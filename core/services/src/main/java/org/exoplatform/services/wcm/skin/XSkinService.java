@@ -30,13 +30,13 @@ import javax.servlet.ServletContext;
 
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.lang.StringUtils;
-import org.exoplatform.container.PortalContainer;
-import org.exoplatform.container.RootContainer;
+
+
 import org.exoplatform.portal.resource.SkinConfig;
 import org.exoplatform.portal.resource.SkinKey;
 import org.exoplatform.portal.resource.SkinService;
 import org.exoplatform.portal.resource.SkinVisitor;
-import org.exoplatform.services.deployment.WCMContentInitializerService;
+
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
@@ -84,11 +84,7 @@ public class XSkinService implements Startable {
    * @param livePortalService the LivePortalManagerService service
    * @throws Exception the exception
    */
-  /**
-   * We inject wcmContentInitializerService first so that all moduleName are loaded before the constructor is called.
-   * we use those modules to generate the CSS URL.
-   */
-  public XSkinService(LivePortalManagerService livePortalService, WCMContentInitializerService wcmContentInitializerService) throws Exception {
+  public XSkinService(LivePortalManagerService livePortalService) throws Exception {
     this.skinService = WCMCoreUtils.getService(SkinService.class);
     this.skinService.addResourceResolver(new WCMSkinResourceResolver(this.skinService, livePortalService));
     this.configurationService = WCMCoreUtils.getService(WCMConfigurationService.class);
@@ -186,33 +182,22 @@ public class XSkinService implements Startable {
    * @see org.picocontainer.Startable#start()
    */
   public void start() {
-    /*
-     XSkinService and SkinService are running concurrently and we need to execute the XSkinService at the end of that cycle.
-     Using the PortalContainerPostCreateTask is the only way to wait until all available skins are loaded.
-     */
-    final RootContainer.PortalContainerPostCreateTask task = new RootContainer.PortalContainerPostCreateTask() {
-      public void execute(ServletContext context, PortalContainer portalContainer) {
-        SessionProvider sessionProvider = SessionProvider.createSystemProvider();
-        try {
-          LivePortalManagerService livePortalManagerService = WCMCoreUtils.getService(LivePortalManagerService.class);
-          List<Node> livePortals = livePortalManagerService.getLivePortals(sessionProvider);
-          for (Node portal : livePortals) {
-            addPortalSkin(portal);
-          }
-          Node sharedPortal = livePortalManagerService.getLiveSharedPortal(sessionProvider);
-          addSharedPortalSkin(sharedPortal);
-        } catch (Exception e) {
-          if (LOG.isErrorEnabled()) {
-            LOG.error("Exception when start XSkinService", e);
-          }
-        } finally {
-          sessionProvider.close();
-        }
+    SessionProvider sessionProvider = SessionProvider.createSystemProvider();
+    try {
+      LivePortalManagerService livePortalManagerService = WCMCoreUtils.getService(LivePortalManagerService.class);
+      List<Node> livePortals = livePortalManagerService.getLivePortals(sessionProvider);
+      for (Node portal : livePortals) {
+        addPortalSkin(portal);
       }
-    };
-
-    RootContainer rootContainer = RootContainer.getInstance();
-    rootContainer.addInitTask(servletContext, task);
+      Node sharedPortal = livePortalManagerService.getLiveSharedPortal(sessionProvider);
+      addSharedPortalSkin(sharedPortal);
+    } catch (Exception e) {
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Exception when start XSkinService", e);
+      }
+    } finally {
+      sessionProvider.close();
+    }
   }
 
   /* (non-Javadoc)

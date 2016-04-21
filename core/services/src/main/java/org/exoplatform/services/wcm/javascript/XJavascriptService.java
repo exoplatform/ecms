@@ -32,7 +32,6 @@ import javax.jcr.query.QueryResult;
 import javax.servlet.ServletContext;
 
 import org.apache.commons.lang.StringUtils;
-import org.exoplatform.services.deployment.WCMContentInitializerService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
@@ -90,12 +89,7 @@ public class XJavascriptService implements Startable {
    *
    * @throws Exception the exception
    */
-  
-  /**
-   * We inject wcmContentInitializerService first so that all moduleName are loaded before the constructor is called.
-   * we use those modules to generate the javascript URL.
-   */
-  public XJavascriptService(LivePortalManagerService livePortalService, WCMContentInitializerService wcmContentInitializerService) throws Exception{
+  public XJavascriptService(LivePortalManagerService livePortalService) throws Exception{
     this.livePortalManagerService_ = livePortalService;
     this.jsConfigService = WCMCoreUtils.getService(JavascriptConfigService.class);
     this.jsConfigService.addResourceResolver(
