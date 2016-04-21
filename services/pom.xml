@@ -25,7 +25,7 @@
   <parent>
     <groupId>org.exoplatform.addons</groupId>
     <artifactId>exo-clouddrive-gdrive</artifactId>
-    <version>1.4.0</version>
+    <version>1.4.x-SNAPSHOT</version>
   </parent>
   <artifactId>exo-clouddrive-gdrive-services</artifactId>
   <packaging>jar</packaging>
