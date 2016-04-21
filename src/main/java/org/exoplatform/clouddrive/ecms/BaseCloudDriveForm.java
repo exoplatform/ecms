@@ -18,10 +18,8 @@
  */
 package org.exoplatform.clouddrive.ecms;
 
-import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
-import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.core.UIPopupComponent;
 import org.exoplatform.webui.form.UIForm;
 
@@ -29,23 +27,8 @@ public abstract class BaseCloudDriveForm extends UIForm implements UIPopupCompon
 
   protected static final Log LOG = ExoLogger.getLogger(BaseCloudDriveForm.class);
 
-  /**
-   * Workspace and node path associated with current context.
-   */
-  protected String workspace, path;
-  
   protected void initContext() throws Exception {
-    UIJCRExplorer uiExplorer = getAncestorOfType(UIJCRExplorer.class);
-    if (uiExplorer != null) {
-      // we store current node in the context
-      path = uiExplorer.getCurrentNode().getPath();
-      workspace = uiExplorer.getCurrentNode().getSession().getWorkspace().getName();
-      CloudDriveContext.init(WebuiRequestContext.getCurrentInstance(), workspace, path);
-    } else {
-      workspace = path = null;
-      LOG.error("Cannot find ancestor of type UIJCRExplorer in component " + this + ", parent: "
-          + this.getParent());
-    }
+    CloudDriveContext.init(this);
   }
 
   @Override

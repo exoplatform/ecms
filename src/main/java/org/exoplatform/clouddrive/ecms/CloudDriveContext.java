@@ -22,6 +22,8 @@ import org.exoplatform.clouddrive.CloudDriveException;
 import org.exoplatform.clouddrive.CloudDriveService;
 import org.exoplatform.clouddrive.CloudProvider;
 import org.exoplatform.clouddrive.features.CloudDriveFeatures;
+import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
+import org.exoplatform.ecm.webui.presentation.UIBaseNodePresentation;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
@@ -29,6 +31,7 @@ import org.exoplatform.web.application.JavascriptManager;
 import org.exoplatform.web.application.RequestContext;
 import org.exoplatform.web.application.RequireJS;
 import org.exoplatform.webui.application.WebuiRequestContext;
+import org.exoplatform.webui.core.UIComponent;
 import org.json.JSONObject;
 
 import java.util.HashSet;
@@ -53,6 +56,35 @@ public class CloudDriveContext {
   protected static final String JAVASCRIPT = "CloudDriveContext_Javascript".intern();
 
   protected static final Log    LOG        = ExoLogger.getLogger(CloudDriveContext.class);
+
+  /**
+   * Initialize request with Cloud Drive support from given WebUI component.
+   * 
+   * @param uiComponent {@link UIComponent}
+   * @throws Exception
+   */
+  public static void init(UIComponent uiComponent) throws Exception {
+    Node contextNode;
+    UIJCRExplorer uiExplorer = uiComponent.getAncestorOfType(UIJCRExplorer.class);
+    if (uiExplorer != null) {
+      // when in document explorer
+      contextNode = uiExplorer.getCurrentNode();
+    } else if (uiComponent.getParent() instanceof UIBaseNodePresentation) {
+      // when in social activity stream (file view)
+      UIBaseNodePresentation docViewer = uiComponent.getParent();
+      contextNode = docViewer.getNode();
+    } else {
+      contextNode = null;
+    }
+    if (contextNode != null) {
+      // we store current node in the context
+      init(WebuiRequestContext.getCurrentInstance(),
+           contextNode.getSession().getWorkspace().getName(),
+           contextNode.getPath());
+    } else {
+      LOG.error("Cannot find ancestor context node in component " + uiComponent + ", parent: " + uiComponent.getParent());
+    }
+  }
 
   /**
    * Initialize request with Cloud Drive support for given JCR location and {@link CloudProvider}.

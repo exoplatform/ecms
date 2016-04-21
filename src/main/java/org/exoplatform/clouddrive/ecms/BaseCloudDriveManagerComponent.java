@@ -16,15 +16,10 @@
  */
 package org.exoplatform.clouddrive.ecms;
 
-import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
-import org.exoplatform.ecm.webui.presentation.UIBaseNodePresentation;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
-import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.ext.manager.UIAbstractManager;
 import org.exoplatform.webui.ext.manager.UIAbstractManagerComponent;
-
-import javax.jcr.Node;
 
 /**
  * Created by The eXo Platform SAS.
@@ -37,11 +32,6 @@ public abstract class BaseCloudDriveManagerComponent extends UIAbstractManagerCo
   protected static final Log LOG = ExoLogger.getLogger(BaseCloudDriveManagerComponent.class);
 
   /**
-   * Workspace and node path associated with current context.
-   */
-  protected String           workspace, path;
-
-  /**
    * {@inheritDoc}
    */
   @Override
@@ -50,25 +40,6 @@ public abstract class BaseCloudDriveManagerComponent extends UIAbstractManagerCo
   }
 
   protected void initContext() throws Exception {
-    Node contextNode;
-    UIJCRExplorer uiExplorer = getAncestorOfType(UIJCRExplorer.class);
-    if (uiExplorer != null) {
-      // when in document explorer
-      contextNode = uiExplorer.getCurrentNode();
-    } else if (getParent() instanceof org.exoplatform.ecm.webui.presentation.UIBaseNodePresentation) {
-      // when in social activity stream (file view)
-      UIBaseNodePresentation docViewer = getParent();
-      contextNode = docViewer.getNode();
-    } else {
-      workspace = path = null;
-      LOG.error("Cannot find ancestor of type UIJCRExplorer in component " + this + ", parent: " + this.getParent());
-      return;
-    }
-    if (contextNode != null) {
-      // we store current node in the context
-      path = contextNode.getPath();
-      workspace = contextNode.getSession().getWorkspace().getName();
-      CloudDriveContext.init(WebuiRequestContext.getCurrentInstance(), workspace, path);
-    }
+    CloudDriveContext.init(this);
   }
 }

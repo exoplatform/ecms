@@ -120,6 +120,7 @@ public class PDFViewer extends AbstractFileForm {
     try {
       // init PDF viewer data (aka initDatas())
       String repository = jcrService.getCurrentRepository().getConfiguration().getName();
+      String workspace = drive.getWorkspace();
       ContentFile contentFile = storage.createFile(repository, workspace, drive, file);
       if (contentFile.isPDF()) {
         this.pdfFile = contentFile.asPDF();
