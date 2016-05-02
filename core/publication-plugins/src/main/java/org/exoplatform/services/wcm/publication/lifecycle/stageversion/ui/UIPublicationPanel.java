@@ -587,10 +587,10 @@ public class UIPublicationPanel extends UIForm {
           }
         }
         //set current state
-        currentNode.setProperty("publication:currentState", currentState);
+        currentNode.setProperty("publication:currentState", PublicationDefaultStates.DRAFT);
         //set revision data
         Map<String, VersionData> revisionsDataMap = publicationPanel.getRevisionData(currentNode);
-        revisionsDataMap.get(currentNode.getUUID()).setState(PublicationDefaultStates.ENROLLED);
+        revisionsDataMap.get(currentNode.getUUID()).setState(PublicationDefaultStates.DRAFT);
         List<Value> valueList = new ArrayList<Value>();
         ValueFactory factory = currentNode.getSession().getValueFactory();
         for(VersionData versionData: revisionsDataMap.values()) {
@@ -612,6 +612,7 @@ public class UIPublicationPanel extends UIForm {
         currentNode.setProperty(StageAndVersionPublicationConstant.HISTORY, list.toArray(new Value[] {}));
         //save data and update ui
         currentNode.getSession().save();
+        publicationPanel.setCurrentRevision(currentNode);
         publicationPanel.updatePanel();
       } catch (Exception e) {
         UIApplication uiApp = publicationPanel.getAncestorOfType(UIApplication.class);
