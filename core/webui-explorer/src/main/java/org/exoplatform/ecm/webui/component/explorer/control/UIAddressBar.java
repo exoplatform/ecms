@@ -103,10 +103,10 @@ public class UIAddressBar extends UIForm {
 
   final static private  String ROOT_SQL_QUERY  = "select * from nt:base where (not jcr:primaryType like 'nt:resource') AND" +
                                "((jcr:primaryType like 'exo:symlink' or jcr:primaryType like 'exo:taxonomyLink')" +
-                               " OR ( contains(*, '$1') or lower(exo:name) like '%$2%' or lower(exo:commentContent) like '%$3%')) order by exo:title ASC";
+                               " OR ( contains(*, '$1') or lower(exo:name) like '%$2%' or lower(exo:summary) like '%$3%' or lower(exo:commentContent) like '%$4%')) order by exo:title ASC";
   final static private String SQL_QUERY = "select * from nt:base where (not jcr:primaryType like 'nt:resource') AND jcr:path like '$0/%' AND " +
                                "( (jcr:primaryType like 'exo:symlink' or jcr:primaryType like 'exo:taxonomyLink')" +
-                               " OR ( contains(*, '$1') or lower(exo:name) like '%$2%' or lower(exo:commentContent) like '%$3%') ) order by exo:title ASC";
+                               " OR ( contains(*, '$1') or lower(exo:name) like '%$2%' or lower(exo:summary) like '%$3%' or lower(exo:commentContent) like '%$4%')) order by exo:title ASC";
 
   public UIAddressBar() throws Exception {
     addUIFormInput(new UIFormStringInput(FIELD_ADDRESS, FIELD_ADDRESS, null));
@@ -277,6 +277,7 @@ public class UIAddressBar extends UIForm {
       queryStatement = StringUtils.replace(queryStatement,"$1", escapedText);
       queryStatement = StringUtils.replace(queryStatement,"$2", escapedText.toLowerCase());
       queryStatement = StringUtils.replace(queryStatement,"$3", escapedText.toLowerCase());
+      queryStatement = StringUtils.replace(queryStatement,"$4", escapedText.toLowerCase());
       uiExplorer.removeChildById("ViewSearch");
       UIWorkingArea uiWorkingArea = uiExplorer.getChild(UIWorkingArea.class);
       UIDocumentWorkspace uiDocumentWorkspace = uiWorkingArea.getChild(UIDocumentWorkspace.class);
