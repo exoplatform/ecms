@@ -399,21 +399,23 @@
         frequency = gj(userStatus).attr("user-status-ping-frequency");
         delay = gj(userStatus).attr("user-status-offline-delay");
       }
-      var pingEvent = window.clearInterval(pingEvent);
-      pingEvent = setInterval(gj.proxy(eXo.ecm.WCMUtils.sendPing, eXo.ecm.WCMUtils), frequency);
-      eXo.ecm.WCMUtils.sendPing();
+      eXo.ecm.WCMUtils.sendPing(frequency);
     }
 
-    WCMUtils.prototype.sendPing = function() {
+    WCMUtils.prototype.sendPing = function(frequency) {
       gj.ajax({
         url: "/rest/state/ping/",
         dataType: "json",
         context: this,
         success: function(data){
-
+          setTimeout(WCMUtils.prototype.sendPing, frequency, frequency);
         },
-        error: function(){
-     
+        error: function(xhr, status){
+          if (xhr.status >= 500) {
+            setTimeout(WCMUtils.prototype.sendPing, frequency * 2, frequency);
+          } else {
+            console.log("Last ping returns a status code " + xhr.status + ", stopping");
+          } 
         }
      });
    };
