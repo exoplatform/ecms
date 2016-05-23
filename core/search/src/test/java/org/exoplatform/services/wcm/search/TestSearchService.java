@@ -1015,7 +1015,7 @@ public class TestSearchService extends BaseSearchTest {
       pageList = getSearchResult(true, searchItemsPerPage);
       // 20 web contents + 101 documents
       assertEquals("Wrong result number of page 1 at round " + i + ": ", searchItemsPerPage, pageList.getPage(1).size());
-      assertEquals("Wrong result number of page 2 at round " + i + ": ", 21, pageList.getPage(2).size());
+      assertEquals("Wrong result number of page 2 at round " + i + ": ", 1, pageList.getPage(2).size());
     }  
   }
   
