@@ -66,6 +66,9 @@ public class PublicationUpdateStateListener extends Listener<CmsService, Node> {
       String titlePublished = null;
       Long index = null;
       Calendar dateModified = new GregorianCalendar();
+      if(targetNode.canAddMixin("exo:datetime")) {
+        targetNode.addMixin("exo:datetime");
+      }
       targetNode.setProperty("exo:dateModified", dateModified);
 
       if (targetNode.hasProperty("exo:title")) {
