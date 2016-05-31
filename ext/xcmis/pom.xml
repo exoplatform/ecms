@@ -13,6 +13,5 @@
   <modules>
     <module>sp</module>
     <module>extension</module>
-	<module>config</module>
   </modules>
 </project>

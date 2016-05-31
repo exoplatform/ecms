@@ -298,11 +298,6 @@
       </dependency>
       <dependency>
         <groupId>org.exoplatform.ecms</groupId>
-        <artifactId>ecms-ext-xcmis-config</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.exoplatform.ecms</groupId>
         <artifactId>ecms-packaging-wcm-webapp</artifactId>
         <version>${project.version}</version>
         <type>war</type>
