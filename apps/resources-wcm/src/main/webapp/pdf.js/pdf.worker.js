@@ -19,7 +19,8 @@
   'use strict';
   if (typeof define === 'function' && define.amd) {
 define('pdfjs-dist/build/pdf.worker', ['exports'], factory);
-  } else if (typeof exports !== 'undefined') {
+  }
+  if (typeof exports !== 'undefined') {
     factory(exports);
   } else {
 factory((root.pdfjsDistBuildPdfWorker = {}));
