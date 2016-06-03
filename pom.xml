@@ -86,18 +86,6 @@
       </dependency>
       <dependency>
         <groupId>org.exoplatform.ecms</groupId>
-        <artifactId>ecms-apps-gadget-publication</artifactId>
-        <version>${project.version}</version>
-        <type>war</type>
-      </dependency>
-      <dependency>
-        <groupId>org.exoplatform.ecms</groupId>
-        <artifactId>ecms-apps-gadget-publication</artifactId>
-        <version>${project.version}</version>
-        <type>pom</type>
-      </dependency>
-      <dependency>
-        <groupId>org.exoplatform.ecms</groupId>
         <artifactId>ecms-apps-portlet-administration</artifactId>
         <version>${project.version}</version>
         <type>war</type>
