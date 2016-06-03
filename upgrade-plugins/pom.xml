@@ -4,7 +4,7 @@
   <parent>
     <artifactId>ecms</artifactId>
     <groupId>org.exoplatform.ecms</groupId>
-    <version>4.4.0-M01</version>
+    <version>4.4.x-SNAPSHOT</version>
   </parent>
   <artifactId>ecms-upgrade-plugins</artifactId>
   <packaging>jar</packaging>
