@@ -25,7 +25,6 @@
 
 'use strict';
 
-var DEFAULT_URL = 'compressed.tracemonkey-pldi-09.pdf';
 var DEFAULT_SCALE_DELTA = 1.1;
 var MIN_SCALE = 0.25;
 var MAX_SCALE = 10.0;
@@ -96,7 +95,7 @@ function scrollIntoView(element, spot, skipOverflowHiddenElements) {
   // producing the error. See also animationStartedClosure.
   var parent = element.offsetParent;
   if (!parent) {
-    console.error('offsetParent is not set -- cannot scroll');
+    //console.error('offsetParent is not set -- cannot scroll');
     return;
   }
   var checkOverflow = skipOverflowHiddenElements || false;
@@ -1530,9 +1529,9 @@ var PDFLinkService = (function () {
     /**
      * @returns {number}
      */
-    /*get pagesCount() {
+    get pagesCount() {
       return this.pdfDocument.numPages;
-    },*/
+    },
 
     /**
      * @returns {number}
@@ -7272,13 +7271,13 @@ function webViewerInitialized() {
   mozL10n.setLanguage(locale);
 
   if (!PDFViewerApplication.supportsPrinting) {
-    //document.getElementById('print').classList.add('hidden');
-    //document.getElementById('secondaryPrint').classList.add('hidden');
+    document.getElementById('print').classList.add('hidden');
+    document.getElementById('secondaryPrint').classList.add('hidden');
   }
 
   if (!PDFViewerApplication.supportsFullscreen) {
-    //document.getElementById('presentationMode').classList.add('hidden');
-    //document.getElementById('secondaryPresentationMode').classList.add('hidden');
+    document.getElementById('presentationMode').classList.add('hidden');
+    document.getElementById('secondaryPresentationMode').classList.add('hidden');
   }
 
   if (PDFViewerApplication.supportsIntegratedFind) {
@@ -7410,7 +7409,8 @@ function webViewerInitialized() {
   }
 }
 
-document.addEventListener('DOMContentLoaded', webViewerLoad, true);
+//document.addEventListener('DOMContentLoaded', webViewerLoad, true);
+webViewerLoad();
 
 document.addEventListener('pagerendered', function (e) {
   var pageNumber = e.detail.pageNumber;
@@ -7674,11 +7674,35 @@ window.addEventListener('pagechange', function pagechange(evt) {
   }
   var numPages = PDFViewerApplication.pagesCount;
 
-  document.getElementById('previous').disabled = (page <= 1);
-  document.getElementById('next').disabled = (page >= numPages);
+  var previousButton = document.getElementById('previous');
+  var nextButton = document.getElementById('next');
 
-  document.getElementById('firstPage').disabled = (page <= 1);
-  document.getElementById('lastPage').disabled = (page >= numPages);
+  var firstPageMenu = document.getElementById('firstPage');
+  var lastPageMenu = document.getElementById('lastPage');
+
+  previousButton.disabled = (page <= 1);
+  if (previousButton.disabled) {
+    if(previousButton.className.indexOf("disabled") < 0){
+      previousButton.className += " disabled";
+      firstPageMenu.className += " disabled";
+    }
+  } else {
+    if((firstPageMenu.className == " disabled")||(firstPageMenu.className == " ")||(firstPageMenu.className == "")) firstPageMenu.className = "";
+    else firstPageMenu.className = previousButton.className.replace(' disabled', '');
+    previousButton.className = previousButton.className.replace(' disabled', '');
+  }
+  nextButton.disabled = (page >= numPages);
+  if (nextButton.disabled) {
+    if(nextButton.className.indexOf("disabled") < 0){
+      nextButton.className += " disabled";
+      lastPageMenu.className += " disabled";
+    }
+  } else {
+    if((lastPageMenu.className == " disabled")||(lastPageMenu.className == " ")||(lastPageMenu.className == "")){
+      lastPageMenu.className = "";
+    } else lastPageMenu.className = nextButton.className.replace(' disabled', '');
+    nextButton.className = nextButton.className.replace(' disabled', '');
+  }
 
   // we need to update stats
   if (PDFJS.pdfBug && Stats.enabled) {

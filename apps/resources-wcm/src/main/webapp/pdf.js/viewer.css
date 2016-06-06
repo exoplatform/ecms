@@ -374,28 +374,6 @@ body {
     opacity: 0.5;
 }
 
-#secondaryToolbarButtonContainer a#firstPage.disabled:hover,
-#secondaryToolbarButtonContainer a#lastPage.disabled:hover {
-    background: none #fff;
-    color: #333;
-}
-#secondaryToolbarButtonContainer a#firstPage.disabled:focus,
-#secondaryToolbarButtonContainer a#lastPage.disabled:focus {
-    background: none #fff;
-    color: #333;
-    outline: none;
-}
-
-#secondaryToolbarButtonContainer a#firstPage.disabled:hover [class^="uiIcon"],
-#secondaryToolbarButtonContainer a#lastPage.disabled:hover [class^="uiIcon"] {
-    background-image: url("/eXoResources/skin/images/Icons/uiIconsLightGray.png");
-}
-#secondaryToolbarButtonContainer a#firstPage.disabled:focus [class^="uiIcon"],
-#secondaryToolbarButtonContainer a#lastPage.disabled:focus [class^="uiIcon"] {
-    background-image: url("/eXoResources/skin/images/Icons/uiIconsLightGray.png");
-    outline: none;
-}
-
 .doorHanger,
 .doorHangerRight {
   border: 1px solid #d1d1d1;
@@ -1419,7 +1397,7 @@ canvas {
   }
   #sidebarContent {
     top: 32px;
-    background #f8f8f8;
+    background: #f8f8f8;
   }
 
   #outerContainer.sidebarOpen > #mainContainer {
@@ -1476,9 +1454,5 @@ canvas {
   #scaleSelectContainer, #pageNumberLabel {
     display: none;
   }
-}
-
-.secondaryToolbar .dropdown-menu li > a:focus > [class^="uiIcon"]{
-  background-image: url("/eXoResources/skin/images/Icons/uiIconsWhite.png");
 }
 
