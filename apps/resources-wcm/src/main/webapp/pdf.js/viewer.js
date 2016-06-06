@@ -6325,9 +6325,9 @@ var PDFViewerApplication = {
     this.pdfViewer.currentScaleValue = newScale;
   },
 
-  get pagesCount() {
+  /*get pagesCount() {
     return this.pdfDocument.numPages;
-  },
+  },*/
 
   set page(val) {
     this.pdfLinkService.page = val;
@@ -7505,32 +7505,34 @@ window.addEventListener('updateviewarea', function (evt) {
   }
   var location = evt.location;
 
-  PDFViewerApplication.store.initializedPromise.then(function() {
-    PDFViewerApplication.store.setMultiple({
-      'exists': true,
-      'page': location.pageNumber,
-      'zoom': location.scale,
-      'scrollLeft': location.left,
-      'scrollTop': location.top
-    }).catch(function() {
-      // unable to write to storage
+  if(typeof PDFViewerApplication.store !== "undefined") {
+    PDFViewerApplication.store.initializedPromise.then(function() {
+      PDFViewerApplication.store.setMultiple({
+        'exists': true,
+        'page': location.pageNumber,
+        'zoom': location.scale,
+        'scrollLeft': location.left,
+        'scrollTop': location.top
+      }).catch(function() {
+        // unable to write to storage
+      });
     });
-  });
-  var href =
+  }
+  /*var href =
     PDFViewerApplication.pdfLinkService.getAnchorUrl(location.pdfOpenParams);
   //document.getElementById('viewBookmark').href = href;
   //document.getElementById('secondaryViewBookmark').href = href;
 
   // Update the current bookmark in the browsing history.
   PDFViewerApplication.pdfHistory.updateCurrentBookmark(location.pdfOpenParams,
-                                                        location.pageNumber);
+                                                        location.pageNumber);*/
 
   // Show/hide the loading indicator in the page number input element.
   var pageNumberInput = document.getElementById('pageNumber');
   var currentPage =
     PDFViewerApplication.pdfViewer.getPageView(PDFViewerApplication.page - 1);
 
-  if (currentPage.renderingState === RenderingStates.FINISHED) {
+  if (typeof currentPage !== "undefined" && currentPage.renderingState === RenderingStates.FINISHED) {
     pageNumberInput.classList.remove(PAGE_NUMBER_LOADING_INDICATOR);
   } else {
     pageNumberInput.classList.add(PAGE_NUMBER_LOADING_INDICATOR);
