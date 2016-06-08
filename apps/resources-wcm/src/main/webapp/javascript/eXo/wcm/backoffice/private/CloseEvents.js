@@ -66,25 +66,8 @@
 	 
 	 if (!callback) callback = null;
 	 var form = this.getFormElemt(formId) ;
-	 //TODO need review try-cactch block for form doesn't use FCK
+
 	 try {
-	  if (FCKeditorAPI && typeof FCKeditorAPI == "object") {
-	    for ( var name in FCKeditorAPI.__Instances ) {
-	      var oEditor ;
-	      try {
-	        oEditor = FCKeditorAPI.__Instances[name] ;
-	        if (oEditor && oEditor.GetParentForm && oEditor.GetParentForm() == form ) {
-	          oEditor.UpdateLinkedField() ;
-	        }
-	      } catch(e) {
-	        continue ;
-	      }
-	    }
-	  }
-	 } catch(e) {}
-	
-	 try {
-	  
 	  if (CKEDITOR && typeof CKEDITOR == "object") {
 	    for ( var name in CKEDITOR.instances ) {
 	      var oEditor ;
@@ -148,19 +131,7 @@
 	 */
 	eXo.webui.UIForm.submitEvent = function(formId, action, params) {
 	  var form = this.getFormElemt(formId) ;
-		 try {
-		  if (FCKeditorAPI && typeof FCKeditorAPI == "object") {
-		 	  for ( var name in FCKeditorAPI.__Instances ) {
-		 	  	var oEditor = FCKeditorAPI.__Instances[name] ;
-		 	  	if ( oEditor.GetParentForm && oEditor.GetParentForm() == form ) {
-		 	  		oEditor.UpdateLinkedField() ;
-		 	  	}
-		  	}
-		  }
-		 } catch(e) {}
-		 
-		  try {
-	
+	  try {
 		  if (CKEDITOR && typeof CKEDITOR == "object") {
 		    for ( var name in CKEDITOR.instances ) {
 		      var oEditor ;
@@ -176,8 +147,8 @@
 		    }
 		  }
 		 } catch(e) {}
-	
-		 
+
+
 	  form.elements['formOp'].value = action ; 
 	  if(!form.originalAction) form.originalAction = form.action ; 
 		form.action =  form.originalAction +  encodeURI(params) ;

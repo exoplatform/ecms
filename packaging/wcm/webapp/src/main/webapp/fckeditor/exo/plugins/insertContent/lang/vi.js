@@ -1,1 +1,0 @@
-FCKLang.WCMInsertContent = "Chèn nội dung";

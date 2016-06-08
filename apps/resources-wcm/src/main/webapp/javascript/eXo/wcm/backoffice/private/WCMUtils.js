@@ -551,7 +551,7 @@
 		function updateStyle() {
 			var sValue = eContentCSS.value;
 			if(!sValue)	return;
-			var iDoc = FCKeditorAPI.Instances[Instance].EditorWindow.document;
+			var iDoc = CKEDITOR.instances[Instance].EditorWindow.document;
 			var eHead = iDoc.getElementsByTagName("head")[0];
 			var eStyle = iDoc.getElementById(sContentCSSId);
 			if (eStyle) {
