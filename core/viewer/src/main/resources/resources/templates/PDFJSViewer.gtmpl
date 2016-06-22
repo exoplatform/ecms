@@ -343,6 +343,8 @@ if(uicomponent.isNotModernBrowser()) {
             <!-- findbar -->
             <div id="secondaryToolbar" class="secondaryToolbar hidden">
                 <ul id="secondaryToolbarButtonContainer" class="dropdown-menu" style="display: block; top: -10px; left: -142px;">
+                    <button id="secondaryPresentationMode" class="hidden">
+                    </button>
                     <!--<li>-->
                         <!--<a id="secondaryDownload" href="<%=downloadLink%>" tabindex="21">-->
                             <!--<i class="uiIconDownload uiIconLightGray"></i> Download-->
