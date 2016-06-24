@@ -76,7 +76,7 @@ public class UIFormRichtextField extends DialogFormField {
     for (SkinConfig portalSkin : portalSkins) {
       contentsCss.append("'").append(portalSkin.createURL(Util.getPortalRequestContext().getControllerContext())).append("',");
     }
-    contentsCss.append("'/CommonsResources/ckeditor/contents.css'");
+    contentsCss.append("'/commons-extension/ckeditor/contents.css'");
     contentsCss.append("]");    
     richtext.setCss(contentsCss.toString());
     

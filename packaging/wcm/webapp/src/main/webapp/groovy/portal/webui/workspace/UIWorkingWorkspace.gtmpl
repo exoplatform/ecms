@@ -57,7 +57,7 @@ if (rcontext.getRemoteUser() != null && WCMComposer.MODE_EDIT.equals(Utils.getCu
    
   %>
     <script type="text/javascript">
-      require(['/CommonsResources/ckeditor/ckeditor.js'], function() {      
+      require(['/commons-extension/ckeditor/ckeditor.js'], function() {
         CKEDITOR.config.toolbar = "InlineEdit";
         CKEDITOR.disableAutoInline = true;
         var allElements = document.getElementsByClassName("WCMInlineEditable");
