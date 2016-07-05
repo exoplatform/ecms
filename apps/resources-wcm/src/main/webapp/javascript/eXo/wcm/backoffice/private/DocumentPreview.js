@@ -31,7 +31,7 @@
         // Resize Event
         var resizeEventHandler = function() {
             // Calculate margin 
-            var pdfDisplayAreaHeight = window.innerHeight - 62;
+            var pdfDisplayAreaHeight = window.innerHeight - 92;
             gj('#outerContainer', $uiDocumentPreview).height(pdfDisplayAreaHeight); // pdf viewer
             var $commentArea = gj('.commentArea', $uiDocumentPreview);
             var $commentAreaTitle = gj('.title', $commentArea);
