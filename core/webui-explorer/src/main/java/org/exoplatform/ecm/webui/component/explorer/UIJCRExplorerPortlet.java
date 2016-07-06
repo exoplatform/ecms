@@ -16,6 +16,7 @@
  */
   package org.exoplatform.ecm.webui.component.explorer;
 
+import org.apache.commons.lang.StringUtils;
 import org.exoplatform.ecm.jcr.model.Preference;
 import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.ecm.webui.component.explorer.control.UIActionBar;
@@ -367,8 +368,22 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
     }
     driveData.setViews(viewListStr.toString());
     String homePath = driveData.getHomePath();
-    if (homePath.contains("${userId}")) 
+    if (homePath.contains("${userId}")) {
       homePath = org.exoplatform.services.cms.impl.Utils.getPersonalDrivePath(homePath, userId);
+    } else if(homePath.contains("${groupId}")) {
+      // if the drive is a virtual drive containing ${groupdId}, the first token is the group id
+      // the input has the pattern /:<group>:<subgroup>/absolute/path/of/the/file
+      // we start by getting the group id
+      int secondSlash = path.indexOf("/", 1);
+      if(secondSlash >= 0) {
+        String group = path.substring(1, secondSlash);
+        String groupId = group.replaceAll(":", "/");
+        // we update the drive homePath with the real group id value
+        homePath = StringUtils.replaceOnce(homePath, "${groupId}", groupId);
+        // we update the path to keep only the absolute path to the file (/absolute/path/of/the/file)
+        path = path.substring(secondSlash);
+      }
+    }
     setFlagSelect(true);
     UIJCRExplorer uiExplorer = findFirstComponentOfType(UIJCRExplorer.class);
 
