@@ -369,6 +369,19 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
     driveData.setViews(viewListStr.toString());
     String homePath = driveData.getHomePath();
     if (homePath.contains("${userId}")) {
+      // if the drive is a virtual drive containing ${userId}, if the first token starts with ":",
+      // it is the userId to used instead of the user id of the connected user
+      // the input has the pattern /:userId/absolute/path/of/the/file
+      int secondSlash = path.indexOf("/", 1);
+      if(secondSlash >= 0) {
+        String userIdToken = path.substring(1, secondSlash);
+        if(userIdToken != null && userIdToken.startsWith(":")) {
+          // we use this userId instead of the userId of the connected user
+          userId = userIdToken.substring(1);
+          // we update the path to keep only the absolute path to the file (/absolute/path/of/the/file)
+          path = path.substring(secondSlash);
+        }
+      }
       homePath = org.exoplatform.services.cms.impl.Utils.getPersonalDrivePath(homePath, userId);
     } else if(homePath.contains("${groupId}")) {
       // if the drive is a virtual drive containing ${groupdId}, the first token is the group id
@@ -395,7 +408,7 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
         WCMCoreUtils.getUserSessionProvider().getSession(driveData.getWorkspace(), rservice.getCurrentRepository());
       // check if it exists
       // we assume that the path is a real path
-      session.getItem(homePath);
+      session.getItem(path);
     } catch(AccessDeniedException ace) {
       Object[] args = { driveName };
       uiApp.addMessage(new ApplicationMessage("UIDrivesArea.msg.access-denied", args,
