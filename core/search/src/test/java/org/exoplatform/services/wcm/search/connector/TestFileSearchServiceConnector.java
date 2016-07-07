@@ -25,6 +25,7 @@ import javax.jcr.Node;
 import javax.jcr.NodeIterator;
 
 import org.exoplatform.commons.api.search.SearchServiceConnector;
+import org.exoplatform.commons.api.search.data.SearchContext;
 import org.exoplatform.commons.api.search.data.SearchResult;
 import org.exoplatform.component.test.ConfigurationUnit;
 import org.exoplatform.component.test.ConfiguredBy;
@@ -34,6 +35,8 @@ import org.exoplatform.services.security.Identity;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.search.base.BaseSearchTest;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+import org.exoplatform.web.controller.metadata.ControllerDescriptor;
+import org.exoplatform.web.controller.router.Router;
 
 /**
  * Created by The eXo Platform SAS
@@ -110,7 +113,7 @@ public class TestFileSearchServiceConnector extends BaseSearchTest {
     Collection<String> sites = new ArrayList<String>();
     sites.add("classic");
     Collection<SearchResult> ret 
-          = fileSearch_.search(null, "anthony~", 
+          = fileSearch_.search(new SearchContext(new Router(new ControllerDescriptor()), "classic"), "anthony~",
                                    sites, 
                                    0, 20, "title", "asc");
     assertEquals(4, ret.size());//2
@@ -120,7 +123,7 @@ public class TestFileSearchServiceConnector extends BaseSearchTest {
     Collection<String> sites = new ArrayList<String>();
     sites.add("classic");
     Collection<SearchResult> ret 
-          = fileSearch_.search(null, "anthony~", 
+          = fileSearch_.search(new SearchContext(new Router(new ControllerDescriptor()), "classic"), "anthony~",
                                    sites, 
                                    1, 20, "title", "asc");
     assertEquals(3, ret.size());//1
@@ -130,7 +133,7 @@ public class TestFileSearchServiceConnector extends BaseSearchTest {
     Collection<String> sites = new ArrayList<String>();
     sites.add("classic");
     Collection<SearchResult> ret 
-          = fileSearch_.search(null, "anthony~", 
+          = fileSearch_.search(new SearchContext(new Router(new ControllerDescriptor()), "classic"), "anthony~",
                                    sites, 
                                    0, 1, "title", "asc");
     assertEquals(1, ret.size());
@@ -140,7 +143,7 @@ public class TestFileSearchServiceConnector extends BaseSearchTest {
     Collection<String> sites = new ArrayList<String>();
     sites.add("classic");
     Collection<SearchResult> ret 
-          = fileSearch_.search(null, "anthony cjohn~", 
+          = fileSearch_.search(new SearchContext(new Router(new ControllerDescriptor()), "classic"), "anthony cjohn~",
                                    sites, 
                                    0, 20, "title", "asc");
     assertEquals(2, ret.size());//3
@@ -150,7 +153,7 @@ public class TestFileSearchServiceConnector extends BaseSearchTest {
     Collection<String> sites = new ArrayList<String>();
     sites.add("classic");
     Collection<SearchResult> ret 
-          = fileSearch_.search(null, "anthony cjohn~", 
+          = fileSearch_.search(new SearchContext(new Router(new ControllerDescriptor()), "classic"), "anthony cjohn~",
                                    sites, 
                                    1, 20, "title", "asc");
     assertEquals(1, ret.size());//2
@@ -160,7 +163,7 @@ public class TestFileSearchServiceConnector extends BaseSearchTest {
     Collection<String> sites = new ArrayList<String>();
     sites.add("classic");
     Collection<SearchResult> ret 
-          = fileSearch_.search(null, "anthony cjohn~", 
+          = fileSearch_.search(new SearchContext(new Router(new ControllerDescriptor()), "classic"), "anthony cjohn~",
                                    sites, 
                                    0, 1, "title", "asc");
     assertEquals(1, ret.size());
@@ -170,7 +173,7 @@ public class TestFileSearchServiceConnector extends BaseSearchTest {
     Collection<String> sites = new ArrayList<String>();
     sites.add("classic");
     Collection<SearchResult> ret 
-          = fileSearch_.search(null, "\"anthony cena\"", 
+          = fileSearch_.search(new SearchContext(new Router(new ControllerDescriptor()), "classic"), "\"anthony cena\"",
                                    sites, 
                                    0, 20, "title", "asc");
     assertEquals(2, ret.size());//1
@@ -180,7 +183,7 @@ public class TestFileSearchServiceConnector extends BaseSearchTest {
     Collection<String> sites = new ArrayList<String>();
     sites.add("classic");
     Collection<SearchResult> ret 
-          = fileSearch_.search(null, "\"anthony cena\"", 
+          = fileSearch_.search(new SearchContext(new Router(new ControllerDescriptor()), "classic"), "\"anthony cena\"",
                                    sites, 
                                    1, 20, "title", "asc");
     assertEquals(1, ret.size());//0

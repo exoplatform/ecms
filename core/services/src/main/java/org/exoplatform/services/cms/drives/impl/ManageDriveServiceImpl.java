@@ -115,6 +115,10 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
    */
   private static String ALLOW_CREATE_FOLDER = "exo:allowCreateFolders" ;
   private static String ALLOW_NODETYPES_ON_TREE = "exo:allowNodeTypesOnTree";
+  public static final String GROUPS_DRIVE_NAME = "Groups";
+  public static final String GROUPS_DRIVE_ROOT_NODE = "Groups";
+  public static final String PERSONAL_DRIVE_NAME = "Personal Documents";
+  public static final String PERSONAL_DRIVE_ROOT_NODE = "Users";
 
   /**
    * List of ManageDrivePlugin
@@ -254,7 +258,7 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
       data.setShowHiddenNode(Boolean.parseBoolean(drive.getProperty(SHOW_HIDDEN_NODE).getString())) ;
       data.setAllowCreateFolders(drive.getProperty(ALLOW_CREATE_FOLDER).getString()) ;
       data.setAllowNodeTypesOnTree(drive.getProperty(ALLOW_NODETYPES_ON_TREE).getString());
-      if ("Groups".equals(data.getName())) {
+      if (GROUPS_DRIVE_NAME.equals(data.getName())) {
         groupDriveTemplate_ = data.clone();
         // Include group drive template if necessary
         if (withVirtualDrives) {
@@ -512,7 +516,7 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
     if (drives != null)
       return new ArrayList<DriveData>((List<DriveData>) drives);
     List<DriveData> groupDrives = new ArrayList<DriveData>();
-    DriveData groupDrive = getDriveByName("Groups");
+    DriveData groupDrive = getDriveByName(GROUPS_DRIVE_NAME);
     if(groupDrive == null){
       return groupDrives;
     }
@@ -540,6 +544,13 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
     Collections.sort(groupDrives);
     drivesCache_.put(getRepoName() + "_" + userId + ALL_GROUP_CACHED_DRIVES, groupDrives);
     return new ArrayList<DriveData>(groupDrives);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public DriveData getGroupDriveTemplate() {
+    return groupDriveTemplate_;
   }
 
   /**

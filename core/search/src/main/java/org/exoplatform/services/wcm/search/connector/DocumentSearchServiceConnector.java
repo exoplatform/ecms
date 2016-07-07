@@ -20,29 +20,22 @@ import java.net.URLDecoder;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Locale;
-import java.util.ResourceBundle;
 
 import javax.jcr.RepositoryException;
 
 import org.apache.commons.lang.StringUtils;
+
 import org.exoplatform.commons.api.search.data.SearchContext;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.portal.config.DataStorage;
-import org.exoplatform.portal.config.UserPortalConfig;
-import org.exoplatform.portal.config.UserPortalConfigService;
 import org.exoplatform.portal.config.model.Application;
+import org.exoplatform.portal.config.model.Container;
 import org.exoplatform.portal.config.model.ModelObject;
 import org.exoplatform.portal.mop.SiteKey;
 import org.exoplatform.portal.mop.SiteType;
-import org.exoplatform.portal.mop.navigation.NavigationContext;
-import org.exoplatform.portal.mop.navigation.NavigationService;
-import org.exoplatform.portal.mop.navigation.NodeContext;
-import org.exoplatform.portal.mop.navigation.NodeModel;
-import org.exoplatform.portal.mop.navigation.Scope;
-import org.exoplatform.portal.mop.user.UserNavigation;
-import org.exoplatform.portal.mop.user.UserPortalContext;
+import org.exoplatform.portal.mop.navigation.*;
 import org.exoplatform.services.cms.drives.DriveData;
+import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
@@ -50,7 +43,6 @@ import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.search.ResultNode;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
-import org.exoplatform.portal.config.model.Container;
 
 /**
  * Documents are nodes whose nodetype was declared as a Document Type in ECM admin.
@@ -99,18 +91,20 @@ public class DocumentSearchServiceConnector extends BaseContentSearchServiceConn
    * @throws RepositoryException 
    */
   @Override
-  protected String getPath(DriveData driveData, ResultNode node, SearchContext context) throws Exception {
+  protected String getPath(ResultNode node, SearchContext context) throws Exception {
     String url = BaseSearchServiceConnector.NONE_NAGVIGATION;
     String handler = WCMCoreUtils.getPortalName();
-    UserPortalConfig prc = getUserPortalConfig();
-    if (prc == null) return null;
-    SiteKey siteKey = SiteKey.portal(prc.getPortalConfig().getName());
-    if(siteKey != null) {
-      if(StringUtils.isNotBlank(siteKey.getName())) {
+    if(StringUtils.isNotEmpty(context.getSiteName())) {
+      String siteType = StringUtils.isEmpty(context.getSiteType()) ? SiteType.PORTAL.toString() : context.getSiteType().toUpperCase();
+      SiteKey siteKey = new SiteKey(SiteType.valueOf(siteType), context.getSiteName());
+
+      DriveData driveData = documentService.getDriveOfNode(node.getPath(), ConversationState.getCurrent().getIdentity().getUserId(), Utils.getMemberships());
+
+      if (StringUtils.isNotBlank(siteKey.getName())) {
         String pageName = getPageName(siteKey);
-        if(StringUtils.isNotBlank(pageName)) {
-          siteKey = SiteKey.portal(context.getSiteName() != null ? context.getSiteName():
-                                                                   BaseSearchServiceConnector.DEFAULT_SITENAME);
+        if (StringUtils.isNotBlank(pageName)) {
+          siteKey = SiteKey.portal(context.getSiteName() != null ? context.getSiteName() :
+                  BaseSearchServiceConnector.DEFAULT_SITENAME);
           pageName = getPageName(siteKey);
         }
         try {
@@ -118,16 +112,17 @@ public class DocumentSearchServiceConnector extends BaseContentSearchServiceConn
                   lang("").
                   siteName(siteKey.getName()).
                   siteType(SiteType.PORTAL.getName()).
-                  path(pageName+"?path=" +driveData.getName() + "/" + node.getPath()).renderLink();
+                  path(pageName + "?path=" + driveData.getName() + "/" + node.getPath()).renderLink();
         } catch (Exception e) {
           LOG.debug("The current user does not have the needed permission to get the requested document");
           return null;
         }
       }
     }
+
     return URLDecoder.decode(url, "UTF-8");
   }
-  
+
   private String getPageName(SiteKey siteKey) throws Exception {
     NavigationService navService = WCMCoreUtils.getService(NavigationService.class);
     NavigationContext nav = navService.loadNavigation(siteKey);
@@ -147,22 +142,6 @@ public class DocumentSearchServiceConnector extends BaseContentSearchServiceConn
       }
     }
     return "";
-  }
-  
-  private static UserPortalConfig getUserPortalConfig() throws Exception {
-    UserPortalConfigService userPortalConfigSer = WCMCoreUtils.getService(UserPortalConfigService.class);
-    UserPortalContext NULL_CONTEXT = new UserPortalContext() {
-      public ResourceBundle getBundle(UserNavigation navigation) {
-        return null;
-      }
-      public Locale getUserLocale() {
-        return Locale.ENGLISH;
-      }
-    };
-    String remoteId = ConversationState.getCurrent().getIdentity().getUserId() ;
-    UserPortalConfig userPortalCfg = userPortalConfigSer.
-        getUserPortalConfig(userPortalConfigSer.getDefaultPortal(), remoteId, NULL_CONTEXT);
-    return userPortalCfg;
   }
   
   private boolean hasPortlet(NodeContext<?> pageCt, String plName) {

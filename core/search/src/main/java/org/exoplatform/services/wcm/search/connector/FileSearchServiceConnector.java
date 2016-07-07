@@ -22,12 +22,15 @@ import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 
 import org.exoplatform.commons.api.search.data.SearchContext;
-import org.exoplatform.container.definition.PortalContainerConfig;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.container.xml.PortalContainerInfo;
+import org.exoplatform.portal.mop.SiteType;
 import org.exoplatform.services.cms.drives.DriveData;
+import org.exoplatform.services.cms.drives.impl.ManageDriveServiceImpl;
+import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.search.ResultNode;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
@@ -69,14 +72,44 @@ public class FileSearchServiceConnector extends BaseContentSearchServiceConnecto
    * @throws RepositoryException 
    */
   @Override
-  protected String getPath(DriveData driveData, ResultNode node, SearchContext context) throws Exception {
-    String siteName = WCMCoreUtils.getService(PortalContainerInfo.class).getContainerName();
-    String restContextName = WCMCoreUtils.getService(PortalContainerConfig.class).getRestContextName(siteName);
-    StringBuffer ret = new StringBuffer();
-    ret.append('/').append(siteName).append('/').append(restContextName).append("/jcr/").
-        append(WCMCoreUtils.getRepository().getConfiguration().getName()).append('/'). 
-        append(node.getSession().getWorkspace().getName()).append(node.getPath());
-    return ret.toString();
+  protected String getPath(ResultNode node, SearchContext context) throws Exception {
+    String url = documentService.getLinkInDocumentsApp(node.getPath());
+
+    /*
+    DriveData driveData = documentService.getDriveOfNode(node.getPath(), ConversationState.getCurrent().getIdentity().getUserId(), Utils.getMemberships());
+
+    if(driveData.getName().equals(ManageDriveServiceImpl.GROUPS_DRIVE_NAME)) {
+      int groupDocumentsRootNodeName = nodePath.indexOf("/Documents");
+      if(groupDocumentsRootNodeName >= 0) {
+        String groupId = nodePath.substring(ManageDriveServiceImpl.GROUPS_DRIVE_ROOT_NODE.length() + 1, groupDocumentsRootNodeName);
+        String groupPageName;
+        String[] splitedGroupId = groupId.split("/");
+        if (splitedGroupId != null && splitedGroupId.length == 3 && splitedGroupId[1].equals("spaces")) {
+          groupPageName = splitedGroupId[2] + "/documents";
+        } else {
+          groupPageName = "documents";
+        }
+        url.append(context.handler(containerName).siteName(groupId).siteType(SiteType.GROUP.getName()).path(groupPageName).renderLink());
+        url.append("?path=" + driveData.getName() + "/" + groupId.replaceAll("/", ":") + nodePath);
+      } else {
+        throw new Exception("Cannot extract group id from node path " + nodePath);
+      }
+    } else if(driveData.getName().equals(ManageDriveServiceImpl.PERSONAL_DRIVE_NAME)) {
+      SearchContext personalDocumentsSearchContext = context.handler(containerName).siteType(SiteType.PORTAL.getName());
+      url.append(personalDocumentsSearchContext.siteName(context.getSiteName()).path("documents").renderLink());
+      String[] splitedNodePath = nodePath.split("/");
+      if(splitedNodePath != null && splitedNodePath.length >= 6) {
+        String userId = splitedNodePath[5];
+        url.append("?path=" + driveData.getName() + "/:" + userId + nodePath);
+      } else {
+        url.append("?path=" + driveData.getName() + nodePath);
+      }
+    } else {
+      url.append(context.handler(containerName).siteName(context.getSiteName()).siteType(SiteType.PORTAL.getName()).path("documents").renderLink());
+      url.append("?path=" + driveData.getName() + nodePath);
+    }
+    */
+    return url;
   }
   
   /**
@@ -103,5 +136,4 @@ public class FileSearchServiceConnector extends BaseContentSearchServiceConnecto
       return super.getImageUrl(node);
     }
   }
-
 }

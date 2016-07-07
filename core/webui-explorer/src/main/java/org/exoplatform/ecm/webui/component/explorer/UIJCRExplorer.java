@@ -1012,17 +1012,19 @@ public class UIJCRExplorer extends UIContainer {
 
   private Node getNodeByPath(String nodePath, Session session, boolean giveTarget, boolean firstTime) throws Exception {
     NodeFinder nodeFinder = getApplicationComponent(NodeFinder.class);
-    Node node;
-    try {
+    Node node = null;
+    if (nodeFinder.itemExists(session, nodePath)) {
       node = (Node) nodeFinder.getItem(session, nodePath, giveTarget);
-    } catch (Exception e) {
+    } else {
       if (nodePath.equals(currentPath_) && !nodePath.equals(currentRootPath_)) {
         setCurrentPath(LinkUtils.getParentPath(currentPath_));
         return getNodeByPath(currentPath_, session, giveTarget, false);
       }
       try {
-        node = (Node) nodeFinder.getItem(session, nodePath, !giveTarget);
-        return node;
+        if (nodeFinder.itemExists(session, nodePath)) {
+          node = (Node) nodeFinder.getItem(session, nodePath, !giveTarget);
+          return node;
+        }
       } catch (Exception e3) {
         if (LOG.isWarnEnabled()) {
           LOG.warn(e3.getMessage());
@@ -1032,12 +1034,12 @@ public class UIJCRExplorer extends UIContainer {
         String workspace = session.getWorkspace().getName();
         if (LOG.isWarnEnabled()) {
           LOG.warn("The node cannot be found at " + nodePath
-            + " into the workspace " + workspace);
+                  + " into the workspace " + workspace);
         }
       }
-      throw e;
     }
-    if (!firstTime) {
+
+    if (node != null && !firstTime) {
       refreshExplorer(node);
     }
     return node;

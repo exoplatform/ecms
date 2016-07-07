@@ -93,8 +93,8 @@ public class TestDocumentSearchServiceConnector extends BaseSearchTest {
     Collection<String> sites = new ArrayList<String>();
     sites.add("classic");
     Collection<SearchResult> ret 
-          = documentSearch_.search(new SearchContext(new Router(new ControllerDescriptor()), "intranet"), "anthony~", 
-                                   sites, 
+          = documentSearch_.search(new SearchContext(new Router(new ControllerDescriptor()), "classic"), "anthony~",
+                                   sites,
                                    0, 20, "title", "asc");
     assertEquals(4, ret.size());//2
   }
@@ -103,7 +103,7 @@ public class TestDocumentSearchServiceConnector extends BaseSearchTest {
     Collection<String> sites = new ArrayList<String>();
     sites.add("classic");
     Collection<SearchResult> ret 
-          = documentSearch_.search(new SearchContext(new Router(new ControllerDescriptor()), "intranet"), "anthony~", 
+          = documentSearch_.search(new SearchContext(new Router(new ControllerDescriptor()), "classic"), "anthony~",
                                    sites, 
                                    1, 20, "title", "asc");
     assertEquals(3, ret.size());//1
@@ -113,7 +113,7 @@ public class TestDocumentSearchServiceConnector extends BaseSearchTest {
     Collection<String> sites = new ArrayList<String>();
     sites.add("classic");
     Collection<SearchResult> ret 
-          = documentSearch_.search(new SearchContext(new Router(new ControllerDescriptor()), "intranet"), "anthony~", 
+          = documentSearch_.search(new SearchContext(new Router(new ControllerDescriptor()), "classic"), "anthony~",
                                    sites, 
                                    0, 1, "title", "asc");
     assertEquals(1, ret.size());
@@ -123,7 +123,7 @@ public class TestDocumentSearchServiceConnector extends BaseSearchTest {
     Collection<String> sites = new ArrayList<String>();
     sites.add("classic");
     Collection<SearchResult> ret 
-          = documentSearch_.search(new SearchContext(new Router(new ControllerDescriptor()), "intranet"), "anthony Felix~", 
+          = documentSearch_.search(new SearchContext(new Router(new ControllerDescriptor()), "classic"), "anthony Felix~",
                                    sites, 
                                    0, 20, "title", "asc");
     assertEquals(2, ret.size());//3
@@ -133,7 +133,7 @@ public class TestDocumentSearchServiceConnector extends BaseSearchTest {
     Collection<String> sites = new ArrayList<String>();
     sites.add("classic");
     Collection<SearchResult> ret 
-          = documentSearch_.search(new SearchContext(new Router(new ControllerDescriptor()), "intranet"), "anthony Felix~", 
+          = documentSearch_.search(new SearchContext(new Router(new ControllerDescriptor()), "classic"), "anthony Felix~",
                                    sites, 
                                    1, 20, "title", "asc");
     assertEquals(1, ret.size());//2
@@ -143,7 +143,7 @@ public class TestDocumentSearchServiceConnector extends BaseSearchTest {
     Collection<String> sites = new ArrayList<String>();
     sites.add("classic");
     Collection<SearchResult> ret 
-          = documentSearch_.search(new SearchContext(new Router(new ControllerDescriptor()), "intranet"), "anthony Felix~", 
+          = documentSearch_.search(new SearchContext(new Router(new ControllerDescriptor()), "classic"), "anthony Felix~",
                                    sites, 
                                    0, 1, "title", "asc");
     assertEquals(1, ret.size());
@@ -154,7 +154,7 @@ public class TestDocumentSearchServiceConnector extends BaseSearchTest {
     Collection<String> sites = new ArrayList<String>();
     sites.add("classic");
     Collection<SearchResult> ret 
-          = documentSearch_.search(new SearchContext(new Router(new ControllerDescriptor()), "intranet"), "\"anthony cena~\"", 
+          = documentSearch_.search(new SearchContext(new Router(new ControllerDescriptor()), "classic"), "\"anthony cena~\"",
                                    sites, 
                                    0, 20, "title", "asc");
     assertEquals(2, ret.size());//1
@@ -164,7 +164,7 @@ public class TestDocumentSearchServiceConnector extends BaseSearchTest {
     Collection<String> sites = new ArrayList<String>();
     sites.add("classic");
     Collection<SearchResult> ret 
-          = documentSearch_.search(new SearchContext(new Router(new ControllerDescriptor()), "intranet"), "\"anthony cena\"", 
+          = documentSearch_.search(new SearchContext(new Router(new ControllerDescriptor()), "classic"), "\"anthony cena\"",
                                    sites, 
                                    1, 20, "title", "asc");
     assertEquals(1, ret.size());//0

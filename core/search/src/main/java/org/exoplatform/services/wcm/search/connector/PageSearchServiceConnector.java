@@ -26,6 +26,8 @@ import org.apache.commons.lang.StringUtils;
 import org.exoplatform.commons.api.search.data.SearchContext;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.services.cms.drives.DriveData;
+import org.exoplatform.services.cms.impl.Utils;
+import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.wcm.search.QueryCriteria;
 import org.exoplatform.services.wcm.search.ResultNode;
 import org.exoplatform.services.wcm.search.base.AbstractPageList;
@@ -114,7 +116,7 @@ public class PageSearchServiceConnector extends BaseSearchServiceConnector {
   }
   
   @Override
-  protected String getPath(DriveData driveData, ResultNode node, SearchContext context) throws Exception {
+  protected String getPath(ResultNode node, SearchContext context) throws Exception {
     return node.getUserNavigationURI();
   }
 
@@ -148,7 +150,7 @@ public class PageSearchServiceConnector extends BaseSearchServiceConnector {
    * {@inheritDoc}
    */
   protected String getDetails(ResultNode retNode, SearchContext context) throws Exception {
-    DriveData driveData = getDriveData(retNode);
+    DriveData driveData = documentService.getDriveOfNode(retNode.getPath(), ConversationState.getCurrent().getIdentity().getUserId(), Utils.getMemberships());
     return getDriveTitle(driveData);
   }
   

@@ -23,6 +23,10 @@
   addScripts("ecmutil.ECMUtils.selectedPath('${idSelected}');");
 
   public void writeNodes(TreeNode rootTree) {
+		if(rootTree == null) {
+			return;
+		}
+
     UIRightClickPopupMenu contextMenu = uicomponent.getContextMenu();
     def uiCustomActionComponent = uicomponent.getWorkingArea().getCustomAction();
     String serverPath = uicomponent.getServerPath();
@@ -175,7 +179,9 @@
 		}			
   }  
   TreeNode treeNodeRoot = uicomponent.getRootTreeNode();
-  treeNodeRoot.getNode().refresh(true);
+	if(treeNodeRoot != null) {
+  	treeNodeRoot.getNode().refresh(true);
+	}
   String contextMenuEvent = uicomponent.getRootActionList() ;
   def uiWorkingArea = uicomponent.getAncestorOfType(UIWorkingArea.class);
   def label = uicomponent.getLabel();
@@ -187,7 +193,7 @@
 </div>
 
  
-	<h6 class="title" style="cursor: pointer;" rel="tooltip" data-placement="bottom" title="$label" onclick="<%=uicomponent.event("Expand",treeNodeRoot.getPath())%>" $contextMenuEvent>
+	<h6 class="title" style="cursor: pointer;" rel="tooltip" data-placement="bottom" title="$label" onclick="<%=(treeNodeRoot != null ? uicomponent.event("Expand",treeNodeRoot.getPath()) : "")%>" $contextMenuEvent>
 		<i class="uiIconEcmsHome uiIconEcmsLightGray"></i> ${label}
 	</h6>			  	
 			  	
@@ -199,7 +205,7 @@
 		        //re-initialize action
 		       writeNodes(treeNodeRoot);
     	     uicomponent.getWorkingArea().initialize();
-		       if(uicomponent.isPaginated(treeNodeRoot)) {%>
+		       if(treeNodeRoot != null && uicomponent.isPaginated(treeNodeRoot)) {%>
 		       			<li class="node pageIterator">
 		       				<% _ctx.renderUIComponent(uicomponent.getUIPageIterator(treeNodeRoot.getPath())); %>
 		       			</li>       	
