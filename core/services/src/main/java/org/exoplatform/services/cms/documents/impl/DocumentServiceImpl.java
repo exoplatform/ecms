@@ -24,14 +24,12 @@ import java.util.ResourceBundle;
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 
-import org.exoplatform.commons.api.search.data.SearchContext;
 import org.exoplatform.commons.utils.CommonsUtils;
 import org.exoplatform.container.PortalContainer;
 import org.exoplatform.container.xml.PortalContainerInfo;
 import org.exoplatform.portal.config.UserPortalConfig;
 import org.exoplatform.portal.config.UserPortalConfigService;
 import org.exoplatform.portal.mop.SiteKey;
-import org.exoplatform.portal.mop.SiteType;
 import org.exoplatform.portal.mop.user.UserNavigation;
 import org.exoplatform.portal.mop.user.UserPortalContext;
 import org.exoplatform.services.cms.documents.DocumentService;
@@ -163,47 +161,6 @@ public class DocumentServiceImpl implements DocumentService {
               .append("?path=" + driveData.getName() + nodePath);
     }
     return url.toString();
-
-    /*
-    String url;
-    String[] splitedPath = nodePath.split("/");
-    if (splitedPath != null && splitedPath.length >= 4
-            && splitedPath[1].equals(GROUPS_DRIVE_ROOT_NODE) && splitedPath[2].equals("spaces")) {
-      // use the space documents application if the document is the space documents
-      String spaceName = splitedPath[3];
-      url = new StringBuilder(CommonsUtils.getCurrentDomain()).append("/")
-              .append(PortalContainer.getCurrentPortalContainerName())
-              .append("/g/:spaces:")
-              .append(spaceName)
-              .append("/")
-              .append(spaceName)
-              .append("/documents?path=")
-              .append(GROUPS_DRIVE_NAME)
-              .append("/:spaces:")
-              .append(spaceName)
-              .append(nodePath)
-              .toString();
-    } else if (splitedPath != null && splitedPath.length >= 6
-            && splitedPath[1].equals(PERSONAL_DRIVE_ROOT_NODE)) {
-      // use the personal documents drive if the document is the personal documents
-      String userId = splitedPath[5];
-      url = new StringBuilder(CommonsUtils.getCurrentDomain()).append("/")
-              .append(PortalContainer.getCurrentPortalContainerName())
-              // TODO remove hardcoded reference to intranet site
-              .append("/intranet")
-              .append("/documents?path=")
-              .append(PERSONAL_DRIVE_NAME)
-              .append("/:")
-              .append(userId)
-              .append(nodePath)
-              .toString();
-    } else {
-      // otherwise use the default drive
-      url = getLinkInDocumentsApp(nodePath, manageDriveService.getDriveOfDefaultWorkspace());
-    }
-
-    return url;
-    */
   }
 
   /**
