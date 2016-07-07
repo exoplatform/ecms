@@ -63,6 +63,7 @@ public class DocumentServiceImpl implements DocumentService {
   private static final String GROUPS_DRIVE_NAME = "Groups";
   private static final String GROUPS_DRIVE_ROOT_NODE = "Groups";
   private static final String PERSONAL_DRIVE_NAME = "Personal Documents";
+  private static final String USER_DRIVE_NAME = "User Documents";
   private static final String PERSONAL_DRIVE_ROOT_NODE = "Users";
 
   private ManageDriveService manageDriveService;
@@ -138,7 +139,8 @@ public class DocumentServiceImpl implements DocumentService {
       } else {
         throw new Exception("Cannot extract group id from node path " + nodePath);
       }
-    } else if(driveData.getName().equals(ManageDriveServiceImpl.PERSONAL_DRIVE_NAME)) {
+    } else if(driveData.getName().equals(ManageDriveServiceImpl.USER_DRIVE_NAME)
+            || driveData.getName().equals(ManageDriveServiceImpl.PERSONAL_DRIVE_NAME)) {
       SiteKey siteKey = getDefaultSiteKey();
       url.append("/").append(siteKey.getName()).append("/").append("documents");
       String[] splitedNodePath = nodePath.split("/");
@@ -231,8 +233,12 @@ public class DocumentServiceImpl implements DocumentService {
     if (splitedPath != null && splitedPath.length >= 2) {
       if (splitedPath[1].equals(GROUPS_DRIVE_ROOT_NODE)) {
         nodeDrive = manageDriveService.getGroupDriveTemplate();
-      } else if (splitedPath != null && splitedPath.length >= 2 && splitedPath[1].equals(PERSONAL_DRIVE_ROOT_NODE)) {
-        nodeDrive = manageDriveService.getDriveByName(PERSONAL_DRIVE_NAME);
+      } else if (splitedPath != null && splitedPath.length >= 6 && splitedPath[1].equals(PERSONAL_DRIVE_ROOT_NODE)) {
+        if(splitedPath[5].equals(userId)) {
+          nodeDrive = manageDriveService.getDriveByName(PERSONAL_DRIVE_NAME);
+        } else {
+          nodeDrive = manageDriveService.getDriveByName(USER_DRIVE_NAME);
+        }
       }
     }
     if(nodeDrive == null) {
