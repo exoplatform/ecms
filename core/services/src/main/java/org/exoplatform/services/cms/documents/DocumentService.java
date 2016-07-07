@@ -31,8 +31,23 @@ import java.util.List;
 public interface DocumentService {
   public Document findDocById(String id) throws RepositoryException;
 
+  /**
+   * Get the link to display a document in the Documents app.
+   * It will try to get the best matching context (personal doc, space doc, ...).
+   * @param nodePath The path of the node
+   * @return The link to open the document
+   * @throws Exception
+   */
   public String getLinkInDocumentsApp(String nodePath) throws Exception;
 
+  /**
+   * Get the link to display a document in the Documents app in the given drive.
+   * It will try to get the best matching context (personal doc, space doc, ...).
+   * @param nodePath The path of the node
+   * @param driveName The drive to use
+   * @return The link to open the document
+   * @throws Exception
+   */
   public String getLinkInDocumentsApp(String nodePath, String driveName) throws Exception;
 
   /**

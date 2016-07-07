@@ -121,17 +121,22 @@ public class DocumentServiceImpl implements DocumentService {
     StringBuffer url = new StringBuffer();
     url.append("/").append(containerName);
 
+    // find the best matching drive to display the document
     DriveData driveData = this.getDriveOfNode(nodePath, ConversationState.getCurrent().getIdentity().getUserId(), Utils.getMemberships());
 
     if(driveData.getName().equals(ManageDriveServiceImpl.GROUPS_DRIVE_NAME)) {
+      // handle group drive case
       int groupDocumentsRootNodeName = nodePath.indexOf("/Documents");
       if(groupDocumentsRootNodeName >= 0) {
+        // extract group id for doc path
         String groupId = nodePath.substring(ManageDriveServiceImpl.GROUPS_DRIVE_ROOT_NODE.length() + 1, groupDocumentsRootNodeName);
         String groupPageName;
         String[] splitedGroupId = groupId.split("/");
         if (splitedGroupId != null && splitedGroupId.length == 3 && splitedGroupId[1].equals("spaces")) {
+          // the doc is in a space -> we use the documents application of the space
           groupPageName = splitedGroupId[2] + "/documents";
         } else {
+          // otherwise we use the portal documents application
           groupPageName = "documents";
         }
         url.append("/g/").append(groupId.replaceAll("/", ":")).append("/").append(groupPageName)
@@ -141,6 +146,7 @@ public class DocumentServiceImpl implements DocumentService {
       }
     } else if(driveData.getName().equals(ManageDriveServiceImpl.USER_DRIVE_NAME)
             || driveData.getName().equals(ManageDriveServiceImpl.PERSONAL_DRIVE_NAME)) {
+      // handle personal drive case
       SiteKey siteKey = getDefaultSiteKey();
       url.append("/").append(siteKey.getName()).append("/").append("documents");
       String[] splitedNodePath = nodePath.split("/");
@@ -151,6 +157,7 @@ public class DocumentServiceImpl implements DocumentService {
         url.append("?path=" + driveData.getName() + nodePath);
       }
     } else {
+      // default case
       SiteKey siteKey = getDefaultSiteKey();
       url.append("/").append(siteKey.getName()).append("/").append("documents")
               .append("?path=" + driveData.getName() + nodePath);
