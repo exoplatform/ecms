@@ -51,6 +51,15 @@ public interface DocumentService {
   public String getLinkInDocumentsApp(String nodePath, String driveName) throws Exception;
 
   /**
+   * Get the drive containing the node with the given node path, for the current user.
+   * If several drives contain the node, try to find the best matching.
+   * @param nodePath The path of the node
+   * @return The drive containing the node
+   * @throws Exception
+   */
+  DriveData getDriveOfNode(String nodePath) throws Exception;
+
+  /**
    * Get the drive containing the node with the given node path.
    * If several drives contain the node, try to find the best matching.
    * @param nodePath The path of the node

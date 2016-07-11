@@ -17,7 +17,10 @@
 package org.exoplatform.services.cms.drives;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.regex.Pattern;
 
 /**
  * Created by The eXo Platform SARL
@@ -43,6 +46,7 @@ public class DriveData implements Comparable<DriveData>, Serializable {
   private boolean showHiddenNode ;
   private String allowCreateFolders ;
   private String allowNodeTypesOnTree;
+  private Map<String, String> parameters = new HashMap<>();
 
   public  DriveData(){}
 
@@ -65,6 +69,7 @@ public class DriveData implements Comparable<DriveData>, Serializable {
     driveData.setViewSideBar(getViewSideBar());
     driveData.setViews(getViews());
     driveData.setWorkspace(getWorkspace());
+    driveData.setParameters(getParameters());
     return driveData;
   }
 
@@ -193,6 +198,14 @@ public class DriveData implements Comparable<DriveData>, Serializable {
    */
   public void setShowHiddenNode(boolean b) { showHiddenNode = b ; }
 
+  public Map<String, String> getParameters() {
+    return parameters;
+  }
+
+  public void setParameters(Map<String, String> parameters) {
+    this.parameters = parameters;
+  }
+
   /**
    *
    * @return  the array of permission
@@ -226,6 +239,11 @@ public class DriveData implements Comparable<DriveData>, Serializable {
       }
     }
     return permissionList.contains(permission) ;
+  }
+
+  public String getResolvedHomePath() {
+    return homePath.replaceAll(Pattern.quote("${userId}"), parameters.get("userId"))
+            .replaceAll(Pattern.quote("${groupId}"), parameters.get("groupId"));
   }
 
   public int compareTo(DriveData arg) {
