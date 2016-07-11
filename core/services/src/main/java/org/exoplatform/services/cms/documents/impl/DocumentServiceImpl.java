@@ -115,16 +115,32 @@ public class DocumentServiceImpl implements DocumentService {
       return null;
     }
 
+    // find the best matching drive to display the document
+    DriveData drive = this.getDriveOfNode(nodePath);
+
+    return getLinkInDocumentsApp(nodePath, drive);
+  }
+
+  /**
+   * Get link to open a document in the Documents application with the given drive
+   * @param nodePath path of the nt:file node to open
+   * @param drive drive to use to open the nt:file node
+   * @return Link to open the document
+   * @throws Exception
+   */
+  @Override
+  public String getLinkInDocumentsApp(String nodePath, DriveData drive) throws Exception {
+    if(nodePath == null) {
+      return null;
+    }
+
     String containerName = WCMCoreUtils.getService(PortalContainerInfo.class).getContainerName();
     StringBuffer url = new StringBuffer();
     url.append("/").append(containerName);
 
-    // find the best matching drive to display the document
-    DriveData driveData = this.getDriveOfNode(nodePath);
-
-    if(driveData.getName().equals(ManageDriveServiceImpl.GROUPS_DRIVE_NAME)) {
+    if(drive.getName().equals(ManageDriveServiceImpl.GROUPS_DRIVE_NAME)) {
       // handle group drive case
-      String groupId = driveData.getParameters().get("groupId");
+      String groupId = drive.getParameters().get("groupId");
       if(groupId != null) {
         String groupPageName;
         String[] splitedGroupId = groupId.split("/");
@@ -136,52 +152,30 @@ public class DocumentServiceImpl implements DocumentService {
           groupPageName = "documents";
         }
         url.append("/g/").append(groupId.replaceAll("/", ":")).append("/").append(groupPageName)
-                .append("?path=" + driveData.getName() + "/" + groupId.replaceAll("/", ":") + nodePath);
+                .append("?path=" + drive.getName() + "/" + groupId.replaceAll("/", ":") + nodePath);
       } else {
         throw new Exception("Cannot get group id from node path " + nodePath);
       }
-    } else if(driveData.getName().equals(ManageDriveServiceImpl.USER_DRIVE_NAME)
-            || driveData.getName().equals(ManageDriveServiceImpl.PERSONAL_DRIVE_NAME)) {
+    } else if(drive.getName().equals(ManageDriveServiceImpl.USER_DRIVE_NAME)
+            || drive.getName().equals(ManageDriveServiceImpl.PERSONAL_DRIVE_NAME)) {
       // handle personal drive case
       SiteKey siteKey = getDefaultSiteKey();
       url.append("/").append(siteKey.getName()).append("/").append("documents");
       String[] splitedNodePath = nodePath.split("/");
       if(splitedNodePath != null && splitedNodePath.length >= 6) {
         String userId = splitedNodePath[5];
-        url.append("?path=" + driveData.getName() + "/:" + userId + nodePath);
+        url.append("?path=" + drive.getName() + "/:" + userId + nodePath);
       } else {
-        url.append("?path=" + driveData.getName() + nodePath);
+        url.append("?path=" + drive.getName() + nodePath);
       }
     } else {
       // default case
       SiteKey siteKey = getDefaultSiteKey();
       url.append("/").append(siteKey.getName()).append("/").append("documents")
-              .append("?path=" + driveData.getName() + nodePath);
+              .append("?path=" + drive.getName() + nodePath);
     }
-    return url.toString();
-  }
 
-  /**
-   * Get link to open a document in the Documents application with the given drive
-   * @param path path of the nt:file node to open
-   * @param driveName driveName to use to open the nt:file node
-   * @return Link to open the document
-   * @throws Exception
-   */
-  @Override
-  public String getLinkInDocumentsApp(String path, String driveName) throws Exception {
-    if(path == null) {
-      return null;
-    }
-    String url = new StringBuilder(CommonsUtils.getCurrentDomain()).append("/")
-              .append(PortalContainer.getCurrentPortalContainerName())
-              // TODO remove hardcoded reference to intranet site
-              .append("/intranet")
-              .append("/documents?path=")
-              .append(driveName)
-              .append(path)
-              .toString();
-    return url;
+    return url.toString();
   }
 
   @Override

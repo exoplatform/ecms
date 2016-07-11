@@ -44,11 +44,11 @@ public interface DocumentService {
    * Get the link to display a document in the Documents app in the given drive.
    * It will try to get the best matching context (personal doc, space doc, ...).
    * @param nodePath The path of the node
-   * @param driveName The drive to use
+   * @param drive The drive to use
    * @return The link to open the document
    * @throws Exception
    */
-  public String getLinkInDocumentsApp(String nodePath, String driveName) throws Exception;
+  public String getLinkInDocumentsApp(String nodePath, DriveData drive) throws Exception;
 
   /**
    * Get the drive containing the node with the given node path, for the current user.
