@@ -17,32 +17,19 @@
 package org.exoplatform.ecm.webui.utils;
 
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeMap;
+import java.util.*;
 
 import javax.jcr.Node;
 import javax.jcr.PathNotFoundException;
 import javax.jcr.Property;
 import javax.jcr.PropertyType;
 
+import org.exoplatform.commons.utils.HTMLSanitizer;
 import org.exoplatform.commons.utils.IOUtil;
 import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.ecm.webui.form.UIDialogForm;
 import org.exoplatform.ecm.webui.form.UIFormUploadInputNoUploadButton;
-import org.exoplatform.ecm.webui.form.validator.CategoryValidator;
-import org.exoplatform.ecm.webui.form.validator.CronExpressionValidator;
-import org.exoplatform.ecm.webui.form.validator.DateValidator;
-import org.exoplatform.ecm.webui.form.validator.ECMNameValidator;
-import org.exoplatform.ecm.webui.form.validator.PhoneFormatValidator;
-import org.exoplatform.ecm.webui.form.validator.RepeatCountValidator;
-import org.exoplatform.ecm.webui.form.validator.RepeatIntervalValidator;
-import org.exoplatform.ecm.webui.form.validator.XSSValidator;
+import org.exoplatform.ecm.webui.form.validator.*;
 import org.exoplatform.services.cms.JcrInputProperty;
 import org.exoplatform.upload.UploadResource;
 import org.exoplatform.wcm.webui.Utils;
@@ -53,12 +40,7 @@ import org.exoplatform.webui.form.UIFormMultiValueInputSet;
 import org.exoplatform.webui.form.UIFormSelectBox;
 import org.exoplatform.webui.form.input.UICheckBoxInput;
 import org.exoplatform.webui.form.input.UIUploadInput;
-import org.exoplatform.webui.form.validator.DateTimeValidator;
-import org.exoplatform.webui.form.validator.EmailAddressValidator;
-import org.exoplatform.webui.form.validator.MandatoryValidator;
-import org.exoplatform.webui.form.validator.NullFieldValidator;
-import org.exoplatform.webui.form.validator.NumberFormatValidator;
-import org.exoplatform.webui.form.validator.StringLengthValidator;
+import org.exoplatform.webui.form.validator.*;
 
 /*
  * Created by The eXo Platform SAS
@@ -71,20 +53,27 @@ import org.exoplatform.webui.form.validator.StringLengthValidator;
  */
 public class DialogFormUtil {
 
-  public static String VALIDATOR_PARAM_BEGIN      ="(";
-  public static String VALIDATOR_PARAM_END        =")";
-  public static String VALIDATOR_PARAM_SEPERATOR  =";";
-  public static String SANITIZATION_FLAG          ="noSanitization";
+  public static String VALIDATOR_PARAM_BEGIN     = "(";
 
-  /** Type of parameters which were passed for the validator
-   * TODO: Please add all the possible type here and parser it in side the
-   * function parserValidatorParam.
-   * If any question, ask for VinhNT from Content's team.
-   * */
-  public static String TYPE_FLOAT                 ="Float";
-  public static String TYPE_DOUBLE                ="Double";
-  public static String TYPE_INTEGER               ="Int";
-  public static String TYPE_STRING                ="String";
+  public static String VALIDATOR_PARAM_END       = ")";
+
+  public static String VALIDATOR_PARAM_SEPERATOR = ";";
+
+  public static String SANITIZATION_FLAG         = "noSanitization";
+
+  /**
+   * Type of parameters which were passed for the validator TODO: Please add all
+   * the possible type here and parser it in side the function
+   * parserValidatorParam. If any question, ask for VinhNT from Content's team.
+   */
+  public static String TYPE_FLOAT                = "Float";
+
+  public static String TYPE_DOUBLE               = "Double";
+
+  public static String TYPE_INTEGER              = "Int";
+
+  public static String TYPE_STRING               = "String";
+
   /**
    * Prepare map.
    *
@@ -96,11 +85,12 @@ public class DialogFormUtil {
   public static Map<String, JcrInputProperty> prepareMap(List inputs, Map properties) throws Exception {
     return prepareMap(inputs, properties, null);
   }
+
   @SuppressWarnings("unchecked")
   public static Map<String, JcrInputProperty> prepareMap(List inputs, Map properties, Map options) throws Exception {
     Map<String, String> changeInJcrPathParamMap = new HashMap<String, String>();
     Map<String, JcrInputProperty> rawinputs = new HashMap<String, JcrInputProperty>();
-    HashMap<String, JcrInputProperty> hasMap = new HashMap<String, JcrInputProperty>() ;
+    HashMap<String, JcrInputProperty> hasMap = new HashMap<String, JcrInputProperty>();
     String inputName = null;
     String mimeTypeJcrPath = null;
     InputStream inputStream = null;
@@ -108,32 +98,31 @@ public class DialogFormUtil {
     for (int i = 0; i < inputs.size(); i++) {
       JcrInputProperty property = null;
       String option = null;
-      if(inputs.get(i) instanceof UIFormMultiValueInputSet) {
-        UIFormMultiValueInputSet inputI = (UIFormMultiValueInputSet)inputs.get(i);
-        inputName = (inputI).getName() ;
-        if(!hasMap.containsKey(inputName)) {
+      if (inputs.get(i) instanceof UIFormMultiValueInputSet) {
+        UIFormMultiValueInputSet inputI = (UIFormMultiValueInputSet) inputs.get(i);
+        inputName = (inputI).getName();
+        if (!hasMap.containsKey(inputName)) {
           List<UIComponent> inputChild = inputI.getChildren();
           property = (JcrInputProperty) properties.get(inputName);
-          if (inputChild != null && inputChild.size() > 0 &&
-              inputChild.get(0) instanceof UIUploadInput) {
+          if (inputChild != null && inputChild.size() > 0 && inputChild.get(0) instanceof UIUploadInput) {
             Map<String, List> uploadDataMap = new TreeMap<String, List>();
             for (UIComponent child : inputChild) {
-              UIUploadInput uploadInput = (UIUploadInput)child;
+              UIUploadInput uploadInput = (UIUploadInput) child;
               String uploadId = uploadInput.getUploadIds()[0];
               String uploadDataName = null;
               String uploadMimeType = null;
               byte[] uploadData = null;
               if (uploadInput instanceof UIFormUploadInputNoUploadButton) {
-                uploadDataName = ((UIFormUploadInputNoUploadButton)uploadInput).getFileName();
-                uploadMimeType = ((UIFormUploadInputNoUploadButton)uploadInput).getMimeType();
-                uploadData = ((UIFormUploadInputNoUploadButton)uploadInput).getByteValue();
+                uploadDataName = ((UIFormUploadInputNoUploadButton) uploadInput).getFileName();
+                uploadMimeType = ((UIFormUploadInputNoUploadButton) uploadInput).getMimeType();
+                uploadData = ((UIFormUploadInputNoUploadButton) uploadInput).getByteValue();
               } else {
                 UploadResource uploadResource = (uploadInput).getUploadResource(uploadId);
                 if (uploadResource != null) {
-                String location = uploadResource.getStoreLocation();
-                uploadDataName = uploadResource.getFileName();
-                uploadData = IOUtil.getFileContentAsBytes(location);
-                uploadMimeType = uploadResource.getMimeType();
+                  String location = uploadResource.getStoreLocation();
+                  uploadDataName = uploadResource.getFileName();
+                  uploadData = IOUtil.getFileContentAsBytes(location);
+                  uploadMimeType = uploadResource.getMimeType();
                 }
               }
               if (uploadDataName != null && uploadData != null) {
@@ -145,26 +134,27 @@ public class DialogFormUtil {
                 } else {
                   int count = 1;
                   while (uploadDataMap.containsKey(uploadDataName + count)) {
-                    count ++;
+                    count++;
                   }
                   uploadDataMap.put(uploadDataName + count, data);
                 }
               }
-           }
+            }
             property.setValue(uploadDataMap);
           } else {
-            List<String> values = (List<String>) (inputI).getValue() ;
-            if(property != null){
-              property.setValue(values.toArray(new String[values.size()])) ;
+            List<String> values = (List<String>) (inputI).getValue();
+            if (property != null) {
+              property.setValue(values.toArray(new String[values.size()]));
             }
           }
         }
-        hasMap.put(inputName, property) ;
+        hasMap.put(inputName, property);
       } else {
         UIFormInputBase input = (UIFormInputBase) inputs.get(i);
         property = (JcrInputProperty) properties.get(input.getName());
-        if(options != null && options.get(input.getName()) != null) option = (String)options.get(input.getName());
-        if(property != null) {
+        if (options != null && options.get(input.getName()) != null)
+          option = (String) options.get(input.getName());
+        if (property != null) {
           if (input instanceof UIUploadInput) {
             String uploadId = ((UIUploadInput) input).getUploadIds()[0];
             UploadResource uploadResource = ((UIUploadInput) input).getUploadResource(uploadId);
@@ -173,36 +163,38 @@ public class DialogFormUtil {
                 changeInJcrPathParamMap.put(property.getChangeInJcrPathParam(), "");
               continue;
             }
-              String location = uploadResource.getStoreLocation();
-              byte[] uploadData = IOUtil.getFileContentAsBytes(location);
-              property.setValue(uploadData);
-              //change param in jcr path
-              if (property.getChangeInJcrPathParam() != null)
-                changeInJcrPathParamMap.put(property.getChangeInJcrPathParam(),
-                                            Text.escapeIllegalJcrChars(uploadResource.getFileName()));
+            String location = uploadResource.getStoreLocation();
+            byte[] uploadData = IOUtil.getFileContentAsBytes(location);
+            property.setValue(uploadData);
+            // change param in jcr path
+            if (property.getChangeInJcrPathParam() != null)
+              changeInJcrPathParamMap.put(property.getChangeInJcrPathParam(),
+                                          Text.escapeIllegalJcrChars(uploadResource.getFileName()));
 
-              mimeTypeJcrPath = property.getJcrPath().replace("jcr:data", "jcr:mimeType");
-              JcrInputProperty mimeTypeInputPropertyTmp = new JcrInputProperty();
-              mimeTypeInputPropertyTmp.setJcrPath(mimeTypeJcrPath);
-              mimeTypeInputPropertyTmp.setValue(((UIUploadInput) input).getUploadResource(uploadId).getMimeType());
-              mimeTypes.put(mimeTypeJcrPath, mimeTypeInputPropertyTmp);
-          } else if(input instanceof UIFormDateTimeInput) {
-            property.setValue(((UIFormDateTimeInput)input).getCalendar()) ;
-          } else if(input instanceof UIFormSelectBox) {
+            mimeTypeJcrPath = property.getJcrPath().replace("jcr:data", "jcr:mimeType");
+            JcrInputProperty mimeTypeInputPropertyTmp = new JcrInputProperty();
+            mimeTypeInputPropertyTmp.setJcrPath(mimeTypeJcrPath);
+            mimeTypeInputPropertyTmp.setValue(((UIUploadInput) input).getUploadResource(uploadId).getMimeType());
+            mimeTypes.put(mimeTypeJcrPath, mimeTypeInputPropertyTmp);
+          } else if (input instanceof UIFormDateTimeInput) {
+            property.setValue(((UIFormDateTimeInput) input).getCalendar());
+          } else if (input instanceof UIFormSelectBox) {
             UIFormSelectBox uiSelectBox = (UIFormSelectBox) input;
-            if(!uiSelectBox.isMultiple()) {
+            if (!uiSelectBox.isMultiple()) {
               property.setValue(uiSelectBox.getValue());
-            }else {
+            } else {
               property.setValue(uiSelectBox.getSelectedValues());
             }
-          } else if(input instanceof UICheckBoxInput) {
-            property.setValue(((UICheckBoxInput)input).isChecked()) ;
+          } else if (input instanceof UICheckBoxInput) {
+            property.setValue(((UICheckBoxInput) input).isChecked());
           } else {
-            if(input.getValue()!=null) {
+            if (input.getValue() != null) {
               String inputValue = input.getValue().toString().trim();
               boolean isEmpty = Utils.isEmptyContent(inputValue);
-              if(isEmpty) inputValue = "";
-              else if(option == null || option.indexOf(SANITIZATION_FLAG) < 0) inputValue = org.exoplatform.services.deployment.Utils.sanitize(inputValue);
+              if (isEmpty)
+                inputValue = "";
+              else if (option == null || option.indexOf(SANITIZATION_FLAG) < 0)
+                inputValue = HTMLSanitizer.sanitize(inputValue);
               if (input.getName().equals("name") && input.getAncestorOfType(UIDialogForm.class).isAddNew()) {
                 JcrInputProperty jcrExoTitle = new JcrInputProperty();
                 jcrExoTitle.setJcrPath("/node/exo:title");
@@ -218,15 +210,15 @@ public class DialogFormUtil {
         }
       }
     }
-    Iterator iter = properties.values().iterator() ;
-    JcrInputProperty property ;
+    Iterator iter = properties.values().iterator();
+    JcrInputProperty property;
     while (iter.hasNext()) {
-      property = (JcrInputProperty) iter.next() ;
-      rawinputs.put(property.getJcrPath(), property) ;
+      property = (JcrInputProperty) iter.next();
+      rawinputs.put(property.getJcrPath(), property);
     }
     for (String jcrPath : mimeTypes.keySet()) {
       if (!rawinputs.containsKey(jcrPath)) {
-        rawinputs.put(jcrPath, mimeTypes.get(jcrPath)) ;
+        rawinputs.put(jcrPath, mimeTypes.get(jcrPath));
       }
     }
     List<UIUploadInput> formUploadList = new ArrayList<UIUploadInput>();
@@ -237,11 +229,13 @@ public class DialogFormUtil {
             && uiSet.getId().equals("attachment__")) {
           List<UIComponent> list = uiSet.getChildren();
           for (UIComponent component : list) {
-            if (!formUploadList.contains(component)) formUploadList.add((UIUploadInput) component);
+            if (!formUploadList.contains(component))
+              formUploadList.add((UIUploadInput) component);
           }
         }
       } else if (input instanceof UIUploadInput) {
-        if (!formUploadList.contains(input)) formUploadList.add((UIUploadInput) input);
+        if (!formUploadList.contains(input))
+          formUploadList.add((UIUploadInput) input);
       }
     }
     if (formUploadList.size() > 0) {
@@ -298,11 +292,10 @@ public class DialogFormUtil {
             value.setJcrPath(value.getJcrPath().replace(changeEntry.getKey(), changeEntry.getValue()));
           }
           if (value.getValue() != null && value.getValue() instanceof String) {
-            value.setValue(((String)value.getValue()).replace(changeEntry.getKey(), changeEntry.getValue()));
+            value.setValue(((String) value.getValue()).replace(changeEntry.getKey(), changeEntry.getValue()));
           }
           if (value != null && !"".equals(value) && changeEntry.getValue() != null && !"".equals(changeEntry.getValue())) {
-            ret.put(entry.getKey().replace(changeEntry.getKey(), changeEntry.getValue()),
-                    value);
+            ret.put(entry.getKey().replace(changeEntry.getKey(), changeEntry.getValue()), value);
           }
         }
       }
@@ -338,12 +331,15 @@ public class DialogFormUtil {
    * @return the t
    * @throws Exception the exception
    */
-  public static <T extends UIFormInputBase> T createFormInput(Class<T> type,String name, String label,
-      String validateType, Class valueType) throws Exception {
-    Object[] args= {name, null, valueType };
-    UIFormInputBase formInput = type.getConstructor().newInstance(args) ;
+  public static <T extends UIFormInputBase> T createFormInput(Class<T> type,
+                                                              String name,
+                                                              String label,
+                                                              String validateType,
+                                                              Class valueType) throws Exception {
+    Object[] args = { name, null, valueType };
+    UIFormInputBase formInput = type.getConstructor().newInstance(args);
     addValidators(formInput, validateType);
-    if(label != null && label.length()!=0) {
+    if (label != null && label.length() != 0) {
       formInput.setLabel(label);
     }
     return type.cast(formInput);
@@ -359,52 +355,52 @@ public class DialogFormUtil {
    */
   public static String getPropertyValueAsString(Node node, String propertyName) throws Exception {
     Property property = null;
-    try{
+    try {
       property = node.getProperty(propertyName);
-    }catch (PathNotFoundException e) {
+    } catch (PathNotFoundException e) {
       return "";
     }
-    int valueType = property.getType() ;
-    switch(valueType) {
-    case PropertyType.STRING: //String
-      return property.getString() ;
+    int valueType = property.getType();
+    switch (valueType) {
+    case PropertyType.STRING: // String
+      return property.getString();
     case PropertyType.LONG: // Long
-      return Long.toString(property.getLong()) ;
+      return Long.toString(property.getLong());
     case PropertyType.DOUBLE: // Double
-      return Double.toString(property.getDouble()) ;
-    case PropertyType.DATE: //Date
-      return property.getDate().getTime().toString() ;
-    case PropertyType.BOOLEAN: //Boolean
-      return Boolean.toString(property.getBoolean()) ;
-    case PropertyType.NAME: //Name
-      return property.getName() ;
-    case 8: //Path
-    case 9: //References
-    case 0: //Undifine
+      return Double.toString(property.getDouble());
+    case PropertyType.DATE: // Date
+      return property.getDate().getTime().toString();
+    case PropertyType.BOOLEAN: // Boolean
+      return Boolean.toString(property.getBoolean());
+    case PropertyType.NAME: // Name
+      return property.getName();
+    case 8: // Path
+    case 9: // References
+    case 0: // Undifine
     }
-    return "" ;
+    return "";
   }
 
   public static Class getValidator(String validatorType) throws ClassNotFoundException {
-    if(validatorType.equals("name")) {
-      return ECMNameValidator.class ;
-    } else if (validatorType.equals("email")){
-      return EmailAddressValidator.class ;
+    if (validatorType.equals("name")) {
+      return ECMNameValidator.class;
+    } else if (validatorType.equals("email")) {
+      return EmailAddressValidator.class;
     } else if (validatorType.equals("number")) {
       return NumberFormatValidator.class;
-    } else if (validatorType.equals("empty")){
-      return MandatoryValidator.class ;
-    } else if(validatorType.equals("null")) {
+    } else if (validatorType.equals("empty")) {
+      return MandatoryValidator.class;
+    } else if (validatorType.equals("null")) {
       return NullFieldValidator.class;
-    } else if(validatorType.equals("datetime")) {
+    } else if (validatorType.equals("datetime")) {
       return DateTimeValidator.class;
-    } else if(validatorType.equals("date")) {
+    } else if (validatorType.equals("date")) {
       return DateValidator.class;
-    } else if(validatorType.equals("cronExpressionValidator")) {
+    } else if (validatorType.equals("cronExpressionValidator")) {
       return CronExpressionValidator.class;
-    } else if(validatorType.equals("repeatCountValidator")) {
+    } else if (validatorType.equals("repeatCountValidator")) {
       return RepeatCountValidator.class;
-    } else if(validatorType.equals("repeatIntervalValidator")) {
+    } else if (validatorType.equals("repeatIntervalValidator")) {
       return RepeatIntervalValidator.class;
     } else if (validatorType.equals("length")) {
       return StringLengthValidator.class;
@@ -419,31 +415,34 @@ public class DialogFormUtil {
       return cl.loadClass(validatorType);
     }
   }
+
   @SuppressWarnings("unchecked")
   public static void addValidators(UIFormInputBase uiInput, String validators) throws Exception {
     String[] validatorList = null;
-    if (validators.indexOf(',') > -1) validatorList = validators.split(",");
-    else validatorList = new String[] {validators};
+    if (validators.indexOf(',') > -1)
+      validatorList = validators.split(",");
+    else
+      validatorList = new String[] { validators };
     for (String validator : validatorList) {
       Object[] params;
-      String s_param=null;
+      String s_param = null;
       int p_begin, p_end;
       p_begin = validator.indexOf(VALIDATOR_PARAM_BEGIN);
-      p_end   = validator.indexOf(VALIDATOR_PARAM_END);
-      if (p_begin>0 && p_end > p_begin) {
+      p_end = validator.indexOf(VALIDATOR_PARAM_END);
+      if (p_begin > 0 && p_end > p_begin) {
         String v_name;
-        s_param = validator.substring(p_begin+1, p_end);
+        s_param = validator.substring(p_begin + 1, p_end);
         params = s_param.split(VALIDATOR_PARAM_SEPERATOR);
-        params = parserValidatorParam(params, params.length-1, params[params.length-1].toString());
+        params = parserValidatorParam(params, params.length - 1, params[params.length - 1].toString());
         v_name = validator.substring(0, p_begin);
-        uiInput.addValidator(getValidator(v_name.trim()), params) ;
-      }else {
-        uiInput.addValidator(getValidator(validator.trim())) ;
+        uiInput.addValidator(getValidator(v_name.trim()), params);
+      } else {
+        uiInput.addValidator(getValidator(validator.trim()));
       }
     }
   }
+
   /**
-   *
    * @param params
    * @param length
    * @param type
@@ -453,15 +452,20 @@ public class DialogFormUtil {
   public static Object[] parserValidatorParam(Object[] params, int length, String type) throws Exception {
     int i;
     Object[] newParams;
-    if (length<1) return params;
+    if (length < 1)
+      return params;
     newParams = new Object[length];
     if (type.equalsIgnoreCase(TYPE_INTEGER)) {
-      for (i=0; i<length; i++ ) newParams[i] = Integer.parseInt(params[i].toString());
-    }else if (type.equalsIgnoreCase(TYPE_FLOAT)){
-      for (i=0; i<length; i++ ) newParams[i] = Float.parseFloat(params[i].toString());
-    }else if (type.equalsIgnoreCase(TYPE_DOUBLE)) {
-      for (i=0; i<length; i++ ) newParams[i] = Double.parseDouble(params[i].toString());
-    }else return params;//Do not convert, let those parameters are the Objec type
+      for (i = 0; i < length; i++)
+        newParams[i] = Integer.parseInt(params[i].toString());
+    } else if (type.equalsIgnoreCase(TYPE_FLOAT)) {
+      for (i = 0; i < length; i++)
+        newParams[i] = Float.parseFloat(params[i].toString());
+    } else if (type.equalsIgnoreCase(TYPE_DOUBLE)) {
+      for (i = 0; i < length; i++)
+        newParams[i] = Double.parseDouble(params[i].toString());
+    } else
+      return params;// Do not convert, let those parameters are the Objec type
     return newParams;
   }
 }

@@ -17,17 +17,16 @@
 package org.exoplatform.ecm.webui.form.validator;
 
 import org.apache.commons.lang.StringUtils;
-import org.exoplatform.services.deployment.Utils;
+
+import org.exoplatform.commons.utils.HTMLSanitizer;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.exception.MessageException;
 import org.exoplatform.webui.form.UIFormInput;
 import org.exoplatform.webui.form.validator.Validator;
 
 /**
- * Created by The eXo Platform SAS
- * Author : Tran Hung Phong
- *          phongth@exoplatform.com
- * Jul 24, 2012  
+ * Created by The eXo Platform SAS Author : Tran Hung Phong
+ * phongth@exoplatform.com Jul 24, 2012
  */
 public class XSSValidator implements Validator {
 
@@ -37,11 +36,12 @@ public class XSSValidator implements Validator {
     if (inputValue == null || inputValue.trim().length() == 0) {
       return;
     }
-    
-    inputValue = Utils.sanitize(inputValue);
+
+    inputValue = HTMLSanitizer.sanitize(inputValue);
     if (StringUtils.isEmpty(inputValue)) {
       String message = "UIActionForm.msg.xss-vulnerability-character";
-      if(uiInput.getLabel() == null) message = "UIActionForm.msg.xss-vulnerability-character-wo-label";
+      if (uiInput.getLabel() == null)
+        message = "UIActionForm.msg.xss-vulnerability-character-wo-label";
       Object[] args = { uiInput.getLabel() };
       throw new MessageException(new ApplicationMessage(message, args, ApplicationMessage.WARNING));
     }
