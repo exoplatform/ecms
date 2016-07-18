@@ -50,19 +50,20 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
  */
 public class DocumentServiceImpl implements DocumentService {
 
-  private static final String MIX_REFERENCEABLE = "mix:referenceable";
-  private static final String EXO_LAST_MODIFIER_PROP = "exo:lastModifier";
-  private static final String EXO_DATE_CREATED_PROP = "exo:dateCreated";
-  private static final String JCR_LAST_MODIFIED_PROP = "jcr:lastModified";
-  private static final String JCR_CONTENT = "jcr:content";
-  private static final String EXO_OWNER_PROP = "exo:owner";
-  private static final String EXO_TITLE_PROP = "exo:title";
-  private static final String CURRENT_STATE_PROP = "publication:currentState";
-  private static final String GROUPS_DRIVE_NAME = "Groups";
-  private static final String GROUPS_DRIVE_ROOT_NODE = "Groups";
-  private static final String PERSONAL_DRIVE_NAME = "Personal Documents";
-  private static final String USER_DRIVE_NAME = "User Documents";
-  private static final String PERSONAL_DRIVE_ROOT_NODE = "Users";
+  public static final String MIX_REFERENCEABLE = "mix:referenceable";
+  public static final String EXO_LAST_MODIFIER_PROP = "exo:lastModifier";
+  public static final String EXO_DATE_CREATED_PROP = "exo:dateCreated";
+  public static final String JCR_LAST_MODIFIED_PROP = "jcr:lastModified";
+  public static final String JCR_CONTENT = "jcr:content";
+  public static final String EXO_OWNER_PROP = "exo:owner";
+  public static final String EXO_TITLE_PROP = "exo:title";
+  public static final String CURRENT_STATE_PROP = "publication:currentState";
+  public static final String GROUPS_DRIVE_NAME = "Groups";
+  public static final String GROUPS_DRIVE_ROOT_NODE = "Groups";
+  public static final String PERSONAL_DRIVE_NAME = "Personal Documents";
+  public static final String USER_DRIVE_NAME = "User Documents";
+  public static final String PERSONAL_DRIVE_ROOT_NODE = "Users";
+  public static final String DOCUMENTS_APP_NAVIGATION_NODE_NAME = "documents";
 
   private ManageDriveService manageDriveService;
 
@@ -146,10 +147,10 @@ public class DocumentServiceImpl implements DocumentService {
         String[] splitedGroupId = groupId.split("/");
         if (splitedGroupId != null && splitedGroupId.length == 3 && splitedGroupId[1].equals("spaces")) {
           // the doc is in a space -> we use the documents application of the space
-          groupPageName = splitedGroupId[2] + "/documents";
+          groupPageName = splitedGroupId[2] + "/" + DOCUMENTS_APP_NAVIGATION_NODE_NAME;
         } else {
           // otherwise we use the portal documents application
-          groupPageName = "documents";
+          groupPageName = DOCUMENTS_APP_NAVIGATION_NODE_NAME;
         }
         url.append("/g/").append(groupId.replaceAll("/", ":")).append("/").append(groupPageName)
                 .append("?path=" + drive.getName() + "/" + groupId.replaceAll("/", ":") + nodePath);
@@ -160,7 +161,7 @@ public class DocumentServiceImpl implements DocumentService {
             || drive.getName().equals(ManageDriveServiceImpl.PERSONAL_DRIVE_NAME)) {
       // handle personal drive case
       SiteKey siteKey = getDefaultSiteKey();
-      url.append("/").append(siteKey.getName()).append("/").append("documents");
+      url.append("/").append(siteKey.getName()).append("/").append(DOCUMENTS_APP_NAVIGATION_NODE_NAME);
       String[] splitedNodePath = nodePath.split("/");
       if(splitedNodePath != null && splitedNodePath.length >= 6) {
         String userId = splitedNodePath[5];
@@ -171,7 +172,7 @@ public class DocumentServiceImpl implements DocumentService {
     } else {
       // default case
       SiteKey siteKey = getDefaultSiteKey();
-      url.append("/").append(siteKey.getName()).append("/").append("documents")
+      url.append("/").append(siteKey.getName()).append("/").append(DOCUMENTS_APP_NAVIGATION_NODE_NAME)
               .append("?path=" + drive.getName() + nodePath);
     }
 
