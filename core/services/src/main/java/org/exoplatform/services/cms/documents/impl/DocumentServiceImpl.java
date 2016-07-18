@@ -24,8 +24,6 @@ import java.util.ResourceBundle;
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 
-import org.exoplatform.commons.utils.CommonsUtils;
-import org.exoplatform.container.PortalContainer;
 import org.exoplatform.container.xml.PortalContainerInfo;
 import org.exoplatform.portal.config.UserPortalConfig;
 import org.exoplatform.portal.config.UserPortalConfigService;
@@ -58,11 +56,6 @@ public class DocumentServiceImpl implements DocumentService {
   public static final String EXO_OWNER_PROP = "exo:owner";
   public static final String EXO_TITLE_PROP = "exo:title";
   public static final String CURRENT_STATE_PROP = "publication:currentState";
-  public static final String GROUPS_DRIVE_NAME = "Groups";
-  public static final String GROUPS_DRIVE_ROOT_NODE = "Groups";
-  public static final String PERSONAL_DRIVE_NAME = "Personal Documents";
-  public static final String USER_DRIVE_NAME = "User Documents";
-  public static final String PERSONAL_DRIVE_ROOT_NODE = "Users";
   public static final String DOCUMENTS_APP_NAVIGATION_NODE_NAME = "documents";
 
   private ManageDriveService manageDriveService;
@@ -192,7 +185,7 @@ public class DocumentServiceImpl implements DocumentService {
     // Manage special cases
     String[] splitedPath = nodePath.split("/");
     if (splitedPath != null && splitedPath.length >= 2) {
-      if (splitedPath[1].equals(GROUPS_DRIVE_ROOT_NODE)) {
+      if (splitedPath[1].equals(ManageDriveServiceImpl.GROUPS_DRIVE_ROOT_NODE)) {
         nodeDrive = manageDriveService.getGroupDriveTemplate();
 
         int groupDocumentsRootNodeName = nodePath.indexOf("/Documents");
@@ -203,11 +196,11 @@ public class DocumentServiceImpl implements DocumentService {
         } else {
           throw new Exception("Cannot extract group id from node path " + nodePath);
         }
-      } else if (splitedPath != null && splitedPath.length >= 6 && splitedPath[1].equals(PERSONAL_DRIVE_ROOT_NODE)) {
+      } else if (splitedPath != null && splitedPath.length >= 6 && splitedPath[1].equals(ManageDriveServiceImpl.PERSONAL_DRIVE_ROOT_NODE)) {
         if(splitedPath[5].equals(userId)) {
-          nodeDrive = manageDriveService.getDriveByName(PERSONAL_DRIVE_NAME);
+          nodeDrive = manageDriveService.getDriveByName(ManageDriveServiceImpl.PERSONAL_DRIVE_NAME);
         } else {
-          nodeDrive = manageDriveService.getDriveByName(USER_DRIVE_NAME);
+          nodeDrive = manageDriveService.getDriveByName(ManageDriveServiceImpl.USER_DRIVE_NAME);
         }
         nodeDrive.getParameters().put("userId", splitedPath[2] + "/" + splitedPath[3] + "/" + splitedPath[4] + "/" + splitedPath[5]);
       }
