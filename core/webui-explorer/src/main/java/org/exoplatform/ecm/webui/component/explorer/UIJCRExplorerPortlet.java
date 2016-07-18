@@ -395,10 +395,11 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
       }
     }
 
-    // we update the path to keep only the absolute path to the file (/absolute/path/of/the/file)
+    // we extract the absolute path of the file (remove the drive name)
+    String contentRealPath = path;
     int firstSlash = path.indexOf("/");
     if(firstSlash >= 0) {
-      path = path.substring(firstSlash);
+      contentRealPath = path.substring(firstSlash);
     }
 
     setFlagSelect(true);
@@ -412,7 +413,7 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
         WCMCoreUtils.getUserSessionProvider().getSession(driveData.getWorkspace(), rservice.getCurrentRepository());
       // check if it exists
       // we assume that the path is a real path
-      session.getItem(path);
+      session.getItem(contentRealPath);
     } catch(AccessDeniedException ace) {
       Object[] args = { driveName };
       uiApp.addMessage(new ApplicationMessage("UIDrivesArea.msg.access-denied", args,
@@ -430,7 +431,15 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
     uiExplorer.setRepositoryName(repositoryName);
     uiExplorer.setWorkspaceName(driveData.getWorkspace());
     uiExplorer.setRootPath(homePath);
-    path = path.replaceAll("/+", "/");
+    String addressPath = contentRealPath.replaceAll("/+", "/");
+    // handle special case of docs in Public Personal Documents and the symlink "Public"
+    if(driveData.getName().equals(ManageDriveServiceImpl.PERSONAL_DRIVE_NAME) &&
+            !addressPath.startsWith(homePath)) {
+      String publicHomePath = homePath.replace("/" + ManageDriveServiceImpl.PERSONAL_DRIVE_PRIVATE_FOLDER_NAME, "/" + ManageDriveServiceImpl.PERSONAL_DRIVE_PUBLIC_FOLDER_NAME);
+      if(addressPath.startsWith(publicHomePath)) {
+        addressPath = addressPath.replace("/" + ManageDriveServiceImpl.PERSONAL_DRIVE_PUBLIC_FOLDER_NAME, "/Private/" + ManageDriveServiceImpl.PERSONAL_DRIVE_PUBLIC_FOLDER_NAME);
+      }
+    }
     Preference pref = uiExplorer.getPreference();
     pref.setShowSideBar(driveData.getViewSideBar());
     pref.setShowNonDocumentType(driveData.getViewNonDocument());
@@ -450,7 +459,7 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
     boolean isShowActionBar = isShowActionBar() ;
     uiActionbar.setTabOptions(viewList.get(0));
     uiActionbar.setRendered(isShowActionBar);
-    uiExplorer.setSelectNode(driveData.getWorkspace(), path);
+    uiExplorer.setSelectNode(driveData.getWorkspace(), addressPath);
 
     UIDocumentWorkspace uiDocWorkspace = uiWorkingArea.getChild(UIDocumentWorkspace.class);
     uiDocWorkspace.setRenderedChild(UIDocumentContainer.class);
@@ -468,7 +477,7 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
     Boolean isEdit = Boolean.valueOf(Util.getPortalRequestContext().getRequestParameter("edit"));
     Node selectedNode = uiExplorer.getCurrentNode();
     if (isEdit) {
-      if (uiExplorer.getCurrentPath().equals(path)) {
+      if (uiExplorer.getCurrentPath().equals(addressPath)) {
         if(canManageNode(selectedNode, uiApp, uiExplorer, uiActionbar, context, EditDocumentActionComponent.getFilters())) {
           EditDocumentActionComponent.editDocument(null, context, this, uiExplorer, selectedNode, uiApp);
         }else if(canManageNode(selectedNode, uiApp, uiExplorer, uiActionbar, context, EditPropertyActionComponent.getFilters())) {
