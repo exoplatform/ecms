@@ -125,6 +125,8 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
   public static final String PERSONAL_DRIVE_PRIVATE_FOLDER_NAME = "Private";
   public static final String USER_DRIVE_NAME = "User Documents";
   public static final String PERSONAL_DRIVE_ROOT_NODE = "Users";
+  public static final String DRIVE_PARAMATER_USER_ID = "userId";
+  public static final String DRIVE_PARAMATER_GROUP_ID = "groupId";
 
   /**
    * List of ManageDrivePlugin

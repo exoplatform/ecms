@@ -33,6 +33,7 @@ import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.documents.AutoVersionService;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.drives.ManageDriveService;
+import org.exoplatform.services.cms.drives.impl.ManageDriveServiceImpl;
 import org.exoplatform.services.cms.views.ManageViewService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.log.ExoLogger;
@@ -97,6 +98,8 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
 
   private boolean flagSelect = false;
 
+  private Pattern driveParameteriedPathPattern = Pattern.compile(".*\\$\\{(.*)\\}.*");
+
   public UIJCRExplorerPortlet() throws Exception {
     if (Util.getPortalRequestContext().getRemoteUser() != null) {
       UIJcrExplorerContainer explorerContainer = addChild(UIJcrExplorerContainer.class, null, null);
@@ -144,7 +147,7 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
     UIJcrExplorerContainer explorerContainer = getChild(UIJcrExplorerContainer.class);
     UIJcrExplorerEditContainer editContainer = getChild(UIJcrExplorerEditContainer.class);
     PortletRequestContext portletReqContext = (PortletRequestContext) context ;
-    HashMap<String, String> map = getElementByContext(context);
+    Map<String, String> map = getElementByContext(context);
     PortalRequestContext pcontext = Util.getPortalRequestContext();
     String backToValue = Util.getPortalRequestContext().getRequestParameter(org.exoplatform.ecm.webui.utils.Utils.URL_BACKTO);
     
@@ -270,38 +273,44 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
       uiRightClickPopupMenu.setRendered(true);
   }
 
-  private HashMap<String, String> getElementByContext(WebuiRequestContext context) {
-    HashMap<String, String> mapParam = new HashMap<String, String>();
+  private Map<String, String> getElementByContext(WebuiRequestContext context) {
+    HashMap<String, String> mapParam = new HashMap<>();
     //In case access by ajax request
     if (context.useAjax()) return mapParam;
-    Pattern patternUrl = Pattern.compile("([^/]+)/([^/]+)/([^/]+)/(.*)");
     PortalRequestContext pcontext = Util.getPortalRequestContext();
     Matcher matcher;
 
-    String nodePathParam = pcontext.getRequestParameter("path");
-    String currentRepo = WCMCoreUtils.getRepository().getConfiguration().getName();
-    if (nodePathParam != null && nodePathParam.length() > 0) {
-      patternUrl = Pattern.compile("([^/]+)/(.*)");
-      matcher = patternUrl.matcher(nodePathParam);
-      if (matcher.find()) {
-        mapParam.put("repository", currentRepo);
-        mapParam.put("drive", matcher.group(1));
-        mapParam.put("path", matcher.group(2));
-        return mapParam;
-      } 
-      patternUrl = Pattern.compile("(.*)");
-      matcher = patternUrl.matcher(nodePathParam);
-      if (matcher.find()) {
-        mapParam.put("repository", currentRepo);
-        mapParam.put("drive", matcher.group(1));
-        mapParam.put("path", "/");
-        return mapParam;
+    Map<String, String[]> requestParams = pcontext.getRequest().getParameterMap();
+    for(String requestParamName : requestParams.keySet()) {
+      if (requestParamName.equals("path")) {
+        String nodePathParam = pcontext.getRequestParameter("path");
+        String currentRepo = WCMCoreUtils.getRepository().getConfiguration().getName();
+        if (nodePathParam != null && nodePathParam.length() > 0) {
+          Pattern patternUrl = Pattern.compile("([^/]+)/(.*)");
+          matcher = patternUrl.matcher(nodePathParam);
+          if (matcher.find()) {
+            mapParam.put("repository", currentRepo);
+            mapParam.put("drive", matcher.group(1));
+            mapParam.put("path", matcher.group(2));
+          } else {
+            patternUrl = Pattern.compile("(.*)");
+            matcher = patternUrl.matcher(nodePathParam);
+            if (matcher.find()) {
+              mapParam.put("repository", currentRepo);
+              mapParam.put("drive", matcher.group(1));
+              mapParam.put("path", "/");
+            }
+          }
+        }
+      } else {
+        mapParam.put(requestParamName, pcontext.getRequest().getParameter(requestParamName));
       }
     }
+
     return mapParam;
   }
 
-  private void showDocument(WebuiRequestContext context, HashMap<String, String> map) throws Exception {
+  private void showDocument(WebuiRequestContext context, Map<String, String> map) throws Exception {
     String repositoryName = String.valueOf(map.get("repository"));
     String driveName = String.valueOf(map.get("drive"));
     String path = String.valueOf(map.get("path"));
@@ -367,36 +376,31 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
         viewListStr.append(viewName);
     }
     driveData.setViews(viewListStr.toString());
+
     String homePath = driveData.getHomePath();
-    if (homePath.contains("${userId}")) {
-      // if the drive is a virtual drive containing ${userId}, if the first token starts with ":",
-      // it is the userId to used instead of the user id of the connected user
-      // the input has the pattern /:userId/absolute/path/of/the/file
-      int secondSlash = path.indexOf("/", 1);
-      if(secondSlash >= 0) {
-        String userIdToken = path.substring(1, secondSlash);
-        if(userIdToken != null && userIdToken.startsWith(":")) {
-          // we use this userId instead of the userId of the connected user
-          userId = userIdToken.substring(1);
-          // we update the path to keep only the absolute path to the file (/absolute/path/of/the/file)
-          path = path.substring(secondSlash);
+    Matcher matcher = driveParameteriedPathPattern.matcher(homePath);
+    if(matcher.matches()) {
+      // if the drive is a virtual drive containing, the paramterized value is available as request parameter
+      String drivePathParamName = matcher.group(1);
+      // we need to get the real drive home path
+      String drivePathParamValue = map.get(drivePathParamName);
+      if(StringUtils.isNotEmpty(drivePathParamValue)) {
+        if(ManageDriveServiceImpl.DRIVE_PARAMATER_USER_ID.equals(drivePathParamName)) {
+          // User id parameter is a special case since it must be replaced by its distributed format
+          homePath = org.exoplatform.services.cms.impl.Utils.getPersonalDrivePath(homePath, drivePathParamValue);
+        } else {
+          // we update the drive homePath with the real value
+          homePath = StringUtils.replaceOnce(homePath, "${" + drivePathParamName + "}", drivePathParamValue);
         }
       }
-      homePath = org.exoplatform.services.cms.impl.Utils.getPersonalDrivePath(homePath, userId);
-    } else if(homePath.contains("${groupId}")) {
-      // if the drive is a virtual drive containing ${groupdId}, the first token is the group id
-      // the input has the pattern /:<group>:<subgroup>/absolute/path/of/the/file
-      // we start by getting the group id
-      int secondSlash = path.indexOf("/", 1);
-      if(secondSlash >= 0) {
-        String group = path.substring(1, secondSlash);
-        String groupId = group.replaceAll(":", "/");
-        // we update the drive homePath with the real group id value
-        homePath = StringUtils.replaceOnce(homePath, "${groupId}", groupId);
-        // we update the path to keep only the absolute path to the file (/absolute/path/of/the/file)
-        path = path.substring(secondSlash);
-      }
     }
+
+    // we update the path to keep only the absolute path to the file (/absolute/path/of/the/file)
+    int firstSlash = path.indexOf("/");
+    if(firstSlash >= 0) {
+      path = path.substring(firstSlash);
+    }
+
     setFlagSelect(true);
     UIJCRExplorer uiExplorer = findFirstComponentOfType(UIJCRExplorer.class);
 

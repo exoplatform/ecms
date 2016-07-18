@@ -146,7 +146,7 @@ public class DocumentServiceImpl implements DocumentService {
           groupPageName = DOCUMENTS_APP_NAVIGATION_NODE_NAME;
         }
         url.append("/g/").append(groupId.replaceAll("/", ":")).append("/").append(groupPageName)
-                .append("?path=" + drive.getName() + "/" + groupId.replaceAll("/", ":") + nodePath);
+                .append("?path=" + drive.getName() + nodePath + "&groupId=" + groupId);
       } else {
         throw new Exception("Cannot get group id from node path " + nodePath);
       }
@@ -154,13 +154,12 @@ public class DocumentServiceImpl implements DocumentService {
             || drive.getName().equals(ManageDriveServiceImpl.PERSONAL_DRIVE_NAME)) {
       // handle personal drive case
       SiteKey siteKey = getDefaultSiteKey();
-      url.append("/").append(siteKey.getName()).append("/").append(DOCUMENTS_APP_NAVIGATION_NODE_NAME);
+      url.append("/").append(siteKey.getName()).append("/").append(DOCUMENTS_APP_NAVIGATION_NODE_NAME)
+              .append("?path=" + drive.getName() + nodePath);
       String[] splitedNodePath = nodePath.split("/");
       if(splitedNodePath != null && splitedNodePath.length >= 6) {
         String userId = splitedNodePath[5];
-        url.append("?path=" + drive.getName() + "/:" + userId + nodePath);
-      } else {
-        url.append("?path=" + drive.getName() + nodePath);
+        url.append("&userId=" + userId);
       }
     } else {
       // default case
