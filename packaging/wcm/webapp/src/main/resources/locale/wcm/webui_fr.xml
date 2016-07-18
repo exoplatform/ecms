@@ -36,6 +36,8 @@
     <label>
       <ManagedSites>Gestion de Site</ManagedSites>
       <SharedSite>Espace Partagé</SharedSite>
+      <PersonalDocuments>Documents Personels</PersonalDocuments>
+      <UserDocuments>Documents de {0}</UserDocuments>
     </label>
   </Drives>
 

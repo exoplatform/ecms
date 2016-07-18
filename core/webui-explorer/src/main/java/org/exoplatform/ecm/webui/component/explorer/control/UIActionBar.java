@@ -17,6 +17,7 @@
 package org.exoplatform.ecm.webui.component.explorer.control;
 
 import org.apache.commons.lang.StringUtils;
+import org.exoplatform.commons.utils.CommonsUtils;
 import org.exoplatform.ecm.jcr.SearchValidator;
 import org.exoplatform.ecm.webui.component.explorer.*;
 import org.exoplatform.ecm.webui.component.explorer.popup.actions.UIDocumentForm;
@@ -25,12 +26,15 @@ import org.exoplatform.ecm.webui.component.explorer.search.*;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.drives.DriveData;
+import org.exoplatform.services.cms.drives.impl.ManageDriveServiceImpl;
 import org.exoplatform.services.cms.queries.QueryService;
 import org.exoplatform.services.cms.views.ManageViewService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.organization.OrganizationService;
+import org.exoplatform.services.organization.User;
 import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
@@ -91,6 +95,8 @@ public class UIActionBar extends UIForm {
    */
   private static final Log LOG  = ExoLogger.getLogger(UIActionBar.class.getName());
 
+  private OrganizationService organizationService;
+
   private NodeLocation view_ ;
   private String templateName_ ;
   //private List<SelectItemOption<String>> tabOptions = new ArrayList<SelectItemOption<String>>() ;
@@ -119,6 +125,8 @@ public class UIActionBar extends UIForm {
   private String backLink;
 
   public UIActionBar() throws Exception {
+    organizationService = CommonsUtils.getService(OrganizationService.class);
+
     addChild(new UIFormStringInput(FIELD_SIMPLE_SEARCH, FIELD_SIMPLE_SEARCH, null).addValidator(SearchValidator.class));
     List<SelectItemOption<String>> typeOptions = new ArrayList<SelectItemOption<String>>();
     typeOptions.add(new SelectItemOption<String>(FIELD_SQL, Query.SQL));
@@ -365,26 +373,59 @@ public class UIActionBar extends UIForm {
       event.getRequestContext().addUIComponentToUpdateByAjax(uiWorkingArea) ;
     }
   }
+
   public String getDriveLabel() {
     RequestContext context = RequestContext.getCurrentInstance();
     ResourceBundle res = context.getApplicationResourceBundle();
-    DriveData driveData = getAncestorOfType(UIJCRExplorer.class).getDriveData();
-    String id = driveData.getName();
+    DriveData drive = getAncestorOfType(UIJCRExplorer.class).getDriveData();
+    String driveName = drive.getName();
+
+    String driveLabel = "";
+
     try {
-      return res.getString("Drives.label." + id.replace(".", "").replace(" ", ""));
-    } catch (MissingResourceException ex) {
-      try {
+      if(ManageDriveServiceImpl.GROUPS_DRIVE_NAME.equals(driveName) || driveName.startsWith(".")) {
+        // Groups drive
         RepositoryService repoService = WCMCoreUtils.getService(RepositoryService.class);
         NodeHierarchyCreator nodeHierarchyCreator = WCMCoreUtils.getService(NodeHierarchyCreator.class);
         String groupPath = nodeHierarchyCreator.getJcrPath(BasePath.CMS_GROUPS_PATH);
         Node groupNode = (Node)WCMCoreUtils.getSystemSessionProvider().getSession(
-                                      repoService.getCurrentRepository().getConfiguration().getDefaultWorkspaceName(),
-                                      repoService.getCurrentRepository()).getItem(
-                                              groupPath + driveData.getName().replace(".", "/"));
-        return groupNode.getProperty(NodetypeConstant.EXO_LABEL).getString();
-      } catch(Exception e) {
-        return id.replace(".", " / ");
+                repoService.getCurrentRepository().getConfiguration().getDefaultWorkspaceName(),
+                repoService.getCurrentRepository()).getItem(
+                groupPath + drive.getName().replace(".", "/"));
+        driveLabel = groupNode.getProperty(NodetypeConstant.EXO_LABEL).getString();
+      } else if(ManageDriveServiceImpl.USER_DRIVE_NAME.equals(driveName)) {
+        // User Documents drive
+        String userDisplayName = "";
+        String driveLabelKey = "Drives.label.UserDocuments";
+        String userIdPath = drive.getParameters().get(ManageDriveServiceImpl.DRIVE_PARAMATER_USER_ID);
+        String userId = userIdPath.substring(userIdPath.lastIndexOf("/") + 1);
+        if(StringUtils.isNotEmpty(userId)) {
+          userDisplayName = userId;
+          User user = organizationService.getUserHandler().findUserByName(userId);
+          if(user != null) {
+            userDisplayName = user.getDisplayName();
+          }
+        }
+        try {
+          driveLabel = res.getString(driveLabelKey).replace("{0}", userDisplayName);
+        } catch(MissingResourceException mre) {
+          LOG.error("Cannot get resource string " + driveLabel + " : " + mre.getMessage(), mre);
+          driveLabel = userDisplayName;
+        }
+      } else {
+        // Others drives
+        String driveLabelKey = "Drives.label." + driveName.replace(".", "").replace(" ", "");
+        try {
+          driveLabel = res.getString(driveLabelKey);
+        } catch (MissingResourceException ex) {
+          LOG.error("Cannot get resource string for " + driveLabelKey + " : " + ex.getMessage(), ex);
+          driveLabel = driveLabelKey;
+        }
       }
+    } catch(Exception e) {
+      driveLabel = driveName.replace(".", " / ");
     }
+
+    return driveLabel;
   }
 }

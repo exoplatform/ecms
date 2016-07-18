@@ -382,8 +382,9 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
     if(matcher.matches()) {
       // if the drive is a virtual drive containing, the paramterized value is available as request parameter
       String drivePathParamName = matcher.group(1);
-      // we need to get the real drive home path
       String drivePathParamValue = map.get(drivePathParamName);
+      driveData.getParameters().put(drivePathParamName, drivePathParamValue);
+      // we need to get the real drive home path
       if(StringUtils.isNotEmpty(drivePathParamValue)) {
         if(ManageDriveServiceImpl.DRIVE_PARAMATER_USER_ID.equals(drivePathParamName)) {
           // User id parameter is a special case since it must be replaced by its distributed format
