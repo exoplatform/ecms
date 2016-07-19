@@ -134,7 +134,7 @@ public class DocumentServiceImpl implements DocumentService {
 
     if(drive.getName().equals(ManageDriveServiceImpl.GROUPS_DRIVE_NAME)) {
       // handle group drive case
-      String groupId = drive.getParameters().get("groupId");
+      String groupId = drive.getParameters().get(ManageDriveServiceImpl.DRIVE_PARAMATER_GROUP_ID);
       if(groupId != null) {
         String groupPageName;
         String[] splitedGroupId = groupId.split("/");
@@ -146,7 +146,8 @@ public class DocumentServiceImpl implements DocumentService {
           groupPageName = DOCUMENTS_APP_NAVIGATION_NODE_NAME;
         }
         url.append("/g/").append(groupId.replaceAll("/", ":")).append("/").append(groupPageName)
-                .append("?path=" + drive.getName() + nodePath + "&groupId=" + groupId);
+                .append("?path=").append(drive.getName()).append(nodePath)
+                .append("&").append(ManageDriveServiceImpl.DRIVE_PARAMATER_GROUP_ID).append("=").append(groupId);
       } else {
         throw new Exception("Cannot get group id from node path " + nodePath);
       }
@@ -159,7 +160,7 @@ public class DocumentServiceImpl implements DocumentService {
       String[] splitedNodePath = nodePath.split("/");
       if(splitedNodePath != null && splitedNodePath.length >= 6) {
         String userId = splitedNodePath[5];
-        url.append("&userId=" + userId);
+        url.append("&").append(ManageDriveServiceImpl.DRIVE_PARAMATER_USER_ID).append("=").append(userId);
       }
     } else {
       // default case
@@ -191,7 +192,7 @@ public class DocumentServiceImpl implements DocumentService {
         if(groupDocumentsRootNodeName >= 0) {
           // extract group id for doc path
           String groupId = nodePath.substring(ManageDriveServiceImpl.GROUPS_DRIVE_ROOT_NODE.length() + 1, groupDocumentsRootNodeName);
-          nodeDrive.getParameters().put("groupId", groupId);
+          nodeDrive.getParameters().put(ManageDriveServiceImpl.DRIVE_PARAMATER_GROUP_ID, groupId);
         } else {
           throw new Exception("Cannot extract group id from node path " + nodePath);
         }
@@ -201,7 +202,7 @@ public class DocumentServiceImpl implements DocumentService {
         } else {
           nodeDrive = manageDriveService.getDriveByName(ManageDriveServiceImpl.USER_DRIVE_NAME);
         }
-        nodeDrive.getParameters().put("userId", splitedPath[2] + "/" + splitedPath[3] + "/" + splitedPath[4] + "/" + splitedPath[5]);
+        nodeDrive.getParameters().put(ManageDriveServiceImpl.DRIVE_PARAMATER_USER_ID, splitedPath[2] + "/" + splitedPath[3] + "/" + splitedPath[4] + "/" + splitedPath[5]);
       }
     }
     if(nodeDrive == null) {
