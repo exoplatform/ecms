@@ -600,6 +600,7 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
     for(DriveData drive : getAllDrives()) {
       if((drive.getHomePath().startsWith(cmsUserPath + "/${userId}")
               || drive.getHomePath().startsWith(userPath + "/"))
+              && !USER_DRIVE_NAME.equals(drive.getName())
               && hasPermissionOnDrive(drive, memberships)) {
         personalDrives.add(drive);
       }
