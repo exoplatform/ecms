@@ -21,12 +21,14 @@ import javax.jcr.ReferentialIntegrityException;
 import javax.jcr.version.Version;
 import javax.jcr.version.VersionHistory;
 
+import org.exoplatform.commons.utils.LazyPageList;
+import org.exoplatform.commons.utils.ListAccess;
+import org.exoplatform.commons.utils.ListAccessImpl;
 import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.ecm.jcr.model.VersionNode;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
-import org.exoplatform.webui.core.UIPopupComponent;
-import org.exoplatform.webui.core.UIPopupContainer;
+import org.exoplatform.webui.core.*;
 import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
 import org.exoplatform.services.jcr.impl.storage.JCRInvalidItemStateException;
 import org.exoplatform.services.log.ExoLogger;
@@ -35,11 +37,12 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
-import org.exoplatform.webui.core.UIApplication;
-import org.exoplatform.webui.core.UIComponent;
-import org.exoplatform.webui.core.UIContainer;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Created by The eXo Platform SARL
@@ -64,17 +67,34 @@ import org.exoplatform.webui.event.EventListener;
     }
 )
 
-public class UIVersionInfo extends UIContainer implements UIPopupComponent {
+public class UIVersionInfo extends UIContainer  {
   private static final Log LOG  = ExoLogger.getLogger(UIVersionInfo.class.getName());
 
   protected VersionNode rootVersion_ ;
   protected VersionNode curentVersion_;
   protected NodeLocation node_ ;
+  private UIPageIterator uiPageIterator_ ;
+  private List<VersionNode> listVersion = new ArrayList<VersionNode>() ;
   public UIVersionInfo() throws Exception {
     addChild(UILabelForm.class, null, null).setRendered(false);
     addChild(UIRemoveLabelForm.class, null, null).setRendered(false);
     addChild(UIViewVersion.class, null, null).setRendered(false);
     addChild(UIDiff.class, null, null).setRendered(false) ;
+    uiPageIterator_ = addChild(UIPageIterator.class, null, "VersionInfoIterator").setRendered(false);
+  }
+
+  public UIPageIterator getUIPageIterator() { return uiPageIterator_; }
+
+  public List getListRecords() throws Exception { return uiPageIterator_.getCurrentPageData(); }
+
+  @SuppressWarnings("unchecked")
+  public void updateGrid() throws Exception {
+    listVersion.clear();
+    listVersion = getNodeVersions(getRootVersionNode().getChildren());
+    Collections.reverse(listVersion);
+    ListAccess<VersionNode> recordList = new ListAccessImpl<VersionNode>(VersionNode.class, listVersion);
+    LazyPageList<VersionNode> dataPageList = new LazyPageList<VersionNode>(recordList, 10);
+    uiPageIterator_.setPageList(dataPageList);
   }
 
   public String[] getVersionLabels(VersionNode version) throws Exception {
@@ -90,6 +110,16 @@ public class UIVersionInfo extends UIContainer implements UIPopupComponent {
 
   public VersionNode getRootVersionNode() throws Exception {  return rootVersion_ ; }
 
+  private List<VersionNode> getNodeVersions(List<VersionNode> children) throws Exception {
+    List<VersionNode> child = new ArrayList<VersionNode>() ;
+    for(int i = 0; i < children.size(); i ++){
+      listVersion.add(children.get(i));
+      child = children.get(i).getChildren() ;
+      if(!child.isEmpty()) getNodeVersions(child) ;
+    }
+    return listVersion ;
+  }
+
   public void activate() {
     try {
       UIJCRExplorer uiExplorer = getAncestorOfType(UIJCRExplorer.class);
@@ -101,14 +131,13 @@ public class UIVersionInfo extends UIContainer implements UIPopupComponent {
                                                  .getRootVersion(), uiExplorer.getSession());
       curentVersion_ = rootVersion_;
       getChild(UIViewVersion.class).update();
+      updateGrid();
     } catch (Exception e) {
       if (LOG.isErrorEnabled()) {
         LOG.error("Unexpected error!", e.getMessage());
       }
     }
   }
-
-  public void deActivate() {}
 
   public VersionNode getCurrentVersionNode() { return curentVersion_ ;}
   
@@ -118,12 +147,6 @@ public class UIVersionInfo extends UIContainer implements UIPopupComponent {
   
   public void setCurrentNode(Node node) {
     node_ = NodeLocation.getNodeLocationByNode(node);
-  }
-
-  public boolean isViewVersion() {
-    UIViewVersion uiViewVersion = getChild(UIViewVersion.class);
-    if(uiViewVersion.isRendered()) return true;
-    return false;
   }
 
   static  public class ViewVersionActionListener extends EventListener<UIVersionInfo> {
@@ -247,7 +270,8 @@ public class UIVersionInfo extends UIContainer implements UIPopupComponent {
         uiVersionInfo.curentVersion_ = uiVersionInfo.rootVersion_ ;
         if(!node.isCheckedOut()) node.checkout() ;
         uiExplorer.getSession().save() ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiVersionInfo.getAncestorOfType(UIPopupContainer.class)) ;
+        uiVersionInfo.activate();
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiVersionInfo) ;
       } catch (ReferentialIntegrityException rie) {
         if (LOG.isErrorEnabled()) {
           LOG.error("Unexpected error", rie);
@@ -301,7 +325,7 @@ public class UIVersionInfo extends UIContainer implements UIPopupComponent {
         }
       }
       UIJCRExplorer uiExplorer = uiVersionInfo.getAncestorOfType(UIJCRExplorer.class) ;
-      uiExplorer.cancelAction() ;
+      uiExplorer.updateAjax(event) ;
     }
   }
 

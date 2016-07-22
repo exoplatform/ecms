@@ -31,6 +31,7 @@ import javax.jcr.query.QueryManager;
 import javax.jcr.query.QueryResult;
 import javax.jcr.version.Version;
 
+import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.cms.impl.DMSConfiguration;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
@@ -51,6 +52,7 @@ public class VersionNode {
   private String ws_ = "";
   private String uuid_;
   private String[] versionLabels_ = new String[]{};
+  private String author_;
   
   public VersionNode(Version version, Session session) {
     try {
@@ -60,6 +62,7 @@ public class VersionNode {
         path_ = version.getPath();
         ws_ = version.getSession().getWorkspace().getName();
         uuid_ = version.getUUID();
+        author_ = version.getNode("jcr:frozenNode").getProperty(Utils.EXO_LASTMODIFIER).getString();
         if (version.isNodeType(NodetypeConstant.MIX_VERSIONABLE)) {
           versionLabels_ = version.getVersionHistory().getVersionLabels(version);
         }
@@ -92,6 +95,7 @@ public class VersionNode {
       path_ = version.getPath();
       ws_ = version.getSession().getWorkspace().getName();
       uuid_ = version.getUUID();
+      author_ = version.getNode("jcr:frozenNode").getProperty(org.exoplatform.ecm.webui.utils.Utils.EXO_LASTMODIFIER).getString();
       versionLabels_ = version.getVersionHistory().getVersionLabels(version);
     } catch (Exception e) {
       if (LOG.isWarnEnabled()) {
@@ -127,7 +131,11 @@ public class VersionNode {
   public List<VersionNode> getChildren() { return children_; }
 
   public Calendar getCreatedTime() { return createdTime_; }
-  
+
+  public String getAuthor() {
+    return author_;
+  }
+
   public String[] getVersionLabels() {
     return versionLabels_;
   }

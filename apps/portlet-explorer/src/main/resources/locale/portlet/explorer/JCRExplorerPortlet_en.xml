@@ -1345,6 +1345,7 @@
   ###############################################################################
   -->
   <UIVersionInfo>
+    <title>Versions history</title>
     <tooltip>
       <version>Version</version>
       <baseVersion>Base Version</baseVersion>
@@ -1365,6 +1366,7 @@
     <action>
       <close>#{word.close}</close>
       <close-view>Close View</close-view>
+      <compare-versions>Compare selected versions</compare-versions>
     </action>
   </UIVersionInfo>
   <!--

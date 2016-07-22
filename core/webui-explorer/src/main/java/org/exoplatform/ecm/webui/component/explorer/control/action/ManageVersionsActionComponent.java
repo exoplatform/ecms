@@ -21,7 +21,10 @@ import java.util.List;
 
 import javax.jcr.Node;
 
+import org.exoplatform.ecm.webui.component.explorer.UIDocumentContainer;
+import org.exoplatform.ecm.webui.component.explorer.UIDocumentWorkspace;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
+import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.CanEnableVersionFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.CanSetPropertyFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotFolderFilter;
@@ -30,9 +33,11 @@ import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotRootNode
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotLockedFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotIgnoreVersionNodeFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.listener.UIActionBarActionListener;
+import org.exoplatform.ecm.webui.component.explorer.search.UISearchResult;
 import org.exoplatform.ecm.webui.component.explorer.versions.UIActivateVersion;
 import org.exoplatform.ecm.webui.component.explorer.versions.UIVersionInfo;
 import org.exoplatform.ecm.webui.utils.Utils;
+import org.exoplatform.portal.webui.container.UIContainer;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIComponent;
@@ -76,8 +81,13 @@ public class ManageVersionsActionComponent extends UIComponent {
         UIPopupContainer.activate(UIActivateVersion.class, 400);
         event.getRequestContext().addUIComponentToUpdateByAjax(UIPopupContainer);
       } else if (currentNode.isNodeType(Utils.MIX_VERSIONABLE)) {
-        UIPopupContainer.activate(UIVersionInfo.class, null, 700, 500);
-        event.getRequestContext().addUIComponentToUpdateByAjax(UIPopupContainer);
+        UIWorkingArea uiWorkingArea = uiExplorer.getChild(UIWorkingArea.class);
+        UIDocumentWorkspace uiDocumentWorkspace = uiWorkingArea.getChild(UIDocumentWorkspace.class);
+        UIVersionInfo uiVersionInfo = uiDocumentWorkspace.getChild(UIVersionInfo.class);
+        uiVersionInfo.setCurrentNode(currentNode);
+        uiVersionInfo.activate();
+        uiDocumentWorkspace.setRenderedChild(UIVersionInfo.class);
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiDocumentWorkspace);
       }
     }
   }

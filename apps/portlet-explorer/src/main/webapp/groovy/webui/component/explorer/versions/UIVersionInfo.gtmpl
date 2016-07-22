@@ -6,100 +6,79 @@
  * Sep 29, 2006
  * 11:57:24 AM 
  */
-%>
-<% import org.exoplatform.ecm.jcr.model.VersionNode; 
-   import org.exoplatform.ecm.webui.utils.Utils;
 
-%>
-<%  
-  public void writeNodes(List nodes, String clazz, int level) {
-    for(node in nodes) {
-		  if(clazz == "Even") clazz = "";
-      else clazz = "Even" ;
-		  String[] labels = uicomponent.getVersionLabels(node);
-		  StringBuffer label = new StringBuffer() ;
-		  label.append("<label>") ;
-		  StringBuffer displayLabel = new StringBuffer();
-			for(temp in labels) {
-		    displayLabel.append("[").append(temp).append("] ") ;
-		 	}
+    import java.util.Locale;
+    import java.text.DateFormat;
+    import org.exoplatform.ecm.jcr.model.VersionNode;
+    import org.exoplatform.ecm.webui.utils.Utils;
+    import org.exoplatform.portal.webui.util.Util;
 
-		  if (displayLabel.length() > 50) {
-		    label.append(displayLabel.substring(0, 50)).append("...");
-		  } else {
-		    label.append(displayLabel);
-		  }
-		  label.append("</label>") ;
-		  
-            String show = _ctx.appRes("UIVersionInfo.tooltip.version") + " : " + node.getName() + " " + label.toString();
-			String dateCreated = node.getCreatedTime().getTime().toString();
-			String titleLable = displayLabel.toString();
-			println """
-				    <tr><td>$show</td>				    
-	    """;
-		  		  
-	    println """
-			    <td class="right">
-			""";
-			if(uicomponent.getCurrentNode().isNodeType("nt:file")) {						
-  			println "<a class=\"actionIcon\" onclick=\"" + 
-	  		         uicomponent.event("CompareVersion",   node.getPath()) + "\" rel=\"tooltip\" data-placement=\"bottom\" title=\"" + _ctx.appRes("UIVersionInfo.tooltip.compareVersion") + "\"><i class=\"uiIconViewChange uiIconLightGray\"></i></a>" ;			
-			}
-      println "<a class=\"actionIcon\" onclick=\"" + 
-               uicomponent.event("AddLabel",   node.getPath()) + "\" rel=\"tooltip\" data-placement=\"bottom\" title=\"" + _ctx.appRes("UIVersionInfo.tooltip.addLabel") + "\"><i class=\"uiIconPlus uiIconLightGray\"></i></a>" ;
-			if(uicomponent.getVersionLabels(node).size() > 0){
-				println "<a class=\"actionIcon\" onclick=\"" + 
-				         uicomponent.event("RemoveLabel",   node.getPath()) + "\" rel=\"tooltip\" data-placement=\"bottom\" title=\"" + _ctx.appRes("UIVersionInfo.tooltip.removeLable") + "\"><i class=\"uiIconMinus uiIconLightGray\"></i></a>" ;      
-			}         
-				println "<a class=\"actionIcon\" onclick=\"" + 
-				         uicomponent.event("RestoreVersion",   node.getPath()) + "\" rel=\"tooltip\" data-placement=\"bottom\" title=\"" + _ctx.appRes("UIVersionInfo.tooltip.restoreVersion") + "\"><i class=\"uiIconRestore uiIconLightGray\"></i></a>" ;        
-			println "<a class=\"actionIcon\" onclick=\"" +  
-			         uicomponent.event("ViewVersion",   node.getPath()) + "\" rel=\"tooltip\" data-placement=\"bottom\" title=\"" + _ctx.appRes("UIVersionInfo.tooltip.viewVersion") + "\"><i class=\"uiIconPreview uiIconLightGray\"></i></a>" ;
-				println "<a class=\"actionIcon\" onclick=\"" + 
-				         uicomponent.event("DeleteVersion",   node.getPath()) + "\" rel=\"tooltip\" data-placement=\"bottom\" title=\"" + _ctx.appRes("UIVersionInfo.tooltip.deleteVersion") + "\"><i class=\"uiIconTrash uiIconLightGray\"></i></a>" ;      
-			println "</td></tr>" ;      
-			
-	    if(node.getChildrenSize() > 0 && node.isExpanded()) writeNodes(node.getChildren(), clazz, level) ;
+  public void writeNodes() {
+    String clazz = "" ;
+    Locale currentLocale = Util.getPortalRequestContext().getLocale();
+    DateFormat df = DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT, currentLocale);
+    for(node in uicomponent.getListRecords()) {
+      if(clazz == "Even")
+        clazz = "";
+      else
+        clazz = "Even" ;
+      String versionNumber = node.getName();
+      String author = "farhat";
+    %>
+    <tr>
+      <td>
+        <span class="uiCheckbox"><input type="checkbox" name="checkbox" class="checkbox"><span></span></span>
+      </td>
+      <td >
+        <label>
+            $versionNumber
+        </label>
+      </td>
+      <td><%=df.format(node.getCreatedTime().getTime())%></td>
+      <td><%=node.getAuthor()%></td>
+      <td>commentt</td>
+      <td class="center">
+        <a class="actionIcon" onclick="<%=uicomponent.event('ViewVersion', node.getPath()); %>" rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes('UIVersionInfo.tooltip.viewVersion'); %>"><i class="uiIconWatch uiIconLightGray"></i></a>
+        <a class="actionIcon" onclick="<%=uicomponent.event('RestoreVersion', node.getPath()); %>" rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes('UIVersionInfo.tooltip.restoreVersion'); %>"><i class="uiIconRestore uiIconLightGray"></i></a>
+        <a class="actionIcon" onclick="<%=uicomponent.event('DeleteVersion', node.getPath()); %>" rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes('UIVersionInfo.tooltip.deleteVersion'); %>"><i class="uiIconTrash uiIconLightGray"></i></a>
+      </td>
+    </tr>
+    <%
     }
   }
 %>
 
 <div class="uiVersionInfo resizable" id="$uicomponent.id">
-	<div class="uiBox noRounded">
-		<h6 class="title">
-			<i class="<%=Utils.getNodeTypeIcon(uicomponent.getCurrentNode(), "uiIcon16x16")%>"></i> <%=uicomponent.getCurrentNode().getName()%>
-		</h6>
-		<table class="uiGrid table no-border-cell table-hover table-striped">
-			<%
-				String clazz = "" ;
-				VersionNode rootNode = uicomponent.getRootVersionNode();
-				String baseVersion = "" ;
-                baseVersion = " (" + _ctx.appRes("UIVersionInfo.tooltip.baseVersion") + ")";
-                String show1 = _ctx.appRes("UIVersionInfo.tooltip.version") + " : " + "0" + baseVersion;
-                println """
-                  <tr><td>$show1</td>
-                """;
-                println """
-                  <td class="right">
-                """;
-                println "<a class=\"actionIcon\" onclick=\"" + uicomponent.event("AddLabel",   rootNode.getPath()) + "\" rel=\"tooltip\" data-placement=\"bottom\" title=\"" + _ctx.appRes("UIVersionInfo.tooltip.addLabel") + "\"><i class=\"uiIconPlus uiIconLightGray\"></i></a>" ;
-                println "<a class=\"actionIcon\" onclick=\"" + uicomponent.event("ViewVersion",   rootNode.getPath()) + "\" rel=\"tooltip\" data-placement=\"bottom\" title=\"" + _ctx.appRes("UIVersionInfo.tooltip.viewVersion") + "\"><i class=\"uiIconPreview uiIconLightGray\"></i></a>" ;
-                println "</tr>" ;
-                writeNodes(rootNode.getChildren(), clazz, 1);
-			%>
-		</table>
+  <div class="uiBox noRounded">
+    <h4 class="historyLabel"><%= _ctx.appRes("UIVersionInfo.title"); %></h4>
+    <table class="uiFormGrid uiGrid table table-hover table-striped">
+      <thead >
+        <tr>
+          <th >#</th>
+          <th >Version</th>
+          <th >Date</th>
+          <th >Author</th>
+          <th >Summary</th>
+          <th class="center">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+      <%
+          writeNodes();
+      %>
+      </tbody>
+    </table>
 	</div>
 
 	<%
 		uicomponent.renderChildren(); 
 	%>
-	
+		<% if(uicomponent.getUIPageIterator().getAvailablePage() > 1) { %>
+		<div>
+			<%_ctx.renderUIComponent(uicomponent.getUIPageIterator())%>
+		</div>
+		<% } %>
 </div>
 <div class="uiAction uiActionBorder">
 	<button type="button" onclick="<%=uicomponent.event("Close")%>" class="btn" href="javascript:void(0);"><%=_ctx.appRes("UIVersionInfo.action.close")%></button>
-	<%
-	if(uicomponent.isViewVersion()) {
-	%>
-	<button type="button" onclick="<%=uicomponent.event("CloseView")%>" class="btn" href="javascript:void(0);"><%=_ctx.appRes("UIVersionInfo.action.close-view")%></button>
-	<%}%>
 </div>

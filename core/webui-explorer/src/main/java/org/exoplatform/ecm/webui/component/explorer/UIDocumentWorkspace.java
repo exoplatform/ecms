@@ -18,6 +18,7 @@ package org.exoplatform.ecm.webui.component.explorer ;
 
 import org.exoplatform.ecm.webui.component.explorer.lifecycle.UIDocumentWorkspaceLifeCycle;
 import org.exoplatform.ecm.webui.component.explorer.search.UISearchResult;
+import org.exoplatform.ecm.webui.component.explorer.versions.UIVersionInfo;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.UIContainer;
 
@@ -35,5 +36,6 @@ public class UIDocumentWorkspace extends UIContainer {
   public UIDocumentWorkspace() throws Exception {
     addChild(UIDocumentContainer.class, null, null) ;
     addChild(UISearchResult.class, null, SIMPLE_SEARCH_RESULT).setRendered(false);
+    addChild(UIVersionInfo.class, null, null).setRendered(false);
   }
 }
