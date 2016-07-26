@@ -29,6 +29,7 @@ public class EcmsSearchResult extends SearchResult {
   private String fileType_;
   
   public EcmsSearchResult(String url,
+                          String urlOnImage,
                           String title,
                           String excerpt,
                           String detail,
@@ -36,7 +37,7 @@ public class EcmsSearchResult extends SearchResult {
                           long date,
                           long relevancy,
                           String fileType) {
-    super(url, title, excerpt, detail, imageUrl, date, relevancy);
+    super(url, urlOnImage, title, excerpt, detail, imageUrl, date, relevancy);
     this.fileType_ = fileType;
   }
   

@@ -177,9 +177,11 @@ public abstract class BaseSearchServiceConnector extends SearchServiceConnector 
                 Calendar date = getDate(retNode);
                 String url = getPath(retNode, context);
                 if (url == null) continue;
+
                 EcmsSearchResult result = 
                 //  new SearchResult(url, title, excerpt, detail, imageUrl, date, relevancy);
                     new EcmsSearchResult(url,
+                                         getPreviewUrl(retNode, context),
                                          getTitleResult(retNode), 
                                          retNode.getExcerpt(), 
                                          getDetails(retNode, context),
@@ -291,7 +293,18 @@ public abstract class BaseSearchServiceConnector extends SearchServiceConnector 
    * @throws Exception
    */
   protected abstract String getPath(ResultNode node, SearchContext context) throws Exception;
-  
+
+  /**
+   * returns the preview url
+   * @param node the node
+   * @return the expected path
+   * @throws Exception
+   */
+  protected String getPreviewUrl(ResultNode node, SearchContext context) throws Exception {
+    // defaults to the same url returned by getPath
+    return getPath(node, context);
+  }
+
   /**
    * gets the file type
    * @return

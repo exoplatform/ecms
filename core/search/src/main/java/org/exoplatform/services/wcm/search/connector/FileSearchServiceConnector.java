@@ -69,7 +69,17 @@ public class FileSearchServiceConnector extends BaseContentSearchServiceConnecto
   protected String getPath(ResultNode node, SearchContext context) throws Exception {
     return documentService.getLinkInDocumentsApp(node.getPath());
   }
-  
+
+  @Override
+  protected String getPreviewUrl(ResultNode node, SearchContext context) throws Exception {
+    StringBuilder url = new StringBuilder("javascript:require(['SHARED/social-ui-activity'], function(activity) {activity.previewDoc({");
+    if(node.isNodeType(NodetypeConstant.MIX_REFERENCEABLE)) {
+      url.append("docId:'").append(node.getUUID()).append("',");
+    }
+    return url.append("docPath:'").append(node.getPath()).append("', downloadUrl:'', openUrl:'")
+            .append(documentService.getLinkInDocumentsApp(node.getPath())).append("'})})").toString();
+  }
+
   /**
    * gets the image url
    * @return
