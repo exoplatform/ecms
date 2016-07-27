@@ -370,14 +370,18 @@
 		});
 	};
 
-	WCMUtils.prototype.loadImageForFileActivityCallback = function(obj){
-      		var img = gj(obj).nextAll("a:first")[0];
-      		img.style.display = "block";
-      		obj.style.display = "none";
-      		gj(obj.parentNode).removeClass();
-      		gj(obj.parentNode).addClass("fileTypeContent");
-      		
-    	};
+  WCMUtils.prototype.loadFallbackImage = function(image){
+    if (image != null) {
+      var imageContainer = gj(image).closest(".mediaContent");
+      if(imageContainer != null && imageContainer.length > 0) {
+        var fallbackImage = imageContainer.find(".fallbackImage");
+        if(fallbackImage != null && fallbackImage.length > 0) {
+          gj(image).hide();
+          fallbackImage.show();
+        }
+      }
+    }
+  };
 
     WCMUtils.prototype.getPlacement = function (element) {
         var offset = gj(element).offset();
