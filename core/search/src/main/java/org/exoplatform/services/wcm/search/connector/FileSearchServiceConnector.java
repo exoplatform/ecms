@@ -72,12 +72,19 @@ public class FileSearchServiceConnector extends BaseContentSearchServiceConnecto
 
   @Override
   protected String getPreviewUrl(ResultNode node, SearchContext context) throws Exception {
+    String restContextName =  WCMCoreUtils.getRestContextName();
+    StringBuffer downloadUrl = new StringBuffer();
+    downloadUrl.append('/').append(restContextName).append("/jcr/").
+            append(WCMCoreUtils.getRepository().getConfiguration().getName()).append('/').
+            append(node.getSession().getWorkspace().getName()).append(node.getPath());
+
     StringBuilder url = new StringBuilder("javascript:require(['SHARED/social-ui-activity'], function(activity) {activity.previewDoc({");
     if(node.isNodeType(NodetypeConstant.MIX_REFERENCEABLE)) {
       url.append("docId:'").append(node.getUUID()).append("',");
     }
-    return url.append("docPath:'").append(node.getPath()).append("', downloadUrl:'', openUrl:'")
-            .append(documentService.getLinkInDocumentsApp(node.getPath())).append("'})})").toString();
+    return url.append("docPath:'").append(node.getPath()).append("', downloadUrl:'").append(downloadUrl.toString())
+            .append("', openUrl:'").append(documentService.getLinkInDocumentsApp(node.getPath()))
+            .append("'})})").toString();
   }
 
   /**
