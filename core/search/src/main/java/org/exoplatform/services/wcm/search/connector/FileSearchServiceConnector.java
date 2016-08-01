@@ -20,9 +20,11 @@ import java.net.URLEncoder;
 
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
+import javax.jcr.Session;
 
 import org.exoplatform.commons.api.search.data.SearchContext;
 import org.exoplatform.container.xml.InitParams;
+import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
@@ -73,18 +75,27 @@ public class FileSearchServiceConnector extends BaseContentSearchServiceConnecto
   @Override
   protected String getPreviewUrl(ResultNode node, SearchContext context) throws Exception {
     String restContextName =  WCMCoreUtils.getRestContextName();
+
+    Session session = node.getSession();
+    String repositoryName = ((ManageableRepository) session.getRepository()).getConfiguration().getName();
+    String workspaceName = node.getSession().getWorkspace().getName();
+
     StringBuffer downloadUrl = new StringBuffer();
     downloadUrl.append('/').append(restContextName).append("/jcr/").
             append(WCMCoreUtils.getRepository().getConfiguration().getName()).append('/').
-            append(node.getSession().getWorkspace().getName()).append(node.getPath());
+            append(workspaceName).append(node.getPath());
 
-    StringBuilder url = new StringBuilder("javascript:require(['SHARED/social-ui-activity'], function(activity) {activity.previewDoc({");
+
+    StringBuilder url = new StringBuilder("javascript:require(['SHARED/social-ui-activity'], function(activity) {activity.previewDoc({doc:{");
     if(node.isNodeType(NodetypeConstant.MIX_REFERENCEABLE)) {
-      url.append("docId:'").append(node.getUUID()).append("',");
+      url.append("id:'").append(node.getUUID()).append("',");
     }
-    return url.append("docPath:'").append(node.getPath()).append("', downloadUrl:'").append(downloadUrl.toString())
+    return url.append("path:'").append(node.getPath())
+            .append("', repository:'").append(repositoryName)
+            .append("', workspace:'").append(workspaceName)
+            .append("', downloadUrl:'").append(downloadUrl.toString())
             .append("', openUrl:'").append(documentService.getLinkInDocumentsApp(node.getPath()))
-            .append("'})})").toString();
+            .append("'}})})").toString();
   }
 
   /**
