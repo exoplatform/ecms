@@ -22,6 +22,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import javax.jcr.RepositoryException;
+import javax.jcr.Session;
 
 import org.apache.commons.lang.StringUtils;
 
@@ -37,6 +38,7 @@ import org.exoplatform.portal.mop.navigation.*;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.cms.templates.TemplateService;
+import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.security.ConversationState;
@@ -121,6 +123,33 @@ public class DocumentSearchServiceConnector extends BaseContentSearchServiceConn
     }
 
     return URLDecoder.decode(url, "UTF-8");
+  }
+
+  @Override
+  protected String getPreviewUrl(ResultNode node, SearchContext context) throws Exception {
+    String restContextName =  WCMCoreUtils.getRestContextName();
+
+    Session session = node.getSession();
+    String repositoryName = ((ManageableRepository) session.getRepository()).getConfiguration().getName();
+    String workspaceName = node.getSession().getWorkspace().getName();
+
+    StringBuffer downloadUrl = new StringBuffer();
+    downloadUrl.append('/').append(restContextName).append("/jcr/").
+            append(WCMCoreUtils.getRepository().getConfiguration().getName()).append('/').
+            append(workspaceName).append(node.getPath());
+
+
+    StringBuilder url = new StringBuilder("javascript:require(['SHARED/social-ui-activity'], function(activity) {activity.previewDoc({doc:{");
+    if(node.isNodeType(NodetypeConstant.MIX_REFERENCEABLE)) {
+      url.append("id:'").append(node.getUUID()).append("',");
+    }
+    return url.append("path:'").append(node.getPath())
+            .append("', repository:'").append(repositoryName)
+            .append("', workspace:'").append(workspaceName)
+            .append("', downloadUrl:'").append(downloadUrl.toString())
+            .append("', openUrl:'").append(documentService.getLinkInDocumentsApp(node.getPath()))
+            .append("', isWebContent:true")
+            .append("}})})").toString();
   }
 
   private String getPageName(SiteKey siteKey) throws Exception {
