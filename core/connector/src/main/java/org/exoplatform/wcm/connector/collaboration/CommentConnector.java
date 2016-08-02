@@ -23,16 +23,13 @@ import java.util.Date;
 import java.util.List;
 
 import javax.jcr.Node;
-import javax.ws.rs.FormParam;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.QueryParam;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.dom.DOMSource;
 
+import org.apache.commons.lang.StringUtils;
 import org.exoplatform.ecm.connector.fckeditor.FCKUtils;
 import org.exoplatform.services.cms.comments.CommentsService;
 import org.exoplatform.services.rest.resource.ResourceContainer;
@@ -83,13 +80,7 @@ public class CommentConnector extends BaseConnector implements ResourceContainer
           @FormParam("comment") String comment
           ) throws Exception {
 
-    if (jcrPath.contains("%20")) jcrPath = URLDecoder.decode(jcrPath, "UTF-8");
-    String[] path = jcrPath.split("/");
-    String repositoryName = path[1];
-    String workspaceName = path[2];
-    jcrPath = jcrPath.substring(repositoryName.length()+workspaceName.length()+2);
-    if (jcrPath.charAt(1)=='/') jcrPath.substring(1);
-    Node content = getContent(workspaceName, jcrPath, null, false);
+    Node content = getNode(jcrPath);
 
     commentsService.addComment(content, content.getSession().getUserID(), null, null, comment,null);
 
@@ -113,15 +104,8 @@ public class CommentConnector extends BaseConnector implements ResourceContainer
           @QueryParam("jcrPath") String jcrPath
           ) throws Exception {
 
-    if (jcrPath.contains("%20")) jcrPath = URLDecoder.decode(jcrPath, "UTF-8");
-    String[] path = jcrPath.split("/");
-    String repositoryName = path[1];
-    String workspaceName = path[2];
-    jcrPath = jcrPath.substring(repositoryName.length()+workspaceName.length()+2);
-    if (jcrPath.charAt(1)=='/') jcrPath.substring(1);
-
     try {
-      Node content = getContent(workspaceName, jcrPath, null, false);
+      Node content = getNode(jcrPath);
 
       List<Node> comments = commentsService.getComments(content, null);
 
@@ -131,6 +115,9 @@ public class CommentConnector extends BaseConnector implements ResourceContainer
 
       for (Node comment:comments) {
         Element tagElt = document.createElement("comment");
+        //exo:name
+        Element id = document.createElement("id");
+        id.setTextContent(comment.getName());
         //exo:commentor
         Element commentor = document.createElement("commentor");
         commentor.setTextContent(comment.getProperty("exo:commentor").getString());
@@ -147,6 +134,7 @@ public class CommentConnector extends BaseConnector implements ResourceContainer
         Element commentElt = document.createElement("content");
         commentElt.setTextContent(comment.getProperty("exo:commentContent").getString());
 
+        tagElt.appendChild(id);
         tagElt.appendChild(commentor);
         tagElt.appendChild(commentorEmail);
         tagElt.appendChild(date);
@@ -169,6 +157,63 @@ public class CommentConnector extends BaseConnector implements ResourceContainer
 
   }
 
+  /**
+   *
+   * Delete a comment of a content.
+   *
+   * @param jcrPath The JCR path of the content.
+   * @param commentId The id of the comment to delete.
+   * @return
+   * @throws Exception The exception
+   *
+   * @anchor CommentConnector.deleteComment
+   */
+  @DELETE
+  @Path("/delete")
+  public Response deleteComment(
+          @QueryParam("jcrPath") String jcrPath,
+          @QueryParam("commentId") String commentId
+  ) throws Exception {
+
+    if(StringUtils.isEmpty(jcrPath) || StringUtils.isEmpty(commentId)) {
+      return Response.status(400).entity("jcrPath and commentId query parameters are mandatory").build();
+    }
+
+    Node content = getNode(jcrPath);
+
+    if(content.hasNode("comments")) {
+      Node commentsNode = content.getNode("comments");
+      if(commentsNode.hasNode(commentId)) {
+        commentsService.deleteComment(commentsNode.getNode(commentId));
+      } else {
+        return Response.noContent().build();
+      }
+    } else {
+      return Response.noContent().build();
+    }
+
+    return Response.ok().build();
+  }
+
+  /**
+   * Get the jcr node of the given jcr path
+   * @param jcrPath
+   * @return The node of the given jcr path
+   * @throws Exception
+   */
+  protected Node getNode(@QueryParam("jcrPath") String jcrPath) throws Exception {
+    if (jcrPath.contains("%20")) {
+      jcrPath = URLDecoder.decode(jcrPath, "UTF-8");
+    }
+    String[] path = jcrPath.split("/");
+    String repositoryName = path[1];
+    String workspaceName = path[2];
+    jcrPath = jcrPath.substring(repositoryName.length()+workspaceName.length()+2);
+    if (jcrPath.charAt(1)=='/') {
+      jcrPath.substring(1);
+    }
+    return getContent(workspaceName, jcrPath, null, false);
+  }
 
 
   /*
