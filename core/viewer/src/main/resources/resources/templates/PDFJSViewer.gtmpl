@@ -405,7 +405,7 @@ if(uicomponent.isNotModernBrowser()) {
                             <span id="numPages" class="toolbarLabel"></span>
                         </div>
                         <div id="toolbarViewerRight" class="pull-right">
-                            <a id="secondaryDownload" class="actionIcon" data-placement="bottom" rel="tooltip" data-original-title="Download" href="<%=downloadLink%>" tabindex="12" data-l10n-id="download">
+                            <a id="secondaryDownload" class="actionIcon hidden" data-placement="bottom" rel="tooltip" data-original-title="Download" href="<%=downloadLink%>" tabindex="12" data-l10n-id="download">
                                 <i class="uiIconDownload uiIconLightGray"></i>
                             </a>
                             <a id="presentationMode" class="actionIcon" data-placement="bottom" rel="tooltip" data-original-title="Switch to Presentation Mode" tabindex="13" data-l10n-id="presentation_mode">

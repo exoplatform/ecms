@@ -165,6 +165,12 @@ public interface ManageDriveService {
   public List<DriveData> getGroupDrives(String userId, List<String> userRoles) throws Exception;
 
   /**
+   * Get the Groups drive
+   * @return The Groups drive
+   */
+  public DriveData getGroupDriveTemplate();
+
+  /**
    * Check if a drive is vitual(Group Drive Template)
    * @param driveName  the string contain the drive name
    * @return true: is Virtual Drive, false: not is Virtual Drive

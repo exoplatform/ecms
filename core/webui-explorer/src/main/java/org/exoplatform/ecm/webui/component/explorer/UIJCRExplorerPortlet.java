@@ -16,6 +16,7 @@
  */
   package org.exoplatform.ecm.webui.component.explorer;
 
+import org.apache.commons.lang.StringUtils;
 import org.exoplatform.ecm.jcr.model.Preference;
 import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.ecm.webui.component.explorer.control.UIActionBar;
@@ -32,6 +33,7 @@ import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.documents.AutoVersionService;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.drives.ManageDriveService;
+import org.exoplatform.services.cms.drives.impl.ManageDriveServiceImpl;
 import org.exoplatform.services.cms.views.ManageViewService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.log.ExoLogger;
@@ -96,6 +98,8 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
 
   private boolean flagSelect = false;
 
+  private Pattern driveParameteriedPathPattern = Pattern.compile(".*\\$\\{(.*)\\}.*");
+
   public UIJCRExplorerPortlet() throws Exception {
     if (Util.getPortalRequestContext().getRemoteUser() != null) {
       UIJcrExplorerContainer explorerContainer = addChild(UIJcrExplorerContainer.class, null, null);
@@ -143,7 +147,7 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
     UIJcrExplorerContainer explorerContainer = getChild(UIJcrExplorerContainer.class);
     UIJcrExplorerEditContainer editContainer = getChild(UIJcrExplorerEditContainer.class);
     PortletRequestContext portletReqContext = (PortletRequestContext) context ;
-    HashMap<String, String> map = getElementByContext(context);
+    Map<String, String> map = getElementByContext(context);
     PortalRequestContext pcontext = Util.getPortalRequestContext();
     String backToValue = Util.getPortalRequestContext().getRequestParameter(org.exoplatform.ecm.webui.utils.Utils.URL_BACKTO);
     
@@ -269,38 +273,44 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
       uiRightClickPopupMenu.setRendered(true);
   }
 
-  private HashMap<String, String> getElementByContext(WebuiRequestContext context) {
-    HashMap<String, String> mapParam = new HashMap<String, String>();
+  private Map<String, String> getElementByContext(WebuiRequestContext context) {
+    HashMap<String, String> mapParam = new HashMap<>();
     //In case access by ajax request
     if (context.useAjax()) return mapParam;
-    Pattern patternUrl = Pattern.compile("([^/]+)/([^/]+)/([^/]+)/(.*)");
     PortalRequestContext pcontext = Util.getPortalRequestContext();
     Matcher matcher;
 
-    String nodePathParam = pcontext.getRequestParameter("path");
-    String currentRepo = WCMCoreUtils.getRepository().getConfiguration().getName();
-    if (nodePathParam != null && nodePathParam.length() > 0) {
-      patternUrl = Pattern.compile("([^/]+)/(.*)");
-      matcher = patternUrl.matcher(nodePathParam);
-      if (matcher.find()) {
-        mapParam.put("repository", currentRepo);
-        mapParam.put("drive", matcher.group(1));
-        mapParam.put("path", matcher.group(2));
-        return mapParam;
-      } 
-      patternUrl = Pattern.compile("(.*)");
-      matcher = patternUrl.matcher(nodePathParam);
-      if (matcher.find()) {
-        mapParam.put("repository", currentRepo);
-        mapParam.put("drive", matcher.group(1));
-        mapParam.put("path", "/");
-        return mapParam;
+    Map<String, String[]> requestParams = pcontext.getRequest().getParameterMap();
+    for(String requestParamName : requestParams.keySet()) {
+      if (requestParamName.equals("path")) {
+        String nodePathParam = pcontext.getRequestParameter("path");
+        String currentRepo = WCMCoreUtils.getRepository().getConfiguration().getName();
+        if (nodePathParam != null && nodePathParam.length() > 0) {
+          Pattern patternUrl = Pattern.compile("([^/]+)/(.*)");
+          matcher = patternUrl.matcher(nodePathParam);
+          if (matcher.find()) {
+            mapParam.put("repository", currentRepo);
+            mapParam.put("drive", matcher.group(1));
+            mapParam.put("path", matcher.group(2));
+          } else {
+            patternUrl = Pattern.compile("(.*)");
+            matcher = patternUrl.matcher(nodePathParam);
+            if (matcher.find()) {
+              mapParam.put("repository", currentRepo);
+              mapParam.put("drive", matcher.group(1));
+              mapParam.put("path", "/");
+            }
+          }
+        }
+      } else {
+        mapParam.put(requestParamName, pcontext.getRequest().getParameter(requestParamName));
       }
     }
+
     return mapParam;
   }
 
-  private void showDocument(WebuiRequestContext context, HashMap<String, String> map) throws Exception {
+  private void showDocument(WebuiRequestContext context, Map<String, String> map) throws Exception {
     String repositoryName = String.valueOf(map.get("repository"));
     String driveName = String.valueOf(map.get("drive"));
     String path = String.valueOf(map.get("path"));
@@ -366,9 +376,33 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
         viewListStr.append(viewName);
     }
     driveData.setViews(viewListStr.toString());
+
     String homePath = driveData.getHomePath();
-    if (homePath.contains("${userId}")) 
-      homePath = org.exoplatform.services.cms.impl.Utils.getPersonalDrivePath(homePath, userId);
+    Matcher matcher = driveParameteriedPathPattern.matcher(homePath);
+    if(matcher.matches()) {
+      // if the drive is a virtual drive containing, the paramterized value is available as request parameter
+      String drivePathParamName = matcher.group(1);
+      String drivePathParamValue = map.get(drivePathParamName);
+      driveData.getParameters().put(drivePathParamName, drivePathParamValue);
+      // we need to get the real drive home path
+      if(StringUtils.isNotEmpty(drivePathParamValue)) {
+        if(ManageDriveServiceImpl.DRIVE_PARAMATER_USER_ID.equals(drivePathParamName)) {
+          // User id parameter is a special case since it must be replaced by its distributed format
+          homePath = org.exoplatform.services.cms.impl.Utils.getPersonalDrivePath(homePath, drivePathParamValue);
+        } else {
+          // we update the drive homePath with the real value
+          homePath = StringUtils.replaceOnce(homePath, "${" + drivePathParamName + "}", drivePathParamValue);
+        }
+      }
+    }
+
+    // we extract the absolute path of the file (remove the drive name)
+    String contentRealPath = path;
+    int firstSlash = path.indexOf("/");
+    if(firstSlash >= 0) {
+      contentRealPath = path.substring(firstSlash);
+    }
+
     setFlagSelect(true);
     UIJCRExplorer uiExplorer = findFirstComponentOfType(UIJCRExplorer.class);
 
@@ -380,7 +414,7 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
         WCMCoreUtils.getUserSessionProvider().getSession(driveData.getWorkspace(), rservice.getCurrentRepository());
       // check if it exists
       // we assume that the path is a real path
-      session.getItem(homePath);
+      session.getItem(contentRealPath);
     } catch(AccessDeniedException ace) {
       Object[] args = { driveName };
       uiApp.addMessage(new ApplicationMessage("UIDrivesArea.msg.access-denied", args,
@@ -398,7 +432,15 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
     uiExplorer.setRepositoryName(repositoryName);
     uiExplorer.setWorkspaceName(driveData.getWorkspace());
     uiExplorer.setRootPath(homePath);
-    path = path.replaceAll("/+", "/");
+    String addressPath = contentRealPath.replaceAll("/+", "/");
+    // handle special case of docs in Public Personal Documents and the symlink "Public"
+    if(driveData.getName().equals(ManageDriveServiceImpl.PERSONAL_DRIVE_NAME) &&
+            !addressPath.startsWith(homePath)) {
+      String publicHomePath = homePath.replace("/" + ManageDriveServiceImpl.PERSONAL_DRIVE_PRIVATE_FOLDER_NAME, "/" + ManageDriveServiceImpl.PERSONAL_DRIVE_PUBLIC_FOLDER_NAME);
+      if(addressPath.startsWith(publicHomePath)) {
+        addressPath = addressPath.replace("/" + ManageDriveServiceImpl.PERSONAL_DRIVE_PUBLIC_FOLDER_NAME, "/Private/" + ManageDriveServiceImpl.PERSONAL_DRIVE_PUBLIC_FOLDER_NAME);
+      }
+    }
     Preference pref = uiExplorer.getPreference();
     pref.setShowSideBar(driveData.getViewSideBar());
     pref.setShowNonDocumentType(driveData.getViewNonDocument());
@@ -418,7 +460,7 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
     boolean isShowActionBar = isShowActionBar() ;
     uiActionbar.setTabOptions(viewList.get(0));
     uiActionbar.setRendered(isShowActionBar);
-    uiExplorer.setSelectNode(driveData.getWorkspace(), path);
+    uiExplorer.setSelectNode(driveData.getWorkspace(), addressPath);
 
     UIDocumentWorkspace uiDocWorkspace = uiWorkingArea.getChild(UIDocumentWorkspace.class);
     uiDocWorkspace.setRenderedChild(UIDocumentContainer.class);
@@ -436,7 +478,7 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
     Boolean isEdit = Boolean.valueOf(Util.getPortalRequestContext().getRequestParameter("edit"));
     Node selectedNode = uiExplorer.getCurrentNode();
     if (isEdit) {
-      if (uiExplorer.getCurrentPath().equals(path)) {
+      if (uiExplorer.getCurrentPath().equals(addressPath)) {
         if(canManageNode(selectedNode, uiApp, uiExplorer, uiActionbar, context, EditDocumentActionComponent.getFilters())) {
           EditDocumentActionComponent.editDocument(null, context, this, uiExplorer, selectedNode, uiApp);
         }else if(canManageNode(selectedNode, uiApp, uiExplorer, uiActionbar, context, EditPropertyActionComponent.getFilters())) {

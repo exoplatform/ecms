@@ -22,10 +22,7 @@ import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 
 import org.exoplatform.commons.api.search.data.SearchContext;
-import org.exoplatform.container.definition.PortalContainerConfig;
 import org.exoplatform.container.xml.InitParams;
-import org.exoplatform.container.xml.PortalContainerInfo;
-import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
@@ -69,14 +66,8 @@ public class FileSearchServiceConnector extends BaseContentSearchServiceConnecto
    * @throws RepositoryException 
    */
   @Override
-  protected String getPath(DriveData driveData, ResultNode node, SearchContext context) throws Exception {
-    String siteName = WCMCoreUtils.getService(PortalContainerInfo.class).getContainerName();
-    String restContextName = WCMCoreUtils.getService(PortalContainerConfig.class).getRestContextName(siteName);
-    StringBuffer ret = new StringBuffer();
-    ret.append('/').append(siteName).append('/').append(restContextName).append("/jcr/").
-        append(WCMCoreUtils.getRepository().getConfiguration().getName()).append('/'). 
-        append(node.getSession().getWorkspace().getName()).append(node.getPath());
-    return ret.toString();
+  protected String getPath(ResultNode node, SearchContext context) throws Exception {
+    return documentService.getLinkInDocumentsApp(node.getPath());
   }
   
   /**
@@ -103,5 +94,4 @@ public class FileSearchServiceConnector extends BaseContentSearchServiceConnecto
       return super.getImageUrl(node);
     }
   }
-
 }

@@ -311,54 +311,63 @@ public class UITreeExplorer extends UIContainer {
   private void buildTree(String path) throws Exception {
     UIJCRExplorer jcrExplorer = getAncestorOfType(UIJCRExplorer.class);
     int nodePerPages = jcrExplorer.getPreference().getNodesPerPage();
-    TreeNode treeRoot = new TreeNode(getRootNode());
-    if (path == null)
-      path = jcrExplorer.getCurrentPath();
-    String[] arr = path.replaceFirst(treeRoot.getPath(), "").split("/");
-    TreeNode temp = treeRoot;
-    StringBuffer subPath = null;
-    String rootPath = treeRoot.getPath();
-    StringBuffer prefix = new StringBuffer(rootPath);
-    if (!rootPath.equals("/")) {
-      prefix.append("/");
+    Node rootNode = null;
+    try {
+      rootNode = getRootNode();
+    } catch(PathNotFoundException pnfe) {
+      LOG.error("Cannot get root node : " + pnfe.getMessage(), pnfe);
     }
-    if(isTimelineView()) {
-      temp.setChildren(getTreeWithNoDocuments(jcrExplorer.getChildrenList(rootPath, false)));
-    } else {
-      temp.setChildren(jcrExplorer.getChildrenList(rootPath, false));
-    }
-    if (temp.getChildrenSize() > nodePerPages) {
-      ListAccess<TreeNode> childList = new ListAccessImpl<TreeNode>(TreeNode.class,
-          temp.getChildren());
-      LazyPageList<TreeNode> pageList = new LazyPageList<TreeNode>(childList, nodePerPages);
-      addTreeNodePageIteratorAsChild(temp.getPath(), pageList, rootPath, path);
-    }
-    for (String nodeName : arr) {
-      if (nodeName.length() == 0)
-        continue;
-      temp = temp.getChildByName(nodeName);
-      if (temp == null) {
-        treeRoot_ = treeRoot;
-        return;
-      }
-      if (subPath == null) {
-        subPath = new StringBuffer();
-        subPath.append(prefix).append(nodeName);
-      } else {
-        subPath.append("/").append(nodeName);
+    TreeNode treeRoot = null;
+    if(rootNode != null) {
+      treeRoot = new TreeNode(rootNode);
+      if (path == null)
+        path = jcrExplorer.getCurrentPath();
+      String[] arr = path.replaceFirst(treeRoot.getPath(), "").split("/");
+      TreeNode temp = treeRoot;
+      StringBuffer subPath = null;
+      String rootPath = treeRoot.getPath();
+      StringBuffer prefix = new StringBuffer(rootPath);
+      if (!rootPath.equals("/")) {
+        prefix.append("/");
       }
       if (isTimelineView()) {
-        temp.setChildren(getTreeWithNoDocuments(jcrExplorer.getChildrenList(subPath.toString(),
-                                                                            false)));
+        temp.setChildren(getTreeWithNoDocuments(jcrExplorer.getChildrenList(rootPath, false)));
       } else {
-        temp.setChildren(jcrExplorer.getChildrenList(subPath.toString(), false));
+        temp.setChildren(jcrExplorer.getChildrenList(rootPath, false));
       }
-
       if (temp.getChildrenSize() > nodePerPages) {
-        ListAccess<TreeNode> childNodeList = new ListAccessImpl<TreeNode>(TreeNode.class,
-            temp.getChildren());
-        LazyPageList<TreeNode> pageList = new LazyPageList<TreeNode>(childNodeList, nodePerPages);
-        addTreeNodePageIteratorAsChild(temp.getPath(), pageList, subPath.toString(), path);
+        ListAccess<TreeNode> childList = new ListAccessImpl<TreeNode>(TreeNode.class,
+                temp.getChildren());
+        LazyPageList<TreeNode> pageList = new LazyPageList<TreeNode>(childList, nodePerPages);
+        addTreeNodePageIteratorAsChild(temp.getPath(), pageList, rootPath, path);
+      }
+      for (String nodeName : arr) {
+        if (nodeName.length() == 0)
+          continue;
+        temp = temp.getChildByName(nodeName);
+        if (temp == null) {
+          treeRoot_ = treeRoot;
+          return;
+        }
+        if (subPath == null) {
+          subPath = new StringBuffer();
+          subPath.append(prefix).append(nodeName);
+        } else {
+          subPath.append("/").append(nodeName);
+        }
+        if (isTimelineView()) {
+          temp.setChildren(getTreeWithNoDocuments(jcrExplorer.getChildrenList(subPath.toString(),
+                  false)));
+        } else {
+          temp.setChildren(jcrExplorer.getChildrenList(subPath.toString(), false));
+        }
+
+        if (temp.getChildrenSize() > nodePerPages) {
+          ListAccess<TreeNode> childNodeList = new ListAccessImpl<TreeNode>(TreeNode.class,
+                  temp.getChildren());
+          LazyPageList<TreeNode> pageList = new LazyPageList<TreeNode>(childNodeList, nodePerPages);
+          addTreeNodePageIteratorAsChild(temp.getPath(), pageList, subPath.toString(), path);
+        }
       }
     }
     treeRoot_ = treeRoot;

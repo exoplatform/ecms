@@ -18,10 +18,7 @@ package org.exoplatform.services.wcm.search.connector;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
@@ -31,6 +28,12 @@ import org.exoplatform.commons.api.search.data.SearchContext;
 import org.exoplatform.commons.api.search.data.SearchResult;
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.xml.InitParams;
+import org.exoplatform.portal.config.UserPortalConfig;
+import org.exoplatform.portal.config.UserPortalConfigService;
+import org.exoplatform.portal.mop.SiteKey;
+import org.exoplatform.portal.mop.user.UserNavigation;
+import org.exoplatform.portal.mop.user.UserPortalContext;
+import org.exoplatform.services.cms.documents.DocumentService;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.drives.ManageDriveService;
 import org.exoplatform.services.cms.impl.Utils;
@@ -57,8 +60,9 @@ public abstract class BaseSearchServiceConnector extends SearchServiceConnector 
   public static final String sortByTitle = "title";
   
   protected SiteSearchService siteSearch_;
+  protected DocumentService documentService;
   protected ManageDriveService driveService_;
-  
+
   private static final Log LOG = ExoLogger.getLogger(BaseSearchServiceConnector.class.getName());
   
   public static final String DEFAULT_SITENAME = "intranet";
@@ -69,6 +73,7 @@ public abstract class BaseSearchServiceConnector extends SearchServiceConnector 
   public BaseSearchServiceConnector(InitParams initParams) throws Exception {
     super(initParams);
     siteSearch_ = WCMCoreUtils.getService(SiteSearchService.class);
+    documentService = WCMCoreUtils.getService(DocumentService.class);
     driveService_ = WCMCoreUtils.getService(ManageDriveService.class);
   }
 
@@ -169,9 +174,8 @@ public abstract class BaseSearchServiceConnector extends SearchServiceConnector 
                   continue;
                 }
                 //generate SearchResult object
-                DriveData driveData = getDriveData(retNode);
                 Calendar date = getDate(retNode);
-                String url = getPath(driveData, retNode, context);
+                String url = getPath(retNode, context);
                 if (url == null) continue;
                 EcmsSearchResult result = 
                 //  new SearchResult(url, title, excerpt, detail, imageUrl, date, relevancy);
@@ -216,37 +220,6 @@ public abstract class BaseSearchServiceConnector extends SearchServiceConnector 
    */
   protected String fileSize(Node node) throws Exception {
     return Utils.fileSize(node);
-  }
-  
-  /**
-   * returns the drive data object which is closest to the node (in term of path)
-   * @param node the node
-   * @return the drive data
-   * @throws Exception
-   */
-  protected DriveData getDriveData(Node node) throws Exception {
-    List<DriveData> dataList = getDriveDataList();
-    DriveData ret = null;
-    for (DriveData data : dataList) {
-      if (node.getPath().startsWith(data.getHomePath())) {
-        if (ret == null || ret.getHomePath().length() < data.getHomePath().length()) {
-          ret = data;
-        }
-      }
-    }
-    return ret;
-  }
-
-  /**
-   * gets all drive datas which is accessible by current user
-   * @return the drive data list
-   * @throws Exception
-   */
-  protected List<DriveData> getDriveDataList() throws Exception {
-    String user = ConversationState.getCurrent().getIdentity().getUserId();
-    List<String> memberships = IdentityConstants.ANONIM.equals(user) ? 
-                     new ArrayList<String>() : org.exoplatform.services.cms.impl.Utils.getMemberships();
-    return driveService_.getDriveByUserRoles(user, memberships);
   }
   
   /**
@@ -313,12 +286,11 @@ public abstract class BaseSearchServiceConnector extends SearchServiceConnector 
   
   /**
    * returns path of node in format: "{drivename}/{relative path from drive root node}
-   * @param driveData the drive data object
    * @param node the node
    * @return the expected path
    * @throws Exception
    */
-  protected abstract String getPath(DriveData driveData, ResultNode node, SearchContext context) throws Exception;
+  protected abstract String getPath(ResultNode node, SearchContext context) throws Exception;
   
   /**
    * gets the file type

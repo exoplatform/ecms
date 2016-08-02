@@ -30,6 +30,9 @@ import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.organization.Membership;
+import org.exoplatform.services.organization.OrganizationService;
+import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.picocontainer.Startable;
 
@@ -39,10 +42,8 @@ import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Created by The eXo Platform SARL
@@ -70,6 +71,8 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
   private static String ALL_GROUP_CACHED_DRIVES = "_groupDrives";
   
   private static String ALL_GROUP_PERMISSION = "*:${groupId}";
+
+  private static String ALL_USER_PERMISSION = "${userId}";
   /**
    * Name of property PERMISSIONS
    */
@@ -115,6 +118,15 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
    */
   private static String ALLOW_CREATE_FOLDER = "exo:allowCreateFolders" ;
   private static String ALLOW_NODETYPES_ON_TREE = "exo:allowNodeTypesOnTree";
+  public static final String GROUPS_DRIVE_NAME = "Groups";
+  public static final String GROUPS_DRIVE_ROOT_NODE = "Groups";
+  public static final String PERSONAL_DRIVE_NAME = "Personal Documents";
+  public static final String PERSONAL_DRIVE_PUBLIC_FOLDER_NAME = "Public";
+  public static final String PERSONAL_DRIVE_PRIVATE_FOLDER_NAME = "Private";
+  public static final String USER_DRIVE_NAME = "User Documents";
+  public static final String PERSONAL_DRIVE_ROOT_NODE = "Users";
+  public static final String DRIVE_PARAMATER_USER_ID = "userId";
+  public static final String DRIVE_PARAMATER_GROUP_ID = "groupId";
 
   /**
    * List of ManageDrivePlugin
@@ -125,6 +137,11 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
    * RepositoryService object
    */
   private RepositoryService repositoryService_ ;
+
+  /**
+   * OrganizationService object
+   */
+  private OrganizationService organizationService ;
 
   /**
    * Path to drive home directory
@@ -161,12 +178,14 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
    */
   public ManageDriveServiceImpl(RepositoryService jcrService,
                                 NodeHierarchyCreator nodeHierarchyCreator, DMSConfiguration dmsConfiguration,
-                                CacheService caService) throws Exception{
+                                CacheService caService,
+                                OrganizationService organizationService) throws Exception{
     repositoryService_ = jcrService ;
     nodeHierarchyCreator_ = nodeHierarchyCreator ;
     baseDrivePath_ = nodeHierarchyCreator_.getJcrPath(BasePath.EXO_DRIVES_PATH);
     dmsConfiguration_ = dmsConfiguration;
     drivesCache_ = caService.getCacheInstance("wcm.drive");
+    this.organizationService = organizationService;
   }
 
   /**
@@ -254,7 +273,7 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
       data.setShowHiddenNode(Boolean.parseBoolean(drive.getProperty(SHOW_HIDDEN_NODE).getString())) ;
       data.setAllowCreateFolders(drive.getProperty(ALLOW_CREATE_FOLDER).getString()) ;
       data.setAllowNodeTypesOnTree(drive.getProperty(ALLOW_NODETYPES_ON_TREE).getString());
-      if ("Groups".equals(data.getName())) {
+      if (GROUPS_DRIVE_NAME.equals(data.getName())) {
         groupDriveTemplate_ = data.clone();
         // Include group drive template if necessary
         if (withVirtualDrives) {
@@ -285,6 +304,7 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
       DriveData drive = groupDriveTemplate_.clone();
       drive.setHomePath(groupDriveTemplate_.getHomePath().replace("${groupId}", groupName));
       drive.setName(name);
+      drive.getParameters().put(ManageDriveServiceImpl.DRIVE_PARAMATER_GROUP_ID, name);
       drive.setPermissions("*:" + groupName);
       return drive;
     }
@@ -512,18 +532,12 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
     if (drives != null)
       return new ArrayList<DriveData>((List<DriveData>) drives);
     List<DriveData> groupDrives = new ArrayList<DriveData>();
-    DriveData groupDrive = getDriveByName("Groups");
+    DriveData groupDrive = getDriveByName(GROUPS_DRIVE_NAME);
     if(groupDrive == null){
       return groupDrives;
     }
-    String[] allPermission = groupDrive.getAllPermissions();
-    boolean flag = false;
-    for (String role : userRoles) {
-      if (groupDrive.hasPermission(allPermission, role) || ALL_GROUP_PERMISSION.equals(allPermission[0])) {
-        flag = true;
-        break;
-      }
-    }
+
+    boolean flag = hasPermissionOnDrive(groupDrive, userRoles);
     if(flag){
       for (String role : userRoles) {
         String group = role.substring(role.indexOf(":")+1);
@@ -540,6 +554,13 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
     Collections.sort(groupDrives);
     drivesCache_.put(getRepoName() + "_" + userId + ALL_GROUP_CACHED_DRIVES, groupDrives);
     return new ArrayList<DriveData>(groupDrives);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public DriveData getGroupDriveTemplate() {
+    return groupDriveTemplate_;
   }
 
   /**
@@ -570,20 +591,48 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
     SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
     Node userNode = nodeHierarchyCreator_.getUserNode(sessionProvider, userId);
     Object drives = drivesCache_.get(getRepoName() + "_" + userId + ALL_PERSONAL_CACHED_DRIVE);
-    if(drives != null) return new ArrayList<DriveData>((List<DriveData>) drives);
+    if(drives != null) return new ArrayList<>((List<DriveData>) drives);
 
-    List<DriveData> personalDrives = new ArrayList<DriveData>();
+    String cmsUserPath = nodeHierarchyCreator_.getJcrPath(BasePath.CMS_USERS_PATH);
+    List<String> memberships = getUserMemberships(userId);
+    List<DriveData> personalDrives = new ArrayList<>();
     String userPath = userNode.getPath();
     for(DriveData drive : getAllDrives()) {
-      if(drive.getHomePath().startsWith(nodeHierarchyCreator_.getJcrPath(BasePath.CMS_USERS_PATH) + "/${userId}")) {
-        personalDrives.add(drive);
-      } else if(drive.getHomePath().startsWith(userPath + "/")) {
+      if((drive.getHomePath().startsWith(cmsUserPath + "/${userId}")
+              || drive.getHomePath().startsWith(userPath + "/"))
+              && !USER_DRIVE_NAME.equals(drive.getName())
+              && hasPermissionOnDrive(drive, memberships)) {
         personalDrives.add(drive);
       }
     }
     Collections.sort(personalDrives);
     drivesCache_.put(getRepoName() + "_" + userId + ALL_PERSONAL_CACHED_DRIVE, personalDrives);
     return new ArrayList<DriveData>(personalDrives);
+  }
+
+  protected boolean hasPermissionOnDrive(DriveData drive, List<String> userMemberships) {
+    String[] allPermission = drive.getAllPermissions();
+    if(ALL_GROUP_PERMISSION.equals(allPermission[0]) || ALL_USER_PERMISSION.equals(allPermission[0])) {
+      return true;
+    }
+    for (String membership : userMemberships) {
+      if (drive.hasPermission(allPermission, membership)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  protected List<String> getUserMemberships(String userId) throws Exception {
+    List<String> memberships = null;
+    String currentUser = ConversationState.getCurrent().getIdentity().getUserId();
+    if(currentUser.equals(userId)) {
+      memberships = Utils.getMemberships();
+    } else {
+      Collection<Membership> colMemberships = organizationService.getMembershipHandler().findMembershipsByUser(userId);
+      memberships = colMemberships.stream().map(m -> m.getMembershipType() + ":" + m.getGroupId()).collect(Collectors.toList());
+    }
+    return memberships;
   }
 
   /**
