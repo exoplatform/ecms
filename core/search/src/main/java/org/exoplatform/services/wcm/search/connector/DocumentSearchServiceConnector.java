@@ -138,18 +138,28 @@ public class DocumentSearchServiceConnector extends BaseContentSearchServiceConn
             append(WCMCoreUtils.getRepository().getConfiguration().getName()).append('/').
             append(workspaceName).append(node.getPath());
 
+    // get document author
+    String authorUsername = null;
+    if(node.hasProperty("exo:owner")) {
+      authorUsername = node.getProperty("exo:owner").getString();
+    }
 
     StringBuilder url = new StringBuilder("javascript:require(['SHARED/social-ui-activity'], function(activity) {activity.previewDoc({doc:{");
     if(node.isNodeType(NodetypeConstant.MIX_REFERENCEABLE)) {
       url.append("id:'").append(node.getUUID()).append("',");
     }
-    return url.append("path:'").append(node.getPath())
+    url.append("path:'").append(node.getPath())
             .append("', repository:'").append(repositoryName)
             .append("', workspace:'").append(workspaceName)
             .append("', downloadUrl:'").append(downloadUrl.toString())
             .append("', openUrl:'").append(documentService.getLinkInDocumentsApp(node.getPath()))
-            .append("', isWebContent:true")
-            .append("}})})").toString();
+            .append("'}");
+    if(authorUsername != null) {
+      url.append(",author:{username:'").append(authorUsername).append("'}");
+    }
+    url.append("})})");
+
+    return url.toString();
   }
 
   private String getPageName(SiteKey siteKey) throws Exception {
