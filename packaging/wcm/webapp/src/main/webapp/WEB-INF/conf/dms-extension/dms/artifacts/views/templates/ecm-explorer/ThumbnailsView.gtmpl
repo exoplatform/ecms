@@ -197,8 +197,8 @@
 												<div class="Link"></div>
 											<%}%>
 											<div class="bgThumbnailImage" >
-												<div>
-													<img src="$thumbnailImage" retryCount="0"  onerror='loadImageOnError(this);' />
+												<div style="background-image:url($thumbnailImage);">
+												<img src="$thumbnailImage" retryCount="0"  onerror='loadImageOnError(this);' />
 												</div>
 											</div>
 									</div>
