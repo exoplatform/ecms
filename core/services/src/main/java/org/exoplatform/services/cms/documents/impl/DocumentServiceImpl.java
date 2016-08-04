@@ -16,6 +16,7 @@
  */
 package org.exoplatform.services.cms.documents.impl;
 
+import java.net.URLEncoder;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
@@ -24,6 +25,7 @@ import java.util.ResourceBundle;
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 
+import org.exoplatform.commons.utils.CommonsUtils;
 import org.exoplatform.container.xml.PortalContainerInfo;
 import org.exoplatform.portal.config.UserPortalConfig;
 import org.exoplatform.portal.config.UserPortalConfigService;
@@ -97,6 +99,25 @@ public class DocumentServiceImpl implements DocumentService {
   }
 
   /**
+   * Get the short link to display a document in the Documents app by its id.
+   * @param workspaceName The workspace of the node
+   * @param nodeId The id of the node
+   * @return The link to open the document
+   * @throws Exception
+   */
+  @Override
+  public String getShortLinkInDocumentsApp(String workspaceName, String nodeId) throws Exception {
+    StringBuilder url = new StringBuilder();
+    url.append("/")
+            .append(CommonsUtils.getRestContextName())
+            .append("/documents/view/")
+            .append(workspaceName)
+            .append("/")
+            .append(nodeId);
+    return url.toString();
+  }
+
+  /**
    * Get link to open a document in the Documents application.
    * This method will try to guess what is the best drive to use based on the node path.
    * @param nodePath path of the nt:file node to open
@@ -132,6 +153,8 @@ public class DocumentServiceImpl implements DocumentService {
     StringBuffer url = new StringBuffer();
     url.append("/").append(containerName);
 
+    String encodedDriveName = URLEncoder.encode(drive.getName(), "UTF-8");
+    String encodedNodePath = URLEncoder.encode(nodePath, "UTF-8");
     if(drive.getName().equals(ManageDriveServiceImpl.GROUPS_DRIVE_NAME)) {
       // handle group drive case
       String groupId = drive.getParameters().get(ManageDriveServiceImpl.DRIVE_PARAMATER_GROUP_ID);
@@ -146,7 +169,7 @@ public class DocumentServiceImpl implements DocumentService {
           groupPageName = DOCUMENTS_APP_NAVIGATION_NODE_NAME;
         }
         url.append("/g/").append(groupId.replaceAll("/", ":")).append("/").append(groupPageName)
-                .append("?path=").append(drive.getName()).append(nodePath)
+                .append("?path=").append(encodedDriveName).append(encodedNodePath)
                 .append("&").append(ManageDriveServiceImpl.DRIVE_PARAMATER_GROUP_ID).append("=").append(groupId);
       } else {
         throw new Exception("Cannot get group id from node path " + nodePath);
@@ -156,7 +179,7 @@ public class DocumentServiceImpl implements DocumentService {
       // handle personal drive case
       SiteKey siteKey = getDefaultSiteKey();
       url.append("/").append(siteKey.getName()).append("/").append(DOCUMENTS_APP_NAVIGATION_NODE_NAME)
-              .append("?path=" + drive.getName() + nodePath);
+              .append("?path=" + encodedDriveName + encodedNodePath);
       String[] splitedNodePath = nodePath.split("/");
       if(splitedNodePath != null && splitedNodePath.length >= 6) {
         String userId = splitedNodePath[5];
@@ -166,7 +189,7 @@ public class DocumentServiceImpl implements DocumentService {
       // default case
       SiteKey siteKey = getDefaultSiteKey();
       url.append("/").append(siteKey.getName()).append("/").append(DOCUMENTS_APP_NAVIGATION_NODE_NAME)
-              .append("?path=" + drive.getName() + nodePath);
+              .append("?path=" + encodedDriveName + encodedNodePath);
     }
 
     return url.toString();
