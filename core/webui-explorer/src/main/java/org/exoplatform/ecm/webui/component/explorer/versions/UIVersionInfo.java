@@ -19,11 +19,13 @@ package org.exoplatform.ecm.webui.component.explorer.versions;
 import javax.jcr.Node;
 import javax.jcr.ReferentialIntegrityException;
 import javax.jcr.version.Version;
+import javax.jcr.version.VersionException;
 import javax.jcr.version.VersionHistory;
 
 import org.exoplatform.commons.utils.LazyPageList;
 import org.exoplatform.commons.utils.ListAccess;
 import org.exoplatform.commons.utils.ListAccessImpl;
+import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.ecm.jcr.model.VersionNode;
@@ -40,9 +42,7 @@ import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by The eXo Platform SARL
@@ -58,12 +58,11 @@ import java.util.List;
         @EventConfig(listeners = UIVersionInfo.SelectActionListener.class),
         @EventConfig(listeners = UIVersionInfo.RestoreVersionActionListener.class),
         @EventConfig(listeners = UIVersionInfo.ViewVersionActionListener.class),
-        @EventConfig(listeners = UIVersionInfo.AddLabelActionListener.class),
         @EventConfig(listeners = UIVersionInfo.CompareVersionActionListener.class),
         @EventConfig(listeners = UIVersionInfo.DeleteVersionActionListener.class, confirm = "UIVersionInfo.msg.confirm-delete"),
-        @EventConfig(listeners = UIVersionInfo.RemoveLabelActionListener.class),
         @EventConfig(listeners = UIVersionInfo.CloseActionListener.class),
-        @EventConfig(listeners = UIVersionInfo.CloseViewActionListener.class)
+        @EventConfig(listeners = UIVersionInfo.CloseViewActionListener.class),
+        @EventConfig(listeners = UIVersionInfo.AddSummaryActionListener.class)
     }
 )
 
@@ -76,8 +75,6 @@ public class UIVersionInfo extends UIContainer  {
   private UIPageIterator uiPageIterator_ ;
   private List<VersionNode> listVersion = new ArrayList<VersionNode>() ;
   public UIVersionInfo() throws Exception {
-    addChild(UILabelForm.class, null, null).setRendered(false);
-    addChild(UIRemoveLabelForm.class, null, null).setRendered(false);
     addChild(UIViewVersion.class, null, null).setRendered(false);
     addChild(UIDiff.class, null, null).setRendered(false) ;
     uiPageIterator_ = addChild(UIPageIterator.class, null, "VersionInfoIterator").setRendered(false);
@@ -169,32 +166,6 @@ public class UIVersionInfo extends UIContainer  {
         return ;
       }
       uiViewVersion.setRendered(true) ;
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiVersionInfo) ;
-    }
-  }
-
-  static  public class AddLabelActionListener extends EventListener<UIVersionInfo> {
-    public void execute(Event<UIVersionInfo> event) throws Exception {
-      UIVersionInfo uiVersionInfo = event.getSource();
-      for(UIComponent uiChild : uiVersionInfo.getChildren()) {
-        uiChild.setRendered(false) ;
-      }
-      String objectId = event.getRequestContext().getRequestParameter(OBJECTID) ;
-      uiVersionInfo.curentVersion_  = uiVersionInfo.rootVersion_.findVersionNode(objectId) ;
-      uiVersionInfo.getChild(UILabelForm.class).setRendered(true);
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiVersionInfo) ;
-    }
-  }
-
-  static  public class RemoveLabelActionListener extends EventListener<UIVersionInfo> {
-    public void execute(Event<UIVersionInfo> event) throws Exception {
-      UIVersionInfo uiVersionInfo = event.getSource();
-      for(UIComponent uiChild : uiVersionInfo.getChildren()) {
-        uiChild.setRendered(false) ;
-      }
-      String objectId = event.getRequestContext().getRequestParameter(OBJECTID) ;
-      uiVersionInfo.curentVersion_  = uiVersionInfo.rootVersion_.findVersionNode(objectId) ;
-      uiVersionInfo.getChild(UIRemoveLabelForm.class).update() ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiVersionInfo) ;
     }
   }
@@ -338,6 +309,37 @@ public class UIVersionInfo extends UIContainer  {
         event.getRequestContext().addUIComponentToUpdateByAjax(uiVersionInfo);
         return;
       }
+    }
+  }
+
+  static  public class AddSummaryActionListener extends EventListener<UIVersionInfo> {
+    public void execute(Event<UIVersionInfo> event) throws Exception {
+      UIVersionInfo uiVersionInfo = event.getSource();
+      String objectId = event.getRequestContext().getRequestParameter(OBJECTID) ;
+      uiVersionInfo.curentVersion_  = uiVersionInfo.rootVersion_.findVersionNode(objectId) ;
+      String currentVersionName = uiVersionInfo.curentVersion_.getName();
+      String summary = event.getRequestContext().getRequestParameter("value") + currentVersionName;
+      UIJCRExplorer uiExplorer = uiVersionInfo.getAncestorOfType(UIJCRExplorer.class) ;
+      UIApplication uiApp = uiVersionInfo.getAncestorOfType(UIApplication.class) ;
+      Node currentNode = uiExplorer.getCurrentNode() ;
+      if(!Utils.isNameValid(summary, Utils.SPECIALCHARACTER)) {
+        uiApp.addMessage(new ApplicationMessage("UILabelForm.msg.label-invalid",
+                null, ApplicationMessage.WARNING)) ;
+        return ;
+      }
+      try{
+        if(!currentNode.getVersionHistory().hasVersionLabel(summary)) {
+          Version currentVersion = currentNode.getVersionHistory().getVersion(currentVersionName);
+          for(String label : currentNode.getVersionHistory().getVersionLabels(currentVersion)) {
+            currentNode.getVersionHistory().removeVersionLabel(label);
+          }
+          currentNode.getVersionHistory().addVersionLabel(currentVersionName, summary, false);
+        }
+      } catch (VersionException ve) {
+        uiApp.addMessage(new ApplicationMessage("UILabelForm.msg.label-exist", new Object[]{summary})) ;
+        return ;
+      }
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiVersionInfo) ;
     }
   }
 }

@@ -9,11 +9,30 @@
 
     import java.util.Locale;
     import java.text.DateFormat;
+    import org.apache.commons.lang.StringUtils;
     import org.exoplatform.ecm.jcr.model.VersionNode;
     import org.exoplatform.ecm.webui.utils.Utils;
     import org.exoplatform.portal.webui.util.Util;
+    import org.exoplatform.social.core.identity.model.Identity;
+    import org.exoplatform.social.core.identity.provider.OrganizationIdentityProvider;
+    import org.exoplatform.social.core.service.LinkProvider;
+    import org.exoplatform.social.webui.Utils
+
+  public String getAvatarURL(String userName) {
+      String ownerAvatar = null;
+      Identity identity = Utils.getIdentityManager().getOrCreateIdentity(OrganizationIdentityProvider.NAME,userName, true);
+      ownerAvatar = identity.getProfile().getAvatarUrl();
+
+      if (ownerAvatar == null || ownerAvatar.isEmpty()) {
+          ownerAvatar = LinkProvider.PROFILE_DEFAULT_AVATAR_URL;
+      }
+      return ownerAvatar;
+  }
 
   public void writeNodes() {
+  	def context = _ctx.getRequestContext();
+  	def jsManager = context.getJavascriptManager();
+  	jsManager.require("SHARED/jquery", "gj").require("SHARED/X-editable", "xeditable");
     String clazz = "" ;
     Locale currentLocale = Util.getPortalRequestContext().getLocale();
     DateFormat df = DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT, currentLocale);
@@ -23,7 +42,17 @@
       else
         clazz = "Even" ;
       String versionNumber = node.getName();
-      String author = "farhat";
+      boolean isBaseVersion = uicomponent.isBaseVersion(node);
+      String baseVersion = "";
+      if (isBaseVersion) {
+        baseVersion = " (" + _ctx.appRes("UIVersionInfo.tooltip.baseVersion") + ")";
+      }
+      String author = node.getAuthor();
+      String avatarURL = getAvatarURL(author);
+      String versionSummary = "";
+      if (uicomponent.getVersionLabels(node).length > 0) {
+        versionSummary = uicomponent.getVersionLabels(node)[0].replace(versionNumber,"");
+      }
     %>
     <tr>
       <td>
@@ -31,19 +60,25 @@
       </td>
       <td >
         <label>
-            $versionNumber
+            $versionNumber $baseVersion
         </label>
       </td>
       <td><%=df.format(node.getCreatedTime().getTime())%></td>
-      <td><%=node.getAuthor()%></td>
-      <td>commentt</td>
+      <td><img class="avatarSmall" src="<%=avatarURL%>"/>  <%=author%></td>
+      <td><a id="versionSummary<%=versionNumber%>" class="versionSummary" href="#">$versionSummary</a></td>
       <td class="center">
         <a class="actionIcon" onclick="<%=uicomponent.event('ViewVersion', node.getPath()); %>" rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes('UIVersionInfo.tooltip.viewVersion'); %>"><i class="uiIconWatch uiIconLightGray"></i></a>
-        <a class="actionIcon" onclick="<%=uicomponent.event('RestoreVersion', node.getPath()); %>" rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes('UIVersionInfo.tooltip.restoreVersion'); %>"><i class="uiIconRestore uiIconLightGray"></i></a>
-        <a class="actionIcon" onclick="<%=uicomponent.event('DeleteVersion', node.getPath()); %>" rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes('UIVersionInfo.tooltip.deleteVersion'); %>"><i class="uiIconTrash uiIconLightGray"></i></a>
+        <%
+            if(!isBaseVersion) {
+        %>
+            <a class="actionIcon" onclick="<%=uicomponent.event('RestoreVersion', node.getPath()); %>" rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes('UIVersionInfo.tooltip.restoreVersion'); %>"><i class="uiIconRestore uiIconLightGray"></i></a>
+            <a class="actionIcon" onclick="<%=uicomponent.event('DeleteVersion', node.getPath()); %>" rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes('UIVersionInfo.tooltip.deleteVersion'); %>"><i class="uiIconTrash uiIconLightGray"></i></a>
+        <%  } %>
       </td>
     </tr>
     <%
+    def actionUrl = StringUtils.getNestedString(uicomponent.event('AddSummary', node.getPath()),"javascript:ajaxGet(\'","\')");
+    jsManager.require("SHARED/jquery", "gj").require("SHARED/X-editable", "xeditable").addScripts("gj(\"#versionSummary"+node.getName()+"\").editable({ mode: \"inline\", url: \""+actionUrl+"\", pk:\""+node.getName()+"\" ,type: \"text\" });");
     }
   }
 %>

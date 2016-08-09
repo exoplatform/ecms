@@ -52,7 +52,7 @@ public class VersionNode {
   private String ws_ = "";
   private String uuid_;
   private String[] versionLabels_ = new String[]{};
-  private String author_;
+  private String author_ = "";
   
   public VersionNode(Version version, Session session) {
     try {
@@ -62,7 +62,9 @@ public class VersionNode {
         path_ = version.getPath();
         ws_ = version.getSession().getWorkspace().getName();
         uuid_ = version.getUUID();
-        author_ = version.getNode("jcr:frozenNode").getProperty(Utils.EXO_LASTMODIFIER).getString();
+        if(version.hasNode("jcr:frozenNode") && version.getNode("jcr:frozenNode").hasProperty(Utils.EXO_LASTMODIFIER)) {
+          author_ = version.getNode("jcr:frozenNode").getProperty(Utils.EXO_LASTMODIFIER).getString();
+        }
         if (version.isNodeType(NodetypeConstant.MIX_VERSIONABLE)) {
           versionLabels_ = version.getVersionHistory().getVersionLabels(version);
         }

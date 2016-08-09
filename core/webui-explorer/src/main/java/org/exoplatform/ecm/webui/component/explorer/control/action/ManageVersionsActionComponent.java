@@ -21,7 +21,6 @@ import java.util.List;
 
 import javax.jcr.Node;
 
-import org.exoplatform.ecm.webui.component.explorer.UIDocumentContainer;
 import org.exoplatform.ecm.webui.component.explorer.UIDocumentWorkspace;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
@@ -33,11 +32,9 @@ import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotRootNode
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotLockedFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotIgnoreVersionNodeFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.listener.UIActionBarActionListener;
-import org.exoplatform.ecm.webui.component.explorer.search.UISearchResult;
 import org.exoplatform.ecm.webui.component.explorer.versions.UIActivateVersion;
 import org.exoplatform.ecm.webui.component.explorer.versions.UIVersionInfo;
 import org.exoplatform.ecm.webui.utils.Utils;
-import org.exoplatform.portal.webui.container.UIContainer;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIComponent;
