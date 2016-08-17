@@ -29,6 +29,7 @@ import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.core.UIContainer;
 import org.exoplatform.webui.core.UIPopupComponent;
+import org.exoplatform.webui.core.UIPopupContainer;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
 
@@ -73,7 +74,9 @@ public class UIActivateVersion extends UIContainer implements UIPopupComponent {
         uiVersionInfo.setCurrentNode(currentNode);
         uiVersionInfo.activate();
         uiDocumentWorkspace.setRenderedChild(UIVersionInfo.class);
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiDocumentWorkspace);
+        UIPopupContainer UIPopupContainer = uiExplorer.getChild(UIPopupContainer.class);
+        UIPopupContainer.deActivate();
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiExplorer);
       }
       catch (AccessDeniedException ex) {
         UIApplication uiApp = uiExplorer.getAncestorOfType(UIApplication.class);
