@@ -148,6 +148,8 @@ public class DocumentSearchServiceConnector extends BaseContentSearchServiceConn
     if(node.isNodeType(NodetypeConstant.MIX_REFERENCEABLE)) {
       url.append("id:'").append(node.getUUID()).append("',");
     }
+    url.append("fileType:'").append(getFileType(node)).append("',");
+    url.append("title:'").append(getTitleResult(node)).append("',");
     url.append("path:'").append(node.getPath())
             .append("', repository:'").append(repositoryName)
             .append("', workspace:'").append(workspaceName)
@@ -157,7 +159,8 @@ public class DocumentSearchServiceConnector extends BaseContentSearchServiceConn
     if(authorUsername != null) {
       url.append(",author:{username:'").append(authorUsername).append("'}");
     }
-    url.append("})})");
+    //add void(0) to make firefox execute js
+    url.append("})});void(0);");
 
     return url.toString();
   }
