@@ -28,6 +28,7 @@ import javax.jcr.nodetype.NodeTypeManager;
 import javax.jcr.nodetype.PropertyDefinition;
 
 import org.apache.commons.lang.ArrayUtils;
+import org.exoplatform.commons.utils.HTMLSanitizer;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.form.UIDialogForm;
 import org.exoplatform.ecm.utils.lock.LockUtil;
@@ -146,6 +147,11 @@ public class UIViewMetadataForm extends UIDialogForm {
                 if(!node.hasProperty(name) || (node.hasProperty(name) && 
                     !uiForm.isEqualsValueStringArrays(node.getProperty(name).getValues(), 
                                                       values.toArray(new String[values.size()]))))
+
+                  //--- Sanitize HTML input to avoid XSS attacks
+                  for (int i = 0; i < values.size(); i++) {
+                    values.set(i,HTMLSanitizer.sanitize(values.get(i)));
+                  }
                   node.setProperty(name, values.toArray(new String[values.size()]));
               }
             }
@@ -171,6 +177,8 @@ public class UIViewMetadataForm extends UIDialogForm {
                 value = ((UIFormStringInput)uiForm.getUIInput(inputName)).getValue();
                 if (value == null) value = "";
               }
+              //--- Sanitize HTML input to avoid XSS attacks
+              value = HTMLSanitizer.sanitize(value);
               if(!node.hasProperty(name) || (node.hasProperty(name) && !node.getProperty(name).getString().equals(value)))
                 node.setProperty(name, value);
             }
