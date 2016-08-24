@@ -188,7 +188,8 @@ public abstract class BaseSearchServiceConnector extends SearchServiceConnector 
                                          getImageUrl(retNode), 
                                          date.getTimeInMillis(), 
                                          (long)retNode.getScore(),
-                                         getFileType(retNode));
+                                         getFileType(retNode),
+                                         retNode.getPath());
                 if (result != null) {
                   ret.add(result);
                 }
