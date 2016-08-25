@@ -14,22 +14,37 @@
 
   <UICategoryNavigationTargetPathFormInputSet>
     <title>
-      <SelectTargetPath></SelectTargetPath>
+      <SelectTargetPath/>
     </title>
   </UICategoryNavigationTargetPathFormInputSet>
 
   <UICategoryNavigationConfig>
     <label>
-      <UICategoryNavigationRepositoryFormSelectBox>Dépôt de données</UICategoryNavigationRepositoryFormSelectBox>
+      <UICategoryNavigationRepositoryFormSelectBox>Entrepôt</UICategoryNavigationRepositoryFormSelectBox>
       <UICategoryNavigationTreeNameSelectBox>Arbre taxonomique</UICategoryNavigationTreeNameSelectBox>
       <UICategoryNavigationTreeTitleFormStringInput>Titre</UICategoryNavigationTreeTitleFormStringInput>
+  
       <UICategoryNavigationTreeNameFormSelectBox>Nom de l'arbre</UICategoryNavigationTreeNameFormSelectBox>
-      <UICategoryNavigationTemplateFormSelectBox>Le modèle de l'abre vue</UICategoryNavigationTemplateFormSelectBox>
+      <UICategoryNavigationTemplateFormSelectBox>Template de catégories</UICategoryNavigationTemplateFormSelectBox>
+      
+      <UICategoryNavigationTargetPathFormInputSet>Page de Détail</UICategoryNavigationTargetPathFormInputSet>      
+      <TreeSelectionBlock>Sélection</TreeSelectionBlock>
+      <DisplaySettingBlock>Afficher les paramètres</DisplaySettingBlock>
+      <AdvancedBlock>Avancé</AdvancedBlock>
+  
+  <UICategoryNavigationTreePathFormInputSet>Chemin Cible</UICategoryNavigationTreePathFormInputSet>
+  <UICategoryNavigationTreePathFormStringInput>Chemin Cible</UICategoryNavigationTreePathFormStringInput>
+  <UICategoryNavigationHeaderFormStringInput>Entête</UICategoryNavigationHeaderFormStringInput>
+  <UICategoryNavigationAutomaticDetectionCheckBoxInput>Automatique</UICategoryNavigationAutomaticDetectionCheckBoxInput>
+  <UICategoryNavigationDynamicNavigationLabel>Navigation Dynamique</UICategoryNavigationDynamicNavigationLabel>
+  <UICategoryNavigationWithClvFormStringInput>avec</UICategoryNavigationWithClvFormStringInput>
+  <UICategoryNavigationTreepathPopupWindow>Chemin Cible</UICategoryNavigationTreepathPopupWindow>    
+      
     </label>
     <msg>
       <not-support-encoding>L'encodage n'est pas pris en charge.</not-support-encoding>
-      <render>Erreur lorsque processus de rendu. </render>
-      <saving-success>Cette portlet a été mise à jour</saving-success>
+      <render>Une erreur d'affichage s'est produite.</render>
+      <saving-success>Mise à jour des informations réussie.</saving-success>
     </msg>
     <action>
       <Save>Enregistrer</Save>
@@ -37,23 +52,7 @@
   </UICategoryNavigationConfig>
   <UICategoryNavigationTreeBase>
     <msg>
-      <not-existed-category>Cette catégorie n'existe pas</not-existed-category>
+      <not-existed-category>La catégorie n'existe pas</not-existed-category>
     </msg>
   </UICategoryNavigationTreeBase>
-
-  <UICategoryNavigationConfig>
-    <label>
-      <UICategoryNavigationTargetPathFormInputSet>Show in Page</UICategoryNavigationTargetPathFormInputSet>      
-      <TreeSelectionBlock>Tree Selection</TreeSelectionBlock>
-      <DisplaySettingBlock>Afficher les paramètres</DisplaySettingBlock>
-      <AdvancedBlock>Avancée</AdvancedBlock>
-	  <UICategoryNavigationTreePathFormInputSet>Tree Path</UICategoryNavigationTreePathFormInputSet>
-	  <UICategoryNavigationTreePathFormStringInput>Tree Path</UICategoryNavigationTreePathFormStringInput>
-	  <UICategoryNavigationHeaderFormStringInput>Entête</UICategoryNavigationHeaderFormStringInput>
-	  <UICategoryNavigationAutomaticDetectionCheckBoxInput>Automatique</UICategoryNavigationAutomaticDetectionCheckBoxInput>
-	  <UICategoryNavigationDynamicNavigationLabel>Navigation Dynamique</UICategoryNavigationDynamicNavigationLabel>
-	  <UICategoryNavigationWithClvFormStringInput>avec</UICategoryNavigationWithClvFormStringInput>
-	  <UICategoryNavigationTreepathPopupWindow>Tree Path</UICategoryNavigationTreepathPopupWindow>    
-    </label>
-  </UICategoryNavigationConfig>  
 </bundle>

@@ -282,10 +282,10 @@
   -->
   <UIActionBar>
     <tooltip>
-      <AddFolder>Nouveau Dossier</AddFolder>
-      <AddDocument>Nouveau Contenu</AddDocument>
+      <AddFolder>Nouveau dossier</AddFolder>
+      <AddDocument>Nouveau contenu</AddDocument>
       <EditDocument>Modifier</EditDocument>
-      <Upload>Déposer des fichiers</Upload>
+      <Upload>Uploader</Upload>
       <Paste>Coller</Paste>
       <Search>Chercher</Search>
       <WatchDocument>Suivre</WatchDocument>
@@ -294,7 +294,7 @@
       <Comment>Commenter</Comment>
       <ManageVersions>Versions</ManageVersions>
       <ManageAuditing>Audit</ManageAuditing>
-      <ManagePublications>Publications</ManagePublications>
+      <ManagePublications>Publication</ManagePublications>
       <ManageCategories>Catégories</ManageCategories>
       <ManageRelations>Relations</ManageRelations>
       <ManageActions>Actions</ManageActions>
@@ -305,11 +305,11 @@
       <ViewReferences>Références</ViewReferences>
       <ViewNodeType>Types</ViewNodeType>
       <ViewPermissions>Permissions</ViewPermissions>
-      <ViewProperties>Propriétés</ViewProperties>
+      <ViewProperties>Propriétés Système</ViewProperties>
       <ViewMetadatas>Métadonnées</ViewMetadatas>
       <ViewRelations>Montrer/Cacher les Relations</ViewRelations>
       <ShowJCRStructure>Monter/Cacher la Structure</ShowJCRStructure>
-      <EditProperty>Modifier les Propriétés</EditProperty>
+      <EditProperty>Propriétés du document</EditProperty>
       <UploadNewVersion>Nouvelle version</UploadNewVersion>
     </tooltip>
     <msg>
@@ -591,7 +591,7 @@
       <ViewProperties>Visualiser les propriétés du noeud</ViewProperties>
       <GetURL>Copier l'URL</GetURL>
       <AddThumbnail>Ajouter/Supprimer une Vignette</AddThumbnail>
-      <AddToFavourite>Ajouter aux Favoris</AddToFavourite>
+      <AddToFavourite>Ajouter à mes favoris</AddToFavourite>
       <RemoveFromFavourite>Supprimer</RemoveFromFavourite>
       <MoveToTrash>Déplacer dans la Corbeille</MoveToTrash>
       <RestoreFromTrash>Restaurer</RestoreFromTrash>
@@ -659,7 +659,7 @@
       <UINonPublishedForm>Etat</UINonPublishedForm>
       <UIPublishedForm>Etat</UIPublishedForm>
       <UIPublicationLogList>Historique</UIPublicationLogList>
-      <UIDocumentWithTree>Vue Fichier</UIDocumentWithTree>
+      <UIDocumentWithTree>Vue Structure</UIDocumentWithTree>
       <UIDocumentInfo>Vue Document</UIDocumentInfo>
       <UICategoriesSelectPanel>Selectionner des Catégories</UICategoriesSelectPanel>
       <UISelectedCategoriesGrid>Catégories Référencées</UISelectedCategoriesGrid>
@@ -1346,6 +1346,8 @@
   -->
   <UIVersionInfo>
     <tooltip>
+      <version>Version</version>
+      <baseVersion>Version de base</baseVersion>
       <addLabel>Ajouter un Libellé</addLabel>
       <removeLable>Supprimer le Libellé</removeLable>
       <restoreVersion>Restaurer cette Version</restoreVersion>
@@ -2266,7 +2268,7 @@
   <UIActionBar>
     <tooltip>
       <AddSymLink>Ajouter un Raccourci</AddSymLink>
-      <AddLocalizationLink>Ajouter une Traduction</AddLocalizationLink>
+      <AddLocalizationLink>Traduction</AddLocalizationLink>
 		</tooltip>
 	</UIActionBar>
 
@@ -2580,7 +2582,7 @@
   -->
   <ECMContextMenu>
 	    <event>
-	    	<Permlink>Voir Document</Permlink>
+        <Permlink>Afficher</Permlink>
 	    </event>
   </ECMContextMenu>
   
@@ -2697,7 +2699,7 @@
 
   <UIAllItemsByType>
   	<label>
-  		<ByType>Filtrer Par Type</ByType>
+    <ByType>Filtrer par type</ByType>
       <DocumentFilterConfiguration>Configurer les Filtres</DocumentFilterConfiguration>
   	</label>
    	<title>
@@ -3035,11 +3037,11 @@
   </UIPopupWindow>
   <WCMContentView>
    <header>
-      <status>Etat</status>
-      <author>Auteur</author>
-      <date>Date de création</date>
-      <title>Le titre du document</title>
-     <lastUser>Dernier utilisateur</lastUser>
+      <status>Etat de publication</status>
+      <author>Créé par</author>
+      <date>Créé le</date>
+      <title>Titre</title>
+      <lastUser>Modifié par</lastUser>
 	</header>
   </WCMContentView>
   <UITagForm>
@@ -3083,7 +3085,7 @@
       <no-view-found>Il n'y a pas de vue disponible par rapport à vos droits d'accès sur le lecteur '{0}'.</no-view-found>
       <access-denied>Accès refusé. Vous n'avez peut-être pas les droits suffisants pour accéder à l'espace de stockage du lecteur '{0}'.</access-denied>
       <empty-drives>Il n'y a pas de lecteur dans ce dépôt de données ou vous n'avez pas les droits requis pour accéder à au moins un lecteur de ce dépôt de données.</empty-drives>
-      <workspace-not-exist>Le lecteur '{0}' a été sauvegardé dans un espace de stockage inconnu. Veuillez reconfigurer le lecteur.</workspace-not-exist>
+      <workspace-not-exist>Le lecteur '{0}' a été enregistré dans un espace de stockage inconnu. Veuillez reconfigurer le lecteur.</workspace-not-exist>
     </msg>
   </UIDrivesArea>
   <UIJcrExplorerEditForm>

@@ -992,7 +992,7 @@
       <checkOut>Check Out</checkOut>
       <shareDocuments>Partager</shareDocuments>
       <openDocument>Editer à Distance</openDocument>
-      <editProperty>Modifier les Propriétés</editProperty>
+      <editProperty>Propriétés du document</editProperty>
       <uploadNewVersion>Nouvelle version</uploadNewVersion>
     </label>			
     <action>
@@ -2328,7 +2328,7 @@
   		<action>Action</action>
   	</header>
   	<tooltip>
-				<UnLock>Déverouiller</UnLock>			
+<UnLock>Déverrouiller</UnLock>
   	</tooltip>
   	<msg>
   <access-denied-exception>Vous n'avez pas la permission d'accéder au noeud {0} ou ce noeud a été supprimé.</access-denied-exception>

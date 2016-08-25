@@ -34,7 +34,7 @@
 
   <Drives>
     <label>
-      <ManagedSites>Gestion de Site</ManagedSites>
+      <ManagedSites>Gestion de Contenu</ManagedSites>
       <SharedSite>Espace Partagé</SharedSite>
       <PersonalDocuments>Documents Personels</PersonalDocuments>
       <UserDocuments>Documents de {0}</UserDocuments>
@@ -383,7 +383,7 @@
     <welcome>Bienvenue</welcome>
     <login>Connexion</login>
     <logout>Déconnexion</logout>
-    <language>Changer de Langue</language>
+    <language>Changer de langue</language>
     <register>S'inscrire</register>
   </Signin>
   <UIDriveForm>
