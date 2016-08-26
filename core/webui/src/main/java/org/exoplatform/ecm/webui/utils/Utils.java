@@ -1220,9 +1220,13 @@ public class Utils {
     String nodePath = currentNode.getPath();
     String ws = currentNode.getSession().getWorkspace().getName();
     String repo = WCMCoreUtils.getRepository().getConfiguration().getName();
+    String mountNodePath = currentNode.getParent().getPath();
     String filePath = httpServletRequest.getScheme() + "://" + httpServletRequest.getServerName() + ":"
         + httpServletRequest.getServerPort() + "/" + WCMCoreUtils.getRestContextName() + "/private/jcr/" + repo + "/" + ws
         + nodePath;
+    String mountPath = httpServletRequest.getScheme()+ "://" + httpServletRequest.getServerName() + ":"
+        + httpServletRequest.getServerPort() + "/"
+        + WCMCoreUtils.getRestContextName()+ "/private/jcr/" + repo + "/" + ws + mountNodePath;
 
     if (currentNode.isLocked()) {
       String[] userLock = { currentNode.getLock().getLockOwner() };
@@ -1232,7 +1236,7 @@ public class Utils {
       uiOpenDocumentForm.setMessageKey("UIPopupMenu.msg.lock-node-read-only");
       uiOpenDocumentForm.setArguments(userLock);
       uiOpenDocumentForm.setFilePath(nodePath);
-      uiOpenDocumentForm.setWorkspace(ws);
+      uiOpenDocumentForm.setMountPath(mountPath);
       uiOpenDocumentForm.setAbsolutePath(filePath);
       event.getRequestContext()
            .getJavascriptManager()
@@ -1242,7 +1246,7 @@ public class Utils {
       event.getRequestContext()
            .getJavascriptManager()
            .require("SHARED/openDocumentInOffice")
-           .addScripts("eXo.ecm.OpenDocumentInOffice.openDocument('" + filePath + "', '" + ws + "', '" + nodePath + "');");
+           .addScripts("eXo.ecm.OpenDocumentInOffice.openDocument('" + filePath + "', '" + mountPath + "');");
     }
     event.getRequestContext().addUIComponentToUpdateByAjax(popupContainer.getParent());
 
