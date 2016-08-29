@@ -17,10 +17,7 @@
 package org.exoplatform.services.cms.documents.impl;
 
 import java.net.URLEncoder;
-import java.util.Calendar;
-import java.util.List;
-import java.util.Locale;
-import java.util.ResourceBundle;
+import java.util.*;
 
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
@@ -30,8 +27,7 @@ import org.exoplatform.container.xml.PortalContainerInfo;
 import org.exoplatform.portal.config.UserPortalConfig;
 import org.exoplatform.portal.config.UserPortalConfigService;
 import org.exoplatform.portal.mop.SiteKey;
-import org.exoplatform.portal.mop.user.UserNavigation;
-import org.exoplatform.portal.mop.user.UserPortalContext;
+import org.exoplatform.portal.mop.user.*;
 import org.exoplatform.services.cms.documents.DocumentService;
 import org.exoplatform.services.cms.documents.model.Document;
 import org.exoplatform.services.cms.drives.DriveData;
@@ -43,6 +39,10 @@ import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+import org.gatein.api.Portal;
+import org.gatein.api.navigation.Navigation;
+import org.gatein.api.navigation.Nodes;
+import org.gatein.api.site.SiteId;
 
 /**
  * Created by The eXo Platform SAS Author : eXoPlatform exo@exoplatform.com Mar
@@ -61,9 +61,11 @@ public class DocumentServiceImpl implements DocumentService {
   public static final String DOCUMENTS_APP_NAVIGATION_NODE_NAME = "documents";
 
   private ManageDriveService manageDriveService;
+  private Portal portal;
 
-  public DocumentServiceImpl(ManageDriveService manageDriveService) {
+  public DocumentServiceImpl(ManageDriveService manageDriveService, Portal portal) {
     this.manageDriveService = manageDriveService;
+    this.portal = portal;
   }
 
   @Override
@@ -163,7 +165,12 @@ public class DocumentServiceImpl implements DocumentService {
         String[] splitedGroupId = groupId.split("/");
         if (splitedGroupId != null && splitedGroupId.length == 3 && splitedGroupId[1].equals("spaces")) {
           // the doc is in a space -> we use the documents application of the space
-          groupPageName = splitedGroupId[2] + "/" + DOCUMENTS_APP_NAVIGATION_NODE_NAME;
+
+          // we need to retrieve the root navigation URI of the space since it can differ from
+          // the group id if the space has been renamed
+          String rootNavigation = getSpaceRootNavigationNodeURI(groupId);
+
+          groupPageName = rootNavigation + "/" + DOCUMENTS_APP_NAVIGATION_NODE_NAME;
         } else {
           // otherwise we use the portal documents application
           groupPageName = DOCUMENTS_APP_NAVIGATION_NODE_NAME;
@@ -193,6 +200,28 @@ public class DocumentServiceImpl implements DocumentService {
     }
 
     return url.toString();
+  }
+
+  /**
+   * Retrieve the root navigation node URi of a space
+   * This method uses the Portal Navigation API and not the Space API to avoid making ECMS depends on Social
+   * @param spaceGroupId The groupId of the space
+   * @return The URI of the root navigation node of the space
+   */
+  protected String getSpaceRootNavigationNodeURI(String spaceGroupId) throws Exception {
+    String navigationName = null;
+
+    Navigation spaceNavigation = portal.getNavigation(new SiteId(org.gatein.api.site.SiteType.SPACE, spaceGroupId));
+    if(spaceNavigation != null) {
+      org.gatein.api.navigation.Node navigationRootNode = spaceNavigation.getRootNode(Nodes.visitChildren());
+      if(navigationRootNode != null && navigationRootNode.iterator().hasNext()) {
+        // we assume there is only one root navigation node, that's how spaces work
+        org.gatein.api.navigation.Node node = navigationRootNode.iterator().next();
+        navigationName = node.getName();
+      }
+    }
+
+    return navigationName;
   }
 
   @Override
