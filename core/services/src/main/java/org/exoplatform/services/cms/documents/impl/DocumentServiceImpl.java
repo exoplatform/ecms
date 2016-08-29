@@ -17,10 +17,7 @@
 package org.exoplatform.services.cms.documents.impl;
 
 import java.net.URLEncoder;
-import java.util.Calendar;
-import java.util.List;
-import java.util.Locale;
-import java.util.ResourceBundle;
+import java.util.*;
 
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
@@ -30,8 +27,11 @@ import org.exoplatform.container.xml.PortalContainerInfo;
 import org.exoplatform.portal.config.UserPortalConfig;
 import org.exoplatform.portal.config.UserPortalConfigService;
 import org.exoplatform.portal.mop.SiteKey;
-import org.exoplatform.portal.mop.user.UserNavigation;
-import org.exoplatform.portal.mop.user.UserPortalContext;
+import org.exoplatform.portal.mop.SiteType;
+import org.exoplatform.portal.mop.Visibility;
+import org.exoplatform.portal.mop.navigation.Scope;
+import org.exoplatform.portal.mop.user.*;
+import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.documents.DocumentService;
 import org.exoplatform.services.cms.documents.model.Document;
 import org.exoplatform.services.cms.drives.DriveData;
@@ -163,7 +163,12 @@ public class DocumentServiceImpl implements DocumentService {
         String[] splitedGroupId = groupId.split("/");
         if (splitedGroupId != null && splitedGroupId.length == 3 && splitedGroupId[1].equals("spaces")) {
           // the doc is in a space -> we use the documents application of the space
-          groupPageName = splitedGroupId[2] + "/" + DOCUMENTS_APP_NAVIGATION_NODE_NAME;
+
+          // we need to retrieve the root navigation URI of the space since it can differ from
+          // the group id if the space has been renamed
+          String rootNavigation = getSpaceRootNavigationNodeURI(groupId);
+
+          groupPageName = rootNavigation + "/" + DOCUMENTS_APP_NAVIGATION_NODE_NAME;
         } else {
           // otherwise we use the portal documents application
           groupPageName = DOCUMENTS_APP_NAVIGATION_NODE_NAME;
@@ -193,6 +198,34 @@ public class DocumentServiceImpl implements DocumentService {
     }
 
     return url.toString();
+  }
+
+  /**
+   * Retrieve the root navigation node URi of a space
+   * This method uses the Portal API and not the Space API to avoid making ECMS depends on Social
+   * @param spaceGroupId The groupId of the space
+   * @return The URI of the root navigation node of the space
+   */
+  protected String getSpaceRootNavigationNodeURI(String spaceGroupId) {
+    String navigationName = null;
+
+    UserPortal userPortal = Util.getPortalRequestContext().getUserPortalConfig().getUserPortal();
+    UserNavigation spaceNavigation = Util.getPortalRequestContext().getUserPortalConfig().getUserPortal().getNavigation(new SiteKey(SiteType.GROUP, spaceGroupId));
+
+    UserNodeFilterConfig.Builder filterConfigBuilder = UserNodeFilterConfig.builder();
+    filterConfigBuilder.withReadWriteCheck().withVisibility(Visibility.DISPLAYED, Visibility.TEMPORAL);
+    filterConfigBuilder.withTemporalCheck();
+
+    UserNode spaceRootNode = userPortal.getNode(spaceNavigation, Scope.CHILDREN, filterConfigBuilder.build(), null);
+    if(spaceRootNode != null) {
+      Collection<UserNode> spaceRootNodeChildren = spaceRootNode.getChildren();
+      if(spaceRootNodeChildren != null && spaceRootNodeChildren.size() > 0) {
+        // we assume there is only one navigation node, that's how spaces work
+        navigationName = spaceRootNodeChildren.iterator().next().getURI();
+      }
+    }
+
+    return navigationName;
   }
 
   @Override
