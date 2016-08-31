@@ -10,6 +10,7 @@
     import java.util.Locale;
     import java.text.DateFormat;
     import org.apache.commons.lang.StringUtils;
+    import org.apache.commons.lang.StringEscapeUtils;
     import org.exoplatform.ecm.jcr.model.VersionNode;
     import org.exoplatform.ecm.webui.utils.Utils;
     import org.exoplatform.portal.webui.util.Util;
@@ -19,20 +20,43 @@
     import org.exoplatform.social.webui.Utils
 
   public String getAvatarURL(String userName) {
-      String ownerAvatar = null;
+      String profileAvatar = null;
       Identity identity = Utils.getIdentityManager().getOrCreateIdentity(OrganizationIdentityProvider.NAME,userName, true);
-      ownerAvatar = identity.getProfile().getAvatarUrl();
+      profileAvatar = identity.getProfile().getAvatarUrl();
 
-      if (ownerAvatar == null || ownerAvatar.isEmpty()) {
-          ownerAvatar = LinkProvider.PROFILE_DEFAULT_AVATAR_URL;
+      if (profileAvatar == null || profileAvatar.isEmpty()) {
+          profileAvatar = LinkProvider.PROFILE_DEFAULT_AVATAR_URL;
       }
-      return ownerAvatar;
+      return profileAvatar;
   }
+    public String getProfileURL(String userName) {
+        String profileUrl = null;
+        Identity identity = Utils.getIdentityManager().getOrCreateIdentity(OrganizationIdentityProvider.NAME,userName, true);
+        profileUrl = identity.getProfile().getUrl();
+        return profileUrl;
+    }
 
   public void writeNodes() {
   	def context = _ctx.getRequestContext();
   	def jsManager = context.getJavascriptManager();
-  	jsManager.require("SHARED/jquery", "gj").require("SHARED/X-editable", "xeditable");
+
+    String statusTitle = StringEscapeUtils.escapeJavaScript(_ctx.appRes("UserProfilePopup.label.Loading"));
+    String connectLabel = StringEscapeUtils.escapeJavaScript(_ctx.appRes("UserProfilePopup.label.Connect"));
+    String confirmLabel = StringEscapeUtils.escapeJavaScript(_ctx.appRes("UserProfilePopup.label.Confirm"));
+    String cancelRequestLabel = StringEscapeUtils.escapeJavaScript(_ctx.appRes("UserProfilePopup.label.CancelRequest"));
+    String removeConnectionLabel = StringEscapeUtils.escapeJavaScript(_ctx.appRes("UserProfilePopup.label.RemoveConnection"));
+    String ignoreLabel = StringEscapeUtils.escapeJavaScript(_ctx.appRes("UserProfilePopup.label.Ignore"));
+
+    String labels = """ {
+    StatusTitle: '${statusTitle}',
+    Connect: '${connectLabel}',
+    Confirm: '${confirmLabel}',
+    CancelRequest: '${cancelRequestLabel}',
+    RemoveConnection: '${removeConnectionLabel}',
+    Ignore: '${ignoreLabel}'
+    } """;
+
+  	jsManager.require("SHARED/jquery", "gj").require("SHARED/X-editable", "xeditable").require("SHARED/userPopupPlugin","userPopup").addScripts("initUserProfilePopup($labels);");
     String clazz = "" ;
     Locale currentLocale = Util.getPortalRequestContext().getLocale();
     DateFormat df = DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT, currentLocale);
@@ -49,6 +73,7 @@
       }
       String author = node.getAuthor();
       String avatarURL = getAvatarURL(author);
+      String profileURL = getProfileURL(author);
       String versionSummary = "";
       if (uicomponent.getVersionLabels(node).length > 0) {
         versionSummary = uicomponent.getVersionLabels(node)[0].replace(versionNumber,"");
@@ -64,7 +89,7 @@
         </label>
       </td>
       <td><%=df.format(node.getCreatedTime().getTime())%></td>
-      <td><img class="avatarSmall" src="<%=avatarURL%>"/>  <%=author%></td>
+      <td><a class="userAvatarLink" href="$profileURL"><img class="avatarSmall" src="<%=avatarURL%>"/>  <%=author%></a></td>
       <td><a id="versionSummary<%=versionNumber%>" class="versionSummary" href="#">$versionSummary</a></td>
       <td class="center">
         <a class="actionIcon" onclick="<%=uicomponent.event('ViewVersion', node.getPath()); %>" rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes('UIVersionInfo.tooltip.viewVersion'); %>"><i class="uiIconWatch uiIconLightGray"></i></a>
@@ -117,3 +142,23 @@
 <div class="uiAction uiActionBorder">
 	<button type="button" onclick="<%=uicomponent.event("Close")%>" class="btn" href="javascript:void(0);"><%=_ctx.appRes("UIVersionInfo.action.close")%></button>
 </div>
+
+<script language="javascript">
+    function initUserProfilePopup(globalLabels) {
+        require(['SHARED/jquery','SHARED/userPopupPlugin','SHARED/socialUtil'],function(jQuery,userPopup,socialUtil){
+            var labels = {};
+            var profileLabels = jQuery.extend(true, {}, labels, globalLabels);
+            jQuery.each(profileLabels, function(key) {
+              profileLabels[key] =  window.decodeURIComponent(profileLabels[key]);
+            });
+            jQuery(".userAvatarLink").userPopup({
+                restURL: '//' + window.location.host + eXo.social.portal.context + '/' + eXo.social.portal.rest + '/social/people' + '/getPeopleInfo/{0}.json',
+                labels: profileLabels,
+                content: false,
+                defaultPosition: "left",
+                keepAlive: true,
+                maxWidth: "240px"
+            });
+        });
+    }
+</script>
