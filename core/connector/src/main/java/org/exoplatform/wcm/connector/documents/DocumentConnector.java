@@ -32,6 +32,11 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.xml.transform.dom.DOMSource;
 
+import org.exoplatform.services.cms.impl.Utils;
+
+import org.exoplatform.services.wcm.core.NodeLocation;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+import org.exoplatform.services.cms.drives.DriveData;
 import org.codehaus.groovy.util.ListHashMap;
 import org.exoplatform.wcm.connector.BaseConnector;
 import org.exoplatform.services.cms.documents.DocumentService;
@@ -58,7 +63,7 @@ public class DocumentConnector extends BaseConnector implements ResourceContaine
     @Path("/docOpenUri")
     public Response getDocOpenUri(@QueryParam("nodePath") String nodePath) {
         try {
-            Map<String, String> uris = new ListHashMap<>();
+            Map<String, List<String>> uris = new ListHashMap<>();
             if (nodePath.startsWith("/")) {
               nodePath = nodePath.substring(1);
             }
@@ -69,7 +74,19 @@ public class DocumentConnector extends BaseConnector implements ResourceContaine
             for (String nodeName : nodePath.split("/")) {
               path += "/" + nodeName;
               try {
-                uris.put(path, documentService.getLinkInDocumentsApp(path));
+                DriveData drive = documentService.getDriveOfNode(path);
+                Node docNode = NodeLocation.getNodeByExpression(
+                        WCMCoreUtils.getRepository().getConfiguration().getName() + ":" +
+                        drive.getWorkspace() + ":" + path);
+                String nodeTitle = Utils.getTitle(docNode);
+                
+                String docLink = documentService.getLinkInDocumentsApp(path);
+                
+                List<String> titleAndLink = new ArrayList<>();
+                titleAndLink.add(nodeTitle);
+                titleAndLink.add(docLink);
+                
+                uris.put(path, titleAndLink);
               } catch (Exception e) {
                 //normal case, ok
               }
