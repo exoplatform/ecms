@@ -88,8 +88,7 @@ public abstract class BaseContentSearchServiceConnector extends BaseSearchServic
 
   @Override
   protected String getFileType(ResultNode node) throws Exception {
-    return org.exoplatform.services.cms.impl.Utils.getNodeTypeIcon(node, "").
-            replace(".", "").replace("/", "").replace("\\","").replace(".", "");
+    return org.exoplatform.services.cms.impl.Utils.getFileType(node);
   }
 
   /**
