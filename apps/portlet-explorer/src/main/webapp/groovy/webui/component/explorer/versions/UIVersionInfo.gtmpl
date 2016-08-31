@@ -36,6 +36,13 @@
         return profileUrl;
     }
 
+    public String getProfileFullName(String userName) {
+        String profileFullName = null;
+        Identity identity = Utils.getIdentityManager().getOrCreateIdentity(OrganizationIdentityProvider.NAME,userName, true);
+        profileFullName = identity.getProfile().getFullName();
+        return profileFullName;
+    }
+
   public void writeNodes() {
   	def context = _ctx.getRequestContext();
   	def jsManager = context.getJavascriptManager();
@@ -71,9 +78,10 @@
       if (isBaseVersion) {
         baseVersion = " (" + _ctx.appRes("UIVersionInfo.tooltip.baseVersion") + ")";
       }
-      String author = node.getAuthor();
-      String avatarURL = getAvatarURL(author);
-      String profileURL = getProfileURL(author);
+      String authorUserName = node.getAuthor();
+      String authorFullName = getProfileFullName(authorUserName);
+      String avatarURL = getAvatarURL(authorUserName);
+      String profileURL = getProfileURL(authorUserName);
       String versionSummary = "";
       if (uicomponent.getVersionLabels(node).length > 0) {
         versionSummary = uicomponent.getVersionLabels(node)[0].replace(versionNumber,"");
@@ -89,7 +97,7 @@
         </label>
       </td>
       <td><%=df.format(node.getCreatedTime().getTime())%></td>
-      <td><a class="userAvatarLink" href="$profileURL"><img class="avatarSmall" src="<%=avatarURL%>"/>  <%=author%></a></td>
+      <td><a class="userAvatarLink" href="$profileURL"><img class="avatarSmall" src="<%=avatarURL%>"/>  <%=authorFullName%></a></td>
       <td><a id="versionSummary<%=versionNumber%>" class="versionSummary" href="#">$versionSummary</a></td>
       <td class="center">
         <a class="actionIcon" onclick="<%=uicomponent.event('ViewVersion', node.getPath()); %>" rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes('UIVersionInfo.tooltip.viewVersion'); %>"><i class="uiIconWatch uiIconLightGray"></i></a>

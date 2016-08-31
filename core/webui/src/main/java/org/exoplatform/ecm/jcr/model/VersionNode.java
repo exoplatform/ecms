@@ -62,8 +62,8 @@ public class VersionNode {
         path_ = version.getPath();
         ws_ = version.getSession().getWorkspace().getName();
         uuid_ = version.getUUID();
-        if(version.hasNode("jcr:frozenNode") && version.getNode("jcr:frozenNode").hasProperty(Utils.EXO_LASTMODIFIER)) {
-          author_ = version.getNode("jcr:frozenNode").getProperty(Utils.EXO_LASTMODIFIER).getString();
+        if(version.hasNode(NodetypeConstant.JCR_FROZEN_NODE) && version.getNode(NodetypeConstant.JCR_FROZEN_NODE).hasProperty(Utils.EXO_LASTMODIFIER)) {
+          author_ = version.getNode(NodetypeConstant.JCR_FROZEN_NODE).getProperty(Utils.EXO_LASTMODIFIER).getString();
         }
         if (version.isNodeType(NodetypeConstant.MIX_VERSIONABLE)) {
           versionLabels_ = version.getVersionHistory().getVersionLabels(version);
