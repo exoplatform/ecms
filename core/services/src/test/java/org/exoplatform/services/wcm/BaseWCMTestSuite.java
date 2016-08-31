@@ -48,6 +48,7 @@ import org.exoplatform.services.ecm.dms.watchdocument.TestWatchDocumentService;
 import org.exoplatform.services.pdfviewer.TestPDFViewerService;
 import org.exoplatform.services.portletcache.TestFragmentCacheService;
 import org.exoplatform.services.portletcache.TestPortletFutureCache;
+import org.exoplatform.services.rest.TestDocumentsAppRedirectService;
 import org.exoplatform.services.seo.TestSEOService;
 import org.exoplatform.services.wcm.core.TestWCMConfigurationService;
 import org.exoplatform.services.wcm.core.TestWCMService;
@@ -111,7 +112,8 @@ import org.junit.runners.Suite.SuiteClasses;
   TestThumbnailService.class,
   TestSEOService.class,
   TestClipboardService.class,
-  TestPDFViewerService.class
+  TestPDFViewerService.class,
+  TestDocumentsAppRedirectService.class
 })
 @ConfigTestCase(BaseWCMTestCase.class)
 public class BaseWCMTestSuite extends BaseExoContainerTestSuite {

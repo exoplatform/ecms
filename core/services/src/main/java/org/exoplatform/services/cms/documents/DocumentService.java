@@ -32,6 +32,15 @@ public interface DocumentService {
   public Document findDocById(String id) throws RepositoryException;
 
   /**
+   * Get the short link to display a document in the Documents app by its id.
+   * @param workspaceName The workspace of the node
+   * @param nodeId The id of the node
+   * @return The link to open the document
+   * @throws Exception
+   */
+  public String getShortLinkInDocumentsApp(String workspaceName, String nodeId) throws Exception;
+
+  /**
    * Get the link to display a document in the Documents app.
    * It will try to get the best matching context (personal doc, space doc, ...).
    * @param nodePath The path of the node
