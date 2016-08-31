@@ -216,7 +216,6 @@ public class DocumentServiceImpl implements DocumentService {
           // extract group id for doc path
           String groupId = nodePath.substring(ManageDriveServiceImpl.GROUPS_DRIVE_ROOT_NODE.length() + 1, groupDocumentsRootNodeName);
           nodeDrive.getParameters().put(ManageDriveServiceImpl.DRIVE_PARAMATER_GROUP_ID, groupId);
-          nodeDrive.setName(groupId);
         } else {
           throw new Exception("Cannot extract group id from node path " + nodePath);
         }
