@@ -252,7 +252,7 @@ public abstract class BaseSearchServiceConnector extends SearchServiceConnector 
       return "";
     }
     String id = driveData.getName();
-    String path = driveData.getHomePath();
+    String path = driveData.getResolvedHomePath();
     //get space name (in case drive is space drive)
     try {
       Class spaceServiceClass = Class.forName("org.exoplatform.social.core.space.spi.SpaceService");
