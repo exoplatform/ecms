@@ -45,6 +45,8 @@ import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+import org.exoplatform.services.cache.ExoCache;
+import org.exoplatform.services.cache.CacheService;
 import org.exoplatform.webui.application.WebuiRequestContext;
 
 
@@ -58,7 +60,7 @@ public class NavigationUtils {
 
   public static final Scope ECMS_NAVIGATION_SCOPE = Scope.CHILDREN;
 
-  private static ThreadLocal<Map<String, String>> gotNavigationKeeper = new ThreadLocal<Map<String, String>>();
+  private static ExoCache<String, Object> NavigationKeeperCache;
 
   private static Constructor<UserNavigation> userNavigationCtor = null;
 
@@ -70,6 +72,7 @@ public class NavigationUtils {
       userNavigationCtor = UserNavigation.class.getDeclaredConstructor(
                                           new Class[] {UserPortalImpl.class, NavigationContext.class, boolean.class});
       userNavigationCtor.setAccessible(true);
+      NavigationKeeperCache= WCMCoreUtils.getService(CacheService.class).getCacheInstance("CacheUserNavigationKeeper");
     }catch (Exception e) {
       if (LOG.isErrorEnabled()) {
         LOG.error(e);
@@ -82,10 +85,9 @@ public class NavigationUtils {
   }
   
   public static boolean gotNavigation(String portal, String user, String scope) {
-    Map<String, String> navigations = gotNavigationKeeper.get();
-    if (navigations == null) return false;
-    String navigation = navigations.get(portal + " " + user + " " + scope);
-    return (navigation != null);
+    if (NavigationKeeperCache.get(portal + " " + user + " " + scope) != null)
+      return true;
+    return false;
   }  
 
   public static UserNavigation getUserNavigationOfPortal(UserPortal userPortal, String portalName) throws Exception {
@@ -134,11 +136,7 @@ public class NavigationUtils {
   public static void removeNavigationAsJson (String portalName, String username, String scope) throws Exception
   {
     String key = portalName + " " + username + " " + scope;
-    Map<String, String> navigations = gotNavigationKeeper.get();
-    if (navigations != null) {
-      navigations.remove(key);
-      gotNavigationKeeper.set(navigations);
-    }
+    NavigationKeeperCache.remove(key);
   }
 
   public static String getNavigationAsJSON(String portalName, String username) throws Exception {
@@ -148,15 +146,11 @@ public class NavigationUtils {
   public static String getNavigationAsJSON(String portalName, String username, Scope scope, String navigationScope) throws Exception {
 
     String key = portalName + " " + username + " " + navigationScope;
-    Map<String, String> navigations = gotNavigationKeeper.get();
-    if (navigations == null) {
-      navigations = new Hashtable<String, String>();
-    } else {
-      String navigationData = navigations.get(key);
-      if (navigationData != null) {
-        return navigationData;
-      }
+    String navigationData =(String)NavigationKeeperCache.get(key);
+    if (navigationData != null) {
+      return navigationData;
     }
+
     UserPortalConfigService userPortalConfigService = WCMCoreUtils.getService(UserPortalConfigService.class);
     UserPortalConfig userPortalCfg = userPortalConfigService.getUserPortalConfig(portalName,
                                                                                  username,
@@ -174,8 +168,7 @@ public class NavigationUtils {
     UserNode root = userPortal.getNode(navigation, scope == null ? ECMS_NAVIGATION_SCOPE : scope, filterConfig, null);
 
     String ret = createJsonTree(navigation, root);
-    navigations.put(key, ret);
-    gotNavigationKeeper.set(navigations);
+    NavigationKeeperCache.put(key, ret);
     return ret;
   }
 
