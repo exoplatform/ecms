@@ -9,11 +9,6 @@ function UIVersionInfo(){
   var versionListForm = document.getElementById(formId);
   var inputs = $(versionListForm).find(':checkbox');
   me.compareButton = $("#CompareVersion");
-  $(this.compareButton).click(function(evt) {
-    if (me.selectedCheckbox.length == 2) {
-      //eXo.ecm.AjaxRequest.makeNewHash("#CompareRevision");
-    }
-  });
 
   var countCheckBox = inputs.length;
   for ( var i = 0; i < countCheckBox; i++) {
@@ -62,6 +57,19 @@ function UIVersionInfo(){
       defaultPosition: "left",
       keepAlive: true,
       maxWidth: "240px"
+    });
+  };
+
+  UIVersionInfo.prototype.compareEventUrl = function(actionLink) {
+    var me = eXo.ecm.UIVersionInfo;
+    $(me.compareButton).click(function(evt) {
+      if (me.selectedCheckbox.length == 2) {
+        var selectedVersions = new Array();
+        for(var i=0;i<2;i++) {
+          selectedVersions.push(me.selectedCheckbox[i].id.split("_")[1]);
+        }
+        ajaxGet(actionLink+"&versions="+selectedVersions.toString());
+      }
     });
   };
 

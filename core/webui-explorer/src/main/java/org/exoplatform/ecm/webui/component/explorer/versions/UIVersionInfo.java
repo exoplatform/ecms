@@ -265,8 +265,8 @@ public class UIVersionInfo extends UIContainer  {
       for(UIComponent uiChild : uiVersionInfo.getChildren()) {
         uiChild.setRendered(false) ;
       }
-      String version1 = event.getRequestContext().getRequestParameter(OBJECTID) ;
-      String version2 = event.getRequestContext().getRequestParameter(OBJECTID);
+      String version1 = event.getRequestContext().getRequestParameter("versions").split(",")[0];
+      String version2 = event.getRequestContext().getRequestParameter("versions").split(",")[1];
       UIDiff uiDiff = uiVersionInfo.getChild(UIDiff.class) ;
       Node node = uiVersionInfo.getCurrentNode() ;
       VersionHistory versionHistory = node.getVersionHistory() ;

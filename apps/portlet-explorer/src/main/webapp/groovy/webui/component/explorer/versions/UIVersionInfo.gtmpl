@@ -63,14 +63,15 @@
     Ignore: '${ignoreLabel}'
     } """;
 
+    def actionCompareLink = StringUtils.getNestedString(uicomponent.event("CompareVersion"),"javascript:ajaxGet(\'","\')");
     jsManager.require("SHARED/UIVersionInfo", "uiVersionInfo").addScripts("uiVersionInfo.init(\""+uicomponent.id+"\");")
-           .addScripts("uiVersionInfo.initUserProfilePopup($labels);");
+           .addScripts("uiVersionInfo.initUserProfilePopup($labels);")
+           .addScripts("uiVersionInfo.compareEventUrl(\""+actionCompareLink+"\");");
     String clazz = "" ;
     Locale currentLocale = Util.getPortalRequestContext().getLocale();
     DateFormat df = DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT, currentLocale);
     if(uicomponent.getCurrentNode().isNodeType("nt:file")) {
-    println "<a id=\"CompareVersion\" class=\"btn btn-primary disabled\" disabled onclick=\"" +
-             uicomponent.event("CompareVersion") + "\" >"+_ctx.appRes("UIVersionInfo.action.compare-versions")+"</a>" ;
+    println "<a id=\"CompareVersion\" class=\"btn btn-primary disabled\" disabled>"+_ctx.appRes("UIVersionInfo.action.compare-versions")+"</a>" ;
     }
     for(node in uicomponent.getListRecords()) {
       if(clazz == "Even")
