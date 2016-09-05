@@ -712,6 +712,30 @@
       </init-params>
     </component-plugin>
   </external-component-plugins>
+
+    <!-- Configure User Navigation caches - Cluster mode -->
+  <external-component-plugins>
+    <target-component>org.exoplatform.services.cache.CacheService</target-component>
+    <component-plugin  profiles="cluster">
+      <name>addExoCacheConfig</name>
+      <set-method>addExoCacheConfig</set-method>
+      <type>org.exoplatform.services.cache.ExoCacheConfigPlugin</type>
+      <description>Configures the cache for User Navigation</description>
+      <init-params>
+        <object-param>
+          <name>CacheUserNavigationKeeper</name>
+          <description></description>
+          <object type="org.exoplatform.services.cache.impl.infinispan.generic.GenericExoCacheConfig">
+            <field name="name"><string>CacheUserNavigationKeeper</string></field>
+            <field name="strategy"><string>LIRS</string></field>
+            <field name="maxEntries"><int>${wcm.cache.userNavigation.maxnodes:300}</int></field>
+            <field name="lifespan"><long>${wcm.cache.userNavigation.expirationtimeout:600000}</long></field>
+            <field name="replicated"><boolean>true</boolean></field>
+          </object>
+        </object-param>
+      </init-params>
+    </component-plugin>
+  </external-component-plugins>
  
   <!--Configure Lock service cached-->
   <external-component-plugins>
