@@ -1359,6 +1359,7 @@
     <msg>
       <have-no-view-template>The view template is not supported.</have-no-view-template>
       <cannot-remove-version>You cannot remove the base version.</cannot-remove-version>
+      <confirm-restore>Are you sure you want to restore this version?</confirm-restore>
       <confirm-delete>Are you sure you want to remove this version?</confirm-delete>
       <not-checked-out>You have to check out this node before restoring.</not-checked-out>
       <invalid-item-state>You cannot restore this version, either because one or more items were deleted or moved during another session.</invalid-item-state>
@@ -1368,6 +1369,13 @@
       <close-view>Close View</close-view>
       <compare-versions>Compare selected versions</compare-versions>
     </action>
+    <labels>
+      <version>Version</version>
+      <date>Date</date>
+      <author>Modified By</author>
+      <summary>Summary</summary>
+      <action>Action</action>
+    </labels>
   </UIVersionInfo>
   <!--
   ################################################################################

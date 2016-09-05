@@ -56,7 +56,7 @@ import java.util.*;
     template = "app:/groovy/webui/component/explorer/versions/UIVersionInfo.gtmpl",
     events = {
         @EventConfig(listeners = UIVersionInfo.SelectActionListener.class),
-        @EventConfig(listeners = UIVersionInfo.RestoreVersionActionListener.class),
+        @EventConfig(listeners = UIVersionInfo.RestoreVersionActionListener.class, confirm = "UIVersionInfo.msg.confirm-restore"),
         @EventConfig(listeners = UIVersionInfo.ViewVersionActionListener.class),
         @EventConfig(listeners = UIVersionInfo.CompareVersionActionListener.class),
         @EventConfig(listeners = UIVersionInfo.DeleteVersionActionListener.class, confirm = "UIVersionInfo.msg.confirm-delete"),
@@ -265,11 +265,12 @@ public class UIVersionInfo extends UIContainer  {
       for(UIComponent uiChild : uiVersionInfo.getChildren()) {
         uiChild.setRendered(false) ;
       }
-      String objectId = event.getRequestContext().getRequestParameter(OBJECTID) ;
-      VersionNode node = uiVersionInfo.rootVersion_.findVersionNode(objectId) ;
+      String version1 = event.getRequestContext().getRequestParameter(OBJECTID) ;
+      String version2 = event.getRequestContext().getRequestParameter(OBJECTID);
       UIDiff uiDiff = uiVersionInfo.getChild(UIDiff.class) ;
-      uiDiff.setVersions(uiVersionInfo.getCurrentNode().getBaseVersion(),
-                         node.getName(), node.getCreatedTime(), node.getWs(), node.getPath());
+      Node node = uiVersionInfo.getCurrentNode() ;
+      VersionHistory versionHistory = node.getVersionHistory() ;
+      uiDiff.setVersions(versionHistory.getVersion(version1),versionHistory.getVersion(version2));
       uiDiff.setRendered(true) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiVersionInfo) ;
     }

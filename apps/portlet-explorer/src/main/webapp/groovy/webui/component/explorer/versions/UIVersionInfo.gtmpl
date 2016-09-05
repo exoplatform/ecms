@@ -63,16 +63,22 @@
     Ignore: '${ignoreLabel}'
     } """;
 
-  	jsManager.require("SHARED/jquery", "gj").require("SHARED/X-editable", "xeditable").require("SHARED/userPopupPlugin","userPopup").addScripts("initUserProfilePopup($labels);");
+    jsManager.require("SHARED/UIVersionInfo", "uiVersionInfo").addScripts("uiVersionInfo.init(\""+uicomponent.id+"\");")
+           .addScripts("uiVersionInfo.initUserProfilePopup($labels);");
     String clazz = "" ;
     Locale currentLocale = Util.getPortalRequestContext().getLocale();
     DateFormat df = DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT, currentLocale);
+    if(uicomponent.getCurrentNode().isNodeType("nt:file")) {
+    println "<a id=\"CompareVersion\" class=\"btn btn-primary disabled\" disabled onclick=\"" +
+             uicomponent.event("CompareVersion") + "\" >"+_ctx.appRes("UIVersionInfo.action.compare-versions")+"</a>" ;
+    }
     for(node in uicomponent.getListRecords()) {
       if(clazz == "Even")
         clazz = "";
       else
         clazz = "Even" ;
       String versionNumber = node.getName();
+      String versionId = "version_"+versionNumber;
       boolean isBaseVersion = uicomponent.isBaseVersion(node);
       String baseVersion = "";
       if (isBaseVersion) {
@@ -89,7 +95,7 @@
     %>
     <tr>
       <td>
-        <span class="uiCheckbox"><input type="checkbox" name="checkbox" class="checkbox"><span></span></span>
+      <input type="checkbox" id="$versionId" name="$versionId" class="uiCheckbox"/>
       </td>
       <td >
         <label>
@@ -123,17 +129,24 @@
       <thead >
         <tr>
           <th >#</th>
-          <th >Version</th>
-          <th >Date</th>
-          <th >Author</th>
-          <th >Summary</th>
-          <th class="center">Action</th>
+          <th ><%= _ctx.appRes("UIVersionInfo.labels.version"); %></th>
+          <th ><%= _ctx.appRes("UIVersionInfo.labels.date"); %></th>
+          <th ><%= _ctx.appRes("UIVersionInfo.labels.author"); %></th>
+          <th ><%= _ctx.appRes("UIVersionInfo.labels.summary"); %></th>
+          <th class="center"><%= _ctx.appRes("UIVersionInfo.labels.action"); %></th>
         </tr>
       </thead>
       <tbody>
-      <%
-          writeNodes();
-      %>
+      <% if (uicomponent.getUIPageIterator().getAvailable() < 1) { %>
+          <tr>
+      	    <td class="center empty" colspan="6">
+              <%=_ctx.appRes("UIGrid.msg.empty")%>
+            </td>
+          </tr>
+        <% } else {
+            writeNodes();
+          }
+        %>
       </tbody>
     </table>
 	</div>
@@ -150,23 +163,3 @@
 <div class="uiAction uiActionBorder">
 	<button type="button" onclick="<%=uicomponent.event("Close")%>" class="btn" href="javascript:void(0);"><%=_ctx.appRes("UIVersionInfo.action.close")%></button>
 </div>
-
-<script language="javascript">
-    function initUserProfilePopup(globalLabels) {
-        require(['SHARED/jquery','SHARED/userPopupPlugin','SHARED/socialUtil'],function(jQuery,userPopup,socialUtil){
-            var labels = {};
-            var profileLabels = jQuery.extend(true, {}, labels, globalLabels);
-            jQuery.each(profileLabels, function(key) {
-              profileLabels[key] =  window.decodeURIComponent(profileLabels[key]);
-            });
-            jQuery(".userAvatarLink").userPopup({
-                restURL: '//' + window.location.host + eXo.social.portal.context + '/' + eXo.social.portal.rest + '/social/people' + '/getPeopleInfo/{0}.json',
-                labels: profileLabels,
-                content: false,
-                defaultPosition: "left",
-                keepAlive: true,
-                maxWidth: "240px"
-            });
-        });
-    }
-</script>

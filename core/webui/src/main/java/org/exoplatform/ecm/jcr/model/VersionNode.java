@@ -37,7 +37,6 @@ import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
-import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 public class VersionNode {
@@ -62,10 +61,10 @@ public class VersionNode {
         path_ = version.getPath();
         ws_ = version.getSession().getWorkspace().getName();
         uuid_ = version.getUUID();
-        if(version.hasNode(NodetypeConstant.JCR_FROZEN_NODE) && version.getNode(NodetypeConstant.JCR_FROZEN_NODE).hasProperty(Utils.EXO_LASTMODIFIER)) {
-          author_ = version.getNode(NodetypeConstant.JCR_FROZEN_NODE).getProperty(Utils.EXO_LASTMODIFIER).getString();
+        if(version.hasNode(Utils.JCR_FROZEN) && version.getNode(Utils.JCR_FROZEN).hasProperty(Utils.EXO_LASTMODIFIER)) {
+          author_ = version.getNode(Utils.JCR_FROZEN).getProperty(Utils.EXO_LASTMODIFIER).getString();
         }
-        if (version.isNodeType(NodetypeConstant.MIX_VERSIONABLE)) {
+        if (version.isNodeType(Utils.MIX_VERSIONABLE)) {
           versionLabels_ = version.getVersionHistory().getVersionLabels(version);
         }
       } catch (Exception e) {
