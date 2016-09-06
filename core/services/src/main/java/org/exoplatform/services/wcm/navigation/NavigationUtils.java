@@ -60,7 +60,7 @@ public class NavigationUtils {
 
   public static final Scope ECMS_NAVIGATION_SCOPE = Scope.CHILDREN;
 
-  private static ExoCache<String, Object> NavigationKeeperCache;
+  private static ExoCache<String, Object> userNavigationCache;
 
   private static Constructor<UserNavigation> userNavigationCtor = null;
 
@@ -72,7 +72,7 @@ public class NavigationUtils {
       userNavigationCtor = UserNavigation.class.getDeclaredConstructor(
                                           new Class[] {UserPortalImpl.class, NavigationContext.class, boolean.class});
       userNavigationCtor.setAccessible(true);
-      NavigationKeeperCache= WCMCoreUtils.getService(CacheService.class).getCacheInstance("CacheUserNavigationKeeper");
+      userNavigationCache= WCMCoreUtils.getService(CacheService.class).getCacheInstance("CacheUserNavigation");
     }catch (Exception e) {
       if (LOG.isErrorEnabled()) {
         LOG.error(e);
@@ -85,7 +85,7 @@ public class NavigationUtils {
   }
   
   public static boolean gotNavigation(String portal, String user, String scope) {
-    if (NavigationKeeperCache.get(portal + " " + user + " " + scope) != null)
+    if (userNavigationCache.get(portal + " " + user + " " + scope) != null)
       return true;
     return false;
   }  
@@ -136,7 +136,7 @@ public class NavigationUtils {
   public static void removeNavigationAsJson (String portalName, String username, String scope) throws Exception
   {
     String key = portalName + " " + username + " " + scope;
-    NavigationKeeperCache.remove(key);
+    userNavigationCache.remove(key);
   }
 
   public static String getNavigationAsJSON(String portalName, String username) throws Exception {
@@ -146,7 +146,7 @@ public class NavigationUtils {
   public static String getNavigationAsJSON(String portalName, String username, Scope scope, String navigationScope) throws Exception {
 
     String key = portalName + " " + username + " " + navigationScope;
-    String navigationData =(String)NavigationKeeperCache.get(key);
+    String navigationData =(String)userNavigationCache.get(key);
     if (navigationData != null) {
       return navigationData;
     }
@@ -168,7 +168,7 @@ public class NavigationUtils {
     UserNode root = userPortal.getNode(navigation, scope == null ? ECMS_NAVIGATION_SCOPE : scope, filterConfig, null);
 
     String ret = createJsonTree(navigation, root);
-    NavigationKeeperCache.put(key, ret);
+    userNavigationCache.put(key, ret);
     return ret;
   }
 
