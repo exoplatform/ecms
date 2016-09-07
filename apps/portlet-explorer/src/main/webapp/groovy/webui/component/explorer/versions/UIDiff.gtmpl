@@ -34,7 +34,7 @@
 						      	<%=uicomponent.getCurrentVersionDate()%>
 						      </th>
 						      <th>
-						      	<%=_ctx.appRes("UIDiff.label.baseVerion")%>:
+						      	<%=_ctx.appRes("UIDiff.label.compareVerion")%>:
 						      	<%=uicomponent.getBaseVersionNum()%>,
 						      	<%=uicomponent.getBaseVersionDate()%>
 						      </th>

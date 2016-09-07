@@ -70,9 +70,7 @@
     String clazz = "" ;
     Locale currentLocale = Util.getPortalRequestContext().getLocale();
     DateFormat df = DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT, currentLocale);
-    if(uicomponent.getCurrentNode().isNodeType("nt:file")) {
-    println "<a id=\"CompareVersion\" class=\"btn btn-primary disabled\" disabled>"+_ctx.appRes("UIVersionInfo.action.compare-versions")+"</a>" ;
-    }
+    println "<a class=\"hidden-phone\" id=\"CompareVersion\" class=\"btn btn-primary disabled\" disabled>"+_ctx.appRes("UIVersionInfo.action.compare-versions")+"</a>" ;
     for(node in uicomponent.getListRecords()) {
       if(clazz == "Even")
         clazz = "";
@@ -91,7 +89,7 @@
       String profileURL = getProfileURL(authorUserName);
       String versionSummary = "";
       if (uicomponent.getVersionLabels(node).length > 0) {
-        versionSummary = uicomponent.getVersionLabels(node)[0].replace(versionNumber,"");
+        versionSummary = uicomponent.getVersionLabels(node)[0].replace("_"+versionNumber,"");
       }
     %>
     <tr>

@@ -25,6 +25,7 @@ import javax.jcr.version.VersionHistory;
 import org.exoplatform.commons.utils.LazyPageList;
 import org.exoplatform.commons.utils.ListAccess;
 import org.exoplatform.commons.utils.ListAccessImpl;
+import org.exoplatform.ecm.webui.component.explorer.UIDocumentWorkspace;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.log.Log;
@@ -61,7 +62,7 @@ import java.util.*;
         @EventConfig(listeners = UIVersionInfo.CompareVersionActionListener.class),
         @EventConfig(listeners = UIVersionInfo.DeleteVersionActionListener.class, confirm = "UIVersionInfo.msg.confirm-delete"),
         @EventConfig(listeners = UIVersionInfo.CloseActionListener.class),
-        @EventConfig(listeners = UIVersionInfo.CloseViewActionListener.class),
+        @EventConfig(listeners = UIVersionInfo.CloseCompareActionListener.class),
         @EventConfig(listeners = UIVersionInfo.AddSummaryActionListener.class)
     }
 )
@@ -75,8 +76,8 @@ public class UIVersionInfo extends UIContainer  {
   private UIPageIterator uiPageIterator_ ;
   private List<VersionNode> listVersion = new ArrayList<VersionNode>() ;
   public UIVersionInfo() throws Exception {
-    addChild(UIViewVersion.class, null, null).setRendered(false);
-    addChild(UIDiff.class, null, null).setRendered(false) ;
+    //addChild(UIViewVersion.class, null, null).setRendered(false);
+    //addChild(UIDiff.class, null, null).setRendered(false) ;
     uiPageIterator_ = addChild(UIPageIterator.class, null, "VersionInfoIterator").setRendered(false);
   }
 
@@ -127,7 +128,8 @@ public class UIVersionInfo extends UIContainer  {
                                                  .getVersionHistory()
                                                  .getRootVersion(), uiExplorer.getSession());
       curentVersion_ = rootVersion_;
-      getChild(UIViewVersion.class).update();
+      UIDocumentWorkspace uiDocumentWorkspace = getAncestorOfType(UIDocumentWorkspace.class);
+      uiDocumentWorkspace.getChild(UIViewVersion.class).update();
       updateGrid();
     } catch (Exception e) {
       if (LOG.isErrorEnabled()) {
@@ -149,12 +151,13 @@ public class UIVersionInfo extends UIContainer  {
   static  public class ViewVersionActionListener extends EventListener<UIVersionInfo> {
     public void execute(Event<UIVersionInfo> event) throws Exception {
       UIVersionInfo uiVersionInfo = event.getSource();
-      for(UIComponent uiChild : uiVersionInfo.getChildren()) {
+      UIDocumentWorkspace uiDocumentWorkspace = uiVersionInfo.getAncestorOfType(UIDocumentWorkspace.class);
+      for(UIComponent uiChild : uiDocumentWorkspace.getChildren()) {
         uiChild.setRendered(false) ;
       }
       String objectId = event.getRequestContext().getRequestParameter(OBJECTID) ;
       uiVersionInfo.curentVersion_  = uiVersionInfo.rootVersion_.findVersionNode(objectId) ;
-      UIViewVersion uiViewVersion = uiVersionInfo.getChild(UIViewVersion.class) ;
+      UIViewVersion uiViewVersion = uiDocumentWorkspace.getChild(UIViewVersion.class) ;
       if ( !(uiVersionInfo.curentVersion_.getName().equals("jcr:rootVersion"))) {
         Node frozenNode = uiVersionInfo.curentVersion_.getNode("jcr:frozenNode") ;
         uiViewVersion.setNode(frozenNode) ;
@@ -166,7 +169,7 @@ public class UIVersionInfo extends UIContainer  {
         return ;
       }
       uiViewVersion.setRendered(true) ;
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiVersionInfo) ;
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiDocumentWorkspace) ;
     }
   }
 
@@ -262,17 +265,18 @@ public class UIVersionInfo extends UIContainer  {
   static  public class CompareVersionActionListener extends EventListener<UIVersionInfo> {
     public void execute(Event<UIVersionInfo> event) throws Exception {
       UIVersionInfo uiVersionInfo = event.getSource();
-      for(UIComponent uiChild : uiVersionInfo.getChildren()) {
+      UIDocumentWorkspace uiDocumentWorkspace = uiVersionInfo.getAncestorOfType(UIDocumentWorkspace.class);
+      for(UIComponent uiChild : uiDocumentWorkspace.getChildren()) {
         uiChild.setRendered(false) ;
       }
       String version1 = event.getRequestContext().getRequestParameter("versions").split(",")[0];
       String version2 = event.getRequestContext().getRequestParameter("versions").split(",")[1];
-      UIDiff uiDiff = uiVersionInfo.getChild(UIDiff.class) ;
+      UIDiff uiDiff = uiDocumentWorkspace.getChild(UIDiff.class) ;
       Node node = uiVersionInfo.getCurrentNode() ;
       VersionHistory versionHistory = node.getVersionHistory() ;
       uiDiff.setVersions(versionHistory.getVersion(version1),versionHistory.getVersion(version2));
       uiDiff.setRendered(true) ;
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiVersionInfo) ;
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiDocumentWorkspace) ;
     }
   }
 
@@ -301,13 +305,26 @@ public class UIVersionInfo extends UIContainer  {
     }
   }
 
-  static public class CloseViewActionListener extends EventListener<UIVersionInfo> {
+  /*static public class CloseViewActionListener extends EventListener<UIVersionInfo> {
     public void execute(Event<UIVersionInfo> event) throws Exception {
       UIVersionInfo uiVersionInfo = event.getSource();
       UIViewVersion uiViewVersion = uiVersionInfo.getChild(UIViewVersion.class);
       if(uiViewVersion.isRendered()) {
         uiViewVersion.setRendered(false);
         event.getRequestContext().addUIComponentToUpdateByAjax(uiVersionInfo);
+        return;
+      }
+    }
+  }*/
+
+  static public class CloseCompareActionListener extends EventListener<UIVersionInfo> {
+    public void execute(Event<UIVersionInfo> event) throws Exception {
+      UIVersionInfo uiVersionInfo = event.getSource();
+      UIDocumentWorkspace uiDocumentWorkspace = uiVersionInfo.getAncestorOfType(UIDocumentWorkspace.class);
+      UIDiff uiDiff = uiDocumentWorkspace.getChild(UIDiff.class);
+      if(uiDiff.isRendered()) {
+        uiDiff.setRendered(false);
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiDocumentWorkspace);
         return;
       }
     }
@@ -319,7 +336,7 @@ public class UIVersionInfo extends UIContainer  {
       String objectId = event.getRequestContext().getRequestParameter(OBJECTID) ;
       uiVersionInfo.curentVersion_  = uiVersionInfo.rootVersion_.findVersionNode(objectId) ;
       String currentVersionName = uiVersionInfo.curentVersion_.getName();
-      String summary = event.getRequestContext().getRequestParameter("value") + currentVersionName;
+      String summary = event.getRequestContext().getRequestParameter("value") + "_" + currentVersionName;
       UIJCRExplorer uiExplorer = uiVersionInfo.getAncestorOfType(UIJCRExplorer.class) ;
       UIApplication uiApp = uiVersionInfo.getAncestorOfType(UIApplication.class) ;
       Node currentNode = uiExplorer.getCurrentNode() ;

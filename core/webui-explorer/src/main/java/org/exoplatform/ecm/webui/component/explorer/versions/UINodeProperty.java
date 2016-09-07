@@ -30,6 +30,7 @@ import javax.jcr.nodetype.NodeTypeManager;
 import javax.jcr.nodetype.PropertyDefinition;
 
 import org.exoplatform.container.PortalContainer;
+import org.exoplatform.ecm.webui.component.explorer.UIDocumentWorkspace;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
@@ -61,7 +62,7 @@ public class UINodeProperty extends UIForm{
     NodeType ntVersion = nodeTypeManager.getNodeType("nt:version") ;
     NodeType ntVersionHistory = nodeTypeManager.getNodeType("nt:versionHistory") ;
     NodeType mixVersionable = nodeTypeManager.getNodeType("mix:versionable") ;
-    UIVersionInfo uiVersionInfo = getAncestorOfType(UIVersionInfo.class) ;
+    UIVersionInfo uiVersionInfo = getAncestorOfType(UIDocumentWorkspace.class).getChild(UIVersionInfo.class) ;
     Node frozenNode = uiVersionInfo.getCurrentVersionNode().getNode("jcr:frozenNode") ;
     for(PropertyIterator propertyIter = frozenNode.getProperties(); propertyIter.hasNext() ;) {
       Property property = propertyIter.nextProperty() ;
