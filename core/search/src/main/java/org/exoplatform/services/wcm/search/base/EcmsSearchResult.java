@@ -27,17 +27,21 @@ import org.exoplatform.commons.api.search.data.SearchResult;
 public class EcmsSearchResult extends SearchResult {
 
   private String fileType_;
+  private String nodePath;
   
   public EcmsSearchResult(String url,
+                          String urlOnImage,
                           String title,
                           String excerpt,
                           String detail,
                           String imageUrl,
                           long date,
                           long relevancy,
-                          String fileType) {
-    super(url, title, excerpt, detail, imageUrl, date, relevancy);
+                          String fileType,
+                          String nodePath) {
+    super(url, urlOnImage, title, excerpt, detail, imageUrl, date, relevancy);
     this.fileType_ = fileType;
+    this.nodePath = nodePath;
   }
   
   public String getFileType() {
@@ -46,6 +50,14 @@ public class EcmsSearchResult extends SearchResult {
   
   public void setFileType(String fileType) {
     this.fileType_ = fileType;
+  }
+
+  public String getNodePath() {
+    return nodePath;
+  }
+    
+  public void setNodePath(String nodePath) {
+    this.nodePath = nodePath;
   }
   
 }

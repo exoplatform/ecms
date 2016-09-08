@@ -763,7 +763,12 @@ public class Utils {
       }
     }
 
-    String portletRealID = org.exoplatform.wcm.webui.Utils.getRealPortletId((PortletRequestContext) WebuiRequestContext.getCurrentInstance());
+    String portletRealID;
+    if(WebuiRequestContext.getCurrentInstance() instanceof PortletRequestContext) {
+      portletRealID = org.exoplatform.wcm.webui.Utils.getRealPortletId((PortletRequestContext) WebuiRequestContext.getCurrentInstance());
+    } else {
+      portletRealID = "";
+    }
     StringBuffer sb = new StringBuffer();
     StringBuffer actionsb = new StringBuffer();
     String repo = ((ManageableRepository) orgNode.getSession().getRepository()).getConfiguration().getName();

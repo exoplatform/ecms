@@ -29,6 +29,9 @@
     <type>org.exoplatform.wcm.connector.collaboration.CommentConnector</type>
   </component>
   <component>
+    <type>org.exoplatform.wcm.connector.documents.DocumentConnector</type>
+  </component>
+  <component>
     <type>org.exoplatform.wcm.connector.collaboration.RssConnector</type>
   </component>
   <component>

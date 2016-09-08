@@ -55,6 +55,7 @@ import javax.jcr.ValueFormatException;
 import javax.jcr.nodetype.NodeType;
 import javax.jcr.nodetype.PropertyDefinition;
 import javax.ws.rs.core.MediaType;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
@@ -805,6 +806,11 @@ public class Utils {
   public static String getNodeTypeIcon(Node node, String appended)
       throws RepositoryException {
     return getNodeTypeIcon(node, appended, null);
+  }
+  
+  public static String getFileType(Node node) throws Exception {
+    return getNodeTypeIcon(node, "").
+            replace(".", "").replace("/", "").replace("\\","").replace(".", "");
   }
 
   /**
