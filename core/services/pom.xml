@@ -7,7 +7,7 @@
     <version>4.4.x-SNAPSHOT</version>
   </parent>
   <artifactId>ecms-core-services</artifactId>
-  <name>eXo CMS Service</name>
+  <name>eXo PLF:: CMS Service</name>
   <description>eXo CMS Service</description>
   <dependencies>
     <dependency>

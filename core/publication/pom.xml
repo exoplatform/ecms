@@ -8,7 +8,7 @@
   </parent>
   <artifactId>ecms-core-publication</artifactId>
   <packaging>jar</packaging>
-  <name>eXo Publication Service</name>
+  <name>eXo PLF:: Publication Service</name>
   <description>eXo Publication Service</description>
   <dependencies>
     <dependency>

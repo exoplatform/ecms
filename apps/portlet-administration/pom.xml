@@ -8,7 +8,7 @@
   </parent>
   <artifactId>ecms-apps-portlet-administration</artifactId>
   <packaging>war</packaging>
-  <name>eXo Site Administration Portlet</name>
+  <name>eXo PLF:: Site Administration Portlet</name>
   <description>eXo DMS Portlet Java Content: ECM Admin</description>
   <dependencies>
     <!-- We want to be sure to use the right version in the dependency plugin but it's not required in the package -->

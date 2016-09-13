@@ -8,7 +8,7 @@
   </parent>
   <artifactId>ecms-apps-portlet-explorer</artifactId>
   <packaging>war</packaging>
-  <name>eXo Site Explorer Portlet</name>
+  <name>eXo PLF:: Site Explorer Portlet</name>
   <description>eXo DMS Portlet Java Content: File Explorer, Browser Content, ECM Admin</description>
   <dependencies>
     <!-- We want to be sure to use the right version in the dependency plugin but it's not required in the package -->

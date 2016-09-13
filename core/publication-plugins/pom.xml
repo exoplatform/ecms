@@ -8,7 +8,7 @@
   </parent>
   <artifactId>ecms-core-publication-plugins</artifactId>
   <packaging>jar</packaging>
-  <name>eXo Publication Plugins</name>
+  <name>eXo PLF:: Publication Plugins</name>
   <description>eXo Publication Plugins</description>
   <dependencies>
     <dependency>

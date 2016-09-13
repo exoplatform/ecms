@@ -8,7 +8,7 @@
   </parent>
   <artifactId>ecms-ext-fastcontentcreator-portlet</artifactId>
   <packaging>war</packaging>
-  <name>eXo WCM Fast Content Creator Portlet</name>
+  <name>eXo PLF:: WCM Fast Content Creator Portlet</name>
   <description>eXo WCM Fast Content Creator Portlet</description>
   <dependencies>
     <dependency>

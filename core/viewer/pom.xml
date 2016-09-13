@@ -7,7 +7,7 @@
     <version>4.4.x-SNAPSHOT</version>
   </parent>
   <artifactId>ecms-core-viewer</artifactId>
-  <name>eXo DMS Document Viewer</name>
+  <name>eXo PLF:: DMS Document Viewer</name>
   <description>eXo PDF Viewer</description>
   <dependencies>
     <dependency>

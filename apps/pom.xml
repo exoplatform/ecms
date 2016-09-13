@@ -8,7 +8,7 @@
   </parent>
   <artifactId>ecms-apps</artifactId>
   <packaging>pom</packaging>
-  <name>eXo ECM Suite :: Apps</name>
+  <name>eXo PLF:: ECM Suite :: Apps</name>
   <description>eXo Entreprise Content Management Suite :: Applications</description>
   <modules>
     <module>portlet-administration</module>

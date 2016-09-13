@@ -8,7 +8,7 @@
   </parent>
   <artifactId>ecms-core-webui-presentation</artifactId>
   <packaging>jar</packaging>
-  <name>eXo WCM Presentation Portlet Webui</name>
+  <name>eXo PLF:: WCM Presentation Portlet Webui</name>
   <dependencies>
     <dependency>
       <groupId>commons-lang</groupId>

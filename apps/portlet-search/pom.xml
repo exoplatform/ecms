@@ -8,7 +8,7 @@
   </parent>
   <artifactId>ecms-apps-portlet-search</artifactId>
   <packaging>war</packaging>
-  <name>eXo WCM Search Portlet Suites</name>
+  <name>eXo PLF:: WCM Search Portlet Suites</name>
   <dependencies>
     <dependency>
       <groupId>javax.jcr</groupId>

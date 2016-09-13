@@ -8,7 +8,7 @@
   </parent>
   <artifactId>ecms-packaging-wcm-webapp</artifactId>
   <packaging>war</packaging>
-  <name>eXo WCM Extension WAR</name>
+  <name>eXo PLF:: WCM Extension WAR</name>
   <description>eXo WCM Extension WAR's configuration</description>
   <dependencies>
     <dependency>

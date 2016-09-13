@@ -8,7 +8,7 @@
   </parent>
   <artifactId>ecms-apps-resources-wcm</artifactId>
   <packaging>war</packaging>
-  <name>eXo WCM Resources</name>
+  <name>eXo PLF:: WCM Resources</name>
 
   <dependencies>
     <!-- We want to be sure to use the right version in the dependency plugin but it's not required in the package -->

@@ -8,7 +8,7 @@
   </parent>
   <artifactId>ecms-ext-authoring-apps</artifactId>
   <packaging>war</packaging>
-  <name>eXo ECMS Extensions Staging Apps Addons</name>
+  <name>eXo PLF:: ECMS Extensions Staging Apps Addons</name>
   <dependencies>
     <dependency>
       <groupId>javax.jcr</groupId>

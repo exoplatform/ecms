@@ -8,7 +8,7 @@
   </parent>
   <artifactId>ecms-core</artifactId>
   <packaging>pom</packaging>
-  <name>eXo ECM Suite :: Core</name>
+  <name>eXo PLF:: ECM Suite :: Core</name>
   <description>eXo Entreprise Content Management Suite :: Core Components</description>
   <modules>
     <module>services</module>

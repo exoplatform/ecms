@@ -8,7 +8,7 @@
   </parent>
   <artifactId>ecms-ext-webui</artifactId>
   <packaging>jar</packaging>
-  <name>eXo Contextmenu - View Informations</name>
+  <name>eXo PLF:: Contextmenu - View Informations</name>
   <description>Action View Information on Right click popup menu</description>
   <dependencies>
     <dependency>

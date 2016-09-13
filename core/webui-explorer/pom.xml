@@ -8,7 +8,7 @@
   </parent>
   <artifactId>ecms-core-webui-explorer</artifactId>
   <packaging>jar</packaging>
-  <name>eXo Explorer Portlet Java Content</name>
+  <name>eXo PLF:: Explorer Portlet Java Content</name>
   <description>eXo Explorer Portlet Java Content: File Explorer</description>
   <dependencies>
     <dependency>

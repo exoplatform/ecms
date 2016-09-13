@@ -8,7 +8,7 @@
   </parent>
   <artifactId>ecms-ext-authoring</artifactId>
   <packaging>pom</packaging>
-  <name>eXo ECM Suite :: Ext :: Authoring</name>
+  <name>eXo PLF:: ECM Suite :: Ext :: Authoring</name>
   <description>eXo Entreprise Content Management Suite :: Extensions :: Authoring</description>
   <modules>
     <module>services</module>

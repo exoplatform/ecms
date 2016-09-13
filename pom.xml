@@ -11,7 +11,7 @@
   <artifactId>ecms</artifactId>
   <version>4.4.x-SNAPSHOT</version>
   <packaging>pom</packaging>
-  <name>eXo ECM Suite</name>
+  <name>eXo PLF:: ECM Suite</name>
   <description>eXo Entreprise Content Management Suite</description>
   <modules>
     <module>core</module>

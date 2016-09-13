@@ -7,7 +7,7 @@
     <version>4.4.x-SNAPSHOT</version>
   </parent>
   <artifactId>ecms-testsuite-test</artifactId>
-  <name>eXo ECMS Testing</name>
+  <name>eXo PLF:: ECMS Testing</name>
   <dependencies>
     <dependency>
       <groupId>javax.jcr</groupId>

@@ -8,7 +8,7 @@
   </parent>
   <artifactId>ecms-ext-authoring-webui</artifactId>
   <packaging>jar</packaging>
-  <name>eXo ECMS Extensions Staging Webui Addons</name>
+  <name>eXo PLF:: ECMS Extensions Staging Webui Addons</name>
   <dependencies>
     <dependency>
       <groupId>javax.jcr</groupId>

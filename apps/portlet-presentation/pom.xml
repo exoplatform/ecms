@@ -8,7 +8,7 @@
   </parent>
   <artifactId>ecms-apps-portlet-presentation</artifactId>
   <packaging>war</packaging>
-  <name>eXo WCM Presentation Portlet Suites</name>
+  <name>eXo PLF:: WCM Presentation Portlet Suites</name>
   <dependencies>
     <dependency>
       <groupId>commons-lang</groupId>

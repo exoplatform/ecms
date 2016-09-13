@@ -8,7 +8,7 @@
   </parent>
   <artifactId>ecms-ext-fastcontentcreator</artifactId>
   <packaging>pom</packaging>
-  <name>eXo ECM Suite :: Ext :: Fast Content Creator</name>
+  <name>eXo PLF:: ECM Suite :: Ext :: Fast Content Creator</name>
   <description>eXo Entreprise Content Management Suite :: Fast Content Creator</description>
   <modules>
     <module>portlet</module>

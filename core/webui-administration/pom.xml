@@ -8,7 +8,7 @@
   </parent>
   <artifactId>ecms-core-webui-administration</artifactId>
   <packaging>jar</packaging>
-  <name>eXo Site Administration Portlet</name>
+  <name>eXo PLF:: Site Administration Portlet</name>
   <description>eXo DMS Portlet Java Content: ECM Admin</description>
   <dependencies>
     <dependency>

@@ -8,7 +8,7 @@
   </parent>
   <artifactId>ecms-ext-data-injector</artifactId>
   <packaging>jar</packaging>
-  <name>eXo DMS data injector</name>
+  <name>eXo PLF:: DMS data injector</name>
   <description>eXo DMS data injector service</description>
   <dependencies>
     <dependency>

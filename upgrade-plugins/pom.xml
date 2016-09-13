@@ -8,7 +8,7 @@
   </parent>
   <artifactId>ecms-upgrade-plugins</artifactId>
   <packaging>jar</packaging>
-  <name>eXo ECMS Upgrade Plugins</name>
+  <name>eXo PLF:: ECMS Upgrade Plugins</name>
   <description>eXo ECMS Upgrade Plugins</description>
   <dependencies>
     <dependency>

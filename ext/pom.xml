@@ -8,7 +8,7 @@
   </parent>
   <artifactId>ecms-ext</artifactId>
   <packaging>pom</packaging>
-  <name>eXo ECM Suite :: Ext</name>
+  <name>eXo PLF:: ECM Suite :: Ext</name>
   <description>eXo Entreprise Content Management Suite :: Extensions</description>
   <modules>
     <module>authoring</module>
