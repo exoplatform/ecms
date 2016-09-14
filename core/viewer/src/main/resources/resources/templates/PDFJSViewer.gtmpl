@@ -51,7 +51,7 @@ if (maximumPage > 0 && maximumPage <= pdfViewerService.getMaxPages() && fileSize
         <div id="sidebarContainer">
             <div id="toolbarSidebar">
                 <div class="splitToolbarButton toggled btn-group">
-                    <button id="viewThumbnail" class="btn active" data-placement="right" rel="tooltip" data-original-title="Show Thumbnails" tabindex="2" data-l10n-id="thumbs">
+                    <button id="viewThumbnail" class="btn hidden" data-placement="right" rel="tooltip" data-original-title="Show Thumbnails" tabindex="2" data-l10n-id="thumbs">
                         <i class="uiIconEcmsViewDefault uiIconEcmsViewIcons"></i>
                     </button>
                     <!--<button id="viewOutline" class="btn" data-placement="bottom" rel="tooltip" data-original-title="Show Document Outline"  tabindex="3" data-l10n-id="outline">
