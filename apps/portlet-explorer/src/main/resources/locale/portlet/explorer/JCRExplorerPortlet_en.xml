@@ -1483,11 +1483,12 @@
   -->
   <UIDiff>
     <label>
+      <backTo>Back to version history</backTo>
       <diffTitle>Compare Versions</diffTitle>
       <noChange>No change between two versions</noChange>
-      <compareVerion>Version</compareVerion>
+      <compareVerion>Version {0} by {1}</compareVerion>
       <can-not-compare>Failed to compare two versions</can-not-compare>
-      <DateChange>on {0}</DateChange>
+      <DateChange>On {0}</DateChange>
       <PreviousAndNextCompare>Changes from {0} to {1}</PreviousAndNextCompare>
       <ComparedWith>Compared With</ComparedWith>
     </label>

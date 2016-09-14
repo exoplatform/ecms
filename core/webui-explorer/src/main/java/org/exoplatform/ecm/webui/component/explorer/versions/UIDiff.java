@@ -23,8 +23,11 @@ import java.util.List;
 
 import javax.jcr.Node;
 import javax.jcr.version.Version;
+import javax.jcr.version.VersionHistory;
 
 import org.apache.commons.lang.StringUtils;
+import org.exoplatform.ecm.webui.component.explorer.UIDocumentWorkspace;
+import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.cms.impl.DMSConfiguration;
 import org.exoplatform.services.document.DocumentReaderService;
 import org.exoplatform.services.document.diff.AddDelta;
@@ -37,7 +40,10 @@ import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
+import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIComponent;
+import org.exoplatform.webui.event.Event;
+import org.exoplatform.webui.event.EventListener;
 
 /**
  * Created by The eXo Platform SARL
@@ -46,20 +52,34 @@ import org.exoplatform.webui.core.UIComponent;
  * May 3, 2007
  */
 
-@ComponentConfig(template = "app:/groovy/webui/component/explorer/versions/UIDiff.gtmpl")
+@ComponentConfig(
+        template = "app:/groovy/webui/component/explorer/versions/UIDiff.gtmpl",
+        events = {
+                @EventConfig(listeners = UIDiff.CompareActionListener.class),
+                @EventConfig(listeners = UIDiff.CloseCompareActionListener.class)
+        }
+)
 
 public class UIDiff extends UIComponent {
+
+  public static final String FROM_PARAM = "from";
+
+  public static final String TO_PARAM = "to";
 
   //name, date, ws, path
   private String baseVersionName_;
   private String baseVersionDate_;
   private String baseVersionWs_;
   private String baseVersionPath_;
+  private String baseVersionAuthor_;
+  private String[] baseVersionLabels_;
   
   private String versionName_;
   private String versionDate_;
   private String versionWs_;
   private String versionPath_;
+  private String versionAuthor_;
+  private String[] versionLabels_;
   
   private boolean versionCompareable_ = true ;
 
@@ -69,11 +89,25 @@ public class UIDiff extends UIComponent {
     baseVersionDate_ = formatDate(baseVersion.getCreated());
     baseVersionWs_ = baseVersion.getSession().getWorkspace().getName();
     baseVersionPath_ = baseVersion.getPath();
+    if(baseVersion.hasNode(Utils.JCR_FROZEN) && baseVersion.getNode(Utils.JCR_FROZEN).hasProperty(Utils.EXO_LASTMODIFIER)) {
+      baseVersionAuthor_ = baseVersion.getNode(Utils.JCR_FROZEN).getProperty(Utils.EXO_LASTMODIFIER).getString();
+    }
+    UIDocumentWorkspace uiDocumentWorkspace = getAncestorOfType(UIDocumentWorkspace.class);
+    UIVersionInfo uiVersionInfo = uiDocumentWorkspace.getChild(UIVersionInfo.class);
+    if (uiVersionInfo.getCurrentNode().isNodeType(Utils.MIX_VERSIONABLE)) {
+      baseVersionLabels_ = uiVersionInfo.getCurrentNode().getVersionHistory().getVersionLabels(baseVersion);
+    }
     
     versionName_ = version.getName();
     versionDate_ = formatDate(version.getCreated());
     versionWs_ = version.getSession().getWorkspace().getName();
     versionPath_ = version.getPath();
+    if(version.hasNode(Utils.JCR_FROZEN) && version.getNode(Utils.JCR_FROZEN).hasProperty(Utils.EXO_LASTMODIFIER)) {
+      versionAuthor_ = version.getNode(Utils.JCR_FROZEN).getProperty(Utils.EXO_LASTMODIFIER).getString();
+    }
+    if (uiVersionInfo.getCurrentNode().isNodeType(Utils.MIX_VERSIONABLE)) {
+      versionLabels_ = uiVersionInfo.getCurrentNode().getVersionHistory().getVersionLabels(version);
+    }
   }
   
   public void setVersions(Version baseVersion, String versionName, 
@@ -122,6 +156,22 @@ public class UIDiff extends UIComponent {
     return versionDate_;
   }
 
+  public String getBaseVersionAuthor_() {
+    return baseVersionAuthor_;
+  }
+
+  public String[] getBaseVersionLabels_() {
+    return baseVersionLabels_;
+  }
+
+  public String getVersionAuthor_() {
+    return versionAuthor_;
+  }
+
+  public String[] getVersionLabels_() {
+    return versionLabels_;
+  }
+
   private String formatDate(Calendar calendar) {
     DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
     return dateFormat.format(calendar.getTime()) ;
@@ -168,5 +218,31 @@ public class UIDiff extends UIComponent {
     SessionProvider provider = systemWS.equals(ws) ? WCMCoreUtils.getSystemSessionProvider() :
                                                      WCMCoreUtils.getUserSessionProvider();
     return (Node)provider.getSession(ws, repo).getItem(path);
+  }
+
+  static public class CloseCompareActionListener extends EventListener<UIDiff> {
+    public void execute(Event<UIDiff> event) throws Exception {
+      UIDiff uiDiff = event.getSource();
+      if(uiDiff.isRendered()) {
+        uiDiff.setRendered(false);
+      }
+      UIDocumentWorkspace uiDocumentWorkspace = uiDiff.getAncestorOfType(UIDocumentWorkspace.class);
+      UIVersionInfo uiVersionInfo = uiDocumentWorkspace.getChild(UIVersionInfo.class);
+      uiVersionInfo.setRendered(true);
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiDocumentWorkspace) ;
+    }
+  }
+
+  static public class CompareActionListener extends EventListener<UIDiff> {
+    public void execute(Event<UIDiff> event) throws Exception {
+      UIDiff uiDiff = (UIDiff) event.getSource();
+      String fromVersionName = event.getRequestContext().getRequestParameter(FROM_PARAM);
+      String toVersionName = event.getRequestContext().getRequestParameter(TO_PARAM);
+      UIDocumentWorkspace uiDocumentWorkspace = uiDiff.getAncestorOfType(UIDocumentWorkspace.class);
+      UIVersionInfo uiVersionInfo = uiDocumentWorkspace.getChild(UIVersionInfo.class);
+      Node node = uiVersionInfo.getCurrentNode() ;
+      VersionHistory versionHistory = node.getVersionHistory() ;
+      uiDiff.setVersions(versionHistory.getVersion(fromVersionName), versionHistory.getVersion(toVersionName));
+    }
   }
 }

@@ -62,7 +62,6 @@ import java.util.*;
         @EventConfig(listeners = UIVersionInfo.CompareVersionActionListener.class),
         @EventConfig(listeners = UIVersionInfo.DeleteVersionActionListener.class, confirm = "UIVersionInfo.msg.confirm-delete"),
         @EventConfig(listeners = UIVersionInfo.CloseActionListener.class),
-        @EventConfig(listeners = UIVersionInfo.CloseCompareActionListener.class),
         @EventConfig(listeners = UIVersionInfo.AddSummaryActionListener.class)
     }
 )
@@ -146,6 +145,14 @@ public class UIVersionInfo extends UIContainer  {
   
   public void setCurrentNode(Node node) {
     node_ = NodeLocation.getNodeLocationByNode(node);
+  }
+
+  public List<VersionNode> getListVersion() {
+    return listVersion;
+  }
+
+  public void setListVersion(List<VersionNode> listVersion) {
+    this.listVersion = listVersion;
   }
 
   static  public class ViewVersionActionListener extends EventListener<UIVersionInfo> {
@@ -274,7 +281,11 @@ public class UIVersionInfo extends UIContainer  {
       UIDiff uiDiff = uiDocumentWorkspace.getChild(UIDiff.class) ;
       Node node = uiVersionInfo.getCurrentNode() ;
       VersionHistory versionHistory = node.getVersionHistory() ;
-      uiDiff.setVersions(versionHistory.getVersion(version1),versionHistory.getVersion(version2));
+      if(Integer.parseInt(version1) < Integer.parseInt(version2)) {
+        uiDiff.setVersions(versionHistory.getVersion(version1), versionHistory.getVersion(version2));
+      } else {
+        uiDiff.setVersions(versionHistory.getVersion(version2), versionHistory.getVersion(version1));
+      }
       uiDiff.setRendered(true) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiDocumentWorkspace) ;
     }
@@ -316,19 +327,6 @@ public class UIVersionInfo extends UIContainer  {
       }
     }
   }*/
-
-  static public class CloseCompareActionListener extends EventListener<UIVersionInfo> {
-    public void execute(Event<UIVersionInfo> event) throws Exception {
-      UIVersionInfo uiVersionInfo = event.getSource();
-      UIDocumentWorkspace uiDocumentWorkspace = uiVersionInfo.getAncestorOfType(UIDocumentWorkspace.class);
-      UIDiff uiDiff = uiDocumentWorkspace.getChild(UIDiff.class);
-      if(uiDiff.isRendered()) {
-        uiDiff.setRendered(false);
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiDocumentWorkspace);
-        return;
-      }
-    }
-  }
 
   static  public class AddSummaryActionListener extends EventListener<UIVersionInfo> {
     public void execute(Event<UIVersionInfo> event) throws Exception {

@@ -17,7 +17,7 @@
     import org.exoplatform.social.core.identity.model.Identity;
     import org.exoplatform.social.core.identity.provider.OrganizationIdentityProvider;
     import org.exoplatform.social.core.service.LinkProvider;
-    import org.exoplatform.social.webui.Utils
+    import org.exoplatform.social.webui.Utils;
 
   public String getAvatarURL(String userName) {
       String profileAvatar = null;
