@@ -1,4 +1,5 @@
 <%
+    import org.apache.commons.lang.StringEscapeUtils;
     import org.exoplatform.ecm.webui.component.explorer.versions.UIVersionInfo;
 	import org.exoplatform.services.document.diff.Delta ;
     import org.exoplatform.social.core.identity.model.Identity;
@@ -22,6 +23,24 @@
 
 	def rcontext = _ctx.getRequestContext() ;
 	def jm = rcontext.getJavascriptManager();
+
+    String statusTitle = StringEscapeUtils.escapeJavaScript(_ctx.appRes("UserProfilePopup.label.Loading"));
+    String connectLabel = StringEscapeUtils.escapeJavaScript(_ctx.appRes("UserProfilePopup.label.Connect"));
+    String confirmLabel = StringEscapeUtils.escapeJavaScript(_ctx.appRes("UserProfilePopup.label.Confirm"));
+    String cancelRequestLabel = StringEscapeUtils.escapeJavaScript(_ctx.appRes("UserProfilePopup.label.CancelRequest"));
+    String removeConnectionLabel = StringEscapeUtils.escapeJavaScript(_ctx.appRes("UserProfilePopup.label.RemoveConnection"));
+    String ignoreLabel = StringEscapeUtils.escapeJavaScript(_ctx.appRes("UserProfilePopup.label.Ignore"));
+
+    String labels = """ {
+    StatusTitle: '${statusTitle}',
+    Connect: '${connectLabel}',
+    Confirm: '${confirmLabel}',
+    CancelRequest: '${cancelRequestLabel}',
+    RemoveConnection: '${removeConnectionLabel}',
+    Ignore: '${ignoreLabel}'
+    } """;
+
+    jm.require("SHARED/UIVersionInfo", "uiVersionInfo").addScripts("uiVersionInfo.initUserProfilePopup($labels);");
 %>
 <div class="uiDiff">
     <div class="headTitle">
@@ -54,8 +73,10 @@
 						String fromVersion = _ctx.appRes("UIDiff.label.compareVerion");
 						String fromVersionName = uicomponent.getBaseVersionNum();
 						fromVersion = fromVersion.replace("{0}", fromVersionName);
-						fromVersion = fromVersion.replace("{1}","<a href='javascript:void(0);'>"+getProfileFullName(uicomponent.getBaseVersionAuthor_())+"</a>");
                         String fromVersionProfileURL = getProfileURL(uicomponent.getBaseVersionAuthor_());
+						fromVersion = fromVersion.replace("{1}","<a class='userAvatarLink' href='$fromVersionProfileURL'>"+getProfileFullName(uicomponent.getBaseVersionAuthor_())+"</a>");
+						String fromVersionDate = _ctx.appRes("UIDiff.label.compareVerion");
+						fromVersionDate = fromVersionDate.replace("{0}", uicomponent.getCurrentVersionDate());
                         String fromVersionSummary = "";
                         if (uicomponent.getBaseVersionLabels_().length > 0) {
                             fromVersionSummary = uicomponent.getBaseVersionLabels_()[0].replace("_"+fromVersionName,"");
@@ -74,8 +95,10 @@
 						String toVersion = _ctx.appRes("UIDiff.label.compareVerion");
 						String toVersionName = uicomponent.getCurrentVersionNum();
 						toVersion = toVersion.replace("{0}", toVersionName);
-						toVersion = toVersion.replace("{1}","<a href='javascript:void(0);'>"+getProfileFullName(uicomponent.getVersionAuthor_())+"</a>");
                         String toVersionProfileURL = getProfileURL(uicomponent.getVersionAuthor_());
+						toVersion = toVersion.replace("{1}","<a class='userAvatarLink' href='$toVersionProfileURL'>"+getProfileFullName(uicomponent.getVersionAuthor_())+"</a>");
+						String toVersionDate = _ctx.appRes("UIDiff.label.compareVerion");
+						toVersionDate = toVersionDate.replace("{0}", uicomponent.getBaseVersionDate());
                         String toVersionSummary = "";
                         if (uicomponent.getVersionLabels_().length > 0) {
                             toVersionSummary = uicomponent.getVersionLabels_()[0].replace("_"+toVersionName,"");
@@ -96,7 +119,7 @@
 					    <div class="uiBox pull-left">
                             <h6 class="title center">$fromVersion</h6>
                             <div class="boxVersionDetail">
-                                <span>On <%=uicomponent.getCurrentVersionDate()%></span>
+                                <span>$fromVersionDate</span>
                                 <span>$fromVersionSummary</span>
                                 <a class="changes" href="$previousCompareLink"><%= previousCompare %></a>
                             </div>
@@ -104,17 +127,19 @@
                         <div class="uiBox pull-right">
                             <h6 class="title center">$toVersion</h6>
                             <div class="boxVersionDetail">
-                                <span>On <%=uicomponent.getBaseVersionDate()%></span>
+                                <span>$toVersionDate</span>
                                 <span>$toVersionSummary</span>
                                 <a class="changes" href="$nextCompareLink"><%= nextCompare %></a>
                             </div>
                         </div>
 
+                        <div class="center comparedwith"><%=_ctx.appRes("UIDiff.label.ComparedWith")%></div>
+
 						<table class="uiGrid table table-hover table-striped">
 						  <tbody>
 						  <%  
 						    def i=1;
-						  	for(Delta delta in uicomponent.getDeltas()){		    		
+						  	for(Delta delta in uicomponent.getDeltas()){
 						  	  //jm.require("SHARED/ecm-utils", "ecmutil").addScripts("ecmutil.ECMUtils.insertContentToIframe('$i');") ;
 			    		%>		    		
 		    			<tr onload="eXo.ecm.ECMUtils.insertContentToIframe('$i') ;"> 

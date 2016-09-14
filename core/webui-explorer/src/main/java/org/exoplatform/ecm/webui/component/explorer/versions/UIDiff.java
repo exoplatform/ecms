@@ -20,6 +20,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 import javax.jcr.Node;
 import javax.jcr.version.Version;
@@ -28,6 +29,7 @@ import javax.jcr.version.VersionHistory;
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.ecm.webui.component.explorer.UIDocumentWorkspace;
 import org.exoplatform.ecm.webui.utils.Utils;
+import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.impl.DMSConfiguration;
 import org.exoplatform.services.document.DocumentReaderService;
 import org.exoplatform.services.document.diff.AddDelta;
@@ -173,7 +175,8 @@ public class UIDiff extends UIComponent {
   }
 
   private String formatDate(Calendar calendar) {
-    DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+    Locale currentLocale = Util.getPortalRequestContext().getLocale();
+    DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT, currentLocale);
     return dateFormat.format(calendar.getTime()) ;
   }
 
@@ -181,8 +184,8 @@ public class UIDiff extends UIComponent {
 
   public List<Delta> getDeltas() throws Exception {
     List<Delta> deltas = new ArrayList<Delta>();
-    String previousText = getText(getNode(versionWs_, versionPath_).getNode("jcr:frozenNode"));
-    String currentText = getText(getNode(baseVersionWs_, baseVersionPath_).getNode("jcr:frozenNode"));
+    String previousText = getText(getNode(baseVersionWs_, baseVersionPath_).getNode("jcr:frozenNode"));
+    String currentText = getText(getNode(versionWs_, versionPath_).getNode("jcr:frozenNode"));
     if((previousText != null)&&(currentText != null)) {
       String lineSeparator = DiffService.NL;
       Object[] orig = StringUtils.split(previousText, lineSeparator);
