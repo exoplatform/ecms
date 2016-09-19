@@ -25,6 +25,8 @@ import javax.jcr.version.VersionHistory;
 import org.exoplatform.commons.utils.LazyPageList;
 import org.exoplatform.commons.utils.ListAccess;
 import org.exoplatform.commons.utils.ListAccessImpl;
+import org.exoplatform.download.DownloadService;
+import org.exoplatform.download.InputStreamDownloadResource;
 import org.exoplatform.ecm.webui.component.explorer.UIDocumentWorkspace;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.listener.ListenerService;
@@ -43,6 +45,7 @@ import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
 
+import java.io.InputStream;
 import java.util.*;
 
 /**
@@ -153,6 +156,19 @@ public class UIVersionInfo extends UIContainer  {
 
   public void setListVersion(List<VersionNode> listVersion) {
     this.listVersion = listVersion;
+  }
+
+  public String getDownloadLink(Node node) throws Exception {
+    DownloadService dservice = getApplicationComponent(DownloadService.class) ;
+    InputStreamDownloadResource dresource ;
+    if(!node.getPrimaryNodeType().getName().equals(Utils.NT_FILE)) {
+      node = NodeLocation.getNodeByLocation(node_);
+    }
+    Node jcrContentNode = node.getNode(Utils.JCR_CONTENT) ;
+    InputStream input = jcrContentNode.getProperty(Utils.JCR_DATA).getStream() ;
+    dresource = new InputStreamDownloadResource(input, "image") ;
+    dresource.setDownloadName(node.getName()) ;
+    return dservice.getDownloadLink(dservice.addDownloadResource(dresource)) ;
   }
 
   static  public class ViewVersionActionListener extends EventListener<UIVersionInfo> {

@@ -18,6 +18,8 @@
     import org.exoplatform.social.core.identity.provider.OrganizationIdentityProvider;
     import org.exoplatform.social.core.service.LinkProvider;
     import org.exoplatform.social.webui.Utils;
+    import org.exoplatform.services.jcr.core.ManageableRepository;
+    import org.exoplatform.services.cms.link.NodeLinkAware;
 
   public String getAvatarURL(String userName) {
       String profileAvatar = null;
@@ -71,6 +73,10 @@
     Locale currentLocale = Util.getPortalRequestContext().getLocale();
     DateFormat df = DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT, currentLocale);
     println "<a class=\"hidden-phone\" id=\"CompareVersion\" class=\"btn btn-primary disabled\" disabled>"+_ctx.appRes("UIVersionInfo.action.compare-versions")+"</a>" ;
+    /* Prepare common parameters for Document Preview */
+    def fileType = org.exoplatform.services.cms.impl.Utils.getFileType(uicomponent.getCurrentNode());
+    def preferenceWS  = uicomponent.getCurrentNode().getSession().getWorkspace().getName();
+    def repository = ((ManageableRepository)uicomponent.getCurrentNode().getSession().getRepository()).getConfiguration().getName();
     for(node in uicomponent.getListRecords()) {
       if(clazz == "Even")
         clazz = "";
@@ -107,7 +113,13 @@
       <td class="center">
         <div class="btn-toolbar">
             <div class="btn-group">
-                <a class="btn" onclick="<%=uicomponent.event('ViewVersion', node.getPath()); %>" rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes('UIVersionInfo.tooltip.viewVersion'); %>"><i class="uiIconWatch uiIconLightGray"></i></a>
+                <%
+                    def docDownloadUrl = uicomponent.getDownloadLink(node.getNode("jcr:frozenNode"));
+                    def docOpenUri = ""; //uicomponent.getCurrentDocOpenUri();
+                    javax.jcr.Node relativeNode = (javax.jcr.Node) node.getNode("jcr:frozenNode");
+                    def docPreviewUri = "javascript:require(['SHARED/social-ui-activity'], function(activity) {activity.previewDoc({doc: {id:'" + uicomponent.getCurrentNode().getUUID() + "', fileType: '" + fileType +"', repository:'" + repository + "', workspace:'" + preferenceWS + "', path:'" + uicomponent.getCurrentNode().getPath() + "', title:'" + uicomponent.getCurrentNode().getName() + "', downloadUrl:'" + docDownloadUrl + "', openUrl:'" + docOpenUri + "'}, author: {username:'" + authorUserName + "', fullname:'" + authorFullName + "', avatarUrl:'" + avatarURL + "', profileUrl:'" + profileURL + "'}})})";
+                %>
+                <a class="btn" onclick="<%=docPreviewUri %>" rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes('UIVersionInfo.tooltip.viewVersion'); %>"><i class="uiIconWatch uiIconLightGray"></i></a>
                 <%
                     if(!isBaseVersion) {
                 %>
