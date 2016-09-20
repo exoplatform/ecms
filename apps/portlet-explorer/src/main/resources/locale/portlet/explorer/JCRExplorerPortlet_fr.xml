@@ -1481,6 +1481,7 @@
       <DateChange>On {0}</DateChange>
       <PreviousAndNextCompare>Changes from {0} to {1}</PreviousAndNextCompare>
       <ComparedWith>Compared With</ComparedWith>
+      <restoredFrom>Restauré de la version {0}</restoredFrom>
     </label>
   </UIDiff>
   <!--

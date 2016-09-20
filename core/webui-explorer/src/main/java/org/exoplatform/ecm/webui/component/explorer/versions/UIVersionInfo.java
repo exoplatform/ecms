@@ -29,6 +29,7 @@ import org.exoplatform.download.DownloadService;
 import org.exoplatform.download.InputStreamDownloadResource;
 import org.exoplatform.ecm.webui.component.explorer.UIDocumentWorkspace;
 import org.exoplatform.ecm.webui.utils.Utils;
+import org.exoplatform.services.cms.documents.AutoVersionService;
 import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.ecm.jcr.model.VersionNode;
@@ -204,13 +205,18 @@ public class UIVersionInfo extends UIContainer  {
         uiChild.setRendered(false) ;
       }
       String objectId = event.getRequestContext().getRequestParameter(OBJECTID) ;
-      uiVersionInfo.curentVersion_  = uiVersionInfo.rootVersion_.findVersionNode(objectId) ;
+      String fromVersionName  = uiVersionInfo.rootVersion_.findVersionNode(objectId).getName() ;
       UIApplication uiApp = uiVersionInfo.getAncestorOfType(UIApplication.class) ;
       uiExplorer.addLockToken(NodeLocation.getNodeByLocation(uiVersionInfo.node_));
       try {
         Node restoredNode =NodeLocation.getNodeByLocation(uiVersionInfo.node_);
-        String versionName = uiVersionInfo.curentVersion_.getName();
-        restoredNode.restore(versionName, true);
+        AutoVersionService autoVersionService = WCMCoreUtils.getService(AutoVersionService.class);
+        autoVersionService.autoVersion(restoredNode);
+        uiVersionInfo.curentVersion_ = uiVersionInfo.rootVersion_.findVersionNode(restoredNode.getBaseVersion().getPath());
+        String versionName = restoredNode.getBaseVersion().getName();
+        ResourceBundle res = event.getRequestContext().getApplicationResourceBundle() ;
+        String restoredFromMsg = res.getString("UIDiff.label.restoredFrom").replace("{0}", fromVersionName);
+        restoredNode.getVersionHistory().addVersionLabel(versionName, restoredFromMsg, false);
         ListenerService listenerService = WCMCoreUtils.getService(ListenerService.class);
         ActivityCommonService activityService = WCMCoreUtils.getService(ActivityCommonService.class);
         try {
@@ -239,12 +245,9 @@ public class UIVersionInfo extends UIContainer  {
 
         return;
       }
-      Node node = uiVersionInfo.getCurrentNode() ;
-      if(!node.isCheckedOut()) node.checkout() ;
-      uiExplorer.getSession().save() ;
+      uiVersionInfo.activate();
       event.getRequestContext().addUIComponentToUpdateByAjax(uiVersionInfo) ;
       uiExplorer.setIsHidePopup(true) ;
-      uiExplorer.updateAjax(event) ;
     }
   }
 
