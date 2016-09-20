@@ -1473,11 +1473,14 @@
   -->
   <UIDiff>
     <label>
+      <backTo>Back to version history</backTo>
       <diffTitle>Comparer les versions</diffTitle>
       <noChange>Aucune donnée à comparer</noChange>
-      <baseVerion>Version de base</baseVerion>
-      <compareVerion>Version</compareVerion>
+      <compareVerion>Version {0} par {1}</compareVerion>
       <can-not-compare>Impossible de comparer les deux versions</can-not-compare>
+      <DateChange>On {0}</DateChange>
+      <PreviousAndNextCompare>Changes from {0} to {1}</PreviousAndNextCompare>
+      <ComparedWith>Compared With</ComparedWith>
     </label>
   </UIDiff>
   <!--

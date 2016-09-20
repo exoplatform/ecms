@@ -61,21 +61,12 @@
 				</div>	
 				<%
 					} else {										
-					if(arr.isEmpty()) {
-				%>
-					<div class="contentDetail">	
-						<div  class="contentEmpty">					
-							<label> <%=_ctx.appRes("UIDiff.label.noChange")%> </label>	
-						</div>					
-					</div>	
-					<%
-						} else {
 						String fromVersion = _ctx.appRes("UIDiff.label.compareVerion");
 						String fromVersionName = uicomponent.getBaseVersionNum();
 						fromVersion = fromVersion.replace("{0}", fromVersionName);
                         String fromVersionProfileURL = getProfileURL(uicomponent.getBaseVersionAuthor_());
 						fromVersion = fromVersion.replace("{1}","<a class='userAvatarLink' href='$fromVersionProfileURL'>"+getProfileFullName(uicomponent.getBaseVersionAuthor_())+"</a>");
-						String fromVersionDate = _ctx.appRes("UIDiff.label.compareVerion");
+						String fromVersionDate = _ctx.appRes("UIDiff.label.DateChange");
 						fromVersionDate = fromVersionDate.replace("{0}", uicomponent.getCurrentVersionDate());
                         String fromVersionSummary = "";
                         if (uicomponent.getBaseVersionLabels_().length > 0) {
@@ -97,7 +88,7 @@
 						toVersion = toVersion.replace("{0}", toVersionName);
                         String toVersionProfileURL = getProfileURL(uicomponent.getVersionAuthor_());
 						toVersion = toVersion.replace("{1}","<a class='userAvatarLink' href='$toVersionProfileURL'>"+getProfileFullName(uicomponent.getVersionAuthor_())+"</a>");
-						String toVersionDate = _ctx.appRes("UIDiff.label.compareVerion");
+						String toVersionDate = _ctx.appRes("UIDiff.label.DateChange");
 						toVersionDate = toVersionDate.replace("{0}", uicomponent.getBaseVersionDate());
                         String toVersionSummary = "";
                         if (uicomponent.getVersionLabels_().length > 0) {
@@ -134,7 +125,17 @@
                         </div>
 
                         <div class="center comparedwith"><%=_ctx.appRes("UIDiff.label.ComparedWith")%></div>
-
+                    <%
+                        if(arr.isEmpty()) {
+                    %>
+                        <div class="contentDetail">
+                            <div  class="contentEmpty">
+                                <label> <%=_ctx.appRes("UIDiff.label.noChange")%> </label>
+                            </div>
+                        </div>
+                    <%
+                        } else {
+                    %>
 						<table class="uiGrid table table-hover table-striped">
 						  <tbody>
 						  <%  
