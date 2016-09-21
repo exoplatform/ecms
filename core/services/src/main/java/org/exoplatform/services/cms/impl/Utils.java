@@ -813,6 +813,11 @@ public class Utils {
             replace(".", "").replace("/", "").replace("\\","").replace(".", "");
   }
 
+  public static String getFileType(NodeImpl node) throws Exception {
+    return getNodeTypeIcon(node, "").
+        replace(".", "").replace("/", "").replace("\\","").replace(".", "");
+  }
+
   /**
    * Check if a node is document type.
    * @param node
