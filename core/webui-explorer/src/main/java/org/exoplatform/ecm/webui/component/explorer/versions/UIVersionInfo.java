@@ -30,6 +30,7 @@ import org.exoplatform.download.InputStreamDownloadResource;
 import org.exoplatform.ecm.webui.component.explorer.UIDocumentWorkspace;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.cms.documents.AutoVersionService;
+import org.exoplatform.services.cms.documents.DocumentService;
 import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.ecm.jcr.model.VersionNode;
@@ -79,8 +80,6 @@ public class UIVersionInfo extends UIContainer  {
   private UIPageIterator uiPageIterator_ ;
   private List<VersionNode> listVersion = new ArrayList<VersionNode>() ;
   public UIVersionInfo() throws Exception {
-    //addChild(UIViewVersion.class, null, null).setRendered(false);
-    //addChild(UIDiff.class, null, null).setRendered(false) ;
     uiPageIterator_ = addChild(UIPageIterator.class, null, "VersionInfoIterator").setRendered(false);
   }
 
@@ -131,8 +130,6 @@ public class UIVersionInfo extends UIContainer  {
                                                  .getVersionHistory()
                                                  .getRootVersion(), uiExplorer.getSession());
       curentVersion_ = rootVersion_;
-      UIDocumentWorkspace uiDocumentWorkspace = getAncestorOfType(UIDocumentWorkspace.class);
-      uiDocumentWorkspace.getChild(UIViewVersion.class).update();
       updateGrid();
     } catch (Exception e) {
       if (LOG.isErrorEnabled()) {
@@ -159,42 +156,9 @@ public class UIVersionInfo extends UIContainer  {
     this.listVersion = listVersion;
   }
 
-  public String getDownloadLink(Node node) throws Exception {
-    DownloadService dservice = getApplicationComponent(DownloadService.class) ;
-    InputStreamDownloadResource dresource ;
-    if(!node.getPrimaryNodeType().getName().equals(Utils.NT_FILE)) {
-      node = NodeLocation.getNodeByLocation(node_);
-    }
-    Node jcrContentNode = node.getNode(Utils.JCR_CONTENT) ;
-    InputStream input = jcrContentNode.getProperty(Utils.JCR_DATA).getStream() ;
-    dresource = new InputStreamDownloadResource(input, "image") ;
-    dresource.setDownloadName(node.getName()) ;
-    return dservice.getDownloadLink(dservice.addDownloadResource(dresource)) ;
-  }
-
-  static  public class ViewVersionActionListener extends EventListener<UIVersionInfo> {
-    public void execute(Event<UIVersionInfo> event) throws Exception {
-      UIVersionInfo uiVersionInfo = event.getSource();
-      UIDocumentWorkspace uiDocumentWorkspace = uiVersionInfo.getAncestorOfType(UIDocumentWorkspace.class);
-      for(UIComponent uiChild : uiDocumentWorkspace.getChildren()) {
-        uiChild.setRendered(false) ;
-      }
-      String objectId = event.getRequestContext().getRequestParameter(OBJECTID) ;
-      uiVersionInfo.curentVersion_  = uiVersionInfo.rootVersion_.findVersionNode(objectId) ;
-      UIViewVersion uiViewVersion = uiDocumentWorkspace.getChild(UIViewVersion.class) ;
-      if ( !(uiVersionInfo.curentVersion_.getName().equals("jcr:rootVersion"))) {
-        Node frozenNode = uiVersionInfo.curentVersion_.getNode("jcr:frozenNode") ;
-        uiViewVersion.setNode(frozenNode) ;
-      }
-      if(uiViewVersion.getTemplate() == null || uiViewVersion.getTemplate().trim().length() == 0) {
-        UIApplication uiApp = uiVersionInfo.getAncestorOfType(UIApplication.class) ;
-        uiApp.addMessage(new ApplicationMessage("UIVersionInfo.msg.have-no-view-template", null)) ;
-
-        return ;
-      }
-      uiViewVersion.setRendered(true) ;
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiDocumentWorkspace) ;
-    }
+  public String getLinkInDocumentsApp(String nodePath) throws Exception {
+    DocumentService documentService = WCMCoreUtils.getService(DocumentService.class);
+    return documentService.getLinkInDocumentsApp(nodePath);
   }
 
   static  public class RestoreVersionActionListener extends EventListener<UIVersionInfo> {
@@ -334,18 +298,6 @@ public class UIVersionInfo extends UIContainer  {
       uiExplorer.updateAjax(event) ;
     }
   }
-
-  /*static public class CloseViewActionListener extends EventListener<UIVersionInfo> {
-    public void execute(Event<UIVersionInfo> event) throws Exception {
-      UIVersionInfo uiVersionInfo = event.getSource();
-      UIViewVersion uiViewVersion = uiVersionInfo.getChild(UIViewVersion.class);
-      if(uiViewVersion.isRendered()) {
-        uiViewVersion.setRendered(false);
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiVersionInfo);
-        return;
-      }
-    }
-  }*/
 
   static  public class AddSummaryActionListener extends EventListener<UIVersionInfo> {
     public void execute(Event<UIVersionInfo> event) throws Exception {

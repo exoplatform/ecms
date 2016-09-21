@@ -20,7 +20,6 @@ import org.exoplatform.ecm.webui.component.explorer.lifecycle.UIDocumentWorkspac
 import org.exoplatform.ecm.webui.component.explorer.search.UISearchResult;
 import org.exoplatform.ecm.webui.component.explorer.versions.UIDiff;
 import org.exoplatform.ecm.webui.component.explorer.versions.UIVersionInfo;
-import org.exoplatform.ecm.webui.component.explorer.versions.UIViewVersion;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.UIContainer;
 
@@ -39,7 +38,6 @@ public class UIDocumentWorkspace extends UIContainer {
     addChild(UIDocumentContainer.class, null, null) ;
     addChild(UISearchResult.class, null, SIMPLE_SEARCH_RESULT).setRendered(false);
     addChild(UIVersionInfo.class, null, null).setRendered(false);
-    addChild(UIViewVersion.class, null, null).setRendered(false);
     addChild(UIDiff.class, null, null).setRendered(false);
   }
 }

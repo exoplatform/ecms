@@ -7,19 +7,17 @@
  * 11:57:24 AM 
  */
 
-    import java.util.Locale;
+import javax.jcr.Node
+import java.util.Locale;
     import java.text.DateFormat;
     import org.apache.commons.lang.StringUtils;
     import org.apache.commons.lang.StringEscapeUtils;
-    import org.exoplatform.ecm.jcr.model.VersionNode;
     import org.exoplatform.ecm.webui.utils.Utils;
     import org.exoplatform.portal.webui.util.Util;
     import org.exoplatform.social.core.identity.model.Identity;
     import org.exoplatform.social.core.identity.provider.OrganizationIdentityProvider;
     import org.exoplatform.social.core.service.LinkProvider;
-    import org.exoplatform.social.webui.Utils;
     import org.exoplatform.services.jcr.core.ManageableRepository;
-    import org.exoplatform.services.cms.link.NodeLinkAware;
 
   public String getAvatarURL(String userName) {
       String profileAvatar = null;
@@ -74,9 +72,10 @@
     DateFormat df = DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT, currentLocale);
     println "<a class=\"hidden-phone\" id=\"CompareVersion\" class=\"btn btn-primary disabled\" disabled>"+_ctx.appRes("UIVersionInfo.action.compare-versions")+"</a>" ;
     /* Prepare common parameters for Document Preview */
-    def fileType = org.exoplatform.services.cms.impl.Utils.getFileType(uicomponent.getCurrentNode());
-    def preferenceWS  = uicomponent.getCurrentNode().getSession().getWorkspace().getName();
-    def repository = ((ManageableRepository)uicomponent.getCurrentNode().getSession().getRepository()).getConfiguration().getName();
+    javax.jcr.Node currentNode = uicomponent.getCurrentNode();
+    def fileType = org.exoplatform.services.cms.impl.Utils.getFileType(currentNode);
+    def preferenceWS  = currentNode.getSession().getWorkspace().getName();
+    def repository = ((ManageableRepository)currentNode.getSession().getRepository()).getConfiguration().getName();
     for(node in uicomponent.getListRecords()) {
       if(clazz == "Even")
         clazz = "";
@@ -114,10 +113,10 @@
         <div class="btn-toolbar">
             <div class="btn-group">
                 <%
-                    def docDownloadUrl = uicomponent.getDownloadLink(node.getNode("jcr:frozenNode"));
-                    def docOpenUri = ""; //uicomponent.getCurrentDocOpenUri();
-                    javax.jcr.Node relativeNode = (javax.jcr.Node) node.getNode("jcr:frozenNode");
-                    def docPreviewUri = "javascript:require(['SHARED/social-ui-activity'], function(activity) {activity.previewDoc({doc: {id:'" + uicomponent.getCurrentNode().getUUID() + "', fileType: '" + fileType +"', repository:'" + repository + "', workspace:'" + preferenceWS + "', path:'" + uicomponent.getCurrentNode().getPath() + "', title:'" + uicomponent.getCurrentNode().getName() + "', downloadUrl:'" + docDownloadUrl + "', openUrl:'" + docOpenUri + "'}, author: {username:'" + authorUserName + "', fullname:'" + authorFullName + "', avatarUrl:'" + avatarURL + "', profileUrl:'" + profileURL + "'}})})";
+                    javax.jcr.Node frozenNode = node.getNode("jcr:frozenNode");
+                    def docDownloadUrl = org.exoplatform.wcm.webui.Utils.getDownloadLink(frozenNode);
+                    def docOpenUri = uicomponent.getLinkInDocumentsApp(currentNode.getPath());
+                    def docPreviewUri = "javascript:require(['SHARED/social-ui-activity'], function(activity) {activity.previewDoc({doc: {id:'" + frozenNode.getUUID() + "', fileType: '" + fileType +"', repository:'" + repository + "', workspace:'" + preferenceWS + "', path:'" + currentNode.getPath() + "', title:'" + currentNode.getName() + "', downloadUrl:'" + docDownloadUrl + "', openUrl:'" + docOpenUri + "'}, author: {username:'" + authorUserName + "', fullname:'" + authorFullName + "', avatarUrl:'" + avatarURL + "', profileUrl:'" + profileURL + "'}})})";
                 %>
                 <a class="btn" onclick="<%=docPreviewUri %>" rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes('UIVersionInfo.tooltip.viewVersion'); %>"><i class="uiIconWatch uiIconLightGray"></i></a>
                 <%
