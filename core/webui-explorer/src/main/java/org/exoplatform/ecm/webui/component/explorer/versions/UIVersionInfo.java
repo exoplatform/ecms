@@ -25,12 +25,11 @@ import javax.jcr.version.VersionHistory;
 import org.exoplatform.commons.utils.LazyPageList;
 import org.exoplatform.commons.utils.ListAccess;
 import org.exoplatform.commons.utils.ListAccessImpl;
-import org.exoplatform.download.DownloadService;
-import org.exoplatform.download.InputStreamDownloadResource;
 import org.exoplatform.ecm.webui.component.explorer.UIDocumentWorkspace;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.cms.documents.AutoVersionService;
 import org.exoplatform.services.cms.documents.DocumentService;
+import org.exoplatform.services.jcr.ext.utils.VersionHistoryUtils;
 import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.ecm.jcr.model.VersionNode;
@@ -63,7 +62,6 @@ import java.util.*;
     events = {
         @EventConfig(listeners = UIVersionInfo.SelectActionListener.class),
         @EventConfig(listeners = UIVersionInfo.RestoreVersionActionListener.class, confirm = "UIVersionInfo.msg.confirm-restore"),
-        @EventConfig(listeners = UIVersionInfo.ViewVersionActionListener.class),
         @EventConfig(listeners = UIVersionInfo.CompareVersionActionListener.class),
         @EventConfig(listeners = UIVersionInfo.DeleteVersionActionListener.class, confirm = "UIVersionInfo.msg.confirm-delete"),
         @EventConfig(listeners = UIVersionInfo.CloseActionListener.class),
@@ -169,18 +167,20 @@ public class UIVersionInfo extends UIContainer  {
         uiChild.setRendered(false) ;
       }
       String objectId = event.getRequestContext().getRequestParameter(OBJECTID) ;
-      String fromVersionName  = uiVersionInfo.rootVersion_.findVersionNode(objectId).getName() ;
+      VersionNode currentVersionNode = uiVersionInfo.rootVersion_.findVersionNode(objectId);
+      String fromVersionName  = currentVersionNode.getName() ;
       UIApplication uiApp = uiVersionInfo.getAncestorOfType(UIApplication.class) ;
       uiExplorer.addLockToken(NodeLocation.getNodeByLocation(uiVersionInfo.node_));
+      Node currentNode = uiVersionInfo.getCurrentNode();
       try {
-        Node restoredNode =NodeLocation.getNodeByLocation(uiVersionInfo.node_);
-        AutoVersionService autoVersionService = WCMCoreUtils.getService(AutoVersionService.class);
-        autoVersionService.autoVersion(restoredNode);
-        uiVersionInfo.curentVersion_ = uiVersionInfo.rootVersion_.findVersionNode(restoredNode.getBaseVersion().getPath());
-        String versionName = restoredNode.getBaseVersion().getName();
+        Node restoredNode = org.exoplatform.wcm.webui.Utils.getRealNode(currentVersionNode.getNode(Utils.JCR_FROZEN));
+        Version restoredVersion = restoredNode.checkin();
+        restoredNode.checkout();
+        String versionName = restoredVersion.getName();
+        uiVersionInfo.curentVersion_ = uiVersionInfo.rootVersion_.findVersionNode(restoredVersion.getPath());
         ResourceBundle res = event.getRequestContext().getApplicationResourceBundle() ;
         String restoredFromMsg = res.getString("UIDiff.label.restoredFrom").replace("{0}", fromVersionName);
-        restoredNode.getVersionHistory().addVersionLabel(versionName, restoredFromMsg, false);
+        currentNode.getVersionHistory().addVersionLabel(versionName, restoredFromMsg+ "_" + versionName, false);
         ListenerService listenerService = WCMCoreUtils.getService(ListenerService.class);
         ActivityCommonService activityService = WCMCoreUtils.getService(ActivityCommonService.class);
         try {

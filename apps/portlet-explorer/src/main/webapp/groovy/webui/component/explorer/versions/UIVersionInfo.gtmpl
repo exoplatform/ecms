@@ -12,11 +12,11 @@ import java.util.Locale;
     import java.text.DateFormat;
     import org.apache.commons.lang.StringUtils;
     import org.apache.commons.lang.StringEscapeUtils;
-    import org.exoplatform.ecm.webui.utils.Utils;
     import org.exoplatform.portal.webui.util.Util;
     import org.exoplatform.social.core.identity.model.Identity;
     import org.exoplatform.social.core.identity.provider.OrganizationIdentityProvider;
     import org.exoplatform.social.core.service.LinkProvider;
+    import org.exoplatform.social.webui.Utils;
     import org.exoplatform.services.jcr.core.ManageableRepository;
 
   public String getAvatarURL(String userName) {
