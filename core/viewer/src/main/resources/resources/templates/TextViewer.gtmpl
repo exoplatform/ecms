@@ -5,7 +5,7 @@
 	import javax.jcr.NodeIterator;
 	import org.exoplatform.webui.core.UIComponent;
   import org.exoplatform.services.jcr.util.Text;	
-  import org.exoplatform.services.deployment.Utils;
+  import org.exoplatform.commons.utils.HTMLSanitizer;
   import org.apache.commons.lang.StringEscapeUtils;
   import org.exoplatform.wcm.webui.reader.ContentReader;
 	
@@ -44,7 +44,7 @@
 						String iframeId = uiParent.getId() + "ifame" ;
 						def rqcontext = _ctx.getRequestContext() ;
 						def strContent = StringEscapeUtils.unescapeHtml(contentNode.getProperty("jcr:data").getString());	
-						strContent = ContentReader.getEscapeHtmlContent(Utils.sanitize(strContent));	        	  
+						strContent = ContentReader.getEscapeHtmlContent(HTMLSanitizer.sanitize(strContent));
 				%>
 				<div class="textContent">
 					<textarea id="<%=iframeId%>"><%=strContent%></textarea> 
@@ -62,7 +62,7 @@
 					<%
 						if(contentNode.hasProperty("jcr:data")) {
 							def strContent = StringEscapeUtils.unescapeHtml(contentNode.getProperty("jcr:data").getString());	
-							strContent = ContentReader.getEscapeHtmlContent(Utils.sanitize(strContent));
+							strContent = ContentReader.getEscapeHtmlContent(HTMLSanitizer.sanitize(strContent));
 							println "<pre>" + strContent + "</pre>"; 
 						}
 					%>
@@ -74,7 +74,7 @@
   <%        
     if(!unsupportMimeTypeText.contains(mimeType) && contentNode.hasProperty("jcr:data")) {
       def strContent = StringEscapeUtils.unescapeHtml(contentNode.getProperty("jcr:data").getString());	
-			strContent = ContentReader.getEscapeHtmlContent(Utils.sanitize(strContent));
+			strContent = ContentReader.getEscapeHtmlContent(HTMLSanitizer.sanitize(strContent));
       if(getFileSize(contentNode) < 1024) {
         println "<pre>" + strContent + "</pre>"; 
       } else {
