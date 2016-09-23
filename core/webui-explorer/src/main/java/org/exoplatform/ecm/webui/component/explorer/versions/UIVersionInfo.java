@@ -170,12 +170,13 @@ public class UIVersionInfo extends UIContainer  {
       VersionNode currentVersionNode = uiVersionInfo.rootVersion_.findVersionNode(objectId);
       String fromVersionName  = currentVersionNode.getName() ;
       UIApplication uiApp = uiVersionInfo.getAncestorOfType(UIApplication.class) ;
-      uiExplorer.addLockToken(NodeLocation.getNodeByLocation(uiVersionInfo.node_));
       Node currentNode = uiVersionInfo.getCurrentNode();
+      uiExplorer.addLockToken(currentNode);
       try {
-        Node restoredNode = org.exoplatform.wcm.webui.Utils.getRealNode(currentVersionNode.getNode(Utils.JCR_FROZEN));
-        Version restoredVersion = restoredNode.checkin();
-        restoredNode.checkout();
+        currentNode.restore(fromVersionName,true);
+        currentNode.checkout();
+        Version restoredVersion = currentNode.checkin();
+        currentNode.checkout();
         String versionName = restoredVersion.getName();
         uiVersionInfo.curentVersion_ = uiVersionInfo.rootVersion_.findVersionNode(restoredVersion.getPath());
         ResourceBundle res = event.getRequestContext().getApplicationResourceBundle() ;
@@ -184,8 +185,8 @@ public class UIVersionInfo extends UIContainer  {
         ListenerService listenerService = WCMCoreUtils.getService(ListenerService.class);
         ActivityCommonService activityService = WCMCoreUtils.getService(ActivityCommonService.class);
         try {
-          if (listenerService!=null && activityService !=null && activityService.isAcceptedNode(restoredNode)) {
-            listenerService.broadcast(ActivityCommonService.NODE_REVISION_CHANGED, restoredNode, versionName);
+          if (listenerService!=null && activityService !=null && activityService.isAcceptedNode(currentNode)) {
+            listenerService.broadcast(ActivityCommonService.NODE_REVISION_CHANGED, currentNode, versionName);
           }
         }catch (Exception e) {
           if (LOG.isErrorEnabled()) {
