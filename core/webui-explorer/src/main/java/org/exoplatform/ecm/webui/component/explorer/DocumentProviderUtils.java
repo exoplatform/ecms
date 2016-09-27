@@ -44,7 +44,6 @@ import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.security.ConversationState;
-import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.search.base.LazyPageList;
 import org.exoplatform.services.wcm.search.base.PageListFactory;
@@ -88,7 +87,15 @@ public class DocumentProviderUtils {
     }
     return true;
   }
-
+  public <E> LazyPageList<E> getPageList(String ws, String path, Preference pref, 
+                                                 Set<String> allItemFilter, Set<String> allItemByTypeFilter, 
+                                                 SearchDataCreator<E> dataCreater) throws Exception{
+    String statement = getStatement(ws, path, pref, allItemFilter, allItemByTypeFilter);
+    QueryData queryData = new QueryData(statement, ws, Query.SQL, 
+                                        WCMCoreUtils.getRemoteUser().equals(WCMCoreUtils.getSuperUser()));
+    return PageListFactory.createLazyPageList(queryData, pref.getNodesPerPage(),dataCreater);
+  }
+  
   public LazyPageList<NodeLinkAware> getPageList(String ws, String path, Preference pref, 
                           Set<String> allItemFilter, Set<String> allItemByTypeFilter,
                           NodeLinkAware parent) throws Exception {

@@ -27,7 +27,7 @@ import org.exoplatform.services.jcr.util.Text;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.core.NodeLocation;
-
+import org.exoplatform.services.jcr.impl.core.NodeImpl;
 /**
  * Created by The eXo Platform SARL
  * Author : Tran The Trong
@@ -46,6 +46,8 @@ public class TreeNode {
   private String name_;
   private List<TreeNode> children_ = new ArrayList<TreeNode>() ;
 
+  private long childrenSize;
+
   public TreeNode(Node node) throws RepositoryException {
     this(node, node.getPath());
   }
@@ -53,9 +55,20 @@ public class TreeNode {
   private TreeNode(Node node, String path) {
     if (node instanceof NodeLinkAware) {
       this.node = (NodeLinkAware)node;
+      try {
+        this.childrenSize = this.node.getNodesLazily().getSize();
+      } catch (RepositoryException e) {
+        this.childrenSize = 0;
+      }
     } else {
       node_ = NodeLocation.getNodeLocationByNode(node);
+      try {
+        this.childrenSize = ((NodeImpl) node).getNodesLazily().getSize();
+      } catch (RepositoryException e) {
+        this.childrenSize = 0;
+      }
     }
+
     name_ = getName(node);
     isExpanded_ = false ;
     path_ = path;
@@ -106,13 +119,19 @@ public class TreeNode {
     return tmp.replace('%', '_');
   }
   public List<TreeNode> getChildren() { return children_ ; }
-  public int getChildrenSize() { return children_.size() ; }
+  public int getChildrenSize() { 
+    return (int) childrenSize;
+    }
 
   public TreeNode getChildByName(String name) throws RepositoryException {
     for(TreeNode child : children_) {
       if(child.getName().equals(name)) return child ;
     }
-    return null;
+    Node tempNode = this.getNode().getNode(name);
+    if (tempNode == null) return null;
+    TreeNode tempTreeNode = new TreeNode(tempNode);
+    children_.add(tempTreeNode);
+    return tempTreeNode;
   }
 
   public void setChildren(List<Node> children) throws Exception {

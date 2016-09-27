@@ -164,7 +164,7 @@
 		println " </i> <span class='nodeName'>$treeNodeName</span></a>" ;
 	    println "    </div>" ; 
 	    println "  </div>" ; 
-	    if(treeNode.getChildrenSize() > 0) {
+	    if(uicomponent.isShowChildren(treeNode.getPath())) {
 	      println "<ul class=\"nodeGroup\">" ;
 	      writeNodes(treeNode) ;
 	      if(uicomponent.isPaginated(treeNode)) {

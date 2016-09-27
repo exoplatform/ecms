@@ -16,7 +16,7 @@
  */
 package org.exoplatform.ecm.webui.component.explorer.sidebar ;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
@@ -30,21 +30,20 @@ import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 import javax.jcr.nodetype.NodeType;
+import javax.jcr.query.Row;
 import javax.portlet.PortletPreferences;
 
 import org.apache.ws.commons.util.Base64;
-import org.exoplatform.commons.utils.LazyPageList;
-import org.exoplatform.commons.utils.ListAccess;
-import org.exoplatform.commons.utils.ListAccessImpl;
+import org.exoplatform.commons.utils.PageList;
 import org.exoplatform.container.xml.PortalContainerInfo;
 import org.exoplatform.ecm.jcr.model.Preference;
+import org.exoplatform.ecm.webui.component.explorer.DocumentProviderUtils;
 import org.exoplatform.ecm.webui.component.explorer.UIDocumentContainer;
 import org.exoplatform.ecm.webui.component.explorer.UIDocumentWorkspace;
 import org.exoplatform.ecm.webui.component.explorer.UIDrivesArea;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorerPortlet;
 import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
-import org.exoplatform.ecm.webui.component.explorer.control.UIAddressBar;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.services.cms.clipboard.ClipboardService;
 import org.exoplatform.services.cms.documents.AutoVersionService;
@@ -59,6 +58,7 @@ import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
+import org.exoplatform.services.wcm.search.base.SearchDataCreator;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.web.application.RequestContext;
@@ -71,6 +71,7 @@ import org.exoplatform.webui.core.UIContainer;
 import org.exoplatform.webui.core.UIRightClickPopupMenu;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
+import org.exoplatform.services.wcm.search.base.LazyPageList;
 
 /**
  * Created by The eXo Platform SARL
@@ -89,6 +90,17 @@ import org.exoplatform.webui.event.EventListener;
 
 public class UITreeExplorer extends UIContainer {
 
+  private class TreeNodeDataCreater implements SearchDataCreator<TreeNode>{
+
+    @Override
+    public TreeNode createData(Node node, Row row){
+      try {
+        return new TreeNode(node);
+      } catch (RepositoryException e) {
+        return null;
+      }
+    }
+  }
   /**
    * Logger.
    */
@@ -225,7 +237,7 @@ public class UITreeExplorer extends UIContainer {
   public boolean isPaginated(TreeNode treeNode) {
     UIJCRExplorer jcrExplorer = getAncestorOfType(UIJCRExplorer.class) ;
     int nodePerPages = jcrExplorer.getPreference().getNodesPerPage();
-    return (treeNode.getChildrenSize()>nodePerPages) ;
+    return (treeNode.getChildrenSize()>nodePerPages) && (findComponentById(treeNode.getPath()) != null) ;
   }
 
   public String getPortalName() {
@@ -239,6 +251,12 @@ public class UITreeExplorer extends UIContainer {
         portletRequestContext.getRequest().getServerName() + ":" +
         String.format("%s",portletRequestContext.getRequest().getServerPort()) ;
     return prefixWebDAV ;
+  }
+  
+  public boolean isShowChildren(String path){
+    UIJCRExplorer jcrExplorer = getAncestorOfType(UIJCRExplorer.class);
+    String currentPath = jcrExplorer.getCurrentPath();
+    return currentPath.startsWith(path);
   }
 
   public String getRepository() {
@@ -264,8 +282,16 @@ public class UITreeExplorer extends UIContainer {
     return Base64.encode(value.getBytes()).replaceAll(Base64.LINE_SEPARATOR,"");
   }
 
+  /**
+   * 
+   * @param id ID of TreeNodePageIterator, should be path of node
+   * @param pageList Paged list children of node
+   * @param selectedPath Path relate with pageList
+   * @param currentPath Path that user are working on
+   * 
+   * */
   private void addTreeNodePageIteratorAsChild(String id,
-                                              LazyPageList<TreeNode> pageList,
+                                              PageList<TreeNode> pageList,
                                               String selectedPath,
                                               String currentPath) throws Exception {
     if (findComponentById(id) == null) {
@@ -289,86 +315,55 @@ public class UITreeExplorer extends UIContainer {
     return uiExplorer.getRootNode();
   }
 
-  private List<Node> getTreeWithNoDocuments(List<Node> childrenList) throws Exception {
-    TemplateService templateService = getApplicationComponent(TemplateService.class);
-    List<String> nodeTypes = templateService.getAllDocumentNodeTypes();
-    List<Node> treeList = new ArrayList<Node>();
-    for(Node node : childrenList) {
-      if(nodeTypes.contains(node.getPrimaryNodeType().getName())) continue;
-      treeList.add(node);
-    }
-    return treeList;
-  }
-
-  private boolean isTimelineView() {
-    UIJCRExplorer jcrExplorer = getAncestorOfType(UIJCRExplorer.class);
-    UIAddressBar uiAddressBar = jcrExplorer.findFirstComponentOfType(UIAddressBar.class);
-    if(uiAddressBar.getSelectedViewName() != null &&
-        uiAddressBar.getSelectedViewName().equals("timeline-view")) return true;
-    return false;
-  }
-
   private void buildTree(String path) throws Exception {
     UIJCRExplorer jcrExplorer = getAncestorOfType(UIJCRExplorer.class);
     int nodePerPages = jcrExplorer.getPreference().getNodesPerPage();
-    Node rootNode = null;
-    try {
-      rootNode = getRootNode();
-    } catch(PathNotFoundException pnfe) {
-      LOG.error("Cannot get root node : " + pnfe.getMessage(), pnfe);
+    TreeNode treeRoot = new TreeNode(getRootNode());
+    if (path == null)
+      path = jcrExplorer.getCurrentPath();
+    String[] arr = path.replaceFirst(treeRoot.getPath(), "").split("/");
+    TreeNode temp = treeRoot;
+    StringBuffer subPath = null;
+    String rootPath = treeRoot.getPath();
+    StringBuffer prefix = new StringBuffer(rootPath);
+    if (!rootPath.equals("/")) {
+      prefix.append("/");
     }
-    TreeNode treeRoot = null;
-    if(rootNode != null) {
-      treeRoot = new TreeNode(rootNode);
-      if (path == null)
-        path = jcrExplorer.getCurrentPath();
-      String[] arr = path.replaceFirst(treeRoot.getPath(), "").split("/");
-      TreeNode temp = treeRoot;
-      StringBuffer subPath = null;
-      String rootPath = treeRoot.getPath();
-      StringBuffer prefix = new StringBuffer(rootPath);
-      if (!rootPath.equals("/")) {
-        prefix.append("/");
+    HashSet<String> emptySet = new HashSet<String>();//This control doesn't have any filter
+    //Build root tree node
+    if (temp.getChildrenSize() > nodePerPages) {
+      LazyPageList<TreeNode> pageList = DocumentProviderUtils.getInstance().getPageList(jcrExplorer.getWorkspaceName(), 
+                                                                                        rootPath, 
+                                                                                        jcrExplorer.getPreference(), 
+                                                                                        emptySet, 
+                                                                                        emptySet, 
+                                                                                        new TreeNodeDataCreater());
+      addTreeNodePageIteratorAsChild(treeRoot.getPath(), pageList, rootPath, path);
+    } else temp.setChildren(jcrExplorer.getChildrenList(rootPath, false));
+    //Build children
+    for (String nodeName : arr) {
+      if (nodeName.length() == 0)
+        continue;
+      temp = temp.getChildByName(nodeName);
+      if (temp == null) {
+        treeRoot_ = treeRoot;
+        return;
       }
-      if (isTimelineView()) {
-        temp.setChildren(getTreeWithNoDocuments(jcrExplorer.getChildrenList(rootPath, false)));
+      if (subPath == null) {
+        subPath = new StringBuffer();
+        subPath.append(prefix).append(nodeName);
       } else {
-        temp.setChildren(jcrExplorer.getChildrenList(rootPath, false));
+        subPath.append("/").append(nodeName);
       }
       if (temp.getChildrenSize() > nodePerPages) {
-        ListAccess<TreeNode> childList = new ListAccessImpl<TreeNode>(TreeNode.class,
-                temp.getChildren());
-        LazyPageList<TreeNode> pageList = new LazyPageList<TreeNode>(childList, nodePerPages);
-        addTreeNodePageIteratorAsChild(temp.getPath(), pageList, rootPath, path);
-      }
-      for (String nodeName : arr) {
-        if (nodeName.length() == 0)
-          continue;
-        temp = temp.getChildByName(nodeName);
-        if (temp == null) {
-          treeRoot_ = treeRoot;
-          return;
-        }
-        if (subPath == null) {
-          subPath = new StringBuffer();
-          subPath.append(prefix).append(nodeName);
-        } else {
-          subPath.append("/").append(nodeName);
-        }
-        if (isTimelineView()) {
-          temp.setChildren(getTreeWithNoDocuments(jcrExplorer.getChildrenList(subPath.toString(),
-                  false)));
-        } else {
-          temp.setChildren(jcrExplorer.getChildrenList(subPath.toString(), false));
-        }
-
-        if (temp.getChildrenSize() > nodePerPages) {
-          ListAccess<TreeNode> childNodeList = new ListAccessImpl<TreeNode>(TreeNode.class,
-                  temp.getChildren());
-          LazyPageList<TreeNode> pageList = new LazyPageList<TreeNode>(childNodeList, nodePerPages);
-          addTreeNodePageIteratorAsChild(temp.getPath(), pageList, subPath.toString(), path);
-        }
-      }
+        LazyPageList<TreeNode> pageList = DocumentProviderUtils.getInstance().getPageList(jcrExplorer.getWorkspaceName(), 
+                                                                                          subPath.toString(), 
+                                                                                          jcrExplorer.getPreference(), 
+                                                                                          emptySet, 
+                                                                                          emptySet, 
+                                                                                          new TreeNodeDataCreater());
+        addTreeNodePageIteratorAsChild(temp.getPath(), pageList, subPath.toString(), path);
+      } else temp.setChildren(jcrExplorer.getChildrenList(subPath.toString(), false));
     }
     treeRoot_ = treeRoot;
   }
