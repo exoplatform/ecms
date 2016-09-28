@@ -178,7 +178,7 @@
               }
 		        %>   
 		      <div class="actionIconBox" <%= uicomponent.getNodeAttributeInView(data) %> 
-	       													   ondblclick="$actionLink">
+	       													   onclick="$actionLink">
 		        <div style="height: auto; width: auto; border: none; -moz-user-select: none;" unselectable="on">
 							<div class="nodeLabel">
 								<div class="thumbnailImage">
