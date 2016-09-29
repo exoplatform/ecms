@@ -24,7 +24,10 @@
       gj(".uiShareDocuments.resizable .spaceChooserPopup .uiIconClose").trigger("click");
     })
     correctSpacePos();
-
+    //disable shortcuts for pdf.js when a document is opened
+    gj("#UIShareDocument").on("keydown", function (evt) {
+      evt.stopPropagation();
+    });
     gj(".uiShareDocuments.resizable #textAreaInput").exoMentions({
       onDataRequest : function(mode, query, callback) {
         var url = window.location.protocol + '//' + window.location.host + '/' + eXo.env.portal.rest + '/social/people/getprofile/data.json?search=' + query;
@@ -70,6 +73,10 @@
     }else{
       gj(".PopupContent .uiActionBorder .btn-primary").removeAttr("disabled")
     }
+  }
+
+  ShareContent.prototype.checkRemovedEntry = function(entry){
+    gj(".PopupContent .uiActionBorder .btn-primary").removeAttr("disabled");
   }
 
   eXo.ecm.ShareContent = new ShareContent();
