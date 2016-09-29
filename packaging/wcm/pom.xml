@@ -4,7 +4,7 @@
   <parent>
     <artifactId>ecms-packaging</artifactId>
     <groupId>org.exoplatform.ecms</groupId>
-    <version>4.4.x-SNAPSHOT</version>
+    <version>4.4.0-M17</version>
   </parent>
   <artifactId>ecms-packaging-wcm</artifactId>
   <packaging>pom</packaging>
