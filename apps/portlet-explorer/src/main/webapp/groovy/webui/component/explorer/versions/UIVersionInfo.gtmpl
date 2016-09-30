@@ -113,10 +113,13 @@ import java.util.Locale;
         <div class="btn-toolbar">
             <div class="btn-group">
                 <%
-                    javax.jcr.Node frozenNode = node.getNode("jcr:frozenNode");
-                    def docDownloadUrl = org.exoplatform.wcm.webui.Utils.getDownloadLink(frozenNode);
+                    javax.jcr.Node currentVersionNode = currentNode;
+                    if(node.hasNode(org.exoplatform.ecm.webui.utils.Utils.JCR_FROZEN)) {
+                        currentVersionNode = node.getNode(org.exoplatform.ecm.webui.utils.Utils.JCR_FROZEN);
+                    }
+                    def docDownloadUrl = org.exoplatform.wcm.webui.Utils.getDownloadLink(currentVersionNode);
                     def docOpenUri = uicomponent.getLinkInDocumentsApp(currentNode.getPath());
-                    def docPreviewUri = "javascript:require(['SHARED/social-ui-activity'], function(activity) {activity.previewDoc({doc: {id:'" + frozenNode.getUUID() + "', fileType: '" + fileType +"', repository:'" + repository + "', workspace:'" + preferenceWS + "', path:'" + currentNode.getPath() + "', title:'" + currentNode.getName() + "', downloadUrl:'" + docDownloadUrl + "', openUrl:'" + docOpenUri + "'}, author: {username:'" + authorUserName + "', fullname:'" + authorFullName + "', avatarUrl:'" + avatarURL + "', profileUrl:'" + profileURL + "'}})})";
+                    def docPreviewUri = "javascript:require(['SHARED/social-ui-activity'], function(activity) {activity.previewDoc({doc: {id:'" + currentVersionNode.getUUID() + "', fileType: '" + fileType +"', repository:'" + repository + "', workspace:'" + preferenceWS + "', path:'" + currentNode.getPath() + "', title:'" + currentNode.getName() + "', downloadUrl:'" + docDownloadUrl + "', openUrl:'" + docOpenUri + "'}, author: {username:'" + authorUserName + "', fullname:'" + authorFullName + "', avatarUrl:'" + avatarURL + "', profileUrl:'" + profileURL + "'}})})";
                 %>
                 <a class="btn" onclick="<%=docPreviewUri %>" rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes('UIVersionInfo.tooltip.viewVersion'); %>"><i class="uiIconWatch uiIconLightGray"></i></a>
                 <%
@@ -131,7 +134,7 @@ import java.util.Locale;
     </tr>
     <%
     def actionUrl = StringUtils.getNestedString(uicomponent.event('AddSummary', node.getPath()),"javascript:ajaxGet(\'","\')");
-    jsManager.require("SHARED/jquery", "gj").require("SHARED/X-editable", "xeditable").addScripts("gj(\"#versionSummary"+node.getName()+"\").editable({ mode: \"inline\", url: \""+actionUrl+"\", pk:\""+node.getName()+"\" ,type: \"text\" });");
+    jsManager.require("SHARED/jquery", "gj").require("SHARED/X-editable", "xeditable").addScripts("gj(\"#versionSummary"+versionNumber+"\").editable({ mode: \"inline\", url: \""+actionUrl+"\", pk:\""+versionNumber+"\" ,type: \"text\" });");
     }
   }
 %>

@@ -107,7 +107,7 @@
                         }
 					%>
 
-					    <div class="uiBox pull-left">
+					    <div class="uiBox pull-left hidden-phone">
                             <h6 class="title center">$fromVersion</h6>
                             <div class="boxVersionDetail">
                                 <span>$fromVersionDate</span>
@@ -115,7 +115,10 @@
                                 <a class="changes" href="$previousCompareLink"><%= previousCompare %></a>
                             </div>
 					    </div>
-                        <div class="uiBox pull-right">
+                        <div class="pull-left visible-phone">
+                            <a class="changes" href="$previousCompareLink"><%= previousCompare %></a>
+                        </div>
+                        <div class="uiBox pull-right hidden-phone">
                             <h6 class="title center">$toVersion</h6>
                             <div class="boxVersionDetail">
                                 <span>$toVersionDate</span>
@@ -123,8 +126,11 @@
                                 <a class="changes" href="$nextCompareLink"><%= nextCompare %></a>
                             </div>
                         </div>
+                        <div class="pull-right visible-phone">
+                            <a class="changes" href="$nextCompareLink"><%= nextCompare %></a>
+                        </div>
 
-                        <div class="center comparedwith"><%=_ctx.appRes("UIDiff.label.ComparedWith")%></div>
+                        <div class="center comparedwith hidden-phone"><%=_ctx.appRes("UIDiff.label.ComparedWith")%></div>
                     <%
                         if(arr.isEmpty()) {
                     %>

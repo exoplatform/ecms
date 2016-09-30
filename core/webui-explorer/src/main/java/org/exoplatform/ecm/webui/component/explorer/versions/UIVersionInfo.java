@@ -27,9 +27,7 @@ import org.exoplatform.commons.utils.ListAccess;
 import org.exoplatform.commons.utils.ListAccessImpl;
 import org.exoplatform.ecm.webui.component.explorer.UIDocumentWorkspace;
 import org.exoplatform.ecm.webui.utils.Utils;
-import org.exoplatform.services.cms.documents.AutoVersionService;
 import org.exoplatform.services.cms.documents.DocumentService;
-import org.exoplatform.services.jcr.ext.utils.VersionHistoryUtils;
 import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.ecm.jcr.model.VersionNode;
@@ -46,7 +44,6 @@ import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
 
-import java.io.InputStream;
 import java.util.*;
 
 /**
@@ -89,7 +86,6 @@ public class UIVersionInfo extends UIContainer  {
   public void updateGrid() throws Exception {
     listVersion.clear();
     listVersion = getNodeVersions(getRootVersionNode().getChildren());
-    Collections.reverse(listVersion);
     ListAccess<VersionNode> recordList = new ListAccessImpl<VersionNode>(VersionNode.class, listVersion);
     LazyPageList<VersionNode> dataPageList = new LazyPageList<VersionNode>(recordList, 10);
     uiPageIterator_.setPageList(dataPageList);
@@ -115,6 +111,19 @@ public class UIVersionInfo extends UIContainer  {
       child = children.get(i).getChildren() ;
       if(!child.isEmpty()) getNodeVersions(child) ;
     }
+    listVersion.sort(new Comparator<VersionNode>() {
+      @Override
+      public int compare(VersionNode v1, VersionNode v2) {
+        try {
+          if (Integer.parseInt(v1.getName()) < Integer.parseInt(v2.getName()))
+            return 1;
+          else
+            return 0;
+        }catch (Exception e) {
+          return 0;
+        }
+      }
+    });
     return listVersion ;
   }
 

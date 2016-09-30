@@ -96,7 +96,9 @@ public class VersionNode {
       path_ = version.getPath();
       ws_ = version.getSession().getWorkspace().getName();
       uuid_ = version.getUUID();
-      author_ = version.getNode("jcr:frozenNode").getProperty(org.exoplatform.ecm.webui.utils.Utils.EXO_LASTMODIFIER).getString();
+      if(version.hasNode(org.exoplatform.ecm.webui.utils.Utils.JCR_FROZEN)) {
+        author_ = version.getNode(org.exoplatform.ecm.webui.utils.Utils.JCR_FROZEN).getProperty(org.exoplatform.ecm.webui.utils.Utils.EXO_LASTMODIFIER).getString();
+      }
       versionLabels_ = version.getVersionHistory().getVersionLabels(version);
     } catch (Exception e) {
       if (LOG.isWarnEnabled()) {
@@ -148,6 +150,15 @@ public class VersionNode {
     SessionProvider provider = systemWS.equals(ws_) ? WCMCoreUtils.getSystemSessionProvider() :
                                                      WCMCoreUtils.getUserSessionProvider();
     return ((Node)provider.getSession(ws_, repo).getItem(path_)).getNode(nodeName);
+  }
+
+  public boolean hasNode(String nodeName) throws Exception {
+    DMSConfiguration dmsConf = WCMCoreUtils.getService(DMSConfiguration.class);
+    String systemWS = dmsConf.getConfig().getSystemWorkspace();
+    ManageableRepository repo = WCMCoreUtils.getRepository();
+    SessionProvider provider = systemWS.equals(ws_) ? WCMCoreUtils.getSystemSessionProvider() :
+            WCMCoreUtils.getUserSessionProvider();
+    return ((Node)provider.getSession(ws_, repo).getItem(path_)).hasNode(nodeName);
   }
   
   public String getUUID() { return uuid_; }
