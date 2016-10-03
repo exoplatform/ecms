@@ -381,6 +381,41 @@
       </component-plugin>
     </component-plugins>
   </component>
+
+  <component>
+    <key>org.gatein.api.Portal</key>
+    <type>org.gatein.api.PortalImpl</type>
+  </component>
+
+  <component>
+    <key>org.exoplatform.services.resources.ResourceBundleManager</key>
+    <type>org.exoplatform.services.resources.ResourceBundleManager</type>
+  </component>
+
+  <component>
+    <key>org.gatein.api.oauth.OAuthProviderAccessor</key>
+    <type>org.gatein.api.oauth.BasicOAuthProviderAccessorImpl</type>
+  </component>
+
+  <component>
+    <key>org.gatein.security.oauth.spi.OAuthProviderTypeRegistry</key>
+    <type>org.gatein.security.oauth.registry.OAuthProviderTypeRegistryImpl</type>
+  </component>
+
+  <component>
+    <key>org.gatein.security.oauth.spi.SocialNetworkService</key>
+    <type>org.gatein.security.oauth.data.SocialNetworkServiceImpl</type>
+  </component>
+
+  <component>
+    <type>org.exoplatform.web.security.codec.CodecInitializer</type>
+    <init-params>
+      <value-param>
+        <name>gatein.conf.dir</name>
+        <value>jar:/conf</value>
+      </value-param>
+    </init-params>
+  </component>
   
   <external-component-plugins>
     <target-component>org.exoplatform.services.cms.impl.DMSConfiguration</target-component>
