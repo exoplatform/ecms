@@ -15,29 +15,12 @@
  * along with this program; if not, see<http://www.gnu.org/licenses/>.
  */
 package org.exoplatform.ecm.webui.component.explorer.versions;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
-import java.util.Locale;
 
-import javax.jcr.Node;
-import javax.jcr.version.Version;
-import javax.jcr.version.VersionHistory;
-
-import org.apache.commons.lang.StringUtils;
 import org.exoplatform.ecm.webui.component.explorer.UIDocumentWorkspace;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.impl.DMSConfiguration;
 import org.exoplatform.services.document.DocumentReaderService;
-import org.exoplatform.services.document.diff.AddDelta;
-import org.exoplatform.services.document.diff.ChangeDelta;
-import org.exoplatform.services.document.diff.DeleteDelta;
-import org.exoplatform.services.document.diff.Delta;
-import org.exoplatform.services.document.diff.DiffService;
-import org.exoplatform.services.document.diff.Revision;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
@@ -46,6 +29,12 @@ import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
+
+import javax.jcr.Node;
+import javax.jcr.version.Version;
+import javax.jcr.version.VersionHistory;
+import java.text.DateFormat;
+import java.util.*;
 
 /**
  * Created by The eXo Platform SARL
@@ -182,38 +171,47 @@ public class UIDiff extends UIComponent {
 
   public boolean isCompareable() { return versionCompareable_ ; }
 
-  public List<Delta> getDeltas() throws Exception {
-    List<Delta> deltas = new ArrayList<Delta>();
+  public String getDifferences() throws Exception {
     String previousText = getText(getNode(baseVersionWs_, baseVersionPath_).getNode("jcr:frozenNode"));
     String currentText = getText(getNode(versionWs_, versionPath_).getNode("jcr:frozenNode"));
     if((previousText != null)&&(currentText != null)) {
-      String lineSeparator = DiffService.NL;
-      Object[] orig = StringUtils.split(previousText, lineSeparator);
-      Object[] rev = StringUtils.split(currentText, lineSeparator);
-      DiffService diffService = getApplicationComponent(DiffService.class) ;
-      Revision revision = diffService.diff(orig, rev);
-      for (int i = 0; i < revision.size(); i++) {
-        deltas.add(revision.getDelta(i));
-      }
+      DiffService diffService = new DiffService();
+      DiffResult diffResult = diffService.getDifferencesAsHTML(previousText, currentText, true);
+      return (diffResult.getDiffHTML());
     }
-    return deltas;
+    return "";
   }
 
-  public boolean isDeleteDelta(Delta delta) {
-    if (delta instanceof DeleteDelta) return true;
-    return false;
+  public boolean isImage() throws Exception {
+    String baseMimetype = "";
+    String mimeType = "";
+    Node baseContent = getNode(baseVersionWs_, baseVersionPath_).getNode("jcr:frozenNode").getNode("jcr:content");
+    if(baseContent.hasProperty("jcr:mimeType")) {
+      baseMimetype = baseContent.getProperty("jcr:mimeType").getString();
+    }
+    Node content = getNode(versionWs_, versionPath_).getNode("jcr:frozenNode").getNode("jcr:content");
+    if(baseContent.hasProperty("jcr:mimeType")) {
+      mimeType = content.getProperty("jcr:mimeType").getString();
+    }
+    return mimeType.startsWith("image") && baseMimetype.startsWith("image");
   }
 
-  public boolean isAddDelta(Delta delta) {
-    if (delta instanceof AddDelta) return true;
-    return false;
+  private String getPreviewImagePath(Node node, String workspace, String version) throws Exception {
+    return  "/" + WCMCoreUtils.getPortalName() + "/" + WCMCoreUtils.getRestContextName()+ "/jcr/"
+        + WCMCoreUtils.getRepository().getConfiguration().getName() + "/" + workspace + node.getPath()
+        + "?version=" + version;
   }
 
-  public boolean isChangeDelta(Delta delta) {
-    if (delta instanceof ChangeDelta) return true;
-    return false;
+  public String getBaseImage() throws Exception {
+    Node node = org.exoplatform.wcm.webui.Utils.getRealNode(getNode(baseVersionWs_, baseVersionPath_).getNode("jcr:frozenNode"));
+    return getPreviewImagePath(node, baseVersionWs_, baseVersionName_);
   }
-  
+
+  public String getImage() throws Exception {
+    Node node = org.exoplatform.wcm.webui.Utils.getRealNode(getNode(versionWs_, versionPath_).getNode("jcr:frozenNode"));
+    return getPreviewImagePath(node, versionWs_, versionName_);
+  }
+
   private Node getNode(String ws, String path) throws Exception {
     DMSConfiguration dmsConf = WCMCoreUtils.getService(DMSConfiguration.class);
     String systemWS = dmsConf.getConfig().getSystemWorkspace();

@@ -2,7 +2,6 @@
     import org.apache.commons.lang.StringEscapeUtils;
     import org.exoplatform.ecm.jcr.model.VersionNode;
     import org.exoplatform.ecm.webui.component.explorer.versions.UIVersionInfo;
-	import org.exoplatform.services.document.diff.Delta ;
     import org.exoplatform.social.core.identity.model.Identity;
     import org.exoplatform.social.core.identity.provider.OrganizationIdentityProvider;
     import org.exoplatform.social.webui.Utils;
@@ -54,8 +53,7 @@
     </div>
 			<div class="uiContentBox">
 				<%
-					def arr = uicomponent.getDeltas() ;					
-					if(!uicomponent.isCompareable()) {											
+                    if(!uicomponent.isCompareable()) {
 				%>
 				<div class="contentDetail">						
 					<label><%=_ctx.appRes("UIDiff.label.can-not-compare")%></label>						
@@ -143,7 +141,7 @@
 
                         <div class="center comparedwith hidden-phone"><%=_ctx.appRes("UIDiff.label.ComparedWith")%></div>
                     <%
-                        if(arr.isEmpty()) {
+                        if(uicomponent.getDifferences().isEmpty()) {
                     %>
                         <div class="contentDetail">
                             <div  class="contentEmpty">
@@ -151,63 +149,36 @@
                             </div>
                         </div>
                     <%
-                        } else {
+                        } else if(!uicomponent.isImage()) {
                     %>
 						<table class="uiGrid table table-hover table-striped">
-						  <tbody>
-						  <%  
-						    def i=1;
-						  	for(Delta delta in uicomponent.getDeltas()){
-						  	  //jm.require("SHARED/ecm-utils", "ecmutil").addScripts("ecmutil.ECMUtils.insertContentToIframe('$i');") ;
-			    		%>		    		
-		    			<tr onload="eXo.ecm.ECMUtils.insertContentToIframe('$i') ;"> 
-		    				<% 
-		    					if (uicomponent.isDeleteDelta(delta)) {
-		    				%>	   
-		    				<td class="diffDelete">
-		    				  <div id="original${i}" scrolling = "auto" style="border: 0px; height: 60px; width: 100%;overflow :auto; " content="<%=delta.getOriginal().toString()%>">
-		    				    <%=delta.getOriginal().toString()%>
-		    				  </div>
-		    				</td>	 				
-		    				<td class="diffEmpty">
-		    				  <div id="revised${i}" scrolling = "auto" style="border: 0px; height: 60px; width: 100%;overflow :auto;" content="<%=delta.getRevised().toString()%>">
-		    				    <%=delta.getRevised().toString()%>
-		    				  </div>
-		    				</td>	
-		    				<% 
-		    					} else if(uicomponent.isAddDelta(delta)) { 
-		    				%>
-		    				<td class="diffEmpty">
-		    				  <div id="original${i}" scrolling = "auto" style="border: 0px; height: 60px; width: 100%;overflow :auto;" content="<%=delta.getOriginal().toString()%>">
-		    				    <%=delta.getOriginal().toString()%>
-		    				  </div>
-		    				</td>
-		    				<td class="diffAdd">
-		    				  <div id="revised${i}" scrolling = "auto" style="border: 0px; height: 60px; width: 100%;overflow :auto;" content="<%=delta.getRevised().toString()%>">
-		    				    <%=delta.getRevised().toString()%>
-		    				  </div>
-		    				</td>	
-		    				<% 
-		    					} else {	    		
-		    				%>
-		    				<td class="diffModify">
-		    				  <div id="original${i}" scrolling = "auto" style="border: 0px; height: 60px; width: 100%;overflow :auto;" content="<%=delta.getOriginal().toString()%>">
-		    				    <%=delta.getOriginal().toString()%>
-		    				  </div>
-		    			  </td>	
-		    				<td class="diffModify">
-		    				  <div id="revised${i}" scrolling = "auto" style="border: 0px; height: 60px; width: 100%;overflow :auto;" content="<%=delta.getRevised().toString()%>">
-		    				    <%=delta.getRevised().toString()%>
-		    				  </div>
-		    				</td>
-		    				<% } %>	    				
-		    			</tr>
-		    			<% 
-						i++;		    			
-		    			  } 
-		    			%>
+						<tbody>
+                            <tr>
+                                <td>
+                                  <div id="original" scrolling = "auto" style="border: 0px; height: 80px; width: 100%;overflow :auto;">
+                                    <%= uicomponent.getDifferences() %>
+                                  </div>
+                              </td>
+                            </tr>
 						</tbody>						
 						</table>
-					<% } } %>			    	
+					<% } else { %>
+					<table class="uiGrid table table-hover table-striped">
+                        <tbody>
+					      <tr>
+                          <td>
+                            <div id="original1">
+                                <img src="<%= uicomponent.getBaseImage()%>" height="200" width="410"></img>
+                            </div>
+                          </td>
+                          <td>
+                            <div id="revised1">
+                                <img src="<%= uicomponent.getImage()%>" height="200" width="410"></img>
+                            </div>
+                          </td>
+                          </tr>
+                        </tbody>
+                    </table>
+					<% } } %>
 			</div>
 </div>
