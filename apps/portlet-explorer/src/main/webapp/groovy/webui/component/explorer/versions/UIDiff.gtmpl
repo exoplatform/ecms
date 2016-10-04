@@ -145,7 +145,7 @@
                     %>
                         <div class="contentDetail">
                             <div  class="contentEmpty">
-                                <label> <%=_ctx.appRes("UIDiff.label.noChange")%> </label>
+                                <label> <%=_ctx.appRes("UIDiff.label.noContent")%> </label>
                             </div>
                         </div>
                     <%

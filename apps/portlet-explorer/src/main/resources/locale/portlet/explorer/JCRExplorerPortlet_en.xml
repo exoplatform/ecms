@@ -1485,7 +1485,7 @@
     <label>
       <backTo>Back to version history</backTo>
       <diffTitle>Compare Versions</diffTitle>
-      <noChange>No change between two versions</noChange>
+      <noContent>There is no content to compare</noContent>
       <compareVerion>Version {0} by {1}</compareVerion>
       <can-not-compare>Failed to compare two versions</can-not-compare>
       <DateChange>On {0}</DateChange>
