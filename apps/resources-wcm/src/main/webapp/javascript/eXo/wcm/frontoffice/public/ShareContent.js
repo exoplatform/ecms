@@ -28,6 +28,13 @@
     gj("#UIShareDocument").on("keydown", function (evt) {
       evt.stopPropagation();
     });
+    gj(".mention-input").on("change", function (event) {
+      if (gj("#user").val() != "") {
+        gj(".addEntry").removeAttr('disabled');
+      } else {
+        gj(".addEntry").attr('disabled','disabled');
+      }
+    });
     gj(".uiShareDocuments.resizable #textAreaInput").exoMentions({
       onDataRequest : function(mode, query, callback) {
         var url = window.location.protocol + '//' + window.location.host + '/' + eXo.env.portal.rest + '/social/people/getprofile/data.json?search=' + query;
@@ -49,8 +56,11 @@
       },
       messages : window.eXo.social.I18n.mentions
     });
-
-    gj('#DisplaytextAreaInput').trigger('focus');
+    if (gj("#user").val() == "") {
+      gj(".addEntry").attr('disabled','disabled');
+    } else {
+      gj(".addEntry").removeAttr('disabled');
+    }
   }
 
   ShareContent.prototype.doShare = function(){
