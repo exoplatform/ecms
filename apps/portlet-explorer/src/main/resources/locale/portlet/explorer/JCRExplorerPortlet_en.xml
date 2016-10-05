@@ -61,7 +61,7 @@
       <refresh-session-success>The session was refreshed successfully.</refresh-session-success>
       <no-node-history>You are in the root node.</no-node-history>
       <save-session-success>All changes have been saved.</save-session-success>
-      <target-path-not-found>You cannot access this node, either because it doesn't exist anymore or because you do not have the right to access it.</target-path-not-found>
+      <target-path-not-found>You cannot access this document, either because it doesn't exist anymore or because you do not have the right to access it.</target-path-not-found>
     </msg>
   </UIJCRExplorer>
   <!--

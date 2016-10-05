@@ -61,7 +61,7 @@
       <refresh-session-success>La session a été réactualisée avec succès.</refresh-session-success>
       <no-node-history>Vous êtes à la racine.</no-node-history>
       <save-session-success>Les modifications ont été sauvegardés.</save-session-success>
-      <target-path-not-found>Vous ne pouvez pas accéder ce noeud car il n'existe pas ou vous n'avez pas de permission d'y accéder.</target-path-not-found>
+      <target-path-not-found>Vous ne pouvez pas accéder ce document car il n'existe pas ou vous n'avez pas de permission d'y accéder.</target-path-not-found>
     </msg>
   </UIJCRExplorer>
   <!--
