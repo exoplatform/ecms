@@ -6110,7 +6110,8 @@ var PDFViewerApplication = {
   preferencePdfBugEnabled: false,
   preferenceShowPreviousViewOnLoad: true,
   preferenceDefaultZoomValue: '',
-  isViewerEmbedded: (window.parent !== window),
+  // force embedded mode so pdf.js does not update browser title with document name
+  isViewerEmbedded: true,
   url: '',
 
   // called once when the document is loaded
