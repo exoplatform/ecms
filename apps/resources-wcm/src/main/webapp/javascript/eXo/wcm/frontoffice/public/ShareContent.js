@@ -30,9 +30,9 @@
     });
     gj(".mention-input").on("change", function (event) {
       if (gj("#user").val() != "") {
-        gj(".addEntry").removeAttr('disabled');
+        gj("#addActionBtn").removeAttr('disabled');
       } else {
-        gj(".addEntry").attr('disabled','disabled');
+        gj("#addActionBtn").attr('disabled','disabled');
       }
     });
     gj(".uiShareDocuments.resizable #textAreaInput").exoMentions({
@@ -57,9 +57,9 @@
       messages : window.eXo.social.I18n.mentions
     });
     if (gj("#user").val() == "") {
-      gj(".addEntry").attr('disabled','disabled');
+      gj("#addActionBtn").attr('disabled','disabled');
     } else {
-      gj(".addEntry").removeAttr('disabled');
+      gj("#addActionBtn").removeAttr('disabled');
     }
   }
 
