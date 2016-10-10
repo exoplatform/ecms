@@ -16,18 +16,13 @@
  */
 package org.exoplatform.services.cms.documents.impl;
 
-import java.net.URLEncoder;
-import java.util.*;
-
-import javax.jcr.Node;
-import javax.jcr.RepositoryException;
-
 import org.exoplatform.commons.utils.CommonsUtils;
 import org.exoplatform.container.xml.PortalContainerInfo;
 import org.exoplatform.portal.config.UserPortalConfig;
 import org.exoplatform.portal.config.UserPortalConfigService;
 import org.exoplatform.portal.mop.SiteKey;
-import org.exoplatform.portal.mop.user.*;
+import org.exoplatform.portal.mop.user.UserNavigation;
+import org.exoplatform.portal.mop.user.UserPortalContext;
 import org.exoplatform.services.cms.documents.DocumentService;
 import org.exoplatform.services.cms.documents.model.Document;
 import org.exoplatform.services.cms.drives.DriveData;
@@ -44,6 +39,14 @@ import org.gatein.api.navigation.Navigation;
 import org.gatein.api.navigation.Nodes;
 import org.gatein.api.site.SiteId;
 
+import javax.jcr.Node;
+import javax.jcr.RepositoryException;
+import java.net.URLEncoder;
+import java.util.Calendar;
+import java.util.List;
+import java.util.Locale;
+import java.util.ResourceBundle;
+
 /**
  * Created by The eXo Platform SAS Author : eXoPlatform exo@exoplatform.com Mar
  * 22, 2011
@@ -59,6 +62,7 @@ public class DocumentServiceImpl implements DocumentService {
   public static final String EXO_TITLE_PROP = "exo:title";
   public static final String CURRENT_STATE_PROP = "publication:currentState";
   public static final String DOCUMENTS_APP_NAVIGATION_NODE_NAME = "documents";
+  public static final String DOCUMENT_NOT_FOUND = "?path=doc-not-found";
 
   private ManageDriveService manageDriveService;
   private Portal portal;
@@ -154,6 +158,12 @@ public class DocumentServiceImpl implements DocumentService {
     String containerName = WCMCoreUtils.getService(PortalContainerInfo.class).getContainerName();
     StringBuffer url = new StringBuffer();
     url.append("/").append(containerName);
+    if (drive == null) {
+      SiteKey siteKey = getDefaultSiteKey();
+      url.append("/").append(siteKey.getName()).append("/").append(DOCUMENTS_APP_NAVIGATION_NODE_NAME)
+          .append(DOCUMENT_NOT_FOUND);
+      return url.toString();
+    }
 
     String encodedDriveName = URLEncoder.encode(drive.getName(), "UTF-8");
     String encodedNodePath = URLEncoder.encode(nodePath, "UTF-8");
