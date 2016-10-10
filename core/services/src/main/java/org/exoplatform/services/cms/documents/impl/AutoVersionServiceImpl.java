@@ -7,6 +7,7 @@ import org.exoplatform.services.cms.drives.ManageDriveService;
 import org.exoplatform.services.jcr.ext.utils.VersionHistoryUtils;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.services.cms.drives.DriveData;
@@ -14,6 +15,7 @@ import org.exoplatform.services.cms.drives.DriveData;
 import javax.jcr.Node;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.GregorianCalendar;
 import java.util.List;
 /**
  * Created by The eXo Platform SEA
@@ -53,8 +55,21 @@ public class AutoVersionServiceImpl implements AutoVersionService{
     manageDriveService = WCMCoreUtils.getService(ManageDriveService.class);
     if(currentNode.canAddMixin(NodetypeConstant.MIX_REFERENCEABLE)){
       currentNode.addMixin(NodetypeConstant.MIX_REFERENCEABLE);
-      currentNode.save();
     }
+
+    if(currentNode.canAddMixin(NodetypeConstant.EXO_MODIFY)){
+      currentNode.addMixin(NodetypeConstant.EXO_MODIFY);
+      currentNode.setProperty(NodetypeConstant.EXO_DATE_CREATED, new GregorianCalendar());
+    }
+
+    currentNode.setProperty(NodetypeConstant.EXO_LAST_MODIFIED_DATE, new GregorianCalendar());
+    
+    ConversationState conversationState = ConversationState.getCurrent();
+    String userName = (conversationState == null) ? currentNode.getSession().getUserID() :
+                                                    conversationState.getIdentity().getUserId();
+    currentNode.setProperty(NodetypeConstant.EXO_LAST_MODIFIER, userName);
+    currentNode.save();
+
     if(isSkipCheckDrive){
       VersionHistoryUtils.createVersion(currentNode);
       return;
