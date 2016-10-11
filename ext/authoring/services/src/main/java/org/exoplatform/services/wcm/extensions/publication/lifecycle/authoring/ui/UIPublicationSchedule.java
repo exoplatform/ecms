@@ -16,6 +16,7 @@
  */
 package org.exoplatform.services.wcm.extensions.publication.lifecycle.authoring.ui;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import javax.jcr.ItemExistsException;
@@ -56,8 +57,8 @@ public class UIPublicationSchedule extends UIForm {
   private static final Log    LOG               = LogFactory.getLog(UIPublicationSchedule.class.getName());
   
   public UIPublicationSchedule() throws Exception {
-    addUIFormInput(new UIFormDateTimeInput(START_PUBLICATION, START_PUBLICATION, null).addValidator(DateTimeValidator.class));
-    addUIFormInput(new UIFormDateTimeInput(END_PUBLICATION, END_PUBLICATION, null).addValidator(DateTimeValidator.class));
+    addUIFormInput(new UIFormDateTimeInput(START_PUBLICATION, START_PUBLICATION, null,true,true).addValidator(DateTimeValidator.class));
+    addUIFormInput(new UIFormDateTimeInput(END_PUBLICATION, END_PUBLICATION, null,true,true).addValidator(DateTimeValidator.class));
     setActions(new String[] { "Save", "Reset" });
   }
   
@@ -99,6 +100,11 @@ public class UIPublicationSchedule extends UIForm {
       String endValue = endPublication.getValue();
       Calendar startDate = startPublication.getCalendar();
       Calendar endDate = endPublication.getCalendar();
+      SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss Z");
+      String startdateconv=format.format(format.parse(startValue));
+      String enddateconv=format.format(format.parse(endValue));
+      startDate.setTime(format.parse(startdateconv));
+      endDate.setTime(format.parse(enddateconv));
       Node node = publicationPanel.getCurrentNode();
       try {
         if ((startDate == null && StringUtils.isNotEmpty(startValue))
