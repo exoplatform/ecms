@@ -61,7 +61,7 @@
       <refresh-session-success>La session a été réactualisée avec succès.</refresh-session-success>
       <no-node-history>Vous êtes à la racine.</no-node-history>
       <save-session-success>Les modifications ont été sauvegardés.</save-session-success>
-      <target-path-not-found>Vous ne pouvez pas accéder ce noeud car il n'existe pas ou vous n'avez pas de permission d'y accéder.</target-path-not-found>
+      <target-path-not-found>Vous ne pouvez pas accéder ce document car il n'existe pas ou vous n'avez pas de permission d'y accéder.</target-path-not-found>
     </msg>
   </UIJCRExplorer>
   <!--
@@ -3084,6 +3084,7 @@
     <msg>
       <no-view-found>Il n'y a pas de vue disponible par rapport à vos droits d'accès sur le lecteur '{0}'.</no-view-found>
       <access-denied>Accès refusé. Vous n'avez peut-être pas les droits suffisants pour accéder à l'espace de stockage du lecteur '{0}'.</access-denied>
+      <not-found>Le document que vous essayez d'accéder n'existe plus.</not-found>
       <empty-drives>Il n'y a pas de lecteur dans ce dépôt de données ou vous n'avez pas les droits requis pour accéder à au moins un lecteur de ce dépôt de données.</empty-drives>
       <workspace-not-exist>Le lecteur '{0}' a été enregistré dans un espace de stockage inconnu. Veuillez reconfigurer le lecteur.</workspace-not-exist>
     </msg>

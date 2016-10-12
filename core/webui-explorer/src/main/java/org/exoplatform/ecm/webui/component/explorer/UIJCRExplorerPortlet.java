@@ -94,6 +94,8 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
 
   final static public String SHOW_FILTER_BAR    = "showFilterBar";
 
+  final static private String DOC_NOT_FOUND    = "doc-not-found";
+
   private String backTo ="";
 
   private boolean flagSelect = false;
@@ -313,6 +315,11 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
   private void showDocument(WebuiRequestContext context, Map<String, String> map) throws Exception {
     String repositoryName = String.valueOf(map.get("repository"));
     String driveName = String.valueOf(map.get("drive"));
+    if (driveName.equals(DOC_NOT_FOUND)) {
+      UIApplication uiApp = findFirstComponentOfType(UIApplication.class);
+      uiApp.addMessage(new ApplicationMessage("UIDrivesArea.msg.not-found", null, ApplicationMessage.WARNING));
+      return;
+    }
     String path = String.valueOf(map.get("path"));
     if (path.indexOf("&") > 0) {
       path = path.substring(0, path.indexOf("&"));
@@ -418,12 +425,12 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
     } catch(AccessDeniedException ace) {
       Object[] args = { driveName };
       uiApp.addMessage(new ApplicationMessage("UIDrivesArea.msg.access-denied", args,
-          ApplicationMessage.WARNING));      
+          ApplicationMessage.WARNING));
       return;
     } catch(NoSuchWorkspaceException nosuchWS) {
       Object[] args = { driveName };
       uiApp.addMessage(new ApplicationMessage("UIDrivesArea.msg.workspace-not-exist", args,
-          ApplicationMessage.WARNING));      
+          ApplicationMessage.WARNING));
       return;
     } catch(Exception e) {
       JCRExceptionManager.process(uiApp, e);

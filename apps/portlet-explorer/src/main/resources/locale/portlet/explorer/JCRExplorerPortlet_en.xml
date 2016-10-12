@@ -61,7 +61,7 @@
       <refresh-session-success>The session was refreshed successfully.</refresh-session-success>
       <no-node-history>You are in the root node.</no-node-history>
       <save-session-success>All changes have been saved.</save-session-success>
-      <target-path-not-found>You cannot access this node, either because it doesn't exist anymore or because you do not have the right to access it.</target-path-not-found>
+      <target-path-not-found>You cannot access this document, either because it doesn't exist anymore or because you do not have the right to access it.</target-path-not-found>
     </msg>
   </UIJCRExplorer>
   <!--
@@ -3084,6 +3084,7 @@
     <msg>
       <no-view-found>There are no views applied for your access permission in drive '{0}'.</no-view-found>
       <access-denied>Access denied. You may not have permission in the workspace of drive '{0}'.</access-denied>
+      <not-found>The document you are trying to access is no longer available.</not-found>
       <empty-drives>Access denied. Either there is no drive in this repository or you do not have permission to access any drives in this repository.</empty-drives>
       <workspace-not-exist>Drive '{0}' was stored in one unrecognized workspace. Please reconfigure this drive.</workspace-not-exist>
     </msg>

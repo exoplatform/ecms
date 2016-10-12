@@ -16,18 +16,17 @@
  */
 package org.exoplatform.ecm.webui.component.explorer.sidebar;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.jcr.Node;
-import javax.jcr.RepositoryException;
-
 import org.exoplatform.services.cms.link.NodeLinkAware;
+import org.exoplatform.services.jcr.impl.core.NodeImpl;
 import org.exoplatform.services.jcr.util.Text;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.core.NodeLocation;
-import org.exoplatform.services.jcr.impl.core.NodeImpl;
+
+import javax.jcr.Node;
+import javax.jcr.RepositoryException;
+import java.util.ArrayList;
+import java.util.List;
 /**
  * Created by The eXo Platform SARL
  * Author : Tran The Trong
@@ -127,11 +126,7 @@ public class TreeNode {
     for(TreeNode child : children_) {
       if(child.getName().equals(name)) return child ;
     }
-    Node tempNode = this.getNode().getNode(name);
-    if (tempNode == null) return null;
-    TreeNode tempTreeNode = new TreeNode(tempNode);
-    children_.add(tempTreeNode);
-    return tempTreeNode;
+    return null;
   }
 
   public void setChildren(List<Node> children) throws Exception {
