@@ -1418,7 +1418,7 @@
   -->
   <UIActivateVersion>
     <label>
-      <note>Le versionnage n'a pas été activé pour ce noeud.</note>
+      <note>Le versionnage n'a pas été activé pour ce document.</note>
       <question>Confirmez-vous l'activation?</question>
       <button-active>Activer</button-active>
       <button-cancel>#{word.cancel}</button-cancel>

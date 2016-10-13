@@ -1428,7 +1428,7 @@
   -->
   <UIActivateVersion>
     <label>
-      <note>Versioning has not been activated for this node.</note>
+      <note>Versioning has not been activated for this document.</note>
       <question>Are you sure you want to activate it?</question>
       <button-active>Activate</button-active>
       <button-cancel>#{word.cancel}</button-cancel>
