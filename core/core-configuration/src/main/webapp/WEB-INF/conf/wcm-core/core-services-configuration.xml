@@ -304,7 +304,7 @@
                         <field name="subject"><string>${gatein.ecms.watchdocument.subject:Your watching document is changed}</string></field>
                         <field name="mimeType"><string>${gatein.ecms.watchdocument.mimetype:text/html}</string></field>
                         <field name="content">
-                            <string>${gatein.ecms.watchdocument.content:<![CDATA[Dear $user_name,<br><br>The document $doc_name ($doc_title) has changed.<br><br>Please go to <a href="$doc_url">$doc_title</a> to see this change.<br><br>]]>}
+                            <string>${gatein.ecms.watchdocument.content:<![CDATA[Dear $user_name,<br/><br/>The document $doc_name ($doc_title) has changed.<br/><br/>Please go to <a href="$doc_url">$doc_title</a> to see this change.<br/><br/>]]>}
                             </string>
                         </field>
                     </object>
