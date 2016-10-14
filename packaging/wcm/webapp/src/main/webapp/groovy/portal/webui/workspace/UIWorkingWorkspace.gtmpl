@@ -17,7 +17,6 @@
   def selectedNodeUri = Util.getUIPortal().getSelectedUserNode().getURI();
   def session = _ctx.getRequestContext().getRequest().getSession();
   def previousURI = session.getAttribute("previousURI");
-  NavigationUtils.removeNavigationAsJson(portalName, userName);
   
   session.setAttribute("previousURI", selectedNodeUri);
 
@@ -46,7 +45,14 @@
 </script>
     
 <div id="UIWorkingWorkspace" class="UIWorkingWorkspace" style="position: relative; z-index: 0;">
-  <%uicomponent.renderChildren()%>
+  <%
+  try{
+   uicomponent.renderChildren();
+   }
+  finally{
+   NavigationUtils.removeNavigationAsJson(portalName, userName);
+   }
+  %>
 </div>
 <div id="user-status" user-status-ping-frequency="<%=frequency%>" user-status-offline-delay="<%=delay%>" style="display: none;"></div>
 
