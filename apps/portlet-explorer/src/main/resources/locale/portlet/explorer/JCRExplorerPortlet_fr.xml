@@ -1345,6 +1345,9 @@
   ###############################################################################
   -->
   <UIVersionInfo>
+    <summary>
+      <empty>Cliquer ici pour ajouter un résumé</empty>
+    </summary>
     <tooltip>
       <version>Version</version>
       <baseVersion>Version de base</baseVersion>

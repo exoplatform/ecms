@@ -1346,6 +1346,9 @@
   -->
   <UIVersionInfo>
     <title>Versions history</title>
+    <summary>
+      <empty>Click here to add a summary</empty>
+    </summary>
     <tooltip>
       <version>Version</version>
       <baseVersion>Base Version</baseVersion>

@@ -82,6 +82,7 @@ import java.util.Locale;
       else
         clazz = "Even" ;
       String versionNumber = node.getName();
+      String emptySummary = _ctx.appRes("UIVersionInfo.summary.empty");
       String versionId = "version_"+versionNumber;
       boolean isBaseVersion = uicomponent.isBaseVersion(node);
       String baseVersion = "";
@@ -134,7 +135,7 @@ import java.util.Locale;
     </tr>
     <%
     def actionUrl = StringUtils.getNestedString(uicomponent.event('AddSummary', node.getPath()),"javascript:ajaxGet(\'","\')");
-    jsManager.require("SHARED/jquery", "gj").require("SHARED/X-editable", "xeditable").addScripts("gj(\"#versionSummary"+versionNumber+"\").editable({ mode: \"inline\", url: \""+actionUrl+"\", pk:\""+versionNumber+"\" ,type: \"text\" });");
+    jsManager.require("SHARED/jquery", "gj").require("SHARED/X-editable", "xeditable").addScripts("gj(\"#versionSummary"+versionNumber+"\").editable({ mode: \"inline\", url: \""+actionUrl+"\", pk:\""+versionNumber+"\" ,type: \"text\" ,emptytext: \""+emptySummary+"\" });");
     }
   }
 %>
