@@ -13,6 +13,7 @@
   
   rcontext.getJavascriptManager().require("SHARED/uiRightClickPopupMenu", "uiRightClickPopupMenu").
   addScripts("uiRightClickPopupMenu.init('" + uicomponent.getId() + "');").
+  require("SHARED/rename", "Rename").
   addScripts("eXo.ecm.Rename.init('" + refreshAction + "') ;");
 %>
 <div class="uiRightClickPopupMenu" id="$uicomponent.id">
