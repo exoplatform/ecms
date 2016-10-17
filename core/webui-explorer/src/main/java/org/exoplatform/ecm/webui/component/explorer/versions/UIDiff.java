@@ -99,6 +99,7 @@ public class UIDiff extends UIComponent {
     if (uiVersionInfo.getCurrentNode().isNodeType(Utils.MIX_VERSIONABLE)) {
       versionLabels_ = uiVersionInfo.getCurrentNode().getVersionHistory().getVersionLabels(version);
     }
+    versionCompareable_ = true ;
   }
   
   public void setVersions(Version baseVersion, String versionName, 

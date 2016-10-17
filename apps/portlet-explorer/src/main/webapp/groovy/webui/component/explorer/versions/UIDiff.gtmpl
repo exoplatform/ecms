@@ -141,7 +141,14 @@
 
                         <div class="center comparedwith hidden-phone"><%=_ctx.appRes("UIDiff.label.ComparedWith")%></div>
                     <%
-                        if(uicomponent.getDifferences().isEmpty()) {
+                        if(!uicomponent.isCompareable()) {
+                    %>
+                            <div class="contentDetail">
+                                <label><%=_ctx.appRes("UIDiff.label.can-not-compare")%></label>
+                            </div>
+
+                    <%
+                        } else if(uicomponent.getDifferences().isEmpty()) {
                     %>
                         <div class="contentDetail">
                             <div  class="contentEmpty">
