@@ -144,15 +144,17 @@
                         if(!uicomponent.isCompareable()) {
                     %>
                             <div class="contentDetail">
-                                <label><%=_ctx.appRes("UIDiff.label.can-not-compare")%></label>
+                            <div class="alert alert-warning">
+                                <i class="uiIconWarning"></i><%=_ctx.appRes("UIDiff.label.compare-unavailable")%>
                             </div>
+                        </div>
 
                     <%
                         } else if(uicomponent.getDifferences().isEmpty()) {
                     %>
                         <div class="contentDetail">
-                            <div  class="contentEmpty">
-                                <label> <%=_ctx.appRes("UIDiff.label.noContent")%> </label>
+                            <div class="alert alert-warning">
+                                <i class="uiIconWarning"></i><%=_ctx.appRes("UIDiff.label.compare-unavailable")%>
                             </div>
                         </div>
                     <%
