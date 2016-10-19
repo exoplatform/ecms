@@ -5,6 +5,7 @@ function UIVersionInfo(){
 
   UIVersionInfo.prototype.init = function(formId) {
   var me = eXo.ecm.UIVersionInfo;
+  window.scrollTo(0,0);
   me.selectedCheckbox = new Array();
   var versionListForm = document.getElementById(formId);
   var inputs = $(versionListForm).find(':checkbox');
