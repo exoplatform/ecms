@@ -16,21 +16,10 @@
  */
 package org.exoplatform.ecm.webui.component.explorer.control.action;
 
-import java.util.Arrays;
-import java.util.List;
-
-import javax.jcr.Node;
-
 import org.exoplatform.ecm.webui.component.explorer.UIDocumentWorkspace;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
-import org.exoplatform.ecm.webui.component.explorer.control.filter.CanEnableVersionFilter;
-import org.exoplatform.ecm.webui.component.explorer.control.filter.CanSetPropertyFilter;
-import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotFolderFilter;
-import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotEditingDocumentFilter;
-import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotRootNodeFilter;
-import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotLockedFilter;
-import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotIgnoreVersionNodeFilter;
+import org.exoplatform.ecm.webui.component.explorer.control.filter.*;
 import org.exoplatform.ecm.webui.component.explorer.control.listener.UIActionBarActionListener;
 import org.exoplatform.ecm.webui.component.explorer.versions.UIActivateVersion;
 import org.exoplatform.ecm.webui.component.explorer.versions.UIVersionInfo;
@@ -42,6 +31,10 @@ import org.exoplatform.webui.core.UIPopupContainer;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.ext.filter.UIExtensionFilter;
 import org.exoplatform.webui.ext.filter.UIExtensionFilters;
+
+import javax.jcr.Node;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by The eXo Platform SAS
@@ -82,6 +75,7 @@ public class ManageVersionsActionComponent extends UIComponent {
         UIDocumentWorkspace uiDocumentWorkspace = uiWorkingArea.getChild(UIDocumentWorkspace.class);
         UIVersionInfo uiVersionInfo = uiDocumentWorkspace.getChild(UIVersionInfo.class);
         uiVersionInfo.setCurrentNode(currentNode);
+        uiVersionInfo.setRootOwner(currentNode.getProperty("exo:lastModifier").getString());
         uiVersionInfo.activate();
         uiDocumentWorkspace.setRenderedChild(UIVersionInfo.class);
         event.getRequestContext().addUIComponentToUpdateByAjax(uiDocumentWorkspace);

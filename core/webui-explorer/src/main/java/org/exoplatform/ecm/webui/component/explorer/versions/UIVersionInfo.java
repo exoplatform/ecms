@@ -30,6 +30,8 @@ import org.exoplatform.services.jcr.impl.storage.JCRInvalidItemStateException;
 import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.security.ConversationState;
+import org.exoplatform.services.security.MembershipEntry;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
@@ -143,6 +145,15 @@ public class UIVersionInfo extends UIContainer  {
     if (!isRestoredVersions(listVersion))  return isRootversion(versionNode);
     else if (NodeLocation.getNodeByLocation(node_).getBaseVersion().getName().equals(versionNode.getName())) return true ;
     return false ;
+  }
+
+  public boolean hasPermission() throws Exception {
+    if (getCurrentNode().getPath().startsWith("/Groups/spaces")) {
+      MembershipEntry mem = new MembershipEntry("/spaces/" + getCurrentNode().getPath().split("/")[3], "manager");
+      return (ConversationState.getCurrent().getIdentity().getMemberships().contains(mem));
+    } else {
+      return true;
+    }
   }
 
   public boolean isRootversion(VersionNode versionNode) throws Exception {
