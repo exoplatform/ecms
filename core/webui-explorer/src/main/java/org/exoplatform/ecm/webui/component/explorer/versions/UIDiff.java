@@ -57,6 +57,10 @@ public class UIDiff extends UIComponent {
 
   public static final String TO_PARAM = "to";
 
+  private String rootAuthor_;
+  private String rootVersionNum_;
+  private String originNodePath_;
+
   //name, date, ws, path
   private String baseVersionName_;
   private String baseVersionDate_;
@@ -71,8 +75,13 @@ public class UIDiff extends UIComponent {
   private String versionPath_;
   private String versionAuthor_;
   private String[] versionLabels_;
-  
+
   private boolean versionCompareable_ = true ;
+
+  public void setRootAuthor(String author) {
+    this.rootAuthor_ = author;
+  }
+
 
   public void setVersions(Version baseVersion, Version version)
   throws Exception {
@@ -137,8 +146,8 @@ public class UIDiff extends UIComponent {
     return null ;
   }
 
-  public String getBaseVersionNum() throws Exception { return  baseVersionName_; }
-  public String getCurrentVersionNum() throws Exception {return versionName_; }
+  public String getBaseVersionNum() throws Exception { return  baseVersionName_.contains("rootVersion") ? getRootVersionNum() : baseVersionName_; }
+  public String getCurrentVersionNum() throws Exception {return versionName_.contains("rootVersion") ? getRootVersionNum() : versionName_; }
 
   public String getBaseVersionDate() throws Exception {
     return baseVersionDate_;
@@ -173,8 +182,20 @@ public class UIDiff extends UIComponent {
   public boolean isCompareable() { return versionCompareable_ ; }
 
   public String getDifferences() throws Exception {
-    String previousText = getText(getNode(baseVersionWs_, baseVersionPath_).getNode("jcr:frozenNode"));
-    String currentText = getText(getNode(versionWs_, versionPath_).getNode("jcr:frozenNode"));
+    Node node1 = getNode(baseVersionWs_, baseVersionPath_);
+    Node node2 = getNode(versionWs_, versionPath_);
+    String previousText = null;
+    String currentText = null;
+    if (node1.hasNode("jcr:frozenNode")) {
+      previousText = getText(node1.getNode("jcr:frozenNode"));
+    } else {
+      previousText = getText(getNode(baseVersionWs_, originNodePath_));
+    }
+    if (node2.hasNode("jcr:frozenNode")) {
+      currentText = getText(node2.getNode("jcr:frozenNode"));
+    } else {
+      currentText = getText(getNode(versionWs_, originNodePath_));
+    }
     if((previousText != null)&&(currentText != null)) {
       DiffService diffService = new DiffService();
       DiffResult diffResult = diffService.getDifferencesAsHTML(previousText, currentText, true);
@@ -186,11 +207,24 @@ public class UIDiff extends UIComponent {
   public boolean isImage() throws Exception {
     String baseMimetype = "";
     String mimeType = "";
-    Node baseContent = getNode(baseVersionWs_, baseVersionPath_).getNode("jcr:frozenNode").getNode("jcr:content");
+    Node baseNode = getNode(baseVersionWs_, baseVersionPath_);
+    Node baseContent = null;
+    if (baseNode.hasNode("jcr:frozenNode")) {
+      baseContent = baseNode.getNode("jcr:frozenNode").getNode("jcr:content");
+    } else {
+      SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
+      baseContent = getNode(baseVersionWs_, originNodePath_).getNode("jcr:content");
+    }
     if(baseContent.hasProperty("jcr:mimeType")) {
       baseMimetype = baseContent.getProperty("jcr:mimeType").getString();
     }
-    Node content = getNode(versionWs_, versionPath_).getNode("jcr:frozenNode").getNode("jcr:content");
+    Node node = getNode(versionWs_, versionPath_);
+    Node content = null;
+    if (node.hasNode("jcr:frozenNode")) {
+      content = node.getNode("jcr:frozenNode").getNode("jcr:content");
+    } else {
+      content = getNode(versionWs_, originNodePath_).getNode("jcr:content");
+    }
     if(baseContent.hasProperty("jcr:mimeType")) {
       mimeType = content.getProperty("jcr:mimeType").getString();
     }
@@ -222,6 +256,18 @@ public class UIDiff extends UIComponent {
     return (Node)provider.getSession(ws, repo).getItem(path);
   }
 
+  public void setRootVersionNum(String rootVersionNum) {
+    this.rootVersionNum_ = rootVersionNum;
+  }
+
+  public String getRootVersionNum() {
+    return rootVersionNum_;
+  }
+
+  public void setOriginNodePath(String originNodeId) {
+    this.originNodePath_ = originNodeId;
+  }
+
   static public class CloseCompareActionListener extends EventListener<UIDiff> {
     public void execute(Event<UIDiff> event) throws Exception {
       UIDiff uiDiff = event.getSource();
@@ -242,9 +288,15 @@ public class UIDiff extends UIComponent {
       String toVersionName = event.getRequestContext().getRequestParameter(TO_PARAM);
       UIDocumentWorkspace uiDocumentWorkspace = uiDiff.getAncestorOfType(UIDocumentWorkspace.class);
       UIVersionInfo uiVersionInfo = uiDocumentWorkspace.getChild(UIVersionInfo.class);
-      Node node = uiVersionInfo.getCurrentNode() ;
-      VersionHistory versionHistory = node.getVersionHistory() ;
-      uiDiff.setVersions(versionHistory.getVersion(fromVersionName), versionHistory.getVersion(toVersionName));
+      Node node = uiVersionInfo.getCurrentNode();
+      VersionHistory versionHistory = node.getVersionHistory();
+      if (fromVersionName.equals(uiVersionInfo.getRootVersionNum())) {
+        uiDiff.setVersions(uiVersionInfo.getCurrentNode().getVersionHistory().getRootVersion(), versionHistory.getVersion(toVersionName));
+      } else if (toVersionName.equals(uiVersionInfo.getRootVersionNum())) {
+        uiDiff.setVersions(versionHistory.getVersion(fromVersionName), uiVersionInfo.getCurrentNode().getVersionHistory().getRootVersion());
+      } else {
+        uiDiff.setVersions(versionHistory.getVersion(fromVersionName), versionHistory.getVersion(toVersionName));
+      }
     }
   }
 }

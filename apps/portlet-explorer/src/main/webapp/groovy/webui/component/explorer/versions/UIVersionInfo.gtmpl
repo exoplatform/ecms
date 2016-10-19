@@ -81,7 +81,7 @@ import java.util.Locale;
         clazz = "";
       else
         clazz = "Even" ;
-      String versionNumber = node.getName();
+      String versionNumber = uicomponent.isRootversion(node) ? uicomponent.getRootVersionNum() : node.getName();
       String emptySummary = _ctx.appRes("UIVersionInfo.summary.empty");
       String versionId = "version_"+versionNumber;
       boolean isBaseVersion = uicomponent.isBaseVersion(node);
@@ -89,7 +89,7 @@ import java.util.Locale;
       if (isBaseVersion) {
         baseVersion = " (" + _ctx.appRes("UIVersionInfo.tooltip.baseVersion") + ")";
       }
-      String authorUserName = node.getAuthor();
+      String authorUserName = uicomponent.isRootversion(node) ? uicomponent.getRootOwner() : node.getAuthor();
       String authorFullName = getProfileFullName(authorUserName);
       String avatarURL = getAvatarURL(authorUserName);
       String profileURL = getProfileURL(authorUserName);
