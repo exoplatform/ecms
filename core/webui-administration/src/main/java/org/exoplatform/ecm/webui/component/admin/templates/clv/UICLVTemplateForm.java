@@ -79,6 +79,7 @@ public class UICLVTemplateForm extends UIForm {
     UIFormTextAreaInput contentInput = new UIFormTextAreaInput(FIELD_CONTENT, FIELD_CONTENT, null);
     addUIFormInput(contentInput);
     UIFormStringInput nameInput = new UIFormStringInput(FIELD_TITLE, FIELD_TITLE, null);
+    nameInput.addValidator(ECMNameValidator.class);
     addUIFormInput(nameInput);
     UIFormStringInput tempateNameInput = new UIFormStringInput(FIELD_TEMPLATE_NAME, FIELD_TEMPLATE_NAME, null);
     tempateNameInput.addValidator(MandatoryValidator.class).addValidator(ECMNameValidator.class);
