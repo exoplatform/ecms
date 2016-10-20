@@ -376,12 +376,8 @@
 	};
 
 	MultiUpload.prototype.doDropItemArea = function(event, box, path) {
-		box.style.background="";
-		if (path.indexOf(eXo.ecm.MultiUpload.drivePath) == 0) {
-			path = path.substring(eXo.ecm.MultiUpload.drivePath.length);
-		}
-		eXo.ecm.MultiUpload.dropNodePath = path;
-		eXo.ecm.MultiUpload.drop(event);
+		var progressId = Math.random().toString().substring(2);
+               eXo.ecm.MultiUpload.processUploadRequest3(progressId);
 	};
 
 	MultiUpload.prototype.displayCorrectUploadButton = function() {
