@@ -33,12 +33,16 @@ import org.exoplatform.services.organization.User;
 import org.exoplatform.services.organization.UserEventListener;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+import org.gatein.common.logging.Logger;
+import org.gatein.common.logging.LoggerFactory;
 
 /**
  * @author Benjamin Mestrallet benjamin.mestrallet@exoplatform.com
  */
 public class NewUserListener extends UserEventListener {
   
+  private static final Logger LOG = LoggerFactory.getLogger(NewUserListener.class);
+
   private NewUserConfig config_;
   private NodeHierarchyCreator nodeHierarchyCreator_;
   private RepositoryService repositoryService_ ;
@@ -61,23 +65,27 @@ public class NewUserListener extends UserEventListener {
   private void initSystemData(String userName) throws Exception{
     SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
     Node userNode = nodeHierarchyCreator_.getUserNode(sessionProvider, userName);
-    Node queriesHome =  userNode.getNode(relativePath_) ;
-    boolean userFound = false;
-    NewUserConfig.User templateConfig = null;
-    for (NewUserConfig.User userConfig : config_.getUsers()) {
-      String currentName = userConfig.getUserName();
-      if (config_.getTemplate().equals(currentName))  templateConfig = userConfig;
-      if (currentName.equals(userName)) {
-        List<NewUserConfig.Query> queries = userConfig.getQueries();
-        importQueries(queriesHome, queries, userNode.getSession().getWorkspace().getName());
-        userFound = true;
-        break;
+    if (userNode.hasNode(relativePath_)) {
+      Node queriesHome =  userNode.getNode(relativePath_) ;
+      boolean userFound = false;
+      NewUserConfig.User templateConfig = null;
+      for (NewUserConfig.User userConfig : config_.getUsers()) {
+        String currentName = userConfig.getUserName();
+        if (config_.getTemplate().equals(currentName))  templateConfig = userConfig;
+        if (currentName.equals(userName)) {
+          List<NewUserConfig.Query> queries = userConfig.getQueries();
+          importQueries(queriesHome, queries, userNode.getSession().getWorkspace().getName());
+          userFound = true;
+          break;
+        }
       }
-    }
-    if (!userFound) {
-      //use template conf
-      List<NewUserConfig.Query> queries = templateConfig.getQueries();
-      importQueries(queriesHome, queries);
+      if (!userFound) {
+        //use template conf
+        List<NewUserConfig.Query> queries = templateConfig.getQueries();
+        importQueries(queriesHome, queries);
+      }
+    } else {
+      LOG.debug("The userNode "+userNode.getName()+" doesn't have a child node named : "+relativePath_+". The feature 'StoredQueries' will be ignored ");
     }
   }
 

@@ -66,15 +66,19 @@ public class AddToFavoriteScript implements CmsScript {
       if(userID.equals(IdentityConstants.ANONIM) || userID.equals(IdentityConstants.SYSTEM) || (activateUser != null && activateUser.equals(IdentityConstants.SYSTEM))) return;
       ExtendedNode userNode = (ExtendedNode)nodeHierarchyCreator_.getUserNode(WCMCoreUtils.getSystemSessionProvider(), userID);
       String favoritePath = nodeHierarchyCreator_.getJcrPath(FAVORITE_ALIAS);
-      ExtendedNode favoriteNode = (ExtendedNode)userNode.getNode(favoritePath);
-      if (nodePath.startsWith(favoriteNode.getPath())) { 
-        // Get new added node
-        ExtendedNode addedNode = (ExtendedNode) WCMCoreUtils.getSystemSessionProvider().
-        getSession(workspace, repositoryService_.getCurrentRepository()).getItem(nodePath);
-        if (templateService_.getAllDocumentNodeTypes().contains(addedNode.getPrimaryNodeType().getName())) {
-          // Add new node to favorite
-          favoriteService_.addFavorite(addedNode, userID);
+      if (userNode.hasNode(favoritePath)) {
+        ExtendedNode favoriteNode = (ExtendedNode)userNode.getNode(favoritePath);
+        if (nodePath.startsWith(favoriteNode.getPath())) {
+          // Get new added node
+          ExtendedNode addedNode = (ExtendedNode) WCMCoreUtils.getSystemSessionProvider().
+                  getSession(workspace, repositoryService_.getCurrentRepository()).getItem(nodePath);
+          if (templateService_.getAllDocumentNodeTypes().contains(addedNode.getPrimaryNodeType().getName())) {
+            // Add new node to favorite
+            favoriteService_.addFavorite(addedNode, userID);
+          }
         }
+      } else {
+        LOG.debug("The userNode "+userNode.getName()+" doesn't have a child node named : "+favoritePath+". The feature 'Favorite Documents' will be ignored ");
       }
     } catch (Exception e) {
       if (LOG.isErrorEnabled()) {
