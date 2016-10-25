@@ -135,7 +135,7 @@ import java.util.Locale;
     </tr>
     <%
     def actionUrl = StringUtils.getNestedString(uicomponent.event('AddSummary', node.getPath()),"javascript:ajaxGet(\'","\')");
-        if (uicomponent.hasPermission())
+        if (uicomponent.hasPermission(currentVersionNode))
     jsManager.require("SHARED/jquery", "gj").require("SHARED/X-editable", "xeditable").addScripts("gj(\"#versionSummary"+versionNumber+"\").editable({ mode: \"inline\", url: \""+actionUrl+"\", pk:\""+versionNumber+"\" ,type: \"text\" ,emptytext: \""+emptySummary+"\" });");
      else
     jsManager.require("SHARED/jquery", "gj").require("SHARED/X-editable", "xeditable").addScripts("gj(\"#versionSummary"+versionNumber+"\").editable({ mode: \"inline\", url: \""+actionUrl+"\", pk:\""+versionNumber+"\" ,type: \"text\" ,disabled: \"true\" ,emptytext: \""+emptySummary+"\" });");

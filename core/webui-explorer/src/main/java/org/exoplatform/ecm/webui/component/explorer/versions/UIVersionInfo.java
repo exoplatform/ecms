@@ -147,10 +147,12 @@ public class UIVersionInfo extends UIContainer  {
     return false ;
   }
 
-  public boolean hasPermission() throws Exception {
+  public boolean hasPermission(Node node) throws Exception {
     if (getCurrentNode().getPath().startsWith("/Groups/spaces")) {
       MembershipEntry mem = new MembershipEntry("/spaces/" + getCurrentNode().getPath().split("/")[3], "manager");
-      return (ConversationState.getCurrent().getIdentity().getMemberships().contains(mem));
+      return (ConversationState.getCurrent().getIdentity().getMemberships().contains(mem)
+      || ConversationState.getCurrent().getIdentity().getUserId().equals(node.getProperty("exo:lastModifier").getString()));
+
     } else {
       return true;
     }
