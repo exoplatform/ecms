@@ -55,9 +55,11 @@
 				<%
                     if(!uicomponent.isCompareable()) {
 				%>
-				<div class="contentDetail">						
-					<label><%=_ctx.appRes("UIDiff.label.can-not-compare")%></label>						
-				</div>	
+                    <div class="contentDetail">
+                        <div class="alert alert-warning">
+                            <i class="uiIconWarning"></i><%=_ctx.appRes("UIDiff.label.compare-unavailable")%>
+                        </div>
+                    </div>
 				<%
 					} else {
                         UIVersionInfo uiVersionInfo = uicomponent.getParent().getChild(UIVersionInfo.class);
@@ -171,7 +173,7 @@
 						<tbody>
                             <tr>
                                 <td>
-                                  <div id="original" scrolling = "auto" style="border: 0px; height: 80px; width: 100%;overflow :auto;">
+                                  <div id="original" scrolling = "auto" style="border: 0px; width: 100%;overflow :auto;">
                                     <%= uicomponent.getDifferences() %>
                                   </div>
                               </td>
