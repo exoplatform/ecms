@@ -16,13 +16,27 @@
  */
 package org.exoplatform.ecm.webui.component.explorer.versions;
 
+import java.text.DateFormat;
+import java.util.Calendar;
+import java.util.Locale;
+
+import javax.jcr.Node;
+import javax.jcr.PathNotFoundException;
+import javax.jcr.Property;
+import javax.jcr.RepositoryException;
+import javax.jcr.version.Version;
+import javax.jcr.version.VersionHistory;
+
+import org.apache.commons.lang.StringUtils;
+
 import org.exoplatform.ecm.webui.component.explorer.UIDocumentWorkspace;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.portal.webui.util.Util;
-import org.exoplatform.services.cms.impl.DMSConfiguration;
+import org.exoplatform.services.document.DocumentReader;
 import org.exoplatform.services.document.DocumentReaderService;
-import org.exoplatform.services.jcr.core.ManageableRepository;
-import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.document.HandlerNotFoundException;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -30,124 +44,182 @@ import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
 
-import javax.jcr.Node;
-import javax.jcr.version.Version;
-import javax.jcr.version.VersionHistory;
-import java.text.DateFormat;
-import java.util.*;
-
 /**
- * Created by The eXo Platform SARL
- * Author : Pham Tuan
- *          tuan.pham@exoplatform.com
+ * Created by The eXo Platform SARL Author : Pham Tuan tuan.pham@exoplatform.com
  * May 3, 2007
  */
 
-@ComponentConfig(
-        template = "app:/groovy/webui/component/explorer/versions/UIDiff.gtmpl",
-        events = {
-                @EventConfig(listeners = UIDiff.CompareActionListener.class),
-                @EventConfig(listeners = UIDiff.CloseCompareActionListener.class)
-        }
-)
-
+@ComponentConfig(template = "app:/groovy/webui/component/explorer/versions/UIDiff.gtmpl", events = {
+    @EventConfig(listeners = UIDiff.CompareActionListener.class),
+    @EventConfig(listeners = UIDiff.CloseCompareActionListener.class) })
 public class UIDiff extends UIComponent {
+  private static final String EXO_LAST_MODIFIED_DATE = "exo:lastModifiedDate";
 
-  public static final String FROM_PARAM = "from";
+  private static final Log   LOG                 = ExoLogger.getLogger(UIDiff.class.getName());
 
-  public static final String TO_PARAM = "to";
+  public static final String FROM_PARAM          = "from";
 
-  private String rootAuthor_;
-  private String rootVersionNum_;
-  private String originNodePath_;
+  public static final String TO_PARAM            = "to";
 
-  //name, date, ws, path
-  private String baseVersionName_;
-  private String baseVersionDate_;
-  private String baseVersionWs_;
-  private String baseVersionPath_;
-  private String baseVersionAuthor_;
-  private String[] baseVersionLabels_;
-  
-  private String versionName_;
-  private String versionDate_;
-  private String versionWs_;
-  private String versionPath_;
-  private String versionAuthor_;
-  private String[] versionLabels_;
+  private String             baseVersionName_;
 
-  private boolean versionCompareable_ = true ;
+  private String             baseVersionDate_;
 
-  public void setRootAuthor(String author) {
-    this.rootAuthor_ = author;
-  }
+  private String             baseVersionAuthor_;
 
+  private String             baseVersionLabel_;
 
-  public void setVersions(Version baseVersion, Version version)
-  throws Exception {
-    baseVersionName_ = baseVersion.getName();
-    baseVersionDate_ = formatDate(baseVersion.getCreated());
-    baseVersionWs_ = baseVersion.getSession().getWorkspace().getName();
-    baseVersionPath_ = baseVersion.getPath();
-    if(baseVersion.hasNode(Utils.JCR_FROZEN) && baseVersion.getNode(Utils.JCR_FROZEN).hasProperty(Utils.EXO_LASTMODIFIER)) {
-      baseVersionAuthor_ = baseVersion.getNode(Utils.JCR_FROZEN).getProperty(Utils.EXO_LASTMODIFIER).getString();
-    }
+  private String             versionName_;
+
+  private String             versionDate_;
+
+  private String             versionAuthor_;
+
+  private String             versionLabel_;
+
+  private String             previousText_       = null;
+
+  private String             currentText_        = null;
+
+  private boolean            versionCompareable_ = true;
+
+  private String             diffResultHTML_     = null;
+
+  private boolean            isImage_            = false;
+
+  private String             baseImage_          = null;
+
+  private String             currentImage_       = null;
+
+  public void setVersions(Node baseVersion, Node version) throws Exception {
     UIDocumentWorkspace uiDocumentWorkspace = getAncestorOfType(UIDocumentWorkspace.class);
     UIVersionInfo uiVersionInfo = uiDocumentWorkspace.getChild(UIVersionInfo.class);
-    if (uiVersionInfo.getCurrentNode().isNodeType(Utils.MIX_VERSIONABLE)) {
-      baseVersionLabels_ = uiVersionInfo.getCurrentNode().getVersionHistory().getVersionLabels(baseVersion);
-    }
-    
-    versionName_ = version.getName();
-    versionDate_ = formatDate(version.getCreated());
-    versionWs_ = version.getSession().getWorkspace().getName();
-    versionPath_ = version.getPath();
-    if(version.hasNode(Utils.JCR_FROZEN) && version.getNode(Utils.JCR_FROZEN).hasProperty(Utils.EXO_LASTMODIFIER)) {
-      versionAuthor_ = version.getNode(Utils.JCR_FROZEN).getProperty(Utils.EXO_LASTMODIFIER).getString();
-    }
-    if (uiVersionInfo.getCurrentNode().isNodeType(Utils.MIX_VERSIONABLE)) {
-      versionLabels_ = uiVersionInfo.getCurrentNode().getVersionHistory().getVersionLabels(version);
-    }
-    versionCompareable_ = true ;
-  }
-  
-  public void setVersions(Version baseVersion, String versionName, 
-                          Calendar versionCalendar, String versionWs, String versionPath) throws Exception {
-    baseVersionName_ = baseVersion.getName();
-    baseVersionDate_ = formatDate(baseVersion.getCreated());
-    baseVersionWs_ = baseVersion.getSession().getWorkspace().getName();
-    baseVersionPath_ = baseVersion.getPath();
-    
-    versionName_ = versionName;
-    versionDate_ = formatDate(versionCalendar);
-    versionWs_ = versionWs;
-    versionPath_ = versionPath;
-  }
 
-  public String getText(Node node) throws Exception {
-    if(node.hasNode("jcr:content")) {
-      Node content = node.getNode("jcr:content");
-      if(content.hasProperty("jcr:mimeType")){
-        String mimeType = content.getProperty("jcr:mimeType").getString();
-        if(content.hasProperty("jcr:data")) {
-          if(mimeType.startsWith("text")) {
-            return content.getProperty("jcr:data").getString();
-          }
-          DocumentReaderService readerService = getApplicationComponent(DocumentReaderService.class) ;
-          try{
-            return readerService.getDocumentReader(mimeType).
-            getContentAsText(content.getProperty("jcr:data").getStream()) ;
-          }catch (Exception e) {
-            versionCompareable_ = false ;
-          }
+    versionCompareable_ = baseVersion != null && version != null && !baseVersion.getUUID().equals(version.getUUID());
+    if (!versionCompareable_) {
+      throw new IllegalStateException("Can't compare both versions");
+    } else {
+      Node versionRootVersion = null;
+      if (version instanceof Version) {
+        versionRootVersion = ((Version) version).getContainingHistory().getRootVersion();
+      } else {
+        versionRootVersion = version.getVersionHistory().getRootVersion();
+      }
+
+      Node baseVersionRootVersion = null;
+      if (baseVersion instanceof Version) {
+        baseVersionRootVersion = ((Version) baseVersion).getContainingHistory().getRootVersion();
+      } else {
+        baseVersionRootVersion = baseVersion.getVersionHistory().getRootVersion();
+      }
+
+      versionCompareable_ = baseVersionRootVersion.getUUID().endsWith(versionRootVersion.getUUID());
+      if (!versionCompareable_) {
+        throw new IllegalStateException("Versions to compare are the same");
+      }
+    }
+
+    Node currentNode = uiVersionInfo.getCurrentNode();
+    VersionHistory versionHistory = currentNode.getVersionHistory();
+    Version rootVersion = versionHistory.getRootVersion();
+
+    // Make baseVersion parameter always the oldest version
+    if (currentNode.getUUID().equals(baseVersion.getUUID())) {
+      // switch version and baseVersion to make sure that baseVersion is the
+      // oldest
+      Node tmpNode = baseVersion;
+      baseVersion = version;
+      version = tmpNode;
+    } else if (currentNode.getUUID().equals(version.getUUID())) {
+      // It's ok, the version' indice > baseVersion indice
+    } else if (baseVersion instanceof Version && version instanceof Version) {
+      // compare versions by indice
+      int baseVersionIndice = Integer.parseInt(baseVersion.getName());
+      int versionNumIndice = Integer.parseInt(version.getName());
+
+      if (baseVersionIndice == versionNumIndice) {
+        throw new IllegalStateException("Can't compare the same version");
+      } else if (baseVersionIndice > versionNumIndice) {
+        Node tmpNode = baseVersion;
+        baseVersion = version;
+        version = tmpNode;
+      }
+    }
+
+    // Base version is of type Version all the time
+    baseVersionName_ = ((Version) baseVersion).getName();
+    // Current version can be of type Version or Node (draft node)
+    versionName_ = version instanceof Version ? version.getName() : uiVersionInfo.getRootVersionNum();
+
+    // Base version is of type Version all the time
+    Calendar modifiedDate = getModifiedDate(baseVersion);
+    baseVersionDate_ = formatDate(modifiedDate);
+
+    // Current version can be of type Version or Node (draft node)
+    modifiedDate = getModifiedDate(version);
+    versionDate_ = formatDate(modifiedDate);
+
+    baseVersionAuthor_ = getLastModifier(baseVersion);
+    versionAuthor_ = getLastModifier(version);
+
+    // Base version is of type Version all the time
+    String[] baseVersionLabels = versionHistory.getVersionLabels((Version) baseVersion);
+    baseVersionLabel_ = baseVersionLabels == null || baseVersionLabels.length == 0 ? null : baseVersionLabels[0];
+    // Current version can be of type Version or Node (draft node)
+    if (version instanceof Version) {
+      String[] versionLabels = versionHistory.getVersionLabels((Version) version);
+      versionLabel_ = versionLabels == null || versionLabels.length == 0 ? null : versionLabels[0];
+    } else {
+      String[] versionLabels = versionHistory.getVersionLabels(rootVersion);
+      versionLabel_ = versionLabels == null || versionLabels.length == 0 ? null : versionLabels[0];
+    }
+
+    isImage_ = isOriginalNodeImage(version) && isOriginalNodeImage(baseVersion);
+
+    previousText_ = null;
+    currentText_ = null;
+    diffResultHTML_ = null;
+    currentImage_ = null;
+    baseImage_ = null;
+    isImage_ = isOriginalNodeImage(version) && isOriginalNodeImage(baseVersion);
+
+    if (isImage_) {
+      String wsName = currentNode.getSession().getWorkspace().getName();
+      String originalNodePath = currentNode.getPath();
+      String basePath = "/" + WCMCoreUtils.getPortalName() + "/" + WCMCoreUtils.getRestContextName() + "/jcr/"
+          + WCMCoreUtils.getRepository().getConfiguration().getName() + "/" + wsName + originalNodePath;
+
+      long timeInMS = Calendar.getInstance().getTimeInMillis();
+
+      currentImage_ = basePath + (currentNode.getUUID().equals(version.getUUID()) ? "?" + timeInMS : ("?version=" + version.getName() + "&" + timeInMS));
+      baseImage_ = basePath + (currentNode.getUUID().equals(baseVersion.getUUID()) ? "?" + timeInMS : "?version=" + baseVersion.getName() + "&" + timeInMS);
+    } else {
+      try {
+        previousText_ = getText(baseVersion);
+        currentText_ = getText(version);
+      } catch (HandlerNotFoundException e) {
+        versionCompareable_ = false;
+      }
+
+      if (versionCompareable_) {
+        if(StringUtils.isBlank(previousText_) && StringUtils.isBlank(currentText_)) {
+          versionCompareable_ = false;
+        } else if ((previousText_ != null) && (currentText_ != null)) {
+          DiffService diffService = new DiffService();
+          DiffResult diffResult = diffService.getDifferencesAsHTML(previousText_, currentText_, true);
+          diffResultHTML_ = diffResult.getDiffHTML();
         }
       }
     }
-    return null ;
   }
 
-  public String getBaseVersionNum() throws Exception { return  baseVersionName_.contains("rootVersion") ? getRootVersionNum() : baseVersionName_; }
-  public String getCurrentVersionNum() throws Exception {return versionName_.contains("rootVersion") ? getRootVersionNum() : versionName_; }
+  public String getBaseVersionNum() throws Exception {
+    return baseVersionName_;
+  }
+
+  public String getCurrentVersionNum() throws Exception {
+    return versionName_;
+  }
 
   public String getBaseVersionDate() throws Exception {
     return baseVersionDate_;
@@ -157,127 +229,116 @@ public class UIDiff extends UIComponent {
     return versionDate_;
   }
 
-  public String getBaseVersionAuthor_() {
+  public String getBaseVersionAuthor() {
     return baseVersionAuthor_;
   }
 
-  public String[] getBaseVersionLabels_() {
-    return baseVersionLabels_;
-  }
-
-  public String getVersionAuthor_() {
+  public String getCurrentVersionAuthor() {
     return versionAuthor_;
   }
 
-  public String[] getVersionLabels_() {
-    return versionLabels_;
+  public String getBaseVersionLabel() {
+    return baseVersionLabel_;
+  }
+
+  public String getCurrentVersionLabel() {
+    return versionLabel_;
+  }
+
+  public String getBaseImage() throws Exception {
+    return baseImage_;
+  }
+
+  public String getCurrentImage() throws Exception {
+    return currentImage_;
+  }
+
+  public boolean isCompareable() {
+    return versionCompareable_;
+  }
+
+  public String getDifferences() throws Exception {
+    return diffResultHTML_;
+  }
+
+  public boolean isImage() {
+    return isImage_;
+  }
+
+  private Calendar getModifiedDate(Node node) throws RepositoryException {
+    Property property = getProperty(node, EXO_LAST_MODIFIED_DATE);
+    return property == null ? null : property.getDate();
+  }
+
+  private String getLastModifier(Node node) throws RepositoryException {
+    Property property = getProperty(node, Utils.EXO_LASTMODIFIER);
+    return property == null ? null : property.getString();
+  }
+
+  private boolean isOriginalNodeImage(Node node) throws Exception {
+    Property mimeProperty = getProperty(node, Utils.JCR_MIMETYPE);
+    String mimeType = mimeProperty == null ? null : mimeProperty.getString();
+    return StringUtils.isNotBlank(mimeType) && mimeType.startsWith("image");
+  }
+
+  private String getText(Node node) throws Exception {
+    Property mimeProperty = getProperty(node, Utils.JCR_MIMETYPE);
+    Property dataProperty = getProperty(node, Utils.JCR_DATA);
+    if (mimeProperty != null && dataProperty != null) {
+      String mimeType = mimeProperty.getString();
+      if (mimeType.startsWith("text")) {
+        return dataProperty.getString();
+      }
+      DocumentReaderService readerService = getApplicationComponent(DocumentReaderService.class);
+      DocumentReader documentReader = readerService.getDocumentReader(mimeType);
+      if (documentReader != null) {
+        try {
+          return documentReader.getContentAsText(dataProperty.getStream());
+        } catch (Exception e) {
+          LOG.warn("An error occured while getting text from file " + node.getPath() + " with mimeType " + mimeType
+              + " with document reader = " + documentReader + ". File comparaison will be disabled", e);
+        }
+      }
+    }
+    throw new HandlerNotFoundException();
+  }
+
+  private Property getProperty(Node node, String propertyName) throws RepositoryException, PathNotFoundException {
+    Property property = null;
+    if (node instanceof Version) {
+      if (node.hasNode(Utils.JCR_FROZEN)) {
+        node = node.getNode(Utils.JCR_FROZEN);
+      } else {
+        return null;
+      }
+    }
+    if (node.hasProperty(propertyName)) {
+      property = node.getProperty(propertyName);
+    } else if (node.hasNode(Utils.JCR_CONTENT)) {
+      Node content = node.getNode(Utils.JCR_CONTENT);
+      if (content.hasProperty(propertyName)) {
+        property = content.getProperty(propertyName);
+      }
+    }
+    return property;
   }
 
   private String formatDate(Calendar calendar) {
     Locale currentLocale = Util.getPortalRequestContext().getLocale();
     DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT, currentLocale);
-    return dateFormat.format(calendar.getTime()) ;
-  }
-
-  public boolean isCompareable() { return versionCompareable_ ; }
-
-  public String getDifferences() throws Exception {
-    Node node1 = getNode(baseVersionWs_, baseVersionPath_);
-    Node node2 = getNode(versionWs_, versionPath_);
-    String previousText = null;
-    String currentText = null;
-    if (node1.hasNode("jcr:frozenNode")) {
-      previousText = getText(node1.getNode("jcr:frozenNode"));
-    } else {
-      previousText = getText(getNode(baseVersionWs_, originNodePath_));
-    }
-    if (node2.hasNode("jcr:frozenNode")) {
-      currentText = getText(node2.getNode("jcr:frozenNode"));
-    } else {
-      currentText = getText(getNode(versionWs_, originNodePath_));
-    }
-    if((previousText != null)&&(currentText != null)) {
-      DiffService diffService = new DiffService();
-      DiffResult diffResult = diffService.getDifferencesAsHTML(previousText, currentText, true);
-      return (diffResult.getDiffHTML());
-    }
-    return "";
-  }
-
-  public boolean isImage() throws Exception {
-    String baseMimetype = "";
-    String mimeType = "";
-    Node baseNode = getNode(baseVersionWs_, baseVersionPath_);
-    Node baseContent = null;
-    if (baseNode.hasNode("jcr:frozenNode")) {
-      baseContent = baseNode.getNode("jcr:frozenNode").getNode("jcr:content");
-    } else {
-      SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
-      baseContent = getNode(baseVersionWs_, originNodePath_).getNode("jcr:content");
-    }
-    if(baseContent.hasProperty("jcr:mimeType")) {
-      baseMimetype = baseContent.getProperty("jcr:mimeType").getString();
-    }
-    Node node = getNode(versionWs_, versionPath_);
-    Node content = null;
-    if (node.hasNode("jcr:frozenNode")) {
-      content = node.getNode("jcr:frozenNode").getNode("jcr:content");
-    } else {
-      content = getNode(versionWs_, originNodePath_).getNode("jcr:content");
-    }
-    if(baseContent.hasProperty("jcr:mimeType")) {
-      mimeType = content.getProperty("jcr:mimeType").getString();
-    }
-    return mimeType.startsWith("image") && baseMimetype.startsWith("image");
-  }
-
-  private String getPreviewImagePath(Node node, String workspace, String version) throws Exception {
-    return  "/" + WCMCoreUtils.getPortalName() + "/" + WCMCoreUtils.getRestContextName()+ "/jcr/"
-        + WCMCoreUtils.getRepository().getConfiguration().getName() + "/" + workspace + node.getPath()
-        + "?version=" + version;
-  }
-
-  public String getBaseImage() throws Exception {
-    Node node = org.exoplatform.wcm.webui.Utils.getRealNode(getNode(baseVersionWs_, baseVersionPath_).getNode("jcr:frozenNode"));
-    return getPreviewImagePath(node, baseVersionWs_, baseVersionName_);
-  }
-
-  public String getImage() throws Exception {
-    Node node = org.exoplatform.wcm.webui.Utils.getRealNode(getNode(versionWs_, versionPath_).getNode("jcr:frozenNode"));
-    return getPreviewImagePath(node, versionWs_, versionName_);
-  }
-
-  private Node getNode(String ws, String path) throws Exception {
-    DMSConfiguration dmsConf = WCMCoreUtils.getService(DMSConfiguration.class);
-    String systemWS = dmsConf.getConfig().getSystemWorkspace();
-    ManageableRepository repo = WCMCoreUtils.getRepository(); 
-    SessionProvider provider = systemWS.equals(ws) ? WCMCoreUtils.getSystemSessionProvider() :
-                                                     WCMCoreUtils.getUserSessionProvider();
-    return (Node)provider.getSession(ws, repo).getItem(path);
-  }
-
-  public void setRootVersionNum(String rootVersionNum) {
-    this.rootVersionNum_ = rootVersionNum;
-  }
-
-  public String getRootVersionNum() {
-    return rootVersionNum_;
-  }
-
-  public void setOriginNodePath(String originNodeId) {
-    this.originNodePath_ = originNodeId;
+    return dateFormat.format(calendar.getTime());
   }
 
   static public class CloseCompareActionListener extends EventListener<UIDiff> {
     public void execute(Event<UIDiff> event) throws Exception {
       UIDiff uiDiff = event.getSource();
-      if(uiDiff.isRendered()) {
+      if (uiDiff.isRendered()) {
         uiDiff.setRendered(false);
       }
       UIDocumentWorkspace uiDocumentWorkspace = uiDiff.getAncestorOfType(UIDocumentWorkspace.class);
       UIVersionInfo uiVersionInfo = uiDocumentWorkspace.getChild(UIVersionInfo.class);
       uiVersionInfo.setRendered(true);
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiDocumentWorkspace) ;
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiDocumentWorkspace);
     }
   }
 
@@ -288,15 +349,7 @@ public class UIDiff extends UIComponent {
       String toVersionName = event.getRequestContext().getRequestParameter(TO_PARAM);
       UIDocumentWorkspace uiDocumentWorkspace = uiDiff.getAncestorOfType(UIDocumentWorkspace.class);
       UIVersionInfo uiVersionInfo = uiDocumentWorkspace.getChild(UIVersionInfo.class);
-      Node node = uiVersionInfo.getCurrentNode();
-      VersionHistory versionHistory = node.getVersionHistory();
-      if (fromVersionName.equals(uiVersionInfo.getRootVersionNum())) {
-        uiDiff.setVersions(uiVersionInfo.getCurrentNode().getVersionHistory().getRootVersion(), versionHistory.getVersion(toVersionName));
-      } else if (toVersionName.equals(uiVersionInfo.getRootVersionNum())) {
-        uiDiff.setVersions(versionHistory.getVersion(fromVersionName), uiVersionInfo.getCurrentNode().getVersionHistory().getRootVersion());
-      } else {
-        uiDiff.setVersions(versionHistory.getVersion(fromVersionName), versionHistory.getVersion(toVersionName));
-      }
+      uiDiff.setVersions(uiVersionInfo.getVersion(fromVersionName), uiVersionInfo.getVersion(toVersionName));
     }
   }
 }

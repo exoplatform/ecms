@@ -19,27 +19,35 @@ import java.util.Locale;
     import org.exoplatform.social.webui.Utils;
     import org.exoplatform.services.jcr.core.ManageableRepository;
 
-  public String getAvatarURL(String userName) {
-      String profileAvatar = null;
-      Identity identity = Utils.getIdentityManager().getOrCreateIdentity(OrganizationIdentityProvider.NAME,userName, true);
-      profileAvatar = identity.getProfile().getAvatarUrl();
-
-      if (profileAvatar == null || profileAvatar.isEmpty()) {
-          profileAvatar = LinkProvider.PROFILE_DEFAULT_AVATAR_URL;
-      }
-      return profileAvatar;
-  }
+    public String getAvatarURL(String userName) {
+        String profileAvatar = null;
+        Identity identity = Utils.getIdentityManager().getOrCreateIdentity(OrganizationIdentityProvider.NAME,userName, true);
+        if(identity != null && identity.getProfile() != null) {
+          profileAvatar = identity.getProfile().getAvatarUrl();
+          if (profileAvatar == null || profileAvatar.isEmpty()) {
+              profileAvatar = LinkProvider.PROFILE_DEFAULT_AVATAR_URL;
+          }
+        }
+        return profileAvatar;
+    }
     public String getProfileURL(String userName) {
         String profileUrl = null;
         Identity identity = Utils.getIdentityManager().getOrCreateIdentity(OrganizationIdentityProvider.NAME,userName, true);
-        profileUrl = identity.getProfile().getUrl();
+        if(identity != null && identity.getProfile() != null) {
+          profileUrl = identity.getProfile().getUrl();
+		  if(profileUrl == null) {
+			profileUrl = "profile/" + userName;
+		  }
+        }
         return profileUrl;
     }
 
     public String getProfileFullName(String userName) {
         String profileFullName = null;
         Identity identity = Utils.getIdentityManager().getOrCreateIdentity(OrganizationIdentityProvider.NAME,userName, true);
-        profileFullName = identity.getProfile().getFullName();
+        if(identity != null && identity.getProfile() != null) {
+          profileFullName = identity.getProfile().getFullName();
+        }
         return profileFullName;
     }
 
@@ -81,21 +89,39 @@ import java.util.Locale;
         clazz = "";
       else
         clazz = "Even" ;
-      String versionNumber = uicomponent.isRootversion(node) ? uicomponent.getRootVersionNum() : node.getName();
+      boolean isBaseVersion = uicomponent.isBaseVersion(node);
+
+      String versionNumber = uicomponent.isRootVersion(node) ? uicomponent.getRootVersionNum() : node.getName();
       String emptySummary = _ctx.appRes("UIVersionInfo.summary.empty");
       String versionId = "version_"+versionNumber;
-      boolean isBaseVersion = uicomponent.isBaseVersion(node);
       String baseVersion = "";
       if (isBaseVersion) {
         baseVersion = " (" + _ctx.appRes("UIVersionInfo.tooltip.baseVersion") + ")";
       }
-      String authorUserName = uicomponent.isRootversion(node) ? uicomponent.getRootOwner() : node.getAuthor();
+      String authorUserName = uicomponent.isRootVersion(node) ? uicomponent.getRootOwner() : node.getAuthor();
       String authorFullName = getProfileFullName(authorUserName);
       String avatarURL = getAvatarURL(authorUserName);
       String profileURL = getProfileURL(authorUserName);
       String versionSummary = "";
-      if (uicomponent.getVersionLabels(node).length > 0) {
-        versionSummary = uicomponent.getVersionLabels(node)[0].replace("_"+versionNumber,"");
+	  def versionLabels = uicomponent.getVersionLabels(node);
+      if (versionLabels != null && versionLabels.length > 0) {
+        versionSummary = versionLabels[0];
+        if(versionSummary.lastIndexOf("_") != -1) {
+          versionSummary = versionSummary.substring(0, versionSummary.lastIndexOf("_"));
+        }
+		if (versionSummary != null && versionSummary != "") {
+		  if(versionSummary.contains("UIDiff.label.restoredFrom")) {
+			if(versionSummary.lastIndexOf("_") != -1) {
+			  versionSummary = versionSummary.replace("UIDiff.label.restoredFrom", "");
+			  def oldVersionNum = versionSummary.substring(versionSummary.lastIndexOf("_") + 1, versionSummary.length());
+			  versionSummary = _ctx.appRes("UIDiff.label.restoredFrom").replace("{0}", oldVersionNum);
+			} else {
+			  versionSummary = versionSummary.replace("UIDiff.label.restoredFrom", _ctx.appRes("UIDiff.label.restoredFrom").replace("{0}", ""));
+			}
+		  }
+		} else {
+			versionSummary = '';
+		}
       }
     %>
     <tr>
@@ -135,10 +161,10 @@ import java.util.Locale;
     </tr>
     <%
     def actionUrl = StringUtils.getNestedString(uicomponent.event('AddSummary', node.getPath()),"javascript:ajaxGet(\'","\')");
-        if (uicomponent.hasPermission(currentVersionNode))
-    jsManager.require("SHARED/jquery", "gj").require("SHARED/X-editable", "xeditable").addScripts("gj(\"#versionSummary"+versionNumber+"\").editable({ mode: \"inline\", url: \""+actionUrl+"\", pk:\""+versionNumber+"\" ,type: \"text\" ,emptytext: \""+emptySummary+"\" });");
-     else
-    jsManager.require("SHARED/jquery", "gj").require("SHARED/X-editable", "xeditable").addScripts("gj(\"#versionSummary"+versionNumber+"\").editable({ mode: \"inline\", url: \""+actionUrl+"\", pk:\""+versionNumber+"\" ,type: \"text\" ,disabled: \"true\" ,emptytext: \""+emptySummary+"\" });");
+    if (uicomponent.hasPermission(currentVersionNode))
+      jsManager.require("SHARED/jquery", "gj").require("SHARED/X-editable", "xeditable").addScripts("gj(\"#versionSummary"+versionNumber+"\").editable({ mode: \"inline\", url: \""+actionUrl+"\", pk:\""+versionNumber+"\" ,type: \"text\" ,emptytext: \""+emptySummary+"\" });");
+    else
+      jsManager.require("SHARED/jquery", "gj").require("SHARED/X-editable", "xeditable").addScripts("gj(\"#versionSummary"+versionNumber+"\").editable({ mode: \"inline\", url: \""+actionUrl+"\", pk:\""+versionNumber+"\" ,type: \"text\" ,disabled: \"true\" ,emptytext: \""+emptySummary+"\" });");
     }
   }
 %>
@@ -180,6 +206,6 @@ import java.util.Locale;
 		</div>
 		<% } %>
 </div>
-<div class="uiAction uiActionBorder">
+<div class="uiAction">
 	<button type="button" onclick="<%=uicomponent.event("Close")%>" class="btn" href="javascript:void(0);"><%=_ctx.appRes("UIVersionInfo.action.close")%></button>
 </div>

@@ -22,14 +22,11 @@ import java.util.Iterator;
 import java.util.List;
 
 import javax.jcr.Node;
-import javax.jcr.NodeIterator;
-import javax.jcr.PathNotFoundException;
+import javax.jcr.Property;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
-import javax.jcr.query.Query;
-import javax.jcr.query.QueryManager;
-import javax.jcr.query.QueryResult;
 import javax.jcr.version.Version;
+import javax.jcr.version.VersionIterator;
 
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.cms.impl.DMSConfiguration;
@@ -40,47 +37,44 @@ import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 public class VersionNode {
+  private static final String EXO_LAST_MODIFIED_DATE = "exo:lastModifiedDate";
 
-  private boolean isExpanded = true ;
-//  protected Version version_ ;
-  private List<VersionNode> children_ = new ArrayList<VersionNode>() ;
-  private static final Log LOG  = ExoLogger.getLogger(VersionNode.class.getName());
-  private Calendar createdTime_;
-  private String name_ = "";
-  private String path_ = "";
-  private String ws_ = "";
-  private String uuid_;
-  private String[] versionLabels_ = new String[]{};
-  private String author_ = "";
-  
-  public VersionNode(Version version, Session session) {
+  private boolean           isExpanded     = true;
+
+  private List<VersionNode> children_      = new ArrayList<VersionNode>();
+
+  private static final Log  LOG            = ExoLogger.getLogger(VersionNode.class.getName());
+
+  private Calendar          createdTime_;
+
+  private String            name_          = "";
+
+  private String            path_          = "";
+
+  private String            ws_            = "";
+
+  private String            uuid_;
+
+  private String[]          versionLabels_ = new String[] {};
+
+  private String            author_        = "";
+
+  public VersionNode(Node node, Session session) {
+    Version version = node instanceof Version ? (Version) node : null;
     try {
-      try {
-        createdTime_ = version.getCreated();
-        name_ = version.getName();
-        path_ = version.getPath();
-        ws_ = version.getSession().getWorkspace().getName();
-        uuid_ = version.getUUID();
-        if(version.hasNode(Utils.JCR_FROZEN) && version.getNode(Utils.JCR_FROZEN).hasProperty(Utils.EXO_LASTMODIFIER)) {
-          author_ = version.getNode(Utils.JCR_FROZEN).getProperty(Utils.EXO_LASTMODIFIER).getString();
+      createdTime_ = getProperty(node, EXO_LAST_MODIFIED_DATE).getDate();
+      name_ = version == null ? "" : version.getName();
+      path_ = node.getPath();
+      ws_ = node.getSession().getWorkspace().getName();
+      uuid_ = node.getUUID();
+      Property prop = getProperty(node, Utils.EXO_LASTMODIFIER);
+      author_ = prop == null ? null : prop.getString();
+      if (version == null) {
+        if (node.isNodeType(Utils.MIX_VERSIONABLE)) {
+          addVersions(node, session);
         }
-        if (version.isNodeType(Utils.MIX_VERSIONABLE)) {
-          versionLabels_ = version.getVersionHistory().getVersionLabels(version);
-        }
-      } catch (Exception e) {
-        if (LOG.isWarnEnabled()) {
-          LOG.warn(e.getMessage());
-        }
-      }
-      
-      String uuid = version.getUUID();
-      QueryManager queryManager = version.getSession().getWorkspace().getQueryManager();
-      Query query = queryManager.createQuery("//element(*, nt:version)[@jcr:predecessors='" + uuid + "']", Query.XPATH);
-      QueryResult queryResult = query.execute();
-      NodeIterator iterate = queryResult.getNodes();
-      while (iterate.hasNext()) {
-        Version version1 = (Version) iterate.nextNode();
-        children_.add(new VersionNode(version1, session));
+      } else {
+        addVersions(node, session);
       }
     } catch (Exception e) {
       if (LOG.isErrorEnabled()) {
@@ -88,52 +82,70 @@ public class VersionNode {
       }
     }
   }
-  
-  public VersionNode(Version version) throws RepositoryException {
-    try {
-      createdTime_ = version.getCreated();
-      name_ = version.getName();
-      path_ = version.getPath();
-      ws_ = version.getSession().getWorkspace().getName();
-      uuid_ = version.getUUID();
-      if(version.hasNode(org.exoplatform.ecm.webui.utils.Utils.JCR_FROZEN)) {
-        author_ = version.getNode(org.exoplatform.ecm.webui.utils.Utils.JCR_FROZEN).getProperty(org.exoplatform.ecm.webui.utils.Utils.EXO_LASTMODIFIER).getString();
+
+  private void addVersions(Node node, Session session) throws RepositoryException {
+    if(node instanceof Version) {
+      Version version = (Version) node;
+      versionLabels_ = version.getContainingHistory().getVersionLabels(version);
+    } else {
+      Version rootVersion = node.getVersionHistory().getRootVersion();
+      VersionIterator allVersions = node.getVersionHistory().getAllVersions();
+      int maxIndex = 0;
+      while (allVersions.hasNext()) {
+        Version version = allVersions.nextVersion();
+        if(version.getUUID().equals(rootVersion.getUUID())) {
+          continue;
+        }
+        int versionIndex = Integer.parseInt(version.getName());
+        maxIndex = Math.max(maxIndex , versionIndex);
+        children_.add(new VersionNode(version, session));
       }
-      versionLabels_ = version.getVersionHistory().getVersionLabels(version);
-    } catch (Exception e) {
-      if (LOG.isWarnEnabled()) {
-        LOG.warn(e.getMessage());
-      }
-    }
-    
-    try {
-      Version[] versions = version.getSuccessors() ;
-      if(versions == null || versions.length == 0) isExpanded = false;
-      for (Version versionChild : versions) {
-        children_.add(new VersionNode(versionChild)) ;
-      }
-    } catch (PathNotFoundException e) {
-      if (LOG.isWarnEnabled()) {
-        LOG.warn(e.getMessage());
-      }
+      name_ = String.valueOf(maxIndex + 1);
+      versionLabels_ = node.getVersionHistory().getVersionLabels(rootVersion);
     }
   }
 
-  public boolean isExpanded() { return isExpanded ; }
+  private Property getProperty(Node node, String propName) throws RepositoryException {
+    Property property = null;
+    if (node.hasProperty(propName)) {
+      property = node.getProperty(propName);
+    } else if (node.hasNode(Utils.JCR_FROZEN) && node.getNode(Utils.JCR_FROZEN).hasProperty(propName)) {
+      property = node.getNode(Utils.JCR_FROZEN).getProperty(propName);
+    }
+    return property;
+  }
 
-  public void setExpanded(boolean isExpanded) { this.isExpanded = isExpanded ; }
+  public boolean isExpanded() {
+    return isExpanded;
+  }
 
-  public String getName() throws RepositoryException { return name_; }
-  
-  public String getWs() { return ws_; }
+  public void setExpanded(boolean isExpanded) {
+    this.isExpanded = isExpanded;
+  }
 
-  public String getPath() throws RepositoryException { return path_; }
+  public String getName() {
+    return name_;
+  }
 
-  public int getChildrenSize() { return children_.size() ; }
+  public String getWs() {
+    return ws_;
+  }
 
-  public List<VersionNode> getChildren() { return children_; }
+  public String getPath() {
+    return path_;
+  }
 
-  public Calendar getCreatedTime() { return createdTime_; }
+  public int getChildrenSize() {
+    return children_.size();
+  }
+
+  public List<VersionNode> getChildren() {
+    return children_;
+  }
+
+  public Calendar getCreatedTime() {
+    return createdTime_;
+  }
 
   public String getAuthor() {
     return author_;
@@ -142,46 +154,51 @@ public class VersionNode {
   public String[] getVersionLabels() {
     return versionLabels_;
   }
-  
-  public Node getNode(String nodeName) throws Exception {
+
+  public Node getNode(String nodeName) throws RepositoryException {
     DMSConfiguration dmsConf = WCMCoreUtils.getService(DMSConfiguration.class);
     String systemWS = dmsConf.getConfig().getSystemWorkspace();
-    ManageableRepository repo = WCMCoreUtils.getRepository(); 
-    SessionProvider provider = systemWS.equals(ws_) ? WCMCoreUtils.getSystemSessionProvider() :
-                                                     WCMCoreUtils.getUserSessionProvider();
-    return ((Node)provider.getSession(ws_, repo).getItem(path_)).getNode(nodeName);
+    ManageableRepository repo = WCMCoreUtils.getRepository();
+    SessionProvider provider = systemWS.equals(ws_) ? WCMCoreUtils.getSystemSessionProvider()
+                                                   : WCMCoreUtils.getUserSessionProvider();
+    return ((Node) provider.getSession(ws_, repo).getItem(path_)).getNode(nodeName);
   }
 
   public boolean hasNode(String nodeName) throws Exception {
     DMSConfiguration dmsConf = WCMCoreUtils.getService(DMSConfiguration.class);
     String systemWS = dmsConf.getConfig().getSystemWorkspace();
     ManageableRepository repo = WCMCoreUtils.getRepository();
-    SessionProvider provider = systemWS.equals(ws_) ? WCMCoreUtils.getSystemSessionProvider() :
-            WCMCoreUtils.getUserSessionProvider();
-    return ((Node)provider.getSession(ws_, repo).getItem(path_)).hasNode(nodeName);
+    SessionProvider provider = systemWS.equals(ws_) ? WCMCoreUtils.getSystemSessionProvider()
+                                                   : WCMCoreUtils.getUserSessionProvider();
+    return ((Node) provider.getSession(ws_, repo).getItem(path_)).hasNode(nodeName);
   }
-  
-  public String getUUID() { return uuid_; }
-  
+
+  public String getUUID() {
+    return uuid_;
+  }
+
   public VersionNode findVersionNode(String path) throws RepositoryException {
-    if(path_.equals(path)) return this ;
-    VersionNode node = null ;
-    Iterator iter = children_.iterator() ;
+    if (path_.equals(path))
+      return this;
+    VersionNode node = null;
+    Iterator<VersionNode> iter = children_.iterator();
     while (iter.hasNext()) {
       VersionNode child = (VersionNode) iter.next();
       node = child.findVersionNode(path);
-      if(node != null) return node;
+      if (node != null)
+        return node;
     }
     return null;
   }
 
   public void removeVersionInChild(VersionNode versionNode1, VersionNode versionNodeRemove) throws RepositoryException {
-    if (versionNode1.getChildren().contains(versionNodeRemove)) versionNode1.getChildren().remove(versionNodeRemove);
+    if (versionNode1.getChildren().contains(versionNodeRemove))
+      versionNode1.getChildren().remove(versionNodeRemove);
     else {
       for (VersionNode vsN : versionNode1.getChildren()) {
         removeVersionInChild(vsN, versionNodeRemove);
       }
     }
   }
-  
+
 }

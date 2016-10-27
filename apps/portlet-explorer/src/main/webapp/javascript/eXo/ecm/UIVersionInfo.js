@@ -1,49 +1,48 @@
 (function($,userPopupPlugin,socialUtil) {
 
-function UIVersionInfo(){
-};
+  function UIVersionInfo(){};
 
   UIVersionInfo.prototype.init = function(formId) {
-  var me = eXo.ecm.UIVersionInfo;
-  window.scrollTo(0,0);
-  me.selectedCheckbox = new Array();
-  var versionListForm = document.getElementById(formId);
-  var inputs = $(versionListForm).find(':checkbox');
-  me.compareButton = $("#CompareVersion");
-
-  var countCheckBox = inputs.length;
-  for ( var i = 0; i < countCheckBox; i++) {
-    var input = inputs[i];
-    input.checked = false;
-    $(input).click(me.onCheck);
-  }
-  $(me.compareButton).attr('class', 'btn disableButton');
-  $(me.compareButton).attr('disabled', true);
-};
+    var me = eXo.ecm.UIVersionInfo;
+    window.scrollTo(0,0);
+    me.selectedCheckbox = new Array();
+    var versionListForm = document.getElementById(formId);
+    var inputs = $(versionListForm).find(':checkbox');
+    me.compareButton = $("#CompareVersion");
+  
+    var countCheckBox = inputs.length;
+    for ( var i = 0; i < countCheckBox; i++) {
+      var input = inputs[i];
+      input.checked = false;
+      $(input).click(me.onCheck);
+    }
+    $(me.compareButton).attr('class', 'btn disableButton');
+    $(me.compareButton).attr('disabled', true);
+  };
 
   UIVersionInfo.prototype.onCheck = function(evt) {
-  var me = eXo.ecm.UIVersionInfo;
-  var evt = evt || window.event;
-  var target = evt.target || evt.srcElement;
-  
-  if (target.checked == true) {
-    me.selectedCheckbox.push(target);
-    if (me.selectedCheckbox.length > 2) {
-      var popCheckbox = me.selectedCheckbox.shift();
-      popCheckbox.checked = false;
+    var me = eXo.ecm.UIVersionInfo;
+    var evt = evt || window.event;
+    var target = evt.target || evt.srcElement;
+    
+    if (target.checked == true) {
+      me.selectedCheckbox.push(target);
+      if (me.selectedCheckbox.length > 2) {
+        var popCheckbox = me.selectedCheckbox.shift();
+        popCheckbox.checked = false;
+      }
+    } else {
+      me.selectedCheckbox.splice(me.selectedCheckbox.indexOf(target),1);
     }
-  } else {
-    me.selectedCheckbox.splice(me.selectedCheckbox.indexOf(target),1);
-  }
-  
-  if (me.selectedCheckbox.length == 2) {
-    $(me.compareButton).attr('class','btn btn-primary');
-	$(me.compareButton).attr('disabled', false);
-  } else {
-    $(me.compareButton).attr('class','btn disableButton');
-	$(me.compareButton).attr('disabled', true);
-  }
-};
+    
+    if (me.selectedCheckbox.length == 2) {
+      $(me.compareButton).attr('class','btn btn-primary');
+  	$(me.compareButton).attr('disabled', false);
+    } else {
+      $(me.compareButton).attr('class','btn disableButton');
+  	$(me.compareButton).attr('disabled', true);
+    }
+  };
 
   UIVersionInfo.prototype.initUserProfilePopup = function(globalLabels) {
     var labels = {};
@@ -74,7 +73,7 @@ function UIVersionInfo(){
     });
   };
 
-eXo.ecm.UIVersionInfo = new UIVersionInfo();
-return eXo.ecm.UIVersionInfo;
+  eXo.ecm.UIVersionInfo = new UIVersionInfo();
+  return eXo.ecm.UIVersionInfo;
 
 })($,userPopupPlugin,socialUtil);
