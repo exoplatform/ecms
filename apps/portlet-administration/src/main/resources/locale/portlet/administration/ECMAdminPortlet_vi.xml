@@ -13,21 +13,21 @@
         <Repository>Kho dữ liệu</Repository>
         <Advanced>Nâng cao</Advanced>
       </label>
-    </tab>    
-    <label>     
+    </tab>
+    <label>
       <UITaxonomyManagerTrees>Danh mục</UITaxonomyManagerTrees>
       <UIMetadataManager>Siêu dữ liệu</UIMetadataManager>
       <UINamespaceManager>Định danh</UINamespaceManager>
       <UINodeTypeManager>Kiểu Nút</UINodeTypeManager>
       <UITemplatesManager>Tài liệu</UITemplatesManager>
-   <UICLVTemplatesManager>Danh sách</UICLVTemplatesManager>
+      <UICLVTemplatesManager>Danh sách</UICLVTemplatesManager>
       <UIViewManager>Giao diện xem</UIViewManager>
       <UIDriveManager>Ổ đĩa</UIDriveManager>
       <UIQueriesManager>Truy vấn</UIQueriesManager>
       <UIActionManager>Hành động</UIActionManager>
       <UIScriptManager>Kịch bản</UIScriptManager>
       <UIUnLockManager>Khóa</UIUnLockManager>
-      <UIFolksonomyManager>Nhãn</UIFolksonomyManager>      
+      <UIFolksonomyManager>Nhãn</UIFolksonomyManager>
     </label>
     <msg>
       <access-denied>Truy cập bị khước từ. Bạn không có phân quyền để thực hiện chức năng này.</access-denied>
@@ -40,11 +40,13 @@
   -->
   <UITaxonomyWorkingArea>
     <msg>
-      <referential-integrity>Không thể đọc được từ tệp tin nguồn hoặc danh mục điểm đến là một danh mục con.</referential-integrity>
+      <referential-integrity>Không thể đọc được từ tệp tin nguồn hoặc danh mục điểm đến là một danh mục con.
+      </referential-integrity>
       <no-taxonomy-selected>Bạn phải sao chép hoặc cắt ít nhất một danh mục.</no-taxonomy-selected>
       <node-is-cutting>Bạn không thể dán vào đây vì node danh mục '{0}' có thể đã bị cắt.</node-is-cutting>
       <can-not-paste>Không có dữ liệu nào trong bộ nhớ tạm để dán vào.</can-not-paste>
-      <reference-exception>Không thể xoá danh mục này bởi vì nó hiện đang được tham chiếu bởi một nội dung.</reference-exception>
+      <reference-exception>Không thể xoá danh mục này bởi vì nó hiện đang được tham chiếu bởi một nội dung.
+      </reference-exception>
       <path-error>Một lỗi đã xảy ra khi đang gỡ bỏ node danh mục này.</path-error>
     </msg>
   </UITaxonomyWorkingArea>
@@ -60,7 +62,7 @@
       <remove>Xóa</remove>
     </title>
   </UITaxonomyManager>
-  
+
   <!--
   ################################################################################
   #    org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyTreeContainer#
@@ -69,17 +71,20 @@
   <UITaxonomyTreeContainer>
     <tab>
       <info>
-        <UITaxonomyTreeMainForm>Cho biết tên danh mục, không gian lưu trữ và đường dẫn đến trang chủ.</UITaxonomyTreeMainForm>
+        <UITaxonomyTreeMainForm>Cho biết tên danh mục, không gian lưu trữ và đường dẫn đến trang chủ.
+        </UITaxonomyTreeMainForm>
         <UIPermissionTreeManager>Đặt phân quyền cho cây danh mục.</UIPermissionTreeManager>
-        <UIActionTaxonomyManager>Thêm hành động vào cây danh mục để hoàn tất khởi tạo hoặc cập nhật.</UIActionTaxonomyManager>
-        <UITaxonomyTreeCreateChild>Sửa cây danh mục bằng cách thêm mới, sao chép, cắt và chọn phân quyền.</UITaxonomyTreeCreateChild>
+        <UIActionTaxonomyManager>Thêm hành động vào cây danh mục để hoàn tất khởi tạo hoặc cập nhật.
+        </UIActionTaxonomyManager>
+        <UITaxonomyTreeCreateChild>Sửa cây danh mục bằng cách thêm mới, sao chép, cắt và chọn phân quyền.
+        </UITaxonomyTreeCreateChild>
       </info>
     </tab>
     <msg>
       <not-exist-tree>Cây danh mục không tồn tại.</not-exist-tree>
     </msg>
   </UITaxonomyTreeContainer>
-  
+
   <!--
 ##########################################################################################
 #     org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyTreeMainForm          #
@@ -111,45 +116,45 @@
       <AddPath>Thêm Đường dẫn</AddPath>
     </title>
   </TaxonomyTreeHomePath>
-  
+
   <!--
 ##########################################################################################
 #     org.exoplatform.ecm.webui.component.admin.taxonomy.tree.info.UIPermissionTreeInfo  #
 ##########################################################################################
 -->
-<UIPermissionTreeInfo>
-<action>
-<title>
-<Delete>Xóa</Delete>
-<Edit>Chỉnh sửa</Edit>
-</title>
-</action>
-<header>
-<usersOrGroups>Người dùng hoặc nhóm người dùng</usersOrGroups>
-<read>Đọc</read>
-<addNode>Thêm Nút</addNode>
-<setProperty>Gỡ bỏ</setProperty>
-<remove>Gỡ bỏ</remove>
-<action>Hành động</action>
-</header>
-</UIPermissionTreeInfo>
+  <UIPermissionTreeInfo>
+    <action>
+      <title>
+        <Delete>Xóa</Delete>
+        <Edit>Chỉnh sửa</Edit>
+      </title>
+    </action>
+    <header>
+      <usersOrGroups>Người dùng hoặc nhóm người dùng</usersOrGroups>
+      <read>Đọc</read>
+      <addNode>Thêm Nút</addNode>
+      <setProperty>Gỡ bỏ</setProperty>
+      <remove>Gỡ bỏ</remove>
+      <action>Hành động</action>
+    </header>
+  </UIPermissionTreeInfo>
 
-<!--
-##########################################################################################
-#     org.exoplatform.ecm.webui.component.admin.taxonomy.tree.info.UIPermissionTreeForm  #
-##########################################################################################
--->
+  <!--
+  ##########################################################################################
+  #     org.exoplatform.ecm.webui.component.admin.taxonomy.tree.info.UIPermissionTreeForm  #
+  ##########################################################################################
+  -->
   <UIPermissionTreeForm>
     <msg>
       <have-not-any-permission>Vui lòng chỉ định ít nhất một phân quyền cho node này.</have-not-any-permission>
     </msg>
   </UIPermissionTreeForm>
 
-<!--
-################################################################################
-#     org.exoplatform.ecm.webui.component.admin.taxonomy.UIActionForm          #
-################################################################################
--->
+  <!--
+  ################################################################################
+  #     org.exoplatform.ecm.webui.component.admin.taxonomy.UIActionForm          #
+  ################################################################################
+  -->
 
   <UIActionForm>
     <title>Thêm hành động vào cây danh mục</title>
@@ -157,12 +162,13 @@
       <Save>#{word.save}</Save>
     </action>
     <msg>
-      <name-not-allowed>Không được để trống tên cũng như không được sử dụng các ký tự đặc biệt trong tên hành động.</name-not-allowed>
+      <name-not-allowed>Không được để trống tên cũng như không được sử dụng các ký tự đặc biệt trong tên hành động.
+      </name-not-allowed>
       <path-invalid>Đường dẫn không hợp lệ.</path-invalid>
       <taxonomy-existed>Cây danh mục đã tồn tại.</taxonomy-existed>
       <taxonomy-node-existed>Node danh mục đã tồn tại.</taxonomy-node-existed>
       <no-permission-add>Bạn không có quyền để thêm một hành động.</no-permission-add>
-      <not-created-tree>Cây phân loại chưa được khởi  tạo.</not-created-tree>
+      <not-created-tree>Cây phân loại chưa được khởi tạo.</not-created-tree>
     </msg>
   </UIActionForm>
 
@@ -250,7 +256,8 @@
     <msg>
       <confirm-delete>Bạn có chắc chắn muốn xóa siêu dữ liệu này không?</confirm-delete>
       <delete-successful>Đã xóa thành công các mẫu thiết kế của '{0}'.</delete-successful>
-      <path-not-found-exception>Siêu dữ liệu này đã bị xóa hoặc thay đổi. Hãy nhấp nút Làm mới.</path-not-found-exception>
+      <path-not-found-exception>Siêu dữ liệu này đã bị xóa hoặc thay đổi. Hãy nhấp nút Làm mới.
+      </path-not-found-exception>
     </msg>
     <action>
       <Add>Thêm Siêu dữ liệu</Add>
@@ -425,13 +432,13 @@
       <action>Hành động</action>
     </header>
   </UITreeList>
-  
+
   <UIRepositoryList>
     <titlebar>
       <label>Các Chức năng Quản trị nội dung</label>
     </titlebar>
   </UIRepositoryList>
-  
+
   <!--
   ################################################################################
   #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeManager #
@@ -561,8 +568,11 @@
     </action>
     <msg>
       <register-successfully>Kiểu nút '{0}' đã được đăng kí thành công.</register-successfully>
-      <supertype-is-madatory>Kiểu kế thừa là trường bắt buộc khi bạn đăng ký kiểu nút mới. Vui lòng chọn ít nhất một kiểu kế thừa.</supertype-is-madatory>
-      <register-failed>Không đăng ký được kiểu nút này. Kiểu này đã tồn tại hoặc kiểu kế thừa không hợp lệ.</register-failed>
+      <supertype-is-madatory>Kiểu kế thừa là trường bắt buộc khi bạn đăng ký kiểu nút mới. Vui lòng chọn ít nhất một
+        kiểu kế thừa.
+      </supertype-is-madatory>
+      <register-failed>Không đăng ký được kiểu nút này. Kiểu này đã tồn tại hoặc kiểu kế thừa không hợp lệ.
+      </register-failed>
       <nodeType-name>Yêu cầu phải có tên kiểu nút.</nodeType-name>
       <fileName-invalid>Tên tệp tin chứa một vài ký tự không hợp lệ.</fileName-invalid>
       <node-type-exists>Kiểu nút '{0}' đã tồn tại.</node-type-exists>
@@ -581,7 +591,8 @@
     </tab>
     <msg>
       <property-name>Tên định nghĩa thuộc tính không hợp lệ.</property-name>
-      <not-supported-value-constraints>Kiểu bắt buộc này không hỗ trợ các giá trị hạn chế.</not-supported-value-constraints>
+      <not-supported-value-constraints>Kiểu bắt buộc này không hỗ trợ các giá trị hạn chế.
+      </not-supported-value-constraints>
     </msg>
   </UIPropertyDefinitionForm>
   <UIChildNodeDefinitionForm>
@@ -726,7 +737,7 @@
     <header>
       <name>Kịch bản</name>
       <label>Tên</label>
-<action>Hành động</action>
+      <action>Hành động</action>
     </header>
     <title>
       <Edit>Chỉnh sửa</Edit>
@@ -735,10 +746,10 @@
     <action>
       <AddAction>Thêm Kiểu Hành động</AddAction>
     </action>
-<msg>
- <confirm-delete>Bạn có chắc chắn muốn xóa kiểu hành động này không?</confirm-delete>
-<cannot-delete>Bạn không thể gỡ bỏ kiểu hành động này vì hệ thống vẫn đang dùng nó.</cannot-delete>
-</msg>
+    <msg>
+      <confirm-delete>Bạn có chắc chắn muốn xóa kiểu hành động này không?</confirm-delete>
+      <cannot-delete>Bạn không thể gỡ bỏ kiểu hành động này vì hệ thống vẫn đang dùng nó.</cannot-delete>
+    </msg>
   </UIActionTypeList>
   <!--
   ######################################################################################
@@ -791,11 +802,11 @@
       <UITemplateContainer>Mẫu tài liệu</UITemplateContainer>
       <UIActionsTemplateContainer>Mẫu hành động</UIActionsTemplateContainer>
       <UIOthersTemplateContainer>Mẫu khác</UIOthersTemplateContainer>
-  <UIActionScriptContainer>Tác vụ</UIActionScriptContainer>
-  <UIWidgetScriptContainer>Widget</UIWidgetScriptContainer>
-<UIInterceptorScriptContainer>Kịch bản chặn</UIInterceptorScriptContainer>
+      <UIActionScriptContainer>Tác vụ</UIActionScriptContainer>
+      <UIWidgetScriptContainer>Widget</UIWidgetScriptContainer>
+      <UIInterceptorScriptContainer>Kịch bản chặn</UIInterceptorScriptContainer>
 
-<nodeTypeDefinition>Kiểu nút</nodeTypeDefinition>
+      <nodeTypeDefinition>Kiểu nút</nodeTypeDefinition>
       <propertyDefinition>Thuộc tính</propertyDefinition>
       <childNodeDefinition>Nút con</childNodeDefinition>
       <SuperTypeTab>Kiểu thừa kế</SuperTypeTab>
@@ -810,11 +821,11 @@
   ######################################################################################
   -->
   <UIViewList>
-   <title>
-     <View>Xem</View>
-     <EditInfo>Chỉnh sửa</EditInfo>
-     <Delete>Xóa</Delete>
-   </title>
+    <title>
+      <View>Xem</View>
+      <EditInfo>Chỉnh sửa</EditInfo>
+      <Delete>Xóa</Delete>
+    </title>
     <header>
       <name>Tên</name>
       <permissions>Phân quyền</permissions>
@@ -848,71 +859,71 @@
     </title>
   </EditPopup>
 
-<UITabList>
-                  <title>
-                    <Edit>Chỉnh sửa</Edit>
-                    <Delete>Xóa</Delete>
-                  </title>       
- <header>
-  <tabName>Tab</tabName>
-  <localizeButtons>Mô tả</localizeButtons>
-<action>Hành động</action>
-</header>
-<action>
- <AddTab>Thêm</AddTab>
-</action>
-<msg>
- <confirm-delete>Bạn có chắc bạn muốn xóa tab này không?</confirm-delete>
-</msg>
-<grid>
- <msg>
-  <empty>Không có tab nào trong khung nhìn này</empty>
- </msg>
-</grid>
-</UITabList>
+  <UITabList>
+    <title>
+      <Edit>Chỉnh sửa</Edit>
+      <Delete>Xóa</Delete>
+    </title>
+    <header>
+      <tabName>Tab</tabName>
+      <localizeButtons>Mô tả</localizeButtons>
+      <action>Hành động</action>
+    </header>
+    <action>
+      <AddTab>Thêm</AddTab>
+    </action>
+    <msg>
+      <confirm-delete>Bạn có chắc bạn muốn xóa tab này không?</confirm-delete>
+    </msg>
+    <grid>
+      <msg>
+        <empty>Không có tab nào trong khung nhìn này</empty>
+      </msg>
+    </grid>
+  </UITabList>
 
-<UIViewPermissionList>
- <title>Chọn Người sở hữu có phân quyền trên giao diện xem này:</title>
-<label>
- <permission>{0} trong {1}</permission>
-</label>
-<msg>
- <confirm-delete>Bạn có chắc chắn muốn xóa phân quyền này không?</confirm-delete>
-  <permission-cannot-empty>Xin vui lòng chọn quyền xem.</permission-cannot-empty>
-</msg>
-</UIViewPermissionList>
+  <UIViewPermissionList>
+    <title>Chọn Người sở hữu có phân quyền trên giao diện xem này:</title>
+    <label>
+      <permission>{0} trong {1}</permission>
+    </label>
+    <msg>
+      <confirm-delete>Bạn có chắc chắn muốn xóa phân quyền này không?</confirm-delete>
+      <permission-cannot-empty>Xin vui lòng chọn quyền xem.</permission-cannot-empty>
+    </msg>
+  </UIViewPermissionList>
 
-<UIViewPermissionList>
-                         <title>
-                           <Delete>Xóa</Delete>
-                         </title>
- <header>
-<friendlyPermission>Quyền truy nhập</friendlyPermission>
-     <action>Tác vụ</action>
- </header>
-<action>
- <title>
-  <Delete>Xóa</Delete>
- </title>
-</action>
-<grid>
- <msg>
-  <empty>Không có phân quyền nào trên giao diện xem này.</empty>
- </msg>
-</grid>
-</UIViewPermissionList>
+  <UIViewPermissionList>
+    <title>
+      <Delete>Xóa</Delete>
+    </title>
+    <header>
+      <friendlyPermission>Quyền truy nhập</friendlyPermission>
+      <action>Tác vụ</action>
+    </header>
+    <action>
+      <title>
+        <Delete>Xóa</Delete>
+      </title>
+    </action>
+    <grid>
+      <msg>
+        <empty>Không có phân quyền nào trên giao diện xem này.</empty>
+      </msg>
+    </grid>
+  </UIViewPermissionList>
 
-<UIViewPermissionForm>
-<action>
- <Add>Thêm</Add>
-</action>
-<label>
- <userOrGroup>Người dùng hoặc Nhóm người dùng</userOrGroup>
-</label>
-<msg>
- <permission-exist>Phân quyền '{0}' đã tồn tại trong danh sách.</permission-exist>
-</msg>
-</UIViewPermissionForm>
+  <UIViewPermissionForm>
+    <action>
+      <Add>Thêm</Add>
+    </action>
+    <label>
+      <userOrGroup>Người dùng hoặc Nhóm người dùng</userOrGroup>
+    </label>
+    <msg>
+      <permission-exist>Phân quyền '{0}' đã tồn tại trong danh sách.</permission-exist>
+    </msg>
+  </UIViewPermissionForm>
 
   <!--
   ######################################################################################
@@ -927,15 +938,15 @@
     <msg>
       <view-name-invalid>Yêu cầu phải có tên giao diện xem.</view-name-invalid>
       <fileName-invalid>Tên giao diện xem chứa một số ký tự không hợp lệ.</fileName-invalid>
-      <permission-not-empty>Vui lòng chọn phân quyền cho giao diện xem.</permission-not-empty>      
+      <permission-not-empty>Vui lòng chọn phân quyền cho giao diện xem.</permission-not-empty>
       <mustbe-add-tab>Vui lòng thêm mới một tab.</mustbe-add-tab>
-<mustbe-add-permission>Vui lòng chọn phân quyền cho giao diện xem này.</mustbe-add-permission>
+      <mustbe-add-permission>Vui lòng chọn phân quyền cho giao diện xem này.</mustbe-add-permission>
       <view-exist>Tên giao diện xem đã tồn tại.</view-exist>
     </msg>
     <label>
       <viewName>Tên</viewName>
       <template>Mẫu</template>
-<version>Khôi phục Phiên bản</version>
+      <version>Khôi phục Phiên bản</version>
       <enableVersion>Cho phép tạo phiên bản</enableVersion>
       <hideExplorerPanel>Ẩn cây thư mục bên trái</hideExplorerPanel>
     </label>
@@ -980,14 +991,14 @@
       <overloadThumbnail>Chèn Hình nhỏ</overloadThumbnail>
       <manageHidden>Ẩn/Hiển thị nội dung</manageHidden>
       <comment>Bình luận</comment>
-      <vote>Bình chọn</vote>  
+      <vote>Bình chọn</vote>
       <addCategory>Thêm Danh mục</addCategory>
       <addLocalizationLink>Thêm bản dịch</addLocalizationLink>
       <publicationRequestApproval>Yêu cầu phê duyệt</publicationRequestApproval>
       <publicationApproveContent>Duyệt nội dung</publicationApproveContent>
       <publicationPublish>Xuất bản</publicationPublish>
-<contentNavigation>Điều hướng theo nội dung</contentNavigation>
-<addSymLink>Thêm liên kết</addSymLink>
+      <contentNavigation>Điều hướng theo nội dung</contentNavigation>
+      <addSymLink>Thêm liên kết</addSymLink>
       <checkIn>Check In</checkIn>
       <checkOut>Check Out</checkOut>
       <shareDocuments>Chia sẻ</shareDocuments>
@@ -996,8 +1007,8 @@
       <uploadNewVersion>Upload a new version</uploadNewVersion>
     </label>
     <action>
-      <Save>#{word.save}</Save>      
-      <Cancel>#{word.cancel}</Cancel>      
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
   </UITabForm>
   <UIPermissionForm>
@@ -1010,7 +1021,7 @@
       <label>
         <UITabContainer>Tác vụ</UITabContainer>
         <UIViewForm>Xem</UIViewForm>
-        <UIViewPermissionContainer>Phân quyền</UIViewPermissionContainer>    
+        <UIViewPermissionContainer>Phân quyền</UIViewPermissionContainer>
       </label>
     </tab>
     <action>
@@ -1027,19 +1038,19 @@
     </title>
   </PopupViewPermission>
 
-<TabForm_Popup>
- <title>
-  <UITabForm>Các tác vụ</UITabForm>
- </title>
-</TabForm_Popup>
+  <TabForm_Popup>
+    <title>
+      <UITabForm>Các tác vụ</UITabForm>
+    </title>
+  </TabForm_Popup>
 
-<tab_permission>
- <title>
-  <SelectUser>Chọn Người dùng</SelectUser>
-<SelectMember>Chọn Thành viên</SelectMember>
-<AddAny>Bất kỳ ai</AddAny>
- </title>
-</tab_permission>
+  <tab_permission>
+    <title>
+      <SelectUser>Chọn Người dùng</SelectUser>
+      <SelectMember>Chọn Thành viên</SelectMember>
+      <AddAny>Bất kỳ ai</AddAny>
+    </title>
+  </tab_permission>
   <!--
   ######################################################################################
   #             org.exoplatform.ecm.webui.component.admin.view.UIECMTemplateList   #
@@ -1228,7 +1239,7 @@
   #             org.exoplatform.ecm.webui.component.admin.script.ecmScriptForm #
   ######################################################################################
   -->
- 
+
   <ecmScriptForm>
     <label>
       <selectVersion>Phiên bản</selectVersion>
@@ -1260,7 +1271,7 @@
       <name-too-long>Tên danh mục phải ít hơn 30 ký tự.</name-too-long>
     </msg>
   </UITaxonomyForm>
-    
+
   <EditTaxonomyTreePopup>
     <title>
       <UITaxonomyTreeContainer>Chỉnh sửa Cây Danh mục</UITaxonomyTreeContainer>
@@ -1272,15 +1283,15 @@
       <UITaxonomyTreeContainer>Thêm Cây Danh mục</UITaxonomyTreeContainer>
     </title>
   </AddTaxonomyTreePopup>
-  
+
   <TaxonomyPopupCreateChild>
     <title>
       <UITaxonomyTreeCreateChildForm>Chỉnh sửa Cây Danh mục</UITaxonomyTreeCreateChildForm>
     </title>
   </TaxonomyPopupCreateChild>
 
-<UITaxonomyTreeCreateChildForm>
-  <action>
+  <UITaxonomyTreeCreateChildForm>
+    <action>
       <Save>Lưu</Save>
       <Cancel>Hủy bỏ</Cancel>
     </action>
@@ -1294,41 +1305,41 @@
       <name-too-long>Tên danh mục phải có nhiều hơn {0} ký tự.</name-too-long>
       <exist>Tên danh mục đã tồn tại.</exist>
     </msg>
-</UITaxonomyTreeCreateChildForm>
+  </UITaxonomyTreeCreateChildForm>
 
   <PopupComponent>
     <title>
       <UIOneNodePathSelector>Chọn Đường dẫn</UIOneNodePathSelector>
     </title>
   </PopupComponent>
-  
+
   <TaxoPopupUserSelector>
-  <title>
+    <title>
       <TaxoTreeSelectUserOrGroup>Chọn Người dùng</TaxoTreeSelectUserOrGroup>
       <UIPermissionTreeSelectUser>Chọn Người dùng</UIPermissionTreeSelectUser>
     </title>
   </TaxoPopupUserSelector>
 
   <TaxoTreeSelectUserOrGroupPopup>
-  <title>
+    <title>
       <TaxoTreeSelectUserOrGroup>Chọn kiểu thành viên</TaxoTreeSelectUserOrGroup>
     </title>
   </TaxoTreeSelectUserOrGroupPopup>
-  
+
   <TaxoTreeAnyPermission>
     <label>
       <any>Bất kỳ Phân quyền nào</any>
       <anyPermission>TaxoTreeAnyPermission</anyPermission>
     </label>
   </TaxoTreeAnyPermission>
-  
+
   <TaxoTreeSelectUserOrGroup>
     <label>
       <selectGroup>Chọn Nhóm người dùng</selectGroup>
       <selectMembership>Chọn kiểu thành viên</selectMembership>
     </label>
   </TaxoTreeSelectUserOrGroup>
-  
+
   <!--
   ######################################################################################
   #             org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyTreeList #
@@ -1355,7 +1366,7 @@
       <is-in-trash>Cây danh mục này đã được chuyển vào thư mục Rác.</is-in-trash>
     </msg>
   </UITaxonomyTreeList>
-  
+
   <!--
   ######################################################################################
   #             org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyTreeForm  #
@@ -1372,7 +1383,7 @@
       <homapath-emty>Nhập Đường dẫn</homapath-emty>
     </msg>
   </UITaxonomyTreeForm>
-  
+
   <UIPermissionTreeForm>
     <label>
       <UIPopupWindow>Chọn</UIPopupWindow>
@@ -1391,43 +1402,44 @@
     </action>
     <msg>
       <checkbox-require>Vui lòng chọn ít nhất một phân quyền.</checkbox-require>
-      <userOrGroup-required>Vui lòng chọn người dùng hoặc nhóm người dùng trước khi lưu phân quyền đó.</userOrGroup-required>
+      <userOrGroup-required>Vui lòng chọn người dùng hoặc nhóm người dùng trước khi lưu phân quyền đó.
+      </userOrGroup-required>
       <not-change-permission>Bạn không có quyền để thêm mới phân quyền.</not-change-permission>
       <access-denied>Truy cập bị từ chối. Bạn không thể gỡ bỏ phân quyền này.</access-denied>
     </msg>
   </UIPermissionTreeForm>
-  
+
   <PopupTaxonomyJCRBrowser>
-  <title>
+    <title>
       <UIOneNodePathSelector>Chọn Đường dẫn đến Trang chủ</UIOneNodePathSelector>
     </title>
   </PopupTaxonomyJCRBrowser>
-  
+
   <PopupTaxonomyTreePermission>
     <title>
       <UIPermissionSelector>Chọn Quyền</UIPermissionSelector>
     </title>
-   </PopupTaxonomyTreePermission>
-   
-   <PopupDrivePermission>
+  </PopupTaxonomyTreePermission>
+
+  <PopupDrivePermission>
     <title>
       <AddDrivePermissionSelector>Thêm Phân quyền</AddDrivePermissionSelector>
       <UIPermissionSelector>Chọn Phân quyền</UIPermissionSelector>
     </title>
   </PopupDrivePermission>
-  
+
   <UIPopupWindow>
     <title>
       <UIPermissionManager>Quản lí Phân quyền</UIPermissionManager>
     </title>
-   </UIPopupWindow>
+  </UIPopupWindow>
 
   <PopupUserSelector>
     <title>
       <UIUserContainer>Quản lí Phân quyền</UIUserContainer>
     </title>
-   </PopupUserSelector>
-   
+  </PopupUserSelector>
+
   <UIPermissionInfo>
     <action>
       <title>
@@ -1494,18 +1506,19 @@
     </action>
     <msg>
       <checkbox-require>Vui lòng chọn ít nhất một phân quyền.</checkbox-require>
-      <userOrGroup-required>Bạn phải chọn một người dùng hoặc một nhóm người dùng trước khi lưu quyền này.</userOrGroup-required>
+      <userOrGroup-required>Bạn phải chọn một người dùng hoặc một nhóm người dùng trước khi lưu quyền này.
+      </userOrGroup-required>
       <not-change-permission>Bạn không có quyền để thêm mới một phân quyền.</not-change-permission>
       <access-denied>Truy cập bị từ chối. Bạn không thể gỡ bỏ phân quyền này.</access-denied>
     </msg>
   </UIPermissionForm>
-  
+
   <TaxonomyPopup>
     <title>
       <UITaxonomyForm>Thêm Danh mục</UITaxonomyForm>
     </title>
   </TaxonomyPopup>
-  
+
   <UITaxonomyManager>
     <title>
       <permission>Quản lí Phân quyền</permission>
@@ -1529,11 +1542,12 @@
     <msg>
       <confirm-delete>Bạn có thực sự muốn xóa không?</confirm-delete>
       <access-denied>Truy cập bị từ chối. Bạn không có phân quyền để dùng chức năng này.</access-denied>
-      <editing-template>Truy cập bị từ chối. Bạn không thể xóa và chỉnh sửa đồng thời mẫu thiết kế này.</editing-template>
+      <editing-template>Truy cập bị từ chối. Bạn không thể xóa và chỉnh sửa đồng thời mẫu thiết kế này.
+      </editing-template>
       <template-not-exist>Mẫu thiết kế mà bạn đang cố xóa không tồn tại.</template-not-exist>
     </msg>
   </UITemplateList>
-  
+
   <UIActionsTemplateList>
     <header>
       <name>Kiểu</name>
@@ -1547,11 +1561,12 @@
     <msg>
       <confirm-delete>Bạn có thực sự muốn xóa không?</confirm-delete>
       <access-denied>Truy cập bị từ chối. Bạn không có phân quyền để dùng chức năng này.</access-denied>
-      <editing-template>Truy cập bị từ chối. Bạn không thể xóa và chỉnh sửa đồng thời mẫu thiết kế này.</editing-template>
+      <editing-template>Truy cập bị từ chối. Bạn không thể xóa và chỉnh sửa đồng thời mẫu thiết kế này.
+      </editing-template>
       <template-not-exist>Mẫu thiết kế mà bạn đang cố xóa không tồn tại.</template-not-exist>
     </msg>
   </UIActionsTemplateList>
-  
+
   <UIOthersTemplateList>
     <header>
       <name>Kiểu</name>
@@ -1565,24 +1580,25 @@
     <msg>
       <confirm-delete>Bạn có thực sự muốn xóa không?</confirm-delete>
       <access-denied>Truy cập bị từ chối. Bạn không có phân quyền để dùng chức năng này.</access-denied>
-      <editing-template>Truy cập bị từ chối. Bạn không thể xóa và chỉnh sửa đồng thời mẫu thiết kế này.</editing-template>
+      <editing-template>Truy cập bị từ chối. Bạn không thể xóa và chỉnh sửa đồng thời mẫu thiết kế này.
+      </editing-template>
       <template-not-exist>Mẫu thiết kế mà bạn đang cố xóa không tồn tại.</template-not-exist>
     </msg>
   </UIOthersTemplateList>
 
- <!--
-  ######################################################################################
-  #             org.exoplatform.ecm.webui.component.admin.templates.clv package #
-  ######################################################################################
-  -->
+  <!--
+   ######################################################################################
+   #             org.exoplatform.ecm.webui.component.admin.templates.clv package #
+   ######################################################################################
+   -->
 
-<UITabPane>
- <title>
- <ContentTemplateContainer>Nội dung</ContentTemplateContainer>
-<CateTemplateContainer>Điều hướng</CateTemplateContainer>
-<PageTemplateContainer>Phân trang</PageTemplateContainer>
- </title>
-</UITabPane>
+  <UITabPane>
+    <title>
+      <ContentTemplateContainer>Nội dung</ContentTemplateContainer>
+      <CateTemplateContainer>Điều hướng</CateTemplateContainer>
+      <PageTemplateContainer>Phân trang</PageTemplateContainer>
+    </title>
+  </UITabPane>
 
   <UICLVTemplateList>
     <title>
@@ -1596,18 +1612,19 @@
     </header>
     <action>
       <AddTemplate>Thêm mẫu</AddTemplate>
-<Edit>Chỉnh sửa</Edit>
-<Delete>Xóa</Delete>
+      <Edit>Chỉnh sửa</Edit>
+      <Delete>Xóa</Delete>
     </action>
     <msg>
       <confirm-delete>Bạn có chắc chắn muốn xóa mẫu thiết kế này không?</confirm-delete>
       <access-denied>Truy cập bị từ chối. Bạn không có phân quyền để dùng chức năng này.</access-denied>
-      <editing-template>Truy cập bị từ chối. Bạn không thể xóa và chỉnh sửa đồng thời mẫu thiết kế này.</editing-template>
+      <editing-template>Truy cập bị từ chối. Bạn không thể xóa và chỉnh sửa đồng thời mẫu thiết kế này.
+      </editing-template>
       <template-not-exist>Mẫu thiết kế mà bạn đang cố xóa không tồn tại.</template-not-exist>
     </msg>
   </UICLVTemplateList>
 
-<CateTemplateList>
+  <CateTemplateList>
     <header>
       <title>Tên</title>
       <action>Tác vụ</action>
@@ -1619,12 +1636,12 @@
     </title>
     <action>
       <AddTemplate>Thêm mẫu</AddTemplate>
-<Edit>Chỉnh sửa</Edit>
-<Delete>Xóa</Delete>
+      <Edit>Chỉnh sửa</Edit>
+      <Delete>Xóa</Delete>
     </action>
-</CateTemplateList>
+  </CateTemplateList>
 
-<PageTemplateList>
+  <PageTemplateList>
     <header>
       <title>Tên</title>
       <action>Tác vụ</action>
@@ -1632,103 +1649,103 @@
     </header>
     <action>
       <AddTemplate>Thêm mẫu</AddTemplate>
-<Edit>Chỉnh sửa</Edit>
-<Delete>Xóa</Delete>
+      <Edit>Chỉnh sửa</Edit>
+      <Delete>Xóa</Delete>
     </action>
-</PageTemplateList>
+  </PageTemplateList>
 
-<EditCLVTemplatePopup_ContentTemplateContainer>
- <title>
-   <UICLVTemplateForm_ContentTemplateContainer>Chỉnh sửa mẫu danh sách</UICLVTemplateForm_ContentTemplateContainer>   
- </title>
-</EditCLVTemplatePopup_ContentTemplateContainer>
+  <EditCLVTemplatePopup_ContentTemplateContainer>
+    <title>
+      <UICLVTemplateForm_ContentTemplateContainer>Chỉnh sửa mẫu danh sách</UICLVTemplateForm_ContentTemplateContainer>
+    </title>
+  </EditCLVTemplatePopup_ContentTemplateContainer>
 
-<EditCLVTemplatePopup_CateTemplateContainer>
- <title>
-   <UICLVTemplateForm_CateTemplateContainer>Chỉnh sửa mẫu danh sách</UICLVTemplateForm_CateTemplateContainer>   
- </title>
-</EditCLVTemplatePopup_CateTemplateContainer>
+  <EditCLVTemplatePopup_CateTemplateContainer>
+    <title>
+      <UICLVTemplateForm_CateTemplateContainer>Chỉnh sửa mẫu danh sách</UICLVTemplateForm_CateTemplateContainer>
+    </title>
+  </EditCLVTemplatePopup_CateTemplateContainer>
 
-<EditCLVTemplatePopup_PageTemplateContainer>
- <title>
-   <UICLVTemplateForm_PageTemplateContainer>Chỉnh sửa mẫu danh sách</UICLVTemplateForm_PageTemplateContainer>   
- </title>
-</EditCLVTemplatePopup_PageTemplateContainer>
+  <EditCLVTemplatePopup_PageTemplateContainer>
+    <title>
+      <UICLVTemplateForm_PageTemplateContainer>Chỉnh sửa mẫu danh sách</UICLVTemplateForm_PageTemplateContainer>
+    </title>
+  </EditCLVTemplatePopup_PageTemplateContainer>
 
-<CLVTemplatePopup_ContentTemplateContainer>
- <title>
-   <UICLVTemplateForm_ContentTemplateContainer>Thêm mẫu dạng danh sách</UICLVTemplateForm_ContentTemplateContainer>   
- </title>
-</CLVTemplatePopup_ContentTemplateContainer>
+  <CLVTemplatePopup_ContentTemplateContainer>
+    <title>
+      <UICLVTemplateForm_ContentTemplateContainer>Thêm mẫu dạng danh sách</UICLVTemplateForm_ContentTemplateContainer>
+    </title>
+  </CLVTemplatePopup_ContentTemplateContainer>
 
-<CLVTemplatePopup_CateTemplateContainer>
- <title>
-   <UICLVTemplateForm_CateTemplateContainer>Thêm mẫu dạng danh sách</UICLVTemplateForm_CateTemplateContainer>   
- </title>
-</CLVTemplatePopup_CateTemplateContainer>
+  <CLVTemplatePopup_CateTemplateContainer>
+    <title>
+      <UICLVTemplateForm_CateTemplateContainer>Thêm mẫu dạng danh sách</UICLVTemplateForm_CateTemplateContainer>
+    </title>
+  </CLVTemplatePopup_CateTemplateContainer>
 
-<CLVTemplatePopup_PageTemplateContainer>
- <title>
-   <UICLVTemplateForm_PageTemplateContainer>Thêm mẫu dạng danh sách</UICLVTemplateForm_PageTemplateContainer>   
- </title>
-</CLVTemplatePopup_PageTemplateContainer>
+  <CLVTemplatePopup_PageTemplateContainer>
+    <title>
+      <UICLVTemplateForm_PageTemplateContainer>Thêm mẫu dạng danh sách</UICLVTemplateForm_PageTemplateContainer>
+    </title>
+  </CLVTemplatePopup_PageTemplateContainer>
 
-<UICLVTemplateForm_ContentTemplateContainer>
- <action>
-  <Save>#{word.save}</Save>
-<Reset>Làm lại</Reset>
-<Cancel>#{word.cancel}</Cancel>
- </action>
-<label>
- <title>Tên</title>
-<template>Tên Mẫu</template>
-<content>Nội dung</content>
-<type>Kiểu</type>
-</label>
-</UICLVTemplateForm_ContentTemplateContainer>
+  <UICLVTemplateForm_ContentTemplateContainer>
+    <action>
+      <Save>#{word.save}</Save>
+      <Reset>Làm lại</Reset>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <label>
+      <title>Tên</title>
+      <template>Tên Mẫu</template>
+      <content>Nội dung</content>
+      <type>Kiểu</type>
+    </label>
+  </UICLVTemplateForm_ContentTemplateContainer>
 
-<UICLVTemplateForm_PageTemplateContainer>
- <action>
-  <Save>#{word.save}</Save>
-<Reset>Làm lại</Reset>
-<Cancel>#{word.cancel}</Cancel>
- </action>
-<label>
- <title>Tên</title>
-<template>Tên Mẫu</template>
-<content>Nội dung</content>
-<type>Kiểu</type>
-</label>
-</UICLVTemplateForm_PageTemplateContainer>
+  <UICLVTemplateForm_PageTemplateContainer>
+    <action>
+      <Save>#{word.save}</Save>
+      <Reset>Làm lại</Reset>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <label>
+      <title>Tên</title>
+      <template>Tên Mẫu</template>
+      <content>Nội dung</content>
+      <type>Kiểu</type>
+    </label>
+  </UICLVTemplateForm_PageTemplateContainer>
 
-<UICLVTemplateForm_CateTemplateContainer>
- <action>
-  <Save>#{word.save}</Save>
-<Reset>Làm lại</Reset>
-<Cancel>#{word.cancel}</Cancel>
- </action>
-<label>
- <title>Tên</title>
-<template>Tên Mẫu</template>
-<content>Nội dung</content>
-<type>Kiểu</type>
-</label>
-</UICLVTemplateForm_CateTemplateContainer>
-<UICLVTemplateForm>
-  <label>
-    <paginators>Phân trang</paginators>
-<list>Nội dung</list>
-<navigation>Điều hướng</navigation>
-  </label>
-                          <action>
-                            <Save>#{word.save}</Save>
-                            <Reset>Làm lại</Reset> 
-                            <Cancel>#{word.cancel}</Cancel> 
-                          </action> 
-  <msg>
-  <template-existing>Tên mẫu này đã tồn tại. Vui lòng chọn tên khác.</template-existing>
-  </msg>
-</UICLVTemplateForm>
+  <UICLVTemplateForm_CateTemplateContainer>
+    <action>
+      <Save>#{word.save}</Save>
+      <Reset>Làm lại</Reset>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <label>
+      <title>Tên</title>
+      <template>Tên Mẫu</template>
+      <content>Nội dung</content>
+      <type>Kiểu</type>
+    </label>
+  </UICLVTemplateForm_CateTemplateContainer>
+  <UICLVTemplateForm>
+    <label>
+      <paginators>Phân trang</paginators>
+      <list>Nội dung</list>
+      <navigation>Điều hướng</navigation>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Reset>Làm lại</Reset>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <template-existing>Tên mẫu này đã tồn tại. Vui lòng chọn tên khác.</template-existing>
+    </msg>
+  </UICLVTemplateForm>
 
   <!--
   ######################################################################################
@@ -1789,8 +1806,10 @@
   <TemplateContainerPopup>
     <title>
       <UIViewTemplate_UITemplateContainer><![CDATA[View & Edit Template]]></UIViewTemplate_UITemplateContainer>
-      <UIViewTemplate_UIActionsTemplateContainer><![CDATA[View & Edit Template]]></UIViewTemplate_UIActionsTemplateContainer>
-      <UIViewTemplate_UIOthersTemplateContainer><![CDATA[View & Edit Template]]></UIViewTemplate_UIOthersTemplateContainer>
+      <UIViewTemplate_UIActionsTemplateContainer>
+        <![CDATA[View & Edit Template]]></UIViewTemplate_UIActionsTemplateContainer>
+      <UIViewTemplate_UIOthersTemplateContainer>
+        <![CDATA[View & Edit Template]]></UIViewTemplate_UIOthersTemplateContainer>
     </title>
   </TemplateContainerPopup>
   <UITemplatesManager>
@@ -1834,7 +1853,7 @@
       <action>Hành động</action>
     </header>
     <msg>
-      <undeletable>Bạn không thể xóa '{0}'  vì nó là mặc định.</undeletable>
+      <undeletable>Bạn không thể xóa '{0}' vì nó là mặc định.</undeletable>
       <confirm-delete>Bạn có chắc chắn muốn xóa hộp thoại này không?</confirm-delete>
     </msg>
     <action>
@@ -1938,7 +1957,8 @@
     <msg>
       <confirm-delete>Bạn có chắc chắn muốn xóa truy vấn này không?</confirm-delete>
       <query-not-existed>Các truy vấn không tồn tại nữa.</query-not-existed>
-      <can-not-remove>Lỗi xuất hiện khi xoá các truy vấn. Xin vui lòng liên hệ với người quản trị để biết chi tiết.</can-not-remove>
+      <can-not-remove>Lỗi xuất hiện khi xoá các truy vấn. Xin vui lòng liên hệ với người quản trị để biết chi tiết.
+      </can-not-remove>
     </msg>
   </UIQueriesList>
   <UIQueriesForm>
@@ -1972,11 +1992,11 @@
       <UIQueriesForm>Chỉnh sửa Truy vấn</UIQueriesForm>
     </title>
   </EditQueryForm>
-<PermissionPopup>
-  <title>
-    <UIGroupMemberSelector>Chọn Quyền</UIGroupMemberSelector>
-  </title>
-</PermissionPopup>
+  <PermissionPopup>
+    <title>
+      <UIGroupMemberSelector>Chọn Quyền</UIGroupMemberSelector>
+    </title>
+  </PermissionPopup>
   <!--
   ######################################################################################
   #             org.exoplatform.ecm.webui.component.admin.folksonomy #
@@ -1986,7 +2006,7 @@
     <title>
       <EditStyle>Chỉnh sửa Định dạng</EditStyle>
       <RemoveStyle>Gỡ bỏ Định dạng</RemoveStyle>
-    </title>    
+    </title>
   </UITagManager>
   <UITagStyleList>
     <header>
@@ -2015,9 +2035,12 @@
       <Cancel>Hủy bỏ</Cancel>
     </action>
     <msg>
-      <range-validator>Phạm vi lựa chọn không hợp lệ. Định dạng phải là: a...b, trong đó a, b là các số nguyên dương. Bạn có thể dùng * thay cho b để cho biết không giới hạn phạm vi lựa chọn.</range-validator>
+      <range-validator>Phạm vi lựa chọn không hợp lệ. Định dạng phải là: a...b, trong đó a, b là các số nguyên dương.
+        Bạn có thể dùng * thay cho b để cho biết không giới hạn phạm vi lựa chọn.
+      </range-validator>
       <error-update>Cập nhật không thành công. Thông tin của bạn không hợp lệ.</error-update>
-      <item-not-existing>Bạn không thể lưu các thay đổi cho nhãn này vì nó không còn tồn tại trong cơ sở dữ liệu nữa.</item-not-existing>
+      <item-not-existing>Bạn không thể lưu các thay đổi cho nhãn này vì nó không còn tồn tại trong cơ sở dữ liệu nữa.
+      </item-not-existing>
     </msg>
   </UITagStyleForm>
   <FolksonomyPopup>
@@ -2057,9 +2080,9 @@
   ###################################################################################
   -->
   <PermissionValidator>
-  <msg>
+    <msg>
       <permission-path-invalid>Phân quyền '{0}' không hợp lệ.</permission-path-invalid>
-  </msg>
+    </msg>
   </PermissionValidator>
   <!--
   ###################################################################################
@@ -2128,9 +2151,9 @@
       <EditInfo>Chỉnh sửa</EditInfo>
       <Delete>Xóa</Delete>
     </title>
-<label>
-  <permission>{0} trong {1}</permission>
-</label>
+    <label>
+      <permission>{0} trong {1}</permission>
+    </label>
   </UIViewContainer>
   <ECMTemplate>
     <title>
@@ -2161,7 +2184,7 @@
       <selectMembership>Chọn Vai trò</selectMembership>
     </label>
   </UIDrivePermissionSelector>
-  
+
   <UIPermissionSelector>
     <label>
       <selectGroup>Chọn Nhóm người dùng</selectGroup>
@@ -2169,30 +2192,30 @@
       <selectMembership>Chọn Kiểu thành viên</selectMembership>
     </label>
   </UIPermissionSelector>
-  
+
   <UIAnyPermission>
     <label>
       <anyPermission>Bất kỳ Phân quyền nào</anyPermission>
     </label>
   </UIAnyPermission>
-  
+
   <UIMDriveAnyPermission>
     <label>
       <anyPermission>Cho phép tất cả</anyPermission>
     </label>
   </UIMDriveAnyPermission>
-  
+
   <UIQueriesAnyPermission>
     <label>
       <anyPermission>Cho phép tất cả</anyPermission>
     </label>
   </UIQueriesAnyPermission>
-  
+
   <MetadataPermission>
     <label>
       <selectGroup>Chọn Nhóm người dùng</selectGroup>
     </label>
-  </MetadataPermission>  
+  </MetadataPermission>
   <MetadataPermission>
     <label>
       <selectMembership>Chọn Kiểu thành viên</selectMembership>
@@ -2215,7 +2238,7 @@
   </QueriesPermissionBrowse>
   <!--
   #########Since ECM 2.4##################
-  -->  
+  -->
   <UIViewFormTabPane>
     <label>
       <addSymLink>Thêm Liên kết tượng trưng</addSymLink>
@@ -2223,14 +2246,14 @@
   </UIViewFormTabPane>
   <!--
   #########Since ECM 2.5##################
-  --> 
-  
+  -->
+
   <UIDriveForm>
-<msg>
-  <permission-path-invalid>Phân quyền '{0}' không hợp lệ.</permission-path-invalid>
-  </msg>
+    <msg>
+      <permission-path-invalid>Phân quyền '{0}' không hợp lệ.</permission-path-invalid>
+    </msg>
   </UIDriveForm>
-  
+
   <UITaxonomyTreeMainForm>
     <msg>
       <homepath-emty>Yêu cầu phải có đường dẫn đến trang chủ.</homepath-emty>
@@ -2238,9 +2261,9 @@
     </msg>
   </UITaxonomyTreeMainForm>
   <UITaxonomyWorkingArea>
-  <msg>
-  <exist>Node cây này đã tồn tại.</exist>
-  </msg>
+    <msg>
+      <exist>Node cây này đã tồn tại.</exist>
+    </msg>
   </UITaxonomyWorkingArea>
 
   <PermissionTreeSelectUser>
@@ -2256,16 +2279,16 @@
       <userName>#{word.userName}</userName>
       <lastName>#{word.lastName}</lastName>
       <firstName>#{word.firstName}</firstName>
-    <email>#{word.email}</email>
+      <email>#{word.email}</email>
       <action>#{word.action}</action>
       <Add>#{word.add}</Add>
       <Close>#{word.close}</Close>
     </label>
   </PermissionTreeSelectUser>
-  
+
   <!--
   #########Since ECM 2.6 ##################
-  -->   
+  -->
   <DriveInputSet>
     <label>
       <nt_folder>Thư mục Tài liệu</nt_folder>
@@ -2274,30 +2297,30 @@
       <exo_jsFolder>Javascript</exo_jsFolder>
       <exo_linkFolder>Liên kết</exo_linkFolder>
       <exo_webFolder>Web</exo_webFolder>
-   </label>
+    </label>
   </DriveInputSet>
   <UIPermissionTreeInfo>
-  <msg>
+    <msg>
       <confirm-delete-permission>Bạn có chắc chắn muốn xóa phân quyền này không?</confirm-delete-permission>
-      <no-permission-remove>Bạn không thể gỡ bỏ người sở hữu hay người dùng của hệ thống.</no-permission-remove>  
-  </msg>
-  </UIPermissionTreeInfo>  
+      <no-permission-remove>Bạn không thể gỡ bỏ người sở hữu hay người dùng của hệ thống.</no-permission-remove>
+    </msg>
+  </UIPermissionTreeInfo>
   <UITaxonomyTreeMainForm>
-<msg>
+    <msg>
       <no-right-target-path>Vui lòng chọn đường dẫn khác đến trang chủ.</no-right-target-path>
-</msg>
-</UITaxonomyTreeMainForm>
+    </msg>
+  </UITaxonomyTreeMainForm>
 
-<UIECMAdminControlPanel>
+  <UIECMAdminControlPanel>
     <tab>
-      <label>        
+      <label>
         <ManageUnLock>Quản lý Khóa</ManageUnLock>
       </label>
-    </tab>        
-</UIECMAdminControlPanel>
-<UIUnLockForm>
+    </tab>
+  </UIECMAdminControlPanel>
+  <UIUnLockForm>
     <label>
-      <name>Phân quyền</name>      
+      <name>Phân quyền</name>
       <permissions>Phân quyền</permissions>
       <PermissionButton>UIUnLockForm</PermissionButton>
     </label>
@@ -2306,49 +2329,50 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <permission-require>Bạn phải chọn các phân quyền.</permission-require>      
+      <permission-require>Bạn phải chọn các phân quyền.</permission-require>
     </msg>
   </UIUnLockForm>
   <UILockHolderList>
-  <header>
-  <name>Nhóm hoặc Người dùng</name>
-  <action>Hành động</action>
-  </header>
-  <tooltip>
-<DeleteLock>Xóa Nhóm người dùng</DeleteLock>
-  </tooltip>
-  <msg>
-  <can-not-delete-lock-holder>Không thể xóa nhóm người dùng {0}.</can-not-delete-lock-holder>
-  </msg>
+    <header>
+      <name>Nhóm hoặc Người dùng</name>
+      <action>Hành động</action>
+    </header>
+    <tooltip>
+      <DeleteLock>Xóa Nhóm người dùng</DeleteLock>
+    </tooltip>
+    <msg>
+      <can-not-delete-lock-holder>Không thể xóa nhóm người dùng {0}.</can-not-delete-lock-holder>
+    </msg>
   </UILockHolderList>
   <UILockNodeList>
-  <header>
-  <name>Tiêu đề</name>
-  <hoderLock>Người chủ Khóa</hoderLock>
-  <action>Hành động</action>
-  </header>
-  <tooltip>
-<UnLock>Mở khóa</UnLock>
-  </tooltip>
-  <msg>
-  <access-denied-exception>Bạn không có quyền truy cập nút có đường dẫn {0}, hoặc nút này đã bị xóa.</access-denied-exception>
-  </msg>
+    <header>
+      <name>Tiêu đề</name>
+      <hoderLock>Người chủ Khóa</hoderLock>
+      <action>Hành động</action>
+    </header>
+    <tooltip>
+      <UnLock>Mở khóa</UnLock>
+    </tooltip>
+    <msg>
+      <access-denied-exception>Bạn không có quyền truy cập nút có đường dẫn {0}, hoặc nút này đã bị xóa.
+      </access-denied-exception>
+    </msg>
   </UILockNodeList>
   <EditUnLockForm>
     <title>
       <UIUnLockForm>Quản lý Khóa</UIUnLockForm>
     </title>
-  </EditUnLockForm>  
+  </EditUnLockForm>
   <UITabPane>
     <action>
       <Close>#{word.close}</Close>
     </action>
     <title>
-    <UILockHolderContainer>Quản lý Khóa</UILockHolderContainer>
-    <UILockNodeList>Nút được khóa</UILockNodeList>
+      <UILockHolderContainer>Quản lý Khóa</UILockHolderContainer>
+      <UILockNodeList>Nút được khóa</UILockNodeList>
     </title>
   </UITabPane>
-  
+
   <UIViewFormTabPane>
     <action>
       <AddTabForm>Thêm Tab</AddTabForm>
@@ -2356,21 +2380,21 @@
       <BackViewForm>Quay lại</BackViewForm>
     </action>
   </UIViewFormTabPane>
-  
- <UITemplateForm>
-<tab>
-<label>
-<defaultSkin>CSS</defaultSkin>
-</label>
-</tab>
-</UITemplateForm>
- 
+
+  <UITemplateForm>
+    <tab>
+      <label>
+        <defaultSkin>CSS</defaultSkin>
+      </label>
+    </tab>
+  </UITemplateForm>
+
   <UITabPane>
     <title>
       <UISkinTab>CSS</UISkinTab>
     </title>
   </UITabPane>
-  
+
   <UISkinTab>
     <header>
       <name>Tên</name>
@@ -2389,7 +2413,7 @@
       </title>
     </action>
   </UISkinTab>
-  
+
   <SkinForm>
     <label>
       <UITemplateContent>SkinForm</UITemplateContent>
@@ -2404,56 +2428,57 @@
     <title>Thêm/Chỉnh sửa Giao diện</title>
   </SkinForm>
 
- <UITagManager>
-   <action>
-     <title>
-       <RemoveStyle>Gỡ bỏ</RemoveStyle>
-         <AddStyle>Thêm Định dạng</AddStyle>
-     </title>
-   </action>
-   <msg>
-     <confirm-delete>Bạn có chắc chắn muốn xóa định dạng này không?</confirm-delete>
-   </msg>
- </UITagManager>
+  <UITagManager>
+    <action>
+      <title>
+        <RemoveStyle>Gỡ bỏ</RemoveStyle>
+        <AddStyle>Thêm Định dạng</AddStyle>
+      </title>
+    </action>
+    <msg>
+      <confirm-delete>Bạn có chắc chắn muốn xóa định dạng này không?</confirm-delete>
+    </msg>
+  </UITagManager>
 
-<UITaxonomyTreeContainer>
-<action>
-<Cancel>#{word.close}</Cancel>
-</action>
-</UITaxonomyTreeContainer>
-<UITaxonomyTreeMainForm>
-<action>
-<NextViewPermission>Kế tiếp</NextViewPermission>
-<Reset>Reset</Reset>
-</action>
-</UITaxonomyTreeMainForm>
+  <UITaxonomyTreeContainer>
+    <action>
+      <Cancel>#{word.close}</Cancel>
+    </action>
+  </UITaxonomyTreeContainer>
+  <UITaxonomyTreeMainForm>
+    <action>
+      <NextViewPermission>Kế tiếp</NextViewPermission>
+      <Reset>Reset</Reset>
+    </action>
+  </UITaxonomyTreeMainForm>
 
-<UIPermissionTreeForm>
-<action>
-<Save>Save</Save>
-<Cancel>#{word.cancel}</Cancel>
-<Reset>Reset</Reset>
-<NextAddAction>Kế tiếp</NextAddAction>
-<Previous>Trước đó</Previous>
-</action>
-</UIPermissionTreeForm>
+  <UIPermissionTreeForm>
+    <action>
+      <Save>Save</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <Reset>Reset</Reset>
+      <NextAddAction>Kế tiếp</NextAddAction>
+      <Previous>Trước đó</Previous>
+    </action>
+  </UIPermissionTreeForm>
 
-<UIActionForm>
-<action>
-<PreviousViewPermission>Trước đó</PreviousViewPermission>
-<NextViewTree>Kế tiếp</NextViewTree>
-</action>
-  <msg>
-    <xss-vulnerability-character>Trường '{0}' có chứa các ký tự không hợp lệ</xss-vulnerability-character>
-<xss-vulnerability-character-wo-label>Chuỗi này có thể chứa kí tự không an toàn</xss-vulnerability-character-wo-label>
-  </msg>
-</UIActionForm>
+  <UIActionForm>
+    <action>
+      <PreviousViewPermission>Trước đó</PreviousViewPermission>
+      <NextViewTree>Kế tiếp</NextViewTree>
+    </action>
+    <msg>
+      <xss-vulnerability-character>Trường '{0}' có chứa các ký tự không hợp lệ</xss-vulnerability-character>
+      <xss-vulnerability-character-wo-label>Chuỗi này có thể chứa kí tự không an toàn
+      </xss-vulnerability-character-wo-label>
+    </msg>
+  </UIActionForm>
 
-<UITaxonomyTreeWorkingArea>
-<action>
-<Previous>Trước đó</Previous>
-</action>
-</UITaxonomyTreeWorkingArea>
+  <UITaxonomyTreeWorkingArea>
+    <action>
+      <Previous>Trước đó</Previous>
+    </action>
+  </UITaxonomyTreeWorkingArea>
 
   <UITabPane>
     <title>
@@ -2461,7 +2486,7 @@
       <UITagPermissionManager>Quản lý quyền truy cập nhãn</UITagPermissionManager>
     </title>
   </UITabPane>
-  
+
   <UITagPermissionInfo>
     <header>
       <usersOrGroups>Người dùng hoặc Nhóm người dùng</usersOrGroups>
@@ -2474,7 +2499,7 @@
     </action>
     <msg>
       <confirm-delete-permission>Bạn có chắc chắn muốn xóa phân quyền này không?</confirm-delete-permission>
-    </msg>   
+    </msg>
   </UITagPermissionInfo>
   <UITagPermissionForm>
     <title>Thêm quyền truy cập</title>
@@ -2487,32 +2512,32 @@
     </label>
     <msg>
       <userOrGroup-alreadyExists>Kiểu thành viên đã tồn tại, xin chọn lại kiểu khác.</userOrGroup-alreadyExists>
-    </msg>    
+    </msg>
   </UITagPermissionForm>
-  
+
   <UIGroupMemberSelector>
     <label>
       <selectGroup>Chọn Nhóm người dùng</selectGroup>
       <selectMembership>Chọn Kiểu thành viên</selectMembership>
     </label>
   </UIGroupMemberSelector>
-  
+
   <UIFolksonomyManager>
-  <msg>
+    <msg>
       <confirm-delete>Bạn có chắc chắn muốn xóa kiểu này không?</confirm-delete>
-  </msg>
+    </msg>
     <action>
       <title>
         <AddStyle>Thêm Kiểu</AddStyle>
       </title>
     </action>
-  </UIFolksonomyManager>  
-<UIActionForm>
-  <title>
-  <ShowComponent>Mở Cửa sổ</ShowComponent>
-  <removeReference>Gỡ bỏ</removeReference>
-  </title>
-  </UIActionForm> 
+  </UIFolksonomyManager>
+  <UIActionForm>
+    <title>
+      <ShowComponent>Mở Cửa sổ</ShowComponent>
+      <removeReference>Gỡ bỏ</removeReference>
+    </title>
+  </UIActionForm>
   <NodeTypeNameValidator>
     <msg>
       <Invalid-char>Có một số ký tự không hợp lệ. Vui lòng nhập giá trị khác.</Invalid-char>
@@ -2521,10 +2546,12 @@
   </NodeTypeNameValidator>
   <UIActionForm>
     <msg>
-      <constraint-violation-exception>Không thể thêm nút '{0}' vào '{1}' trong không gian lưu trữ '{2}' do phân quyền hoặc điều kiện ràng buộc.</constraint-violation-exception>
+      <constraint-violation-exception>Không thể thêm nút '{0}' vào '{1}' trong không gian lưu trữ '{2}' do phân quyền
+        hoặc điều kiện ràng buộc.
+      </constraint-violation-exception>
     </msg>
   </UIActionForm>
-  
+
   <UIWorkspaceWizard>
     <msg>
       <name-not-allowed>Tên không hợp lệ</name-not-allowed>
@@ -2532,35 +2559,37 @@
   </UIWorkspaceWizard>
   <UIRepositoryForm>
     <msg>
-      <not-complete-repository>The repository is being created. You need to wait a few minutes before creating another one.</not-complete-repository>
+      <not-complete-repository>The repository is being created. You need to wait a few minutes before creating another
+        one.
+      </not-complete-repository>
     </msg>
   </UIRepositoryForm>
-  
+
   <UIViewFormTabPane>
-  <label>
-  <addCategory>Thêm Danh mục</addCategory>
-          <addLocalizationLink>Thêm bản dịch</addLocalizationLink>
-  </label>
+    <label>
+      <addCategory>Thêm Danh mục</addCategory>
+      <addLocalizationLink>Thêm bản dịch</addLocalizationLink>
+    </label>
   </UIViewFormTabPane>
 
-<UIDriveForm>
-<label>
-<allowNodeTypesOnTree>Kiểu dữ liệu cho phép trên cây bên trái:</allowNodeTypesOnTree>
-</label>
-</UIDriveForm>
-<DriveInputSet>
-<title>
-<RemovePermission>Remove Permission</RemovePermission>
-<ChooseNodeType>Chọn kiểu nút</ChooseNodeType>
-<RemoveNodeType>Gỡ bỏ</RemoveNodeType>
-</title>
-</DriveInputSet>
-<PopupNodeTypeSelector>
-<title>
-<UINodeTypeSelector>Chọn kiểu nút</UINodeTypeSelector>
-<PopupNodeTypeSelector>Chọn kiểu nút</PopupNodeTypeSelector>
-</title>
-</PopupNodeTypeSelector>
+  <UIDriveForm>
+    <label>
+      <allowNodeTypesOnTree>Kiểu dữ liệu cho phép trên cây bên trái:</allowNodeTypesOnTree>
+    </label>
+  </UIDriveForm>
+  <DriveInputSet>
+    <title>
+      <RemovePermission>Remove Permission</RemovePermission>
+      <ChooseNodeType>Chọn kiểu nút</ChooseNodeType>
+      <RemoveNodeType>Gỡ bỏ</RemoveNodeType>
+    </title>
+  </DriveInputSet>
+  <PopupNodeTypeSelector>
+    <title>
+      <UINodeTypeSelector>Chọn kiểu nút</UINodeTypeSelector>
+      <PopupNodeTypeSelector>Chọn kiểu nút</PopupNodeTypeSelector>
+    </title>
+  </PopupNodeTypeSelector>
   <UINodeTypeSelector>
     <label>
       <selectedAllNodeTypes>Chọn tất cả các kiểu nút</selectedAllNodeTypes>
@@ -2568,14 +2597,14 @@
   </UINodeTypeSelector>
   <UIScriptForm>
     <msg>
-      <PathNotFoundException>Tập lệnh đã tồn tại trong thư mục '{0}'.</PathNotFoundException>      
+      <PathNotFoundException>Tập lệnh đã tồn tại trong thư mục '{0}'.</PathNotFoundException>
     </msg>
   </UIScriptForm>
- <UINodeTypeList>
-   <msg>
-   <no-list>Không có kiểu nút thỏa mãn điều kiện tìm kiếm.</no-list>
-   </msg>
- </UINodeTypeList>
+  <UINodeTypeList>
+    <msg>
+      <no-list>Không có kiểu nút thỏa mãn điều kiện tìm kiếm.</no-list>
+    </msg>
+  </UINodeTypeList>
   <UIActionForm>
     <msg>
       <canotChangeActionId>Bạn không thể thay đổi ID Hành động.</canotChangeActionId>
@@ -2593,7 +2622,9 @@
   </UIPageIterator>
   <UILockNodeList>
     <msg>
-      <can-not-unlock-node>Bạn không có quyền mở khóa nút này. Vui lòng liên hệ với quản trị viên để có quyền thích hợp.</can-not-unlock-node>
+      <can-not-unlock-node>Bạn không có quyền mở khóa nút này. Vui lòng liên hệ với quản trị viên để có quyền thích
+        hợp.
+      </can-not-unlock-node>
     </msg>
- </UILockNodeList>
+  </UILockNodeList>
 </bundle>
