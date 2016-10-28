@@ -13,21 +13,21 @@
         <Repository>Skladišče</Repository>
         <Advanced>Napredno</Advanced>
       </label>
-    </tab>    
-    <label>     
+    </tab>
+    <label>
       <UITaxonomyManagerTrees>Kategorije</UITaxonomyManagerTrees>
       <UIMetadataManager>Metapodatki</UIMetadataManager>
       <UINamespaceManager>Imenski prostori</UINamespaceManager>
       <UINodeTypeManager>Vrste vozlišč</UINodeTypeManager>
       <UITemplatesManager>Dokumenti</UITemplatesManager>
-   <UICLVTemplatesManager>Seznam</UICLVTemplatesManager>
+      <UICLVTemplatesManager>Seznam</UICLVTemplatesManager>
       <UIViewManager>Pogledi</UIViewManager>
       <UIDriveManager>Pogoni</UIDriveManager>
       <UIQueriesManager>Poizvedbe</UIQueriesManager>
       <UIActionManager>Dejanja</UIActionManager>
       <UIScriptManager>Skripte</UIScriptManager>
       <UIUnLockManager>Zaklenjeno</UIUnLockManager>
-      <UIFolksonomyManager>Oznake</UIFolksonomyManager>      
+      <UIFolksonomyManager>Oznake</UIFolksonomyManager>
     </label>
     <msg>
       <access-denied>Dostop zavrnjen. Nimate dovoljenja za to dejanje.</access-denied>
@@ -40,9 +40,11 @@
   -->
   <UITaxonomyWorkingArea>
     <msg>
-      <referential-integrity>Ni možno prebrati izvorne datoteke, ali pa je ciljna kategorija podkategorija.</referential-integrity>
+      <referential-integrity>Ni možno prebrati izvorne datoteke, ali pa je ciljna kategorija podkategorija.
+      </referential-integrity>
       <no-taxonomy-selected>Kopirati ali izrezati morate vsaj eno kategorijo.</no-taxonomy-selected>
-      <node-is-cutting>Ne moreš prilepiti (paste) tukaj. Vozlišče kategorije "{0}" je morda izrezano (cut).</node-is-cutting>
+      <node-is-cutting>Ne moreš prilepiti (paste) tukaj. Vozlišče kategorije "{0}" je morda izrezano (cut).
+      </node-is-cutting>
       <can-not-paste>V odložišču ni nobenega podatka, ki bi ga lahko prilepil.</can-not-paste>
       <reference-exception>Te kategorije ni mogoče zbrisati, ker se nanjo sklicuje vsebina.</reference-exception>
       <path-error>Pri odstranjevanju vozlišča kategorije je prišlo do napake.</path-error>
@@ -60,7 +62,7 @@
       <remove>Zbriši</remove>
     </title>
   </UITaxonomyManager>
-  
+
   <!--
   ################################################################################
   #    org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyTreeContainer#
@@ -71,15 +73,19 @@
       <info>
         <UITaxonomyTreeMainForm>Navedi ime kategorije, delovni prostor in pot do domače strani.</UITaxonomyTreeMainForm>
         <UIPermissionTreeManager>Nastavi dovoljenja za drevesno strukturo kategorije.</UIPermissionTreeManager>
-        <UIActionTaxonomyManager>Dodajte Dejanje drevesni strukturi kategorije, da bi zaključili izdelavo ali posodobitev.</UIActionTaxonomyManager>
-        <UITaxonomyTreeCreateChild>Urejanje derevesa taksonomije z dodajanjem, kopiranjem, izrezovanjem in izbiranjem dovoljenj.</UITaxonomyTreeCreateChild>
+        <UIActionTaxonomyManager>Dodajte Dejanje drevesni strukturi kategorije, da bi zaključili izdelavo ali
+          posodobitev.
+        </UIActionTaxonomyManager>
+        <UITaxonomyTreeCreateChild>Urejanje derevesa taksonomije z dodajanjem, kopiranjem, izrezovanjem in izbiranjem
+          dovoljenj.
+        </UITaxonomyTreeCreateChild>
       </info>
     </tab>
     <msg>
       <not-exist-tree>Drevesna struktura kategorije ne obstaja.</not-exist-tree>
     </msg>
   </UITaxonomyTreeContainer>
-  
+
   <!--
 ##########################################################################################
 #     org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyTreeMainForm          #
@@ -111,45 +117,45 @@
       <AddPath>Dodaj pot</AddPath>
     </title>
   </TaxonomyTreeHomePath>
-  
+
   <!--
 ##########################################################################################
 #     org.exoplatform.ecm.webui.component.admin.taxonomy.tree.info.UIPermissionTreeInfo  #
 ##########################################################################################
 -->
-<UIPermissionTreeInfo>
-<action>
-<title>
-<Delete>Izbriši</Delete>
-<Edit>Uredi</Edit>
-</title>
-</action>
-<header>
-<usersOrGroups>Uporabnik ali skupina</usersOrGroups>
-<read>Preberi</read>
-<addNode>Dodaj vozlišče</addNode>
-<setProperty>Nastavi lastnost</setProperty>
-<remove>Odstrani</remove>
-<action>Dejanje</action>
-</header>
-</UIPermissionTreeInfo>
+  <UIPermissionTreeInfo>
+    <action>
+      <title>
+        <Delete>Izbriši</Delete>
+        <Edit>Uredi</Edit>
+      </title>
+    </action>
+    <header>
+      <usersOrGroups>Uporabnik ali skupina</usersOrGroups>
+      <read>Preberi</read>
+      <addNode>Dodaj vozlišče</addNode>
+      <setProperty>Nastavi lastnost</setProperty>
+      <remove>Odstrani</remove>
+      <action>Dejanje</action>
+    </header>
+  </UIPermissionTreeInfo>
 
-<!--
-##########################################################################################
-#     org.exoplatform.ecm.webui.component.admin.taxonomy.tree.info.UIPermissionTreeForm  #
-##########################################################################################
--->
+  <!--
+  ##########################################################################################
+  #     org.exoplatform.ecm.webui.component.admin.taxonomy.tree.info.UIPermissionTreeForm  #
+  ##########################################################################################
+  -->
   <UIPermissionTreeForm>
     <msg>
       <have-not-any-permission>Določite vsaj eno dovoljenje za to vozlišče.</have-not-any-permission>
     </msg>
   </UIPermissionTreeForm>
 
-<!--
-################################################################################
-#     org.exoplatform.ecm.webui.component.admin.taxonomy.UIActionForm          #
-################################################################################
--->
+  <!--
+  ################################################################################
+  #     org.exoplatform.ecm.webui.component.admin.taxonomy.UIActionForm          #
+  ################################################################################
+  -->
 
   <UIActionForm>
     <title>Dodajte dejanje drevesni strukturi kategorije</title>
@@ -250,7 +256,8 @@
     <msg>
       <confirm-delete>Ali ste prepričani, da želite izbrisati ta metapodatek?</confirm-delete>
       <delete-successful>Predloge od '{0}' so bile uspešno izbrisane.</delete-successful>
-      <path-not-found-exception>Ta metapodatek je izbrisan ali spremenjen. Kliknite gumb Osveži.</path-not-found-exception>
+      <path-not-found-exception>Ta metapodatek je izbrisan ali spremenjen. Kliknite gumb Osveži.
+      </path-not-found-exception>
     </msg>
     <action>
       <Add>Dodajanje metapodatkov</Add>
@@ -425,13 +432,13 @@
       <action>Dejanje</action>
     </header>
   </UITreeList>
-  
+
   <UIRepositoryList>
     <titlebar>
       <label>Upravljanje glavnih funkcij ECM</label>
     </titlebar>
   </UIRepositoryList>
-  
+
   <!--
   ################################################################################
   #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeManager #
@@ -561,8 +568,12 @@
     </action>
     <msg>
       <register-successfully>Vrsta vozlišča {0} je bila uspešno registrirana.</register-successfully>
-      <supertype-is-madatory>Pri registraciji nove vrste vozlišča je super vrsta obvezna. Izberite vsaj eno super vrsto.</supertype-is-madatory>
-      <register-failed>Registracija vrste vozlišča je bila neuspešna. Mogoče že obstaja ali pa je super vrsta neveljavna.</register-failed>
+      <supertype-is-madatory>Pri registraciji nove vrste vozlišča je super vrsta obvezna. Izberite vsaj eno super
+        vrsto.
+      </supertype-is-madatory>
+      <register-failed>Registracija vrste vozlišča je bila neuspešna. Mogoče že obstaja ali pa je super vrsta
+        neveljavna.
+      </register-failed>
       <nodeType-name>Ime vrste vozlišča je obvezno.</nodeType-name>
       <fileName-invalid>Ime datoteke vsebuje nedovoljene znake.</fileName-invalid>
       <node-type-exists>Vrsta vozlišča '{0}' že obstaja.</node-type-exists>
@@ -735,10 +746,10 @@
     <action>
       <AddAction>Dodaj vrsto dejanja</AddAction>
     </action>
-<msg>
- <confirm-delete>Ali ste prepričani, da želite izbrisati to vrsto dejanja?</confirm-delete>
-<cannot-delete>Vrste dejanja ni mogoče izbrisati, ker jo sistem še vedno uporablja.</cannot-delete>
-</msg>
+    <msg>
+      <confirm-delete>Ali ste prepričani, da želite izbrisati to vrsto dejanja?</confirm-delete>
+      <cannot-delete>Vrste dejanja ni mogoče izbrisati, ker jo sistem še vedno uporablja.</cannot-delete>
+    </msg>
   </UIActionTypeList>
   <!--
   ######################################################################################
@@ -791,11 +802,11 @@
       <UITemplateContainer>Dokumenti</UITemplateContainer>
       <UIActionsTemplateContainer>Dejanja</UIActionsTemplateContainer>
       <UIOthersTemplateContainer>Ostalo</UIOthersTemplateContainer>
-  <UIActionScriptContainer>Dejanje</UIActionScriptContainer>
-  <UIWidgetScriptContainer>Pripomočki</UIWidgetScriptContainer>
-<UIInterceptorScriptContainer>Prestrezniki</UIInterceptorScriptContainer>
+      <UIActionScriptContainer>Dejanje</UIActionScriptContainer>
+      <UIWidgetScriptContainer>Pripomočki</UIWidgetScriptContainer>
+      <UIInterceptorScriptContainer>Prestrezniki</UIInterceptorScriptContainer>
 
-<nodeTypeDefinition>Vrsta vozlišča</nodeTypeDefinition>
+      <nodeTypeDefinition>Vrsta vozlišča</nodeTypeDefinition>
       <propertyDefinition>Lastnost</propertyDefinition>
       <childNodeDefinition>Podrejeno vozlišče</childNodeDefinition>
       <SuperTypeTab>Super vrste</SuperTypeTab>
@@ -810,11 +821,11 @@
   ######################################################################################
   -->
   <UIViewList>
-   <title>
-     <View>Pogled</View>
-     <EditInfo>Uredi</EditInfo>
-     <Delete>Izbriši</Delete>
-   </title>
+    <title>
+      <View>Pogled</View>
+      <EditInfo>Uredi</EditInfo>
+      <Delete>Izbriši</Delete>
+    </title>
     <header>
       <name>Ime</name>
       <permissions>Dovoljenja</permissions>
@@ -848,71 +859,71 @@
     </title>
   </EditPopup>
 
-<UITabList>
-                  <title>
-                    <Edit>Uredi</Edit>
-                    <Delete>Izbriši</Delete>
-                  </title>       
- <header>
-  <tabName>Zavihek</tabName>
-  <localizeButtons>Opis</localizeButtons>
-<action>Dejanja</action>
-</header>
-<action>
- <AddTab>Dodaj</AddTab>
-</action>
-<msg>
- <confirm-delete>Ali ste prepričani, da želite izbrisati ta zavihek?</confirm-delete>
-</msg>
-<grid>
- <msg>
-  <empty>Na tem pogledu ni zavihka</empty>
- </msg>
-</grid>
-</UITabList>
+  <UITabList>
+    <title>
+      <Edit>Uredi</Edit>
+      <Delete>Izbriši</Delete>
+    </title>
+    <header>
+      <tabName>Zavihek</tabName>
+      <localizeButtons>Opis</localizeButtons>
+      <action>Dejanja</action>
+    </header>
+    <action>
+      <AddTab>Dodaj</AddTab>
+    </action>
+    <msg>
+      <confirm-delete>Ali ste prepričani, da želite izbrisati ta zavihek?</confirm-delete>
+    </msg>
+    <grid>
+      <msg>
+        <empty>Na tem pogledu ni zavihka</empty>
+      </msg>
+    </grid>
+  </UITabList>
 
-<UIViewPermissionList>
- <title>Izberite lastnika, ki ima dovoljenja za ta pogled:</title>
-<label>
- <permission>{0} v {1}</permission>
-</label>
-<msg>
- <confirm-delete>Ali ste prepričani, da želite izbrisati to dovoljenje?</confirm-delete>
-  <permission-cannot-empty>Dovoljenje za pogled je obvezno in ne more biti prazno.</permission-cannot-empty>
-</msg>
-</UIViewPermissionList>
+  <UIViewPermissionList>
+    <title>Izberite lastnika, ki ima dovoljenja za ta pogled:</title>
+    <label>
+      <permission>{0} v {1}</permission>
+    </label>
+    <msg>
+      <confirm-delete>Ali ste prepričani, da želite izbrisati to dovoljenje?</confirm-delete>
+      <permission-cannot-empty>Dovoljenje za pogled je obvezno in ne more biti prazno.</permission-cannot-empty>
+    </msg>
+  </UIViewPermissionList>
 
-<UIViewPermissionList>
-                         <title>
-                           <Delete>Izbriši</Delete>
-                         </title>
- <header>
-<friendlyPermission>Dovoljenja</friendlyPermission>
-     <action>Dejanje</action>
- </header>
-<action>
- <title>
-  <Delete>Izbriši</Delete>
- </title>
-</action>
-<grid>
- <msg>
-  <empty>Ni dovoljenja za ta pogled</empty>
- </msg>
-</grid>
-</UIViewPermissionList>
+  <UIViewPermissionList>
+    <title>
+      <Delete>Izbriši</Delete>
+    </title>
+    <header>
+      <friendlyPermission>Dovoljenja</friendlyPermission>
+      <action>Dejanje</action>
+    </header>
+    <action>
+      <title>
+        <Delete>Izbriši</Delete>
+      </title>
+    </action>
+    <grid>
+      <msg>
+        <empty>Ni dovoljenja za ta pogled</empty>
+      </msg>
+    </grid>
+  </UIViewPermissionList>
 
-<UIViewPermissionForm>
-<action>
- <Add>Dodaj</Add>
-</action>
-<label>
- <userOrGroup>Uporabnik ali skupina</userOrGroup>
-</label>
-<msg>
- <permission-exist>Dovoljenje '{0}'  že obstaja na seznamu.</permission-exist>
-</msg>
-</UIViewPermissionForm>
+  <UIViewPermissionForm>
+    <action>
+      <Add>Dodaj</Add>
+    </action>
+    <label>
+      <userOrGroup>Uporabnik ali skupina</userOrGroup>
+    </label>
+    <msg>
+      <permission-exist>Dovoljenje '{0}' že obstaja na seznamu.</permission-exist>
+    </msg>
+  </UIViewPermissionForm>
 
   <!--
   ######################################################################################
@@ -927,15 +938,15 @@
     <msg>
       <view-name-invalid>Ime pogleda je obvezno.</view-name-invalid>
       <fileName-invalid>Ime pogleda vsebuje nekaj neveljavnih znakov.</fileName-invalid>
-      <permission-not-empty>Izberi dovoljenje za pogled.</permission-not-empty>      
+      <permission-not-empty>Izberi dovoljenje za pogled.</permission-not-empty>
       <mustbe-add-tab>Dodaj zavihek.</mustbe-add-tab>
-<mustbe-add-permission>Izberi dovoljenje za ta pogled</mustbe-add-permission>
+      <mustbe-add-permission>Izberi dovoljenje za ta pogled</mustbe-add-permission>
       <view-exist>Ime pogleda že obstaja.</view-exist>
     </msg>
     <label>
       <viewName>Ime</viewName>
       <template>Predloga</template>
-<version>Obnovi različico</version>
+      <version>Obnovi različico</version>
       <enableVersion>Omogoči različico</enableVersion>
       <hideExplorerPanel>Skrij ploščo brskalnika v stranski pasici</hideExplorerPanel>
     </label>
@@ -980,7 +991,7 @@
       <overloadThumbnail>Nadomestna sličica</overloadThumbnail>
       <manageHidden>Skrij/Pokaži vsebino</manageHidden>
       <comment>Komentiranje</comment>
-      <vote>Glasovanje</vote>  
+      <vote>Glasovanje</vote>
       <addCategory>Dodajanje kategorije</addCategory>
       <addLocalizationLink>Dodajanje prevoda</addLocalizationLink>
       <publicationRequestApproval>Prošnja za odobritev</publicationRequestApproval>
@@ -996,8 +1007,8 @@
       <uploadNewVersion>Nalaganje nove različice</uploadNewVersion>
     </label>
     <action>
-      <Save>#{word.save}</Save>      
-      <Cancel>#{word.cancel}</Cancel>      
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
   </UITabForm>
   <UIPermissionForm>
@@ -1010,7 +1021,7 @@
       <label>
         <UITabContainer>Dejanje</UITabContainer>
         <UIViewForm>Pogled</UIViewForm>
-        <UIViewPermissionContainer>Dovoljenje</UIViewPermissionContainer>    
+        <UIViewPermissionContainer>Dovoljenje</UIViewPermissionContainer>
       </label>
     </tab>
     <action>
@@ -1027,19 +1038,19 @@
     </title>
   </PopupViewPermission>
 
-<TabForm_Popup>
- <title>
-  <UITabForm>Dodaj/Uredi zavihek</UITabForm>
- </title>
-</TabForm_Popup>
+  <TabForm_Popup>
+    <title>
+      <UITabForm>Dodaj/Uredi zavihek</UITabForm>
+    </title>
+  </TabForm_Popup>
 
-<tab_permission>
- <title>
-  <SelectUser>Izberi uporabnika</SelectUser>
-<SelectMember>Izberi člana</SelectMember>
-<AddAny>Vse</AddAny>
- </title>
-</tab_permission>
+  <tab_permission>
+    <title>
+      <SelectUser>Izberi uporabnika</SelectUser>
+      <SelectMember>Izberi člana</SelectMember>
+      <AddAny>Vse</AddAny>
+    </title>
+  </tab_permission>
   <!--
   ######################################################################################
   #             org.exoplatform.ecm.webui.component.admin.view.UIECMTemplateList   #
@@ -1228,7 +1239,7 @@
   #             org.exoplatform.ecm.webui.component.admin.script.ecmScriptForm #
   ######################################################################################
   -->
- 
+
   <ecmScriptForm>
     <label>
       <selectVersion>Različice</selectVersion>
@@ -1260,7 +1271,7 @@
       <name-too-long>Ime kategorije mora biti krajše od 30 znakov.</name-too-long>
     </msg>
   </UITaxonomyForm>
-    
+
   <EditTaxonomyTreePopup>
     <title>
       <UITaxonomyTreeContainer>Uredi drevesno strukturo kategorije</UITaxonomyTreeContainer>
@@ -1272,15 +1283,15 @@
       <UITaxonomyTreeContainer>Dodaj drevesno strukturo kategorije</UITaxonomyTreeContainer>
     </title>
   </AddTaxonomyTreePopup>
-  
+
   <TaxonomyPopupCreateChild>
     <title>
       <UITaxonomyTreeCreateChildForm>Uredi drevesno strukturo kategorije</UITaxonomyTreeCreateChildForm>
     </title>
   </TaxonomyPopupCreateChild>
 
-<UITaxonomyTreeCreateChildForm>
-  <action>
+  <UITaxonomyTreeCreateChildForm>
+    <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
     </action>
@@ -1294,41 +1305,41 @@
       <name-too-long>Ime kategorije mora biti kajše od {0} znakov.</name-too-long>
       <exist>To ime kategorije že obstaja.</exist>
     </msg>
-</UITaxonomyTreeCreateChildForm>
+  </UITaxonomyTreeCreateChildForm>
 
   <PopupComponent>
     <title>
       <UIOneNodePathSelector>Izberi pot</UIOneNodePathSelector>
     </title>
   </PopupComponent>
-  
+
   <TaxoPopupUserSelector>
-  <title>
+    <title>
       <TaxoTreeSelectUserOrGroup>Izberi uporabnika</TaxoTreeSelectUserOrGroup>
       <UIPermissionTreeSelectUser>Izberi uporabnika</UIPermissionTreeSelectUser>
     </title>
   </TaxoPopupUserSelector>
 
   <TaxoTreeSelectUserOrGroupPopup>
-  <title>
+    <title>
       <TaxoTreeSelectUserOrGroup>Izberi članstvo</TaxoTreeSelectUserOrGroup>
     </title>
   </TaxoTreeSelectUserOrGroupPopup>
-  
+
   <TaxoTreeAnyPermission>
     <label>
       <any>Vsako dovoljenje</any>
       <anyPermission>TaxoTreeAnyPermission</anyPermission>
     </label>
   </TaxoTreeAnyPermission>
-  
+
   <TaxoTreeSelectUserOrGroup>
     <label>
       <selectGroup>Izberi skupino</selectGroup>
       <selectMembership>Izberi članstvo</selectMembership>
     </label>
   </TaxoTreeSelectUserOrGroup>
-  
+
   <!--
   ######################################################################################
   #             org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyTreeList #
@@ -1355,7 +1366,7 @@
       <is-in-trash>Ta drevesna struktura kategorije je bila premaknjena v koš za smeti.</is-in-trash>
     </msg>
   </UITaxonomyTreeList>
-  
+
   <!--
   ######################################################################################
   #             org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyTreeForm  #
@@ -1372,7 +1383,7 @@
       <homapath-emty>Vnesi pot</homapath-emty>
     </msg>
   </UITaxonomyTreeForm>
-  
+
   <UIPermissionTreeForm>
     <label>
       <UIPopupWindow>Izberi</UIPopupWindow>
@@ -1396,38 +1407,38 @@
       <access-denied>Dostop zavrnjen. Ne morete odstraniti tega dovoljenja.</access-denied>
     </msg>
   </UIPermissionTreeForm>
-  
+
   <PopupTaxonomyJCRBrowser>
-  <title>
+    <title>
       <UIOneNodePathSelector>Izberite pot za Domov</UIOneNodePathSelector>
     </title>
   </PopupTaxonomyJCRBrowser>
-  
+
   <PopupTaxonomyTreePermission>
     <title>
       <UIPermissionSelector>Izbirnik dovoljenj</UIPermissionSelector>
     </title>
-   </PopupTaxonomyTreePermission>
-   
-   <PopupDrivePermission>
+  </PopupTaxonomyTreePermission>
+
+  <PopupDrivePermission>
     <title>
       <AddDrivePermissionSelector>Dodaj dovoljenje</AddDrivePermissionSelector>
       <UIPermissionSelector>Izberite dovoljenje</UIPermissionSelector>
     </title>
   </PopupDrivePermission>
-  
+
   <UIPopupWindow>
     <title>
       <UIPermissionManager>Upravljanje dovoljenj</UIPermissionManager>
     </title>
-   </UIPopupWindow>
+  </UIPopupWindow>
 
   <PopupUserSelector>
     <title>
       <UIUserContainer>Upravljanje dovoljenj</UIUserContainer>
     </title>
-   </PopupUserSelector>
-   
+  </PopupUserSelector>
+
   <UIPermissionInfo>
     <action>
       <title>
@@ -1499,13 +1510,13 @@
       <access-denied>Dostop zavrnjen. Tega dovoljenja ne morete odstraniti.</access-denied>
     </msg>
   </UIPermissionForm>
-  
+
   <TaxonomyPopup>
     <title>
       <UITaxonomyForm>Dodaj Kategorijo</UITaxonomyForm>
     </title>
   </TaxonomyPopup>
-  
+
   <UITaxonomyManager>
     <title>
       <permission>Upravljanje dovoljenj</permission>
@@ -1533,7 +1544,7 @@
       <template-not-exist>Predloga, ki jo želite izbrisati ne obstaja.</template-not-exist>
     </msg>
   </UITemplateList>
-  
+
   <UIActionsTemplateList>
     <header>
       <name>Vrsta</name>
@@ -1551,7 +1562,7 @@
       <template-not-exist>Predloga, ki jo poskušate izbrisati, ne obstaja.</template-not-exist>
     </msg>
   </UIActionsTemplateList>
-  
+
   <UIOthersTemplateList>
     <header>
       <name>Vrsta</name>
@@ -1570,19 +1581,19 @@
     </msg>
   </UIOthersTemplateList>
 
- <!--
-  ######################################################################################
-  #             org.exoplatform.ecm.webui.component.admin.templates.clv package #
-  ######################################################################################
-  -->
+  <!--
+   ######################################################################################
+   #             org.exoplatform.ecm.webui.component.admin.templates.clv package #
+   ######################################################################################
+   -->
 
-<UITabPane>
- <title>
- <ContentTemplateContainer>Vsebina</ContentTemplateContainer>
-<CateTemplateContainer>Krmarjenje</CateTemplateContainer>
-<PageTemplateContainer>Številčenje strani</PageTemplateContainer>
- </title>
-</UITabPane>
+  <UITabPane>
+    <title>
+      <ContentTemplateContainer>Vsebina</ContentTemplateContainer>
+      <CateTemplateContainer>Krmarjenje</CateTemplateContainer>
+      <PageTemplateContainer>Številčenje strani</PageTemplateContainer>
+    </title>
+  </UITabPane>
 
   <UICLVTemplateList>
     <title>
@@ -1596,8 +1607,8 @@
     </header>
     <action>
       <AddTemplate>Dodaj predlogo</AddTemplate>
-<Edit>Uredi</Edit>
-<Delete>Izbriši</Delete>
+      <Edit>Uredi</Edit>
+      <Delete>Izbriši</Delete>
     </action>
     <msg>
       <confirm-delete>Ali ste prepričani, da želite izbrisati to predlogo?</confirm-delete>
@@ -1607,7 +1618,7 @@
     </msg>
   </UICLVTemplateList>
 
-<CateTemplateList>
+  <CateTemplateList>
     <header>
       <title>Ime</title>
       <action>Dejanje</action>
@@ -1619,12 +1630,12 @@
     </title>
     <action>
       <AddTemplate>Dodaj predlogo</AddTemplate>
-<Edit>Uredi</Edit>
-<Delete>Izbriši</Delete>
+      <Edit>Uredi</Edit>
+      <Delete>Izbriši</Delete>
     </action>
-</CateTemplateList>
+  </CateTemplateList>
 
-<PageTemplateList>
+  <PageTemplateList>
     <header>
       <title>Ime</title>
       <action>Dejanje</action>
@@ -1632,103 +1643,103 @@
     </header>
     <action>
       <AddTemplate>Dodajanje predloge</AddTemplate>
-<Edit>Uredi</Edit>
-<Delete>Izbriši</Delete>
+      <Edit>Uredi</Edit>
+      <Delete>Izbriši</Delete>
     </action>
-</PageTemplateList>
+  </PageTemplateList>
 
-<EditCLVTemplatePopup_ContentTemplateContainer>
- <title>
-   <UICLVTemplateForm_ContentTemplateContainer>Uredi predlogo seznama</UICLVTemplateForm_ContentTemplateContainer>   
- </title>
-</EditCLVTemplatePopup_ContentTemplateContainer>
+  <EditCLVTemplatePopup_ContentTemplateContainer>
+    <title>
+      <UICLVTemplateForm_ContentTemplateContainer>Uredi predlogo seznama</UICLVTemplateForm_ContentTemplateContainer>
+    </title>
+  </EditCLVTemplatePopup_ContentTemplateContainer>
 
-<EditCLVTemplatePopup_CateTemplateContainer>
- <title>
-   <UICLVTemplateForm_CateTemplateContainer>Uredi predlogo seznama</UICLVTemplateForm_CateTemplateContainer>   
- </title>
-</EditCLVTemplatePopup_CateTemplateContainer>
+  <EditCLVTemplatePopup_CateTemplateContainer>
+    <title>
+      <UICLVTemplateForm_CateTemplateContainer>Uredi predlogo seznama</UICLVTemplateForm_CateTemplateContainer>
+    </title>
+  </EditCLVTemplatePopup_CateTemplateContainer>
 
-<EditCLVTemplatePopup_PageTemplateContainer>
- <title>
-   <UICLVTemplateForm_PageTemplateContainer>Uredi predlogo seznama</UICLVTemplateForm_PageTemplateContainer>   
- </title>
-</EditCLVTemplatePopup_PageTemplateContainer>
+  <EditCLVTemplatePopup_PageTemplateContainer>
+    <title>
+      <UICLVTemplateForm_PageTemplateContainer>Uredi predlogo seznama</UICLVTemplateForm_PageTemplateContainer>
+    </title>
+  </EditCLVTemplatePopup_PageTemplateContainer>
 
-<CLVTemplatePopup_ContentTemplateContainer>
- <title>
-   <UICLVTemplateForm_ContentTemplateContainer>Dodaj predlogo seznama</UICLVTemplateForm_ContentTemplateContainer>   
- </title>
-</CLVTemplatePopup_ContentTemplateContainer>
+  <CLVTemplatePopup_ContentTemplateContainer>
+    <title>
+      <UICLVTemplateForm_ContentTemplateContainer>Dodaj predlogo seznama</UICLVTemplateForm_ContentTemplateContainer>
+    </title>
+  </CLVTemplatePopup_ContentTemplateContainer>
 
-<CLVTemplatePopup_CateTemplateContainer>
- <title>
-   <UICLVTemplateForm_CateTemplateContainer>Dodaj predlogo seznama</UICLVTemplateForm_CateTemplateContainer>   
- </title>
-</CLVTemplatePopup_CateTemplateContainer>
+  <CLVTemplatePopup_CateTemplateContainer>
+    <title>
+      <UICLVTemplateForm_CateTemplateContainer>Dodaj predlogo seznama</UICLVTemplateForm_CateTemplateContainer>
+    </title>
+  </CLVTemplatePopup_CateTemplateContainer>
 
-<CLVTemplatePopup_PageTemplateContainer>
- <title>
-   <UICLVTemplateForm_PageTemplateContainer>Dodaj predlogo seznama</UICLVTemplateForm_PageTemplateContainer>   
- </title>
-</CLVTemplatePopup_PageTemplateContainer>
+  <CLVTemplatePopup_PageTemplateContainer>
+    <title>
+      <UICLVTemplateForm_PageTemplateContainer>Dodaj predlogo seznama</UICLVTemplateForm_PageTemplateContainer>
+    </title>
+  </CLVTemplatePopup_PageTemplateContainer>
 
-<UICLVTemplateForm_ContentTemplateContainer>
- <action>
-  <Save>#{word.save}</Save>
-<Reset>Ponastavi</Reset>
-<Cancel>#{word.cancel}</Cancel>
- </action>
-<label>
- <title>Ime</title>
-<template>Ime predloge</template>
-<content>Vsebina</content>
-<type>Vrsta predloge</type>
-</label>
-</UICLVTemplateForm_ContentTemplateContainer>
+  <UICLVTemplateForm_ContentTemplateContainer>
+    <action>
+      <Save>#{word.save}</Save>
+      <Reset>Ponastavi</Reset>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <label>
+      <title>Ime</title>
+      <template>Ime predloge</template>
+      <content>Vsebina</content>
+      <type>Vrsta predloge</type>
+    </label>
+  </UICLVTemplateForm_ContentTemplateContainer>
 
-<UICLVTemplateForm_PageTemplateContainer>
- <action>
-  <Save>#{word.save}</Save>
-<Reset>Ponastavi</Reset>
-<Cancel>#{word.cancel}</Cancel>
- </action>
-<label>
- <title>Ime</title>
-<template>Ime predloge</template>
-<content>Vsebina</content>
-<type>Vrsta predloge</type>
-</label>
-</UICLVTemplateForm_PageTemplateContainer>
+  <UICLVTemplateForm_PageTemplateContainer>
+    <action>
+      <Save>#{word.save}</Save>
+      <Reset>Ponastavi</Reset>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <label>
+      <title>Ime</title>
+      <template>Ime predloge</template>
+      <content>Vsebina</content>
+      <type>Vrsta predloge</type>
+    </label>
+  </UICLVTemplateForm_PageTemplateContainer>
 
-<UICLVTemplateForm_CateTemplateContainer>
- <action>
-  <Save>#{word.save}</Save>
-<Reset>Ponastavi</Reset>
-<Cancel>#{word.cancel}</Cancel>
- </action>
-<label>
- <title>Ime</title>
-<template>Ime predloge</template>
-<content>Vsebina</content>
-<type>Vrsta predloge</type>
-</label>
-</UICLVTemplateForm_CateTemplateContainer>
-<UICLVTemplateForm>
-  <label>
-    <paginators>Številčenje strani</paginators>
-<list>Vsebina</list>
-<navigation>Krmarjenje</navigation>
-  </label>
-                          <action>
-                            <Save>#{word.save}</Save>
-                            <Reset>Ponastavi</Reset> 
-                            <Cancel>#{word.cancel}</Cancel> 
-                          </action> 
-  <msg>
-  <template-existing>To ime za predlogo že obstaja. Prosim izbrerite drugo.</template-existing>
-  </msg>
-</UICLVTemplateForm>
+  <UICLVTemplateForm_CateTemplateContainer>
+    <action>
+      <Save>#{word.save}</Save>
+      <Reset>Ponastavi</Reset>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <label>
+      <title>Ime</title>
+      <template>Ime predloge</template>
+      <content>Vsebina</content>
+      <type>Vrsta predloge</type>
+    </label>
+  </UICLVTemplateForm_CateTemplateContainer>
+  <UICLVTemplateForm>
+    <label>
+      <paginators>Številčenje strani</paginators>
+      <list>Vsebina</list>
+      <navigation>Krmarjenje</navigation>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Reset>Ponastavi</Reset>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <template-existing>To ime za predlogo že obstaja. Prosim izbrerite drugo.</template-existing>
+    </msg>
+  </UICLVTemplateForm>
 
   <!--
   ######################################################################################
@@ -1789,8 +1800,10 @@
   <TemplateContainerPopup>
     <title>
       <UIViewTemplate_UITemplateContainer><![CDATA[View & Edit Template]]></UIViewTemplate_UITemplateContainer>
-      <UIViewTemplate_UIActionsTemplateContainer><![CDATA[View & Edit Template]]></UIViewTemplate_UIActionsTemplateContainer>
-      <UIViewTemplate_UIOthersTemplateContainer><![CDATA[View & Edit Template]]></UIViewTemplate_UIOthersTemplateContainer>
+      <UIViewTemplate_UIActionsTemplateContainer>
+        <![CDATA[View & Edit Template]]></UIViewTemplate_UIActionsTemplateContainer>
+      <UIViewTemplate_UIOthersTemplateContainer>
+        <![CDATA[View & Edit Template]]></UIViewTemplate_UIOthersTemplateContainer>
     </title>
   </TemplateContainerPopup>
   <UITemplatesManager>
@@ -1834,7 +1847,7 @@
       <action>Dejanja</action>
     </header>
     <msg>
-      <undeletable>'{0}'  ni mogoče izbrisati, ker je privzeta.</undeletable>
+      <undeletable>'{0}' ni mogoče izbrisati, ker je privzeta.</undeletable>
       <confirm-delete>Ali ste prepričani, da želite izbrisati to pogovorno okno?</confirm-delete>
     </msg>
     <action>
@@ -1857,7 +1870,7 @@
       <action>Dejanja</action>
     </header>
     <msg>
-      <undeletable>'{0}'  ni mogoče zbrisati, ker je privzet.</undeletable>
+      <undeletable>'{0}' ni mogoče zbrisati, ker je privzet.</undeletable>
       <confirm-delete>Ali res želite izbrisati?</confirm-delete>
     </msg>
     <action>
@@ -1938,7 +1951,8 @@
     <msg>
       <confirm-delete>Ali ste prepričani, da želite izbrisati to poizvedbo?</confirm-delete>
       <query-not-existed>Poizvedba ne obstaja več.</query-not-existed>
-      <can-not-remove>Pri brisanju poizvedbe je prišlo do napake. Za informacije se obrnite na skrbnika.</can-not-remove>
+      <can-not-remove>Pri brisanju poizvedbe je prišlo do napake. Za informacije se obrnite na skrbnika.
+      </can-not-remove>
     </msg>
   </UIQueriesList>
   <UIQueriesForm>
@@ -1972,11 +1986,11 @@
       <UIQueriesForm>Uredi poizvedbo</UIQueriesForm>
     </title>
   </EditQueryForm>
-<PermissionPopup>
-  <title>
-    <UIGroupMemberSelector>Izbirnik dovoljenj</UIGroupMemberSelector>
-  </title>
-</PermissionPopup>
+  <PermissionPopup>
+    <title>
+      <UIGroupMemberSelector>Izbirnik dovoljenj</UIGroupMemberSelector>
+    </title>
+  </PermissionPopup>
   <!--
   ######################################################################################
   #             org.exoplatform.ecm.webui.component.admin.folksonomy #
@@ -1986,7 +2000,7 @@
     <title>
       <EditStyle>Uredi slog</EditStyle>
       <RemoveStyle>Odstrani slog</RemoveStyle>
-    </title>    
+    </title>
   </UITagManager>
   <UITagStyleList>
     <header>
@@ -2015,7 +2029,9 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <range-validator>Obseg ni veljaven. Oblika mora biti: a...b, med katerimi so a in b pozitivna cela števila. Namesto b lahko uporabite * in s tem nakažete, da je obseg neomejen.</range-validator>
+      <range-validator>Obseg ni veljaven. Oblika mora biti: a...b, med katerimi so a in b pozitivna cela števila.
+        Namesto b lahko uporabite * in s tem nakažete, da je obseg neomejen.
+      </range-validator>
       <error-update>Posodobitev je spodletela. Informacije so neveljavne.</error-update>
       <item-not-existing>Spremembe oznake ne morete shraniti, saj v bazi ne obstaja več.</item-not-existing>
     </msg>
@@ -2057,9 +2073,9 @@
   ###################################################################################
   -->
   <PermissionValidator>
-  <msg>
+    <msg>
       <permission-path-invalid>Dovoljenje '{0}' je neveljavno.</permission-path-invalid>
-  </msg>
+    </msg>
   </PermissionValidator>
   <!--
   ###################################################################################
@@ -2128,9 +2144,9 @@
       <EditInfo>Uredi</EditInfo>
       <Delete>Izbriši</Delete>
     </title>
-<label>
-  <permission>{0} v {1}</permission>
-</label>
+    <label>
+      <permission>{0} v {1}</permission>
+    </label>
   </UIViewContainer>
   <ECMTemplate>
     <title>
@@ -2161,7 +2177,7 @@
       <selectMembership>Izberi članstvo</selectMembership>
     </label>
   </UIDrivePermissionSelector>
-  
+
   <UIPermissionSelector>
     <label>
       <selectGroup>Izberi skupino</selectGroup>
@@ -2169,30 +2185,30 @@
       <selectMembership>Izberi članstvo</selectMembership>
     </label>
   </UIPermissionSelector>
-  
+
   <UIAnyPermission>
     <label>
       <anyPermission>Vsa dovoljenja</anyPermission>
     </label>
   </UIAnyPermission>
-  
+
   <UIMDriveAnyPermission>
     <label>
       <anyPermission>Vsa dovoljenja</anyPermission>
     </label>
   </UIMDriveAnyPermission>
-  
+
   <UIQueriesAnyPermission>
     <label>
       <anyPermission>Vsa dovoljenja</anyPermission>
     </label>
   </UIQueriesAnyPermission>
-  
+
   <MetadataPermission>
     <label>
       <selectGroup>Izberi skupino</selectGroup>
     </label>
-  </MetadataPermission>  
+  </MetadataPermission>
   <MetadataPermission>
     <label>
       <selectMembership>Izberi članstvo</selectMembership>
@@ -2215,7 +2231,7 @@
   </QueriesPermissionBrowse>
   <!--
   #########Since ECM 2.4##################
-  -->  
+  -->
   <UIViewFormTabPane>
     <label>
       <addSymLink>Dodaj bližnjico</addSymLink>
@@ -2223,14 +2239,14 @@
   </UIViewFormTabPane>
   <!--
   #########Since ECM 2.5##################
-  --> 
-  
+  -->
+
   <UIDriveForm>
-<msg>
-  <permission-path-invalid>Dovoljenje '{0}' je neveljavno.</permission-path-invalid>
-  </msg>
+    <msg>
+      <permission-path-invalid>Dovoljenje '{0}' je neveljavno.</permission-path-invalid>
+    </msg>
   </UIDriveForm>
-  
+
   <UITaxonomyTreeMainForm>
     <msg>
       <homepath-emty>Pot do domače strani je obveza.</homepath-emty>
@@ -2238,9 +2254,9 @@
     </msg>
   </UITaxonomyTreeMainForm>
   <UITaxonomyWorkingArea>
-  <msg>
-  <exist>To drevesno vozlišče že obstaja.</exist>
-  </msg>
+    <msg>
+      <exist>To drevesno vozlišče že obstaja.</exist>
+    </msg>
   </UITaxonomyWorkingArea>
 
   <PermissionTreeSelectUser>
@@ -2256,16 +2272,16 @@
       <userName>#{word.userName}</userName>
       <lastName>#{word.lastName}</lastName>
       <firstName>#{word.firstName}</firstName>
-    <email>#{word.email}</email>
+      <email>#{word.email}</email>
       <action>#{word.action}</action>
       <Add>#{word.Add}</Add>
       <Close>#{word.Close}</Close>
     </label>
   </PermissionTreeSelectUser>
-  
+
   <!--
   #########Since ECM 2.6 ##################
-  -->   
+  -->
   <DriveInputSet>
     <label>
       <nt_folder>Mapa za dokumente</nt_folder>
@@ -2274,30 +2290,30 @@
       <exo_jsFolder>Mapa za Javascript</exo_jsFolder>
       <exo_linkFolder>Mapa za povezave</exo_linkFolder>
       <exo_webFolder>Mapa za Spletne vsebine</exo_webFolder>
-   </label>
+    </label>
   </DriveInputSet>
   <UIPermissionTreeInfo>
-  <msg>
+    <msg>
       <confirm-delete-permission>Ali ste prepričani, da želite izbrisati to dovoljenje?</confirm-delete-permission>
-      <no-permission-remove>Lastnika ali sistemskega uporabnika ni mogoče odstraniti.</no-permission-remove>  
-  </msg>
-  </UIPermissionTreeInfo>  
+      <no-permission-remove>Lastnika ali sistemskega uporabnika ni mogoče odstraniti.</no-permission-remove>
+    </msg>
+  </UIPermissionTreeInfo>
   <UITaxonomyTreeMainForm>
-<msg>
+    <msg>
       <no-right-target-path>Prosimo, izberite drugo pot domov.</no-right-target-path>
-</msg>
-</UITaxonomyTreeMainForm>
+    </msg>
+  </UITaxonomyTreeMainForm>
 
-<UIECMAdminControlPanel>
+  <UIECMAdminControlPanel>
     <tab>
-      <label>        
+      <label>
         <ManageUnLock>Upravljanje zaklepanja</ManageUnLock>
       </label>
-    </tab>        
-</UIECMAdminControlPanel>
-<UIUnLockForm>
+    </tab>
+  </UIECMAdminControlPanel>
+  <UIUnLockForm>
     <label>
-      <name>Vozlišče poti</name>      
+      <name>Vozlišče poti</name>
       <permissions>Dovoljenja</permissions>
       <PermissionButton>UI Unlock Form</PermissionButton>
     </label>
@@ -2306,49 +2322,51 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <permission-require>Izbrati morate dovoljenja.</permission-require>      
+      <permission-require>Izbrati morate dovoljenja.</permission-require>
     </msg>
   </UIUnLockForm>
   <UILockHolderList>
-  <header>
-  <name>Skupine ali uporabniki</name>
-  <action>Dejanje</action>
-  </header>
-  <tooltip>
-<DeleteLock>Izbriši skupino</DeleteLock>
-  </tooltip>
-  <msg>
-  <can-not-delete-lock-holder>Skupine {0} ni mogoče izbrisati.</can-not-delete-lock-holder>
-  </msg>
+    <header>
+      <name>Skupine ali uporabniki</name>
+      <action>Dejanje</action>
+    </header>
+    <tooltip>
+      <DeleteLock>Izbriši skupino</DeleteLock>
+    </tooltip>
+    <msg>
+      <can-not-delete-lock-holder>Skupine {0} ni mogoče izbrisati.</can-not-delete-lock-holder>
+    </msg>
   </UILockHolderList>
   <UILockNodeList>
-  <header>
-  <name>Naslov</name>
-  <hoderLock>Zaklenil lastnik</hoderLock>
-  <action>Dejanje</action>
-  </header>
-  <tooltip>
-<UnLock>Odkleni</UnLock>
-  </tooltip>
-  <msg>
-  <access-denied-exception>Nimate dovoljenja za dostop do vozlišča, ki se nahaja na naslovu {0}, ali pa je vozlišče bilo izbrisano.</access-denied-exception>
-  </msg>
+    <header>
+      <name>Naslov</name>
+      <hoderLock>Zaklenil lastnik</hoderLock>
+      <action>Dejanje</action>
+    </header>
+    <tooltip>
+      <UnLock>Odkleni</UnLock>
+    </tooltip>
+    <msg>
+      <access-denied-exception>Nimate dovoljenja za dostop do vozlišča, ki se nahaja na naslovu {0}, ali pa je vozlišče
+        bilo izbrisano.
+      </access-denied-exception>
+    </msg>
   </UILockNodeList>
   <EditUnLockForm>
     <title>
       <UIUnLockForm>Upravljanje zaklepanja</UIUnLockForm>
     </title>
-  </EditUnLockForm>  
+  </EditUnLockForm>
   <UITabPane>
     <action>
       <Close>#{word.close}</Close>
     </action>
     <title>
-    <UILockHolderContainer>Upravljanje zaklepanja</UILockHolderContainer>
-    <UILockNodeList>Zaklenjeno vozlišče</UILockNodeList>
+      <UILockHolderContainer>Upravljanje zaklepanja</UILockHolderContainer>
+      <UILockNodeList>Zaklenjeno vozlišče</UILockNodeList>
     </title>
   </UITabPane>
-  
+
   <UIViewFormTabPane>
     <action>
       <AddTabForm>Dodaj zavihek</AddTabForm>
@@ -2356,21 +2374,21 @@
       <BackViewForm>Nazaj</BackViewForm>
     </action>
   </UIViewFormTabPane>
-  
- <UITemplateForm>
-<tab>
-<label>
-<defaultSkin>CSS</defaultSkin>
-</label>
-</tab>
-</UITemplateForm>
- 
+
+  <UITemplateForm>
+    <tab>
+      <label>
+        <defaultSkin>CSS</defaultSkin>
+      </label>
+    </tab>
+  </UITemplateForm>
+
   <UITabPane>
     <title>
       <UISkinTab>CSS</UISkinTab>
     </title>
   </UITabPane>
-  
+
   <UISkinTab>
     <header>
       <name>Ime</name>
@@ -2379,7 +2397,7 @@
       <action>Dejanja</action>
     </header>
     <msg>
-      <undeletable>'{0}'  ni mogoče izbrisati, ker je privzet.</undeletable>
+      <undeletable>'{0}' ni mogoče izbrisati, ker je privzet.</undeletable>
       <confirm-delete>Ali ste prepričani, da želite izbrisati to preobleko?</confirm-delete>
     </msg>
     <action>
@@ -2389,7 +2407,7 @@
       </title>
     </action>
   </UISkinTab>
-  
+
   <SkinForm>
     <label>
       <UITemplateContent>SkinForm</UITemplateContent>
@@ -2404,56 +2422,57 @@
     <title>Dodaj/Uredi preobleko</title>
   </SkinForm>
 
- <UITagManager>
-   <action>
-     <title>
-       <RemoveStyle>Odstrani</RemoveStyle>
-         <AddStyle>Dodaj slog</AddStyle>
-     </title>
-   </action>
-   <msg>
-     <confirm-delete>Ali ste prepričani, da želite izbrisati ta slog oznake?</confirm-delete>
-   </msg>
- </UITagManager>
+  <UITagManager>
+    <action>
+      <title>
+        <RemoveStyle>Odstrani</RemoveStyle>
+        <AddStyle>Dodaj slog</AddStyle>
+      </title>
+    </action>
+    <msg>
+      <confirm-delete>Ali ste prepričani, da želite izbrisati ta slog oznake?</confirm-delete>
+    </msg>
+  </UITagManager>
 
-<UITaxonomyTreeContainer>
-<action>
-<Cancel>#{word.close}</Cancel>
-</action>
-</UITaxonomyTreeContainer>
-<UITaxonomyTreeMainForm>
-<action>
-<NextViewPermission>Naslednji</NextViewPermission>
-<Reset>Reset</Reset>
-</action>
-</UITaxonomyTreeMainForm>
+  <UITaxonomyTreeContainer>
+    <action>
+      <Cancel>#{word.close}</Cancel>
+    </action>
+  </UITaxonomyTreeContainer>
+  <UITaxonomyTreeMainForm>
+    <action>
+      <NextViewPermission>Naslednji</NextViewPermission>
+      <Reset>Reset</Reset>
+    </action>
+  </UITaxonomyTreeMainForm>
 
-<UIPermissionTreeForm>
-<action>
-<Save>Save</Save>
-<Cancel>#{word.cancel}</Cancel>
-<Reset>Reset</Reset>
-<NextAddAction>Naslednji</NextAddAction>
-<Previous>Prejšnji</Previous>
-</action>
-</UIPermissionTreeForm>
+  <UIPermissionTreeForm>
+    <action>
+      <Save>Save</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <Reset>Reset</Reset>
+      <NextAddAction>Naslednji</NextAddAction>
+      <Previous>Prejšnji</Previous>
+    </action>
+  </UIPermissionTreeForm>
 
-<UIActionForm>
-<action>
-<PreviousViewPermission>Prejšnji</PreviousViewPermission>
-<NextViewTree>Naslednji</NextViewTree>
-</action>
-  <msg>
-    <xss-vulnerability-character>Polje '{0}' vsebuje znake, ki povzročajo XSS ranljivost</xss-vulnerability-character>
-<xss-vulnerability-character-wo-label>Vnos lahko vsebuje znake, ki povzročajo XSS ranljivost</xss-vulnerability-character-wo-label>
-  </msg>
-</UIActionForm>
+  <UIActionForm>
+    <action>
+      <PreviousViewPermission>Prejšnji</PreviousViewPermission>
+      <NextViewTree>Naslednji</NextViewTree>
+    </action>
+    <msg>
+      <xss-vulnerability-character>Polje '{0}' vsebuje znake, ki povzročajo XSS ranljivost</xss-vulnerability-character>
+      <xss-vulnerability-character-wo-label>Vnos lahko vsebuje znake, ki povzročajo XSS ranljivost
+      </xss-vulnerability-character-wo-label>
+    </msg>
+  </UIActionForm>
 
-<UITaxonomyTreeWorkingArea>
-<action>
-<Previous>Prejšnji</Previous>
-</action>
-</UITaxonomyTreeWorkingArea>
+  <UITaxonomyTreeWorkingArea>
+    <action>
+      <Previous>Prejšnji</Previous>
+    </action>
+  </UITaxonomyTreeWorkingArea>
 
   <UITabPane>
     <title>
@@ -2461,7 +2480,7 @@
       <UITagPermissionManager>Upravljanje dovoljenj oznak</UITagPermissionManager>
     </title>
   </UITabPane>
-  
+
   <UITagPermissionInfo>
     <header>
       <usersOrGroups>Uporabnik ali skupina</usersOrGroups>
@@ -2474,7 +2493,7 @@
     </action>
     <msg>
       <confirm-delete-permission>Ali ste prepričani, da želite izbrisati to dovoljenje?</confirm-delete-permission>
-    </msg>   
+    </msg>
   </UITagPermissionInfo>
   <UITagPermissionForm>
     <title>Dodaj dovoljenje</title>
@@ -2487,32 +2506,32 @@
     </label>
     <msg>
       <userOrGroup-alreadyExists>To članstvo že obstaja. Izberite drugo.</userOrGroup-alreadyExists>
-    </msg>    
+    </msg>
   </UITagPermissionForm>
-  
+
   <UIGroupMemberSelector>
     <label>
       <selectGroup>Izberi skupino</selectGroup>
       <selectMembership>Izberi članstvo</selectMembership>
     </label>
   </UIGroupMemberSelector>
-  
+
   <UIFolksonomyManager>
-  <msg>
+    <msg>
       <confirm-delete>Ali ste prepričani, da želite izbrisati ta slog?</confirm-delete>
-  </msg>
+    </msg>
     <action>
       <title>
         <AddStyle>Dodaj slog</AddStyle>
       </title>
     </action>
-  </UIFolksonomyManager>  
-<UIActionForm>
-  <title>
-  <ShowComponent>Odpri okno</ShowComponent>
-  <removeReference>Odstrani</removeReference>
-  </title>
-  </UIActionForm> 
+  </UIFolksonomyManager>
+  <UIActionForm>
+    <title>
+      <ShowComponent>Odpri okno</ShowComponent>
+      <removeReference>Odstrani</removeReference>
+    </title>
+  </UIActionForm>
   <NodeTypeNameValidator>
     <msg>
       <Invalid-char>Obstaja nekaj neveljavnih znakov. Vnesite drugo vrednost.</Invalid-char>
@@ -2521,10 +2540,12 @@
   </NodeTypeNameValidator>
   <UIActionForm>
     <msg>
-      <constraint-violation-exception>Vozlišče '{0}' ne more biti dodano v '{1}' v delovni prostor '{2}'.  Obstaja težava  z dovoljenji ali omejitvami.</constraint-violation-exception>
+      <constraint-violation-exception>Vozlišče '{0}' ne more biti dodano v '{1}' v delovni prostor '{2}'. Obstaja težava
+        z dovoljenji ali omejitvami.
+      </constraint-violation-exception>
     </msg>
   </UIActionForm>
-  
+
   <UIWorkspaceWizard>
     <msg>
       <name-not-allowed>Prepovedano ime</name-not-allowed>
@@ -2532,35 +2553,37 @@
   </UIWorkspaceWizard>
   <UIRepositoryForm>
     <msg>
-      <not-complete-repository>The repository is being created. You need to wait a few minutes before creating another one.</not-complete-repository>
+      <not-complete-repository>The repository is being created. You need to wait a few minutes before creating another
+        one.
+      </not-complete-repository>
     </msg>
   </UIRepositoryForm>
-  
+
   <UIViewFormTabPane>
-  <label>
-  <addCategory>Dodaj Kategorijo</addCategory>
-          <addLocalizationLink>Dodaj prevod</addLocalizationLink>
-  </label>
+    <label>
+      <addCategory>Dodaj Kategorijo</addCategory>
+      <addLocalizationLink>Dodaj prevod</addLocalizationLink>
+    </label>
   </UIViewFormTabPane>
 
-<UIDriveForm>
-<label>
-<allowNodeTypesOnTree>Dovoljena vrsta vozlišč na levi drevesni strukturi:</allowNodeTypesOnTree>
-</label>
-</UIDriveForm>
-<DriveInputSet>
-<title>
-<RemovePermission>Remove Permission</RemovePermission>
-<ChooseNodeType>Izberi vrste vozlišča</ChooseNodeType>
-<RemoveNodeType>Odstrani</RemoveNodeType>
-</title>
-</DriveInputSet>
-<PopupNodeTypeSelector>
-<title>
-<UINodeTypeSelector>Izberi vrste vozlišča</UINodeTypeSelector>
-<PopupNodeTypeSelector>Izberi Vrste vozlišča</PopupNodeTypeSelector>
-</title>
-</PopupNodeTypeSelector>
+  <UIDriveForm>
+    <label>
+      <allowNodeTypesOnTree>Dovoljena vrsta vozlišč na levi drevesni strukturi:</allowNodeTypesOnTree>
+    </label>
+  </UIDriveForm>
+  <DriveInputSet>
+    <title>
+      <RemovePermission>Remove Permission</RemovePermission>
+      <ChooseNodeType>Izberi vrste vozlišča</ChooseNodeType>
+      <RemoveNodeType>Odstrani</RemoveNodeType>
+    </title>
+  </DriveInputSet>
+  <PopupNodeTypeSelector>
+    <title>
+      <UINodeTypeSelector>Izberi vrste vozlišča</UINodeTypeSelector>
+      <PopupNodeTypeSelector>Izberi Vrste vozlišča</PopupNodeTypeSelector>
+    </title>
+  </PopupNodeTypeSelector>
   <UINodeTypeSelector>
     <label>
       <selectedAllNodeTypes>Izberi vse vrste vozlišč</selectedAllNodeTypes>
@@ -2568,14 +2591,14 @@
   </UINodeTypeSelector>
   <UIScriptForm>
     <msg>
-      <PathNotFoundException>V mapi '{0}' že obstaja skripta.</PathNotFoundException>      
+      <PathNotFoundException>V mapi '{0}' že obstaja skripta.</PathNotFoundException>
     </msg>
   </UIScriptForm>
- <UINodeTypeList>
-   <msg>
-   <no-list>Vrsta vozlišča, ki bi ustrezala isaknemu pogoju ne obstaja.</no-list>
-   </msg>
- </UINodeTypeList>
+  <UINodeTypeList>
+    <msg>
+      <no-list>Vrsta vozlišča, ki bi ustrezala isaknemu pogoju ne obstaja.</no-list>
+    </msg>
+  </UINodeTypeList>
   <UIActionForm>
     <msg>
       <canotChangeActionId>Ne moreš spremeniti ID dejanja.</canotChangeActionId>
@@ -2593,7 +2616,9 @@
   </UIPageIterator>
   <UILockNodeList>
     <msg>
-      <can-not-unlock-node>Nimaš dovoljenja za odklepanje tega vozlišča. Obrnite se na skrbnika, da vam dodeli ustrezno pravico.</can-not-unlock-node>
+      <can-not-unlock-node>Nimaš dovoljenja za odklepanje tega vozlišča. Obrnite se na skrbnika, da vam dodeli ustrezno
+        pravico.
+      </can-not-unlock-node>
     </msg>
- </UILockNodeList>
+  </UILockNodeList>
 </bundle>

@@ -13,21 +13,21 @@
         <Repository>مُستودع البيانات</Repository>
         <Advanced>متطور/ة</Advanced>
       </label>
-    </tab>    
-    <label>     
+    </tab>
+    <label>
       <UITaxonomyManagerTrees>فئات</UITaxonomyManagerTrees>
       <UIMetadataManager>دليل المعلومات القياسيّة</UIMetadataManager>
       <UINamespaceManager>أسماء الفضاءات</UINamespaceManager>
       <UINodeTypeManager>أنواع العقد</UINodeTypeManager>
       <UITemplatesManager>وثائق</UITemplatesManager>
-   <UICLVTemplatesManager>قائمة</UICLVTemplatesManager>
+      <UICLVTemplatesManager>قائمة</UICLVTemplatesManager>
       <UIViewManager>المشاهد</UIViewManager>
       <UIDriveManager>الأقراص</UIDriveManager>
       <UIQueriesManager>استبيانات</UIQueriesManager>
       <UIActionManager>الإجراءات</UIActionManager>
       <UIScriptManager>سكريبتات</UIScriptManager>
       <UIUnLockManager>أقفال</UIUnLockManager>
-      <UIFolksonomyManager>تصنيفات</UIFolksonomyManager>      
+      <UIFolksonomyManager>تصنيفات</UIFolksonomyManager>
     </label>
     <msg>
       <access-denied>غير مسموح بالدخول. لم تتحصل على الصلاحية الكافية للقيام بهذه الاجراء.</access-denied>
@@ -60,7 +60,7 @@
       <remove>حذف</remove>
     </title>
   </UITaxonomyManager>
-  
+
   <!--
   ################################################################################
   #    org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyTreeContainer#
@@ -71,15 +71,17 @@
       <info>
         <UITaxonomyTreeMainForm>حدّد اسم الفئة، مساحة العمل و مسار الصفحة الرئيسيّة.</UITaxonomyTreeMainForm>
         <UIPermissionTreeManager>تعيين صلاحيّة لاختيار شجرة الفئات</UIPermissionTreeManager>
-        <UIActionTaxonomyManager>اضافة اجراء الى شجرة الفئات قصد اتمام عمليّة الانشاء أو التغيير</UIActionTaxonomyManager>
-        <UITaxonomyTreeCreateChild>تعديل تصنيف الشجرة من خلال إضافة ، نسخ ، واختيار  الصلاحيّات.</UITaxonomyTreeCreateChild>
+        <UIActionTaxonomyManager>اضافة اجراء الى شجرة الفئات قصد اتمام عمليّة الانشاء أو التغيير
+        </UIActionTaxonomyManager>
+        <UITaxonomyTreeCreateChild>تعديل تصنيف الشجرة من خلال إضافة ، نسخ ، واختيار الصلاحيّات.
+        </UITaxonomyTreeCreateChild>
       </info>
     </tab>
     <msg>
       <not-exist-tree>شجرة الفئات لا وجود لها حتى الآن.</not-exist-tree>
     </msg>
   </UITaxonomyTreeContainer>
-  
+
   <!--
 ##########################################################################################
 #     org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyTreeMainForm          #
@@ -111,45 +113,45 @@
       <AddPath>اضافة مسار</AddPath>
     </title>
   </TaxonomyTreeHomePath>
-  
+
   <!--
 ##########################################################################################
 #     org.exoplatform.ecm.webui.component.admin.taxonomy.tree.info.UIPermissionTreeInfo  #
 ##########################################################################################
 -->
-<UIPermissionTreeInfo>
-<action>
-<title>
-<Delete>حذف</Delete>
-<Edit>قراءة</Edit>
-</title>
-</action>
-<header>
-<usersOrGroups>مستخدم أو مجموعة</usersOrGroups>
-<read>قراءة</read>
-<addNode>إضافة العقدة</addNode>
-<setProperty>تعيين الخاصية</setProperty>
-<remove>قراءة</remove>
-<action>العمل</action>
-</header>
-</UIPermissionTreeInfo>
+  <UIPermissionTreeInfo>
+    <action>
+      <title>
+        <Delete>حذف</Delete>
+        <Edit>قراءة</Edit>
+      </title>
+    </action>
+    <header>
+      <usersOrGroups>مستخدم أو مجموعة</usersOrGroups>
+      <read>قراءة</read>
+      <addNode>إضافة العقدة</addNode>
+      <setProperty>تعيين الخاصية</setProperty>
+      <remove>قراءة</remove>
+      <action>العمل</action>
+    </header>
+  </UIPermissionTreeInfo>
 
-<!--
-##########################################################################################
-#     org.exoplatform.ecm.webui.component.admin.taxonomy.tree.info.UIPermissionTreeForm  #
-##########################################################################################
--->
+  <!--
+  ##########################################################################################
+  #     org.exoplatform.ecm.webui.component.admin.taxonomy.tree.info.UIPermissionTreeForm  #
+  ##########################################################################################
+  -->
   <UIPermissionTreeForm>
     <msg>
       <have-not-any-permission>يُرجى تحديد على الأقلّ صلاحية لهذه العقدة</have-not-any-permission>
     </msg>
   </UIPermissionTreeForm>
 
-<!--
-################################################################################
-#     org.exoplatform.ecm.webui.component.admin.taxonomy.UIActionForm          #
-################################################################################
--->
+  <!--
+  ################################################################################
+  #     org.exoplatform.ecm.webui.component.admin.taxonomy.UIActionForm          #
+  ################################################################################
+  -->
 
   <UIActionForm>
     <title>إضافة اجراء إلى فئة الشّجرة</title>
@@ -425,13 +427,13 @@
       <action>اجراء</action>
     </header>
   </UITreeList>
-  
+
   <UIRepositoryList>
     <titlebar>
       <label>إدارة مهام الـ'ECM'</label>
     </titlebar>
   </UIRepositoryList>
-  
+
   <!--
   ################################################################################
   #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeManager #
@@ -561,8 +563,10 @@
     </action>
     <msg>
       <register-successfully>نوع العقدة '{0}' تم تسجيله بنجاح</register-successfully>
-      <supertype-is-madatory>النوع السوبر إجباري لتسجيل نوع عقدة جديد. يجب اختيار نوع سوبر واحد على الاقل</supertype-is-madatory>
-      <register-failed>تسجيل نوع العقدة لم يتم بنجاح. اما انه موجود من قبل او ان الانواع السوبر غير صحيحة</register-failed>
+      <supertype-is-madatory>النوع السوبر إجباري لتسجيل نوع عقدة جديد. يجب اختيار نوع سوبر واحد على الاقل
+      </supertype-is-madatory>
+      <register-failed>تسجيل نوع العقدة لم يتم بنجاح. اما انه موجود من قبل او ان الانواع السوبر غير صحيحة
+      </register-failed>
       <nodeType-name>اسم نوع العقدة ضروري</nodeType-name>
       <fileName-invalid>هناك بعض احرف في الاسم غير صحيحة</fileName-invalid>
       <node-type-exists>نوع العقدة '{0}' موجود من قبل</node-type-exists>
@@ -586,7 +590,7 @@
   </UIPropertyDefinitionForm>
   <UIChildNodeDefinitionForm>
     <msg>
-      <child-name>اسم  العقدة الإبن ضروري</child-name>
+      <child-name>اسم العقدة الإبن ضروري</child-name>
       <child-invalid>الاسم يحتوي على حرف غير صالح</child-invalid>
       <default-node-type-not-found>نوع العقدة الإفتراضي غير موجود</default-node-type-not-found>
       <requiredPrimaryType>النوع الرئيسي ضروري</requiredPrimaryType>
@@ -663,7 +667,7 @@
       <Cancel>#{word.cancel}</Cancel>
       <Upload>تحميل</Upload>
     </action>
-    <title>'XML' إستيراد  نوع عقدة من ملف ذات نوع</title>
+    <title>'XML' إستيراد نوع عقدة من ملف ذات نوع</title>
     <msg>
       <filename-error>استعراض الملف نوع عقدة للاستيراد</filename-error>
       <data-file-error>معتمدة فقط أكس ملف أو ملف مضغوط لاستيراد.</data-file-error>
@@ -696,7 +700,7 @@
   </UINodeTypeImport>
   <NodeTypeImportPopup>
     <title>
-      <UINodeTypeImportPopup>إستيراد  نوع عقدة من ملف من نوع 'XML'</UINodeTypeImportPopup>
+      <UINodeTypeImportPopup>إستيراد نوع عقدة من ملف من نوع 'XML'</UINodeTypeImportPopup>
     </title>
   </NodeTypeImportPopup>
   <!--
@@ -726,7 +730,7 @@
     <header>
       <name>الإسم</name>
       <label>الاسم</label>
-<action>الإجراءات</action>
+      <action>الإجراءات</action>
     </header>
     <title>
       <Edit>تغيير</Edit>
@@ -735,10 +739,10 @@
     <action>
       <AddAction>أضف</AddAction>
     </action>
-<msg>
- <confirm-delete>هل ترغب حقّا بحذف هذا النوع من الاجراء؟</confirm-delete>
-<cannot-delete>لا يمكن حذف هذا النوع من الاجراء لأنه في حالة استخدام من قبل نظام التشغيل.</cannot-delete>
-</msg>
+    <msg>
+      <confirm-delete>هل ترغب حقّا بحذف هذا النوع من الاجراء؟</confirm-delete>
+      <cannot-delete>لا يمكن حذف هذا النوع من الاجراء لأنه في حالة استخدام من قبل نظام التشغيل.</cannot-delete>
+    </msg>
   </UIActionTypeList>
   <!--
   ######################################################################################
@@ -791,11 +795,11 @@
       <UITemplateContainer>وثائق</UITemplateContainer>
       <UIActionsTemplateContainer>الإجراءات</UIActionsTemplateContainer>
       <UIOthersTemplateContainer>الآخرين</UIOthersTemplateContainer>
-  <UIActionScriptContainer>اجراء</UIActionScriptContainer>
-  <UIWidgetScriptContainer>تطبيقات مصغّرة</UIWidgetScriptContainer>
-<UIInterceptorScriptContainer>الحواجز</UIInterceptorScriptContainer>
+      <UIActionScriptContainer>اجراء</UIActionScriptContainer>
+      <UIWidgetScriptContainer>تطبيقات مصغّرة</UIWidgetScriptContainer>
+      <UIInterceptorScriptContainer>الحواجز</UIInterceptorScriptContainer>
 
-<nodeTypeDefinition>نوع العقدة</nodeTypeDefinition>
+      <nodeTypeDefinition>نوع العقدة</nodeTypeDefinition>
       <propertyDefinition>الخاصية</propertyDefinition>
       <childNodeDefinition>الفروع</childNodeDefinition>
       <SuperTypeTab>أنواع السوبر</SuperTypeTab>
@@ -810,11 +814,11 @@
   ######################################################################################
   -->
   <UIViewList>
-   <title>
-     <View>عرض</View>
-     <EditInfo>تغيير</EditInfo>
-     <Delete>حذف</Delete>
-   </title>
+    <title>
+      <View>عرض</View>
+      <EditInfo>تغيير</EditInfo>
+      <Delete>حذف</Delete>
+    </title>
     <header>
       <name>الاسم</name>
       <permissions>الصلاحيّات</permissions>
@@ -826,7 +830,7 @@
       <AddView>إضافة مشهد</AddView>
     </action>
     <msg>
-      <access-denied>.غير مسموح بالدخول!  ليس لديك الصلاحيّات الكافية لاستخدام هذه المُهمّة.</access-denied>
+      <access-denied>.غير مسموح بالدخول! ليس لديك الصلاحيّات الكافية لاستخدام هذه المُهمّة.</access-denied>
       <template-in-use>لا يمكن حذف '{0}'. هو الآن بحالة إستخدام.</template-in-use>
       <confirm-delete>هل ترغب حقــا بتأكيد عملية الحذف؟</confirm-delete>
     </msg>
@@ -848,71 +852,71 @@
     </title>
   </EditPopup>
 
-<UITabList>
-                  <title>
-                    <Edit>تغيير</Edit>
-                    <Delete>حذف</Delete>
-                  </title>       
- <header>
-  <tabName>التبويب</tabName>
-  <localizeButtons>الوصف</localizeButtons>
-<action>الإجراءات</action>
-</header>
-<action>
- <AddTab>اضافة</AddTab>
-</action>
-<msg>
- <confirm-delete>هل أنت متأكد من حذف هذه التّبويبة؟</confirm-delete>
-</msg>
-<grid>
- <msg>
-  <empty>لا وجود لأيّ تبويبة ضمن هذا المشهد</empty>
- </msg>
-</grid>
-</UITabList>
+  <UITabList>
+    <title>
+      <Edit>تغيير</Edit>
+      <Delete>حذف</Delete>
+    </title>
+    <header>
+      <tabName>التبويب</tabName>
+      <localizeButtons>الوصف</localizeButtons>
+      <action>الإجراءات</action>
+    </header>
+    <action>
+      <AddTab>اضافة</AddTab>
+    </action>
+    <msg>
+      <confirm-delete>هل أنت متأكد من حذف هذه التّبويبة؟</confirm-delete>
+    </msg>
+    <grid>
+      <msg>
+        <empty>لا وجود لأيّ تبويبة ضمن هذا المشهد</empty>
+      </msg>
+    </grid>
+  </UITabList>
 
-<UIViewPermissionList>
- <title>حدد صاحب الصلاحيّات على هذا المشهد:</title>
-<label>
- <permission>{0} في {1}</permission>
-</label>
-<msg>
- <confirm-delete>هل ترغب حقّا في حذف هذه الصلاحيّة؟</confirm-delete>
-  <permission-cannot-empty>عرض الصلاحيّة أمر اجباري بحيث لا يمكن أن يكون فارغاً.</permission-cannot-empty>
-</msg>
-</UIViewPermissionList>
+  <UIViewPermissionList>
+    <title>حدد صاحب الصلاحيّات على هذا المشهد:</title>
+    <label>
+      <permission>{0} في {1}</permission>
+    </label>
+    <msg>
+      <confirm-delete>هل ترغب حقّا في حذف هذه الصلاحيّة؟</confirm-delete>
+      <permission-cannot-empty>عرض الصلاحيّة أمر اجباري بحيث لا يمكن أن يكون فارغاً.</permission-cannot-empty>
+    </msg>
+  </UIViewPermissionList>
 
-<UIViewPermissionList>
-                         <title>
-                           <Delete>حذف</Delete>
-                         </title>
- <header>
-<friendlyPermission>الصلاحيات</friendlyPermission>
-     <action>اجراء</action>
- </header>
-<action>
- <title>
-  <Delete>حذف</Delete>
- </title>
-</action>
-<grid>
- <msg>
-  <empty>لا توجد صلاحيّات لهذا المشهد</empty>
- </msg>
-</grid>
-</UIViewPermissionList>
+  <UIViewPermissionList>
+    <title>
+      <Delete>حذف</Delete>
+    </title>
+    <header>
+      <friendlyPermission>الصلاحيات</friendlyPermission>
+      <action>اجراء</action>
+    </header>
+    <action>
+      <title>
+        <Delete>حذف</Delete>
+      </title>
+    </action>
+    <grid>
+      <msg>
+        <empty>لا توجد صلاحيّات لهذا المشهد</empty>
+      </msg>
+    </grid>
+  </UIViewPermissionList>
 
-<UIViewPermissionForm>
-<action>
- <Add>اضافة</Add>
-</action>
-<label>
- <userOrGroup>مستخدم أو مجموعة</userOrGroup>
-</label>
-<msg>
- <permission-exist>الصلاحيّة '{0}' موجودة مُسبقـا في القائمة.</permission-exist>
-</msg>
-</UIViewPermissionForm>
+  <UIViewPermissionForm>
+    <action>
+      <Add>اضافة</Add>
+    </action>
+    <label>
+      <userOrGroup>مستخدم أو مجموعة</userOrGroup>
+    </label>
+    <msg>
+      <permission-exist>الصلاحيّة '{0}' موجودة مُسبقـا في القائمة.</permission-exist>
+    </msg>
+  </UIViewPermissionForm>
 
   <!--
   ######################################################################################
@@ -927,15 +931,15 @@
     <msg>
       <view-name-invalid>يرجى ادخال الاسم</view-name-invalid>
       <fileName-invalid>هناك بعض الأحرف الغير مُتاحة في هذا الاسم.</fileName-invalid>
-      <permission-not-empty>يجب أن تختار الصلاحية</permission-not-empty>      
+      <permission-not-empty>يجب أن تختار الصلاحية</permission-not-empty>
       <mustbe-add-tab>يُرجى اضافة تبويبة</mustbe-add-tab>
-<mustbe-add-permission>الرجاء اختيار صلاحيّة لهذا المشهد</mustbe-add-permission>
+      <mustbe-add-permission>الرجاء اختيار صلاحيّة لهذا المشهد</mustbe-add-permission>
       <view-exist>إسم المشهد موجود.</view-exist>
     </msg>
     <label>
       <viewName>الاسم</viewName>
       <template>قالب</template>
-<version>استعادة الإصدار</version>
+      <version>استعادة الإصدار</version>
       <enableVersion>تفعييل الإصدار</enableVersion>
       <hideExplorerPanel>إخفاء لوحة المستكشف الموجود في الشريط الجانبي</hideExplorerPanel>
     </label>
@@ -980,14 +984,14 @@
       <overloadThumbnail>زيادة صورة مصغرة</overloadThumbnail>
       <manageHidden>إخفاء/عرض المحتوى</manageHidden>
       <comment>تعليق</comment>
-      <vote>تصويت</vote>  
+      <vote>تصويت</vote>
       <addCategory>إضافة فئة</addCategory>
       <addLocalizationLink>اضافة ترجمة</addLocalizationLink>
       <publicationRequestApproval>طلب المصادقة</publicationRequestApproval>
       <publicationApproveContent>المصادقة على المحتوى</publicationApproveContent>
       <publicationPublish>نشر</publicationPublish>
-<contentNavigation>تصفّح المحتوى</contentNavigation>
-<addSymLink>إضافة وصلة رمزيّة</addSymLink>
+      <contentNavigation>تصفّح المحتوى</contentNavigation>
+      <addSymLink>إضافة وصلة رمزيّة</addSymLink>
       <checkIn>Check In</checkIn>
       <checkOut>Check Out</checkOut>
       <shareDocuments>شارك</shareDocuments>
@@ -996,8 +1000,8 @@
       <uploadNewVersion>Upload a new version</uploadNewVersion>
     </label>
     <action>
-      <Save>#{word.save}</Save>      
-      <Cancel>#{word.cancel}</Cancel>      
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
   </UITabForm>
   <UIPermissionForm>
@@ -1010,7 +1014,7 @@
       <label>
         <UITabContainer>اجراء</UITabContainer>
         <UIViewForm>رأي</UIViewForm>
-        <UIViewPermissionContainer>صلاحيّة</UIViewPermissionContainer>    
+        <UIViewPermissionContainer>صلاحيّة</UIViewPermissionContainer>
       </label>
     </tab>
     <action>
@@ -1027,19 +1031,19 @@
     </title>
   </PopupViewPermission>
 
-<TabForm_Popup>
- <title>
-  <UITabForm>إضافة/تغيير علامة التبويب</UITabForm>
- </title>
-</TabForm_Popup>
+  <TabForm_Popup>
+    <title>
+      <UITabForm>إضافة/تغيير علامة التبويب</UITabForm>
+    </title>
+  </TabForm_Popup>
 
-<tab_permission>
- <title>
-  <SelectUser>اختيارمستخدم</SelectUser>
-<SelectMember>اختيار عضو</SelectMember>
-<AddAny>أيّما</AddAny>
- </title>
-</tab_permission>
+  <tab_permission>
+    <title>
+      <SelectUser>اختيارمستخدم</SelectUser>
+      <SelectMember>اختيار عضو</SelectMember>
+      <AddAny>أيّما</AddAny>
+    </title>
+  </tab_permission>
   <!--
   ######################################################################################
   #             org.exoplatform.ecm.webui.component.admin.view.UIECMTemplateList   #
@@ -1086,7 +1090,7 @@
     <msg>
       <version-restored>إستعادة الإصدار {0} بنجاح.</version-restored>
       <role-require>يجب إختيار الصلاحية</role-require>
-      <template-name-exist>إسم القالب '{0}'  موجود مُسبقــا.</template-name-exist>
+      <template-name-exist>إسم القالب '{0}' موجود مُسبقــا.</template-name-exist>
       <add-permission-denied>ليس لديك الصلاحيّات الكافية لاضافة قالب جديد.</add-permission-denied>
       <edit-permission-denied>ليس لديك الصلاحيّات الكافية لتغيير '{0}' النموذج.</edit-permission-denied>
     </msg>
@@ -1228,7 +1232,7 @@
   #             org.exoplatform.ecm.webui.component.admin.script.ecmScriptForm #
   ######################################################################################
   -->
- 
+
   <ecmScriptForm>
     <label>
       <selectVersion>الاصدارات</selectVersion>
@@ -1260,7 +1264,7 @@
       <name-too-long>إسم الفئة يجب أن يحتوي على أقلّ من 30 حرفا.</name-too-long>
     </msg>
   </UITaxonomyForm>
-    
+
   <EditTaxonomyTreePopup>
     <title>
       <UITaxonomyTreeContainer>تغيير شجرة الفئات</UITaxonomyTreeContainer>
@@ -1272,15 +1276,15 @@
       <UITaxonomyTreeContainer>إضافة شجرة الفئات</UITaxonomyTreeContainer>
     </title>
   </AddTaxonomyTreePopup>
-  
+
   <TaxonomyPopupCreateChild>
     <title>
       <UITaxonomyTreeCreateChildForm>تغيير شجرة الفئات</UITaxonomyTreeCreateChildForm>
     </title>
   </TaxonomyPopupCreateChild>
 
-<UITaxonomyTreeCreateChildForm>
-  <action>
+  <UITaxonomyTreeCreateChildForm>
+    <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
     </action>
@@ -1294,41 +1298,41 @@
       <name-too-long>لا يجب أن يحتوي اسم الفئة على أكثر من {0} أحرف.</name-too-long>
       <exist>اسم الفئة موجود مُسبقـا.</exist>
     </msg>
-</UITaxonomyTreeCreateChildForm>
+  </UITaxonomyTreeCreateChildForm>
 
   <PopupComponent>
     <title>
       <UIOneNodePathSelector>اختيار المسار</UIOneNodePathSelector>
     </title>
   </PopupComponent>
-  
+
   <TaxoPopupUserSelector>
-  <title>
+    <title>
       <TaxoTreeSelectUserOrGroup>اختيار المستخدم</TaxoTreeSelectUserOrGroup>
       <UIPermissionTreeSelectUser>اختيار المستخدم</UIPermissionTreeSelectUser>
     </title>
   </TaxoPopupUserSelector>
 
   <TaxoTreeSelectUserOrGroupPopup>
-  <title>
+    <title>
       <TaxoTreeSelectUserOrGroup>اختيار العضوية</TaxoTreeSelectUserOrGroup>
     </title>
   </TaxoTreeSelectUserOrGroupPopup>
-  
+
   <TaxoTreeAnyPermission>
     <label>
       <any>كل الصلاحيّات</any>
       <anyPermission>TaxoTreeAnyPermission</anyPermission>
     </label>
   </TaxoTreeAnyPermission>
-  
+
   <TaxoTreeSelectUserOrGroup>
     <label>
       <selectGroup>إختيار مجموعة</selectGroup>
       <selectMembership>إختيار العضوية</selectMembership>
     </label>
   </TaxoTreeSelectUserOrGroup>
-  
+
   <!--
   ######################################################################################
   #             org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyTreeList #
@@ -1355,7 +1359,7 @@
       <is-in-trash>تمّ تحويل شجرة لفئات هذه الى سلّة المهملات.</is-in-trash>
     </msg>
   </UITaxonomyTreeList>
-  
+
   <!--
   ######################################################################################
   #             org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyTreeForm  #
@@ -1372,7 +1376,7 @@
       <homapath-emty>المسار</homapath-emty>
     </msg>
   </UITaxonomyTreeForm>
-  
+
   <UIPermissionTreeForm>
     <label>
       <UIPopupWindow>اختيار</UIPopupWindow>
@@ -1390,44 +1394,44 @@
       <Reset>إعادة تعيين</Reset>
     </action>
     <msg>
-      <checkbox-require>يُرجى اختيار صلاحيّة واحدة  على أقصى تقدير.</checkbox-require>
+      <checkbox-require>يُرجى اختيار صلاحيّة واحدة على أقصى تقدير.</checkbox-require>
       <userOrGroup-required>يُرجى اختيار مستخدم أو مجموعة قبل حفظ الصلاحيّات</userOrGroup-required>
       <not-change-permission>ليس لديك الحق في اضافة صلاحيّة.</not-change-permission>
       <access-denied>غير مسموح بالدخول. لا يمكن حذف هذه الصلاحيّة.</access-denied>
     </msg>
   </UIPermissionTreeForm>
-  
+
   <PopupTaxonomyJCRBrowser>
-  <title>
+    <title>
       <UIOneNodePathSelector>اختيار مسار الصفحة الرئيسيّة</UIOneNodePathSelector>
     </title>
   </PopupTaxonomyJCRBrowser>
-  
+
   <PopupTaxonomyTreePermission>
     <title>
       <UIPermissionSelector>منتق الصلاحية</UIPermissionSelector>
     </title>
-   </PopupTaxonomyTreePermission>
-   
-   <PopupDrivePermission>
+  </PopupTaxonomyTreePermission>
+
+  <PopupDrivePermission>
     <title>
       <AddDrivePermissionSelector>Add Permissions</AddDrivePermissionSelector>
       <UIPermissionSelector>اختيار صلاحيّة</UIPermissionSelector>
     </title>
   </PopupDrivePermission>
-  
+
   <UIPopupWindow>
     <title>
       <UIPermissionManager>إدارة الصلاحيات</UIPermissionManager>
     </title>
-   </UIPopupWindow>
+  </UIPopupWindow>
 
   <PopupUserSelector>
     <title>
       <UIUserContainer>إدارة الصلاحيات</UIUserContainer>
     </title>
-   </PopupUserSelector>
-   
+  </PopupUserSelector>
+
   <UIPermissionInfo>
     <action>
       <title>
@@ -1494,18 +1498,18 @@
     </action>
     <msg>
       <checkbox-require>يجب عليك إختيار صلاحية واحدة على الأقل</checkbox-require>
-      <userOrGroup-required>يجب عليك اختيار المستخدم أو المجموعة  قبل حفظ هذه الصلاحية</userOrGroup-required>
+      <userOrGroup-required>يجب عليك اختيار المستخدم أو المجموعة قبل حفظ هذه الصلاحية</userOrGroup-required>
       <not-change-permission>ليس لديك الحق في اضافة صلاحية</not-change-permission>
-      <access-denied>.غير مسموح بالدخول!  لا يمكن حذف هذه الصلاحيّة</access-denied>
+      <access-denied>.غير مسموح بالدخول! لا يمكن حذف هذه الصلاحيّة</access-denied>
     </msg>
   </UIPermissionForm>
-  
+
   <TaxonomyPopup>
     <title>
       <UITaxonomyForm>اضافة فئة</UITaxonomyForm>
     </title>
   </TaxonomyPopup>
-  
+
   <UITaxonomyManager>
     <title>
       <permission>إدارة الصلاحيات</permission>
@@ -1533,7 +1537,7 @@
       <template-not-exist>النموذج الذي تحاول حذفه لم يعُد موجودًا.</template-not-exist>
     </msg>
   </UITemplateList>
-  
+
   <UIActionsTemplateList>
     <header>
       <name>النوع</name>
@@ -1551,7 +1555,7 @@
       <template-not-exist>النموذج الذي أنت بصدد محاولة حذفه لم يعُد موجودا.</template-not-exist>
     </msg>
   </UIActionsTemplateList>
-  
+
   <UIOthersTemplateList>
     <header>
       <name>النوع</name>
@@ -1570,19 +1574,19 @@
     </msg>
   </UIOthersTemplateList>
 
- <!--
-  ######################################################################################
-  #             org.exoplatform.ecm.webui.component.admin.templates.clv package #
-  ######################################################################################
-  -->
+  <!--
+   ######################################################################################
+   #             org.exoplatform.ecm.webui.component.admin.templates.clv package #
+   ######################################################################################
+   -->
 
-<UITabPane>
- <title>
- <ContentTemplateContainer>المحتوى</ContentTemplateContainer>
-<CateTemplateContainer>التصفح</CateTemplateContainer>
-<PageTemplateContainer>ترقيم الصّفحات</PageTemplateContainer>
- </title>
-</UITabPane>
+  <UITabPane>
+    <title>
+      <ContentTemplateContainer>المحتوى</ContentTemplateContainer>
+      <CateTemplateContainer>التصفح</CateTemplateContainer>
+      <PageTemplateContainer>ترقيم الصّفحات</PageTemplateContainer>
+    </title>
+  </UITabPane>
 
   <UICLVTemplateList>
     <title>
@@ -1596,8 +1600,8 @@
     </header>
     <action>
       <AddTemplate>إضافة قالب</AddTemplate>
-<Edit>تغيير</Edit>
-<Delete>حذف</Delete>
+      <Edit>تغيير</Edit>
+      <Delete>حذف</Delete>
     </action>
     <msg>
       <confirm-delete>هل ترغب حقّــا بحذف هذا القالب؟</confirm-delete>
@@ -1607,7 +1611,7 @@
     </msg>
   </UICLVTemplateList>
 
-<CateTemplateList>
+  <CateTemplateList>
     <header>
       <title>الاسم</title>
       <action>اجراء</action>
@@ -1619,12 +1623,12 @@
     </title>
     <action>
       <AddTemplate>إضافة قالب</AddTemplate>
-<Edit>تغيير</Edit>
-<Delete>حذف</Delete>
+      <Edit>تغيير</Edit>
+      <Delete>حذف</Delete>
     </action>
-</CateTemplateList>
+  </CateTemplateList>
 
-<PageTemplateList>
+  <PageTemplateList>
     <header>
       <title>الاسم</title>
       <action>اجراء</action>
@@ -1632,103 +1636,103 @@
     </header>
     <action>
       <AddTemplate>إضافة قالب</AddTemplate>
-<Edit>تغيير</Edit>
-<Delete>حذف</Delete>
+      <Edit>تغيير</Edit>
+      <Delete>حذف</Delete>
     </action>
-</PageTemplateList>
+  </PageTemplateList>
 
-<EditCLVTemplatePopup_ContentTemplateContainer>
- <title>
-   <UICLVTemplateForm_ContentTemplateContainer>تغيير قائمة النماذج</UICLVTemplateForm_ContentTemplateContainer>   
- </title>
-</EditCLVTemplatePopup_ContentTemplateContainer>
+  <EditCLVTemplatePopup_ContentTemplateContainer>
+    <title>
+      <UICLVTemplateForm_ContentTemplateContainer>تغيير قائمة النماذج</UICLVTemplateForm_ContentTemplateContainer>
+    </title>
+  </EditCLVTemplatePopup_ContentTemplateContainer>
 
-<EditCLVTemplatePopup_CateTemplateContainer>
- <title>
-   <UICLVTemplateForm_CateTemplateContainer>تغيير قائمة النماذج</UICLVTemplateForm_CateTemplateContainer>   
- </title>
-</EditCLVTemplatePopup_CateTemplateContainer>
+  <EditCLVTemplatePopup_CateTemplateContainer>
+    <title>
+      <UICLVTemplateForm_CateTemplateContainer>تغيير قائمة النماذج</UICLVTemplateForm_CateTemplateContainer>
+    </title>
+  </EditCLVTemplatePopup_CateTemplateContainer>
 
-<EditCLVTemplatePopup_PageTemplateContainer>
- <title>
-   <UICLVTemplateForm_PageTemplateContainer>تغيير قائمة النماذج</UICLVTemplateForm_PageTemplateContainer>   
- </title>
-</EditCLVTemplatePopup_PageTemplateContainer>
+  <EditCLVTemplatePopup_PageTemplateContainer>
+    <title>
+      <UICLVTemplateForm_PageTemplateContainer>تغيير قائمة النماذج</UICLVTemplateForm_PageTemplateContainer>
+    </title>
+  </EditCLVTemplatePopup_PageTemplateContainer>
 
-<CLVTemplatePopup_ContentTemplateContainer>
- <title>
-   <UICLVTemplateForm_ContentTemplateContainer>إضافة نموذج للقائمة</UICLVTemplateForm_ContentTemplateContainer>   
- </title>
-</CLVTemplatePopup_ContentTemplateContainer>
+  <CLVTemplatePopup_ContentTemplateContainer>
+    <title>
+      <UICLVTemplateForm_ContentTemplateContainer>إضافة نموذج للقائمة</UICLVTemplateForm_ContentTemplateContainer>
+    </title>
+  </CLVTemplatePopup_ContentTemplateContainer>
 
-<CLVTemplatePopup_CateTemplateContainer>
- <title>
-   <UICLVTemplateForm_CateTemplateContainer>إضافة نموذج للقائمة</UICLVTemplateForm_CateTemplateContainer>   
- </title>
-</CLVTemplatePopup_CateTemplateContainer>
+  <CLVTemplatePopup_CateTemplateContainer>
+    <title>
+      <UICLVTemplateForm_CateTemplateContainer>إضافة نموذج للقائمة</UICLVTemplateForm_CateTemplateContainer>
+    </title>
+  </CLVTemplatePopup_CateTemplateContainer>
 
-<CLVTemplatePopup_PageTemplateContainer>
- <title>
-   <UICLVTemplateForm_PageTemplateContainer>إضافة نموذج للقائمة</UICLVTemplateForm_PageTemplateContainer>   
- </title>
-</CLVTemplatePopup_PageTemplateContainer>
+  <CLVTemplatePopup_PageTemplateContainer>
+    <title>
+      <UICLVTemplateForm_PageTemplateContainer>إضافة نموذج للقائمة</UICLVTemplateForm_PageTemplateContainer>
+    </title>
+  </CLVTemplatePopup_PageTemplateContainer>
 
-<UICLVTemplateForm_ContentTemplateContainer>
- <action>
-  <Save>#{word.save}</Save>
-<Reset>إعادة التعيين</Reset>
-<Cancel>#{word.cancel}</Cancel>
- </action>
-<label>
- <title>اسم</title>
-<template>اسم النموذج</template>
-<content>المحتوى</content>
-<type>نوع النموذج</type>
-</label>
-</UICLVTemplateForm_ContentTemplateContainer>
+  <UICLVTemplateForm_ContentTemplateContainer>
+    <action>
+      <Save>#{word.save}</Save>
+      <Reset>إعادة التعيين</Reset>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <label>
+      <title>اسم</title>
+      <template>اسم النموذج</template>
+      <content>المحتوى</content>
+      <type>نوع النموذج</type>
+    </label>
+  </UICLVTemplateForm_ContentTemplateContainer>
 
-<UICLVTemplateForm_PageTemplateContainer>
- <action>
-  <Save>#{word.save}</Save>
-<Reset>إعادة التعيين</Reset>
-<Cancel>#{word.cancel}</Cancel>
- </action>
-<label>
- <title>الاسم</title>
-<template>اسم النموذج</template>
-<content>المحتوى</content>
-<type>نوع النموذج</type>
-</label>
-</UICLVTemplateForm_PageTemplateContainer>
+  <UICLVTemplateForm_PageTemplateContainer>
+    <action>
+      <Save>#{word.save}</Save>
+      <Reset>إعادة التعيين</Reset>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <label>
+      <title>الاسم</title>
+      <template>اسم النموذج</template>
+      <content>المحتوى</content>
+      <type>نوع النموذج</type>
+    </label>
+  </UICLVTemplateForm_PageTemplateContainer>
 
-<UICLVTemplateForm_CateTemplateContainer>
- <action>
-  <Save>#{word.save}</Save>
-<Reset>إعادة التعيين</Reset>
-<Cancel>#{word.cancel}</Cancel>
- </action>
-<label>
- <title>الاسم</title>
-<template>اسم النموذج</template>
-<content>المحتوى</content>
-<type>نوع النموذج</type>
-</label>
-</UICLVTemplateForm_CateTemplateContainer>
-<UICLVTemplateForm>
-  <label>
-    <paginators>ترقيم الصّفحات</paginators>
-<list>المحتوى</list>
-<navigation>التصفح</navigation>
-  </label>
-                          <action>
-                            <Save>#{word.save}</Save>
-                            <Reset>إعادة تعيين</Reset> 
-                            <Cancel>#{word.cancel}</Cancel> 
-                          </action> 
-  <msg>
-  <template-existing>اسم القالب هذا موجود مُسبقــا. الرجاء اختيار اسما آخرا.</template-existing>
-  </msg>
-</UICLVTemplateForm>
+  <UICLVTemplateForm_CateTemplateContainer>
+    <action>
+      <Save>#{word.save}</Save>
+      <Reset>إعادة التعيين</Reset>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <label>
+      <title>الاسم</title>
+      <template>اسم النموذج</template>
+      <content>المحتوى</content>
+      <type>نوع النموذج</type>
+    </label>
+  </UICLVTemplateForm_CateTemplateContainer>
+  <UICLVTemplateForm>
+    <label>
+      <paginators>ترقيم الصّفحات</paginators>
+      <list>المحتوى</list>
+      <navigation>التصفح</navigation>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Reset>إعادة تعيين</Reset>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <template-existing>اسم القالب هذا موجود مُسبقــا. الرجاء اختيار اسما آخرا.</template-existing>
+    </msg>
+  </UICLVTemplateForm>
 
   <!--
   ######################################################################################
@@ -1789,8 +1793,10 @@
   <TemplateContainerPopup>
     <title>
       <UIViewTemplate_UITemplateContainer><![CDATA[View & Edit Template]]></UIViewTemplate_UITemplateContainer>
-      <UIViewTemplate_UIActionsTemplateContainer><![CDATA[View & Edit Template]]></UIViewTemplate_UIActionsTemplateContainer>
-      <UIViewTemplate_UIOthersTemplateContainer><![CDATA[View & Edit Template]]></UIViewTemplate_UIOthersTemplateContainer>
+      <UIViewTemplate_UIActionsTemplateContainer>
+        <![CDATA[View & Edit Template]]></UIViewTemplate_UIActionsTemplateContainer>
+      <UIViewTemplate_UIOthersTemplateContainer>
+        <![CDATA[View & Edit Template]]></UIViewTemplate_UIOthersTemplateContainer>
     </title>
   </TemplateContainerPopup>
   <UITemplatesManager>
@@ -1938,7 +1944,8 @@
     <msg>
       <confirm-delete>هل تريد حقا أن تحذف هذا الاستبيان؟</confirm-delete>
       <query-not-existed>هذا الاستبيان لم يعُد موجوداً .</query-not-existed>
-      <can-not-remove>حدث خطأ أثناء حذف هذا الاستبيان. الرجاء الاتصال بالمسؤول للحصول على مزيد من المعلومات.</can-not-remove>
+      <can-not-remove>حدث خطأ أثناء حذف هذا الاستبيان. الرجاء الاتصال بالمسؤول للحصول على مزيد من المعلومات.
+      </can-not-remove>
     </msg>
   </UIQueriesList>
   <UIQueriesForm>
@@ -1957,7 +1964,7 @@
     <msg>
       <permission-require>يُرجى إختيار الصلاحيات</permission-require>
       <name-invalid>هناك بعض الأحرف الغير متاحة في المجال الخاص بالاسم.</name-invalid>
-      <name-existing>إسم الاستبيان موجود مُسبقًا. يُرجى اختيار اسمــًا  آخرا.</name-existing>
+      <name-existing>إسم الاستبيان موجود مُسبقًا. يُرجى اختيار اسمــًا آخرا.</name-existing>
       <invalid-query>صيغة الاستبيان غير صحيحة. يُرجى التثبّت منها.</invalid-query>
       <access-denied>غير مسموح بالدخول. ليس لديك الصلاحية الكافية للقيام بهذه العمليّة.</access-denied>
     </msg>
@@ -1972,11 +1979,11 @@
       <UIQueriesForm>تغيير الاستبيان</UIQueriesForm>
     </title>
   </EditQueryForm>
-<PermissionPopup>
-  <title>
-    <UIGroupMemberSelector>منتق الصلاحية</UIGroupMemberSelector>
-  </title>
-</PermissionPopup>
+  <PermissionPopup>
+    <title>
+      <UIGroupMemberSelector>منتق الصلاحية</UIGroupMemberSelector>
+    </title>
+  </PermissionPopup>
   <!--
   ######################################################################################
   #             org.exoplatform.ecm.webui.component.admin.folksonomy #
@@ -1986,7 +1993,7 @@
     <title>
       <EditStyle>تغيير النّمط</EditStyle>
       <RemoveStyle>حذف النّمط</RemoveStyle>
-    </title>    
+    </title>
   </UITagManager>
   <UITagStyleList>
     <header>
@@ -2015,9 +2022,12 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <range-validator>عدد الوصلات غير صحيح. الشكل الصحيح هو: أ..بحيث تكون "أ" و "ب" أعدادا صحيحة موجبة.يمكنك إستعمال '*' للإشارة عوضاً عن "ب" للإشارة بأن القيمة غير محدودة.</range-validator>
+      <range-validator>عدد الوصلات غير صحيح. الشكل الصحيح هو: أ..بحيث تكون "أ" و "ب" أعدادا صحيحة موجبة.يمكنك إستعمال
+        '*' للإشارة عوضاً عن "ب" للإشارة بأن القيمة غير محدودة.
+      </range-validator>
       <error-update>أثناء عملية التحديث. هذه المعلومات غير صحيحة.</error-update>
-      <item-not-existing>لا يمكنك حفظ التغييرات الخاصة بهذه العلامة و التي لم تعد موجودة في قاعدة البينات.</item-not-existing>
+      <item-not-existing>لا يمكنك حفظ التغييرات الخاصة بهذه العلامة و التي لم تعد موجودة في قاعدة البينات.
+      </item-not-existing>
     </msg>
   </UITagStyleForm>
   <FolksonomyPopup>
@@ -2057,9 +2067,9 @@
   ###################################################################################
   -->
   <PermissionValidator>
-  <msg>
+    <msg>
       <permission-path-invalid>الصلاحية'{0}' غير صحيحة.</permission-path-invalid>
-  </msg>
+    </msg>
   </PermissionValidator>
   <!--
   ###################################################################################
@@ -2128,9 +2138,9 @@
       <EditInfo>تغيير</EditInfo>
       <Delete>حذف</Delete>
     </title>
-<label>
-  <permission>{0} في {1}</permission>
-</label>
+    <label>
+      <permission>{0} في {1}</permission>
+    </label>
   </UIViewContainer>
   <ECMTemplate>
     <title>
@@ -2161,7 +2171,7 @@
       <selectMembership>اختيار العضوية</selectMembership>
     </label>
   </UIDrivePermissionSelector>
-  
+
   <UIPermissionSelector>
     <label>
       <selectGroup>إختيار مجموعة</selectGroup>
@@ -2169,30 +2179,30 @@
       <selectMembership>إختيار العضوية</selectMembership>
     </label>
   </UIPermissionSelector>
-  
+
   <UIAnyPermission>
     <label>
       <anyPermission>جميع الصلاحيات</anyPermission>
     </label>
   </UIAnyPermission>
-  
+
   <UIMDriveAnyPermission>
     <label>
       <anyPermission>جميع التصاريح</anyPermission>
     </label>
   </UIMDriveAnyPermission>
-  
+
   <UIQueriesAnyPermission>
     <label>
       <anyPermission>جميع التصاريح</anyPermission>
     </label>
   </UIQueriesAnyPermission>
-  
+
   <MetadataPermission>
     <label>
       <selectGroup>اختر مجموعة</selectGroup>
     </label>
-  </MetadataPermission>  
+  </MetadataPermission>
   <MetadataPermission>
     <label>
       <selectMembership>اختر عضوية</selectMembership>
@@ -2215,7 +2225,7 @@
   </QueriesPermissionBrowse>
   <!--
   #########Since ECM 2.4##################
-  -->  
+  -->
   <UIViewFormTabPane>
     <label>
       <addSymLink>إضافة صلة رمزية</addSymLink>
@@ -2223,14 +2233,14 @@
   </UIViewFormTabPane>
   <!--
   #########Since ECM 2.5##################
-  --> 
-  
+  -->
+
   <UIDriveForm>
-<msg>
-  <permission-path-invalid>الصلاحية'{0}' غير صحيحة.</permission-path-invalid>
-  </msg>
+    <msg>
+      <permission-path-invalid>الصلاحية'{0}' غير صحيحة.</permission-path-invalid>
+    </msg>
   </UIDriveForm>
-  
+
   <UITaxonomyTreeMainForm>
     <msg>
       <homepath-emty>مسار الصفحة الرئيسية أمر ضروري.</homepath-emty>
@@ -2238,9 +2248,9 @@
     </msg>
   </UITaxonomyTreeMainForm>
   <UITaxonomyWorkingArea>
-  <msg>
-  <exist>شجرة هذه العقدة موجودة مسبقا.</exist>
-  </msg>
+    <msg>
+      <exist>شجرة هذه العقدة موجودة مسبقا.</exist>
+    </msg>
   </UITaxonomyWorkingArea>
 
   <PermissionTreeSelectUser>
@@ -2256,16 +2266,16 @@
       <userName>#{word.userName}</userName>
       <lastName>#{word.lastName}</lastName>
       <firstName>#{word.firstName}</firstName>
-    <email>#{word.email}</email>
+      <email>#{word.email}</email>
       <action>#{word.action}</action>
       <Add>#{word.Add}</Add>
       <Close>#{word.Close}</Close>
     </label>
   </PermissionTreeSelectUser>
-  
+
   <!--
   #########Since ECM 2.6 ##################
-  -->   
+  -->
   <DriveInputSet>
     <label>
       <nt_folder>وثائق</nt_folder>
@@ -2274,30 +2284,30 @@
       <exo_jsFolder>مجلد جافاسكريبت</exo_jsFolder>
       <exo_linkFolder>رابط</exo_linkFolder>
       <exo_webFolder>مجلد محتوى الواب</exo_webFolder>
-   </label>
+    </label>
   </DriveInputSet>
   <UIPermissionTreeInfo>
-  <msg>
+    <msg>
       <confirm-delete-permission>هل حقا تريد حذف هذه الصلاحيّة ؟</confirm-delete-permission>
-      <no-permission-remove>لا يمكنك إزالة المالك أو المستخدم "النظام"</no-permission-remove>  
-  </msg>
-  </UIPermissionTreeInfo>  
+      <no-permission-remove>لا يمكنك إزالة المالك أو المستخدم "النظام"</no-permission-remove>
+    </msg>
+  </UIPermissionTreeInfo>
   <UITaxonomyTreeMainForm>
-<msg>
+    <msg>
       <no-right-target-path>يرجى اختيار مسارا آخر للصفحة الرئيسية.</no-right-target-path>
-</msg>
-</UITaxonomyTreeMainForm>
+    </msg>
+  </UITaxonomyTreeMainForm>
 
-<UIECMAdminControlPanel>
+  <UIECMAdminControlPanel>
     <tab>
-      <label>        
+      <label>
         <ManageUnLock>تحرير إدارة</ManageUnLock>
       </label>
-    </tab>        
-</UIECMAdminControlPanel>
-<UIUnLockForm>
+    </tab>
+  </UIECMAdminControlPanel>
+  <UIUnLockForm>
     <label>
-      <name>مسار العقدة</name>      
+      <name>مسار العقدة</name>
       <permissions>الصلاحيّات</permissions>
       <PermissionButton>فتح الواجهة</PermissionButton>
     </label>
@@ -2306,49 +2316,50 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <permission-require>يجب تحديد صلاحيّات</permission-require>      
+      <permission-require>يجب تحديد صلاحيّات</permission-require>
     </msg>
   </UIUnLockForm>
   <UILockHolderList>
-  <header>
-  <name>مجموعات أو مُستخدمين</name>
-  <action>اجراء</action>
-  </header>
-  <tooltip>
-<DeleteLock>حذف مجموعة</DeleteLock>
-  </tooltip>
-  <msg>
-  <can-not-delete-lock-holder>لا يمكن حذف المجموعة {0}.</can-not-delete-lock-holder>
-  </msg>
+    <header>
+      <name>مجموعات أو مُستخدمين</name>
+      <action>اجراء</action>
+    </header>
+    <tooltip>
+      <DeleteLock>حذف مجموعة</DeleteLock>
+    </tooltip>
+    <msg>
+      <can-not-delete-lock-holder>لا يمكن حذف المجموعة {0}.</can-not-delete-lock-holder>
+    </msg>
   </UILockHolderList>
   <UILockNodeList>
-  <header>
-  <name>مسار العقدة</name>
-  <hoderLock>صاحب القفل</hoderLock>
-  <action>اجراء</action>
-  </header>
-  <tooltip>
-<UnLock>الغاء التأمين</UnLock>
-  </tooltip>
-  <msg>
-  <access-denied-exception>ليس لديك صلاحية للوصول إلى هذه العقدة عن طريق المسار {0} أو ربّما تمّ حذف هذه العقدة.</access-denied-exception>
-  </msg>
+    <header>
+      <name>مسار العقدة</name>
+      <hoderLock>صاحب القفل</hoderLock>
+      <action>اجراء</action>
+    </header>
+    <tooltip>
+      <UnLock>الغاء التأمين</UnLock>
+    </tooltip>
+    <msg>
+      <access-denied-exception>ليس لديك صلاحية للوصول إلى هذه العقدة عن طريق المسار {0} أو ربّما تمّ حذف هذه العقدة.
+      </access-denied-exception>
+    </msg>
   </UILockNodeList>
   <EditUnLockForm>
     <title>
       <UIUnLockForm>إدارة عملية التأمين</UIUnLockForm>
     </title>
-  </EditUnLockForm>  
+  </EditUnLockForm>
   <UITabPane>
     <action>
       <Close>#{word.close}</Close>
     </action>
     <title>
-    <UILockHolderContainer>إدارة عملية التأمين</UILockHolderContainer>
-    <UILockNodeList>عقدة مؤمّنة</UILockNodeList>
+      <UILockHolderContainer>إدارة عملية التأمين</UILockHolderContainer>
+      <UILockNodeList>عقدة مؤمّنة</UILockNodeList>
     </title>
   </UITabPane>
-  
+
   <UIViewFormTabPane>
     <action>
       <AddTabForm>إضافة علامة تبويب</AddTabForm>
@@ -2356,21 +2367,21 @@
       <BackViewForm>السابق</BackViewForm>
     </action>
   </UIViewFormTabPane>
-  
- <UITemplateForm>
-<tab>
-<label>
-<defaultSkin>CSS</defaultSkin>
-</label>
-</tab>
-</UITemplateForm>
- 
+
+  <UITemplateForm>
+    <tab>
+      <label>
+        <defaultSkin>CSS</defaultSkin>
+      </label>
+    </tab>
+  </UITemplateForm>
+
   <UITabPane>
     <title>
       <UISkinTab>CSS</UISkinTab>
     </title>
   </UITabPane>
-  
+
   <UISkinTab>
     <header>
       <name>اسم</name>
@@ -2389,7 +2400,7 @@
       </title>
     </action>
   </UISkinTab>
-  
+
   <SkinForm>
     <label>
       <UITemplateContent>نموذج المظهر الخارجي</UITemplateContent>
@@ -2404,56 +2415,57 @@
     <title>إضافة / تغيير المظهر</title>
   </SkinForm>
 
- <UITagManager>
-   <action>
-     <title>
-       <RemoveStyle>إزالة</RemoveStyle>
-         <AddStyle>اضافة نمط</AddStyle>
-     </title>
-   </action>
-   <msg>
-     <confirm-delete>هل أنت متأكد من أنك تريد حذف هذا النّمط الخاص بالعلامة؟</confirm-delete>
-   </msg>
- </UITagManager>
+  <UITagManager>
+    <action>
+      <title>
+        <RemoveStyle>إزالة</RemoveStyle>
+        <AddStyle>اضافة نمط</AddStyle>
+      </title>
+    </action>
+    <msg>
+      <confirm-delete>هل أنت متأكد من أنك تريد حذف هذا النّمط الخاص بالعلامة؟</confirm-delete>
+    </msg>
+  </UITagManager>
 
-<UITaxonomyTreeContainer>
-<action>
-<Cancel>#{word.close}</Cancel>
-</action>
-</UITaxonomyTreeContainer>
-<UITaxonomyTreeMainForm>
-<action>
-<NextViewPermission>التالي</NextViewPermission>
-<Reset>Reset</Reset>
-</action>
-</UITaxonomyTreeMainForm>
+  <UITaxonomyTreeContainer>
+    <action>
+      <Cancel>#{word.close}</Cancel>
+    </action>
+  </UITaxonomyTreeContainer>
+  <UITaxonomyTreeMainForm>
+    <action>
+      <NextViewPermission>التالي</NextViewPermission>
+      <Reset>Reset</Reset>
+    </action>
+  </UITaxonomyTreeMainForm>
 
-<UIPermissionTreeForm>
-<action>
-<Save>Save</Save>
-<Cancel>#{word.cancel}</Cancel>
-<Reset>Reset</Reset>
-<NextAddAction>التالي</NextAddAction>
-<Previous>السابق</Previous>
-</action>
-</UIPermissionTreeForm>
+  <UIPermissionTreeForm>
+    <action>
+      <Save>Save</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <Reset>Reset</Reset>
+      <NextAddAction>التالي</NextAddAction>
+      <Previous>السابق</Previous>
+    </action>
+  </UIPermissionTreeForm>
 
-<UIActionForm>
-<action>
-<PreviousViewPermission>السابق</PreviousViewPermission>
-<NextViewTree>التالي</NextViewTree>
-</action>
-  <msg>
-    <xss-vulnerability-character>يحتوي المجال '{0}' على أحرف XSS</xss-vulnerability-character>
-<xss-vulnerability-character-wo-label>القيمة التي تمّ ادخالها في هذا المجال قد تحتوي على أحرف XSS</xss-vulnerability-character-wo-label>
-  </msg>
-</UIActionForm>
+  <UIActionForm>
+    <action>
+      <PreviousViewPermission>السابق</PreviousViewPermission>
+      <NextViewTree>التالي</NextViewTree>
+    </action>
+    <msg>
+      <xss-vulnerability-character>يحتوي المجال '{0}' على أحرف XSS</xss-vulnerability-character>
+      <xss-vulnerability-character-wo-label>القيمة التي تمّ ادخالها في هذا المجال قد تحتوي على أحرف XSS
+      </xss-vulnerability-character-wo-label>
+    </msg>
+  </UIActionForm>
 
-<UITaxonomyTreeWorkingArea>
-<action>
-<Previous>السابق</Previous>
-</action>
-</UITaxonomyTreeWorkingArea>
+  <UITaxonomyTreeWorkingArea>
+    <action>
+      <Previous>السابق</Previous>
+    </action>
+  </UITaxonomyTreeWorkingArea>
 
   <UITabPane>
     <title>
@@ -2461,7 +2473,7 @@
       <UITagPermissionManager>صلاحيات ادارة العلامات</UITagPermissionManager>
     </title>
   </UITabPane>
-  
+
   <UITagPermissionInfo>
     <header>
       <usersOrGroups>مستخدم أو مجموعة</usersOrGroups>
@@ -2474,7 +2486,7 @@
     </action>
     <msg>
       <confirm-delete-permission>هل ترغب حقّا في حذف هذه الصلاحيّة؟</confirm-delete-permission>
-    </msg>   
+    </msg>
   </UITagPermissionInfo>
   <UITagPermissionForm>
     <title>أضف صلاحيّة</title>
@@ -2487,32 +2499,32 @@
     </label>
     <msg>
       <userOrGroup-alreadyExists>هذه العضوية موجودة مُسبقا. الرجاء اختيار واحدة أخرى.</userOrGroup-alreadyExists>
-    </msg>    
+    </msg>
   </UITagPermissionForm>
-  
+
   <UIGroupMemberSelector>
     <label>
       <selectGroup>اختيار مجموعة</selectGroup>
       <selectMembership>اختيار العضوية</selectMembership>
     </label>
   </UIGroupMemberSelector>
-  
+
   <UIFolksonomyManager>
-  <msg>
+    <msg>
       <confirm-delete>هل ترغب فعلا بحذف هذا النّمط ؟</confirm-delete>
-  </msg>
+    </msg>
     <action>
       <title>
         <AddStyle>اضافة نمط</AddStyle>
       </title>
     </action>
-  </UIFolksonomyManager>  
-<UIActionForm>
-  <title>
-  <ShowComponent>فتح نافذة</ShowComponent>
-  <removeReference>إزالة</removeReference>
-  </title>
-  </UIActionForm> 
+  </UIFolksonomyManager>
+  <UIActionForm>
+    <title>
+      <ShowComponent>فتح نافذة</ShowComponent>
+      <removeReference>إزالة</removeReference>
+    </title>
+  </UIActionForm>
   <NodeTypeNameValidator>
     <msg>
       <Invalid-char>هناك بعض الأحرف الغير مُتاحة. يُرجى كتابة قيمة أخرى.</Invalid-char>
@@ -2521,10 +2533,12 @@
   </NodeTypeNameValidator>
   <UIActionForm>
     <msg>
-      <constraint-violation-exception>لا يمكن إضافة العقدة '{0}' إلى '{1}' في مساحة العمل '{2}'. توجد مشكلة مع الصلاحيّات أو مع بعض القيود المفروضة.</constraint-violation-exception>
+      <constraint-violation-exception>لا يمكن إضافة العقدة '{0}' إلى '{1}' في مساحة العمل '{2}'. توجد مشكلة مع
+        الصلاحيّات أو مع بعض القيود المفروضة.
+      </constraint-violation-exception>
     </msg>
   </UIActionForm>
-  
+
   <UIWorkspaceWizard>
     <msg>
       <name-not-allowed>اسم محظور</name-not-allowed>
@@ -2532,35 +2546,37 @@
   </UIWorkspaceWizard>
   <UIRepositoryForm>
     <msg>
-      <not-complete-repository>The repository is being created. You need to wait a few minutes before creating another one.</not-complete-repository>
+      <not-complete-repository>The repository is being created. You need to wait a few minutes before creating another
+        one.
+      </not-complete-repository>
     </msg>
   </UIRepositoryForm>
-  
+
   <UIViewFormTabPane>
-  <label>
-  <addCategory>إضافة فئة</addCategory>
-          <addLocalizationLink>اضافة ترجمة</addLocalizationLink>
-  </label>
+    <label>
+      <addCategory>إضافة فئة</addCategory>
+      <addLocalizationLink>اضافة ترجمة</addLocalizationLink>
+    </label>
   </UIViewFormTabPane>
 
-<UIDriveForm>
-<label>
-<allowNodeTypesOnTree>نوع العُقد المسموح بها في الشجرة الموجودة على اليسار.</allowNodeTypesOnTree>
-</label>
-</UIDriveForm>
-<DriveInputSet>
-<title>
-<RemovePermission>Remove Permission</RemovePermission>
-<ChooseNodeType>اختيار أنواع العقدة</ChooseNodeType>
-<RemoveNodeType>إزالة</RemoveNodeType>
-</title>
-</DriveInputSet>
-<PopupNodeTypeSelector>
-<title>
-<UINodeTypeSelector>اختيار أنواع العقدة</UINodeTypeSelector>
-<PopupNodeTypeSelector>حدد أنواع العقدة</PopupNodeTypeSelector>
-</title>
-</PopupNodeTypeSelector>
+  <UIDriveForm>
+    <label>
+      <allowNodeTypesOnTree>نوع العُقد المسموح بها في الشجرة الموجودة على اليسار.</allowNodeTypesOnTree>
+    </label>
+  </UIDriveForm>
+  <DriveInputSet>
+    <title>
+      <RemovePermission>Remove Permission</RemovePermission>
+      <ChooseNodeType>اختيار أنواع العقدة</ChooseNodeType>
+      <RemoveNodeType>إزالة</RemoveNodeType>
+    </title>
+  </DriveInputSet>
+  <PopupNodeTypeSelector>
+    <title>
+      <UINodeTypeSelector>اختيار أنواع العقدة</UINodeTypeSelector>
+      <PopupNodeTypeSelector>حدد أنواع العقدة</PopupNodeTypeSelector>
+    </title>
+  </PopupNodeTypeSelector>
   <UINodeTypeSelector>
     <label>
       <selectedAllNodeTypes>اختيار جميع أنواع العقدة</selectedAllNodeTypes>
@@ -2568,14 +2584,14 @@
   </UINodeTypeSelector>
   <UIScriptForm>
     <msg>
-      <PathNotFoundException>السكريبت موجود بالفعل في المجلد '{0}'.</PathNotFoundException>      
+      <PathNotFoundException>السكريبت موجود بالفعل في المجلد '{0}'.</PathNotFoundException>
     </msg>
   </UIScriptForm>
- <UINodeTypeList>
-   <msg>
-   <no-list>لا يوجد أي نوع عقدة يطابق بحثك.</no-list>
-   </msg>
- </UINodeTypeList>
+  <UINodeTypeList>
+    <msg>
+      <no-list>لا يوجد أي نوع عقدة يطابق بحثك.</no-list>
+    </msg>
+  </UINodeTypeList>
   <UIActionForm>
     <msg>
       <canotChangeActionId>لا يمكنك تغيير معرّف الاجراء ( Action ID).</canotChangeActionId>
@@ -2593,7 +2609,8 @@
   </UIPageIterator>
   <UILockNodeList>
     <msg>
-      <can-not-unlock-node>ليس لديك الصلاحية لتحرير قفل هذه العقدة.  اتصل بخطط النظام للحصول على الصلاحية الصحيحة</can-not-unlock-node>
+      <can-not-unlock-node>ليس لديك الصلاحية لتحرير قفل هذه العقدة. اتصل بخطط النظام للحصول على الصلاحية الصحيحة
+      </can-not-unlock-node>
     </msg>
- </UILockNodeList>
+  </UILockNodeList>
 </bundle>

@@ -13,21 +13,21 @@
         <Repository>Depo</Repository>
         <Advanced>Gelişmiş</Advanced>
       </label>
-    </tab>    
-    <label>     
+    </tab>
+    <label>
       <UITaxonomyManagerTrees>Kategoriler</UITaxonomyManagerTrees>
       <UIMetadataManager>Metaveri</UIMetadataManager>
       <UINamespaceManager>Ad Alanları</UINamespaceManager>
       <UINodeTypeManager>Düğüm Türleri</UINodeTypeManager>
       <UITemplatesManager>Belgeler</UITemplatesManager>
-   <UICLVTemplatesManager>Liste</UICLVTemplatesManager>
+      <UICLVTemplatesManager>Liste</UICLVTemplatesManager>
       <UIViewManager>Görünümler</UIViewManager>
       <UIDriveManager>Sürücüler</UIDriveManager>
       <UIQueriesManager>Sorgular</UIQueriesManager>
       <UIActionManager>Eylemler</UIActionManager>
       <UIScriptManager>Scriptler</UIScriptManager>
       <UIUnLockManager>Kilitler</UIUnLockManager>
-      <UIFolksonomyManager>Etiketler</UIFolksonomyManager>      
+      <UIFolksonomyManager>Etiketler</UIFolksonomyManager>
     </label>
     <msg>
       <access-denied>Erişim engellendi. Bu eylemi gerçekleştirmek için gerekli izniniz yok.</access-denied>
@@ -60,7 +60,7 @@
       <remove>Sil</remove>
     </title>
   </UITaxonomyManager>
-  
+
   <!--
   ################################################################################
   #    org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyTreeContainer#
@@ -71,15 +71,19 @@
       <info>
         <UITaxonomyTreeMainForm>Kategori adı, çalışma alanı ve anasayfa yolu belirtin.</UITaxonomyTreeMainForm>
         <UIPermissionTreeManager>Kategori ağacı izni ayarlayın.</UIPermissionTreeManager>
-        <UIActionTaxonomyManager>Kategori ağacına eylem eklemek için oluşturma veya güncelleme işlemini tamamlamanız gerekiyor.</UIActionTaxonomyManager>
-        <UITaxonomyTreeCreateChild>Sınıflandırma ağacını ekleyerek, kopyalayarak, keserek ve izinleri seçerek düzenleyin.</UITaxonomyTreeCreateChild>
+        <UIActionTaxonomyManager>Kategori ağacına eylem eklemek için oluşturma veya güncelleme işlemini tamamlamanız
+          gerekiyor.
+        </UIActionTaxonomyManager>
+        <UITaxonomyTreeCreateChild>Sınıflandırma ağacını ekleyerek, kopyalayarak, keserek ve izinleri seçerek
+          düzenleyin.
+        </UITaxonomyTreeCreateChild>
       </info>
     </tab>
     <msg>
       <not-exist-tree>Kategori ağacı yok.</not-exist-tree>
     </msg>
   </UITaxonomyTreeContainer>
-  
+
   <!--
 ##########################################################################################
 #     org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyTreeMainForm          #
@@ -111,45 +115,45 @@
       <AddPath>Yol Ekle</AddPath>
     </title>
   </TaxonomyTreeHomePath>
-  
+
   <!--
 ##########################################################################################
 #     org.exoplatform.ecm.webui.component.admin.taxonomy.tree.info.UIPermissionTreeInfo  #
 ##########################################################################################
 -->
-<UIPermissionTreeInfo>
-<action>
-<title>
-<Delete>Sil</Delete>
-<Edit>Düzenle</Edit>
-</title>
-</action>
-<header>
-<usersOrGroups>Kullanıcı veya Grup</usersOrGroups>
-<read>Oku</read>
-<addNode>Düğüm Ekle</addNode>
-<setProperty>Özellik Ayarla</setProperty>
-<remove>Kaldır</remove>
-<action>Eylem</action>
-</header>
-</UIPermissionTreeInfo>
+  <UIPermissionTreeInfo>
+    <action>
+      <title>
+        <Delete>Sil</Delete>
+        <Edit>Düzenle</Edit>
+      </title>
+    </action>
+    <header>
+      <usersOrGroups>Kullanıcı veya Grup</usersOrGroups>
+      <read>Oku</read>
+      <addNode>Düğüm Ekle</addNode>
+      <setProperty>Özellik Ayarla</setProperty>
+      <remove>Kaldır</remove>
+      <action>Eylem</action>
+    </header>
+  </UIPermissionTreeInfo>
 
-<!--
-##########################################################################################
-#     org.exoplatform.ecm.webui.component.admin.taxonomy.tree.info.UIPermissionTreeForm  #
-##########################################################################################
--->
+  <!--
+  ##########################################################################################
+  #     org.exoplatform.ecm.webui.component.admin.taxonomy.tree.info.UIPermissionTreeForm  #
+  ##########################################################################################
+  -->
   <UIPermissionTreeForm>
     <msg>
       <have-not-any-permission>Lütfen bu düğüm için en az bir izin belirtin.</have-not-any-permission>
     </msg>
   </UIPermissionTreeForm>
 
-<!--
-################################################################################
-#     org.exoplatform.ecm.webui.component.admin.taxonomy.UIActionForm          #
-################################################################################
--->
+  <!--
+  ################################################################################
+  #     org.exoplatform.ecm.webui.component.admin.taxonomy.UIActionForm          #
+  ################################################################################
+  -->
 
   <UIActionForm>
     <title>Kategori ağacına eylem ekle</title>
@@ -250,7 +254,8 @@
     <msg>
       <confirm-delete>Bu metaverileri silmek istediğinizden emin misiniz?</confirm-delete>
       <delete-successful>'{0}' Şablonu başarıyla silindi.</delete-successful>
-      <path-not-found-exception>Bu metaveriler değiştirildi veya silindi. Lütfen Yenile düğmesini tıklatın.</path-not-found-exception>
+      <path-not-found-exception>Bu metaveriler değiştirildi veya silindi. Lütfen Yenile düğmesini tıklatın.
+      </path-not-found-exception>
     </msg>
     <action>
       <Add>Metaveri Ekle</Add>
@@ -425,13 +430,13 @@
       <action>Eylem</action>
     </header>
   </UITreeList>
-  
+
   <UIRepositoryList>
     <titlebar>
       <label>ECM Ana Fonksiyonlarını Yönet</label>
     </titlebar>
   </UIRepositoryList>
-  
+
   <!--
   ################################################################################
   #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeManager #
@@ -561,7 +566,8 @@
     </action>
     <msg>
       <register-successfully>'{0}' Düğüm türü başarıyla kaydedildi.</register-successfully>
-      <supertype-is-madatory>Yeni bir öğe türü kaydettiğinizde süper tür zorunludur.Lütfen en az bir süper tür seçin.</supertype-is-madatory>
+      <supertype-is-madatory>Yeni bir öğe türü kaydettiğinizde süper tür zorunludur.Lütfen en az bir süper tür seçin.
+      </supertype-is-madatory>
       <register-failed>Düğüm türü kaydı başarısız oldu. Ya zaten var veya süper türü geçersiz.</register-failed>
       <nodeType-name>Düğüm türü adı gereklidir.</nodeType-name>
       <fileName-invalid>Dosya adında geçersiz bir karakter var.</fileName-invalid>
@@ -581,7 +587,8 @@
     </tab>
     <msg>
       <property-name>Özellik tanımının adı geçersiz.</property-name>
-      <not-supported-value-constraints>Bu gerekli tür değer kısıtlamalarında desteklenmiyor.</not-supported-value-constraints>
+      <not-supported-value-constraints>Bu gerekli tür değer kısıtlamalarında desteklenmiyor.
+      </not-supported-value-constraints>
     </msg>
   </UIPropertyDefinitionForm>
   <UIChildNodeDefinitionForm>
@@ -605,7 +612,7 @@
   </requiredPrimaryTypePopup>
   <superTypesPopup>
     <title>
-      <FormsuperTypesPopup>Süper Türleri  Seçin</FormsuperTypesPopup>
+      <FormsuperTypesPopup>Süper Türleri Seçin</FormsuperTypesPopup>
     </title>
   </superTypesPopup>
   <NodeTypePopup>
@@ -726,7 +733,7 @@
     <header>
       <name>Script</name>
       <label>Adı</label>
-<action>Eylemler</action>
+      <action>Eylemler</action>
     </header>
     <title>
       <Edit>Düzenle</Edit>
@@ -735,10 +742,10 @@
     <action>
       <AddAction>Eylem Türü Ekle</AddAction>
     </action>
-<msg>
- <confirm-delete>Bu eylem türünü silmek istediğinizden emin misiniz?</confirm-delete>
-<cannot-delete>Bu eylem türünü, sistem hala kullandığından kaldıramazsınız.</cannot-delete>
-</msg>
+    <msg>
+      <confirm-delete>Bu eylem türünü silmek istediğinizden emin misiniz?</confirm-delete>
+      <cannot-delete>Bu eylem türünü, sistem hala kullandığından kaldıramazsınız.</cannot-delete>
+    </msg>
   </UIActionTypeList>
   <!--
   ######################################################################################
@@ -791,11 +798,11 @@
       <UITemplateContainer>Belgeler</UITemplateContainer>
       <UIActionsTemplateContainer>Eylemler</UIActionsTemplateContainer>
       <UIOthersTemplateContainer>Diğerleri</UIOthersTemplateContainer>
-  <UIActionScriptContainer>Eylem</UIActionScriptContainer>
-  <UIWidgetScriptContainer>Widgetler</UIWidgetScriptContainer>
-<UIInterceptorScriptContainer>Önleyiciler</UIInterceptorScriptContainer>
+      <UIActionScriptContainer>Eylem</UIActionScriptContainer>
+      <UIWidgetScriptContainer>Widgetler</UIWidgetScriptContainer>
+      <UIInterceptorScriptContainer>Önleyiciler</UIInterceptorScriptContainer>
 
-<nodeTypeDefinition>Düğüm Türü</nodeTypeDefinition>
+      <nodeTypeDefinition>Düğüm Türü</nodeTypeDefinition>
       <propertyDefinition>Özelliği</propertyDefinition>
       <childNodeDefinition>Alt Düğüm</childNodeDefinition>
       <SuperTypeTab>Süper Türler</SuperTypeTab>
@@ -810,11 +817,11 @@
   ######################################################################################
   -->
   <UIViewList>
-   <title>
-     <View>Görün</View>
-     <EditInfo>Düzenle</EditInfo>
-     <Delete>Sil</Delete>
-   </title>
+    <title>
+      <View>Görün</View>
+      <EditInfo>Düzenle</EditInfo>
+      <Delete>Sil</Delete>
+    </title>
     <header>
       <name>Adı</name>
       <permissions>İzinler</permissions>
@@ -848,71 +855,71 @@
     </title>
   </EditPopup>
 
-<UITabList>
-                  <title>
-                    <Edit>Düzenle</Edit>
-                    <Delete>Sil</Delete>
-                  </title>       
- <header>
-  <tabName>Sekme</tabName>
-  <localizeButtons>Açıklama</localizeButtons>
-<action>Eylemler</action>
-</header>
-<action>
- <AddTab>Ekle</AddTab>
-</action>
-<msg>
- <confirm-delete>Bu sekmeyi silmek istediğinizden emin misiniz?</confirm-delete>
-</msg>
-<grid>
- <msg>
-  <empty>Bu görünümde sekme yok</empty>
- </msg>
-</grid>
-</UITabList>
+  <UITabList>
+    <title>
+      <Edit>Düzenle</Edit>
+      <Delete>Sil</Delete>
+    </title>
+    <header>
+      <tabName>Sekme</tabName>
+      <localizeButtons>Açıklama</localizeButtons>
+      <action>Eylemler</action>
+    </header>
+    <action>
+      <AddTab>Ekle</AddTab>
+    </action>
+    <msg>
+      <confirm-delete>Bu sekmeyi silmek istediğinizden emin misiniz?</confirm-delete>
+    </msg>
+    <grid>
+      <msg>
+        <empty>Bu görünümde sekme yok</empty>
+      </msg>
+    </grid>
+  </UITabList>
 
-<UIViewPermissionList>
- <title>Bu görünümün sahibini ve izinlerini seçin:</title>
-<label>
- <permission>{1} içindeki {0}</permission>
-</label>
-<msg>
- <confirm-delete>Bu izin silmek istediğinizden emin misiniz?</confirm-delete>
-  <permission-cannot-empty>Görünüm izni gereklidir ve boş olamaz.</permission-cannot-empty>
-</msg>
-</UIViewPermissionList>
+  <UIViewPermissionList>
+    <title>Bu görünümün sahibini ve izinlerini seçin:</title>
+    <label>
+      <permission>{1} içindeki {0}</permission>
+    </label>
+    <msg>
+      <confirm-delete>Bu izin silmek istediğinizden emin misiniz?</confirm-delete>
+      <permission-cannot-empty>Görünüm izni gereklidir ve boş olamaz.</permission-cannot-empty>
+    </msg>
+  </UIViewPermissionList>
 
-<UIViewPermissionList>
-                         <title>
-                           <Delete>Sil</Delete>
-                         </title>
- <header>
-<friendlyPermission>İzinler</friendlyPermission>
-     <action>Eylem</action>
- </header>
-<action>
- <title>
-  <Delete>Sil</Delete>
- </title>
-</action>
-<grid>
- <msg>
-  <empty>Bu görünümü hiçbir izni yok</empty>
- </msg>
-</grid>
-</UIViewPermissionList>
+  <UIViewPermissionList>
+    <title>
+      <Delete>Sil</Delete>
+    </title>
+    <header>
+      <friendlyPermission>İzinler</friendlyPermission>
+      <action>Eylem</action>
+    </header>
+    <action>
+      <title>
+        <Delete>Sil</Delete>
+      </title>
+    </action>
+    <grid>
+      <msg>
+        <empty>Bu görünümü hiçbir izni yok</empty>
+      </msg>
+    </grid>
+  </UIViewPermissionList>
 
-<UIViewPermissionForm>
-<action>
- <Add>Ekle</Add>
-</action>
-<label>
- <userOrGroup>Kullanıcı veya Grup</userOrGroup>
-</label>
-<msg>
- <permission-exist>'{0}' İzni zaten listede var.</permission-exist>
-</msg>
-</UIViewPermissionForm>
+  <UIViewPermissionForm>
+    <action>
+      <Add>Ekle</Add>
+    </action>
+    <label>
+      <userOrGroup>Kullanıcı veya Grup</userOrGroup>
+    </label>
+    <msg>
+      <permission-exist>'{0}' İzni zaten listede var.</permission-exist>
+    </msg>
+  </UIViewPermissionForm>
 
   <!--
   ######################################################################################
@@ -927,15 +934,15 @@
     <msg>
       <view-name-invalid>Görünüm adı gereklidir.</view-name-invalid>
       <fileName-invalid>Görünüm adı bazı geçersiz karakterler içeriyor.</fileName-invalid>
-      <permission-not-empty>Lütfen görünüm için bir izin seçin.</permission-not-empty>      
+      <permission-not-empty>Lütfen görünüm için bir izin seçin.</permission-not-empty>
       <mustbe-add-tab>Lütfen bir sekme ekleyin.</mustbe-add-tab>
-<mustbe-add-permission>Lütfen görünüm için izin seçin</mustbe-add-permission>
+      <mustbe-add-permission>Lütfen görünüm için izin seçin</mustbe-add-permission>
       <view-exist>Görünüm adı zaten var.</view-exist>
     </msg>
     <label>
       <viewName>Adı</viewName>
       <template>Şablon</template>
-<version>Sürümü geri yükle</version>
+      <version>Sürümü geri yükle</version>
       <enableVersion>Sürüm Kontrolü Etkinleştir</enableVersion>
       <hideExplorerPanel>Kenar çubuğunda Gezgin panelini gizle</hideExplorerPanel>
     </label>
@@ -980,14 +987,14 @@
       <overloadThumbnail>Çok küçük resim</overloadThumbnail>
       <manageHidden>İçeriği Gizle/Göster</manageHidden>
       <comment>Yorum</comment>
-      <vote>Oyla</vote>  
+      <vote>Oyla</vote>
       <addCategory>Kategori Ekle</addCategory>
       <addLocalizationLink>Çeviri Ekle</addLocalizationLink>
       <publicationRequestApproval>Onay İste</publicationRequestApproval>
       <publicationApproveContent>İçeriği Onayla</publicationApproveContent>
       <publicationPublish>Yayımla</publicationPublish>
-<contentNavigation>İçerik Gezinti</contentNavigation>
-<addSymLink>Sembolik link ekle</addSymLink>
+      <contentNavigation>İçerik Gezinti</contentNavigation>
+      <addSymLink>Sembolik link ekle</addSymLink>
       <checkIn>Check In</checkIn>
       <checkOut>Check Out</checkOut>
       <shareDocuments>Paylaş</shareDocuments>
@@ -996,8 +1003,8 @@
       <uploadNewVersion>Upload a new version</uploadNewVersion>
     </label>
     <action>
-      <Save>#{word.save}</Save>      
-      <Cancel>#{word.cancel}</Cancel>      
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
   </UITabForm>
   <UIPermissionForm>
@@ -1010,7 +1017,7 @@
       <label>
         <UITabContainer>Eylem</UITabContainer>
         <UIViewForm>Görün</UIViewForm>
-        <UIViewPermissionContainer>İzin</UIViewPermissionContainer>    
+        <UIViewPermissionContainer>İzin</UIViewPermissionContainer>
       </label>
     </tab>
     <action>
@@ -1027,19 +1034,19 @@
     </title>
   </PopupViewPermission>
 
-<TabForm_Popup>
- <title>
-  <UITabForm>Sekme Ekle/Düzenle</UITabForm>
- </title>
-</TabForm_Popup>
+  <TabForm_Popup>
+    <title>
+      <UITabForm>Sekme Ekle/Düzenle</UITabForm>
+    </title>
+  </TabForm_Popup>
 
-<tab_permission>
- <title>
-  <SelectUser>Kullanıcı Seçin</SelectUser>
-<SelectMember>Üye Seçin</SelectMember>
-<AddAny>Herhangi bir</AddAny>
- </title>
-</tab_permission>
+  <tab_permission>
+    <title>
+      <SelectUser>Kullanıcı Seçin</SelectUser>
+      <SelectMember>Üye Seçin</SelectMember>
+      <AddAny>Herhangi bir</AddAny>
+    </title>
+  </tab_permission>
   <!--
   ######################################################################################
   #             org.exoplatform.ecm.webui.component.admin.view.UIECMTemplateList   #
@@ -1228,7 +1235,7 @@
   #             org.exoplatform.ecm.webui.component.admin.script.ecmScriptForm #
   ######################################################################################
   -->
- 
+
   <ecmScriptForm>
     <label>
       <selectVersion>Sürümler</selectVersion>
@@ -1260,7 +1267,7 @@
       <name-too-long>Kategori adında 30'dan az karakter olmalıdır.</name-too-long>
     </msg>
   </UITaxonomyForm>
-    
+
   <EditTaxonomyTreePopup>
     <title>
       <UITaxonomyTreeContainer>Kategori Ağacı Düzenle</UITaxonomyTreeContainer>
@@ -1272,15 +1279,15 @@
       <UITaxonomyTreeContainer>Kategori Ağacı Ekle</UITaxonomyTreeContainer>
     </title>
   </AddTaxonomyTreePopup>
-  
+
   <TaxonomyPopupCreateChild>
     <title>
       <UITaxonomyTreeCreateChildForm>Kategori Ağacı Düzenle</UITaxonomyTreeCreateChildForm>
     </title>
   </TaxonomyPopupCreateChild>
 
-<UITaxonomyTreeCreateChildForm>
-  <action>
+  <UITaxonomyTreeCreateChildForm>
+    <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
     </action>
@@ -1294,41 +1301,41 @@
       <name-too-long>Kategori adı {0} karakterden fazla olmamalıdır.</name-too-long>
       <exist>Kategori adı zaten var.</exist>
     </msg>
-</UITaxonomyTreeCreateChildForm>
+  </UITaxonomyTreeCreateChildForm>
 
   <PopupComponent>
     <title>
       <UIOneNodePathSelector>Yolu Seçin</UIOneNodePathSelector>
     </title>
   </PopupComponent>
-  
+
   <TaxoPopupUserSelector>
-  <title>
+    <title>
       <TaxoTreeSelectUserOrGroup>Kullanıcı Seçin</TaxoTreeSelectUserOrGroup>
       <UIPermissionTreeSelectUser>Kullanıcı Seçin</UIPermissionTreeSelectUser>
     </title>
   </TaxoPopupUserSelector>
 
   <TaxoTreeSelectUserOrGroupPopup>
-  <title>
+    <title>
       <TaxoTreeSelectUserOrGroup>Üyelik Seçin</TaxoTreeSelectUserOrGroup>
     </title>
   </TaxoTreeSelectUserOrGroupPopup>
-  
+
   <TaxoTreeAnyPermission>
     <label>
       <any>Herhangi bir İzin</any>
       <anyPermission>TaxoTreeAnyPermission</anyPermission>
     </label>
   </TaxoTreeAnyPermission>
-  
+
   <TaxoTreeSelectUserOrGroup>
     <label>
       <selectGroup>Grup Seçin</selectGroup>
       <selectMembership>Üyelik Seçin</selectMembership>
     </label>
   </TaxoTreeSelectUserOrGroup>
-  
+
   <!--
   ######################################################################################
   #             org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyTreeList #
@@ -1355,7 +1362,7 @@
       <is-in-trash>Bu kategori ağacı Çöp klasörüne taşındı.</is-in-trash>
     </msg>
   </UITaxonomyTreeList>
-  
+
   <!--
   ######################################################################################
   #             org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyTreeForm  #
@@ -1372,7 +1379,7 @@
       <homapath-emty>Giriş Yolu</homapath-emty>
     </msg>
   </UITaxonomyTreeForm>
-  
+
   <UIPermissionTreeForm>
     <label>
       <UIPopupWindow>Seçin</UIPopupWindow>
@@ -1391,43 +1398,43 @@
     </action>
     <msg>
       <checkbox-require>Lütfen en az bir izin seçin.</checkbox-require>
-      <userOrGroup-required>Lütfen izni kaydetmeden önce  bir kullanıcı veya grup seçin.</userOrGroup-required>
+      <userOrGroup-required>Lütfen izni kaydetmeden önce bir kullanıcı veya grup seçin.</userOrGroup-required>
       <not-change-permission>Bir izni ekleme hakkınız yok.</not-change-permission>
       <access-denied>Erişim engellendi. Bu izini kaldıramazsınız.</access-denied>
     </msg>
   </UIPermissionTreeForm>
-  
+
   <PopupTaxonomyJCRBrowser>
-  <title>
+    <title>
       <UIOneNodePathSelector>Anasayfa Yolunu Seçin</UIOneNodePathSelector>
     </title>
   </PopupTaxonomyJCRBrowser>
-  
+
   <PopupTaxonomyTreePermission>
     <title>
       <UIPermissionSelector>Yetki Seçici</UIPermissionSelector>
     </title>
-   </PopupTaxonomyTreePermission>
-   
-   <PopupDrivePermission>
+  </PopupTaxonomyTreePermission>
+
+  <PopupDrivePermission>
     <title>
       <AddDrivePermissionSelector>İzin Ekle</AddDrivePermissionSelector>
       <UIPermissionSelector>Yetkileri Seç</UIPermissionSelector>
     </title>
   </PopupDrivePermission>
-  
+
   <UIPopupWindow>
     <title>
       <UIPermissionManager>İzin Yönetimi</UIPermissionManager>
     </title>
-   </UIPopupWindow>
+  </UIPopupWindow>
 
   <PopupUserSelector>
     <title>
       <UIUserContainer>İzin Yönetimi</UIUserContainer>
     </title>
-   </PopupUserSelector>
-   
+  </PopupUserSelector>
+
   <UIPermissionInfo>
     <action>
       <title>
@@ -1494,18 +1501,18 @@
     </action>
     <msg>
       <checkbox-require>Lütfen en az bir izin seçin.</checkbox-require>
-      <userOrGroup-required>Lütfen izni kaydetmeden önce  bir kullanıcı veya grup seçin.</userOrGroup-required>
+      <userOrGroup-required>Lütfen izni kaydetmeden önce bir kullanıcı veya grup seçin.</userOrGroup-required>
       <not-change-permission>Bir izni ekleme hakkınız yok.</not-change-permission>
       <access-denied>Erişim engellendi. Bu izini kaldıramazsınız.</access-denied>
     </msg>
   </UIPermissionForm>
-  
+
   <TaxonomyPopup>
     <title>
       <UITaxonomyForm>Kategori Ekle</UITaxonomyForm>
     </title>
   </TaxonomyPopup>
-  
+
   <UITaxonomyManager>
     <title>
       <permission>İzin Yönetimi</permission>
@@ -1533,7 +1540,7 @@
       <template-not-exist>Silmeye çalıştığınız şablon yok.</template-not-exist>
     </msg>
   </UITemplateList>
-  
+
   <UIActionsTemplateList>
     <header>
       <name>Türü</name>
@@ -1551,7 +1558,7 @@
       <template-not-exist>Silmeye çalıştığınız şablon yok.</template-not-exist>
     </msg>
   </UIActionsTemplateList>
-  
+
   <UIOthersTemplateList>
     <header>
       <name>Türü</name>
@@ -1570,19 +1577,19 @@
     </msg>
   </UIOthersTemplateList>
 
- <!--
-  ######################################################################################
-  #             org.exoplatform.ecm.webui.component.admin.templates.clv package #
-  ######################################################################################
-  -->
+  <!--
+   ######################################################################################
+   #             org.exoplatform.ecm.webui.component.admin.templates.clv package #
+   ######################################################################################
+   -->
 
-<UITabPane>
- <title>
- <ContentTemplateContainer>İçerik</ContentTemplateContainer>
-<CateTemplateContainer>Gezinti</CateTemplateContainer>
-<PageTemplateContainer>Sayfalandırma</PageTemplateContainer>
- </title>
-</UITabPane>
+  <UITabPane>
+    <title>
+      <ContentTemplateContainer>İçerik</ContentTemplateContainer>
+      <CateTemplateContainer>Gezinti</CateTemplateContainer>
+      <PageTemplateContainer>Sayfalandırma</PageTemplateContainer>
+    </title>
+  </UITabPane>
 
   <UICLVTemplateList>
     <title>
@@ -1596,8 +1603,8 @@
     </header>
     <action>
       <AddTemplate>Şablon Ekle</AddTemplate>
-<Edit>Düzenle</Edit>
-<Delete>Sil</Delete>
+      <Edit>Düzenle</Edit>
+      <Delete>Sil</Delete>
     </action>
     <msg>
       <confirm-delete>Bu şablonu silmek istediğinizden emin misiniz?</confirm-delete>
@@ -1607,7 +1614,7 @@
     </msg>
   </UICLVTemplateList>
 
-<CateTemplateList>
+  <CateTemplateList>
     <header>
       <title>Adı</title>
       <action>Eylem</action>
@@ -1619,12 +1626,12 @@
     </title>
     <action>
       <AddTemplate>Şablon Ekle</AddTemplate>
-<Edit>Düzenle</Edit>
-<Delete>Sil</Delete>
+      <Edit>Düzenle</Edit>
+      <Delete>Sil</Delete>
     </action>
-</CateTemplateList>
+  </CateTemplateList>
 
-<PageTemplateList>
+  <PageTemplateList>
     <header>
       <title>Adı</title>
       <action>Eylem</action>
@@ -1632,103 +1639,103 @@
     </header>
     <action>
       <AddTemplate>Şablon Ekle</AddTemplate>
-<Edit>Düzenle</Edit>
-<Delete>Sil</Delete>
+      <Edit>Düzenle</Edit>
+      <Delete>Sil</Delete>
     </action>
-</PageTemplateList>
+  </PageTemplateList>
 
-<EditCLVTemplatePopup_ContentTemplateContainer>
- <title>
-   <UICLVTemplateForm_ContentTemplateContainer>Liste Şablonu Düzenle</UICLVTemplateForm_ContentTemplateContainer>   
- </title>
-</EditCLVTemplatePopup_ContentTemplateContainer>
+  <EditCLVTemplatePopup_ContentTemplateContainer>
+    <title>
+      <UICLVTemplateForm_ContentTemplateContainer>Liste Şablonu Düzenle</UICLVTemplateForm_ContentTemplateContainer>
+    </title>
+  </EditCLVTemplatePopup_ContentTemplateContainer>
 
-<EditCLVTemplatePopup_CateTemplateContainer>
- <title>
-   <UICLVTemplateForm_CateTemplateContainer>Liste Şablonu Düzenle</UICLVTemplateForm_CateTemplateContainer>   
- </title>
-</EditCLVTemplatePopup_CateTemplateContainer>
+  <EditCLVTemplatePopup_CateTemplateContainer>
+    <title>
+      <UICLVTemplateForm_CateTemplateContainer>Liste Şablonu Düzenle</UICLVTemplateForm_CateTemplateContainer>
+    </title>
+  </EditCLVTemplatePopup_CateTemplateContainer>
 
-<EditCLVTemplatePopup_PageTemplateContainer>
- <title>
-   <UICLVTemplateForm_PageTemplateContainer>Liste Şablonu Düzenle</UICLVTemplateForm_PageTemplateContainer>   
- </title>
-</EditCLVTemplatePopup_PageTemplateContainer>
+  <EditCLVTemplatePopup_PageTemplateContainer>
+    <title>
+      <UICLVTemplateForm_PageTemplateContainer>Liste Şablonu Düzenle</UICLVTemplateForm_PageTemplateContainer>
+    </title>
+  </EditCLVTemplatePopup_PageTemplateContainer>
 
-<CLVTemplatePopup_ContentTemplateContainer>
- <title>
-   <UICLVTemplateForm_ContentTemplateContainer>Liste Şablonu Ekle</UICLVTemplateForm_ContentTemplateContainer>   
- </title>
-</CLVTemplatePopup_ContentTemplateContainer>
+  <CLVTemplatePopup_ContentTemplateContainer>
+    <title>
+      <UICLVTemplateForm_ContentTemplateContainer>Liste Şablonu Ekle</UICLVTemplateForm_ContentTemplateContainer>
+    </title>
+  </CLVTemplatePopup_ContentTemplateContainer>
 
-<CLVTemplatePopup_CateTemplateContainer>
- <title>
-   <UICLVTemplateForm_CateTemplateContainer>Liste Şablonu Ekle</UICLVTemplateForm_CateTemplateContainer>   
- </title>
-</CLVTemplatePopup_CateTemplateContainer>
+  <CLVTemplatePopup_CateTemplateContainer>
+    <title>
+      <UICLVTemplateForm_CateTemplateContainer>Liste Şablonu Ekle</UICLVTemplateForm_CateTemplateContainer>
+    </title>
+  </CLVTemplatePopup_CateTemplateContainer>
 
-<CLVTemplatePopup_PageTemplateContainer>
- <title>
-   <UICLVTemplateForm_PageTemplateContainer>Liste Şablonu Ekle</UICLVTemplateForm_PageTemplateContainer>   
- </title>
-</CLVTemplatePopup_PageTemplateContainer>
+  <CLVTemplatePopup_PageTemplateContainer>
+    <title>
+      <UICLVTemplateForm_PageTemplateContainer>Liste Şablonu Ekle</UICLVTemplateForm_PageTemplateContainer>
+    </title>
+  </CLVTemplatePopup_PageTemplateContainer>
 
-<UICLVTemplateForm_ContentTemplateContainer>
- <action>
-  <Save>#{word.save}</Save>
-<Reset>Sıfırla</Reset>
-<Cancel>#{word.cancel}</Cancel>
- </action>
-<label>
- <title>Adı</title>
-<template>Şablon Adı</template>
-<content>İçerik</content>
-<type>Şablon Türü</type>
-</label>
-</UICLVTemplateForm_ContentTemplateContainer>
+  <UICLVTemplateForm_ContentTemplateContainer>
+    <action>
+      <Save>#{word.save}</Save>
+      <Reset>Sıfırla</Reset>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <label>
+      <title>Adı</title>
+      <template>Şablon Adı</template>
+      <content>İçerik</content>
+      <type>Şablon Türü</type>
+    </label>
+  </UICLVTemplateForm_ContentTemplateContainer>
 
-<UICLVTemplateForm_PageTemplateContainer>
- <action>
-  <Save>#{word.save}</Save>
-<Reset>Sıfırla</Reset>
-<Cancel>#{word.cancel}</Cancel>
- </action>
-<label>
- <title>Adı</title>
-<template>Şablon Adı</template>
-<content>İçerik</content>
-<type>Şablon Türü</type>
-</label>
-</UICLVTemplateForm_PageTemplateContainer>
+  <UICLVTemplateForm_PageTemplateContainer>
+    <action>
+      <Save>#{word.save}</Save>
+      <Reset>Sıfırla</Reset>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <label>
+      <title>Adı</title>
+      <template>Şablon Adı</template>
+      <content>İçerik</content>
+      <type>Şablon Türü</type>
+    </label>
+  </UICLVTemplateForm_PageTemplateContainer>
 
-<UICLVTemplateForm_CateTemplateContainer>
- <action>
-  <Save>#{word.save}</Save>
-<Reset>Sıfırla</Reset>
-<Cancel>#{word.cancel}</Cancel>
- </action>
-<label>
- <title>Adı</title>
-<template>Şablon Adı</template>
-<content>İçerik</content>
-<type>Şablon Türü</type>
-</label>
-</UICLVTemplateForm_CateTemplateContainer>
-<UICLVTemplateForm>
-  <label>
-    <paginators>Sayfalandırma</paginators>
-<list>İçerik</list>
-<navigation>Gezinti</navigation>
-  </label>
-                          <action>
-                            <Save>#{word.save}</Save>
-                            <Reset>Sıfırla</Reset> 
-                            <Cancel>#{word.cancel}</Cancel> 
-                          </action> 
-  <msg>
-  <template-existing>Bu şablon adı zaten var. Lütfen başka bir tane seçin.</template-existing>
-  </msg>
-</UICLVTemplateForm>
+  <UICLVTemplateForm_CateTemplateContainer>
+    <action>
+      <Save>#{word.save}</Save>
+      <Reset>Sıfırla</Reset>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <label>
+      <title>Adı</title>
+      <template>Şablon Adı</template>
+      <content>İçerik</content>
+      <type>Şablon Türü</type>
+    </label>
+  </UICLVTemplateForm_CateTemplateContainer>
+  <UICLVTemplateForm>
+    <label>
+      <paginators>Sayfalandırma</paginators>
+      <list>İçerik</list>
+      <navigation>Gezinti</navigation>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Reset>Sıfırla</Reset>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <template-existing>Bu şablon adı zaten var. Lütfen başka bir tane seçin.</template-existing>
+    </msg>
+  </UICLVTemplateForm>
 
   <!--
   ######################################################################################
@@ -1789,8 +1796,10 @@
   <TemplateContainerPopup>
     <title>
       <UIViewTemplate_UITemplateContainer><![CDATA[View & Edit Template]]></UIViewTemplate_UITemplateContainer>
-      <UIViewTemplate_UIActionsTemplateContainer><![CDATA[View & Edit Template]]></UIViewTemplate_UIActionsTemplateContainer>
-      <UIViewTemplate_UIOthersTemplateContainer><![CDATA[View & Edit Template]]></UIViewTemplate_UIOthersTemplateContainer>
+      <UIViewTemplate_UIActionsTemplateContainer>
+        <![CDATA[View & Edit Template]]></UIViewTemplate_UIActionsTemplateContainer>
+      <UIViewTemplate_UIOthersTemplateContainer>
+        <![CDATA[View & Edit Template]]></UIViewTemplate_UIOthersTemplateContainer>
     </title>
   </TemplateContainerPopup>
   <UITemplatesManager>
@@ -1972,11 +1981,11 @@
       <UIQueriesForm>Sorgu Düzenle</UIQueriesForm>
     </title>
   </EditQueryForm>
-<PermissionPopup>
-  <title>
-    <UIGroupMemberSelector>Yetki Seçici</UIGroupMemberSelector>
-  </title>
-</PermissionPopup>
+  <PermissionPopup>
+    <title>
+      <UIGroupMemberSelector>Yetki Seçici</UIGroupMemberSelector>
+    </title>
+  </PermissionPopup>
   <!--
   ######################################################################################
   #             org.exoplatform.ecm.webui.component.admin.folksonomy #
@@ -1986,7 +1995,7 @@
     <title>
       <EditStyle>Stil Düzenle</EditStyle>
       <RemoveStyle>Stil Kaldır</RemoveStyle>
-    </title>    
+    </title>
   </UITagManager>
   <UITagStyleList>
     <header>
@@ -2015,7 +2024,9 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <range-validator>Aralık geçersiz. Biçimi: a a..b arasında , b pozitif tamsayılardır. B nin sınırsız olduğunu belirtmek için  * kullanabilirsiniz.</range-validator>
+      <range-validator>Aralık geçersiz. Biçimi: a a..b arasında , b pozitif tamsayılardır. B nin sınırsız olduğunu
+        belirtmek için * kullanabilirsiniz.
+      </range-validator>
       <error-update>Güncelleştirme başarısız oldu. Bilgileriniz geçerli değil.</error-update>
       <item-not-existing>Bu etiket için değişiklikleri kaydedemezsiniz, artık veri tabanında yok.</item-not-existing>
     </msg>
@@ -2057,9 +2068,9 @@
   ###################################################################################
   -->
   <PermissionValidator>
-  <msg>
+    <msg>
       <permission-path-invalid>'{0}' izni geçersiz.</permission-path-invalid>
-  </msg>
+    </msg>
   </PermissionValidator>
   <!--
   ###################################################################################
@@ -2128,9 +2139,9 @@
       <EditInfo>Düzenle</EditInfo>
       <Delete>Sil</Delete>
     </title>
-<label>
-  <permission>{1} içindeki {0}</permission>
-</label>
+    <label>
+      <permission>{1} içindeki {0}</permission>
+    </label>
   </UIViewContainer>
   <ECMTemplate>
     <title>
@@ -2161,7 +2172,7 @@
       <selectMembership>Üyelik Seçin</selectMembership>
     </label>
   </UIDrivePermissionSelector>
-  
+
   <UIPermissionSelector>
     <label>
       <selectGroup>Grup Seçin</selectGroup>
@@ -2169,30 +2180,30 @@
       <selectMembership>Üyelik Seçin</selectMembership>
     </label>
   </UIPermissionSelector>
-  
+
   <UIAnyPermission>
     <label>
       <anyPermission>Herhangi bir İzin</anyPermission>
     </label>
   </UIAnyPermission>
-  
+
   <UIMDriveAnyPermission>
     <label>
       <anyPermission>Herhangi bir İzin</anyPermission>
     </label>
   </UIMDriveAnyPermission>
-  
+
   <UIQueriesAnyPermission>
     <label>
       <anyPermission>Herhangi bir İzin</anyPermission>
     </label>
   </UIQueriesAnyPermission>
-  
+
   <MetadataPermission>
     <label>
       <selectGroup>Grup Seçin</selectGroup>
     </label>
-  </MetadataPermission>  
+  </MetadataPermission>
   <MetadataPermission>
     <label>
       <selectMembership>Üyelik Seçin</selectMembership>
@@ -2215,7 +2226,7 @@
   </QueriesPermissionBrowse>
   <!--
   #########Since ECM 2.4##################
-  -->  
+  -->
   <UIViewFormTabPane>
     <label>
       <addSymLink>Sembolik link Ekle</addSymLink>
@@ -2223,14 +2234,14 @@
   </UIViewFormTabPane>
   <!--
   #########Since ECM 2.5##################
-  --> 
-  
+  -->
+
   <UIDriveForm>
-<msg>
-  <permission-path-invalid>'{0}' izni geçersiz.</permission-path-invalid>
-  </msg>
+    <msg>
+      <permission-path-invalid>'{0}' izni geçersiz.</permission-path-invalid>
+    </msg>
   </UIDriveForm>
-  
+
   <UITaxonomyTreeMainForm>
     <msg>
       <homepath-emty>Ana yolu gereklidir.</homepath-emty>
@@ -2238,9 +2249,9 @@
     </msg>
   </UITaxonomyTreeMainForm>
   <UITaxonomyWorkingArea>
-  <msg>
-  <exist>Bu ağaç düğümü zaten var.</exist>
-  </msg>
+    <msg>
+      <exist>Bu ağaç düğümü zaten var.</exist>
+    </msg>
   </UITaxonomyWorkingArea>
 
   <PermissionTreeSelectUser>
@@ -2256,16 +2267,16 @@
       <userName>#{word.userName}</userName>
       <lastName>#{word.lastName}</lastName>
       <firstName>#{word.firstName}</firstName>
-    <email>#{word.email}</email>
+      <email>#{word.email}</email>
       <action>#{word.action}</action>
       <Add>#{word.Add}</Add>
       <Close>#{word.Close}</Close>
     </label>
   </PermissionTreeSelectUser>
-  
+
   <!--
   #########Since ECM 2.6 ##################
-  -->   
+  -->
   <DriveInputSet>
     <label>
       <nt_folder>Belge Klasörü</nt_folder>
@@ -2274,30 +2285,30 @@
       <exo_jsFolder>JavaScript Klasörü</exo_jsFolder>
       <exo_linkFolder>Link Klasörü</exo_linkFolder>
       <exo_webFolder>Web İçerik Klasörü</exo_webFolder>
-   </label>
+    </label>
   </DriveInputSet>
   <UIPermissionTreeInfo>
-  <msg>
+    <msg>
       <confirm-delete-permission>Bu izin silmek istediğinizden emin misiniz?</confirm-delete-permission>
-      <no-permission-remove>Sahiplerini veya sistem kullanıcılarını kaldıramazsınız.</no-permission-remove>  
-  </msg>
-  </UIPermissionTreeInfo>  
+      <no-permission-remove>Sahiplerini veya sistem kullanıcılarını kaldıramazsınız.</no-permission-remove>
+    </msg>
+  </UIPermissionTreeInfo>
   <UITaxonomyTreeMainForm>
-<msg>
+    <msg>
       <no-right-target-path>Lütfen başka bir anasayfa yolu seçin.</no-right-target-path>
-</msg>
-</UITaxonomyTreeMainForm>
+    </msg>
+  </UITaxonomyTreeMainForm>
 
-<UIECMAdminControlPanel>
+  <UIECMAdminControlPanel>
     <tab>
-      <label>        
+      <label>
         <ManageUnLock>Kilitleri Yönet</ManageUnLock>
       </label>
-    </tab>        
-</UIECMAdminControlPanel>
-<UIUnLockForm>
+    </tab>
+  </UIECMAdminControlPanel>
+  <UIUnLockForm>
     <label>
-      <name>Yol Düğümü</name>      
+      <name>Yol Düğümü</name>
       <permissions>İzinler</permissions>
       <PermissionButton>UI Unlock Form</PermissionButton>
     </label>
@@ -2306,49 +2317,50 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <permission-require>İzinleri seçmeniz gerekir.</permission-require>      
+      <permission-require>İzinleri seçmeniz gerekir.</permission-require>
     </msg>
   </UIUnLockForm>
   <UILockHolderList>
-  <header>
-  <name>Kullanıcı veya Gruplar</name>
-  <action>Eylem</action>
-  </header>
-  <tooltip>
-<DeleteLock>Grubu Sil</DeleteLock>
-  </tooltip>
-  <msg>
-  <can-not-delete-lock-holder>{0} Grubu silemezsiniz.</can-not-delete-lock-holder>
-  </msg>
+    <header>
+      <name>Kullanıcı veya Gruplar</name>
+      <action>Eylem</action>
+    </header>
+    <tooltip>
+      <DeleteLock>Grubu Sil</DeleteLock>
+    </tooltip>
+    <msg>
+      <can-not-delete-lock-holder>{0} Grubu silemezsiniz.</can-not-delete-lock-holder>
+    </msg>
   </UILockHolderList>
   <UILockNodeList>
-  <header>
-  <name>Başlık</name>
-  <hoderLock>Kilit Sahibi</hoderLock>
-  <action>Eylem</action>
-  </header>
-  <tooltip>
-<UnLock>Kilidini Aç</UnLock>
-  </tooltip>
-  <msg>
-  <access-denied-exception>Düğüm yolu {0} ile erişmek için izniniz yok veya bu düğümde silindi.</access-denied-exception>
-  </msg>
+    <header>
+      <name>Başlık</name>
+      <hoderLock>Kilit Sahibi</hoderLock>
+      <action>Eylem</action>
+    </header>
+    <tooltip>
+      <UnLock>Kilidini Aç</UnLock>
+    </tooltip>
+    <msg>
+      <access-denied-exception>Düğüm yolu {0} ile erişmek için izniniz yok veya bu düğümde silindi.
+      </access-denied-exception>
+    </msg>
   </UILockNodeList>
   <EditUnLockForm>
     <title>
-      <UIUnLockForm>Kilit  Yönet</UIUnLockForm>
+      <UIUnLockForm>Kilit Yönet</UIUnLockForm>
     </title>
-  </EditUnLockForm>  
+  </EditUnLockForm>
   <UITabPane>
     <action>
       <Close>#{word.close}</Close>
     </action>
     <title>
-    <UILockHolderContainer>Kilit  Yönet</UILockHolderContainer>
-    <UILockNodeList>Kilitli Düğüm</UILockNodeList>
+      <UILockHolderContainer>Kilit Yönet</UILockHolderContainer>
+      <UILockNodeList>Kilitli Düğüm</UILockNodeList>
     </title>
   </UITabPane>
-  
+
   <UIViewFormTabPane>
     <action>
       <AddTabForm>Sekme Ekle</AddTabForm>
@@ -2356,21 +2368,21 @@
       <BackViewForm>Geri</BackViewForm>
     </action>
   </UIViewFormTabPane>
-  
- <UITemplateForm>
-<tab>
-<label>
-<defaultSkin>CSS</defaultSkin>
-</label>
-</tab>
-</UITemplateForm>
- 
+
+  <UITemplateForm>
+    <tab>
+      <label>
+        <defaultSkin>CSS</defaultSkin>
+      </label>
+    </tab>
+  </UITemplateForm>
+
   <UITabPane>
     <title>
       <UISkinTab>CSS</UISkinTab>
     </title>
   </UITabPane>
-  
+
   <UISkinTab>
     <header>
       <name>Adı</name>
@@ -2389,7 +2401,7 @@
       </title>
     </action>
   </UISkinTab>
-  
+
   <SkinForm>
     <label>
       <UITemplateContent>SkinForm</UITemplateContent>
@@ -2404,56 +2416,57 @@
     <title>Giydirme Ekle/Düzenle</title>
   </SkinForm>
 
- <UITagManager>
-   <action>
-     <title>
-       <RemoveStyle>Kaldır</RemoveStyle>
-         <AddStyle>Stil Ekle</AddStyle>
-     </title>
-   </action>
-   <msg>
-     <confirm-delete>Bu etiket stili silmek istediğinizden emin misiniz?</confirm-delete>
-   </msg>
- </UITagManager>
+  <UITagManager>
+    <action>
+      <title>
+        <RemoveStyle>Kaldır</RemoveStyle>
+        <AddStyle>Stil Ekle</AddStyle>
+      </title>
+    </action>
+    <msg>
+      <confirm-delete>Bu etiket stili silmek istediğinizden emin misiniz?</confirm-delete>
+    </msg>
+  </UITagManager>
 
-<UITaxonomyTreeContainer>
-<action>
-<Cancel>#{word.close}</Cancel>
-</action>
-</UITaxonomyTreeContainer>
-<UITaxonomyTreeMainForm>
-<action>
-<NextViewPermission>Sonraki</NextViewPermission>
-<Reset>Reset</Reset>
-</action>
-</UITaxonomyTreeMainForm>
+  <UITaxonomyTreeContainer>
+    <action>
+      <Cancel>#{word.close}</Cancel>
+    </action>
+  </UITaxonomyTreeContainer>
+  <UITaxonomyTreeMainForm>
+    <action>
+      <NextViewPermission>Sonraki</NextViewPermission>
+      <Reset>Reset</Reset>
+    </action>
+  </UITaxonomyTreeMainForm>
 
-<UIPermissionTreeForm>
-<action>
-<Save>Save</Save>
-<Cancel>#{word.cancel}</Cancel>
-<Reset>Reset</Reset>
-<NextAddAction>Sonraki</NextAddAction>
-<Previous>Önceki</Previous>
-</action>
-</UIPermissionTreeForm>
+  <UIPermissionTreeForm>
+    <action>
+      <Save>Save</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <Reset>Reset</Reset>
+      <NextAddAction>Sonraki</NextAddAction>
+      <Previous>Önceki</Previous>
+    </action>
+  </UIPermissionTreeForm>
 
-<UIActionForm>
-<action>
-<PreviousViewPermission>Önceki</PreviousViewPermission>
-<NextViewTree>Sonraki</NextViewTree>
-</action>
-  <msg>
-    <xss-vulnerability-character>'{0}' Alanı XSS açığı karakterler içeriyor</xss-vulnerability-character>
-<xss-vulnerability-character-wo-label>Giridikleriniz XSS açığı karakterler içeriyor olabilir</xss-vulnerability-character-wo-label>
-  </msg>
-</UIActionForm>
+  <UIActionForm>
+    <action>
+      <PreviousViewPermission>Önceki</PreviousViewPermission>
+      <NextViewTree>Sonraki</NextViewTree>
+    </action>
+    <msg>
+      <xss-vulnerability-character>'{0}' Alanı XSS açığı karakterler içeriyor</xss-vulnerability-character>
+      <xss-vulnerability-character-wo-label>Giridikleriniz XSS açığı karakterler içeriyor olabilir
+      </xss-vulnerability-character-wo-label>
+    </msg>
+  </UIActionForm>
 
-<UITaxonomyTreeWorkingArea>
-<action>
-<Previous>Önceki</Previous>
-</action>
-</UITaxonomyTreeWorkingArea>
+  <UITaxonomyTreeWorkingArea>
+    <action>
+      <Previous>Önceki</Previous>
+    </action>
+  </UITaxonomyTreeWorkingArea>
 
   <UITabPane>
     <title>
@@ -2461,7 +2474,7 @@
       <UITagPermissionManager>Etiket İzni Yöneticisi</UITagPermissionManager>
     </title>
   </UITabPane>
-  
+
   <UITagPermissionInfo>
     <header>
       <usersOrGroups>Kullanıcı veya Grup</usersOrGroups>
@@ -2474,7 +2487,7 @@
     </action>
     <msg>
       <confirm-delete-permission>Bu izin silmek istediğinizden emin misiniz?</confirm-delete-permission>
-    </msg>   
+    </msg>
   </UITagPermissionInfo>
   <UITagPermissionForm>
     <title>İzin Ekle</title>
@@ -2487,32 +2500,32 @@
     </label>
     <msg>
       <userOrGroup-alreadyExists>Bu üyelik zaten var. Lütfen başka bir tane seçin.</userOrGroup-alreadyExists>
-    </msg>    
+    </msg>
   </UITagPermissionForm>
-  
+
   <UIGroupMemberSelector>
     <label>
       <selectGroup>Grup Seçin</selectGroup>
       <selectMembership>Üyelik Seçin</selectMembership>
     </label>
   </UIGroupMemberSelector>
-  
+
   <UIFolksonomyManager>
-  <msg>
+    <msg>
       <confirm-delete>Bu stili silmek istediğinizden emin misiniz?</confirm-delete>
-  </msg>
+    </msg>
     <action>
       <title>
         <AddStyle>Stil Ekle</AddStyle>
       </title>
     </action>
-  </UIFolksonomyManager>  
-<UIActionForm>
-  <title>
-  <ShowComponent>Pencere Aç</ShowComponent>
-  <removeReference>Kaldır</removeReference>
-  </title>
-  </UIActionForm> 
+  </UIFolksonomyManager>
+  <UIActionForm>
+    <title>
+      <ShowComponent>Pencere Aç</ShowComponent>
+      <removeReference>Kaldır</removeReference>
+    </title>
+  </UIActionForm>
   <NodeTypeNameValidator>
     <msg>
       <Invalid-char>Geçersiz karakterler. Lütfen başka bir değer girin.</Invalid-char>
@@ -2521,10 +2534,12 @@
   </NodeTypeNameValidator>
   <UIActionForm>
     <msg>
-      <constraint-violation-exception>Düğüm '{0}'  '{2}' çalışma alanındaki '{1}'  eklenemiyor.  İzinler veya kısıtlamalar koşulu ile ilgili bir sorun vardır.</constraint-violation-exception>
+      <constraint-violation-exception>Düğüm '{0}' '{2}' çalışma alanındaki '{1}' eklenemiyor. İzinler veya kısıtlamalar
+        koşulu ile ilgili bir sorun vardır.
+      </constraint-violation-exception>
     </msg>
   </UIActionForm>
-  
+
   <UIWorkspaceWizard>
     <msg>
       <name-not-allowed>Yasak İsim</name-not-allowed>
@@ -2532,35 +2547,37 @@
   </UIWorkspaceWizard>
   <UIRepositoryForm>
     <msg>
-      <not-complete-repository>The repository is being created. You need to wait a few minutes before creating another one.</not-complete-repository>
+      <not-complete-repository>The repository is being created. You need to wait a few minutes before creating another
+        one.
+      </not-complete-repository>
     </msg>
   </UIRepositoryForm>
-  
+
   <UIViewFormTabPane>
-  <label>
-  <addCategory>Kategori Ekle</addCategory>
-          <addLocalizationLink>Çeviri Ekle</addLocalizationLink>
-  </label>
+    <label>
+      <addCategory>Kategori Ekle</addCategory>
+      <addLocalizationLink>Çeviri Ekle</addLocalizationLink>
+    </label>
   </UIViewFormTabPane>
 
-<UIDriveForm>
-<label>
-<allowNodeTypesOnTree>Sol ağaç izin düğüm türü:</allowNodeTypesOnTree>
-</label>
-</UIDriveForm>
-<DriveInputSet>
-<title>
-<RemovePermission>Remove Permission</RemovePermission>
-<ChooseNodeType>Düğüm Türleri Seçin</ChooseNodeType>
-<RemoveNodeType>Kaldır</RemoveNodeType>
-</title>
-</DriveInputSet>
-<PopupNodeTypeSelector>
-<title>
-<UINodeTypeSelector>Düğüm Türleri Seçin</UINodeTypeSelector>
-<PopupNodeTypeSelector>Düğüm Türleri Seçin</PopupNodeTypeSelector>
-</title>
-</PopupNodeTypeSelector>
+  <UIDriveForm>
+    <label>
+      <allowNodeTypesOnTree>Sol ağaç izin düğüm türü:</allowNodeTypesOnTree>
+    </label>
+  </UIDriveForm>
+  <DriveInputSet>
+    <title>
+      <RemovePermission>Remove Permission</RemovePermission>
+      <ChooseNodeType>Düğüm Türleri Seçin</ChooseNodeType>
+      <RemoveNodeType>Kaldır</RemoveNodeType>
+    </title>
+  </DriveInputSet>
+  <PopupNodeTypeSelector>
+    <title>
+      <UINodeTypeSelector>Düğüm Türleri Seçin</UINodeTypeSelector>
+      <PopupNodeTypeSelector>Düğüm Türleri Seçin</PopupNodeTypeSelector>
+    </title>
+  </PopupNodeTypeSelector>
   <UINodeTypeSelector>
     <label>
       <selectedAllNodeTypes>Tüm Düğüm Türlerini Seçin</selectedAllNodeTypes>
@@ -2568,14 +2585,14 @@
   </UINodeTypeSelector>
   <UIScriptForm>
     <msg>
-      <PathNotFoundException>Bu scirpt '{0}' klasöründe zaten var.</PathNotFoundException>      
+      <PathNotFoundException>Bu scirpt '{0}' klasöründe zaten var.</PathNotFoundException>
     </msg>
   </UIScriptForm>
- <UINodeTypeList>
-   <msg>
-   <no-list>Aramanızla eşleşen hiçbir düğüm türü yoktur.</no-list>
-   </msg>
- </UINodeTypeList>
+  <UINodeTypeList>
+    <msg>
+      <no-list>Aramanızla eşleşen hiçbir düğüm türü yoktur.</no-list>
+    </msg>
+  </UINodeTypeList>
   <UIActionForm>
     <msg>
       <canotChangeActionId>Eylem Kimliği değiştirilemez.</canotChangeActionId>
@@ -2593,7 +2610,8 @@
   </UIPageIterator>
   <UILockNodeList>
     <msg>
-      <can-not-unlock-node>Bu düğümün kilidini açmak için izniniz yok. Yetkinizi almak için yöneticinize başvurun.</can-not-unlock-node>
+      <can-not-unlock-node>Bu düğümün kilidini açmak için izniniz yok. Yetkinizi almak için yöneticinize başvurun.
+      </can-not-unlock-node>
     </msg>
- </UILockNodeList>
+  </UILockNodeList>
 </bundle>

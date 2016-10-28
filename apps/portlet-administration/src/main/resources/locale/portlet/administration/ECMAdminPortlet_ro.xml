@@ -13,21 +13,21 @@
         <Repository>Depozit</Repository>
         <Advanced>Avansat</Advanced>
       </label>
-    </tab>    
-    <label>     
+    </tab>
+    <label>
       <UITaxonomyManagerTrees>Categorii</UITaxonomyManagerTrees>
       <UIMetadataManager>Metadate</UIMetadataManager>
       <UINamespaceManager>Spații de nume</UINamespaceManager>
       <UINodeTypeManager>Tipuri de module</UINodeTypeManager>
       <UITemplatesManager>Documente</UITemplatesManager>
-   <UICLVTemplatesManager>Listă</UICLVTemplatesManager>
+      <UICLVTemplatesManager>Listă</UICLVTemplatesManager>
       <UIViewManager>Vizualizări</UIViewManager>
       <UIDriveManager>Drive-uri</UIDriveManager>
       <UIQueriesManager>Interogări</UIQueriesManager>
       <UIActionManager>Acțiuni</UIActionManager>
       <UIScriptManager>Script-uri</UIScriptManager>
       <UIUnLockManager>Blocări</UIUnLockManager>
-      <UIFolksonomyManager>Tag-uri</UIFolksonomyManager>      
+      <UIFolksonomyManager>Tag-uri</UIFolksonomyManager>
     </label>
     <msg>
       <access-denied>Acces refuzat. Nu aveţi dreptul de a efectua această acţiune.</access-denied>
@@ -40,11 +40,13 @@
   -->
   <UITaxonomyWorkingArea>
     <msg>
-      <referential-integrity>Nu pot citi din fişierul sursă sau destinația categoriei este o sub-categorie.</referential-integrity>
+      <referential-integrity>Nu pot citi din fişierul sursă sau destinația categoriei este o sub-categorie.
+      </referential-integrity>
       <no-taxonomy-selected>Trebuie să copiaţi sau să tăiați cel puţin o categorie.</no-taxonomy-selected>
       <node-is-cutting>Nu puteți insera aici. Modulul de categoria "{0}" ar putea fi tăiat.</node-is-cutting>
       <can-not-paste>Nu există date în clipboard pentru a insera.</can-not-paste>
-      <reference-exception>Imposibil de şters această categorie, deoarece este folosită în prezent de un conţinut.</reference-exception>
+      <reference-exception>Imposibil de şters această categorie, deoarece este folosită în prezent de un conţinut.
+      </reference-exception>
       <path-error>Eroare la eliminarea acest modul de categorie.</path-error>
     </msg>
   </UITaxonomyWorkingArea>
@@ -60,7 +62,7 @@
       <remove>Ştergeţi</remove>
     </title>
   </UITaxonomyManager>
-  
+
   <!--
   ################################################################################
   #    org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyTreeContainer#
@@ -71,15 +73,19 @@
       <info>
         <UITaxonomyTreeMainForm>Specificaţi numele, spațiul de lucru și calea pentru categorie.</UITaxonomyTreeMainForm>
         <UIPermissionTreeManager>Setaţi drepturile pentru mulțimea de categorii.</UIPermissionTreeManager>
-        <UIActionTaxonomyManager>Adăugaţi o acţiune în mulțimea de categorii pentru a finaliza crearea sau actualizarea.</UIActionTaxonomyManager>
-        <UITaxonomyTreeCreateChild>Editați mulțimea clasificărilor, adăugând, copiind, decupând și selectând drepturile.</UITaxonomyTreeCreateChild>
+        <UIActionTaxonomyManager>Adăugaţi o acţiune în mulțimea de categorii pentru a finaliza crearea sau
+          actualizarea.
+        </UIActionTaxonomyManager>
+        <UITaxonomyTreeCreateChild>Editați mulțimea clasificărilor, adăugând, copiind, decupând și selectând
+          drepturile.
+        </UITaxonomyTreeCreateChild>
       </info>
     </tab>
     <msg>
       <not-exist-tree>Mulțimea de categorii nu există.</not-exist-tree>
     </msg>
   </UITaxonomyTreeContainer>
-  
+
   <!--
 ##########################################################################################
 #     org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyTreeMainForm          #
@@ -111,45 +117,45 @@
       <AddPath>Adaugă cale</AddPath>
     </title>
   </TaxonomyTreeHomePath>
-  
+
   <!--
 ##########################################################################################
 #     org.exoplatform.ecm.webui.component.admin.taxonomy.tree.info.UIPermissionTreeInfo  #
 ##########################################################################################
 -->
-<UIPermissionTreeInfo>
-<action>
-<title>
-<Delete>Ştergeţi</Delete>
-<Edit>Modifică</Edit>
-</title>
-</action>
-<header>
-<usersOrGroups>Utilizator sau grup</usersOrGroups>
-<read>Citește</read>
-<addNode>Adaugă modul</addNode>
-<setProperty>Setaţi proprietatea</setProperty>
-<remove>Elimină</remove>
-<action>Acțiune</action>
-</header>
-</UIPermissionTreeInfo>
+  <UIPermissionTreeInfo>
+    <action>
+      <title>
+        <Delete>Ştergeţi</Delete>
+        <Edit>Modifică</Edit>
+      </title>
+    </action>
+    <header>
+      <usersOrGroups>Utilizator sau grup</usersOrGroups>
+      <read>Citește</read>
+      <addNode>Adaugă modul</addNode>
+      <setProperty>Setaţi proprietatea</setProperty>
+      <remove>Elimină</remove>
+      <action>Acțiune</action>
+    </header>
+  </UIPermissionTreeInfo>
 
-<!--
-##########################################################################################
-#     org.exoplatform.ecm.webui.component.admin.taxonomy.tree.info.UIPermissionTreeForm  #
-##########################################################################################
--->
+  <!--
+  ##########################################################################################
+  #     org.exoplatform.ecm.webui.component.admin.taxonomy.tree.info.UIPermissionTreeForm  #
+  ##########################################################################################
+  -->
   <UIPermissionTreeForm>
     <msg>
       <have-not-any-permission>Vă rugăm să specificaţi cel puţin un drept pentru acest modul.</have-not-any-permission>
     </msg>
   </UIPermissionTreeForm>
 
-<!--
-################################################################################
-#     org.exoplatform.ecm.webui.component.admin.taxonomy.UIActionForm          #
-################################################################################
--->
+  <!--
+  ################################################################################
+  #     org.exoplatform.ecm.webui.component.admin.taxonomy.UIActionForm          #
+  ################################################################################
+  -->
 
   <UIActionForm>
     <title>Adăugaţi o acţiune în mulțimea de categorii</title>
@@ -157,7 +163,8 @@
       <Save>#{word.save}</Save>
     </action>
     <msg>
-      <name-not-allowed>Numele necompletat sau caracterele speciale nu sunt permise în numele acţiunii.</name-not-allowed>
+      <name-not-allowed>Numele necompletat sau caracterele speciale nu sunt permise în numele acţiunii.
+      </name-not-allowed>
       <path-invalid>Calea este invalidă.</path-invalid>
       <taxonomy-existed>Mulțimea de categorii există deja.</taxonomy-existed>
       <taxonomy-node-existed>Modulul de categorie există deja.</taxonomy-node-existed>
@@ -200,7 +207,7 @@
     <msg>
       <register-unsuccessfull>Domeniul de nume sau URI există deja.</register-unsuccessfull>
       <prefix-null>Vă rugăm să specificaţi prefixul domeniului de nume.</prefix-null>
-      <uri-null>Vă rugăm să specificaţi  URI-ul domeniului de nume.</uri-null>
+      <uri-null>Vă rugăm să specificaţi URI-ul domeniului de nume.</uri-null>
     </msg>
   </UINamespaceForm>
   <!--
@@ -250,7 +257,9 @@
     <msg>
       <confirm-delete>Sunteţi sigur că doriţi să ştergeţi aceste metadate?</confirm-delete>
       <delete-successful>Template-uri de "{0}" s-au şters cu succes.</delete-successful>
-      <path-not-found-exception>Aceste metadate au fost şterse sau modificate. Vă rugăm să faceţi clic pe butonul de reîmprospătare.</path-not-found-exception>
+      <path-not-found-exception>Aceste metadate au fost şterse sau modificate. Vă rugăm să faceţi clic pe butonul de
+        reîmprospătare.
+      </path-not-found-exception>
     </msg>
     <action>
       <Add>Adăuga metadate</Add>
@@ -425,13 +434,13 @@
       <action>Acțiune</action>
     </header>
   </UITreeList>
-  
+
   <UIRepositoryList>
     <titlebar>
       <label>Gestionare funcțiile principale ECM</label>
     </titlebar>
   </UIRepositoryList>
-  
+
   <!--
   ################################################################################
   #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeManager #
@@ -561,8 +570,11 @@
     </action>
     <msg>
       <register-successfully>Nod de tipul "{0}" a fost înregistrat cu succes.</register-successfully>
-      <supertype-is-madatory>Tipul superior este obligatoriu atunci când  înregistraţi un nou tip de nod. Vă rugăm să selectaţi cel puţin un tip superior.</supertype-is-madatory>
-      <register-failed>Înregistrare de tip nod a fost nereuşită. Fie există deja sau tip super este invalid.</register-failed>
+      <supertype-is-madatory>Tipul superior este obligatoriu atunci când înregistraţi un nou tip de nod. Vă rugăm să
+        selectaţi cel puţin un tip superior.
+      </supertype-is-madatory>
+      <register-failed>Înregistrare de tip nod a fost nereuşită. Fie există deja sau tip super este invalid.
+      </register-failed>
       <nodeType-name>Este necesar numele nodului.</nodeType-name>
       <fileName-invalid>Numele de fişier are unele caractere invalide.</fileName-invalid>
       <node-type-exists>Nodul de tip "{0}" există deja.</node-type-exists>
@@ -735,10 +747,10 @@
     <action>
       <AddAction>Adaugă tip acţiune</AddAction>
     </action>
-<msg>
- <confirm-delete>Sigur ștergeți acest tip de acţiune?</confirm-delete>
-<cannot-delete>Nu se poate elimina acest tip de acţiune pentru că sistemul încă o folosește.</cannot-delete>
-</msg>
+    <msg>
+      <confirm-delete>Sigur ștergeți acest tip de acţiune?</confirm-delete>
+      <cannot-delete>Nu se poate elimina acest tip de acţiune pentru că sistemul încă o folosește.</cannot-delete>
+    </msg>
   </UIActionTypeList>
   <!--
   ######################################################################################
@@ -791,11 +803,11 @@
       <UITemplateContainer>Documente</UITemplateContainer>
       <UIActionsTemplateContainer>Acţiuni</UIActionsTemplateContainer>
       <UIOthersTemplateContainer>Altele</UIOthersTemplateContainer>
-  <UIActionScriptContainer>Acțiune</UIActionScriptContainer>
-  <UIWidgetScriptContainer>Widget-uri</UIWidgetScriptContainer>
-<UIInterceptorScriptContainer>Interceptare</UIInterceptorScriptContainer>
+      <UIActionScriptContainer>Acțiune</UIActionScriptContainer>
+      <UIWidgetScriptContainer>Widget-uri</UIWidgetScriptContainer>
+      <UIInterceptorScriptContainer>Interceptare</UIInterceptorScriptContainer>
 
-<nodeTypeDefinition>Tip modul</nodeTypeDefinition>
+      <nodeTypeDefinition>Tip modul</nodeTypeDefinition>
       <propertyDefinition>Proprietate</propertyDefinition>
       <childNodeDefinition>Modul urmaș</childNodeDefinition>
       <SuperTypeTab>Tipuri superioare</SuperTypeTab>
@@ -810,11 +822,11 @@
   ######################################################################################
   -->
   <UIViewList>
-   <title>
-     <View>Afișare</View>
-     <EditInfo>Modifică</EditInfo>
-     <Delete>Ştergeţi</Delete>
-   </title>
+    <title>
+      <View>Afișare</View>
+      <EditInfo>Modifică</EditInfo>
+      <Delete>Ştergeţi</Delete>
+    </title>
     <header>
       <name>Nume</name>
       <permissions>Drepturi</permissions>
@@ -848,71 +860,72 @@
     </title>
   </EditPopup>
 
-<UITabList>
-                  <title>
-                    <Edit>Modifică</Edit>
-                    <Delete>Ştergeţi</Delete>
-                  </title>       
- <header>
-  <tabName>Fila</tabName>
-  <localizeButtons>Descriere</localizeButtons>
-<action>Acțiuni</action>
-</header>
-<action>
- <AddTab>Adaugă</AddTab>
-</action>
-<msg>
- <confirm-delete>Sigur doriţi să ştergeţi această filă?</confirm-delete>
-</msg>
-<grid>
- <msg>
-  <empty>Nu există nici o filă de afișat</empty>
- </msg>
-</grid>
-</UITabList>
+  <UITabList>
+    <title>
+      <Edit>Modifică</Edit>
+      <Delete>Ştergeţi</Delete>
+    </title>
+    <header>
+      <tabName>Fila</tabName>
+      <localizeButtons>Descriere</localizeButtons>
+      <action>Acțiuni</action>
+    </header>
+    <action>
+      <AddTab>Adaugă</AddTab>
+    </action>
+    <msg>
+      <confirm-delete>Sigur doriţi să ştergeţi această filă?</confirm-delete>
+    </msg>
+    <grid>
+      <msg>
+        <empty>Nu există nici o filă de afișat</empty>
+      </msg>
+    </grid>
+  </UITabList>
 
-<UIViewPermissionList>
- <title>Selectaţi proprietarul cu drepturi pe această afișare:</title>
-<label>
- <permission>{0} din {1}</permission>
-</label>
-<msg>
- <confirm-delete>Sigur ștergeți aceste drepturi?</confirm-delete>
-  <permission-cannot-empty>Drepturile de vizualizare sunt necesare și nu pot fi nedefinite.</permission-cannot-empty>
-</msg>
-</UIViewPermissionList>
+  <UIViewPermissionList>
+    <title>Selectaţi proprietarul cu drepturi pe această afișare:</title>
+    <label>
+      <permission>{0} din {1}</permission>
+    </label>
+    <msg>
+      <confirm-delete>Sigur ștergeți aceste drepturi?</confirm-delete>
+      <permission-cannot-empty>Drepturile de vizualizare sunt necesare și nu pot fi nedefinite.
+      </permission-cannot-empty>
+    </msg>
+  </UIViewPermissionList>
 
-<UIViewPermissionList>
-                         <title>
-                           <Delete>Ştergeţi</Delete>
-                         </title>
- <header>
-<friendlyPermission>Drepturi</friendlyPermission>
-     <action>Acțiune</action>
- </header>
-<action>
- <title>
-  <Delete>Ştergeţi</Delete>
- </title>
-</action>
-<grid>
- <msg>
-  <empty>Nu există drepturi pe această afișare</empty>
- </msg>
-</grid>
-</UIViewPermissionList>
+  <UIViewPermissionList>
+    <title>
+      <Delete>Ştergeţi</Delete>
+    </title>
+    <header>
+      <friendlyPermission>Drepturi</friendlyPermission>
+      <action>Acțiune</action>
+    </header>
+    <action>
+      <title>
+        <Delete>Ştergeţi</Delete>
+      </title>
+    </action>
+    <grid>
+      <msg>
+        <empty>Nu există drepturi pe această afișare</empty>
+      </msg>
+    </grid>
+  </UIViewPermissionList>
 
-<UIViewPermissionForm>
-<action>
- <Add>Adaugă</Add>
-</action>
-<label>
- <userOrGroup>Utilizator sau grup</userOrGroup>
-</label>
-<msg>
- <permission-exist>Dreptul "{0}" există deja în listă.</permission-exist>
-</msg>
-</UIViewPermissionForm>
+  <UIViewPermissionForm>
+    <action>
+      <Add>Adaugă</Add>
+    </action>
+    <label>
+      <userOrGroup>Utilizator sau grup</userOrGroup>
+    </label>
+    <msg>
+      <permission-exist>Dreptul "{0}" există deja în listă.</permission-exist>
+    </msg>
+  </UIViewPermissionForm>
 
   <!--
   ######################################################################################
@@ -927,15 +940,15 @@
     <msg>
       <view-name-invalid>Este necesar numele vizualizării.</view-name-invalid>
       <fileName-invalid>Numele vizualizării conține unele caractere invalide.</fileName-invalid>
-      <permission-not-empty>Vă rugăm să selectaţi drepturi pentru vizualizare.</permission-not-empty>      
+      <permission-not-empty>Vă rugăm să selectaţi drepturi pentru vizualizare.</permission-not-empty>
       <mustbe-add-tab>Vă rugăm să adăugaţi o filă.</mustbe-add-tab>
-<mustbe-add-permission>Vă rugăm să selectaţi drepturi pentru această vizualizare</mustbe-add-permission>
+      <mustbe-add-permission>Vă rugăm să selectaţi drepturi pentru această vizualizare</mustbe-add-permission>
       <view-exist>Numele există deja.</view-exist>
     </msg>
     <label>
       <viewName>Nume</viewName>
       <template>Şablon</template>
-<version>Restabilire versiune</version>
+      <version>Restabilire versiune</version>
       <enableVersion>Activare versiune</enableVersion>
       <hideExplorerPanel>Ascundere panou explorator în bara laterală</hideExplorerPanel>
     </label>
@@ -980,14 +993,14 @@
       <overloadThumbnail>Suprascrie mini-imaginea</overloadThumbnail>
       <manageHidden>Ascundere/Afişare conţinut</manageHidden>
       <comment>Comentariu</comment>
-      <vote>Vot</vote>  
+      <vote>Vot</vote>
       <addCategory>Adaugă categorie</addCategory>
       <addLocalizationLink>Adaugă traducere</addLocalizationLink>
       <publicationRequestApproval>Cere aprobare</publicationRequestApproval>
       <publicationApproveContent>Aprobă conţinutul</publicationApproveContent>
       <publicationPublish>Publică</publicationPublish>
-<contentNavigation>Navigare în conținut</contentNavigation>
-<addSymLink>Adaugă Symlink</addSymLink>
+      <contentNavigation>Navigare în conținut</contentNavigation>
+      <addSymLink>Adaugă Symlink</addSymLink>
       <checkIn>Check In</checkIn>
       <checkOut>Check Out</checkOut>
       <shareDocuments>Distribuie</shareDocuments>
@@ -996,8 +1009,8 @@
       <uploadNewVersion>Upload a new version</uploadNewVersion>
     </label>
     <action>
-      <Save>#{word.save}</Save>      
-      <Cancel>#{word.cancel}</Cancel>      
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
   </UITabForm>
   <UIPermissionForm>
@@ -1010,7 +1023,7 @@
       <label>
         <UITabContainer>Acțiune</UITabContainer>
         <UIViewForm>Afișare</UIViewForm>
-        <UIViewPermissionContainer>Drepturi</UIViewPermissionContainer>    
+        <UIViewPermissionContainer>Drepturi</UIViewPermissionContainer>
       </label>
     </tab>
     <action>
@@ -1027,19 +1040,19 @@
     </title>
   </PopupViewPermission>
 
-<TabForm_Popup>
- <title>
-  <UITabForm>Adăugare/Editare Tab</UITabForm>
- </title>
-</TabForm_Popup>
+  <TabForm_Popup>
+    <title>
+      <UITabForm>Adăugare/Editare Tab</UITabForm>
+    </title>
+  </TabForm_Popup>
 
-<tab_permission>
- <title>
-  <SelectUser>Selectaţi utilizator</SelectUser>
-<SelectMember>Selectaţi membru</SelectMember>
-<AddAny>Oricare</AddAny>
- </title>
-</tab_permission>
+  <tab_permission>
+    <title>
+      <SelectUser>Selectaţi utilizator</SelectUser>
+      <SelectMember>Selectaţi membru</SelectMember>
+      <AddAny>Oricare</AddAny>
+    </title>
+  </tab_permission>
   <!--
   ######################################################################################
   #             org.exoplatform.ecm.webui.component.admin.view.UIECMTemplateList   #
@@ -1200,7 +1213,7 @@
     <msg>
       <version-restored>Versiunea {0} a fost restaurată cu succes.</version-restored>
       <name-null>Vă rugăm să introduceţi numele scriptului.</name-null>
-      <name-exist>Numele scriptului '{0}'  există deja.</name-exist>
+      <name-exist>Numele scriptului '{0}' există deja.</name-exist>
       <fileName-invalid>Numele scriptului are unele caractere invalide.</fileName-invalid>
     </msg>
   </UIScriptForm>
@@ -1228,7 +1241,7 @@
   #             org.exoplatform.ecm.webui.component.admin.script.ecmScriptForm #
   ######################################################################################
   -->
- 
+
   <ecmScriptForm>
     <label>
       <selectVersion>Versiuni</selectVersion>
@@ -1260,7 +1273,7 @@
       <name-too-long>Denumirea categoriei trebuie să fie mai mică de 30 de caractere.</name-too-long>
     </msg>
   </UITaxonomyForm>
-    
+
   <EditTaxonomyTreePopup>
     <title>
       <UITaxonomyTreeContainer>Editează mulțimea de categorii</UITaxonomyTreeContainer>
@@ -1272,15 +1285,15 @@
       <UITaxonomyTreeContainer>Adaugă mulțime de categorii</UITaxonomyTreeContainer>
     </title>
   </AddTaxonomyTreePopup>
-  
+
   <TaxonomyPopupCreateChild>
     <title>
       <UITaxonomyTreeCreateChildForm>Editează mulțimea de categorii</UITaxonomyTreeCreateChildForm>
     </title>
   </TaxonomyPopupCreateChild>
 
-<UITaxonomyTreeCreateChildForm>
-  <action>
+  <UITaxonomyTreeCreateChildForm>
+    <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
     </action>
@@ -1294,41 +1307,41 @@
       <name-too-long>Denumirea categoriei nu trebuie să aibă mai mult de {0} de caractere.</name-too-long>
       <exist>Numele categoriei există deja.</exist>
     </msg>
-</UITaxonomyTreeCreateChildForm>
+  </UITaxonomyTreeCreateChildForm>
 
   <PopupComponent>
     <title>
       <UIOneNodePathSelector>Selectaţi calea</UIOneNodePathSelector>
     </title>
   </PopupComponent>
-  
+
   <TaxoPopupUserSelector>
-  <title>
+    <title>
       <TaxoTreeSelectUserOrGroup>Selectaţi utilizator</TaxoTreeSelectUserOrGroup>
       <UIPermissionTreeSelectUser>Selectaţi utilizator</UIPermissionTreeSelectUser>
     </title>
   </TaxoPopupUserSelector>
 
   <TaxoTreeSelectUserOrGroupPopup>
-  <title>
+    <title>
       <TaxoTreeSelectUserOrGroup>Selectaţi statutul de membru</TaxoTreeSelectUserOrGroup>
     </title>
   </TaxoTreeSelectUserOrGroupPopup>
-  
+
   <TaxoTreeAnyPermission>
     <label>
       <any>Orice drept</any>
       <anyPermission>TaxoTreeAnyPermission</anyPermission>
     </label>
   </TaxoTreeAnyPermission>
-  
+
   <TaxoTreeSelectUserOrGroup>
     <label>
       <selectGroup>Selectaţi grupul</selectGroup>
       <selectMembership>Selectaţi statutul de membru</selectMembership>
     </label>
   </TaxoTreeSelectUserOrGroup>
-  
+
   <!--
   ######################################################################################
   #             org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyTreeList #
@@ -1355,7 +1368,7 @@
       <is-in-trash>Acestă mulțime de categorii a fost mutată la coşul de gunoi.</is-in-trash>
     </msg>
   </UITaxonomyTreeList>
-  
+
   <!--
   ######################################################################################
   #             org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyTreeForm  #
@@ -1372,7 +1385,7 @@
       <homapath-emty>Introduceți calea</homapath-emty>
     </msg>
   </UITaxonomyTreeForm>
-  
+
   <UIPermissionTreeForm>
     <label>
       <UIPopupWindow>Selectaţi</UIPopupWindow>
@@ -1391,43 +1404,44 @@
     </action>
     <msg>
       <checkbox-require>Vă rugăm să selectaţi cel puţin un drept.</checkbox-require>
-      <userOrGroup-required>Vă rugăm să selectaţi un utilizator sau un grup înainte de a salva dreptul.</userOrGroup-required>
+      <userOrGroup-required>Vă rugăm să selectaţi un utilizator sau un grup înainte de a salva dreptul.
+      </userOrGroup-required>
       <not-change-permission>Nu aveţi dreptul de a adăuga o permisiune.</not-change-permission>
       <access-denied>Acces refuzat. Nu se poate elimina această permisiune.</access-denied>
     </msg>
   </UIPermissionTreeForm>
-  
+
   <PopupTaxonomyJCRBrowser>
-  <title>
+    <title>
       <UIOneNodePathSelector>Selectați calea Home</UIOneNodePathSelector>
     </title>
   </PopupTaxonomyJCRBrowser>
-  
+
   <PopupTaxonomyTreePermission>
     <title>
       <UIPermissionSelector>Selector de drepturi</UIPermissionSelector>
     </title>
-   </PopupTaxonomyTreePermission>
-   
-   <PopupDrivePermission>
+  </PopupTaxonomyTreePermission>
+
+  <PopupDrivePermission>
     <title>
       <AddDrivePermissionSelector>Adaugă drepturi</AddDrivePermissionSelector>
       <UIPermissionSelector>Selectaţi drepturile</UIPermissionSelector>
     </title>
   </PopupDrivePermission>
-  
+
   <UIPopupWindow>
     <title>
       <UIPermissionManager>Gestionare drepturi</UIPermissionManager>
     </title>
-   </UIPopupWindow>
+  </UIPopupWindow>
 
   <PopupUserSelector>
     <title>
       <UIUserContainer>Gestionare drepturi</UIUserContainer>
     </title>
-   </PopupUserSelector>
-   
+  </PopupUserSelector>
+
   <UIPermissionInfo>
     <action>
       <title>
@@ -1494,18 +1508,19 @@
     </action>
     <msg>
       <checkbox-require>Vă rugăm să selectaţi cel puţin un drept.</checkbox-require>
-      <userOrGroup-required>Vă rugăm să selectaţi un utilizator sau un grup înainte de a salva dreptul.</userOrGroup-required>
+      <userOrGroup-required>Vă rugăm să selectaţi un utilizator sau un grup înainte de a salva dreptul.
+      </userOrGroup-required>
       <not-change-permission>Nu aveţi dreptul de a adăuga o permisiune.</not-change-permission>
       <access-denied>Acces refuzat. Nu se poate elimina această permisiune.</access-denied>
     </msg>
   </UIPermissionForm>
-  
+
   <TaxonomyPopup>
     <title>
       <UITaxonomyForm>Adaugă categorie</UITaxonomyForm>
     </title>
   </TaxonomyPopup>
-  
+
   <UITaxonomyManager>
     <title>
       <permission>Gestionare drepturi</permission>
@@ -1529,11 +1544,11 @@
     <msg>
       <confirm-delete>Doriți să ștergeți?</confirm-delete>
       <access-denied>Acces refuzat. Nu aveţi dreptul de a utiliza această funcţie.</access-denied>
-      <editing-template>Acces refuzat. Nu puteţi şterge şi edita  simultan acest şablon.</editing-template>
+      <editing-template>Acces refuzat. Nu puteţi şterge şi edita simultan acest şablon.</editing-template>
       <template-not-exist>Şablonul pe care încercaţi să-l ştergeţi nu există.</template-not-exist>
     </msg>
   </UITemplateList>
-  
+
   <UIActionsTemplateList>
     <header>
       <name>Tip</name>
@@ -1547,11 +1562,11 @@
     <msg>
       <confirm-delete>Doriți să ștergeți?</confirm-delete>
       <access-denied>Acces refuzat. Nu aveţi dreptul de a utiliza această funcţie.</access-denied>
-      <editing-template>Acces refuzat. Nu puteţi şterge şi edita  simultan acest şablon.</editing-template>
+      <editing-template>Acces refuzat. Nu puteţi şterge şi edita simultan acest şablon.</editing-template>
       <template-not-exist>Şablonul pe care încercaţi să-l ştergeţi nu există.</template-not-exist>
     </msg>
   </UIActionsTemplateList>
-  
+
   <UIOthersTemplateList>
     <header>
       <name>Tip</name>
@@ -1565,24 +1580,24 @@
     <msg>
       <confirm-delete>Doriți să ștergeți?</confirm-delete>
       <access-denied>Acces refuzat. Nu aveţi dreptul de a utiliza această funcţie.</access-denied>
-      <editing-template>Acces refuzat. Nu puteţi şterge şi edita  simultan acest şablon.</editing-template>
+      <editing-template>Acces refuzat. Nu puteţi şterge şi edita simultan acest şablon.</editing-template>
       <template-not-exist>Şablonul pe care încercaţi să-l ştergeţi nu există.</template-not-exist>
     </msg>
   </UIOthersTemplateList>
 
- <!--
-  ######################################################################################
-  #             org.exoplatform.ecm.webui.component.admin.templates.clv package #
-  ######################################################################################
-  -->
+  <!--
+   ######################################################################################
+   #             org.exoplatform.ecm.webui.component.admin.templates.clv package #
+   ######################################################################################
+   -->
 
-<UITabPane>
- <title>
- <ContentTemplateContainer>Conţinut</ContentTemplateContainer>
-<CateTemplateContainer>Navigare</CateTemplateContainer>
-<PageTemplateContainer>Paginație</PageTemplateContainer>
- </title>
-</UITabPane>
+  <UITabPane>
+    <title>
+      <ContentTemplateContainer>Conţinut</ContentTemplateContainer>
+      <CateTemplateContainer>Navigare</CateTemplateContainer>
+      <PageTemplateContainer>Paginație</PageTemplateContainer>
+    </title>
+  </UITabPane>
 
   <UICLVTemplateList>
     <title>
@@ -1596,18 +1611,18 @@
     </header>
     <action>
       <AddTemplate>Adaugă şablon</AddTemplate>
-<Edit>Modifică</Edit>
-<Delete>Ştergeţi</Delete>
+      <Edit>Modifică</Edit>
+      <Delete>Ştergeţi</Delete>
     </action>
     <msg>
       <confirm-delete>Sunteţi sigur că doriţi să ştergeţi acest şablon?</confirm-delete>
       <access-denied>Acces refuzat. Nu aveţi dreptul de a utiliza această funcţie.</access-denied>
-      <editing-template>Acces refuzat. Nu puteţi şterge şi edita  simultan acest şablon.</editing-template>
+      <editing-template>Acces refuzat. Nu puteţi şterge şi edita simultan acest şablon.</editing-template>
       <template-not-exist>Şablonul pe care încercaţi să-l ştergeţi nu există.</template-not-exist>
     </msg>
   </UICLVTemplateList>
 
-<CateTemplateList>
+  <CateTemplateList>
     <header>
       <title>Nume</title>
       <action>Acțiune</action>
@@ -1619,12 +1634,12 @@
     </title>
     <action>
       <AddTemplate>Adaugă şablon</AddTemplate>
-<Edit>Modifică</Edit>
-<Delete>Ştergeţi</Delete>
+      <Edit>Modifică</Edit>
+      <Delete>Ştergeţi</Delete>
     </action>
-</CateTemplateList>
+  </CateTemplateList>
 
-<PageTemplateList>
+  <PageTemplateList>
     <header>
       <title>Nume</title>
       <action>Acțiune</action>
@@ -1632,103 +1647,103 @@
     </header>
     <action>
       <AddTemplate>Adaugă şablon</AddTemplate>
-<Edit>Modifică</Edit>
-<Delete>Ştergeţi</Delete>
+      <Edit>Modifică</Edit>
+      <Delete>Ştergeţi</Delete>
     </action>
-</PageTemplateList>
+  </PageTemplateList>
 
-<EditCLVTemplatePopup_ContentTemplateContainer>
- <title>
-   <UICLVTemplateForm_ContentTemplateContainer>Modificare listă șabloane</UICLVTemplateForm_ContentTemplateContainer>   
- </title>
-</EditCLVTemplatePopup_ContentTemplateContainer>
+  <EditCLVTemplatePopup_ContentTemplateContainer>
+    <title>
+      <UICLVTemplateForm_ContentTemplateContainer>Modificare listă șabloane</UICLVTemplateForm_ContentTemplateContainer>
+    </title>
+  </EditCLVTemplatePopup_ContentTemplateContainer>
 
-<EditCLVTemplatePopup_CateTemplateContainer>
- <title>
-   <UICLVTemplateForm_CateTemplateContainer>Modificare listă șabloane</UICLVTemplateForm_CateTemplateContainer>   
- </title>
-</EditCLVTemplatePopup_CateTemplateContainer>
+  <EditCLVTemplatePopup_CateTemplateContainer>
+    <title>
+      <UICLVTemplateForm_CateTemplateContainer>Modificare listă șabloane</UICLVTemplateForm_CateTemplateContainer>
+    </title>
+  </EditCLVTemplatePopup_CateTemplateContainer>
 
-<EditCLVTemplatePopup_PageTemplateContainer>
- <title>
-   <UICLVTemplateForm_PageTemplateContainer>Modificare listă șabloane</UICLVTemplateForm_PageTemplateContainer>   
- </title>
-</EditCLVTemplatePopup_PageTemplateContainer>
+  <EditCLVTemplatePopup_PageTemplateContainer>
+    <title>
+      <UICLVTemplateForm_PageTemplateContainer>Modificare listă șabloane</UICLVTemplateForm_PageTemplateContainer>
+    </title>
+  </EditCLVTemplatePopup_PageTemplateContainer>
 
-<CLVTemplatePopup_ContentTemplateContainer>
- <title>
-   <UICLVTemplateForm_ContentTemplateContainer>Adaugă listă șabloane</UICLVTemplateForm_ContentTemplateContainer>   
- </title>
-</CLVTemplatePopup_ContentTemplateContainer>
+  <CLVTemplatePopup_ContentTemplateContainer>
+    <title>
+      <UICLVTemplateForm_ContentTemplateContainer>Adaugă listă șabloane</UICLVTemplateForm_ContentTemplateContainer>
+    </title>
+  </CLVTemplatePopup_ContentTemplateContainer>
 
-<CLVTemplatePopup_CateTemplateContainer>
- <title>
-   <UICLVTemplateForm_CateTemplateContainer>Adaugă listă șabloane</UICLVTemplateForm_CateTemplateContainer>   
- </title>
-</CLVTemplatePopup_CateTemplateContainer>
+  <CLVTemplatePopup_CateTemplateContainer>
+    <title>
+      <UICLVTemplateForm_CateTemplateContainer>Adaugă listă șabloane</UICLVTemplateForm_CateTemplateContainer>
+    </title>
+  </CLVTemplatePopup_CateTemplateContainer>
 
-<CLVTemplatePopup_PageTemplateContainer>
- <title>
-   <UICLVTemplateForm_PageTemplateContainer>Adaugă listă șabloane</UICLVTemplateForm_PageTemplateContainer>   
- </title>
-</CLVTemplatePopup_PageTemplateContainer>
+  <CLVTemplatePopup_PageTemplateContainer>
+    <title>
+      <UICLVTemplateForm_PageTemplateContainer>Adaugă listă șabloane</UICLVTemplateForm_PageTemplateContainer>
+    </title>
+  </CLVTemplatePopup_PageTemplateContainer>
 
-<UICLVTemplateForm_ContentTemplateContainer>
- <action>
-  <Save>#{word.save}</Save>
-<Reset>Reset</Reset>
-<Cancel>#{word.cancel}</Cancel>
- </action>
-<label>
- <title>Nume</title>
-<template>Numele șablonului</template>
-<content>Conţinut</content>
-<type>Tipul șablonului</type>
-</label>
-</UICLVTemplateForm_ContentTemplateContainer>
+  <UICLVTemplateForm_ContentTemplateContainer>
+    <action>
+      <Save>#{word.save}</Save>
+      <Reset>Reset</Reset>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <label>
+      <title>Nume</title>
+      <template>Numele șablonului</template>
+      <content>Conţinut</content>
+      <type>Tipul șablonului</type>
+    </label>
+  </UICLVTemplateForm_ContentTemplateContainer>
 
-<UICLVTemplateForm_PageTemplateContainer>
- <action>
-  <Save>#{word.save}</Save>
-<Reset>Reset</Reset>
-<Cancel>#{word.cancel}</Cancel>
- </action>
-<label>
- <title>Nume</title>
-<template>Numele șablonului</template>
-<content>Conţinut</content>
-<type>Tipul șablonului</type>
-</label>
-</UICLVTemplateForm_PageTemplateContainer>
+  <UICLVTemplateForm_PageTemplateContainer>
+    <action>
+      <Save>#{word.save}</Save>
+      <Reset>Reset</Reset>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <label>
+      <title>Nume</title>
+      <template>Numele șablonului</template>
+      <content>Conţinut</content>
+      <type>Tipul șablonului</type>
+    </label>
+  </UICLVTemplateForm_PageTemplateContainer>
 
-<UICLVTemplateForm_CateTemplateContainer>
- <action>
-  <Save>#{word.save}</Save>
-<Reset>Reset</Reset>
-<Cancel>#{word.cancel}</Cancel>
- </action>
-<label>
- <title>Nume</title>
-<template>Numele șablonului</template>
-<content>Conţinut</content>
-<type>Tipul șablonului</type>
-</label>
-</UICLVTemplateForm_CateTemplateContainer>
-<UICLVTemplateForm>
-  <label>
-    <paginators>Paginație</paginators>
-<list>Conţinut</list>
-<navigation>Navigare</navigation>
-  </label>
-                          <action>
-                            <Save>#{word.save}</Save>
-                            <Reset>Reset</Reset> 
-                            <Cancel>#{word.cancel}</Cancel> 
-                          </action> 
-  <msg>
-  <template-existing>Acest nume de șablon există deja. Vă rugăm să selectaţi un alt unul.</template-existing>
-  </msg>
-</UICLVTemplateForm>
+  <UICLVTemplateForm_CateTemplateContainer>
+    <action>
+      <Save>#{word.save}</Save>
+      <Reset>Reset</Reset>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <label>
+      <title>Nume</title>
+      <template>Numele șablonului</template>
+      <content>Conţinut</content>
+      <type>Tipul șablonului</type>
+    </label>
+  </UICLVTemplateForm_CateTemplateContainer>
+  <UICLVTemplateForm>
+    <label>
+      <paginators>Paginație</paginators>
+      <list>Conţinut</list>
+      <navigation>Navigare</navigation>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Reset>Reset</Reset>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <template-existing>Acest nume de șablon există deja. Vă rugăm să selectaţi un alt unul.</template-existing>
+    </msg>
+  </UICLVTemplateForm>
 
   <!--
   ######################################################################################
@@ -1789,8 +1804,10 @@
   <TemplateContainerPopup>
     <title>
       <UIViewTemplate_UITemplateContainer><![CDATA[View & Edit Template]]></UIViewTemplate_UITemplateContainer>
-      <UIViewTemplate_UIActionsTemplateContainer><![CDATA[View & Edit Template]]></UIViewTemplate_UIActionsTemplateContainer>
-      <UIViewTemplate_UIOthersTemplateContainer><![CDATA[View & Edit Template]]></UIViewTemplate_UIOthersTemplateContainer>
+      <UIViewTemplate_UIActionsTemplateContainer>
+        <![CDATA[View & Edit Template]]></UIViewTemplate_UIActionsTemplateContainer>
+      <UIViewTemplate_UIOthersTemplateContainer>
+        <![CDATA[View & Edit Template]]></UIViewTemplate_UIOthersTemplateContainer>
     </title>
   </TemplateContainerPopup>
   <UITemplatesManager>
@@ -1972,11 +1989,11 @@
       <UIQueriesForm>Editare interogare</UIQueriesForm>
     </title>
   </EditQueryForm>
-<PermissionPopup>
-  <title>
-    <UIGroupMemberSelector>Selector de drepturi</UIGroupMemberSelector>
-  </title>
-</PermissionPopup>
+  <PermissionPopup>
+    <title>
+      <UIGroupMemberSelector>Selector de drepturi</UIGroupMemberSelector>
+    </title>
+  </PermissionPopup>
   <!--
   ######################################################################################
   #             org.exoplatform.ecm.webui.component.admin.folksonomy #
@@ -1986,7 +2003,7 @@
     <title>
       <EditStyle>Editare stil</EditStyle>
       <RemoveStyle>Elimină stil</RemoveStyle>
-    </title>    
+    </title>
   </UITagManager>
   <UITagStyleList>
     <header>
@@ -2015,9 +2032,12 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <range-validator>Intervalul este invalid. Formatul trebuie să fie: a..b, cu  a, b  numere întregi pozitive. Utilizaţi * în loc de b pentru a indica faptul că intervalul este nelimitat.</range-validator>
+      <range-validator>Intervalul este invalid. Formatul trebuie să fie: a..b, cu a, b numere întregi pozitive.
+        Utilizaţi * în loc de b pentru a indica faptul că intervalul este nelimitat.
+      </range-validator>
       <error-update>Actualizarea nu a reușit. Informaţia nu este validă.</error-update>
-      <item-not-existing>Imposibil de salvat modificările la această etichetă deoarece nu mai există în baza de date.</item-not-existing>
+      <item-not-existing>Imposibil de salvat modificările la această etichetă deoarece nu mai există în baza de date.
+      </item-not-existing>
     </msg>
   </UITagStyleForm>
   <FolksonomyPopup>
@@ -2057,9 +2077,9 @@
   ###################################################################################
   -->
   <PermissionValidator>
-  <msg>
+    <msg>
       <permission-path-invalid>Dreptul '{0}' este invalid.</permission-path-invalid>
-  </msg>
+    </msg>
   </PermissionValidator>
   <!--
   ###################################################################################
@@ -2128,9 +2148,9 @@
       <EditInfo>Modifică</EditInfo>
       <Delete>Ştergeţi</Delete>
     </title>
-<label>
-  <permission>{0} din {1}</permission>
-</label>
+    <label>
+      <permission>{0} din {1}</permission>
+    </label>
   </UIViewContainer>
   <ECMTemplate>
     <title>
@@ -2161,7 +2181,7 @@
       <selectMembership>Selectaţi statutul de membru</selectMembership>
     </label>
   </UIDrivePermissionSelector>
-  
+
   <UIPermissionSelector>
     <label>
       <selectGroup>Selectaţi grupul</selectGroup>
@@ -2169,30 +2189,30 @@
       <selectMembership>Selectaţi statutul de membru</selectMembership>
     </label>
   </UIPermissionSelector>
-  
+
   <UIAnyPermission>
     <label>
       <anyPermission>Orice drept</anyPermission>
     </label>
   </UIAnyPermission>
-  
+
   <UIMDriveAnyPermission>
     <label>
       <anyPermission>Orice drept</anyPermission>
     </label>
   </UIMDriveAnyPermission>
-  
+
   <UIQueriesAnyPermission>
     <label>
       <anyPermission>Orice drept</anyPermission>
     </label>
   </UIQueriesAnyPermission>
-  
+
   <MetadataPermission>
     <label>
       <selectGroup>Selectaţi grupul</selectGroup>
     </label>
-  </MetadataPermission>  
+  </MetadataPermission>
   <MetadataPermission>
     <label>
       <selectMembership>Selectaţi statutul de membru</selectMembership>
@@ -2215,7 +2235,7 @@
   </QueriesPermissionBrowse>
   <!--
   #########Since ECM 2.4##################
-  -->  
+  -->
   <UIViewFormTabPane>
     <label>
       <addSymLink>Adaugă Symlink</addSymLink>
@@ -2223,14 +2243,14 @@
   </UIViewFormTabPane>
   <!--
   #########Since ECM 2.5##################
-  --> 
-  
+  -->
+
   <UIDriveForm>
-<msg>
-  <permission-path-invalid>Dreptul '{0}' este invalid.</permission-path-invalid>
-  </msg>
+    <msg>
+      <permission-path-invalid>Dreptul '{0}' este invalid.</permission-path-invalid>
+    </msg>
   </UIDriveForm>
-  
+
   <UITaxonomyTreeMainForm>
     <msg>
       <homepath-emty>Este necesară adresa de origine.</homepath-emty>
@@ -2238,9 +2258,9 @@
     </msg>
   </UITaxonomyTreeMainForm>
   <UITaxonomyWorkingArea>
-  <msg>
-  <exist>Acest arbore de module există deja.</exist>
-  </msg>
+    <msg>
+      <exist>Acest arbore de module există deja.</exist>
+    </msg>
   </UITaxonomyWorkingArea>
 
   <PermissionTreeSelectUser>
@@ -2256,16 +2276,16 @@
       <userName>#{word.userName}</userName>
       <lastName>#{word.lastName}</lastName>
       <firstName>#{word.firstName}</firstName>
-    <email>#{word.email}</email>
+      <email>#{word.email}</email>
       <action>#{word.action}</action>
       <Add>#{word.Add}</Add>
       <Close>#{word.Close}</Close>
     </label>
   </PermissionTreeSelectUser>
-  
+
   <!--
   #########Since ECM 2.6 ##################
-  -->   
+  -->
   <DriveInputSet>
     <label>
       <nt_folder>Folder documente</nt_folder>
@@ -2274,30 +2294,30 @@
       <exo_jsFolder>Folder Javascript</exo_jsFolder>
       <exo_linkFolder>Folder Link</exo_linkFolder>
       <exo_webFolder>Folder conținut Web</exo_webFolder>
-   </label>
+    </label>
   </DriveInputSet>
   <UIPermissionTreeInfo>
-  <msg>
+    <msg>
       <confirm-delete-permission>Sigur ștergeți aceste drepturi?</confirm-delete-permission>
-      <no-permission-remove>Imposibil de eliminat proprietarul sau utilizatorul de sistem.</no-permission-remove>  
-  </msg>
-  </UIPermissionTreeInfo>  
+      <no-permission-remove>Imposibil de eliminat proprietarul sau utilizatorul de sistem.</no-permission-remove>
+    </msg>
+  </UIPermissionTreeInfo>
   <UITaxonomyTreeMainForm>
-<msg>
+    <msg>
       <no-right-target-path>Vă rugăm să selectaţi o altă cale pentru origine.</no-right-target-path>
-</msg>
-</UITaxonomyTreeMainForm>
+    </msg>
+  </UITaxonomyTreeMainForm>
 
-<UIECMAdminControlPanel>
+  <UIECMAdminControlPanel>
     <tab>
-      <label>        
+      <label>
         <ManageUnLock>Gestionare blocaje</ManageUnLock>
       </label>
-    </tab>        
-</UIECMAdminControlPanel>
-<UIUnLockForm>
+    </tab>
+  </UIECMAdminControlPanel>
+  <UIUnLockForm>
     <label>
-      <name>Modul căi</name>      
+      <name>Modul căi</name>
       <permissions>Drepturi</permissions>
       <PermissionButton>UI Unlock Form</PermissionButton>
     </label>
@@ -2306,49 +2326,50 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <permission-require>Trebuie să selectaţi permisiunile.</permission-require>      
+      <permission-require>Trebuie să selectaţi permisiunile.</permission-require>
     </msg>
   </UIUnLockForm>
   <UILockHolderList>
-  <header>
-  <name>Grupurile sau utilizatorii</name>
-  <action>Acțiune</action>
-  </header>
-  <tooltip>
-<DeleteLock>Șterge grup</DeleteLock>
-  </tooltip>
-  <msg>
-  <can-not-delete-lock-holder>Nu puteţi şterge grupul {0}.</can-not-delete-lock-holder>
-  </msg>
+    <header>
+      <name>Grupurile sau utilizatorii</name>
+      <action>Acțiune</action>
+    </header>
+    <tooltip>
+      <DeleteLock>Șterge grup</DeleteLock>
+    </tooltip>
+    <msg>
+      <can-not-delete-lock-holder>Nu puteţi şterge grupul {0}.</can-not-delete-lock-holder>
+    </msg>
   </UILockHolderList>
   <UILockNodeList>
-  <header>
-  <name>Titlu</name>
-  <hoderLock>Proprietar blocaj</hoderLock>
-  <action>Acțiune</action>
-  </header>
-  <tooltip>
-<UnLock>Deblocare</UnLock>
-  </tooltip>
-  <msg>
-  <access-denied-exception>Nu aveţi permisiunea de a accesa modulul cu calea {0}, sau acest modul este şters.</access-denied-exception>
-  </msg>
+    <header>
+      <name>Titlu</name>
+      <hoderLock>Proprietar blocaj</hoderLock>
+      <action>Acțiune</action>
+    </header>
+    <tooltip>
+      <UnLock>Deblocare</UnLock>
+    </tooltip>
+    <msg>
+      <access-denied-exception>Nu aveţi permisiunea de a accesa modulul cu calea {0}, sau acest modul este şters.
+      </access-denied-exception>
+    </msg>
   </UILockNodeList>
   <EditUnLockForm>
     <title>
       <UIUnLockForm>Gestionare blocaje</UIUnLockForm>
     </title>
-  </EditUnLockForm>  
+  </EditUnLockForm>
   <UITabPane>
     <action>
       <Close>#{word.close}</Close>
     </action>
     <title>
-    <UILockHolderContainer>Gestionare blocaje</UILockHolderContainer>
-    <UILockNodeList>Modul blocat</UILockNodeList>
+      <UILockHolderContainer>Gestionare blocaje</UILockHolderContainer>
+      <UILockNodeList>Modul blocat</UILockNodeList>
     </title>
   </UITabPane>
-  
+
   <UIViewFormTabPane>
     <action>
       <AddTabForm>Adaugă Tab</AddTabForm>
@@ -2356,21 +2377,21 @@
       <BackViewForm>Înapoi</BackViewForm>
     </action>
   </UIViewFormTabPane>
-  
- <UITemplateForm>
-<tab>
-<label>
-<defaultSkin>CSS</defaultSkin>
-</label>
-</tab>
-</UITemplateForm>
- 
+
+  <UITemplateForm>
+    <tab>
+      <label>
+        <defaultSkin>CSS</defaultSkin>
+      </label>
+    </tab>
+  </UITemplateForm>
+
   <UITabPane>
     <title>
       <UISkinTab>CSS</UISkinTab>
     </title>
   </UITabPane>
-  
+
   <UISkinTab>
     <header>
       <name>Nume</name>
@@ -2389,7 +2410,7 @@
       </title>
     </action>
   </UISkinTab>
-  
+
   <SkinForm>
     <label>
       <UITemplateContent>SkinForm</UITemplateContent>
@@ -2404,56 +2425,57 @@
     <title>Adăugare/Editare aspect</title>
   </SkinForm>
 
- <UITagManager>
-   <action>
-     <title>
-       <RemoveStyle>Elimină</RemoveStyle>
-         <AddStyle>Adaugă stil</AddStyle>
-     </title>
-   </action>
-   <msg>
-     <confirm-delete>Sunteţi sigur că doriţi să ştergeţi acest stil de etichetă?</confirm-delete>
-   </msg>
- </UITagManager>
+  <UITagManager>
+    <action>
+      <title>
+        <RemoveStyle>Elimină</RemoveStyle>
+        <AddStyle>Adaugă stil</AddStyle>
+      </title>
+    </action>
+    <msg>
+      <confirm-delete>Sunteţi sigur că doriţi să ştergeţi acest stil de etichetă?</confirm-delete>
+    </msg>
+  </UITagManager>
 
-<UITaxonomyTreeContainer>
-<action>
-<Cancel>#{word.close}</Cancel>
-</action>
-</UITaxonomyTreeContainer>
-<UITaxonomyTreeMainForm>
-<action>
-<NextViewPermission>Următorul</NextViewPermission>
-<Reset>Reset</Reset>
-</action>
-</UITaxonomyTreeMainForm>
+  <UITaxonomyTreeContainer>
+    <action>
+      <Cancel>#{word.close}</Cancel>
+    </action>
+  </UITaxonomyTreeContainer>
+  <UITaxonomyTreeMainForm>
+    <action>
+      <NextViewPermission>Următorul</NextViewPermission>
+      <Reset>Reset</Reset>
+    </action>
+  </UITaxonomyTreeMainForm>
 
-<UIPermissionTreeForm>
-<action>
-<Save>Save</Save>
-<Cancel>#{word.cancel}</Cancel>
-<Reset>Reset</Reset>
-<NextAddAction>Următorul</NextAddAction>
-<Previous>Anterior</Previous>
-</action>
-</UIPermissionTreeForm>
+  <UIPermissionTreeForm>
+    <action>
+      <Save>Save</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <Reset>Reset</Reset>
+      <NextAddAction>Următorul</NextAddAction>
+      <Previous>Anterior</Previous>
+    </action>
+  </UIPermissionTreeForm>
 
-<UIActionForm>
-<action>
-<PreviousViewPermission>Anterior</PreviousViewPermission>
-<NextViewTree>Următorul</NextViewTree>
-</action>
-  <msg>
-    <xss-vulnerability-character>Câmpul '{0}' conține caractere de vulnerabile XSS</xss-vulnerability-character>
-<xss-vulnerability-character-wo-label>Intrare poate conține caractere de vulnerabile XSS</xss-vulnerability-character-wo-label>
-  </msg>
-</UIActionForm>
+  <UIActionForm>
+    <action>
+      <PreviousViewPermission>Anterior</PreviousViewPermission>
+      <NextViewTree>Următorul</NextViewTree>
+    </action>
+    <msg>
+      <xss-vulnerability-character>Câmpul '{0}' conține caractere de vulnerabile XSS</xss-vulnerability-character>
+      <xss-vulnerability-character-wo-label>Intrare poate conține caractere de vulnerabile XSS
+      </xss-vulnerability-character-wo-label>
+    </msg>
+  </UIActionForm>
 
-<UITaxonomyTreeWorkingArea>
-<action>
-<Previous>Anterior</Previous>
-</action>
-</UITaxonomyTreeWorkingArea>
+  <UITaxonomyTreeWorkingArea>
+    <action>
+      <Previous>Anterior</Previous>
+    </action>
+  </UITaxonomyTreeWorkingArea>
 
   <UITabPane>
     <title>
@@ -2461,7 +2483,7 @@
       <UITagPermissionManager>Manager de drepturi etichete</UITagPermissionManager>
     </title>
   </UITabPane>
-  
+
   <UITagPermissionInfo>
     <header>
       <usersOrGroups>Utilizator sau grup</usersOrGroups>
@@ -2474,7 +2496,7 @@
     </action>
     <msg>
       <confirm-delete-permission>Sigur ștergeți aceste drepturi?</confirm-delete-permission>
-    </msg>   
+    </msg>
   </UITagPermissionInfo>
   <UITagPermissionForm>
     <title>Adaugă drepturi</title>
@@ -2487,32 +2509,32 @@
     </label>
     <msg>
       <userOrGroup-alreadyExists>Apartenența există deja. Vă rugăm să selectaţi alta.</userOrGroup-alreadyExists>
-    </msg>    
+    </msg>
   </UITagPermissionForm>
-  
+
   <UIGroupMemberSelector>
     <label>
       <selectGroup>Selectaţi grupul</selectGroup>
       <selectMembership>Selectați apartenența</selectMembership>
     </label>
   </UIGroupMemberSelector>
-  
+
   <UIFolksonomyManager>
-  <msg>
+    <msg>
       <confirm-delete>Sunteţi sigur că doriţi să ştergeţi acest stil?</confirm-delete>
-  </msg>
+    </msg>
     <action>
       <title>
         <AddStyle>Adaugă stil</AddStyle>
       </title>
     </action>
-  </UIFolksonomyManager>  
-<UIActionForm>
-  <title>
-  <ShowComponent>Deschide fereastră</ShowComponent>
-  <removeReference>Elimină</removeReference>
-  </title>
-  </UIActionForm> 
+  </UIFolksonomyManager>
+  <UIActionForm>
+    <title>
+      <ShowComponent>Deschide fereastră</ShowComponent>
+      <removeReference>Elimină</removeReference>
+    </title>
+  </UIActionForm>
   <NodeTypeNameValidator>
     <msg>
       <Invalid-char>Există unele caractere invalide. Vă rugăm să introduceţi o altă valoare.</Invalid-char>
@@ -2521,10 +2543,12 @@
   </NodeTypeNameValidator>
   <UIActionForm>
     <msg>
-      <constraint-violation-exception>Modulul '{0}' nu poate fi adăugat la '{1}' în spațiul de lucru '{2}'.  Există o problemă cu permisiunile.</constraint-violation-exception>
+      <constraint-violation-exception>Modulul '{0}' nu poate fi adăugat la '{1}' în spațiul de lucru '{2}'. Există o
+        problemă cu permisiunile.
+      </constraint-violation-exception>
     </msg>
   </UIActionForm>
-  
+
   <UIWorkspaceWizard>
     <msg>
       <name-not-allowed>Nume interzis</name-not-allowed>
@@ -2532,35 +2556,37 @@
   </UIWorkspaceWizard>
   <UIRepositoryForm>
     <msg>
-      <not-complete-repository>Spațiul de depozitare este creat. Aveţi nevoie să aşteptaţi câteva minute înainte de a crea un alt unul.</not-complete-repository>
+      <not-complete-repository>Spațiul de depozitare este creat. Aveţi nevoie să aşteptaţi câteva minute înainte de a
+        crea un alt unul.
+      </not-complete-repository>
     </msg>
   </UIRepositoryForm>
-  
+
   <UIViewFormTabPane>
-  <label>
-  <addCategory>Adaugă categorie</addCategory>
-          <addLocalizationLink>Adaugă traducere</addLocalizationLink>
-  </label>
+    <label>
+      <addCategory>Adaugă categorie</addCategory>
+      <addLocalizationLink>Adaugă traducere</addLocalizationLink>
+    </label>
   </UIViewFormTabPane>
 
-<UIDriveForm>
-<label>
-<allowNodeTypesOnTree>Tipuri de noduri permise pe ramura stângă:</allowNodeTypesOnTree>
-</label>
-</UIDriveForm>
-<DriveInputSet>
-<title>
-<RemovePermission>Remove Permission</RemovePermission>
-<ChooseNodeType>Selectaţi tipurile de module</ChooseNodeType>
-<RemoveNodeType>Elimină</RemoveNodeType>
-</title>
-</DriveInputSet>
-<PopupNodeTypeSelector>
-<title>
-<UINodeTypeSelector>Selectaţi tipurile de module</UINodeTypeSelector>
-<PopupNodeTypeSelector>Selectaţi tipurile de module</PopupNodeTypeSelector>
-</title>
-</PopupNodeTypeSelector>
+  <UIDriveForm>
+    <label>
+      <allowNodeTypesOnTree>Tipuri de noduri permise pe ramura stângă:</allowNodeTypesOnTree>
+    </label>
+  </UIDriveForm>
+  <DriveInputSet>
+    <title>
+      <RemovePermission>Remove Permission</RemovePermission>
+      <ChooseNodeType>Selectaţi tipurile de module</ChooseNodeType>
+      <RemoveNodeType>Elimină</RemoveNodeType>
+    </title>
+  </DriveInputSet>
+  <PopupNodeTypeSelector>
+    <title>
+      <UINodeTypeSelector>Selectaţi tipurile de module</UINodeTypeSelector>
+      <PopupNodeTypeSelector>Selectaţi tipurile de module</PopupNodeTypeSelector>
+    </title>
+  </PopupNodeTypeSelector>
   <UINodeTypeSelector>
     <label>
       <selectedAllNodeTypes>Selectaţi toate tipurile de module</selectedAllNodeTypes>
@@ -2568,14 +2594,14 @@
   </UINodeTypeSelector>
   <UIScriptForm>
     <msg>
-      <PathNotFoundException>Script-ul există deja în folderul '{0}'.</PathNotFoundException>      
+      <PathNotFoundException>Script-ul există deja în folderul '{0}'.</PathNotFoundException>
     </msg>
   </UIScriptForm>
- <UINodeTypeList>
-   <msg>
-   <no-list>Nici un modul nu se potrivește cu căutarea.</no-list>
-   </msg>
- </UINodeTypeList>
+  <UINodeTypeList>
+    <msg>
+      <no-list>Nici un modul nu se potrivește cu căutarea.</no-list>
+    </msg>
+  </UINodeTypeList>
   <UIActionForm>
     <msg>
       <canotChangeActionId>Nu se poate modifica ID-ul acțiunii.</canotChangeActionId>
@@ -2593,7 +2619,9 @@
   </UIPageIterator>
   <UILockNodeList>
     <msg>
-      <can-not-unlock-node>Nu aveţi permisiunea de a debloca acest modul. Vă rugăm să contactaţi administratorul pentru a obţine dreptul.</can-not-unlock-node>
+      <can-not-unlock-node>Nu aveţi permisiunea de a debloca acest modul. Vă rugăm să contactaţi administratorul pentru
+        a obţine dreptul.
+      </can-not-unlock-node>
     </msg>
- </UILockNodeList>
+  </UILockNodeList>
 </bundle>

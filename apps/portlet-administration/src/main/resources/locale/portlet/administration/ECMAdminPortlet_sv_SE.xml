@@ -13,21 +13,21 @@
         <Repository>Repository</Repository>
         <Advanced>Avancerad</Advanced>
       </label>
-    </tab>    
-    <label>     
+    </tab>
+    <label>
       <UITaxonomyManagerTrees>Kategorier</UITaxonomyManagerTrees>
       <UIMetadataManager>Metadata</UIMetadataManager>
       <UINamespaceManager>Namnplatser</UINamespaceManager>
       <UINodeTypeManager>Nodtyper</UINodeTypeManager>
       <UITemplatesManager>Dokument</UITemplatesManager>
-   <UICLVTemplatesManager>Listvy</UICLVTemplatesManager>
+      <UICLVTemplatesManager>Listvy</UICLVTemplatesManager>
       <UIViewManager>Vyer</UIViewManager>
       <UIDriveManager>Enheter</UIDriveManager>
       <UIQueriesManager>Frågor</UIQueriesManager>
       <UIActionManager>Åtgärder</UIActionManager>
       <UIScriptManager>Skript</UIScriptManager>
       <UIUnLockManager>Lås</UIUnLockManager>
-      <UIFolksonomyManager>Taggar</UIFolksonomyManager>      
+      <UIFolksonomyManager>Taggar</UIFolksonomyManager>
     </label>
     <msg>
       <access-denied>Åtkomst nekad. Du har inte behörighet till denna funktion.</access-denied>
@@ -40,11 +40,13 @@
   -->
   <UITaxonomyWorkingArea>
     <msg>
-      <referential-integrity>Går inte att läsa från filen eller att målkategorin är en underkategori.</referential-integrity>
+      <referential-integrity>Går inte att läsa från filen eller att målkategorin är en underkategori.
+      </referential-integrity>
       <no-taxonomy-selected>Du måste kopiera eller ta bort minst en kategori.</no-taxonomy-selected>
       <node-is-cutting>Du kan inte klistra in här. Kategorinoden {0} kan tas bort.</node-is-cutting>
       <can-not-paste>Det finns inga data i Urklipp.</can-not-paste>
-      <reference-exception>Cannot delete this category  because it is currently referenced by a content.</reference-exception>
+      <reference-exception>Cannot delete this category because it is currently referenced by a content.
+      </reference-exception>
       <path-error>Ett fel uppstod när du tog bort denna kategorinod.</path-error>
     </msg>
   </UITaxonomyWorkingArea>
@@ -60,7 +62,7 @@
       <remove>Ta bort</remove>
     </title>
   </UITaxonomyManager>
-  
+
   <!--
   ################################################################################
   #    org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyTreeContainer#
@@ -71,15 +73,18 @@
       <info>
         <UITaxonomyTreeMainForm>Ange kategorins namn, arbetsyta och hem.</UITaxonomyTreeMainForm>
         <UIPermissionTreeManager>Ställa in behörighet för kategoriträdet.</UIPermissionTreeManager>
-        <UIActionTaxonomyManager>Lägga till en åtgärd i kategoriträdet för att slutföra eller uppdatera.</UIActionTaxonomyManager>
-        <UITaxonomyTreeCreateChild>Redigera taxonomi trädet genom att lägga till, kopiera, klippa och välja behörigheter.</UITaxonomyTreeCreateChild>
+        <UIActionTaxonomyManager>Lägga till en åtgärd i kategoriträdet för att slutföra eller uppdatera.
+        </UIActionTaxonomyManager>
+        <UITaxonomyTreeCreateChild>Redigera taxonomi trädet genom att lägga till, kopiera, klippa och välja
+          behörigheter.
+        </UITaxonomyTreeCreateChild>
       </info>
     </tab>
     <msg>
       <not-exist-tree>Kategoriträdet finns inte.</not-exist-tree>
     </msg>
   </UITaxonomyTreeContainer>
-  
+
   <!--
 ##########################################################################################
 #     org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyTreeMainForm          #
@@ -111,45 +116,45 @@
       <AddPath>Lägga till sökväg</AddPath>
     </title>
   </TaxonomyTreeHomePath>
-  
+
   <!--
 ##########################################################################################
 #     org.exoplatform.ecm.webui.component.admin.taxonomy.tree.info.UIPermissionTreeInfo  #
 ##########################################################################################
 -->
-<UIPermissionTreeInfo>
-<action>
-<title>
-<Delete>Ta bort</Delete>
-<Edit>Editera</Edit>
-</title>
-</action>
-<header>
-<usersOrGroups>Användare eller grupp</usersOrGroups>
-<read>Läs</read>
-<addNode>Lägg till nod</addNode>
-<setProperty>Ange rättigheter</setProperty>
-<remove>Ta bort</remove>
-<action>Åtgärd</action>
-</header>
-</UIPermissionTreeInfo>
+  <UIPermissionTreeInfo>
+    <action>
+      <title>
+        <Delete>Ta bort</Delete>
+        <Edit>Editera</Edit>
+      </title>
+    </action>
+    <header>
+      <usersOrGroups>Användare eller grupp</usersOrGroups>
+      <read>Läs</read>
+      <addNode>Lägg till nod</addNode>
+      <setProperty>Ange rättigheter</setProperty>
+      <remove>Ta bort</remove>
+      <action>Åtgärd</action>
+    </header>
+  </UIPermissionTreeInfo>
 
-<!--
-##########################################################################################
-#     org.exoplatform.ecm.webui.component.admin.taxonomy.tree.info.UIPermissionTreeForm  #
-##########################################################################################
--->
+  <!--
+  ##########################################################################################
+  #     org.exoplatform.ecm.webui.component.admin.taxonomy.tree.info.UIPermissionTreeForm  #
+  ##########################################################################################
+  -->
   <UIPermissionTreeForm>
     <msg>
       <have-not-any-permission>Ange minst ett rättighet för den här noden.</have-not-any-permission>
     </msg>
   </UIPermissionTreeForm>
 
-<!--
-################################################################################
-#     org.exoplatform.ecm.webui.component.admin.taxonomy.UIActionForm          #
-################################################################################
--->
+  <!--
+  ################################################################################
+  #     org.exoplatform.ecm.webui.component.admin.taxonomy.UIActionForm          #
+  ################################################################################
+  -->
 
   <UIActionForm>
     <title>Lägga till en åtgärd i kategoriträdet</title>
@@ -250,7 +255,8 @@
     <msg>
       <confirm-delete>Är du säker på att du vill ta bort denna metadata?</confirm-delete>
       <delete-successful>Mallar för {0} raderades.</delete-successful>
-      <path-not-found-exception>Dessa metadata har tagits bort eller ändrats. Klicka på Uppdatera.</path-not-found-exception>
+      <path-not-found-exception>Dessa metadata har tagits bort eller ändrats. Klicka på Uppdatera.
+      </path-not-found-exception>
     </msg>
     <action>
       <Add>Lägg till Metadata</Add>
@@ -425,13 +431,13 @@
       <action>Åtgärd</action>
     </header>
   </UITreeList>
-  
+
   <UIRepositoryList>
     <titlebar>
       <label>Hantera ECM huvudfunktioner</label>
     </titlebar>
   </UIRepositoryList>
-  
+
   <!--
   ################################################################################
   #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeManager #
@@ -561,8 +567,10 @@
     </action>
     <msg>
       <register-successfully>Nodtypen {0} registrerades framgångsrikt.</register-successfully>
-      <supertype-is-madatory>Super typer är obligatoriska när du registrerar en ny nodtyp. Välj minst en super typ.</supertype-is-madatory>
-      <register-failed>Nodtyp registreringen misslyckade. Antingen finns den redan eller supertypen är ogiltig.</register-failed>
+      <supertype-is-madatory>Super typer är obligatoriska när du registrerar en ny nodtyp. Välj minst en super typ.
+      </supertype-is-madatory>
+      <register-failed>Nodtyp registreringen misslyckade. Antingen finns den redan eller supertypen är ogiltig.
+      </register-failed>
       <nodeType-name>Namnet på nodtypen krävs.</nodeType-name>
       <fileName-invalid>Filnamnet innehåller ogiltiga tecken.</fileName-invalid>
       <node-type-exists>Nodtypen {0} finns redan.</node-type-exists>
@@ -586,7 +594,7 @@
   </UIPropertyDefinitionForm>
   <UIChildNodeDefinitionForm>
     <msg>
-      <child-name>Nodnamnet  för undernod krävs.</child-name>
+      <child-name>Nodnamnet för undernod krävs.</child-name>
       <child-invalid>Nodnamnet för undernod innehåller ogiltiga tecken.</child-invalid>
       <default-node-type-not-found>Standard nodtypen finns inte.</default-node-type-not-found>
       <requiredPrimaryType>Den primära typen krävs.</requiredPrimaryType>
@@ -726,7 +734,7 @@
     <header>
       <name>Skript</name>
       <label>Namn</label>
-<action>Åtgärder</action>
+      <action>Åtgärder</action>
     </header>
     <title>
       <Edit>Redigera</Edit>
@@ -735,10 +743,11 @@
     <action>
       <AddAction>Lägg till åtgärdstyp</AddAction>
     </action>
-<msg>
- <confirm-delete>Är du säker på att du vill ta bort denna aktivitets typ?</confirm-delete>
-<cannot-delete>Du kan inte ta bort den här åtgärdstypen eftersom systemet använder det fortfarande.</cannot-delete>
-</msg>
+    <msg>
+      <confirm-delete>Är du säker på att du vill ta bort denna aktivitets typ?</confirm-delete>
+      <cannot-delete>Du kan inte ta bort den här åtgärdstypen eftersom systemet använder det fortfarande.
+      </cannot-delete>
+    </msg>
   </UIActionTypeList>
   <!--
   ######################################################################################
@@ -791,11 +800,11 @@
       <UITemplateContainer>Dokument</UITemplateContainer>
       <UIActionsTemplateContainer>Åtgärder</UIActionsTemplateContainer>
       <UIOthersTemplateContainer>Andra</UIOthersTemplateContainer>
-  <UIActionScriptContainer>Åtgärd</UIActionScriptContainer>
-  <UIWidgetScriptContainer>Widgets</UIWidgetScriptContainer>
-<UIInterceptorScriptContainer>Jaktplan</UIInterceptorScriptContainer>
+      <UIActionScriptContainer>Åtgärd</UIActionScriptContainer>
+      <UIWidgetScriptContainer>Widgets</UIWidgetScriptContainer>
+      <UIInterceptorScriptContainer>Jaktplan</UIInterceptorScriptContainer>
 
-<nodeTypeDefinition>Nodtyp</nodeTypeDefinition>
+      <nodeTypeDefinition>Nodtyp</nodeTypeDefinition>
       <propertyDefinition>Rättigheter</propertyDefinition>
       <childNodeDefinition>Underordnad nod</childNodeDefinition>
       <SuperTypeTab>Super typer</SuperTypeTab>
@@ -810,11 +819,11 @@
   ######################################################################################
   -->
   <UIViewList>
-   <title>
-     <View>Visa</View>
-     <EditInfo>Redigera</EditInfo>
-     <Delete>Ta bort</Delete>
-   </title>
+    <title>
+      <View>Visa</View>
+      <EditInfo>Redigera</EditInfo>
+      <Delete>Ta bort</Delete>
+    </title>
     <header>
       <name>Namn</name>
       <permissions>Behörighet</permissions>
@@ -848,71 +857,71 @@
     </title>
   </EditPopup>
 
-<UITabList>
-                  <title>
-                    <Edit>Redigera</Edit>
-                    <Delete>Ta bort</Delete>
-                  </title>       
- <header>
-  <tabName>Fliken</tabName>
-  <localizeButtons>Beskrivning</localizeButtons>
-<action>Åtgärder</action>
-</header>
-<action>
- <AddTab>Lägg till</AddTab>
-</action>
-<msg>
- <confirm-delete>Är du säker på att du vill ta bort den här fliken?</confirm-delete>
-</msg>
-<grid>
- <msg>
-  <empty>Det finns ingen flik på denna vy</empty>
- </msg>
-</grid>
-</UITabList>
+  <UITabList>
+    <title>
+      <Edit>Redigera</Edit>
+      <Delete>Ta bort</Delete>
+    </title>
+    <header>
+      <tabName>Fliken</tabName>
+      <localizeButtons>Beskrivning</localizeButtons>
+      <action>Åtgärder</action>
+    </header>
+    <action>
+      <AddTab>Lägg till</AddTab>
+    </action>
+    <msg>
+      <confirm-delete>Är du säker på att du vill ta bort den här fliken?</confirm-delete>
+    </msg>
+    <grid>
+      <msg>
+        <empty>Det finns ingen flik på denna vy</empty>
+      </msg>
+    </grid>
+  </UITabList>
 
-<UIViewPermissionList>
- <title>Välj ägare med behörigheter på den här vyn:</title>
-<label>
- <permission>{0} i {1}</permission>
-</label>
-<msg>
- <confirm-delete>Är du säker på att du vill ta bort denna rättighet?</confirm-delete>
-  <permission-cannot-empty>Behörighet att visa krävs och kan inte vara tomt.</permission-cannot-empty>
-</msg>
-</UIViewPermissionList>
+  <UIViewPermissionList>
+    <title>Välj ägare med behörigheter på den här vyn:</title>
+    <label>
+      <permission>{0} i {1}</permission>
+    </label>
+    <msg>
+      <confirm-delete>Är du säker på att du vill ta bort denna rättighet?</confirm-delete>
+      <permission-cannot-empty>Behörighet att visa krävs och kan inte vara tomt.</permission-cannot-empty>
+    </msg>
+  </UIViewPermissionList>
 
-<UIViewPermissionList>
-                         <title>
-                           <Delete>Ta bort</Delete>
-                         </title>
- <header>
-<friendlyPermission>Behörighet</friendlyPermission>
-     <action>Åtgärd</action>
- </header>
-<action>
- <title>
-  <Delete>Ta bort</Delete>
- </title>
-</action>
-<grid>
- <msg>
-  <empty>Det finns ingen behörighet på detta</empty>
- </msg>
-</grid>
-</UIViewPermissionList>
+  <UIViewPermissionList>
+    <title>
+      <Delete>Ta bort</Delete>
+    </title>
+    <header>
+      <friendlyPermission>Behörighet</friendlyPermission>
+      <action>Åtgärd</action>
+    </header>
+    <action>
+      <title>
+        <Delete>Ta bort</Delete>
+      </title>
+    </action>
+    <grid>
+      <msg>
+        <empty>Det finns ingen behörighet på detta</empty>
+      </msg>
+    </grid>
+  </UIViewPermissionList>
 
-<UIViewPermissionForm>
-<action>
- <Add>Lägg till</Add>
-</action>
-<label>
- <userOrGroup>Användare eller grupp</userOrGroup>
-</label>
-<msg>
- <permission-exist>Behörigheten {0} finns redan i listan.</permission-exist>
-</msg>
-</UIViewPermissionForm>
+  <UIViewPermissionForm>
+    <action>
+      <Add>Lägg till</Add>
+    </action>
+    <label>
+      <userOrGroup>Användare eller grupp</userOrGroup>
+    </label>
+    <msg>
+      <permission-exist>Behörigheten {0} finns redan i listan.</permission-exist>
+    </msg>
+  </UIViewPermissionForm>
 
   <!--
   ######################################################################################
@@ -927,15 +936,15 @@
     <msg>
       <view-name-invalid>Vynamnet krävs.</view-name-invalid>
       <fileName-invalid>Vy namnet innehåller ogiltiga tecken.</fileName-invalid>
-      <permission-not-empty>Välj en behörighet för vyn.</permission-not-empty>      
+      <permission-not-empty>Välj en behörighet för vyn.</permission-not-empty>
       <mustbe-add-tab>Lägg till en flik.</mustbe-add-tab>
-<mustbe-add-permission>Välj behörighet för den här vyn</mustbe-add-permission>
+      <mustbe-add-permission>Välj behörighet för den här vyn</mustbe-add-permission>
       <view-exist>Vy namnet finns redan.</view-exist>
     </msg>
     <label>
       <viewName>Namn</viewName>
       <template>Mall</template>
-<version>Återställa Version</version>
+      <version>Återställa Version</version>
       <enableVersion>Aktivera Version</enableVersion>
       <hideExplorerPanel>Dölja explorer panel i sidomenyn</hideExplorerPanel>
     </label>
@@ -980,14 +989,14 @@
       <overloadThumbnail>Lägg till miniatyrbild</overloadThumbnail>
       <manageHidden>Visa/Dölj innehåll</manageHidden>
       <comment>Kommentar</comment>
-      <vote>Rösta</vote>  
+      <vote>Rösta</vote>
       <addCategory>Lägg till kategori</addCategory>
       <addLocalizationLink>Lägg till översättning</addLocalizationLink>
       <publicationRequestApproval>Godkännande</publicationRequestApproval>
       <publicationApproveContent>Godkänn innehållet</publicationApproveContent>
       <publicationPublish>Publicera</publicationPublish>
-<contentNavigation>Navigering i innehåll</contentNavigation>
-<addSymLink>Lägg till Symlink</addSymLink>
+      <contentNavigation>Navigering i innehåll</contentNavigation>
+      <addSymLink>Lägg till Symlink</addSymLink>
       <checkIn>Check In</checkIn>
       <checkOut>Check Out</checkOut>
       <shareDocuments>Dela</shareDocuments>
@@ -996,8 +1005,8 @@
       <uploadNewVersion>Upload a new version</uploadNewVersion>
     </label>
     <action>
-      <Save>#{word.save}</Save>      
-      <Cancel>#{word.cancel}</Cancel>      
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
   </UITabForm>
   <UIPermissionForm>
@@ -1010,7 +1019,7 @@
       <label>
         <UITabContainer>Åtgärd</UITabContainer>
         <UIViewForm>Visa</UIViewForm>
-        <UIViewPermissionContainer>Rättigheter</UIViewPermissionContainer>    
+        <UIViewPermissionContainer>Rättigheter</UIViewPermissionContainer>
       </label>
     </tab>
     <action>
@@ -1027,19 +1036,19 @@
     </title>
   </PopupViewPermission>
 
-<TabForm_Popup>
- <title>
-  <UITabForm>Lägg till/redigera-fliken</UITabForm>
- </title>
-</TabForm_Popup>
+  <TabForm_Popup>
+    <title>
+      <UITabForm>Lägg till/redigera-fliken</UITabForm>
+    </title>
+  </TabForm_Popup>
 
-<tab_permission>
- <title>
-  <SelectUser>Välj användare</SelectUser>
-<SelectMember>Välj medlem</SelectMember>
-<AddAny>Någon</AddAny>
- </title>
-</tab_permission>
+  <tab_permission>
+    <title>
+      <SelectUser>Välj användare</SelectUser>
+      <SelectMember>Välj medlem</SelectMember>
+      <AddAny>Någon</AddAny>
+    </title>
+  </tab_permission>
   <!--
   ######################################################################################
   #             org.exoplatform.ecm.webui.component.admin.view.UIECMTemplateList   #
@@ -1228,7 +1237,7 @@
   #             org.exoplatform.ecm.webui.component.admin.script.ecmScriptForm #
   ######################################################################################
   -->
- 
+
   <ecmScriptForm>
     <label>
       <selectVersion>Versioner</selectVersion>
@@ -1260,7 +1269,7 @@
       <name-too-long>Kategorinamnet måste ha mindre än 30 tecken.</name-too-long>
     </msg>
   </UITaxonomyForm>
-    
+
   <EditTaxonomyTreePopup>
     <title>
       <UITaxonomyTreeContainer>Redigera kategoriträd</UITaxonomyTreeContainer>
@@ -1272,15 +1281,15 @@
       <UITaxonomyTreeContainer>Lägg till kategoriträd</UITaxonomyTreeContainer>
     </title>
   </AddTaxonomyTreePopup>
-  
+
   <TaxonomyPopupCreateChild>
     <title>
       <UITaxonomyTreeCreateChildForm>Redigera kategoriträd</UITaxonomyTreeCreateChildForm>
     </title>
   </TaxonomyPopupCreateChild>
 
-<UITaxonomyTreeCreateChildForm>
-  <action>
+  <UITaxonomyTreeCreateChildForm>
+    <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
     </action>
@@ -1294,41 +1303,41 @@
       <name-too-long>Kategorinamnet får inte ha mer än {0} tecken.</name-too-long>
       <exist>Kategorinamn finns redan.</exist>
     </msg>
-</UITaxonomyTreeCreateChildForm>
+  </UITaxonomyTreeCreateChildForm>
 
   <PopupComponent>
     <title>
       <UIOneNodePathSelector>Välj sökväg</UIOneNodePathSelector>
     </title>
   </PopupComponent>
-  
+
   <TaxoPopupUserSelector>
-  <title>
+    <title>
       <TaxoTreeSelectUserOrGroup>Välj användare</TaxoTreeSelectUserOrGroup>
       <UIPermissionTreeSelectUser>Välj användare</UIPermissionTreeSelectUser>
     </title>
   </TaxoPopupUserSelector>
 
   <TaxoTreeSelectUserOrGroupPopup>
-  <title>
+    <title>
       <TaxoTreeSelectUserOrGroup>Välj medlemskap</TaxoTreeSelectUserOrGroup>
     </title>
   </TaxoTreeSelectUserOrGroupPopup>
-  
+
   <TaxoTreeAnyPermission>
     <label>
       <any>Alla tillstånd</any>
       <anyPermission>TaxoTreeAnyPermission</anyPermission>
     </label>
   </TaxoTreeAnyPermission>
-  
+
   <TaxoTreeSelectUserOrGroup>
     <label>
       <selectGroup>Välj grupp</selectGroup>
       <selectMembership>Välj medlemskap</selectMembership>
     </label>
   </TaxoTreeSelectUserOrGroup>
-  
+
   <!--
   ######################################################################################
   #             org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyTreeList #
@@ -1348,14 +1357,14 @@
       <EditTaxonomyTree>Redigera kategoriträd</EditTaxonomyTree>
       <Delete>Ta bort kategoriträd</Delete>
     </tooltip>
-    <title>Bläddra  i kategoriträdet</title>
+    <title>Bläddra i kategoriträdet</title>
     <msg>
       <no-list>Ingen kategori träd har skapats.</no-list>
       <confirm-delete>Är du säker på att du vill ta bort kategoriträdet?</confirm-delete>
       <is-in-trash>Detta kategoriträd har flyttats till papperskorgen.</is-in-trash>
     </msg>
   </UITaxonomyTreeList>
-  
+
   <!--
   ######################################################################################
   #             org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyTreeForm  #
@@ -1372,7 +1381,7 @@
       <homapath-emty>sökväg för Indata</homapath-emty>
     </msg>
   </UITaxonomyTreeForm>
-  
+
   <UIPermissionTreeForm>
     <label>
       <UIPopupWindow>Välj</UIPopupWindow>
@@ -1396,38 +1405,38 @@
       <access-denied>Åtkomst nekad. Du kan inte ta bort denna behörighet.</access-denied>
     </msg>
   </UIPermissionTreeForm>
-  
+
   <PopupTaxonomyJCRBrowser>
-  <title>
+    <title>
       <UIOneNodePathSelector>Välj hem väg</UIOneNodePathSelector>
     </title>
   </PopupTaxonomyJCRBrowser>
-  
+
   <PopupTaxonomyTreePermission>
     <title>
       <UIPermissionSelector>Väljare för behörighet</UIPermissionSelector>
     </title>
-   </PopupTaxonomyTreePermission>
-   
-   <PopupDrivePermission>
+  </PopupTaxonomyTreePermission>
+
+  <PopupDrivePermission>
     <title>
       <AddDrivePermissionSelector>Lägg till behörighet</AddDrivePermissionSelector>
       <UIPermissionSelector>Välj behörighet</UIPermissionSelector>
     </title>
   </PopupDrivePermission>
-  
+
   <UIPopupWindow>
     <title>
       <UIPermissionManager>Hantering av behörighet</UIPermissionManager>
     </title>
-   </UIPopupWindow>
+  </UIPopupWindow>
 
   <PopupUserSelector>
     <title>
       <UIUserContainer>Hantering av behörighet</UIUserContainer>
     </title>
-   </PopupUserSelector>
-   
+  </PopupUserSelector>
+
   <UIPermissionInfo>
     <action>
       <title>
@@ -1499,13 +1508,13 @@
       <access-denied>Åtkomst nekad. Du kan inte ta bort denna behörighet.</access-denied>
     </msg>
   </UIPermissionForm>
-  
+
   <TaxonomyPopup>
     <title>
       <UITaxonomyForm>Lägg till kategori</UITaxonomyForm>
     </title>
   </TaxonomyPopup>
-  
+
   <UITaxonomyManager>
     <title>
       <permission>Hantering av behörighet</permission>
@@ -1533,7 +1542,7 @@
       <template-not-exist>Den mall som du försöker ta bort finns inte.</template-not-exist>
     </msg>
   </UITemplateList>
-  
+
   <UIActionsTemplateList>
     <header>
       <name>Typ</name>
@@ -1551,7 +1560,7 @@
       <template-not-exist>Den mall som du försöker ta bort finns inte.</template-not-exist>
     </msg>
   </UIActionsTemplateList>
-  
+
   <UIOthersTemplateList>
     <header>
       <name>Typ</name>
@@ -1570,19 +1579,19 @@
     </msg>
   </UIOthersTemplateList>
 
- <!--
-  ######################################################################################
-  #             org.exoplatform.ecm.webui.component.admin.templates.clv package #
-  ######################################################################################
-  -->
+  <!--
+   ######################################################################################
+   #             org.exoplatform.ecm.webui.component.admin.templates.clv package #
+   ######################################################################################
+   -->
 
-<UITabPane>
- <title>
- <ContentTemplateContainer>Innehåll</ContentTemplateContainer>
-<CateTemplateContainer>Navigering</CateTemplateContainer>
-<PageTemplateContainer>Sidnumrering</PageTemplateContainer>
- </title>
-</UITabPane>
+  <UITabPane>
+    <title>
+      <ContentTemplateContainer>Innehåll</ContentTemplateContainer>
+      <CateTemplateContainer>Navigering</CateTemplateContainer>
+      <PageTemplateContainer>Sidnumrering</PageTemplateContainer>
+    </title>
+  </UITabPane>
 
   <UICLVTemplateList>
     <title>
@@ -1596,8 +1605,8 @@
     </header>
     <action>
       <AddTemplate>Lägg till mall</AddTemplate>
-<Edit>Redigera</Edit>
-<Delete>Ta bort</Delete>
+      <Edit>Redigera</Edit>
+      <Delete>Ta bort</Delete>
     </action>
     <msg>
       <confirm-delete>Är det säkert att du vill ta bort mallen?</confirm-delete>
@@ -1607,7 +1616,7 @@
     </msg>
   </UICLVTemplateList>
 
-<CateTemplateList>
+  <CateTemplateList>
     <header>
       <title>Namn</title>
       <action>Åtgärd</action>
@@ -1619,12 +1628,12 @@
     </title>
     <action>
       <AddTemplate>Lägg till mall</AddTemplate>
-<Edit>Redigera</Edit>
-<Delete>Ta bort</Delete>
+      <Edit>Redigera</Edit>
+      <Delete>Ta bort</Delete>
     </action>
-</CateTemplateList>
+  </CateTemplateList>
 
-<PageTemplateList>
+  <PageTemplateList>
     <header>
       <title>Namn</title>
       <action>Åtgärd</action>
@@ -1632,103 +1641,103 @@
     </header>
     <action>
       <AddTemplate>Lägg till mall</AddTemplate>
-<Edit>Redigera</Edit>
-<Delete>Ta bort</Delete>
+      <Edit>Redigera</Edit>
+      <Delete>Ta bort</Delete>
     </action>
-</PageTemplateList>
+  </PageTemplateList>
 
-<EditCLVTemplatePopup_ContentTemplateContainer>
- <title>
-   <UICLVTemplateForm_ContentTemplateContainer>Redigera lista mall</UICLVTemplateForm_ContentTemplateContainer>   
- </title>
-</EditCLVTemplatePopup_ContentTemplateContainer>
+  <EditCLVTemplatePopup_ContentTemplateContainer>
+    <title>
+      <UICLVTemplateForm_ContentTemplateContainer>Redigera lista mall</UICLVTemplateForm_ContentTemplateContainer>
+    </title>
+  </EditCLVTemplatePopup_ContentTemplateContainer>
 
-<EditCLVTemplatePopup_CateTemplateContainer>
- <title>
-   <UICLVTemplateForm_CateTemplateContainer>Redigera lista mall</UICLVTemplateForm_CateTemplateContainer>   
- </title>
-</EditCLVTemplatePopup_CateTemplateContainer>
+  <EditCLVTemplatePopup_CateTemplateContainer>
+    <title>
+      <UICLVTemplateForm_CateTemplateContainer>Redigera lista mall</UICLVTemplateForm_CateTemplateContainer>
+    </title>
+  </EditCLVTemplatePopup_CateTemplateContainer>
 
-<EditCLVTemplatePopup_PageTemplateContainer>
- <title>
-   <UICLVTemplateForm_PageTemplateContainer>Redigera mall lista</UICLVTemplateForm_PageTemplateContainer>   
- </title>
-</EditCLVTemplatePopup_PageTemplateContainer>
+  <EditCLVTemplatePopup_PageTemplateContainer>
+    <title>
+      <UICLVTemplateForm_PageTemplateContainer>Redigera mall lista</UICLVTemplateForm_PageTemplateContainer>
+    </title>
+  </EditCLVTemplatePopup_PageTemplateContainer>
 
-<CLVTemplatePopup_ContentTemplateContainer>
- <title>
-   <UICLVTemplateForm_ContentTemplateContainer>Lägg till lista mallar</UICLVTemplateForm_ContentTemplateContainer>   
- </title>
-</CLVTemplatePopup_ContentTemplateContainer>
+  <CLVTemplatePopup_ContentTemplateContainer>
+    <title>
+      <UICLVTemplateForm_ContentTemplateContainer>Lägg till lista mallar</UICLVTemplateForm_ContentTemplateContainer>
+    </title>
+  </CLVTemplatePopup_ContentTemplateContainer>
 
-<CLVTemplatePopup_CateTemplateContainer>
- <title>
-   <UICLVTemplateForm_CateTemplateContainer>Lägg till lista mallar</UICLVTemplateForm_CateTemplateContainer>   
- </title>
-</CLVTemplatePopup_CateTemplateContainer>
+  <CLVTemplatePopup_CateTemplateContainer>
+    <title>
+      <UICLVTemplateForm_CateTemplateContainer>Lägg till lista mallar</UICLVTemplateForm_CateTemplateContainer>
+    </title>
+  </CLVTemplatePopup_CateTemplateContainer>
 
-<CLVTemplatePopup_PageTemplateContainer>
- <title>
-   <UICLVTemplateForm_PageTemplateContainer>Lägg till listmallen</UICLVTemplateForm_PageTemplateContainer>   
- </title>
-</CLVTemplatePopup_PageTemplateContainer>
+  <CLVTemplatePopup_PageTemplateContainer>
+    <title>
+      <UICLVTemplateForm_PageTemplateContainer>Lägg till listmallen</UICLVTemplateForm_PageTemplateContainer>
+    </title>
+  </CLVTemplatePopup_PageTemplateContainer>
 
-<UICLVTemplateForm_ContentTemplateContainer>
- <action>
-  <Save>#{word.save}</Save>
-<Reset>Återställ</Reset>
-<Cancel>#{word.cancel}</Cancel>
- </action>
-<label>
- <title>Namn</title>
-<template>Mallnamn</template>
-<content>Innehåll</content>
-<type>Typ av mall</type>
-</label>
-</UICLVTemplateForm_ContentTemplateContainer>
+  <UICLVTemplateForm_ContentTemplateContainer>
+    <action>
+      <Save>#{word.save}</Save>
+      <Reset>Återställ</Reset>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <label>
+      <title>Namn</title>
+      <template>Mallnamn</template>
+      <content>Innehåll</content>
+      <type>Typ av mall</type>
+    </label>
+  </UICLVTemplateForm_ContentTemplateContainer>
 
-<UICLVTemplateForm_PageTemplateContainer>
- <action>
-  <Save>#{word.save}</Save>
-<Reset>Återställ</Reset>
-<Cancel>#{word.cancel}</Cancel>
- </action>
-<label>
- <title>Namn</title>
-<template>Mallnamn</template>
-<content>Innehåll</content>
-<type>Typ av mall</type>
-</label>
-</UICLVTemplateForm_PageTemplateContainer>
+  <UICLVTemplateForm_PageTemplateContainer>
+    <action>
+      <Save>#{word.save}</Save>
+      <Reset>Återställ</Reset>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <label>
+      <title>Namn</title>
+      <template>Mallnamn</template>
+      <content>Innehåll</content>
+      <type>Typ av mall</type>
+    </label>
+  </UICLVTemplateForm_PageTemplateContainer>
 
-<UICLVTemplateForm_CateTemplateContainer>
- <action>
-  <Save>#{word.save}</Save>
-<Reset>Återställ</Reset>
-<Cancel>#{word.cancel}</Cancel>
- </action>
-<label>
- <title>Namn</title>
-<template>Mallnamn</template>
-<content>Innehåll</content>
-<type>Typ av mall</type>
-</label>
-</UICLVTemplateForm_CateTemplateContainer>
-<UICLVTemplateForm>
-  <label>
-    <paginators>Sidnumrering</paginators>
-<list>Innehåll</list>
-<navigation>Navigering</navigation>
-  </label>
-                          <action>
-                            <Save>#{word.save}</Save>
-                            <Reset>Återställ</Reset> 
-                            <Cancel>#{word.cancel}</Cancel> 
-                          </action> 
-  <msg>
-  <template-existing>Detta namn finns redan. Välj en annan.</template-existing>
-  </msg>
-</UICLVTemplateForm>
+  <UICLVTemplateForm_CateTemplateContainer>
+    <action>
+      <Save>#{word.save}</Save>
+      <Reset>Återställ</Reset>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <label>
+      <title>Namn</title>
+      <template>Mallnamn</template>
+      <content>Innehåll</content>
+      <type>Typ av mall</type>
+    </label>
+  </UICLVTemplateForm_CateTemplateContainer>
+  <UICLVTemplateForm>
+    <label>
+      <paginators>Sidnumrering</paginators>
+      <list>Innehåll</list>
+      <navigation>Navigering</navigation>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Reset>Återställ</Reset>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <template-existing>Detta namn finns redan. Välj en annan.</template-existing>
+    </msg>
+  </UICLVTemplateForm>
 
   <!--
   ######################################################################################
@@ -1789,8 +1798,10 @@
   <TemplateContainerPopup>
     <title>
       <UIViewTemplate_UITemplateContainer><![CDATA[View & Edit Template]]></UIViewTemplate_UITemplateContainer>
-      <UIViewTemplate_UIActionsTemplateContainer><![CDATA[View & Edit Template]]></UIViewTemplate_UIActionsTemplateContainer>
-      <UIViewTemplate_UIOthersTemplateContainer><![CDATA[View & Edit Template]]></UIViewTemplate_UIOthersTemplateContainer>
+      <UIViewTemplate_UIActionsTemplateContainer>
+        <![CDATA[View & Edit Template]]></UIViewTemplate_UIActionsTemplateContainer>
+      <UIViewTemplate_UIOthersTemplateContainer>
+        <![CDATA[View & Edit Template]]></UIViewTemplate_UIOthersTemplateContainer>
     </title>
   </TemplateContainerPopup>
   <UITemplatesManager>
@@ -1835,7 +1846,7 @@
     </header>
     <msg>
       <undeletable>Du kan inte ta bort {0} eftersom det är standarden.</undeletable>
-      <confirm-delete>Är du säker på att  du vill ta bort den här dialogrutan?</confirm-delete>
+      <confirm-delete>Är du säker på att du vill ta bort den här dialogrutan?</confirm-delete>
     </msg>
     <action>
       <title>
@@ -1972,11 +1983,11 @@
       <UIQueriesForm>Redigera fråga</UIQueriesForm>
     </title>
   </EditQueryForm>
-<PermissionPopup>
-  <title>
-    <UIGroupMemberSelector>Väljare för behörighet</UIGroupMemberSelector>
-  </title>
-</PermissionPopup>
+  <PermissionPopup>
+    <title>
+      <UIGroupMemberSelector>Väljare för behörighet</UIGroupMemberSelector>
+    </title>
+  </PermissionPopup>
   <!--
   ######################################################################################
   #             org.exoplatform.ecm.webui.component.admin.folksonomy #
@@ -1986,7 +1997,7 @@
     <title>
       <EditStyle>Redigera format</EditStyle>
       <RemoveStyle>Ta bort format</RemoveStyle>
-    </title>    
+    </title>
   </UITagManager>
   <UITagStyleList>
     <header>
@@ -2015,9 +2026,12 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <range-validator>Området är ogiltig. Formatet måste vara: en...b, bland vilka a, b är positiva heltal. Du kan använda * istället för b att visa ett obegränsat område.</range-validator>
+      <range-validator>Området är ogiltig. Formatet måste vara: en...b, bland vilka a, b är positiva heltal. Du kan
+        använda * istället för b att visa ett obegränsat område.
+      </range-validator>
       <error-update>Det gick inte att uppdatera. Din information är ogiltig.</error-update>
-      <item-not-existing>Du kan inte spara ändringar i denna tagg eftersom den inte längre finns i databasen.</item-not-existing>
+      <item-not-existing>Du kan inte spara ändringar i denna tagg eftersom den inte längre finns i databasen.
+      </item-not-existing>
     </msg>
   </UITagStyleForm>
   <FolksonomyPopup>
@@ -2057,9 +2071,9 @@
   ###################################################################################
   -->
   <PermissionValidator>
-  <msg>
+    <msg>
       <permission-path-invalid>Behörigheten {0} är ogiltig.</permission-path-invalid>
-  </msg>
+    </msg>
   </PermissionValidator>
   <!--
   ###################################################################################
@@ -2128,9 +2142,9 @@
       <EditInfo>Redigera</EditInfo>
       <Delete>Ta bort</Delete>
     </title>
-<label>
-  <permission>{0} i {1}</permission>
-</label>
+    <label>
+      <permission>{0} i {1}</permission>
+    </label>
   </UIViewContainer>
   <ECMTemplate>
     <title>
@@ -2161,7 +2175,7 @@
       <selectMembership>Välj medlemskap</selectMembership>
     </label>
   </UIDrivePermissionSelector>
-  
+
   <UIPermissionSelector>
     <label>
       <selectGroup>Välj grupp</selectGroup>
@@ -2169,30 +2183,30 @@
       <selectMembership>Välj medlemskap</selectMembership>
     </label>
   </UIPermissionSelector>
-  
+
   <UIAnyPermission>
     <label>
       <anyPermission>Alla tillstånd</anyPermission>
     </label>
   </UIAnyPermission>
-  
+
   <UIMDriveAnyPermission>
     <label>
       <anyPermission>Alla tillstånd</anyPermission>
     </label>
   </UIMDriveAnyPermission>
-  
+
   <UIQueriesAnyPermission>
     <label>
       <anyPermission>Alla tillstånd</anyPermission>
     </label>
   </UIQueriesAnyPermission>
-  
+
   <MetadataPermission>
     <label>
       <selectGroup>Välj grupp</selectGroup>
     </label>
-  </MetadataPermission>  
+  </MetadataPermission>
   <MetadataPermission>
     <label>
       <selectMembership>Välj medlemskap</selectMembership>
@@ -2215,7 +2229,7 @@
   </QueriesPermissionBrowse>
   <!--
   #########Since ECM 2.4##################
-  -->  
+  -->
   <UIViewFormTabPane>
     <label>
       <addSymLink>Lägg till Symlink</addSymLink>
@@ -2223,14 +2237,14 @@
   </UIViewFormTabPane>
   <!--
   #########Since ECM 2.5##################
-  --> 
-  
+  -->
+
   <UIDriveForm>
-<msg>
-  <permission-path-invalid>Behörigheten {0} är ogiltig.</permission-path-invalid>
-  </msg>
+    <msg>
+      <permission-path-invalid>Behörigheten {0} är ogiltig.</permission-path-invalid>
+    </msg>
   </UIDriveForm>
-  
+
   <UITaxonomyTreeMainForm>
     <msg>
       <homepath-emty>Sökvägen till Hem krävs.</homepath-emty>
@@ -2238,9 +2252,9 @@
     </msg>
   </UITaxonomyTreeMainForm>
   <UITaxonomyWorkingArea>
-  <msg>
-  <exist>Denna trädnod finns redan.</exist>
-  </msg>
+    <msg>
+      <exist>Denna trädnod finns redan.</exist>
+    </msg>
   </UITaxonomyWorkingArea>
 
   <PermissionTreeSelectUser>
@@ -2256,16 +2270,16 @@
       <userName>#{word.userName}</userName>
       <lastName>#{word.lastName}</lastName>
       <firstName>#{word.firstName}</firstName>
-    <email>#{word.email}</email>
+      <email>#{word.email}</email>
       <action>#{word.action}</action>
       <Add>#{word.Add}</Add>
       <Close>#{word.Close}</Close>
     </label>
   </PermissionTreeSelectUser>
-  
+
   <!--
   #########Since ECM 2.6 ##################
-  -->   
+  -->
   <DriveInputSet>
     <label>
       <nt_folder>Dokumentmapp</nt_folder>
@@ -2274,30 +2288,30 @@
       <exo_jsFolder>JavaScript mapp</exo_jsFolder>
       <exo_linkFolder>Länk mapp</exo_linkFolder>
       <exo_webFolder>Webbinnehållsmapp</exo_webFolder>
-   </label>
+    </label>
   </DriveInputSet>
   <UIPermissionTreeInfo>
-  <msg>
+    <msg>
       <confirm-delete-permission>Är du säker på att du vill ta bort denna rättighet?</confirm-delete-permission>
-      <no-permission-remove>Du kan inte ta bort ägare eller systemanvändaren.</no-permission-remove>  
-  </msg>
-  </UIPermissionTreeInfo>  
+      <no-permission-remove>Du kan inte ta bort ägare eller systemanvändaren.</no-permission-remove>
+    </msg>
+  </UIPermissionTreeInfo>
   <UITaxonomyTreeMainForm>
-<msg>
+    <msg>
       <no-right-target-path>Välj en annan sökväg hem.</no-right-target-path>
-</msg>
-</UITaxonomyTreeMainForm>
+    </msg>
+  </UITaxonomyTreeMainForm>
 
-<UIECMAdminControlPanel>
+  <UIECMAdminControlPanel>
     <tab>
-      <label>        
+      <label>
         <ManageUnLock>Hantera lås</ManageUnLock>
       </label>
-    </tab>        
-</UIECMAdminControlPanel>
-<UIUnLockForm>
+    </tab>
+  </UIECMAdminControlPanel>
+  <UIUnLockForm>
     <label>
-      <name>Sökväg till nod</name>      
+      <name>Sökväg till nod</name>
       <permissions>Behörigheter</permissions>
       <PermissionButton>UI Unlock Form</PermissionButton>
     </label>
@@ -2306,49 +2320,51 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <permission-require>Du måste välja behörigheter.</permission-require>      
+      <permission-require>Du måste välja behörigheter.</permission-require>
     </msg>
   </UIUnLockForm>
   <UILockHolderList>
-  <header>
-  <name>Grupper eller användare</name>
-  <action>Åtgärd</action>
-  </header>
-  <tooltip>
-<DeleteLock>Ta bort grupp</DeleteLock>
-  </tooltip>
-  <msg>
-  <can-not-delete-lock-holder>Kan inte ta bort gruppen {0}.</can-not-delete-lock-holder>
-  </msg>
+    <header>
+      <name>Grupper eller användare</name>
+      <action>Åtgärd</action>
+    </header>
+    <tooltip>
+      <DeleteLock>Ta bort grupp</DeleteLock>
+    </tooltip>
+    <msg>
+      <can-not-delete-lock-holder>Kan inte ta bort gruppen {0}.</can-not-delete-lock-holder>
+    </msg>
   </UILockHolderList>
   <UILockNodeList>
-  <header>
-  <name>Titel</name>
-  <hoderLock>Lås ägare</hoderLock>
-  <action>Åtgärd</action>
-  </header>
-  <tooltip>
-<UnLock>Låsa upp</UnLock>
-  </tooltip>
-  <msg>
-  <access-denied-exception>Du har inte behörighet att komma åt noden med sökvägen {0}, eller denna nod är borttagen</access-denied-exception>
-  </msg>
+    <header>
+      <name>Titel</name>
+      <hoderLock>Lås ägare</hoderLock>
+      <action>Åtgärd</action>
+    </header>
+    <tooltip>
+      <UnLock>Låsa upp</UnLock>
+    </tooltip>
+    <msg>
+      <access-denied-exception>Du har inte behörighet att komma åt noden med sökvägen {0}, eller denna nod är
+        borttagen
+      </access-denied-exception>
+    </msg>
   </UILockNodeList>
   <EditUnLockForm>
     <title>
       <UIUnLockForm>Hantera lås</UIUnLockForm>
     </title>
-  </EditUnLockForm>  
+  </EditUnLockForm>
   <UITabPane>
     <action>
       <Close>#{word.close}</Close>
     </action>
     <title>
-    <UILockHolderContainer>Hantera lås</UILockHolderContainer>
-    <UILockNodeList>Låst nod</UILockNodeList>
+      <UILockHolderContainer>Hantera lås</UILockHolderContainer>
+      <UILockNodeList>Låst nod</UILockNodeList>
     </title>
   </UITabPane>
-  
+
   <UIViewFormTabPane>
     <action>
       <AddTabForm>Lägg till fliken</AddTabForm>
@@ -2356,21 +2372,21 @@
       <BackViewForm>Tillbaka</BackViewForm>
     </action>
   </UIViewFormTabPane>
-  
- <UITemplateForm>
-<tab>
-<label>
-<defaultSkin>CSS</defaultSkin>
-</label>
-</tab>
-</UITemplateForm>
- 
+
+  <UITemplateForm>
+    <tab>
+      <label>
+        <defaultSkin>CSS</defaultSkin>
+      </label>
+    </tab>
+  </UITemplateForm>
+
   <UITabPane>
     <title>
       <UISkinTab>CSS</UISkinTab>
     </title>
   </UITabPane>
-  
+
   <UISkinTab>
     <header>
       <name>Namn</name>
@@ -2389,7 +2405,7 @@
       </title>
     </action>
   </UISkinTab>
-  
+
   <SkinForm>
     <label>
       <UITemplateContent>SkinForm</UITemplateContent>
@@ -2404,56 +2420,57 @@
     <title>Lägg till/redigera utseende</title>
   </SkinForm>
 
- <UITagManager>
-   <action>
-     <title>
-       <RemoveStyle>Ta bort</RemoveStyle>
-         <AddStyle>Lägga till stil</AddStyle>
-     </title>
-   </action>
-   <msg>
-     <confirm-delete>Är du säker på att du vill ta bort denna tagg stil?</confirm-delete>
-   </msg>
- </UITagManager>
+  <UITagManager>
+    <action>
+      <title>
+        <RemoveStyle>Ta bort</RemoveStyle>
+        <AddStyle>Lägga till stil</AddStyle>
+      </title>
+    </action>
+    <msg>
+      <confirm-delete>Är du säker på att du vill ta bort denna tagg stil?</confirm-delete>
+    </msg>
+  </UITagManager>
 
-<UITaxonomyTreeContainer>
-<action>
-<Cancel>#{word.close}</Cancel>
-</action>
-</UITaxonomyTreeContainer>
-<UITaxonomyTreeMainForm>
-<action>
-<NextViewPermission>Nästa</NextViewPermission>
-<Reset>Reset</Reset>
-</action>
-</UITaxonomyTreeMainForm>
+  <UITaxonomyTreeContainer>
+    <action>
+      <Cancel>#{word.close}</Cancel>
+    </action>
+  </UITaxonomyTreeContainer>
+  <UITaxonomyTreeMainForm>
+    <action>
+      <NextViewPermission>Nästa</NextViewPermission>
+      <Reset>Reset</Reset>
+    </action>
+  </UITaxonomyTreeMainForm>
 
-<UIPermissionTreeForm>
-<action>
-<Save>Save</Save>
-<Cancel>#{word.cancel}</Cancel>
-<Reset>Reset</Reset>
-<NextAddAction>Nästa</NextAddAction>
-<Previous>Föregående</Previous>
-</action>
-</UIPermissionTreeForm>
+  <UIPermissionTreeForm>
+    <action>
+      <Save>Save</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <Reset>Reset</Reset>
+      <NextAddAction>Nästa</NextAddAction>
+      <Previous>Föregående</Previous>
+    </action>
+  </UIPermissionTreeForm>
 
-<UIActionForm>
-<action>
-<PreviousViewPermission>Föregående</PreviousViewPermission>
-<NextViewTree>Nästa</NextViewTree>
-</action>
-  <msg>
-    <xss-vulnerability-character>Fältet {0} innehåller XSS sårbarhets tecken</xss-vulnerability-character>
-<xss-vulnerability-character-wo-label>Your input may contain XSS vulnerability characters</xss-vulnerability-character-wo-label>
-  </msg>
-</UIActionForm>
+  <UIActionForm>
+    <action>
+      <PreviousViewPermission>Föregående</PreviousViewPermission>
+      <NextViewTree>Nästa</NextViewTree>
+    </action>
+    <msg>
+      <xss-vulnerability-character>Fältet {0} innehåller XSS sårbarhets tecken</xss-vulnerability-character>
+      <xss-vulnerability-character-wo-label>Your input may contain XSS vulnerability characters
+      </xss-vulnerability-character-wo-label>
+    </msg>
+  </UIActionForm>
 
-<UITaxonomyTreeWorkingArea>
-<action>
-<Previous>Föregående</Previous>
-</action>
-</UITaxonomyTreeWorkingArea>
+  <UITaxonomyTreeWorkingArea>
+    <action>
+      <Previous>Föregående</Previous>
+    </action>
+  </UITaxonomyTreeWorkingArea>
 
   <UITabPane>
     <title>
@@ -2461,7 +2478,7 @@
       <UITagPermissionManager>Tag tillstånd Manager</UITagPermissionManager>
     </title>
   </UITabPane>
-  
+
   <UITagPermissionInfo>
     <header>
       <usersOrGroups>Användare eller grupp</usersOrGroups>
@@ -2474,7 +2491,7 @@
     </action>
     <msg>
       <confirm-delete-permission>Är du säker på att du vill ta bort denna rättighet?</confirm-delete-permission>
-    </msg>   
+    </msg>
   </UITagPermissionInfo>
   <UITagPermissionForm>
     <title>Lägg till behörighet</title>
@@ -2487,32 +2504,32 @@
     </label>
     <msg>
       <userOrGroup-alreadyExists>Detta medlemskap finns redan. Välj en annan.</userOrGroup-alreadyExists>
-    </msg>    
+    </msg>
   </UITagPermissionForm>
-  
+
   <UIGroupMemberSelector>
     <label>
       <selectGroup>Välj grupp</selectGroup>
       <selectMembership>Välj medlemskap</selectMembership>
     </label>
   </UIGroupMemberSelector>
-  
+
   <UIFolksonomyManager>
-  <msg>
+    <msg>
       <confirm-delete>Är du säker på att du vill ta bort denna tagg stil?</confirm-delete>
-  </msg>
+    </msg>
     <action>
       <title>
         <AddStyle>Lägga till stil</AddStyle>
       </title>
     </action>
-  </UIFolksonomyManager>  
-<UIActionForm>
-  <title>
-  <ShowComponent>Öppna fönstret</ShowComponent>
-  <removeReference>Ta bort</removeReference>
-  </title>
-  </UIActionForm> 
+  </UIFolksonomyManager>
+  <UIActionForm>
+    <title>
+      <ShowComponent>Öppna fönstret</ShowComponent>
+      <removeReference>Ta bort</removeReference>
+    </title>
+  </UIActionForm>
   <NodeTypeNameValidator>
     <msg>
       <Invalid-char>Det finns ogiltiga tecken. Ange ett annat värde.</Invalid-char>
@@ -2521,10 +2538,12 @@
   </NodeTypeNameValidator>
   <UIActionForm>
     <msg>
-      <constraint-violation-exception>Noden {0} kan inte läggas till {1} i arbetsytan {2}.  Det finns ett problem med behörigheter eller begränsningar.</constraint-violation-exception>
+      <constraint-violation-exception>Noden {0} kan inte läggas till {1} i arbetsytan {2}. Det finns ett problem med
+        behörigheter eller begränsningar.
+      </constraint-violation-exception>
     </msg>
   </UIActionForm>
-  
+
   <UIWorkspaceWizard>
     <msg>
       <name-not-allowed>Förbjudet namn</name-not-allowed>
@@ -2532,35 +2551,37 @@
   </UIWorkspaceWizard>
   <UIRepositoryForm>
     <msg>
-      <not-complete-repository>The repository is being created. You need to wait a few minutes before creating another one.</not-complete-repository>
+      <not-complete-repository>The repository is being created. You need to wait a few minutes before creating another
+        one.
+      </not-complete-repository>
     </msg>
   </UIRepositoryForm>
-  
+
   <UIViewFormTabPane>
-  <label>
-  <addCategory>Lägg till kategori</addCategory>
-          <addLocalizationLink>Lägg till översättning</addLocalizationLink>
-  </label>
+    <label>
+      <addCategory>Lägg till kategori</addCategory>
+      <addLocalizationLink>Lägg till översättning</addLocalizationLink>
+    </label>
   </UIViewFormTabPane>
 
-<UIDriveForm>
-<label>
-<allowNodeTypesOnTree>Ersättning nodetype på vänster träd:</allowNodeTypesOnTree>
-</label>
-</UIDriveForm>
-<DriveInputSet>
-<title>
-<RemovePermission>Remove Permission</RemovePermission>
-<ChooseNodeType>Markera nodtyper</ChooseNodeType>
-<RemoveNodeType>Ta bort</RemoveNodeType>
-</title>
-</DriveInputSet>
-<PopupNodeTypeSelector>
-<title>
-<UINodeTypeSelector>Markera nodtyper</UINodeTypeSelector>
-<PopupNodeTypeSelector>Markera nodtyper</PopupNodeTypeSelector>
-</title>
-</PopupNodeTypeSelector>
+  <UIDriveForm>
+    <label>
+      <allowNodeTypesOnTree>Ersättning nodetype på vänster träd:</allowNodeTypesOnTree>
+    </label>
+  </UIDriveForm>
+  <DriveInputSet>
+    <title>
+      <RemovePermission>Remove Permission</RemovePermission>
+      <ChooseNodeType>Markera nodtyper</ChooseNodeType>
+      <RemoveNodeType>Ta bort</RemoveNodeType>
+    </title>
+  </DriveInputSet>
+  <PopupNodeTypeSelector>
+    <title>
+      <UINodeTypeSelector>Markera nodtyper</UINodeTypeSelector>
+      <PopupNodeTypeSelector>Markera nodtyper</PopupNodeTypeSelector>
+    </title>
+  </PopupNodeTypeSelector>
   <UINodeTypeSelector>
     <label>
       <selectedAllNodeTypes>Välj alla nodtyper</selectedAllNodeTypes>
@@ -2568,14 +2589,14 @@
   </UINodeTypeSelector>
   <UIScriptForm>
     <msg>
-      <PathNotFoundException>Skriptet finns redan i mappen {0}.</PathNotFoundException>      
+      <PathNotFoundException>Skriptet finns redan i mappen {0}.</PathNotFoundException>
     </msg>
   </UIScriptForm>
- <UINodeTypeList>
-   <msg>
-   <no-list>There is no node type matching your search.</no-list>
-   </msg>
- </UINodeTypeList>
+  <UINodeTypeList>
+    <msg>
+      <no-list>There is no node type matching your search.</no-list>
+    </msg>
+  </UINodeTypeList>
   <UIActionForm>
     <msg>
       <canotChangeActionId>Du kan inte ändra åtgärds-ID.</canotChangeActionId>
@@ -2593,7 +2614,9 @@
   </UIPageIterator>
   <UILockNodeList>
     <msg>
-      <can-not-unlock-node>Du har inte behörighet att låsa upp den här noden. Kontakta administratören för att få rätt rättigheter.</can-not-unlock-node>
+      <can-not-unlock-node>Du har inte behörighet att låsa upp den här noden. Kontakta administratören för att få rätt
+        rättigheter.
+      </can-not-unlock-node>
     </msg>
- </UILockNodeList>
+  </UILockNodeList>
 </bundle>

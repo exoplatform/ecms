@@ -13,21 +13,21 @@
         <Repository>Arkiv</Repository>
         <Advanced>Avansert</Advanced>
       </label>
-    </tab>    
-    <label>     
+    </tab>
+    <label>
       <UITaxonomyManagerTrees>Kategorier</UITaxonomyManagerTrees>
       <UIMetadataManager>Metadata</UIMetadataManager>
       <UINamespaceManager>Navnerom</UINamespaceManager>
       <UINodeTypeManager>Nodetyper</UINodeTypeManager>
       <UITemplatesManager>Dokumenter</UITemplatesManager>
-   <UICLVTemplatesManager>Liste</UICLVTemplatesManager>
+      <UICLVTemplatesManager>Liste</UICLVTemplatesManager>
       <UIViewManager>Visninger</UIViewManager>
       <UIDriveManager>Stasjoner</UIDriveManager>
       <UIQueriesManager>Spørringer</UIQueriesManager>
       <UIActionManager>Handlinger</UIActionManager>
       <UIScriptManager>Skript</UIScriptManager>
       <UIUnLockManager>Låser</UIUnLockManager>
-      <UIFolksonomyManager>Tagger</UIFolksonomyManager>      
+      <UIFolksonomyManager>Tagger</UIFolksonomyManager>
     </label>
     <msg>
       <access-denied>Tilgang nektet. Du har ikke tillatelse til å utføre denne handlingen.</access-denied>
@@ -40,11 +40,13 @@
   -->
   <UITaxonomyWorkingArea>
     <msg>
-      <referential-integrity>Kan ikke lese fra kildefilen eller destinasjonskategorien er en underkategori.</referential-integrity>
+      <referential-integrity>Kan ikke lese fra kildefilen eller destinasjonskategorien er en underkategori.
+      </referential-integrity>
       <no-taxonomy-selected>Du må kopiere eller klippe ut minst én kategori.</no-taxonomy-selected>
       <node-is-cutting>Du kan ikke lime inn her. Kategori node '{0}' blir kanskje kuttet.</node-is-cutting>
       <can-not-paste>Det er ingen data i utklippstavlen som du kan lime inn.</can-not-paste>
-      <reference-exception>Kan ikke slette denne kategorien fordi den for øyeblikket er referert av noe innhold.</reference-exception>
+      <reference-exception>Kan ikke slette denne kategorien fordi den for øyeblikket er referert av noe innhold.
+      </reference-exception>
       <path-error>Det oppstod en feil under fjerning av denne kategorinode.</path-error>
     </msg>
   </UITaxonomyWorkingArea>
@@ -60,7 +62,7 @@
       <remove>Slette</remove>
     </title>
   </UITaxonomyManager>
-  
+
   <!--
   ################################################################################
   #    org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyTreeContainer#
@@ -71,15 +73,18 @@
       <info>
         <UITaxonomyTreeMainForm>Spesifiser kategori navn, arbeidsområde og bane.</UITaxonomyTreeMainForm>
         <UIPermissionTreeManager>Angi rettighet for kategoritreet.</UIPermissionTreeManager>
-        <UIActionTaxonomyManager>Legge til en handling til kategoritreet for å fullføre opprettingen eller oppdateringen.</UIActionTaxonomyManager>
-        <UITaxonomyTreeCreateChild>Redigere taksonomi treet ved å legge til, kopiere, klippe og velge rettigheter.</UITaxonomyTreeCreateChild>
+        <UIActionTaxonomyManager>Legge til en handling til kategoritreet for å fullføre opprettingen eller
+          oppdateringen.
+        </UIActionTaxonomyManager>
+        <UITaxonomyTreeCreateChild>Redigere taksonomi treet ved å legge til, kopiere, klippe og velge rettigheter.
+        </UITaxonomyTreeCreateChild>
       </info>
     </tab>
     <msg>
       <not-exist-tree>Kategoritreet finnes ikke.</not-exist-tree>
     </msg>
   </UITaxonomyTreeContainer>
-  
+
   <!--
 ##########################################################################################
 #     org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyTreeMainForm          #
@@ -111,45 +116,45 @@
       <AddPath>Legg til sti</AddPath>
     </title>
   </TaxonomyTreeHomePath>
-  
+
   <!--
 ##########################################################################################
 #     org.exoplatform.ecm.webui.component.admin.taxonomy.tree.info.UIPermissionTreeInfo  #
 ##########################################################################################
 -->
-<UIPermissionTreeInfo>
-<action>
-<title>
-<Delete>Slette</Delete>
-<Edit>Rediger</Edit>
-</title>
-</action>
-<header>
-<usersOrGroups>Bruker eller gruppe</usersOrGroups>
-<read>Lest</read>
-<addNode>Legg til Node</addNode>
-<setProperty>Angi egenskap</setProperty>
-<remove>Fjern</remove>
-<action>Handling</action>
-</header>
-</UIPermissionTreeInfo>
+  <UIPermissionTreeInfo>
+    <action>
+      <title>
+        <Delete>Slette</Delete>
+        <Edit>Rediger</Edit>
+      </title>
+    </action>
+    <header>
+      <usersOrGroups>Bruker eller gruppe</usersOrGroups>
+      <read>Lest</read>
+      <addNode>Legg til Node</addNode>
+      <setProperty>Angi egenskap</setProperty>
+      <remove>Fjern</remove>
+      <action>Handling</action>
+    </header>
+  </UIPermissionTreeInfo>
 
-<!--
-##########################################################################################
-#     org.exoplatform.ecm.webui.component.admin.taxonomy.tree.info.UIPermissionTreeForm  #
-##########################################################################################
--->
+  <!--
+  ##########################################################################################
+  #     org.exoplatform.ecm.webui.component.admin.taxonomy.tree.info.UIPermissionTreeForm  #
+  ##########################################################################################
+  -->
   <UIPermissionTreeForm>
     <msg>
       <have-not-any-permission>Angi minst én rettighet for denne noden.</have-not-any-permission>
     </msg>
   </UIPermissionTreeForm>
 
-<!--
-################################################################################
-#     org.exoplatform.ecm.webui.component.admin.taxonomy.UIActionForm          #
-################################################################################
--->
+  <!--
+  ################################################################################
+  #     org.exoplatform.ecm.webui.component.admin.taxonomy.UIActionForm          #
+  ################################################################################
+  -->
 
   <UIActionForm>
     <title>Legg til en handling til kategoritreet</title>
@@ -250,7 +255,8 @@
     <msg>
       <confirm-delete>Er du sikker på at du vil slette disse metadataene?</confirm-delete>
       <delete-successful>Malene på '{0}' ble slettet.</delete-successful>
-      <path-not-found-exception>Disse metadataene har blitt slettet eller endret. Klikk Oppdater-knappen.</path-not-found-exception>
+      <path-not-found-exception>Disse metadataene har blitt slettet eller endret. Klikk Oppdater-knappen.
+      </path-not-found-exception>
     </msg>
     <action>
       <Add>Legg til metadata</Add>
@@ -425,13 +431,13 @@
       <action>Handling</action>
     </header>
   </UITreeList>
-  
+
   <UIRepositoryList>
     <titlebar>
       <label>Administrere ECMs hovedfunksjoner</label>
     </titlebar>
   </UIRepositoryList>
-  
+
   <!--
   ################################################################################
   #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeManager #
@@ -561,8 +567,12 @@
     </action>
     <msg>
       <register-successfully>Nodetypen '{0}' ble registrert som vellykket.</register-successfully>
-      <supertype-is-madatory>Overordnet typen er obligatorisk når du registrerer nye nodetypen. Velg minst én overordnet type.</supertype-is-madatory>
-      <register-failed>Node type registreringen var mislykket. Enten finnes den allerede eller så er overordnet type ugyldig.</register-failed>
+      <supertype-is-madatory>Overordnet typen er obligatorisk når du registrerer nye nodetypen. Velg minst én overordnet
+        type.
+      </supertype-is-madatory>
+      <register-failed>Node type registreringen var mislykket. Enten finnes den allerede eller så er overordnet type
+        ugyldig.
+      </register-failed>
       <nodeType-name>Navnet på node typen er påkrevd.</nodeType-name>
       <fileName-invalid>Filnavnet inneholder noen ugyldige tegn.</fileName-invalid>
       <node-type-exists>Det finnes allerede en nodetype '{0}'.</node-type-exists>
@@ -581,7 +591,8 @@
     </tab>
     <msg>
       <property-name>Egenskapsdefinisjonens navn var ugyldig.</property-name>
-      <not-supported-value-constraints>Denne påkrevde typen støtter ikke verdibetingelsene.</not-supported-value-constraints>
+      <not-supported-value-constraints>Denne påkrevde typen støtter ikke verdibetingelsene.
+      </not-supported-value-constraints>
     </msg>
   </UIPropertyDefinitionForm>
   <UIChildNodeDefinitionForm>
@@ -735,10 +746,10 @@
     <action>
       <AddAction>Legge til handlingstype</AddAction>
     </action>
-<msg>
- <confirm-delete>Er du sikker på du vil slette denne handlingstypen?</confirm-delete>
-<cannot-delete>Du kan ikke fjerne denne handlingstypen fordi systemet fortsatt bruker den.</cannot-delete>
-</msg>
+    <msg>
+      <confirm-delete>Er du sikker på du vil slette denne handlingstypen?</confirm-delete>
+      <cannot-delete>Du kan ikke fjerne denne handlingstypen fordi systemet fortsatt bruker den.</cannot-delete>
+    </msg>
   </UIActionTypeList>
   <!--
   ######################################################################################
@@ -791,11 +802,11 @@
       <UITemplateContainer>Dokumenter</UITemplateContainer>
       <UIActionsTemplateContainer>Handlinger</UIActionsTemplateContainer>
       <UIOthersTemplateContainer>Andre</UIOthersTemplateContainer>
-  <UIActionScriptContainer>Handling</UIActionScriptContainer>
-  <UIWidgetScriptContainer>Widgets</UIWidgetScriptContainer>
-<UIInterceptorScriptContainer>Interceptorer</UIInterceptorScriptContainer>
+      <UIActionScriptContainer>Handling</UIActionScriptContainer>
+      <UIWidgetScriptContainer>Widgets</UIWidgetScriptContainer>
+      <UIInterceptorScriptContainer>Interceptorer</UIInterceptorScriptContainer>
 
-<nodeTypeDefinition>Nodetype</nodeTypeDefinition>
+      <nodeTypeDefinition>Nodetype</nodeTypeDefinition>
       <propertyDefinition>Egenskap</propertyDefinition>
       <childNodeDefinition>Undernode</childNodeDefinition>
       <SuperTypeTab>Overordnete typer</SuperTypeTab>
@@ -810,11 +821,11 @@
   ######################################################################################
   -->
   <UIViewList>
-   <title>
-     <View>Vis</View>
-     <EditInfo>Rediger</EditInfo>
-     <Delete>Slette</Delete>
-   </title>
+    <title>
+      <View>Vis</View>
+      <EditInfo>Rediger</EditInfo>
+      <Delete>Slette</Delete>
+    </title>
     <header>
       <name>Navn</name>
       <permissions>Rettigheter</permissions>
@@ -848,71 +859,71 @@
     </title>
   </EditPopup>
 
-<UITabList>
-                  <title>
-                    <Edit>Rediger</Edit>
-                    <Delete>Slette</Delete>
-                  </title>       
- <header>
-  <tabName>Fane</tabName>
-  <localizeButtons>Beskrivelse</localizeButtons>
-<action>Handlinger</action>
-</header>
-<action>
- <AddTab>Legg til</AddTab>
-</action>
-<msg>
- <confirm-delete>Er du sikker på at du vil slette denne fanen?</confirm-delete>
-</msg>
-<grid>
- <msg>
-  <empty>Det er ingen fane for denne visningen</empty>
- </msg>
-</grid>
-</UITabList>
+  <UITabList>
+    <title>
+      <Edit>Rediger</Edit>
+      <Delete>Slette</Delete>
+    </title>
+    <header>
+      <tabName>Fane</tabName>
+      <localizeButtons>Beskrivelse</localizeButtons>
+      <action>Handlinger</action>
+    </header>
+    <action>
+      <AddTab>Legg til</AddTab>
+    </action>
+    <msg>
+      <confirm-delete>Er du sikker på at du vil slette denne fanen?</confirm-delete>
+    </msg>
+    <grid>
+      <msg>
+        <empty>Det er ingen fane for denne visningen</empty>
+      </msg>
+    </grid>
+  </UITabList>
 
-<UIViewPermissionList>
- <title>Velg eier med rettigheter for denne visningen:</title>
-<label>
- <permission>{0} i {1}</permission>
-</label>
-<msg>
- <confirm-delete>Er du sikker på at du vil slette denne rettigheten?</confirm-delete>
-  <permission-cannot-empty>Vis rettigheter er påkrevd og kan ikke være tom.</permission-cannot-empty>
-</msg>
-</UIViewPermissionList>
+  <UIViewPermissionList>
+    <title>Velg eier med rettigheter for denne visningen:</title>
+    <label>
+      <permission>{0} i {1}</permission>
+    </label>
+    <msg>
+      <confirm-delete>Er du sikker på at du vil slette denne rettigheten?</confirm-delete>
+      <permission-cannot-empty>Vis rettigheter er påkrevd og kan ikke være tom.</permission-cannot-empty>
+    </msg>
+  </UIViewPermissionList>
 
-<UIViewPermissionList>
-                         <title>
-                           <Delete>Slette</Delete>
-                         </title>
- <header>
-<friendlyPermission>Rettigheter</friendlyPermission>
-     <action>Handling</action>
- </header>
-<action>
- <title>
-  <Delete>Slette</Delete>
- </title>
-</action>
-<grid>
- <msg>
-  <empty>Det finnes ingen rettigheter for denne visningen</empty>
- </msg>
-</grid>
-</UIViewPermissionList>
+  <UIViewPermissionList>
+    <title>
+      <Delete>Slette</Delete>
+    </title>
+    <header>
+      <friendlyPermission>Rettigheter</friendlyPermission>
+      <action>Handling</action>
+    </header>
+    <action>
+      <title>
+        <Delete>Slette</Delete>
+      </title>
+    </action>
+    <grid>
+      <msg>
+        <empty>Det finnes ingen rettigheter for denne visningen</empty>
+      </msg>
+    </grid>
+  </UIViewPermissionList>
 
-<UIViewPermissionForm>
-<action>
- <Add>Legg til</Add>
-</action>
-<label>
- <userOrGroup>Bruker eller gruppe</userOrGroup>
-</label>
-<msg>
- <permission-exist>Tillatelsen '{0}' finnes allerede i listen.</permission-exist>
-</msg>
-</UIViewPermissionForm>
+  <UIViewPermissionForm>
+    <action>
+      <Add>Legg til</Add>
+    </action>
+    <label>
+      <userOrGroup>Bruker eller gruppe</userOrGroup>
+    </label>
+    <msg>
+      <permission-exist>Tillatelsen '{0}' finnes allerede i listen.</permission-exist>
+    </msg>
+  </UIViewPermissionForm>
 
   <!--
   ######################################################################################
@@ -927,15 +938,15 @@
     <msg>
       <view-name-invalid>Visningsnavn er påkrevd.</view-name-invalid>
       <fileName-invalid>Visningsnavnet inneholder ugyldige tegn.</fileName-invalid>
-      <permission-not-empty>Velg en tillatelse for visningen.</permission-not-empty>      
+      <permission-not-empty>Velg en tillatelse for visningen.</permission-not-empty>
       <mustbe-add-tab>Legg til en fane.</mustbe-add-tab>
-<mustbe-add-permission>Velg rettigheter for denne visningen.</mustbe-add-permission>
+      <mustbe-add-permission>Velg rettigheter for denne visningen.</mustbe-add-permission>
       <view-exist>Visningen finnes allerede.</view-exist>
     </msg>
     <label>
       <viewName>Navn</viewName>
       <template>Mal</template>
-<version>Gjenopprett versjon</version>
+      <version>Gjenopprett versjon</version>
       <enableVersion>Aktiver versjon</enableVersion>
       <hideExplorerPanel>Skjul utforskeren i sidestolpen</hideExplorerPanel>
     </label>
@@ -980,14 +991,14 @@
       <overloadThumbnail>Bytt miniatyrbilde</overloadThumbnail>
       <manageHidden>Skjul/vis innhold</manageHidden>
       <comment>Kommentar</comment>
-      <vote>Stem</vote>  
+      <vote>Stem</vote>
       <addCategory>Legge til kategori</addCategory>
       <addLocalizationLink>Legge til oversettelse</addLocalizationLink>
       <publicationRequestApproval>Godkjenningsforespørsel</publicationRequestApproval>
       <publicationApproveContent>Godkjenn innhold</publicationApproveContent>
       <publicationPublish>Publiser</publicationPublish>
-<contentNavigation>Innholds navigasjon</contentNavigation>
-<addSymLink>Legg til Symlink</addSymLink>
+      <contentNavigation>Innholds navigasjon</contentNavigation>
+      <addSymLink>Legg til Symlink</addSymLink>
       <checkIn>Check In</checkIn>
       <checkOut>Check Out</checkOut>
       <shareDocuments>Del</shareDocuments>
@@ -996,8 +1007,8 @@
       <uploadNewVersion>Upload a new version</uploadNewVersion>
     </label>
     <action>
-      <Save>#{word.save}</Save>      
-      <Cancel>#{word.cancel}</Cancel>      
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
   </UITabForm>
   <UIPermissionForm>
@@ -1010,7 +1021,7 @@
       <label>
         <UITabContainer>Handling</UITabContainer>
         <UIViewForm>Vis</UIViewForm>
-        <UIViewPermissionContainer>Rettighet</UIViewPermissionContainer>    
+        <UIViewPermissionContainer>Rettighet</UIViewPermissionContainer>
       </label>
     </tab>
     <action>
@@ -1027,19 +1038,19 @@
     </title>
   </PopupViewPermission>
 
-<TabForm_Popup>
- <title>
-  <UITabForm>Legg til/Rediger fane</UITabForm>
- </title>
-</TabForm_Popup>
+  <TabForm_Popup>
+    <title>
+      <UITabForm>Legg til/Rediger fane</UITabForm>
+    </title>
+  </TabForm_Popup>
 
-<tab_permission>
- <title>
-  <SelectUser>Velg bruker</SelectUser>
-<SelectMember>Velg medlem</SelectMember>
-<AddAny>Noen</AddAny>
- </title>
-</tab_permission>
+  <tab_permission>
+    <title>
+      <SelectUser>Velg bruker</SelectUser>
+      <SelectMember>Velg medlem</SelectMember>
+      <AddAny>Noen</AddAny>
+    </title>
+  </tab_permission>
   <!--
   ######################################################################################
   #             org.exoplatform.ecm.webui.component.admin.view.UIECMTemplateList   #
@@ -1228,7 +1239,7 @@
   #             org.exoplatform.ecm.webui.component.admin.script.ecmScriptForm #
   ######################################################################################
   -->
- 
+
   <ecmScriptForm>
     <label>
       <selectVersion>Versjoner</selectVersion>
@@ -1260,7 +1271,7 @@
       <name-too-long>Kategorinavnet må ha mindre enn 30 tegn.</name-too-long>
     </msg>
   </UITaxonomyForm>
-    
+
   <EditTaxonomyTreePopup>
     <title>
       <UITaxonomyTreeContainer>Redigere kategoritreet</UITaxonomyTreeContainer>
@@ -1272,15 +1283,15 @@
       <UITaxonomyTreeContainer>Legg til kategoritreet</UITaxonomyTreeContainer>
     </title>
   </AddTaxonomyTreePopup>
-  
+
   <TaxonomyPopupCreateChild>
     <title>
       <UITaxonomyTreeCreateChildForm>Redigere kategoritreet</UITaxonomyTreeCreateChildForm>
     </title>
   </TaxonomyPopupCreateChild>
 
-<UITaxonomyTreeCreateChildForm>
-  <action>
+  <UITaxonomyTreeCreateChildForm>
+    <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
     </action>
@@ -1294,41 +1305,41 @@
       <name-too-long>Kategorinavnet kan ikke ha mer enn {0} tegn.</name-too-long>
       <exist>Kategorinavnet finnes allerede.</exist>
     </msg>
-</UITaxonomyTreeCreateChildForm>
+  </UITaxonomyTreeCreateChildForm>
 
   <PopupComponent>
     <title>
       <UIOneNodePathSelector>Velg sti</UIOneNodePathSelector>
     </title>
   </PopupComponent>
-  
+
   <TaxoPopupUserSelector>
-  <title>
+    <title>
       <TaxoTreeSelectUserOrGroup>Velg bruker</TaxoTreeSelectUserOrGroup>
       <UIPermissionTreeSelectUser>Velg bruker</UIPermissionTreeSelectUser>
     </title>
   </TaxoPopupUserSelector>
 
   <TaxoTreeSelectUserOrGroupPopup>
-  <title>
+    <title>
       <TaxoTreeSelectUserOrGroup>Velg medlemsskap</TaxoTreeSelectUserOrGroup>
     </title>
   </TaxoTreeSelectUserOrGroupPopup>
-  
+
   <TaxoTreeAnyPermission>
     <label>
       <any>Noen tillatelser</any>
       <anyPermission>TaxoTreeAnyPermission</anyPermission>
     </label>
   </TaxoTreeAnyPermission>
-  
+
   <TaxoTreeSelectUserOrGroup>
     <label>
       <selectGroup>Velg gruppe</selectGroup>
       <selectMembership>Velg medlemskap</selectMembership>
     </label>
   </TaxoTreeSelectUserOrGroup>
-  
+
   <!--
   ######################################################################################
   #             org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyTreeList #
@@ -1355,7 +1366,7 @@
       <is-in-trash>Dette kategoritreet har blitt flyttet til papirkurven.</is-in-trash>
     </msg>
   </UITaxonomyTreeList>
-  
+
   <!--
   ######################################################################################
   #             org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyTreeForm  #
@@ -1372,7 +1383,7 @@
       <homapath-emty>Inndata sti</homapath-emty>
     </msg>
   </UITaxonomyTreeForm>
-  
+
   <UIPermissionTreeForm>
     <label>
       <UIPopupWindow>Velg</UIPopupWindow>
@@ -1396,38 +1407,38 @@
       <access-denied>Ingen tilgang. Du kan ikke fjerne denne rettigheten.</access-denied>
     </msg>
   </UIPermissionTreeForm>
-  
+
   <PopupTaxonomyJCRBrowser>
-  <title>
+    <title>
       <UIOneNodePathSelector>Velg hjem sti</UIOneNodePathSelector>
     </title>
   </PopupTaxonomyJCRBrowser>
-  
+
   <PopupTaxonomyTreePermission>
     <title>
       <UIPermissionSelector>Rettighets velger</UIPermissionSelector>
     </title>
-   </PopupTaxonomyTreePermission>
-   
-   <PopupDrivePermission>
+  </PopupTaxonomyTreePermission>
+
+  <PopupDrivePermission>
     <title>
       <AddDrivePermissionSelector>Legge til rettighet</AddDrivePermissionSelector>
       <UIPermissionSelector>Velg rettigheter</UIPermissionSelector>
     </title>
   </PopupDrivePermission>
-  
+
   <UIPopupWindow>
     <title>
       <UIPermissionManager>Administrere tillatelser</UIPermissionManager>
     </title>
-   </UIPopupWindow>
+  </UIPopupWindow>
 
   <PopupUserSelector>
     <title>
       <UIUserContainer>Administrere tillatelser</UIUserContainer>
     </title>
-   </PopupUserSelector>
-   
+  </PopupUserSelector>
+
   <UIPermissionInfo>
     <action>
       <title>
@@ -1499,13 +1510,13 @@
       <access-denied>Ingen tilgang. Du kan ikke fjerne denne rettigheten.</access-denied>
     </msg>
   </UIPermissionForm>
-  
+
   <TaxonomyPopup>
     <title>
       <UITaxonomyForm>Legge til kategori</UITaxonomyForm>
     </title>
   </TaxonomyPopup>
-  
+
   <UITaxonomyManager>
     <title>
       <permission>Administrere tillatelser</permission>
@@ -1533,7 +1544,7 @@
       <template-not-exist>Malen du prøver å slette, finnes ikke.</template-not-exist>
     </msg>
   </UITemplateList>
-  
+
   <UIActionsTemplateList>
     <header>
       <name>Type</name>
@@ -1551,7 +1562,7 @@
       <template-not-exist>Malen du prøver å slette, finnes ikke.</template-not-exist>
     </msg>
   </UIActionsTemplateList>
-  
+
   <UIOthersTemplateList>
     <header>
       <name>Type</name>
@@ -1570,19 +1581,19 @@
     </msg>
   </UIOthersTemplateList>
 
- <!--
-  ######################################################################################
-  #             org.exoplatform.ecm.webui.component.admin.templates.clv package #
-  ######################################################################################
-  -->
+  <!--
+   ######################################################################################
+   #             org.exoplatform.ecm.webui.component.admin.templates.clv package #
+   ######################################################################################
+   -->
 
-<UITabPane>
- <title>
- <ContentTemplateContainer>Innhold</ContentTemplateContainer>
-<CateTemplateContainer>Navigering</CateTemplateContainer>
-<PageTemplateContainer>Paginator</PageTemplateContainer>
- </title>
-</UITabPane>
+  <UITabPane>
+    <title>
+      <ContentTemplateContainer>Innhold</ContentTemplateContainer>
+      <CateTemplateContainer>Navigering</CateTemplateContainer>
+      <PageTemplateContainer>Paginator</PageTemplateContainer>
+    </title>
+  </UITabPane>
 
   <UICLVTemplateList>
     <title>
@@ -1596,8 +1607,8 @@
     </header>
     <action>
       <AddTemplate>Legg til mal</AddTemplate>
-<Edit>Rediger</Edit>
-<Delete>Slette</Delete>
+      <Edit>Rediger</Edit>
+      <Delete>Slette</Delete>
     </action>
     <msg>
       <confirm-delete>Er du sikker på at du vil slette denne malen?</confirm-delete>
@@ -1607,7 +1618,7 @@
     </msg>
   </UICLVTemplateList>
 
-<CateTemplateList>
+  <CateTemplateList>
     <header>
       <title>Navn</title>
       <action>Handling</action>
@@ -1619,12 +1630,12 @@
     </title>
     <action>
       <AddTemplate>Legg til mal</AddTemplate>
-<Edit>Rediger</Edit>
-<Delete>Slette</Delete>
+      <Edit>Rediger</Edit>
+      <Delete>Slette</Delete>
     </action>
-</CateTemplateList>
+  </CateTemplateList>
 
-<PageTemplateList>
+  <PageTemplateList>
     <header>
       <title>Navn</title>
       <action>Handling</action>
@@ -1632,103 +1643,103 @@
     </header>
     <action>
       <AddTemplate>Legg til mal</AddTemplate>
-<Edit>Rediger</Edit>
-<Delete>Slette</Delete>
+      <Edit>Rediger</Edit>
+      <Delete>Slette</Delete>
     </action>
-</PageTemplateList>
+  </PageTemplateList>
 
-<EditCLVTemplatePopup_ContentTemplateContainer>
- <title>
-   <UICLVTemplateForm_ContentTemplateContainer>Rediger listemal</UICLVTemplateForm_ContentTemplateContainer>   
- </title>
-</EditCLVTemplatePopup_ContentTemplateContainer>
+  <EditCLVTemplatePopup_ContentTemplateContainer>
+    <title>
+      <UICLVTemplateForm_ContentTemplateContainer>Rediger listemal</UICLVTemplateForm_ContentTemplateContainer>
+    </title>
+  </EditCLVTemplatePopup_ContentTemplateContainer>
 
-<EditCLVTemplatePopup_CateTemplateContainer>
- <title>
-   <UICLVTemplateForm_CateTemplateContainer>Rediger listemal</UICLVTemplateForm_CateTemplateContainer>   
- </title>
-</EditCLVTemplatePopup_CateTemplateContainer>
+  <EditCLVTemplatePopup_CateTemplateContainer>
+    <title>
+      <UICLVTemplateForm_CateTemplateContainer>Rediger listemal</UICLVTemplateForm_CateTemplateContainer>
+    </title>
+  </EditCLVTemplatePopup_CateTemplateContainer>
 
-<EditCLVTemplatePopup_PageTemplateContainer>
- <title>
-   <UICLVTemplateForm_PageTemplateContainer>Rediger listemal</UICLVTemplateForm_PageTemplateContainer>   
- </title>
-</EditCLVTemplatePopup_PageTemplateContainer>
+  <EditCLVTemplatePopup_PageTemplateContainer>
+    <title>
+      <UICLVTemplateForm_PageTemplateContainer>Rediger listemal</UICLVTemplateForm_PageTemplateContainer>
+    </title>
+  </EditCLVTemplatePopup_PageTemplateContainer>
 
-<CLVTemplatePopup_ContentTemplateContainer>
- <title>
-   <UICLVTemplateForm_ContentTemplateContainer>Legg til listemal</UICLVTemplateForm_ContentTemplateContainer>   
- </title>
-</CLVTemplatePopup_ContentTemplateContainer>
+  <CLVTemplatePopup_ContentTemplateContainer>
+    <title>
+      <UICLVTemplateForm_ContentTemplateContainer>Legg til listemal</UICLVTemplateForm_ContentTemplateContainer>
+    </title>
+  </CLVTemplatePopup_ContentTemplateContainer>
 
-<CLVTemplatePopup_CateTemplateContainer>
- <title>
-   <UICLVTemplateForm_CateTemplateContainer>Legg til listemal</UICLVTemplateForm_CateTemplateContainer>   
- </title>
-</CLVTemplatePopup_CateTemplateContainer>
+  <CLVTemplatePopup_CateTemplateContainer>
+    <title>
+      <UICLVTemplateForm_CateTemplateContainer>Legg til listemal</UICLVTemplateForm_CateTemplateContainer>
+    </title>
+  </CLVTemplatePopup_CateTemplateContainer>
 
-<CLVTemplatePopup_PageTemplateContainer>
- <title>
-   <UICLVTemplateForm_PageTemplateContainer>Legg til listemal</UICLVTemplateForm_PageTemplateContainer>   
- </title>
-</CLVTemplatePopup_PageTemplateContainer>
+  <CLVTemplatePopup_PageTemplateContainer>
+    <title>
+      <UICLVTemplateForm_PageTemplateContainer>Legg til listemal</UICLVTemplateForm_PageTemplateContainer>
+    </title>
+  </CLVTemplatePopup_PageTemplateContainer>
 
-<UICLVTemplateForm_ContentTemplateContainer>
- <action>
-  <Save>#{word.save}</Save>
-<Reset>Tilbakestill</Reset>
-<Cancel>#{word.cancel}</Cancel>
- </action>
-<label>
- <title>Navn</title>
-<template>Malnavn</template>
-<content>Innhold</content>
-<type>Maltype</type>
-</label>
-</UICLVTemplateForm_ContentTemplateContainer>
+  <UICLVTemplateForm_ContentTemplateContainer>
+    <action>
+      <Save>#{word.save}</Save>
+      <Reset>Tilbakestill</Reset>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <label>
+      <title>Navn</title>
+      <template>Malnavn</template>
+      <content>Innhold</content>
+      <type>Maltype</type>
+    </label>
+  </UICLVTemplateForm_ContentTemplateContainer>
 
-<UICLVTemplateForm_PageTemplateContainer>
- <action>
-  <Save>#{word.save}</Save>
-<Reset>Tilbakestill</Reset>
-<Cancel>#{word.cancel}</Cancel>
- </action>
-<label>
- <title>Navn</title>
-<template>Malnavn</template>
-<content>Innhold</content>
-<type>Maltype</type>
-</label>
-</UICLVTemplateForm_PageTemplateContainer>
+  <UICLVTemplateForm_PageTemplateContainer>
+    <action>
+      <Save>#{word.save}</Save>
+      <Reset>Tilbakestill</Reset>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <label>
+      <title>Navn</title>
+      <template>Malnavn</template>
+      <content>Innhold</content>
+      <type>Maltype</type>
+    </label>
+  </UICLVTemplateForm_PageTemplateContainer>
 
-<UICLVTemplateForm_CateTemplateContainer>
- <action>
-  <Save>#{word.save}</Save>
-<Reset>Tilbakestill</Reset>
-<Cancel>#{word.cancel}</Cancel>
- </action>
-<label>
- <title>Navn</title>
-<template>Malnavn</template>
-<content>Innhold</content>
-<type>Maltype</type>
-</label>
-</UICLVTemplateForm_CateTemplateContainer>
-<UICLVTemplateForm>
-  <label>
-    <paginators>Paginator</paginators>
-<list>Innhold</list>
-<navigation>Navigering</navigation>
-  </label>
-                          <action>
-                            <Save>#{word.save}</Save>
-                            <Reset>Tilbakestill</Reset> 
-                            <Cancel>#{word.cancel}</Cancel> 
-                          </action> 
-  <msg>
-  <template-existing>Dette malnavnet finnes allerede. Velg et annet.</template-existing>
-  </msg>
-</UICLVTemplateForm>
+  <UICLVTemplateForm_CateTemplateContainer>
+    <action>
+      <Save>#{word.save}</Save>
+      <Reset>Tilbakestill</Reset>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <label>
+      <title>Navn</title>
+      <template>Malnavn</template>
+      <content>Innhold</content>
+      <type>Maltype</type>
+    </label>
+  </UICLVTemplateForm_CateTemplateContainer>
+  <UICLVTemplateForm>
+    <label>
+      <paginators>Paginator</paginators>
+      <list>Innhold</list>
+      <navigation>Navigering</navigation>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Reset>Tilbakestill</Reset>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <template-existing>Dette malnavnet finnes allerede. Velg et annet.</template-existing>
+    </msg>
+  </UICLVTemplateForm>
 
   <!--
   ######################################################################################
@@ -1789,8 +1800,10 @@
   <TemplateContainerPopup>
     <title>
       <UIViewTemplate_UITemplateContainer><![CDATA[View & Edit Template]]></UIViewTemplate_UITemplateContainer>
-      <UIViewTemplate_UIActionsTemplateContainer><![CDATA[View & Edit Template]]></UIViewTemplate_UIActionsTemplateContainer>
-      <UIViewTemplate_UIOthersTemplateContainer><![CDATA[View & Edit Template]]></UIViewTemplate_UIOthersTemplateContainer>
+      <UIViewTemplate_UIActionsTemplateContainer>
+        <![CDATA[View & Edit Template]]></UIViewTemplate_UIActionsTemplateContainer>
+      <UIViewTemplate_UIOthersTemplateContainer>
+        <![CDATA[View & Edit Template]]></UIViewTemplate_UIOthersTemplateContainer>
     </title>
   </TemplateContainerPopup>
   <UITemplatesManager>
@@ -1938,7 +1951,8 @@
     <msg>
       <confirm-delete>Er du sikker på at du vil slette denne spørringen?</confirm-delete>
       <query-not-existed>Spørringen finnes ikke lenger.</query-not-existed>
-      <can-not-remove>Det oppstod en feil under sletting av spørringen. Kontakt systemansvarlig for informasjon.</can-not-remove>
+      <can-not-remove>Det oppstod en feil under sletting av spørringen. Kontakt systemansvarlig for informasjon.
+      </can-not-remove>
     </msg>
   </UIQueriesList>
   <UIQueriesForm>
@@ -1972,11 +1986,11 @@
       <UIQueriesForm>Rediger spørring</UIQueriesForm>
     </title>
   </EditQueryForm>
-<PermissionPopup>
-  <title>
-    <UIGroupMemberSelector>Rettighets velger</UIGroupMemberSelector>
-  </title>
-</PermissionPopup>
+  <PermissionPopup>
+    <title>
+      <UIGroupMemberSelector>Rettighets velger</UIGroupMemberSelector>
+    </title>
+  </PermissionPopup>
   <!--
   ######################################################################################
   #             org.exoplatform.ecm.webui.component.admin.folksonomy #
@@ -1986,7 +2000,7 @@
     <title>
       <EditStyle>Rediger stil</EditStyle>
       <RemoveStyle>Fjerne stil</RemoveStyle>
-    </title>    
+    </title>
   </UITagManager>
   <UITagStyleList>
     <header>
@@ -2015,9 +2029,12 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <range-validator>Utvalget er ugyldig. Formatet skal være: a..b, der a og b er positive heltall. Du kan bruke * istedet for b for å angi at området er ubegrenset.</range-validator>
+      <range-validator>Utvalget er ugyldig. Formatet skal være: a..b, der a og b er positive heltall. Du kan bruke *
+        istedet for b for å angi at området er ubegrenset.
+      </range-validator>
       <error-update>Oppdateringen mislyktes. Informasjonen er ugyldig.</error-update>
-      <item-not-existing>Du kan ikke lagre endringer til denne taggen siden det ikke finnes i databasen.</item-not-existing>
+      <item-not-existing>Du kan ikke lagre endringer til denne taggen siden det ikke finnes i databasen.
+      </item-not-existing>
     </msg>
   </UITagStyleForm>
   <FolksonomyPopup>
@@ -2057,9 +2074,9 @@
   ###################################################################################
   -->
   <PermissionValidator>
-  <msg>
+    <msg>
       <permission-path-invalid>Tillatelsen '{0}' er ugyldig.</permission-path-invalid>
-  </msg>
+    </msg>
   </PermissionValidator>
   <!--
   ###################################################################################
@@ -2128,9 +2145,9 @@
       <EditInfo>Rediger</EditInfo>
       <Delete>Slette</Delete>
     </title>
-<label>
-  <permission>{0} i {1}</permission>
-</label>
+    <label>
+      <permission>{0} i {1}</permission>
+    </label>
   </UIViewContainer>
   <ECMTemplate>
     <title>
@@ -2161,7 +2178,7 @@
       <selectMembership>Velg medlemsskap</selectMembership>
     </label>
   </UIDrivePermissionSelector>
-  
+
   <UIPermissionSelector>
     <label>
       <selectGroup>Velg gruppe</selectGroup>
@@ -2169,30 +2186,30 @@
       <selectMembership>Velg medlemsskap</selectMembership>
     </label>
   </UIPermissionSelector>
-  
+
   <UIAnyPermission>
     <label>
       <anyPermission>Noen tillatelser</anyPermission>
     </label>
   </UIAnyPermission>
-  
+
   <UIMDriveAnyPermission>
     <label>
       <anyPermission>Noen tillatelser</anyPermission>
     </label>
   </UIMDriveAnyPermission>
-  
+
   <UIQueriesAnyPermission>
     <label>
       <anyPermission>Noen tillatelser</anyPermission>
     </label>
   </UIQueriesAnyPermission>
-  
+
   <MetadataPermission>
     <label>
       <selectGroup>Velg gruppe</selectGroup>
     </label>
-  </MetadataPermission>  
+  </MetadataPermission>
   <MetadataPermission>
     <label>
       <selectMembership>Velg medlemsskap</selectMembership>
@@ -2215,7 +2232,7 @@
   </QueriesPermissionBrowse>
   <!--
   #########Since ECM 2.4##################
-  -->  
+  -->
   <UIViewFormTabPane>
     <label>
       <addSymLink>Legg til Symlink</addSymLink>
@@ -2223,14 +2240,14 @@
   </UIViewFormTabPane>
   <!--
   #########Since ECM 2.5##################
-  --> 
-  
+  -->
+
   <UIDriveForm>
-<msg>
-  <permission-path-invalid>Tillatelsen '{0}', er ugyldig.</permission-path-invalid>
-  </msg>
+    <msg>
+      <permission-path-invalid>Tillatelsen '{0}', er ugyldig.</permission-path-invalid>
+    </msg>
   </UIDriveForm>
-  
+
   <UITaxonomyTreeMainForm>
     <msg>
       <homepath-emty>Hjem stien er påkrevd.</homepath-emty>
@@ -2238,9 +2255,9 @@
     </msg>
   </UITaxonomyTreeMainForm>
   <UITaxonomyWorkingArea>
-  <msg>
-  <exist>Denne treenoden finnes allerede.</exist>
-  </msg>
+    <msg>
+      <exist>Denne treenoden finnes allerede.</exist>
+    </msg>
   </UITaxonomyWorkingArea>
 
   <PermissionTreeSelectUser>
@@ -2256,16 +2273,16 @@
       <userName>#{word.userName}</userName>
       <lastName>#{word.lastName}</lastName>
       <firstName>#{word.firstName}</firstName>
-    <email>#{word.email}</email>
+      <email>#{word.email}</email>
       <action>#{word.action}</action>
       <Add>#{word.Add}</Add>
       <Close>#{word.Close}</Close>
     </label>
   </PermissionTreeSelectUser>
-  
+
   <!--
   #########Since ECM 2.6 ##################
-  -->   
+  -->
   <DriveInputSet>
     <label>
       <nt_folder>Dokumentmappe</nt_folder>
@@ -2274,30 +2291,30 @@
       <exo_jsFolder>JavaScript-mappe</exo_jsFolder>
       <exo_linkFolder>Link mappe</exo_linkFolder>
       <exo_webFolder>Web innholdsmappe</exo_webFolder>
-   </label>
+    </label>
   </DriveInputSet>
   <UIPermissionTreeInfo>
-  <msg>
+    <msg>
       <confirm-delete-permission>Er du sikker på at du vil slette denne rettigheten?</confirm-delete-permission>
-      <no-permission-remove>Du kan ikke fjerne eieren eller systembrukeren.</no-permission-remove>  
-  </msg>
-  </UIPermissionTreeInfo>  
+      <no-permission-remove>Du kan ikke fjerne eieren eller systembrukeren.</no-permission-remove>
+    </msg>
+  </UIPermissionTreeInfo>
   <UITaxonomyTreeMainForm>
-<msg>
+    <msg>
       <no-right-target-path>Velg en annen hjem-sti.</no-right-target-path>
-</msg>
-</UITaxonomyTreeMainForm>
+    </msg>
+  </UITaxonomyTreeMainForm>
 
-<UIECMAdminControlPanel>
+  <UIECMAdminControlPanel>
     <tab>
-      <label>        
+      <label>
         <ManageUnLock>Administrer lås</ManageUnLock>
       </label>
-    </tab>        
-</UIECMAdminControlPanel>
-<UIUnLockForm>
+    </tab>
+  </UIECMAdminControlPanel>
+  <UIUnLockForm>
     <label>
-      <name>Stinode</name>      
+      <name>Stinode</name>
       <permissions>Rettigheter</permissions>
       <PermissionButton>UI Unlock Form</PermissionButton>
     </label>
@@ -2306,49 +2323,50 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <permission-require>Du må velge rettigheter.</permission-require>      
+      <permission-require>Du må velge rettigheter.</permission-require>
     </msg>
   </UIUnLockForm>
   <UILockHolderList>
-  <header>
-  <name>Grupper eller brukere</name>
-  <action>Handling</action>
-  </header>
-  <tooltip>
-<DeleteLock>Slette gruppe</DeleteLock>
-  </tooltip>
-  <msg>
-  <can-not-delete-lock-holder>Kan ikke slette gruppen {0}.</can-not-delete-lock-holder>
-  </msg>
+    <header>
+      <name>Grupper eller brukere</name>
+      <action>Handling</action>
+    </header>
+    <tooltip>
+      <DeleteLock>Slette gruppe</DeleteLock>
+    </tooltip>
+    <msg>
+      <can-not-delete-lock-holder>Kan ikke slette gruppen {0}.</can-not-delete-lock-holder>
+    </msg>
   </UILockHolderList>
   <UILockNodeList>
-  <header>
-  <name>Tittel</name>
-  <hoderLock>Lås eier</hoderLock>
-  <action>Handling</action>
-  </header>
-  <tooltip>
-<UnLock>Lås opp</UnLock>
-  </tooltip>
-  <msg>
-  <access-denied-exception>Du har ikke rettigheter til noden med stien {0}, eller så er denne noden slettet.</access-denied-exception>
-  </msg>
+    <header>
+      <name>Tittel</name>
+      <hoderLock>Lås eier</hoderLock>
+      <action>Handling</action>
+    </header>
+    <tooltip>
+      <UnLock>Lås opp</UnLock>
+    </tooltip>
+    <msg>
+      <access-denied-exception>Du har ikke rettigheter til noden med stien {0}, eller så er denne noden slettet.
+      </access-denied-exception>
+    </msg>
   </UILockNodeList>
   <EditUnLockForm>
     <title>
       <UIUnLockForm>Administrere lås</UIUnLockForm>
     </title>
-  </EditUnLockForm>  
+  </EditUnLockForm>
   <UITabPane>
     <action>
       <Close>#{word.close}</Close>
     </action>
     <title>
-    <UILockHolderContainer>Administrere lås</UILockHolderContainer>
-    <UILockNodeList>Låst Node</UILockNodeList>
+      <UILockHolderContainer>Administrere lås</UILockHolderContainer>
+      <UILockNodeList>Låst Node</UILockNodeList>
     </title>
   </UITabPane>
-  
+
   <UIViewFormTabPane>
     <action>
       <AddTabForm>Legg til fane</AddTabForm>
@@ -2356,21 +2374,21 @@
       <BackViewForm>Tilbake</BackViewForm>
     </action>
   </UIViewFormTabPane>
-  
- <UITemplateForm>
-<tab>
-<label>
-<defaultSkin>CSS</defaultSkin>
-</label>
-</tab>
-</UITemplateForm>
- 
+
+  <UITemplateForm>
+    <tab>
+      <label>
+        <defaultSkin>CSS</defaultSkin>
+      </label>
+    </tab>
+  </UITemplateForm>
+
   <UITabPane>
     <title>
       <UISkinTab>CSS</UISkinTab>
     </title>
   </UITabPane>
-  
+
   <UISkinTab>
     <header>
       <name>Navn</name>
@@ -2389,7 +2407,7 @@
       </title>
     </action>
   </UISkinTab>
-  
+
   <SkinForm>
     <label>
       <UITemplateContent>SkinForm</UITemplateContent>
@@ -2404,56 +2422,57 @@
     <title>Legg til/Rediger utseende</title>
   </SkinForm>
 
- <UITagManager>
-   <action>
-     <title>
-       <RemoveStyle>Fjern</RemoveStyle>
-         <AddStyle>Legg til stil</AddStyle>
-     </title>
-   </action>
-   <msg>
-     <confirm-delete>Er du sikker på at du vil slette denne tagg stilen?</confirm-delete>
-   </msg>
- </UITagManager>
+  <UITagManager>
+    <action>
+      <title>
+        <RemoveStyle>Fjern</RemoveStyle>
+        <AddStyle>Legg til stil</AddStyle>
+      </title>
+    </action>
+    <msg>
+      <confirm-delete>Er du sikker på at du vil slette denne tagg stilen?</confirm-delete>
+    </msg>
+  </UITagManager>
 
-<UITaxonomyTreeContainer>
-<action>
-<Cancel>#{word.close}</Cancel>
-</action>
-</UITaxonomyTreeContainer>
-<UITaxonomyTreeMainForm>
-<action>
-<NextViewPermission>Neste</NextViewPermission>
-<Reset>Reset</Reset>
-</action>
-</UITaxonomyTreeMainForm>
+  <UITaxonomyTreeContainer>
+    <action>
+      <Cancel>#{word.close}</Cancel>
+    </action>
+  </UITaxonomyTreeContainer>
+  <UITaxonomyTreeMainForm>
+    <action>
+      <NextViewPermission>Neste</NextViewPermission>
+      <Reset>Reset</Reset>
+    </action>
+  </UITaxonomyTreeMainForm>
 
-<UIPermissionTreeForm>
-<action>
-<Save>Save</Save>
-<Cancel>#{word.cancel}</Cancel>
-<Reset>Reset</Reset>
-<NextAddAction>Neste</NextAddAction>
-<Previous>Forrige</Previous>
-</action>
-</UIPermissionTreeForm>
+  <UIPermissionTreeForm>
+    <action>
+      <Save>Save</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <Reset>Reset</Reset>
+      <NextAddAction>Neste</NextAddAction>
+      <Previous>Forrige</Previous>
+    </action>
+  </UIPermissionTreeForm>
 
-<UIActionForm>
-<action>
-<PreviousViewPermission>Forrige</PreviousViewPermission>
-<NextViewTree>Neste</NextViewTree>
-</action>
-  <msg>
-    <xss-vulnerability-character>Feltet '{0}' inneholder  XSS sårbare tegn</xss-vulnerability-character>
-<xss-vulnerability-character-wo-label>Inndataene kan inneholde XSS sårbare tegn</xss-vulnerability-character-wo-label>
-  </msg>
-</UIActionForm>
+  <UIActionForm>
+    <action>
+      <PreviousViewPermission>Forrige</PreviousViewPermission>
+      <NextViewTree>Neste</NextViewTree>
+    </action>
+    <msg>
+      <xss-vulnerability-character>Feltet '{0}' inneholder XSS sårbare tegn</xss-vulnerability-character>
+      <xss-vulnerability-character-wo-label>Inndataene kan inneholde XSS sårbare tegn
+      </xss-vulnerability-character-wo-label>
+    </msg>
+  </UIActionForm>
 
-<UITaxonomyTreeWorkingArea>
-<action>
-<Previous>Forrige</Previous>
-</action>
-</UITaxonomyTreeWorkingArea>
+  <UITaxonomyTreeWorkingArea>
+    <action>
+      <Previous>Forrige</Previous>
+    </action>
+  </UITaxonomyTreeWorkingArea>
 
   <UITabPane>
     <title>
@@ -2461,7 +2480,7 @@
       <UITagPermissionManager>Tagg tillatelse behandler</UITagPermissionManager>
     </title>
   </UITabPane>
-  
+
   <UITagPermissionInfo>
     <header>
       <usersOrGroups>Bruker eller gruppe</usersOrGroups>
@@ -2474,7 +2493,7 @@
     </action>
     <msg>
       <confirm-delete-permission>Er du sikker på at du vil slette denne rettigheten?</confirm-delete-permission>
-    </msg>   
+    </msg>
   </UITagPermissionInfo>
   <UITagPermissionForm>
     <title>Legge til rettighet</title>
@@ -2487,32 +2506,32 @@
     </label>
     <msg>
       <userOrGroup-alreadyExists>Dette medlemsskapet finnes allerede. Velg et annet.</userOrGroup-alreadyExists>
-    </msg>    
+    </msg>
   </UITagPermissionForm>
-  
+
   <UIGroupMemberSelector>
     <label>
       <selectGroup>Velg gruppe</selectGroup>
       <selectMembership>Velg medlemsskap</selectMembership>
     </label>
   </UIGroupMemberSelector>
-  
+
   <UIFolksonomyManager>
-  <msg>
+    <msg>
       <confirm-delete>Er du sikker på at du vil slette denne stilen?</confirm-delete>
-  </msg>
+    </msg>
     <action>
       <title>
         <AddStyle>Legg til stil</AddStyle>
       </title>
     </action>
-  </UIFolksonomyManager>  
-<UIActionForm>
-  <title>
-  <ShowComponent>Åpne vindu</ShowComponent>
-  <removeReference>Fjern</removeReference>
-  </title>
-  </UIActionForm> 
+  </UIFolksonomyManager>
+  <UIActionForm>
+    <title>
+      <ShowComponent>Åpne vindu</ShowComponent>
+      <removeReference>Fjern</removeReference>
+    </title>
+  </UIActionForm>
   <NodeTypeNameValidator>
     <msg>
       <Invalid-char>Det finnes ugyldige tegn. Angi en annen verdi.</Invalid-char>
@@ -2521,10 +2540,12 @@
   </NodeTypeNameValidator>
   <UIActionForm>
     <msg>
-      <constraint-violation-exception>Noden '{0}' kan ikke legges til '{1}' i arbeidsområdet '{2}'.  Det er problem med rettigheter eller betingelser.</constraint-violation-exception>
+      <constraint-violation-exception>Noden '{0}' kan ikke legges til '{1}' i arbeidsområdet '{2}'. Det er problem med
+        rettigheter eller betingelser.
+      </constraint-violation-exception>
     </msg>
   </UIActionForm>
-  
+
   <UIWorkspaceWizard>
     <msg>
       <name-not-allowed>Forbudt navn</name-not-allowed>
@@ -2532,35 +2553,37 @@
   </UIWorkspaceWizard>
   <UIRepositoryForm>
     <msg>
-      <not-complete-repository>The repository is being created. You need to wait a few minutes before creating another one.</not-complete-repository>
+      <not-complete-repository>The repository is being created. You need to wait a few minutes before creating another
+        one.
+      </not-complete-repository>
     </msg>
   </UIRepositoryForm>
-  
+
   <UIViewFormTabPane>
-  <label>
-  <addCategory>Legge til kategori</addCategory>
-          <addLocalizationLink>Legge til oversettelse</addLocalizationLink>
-  </label>
+    <label>
+      <addCategory>Legge til kategori</addCategory>
+      <addLocalizationLink>Legge til oversettelse</addLocalizationLink>
+    </label>
   </UIViewFormTabPane>
 
-<UIDriveForm>
-<label>
-<allowNodeTypesOnTree>Tillatt nodetype for treet til venstre:</allowNodeTypesOnTree>
-</label>
-</UIDriveForm>
-<DriveInputSet>
-<title>
-<RemovePermission>Remove Permission</RemovePermission>
-<ChooseNodeType>Velg nodetype</ChooseNodeType>
-<RemoveNodeType>Fjern</RemoveNodeType>
-</title>
-</DriveInputSet>
-<PopupNodeTypeSelector>
-<title>
-<UINodeTypeSelector>Velg nodetype</UINodeTypeSelector>
-<PopupNodeTypeSelector>Velg nodetype</PopupNodeTypeSelector>
-</title>
-</PopupNodeTypeSelector>
+  <UIDriveForm>
+    <label>
+      <allowNodeTypesOnTree>Tillatt nodetype for treet til venstre:</allowNodeTypesOnTree>
+    </label>
+  </UIDriveForm>
+  <DriveInputSet>
+    <title>
+      <RemovePermission>Remove Permission</RemovePermission>
+      <ChooseNodeType>Velg nodetype</ChooseNodeType>
+      <RemoveNodeType>Fjern</RemoveNodeType>
+    </title>
+  </DriveInputSet>
+  <PopupNodeTypeSelector>
+    <title>
+      <UINodeTypeSelector>Velg nodetype</UINodeTypeSelector>
+      <PopupNodeTypeSelector>Velg nodetype</PopupNodeTypeSelector>
+    </title>
+  </PopupNodeTypeSelector>
   <UINodeTypeSelector>
     <label>
       <selectedAllNodeTypes>Velg alle nodetypene</selectedAllNodeTypes>
@@ -2568,14 +2591,14 @@
   </UINodeTypeSelector>
   <UIScriptForm>
     <msg>
-      <PathNotFoundException>Skriptet finnes allerede i mappen '{0}'.</PathNotFoundException>      
+      <PathNotFoundException>Skriptet finnes allerede i mappen '{0}'.</PathNotFoundException>
     </msg>
   </UIScriptForm>
- <UINodeTypeList>
-   <msg>
-   <no-list>Det er ingen nodetypen som samsvarer med søket ditt.</no-list>
-   </msg>
- </UINodeTypeList>
+  <UINodeTypeList>
+    <msg>
+      <no-list>Det er ingen nodetypen som samsvarer med søket ditt.</no-list>
+    </msg>
+  </UINodeTypeList>
   <UIActionForm>
     <msg>
       <canotChangeActionId>Du kan ikke endre handlings-IDen.</canotChangeActionId>
@@ -2593,7 +2616,9 @@
   </UIPageIterator>
   <UILockNodeList>
     <msg>
-      <can-not-unlock-node>Du har ikke tillatelse til å låse opp denne noden. Kontakt administratoren for å få rettigheter.</can-not-unlock-node>
+      <can-not-unlock-node>Du har ikke tillatelse til å låse opp denne noden. Kontakt administratoren for å få
+        rettigheter.
+      </can-not-unlock-node>
     </msg>
- </UILockNodeList>
+  </UILockNodeList>
 </bundle>

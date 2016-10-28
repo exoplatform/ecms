@@ -13,21 +13,21 @@
         <Repository>Saugykla</Repository>
         <Advanced>Išplėstinės nuostatos</Advanced>
       </label>
-    </tab>    
-    <label>     
+    </tab>
+    <label>
       <UITaxonomyManagerTrees>Kategorijos</UITaxonomyManagerTrees>
       <UIMetadataManager>Metaduomenys</UIMetadataManager>
       <UINamespaceManager>Vardų sritys</UINamespaceManager>
       <UINodeTypeManager>Mazgo tipai</UINodeTypeManager>
       <UITemplatesManager>Dokumentai</UITemplatesManager>
-   <UICLVTemplatesManager>Sąrašas</UICLVTemplatesManager>
+      <UICLVTemplatesManager>Sąrašas</UICLVTemplatesManager>
       <UIViewManager>Peržiūros</UIViewManager>
       <UIDriveManager>Diskai</UIDriveManager>
       <UIQueriesManager>Užklausos</UIQueriesManager>
       <UIActionManager>Veiksmai</UIActionManager>
       <UIScriptManager>Scenarijai</UIScriptManager>
       <UIUnLockManager>Užraktai</UIUnLockManager>
-      <UIFolksonomyManager>Žymos</UIFolksonomyManager>      
+      <UIFolksonomyManager>Žymos</UIFolksonomyManager>
     </label>
     <msg>
       <access-denied>Prieiga uždrausta. Jūs neturite teisės atlikti šio veiksmo.</access-denied>
@@ -40,11 +40,14 @@
   -->
   <UITaxonomyWorkingArea>
     <msg>
-      <referential-integrity>Negalima skaityti šaltinio failo, arba paskirties kategorija yra žemesnio lygio kategorija.</referential-integrity>
+      <referential-integrity>Negalima skaityti šaltinio failo, arba paskirties kategorija yra žemesnio lygio
+        kategorija.
+      </referential-integrity>
       <no-taxonomy-selected>Turite kopijuoti arba iškirpti bent vieną kategoriją.</no-taxonomy-selected>
       <node-is-cutting>Jūs negalite įklijuoti čia. Kategorijos mazgas '{0}' gali būti iškirptas.</node-is-cutting>
       <can-not-paste>Nėra iškarpinėje duomenų, kad įklijuoti.</can-not-paste>
-      <reference-exception>Negalite panaikinti šios kategorijos, nes ji šiuo metu yra susieta su turiniu.</reference-exception>
+      <reference-exception>Negalite panaikinti šios kategorijos, nes ji šiuo metu yra susieta su turiniu.
+      </reference-exception>
       <path-error>Įvyko klaida šalinant šios kategorijos mazgą.</path-error>
     </msg>
   </UITaxonomyWorkingArea>
@@ -60,7 +63,7 @@
       <remove>Ištrinti</remove>
     </title>
   </UITaxonomyManager>
-  
+
   <!--
   ################################################################################
   #    org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyTreeContainer#
@@ -71,15 +74,17 @@
       <info>
         <UITaxonomyTreeMainForm>Nurodykite kategorijos pavadinimą, darbo vietos ir namų kelią.</UITaxonomyTreeMainForm>
         <UIPermissionTreeManager>Nustatyti teisę kategorijos medžiui.</UIPermissionTreeManager>
-        <UIActionTaxonomyManager>Pridėkite veiksmą prie kategorijų medžio, kad baigti kūrimą ar atnaujinimą.</UIActionTaxonomyManager>
-        <UITaxonomyTreeCreateChild>Pridėti, kopijuoti, kirpti ir pasirinkti teises redaguojant taksonomijos medį.</UITaxonomyTreeCreateChild>
+        <UIActionTaxonomyManager>Pridėkite veiksmą prie kategorijų medžio, kad baigti kūrimą ar atnaujinimą.
+        </UIActionTaxonomyManager>
+        <UITaxonomyTreeCreateChild>Pridėti, kopijuoti, kirpti ir pasirinkti teises redaguojant taksonomijos medį.
+        </UITaxonomyTreeCreateChild>
       </info>
     </tab>
     <msg>
       <not-exist-tree>Kategorijos medis neegzistuoja.</not-exist-tree>
     </msg>
   </UITaxonomyTreeContainer>
-  
+
   <!--
 ##########################################################################################
 #     org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyTreeMainForm          #
@@ -111,45 +116,45 @@
       <AddPath>Pridėti kelią</AddPath>
     </title>
   </TaxonomyTreeHomePath>
-  
+
   <!--
 ##########################################################################################
 #     org.exoplatform.ecm.webui.component.admin.taxonomy.tree.info.UIPermissionTreeInfo  #
 ##########################################################################################
 -->
-<UIPermissionTreeInfo>
-<action>
-<title>
-<Delete>Ištrinti</Delete>
-<Edit>Redaguoti</Edit>
-</title>
-</action>
-<header>
-<usersOrGroups>Vartotojas arba grupė</usersOrGroups>
-<read>Skaityti</read>
-<addNode>Pridėti mazgą</addNode>
-<setProperty>Nustatyti ypatybę</setProperty>
-<remove>Pašalinti</remove>
-<action>Veiksmas</action>
-</header>
-</UIPermissionTreeInfo>
+  <UIPermissionTreeInfo>
+    <action>
+      <title>
+        <Delete>Ištrinti</Delete>
+        <Edit>Redaguoti</Edit>
+      </title>
+    </action>
+    <header>
+      <usersOrGroups>Vartotojas arba grupė</usersOrGroups>
+      <read>Skaityti</read>
+      <addNode>Pridėti mazgą</addNode>
+      <setProperty>Nustatyti ypatybę</setProperty>
+      <remove>Pašalinti</remove>
+      <action>Veiksmas</action>
+    </header>
+  </UIPermissionTreeInfo>
 
-<!--
-##########################################################################################
-#     org.exoplatform.ecm.webui.component.admin.taxonomy.tree.info.UIPermissionTreeForm  #
-##########################################################################################
--->
+  <!--
+  ##########################################################################################
+  #     org.exoplatform.ecm.webui.component.admin.taxonomy.tree.info.UIPermissionTreeForm  #
+  ##########################################################################################
+  -->
   <UIPermissionTreeForm>
     <msg>
       <have-not-any-permission>Nurodykite bent vieną teisę šiam mazgui.</have-not-any-permission>
     </msg>
   </UIPermissionTreeForm>
 
-<!--
-################################################################################
-#     org.exoplatform.ecm.webui.component.admin.taxonomy.UIActionForm          #
-################################################################################
--->
+  <!--
+  ################################################################################
+  #     org.exoplatform.ecm.webui.component.admin.taxonomy.UIActionForm          #
+  ################################################################################
+  -->
 
   <UIActionForm>
     <title>Įtraukti veiksmą į kategorijų medį</title>
@@ -250,7 +255,8 @@
     <msg>
       <confirm-delete>Ar tikrai norite naikinti šiuos metaduomenis?</confirm-delete>
       <delete-successful>"{0}" šablonai buvo sėkmingai ištrinti.</delete-successful>
-      <path-not-found-exception>Šie metaduomenys buvo ištrinti arba pakeisti. Spustelėkite mygtuką atnaujinti.</path-not-found-exception>
+      <path-not-found-exception>Šie metaduomenys buvo ištrinti arba pakeisti. Spustelėkite mygtuką atnaujinti.
+      </path-not-found-exception>
     </msg>
     <action>
       <Add>Pridėti metaduomenis</Add>
@@ -425,13 +431,13 @@
       <action>Veiksmas</action>
     </header>
   </UITreeList>
-  
+
   <UIRepositoryList>
     <titlebar>
       <label>Valdyti ECM pagrindines funkcijas</label>
     </titlebar>
   </UIRepositoryList>
-  
+
   <!--
   ################################################################################
   #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeManager #
@@ -561,8 +567,11 @@
     </action>
     <msg>
       <register-successfully>'{0}' mazgo tipas buvo sėkmingai užregistruotas.</register-successfully>
-      <supertype-is-madatory>Super tipas yra privalomas kai užregistruojate naują mazgo tipą. Prašome pasirinkti bent vieną super tipą.</supertype-is-madatory>
-      <register-failed>Mazgo tipo registracija buvo nesėkminga. Ji arba jau yra arba super tipas yra netinkamas.</register-failed>
+      <supertype-is-madatory>Super tipas yra privalomas kai užregistruojate naują mazgo tipą. Prašome pasirinkti bent
+        vieną super tipą.
+      </supertype-is-madatory>
+      <register-failed>Mazgo tipo registracija buvo nesėkminga. Ji arba jau yra arba super tipas yra netinkamas.
+      </register-failed>
       <nodeType-name>Mazgo tipo pavadinimas yra reikalaujamas.</nodeType-name>
       <fileName-invalid>Failo varde yra neleistinų simbolių.</fileName-invalid>
       <node-type-exists>Mazgo tipas '{0}', jau yra.</node-type-exists>
@@ -581,7 +590,8 @@
     </tab>
     <msg>
       <property-name>Ypatybės apibrėžimo pavadinimas yra negaliojantis.</property-name>
-      <not-supported-value-constraints>Šis reikalinga tipas nepalaiko vertės apribojimų.</not-supported-value-constraints>
+      <not-supported-value-constraints>Šis reikalinga tipas nepalaiko vertės apribojimų.
+      </not-supported-value-constraints>
     </msg>
   </UIPropertyDefinitionForm>
   <UIChildNodeDefinitionForm>
@@ -735,10 +745,10 @@
     <action>
       <AddAction>Pridėti veiksmo tipą</AddAction>
     </action>
-<msg>
- <confirm-delete>Ar tikrai norite panaikinti šį veiksmo tipą?</confirm-delete>
-<cannot-delete>Jūs negalite pašalinti šio veiksmo tipo, nes sistema vis dar naudoja jį.</cannot-delete>
-</msg>
+    <msg>
+      <confirm-delete>Ar tikrai norite panaikinti šį veiksmo tipą?</confirm-delete>
+      <cannot-delete>Jūs negalite pašalinti šio veiksmo tipo, nes sistema vis dar naudoja jį.</cannot-delete>
+    </msg>
   </UIActionTypeList>
   <!--
   ######################################################################################
@@ -791,11 +801,11 @@
       <UITemplateContainer>Dokumentai</UITemplateContainer>
       <UIActionsTemplateContainer>Veiksmai</UIActionsTemplateContainer>
       <UIOthersTemplateContainer>Kiti</UIOthersTemplateContainer>
-  <UIActionScriptContainer>Veiksmas</UIActionScriptContainer>
-  <UIWidgetScriptContainer>Valdikliai</UIWidgetScriptContainer>
-<UIInterceptorScriptContainer>Perėmėjai</UIInterceptorScriptContainer>
+      <UIActionScriptContainer>Veiksmas</UIActionScriptContainer>
+      <UIWidgetScriptContainer>Valdikliai</UIWidgetScriptContainer>
+      <UIInterceptorScriptContainer>Perėmėjai</UIInterceptorScriptContainer>
 
-<nodeTypeDefinition>Mazgo tipas</nodeTypeDefinition>
+      <nodeTypeDefinition>Mazgo tipas</nodeTypeDefinition>
       <propertyDefinition>Ypatybė</propertyDefinition>
       <childNodeDefinition>Antrinis mazgas</childNodeDefinition>
       <SuperTypeTab>Super tipai</SuperTypeTab>
@@ -810,11 +820,11 @@
   ######################################################################################
   -->
   <UIViewList>
-   <title>
-     <View>Peržiūrėti</View>
-     <EditInfo>Redaguoti</EditInfo>
-     <Delete>Ištrinti</Delete>
-   </title>
+    <title>
+      <View>Peržiūrėti</View>
+      <EditInfo>Redaguoti</EditInfo>
+      <Delete>Ištrinti</Delete>
+    </title>
     <header>
       <name>Vardas</name>
       <permissions>Teisės</permissions>
@@ -848,71 +858,71 @@
     </title>
   </EditPopup>
 
-<UITabList>
-                  <title>
-                    <Edit>Redaguoti</Edit>
-                    <Delete>Ištrinti</Delete>
-                  </title>       
- <header>
-  <tabName>Skirtukas</tabName>
-  <localizeButtons>Aprašymas</localizeButtons>
-<action>Veiksmai</action>
-</header>
-<action>
- <AddTab>Pridėti</AddTab>
-</action>
-<msg>
- <confirm-delete>Ar tikrai norite naikinti šį skirtuką?</confirm-delete>
-</msg>
-<grid>
- <msg>
-  <empty>Rodinyje nėra jokio skirtuko</empty>
- </msg>
-</grid>
-</UITabList>
+  <UITabList>
+    <title>
+      <Edit>Redaguoti</Edit>
+      <Delete>Ištrinti</Delete>
+    </title>
+    <header>
+      <tabName>Skirtukas</tabName>
+      <localizeButtons>Aprašymas</localizeButtons>
+      <action>Veiksmai</action>
+    </header>
+    <action>
+      <AddTab>Pridėti</AddTab>
+    </action>
+    <msg>
+      <confirm-delete>Ar tikrai norite naikinti šį skirtuką?</confirm-delete>
+    </msg>
+    <grid>
+      <msg>
+        <empty>Rodinyje nėra jokio skirtuko</empty>
+      </msg>
+    </grid>
+  </UITabList>
 
-<UIViewPermissionList>
- <title>Pasirinkite savininką su teisėmis šiame rodinyje:</title>
-<label>
- <permission>{0} iš {1}</permission>
-</label>
-<msg>
- <confirm-delete>Ar tikrai norite panaikinti šį leidimą?</confirm-delete>
-  <permission-cannot-empty>Rodinio leidimas yra reikalaujamas ir jis negali būti tuščias.</permission-cannot-empty>
-</msg>
-</UIViewPermissionList>
+  <UIViewPermissionList>
+    <title>Pasirinkite savininką su teisėmis šiame rodinyje:</title>
+    <label>
+      <permission>{0} iš {1}</permission>
+    </label>
+    <msg>
+      <confirm-delete>Ar tikrai norite panaikinti šį leidimą?</confirm-delete>
+      <permission-cannot-empty>Rodinio leidimas yra reikalaujamas ir jis negali būti tuščias.</permission-cannot-empty>
+    </msg>
+  </UIViewPermissionList>
 
-<UIViewPermissionList>
-                         <title>
-                           <Delete>Ištrinti</Delete>
-                         </title>
- <header>
-<friendlyPermission>Teisės</friendlyPermission>
-     <action>Veiksmas</action>
- </header>
-<action>
- <title>
-  <Delete>Ištrinti</Delete>
- </title>
-</action>
-<grid>
- <msg>
-  <empty>Nėra jokio leidimo rodiniui</empty>
- </msg>
-</grid>
-</UIViewPermissionList>
+  <UIViewPermissionList>
+    <title>
+      <Delete>Ištrinti</Delete>
+    </title>
+    <header>
+      <friendlyPermission>Teisės</friendlyPermission>
+      <action>Veiksmas</action>
+    </header>
+    <action>
+      <title>
+        <Delete>Ištrinti</Delete>
+      </title>
+    </action>
+    <grid>
+      <msg>
+        <empty>Nėra jokio leidimo rodiniui</empty>
+      </msg>
+    </grid>
+  </UIViewPermissionList>
 
-<UIViewPermissionForm>
-<action>
- <Add>Pridėti</Add>
-</action>
-<label>
- <userOrGroup>Vartotojas arba grupė</userOrGroup>
-</label>
-<msg>
- <permission-exist>Leidimas "{0}" jau yra sąraše.</permission-exist>
-</msg>
-</UIViewPermissionForm>
+  <UIViewPermissionForm>
+    <action>
+      <Add>Pridėti</Add>
+    </action>
+    <label>
+      <userOrGroup>Vartotojas arba grupė</userOrGroup>
+    </label>
+    <msg>
+      <permission-exist>Leidimas "{0}" jau yra sąraše.</permission-exist>
+    </msg>
+  </UIViewPermissionForm>
 
   <!--
   ######################################################################################
@@ -927,15 +937,15 @@
     <msg>
       <view-name-invalid>Rodinio pavadinimas yra reikalingas.</view-name-invalid>
       <fileName-invalid>Rodinio pavadinime yra neleistinų simbolių.</fileName-invalid>
-      <permission-not-empty>Prašome pasirinkti rodinio teisę.</permission-not-empty>      
+      <permission-not-empty>Prašome pasirinkti rodinio teisę.</permission-not-empty>
       <mustbe-add-tab>Prašome pridėti skirtuką.</mustbe-add-tab>
-<mustbe-add-permission>Pasirinkite leidimą šiam rodiniui.</mustbe-add-permission>
+      <mustbe-add-permission>Pasirinkite leidimą šiam rodiniui.</mustbe-add-permission>
       <view-exist>Rodinio pavadinimas jau egzistuoja.</view-exist>
     </msg>
     <label>
       <viewName>Vardas</viewName>
       <template>Šablonas</template>
-<version>Atkurti versiją</version>
+      <version>Atkurti versiją</version>
       <enableVersion>Įgalinti versiją</enableVersion>
       <hideExplorerPanel>Slėpti naršyklės panelę šoninėje įrankių juostoje</hideExplorerPanel>
     </label>
@@ -980,14 +990,14 @@
       <overloadThumbnail>Perkrovos miniatūros</overloadThumbnail>
       <manageHidden>Slėpti/Rodyti turinį</manageHidden>
       <comment>Komentuoti</comment>
-      <vote>Balsuoti</vote>  
+      <vote>Balsuoti</vote>
       <addCategory>Pridėti kategoriją</addCategory>
       <addLocalizationLink>Pridėti vertimą</addLocalizationLink>
       <publicationRequestApproval>Prašymo patvirtinimas</publicationRequestApproval>
       <publicationApproveContent>Patvirtinti turinį</publicationApproveContent>
       <publicationPublish>Paskelbti</publicationPublish>
-<contentNavigation>Turinio navigacija</contentNavigation>
-<addSymLink>Pridėti nuorodą</addSymLink>
+      <contentNavigation>Turinio navigacija</contentNavigation>
+      <addSymLink>Pridėti nuorodą</addSymLink>
       <checkIn>Check In</checkIn>
       <checkOut>Check Out</checkOut>
       <shareDocuments>Dalintis</shareDocuments>
@@ -996,8 +1006,8 @@
       <uploadNewVersion>Upload a new version</uploadNewVersion>
     </label>
     <action>
-      <Save>#{word.save}</Save>      
-      <Cancel>#{word.cancel}</Cancel>      
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
   </UITabForm>
   <UIPermissionForm>
@@ -1010,7 +1020,7 @@
       <label>
         <UITabContainer>Veiksmas</UITabContainer>
         <UIViewForm>Rodyti</UIViewForm>
-        <UIViewPermissionContainer>Teisė</UIViewPermissionContainer>    
+        <UIViewPermissionContainer>Teisė</UIViewPermissionContainer>
       </label>
     </tab>
     <action>
@@ -1027,19 +1037,19 @@
     </title>
   </PopupViewPermission>
 
-<TabForm_Popup>
- <title>
-  <UITabForm>Pridėti/redaguoti skirtuką</UITabForm>
- </title>
-</TabForm_Popup>
+  <TabForm_Popup>
+    <title>
+      <UITabForm>Pridėti/redaguoti skirtuką</UITabForm>
+    </title>
+  </TabForm_Popup>
 
-<tab_permission>
- <title>
-  <SelectUser>Pasirinkti vartotoją</SelectUser>
-<SelectMember>Pasirinkti narį</SelectMember>
-<AddAny>Bet kas</AddAny>
- </title>
-</tab_permission>
+  <tab_permission>
+    <title>
+      <SelectUser>Pasirinkti vartotoją</SelectUser>
+      <SelectMember>Pasirinkti narį</SelectMember>
+      <AddAny>Bet kas</AddAny>
+    </title>
+  </tab_permission>
   <!--
   ######################################################################################
   #             org.exoplatform.ecm.webui.component.admin.view.UIECMTemplateList   #
@@ -1228,7 +1238,7 @@
   #             org.exoplatform.ecm.webui.component.admin.script.ecmScriptForm #
   ######################################################################################
   -->
- 
+
   <ecmScriptForm>
     <label>
       <selectVersion>Versijos</selectVersion>
@@ -1260,7 +1270,7 @@
       <name-too-long>Kategorijos pavadinime gali būti ne daugiau kaip 30 simbolių.</name-too-long>
     </msg>
   </UITaxonomyForm>
-    
+
   <EditTaxonomyTreePopup>
     <title>
       <UITaxonomyTreeContainer>Redaguoti kategorijos medį</UITaxonomyTreeContainer>
@@ -1272,15 +1282,15 @@
       <UITaxonomyTreeContainer>Pridėti kategorijos medį</UITaxonomyTreeContainer>
     </title>
   </AddTaxonomyTreePopup>
-  
+
   <TaxonomyPopupCreateChild>
     <title>
       <UITaxonomyTreeCreateChildForm>Redaguoti kategorijos medį</UITaxonomyTreeCreateChildForm>
     </title>
   </TaxonomyPopupCreateChild>
 
-<UITaxonomyTreeCreateChildForm>
-  <action>
+  <UITaxonomyTreeCreateChildForm>
+    <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
     </action>
@@ -1294,41 +1304,41 @@
       <name-too-long>Kategorijos pavadinime neturi būti daugiau negu {0} simbolių.</name-too-long>
       <exist>Kategorijos pavadinimas jau egzistuoja.</exist>
     </msg>
-</UITaxonomyTreeCreateChildForm>
+  </UITaxonomyTreeCreateChildForm>
 
   <PopupComponent>
     <title>
       <UIOneNodePathSelector>Pasirinkti kelią</UIOneNodePathSelector>
     </title>
   </PopupComponent>
-  
+
   <TaxoPopupUserSelector>
-  <title>
+    <title>
       <TaxoTreeSelectUserOrGroup>Pasirinkti vartotoją</TaxoTreeSelectUserOrGroup>
       <UIPermissionTreeSelectUser>Pasirinkti vartotoją</UIPermissionTreeSelectUser>
     </title>
   </TaxoPopupUserSelector>
 
   <TaxoTreeSelectUserOrGroupPopup>
-  <title>
+    <title>
       <TaxoTreeSelectUserOrGroup>Pasirinkti narystę</TaxoTreeSelectUserOrGroup>
     </title>
   </TaxoTreeSelectUserOrGroupPopup>
-  
+
   <TaxoTreeAnyPermission>
     <label>
       <any>Bet kuris leidimas</any>
       <anyPermission>TaxoTreeAnyPermission</anyPermission>
     </label>
   </TaxoTreeAnyPermission>
-  
+
   <TaxoTreeSelectUserOrGroup>
     <label>
       <selectGroup>Pasirinkti grupę</selectGroup>
       <selectMembership>Pasirinkti narystę</selectMembership>
     </label>
   </TaxoTreeSelectUserOrGroup>
-  
+
   <!--
   ######################################################################################
   #             org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyTreeList #
@@ -1355,7 +1365,7 @@
       <is-in-trash>Šis kategorijos medis buvo perkeltas į šiukšliadėžę.</is-in-trash>
     </msg>
   </UITaxonomyTreeList>
-  
+
   <!--
   ######################################################################################
   #             org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyTreeForm  #
@@ -1372,7 +1382,7 @@
       <homapath-emty>Įvesties kelias</homapath-emty>
     </msg>
   </UITaxonomyTreeForm>
-  
+
   <UIPermissionTreeForm>
     <label>
       <UIPopupWindow>Pasirinkti</UIPopupWindow>
@@ -1396,38 +1406,38 @@
       <access-denied>Prieiga uždrausta. Jūs negalite pašalinti šio leidimo.</access-denied>
     </msg>
   </UIPermissionTreeForm>
-  
+
   <PopupTaxonomyJCRBrowser>
-  <title>
+    <title>
       <UIOneNodePathSelector>Pasirinkti pradinį kelią</UIOneNodePathSelector>
     </title>
   </PopupTaxonomyJCRBrowser>
-  
+
   <PopupTaxonomyTreePermission>
     <title>
       <UIPermissionSelector>Teisės pasirinkimas</UIPermissionSelector>
     </title>
-   </PopupTaxonomyTreePermission>
-   
-   <PopupDrivePermission>
+  </PopupTaxonomyTreePermission>
+
+  <PopupDrivePermission>
     <title>
       <AddDrivePermissionSelector>Pridėti teisę</AddDrivePermissionSelector>
       <UIPermissionSelector>Pasirinkti teisę</UIPermissionSelector>
     </title>
   </PopupDrivePermission>
-  
+
   <UIPopupWindow>
     <title>
       <UIPermissionManager>Teisių valdymas</UIPermissionManager>
     </title>
-   </UIPopupWindow>
+  </UIPopupWindow>
 
   <PopupUserSelector>
     <title>
       <UIUserContainer>Teisių valdymas</UIUserContainer>
     </title>
-   </PopupUserSelector>
-   
+  </PopupUserSelector>
+
   <UIPermissionInfo>
     <action>
       <title>
@@ -1499,13 +1509,13 @@
       <access-denied>Prieiga uždrausta. Jūs negalite pašalinti šio leidimo.</access-denied>
     </msg>
   </UIPermissionForm>
-  
+
   <TaxonomyPopup>
     <title>
       <UITaxonomyForm>Pridėti kategoriją</UITaxonomyForm>
     </title>
   </TaxonomyPopup>
-  
+
   <UITaxonomyManager>
     <title>
       <permission>Teisių valdymas</permission>
@@ -1533,7 +1543,7 @@
       <template-not-exist>Šablonas, kurį jūs bandote ištrinti neegzistuoja.</template-not-exist>
     </msg>
   </UITemplateList>
-  
+
   <UIActionsTemplateList>
     <header>
       <name>Tipas</name>
@@ -1551,7 +1561,7 @@
       <template-not-exist>Šablonas, kurį jūs bandote ištrinti, neegzistuoja.</template-not-exist>
     </msg>
   </UIActionsTemplateList>
-  
+
   <UIOthersTemplateList>
     <header>
       <name>Tipas</name>
@@ -1570,19 +1580,19 @@
     </msg>
   </UIOthersTemplateList>
 
- <!--
-  ######################################################################################
-  #             org.exoplatform.ecm.webui.component.admin.templates.clv package #
-  ######################################################################################
-  -->
+  <!--
+   ######################################################################################
+   #             org.exoplatform.ecm.webui.component.admin.templates.clv package #
+   ######################################################################################
+   -->
 
-<UITabPane>
- <title>
- <ContentTemplateContainer>Turinys</ContentTemplateContainer>
-<CateTemplateContainer>Navigacija</CateTemplateContainer>
-<PageTemplateContainer>Numeracija</PageTemplateContainer>
- </title>
-</UITabPane>
+  <UITabPane>
+    <title>
+      <ContentTemplateContainer>Turinys</ContentTemplateContainer>
+      <CateTemplateContainer>Navigacija</CateTemplateContainer>
+      <PageTemplateContainer>Numeracija</PageTemplateContainer>
+    </title>
+  </UITabPane>
 
   <UICLVTemplateList>
     <title>
@@ -1596,8 +1606,8 @@
     </header>
     <action>
       <AddTemplate>Pridėti šabloną</AddTemplate>
-<Edit>Redaguoti</Edit>
-<Delete>Ištrinti</Delete>
+      <Edit>Redaguoti</Edit>
+      <Delete>Ištrinti</Delete>
     </action>
     <msg>
       <confirm-delete>Ar tikrai norite ištrinti šį šabloną?</confirm-delete>
@@ -1607,7 +1617,7 @@
     </msg>
   </UICLVTemplateList>
 
-<CateTemplateList>
+  <CateTemplateList>
     <header>
       <title>Vardas</title>
       <action>Veiksmas</action>
@@ -1619,12 +1629,12 @@
     </title>
     <action>
       <AddTemplate>Pridėti šabloną</AddTemplate>
-<Edit>Redaguoti</Edit>
-<Delete>Ištrinti</Delete>
+      <Edit>Redaguoti</Edit>
+      <Delete>Ištrinti</Delete>
     </action>
-</CateTemplateList>
+  </CateTemplateList>
 
-<PageTemplateList>
+  <PageTemplateList>
     <header>
       <title>Pavadinimas</title>
       <action>Veiksmas</action>
@@ -1632,103 +1642,103 @@
     </header>
     <action>
       <AddTemplate>Pridėti šabloną</AddTemplate>
-<Edit>Redaguoti</Edit>
-<Delete>Ištrinti</Delete>
+      <Edit>Redaguoti</Edit>
+      <Delete>Ištrinti</Delete>
     </action>
-</PageTemplateList>
+  </PageTemplateList>
 
-<EditCLVTemplatePopup_ContentTemplateContainer>
- <title>
-   <UICLVTemplateForm_ContentTemplateContainer>Redaguoti sąrašo šabloną</UICLVTemplateForm_ContentTemplateContainer>   
- </title>
-</EditCLVTemplatePopup_ContentTemplateContainer>
+  <EditCLVTemplatePopup_ContentTemplateContainer>
+    <title>
+      <UICLVTemplateForm_ContentTemplateContainer>Redaguoti sąrašo šabloną</UICLVTemplateForm_ContentTemplateContainer>
+    </title>
+  </EditCLVTemplatePopup_ContentTemplateContainer>
 
-<EditCLVTemplatePopup_CateTemplateContainer>
- <title>
-   <UICLVTemplateForm_CateTemplateContainer>Redaguoti sąrašo šabloną</UICLVTemplateForm_CateTemplateContainer>   
- </title>
-</EditCLVTemplatePopup_CateTemplateContainer>
+  <EditCLVTemplatePopup_CateTemplateContainer>
+    <title>
+      <UICLVTemplateForm_CateTemplateContainer>Redaguoti sąrašo šabloną</UICLVTemplateForm_CateTemplateContainer>
+    </title>
+  </EditCLVTemplatePopup_CateTemplateContainer>
 
-<EditCLVTemplatePopup_PageTemplateContainer>
- <title>
-   <UICLVTemplateForm_PageTemplateContainer>Redaguoti sąrašo šabloną</UICLVTemplateForm_PageTemplateContainer>   
- </title>
-</EditCLVTemplatePopup_PageTemplateContainer>
+  <EditCLVTemplatePopup_PageTemplateContainer>
+    <title>
+      <UICLVTemplateForm_PageTemplateContainer>Redaguoti sąrašo šabloną</UICLVTemplateForm_PageTemplateContainer>
+    </title>
+  </EditCLVTemplatePopup_PageTemplateContainer>
 
-<CLVTemplatePopup_ContentTemplateContainer>
- <title>
-   <UICLVTemplateForm_ContentTemplateContainer>Įtraukti sąrašo šabloną</UICLVTemplateForm_ContentTemplateContainer>   
- </title>
-</CLVTemplatePopup_ContentTemplateContainer>
+  <CLVTemplatePopup_ContentTemplateContainer>
+    <title>
+      <UICLVTemplateForm_ContentTemplateContainer>Įtraukti sąrašo šabloną</UICLVTemplateForm_ContentTemplateContainer>
+    </title>
+  </CLVTemplatePopup_ContentTemplateContainer>
 
-<CLVTemplatePopup_CateTemplateContainer>
- <title>
-   <UICLVTemplateForm_CateTemplateContainer>Įtraukti sąrašo šabloną</UICLVTemplateForm_CateTemplateContainer>   
- </title>
-</CLVTemplatePopup_CateTemplateContainer>
+  <CLVTemplatePopup_CateTemplateContainer>
+    <title>
+      <UICLVTemplateForm_CateTemplateContainer>Įtraukti sąrašo šabloną</UICLVTemplateForm_CateTemplateContainer>
+    </title>
+  </CLVTemplatePopup_CateTemplateContainer>
 
-<CLVTemplatePopup_PageTemplateContainer>
- <title>
-   <UICLVTemplateForm_PageTemplateContainer>Įtraukti sąrašo šabloną</UICLVTemplateForm_PageTemplateContainer>   
- </title>
-</CLVTemplatePopup_PageTemplateContainer>
+  <CLVTemplatePopup_PageTemplateContainer>
+    <title>
+      <UICLVTemplateForm_PageTemplateContainer>Įtraukti sąrašo šabloną</UICLVTemplateForm_PageTemplateContainer>
+    </title>
+  </CLVTemplatePopup_PageTemplateContainer>
 
-<UICLVTemplateForm_ContentTemplateContainer>
- <action>
-  <Save>#{word.save}</Save>
-<Reset>Atstatyti</Reset>
-<Cancel>#{word.cancel}</Cancel>
- </action>
-<label>
- <title>Pavadinimas</title>
-<template>Šablono pavadinimas</template>
-<content>Turinys</content>
-<type>Šablono tipas</type>
-</label>
-</UICLVTemplateForm_ContentTemplateContainer>
+  <UICLVTemplateForm_ContentTemplateContainer>
+    <action>
+      <Save>#{word.save}</Save>
+      <Reset>Atstatyti</Reset>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <label>
+      <title>Pavadinimas</title>
+      <template>Šablono pavadinimas</template>
+      <content>Turinys</content>
+      <type>Šablono tipas</type>
+    </label>
+  </UICLVTemplateForm_ContentTemplateContainer>
 
-<UICLVTemplateForm_PageTemplateContainer>
- <action>
-  <Save>#{word.save}</Save>
-<Reset>Atstatyti</Reset>
-<Cancel>#{word.cancel}</Cancel>
- </action>
-<label>
- <title>Pavadinimas</title>
-<template>Šablono pavadinimas</template>
-<content>Turinys</content>
-<type>Šablono tipas</type>
-</label>
-</UICLVTemplateForm_PageTemplateContainer>
+  <UICLVTemplateForm_PageTemplateContainer>
+    <action>
+      <Save>#{word.save}</Save>
+      <Reset>Atstatyti</Reset>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <label>
+      <title>Pavadinimas</title>
+      <template>Šablono pavadinimas</template>
+      <content>Turinys</content>
+      <type>Šablono tipas</type>
+    </label>
+  </UICLVTemplateForm_PageTemplateContainer>
 
-<UICLVTemplateForm_CateTemplateContainer>
- <action>
-  <Save>#{word.save}</Save>
-<Reset>Atstatyti</Reset>
-<Cancel>#{word.cancel}</Cancel>
- </action>
-<label>
- <title>Pavadinimas</title>
-<template>Šablono pavadinimas</template>
-<content>Turinys</content>
-<type>Šablono tipas</type>
-</label>
-</UICLVTemplateForm_CateTemplateContainer>
-<UICLVTemplateForm>
-  <label>
-    <paginators>Numeracija</paginators>
-<list>Turinys</list>
-<navigation>Navigacija</navigation>
-  </label>
-                          <action>
-                            <Save>#{word.save}</Save>
-                            <Reset>Atstatyti</Reset> 
-                            <Cancel>#{word.cancel}</Cancel> 
-                          </action> 
-  <msg>
-  <template-existing>Šio šablono pavadinimas jau egzistuoja. Prašome pasirinkti kitą.</template-existing>
-  </msg>
-</UICLVTemplateForm>
+  <UICLVTemplateForm_CateTemplateContainer>
+    <action>
+      <Save>#{word.save}</Save>
+      <Reset>Atstatyti</Reset>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <label>
+      <title>Pavadinimas</title>
+      <template>Šablono pavadinimas</template>
+      <content>Turinys</content>
+      <type>Šablono tipas</type>
+    </label>
+  </UICLVTemplateForm_CateTemplateContainer>
+  <UICLVTemplateForm>
+    <label>
+      <paginators>Numeracija</paginators>
+      <list>Turinys</list>
+      <navigation>Navigacija</navigation>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Reset>Atstatyti</Reset>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <template-existing>Šio šablono pavadinimas jau egzistuoja. Prašome pasirinkti kitą.</template-existing>
+    </msg>
+  </UICLVTemplateForm>
 
   <!--
   ######################################################################################
@@ -1789,8 +1799,10 @@
   <TemplateContainerPopup>
     <title>
       <UIViewTemplate_UITemplateContainer><![CDATA[View & Edit Template]]></UIViewTemplate_UITemplateContainer>
-      <UIViewTemplate_UIActionsTemplateContainer><![CDATA[View & Edit Template]]></UIViewTemplate_UIActionsTemplateContainer>
-      <UIViewTemplate_UIOthersTemplateContainer><![CDATA[View & Edit Template]]></UIViewTemplate_UIOthersTemplateContainer>
+      <UIViewTemplate_UIActionsTemplateContainer>
+        <![CDATA[View & Edit Template]]></UIViewTemplate_UIActionsTemplateContainer>
+      <UIViewTemplate_UIOthersTemplateContainer>
+        <![CDATA[View & Edit Template]]></UIViewTemplate_UIOthersTemplateContainer>
     </title>
   </TemplateContainerPopup>
   <UITemplatesManager>
@@ -1972,11 +1984,11 @@
       <UIQueriesForm>Redaguoti užklausą</UIQueriesForm>
     </title>
   </EditQueryForm>
-<PermissionPopup>
-  <title>
-    <UIGroupMemberSelector>Teisės pasirinkimas</UIGroupMemberSelector>
-  </title>
-</PermissionPopup>
+  <PermissionPopup>
+    <title>
+      <UIGroupMemberSelector>Teisės pasirinkimas</UIGroupMemberSelector>
+    </title>
+  </PermissionPopup>
   <!--
   ######################################################################################
   #             org.exoplatform.ecm.webui.component.admin.folksonomy #
@@ -1986,7 +1998,7 @@
     <title>
       <EditStyle>Redaguoti stilių</EditStyle>
       <RemoveStyle>Pašalinti stilių</RemoveStyle>
-    </title>    
+    </title>
   </UITagManager>
   <UITagStyleList>
     <header>
@@ -2015,9 +2027,12 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <range-validator>Diapazonas yra neteisingas. Formatas turi būti: a...b, tarp kurių a, b yra teigiami sveikieji skaičiai. Galite naudoti * vietoj b nurodyti, kad diapazonas yra neribotas.</range-validator>
+      <range-validator>Diapazonas yra neteisingas. Formatas turi būti: a...b, tarp kurių a, b yra teigiami sveikieji
+        skaičiai. Galite naudoti * vietoj b nurodyti, kad diapazonas yra neribotas.
+      </range-validator>
       <error-update>Naujinimas nepavyko. Jūsų informacija yra negaliojanti.</error-update>
-      <item-not-existing>Jūs negalėsite įrašyti keitimų į šią žymę, nes ji nebeegzistuoja duomenų bazėje.</item-not-existing>
+      <item-not-existing>Jūs negalėsite įrašyti keitimų į šią žymę, nes ji nebeegzistuoja duomenų bazėje.
+      </item-not-existing>
     </msg>
   </UITagStyleForm>
   <FolksonomyPopup>
@@ -2057,9 +2072,9 @@
   ###################################################################################
   -->
   <PermissionValidator>
-  <msg>
+    <msg>
       <permission-path-invalid>Leidimas '{0}' yra netinkamas.</permission-path-invalid>
-  </msg>
+    </msg>
   </PermissionValidator>
   <!--
   ###################################################################################
@@ -2128,9 +2143,9 @@
       <EditInfo>Redaguoti</EditInfo>
       <Delete>Ištrinti</Delete>
     </title>
-<label>
-  <permission>{0} iš {1}</permission>
-</label>
+    <label>
+      <permission>{0} iš {1}</permission>
+    </label>
   </UIViewContainer>
   <ECMTemplate>
     <title>
@@ -2161,7 +2176,7 @@
       <selectMembership>Pasirinkti narystę</selectMembership>
     </label>
   </UIDrivePermissionSelector>
-  
+
   <UIPermissionSelector>
     <label>
       <selectGroup>Pasirinkti grupę</selectGroup>
@@ -2169,30 +2184,30 @@
       <selectMembership>Pasirinkti narystę</selectMembership>
     </label>
   </UIPermissionSelector>
-  
+
   <UIAnyPermission>
     <label>
       <anyPermission>Bet kuri teisė</anyPermission>
     </label>
   </UIAnyPermission>
-  
+
   <UIMDriveAnyPermission>
     <label>
       <anyPermission>Bet kuri teisė</anyPermission>
     </label>
   </UIMDriveAnyPermission>
-  
+
   <UIQueriesAnyPermission>
     <label>
       <anyPermission>Bet kuri teisė</anyPermission>
     </label>
   </UIQueriesAnyPermission>
-  
+
   <MetadataPermission>
     <label>
       <selectGroup>Pasirinkti grupę</selectGroup>
     </label>
-  </MetadataPermission>  
+  </MetadataPermission>
   <MetadataPermission>
     <label>
       <selectMembership>Pasirinkti narystę</selectMembership>
@@ -2215,7 +2230,7 @@
   </QueriesPermissionBrowse>
   <!--
   #########Since ECM 2.4##################
-  -->  
+  -->
   <UIViewFormTabPane>
     <label>
       <addSymLink>Pridėti nuorodą</addSymLink>
@@ -2223,14 +2238,14 @@
   </UIViewFormTabPane>
   <!--
   #########Since ECM 2.5##################
-  --> 
-  
+  -->
+
   <UIDriveForm>
-<msg>
-  <permission-path-invalid>Teisė '{0}' yra netinkama.</permission-path-invalid>
-  </msg>
+    <msg>
+      <permission-path-invalid>Teisė '{0}' yra netinkama.</permission-path-invalid>
+    </msg>
   </UIDriveForm>
-  
+
   <UITaxonomyTreeMainForm>
     <msg>
       <homepath-emty>Pradinis kelias yra reikalingas.</homepath-emty>
@@ -2238,9 +2253,9 @@
     </msg>
   </UITaxonomyTreeMainForm>
   <UITaxonomyWorkingArea>
-  <msg>
-  <exist>Šio medžio mazgas jau egzistuoja.</exist>
-  </msg>
+    <msg>
+      <exist>Šio medžio mazgas jau egzistuoja.</exist>
+    </msg>
   </UITaxonomyWorkingArea>
 
   <PermissionTreeSelectUser>
@@ -2256,16 +2271,16 @@
       <userName>#{word.userName}</userName>
       <lastName>#{word.lastName}</lastName>
       <firstName>#{word.firstName}</firstName>
-    <email>#{word.email}</email>
+      <email>#{word.email}</email>
       <action>#{word.action}</action>
       <Add>#{word.Add}</Add>
       <Close>#{word.Close}</Close>
     </label>
   </PermissionTreeSelectUser>
-  
+
   <!--
   #########Since ECM 2.6 ##################
-  -->   
+  -->
   <DriveInputSet>
     <label>
       <nt_folder>Dokumento aplankas</nt_folder>
@@ -2274,30 +2289,30 @@
       <exo_jsFolder>Javascript aplankas</exo_jsFolder>
       <exo_linkFolder>Nuorodos aplankas</exo_linkFolder>
       <exo_webFolder>Internetinio turinio aplankas</exo_webFolder>
-   </label>
+    </label>
   </DriveInputSet>
   <UIPermissionTreeInfo>
-  <msg>
+    <msg>
       <confirm-delete-permission>Ar tikrai norite panaikinti šį leidimą?</confirm-delete-permission>
-      <no-permission-remove>Jūs negalite pašalinti savininko arba sistemos vartotojo.</no-permission-remove>  
-  </msg>
-  </UIPermissionTreeInfo>  
+      <no-permission-remove>Jūs negalite pašalinti savininko arba sistemos vartotojo.</no-permission-remove>
+    </msg>
+  </UIPermissionTreeInfo>
   <UITaxonomyTreeMainForm>
-<msg>
+    <msg>
       <no-right-target-path>Prašome pasirinkti kitą pradinį kelią.</no-right-target-path>
-</msg>
-</UITaxonomyTreeMainForm>
+    </msg>
+  </UITaxonomyTreeMainForm>
 
-<UIECMAdminControlPanel>
+  <UIECMAdminControlPanel>
     <tab>
-      <label>        
+      <label>
         <ManageUnLock>Valdyti užraktus</ManageUnLock>
       </label>
-    </tab>        
-</UIECMAdminControlPanel>
-<UIUnLockForm>
+    </tab>
+  </UIECMAdminControlPanel>
+  <UIUnLockForm>
     <label>
-      <name>Kelio mazgas</name>      
+      <name>Kelio mazgas</name>
       <permissions>Teisės</permissions>
       <PermissionButton>UI Unlock Form</PermissionButton>
     </label>
@@ -2306,49 +2321,50 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <permission-require>Pasirinkite teises.</permission-require>      
+      <permission-require>Pasirinkite teises.</permission-require>
     </msg>
   </UIUnLockForm>
   <UILockHolderList>
-  <header>
-  <name>Grupės arba vartotojai</name>
-  <action>Veiksmas</action>
-  </header>
-  <tooltip>
-<DeleteLock>ištrinti grupę</DeleteLock>
-  </tooltip>
-  <msg>
-  <can-not-delete-lock-holder>Negalima ištrinti grupės {0}.</can-not-delete-lock-holder>
-  </msg>
+    <header>
+      <name>Grupės arba vartotojai</name>
+      <action>Veiksmas</action>
+    </header>
+    <tooltip>
+      <DeleteLock>ištrinti grupę</DeleteLock>
+    </tooltip>
+    <msg>
+      <can-not-delete-lock-holder>Negalima ištrinti grupės {0}.</can-not-delete-lock-holder>
+    </msg>
   </UILockHolderList>
   <UILockNodeList>
-  <header>
-  <name>Pavadinimas</name>
-  <hoderLock>Užrakto savininkas</hoderLock>
-  <action>Veiksmas</action>
-  </header>
-  <tooltip>
-<UnLock>Atrakinti</UnLock>
-  </tooltip>
-  <msg>
-  <access-denied-exception>Jūs neturite leidimo pasiekti mazgo keliu {0}, arba šis mazgas yra panaikintas.</access-denied-exception>
-  </msg>
+    <header>
+      <name>Pavadinimas</name>
+      <hoderLock>Užrakto savininkas</hoderLock>
+      <action>Veiksmas</action>
+    </header>
+    <tooltip>
+      <UnLock>Atrakinti</UnLock>
+    </tooltip>
+    <msg>
+      <access-denied-exception>Jūs neturite leidimo pasiekti mazgo keliu {0}, arba šis mazgas yra panaikintas.
+      </access-denied-exception>
+    </msg>
   </UILockNodeList>
   <EditUnLockForm>
     <title>
       <UIUnLockForm>Valdyti užraktus</UIUnLockForm>
     </title>
-  </EditUnLockForm>  
+  </EditUnLockForm>
   <UITabPane>
     <action>
       <Close>#{word.close}</Close>
     </action>
     <title>
-    <UILockHolderContainer>Valdyti užraktus</UILockHolderContainer>
-    <UILockNodeList>Užrakintas mazgas</UILockNodeList>
+      <UILockHolderContainer>Valdyti užraktus</UILockHolderContainer>
+      <UILockNodeList>Užrakintas mazgas</UILockNodeList>
     </title>
   </UITabPane>
-  
+
   <UIViewFormTabPane>
     <action>
       <AddTabForm>Pridėti skirtuką</AddTabForm>
@@ -2356,21 +2372,21 @@
       <BackViewForm>Atgal</BackViewForm>
     </action>
   </UIViewFormTabPane>
-  
- <UITemplateForm>
-<tab>
-<label>
-<defaultSkin>CSS</defaultSkin>
-</label>
-</tab>
-</UITemplateForm>
- 
+
+  <UITemplateForm>
+    <tab>
+      <label>
+        <defaultSkin>CSS</defaultSkin>
+      </label>
+    </tab>
+  </UITemplateForm>
+
   <UITabPane>
     <title>
       <UISkinTab>CSS</UISkinTab>
     </title>
   </UITabPane>
-  
+
   <UISkinTab>
     <header>
       <name>Pavadinimas</name>
@@ -2389,7 +2405,7 @@
       </title>
     </action>
   </UISkinTab>
-  
+
   <SkinForm>
     <label>
       <UITemplateContent>SkinForm</UITemplateContent>
@@ -2404,56 +2420,57 @@
     <title>Pridėti/redaguoti apvalkalą</title>
   </SkinForm>
 
- <UITagManager>
-   <action>
-     <title>
-       <RemoveStyle>Pašalinti</RemoveStyle>
-         <AddStyle>Pridėti stilių</AddStyle>
-     </title>
-   </action>
-   <msg>
-     <confirm-delete>Ar tikrai norite ištrinti šios žymės stilių?</confirm-delete>
-   </msg>
- </UITagManager>
+  <UITagManager>
+    <action>
+      <title>
+        <RemoveStyle>Pašalinti</RemoveStyle>
+        <AddStyle>Pridėti stilių</AddStyle>
+      </title>
+    </action>
+    <msg>
+      <confirm-delete>Ar tikrai norite ištrinti šios žymės stilių?</confirm-delete>
+    </msg>
+  </UITagManager>
 
-<UITaxonomyTreeContainer>
-<action>
-<Cancel>#{word.close}</Cancel>
-</action>
-</UITaxonomyTreeContainer>
-<UITaxonomyTreeMainForm>
-<action>
-<NextViewPermission>Kitas</NextViewPermission>
-<Reset>Reset</Reset>
-</action>
-</UITaxonomyTreeMainForm>
+  <UITaxonomyTreeContainer>
+    <action>
+      <Cancel>#{word.close}</Cancel>
+    </action>
+  </UITaxonomyTreeContainer>
+  <UITaxonomyTreeMainForm>
+    <action>
+      <NextViewPermission>Kitas</NextViewPermission>
+      <Reset>Reset</Reset>
+    </action>
+  </UITaxonomyTreeMainForm>
 
-<UIPermissionTreeForm>
-<action>
-<Save>Save</Save>
-<Cancel>#{word.cancel}</Cancel>
-<Reset>Reset</Reset>
-<NextAddAction>Kitas</NextAddAction>
-<Previous>Ankstesnis</Previous>
-</action>
-</UIPermissionTreeForm>
+  <UIPermissionTreeForm>
+    <action>
+      <Save>Save</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <Reset>Reset</Reset>
+      <NextAddAction>Kitas</NextAddAction>
+      <Previous>Ankstesnis</Previous>
+    </action>
+  </UIPermissionTreeForm>
 
-<UIActionForm>
-<action>
-<PreviousViewPermission>Ankstesnis</PreviousViewPermission>
-<NextViewTree>Kitas</NextViewTree>
-</action>
-  <msg>
-    <xss-vulnerability-character>Laukelyje '{0}' yra XSS pažeidžiamumo simbolių</xss-vulnerability-character>
-<xss-vulnerability-character-wo-label>Jūsų indėlyje gali būti XSS pažeidžiamumo simbolių</xss-vulnerability-character-wo-label>
-  </msg>
-</UIActionForm>
+  <UIActionForm>
+    <action>
+      <PreviousViewPermission>Ankstesnis</PreviousViewPermission>
+      <NextViewTree>Kitas</NextViewTree>
+    </action>
+    <msg>
+      <xss-vulnerability-character>Laukelyje '{0}' yra XSS pažeidžiamumo simbolių</xss-vulnerability-character>
+      <xss-vulnerability-character-wo-label>Jūsų indėlyje gali būti XSS pažeidžiamumo simbolių
+      </xss-vulnerability-character-wo-label>
+    </msg>
+  </UIActionForm>
 
-<UITaxonomyTreeWorkingArea>
-<action>
-<Previous>Ankstesnis</Previous>
-</action>
-</UITaxonomyTreeWorkingArea>
+  <UITaxonomyTreeWorkingArea>
+    <action>
+      <Previous>Ankstesnis</Previous>
+    </action>
+  </UITaxonomyTreeWorkingArea>
 
   <UITabPane>
     <title>
@@ -2461,7 +2478,7 @@
       <UITagPermissionManager>Žymų teisių valdymas</UITagPermissionManager>
     </title>
   </UITabPane>
-  
+
   <UITagPermissionInfo>
     <header>
       <usersOrGroups>Vartotojai arba grupės</usersOrGroups>
@@ -2474,7 +2491,7 @@
     </action>
     <msg>
       <confirm-delete-permission>Ar tikrai norite ištrinti šią teisę?</confirm-delete-permission>
-    </msg>   
+    </msg>
   </UITagPermissionInfo>
   <UITagPermissionForm>
     <title>Pridėti teisę</title>
@@ -2487,32 +2504,32 @@
     </label>
     <msg>
       <userOrGroup-alreadyExists>Ši narystė jau egzistuoja. Prašome pasirinkti kitą.</userOrGroup-alreadyExists>
-    </msg>    
+    </msg>
   </UITagPermissionForm>
-  
+
   <UIGroupMemberSelector>
     <label>
       <selectGroup>Pasirinkti grupę</selectGroup>
       <selectMembership>Pasirinkti narystę</selectMembership>
     </label>
   </UIGroupMemberSelector>
-  
+
   <UIFolksonomyManager>
-  <msg>
+    <msg>
       <confirm-delete>Ar tikrai norite ištrinti šios žymės stilių?</confirm-delete>
-  </msg>
+    </msg>
     <action>
       <title>
         <AddStyle>Pridėti stilių</AddStyle>
       </title>
     </action>
-  </UIFolksonomyManager>  
-<UIActionForm>
-  <title>
-  <ShowComponent>Atidaryti langą</ShowComponent>
-  <removeReference>Pašalinti</removeReference>
-  </title>
-  </UIActionForm> 
+  </UIFolksonomyManager>
+  <UIActionForm>
+    <title>
+      <ShowComponent>Atidaryti langą</ShowComponent>
+      <removeReference>Pašalinti</removeReference>
+    </title>
+  </UIActionForm>
   <NodeTypeNameValidator>
     <msg>
       <Invalid-char>Yra keletas neleistinų simbolių. Įveskite kitą reikšmę.</Invalid-char>
@@ -2521,10 +2538,12 @@
   </NodeTypeNameValidator>
   <UIActionForm>
     <msg>
-      <constraint-violation-exception>Mazge '{0}' negali būti įtrauktas į '{1}' darbo srityje {2}.  Yra problema su teisėmis arba apribojimų sąlygomis.</constraint-violation-exception>
+      <constraint-violation-exception>Mazge '{0}' negali būti įtrauktas į '{1}' darbo srityje {2}. Yra problema su
+        teisėmis arba apribojimų sąlygomis.
+      </constraint-violation-exception>
     </msg>
   </UIActionForm>
-  
+
   <UIWorkspaceWizard>
     <msg>
       <name-not-allowed>Draudžiamas pavadinimas</name-not-allowed>
@@ -2532,35 +2551,37 @@
   </UIWorkspaceWizard>
   <UIRepositoryForm>
     <msg>
-      <not-complete-repository>The repository is being created. You need to wait a few minutes before creating another one.</not-complete-repository>
+      <not-complete-repository>The repository is being created. You need to wait a few minutes before creating another
+        one.
+      </not-complete-repository>
     </msg>
   </UIRepositoryForm>
-  
+
   <UIViewFormTabPane>
-  <label>
-  <addCategory>Pridėti kategoriją</addCategory>
-          <addLocalizationLink>Pridėti vertimą</addLocalizationLink>
-  </label>
+    <label>
+      <addCategory>Pridėti kategoriją</addCategory>
+      <addLocalizationLink>Pridėti vertimą</addLocalizationLink>
+    </label>
   </UIViewFormTabPane>
 
-<UIDriveForm>
-<label>
-<allowNodeTypesOnTree>Mazgų tipų leidimas kairiajame medyje:</allowNodeTypesOnTree>
-</label>
-</UIDriveForm>
-<DriveInputSet>
-<title>
-<RemovePermission>Remove Permission</RemovePermission>
-<ChooseNodeType>Pasirinkti mazgų tipus</ChooseNodeType>
-<RemoveNodeType>Pašalinti</RemoveNodeType>
-</title>
-</DriveInputSet>
-<PopupNodeTypeSelector>
-<title>
-<UINodeTypeSelector>Pasirinkti mazgų tipus</UINodeTypeSelector>
-<PopupNodeTypeSelector>Pasirinkti mazgų tipus</PopupNodeTypeSelector>
-</title>
-</PopupNodeTypeSelector>
+  <UIDriveForm>
+    <label>
+      <allowNodeTypesOnTree>Mazgų tipų leidimas kairiajame medyje:</allowNodeTypesOnTree>
+    </label>
+  </UIDriveForm>
+  <DriveInputSet>
+    <title>
+      <RemovePermission>Remove Permission</RemovePermission>
+      <ChooseNodeType>Pasirinkti mazgų tipus</ChooseNodeType>
+      <RemoveNodeType>Pašalinti</RemoveNodeType>
+    </title>
+  </DriveInputSet>
+  <PopupNodeTypeSelector>
+    <title>
+      <UINodeTypeSelector>Pasirinkti mazgų tipus</UINodeTypeSelector>
+      <PopupNodeTypeSelector>Pasirinkti mazgų tipus</PopupNodeTypeSelector>
+    </title>
+  </PopupNodeTypeSelector>
   <UINodeTypeSelector>
     <label>
       <selectedAllNodeTypes>Pasirinkti visus mazgų tipus</selectedAllNodeTypes>
@@ -2568,14 +2589,14 @@
   </UINodeTypeSelector>
   <UIScriptForm>
     <msg>
-      <PathNotFoundException>Scenarijus jau yra aplanke '{0}'.</PathNotFoundException>      
+      <PathNotFoundException>Scenarijus jau yra aplanke '{0}'.</PathNotFoundException>
     </msg>
   </UIScriptForm>
- <UINodeTypeList>
-   <msg>
-   <no-list>Nėra jokio mazgo tipo atitinkančio jūsų paiešką.</no-list>
-   </msg>
- </UINodeTypeList>
+  <UINodeTypeList>
+    <msg>
+      <no-list>Nėra jokio mazgo tipo atitinkančio jūsų paiešką.</no-list>
+    </msg>
+  </UINodeTypeList>
   <UIActionForm>
     <msg>
       <canotChangeActionId>Jūs negalite pakeisti veiksmo ID.</canotChangeActionId>
@@ -2593,7 +2614,9 @@
   </UIPageIterator>
   <UILockNodeList>
     <msg>
-      <can-not-unlock-node>Jūs neturite teisių atrakinti šio mazgo. Prašome kreiptis į administratorių dėl reikiamų teisių.</can-not-unlock-node>
+      <can-not-unlock-node>Jūs neturite teisių atrakinti šio mazgo. Prašome kreiptis į administratorių dėl reikiamų
+        teisių.
+      </can-not-unlock-node>
     </msg>
- </UILockNodeList>
+  </UILockNodeList>
 </bundle>

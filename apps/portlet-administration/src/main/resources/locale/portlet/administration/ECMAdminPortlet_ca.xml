@@ -13,21 +13,21 @@
         <Repository>Repositori</Repository>
         <Advanced>Avançat</Advanced>
       </label>
-    </tab>    
-    <label>     
+    </tab>
+    <label>
       <UITaxonomyManagerTrees>Categories</UITaxonomyManagerTrees>
       <UIMetadataManager>Metadades</UIMetadataManager>
       <UINamespaceManager>Espais de noms</UINamespaceManager>
       <UINodeTypeManager>Tipus de node</UINodeTypeManager>
       <UITemplatesManager>Documents</UITemplatesManager>
-   <UICLVTemplatesManager>Llista</UICLVTemplatesManager>
+      <UICLVTemplatesManager>Llista</UICLVTemplatesManager>
       <UIViewManager>Vistes</UIViewManager>
       <UIDriveManager>Unitats</UIDriveManager>
       <UIQueriesManager>Consultes</UIQueriesManager>
       <UIActionManager>Accions</UIActionManager>
       <UIScriptManager>Scripts</UIScriptManager>
       <UIUnLockManager>Bloquejos</UIUnLockManager>
-      <UIFolksonomyManager>Etiquetes</UIFolksonomyManager>      
+      <UIFolksonomyManager>Etiquetes</UIFolksonomyManager>
     </label>
     <msg>
       <access-denied>Accés denegat. No té permís per fer aquesta acció.</access-denied>
@@ -40,11 +40,14 @@
   -->
   <UITaxonomyWorkingArea>
     <msg>
-      <referential-integrity>No es pot llegir el fitxer d'origen o la categoria de destí és una subcategoria.</referential-integrity>
+      <referential-integrity>No es pot llegir el fitxer d'origen o la categoria de destí és una subcategoria.
+      </referential-integrity>
       <no-taxonomy-selected>Ha de copiar o tallar almenys una categoria.</no-taxonomy-selected>
-      <node-is-cutting>No pot enganxar-ho aquí. El node de la categoria '{0}' podria haver-se desplaçat.</node-is-cutting>
+      <node-is-cutting>No pot enganxar-ho aquí. El node de la categoria '{0}' podria haver-se desplaçat.
+      </node-is-cutting>
       <can-not-paste>No hi han dades al porta-retalls per enganxar.</can-not-paste>
-      <reference-exception>No es pot suprimir aquesta categoria perquè hi ha un contingut que li fa referència.</reference-exception>
+      <reference-exception>No es pot suprimir aquesta categoria perquè hi ha un contingut que li fa referència.
+      </reference-exception>
       <path-error>S'ha produït un error en suprimir el node node d'auqesta categoria.</path-error>
     </msg>
   </UITaxonomyWorkingArea>
@@ -60,7 +63,7 @@
       <remove>Suprimeix</remove>
     </title>
   </UITaxonomyManager>
-  
+
   <!--
   ################################################################################
   #    org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyTreeContainer#
@@ -69,17 +72,20 @@
   <UITaxonomyTreeContainer>
     <tab>
       <info>
-        <UITaxonomyTreeMainForm>Especifica el nom de la categoria, àrea de treball i ruta al inici.</UITaxonomyTreeMainForm>
+        <UITaxonomyTreeMainForm>Especifica el nom de la categoria, àrea de treball i ruta al inici.
+        </UITaxonomyTreeMainForm>
         <UIPermissionTreeManager>Estableix permisos per a l'arbre de categories.</UIPermissionTreeManager>
-        <UIActionTaxonomyManager>Afegeix una acció a l'arbre de categories per completar la creació o actualització.</UIActionTaxonomyManager>
-        <UITaxonomyTreeCreateChild>Edita l'arbre de taxonomia afegint, copiant, tallant i seleccionant els permisos.</UITaxonomyTreeCreateChild>
+        <UIActionTaxonomyManager>Afegeix una acció a l'arbre de categories per completar la creació o actualització.
+        </UIActionTaxonomyManager>
+        <UITaxonomyTreeCreateChild>Edita l'arbre de taxonomia afegint, copiant, tallant i seleccionant els permisos.
+        </UITaxonomyTreeCreateChild>
       </info>
     </tab>
     <msg>
       <not-exist-tree>L'arbre de categories no existeix.</not-exist-tree>
     </msg>
   </UITaxonomyTreeContainer>
-  
+
   <!--
 ##########################################################################################
 #     org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyTreeMainForm          #
@@ -111,45 +117,45 @@
       <AddPath>Afegeix una ruta</AddPath>
     </title>
   </TaxonomyTreeHomePath>
-  
+
   <!--
 ##########################################################################################
 #     org.exoplatform.ecm.webui.component.admin.taxonomy.tree.info.UIPermissionTreeInfo  #
 ##########################################################################################
 -->
-<UIPermissionTreeInfo>
-<action>
-<title>
-<Delete>Suprimeix</Delete>
-<Edit>Edita</Edit>
-</title>
-</action>
-<header>
-<usersOrGroups>Usuari o Grup</usersOrGroups>
-<read>Lectura</read>
-<addNode>Afegeix Node</addNode>
-<setProperty>Estableix la Propietat</setProperty>
-<remove>Elimina</remove>
-<action>Acció</action>
-</header>
-</UIPermissionTreeInfo>
+  <UIPermissionTreeInfo>
+    <action>
+      <title>
+        <Delete>Suprimeix</Delete>
+        <Edit>Edita</Edit>
+      </title>
+    </action>
+    <header>
+      <usersOrGroups>Usuari o Grup</usersOrGroups>
+      <read>Lectura</read>
+      <addNode>Afegeix Node</addNode>
+      <setProperty>Estableix la Propietat</setProperty>
+      <remove>Elimina</remove>
+      <action>Acció</action>
+    </header>
+  </UIPermissionTreeInfo>
 
-<!--
-##########################################################################################
-#     org.exoplatform.ecm.webui.component.admin.taxonomy.tree.info.UIPermissionTreeForm  #
-##########################################################################################
--->
+  <!--
+  ##########################################################################################
+  #     org.exoplatform.ecm.webui.component.admin.taxonomy.tree.info.UIPermissionTreeForm  #
+  ##########################################################################################
+  -->
   <UIPermissionTreeForm>
     <msg>
       <have-not-any-permission>Si us plau especifica com a mínim un permís per a aquest node.</have-not-any-permission>
     </msg>
   </UIPermissionTreeForm>
 
-<!--
-################################################################################
-#     org.exoplatform.ecm.webui.component.admin.taxonomy.UIActionForm          #
-################################################################################
--->
+  <!--
+  ################################################################################
+  #     org.exoplatform.ecm.webui.component.admin.taxonomy.UIActionForm          #
+  ################################################################################
+  -->
 
   <UIActionForm>
     <title>Afegeix una acció a l'arbre de categoria</title>
@@ -250,7 +256,9 @@
     <msg>
       <confirm-delete>Està segur que vol suprimir aquestes metadades?</confirm-delete>
       <delete-successful>Les plantilles de '{0}' s'han suprimit correctament.</delete-successful>
-      <path-not-found-exception>Aquestes metadades han estat suprimides o canviades. Si us plau, feu clic al botó Recarrega.</path-not-found-exception>
+      <path-not-found-exception>Aquestes metadades han estat suprimides o canviades. Si us plau, feu clic al botó
+        Recarrega.
+      </path-not-found-exception>
     </msg>
     <action>
       <Add>Afegeix metadades</Add>
@@ -425,13 +433,13 @@
       <action>Acció</action>
     </header>
   </UITreeList>
-  
+
   <UIRepositoryList>
     <titlebar>
       <label>Gestiona les funcions principals del ECM</label>
     </titlebar>
   </UIRepositoryList>
-  
+
   <!--
   ################################################################################
   #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeManager #
@@ -561,8 +569,11 @@
     </action>
     <msg>
       <register-successfully>El tupis de node '{0}' s'ha enregistrat correctament.</register-successfully>
-      <supertype-is-madatory>El súper tipus és obligatori quan vol registrar un nou tipus de node. Si us plau, selecciona almenys un súper tipus.</supertype-is-madatory>
-      <register-failed>Impossible la inscripció del tipus de node. O be, ja existeixi, o bé el supertipus és invàlid.</register-failed>
+      <supertype-is-madatory>El súper tipus és obligatori quan vol registrar un nou tipus de node. Si us plau,
+        selecciona almenys un súper tipus.
+      </supertype-is-madatory>
+      <register-failed>Impossible la inscripció del tipus de node. O be, ja existeixi, o bé el supertipus és invàlid.
+      </register-failed>
       <nodeType-name>El nom del tipus de node es necessari.</nodeType-name>
       <fileName-invalid>El nom del fitxer té alguns caràcters invàlids.</fileName-invalid>
       <node-type-exists>El tipus de node '{0}' ja existeix.</node-type-exists>
@@ -581,7 +592,8 @@
     </tab>
     <msg>
       <property-name>El nom de la definició de la propietat no era vàlid.</property-name>
-      <not-supported-value-constraints>Aquest tipus no és compatible amb el valor de les limitacions.</not-supported-value-constraints>
+      <not-supported-value-constraints>Aquest tipus no és compatible amb el valor de les limitacions.
+      </not-supported-value-constraints>
     </msg>
   </UIPropertyDefinitionForm>
   <UIChildNodeDefinitionForm>
@@ -735,10 +747,10 @@
     <action>
       <AddAction>Afegeix els tipus d'acció</AddAction>
     </action>
-<msg>
- <confirm-delete>Està segur que vol suprimir aquest tipus d'acció?</confirm-delete>
-<cannot-delete>No pot suprimir aquest tipus d'acció perquè el sistema encara l'utilitza.</cannot-delete>
-</msg>
+    <msg>
+      <confirm-delete>Està segur que vol suprimir aquest tipus d'acció?</confirm-delete>
+      <cannot-delete>No pot suprimir aquest tipus d'acció perquè el sistema encara l'utilitza.</cannot-delete>
+    </msg>
   </UIActionTypeList>
   <!--
   ######################################################################################
@@ -791,11 +803,11 @@
       <UITemplateContainer>Documents</UITemplateContainer>
       <UIActionsTemplateContainer>Accions</UIActionsTemplateContainer>
       <UIOthersTemplateContainer>Altres</UIOthersTemplateContainer>
-  <UIActionScriptContainer>Acció</UIActionScriptContainer>
-  <UIWidgetScriptContainer>Widgets</UIWidgetScriptContainer>
-<UIInterceptorScriptContainer>Interceptors</UIInterceptorScriptContainer>
+      <UIActionScriptContainer>Acció</UIActionScriptContainer>
+      <UIWidgetScriptContainer>Widgets</UIWidgetScriptContainer>
+      <UIInterceptorScriptContainer>Interceptors</UIInterceptorScriptContainer>
 
-<nodeTypeDefinition>Tipus de node</nodeTypeDefinition>
+      <nodeTypeDefinition>Tipus de node</nodeTypeDefinition>
       <propertyDefinition>Propietat</propertyDefinition>
       <childNodeDefinition>Node Secundari</childNodeDefinition>
       <SuperTypeTab>Súper Tipus</SuperTypeTab>
@@ -810,11 +822,11 @@
   ######################################################################################
   -->
   <UIViewList>
-   <title>
-     <View>Veure</View>
-     <EditInfo>Edita</EditInfo>
-     <Delete>Suprimeix</Delete>
-   </title>
+    <title>
+      <View>Veure</View>
+      <EditInfo>Edita</EditInfo>
+      <Delete>Suprimeix</Delete>
+    </title>
     <header>
       <name>Nom</name>
       <permissions>Permisos</permissions>
@@ -848,71 +860,71 @@
     </title>
   </EditPopup>
 
-<UITabList>
-                  <title>
-                    <Edit>Edita</Edit>
-                    <Delete>Suprimeix</Delete>
-                  </title>       
- <header>
-  <tabName>Pestanya</tabName>
-  <localizeButtons>Descripció</localizeButtons>
-<action>Accions</action>
-</header>
-<action>
- <AddTab>Afegeix</AddTab>
-</action>
-<msg>
- <confirm-delete>Està segur que vol suprimir aquesta pestanya?</confirm-delete>
-</msg>
-<grid>
- <msg>
-  <empty>No hi ha cap pestanya en aquesta vista</empty>
- </msg>
-</grid>
-</UITabList>
+  <UITabList>
+    <title>
+      <Edit>Edita</Edit>
+      <Delete>Suprimeix</Delete>
+    </title>
+    <header>
+      <tabName>Pestanya</tabName>
+      <localizeButtons>Descripció</localizeButtons>
+      <action>Accions</action>
+    </header>
+    <action>
+      <AddTab>Afegeix</AddTab>
+    </action>
+    <msg>
+      <confirm-delete>Està segur que vol suprimir aquesta pestanya?</confirm-delete>
+    </msg>
+    <grid>
+      <msg>
+        <empty>No hi ha cap pestanya en aquesta vista</empty>
+      </msg>
+    </grid>
+  </UITabList>
 
-<UIViewPermissionList>
- <title>Selecciona el propietari amb permisos en aquesta vista:</title>
-<label>
- <permission>{0} al {1}</permission>
-</label>
-<msg>
- <confirm-delete>Està segur que vol suprimir aquest permís?</confirm-delete>
-  <permission-cannot-empty>El permís de visualització es necessari i no pot estar buit.</permission-cannot-empty>
-</msg>
-</UIViewPermissionList>
+  <UIViewPermissionList>
+    <title>Selecciona el propietari amb permisos en aquesta vista:</title>
+    <label>
+      <permission>{0} al {1}</permission>
+    </label>
+    <msg>
+      <confirm-delete>Està segur que vol suprimir aquest permís?</confirm-delete>
+      <permission-cannot-empty>El permís de visualització es necessari i no pot estar buit.</permission-cannot-empty>
+    </msg>
+  </UIViewPermissionList>
 
-<UIViewPermissionList>
-                         <title>
-                           <Delete>Suprimeix</Delete>
-                         </title>
- <header>
-<friendlyPermission>Permisos</friendlyPermission>
-     <action>Acció</action>
- </header>
-<action>
- <title>
-  <Delete>Suprimeix</Delete>
- </title>
-</action>
-<grid>
- <msg>
-  <empty>No hi ha cap permís en aquesta visualització</empty>
- </msg>
-</grid>
-</UIViewPermissionList>
+  <UIViewPermissionList>
+    <title>
+      <Delete>Suprimeix</Delete>
+    </title>
+    <header>
+      <friendlyPermission>Permisos</friendlyPermission>
+      <action>Acció</action>
+    </header>
+    <action>
+      <title>
+        <Delete>Suprimeix</Delete>
+      </title>
+    </action>
+    <grid>
+      <msg>
+        <empty>No hi ha cap permís en aquesta visualització</empty>
+      </msg>
+    </grid>
+  </UIViewPermissionList>
 
-<UIViewPermissionForm>
-<action>
- <Add>Afegeix</Add>
-</action>
-<label>
- <userOrGroup>Usuari o Grup</userOrGroup>
-</label>
-<msg>
- <permission-exist>El permís '{0}' ja existeix a la llista.</permission-exist>
-</msg>
-</UIViewPermissionForm>
+  <UIViewPermissionForm>
+    <action>
+      <Add>Afegeix</Add>
+    </action>
+    <label>
+      <userOrGroup>Usuari o Grup</userOrGroup>
+    </label>
+    <msg>
+      <permission-exist>El permís '{0}' ja existeix a la llista.</permission-exist>
+    </msg>
+  </UIViewPermissionForm>
 
   <!--
   ######################################################################################
@@ -927,15 +939,15 @@
     <msg>
       <view-name-invalid>El nom de la vista és necessari.</view-name-invalid>
       <fileName-invalid>El nom de la vista conté alguns caràcters no vàlids.</fileName-invalid>
-      <permission-not-empty>Si us plau, selecciona un permís per a la visualització.</permission-not-empty>      
+      <permission-not-empty>Si us plau, selecciona un permís per a la visualització.</permission-not-empty>
       <mustbe-add-tab>Si us plau, afegeix una pestanya.</mustbe-add-tab>
-<mustbe-add-permission>Si us plau, selecciona el permís per a aquesta vista</mustbe-add-permission>
+      <mustbe-add-permission>Si us plau, selecciona el permís per a aquesta vista</mustbe-add-permission>
       <view-exist>El nom de la vista ja existeix.</view-exist>
     </msg>
     <label>
       <viewName>Nom</viewName>
       <template>Plantilla</template>
-<version>Restaurar aquesta Versió</version>
+      <version>Restaurar aquesta Versió</version>
       <enableVersion>Activa les Versions</enableVersion>
       <hideExplorerPanel>Oculta el panell explorador en barra lateral</hideExplorerPanel>
     </label>
@@ -980,14 +992,14 @@
       <overloadThumbnail>Sobrecàrrega la miniatura</overloadThumbnail>
       <manageHidden>Mostra/Amaga el contingut</manageHidden>
       <comment>Comentari</comment>
-      <vote>Vota</vote>  
+      <vote>Vota</vote>
       <addCategory>Afegeix una categoria</addCategory>
       <addLocalizationLink>Afegeix una traducció</addLocalizationLink>
       <publicationRequestApproval>Demanda Validació</publicationRequestApproval>
       <publicationApproveContent>Aprova el contingut</publicationApproveContent>
       <publicationPublish>Publica-ho</publicationPublish>
-<contentNavigation>Navegació de contingut</contentNavigation>
-<addSymLink>Afegeix un enllaç simbòlic</addSymLink>
+      <contentNavigation>Navegació de contingut</contentNavigation>
+      <addSymLink>Afegeix un enllaç simbòlic</addSymLink>
       <checkIn>Protegir</checkIn>
       <checkOut>Desprotegir</checkOut>
       <shareDocuments>Compartir</shareDocuments>
@@ -996,8 +1008,8 @@
       <uploadNewVersion>Puja una versió nova</uploadNewVersion>
     </label>
     <action>
-      <Save>#{word.save}</Save>      
-      <Cancel>#{word.cancel}</Cancel>      
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
   </UITabForm>
   <UIPermissionForm>
@@ -1010,7 +1022,7 @@
       <label>
         <UITabContainer>Acció</UITabContainer>
         <UIViewForm>Veure</UIViewForm>
-        <UIViewPermissionContainer>Permisos</UIViewPermissionContainer>    
+        <UIViewPermissionContainer>Permisos</UIViewPermissionContainer>
       </label>
     </tab>
     <action>
@@ -1027,19 +1039,19 @@
     </title>
   </PopupViewPermission>
 
-<TabForm_Popup>
- <title>
-  <UITabForm>Afegeix/Edita la pestanya</UITabForm>
- </title>
-</TabForm_Popup>
+  <TabForm_Popup>
+    <title>
+      <UITabForm>Afegeix/Edita la pestanya</UITabForm>
+    </title>
+  </TabForm_Popup>
 
-<tab_permission>
- <title>
-  <SelectUser>Selecciona usuari/a</SelectUser>
-<SelectMember>Selecciona un membre</SelectMember>
-<AddAny>Qualsevol</AddAny>
- </title>
-</tab_permission>
+  <tab_permission>
+    <title>
+      <SelectUser>Selecciona usuari/a</SelectUser>
+      <SelectMember>Selecciona un membre</SelectMember>
+      <AddAny>Qualsevol</AddAny>
+    </title>
+  </tab_permission>
   <!--
   ######################################################################################
   #             org.exoplatform.ecm.webui.component.admin.view.UIECMTemplateList   #
@@ -1228,7 +1240,7 @@
   #             org.exoplatform.ecm.webui.component.admin.script.ecmScriptForm #
   ######################################################################################
   -->
- 
+
   <ecmScriptForm>
     <label>
       <selectVersion>Versions</selectVersion>
@@ -1260,7 +1272,7 @@
       <name-too-long>El nom de la categoria ha de tenir menys de 30 caràcters.</name-too-long>
     </msg>
   </UITaxonomyForm>
-    
+
   <EditTaxonomyTreePopup>
     <title>
       <UITaxonomyTreeContainer>Edita l'Arbre de Categories</UITaxonomyTreeContainer>
@@ -1272,15 +1284,15 @@
       <UITaxonomyTreeContainer>Afegeix l'Arbre de Categories</UITaxonomyTreeContainer>
     </title>
   </AddTaxonomyTreePopup>
-  
+
   <TaxonomyPopupCreateChild>
     <title>
       <UITaxonomyTreeCreateChildForm>Edita l'Arbre de Categories</UITaxonomyTreeCreateChildForm>
     </title>
   </TaxonomyPopupCreateChild>
 
-<UITaxonomyTreeCreateChildForm>
-  <action>
+  <UITaxonomyTreeCreateChildForm>
+    <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
     </action>
@@ -1294,41 +1306,41 @@
       <name-too-long>El nom de la categoria no ha de tenir més de {0} caràcters.</name-too-long>
       <exist>El nom de la categoria ja existeix.</exist>
     </msg>
-</UITaxonomyTreeCreateChildForm>
+  </UITaxonomyTreeCreateChildForm>
 
   <PopupComponent>
     <title>
       <UIOneNodePathSelector>Selecciona una Ruta</UIOneNodePathSelector>
     </title>
   </PopupComponent>
-  
+
   <TaxoPopupUserSelector>
-  <title>
+    <title>
       <TaxoTreeSelectUserOrGroup>Selecciona usuari/a</TaxoTreeSelectUserOrGroup>
       <UIPermissionTreeSelectUser>Selecciona usuari/a</UIPermissionTreeSelectUser>
     </title>
   </TaxoPopupUserSelector>
 
   <TaxoTreeSelectUserOrGroupPopup>
-  <title>
+    <title>
       <TaxoTreeSelectUserOrGroup>Selecciona l'Afiliació</TaxoTreeSelectUserOrGroup>
     </title>
   </TaxoTreeSelectUserOrGroupPopup>
-  
+
   <TaxoTreeAnyPermission>
     <label>
       <any>Qualsevol Permís</any>
       <anyPermission>TaxoTreeAnyPermission</anyPermission>
     </label>
   </TaxoTreeAnyPermission>
-  
+
   <TaxoTreeSelectUserOrGroup>
     <label>
       <selectGroup>Selecciona Grup</selectGroup>
       <selectMembership>Selecciona l'Afiliació</selectMembership>
     </label>
   </TaxoTreeSelectUserOrGroup>
-  
+
   <!--
   ######################################################################################
   #             org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyTreeList #
@@ -1355,7 +1367,7 @@
       <is-in-trash>Aquest arbre de categoria s'ha traslladat a la paperera.</is-in-trash>
     </msg>
   </UITaxonomyTreeList>
-  
+
   <!--
   ######################################################################################
   #             org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyTreeForm  #
@@ -1372,7 +1384,7 @@
       <homapath-emty>Ruta d'Entrada</homapath-emty>
     </msg>
   </UITaxonomyTreeForm>
-  
+
   <UIPermissionTreeForm>
     <label>
       <UIPopupWindow>Selecciona</UIPopupWindow>
@@ -1396,38 +1408,38 @@
       <access-denied>Accés denegat. No es pot eliminar aquest permís.</access-denied>
     </msg>
   </UIPermissionTreeForm>
-  
+
   <PopupTaxonomyJCRBrowser>
-  <title>
+    <title>
       <UIOneNodePathSelector>Selecciona ruta al Inici</UIOneNodePathSelector>
     </title>
   </PopupTaxonomyJCRBrowser>
-  
+
   <PopupTaxonomyTreePermission>
     <title>
       <UIPermissionSelector>Selector de permisos</UIPermissionSelector>
     </title>
-   </PopupTaxonomyTreePermission>
-   
-   <PopupDrivePermission>
+  </PopupTaxonomyTreePermission>
+
+  <PopupDrivePermission>
     <title>
       <AddDrivePermissionSelector>Afegeix permisos</AddDrivePermissionSelector>
       <UIPermissionSelector>Selecciona el Permís</UIPermissionSelector>
     </title>
   </PopupDrivePermission>
-  
+
   <UIPopupWindow>
     <title>
       <UIPermissionManager>Gestió de permisos</UIPermissionManager>
     </title>
-   </UIPopupWindow>
+  </UIPopupWindow>
 
   <PopupUserSelector>
     <title>
       <UIUserContainer>Gestió de permisos</UIUserContainer>
     </title>
-   </PopupUserSelector>
-   
+  </PopupUserSelector>
+
   <UIPermissionInfo>
     <action>
       <title>
@@ -1499,13 +1511,13 @@
       <access-denied>Accés denegat. No pot suprimir aquest permís.</access-denied>
     </msg>
   </UIPermissionForm>
-  
+
   <TaxonomyPopup>
     <title>
       <UITaxonomyForm>Afegeix una categoria</UITaxonomyForm>
     </title>
   </TaxonomyPopup>
-  
+
   <UITaxonomyManager>
     <title>
       <permission>Gestió de permisos</permission>
@@ -1533,7 +1545,7 @@
       <template-not-exist>No existeix la plantilla que està intentant suprimir.</template-not-exist>
     </msg>
   </UITemplateList>
-  
+
   <UIActionsTemplateList>
     <header>
       <name>Tipus</name>
@@ -1551,7 +1563,7 @@
       <template-not-exist>No existeix la plantilla que està intentant suprimir.</template-not-exist>
     </msg>
   </UIActionsTemplateList>
-  
+
   <UIOthersTemplateList>
     <header>
       <name>Tipus</name>
@@ -1570,19 +1582,19 @@
     </msg>
   </UIOthersTemplateList>
 
- <!--
-  ######################################################################################
-  #             org.exoplatform.ecm.webui.component.admin.templates.clv package #
-  ######################################################################################
-  -->
+  <!--
+   ######################################################################################
+   #             org.exoplatform.ecm.webui.component.admin.templates.clv package #
+   ######################################################################################
+   -->
 
-<UITabPane>
- <title>
- <ContentTemplateContainer>Contingut</ContentTemplateContainer>
-<CateTemplateContainer>Navegació</CateTemplateContainer>
-<PageTemplateContainer>Paginació</PageTemplateContainer>
- </title>
-</UITabPane>
+  <UITabPane>
+    <title>
+      <ContentTemplateContainer>Contingut</ContentTemplateContainer>
+      <CateTemplateContainer>Navegació</CateTemplateContainer>
+      <PageTemplateContainer>Paginació</PageTemplateContainer>
+    </title>
+  </UITabPane>
 
   <UICLVTemplateList>
     <title>
@@ -1596,8 +1608,8 @@
     </header>
     <action>
       <AddTemplate>Afegeix una Plantilla</AddTemplate>
-<Edit>Edita</Edit>
-<Delete>Suprimeix</Delete>
+      <Edit>Edita</Edit>
+      <Delete>Suprimeix</Delete>
     </action>
     <msg>
       <confirm-delete>Està segur que vol suprimir aquesta plantilla?</confirm-delete>
@@ -1607,7 +1619,7 @@
     </msg>
   </UICLVTemplateList>
 
-<CateTemplateList>
+  <CateTemplateList>
     <header>
       <title>Nom</title>
       <action>Acció</action>
@@ -1619,12 +1631,12 @@
     </title>
     <action>
       <AddTemplate>Afegeix una Plantilla</AddTemplate>
-<Edit>Edita</Edit>
-<Delete>Suprimeix</Delete>
+      <Edit>Edita</Edit>
+      <Delete>Suprimeix</Delete>
     </action>
-</CateTemplateList>
+  </CateTemplateList>
 
-<PageTemplateList>
+  <PageTemplateList>
     <header>
       <title>Nom</title>
       <action>Acció</action>
@@ -1632,103 +1644,105 @@
     </header>
     <action>
       <AddTemplate>Afegeix una Plantilla</AddTemplate>
-<Edit>Edita</Edit>
-<Delete>Suprimeix</Delete>
+      <Edit>Edita</Edit>
+      <Delete>Suprimeix</Delete>
     </action>
-</PageTemplateList>
+  </PageTemplateList>
 
-<EditCLVTemplatePopup_ContentTemplateContainer>
- <title>
-   <UICLVTemplateForm_ContentTemplateContainer>Edita la plantilla de la llista</UICLVTemplateForm_ContentTemplateContainer>   
- </title>
-</EditCLVTemplatePopup_ContentTemplateContainer>
+  <EditCLVTemplatePopup_ContentTemplateContainer>
+    <title>
+      <UICLVTemplateForm_ContentTemplateContainer>Edita la plantilla de la llista
+      </UICLVTemplateForm_ContentTemplateContainer>
+    </title>
+  </EditCLVTemplatePopup_ContentTemplateContainer>
 
-<EditCLVTemplatePopup_CateTemplateContainer>
- <title>
-   <UICLVTemplateForm_CateTemplateContainer>Edita la plantilla de la llista</UICLVTemplateForm_CateTemplateContainer>   
- </title>
-</EditCLVTemplatePopup_CateTemplateContainer>
+  <EditCLVTemplatePopup_CateTemplateContainer>
+    <title>
+      <UICLVTemplateForm_CateTemplateContainer>Edita la plantilla de la llista</UICLVTemplateForm_CateTemplateContainer>
+    </title>
+  </EditCLVTemplatePopup_CateTemplateContainer>
 
-<EditCLVTemplatePopup_PageTemplateContainer>
- <title>
-   <UICLVTemplateForm_PageTemplateContainer>Edita la plantilla de la llista</UICLVTemplateForm_PageTemplateContainer>   
- </title>
-</EditCLVTemplatePopup_PageTemplateContainer>
+  <EditCLVTemplatePopup_PageTemplateContainer>
+    <title>
+      <UICLVTemplateForm_PageTemplateContainer>Edita la plantilla de la llista</UICLVTemplateForm_PageTemplateContainer>
+    </title>
+  </EditCLVTemplatePopup_PageTemplateContainer>
 
-<CLVTemplatePopup_ContentTemplateContainer>
- <title>
-   <UICLVTemplateForm_ContentTemplateContainer>Afegeix una plantilla de llista</UICLVTemplateForm_ContentTemplateContainer>   
- </title>
-</CLVTemplatePopup_ContentTemplateContainer>
+  <CLVTemplatePopup_ContentTemplateContainer>
+    <title>
+      <UICLVTemplateForm_ContentTemplateContainer>Afegeix una plantilla de llista
+      </UICLVTemplateForm_ContentTemplateContainer>
+    </title>
+  </CLVTemplatePopup_ContentTemplateContainer>
 
-<CLVTemplatePopup_CateTemplateContainer>
- <title>
-   <UICLVTemplateForm_CateTemplateContainer>Afegeix una plantilla de llista</UICLVTemplateForm_CateTemplateContainer>   
- </title>
-</CLVTemplatePopup_CateTemplateContainer>
+  <CLVTemplatePopup_CateTemplateContainer>
+    <title>
+      <UICLVTemplateForm_CateTemplateContainer>Afegeix una plantilla de llista</UICLVTemplateForm_CateTemplateContainer>
+    </title>
+  </CLVTemplatePopup_CateTemplateContainer>
 
-<CLVTemplatePopup_PageTemplateContainer>
- <title>
-   <UICLVTemplateForm_PageTemplateContainer>Afegeix una plantilla de llista</UICLVTemplateForm_PageTemplateContainer>   
- </title>
-</CLVTemplatePopup_PageTemplateContainer>
+  <CLVTemplatePopup_PageTemplateContainer>
+    <title>
+      <UICLVTemplateForm_PageTemplateContainer>Afegeix una plantilla de llista</UICLVTemplateForm_PageTemplateContainer>
+    </title>
+  </CLVTemplatePopup_PageTemplateContainer>
 
-<UICLVTemplateForm_ContentTemplateContainer>
- <action>
-  <Save>#{word.save}</Save>
-<Reset>Restablir</Reset>
-<Cancel>#{word.cancel}</Cancel>
- </action>
-<label>
- <title>Nom</title>
-<template>Nom de la plantilla</template>
-<content>Contingut</content>
-<type>Tipus de plantilla</type>
-</label>
-</UICLVTemplateForm_ContentTemplateContainer>
+  <UICLVTemplateForm_ContentTemplateContainer>
+    <action>
+      <Save>#{word.save}</Save>
+      <Reset>Restablir</Reset>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <label>
+      <title>Nom</title>
+      <template>Nom de la plantilla</template>
+      <content>Contingut</content>
+      <type>Tipus de plantilla</type>
+    </label>
+  </UICLVTemplateForm_ContentTemplateContainer>
 
-<UICLVTemplateForm_PageTemplateContainer>
- <action>
-  <Save>#{word.save}</Save>
-<Reset>Restablir</Reset>
-<Cancel>#{word.cancel}</Cancel>
- </action>
-<label>
- <title>Nom</title>
-<template>Nom de la plantilla</template>
-<content>Contingut</content>
-<type>Tipus de plantilla</type>
-</label>
-</UICLVTemplateForm_PageTemplateContainer>
+  <UICLVTemplateForm_PageTemplateContainer>
+    <action>
+      <Save>#{word.save}</Save>
+      <Reset>Restablir</Reset>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <label>
+      <title>Nom</title>
+      <template>Nom de la plantilla</template>
+      <content>Contingut</content>
+      <type>Tipus de plantilla</type>
+    </label>
+  </UICLVTemplateForm_PageTemplateContainer>
 
-<UICLVTemplateForm_CateTemplateContainer>
- <action>
-  <Save>#{word.save}</Save>
-<Reset>Restablir</Reset>
-<Cancel>#{word.cancel}</Cancel>
- </action>
-<label>
- <title>Nom</title>
-<template>Nom de la plantilla</template>
-<content>Contingut</content>
-<type>Tipus de plantilla</type>
-</label>
-</UICLVTemplateForm_CateTemplateContainer>
-<UICLVTemplateForm>
-  <label>
-    <paginators>Paginació</paginators>
-<list>Contingut</list>
-<navigation>Navegació</navigation>
-  </label>
-                          <action>
-                            <Save>#{word.save}</Save>
-                            <Reset>Restablir</Reset> 
-                            <Cancel>#{word.cancel}</Cancel> 
-                          </action> 
-  <msg>
-  <template-existing>Aquest nom de plantilla ja existeix. Si us plau, seleccioni un altre.</template-existing>
-  </msg>
-</UICLVTemplateForm>
+  <UICLVTemplateForm_CateTemplateContainer>
+    <action>
+      <Save>#{word.save}</Save>
+      <Reset>Restablir</Reset>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <label>
+      <title>Nom</title>
+      <template>Nom de la plantilla</template>
+      <content>Contingut</content>
+      <type>Tipus de plantilla</type>
+    </label>
+  </UICLVTemplateForm_CateTemplateContainer>
+  <UICLVTemplateForm>
+    <label>
+      <paginators>Paginació</paginators>
+      <list>Contingut</list>
+      <navigation>Navegació</navigation>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Reset>Restablir</Reset>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <template-existing>Aquest nom de plantilla ja existeix. Si us plau, seleccioni un altre.</template-existing>
+    </msg>
+  </UICLVTemplateForm>
 
   <!--
   ######################################################################################
@@ -1789,8 +1803,10 @@
   <TemplateContainerPopup>
     <title>
       <UIViewTemplate_UITemplateContainer><![CDATA[View & Edit Template]]></UIViewTemplate_UITemplateContainer>
-      <UIViewTemplate_UIActionsTemplateContainer><![CDATA[View & Edit Template]]></UIViewTemplate_UIActionsTemplateContainer>
-      <UIViewTemplate_UIOthersTemplateContainer><![CDATA[View & Edit Template]]></UIViewTemplate_UIOthersTemplateContainer>
+      <UIViewTemplate_UIActionsTemplateContainer>
+        <![CDATA[View & Edit Template]]></UIViewTemplate_UIActionsTemplateContainer>
+      <UIViewTemplate_UIOthersTemplateContainer>
+        <![CDATA[View & Edit Template]]></UIViewTemplate_UIOthersTemplateContainer>
     </title>
   </TemplateContainerPopup>
   <UITemplatesManager>
@@ -1938,7 +1954,9 @@
     <msg>
       <confirm-delete>Està segur que vol suprimir aquesta consulta?</confirm-delete>
       <query-not-existed>La consulta ja no existeix.</query-not-existed>
-      <can-not-remove>S'ha produït un error suprimint la consulta. Contacteu amb l'administrador per obtenir informació.</can-not-remove>
+      <can-not-remove>S'ha produït un error suprimint la consulta. Contacteu amb l'administrador per obtenir
+        informació.
+      </can-not-remove>
     </msg>
   </UIQueriesList>
   <UIQueriesForm>
@@ -1972,11 +1990,11 @@
       <UIQueriesForm>Edita una consulta</UIQueriesForm>
     </title>
   </EditQueryForm>
-<PermissionPopup>
-  <title>
-    <UIGroupMemberSelector>Selector de permisos</UIGroupMemberSelector>
-  </title>
-</PermissionPopup>
+  <PermissionPopup>
+    <title>
+      <UIGroupMemberSelector>Selector de permisos</UIGroupMemberSelector>
+    </title>
+  </PermissionPopup>
   <!--
   ######################################################################################
   #             org.exoplatform.ecm.webui.component.admin.folksonomy #
@@ -1986,7 +2004,7 @@
     <title>
       <EditStyle>Edita l'Estil</EditStyle>
       <RemoveStyle>Treure l'Estil</RemoveStyle>
-    </title>    
+    </title>
   </UITagManager>
   <UITagStyleList>
     <header>
@@ -2015,9 +2033,12 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <range-validator>Gamma de valors invàlida. El format ha de ser: a...b, entre els quals a, b són enters positius. Pot utilitzar * en lloc de b per indicar que la gamma de valors és il·limitada.</range-validator>
+      <range-validator>Gamma de valors invàlida. El format ha de ser: a...b, entre els quals a, b són enters positius.
+        Pot utilitzar * en lloc de b per indicar que la gamma de valors és il·limitada.
+      </range-validator>
       <error-update>L'actualització ha fallat. La informació no és vàlida.</error-update>
-      <item-not-existing>No pot desar els canvis en aquesta etiqueta ja que ja no existeix a la base de dades.</item-not-existing>
+      <item-not-existing>No pot desar els canvis en aquesta etiqueta ja que ja no existeix a la base de dades.
+      </item-not-existing>
     </msg>
   </UITagStyleForm>
   <FolksonomyPopup>
@@ -2057,9 +2078,9 @@
   ###################################################################################
   -->
   <PermissionValidator>
-  <msg>
+    <msg>
       <permission-path-invalid>El permís '{0}' no és vàlid.</permission-path-invalid>
-  </msg>
+    </msg>
   </PermissionValidator>
   <!--
   ###################################################################################
@@ -2128,9 +2149,9 @@
       <EditInfo>Edita</EditInfo>
       <Delete>Suprimeix</Delete>
     </title>
-<label>
-  <permission>{0} al {1}</permission>
-</label>
+    <label>
+      <permission>{0} al {1}</permission>
+    </label>
   </UIViewContainer>
   <ECMTemplate>
     <title>
@@ -2161,7 +2182,7 @@
       <selectMembership>Selecciona l'Afiliació</selectMembership>
     </label>
   </UIDrivePermissionSelector>
-  
+
   <UIPermissionSelector>
     <label>
       <selectGroup>Selecciona Grup</selectGroup>
@@ -2169,30 +2190,30 @@
       <selectMembership>Selecciona l'Afiliació</selectMembership>
     </label>
   </UIPermissionSelector>
-  
+
   <UIAnyPermission>
     <label>
       <anyPermission>Qualsevol Permís</anyPermission>
     </label>
   </UIAnyPermission>
-  
+
   <UIMDriveAnyPermission>
     <label>
       <anyPermission>Qualsevol Permís</anyPermission>
     </label>
   </UIMDriveAnyPermission>
-  
+
   <UIQueriesAnyPermission>
     <label>
       <anyPermission>Qualsevol Permís</anyPermission>
     </label>
   </UIQueriesAnyPermission>
-  
+
   <MetadataPermission>
     <label>
       <selectGroup>Selecciona Grup</selectGroup>
     </label>
-  </MetadataPermission>  
+  </MetadataPermission>
   <MetadataPermission>
     <label>
       <selectMembership>Selecciona l'Afiliació</selectMembership>
@@ -2215,7 +2236,7 @@
   </QueriesPermissionBrowse>
   <!--
   #########Since ECM 2.4##################
-  -->  
+  -->
   <UIViewFormTabPane>
     <label>
       <addSymLink>Afegeix un enllaç simbòlic</addSymLink>
@@ -2223,14 +2244,14 @@
   </UIViewFormTabPane>
   <!--
   #########Since ECM 2.5##################
-  --> 
-  
+  -->
+
   <UIDriveForm>
-<msg>
-  <permission-path-invalid>El permís '{0}' no és vàlid.</permission-path-invalid>
-  </msg>
+    <msg>
+      <permission-path-invalid>El permís '{0}' no és vàlid.</permission-path-invalid>
+    </msg>
   </UIDriveForm>
-  
+
   <UITaxonomyTreeMainForm>
     <msg>
       <homepath-emty>La ruta al Inici és necessari.</homepath-emty>
@@ -2238,9 +2259,9 @@
     </msg>
   </UITaxonomyTreeMainForm>
   <UITaxonomyWorkingArea>
-  <msg>
-  <exist>Aquest node d'arbre ja existeix.</exist>
-  </msg>
+    <msg>
+      <exist>Aquest node d'arbre ja existeix.</exist>
+    </msg>
   </UITaxonomyWorkingArea>
 
   <PermissionTreeSelectUser>
@@ -2256,16 +2277,16 @@
       <userName>#{word.userName}</userName>
       <lastName>#{word.lastName}</lastName>
       <firstName>#{word.firstName}</firstName>
-    <email>#{word.email}</email>
+      <email>#{word.email}</email>
       <action>#{word.action}</action>
       <Add>#{word.Add}</Add>
       <Close>#{word.Close}</Close>
     </label>
   </PermissionTreeSelectUser>
-  
+
   <!--
   #########Since ECM 2.6 ##################
-  -->   
+  -->
   <DriveInputSet>
     <label>
       <nt_folder>Carpeta de Documents</nt_folder>
@@ -2274,30 +2295,30 @@
       <exo_jsFolder>Carpeta de Javascript</exo_jsFolder>
       <exo_linkFolder>Carpeta d'Enllaços</exo_linkFolder>
       <exo_webFolder>Carpeta de contingut web</exo_webFolder>
-   </label>
+    </label>
   </DriveInputSet>
   <UIPermissionTreeInfo>
-  <msg>
+    <msg>
       <confirm-delete-permission>Està segur que vol suprimir aquest permís?</confirm-delete-permission>
-      <no-permission-remove>No es pot eliminar el propietari o l'usuari del sistema.</no-permission-remove>  
-  </msg>
-  </UIPermissionTreeInfo>  
+      <no-permission-remove>No es pot eliminar el propietari o l'usuari del sistema.</no-permission-remove>
+    </msg>
+  </UIPermissionTreeInfo>
   <UITaxonomyTreeMainForm>
-<msg>
+    <msg>
       <no-right-target-path>Si us plau selecciona una altre ruta al inici.</no-right-target-path>
-</msg>
-</UITaxonomyTreeMainForm>
+    </msg>
+  </UITaxonomyTreeMainForm>
 
-<UIECMAdminControlPanel>
+  <UIECMAdminControlPanel>
     <tab>
-      <label>        
+      <label>
         <ManageUnLock>Gestiona els Bloqueigs</ManageUnLock>
       </label>
-    </tab>        
-</UIECMAdminControlPanel>
-<UIUnLockForm>
+    </tab>
+  </UIECMAdminControlPanel>
+  <UIUnLockForm>
     <label>
-      <name>Ruta al Node</name>      
+      <name>Ruta al Node</name>
       <permissions>Permisos</permissions>
       <PermissionButton>UI Unlock Form</PermissionButton>
     </label>
@@ -2306,49 +2327,50 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <permission-require>Ha de seleccionar els permisos.</permission-require>      
+      <permission-require>Ha de seleccionar els permisos.</permission-require>
     </msg>
   </UIUnLockForm>
   <UILockHolderList>
-  <header>
-  <name>Grups o Usuaris</name>
-  <action>Acció</action>
-  </header>
-  <tooltip>
-<DeleteLock>Suprimeix Grup</DeleteLock>
-  </tooltip>
-  <msg>
-  <can-not-delete-lock-holder>No es pot suprimir el grup {0}.</can-not-delete-lock-holder>
-  </msg>
+    <header>
+      <name>Grups o Usuaris</name>
+      <action>Acció</action>
+    </header>
+    <tooltip>
+      <DeleteLock>Suprimeix Grup</DeleteLock>
+    </tooltip>
+    <msg>
+      <can-not-delete-lock-holder>No es pot suprimir el grup {0}.</can-not-delete-lock-holder>
+    </msg>
   </UILockHolderList>
   <UILockNodeList>
-  <header>
-  <name>Títol</name>
-  <hoderLock>Propietari del bloqueig</hoderLock>
-  <action>Acció</action>
-  </header>
-  <tooltip>
-<UnLock>Desbloqueja</UnLock>
-  </tooltip>
-  <msg>
-  <access-denied-exception>No té permís per accedir al node mitjançant {0}, o aquest node s'ha suprimit.</access-denied-exception>
-  </msg>
+    <header>
+      <name>Títol</name>
+      <hoderLock>Propietari del bloqueig</hoderLock>
+      <action>Acció</action>
+    </header>
+    <tooltip>
+      <UnLock>Desbloqueja</UnLock>
+    </tooltip>
+    <msg>
+      <access-denied-exception>No té permís per accedir al node mitjançant {0}, o aquest node s'ha suprimit.
+      </access-denied-exception>
+    </msg>
   </UILockNodeList>
   <EditUnLockForm>
     <title>
       <UIUnLockForm>Gestiona el bloqueig</UIUnLockForm>
     </title>
-  </EditUnLockForm>  
+  </EditUnLockForm>
   <UITabPane>
     <action>
       <Close>#{word.close}</Close>
     </action>
     <title>
-    <UILockHolderContainer>Gestiona el bloqueig</UILockHolderContainer>
-    <UILockNodeList>Node bloquejat</UILockNodeList>
+      <UILockHolderContainer>Gestiona el bloqueig</UILockHolderContainer>
+      <UILockNodeList>Node bloquejat</UILockNodeList>
     </title>
   </UITabPane>
-  
+
   <UIViewFormTabPane>
     <action>
       <AddTabForm>Afegeix una pestanya</AddTabForm>
@@ -2356,21 +2378,21 @@
       <BackViewForm>Enrere</BackViewForm>
     </action>
   </UIViewFormTabPane>
-  
- <UITemplateForm>
-<tab>
-<label>
-<defaultSkin>CSS</defaultSkin>
-</label>
-</tab>
-</UITemplateForm>
- 
+
+  <UITemplateForm>
+    <tab>
+      <label>
+        <defaultSkin>CSS</defaultSkin>
+      </label>
+    </tab>
+  </UITemplateForm>
+
   <UITabPane>
     <title>
       <UISkinTab>CSS</UISkinTab>
     </title>
   </UITabPane>
-  
+
   <UISkinTab>
     <header>
       <name>Nom</name>
@@ -2389,7 +2411,7 @@
       </title>
     </action>
   </UISkinTab>
-  
+
   <SkinForm>
     <label>
       <UITemplateContent>SkinForm</UITemplateContent>
@@ -2404,56 +2426,57 @@
     <title>Afegeix/Edita Aparença</title>
   </SkinForm>
 
- <UITagManager>
-   <action>
-     <title>
-       <RemoveStyle>Elimina</RemoveStyle>
-         <AddStyle>Afegeix un Estil</AddStyle>
-     </title>
-   </action>
-   <msg>
-     <confirm-delete>Està segur que vol suprimir aquest estil d'etiqueta?</confirm-delete>
-   </msg>
- </UITagManager>
+  <UITagManager>
+    <action>
+      <title>
+        <RemoveStyle>Elimina</RemoveStyle>
+        <AddStyle>Afegeix un Estil</AddStyle>
+      </title>
+    </action>
+    <msg>
+      <confirm-delete>Està segur que vol suprimir aquest estil d'etiqueta?</confirm-delete>
+    </msg>
+  </UITagManager>
 
-<UITaxonomyTreeContainer>
-<action>
-<Cancel>#{word.close}</Cancel>
-</action>
-</UITaxonomyTreeContainer>
-<UITaxonomyTreeMainForm>
-<action>
-<NextViewPermission>Següent</NextViewPermission>
-<Reset>Reset</Reset>
-</action>
-</UITaxonomyTreeMainForm>
+  <UITaxonomyTreeContainer>
+    <action>
+      <Cancel>#{word.close}</Cancel>
+    </action>
+  </UITaxonomyTreeContainer>
+  <UITaxonomyTreeMainForm>
+    <action>
+      <NextViewPermission>Següent</NextViewPermission>
+      <Reset>Reset</Reset>
+    </action>
+  </UITaxonomyTreeMainForm>
 
-<UIPermissionTreeForm>
-<action>
-<Save>Save</Save>
-<Cancel>#{word.cancel}</Cancel>
-<Reset>Reset</Reset>
-<NextAddAction>Següent</NextAddAction>
-<Previous>Anterior</Previous>
-</action>
-</UIPermissionTreeForm>
+  <UIPermissionTreeForm>
+    <action>
+      <Save>Save</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <Reset>Reset</Reset>
+      <NextAddAction>Següent</NextAddAction>
+      <Previous>Anterior</Previous>
+    </action>
+  </UIPermissionTreeForm>
 
-<UIActionForm>
-<action>
-<PreviousViewPermission>Anterior</PreviousViewPermission>
-<NextViewTree>Següent</NextViewTree>
-</action>
-  <msg>
-    <xss-vulnerability-character>El camp '{0}' conté caràcters de vulnerables a XSS</xss-vulnerability-character>
-<xss-vulnerability-character-wo-label>La seva aportació pot contenir caràcters vulnerables a XSS</xss-vulnerability-character-wo-label>
-  </msg>
-</UIActionForm>
+  <UIActionForm>
+    <action>
+      <PreviousViewPermission>Anterior</PreviousViewPermission>
+      <NextViewTree>Següent</NextViewTree>
+    </action>
+    <msg>
+      <xss-vulnerability-character>El camp '{0}' conté caràcters de vulnerables a XSS</xss-vulnerability-character>
+      <xss-vulnerability-character-wo-label>La seva aportació pot contenir caràcters vulnerables a XSS
+      </xss-vulnerability-character-wo-label>
+    </msg>
+  </UIActionForm>
 
-<UITaxonomyTreeWorkingArea>
-<action>
-<Previous>Anterior</Previous>
-</action>
-</UITaxonomyTreeWorkingArea>
+  <UITaxonomyTreeWorkingArea>
+    <action>
+      <Previous>Anterior</Previous>
+    </action>
+  </UITaxonomyTreeWorkingArea>
 
   <UITabPane>
     <title>
@@ -2461,7 +2484,7 @@
       <UITagPermissionManager>Gestor de Permisos d'Etiquetes</UITagPermissionManager>
     </title>
   </UITabPane>
-  
+
   <UITagPermissionInfo>
     <header>
       <usersOrGroups>Usuari o Grup</usersOrGroups>
@@ -2474,7 +2497,7 @@
     </action>
     <msg>
       <confirm-delete-permission>Està segur que vol suprimir aquest permís?</confirm-delete-permission>
-    </msg>   
+    </msg>
   </UITagPermissionInfo>
   <UITagPermissionForm>
     <title>Afegeix permisos</title>
@@ -2487,32 +2510,32 @@
     </label>
     <msg>
       <userOrGroup-alreadyExists>L'afiliació ja existeix. Si us plau, selecciona un altre.</userOrGroup-alreadyExists>
-    </msg>    
+    </msg>
   </UITagPermissionForm>
-  
+
   <UIGroupMemberSelector>
     <label>
       <selectGroup>Selecciona Grup</selectGroup>
       <selectMembership>Selecciona l'Afiliació</selectMembership>
     </label>
   </UIGroupMemberSelector>
-  
+
   <UIFolksonomyManager>
-  <msg>
+    <msg>
       <confirm-delete>Està segur que vol suprimir aquest estil?</confirm-delete>
-  </msg>
+    </msg>
     <action>
       <title>
         <AddStyle>Afegeix un Estil</AddStyle>
       </title>
     </action>
-  </UIFolksonomyManager>  
-<UIActionForm>
-  <title>
-  <ShowComponent>Obrir la Finestra</ShowComponent>
-  <removeReference>Elimina</removeReference>
-  </title>
-  </UIActionForm> 
+  </UIFolksonomyManager>
+  <UIActionForm>
+    <title>
+      <ShowComponent>Obrir la Finestra</ShowComponent>
+      <removeReference>Elimina</removeReference>
+    </title>
+  </UIActionForm>
   <NodeTypeNameValidator>
     <msg>
       <Invalid-char>Hi ha alguns caràcters invàlids. Si us plau, introdueix un altre valor.</Invalid-char>
@@ -2521,10 +2544,12 @@
   </NodeTypeNameValidator>
   <UIActionForm>
     <msg>
-      <constraint-violation-exception>No es pot afegir el node '{0}' a '{1}' en l'emmagatzematge '{2}' a causa d'un problema de drets d'accés o d'alguna condició de limitació.</constraint-violation-exception>
+      <constraint-violation-exception>No es pot afegir el node '{0}' a '{1}' en l'emmagatzematge '{2}' a causa d'un
+        problema de drets d'accés o d'alguna condició de limitació.
+      </constraint-violation-exception>
     </msg>
   </UIActionForm>
-  
+
   <UIWorkspaceWizard>
     <msg>
       <name-not-allowed>Nom prohibit</name-not-allowed>
@@ -2532,35 +2557,37 @@
   </UIWorkspaceWizard>
   <UIRepositoryForm>
     <msg>
-      <not-complete-repository>The repository is being created. You need to wait a few minutes before creating another one.</not-complete-repository>
+      <not-complete-repository>The repository is being created. You need to wait a few minutes before creating another
+        one.
+      </not-complete-repository>
     </msg>
   </UIRepositoryForm>
-  
+
   <UIViewFormTabPane>
-  <label>
-  <addCategory>Afegeix una categoria</addCategory>
-          <addLocalizationLink>Afegeix una traducció</addLocalizationLink>
-  </label>
+    <label>
+      <addCategory>Afegeix una categoria</addCategory>
+      <addLocalizationLink>Afegeix una traducció</addLocalizationLink>
+    </label>
   </UIViewFormTabPane>
 
-<UIDriveForm>
-<label>
-<allowNodeTypesOnTree>Tipus de node permès en l'arbre de l'esquerra:</allowNodeTypesOnTree>
-</label>
-</UIDriveForm>
-<DriveInputSet>
-<title>
-<RemovePermission>Remove Permission</RemovePermission>
-<ChooseNodeType>Selecciona un tipus de node</ChooseNodeType>
-<RemoveNodeType>Elimina</RemoveNodeType>
-</title>
-</DriveInputSet>
-<PopupNodeTypeSelector>
-<title>
-<UINodeTypeSelector>Selecciona un tipus de node</UINodeTypeSelector>
-<PopupNodeTypeSelector>Selecciona un tipus de node</PopupNodeTypeSelector>
-</title>
-</PopupNodeTypeSelector>
+  <UIDriveForm>
+    <label>
+      <allowNodeTypesOnTree>Tipus de node permès en l'arbre de l'esquerra:</allowNodeTypesOnTree>
+    </label>
+  </UIDriveForm>
+  <DriveInputSet>
+    <title>
+      <RemovePermission>Remove Permission</RemovePermission>
+      <ChooseNodeType>Selecciona un tipus de node</ChooseNodeType>
+      <RemoveNodeType>Elimina</RemoveNodeType>
+    </title>
+  </DriveInputSet>
+  <PopupNodeTypeSelector>
+    <title>
+      <UINodeTypeSelector>Selecciona un tipus de node</UINodeTypeSelector>
+      <PopupNodeTypeSelector>Selecciona un tipus de node</PopupNodeTypeSelector>
+    </title>
+  </PopupNodeTypeSelector>
   <UINodeTypeSelector>
     <label>
       <selectedAllNodeTypes>Selecciona tots els tipus de node</selectedAllNodeTypes>
@@ -2568,14 +2595,14 @@
   </UINodeTypeSelector>
   <UIScriptForm>
     <msg>
-      <PathNotFoundException>El script ja existeix a la carpeta '{0}'.</PathNotFoundException>      
+      <PathNotFoundException>El script ja existeix a la carpeta '{0}'.</PathNotFoundException>
     </msg>
   </UIScriptForm>
- <UINodeTypeList>
-   <msg>
-   <no-list>No hi ha cap tipus de node que coincideixi amb la cerca.</no-list>
-   </msg>
- </UINodeTypeList>
+  <UINodeTypeList>
+    <msg>
+      <no-list>No hi ha cap tipus de node que coincideixi amb la cerca.</no-list>
+    </msg>
+  </UINodeTypeList>
   <UIActionForm>
     <msg>
       <canotChangeActionId>No pot canviar l'ID de l'acció.</canotChangeActionId>
@@ -2593,7 +2620,9 @@
   </UIPageIterator>
   <UILockNodeList>
     <msg>
-      <can-not-unlock-node>No té permís per desbloquejar aquest node. Si us plau, contacta amb l'administrador per obtenir el permís correcte.</can-not-unlock-node>
+      <can-not-unlock-node>No té permís per desbloquejar aquest node. Si us plau, contacta amb l'administrador per
+        obtenir el permís correcte.
+      </can-not-unlock-node>
     </msg>
- </UILockNodeList>
+  </UILockNodeList>
 </bundle>

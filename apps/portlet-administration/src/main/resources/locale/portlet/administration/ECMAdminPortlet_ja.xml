@@ -13,21 +13,21 @@
         <Repository>レポジトリ</Repository>
         <Advanced>詳細設定</Advanced>
       </label>
-    </tab>    
-    <label>     
+    </tab>
+    <label>
       <UITaxonomyManagerTrees>カテゴリー</UITaxonomyManagerTrees>
       <UIMetadataManager>メタデータ観覧</UIMetadataManager>
       <UINamespaceManager>名前空間</UINamespaceManager>
       <UINodeTypeManager>ノードタイプ</UINodeTypeManager>
       <UITemplatesManager>ドキュメント</UITemplatesManager>
-   <UICLVTemplatesManager>一覧</UICLVTemplatesManager>
+      <UICLVTemplatesManager>一覧</UICLVTemplatesManager>
       <UIViewManager>ビュー</UIViewManager>
       <UIDriveManager>ドライブ</UIDriveManager>
       <UIQueriesManager>クエリ</UIQueriesManager>
       <UIActionManager>アクション</UIActionManager>
       <UIScriptManager>スクリプト</UIScriptManager>
       <UIUnLockManager>ロックの管理</UIUnLockManager>
-      <UIFolksonomyManager>パブリックタグ</UIFolksonomyManager>      
+      <UIFolksonomyManager>パブリックタグ</UIFolksonomyManager>
     </label>
     <msg>
       <access-denied>アクセスできません！権限がありません</access-denied>
@@ -44,7 +44,8 @@
       <no-taxonomy-selected>少なくとも一つのカテゴリのコピーかカットをする必要があります。</no-taxonomy-selected>
       <node-is-cutting>ここに貼付けることができません。恐らく、分類ノード '{0}' はカットされています。</node-is-cutting>
       <can-not-paste>貼付けるためのクリップボードにデータがありません。</can-not-paste>
-      <reference-exception>Cannot delete this category  because it is currently referenced by a content.</reference-exception>
+      <reference-exception>Cannot delete this category because it is currently referenced by a content.
+      </reference-exception>
       <path-error>分類ノードが削除されたので問題が発生している可能性があります。</path-error>
     </msg>
   </UITaxonomyWorkingArea>
@@ -60,7 +61,7 @@
       <remove>削除</remove>
     </title>
   </UITaxonomyManager>
-  
+
   <!--
   ################################################################################
   #    org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyTreeContainer#
@@ -79,7 +80,7 @@
       <not-exist-tree>ツリーはまだ存在しません。</not-exist-tree>
     </msg>
   </UITaxonomyTreeContainer>
-  
+
   <!--
 ##########################################################################################
 #     org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyTreeMainForm          #
@@ -111,45 +112,45 @@
       <AddPath>パスの追加</AddPath>
     </title>
   </TaxonomyTreeHomePath>
-  
+
   <!--
 ##########################################################################################
 #     org.exoplatform.ecm.webui.component.admin.taxonomy.tree.info.UIPermissionTreeInfo  #
 ##########################################################################################
 -->
-<UIPermissionTreeInfo>
-<action>
-<title>
-<Delete>削除</Delete>
-<Edit>編集</Edit>
-</title>
-</action>
-<header>
-<usersOrGroups>ユーザorグループ</usersOrGroups>
-<read>読み込み</read>
-<addNode>ノードの追加</addNode>
-<setProperty>プロパティのセット</setProperty>
-<remove>削除</remove>
-<action>アクション</action>
-</header>
-</UIPermissionTreeInfo>
+  <UIPermissionTreeInfo>
+    <action>
+      <title>
+        <Delete>削除</Delete>
+        <Edit>編集</Edit>
+      </title>
+    </action>
+    <header>
+      <usersOrGroups>ユーザorグループ</usersOrGroups>
+      <read>読み込み</read>
+      <addNode>ノードの追加</addNode>
+      <setProperty>プロパティのセット</setProperty>
+      <remove>削除</remove>
+      <action>アクション</action>
+    </header>
+  </UIPermissionTreeInfo>
 
-<!--
-##########################################################################################
-#     org.exoplatform.ecm.webui.component.admin.taxonomy.tree.info.UIPermissionTreeForm  #
-##########################################################################################
--->
+  <!--
+  ##########################################################################################
+  #     org.exoplatform.ecm.webui.component.admin.taxonomy.tree.info.UIPermissionTreeForm  #
+  ##########################################################################################
+  -->
   <UIPermissionTreeForm>
     <msg>
       <have-not-any-permission>ノード追加のための権限追加</have-not-any-permission>
     </msg>
   </UIPermissionTreeForm>
 
-<!--
-################################################################################
-#     org.exoplatform.ecm.webui.component.admin.taxonomy.UIActionForm          #
-################################################################################
--->
+  <!--
+  ################################################################################
+  #     org.exoplatform.ecm.webui.component.admin.taxonomy.UIActionForm          #
+  ################################################################################
+  -->
 
   <UIActionForm>
     <title>分類ツリーの為のアクションの追加</title>
@@ -425,13 +426,13 @@
       <action>アクション</action>
     </header>
   </UITreeList>
-  
+
   <UIRepositoryList>
     <titlebar>
       <label>メインECM機能の管理</label>
     </titlebar>
   </UIRepositoryList>
-  
+
   <!--
   ################################################################################
   #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeManager #
@@ -669,7 +670,7 @@
       <data-file-error>XMLファイルもしくはZIPファイルのみインポートすることがサポートされます。</data-file-error>
       <data-invalid>タンプノードをインポートする際の無効なデータ</data-invalid>
       <nodetype-exist>無効なデータ：ノードタイプは存在します : '{0}'</nodetype-exist>
-      <namespace-invalid>無効なデータ:  不明なネームスペース : '{0}'</namespace-invalid>
+      <namespace-invalid>無効なデータ: 不明なネームスペース : '{0}'</namespace-invalid>
     </msg>
   </UINodeTypeUpload>
   <!--
@@ -726,7 +727,7 @@
     <header>
       <name>名前</name>
       <label>名前</label>
-<action>アクション</action>
+      <action>アクション</action>
     </header>
     <title>
       <Edit>編集</Edit>
@@ -735,10 +736,10 @@
     <action>
       <AddAction>追加</AddAction>
     </action>
-<msg>
- <confirm-delete>このアクション種類を削除してもよろしいですか？</confirm-delete>
-<cannot-delete>システムはまだ使用しているので、そのアクション種類は削除できません。</cannot-delete>
-</msg>
+    <msg>
+      <confirm-delete>このアクション種類を削除してもよろしいですか？</confirm-delete>
+      <cannot-delete>システムはまだ使用しているので、そのアクション種類は削除できません。</cannot-delete>
+    </msg>
   </UIActionTypeList>
   <!--
   ######################################################################################
@@ -791,11 +792,11 @@
       <UITemplateContainer>ドキュメント</UITemplateContainer>
       <UIActionsTemplateContainer>アクション</UIActionsTemplateContainer>
       <UIOthersTemplateContainer>その他</UIOthersTemplateContainer>
-  <UIActionScriptContainer>アクション</UIActionScriptContainer>
-  <UIWidgetScriptContainer>ウィジェット</UIWidgetScriptContainer>
-<UIInterceptorScriptContainer>インターセプター</UIInterceptorScriptContainer>
+      <UIActionScriptContainer>アクション</UIActionScriptContainer>
+      <UIWidgetScriptContainer>ウィジェット</UIWidgetScriptContainer>
+      <UIInterceptorScriptContainer>インターセプター</UIInterceptorScriptContainer>
 
-<nodeTypeDefinition>ノードタイプ</nodeTypeDefinition>
+      <nodeTypeDefinition>ノードタイプ</nodeTypeDefinition>
       <propertyDefinition>プロパティ</propertyDefinition>
       <childNodeDefinition>子ノード</childNodeDefinition>
       <SuperTypeTab>Superタイプ</SuperTypeTab>
@@ -810,11 +811,11 @@
   ######################################################################################
   -->
   <UIViewList>
-   <title>
-     <View>ビュー</View>
-     <EditInfo>編集</EditInfo>
-     <Delete>削除</Delete>
-   </title>
+    <title>
+      <View>ビュー</View>
+      <EditInfo>編集</EditInfo>
+      <Delete>削除</Delete>
+    </title>
     <header>
       <name>名前</name>
       <permissions>権限</permissions>
@@ -848,71 +849,71 @@
     </title>
   </EditPopup>
 
-<UITabList>
-                  <title>
-                    <Edit>編集</Edit>
-                    <Delete>削除する</Delete>
-                  </title>       
- <header>
-  <tabName>タブ</tabName>
-  <localizeButtons>説明:</localizeButtons>
-<action>アクション</action>
-</header>
-<action>
- <AddTab>追加</AddTab>
-</action>
-<msg>
- <confirm-delete>削除したいですか？</confirm-delete>
-</msg>
-<grid>
- <msg>
-  <empty>このビューではタブがありません。</empty>
- </msg>
-</grid>
-</UITabList>
+  <UITabList>
+    <title>
+      <Edit>編集</Edit>
+      <Delete>削除する</Delete>
+    </title>
+    <header>
+      <tabName>タブ</tabName>
+      <localizeButtons>説明:</localizeButtons>
+      <action>アクション</action>
+    </header>
+    <action>
+      <AddTab>追加</AddTab>
+    </action>
+    <msg>
+      <confirm-delete>削除したいですか？</confirm-delete>
+    </msg>
+    <grid>
+      <msg>
+        <empty>このビューではタブがありません。</empty>
+      </msg>
+    </grid>
+  </UITabList>
 
-<UIViewPermissionList>
- <title>このビューに対する権限を持つ所有者を選択します。</title>
-<label>
- <permission>{1} に {0} があります</permission>
-</label>
-<msg>
- <confirm-delete>本当にこの権限を削除しますか？</confirm-delete>
-  <permission-cannot-empty>参照アクセス許可は必須入力です。空白のままでは許可されません。</permission-cannot-empty>
-</msg>
-</UIViewPermissionList>
+  <UIViewPermissionList>
+    <title>このビューに対する権限を持つ所有者を選択します。</title>
+    <label>
+      <permission>{1} に {0} があります</permission>
+    </label>
+    <msg>
+      <confirm-delete>本当にこの権限を削除しますか？</confirm-delete>
+      <permission-cannot-empty>参照アクセス許可は必須入力です。空白のままでは許可されません。</permission-cannot-empty>
+    </msg>
+  </UIViewPermissionList>
 
-<UIViewPermissionList>
-                         <title>
-                           <Delete>削除する</Delete>
-                         </title>
- <header>
-<friendlyPermission>権限観覧</friendlyPermission>
-     <action>アクション</action>
- </header>
-<action>
- <title>
-  <Delete>削除</Delete>
- </title>
-</action>
-<grid>
- <msg>
-  <empty>このビューに対する権限はありません。</empty>
- </msg>
-</grid>
-</UIViewPermissionList>
+  <UIViewPermissionList>
+    <title>
+      <Delete>削除する</Delete>
+    </title>
+    <header>
+      <friendlyPermission>権限観覧</friendlyPermission>
+      <action>アクション</action>
+    </header>
+    <action>
+      <title>
+        <Delete>削除</Delete>
+      </title>
+    </action>
+    <grid>
+      <msg>
+        <empty>このビューに対する権限はありません。</empty>
+      </msg>
+    </grid>
+  </UIViewPermissionList>
 
-<UIViewPermissionForm>
-<action>
- <Add>追加</Add>
-</action>
-<label>
- <userOrGroup>ユーザorグループ</userOrGroup>
-</label>
-<msg>
- <permission-exist>アクセス権限 '{0}' は、既に存在しています。</permission-exist>
-</msg>
-</UIViewPermissionForm>
+  <UIViewPermissionForm>
+    <action>
+      <Add>追加</Add>
+    </action>
+    <label>
+      <userOrGroup>ユーザorグループ</userOrGroup>
+    </label>
+    <msg>
+      <permission-exist>アクセス権限 '{0}' は、既に存在しています。</permission-exist>
+    </msg>
+  </UIViewPermissionForm>
 
   <!--
   ######################################################################################
@@ -927,15 +928,15 @@
     <msg>
       <view-name-invalid>名前を入力する必要があります。</view-name-invalid>
       <fileName-invalid>名前の中に無効な文字があります。</fileName-invalid>
-      <permission-not-empty>権限を選択する必要があります</permission-not-empty>      
+      <permission-not-empty>権限を選択する必要があります</permission-not-empty>
       <mustbe-add-tab>タブを使いする必要があります。</mustbe-add-tab>
-<mustbe-add-permission>このビューのアクセス権限を選択してください。</mustbe-add-permission>
+      <mustbe-add-permission>このビューのアクセス権限を選択してください。</mustbe-add-permission>
       <view-exist>ビュー名はすでに存在します。</view-exist>
     </msg>
     <label>
       <viewName>名前</viewName>
       <template>テンプレート</template>
-<version>バージョンのリストア</version>
+      <version>バージョンのリストア</version>
       <enableVersion>バージョンの許可</enableVersion>
       <hideExplorerPanel>サイド ・ バーにあるエクスプ ローラー パネルを非表示にしてください。</hideExplorerPanel>
     </label>
@@ -980,14 +981,14 @@
       <overloadThumbnail>オーバーロード サムネイル</overloadThumbnail>
       <manageHidden>コンテンツの表示/非表示</manageHidden>
       <comment>コメント</comment>
-      <vote>ドキュメントに投票</vote>  
+      <vote>ドキュメントに投票</vote>
       <addCategory>カテゴリーを追加</addCategory>
       <addLocalizationLink>Translationの追加</addLocalizationLink>
       <publicationRequestApproval>リクエストの承認</publicationRequestApproval>
       <publicationApproveContent>コンテンツの承認</publicationApproveContent>
       <publicationPublish>公開</publicationPublish>
-<contentNavigation>コンテンツ ナビゲーション</contentNavigation>
-<addSymLink>Symリンクの追加</addSymLink>
+      <contentNavigation>コンテンツ ナビゲーション</contentNavigation>
+      <addSymLink>Symリンクの追加</addSymLink>
       <checkIn>Check In</checkIn>
       <checkOut>Check Out</checkOut>
       <shareDocuments>共有</shareDocuments>
@@ -996,8 +997,8 @@
       <uploadNewVersion>Upload a new version</uploadNewVersion>
     </label>
     <action>
-      <Save>#{word.save}</Save>      
-      <Cancel>#{word.cancel}</Cancel>      
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
   </UITabForm>
   <UIPermissionForm>
@@ -1010,7 +1011,7 @@
       <label>
         <UITabContainer>アクション</UITabContainer>
         <UIViewForm>ビュー</UIViewForm>
-        <UIViewPermissionContainer>パーミッション</UIViewPermissionContainer>    
+        <UIViewPermissionContainer>パーミッション</UIViewPermissionContainer>
       </label>
     </tab>
     <action>
@@ -1027,19 +1028,19 @@
     </title>
   </PopupViewPermission>
 
-<TabForm_Popup>
- <title>
-  <UITabForm>タブの追加と編集</UITabForm>
- </title>
-</TabForm_Popup>
+  <TabForm_Popup>
+    <title>
+      <UITabForm>タブの追加と編集</UITabForm>
+    </title>
+  </TabForm_Popup>
 
-<tab_permission>
- <title>
-  <SelectUser>ユーザの選択</SelectUser>
-<SelectMember>メンバの選択</SelectMember>
-<AddAny>任意の</AddAny>
- </title>
-</tab_permission>
+  <tab_permission>
+    <title>
+      <SelectUser>ユーザの選択</SelectUser>
+      <SelectMember>メンバの選択</SelectMember>
+      <AddAny>任意の</AddAny>
+    </title>
+  </tab_permission>
   <!--
   ######################################################################################
   #             org.exoplatform.ecm.webui.component.admin.view.UIECMTemplateList   #
@@ -1228,7 +1229,7 @@
   #             org.exoplatform.ecm.webui.component.admin.script.ecmScriptForm #
   ######################################################################################
   -->
- 
+
   <ecmScriptForm>
     <label>
       <selectVersion>バージョン</selectVersion>
@@ -1260,7 +1261,7 @@
       <name-too-long>分類名は30文字以内である必要があります。</name-too-long>
     </msg>
   </UITaxonomyForm>
-    
+
   <EditTaxonomyTreePopup>
     <title>
       <UITaxonomyTreeContainer>分類ツリーの編集</UITaxonomyTreeContainer>
@@ -1272,15 +1273,15 @@
       <UITaxonomyTreeContainer>分類ツリーの追加</UITaxonomyTreeContainer>
     </title>
   </AddTaxonomyTreePopup>
-  
+
   <TaxonomyPopupCreateChild>
     <title>
       <UITaxonomyTreeCreateChildForm>分類ツリーの編集</UITaxonomyTreeCreateChildForm>
     </title>
   </TaxonomyPopupCreateChild>
 
-<UITaxonomyTreeCreateChildForm>
-  <action>
+  <UITaxonomyTreeCreateChildForm>
+    <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
     </action>
@@ -1294,41 +1295,41 @@
       <name-too-long>名前は長過ぎます。</name-too-long>
       <exist>名前は既に存在します。</exist>
     </msg>
-</UITaxonomyTreeCreateChildForm>
+  </UITaxonomyTreeCreateChildForm>
 
   <PopupComponent>
     <title>
       <UIOneNodePathSelector>パスの選択</UIOneNodePathSelector>
     </title>
   </PopupComponent>
-  
+
   <TaxoPopupUserSelector>
-  <title>
+    <title>
       <TaxoTreeSelectUserOrGroup>ユーザの選択</TaxoTreeSelectUserOrGroup>
       <UIPermissionTreeSelectUser>ユーザの選択</UIPermissionTreeSelectUser>
     </title>
   </TaxoPopupUserSelector>
 
   <TaxoTreeSelectUserOrGroupPopup>
-  <title>
+    <title>
       <TaxoTreeSelectUserOrGroup>メンバーシップの選択</TaxoTreeSelectUserOrGroup>
     </title>
   </TaxoTreeSelectUserOrGroupPopup>
-  
+
   <TaxoTreeAnyPermission>
     <label>
       <any>権限</any>
       <anyPermission>TaxoTreeAnyPermission</anyPermission>
     </label>
   </TaxoTreeAnyPermission>
-  
+
   <TaxoTreeSelectUserOrGroup>
     <label>
       <selectGroup>グループの選択</selectGroup>
       <selectMembership>メンバーシップの選択</selectMembership>
     </label>
   </TaxoTreeSelectUserOrGroup>
-  
+
   <!--
   ######################################################################################
   #             org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyTreeList #
@@ -1355,7 +1356,7 @@
       <is-in-trash>この分類ツリーをごみ箱に移動されていた！</is-in-trash>
     </msg>
   </UITaxonomyTreeList>
-  
+
   <!--
   ######################################################################################
   #             org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyTreeForm  #
@@ -1372,7 +1373,7 @@
       <homapath-emty>ホームパスの入力</homapath-emty>
     </msg>
   </UITaxonomyTreeForm>
-  
+
   <UIPermissionTreeForm>
     <label>
       <UIPopupWindow>選択</UIPopupWindow>
@@ -1396,38 +1397,38 @@
       <access-denied>アクセスできません！権限がありません</access-denied>
     </msg>
   </UIPermissionTreeForm>
-  
+
   <PopupTaxonomyJCRBrowser>
-  <title>
+    <title>
       <UIOneNodePathSelector>ホームパスの選択</UIOneNodePathSelector>
     </title>
   </PopupTaxonomyJCRBrowser>
-  
+
   <PopupTaxonomyTreePermission>
     <title>
       <UIPermissionSelector>権限の選択</UIPermissionSelector>
     </title>
-   </PopupTaxonomyTreePermission>
-   
-   <PopupDrivePermission>
+  </PopupTaxonomyTreePermission>
+
+  <PopupDrivePermission>
     <title>
       <AddDrivePermissionSelector>権限の追加</AddDrivePermissionSelector>
       <UIPermissionSelector>権限の選択</UIPermissionSelector>
     </title>
   </PopupDrivePermission>
-  
+
   <UIPopupWindow>
     <title>
       <UIPermissionManager>権限管理</UIPermissionManager>
     </title>
-   </UIPopupWindow>
+  </UIPopupWindow>
 
   <PopupUserSelector>
     <title>
       <UIUserContainer>権限管理</UIUserContainer>
     </title>
-   </PopupUserSelector>
-   
+  </PopupUserSelector>
+
   <UIPermissionInfo>
     <action>
       <title>
@@ -1499,13 +1500,13 @@
       <access-denied>アクセスできません！権限がありません</access-denied>
     </msg>
   </UIPermissionForm>
-  
+
   <TaxonomyPopup>
     <title>
       <UITaxonomyForm>分類の追加</UITaxonomyForm>
     </title>
   </TaxonomyPopup>
-  
+
   <UITaxonomyManager>
     <title>
       <permission>権限マネージメント</permission>
@@ -1533,7 +1534,7 @@
       <template-not-exist>The template that you attempt to delete doesn't exist.</template-not-exist>
     </msg>
   </UITemplateList>
-  
+
   <UIActionsTemplateList>
     <header>
       <name>Template Name</name>
@@ -1551,7 +1552,7 @@
       <template-not-exist>The template that you attempt to delete doesn't exist.</template-not-exist>
     </msg>
   </UIActionsTemplateList>
-  
+
   <UIOthersTemplateList>
     <header>
       <name>Template Name</name>
@@ -1570,19 +1571,19 @@
     </msg>
   </UIOthersTemplateList>
 
- <!--
-  ######################################################################################
-  #             org.exoplatform.ecm.webui.component.admin.templates.clv package #
-  ######################################################################################
-  -->
+  <!--
+   ######################################################################################
+   #             org.exoplatform.ecm.webui.component.admin.templates.clv package #
+   ######################################################################################
+   -->
 
-<UITabPane>
- <title>
- <ContentTemplateContainer>コンテンツ</ContentTemplateContainer>
-<CateTemplateContainer>ナビゲーション</CateTemplateContainer>
-<PageTemplateContainer>改ページ</PageTemplateContainer>
- </title>
-</UITabPane>
+  <UITabPane>
+    <title>
+      <ContentTemplateContainer>コンテンツ</ContentTemplateContainer>
+      <CateTemplateContainer>ナビゲーション</CateTemplateContainer>
+      <PageTemplateContainer>改ページ</PageTemplateContainer>
+    </title>
+  </UITabPane>
 
   <UICLVTemplateList>
     <title>
@@ -1596,8 +1597,8 @@
     </header>
     <action>
       <AddTemplate>テンプレートの追加</AddTemplate>
-<Edit>編集</Edit>
-<Delete>削除</Delete>
+      <Edit>編集</Edit>
+      <Delete>削除</Delete>
     </action>
     <msg>
       <confirm-delete>本当に削除したいですか?</confirm-delete>
@@ -1607,7 +1608,7 @@
     </msg>
   </UICLVTemplateList>
 
-<CateTemplateList>
+  <CateTemplateList>
     <header>
       <title>名前</title>
       <action>アクション</action>
@@ -1619,12 +1620,12 @@
     </title>
     <action>
       <AddTemplate>テンプレートの追加</AddTemplate>
-<Edit>編集</Edit>
-<Delete>削除</Delete>
+      <Edit>編集</Edit>
+      <Delete>削除</Delete>
     </action>
-</CateTemplateList>
+  </CateTemplateList>
 
-<PageTemplateList>
+  <PageTemplateList>
     <header>
       <title>名前</title>
       <action>アクション</action>
@@ -1632,103 +1633,103 @@
     </header>
     <action>
       <AddTemplate>テンプレートの追加</AddTemplate>
-<Edit>編集</Edit>
-<Delete>削除</Delete>
+      <Edit>編集</Edit>
+      <Delete>削除</Delete>
     </action>
-</PageTemplateList>
+  </PageTemplateList>
 
-<EditCLVTemplatePopup_ContentTemplateContainer>
- <title>
-   <UICLVTemplateForm_ContentTemplateContainer>リスト テンプレートを編集</UICLVTemplateForm_ContentTemplateContainer>   
- </title>
-</EditCLVTemplatePopup_ContentTemplateContainer>
+  <EditCLVTemplatePopup_ContentTemplateContainer>
+    <title>
+      <UICLVTemplateForm_ContentTemplateContainer>リスト テンプレートを編集</UICLVTemplateForm_ContentTemplateContainer>
+    </title>
+  </EditCLVTemplatePopup_ContentTemplateContainer>
 
-<EditCLVTemplatePopup_CateTemplateContainer>
- <title>
-   <UICLVTemplateForm_CateTemplateContainer>リスト テンプレートを編集</UICLVTemplateForm_CateTemplateContainer>   
- </title>
-</EditCLVTemplatePopup_CateTemplateContainer>
+  <EditCLVTemplatePopup_CateTemplateContainer>
+    <title>
+      <UICLVTemplateForm_CateTemplateContainer>リスト テンプレートを編集</UICLVTemplateForm_CateTemplateContainer>
+    </title>
+  </EditCLVTemplatePopup_CateTemplateContainer>
 
-<EditCLVTemplatePopup_PageTemplateContainer>
- <title>
-   <UICLVTemplateForm_PageTemplateContainer>リスト テンプレートを編集</UICLVTemplateForm_PageTemplateContainer>   
- </title>
-</EditCLVTemplatePopup_PageTemplateContainer>
+  <EditCLVTemplatePopup_PageTemplateContainer>
+    <title>
+      <UICLVTemplateForm_PageTemplateContainer>リスト テンプレートを編集</UICLVTemplateForm_PageTemplateContainer>
+    </title>
+  </EditCLVTemplatePopup_PageTemplateContainer>
 
-<CLVTemplatePopup_ContentTemplateContainer>
- <title>
-   <UICLVTemplateForm_ContentTemplateContainer>リスト テンプレートを追加</UICLVTemplateForm_ContentTemplateContainer>   
- </title>
-</CLVTemplatePopup_ContentTemplateContainer>
+  <CLVTemplatePopup_ContentTemplateContainer>
+    <title>
+      <UICLVTemplateForm_ContentTemplateContainer>リスト テンプレートを追加</UICLVTemplateForm_ContentTemplateContainer>
+    </title>
+  </CLVTemplatePopup_ContentTemplateContainer>
 
-<CLVTemplatePopup_CateTemplateContainer>
- <title>
-   <UICLVTemplateForm_CateTemplateContainer>リスト テンプレートを追加</UICLVTemplateForm_CateTemplateContainer>   
- </title>
-</CLVTemplatePopup_CateTemplateContainer>
+  <CLVTemplatePopup_CateTemplateContainer>
+    <title>
+      <UICLVTemplateForm_CateTemplateContainer>リスト テンプレートを追加</UICLVTemplateForm_CateTemplateContainer>
+    </title>
+  </CLVTemplatePopup_CateTemplateContainer>
 
-<CLVTemplatePopup_PageTemplateContainer>
- <title>
-   <UICLVTemplateForm_PageTemplateContainer>リスト テンプレートを追加</UICLVTemplateForm_PageTemplateContainer>   
- </title>
-</CLVTemplatePopup_PageTemplateContainer>
+  <CLVTemplatePopup_PageTemplateContainer>
+    <title>
+      <UICLVTemplateForm_PageTemplateContainer>リスト テンプレートを追加</UICLVTemplateForm_PageTemplateContainer>
+    </title>
+  </CLVTemplatePopup_PageTemplateContainer>
 
-<UICLVTemplateForm_ContentTemplateContainer>
- <action>
-  <Save>#{word.save}</Save>
-<Reset>リセット</Reset>
-<Cancel>#{word.cancel}</Cancel>
- </action>
-<label>
- <title>名前</title>
-<template>テンプレート名</template>
-<content>コンテンツ</content>
-<type>テンプレート タイプ</type>
-</label>
-</UICLVTemplateForm_ContentTemplateContainer>
+  <UICLVTemplateForm_ContentTemplateContainer>
+    <action>
+      <Save>#{word.save}</Save>
+      <Reset>リセット</Reset>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <label>
+      <title>名前</title>
+      <template>テンプレート名</template>
+      <content>コンテンツ</content>
+      <type>テンプレート タイプ</type>
+    </label>
+  </UICLVTemplateForm_ContentTemplateContainer>
 
-<UICLVTemplateForm_PageTemplateContainer>
- <action>
-  <Save>#{word.save}</Save>
-<Reset>リセット</Reset>
-<Cancel>#{word.cancel}</Cancel>
- </action>
-<label>
- <title>名前</title>
-<template>テンプレート名</template>
-<content>コンテンツ</content>
-<type>テンプレート タイプ</type>
-</label>
-</UICLVTemplateForm_PageTemplateContainer>
+  <UICLVTemplateForm_PageTemplateContainer>
+    <action>
+      <Save>#{word.save}</Save>
+      <Reset>リセット</Reset>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <label>
+      <title>名前</title>
+      <template>テンプレート名</template>
+      <content>コンテンツ</content>
+      <type>テンプレート タイプ</type>
+    </label>
+  </UICLVTemplateForm_PageTemplateContainer>
 
-<UICLVTemplateForm_CateTemplateContainer>
- <action>
-  <Save>#{word.save}</Save>
-<Reset>リセット</Reset>
-<Cancel>#{word.cancel}</Cancel>
- </action>
-<label>
- <title>名前</title>
-<template>テンプレート名</template>
-<content>コンテンツ</content>
-<type>テンプレート タイプ</type>
-</label>
-</UICLVTemplateForm_CateTemplateContainer>
-<UICLVTemplateForm>
-  <label>
-    <paginators>改ページ</paginators>
-<list>コンテンツ</list>
-<navigation>ナビゲーション</navigation>
-  </label>
-                          <action>
-                            <Save>#{word.save}</Save>
-                            <Reset>リセット</Reset> 
-                            <Cancel>#{word.cancel}</Cancel> 
-                          </action> 
-  <msg>
-  <template-existing>このテンプレート名は既に存在します。他の名称を選択してください。</template-existing>
-  </msg>
-</UICLVTemplateForm>
+  <UICLVTemplateForm_CateTemplateContainer>
+    <action>
+      <Save>#{word.save}</Save>
+      <Reset>リセット</Reset>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <label>
+      <title>名前</title>
+      <template>テンプレート名</template>
+      <content>コンテンツ</content>
+      <type>テンプレート タイプ</type>
+    </label>
+  </UICLVTemplateForm_CateTemplateContainer>
+  <UICLVTemplateForm>
+    <label>
+      <paginators>改ページ</paginators>
+      <list>コンテンツ</list>
+      <navigation>ナビゲーション</navigation>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Reset>リセット</Reset>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <template-existing>このテンプレート名は既に存在します。他の名称を選択してください。</template-existing>
+    </msg>
+  </UICLVTemplateForm>
 
   <!--
   ######################################################################################
@@ -1789,8 +1790,10 @@
   <TemplateContainerPopup>
     <title>
       <UIViewTemplate_UITemplateContainer><![CDATA[View & Edit Template]]></UIViewTemplate_UITemplateContainer>
-      <UIViewTemplate_UIActionsTemplateContainer><![CDATA[View & Edit Template]]></UIViewTemplate_UIActionsTemplateContainer>
-      <UIViewTemplate_UIOthersTemplateContainer><![CDATA[View & Edit Template]]></UIViewTemplate_UIOthersTemplateContainer>
+      <UIViewTemplate_UIActionsTemplateContainer>
+        <![CDATA[View & Edit Template]]></UIViewTemplate_UIActionsTemplateContainer>
+      <UIViewTemplate_UIOthersTemplateContainer>
+        <![CDATA[View & Edit Template]]></UIViewTemplate_UIOthersTemplateContainer>
     </title>
   </TemplateContainerPopup>
   <UITemplatesManager>
@@ -1972,11 +1975,11 @@
       <UIQueriesForm>クエリの編集</UIQueriesForm>
     </title>
   </EditQueryForm>
-<PermissionPopup>
-  <title>
-    <UIGroupMemberSelector>権限の選択</UIGroupMemberSelector>
-  </title>
-</PermissionPopup>
+  <PermissionPopup>
+    <title>
+      <UIGroupMemberSelector>権限の選択</UIGroupMemberSelector>
+    </title>
+  </PermissionPopup>
   <!--
   ######################################################################################
   #             org.exoplatform.ecm.webui.component.admin.folksonomy #
@@ -1986,7 +1989,7 @@
     <title>
       <EditStyle>編集</EditStyle>
       <RemoveStyle>削除</RemoveStyle>
-    </title>    
+    </title>
   </UITagManager>
   <UITagStyleList>
     <header>
@@ -2015,7 +2018,9 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <range-validator>無効なレンジです。正しいレンジのフォーマットは a..b with a, b is positive integer. You can use * instead of b to indicate that unlimited.</range-validator>
+      <range-validator>無効なレンジです。正しいレンジのフォーマットは a..b with a, b is positive integer. You can use * instead of b to
+        indicate that unlimited.
+      </range-validator>
       <error-update>情報は正しくありません。</error-update>
       <item-not-existing>You cannot save changes to this tag that no longer exist in database</item-not-existing>
     </msg>
@@ -2057,9 +2062,9 @@
   ###################################################################################
   -->
   <PermissionValidator>
-  <msg>
+    <msg>
       <permission-path-invalid>アクセス権限 '{0}' は無効です。</permission-path-invalid>
-  </msg>
+    </msg>
   </PermissionValidator>
   <!--
   ###################################################################################
@@ -2128,9 +2133,9 @@
       <EditInfo>編集</EditInfo>
       <Delete>削除</Delete>
     </title>
-<label>
-  <permission>{1} に {0} があります</permission>
-</label>
+    <label>
+      <permission>{1} に {0} があります</permission>
+    </label>
   </UIViewContainer>
   <ECMTemplate>
     <title>
@@ -2161,7 +2166,7 @@
       <selectMembership>メンバシップの選択</selectMembership>
     </label>
   </UIDrivePermissionSelector>
-  
+
   <UIPermissionSelector>
     <label>
       <selectGroup>グループの選択</selectGroup>
@@ -2169,30 +2174,30 @@
       <selectMembership>メンバーシップの選択</selectMembership>
     </label>
   </UIPermissionSelector>
-  
+
   <UIAnyPermission>
     <label>
       <anyPermission>権限</anyPermission>
     </label>
   </UIAnyPermission>
-  
+
   <UIMDriveAnyPermission>
     <label>
       <anyPermission>権限</anyPermission>
     </label>
   </UIMDriveAnyPermission>
-  
+
   <UIQueriesAnyPermission>
     <label>
       <anyPermission>権限</anyPermission>
     </label>
   </UIQueriesAnyPermission>
-  
+
   <MetadataPermission>
     <label>
       <selectGroup>グループの選択</selectGroup>
     </label>
-  </MetadataPermission>  
+  </MetadataPermission>
   <MetadataPermission>
     <label>
       <selectMembership>メンバーシップの選択</selectMembership>
@@ -2215,7 +2220,7 @@
   </QueriesPermissionBrowse>
   <!--
   #########Since ECM 2.4##################
-  -->  
+  -->
   <UIViewFormTabPane>
     <label>
       <addSymLink>システムリンクの追加</addSymLink>
@@ -2223,14 +2228,14 @@
   </UIViewFormTabPane>
   <!--
   #########Since ECM 2.5##################
-  --> 
-  
+  -->
+
   <UIDriveForm>
-<msg>
-  <permission-path-invalid>権限は無効です！</permission-path-invalid>
-  </msg>
+    <msg>
+      <permission-path-invalid>権限は無効です！</permission-path-invalid>
+    </msg>
   </UIDriveForm>
-  
+
   <UITaxonomyTreeMainForm>
     <msg>
       <homepath-emty>ホームパスは空です。</homepath-emty>
@@ -2238,9 +2243,9 @@
     </msg>
   </UITaxonomyTreeMainForm>
   <UITaxonomyWorkingArea>
-  <msg>
-  <exist>このツリーノードは存在します！</exist>
-  </msg>
+    <msg>
+      <exist>このツリーノードは存在します！</exist>
+    </msg>
   </UITaxonomyWorkingArea>
 
   <PermissionTreeSelectUser>
@@ -2256,16 +2261,16 @@
       <userName>#{word.userName}</userName>
       <lastName>#{word.lastName}</lastName>
       <firstName>#{word.firstName}</firstName>
-    <email>#{word.email}</email>
+      <email>#{word.email}</email>
       <action>#{word.action}</action>
       <Add>#{word.Add}</Add>
       <Close>#{word.Close}</Close>
     </label>
   </PermissionTreeSelectUser>
-  
+
   <!--
   #########Since ECM 2.6 ##################
-  -->   
+  -->
   <DriveInputSet>
     <label>
       <nt_folder>フォルダ</nt_folder>
@@ -2274,30 +2279,30 @@
       <exo_jsFolder>Java スクリプトフォルダー</exo_jsFolder>
       <exo_linkFolder>リンク フォルダー</exo_linkFolder>
       <exo_webFolder>Web コンテンツ フォルダー</exo_webFolder>
-   </label>
+    </label>
   </DriveInputSet>
   <UIPermissionTreeInfo>
-  <msg>
+    <msg>
       <confirm-delete-permission>本当にこの権限を削除したいですか？</confirm-delete-permission>
-      <no-permission-remove>オーナーもしくはシステムを削除することは出来ません。</no-permission-remove>  
-  </msg>
-  </UIPermissionTreeInfo>  
+      <no-permission-remove>オーナーもしくはシステムを削除することは出来ません。</no-permission-remove>
+    </msg>
+  </UIPermissionTreeInfo>
   <UITaxonomyTreeMainForm>
-<msg>
+    <msg>
       <no-right-target-path>他のホームパスを選択しなければなりません。</no-right-target-path>
-</msg>
-</UITaxonomyTreeMainForm>
+    </msg>
+  </UITaxonomyTreeMainForm>
 
-<UIECMAdminControlPanel>
+  <UIECMAdminControlPanel>
     <tab>
-      <label>        
+      <label>
         <ManageUnLock>ロックの管理</ManageUnLock>
       </label>
-    </tab>        
-</UIECMAdminControlPanel>
-<UIUnLockForm>
+    </tab>
+  </UIECMAdminControlPanel>
+  <UIUnLockForm>
     <label>
-      <name>パスノード</name>      
+      <name>パスノード</name>
       <permissions>権限</permissions>
       <PermissionButton>UIUnLockForm</PermissionButton>
     </label>
@@ -2306,49 +2311,49 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <permission-require>権限を選択しなければなりません。</permission-require>      
+      <permission-require>権限を選択しなければなりません。</permission-require>
     </msg>
   </UIUnLockForm>
   <UILockHolderList>
-  <header>
-  <name>グループorユーザ</name>
-  <action>アクション</action>
-  </header>
-  <tooltip>
-<DeleteLock>グループの削除</DeleteLock>
-  </tooltip>
-  <msg>
-  <can-not-delete-lock-holder>グループ {0}を削除できません。</can-not-delete-lock-holder>
-  </msg>
+    <header>
+      <name>グループorユーザ</name>
+      <action>アクション</action>
+    </header>
+    <tooltip>
+      <DeleteLock>グループの削除</DeleteLock>
+    </tooltip>
+    <msg>
+      <can-not-delete-lock-holder>グループ {0}を削除できません。</can-not-delete-lock-holder>
+    </msg>
   </UILockHolderList>
   <UILockNodeList>
-  <header>
-  <name>ノードパス</name>
-  <hoderLock>ユーザロック</hoderLock>
-  <action>アクション</action>
-  </header>
-  <tooltip>
-<UnLock>ロック解除</UnLock>
-  </tooltip>
-  <msg>
-  <access-denied-exception>パス {0} のノードにアクセスするための権限が無いか、ノードは削除されました。</access-denied-exception>
-  </msg>
+    <header>
+      <name>ノードパス</name>
+      <hoderLock>ユーザロック</hoderLock>
+      <action>アクション</action>
+    </header>
+    <tooltip>
+      <UnLock>ロック解除</UnLock>
+    </tooltip>
+    <msg>
+      <access-denied-exception>パス {0} のノードにアクセスするための権限が無いか、ノードは削除されました。</access-denied-exception>
+    </msg>
   </UILockNodeList>
   <EditUnLockForm>
     <title>
       <UIUnLockForm>管理ロック</UIUnLockForm>
     </title>
-  </EditUnLockForm>  
+  </EditUnLockForm>
   <UITabPane>
     <action>
       <Close>#{word.close}</Close>
     </action>
     <title>
-    <UILockHolderContainer>管理ロック</UILockHolderContainer>
-    <UILockNodeList>ロックされたノード</UILockNodeList>
+      <UILockHolderContainer>管理ロック</UILockHolderContainer>
+      <UILockNodeList>ロックされたノード</UILockNodeList>
     </title>
   </UITabPane>
-  
+
   <UIViewFormTabPane>
     <action>
       <AddTabForm>タブの追加</AddTabForm>
@@ -2356,21 +2361,21 @@
       <BackViewForm>戻る</BackViewForm>
     </action>
   </UIViewFormTabPane>
-  
- <UITemplateForm>
-<tab>
-<label>
-<defaultSkin>CSS</defaultSkin>
-</label>
-</tab>
-</UITemplateForm>
- 
+
+  <UITemplateForm>
+    <tab>
+      <label>
+        <defaultSkin>CSS</defaultSkin>
+      </label>
+    </tab>
+  </UITemplateForm>
+
   <UITabPane>
     <title>
       <UISkinTab>CSS</UISkinTab>
     </title>
   </UITabPane>
-  
+
   <UISkinTab>
     <header>
       <name>名前</name>
@@ -2389,7 +2394,7 @@
       </title>
     </action>
   </UISkinTab>
-  
+
   <SkinForm>
     <label>
       <UITemplateContent>スキンフォーム</UITemplateContent>
@@ -2404,56 +2409,57 @@
     <title>スキンの追加/編集</title>
   </SkinForm>
 
- <UITagManager>
-   <action>
-     <title>
-       <RemoveStyle>削除</RemoveStyle>
-         <AddStyle>スタイルの追加</AddStyle>
-     </title>
-   </action>
-   <msg>
-     <confirm-delete>このタグスタイルを削除したいですか？</confirm-delete>
-   </msg>
- </UITagManager>
+  <UITagManager>
+    <action>
+      <title>
+        <RemoveStyle>削除</RemoveStyle>
+        <AddStyle>スタイルの追加</AddStyle>
+      </title>
+    </action>
+    <msg>
+      <confirm-delete>このタグスタイルを削除したいですか？</confirm-delete>
+    </msg>
+  </UITagManager>
 
-<UITaxonomyTreeContainer>
-<action>
-<Cancel>#{word.close}</Cancel>
-</action>
-</UITaxonomyTreeContainer>
-<UITaxonomyTreeMainForm>
-<action>
-<NextViewPermission>次へ</NextViewPermission>
-<Reset>Reset</Reset>
-</action>
-</UITaxonomyTreeMainForm>
+  <UITaxonomyTreeContainer>
+    <action>
+      <Cancel>#{word.close}</Cancel>
+    </action>
+  </UITaxonomyTreeContainer>
+  <UITaxonomyTreeMainForm>
+    <action>
+      <NextViewPermission>次へ</NextViewPermission>
+      <Reset>Reset</Reset>
+    </action>
+  </UITaxonomyTreeMainForm>
 
-<UIPermissionTreeForm>
-<action>
-<Save>Save</Save>
-<Cancel>#{word.cancel}</Cancel>
-<Reset>Reset</Reset>
-<NextAddAction>次へ</NextAddAction>
-<Previous>前へ</Previous>
-</action>
-</UIPermissionTreeForm>
+  <UIPermissionTreeForm>
+    <action>
+      <Save>Save</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <Reset>Reset</Reset>
+      <NextAddAction>次へ</NextAddAction>
+      <Previous>前へ</Previous>
+    </action>
+  </UIPermissionTreeForm>
 
-<UIActionForm>
-<action>
-<PreviousViewPermission>前へ</PreviousViewPermission>
-<NextViewTree>次へ</NextViewTree>
-</action>
-  <msg>
-    <xss-vulnerability-character>フィールド'{0}'は、クロスサイトスクリプティングの脆弱性文字が含まれています。</xss-vulnerability-character>
-<xss-vulnerability-character-wo-label>Your input may contain XSS vulnerability characters</xss-vulnerability-character-wo-label>
-  </msg>
-</UIActionForm>
+  <UIActionForm>
+    <action>
+      <PreviousViewPermission>前へ</PreviousViewPermission>
+      <NextViewTree>次へ</NextViewTree>
+    </action>
+    <msg>
+      <xss-vulnerability-character>フィールド'{0}'は、クロスサイトスクリプティングの脆弱性文字が含まれています。</xss-vulnerability-character>
+      <xss-vulnerability-character-wo-label>Your input may contain XSS vulnerability characters
+      </xss-vulnerability-character-wo-label>
+    </msg>
+  </UIActionForm>
 
-<UITaxonomyTreeWorkingArea>
-<action>
-<Previous>前へ</Previous>
-</action>
-</UITaxonomyTreeWorkingArea>
+  <UITaxonomyTreeWorkingArea>
+    <action>
+      <Previous>前へ</Previous>
+    </action>
+  </UITaxonomyTreeWorkingArea>
 
   <UITabPane>
     <title>
@@ -2461,7 +2467,7 @@
       <UITagPermissionManager>タグ権限マネージャ</UITagPermissionManager>
     </title>
   </UITabPane>
-  
+
   <UITagPermissionInfo>
     <header>
       <usersOrGroups>ユーザorグループ</usersOrGroups>
@@ -2474,7 +2480,7 @@
     </action>
     <msg>
       <confirm-delete-permission>この権限を削除したいですか？</confirm-delete-permission>
-    </msg>   
+    </msg>
   </UITagPermissionInfo>
   <UITagPermissionForm>
     <title>権限の追加</title>
@@ -2487,32 +2493,32 @@
     </label>
     <msg>
       <userOrGroup-alreadyExists>メンバーシップは既に存在します。別の物を選択してください!</userOrGroup-alreadyExists>
-    </msg>    
+    </msg>
   </UITagPermissionForm>
-  
+
   <UIGroupMemberSelector>
     <label>
       <selectGroup>グループの選択</selectGroup>
       <selectMembership>メンバーシップの選択</selectMembership>
     </label>
   </UIGroupMemberSelector>
-  
+
   <UIFolksonomyManager>
-  <msg>
+    <msg>
       <confirm-delete>このスタイルを削除したいですか？</confirm-delete>
-  </msg>
+    </msg>
     <action>
       <title>
         <AddStyle>スタイルの追加</AddStyle>
       </title>
     </action>
-  </UIFolksonomyManager>  
-<UIActionForm>
-  <title>
-  <ShowComponent>ウィンドウを開く</ShowComponent>
-  <removeReference>削除</removeReference>
-  </title>
-  </UIActionForm> 
+  </UIFolksonomyManager>
+  <UIActionForm>
+    <title>
+      <ShowComponent>ウィンドウを開く</ShowComponent>
+      <removeReference>削除</removeReference>
+    </title>
+  </UIActionForm>
   <NodeTypeNameValidator>
     <msg>
       <Invalid-char>無効な文字があります。他の値を入力してください。</Invalid-char>
@@ -2524,7 +2530,7 @@
       <constraint-violation-exception>ワークスペース'{2}'の'{1}に'{0}'を追加できません。</constraint-violation-exception>
     </msg>
   </UIActionForm>
-  
+
   <UIWorkspaceWizard>
     <msg>
       <name-not-allowed>許されない名前</name-not-allowed>
@@ -2535,32 +2541,32 @@
       <not-complete-repository>レポジトリは作成されています。新しいレポジトリを作成する為に数秒待つ必要があります。</not-complete-repository>
     </msg>
   </UIRepositoryForm>
-  
+
   <UIViewFormTabPane>
-  <label>
-  <addCategory>カテゴリーの追加</addCategory>
-          <addLocalizationLink>Translationの追加</addLocalizationLink>
-  </label>
+    <label>
+      <addCategory>カテゴリーの追加</addCategory>
+      <addLocalizationLink>Translationの追加</addLocalizationLink>
+    </label>
   </UIViewFormTabPane>
 
-<UIDriveForm>
-<label>
-<allowNodeTypesOnTree>Allowance nodetype on left tree</allowNodeTypesOnTree>
-</label>
-</UIDriveForm>
-<DriveInputSet>
-<title>
-<RemovePermission>Remove Permission</RemovePermission>
-<ChooseNodeType>ノードタイプの選択</ChooseNodeType>
-<RemoveNodeType>削除</RemoveNodeType>
-</title>
-</DriveInputSet>
-<PopupNodeTypeSelector>
-<title>
-<UINodeTypeSelector>ノードタイプを選択</UINodeTypeSelector>
-<PopupNodeTypeSelector>ノードタイプを選択</PopupNodeTypeSelector>
-</title>
-</PopupNodeTypeSelector>
+  <UIDriveForm>
+    <label>
+      <allowNodeTypesOnTree>Allowance nodetype on left tree</allowNodeTypesOnTree>
+    </label>
+  </UIDriveForm>
+  <DriveInputSet>
+    <title>
+      <RemovePermission>Remove Permission</RemovePermission>
+      <ChooseNodeType>ノードタイプの選択</ChooseNodeType>
+      <RemoveNodeType>削除</RemoveNodeType>
+    </title>
+  </DriveInputSet>
+  <PopupNodeTypeSelector>
+    <title>
+      <UINodeTypeSelector>ノードタイプを選択</UINodeTypeSelector>
+      <PopupNodeTypeSelector>ノードタイプを選択</PopupNodeTypeSelector>
+    </title>
+  </PopupNodeTypeSelector>
   <UINodeTypeSelector>
     <label>
       <selectedAllNodeTypes>すべてのノードタイプを選択</selectedAllNodeTypes>
@@ -2568,14 +2574,14 @@
   </UINodeTypeSelector>
   <UIScriptForm>
     <msg>
-      <PathNotFoundException>スクリプトは '{0}' フォルダに既に存在します。</PathNotFoundException>      
+      <PathNotFoundException>スクリプトは '{0}' フォルダに既に存在します。</PathNotFoundException>
     </msg>
   </UIScriptForm>
- <UINodeTypeList>
-   <msg>
-   <no-list>There is no node type matching your search.</no-list>
-   </msg>
- </UINodeTypeList>
+  <UINodeTypeList>
+    <msg>
+      <no-list>There is no node type matching your search.</no-list>
+    </msg>
+  </UINodeTypeList>
   <UIActionForm>
     <msg>
       <canotChangeActionId>アクションIDを変更することは出来ません</canotChangeActionId>
@@ -2595,5 +2601,5 @@
     <msg>
       <can-not-unlock-node>このノードをロック解除する権限がありません。正しい権限を得る為に管理者にコンタクトしてください。</can-not-unlock-node>
     </msg>
- </UILockNodeList>
+  </UILockNodeList>
 </bundle>

@@ -13,21 +13,21 @@
         <Repository>Repozytorium</Repository>
         <Advanced>Zaawansowane</Advanced>
       </label>
-    </tab>    
-    <label>     
+    </tab>
+    <label>
       <UITaxonomyManagerTrees>Kategorie</UITaxonomyManagerTrees>
       <UIMetadataManager>Metadane</UIMetadataManager>
       <UINamespaceManager>Przestrzenie nazw</UINamespaceManager>
       <UINodeTypeManager>Typy węzłów</UINodeTypeManager>
       <UITemplatesManager>Dokumenty</UITemplatesManager>
-   <UICLVTemplatesManager>Lista</UICLVTemplatesManager>
+      <UICLVTemplatesManager>Lista</UICLVTemplatesManager>
       <UIViewManager>Widoki</UIViewManager>
       <UIDriveManager>Dyski</UIDriveManager>
       <UIQueriesManager>Kwerendy</UIQueriesManager>
       <UIActionManager>Działania</UIActionManager>
       <UIScriptManager>Skrypty</UIScriptManager>
       <UIUnLockManager>Blokady</UIUnLockManager>
-      <UIFolksonomyManager>Tagi</UIFolksonomyManager>      
+      <UIFolksonomyManager>Tagi</UIFolksonomyManager>
     </label>
     <msg>
       <access-denied>Odmowa dostępu. Nie masz wystarczających uprawnień aby wykonać tę operację.</access-denied>
@@ -40,11 +40,13 @@
   -->
   <UITaxonomyWorkingArea>
     <msg>
-      <referential-integrity>Nie można odczytać pliku źródłowego lub kategoria docelowa jest podkategorią.</referential-integrity>
+      <referential-integrity>Nie można odczytać pliku źródłowego lub kategoria docelowa jest podkategorią.
+      </referential-integrity>
       <no-taxonomy-selected>Należy skopiować lub wyciąć co najmniej jedną kategorię.</no-taxonomy-selected>
       <node-is-cutting>Nie można wkleić tutaj. Węzeł Kategorii '{0}' mógł zostać wycięty.</node-is-cutting>
       <can-not-paste>Nie ma żadnych danych w schowku do wklejenia.</can-not-paste>
-      <reference-exception>Nie można usunąć tej kategorii, bo istnieją do niej odwołania w zawartości.</reference-exception>
+      <reference-exception>Nie można usunąć tej kategorii, bo istnieją do niej odwołania w zawartości.
+      </reference-exception>
       <path-error>Wystąpił błąd podczas usuwania tego węzła kategorii.</path-error>
     </msg>
   </UITaxonomyWorkingArea>
@@ -60,7 +62,7 @@
       <remove>Usuń</remove>
     </title>
   </UITaxonomyManager>
-  
+
   <!--
   ################################################################################
   #    org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyTreeContainer#
@@ -71,15 +73,17 @@
       <info>
         <UITaxonomyTreeMainForm>Określ nazwę kategorii, obszar roboczy i ścieżkę główną.</UITaxonomyTreeMainForm>
         <UIPermissionTreeManager>Ustaw uprawnienia do drzewa kategorii.</UIPermissionTreeManager>
-        <UIActionTaxonomyManager>Dodaj zdarzenie do drzewa kategorii żeby ukończyć tworzenie lub aktualizację.</UIActionTaxonomyManager>
-        <UITaxonomyTreeCreateChild>Edytuj drzewo taksonomii, dodając, kopiując, wycinając i wybierając uprawnienia.</UITaxonomyTreeCreateChild>
+        <UIActionTaxonomyManager>Dodaj zdarzenie do drzewa kategorii żeby ukończyć tworzenie lub aktualizację.
+        </UIActionTaxonomyManager>
+        <UITaxonomyTreeCreateChild>Edytuj drzewo taksonomii, dodając, kopiując, wycinając i wybierając uprawnienia.
+        </UITaxonomyTreeCreateChild>
       </info>
     </tab>
     <msg>
       <not-exist-tree>Drzewo kategorii nie istnieje.</not-exist-tree>
     </msg>
   </UITaxonomyTreeContainer>
-  
+
   <!--
 ##########################################################################################
 #     org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyTreeMainForm          #
@@ -111,45 +115,45 @@
       <AddPath>Dodaj ścieżkę</AddPath>
     </title>
   </TaxonomyTreeHomePath>
-  
+
   <!--
 ##########################################################################################
 #     org.exoplatform.ecm.webui.component.admin.taxonomy.tree.info.UIPermissionTreeInfo  #
 ##########################################################################################
 -->
-<UIPermissionTreeInfo>
-<action>
-<title>
-<Delete>Usuń</Delete>
-<Edit>Edytuj</Edit>
-</title>
-</action>
-<header>
-<usersOrGroups>Użytkownik lub Grupa</usersOrGroups>
-<read>Czytaj</read>
-<addNode>Dodaj węzeł</addNode>
-<setProperty>Ustaw właściwość</setProperty>
-<remove>Usuń</remove>
-<action>Działanie</action>
-</header>
-</UIPermissionTreeInfo>
+  <UIPermissionTreeInfo>
+    <action>
+      <title>
+        <Delete>Usuń</Delete>
+        <Edit>Edytuj</Edit>
+      </title>
+    </action>
+    <header>
+      <usersOrGroups>Użytkownik lub Grupa</usersOrGroups>
+      <read>Czytaj</read>
+      <addNode>Dodaj węzeł</addNode>
+      <setProperty>Ustaw właściwość</setProperty>
+      <remove>Usuń</remove>
+      <action>Działanie</action>
+    </header>
+  </UIPermissionTreeInfo>
 
-<!--
-##########################################################################################
-#     org.exoplatform.ecm.webui.component.admin.taxonomy.tree.info.UIPermissionTreeForm  #
-##########################################################################################
--->
+  <!--
+  ##########################################################################################
+  #     org.exoplatform.ecm.webui.component.admin.taxonomy.tree.info.UIPermissionTreeForm  #
+  ##########################################################################################
+  -->
   <UIPermissionTreeForm>
     <msg>
       <have-not-any-permission>Należy określić co najmniej jedno uprawnienie dla tego węzła.</have-not-any-permission>
     </msg>
   </UIPermissionTreeForm>
 
-<!--
-################################################################################
-#     org.exoplatform.ecm.webui.component.admin.taxonomy.UIActionForm          #
-################################################################################
--->
+  <!--
+  ################################################################################
+  #     org.exoplatform.ecm.webui.component.admin.taxonomy.UIActionForm          #
+  ################################################################################
+  -->
 
   <UIActionForm>
     <title>Dodaj zdazrenie do drzewa kategorii</title>
@@ -250,7 +254,8 @@
     <msg>
       <confirm-delete>Czy na pewno chcesz usunąć metadane?</confirm-delete>
       <delete-successful>Szablony '{0}' zostały pomyślnie usunięte.</delete-successful>
-      <path-not-found-exception>Metadane zostały usunięte lub zmienione. Kliknij przycisk Odśwież.</path-not-found-exception>
+      <path-not-found-exception>Metadane zostały usunięte lub zmienione. Kliknij przycisk Odśwież.
+      </path-not-found-exception>
     </msg>
     <action>
       <Add>Dodaj metadane</Add>
@@ -425,13 +430,13 @@
       <action>Akcja</action>
     </header>
   </UITreeList>
-  
+
   <UIRepositoryList>
     <titlebar>
       <label>Zarządzaj głównymi funkcjami ECM</label>
     </titlebar>
   </UIRepositoryList>
-  
+
   <!--
   ################################################################################
   #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeManager #
@@ -561,8 +566,12 @@
     </action>
     <msg>
       <register-successfully>Typ węzła „{0}” został pomyślnie zarejestrowany.</register-successfully>
-      <supertype-is-madatory>Super typ jest obowiązkowy podczas rejestracji nowego typu węzła. Proszę wybrać przynajmniej jeden Super typ.</supertype-is-madatory>
-      <register-failed>Rejestracja typu węzła nie powiodła się. Element albo już istnieje, albo super typ jest nieprawidłowy.</register-failed>
+      <supertype-is-madatory>Super typ jest obowiązkowy podczas rejestracji nowego typu węzła. Proszę wybrać
+        przynajmniej jeden Super typ.
+      </supertype-is-madatory>
+      <register-failed>Rejestracja typu węzła nie powiodła się. Element albo już istnieje, albo super typ jest
+        nieprawidłowy.
+      </register-failed>
       <nodeType-name>Wymagana jest nazwa typu węzła.</nodeType-name>
       <fileName-invalid>Nazwa pliku zawiera nieprawidłowe znaki.</fileName-invalid>
       <node-type-exists>Typ węzła „{0}” już istnieje.</node-type-exists>
@@ -735,10 +744,10 @@
     <action>
       <AddAction>Dodaj typ akcji</AddAction>
     </action>
-<msg>
- <confirm-delete>Czy na pewno chcesz usunąć ten typ akcji?</confirm-delete>
-<cannot-delete>Nie można usunąć tego typu akcji, ponieważ jest on nadal używany przez system.</cannot-delete>
-</msg>
+    <msg>
+      <confirm-delete>Czy na pewno chcesz usunąć ten typ akcji?</confirm-delete>
+      <cannot-delete>Nie można usunąć tego typu akcji, ponieważ jest on nadal używany przez system.</cannot-delete>
+    </msg>
   </UIActionTypeList>
   <!--
   ######################################################################################
@@ -791,11 +800,11 @@
       <UITemplateContainer>Dokumenty</UITemplateContainer>
       <UIActionsTemplateContainer>Akcje</UIActionsTemplateContainer>
       <UIOthersTemplateContainer>Inne</UIOthersTemplateContainer>
-  <UIActionScriptContainer>Akcja</UIActionScriptContainer>
-  <UIWidgetScriptContainer>Widżety</UIWidgetScriptContainer>
-<UIInterceptorScriptContainer>Przechwyć</UIInterceptorScriptContainer>
+      <UIActionScriptContainer>Akcja</UIActionScriptContainer>
+      <UIWidgetScriptContainer>Widżety</UIWidgetScriptContainer>
+      <UIInterceptorScriptContainer>Przechwyć</UIInterceptorScriptContainer>
 
-<nodeTypeDefinition>Typ węzła</nodeTypeDefinition>
+      <nodeTypeDefinition>Typ węzła</nodeTypeDefinition>
       <propertyDefinition>Własność</propertyDefinition>
       <childNodeDefinition>Węzeł podrzędny</childNodeDefinition>
       <SuperTypeTab>Super typy</SuperTypeTab>
@@ -810,11 +819,11 @@
   ######################################################################################
   -->
   <UIViewList>
-   <title>
-     <View>Widok</View>
-     <EditInfo>Edytuj</EditInfo>
-     <Delete>Usuń</Delete>
-   </title>
+    <title>
+      <View>Widok</View>
+      <EditInfo>Edytuj</EditInfo>
+      <Delete>Usuń</Delete>
+    </title>
     <header>
       <name>Nazwa</name>
       <permissions>Uprawnienia</permissions>
@@ -848,71 +857,71 @@
     </title>
   </EditPopup>
 
-<UITabList>
-                  <title>
-                    <Edit>Edytuj</Edit>
-                    <Delete>Usuń</Delete>
-                  </title>       
- <header>
-  <tabName>Zakładka</tabName>
-  <localizeButtons>Opis</localizeButtons>
-<action>Akcje</action>
-</header>
-<action>
- <AddTab>Dodaj</AddTab>
-</action>
-<msg>
- <confirm-delete>Czy na pewno chcesz usunąć tę kartę?</confirm-delete>
-</msg>
-<grid>
- <msg>
-  <empty>Karta nie działa na tym widoku</empty>
- </msg>
-</grid>
-</UITabList>
+  <UITabList>
+    <title>
+      <Edit>Edytuj</Edit>
+      <Delete>Usuń</Delete>
+    </title>
+    <header>
+      <tabName>Zakładka</tabName>
+      <localizeButtons>Opis</localizeButtons>
+      <action>Akcje</action>
+    </header>
+    <action>
+      <AddTab>Dodaj</AddTab>
+    </action>
+    <msg>
+      <confirm-delete>Czy na pewno chcesz usunąć tę kartę?</confirm-delete>
+    </msg>
+    <grid>
+      <msg>
+        <empty>Karta nie działa na tym widoku</empty>
+      </msg>
+    </grid>
+  </UITabList>
 
-<UIViewPermissionList>
- <title>Wybierz właściciela z uprawnieniami do tego widoku:</title>
-<label>
- <permission>{0} w {1}</permission>
-</label>
-<msg>
- <confirm-delete>Czy na pewno chcesz usunąć to uprawnienie?</confirm-delete>
-  <permission-cannot-empty>Zgoda jest wymagana i pole nie może pozostać puste.</permission-cannot-empty>
-</msg>
-</UIViewPermissionList>
+  <UIViewPermissionList>
+    <title>Wybierz właściciela z uprawnieniami do tego widoku:</title>
+    <label>
+      <permission>{0} w {1}</permission>
+    </label>
+    <msg>
+      <confirm-delete>Czy na pewno chcesz usunąć to uprawnienie?</confirm-delete>
+      <permission-cannot-empty>Zgoda jest wymagana i pole nie może pozostać puste.</permission-cannot-empty>
+    </msg>
+  </UIViewPermissionList>
 
-<UIViewPermissionList>
-                         <title>
-                           <Delete>Usuń</Delete>
-                         </title>
- <header>
-<friendlyPermission>Uprawnienia</friendlyPermission>
-     <action>Akcja</action>
- </header>
-<action>
- <title>
-  <Delete>Usuń</Delete>
- </title>
-</action>
-<grid>
- <msg>
-  <empty>Brak uprawnień do tego widoku</empty>
- </msg>
-</grid>
-</UIViewPermissionList>
+  <UIViewPermissionList>
+    <title>
+      <Delete>Usuń</Delete>
+    </title>
+    <header>
+      <friendlyPermission>Uprawnienia</friendlyPermission>
+      <action>Akcja</action>
+    </header>
+    <action>
+      <title>
+        <Delete>Usuń</Delete>
+      </title>
+    </action>
+    <grid>
+      <msg>
+        <empty>Brak uprawnień do tego widoku</empty>
+      </msg>
+    </grid>
+  </UIViewPermissionList>
 
-<UIViewPermissionForm>
-<action>
- <Add>Dodaj</Add>
-</action>
-<label>
- <userOrGroup>Użytkownik lub Grupa</userOrGroup>
-</label>
-<msg>
- <permission-exist>Uprawnienie '{0}' już istnieje na liście.</permission-exist>
-</msg>
-</UIViewPermissionForm>
+  <UIViewPermissionForm>
+    <action>
+      <Add>Dodaj</Add>
+    </action>
+    <label>
+      <userOrGroup>Użytkownik lub Grupa</userOrGroup>
+    </label>
+    <msg>
+      <permission-exist>Uprawnienie '{0}' już istnieje na liście.</permission-exist>
+    </msg>
+  </UIViewPermissionForm>
 
   <!--
   ######################################################################################
@@ -927,15 +936,15 @@
     <msg>
       <view-name-invalid>Nazwa widoku jest wymagana.</view-name-invalid>
       <fileName-invalid>Nazwa widoku zawiera nieprawidłowe znaki.</fileName-invalid>
-      <permission-not-empty>Wybierz uprawnienia dla widoku.</permission-not-empty>      
+      <permission-not-empty>Wybierz uprawnienia dla widoku.</permission-not-empty>
       <mustbe-add-tab>Dodaj kartę.</mustbe-add-tab>
-<mustbe-add-permission>Wybierz uprawnienia dla tego widoku</mustbe-add-permission>
+      <mustbe-add-permission>Wybierz uprawnienia dla tego widoku</mustbe-add-permission>
       <view-exist>Nazwa widoku już istnieje.</view-exist>
     </msg>
     <label>
       <viewName>Nazwa</viewName>
       <template>Szablon</template>
-<version>Przywróć wersję</version>
+      <version>Przywróć wersję</version>
       <enableVersion>Włącz wersję</enableVersion>
       <hideExplorerPanel>Ukryj panel Eksploratora w pasku bocznym</hideExplorerPanel>
     </label>
@@ -980,14 +989,14 @@
       <overloadThumbnail>Miniatura przeciążenia</overloadThumbnail>
       <manageHidden>Ukryj/Pokaż zawartość</manageHidden>
       <comment>Komentarz</comment>
-      <vote>Głosuj</vote>  
+      <vote>Głosuj</vote>
       <addCategory>Dodaj kategorię</addCategory>
       <addLocalizationLink>Dodaj tłumaczenie</addLocalizationLink>
       <publicationRequestApproval>Zatwierdzenie zapytania</publicationRequestApproval>
       <publicationApproveContent>Zatwierdź zawartość</publicationApproveContent>
       <publicationPublish>Opublikuj</publicationPublish>
-<contentNavigation>Zawartość nawigacji</contentNavigation>
-<addSymLink>Dodaj dowiązanie symboliczne</addSymLink>
+      <contentNavigation>Zawartość nawigacji</contentNavigation>
+      <addSymLink>Dodaj dowiązanie symboliczne</addSymLink>
       <checkIn>Check In</checkIn>
       <checkOut>Check Out</checkOut>
       <shareDocuments>Udostępnij</shareDocuments>
@@ -996,8 +1005,8 @@
       <uploadNewVersion>Upload a new version</uploadNewVersion>
     </label>
     <action>
-      <Save>#{word.save}</Save>      
-      <Cancel>#{word.cancel}</Cancel>      
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
   </UITabForm>
   <UIPermissionForm>
@@ -1010,7 +1019,7 @@
       <label>
         <UITabContainer>Akcja</UITabContainer>
         <UIViewForm>Widok</UIViewForm>
-        <UIViewPermissionContainer>Uprawnienie</UIViewPermissionContainer>    
+        <UIViewPermissionContainer>Uprawnienie</UIViewPermissionContainer>
       </label>
     </tab>
     <action>
@@ -1027,19 +1036,19 @@
     </title>
   </PopupViewPermission>
 
-<TabForm_Popup>
- <title>
-  <UITabForm>Dodaj/Edytuj kartę</UITabForm>
- </title>
-</TabForm_Popup>
+  <TabForm_Popup>
+    <title>
+      <UITabForm>Dodaj/Edytuj kartę</UITabForm>
+    </title>
+  </TabForm_Popup>
 
-<tab_permission>
- <title>
-  <SelectUser>Wybierz użytkownika</SelectUser>
-<SelectMember>Wybierz członka</SelectMember>
-<AddAny>Dowolny</AddAny>
- </title>
-</tab_permission>
+  <tab_permission>
+    <title>
+      <SelectUser>Wybierz użytkownika</SelectUser>
+      <SelectMember>Wybierz członka</SelectMember>
+      <AddAny>Dowolny</AddAny>
+    </title>
+  </tab_permission>
   <!--
   ######################################################################################
   #             org.exoplatform.ecm.webui.component.admin.view.UIECMTemplateList   #
@@ -1228,7 +1237,7 @@
   #             org.exoplatform.ecm.webui.component.admin.script.ecmScriptForm #
   ######################################################################################
   -->
- 
+
   <ecmScriptForm>
     <label>
       <selectVersion>Wersje</selectVersion>
@@ -1260,7 +1269,7 @@
       <name-too-long>Nazwa kategorii musi mieć mniej niż 30 znaków.</name-too-long>
     </msg>
   </UITaxonomyForm>
-    
+
   <EditTaxonomyTreePopup>
     <title>
       <UITaxonomyTreeContainer>Edytuj drzewo kategorii</UITaxonomyTreeContainer>
@@ -1272,15 +1281,15 @@
       <UITaxonomyTreeContainer>Dodaj drzewo kategorii</UITaxonomyTreeContainer>
     </title>
   </AddTaxonomyTreePopup>
-  
+
   <TaxonomyPopupCreateChild>
     <title>
       <UITaxonomyTreeCreateChildForm>Edytuj drzewo kategorii</UITaxonomyTreeCreateChildForm>
     </title>
   </TaxonomyPopupCreateChild>
 
-<UITaxonomyTreeCreateChildForm>
-  <action>
+  <UITaxonomyTreeCreateChildForm>
+    <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
     </action>
@@ -1294,41 +1303,41 @@
       <name-too-long>Nazwa kategorii nie może mieć więcej niż {0} znaków.</name-too-long>
       <exist>Nazwa kategorii już istnieje.</exist>
     </msg>
-</UITaxonomyTreeCreateChildForm>
+  </UITaxonomyTreeCreateChildForm>
 
   <PopupComponent>
     <title>
       <UIOneNodePathSelector>Wybierz ścieżkę</UIOneNodePathSelector>
     </title>
   </PopupComponent>
-  
+
   <TaxoPopupUserSelector>
-  <title>
+    <title>
       <TaxoTreeSelectUserOrGroup>Wybierz użytkownika</TaxoTreeSelectUserOrGroup>
       <UIPermissionTreeSelectUser>Wybierz użytkownika</UIPermissionTreeSelectUser>
     </title>
   </TaxoPopupUserSelector>
 
   <TaxoTreeSelectUserOrGroupPopup>
-  <title>
+    <title>
       <TaxoTreeSelectUserOrGroup>Wybierz członkostwo</TaxoTreeSelectUserOrGroup>
     </title>
   </TaxoTreeSelectUserOrGroupPopup>
-  
+
   <TaxoTreeAnyPermission>
     <label>
       <any>Każda licencja</any>
       <anyPermission>TaxoTreeAnyPermission</anyPermission>
     </label>
   </TaxoTreeAnyPermission>
-  
+
   <TaxoTreeSelectUserOrGroup>
     <label>
       <selectGroup>Wybierz grupę</selectGroup>
       <selectMembership>Wybierz członkostwo</selectMembership>
     </label>
   </TaxoTreeSelectUserOrGroup>
-  
+
   <!--
   ######################################################################################
   #             org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyTreeList #
@@ -1355,7 +1364,7 @@
       <is-in-trash>To drzewo kategorii zostało przeniesione do Kosza.</is-in-trash>
     </msg>
   </UITaxonomyTreeList>
-  
+
   <!--
   ######################################################################################
   #             org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyTreeForm  #
@@ -1372,7 +1381,7 @@
       <homapath-emty>Ścieżka wejścia</homapath-emty>
     </msg>
   </UITaxonomyTreeForm>
-  
+
   <UIPermissionTreeForm>
     <label>
       <UIPopupWindow>Wybierz</UIPopupWindow>
@@ -1396,38 +1405,38 @@
       <access-denied>Odmowa dostępu. Nie można usunąć tego uprawnienia.</access-denied>
     </msg>
   </UIPermissionTreeForm>
-  
+
   <PopupTaxonomyJCRBrowser>
-  <title>
+    <title>
       <UIOneNodePathSelector>Wybierz ścieżkę startową</UIOneNodePathSelector>
     </title>
   </PopupTaxonomyJCRBrowser>
-  
+
   <PopupTaxonomyTreePermission>
     <title>
       <UIPermissionSelector>Selektor uprawnień</UIPermissionSelector>
     </title>
-   </PopupTaxonomyTreePermission>
-   
-   <PopupDrivePermission>
+  </PopupTaxonomyTreePermission>
+
+  <PopupDrivePermission>
     <title>
       <AddDrivePermissionSelector>Dodaj uprawnienie</AddDrivePermissionSelector>
       <UIPermissionSelector>Wybierz uprawnienia</UIPermissionSelector>
     </title>
   </PopupDrivePermission>
-  
+
   <UIPopupWindow>
     <title>
       <UIPermissionManager>Zarządzanie uprawnieniami</UIPermissionManager>
     </title>
-   </UIPopupWindow>
+  </UIPopupWindow>
 
   <PopupUserSelector>
     <title>
       <UIUserContainer>Zarządzanie uprawnieniami</UIUserContainer>
     </title>
-   </PopupUserSelector>
-   
+  </PopupUserSelector>
+
   <UIPermissionInfo>
     <action>
       <title>
@@ -1499,13 +1508,13 @@
       <access-denied>Odmowa dostępu. Nie można usunąć tego uprawnienia.</access-denied>
     </msg>
   </UIPermissionForm>
-  
+
   <TaxonomyPopup>
     <title>
       <UITaxonomyForm>Dodaj kategorię</UITaxonomyForm>
     </title>
   </TaxonomyPopup>
-  
+
   <UITaxonomyManager>
     <title>
       <permission>Zarządzanie uprawnieniami</permission>
@@ -1533,7 +1542,7 @@
       <template-not-exist>Szablon, który próbujesz usunąć, nie istnieje.</template-not-exist>
     </msg>
   </UITemplateList>
-  
+
   <UIActionsTemplateList>
     <header>
       <name>Typ</name>
@@ -1551,7 +1560,7 @@
       <template-not-exist>Szablon, który próbujesz usunąć, nie istnieje.</template-not-exist>
     </msg>
   </UIActionsTemplateList>
-  
+
   <UIOthersTemplateList>
     <header>
       <name>Typ</name>
@@ -1570,19 +1579,19 @@
     </msg>
   </UIOthersTemplateList>
 
- <!--
-  ######################################################################################
-  #             org.exoplatform.ecm.webui.component.admin.templates.clv package #
-  ######################################################################################
-  -->
+  <!--
+   ######################################################################################
+   #             org.exoplatform.ecm.webui.component.admin.templates.clv package #
+   ######################################################################################
+   -->
 
-<UITabPane>
- <title>
- <ContentTemplateContainer>Zawartość</ContentTemplateContainer>
-<CateTemplateContainer>Nawigacja</CateTemplateContainer>
-<PageTemplateContainer>Paginator</PageTemplateContainer>
- </title>
-</UITabPane>
+  <UITabPane>
+    <title>
+      <ContentTemplateContainer>Zawartość</ContentTemplateContainer>
+      <CateTemplateContainer>Nawigacja</CateTemplateContainer>
+      <PageTemplateContainer>Paginator</PageTemplateContainer>
+    </title>
+  </UITabPane>
 
   <UICLVTemplateList>
     <title>
@@ -1596,8 +1605,8 @@
     </header>
     <action>
       <AddTemplate>Dodaj Szablon</AddTemplate>
-<Edit>Edytuj</Edit>
-<Delete>Usuń</Delete>
+      <Edit>Edytuj</Edit>
+      <Delete>Usuń</Delete>
     </action>
     <msg>
       <confirm-delete>Czy na pewno chcesz usunąć ten szablon?</confirm-delete>
@@ -1607,7 +1616,7 @@
     </msg>
   </UICLVTemplateList>
 
-<CateTemplateList>
+  <CateTemplateList>
     <header>
       <title>Nazwa</title>
       <action>Akcja</action>
@@ -1619,12 +1628,12 @@
     </title>
     <action>
       <AddTemplate>Dodaj Szablon</AddTemplate>
-<Edit>Edytuj</Edit>
-<Delete>Usuń</Delete>
+      <Edit>Edytuj</Edit>
+      <Delete>Usuń</Delete>
     </action>
-</CateTemplateList>
+  </CateTemplateList>
 
-<PageTemplateList>
+  <PageTemplateList>
     <header>
       <title>Nazwa</title>
       <action>Akcja</action>
@@ -1632,103 +1641,103 @@
     </header>
     <action>
       <AddTemplate>Dodaj Szablon</AddTemplate>
-<Edit>Edytuj</Edit>
-<Delete>Usuń</Delete>
+      <Edit>Edytuj</Edit>
+      <Delete>Usuń</Delete>
     </action>
-</PageTemplateList>
+  </PageTemplateList>
 
-<EditCLVTemplatePopup_ContentTemplateContainer>
- <title>
-   <UICLVTemplateForm_ContentTemplateContainer>Edytuj szablon listy</UICLVTemplateForm_ContentTemplateContainer>   
- </title>
-</EditCLVTemplatePopup_ContentTemplateContainer>
+  <EditCLVTemplatePopup_ContentTemplateContainer>
+    <title>
+      <UICLVTemplateForm_ContentTemplateContainer>Edytuj szablon listy</UICLVTemplateForm_ContentTemplateContainer>
+    </title>
+  </EditCLVTemplatePopup_ContentTemplateContainer>
 
-<EditCLVTemplatePopup_CateTemplateContainer>
- <title>
-   <UICLVTemplateForm_CateTemplateContainer>Edytuj szablon listy</UICLVTemplateForm_CateTemplateContainer>   
- </title>
-</EditCLVTemplatePopup_CateTemplateContainer>
+  <EditCLVTemplatePopup_CateTemplateContainer>
+    <title>
+      <UICLVTemplateForm_CateTemplateContainer>Edytuj szablon listy</UICLVTemplateForm_CateTemplateContainer>
+    </title>
+  </EditCLVTemplatePopup_CateTemplateContainer>
 
-<EditCLVTemplatePopup_PageTemplateContainer>
- <title>
-   <UICLVTemplateForm_PageTemplateContainer>Edytuj szablon listy</UICLVTemplateForm_PageTemplateContainer>   
- </title>
-</EditCLVTemplatePopup_PageTemplateContainer>
+  <EditCLVTemplatePopup_PageTemplateContainer>
+    <title>
+      <UICLVTemplateForm_PageTemplateContainer>Edytuj szablon listy</UICLVTemplateForm_PageTemplateContainer>
+    </title>
+  </EditCLVTemplatePopup_PageTemplateContainer>
 
-<CLVTemplatePopup_ContentTemplateContainer>
- <title>
-   <UICLVTemplateForm_ContentTemplateContainer>Dodaj szablon listy</UICLVTemplateForm_ContentTemplateContainer>   
- </title>
-</CLVTemplatePopup_ContentTemplateContainer>
+  <CLVTemplatePopup_ContentTemplateContainer>
+    <title>
+      <UICLVTemplateForm_ContentTemplateContainer>Dodaj szablon listy</UICLVTemplateForm_ContentTemplateContainer>
+    </title>
+  </CLVTemplatePopup_ContentTemplateContainer>
 
-<CLVTemplatePopup_CateTemplateContainer>
- <title>
-   <UICLVTemplateForm_CateTemplateContainer>Dodaj szablon listy</UICLVTemplateForm_CateTemplateContainer>   
- </title>
-</CLVTemplatePopup_CateTemplateContainer>
+  <CLVTemplatePopup_CateTemplateContainer>
+    <title>
+      <UICLVTemplateForm_CateTemplateContainer>Dodaj szablon listy</UICLVTemplateForm_CateTemplateContainer>
+    </title>
+  </CLVTemplatePopup_CateTemplateContainer>
 
-<CLVTemplatePopup_PageTemplateContainer>
- <title>
-   <UICLVTemplateForm_PageTemplateContainer>Dodaj szablon listy</UICLVTemplateForm_PageTemplateContainer>   
- </title>
-</CLVTemplatePopup_PageTemplateContainer>
+  <CLVTemplatePopup_PageTemplateContainer>
+    <title>
+      <UICLVTemplateForm_PageTemplateContainer>Dodaj szablon listy</UICLVTemplateForm_PageTemplateContainer>
+    </title>
+  </CLVTemplatePopup_PageTemplateContainer>
 
-<UICLVTemplateForm_ContentTemplateContainer>
- <action>
-  <Save>#{word.save}</Save>
-<Reset>Resetowanie</Reset>
-<Cancel>#{word.cancel}</Cancel>
- </action>
-<label>
- <title>Nazwa</title>
-<template>Nazwa szablonu</template>
-<content>Zawartość</content>
-<type>Typ szablonu</type>
-</label>
-</UICLVTemplateForm_ContentTemplateContainer>
+  <UICLVTemplateForm_ContentTemplateContainer>
+    <action>
+      <Save>#{word.save}</Save>
+      <Reset>Resetowanie</Reset>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <label>
+      <title>Nazwa</title>
+      <template>Nazwa szablonu</template>
+      <content>Zawartość</content>
+      <type>Typ szablonu</type>
+    </label>
+  </UICLVTemplateForm_ContentTemplateContainer>
 
-<UICLVTemplateForm_PageTemplateContainer>
- <action>
-  <Save>#{word.save}</Save>
-<Reset>Resetowanie</Reset>
-<Cancel>#{word.cancel}</Cancel>
- </action>
-<label>
- <title>Nazwa</title>
-<template>Nazwa szablonu</template>
-<content>Zawartość</content>
-<type>Typ szablonu</type>
-</label>
-</UICLVTemplateForm_PageTemplateContainer>
+  <UICLVTemplateForm_PageTemplateContainer>
+    <action>
+      <Save>#{word.save}</Save>
+      <Reset>Resetowanie</Reset>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <label>
+      <title>Nazwa</title>
+      <template>Nazwa szablonu</template>
+      <content>Zawartość</content>
+      <type>Typ szablonu</type>
+    </label>
+  </UICLVTemplateForm_PageTemplateContainer>
 
-<UICLVTemplateForm_CateTemplateContainer>
- <action>
-  <Save>#{word.save}</Save>
-<Reset>Resetowanie</Reset>
-<Cancel>#{word.cancel}</Cancel>
- </action>
-<label>
- <title>Nazwa</title>
-<template>Nazwa szablonu</template>
-<content>Zawartość</content>
-<type>Typ szablonu</type>
-</label>
-</UICLVTemplateForm_CateTemplateContainer>
-<UICLVTemplateForm>
-  <label>
-    <paginators>Paginator</paginators>
-<list>Zawartość</list>
-<navigation>Nawigacja</navigation>
-  </label>
-                          <action>
-                            <Save>#{word.save}</Save>
-                            <Reset>Resetowanie</Reset> 
-                            <Cancel>#{word.cancel}</Cancel> 
-                          </action> 
-  <msg>
-  <template-existing>Ta nazwa szablonu już istnieje. Proszę wybrać inną nazwę.</template-existing>
-  </msg>
-</UICLVTemplateForm>
+  <UICLVTemplateForm_CateTemplateContainer>
+    <action>
+      <Save>#{word.save}</Save>
+      <Reset>Resetowanie</Reset>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <label>
+      <title>Nazwa</title>
+      <template>Nazwa szablonu</template>
+      <content>Zawartość</content>
+      <type>Typ szablonu</type>
+    </label>
+  </UICLVTemplateForm_CateTemplateContainer>
+  <UICLVTemplateForm>
+    <label>
+      <paginators>Paginator</paginators>
+      <list>Zawartość</list>
+      <navigation>Nawigacja</navigation>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Reset>Resetowanie</Reset>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <template-existing>Ta nazwa szablonu już istnieje. Proszę wybrać inną nazwę.</template-existing>
+    </msg>
+  </UICLVTemplateForm>
 
   <!--
   ######################################################################################
@@ -1789,8 +1798,10 @@
   <TemplateContainerPopup>
     <title>
       <UIViewTemplate_UITemplateContainer><![CDATA[View & Edit Template]]></UIViewTemplate_UITemplateContainer>
-      <UIViewTemplate_UIActionsTemplateContainer><![CDATA[View & Edit Template]]></UIViewTemplate_UIActionsTemplateContainer>
-      <UIViewTemplate_UIOthersTemplateContainer><![CDATA[View & Edit Template]]></UIViewTemplate_UIOthersTemplateContainer>
+      <UIViewTemplate_UIActionsTemplateContainer>
+        <![CDATA[View & Edit Template]]></UIViewTemplate_UIActionsTemplateContainer>
+      <UIViewTemplate_UIOthersTemplateContainer>
+        <![CDATA[View & Edit Template]]></UIViewTemplate_UIOthersTemplateContainer>
     </title>
   </TemplateContainerPopup>
   <UITemplatesManager>
@@ -1938,7 +1949,9 @@
     <msg>
       <confirm-delete>Czy na pewno chcesz usunąć to zapytanie?</confirm-delete>
       <query-not-existed>Zapytanie już nie istnieje.</query-not-existed>
-      <can-not-remove>Wystąpił błąd podczas usuwania zapytania. Skontaktuj się z administratorem w celu uzyskania dodatkowych informacji.</can-not-remove>
+      <can-not-remove>Wystąpił błąd podczas usuwania zapytania. Skontaktuj się z administratorem w celu uzyskania
+        dodatkowych informacji.
+      </can-not-remove>
     </msg>
   </UIQueriesList>
   <UIQueriesForm>
@@ -1972,11 +1985,11 @@
       <UIQueriesForm>Edytuj zapytanie</UIQueriesForm>
     </title>
   </EditQueryForm>
-<PermissionPopup>
-  <title>
-    <UIGroupMemberSelector>Selektor uprawnień</UIGroupMemberSelector>
-  </title>
-</PermissionPopup>
+  <PermissionPopup>
+    <title>
+      <UIGroupMemberSelector>Selektor uprawnień</UIGroupMemberSelector>
+    </title>
+  </PermissionPopup>
   <!--
   ######################################################################################
   #             org.exoplatform.ecm.webui.component.admin.folksonomy #
@@ -1986,7 +1999,7 @@
     <title>
       <EditStyle>Edytuj styl</EditStyle>
       <RemoveStyle>Usuń styl</RemoveStyle>
-    </title>    
+    </title>
   </UITagManager>
   <UITagStyleList>
     <header>
@@ -2015,9 +2028,12 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <range-validator>Zakres jest nieprawidłowy. Format musi być: w zakresie wartości a…b, wśród których b są liczbami całkowitymi dodatnimi. Możesz użyć * zamiast b, aby wskazać, że zakres jest nieograniczony.</range-validator>
+      <range-validator>Zakres jest nieprawidłowy. Format musi być: w zakresie wartości a…b, wśród których b są liczbami
+        całkowitymi dodatnimi. Możesz użyć * zamiast b, aby wskazać, że zakres jest nieograniczony.
+      </range-validator>
       <error-update>Aktualizacja nie powiodła się. Twoje dane są nieprawidłowe.</error-update>
-      <item-not-existing>Nie można zapisać zmian do tego tagu, ponieważ nie istnieje on w bazie danych.</item-not-existing>
+      <item-not-existing>Nie można zapisać zmian do tego tagu, ponieważ nie istnieje on w bazie danych.
+      </item-not-existing>
     </msg>
   </UITagStyleForm>
   <FolksonomyPopup>
@@ -2057,9 +2073,9 @@
   ###################################################################################
   -->
   <PermissionValidator>
-  <msg>
+    <msg>
       <permission-path-invalid>Uprawnienie '{0}' jest nieprawidłowe.</permission-path-invalid>
-  </msg>
+    </msg>
   </PermissionValidator>
   <!--
   ###################################################################################
@@ -2128,9 +2144,9 @@
       <EditInfo>Edytuj</EditInfo>
       <Delete>Usuń</Delete>
     </title>
-<label>
-  <permission>{0} w {1}</permission>
-</label>
+    <label>
+      <permission>{0} w {1}</permission>
+    </label>
   </UIViewContainer>
   <ECMTemplate>
     <title>
@@ -2161,7 +2177,7 @@
       <selectMembership>Wybierz członkostwo</selectMembership>
     </label>
   </UIDrivePermissionSelector>
-  
+
   <UIPermissionSelector>
     <label>
       <selectGroup>Wybierz grupę</selectGroup>
@@ -2169,30 +2185,30 @@
       <selectMembership>Wybierz członkostwo</selectMembership>
     </label>
   </UIPermissionSelector>
-  
+
   <UIAnyPermission>
     <label>
       <anyPermission>Każda licencja</anyPermission>
     </label>
   </UIAnyPermission>
-  
+
   <UIMDriveAnyPermission>
     <label>
       <anyPermission>Każda licencja</anyPermission>
     </label>
   </UIMDriveAnyPermission>
-  
+
   <UIQueriesAnyPermission>
     <label>
       <anyPermission>Każda licencja</anyPermission>
     </label>
   </UIQueriesAnyPermission>
-  
+
   <MetadataPermission>
     <label>
       <selectGroup>Wybierz grupę</selectGroup>
     </label>
-  </MetadataPermission>  
+  </MetadataPermission>
   <MetadataPermission>
     <label>
       <selectMembership>Wybierz członkostwo</selectMembership>
@@ -2215,7 +2231,7 @@
   </QueriesPermissionBrowse>
   <!--
   #########Since ECM 2.4##################
-  -->  
+  -->
   <UIViewFormTabPane>
     <label>
       <addSymLink>Dodaj dowiązanie symboliczne</addSymLink>
@@ -2223,14 +2239,14 @@
   </UIViewFormTabPane>
   <!--
   #########Since ECM 2.5##################
-  --> 
-  
+  -->
+
   <UIDriveForm>
-<msg>
-  <permission-path-invalid>Uprawnienie '{0}' jest nieprawidłowe.</permission-path-invalid>
-  </msg>
+    <msg>
+      <permission-path-invalid>Uprawnienie '{0}' jest nieprawidłowe.</permission-path-invalid>
+    </msg>
   </UIDriveForm>
-  
+
   <UITaxonomyTreeMainForm>
     <msg>
       <homepath-emty>Ścieżka główna jest wymagana.</homepath-emty>
@@ -2238,9 +2254,9 @@
     </msg>
   </UITaxonomyTreeMainForm>
   <UITaxonomyWorkingArea>
-  <msg>
-  <exist>Ten węzeł drzewa już istnieje.</exist>
-  </msg>
+    <msg>
+      <exist>Ten węzeł drzewa już istnieje.</exist>
+    </msg>
   </UITaxonomyWorkingArea>
 
   <PermissionTreeSelectUser>
@@ -2256,16 +2272,16 @@
       <userName>#{word.userName}</userName>
       <lastName>#{word.lastName}</lastName>
       <firstName>#{word.firstName}</firstName>
-    <email>#{word.email}</email>
+      <email>#{word.email}</email>
       <action>#{word.action}</action>
       <Add>#{word.Add}</Add>
       <Close>#{word.Close}</Close>
     </label>
   </PermissionTreeSelectUser>
-  
+
   <!--
   #########Since ECM 2.6 ##################
-  -->   
+  -->
   <DriveInputSet>
     <label>
       <nt_folder>Folder dokumentów</nt_folder>
@@ -2274,30 +2290,30 @@
       <exo_jsFolder>Folder javascript</exo_jsFolder>
       <exo_linkFolder>Linkuj Folder</exo_linkFolder>
       <exo_webFolder>Zawartość katalogu sieci Web</exo_webFolder>
-   </label>
+    </label>
   </DriveInputSet>
   <UIPermissionTreeInfo>
-  <msg>
+    <msg>
       <confirm-delete-permission>Czy na pewno chcesz usunąć to uprawnienie?</confirm-delete-permission>
-      <no-permission-remove>Nie można usunąć właściciela lub użytkownika systemu.</no-permission-remove>  
-  </msg>
-  </UIPermissionTreeInfo>  
+      <no-permission-remove>Nie można usunąć właściciela lub użytkownika systemu.</no-permission-remove>
+    </msg>
+  </UIPermissionTreeInfo>
   <UITaxonomyTreeMainForm>
-<msg>
+    <msg>
       <no-right-target-path>Proszę wybrać inną ścieżkę strony głównej.</no-right-target-path>
-</msg>
-</UITaxonomyTreeMainForm>
+    </msg>
+  </UITaxonomyTreeMainForm>
 
-<UIECMAdminControlPanel>
+  <UIECMAdminControlPanel>
     <tab>
-      <label>        
+      <label>
         <ManageUnLock>Zarządzaj blokadami</ManageUnLock>
       </label>
-    </tab>        
-</UIECMAdminControlPanel>
-<UIUnLockForm>
+    </tab>
+  </UIECMAdminControlPanel>
+  <UIUnLockForm>
     <label>
-      <name>Ścieżka węzła</name>      
+      <name>Ścieżka węzła</name>
       <permissions>Uprawnienia</permissions>
       <PermissionButton>UI Unlock Form</PermissionButton>
     </label>
@@ -2306,49 +2322,50 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <permission-require>Musisz wybrać uprawnienia.</permission-require>      
+      <permission-require>Musisz wybrać uprawnienia.</permission-require>
     </msg>
   </UIUnLockForm>
   <UILockHolderList>
-  <header>
-  <name>Grupy lub użytkownicy</name>
-  <action>Akcja</action>
-  </header>
-  <tooltip>
-<DeleteLock>Usuń grupę</DeleteLock>
-  </tooltip>
-  <msg>
-  <can-not-delete-lock-holder>Nie można usunąć grupy {0}.</can-not-delete-lock-holder>
-  </msg>
+    <header>
+      <name>Grupy lub użytkownicy</name>
+      <action>Akcja</action>
+    </header>
+    <tooltip>
+      <DeleteLock>Usuń grupę</DeleteLock>
+    </tooltip>
+    <msg>
+      <can-not-delete-lock-holder>Nie można usunąć grupy {0}.</can-not-delete-lock-holder>
+    </msg>
   </UILockHolderList>
   <UILockNodeList>
-  <header>
-  <name>Tytuł</name>
-  <hoderLock>Blokada właściciela</hoderLock>
-  <action>Akcja</action>
-  </header>
-  <tooltip>
-<UnLock>Odblokuj</UnLock>
-  </tooltip>
-  <msg>
-  <access-denied-exception>Nie masz uprawnień dostępu do węzła ze ścieżką {0}, lub węzeł został usunięty.</access-denied-exception>
-  </msg>
+    <header>
+      <name>Tytuł</name>
+      <hoderLock>Blokada właściciela</hoderLock>
+      <action>Akcja</action>
+    </header>
+    <tooltip>
+      <UnLock>Odblokuj</UnLock>
+    </tooltip>
+    <msg>
+      <access-denied-exception>Nie masz uprawnień dostępu do węzła ze ścieżką {0}, lub węzeł został usunięty.
+      </access-denied-exception>
+    </msg>
   </UILockNodeList>
   <EditUnLockForm>
     <title>
       <UIUnLockForm>Zarządzaj blokadą</UIUnLockForm>
     </title>
-  </EditUnLockForm>  
+  </EditUnLockForm>
   <UITabPane>
     <action>
       <Close>#{word.close}</Close>
     </action>
     <title>
-    <UILockHolderContainer>Zarządzaj blokadą</UILockHolderContainer>
-    <UILockNodeList>Węzeł zablokowany</UILockNodeList>
+      <UILockHolderContainer>Zarządzaj blokadą</UILockHolderContainer>
+      <UILockNodeList>Węzeł zablokowany</UILockNodeList>
     </title>
   </UITabPane>
-  
+
   <UIViewFormTabPane>
     <action>
       <AddTabForm>Dodaj kartę</AddTabForm>
@@ -2356,21 +2373,21 @@
       <BackViewForm>Powrót</BackViewForm>
     </action>
   </UIViewFormTabPane>
-  
- <UITemplateForm>
-<tab>
-<label>
-<defaultSkin>CSS</defaultSkin>
-</label>
-</tab>
-</UITemplateForm>
- 
+
+  <UITemplateForm>
+    <tab>
+      <label>
+        <defaultSkin>CSS</defaultSkin>
+      </label>
+    </tab>
+  </UITemplateForm>
+
   <UITabPane>
     <title>
       <UISkinTab>CSS</UISkinTab>
     </title>
   </UITabPane>
-  
+
   <UISkinTab>
     <header>
       <name>Nazwa</name>
@@ -2389,7 +2406,7 @@
       </title>
     </action>
   </UISkinTab>
-  
+
   <SkinForm>
     <label>
       <UITemplateContent>SkinForm</UITemplateContent>
@@ -2404,56 +2421,57 @@
     <title>Dodaj/Edytuj skórkę</title>
   </SkinForm>
 
- <UITagManager>
-   <action>
-     <title>
-       <RemoveStyle>Usuń</RemoveStyle>
-         <AddStyle>Dodaj styl</AddStyle>
-     </title>
-   </action>
-   <msg>
-     <confirm-delete>Czy na pewno chcesz usunąć ten styl tagów?</confirm-delete>
-   </msg>
- </UITagManager>
+  <UITagManager>
+    <action>
+      <title>
+        <RemoveStyle>Usuń</RemoveStyle>
+        <AddStyle>Dodaj styl</AddStyle>
+      </title>
+    </action>
+    <msg>
+      <confirm-delete>Czy na pewno chcesz usunąć ten styl tagów?</confirm-delete>
+    </msg>
+  </UITagManager>
 
-<UITaxonomyTreeContainer>
-<action>
-<Cancel>#{word.close}</Cancel>
-</action>
-</UITaxonomyTreeContainer>
-<UITaxonomyTreeMainForm>
-<action>
-<NextViewPermission>Następny</NextViewPermission>
-<Reset>Reset</Reset>
-</action>
-</UITaxonomyTreeMainForm>
+  <UITaxonomyTreeContainer>
+    <action>
+      <Cancel>#{word.close}</Cancel>
+    </action>
+  </UITaxonomyTreeContainer>
+  <UITaxonomyTreeMainForm>
+    <action>
+      <NextViewPermission>Następny</NextViewPermission>
+      <Reset>Reset</Reset>
+    </action>
+  </UITaxonomyTreeMainForm>
 
-<UIPermissionTreeForm>
-<action>
-<Save>Save</Save>
-<Cancel>#{word.cancel}</Cancel>
-<Reset>Reset</Reset>
-<NextAddAction>Następny</NextAddAction>
-<Previous>Poprzedni</Previous>
-</action>
-</UIPermissionTreeForm>
+  <UIPermissionTreeForm>
+    <action>
+      <Save>Save</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <Reset>Reset</Reset>
+      <NextAddAction>Następny</NextAddAction>
+      <Previous>Poprzedni</Previous>
+    </action>
+  </UIPermissionTreeForm>
 
-<UIActionForm>
-<action>
-<PreviousViewPermission>Poprzedni</PreviousViewPermission>
-<NextViewTree>Następny</NextViewTree>
-</action>
-  <msg>
-    <xss-vulnerability-character>Pole '{0}' zawiera znaki podatności XSS</xss-vulnerability-character>
-<xss-vulnerability-character-wo-label>Wprowadzone dane mogą zawierać znaki podatności XSS</xss-vulnerability-character-wo-label>
-  </msg>
-</UIActionForm>
+  <UIActionForm>
+    <action>
+      <PreviousViewPermission>Poprzedni</PreviousViewPermission>
+      <NextViewTree>Następny</NextViewTree>
+    </action>
+    <msg>
+      <xss-vulnerability-character>Pole '{0}' zawiera znaki podatności XSS</xss-vulnerability-character>
+      <xss-vulnerability-character-wo-label>Wprowadzone dane mogą zawierać znaki podatności XSS
+      </xss-vulnerability-character-wo-label>
+    </msg>
+  </UIActionForm>
 
-<UITaxonomyTreeWorkingArea>
-<action>
-<Previous>Poprzedni</Previous>
-</action>
-</UITaxonomyTreeWorkingArea>
+  <UITaxonomyTreeWorkingArea>
+    <action>
+      <Previous>Poprzedni</Previous>
+    </action>
+  </UITaxonomyTreeWorkingArea>
 
   <UITabPane>
     <title>
@@ -2461,7 +2479,7 @@
       <UITagPermissionManager>Zarządzanie tagami uprawnień</UITagPermissionManager>
     </title>
   </UITabPane>
-  
+
   <UITagPermissionInfo>
     <header>
       <usersOrGroups>Użytkownik lub Grupa</usersOrGroups>
@@ -2474,7 +2492,7 @@
     </action>
     <msg>
       <confirm-delete-permission>Czy na pewno chcesz usunąć to uprawnienie?</confirm-delete-permission>
-    </msg>   
+    </msg>
   </UITagPermissionInfo>
   <UITagPermissionForm>
     <title>Dodaj uprawnienie</title>
@@ -2487,32 +2505,32 @@
     </label>
     <msg>
       <userOrGroup-alreadyExists>To członkostwo już istnieje. Proszę wybrać inne.</userOrGroup-alreadyExists>
-    </msg>    
+    </msg>
   </UITagPermissionForm>
-  
+
   <UIGroupMemberSelector>
     <label>
       <selectGroup>Wybierz grupę</selectGroup>
       <selectMembership>Wybierz członkostwo</selectMembership>
     </label>
   </UIGroupMemberSelector>
-  
+
   <UIFolksonomyManager>
-  <msg>
+    <msg>
       <confirm-delete>Czy na pewno chcesz usunąć ten styl?</confirm-delete>
-  </msg>
+    </msg>
     <action>
       <title>
         <AddStyle>Dodaj styl</AddStyle>
       </title>
     </action>
-  </UIFolksonomyManager>  
-<UIActionForm>
-  <title>
-  <ShowComponent>Otwórz okno</ShowComponent>
-  <removeReference>Usuń</removeReference>
-  </title>
-  </UIActionForm> 
+  </UIFolksonomyManager>
+  <UIActionForm>
+    <title>
+      <ShowComponent>Otwórz okno</ShowComponent>
+      <removeReference>Usuń</removeReference>
+    </title>
+  </UIActionForm>
   <NodeTypeNameValidator>
     <msg>
       <Invalid-char>Istnieją pewne nieprawidłowe znaki. Proszę wpisać inną wartość.</Invalid-char>
@@ -2521,10 +2539,12 @@
   </NodeTypeNameValidator>
   <UIActionForm>
     <msg>
-      <constraint-violation-exception>Węzeł '{0}' nie może zostać dodany do '{1}' w przestrzeni roboczej '{2}'. Pojawił się problem z uprawnieniami lub ograniczenia stanu.</constraint-violation-exception>
+      <constraint-violation-exception>Węzeł '{0}' nie może zostać dodany do '{1}' w przestrzeni roboczej '{2}'. Pojawił
+        się problem z uprawnieniami lub ograniczenia stanu.
+      </constraint-violation-exception>
     </msg>
   </UIActionForm>
-  
+
   <UIWorkspaceWizard>
     <msg>
       <name-not-allowed>Zabroniona nazwa</name-not-allowed>
@@ -2532,35 +2552,37 @@
   </UIWorkspaceWizard>
   <UIRepositoryForm>
     <msg>
-      <not-complete-repository>The repository is being created. You need to wait a few minutes before creating another one.</not-complete-repository>
+      <not-complete-repository>The repository is being created. You need to wait a few minutes before creating another
+        one.
+      </not-complete-repository>
     </msg>
   </UIRepositoryForm>
-  
+
   <UIViewFormTabPane>
-  <label>
-  <addCategory>Dodaj kategorię</addCategory>
-          <addLocalizationLink>Dodaj tłumaczenie</addLocalizationLink>
-  </label>
+    <label>
+      <addCategory>Dodaj kategorię</addCategory>
+      <addLocalizationLink>Dodaj tłumaczenie</addLocalizationLink>
+    </label>
   </UIViewFormTabPane>
 
-<UIDriveForm>
-<label>
-<allowNodeTypesOnTree>Dozwolone typy węzłów na lewym drzewie:</allowNodeTypesOnTree>
-</label>
-</UIDriveForm>
-<DriveInputSet>
-<title>
-<RemovePermission>Remove Permission</RemovePermission>
-<ChooseNodeType>Wybierz typy węzłów</ChooseNodeType>
-<RemoveNodeType>Usuń</RemoveNodeType>
-</title>
-</DriveInputSet>
-<PopupNodeTypeSelector>
-<title>
-<UINodeTypeSelector>Wybierz typy węzłów</UINodeTypeSelector>
-<PopupNodeTypeSelector>Wybierz typy węzłów</PopupNodeTypeSelector>
-</title>
-</PopupNodeTypeSelector>
+  <UIDriveForm>
+    <label>
+      <allowNodeTypesOnTree>Dozwolone typy węzłów na lewym drzewie:</allowNodeTypesOnTree>
+    </label>
+  </UIDriveForm>
+  <DriveInputSet>
+    <title>
+      <RemovePermission>Remove Permission</RemovePermission>
+      <ChooseNodeType>Wybierz typy węzłów</ChooseNodeType>
+      <RemoveNodeType>Usuń</RemoveNodeType>
+    </title>
+  </DriveInputSet>
+  <PopupNodeTypeSelector>
+    <title>
+      <UINodeTypeSelector>Wybierz typy węzłów</UINodeTypeSelector>
+      <PopupNodeTypeSelector>Wybierz typy węzłów</PopupNodeTypeSelector>
+    </title>
+  </PopupNodeTypeSelector>
   <UINodeTypeSelector>
     <label>
       <selectedAllNodeTypes>Wybierz wszystkie typy węzłów</selectedAllNodeTypes>
@@ -2568,14 +2590,14 @@
   </UINodeTypeSelector>
   <UIScriptForm>
     <msg>
-      <PathNotFoundException>Skrypt istnieje już w folderze '{0}'.</PathNotFoundException>      
+      <PathNotFoundException>Skrypt istnieje już w folderze '{0}'.</PathNotFoundException>
     </msg>
   </UIScriptForm>
- <UINodeTypeList>
-   <msg>
-   <no-list>Nie ma typu węzła spełniającego kryteria wyszukiwania.</no-list>
-   </msg>
- </UINodeTypeList>
+  <UINodeTypeList>
+    <msg>
+      <no-list>Nie ma typu węzła spełniającego kryteria wyszukiwania.</no-list>
+    </msg>
+  </UINodeTypeList>
   <UIActionForm>
     <msg>
       <canotChangeActionId>Nie można zmienić identyfikatora działania.</canotChangeActionId>
@@ -2593,7 +2615,9 @@
   </UIPageIterator>
   <UILockNodeList>
     <msg>
-      <can-not-unlock-node>Nie masz uprawnień, aby odblokować ten węzeł. Skontaktuj się z administratorem, aby uzyskać odpowiednie prawo.</can-not-unlock-node>
+      <can-not-unlock-node>Nie masz uprawnień, aby odblokować ten węzeł. Skontaktuj się z administratorem, aby uzyskać
+        odpowiednie prawo.
+      </can-not-unlock-node>
     </msg>
- </UILockNodeList>
+  </UILockNodeList>
 </bundle>
