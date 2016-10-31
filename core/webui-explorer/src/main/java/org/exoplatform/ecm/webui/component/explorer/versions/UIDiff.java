@@ -29,6 +29,8 @@ import javax.jcr.version.VersionHistory;
 
 import org.apache.commons.lang.StringUtils;
 
+import org.exoplatform.commons.diff.DiffResult;
+import org.exoplatform.commons.diff.DiffService;
 import org.exoplatform.ecm.webui.component.explorer.UIDocumentWorkspace;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.portal.webui.util.Util;
@@ -202,10 +204,10 @@ public class UIDiff extends UIComponent {
       }
 
       if (versionCompareable_) {
-        if(StringUtils.isBlank(previousText_) && StringUtils.isBlank(currentText_)) {
+        if (StringUtils.isBlank(previousText_) && StringUtils.isBlank(currentText_)) {
           versionCompareable_ = false;
         } else if ((previousText_ != null) && (currentText_ != null)) {
-          DiffService diffService = new DiffService();
+          DiffService diffService = WCMCoreUtils.getService(DiffService.class);
           DiffResult diffResult = diffService.getDifferencesAsHTML(previousText_, currentText_, true);
           diffResultHTML_ = diffResult.getDiffHTML();
         }
