@@ -222,7 +222,7 @@
       <UIExportNode>Export</UIExportNode>
       <UINodeTypeInfo>Node Type Information</UINodeTypeInfo>
       <UIVersionInfo>Version Info</UIVersionInfo>
-      <UIActivateVersion>Activate Version</UIActivateVersion>
+      <UIActivateVersion>Activate Versioning</UIActivateVersion>
       <UIAuditingInfo>Auditing Information</UIAuditingInfo>
       <UIActivateAuditing>Activate Auditing</UIActivateAuditing>
       <UIPermissionManager>Permission Management</UIPermissionManager>

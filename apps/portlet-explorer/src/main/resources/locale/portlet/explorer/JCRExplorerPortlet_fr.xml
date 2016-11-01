@@ -222,7 +222,7 @@
       <UIExportNode>Exporter</UIExportNode>
       <UINodeTypeInfo>Information sur le type de noeud</UINodeTypeInfo>
       <UIVersionInfo>Informations de la Version</UIVersionInfo>
-      <UIActivateVersion>Activer les versions</UIActivateVersion>
+      <UIActivateVersion>Activer le contrôle de versions</UIActivateVersion>
       <UIAuditingInfo>Audit</UIAuditingInfo>
       <UIActivateAuditing>Activer l'Audit</UIActivateAuditing>
       <UIPermissionManager>Gestion des Permissions</UIPermissionManager>
