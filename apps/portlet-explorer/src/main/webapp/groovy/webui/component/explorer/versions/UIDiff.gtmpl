@@ -52,12 +52,8 @@
 %>
 <div class="uiDiff">
   <div class="headTitle">
-      <div>
-          <button class="btn" onclick="<%=uicomponent.event("CloseCompare")%>"><i class="uiIconEcmsGoBack"></i> <%=_ctx.appRes("UIDiff.label.backTo")%></button>
-      </div>
-      <div>
-          <h5 class="title"><%=_ctx.appRes("UIDiff.label.diffTitle")%></h5>
-      </div>
+      <button class="btn" onclick="<%=uicomponent.event("CloseCompare")%>"><i class="uiIconEcmsGoBack"></i> <%=_ctx.appRes("UIDiff.label.backTo")%></button>
+      <h5 class="title"><%=_ctx.appRes("UIDiff.label.diffTitle")%></h5>
   </div>
   <div class="uiContentBox">
     <% if(!uicomponent.isCompareable()) { %>
