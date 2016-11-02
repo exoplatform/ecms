@@ -140,6 +140,20 @@
       <module>ecm-utils</module>
     </depends>
   </module>
+  <module>
+    <name>uiCommentForm</name>
+    <script>
+      <path>/javascript/eXo/ecm/CommentForm.js</path>
+    </script>
+    <depends>
+      <module>jquery</module>
+      <as>$</as>
+    </depends>
+    <depends>
+      <module>commons-editor</module>
+      <as>editor</as>
+    </depends>
+  </module>
   
   <module>
     <name>uiListView</name>
