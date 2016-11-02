@@ -1,99 +1,217 @@
 <%
-	import org.exoplatform.services.document.diff.Delta ;
-	def rcontext = _ctx.getRequestContext() ;
-	def jm = rcontext.getJavascriptManager();
+    import org.apache.commons.lang.StringEscapeUtils;
+    import org.exoplatform.ecm.jcr.model.VersionNode;
+    import org.exoplatform.ecm.webui.component.explorer.versions.UIVersionInfo;
+    import org.exoplatform.social.core.identity.model.Identity;
+    import org.exoplatform.social.core.identity.provider.OrganizationIdentityProvider;
+    import org.exoplatform.social.webui.Utils;
+    import org.exoplatform.web.application.Parameter;
+    import org.exoplatform.social.core.service.LinkProvider;
+
+    public String getProfileURL(String userName) {
+        String profileUrl = null;
+        Identity identity = Utils.getIdentityManager().getOrCreateIdentity(OrganizationIdentityProvider.NAME,userName, true);
+        if(identity != null && identity.getProfile() != null) {
+          profileUrl = identity.getProfile().getUrl();
+      if(profileUrl == null) {
+      profileUrl = "profile/" + userName;
+      }
+        }
+        return profileUrl;
+    }
+
+    public String getProfileFullName(String userName) {
+        String profileFullName = null;
+        Identity identity = Utils.getIdentityManager().getOrCreateIdentity(OrganizationIdentityProvider.NAME,userName, true);
+        if(identity != null && identity.getProfile() != null) {
+          profileFullName = identity.getProfile().getFullName();
+        }
+        return profileFullName;
+    }
+
+    def rcontext = _ctx.getRequestContext() ;
+    def jm = rcontext.getJavascriptManager();
+
+    String statusTitle = StringEscapeUtils.escapeJavaScript(_ctx.appRes("UserProfilePopup.label.Loading"));
+    String connectLabel = StringEscapeUtils.escapeJavaScript(_ctx.appRes("UserProfilePopup.label.Connect"));
+    String confirmLabel = StringEscapeUtils.escapeJavaScript(_ctx.appRes("UserProfilePopup.label.Confirm"));
+    String cancelRequestLabel = StringEscapeUtils.escapeJavaScript(_ctx.appRes("UserProfilePopup.label.CancelRequest"));
+    String removeConnectionLabel = StringEscapeUtils.escapeJavaScript(_ctx.appRes("UserProfilePopup.label.RemoveConnection"));
+    String ignoreLabel = StringEscapeUtils.escapeJavaScript(_ctx.appRes("UserProfilePopup.label.Ignore"));
+
+    String labels = """ {
+      StatusTitle: '${statusTitle}',
+      Connect: '${connectLabel}',
+      Confirm: '${confirmLabel}',
+      CancelRequest: '${cancelRequestLabel}',
+      RemoveConnection: '${removeConnectionLabel}',
+      Ignore: '${ignoreLabel}'
+    } """;
+
+    jm.require("SHARED/UIVersionInfo", "uiVersionInfo").addScripts("uiVersionInfo.initUserProfilePopup($labels);");
 %>
-<div class="uiDiff uiBox noRounded">	
-			<h6 class="title"><%=_ctx.appRes("UIDiff.label.diffTitle")%></h6>
-			<div class="uiContentBox">
-				<%
-					def arr = uicomponent.getDeltas() ;					
-					if(!uicomponent.isCompareable()) {											
-				%>
-				<div class="contentDetail">						
-					<label><%=_ctx.appRes("UIDiff.label.can-not-compare")%></label>						
-				</div>	
-				<%
-					} else {										
-					if(arr.isEmpty()) {
-				%>
-					<div class="contentDetail">	
-						<div  class="contentEmpty">					
-							<label> <%=_ctx.appRes("UIDiff.label.noChange")%> </label>	
-						</div>					
-					</div>	
-					<%
-						} else {
-					%>
-						<table class="uiGrid table table-hover table-striped">
-							<thead>
-						    <tr>
-						      <th>
-						      	<%=_ctx.appRes("UIDiff.label.compareVerion")%>:
-						      	<%=uicomponent.getCurrentVersionNum()%>,
-						      	<%=uicomponent.getCurrentVersionDate()%>
-						      </th>
-						      <th>
-						      	<%=_ctx.appRes("UIDiff.label.baseVerion")%>:
-						      	<%=uicomponent.getBaseVersionNum()%>,
-						      	<%=uicomponent.getBaseVersionDate()%>
-						      </th>
-						    </tr>
-						  </thead>
-						  <tbody>
-						  <%  
-						    def i=1;
-						  	for(Delta delta in uicomponent.getDeltas()){		    		
-						  	  //jm.require("SHARED/ecm-utils", "ecmutil").addScripts("ecmutil.ECMUtils.insertContentToIframe('$i');") ;
-			    		%>		    		
-		    			<tr onload="eXo.ecm.ECMUtils.insertContentToIframe('$i') ;"> 
-		    				<% 
-		    					if (uicomponent.isDeleteDelta(delta)) {
-		    				%>	   
-		    				<td class="diffDelete">
-		    				  <div id="original${i}" scrolling = "auto" style="border: 0px; height: 60px; width: 100%;overflow :auto; " content="<%=delta.getOriginal().toString()%>">
-		    				    <%=delta.getOriginal().toString()%>
-		    				  </div>
-		    				</td>	 				
-		    				<td class="diffEmpty">
-		    				  <div id="revised${i}" scrolling = "auto" style="border: 0px; height: 60px; width: 100%;overflow :auto;" content="<%=delta.getRevised().toString()%>">
-		    				    <%=delta.getRevised().toString()%>
-		    				  </div>
-		    				</td>	
-		    				<% 
-		    					} else if(uicomponent.isAddDelta(delta)) { 
-		    				%>
-		    				<td class="diffEmpty">
-		    				  <div id="original${i}" scrolling = "auto" style="border: 0px; height: 60px; width: 100%;overflow :auto;" content="<%=delta.getOriginal().toString()%>">
-		    				    <%=delta.getOriginal().toString()%>
-		    				  </div>
-		    				</td>
-		    				<td class="diffAdd">
-		    				  <div id="revised${i}" scrolling = "auto" style="border: 0px; height: 60px; width: 100%;overflow :auto;" content="<%=delta.getRevised().toString()%>">
-		    				    <%=delta.getRevised().toString()%>
-		    				  </div>
-		    				</td>	
-		    				<% 
-		    					} else {	    		
-		    				%>
-		    				<td class="diffModify">
-		    				  <div id="original${i}" scrolling = "auto" style="border: 0px; height: 60px; width: 100%;overflow :auto;" content="<%=delta.getOriginal().toString()%>">
-		    				    <%=delta.getOriginal().toString()%>
-		    				  </div>
-		    			  </td>	
-		    				<td class="diffModify">
-		    				  <div id="revised${i}" scrolling = "auto" style="border: 0px; height: 60px; width: 100%;overflow :auto;" content="<%=delta.getRevised().toString()%>">
-		    				    <%=delta.getRevised().toString()%>
-		    				  </div>
-		    				</td>
-		    				<% } %>	    				
-		    			</tr>
-		    			<% 
-						i++;		    			
-		    			  } 
-		    			%>
-						</tbody>						
-						</table>
-					<% } } %>			    	
-			</div>
+<div class="uiDiff">
+  <div class="headTitle">
+      <button class="btn" onclick="<%=uicomponent.event("CloseCompare")%>"><i class="uiIconEcmsGoBack"></i> <%=_ctx.appRes("UIDiff.label.backTo")%></button>
+      <h5 class="title"><%=_ctx.appRes("UIDiff.label.diffTitle")%></h5>
+  </div>
+  <div class="uiContentBox">
+    <% if(!uicomponent.isCompareable()) { %>
+        <div class="contentDetail">
+            <div class="alert alert-warning">
+                <i class="uiIconWarning"></i><%=_ctx.appRes("UIDiff.label.compare-unavailable")%>
+            </div>
+        </div>
+    <% } else {
+        UIVersionInfo uiVersionInfo = uicomponent.getParent().getChild(UIVersionInfo.class);
+        String fromVersion = _ctx.appRes("UIDiff.label.compareVerion");
+        String fromVersionName = uicomponent.getBaseVersionNum();
+        fromVersion = fromVersion.replace("{0}", fromVersionName);
+        String baseVersionAuthor = uicomponent.getBaseVersionAuthor();
+        String fromVersionProfileURL = getProfileURL(baseVersionAuthor);
+        fromVersion = fromVersion.replace("{1}","<a class='userAvatarLink' href='$fromVersionProfileURL'>"+getProfileFullName(baseVersionAuthor)+"</a>");
+        String fromVersionDate = _ctx.appRes("UIDiff.label.DateChange");
+        fromVersionDate = fromVersionDate.replace("{0}", uicomponent.getBaseVersionDate());
+        String fromVersionSummary = uicomponent.getBaseVersionLabel();
+        if (fromVersionSummary != null && fromVersionSummary != '') {
+                if(fromVersionSummary.lastIndexOf("_") != -1) {
+                  fromVersionSummary = fromVersionSummary.substring(0, fromVersionSummary.lastIndexOf("_"));
+                }
+                if(fromVersionSummary.contains("UIDiff.label.restoredFrom")) {
+                  if(fromVersionSummary.lastIndexOf("_") != -1) {
+                    fromVersionSummary = fromVersionSummary.replace("UIDiff.label.restoredFrom", "");
+                    def oldVersionNum = fromVersionSummary.substring(fromVersionSummary.lastIndexOf("_") + 1, fromVersionSummary.length());
+                    fromVersionSummary = _ctx.appRes("UIDiff.label.restoredFrom").replace("{0}", oldVersionNum);
+                  } else {
+                    fromVersionSummary = fromVersionSummary.replace("UIDiff.label.restoredFrom", _ctx.appRes("UIDiff.label.restoredFrom").replace("{0}", ""));
+                  }
+                }
+        } else {
+        fromVersionSummary = '';
+        }
+  
+        String toVersion = _ctx.appRes("UIDiff.label.compareVerion");
+        String toVersionName = uicomponent.getCurrentVersionNum();
+        toVersion = toVersion.replace("{0}", toVersionName);
+        String versionAuthor = uicomponent.getCurrentVersionAuthor();
+        String toVersionProfileURL = getProfileURL(versionAuthor);
+        toVersion = toVersion.replace("{1}","<a class='userAvatarLink' href='$toVersionProfileURL'>"+getProfileFullName(versionAuthor)+"</a>");
+        String toVersionDate = _ctx.appRes("UIDiff.label.DateChange");
+        toVersionDate = toVersionDate.replace("{0}", uicomponent.getCurrentVersionDate());
+        String toVersionSummary = uicomponent.getCurrentVersionLabel();
+        if (toVersionSummary != null && toVersionSummary != '') {
+                  if(toVersionSummary.lastIndexOf("_") != -1) {
+                    toVersionSummary = toVersionSummary.substring(0, toVersionSummary.lastIndexOf("_"));
+                  }
+          if(toVersionSummary.contains("UIDiff.label.restoredFrom")) {
+          if(toVersionSummary.lastIndexOf("_") > 0) {
+            toVersionSummary = toVersionSummary.replace("UIDiff.label.restoredFrom", "");
+            def oldVersionNum = toVersionSummary.substring(toVersionSummary.lastIndexOf("_") + 1, toVersionSummary.length());
+            toVersionSummary = _ctx.appRes("UIDiff.label.restoredFrom").replace("{0}", oldVersionNum);
+          } else {
+            toVersionSummary = toVersionSummary.replace("UIDiff.label.restoredFrom", _ctx.appRes("UIDiff.label.restoredFrom").replace("{0}", ""));
+          }
+          }
+        } else {
+          toVersionSummary = '';
+        }
+
+        String previousNum = "";
+        String nextNum = "";
+        List<VersionNode> listVersion = uiVersionInfo.getListVersion();
+        for(int i = 0; i < listVersion.size(); i++) {
+            if((i+1) < listVersion.size() && listVersion[i].getName().equals(fromVersionName) && listVersion[i+1] != null) {
+                previousNum = listVersion[i+1].getName();
+            }
+            if(i > 0 && listVersion[i].getName().equals(toVersionName) && listVersion[i-1] != null) {
+                nextNum = listVersion[i-1].getName();
+            }
+        }
+        String previousCompare = "";
+        String previousCompareLink = "";
+        Parameter[] parameters = new Parameter[2];
+        if(!previousNum.isEmpty()){
+            previousCompare = "&laquo; " + _ctx.appRes("UIDiff.label.PreviousAndNextCompare").replace("{0}", "<b>" + previousNum + "</b>").replace("{1}", "<b>" + fromVersionName + "</b>");
+            parameters[0] = new Parameter(uicomponent.FROM_PARAM, previousNum);
+            parameters[1] = new Parameter(uicomponent.TO_PARAM, fromVersionName);
+            previousCompareLink = uicomponent.event("Compare", null, parameters);
+        }
+  
+        String nextCompareLink = "";
+        String nextCompare = "";
+        if(!nextNum.isEmpty()){
+            nextCompare = _ctx.appRes("UIDiff.label.PreviousAndNextCompare").replace("{0}", "<b>" + toVersionName + "</b>").replace("{1}","<b>" + nextNum + "</b>") + " &raquo;";
+            parameters[0] = new Parameter(uicomponent.FROM_PARAM, toVersionName);
+            parameters[1] = new Parameter(uicomponent.TO_PARAM, nextNum);
+            nextCompareLink = uicomponent.event("Compare", null, parameters);
+        } %>
+        <div class="uiBox pull-left hidden-phone">
+            <h6 class="title center">$fromVersion</h6>
+            <div class="boxVersionDetail">
+                <span>$fromVersionDate</span>
+                <span>$fromVersionSummary</span>
+                <a class="changes" href="$previousCompareLink"><%= previousCompare %></a>
+            </div>
+        </div>
+        <div class="pull-left visible-phone">
+            <a class="changes" href="$previousCompareLink"><%= previousCompare %></a>
+        </div>
+        <div class="uiBox pull-right hidden-phone">
+            <h6 class="title center">$toVersion</h6>
+            <div class="boxVersionDetail">
+                <span>$toVersionDate</span>
+                <span>$toVersionSummary</span>
+                <a class="changes" href="$nextCompareLink"><%= nextCompare %></a>
+            </div>
+        </div>
+        <div class="pull-right visible-phone">
+            <a class="changes" href="$nextCompareLink"><%= nextCompare %></a>
+        </div>
+  
+        <div class="center comparedwith hidden-phone"><%=_ctx.appRes("UIDiff.label.ComparedWith")%></div>
+        <% if(!uicomponent.isCompareable()) { %>
+                <div class="contentDetail">
+                    <div class="alert alert-warning">
+                        <i class="uiIconWarning"></i><%=_ctx.appRes("UIDiff.label.compare-unavailable")%>
+                    </div>
+                </div>
+  
+        <% } else if(uicomponent.isImage()) { %>
+          <table class="uiGrid table table-hover table-striped">
+            <tbody>
+               <tr>
+                  <td>
+                    <div id="original1">
+                        <img src="<%= uicomponent.getBaseImage()%>" height="200" width="410"></img>
+                    </div>
+                  </td>
+                  <td>
+                    <div id="revised1">
+                        <img src="<%= uicomponent.getCurrentImage()%>" height="200" width="410"></img>
+                    </div>
+                  </td>
+                </tr>
+            </tbody>
+        </table>
+       <% } else if(uicomponent.getDifferences() == null || uicomponent.getDifferences().isEmpty()) { %>
+            <div class="contentDetail">
+                <div class="alert alert-warning">
+                    <i class="uiIconWarning"></i><%=_ctx.appRes("UIDiff.label.compare-unavailable")%>
+                </div>
+            </div>
+        <% } else { %>
+          <table class="uiGrid table table-hover table-striped">
+            <tbody>
+                <tr>
+                    <td>
+                      <div id="original" scrolling = "auto" style="border: 0px; width: 100%;overflow :auto;">
+                        <%= uicomponent.getDifferences() %>
+                      </div>
+                  </td>
+                </tr>
+            </tbody>
+          </table>
+      <% } %>
+    <% } %>
+  </div>
 </div>

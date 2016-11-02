@@ -222,7 +222,7 @@
       <UIExportNode>Exporter</UIExportNode>
       <UINodeTypeInfo>Information sur le type de noeud</UINodeTypeInfo>
       <UIVersionInfo>Informations de la Version</UIVersionInfo>
-      <UIActivateVersion>Activer les versions</UIActivateVersion>
+      <UIActivateVersion>Activer le contrôle de versions</UIActivateVersion>
       <UIAuditingInfo>Audit</UIAuditingInfo>
       <UIActivateAuditing>Activer l'Audit</UIActivateAuditing>
       <UIPermissionManager>Gestion des Permissions</UIPermissionManager>
@@ -1345,6 +1345,9 @@
   ###############################################################################
   -->
   <UIVersionInfo>
+    <summary>
+      <empty>Cliquer ici pour ajouter un résumé</empty>
+    </summary>
     <tooltip>
       <version>Version</version>
       <baseVersion>Version de base</baseVersion>
@@ -1358,6 +1361,8 @@
     <msg>
       <have-no-view-template>Le formulaire de consultation n'est pas supporté</have-no-view-template>
       <cannot-remove-version>Suppression de la version de base impossible</cannot-remove-version>
+      <error-removing-version>Une erreur s'est produite lors de la suppression de la version.</error-removing-version>
+      <error-removing-referenced-version>Cette version est référencé et ne peut être supprimé.</error-removing-referenced-version>
       <confirm-delete>Confirmez-vous la suppression?</confirm-delete>
       <not-checked-out>Vous devez faire un check out du noeud avant de restaurer.</not-checked-out>
       <invalid-item-state>Vous ne pouvez pas restaurer cette version. Probablement un ou plusieurs éléments ont été déplacés ou supprimés par une autre session.</invalid-item-state>
@@ -1418,7 +1423,7 @@
   -->
   <UIActivateVersion>
     <label>
-      <note>Le versionnage n'a pas été activé pour ce noeud.</note>
+      <note>Le versionnage n'a pas été activé pour ce document.</note>
       <question>Confirmez-vous l'activation?</question>
       <button-active>Activer</button-active>
       <button-cancel>#{word.cancel}</button-cancel>
@@ -1473,11 +1478,16 @@
   -->
   <UIDiff>
     <label>
+      <backTo>Back to version history</backTo>
       <diffTitle>Comparer les versions</diffTitle>
-      <noChange>Aucune donnée à comparer</noChange>
-      <baseVerion>Version de base</baseVerion>
-      <compareVerion>Version</compareVerion>
+      <noContent>Il n'y a pas de contenu à comparer</noContent>
+      <compareVerion>Version {0} par {1}</compareVerion>
       <can-not-compare>Impossible de comparer les deux versions</can-not-compare>
+      <compare-unavailable>La comparaison de versions n'est pas disponible pour ce document</compare-unavailable>
+      <DateChange>On {0}</DateChange>
+      <PreviousAndNextCompare>Changes from {0} to {1}</PreviousAndNextCompare>
+      <ComparedWith>Compared With</ComparedWith>
+      <restoredFrom>Restauré de la version {0}</restoredFrom>
     </label>
   </UIDiff>
   <!--

@@ -1,20 +1,25 @@
 package org.exoplatform.services.cms.documents.impl;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import javax.jcr.Node;
+import javax.jcr.RepositoryException;
+import javax.jcr.version.Version;
+import javax.jcr.version.VersionHistory;
+
 import org.apache.commons.lang.StringUtils;
+
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.services.cms.documents.AutoVersionService;
+import org.exoplatform.services.cms.documents.VersionHistoryUtils;
+import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.drives.ManageDriveService;
-import org.exoplatform.services.jcr.ext.utils.VersionHistoryUtils;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
-import org.exoplatform.services.cms.drives.DriveData;
-
-import javax.jcr.Node;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 /**
  * Created by The eXo Platform SEA
  * Author : eXoPlatform
@@ -24,40 +29,39 @@ import java.util.List;
  */
 public class AutoVersionServiceImpl implements AutoVersionService{
 
-  private static Log log = ExoLogger.getLogger(AutoVersionServiceImpl.class);
-
   private ManageDriveService manageDriveService;
   private List<String> lstDriveAutoVersion = new ArrayList<String>();
   private int maxVersionNumber=0;
-  private int expiredTimeVersion =0;
 
   public AutoVersionServiceImpl(ManageDriveService manageDriveService, InitParams params) {
     this.manageDriveService = manageDriveService;
     String driveAutoVersion = params.getValueParam(DRIVES_AUTO_VERSION).getValue();
     maxVersionNumber = Integer.parseInt(params.getValueParam(DRIVES_AUTO_VERSION_MAX).getValue());
-    expiredTimeVersion = Integer.parseInt(params.getValueParam(DRIVES_AUTO_VERSION_EXPIRED).getValue());
     if(StringUtils.isNotEmpty(driveAutoVersion)) lstDriveAutoVersion = Arrays.asList(driveAutoVersion.split(","));
   }
+
   /**
    * {@inheritDoc}
    */
   @Override
-  public void autoVersion(Node currentNode) throws Exception {
-    autoVersion(currentNode,false);
+  public Version autoVersion(Node currentNode) throws Exception {
+    return autoVersion(currentNode,false);
   }
+
   /**
    * {@inheritDoc}
    */
   @Override
-  public void autoVersion(Node currentNode, boolean isSkipCheckDrive) throws Exception {
+  public Version autoVersion(Node currentNode, boolean isSkipCheckDrive) throws Exception {
     manageDriveService = WCMCoreUtils.getService(ManageDriveService.class);
     if(currentNode.canAddMixin(NodetypeConstant.MIX_REFERENCEABLE)){
       currentNode.addMixin(NodetypeConstant.MIX_REFERENCEABLE);
-      currentNode.save();
     }
+
     if(isSkipCheckDrive){
-      VersionHistoryUtils.createVersion(currentNode);
-      return;
+      Version createdVersion = VersionHistoryUtils.createVersion(currentNode);
+      addRootVersionLabelsToCreatedVersion(currentNode, createdVersion);
+      return createdVersion;
     }
     String nodePath = currentNode.getPath();
     for (String driveAutoVersion: lstDriveAutoVersion){
@@ -68,10 +72,12 @@ public class AutoVersionServiceImpl implements AutoVersionService{
       if((driveHomePath.startsWith(PERSONAL_DRIVE_PARRTEN) && nodePath.startsWith(PERSONAL_DRIVE_PREFIX)) ||
               driveHomePath.startsWith(GROUP_DRIVE_PARRTEN) && nodePath.startsWith(GROUP_DRIVE_PREFIX) ||
               nodePath.startsWith(driveHomePath)){
-        VersionHistoryUtils.createVersion(currentNode);
-        return;
+        Version createdVersion = VersionHistoryUtils.createVersion(currentNode);
+        addRootVersionLabelsToCreatedVersion(currentNode, createdVersion);
+        return createdVersion;
       }
     }
+    return null;
   }
 
   /**
@@ -155,5 +161,16 @@ public class AutoVersionServiceImpl implements AutoVersionService{
       return true;
     }
     return false;
+  }
+  
+  private void addRootVersionLabelsToCreatedVersion(Node currentNode, Version createdVersion) throws RepositoryException {
+    VersionHistory versionHistory = currentNode.getVersionHistory();
+    String[] oldVersionLabels = versionHistory.getVersionLabels(versionHistory.getRootVersion());
+    if(oldVersionLabels != null) {
+      for (String oldVersionLabel : oldVersionLabels) {
+        versionHistory.addVersionLabel(createdVersion.getName(), oldVersionLabel, true);
+        versionHistory.getSession().save();
+      }
+    }
   }
 }

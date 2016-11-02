@@ -16,32 +16,8 @@
  */
 package org.exoplatform.ecm.webui.component.explorer;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Locale;
-import java.util.MissingResourceException;
-import java.util.ResourceBundle;
-import java.util.Set;
-
-import javax.jcr.AccessDeniedException;
-import javax.jcr.Item;
-import javax.jcr.ItemNotFoundException;
-import javax.jcr.Node;
-import javax.jcr.PathNotFoundException;
-import javax.jcr.Property;
-import javax.jcr.RepositoryException;
-import javax.jcr.ValueFormatException;
-
 import org.apache.commons.lang.StringUtils;
-import org.exoplatform.commons.utils.EmptySerializablePageList;
-import org.exoplatform.commons.utils.LazyPageList;
-import org.exoplatform.commons.utils.ListAccess;
-import org.exoplatform.commons.utils.ListAccessImpl;
-import org.exoplatform.commons.utils.PageList;
+import org.exoplatform.commons.utils.*;
 import org.exoplatform.ecm.jcr.model.Preference;
 import org.exoplatform.ecm.webui.component.explorer.control.action.ManageVersionsActionComponent;
 import org.exoplatform.ecm.webui.component.explorer.versions.UIActivateVersion;
@@ -50,11 +26,7 @@ import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.portal.webui.workspace.UIPortalApplication;
-import org.exoplatform.services.cms.link.ItemLinkAware;
-import org.exoplatform.services.cms.link.LinkManager;
-import org.exoplatform.services.cms.link.LinkUtils;
-import org.exoplatform.services.cms.link.NodeFinder;
-import org.exoplatform.services.cms.link.NodeLinkAware;
+import org.exoplatform.services.cms.link.*;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.security.ConversationState;
@@ -66,13 +38,14 @@ import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.web.application.RequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
-import org.exoplatform.webui.core.UIApplication;
-import org.exoplatform.webui.core.UIComponent;
-import org.exoplatform.webui.core.UIContainer;
-import org.exoplatform.webui.core.UIPageIterator;
-import org.exoplatform.webui.core.UIPopupContainer;
+import org.exoplatform.webui.core.*;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
+
+import javax.jcr.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * Created by The eXo Platform SAS
@@ -466,6 +439,7 @@ public class UIDocumentNodeList extends UIContainer {
       } else if (currentNode.isNodeType(Utils.MIX_VERSIONABLE)) {
         UIVersionInfo uiVersion = event.getSource().createUIComponent(UIVersionInfo.class, null, null);
         uiVersion.setCurrentNode(currentNode);
+        uiVersion.setRootOwner(currentNode.getProperty("exo:lastModifier").getString());
         UIPopupContainer.activate(uiVersion, 700, 500);
         event.getRequestContext().addUIComponentToUpdateByAjax(UIPopupContainer);
       }

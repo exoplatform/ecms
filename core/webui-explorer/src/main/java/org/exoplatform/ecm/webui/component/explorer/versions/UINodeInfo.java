@@ -16,6 +16,7 @@
  */
 package org.exoplatform.ecm.webui.component.explorer.versions;
 
+import org.exoplatform.ecm.webui.component.explorer.UIDocumentWorkspace;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
@@ -41,7 +42,7 @@ public class UINodeInfo extends UIForm {
   }
 
   public void update() throws Exception {
-    UIVersionInfo uiVersionInfo = getAncestorOfType(UIVersionInfo.class) ;
+    UIVersionInfo uiVersionInfo = getAncestorOfType(UIDocumentWorkspace.class).getChild(UIVersionInfo.class) ;
     node_ = NodeLocation.getNodeLocationByNode(uiVersionInfo.getCurrentNode());
     versionCreatedDate_ = uiVersionInfo.getCurrentVersionNode().getCreatedTime().getTime().toString();
   }
@@ -55,11 +56,11 @@ public class UINodeInfo extends UIForm {
   }
 
   public String getVersionName() throws Exception {
-    return getAncestorOfType(UIVersionInfo.class) .getCurrentVersionNode().getName();
+    return getAncestorOfType(UIDocumentWorkspace.class).getChild(UIVersionInfo.class) .getCurrentVersionNode().getName();
   }
 
   public String getVersionLabels() throws Exception{
-    UIVersionInfo uiVersionInfo = getAncestorOfType(UIVersionInfo.class) ;
+    UIVersionInfo uiVersionInfo = getAncestorOfType(UIDocumentWorkspace.class).getChild(UIVersionInfo.class) ;
     String[] labels = uiVersionInfo.getVersionLabels(uiVersionInfo.getCurrentVersionNode());
     StringBuilder label = new StringBuilder() ;
     if(labels.length  == 0 ) return "N/A" ;

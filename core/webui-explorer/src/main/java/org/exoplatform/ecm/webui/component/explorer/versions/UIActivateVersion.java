@@ -16,10 +16,9 @@
  */
 package org.exoplatform.ecm.webui.component.explorer.versions;
 
-import javax.jcr.AccessDeniedException;
-import javax.jcr.Node;
-
+import org.exoplatform.ecm.webui.component.explorer.UIDocumentWorkspace;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
+import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -27,8 +26,12 @@ import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.core.UIContainer;
 import org.exoplatform.webui.core.UIPopupComponent;
+import org.exoplatform.webui.core.UIPopupContainer;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
+
+import javax.jcr.AccessDeniedException;
+import javax.jcr.Node;
 
 /**
  * Created by The eXo Platform SARL
@@ -65,7 +68,16 @@ public class UIActivateVersion extends UIContainer implements UIPopupComponent {
         currentNode.save() ;
         currentNode.getSession().save();
         currentNode.getSession().refresh(true) ;
-        uiExplorer.updateAjax(event) ;
+        UIWorkingArea uiWorkingArea = uiExplorer.getChild(UIWorkingArea.class);
+        UIDocumentWorkspace uiDocumentWorkspace = uiWorkingArea.getChild(UIDocumentWorkspace.class);
+        UIVersionInfo uiVersionInfo = uiDocumentWorkspace.getChild(UIVersionInfo.class);
+        uiVersionInfo.setCurrentNode(currentNode);
+        uiVersionInfo.setRootOwner(currentNode.getProperty("exo:lastModifier").getString());
+        uiVersionInfo.activate();
+        uiDocumentWorkspace.setRenderedChild(UIVersionInfo.class);
+        UIPopupContainer UIPopupContainer = uiExplorer.getChild(UIPopupContainer.class);
+        UIPopupContainer.deActivate();
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiExplorer);
       }
       catch (AccessDeniedException ex) {
         UIApplication uiApp = uiExplorer.getAncestorOfType(UIApplication.class);

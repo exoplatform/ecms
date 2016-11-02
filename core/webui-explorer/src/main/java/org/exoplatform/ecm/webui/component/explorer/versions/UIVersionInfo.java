@@ -16,20 +16,35 @@
  */
 package org.exoplatform.ecm.webui.component.explorer.versions;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+
 import javax.jcr.Node;
 import javax.jcr.ReferentialIntegrityException;
+import javax.jcr.RepositoryException;
 import javax.jcr.version.Version;
+import javax.jcr.version.VersionException;
 import javax.jcr.version.VersionHistory;
 
-import org.exoplatform.services.listener.ListenerService;
-import org.exoplatform.services.log.Log;
+import org.apache.commons.lang.StringUtils;
+
+import org.exoplatform.commons.utils.LazyPageList;
+import org.exoplatform.commons.utils.ListAccess;
+import org.exoplatform.commons.utils.ListAccessImpl;
 import org.exoplatform.ecm.jcr.model.VersionNode;
+import org.exoplatform.ecm.webui.component.explorer.UIDocumentWorkspace;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
-import org.exoplatform.webui.core.UIPopupComponent;
-import org.exoplatform.webui.core.UIPopupContainer;
+import org.exoplatform.ecm.webui.utils.Utils;
+import org.exoplatform.services.cms.documents.AutoVersionService;
+import org.exoplatform.services.cms.documents.DocumentService;
 import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
 import org.exoplatform.services.jcr.impl.storage.JCRInvalidItemStateException;
+import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
+import org.exoplatform.services.security.ConversationState;
+import org.exoplatform.services.security.MembershipEntry;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
@@ -38,6 +53,7 @@ import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.UIContainer;
+import org.exoplatform.webui.core.UIPageIterator;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
 
@@ -53,42 +69,141 @@ import org.exoplatform.webui.event.EventListener;
     template = "app:/groovy/webui/component/explorer/versions/UIVersionInfo.gtmpl",
     events = {
         @EventConfig(listeners = UIVersionInfo.SelectActionListener.class),
-        @EventConfig(listeners = UIVersionInfo.RestoreVersionActionListener.class),
-        @EventConfig(listeners = UIVersionInfo.ViewVersionActionListener.class),
-        @EventConfig(listeners = UIVersionInfo.AddLabelActionListener.class),
+        @EventConfig(listeners = UIVersionInfo.RestoreVersionActionListener.class, confirm = "UIVersionInfo.msg.confirm-restore"),
         @EventConfig(listeners = UIVersionInfo.CompareVersionActionListener.class),
         @EventConfig(listeners = UIVersionInfo.DeleteVersionActionListener.class, confirm = "UIVersionInfo.msg.confirm-delete"),
-        @EventConfig(listeners = UIVersionInfo.RemoveLabelActionListener.class),
         @EventConfig(listeners = UIVersionInfo.CloseActionListener.class),
-        @EventConfig(listeners = UIVersionInfo.CloseViewActionListener.class)
+        @EventConfig(listeners = UIVersionInfo.AddSummaryActionListener.class)
     }
 )
 
-public class UIVersionInfo extends UIContainer implements UIPopupComponent {
+public class UIVersionInfo extends UIContainer  {
   private static final Log LOG  = ExoLogger.getLogger(UIVersionInfo.class.getName());
 
   protected VersionNode rootVersion_ ;
+  protected String rootOwner_;
+  protected String rootVersionNum_;
   protected VersionNode curentVersion_;
   protected NodeLocation node_ ;
+  private UIPageIterator uiPageIterator_ ;
+  private List<VersionNode> listVersion = new ArrayList<VersionNode>() ;
+
   public UIVersionInfo() throws Exception {
-    addChild(UILabelForm.class, null, null).setRendered(false);
-    addChild(UIRemoveLabelForm.class, null, null).setRendered(false);
-    addChild(UIViewVersion.class, null, null).setRendered(false);
-    addChild(UIDiff.class, null, null).setRendered(false) ;
+    uiPageIterator_ = addChild(UIPageIterator.class, null, "VersionInfoIterator").setRendered(false);
+  }
+
+  public UIPageIterator getUIPageIterator() { return uiPageIterator_; }
+
+  @SuppressWarnings("rawtypes")
+  public List getListRecords() throws Exception { return uiPageIterator_.getCurrentPageData(); }
+
+  public void updateGrid() throws Exception {
+    listVersion.clear();
+    Node currentNode = getCurrentNode();
+    rootVersion_ = new VersionNode(currentNode, currentNode.getSession());
+    curentVersion_ = rootVersion_;
+
+    listVersion = getNodeVersions(getRootVersionNode().getChildren());
+    VersionNode currentNodeTuple = new VersionNode(currentNode, currentNode.getSession());
+    if(!listVersion.isEmpty()) {
+      int lastVersionNum = Integer.parseInt(listVersion.get(0).getName());
+      setRootVersionNum(String.valueOf(++lastVersionNum));
+    } else {
+      setRootVersionNum(String.valueOf(listVersion.size() + 1));
+    }
+    listVersion.add(0, currentNodeTuple);
+
+    ListAccess<VersionNode> recordList = new ListAccessImpl<VersionNode>(VersionNode.class, listVersion);
+    LazyPageList<VersionNode> dataPageList = new LazyPageList<VersionNode>(recordList, 10);
+    uiPageIterator_.setPageList(dataPageList);
+  }
+
+  private boolean isRestoredVersions(List<VersionNode> list)  {
+    try {
+      for (int i = 0; i < list.size(); i++) {
+        if (getVersionLabels(list.get(i)).length > 0) {
+          if (isRestoredLabel(getVersionLabels(list.get(i))[0])) return true;
+        }
+      }
+    } catch (Exception e) {
+      return false;
+    }
+    return false;
+  }
+
+  private boolean isRestoredLabel(String label) {
+    try {
+      String from = label.substring(label.indexOf("_") - 1).split("_")[0];
+      String to = label.substring(label.indexOf("_") - 1).split("_")[1];
+      Integer.parseInt(from);
+      Integer.parseInt(to);
+      return true;
+    } catch (Exception e) {
+      return false;
+    }
   }
 
   public String[] getVersionLabels(VersionNode version) throws Exception {
     VersionHistory vH = NodeLocation.getNodeByLocation(node_).getVersionHistory();
-    Version versionNode = vH.getVersion(version.getName());
-    return vH.getVersionLabels(versionNode);
+    if (StringUtils.isNotBlank(version.getName()) && !getRootVersionNum().equals(version.getName())) {
+      Version versionNode = vH.getVersion(version.getName());
+      return vH.getVersionLabels(versionNode);
+    } else {
+      return vH.getVersionLabels(vH.getRootVersion());
+    }
   }
 
   public boolean isBaseVersion(VersionNode versionNode) throws Exception {
-    if (NodeLocation.getNodeByLocation(node_).getBaseVersion().getName().equals(versionNode.getName())) return true ;
-    return false ;
+    if (!isRestoredVersions(listVersion)) {
+      return isRootVersion(versionNode);
+    } else {
+      return versionNode.getPath().equals(getCurrentNode().getPath());
+    }
+  }
+
+  public boolean hasPermission(Node node) throws Exception {
+    if (getCurrentNode().getPath().startsWith("/Groups/spaces")) {
+      MembershipEntry mem = new MembershipEntry("/spaces/" + getCurrentNode().getPath().split("/")[3], "manager");
+      return (ConversationState.getCurrent().getIdentity().getMemberships().contains(mem)
+          || ConversationState.getCurrent().getIdentity().getUserId().equals(node.getProperty("exo:lastModifier").getString()));
+
+    } else {
+      return true;
+    }
+  }
+
+  public boolean isRootVersion(VersionNode versionNode) throws Exception {
+    return (versionNode.getUUID().equals(getCurrentNode().getUUID()));
   }
 
   public VersionNode getRootVersionNode() throws Exception {  return rootVersion_ ; }
+
+  public String getRootOwner() throws Exception {  return rootOwner_ ; }
+
+  public void setRootOwner(String user) {  this.rootOwner_ = user; }
+
+  private List<VersionNode> getNodeVersions(List<VersionNode> children) throws Exception {
+    List<VersionNode> child = new ArrayList<VersionNode>() ;
+    for(int i = 0; i < children.size(); i ++){
+      listVersion.add(children.get(i));
+      child = children.get(i).getChildren() ;
+      if(!child.isEmpty()) getNodeVersions(child) ;
+    }
+    listVersion.sort(new Comparator<VersionNode>() {
+      @Override
+      public int compare(VersionNode v1, VersionNode v2) {
+        try {
+          if (Integer.parseInt(v1.getName()) < Integer.parseInt(v2.getName()))
+            return 1;
+          else
+            return 0;
+        }catch (Exception e) {
+          return 0;
+        }
+      }
+    });
+    return listVersion;
+  }
 
   public void activate() {
     try {
@@ -96,84 +211,56 @@ public class UIVersionInfo extends UIContainer implements UIPopupComponent {
       if (node_ == null) {
         node_ = NodeLocation.getNodeLocationByNode(uiExplorer.getCurrentNode());
       }
-      rootVersion_ = new VersionNode(NodeLocation.getNodeByLocation(node_)
-                                                 .getVersionHistory()
-                                                 .getRootVersion(), uiExplorer.getSession());
-      curentVersion_ = rootVersion_;
-      getChild(UIViewVersion.class).update();
+      updateGrid();
     } catch (Exception e) {
-      if (LOG.isErrorEnabled()) {
-        LOG.error("Unexpected error!", e.getMessage());
-      }
+      LOG.error("Unexpected error!", e);
     }
   }
 
-  public void deActivate() {}
-
   public VersionNode getCurrentVersionNode() { return curentVersion_ ;}
-  
+
+  public Node getVersion(String versionName) throws RepositoryException {
+    Node currentNode = getCurrentNode();
+    if ((StringUtils.isBlank(versionName) && StringUtils.isBlank(getCurrentVersionNode().getName()))
+        || (StringUtils.isNotBlank(versionName) && StringUtils.isNotBlank(getCurrentVersionNode().getName())
+            && getCurrentVersionNode().getName().equals(versionName))) {
+      return currentNode;
+    }
+    for (VersionNode versionNode : listVersion) {
+      if(versionNode.getName().equals(versionName)) {
+        return currentNode.getVersionHistory().getVersion(versionName);
+      }
+    }
+    return null;
+  }
+
   public Node getCurrentNode() {
     return NodeLocation.getNodeByLocation(node_);
   }
-  
+
   public void setCurrentNode(Node node) {
     node_ = NodeLocation.getNodeLocationByNode(node);
   }
 
-  public boolean isViewVersion() {
-    UIViewVersion uiViewVersion = getChild(UIViewVersion.class);
-    if(uiViewVersion.isRendered()) return true;
-    return false;
+  public List<VersionNode> getListVersion() {
+    return listVersion;
   }
 
-  static  public class ViewVersionActionListener extends EventListener<UIVersionInfo> {
-    public void execute(Event<UIVersionInfo> event) throws Exception {
-      UIVersionInfo uiVersionInfo = event.getSource();
-      for(UIComponent uiChild : uiVersionInfo.getChildren()) {
-        uiChild.setRendered(false) ;
-      }
-      String objectId = event.getRequestContext().getRequestParameter(OBJECTID) ;
-      uiVersionInfo.curentVersion_  = uiVersionInfo.rootVersion_.findVersionNode(objectId) ;
-      UIViewVersion uiViewVersion = uiVersionInfo.getChild(UIViewVersion.class) ;
-      if ( !(uiVersionInfo.curentVersion_.getName().equals("jcr:rootVersion"))) {
-        Node frozenNode = uiVersionInfo.curentVersion_.getNode("jcr:frozenNode") ;
-        uiViewVersion.setNode(frozenNode) ;
-      }
-      if(uiViewVersion.getTemplate() == null || uiViewVersion.getTemplate().trim().length() == 0) {
-        UIApplication uiApp = uiVersionInfo.getAncestorOfType(UIApplication.class) ;
-        uiApp.addMessage(new ApplicationMessage("UIVersionInfo.msg.have-no-view-template", null)) ;
-
-        return ;
-      }
-      uiViewVersion.setRendered(true) ;
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiVersionInfo) ;
-    }
+  public void setListVersion(List<VersionNode> listVersion) {
+    this.listVersion = listVersion;
   }
 
-  static  public class AddLabelActionListener extends EventListener<UIVersionInfo> {
-    public void execute(Event<UIVersionInfo> event) throws Exception {
-      UIVersionInfo uiVersionInfo = event.getSource();
-      for(UIComponent uiChild : uiVersionInfo.getChildren()) {
-        uiChild.setRendered(false) ;
-      }
-      String objectId = event.getRequestContext().getRequestParameter(OBJECTID) ;
-      uiVersionInfo.curentVersion_  = uiVersionInfo.rootVersion_.findVersionNode(objectId) ;
-      uiVersionInfo.getChild(UILabelForm.class).setRendered(true);
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiVersionInfo) ;
-    }
+  public String getLinkInDocumentsApp(String nodePath) throws Exception {
+    DocumentService documentService = WCMCoreUtils.getService(DocumentService.class);
+    return documentService.getLinkInDocumentsApp(nodePath);
   }
 
-  static  public class RemoveLabelActionListener extends EventListener<UIVersionInfo> {
-    public void execute(Event<UIVersionInfo> event) throws Exception {
-      UIVersionInfo uiVersionInfo = event.getSource();
-      for(UIComponent uiChild : uiVersionInfo.getChildren()) {
-        uiChild.setRendered(false) ;
-      }
-      String objectId = event.getRequestContext().getRequestParameter(OBJECTID) ;
-      uiVersionInfo.curentVersion_  = uiVersionInfo.rootVersion_.findVersionNode(objectId) ;
-      uiVersionInfo.getChild(UIRemoveLabelForm.class).update() ;
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiVersionInfo) ;
-    }
+  public void setRootVersionNum(String rootVersionNum) {
+    this.rootVersionNum_ = rootVersionNum;
+  }
+
+  public String getRootVersionNum() {
+    return rootVersionNum_;
   }
 
   static  public class RestoreVersionActionListener extends EventListener<UIVersionInfo> {
@@ -184,18 +271,33 @@ public class UIVersionInfo extends UIContainer implements UIPopupComponent {
         uiChild.setRendered(false) ;
       }
       String objectId = event.getRequestContext().getRequestParameter(OBJECTID) ;
-      uiVersionInfo.curentVersion_  = uiVersionInfo.rootVersion_.findVersionNode(objectId) ;
+      VersionNode currentVersionNode = uiVersionInfo.rootVersion_.findVersionNode(objectId);
+      String fromVersionName  = currentVersionNode.getName() ;
       UIApplication uiApp = uiVersionInfo.getAncestorOfType(UIApplication.class) ;
-      uiExplorer.addLockToken(NodeLocation.getNodeByLocation(uiVersionInfo.node_));
+      Node currentNode = uiVersionInfo.getCurrentNode();
+      uiExplorer.addLockToken(currentNode);
       try {
-        Node restoredNode =NodeLocation.getNodeByLocation(uiVersionInfo.node_);
-        String versionName = uiVersionInfo.curentVersion_.getName();
-        restoredNode.restore(versionName, true);
+        if(!currentNode.isCheckedOut()) {
+          currentNode.checkout();
+        }
+        AutoVersionService autoVersionService = WCMCoreUtils.getService(AutoVersionService.class);
+        Version addedVersion = autoVersionService.autoVersion(currentNode);
+        currentNode.restore(fromVersionName,true);
+        if(!currentNode.isCheckedOut()) {
+          currentNode.checkout();
+        }
+
+        int lastVersionIndice = Integer.parseInt(addedVersion.getName());
+
+        String restoredFromMsg = "UIDiff.label.restoredFrom_" + fromVersionName + "_" + (lastVersionIndice + 1);
+        VersionHistory versionHistory = currentNode.getVersionHistory();
+        versionHistory.addVersionLabel(versionHistory.getRootVersion().getName(), restoredFromMsg, false);
+
         ListenerService listenerService = WCMCoreUtils.getService(ListenerService.class);
         ActivityCommonService activityService = WCMCoreUtils.getService(ActivityCommonService.class);
         try {
-          if (listenerService!=null && activityService !=null && activityService.isAcceptedNode(restoredNode)) {
-            listenerService.broadcast(ActivityCommonService.NODE_REVISION_CHANGED, restoredNode, versionName);
+          if (listenerService!=null && activityService !=null && activityService.isAcceptedNode(currentNode)) {
+            listenerService.broadcast(ActivityCommonService.NODE_REVISION_CHANGED, currentNode, fromVersionName);
           }
         }catch (Exception e) {
           if (LOG.isErrorEnabled()) {
@@ -219,46 +321,46 @@ public class UIVersionInfo extends UIContainer implements UIPopupComponent {
 
         return;
       }
-      Node node = uiVersionInfo.getCurrentNode() ;
-      if(!node.isCheckedOut()) node.checkout() ;
-      uiExplorer.getSession().save() ;
+      uiVersionInfo.activate();
       event.getRequestContext().addUIComponentToUpdateByAjax(uiVersionInfo) ;
       uiExplorer.setIsHidePopup(true) ;
-      uiExplorer.updateAjax(event) ;
     }
   }
 
-  static  public class DeleteVersionActionListener extends EventListener<UIVersionInfo> {
+  static public class DeleteVersionActionListener extends EventListener<UIVersionInfo> {
     public void execute(Event<UIVersionInfo> event) throws Exception {
       UIVersionInfo uiVersionInfo = event.getSource();
-      UIJCRExplorer uiExplorer = uiVersionInfo.getAncestorOfType(UIJCRExplorer.class) ;
-      for(UIComponent uiChild : uiVersionInfo.getChildren()) {
-        uiChild.setRendered(false) ;
+      UIJCRExplorer uiExplorer = uiVersionInfo.getAncestorOfType(UIJCRExplorer.class);
+      for (UIComponent uiChild : uiVersionInfo.getChildren()) {
+        uiChild.setRendered(false);
       }
-      String objectId = event.getRequestContext().getRequestParameter(OBJECTID) ;
-      uiVersionInfo.curentVersion_  = uiVersionInfo.rootVersion_.findVersionNode(objectId) ;
-      Node node = uiVersionInfo.getCurrentNode() ;
-      VersionHistory versionHistory = node.getVersionHistory() ;
-      UIApplication app = uiVersionInfo.getAncestorOfType(UIApplication.class) ;
+      String objectId = event.getRequestContext().getRequestParameter(OBJECTID);
+      uiVersionInfo.curentVersion_ = uiVersionInfo.rootVersion_.findVersionNode(objectId);
+      Node node = uiVersionInfo.getCurrentNode();
+      VersionHistory versionHistory = node.getVersionHistory();
+      UIApplication app = uiVersionInfo.getAncestorOfType(UIApplication.class);
       try {
-        versionHistory.removeVersion(uiVersionInfo.curentVersion_ .getName());
-        uiVersionInfo.rootVersion_.removeVersionInChild(uiVersionInfo.rootVersion_, uiVersionInfo.curentVersion_);
-        uiVersionInfo.rootVersion_ = new VersionNode(node.getVersionHistory().getRootVersion(), uiExplorer.getSession()) ;
-        uiVersionInfo.curentVersion_ = uiVersionInfo.rootVersion_ ;
-        if(!node.isCheckedOut()) node.checkout() ;
-        uiExplorer.getSession().save() ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiVersionInfo.getAncestorOfType(UIPopupContainer.class)) ;
+        node.getSession().save();
+        node.getSession().refresh(false);
+        versionHistory.removeVersion(uiVersionInfo.curentVersion_.getName());
+        uiVersionInfo.rootVersion_ = new VersionNode(node, uiExplorer.getSession());
+        uiVersionInfo.curentVersion_ = uiVersionInfo.rootVersion_;
+        if (!node.isCheckedOut())
+          node.checkout();
+        uiExplorer.getSession().save();
+        uiVersionInfo.activate();
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiVersionInfo);
       } catch (ReferentialIntegrityException rie) {
         if (LOG.isErrorEnabled()) {
           LOG.error("Unexpected error", rie);
         }
-        app.addMessage(new ApplicationMessage("UIVersionInfo.msg.cannot-remove-version",null)) ;
+        app.addMessage(new ApplicationMessage("UIVersionInfo.msg.error-removing-referenced-version", null, ApplicationMessage.ERROR));
         return;
       } catch (Exception e) {
         if (LOG.isErrorEnabled()) {
           LOG.error("Unexpected error", e);
         }
-        app.addMessage(new ApplicationMessage("UIVersionInfo.msg.cannot-remove-version",null)) ;
+        app.addMessage(new ApplicationMessage("UIVersionInfo.msg.error-removing-version", null, ApplicationMessage.ERROR));
         return;
       }
     }
@@ -267,16 +369,16 @@ public class UIVersionInfo extends UIContainer implements UIPopupComponent {
   static  public class CompareVersionActionListener extends EventListener<UIVersionInfo> {
     public void execute(Event<UIVersionInfo> event) throws Exception {
       UIVersionInfo uiVersionInfo = event.getSource();
-      for(UIComponent uiChild : uiVersionInfo.getChildren()) {
-        uiChild.setRendered(false) ;
+      UIDocumentWorkspace uiDocumentWorkspace = uiVersionInfo.getAncestorOfType(UIDocumentWorkspace.class);
+      for (UIComponent uiChild : uiDocumentWorkspace.getChildren()) {
+        uiChild.setRendered(false);
       }
-      String objectId = event.getRequestContext().getRequestParameter(OBJECTID) ;
-      VersionNode node = uiVersionInfo.rootVersion_.findVersionNode(objectId) ;
-      UIDiff uiDiff = uiVersionInfo.getChild(UIDiff.class) ;
-      uiDiff.setVersions(uiVersionInfo.getCurrentNode().getBaseVersion(),
-                         node.getName(), node.getCreatedTime(), node.getWs(), node.getPath());
-      uiDiff.setRendered(true) ;
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiVersionInfo) ;
+      String fromVersionName = event.getRequestContext().getRequestParameter("versions").split(",")[0];
+      String toVersionName = event.getRequestContext().getRequestParameter("versions").split(",")[1];
+      UIDiff uiDiff = uiDocumentWorkspace.getChild(UIDiff.class);
+      uiDiff.setVersions(uiVersionInfo.getVersion(fromVersionName), uiVersionInfo.getVersion(toVersionName));
+      uiDiff.setRendered(true);
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiDocumentWorkspace);
     }
   }
 
@@ -301,19 +403,47 @@ public class UIVersionInfo extends UIContainer implements UIPopupComponent {
         }
       }
       UIJCRExplorer uiExplorer = uiVersionInfo.getAncestorOfType(UIJCRExplorer.class) ;
-      uiExplorer.cancelAction() ;
+      uiExplorer.updateAjax(event) ;
     }
   }
 
-  static public class CloseViewActionListener extends EventListener<UIVersionInfo> {
+  public static class AddSummaryActionListener extends EventListener<UIVersionInfo> {
     public void execute(Event<UIVersionInfo> event) throws Exception {
       UIVersionInfo uiVersionInfo = event.getSource();
-      UIViewVersion uiViewVersion = uiVersionInfo.getChild(UIViewVersion.class);
-      if(uiViewVersion.isRendered()) {
-        uiViewVersion.setRendered(false);
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiVersionInfo);
-        return;
+      String objectId = event.getRequestContext().getRequestParameter(OBJECTID) ;
+      uiVersionInfo.curentVersion_  = uiVersionInfo.rootVersion_.findVersionNode(objectId) ;
+      String currentVersionName = uiVersionInfo.curentVersion_.getName();
+      if(StringUtils.isBlank(currentVersionName)) {
+        currentVersionName = uiVersionInfo.getRootVersionNum();
       }
+      String summary = event.getRequestContext().getRequestParameter("value") + "_" + currentVersionName;
+      UIJCRExplorer uiExplorer = uiVersionInfo.getAncestorOfType(UIJCRExplorer.class) ;
+      UIApplication uiApp = uiVersionInfo.getAncestorOfType(UIApplication.class) ;
+      Node currentNode = uiExplorer.getCurrentNode() ;
+      if(!Utils.isNameValid(summary, Utils.SPECIALCHARACTER)) {
+        uiApp.addMessage(new ApplicationMessage("UILabelForm.msg.label-invalid",
+            null, ApplicationMessage.WARNING)) ;
+        return ;
+      }
+      try{
+        if(StringUtils.isNotBlank(summary) && !currentNode.getVersionHistory().hasVersionLabel(summary)) {
+          Version currentVersion = null;
+          if(currentVersionName.equals(uiVersionInfo.getRootVersionNum())) {
+            currentVersion = currentNode.getVersionHistory().getRootVersion();
+          } else {
+            currentVersion = currentNode.getVersionHistory().getVersion(currentVersionName);
+          }
+          String[] versionLabels = currentNode.getVersionHistory().getVersionLabels(currentVersion);
+          for(String label : versionLabels) {
+            currentNode.getVersionHistory().removeVersionLabel(label);
+          }
+          currentNode.getVersionHistory().addVersionLabel(currentVersion.getName(), summary, false);
+        }
+      } catch (VersionException ve) {
+        uiApp.addMessage(new ApplicationMessage("UILabelForm.msg.label-exist", new Object[]{summary})) ;
+        return ;
+      }
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiVersionInfo) ;
     }
   }
 }

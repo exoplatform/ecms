@@ -12,7 +12,7 @@
 		<li><span class="confirmationIcon"><%=_ctx.appRes(uicomponent.getId() + ".label.note")%> <%=_ctx.appRes(uicomponent.getId() + ".label.question")%></span></li>
 	</ul>
 	<div class="uiAction uiActionBorder">
-		  <button type="button" onclick="<%=uicomponent.event("EnableVersion")%>" class="btn"><%= _ctx.appRes("UIActivateVersion.label.button-active") %></button>
+		  <button type="button" autofocus onclick="<%=uicomponent.event("EnableVersion")%>" class="btn"><%= _ctx.appRes("UIActivateVersion.label.button-active") %></button>
 		  <button type="button" onclick="<%=uicomponent.event("Cancel")%>" class="btn"><%= _ctx.appRes("UIActivateVersion.label.button-cancel") %></button>
 	</div>  
 </div>

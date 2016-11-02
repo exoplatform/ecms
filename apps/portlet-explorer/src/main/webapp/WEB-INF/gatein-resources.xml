@@ -229,6 +229,43 @@
       <module>wcm-utils</module>
     </depends>
   </module>
+
+  <module>
+    <name>X-editable</name>
+    <as>xeditable</as>
+    <script>
+      <adapter>
+        (function($) {
+        var _$ = window.jQuery; window.jQuery = $;
+        <include>/javascript/eXo/ecm/bootstrap-editable.js</include>
+        window.jQuery = _$;
+        })($);
+      </adapter>
+    </script>
+    <depends>
+      <module>jquery</module>
+    </depends>
+    <depends>
+      <module>bts_popover</module>
+    </depends>
+  </module>
+
+  <module>
+    <name>UIVersionInfo</name>
+    <script>
+      <path>/javascript/eXo/ecm/UIVersionInfo.js</path>
+    </script>
+
+    <depends>
+      <module>jquery</module>
+    </depends>
+    <depends>
+      <module>userPopupPlugin</module>
+    </depends>
+    <depends>
+      <module>socialUtil</module>
+    </depends>
+  </module>
   
   <module>
     <name>mouseEventManager</name>
