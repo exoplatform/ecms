@@ -18,9 +18,11 @@ package org.exoplatform.services.cms.jcrext.activity;
 
 import javax.jcr.Node;
 import javax.jcr.Property;
+import javax.jcr.Session;
 
 import org.apache.commons.chain.Context;
 import org.exoplatform.services.command.action.Action;
+import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
@@ -47,7 +49,12 @@ public class EditFilePropertyActivityAction implements Action{
     if(propertyName.equals(NodetypeConstant.JCR_DATA)) {
       // Save temporary data in current session for system session can see the update
       node.getSession().save();
-      Node parent = WCMCoreUtils.getNodeBySystemSession(node).getParent();
+
+      SessionProvider systemSessionProvider = WCMCoreUtils.getSystemSessionProvider();
+      Session systemSession = systemSessionProvider.getSession(node.getSession().getWorkspace().getName(), WCMCoreUtils.getRepository());
+
+      Node parent = systemSession.itemExists(node.getPath()) ? ((Node)systemSession.getItem(node.getPath())).getParent() : node.getParent();
+
       if(parent.hasNode(NodetypeConstant.EXO_THUMBNAILS_FOLDER)) {
         Node thumnail = parent.getNode(NodetypeConstant.EXO_THUMBNAILS_FOLDER);
         if(thumnail.hasNode(node.getUUID())) thumnail.getNode(node.getUUID()).remove();
