@@ -223,7 +223,5 @@ public class UICommentForm extends UIForm implements UIPopupComponent {
       }
       uiExplorer.updateAjax(event);
     }
-
-
   }
 }

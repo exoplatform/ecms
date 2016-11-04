@@ -149,8 +149,6 @@
 					if (arr[i].clientHeight > arr[i].offsetParent.clientHeight) {
 						arr[i].closest('.commentBox').style.height = arr[i].height + 30 + "px";
 					}
-					// var commentBox = arr[i].closest('.commentBox');
-					// commentBox.style.height = arr[i].height + 30 + "px";
 				}
 			}
 	};
