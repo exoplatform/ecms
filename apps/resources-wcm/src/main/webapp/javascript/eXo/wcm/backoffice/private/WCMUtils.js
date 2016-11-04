@@ -142,6 +142,17 @@
 				elemtClicked.childNodes[1].style.display = 'none' ;
 				elemt.style.display = 'none' ;
 			}
+			//resize comment box
+			var arr = gj('.commentBox img');
+			if (arr.length > 0) {
+				for (var i = 0, len = arr.length; i < len; i++) {
+					if (arr[i].clientHeight > arr[i].offsetParent.clientHeight) {
+						arr[i].closest('.commentBox').style.height = arr[i].height + 30 + "px";
+					}
+					// var commentBox = arr[i].closest('.commentBox');
+					// commentBox.style.height = arr[i].height + 30 + "px";
+				}
+			}
 	};
 
 	WCMUtils.prototype.showHideSideBar = function(event) {

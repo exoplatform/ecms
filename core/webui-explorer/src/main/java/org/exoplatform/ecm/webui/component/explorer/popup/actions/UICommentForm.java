@@ -18,6 +18,7 @@ package org.exoplatform.ecm.webui.component.explorer.popup.actions;
 
 import org.exoplatform.commons.utils.HTMLSanitizer;
 import org.exoplatform.ecm.webui.component.explorer.*;
+import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.comments.CommentsService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
@@ -43,6 +44,7 @@ import org.exoplatform.webui.form.UIFormTextAreaInput;
 import org.exoplatform.webui.form.validator.EmailAddressValidator;
 
 import javax.jcr.Node;
+import java.util.ResourceBundle;
 
 /**
  * Created by The eXo Platform SARL Author : Tran The Trong trongtt@gmail.com
@@ -103,8 +105,10 @@ public class UICommentForm extends UIForm implements UIPopupComponent {
     UIFormTextAreaInput commentField = new UIFormTextAreaInput(FIELD_COMMENT, FIELD_COMMENT, "");
     commentField.addValidator(FckMandatoryValidator.class);
     addUIFormInput(commentField);
+    ResourceBundle res = Util.getPortalRequestContext().getApplicationResourceBundle();
+    String placeholder = res.getString("UICommentForm.comment.placeholder");
     requestContext.getJavascriptManager().require("SHARED/uiCommentForm", "commentForm")
-    .addScripts("eXo.ecm.CommentForm.init();");
+    .addScripts("eXo.ecm.CommentForm.init('" + placeholder + "');");
     if (isEdit()) {
       Node comment = getAncestorOfType(UIJCRExplorer.class).getNodeByPath(nodeCommentPath,
                                                                           NodeLocation.getNodeByLocation(document_).getSession());
@@ -219,5 +223,7 @@ public class UICommentForm extends UIForm implements UIPopupComponent {
       }
       uiExplorer.updateAjax(event);
     }
+
+
   }
 }

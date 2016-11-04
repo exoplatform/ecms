@@ -24,40 +24,15 @@ CKEDITOR.editorConfig = function( config ) {
     CKEDITOR.plugins.addExternal('simpleImage','/commons-extension/eXoPlugins/simpleImage/','plugin.js');
     CKEDITOR.plugins.addExternal('suggester','/commons-extension/eXoPlugins/suggester/','plugin.js');
     //TODO we should ensure adding these plugins
-    //config.extraPlugins = 'simpleLink,simpleImage,suggester';
-    config.skin = 'moono-exo,/commons-extension/ckeditor/skins/moono-exo/';
-    // %REMOVE_END%
-
-    // Define changes to default configuration here.
-    // For complete reference see:
-    // http://docs.ckeditor.com/#!/api/CKEDITOR.config
-
-    // The toolbar groups arrangement.
-    config.toolbarGroups = [
-        { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },
-        { name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align', 'bidi', 'paragraph' ] }
-    ];
-
-    // Remove some buttons provided by the standard plugins, which are
-    // not needed in the Standard(s) toolbar.
-    config.removeButtons = 'Subscript,Superscript,Cut,Copy,Paste,PasteText,PasteFromWord,Undo,Redo,Scayt,Unlink,Anchor,Table,HorizontalRule,SpecialChar,Maximize,Source,Strike,Outdent,Indent,Format,BGColor,About';
-
-    // Set the most common block elements.
-    config.format_tags = 'p;h1;h2;h3;pre';
-
-    // Simplify the dialog windows.
-    config.removeDialogTabs = 'image:advanced;link:advanced';
+    config.extraPlugins = 'simpleLink,simpleImage,suggester';
 
     // Move toolbar below the test area
     config.toolbarLocation = 'bottom';
 
-    // Remove "More colors..." button
-    config.colorButton_enableMore = false;
-
     // style inside the editor
-    config.contentsCss = '/social-resources/javascript/eXo/social/ckeditorCustom/contents.css';
+    config.contentsCss = '/commons-extension/ckeditorCustom/contents.css';
 
-    //config.enterMode = CKEDITOR.ENTER_BR;
+    config.enterMode = CKEDITOR.ENTER_BR;
 
     config.toolbar = [
         ['Bold','Italic','RemoveFormat',],
@@ -70,7 +45,6 @@ CKEDITOR.editorConfig = function( config ) {
     config.autoGrow_onStartup = true;
     config.autoGrow_minHeight = 80;
 
-    config.placeholder = window.eXo.social.I18n.mentions.defaultMessage;
     config.language = eXo.env.portal.language || 'en';
     config.suggester = {
         suffix: ' ',
