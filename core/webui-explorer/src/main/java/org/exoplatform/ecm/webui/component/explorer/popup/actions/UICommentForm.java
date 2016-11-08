@@ -18,11 +18,11 @@ package org.exoplatform.ecm.webui.component.explorer.popup.actions;
 
 import org.exoplatform.commons.utils.HTMLSanitizer;
 import org.exoplatform.ecm.webui.component.explorer.*;
-import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.comments.CommentsService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.organization.*;
+import org.exoplatform.services.resources.ResourceBundleService;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.wcm.webui.validator.FckMandatoryValidator;
@@ -44,6 +44,7 @@ import org.exoplatform.webui.form.UIFormTextAreaInput;
 import org.exoplatform.webui.form.validator.EmailAddressValidator;
 
 import javax.jcr.Node;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 /**
@@ -105,8 +106,10 @@ public class UICommentForm extends UIForm implements UIPopupComponent {
     UIFormTextAreaInput commentField = new UIFormTextAreaInput(FIELD_COMMENT, FIELD_COMMENT, "");
     commentField.addValidator(FckMandatoryValidator.class);
     addUIFormInput(commentField);
-    ResourceBundle res = Util.getPortalRequestContext().getApplicationResourceBundle();
-    String placeholder = res.getString("UICommentForm.comment.placeholder");
+    Locale locale = WebuiRequestContext.getCurrentInstance().getLocale();
+    ResourceBundleService resourceBundleService = WCMCoreUtils.getService(ResourceBundleService.class);
+    ResourceBundle resourceBundle = resourceBundleService.getResourceBundle("locale.ecm.dialogs", locale);
+    String placeholder = resourceBundle.getString("UICommentForm.label.placeholder");
     requestContext.getJavascriptManager().require("SHARED/uiCommentForm", "commentForm")
     .addScripts("eXo.ecm.CommentForm.init('" + placeholder + "');");
     if (isEdit()) {

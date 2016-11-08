@@ -154,6 +154,9 @@
       <as>editor</as>
     </depends>
     <depends>
+      <module>socialUtil</module>
+    </depends>
+    <depends>
       <module>mentionsPlugin</module>
     </depends>
     <depends>

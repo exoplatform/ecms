@@ -32,6 +32,12 @@
 	    <categories>Catégories</categories>
     </label>
   </UIDocumentForm>
+
+  <UICommentForm>
+    <label>
+      <placeholder>Utilisez @ pour identifier une personne dans votre commentaire</placeholder>
+    </label>
+  </UICommentForm>
  
   <!--
   ###################### resoucebundle for HTMLFile dialogs template ####
