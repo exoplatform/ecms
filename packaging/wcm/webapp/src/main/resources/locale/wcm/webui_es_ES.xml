@@ -36,6 +36,8 @@
     <label>
       <ManagedSites>Gestión del Sitio</ManagedSites>
       <SharedSite>Sitio compartido</SharedSite>
+      <PersonalDocuments>Personal Documents</PersonalDocuments>
+      <UserDocuments>{0} Documents</UserDocuments>
     </label>
   </Drives>
 
@@ -109,7 +111,7 @@
       <FilterBy>Filtrar por</FilterBy>
       <WebContent>Contenido Web</WebContent>
       <DMSDocument>Documento</DMSDocument>
-      <Media>Multimedia</Media>
+      <Media>Media</Media>
     </selectBoxValues>
   </UIContentBrowsePanelMulti>
 

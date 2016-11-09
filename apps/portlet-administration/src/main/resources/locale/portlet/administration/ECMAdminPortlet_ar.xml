@@ -71,10 +71,8 @@
       <info>
         <UITaxonomyTreeMainForm>حدّد اسم الفئة، مساحة العمل و مسار الصفحة الرئيسيّة.</UITaxonomyTreeMainForm>
         <UIPermissionTreeManager>تعيين صلاحيّة لاختيار شجرة الفئات</UIPermissionTreeManager>
-        <UIActionTaxonomyManager>اضافة اجراء الى شجرة الفئات قصد اتمام عمليّة الانشاء أو التغيير
-        </UIActionTaxonomyManager>
-        <UITaxonomyTreeCreateChild>تعديل تصنيف الشجرة من خلال إضافة ، نسخ ، واختيار الصلاحيّات.
-        </UITaxonomyTreeCreateChild>
+        <UIActionTaxonomyManager>اضافة اجراء الى شجرة الفئات قصد اتمام عمليّة الانشاء أو التغيير</UIActionTaxonomyManager>
+        <UITaxonomyTreeCreateChild>تعديل تصنيف الشجرة من خلال إضافة ، نسخ ، واختيار  الصلاحيّات.</UITaxonomyTreeCreateChild>
       </info>
     </tab>
     <msg>
@@ -193,7 +191,7 @@
     <title>تسجيل إسم الفضاء جديد</title>
     <label>
       <namespace>بادئة إسم الفضاء</namespace>
-      <uri>URI</uri>
+      <uri>عنوان الـ URI</uri>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -563,10 +561,8 @@
     </action>
     <msg>
       <register-successfully>نوع العقدة '{0}' تم تسجيله بنجاح</register-successfully>
-      <supertype-is-madatory>النوع السوبر إجباري لتسجيل نوع عقدة جديد. يجب اختيار نوع سوبر واحد على الاقل
-      </supertype-is-madatory>
-      <register-failed>تسجيل نوع العقدة لم يتم بنجاح. اما انه موجود من قبل او ان الانواع السوبر غير صحيحة
-      </register-failed>
+      <supertype-is-madatory>النوع السوبر إجباري لتسجيل نوع عقدة جديد. يجب اختيار نوع سوبر واحد على الاقل</supertype-is-madatory>
+      <register-failed>تسجيل نوع العقدة لم يتم بنجاح. اما انه موجود من قبل او ان الانواع السوبر غير صحيحة</register-failed>
       <nodeType-name>اسم نوع العقدة ضروري</nodeType-name>
       <fileName-invalid>هناك بعض احرف في الاسم غير صحيحة</fileName-invalid>
       <node-type-exists>نوع العقدة '{0}' موجود من قبل</node-type-exists>
@@ -992,12 +988,12 @@
       <publicationPublish>نشر</publicationPublish>
       <contentNavigation>تصفّح المحتوى</contentNavigation>
       <addSymLink>إضافة وصلة رمزيّة</addSymLink>
-      <checkIn>Check In</checkIn>
-      <checkOut>Check Out</checkOut>
-      <shareDocuments>شارك</shareDocuments>
-      <openDocument>Remote Edit</openDocument>
-      <editProperty>Edit Document Properties</editProperty>
-      <uploadNewVersion>Upload a new version</uploadNewVersion>
+      <checkIn>مراجعة</checkIn>
+      <checkOut>إنهاء المراجعة</checkOut>
+      <shareDocuments>Share</shareDocuments>
+      <openDocument>تغيير عن بعد</openDocument>
+      <editProperty>تغيير خصائص الملف</editProperty>
+      <uploadNewVersion>تحميل نسخة جديدة</uploadNewVersion>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -1027,7 +1023,7 @@
   </UIViewFormTabPane>
   <PopupViewPermission>
     <title>
-      <UIPermissionSelector>منتق الصلاحية</UIPermissionSelector>
+      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
     </title>
   </PopupViewPermission>
 
@@ -1078,7 +1074,7 @@
   -->
   <UITemplateForm>
     <title>
-      <AddPermission>إضافة صلاحية</AddPermission>
+      <AddPermission>Add Permission</AddPermission>
     </title>
     <action>
       <Save>#{word.save}</Save>
@@ -1387,7 +1383,7 @@
       <set_property>مجموعة حق الملكية</set_property>
       <remove>إزالة الامتياز</remove>
     </label>
-    <title>Add a permission to this node</title>
+    <title>إضافة صلاحية إلى هذه العقدة</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>حفظ</Save>
@@ -1409,7 +1405,7 @@
 
   <PopupTaxonomyTreePermission>
     <title>
-      <UIPermissionSelector>منتق الصلاحية</UIPermissionSelector>
+      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
     </title>
   </PopupTaxonomyTreePermission>
 
@@ -1490,7 +1486,7 @@
       <add_node>تغيير</add_node>
       <remove>حذف</remove>
     </label>
-    <title>Add permission to this node</title>
+    <title>اضافة صلاحية لهذه العقدة</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>#{word.save}</Save>
@@ -1741,7 +1737,7 @@
   -->
   <AddNewTemplatePermission>
     <title>
-      <UIPermissionSelector>منتق الصلاحية</UIPermissionSelector>
+      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
     </title>
   </AddNewTemplatePermission>
   <TemplatePermission>
@@ -1782,12 +1778,12 @@
   </DialogForm>
   <DialogFormTemplatePermission>
     <title>
-      <UIPermissionSelector>منتق الصلاحية</UIPermissionSelector>
+      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
     </title>
   </DialogFormTemplatePermission>
   <ViewFormTemplatePermission>
     <title>
-      <UIPermissionSelector>منتق الصلاحية</UIPermissionSelector>
+      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
     </title>
   </ViewFormTemplatePermission>
   <TemplateContainerPopup>
@@ -1944,8 +1940,7 @@
     <msg>
       <confirm-delete>هل تريد حقا أن تحذف هذا الاستبيان؟</confirm-delete>
       <query-not-existed>هذا الاستبيان لم يعُد موجوداً .</query-not-existed>
-      <can-not-remove>حدث خطأ أثناء حذف هذا الاستبيان. الرجاء الاتصال بالمسؤول للحصول على مزيد من المعلومات.
-      </can-not-remove>
+      <can-not-remove>حدث خطأ أثناء حذف هذا الاستبيان. الرجاء الاتصال بالمسؤول للحصول على مزيد من المعلومات.</can-not-remove>
     </msg>
   </UIQueriesList>
   <UIQueriesForm>
@@ -1981,7 +1976,7 @@
   </EditQueryForm>
   <PermissionPopup>
     <title>
-      <UIGroupMemberSelector>منتق الصلاحية</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Permission Selector</UIGroupMemberSelector>
     </title>
   </PermissionPopup>
   <!--
@@ -2022,12 +2017,9 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <range-validator>عدد الوصلات غير صحيح. الشكل الصحيح هو: أ..بحيث تكون "أ" و "ب" أعدادا صحيحة موجبة.يمكنك إستعمال
-        '*' للإشارة عوضاً عن "ب" للإشارة بأن القيمة غير محدودة.
-      </range-validator>
+      <range-validator>عدد الوصلات غير صحيح. الشكل الصحيح هو: أ..بحيث تكون "أ" و "ب" أعدادا صحيحة موجبة.يمكنك إستعمال '*' للإشارة عوضاً عن "ب" للإشارة بأن القيمة غير محدودة.</range-validator>
       <error-update>أثناء عملية التحديث. هذه المعلومات غير صحيحة.</error-update>
-      <item-not-existing>لا يمكنك حفظ التغييرات الخاصة بهذه العلامة و التي لم تعد موجودة في قاعدة البينات.
-      </item-not-existing>
+      <item-not-existing>لا يمكنك حفظ التغييرات الخاصة بهذه العلامة و التي لم تعد موجودة في قاعدة البينات.</item-not-existing>
     </msg>
   </UITagStyleForm>
   <FolksonomyPopup>
@@ -2042,7 +2034,7 @@
   -->
   <ECMPhoneFormatValidator>
     <msg>
-      <Invalid>The field '{0}' contains an invalid Phone number. Please enter another value.</Invalid>
+      <Invalid>يحتوي الحقل '{0}' على رقم هاتف غير صحيح. الرجاء إدخال قيمة أخرى.</Invalid>
     </msg>
   </ECMPhoneFormatValidator>
   <!--
@@ -2338,11 +2330,10 @@
       <action>اجراء</action>
     </header>
     <tooltip>
-      <UnLock>الغاء التأمين</UnLock>
+      <UnLock>الغاء التّأمين</UnLock>
     </tooltip>
     <msg>
-      <access-denied-exception>ليس لديك صلاحية للوصول إلى هذه العقدة عن طريق المسار {0} أو ربّما تمّ حذف هذه العقدة.
-      </access-denied-exception>
+      <access-denied-exception>ليس لديك صلاحية للوصول إلى هذه العقدة عن طريق المسار {0} أو ربّما تمّ حذف هذه العقدة.</access-denied-exception>
     </msg>
   </UILockNodeList>
   <EditUnLockForm>
@@ -2456,8 +2447,7 @@
     </action>
     <msg>
       <xss-vulnerability-character>يحتوي المجال '{0}' على أحرف XSS</xss-vulnerability-character>
-      <xss-vulnerability-character-wo-label>القيمة التي تمّ ادخالها في هذا المجال قد تحتوي على أحرف XSS
-      </xss-vulnerability-character-wo-label>
+      <xss-vulnerability-character-wo-label>القيمة التي تمّ ادخالها في هذا المجال قد تحتوي على أحرف XSS</xss-vulnerability-character-wo-label>
     </msg>
   </UIActionForm>
 
@@ -2495,7 +2485,7 @@
       <Add>إضافة</Add>
     </action>
     <label>
-      <userOrGroup>العضويات:</userOrGroup>
+      <userOrGroup>Memberships:</userOrGroup>
     </label>
     <msg>
       <userOrGroup-alreadyExists>هذه العضوية موجودة مُسبقا. الرجاء اختيار واحدة أخرى.</userOrGroup-alreadyExists>
@@ -2533,9 +2523,7 @@
   </NodeTypeNameValidator>
   <UIActionForm>
     <msg>
-      <constraint-violation-exception>لا يمكن إضافة العقدة '{0}' إلى '{1}' في مساحة العمل '{2}'. توجد مشكلة مع
-        الصلاحيّات أو مع بعض القيود المفروضة.
-      </constraint-violation-exception>
+      <constraint-violation-exception>لا يمكن إضافة العقدة '{0}' إلى '{1}' في مساحة العمل '{2}'. توجد مشكلة مع الصلاحيّات أو مع بعض القيود المفروضة.</constraint-violation-exception>
     </msg>
   </UIActionForm>
 
@@ -2546,9 +2534,7 @@
   </UIWorkspaceWizard>
   <UIRepositoryForm>
     <msg>
-      <not-complete-repository>The repository is being created. You need to wait a few minutes before creating another
-        one.
-      </not-complete-repository>
+      <not-complete-repository>The repository is being created. You need to wait a few minutes before creating another one.</not-complete-repository>
     </msg>
   </UIRepositoryForm>
 
@@ -2609,8 +2595,7 @@
   </UIPageIterator>
   <UILockNodeList>
     <msg>
-      <can-not-unlock-node>ليس لديك الصلاحية لتحرير قفل هذه العقدة. اتصل بخطط النظام للحصول على الصلاحية الصحيحة
-      </can-not-unlock-node>
+      <can-not-unlock-node>ليس لديك الصلاحية لتحرير قفل هذه العقدة.  اتصل بخطط النظام للحصول على الصلاحية الصحيحة</can-not-unlock-node>
     </msg>
   </UILockNodeList>
 </bundle>

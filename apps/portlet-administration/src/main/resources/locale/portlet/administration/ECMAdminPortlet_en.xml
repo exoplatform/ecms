@@ -40,13 +40,11 @@
   -->
   <UITaxonomyWorkingArea>
     <msg>
-      <referential-integrity>Cannot read from the source file, or the destination category is a sub-category.
-      </referential-integrity>
+      <referential-integrity>Cannot read from the source file, or the destination category is a sub-category.</referential-integrity>
       <no-taxonomy-selected>You must copy or cut at least one category.</no-taxonomy-selected>
       <node-is-cutting>You cannot paste here. The category node '{0}' might be cut.</node-is-cutting>
       <can-not-paste>There is no data in the clipboard to paste.</can-not-paste>
-      <reference-exception>Cannot delete this category because it is currently referenced by a content.
-      </reference-exception>
+      <reference-exception>Cannot delete this category  because it is currently referenced by a content.</reference-exception>
       <path-error>An error occurred while removing this category node.</path-error>
     </msg>
   </UITaxonomyWorkingArea>
@@ -73,10 +71,8 @@
       <info>
         <UITaxonomyTreeMainForm>Specify the category name, workspace and home path.</UITaxonomyTreeMainForm>
         <UIPermissionTreeManager>Set permission for the category tree.</UIPermissionTreeManager>
-        <UIActionTaxonomyManager>Add an action to the category tree to complete the creation or update.
-        </UIActionTaxonomyManager>
-        <UITaxonomyTreeCreateChild>Edit the taxonomy tree by adding, copying, cutting and selecting permissions.
-        </UITaxonomyTreeCreateChild>
+        <UIActionTaxonomyManager>Add an action to the category tree to complete the creation or update.</UIActionTaxonomyManager>
+        <UITaxonomyTreeCreateChild>Edit the taxonomy tree by adding, copying, cutting and selecting permissions.</UITaxonomyTreeCreateChild>
       </info>
     </tab>
     <msg>
@@ -254,8 +250,7 @@
     <msg>
       <confirm-delete>Are you sure you want to delete this metadata?</confirm-delete>
       <delete-successful>The templates of '{0}' were deleted successfully.</delete-successful>
-      <path-not-found-exception>This metadata was deleted or changed. Please click the Refresh button.
-      </path-not-found-exception>
+      <path-not-found-exception>This metadata was deleted or changed. Please click the Refresh button.</path-not-found-exception>
     </msg>
     <action>
       <Add>Add Metadata</Add>
@@ -566,12 +561,8 @@
     </action>
     <msg>
       <register-successfully>The '{0}' node type was registered successfully.</register-successfully>
-      <supertype-is-madatory>The super type is mandatory when you register a new node type. Please select at least one
-        super type.
-      </supertype-is-madatory>
-      <register-failed>The node type registration was unsuccessful. It either already exists or the super type is
-        invalid.
-      </register-failed>
+      <supertype-is-madatory>The super type is mandatory when you register a new node type. Please select at least one super type.</supertype-is-madatory>
+      <register-failed>The node type registration was unsuccessful. It either already exists or the super type is invalid.</register-failed>
       <nodeType-name>The node type name is required.</nodeType-name>
       <fileName-invalid>The file name has some invalid characters.</fileName-invalid>
       <node-type-exists>The '{0}' node type already exists.</node-type-exists>
@@ -590,8 +581,7 @@
     </tab>
     <msg>
       <property-name>The property definition's name was invalid.</property-name>
-      <not-supported-value-constraints>This required type does not support value constraints.
-      </not-supported-value-constraints>
+      <not-supported-value-constraints>This required type does not support value constraints.</not-supported-value-constraints>
     </msg>
   </UIPropertyDefinitionForm>
   <UIChildNodeDefinitionForm>
@@ -1950,8 +1940,7 @@
     <msg>
       <confirm-delete>Are you sure you want to delete this query?</confirm-delete>
       <query-not-existed>The query does not exist anymore.</query-not-existed>
-      <can-not-remove>An error occurred while deleting the query. Please contact the administrator for information.
-      </can-not-remove>
+      <can-not-remove>An error occurred while deleting the query. Please contact the administrator for information.</can-not-remove>
     </msg>
   </UIQueriesList>
   <UIQueriesForm>
@@ -2028,12 +2017,9 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <range-validator>The range is invalid. The format must be: a..b, among which a, b are positive integers. You can
-        use * instead of b to indicate that the range is unlimited.
-      </range-validator>
+      <range-validator>The range is invalid. The format must be: a..b, among which a, b are positive integers. You can use * instead of b to indicate that the range is unlimited.</range-validator>
       <error-update>Update failed. Your information is invalid.</error-update>
-      <item-not-existing>You cannot save changes to this tag since it no longer exists in the database.
-      </item-not-existing>
+      <item-not-existing>You cannot save changes to this tag since it no longer exists in the database.</item-not-existing>
     </msg>
   </UITagStyleForm>
   <FolksonomyPopup>
@@ -2347,9 +2333,7 @@
       <UnLock>UnLock</UnLock>
     </tooltip>
     <msg>
-      <access-denied-exception>You do not have permission to access the node with the path {0}, or this node is
-        deleted.
-      </access-denied-exception>
+      <access-denied-exception>You do not have permission to access the node with the path {0}, or this node is deleted.</access-denied-exception>
     </msg>
   </UILockNodeList>
   <EditUnLockForm>
@@ -2463,8 +2447,7 @@
     </action>
     <msg>
       <xss-vulnerability-character>Field '{0}' contains XSS vulnerability characters</xss-vulnerability-character>
-      <xss-vulnerability-character-wo-label>Your input may contain XSS vulnerability characters
-      </xss-vulnerability-character-wo-label>
+      <xss-vulnerability-character-wo-label>Your input may contain XSS vulnerability characters</xss-vulnerability-character-wo-label>
     </msg>
   </UIActionForm>
 
@@ -2540,9 +2523,7 @@
   </NodeTypeNameValidator>
   <UIActionForm>
     <msg>
-      <constraint-violation-exception>The node '{0}' cannot be added to '{1}' in the workspace '{2}'. There is a problem
-        with the permissions or constraints condition.
-      </constraint-violation-exception>
+      <constraint-violation-exception>The node '{0}' cannot be added to '{1}' in the workspace '{2}'.  There is a problem with the permissions or constraints condition.</constraint-violation-exception>
     </msg>
   </UIActionForm>
 
@@ -2553,9 +2534,7 @@
   </UIWorkspaceWizard>
   <UIRepositoryForm>
     <msg>
-      <not-complete-repository>The repository is being created. You need to wait a few minutes before creating another
-        one.
-      </not-complete-repository>
+      <not-complete-repository>The repository is being created. You need to wait a few minutes before creating another one.</not-complete-repository>
     </msg>
   </UIRepositoryForm>
 
@@ -2616,9 +2595,7 @@
   </UIPageIterator>
   <UILockNodeList>
     <msg>
-      <can-not-unlock-node>You do not have permission to unlock this node. Please contact the administrator to get the
-        correct right.
-      </can-not-unlock-node>
+      <can-not-unlock-node>You do not have permission to unlock this node. Please contact the administrator to get the correct right.</can-not-unlock-node>
     </msg>
   </UILockNodeList>
 </bundle>

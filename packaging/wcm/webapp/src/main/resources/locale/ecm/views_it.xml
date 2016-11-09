@@ -30,7 +30,7 @@
         <comment-by>Commentato da</comment-by>
         <email>E-mail</email>
         <site>Sito</site>
-        <lastComment>Last comment posted by {user} at {time}</lastComment>
+        <lastComment>Ultimo commento pubblicato da {user} alle {time}</lastComment>
       </label>
     </view>
   </Comment>
@@ -41,11 +41,13 @@
   <File>
     <view>
       <label>
-        <not-viewable>The preview of this document is not available.</not-viewable>
-        <pdf-max-size>The preview is not available for content larger than {0} MB.</pdf-max-size>
-        <pdf-max-page>The preview is not available for content with over {0} pages.</pdf-max-page>
-        <using-webDAV>or Open in MS Office</using-webDAV>
-        <open-on-desktop>Open on Desktop</open-on-desktop>
+        <not-viewable>L'anteprima di questo documento non è disponibile.</not-viewable>
+        <pdf-max-size>L'anteprima non è disponibile per i contenuti più grande di {0} MB.</pdf-max-size>
+        <pdf-max-page>L'anteprima non è disponibile per i contenuti con oltre {0} pagine.</pdf-max-page>
+        <using-webDAV>o Apri in MS Office</using-webDAV>
+        <open-on-desktop>Apri sul desktop</open-on-desktop>
+        <open-in-documents>Open in Documents</open-in-documents>
+        <open-in-documents-tooltip>Open this file in Documents app</open-in-documents-tooltip>
         <file-size-too-big>Il contenuto di questo file è troppo grande. Dovrebbe scaricarlo ed usare un client esterno.</file-size-too-big>
         <webDAV>Vista WebDAV</webDAV>
         <download>Scarica questo File</download>
@@ -142,7 +144,7 @@
     <view>
       <label>
         <not-avaliable>N/D</not-avaliable>
-        <core-elements>Core Elements</core-elements>
+        <core-elements>Elementi fondamentali</core-elements>
         <title>Titolo</title>
         <creator>Creatore</creator>
         <subject>Oggetto</subject>

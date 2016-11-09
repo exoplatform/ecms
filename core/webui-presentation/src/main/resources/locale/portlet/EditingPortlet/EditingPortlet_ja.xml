@@ -2,18 +2,18 @@
 <bundle>
   <EditingPortlet>
     <label>
-      <Editing>モード :</Editing>
+      <Editing>Mode:</Editing>
     </label>
     <msg>
-      <not-permission>このアクションを行う権限がありません</not-permission>
+      <not-permission>You don't have permission to do this action.</not-permission>
     </msg>
   </EditingPortlet>
 
   <UIEditingForm>
     <label>
       <option>
-        <Draft>編集</Draft>
-        <Published>公開</Published>
+        <Draft>Edit</Draft>
+        <Published>Published</Published>
       </option>
     </label>
   </UIEditingForm>

@@ -17,7 +17,7 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <not-support>Seuls les documents peuvent être commentés</not-support>
+      <not-support>Vous ne pouvez pas commenter ce type de document.</not-support>
       <not-checkedout>Vous devez effectuer un check out sur le noeud avant de pouvoir ajouter un commentaire</not-checkedout>
       <content-null>Vous ne pouvez pas déposer un commentaire vide.</content-null>
     </msg>
@@ -61,7 +61,7 @@
       <refresh-session-success>La session a été réactualisée avec succès.</refresh-session-success>
       <no-node-history>Vous êtes à la racine.</no-node-history>
       <save-session-success>Les modifications ont été sauvegardés.</save-session-success>
-      <target-path-not-found>Vous ne pouvez pas accéder ce document car il n'existe pas ou vous n'avez pas de permission d'y accéder.</target-path-not-found>
+      <target-path-not-found>Vous ne pouvez pas accéder ce noeud car il n'existe pas ou vous n'avez pas de permission d'y accéder.</target-path-not-found>
     </msg>
   </UIJCRExplorer>
   <!--
@@ -222,7 +222,7 @@
       <UIExportNode>Exporter</UIExportNode>
       <UINodeTypeInfo>Information sur le type de noeud</UINodeTypeInfo>
       <UIVersionInfo>Informations de la Version</UIVersionInfo>
-      <UIActivateVersion>Activer le contrôle de versions</UIActivateVersion>
+      <UIActivateVersion>Activer les versions</UIActivateVersion>
       <UIAuditingInfo>Audit</UIAuditingInfo>
       <UIActivateAuditing>Activer l'Audit</UIActivateAuditing>
       <UIPermissionManager>Gestion des Permissions</UIPermissionManager>
@@ -1345,8 +1345,9 @@
   ###############################################################################
   -->
   <UIVersionInfo>
+    <title>Historique des versions</title>
     <summary>
-      <empty>Cliquer ici pour ajouter un résumé</empty>
+      <empty>Cliquez ici pour ajouter un résumé</empty>
     </summary>
     <tooltip>
       <version>Version</version>
@@ -1361,8 +1362,9 @@
     <msg>
       <have-no-view-template>Le formulaire de consultation n'est pas supporté</have-no-view-template>
       <cannot-remove-version>Suppression de la version de base impossible</cannot-remove-version>
-      <error-removing-version>Une erreur s'est produite lors de la suppression de la version.</error-removing-version>
-      <error-removing-referenced-version>Cette version est référencé et ne peut être supprimé.</error-removing-referenced-version>
+      <error-removing-version>Une erreur s’est produite lors de la suppression de cette version.</error-removing-version>
+      <error-removing-referenced-version>Cette version est référencée et ne peut pas être supprimée.</error-removing-referenced-version>
+      <confirm-restore>Êtes-vous sûr de vouloir restaurer cette version ?</confirm-restore>
       <confirm-delete>Confirmez-vous la suppression?</confirm-delete>
       <not-checked-out>Vous devez faire un check out du noeud avant de restaurer.</not-checked-out>
       <invalid-item-state>Vous ne pouvez pas restaurer cette version. Probablement un ou plusieurs éléments ont été déplacés ou supprimés par une autre session.</invalid-item-state>
@@ -1370,7 +1372,15 @@
     <action>
       <close>#{word.close}</close>
       <close-view>Fermer la vue</close-view>
+      <compare-versions>Comparer les versions sélectionnées</compare-versions>
     </action>
+    <labels>
+      <version>Version</version>
+      <date>Date</date>
+      <author>Modifié par</author>
+      <summary>Résumé</summary>
+      <action>Action</action>
+    </labels>
   </UIVersionInfo>
   <!--
   ################################################################################
@@ -1423,7 +1433,7 @@
   -->
   <UIActivateVersion>
     <label>
-      <note>Le versionnage n'a pas été activé pour ce document.</note>
+      <note>Le versionnage n'a pas été activé pour ce noeud.</note>
       <question>Confirmez-vous l'activation?</question>
       <button-active>Activer</button-active>
       <button-cancel>#{word.cancel}</button-cancel>
@@ -1478,16 +1488,16 @@
   -->
   <UIDiff>
     <label>
-      <backTo>Back to version history</backTo>
+      <backTo>Retour à l’historique</backTo>
       <diffTitle>Comparer les versions</diffTitle>
-      <noContent>Il n'y a pas de contenu à comparer</noContent>
-      <compareVerion>Version {0} par {1}</compareVerion>
+      <noContent>Il n’y a aucun contenu à comparer</noContent>
+      <compareVerion>Version</compareVerion>
       <can-not-compare>Impossible de comparer les deux versions</can-not-compare>
-      <compare-unavailable>La comparaison de versions n'est pas disponible pour ce document</compare-unavailable>
-      <DateChange>On {0}</DateChange>
-      <PreviousAndNextCompare>Changes from {0} to {1}</PreviousAndNextCompare>
-      <ComparedWith>Compared With</ComparedWith>
-      <restoredFrom>Restauré de la version {0}</restoredFrom>
+      <compare-unavailable>La comparaison de version n’est pas disponible pour ce document</compare-unavailable>
+      <DateChange>Le {0}</DateChange>
+      <PreviousAndNextCompare>Modifications de {0} à {1}</PreviousAndNextCompare>
+      <ComparedWith>Comparé à</ComparedWith>
+      <restoredFrom>Restauré depuis la version {0}</restoredFrom>
     </label>
   </UIDiff>
   <!--
@@ -3094,7 +3104,7 @@
     <msg>
       <no-view-found>Il n'y a pas de vue disponible par rapport à vos droits d'accès sur le lecteur '{0}'.</no-view-found>
       <access-denied>Accès refusé. Vous n'avez peut-être pas les droits suffisants pour accéder à l'espace de stockage du lecteur '{0}'.</access-denied>
-      <not-found>Le document que vous essayez d'accéder n'existe plus.</not-found>
+      <not-found>Le document auquel vous tentez d’accéder n’est plus disponible.</not-found>
       <empty-drives>Il n'y a pas de lecteur dans ce dépôt de données ou vous n'avez pas les droits requis pour accéder à au moins un lecteur de ce dépôt de données.</empty-drives>
       <workspace-not-exist>Le lecteur '{0}' a été enregistré dans un espace de stockage inconnu. Veuillez reconfigurer le lecteur.</workspace-not-exist>
     </msg>

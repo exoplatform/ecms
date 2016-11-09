@@ -34,15 +34,17 @@
 
   <Drives>
     <label>
-      <ManagedSites>Site Management</ManagedSites>
+      <ManagedSites>Zarządzanie witryną</ManagedSites>
       <SharedSite>Podgląd strony</SharedSite>
+      <PersonalDocuments>Personal Documents</PersonalDocuments>
+      <UserDocuments>{0} Documents</UserDocuments>
     </label>
   </Drives>
 
   <Views>
     <label>
       <wcm-view>Sieć</wcm-view>
-      <admin-view>Administrator</admin-view>
+      <admin-view>Admin</admin-view>
       <icon-view>Ikony</icon-view>
       <thumbails-view>Miniatury</thumbails-view>
       <list-view>Lista</list-view>
@@ -61,7 +63,7 @@
 
   <UIPageSelectorPanel>
     <header>
-      <path>Ścieżka</path>
+      <path>Path</path>
       <action>#{word.action}</action>
     </header>
     <msg>
@@ -84,7 +86,7 @@
       <UIContentBrowsePanelMulti>Przeglądarka zawartości</UIContentBrowsePanelMulti>
       <UIContentBrowsePanelFolder>Przeglądarka folderów</UIContentBrowsePanelFolder>
       <UIContentSearchForm>Formularz wyszukiwania treści</UIContentSearchForm>
-      <UIContentSearchResult>Wyniki wyszukiwania</UIContentSearchResult>
+      <UIContentSearchResult>Search Result</UIContentSearchResult>
       <UIContentViewer>Podgląd treści</UIContentViewer>
       <WebContentMetadataPopup>Selektor właściwości</WebContentMetadataPopup>
       <WebContentNodeTypePopup>Selektor NodeType</WebContentNodeTypePopup>
@@ -96,7 +98,7 @@
     <selectBoxValues>
       <FilterBy>Filtruj według</FilterBy>
       <WebContent>Zawartość sieci Web</WebContent>
-      <DMSDocument>Dokument</DMSDocument>
+      <DMSDocument>Document</DMSDocument>
       <Media>Multimedia</Media>
     </selectBoxValues>
     <msg>
@@ -108,7 +110,7 @@
     <selectBoxValues>
       <FilterBy>Filtruj według</FilterBy>
       <WebContent>Zawartość sieci Web</WebContent>
-      <DMSDocument>Dokument</DMSDocument>
+      <DMSDocument>Document</DMSDocument>
       <Media>Multimedia</Media>
     </selectBoxValues>
   </UIContentBrowsePanelMulti>
@@ -180,20 +182,20 @@
       <Location>Nazwa strony</Location>
       <SearchByName>Szukaj według nazwy</SearchByName>
       <Fulltext>Słowo lub wyrażenie w kontekście</Fulltext>
-      <Property>Własność</Property>
-      <Contain>Zawiera</Contain>
-      <FromDate>Od</FromDate>
-      <ToDate>Do</ToDate>
-      <DocumentType>Typ dokumentu</DocumentType>
+      <Property>Property</Property>
+      <Contain>Contain</Contain>
+      <FromDate>From Date</FromDate>
+      <ToDate>To Date</ToDate>
+      <DocumentType>Document Type</DocumentType>
     </title>
     <tooltip>
-      <AddMetadataType>Dodaj właściwość</AddMetadataType>
-      <AddNodeType>Dodaj typ węzła</AddNodeType>
+      <AddMetadataType>Add Property</AddMetadataType>
+      <AddNodeType>Add Node Type</AddNodeType>
     </tooltip>    
     <label>
       <option>
-        <CREATED>Utworzony</CREATED>
-        <MODIFIED>Zmodyfikowany</MODIFIED>
+        <CREATED>Created</CREATED>
+        <MODIFIED>Modified</MODIFIED>
       </option>
     </label>
     <action>
@@ -202,23 +204,23 @@
     <msg>
       <time-to-late>Czas wyszukiwania jest zbyt długi.</time-to-late>
       <empty-field>Proszę wpisać poprawne słowo kluczowe dla wyszukiwania.</empty-field>
-      <empty-name>Please enter the name to search</empty-name>
-      <empty-content>Please enter a word or phrase to search</empty-content>
-      <empty-property>Please select a property</empty-property>
-      <empty-property-keyword>Please enter a keyword for the property</empty-property-keyword>
-      <empty-doctype>Please select a document type</empty-doctype>
-      <empty-startDate>"From Date" is required</empty-startDate>
+      <empty-name>Proszę wpisać nazwę do wyszukania</empty-name>
+      <empty-content>Wprowadź słowo lub frazę do wyszukiwania</empty-content>
+      <empty-property>Wybierz właściwość</empty-property>
+      <empty-property-keyword>Wprowadź słowo kluczowe dla właściwości</empty-property-keyword>
+      <empty-doctype>Wybierz typ dokumentu</empty-doctype>
+      <empty-startDate>"Od Daty" jest wymagane</empty-startDate>
       <invalid-format>Nieprawidłowy format daty/godziny w polu „{0}”.</invalid-format>
       <invalid-date>"Data w polu „Do" musi być późniejsza niż data w polu "Od""</invalid-date>
-      <invalid-startDate>"From Date" must not be later than today</invalid-startDate>
+      <invalid-startDate>"Od Daty" nie może być późniejsza niż dzisiejsza data</invalid-startDate>
       <invalid-nodeType>Typ węzła „{0}” jest nieprawidłowy. Proszę sprawdzić ponownie.</invalid-nodeType>
-      <invalid-keyword>Słowo kluczowe jest nieprawidłowe. Niektóre znaki nie są obsługiwane.</invalid-keyword>
+      <invalid-keyword>The keyword is invalid. Some characters are not supported.</invalid-keyword>
     </msg>
   </UIContentSearchForm>
 
   <WebContentMetadataPopup>
     <title>
-      <UIContentPropertySelector>Selektor właściwości</UIContentPropertySelector>
+      <UIContentPropertySelector>Property Selector</UIContentPropertySelector>
     </title>
   </WebContentMetadataPopup>
 
@@ -228,14 +230,14 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
-      <metadataType>Typ metadanych</metadataType>
-      <property_select>Własność</property_select>
+      <metadataType>Metadata Type</metadataType>
+      <property_select>Property</property_select>
     </label>
   </UIContentPropertySelector>
 
   <WebContentNodeTypePopup>
     <title>
-      <UIContentNodeTypeSelector>Selektor typu węzła</UIContentNodeTypeSelector>
+      <UIContentNodeTypeSelector>Node Type Selector</UIContentNodeTypeSelector>
     </title>
   </WebContentNodeTypePopup>
 
@@ -249,8 +251,8 @@
   <UIContentSearchResult>
     <header>
       <title>Tytuł</title>
-      <score>Wynik</score>
-      <publicationstate>Stan publikacji</publicationstate>
+      <score>Score</score>
+      <publicationstate>Publication State</publicationstate>
       <action>Akcja</action>
     </header>
     <title>
@@ -266,7 +268,7 @@
     <action>
       <SaveDraft>Zapisz kopię roboczą</SaveDraft>
       <FastPublish>Szybkie publikowanie</FastPublish>
-      <Preferences>Preferencje</Preferences>
+      <Preferences>Preferences</Preferences>
       <Close>#{word.close}</Close>
     </action>
     <msg>
@@ -278,7 +280,7 @@
 
   <UIPermissionManager>
     <label>
-      <UIPermissionInputSetWithAction>Uprawnienie</UIPermissionInputSetWithAction>
+      <UIPermissionInputSetWithAction>Permission</UIPermissionInputSetWithAction>
       <UIAccessibleCheckboxInput>Prawo dostępu</UIAccessibleCheckboxInput>
       <UIEditableCheckboxInput>Prawo edycji</UIEditableCheckboxInput>
     </label>
@@ -294,33 +296,33 @@
 
   <UIPermissionManagerGrid>
     <header>
-      <owner>Uprawnienie</owner>
+      <owner>Permission</owner>
       <accessible>Dostępny</accessible>
       <editable>Edytowalne</editable>
       <action>Akcja</action>
     </header>
     <msg>
-      <confirm-delete-permission>Czy na pewno chcesz usunąć to uprawnienie?</confirm-delete-permission>
+      <confirm-delete-permission>Are you sure you want to delete this permission?</confirm-delete-permission>
       <no-permission-remove>Nie masz uprawnień.</no-permission-remove>
-      <access-denied>Odmowa dostępu.</access-denied>
+      <access-denied>Access denied.</access-denied>
       <node-locked>Element ścieżki {0} lub jeden z jej rodziców jest zablokowany.</node-locked>
       <userOrGroup-required>Musisz wybrać użytkownika lub grupę.</userOrGroup-required>
       <checkbox-require>Musisz ustawić zakres uprawnień.</checkbox-require>
-      <node-checkedin>W pierwszej kolejności musisz sprawdzić.</node-checkedin>
+      <node-checkedin>You must check out first.</node-checkedin>
     </msg>
   </UIPermissionManagerGrid>
 
   <UIPermissionInputSetWithAction>
     <title>
-      <SelectUser>Wybierz użytkownika</SelectUser>
-      <SelectMember>Wybierz członka</SelectMember>
+      <SelectUser>Select User</SelectUser>
+      <SelectMember>Select Member</SelectMember>
       <AddAny>Nie dodano żadnych uprawnień</AddAny>
     </title>
   </UIPermissionInputSetWithAction>
 
   <UIUserSelectorPopupWindow>
     <title>
-      <UIUserContainer>Wybór Użytkownika</UIUserContainer>
+      <UIUserContainer>User Selector</UIUserContainer>
     </title>
   </UIUserSelectorPopupWindow>
 
@@ -332,14 +334,14 @@
 
   <UIGroupMemberSelector>
     <label>
-      <selectGroup>Wybierz grupę</selectGroup>
-      <selectMembership>Wybierz członkostwo</selectMembership>
+      <selectGroup>Select Group</selectGroup>
+      <selectMembership>Select Membership</selectMembership>
     </label>
   </UIGroupMemberSelector>
 
   <UIContentDialogPreference>
     <action>
-      <Back>Powrót</Back>
+      <Back>Back</Back>
     </action>
   </UIContentDialogPreference>
 
@@ -393,9 +395,9 @@
   
   <ContentSelector>
     <title>
-      <PersonalDrives>Dyski osobiste</PersonalDrives>
-      <GeneralDrives>Dyski ogólne</GeneralDrives>
-      <GroupDrives>Dyski grupowe</GroupDrives>
+      <PersonalDrives>Personal Drives</PersonalDrives>
+      <GeneralDrives>General Drives</GeneralDrives>
+      <GroupDrives>Group Drives</GroupDrives>
       <Private>Prywatny</Private>
       <Public>Publiczne</Public>
       <BackupCenter>Centrum kopii zapasowych</BackupCenter>
@@ -411,7 +413,7 @@
       <Systemfiles>Pliki systemowe</Systemfiles>
       <ValidationRequestsDocumentsCenter>Centrum sprawdzania poprawności dokumentów</ValidationRequestsDocumentsCenter>
       <ManagedSites>Zarządzanie stronami</ManagedSites>
-      <SharedSite>Podgląd strony</SharedSite>
+      <SharedSite>Shared Site</SharedSite>
     </title>
   </ContentSelector>
   

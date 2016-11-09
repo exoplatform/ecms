@@ -74,7 +74,7 @@
     <dialog>
       <label>
         <name>#{word.name}</name>
-        <url>URL</url>
+        <url>Url</url>
         <description>Descrizione</description>
       </label>
     </dialog>

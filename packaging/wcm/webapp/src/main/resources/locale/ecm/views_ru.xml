@@ -46,6 +46,8 @@
         <pdf-max-page>The preview is not available for content with over {0} pages.</pdf-max-page>
         <using-webDAV>или открыть в MS Office</using-webDAV>
         <open-on-desktop>Open on Desktop</open-on-desktop>
+        <open-in-documents>Open in Documents</open-in-documents>
+        <open-in-documents-tooltip>Open this file in Documents app</open-in-documents-tooltip>
         <file-size-too-big>Слишком большой размер содержимого этой страницы. Вам необходимо скачать и открыть в клиенте.</file-size-too-big>
         <webDAV>Показать через WebDAV</webDAV>
         <download>Загрузить</download>

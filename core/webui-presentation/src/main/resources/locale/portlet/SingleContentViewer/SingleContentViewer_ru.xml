@@ -61,7 +61,7 @@
       <Advance>Расширенные</Advance>
       <ContextCaption>Динамическая навигация</ContextCaption>
       <UISCVContextualRadioBox>Контекстуальное содержание</UISCVContextualRadioBox>
-      <UISCVParameterInputBox>От</UISCVParameterInputBox>
+      <UISCVParameterInputBox>by</UISCVParameterInputBox>
       <PrintSettingBlock>Настройки печати</PrintSettingBlock>
       <UISCVPrintPageParameter>с</UISCVPrintPageParameter>
       <UISCVConfigPrintPageFormInputSet>Показать на странице</UISCVConfigPrintPageFormInputSet>
@@ -100,7 +100,7 @@
   </UISCVConfigPrintPageFormInputSet>
   <UISCVConfigPrintPageSelectorPopupWindow>
     <title>
-      <UIPageSelector>Указатель страницы</UIPageSelector>
+      <UIPageSelector>Page Selector</UIPageSelector>
     </title>
   </UISCVConfigPrintPageSelectorPopupWindow>
   <PublicationStates>

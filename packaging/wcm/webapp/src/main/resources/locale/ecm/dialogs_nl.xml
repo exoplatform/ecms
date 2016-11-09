@@ -311,18 +311,18 @@
 <yes>Ja</yes>
 <true>Waar</true>
 <false>Onwaar</false>
-<Electronic>Elektronische</Electronic>
-<Paper>Papier</Paper>
+<Electronic>Electronic</Electronic>
+<Paper>Paper</Paper>
 <NONE>Geen</NONE>
-<CLASSIFIED>Geclassificeerde</CLASSIFIED>
+<CLASSIFIED>Classified</CLASSIFIED>
 <UNCLASSIFIED>Un Classified</UNCLASSIFIED>
-<NOCONTRACT>Geen Contract</NOCONTRACT>
+<NOCONTRACT>No Contract</NOCONTRACT>
 <one-minute>Eén minuut</one-minute>
 <hourly>Per uur</hourly>
-<daily>Dagelijks</daily>
-<quarterly>Per kwartaal</quarterly>
+<daily>Daily</daily>
+<quarterly>Quarterly</quarterly>
 <yearly>Jaarlijks</yearly>
-<ten-years>Tien jaar</ten-years>
+<ten-years>Ten Years</ten-years>
 <read>Actie van de gebruiker</read>
   <schedule>Planner</schedule>
   <node_added>Inhoud toevoeging</node_added>
@@ -334,8 +334,8 @@
   <ScriptAction>
     <dialog>
       <label>
-        <isDeep>Is diep</isDeep>
-        <nodetypes>Node type</nodetypes>
+        <isDeep>Is Deep</isDeep>
+        <nodetypes>Node Types</nodetypes>
         <affectedNodeTypeNames>Node met probleem</affectedNodeTypeNames>
       </label>
     </dialog>
@@ -354,8 +354,8 @@
   <EnableVersioning>
     <dialog>
       <label>
-        <isDeep>Is diep</isDeep>
-        <nodetypes>Node type</nodetypes>
+        <isDeep>Is Deep</isDeep>
+        <nodetypes>Node Types</nodetypes>
         <affectedNodeTypeNames>Node met probleem</affectedNodeTypeNames>
       </label>
     </dialog>
@@ -364,8 +364,8 @@
   <AutoVersioning>
     <dialog>
       <label>
-        <isDeep>Is diep</isDeep>
-        <nodetypes>Node type</nodetypes>
+        <isDeep>Is Deep</isDeep>
+        <nodetypes>Node Types</nodetypes>
         <affectedNodeTypeNames>Node met probleem</affectedNodeTypeNames>
       </label>
     </dialog>

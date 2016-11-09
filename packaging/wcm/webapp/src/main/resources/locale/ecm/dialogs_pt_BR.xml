@@ -9,7 +9,7 @@
         <end-time>Hora de fim</end-time>
         <start-time>Hora de início</start-time>
         <lifecycle>Ciclo de vida</lifecycle>
-        <mimeType>Mime Type</mimeType>
+        <mimeType>Tipo Mime</mimeType>
         <repeat-count>Contagem de testes</repeat-count>
         <time-interval>Intervalo de tempo</time-interval>
         <query-items>Itens da Consulta</query-items>
@@ -54,8 +54,8 @@
         <name>#{word.name}</name>
         <categories>Categorias</categories>
         <mimeType>#{Ecm.dialog.label.mimeType}</mimeType>
-        <width>Width</width>
-        <height>Height</height>
+        <width>Largura</width>
+        <height>Altura</height>
         <content>#{word.content}</content>
         <re-upload>O arquivo já existe. Você pode excluí-lo e enviar outro arquivo a partir daqui.</re-upload>
       </label>

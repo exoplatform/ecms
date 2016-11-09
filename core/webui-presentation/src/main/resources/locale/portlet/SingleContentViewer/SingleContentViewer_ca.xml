@@ -4,7 +4,7 @@
     <title>
       <QuickEdit>Edita-ho a l'Explorador de contingut</QuickEdit>
       <print>Imprimeix aquesta pàgina</print>
-      <FastPublish>Publica-ho</FastPublish>
+      <FastPublish>Publish</FastPublish>
     </title>
     <label>
       <draft>Esborrany</draft>
@@ -42,15 +42,15 @@
       <Save>#{word.save}</Save>
       <Abort>Anul·la</Abort>
       <Cancel>#{word.cancel}</Cancel>
-      <Print>Imprimeix</Print>
+      <Print>Print</Print>
       <Close>#{word.close}</Close>
     </action>
-    <title>Preferències del Destall del Contingut</title>
+    <title>Content Detail Preferences</title>
     <label>
       <Back>Torna a la pàgina anterior</Back>
-      <Edit>Edita</Edit>
+      <Edit>Edit</Edit>
       <Preferences>Preferències</Preferences>
-      <Title>Preferències del Destall del Contingut</Title>
+      <Title>Content Detail Preferences</Title>
       <UISCVShowTitleConfigurationCheckBox>Mostra el títol</UISCVShowTitleConfigurationCheckBox>
       <UISCVShowDateConfigurationCheckBox>Mostra la data</UISCVShowDateConfigurationCheckBox>
       <UISCVShowOptionBarConfigurationCheckBox>Mostra barra d'opcions</UISCVShowOptionBarConfigurationCheckBox>
@@ -58,7 +58,7 @@
       <ContentPathBlock>Selecció del contingut</ContentPathBlock>
       <UISCVConfigItemPathFormInputSet>Ruta  del contingut</UISCVConfigItemPathFormInputSet>
     <UISCVContentPathConfigurationInputBox>Ruta  del contingut</UISCVContentPathConfigurationInputBox>
-      <Advance>Avançat</Advance>
+      <Advance>Advanced</Advance>
       <ContextCaption>Navegació Dinàmica</ContextCaption>
       <UISCVContextualRadioBox>Contingut contextual</UISCVContextualRadioBox>
       <UISCVParameterInputBox>per</UISCVParameterInputBox>
@@ -80,10 +80,10 @@
     </msg>
     <tab>
       <label>
-        <UISCVConfigContentFormInputSet>Selecció del contingut</UISCVConfigContentFormInputSet>
+        <UISCVConfigContentFormInputSet>Content Selection</UISCVConfigContentFormInputSet>
         <UISCVConfigDisplayFormInputSet>Configuració de la visualització</UISCVConfigDisplayFormInputSet>
         <UISCVConfigPrintFormInputSet>Impressió</UISCVConfigPrintFormInputSet>
-        <UISCVConfigAdvancedFormInputSet>Avançat</UISCVConfigAdvancedFormInputSet>
+        <UISCVConfigAdvancedFormInputSet>Advanced</UISCVConfigAdvancedFormInputSet>
       </label>
     </tab>
   </UISCVPreferences>
@@ -100,17 +100,17 @@
   </UISCVConfigPrintPageFormInputSet>
   <UISCVConfigPrintPageSelectorPopupWindow>
     <title>
-      <UIPageSelector>Selector de pàgina</UIPageSelector>
+      <UIPageSelector>Page Selector</UIPageSelector>
     </title>
   </UISCVConfigPrintPageSelectorPopupWindow>
   <PublicationStates>
-    <archived>Arxivat</archived>
-    <obsolete>Obsolet</obsolete>
-    <unpublished>No publicat</unpublished>
-    <enrolled>Inscrit</enrolled>
+    <archived>Archived</archived>
+    <obsolete>Obsolete</obsolete>
+    <unpublished>Unpublished</unpublished>
+    <enrolled>Enrolled</enrolled>
     <draft>Esborrany</draft>
-    <pending>Pendent</pending>
-    <approved>Aprovat</approved>
+    <pending>Pending</pending>
+    <approved>Approved</approved>
     <inreview>Sota Revisió</inreview>
     <staged>Llest per publicar</staged>
     <published>Publicat</published>

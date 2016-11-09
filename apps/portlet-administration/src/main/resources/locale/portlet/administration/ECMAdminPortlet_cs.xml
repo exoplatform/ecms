@@ -40,13 +40,11 @@
   -->
   <UITaxonomyWorkingArea>
     <msg>
-      <referential-integrity>Nelze přečíst ze zdrojového souboru nebo cílová kategorie je podkategorie.
-      </referential-integrity>
+      <referential-integrity>Nelze přečíst ze zdrojového souboru nebo cílová kategorie je podkategorie.</referential-integrity>
       <no-taxonomy-selected>Musíte kopírovat nebo vyjmout alespoň jednu kategorii.</no-taxonomy-selected>
       <node-is-cutting>Zde nelze vložit. Uzel {0} kategorie může být vyjmut.</node-is-cutting>
       <can-not-paste>Ve schránce neexistují žádná data k vložení.</can-not-paste>
-      <reference-exception>Tuto kategorii nelze odstranit, protože je v současné době odkazována obsahem.
-      </reference-exception>
+      <reference-exception>Tuto kategorii nelze odstranit, protože je v současné době odkazována obsahem.</reference-exception>
       <path-error>Došlo k chybě při odebírání toho uzlu kategorie.</path-error>
     </msg>
   </UITaxonomyWorkingArea>
@@ -71,13 +69,10 @@
   <UITaxonomyTreeContainer>
     <tab>
       <info>
-        <UITaxonomyTreeMainForm>Zadejte název kategorie, cestu k pracovnímu a domovskému adresáři.
-        </UITaxonomyTreeMainForm>
+        <UITaxonomyTreeMainForm>Zadejte název kategorie, cestu k pracovnímu a domovskému adresáři.</UITaxonomyTreeMainForm>
         <UIPermissionTreeManager>Nastavení oprávnění pro strom kategorií.</UIPermissionTreeManager>
-        <UIActionTaxonomyManager>Přidejte akci do stromu kategorií pro dokončení vytvoření nebo aktualizaci.
-        </UIActionTaxonomyManager>
-        <UITaxonomyTreeCreateChild>Upravte taxonomii stromu přidáním, kopírováním, vyjmutím a výběrem oprávnění.
-        </UITaxonomyTreeCreateChild>
+        <UIActionTaxonomyManager>Přidejte akci do stromu kategorií pro dokončení vytvoření nebo aktualizaci.</UIActionTaxonomyManager>
+        <UITaxonomyTreeCreateChild>Upravte taxonomii stromu přidáním, kopírováním, vyjmutím a výběrem oprávnění.</UITaxonomyTreeCreateChild>
       </info>
     </tab>
     <msg>
@@ -255,8 +250,7 @@
     <msg>
       <confirm-delete>Jste si jisti, že chcete odstranit tato metadata?</confirm-delete>
       <delete-successful>Šablony {0} byly úspěšně odstraněny.</delete-successful>
-      <path-not-found-exception>Tato metadata byla odstraněna nebo změněna. Prosím klikněte na tlačítko Obnovit.
-      </path-not-found-exception>
+      <path-not-found-exception>Tato metadata byla odstraněna nebo změněna. Prosím klikněte na tlačítko Obnovit.</path-not-found-exception>
     </msg>
     <action>
       <Add>Přidat Metadata</Add>
@@ -567,11 +561,8 @@
     </action>
     <msg>
       <register-successfully>Typ uzlu {0}' byl úspěšně zaregistrován.</register-successfully>
-      <supertype-is-madatory>Nadtyp je povinný, když zaregistrujete nový typ uzlu. Vyberte prosím alespoň jeden
-        nadtyp.
-      </supertype-is-madatory>
-      <register-failed>Registrace typu uzlu neproběhla úspěšně. Buď již existuje, nebo nadtyp je neplatný.
-      </register-failed>
+      <supertype-is-madatory>Nadtyp je povinný, když zaregistrujete nový typ uzlu. Vyberte prosím alespoň jeden nadtyp.</supertype-is-madatory>
+      <register-failed>Registrace typu uzlu neproběhla úspěšně. Buď již existuje, nebo nadtyp je neplatný.</register-failed>
       <nodeType-name>Je požadován název typu uzlu.</nodeType-name>
       <fileName-invalid>Název souboru obsahuje některé neplatné znaky.</fileName-invalid>
       <node-type-exists>Typ uzlu '{0}' již existuje.</node-type-exists>
@@ -590,8 +581,7 @@
     </tab>
     <msg>
       <property-name>Název definice vlastnosti byla neplatná.</property-name>
-      <not-supported-value-constraints>Tento vyžadovaný typ nepodporuje omezení hodnot.
-      </not-supported-value-constraints>
+      <not-supported-value-constraints>Tento vyžadovaný typ nepodporuje omezení hodnot.</not-supported-value-constraints>
     </msg>
   </UIPropertyDefinitionForm>
   <UIChildNodeDefinitionForm>
@@ -1393,7 +1383,7 @@
       <set_property>Právo nastavit vlastnost</set_property>
       <remove>Právo mazat</remove>
     </label>
-    <title>Add a permission to this node</title>
+    <title>Přidání oprávnění do tohoto uzlu</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>Save</Save>
@@ -1415,7 +1405,7 @@
 
   <PopupTaxonomyTreePermission>
     <title>
-      <UIPermissionSelector>Práva</UIPermissionSelector>
+      <UIPermissionSelector>Vyberte práva</UIPermissionSelector>
     </title>
   </PopupTaxonomyTreePermission>
 
@@ -1496,7 +1486,7 @@
       <add_node>Změnit</add_node>
       <remove>Odstranit</remove>
     </label>
-    <title>Add permission to this node</title>
+    <title>Přidat oprávnění k tomuto uzlu</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>#{word.save}</Save>
@@ -1747,7 +1737,7 @@
   -->
   <AddNewTemplatePermission>
     <title>
-      <UIPermissionSelector>Práva</UIPermissionSelector>
+      <UIPermissionSelector>Vyberte práva</UIPermissionSelector>
     </title>
   </AddNewTemplatePermission>
   <TemplatePermission>
@@ -1788,12 +1778,12 @@
   </DialogForm>
   <DialogFormTemplatePermission>
     <title>
-      <UIPermissionSelector>Práva</UIPermissionSelector>
+      <UIPermissionSelector>Vyberte práva</UIPermissionSelector>
     </title>
   </DialogFormTemplatePermission>
   <ViewFormTemplatePermission>
     <title>
-      <UIPermissionSelector>Práva</UIPermissionSelector>
+      <UIPermissionSelector>Vyberte práva</UIPermissionSelector>
     </title>
   </ViewFormTemplatePermission>
   <TemplateContainerPopup>
@@ -1986,7 +1976,7 @@
   </EditQueryForm>
   <PermissionPopup>
     <title>
-      <UIGroupMemberSelector>Práva</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Vyberte práva</UIGroupMemberSelector>
     </title>
   </PermissionPopup>
   <!--
@@ -2027,9 +2017,7 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <range-validator>Rozsah je neplatný. Formát musí být: a..b, kde a, b jsou celá kladná čísla. Můžete použít *
-        namísto b k označení, že rozsah je neomezený.
-      </range-validator>
+      <range-validator>Rozsah je neplatný. Formát musí být: a..b, kde a, b jsou celá kladná čísla. Můžete použít * namísto b k označení, že rozsah je neomezený.</range-validator>
       <error-update>Aktualizace se nezdařila. Vaše informace je neplatná.</error-update>
       <item-not-existing>Nelze uložit změny na tohoto tagu, protože již neexistuje v databázi.</item-not-existing>
     </msg>
@@ -2345,8 +2333,7 @@
       <UnLock>Odemknout</UnLock>
     </tooltip>
     <msg>
-      <access-denied-exception>Nemáte oprávnění k přístupu uzlu s cestou {0}, nebo tento uzel je odstraněn.
-      </access-denied-exception>
+      <access-denied-exception>Nemáte oprávnění k přístupu uzlu s cestou {0}, nebo tento uzel je odstraněn.</access-denied-exception>
     </msg>
   </UILockNodeList>
   <EditUnLockForm>
@@ -2460,8 +2447,7 @@
     </action>
     <msg>
       <xss-vulnerability-character>Pole '{0}' obsahuje XSS zranitelné znaky</xss-vulnerability-character>
-      <xss-vulnerability-character-wo-label>Váš vstup může obsahovat zranitelné znaky XSS
-      </xss-vulnerability-character-wo-label>
+      <xss-vulnerability-character-wo-label>Váš vstup může obsahovat zranitelné znaky XSS</xss-vulnerability-character-wo-label>
     </msg>
   </UIActionForm>
 
@@ -2499,7 +2485,7 @@
       <Add>Přidat</Add>
     </action>
     <label>
-      <userOrGroup>Členství:</userOrGroup>
+      <userOrGroup>Memberships:</userOrGroup>
     </label>
     <msg>
       <userOrGroup-alreadyExists>Toto členství již existuje. Vyberte jinou kombinaci.</userOrGroup-alreadyExists>
@@ -2537,9 +2523,7 @@
   </NodeTypeNameValidator>
   <UIActionForm>
     <msg>
-      <constraint-violation-exception>Uzel '{0}' nelze přidat do '{1}' v prostoru '{2}'. Problém je s oprávněním nebo ve
-        stavu omezení.
-      </constraint-violation-exception>
+      <constraint-violation-exception>Uzel '{0}' nelze přidat do '{1}' v prostoru '{2}'.  Problém je s oprávněním nebo ve stavu omezení.</constraint-violation-exception>
     </msg>
   </UIActionForm>
 
@@ -2550,9 +2534,7 @@
   </UIWorkspaceWizard>
   <UIRepositoryForm>
     <msg>
-      <not-complete-repository>The repository is being created. You need to wait a few minutes before creating another
-        one.
-      </not-complete-repository>
+      <not-complete-repository>The repository is being created. You need to wait a few minutes before creating another one.</not-complete-repository>
     </msg>
   </UIRepositoryForm>
 
@@ -2613,9 +2595,7 @@
   </UIPageIterator>
   <UILockNodeList>
     <msg>
-      <can-not-unlock-node>Nemáte oprávnění k odemknutí tohoto uzlu. Obraťte se na správce, abyste dostali odpovídající
-        právo.
-      </can-not-unlock-node>
+      <can-not-unlock-node>Nemáte oprávnění k odemknutí tohoto uzlu. Obraťte se na správce, abyste dostali odpovídající právo.</can-not-unlock-node>
     </msg>
   </UILockNodeList>
 </bundle>

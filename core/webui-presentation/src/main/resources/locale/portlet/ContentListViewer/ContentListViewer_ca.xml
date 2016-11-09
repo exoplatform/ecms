@@ -2,7 +2,7 @@
 <bundle>
   <UICLVContainer>
     <label>
-      <Preferences>Preferències</Preferences>
+      <Preferences>Preferences</Preferences>
       <AddContent>Afegeix Continguts</AddContent>
       <ManageContent>Gestiona el contingut</ManageContent>
     </label>
@@ -20,14 +20,14 @@
   </UIViewerManagementPopupWindow>
   <UICLVConfig>
     <label>
-      <Title>Preferències del Llistat de Contingut</Title>
+      <Title>Content List Preferences</Title>
       <ContentSelectionBlock>Selecció del contingut</ContentSelectionBlock>
       <UICLVConfigDisplayModeFormRadioBoxInput>Mode</UICLVConfigDisplayModeFormRadioBoxInput>
       <UICLVConfigItemPathFormInputSet>Ruta de la Carpeta</UICLVConfigItemPathFormInputSet>
     <UICLVConfigItemPathFormStringInput>Ruta de la Carpeta</UICLVConfigItemPathFormStringInput>
       <UICLVConfigOrderByFormSelectBox>Ordena per</UICLVConfigOrderByFormSelectBox>
       <option>
-        <exo:title>Títol</exo:title>
+        <exo:title>Title</exo:title>
         <exo:dateCreated>Data de creació</exo:dateCreated>
         <exo:lastModifiedDate>Data de modificació</exo:lastModifiedDate>
         <publication:liveDate>Data de publicació</publication:liveDate>
@@ -40,7 +40,7 @@
       <UICLVConfigHeaderFormStringInput>Capçalera</UICLVConfigHeaderFormStringInput>
       <UICLVConfigDisplayTemplateFormSelectBox>Plantilla</UICLVConfigDisplayTemplateFormSelectBox>
       <UICLVConfigPaginatorTemplateFormSelectBox>Paginació</UICLVConfigPaginatorTemplateFormSelectBox>
-      <UICLVConfigItemsPerPageFormStringInput>Elements per Pàgina</UICLVConfigItemsPerPageFormStringInput>
+      <UICLVConfigItemsPerPageFormStringInput>Items per Page</UICLVConfigItemsPerPageFormStringInput>
       <UICLVConfigShowIllustrationFormCheckboxInput>Mostra la imatge</UICLVConfigShowIllustrationFormCheckboxInput>
       <UICLVConfigShowSummaryFormCheckboxInput>Show Summary</UICLVConfigShowSummaryFormCheckboxInput>
       <UICLVConfigShowHeaderFormCheckboxInput>Show Header</UICLVConfigShowHeaderFormCheckboxInput>
@@ -83,7 +83,7 @@
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
-      <delete>Suprimeix</delete>
+      <delete>Delete</delete>
     </action>
     <msg>
       <not-valid-path>The Folder Path is invalid.</not-valid-path>
@@ -144,7 +144,7 @@
     </label>
     <action>
       <refresh>RecarregaRecarrega</refresh>
-      <edit>Edita-ho a l'Explorador de contingut</edit>
+      <edit>Edit in Content Explorer</edit>
       <delete>Suprimeix</delete>
       <publish>Publica-ho</publish>
     </action>
@@ -171,18 +171,18 @@
   <PublicationStates>
     <archived>Arxivat</archived>
     <obsolete>Obsolet</obsolete>
-    <unpublished>No publicat</unpublished>
+    <unpublished>Unpublished</unpublished>
     <enrolled>Inscrit</enrolled>
     <draft>Esborrany</draft>
-    <pending>Pendent</pending>
+    <pending>Pending</pending>
     <approved>Aprovada</approved>
-    <inreview>En  revisió</inreview>
+    <inreview>In Review</inreview>
     <staged>Llest per publicar</staged>
     <published>Publicat</published>
   </PublicationStates>
   <UICLVConfigCacheEnableRadioBoxInput>
     <label>
-      <ENABLE>Restringit per l'Autenticació</ENABLE>
+      <ENABLE>Restricted by Authentication</ENABLE>
       <DISABLE>Restricted by User Roles</DISABLE>
     </label>
   </UICLVConfigCacheEnableRadioBoxInput>

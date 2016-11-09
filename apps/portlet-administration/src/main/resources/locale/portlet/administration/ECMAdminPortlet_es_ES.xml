@@ -40,15 +40,11 @@
   -->
   <UITaxonomyWorkingArea>
     <msg>
-      <referential-integrity>No se puede leer desde el archivo de origen o la categoría de destino es una
-        subcategoría.
-      </referential-integrity>
+      <referential-integrity>No se puede leer desde el archivo de origen o la categoría de destino es una subcategoría.</referential-integrity>
       <no-taxonomy-selected>Debe copiar o cortar al menos una categoría.</no-taxonomy-selected>
-      <node-is-cutting>No se puede pegar aquí. Podría ser que se está cortando el nodo de la categoría '{0}'.
-      </node-is-cutting>
+      <node-is-cutting>No se puede pegar aquí. Podría ser que se está cortando el nodo de la categoría '{0}'.</node-is-cutting>
       <can-not-paste>No hay datos en el portapapeles para pegar.</can-not-paste>
-      <reference-exception>No se puede eliminar esta categoría, porque actualmente está referenciada por un contenido.
-      </reference-exception>
+      <reference-exception>No se puede eliminar esta categoría, porque actualmente está referenciada por un contenido.</reference-exception>
       <path-error>Error al eliminar este nodo de categoría.</path-error>
     </msg>
   </UITaxonomyWorkingArea>
@@ -73,14 +69,10 @@
   <UITaxonomyTreeContainer>
     <tab>
       <info>
-        <UITaxonomyTreeMainForm>Especifique el nombre de la categoría, el espacio de trabajo y la ruta de inicio.
-        </UITaxonomyTreeMainForm>
+        <UITaxonomyTreeMainForm>Especifique el nombre de la categoría, el espacio de trabajo y la ruta de inicio.</UITaxonomyTreeMainForm>
         <UIPermissionTreeManager>Establecer permisos para el árbol de la categoría.</UIPermissionTreeManager>
-        <UIActionTaxonomyManager>Agregar una acción al árbol de categorías para completar la creación o actualización.
-        </UIActionTaxonomyManager>
-        <UITaxonomyTreeCreateChild>Editar el árbol de la taxonomía, añadiendo, copiando, cortando y seleccionando los
-          permisos.
-        </UITaxonomyTreeCreateChild>
+        <UIActionTaxonomyManager>Agregar una acción al árbol de categorías para completar la creación o actualización.</UIActionTaxonomyManager>
+        <UITaxonomyTreeCreateChild>Editar el árbol de la taxonomía, añadiendo, copiando, cortando y seleccionando los permisos.</UITaxonomyTreeCreateChild>
       </info>
     </tab>
     <msg>
@@ -165,8 +157,7 @@
       <Save>#{word.save}</Save>
     </action>
     <msg>
-      <name-not-allowed>Nombre vacío o caracteres especiales no están permitidos en el nombre de la acción.
-      </name-not-allowed>
+      <name-not-allowed>Nombre vacío o caracteres especiales no están permitidos en el nombre de la acción.</name-not-allowed>
       <path-invalid>Esta ruta no es válida.</path-invalid>
       <taxonomy-existed>El árbol de la categoría ya existe.</taxonomy-existed>
       <taxonomy-node-existed>La categoría para este nodo ya existe.</taxonomy-node-existed>
@@ -259,9 +250,7 @@
     <msg>
       <confirm-delete>¿Está seguro que desea eliminar estos metadatos?</confirm-delete>
       <delete-successful>Las plantillas de '{0}' se han eliminado correctamente.</delete-successful>
-      <path-not-found-exception>Estos metadatos han sido eliminados o cambiados. Por favor, haga clic en el botón
-        Actualizar.
-      </path-not-found-exception>
+      <path-not-found-exception>Estos metadatos han sido eliminados o cambiados. Por favor, haga clic en el botón Actualizar.</path-not-found-exception>
     </msg>
     <action>
       <Add>Agregar metadatos</Add>
@@ -572,11 +561,8 @@
     </action>
     <msg>
       <register-successfully>El tipo de nodo '{0}' se registró correctamente.</register-successfully>
-      <supertype-is-madatory>El super tipo es obligatorio cuando se registre un nuevo tipo de nodo. Por favor,
-        seleccione al menos un super tipo.
-      </supertype-is-madatory>
-      <register-failed>El registro del tipo de nodo no tuvo éxito. Ya existe o no es válido el supertipo.
-      </register-failed>
+      <supertype-is-madatory>El super tipo es obligatorio cuando se registre un nuevo tipo de nodo. Por favor, seleccione al menos un super tipo.</supertype-is-madatory>
+      <register-failed>El registro del tipo de nodo no tuvo éxito. Ya existe o no es válido el supertipo.</register-failed>
       <nodeType-name>Se requiere el nombre del tipo de nodo.</nodeType-name>
       <fileName-invalid>El nombre de la carpeta contiene algunos caracteres no válidos.</fileName-invalid>
       <node-type-exists>El tipo de nodo '{0}' ya existe.</node-type-exists>
@@ -595,8 +581,7 @@
     </tab>
     <msg>
       <property-name>El nombre de la definición de la propiedad no es válido.</property-name>
-      <not-supported-value-constraints>Este tipo requerido no apoya restricciones de valor.
-      </not-supported-value-constraints>
+      <not-supported-value-constraints>Este tipo requerido no apoya restricciones de valor.</not-supported-value-constraints>
     </msg>
   </UIPropertyDefinitionForm>
   <UIChildNodeDefinitionForm>
@@ -682,8 +667,7 @@
     <msg>
       <filename-error>Examinar un archivo de tipo de nodo para importar.</filename-error>
       <data-file-error>Sólo los archivos .xml o .zip son compatibles para importar.</data-file-error>
-      <data-invalid>Los datos no están válidos. Por favor, compruebe el tipo de archivo y vuelva a intentarlo.
-      </data-invalid>
+      <data-invalid>Los datos no están válidos. Por favor, compruebe el tipo de archivo y vuelva a intentarlo.</data-invalid>
       <nodetype-exist>El tipo de nodo '{0}' ya existe.</nodetype-exist>
       <namespace-invalid>El espacio de nombre '{0}' no es válido.</namespace-invalid>
     </msg>
@@ -753,8 +737,7 @@
     </action>
     <msg>
       <confirm-delete>¿Está seguro que desea eliminar este tipo de acción?</confirm-delete>
-      <cannot-delete>No se puede quitar este tipo de acción porque el sistema todavía lo está utilizando.
-      </cannot-delete>
+      <cannot-delete>No se puede quitar este tipo de acción porque el sistema todavía lo está utilizando.</cannot-delete>
     </msg>
   </UIActionTypeList>
   <!--
@@ -1007,10 +990,10 @@
       <addSymLink>Agregar acceso directo</addSymLink>
       <checkIn>Proteger</checkIn>
       <checkOut>Desproteger</checkOut>
-      <shareDocuments>Compartir</shareDocuments>
-      <openDocument>Edición remota</openDocument>
-      <editProperty>Editar propiedades del documento</editProperty>
-      <uploadNewVersion>Subir nueva versión</uploadNewVersion>
+      <shareDocuments>Share</shareDocuments>
+      <openDocument>Remote Edit</openDocument>
+      <editProperty>Edit Document Properties</editProperty>
+      <uploadNewVersion>Upload a new version</uploadNewVersion>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -1040,7 +1023,7 @@
   </UIViewFormTabPane>
   <PopupViewPermission>
     <title>
-      <UIPermissionSelector>Selector de Permiso</UIPermissionSelector>
+      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
     </title>
   </PopupViewPermission>
 
@@ -1091,7 +1074,7 @@
   -->
   <UITemplateForm>
     <title>
-      <AddPermission>Añadir Permisos</AddPermission>
+      <AddPermission>Add Permission</AddPermission>
     </title>
     <action>
       <Save>#{word.save}</Save>
@@ -1408,8 +1391,7 @@
     </action>
     <msg>
       <checkbox-require>Por favor, seleccione al menos un permiso.</checkbox-require>
-      <userOrGroup-required>Por favor, seleccione un usuario o un grupo antes de guardar el permiso.
-      </userOrGroup-required>
+      <userOrGroup-required>Por favor, seleccione un usuario o un grupo antes de guardar el permiso.</userOrGroup-required>
       <not-change-permission>No tiene derecho de añadir el permiso.</not-change-permission>
       <access-denied>¡Acceso denegado! No puede remover este permiso.</access-denied>
     </msg>
@@ -1423,7 +1405,7 @@
 
   <PopupTaxonomyTreePermission>
     <title>
-      <UIPermissionSelector>Selector de Permiso</UIPermissionSelector>
+      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
     </title>
   </PopupTaxonomyTreePermission>
 
@@ -1512,8 +1494,7 @@
     </action>
     <msg>
       <checkbox-require>Por favor, seleccione al menos un permiso.</checkbox-require>
-      <userOrGroup-required>Por favor, seleccione un usuario o un grupo antes de guardar el permiso.
-      </userOrGroup-required>
+      <userOrGroup-required>Por favor, seleccione un usuario o un grupo antes de guardar el permiso.</userOrGroup-required>
       <not-change-permission>No tiene derecho de añadir el permiso.</not-change-permission>
       <access-denied>¡Acceso denegado! No puede remover este permiso.</access-denied>
     </msg>
@@ -1676,8 +1657,7 @@
 
   <CLVTemplatePopup_ContentTemplateContainer>
     <title>
-      <UICLVTemplateForm_ContentTemplateContainer>Agregar plantilla de lista
-      </UICLVTemplateForm_ContentTemplateContainer>
+      <UICLVTemplateForm_ContentTemplateContainer>Agregar plantilla de lista</UICLVTemplateForm_ContentTemplateContainer>
     </title>
   </CLVTemplatePopup_ContentTemplateContainer>
 
@@ -1757,7 +1737,7 @@
   -->
   <AddNewTemplatePermission>
     <title>
-      <UIPermissionSelector>Selector de Permiso</UIPermissionSelector>
+      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
     </title>
   </AddNewTemplatePermission>
   <TemplatePermission>
@@ -1798,12 +1778,12 @@
   </DialogForm>
   <DialogFormTemplatePermission>
     <title>
-      <UIPermissionSelector>Selector de Permiso</UIPermissionSelector>
+      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
     </title>
   </DialogFormTemplatePermission>
   <ViewFormTemplatePermission>
     <title>
-      <UIPermissionSelector>Selector de Permiso</UIPermissionSelector>
+      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
     </title>
   </ViewFormTemplatePermission>
   <TemplateContainerPopup>
@@ -1960,9 +1940,7 @@
     <msg>
       <confirm-delete>¿Estás seguro de eliminar esta consulta?</confirm-delete>
       <query-not-existed>La consulta ya no existe.</query-not-existed>
-      <can-not-remove>Error al eliminar la consulta. Póngase en contacto con el administrador para obtener
-        información.
-      </can-not-remove>
+      <can-not-remove>Error al eliminar la consulta. Póngase en contacto con el administrador para obtener información.</can-not-remove>
     </msg>
   </UIQueriesList>
   <UIQueriesForm>
@@ -1998,7 +1976,7 @@
   </EditQueryForm>
   <PermissionPopup>
     <title>
-      <UIGroupMemberSelector>Selector de Permiso</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Permission Selector</UIGroupMemberSelector>
     </title>
   </PermissionPopup>
   <!--
@@ -2039,12 +2017,9 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <range-validator>El rango es inválido. El formato debe ser: a..b, entre los que a, b son números enteros
-        positivos. Puede utilizar * en lugar de b para indicar que el alcance es ilimitado.
-      </range-validator>
+      <range-validator>El rango es inválido. El formato debe ser: a..b, entre los que a, b son números enteros positivos. Puede utilizar * en lugar de b para indicar que el alcance es ilimitado.</range-validator>
       <error-update>Error al actualizar. Su información no es válida.</error-update>
-      <item-not-existing>No puede guardar cambios a esta etiqueta que ya no existe en la base de datos.
-      </item-not-existing>
+      <item-not-existing>No puede guardar cambios a esta etiqueta que ya no existe en la base de datos.</item-not-existing>
     </msg>
   </UITagStyleForm>
   <FolksonomyPopup>
@@ -2358,8 +2333,7 @@
       <UnLock>Desbloquear</UnLock>
     </tooltip>
     <msg>
-      <access-denied-exception>No tiene permiso para acceder al nodo con la ruta {0}, o el nodo fue eliminado.
-      </access-denied-exception>
+      <access-denied-exception>No tiene permiso para acceder al nodo con la ruta {0}, o el nodo fue eliminado.</access-denied-exception>
     </msg>
   </UILockNodeList>
   <EditUnLockForm>
@@ -2472,10 +2446,8 @@
       <NextViewTree>Siguiente</NextViewTree>
     </action>
     <msg>
-      <xss-vulnerability-character>El campo '{0}' contiene caracteres de vulnerabilidad XSS
-      </xss-vulnerability-character>
-      <xss-vulnerability-character-wo-label>Su campo de entrada puede contenr carácteres de vulnerabilidad XSS
-      </xss-vulnerability-character-wo-label>
+      <xss-vulnerability-character>El campo '{0}' contiene caracteres de vulnerabilidad XSS</xss-vulnerability-character>
+      <xss-vulnerability-character-wo-label>Su campo de entrada puede contenr carácteres de vulnerabilidad XSS</xss-vulnerability-character-wo-label>
     </msg>
   </UIActionForm>
 
@@ -2513,7 +2485,7 @@
       <Add>Añadir</Add>
     </action>
     <label>
-      <userOrGroup>afiliaciones:</userOrGroup>
+      <userOrGroup>Memberships:</userOrGroup>
     </label>
     <msg>
       <userOrGroup-alreadyExists>La afiliación ya existe. Por favor, seleccione otra.</userOrGroup-alreadyExists>
@@ -2551,9 +2523,7 @@
   </NodeTypeNameValidator>
   <UIActionForm>
     <msg>
-      <constraint-violation-exception>El nodo '{0}' no se puede agregar a '{1}' en el espacio de trabajo '{2}'. Hay un
-        problema con los permisos o la condición de restricciones.
-      </constraint-violation-exception>
+      <constraint-violation-exception>El nodo '{0}' no se puede agregar a '{1}' en el espacio de trabajo '{2}'.  Hay un problema con los permisos o la condición de restricciones.</constraint-violation-exception>
     </msg>
   </UIActionForm>
 
@@ -2564,8 +2534,7 @@
   </UIWorkspaceWizard>
   <UIRepositoryForm>
     <msg>
-      <not-complete-repository>Se está creando el repositorio. Tiene que esperar unos minutos antes de crear otro.
-      </not-complete-repository>
+      <not-complete-repository>Se está creando el repositorio. Tiene que esperar unos minutos antes de crear otro.</not-complete-repository>
     </msg>
   </UIRepositoryForm>
 
@@ -2626,9 +2595,7 @@
   </UIPageIterator>
   <UILockNodeList>
     <msg>
-      <can-not-unlock-node>No tiene permiso para desbloquear este nodo. Favor de contactar al administrador para
-        conseguir el derecho correcto.
-      </can-not-unlock-node>
+      <can-not-unlock-node>No tiene permiso para desbloquear este nodo.  Favor de contactar al administrador para conseguir el derecho correcto.</can-not-unlock-node>
     </msg>
   </UILockNodeList>
 </bundle>

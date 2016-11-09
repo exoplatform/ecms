@@ -54,8 +54,8 @@
         <name>#{word.name}</name>
         <categories>الفئات</categories>
         <mimeType>#{Ecm.dialog.label.mimeType}</mimeType>
-        <width>Width</width>
-        <height>Height</height>
+        <width>عرض</width>
+        <height>ارتفاع</height>
         <content>#{word.content}</content>
         <re-upload>ملف موجود مسبقا. يمكنك استبدال من قبل حذفه وتحميل ملف آخر من هنا.</re-upload>
       </label>

@@ -55,7 +55,7 @@
       <AdvancedBlock>Pokročilé</AdvancedBlock>
       <UICLVConfigDynamicNavigationLabel>Dynamická navigace</UICLVConfigDynamicNavigationLabel>
       <UICLVConfigContextualFolderRadioBoxInput>Contextual Folder</UICLVConfigContextualFolderRadioBoxInput>
-      <UICLVConfigShowCLVByStringInput>od</UICLVConfigShowCLVByStringInput>
+      <UICLVConfigShowCLVByStringInput>Od</UICLVConfigShowCLVByStringInput>
       <UICLVConfigshowSCVWithStringInput>s</UICLVConfigshowSCVWithStringInput>
       <UICLVConfigTargetPageFormInputSet>Zobrazit na stránce</UICLVConfigTargetPageFormInputSet>
       <content-not-found>Content not found.</content-not-found>

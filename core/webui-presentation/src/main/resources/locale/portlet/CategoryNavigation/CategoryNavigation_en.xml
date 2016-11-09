@@ -14,7 +14,7 @@
 
   <UICategoryNavigationTargetPathFormInputSet>
     <title>
-      <SelectTargetPath></SelectTargetPath>
+      <SelectTargetPath/>
     </title>
   </UICategoryNavigationTargetPathFormInputSet>
 
@@ -25,26 +25,26 @@
       <UICategoryNavigationTreeTitleFormStringInput>Title</UICategoryNavigationTreeTitleFormStringInput>
   
       <UICategoryNavigationTreeNameFormSelectBox>Tree Name</UICategoryNavigationTreeNameFormSelectBox>
-      <UICategoryNavigationTemplateFormSelectBox>Tree Viewer Template</UICategoryNavigationTemplateFormSelectBox>
+      <UICategoryNavigationTemplateFormSelectBox>Tree viewer template</UICategoryNavigationTemplateFormSelectBox>
       
       <UICategoryNavigationTargetPathFormInputSet>Show in Page</UICategoryNavigationTargetPathFormInputSet>      
       <TreeSelectionBlock>Tree Selection</TreeSelectionBlock>
       <DisplaySettingBlock>Display Settings</DisplaySettingBlock>
-      <AdvancedBlock>Advance</AdvancedBlock>
+      <AdvancedBlock>Advanced</AdvancedBlock>
   
-	  <UICategoryNavigationTreePathFormInputSet>Tree Path</UICategoryNavigationTreePathFormInputSet>
-	  <UICategoryNavigationTreePathFormStringInput>Tree Path</UICategoryNavigationTreePathFormStringInput>
+  <UICategoryNavigationTreePathFormInputSet>Target Path</UICategoryNavigationTreePathFormInputSet>
+  <UICategoryNavigationTreePathFormStringInput>Target Path</UICategoryNavigationTreePathFormStringInput>
 	  <UICategoryNavigationHeaderFormStringInput>Header</UICategoryNavigationHeaderFormStringInput>
 	  <UICategoryNavigationAutomaticDetectionCheckBoxInput>Automatic</UICategoryNavigationAutomaticDetectionCheckBoxInput>
 	  <UICategoryNavigationDynamicNavigationLabel>Dynamic Navigation</UICategoryNavigationDynamicNavigationLabel>
 	  <UICategoryNavigationWithClvFormStringInput>with</UICategoryNavigationWithClvFormStringInput>
-	  <UICategoryNavigationTreepathPopupWindow>Tree Path</UICategoryNavigationTreepathPopupWindow>    
+  <UICategoryNavigationTreepathPopupWindow>Target Path</UICategoryNavigationTreepathPopupWindow>    
       
     </label>
     <msg>
       <not-support-encoding>Encoding is not supported.</not-support-encoding>
       <render>An error occurred when rendering.</render>
-      <saving-success>This portlet was updated successfully.</saving-success>
+      <saving-success>The information was updated successfully.</saving-success>
     </msg>
     <action>
       <Save>Save</Save>
@@ -52,7 +52,7 @@
   </UICategoryNavigationConfig>
   <UICategoryNavigationTreeBase>
     <msg>
-      <not-existed-category>This category does not exist.</not-existed-category>
+      <not-existed-category>The category does not exist.</not-existed-category>
     </msg>
   </UICategoryNavigationTreeBase>
 </bundle>

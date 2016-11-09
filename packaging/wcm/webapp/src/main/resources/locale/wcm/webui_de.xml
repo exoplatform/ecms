@@ -34,8 +34,10 @@
 
   <Drives>
     <label>
-      <ManagedSites>Site Management</ManagedSites>
+      <ManagedSites>Seitenmanagement</ManagedSites>
       <SharedSite>Gemeinsame Webseite</SharedSite>
+      <PersonalDocuments>Personal Documents</PersonalDocuments>
+      <UserDocuments>{0} Documents</UserDocuments>
     </label>
   </Drives>
 
@@ -202,15 +204,15 @@
     <msg>
       <time-to-late>Die Suche benötigt zuviel Zeit.</time-to-late>
       <empty-field>Bitte geben Sie ein gültiges Schlüsselwort für die Suche ein.</empty-field>
-      <empty-name>Please enter the name to search</empty-name>
-      <empty-content>Please enter a word or phrase to search</empty-content>
-      <empty-property>Please select a property</empty-property>
-      <empty-property-keyword>Please enter a keyword for the property</empty-property-keyword>
-      <empty-doctype>Please select a document type</empty-doctype>
-      <empty-startDate>"From Date" is required</empty-startDate>
+      <empty-name>Bitte geben Sie den Namen zum suchen ein</empty-name>
+      <empty-content>Bitte geben Sie ein Wort oder Ausdruck zum suchen ein</empty-content>
+      <empty-property>Bitte wählen Sie ein Objekt aus</empty-property>
+      <empty-property-keyword>Bitte geben Sie ein Schlüsselwort für die Eigenschaft ein</empty-property-keyword>
+      <empty-doctype>Bitte wählen Sie einen Dokumenttyp aus</empty-doctype>
+      <empty-startDate>"Von Datum" ist erforderlich</empty-startDate>
       <invalid-format>Ungültiges Datums-/Zeitformat im Feld '{0}'.</invalid-format>
       <invalid-date>"Das Enddatum muss nach dem Anfangsdatum liegen"</invalid-date>
-      <invalid-startDate>"From Date" must not be later than today</invalid-startDate>
+      <invalid-startDate>"Von Datum" darf nicht später als heute sein</invalid-startDate>
       <invalid-nodeType>Der Knotentyp "{0}" ist ungültig. Bitte überprüfen Sie ihn.</invalid-nodeType>
       <invalid-keyword>Das Schlüsselwort ist ungültig. Einige Zeichen werden nicht erkannt.</invalid-keyword>
     </msg>

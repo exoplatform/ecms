@@ -44,9 +44,7 @@
       <no-taxonomy-selected>شما باید حداقل یک دسته را کپی کنید و یا برش دهید.</no-taxonomy-selected>
       <node-is-cutting>نمی توانید در اینجا بچسبانید. دسته '{0}' باید برش داده شود.</node-is-cutting>
       <can-not-paste>هیچ داده ای در کلیپ بورد برای چسباندن وجود دارد.</can-not-paste>
-      <reference-exception>به علت اینکه این دسته در حال حاضر توسط یک محتوا مورد ارجاع واقع شده است، نمی توانید آن را حذف
-        کنید.
-      </reference-exception>
+      <reference-exception>به علت اینکه این دسته در حال حاضر توسط یک محتوا مورد ارجاع واقع شده است، نمی توانید آن را حذف کنید.</reference-exception>
       <path-error>در هنگام حذف دسته خطایی رخ داده است.</path-error>
     </msg>
   </UITaxonomyWorkingArea>
@@ -73,10 +71,8 @@
       <info>
         <UITaxonomyTreeMainForm>نام دسته، فضای کار و مسیر خانه را مشخص کنید.</UITaxonomyTreeMainForm>
         <UIPermissionTreeManager>تنظیم مجوز برای درخت دسته ها.</UIPermissionTreeManager>
-        <UIActionTaxonomyManager>به منظور تکمیل فرآیند ایجاد و یا به روز رسانی، یک اقدام به درخت دسته ها اضافه کنید.
-        </UIActionTaxonomyManager>
-        <UITaxonomyTreeCreateChild>درخت طبقه بندی را با افزودن، کپی کردن، برش دادن و یا انتخاب مجوزها ویرایش نمایید.
-        </UITaxonomyTreeCreateChild>
+        <UIActionTaxonomyManager>به منظور تکمیل فرآیند ایجاد و یا به روز رسانی، یک اقدام به درخت دسته ها اضافه کنید.</UIActionTaxonomyManager>
+        <UITaxonomyTreeCreateChild>درخت طبقه بندی را با افزودن، کپی کردن، برش دادن و یا انتخاب مجوزها ویرایش نمایید.</UITaxonomyTreeCreateChild>
       </info>
     </tab>
     <msg>
@@ -254,8 +250,7 @@
     <msg>
       <confirm-delete>آیا از حذف این فراداده اطمینان دارید؟</confirm-delete>
       <delete-successful>قالب های '{0}' با موفقیت حذف شدند.</delete-successful>
-      <path-not-found-exception>اين فراداده حذف یا تغییرداده شده است. لطفاً روی دکمه تازه سازی کلیک کنید.
-      </path-not-found-exception>
+      <path-not-found-exception>اين فراداده حذف یا تغییرداده شده است. لطفاً روی دکمه تازه سازی کلیک کنید.</path-not-found-exception>
     </msg>
     <action>
       <Add>افزودن فراداده</Add>
@@ -566,8 +561,7 @@
     </action>
     <msg>
       <register-successfully>نوع گره '{0}' با موفقیت ثبت شد.</register-successfully>
-      <supertype-is-madatory>ابر نوع در حین ثبت نوع گره الزامی است. حداقل یک ابر نوع را انتخاب کنید.
-      </supertype-is-madatory>
+      <supertype-is-madatory>ابر نوع در حین ثبت نوع گره الزامی است. حداقل یک ابر نوع را انتخاب کنید.</supertype-is-madatory>
       <register-failed>ثبت نوع گره ناموفق بود. یا در حال حاضر موجود بوده و یا ابر نوع نامعتبر است.</register-failed>
       <nodeType-name>نام نوع گره مورد نیاز است.</nodeType-name>
       <fileName-invalid>نام فایل حاوی کاراکترهای نامعتبر است.</fileName-invalid>
@@ -587,8 +581,7 @@
     </tab>
     <msg>
       <property-name>نام تعریف ویژگی نامعتبر است.</property-name>
-      <not-supported-value-constraints>این نوع مورد نیاز، محدودیت ارزش را پشتیبانی نمی کند.
-      </not-supported-value-constraints>
+      <not-supported-value-constraints>این نوع مورد نیاز، محدودیت ارزش را پشتیبانی نمی کند.</not-supported-value-constraints>
     </msg>
   </UIPropertyDefinitionForm>
   <UIChildNodeDefinitionForm>
@@ -1536,8 +1529,7 @@
     <msg>
       <confirm-delete>آیا شما واقعا می خواهید حذف کنید؟</confirm-delete>
       <access-denied>دسترسی رد شد. شما مجوز لازم برای استفاده از این ویژگی را ندارید.</access-denied>
-      <editing-template>دسترسی رد شد. شما نمی توانید حذف و ویرایش این قالب را به طور همزمان انجام دهید.
-      </editing-template>
+      <editing-template>دسترسی رد شد. شما نمی توانید حذف و ویرایش این قالب را به طور همزمان انجام دهید.</editing-template>
       <template-not-exist>قالبی که شما می خواهید حذف کنید وجود ندارد.</template-not-exist>
     </msg>
   </UITemplateList>
@@ -1555,8 +1547,7 @@
     <msg>
       <confirm-delete>آیا شما واقعا می خواهید حذف کنید؟</confirm-delete>
       <access-denied>دسترسی رد شد. شما مجوز لازم برای استفاده از این ویژگی را ندارید.</access-denied>
-      <editing-template>دسترسی رد شد. شما نمی توانید حذف و ویرایش این قالب را به طور همزمان انجام دهید.
-      </editing-template>
+      <editing-template>دسترسی رد شد. شما نمی توانید حذف و ویرایش این قالب را به طور همزمان انجام دهید.</editing-template>
       <template-not-exist>قالبی که شما می خواهید حذف کنید وجود ندارد.</template-not-exist>
     </msg>
   </UIActionsTemplateList>
@@ -1574,8 +1565,7 @@
     <msg>
       <confirm-delete>آیا شما واقعا می خواهید حذف کنید؟</confirm-delete>
       <access-denied>دسترسی رد شد. شما مجوز لازم برای استفاده از این ویژگی را ندارید.</access-denied>
-      <editing-template>دسترسی رد شد. شما نمی توانید حذف و ویرایش این قالب را به طور همزمان انجام دهید.
-      </editing-template>
+      <editing-template>دسترسی رد شد. شما نمی توانید حذف و ویرایش این قالب را به طور همزمان انجام دهید.</editing-template>
       <template-not-exist>قالبی که شما می خواهید حذف کنید وجود ندارد.</template-not-exist>
     </msg>
   </UIOthersTemplateList>
@@ -1612,8 +1602,7 @@
     <msg>
       <confirm-delete>آیا از حذف این قالب اطمینان دارید؟</confirm-delete>
       <access-denied>دسترسی رد شد. شما مجوز لازم برای استفاده از این ویژگی را ندارید.</access-denied>
-      <editing-template>دسترسی رد شد. شما نمی توانید حذف و ویرایش این قالب را به طور همزمان انجام دهید.
-      </editing-template>
+      <editing-template>دسترسی رد شد. شما نمی توانید حذف و ویرایش این قالب را به طور همزمان انجام دهید.</editing-template>
       <template-not-exist>قالبی که شما می خواهید حذف کنید وجود ندارد.</template-not-exist>
     </msg>
   </UICLVTemplateList>
@@ -2028,12 +2017,9 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <range-validator>محدوده نامعتبر است. فرمت باید به شکل a..b باشد که بین این دو اعداد صحیح مثبت قرار می گیرند. در
-        صورتیکه بخواهید محدوده را بینهایت تعریف کنید بجای b از علامت * استفاده نمایید.
-      </range-validator>
+      <range-validator>محدوده نامعتبر است. فرمت باید به شکل a..b باشد که بین این دو اعداد صحیح مثبت قرار می گیرند. در صورتیکه بخواهید محدوده را بینهایت تعریف کنید بجای b از علامت * استفاده نمایید.</range-validator>
       <error-update>به روز رسانی انجام نشد. اطلاعات شما نامعتبر می باشد.</error-update>
-      <item-not-existing>شما نمی توانید تغییرات این برچسب را ذخیره کنید. این برچسب در پایگاه داده وجود ندارد.
-      </item-not-existing>
+      <item-not-existing>شما نمی توانید تغییرات این برچسب را ذخیره کنید. این برچسب در پایگاه داده وجود ندارد.</item-not-existing>
     </msg>
   </UITagStyleForm>
   <FolksonomyPopup>
@@ -2347,8 +2333,7 @@
       <UnLock>باز کردن قفل</UnLock>
     </tooltip>
     <msg>
-      <access-denied-exception>شما مجوز لازم برای دسترسی به گره با مسیر {0} را ندارید و یا این گره حذف شده است.
-      </access-denied-exception>
+      <access-denied-exception>شما مجوز لازم برای دسترسی به گره با مسیر {0} را ندارید و یا این گره حذف شده است.</access-denied-exception>
     </msg>
   </UILockNodeList>
   <EditUnLockForm>
@@ -2462,8 +2447,7 @@
     </action>
     <msg>
       <xss-vulnerability-character>فیلد '{0}' شامل کاراکترهای آسیب پذیری XSS است</xss-vulnerability-character>
-      <xss-vulnerability-character-wo-label>ورودی شما ممکن است حاوی کاراکترهای آسیب پذیری XSS باشد
-      </xss-vulnerability-character-wo-label>
+      <xss-vulnerability-character-wo-label>ورودی شما ممکن است حاوی کاراکترهای آسیب پذیری XSS باشد</xss-vulnerability-character-wo-label>
     </msg>
   </UIActionForm>
 
@@ -2501,11 +2485,10 @@
       <Add>افزودن</Add>
     </action>
     <label>
-      <userOrGroup>عضویت ها:</userOrGroup>
+      <userOrGroup>Memberships:</userOrGroup>
     </label>
     <msg>
-      <userOrGroup-alreadyExists>این عضویت در حال حاضر وجود دارد. لطفاً عضویت دیگری را انتخاب کنید.
-      </userOrGroup-alreadyExists>
+      <userOrGroup-alreadyExists>این عضویت در حال حاضر وجود دارد. لطفاً عضویت دیگری را انتخاب کنید.</userOrGroup-alreadyExists>
     </msg>
   </UITagPermissionForm>
 
@@ -2540,9 +2523,7 @@
   </NodeTypeNameValidator>
   <UIActionForm>
     <msg>
-      <constraint-violation-exception>گره '{0}' را نمی توان به "{1}" در فضای کاری '{2}' اضافه کرد. در مورد مجوزها و یا
-        محدودیت ها مشکلی وجود دارد.
-      </constraint-violation-exception>
+      <constraint-violation-exception>گره '{0}' را نمی توان به "{1}" در فضای کاری '{2}' اضافه کرد.  در مورد مجوزها و یا محدودیت ها مشکلی وجود دارد.</constraint-violation-exception>
     </msg>
   </UIActionForm>
 
@@ -2553,9 +2534,7 @@
   </UIWorkspaceWizard>
   <UIRepositoryForm>
     <msg>
-      <not-complete-repository>The repository is being created. You need to wait a few minutes before creating another
-        one.
-      </not-complete-repository>
+      <not-complete-repository>The repository is being created. You need to wait a few minutes before creating another one.</not-complete-repository>
     </msg>
   </UIRepositoryForm>
 
@@ -2616,9 +2595,7 @@
   </UIPageIterator>
   <UILockNodeList>
     <msg>
-      <can-not-unlock-node>شما مجوز لازم برای باز کردن این گره را ندارید. لطفا برای گرفتن مجوز درست با مدیر سیستم تماس
-        بگیرید.
-      </can-not-unlock-node>
+      <can-not-unlock-node>شما مجوز لازم برای باز کردن این گره را ندارید. لطفا برای گرفتن مجوز درست با مدیر سیستم تماس بگیرید.</can-not-unlock-node>
     </msg>
   </UILockNodeList>
 </bundle>

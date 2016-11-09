@@ -2,57 +2,57 @@
 <bundle>
   <UICNContainer>
     <title>
-      <QuickEdit>クイック編集</QuickEdit>
+      <QuickEdit>Quick Edit</QuickEdit>
     </title>
   </UICNContainer>
 
   <UICNConfigPopupWindow>
     <title>
-      <UICategoryNavigationConfig>カテゴリリスト設定</UICategoryNavigationConfig>
+      <UICategoryNavigationConfig>Category List Configuration</UICategoryNavigationConfig>
     </title>
   </UICNConfigPopupWindow>
 
   <UICategoryNavigationTargetPathFormInputSet>
     <title>
-      <SelectTargetPath></SelectTargetPath>
+      <SelectTargetPath/>
     </title>
   </UICategoryNavigationTargetPathFormInputSet>
 
   <UICategoryNavigationConfig>
     <label>
-      <UICategoryNavigationRepositoryFormSelectBox>リポジトリ</UICategoryNavigationRepositoryFormSelectBox>
-      <UICategoryNavigationTreeNameSelectBox>分類ツリー</UICategoryNavigationTreeNameSelectBox>
-      <UICategoryNavigationTreeTitleFormStringInput>タイトル</UICategoryNavigationTreeTitleFormStringInput>
+      <UICategoryNavigationRepositoryFormSelectBox>Repository</UICategoryNavigationRepositoryFormSelectBox>
+      <UICategoryNavigationTreeNameSelectBox>Category Tree</UICategoryNavigationTreeNameSelectBox>
+      <UICategoryNavigationTreeTitleFormStringInput>Title</UICategoryNavigationTreeTitleFormStringInput>
   
-      <UICategoryNavigationTreeNameFormSelectBox>ツリー名</UICategoryNavigationTreeNameFormSelectBox>
-      <UICategoryNavigationTemplateFormSelectBox>ツリービューアテンプレート</UICategoryNavigationTemplateFormSelectBox>
+      <UICategoryNavigationTreeNameFormSelectBox>Tree Name</UICategoryNavigationTreeNameFormSelectBox>
+      <UICategoryNavigationTemplateFormSelectBox>Tree viewer template</UICategoryNavigationTemplateFormSelectBox>
       
-      <UICategoryNavigationTargetPathFormInputSet>ページで見る</UICategoryNavigationTargetPathFormInputSet>      
-      <TreeSelectionBlock>ツリー選択</TreeSelectionBlock>
-      <DisplaySettingBlock>表示設定</DisplaySettingBlock>
-      <AdvancedBlock>詳細</AdvancedBlock>
+      <UICategoryNavigationTargetPathFormInputSet>Show in Page</UICategoryNavigationTargetPathFormInputSet>      
+      <TreeSelectionBlock>Tree Selection</TreeSelectionBlock>
+      <DisplaySettingBlock>Display Settings</DisplaySettingBlock>
+      <AdvancedBlock>詳細設定</AdvancedBlock>
   
-	  <UICategoryNavigationTreePathFormInputSet>ツリーパス</UICategoryNavigationTreePathFormInputSet>
-	  <UICategoryNavigationTreePathFormStringInput>ツリーパス</UICategoryNavigationTreePathFormStringInput>
-	  <UICategoryNavigationHeaderFormStringInput>ヘッダ</UICategoryNavigationHeaderFormStringInput>
-	  <UICategoryNavigationAutomaticDetectionCheckBoxInput>オート</UICategoryNavigationAutomaticDetectionCheckBoxInput>
-	  <UICategoryNavigationDynamicNavigationLabel>ダイナミックナビゲーション</UICategoryNavigationDynamicNavigationLabel>
-	  <UICategoryNavigationWithClvFormStringInput>with</UICategoryNavigationWithClvFormStringInput>
-	  <UICategoryNavigationTreepathPopupWindow>ツリーパス</UICategoryNavigationTreepathPopupWindow>    
+  <UICategoryNavigationTreePathFormInputSet>ターゲットパス</UICategoryNavigationTreePathFormInputSet>
+  <UICategoryNavigationTreePathFormStringInput>ターゲットパス</UICategoryNavigationTreePathFormStringInput>
+  <UICategoryNavigationHeaderFormStringInput>Header</UICategoryNavigationHeaderFormStringInput>
+  <UICategoryNavigationAutomaticDetectionCheckBoxInput>Automatic</UICategoryNavigationAutomaticDetectionCheckBoxInput>
+  <UICategoryNavigationDynamicNavigationLabel>Dynamic Navigation</UICategoryNavigationDynamicNavigationLabel>
+  <UICategoryNavigationWithClvFormStringInput>を</UICategoryNavigationWithClvFormStringInput>
+  <UICategoryNavigationTreepathPopupWindow>ターゲットパス</UICategoryNavigationTreepathPopupWindow>    
       
     </label>
     <msg>
-      <not-support-encoding>エンコーディングはサポートされません。</not-support-encoding>
-      <render>プロセスのレンダ時にエラー</render>
-      <saving-success>このポートレットが更新されました。</saving-success>
+      <not-support-encoding>Encoding is not supported.</not-support-encoding>
+      <render>An error occurred when rendering.</render>
+      <saving-success>The information was updated successfully.</saving-success>
     </msg>
     <action>
-      <Save>保存</Save>
+      <Save>Save</Save>
     </action>
   </UICategoryNavigationConfig>
   <UICategoryNavigationTreeBase>
     <msg>
-      <not-existed-category>このカテゴリは存在しません</not-existed-category>
+      <not-existed-category>カテゴリは存在しません。</not-existed-category>
     </msg>
   </UICategoryNavigationTreeBase>
 </bundle>

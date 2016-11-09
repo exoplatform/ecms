@@ -40,13 +40,11 @@
   -->
   <UITaxonomyWorkingArea>
     <msg>
-      <referential-integrity>Kan ikke lese fra kildefilen eller destinasjonskategorien er en underkategori.
-      </referential-integrity>
+      <referential-integrity>Kan ikke lese fra kildefilen eller destinasjonskategorien er en underkategori.</referential-integrity>
       <no-taxonomy-selected>Du må kopiere eller klippe ut minst én kategori.</no-taxonomy-selected>
       <node-is-cutting>Du kan ikke lime inn her. Kategori node '{0}' blir kanskje kuttet.</node-is-cutting>
       <can-not-paste>Det er ingen data i utklippstavlen som du kan lime inn.</can-not-paste>
-      <reference-exception>Kan ikke slette denne kategorien fordi den for øyeblikket er referert av noe innhold.
-      </reference-exception>
+      <reference-exception>Kan ikke slette denne kategorien fordi den for øyeblikket er referert av noe innhold.</reference-exception>
       <path-error>Det oppstod en feil under fjerning av denne kategorinode.</path-error>
     </msg>
   </UITaxonomyWorkingArea>
@@ -73,11 +71,8 @@
       <info>
         <UITaxonomyTreeMainForm>Spesifiser kategori navn, arbeidsområde og bane.</UITaxonomyTreeMainForm>
         <UIPermissionTreeManager>Angi rettighet for kategoritreet.</UIPermissionTreeManager>
-        <UIActionTaxonomyManager>Legge til en handling til kategoritreet for å fullføre opprettingen eller
-          oppdateringen.
-        </UIActionTaxonomyManager>
-        <UITaxonomyTreeCreateChild>Redigere taksonomi treet ved å legge til, kopiere, klippe og velge rettigheter.
-        </UITaxonomyTreeCreateChild>
+        <UIActionTaxonomyManager>Legge til en handling til kategoritreet for å fullføre opprettingen eller oppdateringen.</UIActionTaxonomyManager>
+        <UITaxonomyTreeCreateChild>Redigere taksonomi treet ved å legge til, kopiere, klippe og velge rettigheter.</UITaxonomyTreeCreateChild>
       </info>
     </tab>
     <msg>
@@ -255,8 +250,7 @@
     <msg>
       <confirm-delete>Er du sikker på at du vil slette disse metadataene?</confirm-delete>
       <delete-successful>Malene på '{0}' ble slettet.</delete-successful>
-      <path-not-found-exception>Disse metadataene har blitt slettet eller endret. Klikk Oppdater-knappen.
-      </path-not-found-exception>
+      <path-not-found-exception>Disse metadataene har blitt slettet eller endret. Klikk Oppdater-knappen.</path-not-found-exception>
     </msg>
     <action>
       <Add>Legg til metadata</Add>
@@ -567,12 +561,8 @@
     </action>
     <msg>
       <register-successfully>Nodetypen '{0}' ble registrert som vellykket.</register-successfully>
-      <supertype-is-madatory>Overordnet typen er obligatorisk når du registrerer nye nodetypen. Velg minst én overordnet
-        type.
-      </supertype-is-madatory>
-      <register-failed>Node type registreringen var mislykket. Enten finnes den allerede eller så er overordnet type
-        ugyldig.
-      </register-failed>
+      <supertype-is-madatory>Overordnet typen er obligatorisk når du registrerer nye nodetypen. Velg minst én overordnet type.</supertype-is-madatory>
+      <register-failed>Node type registreringen var mislykket. Enten finnes den allerede eller så er overordnet type ugyldig.</register-failed>
       <nodeType-name>Navnet på node typen er påkrevd.</nodeType-name>
       <fileName-invalid>Filnavnet inneholder noen ugyldige tegn.</fileName-invalid>
       <node-type-exists>Det finnes allerede en nodetype '{0}'.</node-type-exists>
@@ -591,8 +581,7 @@
     </tab>
     <msg>
       <property-name>Egenskapsdefinisjonens navn var ugyldig.</property-name>
-      <not-supported-value-constraints>Denne påkrevde typen støtter ikke verdibetingelsene.
-      </not-supported-value-constraints>
+      <not-supported-value-constraints>Denne påkrevde typen støtter ikke verdibetingelsene.</not-supported-value-constraints>
     </msg>
   </UIPropertyDefinitionForm>
   <UIChildNodeDefinitionForm>
@@ -1001,7 +990,7 @@
       <addSymLink>Legg til Symlink</addSymLink>
       <checkIn>Check In</checkIn>
       <checkOut>Check Out</checkOut>
-      <shareDocuments>Del</shareDocuments>
+      <shareDocuments>Share</shareDocuments>
       <openDocument>Remote Edit</openDocument>
       <editProperty>Edit Document Properties</editProperty>
       <uploadNewVersion>Upload a new version</uploadNewVersion>
@@ -1034,7 +1023,7 @@
   </UIViewFormTabPane>
   <PopupViewPermission>
     <title>
-      <UIPermissionSelector>Rettighets velger</UIPermissionSelector>
+      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
     </title>
   </PopupViewPermission>
 
@@ -1416,7 +1405,7 @@
 
   <PopupTaxonomyTreePermission>
     <title>
-      <UIPermissionSelector>Rettighets velger</UIPermissionSelector>
+      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
     </title>
   </PopupTaxonomyTreePermission>
 
@@ -1748,7 +1737,7 @@
   -->
   <AddNewTemplatePermission>
     <title>
-      <UIPermissionSelector>Rettighets velger</UIPermissionSelector>
+      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
     </title>
   </AddNewTemplatePermission>
   <TemplatePermission>
@@ -1789,12 +1778,12 @@
   </DialogForm>
   <DialogFormTemplatePermission>
     <title>
-      <UIPermissionSelector>Rettighets velger</UIPermissionSelector>
+      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
     </title>
   </DialogFormTemplatePermission>
   <ViewFormTemplatePermission>
     <title>
-      <UIPermissionSelector>Rettighets velger</UIPermissionSelector>
+      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
     </title>
   </ViewFormTemplatePermission>
   <TemplateContainerPopup>
@@ -1951,8 +1940,7 @@
     <msg>
       <confirm-delete>Er du sikker på at du vil slette denne spørringen?</confirm-delete>
       <query-not-existed>Spørringen finnes ikke lenger.</query-not-existed>
-      <can-not-remove>Det oppstod en feil under sletting av spørringen. Kontakt systemansvarlig for informasjon.
-      </can-not-remove>
+      <can-not-remove>Det oppstod en feil under sletting av spørringen. Kontakt systemansvarlig for informasjon.</can-not-remove>
     </msg>
   </UIQueriesList>
   <UIQueriesForm>
@@ -1988,7 +1976,7 @@
   </EditQueryForm>
   <PermissionPopup>
     <title>
-      <UIGroupMemberSelector>Rettighets velger</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Permission Selector</UIGroupMemberSelector>
     </title>
   </PermissionPopup>
   <!--
@@ -2029,12 +2017,9 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <range-validator>Utvalget er ugyldig. Formatet skal være: a..b, der a og b er positive heltall. Du kan bruke *
-        istedet for b for å angi at området er ubegrenset.
-      </range-validator>
+      <range-validator>Utvalget er ugyldig. Formatet skal være: a..b, der a og b er positive heltall. Du kan bruke * istedet for b for å angi at området er ubegrenset.</range-validator>
       <error-update>Oppdateringen mislyktes. Informasjonen er ugyldig.</error-update>
-      <item-not-existing>Du kan ikke lagre endringer til denne taggen siden det ikke finnes i databasen.
-      </item-not-existing>
+      <item-not-existing>Du kan ikke lagre endringer til denne taggen siden det ikke finnes i databasen.</item-not-existing>
     </msg>
   </UITagStyleForm>
   <FolksonomyPopup>
@@ -2348,8 +2333,7 @@
       <UnLock>Lås opp</UnLock>
     </tooltip>
     <msg>
-      <access-denied-exception>Du har ikke rettigheter til noden med stien {0}, eller så er denne noden slettet.
-      </access-denied-exception>
+      <access-denied-exception>Du har ikke rettigheter til noden med stien {0}, eller så er denne noden slettet.</access-denied-exception>
     </msg>
   </UILockNodeList>
   <EditUnLockForm>
@@ -2463,8 +2447,7 @@
     </action>
     <msg>
       <xss-vulnerability-character>Feltet '{0}' inneholder XSS sårbare tegn</xss-vulnerability-character>
-      <xss-vulnerability-character-wo-label>Inndataene kan inneholde XSS sårbare tegn
-      </xss-vulnerability-character-wo-label>
+      <xss-vulnerability-character-wo-label>Inndataene kan inneholde XSS sårbare tegn</xss-vulnerability-character-wo-label>
     </msg>
   </UIActionForm>
 
@@ -2502,7 +2485,7 @@
       <Add>Legg til</Add>
     </action>
     <label>
-      <userOrGroup>Medlemsskap:</userOrGroup>
+      <userOrGroup>Memberships:</userOrGroup>
     </label>
     <msg>
       <userOrGroup-alreadyExists>Dette medlemsskapet finnes allerede. Velg et annet.</userOrGroup-alreadyExists>
@@ -2540,9 +2523,7 @@
   </NodeTypeNameValidator>
   <UIActionForm>
     <msg>
-      <constraint-violation-exception>Noden '{0}' kan ikke legges til '{1}' i arbeidsområdet '{2}'. Det er problem med
-        rettigheter eller betingelser.
-      </constraint-violation-exception>
+      <constraint-violation-exception>Noden '{0}' kan ikke legges til '{1}' i arbeidsområdet '{2}'.  Det er problem med rettigheter eller betingelser.</constraint-violation-exception>
     </msg>
   </UIActionForm>
 
@@ -2553,9 +2534,7 @@
   </UIWorkspaceWizard>
   <UIRepositoryForm>
     <msg>
-      <not-complete-repository>The repository is being created. You need to wait a few minutes before creating another
-        one.
-      </not-complete-repository>
+      <not-complete-repository>The repository is being created. You need to wait a few minutes before creating another one.</not-complete-repository>
     </msg>
   </UIRepositoryForm>
 
@@ -2616,9 +2595,7 @@
   </UIPageIterator>
   <UILockNodeList>
     <msg>
-      <can-not-unlock-node>Du har ikke tillatelse til å låse opp denne noden. Kontakt administratoren for å få
-        rettigheter.
-      </can-not-unlock-node>
+      <can-not-unlock-node>Du har ikke tillatelse til å låse opp denne noden. Kontakt administratoren for å få rettigheter.</can-not-unlock-node>
     </msg>
   </UILockNodeList>
 </bundle>

@@ -30,7 +30,7 @@
         <comment-by>Yorumlayan</comment-by>
         <email>E-posta</email>
         <site>Site</site>
-        <lastComment>Last comment posted by {user} at {time}</lastComment>
+        <lastComment>Son yorum {user} kullanıcısı tarafından {time} tarihinde yapıldı</lastComment>
       </label>
     </view>
   </Comment>
@@ -42,10 +42,12 @@
     <view>
       <label>
         <not-viewable>Bu belgenin önizlemesi mevcut değildir.</not-viewable>
-        <pdf-max-size>The preview is not available for content larger than {0} MB.</pdf-max-size>
-        <pdf-max-page>The preview is not available for content with over {0} pages.</pdf-max-page>
+        <pdf-max-size>{0} MB'den büyük içerikler için ön izleme bulunmamaktadır.</pdf-max-size>
+        <pdf-max-page>{0} sayfadan daha fazla olan içerikler için ön izleme bulunmamaktadır.</pdf-max-page>
         <using-webDAV>veya MS Office ile Açın</using-webDAV>
-        <open-on-desktop>Open on Desktop</open-on-desktop>
+        <open-on-desktop>Masaüstü'nde Aç</open-on-desktop>
+        <open-in-documents>Open in Documents</open-in-documents>
+        <open-in-documents-tooltip>Open this file in Documents app</open-in-documents-tooltip>
         <file-size-too-big>Bu içerik çok büyük. İçeriği indirip görüntüleyebilirsiniz.</file-size-too-big>
         <webDAV>WebDAV Görünümü</webDAV>
         <download>İndir</download>
@@ -105,7 +107,7 @@
       <label>
         <action-name>Eylem Adı</action-name>
         <lifecycle>Ömrü</lifecycle>
-        <metadata>Metaveri</metadata>
+        <metadata>Metadata</metadata>
         <description>Açıklama</description>
       </label>
     </view>
@@ -141,7 +143,7 @@
   <ElementSet>
     <view>
       <label>
-        <not-avaliable>N/A</not-avaliable>
+        <not-avaliable>Uygulanabilir Değil</not-avaliable>
         <core-elements>Temel Unsurlar</core-elements>
         <title>Başlık</title>
         <creator>Oluşturan</creator>

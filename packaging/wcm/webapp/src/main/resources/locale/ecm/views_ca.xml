@@ -4,10 +4,10 @@
   <View>
     <label>
       <languages>
-        <en>Anglès</en>
-        <fr>Francès</fr>
+        <en>English</en>
+        <fr>French</fr>
         <ru>Rús</ru>
-        <vi>Vietnamita</vi>
+        <vi>Vietnamese</vi>
         <nl>Holandès</nl>
         <de>Alemany</de>
         <uk>Ucraïnès</uk>
@@ -23,13 +23,13 @@
     <view>
       <label>
         <postedBy>Últim comentari publicat per</postedBy>
-        <at>a</at>
+        <at>at</at>
         <comments>Comentari(s)</comments>
         <show-comments>Mostra els comentaris</show-comments>
         <hide-comments>Amaga els comentaris</hide-comments>
-        <comment-by>Comentat per</comment-by>
-        <email>Correu electrònic</email>
-        <site>Lloc</site>
+        <comment-by>Commented by</comment-by>
+        <email>Email</email>
+        <site>Site</site>
         <lastComment>Últim comentari Publicat per {user} a {time}</lastComment>
       </label>
     </view>
@@ -46,6 +46,8 @@
         <pdf-max-page>La visualització prèvia no està disponible per a continguts amb més de {0} pàgines.</pdf-max-page>
         <using-webDAV>o obre en MS Office</using-webDAV>
         <open-on-desktop>Obre al Escriptori</open-on-desktop>
+        <open-in-documents>Open in Documents</open-in-documents>
+        <open-in-documents-tooltip>Open this file in Documents app</open-in-documents-tooltip>
         <file-size-too-big>El contingut d'aquest fitxer és massa gran. Hauria de descarregar-lo i obrir-lo per veure'l.</file-size-too-big>
         <webDAV>Vista WebDAV</webDAV>
         <download>Descarrega</download>
@@ -61,8 +63,8 @@
   <Mail>
     <view>
       <label>
-        <from>Des de:</from>
-        <to>Al:</to>
+        <from>From:</from>
+        <to>To:</to>
         <cc>Cc:</cc>
         <date>Data:</date>
         <subject>Assumpte:</subject>
@@ -77,7 +79,7 @@
     <view>
       <label>
         <avg-rating>Qualificació mitjana</avg-rating>
-        <subscription>Vots</subscription>
+        <subscription>Votes</subscription>
       </label>
     </view>
   </Vote>
@@ -87,12 +89,12 @@
   <ListView>
     <view>
       <label>
-        <name>Nom</name>
+        <name>Name</name>
         <versionable>Versionable</versionable>
-        <exo_owner>Propietari</exo_owner>
-        <exo_dateCreated>Data de creació</exo_dateCreated>
+        <exo_owner>Owner</exo_owner>
+        <exo_dateCreated>Date Created</exo_dateCreated>
         <exo_dateModified>Data de modificació</exo_dateModified>
-        <auditing>Auditoria</auditing>
+        <auditing>Auditing</auditing>
       </label>
     </view>
   </ListView>
@@ -105,7 +107,7 @@
       <label>
         <action-name>Nom de l'acció</action-name>
         <lifecycle>Cicle de vida</lifecycle>
-        <metadata>Metadades</metadata>
+        <metadata>Metadata</metadata>
         <description>Descripció</description>
       </label>
     </view>
@@ -117,8 +119,8 @@
   <AutoVersioning>
     <view>
       <label>
-        <action-name>Nom de l'acció</action-name>
-        <lifecycle>Cicle de vida</lifecycle>
+        <action-name>Action Name</action-name>
+        <lifecycle>Lifecycle</lifecycle>
         <description>Descripció</description>
       </label>
     </view>
@@ -129,7 +131,7 @@
   <EnableVersioning>
     <view>
       <label>
-        <action-name>Nom</action-name>
+        <action-name>Name</action-name>
         <lifecycle>Cicle de vida</lifecycle>
         <description>Descripció</description>
       </label>
@@ -143,24 +145,24 @@
       <label>
         <not-avaliable>N/D</not-avaliable>
         <core-elements>Elements bàsics</core-elements>
-        <title>Títol</title>
-        <creator>Autor</creator>
+        <title>Title</title>
+        <creator>Creator</creator>
         <subject>Assumpte</subject>
-        <source>Font</source>
+        <source>Source</source>
         <contributor>Col·laborador</contributor>
-        <resource-type>Tipus de Recurs</resource-type>
-        <date>Data</date>
+        <resource-type>Resource Type</resource-type>
+        <date>Date</date>
         <publisher>Editor</publisher>
         <description>Descripció</description>
         <rights>Drets</rights>
-        <relation>Relació</relation>
+        <relation>Relation</relation>
         <format>Format</format>
         <coverage>Cobertura</coverage>
         <identifier>Identificador</identifier>
-        <languages>Idiomes</languages>
+        <languages>Languages</languages>
       </label>
       <action>
-        <add-edit>Afegeix/Edita</add-edit>
+        <add-edit>Add/Edit</add-edit>
         <cancel>#{word.cancel}</cancel>
       </action>
       <tooltip>
@@ -185,7 +187,7 @@
     <view>
       <label>
         <isDeep>Recursiu</isDeep>
-        <nodetypes>Tipus de node</nodetypes>
+        <nodetypes>Node Types</nodetypes>
         <affectedNodeTypeNames>Tipus de Node afectats</affectedNodeTypeNames>
         <nodeTypeName>Noms de tipus node</nodeTypeName>
       </label> 
@@ -196,9 +198,9 @@
     <view>
       <label>
         <isDeep>Recursiu</isDeep>
-        <nodetypes>Tipus de node</nodetypes> 
-        <affectedNodeTypeNames>Tipus de Node afectats</affectedNodeTypeNames>
-        <nodeTypeName>Noms de tipus node</nodeTypeName>
+        <nodetypes>Node Types</nodetypes> 
+        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
+        <nodeTypeName>Node Type Names</nodeTypeName>
       </label> 
     </view>
   </EnableVersioning>
@@ -207,9 +209,9 @@
     <view>
       <label>
         <isDeep>Recursiu</isDeep>
-        <nodetypes>Tipus de node</nodetypes>
-        <affectedNodeTypeNames>Tipus de Node afectats</affectedNodeTypeNames>
-        <nodeTypeName>Noms de tipus node</nodeTypeName>
+        <nodetypes>Node Types</nodetypes>
+        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
+        <nodeTypeName>Node Type Names</nodeTypeName>
       </label> 
     </view>
   </AutoVersioning>
@@ -218,7 +220,7 @@
     <view>
       <label>
       <Play-audio-description-of-this-video>Descripció audio</Play-audio-description-of-this-video>
-      <Read-more>Llegeix més</Read-more>
+      <Read-more>Read more</Read-more>
       <Read-less>Llegir menys</Read-less>
       <Switch-back-to-original-video>Vídeo original</Switch-back-to-original-video>
       </label>

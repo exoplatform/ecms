@@ -30,7 +30,7 @@
         <comment-by>Kommentiert von</comment-by>
         <email>E-mail</email>
         <site>Seite</site>
-        <lastComment>Last comment posted by {user} at {time}</lastComment>
+        <lastComment>Letzter Kommentar geschrieben von {user} am {time}</lastComment>
       </label>
     </view>
   </Comment>
@@ -41,11 +41,13 @@
   <File>
     <view>
       <label>
-        <not-viewable>The preview of this document is not available.</not-viewable>
-        <pdf-max-size>The preview is not available for content larger than {0} MB.</pdf-max-size>
-        <pdf-max-page>The preview is not available for content with over {0} pages.</pdf-max-page>
-        <using-webDAV>or Open in MS Office</using-webDAV>
+        <not-viewable>Die Vorschau für dieses Dokument ist nicht verfügbar.</not-viewable>
+        <pdf-max-size>Die Vorschau ist nicht für Inhalte, die größer als {0} MB verfügbar.</pdf-max-size>
+        <pdf-max-page>Die Vorschau ist nicht für Inhalte mit über {0} Seiten.</pdf-max-page>
+        <using-webDAV>oder in MS Office öffnen</using-webDAV>
         <open-on-desktop>Open on Desktop</open-on-desktop>
+        <open-in-documents>Open in Documents</open-in-documents>
+        <open-in-documents-tooltip>Open this file in Documents app</open-in-documents-tooltip>
         <file-size-too-big>Der Inhalt dieser Datei ist zu groß. Sie sollten Sie herunterladen und im Client öffnen.</file-size-too-big>
         <webDAV>WebDAV Ansicht</webDAV>
         <download>Herunterladen</download>

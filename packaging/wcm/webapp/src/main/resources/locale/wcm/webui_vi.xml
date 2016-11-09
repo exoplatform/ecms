@@ -36,6 +36,8 @@
     <label>
       <ManagedSites>Site Management</ManagedSites>
       <SharedSite>Site Chia sẻ</SharedSite>
+      <PersonalDocuments>Personal Documents</PersonalDocuments>
+      <UserDocuments>{0} Documents</UserDocuments>
     </label>
   </Drives>
 

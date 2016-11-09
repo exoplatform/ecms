@@ -17,7 +17,7 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <not-support>Nu poți comenta pe acest tip de document.</not-support>
+      <not-support>You can't comment on this type of document.</not-support>
       <not-checkedout>Trebuie să descărcați modulul înainte de a comenta pe el.</not-checkedout>
       <content-null>Nu poți posta un comentariu gol.</content-null>
     </msg>
@@ -250,7 +250,7 @@
       <UIActivePublication>Înscrieți-vă la procesul de publicare</UIActivePublication>
       <UITaggingForm>Etichetați Document</UITaggingForm>
       <UIThumbnailForm>Adaugă imagine miniatură</UIThumbnailForm>
-      <UIAllItemsPreferenceForm>Preferinţe</UIAllItemsPreferenceForm>
+      <UIAllItemsPreferenceForm>Preferences</UIAllItemsPreferenceForm>
       <UISelectRestorePath>Selectaţi calea pentru restabilire</UISelectRestorePath>
       <UISEOForm>Gestionați SEO</UISEOForm>
       <UISEOToolbarForm>Gestionați SEO</UISEOToolbarForm>
@@ -597,7 +597,7 @@
       <RestoreFromTrash>Restaurează de la gunoi</RestoreFromTrash>
       <EmptyTrash>Golește gunoiul</EmptyTrash>
       <WebDavView>Descărcaţi şi permiteți adăugarea</WebDavView>
-      <Download>Descarcă</Download>
+      <Download>Download</Download>
       <OpenDocument>Remote Edit</OpenDocument>
       <EditProperty>Edit Document Properties</EditProperty>
       <UploadNewVersion>Upload a new version</UploadNewVersion>
@@ -1330,7 +1330,7 @@
   -->
   <PopupUserSelector>
     <title>
-      <UIUserContainer>Selector de drepturi</UIUserContainer>
+      <UIUserContainer>Permission Selector</UIUserContainer>
     </title>
   </PopupUserSelector>
   <UIPopupTaxonomy>
@@ -1345,7 +1345,13 @@
   ###############################################################################
   -->
   <UIVersionInfo>
+    <title>Version history</title>
+    <summary>
+      <empty>Click here to add a summary</empty>
+    </summary>
     <tooltip>
+      <version>Version</version>
+      <baseVersion>Base Version</baseVersion>
       <addLabel>Adaugă eticheta</addLabel>
       <removeLable>Eliminaţi eticheta</removeLable>
       <restoreVersion>Restabilire versiune</restoreVersion>
@@ -1356,6 +1362,9 @@
     <msg>
       <have-no-view-template>Șablonul de afișare nu este acceptat.</have-no-view-template>
       <cannot-remove-version>Nu se poate elimina versiunea de bază.</cannot-remove-version>
+      <error-removing-version>An error occurred while deleting this version.</error-removing-version>
+      <error-removing-referenced-version>This version is referenced and can't be removed.</error-removing-referenced-version>
+      <confirm-restore>Are you sure you want to restore this version?</confirm-restore>
       <confirm-delete>Sigur doriţi să eliminaţi această versiune?</confirm-delete>
       <not-checked-out>Trebuie să rezervați acest nod înainte de restaurare.</not-checked-out>
       <invalid-item-state>Nu se poate restaura această versiune,  pentru că unul sau mai multe elemente au fost şterse sau mutate în timpul altei sesiuni.</invalid-item-state>
@@ -1363,7 +1372,15 @@
     <action>
       <close>#{word.close}</close>
       <close-view>Închidere vizualizare</close-view>
+      <compare-versions>Compare selected versions</compare-versions>
     </action>
+    <labels>
+      <version>Versiune</version>
+      <date>Data</date>
+      <author>Modified By</author>
+      <summary>Rezumat</summary>
+      <action>Acțiune</action>
+    </labels>
   </UIVersionInfo>
   <!--
   ################################################################################
@@ -1471,11 +1488,16 @@
   -->
   <UIDiff>
     <label>
+      <backTo>Back to version history</backTo>
       <diffTitle>Compară între două versiuni</diffTitle>
-      <noChange>Nici o schimbare între două versiuni</noChange>
-      <baseVerion>Versiunea de bază</baseVerion>
+      <noContent>There is no content to compare</noContent>
       <compareVerion>Versiune</compareVerion>
       <can-not-compare>Eroare la compararea versiunilor</can-not-compare>
+      <compare-unavailable>Version comparison is not available for this document</compare-unavailable>
+      <DateChange>On {0}</DateChange>
+      <PreviousAndNextCompare>Modificări de la {0} la {1}</PreviousAndNextCompare>
+      <ComparedWith>Comparată cu</ComparedWith>
+      <restoredFrom>Restored from version {0}</restoredFrom>
     </label>
   </UIDiff>
   <!--
@@ -2436,7 +2458,7 @@
       <Back>Înapoi la Redenumire</Back>
       <Keepfile>Păstrează ambele fişiere</Keepfile>
 <ReadOnly>Open Read-only</ReadOnly>
-<Cancel>Renunță</Cancel>
+<Cancel>Cancel</Cancel>
       <KeepBoth>Keep Both</KeepBoth>
       <CreateNewVersion>Create a new version</CreateNewVersion>
     </label>
@@ -3082,6 +3104,7 @@
     <msg>
       <no-view-found>Nu există nicio vizualizare disponibilă ținând cont de  permisiunile de acces la unitatea "{0}".</no-view-found>
       <access-denied>Acces refuzat. Nu aveți permisiunea în spațiul de lucru din unitatea "{0}".</access-denied>
+      <not-found>The document you are trying to access is no longer available.</not-found>
       <empty-drives>Acces refuzat. Nu există nici o unitate în acest depozit, fie nu aveţi permisiunea de a accesa orice unitate în acest depozit.</empty-drives>
       <workspace-not-exist>Unitatea "{0}" a fost stocată într-un spațiu de lucru nerecunoscut. Vă rugăm să reconfiguraţi această unitate.</workspace-not-exist>
     </msg>

@@ -15,7 +15,7 @@
     </info>
     <action>
       <title>
-        <select>Seleccionar</select>
+        <select>Select</select>
       </title>
     </action>
   </UITreeList>
@@ -67,7 +67,7 @@
   </UIPermissionMembership>
   <TaxoSelectUserOrGroup>
     <label>
-      <selectGroup>Seleccionar grupo</selectGroup>
+      <selectGroup>Select Group</selectGroup>
       <selectMembership>Seleccione la afiliación</selectMembership>
     </label>
   </TaxoSelectUserOrGroup>
@@ -78,7 +78,7 @@
   -->
   <UICLVConfigTargetPageSelectorPopupWindow>
     <title>
-      <UIPageSelector>Selector Página</UIPageSelector>
+      <UIPageSelector>Page Selector</UIPageSelector>
     </title>
   </UICLVConfigTargetPageSelectorPopupWindow>
   <!--
@@ -88,7 +88,7 @@
   -->
   <rootNodeInfo>
     <title>
-      <AddRootNode>Agregar nodo raíz</AddRootNode>
+      <AddRootNode>Add Root Node</AddRootNode>
     </title>
   </rootNodeInfo>
   <!--
@@ -98,7 +98,7 @@
   -->
   <UIMetadataAnyPermission>
     <label>
-      <anyPermission>Cualquier Permiso</anyPermission>
+      <anyPermission>Any Permission</anyPermission>
     </label>
   </UIMetadataAnyPermission>
 </bundle>

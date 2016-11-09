@@ -40,15 +40,11 @@
   -->
   <UITaxonomyWorkingArea>
     <msg>
-      <referential-integrity>Não é possível ler a partir do arquivo fonte ou a categoria de destino é uma
-        subcategoria.
-      </referential-integrity>
+      <referential-integrity>Não é possível ler a partir do arquivo fonte ou a categoria de destino é uma subcategoria.</referential-integrity>
       <no-taxonomy-selected>Você deve copiar ou colar pelo menos uma categoria.</no-taxonomy-selected>
-      <node-is-cutting>Não é possível copiar aqui. A categoria selecionada '{0}' provavelmente foi movida ou excluída.
-      </node-is-cutting>
+      <node-is-cutting>Não é possível copiar aqui. A categoria selecionada '{0}' provavelmente foi movida ou excluída.</node-is-cutting>
       <can-not-paste>Não há dado na área de transferência para ser colado.</can-not-paste>
-      <reference-exception>Não é possível excluir esta categoria porque está sendo referenciada por outro conteúdo.
-      </reference-exception>
+      <reference-exception>Não é possível excluir esta categoria porque está sendo referenciada por outro conteúdo.</reference-exception>
       <path-error>Um erro ocorreu ao remover essa categoria.</path-error>
     </msg>
   </UITaxonomyWorkingArea>
@@ -73,9 +69,7 @@
   <UITaxonomyTreeContainer>
     <tab>
       <info>
-        <UITaxonomyTreeMainForm>Escolha um nome para a categoria, um espaço de trabalho e caminho raiz para a
-          categoria.
-        </UITaxonomyTreeMainForm>
+        <UITaxonomyTreeMainForm>Escolha um nome para a categoria, um espaço de trabalho e caminho raiz para a categoria.</UITaxonomyTreeMainForm>
         <UIPermissionTreeManager>Escolha o tipo de permissão de acesso à árvore de categorias.</UIPermissionTreeManager>
         <UIActionTaxonomyManager>Adicione uma ação a árvore de categorias para finalizar.</UIActionTaxonomyManager>
         <UITaxonomyTreeCreateChild>Edite a árvore de categorias e defina permissões.</UITaxonomyTreeCreateChild>
@@ -256,8 +250,7 @@
     <msg>
       <confirm-delete>Você deseja realmente excluir este metadado ?</confirm-delete>
       <delete-successful>Os modelos de '{0}' foram excluídos com sucesso.</delete-successful>
-      <path-not-found-exception>Esses metadados foram excluídos ou alterados. Por favor, clique no botão Atualizar.
-      </path-not-found-exception>
+      <path-not-found-exception>Esses metadados foram excluídos ou alterados. Por favor, clique no botão Atualizar.</path-not-found-exception>
     </msg>
     <action>
       <Add>Adicionar Metadado</Add>
@@ -568,11 +561,8 @@
     </action>
     <msg>
       <register-successfully>O tipo de nó '{0}' foi registrado com êxito</register-successfully>
-      <supertype-is-madatory>Supertipo é obrigatório para registrar um novo tipo de nó. Pelo menos um supertipo deve ser
-        escolhido.
-      </supertype-is-madatory>
-      <register-failed>O registro do tipo de nó não funcionou. Ele já existe ou o super tipo é inválido
-      </register-failed>
+      <supertype-is-madatory>Supertipo é obrigatório para registrar um novo tipo de nó. Pelo menos um supertipo deve ser escolhido.</supertype-is-madatory>
+      <register-failed>O registro do tipo de nó não funcionou. Ele já existe ou o super tipo é inválido</register-failed>
       <nodeType-name>Nome do tipo de nó é obrigatório.</nodeType-name>
       <fileName-invalid>Há alguns caracteres inválidos no nome.</fileName-invalid>
       <node-type-exists>O tipo de nó '{0}' já existe!</node-type-exists>
@@ -591,8 +581,7 @@
     </tab>
     <msg>
       <property-name>Nome de definição da propriedade inválido!</property-name>
-      <not-supported-value-constraints>O tipo obrigatório não suporta restrições de valor.
-      </not-supported-value-constraints>
+      <not-supported-value-constraints>O tipo obrigatório não suporta restrições de valor.</not-supported-value-constraints>
     </msg>
   </UIPropertyDefinitionForm>
   <UIChildNodeDefinitionForm>
@@ -766,7 +755,7 @@
     <label>
       <actionType>Extender tipo de ação</actionType>
       <name>Nome (começa com "exo:")</name>
-      <isMove>is Action Move:</isMove>
+      <isMove>é Ação Mover:</isMove>
       <variables>Variáveis:</variables>
       <exo_businessProcessAction>Processo de negócio:</exo_businessProcessAction>
       <exo_scriptAction>Scripts Groovy</exo_scriptAction>
@@ -803,7 +792,7 @@
       <UIActionsTemplateContainer>Ações</UIActionsTemplateContainer>
       <UIOthersTemplateContainer>Outros</UIOthersTemplateContainer>
       <UIActionScriptContainer>Ação</UIActionScriptContainer>
-      <UIWidgetScriptContainer>Widgets</UIWidgetScriptContainer>
+      <UIWidgetScriptContainer>Componentes</UIWidgetScriptContainer>
       <UIInterceptorScriptContainer>Interceptadores</UIInterceptorScriptContainer>
 
       <nodeTypeDefinition>Tipo de nó</nodeTypeDefinition>
@@ -889,8 +878,7 @@
     </label>
     <msg>
       <confirm-delete>Tem certeza que deseja excluir esta permissão?</confirm-delete>
-      <permission-cannot-empty>A permissão para a visualização é obrigatória e não pode ser vazio.
-      </permission-cannot-empty>
+      <permission-cannot-empty>A permissão para a visualização é obrigatória e não pode ser vazio.</permission-cannot-empty>
     </msg>
   </UIViewPermissionList>
 
@@ -1000,12 +988,12 @@
       <publicationPublish>Publicar</publicationPublish>
       <contentNavigation>Navegação do conteúdo</contentNavigation>
       <addSymLink>Adicionar link simbólico</addSymLink>
-      <checkIn>Check In</checkIn>
-      <checkOut>Check Out</checkOut>
-      <shareDocuments>Compartilhar</shareDocuments>
-      <openDocument>Remote Edit</openDocument>
-      <editProperty>Edit Document Properties</editProperty>
-      <uploadNewVersion>Upload a new version</uploadNewVersion>
+      <checkIn>Entrar</checkIn>
+      <checkOut>Sair</checkOut>
+      <shareDocuments>Share</shareDocuments>
+      <openDocument>Edição remota</openDocument>
+      <editProperty>Editar propriedades do documento</editProperty>
+      <uploadNewVersion>Carregar uma nova versão</uploadNewVersion>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -1035,7 +1023,7 @@
   </UIViewFormTabPane>
   <PopupViewPermission>
     <title>
-      <UIPermissionSelector>Seletor de permissão</UIPermissionSelector>
+      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
     </title>
   </PopupViewPermission>
 
@@ -1086,7 +1074,7 @@
   -->
   <UITemplateForm>
     <title>
-      <AddPermission>Adicionar Permissão</AddPermission>
+      <AddPermission>Add Permission</AddPermission>
     </title>
     <action>
       <Save>#{word.save}</Save>
@@ -1197,7 +1185,7 @@
   -->
   <uiECMScriptsPopup>
     <title>
-      <ecmScriptForm>ECM Script</ecmScriptForm>
+      <ecmScriptForm>Script de ECM</ecmScriptForm>
     </title>
   </uiECMScriptsPopup>
 
@@ -1395,7 +1383,7 @@
       <set_property>Permissão para alterar propriedades</set_property>
       <remove>Permissão para remoção</remove>
     </label>
-    <title>Add a permission to this node</title>
+    <title>Adicionar uma permissão para este nó</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>Salvar</Save>
@@ -1417,7 +1405,7 @@
 
   <PopupTaxonomyTreePermission>
     <title>
-      <UIPermissionSelector>Seletor de permissão</UIPermissionSelector>
+      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
     </title>
   </PopupTaxonomyTreePermission>
 
@@ -1498,7 +1486,7 @@
       <add_node>Modificar</add_node>
       <remove>Remover</remove>
     </label>
-    <title>Add permission to this node</title>
+    <title>Adicionar permissão ao nó</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>#{word.save}</Save>
@@ -1749,7 +1737,7 @@
   -->
   <AddNewTemplatePermission>
     <title>
-      <UIPermissionSelector>Seletor de permissão</UIPermissionSelector>
+      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
     </title>
   </AddNewTemplatePermission>
   <TemplatePermission>
@@ -1790,12 +1778,12 @@
   </DialogForm>
   <DialogFormTemplatePermission>
     <title>
-      <UIPermissionSelector>Seletor de permissão</UIPermissionSelector>
+      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
     </title>
   </DialogFormTemplatePermission>
   <ViewFormTemplatePermission>
     <title>
-      <UIPermissionSelector>Seletor de permissão</UIPermissionSelector>
+      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
     </title>
   </ViewFormTemplatePermission>
   <TemplateContainerPopup>
@@ -1952,9 +1940,7 @@
     <msg>
       <confirm-delete>Deseja realmente excluir essa consulta?</confirm-delete>
       <query-not-existed>A consulta não existe mais.</query-not-existed>
-      <can-not-remove>Ocorreu um erro ao excluir a consulta. Entre em contato com o administrador para obter
-        informações.
-      </can-not-remove>
+      <can-not-remove>Ocorreu um erro ao excluir a consulta. Entre em contato com o administrador para obter informações.</can-not-remove>
     </msg>
   </UIQueriesList>
   <UIQueriesForm>
@@ -1990,7 +1976,7 @@
   </EditQueryForm>
   <PermissionPopup>
     <title>
-      <UIGroupMemberSelector>Seletor de permissão</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Permission Selector</UIGroupMemberSelector>
     </title>
   </PermissionPopup>
   <!--
@@ -2031,13 +2017,9 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <range-validator>Intervalo inválido. O formato de alcance válido é: a..b com a, b sendo inteiros positivos. Você
-        pode usar * ao invés de b para indicar infinito.
-      </range-validator>
+      <range-validator>Intervalo inválido. O formato de alcance válido é: a..b com a, b sendo inteiros positivos. Você pode usar * ao invés de b para indicar infinito.</range-validator>
       <error-update>Erro na atualização. Sua informação é inválida.</error-update>
-      <item-not-existing>Você não pode salvar as alterações para esta tag, já que ela não existe mais no banco de
-        dados.
-      </item-not-existing>
+      <item-not-existing>Você não pode salvar as alterações para esta tag, já que ela não existe mais no banco de dados.</item-not-existing>
     </msg>
   </UITagStyleForm>
   <FolksonomyPopup>
@@ -2052,7 +2034,7 @@
   -->
   <ECMPhoneFormatValidator>
     <msg>
-      <Invalid>The field '{0}' contains an invalid Phone number. Please enter another value.</Invalid>
+      <Invalid>O campo '{0}' contém um número de telefone inválido. Insira outro valor.</Invalid>
     </msg>
   </ECMPhoneFormatValidator>
   <!--
@@ -2351,8 +2333,7 @@
       <UnLock>Desbloquear</UnLock>
     </tooltip>
     <msg>
-      <access-denied-exception>Você não possui permissão para acessar o nó com o caminho {0} ou este nó foi excluido.
-      </access-denied-exception>
+      <access-denied-exception>Você não possui permissão para acessar o nó com o caminho {0} ou este nó foi excluido.</access-denied-exception>
     </msg>
   </UILockNodeList>
   <EditUnLockForm>
@@ -2466,8 +2447,7 @@
     </action>
     <msg>
       <xss-vulnerability-character>Campo '{0}' contém caracteres de vulnerabilidade XSS</xss-vulnerability-character>
-      <xss-vulnerability-character-wo-label>Sua entrada de dados pode conter caracteres de vulnerabilidade XSS
-      </xss-vulnerability-character-wo-label>
+      <xss-vulnerability-character-wo-label>Sua entrada de dados pode conter caracteres de vulnerabilidade XSS</xss-vulnerability-character-wo-label>
     </msg>
   </UIActionForm>
 
@@ -2505,11 +2485,10 @@
       <Add>Adicionar</Add>
     </action>
     <label>
-      <userOrGroup>Tipos de associação:</userOrGroup>
+      <userOrGroup>Memberships:</userOrGroup>
     </label>
     <msg>
-      <userOrGroup-alreadyExists>Esse tipo de associação já existe. Por favor, escolha outro.
-      </userOrGroup-alreadyExists>
+      <userOrGroup-alreadyExists>Esse tipo de associação já existe. Por favor, escolha outro.</userOrGroup-alreadyExists>
     </msg>
   </UITagPermissionForm>
 
@@ -2544,9 +2523,7 @@
   </NodeTypeNameValidator>
   <UIActionForm>
     <msg>
-      <constraint-violation-exception>O nó '{0}' não pode ser adicionado a '{1}' no no espaço de trabalho '{2}'. Há um
-        problema com permissões ou condições de restrição.
-      </constraint-violation-exception>
+      <constraint-violation-exception>O nó '{0}' não pode ser adicionado a '{1}' no no espaço de trabalho '{2}'. Há um problema com permissões ou condições de restrição.</constraint-violation-exception>
     </msg>
   </UIActionForm>
 
@@ -2557,9 +2534,7 @@
   </UIWorkspaceWizard>
   <UIRepositoryForm>
     <msg>
-      <not-complete-repository>O repositório está sendo criado. Você precisa esperar alguns minutos para criar outro
-        novo repositório
-      </not-complete-repository>
+      <not-complete-repository>O repositório está sendo criado. Você precisa esperar alguns minutos para criar outro novo repositório</not-complete-repository>
     </msg>
   </UIRepositoryForm>
 

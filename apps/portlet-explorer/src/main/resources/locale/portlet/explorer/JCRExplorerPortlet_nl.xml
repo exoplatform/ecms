@@ -17,7 +17,7 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <not-support>Geen Commentaar toegelaten voor dit type document</not-support>
+      <not-support>You can't comment on this type of document.</not-support>
       <not-checkedout>U moet eerst een checkout doen van node voor u Commentaar plaatst</not-checkedout>
       <content-null>Commentaar inhoud is null of leeg. Geef commentaar</content-null>
     </msg>
@@ -250,7 +250,7 @@
       <UIActivePublication>Enrol to publication lifecycle</UIActivePublication>
       <UITaggingForm>Tagging dit document</UITaggingForm>
       <UIThumbnailForm>Thumbnail afbeelding toevoegen</UIThumbnailForm>
-      <UIAllItemsPreferenceForm>Voorkeuren</UIAllItemsPreferenceForm>
+      <UIAllItemsPreferenceForm>Preferences</UIAllItemsPreferenceForm>
       <UISelectRestorePath>Selecteer Restore pad</UISelectRestorePath>
       <UISEOForm>Beheren van SEO</UISEOForm>
       <UISEOToolbarForm>Beheren van SEO</UISEOToolbarForm>
@@ -597,7 +597,7 @@
       <RestoreFromTrash>Terughalen uit prullenbak</RestoreFromTrash>
       <EmptyTrash>Prullenbak leegmaken</EmptyTrash>
       <WebDavView>Download and allow edition</WebDavView>
-      <Download>Downloaden</Download>
+      <Download>Download</Download>
       <OpenDocument>Extern bewerken</OpenDocument>
       <EditProperty>Documenteigenschappen bewerken</EditProperty>
       <UploadNewVersion>Een nieuwe versie uploaden</UploadNewVersion>
@@ -632,8 +632,8 @@
       <UIPublishingPanel>Publication Pane</UIPublishingPanel>
       <UIPublicationPanel>Revisie</UIPublicationPanel>
       <UIPublicationSchedule>Gepland</UIPublicationSchedule>
-      <UIPublicationPagesContainer>Pagina's</UIPublicationPagesContainer>
-      <UIPublicationHistory>Geschiedenis</UIPublicationHistory>
+      <UIPublicationPagesContainer>Pages</UIPublicationPagesContainer>
+      <UIPublicationHistory>History</UIPublicationHistory>
       <UIVersionViewer>Versie Viewer</UIVersionViewer>
 
       <UIPropertyTab>Eigenschappen</UIPropertyTab>
@@ -656,9 +656,9 @@
       <UIActionViewContainer>Actie info</UIActionViewContainer>
       <UIMultiLanguageForm>Toon taal</UIMultiLanguageForm>
       <UIAddLanguageContainer>taal toevoegen</UIAddLanguageContainer>
-      <UINonPublishedForm>Forum Staat</UINonPublishedForm>
-      <UIPublishedForm>Forum Staat</UIPublishedForm>
-      <UIPublicationLogList>Geschiedenis</UIPublicationLogList>
+      <UINonPublishedForm>State</UINonPublishedForm>
+      <UIPublishedForm>State</UIPublishedForm>
+      <UIPublicationLogList>History</UIPublicationLogList>
       <UIDocumentWithTree>bestandszicht</UIDocumentWithTree>
       <UIDocumentInfo>Document zicht</UIDocumentInfo>
       <UICategoriesSelectPanel>Select categories</UICategoriesSelectPanel>
@@ -976,10 +976,10 @@
   </UIShowAllOwnedByUserResult>
   <UIShowAllFavouriteResult>
     <msg>
-      <not-support>Er is geen Toon template voor deze node</not-support>
+      <not-support>There is no View template for this node</not-support>
       <empty>Geen resultaten gevonden</empty>
       <access-denied>U kunt dit node, niet bekijken omdat deze sjabloon wordt niet ondersteund of omdat de toegang is geweigerd.</access-denied>
-      <query-invalid>The query is ongeldig</query-invalid>
+      <query-invalid>The query is invalid</query-invalid>
     </msg>
     <header>
       <name>#{word.name}</name>
@@ -1033,8 +1033,8 @@
       <datecreatedDESC>Gemaakt datum in aflopende volgorde sorteren</datecreatedDESC>
     </title>
     <tooltip>
-      <View>Toon node</View>
-      <OpenFolder>Ga naar map</OpenFolder>
+      <View>View this Node</View>
+      <OpenFolder>Go to Folder</OpenFolder>
       <RemoveHiddenAttribute>Verwijder verborgen kenmerk</RemoveHiddenAttribute>
     </tooltip>
   </UIShowAllHiddenResult>
@@ -1065,8 +1065,8 @@
       <datecreatedDESC>Gemaakt datum in aflopende volgorde sorteren</datecreatedDESC>
     </title>
     <tooltip>
-      <View>Toon node</View>
-      <OpenFolder>Ga naar map</OpenFolder>
+      <View>View this Node</View>
+      <OpenFolder>Go to Folder</OpenFolder>
       <DeletePermanently>Permanent verwijderen</DeletePermanently>
       <RestoreFromTrash>Terughalen uit prullenbak</RestoreFromTrash>
     </tooltip>
@@ -1330,7 +1330,7 @@
   -->
   <PopupUserSelector>
     <title>
-      <UIUserContainer>Permissie selecteur</UIUserContainer>
+      <UIUserContainer>Permission Selector</UIUserContainer>
     </title>
   </PopupUserSelector>
   <UIPopupTaxonomy>
@@ -1345,7 +1345,13 @@
   ###############################################################################
   -->
   <UIVersionInfo>
+    <title>Version history</title>
+    <summary>
+      <empty>Click here to add a summary</empty>
+    </summary>
     <tooltip>
+      <version>Version</version>
+      <baseVersion>Base Version</baseVersion>
       <addLabel>Label toevoegen</addLabel>
       <removeLable>Label verwijdern</removeLable>
       <restoreVersion>Versie herstellen</restoreVersion>
@@ -1356,6 +1362,9 @@
     <msg>
       <have-no-view-template>Toon template of dit is niet ondersteund</have-no-view-template>
       <cannot-remove-version>Kan basis versie niet verwijderen</cannot-remove-version>
+      <error-removing-version>An error occurred while deleting this version.</error-removing-version>
+      <error-removing-referenced-version>This version is referenced and can't be removed.</error-removing-referenced-version>
+      <confirm-restore>Are you sure you want to restore this version?</confirm-restore>
       <confirm-delete>Wilt u deze version verwijderen?</confirm-delete>
       <not-checked-out>U moet eerst check out deze node vooraleer u kunt herstellen.</not-checked-out>
       <invalid-item-state>You can not restore this version. Probably one or more items was deleted or moved by another session.</invalid-item-state>
@@ -1363,7 +1372,15 @@
     <action>
       <close>#{word.close}</close>
       <close-view>Close view</close-view>
+      <compare-versions>Compare selected versions</compare-versions>
     </action>
+    <labels>
+      <version>Versie</version>
+      <date>Datum</date>
+      <author>Modified By</author>
+      <summary>Samenvatting</summary>
+      <action>Actie</action>
+    </labels>
   </UIVersionInfo>
   <!--
   ################################################################################
@@ -1386,7 +1403,7 @@
       <e_256>Add mixin</e_256>
       <e_512>Remove mixin</e_512>
       <e_1024>Kloon</e_1024>
-      <e_2048>Choose file</e_2048>
+      <e_2048>Update</e_2048>
       <e_4096>Importeer Node</e_4096>
       <e_8192>Inchecken</e_8192>
       <e_16384>Uitchecken</e_16384>
@@ -1405,7 +1422,7 @@
       <operation>Operatie</operation>
       <userName>Gebruikersnaam</userName>
       <date>Datum</date>
-      <version>Versie</version>
+      <version>Version</version>
     </label>
   </UIAuditingInfo>
 
@@ -1471,11 +1488,16 @@
   -->
   <UIDiff>
     <label>
+      <backTo>Back to version history</backTo>
       <diffTitle>Vergelijk tussen 2 versies</diffTitle>
-      <noChange>Geen verandering tussen 2 versies</noChange>
-      <baseVerion>Basis versie</baseVerion>
+      <noContent>There is no content to compare</noContent>
       <compareVerion>Versie</compareVerion>
       <can-not-compare>Probleem bij het vergelijken van 2 versies</can-not-compare>
+      <compare-unavailable>Version comparison is not available for this document</compare-unavailable>
+      <DateChange>On {0}</DateChange>
+      <PreviousAndNextCompare>Wijzigingen ten opzichte van {0} naar {1}</PreviousAndNextCompare>
+      <ComparedWith>In vergelijking met</ComparedWith>
+      <restoredFrom>Restored from version {0}</restoredFrom>
     </label>
   </UIDiff>
   <!--
@@ -1550,7 +1572,7 @@
   </UIVersionTree>
   <UIViewVersion>
     <label>
-      <nodeType>Node type</nodeType>
+      <nodeType>Node Type</nodeType>
       <nodeName>Node naam</nodeName>
       <VersionNumber>versie Nummer</VersionNumber>
       <VersionLabels>Versie Labels</VersionLabels>
@@ -2006,11 +2028,11 @@
   -->
   <UIPublicationForm>
     <label>
-      <published>Gepubliceerd</published>
+      <published>Published</published>
       <non-published>UnPublished</non-published>
-      <public>Openbaar</public>
-      <private>Prive</private>
-      <state>Forum Staat</state>
+      <public>Public</public>
+      <private>Private</private>
+      <state>State</state>
       <visibility>Zichtbaarheid</visibility>
       <nodeName>Node naam:</nodeName>
       <lifecycleName>Lifecycle naam</lifecycleName>
@@ -2123,8 +2145,8 @@
   -->
   <UIVersionTreeList>
     <header>
-      <version>Versie</version>
-      <state>Forum Staat</state>
+      <version>Version</version>
+      <state>State</state>
     </header>
   </UIVersionTreeList>
   <!--
@@ -2226,7 +2248,7 @@
 
   <UIDriveSelector>
     <label>
-      <driveName>Drive Naam</driveName>
+      <driveName>Drive Name</driveName>
       <action>Actie</action>
       <adddrives>Drive toevoegen</adddrives>
     </label>
@@ -2295,7 +2317,7 @@
       <repository-exception>De toegang is geweigerd. U bent niet gemachtigd om toe te voegen symlink naar dit node.</repository-exception>
       <numberformat-exception>Can not save this folder. The name provided must be a number format</numberformat-exception>
       <path-node-invalid>Please enter Path Node!</path-node-invalid>
-      <path-node-not-allowed>Deze naam is niet toegestaan.</path-node-not-allowed>
+      <path-node-not-allowed>This name is not allowed.</path-node-not-allowed>
       <non-node>Please choose trust target node Or you don't have enough rights to read this node</non-node>
       <cannot-save>Some constraints were violated during that action.</cannot-save>
       <item-exists-exception>The node with the same name already exists</item-exists-exception>
@@ -2659,7 +2681,7 @@
           <Alphabetic>Alphabetic</Alphabetic>
           <Type>Type</Type>
           <CreatedDate>Gemaakt datum</CreatedDate>
-          <ModifiedDate>Gewijzigd datum</ModifiedDate>
+          <ModifiedDate>Modified Date</ModifiedDate>
           <Ascending>Stijgend</Ascending>
           <Descending>Dalend</Descending>
       </label>
@@ -2667,7 +2689,7 @@
 
   <UISavedSearches>
     <title>
-      <savedSearches>Opgeslagen zoekopdrachten</savedSearches>
+      <savedSearches>Saved Searches</savedSearches>
     </title>
   </UISavedSearches>
   <DocumentType>
@@ -2727,10 +2749,10 @@
 
   <UIAllItemsPreferenceForm>
     <label>
-      <showOwnedByUser>Waarvan ik eigenaar ben</showOwnedByUser>
-      <showFavourites>Favorieten</showFavourites>
+      <showOwnedByUser>Owned by me</showOwnedByUser>
+      <showFavourites>Favorites</showFavourites>
       <showHiddens>Verborgen</showHiddens>
-      <showTrash>Vuilbak</showTrash>
+      <showTrash>Trash</showTrash>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -2765,8 +2787,8 @@
 
    <UITaggingForm>
     <label>
-      <Public>Openbaar</Public>
-      <Private>Prive</Private>
+      <Public>Public</Public>
+      <Private>Private</Private>
       <tagScopes>Tag Scopes</tagScopes>
     </label>
    </UITaggingForm>
@@ -2949,19 +2971,19 @@
       <Close>#{word.close}</Close>
     </button>
     <revisions>
-      <version>Herzieningen</version>
+      <version>Revisions</version>
       <date>Datum</date>
-      <author>Auteur</author>
-      <status>Forum Status</status>
+      <author>Author</author>
+      <status>Status</status>
       <action>Actie</action>
-      <label>Revisie</label>
+      <label>Revision</label>
       <none>Geen revisies</none>
       <seeall>Zie alle versies</seeall>
       <currentVersion>Huidige revisie</currentVersion>
       <confirm>U verliest uw ontwerp werk. Weet u zeker dat u wilt vervangen door de huidige herziening?</confirm>
     </revisions>
     <status>
-      <version>Revisie</version>
+      <version>Revision</version>
       <title>Status</title>
       <archived>Gearchiveerd</archived>
       <obsolete>Verouderde</obsolete>
@@ -2969,7 +2991,7 @@
       <enrolled>Ingeschreven</enrolled>
       <draft>Ontwerp</draft>
       <pending>In behandeling</pending>
-      <approved>Goedgekeurd</approved>
+      <approved>Approved</approved>
       <inreview>In Review</inreview>
       <staged>Geënsceneerd</staged>
       <published>Gepubliceerd</published>
@@ -2994,8 +3016,8 @@
       <date>Datum</date>
       <versionName>Revisie naam</versionName>
       <currentState>Huidige toestand</currentState>
-      <user>Auteur</user>
-      <description>Beschrijving</description>
+      <user>Author</user>
+      <description>Description</description>
     </header>
     <create-version>Nieuwe versie is gemaakt</create-version>
   </UIPublicationHistory>
@@ -3082,6 +3104,7 @@
     <msg>
       <no-view-found>Er zijn geen zichtbaar toegepast voor uw toegangsmachtiging in station '{0}'.</no-view-found>
       <access-denied>Toegang geweigerd! U hebt misschien geen recht op werkruimte van schijf '{0}'.</access-denied>
+      <not-found>The document you are trying to access is no longer available.</not-found>
       <empty-drives>Er is geen schijf in deze repository of u hebt geen toegang op schijven van deze repository.</empty-drives>
       <workspace-not-exist>Drive '{0}' werd opgeslagen in een niet-herkende werkruimte. Configureer dit drive.</workspace-not-exist>
     </msg>
@@ -3107,7 +3130,7 @@
   <lifecyclePhase>
     <label>
     <no>Nee</no>
-  <yes>Ja</yes>
+  <yes>Yes</yes>
   <true>Waar</true>
   <false>Valse</false>
   <Electronic>Elektronische</Electronic>
@@ -3166,11 +3189,11 @@
     <MaxFileSizeAlert>De bestandsgrootte overschrijdt de limiet van</MaxFileSizeAlert>
     <Waiting>Wachten</Waiting>
     <Error>Foutmelding</Error>
-    <or>of</or>
+    <or>or</or>
     <AlreadyInUse>Reeds in gebruik</AlreadyInUse>
     <Keep>Houd zowel</Keep>
-    <Replace>Vervangen</Replace>
-    <Canceled>Geannuleerd</Canceled>
+    <Replace>Replace</Replace>
+    <Canceled>Canceled</Canceled>
       <UploadNewVersion>Een nieuwe versie uploaden</UploadNewVersion>
     <Cancel>#{word.cancel}</Cancel>
     <AbortAllConfirmation>Wilt u alle bestanden die bezig zijn nu afbreken?</AbortAllConfirmation>
@@ -3178,7 +3201,7 @@
   </UIMultiUpload>
   <UIDocumentNodeList>
   <label>
-  <CreatedOn>Gecreëerd Datum</CreatedOn>
+  <CreatedOn>Created on</CreatedOn>
   <Updated>Updated</Updated>
   <by>door</by>
   <you>u</you>
@@ -3188,7 +3211,7 @@
     <label>
       <name>Naam</name>
       <date>Datum</date>
-      <size>Grootte</size>
+      <size>Size</size>
       <sortBy>Sorteer op</sortBy>
       <filesAreSelected>Bestanden zijn geselecteerd.</filesAreSelected>
       <ClearSelection>Keuze verwijderen</ClearSelection>

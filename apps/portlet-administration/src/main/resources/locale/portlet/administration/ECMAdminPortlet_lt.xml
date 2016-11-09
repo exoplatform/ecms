@@ -40,14 +40,11 @@
   -->
   <UITaxonomyWorkingArea>
     <msg>
-      <referential-integrity>Negalima skaityti šaltinio failo, arba paskirties kategorija yra žemesnio lygio
-        kategorija.
-      </referential-integrity>
+      <referential-integrity>Negalima skaityti šaltinio failo, arba paskirties kategorija yra žemesnio lygio kategorija.</referential-integrity>
       <no-taxonomy-selected>Turite kopijuoti arba iškirpti bent vieną kategoriją.</no-taxonomy-selected>
       <node-is-cutting>Jūs negalite įklijuoti čia. Kategorijos mazgas '{0}' gali būti iškirptas.</node-is-cutting>
       <can-not-paste>Nėra iškarpinėje duomenų, kad įklijuoti.</can-not-paste>
-      <reference-exception>Negalite panaikinti šios kategorijos, nes ji šiuo metu yra susieta su turiniu.
-      </reference-exception>
+      <reference-exception>Negalite panaikinti šios kategorijos, nes ji šiuo metu yra susieta su turiniu.</reference-exception>
       <path-error>Įvyko klaida šalinant šios kategorijos mazgą.</path-error>
     </msg>
   </UITaxonomyWorkingArea>
@@ -74,10 +71,8 @@
       <info>
         <UITaxonomyTreeMainForm>Nurodykite kategorijos pavadinimą, darbo vietos ir namų kelią.</UITaxonomyTreeMainForm>
         <UIPermissionTreeManager>Nustatyti teisę kategorijos medžiui.</UIPermissionTreeManager>
-        <UIActionTaxonomyManager>Pridėkite veiksmą prie kategorijų medžio, kad baigti kūrimą ar atnaujinimą.
-        </UIActionTaxonomyManager>
-        <UITaxonomyTreeCreateChild>Pridėti, kopijuoti, kirpti ir pasirinkti teises redaguojant taksonomijos medį.
-        </UITaxonomyTreeCreateChild>
+        <UIActionTaxonomyManager>Pridėkite veiksmą prie kategorijų medžio, kad baigti kūrimą ar atnaujinimą.</UIActionTaxonomyManager>
+        <UITaxonomyTreeCreateChild>Pridėti, kopijuoti, kirpti ir pasirinkti teises redaguojant taksonomijos medį.</UITaxonomyTreeCreateChild>
       </info>
     </tab>
     <msg>
@@ -255,8 +250,7 @@
     <msg>
       <confirm-delete>Ar tikrai norite naikinti šiuos metaduomenis?</confirm-delete>
       <delete-successful>"{0}" šablonai buvo sėkmingai ištrinti.</delete-successful>
-      <path-not-found-exception>Šie metaduomenys buvo ištrinti arba pakeisti. Spustelėkite mygtuką atnaujinti.
-      </path-not-found-exception>
+      <path-not-found-exception>Šie metaduomenys buvo ištrinti arba pakeisti. Spustelėkite mygtuką atnaujinti.</path-not-found-exception>
     </msg>
     <action>
       <Add>Pridėti metaduomenis</Add>
@@ -567,11 +561,8 @@
     </action>
     <msg>
       <register-successfully>'{0}' mazgo tipas buvo sėkmingai užregistruotas.</register-successfully>
-      <supertype-is-madatory>Super tipas yra privalomas kai užregistruojate naują mazgo tipą. Prašome pasirinkti bent
-        vieną super tipą.
-      </supertype-is-madatory>
-      <register-failed>Mazgo tipo registracija buvo nesėkminga. Ji arba jau yra arba super tipas yra netinkamas.
-      </register-failed>
+      <supertype-is-madatory>Super tipas yra privalomas kai užregistruojate naują mazgo tipą. Prašome pasirinkti bent vieną super tipą.</supertype-is-madatory>
+      <register-failed>Mazgo tipo registracija buvo nesėkminga. Ji arba jau yra arba super tipas yra netinkamas.</register-failed>
       <nodeType-name>Mazgo tipo pavadinimas yra reikalaujamas.</nodeType-name>
       <fileName-invalid>Failo varde yra neleistinų simbolių.</fileName-invalid>
       <node-type-exists>Mazgo tipas '{0}', jau yra.</node-type-exists>
@@ -590,8 +581,7 @@
     </tab>
     <msg>
       <property-name>Ypatybės apibrėžimo pavadinimas yra negaliojantis.</property-name>
-      <not-supported-value-constraints>Šis reikalinga tipas nepalaiko vertės apribojimų.
-      </not-supported-value-constraints>
+      <not-supported-value-constraints>Šis reikalinga tipas nepalaiko vertės apribojimų.</not-supported-value-constraints>
     </msg>
   </UIPropertyDefinitionForm>
   <UIChildNodeDefinitionForm>
@@ -1000,7 +990,7 @@
       <addSymLink>Pridėti nuorodą</addSymLink>
       <checkIn>Check In</checkIn>
       <checkOut>Check Out</checkOut>
-      <shareDocuments>Dalintis</shareDocuments>
+      <shareDocuments>Share</shareDocuments>
       <openDocument>Remote Edit</openDocument>
       <editProperty>Edit Document Properties</editProperty>
       <uploadNewVersion>Upload a new version</uploadNewVersion>
@@ -1033,7 +1023,7 @@
   </UIViewFormTabPane>
   <PopupViewPermission>
     <title>
-      <UIPermissionSelector>Teisės pasirinkimas</UIPermissionSelector>
+      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
     </title>
   </PopupViewPermission>
 
@@ -1415,7 +1405,7 @@
 
   <PopupTaxonomyTreePermission>
     <title>
-      <UIPermissionSelector>Teisės pasirinkimas</UIPermissionSelector>
+      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
     </title>
   </PopupTaxonomyTreePermission>
 
@@ -1747,7 +1737,7 @@
   -->
   <AddNewTemplatePermission>
     <title>
-      <UIPermissionSelector>Teisės pasirinkimas</UIPermissionSelector>
+      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
     </title>
   </AddNewTemplatePermission>
   <TemplatePermission>
@@ -1788,12 +1778,12 @@
   </DialogForm>
   <DialogFormTemplatePermission>
     <title>
-      <UIPermissionSelector>Teisės pasirinkimas</UIPermissionSelector>
+      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
     </title>
   </DialogFormTemplatePermission>
   <ViewFormTemplatePermission>
     <title>
-      <UIPermissionSelector>Teisės pasirinkimas</UIPermissionSelector>
+      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
     </title>
   </ViewFormTemplatePermission>
   <TemplateContainerPopup>
@@ -1986,7 +1976,7 @@
   </EditQueryForm>
   <PermissionPopup>
     <title>
-      <UIGroupMemberSelector>Teisės pasirinkimas</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Permission Selector</UIGroupMemberSelector>
     </title>
   </PermissionPopup>
   <!--
@@ -2027,12 +2017,9 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <range-validator>Diapazonas yra neteisingas. Formatas turi būti: a...b, tarp kurių a, b yra teigiami sveikieji
-        skaičiai. Galite naudoti * vietoj b nurodyti, kad diapazonas yra neribotas.
-      </range-validator>
+      <range-validator>Diapazonas yra neteisingas. Formatas turi būti: a...b, tarp kurių a, b yra teigiami sveikieji skaičiai. Galite naudoti * vietoj b nurodyti, kad diapazonas yra neribotas.</range-validator>
       <error-update>Naujinimas nepavyko. Jūsų informacija yra negaliojanti.</error-update>
-      <item-not-existing>Jūs negalėsite įrašyti keitimų į šią žymę, nes ji nebeegzistuoja duomenų bazėje.
-      </item-not-existing>
+      <item-not-existing>Jūs negalėsite įrašyti keitimų į šią žymę, nes ji nebeegzistuoja duomenų bazėje.</item-not-existing>
     </msg>
   </UITagStyleForm>
   <FolksonomyPopup>
@@ -2346,8 +2333,7 @@
       <UnLock>Atrakinti</UnLock>
     </tooltip>
     <msg>
-      <access-denied-exception>Jūs neturite leidimo pasiekti mazgo keliu {0}, arba šis mazgas yra panaikintas.
-      </access-denied-exception>
+      <access-denied-exception>Jūs neturite leidimo pasiekti mazgo keliu {0}, arba šis mazgas yra panaikintas.</access-denied-exception>
     </msg>
   </UILockNodeList>
   <EditUnLockForm>
@@ -2461,8 +2447,7 @@
     </action>
     <msg>
       <xss-vulnerability-character>Laukelyje '{0}' yra XSS pažeidžiamumo simbolių</xss-vulnerability-character>
-      <xss-vulnerability-character-wo-label>Jūsų indėlyje gali būti XSS pažeidžiamumo simbolių
-      </xss-vulnerability-character-wo-label>
+      <xss-vulnerability-character-wo-label>Jūsų indėlyje gali būti XSS pažeidžiamumo simbolių</xss-vulnerability-character-wo-label>
     </msg>
   </UIActionForm>
 
@@ -2500,7 +2485,7 @@
       <Add>Pridėti</Add>
     </action>
     <label>
-      <userOrGroup>Narystės:</userOrGroup>
+      <userOrGroup>Memberships:</userOrGroup>
     </label>
     <msg>
       <userOrGroup-alreadyExists>Ši narystė jau egzistuoja. Prašome pasirinkti kitą.</userOrGroup-alreadyExists>
@@ -2538,9 +2523,7 @@
   </NodeTypeNameValidator>
   <UIActionForm>
     <msg>
-      <constraint-violation-exception>Mazge '{0}' negali būti įtrauktas į '{1}' darbo srityje {2}. Yra problema su
-        teisėmis arba apribojimų sąlygomis.
-      </constraint-violation-exception>
+      <constraint-violation-exception>Mazge '{0}' negali būti įtrauktas į '{1}' darbo srityje {2}.  Yra problema su teisėmis arba apribojimų sąlygomis.</constraint-violation-exception>
     </msg>
   </UIActionForm>
 
@@ -2551,9 +2534,7 @@
   </UIWorkspaceWizard>
   <UIRepositoryForm>
     <msg>
-      <not-complete-repository>The repository is being created. You need to wait a few minutes before creating another
-        one.
-      </not-complete-repository>
+      <not-complete-repository>The repository is being created. You need to wait a few minutes before creating another one.</not-complete-repository>
     </msg>
   </UIRepositoryForm>
 
@@ -2614,9 +2595,7 @@
   </UIPageIterator>
   <UILockNodeList>
     <msg>
-      <can-not-unlock-node>Jūs neturite teisių atrakinti šio mazgo. Prašome kreiptis į administratorių dėl reikiamų
-        teisių.
-      </can-not-unlock-node>
+      <can-not-unlock-node>Jūs neturite teisių atrakinti šio mazgo. Prašome kreiptis į administratorių dėl reikiamų teisių.</can-not-unlock-node>
     </msg>
   </UILockNodeList>
 </bundle>

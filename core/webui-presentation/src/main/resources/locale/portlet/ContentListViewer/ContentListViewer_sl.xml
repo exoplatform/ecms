@@ -117,8 +117,8 @@
   <UICLVConfigOrderTypeFormSelectBox>
     <label>
       <option>
-        <OrderDesc>Padajoče</OrderDesc>
-        <OrderAsc>Naraščajoče</OrderAsc>
+        <OrderDesc>Descendant</OrderDesc>
+        <OrderAsc>Ascendant</OrderAsc>
       </option>
     </label>
   </UICLVConfigOrderTypeFormSelectBox>
@@ -145,7 +145,7 @@
     <action>
       <refresh>Osveži</refresh>
       <edit>Urejanje v Brskalniku vsebine</edit>
-      <delete>Zbriši</delete>
+      <delete>Izbriši</delete>
       <publish>Objavi</publish>
     </action>
     <label>

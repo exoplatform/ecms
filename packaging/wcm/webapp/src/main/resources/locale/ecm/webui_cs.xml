@@ -67,7 +67,7 @@
   </UIPermissionMembership>
   <TaxoSelectUserOrGroup>
     <label>
-      <selectGroup>Vybrat skupinu</selectGroup>
+      <selectGroup>Výběr skupiny</selectGroup>
       <selectMembership>Vybrat členství</selectMembership>
     </label>
   </TaxoSelectUserOrGroup>

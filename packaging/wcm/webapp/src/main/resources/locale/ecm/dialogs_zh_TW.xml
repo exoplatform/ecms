@@ -309,8 +309,8 @@
   -->
 <no>否</no>
 <yes>是</yes>
-<true>對</true>
-<false>錯</false>
+<true>True</true>
+<false>False</false>
 <Electronic>電子</Electronic>
 <Paper>紙</Paper>
 <NONE>無</NONE>

@@ -1,19 +1,19 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <bundle>
   <EditingPortlet>
     <label>
-      <Editing>Modo:</Editing>
+      <Editing>Mode:</Editing>
     </label>
     <msg>
-      <not-permission>Non hai i permessi di fare questa azione.</not-permission>
+      <not-permission>You don't have permission to do this action.</not-permission>
     </msg>
   </EditingPortlet>
 
   <UIEditingForm>
     <label>
       <option>
-        <Draft>Modifica</Draft>
-        <Published>Pubblicato</Published>
+        <Draft>Edit</Draft>
+        <Published>Published</Published>
       </option>
     </label>
   </UIEditingForm>

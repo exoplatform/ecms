@@ -17,7 +17,7 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <not-support>Du kan inte kommentera denna dokumenttyp.</not-support>
+      <not-support>You can't comment on this type of document.</not-support>
       <not-checkedout>Du måste checka ut noden innan du kan kommentera.</not-checkedout>
       <content-null>Du kan inte lägga in en tom kommentar.</content-null>
     </msg>
@@ -236,7 +236,7 @@
       <EditFormController>Redigera dokument</EditFormController>
       <UIRelationManager>Lägg till Relation</UIRelationManager>
       <UICategoryManager>Lägg till kategori</UICategoryManager>
-      <UIImportNode>Importera</UIImportNode>
+      <UIImportNode>Import</UIImportNode>
       <UIViewMetadataManager>Visa Metadata</UIViewMetadataManager>
       <UIVoteForm>Omröstning dokument</UIVoteForm>
       <UICommentForm>Kommentar</UICommentForm>
@@ -250,7 +250,7 @@
       <UIActivePublication>Registrera till publikation livscykel</UIActivePublication>
       <UITaggingForm>Tag dokument</UITaggingForm>
       <UIThumbnailForm>Lägga till miniatyrbild</UIThumbnailForm>
-      <UIAllItemsPreferenceForm>Inställningar</UIAllItemsPreferenceForm>
+      <UIAllItemsPreferenceForm>Preferences</UIAllItemsPreferenceForm>
       <UISelectRestorePath>Välj Återställ sökväg</UISelectRestorePath>
       <UISEOForm>Hantera SEO</UISEOForm>
       <UISEOToolbarForm>Hantera SEO</UISEOToolbarForm>
@@ -597,7 +597,7 @@
       <RestoreFromTrash>Återställ från papperskorgen</RestoreFromTrash>
       <EmptyTrash>Töm papperskorgen</EmptyTrash>
       <WebDavView>Open in MS Office</WebDavView>
-      <Download>Ladda ner</Download>
+      <Download>Download</Download>
       <OpenDocument>Remote Edit</OpenDocument>
       <EditProperty>Edit Document Properties</EditProperty>
       <UploadNewVersion>Upload a new version</UploadNewVersion>
@@ -1155,11 +1155,11 @@
   </UINodeTypeSelectForm>
   <UICompareExactlyForm>
     <label>
-      <filter>Filtrera:</filter>
+      <filter>Filter:</filter>
       <result>Resultat:</result>
     </label>
     <title>
-      <result>Filtrera</result>
+      <result>Filter</result>
     </title>
     <button>
       <label-Select>Välj</label-Select>
@@ -1330,7 +1330,7 @@
   -->
   <PopupUserSelector>
     <title>
-      <UIUserContainer>Väljare för behörighet</UIUserContainer>
+      <UIUserContainer>Permission Selector</UIUserContainer>
     </title>
   </PopupUserSelector>
   <UIPopupTaxonomy>
@@ -1345,7 +1345,13 @@
   ###############################################################################
   -->
   <UIVersionInfo>
+    <title>Version history</title>
+    <summary>
+      <empty>Click here to add a summary</empty>
+    </summary>
     <tooltip>
+      <version>Version</version>
+      <baseVersion>Base Version</baseVersion>
       <addLabel>Lägg till etikett</addLabel>
       <removeLable>Ta bort etikett</removeLable>
       <restoreVersion>Återställ Version</restoreVersion>
@@ -1356,6 +1362,9 @@
     <msg>
       <have-no-view-template>Visa mallen stöds inte.</have-no-view-template>
       <cannot-remove-version>Du kan inte ta bort bas versionen.</cannot-remove-version>
+      <error-removing-version>An error occurred while deleting this version.</error-removing-version>
+      <error-removing-referenced-version>This version is referenced and can't be removed.</error-removing-referenced-version>
+      <confirm-restore>Are you sure you want to restore this version?</confirm-restore>
       <confirm-delete>Är du säker på att du vill ta bort denna version?</confirm-delete>
       <not-checked-out>Du måste checka ut denna nod innan du återställer.</not-checked-out>
       <invalid-item-state>Du kan inte återställa denna version, antingen eftersom ett eller flera objekt var borttagna eller flyttade under en annan session.</invalid-item-state>
@@ -1363,7 +1372,15 @@
     <action>
       <close>#{word.close}</close>
       <close-view>Stäng vy</close-view>
+      <compare-versions>Compare selected versions</compare-versions>
     </action>
+    <labels>
+      <version>Version</version>
+      <date>Datum</date>
+      <author>Modified By</author>
+      <summary>Sammanfattning</summary>
+      <action>Åtgärd</action>
+    </labels>
   </UIVersionInfo>
   <!--
   ################################################################################
@@ -1387,7 +1404,7 @@
       <e_512>Ta bort Mixin</e_512>
       <e_1024>Klon</e_1024>
       <e_2048>Uppdatera</e_2048>
-      <e_4096>Importera</e_4096>
+      <e_4096>Import</e_4096>
       <e_8192>Checka in</e_8192>
       <e_16384>Checka ut</e_16384>
       <e_32768>Återställ</e_32768>
@@ -1471,11 +1488,16 @@
   -->
   <UIDiff>
     <label>
+      <backTo>Back to version history</backTo>
       <diffTitle>Jämför mellan två versioner</diffTitle>
-      <noChange>Ingen ändringar mellan två versioner</noChange>
-      <baseVerion>Bas versionen</baseVerion>
+      <noContent>There is no content to compare</noContent>
       <compareVerion>Version</compareVerion>
       <can-not-compare>Det gick inte att jämföra två versioner</can-not-compare>
+      <compare-unavailable>Version comparison is not available for this document</compare-unavailable>
+      <DateChange>On {0}</DateChange>
+      <PreviousAndNextCompare>Changes from {0} to {1}</PreviousAndNextCompare>
+      <ComparedWith>Jämfört med</ComparedWith>
+      <restoredFrom>Restored from version {0}</restoredFrom>
     </label>
   </UIDiff>
   <!--
@@ -1492,7 +1514,7 @@
     </label>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Import>Importera</Import>
+      <Import>Import</Import>
     </action>
     <title>Importera noden</title>
     <msg>
@@ -2436,7 +2458,7 @@
       <Back>Tillbaka till namnbyte</Back>
       <Keepfile>Behåll båda filerna</Keepfile>
 <ReadOnly>Open Read-only</ReadOnly>
-<Cancel>Avbryt</Cancel>
+<Cancel>Cancel</Cancel>
       <KeepBoth>Keep Both</KeepBoth>
       <CreateNewVersion>Create a new version</CreateNewVersion>
     </label>
@@ -3082,6 +3104,7 @@
     <msg>
       <no-view-found>There are no views applied for your access permission in drive '{0}'.</no-view-found>
       <access-denied>Access denied. You may not have permission in the workspace of drive '{0}'.</access-denied>
+      <not-found>The document you are trying to access is no longer available.</not-found>
       <empty-drives>Access denied. Either there is no drive in this repository or you do not have permission to access any drives in this repository.</empty-drives>
       <workspace-not-exist>Drive '{0}' was stored in one unrecognized workspace. Please reconfigure this drive.</workspace-not-exist>
     </msg>

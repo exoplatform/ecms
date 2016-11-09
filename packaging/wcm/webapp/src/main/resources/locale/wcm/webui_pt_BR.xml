@@ -34,8 +34,10 @@
 
   <Drives>
     <label>
-      <ManagedSites>Site Management</ManagedSites>
+      <ManagedSites>Gestão de locais</ManagedSites>
       <SharedSite>Site Compartihado</SharedSite>
+      <PersonalDocuments>Personal Documents</PersonalDocuments>
+      <UserDocuments>{0} Documents</UserDocuments>
     </label>
   </Drives>
 
@@ -202,15 +204,15 @@
     <msg>
       <time-to-late>O tempo de busca está demorando muito.</time-to-late>
       <empty-field>Por favor coloque uma palavra chave válida para a busca</empty-field>
-      <empty-name>Please enter the name to search</empty-name>
-      <empty-content>Please enter a word or phrase to search</empty-content>
-      <empty-property>Please select a property</empty-property>
-      <empty-property-keyword>Please enter a keyword for the property</empty-property-keyword>
-      <empty-doctype>Please select a document type</empty-doctype>
-      <empty-startDate>"From Date" is required</empty-startDate>
+      <empty-name>Por favor, digite o nome a pesquisar</empty-name>
+      <empty-content>Por favor, digite uma palavra ou frase para pesquisar</empty-content>
+      <empty-property>Por favor, selecione uma propriedade</empty-property>
+      <empty-property-keyword>Por favor, digite uma palavra-chave para a propriedade</empty-property-keyword>
+      <empty-doctype>Por favor, selecione um tipo de documento</empty-doctype>
+      <empty-startDate>O campo "Data inicial" é obrigatório</empty-startDate>
       <invalid-format>Formato de data/hora inválido no campo '{0}'</invalid-format>
       <invalid-date>"Data final" deve ser maior que a "Data inicial"</invalid-date>
-      <invalid-startDate>"From Date" must not be later than today</invalid-startDate>
+      <invalid-startDate>O campo "Data inicial" não pode ser maior que a data de hoje</invalid-startDate>
       <invalid-nodeType>O tipo de nó "{0}" é inválido! Por favor verifique novamente.</invalid-nodeType>
       <invalid-keyword>A palavra-chave é inválida. Alguns caracteres não são autorizados.</invalid-keyword>
     </msg>

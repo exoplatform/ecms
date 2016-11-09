@@ -40,14 +40,11 @@
   -->
   <UITaxonomyWorkingArea>
     <msg>
-      <referential-integrity>Не удается прочитать из исходного файла, либо нужная вам категория является
-        подкатегорией.
-      </referential-integrity>
+      <referential-integrity>Не удается прочитать из исходного файла, либо нужная вам категория является подкатегорией.</referential-integrity>
       <no-taxonomy-selected>Необходимо скопировать или вырезать по крайней мере одну категорию.</no-taxonomy-selected>
       <node-is-cutting>Вы не можете вставить здесь. Узел категории '{0}' может быть вырезан.</node-is-cutting>
       <can-not-paste>В буфере обмена отсутствуют данные.</can-not-paste>
-      <reference-exception>Невозможно удалить эту категорию, поскольку в настоящий момент на нее ссылается контент.
-      </reference-exception>
+      <reference-exception>Невозможно удалить эту категорию, поскольку в настоящий момент на нее ссылается контент.</reference-exception>
       <path-error>Произошла ошибка при удалении узла этой категории.</path-error>
     </msg>
   </UITaxonomyWorkingArea>
@@ -72,14 +69,10 @@
   <UITaxonomyTreeContainer>
     <tab>
       <info>
-        <UITaxonomyTreeMainForm>Укажите название категории, рабочую область и маршрут личного каталога.
-        </UITaxonomyTreeMainForm>
+        <UITaxonomyTreeMainForm>Укажите название категории, рабочую область и маршрут личного каталога.</UITaxonomyTreeMainForm>
         <UIPermissionTreeManager>Установить разрешение для дерева категорий.</UIPermissionTreeManager>
-        <UIActionTaxonomyManager>Добавьте действие в дерево категорий, чтобы завершить создание или обновление.
-        </UIActionTaxonomyManager>
-        <UITaxonomyTreeCreateChild>Редактируйте дерево классификации путем добавления, копирования, вырезания и выбора
-          разрешений.
-        </UITaxonomyTreeCreateChild>
+        <UIActionTaxonomyManager>Добавьте действие в дерево категорий, чтобы завершить создание или обновление.</UIActionTaxonomyManager>
+        <UITaxonomyTreeCreateChild>Редактируйте дерево классификации путем добавления, копирования, вырезания и выбора разрешений.</UITaxonomyTreeCreateChild>
       </info>
     </tab>
     <msg>
@@ -148,8 +141,7 @@
   -->
   <UIPermissionTreeForm>
     <msg>
-      <have-not-any-permission>Пожалуйста, укажите по крайней мере одно разрешение для данного узла.
-      </have-not-any-permission>
+      <have-not-any-permission>Пожалуйста, укажите по крайней мере одно разрешение для данного узла.</have-not-any-permission>
     </msg>
   </UIPermissionTreeForm>
 
@@ -258,8 +250,7 @@
     <msg>
       <confirm-delete>Вы уверены, что вы хотите удалить метаданные?</confirm-delete>
       <delete-successful>Шаблоны «{0}» были успешно удалены.</delete-successful>
-      <path-not-found-exception>Эти метаданные были удалены или изменены. Пожалуйста, нажмите кнопку Обновить.
-      </path-not-found-exception>
+      <path-not-found-exception>Эти метаданные были удалены или изменены. Пожалуйста, нажмите кнопку Обновить.</path-not-found-exception>
     </msg>
     <action>
       <Add>Добавить метаданные</Add>
@@ -570,12 +561,8 @@
     </action>
     <msg>
       <register-successfully>Тип узла '{0}' был успешно зарегистрирован.</register-successfully>
-      <supertype-is-madatory>Супер тип обязателен при регистрации нового типа узла. Пожалуйста, выберите хотя бы один
-        супер тип.
-      </supertype-is-madatory>
-      <register-failed>Регистрация регистрации типа узла прошла безуспешно. Он либо уже существует, либо супер тип
-        является недопустимым.
-      </register-failed>
+      <supertype-is-madatory>Супер тип обязателен при регистрации нового типа узла. Пожалуйста, выберите хотя бы один супер тип.</supertype-is-madatory>
+      <register-failed>Регистрация регистрации типа узла прошла безуспешно. Он либо уже существует, либо супер тип является недопустимым.</register-failed>
       <nodeType-name>Требуется название типа узла.</nodeType-name>
       <fileName-invalid>Имя файла содержит недопустимые знаки.</fileName-invalid>
       <node-type-exists>Тип узла «{0}» уже существует.</node-type-exists>
@@ -594,8 +581,7 @@
     </tab>
     <msg>
       <property-name>Недопустимое имя определения свойства.</property-name>
-      <not-supported-value-constraints>Этот требуемый тип не поддерживает ограничения значений.
-      </not-supported-value-constraints>
+      <not-supported-value-constraints>Этот требуемый тип не поддерживает ограничения значений.</not-supported-value-constraints>
     </msg>
   </UIPropertyDefinitionForm>
   <UIChildNodeDefinitionForm>
@@ -892,8 +878,7 @@
     </label>
     <msg>
       <confirm-delete>Вы действительно хотите удалить это разрешение?</confirm-delete>
-      <permission-cannot-empty>Разрешение на просмотр является обязательным и не может быть пустым.
-      </permission-cannot-empty>
+      <permission-cannot-empty>Разрешение на просмотр является обязательным и не может быть пустым.</permission-cannot-empty>
     </msg>
   </UIViewPermissionList>
 
@@ -1005,7 +990,7 @@
       <addSymLink>Добавить символьную ссылку</addSymLink>
       <checkIn>Check In</checkIn>
       <checkOut>Check Out</checkOut>
-      <shareDocuments>Поделиться</shareDocuments>
+      <shareDocuments>Share</shareDocuments>
       <openDocument>Remote Edit</openDocument>
       <editProperty>Edit Document Properties</editProperty>
       <uploadNewVersion>Upload a new version</uploadNewVersion>
@@ -1038,7 +1023,7 @@
   </UIViewFormTabPane>
   <PopupViewPermission>
     <title>
-      <UIPermissionSelector>Выбор разрешения</UIPermissionSelector>
+      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
     </title>
   </PopupViewPermission>
 
@@ -1089,7 +1074,7 @@
   -->
   <UITemplateForm>
     <title>
-      <AddPermission>Добавить права</AddPermission>
+      <AddPermission>Add Permission</AddPermission>
     </title>
     <action>
       <Save>#{word.save}</Save>
@@ -1420,7 +1405,7 @@
 
   <PopupTaxonomyTreePermission>
     <title>
-      <UIPermissionSelector>Выбор разрешения</UIPermissionSelector>
+      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
     </title>
   </PopupTaxonomyTreePermission>
 
@@ -1544,8 +1529,7 @@
     <msg>
       <confirm-delete>Вы действительно хотите удалить?</confirm-delete>
       <access-denied>Доступ запрещен. Отсутствует разрешение на использование этой функции.</access-denied>
-      <editing-template>Доступ запрещен. Вы не можете удалить и одновременно редактировать этот шаблон.
-      </editing-template>
+      <editing-template>Доступ запрещен. Вы не можете удалить и одновременно редактировать этот шаблон.</editing-template>
       <template-not-exist>Шаблон, который вы пытаетесь удалить, не существует.</template-not-exist>
     </msg>
   </UITemplateList>
@@ -1563,8 +1547,7 @@
     <msg>
       <confirm-delete>Вы действительно хотите удалить?</confirm-delete>
       <access-denied>Доступ запрещен. Отсутствует разрешение на использование этой функции.</access-denied>
-      <editing-template>Доступ запрещен. Вы не можете удалить и одновременно редактировать этот шаблон.
-      </editing-template>
+      <editing-template>Доступ запрещен. Вы не можете удалить и одновременно редактировать этот шаблон.</editing-template>
       <template-not-exist>Шаблон, который вы пытаетесь удалить, не существует.</template-not-exist>
     </msg>
   </UIActionsTemplateList>
@@ -1582,8 +1565,7 @@
     <msg>
       <confirm-delete>Вы действительно хотите удалить?</confirm-delete>
       <access-denied>Доступ запрещен. Отсутствует разрешение на использование этой функции.</access-denied>
-      <editing-template>Доступ запрещен. Вы не можете удалить и одновременно редактировать этот шаблон.
-      </editing-template>
+      <editing-template>Доступ запрещен. Вы не можете удалить и одновременно редактировать этот шаблон.</editing-template>
       <template-not-exist>Шаблон, который вы пытаетесь удалить, не существует.</template-not-exist>
     </msg>
   </UIOthersTemplateList>
@@ -1620,8 +1602,7 @@
     <msg>
       <confirm-delete>Вы уверены, что хотите удалить этот шаблон?</confirm-delete>
       <access-denied>Доступ запрещен. Отсутствует разрешение на использование этой функции.</access-denied>
-      <editing-template>Доступ запрещен. Вы не можете удалить и одновременно редактировать этот шаблон.
-      </editing-template>
+      <editing-template>Доступ запрещен. Вы не можете удалить и одновременно редактировать этот шаблон.</editing-template>
       <template-not-exist>Шаблон, который вы пытаетесь удалить, не существует.</template-not-exist>
     </msg>
   </UICLVTemplateList>
@@ -1658,8 +1639,7 @@
 
   <EditCLVTemplatePopup_ContentTemplateContainer>
     <title>
-      <UICLVTemplateForm_ContentTemplateContainer>Редактировать шаблон списка
-      </UICLVTemplateForm_ContentTemplateContainer>
+      <UICLVTemplateForm_ContentTemplateContainer>Редактировать шаблон списка</UICLVTemplateForm_ContentTemplateContainer>
     </title>
   </EditCLVTemplatePopup_ContentTemplateContainer>
 
@@ -1757,7 +1737,7 @@
   -->
   <AddNewTemplatePermission>
     <title>
-      <UIPermissionSelector>Выбор разрешения</UIPermissionSelector>
+      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
     </title>
   </AddNewTemplatePermission>
   <TemplatePermission>
@@ -1798,12 +1778,12 @@
   </DialogForm>
   <DialogFormTemplatePermission>
     <title>
-      <UIPermissionSelector>Выбор разрешения</UIPermissionSelector>
+      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
     </title>
   </DialogFormTemplatePermission>
   <ViewFormTemplatePermission>
     <title>
-      <UIPermissionSelector>Выбор разрешения</UIPermissionSelector>
+      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
     </title>
   </ViewFormTemplatePermission>
   <TemplateContainerPopup>
@@ -1960,9 +1940,7 @@
     <msg>
       <confirm-delete>Вы уверены, что хотите удалить этот запрос?</confirm-delete>
       <query-not-existed>Запрос больше не существует.</query-not-existed>
-      <can-not-remove>Произошла ошибка при удалении запроса. Пожалуйста, свяжитесь с администратором для получения
-        информации.
-      </can-not-remove>
+      <can-not-remove>Произошла ошибка при удалении запроса. Пожалуйста, свяжитесь с администратором для получения информации.</can-not-remove>
     </msg>
   </UIQueriesList>
   <UIQueriesForm>
@@ -1998,7 +1976,7 @@
   </EditQueryForm>
   <PermissionPopup>
     <title>
-      <UIGroupMemberSelector>Выбор разрешения</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Permission Selector</UIGroupMemberSelector>
     </title>
   </PermissionPopup>
   <!--
@@ -2039,12 +2017,9 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <range-validator>Недопустимый диапазон. Формат должен быть: a...b, где a и b - положительные целые числа. Вы
-        можете использовать * вместо b, чтобы показать, что диапазон неограниченный.
-      </range-validator>
+      <range-validator>Недопустимый диапазон. Формат должен быть: a...b, где a и b - положительные целые числа. Вы можете использовать * вместо b, чтобы показать, что диапазон неограниченный.</range-validator>
       <error-update>Не удалось обновить. Ваша информация является недействительной.</error-update>
-      <item-not-existing>Нельзя сохранить изменения в этот тег, поскольку он больше не существует в базе данных.
-      </item-not-existing>
+      <item-not-existing>Нельзя сохранить изменения в этот тег, поскольку он больше не существует в базе данных.</item-not-existing>
     </msg>
   </UITagStyleForm>
   <FolksonomyPopup>
@@ -2358,8 +2333,7 @@
       <UnLock>Разблокировать</UnLock>
     </tooltip>
     <msg>
-      <access-denied-exception>У вас нет разрешения на доступ к узлу с путем {0}, либо этот узел удален.
-      </access-denied-exception>
+      <access-denied-exception>У вас нет разрешения на доступ к узлу с путем {0}, либо этот узел удален.</access-denied-exception>
     </msg>
   </UILockNodeList>
   <EditUnLockForm>
@@ -2473,8 +2447,7 @@
     </action>
     <msg>
       <xss-vulnerability-character>Поле '{0}' содержит символы уязвимости XSS</xss-vulnerability-character>
-      <xss-vulnerability-character-wo-label>Ваши вводимые данные могут содержать символы уязвимости XSS
-      </xss-vulnerability-character-wo-label>
+      <xss-vulnerability-character-wo-label>Ваши вводимые данные могут содержать символы уязвимости XSS</xss-vulnerability-character-wo-label>
     </msg>
   </UIActionForm>
 
@@ -2512,7 +2485,7 @@
       <Add>Добавить</Add>
     </action>
     <label>
-      <userOrGroup>Членства:</userOrGroup>
+      <userOrGroup>Memberships:</userOrGroup>
     </label>
     <msg>
       <userOrGroup-alreadyExists>Это членство уже существует. Пожалуйста, выберите другое.</userOrGroup-alreadyExists>
@@ -2550,9 +2523,7 @@
   </NodeTypeNameValidator>
   <UIActionForm>
     <msg>
-      <constraint-violation-exception>Невозможно добавить узел '{0}' в '{1}' рабочей области '{2}'. Возникла проблема с
-        разрешениями или условием ограничений.
-      </constraint-violation-exception>
+      <constraint-violation-exception>Невозможно добавить узел '{0}' в '{1}' рабочей области '{2}'.  Возникла проблема с разрешениями или условием ограничений.</constraint-violation-exception>
     </msg>
   </UIActionForm>
 
@@ -2563,9 +2534,7 @@
   </UIWorkspaceWizard>
   <UIRepositoryForm>
     <msg>
-      <not-complete-repository>В настоящее время создается хранилище. Вам нужно подождать несколько минут, прежде чем
-        создавать еще одно.
-      </not-complete-repository>
+      <not-complete-repository>В настоящее время создается хранилище. Вам нужно подождать несколько минут, прежде чем создавать еще одно.</not-complete-repository>
     </msg>
   </UIRepositoryForm>
 
@@ -2626,9 +2595,7 @@
   </UIPageIterator>
   <UILockNodeList>
     <msg>
-      <can-not-unlock-node>У вас недостаточно прав для того, чтобы разблокировать этот узел. Пожалуйста, свяжитесь с
-        администратором для получения необходимых прав.
-      </can-not-unlock-node>
+      <can-not-unlock-node>У вас недостаточно прав для того, чтобы разблокировать этот узел. Пожалуйста, свяжитесь с администратором для получения необходимых прав.</can-not-unlock-node>
     </msg>
   </UILockNodeList>
 </bundle>

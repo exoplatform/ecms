@@ -54,8 +54,8 @@
         <name>#{word.name}</name>
         <categories>Kategorien</categories>
         <mimeType>#{Ecm.dialog.label.mimeType}</mimeType>
-        <width>Width</width>
-        <height>Height</height>
+        <width>Breite</width>
+        <height>Höhe</height>
         <content>#{word.content}</content>
         <re-upload>Die Datei ist bereits vorhanden. Sie können es löschen und eine andere Datei hochladen.</re-upload>
       </label>
@@ -106,7 +106,7 @@
   <AutoVersioning>
     <dialog>
       <label>
-        <id>ID</id>
+        <id>Id</id>
         <name>#{word.name}</name>
         <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
         <schedule-type>#{Ecm.dialog.label.schedule-type}</schedule-type>
@@ -125,7 +125,7 @@
   <EnableVersioning>
     <dialog>
       <label>
-        <id>ID</id>
+        <id>Id</id>
         <name>#{word.name}</name>
         <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
         <schedule-type>#{Ecm.dialog.label.schedule-type}</schedule-type>
@@ -287,7 +287,7 @@
   <ScriptAction>
     <dialog>
       <label>
-        <id>ID</id>
+        <id>Id</id>
         <name>Name</name>
         <lifecycle>Lebenszyklus</lifecycle>
         <homePath>Quellpfad</homePath>

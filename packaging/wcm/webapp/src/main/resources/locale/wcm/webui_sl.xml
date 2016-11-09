@@ -36,6 +36,8 @@
     <label>
       <ManagedSites>Upravljanje mesta</ManagedSites>
       <SharedSite>Mesto v skupni rabi</SharedSite>
+      <PersonalDocuments>Personal Documents</PersonalDocuments>
+      <UserDocuments>{0} Documents</UserDocuments>
     </label>
   </Drives>
 
@@ -61,7 +63,7 @@
 
   <UIPageSelectorPanel>
     <header>
-      <path>Pot</path>
+      <path>Path</path>
       <action>#{word.action}</action>
     </header>
     <msg>
@@ -123,7 +125,7 @@
   <UIContentBrowsePanelMulti>
     <label>
       <LeftColumn>Izberite mapo za prikaz njenih podrejenih kot vsebine.</LeftColumn>
-      <RightColumn>Lahko izberete vsebine, ki so navedene spodaj.</RightColumn>
+      <RightColumn>The content below can be selected.</RightColumn>
     </label>
   </UIContentBrowsePanelMulti>
 
@@ -167,7 +169,7 @@
   <UIContentBrowsePathSelectorFolder>
     <header>
       <name>#{word.name}</name>
-      <publicationstate>Stanje publikacije</publicationstate>
+      <publicationstate>Publication State</publicationstate>
       <action>Dejanje</action>
     </header>
     <msg>
@@ -180,24 +182,24 @@
       <Location>Ime strani</Location>
       <SearchByName>Išči po imenu</SearchByName>
       <Fulltext>Beseda ali fraza v kontekstu</Fulltext>
-      <Property>Lastnost</Property>
-      <Contain>Vsebujejo</Contain>
-      <FromDate>Od datuma</FromDate>
-      <ToDate>Do datuma</ToDate>
-      <DocumentType>Vrsta dokumenta</DocumentType>
+      <Property>Property</Property>
+      <Contain>Contain</Contain>
+      <FromDate>From Date</FromDate>
+      <ToDate>To Date</ToDate>
+      <DocumentType>Document Type</DocumentType>
     </title>
     <tooltip>
-      <AddMetadataType>Dodaj lastnost</AddMetadataType>
-      <AddNodeType>Dodaj vrsto vozlišča</AddNodeType>
+      <AddMetadataType>Add Property</AddMetadataType>
+      <AddNodeType>Add Node Type</AddNodeType>
     </tooltip>    
     <label>
       <option>
-        <CREATED>Ustvarjeno</CREATED>
-        <MODIFIED>Spremenjeno</MODIFIED>
+        <CREATED>Created</CREATED>
+        <MODIFIED>Modified</MODIFIED>
       </option>
     </label>
     <action>
-      <SearchWebContent>Išči</SearchWebContent>
+      <SearchWebContent>Search</SearchWebContent>
     </action>
     <msg>
       <time-to-late>Čas iskanja je predolg.</time-to-late>
@@ -212,13 +214,13 @@
       <invalid-date>"Do datuma" mora biti kasneje kot "od datuma"</invalid-date>
       <invalid-startDate>"Od datuma" ne sme biti poznejši od današnjega</invalid-startDate>
       <invalid-nodeType>Vrsta vozlišča "{0}" ni veljavna. Prosimo, preverite.</invalid-nodeType>
-      <invalid-keyword>Ključna beseda ni veljavna. Nekateri znaki niso podprti.</invalid-keyword>
+      <invalid-keyword>The keyword is invalid. Some characters are not supported.</invalid-keyword>
     </msg>
   </UIContentSearchForm>
 
   <WebContentMetadataPopup>
     <title>
-      <UIContentPropertySelector>Izbirnik lastnosti</UIContentPropertySelector>
+      <UIContentPropertySelector>Property Selector</UIContentPropertySelector>
     </title>
   </WebContentMetadataPopup>
 
@@ -228,14 +230,14 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
-      <metadataType>Vrsta metapodatka</metadataType>
-      <property_select>Lastnost</property_select>
+      <metadataType>Metadata Type</metadataType>
+      <property_select>Property</property_select>
     </label>
   </UIContentPropertySelector>
 
   <WebContentNodeTypePopup>
     <title>
-      <UIContentNodeTypeSelector>Izbirnik vrste vozlišča</UIContentNodeTypeSelector>
+      <UIContentNodeTypeSelector>Node Type Selector</UIContentNodeTypeSelector>
     </title>
   </WebContentNodeTypePopup>
 
@@ -249,13 +251,13 @@
   <UIContentSearchResult>
     <header>
       <title>Naslov</title>
-      <score>Rezultat</score>
-      <publicationstate>Stanje publikacije</publicationstate>
+      <score>Score</score>
+      <publicationstate>Publication State</publicationstate>
       <action>Dejanje</action>
     </header>
     <title>
-      <Select>Izberi</Select>
-      <View>Prikaz</View>
+      <Select>Select</Select>
+      <View>View</View>
     </title>
     <msg>
     <template-not-support>Pregled te vsebine ni mogoč. Predloga ni podprta</template-not-support>
@@ -266,7 +268,7 @@
     <action>
       <SaveDraft>Shrani osnutek</SaveDraft>
       <FastPublish>Hitro objavi</FastPublish>
-      <Preferences>Nastavitve</Preferences>
+      <Preferences>Preferences</Preferences>
       <Close>#{word.close}</Close>
     </action>
     <msg>
@@ -300,9 +302,9 @@
       <action>Dejanje</action>
     </header>
     <msg>
-      <confirm-delete-permission>Ali ste prepričani, da želite izbrisati to dovoljenje?</confirm-delete-permission>
+      <confirm-delete-permission>Are you sure you want to delete this permission?</confirm-delete-permission>
       <no-permission-remove>Nimate dovoljenja.</no-permission-remove>
-      <access-denied>Dostop zavrnjen.</access-denied>
+      <access-denied>Access denied.</access-denied>
       <node-locked>Element poti {0} ali eden izmed njegovih nadrejenih je zaklenjen.</node-locked>
       <userOrGroup-required>Izbrati morate uporabnika ali skupino.</userOrGroup-required>
       <checkbox-require>Nastaviti morate pravice.</checkbox-require>
@@ -312,34 +314,34 @@
 
   <UIPermissionInputSetWithAction>
     <title>
-      <SelectUser>Izberi uporabnika</SelectUser>
-      <SelectMember>Izberi člana</SelectMember>
+      <SelectUser>Select User</SelectUser>
+      <SelectMember>Select Member</SelectMember>
       <AddAny>Dodaj katerokoli dovoljenje</AddAny>
     </title>
   </UIPermissionInputSetWithAction>
 
   <UIUserSelectorPopupWindow>
     <title>
-      <UIUserContainer>Izbirnik uporabnikov</UIUserContainer>
+      <UIUserContainer>User Selector</UIUserContainer>
     </title>
   </UIUserSelectorPopupWindow>
 
   <UIGroupSelectorPopupWindow>
     <title>
-      <UIGroupMemberSelector>Izbirnik skupine</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Group Selector</UIGroupMemberSelector>
     </title>
   </UIGroupSelectorPopupWindow>
 
   <UIGroupMemberSelector>
     <label>
       <selectGroup>Izberi skupino</selectGroup>
-      <selectMembership>Izberi članstvo</selectMembership>
+      <selectMembership>Select Membership</selectMembership>
     </label>
   </UIGroupMemberSelector>
 
   <UIContentDialogPreference>
     <action>
-      <Back>Nazaj</Back>
+      <Back>Back</Back>
     </action>
   </UIContentDialogPreference>
 
@@ -378,11 +380,11 @@
   </UIWizardPageSelectLayoutForm>
 
   <Signin>
-    <welcome>Dobrodošli</welcome>
-    <login>Prijava</login>
-    <logout>Odjava</logout>
-    <language>Spremenite jezik</language>
-    <register>Registracija</register>
+    <welcome>Welcome</welcome>
+    <login>Login</login>
+    <logout>Logout</logout>
+    <language>Change Language</language>
+    <register>Register</register>
   </Signin>
   <UIDriveForm>
 <label>
@@ -393,11 +395,11 @@
   
   <ContentSelector>
     <title>
-      <PersonalDrives>Osebni pogoni</PersonalDrives>
-      <GeneralDrives>Splošni pogoni</GeneralDrives>
-      <GroupDrives>Pogoni skupine</GroupDrives>
-      <Private>Zasebno</Private>
-      <Public>Javno</Public>
+      <PersonalDrives>Personal Drives</PersonalDrives>
+      <GeneralDrives>General Drives</GeneralDrives>
+      <GroupDrives>Group Drives</GroupDrives>
+      <Private>Private</Private>
+      <Public>Public</Public>
       <BackupCenter>Središče za varnostne kopije</BackupCenter>
       <CategorizedDocumentsCenter>Središče za kategorizirane dokumente</CategorizedDocumentsCenter>
       <CollaborationCenter>Središče za sodelovanje</CollaborationCenter>
@@ -411,7 +413,7 @@
       <Systemfiles>Sistemske datoteke</Systemfiles>
       <ValidationRequestsDocumentsCenter>Zahteve potrjevanja veljavnosti dokumentnega središča</ValidationRequestsDocumentsCenter>
       <ManagedSites>Upravljanje mest</ManagedSites>
-      <SharedSite>Mesto v skupni rabi</SharedSite>
+      <SharedSite>Shared Site</SharedSite>
     </title>
   </ContentSelector>
   
@@ -428,19 +430,19 @@
   </UIDocumentInfo>
   <UIPortalApplication>
     <title>
-      <abort>Prekini</abort>
+      <abort>Abort</abort>
     </title>
   </UIPortalApplication>    
   
   <CategoryNavigationTemplate>
   <label>
-  <home>Domov</home>
+  <home>Home</home>
   </label>
   </CategoryNavigationTemplate>
   
   <Breadcrumb>
   <label>
-  <home>Domov</home>
+  <home>Home</home>
   </label>  
   </Breadcrumb>
 </bundle>

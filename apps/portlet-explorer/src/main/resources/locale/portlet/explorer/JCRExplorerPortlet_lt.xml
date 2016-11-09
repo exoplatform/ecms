@@ -17,7 +17,7 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <not-support>Jūs negalite komentuoti šio dokumento tipo.</not-support>
+      <not-support>You can't comment on this type of document.</not-support>
       <not-checkedout>Jūs turite patikrinti mazgą prieš komentuojant jame.</not-checkedout>
       <content-null>jūs negalite siųsti tuščio komentaro.</content-null>
     </msg>
@@ -250,7 +250,7 @@
       <UIActivePublication>Įregistruoti į paskelbimo gyvavimo ciklą</UIActivePublication>
       <UITaggingForm>Žymėti dokumentą</UITaggingForm>
       <UIThumbnailForm>Pridėti miniatiūrą</UIThumbnailForm>
-      <UIAllItemsPreferenceForm>Nuostatos</UIAllItemsPreferenceForm>
+      <UIAllItemsPreferenceForm>Preferences</UIAllItemsPreferenceForm>
       <UISelectRestorePath>Pasirinkite atkūrimo kelią</UISelectRestorePath>
       <UISEOForm>Valdyti SEO</UISEOForm>
       <UISEOToolbarForm>Valdyti SEO</UISEOToolbarForm>
@@ -597,7 +597,7 @@
       <RestoreFromTrash>Atkurti iš šiukšliadėžės</RestoreFromTrash>
       <EmptyTrash>Išvalyti šiukšliadėžę</EmptyTrash>
       <WebDavView>Atidaryti su MS Office</WebDavView>
-      <Download>Atsisiųsti</Download>
+      <Download>Download</Download>
       <OpenDocument>Remote Edit</OpenDocument>
       <EditProperty>Edit Document Properties</EditProperty>
       <UploadNewVersion>Upload a new version</UploadNewVersion>
@@ -1330,7 +1330,7 @@
   -->
   <PopupUserSelector>
     <title>
-      <UIUserContainer>Teisės pasirinkimas</UIUserContainer>
+      <UIUserContainer>Permission Selector</UIUserContainer>
     </title>
   </PopupUserSelector>
   <UIPopupTaxonomy>
@@ -1345,7 +1345,13 @@
   ###############################################################################
   -->
   <UIVersionInfo>
+    <title>Version history</title>
+    <summary>
+      <empty>Click here to add a summary</empty>
+    </summary>
     <tooltip>
+      <version>Version</version>
+      <baseVersion>Base Version</baseVersion>
       <addLabel>Pridėti etiketę</addLabel>
       <removeLable>Pašalinti etiketę</removeLable>
       <restoreVersion>Atkurti versiją</restoreVersion>
@@ -1356,6 +1362,9 @@
     <msg>
       <have-no-view-template>Rodymo šablonas yra nesuderinamas.</have-no-view-template>
       <cannot-remove-version>Jūs negalite pašalinti bazinės versijos.</cannot-remove-version>
+      <error-removing-version>An error occurred while deleting this version.</error-removing-version>
+      <error-removing-referenced-version>This version is referenced and can't be removed.</error-removing-referenced-version>
+      <confirm-restore>Are you sure you want to restore this version?</confirm-restore>
       <confirm-delete>Ar tikrai norite pašalinti šią versiją?</confirm-delete>
       <not-checked-out>Jūs turite išregistruoti šį mazgą prieš atkurdami.</not-checked-out>
       <invalid-item-state>Negalite atkurti šios versijos, arba todėl, kad vienas ar keli elementai buvo ištrinti arba perkelti kitur kitos sesijos metu.</invalid-item-state>
@@ -1363,7 +1372,15 @@
     <action>
       <close>#{word.close}</close>
       <close-view>Uždaryti rodinį</close-view>
+      <compare-versions>Compare selected versions</compare-versions>
     </action>
+    <labels>
+      <version>Versija</version>
+      <date>Data</date>
+      <author>Modified By</author>
+      <summary>Santrauka</summary>
+      <action>Veiksmas</action>
+    </labels>
   </UIVersionInfo>
   <!--
   ################################################################################
@@ -1471,11 +1488,16 @@
   -->
   <UIDiff>
     <label>
+      <backTo>Back to version history</backTo>
       <diffTitle>Palyginti tarp dviejų versijų</diffTitle>
-      <noChange>Jokių pokyčių tarp dviejų versijų</noChange>
-      <baseVerion>Bazinė versija</baseVerion>
+      <noContent>There is no content to compare</noContent>
       <compareVerion>Versija</compareVerion>
       <can-not-compare>Nepavyko palyginti versijų</can-not-compare>
+      <compare-unavailable>Version comparison is not available for this document</compare-unavailable>
+      <DateChange>On {0}</DateChange>
+      <PreviousAndNextCompare>Pakeitimai nuo {0} į {1}</PreviousAndNextCompare>
+      <ComparedWith>Palyginta su</ComparedWith>
+      <restoredFrom>Restored from version {0}</restoredFrom>
     </label>
   </UIDiff>
   <!--
@@ -2436,7 +2458,7 @@
       <Back>Atgal į pervadinimą</Back>
       <Keepfile>Palikti abu failus</Keepfile>
 <ReadOnly>Open Read-only</ReadOnly>
-<Cancel>Atšaukti</Cancel>
+<Cancel>Cancel</Cancel>
       <KeepBoth>Keep Both</KeepBoth>
       <CreateNewVersion>Create a new version</CreateNewVersion>
     </label>
@@ -3082,6 +3104,7 @@
     <msg>
       <no-view-found>There are no views applied for your access permission in drive '{0}'.</no-view-found>
       <access-denied>Access denied. You may not have permission in the workspace of drive '{0}'.</access-denied>
+      <not-found>The document you are trying to access is no longer available.</not-found>
       <empty-drives>Access denied. Either there is no drive in this repository or you do not have permission to access any drives in this repository.</empty-drives>
       <workspace-not-exist>Drive '{0}' was stored in one unrecognized workspace. Please reconfigure this drive.</workspace-not-exist>
     </msg>

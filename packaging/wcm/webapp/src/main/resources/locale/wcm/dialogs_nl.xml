@@ -26,7 +26,7 @@
         <MainContent>Hoofd inhoud</MainContent>
         <cssFile>default.css</cssFile>
         <jsFile>default.js</jsFile>
-        <Advanced>Geavanceerde</Advanced>
+        <Advanced>Advanced</Advanced>
         <Summary>Samenvatting</Summary>
         <name>#{word.name}</name>
         <title>Titel</title>
@@ -54,7 +54,7 @@
         <name>#{word.name}</name>
         <active>Actieve</active>
         <priority>Prioriteit</priority>
-        <content>CSS gegevens</content>
+        <content>CSS Data</content>
       </label>
     </dialog>
   </CSSFile>
@@ -65,7 +65,7 @@
         <name>#{word.name}</name>
         <active>Actieve</active>
         <priority>Prioriteit</priority>
-        <content>JS gegevens</content>
+        <content>JS Data</content>
       </label>
     </dialog>
   </JSFile>

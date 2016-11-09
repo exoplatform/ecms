@@ -40,17 +40,11 @@
   -->
   <UITaxonomyWorkingArea>
     <msg>
-      <referential-integrity>Lecture impossible à partir du fichier source ou la catégorie de destination est une
-        sous-catégorie
-      </referential-integrity>
+      <referential-integrity>Lecture impossible à partir du fichier source ou la catégorie de destination est une sous-catégorie</referential-integrity>
       <no-taxonomy-selected>Vous devez copier ou couper au moins une catégorie</no-taxonomy-selected>
-      <node-is-cutting>Impossible de copier ici. La catégorie sélectionnée ('{0}') a probablement été déplacée ou
-        supprimée.
-      </node-is-cutting>
+      <node-is-cutting>Impossible de copier ici. La catégorie sélectionnée ('{0}') a probablement été déplacée ou supprimée.</node-is-cutting>
       <can-not-paste>Le presse-papier ne contient aucune donnée à copier.</can-not-paste>
-      <reference-exception>Impossible de supprimer cette catégorie car elle est actuellement référencée par un
-        contenu.
-      </reference-exception>
+      <reference-exception>Impossible de supprimer cette catégorie car elle est actuellement référencée par un contenu.</reference-exception>
       <path-error>Un problème est survenu lors de la suppression de cette catégorie.</path-error>
     </msg>
   </UITaxonomyWorkingArea>
@@ -75,9 +69,7 @@
   <UITaxonomyTreeContainer>
     <tab>
       <info>
-        <UITaxonomyTreeMainForm>Choisir un nom de catégorie choisir un espace de stockage et choisir le chemin de la
-          racine de la catégorie.
-        </UITaxonomyTreeMainForm>
+        <UITaxonomyTreeMainForm>Choisir un nom de catégorie  choisir un espace de stockage et choisir le chemin de la racine de la catégorie.</UITaxonomyTreeMainForm>
         <UIPermissionTreeManager>Choisir les droits d'accès à l'arbre de catégories.</UIPermissionTreeManager>
         <UIActionTaxonomyManager>Ajoutez une action à l'arbre des catégories pour terminer.</UIActionTaxonomyManager>
         <UITaxonomyTreeCreateChild>Modifier l'arbre de catégories et choisir les permissions</UITaxonomyTreeCreateChild>
@@ -258,9 +250,7 @@
     <msg>
       <confirm-delete>Confirmez-vous la suppression?</confirm-delete>
       <delete-successful>Les formulaires de '{0}' ont été supprimés avec succès.</delete-successful>
-      <path-not-found-exception>Ces métadonnées ont été supprimées ou modifiées. S'il vous plaît cliquez sur le bouton
-        Actualiser.
-      </path-not-found-exception>
+      <path-not-found-exception>Ces métadonnées ont été supprimées ou modifiées. S'il vous plaît cliquez sur le bouton Actualiser.</path-not-found-exception>
     </msg>
     <action>
       <Add>Ajouter des Métadonnées</Add>
@@ -571,12 +561,8 @@
     </action>
     <msg>
       <register-successfully>Type de noeud '{0}' enregistré avec succès</register-successfully>
-      <supertype-is-madatory>Un super type est obligatoire pour créer un nouveau type de noeud. Vous devez en
-        sélectionner au moins un.
-      </supertype-is-madatory>
-      <register-failed>Enregistrement du type de noeud impossible. Ce type de noeud existe déjà, ou le super type est
-        invalide
-      </register-failed>
+      <supertype-is-madatory>Un super type est obligatoire pour créer un nouveau type de noeud. Vous devez en sélectionner au moins un.</supertype-is-madatory>
+      <register-failed>Enregistrement du type de noeud impossible. Ce type de noeud existe déjà, ou le super type est invalide</register-failed>
       <nodeType-name>Nom du type de noeud requis</nodeType-name>
       <fileName-invalid>Caractères invalides dans le nom.</fileName-invalid>
       <node-type-exists>Le type de noeud '{0}' existe déjà.</node-type-exists>
@@ -1405,8 +1391,7 @@
     </action>
     <msg>
       <checkbox-require>Vous devez choisir au moins une permission.</checkbox-require>
-      <userOrGroup-required>Vous devez choisir un groupe ou un utilisateur avant d'enregistrer la permission
-      </userOrGroup-required>
+      <userOrGroup-required>Vous devez choisir un groupe ou un utilisateur avant d'enregistrer la permission</userOrGroup-required>
       <not-change-permission>Vous n'avez pas le droit d'ajouter une permission.</not-change-permission>
       <access-denied>Accès refusé. Vous ne pouvez pas supprimer cette permission.</access-denied>
     </msg>
@@ -1460,8 +1445,7 @@
     <msg>
       <confirm-delete-permission>Souhaitez-vous supprimer cette permission?</confirm-delete-permission>
       <no-permission-tochange>Vous n'avez pas les droits requis pour supprimer la permission.</no-permission-tochange>
-      <no-permission-remove>Vous ne pouvez pas supprimer le propriétaire ni l'utilisateur "system".
-      </no-permission-remove>
+      <no-permission-remove>Vous ne pouvez pas supprimer le propriétaire ni l'utilisateur "system".</no-permission-remove>
       <access-denied>Accès refusé. Vous ne pouvez pas supprimer cette permission.</access-denied>
     </msg>
   </UIPermissionInfo>
@@ -1510,8 +1494,7 @@
     </action>
     <msg>
       <checkbox-require>Vous devez selectionner au moins une propriété.</checkbox-require>
-      <userOrGroup-required>Vous devez choisir un utilisateur ou un groupe avant d'enregistrer cette permission.
-      </userOrGroup-required>
+      <userOrGroup-required>Vous devez choisir un utilisateur ou un groupe avant d'enregistrer cette permission.</userOrGroup-required>
       <not-change-permission>Vous n'avez pas les droits requis pour ajouter une permission.</not-change-permission>
       <access-denied>Accès refusé. Vous ne pouvez pas supprimer cette permission.</access-denied>
     </msg>
@@ -1546,8 +1529,7 @@
     <msg>
       <confirm-delete>Confirmez-vous la suppression?</confirm-delete>
       <access-denied>Accès refusé. Vous n'avez pas les droits suffisants pour utiliser cette fonction.</access-denied>
-      <editing-template>Accès refusé. Vous ne pouvez pas supprimer et modifier le gabarit en même temps.
-      </editing-template>
+      <editing-template>Accès refusé. Vous ne pouvez pas supprimer et modifier le gabarit en même temps.</editing-template>
       <template-not-exist>Le gabarit que vous tentez de supprimer n'existe pas.</template-not-exist>
     </msg>
   </UITemplateList>
@@ -1565,8 +1547,7 @@
     <msg>
       <confirm-delete>Confirmez-vous la suppression?</confirm-delete>
       <access-denied>Accès refusé. Vous n'avez pas les droits d'utiliser cette fonction.</access-denied>
-      <editing-template>Accès refusé. Vous ne pouvez pas supprimer et modifier un gabarit en même temps.
-      </editing-template>
+      <editing-template>Accès refusé. Vous ne pouvez pas supprimer et modifier un gabarit en même temps.</editing-template>
       <template-not-exist>Le gabarit que vous tentez de supprimer n'existe pas.</template-not-exist>
     </msg>
   </UIActionsTemplateList>
@@ -1584,8 +1565,7 @@
     <msg>
       <confirm-delete>Confirmez-vous la suppression?</confirm-delete>
       <access-denied>Accès refusé. Vous n'avez pas les droits d'utiliser cette fonction.</access-denied>
-      <editing-template>Accès refusé. Vous ne pouvez pas supprimer et modifier ce gabarit en même temps.
-      </editing-template>
+      <editing-template>Accès refusé. Vous ne pouvez pas supprimer et modifier ce gabarit en même temps.</editing-template>
       <template-not-exist>Le gabarit que vous tentez de supprimer n'existe pas.</template-not-exist>
     </msg>
   </UIOthersTemplateList>
@@ -1622,8 +1602,7 @@
     <msg>
       <confirm-delete>Êtes-vous sûr de que vouloir supprimer ce gabarit ?</confirm-delete>
       <access-denied>Accès refusé. Vous n'avez pas les droits d'utiliser cette fonction.</access-denied>
-      <editing-template>Accès refusé. Vous ne pouvez pas supprimer et modifier ce gabarit en même temps.
-      </editing-template>
+      <editing-template>Accès refusé. Vous ne pouvez pas supprimer et modifier ce gabarit en même temps.</editing-template>
       <template-not-exist>Le gabarit que vous tentez de supprimer n'existe pas.</template-not-exist>
     </msg>
   </UICLVTemplateList>
@@ -1660,8 +1639,7 @@
 
   <EditCLVTemplatePopup_ContentTemplateContainer>
     <title>
-      <UICLVTemplateForm_ContentTemplateContainer>Modifier le Gabarit de Liste
-      </UICLVTemplateForm_ContentTemplateContainer>
+      <UICLVTemplateForm_ContentTemplateContainer>Modifier le Gabarit de Liste</UICLVTemplateForm_ContentTemplateContainer>
     </title>
   </EditCLVTemplatePopup_ContentTemplateContainer>
 
@@ -1679,8 +1657,7 @@
 
   <CLVTemplatePopup_ContentTemplateContainer>
     <title>
-      <UICLVTemplateForm_ContentTemplateContainer>Ajouter un Gabarit de Liste
-      </UICLVTemplateForm_ContentTemplateContainer>
+      <UICLVTemplateForm_ContentTemplateContainer>Ajouter un Gabarit de Liste</UICLVTemplateForm_ContentTemplateContainer>
     </title>
   </CLVTemplatePopup_ContentTemplateContainer>
 
@@ -1963,9 +1940,7 @@
     <msg>
       <confirm-delete>Confirmez-vous la suppression?</confirm-delete>
       <query-not-existed>La requête n'existe plus.</query-not-existed>
-      <can-not-remove>Vous ne pouvez pas supprimer cette requête. Veuillez contacter l'administrateur pour plus
-        d'information.
-      </can-not-remove>
+      <can-not-remove>Vous ne pouvez pas supprimer cette requête. Veuillez contacter l'administrateur pour plus d'information.</can-not-remove>
     </msg>
   </UIQueriesList>
   <UIQueriesForm>
@@ -2042,13 +2017,9 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <range-validator>Nombre de références invalide. Le format est le suivant : a..b (a et b entiers positifs).
-        Utiliser '*' à la place de b pour indiquer un nombre illimité.
-      </range-validator>
+      <range-validator>Nombre de références invalide. Le format est le suivant : a..b (a et b entiers positifs). Utiliser '*' à la place de b pour indiquer un nombre illimité.</range-validator>
       <error-update>Erreur lors de la mise à jour.</error-update>
-      <item-not-existing>Vous ne pouvez pas enregistrer les modifications à ce tag qui n'existe plus dans la base de
-        données
-      </item-not-existing>
+      <item-not-existing>Vous ne pouvez pas enregistrer les modifications à ce tag qui n'existe plus dans la base de données</item-not-existing>
     </msg>
   </UITagStyleForm>
   <FolksonomyPopup>
@@ -2362,8 +2333,7 @@
       <UnLock>Déverrouiller</UnLock>
     </tooltip>
     <msg>
-      <access-denied-exception>Vous n'avez pas la permission d'accéder au noeud {0} ou ce noeud a été supprimé.
-      </access-denied-exception>
+      <access-denied-exception>Vous n'avez pas la permission d'accéder au noeud {0} ou ce noeud a été supprimé.</access-denied-exception>
     </msg>
   </UILockNodeList>
   <EditUnLockForm>
@@ -2476,10 +2446,8 @@
       <NextViewTree>Suivant</NextViewTree>
     </action>
     <msg>
-      <xss-vulnerability-character>Le champ '{0}' contient des caractères vulnérables aux attaques XSS
-      </xss-vulnerability-character>
-      <xss-vulnerability-character-wo-label>Votre saisie peut contenir les caractères de vulnérabilité XSS
-      </xss-vulnerability-character-wo-label>
+      <xss-vulnerability-character>Le champ '{0}' contient des caractères vulnérables aux attaques XSS</xss-vulnerability-character>
+      <xss-vulnerability-character-wo-label>Votre saisie peut contenir les caractères de vulnérabilité XSS</xss-vulnerability-character-wo-label>
     </msg>
   </UIActionForm>
 
@@ -2555,9 +2523,7 @@
   </NodeTypeNameValidator>
   <UIActionForm>
     <msg>
-      <constraint-violation-exception>Impossible d'ajouter le noeud '{0}' à '{1}' dans l'espace de stockage '{2}' à
-        cause d'un problème de droit d'accès ou d'une violation de contrainte.
-      </constraint-violation-exception>
+      <constraint-violation-exception>Impossible d'ajouter le noeud '{0}' à '{1}' dans l'espace de stockage '{2}' à cause d'un problème de droit d'accès ou d'une violation de contrainte.</constraint-violation-exception>
     </msg>
   </UIActionForm>
 
@@ -2568,9 +2534,7 @@
   </UIWorkspaceWizard>
   <UIRepositoryForm>
     <msg>
-      <not-complete-repository>Un entrepôt est en cours de création. Veuillez attendre quelques minutes avant de pouvoir
-        en créer un autre
-      </not-complete-repository>
+      <not-complete-repository>Un entrepôt est en cours de création. Veuillez attendre quelques minutes avant de pouvoir en créer un autre</not-complete-repository>
     </msg>
   </UIRepositoryForm>
 

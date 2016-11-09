@@ -17,7 +17,7 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <not-support>Dieser Dokumenttyp kann nicht kommentiert werden.</not-support>
+      <not-support>You can't comment on this type of document.</not-support>
       <not-checkedout>Sie müssen den Knoten auschecken, bevor Sie kommentieren können.</not-checkedout>
       <content-null>Sie können keinen leeren Kommentar posten.</content-null>
     </msg>
@@ -41,7 +41,7 @@
     </label>
     <button>
       <label>
-        <confirm>Ok</confirm>
+        <confirm>OK</confirm>
       </label>
     </button>
     <msg>
@@ -129,7 +129,7 @@
     <title>Explorer</title>
     <label>
       <Root>Wurzel</Root>
-      <webDavView>Open in MS Office</webDavView>
+      <webDavView>In MS Office bearbeiten</webDavView>
     </label>
     <msg>
       <path-not-found>Dieses Element wurde gelöscht oder geändert. Bitte klicken Sie auf die Schaltfläche "aktualisieren".</path-not-found>
@@ -165,7 +165,7 @@
       <enableDragAndDrop>Ziehen und Ablegen aktivieren:</enableDragAndDrop>
       <sortBy>Sortieren nach:</sortBy>
       <order>Sortieren nach:</order>
-      <nodesPerPage>Items per Page:</nodesPerPage>
+      <nodesPerPage>Artikel pro Seite:</nodesPerPage>
     </label>
     <action>
       <Back>#{word.close}</Back>
@@ -250,12 +250,12 @@
       <UIActivePublication>An Veröffentlichungszyklus übergeben.</UIActivePublication>
       <UITaggingForm>Dokument taggen</UITaggingForm>
       <UIThumbnailForm>Miniaturbild hinzufügen</UIThumbnailForm>
-      <UIAllItemsPreferenceForm>Präferenzen</UIAllItemsPreferenceForm>
+      <UIAllItemsPreferenceForm>Preferences</UIAllItemsPreferenceForm>
       <UISelectRestorePath>Wiederherstellungspfad auswählen</UISelectRestorePath>
       <UISEOForm>SEO verwalten</UISEOForm>
       <UISEOToolbarForm>SEO verwalten</UISEOToolbarForm>
-      <UIReadOnlyFileConfirmMessage>Open Document</UIReadOnlyFileConfirmMessage>
-      <UIDocumentAutoVersionForm>Copy Document</UIDocumentAutoVersionForm>
+      <UIReadOnlyFileConfirmMessage>Dokument öffnen</UIReadOnlyFileConfirmMessage>
+      <UIDocumentAutoVersionForm>Dokument kopieren</UIDocumentAutoVersionForm>
     </title>
     <header>
       <workspace>Arbeitsbereich</workspace>
@@ -309,8 +309,8 @@
       <ViewMetadatas>Metadaten</ViewMetadatas>
       <ViewRelations>Beziehungen anzeigen/ausblenden</ViewRelations>
       <ShowJCRStructure>Inhaltsstruktur anzeigen/ausblenden</ShowJCRStructure>
-      <EditProperty>Edit Document Properties</EditProperty>
-      <UploadNewVersion>Upload a new version</UploadNewVersion>
+      <EditProperty>Dokumenteigenschaften bearbeiten</EditProperty>
+      <UploadNewVersion>Eine neue Version hochladen</UploadNewVersion>
     </tooltip>
     <msg>
       <cannot-action-in-rootnode>Diese Aktion kann nicht im Quellknoten ausgeführt werden.</cannot-action-in-rootnode>
@@ -404,7 +404,7 @@
       <constraintviolation-exception>Das Pflichtelement jcr:uuid wurde nicht gefunden. Vielleicht wurde der Knoten gelöscht oder geändert. Bitte klicken Sie auf Aktualisieren.</constraintviolation-exception>
       <path-not-found-exception>Dieser Knoten wurde gelöscht oder geändert. Bitte klicken Sie auf die Schaltfläche "aktualisieren".</path-not-found-exception>
       <not-exist-categories>Diese Kategorie ist nicht vorhanden.</not-exist-categories>
-      <lock-node-read-only>This file is locked by user {0}. Open read-only ?</lock-node-read-only>
+      <lock-node-read-only>Diese Datei wird von Benutzer {0} gesperrt. Schreibgeschützt öffnen?</lock-node-read-only>
     </msg>
   </UIPopupMenu>
   <!--
@@ -597,11 +597,11 @@
       <RestoreFromTrash>Aus dem Papierkorb wiederherstellen</RestoreFromTrash>
       <EmptyTrash>Papierkorb leeren</EmptyTrash>
       <WebDavView>Open in MS Office</WebDavView>
-      <Download>Herunterladen</Download>
-      <OpenDocument>Remote Edit</OpenDocument>
-      <EditProperty>Edit Document Properties</EditProperty>
-      <UploadNewVersion>Upload a new version</UploadNewVersion>
-      <CreateNewVersion>Create a new version</CreateNewVersion>
+      <Download>Download</Download>
+      <OpenDocument>Entferntes Bearbeiten</OpenDocument>
+      <EditProperty>Dokumenteigenschaften bearbeiten</EditProperty>
+      <UploadNewVersion>Eine neue Version hochladen</UploadNewVersion>
+      <CreateNewVersion>Neue Version erstellen</CreateNewVersion>
     </event>
   </ECMContextMenu>
  
@@ -712,17 +712,17 @@
       <namespace>Namensraum:</namespace>
       <multiple>Mehrwertig:</multiple>
       <property_select>Neue Eigenschaft hinzufügen:</property_select>
-      <value0>Value 0</value0>
-      <value1>Value 1</value1>
-      <value2>Value 2</value2>
-      <value3>Value 3</value3>
-      <value4>Value 4</value4>
-      <value5>Value 5</value5>
-      <value6>Value 6</value6>
-      <value7>Value 7</value7>
-      <value8>Value 8</value8>
-      <value9>Value 9</value9>
-      <value10>Value 10</value10>
+      <value0>Wert 0</value0>
+      <value1>Wert 1</value1>
+      <value2>Wert 2</value2>
+      <value3>Wert 3</value3>
+      <value4>Wert 4</value4>
+      <value5>Wert 5</value5>
+      <value6>Wert 6</value6>
+      <value7>Wert 7</value7>
+      <value8>Wert 8</value8>
+      <value9>Wert 9</value9>
+      <value10>Wert 10</value10>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -1330,7 +1330,7 @@
   -->
   <PopupUserSelector>
     <title>
-      <UIUserContainer>Berechtigungsauswahl</UIUserContainer>
+      <UIUserContainer>Permission Selector</UIUserContainer>
     </title>
   </PopupUserSelector>
   <UIPopupTaxonomy>
@@ -1345,7 +1345,13 @@
   ###############################################################################
   -->
   <UIVersionInfo>
+    <title>Version history</title>
+    <summary>
+      <empty>Click here to add a summary</empty>
+    </summary>
     <tooltip>
+      <version>Version</version>
+      <baseVersion>Base Version</baseVersion>
       <addLabel>Label hinzufügen</addLabel>
       <removeLable>Label entfernen</removeLable>
       <restoreVersion>Version wiederherstellen</restoreVersion>
@@ -1356,6 +1362,9 @@
     <msg>
       <have-no-view-template>Die Ansichtsvorlage ist nicht unterstützt.</have-no-view-template>
       <cannot-remove-version>Sie können die Basisversion nicht entfernen.</cannot-remove-version>
+      <error-removing-version>An error occurred while deleting this version.</error-removing-version>
+      <error-removing-referenced-version>This version is referenced and can't be removed.</error-removing-referenced-version>
+      <confirm-restore>Are you sure you want to restore this version?</confirm-restore>
       <confirm-delete>Möchten Sie diese Version wirklich entfernen?</confirm-delete>
       <not-checked-out>Sie müssen diesen Knoten auschecken, bevor den wiederzuherstellen.</not-checked-out>
       <invalid-item-state>Sie können diese Version nicht wiederherstellen. Vermutlich wurden während einer anderen Session ein oder mehrere Elemente gelöscht oder verschoben.</invalid-item-state>
@@ -1363,7 +1372,15 @@
     <action>
       <close>#{word.close}</close>
       <close-view>Ansicht schließen</close-view>
+      <compare-versions>Compare selected versions</compare-versions>
     </action>
+    <labels>
+      <version>Version</version>
+      <date>Datum</date>
+      <author>Modified By</author>
+      <summary>Zusammenfassung</summary>
+      <action>Aktion</action>
+    </labels>
   </UIVersionInfo>
   <!--
   ################################################################################
@@ -1471,11 +1488,16 @@
   -->
   <UIDiff>
     <label>
+      <backTo>Back to version history</backTo>
       <diffTitle>Zwischen zwei Versionen vergleichen</diffTitle>
-      <noChange>Keine Veränderung zwischen 2 Versionen</noChange>
-      <baseVerion>Basisversion</baseVerion>
+      <noContent>There is no content to compare</noContent>
       <compareVerion>Version</compareVerion>
       <can-not-compare>Fehler beim Vergleichen von diesen zwei Versionen</can-not-compare>
+      <compare-unavailable>Version comparison is not available for this document</compare-unavailable>
+      <DateChange>On {0}</DateChange>
+      <PreviousAndNextCompare>Änderungen von {0} zu {1}</PreviousAndNextCompare>
+      <ComparedWith>verglichen mit</ComparedWith>
+      <restoredFrom>Restored from version {0}</restoredFrom>
     </label>
   </UIDiff>
   <!--
@@ -1499,7 +1521,7 @@
       <import-successful>Import erfolgreich!</import-successful>
       <filename-invalid>Wählen Sie eine .xml Datei über das "Datei hochladen" Feld zum importieren aus.</filename-invalid>
       <filetype-error>Kann die hochgeladene Datei nicht importieren. Die .xml Datei könnte ungültig sein.</filetype-error>
-      <xml-invalid>There is an invalid character at position [row, column]:{0} in {1} file</xml-invalid>
+      <xml-invalid>Es gibt ein ungültiges Zeichen an Position [Zeile, Spalte]:{0} in {1}-Datei</xml-invalid>
       <mimetype-invalid>Sie können nur .xml oder .zip Dateien importieren.</mimetype-invalid>
       <access-denied>Zugriff verweigert. Sie haben kein Recht Elemente hier zu Importieren.</access-denied>
       <constraint-violation-exception>Daten können nicht importiert werden. Der Knotentyp "{0}" ist nicht erlaubt.</constraint-violation-exception>
@@ -1897,7 +1919,7 @@
     <msg>
       <name-exist>Der Tagname "{0}" ist bereits vorhanden.</name-exist>
       <tagName-invalid>Der Tagname enthält ungültige Zeichen.</tagName-invalid>
-      <tagName-empty-or-invalid>The tag name is empty or contains some invalid characters.</tagName-empty-or-invalid>
+      <tagName-empty-or-invalid>Der Name des Tags fehlt oder enthält ungültige Zeichen.</tagName-empty-or-invalid>
       <tag-name-empty>Der Tagname ist leer</tag-name-empty>
       <tag-name-duplicate>Die eingegebenen Tagnamen müssen eindeutig sein.</tag-name-duplicate>
       <tagName-too-long>Einer der eingegebenen Tags war zu lang. Tagnamen müssen kürzer als 30 Buchstaben sein.</tagName-too-long>
@@ -1946,7 +1968,7 @@
   -->
    <ECMPhoneFormatValidator>
      <msg>
-       <Invalid>The field '{0}' contains invalid an Phone number. Please enter another value.</Invalid>
+       <Invalid>Das Feld '{0}' enthält eine ungültige Telefonnummer. Bitte geben Sie einen anderen Wert ein.</Invalid>
      </msg>
   </ECMPhoneFormatValidator>
   <ECMNameValidator>
@@ -2355,7 +2377,7 @@
     <msg>
       <create-link-problem>Sie können keine Verknüpfung für den Knoten '{0}' in  '{1}' erstellen.</create-link-problem>
       <dest-node-is-link>Der Zielknoten "{0}" ist bereits eine symbolische Verknüpfung, daher können Sie darin keine weitere erstellen.</dest-node-is-link>
-      <selected-is-link>The selected node '{0}' is already a link. You cannot create a link that points to another link.</selected-is-link>
+      <selected-is-link>Der ausgewählte Knoten '{0}' ist bereits ein Link. Sie können keinen Link erstellen, der auf einen anderen Link verweist.</selected-is-link>
       <confirm-create-link>Möchten Sie eine Verknüpfung zu diesem Ort erstellen?</confirm-create-link>
     </msg>
   </UIWorkingArea>
@@ -2435,9 +2457,9 @@
       <ReplaceData>Daten ersetzen</ReplaceData>
       <Back>Zurück zu Umbenennen</Back>
       <Keepfile>Beide Dateien behalten</Keepfile>
-<ReadOnly>Open Read-only</ReadOnly>
-<Cancel>Abbrechen</Cancel>
-      <KeepBoth>Keep Both</KeepBoth>
+<ReadOnly>Schreibgeschützt öffnen</ReadOnly>
+<Cancel>Cancel</Cancel>
+      <KeepBoth>Beide behalten</KeepBoth>
       <CreateNewVersion>Create a new version</CreateNewVersion>
     </label>
   </UIConfirmMessage>
@@ -2840,7 +2862,7 @@
 
   <UIPopupWindow>
     <title>
-      <UITaggingFormContainer>Tag Manager</UITaggingFormContainer>
+      <UITaggingFormContainer>Tag-Manager</UITaggingFormContainer>
     </title>
   </UIPopupWindow>
 
@@ -2997,15 +3019,15 @@
       <user>Autor</user>
       <description>Beschreibung</description>
     </header>
-    <create-version>New version is created</create-version>
+    <create-version>Neue Version erstellt</create-version>
   </UIPublicationHistory>
   
   <UIPublicationSchedule>
     <label>
       <introduction>Sie können die Veröffentlichung Ihres Dokuments planen. Wählen Sie die Zeitpunkte an denen Sie Ihr Dokument veröffentlicht sehen möchten</introduction>
       <no-schedule-info>Es gibt keinen Veröffentlichungszeitplan für Ihr Dokument</no-schedule-info>
-      <UIPublicationPanelStartDateInput>Start Publication date</UIPublicationPanelStartDateInput>
-      <UIPublicationPanelEndDateInput>End Publication date</UIPublicationPanelEndDateInput>
+      <UIPublicationPanelStartDateInput>Veröffentlichungs-Anfangsdatum</UIPublicationPanelStartDateInput>
+      <UIPublicationPanelEndDateInput>Veröffentlichungs-Enddatum</UIPublicationPanelEndDateInput>
     </label>
     <msg>
       <save-finished>Ihr neuer Veröffentlichungszeitplan wurde erfolgreich gespeichert.</save-finished>
@@ -3080,10 +3102,11 @@
       <ShowDrives>Laufwerke anzeigen</ShowDrives>
     </DrivesArea>
     <msg>
-      <no-view-found>There are no views applied for your access permission in drive '{0}'.</no-view-found>
-      <access-denied>Zugriff verweigert. Sie haben keine Berechtigung in dem Arbeitsbereich des Laufwerks "{0}".</access-denied>
-      <empty-drives>Access denied. Either there is no drive in this repository or you do not have permission to access any drives in this repository.</empty-drives>
-      <workspace-not-exist>Das Laufwerk "{0}" wurde in einem unbekannten Arbeitsbereich gespeichert. Bitte konfigurieren Sie das Laufwerk neu.</workspace-not-exist>
+      <no-view-found>Auf Ihre Zugangsberechtigung auf Laufwerk '{0}' sind keine Ansichten in Kraft.</no-view-found>
+      <access-denied>Access denied. You may not have permission in the workspace of drive '{0}'.</access-denied>
+      <not-found>The document you are trying to access is no longer available.</not-found>
+      <empty-drives>Zugriff verweigert. Entweder gibt es kein Laufwerk in dieser Ablage oder Sie haben keine Zugriffsberechtigung auf die Laufwerke in dieser Ablage.</empty-drives>
+      <workspace-not-exist>Drive '{0}' was stored in one unrecognized workspace. Please reconfigure this drive.</workspace-not-exist>
     </msg>
   </UIDrivesArea>
   <UIJcrExplorerEditForm>
@@ -3171,7 +3194,7 @@
     <Keep>Beide behalten</Keep>
     <Replace>Ersetzen</Replace>
     <Canceled>Abgebrochen</Canceled>
-      <UploadNewVersion>Upload new version</UploadNewVersion>
+      <UploadNewVersion>Neue Version hochladen</UploadNewVersion>
     <Cancel>#{word.cancel}</Cancel>
     <AbortAllConfirmation>Möchten Sie alle Dateien in Bearbeitung abbrechen?</AbortAllConfirmation>
   </label>
@@ -3201,17 +3224,17 @@
     </msg>
   </UIPropertyForm>
   <UIDocumentAutoVersionForm>
-    <msg>A document {0} already exists. What do you want to do?</msg>
+    <msg>Ein {0} Dokument ist bereits vorhanden. Was möchten Sie tun?</msg>
     <UIChkRememberNonVersioned>
-      <label>Remember my choice for all others non-versioned documents</label>
+      <label>Meine Auswahl für alle anderen ohne Versionsangabe Dokumnte merken</label>
     </UIChkRememberNonVersioned>
     <UIChkRememberVersioned>
-      <label>Remember my choice for all other versioned documents</label>
+      <label>Meine Auswahl für alle anderen Versionsangabe Dokumnte merken</label>
     </UIChkRememberVersioned>
   </UIDocumentAutoVersionForm>
   <DocumentAuto>
-    <message>A new version of the document {0} has been created successfully.</message>
-    <messageMultiFile>A new version of the document has been created.</messageMultiFile>
+    <message>Eine neue Version des Dokument {0} wurde erfolgreich erstellt.</message>
+    <messageMultiFile>Eine neue Version des Dokuments wurde erstellt.</messageMultiFile>
   </DocumentAuto>
   <!--
   ###################################################################################

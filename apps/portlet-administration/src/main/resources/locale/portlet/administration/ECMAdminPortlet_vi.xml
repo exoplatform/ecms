@@ -40,13 +40,11 @@
   -->
   <UITaxonomyWorkingArea>
     <msg>
-      <referential-integrity>Không thể đọc được từ tệp tin nguồn hoặc danh mục điểm đến là một danh mục con.
-      </referential-integrity>
+      <referential-integrity>Không thể đọc được từ tệp tin nguồn hoặc danh mục điểm đến là một danh mục con.</referential-integrity>
       <no-taxonomy-selected>Bạn phải sao chép hoặc cắt ít nhất một danh mục.</no-taxonomy-selected>
       <node-is-cutting>Bạn không thể dán vào đây vì node danh mục '{0}' có thể đã bị cắt.</node-is-cutting>
       <can-not-paste>Không có dữ liệu nào trong bộ nhớ tạm để dán vào.</can-not-paste>
-      <reference-exception>Không thể xoá danh mục này bởi vì nó hiện đang được tham chiếu bởi một nội dung.
-      </reference-exception>
+      <reference-exception>Không thể xoá danh mục này bởi vì nó hiện đang được tham chiếu bởi một nội dung.</reference-exception>
       <path-error>Một lỗi đã xảy ra khi đang gỡ bỏ node danh mục này.</path-error>
     </msg>
   </UITaxonomyWorkingArea>
@@ -71,13 +69,10 @@
   <UITaxonomyTreeContainer>
     <tab>
       <info>
-        <UITaxonomyTreeMainForm>Cho biết tên danh mục, không gian lưu trữ và đường dẫn đến trang chủ.
-        </UITaxonomyTreeMainForm>
+        <UITaxonomyTreeMainForm>Cho biết tên danh mục, không gian lưu trữ và đường dẫn đến trang chủ.</UITaxonomyTreeMainForm>
         <UIPermissionTreeManager>Đặt phân quyền cho cây danh mục.</UIPermissionTreeManager>
-        <UIActionTaxonomyManager>Thêm hành động vào cây danh mục để hoàn tất khởi tạo hoặc cập nhật.
-        </UIActionTaxonomyManager>
-        <UITaxonomyTreeCreateChild>Sửa cây danh mục bằng cách thêm mới, sao chép, cắt và chọn phân quyền.
-        </UITaxonomyTreeCreateChild>
+        <UIActionTaxonomyManager>Thêm hành động vào cây danh mục để hoàn tất khởi tạo hoặc cập nhật.</UIActionTaxonomyManager>
+        <UITaxonomyTreeCreateChild>Sửa cây danh mục bằng cách thêm mới, sao chép, cắt và chọn phân quyền.</UITaxonomyTreeCreateChild>
       </info>
     </tab>
     <msg>
@@ -162,8 +157,7 @@
       <Save>#{word.save}</Save>
     </action>
     <msg>
-      <name-not-allowed>Không được để trống tên cũng như không được sử dụng các ký tự đặc biệt trong tên hành động.
-      </name-not-allowed>
+      <name-not-allowed>Không được để trống tên cũng như không được sử dụng các ký tự đặc biệt trong tên hành động.</name-not-allowed>
       <path-invalid>Đường dẫn không hợp lệ.</path-invalid>
       <taxonomy-existed>Cây danh mục đã tồn tại.</taxonomy-existed>
       <taxonomy-node-existed>Node danh mục đã tồn tại.</taxonomy-node-existed>
@@ -256,8 +250,7 @@
     <msg>
       <confirm-delete>Bạn có chắc chắn muốn xóa siêu dữ liệu này không?</confirm-delete>
       <delete-successful>Đã xóa thành công các mẫu thiết kế của '{0}'.</delete-successful>
-      <path-not-found-exception>Siêu dữ liệu này đã bị xóa hoặc thay đổi. Hãy nhấp nút Làm mới.
-      </path-not-found-exception>
+      <path-not-found-exception>Siêu dữ liệu này đã bị xóa hoặc thay đổi. Hãy nhấp nút Làm mới.</path-not-found-exception>
     </msg>
     <action>
       <Add>Thêm Siêu dữ liệu</Add>
@@ -568,11 +561,8 @@
     </action>
     <msg>
       <register-successfully>Kiểu nút '{0}' đã được đăng kí thành công.</register-successfully>
-      <supertype-is-madatory>Kiểu kế thừa là trường bắt buộc khi bạn đăng ký kiểu nút mới. Vui lòng chọn ít nhất một
-        kiểu kế thừa.
-      </supertype-is-madatory>
-      <register-failed>Không đăng ký được kiểu nút này. Kiểu này đã tồn tại hoặc kiểu kế thừa không hợp lệ.
-      </register-failed>
+      <supertype-is-madatory>Kiểu kế thừa là trường bắt buộc khi bạn đăng ký kiểu nút mới. Vui lòng chọn ít nhất một kiểu kế thừa.</supertype-is-madatory>
+      <register-failed>Không đăng ký được kiểu nút này. Kiểu này đã tồn tại hoặc kiểu kế thừa không hợp lệ.</register-failed>
       <nodeType-name>Yêu cầu phải có tên kiểu nút.</nodeType-name>
       <fileName-invalid>Tên tệp tin chứa một vài ký tự không hợp lệ.</fileName-invalid>
       <node-type-exists>Kiểu nút '{0}' đã tồn tại.</node-type-exists>
@@ -591,8 +581,7 @@
     </tab>
     <msg>
       <property-name>Tên định nghĩa thuộc tính không hợp lệ.</property-name>
-      <not-supported-value-constraints>Kiểu bắt buộc này không hỗ trợ các giá trị hạn chế.
-      </not-supported-value-constraints>
+      <not-supported-value-constraints>Kiểu bắt buộc này không hỗ trợ các giá trị hạn chế.</not-supported-value-constraints>
     </msg>
   </UIPropertyDefinitionForm>
   <UIChildNodeDefinitionForm>
@@ -1001,7 +990,7 @@
       <addSymLink>Thêm liên kết</addSymLink>
       <checkIn>Check In</checkIn>
       <checkOut>Check Out</checkOut>
-      <shareDocuments>Chia sẻ</shareDocuments>
+      <shareDocuments>Share</shareDocuments>
       <openDocument>Remote Edit</openDocument>
       <editProperty>Edit Document Properties</editProperty>
       <uploadNewVersion>Upload a new version</uploadNewVersion>
@@ -1034,7 +1023,7 @@
   </UIViewFormTabPane>
   <PopupViewPermission>
     <title>
-      <UIPermissionSelector>Chọn Quyền</UIPermissionSelector>
+      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
     </title>
   </PopupViewPermission>
 
@@ -1085,7 +1074,7 @@
   -->
   <UITemplateForm>
     <title>
-      <AddPermission>Thêm Quyền</AddPermission>
+      <AddPermission>Add Permission</AddPermission>
     </title>
     <action>
       <Save>Lưu</Save>
@@ -1402,8 +1391,7 @@
     </action>
     <msg>
       <checkbox-require>Vui lòng chọn ít nhất một phân quyền.</checkbox-require>
-      <userOrGroup-required>Vui lòng chọn người dùng hoặc nhóm người dùng trước khi lưu phân quyền đó.
-      </userOrGroup-required>
+      <userOrGroup-required>Vui lòng chọn người dùng hoặc nhóm người dùng trước khi lưu phân quyền đó.</userOrGroup-required>
       <not-change-permission>Bạn không có quyền để thêm mới phân quyền.</not-change-permission>
       <access-denied>Truy cập bị từ chối. Bạn không thể gỡ bỏ phân quyền này.</access-denied>
     </msg>
@@ -1417,7 +1405,7 @@
 
   <PopupTaxonomyTreePermission>
     <title>
-      <UIPermissionSelector>Chọn Quyền</UIPermissionSelector>
+      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
     </title>
   </PopupTaxonomyTreePermission>
 
@@ -1506,8 +1494,7 @@
     </action>
     <msg>
       <checkbox-require>Vui lòng chọn ít nhất một phân quyền.</checkbox-require>
-      <userOrGroup-required>Bạn phải chọn một người dùng hoặc một nhóm người dùng trước khi lưu quyền này.
-      </userOrGroup-required>
+      <userOrGroup-required>Bạn phải chọn một người dùng hoặc một nhóm người dùng trước khi lưu quyền này.</userOrGroup-required>
       <not-change-permission>Bạn không có quyền để thêm mới một phân quyền.</not-change-permission>
       <access-denied>Truy cập bị từ chối. Bạn không thể gỡ bỏ phân quyền này.</access-denied>
     </msg>
@@ -1542,8 +1529,7 @@
     <msg>
       <confirm-delete>Bạn có thực sự muốn xóa không?</confirm-delete>
       <access-denied>Truy cập bị từ chối. Bạn không có phân quyền để dùng chức năng này.</access-denied>
-      <editing-template>Truy cập bị từ chối. Bạn không thể xóa và chỉnh sửa đồng thời mẫu thiết kế này.
-      </editing-template>
+      <editing-template>Truy cập bị từ chối. Bạn không thể xóa và chỉnh sửa đồng thời mẫu thiết kế này.</editing-template>
       <template-not-exist>Mẫu thiết kế mà bạn đang cố xóa không tồn tại.</template-not-exist>
     </msg>
   </UITemplateList>
@@ -1561,8 +1547,7 @@
     <msg>
       <confirm-delete>Bạn có thực sự muốn xóa không?</confirm-delete>
       <access-denied>Truy cập bị từ chối. Bạn không có phân quyền để dùng chức năng này.</access-denied>
-      <editing-template>Truy cập bị từ chối. Bạn không thể xóa và chỉnh sửa đồng thời mẫu thiết kế này.
-      </editing-template>
+      <editing-template>Truy cập bị từ chối. Bạn không thể xóa và chỉnh sửa đồng thời mẫu thiết kế này.</editing-template>
       <template-not-exist>Mẫu thiết kế mà bạn đang cố xóa không tồn tại.</template-not-exist>
     </msg>
   </UIActionsTemplateList>
@@ -1580,8 +1565,7 @@
     <msg>
       <confirm-delete>Bạn có thực sự muốn xóa không?</confirm-delete>
       <access-denied>Truy cập bị từ chối. Bạn không có phân quyền để dùng chức năng này.</access-denied>
-      <editing-template>Truy cập bị từ chối. Bạn không thể xóa và chỉnh sửa đồng thời mẫu thiết kế này.
-      </editing-template>
+      <editing-template>Truy cập bị từ chối. Bạn không thể xóa và chỉnh sửa đồng thời mẫu thiết kế này.</editing-template>
       <template-not-exist>Mẫu thiết kế mà bạn đang cố xóa không tồn tại.</template-not-exist>
     </msg>
   </UIOthersTemplateList>
@@ -1618,8 +1602,7 @@
     <msg>
       <confirm-delete>Bạn có chắc chắn muốn xóa mẫu thiết kế này không?</confirm-delete>
       <access-denied>Truy cập bị từ chối. Bạn không có phân quyền để dùng chức năng này.</access-denied>
-      <editing-template>Truy cập bị từ chối. Bạn không thể xóa và chỉnh sửa đồng thời mẫu thiết kế này.
-      </editing-template>
+      <editing-template>Truy cập bị từ chối. Bạn không thể xóa và chỉnh sửa đồng thời mẫu thiết kế này.</editing-template>
       <template-not-exist>Mẫu thiết kế mà bạn đang cố xóa không tồn tại.</template-not-exist>
     </msg>
   </UICLVTemplateList>
@@ -1754,7 +1737,7 @@
   -->
   <AddNewTemplatePermission>
     <title>
-      <UIPermissionSelector>Chọn Quyền</UIPermissionSelector>
+      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
     </title>
   </AddNewTemplatePermission>
   <TemplatePermission>
@@ -1795,12 +1778,12 @@
   </DialogForm>
   <DialogFormTemplatePermission>
     <title>
-      <UIPermissionSelector>Chọn Quyền</UIPermissionSelector>
+      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
     </title>
   </DialogFormTemplatePermission>
   <ViewFormTemplatePermission>
     <title>
-      <UIPermissionSelector>Chọn Quyền</UIPermissionSelector>
+      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
     </title>
   </ViewFormTemplatePermission>
   <TemplateContainerPopup>
@@ -1957,8 +1940,7 @@
     <msg>
       <confirm-delete>Bạn có chắc chắn muốn xóa truy vấn này không?</confirm-delete>
       <query-not-existed>Các truy vấn không tồn tại nữa.</query-not-existed>
-      <can-not-remove>Lỗi xuất hiện khi xoá các truy vấn. Xin vui lòng liên hệ với người quản trị để biết chi tiết.
-      </can-not-remove>
+      <can-not-remove>Lỗi xuất hiện khi xoá các truy vấn. Xin vui lòng liên hệ với người quản trị để biết chi tiết.</can-not-remove>
     </msg>
   </UIQueriesList>
   <UIQueriesForm>
@@ -1994,7 +1976,7 @@
   </EditQueryForm>
   <PermissionPopup>
     <title>
-      <UIGroupMemberSelector>Chọn Quyền</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Permission Selector</UIGroupMemberSelector>
     </title>
   </PermissionPopup>
   <!--
@@ -2035,12 +2017,9 @@
       <Cancel>Hủy bỏ</Cancel>
     </action>
     <msg>
-      <range-validator>Phạm vi lựa chọn không hợp lệ. Định dạng phải là: a...b, trong đó a, b là các số nguyên dương.
-        Bạn có thể dùng * thay cho b để cho biết không giới hạn phạm vi lựa chọn.
-      </range-validator>
+      <range-validator>Phạm vi lựa chọn không hợp lệ. Định dạng phải là: a...b, trong đó a, b là các số nguyên dương. Bạn có thể dùng * thay cho b để cho biết không giới hạn phạm vi lựa chọn.</range-validator>
       <error-update>Cập nhật không thành công. Thông tin của bạn không hợp lệ.</error-update>
-      <item-not-existing>Bạn không thể lưu các thay đổi cho nhãn này vì nó không còn tồn tại trong cơ sở dữ liệu nữa.
-      </item-not-existing>
+      <item-not-existing>Bạn không thể lưu các thay đổi cho nhãn này vì nó không còn tồn tại trong cơ sở dữ liệu nữa.</item-not-existing>
     </msg>
   </UITagStyleForm>
   <FolksonomyPopup>
@@ -2354,8 +2333,7 @@
       <UnLock>Mở khóa</UnLock>
     </tooltip>
     <msg>
-      <access-denied-exception>Bạn không có quyền truy cập nút có đường dẫn {0}, hoặc nút này đã bị xóa.
-      </access-denied-exception>
+      <access-denied-exception>Bạn không có quyền truy cập nút có đường dẫn {0}, hoặc nút này đã bị xóa.</access-denied-exception>
     </msg>
   </UILockNodeList>
   <EditUnLockForm>
@@ -2469,8 +2447,7 @@
     </action>
     <msg>
       <xss-vulnerability-character>Trường '{0}' có chứa các ký tự không hợp lệ</xss-vulnerability-character>
-      <xss-vulnerability-character-wo-label>Chuỗi này có thể chứa kí tự không an toàn
-      </xss-vulnerability-character-wo-label>
+      <xss-vulnerability-character-wo-label>Chuỗi này có thể chứa kí tự không an toàn</xss-vulnerability-character-wo-label>
     </msg>
   </UIActionForm>
 
@@ -2508,7 +2485,7 @@
       <Add>Thêm</Add>
     </action>
     <label>
-      <userOrGroup>Kiểu thành viên:</userOrGroup>
+      <userOrGroup>Memberships:</userOrGroup>
     </label>
     <msg>
       <userOrGroup-alreadyExists>Kiểu thành viên đã tồn tại, xin chọn lại kiểu khác.</userOrGroup-alreadyExists>
@@ -2546,9 +2523,7 @@
   </NodeTypeNameValidator>
   <UIActionForm>
     <msg>
-      <constraint-violation-exception>Không thể thêm nút '{0}' vào '{1}' trong không gian lưu trữ '{2}' do phân quyền
-        hoặc điều kiện ràng buộc.
-      </constraint-violation-exception>
+      <constraint-violation-exception>Không thể thêm nút '{0}' vào '{1}' trong không gian lưu trữ '{2}' do phân quyền hoặc điều kiện ràng buộc.</constraint-violation-exception>
     </msg>
   </UIActionForm>
 
@@ -2559,9 +2534,7 @@
   </UIWorkspaceWizard>
   <UIRepositoryForm>
     <msg>
-      <not-complete-repository>The repository is being created. You need to wait a few minutes before creating another
-        one.
-      </not-complete-repository>
+      <not-complete-repository>The repository is being created. You need to wait a few minutes before creating another one.</not-complete-repository>
     </msg>
   </UIRepositoryForm>
 
@@ -2622,9 +2595,7 @@
   </UIPageIterator>
   <UILockNodeList>
     <msg>
-      <can-not-unlock-node>Bạn không có quyền mở khóa nút này. Vui lòng liên hệ với quản trị viên để có quyền thích
-        hợp.
-      </can-not-unlock-node>
+      <can-not-unlock-node>Bạn không có quyền mở khóa nút này. Vui lòng liên hệ với quản trị viên để có quyền thích hợp.</can-not-unlock-node>
     </msg>
   </UILockNodeList>
 </bundle>

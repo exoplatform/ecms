@@ -17,7 +17,7 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <not-support>No puede comentar en este tipo de documento.</not-support>
+      <not-support>You can't comment on this type of document.</not-support>
       <not-checkedout>Debe salir del nodo antes de comentar en él</not-checkedout>
       <content-null>No puedes publicar un comentario vacío.</content-null>
     </msg>
@@ -41,7 +41,7 @@
     </label>
     <button>
       <label>
-        <confirm>Confirmar</confirm>
+        <confirm>OK</confirm>
       </label>
     </button>
     <msg>
@@ -250,11 +250,11 @@
       <UIActivePublication>Inscribirse a la publicación del ciclo de vida</UIActivePublication>
       <UITaggingForm>Etiquetar este documento</UITaggingForm>
       <UIThumbnailForm>Añadir imagen de la viñeta</UIThumbnailForm>
-      <UIAllItemsPreferenceForm>Preferencias</UIAllItemsPreferenceForm>
+      <UIAllItemsPreferenceForm>Preferences</UIAllItemsPreferenceForm>
       <UISelectRestorePath>Seleccionar Ruta de Restauración</UISelectRestorePath>
       <UISEOForm>Administrar SEO</UISEOForm>
       <UISEOToolbarForm>Administrar SEO</UISEOToolbarForm>
-      <UIReadOnlyFileConfirmMessage>Abrir Documento</UIReadOnlyFileConfirmMessage>
+      <UIReadOnlyFileConfirmMessage>Open Document</UIReadOnlyFileConfirmMessage>
       <UIDocumentAutoVersionForm>Copiar documento</UIDocumentAutoVersionForm>
     </title>
     <header>
@@ -538,7 +538,7 @@
   </UIDocumentWorkspace>
   <UIDocumentInfo>
     <msg>
-      <access-denied>Acceso denegado. No se puede acceder al nodo '{0}'.</access-denied>
+      <access-denied>Acceso denegado. No puede acceder al nodo '{0}'.</access-denied>
       <null-exception>No se ha encontrado el elemento. Fue removido o cambiado o bien no tiene permiso para acceder a este nodo.</null-exception>
       <confirm-deleteattachment>¿Está seguro de eliminar este archivo de datos adjuntos?</confirm-deleteattachment>
       <confirm-deleteattcomment>¿Está seguro de eliminar este comentario?</confirm-deleteattcomment>
@@ -597,7 +597,7 @@
       <RestoreFromTrash>Recuperar del zafacón</RestoreFromTrash>
       <EmptyTrash>Vaciar zafacón</EmptyTrash>
       <WebDavView>Abrir en MS Office</WebDavView>
-      <Download>Descargar</Download>
+      <Download>Download</Download>
       <OpenDocument>Edición remota</OpenDocument>
       <EditProperty>Editar propiedades del documento</EditProperty>
       <UploadNewVersion>Subir nueva versión</UploadNewVersion>
@@ -1330,7 +1330,7 @@
   -->
   <PopupUserSelector>
     <title>
-      <UIUserContainer>Selector de Permiso</UIUserContainer>
+      <UIUserContainer>Permission Selector</UIUserContainer>
     </title>
   </PopupUserSelector>
   <UIPopupTaxonomy>
@@ -1345,7 +1345,13 @@
   ###############################################################################
   -->
   <UIVersionInfo>
+    <title>Version history</title>
+    <summary>
+      <empty>Click here to add a summary</empty>
+    </summary>
     <tooltip>
+      <version>Version</version>
+      <baseVersion>Base Version</baseVersion>
       <addLabel>Añadir etiqueta</addLabel>
       <removeLable>Eliminar la Etiqueta</removeLable>
       <restoreVersion>Restablecer la Versión</restoreVersion>
@@ -1356,6 +1362,9 @@
     <msg>
       <have-no-view-template>La plantilla de vista no es compatible.</have-no-view-template>
       <cannot-remove-version>No se puede quitar la versión base.</cannot-remove-version>
+      <error-removing-version>An error occurred while deleting this version.</error-removing-version>
+      <error-removing-referenced-version>This version is referenced and can't be removed.</error-removing-referenced-version>
+      <confirm-restore>Are you sure you want to restore this version?</confirm-restore>
       <confirm-delete>¿Está seguro de eliminar esta versión?</confirm-delete>
       <not-checked-out>Tiene que verificar este nodo antes de restablecerlo.</not-checked-out>
       <invalid-item-state>No puede restaurar esta versión. Tal vez, uno o más elementos fueron eliminados o movidos por otra sesión.</invalid-item-state>
@@ -1363,7 +1372,15 @@
     <action>
       <close>#{word.close}</close>
       <close-view>Cerrar vista</close-view>
+      <compare-versions>Compare selected versions</compare-versions>
     </action>
+    <labels>
+      <version>Versión</version>
+      <date>Fecha</date>
+      <author>Modified By</author>
+      <summary>Sumario</summary>
+      <action>Acción</action>
+    </labels>
   </UIVersionInfo>
   <!--
   ################################################################################
@@ -1471,11 +1488,16 @@
   -->
   <UIDiff>
     <label>
+      <backTo>Back to version history</backTo>
       <diffTitle>Comparar entre las dos versiones</diffTitle>
-      <noChange>No hubo cambios entre las dos versiones</noChange>
-      <baseVerion>Versión base</baseVerion>
+      <noContent>There is no content to compare</noContent>
       <compareVerion>Versión</compareVerion>
       <can-not-compare>No se pudo comparar ambas versiones</can-not-compare>
+      <compare-unavailable>Version comparison is not available for this document</compare-unavailable>
+      <DateChange>On {0}</DateChange>
+      <PreviousAndNextCompare>Modificaciones desde {0} hasta {1}</PreviousAndNextCompare>
+      <ComparedWith>En comparación con</ComparedWith>
+      <restoredFrom>Restored from version {0}</restoredFrom>
     </label>
   </UIDiff>
   <!--
@@ -1897,7 +1919,7 @@
     <msg>
       <name-exist>Ya existe el nombre de la etiqueta '{0}'.</name-exist>
       <tagName-invalid>El nombre de la etiqueta contiene algunos caracteres no válidos.</tagName-invalid>
-      <tagName-empty-or-invalid>La etiqueta de nombre está vacía o contiene carácteres no válidos.</tagName-empty-or-invalid>
+      <tagName-empty-or-invalid>La etiqueta de nombre está vacía o contiene caracteres no válidos.</tagName-empty-or-invalid>
       <tag-name-empty>El nombre de su etiqueta está vacío</tag-name-empty>
       <tag-name-duplicate>Los nombres de las etiquetas de entrada están duplicados.</tag-name-duplicate>
       <tagName-too-long>Una de las etiquetas introducidas es demasiado larga. El nombre de la etiqueta debe ser menos de 30 caracteres.</tagName-too-long>
@@ -2435,17 +2457,17 @@
       <ReplaceData>Reemplazar la data</ReplaceData>
       <Back>Regresar al cambio de nombre</Back>
       <Keepfile>Guardar ambos archivos</Keepfile>
-<ReadOnly>Abrir en sólo lectura</ReadOnly>
-<Cancel>Cancelar</Cancel>
+<ReadOnly>Open Read-only</ReadOnly>
+<Cancel>Cancel</Cancel>
       <KeepBoth>Mantener ambos</KeepBoth>
-      <CreateNewVersion>Crear una nueva versión</CreateNewVersion>
+      <CreateNewVersion>Create a new version</CreateNewVersion>
     </label>
   </UIConfirmMessage>
 
   <UIRestoreConfirmMessage>
     <label>
       <Close>#{word.close}</Close>
-      <OK>Confirmar</OK>
+      <OK>OK</OK>
       <ReplaceData>Reemplazar la data</ReplaceData>
       <Back>Regresar al cambio de nombre</Back>
       <Keepfile>Mantener ambos archivos</Keepfile>
@@ -3081,9 +3103,10 @@
     </DrivesArea>
     <msg>
       <no-view-found>No hay ninguna vista aplicada para su permiso de acceso en la unidad '{0}'.</no-view-found>
-      <access-denied>Acceso denegado. Tal vez, no tienes permiso en el espacio de trabajo de la unidad '{0}'.</access-denied>
+      <access-denied>Access denied. You may not have permission in the workspace of drive '{0}'.</access-denied>
+      <not-found>The document you are trying to access is no longer available.</not-found>
       <empty-drives>Acceso denegado. No hay lector en este repositorio o no tiene permiso para acceder cualquier lector en este repositorio.</empty-drives>
-      <workspace-not-exist>La unidad '{0}' se almacena en un área de trabajo no reconocido. Por favor, vuelva a configurar esta unidad.</workspace-not-exist>
+      <workspace-not-exist>Drive '{0}' was stored in one unrecognized workspace. Please reconfigure this drive.</workspace-not-exist>
     </msg>
   </UIDrivesArea>
   <UIJcrExplorerEditForm>

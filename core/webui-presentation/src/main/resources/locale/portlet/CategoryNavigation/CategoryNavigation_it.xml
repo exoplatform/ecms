@@ -1,58 +1,58 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <bundle>
   <UICNContainer>
     <title>
-      <QuickEdit>Modifica Veloce</QuickEdit>
+      <QuickEdit>Quick Edit</QuickEdit>
     </title>
   </UICNContainer>
 
   <UICNConfigPopupWindow>
     <title>
-      <UICategoryNavigationConfig>Configurazione Lista Categorie</UICategoryNavigationConfig>
+      <UICategoryNavigationConfig>Category List Configuration</UICategoryNavigationConfig>
     </title>
   </UICNConfigPopupWindow>
 
   <UICategoryNavigationTargetPathFormInputSet>
     <title>
-      <SelectTargetPath></SelectTargetPath>
+      <SelectTargetPath/>
     </title>
   </UICategoryNavigationTargetPathFormInputSet>
 
   <UICategoryNavigationConfig>
     <label>
       <UICategoryNavigationRepositoryFormSelectBox>Repository</UICategoryNavigationRepositoryFormSelectBox>
-      <UICategoryNavigationTreeNameSelectBox>Albero Categoria</UICategoryNavigationTreeNameSelectBox>
-      <UICategoryNavigationTreeTitleFormStringInput>Title</UICategoryNavigationTreeTitleFormStringInput>
+      <UICategoryNavigationTreeNameSelectBox>Category Tree</UICategoryNavigationTreeNameSelectBox>
+      <UICategoryNavigationTreeTitleFormStringInput>Titolo</UICategoryNavigationTreeTitleFormStringInput>
   
-      <UICategoryNavigationTreeNameFormSelectBox>Nome Albero</UICategoryNavigationTreeNameFormSelectBox>
-      <UICategoryNavigationTemplateFormSelectBox>Template Visualizzazione Albero</UICategoryNavigationTemplateFormSelectBox>
+      <UICategoryNavigationTreeNameFormSelectBox>Tree Name</UICategoryNavigationTreeNameFormSelectBox>
+      <UICategoryNavigationTemplateFormSelectBox>Tree viewer template</UICategoryNavigationTemplateFormSelectBox>
       
-      <UICategoryNavigationTargetPathFormInputSet>Mostra in Pagina</UICategoryNavigationTargetPathFormInputSet>      
-      <TreeSelectionBlock>Selezione Albero</TreeSelectionBlock>
-      <DisplaySettingBlock>Impostazioni di visualizzazione</DisplaySettingBlock>
+      <UICategoryNavigationTargetPathFormInputSet>Show in Page</UICategoryNavigationTargetPathFormInputSet>      
+      <TreeSelectionBlock>Tree Selection</TreeSelectionBlock>
+      <DisplaySettingBlock>Display Settings</DisplaySettingBlock>
       <AdvancedBlock>Avanzate</AdvancedBlock>
   
-	  <UICategoryNavigationTreePathFormInputSet>Percorso Albero</UICategoryNavigationTreePathFormInputSet>
-	  <UICategoryNavigationTreePathFormStringInput>Percorso Albero</UICategoryNavigationTreePathFormStringInput>
-	  <UICategoryNavigationHeaderFormStringInput>Header</UICategoryNavigationHeaderFormStringInput>
-	  <UICategoryNavigationAutomaticDetectionCheckBoxInput>Automatico</UICategoryNavigationAutomaticDetectionCheckBoxInput>
-	  <UICategoryNavigationDynamicNavigationLabel>Navigazione Dinamica</UICategoryNavigationDynamicNavigationLabel>
-	  <UICategoryNavigationWithClvFormStringInput>con</UICategoryNavigationWithClvFormStringInput>
-	  <UICategoryNavigationTreepathPopupWindow>Percorso Albero</UICategoryNavigationTreepathPopupWindow>    
+  <UICategoryNavigationTreePathFormInputSet>Path Destinazione</UICategoryNavigationTreePathFormInputSet>
+  <UICategoryNavigationTreePathFormStringInput>Path Destinazione</UICategoryNavigationTreePathFormStringInput>
+  <UICategoryNavigationHeaderFormStringInput>Intestazione</UICategoryNavigationHeaderFormStringInput>
+  <UICategoryNavigationAutomaticDetectionCheckBoxInput>Automatic</UICategoryNavigationAutomaticDetectionCheckBoxInput>
+  <UICategoryNavigationDynamicNavigationLabel>Dynamic Navigation</UICategoryNavigationDynamicNavigationLabel>
+  <UICategoryNavigationWithClvFormStringInput>with</UICategoryNavigationWithClvFormStringInput>
+  <UICategoryNavigationTreepathPopupWindow>Path Destinazione</UICategoryNavigationTreepathPopupWindow>    
       
     </label>
     <msg>
-      <not-support-encoding>Encoding non supportato.</not-support-encoding>
-      <render>Errore mentre renderizzi.</render>
-      <saving-success>Portlet aggiornata con successo.</saving-success>
+      <not-support-encoding>Encoding is not supported.</not-support-encoding>
+      <render>An error occurred when rendering.</render>
+      <saving-success>The information was updated successfully.</saving-success>
     </msg>
     <action>
-      <Save>Salva</Save>
+      <Save>Save</Save>
     </action>
   </UICategoryNavigationConfig>
   <UICategoryNavigationTreeBase>
     <msg>
-      <not-existed-category>Questa categoria non esiste.</not-existed-category>
+      <not-existed-category>La categoria non esiste.</not-existed-category>
     </msg>
   </UICategoryNavigationTreeBase>
 </bundle>

@@ -17,7 +17,7 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <not-support>You cannot comment on this document type.</not-support>
+      <not-support>You can't comment on this type of document.</not-support>
       <not-checkedout>You must check out the node before commenting on it.</not-checkedout>
       <content-null>You cannot post an empty comment.</content-null>
     </msg>
@@ -61,7 +61,7 @@
       <refresh-session-success>The session was refreshed successfully.</refresh-session-success>
       <no-node-history>You are in the root node.</no-node-history>
       <save-session-success>All changes have been saved.</save-session-success>
-      <target-path-not-found>You cannot access this document, either because it doesn't exist anymore or because you do not have the right to access it.</target-path-not-found>
+      <target-path-not-found>You cannot access this node, either because it doesn't exist anymore or because you do not have the right to access it.</target-path-not-found>
     </msg>
   </UIJCRExplorer>
   <!--
@@ -222,7 +222,7 @@
       <UIExportNode>Export</UIExportNode>
       <UINodeTypeInfo>Node Type Information</UINodeTypeInfo>
       <UIVersionInfo>Version Info</UIVersionInfo>
-      <UIActivateVersion>Activate Versioning</UIActivateVersion>
+      <UIActivateVersion>Activate Version</UIActivateVersion>
       <UIAuditingInfo>Auditing Information</UIAuditingInfo>
       <UIActivateAuditing>Activate Auditing</UIActivateAuditing>
       <UIPermissionManager>Permission Management</UIPermissionManager>
@@ -1345,7 +1345,7 @@
   ###############################################################################
   -->
   <UIVersionInfo>
-    <title>Versions history</title>
+    <title>Version history</title>
     <summary>
       <empty>Click here to add a summary</empty>
     </summary>
@@ -1362,7 +1362,7 @@
     <msg>
       <have-no-view-template>The view template is not supported.</have-no-view-template>
       <cannot-remove-version>You cannot remove the base version.</cannot-remove-version>
-      <error-removing-version>An error occurred while deleting version.</error-removing-version>
+      <error-removing-version>An error occurred while deleting this version.</error-removing-version>
       <error-removing-referenced-version>This version is referenced and can't be removed.</error-removing-referenced-version>
       <confirm-restore>Are you sure you want to restore this version?</confirm-restore>
       <confirm-delete>Are you sure you want to remove this version?</confirm-delete>
@@ -1433,7 +1433,7 @@
   -->
   <UIActivateVersion>
     <label>
-      <note>Versioning has not been activated for this document.</note>
+      <note>Versioning has not been activated for this node.</note>
       <question>Are you sure you want to activate it?</question>
       <button-active>Activate</button-active>
       <button-cancel>#{word.cancel}</button-cancel>
@@ -1489,9 +1489,9 @@
   <UIDiff>
     <label>
       <backTo>Back to version history</backTo>
-      <diffTitle>Compare Versions</diffTitle>
+      <diffTitle>Compare between two versions</diffTitle>
       <noContent>There is no content to compare</noContent>
-      <compareVerion>Version {0} by {1}</compareVerion>
+      <compareVerion>Version</compareVerion>
       <can-not-compare>Failed to compare two versions</can-not-compare>
       <compare-unavailable>Version comparison is not available for this document</compare-unavailable>
       <DateChange>On {0}</DateChange>

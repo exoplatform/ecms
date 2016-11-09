@@ -54,8 +54,8 @@
         <name>#{word.name}</name>
         <categories>类别</categories>
         <mimeType>#{Ecm.dialog.label.mimeType}</mimeType>
-        <width>Width</width>
-        <height>Height</height>
+        <width>宽度</width>
+        <height>高度</height>
         <content>#{word.content}</content>
         <re-upload>该文件已经存在。您可以删除它，并将另一个文件上传。</re-upload>
       </label>
@@ -309,7 +309,7 @@
   -->
 <no>否</no>
 <yes>是</yes>
-<true>对</true>
+<true>真</true>
 <false>false</false>
 <Electronic>电子</Electronic>
 <Paper>纸</Paper>

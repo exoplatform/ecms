@@ -17,7 +17,7 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <not-support>Não são permitidos comentários nesse tipo de documento.</not-support>
+      <not-support>You can't comment on this type of document.</not-support>
       <not-checkedout>Você deve reservar o nó antes de comentar.</not-checkedout>
       <content-null>Você não pode publicar um comentário vazio.</content-null>
     </msg>
@@ -41,7 +41,7 @@
     </label>
     <button>
       <label>
-        <confirm>OK</confirm>
+        <confirm>Ok</confirm>
       </label>
     </button>
     <msg>
@@ -165,7 +165,7 @@
       <enableDragAndDrop>Habilitar Arrastar &amp; Soltar</enableDragAndDrop>
       <sortBy>Classificar por:</sortBy>
       <order>Ordenar por:</order>
-      <nodesPerPage>Items per Page:</nodesPerPage>
+      <nodesPerPage>Itens por página:</nodesPerPage>
     </label>
     <action>
       <Back>#{word.close}</Back>
@@ -250,12 +250,12 @@
       <UIActivePublication>Inscrever-se no ciclo de publicações</UIActivePublication>
       <UITaggingForm>Aplicar tag a este documento</UITaggingForm>
       <UIThumbnailForm>Adicionar miniatura</UIThumbnailForm>
-      <UIAllItemsPreferenceForm>Preferências</UIAllItemsPreferenceForm>
+      <UIAllItemsPreferenceForm>Preferences</UIAllItemsPreferenceForm>
       <UISelectRestorePath>Selecionar caminho de restauração</UISelectRestorePath>
       <UISEOForm>Gerenciar SEO</UISEOForm>
       <UISEOToolbarForm>Gerenciar SEO</UISEOToolbarForm>
-      <UIReadOnlyFileConfirmMessage>Open Document</UIReadOnlyFileConfirmMessage>
-      <UIDocumentAutoVersionForm>Copy Document</UIDocumentAutoVersionForm>
+      <UIReadOnlyFileConfirmMessage>Abrir documento</UIReadOnlyFileConfirmMessage>
+      <UIDocumentAutoVersionForm>Copiar documento</UIDocumentAutoVersionForm>
     </title>
     <header>
       <workspace>Espaço de trabalho</workspace>
@@ -289,7 +289,7 @@
       <Paste>Colar</Paste>
       <Search>Buscar</Search>
       <WatchDocument>Acompanhar/Deixar de acompanhar</WatchDocument>
-      <TaggingDocument>Marcação</TaggingDocument>
+      <TaggingDocument>Tag</TaggingDocument>
       <Vote>Votar para esse documento</Vote>
       <Comment>Comentar</Comment>
       <ManageVersions>Versões</ManageVersions>
@@ -309,8 +309,8 @@
       <ViewMetadatas>Metadados</ViewMetadatas>
       <ViewRelations>Mostrar/Esconder relações</ViewRelations>
       <ShowJCRStructure>Mostrar/Esconder estrutura JCR</ShowJCRStructure>
-      <EditProperty>Edit Document Properties</EditProperty>
-      <UploadNewVersion>Upload a new version</UploadNewVersion>
+      <EditProperty>Editar propriedades do documento</EditProperty>
+      <UploadNewVersion>Carregar uma nova versão</UploadNewVersion>
     </tooltip>
     <msg>
       <cannot-action-in-rootnode>Você não pode executar esta ação no nó raiz.</cannot-action-in-rootnode>
@@ -404,7 +404,7 @@
       <constraintviolation-exception>O item obrigatório jcr:uiud não foi encontrado. Talvez o nó foi excluído ou modificado. Por favor, clique no botão Atualizar.</constraintviolation-exception>
       <path-not-found-exception>Este nó foi excluído ou alterado. Por favor, clique no botão Atualizar.</path-not-found-exception>
       <not-exist-categories>A categoria não existe</not-exist-categories>
-      <lock-node-read-only>This file is locked by user {0}. Open read-only ?</lock-node-read-only>
+      <lock-node-read-only>Este arquivo foi bloqueado pelo usuário {0}. Abrir como somente leitura?</lock-node-read-only>
     </msg>
   </UIPopupMenu>
   <!--
@@ -597,11 +597,11 @@
       <RestoreFromTrash>Restaurar da Lixeira</RestoreFromTrash>
       <EmptyTrash>Esvaziar a lixeira</EmptyTrash>
       <WebDavView>Abrir no MS Office</WebDavView>
-      <Download>Baixar</Download>
-      <OpenDocument>Remote Edit</OpenDocument>
-      <EditProperty>Edit Document Properties</EditProperty>
-      <UploadNewVersion>Upload a new version</UploadNewVersion>
-      <CreateNewVersion>Create a new version</CreateNewVersion>
+      <Download>Download</Download>
+      <OpenDocument>Edição remota</OpenDocument>
+      <EditProperty>Editar propriedades do documento</EditProperty>
+      <UploadNewVersion>Carregar uma nova versão</UploadNewVersion>
+      <CreateNewVersion>Criar uma nova versão</CreateNewVersion>
     </event>
   </ECMContextMenu>
  
@@ -712,17 +712,17 @@
       <namespace>Namespace</namespace>
       <multiple>Multiplo</multiple>
       <property_select>Adicione nova propriedade:</property_select>
-      <value0>Value 0</value0>
-      <value1>Value 1</value1>
-      <value2>Value 2</value2>
-      <value3>Value 3</value3>
-      <value4>Value 4</value4>
-      <value5>Value 5</value5>
-      <value6>Value 6</value6>
-      <value7>Value 7</value7>
-      <value8>Value 8</value8>
-      <value9>Value 9</value9>
-      <value10>Value 10</value10>
+      <value0>Valor 0</value0>
+      <value1>Valor 1</value1>
+      <value2>Valor 2</value2>
+      <value3>Valor 3</value3>
+      <value4>Valor 4</value4>
+      <value5>Valor 5</value5>
+      <value6>Valor 6</value6>
+      <value7>Valor 7</value7>
+      <value8>Valor 8</value8>
+      <value9>Valor 9</value9>
+      <value10>Valor 10</value10>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -1330,7 +1330,7 @@
   -->
   <PopupUserSelector>
     <title>
-      <UIUserContainer>Seletor de permissão</UIUserContainer>
+      <UIUserContainer>Permission Selector</UIUserContainer>
     </title>
   </PopupUserSelector>
   <UIPopupTaxonomy>
@@ -1345,7 +1345,13 @@
   ###############################################################################
   -->
   <UIVersionInfo>
+    <title>Version history</title>
+    <summary>
+      <empty>Click here to add a summary</empty>
+    </summary>
     <tooltip>
+      <version>Versão</version>
+      <baseVersion>Versão base</baseVersion>
       <addLabel>Adicionar rótulo</addLabel>
       <removeLable>Remover rótulo</removeLable>
       <restoreVersion>Restaurar versão</restoreVersion>
@@ -1356,6 +1362,9 @@
     <msg>
       <have-no-view-template>O modelo de visualização não é suportado.</have-no-view-template>
       <cannot-remove-version>Não é possível remover a versão base.</cannot-remove-version>
+      <error-removing-version>An error occurred while deleting this version.</error-removing-version>
+      <error-removing-referenced-version>This version is referenced and can't be removed.</error-removing-referenced-version>
+      <confirm-restore>Are you sure you want to restore this version?</confirm-restore>
       <confirm-delete>Deseja mesmo remover esta versão?</confirm-delete>
       <not-checked-out>Você deve reservar o nó antes de restaurar.</not-checked-out>
       <invalid-item-state>Você não pode restaurar esta versão, porque um ou mais itens foram excluídos ou movidos durante outra sessão.</invalid-item-state>
@@ -1363,7 +1372,15 @@
     <action>
       <close>#{word.close}</close>
       <close-view>Fechar visualização</close-view>
+      <compare-versions>Compare selected versions</compare-versions>
     </action>
+    <labels>
+      <version>Versão</version>
+      <date>Data</date>
+      <author>Modified By</author>
+      <summary>Sumário</summary>
+      <action>Ação</action>
+    </labels>
   </UIVersionInfo>
   <!--
   ################################################################################
@@ -1471,11 +1488,16 @@
   -->
   <UIDiff>
     <label>
+      <backTo>Back to version history</backTo>
       <diffTitle>Comparar entre 2 versões</diffTitle>
-      <noChange>Nenhuma mudança entre 2 versões</noChange>
-      <baseVerion>Versão base</baseVerion>
+      <noContent>There is no content to compare</noContent>
       <compareVerion>Versão</compareVerion>
       <can-not-compare>Falha ao comparar 2 versões</can-not-compare>
+      <compare-unavailable>Version comparison is not available for this document</compare-unavailable>
+      <DateChange>On {0}</DateChange>
+      <PreviousAndNextCompare>Alterações de {0} para {1}</PreviousAndNextCompare>
+      <ComparedWith>Em comparação com</ComparedWith>
+      <restoredFrom>Restored from version {0}</restoredFrom>
     </label>
   </UIDiff>
   <!--
@@ -1499,7 +1521,7 @@
       <import-successful>Importado com sucesso.</import-successful>
       <filename-invalid>Navegue até o arquivo .xml para o campo 'Envio de arquivo' para importar.</filename-invalid>
       <filetype-error>Não pode importar o arquivo enviado. Talvez este seja um arquivo .xml inválido.</filetype-error>
-      <xml-invalid>There is an invalid character at position [row, column]:{0} in {1} file</xml-invalid>
+      <xml-invalid>Há um caractere inválido na posição [linha, coluna]:{0} no arquivo {1}</xml-invalid>
       <mimetype-invalid>Apenas arquivos .xml ou .zip são suportados na importação.</mimetype-invalid>
       <access-denied>Acesso negado. Você não está habilitado a importar aí.</access-denied>
       <constraint-violation-exception>Impossível importar dados. O tipo '{0}' não é permitido neste local.</constraint-violation-exception>
@@ -1897,7 +1919,7 @@
     <msg>
       <name-exist>Nome da tag '{0}' existe.</name-exist>
       <tagName-invalid>Há alguns caracteres inválidos no nome da tag.</tagName-invalid>
-      <tagName-empty-or-invalid>The tag name is empty or contains some invalid characters.</tagName-empty-or-invalid>
+      <tagName-empty-or-invalid>O nome da tag está vazio, ou contém alguns caracteres inválidos.</tagName-empty-or-invalid>
       <tag-name-empty>Seu nome de tag está vazio</tag-name-empty>
       <tag-name-duplicate>Você informou tags duplicadas.</tag-name-duplicate>
       <tagName-too-long>Uma das tags inseridas é muito longa. As tags devem ter menos de 30 caracteres.</tagName-too-long>
@@ -1946,7 +1968,7 @@
   -->
    <ECMPhoneFormatValidator>
      <msg>
-       <Invalid>The field '{0}' contains invalid an Phone number. Please enter another value.</Invalid>
+       <Invalid>O campo '{0}' contém um número de telefone inválido. Insira outro valor.</Invalid>
      </msg>
   </ECMPhoneFormatValidator>
   <ECMNameValidator>
@@ -2355,7 +2377,7 @@
     <msg>
       <create-link-problem>Você não pode criar um link para o nó '{0}' em '{1}'.</create-link-problem>
       <dest-node-is-link>O nó destino '{0}' já é um link simbólico. Você não pode criar um link simbólico dentro dele</dest-node-is-link>
-      <selected-is-link>The selected node '{0}' is already a link. You cannot create a link that points to another link.</selected-is-link>
+      <selected-is-link>O nó selecionado '{0}' já é um link. Você não pode criar um link que aponta para outro link.</selected-is-link>
       <confirm-create-link>Você realmente deseja criar um link para este local?</confirm-create-link>
     </msg>
   </UIWorkingArea>
@@ -2435,10 +2457,10 @@
       <ReplaceData>Substituir dado</ReplaceData>
       <Back>Voltar para renomear</Back>
       <Keepfile>Manter ambos arquivos</Keepfile>
-<ReadOnly>Open Read-only</ReadOnly>
-<Cancel>Cancelar</Cancel>
-      <KeepBoth>Keep Both</KeepBoth>
-      <CreateNewVersion>Create a new version</CreateNewVersion>
+<ReadOnly>Abrir como somente leitura</ReadOnly>
+<Cancel>Cancel</Cancel>
+      <KeepBoth>Manter ambos</KeepBoth>
+      <CreateNewVersion>Criar uma nova versão</CreateNewVersion>
     </label>
   </UIConfirmMessage>
 
@@ -2817,7 +2839,7 @@
 
   <TagPopup>
     <title>
-      <UITagForm>Marcação</UITagForm>
+      <UITagForm>Tag</UITagForm>
     </title>
   </TagPopup>
 
@@ -2997,15 +3019,15 @@
       <user>Autor</user>
       <description>Descrição</description>
     </header>
-    <create-version>New version is created</create-version>
+    <create-version>Nova versão criada</create-version>
   </UIPublicationHistory>
   
   <UIPublicationSchedule>
     <label>
       <introduction>Você pode agendar a publicação do seu documento. Selecione as datas que você gostaria de ver seu documento publicado</introduction>
       <no-schedule-info>Não há nenhuma agenda de publicação para o seu documento</no-schedule-info>
-      <UIPublicationPanelStartDateInput>Start Publication date</UIPublicationPanelStartDateInput>
-      <UIPublicationPanelEndDateInput>End Publication date</UIPublicationPanelEndDateInput>
+      <UIPublicationPanelStartDateInput>Início da publicação</UIPublicationPanelStartDateInput>
+      <UIPublicationPanelEndDateInput>Término da publicação</UIPublicationPanelEndDateInput>
     </label>
     <msg>
       <save-finished>Seu novo horário de publicação foi salvo com sucesso.</save-finished>
@@ -3080,10 +3102,11 @@
       <ShowDrives>Mostrar unidades</ShowDrives>
     </DrivesArea>
     <msg>
-      <no-view-found>There are no views applied for your access permission in drive '{0}'.</no-view-found>
-      <access-denied>Access denied. You may not have permission in the workspace of drive '{0}'.</access-denied>
-      <empty-drives>Access denied. Either there is no drive in this repository or you do not have permission to access any drives in this repository.</empty-drives>
-      <workspace-not-exist>Unidade '{0}' foi armazenada em um espaço de trabalho não reconhecido. Por favor reconfigure esta unidade.</workspace-not-exist>
+      <no-view-found>Não existe visualização aplicada para sua permissão de acesso na unidade '{0}'.</no-view-found>
+      <access-denied>Acesso negado. Talvez você não tenha permissão no espaço de trabalho da unidade '{0}'.</access-denied>
+      <not-found>The document you are trying to access is no longer available.</not-found>
+      <empty-drives>Acesso negado. Não há nenhuma unidade neste repositório ou você não tem permissão para acessar quaisquer unidades neste repositório.</empty-drives>
+      <workspace-not-exist>Drive '{0}' was stored in one unrecognized workspace. Please reconfigure this drive.</workspace-not-exist>
     </msg>
   </UIDrivesArea>
   <UIJcrExplorerEditForm>
@@ -3171,7 +3194,7 @@
     <Keep>Manter os dois</Keep>
     <Replace>Substituir</Replace>
     <Canceled>Cancelado</Canceled>
-      <UploadNewVersion>Upload new version</UploadNewVersion>
+      <UploadNewVersion>Carregar uma nova versão</UploadNewVersion>
     <Cancel>#{word.cancel}</Cancel>
     <AbortAllConfirmation>Você quer abortar todos os arquivos em andamento?</AbortAllConfirmation>
   </label>
@@ -3201,17 +3224,17 @@
     </msg>
   </UIPropertyForm>
   <UIDocumentAutoVersionForm>
-    <msg>A document {0} already exists. What do you want to do?</msg>
+    <msg>Um documento {0} já existe. O que você deseja fazer?</msg>
     <UIChkRememberNonVersioned>
-      <label>Remember my choice for all others non-versioned documents</label>
+      <label>Lembrar da minha escolha para todos os demais documentos sem versão</label>
     </UIChkRememberNonVersioned>
     <UIChkRememberVersioned>
-      <label>Remember my choice for all other versioned documents</label>
+      <label>Lembrar da minha escolha para todos os demais documentos com versão</label>
     </UIChkRememberVersioned>
   </UIDocumentAutoVersionForm>
   <DocumentAuto>
-    <message>A new version of the document {0} has been created successfully.</message>
-    <messageMultiFile>A new version of the document has been created.</messageMultiFile>
+    <message>Uma nova versão do documento {0} foi criada com sucesso.</message>
+    <messageMultiFile>Uma nova versão do documento {0} foi criada com sucesso.</messageMultiFile>
   </DocumentAuto>
   <!--
   ###################################################################################

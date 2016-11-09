@@ -87,7 +87,7 @@
 -->
   <UITaxonomyTreeMainForm>
     <action>
-      <Reset>重置</Reset>
+      <Reset>Reset</Reset>
     </action>
     <msg>
       <name-not-allowed>禁止的名称</name-not-allowed>
@@ -211,7 +211,7 @@
   <UINamespaceList>
     <header>
       <prefix>前缀</prefix>
-      <uri>Namespace URI</uri>
+      <uri>命名空间 URI</uri>
       <action>操作</action>
     </header>
     <action>
@@ -230,10 +230,10 @@
   -->
   <UIMetadataList>
     <label>
-      <false>false</false>
-      <true>true</true>
+      <false>假</false>
+      <true>真</true>
       <True>true</True>
-      <False>false</False>
+      <False>假</False>
     </label>
     <title>
       <view>视图</view>
@@ -708,11 +708,11 @@
     <label>
       <both>Both</both>
       <folderOnly>Folder</folderOnly>
-      <unstructuredFolder>Unstructured Folder</unstructuredFolder>
+      <unstructuredFolder>非结构化的文件夹</unstructuredFolder>
     </label>
     <title>
       <AddPermission>添加权限</AddPermission>
-      <RemovePermission>Remove Permission</RemovePermission>
+      <RemovePermission>删除权限</RemovePermission>
       <AddIcon>添加图标</AddIcon>
       <AddPath>添加路径</AddPath>
     </title>
@@ -755,7 +755,7 @@
     <label>
       <actionType>扩展操作类型：</actionType>
       <name>名称：</name>
-      <isMove>is Action Move:</isMove>
+      <isMove>是行动移动：</isMove>
       <variables>变量</variables>
       <exo_businessProcessAction>业务流程：</exo_businessProcessAction>
       <exo_scriptAction>Groovy 脚本：</exo_scriptAction>
@@ -990,7 +990,7 @@
       <addSymLink>添加符号链接</addSymLink>
       <checkIn>Check In</checkIn>
       <checkOut>Check Out</checkOut>
-      <shareDocuments>分享</shareDocuments>
+      <shareDocuments>共享</shareDocuments>
       <openDocument>Remote Edit</openDocument>
       <editProperty>Edit Document Properties</editProperty>
       <uploadNewVersion>Upload a new version</uploadNewVersion>
@@ -1023,7 +1023,7 @@
   </UIViewFormTabPane>
   <PopupViewPermission>
     <title>
-      <UIPermissionSelector>权限选择器</UIPermissionSelector>
+      <UIPermissionSelector>选择权限</UIPermissionSelector>
     </title>
   </PopupViewPermission>
 
@@ -1185,7 +1185,7 @@
   -->
   <uiECMScriptsPopup>
     <title>
-      <ecmScriptForm>ECM Script</ecmScriptForm>
+      <ecmScriptForm>ECM 脚本</ecmScriptForm>
     </title>
   </uiECMScriptsPopup>
 
@@ -1383,11 +1383,11 @@
       <set_property>设置属性权限</set_property>
       <remove>删除权利</remove>
     </label>
-    <title>Add a permission to this node</title>
+    <title>将那节点添加权限</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>保存</Save>
-      <Reset>重置</Reset>
+      <Reset>Reset</Reset>
     </action>
     <msg>
       <checkbox-require>请选择至少一个权限。</checkbox-require>
@@ -1405,7 +1405,7 @@
 
   <PopupTaxonomyTreePermission>
     <title>
-      <UIPermissionSelector>权限选择器</UIPermissionSelector>
+      <UIPermissionSelector>选择权限</UIPermissionSelector>
     </title>
   </PopupTaxonomyTreePermission>
 
@@ -1486,7 +1486,7 @@
       <add_node>修改</add_node>
       <remove>删除</remove>
     </label>
-    <title>Add permission to this node</title>
+    <title>将那节点添加权限</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>#{word.save}</Save>
@@ -1737,7 +1737,7 @@
   -->
   <AddNewTemplatePermission>
     <title>
-      <UIPermissionSelector>权限选择器</UIPermissionSelector>
+      <UIPermissionSelector>选择权限</UIPermissionSelector>
     </title>
   </AddNewTemplatePermission>
   <TemplatePermission>
@@ -1778,12 +1778,12 @@
   </DialogForm>
   <DialogFormTemplatePermission>
     <title>
-      <UIPermissionSelector>权限选择器</UIPermissionSelector>
+      <UIPermissionSelector>选择权限</UIPermissionSelector>
     </title>
   </DialogFormTemplatePermission>
   <ViewFormTemplatePermission>
     <title>
-      <UIPermissionSelector>权限选择器</UIPermissionSelector>
+      <UIPermissionSelector>选择权限</UIPermissionSelector>
     </title>
   </ViewFormTemplatePermission>
   <TemplateContainerPopup>
@@ -1976,7 +1976,7 @@
   </EditQueryForm>
   <PermissionPopup>
     <title>
-      <UIGroupMemberSelector>权限选择器</UIGroupMemberSelector>
+      <UIGroupMemberSelector>选择权限</UIGroupMemberSelector>
     </title>
   </PermissionPopup>
   <!--
@@ -2485,7 +2485,7 @@
       <Add>新增</Add>
     </action>
     <label>
-      <userOrGroup>成员身份：</userOrGroup>
+      <userOrGroup>Memberships:</userOrGroup>
     </label>
     <msg>
       <userOrGroup-alreadyExists>此成员已存在。请选择另一个。</userOrGroup-alreadyExists>
@@ -2534,9 +2534,7 @@
   </UIWorkspaceWizard>
   <UIRepositoryForm>
     <msg>
-      <not-complete-repository>The repository is being created. You need to wait a few minutes before creating another
-        one.
-      </not-complete-repository>
+      <not-complete-repository>正在创建存储库。你需要等待几分钟，然后创建另一个。</not-complete-repository>
     </msg>
   </UIRepositoryForm>
 

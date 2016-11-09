@@ -22,7 +22,7 @@
 <bundle>
   <UIExoStart>
     <tooltip>
-      <homepage>Homepage</homepage>
+      <homepage>Pagina principale</homepage>
     </tooltip>
   </UIExoStart>
 
@@ -34,8 +34,10 @@
 
   <Drives>
     <label>
-      <ManagedSites>Site Management</ManagedSites>
+      <ManagedSites>Gestione del sito</ManagedSites>
       <SharedSite>Sito Condiviso</SharedSite>
+      <PersonalDocuments>Personal Documents</PersonalDocuments>
+      <UserDocuments>{0} Documents</UserDocuments>
     </label>
   </Drives>
 
@@ -202,15 +204,15 @@
     <msg>
       <time-to-late>Il tempo di ricerca è troppo lungo.</time-to-late>
       <empty-field>Prego inserire una chiave di ricerca valida.</empty-field>
-      <empty-name>Please enter the name to search</empty-name>
-      <empty-content>Please enter a word or phrase to search</empty-content>
-      <empty-property>Please select a property</empty-property>
-      <empty-property-keyword>Please enter a keyword for the property</empty-property-keyword>
-      <empty-doctype>Please select a document type</empty-doctype>
-      <empty-startDate>"From Date" is required</empty-startDate>
+      <empty-name>Inserisci il nome da ricercare</empty-name>
+      <empty-content>Inserisci una parola o una frase da ricercare</empty-content>
+      <empty-property>Seleziona una proprietà</empty-property>
+      <empty-property-keyword>Inserisci una parola chiave per la proprietà</empty-property-keyword>
+      <empty-doctype>Seleziona un tipo di documento</empty-doctype>
+      <empty-startDate>Il campo "Data di inizio" è obbligatorio</empty-startDate>
       <invalid-format>Formato data/tempo non valido nel campo '{0}'.</invalid-format>
       <invalid-date>"A Data" dev'essere maggiore della "Da Date"</invalid-date>
-      <invalid-startDate>"From Date" must not be later than today</invalid-startDate>
+      <invalid-startDate>Il campo "Data di inizio" non deve riportare una data successiva ad oggi</invalid-startDate>
       <invalid-nodeType>Tipo nodo "{0}" non è valido. Prego controlla di nuovo.</invalid-nodeType>
       <invalid-keyword>Parola chiave non è valida. Alcuni caratteri non sono supportati.</invalid-keyword>
     </msg>
@@ -434,13 +436,13 @@
   
   <CategoryNavigationTemplate>
   <label>
-  <home>HomePage</home>
+  <home>Home</home>
   </label>
   </CategoryNavigationTemplate>
   
   <Breadcrumb>
   <label>
-  <home>HomePage</home>
+  <home>Home</home>
   </label>  
   </Breadcrumb>
 </bundle>

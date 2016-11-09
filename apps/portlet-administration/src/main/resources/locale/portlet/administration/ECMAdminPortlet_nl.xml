@@ -40,14 +40,11 @@
   -->
   <UITaxonomyWorkingArea>
     <msg>
-      <referential-integrity>Kan niet lezen van bronbestand of bestemmingscategorie is subcategorie
-      </referential-integrity>
+      <referential-integrity>Kan niet lezen van bronbestand of bestemmingscategorie is subcategorie</referential-integrity>
       <no-taxonomy-selected>U moet minstens een categorie kopieren of knippen.</no-taxonomy-selected>
       <node-is-cutting>U kan hier niet plakken, taxonomy node '{0}' is misschien aan het knippen.</node-is-cutting>
       <can-not-paste>Geen data in klembord om te plakken.</can-not-paste>
-      <reference-exception>Kan deze taxonomy node niet verwijderen omdat het momemteel het doel is van een Referentie
-        eigenschap.
-      </reference-exception>
+      <reference-exception>Kan deze taxonomy node niet verwijderen omdat het momemteel het doel is van een Referentie eigenschap.</reference-exception>
       <path-error>Probleem bij het verwijderen van deze taxonomy node.</path-error>
     </msg>
   </UITaxonomyWorkingArea>
@@ -74,10 +71,8 @@
       <info>
         <UITaxonomyTreeMainForm>Input taxonomie naam, kies werkruimte en taxonomie home pad</UITaxonomyTreeMainForm>
         <UIPermissionTreeManager>Selecteer toestemming voor taxonomie boom knoop</UIPermissionTreeManager>
-        <UIActionTaxonomyManager>Na het inschrijven voor een boom, de taxonomie boom wordt gemaakt / bewerkt
-        </UIActionTaxonomyManager>
-        <UITaxonomyTreeCreateChild>Bewerken taxonomie boom door toevoegen, kopiëren, knippen en selecteer toestemming
-        </UITaxonomyTreeCreateChild>
+        <UIActionTaxonomyManager>Na het inschrijven voor een boom, de taxonomie boom wordt gemaakt / bewerkt</UIActionTaxonomyManager>
+        <UITaxonomyTreeCreateChild>Bewerken taxonomie boom door toevoegen, kopiëren, knippen en selecteer toestemming</UITaxonomyTreeCreateChild>
       </info>
     </tab>
     <msg>
@@ -255,8 +250,7 @@
     <msg>
       <confirm-delete>Wilt u Verwijderen ?</confirm-delete>
       <delete-successful>Templates van '{0}' zijn verwijderd</delete-successful>
-      <path-not-found-exception>Deze metagegevens werd verwijderd of gewijzigd. Klik op de knop Vernieuwen.
-      </path-not-found-exception>
+      <path-not-found-exception>Deze metagegevens werd verwijderd of gewijzigd. Klik op de knop Vernieuwen.</path-not-found-exception>
     </msg>
     <action>
       <Add>metadata toevoegen</Add>
@@ -567,11 +561,8 @@
     </action>
     <msg>
       <register-successfully>NodeType '{0}' succesvol geregistreerd</register-successfully>
-      <supertype-is-madatory>Supertype is verplicht te registreren nieuwe nodet type. Ten minste 1 supertype moeten
-        worden gekozen.
-      </supertype-is-madatory>
-      <register-failed>NodeType registratie is tevergeefs. Het is de bestaande of Super soorten is ongeldig
-      </register-failed>
+      <supertype-is-madatory>Supertype is verplicht te registreren nieuwe nodet type. Ten minste 1 supertype moeten worden gekozen.</supertype-is-madatory>
+      <register-failed>NodeType registratie is tevergeefs. Het is de bestaande of Super soorten is ongeldig</register-failed>
       <nodeType-name>Node type naam is verplicht</nodeType-name>
       <fileName-invalid>Er zijn een aantal ongeldige tekens in de naam.</fileName-invalid>
       <node-type-exists>Nodetype '{0}' bestaat reeds!</node-type-exists>
@@ -590,8 +581,7 @@
     </tab>
     <msg>
       <property-name>Eigenschap definitie naam were ongeldig!</property-name>
-      <not-supported-value-constraints>Dit vereiste type does not support waarden beperkingen
-      </not-supported-value-constraints>
+      <not-supported-value-constraints>Dit vereiste type does not support waarden beperkingen</not-supported-value-constraints>
     </msg>
   </UIPropertyDefinitionForm>
   <UIChildNodeDefinitionForm>
@@ -992,7 +982,7 @@
       <comment>Commentaar</comment>
       <vote>Stem voor document</vote>
       <addCategory>Voeg categorie toe</addCategory>
-      <addLocalizationLink>Vertaling toevoegen</addLocalizationLink>
+      <addLocalizationLink>Add Translation</addLocalizationLink>
       <publicationRequestApproval>Goedkeuring aanvragen</publicationRequestApproval>
       <publicationApproveContent>Goedkeuren van inhoud</publicationApproveContent>
       <publicationPublish>Publiceren</publicationPublish>
@@ -1000,8 +990,8 @@
       <addSymLink>Add Sym Link</addSymLink>
       <checkIn>Inchecken</checkIn>
       <checkOut>Uitchecken</checkOut>
-      <shareDocuments>Delen</shareDocuments>
-      <openDocument>Extern bewerken</openDocument>
+      <shareDocuments>Share</shareDocuments>
+      <openDocument>Remote Edit</openDocument>
       <editProperty>Documenteigenschappen bewerken</editProperty>
       <uploadNewVersion>Een nieuwe versie uploaden</uploadNewVersion>
     </label>
@@ -1058,7 +1048,7 @@
   <UIECMTemplateList>
     <title>
       <View>Tonen</View>
-      <EditInfo>Bewerken</EditInfo>
+      <EditInfo>Edit</EditInfo>
       <Delete>Verwijderen</Delete>
     </title>
     <header>
@@ -1084,7 +1074,7 @@
   -->
   <UITemplateForm>
     <title>
-      <AddPermission>Rechten toevoegen</AddPermission>
+      <AddPermission>Add Permission</AddPermission>
     </title>
     <action>
       <Save>#{word.save}</Save>
@@ -1415,7 +1405,7 @@
 
   <PopupTaxonomyTreePermission>
     <title>
-      <UIPermissionSelector>Permissie selecteur</UIPermissionSelector>
+      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
     </title>
   </PopupTaxonomyTreePermission>
 
@@ -1493,7 +1483,7 @@
       <permission>UIPermissionForm</permission>
       <userOrGroup>Gebruiker of Groep</userOrGroup>
       <read>Lees Recht</read>
-      <add_node>Wijzig</add_node>
+      <add_node>Modify</add_node>
       <remove>Verwijderen Recht</remove>
     </label>
     <title>Voeg een toestemming voor dat node</title>
@@ -1589,15 +1579,15 @@
   <UITabPane>
     <title>
       <ContentTemplateContainer>Inhoud</ContentTemplateContainer>
-      <CateTemplateContainer>Navigatie</CateTemplateContainer>
+      <CateTemplateContainer>Navigation</CateTemplateContainer>
       <PageTemplateContainer>Paginator</PageTemplateContainer>
     </title>
   </UITabPane>
 
   <UICLVTemplateList>
     <title>
-      <Edit>Bewerken</Edit>
-      <Delete>Verwijderen</Delete>
+      <Edit>Edit</Edit>
+      <Delete>Delete</Delete>
     </title>
     <header>
       <title>Naam</title>
@@ -1728,7 +1718,7 @@
     <label>
       <paginators>Paginator</paginators>
       <list>Inhoud</list>
-      <navigation>Navigatie</navigation>
+      <navigation>Navigation</navigation>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -1747,7 +1737,7 @@
   -->
   <AddNewTemplatePermission>
     <title>
-      <UIPermissionSelector>Permissie selecteur</UIPermissionSelector>
+      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
     </title>
   </AddNewTemplatePermission>
   <TemplatePermission>
@@ -1788,12 +1778,12 @@
   </DialogForm>
   <DialogFormTemplatePermission>
     <title>
-      <UIPermissionSelector>Permissie selecteur</UIPermissionSelector>
+      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
     </title>
   </DialogFormTemplatePermission>
   <ViewFormTemplatePermission>
     <title>
-      <UIPermissionSelector>Permissie selecteur</UIPermissionSelector>
+      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
     </title>
   </ViewFormTemplatePermission>
   <TemplateContainerPopup>
@@ -1950,9 +1940,7 @@
     <msg>
       <confirm-delete>Bent u echt wilt verwijderen?</confirm-delete>
       <query-not-existed>De query bestaat niet meer.</query-not-existed>
-      <can-not-remove>Er is een fout opgetreden tijdens het verwijderen van de query. Neem contact op met de beheerder
-        voor informatie.
-      </can-not-remove>
+      <can-not-remove>Er is een fout opgetreden tijdens het verwijderen van de query. Neem contact op met de beheerder voor informatie.</can-not-remove>
     </msg>
   </UIQueriesList>
   <UIQueriesForm>
@@ -2011,7 +1999,7 @@
     </header>
     <title>
       <Edit>Bewerken</Edit>
-      <Delete>Verwijderen</Delete>
+      <Delete>Delete</Delete>
       <Remove>Verwijderen</Remove>
     </title>
     <action>
@@ -2029,9 +2017,7 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <range-validator>Ongeldige bereik. Formaat van geldige bereik is: a.. B met a, b is positief getal. Je kunt * in
-        plaats van B om aan te geven dat onbeperkt.
-      </range-validator>
+      <range-validator>Ongeldige bereik. Formaat van geldige bereik is: a.. B met a, b is positief getal. Je kunt * in plaats van B om aan te geven dat onbeperkt.</range-validator>
       <error-update>Uw gegevens zijn niet geldig of dienst verhoogd fout.</error-update>
       <item-not-existing>You cannot save changes to this tag that no longer exist in database</item-not-existing>
     </msg>
@@ -2058,8 +2044,7 @@
   -->
   <ECMNameValidator>
     <msg>
-      <Invalid-char>Er zijn een aantal ongeldige tekens in het veld '{0}'. Typ een andere waarde, alsjeblieft!
-      </Invalid-char>
+      <Invalid-char>Er zijn een aantal ongeldige tekens in het veld '{0}'. Typ een andere waarde, alsjeblieft!</Invalid-char>
       <empty-input>Veld '{0}' is null of leeg.</empty-input>
     </msg>
   </ECMNameValidator>
@@ -2348,8 +2333,7 @@
       <UnLock>vrijmaken</UnLock>
     </tooltip>
     <msg>
-      <access-denied-exception>You don't have permission to access node with path {0} or this node is deleted
-      </access-denied-exception>
+      <access-denied-exception>You don't have permission to access node with path {0} or this node is deleted</access-denied-exception>
     </msg>
   </UILockNodeList>
   <EditUnLockForm>
@@ -2462,9 +2446,8 @@
       <NextViewTree>Volgende</NextViewTree>
     </action>
     <msg>
-      <xss-vulnerability-character>Veld '{0}' bevat XSS kwetsbaarheid tekens</xss-vulnerability-character>
-      <xss-vulnerability-character-wo-label>Uw input kan XSS kwetsbaarheid tekens bevatten
-      </xss-vulnerability-character-wo-label>
+      <xss-vulnerability-character>Field '{0}' contains XSS vulnerability characters</xss-vulnerability-character>
+      <xss-vulnerability-character-wo-label>Uw input kan XSS kwetsbaarheid tekens bevatten</xss-vulnerability-character-wo-label>
     </msg>
   </UIActionForm>
 
@@ -2492,7 +2475,7 @@
       </title>
     </action>
     <msg>
-      <confirm-delete-permission>Weet u zeker dat u wilt verwijderen van deze machtiging?</confirm-delete-permission>
+      <confirm-delete-permission>Are you sure you want to delete this permission?</confirm-delete-permission>
     </msg>
   </UITagPermissionInfo>
   <UITagPermissionForm>
@@ -2511,7 +2494,7 @@
 
   <UIGroupMemberSelector>
     <label>
-      <selectGroup>Selecteer Groep</selectGroup>
+      <selectGroup>Select Group</selectGroup>
       <selectMembership>Select membership</selectMembership>
     </label>
   </UIGroupMemberSelector>
@@ -2522,7 +2505,7 @@
     </msg>
     <action>
       <title>
-        <AddStyle>Stijl toevoegen</AddStyle>
+        <AddStyle>Add Style</AddStyle>
       </title>
     </action>
   </UIFolksonomyManager>
@@ -2540,9 +2523,7 @@
   </NodeTypeNameValidator>
   <UIActionForm>
     <msg>
-      <constraint-violation-exception>Het node '{0}' kan niet worden toegevoegd aan '{1}' in de werkruimte '{2}'. Er is
-        een probleem met de machtigingen of beperkingen voorwaarde.
-      </constraint-violation-exception>
+      <constraint-violation-exception>Het node '{0}' kan niet worden toegevoegd aan '{1}' in de werkruimte '{2}'.  Er is een probleem met de machtigingen of beperkingen voorwaarde.</constraint-violation-exception>
     </msg>
   </UIActionForm>
 
@@ -2553,9 +2534,7 @@
   </UIWorkspaceWizard>
   <UIRepositoryForm>
     <msg>
-      <not-complete-repository>The repository is being created. You need to wait a few minutes before creating another
-        one.
-      </not-complete-repository>
+      <not-complete-repository>The repository is being created. You need to wait a few minutes before creating another one.</not-complete-repository>
     </msg>
   </UIRepositoryForm>
 

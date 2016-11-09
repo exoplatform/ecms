@@ -15,11 +15,11 @@
       <select-language>Selecteer een taal</select-language>
       <option>
         <Always>Altijd</Always>
-        <Hourly>Ieder uur</Hourly>
-        <Daily>Dagelijks</Daily>
-        <Weekly>Wekelijks</Weekly>
+        <Hourly>Hourly</Hourly>
+        <Daily>Daily</Daily>
+        <Weekly>Weekly</Weekly>
         <Monthly>Maandelijkse</Monthly>
-        <Yearly>Jaarlijks</Yearly>
+        <Yearly>Yearly</Yearly>
         <Never>Nooit</Never>
       </option> 
     </label>

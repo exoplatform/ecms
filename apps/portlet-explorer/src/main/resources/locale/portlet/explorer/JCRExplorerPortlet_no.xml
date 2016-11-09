@@ -17,7 +17,7 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <not-support>Du kan ikke kommentere på denne dokumenttypen.</not-support>
+      <not-support>You can't comment on this type of document.</not-support>
       <not-checkedout>Du må sjekke ut noden før du kan kommentere på den.</not-checkedout>
       <content-null>Du kan ikke poste en tom kommentar.</content-null>
     </msg>
@@ -250,7 +250,7 @@
       <UIActivePublication>Registrer i publikasjonens livssyklus</UIActivePublication>
       <UITaggingForm>Tagg dokumentet</UITaggingForm>
       <UIThumbnailForm>Legge til miniatyrbilde</UIThumbnailForm>
-      <UIAllItemsPreferenceForm>Innstillinger</UIAllItemsPreferenceForm>
+      <UIAllItemsPreferenceForm>Preferences</UIAllItemsPreferenceForm>
       <UISelectRestorePath>Velg gjenopprettings sti</UISelectRestorePath>
       <UISEOForm>Administrere SEO</UISEOForm>
       <UISEOToolbarForm>Administrere SEO</UISEOToolbarForm>
@@ -597,7 +597,7 @@
       <RestoreFromTrash>Gjenopprett fra papirkurven</RestoreFromTrash>
       <EmptyTrash>Tøm papirkurven</EmptyTrash>
       <WebDavView>Open in MS Office</WebDavView>
-      <Download>Last ned</Download>
+      <Download>Download</Download>
       <OpenDocument>Remote Edit</OpenDocument>
       <EditProperty>Edit Document Properties</EditProperty>
       <UploadNewVersion>Upload a new version</UploadNewVersion>
@@ -1330,7 +1330,7 @@
   -->
   <PopupUserSelector>
     <title>
-      <UIUserContainer>Rettighets velger</UIUserContainer>
+      <UIUserContainer>Permission Selector</UIUserContainer>
     </title>
   </PopupUserSelector>
   <UIPopupTaxonomy>
@@ -1345,7 +1345,13 @@
   ###############################################################################
   -->
   <UIVersionInfo>
+    <title>Version history</title>
+    <summary>
+      <empty>Click here to add a summary</empty>
+    </summary>
     <tooltip>
+      <version>Version</version>
+      <baseVersion>Base Version</baseVersion>
       <addLabel>Legge til etikett</addLabel>
       <removeLable>Fjern etikett</removeLable>
       <restoreVersion>Gjenopprett versjon</restoreVersion>
@@ -1356,6 +1362,9 @@
     <msg>
       <have-no-view-template>Visningsmalen er ikke støttet.</have-no-view-template>
       <cannot-remove-version>Du kan ikke fjerne baseversjonen.</cannot-remove-version>
+      <error-removing-version>An error occurred while deleting this version.</error-removing-version>
+      <error-removing-referenced-version>This version is referenced and can't be removed.</error-removing-referenced-version>
+      <confirm-restore>Are you sure you want to restore this version?</confirm-restore>
       <confirm-delete>Er du sikker på at du vil fjerne denne versjonen?</confirm-delete>
       <not-checked-out>Du må sjekke ut denne noden før du kan gjenopprette den.</not-checked-out>
       <invalid-item-state>Du kan ikke gjenopprette denne versjonen, fordi ett eller flere elementer ble slettet eller flyttet i en annen sesjon.</invalid-item-state>
@@ -1363,7 +1372,15 @@
     <action>
       <close>#{word.close}</close>
       <close-view>Lukk visningen</close-view>
+      <compare-versions>Compare selected versions</compare-versions>
     </action>
+    <labels>
+      <version>Versjon</version>
+      <date>Dato</date>
+      <author>Modified By</author>
+      <summary>Sammendrag</summary>
+      <action>Handling</action>
+    </labels>
   </UIVersionInfo>
   <!--
   ################################################################################
@@ -1471,11 +1488,16 @@
   -->
   <UIDiff>
     <label>
+      <backTo>Back to version history</backTo>
       <diffTitle>Sammenligne to versjoner</diffTitle>
-      <noChange>Ingen endring mellom to versjoner</noChange>
-      <baseVerion>Baseversjon</baseVerion>
+      <noContent>There is no content to compare</noContent>
       <compareVerion>Versjon</compareVerion>
       <can-not-compare>Kan ikke sammenligne de to versjonene</can-not-compare>
+      <compare-unavailable>Version comparison is not available for this document</compare-unavailable>
+      <DateChange>On {0}</DateChange>
+      <PreviousAndNextCompare>Endringer fra {0} til {1}</PreviousAndNextCompare>
+      <ComparedWith>Sammenlignet med</ComparedWith>
+      <restoredFrom>Restored from version {0}</restoredFrom>
     </label>
   </UIDiff>
   <!--
@@ -2436,7 +2458,7 @@
       <Back>Tilbake til Gi nytt navn</Back>
       <Keepfile>Behold begge filene</Keepfile>
 <ReadOnly>Open Read-only</ReadOnly>
-<Cancel>Avbryt</Cancel>
+<Cancel>Cancel</Cancel>
       <KeepBoth>Keep Both</KeepBoth>
       <CreateNewVersion>Create a new version</CreateNewVersion>
     </label>
@@ -3082,6 +3104,7 @@
     <msg>
       <no-view-found>There are no views applied for your access permission in drive '{0}'.</no-view-found>
       <access-denied>Access denied. You may not have permission in the workspace of drive '{0}'.</access-denied>
+      <not-found>The document you are trying to access is no longer available.</not-found>
       <empty-drives>Access denied. Either there is no drive in this repository or you do not have permission to access any drives in this repository.</empty-drives>
       <workspace-not-exist>Drive '{0}' was stored in one unrecognized workspace. Please reconfigure this drive.</workspace-not-exist>
     </msg>

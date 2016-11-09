@@ -17,7 +17,7 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <not-support>你不能评论此文档类型。</not-support>
+      <not-support>You can't comment on this type of document.</not-support>
       <not-checkedout>您必须签出该节点之前对其进行评论。</not-checkedout>
       <content-null>你不能发布一个空的评论。</content-null>
     </msg>
@@ -129,7 +129,7 @@
     <title>资源管理器</title>
     <label>
       <Root>根</Root>
-      <webDavView>Open in MS Office</webDavView>
+      <webDavView>在 MS Office 中打开</webDavView>
     </label>
     <msg>
       <path-not-found>此元素被删除或更改。请单击刷新按钮。</path-not-found>
@@ -596,7 +596,7 @@
       <MoveToTrash>移到垃圾桶</MoveToTrash>
       <RestoreFromTrash>从垃圾桶中还原</RestoreFromTrash>
       <EmptyTrash>倾倒垃圾桶</EmptyTrash>
-      <WebDavView>Open in MS Office</WebDavView>
+      <WebDavView>在 MS Office 中打开</WebDavView>
       <Download>下载</Download>
       <OpenDocument>Remote Edit</OpenDocument>
       <EditProperty>Edit Document Properties</EditProperty>
@@ -679,14 +679,14 @@
     </confirm>
     <header>
       <name>名称</name>
-      <multiValue>Multi Value</multiValue>
+      <multiValue>多值</multiValue>
       <value>值</value>
       <action>操作</action>
     </header>
     <label>
-      <binary>Binary Data</binary>
+      <binary>二进制数据</binary>
       <notavailable>N/A</notavailable>
-      <cannotget>Cannot get values</cannotget>
+      <cannotget>无法获取值</cannotget>
     </label>
     <action>
       <Close>#{word.close}</Close>
@@ -703,26 +703,26 @@
   #############################################################################
   -->
   <UIPropertyForm>
-    <title>Add/Edit Property</title>
+    <title>添加/编辑属性</title>
     <label>
       <name>名称：</name>
       <type>类型：</type>
-      <value>Value:</value>
+      <value>值：</value>
       <upload>上传:</upload>
-      <namespace>Namespace:</namespace>
-      <multiple>Multiple:</multiple>
-      <property_select>Add New Property:</property_select>
-      <value0>Value 0</value0>
-      <value1>Value 1</value1>
-      <value2>Value 2</value2>
-      <value3>Value 3</value3>
-      <value4>Value 4</value4>
-      <value5>Value 5</value5>
-      <value6>Value 6</value6>
-      <value7>Value 7</value7>
-      <value8>Value 8</value8>
-      <value9>Value 9</value9>
-      <value10>Value 10</value10>
+      <namespace>命名空间：</namespace>
+      <multiple>多个：</multiple>
+      <property_select>添加新的属性：</property_select>
+      <value0>值 0</value0>
+      <value1>值 1</value1>
+      <value2>值 2</value2>
+      <value3>值 3</value3>
+      <value4>值 4</value4>
+      <value5>值 5</value5>
+      <value6>值 6</value6>
+      <value7>值 7</value7>
+      <value8>值 8</value8>
+      <value9>值 9</value9>
+      <value10>值 10</value10>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -730,11 +730,11 @@
       <Reset>重置</Reset>
     </action>
     <msg>
-      <name-invalid>Please enter the property name.</name-invalid>
-      <unable-create>Cannot add properties.</unable-create>
-      <value-invalid>Please enter the value.</value-invalid>
-      <node-checkedin>You must check out this node before adding a property.</node-checkedin>
-      <can-not-add>You cannot add properties to this node. This is only allowed for the node type nt:unstructured.</can-not-add>
+      <name-invalid>请输入属性名称</name-invalid>
+      <unable-create>不能添加属性</unable-create>
+      <value-invalid>请输入值</value-invalid>
+      <node-checkedin>添加一个属性之前，您必须先检验节点。</node-checkedin>
+      <can-not-add>不能将属性添加到此节点。这唯一允许的节点类型 nt:unstructured</can-not-add>
       <propertyName-invalid>The property name must include namespace (e.g. namespace:name).</propertyName-invalid>
       <propertyName-exist>The property '{0}' already exists.</propertyName-exist>
       <propertyValu-null>Some values may be null.</propertyValu-null>
@@ -753,28 +753,28 @@
     <action>
       <title>
         <Edit>编辑</Edit>
-        <Delete>Remove Permission</Delete>
+        <Delete>删除权限</Delete>
       </title>
     </action>
     <header>
-      <usersOrGroups>User or Group</usersOrGroups>
-      <read>Read</read>
-      <addNode>Modify</addNode>
+      <usersOrGroups>用户或组</usersOrGroups>
+      <read>读取</read>
+      <addNode>修改</addNode>
       <remove>删除</remove>
       <action>操作</action>
     </header>
     <msg>
-      <confirm-delete-permission>Are you sure you want to remove this permission?</confirm-delete-permission>
+      <confirm-delete-permission>确实要删除此权限吗?</confirm-delete-permission>
       <no-permission-tochange>You do not have the right to remove permission.</no-permission-tochange>
       <no-permission-remove>You cannot remove the owner.</no-permission-remove>
-      <access-denied>Access denied. You cannot remove this permission.</access-denied>
+      <access-denied>访问被拒绝。您不能删除此权限。</access-denied>
     </msg>
   </UIPermissionInfo>
   <permission>
     <title>
-      <SelectUser>Select User</SelectUser>
+      <SelectUser>选择用户</SelectUser>
       <SelectMember>选择成员</SelectMember>
-      <AddAny>Select Everyone</AddAny>
+      <AddAny>选择所有人</AddAny>
     </title>
   </permission>
   <!--
@@ -785,7 +785,7 @@
   <SelectUserOrGroup>
     <title>
       <UIGroupSelector>选择用户</UIGroupSelector>
-      <UIPermissionSelector>Select Member</UIPermissionSelector>
+      <UIPermissionSelector>选择成员</UIPermissionSelector>
       <UIGroupMemberSelector>选择成员</UIGroupMemberSelector>
     </title>
   </SelectUserOrGroup>
@@ -795,7 +795,7 @@
       <selectUser>选择用户</selectUser>
     </label>
     <msg>
-      <not-change-owner>'{0}' is the owner of this node and has full control permission.</not-change-owner>
+      <not-change-owner>'{0}' 是此节点的所有者以及具有完全控制权限。</not-change-owner>
     </msg>
   </UIGroupSelector>
   <UIPermissionForm>
@@ -803,20 +803,20 @@
       <UIPopupWindow>请选择</UIPopupWindow>
       <permission>UIPermissionForm</permission>
       <userOrGroup>用户或组</userOrGroup>
-      <read>Read Right</read>
+      <read>阅读权</read>
       <add_node>Modify Right</add_node>
-      <remove>Remove Right</remove>
+      <remove>删除权利</remove>
     </label>
-    <title>Add a permission to that node</title>
+    <title>将那节点添加权限</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>#{word.save}</Save>
       <Reset>重置</Reset>
     </action>
     <msg>
-      <checkbox-require>Please select at least one permission.</checkbox-require>
+      <checkbox-require>请选择至少一个权限。</checkbox-require>
       <userOrGroup-required>Please select a user or group before saving this permission.</userOrGroup-required>
-      <not-change-permission>You do not have the right to add a permission.</not-change-permission>
+      <not-change-permission>你并没有添加权限的权利。</not-change-permission>
       <access-denied>访问被拒绝。您不能删除此权限。</access-denied>
     </msg>
   </UIPermissionForm>
@@ -828,9 +828,9 @@
   -->
   <UINodeTypeInfo>
     <label>
-      <node-type>Node Type</node-type>
+      <node-type>节点类型</node-type>
       <name>姓名</name>
-      <item>Primary Item Name</item>
+      <item>主要项目名称</item>
       <super-types>Parent Types</super-types>
       <mixin>Mixin Node Type</mixin>
       <orderable-children>Orderable Children</orderable-children>
@@ -909,15 +909,15 @@
   </UISimpleSearch>
   <ViewSearch>
     <title>
-      <UIViewSearchResult>View Template</UIViewSearchResult>
+      <UIViewSearchResult>视图模板</UIViewSearchResult>
     </title>
   </ViewSearch>
   <UISearchResult>
     <msg>
-      <not-support>There is no View template for this node.</not-support>
+      <not-support>没有为此节点的视图模板。</not-support>
       <empty>没有找到结果。</empty>
       <access-denied>You cannot open this folder, either because it no longer exists or because you do not have the right to access it.</access-denied>
-      <query-invalid>The query is invalid.</query-invalid>
+      <query-invalid>查询无效</query-invalid>
     </msg>
     <header>
       <name>#{word.name}</name>
@@ -926,21 +926,21 @@
       <shortcutPath>路径</shortcutPath>
       <type>类型</type>
       <dateCreated>创建日期</dateCreated>
-      <score>得分</score>
+      <score>分数</score>
     </header>
     <title>
-      <typeASC>Sort by document type in ascending order</typeASC>
-      <typeDESC>Sort by document type in descending order</typeDESC>
-      <scoreASC>Sort by score in ascending order</scoreASC>
-      <scoreDESC>Sort by score in descending order</scoreDESC>
+      <typeASC>按文件类型在按升序排序</typeASC>
+      <typeDESC>按文件类型在按升序排序</typeDESC>
+      <scoreASC>按分数升序排序</scoreASC>
+      <scoreDESC>按分数降序排序</scoreDESC>
       <nameASC>Sort by name in ascending order</nameASC>
       <nameDESC>Sort by name in descending order</nameDESC>
-      <datecreatedASC>Sort by created date in ascending order</datecreatedASC>
-      <datecreatedDESC>Sort by created date in descending order</datecreatedDESC>
+      <datecreatedASC>按创建日期的升序排序</datecreatedASC>
+      <datecreatedDESC>按创建日期的降序排序</datecreatedDESC>
     </title>
     <tooltip>
-      <View>View this node</View>
-      <OpenFolder>Go to folder</OpenFolder>
+      <View>View this Node</View>
+      <OpenFolder>Go to Folder</OpenFolder>
     </tooltip>
   </UISearchResult>
   <UIShowAllOwnedByUserResult>
@@ -966,12 +966,12 @@
       <scoreDESC>按分数降序排序</scoreDESC>
       <nameASC>按名称升序排序</nameASC>
       <nameDESC>按名称降序排序</nameDESC>
-      <datecreatedASC>Sort by Created date in ascending order</datecreatedASC>
-      <datecreatedDESC>Sort by Created date in descending order</datecreatedDESC>
+      <datecreatedASC>按创建日期的升序排序</datecreatedASC>
+      <datecreatedDESC>按创建日期的降序排序</datecreatedDESC>
     </title>
     <tooltip>
       <View>查看此节点</View>
-      <OpenFolder>Go to Folder</OpenFolder>
+      <OpenFolder>转到文件夹</OpenFolder>
     </tooltip>
   </UIShowAllOwnedByUserResult>
   <UIShowAllFavouriteResult>
@@ -1001,7 +1001,7 @@
       <datecreatedDESC>按创建日期降序排序</datecreatedDESC>
     </title>
     <tooltip>
-      <View>View this Node</View>
+      <View>查看此节点</View>
       <OpenFolder>转到文件夹</OpenFolder>
     </tooltip>
   </UIShowAllFavouriteResult>
@@ -1107,8 +1107,8 @@
   </ConstraintsForm>
   <UIConstraintForm>
     <tooltip>
-      <AddMetadataType>Add Property</AddMetadataType>
-      <AddNodeType>Add Node Type</AddNodeType>
+      <AddMetadataType>添加属性</AddMetadataType>
+      <AddNodeType>添加节点类型</AddNodeType>
       <AddCategory>添加类别</AddCategory>
       <FindExactly>Find Exactly</FindExactly>
     </tooltip>
@@ -1330,7 +1330,7 @@
   -->
   <PopupUserSelector>
     <title>
-      <UIUserContainer>权限选择器</UIUserContainer>
+      <UIUserContainer>选择用户权限</UIUserContainer>
     </title>
   </PopupUserSelector>
   <UIPopupTaxonomy>
@@ -1345,7 +1345,13 @@
   ###############################################################################
   -->
   <UIVersionInfo>
+    <title>Version history</title>
+    <summary>
+      <empty>Click here to add a summary</empty>
+    </summary>
     <tooltip>
+      <version>版本</version>
+      <baseVersion>基本版本</baseVersion>
       <addLabel>添加标签</addLabel>
       <removeLable>移除标签</removeLable>
       <restoreVersion>还原的版本</restoreVersion>
@@ -1356,6 +1362,9 @@
     <msg>
       <have-no-view-template>不支持视图模板。</have-no-view-template>
       <cannot-remove-version>您不能删除的基版本。</cannot-remove-version>
+      <error-removing-version>An error occurred while deleting this version.</error-removing-version>
+      <error-removing-referenced-version>This version is referenced and can't be removed.</error-removing-referenced-version>
+      <confirm-restore>Are you sure you want to restore this version?</confirm-restore>
       <confirm-delete>是否确实要删除此版本?</confirm-delete>
       <not-checked-out>您必须在恢复之前签出此节点。</not-checked-out>
       <invalid-item-state>你不能还原此版本，因为在运行阶段一个或多个项目被删除或移动。</invalid-item-state>
@@ -1363,7 +1372,15 @@
     <action>
       <close>#{word.close}</close>
       <close-view>关闭视图</close-view>
+      <compare-versions>Compare selected versions</compare-versions>
     </action>
+    <labels>
+      <version>版本</version>
+      <date>日期</date>
+      <author>Modified By</author>
+      <summary>摘要</summary>
+      <action>操作</action>
+    </labels>
   </UIVersionInfo>
   <!--
   ################################################################################
@@ -1471,11 +1488,16 @@
   -->
   <UIDiff>
     <label>
+      <backTo>Back to version history</backTo>
       <diffTitle>比较两个版本</diffTitle>
-      <noChange>两个版本之间没有变化</noChange>
-      <baseVerion>基本版本</baseVerion>
+      <noContent>There is no content to compare</noContent>
       <compareVerion>版本</compareVerion>
       <can-not-compare>未能比较两个版本</can-not-compare>
+      <compare-unavailable>Version comparison is not available for this document</compare-unavailable>
+      <DateChange>On {0}</DateChange>
+      <PreviousAndNextCompare>从{0}更改到{1}</PreviousAndNextCompare>
+      <ComparedWith>与比较</ComparedWith>
+      <restoredFrom>Restored from version {0}</restoredFrom>
     </label>
   </UIDiff>
   <!--
@@ -2436,7 +2458,7 @@
       <Back>返回重命名</Back>
       <Keepfile>保持这两个文件</Keepfile>
 <ReadOnly>Open Read-only</ReadOnly>
-<Cancel>取消</Cancel>
+<Cancel>关闭</Cancel>
       <KeepBoth>Keep Both</KeepBoth>
       <CreateNewVersion>Create a new version</CreateNewVersion>
     </label>
@@ -2445,7 +2467,7 @@
   <UIRestoreConfirmMessage>
     <label>
       <Close>#{word.close}</Close>
-      <OK>Ok</OK>
+      <OK>好</OK>
       <ReplaceData>替换数据</ReplaceData>
       <Back>返回重命名</Back>
       <Keepfile>保持这两个文件</Keepfile>
@@ -3082,6 +3104,7 @@
     <msg>
       <no-view-found>There are no views applied for your access permission in drive '{0}'.</no-view-found>
       <access-denied>访问被拒绝。您可能没有权限在驱动器 '{0}' 的工作区中。</access-denied>
+      <not-found>The document you are trying to access is no longer available.</not-found>
       <empty-drives>Access denied. Either there is no drive in this repository or you do not have permission to access any drives in this repository.</empty-drives>
       <workspace-not-exist>驱动器 '{0}' 存储在一个无法识别的工作区中。请重新配置此驱动器。</workspace-not-exist>
     </msg>
@@ -3111,9 +3134,9 @@
   <true>对</true>
   <false>错</false>
   <Electronic>电子</Electronic>
-  <Paper>Paper</Paper>
+  <Paper>纸</Paper>
   <NONE>无</NONE>
-  <CLASSIFIED>Classified</CLASSIFIED>
+  <CLASSIFIED>分类</CLASSIFIED>
   <UNCLASSIFIED>未分类</UNCLASSIFIED>
   <NOCONTRACT>没有合同</NOCONTRACT>
   <one-minute>一分钟</one-minute>

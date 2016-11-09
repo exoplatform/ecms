@@ -41,11 +41,13 @@
   <File>
     <view>
       <label>
-        <not-viewable>The preview of this document is not available.</not-viewable>
+        <not-viewable>本文档的预览不可用</not-viewable>
         <pdf-max-size>The preview is not available for content larger than {0} MB.</pdf-max-size>
         <pdf-max-page>The preview is not available for content with over {0} pages.</pdf-max-page>
-        <using-webDAV>or Open in MS Office</using-webDAV>
+        <using-webDAV>或在 MS Office 中打开</using-webDAV>
         <open-on-desktop>Open on Desktop</open-on-desktop>
+        <open-in-documents>Open in Documents</open-in-documents>
+        <open-in-documents-tooltip>Open this file in Documents app</open-in-documents-tooltip>
         <file-size-too-big>此文件的内容是太大。您应下载和在客户端中打开。</file-size-too-big>
         <webDAV>WebDAV 视图</webDAV>
         <download>下载</download>
@@ -142,7 +144,7 @@
     <view>
       <label>
         <not-avaliable>不适用</not-avaliable>
-        <core-elements>Core Elements</core-elements>
+        <core-elements>核心元素</core-elements>
         <title>标题</title>
         <creator>创建者</creator>
         <subject>主题</subject>

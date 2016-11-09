@@ -71,12 +71,8 @@
       <info>
         <UITaxonomyTreeMainForm>Kategori adı, çalışma alanı ve anasayfa yolu belirtin.</UITaxonomyTreeMainForm>
         <UIPermissionTreeManager>Kategori ağacı izni ayarlayın.</UIPermissionTreeManager>
-        <UIActionTaxonomyManager>Kategori ağacına eylem eklemek için oluşturma veya güncelleme işlemini tamamlamanız
-          gerekiyor.
-        </UIActionTaxonomyManager>
-        <UITaxonomyTreeCreateChild>Sınıflandırma ağacını ekleyerek, kopyalayarak, keserek ve izinleri seçerek
-          düzenleyin.
-        </UITaxonomyTreeCreateChild>
+        <UIActionTaxonomyManager>Kategori ağacına eylem eklemek için oluşturma veya güncelleme işlemini tamamlamanız gerekiyor.</UIActionTaxonomyManager>
+        <UITaxonomyTreeCreateChild>Sınıflandırma ağacını ekleyerek, kopyalayarak, keserek ve izinleri seçerek düzenleyin.</UITaxonomyTreeCreateChild>
       </info>
     </tab>
     <msg>
@@ -215,7 +211,7 @@
   <UINamespaceList>
     <header>
       <prefix>Önek</prefix>
-      <uri>Namespace URI</uri>
+      <uri>Ad boşluğu URI</uri>
       <action>Eylem</action>
     </header>
     <action>
@@ -254,8 +250,7 @@
     <msg>
       <confirm-delete>Bu metaverileri silmek istediğinizden emin misiniz?</confirm-delete>
       <delete-successful>'{0}' Şablonu başarıyla silindi.</delete-successful>
-      <path-not-found-exception>Bu metaveriler değiştirildi veya silindi. Lütfen Yenile düğmesini tıklatın.
-      </path-not-found-exception>
+      <path-not-found-exception>Bu metaveriler değiştirildi veya silindi. Lütfen Yenile düğmesini tıklatın.</path-not-found-exception>
     </msg>
     <action>
       <Add>Metaveri Ekle</Add>
@@ -404,7 +399,7 @@
       <permissions>İzinler:</permissions>
       <showHiddenNode>Gizli düğümleri göster:</showHiddenNode>
       <allowCreateFolders>Klasör Oluşturulmasına Olanak Sağla:</allowCreateFolders>
-      <Admin>Admin:</Admin>
+      <Admin>Yönetici:</Admin>
       <Categories>Kategoriler:</Categories>
       <Icons>Simgeler:</Icons>
       <List>Liste:</List>
@@ -566,8 +561,7 @@
     </action>
     <msg>
       <register-successfully>'{0}' Düğüm türü başarıyla kaydedildi.</register-successfully>
-      <supertype-is-madatory>Yeni bir öğe türü kaydettiğinizde süper tür zorunludur.Lütfen en az bir süper tür seçin.
-      </supertype-is-madatory>
+      <supertype-is-madatory>Yeni bir öğe türü kaydettiğinizde süper tür zorunludur.Lütfen en az bir süper tür seçin.</supertype-is-madatory>
       <register-failed>Düğüm türü kaydı başarısız oldu. Ya zaten var veya süper türü geçersiz.</register-failed>
       <nodeType-name>Düğüm türü adı gereklidir.</nodeType-name>
       <fileName-invalid>Dosya adında geçersiz bir karakter var.</fileName-invalid>
@@ -587,8 +581,7 @@
     </tab>
     <msg>
       <property-name>Özellik tanımının adı geçersiz.</property-name>
-      <not-supported-value-constraints>Bu gerekli tür değer kısıtlamalarında desteklenmiyor.
-      </not-supported-value-constraints>
+      <not-supported-value-constraints>Bu gerekli tür değer kısıtlamalarında desteklenmiyor.</not-supported-value-constraints>
     </msg>
   </UIPropertyDefinitionForm>
   <UIChildNodeDefinitionForm>
@@ -715,11 +708,11 @@
     <label>
       <both>Both</both>
       <folderOnly>Folder</folderOnly>
-      <unstructuredFolder>Unstructured Folder</unstructuredFolder>
+      <unstructuredFolder>Yapılanmamış Klasör</unstructuredFolder>
     </label>
     <title>
       <AddPermission>İzin Ekle</AddPermission>
-      <RemovePermission>Remove Permission</RemovePermission>
+      <RemovePermission>İzni Kaldır</RemovePermission>
       <AddIcon>Simge Ekle</AddIcon>
       <AddPath>Yol Ekle</AddPath>
     </title>
@@ -762,7 +755,7 @@
     <label>
       <actionType>Eylem Türünü Genişlet:</actionType>
       <name>Adı:</name>
-      <isMove>is Action Move:</isMove>
+      <isMove>Action Move:</isMove>
       <variables>Değişkenler:</variables>
       <exo_businessProcessAction>İş Süreçleri:</exo_businessProcessAction>
       <exo_scriptAction>Groovy Scriptler:</exo_scriptAction>
@@ -995,12 +988,12 @@
       <publicationPublish>Yayımla</publicationPublish>
       <contentNavigation>İçerik Gezinti</contentNavigation>
       <addSymLink>Sembolik link ekle</addSymLink>
-      <checkIn>Check In</checkIn>
-      <checkOut>Check Out</checkOut>
-      <shareDocuments>Paylaş</shareDocuments>
-      <openDocument>Remote Edit</openDocument>
-      <editProperty>Edit Document Properties</editProperty>
-      <uploadNewVersion>Upload a new version</uploadNewVersion>
+      <checkIn>Kaydet</checkIn>
+      <checkOut>Kaydı Kaldır</checkOut>
+      <shareDocuments>Share</shareDocuments>
+      <openDocument>Uzaktan Düzenle</openDocument>
+      <editProperty>Dosya Özelliklerini Düzenle</editProperty>
+      <uploadNewVersion>Yeni bir sürümünü yükle</uploadNewVersion>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -1030,7 +1023,7 @@
   </UIViewFormTabPane>
   <PopupViewPermission>
     <title>
-      <UIPermissionSelector>Yetki Seçici</UIPermissionSelector>
+      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
     </title>
   </PopupViewPermission>
 
@@ -1081,7 +1074,7 @@
   -->
   <UITemplateForm>
     <title>
-      <AddPermission>İzin Ekle</AddPermission>
+      <AddPermission>Add Permission</AddPermission>
     </title>
     <action>
       <Save>#{word.save}</Save>
@@ -1390,7 +1383,7 @@
       <set_property>Özellik Ayarlama Yetkisi</set_property>
       <remove>Çıkarma Yetkisi</remove>
     </label>
-    <title>Add a permission to this node</title>
+    <title>Bu ağa bir izin ekle</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>Kaydet</Save>
@@ -1412,7 +1405,7 @@
 
   <PopupTaxonomyTreePermission>
     <title>
-      <UIPermissionSelector>Yetki Seçici</UIPermissionSelector>
+      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
     </title>
   </PopupTaxonomyTreePermission>
 
@@ -1493,7 +1486,7 @@
       <add_node>Değiştir</add_node>
       <remove>Kaldır</remove>
     </label>
-    <title>Add permission to this node</title>
+    <title>Bu ağa bir izin ekle</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>#{word.save}</Save>
@@ -1744,7 +1737,7 @@
   -->
   <AddNewTemplatePermission>
     <title>
-      <UIPermissionSelector>Yetki Seçici</UIPermissionSelector>
+      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
     </title>
   </AddNewTemplatePermission>
   <TemplatePermission>
@@ -1785,12 +1778,12 @@
   </DialogForm>
   <DialogFormTemplatePermission>
     <title>
-      <UIPermissionSelector>Yetki Seçici</UIPermissionSelector>
+      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
     </title>
   </DialogFormTemplatePermission>
   <ViewFormTemplatePermission>
     <title>
-      <UIPermissionSelector>Yetki Seçici</UIPermissionSelector>
+      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
     </title>
   </ViewFormTemplatePermission>
   <TemplateContainerPopup>
@@ -1983,7 +1976,7 @@
   </EditQueryForm>
   <PermissionPopup>
     <title>
-      <UIGroupMemberSelector>Yetki Seçici</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Permission Selector</UIGroupMemberSelector>
     </title>
   </PermissionPopup>
   <!--
@@ -2024,9 +2017,7 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <range-validator>Aralık geçersiz. Biçimi: a a..b arasında , b pozitif tamsayılardır. B nin sınırsız olduğunu
-        belirtmek için * kullanabilirsiniz.
-      </range-validator>
+      <range-validator>Aralık geçersiz. Biçimi: a a..b arasında , b pozitif tamsayılardır. B nin sınırsız olduğunu belirtmek için  * kullanabilirsiniz.</range-validator>
       <error-update>Güncelleştirme başarısız oldu. Bilgileriniz geçerli değil.</error-update>
       <item-not-existing>Bu etiket için değişiklikleri kaydedemezsiniz, artık veri tabanında yok.</item-not-existing>
     </msg>
@@ -2043,7 +2034,7 @@
   -->
   <ECMPhoneFormatValidator>
     <msg>
-      <Invalid>The field '{0}' contains an invalid Phone number. Please enter another value.</Invalid>
+      <Invalid>'{0}' alanı geçersiz bir Telefon Numarası içermektedir. Lütfen doğru şekilde giriniz.</Invalid>
     </msg>
   </ECMPhoneFormatValidator>
   <!--
@@ -2342,8 +2333,7 @@
       <UnLock>Kilidini Aç</UnLock>
     </tooltip>
     <msg>
-      <access-denied-exception>Düğüm yolu {0} ile erişmek için izniniz yok veya bu düğümde silindi.
-      </access-denied-exception>
+      <access-denied-exception>Düğüm yolu {0} ile erişmek için izniniz yok veya bu düğümde silindi.</access-denied-exception>
     </msg>
   </UILockNodeList>
   <EditUnLockForm>
@@ -2457,8 +2447,7 @@
     </action>
     <msg>
       <xss-vulnerability-character>'{0}' Alanı XSS açığı karakterler içeriyor</xss-vulnerability-character>
-      <xss-vulnerability-character-wo-label>Giridikleriniz XSS açığı karakterler içeriyor olabilir
-      </xss-vulnerability-character-wo-label>
+      <xss-vulnerability-character-wo-label>Giridikleriniz XSS açığı karakterler içeriyor olabilir</xss-vulnerability-character-wo-label>
     </msg>
   </UIActionForm>
 
@@ -2496,7 +2485,7 @@
       <Add>Ekle</Add>
     </action>
     <label>
-      <userOrGroup>Üyelikler:</userOrGroup>
+      <userOrGroup>Memberships:</userOrGroup>
     </label>
     <msg>
       <userOrGroup-alreadyExists>Bu üyelik zaten var. Lütfen başka bir tane seçin.</userOrGroup-alreadyExists>
@@ -2534,9 +2523,7 @@
   </NodeTypeNameValidator>
   <UIActionForm>
     <msg>
-      <constraint-violation-exception>Düğüm '{0}' '{2}' çalışma alanındaki '{1}' eklenemiyor. İzinler veya kısıtlamalar
-        koşulu ile ilgili bir sorun vardır.
-      </constraint-violation-exception>
+      <constraint-violation-exception>Düğüm '{0}'  '{2}' çalışma alanındaki '{1}'  eklenemiyor.  İzinler veya kısıtlamalar koşulu ile ilgili bir sorun vardır.</constraint-violation-exception>
     </msg>
   </UIActionForm>
 
@@ -2547,9 +2534,7 @@
   </UIWorkspaceWizard>
   <UIRepositoryForm>
     <msg>
-      <not-complete-repository>The repository is being created. You need to wait a few minutes before creating another
-        one.
-      </not-complete-repository>
+      <not-complete-repository>The repository is being created. You need to wait a few minutes before creating another one.</not-complete-repository>
     </msg>
   </UIRepositoryForm>
 
@@ -2610,8 +2595,7 @@
   </UIPageIterator>
   <UILockNodeList>
     <msg>
-      <can-not-unlock-node>Bu düğümün kilidini açmak için izniniz yok. Yetkinizi almak için yöneticinize başvurun.
-      </can-not-unlock-node>
+      <can-not-unlock-node>Bu düğümün kilidini açmak için izniniz yok. Yetkinizi almak için yöneticinize başvurun.</can-not-unlock-node>
     </msg>
   </UILockNodeList>
 </bundle>

@@ -44,8 +44,7 @@
       <no-taxonomy-selected>少なくとも一つのカテゴリのコピーかカットをする必要があります。</no-taxonomy-selected>
       <node-is-cutting>ここに貼付けることができません。恐らく、分類ノード '{0}' はカットされています。</node-is-cutting>
       <can-not-paste>貼付けるためのクリップボードにデータがありません。</can-not-paste>
-      <reference-exception>Cannot delete this category because it is currently referenced by a content.
-      </reference-exception>
+      <reference-exception>Cannot delete this category  because it is currently referenced by a content.</reference-exception>
       <path-error>分類ノードが削除されたので問題が発生している可能性があります。</path-error>
     </msg>
   </UITaxonomyWorkingArea>
@@ -991,7 +990,7 @@
       <addSymLink>Symリンクの追加</addSymLink>
       <checkIn>Check In</checkIn>
       <checkOut>Check Out</checkOut>
-      <shareDocuments>共有</shareDocuments>
+      <shareDocuments>Share</shareDocuments>
       <openDocument>Remote Edit</openDocument>
       <editProperty>Edit Document Properties</editProperty>
       <uploadNewVersion>Upload a new version</uploadNewVersion>
@@ -1024,7 +1023,7 @@
   </UIViewFormTabPane>
   <PopupViewPermission>
     <title>
-      <UIPermissionSelector>権限の選択</UIPermissionSelector>
+      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
     </title>
   </PopupViewPermission>
 
@@ -1075,7 +1074,7 @@
   -->
   <UITemplateForm>
     <title>
-      <AddPermission>パーミッションを追加</AddPermission>
+      <AddPermission>Add Permission</AddPermission>
     </title>
     <action>
       <Save>#{word.save}</Save>
@@ -1406,7 +1405,7 @@
 
   <PopupTaxonomyTreePermission>
     <title>
-      <UIPermissionSelector>権限の選択</UIPermissionSelector>
+      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
     </title>
   </PopupTaxonomyTreePermission>
 
@@ -1738,7 +1737,7 @@
   -->
   <AddNewTemplatePermission>
     <title>
-      <UIPermissionSelector>権限の選択</UIPermissionSelector>
+      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
     </title>
   </AddNewTemplatePermission>
   <TemplatePermission>
@@ -1779,12 +1778,12 @@
   </DialogForm>
   <DialogFormTemplatePermission>
     <title>
-      <UIPermissionSelector>権限の選択</UIPermissionSelector>
+      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
     </title>
   </DialogFormTemplatePermission>
   <ViewFormTemplatePermission>
     <title>
-      <UIPermissionSelector>権限の選択</UIPermissionSelector>
+      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
     </title>
   </ViewFormTemplatePermission>
   <TemplateContainerPopup>
@@ -1977,7 +1976,7 @@
   </EditQueryForm>
   <PermissionPopup>
     <title>
-      <UIGroupMemberSelector>権限の選択</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Permission Selector</UIGroupMemberSelector>
     </title>
   </PermissionPopup>
   <!--
@@ -2018,9 +2017,7 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <range-validator>無効なレンジです。正しいレンジのフォーマットは a..b with a, b is positive integer. You can use * instead of b to
-        indicate that unlimited.
-      </range-validator>
+      <range-validator>無効なレンジです。正しいレンジのフォーマットは a..b with a, b is positive integer. You can use * instead of b to indicate that unlimited.</range-validator>
       <error-update>情報は正しくありません。</error-update>
       <item-not-existing>You cannot save changes to this tag that no longer exist in database</item-not-existing>
     </msg>
@@ -2450,8 +2447,7 @@
     </action>
     <msg>
       <xss-vulnerability-character>フィールド'{0}'は、クロスサイトスクリプティングの脆弱性文字が含まれています。</xss-vulnerability-character>
-      <xss-vulnerability-character-wo-label>Your input may contain XSS vulnerability characters
-      </xss-vulnerability-character-wo-label>
+      <xss-vulnerability-character-wo-label>Your input may contain XSS vulnerability characters</xss-vulnerability-character-wo-label>
     </msg>
   </UIActionForm>
 
@@ -2489,7 +2485,7 @@
       <Add>追加</Add>
     </action>
     <label>
-      <userOrGroup>メンバーシップ:</userOrGroup>
+      <userOrGroup>Memberships:</userOrGroup>
     </label>
     <msg>
       <userOrGroup-alreadyExists>メンバーシップは既に存在します。別の物を選択してください!</userOrGroup-alreadyExists>

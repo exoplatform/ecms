@@ -17,7 +17,7 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <not-support>Δεν μπορείτε να σχολιάσετε σε αυτόν τον τύπο εγγράφου.</not-support>
+      <not-support>You can't comment on this type of document.</not-support>
       <not-checkedout>Πρέπει να ελέγξετε τον κόμβο πριν τον σχολιάσετε.</not-checkedout>
       <content-null>Δεν μπορείτε να δημοσιεύσετε ένα κενό σχόλιο.</content-null>
     </msg>
@@ -250,7 +250,7 @@
       <UIActivePublication>Εγγραφείτε στην παρακολούθηση του κύκλου ζωής της δημοσίευσης</UIActivePublication>
       <UITaggingForm>Ετικέτες εγγράφου</UITaggingForm>
       <UIThumbnailForm>Προσθέστε εικόνα μικρογραφίας</UIThumbnailForm>
-      <UIAllItemsPreferenceForm>Προτιμήσεις</UIAllItemsPreferenceForm>
+      <UIAllItemsPreferenceForm>Preferences</UIAllItemsPreferenceForm>
       <UISelectRestorePath>Επιλέξτε διαδρομή για την επαναφορά</UISelectRestorePath>
       <UISEOForm>Διαχείριση βελτιστοποιήσεων μηχανών αναζήτησης (SEO)</UISEOForm>
       <UISEOToolbarForm>Διαχείριση βελτιστοποιήσεων μηχανών αναζήτησης (SEO)</UISEOToolbarForm>
@@ -597,7 +597,7 @@
       <RestoreFromTrash>Επαναφορά από κάδο</RestoreFromTrash>
       <EmptyTrash>Άδειασμα κάδου διαγραμμένων</EmptyTrash>
       <WebDavView>Άνοιγμα στο Office</WebDavView>
-      <Download>Μεταφόρτωση</Download>
+      <Download>Download</Download>
       <OpenDocument>Απομακρυσμένη επεξεργασία</OpenDocument>
       <EditProperty>Edit Document Properties</EditProperty>
       <UploadNewVersion>Upload a new version</UploadNewVersion>
@@ -1330,7 +1330,7 @@
   -->
   <PopupUserSelector>
     <title>
-      <UIUserContainer>Επιλογέας Δικαιωμάτων</UIUserContainer>
+      <UIUserContainer>Permission Selector</UIUserContainer>
     </title>
   </PopupUserSelector>
   <UIPopupTaxonomy>
@@ -1345,7 +1345,13 @@
   ###############################################################################
   -->
   <UIVersionInfo>
+    <title>Version history</title>
+    <summary>
+      <empty>Click here to add a summary</empty>
+    </summary>
     <tooltip>
+      <version>Version</version>
+      <baseVersion>Base Version</baseVersion>
       <addLabel>Προσθήκη ετικέτας</addLabel>
       <removeLable>Αφαίρεση ετικέτας</removeLable>
       <restoreVersion>Επαναφορά Έκδοσης</restoreVersion>
@@ -1356,6 +1362,9 @@
     <msg>
       <have-no-view-template>Το πρότυπο προβολής δεν υποστηρίζεται.</have-no-view-template>
       <cannot-remove-version>Δεν μπορείτε να καταργήσετε την βασική έκδοση.</cannot-remove-version>
+      <error-removing-version>An error occurred while deleting this version.</error-removing-version>
+      <error-removing-referenced-version>This version is referenced and can't be removed.</error-removing-referenced-version>
+      <confirm-restore>Are you sure you want to restore this version?</confirm-restore>
       <confirm-delete>Είστε βέβαιοι ότι θέλετε να καταργήσετε αυτήν την έκδοση;</confirm-delete>
       <not-checked-out>Πρέπει να αποδεσμεύσετε τον κόμβο πριν τον επαναφέρετε.</not-checked-out>
       <invalid-item-state>Δεν μπορείτε να επαναφέρετε αυτήν την έκδοση, διότι ένα ή περισσότερα στοιχεία έχουν διαγραφεί ή  μετακινηθεί κατά τη διάρκεια μιας άλλης περιόδου λειτουργίας.</invalid-item-state>
@@ -1363,7 +1372,15 @@
     <action>
       <close>#{word.close}</close>
       <close-view>Κλείστε την προβολή</close-view>
+      <compare-versions>Compare selected versions</compare-versions>
     </action>
+    <labels>
+      <version>Έκδοση</version>
+      <date>Ημερομηνία</date>
+      <author>Modified By</author>
+      <summary>Σύνοψη</summary>
+      <action>Ενέργεια</action>
+    </labels>
   </UIVersionInfo>
   <!--
   ################################################################################
@@ -1471,11 +1488,16 @@
   -->
   <UIDiff>
     <label>
+      <backTo>Back to version history</backTo>
       <diffTitle>Σύγκριση μεταξύ των δύο εκδόσεων</diffTitle>
-      <noChange>Καμία αλλαγή μεταξύ των δύο εκδόσεων</noChange>
-      <baseVerion>Βασική έκδοση</baseVerion>
+      <noContent>There is no content to compare</noContent>
       <compareVerion>Έκδοση</compareVerion>
       <can-not-compare>Απέτυχε η σύγκριση των δύο εκδόσεων</can-not-compare>
+      <compare-unavailable>Version comparison is not available for this document</compare-unavailable>
+      <DateChange>On {0}</DateChange>
+      <PreviousAndNextCompare>Αλλαγές από {0} σε {1}</PreviousAndNextCompare>
+      <ComparedWith>Σε σύγκριση με</ComparedWith>
+      <restoredFrom>Restored from version {0}</restoredFrom>
     </label>
   </UIDiff>
   <!--
@@ -2436,7 +2458,7 @@
       <Back>Επιστροφή στη Μετονομασία</Back>
       <Keepfile>Κρατήστε τα δύο αρχεία</Keepfile>
 <ReadOnly>Άνοιγμα μόνο για ανάγνωση</ReadOnly>
-<Cancel>Ακύρωση</Cancel>
+<Cancel>Cancel</Cancel>
       <KeepBoth>Keep Both</KeepBoth>
       <CreateNewVersion>Create a new version</CreateNewVersion>
     </label>
@@ -3082,6 +3104,7 @@
     <msg>
       <no-view-found>There are no views applied for your access permission in drive '{0}'.</no-view-found>
       <access-denied>Access denied. You may not have permission in the workspace of drive '{0}'.</access-denied>
+      <not-found>The document you are trying to access is no longer available.</not-found>
       <empty-drives>Access denied. Either there is no drive in this repository or you do not have permission to access any drives in this repository.</empty-drives>
       <workspace-not-exist>Drive '{0}' was stored in one unrecognized workspace. Please reconfigure this drive.</workspace-not-exist>
     </msg>

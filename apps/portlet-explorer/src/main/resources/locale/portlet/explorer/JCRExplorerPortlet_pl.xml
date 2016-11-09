@@ -8,7 +8,7 @@
   <UICommentForm>
     <label>
       <name>Nazwa</name>
-      <email>Adres e-mail</email>
+      <email>Email</email>
       <website>Strona internetowa</website>
       <comment>Komentarz</comment>
     </label>
@@ -17,7 +17,7 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <not-support>Nie możesz komentować tego typu dokumentu.</not-support>
+      <not-support>You can't comment on this type of document.</not-support>
       <not-checkedout>Musisz sprawdzić węzeł przed skomentowaniem go.</not-checkedout>
       <content-null>Nie możesz opublikować pustego komentarza.</content-null>
     </msg>
@@ -155,7 +155,7 @@
   #########################################################################################
   -->
   <UIPreferencesForm>
-    <title>Ustaw preferencje przeglądania</title>
+    <title>Set up your browsing preferences</title>
     <label>
       <enableStructure>Włącz strukturę DMS:</enableStructure>
       <showSideBar>Pokaż pasek boczny:</showSideBar>
@@ -165,7 +165,7 @@
       <enableDragAndDrop>Włącz Przeciągnij i Upuść:</enableDragAndDrop>
       <sortBy>Sortuj według:</sortBy>
       <order>Sortuj według:</order>
-      <nodesPerPage>Items per Page:</nodesPerPage>
+      <nodesPerPage>Liczba pozycji na stronę:</nodesPerPage>
     </label>
     <action>
       <Back>#{word.close}</Back>
@@ -216,7 +216,7 @@
     <title>
       <UIRenameForm>Zmień nazwę</UIRenameForm>
       <UIActionContainer>Edytuj Akcję</UIActionContainer>
-      <UIFolderForm>Nowy katalog</UIFolderForm>
+      <UIFolderForm>New Folder</UIFolderForm>
       <UIUploadManager>Prześlij plik</UIUploadManager>
       <UIReferencesList>Lista referencji</UIReferencesList>
       <UIExportNode>Eksportuj</UIExportNode>
@@ -250,12 +250,12 @@
       <UIActivePublication>Zapisz się do publikacji „Lifecycle”</UIActivePublication>
       <UITaggingForm>Znacznik dokumentu</UITaggingForm>
       <UIThumbnailForm>Dodaj miniaturę</UIThumbnailForm>
-      <UIAllItemsPreferenceForm>Preferencje</UIAllItemsPreferenceForm>
+      <UIAllItemsPreferenceForm>Preferences</UIAllItemsPreferenceForm>
       <UISelectRestorePath>Wybierz ścieżkę przywracania</UISelectRestorePath>
       <UISEOForm>Zarządzaj SEO</UISEOForm>
       <UISEOToolbarForm>Zarządzaj SEO</UISEOToolbarForm>
-      <UIReadOnlyFileConfirmMessage>Open Document</UIReadOnlyFileConfirmMessage>
-      <UIDocumentAutoVersionForm>Copy Document</UIDocumentAutoVersionForm>
+      <UIReadOnlyFileConfirmMessage>Otwórz dokument</UIReadOnlyFileConfirmMessage>
+      <UIDocumentAutoVersionForm>Kopiuj dokument</UIDocumentAutoVersionForm>
     </title>
     <header>
       <workspace>Przestrzeń robocza</workspace>
@@ -282,7 +282,7 @@
   -->
   <UIActionBar>
     <tooltip>
-      <AddFolder>Nowy katalog</AddFolder>
+      <AddFolder>New Folder</AddFolder>
       <AddDocument>Nowa zawartość</AddDocument>
       <EditDocument>Edytuj</EditDocument>
       <Upload>Prześlij</Upload>
@@ -296,21 +296,21 @@
       <ManageAuditing>Audyt</ManageAuditing>
       <ManagePublications>Publikacje</ManagePublications>
       <ManageCategories>Kategorie</ManageCategories>
-      <ManageRelations>Kontakty</ManageRelations>
+      <ManageRelations>Relations</ManageRelations>
       <ManageActions>Akcje</ManageActions>
       <ExportNode>Eksportuj</ExportNode>
       <ImportNode>Importuj</ImportNode>
       <OverloadThumbnail>Miniatura przeciążenia</OverloadThumbnail>
       <ManageHidden>Pokaż/Ukryj zawartość</ManageHidden>
-      <ViewReferences>Referencje</ViewReferences>
+      <ViewReferences>References</ViewReferences>
       <ViewNodeType>Rodzaje</ViewNodeType>
-      <ViewPermissions>Uprawnienia</ViewPermissions>
+      <ViewPermissions>Permissions</ViewPermissions>
       <ViewProperties>Właściwości</ViewProperties>
       <ViewMetadatas>Metadane</ViewMetadatas>
       <ViewRelations>Pokaż/Ukryj relacje</ViewRelations>
       <ShowJCRStructure>Pokaż/Ukryj strukturę treści</ShowJCRStructure>
-      <EditProperty>Edit Document Properties</EditProperty>
-      <UploadNewVersion>Upload a new version</UploadNewVersion>
+      <EditProperty>Edytuj właściwości dokumentu</EditProperty>
+      <UploadNewVersion>Przekaż nową wersję</UploadNewVersion>
     </tooltip>
     <msg>
       <cannot-action-in-rootnode>Nie można wykonać tej operacji w węźle głównym.</cannot-action-in-rootnode>
@@ -350,7 +350,7 @@
     </msg>
     <title>
       <select-tab>Wybierz kartę</select-tab>
-      <SimpleSearch>Szybkie wyszukiwanie</SimpleSearch>
+      <SimpleSearch>Quick Search</SimpleSearch>
       <AdvanceSearch>Wyszukiwanie zaawansowane</AdvanceSearch>
       <SavedQueries>Zapisane zapytania</SavedQueries>
       <ShowAllOwnedByUser>Pokaż wszystkie moje przedmioty</ShowAllOwnedByUser>
@@ -378,7 +378,7 @@
       <can-not-paste-node>Nie masz uprawnień, aby przejść do tego węzła. Proszę skontaktować się z administratorem.</can-not-paste-node>
       <can-not-move-node>Nie masz uprawnień do przenoszenia tego węzła. Proszę skontaktować się z administratorem.</can-not-move-node>
       <does-not-support-versioning>Nie masz uprawnień, aby przejść do tego węzła. Proszę skontaktować się z administratorem.</does-not-support-versioning>
-      <path-not-found>Ten element został usunięty lub zmieniony. Kliknij przycisk „odśwież”.</path-not-found>
+      <path-not-found>This element was deleted or changed. Please click the Refresh button.</path-not-found>
       <paste-lock-exception>Nie można przenieść elementu {0} do tego węzła, ponieważ węzeł źródłowy lub docelowy są zablokowane lub są związane z zablokowanym węzłem.</paste-lock-exception>
       <can-not-checkin-node>Nie można sprawdzić w tym węźle. Proszę sprawdzić, czy masz odpowiednie uprawnienia.</can-not-checkin-node>
       <can-not-checkout-node>Nie można sprawdzić tego węzła. Proszę sprawdzić, czy masz odpowiednie uprawnienia.</can-not-checkout-node>
@@ -404,7 +404,7 @@
       <constraintviolation-exception>Obowiązkowa pozycja jcr: UUID nie została znaleziona. Węzeł mógł zostać usunięty lub zmieniony. Kliknij przycisk Odśwież.</constraintviolation-exception>
       <path-not-found-exception>Ten węzeł został usunięty lub zmieniony. Kliknij przycisk Odśwież.</path-not-found-exception>
       <not-exist-categories>Kategoria nie istnieje.</not-exist-categories>
-      <lock-node-read-only>This file is locked by user {0}. Open read-only ?</lock-node-read-only>
+      <lock-node-read-only>Ten plik jest zablokowany przez użytkownika {0}. Otworzyć tylko do odczytu ?</lock-node-read-only>
     </msg>
   </UIPopupMenu>
   <!--
@@ -532,7 +532,7 @@
       <Lock>Zablokuj</Lock>
       <Unlock>Odblokuj</Unlock>
       <EditDocument>Edytuj</EditDocument>
-      <Paste>Wklej</Paste>
+      <Paste>Paste</Paste>
       <LockedBy>Zablokowane przez</LockedBy>
     </tooltip>
   </UIDocumentWorkspace>
@@ -543,7 +543,7 @@
       <confirm-deleteattachment>Czy na pewno chcesz usunąć ten plik załącznika?</confirm-deleteattachment>
       <confirm-deleteattcomment>Czy na pewno chcesz usunąć ten komentarz?</confirm-deleteattcomment>
       <access-denied-exception>Odmowa dostępu. Możesz nie mieć uprawnień do czytania, albo węzeł został usunięty lub zmieniony.</access-denied-exception>
-      <path-not-found>Ten element został usunięty lub zmieniony. Kliknij przycisk „odśwież”.</path-not-found>
+      <path-not-found>This element was deleted or changed. Please click the Refresh button.</path-not-found>
     </msg>
     <tooltip>
       <remove-attachment>Usuń ten plik załącznik</remove-attachment>
@@ -555,7 +555,7 @@
       <label>
         <name>Nazwa</name>
         <versionable>Wersja</versionable>
-        <exo_owner>Właściciel</exo_owner>
+        <exo_owner>Owner</exo_owner>
         <auditing>Audyt</auditing>
         <exo_dateCreated>Data utworzenia</exo_dateCreated>
         <exo_dateModified>Data modyfikacji</exo_dateModified>
@@ -576,16 +576,16 @@
       <Rename>Zmień nazwę</Rename>
       <Delete>Usuń</Delete>
       <Save>#{word.save}</Save>
-      <Cut>Wytnij</Cut>
-      <Paste>Wklej</Paste>
+      <Cut>Cut</Cut>
+      <Paste>Paste</Paste>
       <CheckOut>Usuń zaznaczenie</CheckOut>
       <CheckIn>Zaznacz</CheckIn>
       <WebDAV>Zobacz WebDAV</WebDAV>
       <autoversion>Wersja automatyczna</autoversion>
       <Custom>Niestandardowe</Custom>
-      <AddFolder>Nowy katalog</AddFolder>
-      <AddDocument>Nowa zawartość</AddDocument>
-      <Upload>Wgraj pliki</Upload>
+      <AddFolder>New Folder</AddFolder>
+      <AddDocument>New Content</AddDocument>
+      <Upload>Upload Files</Upload>
       <MoveNode>Przenieś</MoveNode>
       <UnLock>Odblokuj</UnLock>
       <ViewProperties>Właściwości widoku</ViewProperties>
@@ -597,11 +597,11 @@
       <RestoreFromTrash>Przywróć z kosza</RestoreFromTrash>
       <EmptyTrash>Opróżnij kosz</EmptyTrash>
       <WebDavView>Download and allow edition</WebDavView>
-      <Download>Pobierz</Download>
-      <OpenDocument>Remote Edit</OpenDocument>
-      <EditProperty>Edit Document Properties</EditProperty>
-      <UploadNewVersion>Upload a new version</UploadNewVersion>
-      <CreateNewVersion>Create a new version</CreateNewVersion>
+      <Download>Download</Download>
+      <OpenDocument>Edycja zdalna</OpenDocument>
+      <EditProperty>Edytuj właściwości dokumentu</EditProperty>
+      <UploadNewVersion>Przekaż nową wersję</UploadNewVersion>
+      <CreateNewVersion>Utwórz nową wersję</CreateNewVersion>
     </event>
   </ECMContextMenu>
  
@@ -615,8 +615,8 @@
       <no-references>Nie znaleziono referencji</no-references>
     </msg>
     <header>
-      <workspace>Przestrzeń robocza</workspace>
-      <path>Ścieżka</path>
+      <workspace>Workspace</workspace>
+      <path>Path</path>
     </header>
     <action>
       <Close>#{word.close}</Close>
@@ -636,8 +636,8 @@
       <UIPublicationHistory>Historia</UIPublicationHistory>
       <UIVersionViewer>Wersja widoku</UIVersionViewer>
 
-      <UIPropertyTab>Właściwości</UIPropertyTab>
-      <UIMetadataTab>Metadane</UIMetadataTab>
+      <UIPropertyTab>Properties</UIPropertyTab>
+      <UIMetadataTab>Metadata</UIMetadataTab>
       <UIPropertyForm>Dodać nową właściwość</UIPropertyForm>
       <UIUploadContent>Informacje o przesłanym pliku</UIUploadContent>
       <UIJCRAdvancedSearch>Nowe zapytanie</UIJCRAdvancedSearch>
@@ -649,7 +649,7 @@
       <UIConstraintsForm>Ograniczenia formularza</UIConstraintsForm>
       <UIViewSearchResult>Zobacz zawartość</UIViewSearchResult>
       <UIContentNameSearch>Szukaj według nazwy</UIContentNameSearch>
-      <UINodeInfo>Informacje o wersji</UINodeInfo>
+      <UINodeInfo>Version Info</UINodeInfo>
       <UINodeProperty>Właściwości węzła</UINodeProperty>
       <UIActionListContainer>Dostępne akcje</UIActionListContainer>
       <UIActionContainer>Dodaj akcję</UIActionContainer>
@@ -705,8 +705,8 @@
   <UIPropertyForm>
     <title>Dodaj/Edytuj Właściwość</title>
     <label>
-      <name>Nazwa:</name>
-      <type>Typ:</type>
+      <name>Name:</name>
+      <type>Type:</type>
       <value>Wartość:</value>
       <upload>Dodaj:</upload>
       <namespace>Przestrzeń nazwy:</namespace>
@@ -772,8 +772,8 @@
   </UIPermissionInfo>
   <permission>
     <title>
-      <SelectUser>Wybierz użytkownika</SelectUser>
-      <SelectMember>Wybierz członkostwo</SelectMember>
+      <SelectUser>Select User</SelectUser>
+      <SelectMember>Select Membership</SelectMember>
       <AddAny>Wybierz wszystkich</AddAny>
     </title>
   </permission>
@@ -784,15 +784,15 @@
   -->
   <SelectUserOrGroup>
     <title>
-      <UIGroupSelector>Wybierz użytkownika</UIGroupSelector>
+      <UIGroupSelector>Select User</UIGroupSelector>
       <UIPermissionSelector>Wybierz członka</UIPermissionSelector>
-      <UIGroupMemberSelector>Wybierz członkostwo</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Select Membership</UIGroupMemberSelector>
     </title>
   </SelectUserOrGroup>
   <UIGroupSelector>
     <label>
       <selectGroup>Przeglądaj i wybierz grupę</selectGroup>
-      <selectUser>Wybierz użytkownika</selectUser>
+      <selectUser>Select User</selectUser>
     </label>
     <msg>
       <not-change-owner>„{0}” jest właścicielem tego węzła i ma uprawnienie „Pełna kontrola”.</not-change-owner>
@@ -817,7 +817,7 @@
       <checkbox-require>Wybierz co najmniej jedno uprawnienie.</checkbox-require>
       <userOrGroup-required>Przed zapisaniem tego uprawnienia należy wybrać użytkownika lub grupę.</userOrGroup-required>
       <not-change-permission>Nie masz prawa do dodawania uprawnień.</not-change-permission>
-      <access-denied>Odmowa dostępu. Nie można usunąć tego uprawnienia.</access-denied>
+      <access-denied>Access denied. You cannot remove this permission.</access-denied>
     </msg>
   </UIPermissionForm>
 
@@ -880,7 +880,7 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <keyword-not-allowed>To słowo kluczowe nie jest dozwolone.</keyword-not-allowed>
+      <keyword-not-allowed>This keyword is not allowed.</keyword-not-allowed>
     </msg>
   </UIContentNameSearch>
   <UISimpleSearch>
@@ -899,8 +899,8 @@
     </label>
     <msg>
       <keyword-null>Wpisz słowo kluczowe.</keyword-null>
-      <not-found>Nie znaleziono żadnych wyników.</not-found>
-      <keyword-not-allow>To słowo kluczowe nie jest dozwolone.</keyword-not-allow>
+      <not-found>No results found.</not-found>
+      <keyword-not-allow>This keyword is not allowed.</keyword-not-allow>
       <value-null>Wpisz słowo kluczowe lub ograniczenia.</value-null>
       <value-save-null>Wpisz słowo kluczowe lub ograniczenia przed zapisaniem tego zapytania.</value-save-null>
       <inputSearch-invalid>W wejściu wyszukiwania są nieprawidłowe znaki.</inputSearch-invalid>
@@ -915,17 +915,17 @@
   <UISearchResult>
     <msg>
       <not-support>Nie ma szablonu Widoku dla tego węzła.</not-support>
-      <empty>Nie znaleziono żadnych wyników.</empty>
+      <empty>No results found.</empty>
       <access-denied>Nie możesz otworzyć tego folderu dlatego, że już nie istnieje, albo dlatego, że nie masz prawa dostępu do niego.</access-denied>
       <query-invalid>Zapytanie jest nieprawidłowe.</query-invalid>
     </msg>
     <header>
       <name>#{word.name}</name>
-      <path>Ścieżka</path>
+      <path>Path</path>
       <action>Akcja</action>
-      <shortcutPath>Ścieżka</shortcutPath>
+      <shortcutPath>Path</shortcutPath>
       <type>Typ</type>
-      <dateCreated>Data utworzenia</dateCreated>
+      <dateCreated>Date Created</dateCreated>
       <score>Wynik</score>
     </header>
     <title>
@@ -946,59 +946,59 @@
   <UIShowAllOwnedByUserResult>
     <msg>
       <not-support>Nie ma szablonu Widoku dla tego węzła</not-support>
-      <empty>Nie znaleziono żadnych wyników.</empty>
+      <empty>No results found.</empty>
       <access-denied>Nie można wyświetlić tego węzła, ponieważ szablon nie jest obsługiwany lub z powodu odmowy dostępu.</access-denied>
       <query-invalid>Zapytanie jest nieprawidłowe</query-invalid>
     </msg>
     <header>
       <name>#{word.name}</name>
-      <path>Ścieżka</path>
+      <path>Path</path>
       <action>Akcja</action>
-      <shortcutPath>Ścieżka</shortcutPath>
+      <shortcutPath>Path</shortcutPath>
       <type>Typ</type>
-      <dateCreated>Data utworzenia</dateCreated>
+      <dateCreated>Date Created</dateCreated>
       <score>Wynik</score>
     </header>
     <title>
-      <typeASC>Sortuj według rodzaju dokumentu, w porządku rosnącym</typeASC>
-      <typeDESC>Sortuj według rodzaju dokumentu, w porządku malejącym</typeDESC>
-      <scoreASC>Sortuj według punktacji w porządku rosnącym</scoreASC>
-      <scoreDESC>Sortuj według punktacji w porządku malejącym</scoreDESC>
-      <nameASC>Sortuj wg nazwy w porządku rosnącym</nameASC>
-      <nameDESC>Sortuj wg nazwy w porządku malejącym</nameDESC>
+      <typeASC>Sort by document type in ascending order</typeASC>
+      <typeDESC>Sort by document type in descending order</typeDESC>
+      <scoreASC>Sort by score in ascending order</scoreASC>
+      <scoreDESC>Sort by score in descending order</scoreDESC>
+      <nameASC>Sort by name in ascending order</nameASC>
+      <nameDESC>Sort by name in descending order</nameDESC>
       <datecreatedASC>Sortuj wg daty utworzenia w kolejności rosnącej</datecreatedASC>
       <datecreatedDESC>Sortuj wg daty utworzenia w kolejności malejącej</datecreatedDESC>
     </title>
     <tooltip>
-      <View>Zobacz ten węzeł</View>
+      <View>View this node</View>
       <OpenFolder>Przejdź do folderu</OpenFolder>
     </tooltip>
   </UIShowAllOwnedByUserResult>
   <UIShowAllFavouriteResult>
     <msg>
-      <not-support>Nie ma szablonu Widoku dla tego węzła</not-support>
+      <not-support>There is no View template for this node</not-support>
       <empty>Brak wyników wyszukiwania</empty>
-      <access-denied>Nie można wyświetlić tego węzła, ponieważ szablon nie jest obsługiwany lub z powodu odmowy dostępu.</access-denied>
-      <query-invalid>Zapytanie jest nieprawidłowe</query-invalid>
+      <access-denied>You cannot view this node, either because this template is not supported or because access is denied.</access-denied>
+      <query-invalid>The query is invalid</query-invalid>
     </msg>
     <header>
       <name>#{word.name}</name>
-      <path>Ścieżka</path>
+      <path>Path</path>
       <action>Akcja</action>
-      <shortcutPath>Ścieżka</shortcutPath>
+      <shortcutPath>Path</shortcutPath>
       <type>Typ</type>
-      <dateCreated>Data utworzenia</dateCreated>
+      <dateCreated>Date Created</dateCreated>
       <score>Wynik</score>
     </header>
     <title>
-      <typeASC>Sortuj według rodzaju dokumentu, w porządku rosnącym</typeASC>
-      <typeDESC>Sortuj według rodzaju dokumentu, w porządku malejącym</typeDESC>
+      <typeASC>Sort by document type in ascending order</typeASC>
+      <typeDESC>Sort by document type in descending order</typeDESC>
       <scoreASC>Sortuj po wynikach w porządku rosnącym</scoreASC>
       <scoreDESC>Sortuj po wynikach w porządku malejącym</scoreDESC>
-      <nameASC>Sortuj wg nazwy w porządku rosnącym</nameASC>
-      <nameDESC>Sortuj wg nazwy w porządku malejącym</nameDESC>
-      <datecreatedASC>Sortuj wg daty utworzenia w kolejności rosnącej</datecreatedASC>
-      <datecreatedDESC>Sortuj wg daty utworzenia w kolejności malejącej</datecreatedDESC>
+      <nameASC>Sort by name in ascending order</nameASC>
+      <nameDESC>Sort by name in descending order</nameDESC>
+      <datecreatedASC>Sort by created date in ascending order</datecreatedASC>
+      <datecreatedDESC>Sort by created date in descending order</datecreatedDESC>
     </title>
     <tooltip>
       <View>Zobacz ten węzeł</View>
@@ -1007,30 +1007,30 @@
   </UIShowAllFavouriteResult>
   <UIShowAllHiddenResult>
     <msg>
-      <not-support>Nie ma szablonu Widoku dla tego węzła.</not-support>
-      <empty>Nie znaleziono żadnych wyników.</empty>
-      <access-denied>Nie można wyświetlić tego węzła, ponieważ szablon nie jest obsługiwany lub z powodu odmowy dostępu.</access-denied>
-      <query-invalid>Zapytanie jest nieprawidłowe.</query-invalid>
+      <not-support>There is no View template for this node.</not-support>
+      <empty>No results found.</empty>
+      <access-denied>You cannot view this node, either because this template is not supported or because access is denied.</access-denied>
+      <query-invalid>The query is invalid.</query-invalid>
     </msg>
     <header>
       <name>#{word.name}</name>
-      <path>Ścieżka</path>
+      <path>Path</path>
       <action>Akcja</action>
-      <shortcutPath>Ścieżka</shortcutPath>
+      <shortcutPath>Path</shortcutPath>
       <type>Typ</type>
-      <dateCreated>Data utworzenia</dateCreated>
+      <dateCreated>Date Created</dateCreated>
       <score>Wynik</score>
       <AddRemoveFavourite>Dodaj/Usuń z ulubionych</AddRemoveFavourite>
     </header>
     <title>
-      <typeASC>Sortuj według rodzaju dokumentu, w porządku rosnącym</typeASC>
-      <typeDESC>Sortuj według rodzaju dokumentu, w porządku malejącym</typeDESC>
-      <scoreASC>Sortuj według punktacji w porządku rosnącym</scoreASC>
-      <scoreDESC>Sortuj według punktacji w porządku malejącym</scoreDESC>
-      <nameASC>Sortuj wg nazwy w porządku rosnącym</nameASC>
-      <nameDESC>Sortuj wg nazwy w porządku malejącym</nameDESC>
-      <datecreatedASC>Sortuj wg daty utworzenia w kolejności rosnącej</datecreatedASC>
-      <datecreatedDESC>Sortuj wg daty utworzenia w kolejności malejącej</datecreatedDESC>
+      <typeASC>Sort by document type in ascending order</typeASC>
+      <typeDESC>Sort by document type in descending order</typeDESC>
+      <scoreASC>Sort by score in ascending order</scoreASC>
+      <scoreDESC>Sort by score in descending order</scoreDESC>
+      <nameASC>Sort by name in ascending order</nameASC>
+      <nameDESC>Sort by name in descending order</nameDESC>
+      <datecreatedASC>Sort by created date in ascending order</datecreatedASC>
+      <datecreatedDESC>Sort by created date in descending order</datecreatedDESC>
     </title>
     <tooltip>
       <View>Zobacz ten węzeł</View>
@@ -1040,41 +1040,41 @@
   </UIShowAllHiddenResult>
   <UIShowAllTrashResult>
     <msg>
-      <not-support>Nie ma szablonu Widoku dla tego węzła.</not-support>
+      <not-support>There is no View template for this node.</not-support>
       <empty>Brak wyników wyszukiwania</empty>
-      <access-denied>Nie można wyświetlić tego węzła, ponieważ szablon nie jest obsługiwany lub z powodu odmowy dostępu.</access-denied>
-      <query-invalid>Zapytanie jest nieprawidłowe.</query-invalid>
+      <access-denied>You cannot view this node, either because this template is not supported or because access is denied.</access-denied>
+      <query-invalid>The query is invalid.</query-invalid>
     </msg>
     <header>
       <name>#{word.name}</name>
-      <path>Ścieżka</path>
+      <path>Path</path>
       <action>Akcja</action>
-      <shortcutPath>Ścieżka</shortcutPath>
+      <shortcutPath>Path</shortcutPath>
       <type>Typ</type>
-      <dateCreated>Data utworzenia</dateCreated>
+      <dateCreated>Date Created</dateCreated>
       <score>Wynik</score>
     </header>
     <title>
-      <typeASC>Sortuj według rodzaju dokumentu, w porządku rosnącym</typeASC>
-      <typeDESC>Sortuj według rodzaju dokumentu, w porządku malejącym</typeDESC>
-      <scoreASC>Sortuj według punktacji w porządku rosnącym</scoreASC>
-      <scoreDESC>Sortuj według punktacji w porządku malejącym</scoreDESC>
-      <nameASC>Sortuj wg nazwy w porządku rosnącym</nameASC>
-      <nameDESC>Sortuj wg nazwy w porządku malejącym</nameDESC>
-      <datecreatedASC>Sortuj wg daty utworzenia w kolejności rosnącej</datecreatedASC>
-      <datecreatedDESC>Sortuj wg daty utworzenia w kolejności malejącej</datecreatedDESC>
+      <typeASC>Sort by document type in ascending order</typeASC>
+      <typeDESC>Sort by document type in descending order</typeDESC>
+      <scoreASC>Sort by score in ascending order</scoreASC>
+      <scoreDESC>Sort by score in descending order</scoreDESC>
+      <nameASC>Sort by name in ascending order</nameASC>
+      <nameDESC>Sort by name in descending order</nameDESC>
+      <datecreatedASC>Sort by created date in ascending order</datecreatedASC>
+      <datecreatedDESC>Sort by created date in descending order</datecreatedDESC>
     </title>
     <tooltip>
-      <View>Zobacz ten węzeł</View>
-      <OpenFolder>Przejdź do folderu</OpenFolder>
+      <View>View this Node</View>
+      <OpenFolder>Go to Folder</OpenFolder>
       <DeletePermanently>Usuń trwale</DeletePermanently>
-      <RestoreFromTrash>Przywróć z kosza</RestoreFromTrash>
+      <RestoreFromTrash>Restore from Trash</RestoreFromTrash>
     </tooltip>
   </UIShowAllTrashResult>
   <UIConstraintsForm>
     <label>
       <constraints>UIConstraintsForm</constraints>
-      <metadataProperty>Właściwości</metadataProperty>
+      <metadataProperty>Properties</metadataProperty>
       <operator>Operator</operator>
       <contains>Zawiera wartość</contains>
       <notcontains>Nie zawiera wartości</notcontains>
@@ -1138,7 +1138,7 @@
   </NodeTypePopup>
   <CategoryPopup>
     <title>
-      <UICategoryManagerSearch>Dodaj kategorię wyszukiwania</UICategoryManagerSearch>
+      <UICategoryManagerSearch>Add Category to Search</UICategoryManagerSearch>
       <UIOneNodePathSelector>Wybierz kategorię</UIOneNodePathSelector>
     </title>
   </CategoryPopup>
@@ -1166,12 +1166,12 @@
       <label-Cancel>#{word.cancel}</label-Cancel>
     </button>
     <msg>
-      <not-result-found>Nie znaleziono żadnych wyników.</not-result-found>
+      <not-result-found>No results found.</not-result-found>
     </msg>
   </UICompareExactlyForm>
   <UIJCRAdvancedSearch>
     <label>
-      <name>Nazwa:</name>
+      <name>Name:</name>
       <selectBox>Wybierz styl zapytań:</selectBox>
       <query>Zapytanie:</query>
     </label>
@@ -1222,12 +1222,12 @@
   </property1MetadataPopup>
   <property2MetadataPopup>
     <title>
-      <UISelectPropertyForm>Wybierz właściwość</UISelectPropertyForm>
+      <UISelectPropertyForm>Select Property</UISelectPropertyForm>
     </title>
   </property2MetadataPopup>
   <property3MetadataPopup>
     <title>
-      <UISelectPropertyForm>Wybierz właściwość</UISelectPropertyForm>
+      <UISelectPropertyForm>Select Property</UISelectPropertyForm>
     </title>
   </property3MetadataPopup>
   <UISelectPropertyForm>
@@ -1249,9 +1249,9 @@
     <header>
       <name>Nazwa</name>
       <language>Język</language>
-      <query>Zapytanie</query>
+      <query>Query</query>
       <action>Akcje</action>
-      <path>Ścieżka</path>
+      <path>Path</path>
     </header>
   </UIECMSearch>
   <UIResult>
@@ -1281,7 +1281,7 @@
       <name>Nazwa</name>
       <type>Typ</type>
       <statement>Instrukcja</statement>
-      <permission>Uprawnienia</permission>
+      <permission>Permissions</permission>
       <action>Akcje</action>
     </header>
     <tooltip>
@@ -1294,7 +1294,7 @@
     </label>
     <msg>
       <confirm-delete-query>Czy na pewno chcesz usunąć to zapytanie?</confirm-delete-query>
-      <not-result-found>Nie znaleziono żadnych wyników.</not-result-found>
+      <not-result-found>No results found.</not-result-found>
     </msg>
   </UISavedQuery>
   <UIQueryResultPageIterator>
@@ -1315,7 +1315,7 @@
       <nodePath>Ścieżka eksportu</nodePath>
       <zip>Zip</zip>
       <systemView>Podgląd systemu</systemView>
-      <documentView>Zobacz dokument</documentView>
+      <documentView>Document View</documentView>
     </label>
     <action>
       <Cancel>#{word.cancel}</Cancel>
@@ -1330,7 +1330,7 @@
   -->
   <PopupUserSelector>
     <title>
-      <UIUserContainer>Selektor uprawnień</UIUserContainer>
+      <UIUserContainer>Permission Selector</UIUserContainer>
     </title>
   </PopupUserSelector>
   <UIPopupTaxonomy>
@@ -1345,7 +1345,13 @@
   ###############################################################################
   -->
   <UIVersionInfo>
+    <title>Version history</title>
+    <summary>
+      <empty>Click here to add a summary</empty>
+    </summary>
     <tooltip>
+      <version>Wersja</version>
+      <baseVersion>Base Version</baseVersion>
       <addLabel>Dodaj etykietę</addLabel>
       <removeLable>Usuń etykietę</removeLable>
       <restoreVersion>Przywróć wersję</restoreVersion>
@@ -1356,6 +1362,9 @@
     <msg>
       <have-no-view-template>Widok szablonu nie jest obsługiwany.</have-no-view-template>
       <cannot-remove-version>Nie można usunąć wersji podstawowej.</cannot-remove-version>
+      <error-removing-version>An error occurred while deleting this version.</error-removing-version>
+      <error-removing-referenced-version>This version is referenced and can't be removed.</error-removing-referenced-version>
+      <confirm-restore>Are you sure you want to restore this version?</confirm-restore>
       <confirm-delete>Czy na pewno chcesz usunąć tę wersję?</confirm-delete>
       <not-checked-out>Musisz sprawdzić ten węzeł przed przywróceniem.</not-checked-out>
       <invalid-item-state>Nie można przywrócić tej wersji, ponieważ jeden lub więcej elementów zostało usuniętych lub przeniesionych podczas innej sesji.</invalid-item-state>
@@ -1363,7 +1372,15 @@
     <action>
       <close>#{word.close}</close>
       <close-view>Zamknij Widok</close-view>
+      <compare-versions>Compare selected versions</compare-versions>
     </action>
+    <labels>
+      <version>Wersja</version>
+      <date>Data</date>
+      <author>Modified By</author>
+      <summary>Streszczenie</summary>
+      <action>Akcja</action>
+    </labels>
   </UIVersionInfo>
   <!--
   ################################################################################
@@ -1399,13 +1416,13 @@
       <e_2097152>Usuń wersję</e_2097152>
       <e_4194304>Zablokuj</e_4194304>
       <e_8388608>Odblokuj</e_8388608>
-      <e_16777216>Czytaj</e_16777216>
+      <e_16777216>Read</e_16777216>
     </eventName>
     <label>
       <operation>Operacja</operation>
-      <userName>Nazwa użytkownika</userName>
-      <date>Data</date>
-      <version>Wersja</version>
+      <userName>Username</userName>
+      <date>Date</date>
+      <version>Version</version>
     </label>
   </UIAuditingInfo>
 
@@ -1471,11 +1488,16 @@
   -->
   <UIDiff>
     <label>
+      <backTo>Back to version history</backTo>
       <diffTitle>Porównanie dwóch wersji</diffTitle>
-      <noChange>Brak zmiany pomiędzy dwiema wersjami</noChange>
-      <baseVerion>Wersja bazowa</baseVerion>
-      <compareVerion>Wersja</compareVerion>
+      <noContent>There is no content to compare</noContent>
+      <compareVerion>Version</compareVerion>
       <can-not-compare>Porównanie dwóch wersji nie powiodło się</can-not-compare>
+      <compare-unavailable>Version comparison is not available for this document</compare-unavailable>
+      <DateChange>On {0}</DateChange>
+      <PreviousAndNextCompare>Zmiany od {0} do {1}</PreviousAndNextCompare>
+      <ComparedWith>W porównaniu z</ComparedWith>
+      <restoredFrom>Restored from version {0}</restoredFrom>
     </label>
   </UIDiff>
   <!--
@@ -1486,8 +1508,8 @@
   <UIImportNode>
     <label>
       <format>Format</format>
-      <systemView>Podgląd systemu</systemView>
-      <documentView>Zobacz dokument</documentView>
+      <systemView>System View</systemView>
+      <documentView>Document View</documentView>
       <upload>Prześlij plik</upload>
     </label>
     <action>
@@ -1499,7 +1521,7 @@
       <import-successful>Zaimportowany.</import-successful>
       <filename-invalid>Przeglądaj plik .xml w polu „Dodaj plik”, aby importować.</filename-invalid>
       <filetype-error>Nie można importować przesłanego pliku. Plik .xml może być nieprawidłowy.</filetype-error>
-      <xml-invalid>There is an invalid character at position [row, column]:{0} in {1} file</xml-invalid>
+      <xml-invalid>Nieprawidłowy znak w pozycji [wiersz, kolumna]:{0} w pliku {1}</xml-invalid>
       <mimetype-invalid>Możesz importować tylko pliki z rozszerzeniami .zip lub .xml.</mimetype-invalid>
       <access-denied>Odmowa dostępu. Nie masz uprawnień aby zaimportować.</access-denied>
       <constraint-violation-exception>Importowanie danych jest niemożliwe. Typ '{0}' nie jest dozwolony w tym miejscu.</constraint-violation-exception>
@@ -1519,7 +1541,7 @@
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
     </action>
-    <title>Dodaj etykietę</title>
+    <title>Add Label</title>
     <msg>
       <label-invalid>Etykieta zawiera pewne nieprawidłowe znaki.</label-invalid>
       <label-exist>Wartość '{0}' już istnieje.</label-exist>
@@ -1531,7 +1553,7 @@
   ###############################################################################
   -->
   <UIRemoveLabelForm>
-    <title>Usuń etykietę</title>
+    <title>Remove Label</title>
     <label>
       <label>Wybierz etykietę</label>
     </label>
@@ -1550,7 +1572,7 @@
   </UIVersionTree>
   <UIViewVersion>
     <label>
-      <nodeType>Typ węzła</nodeType>
+      <nodeType>Node Type</nodeType>
       <nodeName>Nazwa węzła</nodeName>
       <VersionNumber>Numer wersji</VersionNumber>
       <VersionLabels>Etykiety wersji</VersionLabels>
@@ -1576,7 +1598,7 @@
     </action>
     <tab>
       <label>
-        <UICategoriesAddedList>Odnośne kategorie</UICategoriesAddedList>
+        <UICategoriesAddedList>Referenced Categories</UICategoriesAddedList>
         <UIOneNodePathSelector>Wybierz kategorię</UIOneNodePathSelector>
       </label>
     </tab>
@@ -1607,7 +1629,7 @@
       <action>Akcja</action>
     </header>
     <info>
-      <child-not-found>Ten węzeł nie ma żadnych węzłów potomnych.</child-not-found>
+      <child-not-found>This node does not have any child nodes.</child-not-found>
     </info>
   </UITreeList>
   <!--
@@ -1652,7 +1674,7 @@
   -->
   <UIClipboard>
     <header>
-      <path>Ścieżka</path>
+      <path>Path</path>
       <command>Cm</command>
       <action>Akcja</action>
     </header>
@@ -1759,8 +1781,8 @@
   -->
   <editActionPopup>
     <title>
-      <UIActionForm>Edytuj Akcję</UIActionForm>
-      <EditFormAction>Edytuj Akcję</EditFormAction>
+      <UIActionForm>Edit Action</UIActionForm>
+      <EditFormAction>Edit Action</EditFormAction>
     </title>
   </editActionPopup>
   <UIActionViewContainer>
@@ -1825,7 +1847,7 @@
     <title>
       <UIOneNodePathSelector>Wybierz lokalizację</UIOneNodePathSelector>
       <UIPermissionSelector>Przeglądarka uprawnień</UIPermissionSelector>
-      <UICategoriesSelector>Dodaj kategorie</UICategoriesSelector>
+      <UICategoriesSelector>Add Categories</UICategoriesSelector>
     </title>
   </PopupComponent>
   <EditFormAction>
@@ -1946,7 +1968,7 @@
   -->
    <ECMPhoneFormatValidator>
      <msg>
-       <Invalid>The field '{0}' contains invalid an Phone number. Please enter another value.</Invalid>
+       <Invalid>Pole '{0}' zawiera nieprawidłowy numer telefonu. Wprowadź inną wartość.</Invalid>
      </msg>
   </ECMPhoneFormatValidator>
   <ECMNameValidator>
@@ -1985,7 +2007,7 @@
     <msg>Ten element już istnieje.</msg>
   </ItemExistsException>
   <AccessControlException>
-    <msg>Odmowa dostępu. Nie masz uprawnień do wykonania tej czynności.</msg>
+    <msg>Access denied. You do not have permission to perform this action.</msg>
   </AccessControlException>
   <AccessDeniedException>
     <msg>Odmowa dostępu.</msg>
@@ -2066,9 +2088,9 @@
   </RepeatIntervalValidator>
   <UIPermissionSelector>
     <label>
-      <selectGroup>Wybierz grupę</selectGroup>
-      <selectUser>Wybierz użytkownika</selectUser>
-      <selectMembership>Wybierz członkostwo</selectMembership>
+      <selectGroup>Select Group</selectGroup>
+      <selectUser>Select User</selectUser>
+      <selectMembership>Select Membership</selectMembership>
     </label>
   </UIPermissionSelector>
   <!--
@@ -2105,11 +2127,11 @@
   -->
   <UIPublicationLogList>
     <header>
-      <date>Data</date>
+      <date>Date</date>
       <newState>Nowy stan</newState>
       <user>Użytkownik</user>
       <description>Opis</description>
-      <version>Wersja</version>
+      <version>Version</version>
       <visibility>Widoczność</visibility>
     </header>
     <action>
@@ -2123,7 +2145,7 @@
   -->
   <UIVersionTreeList>
     <header>
-      <version>Wersja</version>
+      <version>Version</version>
       <state>Status</state>
     </header>
   </UIVersionTreeList>
@@ -2186,9 +2208,9 @@
   -->
   <UIGroupMemberSelector>
     <label>
-      <selectGroup>Wybierz grupę</selectGroup>
-      <selectUser>Wybierz użytkownika</selectUser>
-      <selectMembership>Wybierz członkostwo</selectMembership>
+      <selectGroup>Select Group</selectGroup>
+      <selectUser>Select User</selectUser>
+      <selectMembership>Select Membership</selectMembership>
     </label>
   </UIGroupMemberSelector>
   <!--
@@ -2244,7 +2266,7 @@
 
   <PopUpSelectDrive>
     <title>
-      <UIDriveSelector>Wybierz dysk</UIDriveSelector>
+      <UIDriveSelector>Select Drive</UIDriveSelector>
     </title>
   </PopUpSelectDrive>
 
@@ -2256,7 +2278,7 @@
 
   <DriveNameInput>
     <title>
-      <SelectDrive>Wybierz dysk</SelectDrive>
+      <SelectDrive>Select Drive</SelectDrive>
     </title>
   </DriveNameInput>
 
@@ -2289,13 +2311,13 @@
     <msg>
       <addFolder-successful>Element Symlink '{0}' został dodany z powodzeniem.</addFolder-successful>
       <name-invalid>Wprowadź nazwę dowiązania symbolicznego.</name-invalid>
-      <name-not-allowed>Nazwa ta nie jest dozwolona.</name-not-allowed>
-      <fileName-error>Nazwa pliku jest nieprawidłowa.</fileName-error>
+      <name-not-allowed>This name is not allowed.</name-not-allowed>
+      <fileName-error>The file name is invalid.</fileName-error>
       <constraint-violation>Nie można dodać typu węzła '{0}' do węzła bieżącego.</constraint-violation>
       <repository-exception>Odmowa dostępu. Nie masz uprawnień do dodawania dowiązania symbolicznego do tego węzła.</repository-exception>
-      <numberformat-exception>Nie można zapisać tego folderu. Nazwa musi być w formacie liczbowym.</numberformat-exception>
+      <numberformat-exception>You cannot save this folder. The name provided must be in numerical format.</numberformat-exception>
       <path-node-invalid>Podaj węzeł ścieżki.</path-node-invalid>
-      <path-node-not-allowed>Nazwa ta nie jest dozwolona.</path-node-not-allowed>
+      <path-node-not-allowed>This name is not allowed.</path-node-not-allowed>
       <non-node>Proszę wybrać zaufany węzeł docelowy; możesz nie mieć prawa do odczytu tego węzła.</non-node>
       <cannot-save>Nie możesz dodać dowiązania symbolicznego dla tego typu węzła.</cannot-save>
       <item-exists-exception>Nazwa węzła już istnieje.</item-exists-exception>
@@ -2322,9 +2344,9 @@
       <fileName-error>Nazwa pliku jest nieprawidłowa.</fileName-error>
       <constraint-violation>Nie można dodać typu węzła '{0}' do węzła bieżącego.</constraint-violation>
       <repository-exception>Odmowa dostępu. Nie masz uprawnień do dodawania dowiązania symbolicznego do tego węzła.</repository-exception>
-      <numberformat-exception>Nie można zapisać tego folderu. Nazwa musi być w formacie liczbowym.</numberformat-exception>
+      <numberformat-exception>You cannot save this folder. The name provided must be in numerical format.</numberformat-exception>
       <path-node-invalid>Podaj węzeł ścieżki.</path-node-invalid>
-      <path-node-not-allowed>Nazwa ta nie jest dozwolona.</path-node-not-allowed>
+      <path-node-not-allowed>This name is not allowed.</path-node-not-allowed>
       <non-node>Proszę wybrać zaufany węzeł docelowy; możesz nie mieć prawa do odczytu tego węzła.</non-node>
       <cannot-save>Wystąpił błąd podczas tworzenia dowiązań symbolicznych.</cannot-save>
       <item-exists-exception>Nazwa węzła już istnieje.</item-exists-exception>
@@ -2355,7 +2377,7 @@
     <msg>
       <create-link-problem>Nie można utworzyć łącza do węzła '{0}' na '{1}'.</create-link-problem>
       <dest-node-is-link>Węzeł docelowy „{0}” jest już dowiązaniem symbolicznym, więc nie można utworzyć dowiązania symbolicznego wewnątrz niego.</dest-node-is-link>
-      <selected-is-link>The selected node '{0}' is already a link. You cannot create a link that points to another link.</selected-is-link>
+      <selected-is-link>Wybrany węzeł '{0}' jest już łączem. Nie możesz utworzyć łącza wskazującego na kolejne łącze.</selected-is-link>
       <confirm-create-link>Czy chcesz utworzyć link do tej lokalizacji?</confirm-create-link>
     </msg>
   </UIWorkingArea>
@@ -2377,7 +2399,7 @@
 
   <UIPopupTaxonomy>
     <title>
-      <UIOneTaxonomySelector>Dodaj kategorie</UIOneTaxonomySelector>
+      <UIOneTaxonomySelector>Add Categories</UIOneTaxonomySelector>
     </title>
   </UIPopupTaxonomy>
 
@@ -2398,7 +2420,7 @@
   <UISimpleCategoryManager>
     <tab>
       <label>
-        <UICategoriesAddedList>Odnośne kategorie</UICategoriesAddedList>
+        <UICategoriesAddedList>Referenced Categories</UICategoriesAddedList>
         <UIOneNodePathSelector>Wybierz kategorię</UIOneNodePathSelector>
       </label>
     </tab>
@@ -2435,10 +2457,10 @@
       <ReplaceData>Zamiana danych</ReplaceData>
       <Back>Powrót do zmiany nazwy</Back>
       <Keepfile>Zatrzymaj oba pliki</Keepfile>
-<ReadOnly>Open Read-only</ReadOnly>
-<Cancel>Anuluj</Cancel>
-      <KeepBoth>Keep Both</KeepBoth>
-      <CreateNewVersion>Create a new version</CreateNewVersion>
+<ReadOnly>Otwórz tylko do odczytu</ReadOnly>
+<Cancel>Cancel</Cancel>
+      <KeepBoth>Zatrzymaj obie</KeepBoth>
+      <CreateNewVersion>Utwórz nową wersję</CreateNewVersion>
     </label>
   </UIConfirmMessage>
 
@@ -2455,7 +2477,7 @@
 
   <PopupComponent>
     <title>
-      <UIOneTaxonomySelector>Dodaj kategorie</UIOneTaxonomySelector>
+      <UIOneTaxonomySelector>Add Categories</UIOneTaxonomySelector>
     </title>
   </PopupComponent>
 
@@ -2500,8 +2522,8 @@
 
   <Import>
     <label>
-      <docview>Zobacz dokument</docview>
-      <sysview>Podgląd systemu</sysview>
+      <docview>Document View</docview>
+      <sysview>System View</sysview>
     </label>
   </Import>
 
@@ -2601,7 +2623,7 @@
 
   <Comments>
     <tooltip>
-      <remove-comment>Usuń ten komentarz</remove-comment>
+      <remove-comment>Remove this comment</remove-comment>
       <edit-comment>Edytuj ten komentarz</edit-comment>
     </tooltip>
   </Comments>
@@ -2631,7 +2653,7 @@
 
   <UIViewSearchResult>
     <tooltip>
-      <remove-attachment>Czy na pewno chcesz usunąć ten plik załącznika?</remove-attachment>
+      <remove-attachment>Are you sure you want to remove this attachment file?</remove-attachment>
     </tooltip>
   </UIViewSearchResult>
 
@@ -2667,7 +2689,7 @@
 
   <UISavedSearches>
     <title>
-      <savedSearches>Zapisane wyszukiwania</savedSearches>
+      <savedSearches>Saved Searches</savedSearches>
     </title>
   </UISavedSearches>
   <DocumentType>
@@ -2688,7 +2710,7 @@
       <Documents>Dokument</Documents>
       <Content>Zawartość</Content>
     </label>
-    <title>Preferencje konfiguracji filtrów</title>
+    <title>Set Up Filter Preferences</title>
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
@@ -2698,7 +2720,7 @@
   <UIAllItemsByType>
     <label>
     <ByType>Filtruj według typu</ByType>
-      <DocumentFilterConfiguration>Preferencje konfiguracji filtrów</DocumentFilterConfiguration>
+      <DocumentFilterConfiguration>Set Up Filter Preferences</DocumentFilterConfiguration>
     </label>
     <title>
       <ShowVideo>Pokaż wszystkie pliki wideo</ShowVideo>
@@ -2782,7 +2804,7 @@
   <UIEditingTagsForm>
     <header>
       <name>Nazwa</name>
-      <relatedDocuments>Dokumenty powiązane</relatedDocuments>
+      <relatedDocuments>Related Documents</relatedDocuments>
       <action>Akcja</action>
     </header>
     <action>
@@ -2811,7 +2833,7 @@
     </action>
     <label>
       <tagName>Nazwa tagu:</tagName>
-      <relatedDocuments>Dokumenty powiązane</relatedDocuments>
+      <relatedDocuments>Related Documents</relatedDocuments>
     </label>
   </UITagForm>
 
@@ -2834,7 +2856,7 @@
 
   <UIPopupMenu>
     <msg>
-      <editTagAccessDenied>Odmowa dostępu.</editTagAccessDenied>
+      <editTagAccessDenied>Access denied.</editTagAccessDenied>
     </msg>
   </UIPopupMenu>
 
@@ -2846,7 +2868,7 @@
 
     <PopupComponent>
     <title>
-      <UINodeTypeSelector>Wybierz typ węzła</UINodeTypeSelector>
+      <UINodeTypeSelector>Select Node Type</UINodeTypeSelector>
     </title>
   </PopupComponent>
 
@@ -2950,7 +2972,7 @@
     </button>
     <revisions>
       <version>Zmiany</version>
-      <date>Data</date>
+      <date>Date</date>
       <author>Autor</author>
       <status>Status</status>
       <action>Akcja</action>
@@ -2982,7 +3004,7 @@
     </scheduled>
     <title>
       <preview>Podgląd</preview>
-      <restore>Przywracanie</restore>
+      <restore>Restore</restore>
     </title>
     <msg>
       <have-no-view-template>Widok szablonu nie jest obsługiwany.</have-no-view-template>
@@ -2991,21 +3013,21 @@
   </UIPublicationPanel>
   <UIPublicationHistory>
     <header>
-      <date>Data</date>
+      <date>Date</date>
       <versionName>Nazwa edycji</versionName>
       <currentState>Aktualny stan</currentState>
       <user>Autor</user>
       <description>Opis</description>
     </header>
-    <create-version>New version is created</create-version>
+    <create-version>Została stworzona nowa wersja</create-version>
   </UIPublicationHistory>
   
   <UIPublicationSchedule>
     <label>
       <introduction>Można zaplanować publikację dokumentu. Wybierz datę, z jaką chcesz opublikować dokument</introduction>
       <no-schedule-info>Nie ma harmonogramu publikacji dla tego dokumentu</no-schedule-info>
-      <UIPublicationPanelStartDateInput>Start Publication date</UIPublicationPanelStartDateInput>
-      <UIPublicationPanelEndDateInput>End Publication date</UIPublicationPanelEndDateInput>
+      <UIPublicationPanelStartDateInput>Data rozpoczęcia publikacji</UIPublicationPanelStartDateInput>
+      <UIPublicationPanelEndDateInput>Data zakończenia publikacji</UIPublicationPanelEndDateInput>
     </label>
     <msg>
       <save-finished>Nowy harmonogram publikacji został zapisany pomyślnie.</save-finished>
@@ -3029,8 +3051,8 @@
   </UIPublicationPanel>
   <UIPopupWindow>
     <title>
-      <UIPublicationContainer>Zarządzaj publikacją</UIPublicationContainer>
-      <UIPublishingPanel>Zarządzaj publikacją</UIPublishingPanel>
+      <UIPublicationContainer>Manage Publication</UIPublicationContainer>
+      <UIPublishingPanel>Manage Publication</UIPublishingPanel>
     </title>
   </UIPopupWindow>
   <WCMContentView>
@@ -3081,9 +3103,10 @@
     </DrivesArea>
     <msg>
       <no-view-found>Brak wyświetleń stosowanych do twoich uprawnień dostępu w dysku '{0}'.</no-view-found>
-      <access-denied>Odmowa dostępu. Możesz nie mieć uprawnień w obszarze roboczym napędu „{0}”.</access-denied>
+      <access-denied>Access denied. You may not have permission in the workspace of drive '{0}'.</access-denied>
+      <not-found>The document you are trying to access is no longer available.</not-found>
       <empty-drives>Odmowa dostępu. W tym dysku brakuje repozytorium lub nie masz dostępu do żadnych dysków w tym repozytorium.</empty-drives>
-      <workspace-not-exist>Napęd „{0}” został zapisany w jednej nierozpoznanej przestrzeni roboczej. Proszę zmienić konfigurację tego napędu.</workspace-not-exist>
+      <workspace-not-exist>Drive '{0}' was stored in one unrecognized workspace. Please reconfigure this drive.</workspace-not-exist>
     </msg>
   </UIDrivesArea>
   <UIJcrExplorerEditForm>
@@ -3112,7 +3135,7 @@
   <false>Fałsz</false>
   <Electronic>Elektroniczny</Electronic>
   <Paper>Papierowy</Paper>
-  <NONE>Brak</NONE>
+  <NONE>None</NONE>
   <CLASSIFIED>Sklasyfikowany</CLASSIFIED>
   <UNCLASSIFIED>Niesklasyfikowany</UNCLASSIFIED>
   <NOCONTRACT>Brak Kontraktu</NOCONTRACT>
@@ -3162,16 +3185,16 @@
     <InvalidCharacters>Nieprawidłowe znaki zostaną zamienione na '-'</InvalidCharacters>
     <DropFileMessage>Upuścić pliki tutaj w bieżącym folderze</DropFileMessage>
     <Close>#{word.close}</Close>
-    <in>w</in>
+    <in>in</in>
     <MaxFileSizeAlert>The file size exceeds the size limit of</MaxFileSizeAlert>
     <Waiting>Czekaj</Waiting>
     <Error>Błąd</Error>
-    <or>lub</or>
+    <or>or</or>
     <AlreadyInUse>Obecnie w użyciu</AlreadyInUse>
     <Keep>Zachowaj oba</Keep>
-    <Replace>Zamień</Replace>
-    <Canceled>Anulowane</Canceled>
-      <UploadNewVersion>Upload new version</UploadNewVersion>
+    <Replace>Replace</Replace>
+    <Canceled>Canceled</Canceled>
+      <UploadNewVersion>Prześlij nową wersję</UploadNewVersion>
     <Cancel>#{word.cancel}</Cancel>
     <AbortAllConfirmation>Czy chcesz, aby przerwać wszystkie pliki w toku?</AbortAllConfirmation>
   </label>
@@ -3187,9 +3210,9 @@
   <FileView>
     <label>
       <name>Nazwa</name>
-      <date>Data</date>
+      <date>Date</date>
       <size>Rozmiar</size>
-      <sortBy>Sortuj według:</sortBy>
+      <sortBy>Sort by:</sortBy>
       <filesAreSelected>Pliki są wybierane.</filesAreSelected>
       <ClearSelection>Wyczyść zaznaczenie</ClearSelection>
       <more>Więcej</more>
@@ -3201,17 +3224,17 @@
     </msg>
   </UIPropertyForm>
   <UIDocumentAutoVersionForm>
-    <msg>A document {0} already exists. What do you want to do?</msg>
+    <msg>Dokument {0} już istnieje. Co zamierzasz zrobić?</msg>
     <UIChkRememberNonVersioned>
-      <label>Remember my choice for all others non-versioned documents</label>
+      <label>Zapamiętaj mój wybór dla wszystkich innych dokumentów nieopatrzonych numerem wersji</label>
     </UIChkRememberNonVersioned>
     <UIChkRememberVersioned>
-      <label>Remember my choice for all other versioned documents</label>
+      <label>Zapamiętaj mój wybór dla wszystkich innych dokumentów opatrzonych numerem wersji</label>
     </UIChkRememberVersioned>
   </UIDocumentAutoVersionForm>
   <DocumentAuto>
-    <message>A new version of the document {0} has been created successfully.</message>
-    <messageMultiFile>A new version of the document has been created.</messageMultiFile>
+    <message>Pomyślnie utworzono nową wersję dokumentu {0}.</message>
+    <messageMultiFile>Utworzono nową wersję dokumentu.</messageMultiFile>
   </DocumentAuto>
   <!--
   ###################################################################################

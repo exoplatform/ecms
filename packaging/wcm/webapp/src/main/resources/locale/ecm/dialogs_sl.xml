@@ -15,7 +15,7 @@
         <query-items>Poizvedbe elementov</query-items>
         <schedule-type>Vrsta urnika</schedule-type>
         <remove>Odstrani element</remove>
-        <add>Dodajte element</add>
+        <add>Dodaj element</add>
         <expand>Razširi</expand>
       </label>
     </dialog>
@@ -287,10 +287,10 @@
   <ScriptAction>
     <dialog>
       <label>
-        <id>ID</id>
+        <id>Id</id>
         <name>Ime</name>
         <lifecycle>Življenjski cikel</lifecycle>
-        <homePath>Pot domov</homePath>
+        <homePath>Home Path</homePath>
         <targetWorkspace>Ciljni delovni prostor</targetWorkspace>
         <targetPath>Ciljna pot</targetPath>
       </label>
@@ -313,7 +313,7 @@
 <false>Napačno</false>
 <Electronic>Elektronska</Electronic>
 <Paper>Papir</Paper>
-<NONE>Brez</NONE>
+<NONE>None</NONE>
 <CLASSIFIED>Razvrščeni</CLASSIFIED>
 <UNCLASSIFIED>Nerazvrščeni</UNCLASSIFIED>
 <NOCONTRACT>Ni pogodbe</NOCONTRACT>
@@ -335,7 +335,7 @@
     <dialog>
       <label>
         <isDeep>Podrobneje</isDeep>
-        <nodetypes>Vrste vozlišč</nodetypes>
+        <nodetypes>Node Types</nodetypes>
         <affectedNodeTypeNames>Vpliva na vrste vozlišč</affectedNodeTypeNames>
       </label>
     </dialog>
@@ -345,7 +345,7 @@
     <dialog>
       <label>
         <isDeep>Podrobneje</isDeep>
-        <nodetypes>Vrste vozlišč</nodetypes>
+        <nodetypes>Node Types</nodetypes>
         <affectedNodeTypeNames>Vpliva na vrste vozlišč</affectedNodeTypeNames>
       </label>
     </dialog>
@@ -355,7 +355,7 @@
     <dialog>
       <label>
         <isDeep>Podrobneje</isDeep>
-        <nodetypes>Vrste vozlišč</nodetypes>
+        <nodetypes>Node Types</nodetypes>
         <affectedNodeTypeNames>Vpliva na vrste vozlišč</affectedNodeTypeNames>
       </label>
     </dialog>
@@ -365,7 +365,7 @@
     <dialog>
       <label>
         <isDeep>Podrobneje</isDeep>
-        <nodetypes>Vrste vozlišč</nodetypes>
+        <nodetypes>Node Types</nodetypes>
         <affectedNodeTypeNames>Vpliva na vrste vozlišč</affectedNodeTypeNames>
       </label>
     </dialog>

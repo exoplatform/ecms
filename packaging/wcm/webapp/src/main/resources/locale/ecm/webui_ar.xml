@@ -15,7 +15,7 @@
     </info>
     <action>
       <title>
-        <select>اختيار</select>
+        <select>Select</select>
       </title>
     </action>
   </UITreeList>
@@ -50,7 +50,7 @@
     <title>
       <UIPermissionUser>اختيار المستخدم</UIPermissionUser>
       <UIPermissionMembership>اختيارالعضوية</UIPermissionMembership>
-      <TaxoSelectUserOrGroup>اختيار عُضويّة</TaxoSelectUserOrGroup>
+      <TaxoSelectUserOrGroup>Select Membership</TaxoSelectUserOrGroup>
     </title>
   </SelectUserOrGroup>
   <UIPermissionUser>
@@ -67,8 +67,8 @@
   </UIPermissionMembership>
   <TaxoSelectUserOrGroup>
     <label>
-      <selectGroup>اختيار مجموعة</selectGroup>
-      <selectMembership>اختيار عُضويّة</selectMembership>
+      <selectGroup>Select Group</selectGroup>
+      <selectMembership>Select Membership</selectMembership>
     </label>
   </TaxoSelectUserOrGroup>
   <!--
@@ -78,7 +78,7 @@
   -->
   <UICLVConfigTargetPageSelectorPopupWindow>
     <title>
-      <UIPageSelector>مُنتق الصفحات</UIPageSelector>
+      <UIPageSelector>Page Selector</UIPageSelector>
     </title>
   </UICLVConfigTargetPageSelectorPopupWindow>
   <!--
@@ -88,7 +88,7 @@
   -->
   <rootNodeInfo>
     <title>
-      <AddRootNode>إضافة العقدة الجذر</AddRootNode>
+      <AddRootNode>Add Root Node</AddRootNode>
     </title>
   </rootNodeInfo>
   <!--
@@ -98,7 +98,7 @@
   -->
   <UIMetadataAnyPermission>
     <label>
-      <anyPermission>صلاحيّة للجميع</anyPermission>
+      <anyPermission>Any Permission</anyPermission>
     </label>
   </UIMetadataAnyPermission>
 </bundle>

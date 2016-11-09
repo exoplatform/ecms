@@ -7,15 +7,15 @@
   -->
   <UITreeList>
     <header>
-      <name>Nom</name>
-      <action>Afegeix</action>
+      <name>Name</name>
+      <action>Add</action>
     </header>
     <info>
       <child-not-found>No s'ha trobat el node secundari!</child-not-found>
     </info>
     <action>
       <title>
-        <select>Selecciona</select>
+        <select>Select</select>
       </title>
     </action>
   </UITreeList>
@@ -26,7 +26,7 @@
   -->
   <UISelectedCategoriesGrid>
     <header>
-      <categoryName>Nom de la categoria</categoryName>
+      <categoryName>Category name</categoryName>
       <categoryPath>Ruta de la categoria</categoryPath>
       <action>#{word.action}</action>
     </header>
@@ -48,27 +48,27 @@
   -->
   <SelectUserOrGroup>
     <title>
-      <UIPermissionUser>Selecciona usuari/a</UIPermissionUser>
-      <UIPermissionMembership>Selecciona l'Afiliació</UIPermissionMembership>
-      <TaxoSelectUserOrGroup>Selecciona l'Afiliació</TaxoSelectUserOrGroup>
+      <UIPermissionUser>Select User</UIPermissionUser>
+      <UIPermissionMembership>Select Membership</UIPermissionMembership>
+      <TaxoSelectUserOrGroup>Select Membership</TaxoSelectUserOrGroup>
     </title>
   </SelectUserOrGroup>
   <UIPermissionUser>
     <label>
-      <selectUser>Selecciona usuari/a</selectUser>
+      <selectUser>Select User</selectUser>
       <selectGroup>Examina i selecciona un grup</selectGroup>
     </label>
   </UIPermissionUser>
   <UIPermissionMembership>
     <label>
-      <selectUser>Selecciona l'Afiliació</selectUser>
+      <selectUser>Select Membership</selectUser>
       <selectGroup>Examina i selecciona un grup</selectGroup>
     </label>
   </UIPermissionMembership>
   <TaxoSelectUserOrGroup>
     <label>
-      <selectGroup>Selecciona Grup</selectGroup>
-      <selectMembership>Selecciona l'Afiliació</selectMembership>
+      <selectGroup>Select Group</selectGroup>
+      <selectMembership>Select Membership</selectMembership>
     </label>
   </TaxoSelectUserOrGroup>
   <!--
@@ -78,7 +78,7 @@
   -->
   <UICLVConfigTargetPageSelectorPopupWindow>
     <title>
-      <UIPageSelector>Selector de pàgina</UIPageSelector>
+      <UIPageSelector>Page Selector</UIPageSelector>
     </title>
   </UICLVConfigTargetPageSelectorPopupWindow>
   <!--
@@ -88,7 +88,7 @@
   -->
   <rootNodeInfo>
     <title>
-      <AddRootNode>Afegeix el Node Arrel</AddRootNode>
+      <AddRootNode>Add Root Node</AddRootNode>
     </title>
   </rootNodeInfo>
   <!--
@@ -98,7 +98,7 @@
   -->
   <UIMetadataAnyPermission>
     <label>
-      <anyPermission>Qualsevol Permís</anyPermission>
+      <anyPermission>Any Permission</anyPermission>
     </label>
   </UIMetadataAnyPermission>
 </bundle>

@@ -2,18 +2,18 @@
 <bundle>
   <EditingPortlet>
     <label>
-      <Editing>Chỉnh sửa</Editing>
+      <Editing>Mode:</Editing>
     </label>
     <msg>
-      <not-permission>Bạn không có quyền thực hiện hành động này.</not-permission>
+      <not-permission>You don't have permission to do this action.</not-permission>
     </msg>
   </EditingPortlet>
 
   <UIEditingForm>
     <label>
       <option>
-        <Draft>Bản nháp</Draft>
-        <Published>Đã xuất bản</Published>
+        <Draft>Edit</Draft>
+        <Published>Published</Published>
       </option>
     </label>
   </UIEditingForm>

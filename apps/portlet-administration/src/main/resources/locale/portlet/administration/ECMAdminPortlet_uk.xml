@@ -40,13 +40,11 @@
   -->
   <UITaxonomyWorkingArea>
     <msg>
-      <referential-integrity>Не вдалося прочитати з джерела файлу або потрібна вам категорія є підкатегорією.
-      </referential-integrity>
+      <referential-integrity>Не вдалося прочитати з джерела файлу або потрібна вам категорія є підкатегорією.</referential-integrity>
       <no-taxonomy-selected>Потрібно скопіювати чи вирізати принаймні одну категорію.</no-taxonomy-selected>
       <node-is-cutting>Не можна вставити тут. Вузол категорії '{0}' може бути вирізаний.</node-is-cutting>
       <can-not-paste>Немає даних в буфері обміну.</can-not-paste>
-      <reference-exception>Не можна видалити цю категорію, оскільки в даний час на неї посилається контент.
-      </reference-exception>
+      <reference-exception>Не можна видалити цю категорію, оскільки в даний час на неї посилається контент.</reference-exception>
       <path-error>Помилка під час видалення цього вузла категорії.</path-error>
     </msg>
   </UITaxonomyWorkingArea>
@@ -71,14 +69,10 @@
   <UITaxonomyTreeContainer>
     <tab>
       <info>
-        <UITaxonomyTreeMainForm>Вкажіть ім'я категорії, робочу область та шлях особистого каталогу.
-        </UITaxonomyTreeMainForm>
+        <UITaxonomyTreeMainForm>Вкажіть ім'я категорії, робочу область та шлях особистого каталогу.</UITaxonomyTreeMainForm>
         <UIPermissionTreeManager>Установити дозвіл для дерева категорій.</UIPermissionTreeManager>
-        <UIActionTaxonomyManager>Додати дію до дерева категорій, щоб завершити створення або оновлення.
-        </UIActionTaxonomyManager>
-        <UITaxonomyTreeCreateChild>Редагувати дерево класифікації шляхом додавання, копіювання, вирізання та вибора
-          дозволів.
-        </UITaxonomyTreeCreateChild>
+        <UIActionTaxonomyManager>Додати дію до дерева категорій, щоб завершити створення або оновлення.</UIActionTaxonomyManager>
+        <UITaxonomyTreeCreateChild>Редагувати дерево класифікації шляхом додавання, копіювання, вирізання та вибора дозволів.</UITaxonomyTreeCreateChild>
       </info>
     </tab>
     <msg>
@@ -256,8 +250,7 @@
     <msg>
       <confirm-delete>Ви дійсно бажаєте видалити ці метадані?</confirm-delete>
       <delete-successful>Успішно видалено шаблони '{0}'.</delete-successful>
-      <path-not-found-exception>Ці метадані видалено або змінено. Будь ласка, натисніть кнопку Оновити.
-      </path-not-found-exception>
+      <path-not-found-exception>Ці метадані видалено або змінено. Будь ласка, натисніть кнопку Оновити.</path-not-found-exception>
     </msg>
     <action>
       <Add>Додати метадані</Add>
@@ -568,11 +561,8 @@
     </action>
     <msg>
       <register-successfully>Тип вузла '{0}' успішно зареєстровано.</register-successfully>
-      <supertype-is-madatory>Супер тип є обов'язковим при реєстрації нового типу вузла. Будь ласка, оберіть хоча б один
-        супер тип.
-      </supertype-is-madatory>
-      <register-failed>Реєстрація типу вузла була невдалою. Він або вже існує або супер тип є неприпустимий .
-      </register-failed>
+      <supertype-is-madatory>Супер тип є обов'язковим при реєстрації нового типу вузла. Будь ласка, оберіть хоча б один супер тип.</supertype-is-madatory>
+      <register-failed>Реєстрація типу вузла була невдалою. Він або вже існує або супер тип є неприпустимий .</register-failed>
       <nodeType-name>Потрібне ім'я вузла.</nodeType-name>
       <fileName-invalid>Ім'я файлу містить деякі неприпустимі символи.</fileName-invalid>
       <node-type-exists>Тип вузла '{0}' уже існує.</node-type-exists>
@@ -591,8 +581,7 @@
     </tab>
     <msg>
       <property-name>Ім'я визначення властивості є хибне.</property-name>
-      <not-supported-value-constraints>Цей необхідний тип не підтримує обмеження значень.
-      </not-supported-value-constraints>
+      <not-supported-value-constraints>Цей необхідний тип не підтримує обмеження значень.</not-supported-value-constraints>
     </msg>
   </UIPropertyDefinitionForm>
   <UIChildNodeDefinitionForm>
@@ -1001,7 +990,7 @@
       <addSymLink>Додати символьне посилання</addSymLink>
       <checkIn>Зареєструватися</checkIn>
       <checkOut>Вийти</checkOut>
-      <shareDocuments>Поділитися</shareDocuments>
+      <shareDocuments>Share</shareDocuments>
       <openDocument>Віддалене редагування</openDocument>
       <editProperty>Змінити властивості документа</editProperty>
       <uploadNewVersion>Завантажити нову версію</uploadNewVersion>
@@ -1034,7 +1023,7 @@
   </UIViewFormTabPane>
   <PopupViewPermission>
     <title>
-      <UIPermissionSelector>Селектор прав доступу</UIPermissionSelector>
+      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
     </title>
   </PopupViewPermission>
 
@@ -1416,7 +1405,7 @@
 
   <PopupTaxonomyTreePermission>
     <title>
-      <UIPermissionSelector>Селектор прав доступу</UIPermissionSelector>
+      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
     </title>
   </PopupTaxonomyTreePermission>
 
@@ -1748,7 +1737,7 @@
   -->
   <AddNewTemplatePermission>
     <title>
-      <UIPermissionSelector>Селектор прав доступу</UIPermissionSelector>
+      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
     </title>
   </AddNewTemplatePermission>
   <TemplatePermission>
@@ -1789,12 +1778,12 @@
   </DialogForm>
   <DialogFormTemplatePermission>
     <title>
-      <UIPermissionSelector>Селектор прав доступу</UIPermissionSelector>
+      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
     </title>
   </DialogFormTemplatePermission>
   <ViewFormTemplatePermission>
     <title>
-      <UIPermissionSelector>Селектор прав доступу</UIPermissionSelector>
+      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
     </title>
   </ViewFormTemplatePermission>
   <TemplateContainerPopup>
@@ -1951,9 +1940,7 @@
     <msg>
       <confirm-delete>Ви дійсно бажаєте видалити цей запит?</confirm-delete>
       <query-not-existed>Запит більше не існує.</query-not-existed>
-      <can-not-remove>Сталася помилка під час видалення запиту. Для додаткової інформації, будь ласка, зв'яжіться з
-        адміністратором.
-      </can-not-remove>
+      <can-not-remove>Сталася помилка під час видалення запиту. Для додаткової інформації, будь ласка, зв'яжіться з адміністратором.</can-not-remove>
     </msg>
   </UIQueriesList>
   <UIQueriesForm>
@@ -1989,7 +1976,7 @@
   </EditQueryForm>
   <PermissionPopup>
     <title>
-      <UIGroupMemberSelector>Селектор прав доступу</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Permission Selector</UIGroupMemberSelector>
     </title>
   </PermissionPopup>
   <!--
@@ -2030,12 +2017,9 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <range-validator>Неприпустимий діапазон. Формат повинен бути: a...b , де a і b - позитивні цілі числа. Ви можете
-        використовувати * замість b, щоб показати, що діапазон необмежений.
-      </range-validator>
+      <range-validator>Неприпустимий діапазон. Формат повинен бути: a...b , де a і b - позитивні цілі числа. Ви можете використовувати * замість b, щоб показати, що діапазон необмежений.</range-validator>
       <error-update>Не вдалося оновити. Ваша інформація є неприпустимою.</error-update>
-      <item-not-existing>Не можна зберегти зміни до цього тегу, оскільки він більше не існує в базі даних.
-      </item-not-existing>
+      <item-not-existing>Не можна зберегти зміни до цього тегу, оскільки він більше не існує в базі даних.</item-not-existing>
     </msg>
   </UITagStyleForm>
   <FolksonomyPopup>
@@ -2349,8 +2333,7 @@
       <UnLock>Розблокування</UnLock>
     </tooltip>
     <msg>
-      <access-denied-exception>Ви не маєте дозволу на доступ до вузла зі шляхом {0}, або цей вузол видалили.
-      </access-denied-exception>
+      <access-denied-exception>Ви не маєте дозволу на доступ до вузла зі шляхом {0}, або цей вузол видалили.</access-denied-exception>
     </msg>
   </UILockNodeList>
   <EditUnLockForm>
@@ -2464,8 +2447,7 @@
     </action>
     <msg>
       <xss-vulnerability-character>Поле "{0}" містить символи уразливості XSS</xss-vulnerability-character>
-      <xss-vulnerability-character-wo-label>Ваші внесені дані можуть містити символи уразливості XSS
-      </xss-vulnerability-character-wo-label>
+      <xss-vulnerability-character-wo-label>Ваші внесені дані можуть містити символи уразливості XSS</xss-vulnerability-character-wo-label>
     </msg>
   </UIActionForm>
 
@@ -2503,7 +2485,7 @@
       <Add>Додати</Add>
     </action>
     <label>
-      <userOrGroup>Членство:</userOrGroup>
+      <userOrGroup>Memberships:</userOrGroup>
     </label>
     <msg>
       <userOrGroup-alreadyExists>Це членство вже існує. Будь ласка, виберіть інше.</userOrGroup-alreadyExists>
@@ -2541,9 +2523,7 @@
   </NodeTypeNameValidator>
   <UIActionForm>
     <msg>
-      <constraint-violation-exception>Вузол '{0}' не можна додати до '{1}' у робочій області '{2}'. Існує проблема з
-        дозволами або обмеженнями умовою.
-      </constraint-violation-exception>
+      <constraint-violation-exception>Вузол '{0}' не можна додати до '{1}' у робочій області '{2}'.  Існує проблема з дозволами або обмеженнями умовою.</constraint-violation-exception>
     </msg>
   </UIActionForm>
 
@@ -2554,9 +2534,7 @@
   </UIWorkspaceWizard>
   <UIRepositoryForm>
     <msg>
-      <not-complete-repository>The repository is being created. You need to wait a few minutes before creating another
-        one.
-      </not-complete-repository>
+      <not-complete-repository>The repository is being created. You need to wait a few minutes before creating another one.</not-complete-repository>
     </msg>
   </UIRepositoryForm>
 
@@ -2617,9 +2595,7 @@
   </UIPageIterator>
   <UILockNodeList>
     <msg>
-      <can-not-unlock-node>Вам не дозволено розблокувати цей вузол. Зверніться до адміністратора, щоб отримати необхідне
-        право.
-      </can-not-unlock-node>
+      <can-not-unlock-node>Вам не дозволено розблокувати цей вузол. Зверніться до адміністратора, щоб отримати необхідне право.</can-not-unlock-node>
     </msg>
   </UILockNodeList>
 </bundle>

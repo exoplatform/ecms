@@ -27,10 +27,10 @@
         <comments>Komentarz(y)</comments>
         <show-comments>Pokaż komentarze</show-comments>
         <hide-comments>Ukryj komentarze</hide-comments>
-        <comment-by>Skomentowane przez</comment-by>
-        <email>Adres e-mail</email>
+        <comment-by>Commented by</comment-by>
+        <email>Email</email>
         <site>Witryna</site>
-        <lastComment>Last comment posted by {user} at {time}</lastComment>
+        <lastComment>Ostatni komentarz dodany przez {user} o godzinie {time}</lastComment>
       </label>
     </view>
   </Comment>
@@ -42,13 +42,15 @@
     <view>
       <label>
         <not-viewable>Podgląd tego dokumentu nie jest dostępny.</not-viewable>
-        <pdf-max-size>The preview is not available for content larger than {0} MB.</pdf-max-size>
-        <pdf-max-page>The preview is not available for content with over {0} pages.</pdf-max-page>
+        <pdf-max-size>Podgląd jest niedostępny dla treści większej niż {0} MB.</pdf-max-size>
+        <pdf-max-page>Podgląd jest niedostępny dla treści o zawartości ponad {0} stron.</pdf-max-page>
         <using-webDAV>lub Otwórz w MS Office</using-webDAV>
-        <open-on-desktop>Open on Desktop</open-on-desktop>
+        <open-on-desktop>Otwórz na Pulpicie</open-on-desktop>
+        <open-in-documents>Open in Documents</open-in-documents>
+        <open-in-documents-tooltip>Open this file in Documents app</open-in-documents-tooltip>
         <file-size-too-big>Zawartość tego pliku jest zbyt duża. Należy pobrać i otworzyć inny plik.</file-size-too-big>
         <webDAV>Widok WebDAV</webDAV>
-        <download>Pobierz</download>
+        <download>Download</download>
         <htmlview>Zobacz jako HTML</htmlview>
         <plaintextview>Zobacz jako zwykły tekst</plaintextview>
       </label>
@@ -77,7 +79,7 @@
     <view>
       <label>
         <avg-rating>Średnia ocena</avg-rating>
-        <subscription>Głosy</subscription>
+        <subscription>Votes</subscription>
       </label>
     </view>
   </Vote>
@@ -88,11 +90,11 @@
     <view>
       <label>
         <name>Nazwa</name>
-        <versionable>Wersja</versionable>
-        <exo_owner>Właściciel</exo_owner>
-        <exo_dateCreated>Data utworzenia</exo_dateCreated>
+        <versionable>Versionable</versionable>
+        <exo_owner>Owner</exo_owner>
+        <exo_dateCreated>Date Created</exo_dateCreated>
         <exo_dateModified>Data modyfikacji</exo_dateModified>
-        <auditing>Audyt</auditing>
+        <auditing>Auditing</auditing>
       </label>
     </view>
   </ListView>
@@ -105,7 +107,7 @@
       <label>
         <action-name>Nazwa akcji</action-name>
         <lifecycle>Cykl życiowy</lifecycle>
-        <metadata>Metadane</metadata>
+        <metadata>Metadata</metadata>
         <description>Opis</description>
       </label>
     </view>
@@ -141,31 +143,31 @@
   <ElementSet>
     <view>
       <label>
-        <not-avaliable>Nie dotyczy</not-avaliable>
+        <not-avaliable>N/A</not-avaliable>
         <core-elements>Elementy podstawowe</core-elements>
         <title>Tytuł</title>
         <creator>Twórca</creator>
-        <subject>Temat</subject>
+        <subject>Subject</subject>
         <source>Źródło</source>
         <contributor>Współtwórca</contributor>
         <resource-type>Typ zasobu</resource-type>
-        <date>Data</date>
+        <date>Date</date>
         <publisher>Wydawca</publisher>
         <description>Opis</description>
         <rights>Prawa</rights>
-        <relation>Relacja</relation>
+        <relation>Relation</relation>
         <format>Format</format>
         <coverage>Zasięg</coverage>
         <identifier>Identyfikator</identifier>
-        <languages>Języki</languages>
+        <languages>Languages</languages>
       </label>
       <action>
-        <add-edit>Dodaj/Edytuj</add-edit>
+        <add-edit>Add/Edit</add-edit>
         <cancel>#{word.cancel}</cancel>
       </action>
       <tooltip>
         <cancel>#{word.cancel}</cancel>
-        <add-edit>Dodaj/Edytuj Właściwości</add-edit>
+        <add-edit>Add/Edit Properties</add-edit>
       </tooltip>
     </view>
   </ElementSet>

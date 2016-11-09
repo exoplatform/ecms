@@ -34,8 +34,10 @@
 
   <Drives>
     <label>
-      <ManagedSites>Gestió dels Llocs</ManagedSites>
+      <ManagedSites>Site Management</ManagedSites>
       <SharedSite>Lloc Compartit</SharedSite>
+      <PersonalDocuments>Personal Documents</PersonalDocuments>
+      <UserDocuments>{0} Documents</UserDocuments>
     </label>
   </Drives>
 
@@ -45,7 +47,7 @@
       <admin-view>Admin</admin-view>
       <icon-view>Icones</icon-view>
       <thumbails-view>Miniatures</thumbails-view>
-      <list-view>Llista</list-view>
+      <list-view>List</list-view>
       <authoring-view>Autoria</authoring-view>
       <wcm-category-view>Categories</wcm-category-view>
       <file-view>Vista de gestió de fitxer</file-view>
@@ -68,7 +70,7 @@
       <child-not-found>No s'ha trobat la pàgina.</child-not-found>
     </msg>
     <title>
-      <select>Selecciona</select>
+      <select>Select</select>
     </title>
   </UIPageSelectorPanel>
 
@@ -81,10 +83,10 @@
   <UITabPane>
     <title>
       <UIContentBrowsePanelOne>Navegador de continguts</UIContentBrowsePanelOne>
-      <UIContentBrowsePanelMulti>Navegador de continguts</UIContentBrowsePanelMulti>
+      <UIContentBrowsePanelMulti>Content Browser</UIContentBrowsePanelMulti>
       <UIContentBrowsePanelFolder>Navegador de carpetes</UIContentBrowsePanelFolder>
       <UIContentSearchForm>Formulari de cerca de continguts</UIContentSearchForm>
-      <UIContentSearchResult>Resultat de la cerca</UIContentSearchResult>
+      <UIContentSearchResult>Search Result</UIContentSearchResult>
       <UIContentViewer>Vista prèvia del contingut</UIContentViewer>
       <WebContentMetadataPopup>Selector de Propietat</WebContentMetadataPopup>
       <WebContentNodeTypePopup>Selector del Tipus de Node</WebContentNodeTypePopup>
@@ -106,10 +108,10 @@
 
   <UIContentBrowsePanelMulti>
     <selectBoxValues>
-      <FilterBy>Filtra per</FilterBy>
-      <WebContent>Contingut Web</WebContent>
+      <FilterBy>Filter by</FilterBy>
+      <WebContent>Web Content</WebContent>
       <DMSDocument>Document</DMSDocument>
-      <Media>Mèdia</Media>
+      <Media>Media</Media>
     </selectBoxValues>
   </UIContentBrowsePanelMulti>
 
@@ -122,14 +124,14 @@
 
   <UIContentBrowsePanelMulti>
     <label>
-      <LeftColumn>Selecciona una carpeta per mostrar les seves subcarpetes com a contingut.</LeftColumn>
-      <RightColumn>El contingut a continuació pot ser seleccionat.</RightColumn>
+      <LeftColumn>Select a folder to display its children as content.</LeftColumn>
+      <RightColumn>The content below can be selected.</RightColumn>
     </label>
   </UIContentBrowsePanelMulti>
 
   <UIContentBrowsePanelFolder>
     <label>
-      <LeftColumn>Selecciona una carpeta per mostrar les seves subcarpetes com a contingut.</LeftColumn>
+      <LeftColumn>Select a folder to display its children as content.</LeftColumn>
       <RightColumn>La següent carpeta es pot seleccionar.</RightColumn>
     </label>
   </UIContentBrowsePanelFolder>
@@ -167,7 +169,7 @@
   <UIContentBrowsePathSelectorFolder>
     <header>
       <name>#{word.name}</name>
-      <publicationstate>Estat de Publicació</publicationstate>
+      <publicationstate>Publication State</publicationstate>
       <action>Acció</action>
     </header>
     <msg>
@@ -178,13 +180,13 @@
   <UIContentSearchForm>
     <title>
       <Location>Nom del Lloc</Location>
-      <SearchByName>Cerca per nom</SearchByName>
+      <SearchByName>Search by Name</SearchByName>
       <Fulltext>Paraula o frase en context</Fulltext>
-      <Property>Propietat</Property>
-      <Contain>Parcialment</Contain>
+      <Property>Property</Property>
+      <Contain>Contain</Contain>
       <FromDate>Del dia</FromDate>
       <ToDate>Fins a</ToDate>
-      <DocumentType>Tipus Document</DocumentType>
+      <DocumentType>Document Type</DocumentType>
     </title>
     <tooltip>
       <AddMetadataType>Afegeix Propietat</AddMetadataType>
@@ -192,8 +194,8 @@
     </tooltip>    
     <label>
       <option>
-        <CREATED>Creat</CREATED>
-        <MODIFIED>Modificat</MODIFIED>
+        <CREATED>Created</CREATED>
+        <MODIFIED>Modified</MODIFIED>
       </option>
     </label>
     <action>
@@ -218,24 +220,24 @@
 
   <WebContentMetadataPopup>
     <title>
-      <UIContentPropertySelector>Selector de Propietat</UIContentPropertySelector>
+      <UIContentPropertySelector>Property Selector</UIContentPropertySelector>
     </title>
   </WebContentMetadataPopup>
 
   <UIContentPropertySelector>
     <action>
-      <Add>Afegeix</Add>
+      <Add>Add</Add>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
-      <metadataType>Tipus de metadades</metadataType>
-      <property_select>Propietat</property_select>
+      <metadataType>Metadata Type</metadataType>
+      <property_select>Property</property_select>
     </label>
   </UIContentPropertySelector>
 
   <WebContentNodeTypePopup>
     <title>
-      <UIContentNodeTypeSelector>Selector de Tipus Node</UIContentNodeTypeSelector>
+      <UIContentNodeTypeSelector>Node Type Selector</UIContentNodeTypeSelector>
     </title>
   </WebContentNodeTypePopup>
 
@@ -255,7 +257,7 @@
     </header>
     <title>
       <Select>Selecciona</Select>
-      <View>Veure</View>
+      <View>View</View>
     </title>
     <msg>
     <template-not-support>No pot tenir una vista prèvia d'aquest contingut. La plantilla no és compatible</template-not-support>
@@ -266,7 +268,7 @@
     <action>
       <SaveDraft>Desa l'esborrany</SaveDraft>
       <FastPublish>Publicació Ràpida</FastPublish>
-      <Preferences>Preferències</Preferences>
+      <Preferences>Preferences</Preferences>
       <Close>#{word.close}</Close>
     </action>
     <msg>
@@ -278,7 +280,7 @@
 
   <UIPermissionManager>
     <label>
-      <UIPermissionInputSetWithAction>Permisos</UIPermissionInputSetWithAction>
+      <UIPermissionInputSetWithAction>Permission</UIPermissionInputSetWithAction>
       <UIAccessibleCheckboxInput>Dret d'accés</UIAccessibleCheckboxInput>
       <UIEditableCheckboxInput>Dret d'Edició</UIEditableCheckboxInput>
     </label>
@@ -294,10 +296,10 @@
 
   <UIPermissionManagerGrid>
     <header>
-      <owner>Permisos</owner>
+      <owner>Permission</owner>
       <accessible>Accessible</accessible>
       <editable>Editable</editable>
-      <action>Acció</action>
+      <action>Action</action>
     </header>
     <msg>
       <confirm-delete-permission>Està segur que vol suprimir aquest permís?</confirm-delete-permission>
@@ -306,14 +308,14 @@
       <node-locked>La ruta al element {0} o a uns dels seus parents està bloquejada.</node-locked>
       <userOrGroup-required>Ha de seleccionar un usuari o grup.</userOrGroup-required>
       <checkbox-require>Cal definir els drets.</checkbox-require>
-      <node-checkedin>Ha de desprotegir primer.</node-checkedin>
+      <node-checkedin>You must check out first.</node-checkedin>
     </msg>
   </UIPermissionManagerGrid>
 
   <UIPermissionInputSetWithAction>
     <title>
-      <SelectUser>Selecciona usuari/a</SelectUser>
-      <SelectMember>Selecciona un membre</SelectMember>
+      <SelectUser>Select User</SelectUser>
+      <SelectMember>Select Member</SelectMember>
       <AddAny>Afegeix qualsevol permís</AddAny>
     </title>
   </UIPermissionInputSetWithAction>
@@ -326,20 +328,20 @@
 
   <UIGroupSelectorPopupWindow>
     <title>
-      <UIGroupMemberSelector>Selector de grup</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Group Selector</UIGroupMemberSelector>
     </title>
   </UIGroupSelectorPopupWindow>
 
   <UIGroupMemberSelector>
     <label>
-      <selectGroup>Selecciona Grup</selectGroup>
-      <selectMembership>Selecciona l'Afiliació</selectMembership>
+      <selectGroup>Select Group</selectGroup>
+      <selectMembership>Select Membership</selectMembership>
     </label>
   </UIGroupMemberSelector>
 
   <UIContentDialogPreference>
     <action>
-      <Back>Enrere</Back>
+      <Back>Back</Back>
     </action>
   </UIContentDialogPreference>
 
@@ -378,11 +380,11 @@
   </UIWizardPageSelectLayoutForm>
 
   <Signin>
-    <welcome>Benvingut/da</welcome>
+    <welcome>Welcome</welcome>
     <login>Inicia la sessió</login>
-    <logout>Tanca la sessió</logout>
-    <language>Canvia d'idioma</language>
-    <register>Registrar-se</register>
+    <logout>Logout</logout>
+    <language>Change Language</language>
+    <register>Register</register>
   </Signin>
   <UIDriveForm>
 <label>
@@ -393,11 +395,11 @@
   
   <ContentSelector>
     <title>
-      <PersonalDrives>Unitats personals</PersonalDrives>
-      <GeneralDrives>Unitats Generals</GeneralDrives>
-      <GroupDrives>Unitats de grups</GroupDrives>
-      <Private>Privat</Private>
-      <Public>Públic</Public>
+      <PersonalDrives>Personal Drives</PersonalDrives>
+      <GeneralDrives>General Drives</GeneralDrives>
+      <GroupDrives>Group Drives</GroupDrives>
+      <Private>Private</Private>
+      <Public>Public</Public>
       <BackupCenter>Centre de còpies de seguretat</BackupCenter>
       <CategorizedDocumentsCenter>Centre de Documents Categoritzats</CategorizedDocumentsCenter>
       <CollaborationCenter>Centre de Col·laboració</CollaborationCenter>
@@ -434,13 +436,13 @@
   
   <CategoryNavigationTemplate>
   <label>
-  <home>Inici</home>
+  <home>Home</home>
   </label>
   </CategoryNavigationTemplate>
   
   <Breadcrumb>
   <label>
-  <home>Inici</home>
+  <home>Home</home>
   </label>  
   </Breadcrumb>
 </bundle>

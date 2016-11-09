@@ -54,7 +54,7 @@
         <name>#{word.name}</name>
         <active>Aktiven</active>
         <priority>Prioriteta</priority>
-        <content>CSS podatki</content>
+        <content>CSS Data</content>
       </label>
     </dialog>
   </CSSFile>
@@ -63,9 +63,9 @@
     <dialog>
       <label>
         <name>#{word.name}</name>
-        <active>Aktiven</active>
-        <priority>Prioriteta</priority>
-        <content>JS podatki</content>
+        <active>Active</active>
+        <priority>Priority</priority>
+        <content>JS Data</content>
       </label>
     </dialog>
   </JSFile>

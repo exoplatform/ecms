@@ -28,7 +28,7 @@
         <show-comments>Hiển thị bình luận</show-comments>
         <hide-comments>Ẩn bình luận</hide-comments>
         <comment-by>Bình luận bởi</comment-by>
-        <email>Địa chỉ thư điện tử</email>
+        <email>Email</email>
         <site>Trang</site>
         <lastComment>Last comment posted by {user} at {time}</lastComment>
       </label>
@@ -46,6 +46,8 @@
         <pdf-max-page>The preview is not available for content with over {0} pages.</pdf-max-page>
         <using-webDAV>hoặc mở bằng MS Office</using-webDAV>
         <open-on-desktop>Open on Desktop</open-on-desktop>
+        <open-in-documents>Open in Documents</open-in-documents>
+        <open-in-documents-tooltip>Open this file in Documents app</open-in-documents-tooltip>
         <file-size-too-big>Nội dung của tệp tin này quá lớn. Bạn nên tải xuống và mở tại máy khách.</file-size-too-big>
         <webDAV>Hiển thị kiểu WebDAV</webDAV>
         <download>Tải xuống</download>

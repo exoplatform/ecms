@@ -18,8 +18,8 @@
       <Document>Documento</Document>
       <DocumentAndPage>Documento e Pagina</DocumentAndPage>
       <documentandpage>documento e pagina</documentandpage>
-      <results>Results {0} to {1} for {2}</results>
-      <oneResult>Only one result for {0}</oneResult>
+      <results>Risultati {0} a {1} per {2}</results>
+      <oneResult>Un solo risultato per {0}</oneResult>
       <ofAboutCaption>di circa</ofAboutCaption>
       <timeUnitCaption>secondi</timeUnitCaption>
       <similar>Pagine in cui appare lo stesso contenuto</similar>
@@ -33,7 +33,7 @@
       <edit>Modifica</edit>
     </action>
     <msg>
-      <search-not-match-type>Your search {0} does not match any {1}.</search-not-match-type>
+      <search-not-match-type>La ricerca {0} non corrisponde ad alcun {1}.</search-not-match-type>
     </msg>
   </UIDefaultSearchResult>
   <UISearchPageLayoutManager>

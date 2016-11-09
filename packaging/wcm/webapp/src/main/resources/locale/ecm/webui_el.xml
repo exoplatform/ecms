@@ -15,7 +15,7 @@
     </info>
     <action>
       <title>
-        <select>Επιλογή</select>
+        <select>Select</select>
       </title>
     </action>
   </UITreeList>
@@ -50,7 +50,7 @@
     <title>
       <UIPermissionUser>Επιλογή χρήστη</UIPermissionUser>
       <UIPermissionMembership>Επιλέξτε την ιδιότητα του μέλους</UIPermissionMembership>
-      <TaxoSelectUserOrGroup>Επιλογή ρόλου</TaxoSelectUserOrGroup>
+      <TaxoSelectUserOrGroup>Select Membership</TaxoSelectUserOrGroup>
     </title>
   </SelectUserOrGroup>
   <UIPermissionUser>
@@ -67,8 +67,8 @@
   </UIPermissionMembership>
   <TaxoSelectUserOrGroup>
     <label>
-      <selectGroup>Επιλογή ομάδας</selectGroup>
-      <selectMembership>Επιλογή ρόλου</selectMembership>
+      <selectGroup>Select Group</selectGroup>
+      <selectMembership>Select Membership</selectMembership>
     </label>
   </TaxoSelectUserOrGroup>
   <!--
@@ -78,7 +78,7 @@
   -->
   <UICLVConfigTargetPageSelectorPopupWindow>
     <title>
-      <UIPageSelector>Επιλογέας σελίδας</UIPageSelector>
+      <UIPageSelector>Page Selector</UIPageSelector>
     </title>
   </UICLVConfigTargetPageSelectorPopupWindow>
   <!--
@@ -88,7 +88,7 @@
   -->
   <rootNodeInfo>
     <title>
-      <AddRootNode>Προσθήκη κόμβου-ρίζα</AddRootNode>
+      <AddRootNode>Add Root Node</AddRootNode>
     </title>
   </rootNodeInfo>
   <!--
@@ -98,7 +98,7 @@
   -->
   <UIMetadataAnyPermission>
     <label>
-      <anyPermission>Όλοι</anyPermission>
+      <anyPermission>Any Permission</anyPermission>
     </label>
   </UIMetadataAnyPermission>
 </bundle>

@@ -26,15 +26,15 @@
         <MainContent>Contingut principal</MainContent>
         <cssFile>default.css</cssFile>
         <jsFile>default.js</jsFile>
-        <Advanced>Avançat</Advanced>
-        <Summary>Resum</Summary>
+        <Advanced>Advanced</Advanced>
+        <Summary>Summary</Summary>
         <name>#{word.name}</name>
-        <title>Títol</title>
+        <title>Title</title>
         <ContentCSS>Dades CSS</ContentCSS>
         <hintCSS>Pot especificar el full d'estil principal per al contingut del seu web. Aquest estil invalidarà l'estil definit al nivell del lloc i al nivell compartit.</hintCSS>
         <ContentJS>Dades JS</ContentJS>
         <hintJS>Pot especificar algun codi JavaScript per ser executat abans de que sigui carregat el contingut de la web.</hintJS>
-        <WebContentHtml>Contingut principal</WebContentHtml>
+        <WebContentHtml>Main Content</WebContentHtml>
         <Illustration>Miniatura</Illustration>
         <hintIllustration>Pot especificar una imatge que es mostrarà quan el contingut del seu web surti a la llista. També pot especificar alguns textos de resum per anar junt amb l'imatge.</hintIllustration>
         <confirm-delete>Està segur que vol suprimir aquesta miniatura?</confirm-delete>
@@ -52,9 +52,9 @@
     <dialog>
       <label>
         <name>#{word.name}</name>
-        <active>Actiu</active>
-        <priority>Prioritat</priority>
-        <content>Dades CSS</content>
+        <active>Active</active>
+        <priority>Priority</priority>
+        <content>CSS Data</content>
       </label>
     </dialog>
   </CSSFile>
@@ -63,9 +63,9 @@
     <dialog>
       <label>
         <name>#{word.name}</name>
-        <active>Actiu</active>
-        <priority>Prioritat</priority>
-        <content>Dades JS</content>
+        <active>Active</active>
+        <priority>Priority</priority>
+        <content>JS Data</content>
       </label>
     </dialog>
   </JSFile>

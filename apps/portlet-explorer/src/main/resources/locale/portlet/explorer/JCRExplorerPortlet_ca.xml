@@ -17,7 +17,7 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <not-support>No es pot comentar sobre aquest tipus de document.</not-support>
+      <not-support>You can't comment on this type of document.</not-support>
       <not-checkedout>Ha de desprotegir el node abans de comentar.</not-checkedout>
       <content-null>No es pot publicar un comentari buit.</content-null>
     </msg>
@@ -155,7 +155,7 @@
   #########################################################################################
   -->
   <UIPreferencesForm>
-    <title>Establir les preferències de navegació</title>
+    <title>Set up your browsing preferences</title>
     <label>
       <enableStructure>Activa l'Estructura DMS:</enableStructure>
       <showSideBar>Mostra Barra Lateral:</showSideBar>
@@ -216,7 +216,7 @@
     <title>
       <UIRenameForm>Reanomena</UIRenameForm>
       <UIActionContainer>Editar Acció</UIActionContainer>
-      <UIFolderForm>Nova Carpeta</UIFolderForm>
+      <UIFolderForm>New Folder</UIFolderForm>
       <UIUploadManager>Puja un fitxer</UIUploadManager>
       <UIReferencesList>Llista de Referències</UIReferencesList>
       <UIExportNode>Exporta</UIExportNode>
@@ -233,13 +233,13 @@
       <UIActionManager>Gestiona les Accions</UIActionManager>
       <UIDocumentForm>Edita el Document</UIDocumentForm>
       <UIDocumentFormController>Afegeix un nou Document</UIDocumentFormController>
-      <EditFormController>Edita el Document</EditFormController>
+      <EditFormController>Edit Document</EditFormController>
       <UIRelationManager>Afegeix Relació</UIRelationManager>
-      <UICategoryManager>Afegeix una categoria</UICategoryManager>
-      <UIImportNode>Importa</UIImportNode>
+      <UICategoryManager>Add Category</UICategoryManager>
+      <UIImportNode>Import</UIImportNode>
       <UIViewMetadataManager>Veure metadades</UIViewMetadataManager>
       <UIVoteForm>Vota el Document</UIVoteForm>
-      <UICommentForm>Comentari</UICommentForm>
+      <UICommentForm>Comment</UICommentForm>
       <UIPreferencesForm>Preferències</UIPreferencesForm>
       <UIPublicationManager>Gestiona la Publicació</UIPublicationManager>
       <UIConfirmMessage>Confirma la supressió ?</UIConfirmMessage>
@@ -250,11 +250,11 @@
       <UIActivePublication>Inscriure's a la publicació del cicle de vida</UIActivePublication>
       <UITaggingForm>Etiqueta aquest document</UITaggingForm>
       <UIThumbnailForm>Afegeix una imatge en miniatura</UIThumbnailForm>
-      <UIAllItemsPreferenceForm>Preferències</UIAllItemsPreferenceForm>
+      <UIAllItemsPreferenceForm>Preferences</UIAllItemsPreferenceForm>
       <UISelectRestorePath>Selecciona la Ruta de Restauració</UISelectRestorePath>
       <UISEOForm>Gestiona el SEO</UISEOForm>
-      <UISEOToolbarForm>Gestiona el SEO</UISEOToolbarForm>
-      <UIReadOnlyFileConfirmMessage>Obre el Document</UIReadOnlyFileConfirmMessage>
+      <UISEOToolbarForm>Manage SEO</UISEOToolbarForm>
+      <UIReadOnlyFileConfirmMessage>Open Document</UIReadOnlyFileConfirmMessage>
       <UIDocumentAutoVersionForm>Copia el document</UIDocumentAutoVersionForm>
     </title>
     <header>
@@ -270,7 +270,7 @@
   <UIResourceForm>
     <title>Edita el contingut del fitxer</title>
     <label>
-      <name>Nom</name>
+      <name>Name</name>
       <textToModify>Text a modificar</textToModify>
       <fileToUpload>Puja nous continguts per aquest document (ha de tenir el mateix mime-type)</fileToUpload>
     </label>
@@ -282,27 +282,27 @@
   -->
   <UIActionBar>
     <tooltip>
-      <AddFolder>Nova Carpeta</AddFolder>
+      <AddFolder>New Folder</AddFolder>
       <AddDocument>Nou Contingut</AddDocument>
-      <EditDocument>Edita</EditDocument>
+      <EditDocument>Edit</EditDocument>
       <Upload>Puja</Upload>
       <Paste>Enganxa</Paste>
       <Search>Cerca</Search>
       <WatchDocument>Segueix/Deixa de Seguir</WatchDocument>
-      <TaggingDocument>Etiqueta</TaggingDocument>
-      <Vote>Vota</Vote>
-      <Comment>Comentari</Comment>
+      <TaggingDocument>Tag</TaggingDocument>
+      <Vote>Vote</Vote>
+      <Comment>Comment</Comment>
       <ManageVersions>Versions</ManageVersions>
       <ManageAuditing>Auditoria</ManageAuditing>
       <ManagePublications>Publicacions</ManagePublications>
       <ManageCategories>Categories</ManageCategories>
       <ManageRelations>Relacions</ManageRelations>
       <ManageActions>Accions</ManageActions>
-      <ExportNode>Exporta</ExportNode>
-      <ImportNode>Importa</ImportNode>
+      <ExportNode>Export</ExportNode>
+      <ImportNode>Import</ImportNode>
       <OverloadThumbnail>Sobrecàrrega la miniatura</OverloadThumbnail>
       <ManageHidden>Mostra/Amaga el contingut</ManageHidden>
-      <ViewReferences>Referències</ViewReferences>
+      <ViewReferences>References</ViewReferences>
       <ViewNodeType>Tipus</ViewNodeType>
       <ViewPermissions>Permisos</ViewPermissions>
       <ViewProperties>Propietats</ViewProperties>
@@ -361,7 +361,7 @@
   </UIActionBar>
   <UIPopupMenu>
     <msg>
-      <has-not-permission>Accés denegat. No té permís d'addició d'aquest node.</has-not-permission>
+      <has-not-permission>Access denied. You do not have add permission in this node.</has-not-permission>
       <has-not-edit-permission>Accés denegat. No té permís per d'edició d'aquest node. Contacteu amb l'administrador.</has-not-edit-permission>
       <cannot-login-node>No pot accedir i enganxar el node aquí.</cannot-login-node>
       <cannot-paste-nodetype>No pot enganxar el node aquí.</cannot-paste-nodetype>
@@ -378,7 +378,7 @@
       <can-not-paste-node>No té permís per desplaçar aquest node. Si us plau, contacta amb l'administrador.</can-not-paste-node>
       <can-not-move-node>No té permís per moure aquest node. Si us plau, contacta amb l'administrador.</can-not-move-node>
       <does-not-support-versioning>No té permís per desplaçar aquest node. Contacta amb l'administrador.</does-not-support-versioning>
-      <path-not-found>Aquest element ha sigut suprimit o canviat. Si us plau, feu clic al botó Recarrega.</path-not-found>
+      <path-not-found>This element was deleted or changed. Please click the Refresh button.</path-not-found>
       <paste-lock-exception>No pot enganxar '{0}' a aquest node perquè la font o el node de destí està bloquejat o està relacionat amb el node bloquejat.</paste-lock-exception>
       <can-not-checkin-node>No pot protegir aquest node. Si us plau, comprova que té els permisos adequats.</can-not-checkin-node>
       <can-not-checkout-node>No pot desprotegir aquest node. Si us plau, comprova que té els permisos adequats.</can-not-checkout-node>
@@ -447,7 +447,7 @@
   -->
   <UIWorkingArea>
     <title>
-      <Icon>Icona</Icon>
+      <Icon>Icon</Icon>
     </title>
     <msg>
       <!-- Delte one node is not in trash and have no relation -->
@@ -515,24 +515,24 @@
     </label>
     <msg>
       <unable-save-node>El node '{0}' s'ha creat recentment. Desa la sessió abans de realitzar aquesta acció.</unable-save-node>
-      <save-node-success>El node '{0}' s'ha desat.</save-node-success>
+      <save-node-success>Node '{0}' has been saved.</save-node-success>
       <node-copied>EL node '{0}' s'ha copiat.</node-copied>
-      <node-cut>El node '{0}' ha estat tallat.</node-cut>
+      <node-cut>Node '{0}' has been cut.</node-cut>
       <remove-root>No es pot eliminar el node principal.</remove-root>
       <node-remove-success>El node '{0}' ha estat eliminat.</node-remove-success>
     </msg>
     <tooltip>
-      <Rename>Reanomena</Rename>
+      <Rename>Rename</Rename>
       <Cut>Talla</Cut>
-      <Copy>Copia</Copy>
+      <Copy>Copy</Copy>
       <Save>#{word.save}</Save>
-      <RemoveNode>Suprimeix</RemoveNode>
+      <RemoveNode>Delete</RemoveNode>
       <Checkin>Protegir</Checkin>
       <Checkout>Desprotegir</Checkout>
-      <Lock>Bloqueja</Lock>
-      <Unlock>Desbloqueja</Unlock>
-      <EditDocument>Edita</EditDocument>
-      <Paste>Enganxa</Paste>
+      <Lock>Lock</Lock>
+      <Unlock>Unlock</Unlock>
+      <EditDocument>Edit</EditDocument>
+      <Paste>Paste</Paste>
       <LockedBy>Bloquejat per</LockedBy>
     </tooltip>
   </UIDocumentWorkspace>
@@ -543,7 +543,7 @@
       <confirm-deleteattachment>Està segur que vol suprimir aquest fitxer adjunt?</confirm-deleteattachment>
       <confirm-deleteattcomment>Està segur que vol suprimir aquest comentari?</confirm-deleteattcomment>
       <access-denied-exception>Accés denegat. Potser no té privilegis de lectura, o el node s'ha eliminat o canviat.</access-denied-exception>
-      <path-not-found>Aquest element ha sigut suprimit o canviat. Si us plau, feu clic al botó Recarrega.</path-not-found>
+      <path-not-found>This element was deleted or changed. Please click the Refresh button.</path-not-found>
     </msg>
     <tooltip>
       <remove-attachment>Elimina aquest fitxer adjunt</remove-attachment>
@@ -553,9 +553,9 @@
   <ListView>
     <view>
       <label>
-        <name>Nom</name>
+        <name>Name</name>
         <versionable>Versionable</versionable>
-        <exo_owner>Propietari</exo_owner>
+        <exo_owner>Owner</exo_owner>
         <auditing>Auditoria</auditing>
         <exo_dateCreated>Data de creació</exo_dateCreated>
         <exo_dateModified>Data de modificaicó</exo_dateModified>
@@ -583,11 +583,11 @@
       <WebDAV>Mostra per WebDAV</WebDAV>
       <autoversion>Control de Versions automàtic</autoversion>
       <Custom>Personalitza</Custom>
-      <AddFolder>Nova Carpeta</AddFolder>
+      <AddFolder>New Folder</AddFolder>
       <AddDocument>Nou Contingut</AddDocument>
       <Upload>Puja Fitxers</Upload>
       <MoveNode>Moure</MoveNode>
-      <UnLock>Desbloqueja</UnLock>
+      <UnLock>Unlock</UnLock>
       <ViewProperties>Mostra les propietats</ViewProperties>
       <GetURL>Copia l'URL al porta-retalls</GetURL>
       <AddThumbnail>Afegeix/Elimina Vinyeta</AddThumbnail>
@@ -596,8 +596,8 @@
       <MoveToTrash>Mou a la paperera</MoveToTrash>
       <RestoreFromTrash>Recupera de la Paperera</RestoreFromTrash>
       <EmptyTrash>Buida la Paperera</EmptyTrash>
-      <WebDavView>Obre-ho a MS Office</WebDavView>
-      <Download>Descarrega</Download>
+      <WebDavView>Open in MS Office</WebDavView>
+      <Download>Download</Download>
       <OpenDocument>Edició remota</OpenDocument>
       <EditProperty>Edita les propietats del document</EditProperty>
       <UploadNewVersion>Puja una versió nova</UploadNewVersion>
@@ -615,7 +615,7 @@
       <no-references>No s'han trobat les referències</no-references>
     </msg>
     <header>
-      <workspace>Àrea de treball</workspace>
+      <workspace>Workspace</workspace>
       <path>Ruta</path>
     </header>
     <action>
@@ -632,12 +632,12 @@
       <UIPublishingPanel>Publication Pane</UIPublishingPanel>
       <UIPublicationPanel>Revisió</UIPublicationPanel>
       <UIPublicationSchedule>Programat</UIPublicationSchedule>
-      <UIPublicationPagesContainer>Pàgines</UIPublicationPagesContainer>
-      <UIPublicationHistory>Històric</UIPublicationHistory>
+      <UIPublicationPagesContainer>Pages</UIPublicationPagesContainer>
+      <UIPublicationHistory>History</UIPublicationHistory>
       <UIVersionViewer>Visor de la versió</UIVersionViewer>
 
-      <UIPropertyTab>Propietats</UIPropertyTab>
-      <UIMetadataTab>Metadades</UIMetadataTab>
+      <UIPropertyTab>Properties</UIPropertyTab>
+      <UIMetadataTab>Metadata</UIMetadataTab>
       <UIPropertyForm>Afegeix una nova propietat</UIPropertyForm>
       <UIUploadContent>Informació del fitxer pujat</UIUploadContent>
       <UIJCRAdvancedSearch>Nova consulta</UIJCRAdvancedSearch>
@@ -648,20 +648,20 @@
       <UICategoryManagerSearch>Afegeix categoria a la cerca</UICategoryManagerSearch>
       <UIConstraintsForm>Formulari de filtre</UIConstraintsForm>
       <UIViewSearchResult>Veure contingut</UIViewSearchResult>
-      <UIContentNameSearch>Cerca per nom</UIContentNameSearch>
-      <UINodeInfo>Informació de la versió</UINodeInfo>
+      <UIContentNameSearch>Search by Name</UIContentNameSearch>
+      <UINodeInfo>Version Info</UINodeInfo>
       <UINodeProperty>Propietat del node</UINodeProperty>
       <UIActionListContainer>Accions disponibles</UIActionListContainer>
       <UIActionContainer>Afegeix una acció</UIActionContainer>
       <UIActionViewContainer>Informació de l'acció</UIActionViewContainer>
       <UIMultiLanguageForm>Veure idioma</UIMultiLanguageForm>
-      <UIAddLanguageContainer>Afegeix un idioma</UIAddLanguageContainer>
-      <UINonPublishedForm>Estat</UINonPublishedForm>
-      <UIPublishedForm>Estat</UIPublishedForm>
-      <UIPublicationLogList>Històric</UIPublicationLogList>
+      <UIAddLanguageContainer>Add Language</UIAddLanguageContainer>
+      <UINonPublishedForm>State</UINonPublishedForm>
+      <UIPublishedForm>State</UIPublishedForm>
+      <UIPublicationLogList>History</UIPublicationLogList>
       <UIDocumentWithTree>Vista de fitxers</UIDocumentWithTree>
       <UIDocumentInfo>Vista de documents</UIDocumentInfo>
-      <UICategoriesSelectPanel>Selecciona les categories</UICategoriesSelectPanel>
+      <UICategoriesSelectPanel>Select Categories</UICategoriesSelectPanel>
       <UISelectedCategoriesGrid>Categories Referenciades</UISelectedCategoriesGrid>
       <UIWorkflowPublicationActionForm>Workflow Publication Action</UIWorkflowPublicationActionForm>
       <UIWorkflowPublicationViewForm>Workflow Publication View</UIWorkflowPublicationViewForm>
@@ -678,10 +678,10 @@
       <remove-property>Està segur que vol suprimir aquesta propietat?</remove-property>
     </confirm>
     <header>
-      <name>Nom</name>
+      <name>Name</name>
       <multiValue>Valor Múltiple</multiValue>
-      <value>Valor</value>
-      <action>Acció</action>
+      <value>Value</value>
+      <action>Action</action>
     </header>
     <label>
       <binary>Dades binàries</binary>
@@ -705,10 +705,10 @@
   <UIPropertyForm>
     <title>Afegeix/Edita la propietat</title>
     <label>
-      <name>Nom:</name>
-      <type>Tipus:</type>
+      <name>Name:</name>
+      <type>Type:</type>
       <value>Valor:</value>
-      <upload>Puja:</upload>
+      <upload>Upload:</upload>
       <namespace>Espai de noms:</namespace>
       <multiple>Múltiple:</multiple>
       <property_select>Afegeix una nova propietat:</property_select>
@@ -752,7 +752,7 @@
   <UIPermissionInfo>
     <action>
       <title>
-        <Edit>Edita</Edit>
+        <Edit>Edit</Edit>
         <Delete>Elimina Permisos</Delete>
       </title>
     </action>
@@ -760,7 +760,7 @@
       <usersOrGroups>Usuari o grup</usersOrGroups>
       <read>Lectura</read>
       <addNode>Modificar</addNode>
-      <remove>Elimina</remove>
+      <remove>Remove</remove>
       <action>Acció</action>
     </header>
     <msg>
@@ -784,15 +784,15 @@
   -->
   <SelectUserOrGroup>
     <title>
-      <UIGroupSelector>Selecciona usuari/a</UIGroupSelector>
+      <UIGroupSelector>Select User</UIGroupSelector>
       <UIPermissionSelector>Selecciona un membre</UIPermissionSelector>
-      <UIGroupMemberSelector>Selecciona l'Afiliació</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Select Membership</UIGroupMemberSelector>
     </title>
   </SelectUserOrGroup>
   <UIGroupSelector>
     <label>
       <selectGroup>Examina i selecciona un Grup</selectGroup>
-      <selectUser>Selecciona usuari/a</selectUser>
+      <selectUser>Select User</selectUser>
     </label>
     <msg>
       <not-change-owner>'{0}' és el propietari d'aquest node i té ple permís de control.</not-change-owner>
@@ -800,9 +800,9 @@
   </UIGroupSelector>
   <UIPermissionForm>
     <label>
-      <UIPopupWindow>Selecciona</UIPopupWindow>
+      <UIPopupWindow>Select</UIPopupWindow>
       <permission>UIPermissionForm</permission>
-      <userOrGroup>Usuari o Grup</userOrGroup>
+      <userOrGroup>User or Group</userOrGroup>
       <read>Drets de lectura</read>
       <add_node>Drets d'escriptura</add_node>
       <remove>Elimina Drets</remove>
@@ -829,14 +829,14 @@
   <UINodeTypeInfo>
     <label>
       <node-type>Tipus de node</node-type>
-      <name>Nom</name>
+      <name>Name</name>
       <item>Nom de l'Element Primari</item>
       <super-types>Tipus Principals</super-types>
       <mixin>Tipus de node mixin</mixin>
       <orderable-children>Nodes secundaris ordenables</orderable-children>
       <property-def>Definició de la propietat del node</property-def>
-      <prop-name>Nom</prop-name>
-      <prop-type>Tipus</prop-type>
+      <prop-name>Name</prop-name>
+      <prop-type>Type</prop-type>
       <prop-multiple>Mul</prop-multiple>
       <prop-mandatory>Man</prop-mandatory>
       <prop-protected>Pr</prop-protected>
@@ -844,7 +844,7 @@
       <prop-default-values><![CDATA[<span title="Default Values">DV</span>]]></prop-default-values>
       <prop-constraints><![CDATA[<span title="Constraints Values">CV</span>]]></prop-constraints>
       <node-def>Definició del node secundari</node-def>
-      <node-def-name>Nom</node-def-name>
+      <node-def-name>Name</node-def-name>
       <node-def-opv>OPV</node-def-opv>
       <node-def-ac>AC</node-def-ac>
       <node-def-man>MAN</node-def-man>
@@ -946,141 +946,141 @@
   <UIShowAllOwnedByUserResult>
     <msg>
       <not-support>No hi ha cap plantilla de visualització per a aquest node</not-support>
-      <empty>No s'han trobat resultats.</empty>
+      <empty>No results found.</empty>
       <access-denied>No pot veure aquest node, perquè no s'admet aquesta plantilla o perquè es nega l'accés.</access-denied>
       <query-invalid>La consulta no és vàlida</query-invalid>
     </msg>
     <header>
       <name>#{word.name}</name>
       <path>Ruta</path>
-      <action>Acció</action>
+      <action>Action</action>
       <shortcutPath>Ruta</shortcutPath>
-      <type>Tipus</type>
-      <dateCreated>Data de creació</dateCreated>
-      <score>Puntuació</score>
+      <type>Type</type>
+      <dateCreated>Date Created</dateCreated>
+      <score>Score</score>
     </header>
     <title>
-      <typeASC>Ordena per tipus de document en ordre ascendent</typeASC>
-      <typeDESC>Ordena per tipus de document en ordre descendent</typeDESC>
-      <scoreASC>Ordena per la puntuació en ordre ascendent</scoreASC>
-      <scoreDESC>Ordena per la puntuació en ordre descendent</scoreDESC>
-      <nameASC>Ordena pel nom en ordre ascendent</nameASC>
-      <nameDESC>Ordena pel nom en ordre descendent</nameDESC>
+      <typeASC>Sort by document type in ascending order</typeASC>
+      <typeDESC>Sort by document type in descending order</typeDESC>
+      <scoreASC>Sort by score in ascending order</scoreASC>
+      <scoreDESC>Sort by score in descending order</scoreDESC>
+      <nameASC>Sort by name in ascending order</nameASC>
+      <nameDESC>Sort by name in descending order</nameDESC>
       <datecreatedASC>Ordena per la data de creació en ordre ascendent</datecreatedASC>
       <datecreatedDESC>Ordena per la data de creació en ordre descendent</datecreatedDESC>
     </title>
     <tooltip>
-      <View>Veure aquest node</View>
+      <View>View this node</View>
       <OpenFolder>Vés a la carpeta</OpenFolder>
     </tooltip>
   </UIShowAllOwnedByUserResult>
   <UIShowAllFavouriteResult>
     <msg>
-      <not-support>No hi ha cap plantilla de visualització per a aquest node</not-support>
+      <not-support>There is no View template for this node</not-support>
       <empty>No s'han trobat resultats</empty>
-      <access-denied>No pot veure aquest node, perquè no s'admet aquesta plantilla o perquè es nega l'accés.</access-denied>
-      <query-invalid>La consulta no és vàlida</query-invalid>
+      <access-denied>You cannot view this node, either because this template is not supported or because access is denied.</access-denied>
+      <query-invalid>The query is invalid</query-invalid>
     </msg>
     <header>
       <name>#{word.name}</name>
       <path>Ruta</path>
-      <action>Acció</action>
+      <action>Action</action>
       <shortcutPath>Ruta</shortcutPath>
-      <type>Tipus</type>
-      <dateCreated>Data de creació</dateCreated>
-      <score>Puntuació</score>
+      <type>Type</type>
+      <dateCreated>Date Created</dateCreated>
+      <score>Score</score>
     </header>
     <title>
-      <typeASC>Ordena per tipus de document en ordre ascendent</typeASC>
-      <typeDESC>Ordena per tipus de document en ordre descendent</typeDESC>
-      <scoreASC>Ordena per la puntuació en ordre ascendent</scoreASC>
-      <scoreDESC>Ordena per la puntuació en ordre descendent</scoreDESC>
-      <nameASC>Ordena pel nom en ordre ascendent</nameASC>
-      <nameDESC>Ordena pel nom en ordre descendent</nameDESC>
-      <datecreatedASC>Ordena per la data de creació en ordre ascendent</datecreatedASC>
-      <datecreatedDESC>Ordena per la data de creació en ordre descendent</datecreatedDESC>
+      <typeASC>Sort by document type in ascending order</typeASC>
+      <typeDESC>Sort by document type in descending order</typeDESC>
+      <scoreASC>Sort by score in ascending order</scoreASC>
+      <scoreDESC>Sort by score in descending order</scoreDESC>
+      <nameASC>Sort by name in ascending order</nameASC>
+      <nameDESC>Sort by name in descending order</nameDESC>
+      <datecreatedASC>Sort by created date in ascending order</datecreatedASC>
+      <datecreatedDESC>Sort by created date in descending order</datecreatedDESC>
     </title>
     <tooltip>
       <View>Veure aquest node</View>
-      <OpenFolder>Vés a la carpeta</OpenFolder>
+      <OpenFolder>Go to Folder</OpenFolder>
     </tooltip>
   </UIShowAllFavouriteResult>
   <UIShowAllHiddenResult>
     <msg>
-      <not-support>No hi ha cap plantilla de visualització per a aquest node.</not-support>
-      <empty>No s'han trobat resultats.</empty>
-      <access-denied>No pot veure aquest node, perquè no s'admet aquesta plantilla o perquè es nega l'accés.</access-denied>
-      <query-invalid>La consulta no és vàlida.</query-invalid>
+      <not-support>There is no View template for this node.</not-support>
+      <empty>No results found.</empty>
+      <access-denied>You cannot view this node, either because this template is not supported or because access is denied.</access-denied>
+      <query-invalid>The query is invalid.</query-invalid>
     </msg>
     <header>
       <name>#{word.name}</name>
       <path>Ruta</path>
-      <action>Acció</action>
+      <action>Action</action>
       <shortcutPath>Ruta</shortcutPath>
-      <type>Tipus</type>
-      <dateCreated>Data de creació</dateCreated>
-      <score>Puntuació</score>
+      <type>Type</type>
+      <dateCreated>Date Created</dateCreated>
+      <score>Score</score>
       <AddRemoveFavourite>Afegeix/Elimina a Favorits</AddRemoveFavourite>
     </header>
     <title>
-      <typeASC>Ordena per tipus de document en ordre ascendent</typeASC>
-      <typeDESC>Ordena per tipus de document en ordre descendent</typeDESC>
-      <scoreASC>Ordena per la puntuació en ordre ascendent</scoreASC>
-      <scoreDESC>Ordena per la puntuació en ordre descendent</scoreDESC>
-      <nameASC>Ordena pel nom en ordre ascendent</nameASC>
-      <nameDESC>Ordena pel nom en ordre descendent</nameDESC>
-      <datecreatedASC>Ordena per la data de creació en ordre ascendent</datecreatedASC>
-      <datecreatedDESC>Ordena per la data de creació en ordre descendent</datecreatedDESC>
+      <typeASC>Sort by document type in ascending order</typeASC>
+      <typeDESC>Sort by document type in descending order</typeDESC>
+      <scoreASC>Sort by score in ascending order</scoreASC>
+      <scoreDESC>Sort by score in descending order</scoreDESC>
+      <nameASC>Sort by name in ascending order</nameASC>
+      <nameDESC>Sort by name in descending order</nameDESC>
+      <datecreatedASC>Sort by created date in ascending order</datecreatedASC>
+      <datecreatedDESC>Sort by created date in descending order</datecreatedDESC>
     </title>
     <tooltip>
-      <View>Veure aquest node</View>
-      <OpenFolder>Vés a la carpeta</OpenFolder>
+      <View>View this Node</View>
+      <OpenFolder>Go to Folder</OpenFolder>
       <RemoveHiddenAttribute>Fer-ho visible</RemoveHiddenAttribute>
     </tooltip>
   </UIShowAllHiddenResult>
   <UIShowAllTrashResult>
     <msg>
-      <not-support>No hi ha cap plantilla de visualització per a aquest node.</not-support>
-      <empty>No s'han trobat resultats</empty>
-      <access-denied>No pot veure aquest node, perquè no s'admet aquesta plantilla o perquè es nega l'accés.</access-denied>
-      <query-invalid>La consulta no és vàlida.</query-invalid>
+      <not-support>There is no View template for this node.</not-support>
+      <empty>No results found</empty>
+      <access-denied>You cannot view this node, either because this template is not supported or because access is denied.</access-denied>
+      <query-invalid>The query is invalid.</query-invalid>
     </msg>
     <header>
       <name>#{word.name}</name>
       <path>Ruta</path>
-      <action>Acció</action>
+      <action>Action</action>
       <shortcutPath>Ruta</shortcutPath>
-      <type>Tipus</type>
-      <dateCreated>Data de creació</dateCreated>
-      <score>Puntuació</score>
+      <type>Type</type>
+      <dateCreated>Date Created</dateCreated>
+      <score>Score</score>
     </header>
     <title>
-      <typeASC>Ordena per tipus de document en ordre ascendent</typeASC>
-      <typeDESC>Ordena per tipus de document en ordre descendent</typeDESC>
-      <scoreASC>Ordena per la puntuació en ordre ascendent</scoreASC>
-      <scoreDESC>Ordena per la puntuació en ordre descendent</scoreDESC>
-      <nameASC>Ordena pel nom en ordre ascendent</nameASC>
-      <nameDESC>Ordena pel nom en ordre descendent</nameDESC>
-      <datecreatedASC>Ordena per la data de creació en ordre ascendent</datecreatedASC>
-      <datecreatedDESC>Ordena per la data de creació en ordre descendent</datecreatedDESC>
+      <typeASC>Sort by document type in ascending order</typeASC>
+      <typeDESC>Sort by document type in descending order</typeDESC>
+      <scoreASC>Sort by score in ascending order</scoreASC>
+      <scoreDESC>Sort by score in descending order</scoreDESC>
+      <nameASC>Sort by name in ascending order</nameASC>
+      <nameDESC>Sort by name in descending order</nameDESC>
+      <datecreatedASC>Sort by created date in ascending order</datecreatedASC>
+      <datecreatedDESC>Sort by created date in descending order</datecreatedDESC>
     </title>
     <tooltip>
-      <View>Veure aquest node</View>
-      <OpenFolder>Vés a la carpeta</OpenFolder>
+      <View>View this Node</View>
+      <OpenFolder>Go to Folder</OpenFolder>
       <DeletePermanently>Suprimeix permanentment</DeletePermanently>
-      <RestoreFromTrash>Recupera de la Paperera</RestoreFromTrash>
+      <RestoreFromTrash>Restore from Trash</RestoreFromTrash>
     </tooltip>
   </UIShowAllTrashResult>
   <UIConstraintsForm>
     <label>
       <constraints>UIConstraintsForm</constraints>
-      <metadataProperty>Propietats</metadataProperty>
+      <metadataProperty>Properties</metadataProperty>
       <operator>Operador</operator>
       <contains>Conté el valor</contains>
       <notcontains>No conté cap valor</notcontains>
     </label>
     <action>
-      <Add>Afegeix</Add>
+      <Add>Add</Add>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
@@ -1095,7 +1095,7 @@
       <toDate-invalid>Tipus invàlid en el camp 'Des de'. Si us plau, torneu a seleccionar-lo o escriviu-lo correctament.</toDate-invalid>
     </msg>
     <button>
-      <label-Add>Afegeix</label-Add>
+      <label-Add>Add</label-Add>
       <label-Cancel>#{word.cancel}</label-Cancel>
     </button>
   </UIConstraintsForm>
@@ -1117,9 +1117,9 @@
       <operator>Operador</operator>
       <exactlyPro-properties>Propietat</exactlyPro-properties>
       <exactlyPro-ContainExactly>Exactament</exactlyPro-ContainExactly>
-      <containPro-properties>Propietat</containPro-properties>
+      <containPro-properties>Property</containPro-properties>
       <containPro-Contain>Parcialment</containPro-Contain>
-      <notContainPro-properties>Propietat</notContainPro-properties>
+      <notContainPro-properties>Property</notContainPro-properties>
       <notContainPro-notContain>No conté</notContainPro-notContain>
       <ConstraintOption-From>Des de</ConstraintOption-From>
       <ConstraintOption-To>A</ConstraintOption-To>
@@ -1138,7 +1138,7 @@
   </NodeTypePopup>
   <CategoryPopup>
     <title>
-      <UICategoryManagerSearch>Afegeix categoria a la cerca</UICategoryManagerSearch>
+      <UICategoryManagerSearch>Add Category to Search</UICategoryManagerSearch>
       <UIOneNodePathSelector>Selecciona una categoria</UIOneNodePathSelector>
     </title>
   </CategoryPopup>
@@ -1155,18 +1155,18 @@
   </UINodeTypeSelectForm>
   <UICompareExactlyForm>
     <label>
-      <filter>Filtre:</filter>
+      <filter>Filter:</filter>
       <result>Resultats:</result>
     </label>
     <title>
-      <result>Filtre</result>
+      <result>Filter</result>
     </title>
     <button>
-      <label-Select>Selecciona</label-Select>
+      <label-Select>Select</label-Select>
       <label-Cancel>#{word.cancel}</label-Cancel>
     </button>
     <msg>
-      <not-result-found>No s'han trobat resultats.</not-result-found>
+      <not-result-found>No results found.</not-result-found>
     </msg>
   </UICompareExactlyForm>
   <UIJCRAdvancedSearch>
@@ -1192,7 +1192,7 @@
   </UIJCRAdvancedSearch>
   <EditQueryForm>
     <label>
-      <name>Nom</name>
+      <name>Name</name>
       <selectBox>Estil de consulta</selectBox>
       <query>Consulta</query>
     </label>
@@ -1212,7 +1212,7 @@
     </label>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Add>Afegeix</Add>
+      <Add>Add</Add>
     </action>
   </UIMetadataSelectForm>
   <property1MetadataPopup>
@@ -1222,12 +1222,12 @@
   </property1MetadataPopup>
   <property2MetadataPopup>
     <title>
-      <UISelectPropertyForm>Selecciona Propietat</UISelectPropertyForm>
+      <UISelectPropertyForm>Select Property</UISelectPropertyForm>
     </title>
   </property2MetadataPopup>
   <property3MetadataPopup>
     <title>
-      <UISelectPropertyForm>Selecciona Propietat</UISelectPropertyForm>
+      <UISelectPropertyForm>Select Property</UISelectPropertyForm>
     </title>
   </property3MetadataPopup>
   <UISelectPropertyForm>
@@ -1247,7 +1247,7 @@
   </ExactlyFormPopup>
   <UIECMSearch>
     <header>
-      <name>Nom</name>
+      <name>Name</name>
       <language>Idioma</language>
       <query>Consulta</query>
       <action>Accions</action>
@@ -1259,7 +1259,7 @@
       <not-found>No s'han trobat dades.</not-found>
     </msg>
     <header>
-      <action>Acció</action>
+      <action>Action</action>
     </header>
   </UIResult>
   <UISaveQueryForm>
@@ -1294,7 +1294,7 @@
     </label>
     <msg>
       <confirm-delete-query>Està segur que vol suprimir aquesta consulta?</confirm-delete-query>
-      <not-result-found>No s'han trobat resultats.</not-result-found>
+      <not-result-found>No results found.</not-result-found>
     </msg>
   </UISavedQuery>
   <UIQueryResultPageIterator>
@@ -1315,11 +1315,11 @@
       <nodePath>Ruta a Exportar</nodePath>
       <zip>Zip</zip>
       <systemView>Vista de sistema</systemView>
-      <documentView>Vista de documents</documentView>
+      <documentView>Document View</documentView>
     </label>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Export>Exporta</Export>
+      <Export>Export</Export>
     </action>
     <title>Exporta un node</title>
   </UIExportNode>
@@ -1330,7 +1330,7 @@
   -->
   <PopupUserSelector>
     <title>
-      <UIUserContainer>Selector de permisos</UIUserContainer>
+      <UIUserContainer>Permission Selector</UIUserContainer>
     </title>
   </PopupUserSelector>
   <UIPopupTaxonomy>
@@ -1345,7 +1345,13 @@
   ###############################################################################
   -->
   <UIVersionInfo>
+    <title>Version history</title>
+    <summary>
+      <empty>Click here to add a summary</empty>
+    </summary>
     <tooltip>
+      <version>Version</version>
+      <baseVersion>Base Version</baseVersion>
       <addLabel>Afegeix una etiqueta</addLabel>
       <removeLable>Elimina l'Etiqueta</removeLable>
       <restoreVersion>Restaurar aquesta Versió</restoreVersion>
@@ -1356,6 +1362,9 @@
     <msg>
       <have-no-view-template>La plantilla de vista no és compatible.</have-no-view-template>
       <cannot-remove-version>No es pot eliminar la versió base.</cannot-remove-version>
+      <error-removing-version>An error occurred while deleting this version.</error-removing-version>
+      <error-removing-referenced-version>This version is referenced and can't be removed.</error-removing-referenced-version>
+      <confirm-restore>Are you sure you want to restore this version?</confirm-restore>
       <confirm-delete>Està segur que vol suprimir aquesta versió?</confirm-delete>
       <not-checked-out>Ha de comprovar aquest node abans de restaurar.</not-checked-out>
       <invalid-item-state>No pot restaurar aquesta versió, ja sigui perquè un o més elements han estat suprimits o traslladats en una altra sessió.</invalid-item-state>
@@ -1363,7 +1372,15 @@
     <action>
       <close>#{word.close}</close>
       <close-view>Tanca la visualització</close-view>
+      <compare-versions>Compare selected versions</compare-versions>
     </action>
+    <labels>
+      <version>Versió</version>
+      <date>Data</date>
+      <author>Modified By</author>
+      <summary>Resum</summary>
+      <action>Acció</action>
+    </labels>
   </UIVersionInfo>
   <!--
   ################################################################################
@@ -1381,30 +1398,30 @@
       <e_16>Propietat canviada</e_16>
       <e_8>Propietat eliminada</e_8>
       <e_32>#{word.save}</e_32>
-      <e_64>Moure</e_64>
-      <e_128>Copia</e_128>
+      <e_64>Move</e_64>
+      <e_128>Copy</e_128>
       <e_256>Afegeix un Mixin</e_256>
       <e_512>Elimina un Mixin</e_512>
       <e_1024>Clona</e_1024>
-      <e_2048>Actualitza</e_2048>
-      <e_4096>Importa</e_4096>
+      <e_2048>Update</e_2048>
+      <e_4096>Import</e_4096>
       <e_8192>Check In</e_8192>
       <e_16384>Check out</e_16384>
       <e_32768>Restaura</e_32768>
-      <e_65536>Unir</e_65536>
+      <e_65536>Merge</e_65536>
       <e_131072>Cancel·lar la combinació</e_131072>
       <e_262144>Combinació feta</e_262144>
       <e_524288>Afegeix una etiqueta de versió</e_524288>
       <e_1048576>Elimina l'Etiqueta de Versió</e_1048576>
       <e_2097152>Elimina la Versió</e_2097152>
-      <e_4194304>Bloqueja</e_4194304>
-      <e_8388608>Desbloqueja</e_8388608>
-      <e_16777216>Lectura</e_16777216>
+      <e_4194304>Lock</e_4194304>
+      <e_8388608>Unlock</e_8388608>
+      <e_16777216>Read</e_16777216>
     </eventName>
     <label>
       <operation>Operació</operation>
-      <userName>Nom d'usuari</userName>
-      <date>Data</date>
+      <userName>Username</userName>
+      <date>Date</date>
       <version>Versió</version>
     </label>
   </UIAuditingInfo>
@@ -1418,7 +1435,7 @@
     <label>
       <note>No ha estat activat el control de versions per a aquest node.</note>
       <question>Esta segur que vol activar-la?</question>
-      <button-active>Activa</button-active>
+      <button-active>Activate</button-active>
       <button-cancel>#{word.cancel}</button-cancel>
     </label>
     <msg>
@@ -1432,9 +1449,9 @@
   -->
   <UIActivePublication>
     <header>
-      <LifecycleName>Nom</LifecycleName>
-      <LifecycleDesc>Descripció</LifecycleDesc>
-      <action>Acció</action>
+      <LifecycleName>Name</LifecycleName>
+      <LifecycleDesc>Description</LifecycleDesc>
+      <action>Action</action>
     </header>
     <action>
       <Cancel>#{word.close}</Cancel>
@@ -1471,11 +1488,16 @@
   -->
   <UIDiff>
     <label>
+      <backTo>Back to version history</backTo>
       <diffTitle>Compara entre dues versions</diffTitle>
-      <noChange>Cap canvi entre dues versions</noChange>
-      <baseVerion>Versió de base</baseVerion>
-      <compareVerion>Versió</compareVerion>
+      <noContent>There is no content to compare</noContent>
+      <compareVerion>Version</compareVerion>
       <can-not-compare>No s'han pogut comparar dues versions</can-not-compare>
+      <compare-unavailable>Version comparison is not available for this document</compare-unavailable>
+      <DateChange>On {0}</DateChange>
+      <PreviousAndNextCompare>Modificacions des de {0} a {1}</PreviousAndNextCompare>
+      <ComparedWith>Compara amb</ComparedWith>
+      <restoredFrom>Restored from version {0}</restoredFrom>
     </label>
   </UIDiff>
   <!--
@@ -1486,13 +1508,13 @@
   <UIImportNode>
     <label>
       <format>Format</format>
-      <systemView>Vista de sistema</systemView>
-      <documentView>Vista de documents</documentView>
+      <systemView>System View</systemView>
+      <documentView>Document View</documentView>
       <upload>Puja una Fitxer</upload>
     </label>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Import>Importa</Import>
+      <Import>Import</Import>
     </action>
     <title>Importa node</title>
     <msg>
@@ -1519,7 +1541,7 @@
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
     </action>
-    <title>Afegeix una etiqueta</title>
+    <title>Add Label</title>
     <msg>
       <label-invalid>L'etiqueta conté alguns caràcters no vàlids.</label-invalid>
       <label-exist>'{0}' ja existeix.</label-exist>
@@ -1531,12 +1553,12 @@
   ###############################################################################
   -->
   <UIRemoveLabelForm>
-    <title>Elimina l'Etiqueta</title>
+    <title>Remove Label</title>
     <label>
       <label>Selecciona una Etiqueta</label>
     </label>
     <action>
-      <Remove>Elimina</Remove>
+      <Remove>Remove</Remove>
       <Cancel>#{word.cancel}</Cancel>
     </action>
   </UIRemoveLabelForm>
@@ -1550,7 +1572,7 @@
   </UIVersionTree>
   <UIViewVersion>
     <label>
-      <nodeType>Tipus de node</nodeType>
+      <nodeType>Node Type</nodeType>
       <nodeName>Nom del Node</nodeName>
       <VersionNumber>Número de versió</VersionNumber>
       <VersionLabels>Etiquetes de versió</VersionLabels>
@@ -1584,7 +1606,7 @@
   <UICategoriesAddedList>
     <header>
       <path>Categoria</path>
-      <action>Accions</action>
+      <action>Actions</action>
     </header>
     <msg>
       <access-denied>Accés denegat. No té permís d'accés en aquest node.</access-denied>
@@ -1592,22 +1614,22 @@
     </msg>
     <action>
       <title>
-        <Delete>Suprimeix</Delete>
+        <Delete>Delete</Delete>
       </title>
     </action>
     <label>
-      <category>Categoria</category>
-      <actions>Acció</actions>
-      <delete>Suprimeix</delete>
+      <category>Category</category>
+      <actions>Action</actions>
+      <delete>Delete</delete>
     </label>
   </UICategoriesAddedList>
   <UITreeList>
     <header>
-      <name>Nom</name>
-      <action>Acció</action>
+      <name>Name</name>
+      <action>Action</action>
     </header>
     <info>
-      <child-not-found>Aquest node encara no te cap de secundari.</child-not-found>
+      <child-not-found>This node does not have any child nodes.</child-not-found>
     </info>
   </UITreeList>
   <!--
@@ -1632,12 +1654,12 @@
   </UIRelationManager>
   <UIRelationsAddedList>
     <header>
-      <path>Relacions</path>
-      <action>Accions</action>
+      <path>Relations</path>
+      <action>Actions</action>
     </header>
     <action>
       <title>
-        <Delete>Suprimeix</Delete>
+        <Delete>Delete</Delete>
       </title>
     </action>
     <msg>
@@ -1654,7 +1676,7 @@
     <header>
       <path>Ruta</path>
       <command>Cm</command>
-      <action>Acció</action>
+      <action>Action</action>
     </header>
     <label>
       <nocommand>No hi ha elements al porta-retalls.</nocommand>
@@ -1691,7 +1713,7 @@
   #######################################################################
   -->
   <UIDocumentForm>
-    <title>Afegeix un nou Document</title>
+    <title>Add New Document</title>
     <action>
       <Save>#{word.save}</Save>
       <SaveAndClose>Desa i Tanca</SaveAndClose>
@@ -1708,7 +1730,7 @@
       <in-versioning>Si us plau comprovi el node actual abans d'afegir un de nou.</in-versioning>
       <not-support>No es pot carregar la plantilla de '{0}'.</not-support>
       <value-invalid>'{0}' és un valor necessari.</value-invalid>
-      <repository-exception>S'ha produït un error en desar el document.</repository-exception>
+      <repository-exception>An error occurred while saving the document.</repository-exception>
       <!--DMS 2.4.x; ECM-3543-->
       <repository-exception-permission>No té permís per afegir un nou document en aquest node.</repository-exception-permission>
       <not-allowed-same-name-sibling>No pot desar aquest document. Un element del mateix nom ja existeix.</not-allowed-same-name-sibling>
@@ -1724,7 +1746,7 @@
   <UIViewDocumentController>
     <tab>
       <label>
-        <UIViewDocumentInfo>Informació</UIViewDocumentInfo>
+        <UIViewDocumentInfo>Information</UIViewDocumentInfo>
       </label>
     </tab>
     <action>
@@ -1744,7 +1766,7 @@
   <UIQuerySaveForm>
     <title>Desa la consulta</title>
     <label>
-      <query>Consulta</query>
+      <query>Query</query>
       <name>Nom de la consulta</name>
     </label>
     <action>
@@ -1759,8 +1781,8 @@
   -->
   <editActionPopup>
     <title>
-      <UIActionForm>Editar Acció</UIActionForm>
-      <EditFormAction>Editar Acció</EditFormAction>
+      <UIActionForm>Edit Action</UIActionForm>
+      <EditFormAction>Edit Action</EditFormAction>
     </title>
   </editActionPopup>
   <UIActionViewContainer>
@@ -1771,11 +1793,11 @@
   <UIActionList>
     <header>
       <name>#{word.name}</name>
-      <description>Descripció</description>
+      <description>Description</description>
   <lifecycle>Cicle de vida</lifecycle>
   <triggeredaction>Acció provocada</triggeredaction>
       <instanceOf>Instancia del tipus d'acció</instanceOf>
-      <action>Acció</action>
+      <action>Action</action>
     </header>
     <msg>
       <remove-popup-first>Ha de tancar la finestra d'edició abans de suprimir aquest node.</remove-popup-first>
@@ -1786,9 +1808,9 @@
     </msg>
     <action>
       <Close>#{word.close}</Close>
-      <View>Veure</View>
-      <Edit>Edita</Edit>
-      <Delete>Suprimeix</Delete>
+      <View>View</View>
+      <Edit>Edit</Edit>
+      <Delete>Delete</Delete>
     </action>
   </UIActionList>
   <UIActionForm>
@@ -1825,15 +1847,15 @@
     <title>
       <UIOneNodePathSelector>Selecciona l'ubicació</UIOneNodePathSelector>
       <UIPermissionSelector>Navegador de Permisos</UIPermissionSelector>
-      <UICategoriesSelector>Afegeix Categories</UICategoriesSelector>
+      <UICategoriesSelector>Add Categories</UICategoriesSelector>
     </title>
   </PopupComponent>
   <EditFormAction>
     <validator>
-      <validator>Validador</validator>
+      <validator>Validator</validator>
       <destPath>Amb la ruta</destPath>
     </validator>
-    <title>Formulari d'Acció</title>
+    <title>Action Form</title>
   </EditFormAction>
   <!--
   #############################################################################
@@ -1847,11 +1869,11 @@
       <keyword-not-support>La paraula clau és invàlida. Alguns caràcters no són compatibles.</keyword-not-support>
     </msg>
     <label>
-      <exeButton>Anar</exeButton>
+      <exeButton>Go</exeButton>
       <address>Adreça:</address>
     </label>
     <title>
-      <exeButton>Anar</exeButton>
+      <exeButton>Go</exeButton>
       <backButton>Torna al node anterior</backButton>
       <showHistory>Mostra l'històric d'adreces</showHistory>
       <changeNode>Canvia Node</changeNode>
@@ -1864,10 +1886,10 @@
   -->
   <UIWatchDocumentForm>
     <action>
-      <Watch>Segueix</Watch>
+      <Watch>Watch</Watch>
       <Cancel>#{word.cancel}</Cancel>
       <Continue>Continua</Continue>
-      <Unwatch>Deixa de Seguir</Unwatch>
+      <Unwatch>Unwatch</Unwatch>
     </action>
     <label>
       <notificationType>Tipus de notificació:</notificationType>
@@ -1891,7 +1913,7 @@
       <tagSet>UITaggingForm</tagSet>
     </label>
     <action>
-      <AddTag>Afegeix</AddTag>
+      <AddTag>Add</AddTag>
       <Cancel>#{word.close}</Cancel>
     </action>
     <msg>
@@ -2006,12 +2028,12 @@
   -->
   <UIPublicationForm>
     <label>
-      <published>Publicat</published>
-      <non-published>No publicat</non-published>
-      <public>Públic</public>
-      <private>Privat</private>
-      <state>Estat</state>
-      <visibility>Visibilitat</visibility>
+      <published>Published</published>
+      <non-published>Unpublished</non-published>
+      <public>Public</public>
+      <private>Private</private>
+      <state>State</state>
+      <visibility>Visibility</visibility>
       <nodeName>Nom del Node:</nodeName>
       <lifecycleName>Nom del cicle de vida</lifecycleName>
       <stateName>Nom de l'estat</stateName>
@@ -2046,7 +2068,7 @@
   -->
   <EmailAddressValidator>
     <msg>
-      <Invalid-input>L'adreça de correu no és vàlida.</Invalid-input>
+      <Invalid-input>The email address is invalid.</Invalid-input>
     </msg>
   </EmailAddressValidator>
   <UIFormInputSetWithAction>
@@ -2066,9 +2088,9 @@
   </RepeatIntervalValidator>
   <UIPermissionSelector>
     <label>
-      <selectGroup>Selecciona Grup</selectGroup>
-      <selectUser>Selecciona usuari/a</selectUser>
-      <selectMembership>Selecciona l'Afiliació</selectMembership>
+      <selectGroup>Select Group</selectGroup>
+      <selectUser>Select User</selectUser>
+      <selectMembership>Select Membership</selectMembership>
     </label>
   </UIPermissionSelector>
   <!--
@@ -2078,7 +2100,7 @@
   -->
   <ECMStandardPropertyNameValidator>
     <msg>
-      <empty-input>El valor del camp '{0}' és nul o està buit.</empty-input>
+      <empty-input>The value of the field '{0}' is null or empty.</empty-input>
       <Invalid-char>El camp '{0}' conté alguns caràcters no vàlids. Si us plau, introdueix un altre valor.</Invalid-char>
     </msg>
   </ECMStandardPropertyNameValidator>
@@ -2105,12 +2127,12 @@
   -->
   <UIPublicationLogList>
     <header>
-      <date>Data</date>
+      <date>Date</date>
       <newState>Nou estat</newState>
-      <user>Usuari</user>
-      <description>Descripció</description>
-      <version>Versió</version>
-      <visibility>Visibilitat</visibility>
+      <user>User</user>
+      <description>Description</description>
+      <version>Version</version>
+      <visibility>Visibility</visibility>
     </header>
     <action>
       <Close>#{word.close}</Close>
@@ -2123,8 +2145,8 @@
   -->
   <UIVersionTreeList>
     <header>
-      <version>Versió</version>
-      <state>Estat</state>
+      <version>Version</version>
+      <state>State</state>
     </header>
   </UIVersionTreeList>
   <!--
@@ -2186,9 +2208,9 @@
   -->
   <UIGroupMemberSelector>
     <label>
-      <selectGroup>Selecciona Grup</selectGroup>
-      <selectUser>Selecciona usuari/a</selectUser>
-      <selectMembership>Selecciona l'Afiliació</selectMembership>
+      <selectGroup>Select Group</selectGroup>
+      <selectUser>Select User</selectUser>
+      <selectMembership>Select Membership</selectMembership>
     </label>
   </UIGroupMemberSelector>
   <!--
@@ -2206,7 +2228,7 @@
   <UIJcrExplorerEditForm>
     <title>Edita l'Explorador de fitxers</title>
     <action>
-      <Edit>Edita</Edit>
+      <Edit>Edit</Edit>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
     </action>
@@ -2227,7 +2249,7 @@
   <UIDriveSelector>
     <label>
       <driveName>Nom de la unitat</driveName>
-      <action>Acció</action>
+      <action>Action</action>
       <adddrives>Afegeix unitats</adddrives>
     </label>
   </UIDriveSelector>
@@ -2244,7 +2266,7 @@
 
   <PopUpSelectDrive>
     <title>
-      <UIDriveSelector>Selecciona unitat</UIDriveSelector>
+      <UIDriveSelector>Select Drive</UIDriveSelector>
     </title>
   </PopUpSelectDrive>
 
@@ -2256,7 +2278,7 @@
 
   <DriveNameInput>
     <title>
-      <SelectDrive>Selecciona unitat</SelectDrive>
+      <SelectDrive>Select Drive</SelectDrive>
     </title>
   </DriveNameInput>
 
@@ -2273,7 +2295,7 @@
   <UIPopupWindow>
     <title>
       <UISymLinkManager>Gestor d'Enllaços simbòlics</UISymLinkManager>
-      <UIAddTranslationManager>Afegeix una traducció</UIAddTranslationManager>
+      <UIAddTranslationManager>Add Translation</UIAddTranslationManager>
     </title>
   </UIPopupWindow>
 
@@ -2289,11 +2311,11 @@
     <msg>
       <addFolder-successful>L'enllaç simbòlic '{0}' s'ha afegit correctament.</addFolder-successful>
       <name-invalid>Si us plau, introdueix el nom de l'enllaç simbòlic.</name-invalid>
-      <name-not-allowed>Aquest nom no està permès.</name-not-allowed>
-      <fileName-error>El nom del fitxer no és vàlid.</fileName-error>
+      <name-not-allowed>This name is not allowed.</name-not-allowed>
+      <fileName-error>The file name is invalid.</fileName-error>
       <constraint-violation>No pots afegir el tipus de node '{0}' al node actual.</constraint-violation>
       <repository-exception>Accés denegat. No té permís per afegir l'enllaç simbòlic a aquest node.</repository-exception>
-      <numberformat-exception>No pot desar aquesta carpeta. El nom proporcionat ha de ser en format numèric.</numberformat-exception>
+      <numberformat-exception>You cannot save this folder. The name provided must be in numerical format.</numberformat-exception>
       <path-node-invalid>Si us plau introdueix la ruta al node.</path-node-invalid>
       <path-node-not-allowed>Aquest nom no està permès.</path-node-not-allowed>
       <non-node>No té drets d'accés al node de destí.</non-node>
@@ -2306,7 +2328,7 @@
   
   <UIAddTranslationForm>
     <label>
-      <symLinkName>Nom del enllaç simbòlic</symLinkName>
+      <symLinkName>Symlink Name</symLinkName>
       <pathNode>Ruta del document:</pathNode>
       <note>Selecciona un altre document que servirà com traducció</note>
     </label>
@@ -2317,19 +2339,19 @@
     </action>
     <msg>
       <addFolder-successful>L'enllaç simbòlic '{0}' s'ha afegit correctament.</addFolder-successful>
-      <name-invalid>Si us plau, introdueix el nom de l'enllaç simbòlic.</name-invalid>
-      <name-not-allowed>Aquest nom no està permès.</name-not-allowed>
-      <fileName-error>El nom del fitxer no és vàlid.</fileName-error>
-      <constraint-violation>No pots afegir el tipus de node '{0}' al node actual.</constraint-violation>
+      <name-invalid>Please enter the symlink name.</name-invalid>
+      <name-not-allowed>This name is not allowed.</name-not-allowed>
+      <fileName-error>The file name is invalid.</fileName-error>
+      <constraint-violation>You cannot add the'{0}' node type to the current node.</constraint-violation>
       <repository-exception>Accés denegat. No té permís per afegir l'enllaç simbòlic a aquest node.</repository-exception>
-      <numberformat-exception>No pot desar aquesta carpeta. El nom proporcionat ha de ser en format numèric.</numberformat-exception>
+      <numberformat-exception>You cannot save this folder. The name provided must be in numerical format.</numberformat-exception>
       <path-node-invalid>Si us plau introdueix la ruta al node.</path-node-invalid>
       <path-node-not-allowed>Aquest nom no està permès.</path-node-not-allowed>
-      <non-node>No té drets d'accés al node de destí.</non-node>
+      <non-node>Please select the trust target node; you may not have the right to read this node.</non-node>
       <cannot-save>S'ha produït un error en crear l'enllaç simbòlic.</cannot-save>
       <item-exists-exception>El nom del node ja existeix.</item-exists-exception>
-      <translation-node-same-language-default>El node de traducció té el mateix idioma que l'idioma per defecte del node actual.</translation-node-same-language-default>
-      <UnsupportedRepositoryOperationException>Aquest node de destí no es referenciat.</UnsupportedRepositoryOperationException>
+      <translation-node-same-language-default>The translation node has the same language as the default language of current node.</translation-node-same-language-default>
+      <UnsupportedRepositoryOperationException>This target node is not referred.</UnsupportedRepositoryOperationException>
     </msg>
   </UIAddTranslationForm>
 
@@ -2340,14 +2362,14 @@
   </UIPopupSymLink>
   <UIPopupSymLink>
     <title>
-      <UIContentSelectorOne>Seleccioni el Document</UIContentSelectorOne>
+      <UIContentSelectorOne>Select Document</UIContentSelectorOne>
     </title>
   </UIPopupSymLink>
 
   <ECMContextMenu>
     <event>
       <AddSymLink>Afegeix un enllaç simbòlic</AddSymLink>
-      <AddLocalizationLink>Afegeix una traducció</AddLocalizationLink>
+      <AddLocalizationLink>Add Translation</AddLocalizationLink>
     </event>
   </ECMContextMenu>
 
@@ -2377,7 +2399,7 @@
 
   <UIPopupTaxonomy>
     <title>
-      <UIOneTaxonomySelector>Afegeix Categories</UIOneTaxonomySelector>
+      <UIOneTaxonomySelector>Add Categories</UIOneTaxonomySelector>
     </title>
   </UIPopupTaxonomy>
 
@@ -2399,7 +2421,7 @@
     <tab>
       <label>
         <UICategoriesAddedList>Categories Referenciades</UICategoriesAddedList>
-        <UIOneNodePathSelector>Selecciona una categoria</UIOneNodePathSelector>
+        <UIOneNodePathSelector>Select Category</UIOneNodePathSelector>
       </label>
     </tab>
   </UISimpleCategoryManager>
@@ -2407,7 +2429,7 @@
   <UICategoryManager>
     <tab>
       <label>
-        <UIOneTaxonomySelector>Selecciona una categoria</UIOneTaxonomySelector>
+        <UIOneTaxonomySelector>Select Category</UIOneTaxonomySelector>
       </label>
     </tab>
   </UICategoryManager>
@@ -2419,12 +2441,12 @@
   </UISimpleCategoryManager>
   <UIPopupWindow>
     <title>
-      <UISimpleCategoryManager>Afegeix una categoria</UISimpleCategoryManager>
+      <UISimpleCategoryManager>Add Category</UISimpleCategoryManager>
     </title>
   </UIPopupWindow>
   <UICategoriesAddedList>
     <msg>
-      <ItemExistsException>El nom de la categoria ja existeix.</ItemExistsException>
+      <ItemExistsException>The category name already exists.</ItemExistsException>
     </msg>
   </UICategoriesAddedList>
 
@@ -2435,27 +2457,27 @@
       <ReplaceData>Substitueix les dades</ReplaceData>
       <Back>Torna a canviar el nom</Back>
       <Keepfile>Manté tots dos fitxers</Keepfile>
-<ReadOnly>Obrir sols lectura</ReadOnly>
-<Cancel>Cancel·la</Cancel>
+<ReadOnly>Open Read-only</ReadOnly>
+<Cancel>Cancel</Cancel>
       <KeepBoth>Conserva'ls ambdós</KeepBoth>
-      <CreateNewVersion>Crea una nova versió</CreateNewVersion>
+      <CreateNewVersion>Create a new version</CreateNewVersion>
     </label>
   </UIConfirmMessage>
 
   <UIRestoreConfirmMessage>
     <label>
       <Close>#{word.close}</Close>
-      <OK>Accepta</OK>
+      <OK>OK</OK>
       <ReplaceData>Substitueix les dades</ReplaceData>
-      <Back>Torna a canviar el nom</Back>
-      <Keepfile>Manté tots dos fitxers</Keepfile>
+      <Back>Back to Rename</Back>
+      <Keepfile>Keep both files</Keepfile>
     </label>
   </UIRestoreConfirmMessage>
 
 
   <PopupComponent>
     <title>
-      <UIOneTaxonomySelector>Afegeix Categories</UIOneTaxonomySelector>
+      <UIOneTaxonomySelector>Add Categories</UIOneTaxonomySelector>
     </title>
   </PopupComponent>
 
@@ -2500,8 +2522,8 @@
 
   <Import>
     <label>
-      <docview>Vista de documents</docview>
-      <sysview>Vista de sistema</sysview>
+      <docview>Document View</docview>
+      <sysview>System View</sysview>
     </label>
   </Import>
 
@@ -2520,10 +2542,10 @@
   <UIActionBar>
     <obtion>
       <Admin>Admin</Admin>
-      <Info>Informació</Info>
-      <Actions>Accions</Actions>
+      <Info>Info</Info>
+      <Actions>Actions</Actions>
       <Collaboration>Col. laboració</Collaboration>
-      <Search>Cerca</Search>
+      <Search>Search</Search>
     </obtion>
   </UIActionBar>
 
@@ -2601,13 +2623,13 @@
 
   <Comments>
     <tooltip>
-      <remove-comment>Elimina aquest comentari</remove-comment>
+      <remove-comment>Remove this comment</remove-comment>
       <edit-comment>Edita aquest comentari</edit-comment>
     </tooltip>
   </Comments>
   <UIDocumentInfo>
     <msg>
-      <confirm-deletecomment>Està segur que vol suprimir aquest comentari?</confirm-deletecomment>
+      <confirm-deletecomment>Are you sure you want to delete this comment?</confirm-deletecomment>
     </msg>
   </UIDocumentInfo>
 
@@ -2631,7 +2653,7 @@
 
   <UIViewSearchResult>
     <tooltip>
-      <remove-attachment>Està segur que vol suprimir aquest fitxer adjunt?</remove-attachment>
+      <remove-attachment>Are you sure you want to remove this attachment file?</remove-attachment>
     </tooltip>
   </UIViewSearchResult>
 
@@ -2667,7 +2689,7 @@
 
   <UISavedSearches>
     <title>
-      <savedSearches>Cerques Desades</savedSearches>
+      <savedSearches>Saved Searches</savedSearches>
     </title>
   </UISavedSearches>
   <DocumentType>
@@ -2676,19 +2698,19 @@
        <Video>Vídeo</Video>
        <Music>Música</Music>
        <Documents>Document</Documents>
-       <Content>Contingut</Content>
+       <Content>Content</Content>
     </label>
   </DocumentType>
 
   <UIDocumentFilterForm>
     <label>
-      <Images>Imatge</Images>
-      <Video>Vídeo</Video>
-      <Music>Música</Music>
+      <Images>Image</Images>
+      <Video>Video</Video>
+      <Music>Music</Music>
       <Documents>Document</Documents>
-      <Content>Contingut</Content>
+      <Content>Content</Content>
     </label>
-    <title>Configura les preferències de filtre</title>
+    <title>Set Up Filter Preferences</title>
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
@@ -2698,7 +2720,7 @@
   <UIAllItemsByType>
     <label>
     <ByType>Filtrar per tipus</ByType>
-      <DocumentFilterConfiguration>Configura les preferències de filtre</DocumentFilterConfiguration>
+      <DocumentFilterConfiguration>Set Up Filter Preferences</DocumentFilterConfiguration>
     </label>
     <title>
       <ShowVideo>Mostra tots els arxius de tipus vídeo</ShowVideo>
@@ -2727,10 +2749,10 @@
 
   <UIAllItemsPreferenceForm>
     <label>
-      <showOwnedByUser>Soc el propietari</showOwnedByUser>
-      <showFavourites>Favorits</showFavourites>
-      <showHiddens>Ocult</showHiddens>
-      <showTrash>Paperera</showTrash>
+      <showOwnedByUser>Owned by me</showOwnedByUser>
+      <showFavourites>Favorites</showFavourites>
+      <showHiddens>Hidden</showHiddens>
+      <showTrash>Trash</showTrash>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -2754,19 +2776,19 @@
   </UICategoryForm>
   <UIPopupWindow>
     <title>
-      <UICategoryForm>Afegeix una categoria</UICategoryForm>
+      <UICategoryForm>Add Category</UICategoryForm>
     </title>
   </UIPopupWindow>
   <UIActionBar>
     <tooltip>
-      <AddCategory>Afegeix una categoria</AddCategory>
+      <AddCategory>Add Category</AddCategory>
     </tooltip>
    </UIActionBar>
 
    <UITaggingForm>
     <label>
-      <Public>Públic</Public>
-      <Private>Privat</Private>
+      <Public>Public</Public>
+      <Private>Private</Private>
       <tagScopes>Àmbits d'etiqueta</tagScopes>
     </label>
    </UITaggingForm>
@@ -2775,21 +2797,21 @@
     <title>
       <PublicTags>Etiquetes</PublicTags>
       <EditPublicTags>Editar Etiquetes</EditPublicTags>
-      <PrivateTags>Etiquetes</PrivateTags>
+      <PrivateTags>Tags</PrivateTags>
     </title>
   </UITagExplorer>
 
   <UIEditingTagsForm>
     <header>
       <name>Nom</name>
-      <relatedDocuments>Documents relacionats</relatedDocuments>
+      <relatedDocuments>Related Documents</relatedDocuments>
       <action>Acció</action>
     </header>
     <action>
       <title>
         <EditTag>Editar l'etiqueta</EditTag>
         <RemoveTag>Elimina l'Etiqueta</RemoveTag>
-        <AddTag>Afegeix una etiqueta</AddTag>
+        <AddTag>Add Tag</AddTag>
       </title>
     </action>
     <msg>
@@ -2811,13 +2833,13 @@
     </action>
     <label>
       <tagName>Nom d'etiqueta:</tagName>
-      <relatedDocuments>Documents relacionats</relatedDocuments>
+      <relatedDocuments>Related Documents</relatedDocuments>
     </label>
   </UITagForm>
 
   <TagPopup>
     <title>
-      <UITagForm>Etiqueta</UITagForm>
+      <UITagForm>Tag</UITagForm>
     </title>
   </TagPopup>
 
@@ -2834,7 +2856,7 @@
 
   <UIPopupMenu>
     <msg>
-      <editTagAccessDenied>Accés denegat.</editTagAccessDenied>
+      <editTagAccessDenied>Access denied.</editTagAccessDenied>
     </msg>
   </UIPopupMenu>
 
@@ -2846,21 +2868,21 @@
 
     <PopupComponent>
     <title>
-      <UINodeTypeSelector>Selecciona un tipus de node</UINodeTypeSelector>
+      <UINodeTypeSelector>Select Node Type</UINodeTypeSelector>
     </title>
   </PopupComponent>
 
     <UIActionForm>
     <title>
       <ShowComponent>Mostra el component</ShowComponent>
-      <removeReference>Elimina</removeReference>
+      <removeReference>Remove</removeReference>
     </title>
   </UIActionForm>
 
   <EditFormAction>
     <title>
-      <ShowComponent>Mostra el component</ShowComponent>
-      <removeReference>Elimina</removeReference>
+      <ShowComponent>Show Component</ShowComponent>
+      <removeReference>Remove</removeReference>
     </title>
   </EditFormAction>
 
@@ -2887,7 +2909,7 @@
 
   <UITreeExplorer>
     <msg>
-      <repository-error>S'ha produït un error. La informació sobre el repositori s'ha perdut.</repository-error>
+      <repository-error>An error occurred. The information about the repository was lost.</repository-error>
     </msg>
   </UITreeExplorer>
   <UIDocumentForm>
@@ -2897,7 +2919,7 @@
   </UIDocumentForm>
   <UIActionForm>
     <msg>
-      <constraintviolation-exception>No pot desar el document. Les dades d'entrada falten o son invàlides.</constraintviolation-exception>
+      <constraintviolation-exception>You cannot save the document. The input data are missing or invalid.</constraintviolation-exception>
     </msg>
   </UIActionForm>
 
@@ -2912,7 +2934,7 @@
   </UISelectRestorePath>
   <PathNode>
     <title>
-      <Add>Afegeix</Add>
+      <Add>Add</Add>
     </title>
   </PathNode>
   <UIPopupPathFoRestore>
@@ -2950,39 +2972,39 @@
     </button>
     <revisions>
       <version>Revisions</version>
-      <date>Data</date>
-      <author>Autor</author>
-      <status>Estat</status>
-      <action>Acció</action>
-      <label>Revisió</label>
+      <date>Date</date>
+      <author>Author</author>
+      <status>Status</status>
+      <action>Action</action>
+      <label>Revision</label>
       <none>Cap revisió</none>
       <seeall>Veure totes les versions</seeall>
       <currentVersion>Revisió actual</currentVersion>
       <confirm>Perdrà lo treballat al esborrany. Està segur que vol substituir la revisió actual?</confirm>
     </revisions>
     <status>
-      <version>Revisió</version>
-      <title>Estat</title>
-      <archived>Arxivat</archived>
-      <obsolete>Obsolet</obsolete>
-      <unpublished>No publicat</unpublished>
+      <version>Revision</version>
+      <title>Status</title>
+      <archived>Archived</archived>
+      <obsolete>Obsolete</obsolete>
+      <unpublished>Unpublished</unpublished>
       <enrolled>Inscrit</enrolled>
       <draft>Esborrany</draft>
-      <pending>Pendent</pending>
-      <approved>Aprovat</approved>
-      <inreview>En  revisió</inreview>
+      <pending>Pending</pending>
+      <approved>Approved</approved>
+      <inreview>In Review</inreview>
       <staged>Llest per publicar</staged>
-      <published>Publicat</published>
-      <live>Publicat</live>
+      <published>Published</published>
+      <live>Published</live>
     </status>
     <scheduled>
-      <title>Programat</title>
-      <from>Des de</from>
-      <to>A</to>
+      <title>Scheduled</title>
+      <from>From</from>
+      <to>To</to>
     </scheduled>
     <title>
-      <preview>Vista prèvia</preview>
-      <restore>Restaura</restore>
+      <preview>Preview</preview>
+      <restore>Restore</restore>
     </title>
     <msg>
       <have-no-view-template>La plantilla de visualització no és compatible.</have-no-view-template>
@@ -2991,11 +3013,11 @@
   </UIPublicationPanel>
   <UIPublicationHistory>
     <header>
-      <date>Data</date>
+      <date>Date</date>
       <versionName>Nom de la revisió</versionName>
       <currentState>Estat actual</currentState>
-      <user>Autor</user>
-      <description>Descripció</description>
+      <user>Author</user>
+      <description>Description</description>
     </header>
     <create-version>Una nova versió ha sigut creada</create-version>
   </UIPublicationHistory>
@@ -3029,8 +3051,8 @@
   </UIPublicationPanel>
   <UIPopupWindow>
     <title>
-      <UIPublicationContainer>Gestiona la Publicació</UIPublicationContainer>
-      <UIPublishingPanel>Gestiona la Publicació</UIPublishingPanel>
+      <UIPublicationContainer>Manage Publication</UIPublicationContainer>
+      <UIPublishingPanel>Manage Publication</UIPublishingPanel>
     </title>
   </UIPopupWindow>
   <WCMContentView>
@@ -3081,9 +3103,10 @@
     </DrivesArea>
     <msg>
       <no-view-found>No hi ha cap visualització assignada als seus permisos d'accés a la unitat '{0}'.</no-view-found>
-      <access-denied>Accés denegat. Potser no te permisos sobre la Unitat del Espai de Treball "{0}".</access-denied>
+      <access-denied>Access denied. You may not have permission in the workspace of drive '{0}'.</access-denied>
+      <not-found>The document you are trying to access is no longer available.</not-found>
       <empty-drives>Accés denegat. O bé no hi ha una unitat, o bé no té permís per accedir a algunes unitats en aquest repositori.</empty-drives>
-      <workspace-not-exist>La unitat '{0}' ha estat emmagatzemada en una àrea de treball no reconeguda. Si us plau, configura la untat de nou.</workspace-not-exist>
+      <workspace-not-exist>Drive '{0}' was stored in one unrecognized workspace. Please reconfigure this drive.</workspace-not-exist>
     </msg>
   </UIDrivesArea>
   <UIJcrExplorerEditForm>
@@ -3112,13 +3135,13 @@
   <false>Fals</false>
   <Electronic>Electrònica</Electronic>
   <Paper>Paper</Paper>
-  <NONE>Cap</NONE>
+  <NONE>None</NONE>
   <CLASSIFIED>Classificat</CLASSIFIED>
   <UNCLASSIFIED>Desclassificat</UNCLASSIFIED>
   <NOCONTRACT>Cap contracte</NOCONTRACT>
   <one-minute>Un minut</one-minute>
-  <hourly>Per hora</hourly>
-  <daily>Diàriament</daily>
+  <hourly>Hourly</hourly>
+  <daily>Daily</daily>
   <quarterly>Trimestralment</quarterly>
   <yearly>Anualment</yearly>
   <ten-years>Deu anys</ten-years>
@@ -3162,7 +3185,7 @@
     <InvalidCharacters>Els caràcters no vàlids seran canviats per '-'</InvalidCharacters>
     <DropFileMessage>Deixa aquí els fitxers a la carpeta actual</DropFileMessage>
     <Close>#{word.close}</Close>
-    <in>en</in>
+    <in>in</in>
     <MaxFileSizeAlert>La mida del fitxer excedeix el límit de mida atorgada de</MaxFileSizeAlert>
     <Waiting>Esperant</Waiting>
     <Error>Error</Error>
@@ -3178,7 +3201,7 @@
   </UIMultiUpload>
   <UIDocumentNodeList>
   <label>
-  <CreatedOn>Creat el</CreatedOn>
+  <CreatedOn>Created on</CreatedOn>
   <Updated>Actualitzat el</Updated>
   <by>per</by>
   <you>tu</you>
@@ -3186,13 +3209,13 @@
   </UIDocumentNodeList>
   <FileView>
     <label>
-      <name>Nom</name>
-      <date>Data</date>
+      <name>Name</name>
+      <date>Date</date>
       <size>Mida</size>
-      <sortBy>Ordenar per:</sortBy>
+      <sortBy>Sort by:</sortBy>
       <filesAreSelected>Els fitxers estan seleccionats.</filesAreSelected>
       <ClearSelection>Neteja la selecció</ClearSelection>
-      <more>Més</more>
+      <more>More</more>
     </label>
   </FileView>
   <UIPropertyForm>

@@ -18,8 +18,8 @@
       <Document>Dokument</Document>
       <DocumentAndPage>Dokument i strona</DocumentAndPage>
       <documentandpage>Dokument i strona</documentandpage>
-      <results>Results {0} to {1} for {2}</results>
-      <oneResult>Only one result for {0}</oneResult>
+      <results>Wyniki {0} do {1} dla {2}</results>
+      <oneResult>Tylko jeden wynik dla {0}</oneResult>
       <ofAboutCaption>o</ofAboutCaption>
       <timeUnitCaption>sekund</timeUnitCaption>
       <similar>Strony, gdzie pojawia się ta sama treść</similar>

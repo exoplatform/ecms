@@ -40,11 +40,9 @@
   -->
   <UITaxonomyWorkingArea>
     <msg>
-      <referential-integrity>Ni možno prebrati izvorne datoteke, ali pa je ciljna kategorija podkategorija.
-      </referential-integrity>
+      <referential-integrity>Ni možno prebrati izvorne datoteke, ali pa je ciljna kategorija podkategorija.</referential-integrity>
       <no-taxonomy-selected>Kopirati ali izrezati morate vsaj eno kategorijo.</no-taxonomy-selected>
-      <node-is-cutting>Ne moreš prilepiti (paste) tukaj. Vozlišče kategorije "{0}" je morda izrezano (cut).
-      </node-is-cutting>
+      <node-is-cutting>Ne moreš prilepiti (paste) tukaj. Vozlišče kategorije "{0}" je morda izrezano (cut).</node-is-cutting>
       <can-not-paste>V odložišču ni nobenega podatka, ki bi ga lahko prilepil.</can-not-paste>
       <reference-exception>Te kategorije ni mogoče zbrisati, ker se nanjo sklicuje vsebina.</reference-exception>
       <path-error>Pri odstranjevanju vozlišča kategorije je prišlo do napake.</path-error>
@@ -59,7 +57,7 @@
       <paste>Prilepi</paste>
       <cut>Izreži</cut>
       <copy>Kopiraj</copy>
-      <remove>Zbriši</remove>
+      <remove>Izbriši</remove>
     </title>
   </UITaxonomyManager>
 
@@ -73,12 +71,8 @@
       <info>
         <UITaxonomyTreeMainForm>Navedi ime kategorije, delovni prostor in pot do domače strani.</UITaxonomyTreeMainForm>
         <UIPermissionTreeManager>Nastavi dovoljenja za drevesno strukturo kategorije.</UIPermissionTreeManager>
-        <UIActionTaxonomyManager>Dodajte Dejanje drevesni strukturi kategorije, da bi zaključili izdelavo ali
-          posodobitev.
-        </UIActionTaxonomyManager>
-        <UITaxonomyTreeCreateChild>Urejanje derevesa taksonomije z dodajanjem, kopiranjem, izrezovanjem in izbiranjem
-          dovoljenj.
-        </UITaxonomyTreeCreateChild>
+        <UIActionTaxonomyManager>Dodajte Dejanje drevesni strukturi kategorije, da bi zaključili izdelavo ali posodobitev.</UIActionTaxonomyManager>
+        <UITaxonomyTreeCreateChild>Urejanje derevesa taksonomije z dodajanjem, kopiranjem, izrezovanjem in izbiranjem dovoljenj.</UITaxonomyTreeCreateChild>
       </info>
     </tab>
     <msg>
@@ -256,11 +250,10 @@
     <msg>
       <confirm-delete>Ali ste prepričani, da želite izbrisati ta metapodatek?</confirm-delete>
       <delete-successful>Predloge od '{0}' so bile uspešno izbrisane.</delete-successful>
-      <path-not-found-exception>Ta metapodatek je izbrisan ali spremenjen. Kliknite gumb Osveži.
-      </path-not-found-exception>
+      <path-not-found-exception>Ta metapodatek je izbrisan ali spremenjen. Kliknite gumb Osveži.</path-not-found-exception>
     </msg>
     <action>
-      <Add>Dodajanje metapodatkov</Add>
+      <Add>Dodaj metapodatke</Add>
       <Cancel>#{word.cancel}</Cancel>
     </action>
   </UIMetadataList>
@@ -415,7 +408,7 @@
   </UIDriveForm>
   <AddDriveManagerPopup>
     <title>
-      <UIDriveForm>Dodaj pogon</UIDriveForm>
+      <UIDriveForm>Add Drive</UIDriveForm>
     </title>
   </AddDriveManagerPopup>
   <EditDriveManagerPopup>
@@ -524,7 +517,7 @@
       <namespace>Imenski prostor</namespace>
       <propertyNamespace>Imenski prostor</propertyNamespace>
       <nodeTypeName>Ime vrste vozlišče</nodeTypeName>
-      <mixinType>Je vrste Mixin</mixinType>
+      <mixinType>Is Mixin Type</mixinType>
       <hasOrderableChildNodes>Razvrščajoča podrejena vozlišča</hasOrderableChildNodes>
       <primaryItemName>Ime primarnega elementa</primaryItemName>
       <superTypes>Super vrste</superTypes>
@@ -532,7 +525,7 @@
       <requiredType>Zahtevana vrsta</requiredType>
       <multiple>je Večkratno</multiple>
       <mandatory>je Obvezno</mandatory>
-      <autoCreated>je Samodejno ustvarjeno</autoCreated>
+      <autoCreated>Je samodejno ustvarjeno</autoCreated>
       <parentversion>Na nadrejeni različici</parentversion>
       <protected>je Zaščiten</protected>
       <constraints>Vrednosti</constraints>
@@ -540,7 +533,7 @@
       <sameNameSiblings>Ime se podvaja</sameNameSiblings>
       <childNamespace>Imenski prostor</childNamespace>
       <childMandatory>je Obvezno</childMandatory>
-      <childAutocreated>je Samodejno ustvarjeno</childAutocreated>
+      <childAutocreated>Je samodejno ustvarjeno</childAutocreated>
       <childParentversion>Na nadrejeni različici</childParentversion>
       <childProtected>je Zaščiten</childProtected>
       <childNodename>Ime definicije</childNodename>
@@ -568,12 +561,8 @@
     </action>
     <msg>
       <register-successfully>Vrsta vozlišča {0} je bila uspešno registrirana.</register-successfully>
-      <supertype-is-madatory>Pri registraciji nove vrste vozlišča je super vrsta obvezna. Izberite vsaj eno super
-        vrsto.
-      </supertype-is-madatory>
-      <register-failed>Registracija vrste vozlišča je bila neuspešna. Mogoče že obstaja ali pa je super vrsta
-        neveljavna.
-      </register-failed>
+      <supertype-is-madatory>Pri registraciji nove vrste vozlišča je super vrsta obvezna. Izberite vsaj eno super vrsto.</supertype-is-madatory>
+      <register-failed>Registracija vrste vozlišča je bila neuspešna. Mogoče že obstaja ali pa je super vrsta neveljavna.</register-failed>
       <nodeType-name>Ime vrste vozlišča je obvezno.</nodeType-name>
       <fileName-invalid>Ime datoteke vsebuje nedovoljene znake.</fileName-invalid>
       <node-type-exists>Vrsta vozlišča '{0}' že obstaja.</node-type-exists>
@@ -849,8 +838,8 @@
   </ViewPopup>
   <AddPopup>
     <title>
-      <UIViewFormTabPane>Dodajanje pogleda</UIViewFormTabPane>
-      <AddPopup>Dodajanje predloge</AddPopup>
+      <UIViewFormTabPane>Dodaj pogled</UIViewFormTabPane>
+      <AddPopup>Dodaj predlogo</AddPopup>
     </title>
   </AddPopup>
   <EditPopup>
@@ -965,8 +954,8 @@
       <tabs>Zavihki</tabs>
       <template>Predloge</template>
       <enableVersion>Omogoči različice</enableVersion>
-      <addFolder>Dodajanje mape</addFolder>
-      <addDocument>Dodajanje dokumenta</addDocument>
+      <addFolder>Dodaj mapo</addFolder>
+      <addDocument>Dodaj dokument</addDocument>
       <editDocument>Urejanje dokumenta</editDocument>
       <upload>Prenos</upload>
       <paste>Prilepi</paste>
@@ -992,17 +981,17 @@
       <manageHidden>Skrij/Pokaži vsebino</manageHidden>
       <comment>Komentiranje</comment>
       <vote>Glasovanje</vote>
-      <addCategory>Dodajanje kategorije</addCategory>
-      <addLocalizationLink>Dodajanje prevoda</addLocalizationLink>
+      <addCategory>Dodaj kategorijo</addCategory>
+      <addLocalizationLink>Dodaj prevod</addLocalizationLink>
       <publicationRequestApproval>Prošnja za odobritev</publicationRequestApproval>
       <publicationApproveContent>Odobravanje vsebine</publicationApproveContent>
       <publicationPublish>Objavi</publicationPublish>
       <contentNavigation>Krmarjenje po vsebini</contentNavigation>
-      <addSymLink>Dodajanje simbolične povezave</addSymLink>
+      <addSymLink>Dodaj simbolično povezavo</addSymLink>
       <checkIn>Sproščanje</checkIn>
       <checkOut>Rezervacija</checkOut>
       <shareDocuments>Skupna raba</shareDocuments>
-      <openDocument>Oddaljeno urejanje</openDocument>
+      <openDocument>Remote Edit</openDocument>
       <editProperty>Urejanje lastnosti dokumenta</editProperty>
       <uploadNewVersion>Nalaganje nove različice</uploadNewVersion>
     </label>
@@ -1034,7 +1023,7 @@
   </UIViewFormTabPane>
   <PopupViewPermission>
     <title>
-      <UIPermissionSelector>Izbirnik dovoljenj</UIPermissionSelector>
+      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
     </title>
   </PopupViewPermission>
 
@@ -1416,7 +1405,7 @@
 
   <PopupTaxonomyTreePermission>
     <title>
-      <UIPermissionSelector>Izbirnik dovoljenj</UIPermissionSelector>
+      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
     </title>
   </PopupTaxonomyTreePermission>
 
@@ -1531,7 +1520,7 @@
     <header>
       <name>Vrsta</name>
       <action>Dejanje</action>
-      <label>Predloga</label>
+      <label>Template</label>
       <icon>Ikona</icon>
     </header>
     <action>
@@ -1549,7 +1538,7 @@
     <header>
       <name>Vrsta</name>
       <action>Dejanje</action>
-      <label>Predloga</label>
+      <label>Template</label>
       <icon>Ikona</icon>
     </header>
     <action>
@@ -1566,7 +1555,7 @@
   <UIOthersTemplateList>
     <header>
       <name>Vrsta</name>
-      <label>Predloga</label>
+      <label>Template</label>
       <icon>Ikona</icon>
       <action>Dejanje</action>
     </header>
@@ -1603,7 +1592,7 @@
     <header>
       <title>Ime</title>
       <action>Dejanje</action>
-      <template>Predloga</template>
+      <template>Template</template>
     </header>
     <action>
       <AddTemplate>Dodaj predlogo</AddTemplate>
@@ -1622,7 +1611,7 @@
     <header>
       <title>Ime</title>
       <action>Dejanje</action>
-      <template>Predloga</template>
+      <template>Template</template>
     </header>
     <title>
       <Edit>Uredi</Edit>
@@ -1639,7 +1628,7 @@
     <header>
       <title>Ime</title>
       <action>Dejanje</action>
-      <template>Predloga</template>
+      <template>Template</template>
     </header>
     <action>
       <AddTemplate>Dodajanje predloge</AddTemplate>
@@ -1692,7 +1681,7 @@
     </action>
     <label>
       <title>Ime</title>
-      <template>Ime predloge</template>
+      <template>Template Name</template>
       <content>Vsebina</content>
       <type>Vrsta predloge</type>
     </label>
@@ -1706,7 +1695,7 @@
     </action>
     <label>
       <title>Ime</title>
-      <template>Ime predloge</template>
+      <template>Template Name</template>
       <content>Vsebina</content>
       <type>Vrsta predloge</type>
     </label>
@@ -1720,14 +1709,14 @@
     </action>
     <label>
       <title>Ime</title>
-      <template>Ime predloge</template>
+      <template>Template Name</template>
       <content>Vsebina</content>
       <type>Vrsta predloge</type>
     </label>
   </UICLVTemplateForm_CateTemplateContainer>
   <UICLVTemplateForm>
     <label>
-      <paginators>Številčenje strani</paginators>
+      <paginators>Paginator</paginators>
       <list>Vsebina</list>
       <navigation>Krmarjenje</navigation>
     </label>
@@ -1748,12 +1737,12 @@
   -->
   <AddNewTemplatePermission>
     <title>
-      <UIPermissionSelector>Izbirnik dovoljenj</UIPermissionSelector>
+      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
     </title>
   </AddNewTemplatePermission>
   <TemplatePermission>
     <title>
-      <UIPermissionSelector>Izberite dovoljenje</UIPermissionSelector>
+      <UIPermissionSelector>Select Permission</UIPermissionSelector>
     </title>
   </TemplatePermission>
   <TemplateContainerPopup>
@@ -1766,10 +1755,10 @@
       <UITemplateContent>ViewForm</UITemplateContent>
       <UIPopupWindow>Ogled dovoljenj</UIPopupWindow>
       <selectVersion>Različice</selectVersion>
-      <content>Vsebina:</content>
+      <content>Content:</content>
       <name>Ime:</name>
       <isDocumentTemplate>je Predloga dokumenta</isDocumentTemplate>
-      <viewPermission>Dovoljenje:</viewPermission>
+      <viewPermission>Permission:</viewPermission>
       <enableVersion>Shranjevanje različic je aktivirano</enableVersion>
     </label>
     <title>Dodaj/Uredi Pogled</title>
@@ -1779,22 +1768,22 @@
       <UITemplateContent>DialogForm</UITemplateContent>
       <UIPopupWindow>Pogovorno okno za dovoljenja</UIPopupWindow>
       <selectVersion>Različice</selectVersion>
-      <content>Vsebina:</content>
+      <content>Content:</content>
       <name>Ime:</name>
-      <isDocumentTemplate>je Predloga dokumenta</isDocumentTemplate>
-      <viewPermission>Dovoljenje:</viewPermission>
-      <enableVersion>Omogoči shranjevanje različic</enableVersion>
+      <isDocumentTemplate>is Document Template</isDocumentTemplate>
+      <viewPermission>Permission:</viewPermission>
+      <enableVersion>Enable Versioning</enableVersion>
     </label>
     <title>Dodaj/Uredi Pogovorno okno</title>
   </DialogForm>
   <DialogFormTemplatePermission>
     <title>
-      <UIPermissionSelector>Izbirnik dovoljenj</UIPermissionSelector>
+      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
     </title>
   </DialogFormTemplatePermission>
   <ViewFormTemplatePermission>
     <title>
-      <UIPermissionSelector>Izbirnik dovoljenj</UIPermissionSelector>
+      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
     </title>
   </ViewFormTemplatePermission>
   <TemplateContainerPopup>
@@ -1826,7 +1815,7 @@
     <label>
       <name>Ime:</name>
       <label>Oznaka:</label>
-      <isDocumentTemplate>je Predloga dokumenta:</isDocumentTemplate>
+      <isDocumentTemplate>is Document Template:</isDocumentTemplate>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -1866,7 +1855,7 @@
     <header>
       <name>Ime</name>
       <roles>Vloge</roles>
-      <baseVersion>Različica</baseVersion>
+      <baseVersion>Version</baseVersion>
       <action>Dejanja</action>
     </header>
     <msg>
@@ -1920,7 +1909,7 @@
   -->
   <JCRBrowser>
     <title>
-      <UIOneNodePathSelector>Izberite pot za Domov</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Select Home Path</UIOneNodePathSelector>
     </title>
   </JCRBrowser>
   <JCRBrowserAssets>
@@ -1951,8 +1940,7 @@
     <msg>
       <confirm-delete>Ali ste prepričani, da želite izbrisati to poizvedbo?</confirm-delete>
       <query-not-existed>Poizvedba ne obstaja več.</query-not-existed>
-      <can-not-remove>Pri brisanju poizvedbe je prišlo do napake. Za informacije se obrnite na skrbnika.
-      </can-not-remove>
+      <can-not-remove>Pri brisanju poizvedbe je prišlo do napake. Za informacije se obrnite na skrbnika.</can-not-remove>
     </msg>
   </UIQueriesList>
   <UIQueriesForm>
@@ -1972,7 +1960,7 @@
       <permission-require>Izberite dovoljenja.</permission-require>
       <name-invalid>Polje ime ne sme vsebovati posebnih znakov.</name-invalid>
       <name-existing>To ime za poizvedbe že obstaja. Izberite drugo.</name-existing>
-      <invalid-query>Poizvedba ni veljavna. Prosimo, preverite izjavo poizvedbe.</invalid-query>
+      <invalid-query>Poizvedba ni veljavna. Prosimo, preverite stavek poizvedbe.</invalid-query>
       <access-denied>Dostop zavrnjen. Nimate dovoljenja za to dejanje.</access-denied>
     </msg>
   </UIQueriesForm>
@@ -1988,7 +1976,7 @@
   </EditQueryForm>
   <PermissionPopup>
     <title>
-      <UIGroupMemberSelector>Izbirnik dovoljenj</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Permission Selector</UIGroupMemberSelector>
     </title>
   </PermissionPopup>
   <!--
@@ -2029,9 +2017,7 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <range-validator>Obseg ni veljaven. Oblika mora biti: a...b, med katerimi so a in b pozitivna cela števila.
-        Namesto b lahko uporabite * in s tem nakažete, da je obseg neomejen.
-      </range-validator>
+      <range-validator>Obseg ni veljaven. Oblika mora biti: a...b, med katerimi so a in b pozitivna cela števila. Namesto b lahko uporabite * in s tem nakažete, da je obseg neomejen.</range-validator>
       <error-update>Posodobitev je spodletela. Informacije so neveljavne.</error-update>
       <item-not-existing>Spremembe oznake ne morete shraniti, saj v bazi ne obstaja več.</item-not-existing>
     </msg>
@@ -2127,7 +2113,7 @@
   </childNodeDefinition>
   <propertyDefinition>
     <title>
-      <AddConstraints>Dodaj omejitve</AddConstraints>
+      <AddConstraints>Add Constraints</AddConstraints>
     </title>
   </propertyDefinition>
   <authInputSet>
@@ -2174,7 +2160,7 @@
     <label>
       <selectGroup>Izberi skupino</selectGroup>
       <selectUser>Izberi uporabnika</selectUser>
-      <selectMembership>Izberi članstvo</selectMembership>
+      <selectMembership>Select Membership</selectMembership>
     </label>
   </UIDrivePermissionSelector>
 
@@ -2182,7 +2168,7 @@
     <label>
       <selectGroup>Izberi skupino</selectGroup>
       <selectUser>Izberi uporabnika</selectUser>
-      <selectMembership>Izberi članstvo</selectMembership>
+      <selectMembership>Select Membership</selectMembership>
     </label>
   </UIPermissionSelector>
 
@@ -2211,7 +2197,7 @@
   </MetadataPermission>
   <MetadataPermission>
     <label>
-      <selectMembership>Izberi članstvo</selectMembership>
+      <selectMembership>Select Membership</selectMembership>
     </label>
   </MetadataPermission>
   <anyPermission>
@@ -2226,7 +2212,7 @@
     <label>
       <selectGroup>Izberi skupino</selectGroup>
       <selectUser>Izberi uporabnika</selectUser>
-      <selectMembership>Izberi članstvo</selectMembership>
+      <selectMembership>Select Membership</selectMembership>
     </label>
   </QueriesPermissionBrowse>
   <!--
@@ -2249,8 +2235,8 @@
 
   <UITaxonomyTreeMainForm>
     <msg>
-      <homepath-emty>Pot do domače strani je obveza.</homepath-emty>
-      <targetpath-emty>Ciljna pot je obvezna.</targetpath-emty>
+      <homepath-emty>The home path is required.</homepath-emty>
+      <targetpath-emty>The target path is required.</targetpath-emty>
     </msg>
   </UITaxonomyTreeMainForm>
   <UITaxonomyWorkingArea>
@@ -2347,9 +2333,7 @@
       <UnLock>Odkleni</UnLock>
     </tooltip>
     <msg>
-      <access-denied-exception>Nimate dovoljenja za dostop do vozlišča, ki se nahaja na naslovu {0}, ali pa je vozlišče
-        bilo izbrisano.
-      </access-denied-exception>
+      <access-denied-exception>Nimate dovoljenja za dostop do vozlišča, ki se nahaja na naslovu {0}, ali pa je vozlišče bilo izbrisano.</access-denied-exception>
     </msg>
   </UILockNodeList>
   <EditUnLockForm>
@@ -2392,8 +2376,8 @@
   <UISkinTab>
     <header>
       <name>Ime</name>
-      <roles>Vloge</roles>
-      <baseVersion>Različica</baseVersion>
+      <roles>Roles</roles>
+      <baseVersion>Version</baseVersion>
       <action>Dejanja</action>
     </header>
     <msg>
@@ -2413,11 +2397,11 @@
       <UITemplateContent>SkinForm</UITemplateContent>
       <UIPopupWindow>Dovoljenje preobleke</UIPopupWindow>
       <selectVersion>Različice</selectVersion>
-      <content>Vsebina:</content>
+      <content>Content:</content>
       <name>Ime:</name>
-      <isDocumentTemplate>je Predloga dokumenta</isDocumentTemplate>
-      <viewPermission>Dovoljenje:</viewPermission>
-      <enableVersion>Omogoči shranjevanje različic</enableVersion>
+      <isDocumentTemplate>is Document Template</isDocumentTemplate>
+      <viewPermission>Permission:</viewPermission>
+      <enableVersion>Enable Versioning</enableVersion>
     </label>
     <title>Dodaj/Uredi preobleko</title>
   </SkinForm>
@@ -2463,8 +2447,7 @@
     </action>
     <msg>
       <xss-vulnerability-character>Polje '{0}' vsebuje znake, ki povzročajo XSS ranljivost</xss-vulnerability-character>
-      <xss-vulnerability-character-wo-label>Vnos lahko vsebuje znake, ki povzročajo XSS ranljivost
-      </xss-vulnerability-character-wo-label>
+      <xss-vulnerability-character-wo-label>Vnos lahko vsebuje znake, ki povzročajo XSS ranljivost</xss-vulnerability-character-wo-label>
     </msg>
   </UIActionForm>
 
@@ -2502,7 +2485,7 @@
       <Add>Dodaj</Add>
     </action>
     <label>
-      <userOrGroup>Članstva:</userOrGroup>
+      <userOrGroup>Memberships:</userOrGroup>
     </label>
     <msg>
       <userOrGroup-alreadyExists>To članstvo že obstaja. Izberite drugo.</userOrGroup-alreadyExists>
@@ -2512,7 +2495,7 @@
   <UIGroupMemberSelector>
     <label>
       <selectGroup>Izberi skupino</selectGroup>
-      <selectMembership>Izberi članstvo</selectMembership>
+      <selectMembership>Select Membership</selectMembership>
     </label>
   </UIGroupMemberSelector>
 
@@ -2522,7 +2505,7 @@
     </msg>
     <action>
       <title>
-        <AddStyle>Dodaj slog</AddStyle>
+        <AddStyle>Add Style</AddStyle>
       </title>
     </action>
   </UIFolksonomyManager>
@@ -2540,22 +2523,18 @@
   </NodeTypeNameValidator>
   <UIActionForm>
     <msg>
-      <constraint-violation-exception>Vozlišče '{0}' ne more biti dodano v '{1}' v delovni prostor '{2}'. Obstaja težava
-        z dovoljenji ali omejitvami.
-      </constraint-violation-exception>
+      <constraint-violation-exception>Vozlišče '{0}' ne more biti dodano v '{1}' v delovni prostor '{2}'.  Obstaja težava  z dovoljenji ali omejitvami.</constraint-violation-exception>
     </msg>
   </UIActionForm>
 
   <UIWorkspaceWizard>
     <msg>
-      <name-not-allowed>Prepovedano ime</name-not-allowed>
+      <name-not-allowed>Forbidden Name</name-not-allowed>
     </msg>
   </UIWorkspaceWizard>
   <UIRepositoryForm>
     <msg>
-      <not-complete-repository>The repository is being created. You need to wait a few minutes before creating another
-        one.
-      </not-complete-repository>
+      <not-complete-repository>The repository is being created. You need to wait a few minutes before creating another one.</not-complete-repository>
     </msg>
   </UIRepositoryForm>
 
@@ -2616,9 +2595,7 @@
   </UIPageIterator>
   <UILockNodeList>
     <msg>
-      <can-not-unlock-node>Nimaš dovoljenja za odklepanje tega vozlišča. Obrnite se na skrbnika, da vam dodeli ustrezno
-        pravico.
-      </can-not-unlock-node>
+      <can-not-unlock-node>Nimaš dovoljenja za odklepanje tega vozlišča. Obrnite se na skrbnika, da vam dodeli ustrezno pravico.</can-not-unlock-node>
     </msg>
   </UILockNodeList>
 </bundle>

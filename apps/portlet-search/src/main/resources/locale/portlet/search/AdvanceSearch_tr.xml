@@ -18,8 +18,8 @@
       <Document>Belge</Document>
       <DocumentAndPage>Belge ve Sayfa</DocumentAndPage>
       <documentandpage>Belge ve Sayfa Sayfa</documentandpage>
-      <results>Results {0} to {1} for {2}</results>
-      <oneResult>Only one result for {0}</oneResult>
+      <results>{2} için {0} - {1} arası sonuçlar</results>
+      <oneResult>{0} için sadece bir sonuç var</oneResult>
       <ofAboutCaption>yaklaşık</ofAboutCaption>
       <timeUnitCaption>saniye</timeUnitCaption>
       <similar>Aynı içeriğin görüntülendiği sayfalar</similar>
@@ -33,7 +33,7 @@
       <edit>Düzenle</edit>
     </action>
     <msg>
-      <search-not-match-type>Your search {0} does not match any {1}.</search-not-match-type>
+      <search-not-match-type>{0} aramanız {1} ile eşleşmedi.</search-not-match-type>
     </msg>
   </UIDefaultSearchResult>
   <UISearchPageLayoutManager>

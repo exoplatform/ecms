@@ -17,7 +17,7 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <not-support>لا يسمح بالتعليق إلا على الوثائق</not-support>
+      <not-support>You can't comment on this type of document.</not-support>
       <not-checkedout>يجب عليك مراجعة العقدة قبل التعليق عليها</not-checkedout>
       <content-null>لا يمكن أن يكون التعليق خالي من محتوى أو فارغا.</content-null>
     </msg>
@@ -129,7 +129,7 @@
     <title>المستكشف</title>
     <label>
       <Root>الجذر</Root>
-      <webDavView>Open in MS Office</webDavView>
+      <webDavView>فتح الملف بواسطة مايكروسوفت أوفيس</webDavView>
     </label>
     <msg>
       <path-not-found>ربما تم حذف هذه العقدة أو تغييرها. الرجاء الضغط على زر التحديث.</path-not-found>
@@ -165,7 +165,7 @@
       <enableDragAndDrop>اتاحة تقنية السحب و الإسقاط:</enableDragAndDrop>
       <sortBy>الترتيب بحسب:</sortBy>
       <order>ترتيب بحسب:</order>
-      <nodesPerPage>Items per Page:</nodesPerPage>
+      <nodesPerPage>عنصر بكل صفحة:</nodesPerPage>
     </label>
     <action>
       <Back>#{word.back}</Back>
@@ -250,12 +250,12 @@
       <UIActivePublication>تسجيل دورة حياة النشر</UIActivePublication>
       <UITaggingForm>إضافة علامات لهذه الوثيقة</UITaggingForm>
       <UIThumbnailForm>إضافة صورة مصغرة</UIThumbnailForm>
-      <UIAllItemsPreferenceForm>خيارات</UIAllItemsPreferenceForm>
+      <UIAllItemsPreferenceForm>Preferences</UIAllItemsPreferenceForm>
       <UISelectRestorePath>اختر المسار الخاص بالاستعادة</UISelectRestorePath>
       <UISEOForm>إدارة الـSEO</UISEOForm>
       <UISEOToolbarForm>إدارة الـSEO</UISEOToolbarForm>
-      <UIReadOnlyFileConfirmMessage>Open Document</UIReadOnlyFileConfirmMessage>
-      <UIDocumentAutoVersionForm>Copy Document</UIDocumentAutoVersionForm>
+      <UIReadOnlyFileConfirmMessage>فتح الوثيقة</UIReadOnlyFileConfirmMessage>
+      <UIDocumentAutoVersionForm>نسخ الوثيقة</UIDocumentAutoVersionForm>
     </title>
     <header>
       <workspace>مساحة عمل</workspace>
@@ -309,8 +309,8 @@
       <ViewMetadatas>قالب المعلومات القياسية</ViewMetadatas>
       <ViewRelations>إخفاء/عرض العلاقات</ViewRelations>
       <ShowJCRStructure>إخفاء/عرض شكل المحتوى</ShowJCRStructure>
-      <EditProperty>Edit Document Properties</EditProperty>
-      <UploadNewVersion>Upload a new version</UploadNewVersion>
+      <EditProperty>تغيير خصائص الملف</EditProperty>
+      <UploadNewVersion>تحميل نسخة جديدة</UploadNewVersion>
     </tooltip>
     <msg>
       <cannot-action-in-rootnode>لا يمكنك القياو بهذا الاجراء في العقدة الجذر</cannot-action-in-rootnode>
@@ -404,7 +404,7 @@
       <constraintviolation-exception>لم يتمّ العثور على العنصر 'jcr:uuid'. رُبّما تم تغيير أو حذف العقدة. يرجى الضغط على زرّ التّحديث.</constraintviolation-exception>
       <path-not-found-exception>تمّ حذف أو تغيير هذه العقدة. يرجى الضغط على زرّ التّحديث.</path-not-found-exception>
       <not-exist-categories>هذه الفئة لا وجود لها.</not-exist-categories>
-      <lock-node-read-only>This file is locked by user {0}. Open read-only ?</lock-node-read-only>
+      <lock-node-read-only>هذا الملف مؤمن بواسطة المستخدم {0}. أترغب بفتحه بصيغة  القراءة فقط؟</lock-node-read-only>
     </msg>
   </UIPopupMenu>
   <!--
@@ -596,12 +596,12 @@
       <MoveToTrash>تحويله الى سلة المهملات</MoveToTrash>
       <RestoreFromTrash>الاستعادة من سلّة المهملات</RestoreFromTrash>
       <EmptyTrash>إفراغ سلّة المهملات</EmptyTrash>
-      <WebDavView>Open in MS Office</WebDavView>
-      <Download>تنزيل هذا الملف</Download>
-      <OpenDocument>Remote Edit</OpenDocument>
-      <EditProperty>Edit Document Properties</EditProperty>
-      <UploadNewVersion>Upload a new version</UploadNewVersion>
-      <CreateNewVersion>Create a new version</CreateNewVersion>
+      <WebDavView>فتح الملف بواسطة مايكروسوفت أوفيس</WebDavView>
+      <Download>Download</Download>
+      <OpenDocument>تغيير عن بعد</OpenDocument>
+      <EditProperty>تغيير خصائص الملف</EditProperty>
+      <UploadNewVersion>تحميل نسخة جديدة</UploadNewVersion>
+      <CreateNewVersion>إنشاء نسخة جديدة</CreateNewVersion>
     </event>
   </ECMContextMenu>
  
@@ -712,17 +712,17 @@
       <namespace>اسم الفضاء:</namespace>
       <multiple>متعدد:</multiple>
       <property_select>اضافة خاصيّة جديدة:</property_select>
-      <value0>Value 0</value0>
-      <value1>Value 1</value1>
-      <value2>Value 2</value2>
-      <value3>Value 3</value3>
-      <value4>Value 4</value4>
-      <value5>Value 5</value5>
-      <value6>Value 6</value6>
-      <value7>Value 7</value7>
-      <value8>Value 8</value8>
-      <value9>Value 9</value9>
-      <value10>Value 10</value10>
+      <value0>القيمة 0</value0>
+      <value1>القيمة 1</value1>
+      <value2>القيمة  2</value2>
+      <value3>القيمة 3</value3>
+      <value4>القيمة 4</value4>
+      <value5>القيمة 5</value5>
+      <value6>القيمة 6</value6>
+      <value7>القيمة 7</value7>
+      <value8>القيمة 8</value8>
+      <value9>القيمة 9</value9>
+      <value10>القيمة 10</value10>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -1330,7 +1330,7 @@
   -->
   <PopupUserSelector>
     <title>
-      <UIUserContainer>منتق الصلاحية</UIUserContainer>
+      <UIUserContainer>Permission Selector</UIUserContainer>
     </title>
   </PopupUserSelector>
   <UIPopupTaxonomy>
@@ -1345,7 +1345,13 @@
   ###############################################################################
   -->
   <UIVersionInfo>
+    <title>Version history</title>
+    <summary>
+      <empty>Click here to add a summary</empty>
+    </summary>
     <tooltip>
+      <version>إصدار</version>
+      <baseVersion>الإصدار الرئيسي</baseVersion>
       <addLabel>إضافة رمز</addLabel>
       <removeLable>حذف رمز</removeLable>
       <restoreVersion>استعادة الإصدار</restoreVersion>
@@ -1356,6 +1362,9 @@
     <msg>
       <have-no-view-template>نموذج العرض غير متاح.</have-no-view-template>
       <cannot-remove-version>لا يمكن حذف الإصدار الرئيسي.</cannot-remove-version>
+      <error-removing-version>An error occurred while deleting this version.</error-removing-version>
+      <error-removing-referenced-version>This version is referenced and can't be removed.</error-removing-referenced-version>
+      <confirm-restore>Are you sure you want to restore this version?</confirm-restore>
       <confirm-delete>هل ترغب حقــا بحذف هذا الإصدار؟</confirm-delete>
       <not-checked-out>يجب إنهاء المراجعة قبل استعادة هذه العقدة.</not-checked-out>
       <invalid-item-state>لا يمكن استعادة هذا الإصدار. ربما تم حذف أو تحويل عناصر عن طريق دورة أخرى.</invalid-item-state>
@@ -1363,7 +1372,15 @@
     <action>
       <close>#{word.close}</close>
       <close-view>إغلاق المشهد</close-view>
+      <compare-versions>Compare selected versions</compare-versions>
     </action>
+    <labels>
+      <version>إصدار</version>
+      <date>تاريخ</date>
+      <author>Modified By</author>
+      <summary>مُلخّص</summary>
+      <action>اجراء</action>
+    </labels>
   </UIVersionInfo>
   <!--
   ################################################################################
@@ -1471,11 +1488,16 @@
   -->
   <UIDiff>
     <label>
+      <backTo>Back to version history</backTo>
       <diffTitle>مقارنة بين إصدارين</diffTitle>
-      <noChange>لا فرق بين الإصدارين</noChange>
-      <baseVerion>الإصدار الرئيسي</baseVerion>
+      <noContent>There is no content to compare</noContent>
       <compareVerion>إصدار</compareVerion>
       <can-not-compare>لم تتم المقارنة بين الإصدارين</can-not-compare>
+      <compare-unavailable>Version comparison is not available for this document</compare-unavailable>
+      <DateChange>On {0}</DateChange>
+      <PreviousAndNextCompare>التّغييرات من {0} الى {1}</PreviousAndNextCompare>
+      <ComparedWith>بالمقارنة مع</ComparedWith>
+      <restoredFrom>Restored from version {0}</restoredFrom>
     </label>
   </UIDiff>
   <!--
@@ -1499,7 +1521,7 @@
       <import-successful>تمّت عمليّة الاستيراد بنجاح.</import-successful>
       <filename-invalid>اختر ملف من نوع 'xml' قصد استيراده.</filename-invalid>
       <filetype-error>لا يمكن الاستيراد. ربّما طرأ خطأ أثناء تحميل الملفّ.</filetype-error>
-      <xml-invalid>There is an invalid character at position [row, column]:{0} in {1} file</xml-invalid>
+      <xml-invalid>يوجد حرف صيغته غير صالحة وهو متواجد في المكان الآتي [صف ، عمود]:{0} في الملف {1}</xml-invalid>
       <mimetype-invalid>يمكن استيراد ملفات من نوع 'xml' أو 'zip' فحسب.</mimetype-invalid>
       <access-denied>غير مسموح. لا يمكنك الاستيراد هناك.</access-denied>
       <constraint-violation-exception>لا يمكنك استيراد البيانات. نوع العقدة '{0}' غير متاح في هذا المكان.</constraint-violation-exception>
@@ -1897,7 +1919,7 @@
     <msg>
       <name-exist>العلامة '{0}' موجودة مُسبقا.</name-exist>
       <tagName-invalid>اسم العلامة يحتوي على بعض الحروف الغير متاحة.</tagName-invalid>
-      <tagName-empty-or-invalid>The tag name is empty or contains some invalid characters.</tagName-empty-or-invalid>
+      <tagName-empty-or-invalid>العلامة لا تحتوي على اسم أو ربّما تحتوي على بعض الأحرف غير مناسبة.</tagName-empty-or-invalid>
       <tag-name-empty>اسم العلامة فارغ.</tag-name-empty>
       <tag-name-duplicate>أسماء العلامة في حالة تكرار.</tag-name-duplicate>
       <tagName-too-long>احدى العلامات تحتوي على اسم طويل جدا. أسماء العلامات يجب أن تكون أقل من 30 حرفا.</tagName-too-long>
@@ -1946,7 +1968,7 @@
   -->
    <ECMPhoneFormatValidator>
      <msg>
-       <Invalid>The field '{0}' contains invalid an Phone number. Please enter another value.</Invalid>
+       <Invalid>يحتوي الحقل '{0}' على رقم هاتف غير صحيح. الرجاء إدخال قيمة أخرى.</Invalid>
      </msg>
   </ECMPhoneFormatValidator>
   <ECMNameValidator>
@@ -2355,7 +2377,7 @@
     <msg>
       <create-link-problem>لا يمكنك إنشاء  رابط بين'{0}' و '{1}'.</create-link-problem>
       <dest-node-is-link>العقدة الهدف '{0} 'هي بالفعل وصلة رمزيّة، بحيث لا يمكنك إنشاء وصلة رمزيّة أخرى بداخله.</dest-node-is-link>
-      <selected-is-link>The selected node '{0}' is already a link. You cannot create a link that points to another link.</selected-is-link>
+      <selected-is-link>العقدة المحددة '{0}'هو بالفعل وجود صلة ، لا يمكنك إنشاء ارتباط إلى ارتباط آخر نقطة.</selected-is-link>
       <confirm-create-link>هل تريد حقاً انشاء رابط  نحو هذا الموقع؟</confirm-create-link>
     </msg>
   </UIWorkingArea>
@@ -2435,10 +2457,10 @@
       <ReplaceData>تعويض البيانات</ReplaceData>
       <Back>مرة أخرى لإعادة تسمية</Back>
       <Keepfile>ابقاء جميع الملفات</Keepfile>
-<ReadOnly>Open Read-only</ReadOnly>
-<Cancel>الغاء</Cancel>
-      <KeepBoth>Keep Both</KeepBoth>
-      <CreateNewVersion>Create a new version</CreateNewVersion>
+<ReadOnly>فتح للقراءة فقط</ReadOnly>
+<Cancel>Cancel</Cancel>
+      <KeepBoth>الابقاء عليهما</KeepBoth>
+      <CreateNewVersion>إنشاء نسخة جديدة</CreateNewVersion>
     </label>
   </UIConfirmMessage>
 
@@ -2997,15 +3019,15 @@
       <user>المؤلّف</user>
       <description>الوصف</description>
     </header>
-    <create-version>New version is created</create-version>
+    <create-version>تمّ إنشاء إصدار جديد</create-version>
   </UIPublicationHistory>
   
   <UIPublicationSchedule>
     <label>
       <introduction>يُمكنك برمجة عمليّة نشر ملفّك. حدد التواريخ التي تود أن يُنشَر خلالها الملفّ.</introduction>
       <no-schedule-info>لا توجد أي برمجة لنشر الملفّ الخاص بك</no-schedule-info>
-      <UIPublicationPanelStartDateInput>Start Publication date</UIPublicationPanelStartDateInput>
-      <UIPublicationPanelEndDateInput>End Publication date</UIPublicationPanelEndDateInput>
+      <UIPublicationPanelStartDateInput>تاريخ بداية النشر</UIPublicationPanelStartDateInput>
+      <UIPublicationPanelEndDateInput>تاريخ نهاية النّشر</UIPublicationPanelEndDateInput>
     </label>
     <msg>
       <save-finished>تمّ حفظ برمجة عمليّة النّشر الخاصة بك بنجاح.</save-finished>
@@ -3080,10 +3102,11 @@
       <ShowDrives>إظهار الأقراص</ShowDrives>
     </DrivesArea>
     <msg>
-      <no-view-found>There are no views applied for your access permission in drive '{0}'.</no-view-found>
-      <access-denied>غير مسموح بالدخول! ربما ، ليست لديك الصلاحيّات الكافية على مساحة العمل الخاصّة بالقرص '{0}'.</access-denied>
-      <empty-drives>Access denied. Either there is no drive in this repository or you do not have permission to access any drives in this repository.</empty-drives>
-      <workspace-not-exist>تم تخزين القرص '{0}' في مساحة عمل أخرى غير معروفة. يرجى إعادة تهيئته.</workspace-not-exist>
+      <no-view-found>ليس هناك مشهد متاح لك و ذلك بالرّجوع الى خصائص صلاحيّاتك على القرص '{0}'.</no-view-found>
+      <access-denied>Access denied. You may not have permission in the workspace of drive '{0}'.</access-denied>
+      <not-found>The document you are trying to access is no longer available.</not-found>
+      <empty-drives>استحالة الدخول. ليست هناك أقراص في هذا المستودع ، أو ربّما ليست لديك الصلاحيّات الكافية للدخول إلى محتوى أي قرص في مستودع البيانات الحالي.</empty-drives>
+      <workspace-not-exist>Drive '{0}' was stored in one unrecognized workspace. Please reconfigure this drive.</workspace-not-exist>
     </msg>
   </UIDrivesArea>
   <UIJcrExplorerEditForm>
@@ -3171,7 +3194,7 @@
     <Keep>الاحتفاظ بكليهما</Keep>
     <Replace>تعويض</Replace>
     <Canceled>تم إلغاؤها</Canceled>
-      <UploadNewVersion>Upload new version</UploadNewVersion>
+      <UploadNewVersion>تحميل نسخة جديدة</UploadNewVersion>
     <Cancel>#{word.cancel}</Cancel>
     <AbortAllConfirmation>هل تريد أن تلغي تحميل جميع الملفات؟</AbortAllConfirmation>
   </label>
@@ -3201,17 +3224,17 @@
     </msg>
   </UIPropertyForm>
   <UIDocumentAutoVersionForm>
-    <msg>A document {0} already exists. What do you want to do?</msg>
+    <msg>وثيقة {0} موجودة مُسبقا. تريد القيام بماذا؟</msg>
     <UIChkRememberNonVersioned>
-      <label>Remember my choice for all others non-versioned documents</label>
+      <label>تذكر خياري لسائر الوثائق التي لم يقع إصداراها</label>
     </UIChkRememberNonVersioned>
     <UIChkRememberVersioned>
-      <label>Remember my choice for all other versioned documents</label>
+      <label>تذكر خياري لسائر الوثائق التي وقع إصداراها</label>
     </UIChkRememberVersioned>
   </UIDocumentAutoVersionForm>
   <DocumentAuto>
-    <message>A new version of the document {0} has been created successfully.</message>
-    <messageMultiFile>A new version of the document has been created.</messageMultiFile>
+    <message>تم إنشاء نسخة جديدة من  الوثيقة {0} بنجاح.</message>
+    <messageMultiFile>تم إنشاء نسخة جديدة من الوثيقة.</messageMultiFile>
   </DocumentAuto>
   <!--
   ###################################################################################

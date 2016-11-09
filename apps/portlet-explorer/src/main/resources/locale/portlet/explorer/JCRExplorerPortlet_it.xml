@@ -17,7 +17,7 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <not-support>Impossibile commentare questo tipo d documento.</not-support>
+      <not-support>You can't comment on this type of document.</not-support>
       <not-checkedout>Devi fare il check out sul nodo prima di commentarlo.</not-checkedout>
       <content-null>Non puoi postare un commento vuoto.</content-null>
     </msg>
@@ -41,7 +41,7 @@
     </label>
     <button>
       <label>
-        <confirm>OK</confirm>
+        <confirm>Ok</confirm>
       </label>
     </button>
     <msg>
@@ -74,7 +74,7 @@
       <Relation>Relazione</Relation>
       <Explorer>Esploratore di file</Explorer>
       <Close>Chiudi Sidebar</Close>
-      <TagExplorer>Tag Cloud</TagExplorer>
+      <TagExplorer>Tag cloud</TagExplorer>
       <Clipboard>Appunti</Clipboard>
       <SavedSearches>Ricerche Salvate</SavedSearches>
     </label>
@@ -129,7 +129,7 @@
     <title>Explorer</title>
     <label>
       <Root>Root</Root>
-      <webDavView>Open in MS Office</webDavView>
+      <webDavView>Aperto in MS Office</webDavView>
     </label>
     <msg>
       <path-not-found>Elemento cancellato o modificato. Clicca il bottone Aggiorna.</path-not-found>
@@ -165,7 +165,7 @@
       <enableDragAndDrop>Abilita Drag &amp; Drop</enableDragAndDrop>
       <sortBy>Ordina per</sortBy>
       <order>Ordina per</order>
-      <nodesPerPage>Items per Page:</nodesPerPage>
+      <nodesPerPage>Elementi per pagina:</nodesPerPage>
     </label>
     <action>
       <Back>#{word.close}</Back>
@@ -250,15 +250,15 @@
       <UIActivePublication>Partecipa al ciclo di vita pubblicazione</UIActivePublication>
       <UITaggingForm>Tagga Documento</UITaggingForm>
       <UIThumbnailForm>Aggiungi Immagine Anteprima</UIThumbnailForm>
-      <UIAllItemsPreferenceForm>Preferenze</UIAllItemsPreferenceForm>
+      <UIAllItemsPreferenceForm>Preferences</UIAllItemsPreferenceForm>
       <UISelectRestorePath>Seleziona Percorso Ripristino</UISelectRestorePath>
       <UISEOForm>Gestisci SEO</UISEOForm>
       <UISEOToolbarForm>Gestisci SEO</UISEOToolbarForm>
-      <UIReadOnlyFileConfirmMessage>Open Document</UIReadOnlyFileConfirmMessage>
-      <UIDocumentAutoVersionForm>Copy Document</UIDocumentAutoVersionForm>
+      <UIReadOnlyFileConfirmMessage>Apri documento</UIReadOnlyFileConfirmMessage>
+      <UIDocumentAutoVersionForm>Copia documento</UIDocumentAutoVersionForm>
     </title>
     <header>
-      <workspace>Workspace</workspace>
+      <workspace>Area di lavoro</workspace>
       <path>Percorso</path>
     </header>
   </UIPopupWindow>
@@ -309,8 +309,8 @@
       <ViewMetadatas>Vedi Metadati</ViewMetadatas>
       <ViewRelations>Mostra/Nascondi Relazioni</ViewRelations>
       <ShowJCRStructure>Mostra/Nascondi Struttura JCR</ShowJCRStructure>
-      <EditProperty>Edit Document Properties</EditProperty>
-      <UploadNewVersion>Upload a new version</UploadNewVersion>
+      <EditProperty>Modifica proprietà documento</EditProperty>
+      <UploadNewVersion>Carica una nuova versione</UploadNewVersion>
     </tooltip>
     <msg>
       <cannot-action-in-rootnode>Non puoi fare questa azione nel nodo root.</cannot-action-in-rootnode>
@@ -404,7 +404,7 @@
       <constraintviolation-exception>Elemento obbligatiorio jcr:uuid non trovato. Forse il nodo Ãš stato eliminato o modificato. Clicca il bottone Aggiorna.</constraintviolation-exception>
       <path-not-found-exception>Nodo cancellato o modificato. Clicca il bottone Aggiorna.</path-not-found-exception>
       <not-exist-categories>La categoria non esiste.</not-exist-categories>
-      <lock-node-read-only>This file is locked by user {0}. Open read-only ?</lock-node-read-only>
+      <lock-node-read-only>Questo file è bloccato dall'utente {0}. Apri in sola lettura?</lock-node-read-only>
     </msg>
   </UIPopupMenu>
   <!--
@@ -527,8 +527,8 @@
       <Copy>Copia</Copy>
       <Save>#{word.save}</Save>
       <RemoveNode>Elimina</RemoveNode>
-      <Checkin>Checkin</Checkin>
-      <Checkout>Checkout</Checkout>
+      <Checkin>Check-in</Checkin>
+      <Checkout>Check-out</Checkout>
       <Lock>Blocca</Lock>
       <Unlock>Sblocca</Unlock>
       <EditDocument>Modifica</EditDocument>
@@ -596,12 +596,12 @@
       <MoveToTrash>Sposta nel Cestino</MoveToTrash>
       <RestoreFromTrash>Ripristina dal Cestino</RestoreFromTrash>
       <EmptyTrash>Svuota Cestino</EmptyTrash>
-      <WebDavView>Open in MS Office</WebDavView>
-      <Download>Scarica</Download>
-      <OpenDocument>Remote Edit</OpenDocument>
-      <EditProperty>Edit Document Properties</EditProperty>
-      <UploadNewVersion>Upload a new version</UploadNewVersion>
-      <CreateNewVersion>Create a new version</CreateNewVersion>
+      <WebDavView>Aperto in MS Office</WebDavView>
+      <Download>Download</Download>
+      <OpenDocument>Modifica remota</OpenDocument>
+      <EditProperty>Modifica proprietà documento</EditProperty>
+      <UploadNewVersion>Carica una nuova versione</UploadNewVersion>
+      <CreateNewVersion>Crea una nuova versione</CreateNewVersion>
     </event>
   </ECMContextMenu>
  
@@ -615,7 +615,7 @@
       <no-references>Referenze non trovate</no-references>
     </msg>
     <header>
-      <workspace>Workspace</workspace>
+      <workspace>Area di lavoro</workspace>
       <path>Percorso</path>
     </header>
     <action>
@@ -685,7 +685,7 @@
     </header>
     <label>
       <binary>Dato Binario</binary>
-      <notavailable>N/A</notavailable>
+      <notavailable>N. d.</notavailable>
       <cannotget>Impossibile ottenere valori</cannotget>
     </label>
     <action>
@@ -712,17 +712,17 @@
       <namespace>Namespace</namespace>
       <multiple>Multiplo</multiple>
       <property_select>Aggiungi nuova ProprietÃ </property_select>
-      <value0>Value 0</value0>
-      <value1>Value 1</value1>
-      <value2>Value 2</value2>
-      <value3>Value 3</value3>
-      <value4>Value 4</value4>
-      <value5>Value 5</value5>
-      <value6>Value 6</value6>
-      <value7>Value 7</value7>
-      <value8>Value 8</value8>
-      <value9>Value 9</value9>
-      <value10>Value 10</value10>
+      <value0>Valore 0</value0>
+      <value1>Valore 1</value1>
+      <value2>Valore 2</value2>
+      <value3>Valore 3</value3>
+      <value4>Valore 4</value4>
+      <value5>Valore 5</value5>
+      <value6>Valore 6</value6>
+      <value7>Valore 7</value7>
+      <value8>Valore 8</value8>
+      <value9>Valore 9</value9>
+      <value10>Valore 10</value10>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -740,7 +740,7 @@
       <propertyValu-null>Forse, alcuni valori sono nulli.</propertyValu-null>
       <valueFormatEx>Impossibile assegnare il valore multiplo a una proprietÃ  con singolo valore.</valueFormatEx>
       <number-format-exception>Il valore inserito ha un formato errato.</number-format-exception>
-      <property-not-exist>The property {0} doesn't exist.</property-not-exist>
+      <property-not-exist>La proprietà {0} non esiste.</property-not-exist>
     </msg>
   </UIPropertyForm>
 
@@ -759,7 +759,7 @@
     <header>
       <usersOrGroups>Utente O Gruppo</usersOrGroups>
       <read>Leggi</read>
-      <addNode>Modify</addNode>
+      <addNode>Modifica</addNode>
       <remove>Rimuovi</remove>
       <action>Azione</action>
     </header>
@@ -804,7 +804,7 @@
       <permission>UIPermissionForm</permission>
       <userOrGroup>Utente O Gruppo</userOrGroup>
       <read>Diritti Lettura</read>
-      <add_node>Modify Right</add_node>
+      <add_node>Modifica diritto</add_node>
       <remove>Diritti Rimozione</remove>
     </label>
     <title>Aggiungi un permesso al nodo</title>
@@ -1194,7 +1194,7 @@
     <label>
       <name>Nome</name>
       <selectBox>Seleziona Stile Query</selectBox>
-      <query>Query</query>
+      <query>Quesito</query>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -1249,7 +1249,7 @@
     <header>
       <name>Nome</name>
       <language>Lingua</language>
-      <query>Query</query>
+      <query>Quesito</query>
       <action>Azioni</action>
       <path>Percorso</path>
     </header>
@@ -1313,7 +1313,7 @@
     <label>
       <format>Formato</format>
       <nodePath>Percorso da esportare</nodePath>
-      <zip>Zip</zip>
+      <zip>CAP</zip>
       <systemView>Vista sistema</systemView>
       <documentView>Vista Documento</documentView>
     </label>
@@ -1330,7 +1330,7 @@
   -->
   <PopupUserSelector>
     <title>
-      <UIUserContainer>Selettore dei permessi</UIUserContainer>
+      <UIUserContainer>Permission Selector</UIUserContainer>
     </title>
   </PopupUserSelector>
   <UIPopupTaxonomy>
@@ -1345,7 +1345,13 @@
   ###############################################################################
   -->
   <UIVersionInfo>
+    <title>Version history</title>
+    <summary>
+      <empty>Click here to add a summary</empty>
+    </summary>
     <tooltip>
+      <version>Versione</version>
+      <baseVersion>Versione Base</baseVersion>
       <addLabel>Aggiungi Etichetta</addLabel>
       <removeLable>Rimuovi Etichetta</removeLable>
       <restoreVersion>Ripristina Versione</restoreVersion>
@@ -1356,6 +1362,9 @@
     <msg>
       <have-no-view-template>Template di visualizzazione non supportato.</have-no-view-template>
       <cannot-remove-version>Impossibile rimuovere versione base.</cannot-remove-version>
+      <error-removing-version>An error occurred while deleting this version.</error-removing-version>
+      <error-removing-referenced-version>This version is referenced and can't be removed.</error-removing-referenced-version>
+      <confirm-restore>Are you sure you want to restore this version?</confirm-restore>
       <confirm-delete>Sei sicuro di voler rimuovere questa versione?</confirm-delete>
       <not-checked-out>Devi fare il check out del nodo prima di ripristinarlo.</not-checked-out>
       <invalid-item-state>Non puoi ripristinare questa versione. Forse, uno o piÃ¹ elementi cancellati o spostati in un'altra sessione.</invalid-item-state>
@@ -1363,7 +1372,15 @@
     <action>
       <close>#{word.close}</close>
       <close-view>Chiudi Vista</close-view>
+      <compare-versions>Compare selected versions</compare-versions>
     </action>
+    <labels>
+      <version>Versione</version>
+      <date>Data</date>
+      <author>Modified By</author>
+      <summary>Sommario</summary>
+      <action>Azione</action>
+    </labels>
   </UIVersionInfo>
   <!--
   ################################################################################
@@ -1471,11 +1488,16 @@
   -->
   <UIDiff>
     <label>
+      <backTo>Back to version history</backTo>
       <diffTitle>Confronta tra 2 versioni</diffTitle>
-      <noChange>Nessun cambio tra 2 versioni</noChange>
-      <baseVerion>Versione Base</baseVerion>
+      <noContent>There is no content to compare</noContent>
       <compareVerion>Versione</compareVerion>
       <can-not-compare>Impossible comparare tra 2 versioni</can-not-compare>
+      <compare-unavailable>Version comparison is not available for this document</compare-unavailable>
+      <DateChange>On {0}</DateChange>
+      <PreviousAndNextCompare>Modifiche da {0} a {1}</PreviousAndNextCompare>
+      <ComparedWith>Confrontati con</ComparedWith>
+      <restoredFrom>Restored from version {0}</restoredFrom>
     </label>
   </UIDiff>
   <!--
@@ -1499,7 +1521,7 @@
       <import-successful>Importa avvenuta con successo.</import-successful>
       <filename-invalid>Scegli un file .xml da importare per il campo 'Carica File'.</filename-invalid>
       <filetype-error>Impossibile caricare il file importato. Forse, il file .xml non Ãš valido.</filetype-error>
-      <xml-invalid>There is an invalid character at position [row, column]:{0} in {1} file</xml-invalid>
+      <xml-invalid>Vi è un carattere non valido nella posizione [riga, colonna]: {0} nel file {1}</xml-invalid>
       <mimetype-invalid>Solo file .xml o .zip sono supportati per l'importazione.</mimetype-invalid>
       <access-denied>Accesso negato! Non sei autorizzato a importare.</access-denied>
       <constraint-violation-exception>Impossibile importare i dati. Il tipo '{0}' non è consentito in questa localizzazione.</constraint-violation-exception>
@@ -1744,7 +1766,7 @@
   <UIQuerySaveForm>
     <title>Salva Form Query</title>
     <label>
-      <query>Query</query>
+      <query>Quesito</query>
       <name>Nome Query</name>
     </label>
     <action>
@@ -1897,7 +1919,7 @@
     <msg>
       <name-exist>Il nome tag '{0}' esiste giÃ .</name-exist>
       <tagName-invalid>Il nome tag contiene caratteri non validi.</tagName-invalid>
-      <tagName-empty-or-invalid>The tag name is empty or contains some invalid characters.</tagName-empty-or-invalid>
+      <tagName-empty-or-invalid>Il nome del tag è vuoto o contiene alcuni caratteri non validi.</tagName-empty-or-invalid>
       <tag-name-empty>Nome tag vuoto</tag-name-empty>
       <tag-name-duplicate>Nomi tag inseriti duplicati.</tag-name-duplicate>
       <tagName-too-long>Nomi tag inseriti troppo lungo. Il nome tag deve essere minore di 30 caratteri.</tagName-too-long>
@@ -1946,7 +1968,7 @@
   -->
    <ECMPhoneFormatValidator>
      <msg>
-       <Invalid>The field '{0}' contains invalid an Phone number. Please enter another value.</Invalid>
+       <Invalid>Il campo '{0}' contiene un numero di telefono non valido. Ti preghiamo di inserire un altro valore.</Invalid>
      </msg>
   </ECMPhoneFormatValidator>
   <ECMNameValidator>
@@ -2355,7 +2377,7 @@
     <msg>
       <create-link-problem>Crea un collegamento dal nodo '{0}' a '{1}'.</create-link-problem>
       <dest-node-is-link>Il nodo destinazione '{0}' Ãš giÃ  un collegamento simbolico, quindi non puoi creare un collegamento simbolico a esso.</dest-node-is-link>
-      <selected-is-link>The selected node '{0}' is already a link. You cannot create a link that points to another link.</selected-is-link>
+      <selected-is-link>Il nodo selezionato '{0}' è già un collegamento. Non è possibile creare un link che riporti a un altro link.</selected-is-link>
       <confirm-create-link>Vuoi crea un collegamtno in questa posizione?</confirm-create-link>
     </msg>
   </UIWorkingArea>
@@ -2435,10 +2457,10 @@
       <ReplaceData>Sostituisci dati</ReplaceData>
       <Back>Torna a rinominare</Back>
       <Keepfile>Mantieni entrambi i file</Keepfile>
-<ReadOnly>Open Read-only</ReadOnly>
-<Cancel>Annulla</Cancel>
-      <KeepBoth>Keep Both</KeepBoth>
-      <CreateNewVersion>Create a new version</CreateNewVersion>
+<ReadOnly>Apri in sola lettura</ReadOnly>
+<Cancel>Cancel</Cancel>
+      <KeepBoth>Mantieni entrambi</KeepBoth>
+      <CreateNewVersion>Crea una nuova versione</CreateNewVersion>
     </label>
   </UIConfirmMessage>
 
@@ -2520,7 +2542,7 @@
   <UIActionBar>
     <obtion>
       <Admin>Amministratore</Admin>
-      <Info>Info</Info>
+      <Info>info</Info>
       <Actions>Azioni</Actions>
       <Collaboration>Collaborazione</Collaboration>
       <Search>Ricerca</Search>
@@ -2711,7 +2733,7 @@
 
   <Views>
     <label>
-      <slide-show>Slide Show</slide-show>
+      <slide-show>Presentazione</slide-show>
     </label>
   </Views>
   <ECMContextMenu>
@@ -2997,15 +3019,15 @@
       <user>Autore</user>
       <description>Descrizione</description>
     </header>
-    <create-version>New version is created</create-version>
+    <create-version>È stata creata una nuova versione</create-version>
   </UIPublicationHistory>
   
   <UIPublicationSchedule>
     <label>
       <introduction>È possibile pianificare la pubblicazione del documento. Seleziona il giorno che vi piacerebbe che il documento sia pubblicato</introduction>
       <no-schedule-info>Non c'è nessun planificazione di pubblicazione per il suo documento</no-schedule-info>
-      <UIPublicationPanelStartDateInput>Start Publication date</UIPublicationPanelStartDateInput>
-      <UIPublicationPanelEndDateInput>End Publication date</UIPublicationPanelEndDateInput>
+      <UIPublicationPanelStartDateInput>Avvia data di pubblicazione</UIPublicationPanelStartDateInput>
+      <UIPublicationPanelEndDateInput>Termina data di pubblicazione</UIPublicationPanelEndDateInput>
     </label>
     <msg>
       <save-finished>Il vostro nuovo programma di pubblicazione è stato salvato con successo.</save-finished>
@@ -3080,10 +3102,11 @@
       <ShowDrives>Visualizza i Drive</ShowDrives>
     </DrivesArea>
     <msg>
-      <no-view-found>There are no views applied for your access permission in drive '{0}'.</no-view-found>
-      <access-denied>Accesso negato. Non si può avere autorizzazione nello Workspace dello drive '{0}'.</access-denied>
-      <empty-drives>Access denied. Either there is no drive in this repository or you do not have permission to access any drives in this repository.</empty-drives>
-      <workspace-not-exist>Il drive '{0}' è stato immagazzinato in un Workspace non riconosciuto. Per favore riconfigura questo drive.</workspace-not-exist>
+      <no-view-found>Non ci sono viste relative alla tua autorizzazione d'accesso nel drive '{0}'.</no-view-found>
+      <access-denied>Access denied. You may not have permission in the workspace of drive '{0}'.</access-denied>
+      <not-found>The document you are trying to access is no longer available.</not-found>
+      <empty-drives>Accesso negato. Non c'è alcuna unità in questa posizione o non sei autorizzato ad accedervi.</empty-drives>
+      <workspace-not-exist>Drive '{0}' was stored in one unrecognized workspace. Please reconfigure this drive.</workspace-not-exist>
     </msg>
   </UIDrivesArea>
   <UIJcrExplorerEditForm>
@@ -3171,7 +3194,7 @@
     <Keep>Tenere entrambi</Keep>
     <Replace>Sostituire</Replace>
     <Canceled>Annullato</Canceled>
-      <UploadNewVersion>Upload new version</UploadNewVersion>
+      <UploadNewVersion>Carica una nuova versione</UploadNewVersion>
     <Cancel>#{word.cancel}</Cancel>
     <AbortAllConfirmation>Desidera annullare tutti i file in corso?</AbortAllConfirmation>
   </label>
@@ -3201,17 +3224,17 @@
     </msg>
   </UIPropertyForm>
   <UIDocumentAutoVersionForm>
-    <msg>A document {0} already exists. What do you want to do?</msg>
+    <msg>Un documento {0} esiste già. Che cosa vuoi fare?</msg>
     <UIChkRememberNonVersioned>
-      <label>Remember my choice for all others non-versioned documents</label>
+      <label>Ricorda la mia scelta per tutti gli altri documenti senza versione</label>
     </UIChkRememberNonVersioned>
     <UIChkRememberVersioned>
-      <label>Remember my choice for all other versioned documents</label>
+      <label>Ricorda la mia scelta per tutti gli altri documenti versionati</label>
     </UIChkRememberVersioned>
   </UIDocumentAutoVersionForm>
   <DocumentAuto>
-    <message>A new version of the document {0} has been created successfully.</message>
-    <messageMultiFile>A new version of the document has been created.</messageMultiFile>
+    <message>Una nuova versione del documento {0} è stata creato con successo.</message>
+    <messageMultiFile>Una nuova versione del documento è stata creata con successo.</messageMultiFile>
   </DocumentAuto>
   <!--
   ###################################################################################

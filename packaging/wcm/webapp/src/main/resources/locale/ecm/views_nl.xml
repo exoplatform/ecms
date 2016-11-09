@@ -46,6 +46,8 @@
         <pdf-max-page>Het afdrukvoorbeeld is niet beschikbaar voor inhoud met meer dan {0} pagina's.</pdf-max-page>
         <using-webDAV>of Open in MS Office</using-webDAV>
         <open-on-desktop>Open op bureau</open-on-desktop>
+        <open-in-documents>Open in Documents</open-in-documents>
+        <open-in-documents-tooltip>Open this file in Documents app</open-in-documents-tooltip>
         <file-size-too-big>De inhoud van dit bestand is te groot. U moet downloaden en openen in de client.</file-size-too-big>
         <webDAV>WebDAV weergave</webDAV>
         <download>Downloaden</download>
@@ -106,7 +108,7 @@
         <action-name>Actienaam</action-name>
         <lifecycle>Levenscyclus</lifecycle>
         <metadata>Toon Metadatas</metadata>
-        <description>Beschrijving</description>
+        <description>Description</description>
       </label>
     </view>
   </AddMetadata>
@@ -119,7 +121,7 @@
       <label>
         <action-name>Actienaam</action-name>
         <lifecycle>Levenscyclus</lifecycle>
-        <description>Beschrijving</description>
+        <description>Description</description>
       </label>
     </view>
   </AutoVersioning>
@@ -130,8 +132,8 @@
     <view>
       <label>
         <action-name>Naam</action-name>
-        <lifecycle>Levenscyclus</lifecycle>
-        <description>Beschrijving</description>
+        <lifecycle>Lifecycle</lifecycle>
+        <description>Description</description>
       </label>
     </view>
   </EnableVersioning>
@@ -148,16 +150,16 @@
         <subject>Onderwerp</subject>
         <source>Bron</source>
         <contributor>Inzender</contributor>
-        <resource-type>Resourcetype</resource-type>
+        <resource-type>Resource Type</resource-type>
         <date>Datum</date>
         <publisher>Uitgever</publisher>
-        <description>Beschrijving</description>
+        <description>Description</description>
         <rights>Rechten</rights>
         <relation>Relatie</relation>
         <format>Formaat</format>
         <coverage>Dekking</coverage>
         <identifier>Identifier</identifier>
-        <languages>Talen</languages>
+        <languages>Languages</languages>
       </label>
       <action>
         <add-edit>Toevoegen/bewerken</add-edit>
@@ -184,8 +186,8 @@
   <AddMetadata>
     <view>
       <label>
-        <isDeep>Is diep</isDeep>
-        <nodetypes>Node type</nodetypes>
+        <isDeep>Is Deep</isDeep>
+        <nodetypes>Node Types</nodetypes>
         <affectedNodeTypeNames>Nodes met probleem</affectedNodeTypeNames>
         <nodeTypeName>Node Type namen</nodeTypeName>
       </label> 
@@ -195,8 +197,8 @@
   <EnableVersioning>
     <view>
       <label>
-        <isDeep>Is diep</isDeep>
-        <nodetypes>Node type</nodetypes> 
+        <isDeep>Is Deep</isDeep>
+        <nodetypes>Node Types</nodetypes> 
         <affectedNodeTypeNames>Node met probleem</affectedNodeTypeNames>
         <nodeTypeName>Node Type namen</nodeTypeName>
       </label> 
@@ -206,10 +208,10 @@
   <AutoVersioning>
     <view>
       <label>
-        <isDeep>Is diep</isDeep>
-        <nodetypes>Node type</nodetypes>
+        <isDeep>Is Deep</isDeep>
+        <nodetypes>Node Types</nodetypes>
         <affectedNodeTypeNames>Nodes met probleem</affectedNodeTypeNames>
-        <nodeTypeName>Node Type namen</nodeTypeName>
+        <nodeTypeName>Node Type Names</nodeTypeName>
       </label> 
     </view>
   </AutoVersioning>

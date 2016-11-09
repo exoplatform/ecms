@@ -17,8 +17,8 @@
     <label>
       <UITaxonomyManagerTrees>Categorie</UITaxonomyManagerTrees>
       <UIMetadataManager>Vedi Metadati</UIMetadataManager>
-      <UINamespaceManager>Namespaces</UINamespaceManager>
-      <UINodeTypeManager>Node Types</UINodeTypeManager>
+      <UINamespaceManager>Namespace</UINamespaceManager>
+      <UINodeTypeManager>Tipi di nodi</UINodeTypeManager>
       <UITemplatesManager>Documenti</UITemplatesManager>
       <UICLVTemplatesManager>Lista</UICLVTemplatesManager>
       <UIViewManager>Viste</UIViewManager>
@@ -40,15 +40,11 @@
   -->
   <UITaxonomyWorkingArea>
     <msg>
-      <referential-integrity>Impossibile leggere dal file di origine, o la categoria di destinazione è una
-        sottocategoria.
-      </referential-integrity>
+      <referential-integrity>Impossibile leggere dal file di origine, o la categoria di destinazione è una sottocategoria.</referential-integrity>
       <no-taxonomy-selected>Devi copiare o tagliare almeno una categoria.</no-taxonomy-selected>
       <node-is-cutting>Non puoi incollare qui. Il nodo categoria '{0}' può essere stato tagliato.</node-is-cutting>
       <can-not-paste>Non ci sono dati negli appunti da incolare.</can-not-paste>
-      <reference-exception>Non è possibile eliminare questa categoria perché attualmente viene fatto riferimento da un
-        contenuto.
-      </reference-exception>
+      <reference-exception>Non è possibile eliminare questa categoria perché attualmente viene fatto riferimento da un contenuto.</reference-exception>
       <path-error>Errore rimuovendo il nodo categoria.</path-error>
     </msg>
   </UITaxonomyWorkingArea>
@@ -73,15 +69,10 @@
   <UITaxonomyTreeContainer>
     <tab>
       <info>
-        <UITaxonomyTreeMainForm>Specifica il nome categoria, spazio di lavoro e percorso della home.
-        </UITaxonomyTreeMainForm>
+        <UITaxonomyTreeMainForm>Specifica il nome categoria, spazio di lavoro e percorso della home.</UITaxonomyTreeMainForm>
         <UIPermissionTreeManager>Imposta permessi per l'albero categoria.</UIPermissionTreeManager>
-        <UIActionTaxonomyManager>Aggiungi un'azione per l'albero delle categorie per completare la creazione o
-          l'aggiornamento.
-        </UIActionTaxonomyManager>
-        <UITaxonomyTreeCreateChild>Modificare l'albero tassonomia aggiungendo, copiando, tagliando e selezionando i
-          permessi.
-        </UITaxonomyTreeCreateChild>
+        <UIActionTaxonomyManager>Aggiungi un'azione per l'albero delle categorie per completare la creazione o l'aggiornamento.</UIActionTaxonomyManager>
+        <UITaxonomyTreeCreateChild>Modificare l'albero tassonomia aggiungendo, copiando, tagliando e selezionando i permessi.</UITaxonomyTreeCreateChild>
       </info>
     </tab>
     <msg>
@@ -220,7 +211,7 @@
   <UINamespaceList>
     <header>
       <prefix>Prefisso</prefix>
-      <uri>Namespace URI</uri>
+      <uri>URI namespace</uri>
       <action>Azione</action>
     </header>
     <action>
@@ -259,8 +250,7 @@
     <msg>
       <confirm-delete>Sei sicuro di voler eliminare questo metadato?</confirm-delete>
       <delete-successful>I template di '{0}' sono stati eliminati con successo.</delete-successful>
-      <path-not-found-exception>Questi metadati sono stati eliminati o modificati. Fare clic sul pulsante Aggiorna.
-      </path-not-found-exception>
+      <path-not-found-exception>Questi metadati sono stati eliminati o modificati. Fare clic sul pulsante Aggiorna.</path-not-found-exception>
     </msg>
     <action>
       <Add>Aggiungi metadato</Add>
@@ -409,7 +399,7 @@
       <permissions>Permessi</permissions>
       <showHiddenNode>Mostra Nodi Nascosti</showHiddenNode>
       <allowCreateFolders>Consentire la creazione di cartelle:</allowCreateFolders>
-      <Admin>Admin:</Admin>
+      <Admin>Amministratore:</Admin>
       <Categories>Categorie:</Categories>
       <Icons>Icone:</Icons>
       <List>Elenco:</List>
@@ -571,11 +561,8 @@
     </action>
     <msg>
       <register-successfully>Tipo nodo '{0}' registrato con successo.</register-successfully>
-      <supertype-is-madatory>Il super tipo è obbligatorio quando registri un nuovo tipo di nodo. Seleziona almeno un
-        super tipo.
-      </supertype-is-madatory>
-      <register-failed>Registrazione tipo di nodo non avvenuta. Esiste già o il super tipo non è valido.
-      </register-failed>
+      <supertype-is-madatory>Il super tipo è obbligatorio quando registri un nuovo tipo di nodo. Seleziona almeno un super tipo.</supertype-is-madatory>
+      <register-failed>Registrazione tipo di nodo non avvenuta. Esiste già o il super tipo non è valido.</register-failed>
       <nodeType-name>Nome tipo nodo richiesto.</nodeType-name>
       <fileName-invalid>Il nome file ha alcuni caratteri non validi.</fileName-invalid>
       <node-type-exists>Il tipo nodo '{0}'esiste già.</node-type-exists>
@@ -805,7 +792,7 @@
       <UIActionsTemplateContainer>Azioni</UIActionsTemplateContainer>
       <UIOthersTemplateContainer>Altri</UIOthersTemplateContainer>
       <UIActionScriptContainer>Azione</UIActionScriptContainer>
-      <UIWidgetScriptContainer>Widgets</UIWidgetScriptContainer>
+      <UIWidgetScriptContainer>Widget</UIWidgetScriptContainer>
       <UIInterceptorScriptContainer>Intercettori</UIInterceptorScriptContainer>
 
       <nodeTypeDefinition>Tipo Nodo</nodeTypeDefinition>
@@ -1001,12 +988,12 @@
       <publicationPublish>Pubblica</publicationPublish>
       <contentNavigation>Navigazione Contenuti</contentNavigation>
       <addSymLink>Aggiungi Collegamento Simbolico</addSymLink>
-      <checkIn>Check In</checkIn>
-      <checkOut>Check Out</checkOut>
-      <shareDocuments>Condividi</shareDocuments>
-      <openDocument>Remote Edit</openDocument>
-      <editProperty>Edit Document Properties</editProperty>
-      <uploadNewVersion>Upload a new version</uploadNewVersion>
+      <checkIn>Check-in</checkIn>
+      <checkOut>Check-out</checkOut>
+      <shareDocuments>Share</shareDocuments>
+      <openDocument>Modifica remota</openDocument>
+      <editProperty>Modifica proprietà documento</editProperty>
+      <uploadNewVersion>Carica una nuova versione</uploadNewVersion>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -1036,7 +1023,7 @@
   </UIViewFormTabPane>
   <PopupViewPermission>
     <title>
-      <UIPermissionSelector>Selettore dei permessi</UIPermissionSelector>
+      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
     </title>
   </PopupViewPermission>
 
@@ -1087,7 +1074,7 @@
   -->
   <UITemplateForm>
     <title>
-      <AddPermission>Aggiungere Permesso</AddPermission>
+      <AddPermission>Add Permission</AddPermission>
     </title>
     <action>
       <Save>#{word.save}</Save>
@@ -1377,7 +1364,7 @@
   <UITaxonomyTreeForm>
     <label>
       <name>Nome</name>
-      <workspace>Workspace</workspace>
+      <workspace>Area di lavoro</workspace>
       <homePath>Percorso Home</homePath>
       <permissions>Permessi</permissions>
     </label>
@@ -1396,7 +1383,7 @@
       <set_property>Imposta Permessi Nodo</set_property>
       <remove>Rimuovi Permessi</remove>
     </label>
-    <title>Add a permission to this node</title>
+    <title>Aggiungi un'autorizzazione a questo nodo</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>Salva</Save>
@@ -1418,7 +1405,7 @@
 
   <PopupTaxonomyTreePermission>
     <title>
-      <UIPermissionSelector>Selettore dei permessi</UIPermissionSelector>
+      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
     </title>
   </PopupTaxonomyTreePermission>
 
@@ -1499,7 +1486,7 @@
       <add_node>Modifica</add_node>
       <remove>Rimuovi</remove>
     </label>
-    <title>Add permission to this node</title>
+    <title>Aggiungi autorizzazione a questo nodo</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>#{word.save}</Save>
@@ -1652,8 +1639,7 @@
 
   <EditCLVTemplatePopup_ContentTemplateContainer>
     <title>
-      <UICLVTemplateForm_ContentTemplateContainer>Modificare il template di Lista
-      </UICLVTemplateForm_ContentTemplateContainer>
+      <UICLVTemplateForm_ContentTemplateContainer>Modificare il template di Lista</UICLVTemplateForm_ContentTemplateContainer>
     </title>
   </EditCLVTemplatePopup_ContentTemplateContainer>
 
@@ -1671,8 +1657,7 @@
 
   <CLVTemplatePopup_ContentTemplateContainer>
     <title>
-      <UICLVTemplateForm_ContentTemplateContainer>Aggiungere Template di Lista
-      </UICLVTemplateForm_ContentTemplateContainer>
+      <UICLVTemplateForm_ContentTemplateContainer>Aggiungere Template di Lista</UICLVTemplateForm_ContentTemplateContainer>
     </title>
   </CLVTemplatePopup_ContentTemplateContainer>
 
@@ -1752,7 +1737,7 @@
   -->
   <AddNewTemplatePermission>
     <title>
-      <UIPermissionSelector>Selettore dei permessi</UIPermissionSelector>
+      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
     </title>
   </AddNewTemplatePermission>
   <TemplatePermission>
@@ -1793,12 +1778,12 @@
   </DialogForm>
   <DialogFormTemplatePermission>
     <title>
-      <UIPermissionSelector>Selettore dei permessi</UIPermissionSelector>
+      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
     </title>
   </DialogFormTemplatePermission>
   <ViewFormTemplatePermission>
     <title>
-      <UIPermissionSelector>Selettore dei permessi</UIPermissionSelector>
+      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
     </title>
   </ViewFormTemplatePermission>
   <TemplateContainerPopup>
@@ -1955,9 +1940,7 @@
     <msg>
       <confirm-delete>Sei sicuro di voler eliminare questa query?</confirm-delete>
       <query-not-existed>La query non esiste più.</query-not-existed>
-      <can-not-remove>Si verificato un errore durante l'eliminazione della query. Per informazioni, contattare
-        l'amministratore.
-      </can-not-remove>
+      <can-not-remove>Si verificato un errore durante l'eliminazione della query. Per informazioni, contattare l'amministratore.</can-not-remove>
     </msg>
   </UIQueriesList>
   <UIQueriesForm>
@@ -1993,7 +1976,7 @@
   </EditQueryForm>
   <PermissionPopup>
     <title>
-      <UIGroupMemberSelector>Selettore dei permessi</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Permission Selector</UIGroupMemberSelector>
     </title>
   </PermissionPopup>
   <!--
@@ -2034,9 +2017,7 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <range-validator>Range non valido. Il formato deve essere: a..b, tra le quali a, b sono interi positivi. Puoi
-        usare * invece di b per indicare che il range è illimitato.
-      </range-validator>
+      <range-validator>Range non valido. Il formato deve essere: a..b, tra le quali a, b sono interi positivi. Puoi usare * invece di b per indicare che il range è illimitato.</range-validator>
       <error-update>Aggiornamento fallito. Informazione non valida.</error-update>
       <item-not-existing>Non puoi salvare modifiche a questo tag che non esiste nel database.</item-not-existing>
     </msg>
@@ -2053,7 +2034,7 @@
   -->
   <ECMPhoneFormatValidator>
     <msg>
-      <Invalid>The field '{0}' contains an invalid Phone number. Please enter another value.</Invalid>
+      <Invalid>Il campo '{0}' contiene un numero di telefono non valido. Ti preghiamo di inserire un altro valore.</Invalid>
     </msg>
   </ECMPhoneFormatValidator>
   <!--
@@ -2349,11 +2330,10 @@
       <action>Azione</action>
     </header>
     <tooltip>
-      <UnLock>Sblocca</UnLock>
+      <UnLock>Sblocco</UnLock>
     </tooltip>
     <msg>
-      <access-denied-exception>Non hai permessi di accedere al nodo con percorso {0}, o il nodo è stato eliminato.
-      </access-denied-exception>
+      <access-denied-exception>Non hai permessi di accedere al nodo con percorso {0}, o il nodo è stato eliminato.</access-denied-exception>
     </msg>
   </UILockNodeList>
   <EditUnLockForm>
@@ -2467,8 +2447,7 @@
     </action>
     <msg>
       <xss-vulnerability-character>Campo '{0}' contiene caratteri a vulnerabilità XSS</xss-vulnerability-character>
-      <xss-vulnerability-character-wo-label>Il vostro contributo può contenere caratteri di vulnerabilità XSS
-      </xss-vulnerability-character-wo-label>
+      <xss-vulnerability-character-wo-label>Il vostro contributo può contenere caratteri di vulnerabilità XSS</xss-vulnerability-character-wo-label>
     </msg>
   </UIActionForm>
 
@@ -2506,7 +2485,7 @@
       <Add>Aggiungere</Add>
     </action>
     <label>
-      <userOrGroup>Membership:</userOrGroup>
+      <userOrGroup>Memberships:</userOrGroup>
     </label>
     <msg>
       <userOrGroup-alreadyExists>La membership esiste già. Selezionane un'altra.</userOrGroup-alreadyExists>
@@ -2544,9 +2523,7 @@
   </NodeTypeNameValidator>
   <UIActionForm>
     <msg>
-      <constraint-violation-exception>Il nodo '{0}' non può essere aggiunto a '{1}' nel workspace '{2}'. C'è un problema
-        con le autorizzazioni o le condizioni delle costanti.
-      </constraint-violation-exception>
+      <constraint-violation-exception>Il nodo '{0}' non  può essere aggiunto a '{1}' nel workspace '{2}'.  C'è un problema con le autorizzazioni o le condizioni delle costanti.</constraint-violation-exception>
     </msg>
   </UIActionForm>
 
@@ -2557,8 +2534,7 @@
   </UIWorkspaceWizard>
   <UIRepositoryForm>
     <msg>
-      <not-complete-repository>Il repository è stato creato. Devi aspettare alcuni minuti per crearne un altro.
-      </not-complete-repository>
+      <not-complete-repository>Il repository è stato creato. Devi aspettare alcuni minuti per crearne un altro.</not-complete-repository>
     </msg>
   </UIRepositoryForm>
 
@@ -2619,9 +2595,7 @@
   </UIPageIterator>
   <UILockNodeList>
     <msg>
-      <can-not-unlock-node>Non hai i permessi di sbloccare questo nodo. Contatta l'amministratore per avere i diritti
-        corretti.
-      </can-not-unlock-node>
+      <can-not-unlock-node>Non hai i permessi di sbloccare questo nodo. Contatta l'amministratore per avere i diritti corretti.</can-not-unlock-node>
     </msg>
   </UILockNodeList>
 </bundle>

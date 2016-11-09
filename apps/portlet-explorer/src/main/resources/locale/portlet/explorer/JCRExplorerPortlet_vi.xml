@@ -8,7 +8,7 @@
   <UICommentForm>
     <label>
       <name>Tên</name>
-      <email>Địa chỉ thư điện tử</email>
+      <email>Email</email>
       <website>Trang web</website>
       <comment>Bình luận</comment>
     </label>
@@ -17,7 +17,7 @@
       <Cancel>Hủy bỏ</Cancel>
     </action>
     <msg>
-      <not-support>Bạn không thể bình luận trên kiểu tài liệu này.</not-support>
+      <not-support>You can't comment on this type of document.</not-support>
       <not-checkedout>Bạn phải checkout nút đó trước khi đưa ra bình luận.</not-checkedout>
       <content-null>Bạn không thể đăng tải một bình luận trống.</content-null>
     </msg>
@@ -41,7 +41,7 @@
     </label>
     <button>
       <label>
-        <confirm>Đồng ý</confirm>
+        <confirm>OK</confirm>
       </label>
     </button>
     <msg>
@@ -250,7 +250,7 @@
       <UIActivePublication>Đăng ký Chu trình Xuất bản</UIActivePublication>
       <UITaggingForm>Gán nhãn Tài liệu</UITaggingForm>
       <UIThumbnailForm>Thêm Ảnh Nhỏ</UIThumbnailForm>
-      <UIAllItemsPreferenceForm>Tùy chọn Thiết lập</UIAllItemsPreferenceForm>
+      <UIAllItemsPreferenceForm>Preferences</UIAllItemsPreferenceForm>
       <UISelectRestorePath>Chọn Đường dẫn Khôi phục</UISelectRestorePath>
       <UISEOForm>Quản lý SEO</UISEOForm>
       <UISEOToolbarForm>Quản lý SEO</UISEOToolbarForm>
@@ -597,7 +597,7 @@
       <RestoreFromTrash>Khôi phục từ Thư mục Rác</RestoreFromTrash>
       <EmptyTrash>Xóa sạch Thư mục Rác?</EmptyTrash>
       <WebDavView>Mở bằng MS Office</WebDavView>
-      <Download>Tải về</Download>
+      <Download>Download</Download>
       <OpenDocument>Remote Edit</OpenDocument>
       <EditProperty>Edit Document Properties</EditProperty>
       <UploadNewVersion>Upload a new version</UploadNewVersion>
@@ -1330,7 +1330,7 @@
   -->
   <PopupUserSelector>
     <title>
-      <UIUserContainer>Chọn Quyền</UIUserContainer>
+      <UIUserContainer>Permission Selector</UIUserContainer>
     </title>
   </PopupUserSelector>
   <UIPopupTaxonomy>
@@ -1345,7 +1345,13 @@
   ###############################################################################
   -->
   <UIVersionInfo>
+    <title>Version history</title>
+    <summary>
+      <empty>Click here to add a summary</empty>
+    </summary>
     <tooltip>
+      <version>Version</version>
+      <baseVersion>Base Version</baseVersion>
       <addLabel>Thêm Nhãn</addLabel>
       <removeLable>Gỡ bỏ Nhãn</removeLable>
       <restoreVersion>Khôi phục Phiên bản</restoreVersion>
@@ -1356,6 +1362,9 @@
     <msg>
       <have-no-view-template>Mẫu giao diện xem này không được hỗ trợ.</have-no-view-template>
       <cannot-remove-version>Bạn không thể gỡ bỏ một phiên bản cơ sở.</cannot-remove-version>
+      <error-removing-version>An error occurred while deleting this version.</error-removing-version>
+      <error-removing-referenced-version>This version is referenced and can't be removed.</error-removing-referenced-version>
+      <confirm-restore>Are you sure you want to restore this version?</confirm-restore>
       <confirm-delete>Bạn có chắc chắn muốn xóa phiên bản này không?</confirm-delete>
       <not-checked-out>Bạn phải checkout nút này trước khi khôi phục.</not-checked-out>
       <invalid-item-state>Bạn không thể khôi phục phiên bản này. Chắc chắn một số khoản mục đã bị xóa hoặc được di chuyển trong một phiên làm việc khác.</invalid-item-state>
@@ -1363,7 +1372,15 @@
     <action>
       <close>#{word.close}</close>
       <close-view>Đóng cửa xem</close-view>
+      <compare-versions>Compare selected versions</compare-versions>
     </action>
+    <labels>
+      <version>Phiên bản</version>
+      <date>Ngày</date>
+      <author>Modified By</author>
+      <summary>Tóm tắt</summary>
+      <action>Tác vụ</action>
+    </labels>
   </UIVersionInfo>
   <!--
   ################################################################################
@@ -1471,11 +1488,16 @@
   -->
   <UIDiff>
     <label>
+      <backTo>Back to version history</backTo>
       <diffTitle>So sánh giữa hai phiên bản</diffTitle>
-      <noChange>Không có thay đổi giữa 2 phiên bản</noChange>
-      <baseVerion>Phiên bản Cơ sở</baseVerion>
+      <noContent>There is no content to compare</noContent>
       <compareVerion>Phiên bản</compareVerion>
       <can-not-compare>Không thể so sánh 2 phiên bản</can-not-compare>
+      <compare-unavailable>Version comparison is not available for this document</compare-unavailable>
+      <DateChange>On {0}</DateChange>
+      <PreviousAndNextCompare>Thay đổi từ {0} đến {1}</PreviousAndNextCompare>
+      <ComparedWith>So sánh với</ComparedWith>
+      <restoredFrom>Restored from version {0}</restoredFrom>
     </label>
   </UIDiff>
   <!--
@@ -2436,7 +2458,7 @@
       <Back>Quay lại đổi tên</Back>
       <Keepfile>Giữ cả hai tệp</Keepfile>
 <ReadOnly>Open Read-only</ReadOnly>
-<Cancel>Hủy bỏ</Cancel>
+<Cancel>Cancel</Cancel>
       <KeepBoth>Keep Both</KeepBoth>
       <CreateNewVersion>Create a new version</CreateNewVersion>
     </label>
@@ -3081,9 +3103,10 @@
     </DrivesArea>
     <msg>
       <no-view-found>Bạn không có quyền truy cập khung nhìn nào cho ổ đĩa '{0}'.</no-view-found>
-      <access-denied>Truy cập bị từ chối. Có thể bạn không có quyền trong không gian làm việc của ổ đĩa '{0}'.</access-denied>
+      <access-denied>Access denied. You may not have permission in the workspace of drive '{0}'.</access-denied>
+      <not-found>The document you are trying to access is no longer available.</not-found>
       <empty-drives>Không có ổ đĩa nào hoặc bạn không có quyền truy cập ổ đĩa nào trong kho dữ liệu này.</empty-drives>
-      <workspace-not-exist>Không thể nhận biết được không gian lưu trữ của ổ đĩa '{0}'. Vui lòng cấu hình lại ổ đĩa này.</workspace-not-exist>
+      <workspace-not-exist>Drive '{0}' was stored in one unrecognized workspace. Please reconfigure this drive.</workspace-not-exist>
     </msg>
   </UIDrivesArea>
   <UIJcrExplorerEditForm>

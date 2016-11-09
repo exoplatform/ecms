@@ -17,7 +17,7 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <not-support>Неможливо коментувати документ цього типу.</not-support>
+      <not-support>You can't comment on this type of document.</not-support>
       <not-checkedout>Ви повинні відмітити вузол, перш ніж коментувати його.</not-checkedout>
       <content-null>Ви не можете опублікувати порожній коментар.</content-null>
     </msg>
@@ -250,11 +250,11 @@
       <UIActivePublication>Внести до життєвого циклу публікації</UIActivePublication>
       <UITaggingForm>Відмітити документ</UITaggingForm>
       <UIThumbnailForm>Додати зображення ескізу</UIThumbnailForm>
-      <UIAllItemsPreferenceForm>Налаштування</UIAllItemsPreferenceForm>
+      <UIAllItemsPreferenceForm>Preferences</UIAllItemsPreferenceForm>
       <UISelectRestorePath>Виділіть шлях відновлення</UISelectRestorePath>
       <UISEOForm>Керувати SEO</UISEOForm>
       <UISEOToolbarForm>Керувати SEO</UISEOToolbarForm>
-      <UIReadOnlyFileConfirmMessage>Відкрити документ</UIReadOnlyFileConfirmMessage>
+      <UIReadOnlyFileConfirmMessage>Open Document</UIReadOnlyFileConfirmMessage>
       <UIDocumentAutoVersionForm>Копіювати документ</UIDocumentAutoVersionForm>
     </title>
     <header>
@@ -597,7 +597,7 @@
       <RestoreFromTrash>Відновлення з кошика</RestoreFromTrash>
       <EmptyTrash>Очистити Кошик</EmptyTrash>
       <WebDavView>Відкрити в MS Office</WebDavView>
-      <Download>Завантажити</Download>
+      <Download>Download</Download>
       <OpenDocument>Віддалене редагування</OpenDocument>
       <EditProperty>Редагувати властивості документа</EditProperty>
       <UploadNewVersion>Завантажити нову версію</UploadNewVersion>
@@ -1330,7 +1330,7 @@
   -->
   <PopupUserSelector>
     <title>
-      <UIUserContainer>Селектор прав доступу</UIUserContainer>
+      <UIUserContainer>Permission Selector</UIUserContainer>
     </title>
   </PopupUserSelector>
   <UIPopupTaxonomy>
@@ -1345,7 +1345,13 @@
   ###############################################################################
   -->
   <UIVersionInfo>
+    <title>Version history</title>
+    <summary>
+      <empty>Click here to add a summary</empty>
+    </summary>
     <tooltip>
+      <version>Version</version>
+      <baseVersion>Base Version</baseVersion>
       <addLabel>Додати мітку</addLabel>
       <removeLable>Видалити мітку</removeLable>
       <restoreVersion>Відновити версію</restoreVersion>
@@ -1356,6 +1362,9 @@
     <msg>
       <have-no-view-template>Шаблони перегляду не підтримуються.</have-no-view-template>
       <cannot-remove-version>Не можна видалити базову версію.</cannot-remove-version>
+      <error-removing-version>An error occurred while deleting this version.</error-removing-version>
+      <error-removing-referenced-version>This version is referenced and can't be removed.</error-removing-referenced-version>
+      <confirm-restore>Are you sure you want to restore this version?</confirm-restore>
       <confirm-delete>Ви справді бажаєте видалити цю версію?</confirm-delete>
       <not-checked-out>Ви повинні відмітити цей вузол перед відновленням.</not-checked-out>
       <invalid-item-state>Ви не можете відновити цю версію тому, що один або кілька елементів були видалені або переміщені під час  іншої сесії.</invalid-item-state>
@@ -1363,7 +1372,15 @@
     <action>
       <close>#{word.close}</close>
       <close-view>Закрити перегляд</close-view>
+      <compare-versions>Compare selected versions</compare-versions>
     </action>
+    <labels>
+      <version>Версія</version>
+      <date>Дата</date>
+      <author>Modified By</author>
+      <summary>Резюме</summary>
+      <action>Дія</action>
+    </labels>
   </UIVersionInfo>
   <!--
   ################################################################################
@@ -1471,11 +1488,16 @@
   -->
   <UIDiff>
     <label>
+      <backTo>Back to version history</backTo>
       <diffTitle>Порівняти дві версії</diffTitle>
-      <noChange>Немає різниці між двома версіями</noChange>
-      <baseVerion>Базова версія</baseVerion>
+      <noContent>There is no content to compare</noContent>
       <compareVerion>Версія</compareVerion>
       <can-not-compare>Не вдалося порівняти дві версії</can-not-compare>
+      <compare-unavailable>Version comparison is not available for this document</compare-unavailable>
+      <DateChange>On {0}</DateChange>
+      <PreviousAndNextCompare>Зміни від {0} до {1}</PreviousAndNextCompare>
+      <ComparedWith>У порівнянні з</ComparedWith>
+      <restoredFrom>Restored from version {0}</restoredFrom>
     </label>
   </UIDiff>
   <!--
@@ -2435,10 +2457,10 @@
       <ReplaceData>Замінити дані</ReplaceData>
       <Back>Повернутися до Перейменувати</Back>
       <Keepfile>Зберегти обидва файли</Keepfile>
-<ReadOnly>Відкрити лише для читання</ReadOnly>
-<Cancel>Скасувати</Cancel>
+<ReadOnly>Open Read-only</ReadOnly>
+<Cancel>Cancel</Cancel>
       <KeepBoth>Залишити обидва</KeepBoth>
-      <CreateNewVersion>Створити нову версію</CreateNewVersion>
+      <CreateNewVersion>Create a new version</CreateNewVersion>
     </label>
   </UIConfirmMessage>
 
@@ -3082,6 +3104,7 @@
     <msg>
       <no-view-found>There are no views applied for your access permission in drive '{0}'.</no-view-found>
       <access-denied>Access denied. You may not have permission in the workspace of drive '{0}'.</access-denied>
+      <not-found>The document you are trying to access is no longer available.</not-found>
       <empty-drives>Access denied. Either there is no drive in this repository or you do not have permission to access any drives in this repository.</empty-drives>
       <workspace-not-exist>Drive '{0}' was stored in one unrecognized workspace. Please reconfigure this drive.</workspace-not-exist>
     </msg>

@@ -40,13 +40,11 @@
   -->
   <UITaxonomyWorkingArea>
     <msg>
-      <referential-integrity>Nu pot citi din fişierul sursă sau destinația categoriei este o sub-categorie.
-      </referential-integrity>
+      <referential-integrity>Nu pot citi din fişierul sursă sau destinația categoriei este o sub-categorie.</referential-integrity>
       <no-taxonomy-selected>Trebuie să copiaţi sau să tăiați cel puţin o categorie.</no-taxonomy-selected>
       <node-is-cutting>Nu puteți insera aici. Modulul de categoria "{0}" ar putea fi tăiat.</node-is-cutting>
       <can-not-paste>Nu există date în clipboard pentru a insera.</can-not-paste>
-      <reference-exception>Imposibil de şters această categorie, deoarece este folosită în prezent de un conţinut.
-      </reference-exception>
+      <reference-exception>Imposibil de şters această categorie, deoarece este folosită în prezent de un conţinut.</reference-exception>
       <path-error>Eroare la eliminarea acest modul de categorie.</path-error>
     </msg>
   </UITaxonomyWorkingArea>
@@ -73,12 +71,8 @@
       <info>
         <UITaxonomyTreeMainForm>Specificaţi numele, spațiul de lucru și calea pentru categorie.</UITaxonomyTreeMainForm>
         <UIPermissionTreeManager>Setaţi drepturile pentru mulțimea de categorii.</UIPermissionTreeManager>
-        <UIActionTaxonomyManager>Adăugaţi o acţiune în mulțimea de categorii pentru a finaliza crearea sau
-          actualizarea.
-        </UIActionTaxonomyManager>
-        <UITaxonomyTreeCreateChild>Editați mulțimea clasificărilor, adăugând, copiind, decupând și selectând
-          drepturile.
-        </UITaxonomyTreeCreateChild>
+        <UIActionTaxonomyManager>Adăugaţi o acţiune în mulțimea de categorii pentru a finaliza crearea sau actualizarea.</UIActionTaxonomyManager>
+        <UITaxonomyTreeCreateChild>Editați mulțimea clasificărilor, adăugând, copiind, decupând și selectând drepturile.</UITaxonomyTreeCreateChild>
       </info>
     </tab>
     <msg>
@@ -163,8 +157,7 @@
       <Save>#{word.save}</Save>
     </action>
     <msg>
-      <name-not-allowed>Numele necompletat sau caracterele speciale nu sunt permise în numele acţiunii.
-      </name-not-allowed>
+      <name-not-allowed>Numele necompletat sau caracterele speciale nu sunt permise în numele acţiunii.</name-not-allowed>
       <path-invalid>Calea este invalidă.</path-invalid>
       <taxonomy-existed>Mulțimea de categorii există deja.</taxonomy-existed>
       <taxonomy-node-existed>Modulul de categorie există deja.</taxonomy-node-existed>
@@ -257,9 +250,7 @@
     <msg>
       <confirm-delete>Sunteţi sigur că doriţi să ştergeţi aceste metadate?</confirm-delete>
       <delete-successful>Template-uri de "{0}" s-au şters cu succes.</delete-successful>
-      <path-not-found-exception>Aceste metadate au fost şterse sau modificate. Vă rugăm să faceţi clic pe butonul de
-        reîmprospătare.
-      </path-not-found-exception>
+      <path-not-found-exception>Aceste metadate au fost şterse sau modificate. Vă rugăm să faceţi clic pe butonul de reîmprospătare.</path-not-found-exception>
     </msg>
     <action>
       <Add>Adăuga metadate</Add>
@@ -570,11 +561,8 @@
     </action>
     <msg>
       <register-successfully>Nod de tipul "{0}" a fost înregistrat cu succes.</register-successfully>
-      <supertype-is-madatory>Tipul superior este obligatoriu atunci când înregistraţi un nou tip de nod. Vă rugăm să
-        selectaţi cel puţin un tip superior.
-      </supertype-is-madatory>
-      <register-failed>Înregistrare de tip nod a fost nereuşită. Fie există deja sau tip super este invalid.
-      </register-failed>
+      <supertype-is-madatory>Tipul superior este obligatoriu atunci când  înregistraţi un nou tip de nod. Vă rugăm să selectaţi cel puţin un tip superior.</supertype-is-madatory>
+      <register-failed>Înregistrare de tip nod a fost nereuşită. Fie există deja sau tip super este invalid.</register-failed>
       <nodeType-name>Este necesar numele nodului.</nodeType-name>
       <fileName-invalid>Numele de fişier are unele caractere invalide.</fileName-invalid>
       <node-type-exists>Nodul de tip "{0}" există deja.</node-type-exists>
@@ -890,8 +878,7 @@
     </label>
     <msg>
       <confirm-delete>Sigur ștergeți aceste drepturi?</confirm-delete>
-      <permission-cannot-empty>Drepturile de vizualizare sunt necesare și nu pot fi nedefinite.
-      </permission-cannot-empty>
+      <permission-cannot-empty>Drepturile de vizualizare sunt necesare și nu pot fi nedefinite.</permission-cannot-empty>
     </msg>
   </UIViewPermissionList>
 
@@ -1003,7 +990,7 @@
       <addSymLink>Adaugă Symlink</addSymLink>
       <checkIn>Check In</checkIn>
       <checkOut>Check Out</checkOut>
-      <shareDocuments>Distribuie</shareDocuments>
+      <shareDocuments>Share</shareDocuments>
       <openDocument>Remote Edit</openDocument>
       <editProperty>Edit Document Properties</editProperty>
       <uploadNewVersion>Upload a new version</uploadNewVersion>
@@ -1036,7 +1023,7 @@
   </UIViewFormTabPane>
   <PopupViewPermission>
     <title>
-      <UIPermissionSelector>Selector de drepturi</UIPermissionSelector>
+      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
     </title>
   </PopupViewPermission>
 
@@ -1404,8 +1391,7 @@
     </action>
     <msg>
       <checkbox-require>Vă rugăm să selectaţi cel puţin un drept.</checkbox-require>
-      <userOrGroup-required>Vă rugăm să selectaţi un utilizator sau un grup înainte de a salva dreptul.
-      </userOrGroup-required>
+      <userOrGroup-required>Vă rugăm să selectaţi un utilizator sau un grup înainte de a salva dreptul.</userOrGroup-required>
       <not-change-permission>Nu aveţi dreptul de a adăuga o permisiune.</not-change-permission>
       <access-denied>Acces refuzat. Nu se poate elimina această permisiune.</access-denied>
     </msg>
@@ -1419,7 +1405,7 @@
 
   <PopupTaxonomyTreePermission>
     <title>
-      <UIPermissionSelector>Selector de drepturi</UIPermissionSelector>
+      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
     </title>
   </PopupTaxonomyTreePermission>
 
@@ -1508,8 +1494,7 @@
     </action>
     <msg>
       <checkbox-require>Vă rugăm să selectaţi cel puţin un drept.</checkbox-require>
-      <userOrGroup-required>Vă rugăm să selectaţi un utilizator sau un grup înainte de a salva dreptul.
-      </userOrGroup-required>
+      <userOrGroup-required>Vă rugăm să selectaţi un utilizator sau un grup înainte de a salva dreptul.</userOrGroup-required>
       <not-change-permission>Nu aveţi dreptul de a adăuga o permisiune.</not-change-permission>
       <access-denied>Acces refuzat. Nu se poate elimina această permisiune.</access-denied>
     </msg>
@@ -1752,7 +1737,7 @@
   -->
   <AddNewTemplatePermission>
     <title>
-      <UIPermissionSelector>Selector de drepturi</UIPermissionSelector>
+      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
     </title>
   </AddNewTemplatePermission>
   <TemplatePermission>
@@ -1793,12 +1778,12 @@
   </DialogForm>
   <DialogFormTemplatePermission>
     <title>
-      <UIPermissionSelector>Selector de drepturi</UIPermissionSelector>
+      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
     </title>
   </DialogFormTemplatePermission>
   <ViewFormTemplatePermission>
     <title>
-      <UIPermissionSelector>Selector de drepturi</UIPermissionSelector>
+      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
     </title>
   </ViewFormTemplatePermission>
   <TemplateContainerPopup>
@@ -1991,7 +1976,7 @@
   </EditQueryForm>
   <PermissionPopup>
     <title>
-      <UIGroupMemberSelector>Selector de drepturi</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Permission Selector</UIGroupMemberSelector>
     </title>
   </PermissionPopup>
   <!--
@@ -2032,12 +2017,9 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <range-validator>Intervalul este invalid. Formatul trebuie să fie: a..b, cu a, b numere întregi pozitive.
-        Utilizaţi * în loc de b pentru a indica faptul că intervalul este nelimitat.
-      </range-validator>
+      <range-validator>Intervalul este invalid. Formatul trebuie să fie: a..b, cu  a, b  numere întregi pozitive. Utilizaţi * în loc de b pentru a indica faptul că intervalul este nelimitat.</range-validator>
       <error-update>Actualizarea nu a reușit. Informaţia nu este validă.</error-update>
-      <item-not-existing>Imposibil de salvat modificările la această etichetă deoarece nu mai există în baza de date.
-      </item-not-existing>
+      <item-not-existing>Imposibil de salvat modificările la această etichetă deoarece nu mai există în baza de date.</item-not-existing>
     </msg>
   </UITagStyleForm>
   <FolksonomyPopup>
@@ -2351,8 +2333,7 @@
       <UnLock>Deblocare</UnLock>
     </tooltip>
     <msg>
-      <access-denied-exception>Nu aveţi permisiunea de a accesa modulul cu calea {0}, sau acest modul este şters.
-      </access-denied-exception>
+      <access-denied-exception>Nu aveţi permisiunea de a accesa modulul cu calea {0}, sau acest modul este şters.</access-denied-exception>
     </msg>
   </UILockNodeList>
   <EditUnLockForm>
@@ -2466,8 +2447,7 @@
     </action>
     <msg>
       <xss-vulnerability-character>Câmpul '{0}' conține caractere de vulnerabile XSS</xss-vulnerability-character>
-      <xss-vulnerability-character-wo-label>Intrare poate conține caractere de vulnerabile XSS
-      </xss-vulnerability-character-wo-label>
+      <xss-vulnerability-character-wo-label>Intrare poate conține caractere de vulnerabile XSS</xss-vulnerability-character-wo-label>
     </msg>
   </UIActionForm>
 
@@ -2505,7 +2485,7 @@
       <Add>Adaugă</Add>
     </action>
     <label>
-      <userOrGroup>Apartenențe:</userOrGroup>
+      <userOrGroup>Memberships:</userOrGroup>
     </label>
     <msg>
       <userOrGroup-alreadyExists>Apartenența există deja. Vă rugăm să selectaţi alta.</userOrGroup-alreadyExists>
@@ -2543,9 +2523,7 @@
   </NodeTypeNameValidator>
   <UIActionForm>
     <msg>
-      <constraint-violation-exception>Modulul '{0}' nu poate fi adăugat la '{1}' în spațiul de lucru '{2}'. Există o
-        problemă cu permisiunile.
-      </constraint-violation-exception>
+      <constraint-violation-exception>Modulul '{0}' nu poate fi adăugat la '{1}' în spațiul de lucru '{2}'.  Există o problemă cu permisiunile.</constraint-violation-exception>
     </msg>
   </UIActionForm>
 
@@ -2556,9 +2534,7 @@
   </UIWorkspaceWizard>
   <UIRepositoryForm>
     <msg>
-      <not-complete-repository>Spațiul de depozitare este creat. Aveţi nevoie să aşteptaţi câteva minute înainte de a
-        crea un alt unul.
-      </not-complete-repository>
+      <not-complete-repository>Spațiul de depozitare este creat. Aveţi nevoie să aşteptaţi câteva minute înainte de a crea un alt unul.</not-complete-repository>
     </msg>
   </UIRepositoryForm>
 
@@ -2619,9 +2595,7 @@
   </UIPageIterator>
   <UILockNodeList>
     <msg>
-      <can-not-unlock-node>Nu aveţi permisiunea de a debloca acest modul. Vă rugăm să contactaţi administratorul pentru
-        a obţine dreptul.
-      </can-not-unlock-node>
+      <can-not-unlock-node>Nu aveţi permisiunea de a debloca acest modul. Vă rugăm să contactaţi administratorul pentru a obţine dreptul.</can-not-unlock-node>
     </msg>
   </UILockNodeList>
 </bundle>

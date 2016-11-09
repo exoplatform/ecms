@@ -32,17 +32,17 @@
   <SiteMetadata>
     <view>
       <label>
-        <title>Tytuł strony</title>
-        <description>Opis strony</description>
-        <keywords>Słowa kluczowe strony</keywords>
-        <robots>Zachowanie wyszukiwarki</robots>
+        <title>Site Title</title>
+        <description>Site Description</description>
+        <keywords>Site Keywords</keywords>
+        <robots>Search Engine Behavior</robots>
       </label>
       <tooltip>
         <add-edit>Dodaj/Edytuj metadane</add-edit>
         <cancel>#{word.cancel}</cancel>
       </tooltip>
       <action>
-        <add-edit>Dodaj/Edytuj</add-edit>
+        <add-edit>Add/Edit</add-edit>
         <cancel>#{word.cancel}</cancel>
       </action>
     </view>
@@ -50,7 +50,7 @@
 
   <Category>
     <view>
-      <label>Kategoria</label>
+      <label>Category</label>
     </view>
   </Category>
 

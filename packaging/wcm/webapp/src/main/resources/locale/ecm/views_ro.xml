@@ -46,6 +46,8 @@
         <pdf-max-page>The preview is not available for content with over {0} pages.</pdf-max-page>
         <using-webDAV>sau deschide în Office</using-webDAV>
         <open-on-desktop>Open on Desktop</open-on-desktop>
+        <open-in-documents>Open in Documents</open-in-documents>
+        <open-in-documents-tooltip>Open this file in Documents app</open-in-documents-tooltip>
         <file-size-too-big>Conținutul acestui fișier este prea mare. Ar trebui să-l salvați și să-l deschideți pe calculator.</file-size-too-big>
         <webDAV>Vizualizare WebDAV</webDAV>
         <download>Descarcă</download>

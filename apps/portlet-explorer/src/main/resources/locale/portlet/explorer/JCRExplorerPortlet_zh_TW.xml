@@ -17,7 +17,7 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <not-support>你不能評論此文件類型。</not-support>
+      <not-support>You can't comment on this type of document.</not-support>
       <not-checkedout>您必須簽出該節點之前對其進行評論。</not-checkedout>
       <content-null>你不能發佈一個空的評論。</content-null>
     </msg>
@@ -250,7 +250,7 @@
       <UIActivePublication>參加出版週期</UIActivePublication>
       <UITaggingForm>標記文件</UITaggingForm>
       <UIThumbnailForm>增加縮略圖圖像</UIThumbnailForm>
-      <UIAllItemsPreferenceForm>偏好設定</UIAllItemsPreferenceForm>
+      <UIAllItemsPreferenceForm>Preferences</UIAllItemsPreferenceForm>
       <UISelectRestorePath>選擇復原路徑</UISelectRestorePath>
       <UISEOForm>管理 SEO</UISEOForm>
       <UISEOToolbarForm>管理 SEO</UISEOToolbarForm>
@@ -597,7 +597,7 @@
       <RestoreFromTrash>從垃圾桶中還原</RestoreFromTrash>
       <EmptyTrash>清空垃圾桶</EmptyTrash>
       <WebDavView>在 MS Office 中打開</WebDavView>
-      <Download>下載</Download>
+      <Download>Download</Download>
       <OpenDocument>Remote Edit</OpenDocument>
       <EditProperty>Edit Document Properties</EditProperty>
       <UploadNewVersion>Upload a new version</UploadNewVersion>
@@ -757,7 +757,7 @@
       </title>
     </action>
     <header>
-      <usersOrGroups>使用者或群組</usersOrGroups>
+      <usersOrGroups>User or Group</usersOrGroups>
       <read>讀取</read>
       <addNode>修改</addNode>
       <remove>刪除</remove>
@@ -772,8 +772,8 @@
   </UIPermissionInfo>
   <permission>
     <title>
-      <SelectUser>選擇使用者</SelectUser>
-      <SelectMember>選擇成員身份</SelectMember>
+      <SelectUser>Select User</SelectUser>
+      <SelectMember>Select Membership</SelectMember>
       <AddAny>選擇所有人</AddAny>
     </title>
   </permission>
@@ -800,7 +800,7 @@
   </UIGroupSelector>
   <UIPermissionForm>
     <label>
-      <UIPopupWindow>選擇</UIPopupWindow>
+      <UIPopupWindow>Select</UIPopupWindow>
       <permission>UIPermissionForm</permission>
       <userOrGroup>使用者或群組</userOrGroup>
       <read>閱讀權</read>
@@ -863,7 +863,7 @@
   <UICategoryManagerSearch>
     <tab>
       <label>
-        <UIOneNodePathSelector>選擇類別</UIOneNodePathSelector>
+        <UIOneNodePathSelector>Select Category</UIOneNodePathSelector>
       </label>
     </tab>
     <action>
@@ -926,7 +926,7 @@
       <shortcutPath>路徑</shortcutPath>
       <type>類型</type>
       <dateCreated>建立日期</dateCreated>
-      <score>得分</score>
+      <score>Score</score>
     </header>
     <title>
       <typeASC>按文件類型升序排序</typeASC>
@@ -1330,7 +1330,7 @@
   -->
   <PopupUserSelector>
     <title>
-      <UIUserContainer>權限選擇</UIUserContainer>
+      <UIUserContainer>Permission Selector</UIUserContainer>
     </title>
   </PopupUserSelector>
   <UIPopupTaxonomy>
@@ -1345,7 +1345,13 @@
   ###############################################################################
   -->
   <UIVersionInfo>
+    <title>Version history</title>
+    <summary>
+      <empty>Click here to add a summary</empty>
+    </summary>
     <tooltip>
+      <version>Version</version>
+      <baseVersion>Base Version</baseVersion>
       <addLabel>增加標籤</addLabel>
       <removeLable>移除標籤</removeLable>
       <restoreVersion>還原的版本</restoreVersion>
@@ -1356,6 +1362,9 @@
     <msg>
       <have-no-view-template>不支援視圖範本。</have-no-view-template>
       <cannot-remove-version>您不能刪除基礎版本。</cannot-remove-version>
+      <error-removing-version>An error occurred while deleting this version.</error-removing-version>
+      <error-removing-referenced-version>This version is referenced and can't be removed.</error-removing-referenced-version>
+      <confirm-restore>Are you sure you want to restore this version?</confirm-restore>
       <confirm-delete>是否確定要刪除此版本?</confirm-delete>
       <not-checked-out>您必須在還原之前簽出此節點。</not-checked-out>
       <invalid-item-state>你不能還原此版本，因為一個或多個項目被刪除或移動另一個會議期間。</invalid-item-state>
@@ -1363,7 +1372,15 @@
     <action>
       <close>#{word.close}</close>
       <close-view>關閉檢視</close-view>
+      <compare-versions>Compare selected versions</compare-versions>
     </action>
+    <labels>
+      <version>版本</version>
+      <date>日期</date>
+      <author>Modified By</author>
+      <summary>總結</summary>
+      <action>操作</action>
+    </labels>
   </UIVersionInfo>
   <!--
   ################################################################################
@@ -1471,11 +1488,16 @@
   -->
   <UIDiff>
     <label>
+      <backTo>Back to version history</backTo>
       <diffTitle>比較兩個版本的差異</diffTitle>
-      <noChange>兩個版本之間沒有差異</noChange>
-      <baseVerion>基本版本</baseVerion>
+      <noContent>There is no content to compare</noContent>
       <compareVerion>版本</compareVerion>
       <can-not-compare>未能比較兩個版本</can-not-compare>
+      <compare-unavailable>Version comparison is not available for this document</compare-unavailable>
+      <DateChange>On {0}</DateChange>
+      <PreviousAndNextCompare>更改從 {0} 至{1}</PreviousAndNextCompare>
+      <ComparedWith>與比較</ComparedWith>
+      <restoredFrom>Restored from version {0}</restoredFrom>
     </label>
   </UIDiff>
   <!--
@@ -2436,7 +2458,7 @@
       <Back>返回重新命名</Back>
       <Keepfile>保持這兩個檔案</Keepfile>
 <ReadOnly>Open Read-only</ReadOnly>
-<Cancel>取消</Cancel>
+<Cancel>Cancel</Cancel>
       <KeepBoth>Keep Both</KeepBoth>
       <CreateNewVersion>Create a new version</CreateNewVersion>
     </label>
@@ -3081,9 +3103,10 @@
     </DrivesArea>
     <msg>
       <no-view-found>你的磁碟機中沒有檢視應用的權限 '{0}'.</no-view-found>
-      <access-denied>訪問被拒絕。您可能沒有在工作區中的磁碟機權限 '{0}' 。</access-denied>
+      <access-denied>Access denied. You may not have permission in the workspace of drive '{0}'.</access-denied>
+      <not-found>The document you are trying to access is no longer available.</not-found>
       <empty-drives>訪問被拒絕。此資料庫中有沒有磁碟機，或者您沒有權限訪問此儲存庫中的任何磁碟機。</empty-drives>
-      <workspace-not-exist>磁碟機 '{0}' 存儲在一個無法識別的工作區中。請重新配置此磁碟機。</workspace-not-exist>
+      <workspace-not-exist>Drive '{0}' was stored in one unrecognized workspace. Please reconfigure this drive.</workspace-not-exist>
     </msg>
   </UIDrivesArea>
   <UIJcrExplorerEditForm>

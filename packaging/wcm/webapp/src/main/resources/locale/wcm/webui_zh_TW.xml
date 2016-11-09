@@ -36,13 +36,15 @@
     <label>
       <ManagedSites>Site Management</ManagedSites>
       <SharedSite>共用的網站</SharedSite>
+      <PersonalDocuments>Personal Documents</PersonalDocuments>
+      <UserDocuments>{0} Documents</UserDocuments>
     </label>
   </Drives>
 
   <Views>
     <label>
       <wcm-view>Web</wcm-view>
-      <admin-view>管理員</admin-view>
+      <admin-view>Admin</admin-view>
       <icon-view>圖示</icon-view>
       <thumbails-view>縮略圖</thumbails-view>
       <list-view>清單</list-view>

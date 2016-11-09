@@ -10,7 +10,7 @@
       <label>
         <Templates>Vorlagen</Templates>
         <Explorer>Explorer</Explorer>
-        <Repository>Repository</Repository>
+        <Repository>Projektarchiv</Repository>
         <Advanced>Erweitert</Advanced>
       </label>
     </tab>
@@ -27,7 +27,7 @@
       <UIActionManager>Aktionen</UIActionManager>
       <UIScriptManager>Skripte</UIScriptManager>
       <UIUnLockManager>Sperren</UIUnLockManager>
-      <UIFolksonomyManager>Tags</UIFolksonomyManager>
+      <UIFolksonomyManager>Schlagwörter</UIFolksonomyManager>
     </label>
     <msg>
       <access-denied>Zugriff verweigert. Sie haben keine Berechtigung, diesen Vorgang durchzuführen.</access-denied>
@@ -40,16 +40,11 @@
   -->
   <UITaxonomyWorkingArea>
     <msg>
-      <referential-integrity>Entweder die Quelldatei kann nicht gelesen werden oder die Zielkategorie ist eine
-        untergeordnete Kategorie.
-      </referential-integrity>
+      <referential-integrity>Entweder die Quelldatei kann nicht gelesen werden oder die Zielkategorie ist eine untergeordnete Kategorie.</referential-integrity>
       <no-taxonomy-selected>Sie müssen mindestens eine Kategorie kopieren oder ausschneiden.</no-taxonomy-selected>
-      <node-is-cutting>Sie können hier nicht einfügen. Der Kategorieknoten "{0}" wurde vielleicht ausgeschnitten.
-      </node-is-cutting>
+      <node-is-cutting>Sie können hier nicht einfügen. Der Kategorieknoten "{0}" wurde vielleicht ausgeschnitten.</node-is-cutting>
       <can-not-paste>Es gibt keine Daten zum Einfügen in der Zwischenablage.</can-not-paste>
-      <reference-exception>Diese Kategorie kann nicht gelöscht werden, da sie derzeit von einem Inhalt referenziert
-        wird.
-      </reference-exception>
+      <reference-exception>Diese Kategorie kann nicht gelöscht werden, da sie derzeit von einem Inhalt referenziert wird.</reference-exception>
       <path-error>Fehler beim Entfernen dieses Kategorieknotens.</path-error>
     </msg>
   </UITaxonomyWorkingArea>
@@ -76,11 +71,8 @@
       <info>
         <UITaxonomyTreeMainForm>Geben Sie den Kategorienamen, Arbeitsbereich und Quellpfad ein.</UITaxonomyTreeMainForm>
         <UIPermissionTreeManager>Berechtigung für den Kategoriebaum festlegen.</UIPermissionTreeManager>
-        <UIActionTaxonomyManager>Um die Erstellung oder Aktualisierung auszuführen, müssen Sie eine Aktion zu dem
-          Kategoriebaum hinzufügen.
-        </UIActionTaxonomyManager>
-        <UITaxonomyTreeCreateChild>Den Taxonomiebaum bearbeiten und die Berechtigungen auswählen.
-        </UITaxonomyTreeCreateChild>
+        <UIActionTaxonomyManager>Um die Erstellung oder Aktualisierung auszuführen, müssen Sie eine Aktion zu dem Kategoriebaum hinzufügen.</UIActionTaxonomyManager>
+        <UITaxonomyTreeCreateChild>Den Taxonomiebaum bearbeiten und die Berechtigungen auswählen.</UITaxonomyTreeCreateChild>
       </info>
     </tab>
     <msg>
@@ -149,8 +141,7 @@
   -->
   <UIPermissionTreeForm>
     <msg>
-      <have-not-any-permission>Bitte geben Sie mindestens eine Berechtigung für diesen Knoten ein.
-      </have-not-any-permission>
+      <have-not-any-permission>Bitte geben Sie mindestens eine Berechtigung für diesen Knoten ein.</have-not-any-permission>
     </msg>
   </UIPermissionTreeForm>
 
@@ -259,9 +250,7 @@
     <msg>
       <confirm-delete>Möchten Sie diese Metadaten wirklich löschen?</confirm-delete>
       <delete-successful>Die Vorlagen von "{0}" wurden erfolgreich gelöscht.</delete-successful>
-      <path-not-found-exception>Diese Metadaten wurden gelöscht oder geändert. Bitte klicken Sie auf die Schaltfläche
-        "aktualisieren".
-      </path-not-found-exception>
+      <path-not-found-exception>Diese Metadaten wurden gelöscht oder geändert. Bitte klicken Sie auf die Schaltfläche "aktualisieren".</path-not-found-exception>
     </msg>
     <action>
       <Add>Metadaten hinzufügen</Add>
@@ -306,7 +295,7 @@
       <metadataName>Metadatenname:</metadataName>
       <viewPermission>Berechtigung:</viewPermission>
       <permission>UIMetadataForm</permission>
-      <metadataLabel>Label:</metadataLabel>
+      <metadataLabel>Bezeichnung:</metadataLabel>
     </label>
     <tab>
       <label>
@@ -410,7 +399,7 @@
       <permissions>Berechtigungen:</permissions>
       <showHiddenNode>Ausgeblendete Knoten anzeigen:</showHiddenNode>
       <allowCreateFolders>Ordnererstellung erlauben:</allowCreateFolders>
-      <Admin>Admin:</Admin>
+      <Admin>Administrator:</Admin>
       <Categories>Kategorien:</Categories>
       <Icons>Piktogramme:</Icons>
       <List>Liste:</List>
@@ -572,12 +561,8 @@
     </action>
     <msg>
       <register-successfully>Der Knotentyp "{0}" wurde erfolgreich registriert.</register-successfully>
-      <supertype-is-madatory>Der Supertyp wird benötigt, wenn Sie einen neuen Knotentyp registrieren. Bitte wählen Sie
-        mindestens einen Supertyp aus.
-      </supertype-is-madatory>
-      <register-failed>Die Knotentyp-Registrierung ist fehlgeschlagen. Entweder dieser Knotentyp ist bereits vorhanden
-        oder der Supertyp ist ungültig.
-      </register-failed>
+      <supertype-is-madatory>Der Supertyp wird benötigt, wenn Sie einen neuen Knotentyp registrieren. Bitte wählen Sie mindestens einen Supertyp aus.</supertype-is-madatory>
+      <register-failed>Die Knotentyp-Registrierung ist fehlgeschlagen. Entweder dieser Knotentyp ist bereits vorhanden oder der Supertyp ist ungültig.</register-failed>
       <nodeType-name>Der Knotentypname wird benötigt.</nodeType-name>
       <fileName-invalid>Der Dateiname enthält ungültigen Zeichen.</fileName-invalid>
       <node-type-exists>Der Knotentyp "{0}" ist bereits vorhanden.</node-type-exists>
@@ -596,8 +581,7 @@
     </tab>
     <msg>
       <property-name>Der Eigenschaftsdefinitionsname war ungültig.</property-name>
-      <not-supported-value-constraints>Dieser benötigte Typ unterstützt keine Werteinschränkungen.
-      </not-supported-value-constraints>
+      <not-supported-value-constraints>Dieser benötigte Typ unterstützt keine Werteinschränkungen.</not-supported-value-constraints>
     </msg>
   </UIPropertyDefinitionForm>
   <UIChildNodeDefinitionForm>
@@ -683,8 +667,7 @@
     <msg>
       <filename-error>Dateien für den Import durchsuchen.</filename-error>
       <data-file-error>Nur .xml oder .zip-Dateien können importiert werden.</data-file-error>
-      <data-invalid>Die Daten sind ungültig. Bitte überprüfen Sie Ihren Dateityp, und versuchen Sie es erneut.
-      </data-invalid>
+      <data-invalid>Die Daten sind ungültig. Bitte überprüfen Sie Ihren Dateityp, und versuchen Sie es erneut.</data-invalid>
       <nodetype-exist>Der Knotentyp "{0}" ist bereits vorhanden.</nodetype-exist>
       <namespace-invalid>Der Namensraum "{0}" ist ungültig.</namespace-invalid>
     </msg>
@@ -895,8 +878,7 @@
     </label>
     <msg>
       <confirm-delete>Möchten Sie diese Berechtigung wirklich löschen?</confirm-delete>
-      <permission-cannot-empty>Eine Anzeigeberechtigung ist erforderlich und diese darf nicht leer sein.
-      </permission-cannot-empty>
+      <permission-cannot-empty>Eine Anzeigeberechtigung ist erforderlich und diese darf nicht leer sein.</permission-cannot-empty>
     </msg>
   </UIViewPermissionList>
 
@@ -1008,10 +990,10 @@
       <addSymLink>Symbolische Verknüpfung hinzufügen</addSymLink>
       <checkIn>Check In</checkIn>
       <checkOut>Check Out</checkOut>
-      <shareDocuments>Teilen</shareDocuments>
-      <openDocument>Remote Edit</openDocument>
-      <editProperty>Edit Document Properties</editProperty>
-      <uploadNewVersion>Upload a new version</uploadNewVersion>
+      <shareDocuments>Share</shareDocuments>
+      <openDocument>Entferntes Bearbeiten</openDocument>
+      <editProperty>Dokumenteigenschaften bearbeiten</editProperty>
+      <uploadNewVersion>Eine neue Version hochladen</uploadNewVersion>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -1041,7 +1023,7 @@
   </UIViewFormTabPane>
   <PopupViewPermission>
     <title>
-      <UIPermissionSelector>Berechtigungsauswahl</UIPermissionSelector>
+      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
     </title>
   </PopupViewPermission>
 
@@ -1092,7 +1074,7 @@
   -->
   <UITemplateForm>
     <title>
-      <AddPermission>Berechtigung hinzufügen</AddPermission>
+      <AddPermission>Add Permission</AddPermission>
     </title>
     <action>
       <Save>#{word.save}</Save>
@@ -1117,7 +1099,7 @@
     </tab>
     <label>
       <name>Name:</name>
-      <label>Label:</label>
+      <label>Bezeichnung:</label>
       <isDocumentTemplate>ist Dokumentvorlage:</isDocumentTemplate>
       <dialog>Dialoginhalt</dialog>
       <view>Inhalt anzeigen</view>
@@ -1401,7 +1383,7 @@
       <set_property>Eigenschaftsrecht festlegen</set_property>
       <remove>Recht Entfernen</remove>
     </label>
-    <title>Add a permission to this node</title>
+    <title>Eine Berechtigung auf diesen Knoten hinzufügen</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>Speichern</Save>
@@ -1409,9 +1391,7 @@
     </action>
     <msg>
       <checkbox-require>Bitte wählen Sie mindestens eine Berechtigung.</checkbox-require>
-      <userOrGroup-required>Bitte wählen Sie einen Benutzer oder eine Gruppe aus, bevor Sie die Berechtigung
-        speichern.
-      </userOrGroup-required>
+      <userOrGroup-required>Bitte wählen Sie einen Benutzer oder eine Gruppe aus, bevor Sie die Berechtigung speichern.</userOrGroup-required>
       <not-change-permission>Ihnen fehlt die Berechtigung, eine Berechtigung hinzuzufügen.</not-change-permission>
       <access-denied>Zugriff verweigert. Diese Berechtigung kann nicht entfernt werden.</access-denied>
     </msg>
@@ -1425,7 +1405,7 @@
 
   <PopupTaxonomyTreePermission>
     <title>
-      <UIPermissionSelector>Berechtigungsauswahl</UIPermissionSelector>
+      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
     </title>
   </PopupTaxonomyTreePermission>
 
@@ -1494,8 +1474,7 @@
       <selectUser>Benutzer auswählen</selectUser>
     </label>
     <msg>
-      <not-change-owner>"{0}" ist der Eigentümer dieses Knotens und verfügt über die Vollzugriffsberechtigung.
-      </not-change-owner>
+      <not-change-owner>"{0}" ist der Eigentümer dieses Knotens und verfügt über die Vollzugriffsberechtigung.</not-change-owner>
     </msg>
   </UIGroupSelector>
   <UIPermissionForm>
@@ -1507,7 +1486,7 @@
       <add_node>Ändern</add_node>
       <remove>Entfernen</remove>
     </label>
-    <title>Add permission to this node</title>
+    <title>Berechtigung für diesen Knoten hinzufügen</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>#{word.save}</Save>
@@ -1515,8 +1494,7 @@
     </action>
     <msg>
       <checkbox-require>Bitte wählen Sie mindestens eine Berechtigung aus.</checkbox-require>
-      <userOrGroup-required>Bitte wählen Sie einen Benutzer oder eine Gruppe vor dem Speichern der Berechtigung.
-      </userOrGroup-required>
+      <userOrGroup-required>Bitte wählen Sie einen Benutzer oder eine Gruppe vor dem Speichern der Berechtigung.</userOrGroup-required>
       <not-change-permission>Ihnen fehlt die Berechtigung, eine Berechtigung hinzuzufügen.</not-change-permission>
       <access-denied>Zugriff verweigert. Diese Berechtigung kann nicht entfernt werden.</access-denied>
     </msg>
@@ -1551,8 +1529,7 @@
     <msg>
       <confirm-delete>Möchten Sie wirklich löschen?</confirm-delete>
       <access-denied>Zugriff verweigert. Ihnen fehlt die Berechtigung, diese Funktion zu verwenden.</access-denied>
-      <editing-template>Zugriff verweigert. Sie können nicht gleichzeitig die Vorlage löschen und bearbeiten.
-      </editing-template>
+      <editing-template>Zugriff verweigert. Sie können nicht gleichzeitig die Vorlage löschen und bearbeiten.</editing-template>
       <template-not-exist>Die Vorlage, die Sie löschen möchten, existiert nicht.</template-not-exist>
     </msg>
   </UITemplateList>
@@ -1570,8 +1547,7 @@
     <msg>
       <confirm-delete>Möchten Sie wirklich löschen?</confirm-delete>
       <access-denied>Zugriff verweigert. Ihnen fehlt die Berechtigung, diese Funktion zu verwenden.</access-denied>
-      <editing-template>Zugriff verweigert. Sie können diese Vorlage nicht gleichzeitig löschen und bearbeiten.
-      </editing-template>
+      <editing-template>Zugriff verweigert. Sie können diese Vorlage nicht gleichzeitig löschen und bearbeiten.</editing-template>
       <template-not-exist>Die Vorlage, die Sie löschen möchten, existiert nicht.</template-not-exist>
     </msg>
   </UIActionsTemplateList>
@@ -1589,8 +1565,7 @@
     <msg>
       <confirm-delete>Möchten Sie das Element wirklich löschen ?</confirm-delete>
       <access-denied>Zugriff verweigert. Ihnen fehlt die Berechtigung, diese Funktion zu verwenden.</access-denied>
-      <editing-template>Zugriff verweigert. Sie können diese Vorlage nicht gleichzeitig löschen und bearbeiten.
-      </editing-template>
+      <editing-template>Zugriff verweigert. Sie können diese Vorlage nicht gleichzeitig löschen und bearbeiten.</editing-template>
       <template-not-exist>Die Vorlage, die Sie löschen möchten, existiert nicht.</template-not-exist>
     </msg>
   </UIOthersTemplateList>
@@ -1627,8 +1602,7 @@
     <msg>
       <confirm-delete>Möchten Sie diese Vorlage wirklich löschen?</confirm-delete>
       <access-denied>Zugriff verweigert. Ihnen fehlt die Berechtigung, diese Funktion zu verwenden.</access-denied>
-      <editing-template>Zugriff verweigert. Sie können diese Vorlage nicht gleichzeitig bearbeiten und löschen.
-      </editing-template>
+      <editing-template>Zugriff verweigert. Sie können diese Vorlage nicht gleichzeitig bearbeiten und löschen.</editing-template>
       <template-not-exist>Die Vorlage, die Sie löschen möchten, existiert nicht.</template-not-exist>
     </msg>
   </UICLVTemplateList>
@@ -1763,7 +1737,7 @@
   -->
   <AddNewTemplatePermission>
     <title>
-      <UIPermissionSelector>Berechtigungsauswahl</UIPermissionSelector>
+      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
     </title>
   </AddNewTemplatePermission>
   <TemplatePermission>
@@ -1804,12 +1778,12 @@
   </DialogForm>
   <DialogFormTemplatePermission>
     <title>
-      <UIPermissionSelector>Berechtigungsauswahl</UIPermissionSelector>
+      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
     </title>
   </DialogFormTemplatePermission>
   <ViewFormTemplatePermission>
     <title>
-      <UIPermissionSelector>Berechtigungsauswahl</UIPermissionSelector>
+      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
     </title>
   </ViewFormTemplatePermission>
   <TemplateContainerPopup>
@@ -1840,7 +1814,7 @@
   <UITemplateEditForm>
     <label>
       <name>Name:</name>
-      <label>Label:</label>
+      <label>Bezeichnung:</label>
       <isDocumentTemplate>Ist Dokumentvorlage</isDocumentTemplate>
     </label>
     <action>
@@ -1966,8 +1940,7 @@
     <msg>
       <confirm-delete>Möchten Sie diese Abfrage wirklich löschen?</confirm-delete>
       <query-not-existed>Die Abfrage ist nicht mehr vorhanden.</query-not-existed>
-      <can-not-remove>Fehler beim Löschen der Abfrage. Bitte kontaktieren Sie den Administrator für Informationen.
-      </can-not-remove>
+      <can-not-remove>Fehler beim Löschen der Abfrage. Bitte kontaktieren Sie den Administrator für Informationen.</can-not-remove>
     </msg>
   </UIQueriesList>
   <UIQueriesForm>
@@ -2003,7 +1976,7 @@
   </EditQueryForm>
   <PermissionPopup>
     <title>
-      <UIGroupMemberSelector>Berechtigungsauswahl</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Permission Selector</UIGroupMemberSelector>
     </title>
   </PermissionPopup>
   <!--
@@ -2044,13 +2017,9 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <range-validator>Der Bereich ist ungültig. Das Format muss wie folgt sein: a...b, wobei a, b positive ganze Zahlen
-        sein müssen. Sie können * anstatt von b verwenden um anzuzeigen das der Bereich endlos ist.
-      </range-validator>
+      <range-validator>Der Bereich ist ungültig. Das Format muss wie folgt sein: a...b, wobei a, b positive ganze Zahlen sein müssen. Sie können * anstatt von b verwenden um anzuzeigen das der Bereich endlos ist.</range-validator>
       <error-update>Aktualisierung fehlgeschlagen. Ihre Informationen sind ungültig.</error-update>
-      <item-not-existing>Die Änderungen auf diesem Tag können nicht gespeichert werden, da dieser Tag nicht mehr in der
-        Datenbank existiert.
-      </item-not-existing>
+      <item-not-existing>Die Änderungen auf diesem Tag können nicht gespeichert werden, da dieser Tag nicht mehr in der Datenbank existiert.</item-not-existing>
     </msg>
   </UITagStyleForm>
   <FolksonomyPopup>
@@ -2065,7 +2034,7 @@
   -->
   <ECMPhoneFormatValidator>
     <msg>
-      <Invalid>The field '{0}' contains an invalid Phone number. Please enter another value.</Invalid>
+      <Invalid>Das Feld '{0}' enthält eine ungültige Telefonnummer. Bitte geben Sie einen anderen Wert ein.</Invalid>
     </msg>
   </ECMPhoneFormatValidator>
   <!--
@@ -2364,9 +2333,7 @@
       <UnLock>Entsperren</UnLock>
     </tooltip>
     <msg>
-      <access-denied-exception>Ihnen fehlt die Berechtigung, den Knoten mit dem Pfad {0} zuzugreifen oder dieser Knoten
-        wurde gelöscht.
-      </access-denied-exception>
+      <access-denied-exception>Ihnen fehlt die Berechtigung, den Knoten mit dem Pfad {0} zuzugreifen oder dieser Knoten wurde gelöscht.</access-denied-exception>
     </msg>
   </UILockNodeList>
   <EditUnLockForm>
@@ -2479,10 +2446,8 @@
       <NextViewTree>Weiter</NextViewTree>
     </action>
     <msg>
-      <xss-vulnerability-character>Feld "{0}" enthält Zeichen, die XSS-Sicherheitslücken öffnen
-      </xss-vulnerability-character>
-      <xss-vulnerability-character-wo-label>Ihre Eingabe kann Zeichen enthalten, die XSS-Attacken erlauben
-      </xss-vulnerability-character-wo-label>
+      <xss-vulnerability-character>Feld "{0}" enthält Zeichen, die XSS-Sicherheitslücken öffnen</xss-vulnerability-character>
+      <xss-vulnerability-character-wo-label>Ihre Eingabe kann Zeichen enthalten, die XSS-Attacken erlauben</xss-vulnerability-character-wo-label>
     </msg>
   </UIActionForm>
 
@@ -2494,7 +2459,7 @@
 
   <UITabPane>
     <title>
-      <UITagManager>Tag Manager</UITagManager>
+      <UITagManager>Tag-Manager</UITagManager>
       <UITagPermissionManager>Berechtigungen</UITagPermissionManager>
     </title>
   </UITabPane>
@@ -2520,11 +2485,10 @@
       <Add>Hinzufügen</Add>
     </action>
     <label>
-      <userOrGroup>Mitgliedschaften:</userOrGroup>
+      <userOrGroup>Memberships:</userOrGroup>
     </label>
     <msg>
-      <userOrGroup-alreadyExists>Diese Rolle ist bereits vorhanden. Bitte wählen Sie eine andere.
-      </userOrGroup-alreadyExists>
+      <userOrGroup-alreadyExists>Diese Rolle ist bereits vorhanden. Bitte wählen Sie eine andere.</userOrGroup-alreadyExists>
     </msg>
   </UITagPermissionForm>
 
@@ -2559,9 +2523,7 @@
   </NodeTypeNameValidator>
   <UIActionForm>
     <msg>
-      <constraint-violation-exception>Der Knoten "{0}" kann nicht zu "{1}" im Arbeitsbereich "{2}" hinzugefügt werden.
-        Es gibt ein Problem mit den Zugriffsberechtigungen oder Einschränkungsverletzung.
-      </constraint-violation-exception>
+      <constraint-violation-exception>Der Knoten "{0}" kann nicht zu "{1}" im Arbeitsbereich "{2}" hinzugefügt werden.  Es gibt ein Problem mit den Zugriffsberechtigungen oder Einschränkungsverletzung.</constraint-violation-exception>
     </msg>
   </UIActionForm>
 
@@ -2572,9 +2534,7 @@
   </UIWorkspaceWizard>
   <UIRepositoryForm>
     <msg>
-      <not-complete-repository>The repository is being created. You need to wait a few minutes before creating another
-        one.
-      </not-complete-repository>
+      <not-complete-repository>The repository is being created. You need to wait a few minutes before creating another one.</not-complete-repository>
     </msg>
   </UIRepositoryForm>
 
@@ -2635,9 +2595,7 @@
   </UIPageIterator>
   <UILockNodeList>
     <msg>
-      <can-not-unlock-node>Ihnen fehlt die Berechtigung, diesen Knoten zu entsperren. Bitte kontaktieren Sie den
-        Administrator, um dieses Recht zu bekommen.
-      </can-not-unlock-node>
+      <can-not-unlock-node>Ihnen fehlt die Berechtigung, diesen Knoten zu entsperren. Bitte kontaktieren Sie den Administrator, um dieses Recht zu bekommen.</can-not-unlock-node>
     </msg>
   </UILockNodeList>
 </bundle>

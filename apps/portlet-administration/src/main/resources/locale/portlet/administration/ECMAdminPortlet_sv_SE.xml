@@ -9,7 +9,7 @@
     <tab>
       <label>
         <Templates>Mallar</Templates>
-        <Explorer>Utforskaren</Explorer>
+        <Explorer>Explorer</Explorer>
         <Repository>Repository</Repository>
         <Advanced>Avancerad</Advanced>
       </label>
@@ -40,13 +40,11 @@
   -->
   <UITaxonomyWorkingArea>
     <msg>
-      <referential-integrity>Går inte att läsa från filen eller att målkategorin är en underkategori.
-      </referential-integrity>
+      <referential-integrity>Går inte att läsa från filen eller att målkategorin är en underkategori.</referential-integrity>
       <no-taxonomy-selected>Du måste kopiera eller ta bort minst en kategori.</no-taxonomy-selected>
       <node-is-cutting>Du kan inte klistra in här. Kategorinoden {0} kan tas bort.</node-is-cutting>
       <can-not-paste>Det finns inga data i Urklipp.</can-not-paste>
-      <reference-exception>Cannot delete this category because it is currently referenced by a content.
-      </reference-exception>
+      <reference-exception>Cannot delete this category  because it is currently referenced by a content.</reference-exception>
       <path-error>Ett fel uppstod när du tog bort denna kategorinod.</path-error>
     </msg>
   </UITaxonomyWorkingArea>
@@ -73,11 +71,8 @@
       <info>
         <UITaxonomyTreeMainForm>Ange kategorins namn, arbetsyta och hem.</UITaxonomyTreeMainForm>
         <UIPermissionTreeManager>Ställa in behörighet för kategoriträdet.</UIPermissionTreeManager>
-        <UIActionTaxonomyManager>Lägga till en åtgärd i kategoriträdet för att slutföra eller uppdatera.
-        </UIActionTaxonomyManager>
-        <UITaxonomyTreeCreateChild>Redigera taxonomi trädet genom att lägga till, kopiera, klippa och välja
-          behörigheter.
-        </UITaxonomyTreeCreateChild>
+        <UIActionTaxonomyManager>Lägga till en åtgärd i kategoriträdet för att slutföra eller uppdatera.</UIActionTaxonomyManager>
+        <UITaxonomyTreeCreateChild>Redigera taxonomi trädet genom att lägga till, kopiera, klippa och välja behörigheter.</UITaxonomyTreeCreateChild>
       </info>
     </tab>
     <msg>
@@ -255,8 +250,7 @@
     <msg>
       <confirm-delete>Är du säker på att du vill ta bort denna metadata?</confirm-delete>
       <delete-successful>Mallar för {0} raderades.</delete-successful>
-      <path-not-found-exception>Dessa metadata har tagits bort eller ändrats. Klicka på Uppdatera.
-      </path-not-found-exception>
+      <path-not-found-exception>Dessa metadata har tagits bort eller ändrats. Klicka på Uppdatera.</path-not-found-exception>
     </msg>
     <action>
       <Add>Lägg till Metadata</Add>
@@ -472,7 +466,7 @@
     </header>
     <action>
       <Export>Exportera</Export>
-      <Import>Importera</Import>
+      <Import>Import</Import>
       <Add>Lägg till</Add>
     </action>
     <tooltip>
@@ -567,10 +561,8 @@
     </action>
     <msg>
       <register-successfully>Nodtypen {0} registrerades framgångsrikt.</register-successfully>
-      <supertype-is-madatory>Super typer är obligatoriska när du registrerar en ny nodtyp. Välj minst en super typ.
-      </supertype-is-madatory>
-      <register-failed>Nodtyp registreringen misslyckade. Antingen finns den redan eller supertypen är ogiltig.
-      </register-failed>
+      <supertype-is-madatory>Super typer är obligatoriska när du registrerar en ny nodtyp. Välj minst en super typ.</supertype-is-madatory>
+      <register-failed>Nodtyp registreringen misslyckade. Antingen finns den redan eller supertypen är ogiltig.</register-failed>
       <nodeType-name>Namnet på nodtypen krävs.</nodeType-name>
       <fileName-invalid>Filnamnet innehåller ogiltiga tecken.</fileName-invalid>
       <node-type-exists>Nodtypen {0} finns redan.</node-type-exists>
@@ -688,7 +680,7 @@
   <UINodeTypeImport>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Import>Importera</Import>
+      <Import>Import</Import>
       <Upload>Ladda upp igen</Upload>
     </action>
     <header>
@@ -745,8 +737,7 @@
     </action>
     <msg>
       <confirm-delete>Är du säker på att du vill ta bort denna aktivitets typ?</confirm-delete>
-      <cannot-delete>Du kan inte ta bort den här åtgärdstypen eftersom systemet använder det fortfarande.
-      </cannot-delete>
+      <cannot-delete>Du kan inte ta bort den här åtgärdstypen eftersom systemet använder det fortfarande.</cannot-delete>
     </msg>
   </UIActionTypeList>
   <!--
@@ -999,7 +990,7 @@
       <addSymLink>Lägg till Symlink</addSymLink>
       <checkIn>Check In</checkIn>
       <checkOut>Check Out</checkOut>
-      <shareDocuments>Dela</shareDocuments>
+      <shareDocuments>Share</shareDocuments>
       <openDocument>Remote Edit</openDocument>
       <editProperty>Edit Document Properties</editProperty>
       <uploadNewVersion>Upload a new version</uploadNewVersion>
@@ -1032,7 +1023,7 @@
   </UIViewFormTabPane>
   <PopupViewPermission>
     <title>
-      <UIPermissionSelector>Väljare för behörighet</UIPermissionSelector>
+      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
     </title>
   </PopupViewPermission>
 
@@ -1083,7 +1074,7 @@
   -->
   <UITemplateForm>
     <title>
-      <AddPermission>Lägg till behörighet</AddPermission>
+      <AddPermission>Add Permission</AddPermission>
     </title>
     <action>
       <Save>#{word.save}</Save>
@@ -1414,7 +1405,7 @@
 
   <PopupTaxonomyTreePermission>
     <title>
-      <UIPermissionSelector>Väljare för behörighet</UIPermissionSelector>
+      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
     </title>
   </PopupTaxonomyTreePermission>
 
@@ -1746,7 +1737,7 @@
   -->
   <AddNewTemplatePermission>
     <title>
-      <UIPermissionSelector>Väljare för behörighet</UIPermissionSelector>
+      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
     </title>
   </AddNewTemplatePermission>
   <TemplatePermission>
@@ -1787,12 +1778,12 @@
   </DialogForm>
   <DialogFormTemplatePermission>
     <title>
-      <UIPermissionSelector>Väljare för behörighet</UIPermissionSelector>
+      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
     </title>
   </DialogFormTemplatePermission>
   <ViewFormTemplatePermission>
     <title>
-      <UIPermissionSelector>Väljare för behörighet</UIPermissionSelector>
+      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
     </title>
   </ViewFormTemplatePermission>
   <TemplateContainerPopup>
@@ -1985,7 +1976,7 @@
   </EditQueryForm>
   <PermissionPopup>
     <title>
-      <UIGroupMemberSelector>Väljare för behörighet</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Permission Selector</UIGroupMemberSelector>
     </title>
   </PermissionPopup>
   <!--
@@ -2026,12 +2017,9 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <range-validator>Området är ogiltig. Formatet måste vara: en...b, bland vilka a, b är positiva heltal. Du kan
-        använda * istället för b att visa ett obegränsat område.
-      </range-validator>
+      <range-validator>Området är ogiltig. Formatet måste vara: en...b, bland vilka a, b är positiva heltal. Du kan använda * istället för b att visa ett obegränsat område.</range-validator>
       <error-update>Det gick inte att uppdatera. Din information är ogiltig.</error-update>
-      <item-not-existing>Du kan inte spara ändringar i denna tagg eftersom den inte längre finns i databasen.
-      </item-not-existing>
+      <item-not-existing>Du kan inte spara ändringar i denna tagg eftersom den inte längre finns i databasen.</item-not-existing>
     </msg>
   </UITagStyleForm>
   <FolksonomyPopup>
@@ -2345,9 +2333,7 @@
       <UnLock>Låsa upp</UnLock>
     </tooltip>
     <msg>
-      <access-denied-exception>Du har inte behörighet att komma åt noden med sökvägen {0}, eller denna nod är
-        borttagen
-      </access-denied-exception>
+      <access-denied-exception>Du har inte behörighet att komma åt noden med sökvägen {0}, eller denna nod är borttagen</access-denied-exception>
     </msg>
   </UILockNodeList>
   <EditUnLockForm>
@@ -2461,8 +2447,7 @@
     </action>
     <msg>
       <xss-vulnerability-character>Fältet {0} innehåller XSS sårbarhets tecken</xss-vulnerability-character>
-      <xss-vulnerability-character-wo-label>Your input may contain XSS vulnerability characters
-      </xss-vulnerability-character-wo-label>
+      <xss-vulnerability-character-wo-label>Your input may contain XSS vulnerability characters</xss-vulnerability-character-wo-label>
     </msg>
   </UIActionForm>
 
@@ -2500,7 +2485,7 @@
       <Add>Lägg till</Add>
     </action>
     <label>
-      <userOrGroup>Medlemskap:</userOrGroup>
+      <userOrGroup>Memberships:</userOrGroup>
     </label>
     <msg>
       <userOrGroup-alreadyExists>Detta medlemskap finns redan. Välj en annan.</userOrGroup-alreadyExists>
@@ -2538,9 +2523,7 @@
   </NodeTypeNameValidator>
   <UIActionForm>
     <msg>
-      <constraint-violation-exception>Noden {0} kan inte läggas till {1} i arbetsytan {2}. Det finns ett problem med
-        behörigheter eller begränsningar.
-      </constraint-violation-exception>
+      <constraint-violation-exception>Noden {0} kan inte läggas till {1} i arbetsytan {2}.  Det finns ett problem med behörigheter eller begränsningar.</constraint-violation-exception>
     </msg>
   </UIActionForm>
 
@@ -2551,9 +2534,7 @@
   </UIWorkspaceWizard>
   <UIRepositoryForm>
     <msg>
-      <not-complete-repository>The repository is being created. You need to wait a few minutes before creating another
-        one.
-      </not-complete-repository>
+      <not-complete-repository>The repository is being created. You need to wait a few minutes before creating another one.</not-complete-repository>
     </msg>
   </UIRepositoryForm>
 
@@ -2614,9 +2595,7 @@
   </UIPageIterator>
   <UILockNodeList>
     <msg>
-      <can-not-unlock-node>Du har inte behörighet att låsa upp den här noden. Kontakta administratören för att få rätt
-        rättigheter.
-      </can-not-unlock-node>
+      <can-not-unlock-node>Du har inte behörighet att låsa upp den här noden. Kontakta administratören för att få rätt rättigheter.</can-not-unlock-node>
     </msg>
   </UILockNodeList>
 </bundle>

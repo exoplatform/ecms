@@ -23,7 +23,7 @@
   <WebLink>
     <view>
       <label>
-        <url>URL-адрес</url>
+        <url>URL</url>
         <description>Описание</description>
       </label>
     </view>

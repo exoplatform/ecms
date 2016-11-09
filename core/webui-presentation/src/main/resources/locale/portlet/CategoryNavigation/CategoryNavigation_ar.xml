@@ -2,44 +2,57 @@
 <bundle>
   <UICNContainer>
     <title>
-      <QuickEdit>تفضيلات</QuickEdit>
+      <QuickEdit>Quick Edit</QuickEdit>
     </title>
   </UICNContainer>
 
   <UICNConfigPopupWindow>
     <title>
-      <UICategoryNavigationConfig>إعداد فئات</UICategoryNavigationConfig>
+      <UICategoryNavigationConfig>Category List Configuration</UICategoryNavigationConfig>
     </title>
   </UICNConfigPopupWindow>
 
   <UICategoryNavigationTargetPathFormInputSet>
     <title>
-      <SelectTargetPath></SelectTargetPath>
+      <SelectTargetPath/>
     </title>
   </UICategoryNavigationTargetPathFormInputSet>
 
-  <UICategoryNavigationTargetPathPopupWindow>
-    <title>
-      <UIPageSelector>محدد الصفحة </UIPageSelector>
-    </title>
-  </UICategoryNavigationTargetPathPopupWindow>
-
   <UICategoryNavigationConfig>
     <label>
-      <UICategoryNavigationRepositoryFormSelectBox>مستودع</UICategoryNavigationRepositoryFormSelectBox>
-      <UICategoryNavigationTreeNameSelectBox>شجرة التصنيف</UICategoryNavigationTreeNameSelectBox>
-      <UICategoryNavigationTreeTitleFormStringInput>لقب</UICategoryNavigationTreeTitleFormStringInput>
-      <UICategoryNavigationTargetPathFormInputSet>الهدف مسار</UICategoryNavigationTargetPathFormInputSet>
-      <UICategoryNavigationTreeNameFormSelectBox>اسم شجرة</UICategoryNavigationTreeNameFormSelectBox>
-      <UICategoryNavigationTemplateFormSelectBox>تم مشاهدة نموذج الشجرة </UICategoryNavigationTemplateFormSelectBox>
+      <UICategoryNavigationRepositoryFormSelectBox>Repository</UICategoryNavigationRepositoryFormSelectBox>
+      <UICategoryNavigationTreeNameSelectBox>Category Tree</UICategoryNavigationTreeNameSelectBox>
+      <UICategoryNavigationTreeTitleFormStringInput>Title</UICategoryNavigationTreeTitleFormStringInput>
+  
+      <UICategoryNavigationTreeNameFormSelectBox>Tree Name</UICategoryNavigationTreeNameFormSelectBox>
+      <UICategoryNavigationTemplateFormSelectBox>Tree viewer template</UICategoryNavigationTemplateFormSelectBox>
+      
+      <UICategoryNavigationTargetPathFormInputSet>Show in Page</UICategoryNavigationTargetPathFormInputSet>      
+      <TreeSelectionBlock>Tree Selection</TreeSelectionBlock>
+      <DisplaySettingBlock>عرض الاعدادات</DisplaySettingBlock>
+      <AdvancedBlock>إعدادات متقدمة</AdvancedBlock>
+  
+  <UICategoryNavigationTreePathFormInputSet>مسار الهدف</UICategoryNavigationTreePathFormInputSet>
+  <UICategoryNavigationTreePathFormStringInput>مسار الهدف</UICategoryNavigationTreePathFormStringInput>
+  <UICategoryNavigationHeaderFormStringInput>نموذج</UICategoryNavigationHeaderFormStringInput>
+  <UICategoryNavigationAutomaticDetectionCheckBoxInput>Automatic</UICategoryNavigationAutomaticDetectionCheckBoxInput>
+  <UICategoryNavigationDynamicNavigationLabel>التصفّح الديناميكي</UICategoryNavigationDynamicNavigationLabel>
+  <UICategoryNavigationWithClvFormStringInput>مع</UICategoryNavigationWithClvFormStringInput>
+  <UICategoryNavigationTreepathPopupWindow>مسار الهدف</UICategoryNavigationTreepathPopupWindow>    
+      
     </label>
     <msg>
-      <not-support-encoding> لم يتم إعتبار الترميز </not-support-encoding>
-      <render> خطأ عندما جعل العملية. </render>
-      <saving-success>تم تحديث هذا مدخل</saving-success>
+      <not-support-encoding>Encoding is not supported.</not-support-encoding>
+      <render>An error occurred when rendering.</render>
+      <saving-success>The information was updated successfully.</saving-success>
     </msg>
     <action>
-      <Save>حفظ</Save>
+      <Save>Save</Save>
     </action>
   </UICategoryNavigationConfig>
+  <UICategoryNavigationTreeBase>
+    <msg>
+      <not-existed-category>هذه الفئة لا وجود لها.</not-existed-category>
+    </msg>
+  </UICategoryNavigationTreeBase>
 </bundle>
