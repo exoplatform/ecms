@@ -140,6 +140,7 @@
       <module>ecm-utils</module>
     </depends>
   </module>
+
   <module>
     <name>uiCommentForm</name>
     <script>

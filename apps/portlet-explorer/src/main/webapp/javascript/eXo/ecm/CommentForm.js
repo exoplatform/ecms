@@ -1,28 +1,42 @@
 (function ($, _) {
-     var CommentForm = function() {}
+    var CommentForm = function() {}
     //
-     CommentForm.prototype.init = function(placeholder) {
+    CommentForm.prototype.init = function(placeholder) {
+
+        var MAX_LENGTH = 2000;
         // TODO this line is mandatory when a custom skin is defined, it should not be mandatory
         CKEDITOR.basePath = '/commons-extension/ckeditor/';
         $('textarea#comment').ckeditor({
             //TODO we should ensure adding external plugins for link and image
-            customConfig: '/ecmexplorer/javascript/eXo/ecm/ckeditorCustom/config.js',
+            customConfig: '/commons-extension/ckeditorCustom/config.js',
             placeholder: placeholder,
             on: {
                 instanceReady: function (evt) {
                     // Hide the editor top bar.
-                    document.getElementById(evt.editor.id + '_bottom').style.display = 'none';
-                    document.getElementById(evt.editor.id + '_contents').style.height = '47px';
+                    $('#' + evt.editor.id + '_bottom').removeClass('cke_bottom_visible');
                 },
-                focus: function (evt) {
-                    // Show the editor top bar.
-                    document.getElementById(evt.editor.id + '_bottom').style.display = 'block';
-                    document.getElementById(evt.editor.id + '_contents').style.height = '150px';
+                focus : function ( evt ) {
+                    evt.editor.execCommand('autogrow');
+                    var $content = $('#' + evt.editor.id + '_contents');
+                    var contentHeight = $content.height();
+                    var $ckeBottom = $('#' + evt.editor.id + '_bottom');
+                    $ckeBottom.animate({
+                        height: "39"
+                    }, {
+                        step: function(number, tween) {
+                            $content.height(contentHeight - number);
+                            if (number >= 9) {
+                                $ckeBottom.addClass('cke_bottom_visible');
+                            }
+                        }
+                    });
                 },
                 blur: function (evt) {
-                    // Show the editor top bar.
-                    document.getElementById(evt.editor.id + '_bottom').style.display = 'none';
-                    document.getElementById(evt.editor.id + '_contents').style.height = '47px';
+                    // Hide the editor toolbar
+                    $('#' + evt.editor.id + '_contents').css('height', $('#' + evt.editor.id + '_contents').height() + 39);
+                    $('#' + evt.editor.id + '_bottom').css('height', '0px');
+                    $('#' + evt.editor.id + '_bottom').removeClass('cke_bottom_visible');
+
                 },
                 change: function (evt) {
                     var newData = evt.editor.getData();
@@ -31,6 +45,15 @@
                         $('#CommentButton' + elId).removeAttr("disabled");
                     } else {
                         $('#CommentButton' + elId).prop("disabled", true);
+                    }
+                },
+                key: function( evt) {
+                    var newData = evt.editor.getData();
+                    var pureText = newData? newData.replace(/<[^>]*>/g, "").replace(/&nbsp;/g,"").trim() : "";
+                    if (pureText.length > MAX_LENGTH) {
+                        if ([8, 46, 33, 34, 35, 36, 37,38,39,40].indexOf(evt.data.keyCode) < 0) {
+                            evt.cancel();
+                        }
                     }
                 }
             }
