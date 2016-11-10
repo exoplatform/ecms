@@ -437,11 +437,14 @@ public class UIDocumentNodeList extends UIContainer {
         UIPopupContainer.activate(UIActivateVersion.class, 400);
         event.getRequestContext().addUIComponentToUpdateByAjax(UIPopupContainer);
       } else if (currentNode.isNodeType(Utils.MIX_VERSIONABLE)) {
-        UIVersionInfo uiVersion = event.getSource().createUIComponent(UIVersionInfo.class, null, null);
-        uiVersion.setCurrentNode(currentNode);
-        uiVersion.setRootOwner(currentNode.getProperty("exo:lastModifier").getString());
-        UIPopupContainer.activate(uiVersion, 700, 500);
-        event.getRequestContext().addUIComponentToUpdateByAjax(UIPopupContainer);
+        UIWorkingArea uiWorkingArea = uiExplorer.getChild(UIWorkingArea.class);
+        UIDocumentWorkspace uiDocumentWorkspace = uiWorkingArea.getChild(UIDocumentWorkspace.class);
+        UIVersionInfo uiVersionInfo = uiDocumentWorkspace.getChild(UIVersionInfo.class);
+        uiVersionInfo.setCurrentNode(currentNode);
+        uiVersionInfo.setRootOwner(currentNode.getProperty("exo:lastModifier").getString());
+        uiVersionInfo.activate();
+        uiDocumentWorkspace.setRenderedChild(UIVersionInfo.class);
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiDocumentWorkspace);
       }
     }
   }
