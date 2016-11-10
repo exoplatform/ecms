@@ -67,6 +67,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
@@ -853,6 +854,19 @@ public class Utils {
       lastModified =node.getProperty("jcr:content/exo:lastModifiedDate").getString();
     }
     return lastModified;
+  }
+  
+  
+  public static Calendar getDate(Node node) throws Exception {
+      return node.hasProperty(NodetypeConstant.EXO_LAST_MODIFIED_DATE) ? 
+                   node.getProperty(NodetypeConstant.EXO_LAST_MODIFIED_DATE).getDate() :
+                   node.getProperty(NodetypeConstant.EXO_DATE_CREATED).getDate();
+  }
+  
+  public static String getOwner(Node node) throws Exception {
+      return node.hasProperty(NodetypeConstant.EXO_OWNER) ? 
+                   node.getProperty(NodetypeConstant.EXO_OWNER).getString() :
+                   "";
   }
   
   /**
