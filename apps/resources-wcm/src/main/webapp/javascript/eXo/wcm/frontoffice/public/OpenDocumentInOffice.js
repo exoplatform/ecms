@@ -43,7 +43,21 @@
     fitLayout();
     if(eXo.ecm.ECMWebDav !== undefined) { // use ITHIT to an open document
       var documentManager = eXo.ecm.ECMWebDav.WebDAV.Client.DocManager;
-      documentManager.EditDocument(filePath, mountPath, this.errorCallback);
+      //Opening MS Office and other Docs from a Web Site with Cookies Authentication
+      if (ITHit.DetectOS.OS == "Linux" && ITHit.DetectBrowser == "Chrome") {
+        documentManager.DavProtocolEditDocument(
+            filePath, 				// Document URL(s)
+            mountPath,              // Mount URL
+            this.errorCallback,     // Function to call if protocol app is not installed
+            null,                   // Reserved
+            'Current',              // Which browser to copy cookies from: 'Current', 'All', 'None'
+            'JSESSIONID',           // Cookie(s) to copy.
+            '/portal/login',        // URL to navigate to if any cookie from the list is not found.
+            'Edit'                  // Command to execute: 'Edit', 'OpenWith'
+        );
+      } else {
+        documentManager.EditDocument(filePath, mountPath, this.errorCallback);
+      }
     }
     if(uisideBarWidth === 0){ //hide side bar
       gj("#UISideBar").show();
