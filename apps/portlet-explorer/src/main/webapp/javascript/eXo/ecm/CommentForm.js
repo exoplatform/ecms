@@ -16,35 +16,42 @@
                     $('#' + evt.editor.id + '_bottom').removeClass('cke_bottom_visible');
                 },
                 focus : function ( evt ) {
-                    evt.editor.execCommand('autogrow');
-                    var $content = $('#' + evt.editor.id + '_contents');
-                    var contentHeight = $content.height();
-                    var $ckeBottom = $('#' + evt.editor.id + '_bottom');
-                    $ckeBottom.animate({
-                        height: "39"
-                    }, {
-                        step: function(number, tween) {
-                            $content.height(contentHeight - number);
-                            if (number >= 9) {
-                                $ckeBottom.addClass('cke_bottom_visible');
+                    // Show the editor toolbar, except for smartphones in landscape mode
+                    if ($(window).width() > 767 || $(window).width() < $(window).height()) {
+                        evt.editor.execCommand('autogrow');
+                        var $content = $('#' + evt.editor.id + '_contents');
+                        var contentHeight = $content.height();
+                        var $ckeBottom = $('#' + evt.editor.id + '_bottom');
+                        $ckeBottom.animate({
+                            height: "39"
+                        }, {
+                            step: function(number, tween) {
+                                $content.height(contentHeight - number);
+                                if (number >= 9) {
+                                    $ckeBottom.addClass('cke_bottom_visible');
+                                }
                             }
-                        }
-                    });
+                        });
+                    } else {
+                        $('#' + evt.editor.id + '_bottom').removeClass('cke_bottom_visible');
+                        $('#' + evt.editor.id + '_bottom')[0].style.display = "none";
+                    }
                 },
                 blur: function (evt) {
-                    // Hide the editor toolbar
-                    $('#' + evt.editor.id + '_contents').css('height', $('#' + evt.editor.id + '_contents').height() + 39);
-                    $('#' + evt.editor.id + '_bottom').css('height', '0px');
-                    $('#' + evt.editor.id + '_bottom').removeClass('cke_bottom_visible');
-
+                    /// Hide the editor toolbar
+                    if ($(window).width() > 767 || $(window).width() < $(window).height()) {
+                        $('#' + evt.editor.id + '_contents').css('height', $('#' + evt.editor.id + '_contents').height() + 39);
+                        $('#' + evt.editor.id + '_bottom').css('height', '0px');
+                        $('#' + evt.editor.id + '_bottom').removeClass('cke_bottom_visible');
+                    }
                 },
                 change: function (evt) {
                     var newData = evt.editor.getData();
-                    if (newData && newData.length > 0) {
-                        var elId = this.element.$.id.replace('CommentTextarea', '');
-                        $('#CommentButton' + elId).removeAttr("disabled");
+                    var pureText = newData? newData.replace(/<[^>]*>/g, "").replace(/&nbsp;/g,"").trim() : "";
+                    if (pureText.length <= MAX_LENGTH) {
+                        evt.editor.getCommand('simpleImage').enable();
                     } else {
-                        $('#CommentButton' + elId).prop("disabled", true);
+                        evt.editor.getCommand('simpleImage').disable();
                     }
                 },
                 key: function( evt) {
