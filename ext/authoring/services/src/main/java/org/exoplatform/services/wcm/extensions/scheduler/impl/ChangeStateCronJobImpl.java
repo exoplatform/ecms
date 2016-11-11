@@ -130,7 +130,7 @@ public class ChangeStateCronJobImpl implements Job {
       }
 
     } catch (RepositoryException ex) {
-      if (LOG.isErrorEnabled()) LOG.error("Repository not found. Ignoring");
+      if (LOG.isErrorEnabled()) LOG.error("Repository not found. Ignoring :  " + ex.getMessage(), ex);
     } catch (Exception ex) {
       if (LOG.isErrorEnabled()) LOG.error("error when changing the state of the content : " + ex.getMessage(), ex);
     } finally {
