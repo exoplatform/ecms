@@ -6,8 +6,8 @@
 	content: url("icons/googledrive-gray-14x14.png");
 }
 
-.uiIconEcmsConnectDialog-gdrive {
-	background: url('icons/googledrive-gray-24x24.png') no-repeat scroll left center transparent !important;
+.uiIconEcmsConnectDialog-gdrive:before {
+	content: url("icons/googledrive-gray-24x24.png");
 	height: 32px !important;
 	width: 32px !important;
 }
@@ -19,9 +19,9 @@
 	content: url("icons/googledrive-gray-14x14.png");
 }
 
-.uiIcon16x16CloudDrive-gdrive {
-	left: -1px;
-	top: 1px;
+.uiIcon16x16CloudDrive-gdrive:before {
+	left: -15px;
+  top: 0px;
 	width: 16px;
   height: 16px;
   position: absolute !important;
@@ -30,25 +30,26 @@
   -o-transform: scale(0.36);
   -ms-transform: scale(0.36);
   transform: scale(0.36);
-	background: url("icons/googledrive-lightgray-16x16.png") no-repeat center center transparent !important;
+	content: url("icons/googledrive-lightgray-16x16.png");
 }
 
-.uiIcon24x24CloudDrive-gdrive {
-	left: 1px;
-  top: -19px;
+.uiIcon24x24CloudDrive-gdrive:before {
+	left: 2px;
+  top: -21px;
   width: 20px;
   height: 20px;
+  position: absolute !important;
 	-webkit-transform: scale(0.7);
   -moz-transform: scale(0.7);
   -o-transform: scale(0.7);
   -ms-transform: scale(0.7);
   transform: scale(0.7);
-	background: url("icons/googledrive-lightgray-16x16.png") no-repeat center center transparent !important;
+  content: url("icons/googledrive-lightgray-16x16.png");
 }
 
-.uiIcon64x64CloudDrive-gdrive {
-	left: 44px;
-	top: 17px;
+.uiIcon64x64CloudDrive-gdrive:before {
+	left: -50px;
+  top: 3px;
 	width: 40px;
   height: 40px;
   position: absolute !important;
@@ -57,16 +58,26 @@
   -o-transform: scale(0.7);
   -ms-transform: scale(0.7);
   transform: scale(0.7);
-	background: url("icons/googledrive-lightgray-32x32.png") no-repeat center center transparent !important;
+  content: url("icons/googledrive-lightgray-32x32.png");
 }
 
 /*
  * Responsive styles
  */
 @media (min-width: 481px) and (max-width: 1024px) {
-	.uiIcon24x24CloudDrive-gdrive {
-		left: 4px;
-	  top: -28px;
+	.uiIcon16x16CloudDrive-gdrive:before {
+		left: -17px;
+		top: 2px;
+		-webkit-transform: scale(0.45);
+		-moz-transform: scale(0.45);
+		-o-transform: scale(0.45);
+		-ms-transform: scale(0.45);
+		transform: scale(0.45);
+	}
+	
+	.uiIcon24x24CloudDrive-gdrive:before {
+		left: 7px;
+	  top: -30px;
 	  -webkit-transform: scale(0.9);
 		-moz-transform: scale(0.9);
 		-o-transform: scale(0.9);
@@ -74,24 +85,14 @@
 		transform: scale(0.9);
 	}
 	
-	.uiIcon64x64CloudDrive-gdrive {
-		left: 44px;
-		top: 27px;
+	.uiIcon64x64CloudDrive-gdrive:before {
+		left: -57px;
+    top: -5px;
 		-webkit-transform: scale(0.9);
 		-moz-transform: scale(0.9);
 		-o-transform: scale(0.9);
 		-ms-transform: scale(0.9);
 		transform: scale(0.9);
-	}
-	
-	.uiIcon16x16CloudDrive-gdrive {
-		left: 1px;
-		top: 3px;
-		-webkit-transform: scale(0.45);
-		-moz-transform: scale(0.45);
-		-o-transform: scale(0.45);
-		-ms-transform: scale(0.45);
-		transform: scale(0.45);
 	}
 }
 
