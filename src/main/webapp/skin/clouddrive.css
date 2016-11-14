@@ -23,6 +23,10 @@
 	height: 14px;
 }
 
+[class^="uiIcon16x16CloudDrive-"], [class^="uiIcon24x24CloudDrive-"], [class^="uiIcon64x64CloudDrive-"] {
+  display: inline;
+}
+
 .uiIconEcmsViewSharing:before {
 	content: url("icons/clouddrive-logo-lightgray-14x14.png");
 }
