@@ -105,7 +105,7 @@ public class CloudFileActionService implements Startable {
 
   protected static final String   EXO_TRASHFOLDER          = "exo:trashFolder";
 
-  protected static final String[] READER_PERMISSION          = new String[] { PermissionType.READ };
+  protected static final String[] READER_PERMISSION        = new String[] { PermissionType.READ };
 
   protected static final String[] MANAGER_PERMISSION       = new String[] { PermissionType.READ, PermissionType.REMOVE };
 
@@ -557,7 +557,7 @@ public class CloudFileActionService implements Startable {
   public String postSharedActivity(Node node, Node link, String comment) throws CloudDriveException {
     try {
       Utils.setActivityType(SHARE_CLOUD_FILES_SPACES);
-      ExoSocialActivity activity = Utils.postFileActivity(link, "", false, false, comment);
+      ExoSocialActivity activity = Utils.postFileActivity(link, "", true, false, comment, "");
       if (activity != null) {
         return activity.getId();
       } else {
