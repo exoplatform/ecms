@@ -25,12 +25,21 @@
         <postedBy>Last comment posted by</postedBy>
         <at>at</at>
         <comments>Comment(s)</comments>
-        <show-comments>Show comments</show-comments>
-        <hide-comments>Hide comments</hide-comments>
+        <show-comments>Show all {0} comments</show-comments>
+        <hide-comments>Hide all {0} comments</hide-comments>
         <comment-by>Commented by</comment-by>
         <email>Email</email>
         <site>Site</site>
         <lastComment>Last comment posted by {user} at {time}</lastComment>
+        <Less_Than_A_Minute>less than a minute ago</Less_Than_A_Minute>
+        <About_A_Minute>about a minute ago</About_A_Minute>
+        <About_x_Minutes>about {0} minutes ago</About_x_Minutes>
+        <About_An_Hour>about an hour ago</About_An_Hour>
+        <About_x_Hours>about {0} hours ago</About_x_Hours>
+        <About_A_Day>about a day ago</About_A_Day>
+        <About_x_Days>about {0} days ago</About_x_Days>
+        <About_A_Month>about a month ago</About_A_Month>
+        <About_x_Months>about {0} months ago</About_x_Months>
       </label>
     </view>
   </Comment>
