@@ -1364,7 +1364,7 @@
       <cannot-remove-version>Suppression de la version de base impossible</cannot-remove-version>
       <error-removing-version>Une erreur s’est produite lors de la suppression de cette version.</error-removing-version>
       <error-removing-referenced-version>Cette version est référencée et ne peut pas être supprimée.</error-removing-referenced-version>
-      <confirm-restore>Êtes-vous sûr de vouloir restaurer cette version ?</confirm-restore>
+      <confirm-restore>Êtes-vous sûr de vouloir restaurer cette version ?</confirm-restore>
       <confirm-delete>Confirmez-vous la suppression?</confirm-delete>
       <not-checked-out>Vous devez faire un check out du noeud avant de restaurer.</not-checked-out>
       <invalid-item-state>Vous ne pouvez pas restaurer cette version. Probablement un ou plusieurs éléments ont été déplacés ou supprimés par une autre session.</invalid-item-state>
