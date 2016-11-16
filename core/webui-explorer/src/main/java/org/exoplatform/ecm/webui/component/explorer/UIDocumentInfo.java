@@ -16,7 +16,6 @@
  */
 package org.exoplatform.ecm.webui.component.explorer;
 
-import com.google.common.collect.Lists;
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.commons.utils.LazyPageList;
 import org.exoplatform.commons.utils.ListAccess;
@@ -76,7 +75,6 @@ import org.exoplatform.webui.application.portlet.PortletRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.*;
-import org.exoplatform.webui.core.lifecycle.WebuiBindingContext;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.exception.MessageException;
@@ -843,10 +841,6 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
 
   public List<Node> getComments() throws Exception {
     return getApplicationComponent(CommentsService.class).getComments(getCurrentNode(), getLanguage()) ;
-  }
-
-  public List<Node> getSortedComments() throws Exception {
-    return Lists.reverse(this.getComments());
   }
 
   public String getViewTemplate(String nodeTypeName, String templateName) throws Exception {
@@ -1862,48 +1856,5 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
   
   public UIPopupContainer getPopupContainer() throws Exception {
     return this.getAncestorOfType(UIJCRExplorer.class).getChild(UIPopupContainer.class);
-  }
-
-  public String getPostedTimeString(WebuiBindingContext resourceBundle, Date postedTime) throws Exception {
-    long time = (new Date().getTime() - postedTime.getTime()) / 1000;
-    long value;
-    if (time < 60) {
-      return resourceBundle.appRes("Comment.view.label.Less_Than_A_Minute");
-    } else {
-      if (time < 120) {
-        return resourceBundle.appRes("Comment.view.label.About_A_Minute");
-      } else {
-        if (time < 3600) {
-          value = Math.round(time / 60);
-          return resourceBundle.appRes("Comment.view.label.About_x_Minutes").replaceFirst("\\{0\\}", String.valueOf(value));
-        } else {
-          if (time < 7200) {
-            return resourceBundle.appRes("Comment.view.label.About_An_Hour");
-          } else {
-            if (time < 86400) {
-              value = Math.round(time / 3600);
-              return resourceBundle.appRes("Comment.view.label.About_x_Hours").replaceFirst("\\{0\\}", String.valueOf(value));
-            } else {
-              if (time < 172800) {
-                return resourceBundle.appRes("Comment.view.label.About_A_Day");
-              } else {
-                if (time < 2592000) {
-                  value = Math.round(time / 86400);
-                  return resourceBundle.appRes("Comment.view.label.About_x_Days").replaceFirst("\\{0\\}", String.valueOf(value));
-                } else {
-                  if (time < 5184000) {
-                    return resourceBundle.appRes("Comment.view.label.About_A_Month");
-                  } else {
-                    value = Math.round(time / 2592000);
-                    return resourceBundle.appRes("Comment.view.label.About_x_Months")
-                        .replaceFirst("\\{0\\}", String.valueOf(value));
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
   }
 }

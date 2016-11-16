@@ -69,12 +69,16 @@ import org.exoplatform.web.application.Parameter ;
 						if(comment.hasProperty("exo:commentor")){
 							commentor=comment.getProperty("exo:commentor").getString();
 						}
+					    def avatarURL = "/eXoSkin/skin/images/themes/default/social/skin/ShareImages/UserAvtDefault.png";
+						if (comment.hasProperty("exo:commentorAvatar")) {
+						  avatarURL = comment.getProperty("exo:commentorAvatar").getString();
+						}
 					  %>
 					  <div class="commentContainer clearfix">
 						<div class="commentBox">
 							<div class="avatarBox pull-left">
 								<a commentor="$commentor" class="avatarXSmall" data-placement="bottom" rel="tooltip" href="<%=org.exoplatform.wcm.webui.Utils.getProfileLink(commentor)%>" data-original-title="<%=comment.getProperty("exo:commentorFullName").getString()%>">
-								<img src="/eXoSkin/skin/images/themes/default/social/skin/ShareImages/UserAvtDefault.png">
+								<img src="$avatarURL">
 								</a>
 							</div>
 							<div class="commentInfo">

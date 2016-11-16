@@ -25,7 +25,6 @@ import org.exoplatform.services.organization.*;
 import org.exoplatform.services.resources.ResourceBundleService;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
-import org.exoplatform.wcm.webui.validator.FckMandatoryValidator;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -104,7 +103,7 @@ public class UICommentForm extends UIForm implements UIPopupComponent {
       addUIFormInput(new UIFormStringInput(FIELD_WEBSITE, FIELD_WEBSITE, null));
     }
     UIFormTextAreaInput commentField = new UIFormTextAreaInput(FIELD_COMMENT, FIELD_COMMENT, "");
-    commentField.addValidator(FckMandatoryValidator.class);
+    //commentField.addValidator(FckMandatoryValidator.class);
     addUIFormInput(commentField);
     Locale locale = WebuiRequestContext.getCurrentInstance().getLocale();
     ResourceBundleService resourceBundleService = WCMCoreUtils.getService(ResourceBundleService.class);
@@ -168,6 +167,7 @@ public class UICommentForm extends UIForm implements UIPopupComponent {
       comment = HTMLSanitizer.sanitize(comment);
       CommentsService commentsService = uiForm.getApplicationComponent(CommentsService.class);
       if (comment == null || comment.trim().length() == 0) {
+        event.getSource().getAncestorOfType(UIPopupContainer.class).cancelPopupAction();
         throw new MessageException(new ApplicationMessage("UICommentForm.msg.content-null", null, ApplicationMessage.WARNING));
       }
       if (uiForm.isEdit()) {

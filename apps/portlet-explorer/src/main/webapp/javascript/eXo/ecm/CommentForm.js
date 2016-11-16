@@ -2,7 +2,46 @@
     var CommentForm = function() {}
     //
     CommentForm.prototype.init = function(placeholder) {
+        var peopleSearchCached = {};
+        var lastNoResultQuery = false;
 
+        $('body').suggester('addProvider', 'exo:people', function(query, callback) {
+            if (lastNoResultQuery && query.length > lastNoResultQuery.length) {
+                if (query.substr(0, lastNoResultQuery.length) === lastNoResultQuery) {
+                    callback.call(this, []);
+                    return;
+                }
+            }
+            if (peopleSearchCached[query]) {
+                callback.call(this, peopleSearchCached[query]);
+            } else {
+                var url = window.location.protocol + '//' + window.location.host + '/' + eXo.social.portal.rest + '/social/people/getprofile/data.json?search=' + query;
+                $.getJSON(url, function(responseData) {
+                    responseData = _.filter(responseData, function(item) {
+                        return item.name.toLowerCase().indexOf(query.toLowerCase()) > -1;
+                    });
+
+                    var result = [];
+                    for (var i = 0; i < responseData.length; i++) {
+                        var d = responseData[i];
+                        var item = {
+                            uid: d.id.substr(1),
+                            name: d.name,
+                            avatar: d.avatar
+                        };
+                        result.push(item);
+                    }
+
+                    peopleSearchCached[query] = result;
+                    if (peopleSearchCached[query].length == 0) {
+                        lastNoResultQuery = query;
+                    } else {
+                        lastNoResultQuery = false;
+                    }
+                    callback.call(this, peopleSearchCached[query]);
+                });
+            }
+        });
         var MAX_LENGTH = 2000;
         // TODO this line is mandatory when a custom skin is defined, it should not be mandatory
         CKEDITOR.basePath = '/commons-extension/ckeditor/';
@@ -13,25 +52,41 @@
             on: {
                 instanceReady: function (evt) {
                     // Hide the editor top bar.
+                    var editor = CKEDITOR.instances["comment"];
+                    if (editor.element.$.defaultValue != "") {
+                        var comment = editor.element.$.defaultValue;
+                        var i = 0, length = comment.length;
+                        for (i; i < length; i++) {
+                            comment = comment.replace("\\\"", "\"");
+                        }
+                        if (comment.indexOf("class=\"pull-left\"") != -1) {
+                            comment = comment.replace("class=\"pull-left\"", "style=\"float:left\" class=\"pull-left\"")
+                        } else if (comment.indexOf("class=\"pull-right\"") != -1) {
+                            comment = comment.replace("class=\"pull-right\"", "style=\"float:right\" class=\"pull-right\"")
+                        }
+                        $(CKEDITOR.instances["comment"].document.getBody().$).html(comment);
+                    }
                     $('#' + evt.editor.id + '_bottom').removeClass('cke_bottom_visible');
                 },
                 focus : function ( evt ) {
                     // Show the editor toolbar, except for smartphones in landscape mode
                     if ($(window).width() > 767 || $(window).width() < $(window).height()) {
+                        //$('#' + evt.editor.id + '_bottom').css('display', 'block');
                         evt.editor.execCommand('autogrow');
                         var $content = $('#' + evt.editor.id + '_contents');
                         var contentHeight = $content.height();
                         var $ckeBottom = $('#' + evt.editor.id + '_bottom');
-                        $ckeBottom.animate({
-                            height: "39"
-                        }, {
-                            step: function(number, tween) {
-                                $content.height(contentHeight - number);
-                                if (number >= 9) {
-                                    $ckeBottom.addClass('cke_bottom_visible');
-                                }
-                            }
-                        });
+                        $ckeBottom[0].style.display = "block";
+                        // $ckeBottom.animate({
+                        //     height: "39"
+                        // }, {
+                        //     step: function (number, tween) {
+                        //         $content.height(contentHeight - number);
+                        //         if (number >= 9) {
+                        //             $ckeBottom.addClass('cke_bottom_visible');
+                        //         }
+                        //     }
+                        // });
                     } else {
                         $('#' + evt.editor.id + '_bottom').removeClass('cke_bottom_visible');
                         $('#' + evt.editor.id + '_bottom')[0].style.display = "none";
@@ -40,7 +95,7 @@
                 blur: function (evt) {
                     /// Hide the editor toolbar
                     if ($(window).width() > 767 || $(window).width() < $(window).height()) {
-                        $('#' + evt.editor.id + '_contents').css('height', $('#' + evt.editor.id + '_contents').height() + 39);
+                        //$('#' + evt.editor.id + '_contents').css('height', $('#' + evt.editor.id + '_contents').height() + 39);
                         $('#' + evt.editor.id + '_bottom').css('height', '0px');
                         $('#' + evt.editor.id + '_bottom').removeClass('cke_bottom_visible');
                     }
@@ -65,48 +120,17 @@
                 }
             }
         });
-    }
-    
-    var peopleSearchCached = {};
-    var lastNoResultQuery = false;
-    
-    $('body').suggester('addProvider', 'exo:people', function(query, callback) {
-        if (lastNoResultQuery && query.length > lastNoResultQuery.length) {
-            if (query.substr(0, lastNoResultQuery.length) === lastNoResultQuery) {
-                callback.call(this, []);
-                return;
-            }
-        }
-        if (peopleSearchCached[query]) {
-            callback.call(this, peopleSearchCached[query]);
-        } else {
-            var url = window.location.protocol + '//' + window.location.host + '/' + eXo.social.portal.rest + '/social/people/getprofile/data.json?search=' + query;
-            $.getJSON(url, function(responseData) {
-                responseData = _.filter(responseData, function(item) {
-                    return item.name.toLowerCase().indexOf(query.toLowerCase()) > -1;
-                });
+    };
 
-                var result = [];
-                for (var i = 0; i < responseData.length; i++) {
-                    var d = responseData[i];
-                    var item = {
-                        uid: d.id.substr(1),
-                        name: d.name,
-                        avatar: d.avatar
-                    };
-                    result.push(item);
-                }
+    CommentForm.prototype.editComment = function() {
+        var editor = CKEDITOR.instances["comment"];
+        //editor.setData(editor.element.$.defaultValue.replace("↵",""));
+        editor.insertHtml(editor.element.$.defaultValue);
+        //editor.setData("<p><img class=\"pull-left\" src=\"https://exo.mybalsamiq.com/mockups/4569881.png?key&#61;249fdfb33bdb917511880603ded31e8ce185539b&amp;lastUpdate&#61;1469636847000#\" title=\"a\" />sdfs</p>↵↵<p>sdf</p>↵");
+        //$(CKEDITOR.instances["comment"].document.getBody().$).html('');
+    };
 
-                peopleSearchCached[query] = result;
-                if (peopleSearchCached[query].length == 0) {
-                    lastNoResultQuery = query;
-                } else {
-                    lastNoResultQuery = false;
-                }
-                callback.call(this, peopleSearchCached[query]);
-            });
-        }
-    });
+
     eXo.ecm.CommentForm = new CommentForm();
     return {
         CommentForm : eXo.ecm.CommentForm
