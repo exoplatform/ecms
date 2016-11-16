@@ -873,12 +873,6 @@ UIFileView.prototype.clickRightMouse = function(event, elemt, menuId, objId, whi
 //    	Self.hideContextMenu(menuId);
     });
 
-    //The callback registered on document won't be triggered by current 'mousedown' event
-    if ( event.stopPropagation ) {
-    	event.stopPropagation();
-    }
-    event.cancelBubble = true;
-
     if (whiteList) {
       gj(contextMenu).find("a").each(function()
       {

@@ -197,14 +197,14 @@ public void writeNodes(level, i, data, uiWorkingArea, linkManager, restContextNa
 			<span class="uiCheckbox"><input type="checkbox" name="checkbox" class="checkbox"><span></span></span>
 		</div>
     <div class="columnText" data-placement="bottom" rel="tooltip" title="$lockedLabel">
-			<a href="javascript:void(0);" onmousedown="$actionLink" onmouseup="eXo.ecm.UIFileView.cancelEvent(event);">
-					<span class="nodeName"><%=fileName%></span>
+			<a class="nodeLabel" onclick="$actionLink" onmouseout="eXo.ecm.UIFileView.cancelEvent(event);" draggable="false">
+					<span class="nodeName" draggable="false"><%=fileName%></span>
 			</a>
-			<span class="nodeLabel fileExtension"><%=fileExtension%></span>
+			<span class="nodeLabel fileExtension" draggable="false"><%=fileExtension%></span>
 
-      <p class="fileInfoBottom">
+      <p class="fileInfoBottom" draggable="false">
         <% if (!"".equals(versionNum)) {%>
-          <a href="<%=manageVersionAction%>" class="fileInfoVersion"><%=versionNum%></a>
+          <a href="<%=manageVersionAction%>" class="fileInfoVersion" draggable="false"><%=versionNum%></a>
         <% } %>
         <%=fileDate%>
         <%=author%>
