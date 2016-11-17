@@ -16,17 +16,15 @@
  */
 package org.exoplatform.ecm.webui.component.explorer.popup.actions;
 
-import javax.jcr.Node;
-
 import org.exoplatform.commons.utils.HTMLSanitizer;
 import org.exoplatform.ecm.webui.component.explorer.*;
 import org.exoplatform.services.cms.comments.CommentsService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.organization.*;
+import org.exoplatform.services.resources.ResourceBundleService;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
-import org.exoplatform.wcm.webui.validator.FckMandatoryValidator;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -40,9 +38,13 @@ import org.exoplatform.webui.event.Event.Phase;
 import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.exception.MessageException;
 import org.exoplatform.webui.form.UIForm;
-import org.exoplatform.webui.form.UIFormRichtextInput;
 import org.exoplatform.webui.form.UIFormStringInput;
+import org.exoplatform.webui.form.UIFormTextAreaInput;
 import org.exoplatform.webui.form.validator.EmailAddressValidator;
+
+import javax.jcr.Node;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 /**
  * Created by The eXo Platform SARL Author : Tran The Trong trongtt@gmail.com
@@ -100,15 +102,20 @@ public class UICommentForm extends UIForm implements UIPopupComponent {
       addUIFormInput(new UIFormStringInput(FIELD_EMAIL, FIELD_EMAIL, null).addValidator(EmailAddressValidator.class));
       addUIFormInput(new UIFormStringInput(FIELD_WEBSITE, FIELD_WEBSITE, null));
     }
-    UIFormRichtextInput commentField = new UIFormRichtextInput(FIELD_COMMENT, FIELD_COMMENT, "");
-    commentField.addValidator(FckMandatoryValidator.class);
-    commentField.setToolbar(UIFormRichtextInput.COMMENT_TOOLBAR);
+    UIFormTextAreaInput commentField = new UIFormTextAreaInput(FIELD_COMMENT, FIELD_COMMENT, "");
+    //commentField.addValidator(FckMandatoryValidator.class);
     addUIFormInput(commentField);
+    Locale locale = WebuiRequestContext.getCurrentInstance().getLocale();
+    ResourceBundleService resourceBundleService = WCMCoreUtils.getService(ResourceBundleService.class);
+    ResourceBundle resourceBundle = resourceBundleService.getResourceBundle("locale.ecm.dialogs", locale);
+    String placeholder = resourceBundle.getString("UICommentForm.label.placeholder");
+    requestContext.getJavascriptManager().require("SHARED/uiCommentForm", "commentForm")
+    .addScripts("eXo.ecm.CommentForm.init('" + placeholder + "');");
     if (isEdit()) {
       Node comment = getAncestorOfType(UIJCRExplorer.class).getNodeByPath(nodeCommentPath,
                                                                           NodeLocation.getNodeByLocation(document_).getSession());
       if (comment.hasProperty("exo:commentContent")) {
-        getChild(UIFormRichtextInput.class).setValue(comment.getProperty("exo:commentContent").getString());
+        getChild(UIFormTextAreaInput.class).setValue(comment.getProperty("exo:commentContent").getString());
       }
     }
   }
@@ -156,10 +163,11 @@ public class UICommentForm extends UIForm implements UIPopupComponent {
     public void execute(Event<UICommentForm> event) throws Exception {
       UICommentForm uiForm = event.getSource();
       UIJCRExplorer uiExplorer = uiForm.getAncestorOfType(UIJCRExplorer.class);
-      String comment = uiForm.getChild(UIFormRichtextInput.class).getValue();
+      String comment = uiForm.getChild(UIFormTextAreaInput.class).getValue();
       comment = HTMLSanitizer.sanitize(comment);
       CommentsService commentsService = uiForm.getApplicationComponent(CommentsService.class);
       if (comment == null || comment.trim().length() == 0) {
+        event.getSource().getAncestorOfType(UIPopupContainer.class).cancelPopupAction();
         throw new MessageException(new ApplicationMessage("UICommentForm.msg.content-null", null, ApplicationMessage.WARNING));
       }
       if (uiForm.isEdit()) {

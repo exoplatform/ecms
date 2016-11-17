@@ -1,4 +1,4 @@
-(function(gj, base) {
+(function(gj, base, userPopupPlugin, socialUtil) {
 	// WCMUtils
 	function WCMUtils(){
 		this.cmdEcmBundle = "/bundle/";
@@ -132,15 +132,27 @@
 	WCMUtils.prototype.showHideComponent = function(elemtClicked) {		
 			var nodeReference = gj(elemtClicked).parents(".showHideContainer:first")[0];    
 			var elemt = gj(nodeReference).find("div.showHideComponent:first")[0];		
-			if(elemt.style.display == 'none') {		
+			if(elemt.style.display == 'none') {
+
+				gj('.numberComment')[0].style.display = "block";
 				elemtClicked.childNodes[0].style.display = 'none' ;
 				elemtClicked.childNodes[1].style.display = 'block' ;
 				elemt.style.display = 'block' ;
 				eXo.ecm.WCMUtils.setScrollBar();
-			} else {			
+			} else {
+				gj('.numberComment')[0].style.display = "none";
 				elemtClicked.childNodes[0].style.display = 'block' ;
 				elemtClicked.childNodes[1].style.display = 'none' ;
 				elemt.style.display = 'none' ;
+			}
+			//resize comment box
+			var arr = gj('.commentBox img');
+			if (arr.length > 0) {
+				for (var i = 0, len = arr.length; i < len; i++) {
+					if (arr[i].clientHeight > arr[i].offsetParent.clientHeight) {
+						arr[i].closest('.commentBox').style.height = arr[i].height + 30 + "px";
+					}
+				}
 			}
 	};
 
@@ -367,6 +379,22 @@
 			var commentor = gj(this).attr("commentor");
 			var img = gj(this).find("img:first")[0];
 			eXo.ecm.WCMUtils.loadAvartar(commentor, img);
+		});
+	};
+
+	WCMUtils.prototype.initUserProfilePopup = function(globalLabels) {
+		var labels = {};
+		var profileLabels = gj.extend(true, {}, labels, globalLabels);
+		gj.each(profileLabels, function(key) {
+			profileLabels[key] =  window.decodeURIComponent(profileLabels[key]);
+		});
+		gj("[type|='mentionedUser']").userPopup({
+			restURL: '//' + window.location.host + eXo.social.portal.context + '/' + eXo.social.portal.rest + '/social/people' + '/getPeopleInfo/{0}.json',
+			labels: profileLabels,
+			content: false,
+			defaultPosition: "left",
+			keepAlive: true,
+			maxWidth: "240px"
 		});
 	};
 
@@ -1013,5 +1041,5 @@
 		CKEditor : eXo.ecm.CKEditor,
 		SELocalization : eXo.ecm.SELocalization
 	};
-})(gj, base);
+})(gj, base, userPopupPlugin, socialUtil);
 

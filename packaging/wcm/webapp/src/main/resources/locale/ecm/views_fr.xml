@@ -25,12 +25,21 @@
         <postedBy>Dernier commentaire posté par</postedBy>
         <at>à</at>
         <comments>Commentaire(s)</comments>
-        <show-comments>Afficher les commentaires</show-comments>
-        <hide-comments>Cacher les commentaires</hide-comments>
+        <show-comments>Afficher tous les {0} commentaires</show-comments>
+        <hide-comments>Cacher tous les {0} commentaires</hide-comments>
         <comment-by>Commenté par</comment-by>
         <email>Email</email>
         <site>Site</site>
         <lastComment>Dernier commentaire posté par {user} à {time}</lastComment>
+        <Less_Than_A_Minute>il y a moins d'une minute</Less_Than_A_Minute>
+        <About_A_Minute>il y a une minute</About_A_Minute>
+        <About_x_Minutes>il y a environ {0} minutes</About_x_Minutes>
+        <About_An_Hour>il y a environ une heure</About_An_Hour>
+        <About_x_Hours>il y a environ {0} heures</About_x_Hours>
+        <About_A_Day>il y a environ un jour</About_A_Day>
+        <About_x_Days>il y a environ {0} jours</About_x_Days>
+        <About_A_Month>il y a environ un mois</About_A_Month>
+        <About_x_Months>il y a environ {0} mois</About_x_Months>
       </label>
     </view>
   </Comment>
