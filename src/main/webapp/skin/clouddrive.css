@@ -23,6 +23,12 @@
 	height: 14px;
 }
 
+[class^="uiIconEcmsConnectDialog-"] {
+	width: 34px;
+	max-height:25px;
+	overflow: hidden;
+}
+
 [class^="uiIcon16x16CloudDrive-"], [class^="uiIcon24x24CloudDrive-"], [class^="uiIcon64x64CloudDrive-"] {
   display: inline;
 }

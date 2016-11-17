@@ -2190,8 +2190,8 @@
 		 * Open pop-up for Cloud Drive authentication.
 		 */
 		this.connectDriveWindow = function(authURL) {
-			var w = 850;
-			var h = 600;
+			var w = 740;
+			var h = 540;
 			var left = (screen.width / 2) - (w / 2);
 			var top = (screen.height / 2) - (h / 2);
 			return window.open(authURL, 'contacts', 'width=' + w + ',height=' + h + ',top=' + top + ',left=' + left);
