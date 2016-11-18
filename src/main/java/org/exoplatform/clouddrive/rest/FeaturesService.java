@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003-2014 eXo Platform SAS.
+ * Copyright (C) 2003-2016 eXo Platform SAS.
  *
  * This is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as
@@ -57,18 +57,28 @@ import javax.ws.rs.core.UriInfo;
 @Produces(MediaType.APPLICATION_JSON)
 public class FeaturesService implements ResourceContainer {
 
+  /** The Constant LOG. */
   protected static final Log             LOG = ExoLogger.getLogger(FeaturesService.class);
 
+  /** The features. */
   protected final CloudDriveFeatures     features;
 
+  /** The cloud drives. */
   protected final CloudDriveService      cloudDrives;
 
+  /** The jcr service. */
   protected final RepositoryService      jcrService;
 
+  /** The session providers. */
   protected final SessionProviderService sessionProviders;
 
   /**
-   * 
+   * Instantiates a new features service.
+   *
+   * @param cloudDrives the cloud drives
+   * @param features the features
+   * @param jcrService the jcr service
+   * @param sessionProviders the session providers
    */
   public FeaturesService(CloudDriveService cloudDrives,
                          CloudDriveFeatures features,
@@ -81,6 +91,15 @@ public class FeaturesService implements ResourceContainer {
     this.sessionProviders = sessionProviders;
   }
 
+  /**
+   * Can create drive.
+   *
+   * @param uriInfo the uri info
+   * @param workspace the workspace
+   * @param path the path
+   * @param providerId the provider id
+   * @return the response
+   */
   @GET
   @Path("/can-create-drive/")
   @RolesAllowed("users")
@@ -123,6 +142,14 @@ public class FeaturesService implements ResourceContainer {
     }
   }
 
+  /**
+   * Checks if is autosync enabled.
+   *
+   * @param uriInfo the uri info
+   * @param workspace the workspace
+   * @param path the path
+   * @return the response
+   */
   @GET
   @Path("/is-autosync-enabled/")
   @RolesAllowed("users")

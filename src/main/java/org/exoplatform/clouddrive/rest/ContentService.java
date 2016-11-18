@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003-2014 eXo Platform SAS.
+ * Copyright (C) 2003-2016 eXo Platform SAS.
  *
  * This is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as
@@ -61,6 +61,7 @@ import javax.ws.rs.core.Response.Status;
 @Path("/clouddrive/content")
 public class ContentService implements ResourceContainer {
 
+  /** The Constant LOG. */
   protected static final Log LOG = ExoLogger.getLogger(ContentService.class);
 
   /**
@@ -73,23 +74,29 @@ public class ContentService implements ResourceContainer {
     SERVICE_PATH = restPath.value();
   }
 
+  /** The features. */
   protected final CloudDriveFeatures     features;
 
+  /** The cloud drives. */
   protected final CloudDriveService      cloudDrives;
 
+  /** The viewer storage. */
   protected final ViewerStorage          viewerStorage;
 
+  /** The jcr service. */
   protected final RepositoryService      jcrService;
 
+  /** The session providers. */
   protected final SessionProviderService sessionProviders;
 
   /**
    * Constructor.
-   * 
-   * @param cloudDrives
-   * @param features
-   * @param jcrService
-   * @param sessionProviders
+   *
+   * @param cloudDrives the cloud drives
+   * @param features the features
+   * @param viewerStorage the viewer storage
+   * @param jcrService the jcr service
+   * @param sessionProviders the session providers
    */
   public ContentService(CloudDriveService cloudDrives,
                         CloudDriveFeatures features,
@@ -107,14 +114,11 @@ public class ContentService implements ResourceContainer {
   /**
    * Create a link to get this file content via eXo REST service as a proxy to remote drive. It is a path
    * relative to the current server.
-   * 
+   *
    * @param workspace {@link String}
    * @param path {@link String}
    * @param fileId {@link String}
    * @return {@link String}
-   * @throws DriveRemovedException
-   * @throws RepositoryException
-   * 
    * @see #get(String, String, String)
    */
   public static String contentLink(String workspace, String path, String fileId) {
@@ -150,12 +154,9 @@ public class ContentService implements ResourceContainer {
   /**
    * Create a link to get this file representation in PDF form. It is a path
    * relative to the current server.
-   * 
+   *
    * @param contentLink {@link String}
    * @return {@link String}
-   * @throws DriveRemovedException
-   * @throws RepositoryException
-   * 
    * @see #get(String, String, String)
    */
   public static String pdfLink(String contentLink) {
@@ -165,12 +166,9 @@ public class ContentService implements ResourceContainer {
   /**
    * Create a link to get this file representation in PDF pages converted to images. It is a path
    * relative to the current server.
-   * 
+   *
    * @param contentLink {@link String}
    * @return {@link String}
-   * @throws DriveRemovedException
-   * @throws RepositoryException
-   * 
    * @see #get(String, String, String)
    */
   public static String pdfPageLink(String contentLink) {
@@ -179,12 +177,11 @@ public class ContentService implements ResourceContainer {
 
   /**
    * Return file content reading it from cloud side.<br>
-   * 
-   * @param uriInfo
-   * @param workspace
-   * @param path
-   * @param providerId
-   * @return
+   *
+   * @param workspace the workspace
+   * @param path the path
+   * @param contentId the content id
+   * @return the response
    */
   @GET
   @Path("/{workspace}/{path:.*}")
@@ -251,12 +248,14 @@ public class ContentService implements ResourceContainer {
    * Return image (PNG) representation of cloud file content (page) reading it from local PDF storage. File
    * should be previously created in the storage to be successfully returned by this method, an empty response
    * (204 No Content) will be returned otherwise.<br>
-   * 
-   * @param uriInfo
-   * @param workspace
-   * @param path
-   * @param providerId
-   * @return
+   *
+   * @param workspace the workspace
+   * @param path the path
+   * @param contentId the content id
+   * @param strPage the str page
+   * @param strRotation the str rotation
+   * @param strScale the str scale
+   * @return the page image
    */
   @GET
   @Path("/pdf/page/{workspace}/{path:.*}")
@@ -359,12 +358,11 @@ public class ContentService implements ResourceContainer {
    * Return cloud file representation reading it from local PDF storage. File
    * should be previously created in the storage to be successfully returned by this method, an empty response
    * (204 No Content) will be returned otherwise.<br>
-   * 
-   * @param uriInfo
-   * @param workspace
-   * @param path
-   * @param providerId
-   * @return
+   *
+   * @param workspace the workspace
+   * @param path the path
+   * @param contentId the content id
+   * @return the pdf
    */
   @GET
   @Path("/pdf/{workspace}/{path:.*}")

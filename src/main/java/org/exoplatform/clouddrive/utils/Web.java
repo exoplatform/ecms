@@ -1,6 +1,6 @@
 
 /*
- * Copyright (C) 2003-2015 eXo Platform SAS.
+ * Copyright (C) 2003-2016 eXo Platform SAS.
  *
  * This is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as
@@ -29,26 +29,26 @@ import java.net.URLDecoder;
 import java.net.URLEncoder;
 
 /**
- * Created by The eXo Platform SAS
- * 
+ * Created by The eXo Platform SAS.
+ *
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
  * @version $Id: Web.java 00000 Jul 17, 2015 pnedonosko $
- * 
  */
 public class Web {
 
+  /** The Constant LOG. */
   protected static final Log LOG = ExoLogger.getLogger(Web.class);
 
   /**
-   * 
+   * Instantiates a new web.
    */
   private Web() {
   }
 
   /**
    * Encode given string into application/x-www-form-urlencoded format using a UTF-8 encoding scheme.
-   * 
-   * @param str
+   *
+   * @param str the str
    * @return encoded string or the same string if UTF-8 scheme not available (will be logged as warning)
    */
   public static String formEncode(String str) {
@@ -62,8 +62,8 @@ public class Web {
 
   /**
    * Decode given string from application/x-www-form-urlencoded format using a UTF-8 encoding scheme.
-   * 
-   * @param str
+   *
+   * @param str the str
    * @return decoded string or the same string if UTF-8 scheme not available (will be logged as warning)
    */
   public static String formDecode(String str) {
@@ -77,8 +77,8 @@ public class Web {
 
   /**
    * Encode given string into URL friendly path format.
-   * 
-   * @param path
+   *
+   * @param path the path
    * @return encoded string
    */
   public static String pathEncode(String path) {
@@ -93,8 +93,8 @@ public class Web {
   
   /**
    * Decode given string from URL path format to raw form.
-   * 
-   * @param path
+   *
+   * @param path the path
    * @return decoded string
    */
   public static String pathDecode(String path) {

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003-2013 eXo Platform SAS.
+ * Copyright (C) 2003-2016 eXo Platform SAS.
  *
  * This is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as
@@ -30,15 +30,17 @@ import java.util.concurrent.atomic.AtomicLong;
  * Iterator methods can throw {@link CloudDriveException} in case of remote or communication errors.<br>
  * 
  * Created by The eXo Platform SAS
- * 
+ *
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
  * @version $Id: ChunkIterator.java 00000 Dec 3, 2013 pnedonosko $
- * 
+ * @param <I> the generic type
  */
 public abstract class ChunkIterator<I> {
 
+  /** The iter. */
   protected Iterator<I> iter;
 
+  /** The next. */
   protected I           next;
 
   /**
@@ -52,10 +54,27 @@ public abstract class ChunkIterator<I> {
    */
   protected AtomicLong  fetched   = new AtomicLong();
 
+  /**
+   * Next chunk.
+   *
+   * @return the iterator
+   * @throws CloudDriveException the cloud drive exception
+   */
   protected abstract Iterator<I> nextChunk() throws CloudDriveException;
 
+  /**
+   * Checks for next chunk.
+   *
+   * @return true, if successful
+   */
   protected abstract boolean hasNextChunk();
 
+  /**
+   * Checks for next.
+   *
+   * @return true, if successful
+   * @throws CloudDriveException the cloud drive exception
+   */
   public boolean hasNext() throws CloudDriveException {
     if (next == null) {
       if (iter.hasNext()) {
@@ -76,6 +95,13 @@ public abstract class ChunkIterator<I> {
     }
   }
 
+  /**
+   * Next.
+   *
+   * @return the i
+   * @throws NoSuchElementException the no such element exception
+   * @throws CloudDriveException the cloud drive exception
+   */
   public I next() throws NoSuchElementException, CloudDriveException {
     if (next == null && !hasNext()) {
       throw new NoSuchElementException("No more data.");

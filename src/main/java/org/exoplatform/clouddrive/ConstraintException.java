@@ -1,6 +1,6 @@
 
 /*
- * Copyright (C) 2003-2014 eXo Platform SAS.
+ * Copyright (C) 2003-2016 eXo Platform SAS.
  *
  * This is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as
@@ -30,28 +30,32 @@ package org.exoplatform.clouddrive;
  */
 public class ConstraintException extends CloudDriveException {
 
-  /**
-   * 
-   */
+  /** The Constant serialVersionUID. */
   private static final long serialVersionUID = 3047097748189248585L;
 
   /**
-   * @param message
+   * Instantiates a new constraint exception.
+   *
+   * @param message the message
    */
   public ConstraintException(String message) {
     super(message);
   }
 
   /**
-   * @param message
-   * @param cause
+   * Instantiates a new constraint exception.
+   *
+   * @param message the message
+   * @param cause the cause
    */
   public ConstraintException(String message, Throwable cause) {
     super(message, cause);
   }
 
   /**
-   * @param cause
+   * Instantiates a new constraint exception.
+   *
+   * @param cause the cause
    */
   public ConstraintException(Throwable cause) {
     super(cause);

@@ -1,18 +1,20 @@
 /*
- * Copyright (C) 2003-2012 eXo Platform SAS.
+ * Copyright (C) 2003-2016 eXo Platform SAS.
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * This is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation; either version 2.1 of
+ * the License, or (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful,
+ * This software is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Affero General Public License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the GNU Affero General Public License
- * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this software; if not, write to the Free
+ * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+ * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
 package org.exoplatform.clouddrive;
 
@@ -29,23 +31,31 @@ import javax.jcr.RepositoryException;
  */
 public abstract class CloudUser {
 
+  /** The id. */
   protected final String        id;
 
+  /** The username. */
   protected final String        username;
 
+  /** The email. */
   protected final String        email;
 
+  /** The provider. */
   protected final CloudProvider provider;
 
+  /** The hash code. */
   protected final int           hashCode;
 
+  /** The service name. */
   protected String              serviceName;
 
   /**
-   * {@link CloudUser} constructor.
-   * 
+   * Instantiates a new cloud user.
+   *
+   * @param id the id
    * @param username {@link String}
    * @param email {@link String}
+   * @param provider the provider
    */
   public CloudUser(String id, String username, String email, CloudProvider provider) {
     this.id = id;
@@ -80,6 +90,8 @@ public abstract class CloudUser {
   }
 
   /**
+   * Gets the provider.
+   *
    * @return the provider
    */
   public CloudProvider getProvider() {
@@ -87,6 +99,8 @@ public abstract class CloudUser {
   }
 
   /**
+   * Gets the id.
+   *
    * @return the id
    */
   public String getId() {
@@ -108,10 +122,11 @@ public abstract class CloudUser {
   /**
    * Create a title for Cloud Drive root node. By default it is 'SERVICE_NAME - EMAIL', but implementation
    * may change it for more detailed.
-   * 
+   *
    * @return String with a text of root node for the user
-   * @throws RepositoryException
-   * @throws DriveRemovedException
+   * @throws RepositoryException the repository exception
+   * @throws DriveRemovedException the drive removed exception
+   * @throws CloudDriveException the cloud drive exception
    */
   public String createDriveTitle() throws RepositoryException, DriveRemovedException, CloudDriveException {
     return getServiceName() + " - " + email;
@@ -156,11 +171,10 @@ public abstract class CloudUser {
   // *********** internals ************
 
   /**
-   * Set servide name connected by this user.<br>
-   * 
-   * @see {@link #getServiceName()} for details
-   * 
-   * @param serviceName
+   * Set service name connected by this user.<br>
+   *
+   * @param serviceName the new service name
+   * @see #getServiceName() for details
    */
   protected void setServiceName(String serviceName) {
     this.serviceName = serviceName;

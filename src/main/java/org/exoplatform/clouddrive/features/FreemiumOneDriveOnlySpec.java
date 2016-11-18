@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003-2014 eXo Platform SAS.
+ * Copyright (C) 2003-2016 eXo Platform SAS.
  *
  * This is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as
@@ -21,16 +21,16 @@ package org.exoplatform.clouddrive.features;
 import org.exoplatform.clouddrive.CloudDrive;
 
 /**
- * Created by The eXo Platform SAS
- * 
+ * Created by The eXo Platform SAS.
+ *
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
  * @version $Id: FreemiumOneDriveOnlySpec.java 00000 Jan 29, 2014 pnedonosko $
- * 
+ * @param <C> the generic type
  */
 public class FreemiumOneDriveOnlySpec<C extends CloudDrive> extends FeatureSpec<C> {
 
   /**
-   * 
+   * Instantiates a new freemium one drive only spec.
    */
   public FreemiumOneDriveOnlySpec() {
   }

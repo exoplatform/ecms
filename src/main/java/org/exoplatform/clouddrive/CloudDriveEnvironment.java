@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003-2014 eXo Platform SAS.
+ * Copyright (C) 2003-2016 eXo Platform SAS.
  *
  * This is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as
@@ -25,7 +25,7 @@ import org.exoplatform.services.log.Log;
 
 /**
  * Support different environments for Cloud Drive commands execution. Three phases can be implemented:
- * preparation of a {@link Command}, cleanup on success or failure on error.<br/>
+ * preparation of a {@link Command}, cleanup on success or failure on error.<br>
  * 
  * Created by The eXo Platform SAS.
  * 
@@ -34,9 +34,11 @@ import org.exoplatform.services.log.Log;
  * 
  */
 public abstract class CloudDriveEnvironment extends BaseComponentPlugin {
-  
+
+  /** The Constant LOG. */
   protected static final Log      LOG = ExoLogger.getLogger(CloudDriveEnvironment.class);
 
+  /** The next. */
   protected CloudDriveEnvironment next;
 
   /**
@@ -47,11 +49,12 @@ public abstract class CloudDriveEnvironment extends BaseComponentPlugin {
 
   /**
    * Configure environment for a command execution. If this configuration will fail the command execution will
-   * fail also with this exception.<br/>
-   * This operation should gather required settings to apply them later in {@link #prepare(Command)} method.
-   * 
-   * @param command {@link Command}
-   * @throws CloudDriveException
+   * fail also with this exception.<br>
+   * This operation should gather required settings to apply them later in
+   * {@link CloudDriveEnvironment#prepare(Command)} method.
+   *
+   * @param command the command
+   * @throws CloudDriveException the cloud drive exception
    */
   public void configure(Command command) throws CloudDriveException {
     if (next != null) {
@@ -61,11 +64,11 @@ public abstract class CloudDriveEnvironment extends BaseComponentPlugin {
 
   /**
    * Prepare environment for a command execution. If this preparation will fail the command execution will
-   * fail also with this exception. This method should be invoked in a thread where the command runs.<br/>
-   * Preparation does apply settings gathered in {@link #configure(Command)} method.
-   * 
-   * @param command {@link Command}
-   * @throws CloudDriveException
+   * fail also with this exception. This method should be invoked in a thread where the command runs.<br>
+   * Preparation does apply settings gathered in {@link CloudDriveEnvironment#configure(Command)} method.
+   *
+   * @param command the command
+   * @throws CloudDriveException the cloud drive exception
    */
   public void prepare(Command command) throws CloudDriveException {
     if (next != null) {
@@ -75,11 +78,11 @@ public abstract class CloudDriveEnvironment extends BaseComponentPlugin {
 
   /**
    * Clean environment after a command execution. This cleanup will be called in case of command success. This
-   * method should be invoked in a thread where the command runs.<br/>
-   * Cleanup does restore setting applied in {@link #prepare(Command)} method.
-   * 
+   * method should be invoked in a thread where the command runs.<br>
+   * Cleanup does restore setting applied in {@link CloudDriveEnvironment#prepare(Command)} method.
+   *
    * @param command {@link Command}
-   * @throws CloudDriveException
+   * @throws CloudDriveException the cloud drive exception
    */
   public void cleanup(Command command) throws CloudDriveException {
     if (next != null) {
@@ -89,13 +92,14 @@ public abstract class CloudDriveEnvironment extends BaseComponentPlugin {
 
   /**
    * Command failed and here it can be reported or some special action applied regarding the error. This
-   * method should be invoked in a thread where the command runs.<br/>
-   * Fail <strong>should not</strong> restore setting applied in {@link #prepare(Command)} method, this should
+   * method should be invoked in a thread where the command runs.<br>
+   * Fail <strong>should not</strong> restore setting applied in
+   * {@link CloudDriveEnvironment#prepare(Command)} method, this should
    * be done by {@link #cleanup(Command)} call from try-finally block for example.
-   * 
+   *
    * @param command {@link Command}
    * @param error {@link Throwable}
-   * @throws CloudDriveException
+   * @throws CloudDriveException the cloud drive exception
    */
   public void fail(Command command, Throwable error) throws CloudDriveException {
     if (next != null) {

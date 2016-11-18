@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003-2013 eXo Platform SAS.
+ * Copyright (C) 2003-2016 eXo Platform SAS.
  *
  * This is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as
@@ -34,37 +34,51 @@ import java.util.Set;
  */
 public abstract class UserToken {
 
+  /** The access token. */
   private String                        accessToken;
 
+  /** The refresh token. */
   private String                        refreshToken;
 
+  /** The expiration time. */
   private long                          expirationTime;
 
+  /** The listeners. */
   private Set<UserTokenRefreshListener> listeners = new LinkedHashSet<UserTokenRefreshListener>();
 
   /**
    * Create empty store.
-   * 
-   * @param id
    */
   protected UserToken() {
   }
 
+  /**
+   * Adds the listener.
+   *
+   * @param listener the listener
+   * @throws CloudDriveException the cloud drive exception
+   */
   public void addListener(UserTokenRefreshListener listener) throws CloudDriveException {
     this.listeners.add(listener);
     listener.onUserTokenRefresh(this);
   }
 
+  /**
+   * Removes the listener.
+   *
+   * @param listener the listener
+   */
   public void removeListener(UserTokenRefreshListener listener) {
     this.listeners.remove(listener);
   }
 
   /**
    * Load OAuth2 token from given data.
-   * 
-   * @param accessToken
-   * @param refreshToken
-   * @param expirationTime
+   *
+   * @param accessToken the access token
+   * @param refreshToken the refresh token
+   * @param expirationTime the expiration time
+   * @throws CloudDriveException the cloud drive exception
    */
   public void load(String accessToken, String refreshToken, long expirationTime) throws CloudDriveException {
     this.accessToken = accessToken;
@@ -74,10 +88,11 @@ public abstract class UserToken {
 
   /**
    * Store new OAuth2 token data.
-   * 
-   * @param accessToken
-   * @param refreshToken
-   * @param expirationTime
+   *
+   * @param accessToken the access token
+   * @param refreshToken the refresh token
+   * @param expirationTime the expiration time
+   * @throws CloudDriveException the cloud drive exception
    */
   public void store(String accessToken, String refreshToken, long expirationTime) throws CloudDriveException {
     load(accessToken, refreshToken, expirationTime);
@@ -86,9 +101,9 @@ public abstract class UserToken {
 
   /**
    * Import OAuth2 tokens from a new {@link UserToken} and unregister listeners of that instance.
-   * 
+   *
    * @param newToken {@link UserToken}
-   * @throws CloudDriveException
+   * @throws CloudDriveException the cloud drive exception
    */
   public void merge(UserToken newToken) throws CloudDriveException {
     newToken.removeListeners(); // May 4 2014, remove listeners on newToken (was on this instance)
@@ -96,6 +111,8 @@ public abstract class UserToken {
   }
 
   /**
+   * Gets the access token.
+   *
    * @return the accessToken
    */
   public String getAccessToken() {
@@ -103,6 +120,8 @@ public abstract class UserToken {
   }
 
   /**
+   * Gets the refresh token.
+   *
    * @return the refreshToken
    */
   public String getRefreshToken() {
@@ -110,22 +129,37 @@ public abstract class UserToken {
   }
 
   /**
+   * Gets the expiration time.
+   *
    * @return the expirationTime
    */
   public long getExpirationTime() {
     return expirationTime;
   }
 
+  /**
+   * Unregister listeners.
+   */
   void unregisterListeners() {
     listeners.clear();
   }
 
+  /**
+   * Removes the listeners.
+   *
+   * @throws CloudDriveException the cloud drive exception
+   */
   void removeListeners() throws CloudDriveException {
     listeners.clear();
   }
 
   // internals
 
+  /**
+   * Fire listeners.
+   *
+   * @throws CloudDriveException the cloud drive exception
+   */
   private void fireListeners() throws CloudDriveException {
     for (UserTokenRefreshListener listener : listeners) {
       listener.onUserTokenRefresh(this);

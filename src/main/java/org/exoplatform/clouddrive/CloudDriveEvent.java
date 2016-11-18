@@ -1,18 +1,20 @@
 /*
- * Copyright (C) 2003-2013 eXo Platform SAS.
+ * Copyright (C) 2003-2016 eXo Platform SAS.
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * This is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation; either version 2.1 of
+ * the License, or (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful,
+ * This software is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Affero General Public License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the GNU Affero General Public License
- * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this software; if not, write to the Free
+ * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+ * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
 package org.exoplatform.clouddrive;
 
@@ -30,14 +32,19 @@ import java.util.Collections;
  */
 public class CloudDriveEvent {
 
+  /** The user. */
   protected final CloudUser             user;
 
+  /** The workspace. */
   protected final String                workspace;
 
+  /** The node path. */
   protected final String                nodePath;
 
+  /** The changed. */
   protected final Collection<CloudFile> changed;
 
+  /** The removed. */
   protected final Collection<String>    removed;
 
   /**
@@ -80,6 +87,8 @@ public class CloudDriveEvent {
   }
 
   /**
+   * Gets the user.
+   *
    * @return affected user.
    */
   public CloudUser getUser() {
@@ -87,6 +96,8 @@ public class CloudDriveEvent {
   }
 
   /**
+   * Gets the workspace.
+   *
    * @return the drive's JCR node workspace name.
    */
   public String getWorkspace() {
@@ -94,6 +105,8 @@ public class CloudDriveEvent {
   }
 
   /**
+   * Gets the node path.
+   *
    * @return the drive's JCR node path, can be <code>null</code>.
    */
   public String getNodePath() {
@@ -101,6 +114,8 @@ public class CloudDriveEvent {
   }
 
   /**
+   * Gets the changed.
+   *
    * @return the files changed by the event
    */
   public Collection<CloudFile> getChanged() {
@@ -108,6 +123,8 @@ public class CloudDriveEvent {
   }
 
   /**
+   * Gets the removed.
+   *
    * @return the file paths removed by the event
    */
   public Collection<String> getRemoved() {

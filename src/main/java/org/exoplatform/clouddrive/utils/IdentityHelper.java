@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003-2014 eXo Platform SAS.
+ * Copyright (C) 2003-2016 eXo Platform SAS.
  *
  * This is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as
@@ -27,24 +27,27 @@ import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 
 /**
- * Created by The eXo Platform SAS
- * 
+ * Created by The eXo Platform SAS.
+ *
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
  * @version $Id: IdentityHelper.java 00000 May 15, 2014 pnedonosko $
- * 
  */
 public class IdentityHelper {
 
+  /** The Constant ROOT_USER_ID. */
   public static final String ROOT_USER_ID   = "root";
 
+  /** The Constant SYSTEM_USER_ID. */
   public static final String SYSTEM_USER_ID = IdentityConstants.SYSTEM;
 
+  /** The Constant EXO_OWNEABLE. */
   public static final String EXO_OWNEABLE   = "exo:owneable";
 
+  /** The Constant EXO_USER. */
   public static final String EXO_USER       = "exo:owner";
 
   /**
-   * 
+   * Instantiates a new identity helper.
    */
   private IdentityHelper() {
   }
@@ -65,13 +68,13 @@ public class IdentityHelper {
   /**
    * Make the node owned by the current user (user of the node session) if current owner is a system account.
    * Does nothing otherwise.
-   * 
+   *
    * @param node {@link Node} target node, its session will be used to set a new (current) owner
    * @param systemSession {@link Session} system session, it will be used to reset the current owner
    * @return {@link Node} fixed node (same as in the given in the parameter)
-   * @throws RepositoryException
    * @throws PathNotFoundException if exo:owner property cannot be found on exo:owneable node, or if the node
    *           cannot be found by path via system session.
+   * @throws RepositoryException the repository exception
    */
   public static Node ensureOwned(Node node, Session systemSession) throws PathNotFoundException, RepositoryException {
     String currentUser = node.getSession().getUserID();
@@ -94,6 +97,14 @@ public class IdentityHelper {
     return node;
   }
 
+  /**
+   * Checks for permission.
+   *
+   * @param acl the acl
+   * @param identity the identity
+   * @param type the type
+   * @return true, if successful
+   */
   public static boolean hasPermission(AccessControlList acl, String identity, String type) {
     if (acl.hasPermissions()) {
       for (String idp : acl.getPermissions(identity)) {

@@ -1,6 +1,6 @@
 
 /*
- * Copyright (C) 2003-2015 eXo Platform SAS.
+ * Copyright (C) 2003-2016 eXo Platform SAS.
  *
  * This is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as
@@ -43,11 +43,11 @@ public interface CloudDriveSecurity {
   /**
    * Share cloud file in cloud provider API. If sharing not supported {@link CloudDriveException} will be
    * thrown.<br>
-   * 
+   *
    * @param fileNode {@link Node} file node
    * @param identities array of {@link String} with organization identities in eXo Platform
-   * @throws RepositoryException
-   * @throws CloudDriveException
+   * @throws RepositoryException the repository exception
+   * @throws CloudDriveException the cloud drive exception
    * @see #isSharingSupported()
    */
   void shareFile(Node fileNode, String... identities) throws RepositoryException, CloudDriveException;

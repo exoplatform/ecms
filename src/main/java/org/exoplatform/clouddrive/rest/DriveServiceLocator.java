@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003-2013 eXo Platform SAS.
+ * Copyright (C) 2003-2016 eXo Platform SAS.
  *
  * This is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as
@@ -55,7 +55,8 @@ public class DriveServiceLocator {
   /**
    * Answers whether the request (to given host) should be redirected to its contextual link. See also
    * {@link #getServiceLink(String, String)}.
-   * 
+   *
+   * @param requestHost the request host
    * @return boolean, <code>true</code> if request should be redirected, <code>false</code> otherwise.
    */
   public final boolean isRedirect(String requestHost) {

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003-2014 eXo Platform SAS.
+ * Copyright (C) 2003-2016 eXo Platform SAS.
  *
  * This is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as
@@ -54,6 +54,7 @@ import javax.activation.MimeTypeParseException;
  */
 public class ExtendedMimeTypeResolver {
 
+  /** The Constant LOG. */
   protected static final Log LOG         = ExoLogger.getLogger(ExtendedMimeTypeResolver.class);
 
   /**
@@ -61,10 +62,20 @@ public class ExtendedMimeTypeResolver {
    */
   public static final String X_TYPE_MODE = "x-type-mode";
 
+  /**
+   * The Class MimeTypeMap.
+   */
   public static class MimeTypeMap extends BaseComponentPlugin {
 
+    /** The paths. */
     protected final List<String> paths;
 
+    /**
+     * Instantiates a new mime type map.
+     *
+     * @param params the params
+     * @throws ConfigurationException the configuration exception
+     */
     public MimeTypeMap(InitParams params) throws ConfigurationException {
       ValuesParam param = params.getValuesParam("mimetypes-properties");
       if (param != null) {
@@ -82,6 +93,8 @@ public class ExtendedMimeTypeResolver {
     }
 
     /**
+     * Gets the paths.
+     *
      * @return the path
      */
     public List<String> getPaths() {
@@ -89,21 +102,38 @@ public class ExtendedMimeTypeResolver {
     }
   }
 
+  /** The config service. */
   protected final ConfigurationManager      configService;
 
+  /** The mime types. */
   protected final Map<String, List<String>> mimeTypes  = new HashMap<String, List<String>>();
 
+  /** The extentions. */
   protected final Map<String, List<String>> extentions = new HashMap<String, List<String>>();
 
+  /** The modes. */
   protected final Map<String, Set<String>>  modes      = new LinkedHashMap<String, Set<String>>();
 
+  /** The resolver. */
   protected final MimeTypeResolver          resolver;
 
+  /**
+   * Instantiates a new extended mime type resolver.
+   *
+   * @param configService the config service
+   * @param params the params
+   * @throws NullPointerException the null pointer exception
+   */
   public ExtendedMimeTypeResolver(ConfigurationManager configService, InitParams params) throws NullPointerException {
     this.configService = configService;
     this.resolver = new MimeTypeResolver();
   }
 
+  /**
+   * Adds the plugin.
+   *
+   * @param typesMap the types map
+   */
   public void addPlugin(final MimeTypeMap typesMap) {
     try {
       SecurityHelper.doPrivilegedIOExceptionAction(new PrivilegedExceptionAction<Void>() {
@@ -143,8 +173,8 @@ public class ExtendedMimeTypeResolver {
    * Get MIMEType which corresponds to file extension. If file extension is unknown the default
    * MIMEType will be returned. If there are more than one MIMETypes for specific extension the
    * first occurred in the list will be returned.
-   * 
-   * @param filename
+   *
+   * @param filename the filename
    * @return String MIMEType
    */
   public String getMimeType(String filename) {
@@ -165,9 +195,9 @@ public class ExtendedMimeTypeResolver {
   /**
    * Get MIMEType which corresponds to file content. If file content
    * does not allow to determine MIMEtype, the default MIMEType will be returned.
-   * 
-   * @param filename
-   * @param is
+   *
+   * @param filename the filename
+   * @param is the is
    * @return String MIMEType
    */
   public String getMimeType(String filename, InputStream is) {
@@ -231,9 +261,8 @@ public class ExtendedMimeTypeResolver {
 
   /**
    * Set default MIMEType.
-   * 
-   * @param defaultMimeType
-   *          String, default MIMEType
+   *
+   * @param type the new default mime type
    */
   public void setDefaultMimeType(String type) {
     resolver.setDefaultMimeType(type);
@@ -300,8 +329,8 @@ public class ExtendedMimeTypeResolver {
 
   /**
    * Load MIMEType and corresponding extension.
-   * 
-   * @param aLine
+   *
+   * @param aLine the a line
    */
   protected void processLine(String aLine) {
     aLine = aLine.toLowerCase();

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003-2013 eXo Platform SAS.
+ * Copyright (C) 2003-2016 eXo Platform SAS.
  *
  * This is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as
@@ -78,20 +78,31 @@ public class ThreadExecutor {
    */
   public static final String      SINGLETON_THREAD_PREFIX = "clouddrive-thread-";
 
+  /** The Constant LOG. */
   protected static final Log      LOG                     = ExoLogger.getLogger(ThreadExecutor.class);
 
+  /** The singleton. */
   protected static ThreadExecutor singleton;
 
   /**
    * Command thread factory adapted from {@link Executors#DefaultThreadFactory}.
    */
   static class CommandThreadFactory implements ThreadFactory {
+    
+    /** The group. */
     final ThreadGroup   group;
 
+    /** The thread number. */
     final AtomicInteger threadNumber = new AtomicInteger(1);
 
+    /** The name prefix. */
     final String        namePrefix;
 
+    /**
+     * Instantiates a new command thread factory.
+     *
+     * @param namePrefix the name prefix
+     */
     CommandThreadFactory(String namePrefix) {
       SecurityManager s = System.getSecurityManager();
       this.group = (s != null) ? s.getThreadGroup() : Thread.currentThread().getThreadGroup();
@@ -119,14 +130,19 @@ public class ThreadExecutor {
     }
   }
 
+  /** The drives. */
   private final ConcurrentHashMap<CloudDrive, Object> drives = new ConcurrentHashMap<CloudDrive, Object>();
 
+  /** The max factor. */
   private final int                                   maxFactor;
 
+  /** The queue factor. */
   private final int                                   queueFactor;
 
+  /** The thread name prefix. */
   private final String                                threadNamePrefix;
 
+  /** The executor. */
   private final ExecutorService                       executor;
 
   /**
@@ -154,12 +170,19 @@ public class ThreadExecutor {
   }
 
   /**
-   * 
+   * Instantiates a new thread executor.
    */
   private ThreadExecutor() {
     this(SINGLETON_THREAD_PREFIX, MAX_FACTOR, QUEUE_FACTOR);
   }
 
+  /**
+   * Instantiates a new thread executor.
+   *
+   * @param threadNamePrefix the thread name prefix
+   * @param maxFactor the max factor
+   * @param queueFactor the queue factor
+   */
   private ThreadExecutor(String threadNamePrefix, int maxFactor, int queueFactor) {
     this.maxFactor = maxFactor;
     this.queueFactor = queueFactor;
@@ -186,20 +209,39 @@ public class ThreadExecutor {
                                       new ThreadPoolExecutor.CallerRunsPolicy());
   }
 
+  /**
+   * Submit.
+   *
+   * @param <P> the generic type
+   * @param command the command
+   * @return the future
+   */
   public synchronized <P> Future<P> submit(Callable<P> command) {
     return executor.submit(command);
   }
 
+  /**
+   * Submit.
+   *
+   * @param worker the worker
+   * @return the future
+   */
   public synchronized Future<?> submit(Runnable worker) {
     return executor.submit(worker);
   }
 
+  /**
+   * Stop.
+   */
   public void stop() {
     stopSheduller();
   }
 
   // internals
 
+  /**
+   * Stop sheduller.
+   */
   private void stopSheduller() {
     if (executor != null) {
       executor.shutdownNow();

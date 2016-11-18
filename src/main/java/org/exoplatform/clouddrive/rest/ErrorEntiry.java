@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003-2014 eXo Platform SAS.
+ * Copyright (C) 2003-2016 eXo Platform SAS.
  *
  * This is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as
@@ -32,18 +32,30 @@ import java.util.Map;
  */
 public class ErrorEntiry {
 
+  /** The Constant DRIVE_REMOVED. */
   public static final String DRIVE_REMOVED      = "drive-removed";
 
+  /** The Constant NODE_NOT_FOUND. */
   public static final String NODE_NOT_FOUND     = "node-not-found";
 
+  /** The Constant NOT_CLOUD_DRIVE. */
   public static final String NOT_CLOUD_DRIVE    = "not-cloud-drive";
 
+  /** The Constant NOT_CLOUD_FILE. */
   public static final String NOT_CLOUD_FILE     = "not-cloud-file";
 
+  /** The Constant NOT_YET_CLOUD_FILE. */
   public static final String NOT_YET_CLOUD_FILE = "not-yet_cloud-file";
   
+  /** The Constant ACCESS_DENIED. */
   public static final String ACCESS_DENIED = "access-denied";
 
+  /**
+   * Acess denied.
+   *
+   * @param message the message
+   * @return the error entiry
+   */
   public static ErrorEntiry acessDenied(String message) {
     ErrorEntiry err = new ErrorEntiry();
     err.error = ACCESS_DENIED;
@@ -51,12 +63,25 @@ public class ErrorEntiry {
     return err;
   }
   
+  /**
+   * Error.
+   *
+   * @param errorCode the error code
+   * @return the error entiry
+   */
   public static ErrorEntiry error(String errorCode) {
     ErrorEntiry err = new ErrorEntiry();
     err.error = errorCode;
     return err;
   }
 
+  /**
+   * Error.
+   *
+   * @param errorCode the error code
+   * @param message the message
+   * @return the error entiry
+   */
   public static ErrorEntiry error(String errorCode, String message) {
     ErrorEntiry err = new ErrorEntiry();
     err.error = errorCode;
@@ -64,6 +89,15 @@ public class ErrorEntiry {
     return err;
   }
 
+  /**
+   * Error.
+   *
+   * @param errorCode the error code
+   * @param message the message
+   * @param workspace the workspace
+   * @param path the path
+   * @return the error entiry
+   */
   public static ErrorEntiry error(String errorCode, String message, String workspace, String path) {
     ErrorEntiry err = new ErrorEntiry();
     err.error = errorCode;
@@ -73,12 +107,26 @@ public class ErrorEntiry {
     return err;
   }
 
+  /**
+   * Message.
+   *
+   * @param message the message
+   * @return the error entiry
+   */
   public static ErrorEntiry message(String message) {
     ErrorEntiry err = new ErrorEntiry();
     err.message = message;
     return err;
   }
 
+  /**
+   * Drive removed.
+   *
+   * @param message the message
+   * @param workspace the workspace
+   * @param path the path
+   * @return the error entiry
+   */
   public static ErrorEntiry driveRemoved(String message, String workspace, String path) {
     ErrorEntiry err = new ErrorEntiry();
     err.error = DRIVE_REMOVED;
@@ -86,6 +134,14 @@ public class ErrorEntiry {
     return err;
   }
   
+  /**
+   * Node not found.
+   *
+   * @param message the message
+   * @param workspace the workspace
+   * @param path the path
+   * @return the error entiry
+   */
   public static ErrorEntiry nodeNotFound(String message, String workspace, String path) {
     ErrorEntiry err = new ErrorEntiry();
     err.error = NODE_NOT_FOUND;
@@ -93,6 +149,14 @@ public class ErrorEntiry {
     return err;
   }
 
+  /**
+   * Not cloud drive.
+   *
+   * @param message the message
+   * @param workspace the workspace
+   * @param path the path
+   * @return the error entiry
+   */
   public static ErrorEntiry notCloudDrive(String message, String workspace, String path) {
     ErrorEntiry err = new ErrorEntiry();
     err.error = NOT_CLOUD_DRIVE;
@@ -100,6 +164,14 @@ public class ErrorEntiry {
     return err;
   }
 
+  /**
+   * Not cloud file.
+   *
+   * @param message the message
+   * @param workspace the workspace
+   * @param path the path
+   * @return the error entiry
+   */
   public static ErrorEntiry notCloudFile(String message, String workspace, String path) {
     ErrorEntiry err = new ErrorEntiry();
     err.error = NOT_CLOUD_FILE;
@@ -107,6 +179,14 @@ public class ErrorEntiry {
     return err;
   }
 
+  /**
+   * Not yet cloud file.
+   *
+   * @param message the message
+   * @param workspace the workspace
+   * @param path the path
+   * @return the error entiry
+   */
   public static ErrorEntiry notYetCloudFile(String message, String workspace, String path) {
     ErrorEntiry err = new ErrorEntiry();
     err.error = NOT_YET_CLOUD_FILE;
@@ -142,20 +222,34 @@ public class ErrorEntiry {
   protected Map<String, Object> props = new LinkedHashMap<String, Object>();
 
   /**
-   * 
+   * Instantiates a new error entiry.
    */
   public ErrorEntiry() {
   }
 
+  /**
+   * Adds the property.
+   *
+   * @param key the key
+   * @param value the value
+   */
   public void addProperty(String key, Object value) {
     props.put(key, value);
   }
 
+  /**
+   * Gets the property.
+   *
+   * @param key the key
+   * @return the property
+   */
   public Object getProperty(String key) {
     return props.get(key);
   }
 
   /**
+   * Gets the message.
+   *
    * @return the message
    */
   public String getMessage() {
@@ -163,6 +257,8 @@ public class ErrorEntiry {
   }
 
   /**
+   * Gets the workspace.
+   *
    * @return the workspace
    */
   public String getWorkspace() {
@@ -170,6 +266,8 @@ public class ErrorEntiry {
   }
 
   /**
+   * Gets the path.
+   *
    * @return the path
    */
   public String getPath() {
@@ -177,6 +275,8 @@ public class ErrorEntiry {
   }
 
   /**
+   * Gets the error.
+   *
    * @return the error
    */
   public String getError() {
@@ -184,6 +284,8 @@ public class ErrorEntiry {
   }
 
   /**
+   * Gets the props.
+   *
    * @return the properties
    */
   public Map<String, ?> getProps() {

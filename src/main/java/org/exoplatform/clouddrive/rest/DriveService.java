@@ -1,18 +1,20 @@
 /*
- * Copyright (C) 2003-2012 eXo Platform SAS.
+ * Copyright (C) 2003-2016 eXo Platform SAS.
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * This is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation; either version 2.1 of
+ * the License, or (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful,
+ * This software is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Affero General Public License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the GNU Affero General Public License
- * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this software; if not, write to the Free
+ * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+ * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
 package org.exoplatform.clouddrive.rest;
 
@@ -72,14 +74,19 @@ import javax.ws.rs.core.UriInfo;
 @Produces(MediaType.APPLICATION_JSON)
 public class DriveService implements ResourceContainer {
 
+  /** The Constant LOG. */
   protected static final Log             LOG           = ExoLogger.getLogger(DriveService.class);
 
+  /** The Constant CONTENT_SUFIX. */
   protected static final String          CONTENT_SUFIX = "/jcr:content";
 
+  /** The cloud drives. */
   protected final CloudDriveService      cloudDrives;
 
+  /** The jcr service. */
   protected final RepositoryService      jcrService;
 
+  /** The session providers. */
   protected final SessionProviderService sessionProviders;
 
   /**
@@ -124,11 +131,11 @@ public class DriveService implements ResourceContainer {
 
   /**
    * Synchronized cloud drive or its file/folder and return result for client refresh.
-   * 
+   *
    * @param uriInfo {@link UriInfo}
    * @param workspace {@link String} Drive Node workspace
    * @param path {@link String} Drive Node path
-   * @return
+   * @return the response
    */
   @POST
   @Path("/synchronize/")
@@ -288,7 +295,8 @@ public class DriveService implements ResourceContainer {
   /**
    * Return file information. Returned file may be not yet created in cloud (accepted for
    * creation), then this service response will be with status ACCEPTED, otherwise it's OK response.
-   * 
+   *
+   * @param uriInfo the uri info
    * @param workspace {@link String} Drive Node workspace
    * @param path {@link String} File Node path
    * @return {@link Response} REST response
@@ -359,7 +367,8 @@ public class DriveService implements ResourceContainer {
    * Return list of files in given folder. Returned files may be not yet created in cloud (accepted for
    * creation), then this service response will be with status ACCEPTED, otherwise it's OK response. This
    * service will not return files for nodes that do not belong to the cloud drive associated with this path.
-   * 
+   *
+   * @param uriInfo the uri info
    * @param workspace {@link String} Drive Node workspace
    * @param path {@link String} Folder Node path
    * @return {@link Response} REST response
@@ -452,10 +461,10 @@ public class DriveService implements ResourceContainer {
 
   /**
    * State of a drive pointed by given workspace and path.
-   * 
+   *
    * @param uriInfo - request info
-   * @param workspace
-   * @param path
+   * @param workspace the workspace
+   * @param path the path
    * @return {@link Response}
    */
   @GET

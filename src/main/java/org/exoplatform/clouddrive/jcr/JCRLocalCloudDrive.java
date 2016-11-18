@@ -1,18 +1,20 @@
 /*
- * Copyright (C) 2003-2012 eXo Platform SAS.
+ * Copyright (C) 2003-2016 eXo Platform SAS.
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * This is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation; either version 2.1 of
+ * the License, or (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful,
+ * This software is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Affero General Public License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the GNU Affero General Public License
- * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this software; if not, write to the Free
+ * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+ * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
 package org.exoplatform.clouddrive.jcr;
 
@@ -147,34 +149,49 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
    */
   public static final String     ECD_IGNORED           = "ecd:ignored";
 
+  /** The Constant EXO_DATETIME. */
   public static final String     EXO_DATETIME          = "exo:datetime";
 
+  /** The Constant EXO_MODIFY. */
   public static final String     EXO_MODIFY            = "exo:modify";
 
+  /** The Constant EXO_TRASHFOLDER. */
   public static final String     EXO_TRASHFOLDER       = "exo:trashFolder";
 
+  /** The Constant EXO_THUMBNAILS. */
   public static final String     EXO_THUMBNAILS        = "exo:thumbnails";
 
+  /** The Constant EXO_THUMBNAIL. */
   public static final String     EXO_THUMBNAIL         = "exo:thumbnail";
 
+  /** The Constant NT_FOLDER. */
   public static final String     NT_FOLDER             = "nt:folder";
 
+  /** The Constant NT_FILE. */
   public static final String     NT_FILE               = "nt:file";
 
+  /** The Constant NT_RESOURCE. */
   public static final String     NT_RESOURCE           = "nt:resource";
 
+  /** The Constant NT_UNSTRUCTURED. */
   public static final String     NT_UNSTRUCTURED       = "nt:unstructured";
 
+  /** The Constant MIX_REFERENCEABLE. */
   public static final String     MIX_REFERENCEABLE     = "mix:referenceable";
-  
-  public static final String     MIX_VERSIONABLE     = "mix:versionable";
 
+  /** The Constant MIX_VERSIONABLE. */
+  public static final String     MIX_VERSIONABLE       = "mix:versionable";
+
+  /** The Constant ECD_LOCALFORMAT. */
   public static final String     ECD_LOCALFORMAT       = "ecd:localFormat";
 
+  /** The Constant CURRENT_LOCALFORMAT. */
   public static final double     CURRENT_LOCALFORMAT   = 1.1d;
 
+  /** The Constant HISTORY_EXPIRATION. */
   public static final long       HISTORY_EXPIRATION    = 1000 * 60 * 60 * 24 * 8; // 8 days
 
+  /** The Constant HISTORY_MAX_LENGTH. */
   public static final int        HISTORY_MAX_LENGTH    = 1000;                    // 1000 file modification
 
   /**
@@ -182,12 +199,16 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
    */
   public static final int        COMMAND_CHANGES_CHUNK = 30;
 
+  /** The Constant DUMMY_DATA. */
   public static final String     DUMMY_DATA            = "".intern();
 
+  /** The Constant USER_WORKSPACE. */
   public static final String     USER_WORKSPACE        = "user.workspace";
 
+  /** The Constant USER_NODEPATH. */
   public static final String     USER_NODEPATH         = "user.nodePath";
 
+  /** The Constant USER_SESSIONPROVIDER. */
   public static final String     USER_SESSIONPROVIDER  = "user.sessionProvider";
 
   /**
@@ -200,10 +221,14 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
    */
   static class AlreadyDone implements Command {
 
+    /** The time. */
     final long time = System.currentTimeMillis();
 
     /**
-     * @inherritDoc
+     * Gets the progress.
+     *
+     * @return the progress
+     * 
      */
     @Override
     public int getProgress() {
@@ -211,7 +236,10 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
     }
 
     /**
-     * @inherritDoc
+     * Checks if is done.
+     *
+     * @return true, if is done
+     * 
      */
     @Override
     public boolean isDone() {
@@ -227,7 +255,10 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
     }
 
     /**
-     * @inherritDoc
+     * Gets the files.
+     *
+     * @return the files
+     * 
      */
     @Override
     public Collection<CloudFile> getFiles() {
@@ -235,7 +266,10 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
     }
 
     /**
-     * @inherritDoc
+     * Gets the removed.
+     *
+     * @return the removed
+     * 
      */
     @Override
     public Collection<String> getRemoved() {
@@ -243,7 +277,10 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
     }
 
     /**
-     * @inherritDoc
+     * Gets the messages.
+     *
+     * @return the messages
+     * 
      */
     @Override
     public Collection<CloudDriveMessage> getMessages() {
@@ -283,7 +320,12 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
     }
   }
 
+  /**
+   * The Class FileTrashing.
+   */
   class FileTrashing {
+
+    /** The latch. */
     private final CountDownLatch latch  = new CountDownLatch(1);
 
     /**
@@ -298,18 +340,34 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
      */
     private String               fileId;
 
+    /** The remove. */
     private boolean              remove = false;
 
+    /**
+     * Confirm.
+     *
+     * @param path the path
+     * @param fileId the file id
+     */
     void confirm(String path, String fileId) {
       this.trashPath = path;
       this.fileId = fileId;
       latch.countDown();
     }
 
+    /**
+     * Removes the.
+     */
     void remove() {
       remove = true;
     }
 
+    /**
+     * Complete.
+     *
+     * @throws InterruptedException the interrupted exception
+     * @throws RepositoryException the repository exception
+     */
     void complete() throws InterruptedException, RepositoryException {
       // Remove trashed file if asked explicitly, but first wait for 60 sec for trashing confirmation.
       // If not confirmed - the file cannot be removed from the Trash locally (we don't know path and/or id).
@@ -319,6 +377,11 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
       }
     }
 
+    /**
+     * Removes the trashed.
+     *
+     * @throws RepositoryException the repository exception
+     */
     private void removeTrashed() throws RepositoryException {
       if (trashPath != null && fileId != null) {
         Session session = systemSession();
@@ -359,8 +422,21 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
   /**
    * Perform actual removal of the drive from JCR on its move to the Trash. Initialize cloud files trashing
    * similarly as for removal.
+   *
    */
   public class JCRListener {
+
+    /**
+     * The listener interface for receiving removeDrive events.
+     * The class that is interested in processing a removeDrive
+     * event implements this interface, and the object created
+     * with that class is registered with a component using the
+     * component's <code>addRemoveDriveListener<code> method. When
+     * the removeDrive event occurs, that object's appropriate
+     * method is invoked.
+     *
+     * @see RemoveDriveEvent
+     */
     class RemoveDriveListener implements EventListener {
       /**
        * {@inheritDoc}
@@ -399,6 +475,17 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
       }
     }
 
+    /**
+     * The listener interface for receiving addTrash events.
+     * The class that is interested in processing a addTrash
+     * event implements this interface, and the object created
+     * with that class is registered with a component using the
+     * component's <code>addAddTrashListener<code> method. When
+     * the addTrash event occurs, that object's appropriate
+     * method is invoked.
+     *
+     * @see AddTrashEvent
+     */
     class AddTrashListener implements EventListener {
       /**
        * {@inheritDoc}
@@ -486,10 +573,25 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
       }
     }
 
+    /**
+     * The listener interface for receiving driveChanges events.
+     * The class that is interested in processing a driveChanges
+     * event implements this interface, and the object created
+     * with that class is registered with a component using the
+     * component's <code>addDriveChangesListener<code> method. When
+     * the driveChanges event occurs, that object's appropriate
+     * method is invoked.
+     *
+     * @see DriveChangesEvent
+     */
     class DriveChangesListener extends BaseCloudDriveListener implements EventListener {
 
+      /** The lock. */
       final ThreadLocal<AtomicLong> lock = new ThreadLocal<AtomicLong>();
 
+      /**
+       * Disable.
+       */
       void disable() {
         AtomicLong requests = lock.get();
         if (requests == null) {
@@ -499,6 +601,9 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
         }
       }
 
+      /**
+       * Enable.
+       */
       void enable() {
         AtomicLong requests = lock.get();
         if (requests == null) {
@@ -508,6 +613,11 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
         }
       }
 
+      /**
+       * Enabled.
+       *
+       * @return true, if successful
+       */
       boolean enabled() {
         AtomicLong requests = lock.get();
         return requests == null || requests.get() == 0;
@@ -597,18 +707,29 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
       }
     }
 
+    /** The initial root path. */
     final String               initialRootPath;
 
+    /** The remove listener. */
     final RemoveDriveListener  removeListener;
 
+    /** The trash listener. */
     final AddTrashListener     trashListener;
 
+    /** The changes listener. */
     final DriveChangesListener changesListener;
 
+    /** The trashed. */
     volatile boolean           trashed = false;
 
+    /** The added. */
     volatile boolean           added   = false;
 
+    /**
+     * Instantiates a new JCR listener.
+     *
+     * @param initialRootPath the initial root path
+     */
     JCRListener(String initialRootPath) {
       this.initialRootPath = initialRootPath;
       this.removeListener = new RemoveDriveListener();
@@ -616,6 +737,12 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
       this.changesListener = new DriveChangesListener();
     }
 
+    /**
+     * Check trashed.
+     *
+     * @param driveRoot the drive root
+     * @throws RepositoryException the repository exception
+     */
     synchronized void checkTrashed(Node driveRoot) throws RepositoryException {
       if (trashed && added) {
         try {
@@ -680,6 +807,12 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
       }
     }
 
+    /**
+     * Finish trashed.
+     *
+     * @param session the session
+     * @param rootPath the root path
+     */
     void finishTrashed(Session session, String rootPath) {
       // reset flags and unregister both listeners from the Observation
       trashed = added = false;
@@ -694,10 +827,16 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
       listeners.fireOnRemove(new CloudDriveEvent(getUser(), rootWorkspace, rootPath));
     }
 
+    /**
+     * Enable.
+     */
     public void enable() {
       changesListener.enable();
     }
 
+    /**
+     * Disable.
+     */
     public void disable() {
       changesListener.disable();
     }
@@ -707,12 +846,23 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
    * Asynchronous runner for {@link Command}.
    */
   protected class CommandCallable implements Callable<Command> {
+
+    /** The command. */
     final AbstractCommand command;
 
+    /**
+     * Instantiates a new command callable.
+     *
+     * @param command the command
+     * @throws CloudDriveException the cloud drive exception
+     */
     CommandCallable(AbstractCommand command) throws CloudDriveException {
       this.command = command;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Command call() throws Exception {
       command.exec();
@@ -720,17 +870,32 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
     }
   }
 
+  /**
+   * The Class ExoJCRSettings.
+   */
   protected class ExoJCRSettings {
+
+    /** The conversation. */
     final ConversationState conversation;
 
+    /** The container. */
     final ExoContainer      container;
 
+    /** The prev conversation. */
     ConversationState       prevConversation;
 
+    /** The prev container. */
     ExoContainer            prevContainer;
 
+    /** The prev sessions. */
     SessionProvider         prevSessions;
 
+    /**
+     * Instantiates a new exo JCR settings.
+     *
+     * @param conversation the conversation
+     * @param container the container
+     */
     ExoJCRSettings(ConversationState conversation, ExoContainer container) {
       this.conversation = conversation;
       this.container = container;
@@ -742,7 +907,9 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
    */
   protected class ExoJCREnvironment extends CloudDriveEnvironment {
 
-    protected final Map<Command, ExoJCRSettings> config = Collections.synchronizedMap(new HashMap<Command, ExoJCRSettings>());
+    /** The config. */
+    protected final Map<Command, ExoJCRSettings> config =
+                                                        Collections.synchronizedMap(new HashMap<Command, ExoJCRSettings>());
 
     /**
      * {@inheritDoc}
@@ -867,6 +1034,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
      */
     protected Future<Command>                async;
 
+    /** The settings. */
     protected ExoJCRSettings                 settings;
 
     /**
@@ -894,9 +1062,9 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
 
     /**
      * Save the drive's JCR node with currently changed files.
-     * 
-     * @throws RepositoryException
-     * @throws CloudDriveException
+     *
+     * @throws RepositoryException the repository exception
+     * @throws CloudDriveException the cloud drive exception
      */
     protected void save() throws RepositoryException, CloudDriveException {
       driveNode.save();
@@ -904,11 +1072,11 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
 
     /**
      * Save the drive's JCR node if number of changed files reached a threshold for a chunk.
-     * 
+     *
      * @return <code>true</code> if save was performed, <code>false</code> otherwise
+     * @throws RepositoryException the repository exception
+     * @throws CloudDriveException the cloud drive exception
      * @see COMMAND_CHANGES_CHUNK
-     * @throws RepositoryException
-     * @throws CloudDriveException
      */
     private boolean saveChunk() throws RepositoryException, CloudDriveException {
       int changedNumber = changed.size() + removed.size();
@@ -921,39 +1089,89 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
       return false;
     }
 
+    /**
+     * Adds the changed.
+     *
+     * @param file the file
+     * @return true, if successful
+     * @throws RepositoryException the repository exception
+     * @throws CloudDriveException the cloud drive exception
+     */
     protected boolean addChanged(CloudFile file) throws RepositoryException, CloudDriveException {
       boolean r = changed.add(file);
       saveChunk();
       return r;
     }
 
+    /**
+     * Removes the changed.
+     *
+     * @param file the file
+     * @return true, if successful
+     */
     protected boolean removeChanged(CloudFile file) {
       return changed.remove(file);
     }
 
+    /**
+     * Checks if is changed.
+     *
+     * @param file the file
+     * @return true, if is changed
+     */
     protected boolean isChanged(CloudFile file) {
       return changed.contains(file);
     }
 
+    /**
+     * Replace changed.
+     *
+     * @param files the files
+     */
     protected void replaceChanged(Collection<CloudFile> files) {
       changed.clear();
       changed.addAll(files);
     }
 
+    /**
+     * Adds the removed.
+     *
+     * @param path the path
+     * @return true, if successful
+     * @throws RepositoryException the repository exception
+     * @throws CloudDriveException the cloud drive exception
+     */
     protected boolean addRemoved(String path) throws RepositoryException, CloudDriveException {
       boolean r = removed.add(path);
       saveChunk();
       return r;
     }
 
+    /**
+     * Removes the removed.
+     *
+     * @param path the path
+     * @return true, if successful
+     */
     protected boolean removeRemoved(String path) {
       return removed.remove(path);
     }
 
+    /**
+     * Checks if is removed.
+     *
+     * @param path the path
+     * @return true, if is removed
+     */
     protected boolean isRemoved(String path) {
       return removed.contains(path);
     }
 
+    /**
+     * Replace removed.
+     *
+     * @param paths the paths
+     */
     protected void replaceRemoved(Collection<String> paths) {
       removed.clear();
       removed.addAll(paths);
@@ -975,10 +1193,10 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
 
     /**
      * Processing logic.
-     * 
-     * @throws CloudDriveException
-     * @throws RepositoryException
-     * @throws InterruptedException
+     *
+     * @throws CloudDriveException the cloud drive exception
+     * @throws RepositoryException the repository exception
+     * @throws InterruptedException the interrupted exception
      */
     protected abstract void process() throws CloudDriveException, RepositoryException, InterruptedException;
 
@@ -992,18 +1210,18 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
     /**
      * It is a method where data or action specific to a connector can be applied when need of save will
      * happened in {@link #saveChunk()}.
-     * 
-     * @throws RepositoryException
-     * @throws CloudDriveException
+     *
+     * @throws CloudDriveException the cloud drive exception
+     * @throws RepositoryException the repository exception
      */
     protected abstract void preSaveChunk() throws CloudDriveException, RepositoryException;
 
     /**
      * Start command execution. If command will fail due to provider error, the execution will be retried
      * {@link CloudDriveConnector#PROVIDER_REQUEST_ATTEMPTS} times before the throwing an exception.
-     * 
-     * @throws CloudDriveException
-     * @throws RepositoryException
+     *
+     * @throws CloudDriveException the cloud drive exception
+     * @throws RepositoryException the repository exception
      */
     protected final void exec() throws CloudDriveException, RepositoryException {
       if (LOG.isDebugEnabled()) {
@@ -1140,7 +1358,10 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
     }
 
     /**
-     * @inherritDoc
+     * Checks if is done.
+     *
+     * @return true, if is done
+     * 
      */
     @Override
     public boolean isDone() {
@@ -1228,9 +1449,9 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
 
     /**
      * Connect command constructor.
-     * 
-     * @throws RepositoryException
-     * @throws DriveRemovedException
+     *
+     * @throws RepositoryException the repository exception
+     * @throws DriveRemovedException the drive removed exception
      */
     protected ConnectCommand() throws RepositoryException, DriveRemovedException {
       super();
@@ -1238,9 +1459,9 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
 
     /**
      * Fetch actual files from cloud provider to local JCR.
-     * 
-     * @throws CloudDriveException
-     * @throws RepositoryException
+     *
+     * @throws CloudDriveException the cloud drive exception
+     * @throws RepositoryException the repository exception
      */
     protected abstract void fetchFiles() throws CloudDriveException, RepositoryException;
 
@@ -1248,6 +1469,11 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
      * NOT SUPPORTED! Don't use this method within Connect commands - use
      * {@link #addConnected(String, CloudFile)}
      * instead.
+     *
+     * @param file the file
+     * @return true, if successful
+     * @throws RepositoryException the repository exception
+     * @throws CloudDriveException the cloud drive exception
      */
     @Override
     protected final boolean addChanged(CloudFile file) throws RepositoryException, CloudDriveException {
@@ -1258,6 +1484,12 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
     /**
      * Add just connected file and associate it with a given parent ID. This method should be used instead of
      * {@link #addChanged(CloudFile)}.
+     *
+     * @param parentId the parent id
+     * @param file the file
+     * @return true, if successful
+     * @throws RepositoryException the repository exception
+     * @throws CloudDriveException the cloud drive exception
      */
     protected boolean addConnected(String parentId, CloudFile file) throws RepositoryException, CloudDriveException {
       boolean r = super.addChanged(file);
@@ -1283,9 +1515,9 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
 
     /**
      * Check if a file with given ID and parent ID is already connected by this command.
-     * 
-     * @param fileId {@link String} file ID
+     *
      * @param parentId {@link String} parent ID, assumed never <code>null</code>
+     * @param fileId {@link String} file ID
      * @return <code>true</code> if file already connected, <code>false</code> otherwise
      */
     protected boolean isConnected(String parentId, String fileId) {
@@ -1293,6 +1525,9 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
       return connectedParents != null && connectedParents.contains(parentId);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getName() {
       return "connect";
@@ -1342,8 +1577,17 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
     }
   }
 
+  /**
+   * The Class NoConnectCommand.
+   */
   protected final class NoConnectCommand extends ConnectCommand {
 
+    /**
+     * Instantiates a new no connect command.
+     *
+     * @throws RepositoryException the repository exception
+     * @throws DriveRemovedException the drive removed exception
+     */
     NoConnectCommand() throws RepositoryException, DriveRemovedException {
       super();
     }
@@ -1373,6 +1617,9 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
      */
     protected Set<String>             linkedNodes = new HashSet<String>();
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getName() {
       return "synchronization";
@@ -1398,7 +1645,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
         }
 
         hasChanges = hasChanges();
-        
+
         // save the drive even if no changes found (we may need to save change ID for later tracking etc)
         save();
       } finally {
@@ -1438,10 +1685,10 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
     /**
      * Prepare files synchronization from cloud provider to local JCR. It includes applying of local changes
      * to remote provider if such had a place. Provider implementations may add other logic to this method.
-     * 
-     * @throws CloudDriveException
-     * @throws RepositoryException
-     * @throws InterruptedException
+     *
+     * @throws CloudDriveException the cloud drive exception
+     * @throws RepositoryException the repository exception
+     * @throws InterruptedException the interrupted exception
      */
     protected void preSyncFiles() throws CloudDriveException, RepositoryException, InterruptedException {
       List<FileChange> changes = savedChanges();
@@ -1458,10 +1705,10 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
 
     /**
      * Synchronize files from cloud provider to local JCR.
-     * 
-     * @throws CloudDriveException
-     * @throws RepositoryException
-     * @throws InterruptedException
+     *
+     * @throws CloudDriveException the cloud drive exception
+     * @throws RepositoryException the repository exception
+     * @throws InterruptedException the interrupted exception
      */
     protected abstract void syncFiles() throws CloudDriveException, RepositoryException, InterruptedException;
 
@@ -1471,8 +1718,8 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
      * This method and its resulting tree can be used in actual algorithms for merging of remote and local
      * changes. But call it "on-demand", only when have changes to merge, otherwise it will add undesired JCR
      * load (due to a whole subtree traversing).
-     * 
-     * @throws RepositoryException
+     *
+     * @throws RepositoryException the repository exception
      */
     protected void readLocalNodes() throws RepositoryException {
       Map<String, List<Node>> nodes = new LinkedHashMap<String, List<Node>>();
@@ -1489,9 +1736,9 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
      * Track the file links referenced its node in current JCR workspace (e.g. ECMS symlinks). This method
      * should be used when synchronizing file removed remotely. Call this method before the node removal and
      * save. Actual removal of the links will be performed on a next chunk save in {@link #save()}.
-     * 
+     *
      * @param fileNode {@link Node}
-     * @throws RepositoryException
+     * @throws RepositoryException the repository exception
      */
     protected void removeLinks(Node fileNode) throws RepositoryException {
       if (fileNode.isNodeType(MIX_REFERENCEABLE)) {
@@ -1541,8 +1788,12 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
     }
   }
 
+  /**
+   * The Class SyncFilesCommand.
+   */
   protected class SyncFilesCommand extends AbstractCommand {
 
+    /** The Constant NAME. */
     static final String    NAME     = "files synchronization";
 
     /**
@@ -1560,8 +1811,14 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
      */
     final List<FileChange> skipped  = new ArrayList<FileChange>();
 
+    /** The changes. */
     final List<FileChange> changes;
 
+    /**
+     * Instantiates a new sync files command.
+     *
+     * @param changes the changes
+     */
     SyncFilesCommand(List<FileChange> changes) {
       this.changes = changes;
 
@@ -1578,6 +1835,11 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
       }
     }
 
+    /**
+     * Inits the drive node.
+     *
+     * @param driveNode the drive node
+     */
     void initDriveNode(Node driveNode) {
       this.driveNode = driveNode;
     }
@@ -1670,6 +1932,13 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
       }
     }
 
+    /**
+     * Sync.
+     *
+     * @throws RepositoryException the repository exception
+     * @throws CloudDriveException the cloud drive exception
+     * @throws InterruptedException the interrupted exception
+     */
     void sync() throws RepositoryException, CloudDriveException, InterruptedException {
       try {
         // compress the changes list:
@@ -1920,6 +2189,13 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
    */
   protected abstract class AbstractFileAPI implements CloudFileAPI {
 
+    /**
+     * Root path.
+     *
+     * @return the string
+     * @throws DriveRemovedException the drive removed exception
+     * @throws RepositoryException the repository exception
+     */
     protected String rootPath() throws DriveRemovedException, RepositoryException {
       return rootNode().getPath();
     }
@@ -1997,6 +2273,13 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
       return fileNode.getProperty("ecd:id").getString();
     }
 
+    /**
+     * Sets the id.
+     *
+     * @param fileNode the file node
+     * @param id the id
+     * @throws RepositoryException the repository exception
+     */
     protected void setId(Node fileNode, String id) throws RepositoryException {
       fileNode.setProperty("ecd:id", id);
     }
@@ -2054,6 +2337,14 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
       return Collections.unmodifiableCollection(parentIds);
     }
 
+    /**
+     * Find parent nodes.
+     *
+     * @param fileId the file id
+     * @return the collection
+     * @throws DriveRemovedException the drive removed exception
+     * @throws RepositoryException the repository exception
+     */
     protected Collection<Node> findParentNodes(String fileId) throws DriveRemovedException, RepositoryException {
       Set<Node> parents = new LinkedHashSet<Node>();
       for (Node fn : findNodes(Arrays.asList(fileId))) {
@@ -2072,10 +2363,13 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
    */
   protected class FileChange {
 
+    /** The Constant REMOVE. */
     public static final String            REMOVE         = "D";
 
+    /** The Constant CREATE. */
     public static final String            CREATE         = "A";
 
+    /** The Constant UPDATE. */
     public static final String            UPDATE         = "U";
 
     /**
@@ -2083,20 +2377,28 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
      */
     public static final String            UPDATE_CONTENT = "C";
 
+    /** The applied. */
     protected final CountDownLatch        applied        = new CountDownLatch(1);
 
+    /** The is folder. */
     protected final boolean               isFolder;
 
+    /** The path. */
     protected final String                path;
 
+    /** The synchronizer. */
     protected final CloudFileSynchronizer synchronizer;
 
+    /** The change type. */
     protected String                      changeType;
 
+    /** The file path. */
     protected String                      filePath;
 
+    /** The file id. */
     protected String                      fileId;
 
+    /** The change id. */
     protected String                      changeId;
 
     /**
@@ -2117,14 +2419,14 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
     /**
      * Constructor for newly observed change when file {@link Node} available in the context. Used for file
      * removals observed via {@link CloudDriveManager} in high-level apps (ECMS and other).
-     * 
-     * @param path
-     * @param fileId
-     * @param isFolder
-     * @param changeType
-     * @param synchronizer
-     * @throws RepositoryException
-     * @throws CloudDriveException
+     *
+     * @param path the path
+     * @param fileId the file id
+     * @param isFolder the is folder
+     * @param changeType the change type
+     * @param synchronizer the synchronizer
+     * @throws CloudDriveException the cloud drive exception
+     * @throws RepositoryException the repository exception
      */
     protected FileChange(String path, String fileId, boolean isFolder, String changeType, CloudFileSynchronizer synchronizer)
         throws CloudDriveException, RepositoryException {
@@ -2137,16 +2439,14 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
     }
 
     /**
-     * Constructor for resumed change. See {@link #parseChanges()}.
-     * 
-     * @param changeId
-     * @param path
-     * @param fileId
-     * @param isFolder
-     * @param changeType
-     * @param synchronizer
-     * @throws DriveRemovedException
-     * @throws RepositoryException
+     * Constructor for resumed change.
+     *
+     * @param changeId the change id
+     * @param path the path
+     * @param fileId the file id
+     * @param isFolder the is folder
+     * @param changeType the change type
+     * @param synchronizer the synchronizer
      */
     protected FileChange(String changeId,
                          String path,
@@ -2165,17 +2465,19 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
     /**
      * File change with postponed decision for file synchronizer implementation. It is used for observed
      * creation and update events. See {@link DriveChangesListener}.
-     * 
-     * @param path
-     * @param changeType
-     * @throws RepositoryException
-     * @throws CloudDriveException
+     *
+     * @param path the path
+     * @param changeType the change type
+     * @throws RepositoryException the repository exception
+     * @throws CloudDriveException the cloud drive exception
      */
     protected FileChange(String path, String changeType) throws RepositoryException, CloudDriveException {
       this(path, null, false, changeType, null);
     }
 
     /**
+     * Checks if is folder.
+     *
      * @return the isFolder
      */
     public boolean isFolder() {
@@ -2183,6 +2485,8 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
     }
 
     /**
+     * Gets the path.
+     *
      * @return the path
      */
     public String getPath() {
@@ -2190,6 +2494,8 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
     }
 
     /**
+     * Gets the synchronizer.
+     *
      * @return the synchronizer
      */
     public CloudFileSynchronizer getSynchronizer() {
@@ -2197,6 +2503,8 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
     }
 
     /**
+     * Gets the change type.
+     *
      * @return the changeType
      */
     public String getChangeType() {
@@ -2204,6 +2512,8 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
     }
 
     /**
+     * Gets the file path.
+     *
      * @return the filePath
      */
     public String getFilePath() {
@@ -2211,6 +2521,8 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
     }
 
     /**
+     * Gets the file id.
+     *
      * @return the fileId
      */
     public String getFileId() {
@@ -2218,6 +2530,8 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
     }
 
     /**
+     * Gets the change id.
+     *
      * @return the changeId
      */
     public String getChangeId() {
@@ -2225,6 +2539,8 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
     }
 
     /**
+     * Gets the file UUID.
+     *
      * @return the fileUUID
      */
     public String getFileUUID() {
@@ -2232,6 +2548,8 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
     }
 
     /**
+     * Gets the node.
+     *
      * @return the node
      */
     public Node getNode() {
@@ -2239,6 +2557,8 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
     }
 
     /**
+     * Gets the file.
+     *
      * @return the file
      */
     public CloudFile getFile() {
@@ -2254,6 +2574,11 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
       return applied.getCount();
     }
 
+    /**
+     * Sets the file UUID.
+     *
+     * @param fileUUID the new file UUID
+     */
     void setFileUUID(String fileUUID) {
       this.fileUUID = fileUUID;
     }
@@ -2261,12 +2586,13 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
     /**
      * Prepare and check if it should be accepted as a change in cloud drive: find the file node if
      * creation/update, ensure synchronizer available for removal.
-     * 
-     * @throws PathNotFoundException
-     * @throws RepositoryException
-     * @throws CloudDriveException
-     * @throws SyncNotSupportedException
-     * @throws InterruptedException
+     *
+     * @return true, if successful
+     * @throws DriveRemovedException the drive removed exception
+     * @throws CloudDriveException the cloud drive exception
+     * @throws PathNotFoundException the path not found exception
+     * @throws RepositoryException the repository exception
+     * @throws InterruptedException the interrupted exception
      */
     boolean accept() throws DriveRemovedException,
                      CloudDriveException,
@@ -2351,12 +2677,11 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
 
     /**
      * Apply the change to target file.
-     * 
-     * @throws RepositoryException
-     * @throws CloudDriveException
-     * @throws SyncNotSupportedException
-     * @throws DriveRemovedException
-     * @throws InterruptedException
+     *
+     * @throws DriveRemovedException the drive removed exception
+     * @throws CloudDriveException the cloud drive exception
+     * @throws RepositoryException the repository exception
+     * @throws InterruptedException the interrupted exception
      */
     void apply() throws DriveRemovedException, CloudDriveException, RepositoryException, InterruptedException {
       if (applied.getCount() > 0) {
@@ -2501,15 +2826,23 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
 
     /**
      * Remove the lock set in {@link #begin()} method by removing this changed file from fileChanges map.
-     * 
-     * @throws PathNotFoundException
-     * @throws RepositoryException
-     * @throws CloudDriveException
+     *
+     * @throws PathNotFoundException the path not found exception
+     * @throws RepositoryException the repository exception
+     * @throws CloudDriveException the cloud drive exception
      */
     private void complete() throws PathNotFoundException, RepositoryException, CloudDriveException {
       fileChanges.remove(filePath, this);
     }
 
+    /**
+     * Removes the.
+     *
+     * @throws PathNotFoundException the path not found exception
+     * @throws CloudDriveException the cloud drive exception
+     * @throws RepositoryException the repository exception
+     * @throws InterruptedException the interrupted exception
+     */
     private void remove() throws PathNotFoundException, CloudDriveException, RepositoryException, InterruptedException {
       if (LOG.isDebugEnabled()) {
         LOG.debug("Remove file " + fileId + " " + filePath);
@@ -2548,6 +2881,14 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
       }
     }
 
+    /**
+     * Trash.
+     *
+     * @throws PathNotFoundException the path not found exception
+     * @throws CloudDriveException the cloud drive exception
+     * @throws RepositoryException the repository exception
+     * @throws InterruptedException the interrupted exception
+     */
     private void trash() throws PathNotFoundException, CloudDriveException, RepositoryException, InterruptedException {
       if (LOG.isDebugEnabled()) {
         LOG.debug("Trash file " + fileId + " " + filePath);
@@ -2591,6 +2932,15 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
       }
     }
 
+    /**
+     * Untrash.
+     *
+     * @throws SkipSyncException the skip sync exception
+     * @throws SyncNotSupportedException the sync not supported exception
+     * @throws CloudDriveException the cloud drive exception
+     * @throws RepositoryException the repository exception
+     * @throws InterruptedException the interrupted exception
+     */
     private void untrash() throws SkipSyncException,
                            SyncNotSupportedException,
                            CloudDriveException,
@@ -2631,6 +2981,15 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
       } while (true);
     }
 
+    /**
+     * Update.
+     *
+     * @throws SkipSyncException the skip sync exception
+     * @throws SyncNotSupportedException the sync not supported exception
+     * @throws CloudDriveException the cloud drive exception
+     * @throws RepositoryException the repository exception
+     * @throws InterruptedException the interrupted exception
+     */
     private void update() throws SkipSyncException,
                           SyncNotSupportedException,
                           CloudDriveException,
@@ -2672,6 +3031,15 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
       } while (true);
     }
 
+    /**
+     * Update content.
+     *
+     * @throws SkipSyncException the skip sync exception
+     * @throws SyncNotSupportedException the sync not supported exception
+     * @throws CloudDriveException the cloud drive exception
+     * @throws RepositoryException the repository exception
+     * @throws InterruptedException the interrupted exception
+     */
     private void updateContent() throws SkipSyncException,
                                  SyncNotSupportedException,
                                  CloudDriveException,
@@ -2700,6 +3068,16 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
       }
     }
 
+    /**
+     * Copy.
+     *
+     * @param srcFile the src file
+     * @throws SkipSyncException the skip sync exception
+     * @throws SyncNotSupportedException the sync not supported exception
+     * @throws CloudDriveException the cloud drive exception
+     * @throws RepositoryException the repository exception
+     * @throws InterruptedException the interrupted exception
+     */
     private void copy(Node srcFile) throws SkipSyncException,
                                     SyncNotSupportedException,
                                     CloudDriveException,
@@ -2739,6 +3117,15 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
       fileId = file.getId();
     }
 
+    /**
+     * Creates the.
+     *
+     * @throws SkipSyncException the skip sync exception
+     * @throws SyncNotSupportedException the sync not supported exception
+     * @throws CloudDriveException the cloud drive exception
+     * @throws RepositoryException the repository exception
+     * @throws InterruptedException the interrupted exception
+     */
     private void create() throws SkipSyncException,
                           SyncNotSupportedException,
                           CloudDriveException,
@@ -2790,6 +3177,9 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
     }
   }
 
+  /**
+   * The Class DriveState.
+   */
   protected class DriveState implements FilesState {
     /**
      * {@inheritDoc}
@@ -2807,6 +3197,9 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
       return JCRLocalCloudDrive.this.isUpdating(fileIdOrPath);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public boolean isNew(String fileIdOrPath) {
       return JCRLocalCloudDrive.this.isNew(fileIdOrPath);
     }
@@ -2819,29 +3212,41 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
    */
   protected static final ThreadLocal<CloudDrive>          actionDrive         = new ThreadLocal<CloudDrive>();
 
-  protected static final Transliterator                   accentsConverter    = Transliterator.getInstance("Latin; NFD; [:Nonspacing Mark:] Remove; NFC;");
+  /** The Constant accentsConverter. */
+  protected static final Transliterator                   accentsConverter    =
+                                                                           Transliterator.getInstance("Latin; NFD; [:Nonspacing Mark:] Remove; NFC;");
 
+  /** The root workspace. */
   protected final String                                  rootWorkspace;
 
+  /** The repository. */
   protected final ManageableRepository                    repository;
 
+  /** The session providers. */
   protected final SessionProviderService                  sessionProviders;
 
+  /** The user. */
   protected final CloudUser                               user;
 
+  /** The root UUID. */
   protected final String                                  rootUUID;
 
+  /** The root node holder. */
   protected final ThreadLocal<SoftReference<Node>>        rootNodeHolder;
 
+  /** The jcr listener. */
   protected final JCRListener                             jcrListener;
 
+  /** The no connect. */
   protected final ConnectCommand                          noConnect           = new NoConnectCommand();
 
   /**
    * Currently active connect command. Used to control concurrency in Cloud Drive.
    */
-  protected final AtomicReference<ConnectCommand>         currentConnect      = new AtomicReference<ConnectCommand>(noConnect);
+  protected final AtomicReference<ConnectCommand>         currentConnect      =
+                                                                         new AtomicReference<ConnectCommand>(noConnect);
 
+  /** The no sync. */
   protected final SyncCommand                             noSync              = new NoSyncCommand();
 
   /**
@@ -2872,7 +3277,8 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
   /**
    * Maintain file trashing requests (move to Trash folder).
    */
-  protected final ConcurrentHashMap<String, FileTrashing> fileTrash           = new ConcurrentHashMap<String, FileTrashing>();
+  protected final ConcurrentHashMap<String, FileTrashing> fileTrash           =
+                                                                    new ConcurrentHashMap<String, FileTrashing>();
 
   /**
    * File changes already committed locally but not yet merged with cloud provider.
@@ -2930,7 +3336,8 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
    * Messages generated by last executed {@link SyncFilesCommand} for next command that will be returned to an
    * user (next sync).
    */
-  protected final Queue<CloudDriveMessage>                syncFilesMessages   = new ConcurrentLinkedQueue<CloudDriveMessage>();
+  protected final Queue<CloudDriveMessage>                syncFilesMessages   =
+                                                                            new ConcurrentLinkedQueue<CloudDriveMessage>();
 
   /**
    * Files updated by last executed {@link SyncFilesCommand} for next command that will be returned to an
@@ -2961,9 +3368,12 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
    * Create JCR backed {@link CloudDrive}. This method used for both newly connecting drives and ones loading
    * from the JCR node. If storage error will happen all pending changes will be rolled back before throwing
    * the exception.
-   * 
+   *
+   * @param user the user
    * @param driveNode {@link Node} - existing node
    * @param sessionProviders {@link SessionProviderService}
+   * @param finder the finder
+   * @param mimeTypes the mime types
    * @throws CloudDriveException if error on cloud provider side happen
    * @throws RepositoryException if storage error happen.
    */
@@ -2971,7 +3381,8 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
                                Node driveNode,
                                SessionProviderService sessionProviders,
                                NodeFinder finder,
-                               ExtendedMimeTypeResolver mimeTypes) throws CloudDriveException, RepositoryException {
+                               ExtendedMimeTypeResolver mimeTypes)
+      throws CloudDriveException, RepositoryException {
 
     this.user = user;
     this.sessionProviders = sessionProviders;
@@ -3064,7 +3475,11 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
   }
 
   /**
-   * @inherritDoc
+   * Gets the local user.
+   *
+   * @return the local user
+   * @throws DriveRemovedException the drive removed exception
+   * @throws RepositoryException the repository exception
    */
   public String getLocalUser() throws DriveRemovedException, RepositoryException {
     return rootNode().getProperty("ecd:localUserName").getString();
@@ -3072,7 +3487,12 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
   }
 
   /**
-   * @inherritDoc
+   * Gets the inits the date.
+   *
+   * @return the inits the date
+   * @throws DriveRemovedException the drive removed exception
+   * @throws RepositoryException the repository exception
+   * 
    */
   public Calendar getInitDate() throws DriveRemovedException, RepositoryException {
     return rootNode().getProperty("ecd:initDate").getDate();
@@ -3084,7 +3504,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
   public String getPath() throws DriveRemovedException, RepositoryException {
     return rootNode().getPath();
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -3093,7 +3513,13 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
   }
 
   /**
-   * @inherritDoc
+   * Gets the connect date.
+   *
+   * @return the connect date
+   * @throws DriveRemovedException the drive removed exception
+   * @throws NotConnectedException the not connected exception
+   * @throws RepositoryException the repository exception
+   * 
    */
   public Calendar getConnectDate() throws DriveRemovedException, NotConnectedException, RepositoryException {
     if (isConnected()) {
@@ -3165,7 +3591,13 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
   }
 
   /**
-   * @inherritDoc
+   * Checks for file.
+   *
+   * @param path the path
+   * @return true, if successful
+   * @throws DriveRemovedException the drive removed exception
+   * @throws RepositoryException the repository exception
+   * 
    */
   @Override
   public boolean hasFile(String path) throws DriveRemovedException, RepositoryException {
@@ -3196,30 +3628,6 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
   @Override
   public List<CloudFile> listFiles() throws DriveRemovedException, CloudDriveException, RepositoryException {
     return listFiles(rootNode());
-  }
-
-  /**
-   * @inherritDoc
-   */
-  @Override
-  @Deprecated
-  public List<CloudFile> listFiles(CloudFile parent) throws DriveRemovedException,
-                                                     NotCloudDriveException,
-                                                     NotCloudFileException,
-                                                     RepositoryException {
-    String parentPath = parent.getPath();
-    Node driveNode = rootNode();
-    if (parentPath.startsWith(driveNode.getPath())) {
-      Item item = driveNode.getSession().getItem(parentPath);
-      if (item.isNode()) {
-        return listFiles((Node) item);
-      } else {
-        throw new NotCloudFileException("Item at path '" + parentPath
-            + "' is Property and cannot be read as Cloud Drive file.");
-      }
-    } else {
-      throw new NotCloudDriveException("File '" + parentPath + "' does not belong to '" + title() + "' Cloud Drive.");
-    }
   }
 
   // ****** CloudDriveStorage ******
@@ -3422,20 +3830,20 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
 
   /**
    * Factory method to create an actual implementation of {@link ConnectCommand} command.
-   * 
-   * @throws DriveRemovedException
-   * @throws RepositoryException
+   *
    * @return {@link ConnectCommand} instance
+   * @throws DriveRemovedException the drive removed exception
+   * @throws RepositoryException the repository exception
    */
   protected abstract ConnectCommand getConnectCommand() throws DriveRemovedException, RepositoryException;
 
   /**
    * Factory method to create an instance of {@link SyncCommand} command.
-   * 
-   * @throws DriveRemovedException
-   * @throws SyncNotSupportedException
-   * @throws RepositoryException
+   *
    * @return {@link SyncCommand} instance
+   * @throws DriveRemovedException the drive removed exception
+   * @throws SyncNotSupportedException the sync not supported exception
+   * @throws RepositoryException the repository exception
    */
   protected abstract SyncCommand getSyncCommand() throws DriveRemovedException,
                                                   SyncNotSupportedException,
@@ -3443,12 +3851,11 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
 
   /**
    * Factory method to create a instance of {@link CloudFileAPI} supporting exact cloud provider.
-   * 
-   * @param node {@link Node} to move
-   * @throws DriveRemovedException
-   * @throws SyncNotSupportedException
-   * @throws RepositoryException
+   *
    * @return {@link CloudFileAPI} instance
+   * @throws DriveRemovedException the drive removed exception
+   * @throws SyncNotSupportedException the sync not supported exception
+   * @throws RepositoryException the repository exception
    */
   protected abstract CloudFileAPI createFileAPI() throws DriveRemovedException,
                                                   SyncNotSupportedException,
@@ -3458,10 +3865,10 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
 
   /**
    * Internal initialization of newly connecting drive node.
-   * 
+   *
    * @param rootNode a {@link Node} to initialize
-   * @throws CloudDriveException
-   * @throws RepositoryException
+   * @throws CloudDriveException the cloud drive exception
+   * @throws RepositoryException the repository exception
    */
   protected void initDrive(Node rootNode) throws CloudDriveException, RepositoryException {
     rootNode.addMixin(ECD_CLOUDDRIVE);
@@ -3487,6 +3894,13 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
     rootNode.setProperty(ECD_LOCALFORMAT, CURRENT_LOCALFORMAT);
   }
 
+  /**
+   * List files.
+   *
+   * @param parentNode the parent node
+   * @return the list
+   * @throws RepositoryException the repository exception
+   */
   protected List<CloudFile> listFiles(Node parentNode) throws RepositoryException {
     List<CloudFile> files = new ArrayList<CloudFile>();
     NodeIterator fileNodes = parentNode.getNodes();
@@ -3506,10 +3920,10 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
   /**
    * Disconnect drive connected to given node. This method doesn't check if the node represents the drive root
    * node. This method also doesn't fire onDisconnect event to drive listeners.
-   * 
+   *
    * @param driveNode {@link Node}
-   * @throws CloudDriveException
-   * @throws RepositoryException
+   * @throws CloudDriveException the cloud drive exception
+   * @throws RepositoryException the repository exception
    */
   private synchronized void disconnect(Node driveNode) throws CloudDriveException, RepositoryException {
     try {
@@ -3636,11 +4050,11 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
    * Init cloud file removal as planned. Initialized file will be later used by the drive listener when
    * removal will be saved in JCR. This method created for use from JCR pre-remove action. If node isn't a
    * cloud file or already ignored, this method will ignore it (has no effect).
-   * 
+   *
    * @param node {@link Node} a node representing a file in the drive.
-   * @throws SyncNotSupportedException
-   * @throws CloudDriveException
-   * @throws RepositoryException
+   * @throws SyncNotSupportedException the sync not supported exception
+   * @throws CloudDriveException the cloud drive exception
+   * @throws RepositoryException the repository exception
    */
   protected void initRemove(Node node) throws SyncNotSupportedException, CloudDriveException, RepositoryException {
     // Note: this method also can be invoked via RemoveCloudFileAction on file trashing in Trash service of
@@ -3681,6 +4095,15 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
     fileCopies.put(fileId, filePath);
   }
 
+  /**
+   * Synchronizer.
+   *
+   * @param file the file
+   * @return the cloud file synchronizer
+   * @throws RepositoryException the repository exception
+   * @throws SkipSyncException the skip sync exception
+   * @throws SyncNotSupportedException the sync not supported exception
+   */
   CloudFileSynchronizer synchronizer(Node file) throws RepositoryException, SkipSyncException, SyncNotSupportedException {
     for (CloudFileSynchronizer s : fileSynchronizers) {
       if (s.accept(file)) {
@@ -3691,6 +4114,15 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
         + " in node " + file.getPath());
   }
 
+  /**
+   * Synchronizer.
+   *
+   * @param clazz the clazz
+   * @return the cloud file synchronizer
+   * @throws RepositoryException the repository exception
+   * @throws SkipSyncException the skip sync exception
+   * @throws SyncNotSupportedException the sync not supported exception
+   */
   CloudFileSynchronizer synchronizer(Class<?> clazz) throws RepositoryException,
                                                      SkipSyncException,
                                                      SyncNotSupportedException {
@@ -3707,6 +4139,14 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
     throw new SyncNotSupportedException("Synchronizer cannot be found " + clazz.getName());
   }
 
+  /**
+   * Adds the changed.
+   *
+   * @param fileId the file id
+   * @param changeType the change type
+   * @throws RepositoryException the repository exception
+   * @throws CloudDriveException the cloud drive exception
+   */
   private void addChanged(String fileId, String changeType) throws RepositoryException, CloudDriveException {
     Set<String> changes = fileHistory.get(fileId);
     if (changes == null) {
@@ -3719,6 +4159,15 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
     changes.add(changeType + getChangeId());
   }
 
+  /**
+   * Checks for changed.
+   *
+   * @param fileId the file id
+   * @param changeTypes the change types
+   * @return true, if successful
+   * @throws RepositoryException the repository exception
+   * @throws CloudDriveException the cloud drive exception
+   */
   private boolean hasChanged(String fileId, String... changeTypes) throws RepositoryException, CloudDriveException {
     Set<String> changes = fileHistory.get(fileId);
     if (changes != null) {
@@ -3732,14 +4181,38 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
     return false;
   }
 
+  /**
+   * Checks for updated.
+   *
+   * @param fileId the file id
+   * @return true, if successful
+   * @throws RepositoryException the repository exception
+   * @throws CloudDriveException the cloud drive exception
+   */
   protected boolean hasUpdated(String fileId) throws RepositoryException, CloudDriveException {
     return hasChanged(fileId, FileChange.UPDATE, FileChange.CREATE);
   }
 
+  /**
+   * Checks for removed.
+   *
+   * @param fileId the file id
+   * @return true, if successful
+   * @throws RepositoryException the repository exception
+   * @throws CloudDriveException the cloud drive exception
+   */
   protected boolean hasRemoved(String fileId) throws RepositoryException, CloudDriveException {
     return hasChanged(fileId, FileChange.REMOVE);
   }
 
+  /**
+   * Clean changed.
+   *
+   * @param fileId the file id
+   * @param changeTypes the change types
+   * @throws RepositoryException the repository exception
+   * @throws CloudDriveException the cloud drive exception
+   */
   private void cleanChanged(String fileId, String... changeTypes) throws RepositoryException, CloudDriveException {
     // FYI this only removes in runtime history, but drive's ecd:localHistory property will contain
     // such changes - they'll be removed only when expired by next call of commitChanges() method.
@@ -3759,14 +4232,35 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
     }
   }
 
+  /**
+   * Clean updated.
+   *
+   * @param fileId the file id
+   * @throws RepositoryException the repository exception
+   * @throws CloudDriveException the cloud drive exception
+   */
   protected void cleanUpdated(String fileId) throws RepositoryException, CloudDriveException {
     cleanChanged(fileId, FileChange.UPDATE, FileChange.CREATE);
   }
 
+  /**
+   * Clean removed.
+   *
+   * @param fileId the file id
+   * @throws RepositoryException the repository exception
+   * @throws CloudDriveException the cloud drive exception
+   */
   protected void cleanRemoved(String fileId) throws RepositoryException, CloudDriveException {
     cleanChanged(fileId, FileChange.REMOVE);
   }
 
+  /**
+   * Next change id.
+   *
+   * @return the string
+   * @throws RepositoryException the repository exception
+   * @throws CloudDriveException the cloud drive exception
+   */
   protected String nextChangeId() throws RepositoryException, CloudDriveException {
     Long driveChangeId = getChangeId();
     return driveChangeId.toString() + '-' + fileChangeSequencer.getAndIncrement();
@@ -3774,10 +4268,10 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
 
   /**
    * Save given file changes to the drive store of not yet applied local changes.
-   * 
+   *
    * @param changes {@link List} of {@link FileChange}
-   * @throws RepositoryException
-   * @throws CloudDriveException
+   * @throws RepositoryException the repository exception
+   * @throws CloudDriveException the cloud drive exception
    */
   protected synchronized void saveChanges(List<FileChange> changes) throws RepositoryException, CloudDriveException {
     // <CID>=<T><F><PATH_LEN><PATH><I<ID>><S<SYNC_CLASS>>\n...
@@ -3824,14 +4318,14 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
   /**
    * Commit given changes to the drive local history but omit skipped. These changes also will be removed from
    * the local changes (from previously saved and not yet applied).
-   * 
+   *
    * @param changes {@link Collection} of {@link FileChange} changes to move from changes store to the history
    * @param skipped {@link Collection} of {@link FileChange} changes that should be removed from changes store
    *          but not added to the history
-   * @throws RepositoryException
-   * @throws CloudDriveException
+   * @throws RepositoryException the repository exception
+   * @throws CloudDriveException the cloud drive exception
    * @see #saveChanges(List)
-   * @see #rollbackChanges(List)
+   * @see #rollbackAllChanges()
    */
   protected synchronized void commitChanges(Collection<FileChange> changes,
                                             Collection<FileChange> skipped) throws RepositoryException, CloudDriveException {
@@ -3926,13 +4420,12 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
    * are not actual anymore, e.g. in case when we do a full sync with remote side.
    * Such changes can be a result of failed {@link SyncFilesCommand} and rollback caused by a
    * {@link SyncCommand}.
-   * 
-   * @throws RepositoryException
-   * @throws CloudDriveException
-   * 
+   *
+   * @throws RepositoryException the repository exception
+   * @throws CloudDriveException the cloud drive exception
    * @see #saveChanges(List)
-   * @see #commitChanges(List)
-   * @see #rollbackChanges(List)
+   * @see #commitChanges(Collection, Collection)
+   * @see #rollbackAllChanges()
    */
   protected synchronized void rollbackAllChanges() throws RepositoryException, CloudDriveException {
     Node driveNode = rootNode();
@@ -3947,10 +4440,10 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
 
   /**
    * Return saved but not yet applied local changes in this drive.
-   * 
+   *
    * @return {@link List} of {@link FileChange}
-   * @throws RepositoryException
-   * @throws CloudDriveException
+   * @throws RepositoryException the repository exception
+   * @throws CloudDriveException the cloud drive exception
    */
   protected List<FileChange> savedChanges() throws RepositoryException, CloudDriveException {
     // TODO read and return only those changes that aren't currently processing by current SyncFilesCommand(s)
@@ -3975,12 +4468,12 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
 
   /**
    * Check if given change is a stored local change in the drive (not yet applied remotely).
-   * 
-   * @param {@link List} of {@link FileChange}
+   *
+   * @param change the change
    * @return <code>true</code> if given change stored locally (not yet applied remotely), <code>false</code>
    *         otherwise
-   * @throws RepositoryException
-   * @throws CloudDriveException
+   * @throws RepositoryException the repository exception
+   * @throws CloudDriveException the cloud drive exception
    */
   protected boolean hasChange(FileChange change) throws RepositoryException, CloudDriveException {
     // <CID>=<T><F><PATH_LEN><PATH><I<ID>><S<SYNC_CLASS>>\n...
@@ -4000,9 +4493,9 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
 
   /**
    * Load committed history of the drive to runtime cache.
-   * 
-   * @throws RepositoryException
-   * @throws CloudDriveException
+   *
+   * @throws RepositoryException the repository exception
+   * @throws CloudDriveException the cloud drive exception
    */
   protected void loadHistory() throws RepositoryException, CloudDriveException {
     Node driveNode = rootNode();
@@ -4022,6 +4515,14 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
     }
   }
 
+  /**
+   * Parses the change.
+   *
+   * @param ch the ch
+   * @return the file change
+   * @throws CloudDriveException the cloud drive exception
+   * @throws RepositoryException the repository exception
+   */
   private FileChange parseChange(String ch) throws CloudDriveException, RepositoryException {
     // <CID>=<T><F><PATH_LEN><PATH><I<ID>><S<SYNC_CLASS>>\n...
     // where I<ID> and S<SYNC_CLASS> can be empty
@@ -4073,6 +4574,13 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
     return new FileChange(changeId, path, fileId, isFolder, changeType, syncClass != null ? synchronizer(syncClass) : null);
   }
 
+  /**
+   * Load changed.
+   *
+   * @param ch the ch
+   * @throws CloudDriveException the cloud drive exception
+   * @throws RepositoryException the repository exception
+   */
   private void loadChanged(String ch) throws CloudDriveException, RepositoryException {
     int cindex = ch.indexOf('=');
 
@@ -4111,6 +4619,13 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
     }
   }
 
+  /**
+   * Sets the change id.
+   *
+   * @param id the new change id
+   * @throws CloudDriveException the cloud drive exception
+   * @throws RepositoryException the repository exception
+   */
   protected void setChangeId(Long id) throws CloudDriveException, RepositoryException {
     // FIXME indeed, it was possible to get interrupted thread for Box connector,
     // as result, drive change Id wasn't properly set and further work blocked.
@@ -4123,6 +4638,13 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
     fileChangeSequencer.addAndGet(1 - fileChangeSequencer.get()); // reset sequencer
   }
 
+  /**
+   * Gets the change id.
+   *
+   * @return the change id
+   * @throws RepositoryException the repository exception
+   * @throws CloudDriveException the cloud drive exception
+   */
   protected Long getChangeId() throws RepositoryException, CloudDriveException {
     Long id = currentChangeId.get();
     if (id < 0) {
@@ -4168,6 +4690,13 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
     return false;
   }
 
+  /**
+   * Checks if is same drive.
+   *
+   * @param anotherNode the another node
+   * @return true, if is same drive
+   * @throws RepositoryException the repository exception
+   */
   protected boolean isSameDrive(Node anotherNode) throws RepositoryException {
     if (anotherNode.isNodeType(ECD_CLOUDDRIVE)) {
       // we cannot compare ecd:id here as they can be equal for some providers (e.g. Box)
@@ -4178,10 +4707,10 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
 
   /**
    * Return {@link Node} instance representing some cloud file, i.e. if given Node is of acceptable type.
-   * 
+   *
    * @param node {@link Node}
    * @return {@link Node}
-   * @throws RepositoryException
+   * @throws RepositoryException the repository exception
    */
   protected Node fileNode(Node node) throws RepositoryException {
     Node fileNode = getOrCleanFileNode(node);
@@ -4197,6 +4726,14 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
     }
   }
 
+  /**
+   * System session.
+   *
+   * @return the session
+   * @throws LoginException the login exception
+   * @throws NoSuchWorkspaceException the no such workspace exception
+   * @throws RepositoryException the repository exception
+   */
   protected Session systemSession() throws LoginException, NoSuchWorkspaceException, RepositoryException {
     SessionProvider ssp = sessionProviders.getSystemSessionProvider(null);
     if (ssp != null) {
@@ -4205,6 +4742,14 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
     throw new RepositoryException("Cannot get system session provider.");
   }
 
+  /**
+   * Session.
+   *
+   * @return the session
+   * @throws LoginException the login exception
+   * @throws NoSuchWorkspaceException the no such workspace exception
+   * @throws RepositoryException the repository exception
+   */
   protected Session session() throws LoginException, NoSuchWorkspaceException, RepositoryException {
     SessionProvider sp = sessionProviders.getSessionProvider(null);
     if (sp != null) {
@@ -4215,9 +4760,10 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
 
   /**
    * Drive's storage root node opened in user session.
-   * 
+   *
    * @return {@link Node}
-   * @throws RepositoryException
+   * @throws DriveRemovedException the drive removed exception
+   * @throws RepositoryException the repository exception
    */
   protected Node rootNode() throws DriveRemovedException, RepositoryException {
     return rootNode(false);
@@ -4225,11 +4771,12 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
 
   /**
    * Drive's storage root node opened in JCR session.
-   * 
+   *
    * @param systemSession {@link Boolean} if <code>true</code> then root node will be open in system session,
    *          <code>false</code> - in current user session.
    * @return {@link Node}
-   * @throws RepositoryException
+   * @throws DriveRemovedException the drive removed exception
+   * @throws RepositoryException the repository exception
    */
   protected Node rootNode(boolean systemSession) throws DriveRemovedException, RepositoryException {
     SoftReference<Node> rootNodeRef = rootNodeHolder.get();
@@ -4269,6 +4816,8 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
 
   /**
    * Rollback all changes made to JCR node storage of the drive. Used in public API methods.
+   *
+   * @param rootNode the root node
    */
   protected void rollback(Node rootNode) {
     try {
@@ -4319,6 +4868,17 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
     }
   }
 
+  /**
+   * Open node.
+   *
+   * @param fileId the file id
+   * @param fileTitle the file title
+   * @param parent the parent
+   * @param nodeType the node type
+   * @return the node
+   * @throws RepositoryException the repository exception
+   * @throws CloudDriveException the cloud drive exception
+   */
   private Node openNode(String fileId, String fileTitle, Node parent, String nodeType) throws RepositoryException,
                                                                                        CloudDriveException {
     Node node;
@@ -4396,18 +4956,27 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
   }
 
   /**
-   * Next nasty thing here: ensure the node is owned by the drive user, it MUST!
-   * 
+   * Next nasty thing here: ensure the node is owned by the drive user, it MUST!.
+   *
    * @param node {@link Node}
    * @return {@link Node} fixed node (same as in the given in the parameter)
-   * @throws RepositoryException
-   * @throws PathNotFoundException
+   * @throws RepositoryException the repository exception
    */
   private Node ensureOwned(Node node) throws RepositoryException {
     // FIXME try avoid do this, or at least do this in single place (JCR listener?)
     return IdentityHelper.ensureOwned(node, systemSession());
   }
 
+  /**
+   * Open file.
+   *
+   * @param fileId the file id
+   * @param fileTitle the file title
+   * @param parent the parent
+   * @return the node
+   * @throws RepositoryException the repository exception
+   * @throws CloudDriveException the cloud drive exception
+   */
   protected Node openFile(String fileId, String fileTitle, Node parent) throws RepositoryException, CloudDriveException {
     Node localNode = openNode(fileId, fileTitle, parent, NT_FILE);
 
@@ -4420,6 +4989,16 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
     return localNode;
   }
 
+  /**
+   * Open folder.
+   *
+   * @param folderId the folder id
+   * @param folderTitle the folder title
+   * @param parent the parent
+   * @return the node
+   * @throws RepositoryException the repository exception
+   * @throws CloudDriveException the cloud drive exception
+   */
   protected Node openFolder(String folderId, String folderTitle, Node parent) throws RepositoryException,
                                                                               CloudDriveException {
     return openNode(folderId, folderTitle, parent, NT_FOLDER);
@@ -4428,14 +5007,14 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
   /**
    * Move file with its subtree in scope of existing JCR session. If a node already exists at destination and
    * its id and title the same as given, then move will not be performed and existing node will be returned.
-   * 
+   *
    * @param id {@link String} a file id of the Node
    * @param title {@link String} a new name of the Node
    * @param source {@link Node}
    * @param destParent {@link Node} a new parent
    * @return a {@link Node} from the destination
-   * @throws RepositoryException
-   * @throws CloudDriveException
+   * @throws RepositoryException the repository exception
+   * @throws CloudDriveException the cloud drive exception
    */
   protected Node moveFile(String id, String title, Node source, Node destParent) throws RepositoryException,
                                                                                  CloudDriveException {
@@ -4457,11 +5036,11 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
 
   /**
    * Copy node with its subtree in scope of existing JCR session.
-   * 
+   *
    * @param node {@link Node}
    * @param destParent {@link Node}
    * @return a {@link Node} from the destination
-   * @throws RepositoryException
+   * @throws RepositoryException the repository exception
    */
   protected Node copyNode(Node node, Node destParent) throws RepositoryException {
     // copy Node
@@ -4501,14 +5080,12 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
    * Read local nodes from the drive folder to a map by file Id. It's possible that for a single Id we have
    * several files (in different parents usually). This can be possible when Cloud Drive provider supports
    * linking or tagging/labeling where tag/label is a folder (e.g. Google Drive).
-   * 
+   *
    * @param parent {@link Node}
    * @param nodes {@link Map} of {@link List} objects to fill with the parent's child nodes
    * @param deep boolean, if <code>true</code> read nodes recursive, <code>false</code> read only direct
    *          child nodes.
    * @throws RepositoryException if JCR error happen
-   * @throws CloudDriveException
-   * @throws SkipSyncException
    */
   protected void readNodes(Node parent, Map<String, List<Node>> nodes, boolean deep) throws RepositoryException {
     for (NodeIterator niter = parent.getNodes(); niter.hasNext();) {
@@ -4532,12 +5109,13 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
    * Read cloud file node from the given parent using the file title and its id. Algorithm of this method is
    * the same as in {@link #openNode(String, String, Node, String)} but this method doesn't create a node if
    * it doesn't exist.
-   * 
+   *
    * @param parent {@link Node} parent
    * @param fileTitle {@link String}
    * @param fileId {@link String}
    * @return {@link Node}
-   * @throws RepositoryException
+   * @throws RepositoryException the repository exception
+   * @throws CloudDriveException the cloud drive exception
    */
   protected Node readNode(Node parent, String fileTitle, String fileId) throws RepositoryException, CloudDriveException {
     Node node;
@@ -4587,11 +5165,11 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
   /**
    * Find local node using JCR SQL query by file id. Note, it will search only persisted nodes - not saved
    * files cannot be found in JCR.
-   * 
+   *
    * @param id {@link String}
    * @return {@link Node}
-   * @throws RepositoryException
-   * @throws DriveRemovedException
+   * @throws RepositoryException the repository exception
+   * @throws DriveRemovedException the drive removed exception
    */
   protected Node findNode(String id) throws RepositoryException, DriveRemovedException {
 
@@ -4615,11 +5193,11 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
    * Find local nodes using JCR SQL query by array of file ids. Note, it will search only persisted nodes -
    * not saved
    * files cannot be found in JCR.
-   * 
+   *
    * @param ids {@link Collection} of {@link String}
    * @return {@link Collection} of nodes
-   * @throws RepositoryException
-   * @throws DriveRemovedException
+   * @throws RepositoryException the repository exception
+   * @throws DriveRemovedException the drive removed exception
    */
   protected Collection<Node> findNodes(Collection<String> ids) throws RepositoryException, DriveRemovedException {
 
@@ -4654,6 +5232,13 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
     return res;
   }
 
+  /**
+   * Read file.
+   *
+   * @param fileNode the file node
+   * @return the JCR local cloud file
+   * @throws RepositoryException the repository exception
+   */
   protected JCRLocalCloudFile readFile(Node fileNode) throws RepositoryException {
     String title = fileAPI.getTitle(fileNode);
     boolean isFolder = fileNode.isNodeType(ECD_CLOUDFOLDER);
@@ -4686,19 +5271,20 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
 
   /**
    * Init or update Cloud File structure on local JCR node.
-   * 
+   *
    * @param fileNode {@link Node}
-   * @param title
-   * @param id
-   * @param type
-   * @param link
-   * @param previewLink, optional, can be null
-   * @param thumbnailLink, optional, can be null
-   * @param author
-   * @param lastUser
-   * @param created
-   * @param modified
-   * @throws RepositoryException
+   * @param title the title
+   * @param id the id
+   * @param type the type
+   * @param link the link
+   * @param previewLink the preview link
+   * @param thumbnailLink the thumbnail link
+   * @param author the author
+   * @param lastUser the last user
+   * @param created the created
+   * @param modified the modified
+   * @param size the size
+   * @throws RepositoryException the repository exception
    */
   protected void initFile(Node fileNode,
                           String title,
@@ -4745,10 +5331,17 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
 
   /**
    * Init or update Cloud Folder structure on local JCR node.
-   * 
-   * @param cfolder {@link CloudFile}
+   *
    * @param localNode {@link Node}
-   * @throws RepositoryException
+   * @param id the id
+   * @param title the title
+   * @param type the type
+   * @param link the link
+   * @param author the author
+   * @param lastUser the last user
+   * @param created the created
+   * @param modified the modified
+   * @throws RepositoryException the repository exception
    */
   protected void initFolder(Node localNode,
                             String id,
@@ -4770,10 +5363,17 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
   /**
    * Init or update Cloud File or Folder properties on local JCR node. This method assumes all mixins are set
    * on the local node.
-   * 
-   * @param cfile {@link CloudFile}
+   *
    * @param node {@link Node}
-   * @throws RepositoryException
+   * @param id the id
+   * @param title the title
+   * @param type the type
+   * @param link the link
+   * @param author the author
+   * @param lastUser the last user
+   * @param created the created
+   * @param modified the modified
+   * @throws RepositoryException the repository exception
    */
   protected void initCommon(Node node,
                             String id,
@@ -4833,10 +5433,10 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
 
   /**
    * Add Observation listener to removal from parent and addition to the Trash.
-   * 
+   *
    * @param driveNode {@link Node}
-   * @throws RepositoryException
    * @return NodeRemoveHandler
+   * @throws RepositoryException the repository exception
    */
   protected JCRListener addJCRListener(Node driveNode) throws RepositoryException {
     JCRListener handler = new JCRListener(driveNode.getPath());
@@ -4874,9 +5474,9 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
 
   /**
    * Remove Observation listeners for this cloud drive.
-   * 
+   *
    * @param session {@link Session}
-   * @throws RepositoryException
+   * @throws RepositoryException the repository exception
    */
   protected void removeJCRListener(Session session) throws RepositoryException {
     ObservationManager observation = session.getWorkspace().getObservationManager();
@@ -4897,7 +5497,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
   /**
    * Do nasty thing: remove predefined node (nodetypes) from the drive. This method doesn't check if node
    * belongs to the drive (it assumes it does). The method also doesn't check if the node ignored (it assumes
-   * it doesn't).<br/>
+   * it doesn't).<br>
    * This method doesn't throw any exception: operation will be performed in system session and saved
    * immediately. In case of a problem it will be logged to system log.
    * 
@@ -4948,6 +5548,12 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
     return null;
   }
 
+  /**
+   * Fix name conflict.
+   *
+   * @param file the file
+   * @throws RepositoryException the repository exception
+   */
   private void fixNameConflict(Node file) throws RepositoryException {
     Session session = file.getSession();
     Node parent = file.getParent();
@@ -4997,10 +5603,10 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
    * Return provider specific link for a file preview. By default this method will try read value of
    * <code>ecd:previewUrl</code> property and if not such property exists <code>null</code> will be returned.
    * Actual connector implementation may override this logic.
-   * 
+   *
    * @param fileNode {@link String} cloud file node
    * @return String with a link should be used for file preview.
-   * @throws RepositoryException
+   * @throws RepositoryException the repository exception
    */
   protected String previewLink(Node fileNode) throws RepositoryException {
     try {
@@ -5015,10 +5621,10 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
    * <code>ecd:thumbnailUrl</code> property and if not such property exists <code>null</code> will be
    * returned.
    * Actual connector implementation may override this logic.
-   * 
+   *
    * @param fileNode {@link String} cloud file node
    * @return String with a link should be used for file thumbnail.
-   * @throws RepositoryException
+   * @throws RepositoryException the repository exception
    */
   protected String thumbnailLink(Node fileNode) throws RepositoryException {
     String link;
@@ -5040,11 +5646,12 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
    * value of <code>ecd:url</code> property and if not such property exists {@link PathNotFoundException} will
    * be thrown.
    * Actual connector implementation may override its logic.
-   * 
+   *
    * @param fileNode {@link String} existing link to a cloud file or <code>null</code> if editing not
    *          supported
    * @return String with a link should be used for file editing.
-   * @throws RepositoryException
+   * @throws PathNotFoundException the path not found exception
+   * @throws RepositoryException the repository exception
    */
   protected String link(Node fileNode) throws PathNotFoundException, RepositoryException {
     return fileNode.getProperty("ecd:url").getString();
@@ -5053,11 +5660,11 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
   /**
    * Read edit link for a cloud file denoted by given node. By default edit link is <code>null</code> -
    * editing not supported.
-   * 
+   *
    * @param fileLink {@link String} file link, can be used to build edit link by the connector implementation
    * @param fileNode {@link Node}
    * @return {@link String} an URL to edit cloud file or <code>null</code> if editing not supported
-   * @throws RepositoryException
+   * @throws RepositoryException the repository exception
    */
   protected String editLink(String fileLink, Node fileNode) throws RepositoryException {
     return null;
@@ -5065,10 +5672,10 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
 
   /**
    * Read cloud file size from given node. If size not available then -1 will be returned.
-   * 
+   *
    * @param fileNode {@link Node}
    * @return {@link Long} file size in bytes or -1 if size not available
-   * @throws RepositoryException
+   * @throws RepositoryException the repository exception
    */
   protected long size(Node fileNode) throws RepositoryException {
     try {
@@ -5078,6 +5685,12 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
     }
   }
 
+  /**
+   * Checks if is updating.
+   *
+   * @param key the key
+   * @return true, if is updating
+   */
   protected boolean isUpdating(String key) {
     AtomicLong counter = updating.get(key);
     if (counter != null) {
@@ -5086,6 +5699,12 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
     return false;
   }
 
+  /**
+   * Checks if is new.
+   *
+   * @param key the key
+   * @return true, if is new
+   */
   protected boolean isNew(String key) {
     AtomicLong counter = updating.get(key);
     if (counter != null) {
@@ -5094,6 +5713,12 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
     return false;
   }
 
+  /**
+   * Checks if is new or updating.
+   *
+   * @param key the key
+   * @return true, if is new or updating
+   */
   protected boolean isNewOrUpdating(String key) {
     AtomicLong counter = updating.get(key);
     if (counter != null) {
@@ -5102,6 +5727,12 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
     return false;
   }
 
+  /**
+   * Inits the updating.
+   *
+   * @param key the key
+   * @return true, if successful
+   */
   protected boolean initUpdating(String key) {
     AtomicLong existingCounter = updating.putIfAbsent(key, new AtomicLong(0));
     boolean res;
@@ -5116,6 +5747,12 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
     return res;
   }
 
+  /**
+   * Adds the updating.
+   *
+   * @param key the key
+   * @return the long
+   */
   protected long addUpdating(String key) {
     AtomicLong newCounter;
     AtomicLong existingCounter = updating.putIfAbsent(key, newCounter = new AtomicLong(1));
@@ -5131,6 +5768,12 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
     return counter;
   }
 
+  /**
+   * Removes the updating.
+   *
+   * @param key the key
+   * @return true, if successful
+   */
   protected boolean removeUpdating(String key) {
     AtomicLong counter = updating.get(key);
     boolean res = false;
@@ -5149,11 +5792,11 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
   /**
    * Check if given drive node is belong to this user already. This method assumes that given node already of
    * cloud drive nodetype (ecd:cloudDrive).
-   * 
+   *
    * @param user {@link String}
    * @param driveNode {@link Node}
-   * @throws RepositoryException
-   * @throws CannotConnectDriveException
+   * @throws RepositoryException the repository exception
+   * @throws CannotConnectDriveException the cannot connect drive exception
    */
   protected void ensureSame(CloudUser user, Node driveNode) throws RepositoryException, CannotConnectDriveException {
     try {
@@ -5200,6 +5843,12 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
     return false;
   }
 
+  /**
+   * Checks if is in trash.
+   *
+   * @param node the node
+   * @return true, if is in trash
+   */
   protected boolean isInTrash(Node node) {
     try {
       String nodePath = node.getPath();
@@ -5223,7 +5872,8 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
    * Construct a cloud file node name from a file title. This method should be used everywhere for cloud nodes
    * creation or modification and reading.<br>
    * Connector implementation may override this logic when required (e.g. for path based file IDs).
-   * 
+   *
+   * @param title the title
    * @return String with cloud file node name
    */
   protected String nodeName(String title) {
@@ -5235,20 +5885,20 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
   /**
    * Read id of the latest cloud change applied to this drive. The id will be read from the drive store, that
    * is provider specific.
-   * 
+   *
    * @return {@link Long}
-   * @throws DriveRemovedException
-   * @throws RepositoryException
+   * @throws CloudDriveException the cloud drive exception
+   * @throws RepositoryException the repository exception
    */
   protected abstract Long readChangeId() throws CloudDriveException, RepositoryException;
 
   /**
    * Save last cloud change applied to this drive. The id will be written to the drive store, that is provider
    * specific.
-   * 
+   *
    * @param id {@link Long}
-   * @throws DriveRemovedException
-   * @throws RepositoryException
+   * @throws CloudDriveException the cloud drive exception
+   * @throws RepositoryException the repository exception
    */
   protected abstract void saveChangeId(Long id) throws CloudDriveException, RepositoryException;
 
@@ -5256,8 +5906,8 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
 
   /**
    * Make JCR compatible item name.
-   * 
-   * @param String str
+   *
+   * @param name the name
    * @return String - JCR compatible name of local file
    */
   public static String cleanName(String name) {
@@ -5315,9 +5965,9 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
 
   /**
    * Check if given node isn't a node in eXo Trash folder and throw {@link DriveRemovedException} if it is.
-   * 
+   *
    * @param node {@link Node}
-   * @throws RepositoryException
+   * @throws RepositoryException the repository exception
    * @throws DriveRemovedException if given node in the eXo Trash.
    */
   public static void checkNotTrashed(Node node) throws RepositoryException, DriveRemovedException {
@@ -5330,9 +5980,9 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
    * Migrate Cloud Drive root node naming from title based (PROVIDER_NAME - user@email) to transliterated
    * title (for ECMS compatibility). Note that node will be saved during the migration: all transient changes
    * will be saved as well. If given node not a root of cloud drive this method will do nothing.
-   * 
+   *
    * @param node {@link Node}
-   * @throws RepositoryException
+   * @throws RepositoryException the repository exception
    */
   public static void migrateName(Node node) throws RepositoryException {
     if (node.isNodeType(ECD_CLOUDDRIVE)) {

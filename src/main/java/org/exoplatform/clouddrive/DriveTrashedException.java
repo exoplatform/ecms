@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003-2014 eXo Platform SAS.
+ * Copyright (C) 2003-2016 eXo Platform SAS.
  *
  * This is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as
@@ -29,13 +29,13 @@ package org.exoplatform.clouddrive;
  */
 public class DriveTrashedException extends DriveRemovedException {
 
-  /**
-   * 
-   */
+  /** The Constant serialVersionUID. */
   private static final long serialVersionUID = -7279598373473446709L;
 
   /**
-   * @param message
+   * Instantiates a new drive trashed exception.
+   *
+   * @param message the message
    */
   public DriveTrashedException(String message) {
     super(message);

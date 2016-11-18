@@ -1,18 +1,20 @@
 /*
- * Copyright (C) 2003-2013 eXo Platform SAS.
+ * Copyright (C) 2003-2016 eXo Platform SAS.
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * This is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation; either version 2.1 of
+ * the License, or (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful,
+ * This software is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Affero General Public License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the GNU Affero General Public License
- * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this software; if not, write to the Free
+ * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+ * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
 package org.exoplatform.clouddrive.rest;
 
@@ -33,36 +35,57 @@ import javax.jcr.Node;
  */
 public class LinkedCloudFile implements CloudFile {
 
+  /** The id. */
   private final String             id;
 
+  /** The title. */
   private final String             title;
 
+  /** The link. */
   private final String             link;
 
+  /** The edit link. */
   private final String             editLink;
 
+  /** The preview link. */
   private final String             previewLink;
 
+  /** The thumbnail link. */
   private final String             thumbnailLink;
 
+  /** The type mode. */
   private final String             type, typeMode;
 
+  /** The last user. */
   private final String             lastUser;
 
+  /** The author. */
   private final String             author;
 
+  /** The size. */
   private final long               size;
 
+  /** The created date. */
   private final transient Calendar createdDate;
 
+  /** The modified date. */
   private final transient Calendar modifiedDate;
 
+  /** The folder. */
   private final boolean            folder;
 
+  /** The path. */
   private final String             path;
 
+  /** The is symlink. */
   private final boolean            isSymlink;
 
+  /**
+   * Instantiates a new linked cloud file.
+   *
+   * @param file the file
+   * @param path the path
+   */
   public LinkedCloudFile(CloudFile file, String path) {
     this.id = file.getId();
     this.title = file.getTitle();

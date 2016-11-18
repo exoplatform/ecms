@@ -1,18 +1,20 @@
 /*
- * Copyright (C) 2003-2012 eXo Platform SAS.
+ * Copyright (C) 2003-2016 eXo Platform SAS.
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * This is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation; either version 2.1 of
+ * the License, or (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful,
+ * This software is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Affero General Public License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the GNU Affero General Public License
- * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this software; if not, write to the Free
+ * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+ * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
 package org.exoplatform.clouddrive;
 
@@ -60,9 +62,16 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
   /**
    * Listener for disconnects and removals of local drives made not via {@link CloudDriveService} (i.e. by
    * move the drive's node to Trash and following removal from the JCR).
+   *
+   * @see LocalDrivesEvent
    */
   class LocalDrivesListener extends BaseCloudDriveListener {
 
+    /**
+     * Clean user caches.
+     *
+     * @param user the user
+     */
     void cleanUserCaches(CloudUser user) {
       Map<CloudUser, CloudDrive> drives = userDrives.get(user);
       if (drives != null) {
@@ -87,6 +96,11 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
     }
 
     /**
+     * On error.
+     *
+     * @param event the event
+     * @param error the error
+     * @param operationName the operation name
      * @inherritDoc
      */
     @Override
@@ -95,10 +109,13 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
     }
   }
 
+  /** The Constant LOG. */
   protected static final Log                                 LOG               = ExoLogger.getLogger(CloudDriveService.class);
 
+  /** The jcr service. */
   protected final RepositoryService                          jcrService;
 
+  /** The session providers. */
   protected final SessionProviderService                     sessionProviders;
 
   /**
@@ -119,8 +136,10 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
    */
   protected final Map<CloudUser, Map<CloudUser, CloudDrive>> userDrives        = new ConcurrentHashMap<CloudUser, Map<CloudUser, CloudDrive>>();
 
+  /** The drives listeners. */
   protected final Set<CloudDriveListener>                    drivesListeners   = new LinkedHashSet<CloudDriveListener>();
 
+  /** The file synchronizers. */
   protected final Set<CloudFileSynchronizer>                 fileSynchronizers = new LinkedHashSet<CloudFileSynchronizer>();
 
   /**
@@ -165,6 +184,11 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
     this(jcrService, sessionProviders, new PermissiveFeatures());
   }
 
+  /**
+   * Adds the plugin.
+   *
+   * @param plugin the plugin
+   */
   public void addPlugin(ComponentPlugin plugin) {
     if (plugin instanceof CloudDriveConnector) {
       // connectors
@@ -192,6 +216,11 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
     }
   }
 
+  /**
+   * Removes the plugin.
+   *
+   * @param plugin the plugin
+   */
   public void removePlugin(ComponentPlugin plugin) {
     if (plugin instanceof CloudDriveConnector) {
       // connectors
@@ -438,6 +467,13 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
 
   // *********************** internal stuff *********************
 
+  /**
+   * Register drive.
+   *
+   * @param user the user
+   * @param drive the drive
+   * @param repoName the repo name
+   */
   protected void registerDrive(CloudUser user, CloudDrive drive, String repoName) {
     // register in caches
     Map<CloudUser, CloudDrive> drives = repositoryDrives.get(repoName);

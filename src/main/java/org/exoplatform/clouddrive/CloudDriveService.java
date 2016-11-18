@@ -1,18 +1,20 @@
 /*
- * Copyright (C) 2003-2013 eXo Platform SAS.
+ * Copyright (C) 2003-2016 eXo Platform SAS.
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * This is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation; either version 2.1 of
+ * the License, or (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful,
+ * This software is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Affero General Public License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the GNU Affero General Public License
- * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this software; if not, write to the Free
+ * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+ * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
 package org.exoplatform.clouddrive;
 
@@ -23,8 +25,8 @@ import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 
 /**
- * Created by The eXo Platform SAS
- * 
+ * Created by The eXo Platform SAS.
+ *
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
  * @version $Id: CloudDriveService.java 00000 Feb 14, 2013 pnedonosko $
  */
@@ -32,42 +34,42 @@ public interface CloudDriveService {
 
   /**
    * Authenticate an user to given cloud provider using OAuth2 authorization code.
-   * 
+   *
    * @param cloudProvider {@link CloudProvider} target provider
    * @param code {@link String} OAuth2 authorization code
    * @return {@link CloudUser} user instance
-   * @throws ProviderNotAvailableException
-   * @throws CloudDriveException
+   * @throws ProviderNotAvailableException the provider not available exception
+   * @throws CloudDriveException the cloud drive exception
    */
   CloudUser authenticate(CloudProvider cloudProvider, String code) throws ProviderNotAvailableException, CloudDriveException;
 
   /**
    * Authenticate an user to given cloud provider using OAuth2 parameters (including code, state, error,
    * error_description etc).
-   * 
+   *
    * @param cloudProvider {@link CloudProvider} target provider
    * @param params {@link Map} of data returned by OAuth2 authorization request (e.g. grabbed from the
    *          redirect request)
    * @return {@link CloudUser} user instance
-   * @throws ProviderNotAvailableException
-   * @throws CloudDriveException
+   * @throws ProviderNotAvailableException the provider not available exception
+   * @throws CloudDriveException the cloud drive exception
    */
   CloudUser authenticate(CloudProvider cloudProvider, Map<String, String> params) throws ProviderNotAvailableException,
                                                                                   CloudDriveException;
 
   /**
    * Create or open a local binding to Cloud Drive.
-   * 
-   * @see CloudDrive#connect()
+   *
    * @param user {@link CloudUser}
    * @param driveNode {@link Node}, existing node
    * @return instance of {@link CloudDrive}
    * @throws UserAlreadyConnectedException if user already connected to another node
    * @throws CannotConnectDriveException if node cannot be connected due to incompatible existing content in
    *           it
-   * @throws ProviderNotAvailableException
-   * @throws CloudDriveException
-   * @throws RepositoryException
+   * @throws ProviderNotAvailableException the provider not available exception
+   * @throws CloudDriveException the cloud drive exception
+   * @throws RepositoryException the repository exception
+   * @see CloudDrive#connect()
    */
   CloudDrive createDrive(CloudUser user, Node driveNode) throws UserAlreadyConnectedException,
                                                          CannotConnectDriveException,
@@ -100,8 +102,8 @@ public interface CloudDriveService {
 
   /**
    * Find provider by given id.
-   * 
-   * @param String id
+   *
+   * @param id the id
    * @return CloudProvider
    * @throws ProviderNotAvailableException if no such provider with given id
    */

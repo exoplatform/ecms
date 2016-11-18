@@ -1,6 +1,6 @@
 
 /*
- * Copyright (C) 2003-2015 eXo Platform SAS.
+ * Copyright (C) 2003-2016 eXo Platform SAS.
  *
  * This is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as
@@ -32,16 +32,30 @@ import java.io.InputStream;
  */
 public class CloudFileContent implements ContentReader {
 
+  /** The content. */
   protected final InputStream content;
 
+  /** The type. */
   protected final String      type;
 
+  /** The type mode. */
   protected final String      typeMode;
 
+  /** The length. */
   protected final long        length;
 
+  /** The file name. */
   protected final String      fileName;
 
+  /**
+   * Instantiates a new cloud file content.
+   *
+   * @param fileName the file name
+   * @param content the content
+   * @param type the type
+   * @param typeMode the type mode
+   * @param length the length
+   */
   public CloudFileContent(String fileName, InputStream content, String type, String typeMode, long length) {
     this.content = content;
     this.length = length;

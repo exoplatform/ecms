@@ -1,18 +1,20 @@
 /*
- * Copyright (C) 2003-2013 eXo Platform SAS.
+ * Copyright (C) 2003-2016 eXo Platform SAS.
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * This is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation; either version 2.1 of
+ * the License, or (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful,
+ * This software is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Affero General Public License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the GNU Affero General Public License
- * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this software; if not, write to the Free
+ * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+ * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
 
 package org.exoplatform.clouddrive.rest;
@@ -39,24 +41,46 @@ import javax.jcr.RepositoryException;
  */
 public class DriveInfo {
 
+  /** The provider. */
   final ProviderInfo                  provider;
 
+  /** The files. */
   final Map<String, CloudFile>        files;
 
+  /** The removed. */
   final Collection<String>            removed;
 
+  /** The messages. */
   final Collection<CloudDriveMessage> messages;
 
+  /** The workspace. */
   final String                        workspace;
 
+  /** The path. */
   final String                        path;
 
+  /** The title. */
   final String                        title;
 
+  /** The state. */
   final Object                        state;
 
+  /** The connected. */
   final boolean                       connected;
 
+  /**
+   * Instantiates a new drive info.
+   *
+   * @param title the title
+   * @param workspace the workspace
+   * @param path the path
+   * @param state the state
+   * @param connected the connected
+   * @param provider the provider
+   * @param files the files
+   * @param removed the removed
+   * @param messages the messages
+   */
   DriveInfo(String title,
             String workspace,
             String path,
@@ -77,6 +101,18 @@ public class DriveInfo {
     this.removed = removed;
   }
 
+  /**
+   * Creates the.
+   *
+   * @param workspaces the workspaces
+   * @param drive the drive
+   * @param files the files
+   * @param removed the removed
+   * @param messages the messages
+   * @return the drive info
+   * @throws RepositoryException the repository exception
+   * @throws CloudDriveException the cloud drive exception
+   */
   static DriveInfo create(String workspaces,
                           CloudDrive drive,
                           Collection<CloudFile> files,
@@ -98,6 +134,17 @@ public class DriveInfo {
                          messages);
   }
 
+  /**
+   * Creates the.
+   *
+   * @param workspaces the workspaces
+   * @param drive the drive
+   * @param files the files
+   * @param messages the messages
+   * @return the drive info
+   * @throws RepositoryException the repository exception
+   * @throws CloudDriveException the cloud drive exception
+   */
   static DriveInfo create(String workspaces,
                           CloudDrive drive,
                           Collection<CloudFile> files,
@@ -106,6 +153,15 @@ public class DriveInfo {
     return create(workspaces, drive, files, new HashSet<String>(), messages);
   }
 
+  /**
+   * Creates the.
+   *
+   * @param workspaces the workspaces
+   * @param drive the drive
+   * @return the drive info
+   * @throws RepositoryException the repository exception
+   * @throws CloudDriveException the cloud drive exception
+   */
   static DriveInfo create(String workspaces, CloudDrive drive) throws RepositoryException,
                                                               CloudDriveException {
     return create(workspaces,
@@ -115,38 +171,83 @@ public class DriveInfo {
                   new ArrayList<CloudDriveMessage>());
   }
 
+  /**
+   * Gets the provider.
+   *
+   * @return the provider
+   */
   public ProviderInfo getProvider() {
     return provider;
   }
 
+  /**
+   * Gets the files.
+   *
+   * @return the files
+   */
   public Map<String, CloudFile> getFiles() {
     return files;
   }
 
+  /**
+   * Gets the removed.
+   *
+   * @return the removed
+   */
   public Collection<String> getRemoved() {
     return removed;
   }
 
+  /**
+   * Gets the messages.
+   *
+   * @return the messages
+   */
   public Collection<CloudDriveMessage> getMessages() {
     return messages;
   }
 
+  /**
+   * Gets the path.
+   *
+   * @return the path
+   */
   public String getPath() {
     return path;
   }
 
+  /**
+   * Gets the state.
+   *
+   * @return the state
+   */
   public Object getState() {
     return state;
   }
 
+  /**
+   * Gets the title.
+   *
+   * @return the title
+   */
   public String getTitle() {
     return title;
   }
 
+  /**
+   * Gets the workspace.
+   *
+   * @return the workspace
+   */
   public String getWorkspace() {
     return workspace;
   }
 
+  /**
+   * Checks if is connected.
+   *
+   * @return true, if is connected
+   */
   public boolean isConnected() {
     return connected;
   }

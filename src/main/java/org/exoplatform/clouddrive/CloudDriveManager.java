@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003-2014 eXo Platform SAS.
+ * Copyright (C) 2003-2016 eXo Platform SAS.
  *
  * This is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as
@@ -32,19 +32,37 @@ import javax.jcr.RepositoryException;
  */
 public class CloudDriveManager {
 
+  /** The drive. */
   private final CloudDrive drive;
 
   /**
-   * 
+   * Instantiates a new cloud drive manager.
+   *
+   * @param drive the drive
    */
   public CloudDriveManager(CloudDrive drive) {
     this.drive = drive;
   }
 
+  /**
+   * Inits the copy.
+   *
+   * @param srcNode the src node
+   * @param destNode the dest node
+   * @throws CloudDriveException the cloud drive exception
+   * @throws RepositoryException the repository exception
+   */
   public void initCopy(Node srcNode, Node destNode) throws CloudDriveException, RepositoryException {
     drive.initCopy(srcNode, destNode);
   }
 
+  /**
+   * Inits the remove.
+   *
+   * @param file the file
+   * @throws CloudDriveException the cloud drive exception
+   * @throws RepositoryException the repository exception
+   */
   public void initRemove(Node file) throws CloudDriveException, RepositoryException {
     drive.initRemove(file);
   }

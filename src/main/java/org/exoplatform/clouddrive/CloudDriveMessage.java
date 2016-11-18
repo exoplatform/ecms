@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003-2014 eXo Platform SAS.
+ * Copyright (C) 2003-2016 eXo Platform SAS.
  *
  * This is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as
@@ -29,16 +29,28 @@ package org.exoplatform.clouddrive;
  */
 public class CloudDriveMessage {
 
-  public enum Type {ERROR, INFO, WARN};
+  /**
+   * The Enum Type.
+   */
+  public enum Type {/** The error. */
+ERROR, /** The info. */
+ INFO, /** The warn. */
+ WARN};
   
+  /** The type. */
   protected final String type;
 
+  /** The text. */
   protected final String text;
   
+  /** The hash code. */
   protected final int hashCode;
 
   /**
-   * 
+   * Instantiates a new cloud drive message.
+   *
+   * @param type the type
+   * @param text the text
    */
   public CloudDriveMessage(Type type, String text) {
     this.type = type.name();
@@ -51,6 +63,8 @@ public class CloudDriveMessage {
   }
 
   /**
+   * Gets the type.
+   *
    * @return the type
    */
   public String getType() {
@@ -58,6 +72,8 @@ public class CloudDriveMessage {
   }
 
   /**
+   * Gets the text.
+   *
    * @return the message
    */
   public String getText() {

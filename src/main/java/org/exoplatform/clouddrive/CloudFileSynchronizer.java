@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003-2014 eXo Platform SAS.
+ * Copyright (C) 2003-2016 eXo Platform SAS.
  *
  * This is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as
@@ -46,13 +46,13 @@ public interface CloudFileSynchronizer {
    * @return boolean, <code>true</code> if given file can be handled by this synchronizer
    * @throws RepositoryException if local storage error happened
    * @throws SkipSyncException if given node should be ignored by synchronization
-   * @see #synchronize(Node, CloudFileAPI)
    */
   boolean accept(Node file) throws RepositoryException, SkipSyncException;
 
   /**
    * Remove cloud file by given path and/or id using given API. This method doesn't check if
-   * the file can be handled by the synchronizer - use {@link #accept(Node)} to perform such check before
+   * the file can be handled by the synchronizer - use {@link CloudFileSynchronizer#accept(Node)} to perform
+   * such check before
    * calling the method.
    * 
    * @param path {@link String}
@@ -64,12 +64,12 @@ public interface CloudFileSynchronizer {
    * @throws RepositoryException if local storage error happened
    * @see #accept(Node)
    */
-  boolean remove(String path, String id, boolean isFolder, CloudFileAPI api) throws CloudDriveException,
-                                                                            RepositoryException;
+  boolean remove(String path, String id, boolean isFolder, CloudFileAPI api) throws CloudDriveException, RepositoryException;
 
   /**
    * Move cloud file to remote trash (if supported) by given path and/or id using given API. This method
-   * doesn't check if the file can be handled by the synchronizer - use {@link #accept(Node)} to perform such
+   * doesn't check if the file can be handled by the synchronizer - use
+   * {@link CloudFileSynchronizer#accept(Node)} to perform such
    * check before calling the method.
    * 
    * @param path {@link String}
@@ -81,12 +81,12 @@ public interface CloudFileSynchronizer {
    * @throws RepositoryException if local storage error happened
    * @see #accept(Node)
    */
-  boolean trash(String path, String id, boolean isFolder, CloudFileAPI api) throws CloudDriveException,
-                                                                           RepositoryException;
+  boolean trash(String path, String id, boolean isFolder, CloudFileAPI api) throws CloudDriveException, RepositoryException;
 
   /**
    * Restore cloud file from remote trash (if supported) by given JCR node using given API. This method
-   * doesn't check if the file can be handled by the synchronizer - use {@link #accept(Node)} to perform such
+   * doesn't check if the file can be handled by the synchronizer - use
+   * {@link CloudFileSynchronizer#accept(Node)} to perform such
    * check before calling the method.
    * 
    * @param file {@link Node}
@@ -100,7 +100,8 @@ public interface CloudFileSynchronizer {
 
   /**
    * Create cloud file remotely from given JCR node using given API. This method
-   * doesn't check if the file can be handled by the synchronizer - use {@link #accept(Node)} to perform such
+   * doesn't check if the file can be handled by the synchronizer - use
+   * {@link CloudFileSynchronizer#accept(Node)} to perform such
    * check before calling the method.
    * 
    * @param file {@link Node}
@@ -114,7 +115,8 @@ public interface CloudFileSynchronizer {
 
   /**
    * Copy cloud file remotely from given source and destination JCR nodes using given API. This method
-   * doesn't check if the file can be handled by the synchronizer - use {@link #accept(Node)} to perform such
+   * doesn't check if the file can be handled by the synchronizer - use
+   * {@link CloudFileSynchronizer#accept(Node)} to perform such
    * check before calling the method.
    * 
    * @param srcFile {@link Node}
@@ -125,13 +127,12 @@ public interface CloudFileSynchronizer {
    * @throws RepositoryException if local storage error happened
    * @see #accept(Node)
    */
-  CloudFile copy(Node srcFile, Node destFile, CloudFileAPI api) throws CloudDriveException,
-                                                               RepositoryException;
+  CloudFile copy(Node srcFile, Node destFile, CloudFileAPI api) throws CloudDriveException, RepositoryException;
 
   /**
    * Update remote cloud file metadata from given JCR nodes using given API. Under metadata it assumes: file
    * name and/or parents. This method doesn't check if the file can be handled by the synchronizer - use
-   * {@link #accept(Node)} to perform such check before calling the method.
+   * {@link CloudFileSynchronizer#accept(Node)} to perform such check before calling the method.
    * 
    * @param file {@link Node}
    * @param api {@link CloudFileAPI}
@@ -145,7 +146,7 @@ public interface CloudFileSynchronizer {
   /**
    * Update remote cloud file content and optionally its metadata from given JCR nodes using given API. Under
    * metadata it assumes: file name and/or parents. This method doesn't check if the file can be handled by
-   * the synchronizer - use {@link #accept(Node)} to perform such check before calling the method.
+   * the synchronizer - use {@link CloudFileSynchronizer#accept(Node)} to perform such check before calling the method.
    * 
    * @param file {@link Node}
    * @param api {@link CloudFileAPI}

@@ -1,18 +1,20 @@
 /*
- * Copyright (C) 2003-2012 eXo Platform SAS.
+ * Copyright (C) 2003-2016 eXo Platform SAS.
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * This is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation; either version 2.1 of
+ * the License, or (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful,
+ * This software is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Affero General Public License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the GNU Affero General Public License
- * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this software; if not, write to the Free
+ * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+ * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
 package org.exoplatform.clouddrive;
 
@@ -26,16 +28,27 @@ package org.exoplatform.clouddrive;
  */
 public abstract class CloudProvider {
 
+  /** The Constant CONNECT_URL_BASE. */
   public static final String CONNECT_URL_BASE = "/portal/rest/clouddrive/connect/";
 
+  /** The Constant AUTH_NOSTATE. */
   public static final String AUTH_NOSTATE     = "__no_state_set__";
 
+  /** The id. */
   protected final String     id;
 
+  /** The name. */
   protected final String     name;
 
+  /** The hash code. */
   protected final int        hashCode;
 
+  /**
+   * Instantiates a new cloud provider.
+   *
+   * @param id the id
+   * @param name the name
+   */
   protected CloudProvider(String id, String name) {
     // intern strings for fast comparison
     this.id = id.intern();
@@ -76,7 +89,8 @@ public abstract class CloudProvider {
   /**
    * Provider specific message for given JVM exception (Throwable). By default this method uses
    * {@link Throwable#getMessage()}.
-   * 
+   *
+   * @param error the error
    * @return String with the error message
    */
   public String getErrorMessage(Throwable error) {
@@ -86,7 +100,9 @@ public abstract class CloudProvider {
   /**
    * Provider specific message for given error string and description. By default this method returns
    * concatenated error and description string.
-   * 
+   *
+   * @param error the error
+   * @param errorDescription the error description
    * @return String with the error message
    */
   public String getErrorMessage(String error, String errorDescription) {

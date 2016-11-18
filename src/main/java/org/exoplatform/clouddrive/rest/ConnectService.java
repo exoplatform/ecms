@@ -1,18 +1,20 @@
 /*
- * Copyright (C) 2003-2012 eXo Platform SAS.
+ * Copyright (C) 2003-2016 eXo Platform SAS.
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * This is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation; either version 2.1 of
+ * the License, or (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful,
+ * This software is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Affero General Public License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the GNU Affero General Public License
- * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this software; if not, write to the Free
+ * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+ * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
 package org.exoplatform.clouddrive.rest;
 
@@ -92,12 +94,16 @@ import javax.ws.rs.core.UriInfo;
 @Produces(MediaType.APPLICATION_JSON)
 public class ConnectService implements ResourceContainer {
 
+  /** The Constant CONNECT_COOKIE. */
   public static final String    CONNECT_COOKIE         = "cloud-drive-connect-id";
 
+  /** The Constant ERROR_COOKIE. */
   public static final String    ERROR_COOKIE           = "cloud-drive-error";
 
+  /** The Constant INIT_COOKIE. */
   public static final String    INIT_COOKIE            = "cloud-drive-init-id";
 
+  /** The Constant INIT_COOKIE_PATH. */
   public static final String    INIT_COOKIE_PATH       = "/portal/rest/clouddrive/connect";
 
   /**
@@ -120,49 +126,95 @@ public class ConnectService implements ResourceContainer {
    */
   public static final int       CONNECT_PROCESS_EXPIRE = 60 * 60 * 1000;                           // 1hr
 
+  /** The Constant random. */
   protected static final Random random                 = new Random();
 
+  /** The Constant LOG. */
   protected static final Log    LOG                    = ExoLogger.getLogger(ConnectService.class);
 
   /**
    * Response builder for connect and state.
    */
   class ConnectResponse extends ServiceResponse {
+    
+    /** The service url. */
     String    serviceUrl;
 
+    /** The progress. */
     int       progress;
 
+    /** The drive. */
     DriveInfo drive;
 
+    /** The error. */
     String    error;
 
+    /** The location. */
     String    location;
 
+    /**
+     * Service url.
+     *
+     * @param serviceUrl the service url
+     * @return the connect response
+     */
     ConnectResponse serviceUrl(String serviceUrl) {
       this.serviceUrl = serviceUrl;
       return this;
     }
 
+    /**
+     * Progress.
+     *
+     * @param progress the progress
+     * @return the connect response
+     */
     ConnectResponse progress(int progress) {
       this.progress = progress;
       return this;
     }
 
+    /**
+     * Drive.
+     *
+     * @param drive the drive
+     * @return the connect response
+     */
     ConnectResponse drive(DriveInfo drive) {
       this.drive = drive;
       return this;
     }
 
+    /**
+     * Error.
+     *
+     * @param error the error
+     * @return the connect response
+     */
     ConnectResponse error(String error) {
       this.error = error;
       return this;
     }
 
+    /**
+     * Location.
+     *
+     * @param location the location
+     * @return the connect response
+     */
     ConnectResponse location(String location) {
       this.location = location;
       return this;
     }
 
+    /**
+     * Connect error.
+     *
+     * @param error the error
+     * @param connectId the connect id
+     * @param host the host
+     * @return the connect response
+     */
     ConnectResponse connectError(String error, String connectId, String host) {
       if (connectId != null) {
         cookie(CONNECT_COOKIE, connectId, "/", host, "Cloud Drive connect ID", 0, false);
@@ -173,6 +225,16 @@ public class ConnectService implements ResourceContainer {
       return this;
     }
 
+    /**
+     * Auth error.
+     *
+     * @param message the message
+     * @param host the host
+     * @param providerName the provider name
+     * @param initId the init id
+     * @param baseHost the base host
+     * @return the connect response
+     */
     ConnectResponse authError(String message, String host, String providerName, String initId, String baseHost) {
       if (initId != null) {
         // need reset previous cookie by expire time = 0
@@ -185,11 +247,21 @@ public class ConnectService implements ResourceContainer {
       return this;
     }
 
+    /**
+     * Auth error.
+     *
+     * @param message the message
+     * @param host the host
+     * @return the connect response
+     */
     ConnectResponse authError(String message, String host) {
       return authError(message, host, null, null, null);
     }
 
     /**
+     * Builds the.
+     *
+     * @return the response
      * @inherritDoc
      */
     @Override
@@ -211,12 +283,23 @@ public class ConnectService implements ResourceContainer {
    * Connect initialization record used during establishment of connect workflow.
    */
   class ConnectInit {
+    
+    /** The local user. */
     final String        localUser;
 
+    /** The provider. */
     final CloudProvider provider;
 
+    /** The host. */
     final String        host;
 
+    /**
+     * Instantiates a new connect init.
+     *
+     * @param localUser the local user
+     * @param provider the provider
+     * @param host the host
+     */
     ConnectInit(String localUser, CloudProvider provider, String host) {
       this.localUser = localUser;
       this.provider = provider;
@@ -228,18 +311,34 @@ public class ConnectService implements ResourceContainer {
    * Connect process record used in connect workflow. Also used to answer on state request.
    */
   class ConnectProcess extends BaseCloudDriveListener {
+    
+    /** The drive. */
     final CloudDrive drive;
 
+    /** The process. */
     final Command    process;
 
+    /** The title. */
     final String     title;
 
+    /** The workspace name. */
     final String     workspaceName;
 
+    /** The lock. */
     final Lock       lock = new ReentrantLock();
 
+    /** The error. */
     String           error;
 
+    /**
+     * Instantiates a new connect process.
+     *
+     * @param workspaceName the workspace name
+     * @param drive the drive
+     * @param conversation the conversation
+     * @throws CloudDriveException the cloud drive exception
+     * @throws RepositoryException the repository exception
+     */
     ConnectProcess(String workspaceName, CloudDrive drive, ConversationState conversation)
         throws CloudDriveException, RepositoryException {
       this.drive = drive;
@@ -251,6 +350,11 @@ public class ConnectService implements ResourceContainer {
       LOG.info(title + " connect started.");
     }
 
+    /**
+     * Rollback.
+     *
+     * @throws RepositoryException the repository exception
+     */
     void rollback() throws RepositoryException {
       SessionProvider provider = sessionProviders.getSessionProvider(null);
       Session session = provider.getSession(workspaceName, jcrService.getCurrentRepository());
@@ -293,6 +397,9 @@ public class ConnectService implements ResourceContainer {
       }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void onConnect(CloudDriveEvent event) {
       // remove from active here
@@ -304,7 +411,14 @@ public class ConnectService implements ResourceContainer {
     }
   }
 
+  /**
+   * The Class Cleaner.
+   */
   protected class Cleaner implements Runnable {
+    
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void run() {
       final long now = System.currentTimeMillis();
@@ -336,20 +450,28 @@ public class ConnectService implements ResourceContainer {
     }
   }
 
+  /** The cloud drives. */
   protected final CloudDriveService           cloudDrives;
 
+  /** The locator. */
   protected final DriveServiceLocator         locator;
 
+  /** The session providers. */
   protected final SessionProviderService      sessionProviders;
 
+  /** The jcr service. */
   protected final RepositoryService           jcrService;
 
+  /** The finder. */
   protected final NodeFinder                  finder;
 
+  /** The authenticated. */
   protected final Map<UUID, CloudUser>        authenticated = new ConcurrentHashMap<UUID, CloudUser>();
 
+  /** The initiated. */
   protected final Map<UUID, ConnectInit>      initiated     = new ConcurrentHashMap<UUID, ConnectInit>();
 
+  /** The timeline. */
   protected final Map<UUID, Long>             timeline      = new ConcurrentHashMap<UUID, Long>();
 
   /**
@@ -357,12 +479,17 @@ public class ConnectService implements ResourceContainer {
    */
   protected final Map<String, ConnectProcess> active        = new ConcurrentHashMap<String, ConnectProcess>();
 
+  /** The connects cleaner. */
   protected final ScheduledExecutorService    connectsCleaner;
 
   /**
    * REST cloudDrives uses {@link CloudDriveService} for actual job.
-   * 
-   * @param {@link CloudDriveService} cloudDrives
+   *
+   * @param cloudDrives the cloud drives
+   * @param locator the locator
+   * @param jcrService the jcr service
+   * @param sessionProviders the session providers
+   * @param finder the finder
    */
   public ConnectService(CloudDriveService cloudDrives,
                         DriveServiceLocator locator,
@@ -381,13 +508,13 @@ public class ConnectService implements ResourceContainer {
 
   /**
    * Start connection of user's Cloud Drive to local JCR node.
-   * 
+   *
    * @param uriInfo - request info
    * @param workspace - workspace for cloud drive node
    * @param path - path to user's node to what connect the drive
-   * @param jsessionsId
-   * @param jsessionsIdSSO
-   * @param connectId
+   * @param jsessionsId the jsessions id
+   * @param jsessionsIdSSO the jsessions id SSO
+   * @param connectId the connect id
    * @return {@link Response}
    */
   @POST
@@ -571,10 +698,10 @@ public class ConnectService implements ResourceContainer {
 
   /**
    * Return drive connect status.
-   * 
-   * @param uriInfo
-   * @param workspace
-   * @param path
+   *
+   * @param uriInfo the uri info
+   * @param workspace the workspace
+   * @param path the path
    * @return {@link Response}
    */
   @GET
@@ -666,13 +793,15 @@ public class ConnectService implements ResourceContainer {
    * handling the connect procedure. Some providers use this service url as callback after authorization
    * (Google Drive). <br>
    * This method is GET because of possibility of redirect on it.
-   * 
+   *
    * @param uriInfo - request info
    * @param providerId - provider id, see more in {@link CloudProvider}
    * @param code - authentication key (OAuth2 code for example)
+   * @param state the state
    * @param error - error from the provider
-   * @param jsessionsId
-   * @param jsessionsIdSSO
+   * @param errorDescription the error description
+   * @param jsessionsId the jsessions id
+   * @param jsessionsIdSSO the jsessions id SSO
    * @param initId - init cookie
    * @return response with connecting page or error
    */
@@ -807,9 +936,11 @@ public class ConnectService implements ResourceContainer {
   /**
    * Initiates connection to cloud drive. Used to get a Provider and remember a user connect request in the
    * service. It will be used later for authentication.
-   * 
+   *
    * @param uriInfo - request with base URI
    * @param providerId - provider name see more in {@link CloudProvider}
+   * @param jsessionsId the jsessions id
+   * @param jsessionsIdSSO the jsessions id SSO
    * @return response with
    */
   @GET
@@ -856,6 +987,12 @@ public class ConnectService implements ResourceContainer {
     }
   }
 
+  /**
+   * Generate id.
+   *
+   * @param name the name
+   * @return the uuid
+   */
   protected UUID generateId(String name) {
     StringBuilder s = new StringBuilder();
     s.append(name);
@@ -865,10 +1002,25 @@ public class ConnectService implements ResourceContainer {
     return UUID.nameUUIDFromBytes(s.toString().getBytes());
   }
 
+  /**
+   * Process id.
+   *
+   * @param workspace the workspace
+   * @param parentPath the parent path
+   * @param driveName the drive name
+   * @return the string
+   */
   protected String processId(String workspace, String parentPath, String driveName) {
     return workspace + ":" + parentPath + "/" + driveName;
   }
 
+  /**
+   * Process id.
+   *
+   * @param workspace the workspace
+   * @param nodePath the node path
+   * @return the string
+   */
   protected String processId(String workspace, String nodePath) {
     return workspace + ":" + nodePath;
   }

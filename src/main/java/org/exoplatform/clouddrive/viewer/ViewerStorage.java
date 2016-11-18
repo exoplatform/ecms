@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003-2015 eXo Platform SAS.
+ * Copyright (C) 2003-2016 eXo Platform SAS.
  *
  * This is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as
@@ -88,28 +88,50 @@ import javax.jcr.RepositoryException;
  */
 public class ViewerStorage {
 
+  /** The Constant LOG. */
   private static final Log   LOG                 = ExoLogger.getLogger(ViewerStorage.class);
 
+  /** The Constant MAX_FILENAME_LENGTH. */
   public static final int    MAX_FILENAME_LENGTH = 180;
 
+  /** The Constant FILE_LIVE_TIME. */
   public static final long   FILE_LIVE_TIME      = 12 * 60 * 60000;                         // 12hrs
 
+  /** The Constant PAGE_IMAGE_TYPE. */
   public static final String PAGE_IMAGE_TYPE     = "image/png";
 
+  /** The Constant PDF_TYPE. */
   public static final String PDF_TYPE            = "application/pdf";
 
+  /** The Constant PAGE_IMAGE_EXT. */
   public static final String PAGE_IMAGE_EXT      = ".png";
 
+  /** The Constant PDF_EXT. */
   public static final String PDF_EXT             = ".pdf";
 
+  /**
+   * The Class FileKey.
+   */
   protected class FileKey implements Serializable {
 
+    /** The Constant serialVersionUID. */
     private static final long serialVersionUID = -1075842770973938557L;
 
+    /** The file id. */
     protected final String    repository, workspace, username, driveName, fileId;
 
+    /** The hash code. */
     protected final int       hashCode;
 
+    /**
+     * Instantiates a new file key.
+     *
+     * @param repository the repository
+     * @param workspace the workspace
+     * @param username the username
+     * @param driveName the drive name
+     * @param fileId the file id
+     */
     protected FileKey(String repository, String workspace, String username, String driveName, String fileId) {
       this.repository = repository;
       this.workspace = workspace;
@@ -166,20 +188,38 @@ public class ViewerStorage {
     }
   }
 
+  /**
+   * The Class ContentFile.
+   */
   public class ContentFile implements ContentReader {
 
+    /** The key. */
     protected final FileKey key;
 
+    /** The file. */
     protected final File    file;
 
+    /** The name. */
     protected final String  name;
 
+    /** The mime type. */
     protected final String  mimeType;
 
+    /** The last modified. */
     protected final long    lastModified;
 
+    /** The last acccessed. */
     protected long          lastAcccessed;
 
+    /**
+     * Instantiates a new content file.
+     *
+     * @param key the key
+     * @param file the file
+     * @param name the name
+     * @param mimeType the mime type
+     * @param lastModified the last modified
+     */
     protected ContentFile(FileKey key, File file, String name, String mimeType, long lastModified) {
       this.key = key;
       this.name = name;
@@ -189,20 +229,37 @@ public class ViewerStorage {
       touch();
     }
 
+    /**
+     * Touch.
+     *
+     * @return the long
+     */
     protected long touch() {
       lastAcccessed = System.currentTimeMillis();
       return lastAcccessed;
     }
 
+    /**
+     * Removes the.
+     *
+     * @return true, if successful
+     */
     public boolean remove() {
       return file.delete();
     }
 
+    /**
+     * Exists.
+     *
+     * @return true, if successful
+     */
     public boolean exists() {
       return file.exists();
     }
 
     /**
+     * Gets the last modified.
+     *
      * @return the lastModified
      */
     public long getLastModified() {
@@ -210,6 +267,8 @@ public class ViewerStorage {
     }
 
     /**
+     * Gets the last acccessed.
+     *
      * @return the lastAcccessed
      */
     public long getLastAcccessed() {
@@ -217,6 +276,8 @@ public class ViewerStorage {
     }
 
     /**
+     * Gets the name.
+     *
      * @return the name
      */
     public String getName() {
@@ -247,6 +308,9 @@ public class ViewerStorage {
       return file.length();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public InputStream getStream() {
       touch();
       try {
@@ -276,10 +340,20 @@ public class ViewerStorage {
       return this.getClass().getSimpleName() + ": " + file.getAbsolutePath();
     }
 
+    /**
+     * Checks if is pdf.
+     *
+     * @return true, if is pdf
+     */
     public boolean isPDF() {
       return false;
     }
 
+    /**
+     * As PDF.
+     *
+     * @return the PDF file
+     */
     public PDFFile asPDF() {
       if (isPDF()) {
         return (PDFFile) this;
@@ -289,18 +363,35 @@ public class ViewerStorage {
     }
   }
 
+  /**
+   * The Class PDFFile.
+   */
   public class PDFFile extends ContentFile {
 
+    /**
+     * The Class PageKey.
+     */
     protected class PageKey {
 
+      /** The page. */
       protected final Integer page;
 
+      /** The rotation. */
       protected final Float   rotation;
 
+      /** The scale. */
       protected final Float   scale;
 
+      /** The hash code. */
       protected final int     hashCode;
 
+      /**
+       * Instantiates a new page key.
+       *
+       * @param page the page
+       * @param rotation the rotation
+       * @param scale the scale
+       */
       protected PageKey(Integer page, Float rotation, Float scale) {
         this.page = page;
         this.rotation = rotation;
@@ -348,13 +439,27 @@ public class ViewerStorage {
       }
     }
 
+    /**
+     * The Class ImageFile.
+     */
     public class ImageFile {
+      
+      /** The file. */
       protected final File   file;
 
+      /** The name. */
       protected final String name;
 
+      /** The type. */
       protected final String type;
 
+      /**
+       * Instantiates a new image file.
+       *
+       * @param file the file
+       * @param name the name
+       * @param type the type
+       */
       protected ImageFile(File file, String name, String type) {
         super();
         this.file = file;
@@ -363,6 +468,8 @@ public class ViewerStorage {
       }
 
       /**
+       * Gets the length.
+       *
        * @return the file length
        */
       public long getLength() {
@@ -370,6 +477,8 @@ public class ViewerStorage {
       }
 
       /**
+       * Gets the type.
+       *
        * @return the type
        */
       public String getType() {
@@ -377,12 +486,19 @@ public class ViewerStorage {
       }
 
       /**
+       * Gets the name.
+       *
        * @return the name
        */
       public String getName() {
         return name;
       }
 
+      /**
+       * Gets the stream.
+       *
+       * @return the stream
+       */
       public InputStream getStream() {
         try {
           return new FileInputStream(file);
@@ -391,17 +507,34 @@ public class ViewerStorage {
         }
       }
 
+      /**
+       * Delete.
+       *
+       * @return true, if successful
+       */
       protected boolean delete() {
         return file.delete();
       }
     }
 
+    /** The number of pages. */
     protected final int                                   numberOfPages;
 
+    /** The metadata. */
     protected final Map<String, String>                   metadata = new HashMap<String, String>();
 
+    /** The pages. */
     protected final ConcurrentHashMap<PageKey, ImageFile> pages    = new ConcurrentHashMap<PageKey, ImageFile>();
 
+    /**
+     * Instantiates a new PDF file.
+     *
+     * @param key the key
+     * @param file the file
+     * @param name the name
+     * @param lastModified the last modified
+     * @param document the document
+     */
     protected PDFFile(FileKey key, File file, String name, long lastModified, Document document) {
       super(key, file, name, PDF_TYPE, lastModified); // TODO not only PDF_TYPE
       this.numberOfPages = document.getNumberOfPages();
@@ -409,6 +542,11 @@ public class ViewerStorage {
       touch();
     }
 
+    /**
+     * Put document info.
+     *
+     * @param documentInfo the document info
+     */
     private void putDocumentInfo(PInfo documentInfo) {
       if (documentInfo != null) {
         if (documentInfo.getTitle() != null && documentInfo.getTitle().length() > 0) {
@@ -438,6 +576,9 @@ public class ViewerStorage {
       }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public boolean remove() {
       boolean res = true;
       for (ImageFile pageFile : pages.values()) {
@@ -446,14 +587,33 @@ public class ViewerStorage {
       return res ? super.remove() : false;
     }
 
+    /**
+     * Gets the number of pages.
+     *
+     * @return the number of pages
+     */
     public int getNumberOfPages() {
       return numberOfPages;
     }
 
+    /**
+     * Gets the metadata.
+     *
+     * @return the metadata
+     */
     public Map<String, String> getMetadata() {
       return metadata;
     }
 
+    /**
+     * Gets the page image.
+     *
+     * @param page the page
+     * @param rotation the rotation
+     * @param scale the scale
+     * @return the page image
+     * @throws IOException Signals that an I/O exception has occurred.
+     */
     public ImageFile getPageImage(int page, float rotation, float scale) throws IOException {
       touch();
       PageKey key = new PageKey(page, rotation, scale);
@@ -492,11 +652,17 @@ public class ViewerStorage {
       return super.toString() + ", " + getNumberOfPages() + " page(s)";
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public boolean isPDF() {
       return true;
     }
   }
 
+  /**
+   * The Class Evicter.
+   */
   protected class Evicter implements Runnable {
 
     /**
@@ -515,10 +681,19 @@ public class ViewerStorage {
     }
   }
 
+  /**
+   * The Class FilesCleaner.
+   */
   protected class FilesCleaner extends BaseCloudDriveListener {
 
+    /** The files. */
     final Map<String, ContentFile> files = new ConcurrentHashMap<String, ContentFile>();
 
+    /**
+     * Adds the file.
+     *
+     * @param file the file
+     */
     void addFile(ContentFile file) {
       ContentFile prev = files.put(file.getName(), file);
       if (prev != null) {
@@ -526,10 +701,18 @@ public class ViewerStorage {
       }
     }
 
+    /**
+     * Removes the file.
+     *
+     * @param file the file
+     */
     void removeFile(PDFFile file) {
       files.remove(file.getName());
     }
 
+    /**
+     * Clean all.
+     */
     void cleanAll() {
       for (Iterator<ContentFile> fiter = files.values().iterator(); fiter.hasNext();) {
         ContentFile file = fiter.next();
@@ -542,6 +725,11 @@ public class ViewerStorage {
       }
     }
 
+    /**
+     * Clean file.
+     *
+     * @param name the name
+     */
     void cleanFile(String name) {
       ContentFile file = files.get(name);
       if (file != null) {
@@ -586,16 +774,24 @@ public class ViewerStorage {
 
   }
 
+  /** The spool. */
   protected final ConcurrentHashMap<FileKey, ContentFile> spool    = new ConcurrentHashMap<FileKey, ContentFile>();
 
+  /** The jod converter. */
   protected final JodConverterService                     jodConverter;
 
+  /** The root dir. */
   protected final File                                    rootDir;
 
+  /** The cleaners. */
   protected final ConcurrentHashMap<String, FilesCleaner> cleaners = new ConcurrentHashMap<String, FilesCleaner>();
 
   /**
-   * 
+   * Instantiates a new viewer storage.
+   *
+   * @param cacheService the cache service
+   * @param jodConverter the jod converter
+   * @throws IOException Signals that an I/O exception has occurred.
    */
   public ViewerStorage(CacheService cacheService, JodConverterService jodConverter) throws IOException {
     String storageName = "CloudDrive." + ViewerStorage.class.getSimpleName();
@@ -626,6 +822,17 @@ public class ViewerStorage {
     executor.schedule(new Evicter(), 30, TimeUnit.MINUTES);
   }
 
+  /**
+   * Gets the file.
+   *
+   * @param repository the repository
+   * @param workspace the workspace
+   * @param drive the drive
+   * @param fileId the file id
+   * @return the file
+   * @throws DriveRemovedException the drive removed exception
+   * @throws RepositoryException the repository exception
+   */
   public ContentFile getFile(String repository, String workspace, CloudDrive drive, String fileId)
                                                                                                    throws DriveRemovedException,
                                                                                                    RepositoryException {
@@ -633,6 +840,19 @@ public class ViewerStorage {
     return spool.get(key);
   }
 
+  /**
+   * Creates the file.
+   *
+   * @param repository the repository
+   * @param workspace the workspace
+   * @param drive the drive
+   * @param file the file
+   * @return the content file
+   * @throws CloudDriveException the cloud drive exception
+   * @throws DriveRemovedException the drive removed exception
+   * @throws RepositoryException the repository exception
+   * @throws IOException Signals that an I/O exception has occurred.
+   */
   public ContentFile createFile(String repository,
                                 String workspace,
                                 CloudDrive drive,
@@ -789,6 +1009,19 @@ public class ViewerStorage {
     return spooledFile;
   }
 
+  /**
+   * Save file.
+   *
+   * @param repository the repository
+   * @param workspace the workspace
+   * @param drive the drive
+   * @param file the file
+   * @return the content file
+   * @throws CloudDriveException the cloud drive exception
+   * @throws DriveRemovedException the drive removed exception
+   * @throws RepositoryException the repository exception
+   * @throws IOException Signals that an I/O exception has occurred.
+   */
   @Deprecated
   public ContentFile saveFile(String repository,
                               String workspace,
@@ -902,6 +1135,13 @@ public class ViewerStorage {
 
   // *********** internals
 
+  /**
+   * Spool to file.
+   *
+   * @param sourceStream the source stream
+   * @param destFile the dest file
+   * @throws IOException Signals that an I/O exception has occurred.
+   */
   private void spoolToFile(final InputStream sourceStream, final File destFile) throws IOException {
     final ReadableByteChannel source = Channels.newChannel(sourceStream);
     final OutputStream destStream = new FileOutputStream(destFile);
@@ -934,11 +1174,11 @@ public class ViewerStorage {
   /**
    * Read IcePDF document from given file.
    * Method adopted from {@link PDFViewerService}.
-   * 
+   *
    * @param input {@link File}
    * @param name {@link String}
    * @return {@link Document}
-   * @throws IOException
+   * @throws IOException Signals that an I/O exception has occurred.
    */
   private Document buildDocumentImage(InputStream input, String name) throws IOException {
     Document document = new Document();
@@ -973,13 +1213,13 @@ public class ViewerStorage {
   /**
    * Convert given page of PDF document to PNG image file.
    * Method adapted from {@link PDFViewerRESTService}.
-   * 
-   * @param input
-   * @param pageNumber
-   * @param strRotation
-   * @param strScale
-   * @return
-   * @throws IOException
+   *
+   * @param input the input
+   * @param page the page
+   * @param rotation the rotation
+   * @param scale the scale
+   * @return the file
+   * @throws IOException Signals that an I/O exception has occurred.
    */
   private File buildFileImage(File input, int page, float rotation, float scale) throws IOException {
     InputStream inputStream = new FileInputStream(input);
@@ -1043,6 +1283,12 @@ public class ViewerStorage {
     }
   }
 
+  /**
+   * Delete.
+   *
+   * @param dir the dir
+   * @return true, if successful
+   */
   private boolean delete(File dir) {
     boolean res = true;
     if (dir.isDirectory()) {
@@ -1056,6 +1302,12 @@ public class ViewerStorage {
     return dir.delete();
   }
 
+  /**
+   * Extract name.
+   *
+   * @param nodePath the node path
+   * @return the string
+   */
   private String extractName(String nodePath) {
     int nameIndex = nodePath.lastIndexOf("/");
     int pathLen = nodePath.length();
@@ -1070,6 +1322,14 @@ public class ViewerStorage {
     return cleanName.length() > MAX_FILENAME_LENGTH ? cleanName.substring(0, MAX_FILENAME_LENGTH) : cleanName;
   }
 
+  /**
+   * Adds the drive listener.
+   *
+   * @param drive the drive
+   * @param file the file
+   * @throws DriveRemovedException the drive removed exception
+   * @throws RepositoryException the repository exception
+   */
   private void addDriveListener(CloudDrive drive, ContentFile file) throws DriveRemovedException, RepositoryException {
     FilesCleaner cleaner = cleaners.get(drive.getPath());
     if (cleaner == null) {

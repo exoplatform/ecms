@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003-2014 eXo Platform SAS.
+ * Copyright (C) 2003-2016 eXo Platform SAS.
  *
  * This is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as
@@ -39,16 +39,19 @@ public interface CloudDriveStorage {
 
   /**
    * Change to Cloud Drive storage.
+   *
+   * @param <R> the generic type
    */
   interface Change<R> {
+    
     /**
      * Apply this change in the Cloud Drive storage.
-     * 
+     *
      * @return resulting object or <code>null</code>
-     * @throws RepositoryException
-     * @throws NotCloudDriveException
-     * @throws DriveRemovedException
-     * @throws CloudDriveException
+     * @throws RepositoryException the repository exception
+     * @throws NotCloudDriveException the not cloud drive exception
+     * @throws DriveRemovedException the drive removed exception
+     * @throws CloudDriveException the cloud drive exception
      */
     R apply() throws RepositoryException, NotCloudDriveException, DriveRemovedException, CloudDriveException;
   }
@@ -57,23 +60,23 @@ public interface CloudDriveStorage {
    * Tell if given node is a local node in this cloud drive, thus it is not a cloud drive, not a cloud file,
    * it is not already ignored local node and it is not currently updating node by the drive (not uploading to
    * remote site).
-   * 
+   *
    * @param node {@link Node}
    * @return boolean <code>true</code> if node is local only in this drive, <code>false</code> otherwise
-   * @throws RepositoryException
-   * @throws NotCloudFileException if node is a root folder of the drive
+   * @throws RepositoryException the repository exception
+   * @throws DriveRemovedException the drive removed exception
    */
   public boolean isLocal(Node node) throws RepositoryException, DriveRemovedException;
 
   /**
    * Tell if given node is ignored in this cloud drive.
-   * 
+   *
    * @param node {@link Node}
    * @return boolean <code>true</code> if node is ignored, <code>false</code> otherwise
-   * @throws RepositoryException
-   * @throws DriveRemovedException if drive removed
+   * @throws RepositoryException the repository exception
    * @throws NotCloudDriveException if given node doesn't belong to cloud drive
    * @throws NotCloudFileException if given node is a root folder of the drive
+   * @throws DriveRemovedException if drive removed
    */
   boolean isIgnored(Node node) throws RepositoryException,
                                NotCloudDriveException,
@@ -83,29 +86,29 @@ public interface CloudDriveStorage {
   /**
    * Mark given file node as ignored. This operation doesn't remove local or remote file. This operation
    * saves the node to persist its ignored state.
-   * 
+   *
    * @param node {@link Node}
    * @return boolean <code>true</code> if file was ignored, <code>false</code> if it is already ignored
-   * @throws RepositoryException
-   * @throws DriveRemovedException if drive removed
+   * @throws RepositoryException the repository exception
    * @throws NotCloudDriveException if node doesn't belong to cloud drive
    * @throws NotCloudFileException if node belongs to cloud drive but not represent a cloud file (not yet
    *           added or ignored node) or node is a root folder of the drive
+   * @throws DriveRemovedException if drive removed
    */
   boolean ignore(Node node) throws RepositoryException, NotCloudDriveException, NotCloudFileException, DriveRemovedException;
 
   /**
    * Remove ignorance mark if given node marked as ignored. This operation doesn't remove local or
    * remote file. This operation saves the node to persist its unignored state.
-   * 
+   *
    * @param node {@link Node}
    * @return boolean <code>true</code> if file was unignored successfully, <code>false</code> if it is already
    *         ignored
-   * @throws RepositoryException
+   * @throws RepositoryException the repository exception
    * @throws NotCloudDriveException if node doesn't belong to cloud drive
+   * @throws DriveRemovedException if drive removed
    * @throws NotCloudFileException if node belongs to cloud drive but not represent a cloud file (not yet
    *           added or ignored node) or node is a root folder of the drive
-   * @throws DriveRemovedException if drive removed
    */
   boolean unignore(Node node) throws RepositoryException,
                               NotCloudDriveException,
@@ -162,13 +165,14 @@ public interface CloudDriveStorage {
    * be</strong> synchronized to the remote drive. Use this method with care as creation of only local JCR
    * nodes for
    * example, may lead to conflicts during the synchronization.
-   * 
+   *
+   * @param <R> the generic type
    * @param change {@link Change} instance
    * @return resulting object or <code>null</code>
-   * @throws NotCloudDriveException
-   * @throws DriveRemovedException
-   * @throws RepositoryException
-   * @throws CloudDriveException
+   * @throws NotCloudDriveException the not cloud drive exception
+   * @throws DriveRemovedException the drive removed exception
+   * @throws RepositoryException the repository exception
+   * @throws CloudDriveException the cloud drive exception
    */
   <R> R localChange(Change<R> change) throws NotCloudDriveException,
                                       DriveRemovedException,
@@ -180,8 +184,8 @@ public interface CloudDriveStorage {
    *
    * @param fileId {@link String}
    * @return {@link ContentReader} or <code>null</code> if content cannot be obtained
-   * @throws RepositoryException
-   * @throws CloudDriveException
+   * @throws RepositoryException the repository exception
+   * @throws CloudDriveException the cloud drive exception
    */
   ContentReader getFileContent(String fileId) throws RepositoryException, CloudDriveException;
 
@@ -190,8 +194,8 @@ public interface CloudDriveStorage {
    *
    * @param fileId {@link String}
    * @return {@link ContentReader} or <code>null</code> if preview not available
-   * @throws RepositoryException
-   * @throws CloudDriveException
+   * @throws RepositoryException the repository exception
+   * @throws CloudDriveException the cloud drive exception
    */
   ContentReader getFilePreview(String fileId) throws RepositoryException, CloudDriveException;
   

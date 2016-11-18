@@ -1,18 +1,20 @@
 /*
- * Copyright (C) 2003-2012 eXo Platform SAS.
+ * Copyright (C) 2003-2016 eXo Platform SAS.
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * This is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation; either version 2.1 of
+ * the License, or (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful,
+ * This software is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Affero General Public License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the GNU Affero General Public License
- * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this software; if not, write to the Free
+ * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+ * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
 package org.exoplatform.clouddrive;
 
@@ -24,7 +26,6 @@ import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.container.xml.ObjectParameter;
 import org.exoplatform.container.xml.PropertiesParam;
 import org.exoplatform.services.jcr.RepositoryService;
-import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
@@ -61,6 +62,8 @@ public abstract class CloudDriveConnector extends BaseComponentPlugin {
    * any and should reflect the final provider needs.
    */
   public static class PredefinedServices {
+
+    /** The services. */
     Set<Object> services = new LinkedHashSet<Object>();
 
     /**
@@ -82,12 +85,16 @@ public abstract class CloudDriveConnector extends BaseComponentPlugin {
     }
   }
 
+  /** The Constant CONFIG_PROVIDER_NAME. */
   public static final String               CONFIG_PROVIDER_NAME             = "provider-name";
 
+  /** The Constant CONFIG_PROVIDER_ID. */
   public static final String               CONFIG_PROVIDER_ID               = "provider-id";
 
+  /** The Constant CONFIG_CONNECTOR_HOST. */
   public static final String               CONFIG_CONNECTOR_HOST            = "connector-host";
 
+  /** The Constant CONFIG_CONNECTOR_SCHEMA. */
   public static final String               CONFIG_CONNECTOR_SCHEMA          = "connector-schema";
 
   /**
@@ -111,50 +118,80 @@ public abstract class CloudDriveConnector extends BaseComponentPlugin {
    */
   public static final String               CONFIG_LOGIN_SSO                 = "login-sso";
 
+  /** The Constant CONFIG_PREDEFINED_SERVICES. */
   public static final String               CONFIG_PREDEFINED_SERVICES       = "predefined-services";
 
+  /** The Constant OAUTH2_CODE. */
   public static final String               OAUTH2_CODE                      = "code";
 
+  /** The Constant OAUTH2_STATE. */
   public static final String               OAUTH2_STATE                     = "state";
 
+  /** The Constant OAUTH2_ERROR. */
   public static final String               OAUTH2_ERROR                     = "error";
 
+  /** The Constant OAUTH2_ERROR_DESCRIPTION. */
   public static final String               OAUTH2_ERROR_DESCRIPTION         = "error_description";
 
-  // CLDINT-1051 increased from 3 to 5, later decreased to 3 again (due to closed JCR session in case of
-  // retry)
+  /**
+   * The Constant PROVIDER_REQUEST_ATTEMPTS.
+   * CLDINT-1051 increased from 3 to 5, later decreased to 3 again (due to closed JCR session in case of
+   * retry)
+   */
   public static final int                  PROVIDER_REQUEST_ATTEMPTS        = 3;
 
-  // CLDINT-1051 increased from 5s tp 10s
+  /** CLDINT-1051 increased from 5s tp 10s. */
   public static final long                 PROVIDER_REQUEST_ATTEMPT_TIMEOUT = 10000;
 
+  /** The Constant LOG. */
   protected static final Log               LOG                              = ExoLogger.getLogger(CloudDriveConnector.class);
 
+  /** The config. */
   protected final Map<String, String>      config;
 
+  /** The session providers. */
   protected final SessionProviderService   sessionProviders;
 
+  /** The jcr service. */
   protected final RepositoryService        jcrService;
 
+  /** The jcr finder. */
   protected final NodeFinder               jcrFinder;
 
+  /** The provider. */
   protected final CloudProvider            provider;
 
+  /** The connector host. */
   protected final String                   connectorHost;
 
+  /** The connector schema. */
   protected final String                   connectorSchema;
 
+  /** The login SSO. */
   protected final boolean                  loginSSO;
 
+  /** The predefined services. */
   protected final PredefinedServices       predefinedServices;
 
+  /** The mime types. */
   protected final ExtendedMimeTypeResolver mimeTypes;
 
+  /**
+   * Instantiates a new cloud drive connector.
+   *
+   * @param jcrService the jcr service
+   * @param sessionProviders the session providers
+   * @param jcrFinder the jcr finder
+   * @param mimeTypes the mime types
+   * @param params the params
+   * @throws ConfigurationException the configuration exception
+   */
   protected CloudDriveConnector(RepositoryService jcrService,
                                 SessionProviderService sessionProviders,
                                 NodeFinder jcrFinder,
                                 ExtendedMimeTypeResolver mimeTypes,
-                                InitParams params) throws ConfigurationException {
+                                InitParams params)
+      throws ConfigurationException {
 
     this.sessionProviders = sessionProviders;
     this.jcrService = jcrService;
@@ -226,34 +263,75 @@ public abstract class CloudDriveConnector extends BaseComponentPlugin {
     this.provider = createProvider();
   }
 
+  /**
+   * Session provider.
+   *
+   * @return the session provider
+   * @throws RepositoryException the repository exception
+   */
   protected SessionProvider sessionProvider() throws RepositoryException {
     return sessionProviders.getSessionProvider(null);
   }
 
+  /**
+   * Gets the connector host.
+   *
+   * @return the connector host
+   */
   protected String getConnectorHost() {
     return connectorHost;
   }
 
+  /**
+   * Gets the connector schema.
+   *
+   * @return the connector schema
+   */
   protected String getConnectorSchema() {
     return connectorSchema;
   }
 
+  /**
+   * Gets the provider name.
+   *
+   * @return the provider name
+   */
   protected String getProviderName() {
     return config.get(CONFIG_PROVIDER_NAME);
   }
 
+  /**
+   * Gets the provider id.
+   *
+   * @return the provider id
+   */
   protected String getProviderId() {
     return config.get(CONFIG_PROVIDER_ID);
   }
 
+  /**
+   * Gets the client id.
+   *
+   * @return the client id
+   */
   protected String getClientId() {
     return config.get(CONFIG_PROVIDER_CLIENT_ID);
   }
 
+  /**
+   * Gets the client secret.
+   *
+   * @return the client secret
+   */
   protected String getClientSecret() {
     return config.get(CONFIG_PROVIDER_CLIENT_SECRET);
   }
 
+  /**
+   * Checks if is disabled.
+   *
+   * @return true, if is disabled
+   */
   protected boolean isDisabled() {
     String disableStr = config.get(CONFIG_DISABLE);
     return disableStr != null && disableStr.equals("true");
@@ -261,10 +339,11 @@ public abstract class CloudDriveConnector extends BaseComponentPlugin {
 
   /**
    * For loading from local storage by {@link CloudDriveService}.
-   * 
-   * @param jcrRepository, {@link ManageableRepository}
+   *
+   * @param driveNodes collection of {@link Node} object
    * @return {@link Set} of locally connected {@link CloudDrive}
-   * @throws {@link CloudDriveException}
+   * @throws RepositoryException the repository exception
+   * @throws CloudDriveException the cloud drive exception
    */
   final Set<CloudDrive> loadStored(Set<Node> driveNodes) throws RepositoryException, CloudDriveException {
     Set<CloudDrive> connected = new HashSet<CloudDrive>();
@@ -325,6 +404,11 @@ public abstract class CloudDriveConnector extends BaseComponentPlugin {
     return redirectURL.toString();
   }
 
+  /**
+   * Current user.
+   *
+   * @return the string
+   */
   protected String currentUser() {
     ConversationState convo = ConversationState.getCurrent();
     if (convo != null) {
@@ -348,33 +432,33 @@ public abstract class CloudDriveConnector extends BaseComponentPlugin {
    * error_description etc).
    * As result an instance of {@link CloudUser} will be returned, in case of fail an exception will be thrown
    * {@link CloudDriveException}.
-   * 
+   *
    * @param params {@link Map}
-   * @throws CloudDriveException
    * @return {@link CloudUser}
+   * @throws CloudDriveException the cloud drive exception
    */
   protected abstract CloudUser authenticate(Map<String, String> params) throws CloudDriveException;
 
   /**
    * Create Cloud Drive instance for given user. This instance will be connected to local storage
    * under existing {@link Node} <code>driveRoot</code> by {@link CloudDrive#connect()} method.
-   * This node can be of any type, the creation procedure will add special nodetypes to it to allow
-   * required properties and child nodes. Node will be actually saved by {@link CloudDrive#connect()} method.
-   * <br>
-   * To connect the drive use {@link CloudDriveService#connect(CloudUser, Node)}.
-   * 
+   * This node can be of any type, the creation procedure will add special nodetypes to it to allow CLoud
+   * Drive specifics.<br>
+   * To connect the drive use {@link CloudDrive#connect()}. Node will be actually saved by
+   * {@link CloudDrive#connect()} method.
+   *
    * @param user {@link CloudUser} connecting user
-   * @param driveRoot {@link Node} existing node what will be a root of the drive
+   * @param driveNode the drive node
+   * @return {@link CloudDrive} local Cloud Drive instance initialized to local JCR node.
    * @throws CloudDriveException if drive error happens
    * @throws RepositoryException if storage error happens
-   * @return {@link CloudDrive} local Cloud Drive instance initialized to local JCR node.
    */
   protected abstract CloudDrive createDrive(CloudUser user, Node driveNode) throws CloudDriveException, RepositoryException;
 
   /**
    * Load Cloud Drive from local storage under existing {@link Node} <code>driveRoot</code>.
-   * 
-   * @param driveRoot {@link Node} existing node pointing the root of the drive
+   *
+   * @param driveNode the drive node
    * @return {@link CloudDrive} local Cloud Drive instance connected to local JCR node.
    * @throws CloudDriveException if drive error happens
    * @throws RepositoryException if storage error happens

@@ -1,6 +1,6 @@
 
 /*
- * Copyright (C) 2003-2014 eXo Platform SAS.
+ * Copyright (C) 2003-2016 eXo Platform SAS.
  *
  * This is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as
@@ -30,21 +30,23 @@ package org.exoplatform.clouddrive;
  */
 public class NotFoundException extends CloudDriveException {
 
-  /**
-   * 
-   */
+  /** The Constant serialVersionUID. */
   private static final long serialVersionUID = -8215526671682471362L;
 
   /**
-   * @param message
+   * Instantiates a new not found exception.
+   *
+   * @param message the message
    */
   public NotFoundException(String message) {
     super(message);
   }
 
   /**
-   * @param message
-   * @param cause
+   * Instantiates a new not found exception.
+   *
+   * @param message the message
+   * @param cause the cause
    */
   public NotFoundException(String message, Throwable cause) {
     super(message, cause);

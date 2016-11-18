@@ -1,18 +1,20 @@
 /*
- * Copyright (C) 2003-2012 eXo Platform SAS.
+ * Copyright (C) 2003-2016 eXo Platform SAS.
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * This is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation; either version 2.1 of
+ * the License, or (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful,
+ * This software is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Affero General Public License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the GNU Affero General Public License
- * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this software; if not, write to the Free
+ * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+ * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
 package org.exoplatform.clouddrive;
 
@@ -30,7 +32,7 @@ import javax.jcr.RepositoryException;
 
 /**
  * Local mirror of cloud drive. All files of this drive contain metadata such as name,
- * author, dates and link to actual drive on the cloud provider. <br/>
+ * author, dates and link to actual drive on the cloud provider. <br>
  * <p>
  * Created by The eXo Platform SAS.
  * 
@@ -39,6 +41,7 @@ import javax.jcr.RepositoryException;
  */
 public abstract class CloudDrive {
 
+  /** The Constant LOG. */
   protected static final Log LOG = ExoLogger.getLogger(CloudDrive.class);
 
   /**
@@ -149,7 +152,7 @@ public abstract class CloudDrive {
      * can be greater if provider supports retry on error.
      * 
      * @return number of attempts already tried (starting from 0)
-     * @see {@link CloudProvider#retryOnProviderError()}
+     * @see CloudProvider#retryOnProviderError()
      */
     int getAttempts();
   }
@@ -189,8 +192,14 @@ public abstract class CloudDrive {
    */
   protected class ListenerSupport {
 
+    /** The registry. */
     Queue<CloudDriveListener> registry = new ConcurrentLinkedQueue<CloudDriveListener>();
 
+    /**
+     * Fire on connect.
+     *
+     * @param event the event
+     */
     public void fireOnConnect(CloudDriveEvent event) {
       for (CloudDriveListener listener : registry) {
         try {
@@ -202,6 +211,11 @@ public abstract class CloudDrive {
       }
     }
 
+    /**
+     * Fire on disconnect.
+     *
+     * @param event the event
+     */
     public void fireOnDisconnect(CloudDriveEvent event) {
       for (CloudDriveListener listener : registry) {
         try {
@@ -213,6 +227,11 @@ public abstract class CloudDrive {
       }
     }
 
+    /**
+     * Fire on remove.
+     *
+     * @param event the event
+     */
     public void fireOnRemove(CloudDriveEvent event) {
       for (CloudDriveListener listener : registry) {
         try {
@@ -224,6 +243,11 @@ public abstract class CloudDrive {
       }
     }
 
+    /**
+     * Fire on synchronized.
+     *
+     * @param event the event
+     */
     public void fireOnSynchronized(CloudDriveEvent event) {
       for (CloudDriveListener listener : registry) {
         try {
@@ -235,6 +259,13 @@ public abstract class CloudDrive {
       }
     }
 
+    /**
+     * Fire on error.
+     *
+     * @param event the event
+     * @param error the error
+     * @param operationName the operation name
+     */
     public void fireOnError(CloudDriveEvent event, Throwable error, String operationName) {
       for (CloudDriveListener listener : registry) {
         try {
@@ -250,6 +281,7 @@ public abstract class CloudDrive {
 
   // *********** class body ************
 
+  /** The listeners. */
   protected final ListenerSupport listeners = new ListenerSupport();
 
   /**
@@ -260,12 +292,22 @@ public abstract class CloudDrive {
     return title() + " " + super.toString();
   }
 
+  /**
+   * Adds the listener.
+   *
+   * @param listener {@link CloudDriveListener}
+   */
   public void addListener(CloudDriveListener listener) {
     if (!listeners.registry.contains(listener)) {
       listeners.registry.add(listener);
     }
   }
 
+  /**
+   * Removes the listener.
+   *
+   * @param listener {@link CloudDriveListener}
+   */
   public void removeListener(CloudDriveListener listener) {
     listeners.registry.remove(listener);
   }
@@ -281,13 +323,18 @@ public abstract class CloudDrive {
    * Cloud Drive title in storage.
    * 
    * @return {@link String} with title
+   * @throws DriveRemovedException when drive removed
+   * @throws RepositoryException on local storage error
    */
   public abstract String getTitle() throws DriveRemovedException, RepositoryException;
 
   /**
    * Link to the drive home.
-   * 
+   *
    * @return {@link String}
+   * @throws DriveRemovedException when drive removed
+   * @throws NotConnectedException when drive disconnected
+   * @throws RepositoryException on local storage error
    */
   public abstract String getLink() throws DriveRemovedException, NotConnectedException, RepositoryException;
 
@@ -295,9 +342,15 @@ public abstract class CloudDrive {
    * State object is vendor specific and describe the drive's current state including changes notification and
    * other internal mechanisms. This kind of service optional and may not be supported. If state not supported
    * then this object will be <code>null</code> .
-   * 
+   *
    * @return {@link FilesState} an object instance that can be used to monitor the drive current state or
    *         <code>null</code> if such service not supported.
+   * @throws DriveRemovedException when drive removed
+   * @throws RefreshAccessException if an an access to the drive should be renewed by invoking an
+   *           authentication and/or authorization of actual user
+   * @throws CloudProviderException an error specific to the drive provider raised (anything related to
+   *           connectivity the cloud or processing response results)
+   * @throws RepositoryException on local storage error
    */
   public abstract FilesState getState() throws DriveRemovedException,
                                         RefreshAccessException,
@@ -308,67 +361,73 @@ public abstract class CloudDrive {
    * Local user related to this Cloud Drive.
    * 
    * @return {@link String}
-   * @throws RepositoryException
+   * @throws DriveRemovedException when drive removed
+   * @throws RepositoryException on local storage error
    */
   public abstract String getLocalUser() throws DriveRemovedException, RepositoryException;
 
   /**
    * Initialization date of this Cloud Drive.
-   * 
+   *
    * @return {@link Calendar}
-   * @throws RepositoryException
-   * @throws DriveRemovedException
+   * @throws DriveRemovedException when drive removed
+   * @throws RepositoryException on local storage error
    */
   public abstract Calendar getInitDate() throws DriveRemovedException, RepositoryException;
 
   /**
    * Date of currently established Cloud Drive connection.
-   * 
+   *
    * @return {@link Calendar}
-   * @throws RepositoryException
-   * @throws DriveRemovedException
-   * @throws NotConnectedException
+   * @throws DriveRemovedException when drive removed
+   * @throws NotConnectedException when drive disconnected
+   * @throws RepositoryException on local storage error
    */
   public abstract Calendar getConnectDate() throws DriveRemovedException, NotConnectedException, RepositoryException;
 
   /**
-   * Cloud Drive path in storage. It introduces storage depended identifier of the drive. <br/>
+   * Cloud Drive path in storage. It introduces storage depended identifier of the drive.
+   * <p>
    * For JCR storage it's a drive Node path. It can be changed if drive node will be moved.
-   * 
+   *
    * @return String with path in the store.
-   * @throws RepositoryException
-   * @throws DriveRemovedException
+   * @throws DriveRemovedException when drive removed
+   * @throws RepositoryException on local storage error
    */
   public abstract String getPath() throws DriveRemovedException, RepositoryException;
 
   /**
-   * Cloud Drive workspace in storage. It introduces storage depended identifier of the drive. <br/>
+   * Cloud Drive workspace in storage. It introduces storage depended identifier of the drive.
+   * <p>
    * For JCR storage it's a drive Node's session workspace.
-   * 
+   *
    * @return String with path in the store.
-   * @throws RepositoryException
-   * @throws DriveRemovedException
+   * @throws DriveRemovedException when drive removed
+   * @throws RepositoryException on local storage error
    */
   public abstract String getWorkspace() throws DriveRemovedException, RepositoryException;
 
   /**
    * Unique identifier of the drive. The Id never changes.
-   * 
+   *
    * @return String with id.
-   * @throws RepositoryException
+   * @throws DriveRemovedException when drive removed
+   * @throws NotConnectedException when drive disconnected
+   * @throws RepositoryException on local storage error
    */
   public abstract String getId() throws DriveRemovedException, NotConnectedException, RepositoryException;
 
   /**
    * Return file from local cloud drive.
    * 
-   * @see #hasFile(String)
+   * @param path {@link String} path in JCR
    * @return local cloud file in the drive.
-   * @throws DriveRemovedException if drive removed
+   * @throws DriveRemovedException when drive removed
    * @throws NotCloudDriveException if given path doesn't belong to this cloud drive
    * @throws NotCloudFileException if given path doesn't belong to this cloud drive
    * @throws NotYetCloudFileException if file not yet a cloud file in this drive (e.g. in process of creation)
-   * @throws RepositoryException
+   * @throws RepositoryException on local storage error
+   * @see #hasFile(String)
    */
   public abstract CloudFile getFile(String path) throws DriveRemovedException,
                                                  NotCloudDriveException,
@@ -379,14 +438,14 @@ public abstract class CloudDrive {
   /**
    * Tells if cloud file with given path exists in this cloud drive. Note that local node existing in a cloud
    * drive, and not yet added to the cloud, will be treated as not a file and <code>false</code> will be
-   * returned. <br/>
+   * returned. <br>
    * This method also works with links to files from the drive.
    * 
-   * @param path {@link String}
+   * @param path {@link String} path in JCR
    * @return boolean, {@code true} if given path points to a cloud file in this drive, {@code false} otherwise
-   * @throws DriveRemovedException if drive removed
+   * @throws DriveRemovedException when drive removed
    * @throws NotCloudDriveException if given paths doesn't belong to drive node
-   * @throws RepositoryException if storage error
+   * @throws RepositoryException on local storage error if storage error
    */
   public abstract boolean hasFile(String path) throws DriveRemovedException, NotCloudDriveException, RepositoryException;
 
@@ -394,27 +453,11 @@ public abstract class CloudDrive {
    * List of files on local cloud drive.
    * 
    * @return collection of local cloud files in the drive.
-   * @throws DriveRemovedException if drive removed
-   * @throws CloudDriveException
-   * @throws RepositoryException
+   * @throws DriveRemovedException when drive removed
+   * @throws CloudDriveException drive error
+   * @throws RepositoryException on local storage error
    */
   public abstract Collection<CloudFile> listFiles() throws DriveRemovedException, CloudDriveException, RepositoryException;
-
-  /**
-   * List of local cloud files on given as parent folder.
-   * 
-   * @param CloudFile parent folder
-   * @return collection of file is a folder, empty list otherwise.
-   * @throws DriveRemovedException
-   * @throws NotCloudDriveException
-   * @throws CloudDriveException
-   * @throws RepositoryException
-   */
-  @Deprecated
-  public abstract Collection<CloudFile> listFiles(CloudFile parent) throws DriveRemovedException,
-                                                                    NotCloudDriveException,
-                                                                    CloudDriveException,
-                                                                    RepositoryException;
 
   /**
    * Connects cloud drive to local JCR storage. This method fetches metadata of remote files from the cloud
@@ -425,17 +468,17 @@ public abstract class CloudDrive {
    * Method returns {@link Command} object what provides information about the connect process such as
    * progress in percents, timing and affected files available during the processing of the command. Connect
    * process will be started asynchronously in another thread and method return immediately.
-   * 
+   *
    * @return {@link Command} describing the connect process
+   * @throws CloudDriveException drive error
+   * @throws RepositoryException on local storage error
    * @see CloudDriveListener#onConnect(CloudDriveEvent)
-   * @throws CloudDriveException
-   * @throws RepositoryException
    */
   public abstract Command connect() throws CloudDriveException, RepositoryException;
 
   /**
    * Synchronize local storage with cloud drive. Refreshes metadata (and optionally a content) of the cloud
-   * drive.<br/>
+   * drive.<br>
    * Drive may not support synchronization. In such case {@link SyncNotSupportedException} will be thrown.<br>
    * To check the state of the synchronization register a listener to drive
    * {@link CloudDrive#addListener(CloudDriveListener)}. <br>
@@ -443,13 +486,12 @@ public abstract class CloudDrive {
    * percents, timing and affected files available during the processing of the command. Synchronization
    * process will be started asynchronously in another thread and method return immediately.
    * 
-   * @see CloudDriveListener#onSynchronized(CloudDriveEvent)
-   * @see CloudDriveListener#getFileChangeAction()
    * @return {@link Command} describing the synchronization process
    * @throws SyncNotSupportedException if synchronization not supported
-   * @throws DriveRemovedException
-   * @throws CloudDriveException
-   * @throws RepositoryException
+   * @throws DriveRemovedException when drive removed
+   * @throws CloudDriveException drive error
+   * @throws RepositoryException on local storage error
+   * @see CloudDriveListener#onSynchronized(CloudDriveEvent)
    */
   public abstract Command synchronize() throws SyncNotSupportedException,
                                         DriveRemovedException,
@@ -460,43 +502,43 @@ public abstract class CloudDrive {
    * Answers if drive is connected.
    * 
    * @return boolean, {@code true} if drive connected to local store, {@code false} otherwise.
-   * @throws DriveRemovedException
-   * @throws RepositoryException
+   * @throws DriveRemovedException when drive removed
+   * @throws RepositoryException on local storage error
    */
   public abstract boolean isConnected() throws DriveRemovedException, RepositoryException;
 
   /**
-   * Tells whether given node instance represents this Cloud Drive. <br/>
-   * A node represents a cloud drive if it is a root node of the drive storage. <br/>
+   * Tells whether given node instance represents this Cloud Drive. <br>
+   * A node represents a cloud drive if it is a root node of the drive storage. <br>
    * This method also works with links to files of the drive.
    * 
    * @param node {@link Node}
    * @return boolean, {@code true} if given node belongs to this Cloud Drive, {@code false} otherwise.
-   * @throws DriveRemovedException
-   * @throws RepositoryException
+   * @throws DriveRemovedException when drive removed
+   * @throws RepositoryException on local storage error
    */
   public abstract boolean isDrive(Node node) throws DriveRemovedException, RepositoryException;
 
   // ********** internal stuff **********
 
   /**
-   * Tells whether given node instance belongs to this Cloud Drive folder. <br/>
+   * Tells whether given node instance belongs to this Cloud Drive folder. <br>
    * A node belong to a cloud drive if it represents this drive's storage root node or it
-   * represents a file on path of this drive folder.<br/>
+   * represents a file on path of this drive folder.<br>
    * This method also works with links to files of the drive.
    * 
    * @param node {@link Node}
    * @return boolean, {@code true} if given node belongs to this Cloud Drive, {@code false} otherwise.
-   * @throws DriveRemovedException
-   * @throws RepositoryException
+   * @throws DriveRemovedException when drive removed
+   * @throws RepositoryException on local storage error
    */
   protected abstract boolean isInDrive(Node node) throws DriveRemovedException, RepositoryException;
 
   /**
-   * Tells whether given path belongs to this Cloud Drive. <br/>
+   * Tells whether given path belongs to this Cloud Drive. <br>
    * A path belong a cloud drive if it represents this drive's storage root node and the drive connected. If
    * {@code includeFiles} is {@code true} then given path also will be tested whether it is a path of a file
-   * in this drive, and if it is, {@code true} will be returned.<br/>
+   * in this drive, and if it is, {@code true} will be returned.<br>
    * This method also works with links to files of the drive.
    * 
    * @param workspace {@link String}
@@ -505,8 +547,8 @@ public abstract class CloudDrive {
    *          this drive and thus {@code true} will be returned for the file on this drive.
    * 
    * @return boolean, {@code true} if given path belongs to this Cloud Drive, {@code false} otherwise.
-   * @throws DriveRemovedException if drive removed
-   * @throws RepositoryException
+   * @throws DriveRemovedException when drive removed if drive removed
+   * @throws RepositoryException on local storage error
    */
   protected abstract boolean isDrive(String workspace, String path, boolean includeFiles) throws DriveRemovedException,
                                                                                           RepositoryException;
@@ -514,16 +556,16 @@ public abstract class CloudDrive {
   /**
    * Disconnects cloud drive from local storage. Clean (remove) metadata of remote files from the local.
    * 
-   * @throws DriveRemovedException
-   * @throws CloudDriveException
-   * @throws RepositoryException
+   * @throws DriveRemovedException when drive removed
+   * @throws CloudDriveException drive error
+   * @throws RepositoryException on local storage error
    */
   protected abstract void disconnect() throws DriveRemovedException, CloudDriveException, RepositoryException;
 
   /**
    * Refresh access to the cloud provider services using locally stored refresh keys.
    * 
-   * @throws CloudDriveException if cloud provider error
+   * @throws CloudDriveException drive or provider error
    */
   protected abstract void refreshAccess() throws CloudDriveException;
 
@@ -532,7 +574,7 @@ public abstract class CloudDrive {
    * 
    * @param user {@link CloudUser}
    * @throws CloudDriveException if drive node was removed or cloud provider error
-   * @throws RepositoryException if storage error
+   * @throws RepositoryException on local storage error if storage error
    */
   protected abstract void updateAccess(CloudUser user) throws CloudDriveException, RepositoryException;
 
@@ -545,7 +587,7 @@ public abstract class CloudDrive {
 
   /**
    * Configure environment for commands execution (optional).
-   * 
+   *
    * @param env {@link CloudDriveEnvironment}
    * @param synchronizers collection of {@link CloudFileSynchronizer}, it will be used for file
    *          synchronization.
@@ -557,9 +599,9 @@ public abstract class CloudDrive {
    * created for use from JCR pre-remove action.
    * 
    * @param file {@link Node} a node representing a file in the drive.
-   * @throws SyncNotSupportedException
-   * @throws CloudDriveException
-   * @throws RepositoryException
+   * @throws SyncNotSupportedException if synchronization not supported
+   * @throws CloudDriveException drive error
+   * @throws RepositoryException on local storage error
    */
   protected abstract void initRemove(Node file) throws SyncNotSupportedException, CloudDriveException, RepositoryException;
 
@@ -568,9 +610,9 @@ public abstract class CloudDrive {
    * 
    * @param srcNode {@link Node}
    * @param destNode {@link Node}
-   * @throws SyncNotSupportedException
-   * @throws CloudDriveException
-   * @throws RepositoryException
+   * @throws SyncNotSupportedException if synchronization not supported
+   * @throws CloudDriveException drive error
+   * @throws RepositoryException on local storage error
    */
   protected abstract void initCopy(Node srcNode, Node destNode) throws SyncNotSupportedException,
                                                                 CloudDriveException,

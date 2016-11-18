@@ -1,18 +1,20 @@
 /*
- * Copyright (C) 2003-2012 eXo Platform SAS.
+ * Copyright (C) 2003-2016 eXo Platform SAS.
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * This is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation; either version 2.1 of
+ * the License, or (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful,
+ * This software is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Affero General Public License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the GNU Affero General Public License
- * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this software; if not, write to the Free
+ * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+ * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
 package org.exoplatform.clouddrive.jcr;
 
@@ -32,43 +34,59 @@ public class JCRLocalCloudFile implements CloudFile {
    */
   public static final long         FOLDER_SIZE = -1;
 
+  /** The path. */
   private final String             path;
 
+  /** The id. */
   private final String             id;
 
+  /** The title. */
   private final String             title;
 
+  /** The link. */
   private final String             link;
 
+  /** The edit link. */
   private final String             editLink;
 
+  /** The preview link. */
   private final String             previewLink;
 
+  /** The thumbnail link. */
   private final String             thumbnailLink;
 
+  /** The type mode. */
   private final String             type, typeMode;
 
+  /** The last user. */
   private final String             lastUser;
 
+  /** The author. */
   private final String             author;
 
+  /** The folder. */
   private final boolean            folder;
 
+  /** The size. */
   private final long               size;
 
   // FYI transient fields will not appear in serialized forms like JSON object on client side
 
+  /** The created date. */
   private final transient Calendar createdDate;
 
+  /** The modified date. */
   private final transient Calendar modifiedDate;
 
+  /** The node. */
   private final transient Node     node;
 
+  /** The changed. */
   private final transient boolean  changed;
 
   /**
    * Local cloud file or folder (full internal constructor).
-   * 
+   *
    * @param path {@link String}
    * @param id {@link String}
    * @param title {@link String}
@@ -83,6 +101,7 @@ public class JCRLocalCloudFile implements CloudFile {
    * @param createdDate {@link Calendar}
    * @param modifiedDate {@link Calendar}
    * @param folder {@link Boolean}
+   * @param size the size
    * @param node {@link Node}
    * @param changed {@link Boolean}
    */
@@ -124,7 +143,7 @@ public class JCRLocalCloudFile implements CloudFile {
 
   /**
    * Local cloud file with edit link.
-   * 
+   *
    * @param path {@link String}
    * @param id {@link String}
    * @param title {@link String}
@@ -138,6 +157,7 @@ public class JCRLocalCloudFile implements CloudFile {
    * @param author {@link String}
    * @param createdDate {@link Calendar}
    * @param modifiedDate {@link Calendar}
+   * @param size the size
    * @param node {@link Node}
    * @param changed {@link Boolean}
    */
@@ -178,7 +198,7 @@ public class JCRLocalCloudFile implements CloudFile {
 
   /**
    * Local cloud file without edit link.
-   * 
+   *
    * @param path {@link String}
    * @param id {@link String}
    * @param title {@link String}
@@ -191,6 +211,7 @@ public class JCRLocalCloudFile implements CloudFile {
    * @param author {@link String}
    * @param createdDate {@link Calendar}
    * @param modifiedDate {@link Calendar}
+   * @param size the size
    * @param node {@link Node}
    * @param changed {@link Boolean}
    */
@@ -273,6 +294,9 @@ public class JCRLocalCloudFile implements CloudFile {
          changed);
   }
 
+  /**
+   * {@inheritDoc}
+   */
   public String getPath() {
     return path;
   }
@@ -310,6 +334,8 @@ public class JCRLocalCloudFile implements CloudFile {
   }
 
   /**
+   * Gets the preview link.
+   *
    * @return the previewLink
    */
   public String getPreviewLink() {
@@ -317,7 +343,9 @@ public class JCRLocalCloudFile implements CloudFile {
   }
 
   /**
-   * @inherritDoc
+   * Gets the thumbnail link.
+   *
+   * @return the thumbnail link
    */
   @Override
   public String getThumbnailLink() {
@@ -333,6 +361,8 @@ public class JCRLocalCloudFile implements CloudFile {
   }
 
   /**
+   * Gets the type mode.
+   *
    * @return the typeMode
    */
   public String getTypeMode() {
