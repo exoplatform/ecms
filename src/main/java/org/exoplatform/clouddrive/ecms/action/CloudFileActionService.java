@@ -318,7 +318,19 @@ public class CloudFileActionService implements Startable {
   protected final String                 usersPath;
 
   /**
-   * 
+   * Instantiates a new cloud file action service.
+   *
+   * @param cloudDrive the cloud drive
+   * @param jcrService the jcr service
+   * @param sessionProviders the session providers
+   * @param orgService the org service
+   * @param finder the finder
+   * @param hierarchyCreator the hierarchy creator
+   * @param linkManager the link manager
+   * @param documentDrives the document drives
+   * @param trash the trash
+   * @param listeners the listeners
+   * @param cmsService the cms service
    */
   public CloudFileActionService(CloudDriveService cloudDrive,
                                 RepositoryService jcrService,
@@ -347,14 +359,35 @@ public class CloudFileActionService implements Startable {
     this.usersPath = hierarchyCreator.getJcrPath(BasePath.CMS_USERS_PATH);
   }
 
+  /**
+   * Checks if is group drive.
+   *
+   * @param drive the drive
+   * @return true, if is group drive
+   */
   public boolean isGroupDrive(DriveData drive) {
     return drive.getHomePath().startsWith(groupsPath);
   }
 
+  /**
+   * Checks if is user drive.
+   *
+   * @param drive the drive
+   * @return true, if is user drive
+   */
   public boolean isUserDrive(DriveData drive) {
     return drive.getHomePath().startsWith(usersPath);
   }
 
+  /**
+   * Link share to user.
+   *
+   * @param fileNode the file node
+   * @param fileDrive the file drive
+   * @param userName the user name
+   * @return the node
+   * @throws Exception the exception
+   */
   public Node linkShareToUser(Node fileNode, CloudDrive fileDrive, String userName) throws Exception {
     Node userDocs = getUserPublicNode(userName);
 
@@ -372,6 +405,13 @@ public class CloudFileActionService implements Startable {
     return link;
   }
 
+  /**
+   * Gets the user drive.
+   *
+   * @param userName the user name
+   * @return the user drive
+   * @throws Exception the exception
+   */
   public DriveData getUserDrive(String userName) throws Exception {
     DriveData userDrive = null;
     String homePath = null;
@@ -395,6 +435,13 @@ public class CloudFileActionService implements Startable {
     return userDrive;
   }
 
+  /**
+   * Gets the user public node.
+   *
+   * @param userName the user name
+   * @return the user public node
+   * @throws Exception the exception
+   */
   public Node getUserPublicNode(String userName) throws Exception {
     SessionProvider ssp = sessionProviders.getSystemSessionProvider(null);
     if (ssp != null) {
@@ -404,6 +451,13 @@ public class CloudFileActionService implements Startable {
     throw new RepositoryException("Cannot get session provider.");
   }
 
+  /**
+   * Removes the links.
+   *
+   * @param fileNode the file node
+   * @param shareIdentity the share identity
+   * @throws RepositoryException the repository exception
+   */
   public void removeLinks(Node fileNode, String shareIdentity) throws RepositoryException {
     // remove all copied/linked symlinks from the original shared to given identity (or all if it is null)
     for (NodeIterator niter = getCloudFileLinks(fileNode, shareIdentity, true); niter.hasNext();) {
@@ -414,6 +468,13 @@ public class CloudFileActionService implements Startable {
     }
   }
 
+  /**
+   * Gets the node drive.
+   *
+   * @param node the node
+   * @return the node drive
+   * @throws Exception the exception
+   */
   public DriveData getNodeDrive(Node node) throws Exception {
     String groupId = getDriveNameFromPath(node.getPath());
     // TODO in case of user drive its home path may be not filled with actual value (contains $userId
@@ -421,6 +482,13 @@ public class CloudFileActionService implements Startable {
     return groupId != null ? documentDrives.getDriveByName(groupId) : null;
   }
 
+  /**
+   * Gets the drive name from path.
+   *
+   * @param nodePath the node path
+   * @return the drive name from path
+   * @throws CloudFileActionException the cloud file action exception
+   */
   @Deprecated // TODO not complete logic
   public String getDriveNameFromPath(String nodePath) throws CloudFileActionException {
     List<DriveData> allDrives;
@@ -450,6 +518,18 @@ public class CloudFileActionService implements Startable {
     return null;
   }
 
+  /**
+   * Link file.
+   *
+   * @param srcNode the src node
+   * @param destNode the dest node
+   * @param destIdentity the dest identity
+   * @return the node
+   * @throws NotCloudDriveException the not cloud drive exception
+   * @throws DriveRemovedException the drive removed exception
+   * @throws RepositoryException the repository exception
+   * @throws CloudDriveException the cloud drive exception
+   */
   public Node linkFile(Node srcNode, Node destNode, String destIdentity) throws NotCloudDriveException,
                                                                          DriveRemovedException,
                                                                          RepositoryException,
@@ -468,6 +548,16 @@ public class CloudFileActionService implements Startable {
     return linkNode;
   }
 
+  /**
+   * Mark remove link.
+   *
+   * @param linkNode the link node
+   * @return the node
+   * @throws NotCloudDriveException the not cloud drive exception
+   * @throws DriveRemovedException the drive removed exception
+   * @throws RepositoryException the repository exception
+   * @throws CloudDriveException the cloud drive exception
+   */
   public Node markRemoveLink(final Node linkNode) throws NotCloudDriveException,
                                                   DriveRemovedException,
                                                   RepositoryException,
@@ -497,6 +587,17 @@ public class CloudFileActionService implements Startable {
     return null;
   }
 
+  /**
+   * Share cloud file.
+   *
+   * @param fileNode the file node
+   * @param cloudDrive the cloud drive
+   * @param identities the identities
+   * @throws NotCloudDriveException the not cloud drive exception
+   * @throws DriveRemovedException the drive removed exception
+   * @throws RepositoryException the repository exception
+   * @throws CloudDriveException the cloud drive exception
+   */
   public void shareCloudFile(final Node fileNode,
                              final CloudDrive cloudDrive,
                              final String... identities) throws NotCloudDriveException,
@@ -529,6 +630,17 @@ public class CloudFileActionService implements Startable {
     }
   }
 
+  /**
+   * Unshare cloud file.
+   *
+   * @param fileNode the file node
+   * @param cloudDrive the cloud drive
+   * @param identities the identities
+   * @throws NotCloudDriveException the not cloud drive exception
+   * @throws DriveRemovedException the drive removed exception
+   * @throws RepositoryException the repository exception
+   * @throws CloudDriveException the cloud drive exception
+   */
   public void unshareCloudFile(final Node fileNode,
                                final CloudDrive cloudDrive,
                                final String... identities) throws NotCloudDriveException,
@@ -554,6 +666,15 @@ public class CloudFileActionService implements Startable {
     });
   }
 
+  /**
+   * Post shared activity.
+   *
+   * @param node the node
+   * @param link the link
+   * @param comment the comment
+   * @return the string
+   * @throws CloudDriveException the cloud drive exception
+   */
   public String postSharedActivity(Node node, Node link, String comment) throws CloudDriveException {
     try {
       Utils.setActivityType(SHARE_CLOUD_FILES_SPACES);
