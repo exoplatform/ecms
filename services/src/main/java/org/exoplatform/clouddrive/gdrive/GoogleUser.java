@@ -29,6 +29,7 @@ import org.exoplatform.clouddrive.CloudUser;
  */
 public class GoogleUser extends CloudUser {
 
+  /** The api. */
   protected final GoogleDriveAPI api;
 
   /**

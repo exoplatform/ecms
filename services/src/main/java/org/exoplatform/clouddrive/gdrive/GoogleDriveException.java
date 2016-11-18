@@ -25,28 +25,32 @@ import org.exoplatform.clouddrive.CloudProviderException;
  */
 public class GoogleDriveException extends CloudProviderException {
   
-  /**
-   * 
-   */
+  /** The Constant serialVersionUID. */
   private static final long serialVersionUID = -4550294718482983340L;
 
   /**
-   * @param message
+   * Instantiates a new google drive exception.
+   *
+   * @param message the message
    */
   public GoogleDriveException(String message) {
     super(message);
   }
 
   /**
-   * @param message
-   * @param cause
+   * Instantiates a new google drive exception.
+   *
+   * @param message the message
+   * @param cause the cause
    */
   public GoogleDriveException(String message, Throwable cause) {
     super(message, cause);
   }
   
   /**
-   * @param cause
+   * Instantiates a new google drive exception.
+   *
+   * @param cause the cause
    */
   public GoogleDriveException(Throwable cause) {
     super(cause);

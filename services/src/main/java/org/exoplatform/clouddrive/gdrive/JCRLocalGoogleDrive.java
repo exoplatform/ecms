@@ -82,9 +82,9 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
 
     /**
      * Create connect to Google Drive command.
-     * 
-     * @throws RepositoryException
-     * @throws DriveRemovedException
+     *
+     * @throws RepositoryException the repository exception
+     * @throws DriveRemovedException the drive removed exception
      */
     protected Connect() throws RepositoryException, DriveRemovedException {
       super();
@@ -106,6 +106,14 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
       setChangeId(about.getLargestChangeId());
     }
 
+    /**
+     * Fetch childs.
+     *
+     * @param fileId the file id
+     * @param localFile the local file
+     * @throws CloudDriveException the cloud drive exception
+     * @throws RepositoryException the repository exception
+     */
     protected void fetchChilds(String fileId, Node localFile) throws CloudDriveException, RepositoryException {
       ChildIterator children = api.children(fileId);
       iterators.add(children);
@@ -209,6 +217,7 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
      */
     protected final GoogleDriveAPI api;
 
+    /** The changes. */
     protected ChangesIterator      changes;
 
     /**
@@ -224,9 +233,9 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
 
     /**
      * Create command for Google Drive synchronization.
-     * 
-     * @throws RepositoryException
-     * @throws DriveRemovedException
+     *
+     * @throws RepositoryException the repository exception
+     * @throws DriveRemovedException the drive removed exception
      */
     protected Sync() throws RepositoryException, DriveRemovedException {
       super();
@@ -275,6 +284,12 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
       setChangeId(changes.getLargestChangeId());
     }
 
+    /**
+     * Sync next.
+     *
+     * @throws RepositoryException the repository exception
+     * @throws CloudDriveException the cloud drive exception
+     */
     protected void syncNext() throws RepositoryException, CloudDriveException {
       while (changes.hasNext() && !Thread.currentThread().isInterrupted()) {
         com.google.api.services.drive.model.Change ch = changes.next();
@@ -344,10 +359,10 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
 
     /**
      * Remove file node.
-     * 
+     *
      * @param fileId {@link String}
-     * @throws RepositoryException
-     * @throws CloudDriveException
+     * @throws RepositoryException the repository exception
+     * @throws CloudDriveException the cloud drive exception
      */
     protected void deleteFile(String fileId) throws RepositoryException, CloudDriveException {
       List<Node> existing = nodes.get(fileId);
@@ -380,13 +395,11 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
 
     /**
      * Create or update file's node.
-     * 
+     *
      * @param gf {@link File}
      * @param parentIds array of Ids of parents (folders)
-     * @throws CloudDriveException
-     * @throws IOException
-     * @throws RepositoryException
-     * @throws InterruptedException
+     * @throws CloudDriveException the cloud drive exception
+     * @throws RepositoryException the repository exception
      */
     protected void updateFile(File gf, String[] parentIds) throws CloudDriveException, RepositoryException {
       List<Node> existing = nodes.get(gf.getId());
@@ -559,6 +572,12 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
       }
     }
 
+    /**
+     * Gets the parents.
+     *
+     * @param gfile the gfile
+     * @return the parents
+     */
     protected String[] getParents(File gfile) {
       if (gfile != null) {
         List<ParentReference> parents = gfile.getParents();
@@ -576,11 +595,11 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
     /**
      * Check if file isn't deleted/trashed in Google Drive, explicitly or as a part of its
      * ancestor deletion/trashing.
-     * 
-     * @param file {@link File}
+     *
+     * @param gfile the gfile
      * @return {@link Boolean} <code>true</code> if the file or its ancestor was deleted or trashed,
      *         <code>false</code> otherwise
-     * @throws GoogleDriveException
+     * @throws GoogleDriveException the google drive exception
      */
     protected boolean isRemoved(File gfile) throws GoogleDriveException {
       try {
@@ -609,6 +628,9 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
     }
   }
 
+  /**
+   * The Class FileAPI.
+   */
   protected class FileAPI extends AbstractFileAPI {
 
     /**
@@ -616,6 +638,9 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
      */
     protected final GoogleDriveAPI api;
 
+    /**
+     * Instantiates a new file API.
+     */
     FileAPI() {
       this.api = getUser().api();
     }
@@ -989,6 +1014,17 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
                                    true);
     }
 
+    /**
+     * Copy subtree.
+     *
+     * @param folderNode the folder node
+     * @return the file
+     * @throws RepositoryException the repository exception
+     * @throws GoogleDriveException the google drive exception
+     * @throws DriveRemovedException the drive removed exception
+     * @throws CloudDriveAccessException the cloud drive access exception
+     * @throws NotFoundException the not found exception
+     */
     protected File copySubtree(Node folderNode) throws RepositoryException,
                                                 GoogleDriveException,
                                                 DriveRemovedException,
@@ -1243,12 +1279,14 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
 
   /**
    * Create newly connecting drive.
-   * 
-   * @param user
-   * @param driveNode
-   * @param sessionProviders
-   * @throws CloudDriveException
-   * @throws RepositoryException
+   *
+   * @param user the user
+   * @param driveNode the drive node
+   * @param sessionProviders the session providers
+   * @param finder the finder
+   * @param mimeTypes the mime types
+   * @throws CloudDriveException the cloud drive exception
+   * @throws RepositoryException the repository exception
    */
   protected JCRLocalGoogleDrive(GoogleUser user,
                                 Node driveNode,
@@ -1261,14 +1299,16 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
 
   /**
    * Create drive by loading it from local JCR node.
-   * 
+   *
    * @param apiBuilder {@link API} API builder
    * @param provider {@link GoogleProvider}
    * @param driveNode {@link Node} root of the drive
-   * @param sessionProviders
+   * @param sessionProviders the session providers
+   * @param finder the finder
+   * @param mimeTypes the mime types
    * @throws RepositoryException if local storage error
-   * @throws CloudDriveException if cannot load tokens stored locally
    * @throws GoogleDriveException if error communicating with Google Drive services
+   * @throws CloudDriveException if cannot load tokens stored locally
    */
   protected JCRLocalGoogleDrive(API apiBuilder,
                                 GoogleProvider provider,
@@ -1283,14 +1323,14 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
 
   /**
    * Load user from the drive Node.
-   * 
+   *
    * @param apiBuilder {@link API} API builder
    * @param provider {@link GoogleProvider}
    * @param driveNode {@link Node} root of the drive
    * @return {@link GoogleUser}
-   * @throws RepositoryException
-   * @throws GoogleDriveException
-   * @throws CloudDriveException
+   * @throws RepositoryException the repository exception
+   * @throws GoogleDriveException the google drive exception
+   * @throws CloudDriveException the cloud drive exception
    */
   protected static GoogleUser loadUser(API apiBuilder, GoogleProvider provider, Node driveNode) throws RepositoryException,
                                                                                                 GoogleDriveException,
@@ -1395,8 +1435,10 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
 
   /**
    * Check if currently coded scope match the one used by the drive access tokens.
-   * 
-   * @throws DriveRemovedException
+   *
+   * @return true, if is access scope match
+   * @throws RepositoryException the repository exception
+   * @throws DriveRemovedException the drive removed exception
    */
   protected boolean isAccessScopeMatch() throws RepositoryException, DriveRemovedException {
     Node driveNode = rootNode();
@@ -1410,13 +1452,13 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
   /**
    * Throw {@link RefreshAccessException} if currently coded scope doesn't match the one used by the drive
    * access tokens.
-   * 
+   *
    * @param cause {@link CloudDriveAccessException}
    * @return <code>false</code> if access coded and currently used access scopes match, otherwise
    *         {@link RefreshAccessException} will be thrown with given cause {@link CloudDriveAccessException}
-   * @throws RepositoryException
-   * @throws RefreshAccessException
-   * @throws DriveRemovedException
+   * @throws RepositoryException the repository exception
+   * @throws RefreshAccessException the refresh access exception
+   * @throws DriveRemovedException the drive removed exception
    */
   protected boolean checkAccessScope(CloudDriveAccessException cause) throws RepositoryException,
                                                                       RefreshAccessException,
@@ -1488,11 +1530,11 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
 
   /**
    * Merge file's local and cloud parents (local changes has precedence).
-   * 
+   *
    * @param parentId {@link String} current local parent id
    * @param cloudParents {@link List} of {@link ParentReference} on cloud side
    * @param localParentIds {@link List} of parent ids locally
-   * @return
+   * @return the list
    */
   protected List<ParentReference> mergeParents(String parentId,
                                                List<ParentReference> cloudParents,

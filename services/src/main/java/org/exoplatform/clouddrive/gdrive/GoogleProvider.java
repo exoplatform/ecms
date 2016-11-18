@@ -33,15 +33,23 @@ import javax.jcr.RepositoryException;
  */
 public class GoogleProvider extends CloudProvider {
 
+  /** The auth URL. */
   protected final String            authURL;
 
+  /** The redirect URL. */
   protected final String            redirectURL;
 
+  /** The jcr service. */
   protected final RepositoryService jcrService;
 
   /**
-   * @param id
-   * @param name
+   * Instantiates a new google provider.
+   *
+   * @param id the id
+   * @param name the name
+   * @param authURL the auth URL
+   * @param redirectURL the redirect URL
+   * @param jcrService the jcr service
    */
   public GoogleProvider(String id, String name, String authURL, String redirectURL, RepositoryService jcrService) {
     super(id, name);
@@ -52,9 +60,11 @@ public class GoogleProvider extends CloudProvider {
 
   /**
    * Used in test.
-   * 
-   * @param id
-   * @param name
+   *
+   * @param id the id
+   * @param name the name
+   * @param authURL the auth URL
+   * @param redirectURL the redirect URL
    */
   @Deprecated
   GoogleProvider(String id, String name, String authURL, String redirectURL) {
@@ -62,7 +72,10 @@ public class GoogleProvider extends CloudProvider {
   }
 
   /**
-   * @inherritDoc
+   * Gets the auth URL.
+   *
+   * @return the auth URL
+   * @throws CloudDriveException the cloud drive exception
    */
   public String getAuthURL() throws CloudDriveException {
     if (jcrService != null) {
@@ -89,6 +102,8 @@ public class GoogleProvider extends CloudProvider {
   }
 
   /**
+   * Gets the redirect URL.
+   *
    * @return the redirectURL
    */
   public String getRedirectURL() {
@@ -97,6 +112,9 @@ public class GoogleProvider extends CloudProvider {
 
   // ********* internals ***********
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
   public boolean retryOnProviderError() {
     return true;

@@ -52,10 +52,14 @@ public class GoogleDriveConnector extends CloudDriveConnector {
    * API builder.
    */
   class API {
+    
+    /** The code. */
     String code;
 
+    /** The access token. */
     String refreshToken, accessToken;
 
+    /** The expiration time. */
     long   expirationTime;
 
     /**
@@ -71,11 +75,11 @@ public class GoogleDriveConnector extends CloudDriveConnector {
 
     /**
      * Authenticate to the API with locally stored tokens.
-     * 
-     * @param userId
-     * @param refreshToken
-     * @param accessToken
-     * @param expirationTime
+     *
+     * @param userId the user id
+     * @param refreshToken the refresh token
+     * @param accessToken the access token
+     * @param expirationTime the expiration time
      * @return this API
      */
     API load(String userId, String refreshToken, String accessToken, long expirationTime) {
@@ -105,9 +109,13 @@ public class GoogleDriveConnector extends CloudDriveConnector {
 
   /**
    * GoogleDrive connector plugin constructor.
-   * 
-   * @param {@link InitParams} params
-   * @throws ConfigurationException
+   *
+   * @param jcrService the jcr service
+   * @param sessionProviders the session providers
+   * @param finder the finder
+   * @param mimeTypes the mime types
+   * @param params the params
+   * @throws ConfigurationException the configuration exception
    */
   public GoogleDriveConnector(RepositoryService jcrService,
                               SessionProviderService sessionProviders,

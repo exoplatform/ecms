@@ -91,10 +91,13 @@ import java.util.regex.Pattern;
  */
 class GoogleDriveAPI implements DataStoreFactory {
 
+  /** The Constant APP_NAME. */
   public static final String       APP_NAME           = "eXo Cloud Drive";
 
+  /** The Constant FOLDER_MIMETYPE. */
   public static final String       FOLDER_MIMETYPE    = "application/vnd.google-apps.folder";
 
+  /** The Constant SCOPES. */
   public static final List<String> SCOPES             = Arrays.asList(DriveScopes.DRIVE,
                                                                       DriveScopes.DRIVE_FILE,
                                                                       DriveScopes.DRIVE_APPDATA,
@@ -103,26 +106,41 @@ class GoogleDriveAPI implements DataStoreFactory {
                                                                       Oauth2Scopes.USERINFO_EMAIL,
                                                                       Oauth2Scopes.USERINFO_PROFILE);
 
+  /** The Constant SCOPES_STRING. */
   public static final String       SCOPES_STRING      = scopes();
 
+  /** The Constant ACCESS_TYPE. */
   public static final String       ACCESS_TYPE        = "offline";
 
+  /** The Constant APPOVAl_PROMT. */
   public static final String       APPOVAl_PROMT      = "force";
 
+  /** The Constant NO_STATE. */
   public static final String       NO_STATE           = "__no_state_set__";
 
+  /** The Constant USER_ID. */
   protected static final String    USER_ID            = "user_id";
 
+  /** The Constant USER_EMAIL_ADDRESS. */
   protected static final String    USER_EMAIL_ADDRESS = "emailAddress";
 
+  /** The Constant FILE_ID_EXPIRED. */
   protected static final Long      FILE_ID_EXPIRED    = 86400000l;
 
+  /** The Constant FILE_ERROR_WAIT. */
   protected static final Long      FILE_ERROR_WAIT    = 2000l;
 
+  /** The Constant LOG. */
   protected static final Log       LOG                = ExoLogger.getLogger(GoogleDriveAPI.class);
 
+  /**
+   * The Class AuthToken.
+   */
   class AuthToken extends UserToken implements CredentialRefreshListener, CredentialCreatedListener {
 
+    /**
+     * The Class Store.
+     */
     class Store implements DataStore<StoredCredential> {
 
       /**
@@ -240,6 +258,11 @@ class GoogleDriveAPI implements DataStoreFactory {
      */
     final Store store = new Store();
 
+    /**
+     * Store.
+     *
+     * @param credential the credential
+     */
     void store(StoredCredential credential) {
       try {
         store(credential.getAccessToken(), credential.getRefreshToken(), credential.getExpirationTimeMilliseconds());
@@ -248,6 +271,11 @@ class GoogleDriveAPI implements DataStoreFactory {
       }
     }
 
+    /**
+     * Store.
+     *
+     * @param credential the credential
+     */
     void store(Credential credential) {
       try {
         store(credential.getAccessToken(), credential.getRefreshToken(), credential.getExpirationTimeMilliseconds());
@@ -300,11 +328,19 @@ class GoogleDriveAPI implements DataStoreFactory {
     }
   }
 
+  /**
+   * The Class ChildIterator.
+   */
   class ChildIterator extends ChunkIterator<ChildReference> {
+    
+    /** The request. */
     final Children.List request;
 
     /**
-     * @throws GoogleDriveException
+     * Instantiates a new child iterator.
+     *
+     * @param fileId the file id
+     * @throws GoogleDriveException the google drive exception
      */
     ChildIterator(String fileId) throws GoogleDriveException {
       try {
@@ -317,6 +353,9 @@ class GoogleDriveAPI implements DataStoreFactory {
       iter = nextChunk();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected Iterator<ChildReference> nextChunk() throws GoogleDriveException {
       try {
@@ -332,19 +371,31 @@ class GoogleDriveAPI implements DataStoreFactory {
       }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected boolean hasNextChunk() {
       return request.getPageToken() != null && request.getPageToken().length() > 0;
     }
   }
 
+  /**
+   * The Class ChangesIterator.
+   */
   class ChangesIterator extends ChunkIterator<Change> {
+    
+    /** The request. */
     final Changes.List request;
 
+    /** The largest change id. */
     long               largestChangeId;
 
     /**
-     * @throws GoogleDriveException
+     * Instantiates a new changes iterator.
+     *
+     * @param startChangeId the start change id
+     * @throws GoogleDriveException the google drive exception
      */
     ChangesIterator(long startChangeId) throws GoogleDriveException {
       try {
@@ -360,6 +411,9 @@ class GoogleDriveAPI implements DataStoreFactory {
       iter = nextChunk();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected Iterator<Change> nextChunk() throws GoogleDriveException {
       try {
@@ -376,11 +430,19 @@ class GoogleDriveAPI implements DataStoreFactory {
       }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected boolean hasNextChunk() {
       return request.getPageToken() != null && request.getPageToken().length() > 0;
     }
 
+    /**
+     * Gets the largest change id.
+     *
+     * @return the largest change id
+     */
     long getLargestChangeId() {
       return largestChangeId;
     }
@@ -403,9 +465,7 @@ class GoogleDriveAPI implements DataStoreFactory {
     @Key
     private List<String>  ids;
 
-    /**
-     * IDs queue for consumption by
-     */
+    /** IDs queue for consumption by. */
     private Queue<String> idsQueue;
 
     /**
@@ -413,11 +473,19 @@ class GoogleDriveAPI implements DataStoreFactory {
      */
     private Long          expired;
 
+    /**
+     * Instantiates a new generated ids.
+     */
     public GeneratedIds() {
       // generated IDs will expire after some period (a day)
       this.expired = System.currentTimeMillis() + FILE_ID_EXPIRED;
     }
 
+    /**
+     * Fill queue.
+     *
+     * @return true, if successful
+     */
     private boolean fillQueue() {
       // FYI this call should be synchronized externally
       if (idsQueue == null) {
@@ -431,10 +499,20 @@ class GoogleDriveAPI implements DataStoreFactory {
       return !idsQueue.isEmpty();
     }
 
+    /**
+     * Checks if is iD expiration time.
+     *
+     * @return the iD expiration time
+     */
     public boolean isExpired() {
       return expired <= System.currentTimeMillis();
     }
 
+    /**
+     * Checks for id.
+     *
+     * @return true, if successful
+     */
     public boolean hasId() {
       if (isExpired()) {
         return false;
@@ -445,6 +523,11 @@ class GoogleDriveAPI implements DataStoreFactory {
       return !idsQueue.isEmpty();
     }
 
+    /**
+     * Next id.
+     *
+     * @return the string
+     */
     public String nextId() {
       if (isExpired()) {
         return null;
@@ -456,6 +539,8 @@ class GoogleDriveAPI implements DataStoreFactory {
     }
 
     /**
+     * Gets the this is always drive#generatedIds.
+     *
      * @return the kind
      */
     public String getKind() {
@@ -463,6 +548,8 @@ class GoogleDriveAPI implements DataStoreFactory {
     }
 
     /**
+     * Gets the type of file that can be created with these IDs.
+     *
      * @return the space
      */
     public String getSpace() {
@@ -470,6 +557,8 @@ class GoogleDriveAPI implements DataStoreFactory {
     }
 
     /**
+     * Gets the IDs generated for the requesting user in the specified space.
+     *
      * @return the ids
      */
     public List<String> getIds() {
@@ -510,8 +599,12 @@ class GoogleDriveAPI implements DataStoreFactory {
     }
   }
 
+  /**
+   * The Class FilesGenerateIds.
+   */
   public class FilesGenerateIds extends DriveRequest<GeneratedIds> {
 
+    /** The Constant REST_PATH. */
     private static final String REST_PATH = "files/generateIds";
 
     /**
@@ -529,51 +622,81 @@ class GoogleDriveAPI implements DataStoreFactory {
       super(drive, "GET", REST_PATH, null, GeneratedIds.class);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public com.google.api.client.http.HttpResponse executeUsingHead() throws java.io.IOException {
       return super.executeUsingHead();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public com.google.api.client.http.HttpRequest buildHttpRequestUsingHead() throws java.io.IOException {
       return super.buildHttpRequestUsingHead();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public FilesGenerateIds setAlt(java.lang.String alt) {
       return (FilesGenerateIds) super.setAlt(alt);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public FilesGenerateIds setFields(java.lang.String fields) {
       return (FilesGenerateIds) super.setFields(fields);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public FilesGenerateIds setKey(java.lang.String key) {
       return (FilesGenerateIds) super.setKey(key);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public FilesGenerateIds setOauthToken(java.lang.String oauthToken) {
       return (FilesGenerateIds) super.setOauthToken(oauthToken);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public FilesGenerateIds setPrettyPrint(java.lang.Boolean prettyPrint) {
       return (FilesGenerateIds) super.setPrettyPrint(prettyPrint);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public FilesGenerateIds setQuotaUser(java.lang.String quotaUser) {
       return (FilesGenerateIds) super.setQuotaUser(quotaUser);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public FilesGenerateIds setUserIp(java.lang.String userIp) {
       return (FilesGenerateIds) super.setUserIp(userIp);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public FilesGenerateIds set(String parameterName, Object value) {
       return (FilesGenerateIds) super.set(parameterName, value);
@@ -596,6 +719,7 @@ class GoogleDriveAPI implements DataStoreFactory {
    */
   final Drive                         drive;
 
+  /** The token. */
   final AuthToken                     token;
 
   /**
@@ -621,10 +745,11 @@ class GoogleDriveAPI implements DataStoreFactory {
 
   /**
    * Create Google Drive API from OAuth2 authentication code.
-   * 
+   *
    * @param clientId {@link String}
    * @param clientSecret {@link String}
    * @param authCode {@link String}
+   * @param redirectUri the redirect uri
    * @throws GoogleDriveException if authentication failed for any reason.
    * @throws CloudDriveException if credentials store exception happen
    */
@@ -707,6 +832,11 @@ class GoogleDriveAPI implements DataStoreFactory {
     return token.store;
   }
 
+  /**
+   * Scopes.
+   *
+   * @return the string
+   */
   private static String scopes() {
     StringBuilder s = new StringBuilder();
     for (String scope : SCOPES) {
@@ -719,12 +849,12 @@ class GoogleDriveAPI implements DataStoreFactory {
   /**
    * Build an authorization flow optionally using provided {@link AuthToken}, then store it as a static
    * class attribute.
-   * 
-   * @param clientId
-   * @param clientSecret
-   * @param tokenStore
+   *
+   * @param clientId the client id
+   * @param clientSecret the client secret
+   * @param storedToken the stored token
    * @return GoogleAuthorizationCodeFlow instance.
-   * @throws IOException
+   * @throws IOException Signals that an I/O exception has occurred.
    */
   GoogleAuthorizationCodeFlow createFlow(String clientId, String clientSecret, AuthToken storedToken) throws IOException {
     HttpTransport httpTransport = new NetHttpTransport();
@@ -783,10 +913,10 @@ class GoogleDriveAPI implements DataStoreFactory {
 
   /**
    * Return About service.
-   * 
+   *
    * @return {@link About}
-   * @throws GoogleDriveException
-   * @throws CloudDriveAccessException
+   * @throws GoogleDriveException the google drive exception
+   * @throws CloudDriveAccessException the cloud drive access exception
    */
   About about() throws GoogleDriveException, CloudDriveAccessException {
     try {
@@ -802,21 +932,35 @@ class GoogleDriveAPI implements DataStoreFactory {
     }
   }
 
+  /**
+   * Children.
+   *
+   * @param fileId the file id
+   * @return the child iterator
+   * @throws GoogleDriveException the google drive exception
+   */
   ChildIterator children(String fileId) throws GoogleDriveException {
     return new ChildIterator(fileId);
   }
 
+  /**
+   * Changes.
+   *
+   * @param startChangeId the start change id
+   * @return the changes iterator
+   * @throws GoogleDriveException the google drive exception
+   */
   ChangesIterator changes(long startChangeId) throws GoogleDriveException {
     return new ChangesIterator(startChangeId);
   }
 
   /**
    * Read file from Files service.
-   * 
+   *
    * @param fileId {@link String}
    * @return {@link File}
-   * @throws GoogleDriveException
-   * @throws NotFoundException
+   * @throws GoogleDriveException the google drive exception
+   * @throws NotFoundException the not found exception
    */
   File file(String fileId) throws GoogleDriveException, NotFoundException {
     try {
@@ -834,12 +978,12 @@ class GoogleDriveAPI implements DataStoreFactory {
 
   /**
    * Insert a new file to Files service and upload its content.
-   * 
-   * @param file {@link File} file metadata
+   *
    * @param file {@link AbstractInputStreamContent} file content
+   * @param content the content
    * @return {@link File} resulting file
-   * @throws GoogleDriveException
-   * @throws CloudDriveAccessException
+   * @throws GoogleDriveException the google drive exception
+   * @throws CloudDriveAccessException the cloud drive access exception
    */
   File insert(File file, AbstractInputStreamContent content) throws GoogleDriveException, CloudDriveAccessException {
     // generate file ID by Google to check later does the file created in case of Google error
@@ -874,11 +1018,11 @@ class GoogleDriveAPI implements DataStoreFactory {
   /**
    * Insert a new file to Files service. This method will create an empty file or a folder (if given file
    * object has such mimetype).
-   * 
+   *
    * @param file {@link File} file metadata
    * @return {@link File} resulting file
-   * @throws GoogleDriveException
-   * @throws CloudDriveAccessException
+   * @throws GoogleDriveException the google drive exception
+   * @throws CloudDriveAccessException the cloud drive access exception
    */
   File insert(File file) throws GoogleDriveException, CloudDriveAccessException {
     // generate file ID by Google to check later does the file created in case of Google error
@@ -944,11 +1088,11 @@ class GoogleDriveAPI implements DataStoreFactory {
 
   /**
    * Update a file metadata in Files service.
-   * 
+   *
    * @param file {@link File} file metadata
-   * @throws GoogleDriveException
-   * @throws NotFoundException
-   * @throws CloudDriveAccessException
+   * @throws GoogleDriveException the google drive exception
+   * @throws NotFoundException the not found exception
+   * @throws CloudDriveAccessException the cloud drive access exception
    */
   void update(File file) throws GoogleDriveException, NotFoundException, CloudDriveAccessException {
     // TODO use If-Match with local ETag to esnure consistency
@@ -973,13 +1117,13 @@ class GoogleDriveAPI implements DataStoreFactory {
 
   /**
    * Copy a file in Files service.
-   * 
+   *
    * @param srcFileId {@link String}
    * @param destFile {@link File} destination file metadata
    * @return {@link File} resulting file
-   * @throws GoogleDriveException
-   * @throws NotFoundException
-   * @throws CloudDriveAccessException
+   * @throws GoogleDriveException the google drive exception
+   * @throws NotFoundException the not found exception
+   * @throws CloudDriveAccessException the cloud drive access exception
    */
   File copy(String srcFileId, File destFile) throws GoogleDriveException, NotFoundException, CloudDriveAccessException {
     // TODO use If-Match with local ETag to esnure consistency
@@ -1027,12 +1171,12 @@ class GoogleDriveAPI implements DataStoreFactory {
 
   /**
    * Move a file to Trash using Files service.
-   * 
+   *
    * @param fileId {@link String} file id
    * @return {@link File} resulting object
-   * @throws GoogleDriveException
-   * @throws NotFoundException
-   * @throws CloudDriveAccessException
+   * @throws GoogleDriveException the google drive exception
+   * @throws NotFoundException the not found exception
+   * @throws CloudDriveAccessException the cloud drive access exception
    */
   File trash(String fileId) throws GoogleDriveException, NotFoundException, CloudDriveAccessException {
     try {
@@ -1053,12 +1197,12 @@ class GoogleDriveAPI implements DataStoreFactory {
 
   /**
    * Move a file from Trash to its original place using Files service.
-   * 
+   *
    * @param fileId {@link String} file id
    * @return {@link File} resulting object
-   * @throws GoogleDriveException
-   * @throws NotFoundException
-   * @throws CloudDriveAccessException
+   * @throws GoogleDriveException the google drive exception
+   * @throws NotFoundException the not found exception
+   * @throws CloudDriveAccessException the cloud drive access exception
    */
   File untrash(String fileId) throws GoogleDriveException, NotFoundException, CloudDriveAccessException {
     try {
@@ -1079,10 +1223,10 @@ class GoogleDriveAPI implements DataStoreFactory {
 
   /**
    * Generate file ID using Files service.
-   * 
+   *
    * @return {@link String} unique file ID generated by Google Drive service
-   * @throws GoogleDriveException
-   * @throws CloudDriveAccessException
+   * @throws GoogleDriveException the google drive exception
+   * @throws CloudDriveAccessException the cloud drive access exception
    */
   String generateFileId() throws GoogleDriveException, CloudDriveAccessException {
     String id = generatedIds.get().nextId();
@@ -1140,9 +1284,9 @@ class GoogleDriveAPI implements DataStoreFactory {
 
   /**
    * Update OAuth2 token to a new one.
-   * 
+   *
    * @param newToken {@link AuthToken}
-   * @throws CloudDriveException
+   * @throws CloudDriveException the cloud drive exception
    */
   void updateToken(UserToken newToken) throws CloudDriveException {
     this.token.merge(newToken);
@@ -1160,6 +1304,12 @@ class GoogleDriveAPI implements DataStoreFactory {
 
   // ********** helpers ***********
 
+  /**
+   * Checks if is folder.
+   *
+   * @param file the file
+   * @return true, if is folder
+   */
   boolean isFolder(File file) {
     return file.getMimeType().equals(FOLDER_MIMETYPE);
   }
@@ -1216,6 +1366,12 @@ class GoogleDriveAPI implements DataStoreFactory {
 
   // **** internals *****
 
+  /**
+   * Checks if is insufficient permissions.
+   *
+   * @param e the e
+   * @return true, if is insufficient permissions
+   */
   private boolean isInsufficientPermissions(GoogleJsonResponseException e) {
     GoogleJsonError details = e.getDetails();
     if (e.getStatusCode() == 403 && details != null) {
@@ -1231,6 +1387,14 @@ class GoogleDriveAPI implements DataStoreFactory {
     return false;
   }
 
+  /**
+   * Wait file.
+   *
+   * @param id the id
+   * @return the file
+   * @throws GoogleDriveException the google drive exception
+   * @throws NotFoundException the not found exception
+   */
   private File waitFile(String id) throws GoogleDriveException, NotFoundException {
     try {
       Thread.sleep(FILE_ERROR_WAIT);
