@@ -52,23 +52,39 @@ import javax.jcr.query.QueryResult;
  */
 public class WatchCloudDocumentServiceImpl implements WatchDocumentService, Startable {
 
+  /** The Constant EXO_WATCHABLE_MIXIN. */
   final public static String EXO_WATCHABLE_MIXIN = "exo:watchable" ;
+  
+  /** The Constant EMAIL_WATCHERS_PROP. */
   final public static String EMAIL_WATCHERS_PROP = "exo:emailWatcher" ;
+  
+  /** The Constant RSS_WATCHERS_PROP. */
   final public static String RSS_WATCHERS_PROP = "exo:rssWatcher" ;
+  
+  /** The Constant WATCHABLE_MIXIN_QUERY. */
   final private static String WATCHABLE_MIXIN_QUERY = "//element(*,exo:watchable)" ;
   
+  /** The Constant CLOUDDRIVE_WATCH_LINK. */
   final public static String CLOUDDRIVE_WATCH_LINK = "ecd:watchLink" ;
 
+  /** The repo service. */
   private RepositoryService repoService_ ;
+  
+  /** The message config. */
   private MessageConfig messageConfig_ ;
+  
+  /** The template service. */
   private TemplateService templateService_ ;
+  
+  /** The Constant LOG. */
   private static final Log LOG  = ExoLogger.getLogger(WatchCloudDocumentServiceImpl.class.getName());
 
   /**
-   * Constructor Method
-   * @param params
-   * @param repoService
-   * @param templateService
+   * Constructor Method.
+   *
+   * @param params the params
+   * @param repoService the repo service
+   * @param templateService the template service
    */
   public WatchCloudDocumentServiceImpl(InitParams params,
       RepositoryService repoService, TemplateService templateService) {
@@ -168,12 +184,13 @@ public class WatchCloudDocumentServiceImpl implements WatchDocumentService, Star
 
   /**
    * This method will observes the specification node by giving the following param : listener, node
-   * Its add an event listener to this node to observes anything that changes to this
-   * @param node              Specify the node to observe
-   * @param listener          The object of EventListener
-   * @see                     EventListener
-   * @see                     Node
-   * @throws Exception
+   * Its add an event listener to this node to observes anything that changes to this.
+   *
+   * @param node Specify the node to observe
+   * @param listener The object of EventListener
+   * @throws Exception the exception
+   * @see EventListener
+   * @see Node
    */
   private void observeNode(Node node, EventListener listener) throws Exception {
     String workspace = node.getSession().getWorkspace().getName() ;
@@ -187,12 +204,14 @@ public class WatchCloudDocumentServiceImpl implements WatchDocumentService, Star
   }
 
   /**
-   * This method will check notify type of watcher, userName is equal value of property with notification type
-   * @param documentNode    specify a node to watch
-   * @param userName        userName to watch a document
-   * @param notification    Notification Type
+   * This method will check notify type of watcher, userName is equal value of property with notification
+   * type.
+   *
+   * @param documentNode specify a node to watch
+   * @param userName userName to watch a document
+   * @param notificationType the notification type
    * @return boolean
-   * @throws Exception
+   * @throws Exception the exception
    */
   private boolean checkNotifyTypeOfWatcher(Node documentNode, String userName,String notificationType) throws Exception {
     if(documentNode.hasProperty(notificationType)) {
@@ -206,9 +225,10 @@ public class WatchCloudDocumentServiceImpl implements WatchDocumentService, Star
 
   /**
    * This method will get all node types of node.
-   * @param node
-   * @return
-   * @throws Exception
+   *
+   * @param node the node
+   * @return the document node types
+   * @throws Exception the exception
    */
   private List<String> getDocumentNodeTypes(Node node) throws Exception {
     List<String> nodeTypeNameList = new ArrayList<String>() ;
@@ -226,7 +246,8 @@ public class WatchCloudDocumentServiceImpl implements WatchDocumentService, Star
 
   /**
    * This method will re-observer all nodes that have been ever observed with all repositories.
-   * @throws Exception
+   *
+   * @throws Exception the exception
    */
   private void reInitObserver() throws Exception {
     RepositoryEntry repo = repoService_.getCurrentRepository().getConfiguration();
@@ -279,7 +300,7 @@ public class WatchCloudDocumentServiceImpl implements WatchDocumentService, Star
   protected MessageConfig getMessageConfig() { return messageConfig_ ; }
 
   /**
-   * using for re-observer
+   * using for re-observer.
    */
   public void start() {
     try {

@@ -26,6 +26,9 @@ import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.Event.Phase;
 import org.exoplatform.webui.event.EventListener;
 
+/**
+ * The Class ConnectCloudDriveForm.
+ */
 @ComponentConfig(lifecycle = UIFormLifecycle.class,
                  template = "classpath:groovy/templates/CloudDriveConnectDialog.gtmpl", events = {
                      @EventConfig(listeners = ConnectCloudDriveForm.ConnectActionListener.class),
@@ -33,14 +36,40 @@ import org.exoplatform.webui.event.EventListener;
                                   phase = Phase.DECODE) })
 public class ConnectCloudDriveForm extends BaseCloudDriveForm {
 
+  /**
+   * The listener interface for receiving cancelAction events.
+   * The class that is interested in processing a cancelAction
+   * event implements this interface, and the object created
+   * with that class is registered with a component using the
+   * component's <code>addCancelActionListener</code> method. When
+   * the cancelAction event occurs, that object's appropriate
+   * method is invoked.
+   */
   public static class CancelActionListener extends EventListener<ConnectCloudDriveForm> {
+    
+    /**
+     * {@inheritDoc}
+     */
     public void execute(Event<ConnectCloudDriveForm> event) throws Exception {
       UIJCRExplorer uiExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);
       uiExplorer.cancelAction();
     }
   }
 
+  /**
+   * The listener interface for receiving connectAction events.
+   * The class that is interested in processing a connectAction
+   * event implements this interface, and the object created
+   * with that class is registered with a component using the
+   * component's <code>addConnectActionListener</code> method. When
+   * the connectAction event occurs, that object's appropriate
+   * method is invoked.
+   */
   public static class ConnectActionListener extends EventListener<ConnectCloudDriveForm> {
+    
+    /**
+     * {@inheritDoc}
+     */
     public void execute(Event<ConnectCloudDriveForm> event) throws Exception {
       UIJCRExplorer uiExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);
       uiExplorer.updateAjax(event);

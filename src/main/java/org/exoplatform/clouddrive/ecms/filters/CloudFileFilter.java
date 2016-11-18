@@ -44,20 +44,42 @@ import javax.jcr.RepositoryException;
  */
 public class CloudFileFilter extends AbstractCloudDriveNodeFilter {
 
+  /** The Constant LOG. */
   protected static final Log LOG = ExoLogger.getLogger(CloudFileFilter.class);
 
+  /**
+   * Instantiates a new cloud file filter.
+   */
   public CloudFileFilter() {
     super();
   }
 
+  /**
+   * Instantiates a new cloud file filter.
+   *
+   * @param providers the providers
+   */
   public CloudFileFilter(List<String> providers) {
     super(providers);
   }
 
+  /**
+   * Instantiates a new cloud file filter.
+   *
+   * @param providers the providers
+   * @param minSize the min size
+   * @param maxSize the max size
+   */
   public CloudFileFilter(List<String> providers, long minSize, long maxSize) {
     super(providers, minSize, maxSize);
   }
 
+  /**
+   * Instantiates a new cloud file filter.
+   *
+   * @param minSize the min size
+   * @param maxSize the max size
+   */
   public CloudFileFilter(long minSize, long maxSize) {
     super(minSize, maxSize);
   }

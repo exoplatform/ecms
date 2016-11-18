@@ -30,16 +30,27 @@ import javax.ws.rs.core.MediaType;
  */
 public abstract class AbstractFileViewer extends BaseCloudDriveManagerComponent implements CloudFileViewer {
 
+  /** The drive. */
   protected CloudDrive drive;
 
+  /** The file. */
   protected CloudFile  file;
 
+  /** The viewable max size. */
   protected final long viewableMaxSize;
 
+  /**
+   * Instantiates a new abstract file viewer.
+   *
+   * @param viewableMaxSize the viewable max size
+   */
   protected AbstractFileViewer(long viewableMaxSize) {
     this.viewableMaxSize = viewableMaxSize;
   }
 
+  /**
+   * Instantiates a new abstract file viewer.
+   */
   protected AbstractFileViewer() {
     this(Long.MAX_VALUE);
   }
@@ -73,6 +84,8 @@ public abstract class AbstractFileViewer extends BaseCloudDriveManagerComponent 
   }
 
   /**
+   * Gets the drive.
+   *
    * @return the drive
    */
   public CloudDrive getDrive() {
@@ -80,12 +93,19 @@ public abstract class AbstractFileViewer extends BaseCloudDriveManagerComponent 
   }
 
   /**
+   * Gets the file.
+   *
    * @return the file
    */
   public CloudFile getFile() {
     return file;
   }
 
+  /**
+   * Checks if is viewable.
+   *
+   * @return true, if is viewable
+   */
   public boolean isViewable() {
     String mimeType = file.getType();
     return file.getSize() <= viewableMaxSize && !mimeType.startsWith(MediaType.APPLICATION_OCTET_STREAM);

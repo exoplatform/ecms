@@ -39,11 +39,10 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Response;
 
 /**
- * Created by The eXo Platform SAS
- * 
+ * Created by The eXo Platform SAS.
+ *
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
  * @version $Id: CloudDriveThumbnailRESTService.java 00000 May 21, 2014 pnedonosko $
- * 
  */
 @Path("/thumbnailImage/")
 public class CloudDriveThumbnailRESTService extends ThumbnailRESTService {
@@ -54,13 +53,17 @@ public class CloudDriveThumbnailRESTService extends ThumbnailRESTService {
   /** The Constant IF_MODIFIED_SINCE_DATE_FORMAT. */
   private static final DateFormat   DATE_FORMAT            = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss z");
 
+  /** The cloud drives. */
   protected final CloudDriveService cloudDrives;
 
   /**
-   * @param repositoryService
-   * @param thumbnailService
-   * @param nodeFinder
-   * @param linkManager
+   * Instantiates a new cloud drive thumbnail REST service.
+   *
+   * @param repositoryService the repository service
+   * @param thumbnailService the thumbnail service
+   * @param nodeFinder the node finder
+   * @param linkManager the link manager
+   * @param cloudDrives the cloud drives
    */
   public CloudDriveThumbnailRESTService(RepositoryService repositoryService,
                                         ThumbnailService thumbnailService,
@@ -176,20 +179,32 @@ public class CloudDriveThumbnailRESTService extends ThumbnailRESTService {
 
   // internals
 
+  /**
+   * Accept.
+   *
+   * @param workspaceName the workspace name
+   * @param nodePath the node path
+   * @return true, if successful
+   * @throws RepositoryException the repository exception
+   */
   protected boolean accept(String workspaceName, String nodePath) throws RepositoryException {
     return cloudDrives.findDrive(workspaceName, getNodePath(nodePath)) == null;
   }
 
+  /**
+   * Ok.
+   *
+   * @return the response
+   */
   protected Response ok() {
     return Response.ok().header(LAST_MODIFIED_PROPERTY, DATE_FORMAT.format(new Date())).build();
   }
 
   /**
    * Method copied from {@link ThumbnailRESTService}.
-   * 
-   * @param nodePath
-   * @return
-   * @throws Exception
+   *
+   * @param nodePath the node path
+   * @return the node path
    */
   private String getNodePath(String nodePath) {
     ArrayList<String> encodeNameArr = new ArrayList<String>();

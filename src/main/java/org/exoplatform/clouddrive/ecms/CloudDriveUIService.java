@@ -60,6 +60,7 @@ public class CloudDriveUIService implements Startable {
    */
   class ViewRestorer implements Suspendable {
 
+    /** The suspended. */
     boolean suspended = false;
 
     /**
@@ -101,36 +102,57 @@ public class CloudDriveUIService implements Startable {
     }
   }
 
+  /** The Constant LOG. */
   private static final Log           LOG                        = ExoLogger.getLogger(CloudDriveUIService.class);
 
+  /** The Constant DMS_SYSTEM_WORKSPACE. */
   protected static final String      DMS_SYSTEM_WORKSPACE       = "dms-system";
 
+  /** The Constant EXO_BUTTONS. */
   protected static final String      EXO_BUTTONS                = "exo:buttons";
 
+  /** The Constant ECD_USER_BUTTONS. */
   protected static final String      ECD_USER_BUTTONS           = "ecd:userButtons";
 
+  /** The Constant ECD_BUTTONS. */
   protected static final String      ECD_BUTTONS                = "ecd:buttons";
 
+  /** The Constant ECD_DEFAULT_BUTTONS. */
   protected static final String      ECD_DEFAULT_BUTTONS        = "ecd:defaultButtons";
 
+  /** The Constant CONNECT_CLOUD_DRIVE_ACTION. */
   public static final String         CONNECT_CLOUD_DRIVE_ACTION = "add.connect.clouddrive.action";
 
+  /** The jcr service. */
   protected final RepositoryService  jcrService;
 
+  /** The manage view. */
   protected final ManageViewService  manageView;
 
+  /** The drive service. */
   protected final CloudDriveService  driveService;
 
+  /** The ui extensions. */
   protected final UIExtensionManager uiExtensions;
 
+  /** The default menu actions. */
   protected final Set<String>        defaultMenuActions         = new HashSet<String>();
 
+  /** The views. */
   protected final List<String>       VIEWS                      = Arrays.asList("List/List",
                                                                                 "Admin/Admin",
                                                                                 "Web/Authoring",
                                                                                 "Icons/Icons",
                                                                                 "Categories/Collaboration");
 
+  /**
+   * Instantiates a new cloud drive UI service.
+   *
+   * @param repoService the repo service
+   * @param driveService the drive service
+   * @param uiExtensions the ui extensions
+   * @param manageView the manage view
+   */
   public CloudDriveUIService(RepositoryService repoService,
                              CloudDriveService driveService,
                              UIExtensionManager uiExtensions,
@@ -141,6 +163,11 @@ public class CloudDriveUIService implements Startable {
     this.uiExtensions = uiExtensions;
   }
 
+  /**
+   * Adds the plugin.
+   *
+   * @param plugin the plugin
+   */
   public void addPlugin(ComponentPlugin plugin) {
     if (plugin instanceof CloudDriveUIExtension) {
       // default menu action to initialize
@@ -154,9 +181,9 @@ public class CloudDriveUIService implements Startable {
 
   /**
    * List of Cloud Drive actions configured to apper in menu by default.
-   * 
+   *
    * @return List of Strings with action names
-   * @throws Exception
+   * @throws Exception the exception
    */
   protected Set<String> getDefaultActions() throws Exception {
     // find all Cloud Drive actions configured by default for action bar
@@ -173,9 +200,9 @@ public class CloudDriveUIService implements Startable {
 
   /**
    * All Cloud Drive actions registered in the system.
-   * 
+   *
    * @return List of Strings with action names
-   * @throws Exception
+   * @throws Exception the exception
    */
   protected List<String> getAllActions() throws Exception {
     // find all Cloud Drive actions configured by default for action bar
@@ -191,11 +218,11 @@ public class CloudDriveUIService implements Startable {
 
   /**
    * Read all buttons actions from given node, in buttons property, to given string builder.
-   * 
+   *
    * @param node {@link Node}
    * @param buttons {@link String}
    * @param actionsStr {@link StringBuilder}
-   * @throws RepositoryException
+   * @throws RepositoryException the repository exception
    */
   protected void readViewActions(Node node,
                                  String buttons,
@@ -218,11 +245,12 @@ public class CloudDriveUIService implements Startable {
   /**
    * Split buttons actions on Cloud Drive's and other from given node, in buttons property, to given string
    * builder.
-   * 
+   *
    * @param node {@link Node}
    * @param buttons {@link String}
-   * @param actionsStr {@link StringBuilder}
-   * @throws RepositoryException
+   * @param cdActions the cd actions
+   * @param otherActions the other actions
+   * @throws RepositoryException the repository exception
    */
   protected void splitViewActions(Node node,
                                   String buttons,
@@ -261,8 +289,8 @@ public class CloudDriveUIService implements Startable {
    * Add Cloud Drive actions to ECMS actions menu if they are not already there. This method adds Cloud Drive
    * actions saved in previous container execution (saved on container stop, see {@link #restoreViews()} ). If
    * no saved actions, then defaults will be added from configuration.
-   * 
-   * @throws Exception
+   *
+   * @throws Exception the exception
    */
   protected void prepareViews() throws Exception {
     SessionProvider jcrSessions = SessionProvider.createSystemProvider();
@@ -363,8 +391,8 @@ public class CloudDriveUIService implements Startable {
   /**
    * Remove Cloud Drive actions from ECMS actions menu and store them in dedicated property. We remove actions
    * to make the add-on uninstallation safe (don't leave our menu actions in the content).
-   * 
-   * @throws Exception
+   *
+   * @throws Exception the exception
    */
   protected void restoreViews() throws Exception {
     SessionProvider jcrSessions = SessionProvider.createSystemProvider();
@@ -388,6 +416,12 @@ public class CloudDriveUIService implements Startable {
     }
   }
 
+  /**
+   * Capitalize.
+   *
+   * @param text the text
+   * @return the string
+   */
   protected String capitalize(String text) {
     char[] tc = text.toCharArray();
     if (tc.length > 0) {
@@ -396,6 +430,12 @@ public class CloudDriveUIService implements Startable {
     return new String(tc);
   }
 
+  /**
+   * Uncapitalize.
+   *
+   * @param text the text
+   * @return the string
+   */
   protected String uncapitalize(String text) {
     char[] tc = text.toCharArray();
     if (tc.length > 0) {
@@ -404,6 +444,9 @@ public class CloudDriveUIService implements Startable {
     return new String(tc);
   }
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
   public void start() {
     try {
@@ -427,6 +470,9 @@ public class CloudDriveUIService implements Startable {
     }
   }
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
   public void stop() {
     // nothing, see ViewRestorer class above

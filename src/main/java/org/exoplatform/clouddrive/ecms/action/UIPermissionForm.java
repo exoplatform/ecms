@@ -55,6 +55,9 @@ import javax.jcr.AccessDeniedException;
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 
+/**
+ * The Class UIPermissionForm.
+ */
 @ComponentConfig(lifecycle = UIFormLifecycle.class, template = "classpath:groovy/wcm/webui/core/UIPermissionForm.gtmpl",
                  events = { @EventConfig(listeners = UIPermissionForm.SaveActionListener.class),
                      @EventConfig(phase = Phase.DECODE, listeners = UIPermissionForm.ResetActionListener.class),
@@ -65,8 +68,19 @@ import javax.jcr.RepositoryException;
                      @EventConfig(phase = Phase.DECODE, listeners = UIPermissionInputSet.OnChangeActionListener.class) })
 public class UIPermissionForm extends org.exoplatform.ecm.webui.component.explorer.popup.info.UIPermissionForm {
 
+  /** The Constant LOG. */
   protected static final Log LOG = ExoLogger.getLogger(UIPermissionForm.class);
 
+  /**
+   * The listener interface for receiving saveAction events.
+   * The class that is interested in processing a saveAction
+   * event implements this interface, and the object created
+   * with that class is registered with a component using the
+   * component's <code>addSaveActionListener</code> method. When
+   * the saveAction event occurs, that object's appropriate
+   * method is invoked.
+   *
+   */
   public static class SaveActionListener extends
                                          org.exoplatform.ecm.webui.component.explorer.popup.info.UIPermissionForm.SaveActionListener {
 
@@ -223,6 +237,14 @@ public class UIPermissionForm extends org.exoplatform.ecm.webui.component.explor
       }
     }
 
+    /**
+     * Inits the context.
+     *
+     * @param context the context
+     * @param currentNode the current node
+     * @throws RepositoryException the repository exception
+     * @throws CloudDriveException the cloud drive exception
+     */
     protected void initContext(WebuiRequestContext context, Node currentNode) throws RepositoryException,
                                                                               CloudDriveException {
       String path = currentNode.getPath();
@@ -231,8 +253,14 @@ public class UIPermissionForm extends org.exoplatform.ecm.webui.component.explor
     }
   }
 
+  /** The permissions. */
   protected final UIPermissionInputSet permissions;
 
+  /**
+   * Instantiates a new UI permission form.
+   *
+   * @throws Exception the exception
+   */
   public UIPermissionForm() throws Exception {
     super();
     // customize form: don't show permission checkboxes

@@ -65,34 +65,50 @@ import javax.jcr.observation.EventListener;
 import javax.portlet.PortletRequest;
 
 /**
- * This is a COPY of ECMS {@link EmailNotifyListener} with proposed fix of https://jira.exoplatform.org/browse/ECMS-5973.<br>
+ * This is a COPY of ECMS {@link EmailNotifyListener} with proposed fix of
+ * https://jira.exoplatform.org/browse/ECMS-5973.<br>
  * 
  * Created by The eXo Platform SAS
  * Author : Xuan Hoa Pham
- *          hoapham@exoplatform.com
- *          phamvuxuanhoa@gmail.com
+ * hoapham@exoplatform.com
+ * phamvuxuanhoa@gmail.com
  * Dec 6, 2006
+ *
  */
 public class EmailNotifyCloudDocumentListener implements EventListener {
 
+  /** The observed node. */
   private NodeLocation observedNode_ ;
 
+  /** The Constant EMAIL_WATCHERS_PROP. */
   final public static String  EMAIL_WATCHERS_PROP = "exo:emailWatcher";
 
+  /** The Constant SITE_EXPLORER. */
   private static final String SITE_EXPLORER       = "siteExplorer";
 
+  /** The Constant PATH_PARAM. */
   private static final String PATH_PARAM          = "path";
+  
+  /** The Constant USER_ID. */
   private static final String USER_ID             = "${userId}";
 
+  /** The Constant LOG. */
   private static final Log    LOG                 = ExoLogger.getLogger(EmailNotifyCloudDocumentListener.class.getName());
 
+  /**
+   * Instantiates a new email notify cloud document listener.
+   *
+   * @param oNode the o node
+   */
   public EmailNotifyCloudDocumentListener(Node oNode) {
     observedNode_ = NodeLocation.getNodeLocationByNode(oNode);
   }
 
   /**
    * This method is used for listening to all changes of property of a node, when there is a change,
-   * message is sent to list of email
+   * message is sent to list of email.
+   *
+   * @param arg0 the arg 0
    */
   public void onEvent(EventIterator arg0) {
     MailService mailService = WCMCoreUtils.getService(MailService.class);
@@ -113,10 +129,11 @@ public class EmailNotifyCloudDocumentListener implements EventListener {
 
   /**
    * Create message when there is any changes of property of a node.
-   * @param receiver
-   * @param messageConfig
-   * @return
-   * @throws Exception
+   *
+   * @param receiver the receiver
+   * @param messageConfig the message config
+   * @return the message
+   * @throws Exception the exception
    */
   private Message createMessage(String receiver, MessageConfig messageConfig) throws Exception {
     Message message = new Message();
@@ -154,9 +171,9 @@ public class EmailNotifyCloudDocumentListener implements EventListener {
 
   /**
    * Used in {@link WatchCloudDocumentServiceImpl#watchDocument(Node, String, int)}.
-   * 
-   * @return
-   * @throws Exception
+   *
+   * @return the viewable link
+   * @throws Exception the exception
    */
   String getViewableLink() throws Exception {
     PortalRequestContext pContext = Util.getPortalRequestContext();
@@ -189,12 +206,13 @@ public class EmailNotifyCloudDocumentListener implements EventListener {
   }
 
   /**
+   * Gets the drive.
    *
-   * @param lstDrive
-   * @param workspace
-   * @param nodePath
-   * @return
-   * @throws RepositoryException
+   * @param lstDrive the lst drive
+   * @param workspace the workspace
+   * @param nodePath the node path
+   * @return the drive
+   * @throws RepositoryException the repository exception
    */
   private DriveData getDrive(List<DriveData> lstDrive, String workspace, String nodePath) throws RepositoryException {
     NodeHierarchyCreator nhc = WCMCoreUtils.getService(NodeHierarchyCreator.class);
@@ -223,9 +241,10 @@ public class EmailNotifyCloudDocumentListener implements EventListener {
   }
 
   /**
+   * Gets the user node by URI.
    *
-   * @param uri
-   * @return
+   * @param uri the uri
+   * @return the user node by URI
    */
   private UserNode getUserNodeByURI(String uri) {
     UserPortal userPortal = Util.getPortalRequestContext().getUserPortalConfig().getUserPortal();
@@ -243,9 +262,9 @@ public class EmailNotifyCloudDocumentListener implements EventListener {
   }
 
   /**
+   * Gets the memberships.
    *
-   * @return
-   * @throws Exception
+   * @return the memberships
    */
   public List<String> getMemberships() {
     String userId = Util.getPortalRequestContext().getRemoteUser();
@@ -265,9 +284,10 @@ public class EmailNotifyCloudDocumentListener implements EventListener {
   }
 
   /**
+   * Gets the user memberships from identity registry.
    *
-   * @param authenticatedUser
-   * @return
+   * @param authenticatedUser the authenticated user
+   * @return the user memberships from identity registry
    */
   private Collection<MembershipEntry> getUserMembershipsFromIdentityRegistry(String authenticatedUser) {
     IdentityRegistry identityRegistry = WCMCoreUtils.getService(IdentityRegistry.class);
@@ -276,9 +296,10 @@ public class EmailNotifyCloudDocumentListener implements EventListener {
   }
 
   /**
-   * This Method will get email of watchers when they watch a document
-   * @param observedNode
-   * @return
+   * This Method will get email of watchers when they watch a document.
+   *
+   * @param observedNode the observed node
+   * @return the email list
    */
   private List<String> getEmailList(Node observedNode) {
     List<String> emailList = new ArrayList<String>() ;

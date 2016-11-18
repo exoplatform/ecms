@@ -28,20 +28,36 @@ import org.exoplatform.webui.config.annotation.ComponentConfig;
 @ComponentConfig(template = "classpath:groovy/templates/TextViewer.gtmpl")
 public class TextViewer extends AbstractFileViewer {
 
+  /** The Constant MAX_FILE_SIZE. */
   public static final long MAX_FILE_SIZE = 2 * 1024 * 1024; // 2M
 
+  /**
+   * Checks if is web document.
+   *
+   * @return true, if is web document
+   */
   public boolean isWebDocument() {
     String mimeType = file.getType();
     return mimeType.startsWith("text/html") || mimeType.startsWith("application/rss+xml")
         || mimeType.startsWith("application/xhtml");
   }
 
+  /**
+   * Checks if is xml document.
+   *
+   * @return true, if is xml document
+   */
   public boolean isXmlDocument() {
     String mimeType = file.getType();
     return mimeType.startsWith("text/xml") || mimeType.startsWith("application/xml")
         || (mimeType.startsWith("application/") && mimeType.indexOf("+xml") > 0);
   }
 
+  /**
+   * Checks if is formatted text.
+   *
+   * @return true, if is formatted text
+   */
   public boolean isFormattedText() {
     String mimeType = file.getType();
     return (mimeType.startsWith("text/") && file.getTypeMode() != null)

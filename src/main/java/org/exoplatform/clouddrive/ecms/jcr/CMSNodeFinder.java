@@ -55,10 +55,20 @@ import javax.jcr.query.QueryResult;
  */
 public class CMSNodeFinder extends NodeFinderImpl implements NodeFinder {
 
+  /** The session provider service. */
   protected final SessionProviderService sessionProviderService;
 
+  /** The hierarchy creator. */
   protected final NodeHierarchyCreator   hierarchyCreator;
 
+  /**
+   * Instantiates a new CMS node finder.
+   *
+   * @param repositoryService the repository service
+   * @param linkManager the link manager
+   * @param sessionProviderService the session provider service
+   * @param hierarchyCreator the hierarchy creator
+   */
   public CMSNodeFinder(RepositoryService repositoryService,
                        LinkManager linkManager,
                        SessionProviderService sessionProviderService,

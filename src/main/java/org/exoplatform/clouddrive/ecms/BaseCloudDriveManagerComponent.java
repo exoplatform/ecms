@@ -31,6 +31,7 @@ import org.exoplatform.webui.ext.manager.UIAbstractManagerComponent;
  */
 public abstract class BaseCloudDriveManagerComponent extends UIAbstractManagerComponent {
 
+  /** The Constant LOG. */
   protected static final Log LOG = ExoLogger.getLogger(BaseCloudDriveManagerComponent.class);
 
   /**
@@ -41,6 +42,11 @@ public abstract class BaseCloudDriveManagerComponent extends UIAbstractManagerCo
     return UIAbstractManager.class;
   }
 
+  /**
+   * Inits the context.
+   *
+   * @throws Exception the exception
+   */
   protected void initContext() throws Exception {
     CloudDriveContext.init(this);
   }

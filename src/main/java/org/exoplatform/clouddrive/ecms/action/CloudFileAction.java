@@ -46,7 +46,6 @@ import java.util.Set;
 import java.util.regex.Matcher;
 
 import javax.jcr.Node;
-import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 
@@ -64,10 +63,13 @@ import javax.jcr.Session;
  */
 public class CloudFileAction {
 
+  /** The Constant LOG. */
   protected static final Log    LOG         = ExoLogger.getLogger(CloudFileAction.class);
 
+  /** The empty params. */
   protected final String[]      emptyParams = new String[0];
 
+  /** The ui explorer. */
   protected final UIJCRExplorer uiExplorer;
 
   /**
@@ -76,16 +78,22 @@ public class CloudFileAction {
    */
   protected final Set<Node>     srcNodes    = new LinkedHashSet<Node>();
 
+  /** The dest path. */
   protected String              destWorkspace, destPath;
 
+  /** The dest node. */
   protected Node                destNode;
 
+  /** The link. */
   protected Node                link;
 
+  /** The move. */
   protected boolean             move;
 
   /**
-   * 
+   * Instantiates a new cloud file action.
+   *
+   * @param uiExplorer the ui explorer
    */
   public CloudFileAction(UIJCRExplorer uiExplorer) {
     this.uiExplorer = uiExplorer;
@@ -93,9 +101,9 @@ public class CloudFileAction {
 
   /**
    * Add source file (target file).
-   * 
+   *
    * @param srcNode {@link Node}
-   * @return
+   * @return the cloud file action
    */
   public CloudFileAction addSource(Node srcNode) {
     this.srcNodes.add(srcNode);
@@ -104,10 +112,10 @@ public class CloudFileAction {
 
   /**
    * Add source file path (path to target file).
-   * 
+   *
    * @param srcInfo {@link String} in format of portal request ObjectId, see
    *          {@link UIWorkingArea#FILE_EXPLORER_URL_SYNTAX}
-   * @return
+   * @return the cloud file action
    * @throws Exception if cannot find node by given path
    */
   public CloudFileAction addSource(String srcInfo) throws Exception {
@@ -117,11 +125,11 @@ public class CloudFileAction {
 
   /**
    * Add source file by its wokrspace name and path.
-   * 
+   *
    * @param srcWorkspace {@link String}
    * @param srcPath {@link String}
-   * @return
-   * @throws Exception
+   * @return the cloud file action
+   * @throws Exception the exception
    */
   public CloudFileAction addSource(String srcWorkspace, String srcPath) throws Exception {
     // FYI don't take a target, use current context node
@@ -130,10 +138,10 @@ public class CloudFileAction {
 
   /**
    * Set link destination node.
-   * 
+   *
    * @param destNode {@link Node}
-   * @return
-   * @throws Exception
+   * @return the cloud file action
+   * @throws Exception the exception
    */
   public CloudFileAction setDestination(Node destNode) throws Exception {
     this.destWorkspace = destNode.getSession().getWorkspace().getName();
@@ -145,10 +153,10 @@ public class CloudFileAction {
 
   /**
    * Set path of link destination.
-   * 
+   *
    * @param destInfo {@link String} in format of portal request ObjectId, see
    *          {@link UIWorkingArea#FILE_EXPLORER_URL_SYNTAX}
-   * @return
+   * @return the cloud file action
    * @throws Exception if cannot find node by given path or cannot read its metadata
    */
   public CloudFileAction setDestination(String destInfo) throws Exception {
@@ -158,8 +166,8 @@ public class CloudFileAction {
 
   /**
    * Link behaviour as instead of "move" operation. Behaviour of "copy" by default.
-   * 
-   * @return
+   *
+   * @return the cloud file action
    */
   public CloudFileAction move() {
     this.move = true;
@@ -167,7 +175,7 @@ public class CloudFileAction {
   }
 
   /**
-   * Return symlink-node created by {@link #create()} method if it returned <code>true</code>. This method has
+   * Return symlink-node created by {@link #apply()} method if it returned <code>true</code>. This method has
    * sense only after calling the mentioned method, otherwise this method returns <code>null</code>.
    * 
    * @return the link {@link Node} or <code>null</code> if link not yet created or creation wasn't successful.
@@ -205,8 +213,8 @@ public class CloudFileAction {
 
   /**
    * Rollback the symlink at its destination in JCR.
-   * 
-   * @throws RepositoryException
+   *
+   * @throws RepositoryException the repository exception
    */
   public void rollback() throws RepositoryException {
     destNode.getSession().refresh(false);
@@ -215,12 +223,12 @@ public class CloudFileAction {
   /**
    * Apply an action for all added source files: move, copy or link from source to destination.
    * This method will save the session of destination node in case of symlink creation.
-   * 
+   *
    * @return <code>true</code> if all sources were linked in destination successfully, <code>false</code>
    *         otherwise. If nothing applied return <code>false</code> also.
    * @throws CloudFileActionException if destination cannot be created locally, this exception will contain
    *           detailed message and a internationalized text for WebUI application.
-   * @throws Exception
+   * @throws Exception the exception
    */
   public boolean apply() throws CloudFileActionException, Exception {
     if (destWorkspace != null) {
@@ -250,8 +258,8 @@ public class CloudFileAction {
             if (!destPath.startsWith(srcPath)) {
               if (srcLocal != null && srcLocal.isDrive(srcNode)) {
                 // it is a drive node as source - reject it
-                throw new CloudFileActionException("Copy or move of cloud drive not supported: " + srcPath
-                    + " to " + destPath,
+                throw new CloudFileActionException("Copy or move of cloud drive not supported: " + srcPath + " to "
+                    + destPath,
                                                    new ApplicationMessage("CloudFile.msg.CloudDriveCopyMoveNotSupported",
                                                                           null,
                                                                           ApplicationMessage.WARNING));
@@ -374,6 +382,14 @@ public class CloudFileAction {
     }
   }
 
+  /**
+   * Gets the node by info.
+   *
+   * @param pathInfo the path info
+   * @param giveTarget the give target
+   * @return the node by info
+   * @throws Exception the exception
+   */
   protected Node getNodeByInfo(String pathInfo, boolean giveTarget) throws Exception {
     Matcher matcher = UIWorkingArea.FILE_EXPLORER_URL_SYNTAX.matcher(pathInfo);
     String workspace, path;
@@ -386,6 +402,15 @@ public class CloudFileAction {
     return getNodeByPath(workspace, path, giveTarget);
   }
 
+  /**
+   * Gets the node by path.
+   *
+   * @param workspace the workspace
+   * @param path the path
+   * @param giveTarget the give target
+   * @return the node by path
+   * @throws Exception the exception
+   */
   protected Node getNodeByPath(String workspace, String path, boolean giveTarget) throws Exception {
     Session srcSession = uiExplorer.getSessionByWorkspace(workspace);
     return uiExplorer.getNodeByPath(path, srcSession, giveTarget);

@@ -26,6 +26,11 @@ import org.exoplatform.webui.config.annotation.ComponentConfig;
 @ComponentConfig(template = "classpath:groovy/templates/H264VideoViewer.gtmpl")
 public class H264VideoViewer extends AbstractFileViewer {
 
+  /**
+   * Instantiates a new h 264 video viewer.
+   *
+   * @throws Exception the exception
+   */
   public H264VideoViewer() throws Exception {
   }
 }

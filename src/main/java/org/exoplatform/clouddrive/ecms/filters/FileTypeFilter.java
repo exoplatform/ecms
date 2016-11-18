@@ -37,10 +37,15 @@ import java.util.Set;
  */
 public class FileTypeFilter implements UIExtensionFilter {
 
+  /** The Constant LOG. */
   protected static final Log LOG = ExoLogger.getLogger(FileTypeFilter.class);
 
+  /** The mime types. */
   protected Set<String>      mimeTypes;
 
+  /**
+   * {@inheritDoc}
+   */
   public boolean accept(Map<String, Object> context) throws Exception {
     if (context == null) {
       return true;
@@ -66,10 +71,16 @@ public class FileTypeFilter implements UIExtensionFilter {
     return false;
   }
 
+  /**
+   * {@inheritDoc}
+   */
   public UIExtensionFilterType getType() {
     return UIExtensionFilterType.MANDATORY;
   }
 
+  /**
+   * {@inheritDoc}
+   */
   public void onDeny(Map<String, Object> context) throws Exception {
   }
 }

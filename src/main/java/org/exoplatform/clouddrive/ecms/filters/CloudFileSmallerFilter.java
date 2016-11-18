@@ -32,14 +32,28 @@ import java.util.List;
  */
 public class CloudFileSmallerFilter extends CloudFileFilter {
 
+  /**
+   * Instantiates a new cloud file smaller filter.
+   */
   public CloudFileSmallerFilter() {
     super();
   }
 
+  /**
+   * Instantiates a new cloud file smaller filter.
+   *
+   * @param providers the providers
+   * @param maxSize the max size
+   */
   public CloudFileSmallerFilter(List<String> providers, long maxSize) {
     super(providers, 0, maxSize);
   }
 
+  /**
+   * Instantiates a new cloud file smaller filter.
+   *
+   * @param maxSize the max size
+   */
   public CloudFileSmallerFilter(long maxSize) {
     super(0, maxSize);
   }

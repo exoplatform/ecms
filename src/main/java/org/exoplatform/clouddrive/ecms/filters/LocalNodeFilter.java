@@ -38,6 +38,7 @@ import javax.jcr.RepositoryException;
  */
 public class LocalNodeFilter extends AbstractCloudDriveNodeFilter {
 
+  /** The Constant LOG. */
   protected static final Log LOG = ExoLogger.getLogger(LocalNodeFilter.class);
 
   /**

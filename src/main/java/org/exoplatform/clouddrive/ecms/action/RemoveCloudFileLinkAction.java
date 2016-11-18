@@ -38,6 +38,7 @@ import javax.jcr.Node;
  */
 public class RemoveCloudFileLinkAction extends AbstractJCRAction {
 
+  /** The log. */
   private static Log LOG = ExoLogger.getLogger(RemoveCloudFileLinkAction.class);
 
   /**

@@ -37,8 +37,10 @@ import javax.ws.rs.core.MediaType;
  */
 public abstract class AbstractFileForm extends BaseCloudDriveForm implements CloudFileViewer {
 
+  /** The drive. */
   protected CloudDrive drive;
 
+  /** The file. */
   protected CloudFile  file;
 
   /**
@@ -70,6 +72,8 @@ public abstract class AbstractFileForm extends BaseCloudDriveForm implements Clo
   }
 
   /**
+   * Gets the drive.
+   *
    * @return the drive
    */
   public CloudDrive getDrive() {
@@ -77,6 +81,8 @@ public abstract class AbstractFileForm extends BaseCloudDriveForm implements Clo
   }
 
   /**
+   * Gets the file.
+   *
    * @return the file
    */
   public CloudFile getFile() {
@@ -84,6 +90,8 @@ public abstract class AbstractFileForm extends BaseCloudDriveForm implements Clo
   }
 
   /**
+   * Checks if is viewable.
+   *
    * @return <code>true</code> if file can be represented as Web document.
    */
   public boolean isViewable() {
@@ -91,6 +99,12 @@ public abstract class AbstractFileForm extends BaseCloudDriveForm implements Clo
     return !mimeType.startsWith(MediaType.APPLICATION_OCTET_STREAM);
   }
 
+  /**
+   * Gets the resource bundle.
+   *
+   * @param key the key
+   * @return the resource bundle
+   */
   public String getResourceBundle(String key) {
     Locale locale = Util.getUIPortal().getAncestorOfType(UIPortalApplication.class).getLocale();
     ResourceBundleService resourceBundleService = WCMCoreUtils.getService(ResourceBundleService.class);
@@ -100,6 +114,11 @@ public abstract class AbstractFileForm extends BaseCloudDriveForm implements Clo
     return resourceBundle.getString(key);
   }
 
+  /**
+   * Locale file.
+   *
+   * @return the string
+   */
   protected abstract String localeFile();
 
 }

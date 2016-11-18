@@ -39,12 +39,20 @@ import org.exoplatform.webui.ext.filter.UIExtensionFilters;
 @ComponentConfig(lifecycle = UIContainerLifecycle.class)
 public class RefreshCloudDriveManagerComponent extends BaseCloudDriveManagerComponent {
 
+  /** The Constant LOG. */
   protected static final Log                     LOG        = ExoLogger.getLogger(RefreshCloudDriveManagerComponent.class);
 
+  /** The Constant EVENT_NAME. */
   public static final String                     EVENT_NAME = "RefreshCloudDrive";
 
+  /** The Constant FILTERS. */
   protected static final List<UIExtensionFilter> FILTERS    = Arrays.asList(new UIExtensionFilter[] { new CloudDriveFilter() });
 
+  /**
+   * Gets the filters.
+   *
+   * @return the filters
+   */
   @UIExtensionFilters
   public List<UIExtensionFilter> getFilters() {
     return FILTERS;

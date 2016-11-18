@@ -40,8 +40,20 @@ import org.exoplatform.webui.event.Event;
                                          listeners = CloudDriveClipboardActionComponent.ClipboardActionListener.class) })
 public class CloudDriveClipboardActionComponent extends ClipboardActionComponent {
 
+  /**
+   * The listener interface for receiving clipboardAction events.
+   * The class that is interested in processing a clipboardAction
+   * event implements this interface, and the object created
+   * with that class is registered with a component using the
+   * component's <code>addClipboardActionListener</code> method. When
+   * the clipboardAction event occurs, that object's appropriate
+   * method is invoked.
+   */
   public static class ClipboardActionListener extends ClipboardActionComponent.ClipboardActionListener {
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected void processEvent(Event<ClipboardActionComponent> event) throws Exception {
       // Replace UIClipboard listener in UISideBar
@@ -57,7 +69,7 @@ public class CloudDriveClipboardActionComponent extends ClipboardActionComponent
   }
 
   /**
-   * 
+   * Instantiates a new cloud drive clipboard action component.
    */
   public CloudDriveClipboardActionComponent() {
     super();

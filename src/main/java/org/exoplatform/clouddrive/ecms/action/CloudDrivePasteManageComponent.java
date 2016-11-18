@@ -22,14 +22,10 @@ import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.rightclick.manager.PasteManageComponent;
 import org.exoplatform.services.cms.clipboard.ClipboardService;
 import org.exoplatform.services.cms.clipboard.jcr.model.ClipboardCommand;
-import org.exoplatform.services.cms.drives.DriveData;
-import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
-import org.exoplatform.social.core.space.model.Space;
-import org.exoplatform.social.core.space.spi.SpaceService;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
@@ -53,13 +49,26 @@ import java.util.Set;
  * @version $Id: CloudDrivePasteManageComponent.java 00000 May 12, 2014 pnedonosko $
  * 
  */
-@ComponentConfig(events = {
-    @EventConfig(listeners = CloudDrivePasteManageComponent.PasteActionListener.class) })
+@ComponentConfig(events = { @EventConfig(listeners = CloudDrivePasteManageComponent.PasteActionListener.class) })
 public class CloudDrivePasteManageComponent extends PasteManageComponent {
 
+  /** The Constant LOG. */
   protected static final Log LOG = ExoLogger.getLogger(CloudDrivePasteManageComponent.class);
 
+  /**
+   * The listener interface for receiving pasteAction events.
+   * The class that is interested in processing a pasteAction
+   * event implements this interface, and the object created
+   * with that class is registered with a component using the
+   * component's <code>addPasteActionListener</code> method. When
+   * the pasteAction event occurs, that object's appropriate
+   * method is invoked.
+   */
   public static class PasteActionListener extends PasteManageComponent.PasteActionListener {
+
+    /**
+     * {@inheritDoc}
+     */
     public void processEvent(Event<PasteManageComponent> event) throws Exception {
       UIJCRExplorer uiExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);
 
@@ -140,8 +149,7 @@ public class CloudDrivePasteManageComponent extends PasteManageComponent {
             } else {
               // something goes wrong and we will let default code to work
               action.rollback();
-              LOG.warn("Links cannot be created for all cloud files. Destination "
-                  + action.getDestonationPath() + "."
+              LOG.warn("Links cannot be created for all cloud files. Destination " + action.getDestonationPath() + "."
                   + (current != null ? " Last file " + current.getSrcPath() + "." : "")
                   + " Default behaviour will be applied (files Paste).");
             }
@@ -167,7 +175,7 @@ public class CloudDrivePasteManageComponent extends PasteManageComponent {
   }
 
   /**
-   * 
+   * Instantiates a new cloud drive paste manage component.
    */
   public CloudDrivePasteManageComponent() {
     super();

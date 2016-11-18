@@ -44,6 +44,9 @@ import java.util.List;
 import javax.jcr.InvalidItemStateException;
 import javax.jcr.Node;
 
+/**
+ * The Class UIPermissionInfo.
+ */
 @ComponentConfig(lifecycle = UIContainerLifecycle.class,
                  events = {
                      @EventConfig(listeners = UIPermissionInfo.DeleteActionListener.class,
@@ -51,15 +54,35 @@ import javax.jcr.Node;
                      @EventConfig(listeners = UIPermissionInfo.EditActionListener.class) })
 public class UIPermissionInfo extends org.exoplatform.ecm.webui.component.explorer.popup.info.UIPermissionInfo {
 
+  /** The permission bean field. */
   protected static String[]  PERMISSION_BEAN_FIELD = { "usersOrGroups" };                        // PermissionType.READ,
                                                                                                  // PermissionType.REMOVE
 
+  /**
+   * The
+   * permission
+   * action.
+   */
   protected static String[]  PERMISSION_ACTION     = { "Delete" };
 
+  /** The Constant LOG. */
   protected static final Log LOG                   = ExoLogger.getLogger(UIPermissionInfo.class);
 
+  /**
+   * The listener interface for receiving deleteAction events.
+   * The class that is interested in processing a deleteAction
+   * event implements this interface, and the object created
+   * with that class is registered with a component using the
+   * component's <code>addDeleteActionListener</code> method. When
+   * the deleteAction event occurs, that object's appropriate
+   * method is invoked.
+   */
   public static class DeleteActionListener extends
                                            org.exoplatform.ecm.webui.component.explorer.popup.info.UIPermissionInfo.DeleteActionListener {
+
+    /**
+     * {@inheritDoc}
+     */
     public void execute(Event<org.exoplatform.ecm.webui.component.explorer.popup.info.UIPermissionInfo> event) throws Exception {
       UIPermissionInfo uiComp = (UIPermissionInfo) event.getSource();
       UIJCRExplorer uiJCRExplorer = uiComp.getAncestorOfType(UIJCRExplorer.class);
@@ -106,6 +129,11 @@ public class UIPermissionInfo extends org.exoplatform.ecm.webui.component.explor
     }
   }
 
+  /**
+   * Instantiates a new UI permission info.
+   *
+   * @throws Exception the exception
+   */
   public UIPermissionInfo() throws Exception {
     super();
     // customize permissions grid

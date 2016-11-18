@@ -34,14 +34,14 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
 /**
- * Created by The eXo Platform SAS
- * 
+ * Created by The eXo Platform SAS.
+ *
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
  * @version $Id: CloudDriveContextFilter.java 00000 Nov 17, 2016 pnedonosko $
- * 
  */
 public class CloudDriveContextFilter implements Filter {
 
+  /** The Constant LOG. */
   protected static final Logger LOG = LoggerFactory.getLogger(CloudDriveContextFilter.class);
 
   /**

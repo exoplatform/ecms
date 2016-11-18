@@ -26,6 +26,11 @@ import org.exoplatform.webui.config.annotation.ComponentConfig;
 @ComponentConfig(template = "classpath:groovy/templates/FlashViewer.gtmpl")
 public class FlashViewer extends AbstractFileViewer {
 
+  /**
+   * Instantiates a new flash viewer.
+   *
+   * @throws Exception the exception
+   */
   public FlashViewer() throws Exception {
   }
 }

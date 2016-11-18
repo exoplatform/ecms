@@ -28,8 +28,14 @@ import org.exoplatform.webui.form.UIForm;
  */
 public abstract class BaseCloudDriveForm extends UIForm implements UIPopupComponent {
 
+  /** The Constant LOG. */
   protected static final Log LOG = ExoLogger.getLogger(BaseCloudDriveForm.class);
 
+  /**
+   * Inits the context.
+   *
+   * @throws Exception the exception
+   */
   protected void initContext() throws Exception {
     CloudDriveContext.init(this);
   }

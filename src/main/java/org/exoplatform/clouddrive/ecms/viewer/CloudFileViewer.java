@@ -35,10 +35,10 @@ public interface CloudFileViewer {
 
   /**
    * Initialize UI component to represent the given cloud file.
-   * 
+   *
    * @param drive {@link CloudDrive}
    * @param file {@link CloudFile}
-   * @throws Exception
+   * @throws Exception the exception
    */
   void initFile(CloudDrive drive, CloudFile file) throws Exception;
   

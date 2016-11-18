@@ -26,6 +26,11 @@ import org.exoplatform.webui.config.annotation.ComponentConfig;
 @ComponentConfig(template = "classpath:groovy/templates/MpegVideoViewer.gtmpl")
 public class MpegVideoViewer extends AbstractFileViewer {
 
+  /**
+   * Instantiates a new mpeg video viewer.
+   *
+   * @throws Exception the exception
+   */
   public MpegVideoViewer() throws Exception {
   }
 }

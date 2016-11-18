@@ -52,15 +52,30 @@ import javax.ws.rs.core.UriInfo;
 @Produces(MediaType.APPLICATION_JSON)
 public class ResourceService implements ResourceContainer {
 
+  /** The Constant LOG. */
   protected static final Log LOG = ExoLogger.getLogger(ResourceService.class);
 
+  /**
+   * The Class LocaleBundle.
+   */
   public static class LocaleBundle {
+    
+    /** The data. */
     protected final Map<String, String> data;
 
+    /** The language. */
     protected final String              language;
 
+    /** The country. */
     protected final String              country;
 
+    /**
+     * Instantiates a new locale bundle.
+     *
+     * @param language the language
+     * @param country the country
+     * @param data the data
+     */
     protected LocaleBundle(String language, String country, Map<String, String> data) {
       super();
       this.language = language;
@@ -69,6 +84,8 @@ public class ResourceService implements ResourceContainer {
     }
 
     /**
+     * Gets the data.
+     *
      * @return the data
      */
     public Map<String, String> getData() {
@@ -76,6 +93,8 @@ public class ResourceService implements ResourceContainer {
     }
 
     /**
+     * Gets the language.
+     *
      * @return the language
      */
     public String getLanguage() {
@@ -83,6 +102,8 @@ public class ResourceService implements ResourceContainer {
     }
 
     /**
+     * Gets the country.
+     *
      * @return the country
      */
     public String getCountry() {
@@ -91,12 +112,13 @@ public class ResourceService implements ResourceContainer {
 
   }
 
+  /** The resource service. */
   protected final ResourceBundleService resourceService;
 
   /**
    * Constructor.
-   * 
-   * @param {@link ResourceBundleService} resourceService
+   *
+   * @param resourceService the resource service
    */
   public ResourceService(ResourceBundleService resourceService) {
     this.resourceService = resourceService;
@@ -104,8 +126,9 @@ public class ResourceService implements ResourceContainer {
 
   /**
    * Return provider by its id.
-   * 
-   * @param providerId - provider name see more in {@link CloudProvider}
+   *
+   * @param uriInfo the uri info
+   * @param request the request
    * @return response with asked {@link CloudProvider} json
    */
   @GET

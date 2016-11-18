@@ -40,12 +40,16 @@ import java.util.Set;
  */
 public class CloudDriveUIExtension extends BaseComponentPlugin {
 
+  /** The Constant LOG. */
   protected static final Log  LOG            = ExoLogger.getLogger(CloudDriveUIExtension.class);
 
+  /** The default actions. */
   protected final Set<String> defaultActions = new HashSet<String>();
 
   /**
-   * 
+   * Instantiates a new cloud drive UI extension.
+   *
+   * @param config the config
    */
   public CloudDriveUIExtension(InitParams config) {
     ValuesParam params = config.getValuesParam("default-actions");
@@ -60,6 +64,11 @@ public class CloudDriveUIExtension extends BaseComponentPlugin {
     }
   }
 
+  /**
+   * Gets the default actions.
+   *
+   * @return the default actions
+   */
   public Collection<String> getDefaultActions() {
     return Collections.unmodifiableSet(defaultActions);
   }

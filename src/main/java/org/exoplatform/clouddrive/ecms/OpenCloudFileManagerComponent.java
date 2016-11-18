@@ -31,20 +31,28 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * Created by The eXo Platform SAS
- * 
+ * Created by The eXo Platform SAS.
+ *
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
  * @version $Id: OpenCloudFileManagerComponent.java 00000 Sep 26, 2012 pnedonosko $
  */
 @ComponentConfig(lifecycle = UIContainerLifecycle.class)
 public class OpenCloudFileManagerComponent extends BaseCloudDriveManagerComponent {
 
+  /** The Constant LOG. */
   protected static final Log                     LOG        = ExoLogger.getLogger(OpenCloudFileManagerComponent.class);
 
+  /** The Constant EVENT_NAME. */
   public static final String                     EVENT_NAME = "OpenCloudFile";
 
+  /** The Constant FILTERS. */
   protected static final List<UIExtensionFilter> FILTERS    = Arrays.asList(new UIExtensionFilter[] { new CloudFileFilter() });
 
+  /**
+   * Gets the filters.
+   *
+   * @return the filters
+   */
   @UIExtensionFilters
   public List<UIExtensionFilter> getFilters() {
     return FILTERS;

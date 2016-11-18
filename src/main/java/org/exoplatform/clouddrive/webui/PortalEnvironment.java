@@ -29,28 +29,39 @@ import java.util.Map;
 import java.util.WeakHashMap;
 
 /**
- * Created by The eXo Platform SAS
- * 
+ * Created by The eXo Platform SAS.
+ *
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
  * @version $Id: PortalEnvironment.java 00000 Jan 16, 2014 pnedonosko $
- * 
  */
 public class PortalEnvironment extends CloudDriveEnvironment {
 
+  /**
+   * The Class Settings.
+   */
   protected class Settings {
+    
+    /** The context. */
     final RequestContext context;
 
+    /** The prev context. */
     RequestContext       prevContext;
 
+    /**
+     * Instantiates a new settings.
+     *
+     * @param context the context
+     */
     Settings(RequestContext context) {
       this.context = context;
     }
   }
 
+  /** The config. */
   protected final Map<Command, Settings> config = Collections.synchronizedMap(new WeakHashMap<Command, Settings>());
 
   /**
-   * 
+   * Instantiates a new portal environment.
    */
   public PortalEnvironment() {
   }

@@ -52,11 +52,10 @@ import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 
 /**
- * Created by The eXo Platform SAS
- * 
+ * Created by The eXo Platform SAS.
+ *
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
  * @version $Id: SharedCloudFileUIActivity.java 00000 Apr 15, 2016 pnedonosko $
- * 
  */
 @ComponentConfigs({
     @ComponentConfig(lifecycle = UIFormLifecycle.class,
@@ -74,14 +73,19 @@ import javax.jcr.RepositoryException;
                                            name = "ClosePopup") ) })
 public class SharedCloudFileUIActivity extends SharedFileUIActivity {
 
+  /** The Constant ACTIVITY_CSS_CLASS. */
   public static final String        ACTIVITY_CSS_CLASS = "uiCloudFileActivity";
 
+  /** The Constant LOG. */
   protected static final Log        LOG                = ExoLogger.getLogger(SharedCloudFileUIActivity.class);
 
+  /** The cloud drives. */
   protected final CloudDriveService cloudDrives;
 
   /**
-   * @throws Exception
+   * Instantiates a new shared cloud file UI activity.
+   *
+   * @throws Exception the exception
    */
   public SharedCloudFileUIActivity() throws Exception {
     this.cloudDrives = WCMCoreUtils.getService(CloudDriveService.class);
@@ -195,6 +199,12 @@ public class SharedCloudFileUIActivity extends SharedFileUIActivity {
 
   // ************* internals *************
 
+  /**
+   * Cloud file.
+   *
+   * @param node the node
+   * @return the cloud file
+   */
   protected CloudFile cloudFile(Node node) {
     try {
       String workspace = node.getSession().getWorkspace().getName();

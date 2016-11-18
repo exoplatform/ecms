@@ -40,8 +40,12 @@ import java.util.List;
 public class ManageVersionsActionComponent extends
                                            org.exoplatform.ecm.webui.component.explorer.control.action.ManageVersionsActionComponent {
 
+  /** The cd filter. */
   protected static IsNotIgnoreVersionNodeFilter cdFilter = new IsNotIgnoreVersionNodeFilter();
 
+  /**
+   * {@inheritDoc}
+   */
   @UIExtensionFilters
   public List<UIExtensionFilter> getFilters() {
     List<UIExtensionFilter> filters = super.getFilters();

@@ -41,21 +41,37 @@ import java.util.List;
 @ComponentConfig(template = "classpath:groovy/templates/DefaultFileViewer.gtmpl")
 public class DefaultFileViewer extends AbstractFileViewer {
 
+  /** The Constant LOG. */
   protected static final Log                     LOG        = ExoLogger.getLogger(DefaultFileViewer.class);
 
+  /** The Constant EVENT_NAME. */
   public static final String                     EVENT_NAME = "ShowCloudFile";
 
+  /** The Constant FILTERS. */
   protected static final List<UIExtensionFilter> FILTERS    = Arrays.asList(new UIExtensionFilter[] {
       new CloudFileFilter() });
 
+  /**
+   * Instantiates a new default file viewer.
+   */
   public DefaultFileViewer() {
     super();
   }
 
+  /**
+   * Instantiates a new default file viewer.
+   *
+   * @param viewableMaxSize the viewable max size
+   */
   protected DefaultFileViewer(long viewableMaxSize) {
     super(viewableMaxSize);
   }
 
+  /**
+   * Gets the filters.
+   *
+   * @return the filters
+   */
   @UIExtensionFilters
   public List<UIExtensionFilter> getFilters() {
     return FILTERS;

@@ -33,6 +33,7 @@ import javax.jcr.Node;
  */
 public class HasEditPermissionsFilter implements UIExtensionFilter {
 
+  /** The Constant LOG. */
   protected static final Log LOG = ExoLogger.getLogger(HasEditPermissionsFilter.class);
 
   /**

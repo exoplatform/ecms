@@ -26,6 +26,11 @@ import org.exoplatform.webui.config.annotation.ComponentConfig;
 @ComponentConfig(template = "classpath:groovy/templates/VideoAudioViewer.gtmpl")
 public class VideoAudioViewer extends AbstractFileViewer {
 
+  /**
+   * Instantiates a new video audio viewer.
+   *
+   * @throws Exception the exception
+   */
   public VideoAudioViewer() throws Exception {
   }
 }

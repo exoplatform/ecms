@@ -32,29 +32,61 @@ import java.util.List;
  */
 public class CloudFileLargerFilter extends CloudFileFilter {
 
+  /**
+   * Instantiates a new cloud file larger filter.
+   */
   public CloudFileLargerFilter() {
     super();
   }
 
+  /**
+   * Instantiates a new cloud file larger filter.
+   *
+   * @param providers the providers
+   * @param minSize the min size
+   * @param maxSize the max size
+   */
   public CloudFileLargerFilter(List<String> providers, long minSize, long maxSize) {
     super(providers, minSize, maxSize);
     // TODO Auto-generated constructor stub
   }
 
+  /**
+   * Instantiates a new cloud file larger filter.
+   *
+   * @param providers the providers
+   */
   public CloudFileLargerFilter(List<String> providers) {
     super(providers);
     // TODO Auto-generated constructor stub
   }
 
+  /**
+   * Instantiates a new cloud file larger filter.
+   *
+   * @param minSize the min size
+   * @param maxSize the max size
+   */
   public CloudFileLargerFilter(long minSize, long maxSize) {
     super(minSize, maxSize);
     // TODO Auto-generated constructor stub
   }
 
+  /**
+   * Instantiates a new cloud file larger filter.
+   *
+   * @param providers the providers
+   * @param minSize the min size
+   */
   public CloudFileLargerFilter(List<String> providers, long minSize) {
     super(providers, minSize, Long.MAX_VALUE);
   }
 
+  /**
+   * Instantiates a new cloud file larger filter.
+   *
+   * @param minSize the min size
+   */
   public CloudFileLargerFilter(long minSize) {
     super(minSize, Long.MAX_VALUE);
   }

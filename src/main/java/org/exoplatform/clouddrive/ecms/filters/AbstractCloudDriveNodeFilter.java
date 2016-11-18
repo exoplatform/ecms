@@ -44,24 +44,48 @@ import javax.jcr.RepositoryException;
  */
 public abstract class AbstractCloudDriveNodeFilter implements UIExtensionFilter {
 
+  /** The min size. */
   protected long         minSize;
 
+  /** The max size. */
   protected long         maxSize;
 
+  /** The providers. */
   protected List<String> providers;
 
+  /**
+   * Instantiates a new abstract cloud drive node filter.
+   */
   public AbstractCloudDriveNodeFilter() {
     this(Collections.<String> emptyList());
   }
 
+  /**
+   * Instantiates a new abstract cloud drive node filter.
+   *
+   * @param providers the providers
+   */
   public AbstractCloudDriveNodeFilter(List<String> providers) {
     this(providers, 0, Long.MAX_VALUE);
   }
 
+  /**
+   * Instantiates a new abstract cloud drive node filter.
+   *
+   * @param minSize the min size
+   * @param maxSize the max size
+   */
   public AbstractCloudDriveNodeFilter(long minSize, long maxSize) {
     this(Collections.<String> emptyList(), minSize, maxSize);
   }
 
+  /**
+   * Instantiates a new abstract cloud drive node filter.
+   *
+   * @param providers the providers
+   * @param minSize the min size
+   * @param maxSize the max size
+   */
   public AbstractCloudDriveNodeFilter(List<String> providers, long minSize, long maxSize) {
     this.providers = providers;
     this.minSize = minSize >= 0 ? minSize : 0;
@@ -130,6 +154,12 @@ public abstract class AbstractCloudDriveNodeFilter implements UIExtensionFilter 
 
   // ****************** internals ******************
 
+  /**
+   * Accept provider.
+   *
+   * @param provider the provider
+   * @return true, if successful
+   */
   protected boolean acceptProvider(CloudProvider provider) {
     if (providers.size() > 0) {
       boolean accepted = providers.contains(provider.getId());
@@ -144,5 +174,12 @@ public abstract class AbstractCloudDriveNodeFilter implements UIExtensionFilter 
     }
   }
 
+  /**
+   * Accept.
+   *
+   * @param node the node
+   * @return true, if successful
+   * @throws RepositoryException the repository exception
+   */
   protected abstract boolean accept(Node node) throws RepositoryException;
 }

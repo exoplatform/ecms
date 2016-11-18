@@ -46,9 +46,24 @@ import javax.jcr.Node;
                      @EventConfig(listeners = UIClipboard.ClearAllActionListener.class) })
 public class UICloudDriveClipboard extends UIClipboard {
 
+  /** The Constant LOG. */
   protected static final Log LOG = ExoLogger.getLogger(UICloudDriveClipboard.class);
 
+  /**
+   * The listener interface for receiving pasteAction events.
+   * The class that is interested in processing a pasteAction
+   * event implements this interface, and the object created
+   * with that class is registered with a component using the
+   * component's <code>addPasteActionListener</code> method. When
+   * the pasteAction event occurs, that object's appropriate
+   * method is invoked.
+   *
+   */
   public static class PasteActionListener extends UIClipboard.PasteActionListener {
+    
+    /**
+     * {@inheritDoc}
+     */
     public void execute(Event<UIClipboard> event) throws Exception {
       UIClipboard uiClipboard = event.getSource();
       UIJCRExplorer uiExplorer = uiClipboard.getAncestorOfType(UIJCRExplorer.class);
@@ -91,7 +106,9 @@ public class UICloudDriveClipboard extends UIClipboard {
   }
 
   /**
-   * @throws Exception
+   * Instantiates a new UI cloud drive clipboard.
+   *
+   * @throws Exception the exception
    */
   public UICloudDriveClipboard() throws Exception {
     super();

@@ -60,28 +60,44 @@ import javax.jcr.RepositoryException;
                      @EventConfig(listeners = PDFViewer.ZoomOutPageActionListener.class, phase = Phase.DECODE) })
 public class PDFViewer extends AbstractFileForm {
 
+  /** The Constant PAGE_NUMBER. */
   private static final String     PAGE_NUMBER       = "pageNumber";
 
+  /** The Constant SCALE_PAGE. */
   private static final String     SCALE_PAGE        = "scalePage";
 
+  /** The Constant localeFile. */
   private static final String     localeFile        = "locale.portlet.viewer.PDFViewer";
 
+  /** The storage. */
   private final ViewerStorage     storage;
 
+  /** The jcr service. */
   private final RepositoryService jcrService;
 
+  /** The pdf file. */
   private PDFFile                 pdfFile;
 
+  /** The pdf link. */
   private String                  pdfLink;
 
+  /** The pdf page link. */
   private String                  pdfPageLink;
 
+  /** The current page number. */
   private int                     currentPageNumber = 1;
 
+  /** The current rotation. */
   private float                   currentRotation   = 0.0f;
 
+  /** The current scale. */
   private float                   currentScale      = 1.0f;
 
+  /**
+   * Instantiates a new PDF viewer.
+   *
+   * @throws Exception the exception
+   */
   public PDFViewer() throws Exception {
     this.storage = (ViewerStorage) getApplicationComponent(ViewerStorage.class);
     this.jcrService = (RepositoryService) getApplicationComponent(RepositoryService.class);
@@ -148,6 +164,11 @@ public class PDFViewer extends AbstractFileForm {
     }
   }
 
+  /**
+   * Gets the file metadata.
+   *
+   * @return the file metadata
+   */
   public Map<String, String> getFileMetadata() {
     if (pdfFile != null) {
       return pdfFile.getMetadata();
@@ -155,6 +176,11 @@ public class PDFViewer extends AbstractFileForm {
     return Collections.emptyMap();
   }
 
+  /**
+   * Gets the number of pages.
+   *
+   * @return the number of pages
+   */
   public int getNumberOfPages() {
     if (pdfFile != null) {
       return pdfFile.getNumberOfPages();
@@ -163,6 +189,8 @@ public class PDFViewer extends AbstractFileForm {
   }
 
   /**
+   * Gets the page image link.
+   *
    * @return the pageImageLink
    */
   public String getPageImageLink() {
@@ -183,36 +211,73 @@ public class PDFViewer extends AbstractFileForm {
   }
 
   /**
+   * Gets the pdf link.
+   *
    * @return the PDF link
    */
   public String getPdfLink() {
     return pdfLink;
   }
 
+  /**
+   * Gets the current rotation.
+   *
+   * @return the current rotation
+   */
   public float getCurrentRotation() {
     return currentRotation;
   }
 
+  /**
+   * Sets the rotation.
+   *
+   * @param rotation the new rotation
+   */
   public void setRotation(float rotation) {
     currentRotation = rotation;
   }
 
+  /**
+   * Gets the current scale.
+   *
+   * @return the current scale
+   */
   public float getCurrentScale() {
     return currentScale;
   }
 
+  /**
+   * Sets the scale.
+   *
+   * @param scale the new scale
+   */
   public void setScale(float scale) {
     currentScale = scale;
   }
 
+  /**
+   * Gets the page number.
+   *
+   * @return the page number
+   */
   public int getPageNumber() {
     return currentPageNumber;
   }
 
+  /**
+   * Sets the page number.
+   *
+   * @param pageNum the new page number
+   */
   public void setPageNumber(int pageNum) {
     currentPageNumber = pageNum;
   };
 
+  /**
+   * Inits the scale options.
+   *
+   * @return the list
+   */
   private List<SelectItemOption<String>> initScaleOptions() {
     List<SelectItemOption<String>> scaleOptions = new ArrayList<SelectItemOption<String>>();
     scaleOptions.add(new SelectItemOption<String>("5%", "0.05f"));
@@ -228,7 +293,21 @@ public class PDFViewer extends AbstractFileForm {
     return scaleOptions;
   }
 
+  /**
+   * The listener interface for receiving previousPageAction events.
+   * The class that is interested in processing a previousPageAction
+   * event implements this interface, and the object created
+   * with that class is registered with a component using the
+   * component's <code>addPreviousPageActionListener</code> method. When
+   * the previousPageAction event occurs, that object's appropriate
+   * method is invoked.
+   *
+   */
   public static class PreviousPageActionListener extends EventListener<PDFViewer> {
+    
+    /**
+     * {@inheritDoc}
+     */
     public void execute(Event<PDFViewer> event) throws Exception {
       PDFViewer pdfViewer = event.getSource();
       if (pdfViewer.currentPageNumber == 1) {
@@ -241,7 +320,21 @@ public class PDFViewer extends AbstractFileForm {
     }
   }
 
+  /**
+   * The listener interface for receiving nextPageAction events.
+   * The class that is interested in processing a nextPageAction
+   * event implements this interface, and the object created
+   * with that class is registered with a component using the
+   * component's <code>addNextPageActionListener</code> method. When
+   * the nextPageAction event occurs, that object's appropriate
+   * method is invoked.
+   *
+   */
   static public class NextPageActionListener extends EventListener<PDFViewer> {
+    
+    /**
+     * {@inheritDoc}
+     */
     public void execute(Event<PDFViewer> event) throws Exception {
       PDFViewer pdfViewer = event.getSource();
       if (pdfViewer.currentPageNumber == pdfViewer.getNumberOfPages()) {
@@ -254,7 +347,20 @@ public class PDFViewer extends AbstractFileForm {
     }
   }
 
+  /**
+   * The listener interface for receiving gotoPageAction events.
+   * The class that is interested in processing a gotoPageAction
+   * event implements this interface, and the object created
+   * with that class is registered with a component using the
+   * component's <code>addGotoPageActionListener</code> method. When
+   * the gotoPageAction event occurs, that object's appropriate
+   * method is invoked.
+   */
   static public class GotoPageActionListener extends EventListener<PDFViewer> {
+    
+    /**
+     * {@inheritDoc}
+     */
     public void execute(Event<PDFViewer> event) throws Exception {
       PDFViewer pdfViewer = event.getSource();
       String pageStr = pdfViewer.getUIStringInput(PAGE_NUMBER).getValue();
@@ -274,7 +380,20 @@ public class PDFViewer extends AbstractFileForm {
     }
   }
 
+  /**
+   * The listener interface for receiving rotateRightPageAction events.
+   * The class that is interested in processing a rotateRightPageAction
+   * event implements this interface, and the object created
+   * with that class is registered with a component using the
+   * component's <code>addRotateRightPageActionListener</code> method. When
+   * the rotateRightPageAction event occurs, that object's appropriate
+   * method is invoked.
+   */
   static public class RotateRightPageActionListener extends EventListener<PDFViewer> {
+    
+    /**
+     * {@inheritDoc}
+     */
     public void execute(Event<PDFViewer> event) throws Exception {
       PDFViewer pdfViewer = event.getSource();
       pdfViewer.setRotation(pdfViewer.currentRotation + 270.0f);
@@ -282,7 +401,20 @@ public class PDFViewer extends AbstractFileForm {
     }
   }
 
+  /**
+   * The listener interface for receiving rotateLeftPageAction events.
+   * The class that is interested in processing a rotateLeftPageAction
+   * event implements this interface, and the object created
+   * with that class is registered with a component using the
+   * component's <code>addRotateLeftPageActionListener</code> method. When
+   * the rotateLeftPageAction event occurs, that object's appropriate
+   * method is invoked.
+   */
   static public class RotateLeftPageActionListener extends EventListener<PDFViewer> {
+    
+    /**
+     * {@inheritDoc}
+     */
     public void execute(Event<PDFViewer> event) throws Exception {
       PDFViewer pdfViewer = event.getSource();
       pdfViewer.setRotation(pdfViewer.currentRotation + 90.0f);
@@ -290,7 +422,20 @@ public class PDFViewer extends AbstractFileForm {
     }
   }
 
+  /**
+   * The listener interface for receiving scalePageAction events.
+   * The class that is interested in processing a scalePageAction
+   * event implements this interface, and the object created
+   * with that class is registered with a component using the
+   * component's <code>addScalePageActionListener</code> method. When
+   * the scalePageAction event occurs, that object's appropriate
+   * method is invoked.
+   */
   static public class ScalePageActionListener extends EventListener<PDFViewer> {
+    
+    /**
+     * {@inheritDoc}
+     */
     public void execute(Event<PDFViewer> event) throws Exception {
       PDFViewer pdfViewer = event.getSource();
       String scale = pdfViewer.getUIFormSelectBox(SCALE_PAGE).getValue();
@@ -299,7 +444,20 @@ public class PDFViewer extends AbstractFileForm {
     }
   }
 
+  /**
+   * The listener interface for receiving zoomInPageAction events.
+   * The class that is interested in processing a zoomInPageAction
+   * event implements this interface, and the object created
+   * with that class is registered with a component using the
+   * component's <code>addZoomInPageActionListener</code> method. When
+   * the zoomInPageAction event occurs, that object's appropriate
+   * method is invoked.
+   */
   static public class ZoomInPageActionListener extends EventListener<PDFViewer> {
+    
+    /**
+     * {@inheritDoc}
+     */
     public void execute(Event<PDFViewer> event) throws Exception {
       PDFViewer pdfViewer = event.getSource();
       String[] arrValue = { "0.05f", "0.1f", "0.25f", "0.5f", "0.75f", "1.0f", "1.25f", "1.5f", "2.0f", "3.0f" };
@@ -317,7 +475,20 @@ public class PDFViewer extends AbstractFileForm {
     }
   }
 
+  /**
+   * The listener interface for receiving zoomOutPageAction events.
+   * The class that is interested in processing a zoomOutPageAction
+   * event implements this interface, and the object created
+   * with that class is registered with a component using the
+   * component's <code>addZoomOutPageActionListener</code> method. When
+   * the zoomOutPageAction event occurs, that object's appropriate
+   * method is invoked.
+   */
   static public class ZoomOutPageActionListener extends EventListener<PDFViewer> {
+    
+    /**
+     * {@inheritDoc}
+     */
     public void execute(Event<PDFViewer> event) throws Exception {
       PDFViewer pdfViewer = event.getSource();
       String scale = pdfViewer.getUIFormSelectBox(SCALE_PAGE).getValue();

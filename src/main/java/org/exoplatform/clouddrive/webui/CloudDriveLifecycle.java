@@ -44,12 +44,14 @@ import org.exoplatform.webui.core.UIComponentDecorator;
  */
 public class CloudDriveLifecycle implements ApplicationLifecycle<WebuiRequestContext> {
 
+  /** The Constant LOG. */
   protected static final Log           LOG             = ExoLogger.getLogger(CloudDriveLifecycle.class);
 
+  /** The toolbar rendered. */
   protected final ThreadLocal<Boolean> toolbarRendered = new ThreadLocal<Boolean>();
 
   /**
-   * 
+   * Instantiates a new cloud drive lifecycle.
    */
   public CloudDriveLifecycle() {
     //
@@ -108,6 +110,14 @@ public class CloudDriveLifecycle implements ApplicationLifecycle<WebuiRequestCon
 
   // ******* internals ******
 
+  /**
+   * Find toolbar component.
+   *
+   * @param app the app
+   * @param context the context
+   * @return the UI component
+   * @throws Exception the exception
+   */
   protected UIComponent findToolbarComponent(Application app, WebuiRequestContext context) throws Exception {
     ExoContainer container = app.getApplicationServiceContainer();
     if (container != null) {

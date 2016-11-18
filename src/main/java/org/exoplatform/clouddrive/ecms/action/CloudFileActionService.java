@@ -87,26 +87,37 @@ import javax.jcr.query.QueryResult;
  */
 public class CloudFileActionService implements Startable {
 
+  /** The Constant LOG. */
   protected static final Log      LOG                      = ExoLogger.getLogger(CloudFileActionService.class);
 
+  /** The Constant SPACES_GROUP. */
   protected static final String   SPACES_GROUP             = "spaces";
 
+  /** The Constant SHARE_CLOUD_FILES_SPACES. */
   protected static final String   SHARE_CLOUD_FILES_SPACES = "sharecloudfiles:spaces";
 
+  /** The Constant EXO_OWNEABLE. */
   protected static final String   EXO_OWNEABLE             = "exo:owneable";
 
+  /** The Constant EXO_PRIVILEGEABLE. */
   protected static final String   EXO_PRIVILEGEABLE        = "exo:privilegeable";
 
+  /** The Constant ECD_CLOUDFILELINK. */
   protected static final String   ECD_CLOUDFILELINK        = "ecd:cloudFileLink";
 
+  /** The Constant ECD_SHAREIDENTITY. */
   protected static final String   ECD_SHAREIDENTITY        = "ecd:shareIdentity";
 
+  /** The Constant MIX_VERSIONABLE. */
   protected static final String   MIX_VERSIONABLE          = "mix:versionable";
 
+  /** The Constant EXO_TRASHFOLDER. */
   protected static final String   EXO_TRASHFOLDER          = "exo:trashFolder";
 
+  /** The Constant READER_PERMISSION. */
   protected static final String[] READER_PERMISSION        = new String[] { PermissionType.READ };
 
+  /** The Constant MANAGER_PERMISSION. */
   protected static final String[] MANAGER_PERMISSION       = new String[] { PermissionType.READ, PermissionType.REMOVE };
 
   /**
@@ -186,9 +197,11 @@ public class CloudFileActionService implements Startable {
 
   /**
    * Act on Cloud File symlink trashing.
+   *
    */
   protected class LinkTrashListener implements EventListener {
 
+    /** The processing links. */
     private final Queue<String> processingLinks = new ConcurrentLinkedQueue<String>();
 
     /**
@@ -273,24 +286,34 @@ public class CloudFileActionService implements Startable {
     }
   }
 
+  /** The cloud drive. */
   protected final CloudDriveService      cloudDrive;
 
+  /** The jcr service. */
   protected final RepositoryService      jcrService;
 
+  /** The hierarchy creator. */
   protected final NodeHierarchyCreator   hierarchyCreator;
 
+  /** The session providers. */
   protected final SessionProviderService sessionProviders;
 
+  /** The org service. */
   protected final OrganizationService    orgService;
 
+  /** The link manager. */
   protected final LinkManager            linkManager;
 
+  /** The document drives. */
   protected final ManageDriveService     documentDrives;
 
+  /** The trash. */
   protected final TrashService           trash;
 
+  /** The listener service. */
   protected final ListenerService        listenerService;
 
+  /** The cms service. */
   protected final CmsService             cmsService;
 
   /**
@@ -313,8 +336,10 @@ public class CloudFileActionService implements Startable {
    */
   protected final ThreadExecutor         workerExecutor = ThreadExecutor.getInstance();
 
+  /** The groups path. */
   protected final String                 groupsPath;
 
+  /** The users path. */
   protected final String                 usersPath;
 
   /**
@@ -711,6 +736,11 @@ public class CloudFileActionService implements Startable {
 
   // ******************* internals *******************
 
+  /**
+   * Listen file links.
+   *
+   * @throws RepositoryException the repository exception
+   */
   protected void listenFileLinks() throws RepositoryException {
     Session session = systemSession();
     try {
@@ -738,11 +768,11 @@ public class CloudFileActionService implements Startable {
    * Set read permissions on the target node to all given identities (e.g. space group members). If node not
    * yet <code>exo:privilegeable</code> it will add such mixin to allow set the permissions first. Requested
    * permissions will be set to all children nodes if the child already <code>exo:privilegeable</code>.<br>
-   * 
+   *
    * @param node {@link Node} link target node
    * @param identities array of {@link String} with user identifiers (names or memberships)
-   * @throws AccessControlException
-   * @throws RepositoryException
+   * @throws AccessControlException the access control exception
+   * @throws RepositoryException the repository exception
    */
   protected void setPermissions(Node node, String... identities) throws AccessControlException, RepositoryException {
     setPermissions(node, true, true, identities);
@@ -753,15 +783,15 @@ public class CloudFileActionService implements Startable {
    * will not be set if target not <code>exo:privilegeable</code> and <code>forcePrivilegeable</code> is
    * <code>false</code>. If <code>deep</code> is <code>true</code> the target children nodes will be checked
    * also for a need to set the requested permissions. <br>
-   * 
+   *
    * @param node {@link Node} link target node
    * @param deep {@link Boolean} if <code>true</code> then also children nodes will be set to the requested
    *          permissions
    * @param forcePrivilegeable {@link Boolean} if <code>true</code> and node not yet
    *          <code>exo:privilegeable</code> it will add such mixin to allow set the permissions.
    * @param identities array of {@link String} with user identifiers (names or memberships)
-   * @throws AccessControlException
-   * @throws RepositoryException
+   * @throws AccessControlException the access control exception
+   * @throws RepositoryException the repository exception
    */
   protected void setPermissions(Node node,
                                 boolean deep,
@@ -819,12 +849,12 @@ public class CloudFileActionService implements Startable {
    * Remove read permissions on the target node for all given identities (e.g. space group members). If
    * <code>deep</code> is <code>true</code> then permissions will be removed on all ancestor nodes (sub-tree
    * for folders).
-   * 
+   *
    * @param node {@link Node} link target node
    * @param deep {@link Boolean} if <code>true</code> then also remove the permissions from children nodes
    * @param identities array of {@link String} with user identifiers (names or memberships)
-   * @throws AccessControlException
-   * @throws RepositoryException
+   * @throws AccessControlException the access control exception
+   * @throws RepositoryException the repository exception
    */
   protected void removePermissions(Node node, boolean deep, String... identities) throws AccessControlException,
                                                                                   RepositoryException {
@@ -872,11 +902,11 @@ public class CloudFileActionService implements Startable {
    * will be added to the parent node.<br>
    * This method SHOULD be used before setting permissions to a link target node in this parent. In this way
    * we will keep permission of the target in consistent state.
-   * 
-   * @param parent
-   * @param identities
-   * @throws AccessControlException
-   * @throws RepositoryException
+   *
+   * @param parent the parent
+   * @param identities the identities
+   * @throws AccessControlException the access control exception
+   * @throws RepositoryException the repository exception
    */
   protected void setParentPermissions(Node parent, String... identities) throws AccessControlException, RepositoryException {
     // first we go through all sub-files/folders and enabled exo:privilegeable, this will copy current
@@ -894,11 +924,11 @@ public class CloudFileActionService implements Startable {
 
   /**
    * Set all available permissions to given node for given identities.
-   * 
-   * @param node
-   * @param identities
-   * @throws AccessControlException
-   * @throws RepositoryException
+   *
+   * @param node the node
+   * @param identities the identities
+   * @throws AccessControlException the access control exception
+   * @throws RepositoryException the repository exception
    */
   protected void setAllPermissions(Node node, String... identities) throws AccessControlException, RepositoryException {
     ExtendedNode target = (ExtendedNode) node;
@@ -912,10 +942,10 @@ public class CloudFileActionService implements Startable {
 
   /**
    * Find pretty name of the document.
-   * 
-   * @param document
-   * @return
-   * @throws RepositoryException
+   *
+   * @param document the document
+   * @return the string
+   * @throws RepositoryException the repository exception
    */
   protected String documentName(Node document) throws RepositoryException {
     try {
@@ -931,9 +961,9 @@ public class CloudFileActionService implements Startable {
 
   /**
    * System session in default workspace of current JCR repository.
-   * 
-   * @return
-   * @throws RepositoryException
+   *
+   * @return the session
+   * @throws RepositoryException the repository exception
    */
   protected Session systemSession() throws RepositoryException {
     SessionProvider ssp = sessionProviders.getSystemSessionProvider(null);
@@ -945,6 +975,15 @@ public class CloudFileActionService implements Startable {
     throw new RepositoryException("Cannot get session provider.");
   }
 
+  /**
+   * Gets the cloud file links.
+   *
+   * @param targetNode the target node
+   * @param shareIdentity the share identity
+   * @param useSystemSession the use system session
+   * @return the cloud file links
+   * @throws RepositoryException the repository exception
+   */
   protected NodeIterator getCloudFileLinks(Node targetNode,
                                            String shareIdentity,
                                            boolean useSystemSession) throws RepositoryException {

@@ -38,11 +38,15 @@ import javax.jcr.Node;
  */
 public class CloudDriveThumbnailServiceImpl extends ThumbnailServiceImpl {
 
+  /** The cloud drives. */
   protected final CloudDriveService cloudDrives;
 
   /**
-   * @param initParams
-   * @throws Exception
+   * Instantiates a new cloud drive thumbnail service impl.
+   *
+   * @param initParams the init params
+   * @param cloudDrives the cloud drives
+   * @throws Exception the exception
    */
   public CloudDriveThumbnailServiceImpl(InitParams initParams, CloudDriveService cloudDrives) throws Exception {
     super(initParams);

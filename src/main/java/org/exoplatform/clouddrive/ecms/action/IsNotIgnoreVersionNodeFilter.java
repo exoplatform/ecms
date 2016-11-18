@@ -35,6 +35,7 @@ import java.util.Map;
 public class IsNotIgnoreVersionNodeFilter extends
                                           org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotIgnoreVersionNodeFilter {
 
+  /** The not cloud drive filter. */
   private NotCloudDriveOrFileFilter notCloudDriveFilter = new NotCloudDriveOrFileFilter();
 
   /**

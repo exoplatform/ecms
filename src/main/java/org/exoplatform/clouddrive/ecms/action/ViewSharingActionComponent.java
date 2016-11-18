@@ -50,16 +50,34 @@ import java.util.List;
                  events = { @EventConfig(listeners = ViewSharingActionListener.class) })
 public class ViewSharingActionComponent extends BaseCloudDriveManagerComponent implements CloudDriveUIMenuAction {
 
+  /** The Constant FILTERS. */
   protected static final List<UIExtensionFilter> FILTERS = Arrays.asList(new UIExtensionFilter[] { new CloudFileFilter(),
       new HasEditPermissionsFilter() });
 
+  /**
+   * Gets the filters.
+   *
+   * @return the filters
+   */
   @UIExtensionFilters
   public List<UIExtensionFilter> getFilters() {
     return FILTERS;
   }
 
-  // UIWorkingAreaActionListener
+  /**
+   * The listener interface for receiving viewSharingAction events.
+   * The class that is interested in processing a viewSharingAction
+   * event implements this interface, and the object created
+   * with that class is registered with a component using the
+   * component's <code>addViewSharingActionListener</code> method. When
+   * the viewSharingAction event occurs, that object's appropriate
+   * method is invoked.
+   */
   public static class ViewSharingActionListener extends UIActionBarActionListener<ViewSharingActionComponent> {
+    
+    /**
+     * {@inheritDoc}
+     */
     public void processEvent(Event<ViewSharingActionComponent> event) throws Exception {
       UIJCRExplorer uiJCRExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);
       UIPopupContainer uiPopupContainer = uiJCRExplorer.getChild(UIPopupContainer.class);

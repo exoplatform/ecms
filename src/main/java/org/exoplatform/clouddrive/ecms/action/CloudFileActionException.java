@@ -21,23 +21,24 @@ package org.exoplatform.clouddrive.ecms.action;
 import org.exoplatform.web.application.ApplicationMessage;
 
 /**
- * Created by The eXo Platform SAS
- * 
+ * Created by The eXo Platform SAS.
+ *
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
  * @version $Id: CloudFileActionException.java 00000 May 19, 2014 pnedonosko $
- * 
  */
 public class CloudFileActionException extends Exception {
 
-  /**
-   * 
-   */
+  /** The Constant serialVersionUID. */
   private static final long serialVersionUID = 24966321739068360L;
   
+  /** The ui message. */
   protected final ApplicationMessage uiMessage;
 
   /**
-   * 
+   * Instantiates a new cloud file action exception.
+   *
+   * @param message the message
+   * @param uiMessage the ui message
    */
   public CloudFileActionException(String message, ApplicationMessage uiMessage) {
     super(message);
@@ -45,6 +46,8 @@ public class CloudFileActionException extends Exception {
   }
 
   /**
+   * Gets the UI message.
+   *
    * @return the uiMessage
    */
   public ApplicationMessage getUIMessage() {

@@ -27,9 +27,12 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.Parameter;
 import org.exoplatform.webui.application.WebuiRequestContext;
 
-public abstract class BaseConnectActionComponent extends BaseCloudDriveManagerComponent implements
-    CloudDriveUIMenuAction {
+/**
+ * The Class BaseConnectActionComponent.
+ */
+public abstract class BaseConnectActionComponent extends BaseCloudDriveManagerComponent implements CloudDriveUIMenuAction {
 
+  /** The Constant LOG. */
   protected static final Log LOG = ExoLogger.getLogger(BaseConnectActionComponent.class);
 
   /**
@@ -40,7 +43,14 @@ public abstract class BaseConnectActionComponent extends BaseCloudDriveManagerCo
   protected abstract String getProviderId();
 
   /**
-   * @inherritDoc
+   * Render event URL.
+   *
+   * @param ajax the ajax
+   * @param name the name
+   * @param beanId the bean id
+   * @param params the params
+   * @return the string
+   * @throws Exception the exception
    */
   @Override
   public String renderEventURL(boolean ajax, String name, String beanId, Parameter[] params) throws Exception {
@@ -66,7 +76,10 @@ public abstract class BaseConnectActionComponent extends BaseCloudDriveManagerCo
   }
 
   /**
-   * @inherritDoc
+   * Gets the name.
+   *
+   * @return the name
+   * 
    */
   @Override
   public String getName() {

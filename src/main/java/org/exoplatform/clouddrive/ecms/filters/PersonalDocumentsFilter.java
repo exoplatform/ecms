@@ -41,6 +41,7 @@ import javax.jcr.Node;
  */
 public class PersonalDocumentsFilter implements UIExtensionFilter {
 
+  /** The Constant LOG. */
   protected static final Log LOG = ExoLogger.getLogger(PersonalDocumentsFilter.class);
 
   /**

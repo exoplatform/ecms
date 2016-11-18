@@ -54,14 +54,30 @@ import java.util.List;
                                          listeners = RefreshViewManagerComponent.RefreshViewActionListener.class) })
 public class RefreshViewManagerComponent extends BaseCloudDriveManagerComponent {
 
+  /** The Constant LOG. */
   protected static final Log                     LOG        = ExoLogger.getLogger(RefreshViewManagerComponent.class);
 
+  /** The Constant EVENT_NAME. */
   public static final String                     EVENT_NAME = "RefreshView";
 
+  /** The Constant FILTERS. */
   protected static final List<UIExtensionFilter> FILTERS    = Arrays.asList(new UIExtensionFilter[] {
       new CloudDriveFilter(), new CloudFileFilter()        });
 
+  /**
+   * The listener interface for receiving refreshViewAction events.
+   * The class that is interested in processing a refreshViewAction
+   * event implements this interface, and the object created
+   * with that class is registered with a component using the
+   * component's <code>addRefreshViewActionListener</code> method. When
+   * the refreshViewAction event occurs, that object's appropriate
+   * method is invoked.
+   */
   public static class RefreshViewActionListener extends EventListener<RefreshViewManagerComponent> {
+    
+    /**
+     * {@inheritDoc}
+     */
     public void execute(Event<RefreshViewManagerComponent> event) throws Exception {
       // code adopted from UIAddressBar.RefreshSessionActionListener.execute()
       UIJCRExplorer explorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);
@@ -79,6 +95,11 @@ public class RefreshViewManagerComponent extends BaseCloudDriveManagerComponent 
     }
   }
 
+  /**
+   * Gets the filters.
+   *
+   * @return the filters
+   */
   @UIExtensionFilters
   public List<UIExtensionFilter> getFilters() {
     return FILTERS;

@@ -27,22 +27,44 @@ import org.exoplatform.webui.core.UIPopupContainer;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.ext.manager.UIAbstractManager;
 
+/**
+ * The Class ShowConnectCloudDriveActionComponent.
+ */
 @ComponentConfig(
                  events = { @EventConfig(
                                          listeners = ShowConnectCloudDriveActionComponent.ShowConnectCloudDriveActionListener.class) })
 public class ShowConnectCloudDriveActionComponent extends BaseCloudDriveManagerComponent implements
     CloudDriveUIMenuAction {
 
+  /**
+   * The listener interface for receiving showConnectCloudDriveAction events.
+   * The class that is interested in processing a showConnectCloudDriveAction
+   * event implements this interface, and the object created
+   * with that class is registered with a component using the
+   * component's <code>addShowConnectCloudDriveActionListener</code> method. When
+   * the showConnectCloudDriveAction event occurs, that object's appropriate
+   * method is invoked.
+   */
   public static class ShowConnectCloudDriveActionListener
                                                          extends
                                                          UIActionBarActionListener<ShowConnectCloudDriveActionComponent> {
 
+    /**
+     * {@inheritDoc}
+     */
     public void processEvent(Event<ShowConnectCloudDriveActionComponent> event) throws Exception {
 
       UIJCRExplorer uiExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);
       connectToDrive(event, uiExplorer);
     }
 
+    /**
+     * Connect to drive.
+     *
+     * @param event the event
+     * @param uiExplorer the ui explorer
+     * @throws Exception the exception
+     */
     private void connectToDrive(Event<? extends UIComponent> event, UIJCRExplorer uiExplorer) throws Exception {
       UIPopupContainer uiPopupContainer = uiExplorer.getChild(UIPopupContainer.class);
       // this form will initialize request context from its template
@@ -51,6 +73,9 @@ public class ShowConnectCloudDriveActionComponent extends BaseCloudDriveManagerC
     }
   }
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
   public Class<? extends UIAbstractManager> getUIAbstractManagerClass() {
     return null;

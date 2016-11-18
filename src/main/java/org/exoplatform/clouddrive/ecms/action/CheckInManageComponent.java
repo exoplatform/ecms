@@ -40,8 +40,12 @@ import java.util.List;
 public class CheckInManageComponent extends
                                     org.exoplatform.ecm.webui.component.explorer.rightclick.manager.CheckInManageComponent {
 
+  /** The cd filter. */
   protected static IsVersionableOrAncestorFilter cdFilter = new IsVersionableOrAncestorFilter();
 
+  /**
+   * {@inheritDoc}
+   */
   @UIExtensionFilters
   public List<UIExtensionFilter> getFilters() {
     List<UIExtensionFilter> filters = super.getFilters();

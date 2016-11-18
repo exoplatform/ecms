@@ -44,7 +44,7 @@ import javax.jcr.Node;
 public class SharedCloudFileContentPresentation extends ContentPresentation {
 
   /**
-   * 
+   * Instantiates a new shared cloud file content presentation.
    */
   public SharedCloudFileContentPresentation() {
     super();

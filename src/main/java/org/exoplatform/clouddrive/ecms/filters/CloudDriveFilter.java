@@ -41,12 +41,21 @@ import javax.jcr.RepositoryException;
  */
 public class CloudDriveFilter extends AbstractCloudDriveNodeFilter {
 
+  /** The Constant LOG. */
   protected static final Log LOG = ExoLogger.getLogger(CloudDriveFilter.class);
 
+  /**
+   * Instantiates a new cloud drive filter.
+   */
   public CloudDriveFilter() {
     super();
   }
 
+  /**
+   * Instantiates a new cloud drive filter.
+   *
+   * @param providers the providers
+   */
   public CloudDriveFilter(List<String> providers) {
     super(providers);
   }

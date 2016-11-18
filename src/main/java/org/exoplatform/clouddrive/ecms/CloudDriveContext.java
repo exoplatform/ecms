@@ -55,15 +55,17 @@ import javax.jcr.RepositoryException;
  */
 public class CloudDriveContext {
 
+  /** The Constant JAVASCRIPT. */
   protected static final String JAVASCRIPT = "CloudDriveContext_Javascript".intern();
 
+  /** The Constant LOG. */
   protected static final Log    LOG        = ExoLogger.getLogger(CloudDriveContext.class);
 
   /**
    * Initialize request with Cloud Drive support from given WebUI component.
-   * 
+   *
    * @param uiComponent {@link UIComponent}
-   * @throws Exception
+   * @throws Exception the exception
    */
   public static void init(UIComponent uiComponent) throws Exception {
     Node contextNode;
@@ -137,16 +139,15 @@ public class CloudDriveContext {
 
   /**
    * Initialize already connected drives for a request and given JCR location. This method assumes that
-   * request already initialized by {@link #init(RequestContext, String, String, CloudProvider)} method.
-   * 
+   * request already initialized by {@link #init(RequestContext, String, String)} method.
+   *
    * @param requestContext {@link RequestContext}
    * @param parent {@link Node}
    * @return boolean <code>true</code> if nodes successfully initialized, <code>false</code> if nodes already
    *         initialized
-   * @throws RepositoryException
-   * @throws CloudDriveException
-   * @see {@link #init(RequestContext, String, String)}
-   * @see {@link #init(RequestContext, String, String, CloudProvider)}
+   * @throws RepositoryException the repository exception
+   * @throws CloudDriveException the cloud drive exception
+   * @see #init(RequestContext, String, String)
    */
   public static boolean initConnected(RequestContext requestContext, Node parent) throws RepositoryException,
                                                                                   CloudDriveException {
@@ -165,11 +166,12 @@ public class CloudDriveContext {
 
   /**
    * Show info notification to the user.
-   * 
+   *
+   * @param requestContext the request context
    * @param title {@link String}
    * @param message {@link String}
-   * @throws RepositoryException
-   * @throws CloudDriveException
+   * @throws RepositoryException the repository exception
+   * @throws CloudDriveException the cloud drive exception
    */
   public static void showInfo(RequestContext requestContext, String title, String message) throws RepositoryException,
                                                                                            CloudDriveException {
@@ -194,14 +196,18 @@ public class CloudDriveContext {
 
   // static variables
 
+  /** The Constant messages. */
   private final static ThreadLocal<Map<String, String>> messages  = new ThreadLocal<Map<String, String>>();
 
   // instance methods
 
+  /** The require. */
   private final RequireJS                               require;
 
+  /** The nodes. */
   private final Set<String>                             nodes     = new HashSet<String>();
 
+  /** The providers. */
   private final Set<String>                             providers = new HashSet<String>();
 
   /**
@@ -214,11 +220,26 @@ public class CloudDriveContext {
     this.require = js.require("SHARED/cloudDrive", "cloudDrive");
   }
 
+  /**
+   * Inits the.
+   *
+   * @param workspace the workspace
+   * @param nodePath the node path
+   * @return the cloud drive context
+   */
   private CloudDriveContext init(String workspace, String nodePath) {
     require.addScripts("\ncloudDrive.init('" + workspace + "','" + nodePath + "');\n");
     return this;
   }
 
+  /**
+   * Adds the connected.
+   *
+   * @param nodes the nodes
+   * @return the cloud drive context
+   * @throws CloudDriveException the cloud drive exception
+   * @throws RepositoryException the repository exception
+   */
   private CloudDriveContext addConnected(NodeIterator nodes) throws CloudDriveException, RepositoryException {
     if (nodes.hasNext()) {
       CloudDriveService driveService = WCMCoreUtils.getService(CloudDriveService.class);
@@ -254,6 +275,13 @@ public class CloudDriveContext {
     return this;
   }
 
+  /**
+   * Adds the provider.
+   *
+   * @param provider the provider
+   * @return the cloud drive context
+   * @throws CloudDriveException the cloud drive exception
+   */
   private CloudDriveContext addProvider(CloudProvider provider) throws CloudDriveException {
     String id = provider.getId();
     if (!providers.contains(id)) {
@@ -269,6 +297,13 @@ public class CloudDriveContext {
     return this;
   }
 
+  /**
+   * Show info.
+   *
+   * @param title the title
+   * @param text the text
+   * @return the cloud drive context
+   */
   private CloudDriveContext showInfo(String title, String text) {
     require.addScripts("\ncloudDrive.showInfo('" + title + "','" + text + "');\n");
     return this;

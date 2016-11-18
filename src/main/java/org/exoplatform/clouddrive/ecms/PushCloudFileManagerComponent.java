@@ -61,13 +61,29 @@ import javax.jcr.Node;
                                          listeners = PushCloudFileManagerComponent.PushCloudFileActionListener.class) })
 public class PushCloudFileManagerComponent extends BaseCloudDriveManagerComponent {
 
+  /** The Constant LOG. */
   protected static final Log                     LOG        = ExoLogger.getLogger(PushCloudFileManagerComponent.class);
 
+  /** The Constant EVENT_NAME. */
   public static final String                     EVENT_NAME = "PushCloudFile";
 
+  /** The Constant FILTERS. */
   protected static final List<UIExtensionFilter> FILTERS    = Arrays.asList(new UIExtensionFilter[] { new LocalNodeFilter() });
 
+  /**
+   * The listener interface for receiving pushCloudFileAction events.
+   * The class that is interested in processing a pushCloudFileAction
+   * event implements this interface, and the object created
+   * with that class is registered with a component using the
+   * component's <code>addPushCloudFileActionListener</code> method. When
+   * the pushCloudFileAction event occurs, that object's appropriate
+   * method is invoked.
+   */
   public static class PushCloudFileActionListener extends EventListener<PushCloudFileManagerComponent> {
+    
+    /**
+     * {@inheritDoc}
+     */
     public void execute(Event<PushCloudFileManagerComponent> event) throws Exception {
       UIJCRExplorer explorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);
       String nodePath;
@@ -122,6 +138,11 @@ public class PushCloudFileManagerComponent extends BaseCloudDriveManagerComponen
     }
   }
 
+  /**
+   * Gets the filters.
+   *
+   * @return the filters
+   */
   @UIExtensionFilters
   public List<UIExtensionFilter> getFilters() {
     return FILTERS;

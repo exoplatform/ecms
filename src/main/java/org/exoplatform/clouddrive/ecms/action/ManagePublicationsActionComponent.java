@@ -39,8 +39,12 @@ import java.util.List;
 public class ManagePublicationsActionComponent extends
                                                org.exoplatform.ecm.webui.component.explorer.control.action.ManagePublicationsActionComponent {
 
+  /** The cd filter. */
   protected static IsNotIgnoreVersionNodeFilter cdFilter = new IsNotIgnoreVersionNodeFilter();
 
+  /**
+   * {@inheritDoc}
+   */
   @UIExtensionFilters
   public List<UIExtensionFilter> getFilters() {
     List<UIExtensionFilter> filters = super.getFilters();

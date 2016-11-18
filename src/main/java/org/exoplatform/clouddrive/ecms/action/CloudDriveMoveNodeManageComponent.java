@@ -43,9 +43,23 @@ import org.exoplatform.webui.event.Event;
                                          confirm = "UIWorkingArea.msg.confirm-move") })
 public class CloudDriveMoveNodeManageComponent extends MoveNodeManageComponent {
 
+  /** The Constant LOG. */
   protected static final Log LOG = ExoLogger.getLogger(CloudDriveMoveNodeManageComponent.class);
 
+  /**
+   * The listener interface for receiving moveNodeAction events.
+   * The class that is interested in processing a moveNodeAction
+   * event implements this interface, and the object created
+   * with that class is registered with a component using the
+   * component's <code>addMoveNodeActionListener</code> method. When
+   * the moveNodeAction event occurs, that object's appropriate
+   * method is invoked.
+   */
   public static class MoveNodeActionListener extends MoveNodeManageComponent.MoveNodeActionListener {
+    
+    /**
+     * {@inheritDoc}
+     */
     public void processEvent(Event<MoveNodeManageComponent> event) throws Exception {
       String srcPath = event.getRequestContext().getRequestParameter(OBJECTID);
       String destInfo = event.getRequestContext().getRequestParameter("destInfo");
@@ -87,7 +101,7 @@ public class CloudDriveMoveNodeManageComponent extends MoveNodeManageComponent {
   }
 
   /**
-   * 
+   * Instantiates a new cloud drive move node manage component.
    */
   public CloudDriveMoveNodeManageComponent() {
     super();
