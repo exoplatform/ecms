@@ -384,6 +384,9 @@ class GoogleDriveAPI implements DataStoreFactory {
     }
   }
 
+  /**
+   * The Class GeneratedIds.
+   */
   public static class GeneratedIds extends com.google.api.client.json.GenericJson {
 
     /** This is always drive#generatedIds. */
@@ -472,7 +475,10 @@ class GoogleDriveAPI implements DataStoreFactory {
     }
 
     /**
+     * Sets the kind.
+     *
      * @param kind the kind to set
+     * @return the generated ids
      */
     public GeneratedIds setKind(String kind) {
       this.kind = kind;
@@ -480,7 +486,10 @@ class GoogleDriveAPI implements DataStoreFactory {
     }
 
     /**
+     * Sets the space.
+     *
      * @param space the space to set
+     * @return the generated ids
      */
     public GeneratedIds setSpace(String space) {
       this.space = space;
@@ -488,7 +497,10 @@ class GoogleDriveAPI implements DataStoreFactory {
     }
 
     /**
+     * Sets the ids.
+     *
      * @param ids the ids to set
+     * @return the generated ids
      */
     public GeneratedIds setIds(List<String> ids) {
       this.ids = ids;
@@ -898,13 +910,12 @@ class GoogleDriveAPI implements DataStoreFactory {
 
   /**
    * Update a file metadata in Files service and upload its new content.
-   * 
-   * @param file {@link File} file metadata
+   *
    * @param file {@link AbstractInputStreamContent} file content
-   * @return {@link File} resulting file
-   * @throws GoogleDriveException
-   * @throws NotFoundException
-   * @throws CloudDriveAccessException
+   * @param content the content
+   * @throws GoogleDriveException the google drive exception
+   * @throws NotFoundException the not found exception
+   * @throws CloudDriveAccessException the cloud drive access exception
    */
   void update(File file, AbstractInputStreamContent content) throws GoogleDriveException,
                                                              NotFoundException,
@@ -933,7 +944,6 @@ class GoogleDriveAPI implements DataStoreFactory {
    * Update a file metadata in Files service.
    * 
    * @param file {@link File} file metadata
-   * @return {@link File} resulting file
    * @throws GoogleDriveException
    * @throws NotFoundException
    * @throws CloudDriveAccessException
@@ -990,12 +1000,11 @@ class GoogleDriveAPI implements DataStoreFactory {
 
   /**
    * Delete a file in Files service.
-   * 
+   *
    * @param fileId {@link String} file id
-   * @return {@link Delete} resulting object
-   * @throws GoogleDriveException
-   * @throws NotFoundException
-   * @throws CloudDriveAccessException
+   * @throws GoogleDriveException the google drive exception
+   * @throws NotFoundException the not found exception
+   * @throws CloudDriveAccessException the cloud drive access exception
    */
   void delete(String fileId) throws GoogleDriveException, NotFoundException, CloudDriveAccessException {
     try {
