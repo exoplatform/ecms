@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2012 eXo Platform SAS.
+ * Copyright (C) 2003-2016 eXo Platform SAS.
  *
  * This is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as
@@ -23,6 +23,9 @@ import org.exoplatform.services.log.Log;
 import org.exoplatform.webui.core.UIPopupComponent;
 import org.exoplatform.webui.form.UIForm;
 
+/**
+ * The Class BaseCloudDriveForm.
+ */
 public abstract class BaseCloudDriveForm extends UIForm implements UIPopupComponent {
 
   protected static final Log LOG = ExoLogger.getLogger(BaseCloudDriveForm.class);
@@ -31,12 +34,18 @@ public abstract class BaseCloudDriveForm extends UIForm implements UIPopupCompon
     CloudDriveContext.init(this);
   }
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
   public void activate() {
     // nothing
 
   }
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
   public void deActivate() {
     // nothing
