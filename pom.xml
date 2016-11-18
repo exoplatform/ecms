@@ -4,12 +4,12 @@
   <parent>
     <artifactId>maven-parent-pom</artifactId>
     <groupId>org.exoplatform</groupId>
-    <version>16-RC01</version>
+    <version>17-SNAPSHOT</version>
     <relativePath />
   </parent>
   <groupId>org.exoplatform.ecms</groupId>
   <artifactId>ecms</artifactId>
-  <version>4.4.x-SNAPSHOT</version>
+  <version>4.5.x-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>eXo PLF:: ECM Suite</name>
   <description>eXo Entreprise Content Management Suite</description>
@@ -39,20 +39,20 @@
     <!-- **************************************** -->
     <!-- Project Dependencies                     -->
     <!-- **************************************** -->
-    <org.exoplatform.depmgt.version>12-SNAPSHOT</org.exoplatform.depmgt.version>
+    <org.exoplatform.depmgt.version>13-SNAPSHOT</org.exoplatform.depmgt.version>
     <!-- JCR Project Dependencies -->
-    <org.exoplatform.kernel.version>2.6.x-SNAPSHOT</org.exoplatform.kernel.version>
-    <org.exoplatform.core.version>2.7.x-SNAPSHOT</org.exoplatform.core.version>
-    <org.exoplatform.ws.version>2.5.x-SNAPSHOT</org.exoplatform.ws.version>
-    <org.exoplatform.jcr.version>1.17.x-SNAPSHOT</org.exoplatform.jcr.version>
+    <org.exoplatform.kernel.version>2.7.x-SNAPSHOT</org.exoplatform.kernel.version>
+    <org.exoplatform.core.version>2.8.x-SNAPSHOT</org.exoplatform.core.version>
+    <org.exoplatform.ws.version>2.6.x-SNAPSHOT</org.exoplatform.ws.version>
+    <org.exoplatform.jcr.version>1.18.x-SNAPSHOT</org.exoplatform.jcr.version>
     <org.exoplatform.jcr-services.version>1.17.x-SNAPSHOT</org.exoplatform.jcr-services.version>
     <!-- GateIn Project Dependencies -->
     <org.gatein.wci.version>2.4.1.Final</org.gatein.wci.version>
     <org.gatein.pc.version>2.6.x-PLF-SNAPSHOT</org.gatein.pc.version>
-    <org.gatein.portal.version>4.4.x-PLF-SNAPSHOT</org.gatein.portal.version>
+    <org.gatein.portal.version>4.5.x-PLF-SNAPSHOT</org.gatein.portal.version>
     <!-- Platform Project Dependencies -->
-    <org.exoplatform.commons.version>4.4.x-SNAPSHOT</org.exoplatform.commons.version>
-    <org.exoplatform.platform-ui.version>4.4.x-SNAPSHOT</org.exoplatform.platform-ui.version>
+    <org.exoplatform.commons.version>4.5.x-SNAPSHOT</org.exoplatform.commons.version>
+    <org.exoplatform.platform-ui.version>4.5.x-SNAPSHOT</org.exoplatform.platform-ui.version>
     <!-- Platform Project 3rd party Dependencies -->
     <org.exoplatform.doc.doc-style.version>4.4.x-SNAPSHOT</org.exoplatform.doc.doc-style.version>
   </properties>
