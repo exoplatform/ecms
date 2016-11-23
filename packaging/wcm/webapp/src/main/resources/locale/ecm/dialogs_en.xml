@@ -29,13 +29,13 @@
       <content>#{word.content}</content>
       <contentPlain>#{word.content}</contentPlain>
       <name>Name</name>
-	    <categories>Categories</categories>
+    <categories>Categories</categories>
     </label>
   </UIDocumentForm>
-
+ 
   <UICommentForm>
     <label>
-	    <placeholder>Use @ to identify a person in your comment</placeholder>
+      <placeholder>Use @ to identify a person in your comment</placeholder>
     </label>
   </UICommentForm>
  
