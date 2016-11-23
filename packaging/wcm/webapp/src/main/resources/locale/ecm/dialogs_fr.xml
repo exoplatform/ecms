@@ -29,10 +29,10 @@
       <content>#{word.content}</content>
       <contentPlain>#{word.content}</contentPlain>
       <name>Nom</name>
-	    <categories>Catégories</categories>
+    <categories>Catégories</categories>
     </label>
   </UIDocumentForm>
-
+ 
   <UICommentForm>
     <label>
       <placeholder>Utilisez @ pour identifier une personne dans votre commentaire</placeholder>
