@@ -25,8 +25,8 @@
         <postedBy>Dernier commentaire posté par</postedBy>
         <at>à</at>
         <comments>Commentaire(s)</comments>
-        <show-comments>Afficher tous les {0} commentaires</show-comments>
-        <hide-comments>Cacher tous les {0} commentaires</hide-comments>
+        <show-comments>Afficher les commentaires</show-comments>
+        <hide-comments>Cacher les commentaires</hide-comments>
         <comment-by>Commenté par</comment-by>
         <email>Email</email>
         <site>Site</site>

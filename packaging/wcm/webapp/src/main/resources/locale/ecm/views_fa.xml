@@ -31,6 +31,15 @@
         <email>ایمیل</email>
         <site>سایت</site>
         <lastComment>Last comment posted by {user} at {time}</lastComment>
+        <Less_Than_A_Minute>کمتر از یک دقیقه پیش</Less_Than_A_Minute>
+        <About_A_Minute>حدود یک دقیقه پیش</About_A_Minute>
+        <About_x_Minutes>حدود {0} دقيقه پیش</About_x_Minutes>
+        <About_An_Hour>حدود یک ساعت پیش</About_An_Hour>
+        <About_x_Hours>حدود {0} ساعت پیش</About_x_Hours>
+        <About_A_Day>حدود یک روز پیش</About_A_Day>
+        <About_x_Days>حدود {0} روز پیش</About_x_Days>
+        <About_A_Month>حدود یک ماه پیش</About_A_Month>
+        <About_x_Months>حدود {0} ماه پیش</About_x_Months>
       </label>
     </view>
   </Comment>

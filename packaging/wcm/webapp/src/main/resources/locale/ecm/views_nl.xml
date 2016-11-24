@@ -31,6 +31,15 @@
         <email>E-mail</email>
         <site>Site</site>
         <lastComment>Laatste commentaar geplaatst door {user} op {time}</lastComment>
+        <Less_Than_A_Minute>minder dan een minuut geleden</Less_Than_A_Minute>
+        <About_A_Minute>ongeveer een minuut geleden</About_A_Minute>
+        <About_x_Minutes>over {0} minuten geleden</About_x_Minutes>
+        <About_An_Hour>ongeveer een uur geleden</About_An_Hour>
+        <About_x_Hours>over {0} uren geleden</About_x_Hours>
+        <About_A_Day>ongeveer een dag geleden</About_A_Day>
+        <About_x_Days>over {0} dagen geleden</About_x_Days>
+        <About_A_Month>ongeveer een maand geleden</About_A_Month>
+        <About_x_Months>over {0} maanden geleden</About_x_Months>
       </label>
     </view>
   </Comment>

@@ -31,6 +31,15 @@
         <email>电子邮件</email>
         <site>站点</site>
         <lastComment>Last comment posted by {user} at {time}</lastComment>
+        <Less_Than_A_Minute>少于一分钟前</Less_Than_A_Minute>
+        <About_A_Minute>大约一分钟前</About_A_Minute>
+        <About_x_Minutes>关于 {0} 分钟前</About_x_Minutes>
+        <About_An_Hour>大约一小时前</About_An_Hour>
+        <About_x_Hours>大约 {0} 个小时前</About_x_Hours>
+        <About_A_Day>大约一天前</About_A_Day>
+        <About_x_Days>大约 {0} 天前</About_x_Days>
+        <About_A_Month>大约一个月前</About_A_Month>
+        <About_x_Months>大约 {0} 个月前</About_x_Months>
       </label>
     </view>
   </Comment>

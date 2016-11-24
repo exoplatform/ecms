@@ -31,6 +31,15 @@
         <email>Διεύθυνση ηλεκτρονικού ταχυδρομείου</email>
         <site>Τοποθεσία</site>
         <lastComment>Τελευταίο σχόλιο από {user} στις {time}</lastComment>
+        <Less_Than_A_Minute>πριν από λιγότερο από ένα λεπτό</Less_Than_A_Minute>
+        <About_A_Minute>περίπου πριν από ένα λεπτό</About_A_Minute>
+        <About_x_Minutes>περίπου {0} λεπτά πριν</About_x_Minutes>
+        <About_An_Hour>περίπου μία ώρα πριν</About_An_Hour>
+        <About_x_Hours>περίπου {0} ώρες πριν</About_x_Hours>
+        <About_A_Day>περίπου μια μέρα πριν</About_A_Day>
+        <About_x_Days>περίπου {0} μέρες πριν</About_x_Days>
+        <About_A_Month>πριν περίπου ένα μήνα</About_A_Month>
+        <About_x_Months>περίπου {0} μήνες πριν</About_x_Months>
       </label>
     </view>
   </Comment>

@@ -31,6 +31,15 @@
         <email>Електронна пошта</email>
         <site>Сайт</site>
         <lastComment>Останній коментар, написав {user} в {time}</lastComment>
+        <Less_Than_A_Minute>менше хвилини назад</Less_Than_A_Minute>
+        <About_A_Minute>біля хвилини назад</About_A_Minute>
+        <About_x_Minutes>біля {0} хвилин назад</About_x_Minutes>
+        <About_An_Hour>близько години назад</About_An_Hour>
+        <About_x_Hours>біля {0} годин назад</About_x_Hours>
+        <About_A_Day>День назад</About_A_Day>
+        <About_x_Days>близько {0} днів назад</About_x_Days>
+        <About_A_Month>близько місяця назад</About_A_Month>
+        <About_x_Months>Близько {0} місяців назад</About_x_Months>
       </label>
     </view>
   </Comment>
