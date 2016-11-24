@@ -123,6 +123,7 @@
     gj(".uiShareDocuments.resizable #textAreaInput").exoMentions('val', function(value) {
       value = value.replace(/<br\/?>/gi, '\n').replace(/&lt;/gi, '<').replace(/&gt;/gi, '>');
       gj(".uiShareDocuments.resizable #textAreaInput").val(value);
+      gj(".PopupContent .uiActionBorder .btn-primary").attr("disabled","disabled");
       gj("#shareActionBtn").trigger("click");
     });
   }
@@ -141,7 +142,11 @@
     }
   }
 
-  ShareContent.prototype.checkRemovedEntry = function(entry){
+  /**
+   * Check entry is updated,
+   * if the permission of the entry has changed or the entry is removed
+   */
+  ShareContent.prototype.checkUpdatedEntry = function(){
     gj(".PopupContent .uiActionBorder .btn-primary").removeAttr("disabled");
   }
 
