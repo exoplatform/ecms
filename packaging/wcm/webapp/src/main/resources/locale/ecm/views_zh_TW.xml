@@ -31,6 +31,15 @@
         <email>電子郵件：</email>
         <site>網站</site>
         <lastComment>Last comment posted by {user} at {time}</lastComment>
+        <Less_Than_A_Minute>小於一分鐘前</Less_Than_A_Minute>
+        <About_A_Minute>大約一分鐘前</About_A_Minute>
+        <About_x_Minutes>約 {0} 分鐘前</About_x_Minutes>
+        <About_An_Hour>大約一小時前</About_An_Hour>
+        <About_x_Hours>關於 {0} 個小時前</About_x_Hours>
+        <About_A_Day>關於前一天</About_A_Day>
+        <About_x_Days>關於 {0} 天前</About_x_Days>
+        <About_A_Month>大約一個月前</About_A_Month>
+        <About_x_Months>關於 {0} 個月前</About_x_Months>
       </label>
     </view>
   </Comment>

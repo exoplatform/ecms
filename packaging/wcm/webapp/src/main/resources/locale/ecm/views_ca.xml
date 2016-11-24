@@ -31,6 +31,15 @@
         <email>Email</email>
         <site>Site</site>
         <lastComment>Últim comentari Publicat per {user} a {time}</lastComment>
+        <Less_Than_A_Minute>fa menys d'un minut</Less_Than_A_Minute>
+        <About_A_Minute>fa al voltant d'un minut</About_A_Minute>
+        <About_x_Minutes>fa al voltant de {0} minuts</About_x_Minutes>
+        <About_An_Hour>fa al voltant d'una hora</About_An_Hour>
+        <About_x_Hours>fa unes {0} hores</About_x_Hours>
+        <About_A_Day>fa al voltant d'un dia</About_A_Day>
+        <About_x_Days>fa al voltant de {0} dies</About_x_Days>
+        <About_A_Month>fa al voltant d'un mes</About_A_Month>
+        <About_x_Months>fa al voltant de {0} mesos</About_x_Months>
       </label>
     </view>
   </Comment>

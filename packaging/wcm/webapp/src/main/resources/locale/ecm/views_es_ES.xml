@@ -31,6 +31,15 @@
         <email>Correo electrónico</email>
         <site>Sitio</site>
         <lastComment>Último comentario publicado por {user} el {time}</lastComment>
+        <Less_Than_A_Minute>Hace menos de un minuto</Less_Than_A_Minute>
+        <About_A_Minute>hace un minuto</About_A_Minute>
+        <About_x_Minutes>hace {0} minutos</About_x_Minutes>
+        <About_An_Hour>hace una hora</About_An_Hour>
+        <About_x_Hours>hace {0} horas</About_x_Hours>
+        <About_A_Day>hace un día</About_A_Day>
+        <About_x_Days>hace {0} días</About_x_Days>
+        <About_A_Month>hace un mes</About_A_Month>
+        <About_x_Months>hace alrededor de {0} meses</About_x_Months>
       </label>
     </view>
   </Comment>

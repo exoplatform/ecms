@@ -158,7 +158,7 @@
     <title>Préférences</title>
     <label>
       <enableStructure>Mode Structure:</enableStructure>
-      <showSideBar>Afficher le panneau latéral:</showSideBar>
+      <showSideBar>Panneau latéral:</showSideBar>
       <showHiddenNode>Montrer les fichiers cachés</showHiddenNode>
       <showNonDocument>Montrer les fichiers système</showNonDocument>
       <showRefDocuments>Montrer les documents référencés</showRefDocuments>
@@ -178,7 +178,7 @@
   #########################################################################################
   -->
   <UIAllItemsPreferenceForm>
-    <title>Configurer les filtres</title>
+    <title>Filtres affichés</title>
     <action>
       <Cancel>#{word.cancel}</Cancel>
       <Save>#{word.save}</Save>
@@ -259,7 +259,7 @@
     </title>
     <header>
       <workspace>Espace de Stockage</workspace>
-      <path>Chemin</path>
+      <path>Emplacement</path>
     </header>
   </UIPopupWindow>
   <!--
@@ -353,7 +353,7 @@
       <SimpleSearch>Recherche Rapide</SimpleSearch>
       <AdvanceSearch>Recherche Avancée</AdvanceSearch>
       <SavedQueries>Requêtes Sauvegardées</SavedQueries>
-      <ShowAllOwnedByUser>Afficher tous les éléments</ShowAllOwnedByUser>
+      <ShowAllOwnedByUser>Filtrer les Documents</ShowAllOwnedByUser>
       <ShowAllFavourite>Afficher tous les éléments favoris</ShowAllFavourite>
       <ShowAllHidden>Afficher tous les éléments cachés</ShowAllHidden>
       <ShowAllFromTrash>Afficher tous les éléments de la corbeille</ShowAllFromTrash>
@@ -616,7 +616,7 @@
     </msg>
     <header>
       <workspace>Espace de Stockage</workspace>
-      <path>Chemin</path>
+      <path>Emplacement</path>
     </header>
     <action>
       <Close>#{word.close}</Close>
@@ -640,15 +640,15 @@
       <UIMetadataTab>Metadonnées</UIMetadataTab>
       <UIPropertyForm>Ajouter une Propriété</UIPropertyForm>
       <UIUploadContent>Information sur le fichier transféré</UIUploadContent>
-      <UIJCRAdvancedSearch>Requêtes Enregistrées</UIJCRAdvancedSearch>
-      <UISavedQuery>Voir le Contenu</UISavedQuery>
+      <UIJCRAdvancedSearch>Requêter</UIJCRAdvancedSearch>
+      <UISavedQuery>Requêtes Enregistrées</UISavedQuery>
       <AdvancedSearchResult>Résultats</AdvancedSearchResult>
       <UISimpleSearch>Recherche simple</UISimpleSearch>
-      <UISearchContainer>Recherche</UISearchContainer>
+      <UISearchContainer>Recherche par Critères</UISearchContainer>
       <UICategoryManagerSearch>Ajouter une catégorie à la recherche</UICategoryManagerSearch>
       <UIConstraintsForm>Formulaire de filtre</UIConstraintsForm>
       <UIViewSearchResult>Voir le Contenu</UIViewSearchResult>
-      <UIContentNameSearch>Recherche par nom</UIContentNameSearch>
+      <UIContentNameSearch>Recherche par Nom</UIContentNameSearch>
       <UINodeInfo>Informations de Version</UINodeInfo>
       <UINodeProperty>Propriété</UINodeProperty>
       <UIActionListContainer>Actions configurées</UIActionListContainer>
@@ -872,8 +872,8 @@
   </UICategoryManagerSearch>
   <UIContentNameSearch>
     <label>
-      <keyword>Nom de contenu:</keyword>
-      <location>Chercher dans:</location>
+      <keyword>Nom du document:</keyword>
+      <location>Emplacement de recherche:</location>
     </label>
     <action>
       <Search>Rechercher</Search>
@@ -921,10 +921,10 @@
     </msg>
     <header>
       <name>#{word.name}</name>
-      <path>Chemin</path>
+      <path>Emplacement</path>
       <action>Action</action>
       <shortcutPath>Dossier</shortcutPath>
-      <type>Nom</type>
+      <type>Type</type>
       <dateCreated>Date de création</dateCreated>
       <score>Score</score>
     </header>
@@ -939,7 +939,7 @@
       <datecreatedDESC>Classer par date de création décroissante</datecreatedDESC>
     </title>
     <tooltip>
-      <View>Voir ce noeud</View>
+      <View>Ouvrir ce document</View>
       <OpenFolder>Ouvrir le dossier</OpenFolder>
     </tooltip>
   </UISearchResult>
@@ -970,7 +970,7 @@
       <datecreatedDESC>Classer par date de création décroissante</datecreatedDESC>
     </title>
     <tooltip>
-      <View>Voir ce noeud</View>
+      <View>Ouvrir ce document</View>
       <OpenFolder>Ouvrir le dossier</OpenFolder>
     </tooltip>
   </UIShowAllOwnedByUserResult>
@@ -986,7 +986,7 @@
       <path>Dossier</path>
       <action>Action</action>
       <shortcutPath>Dossier</shortcutPath>
-      <type>Nom</type>
+      <type>Type</type>
       <dateCreated>Date de création</dateCreated>
       <score>Score</score>
     </header>
@@ -1001,7 +1001,7 @@
       <datecreatedDESC>Classer par date de création décroissante</datecreatedDESC>
     </title>
     <tooltip>
-      <View>Voir ce noeud</View>
+      <View>Ouvrir ce document</View>
       <OpenFolder>Ouvrir le dossier</OpenFolder>
     </tooltip>
   </UIShowAllFavouriteResult>
@@ -1017,7 +1017,7 @@
       <path>Dossier</path>
       <action>Action</action>
       <shortcutPath>Dossier</shortcutPath>
-      <type>Nom</type>
+      <type>Type</type>
       <dateCreated>Date de création</dateCreated>
       <score>Score</score>
       <AddRemoveFavourite>Ajouter/Supprimer un favori</AddRemoveFavourite>
@@ -1033,7 +1033,7 @@
       <datecreatedDESC>Classer par date de création décroissante</datecreatedDESC>
     </title>
     <tooltip>
-      <View>Voir ce noeud</View>
+      <View>Ouvrir ce document</View>
       <OpenFolder>Ouvrir le dossier</OpenFolder>
       <RemoveHiddenAttribute>Rendre visible</RemoveHiddenAttribute>
     </tooltip>
@@ -1050,7 +1050,7 @@
       <path>Annuler</path>
       <action>Action</action>
       <shortcutPath>Dossier</shortcutPath>
-      <type>Nom</type>
+      <type>Type</type>
       <dateCreated>Date de création</dateCreated>
       <score>Score</score>
     </header>
@@ -1065,7 +1065,7 @@
       <datecreatedDESC>Classer par date de création décroissante</datecreatedDESC>
     </title>
     <tooltip>
-      <View>Voir ce noeud</View>
+      <View>Ouvrir ce document</View>
       <OpenFolder>Ouvrir le dossier</OpenFolder>
       <DeletePermanently>Supprimer définitivement</DeletePermanently>
       <RestoreFromTrash>Restaurer de la poubelle</RestoreFromTrash>
@@ -1172,7 +1172,7 @@
   <UIJCRAdvancedSearch>
     <label>
       <name>Nom:</name>
-      <selectBox>Type de Requête :</selectBox>
+      <selectBox>Langage :</selectBox>
       <query>Requête:</query>
     </label>
     <action>
@@ -1193,7 +1193,7 @@
   <EditQueryForm>
     <label>
       <name>Nom</name>
-      <selectBox>Type de Requête</selectBox>
+      <selectBox>Langage</selectBox>
       <query>Requête</query>
     </label>
     <action>
@@ -1674,15 +1674,15 @@
   -->
   <UIClipboard>
     <header>
-      <path>Dossier</path>
+      <path>Elément</path>
       <command/>
-      <action>Act</action>
+      <action>Action</action>
     </header>
     <label>
       <nocommand>Aucun objet dans le presse papier.</nocommand>
     </label>
     <action>
-      <clearall>Tout Effacer</clearall>
+      <clearall>Vider</clearall>
     </action>
     <msg>
       <unable-pasted>Impossible de coller ce noeud.</unable-pasted>
@@ -2302,7 +2302,7 @@
 	<UISymLinkForm>
 		<label>
       <symLinkName>Nom du raccourci</symLinkName>
-			<pathNode>Chemin du Noeud</pathNode>
+      <pathNode>Emplacement du Noeud</pathNode>
 		</label>
 		<action>
 			<Save>#{word.save}</Save>
@@ -2329,7 +2329,7 @@
   <UIAddTranslationForm>
     <label>
       <symLinkName>Nom du raccourci</symLinkName>
-			<pathNode>Chemin du document:</pathNode>
+      <pathNode>Emplacement du document:</pathNode>
       <note>Sélectionnez un autre document qui servira de la traduction</note>
     </label>
     <action>
@@ -2647,7 +2647,7 @@
 	 <UIJcrExplorerEditForm>
 		<msg>
       <notNullDriveName>Le nom du lecteur est vide. Veuillez saisir une valeur.</notNullDriveName>
-      <notNullPath>Le chemin est vide. Veuillez saisir une valeur.</notNullPath>
+      <notNullPath>L'emplacement est vide. Veuillez saisir une valeur.</notNullPath>
 		</msg>
 	</UIJcrExplorerEditForm>
 
@@ -2669,7 +2669,7 @@
       <Favourites>Favoris</Favourites>
       <Hidden>Cachés</Hidden>
       <Trash>Corbeille</Trash>
-      <Configuration>Paramètres</Configuration>
+      <Configuration>Préférences</Configuration>
     </label>
     <title>
       <allItems>Afficher les éléments</allItems>
@@ -2710,7 +2710,7 @@
     	<Documents>Document</Documents>
       <Content>Contenu</Content>
     </label>
-    <title>Configurer les Filtres</title>
+    <title>Filtres affichés</title>
     <action>
   		<Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
@@ -2720,7 +2720,7 @@
   <UIAllItemsByType>
   	<label>
     <ByType>Filtrer par type</ByType>
-      <DocumentFilterConfiguration>Configurer les Filtres</DocumentFilterConfiguration>
+      <DocumentFilterConfiguration>Préférences</DocumentFilterConfiguration>
   	</label>
    	<title>
   	  <ShowVideo>Afficher les vidéos</ShowVideo>
@@ -2743,7 +2743,7 @@
   </ECMContextMenu>
   <UIPopupWindow>
     <title>
-      <UIDocumentFilterForm>Filtrer les types de documents</UIDocumentFilterForm>
+      <UIDocumentFilterForm>Préférences</UIDocumentFilterForm>
     </title>
   </UIPopupWindow>
 
@@ -2929,7 +2929,7 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
-      <formInput>Ancien chemin perdu, veuillez en choisir un autre.</formInput>
+      <formInput>Ancien emplacement perdu, veuillez en choisir un autre.</formInput>
     </label>
   </UISelectRestorePath>
   <PathNode>
@@ -2951,7 +2951,7 @@
   <UIActionForm>
     <msg>
       <homePath-emty>Le chemin d'accueil est vide.</homePath-emty>
-      <targetPath-emty>Le chemin cible est vide.</targetPath-emty>
+      <targetPath-emty>L'emplacement cible est vide.</targetPath-emty>
     </msg>
 		</UIActionForm>
 		<UIActionBar>

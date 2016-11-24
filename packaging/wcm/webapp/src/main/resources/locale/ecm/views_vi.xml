@@ -31,6 +31,15 @@
         <email>Email</email>
         <site>Trang</site>
         <lastComment>Last comment posted by {user} at {time}</lastComment>
+        <Less_Than_A_Minute>chưa đến một phút trước</Less_Than_A_Minute>
+        <About_A_Minute>khoảng một phút trước đây</About_A_Minute>
+        <About_x_Minutes>khoảng {0} phút trước đây</About_x_Minutes>
+        <About_An_Hour>khoảng một giờ trước đây</About_An_Hour>
+        <About_x_Hours>khoảng {0} giờ trước đây</About_x_Hours>
+        <About_A_Day>khoảng một ngày trước đây</About_A_Day>
+        <About_x_Days>khoảng {0} ngày trước đây</About_x_Days>
+        <About_A_Month>khoảng một tháng trước đây</About_A_Month>
+        <About_x_Months>khoảng {0} tháng trước đây</About_x_Months>
       </label>
     </view>
   </Comment>

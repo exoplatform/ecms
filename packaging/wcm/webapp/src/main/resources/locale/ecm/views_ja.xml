@@ -31,6 +31,15 @@
         <email>メール</email>
         <site>サイト</site>
         <lastComment>Last comment posted by {user} at {time}</lastComment>
+        <Less_Than_A_Minute>1 分以内</Less_Than_A_Minute>
+        <About_A_Minute>約 1 分前</About_A_Minute>
+        <About_x_Minutes>約 {0} 分前</About_x_Minutes>
+        <About_An_Hour>約 1 時間前</About_An_Hour>
+        <About_x_Hours>約 {0} 時間前</About_x_Hours>
+        <About_A_Day>１日前</About_A_Day>
+        <About_x_Days>約 {0} 日前</About_x_Days>
+        <About_A_Month>約 1 ヶ月前</About_A_Month>
+        <About_x_Months>約 {0} ヶ月前</About_x_Months>
       </label>
     </view>
   </Comment>

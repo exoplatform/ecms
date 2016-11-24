@@ -31,6 +31,15 @@
         <email>E-pošta</email>
         <site>Stran</site>
         <lastComment>Zadnji je komentiral {user} ob {time}</lastComment>
+        <Less_Than_A_Minute>pred manj kot eno minuto</Less_Than_A_Minute>
+        <About_A_Minute>pred približno eno minuto</About_A_Minute>
+        <About_x_Minutes>pred približno {0} minutami</About_x_Minutes>
+        <About_An_Hour>pred približno eno uro</About_An_Hour>
+        <About_x_Hours>pred približno {0} urami</About_x_Hours>
+        <About_A_Day>približno pred enim dnevom</About_A_Day>
+        <About_x_Days>pred približno {0} dnevi</About_x_Days>
+        <About_A_Month>pred približno enim mesecem</About_A_Month>
+        <About_x_Months>pred približno {0} meseci</About_x_Months>
       </label>
     </view>
   </Comment>

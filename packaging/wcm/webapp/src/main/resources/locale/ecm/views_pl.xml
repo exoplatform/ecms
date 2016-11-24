@@ -31,6 +31,15 @@
         <email>Email</email>
         <site>Witryna</site>
         <lastComment>Ostatni komentarz dodany przez {user} o godzinie {time}</lastComment>
+        <Less_Than_A_Minute>mniej niż minutę temu</Less_Than_A_Minute>
+        <About_A_Minute>około minuty temu</About_A_Minute>
+        <About_x_Minutes>około {0} minut(-y) temu</About_x_Minutes>
+        <About_An_Hour>około godzinę temu</About_An_Hour>
+        <About_x_Hours>około {0} godzin(-y) temu</About_x_Hours>
+        <About_A_Day>około jeden dzień temu</About_A_Day>
+        <About_x_Days>około {0} dni temu</About_x_Days>
+        <About_A_Month>około miesiąc temu</About_A_Month>
+        <About_x_Months>około {0} miesięcy temu</About_x_Months>
       </label>
     </view>
   </Comment>

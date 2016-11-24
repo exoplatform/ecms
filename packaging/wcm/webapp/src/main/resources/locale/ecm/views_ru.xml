@@ -31,6 +31,15 @@
         <email>Эл. почта</email>
         <site>Сайт</site>
         <lastComment>Last comment posted by {user} at {time}</lastComment>
+        <Less_Than_A_Minute>меньше минуты назад</Less_Than_A_Minute>
+        <About_A_Minute>около минуты назад</About_A_Minute>
+        <About_x_Minutes>около {0} минут назад</About_x_Minutes>
+        <About_An_Hour>около часа назад</About_An_Hour>
+        <About_x_Hours>около {0} часов назад</About_x_Hours>
+        <About_A_Day>около суток назад</About_A_Day>
+        <About_x_Days>около {0} дней назад</About_x_Days>
+        <About_A_Month>около месяца назад</About_A_Month>
+        <About_x_Months>около {0} месяцев назад</About_x_Months>
       </label>
     </view>
   </Comment>

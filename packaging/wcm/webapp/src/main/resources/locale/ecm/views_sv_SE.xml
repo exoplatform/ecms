@@ -31,6 +31,15 @@
         <email>E-post</email>
         <site>Webbplats</site>
         <lastComment>Last comment posted by {user} at {time}</lastComment>
+        <Less_Than_A_Minute>mindre än en minut sedan</Less_Than_A_Minute>
+        <About_A_Minute>för en minut sedan</About_A_Minute>
+        <About_x_Minutes>för {0} minuter sedan</About_x_Minutes>
+        <About_An_Hour>ungefär en timme sedan</About_An_Hour>
+        <About_x_Hours>för {0} timmar sedan</About_x_Hours>
+        <About_A_Day>för en dag sedan</About_A_Day>
+        <About_x_Days>för {0} dagar sedan</About_x_Days>
+        <About_A_Month>ungefär en månad sedan</About_A_Month>
+        <About_x_Months>för {0} månader sedan</About_x_Months>
       </label>
     </view>
   </Comment>

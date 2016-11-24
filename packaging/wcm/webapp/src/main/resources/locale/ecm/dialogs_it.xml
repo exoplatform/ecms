@@ -33,6 +33,12 @@
     </label>
   </UIDocumentForm>
  
+  <UICommentForm>
+    <label>
+      <placeholder>Use @ to identify a person in your comment</placeholder>
+    </label>
+  </UICommentForm>
+ 
   <!--
   ###################### resoucebundle for HTMLFile dialogs template ####
   -->

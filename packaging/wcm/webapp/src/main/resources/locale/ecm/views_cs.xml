@@ -31,6 +31,15 @@
         <email>E-mail</email>
         <site>Web</site>
         <lastComment>Last comment posted by {user} at {time}</lastComment>
+        <Less_Than_A_Minute>před méně než minutou</Less_Than_A_Minute>
+        <About_A_Minute>asi před minutou</About_A_Minute>
+        <About_x_Minutes>asi před {0} minutami</About_x_Minutes>
+        <About_An_Hour>asi před hodinou</About_An_Hour>
+        <About_x_Hours>asi před {0} hodinami</About_x_Hours>
+        <About_A_Day>asi přede dnem</About_A_Day>
+        <About_x_Days>asi před {0} dny</About_x_Days>
+        <About_A_Month>asi před měsícem</About_A_Month>
+        <About_x_Months>asi před {0} měsíci</About_x_Months>
       </label>
     </view>
   </Comment>

@@ -31,6 +31,15 @@
         <email>El.paštas</email>
         <site>Svetainė</site>
         <lastComment>Last comment posted by {user} at {time}</lastComment>
+        <Less_Than_A_Minute>mažiau nei prieš minutę</Less_Than_A_Minute>
+        <About_A_Minute>prieš minutę</About_A_Minute>
+        <About_x_Minutes>maždaug prieš {0} minutes(ių)</About_x_Minutes>
+        <About_An_Hour>maždaug prieš valandą</About_An_Hour>
+        <About_x_Hours>maždaug prieš {0} valandas(ų)</About_x_Hours>
+        <About_A_Day>maždaug prieš dieną</About_A_Day>
+        <About_x_Days>maždaug prieš {0} dienas(-ų)</About_x_Days>
+        <About_A_Month>maždaug prieš mėnesį</About_A_Month>
+        <About_x_Months>maždaug prieš {0} mėnsius(-ių)</About_x_Months>
       </label>
     </view>
   </Comment>

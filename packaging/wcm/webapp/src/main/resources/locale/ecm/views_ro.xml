@@ -31,6 +31,15 @@
         <email>E-mail</email>
         <site>Site-ul</site>
         <lastComment>Last comment posted by {user} at {time}</lastComment>
+        <Less_Than_A_Minute>mai puţin de un minut în urmă</Less_Than_A_Minute>
+        <About_A_Minute>aproximativ cu un minut în urmă</About_A_Minute>
+        <About_x_Minutes>aproximativ {0} minute în urmă</About_x_Minutes>
+        <About_An_Hour>aproximativ cu o oră în urmă</About_An_Hour>
+        <About_x_Hours>aproximativ {0} ore în urmă</About_x_Hours>
+        <About_A_Day>aproximativ o zi în urmă</About_A_Day>
+        <About_x_Days>aproximativ {0} zile în urmă</About_x_Days>
+        <About_A_Month>aproximativ o lună în urmă</About_A_Month>
+        <About_x_Months>aproximativ {0} luni în urmă</About_x_Months>
       </label>
     </view>
   </Comment>

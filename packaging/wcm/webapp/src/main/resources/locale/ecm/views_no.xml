@@ -31,6 +31,15 @@
         <email>E-post</email>
         <site>Nettsted</site>
         <lastComment>Last comment posted by {user} at {time}</lastComment>
+        <Less_Than_A_Minute>mindre enn ett minutt siden</Less_Than_A_Minute>
+        <About_A_Minute>omtrent et minutt siden</About_A_Minute>
+        <About_x_Minutes>for {0} minutter siden</About_x_Minutes>
+        <About_An_Hour>for en time siden</About_An_Hour>
+        <About_x_Hours>for {0} timer siden</About_x_Hours>
+        <About_A_Day>for en dag siden</About_A_Day>
+        <About_x_Days>for {0} dager siden</About_x_Days>
+        <About_A_Month>for en måned siden</About_A_Month>
+        <About_x_Months>for {0} måneder siden</About_x_Months>
       </label>
     </view>
   </Comment>

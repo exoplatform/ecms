@@ -33,6 +33,12 @@
     </label>
   </UIDocumentForm>
  
+  <UICommentForm>
+    <label>
+      <placeholder>crwdns6843313:0crwdne6843313:0</placeholder>
+    </label>
+  </UICommentForm>
+ 
   <!--
   ###################### resoucebundle for HTMLFile dialogs template ####
   -->
