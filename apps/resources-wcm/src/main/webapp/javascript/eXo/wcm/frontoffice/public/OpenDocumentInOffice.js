@@ -42,8 +42,14 @@
   OpenDocumentInOffice.prototype.openDocument = function(filePath, mountPath){
     fitLayout();
     if(eXo.ecm.ECMWebDav !== undefined) { // use ITHIT to an open document
+      var webDav = eXo.ecm.ECMWebDav;
       var documentManager = eXo.ecm.ECMWebDav.WebDAV.Client.DocManager;
-      documentManager.EditDocument(filePath, mountPath, this.errorCallback);
+      //Workaround ECMS-7477 : Open in Office on Chrome for Mac
+      if(webDav.DetectOS.OS == "MacOS" && webDav.DetectBrowser.Chrome){
+        documentManager.DavProtocolEditDocument(filePath, mountPath, this.errorCallback);
+      }else {
+        documentManager.EditDocument(filePath, mountPath, this.errorCallback);
+      }
     }
     if(uisideBarWidth === 0){ //hide side bar
       gj("#UISideBar").show();
