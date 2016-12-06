@@ -16,21 +16,11 @@
  */
 package org.exoplatform.ecm.webui.component.explorer.popup.info;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-import javax.jcr.Node;
-import javax.jcr.RepositoryException;
-import javax.jcr.Value;
-import javax.jcr.ValueFormatException;
-import javax.jcr.nodetype.NodeTypeManager;
-import javax.jcr.nodetype.PropertyDefinition;
-
 import org.apache.commons.lang.ArrayUtils;
+import org.apache.commons.lang.StringUtils;
+import org.exoplatform.ecm.utils.lock.LockUtil;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.form.UIDialogForm;
-import org.exoplatform.ecm.utils.lock.LockUtil;
 import org.exoplatform.resolver.ResourceResolver;
 import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
 import org.exoplatform.services.cms.metadata.MetadataService;
@@ -46,12 +36,18 @@ import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.Event.Phase;
 import org.exoplatform.webui.event.EventListener;
-import org.exoplatform.webui.form.UIFormDateTimeInput;
-import org.exoplatform.webui.form.UIFormInput;
-import org.exoplatform.webui.form.UIFormMultiValueInputSet;
-import org.exoplatform.webui.form.UIFormSelectBox;
-import org.exoplatform.webui.form.UIFormStringInput;
+import org.exoplatform.webui.form.*;
 import org.exoplatform.webui.form.input.UICheckBoxInput;
+
+import javax.jcr.Node;
+import javax.jcr.RepositoryException;
+import javax.jcr.Value;
+import javax.jcr.ValueFormatException;
+import javax.jcr.nodetype.NodeTypeManager;
+import javax.jcr.nodetype.PropertyDefinition;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by The eXo Platform SARL
@@ -180,8 +176,8 @@ public class UIViewMetadataForm extends UIDialogForm {
             } else if (requiredType == 4){ // double
               UIFormInput uiInput = uiForm.getUIInput(inputName);
               double value = 0;
-              if(uiForm.getUIInput(inputName) != null) {
-                if ((!node.hasProperty(name) || (node.hasProperty(name) && node.getProperty(name).getDouble() != value))) {
+              if(uiInput != null && StringUtils.isNotBlank((String)uiInput.getValue())) {
+                if ((!node.hasProperty(name) || (node.hasProperty(name) && node.getProperty(name).getDouble() != 0))) {
                   try {
                     value =  Double.parseDouble((String) uiInput.getValue());
                     node.setProperty(name, value);
