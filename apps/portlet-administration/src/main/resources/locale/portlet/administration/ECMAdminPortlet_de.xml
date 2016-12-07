@@ -990,7 +990,7 @@
       <addSymLink>Symbolische Verknüpfung hinzufügen</addSymLink>
       <checkIn>Check In</checkIn>
       <checkOut>Check Out</checkOut>
-      <shareDocuments>Share</shareDocuments>
+      <shareDocuments>Post</shareDocuments>
       <openDocument>Entferntes Bearbeiten</openDocument>
       <editProperty>Dokumenteigenschaften bearbeiten</editProperty>
       <uploadNewVersion>Eine neue Version hochladen</uploadNewVersion>

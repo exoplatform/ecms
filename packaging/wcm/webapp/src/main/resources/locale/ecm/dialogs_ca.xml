@@ -8,7 +8,7 @@
       <label>
         <end-time>Hora de finalització</end-time>
         <start-time>Hora d'inici</start-time>
-        <lifecycle>Lifecycle</lifecycle>
+        <lifecycle>Cicle de vida</lifecycle>
         <mimeType>Tipus MIME</mimeType>
         <repeat-count>Nombre de repeticions</repeat-count>
         <time-interval>Interval de temps</time-interval>
@@ -28,14 +28,14 @@
       <contentHtml>#{word.content}</contentHtml>
       <content>#{word.content}</content>
       <contentPlain>#{word.content}</contentPlain>
-      <name>Name</name>
+      <name>Nom</name>
     <categories>Categories</categories>
     </label>
   </UIDocumentForm>
  
   <UICommentForm>
     <label>
-      <placeholder>Use @ to identify a person in your comment</placeholder>
+      <placeholder>Utilitza @ per tal de mencionar algú al seu comentari</placeholder>
     </label>
   </UICommentForm>
  
@@ -45,8 +45,8 @@
   <HtmlFile>
     <dialog>
       <label>
-        <name>Name</name>
-        <content>Content</content>
+        <name>Nom</name>
+        <content>Contingut</content>
       </label>
     </dialog>
   </HtmlFile>
@@ -73,7 +73,7 @@
       <description>#{word.description}</description>
       <port>Port</port>
       <userName>#{word.userName}</userName>
-      <password>Password</password>
+      <password>Contrasenya</password>
       <link>Enllaç</link>
       <to>Envia un correu a</to>
       <actionName>#{word.name}</actionName>
@@ -84,7 +84,7 @@
       <description>#{word.description}</description>
       <port>Port</port>
       <userName>#{word.userName}</userName>
-      <password>Password</password>
+      <password>Contrasenya</password>
       <link>Enllaç</link>
       <to>Envia un correu a</to>
       <actionName>#{word.name}</actionName>
@@ -189,7 +189,7 @@
       <label>
         <destination-workpsace>Destí de l'àrea de treball</destination-workpsace>
         <destination-path>Ruta de destí</destination-path>
-        <primary-type>Primary Type</primary-type>
+        <primary-type>Tipus Primari</primary-type>
         <mixin-types>Tipus de mixin</mixin-types>
       </label>
     </dialog>
@@ -222,7 +222,7 @@
   <Relationable>
     <dialog>
       <label>
-        <relation>Relation</relation>
+        <relation>Relació</relation>
       </label>
     </dialog>
   </Relationable>
@@ -232,7 +232,7 @@
   <RssEnable>
     <dialog>
       <label>
-        <title>Title</title>
+        <title>Títol</title>
         <summary>#{word.summary}</summary>
       </label>
     </dialog>
@@ -260,10 +260,10 @@
   <ResouceContainer>
     <dialog>
       <label>
-        <name>Name</name>
+        <name>Nom</name>
         <autoload>Càrrega automàtica</autoload>
         <minetype>Tipus MIME</minetype>
-        <content>Content</content>
+        <content>Contingut</content>
       </label>
     </dialog>
   </ResouceContainer>
@@ -272,7 +272,7 @@
   -->
   <EmailAddressValidator>
     <msg>
-      <Invalid-input>The email address is invalid.</Invalid-input>
+      <Invalid-input>L'adreça de correu no és vàlida.</Invalid-input>
     </msg>
   </EmailAddressValidator>
   <EmptyFieldValidator>
@@ -294,8 +294,8 @@
     <dialog>
       <label>
         <id>Id</id>
-        <name>Name</name>
-        <lifecycle>Lifecycle</lifecycle>
+        <name>Nom</name>
+        <lifecycle>Cicle de vida</lifecycle>
         <homePath>Ruta al Inici</homePath>
         <targetWorkspace>Àrea de treball de destí</targetWorkspace>
         <targetPath>Ruta de destí</targetPath>
@@ -316,33 +316,33 @@
 <no>No</no>
 <yes>Sí</yes>
 <true>Cert</true>
-<false>False</false>
-<Electronic>Electronic</Electronic>
+<false>Fals</false>
+<Electronic>Electrònica</Electronic>
 <Paper>Paper</Paper>
-<NONE>None</NONE>
-<CLASSIFIED>Classified</CLASSIFIED>
-<UNCLASSIFIED>Unclassified</UNCLASSIFIED>
-<NOCONTRACT>No Contract</NOCONTRACT>
-<one-minute>One Minute</one-minute>
-<hourly>Hourly</hourly>
-<daily>Daily</daily>
+<NONE>Cap</NONE>
+<CLASSIFIED>Classificat</CLASSIFIED>
+<UNCLASSIFIED>Desclassificat</UNCLASSIFIED>
+<NOCONTRACT>Cap contracte</NOCONTRACT>
+<one-minute>Un minut</one-minute>
+<hourly>Per hora</hourly>
+<daily>Diàriament</daily>
 <quarterly>Trimestralment</quarterly>
 <yearly>Anualment</yearly>
-<ten-years>Ten Years</ten-years>
-<read>User Action</read>
-  <schedule>Scheduler</schedule>
-  <node_added>Content Addition</node_added>
+<ten-years>Deu anys</ten-years>
+<read>Acció d'Usuari</read>
+  <schedule>Planificador</schedule>
+  <node_added>Addició de contingut</node_added>
   <node_removed>Eliminació de contingut</node_removed>
-  <property_added>Property Addition</property_added>
+  <property_added>Addició de Propietat</property_added>
   <property_removed>Eliminació de Propietat</property_removed>
-  <property_changed>Property Modification</property_changed>
+  <property_changed>Modificació de Propietat</property_changed>
 
   <ScriptAction>
     <dialog>
       <label>
         <isDeep>Recursiu</isDeep>
-        <nodetypes>Node Types</nodetypes>
-        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
+        <nodetypes>Tipus de node</nodetypes>
+        <affectedNodeTypeNames>Tipus de Node afectats</affectedNodeTypeNames>
       </label>
     </dialog>
   </ScriptAction>
@@ -351,7 +351,7 @@
     <dialog>
       <label>
         <isDeep>Recursiu</isDeep>
-        <nodetypes>Node Types</nodetypes>
+        <nodetypes>Tipus de node</nodetypes>
         <affectedNodeTypeNames>Tipus de Node afectats</affectedNodeTypeNames>
       </label>
     </dialog>
@@ -361,8 +361,8 @@
     <dialog>
       <label>
         <isDeep>Recursiu</isDeep>
-        <nodetypes>Node Types</nodetypes>
-        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
+        <nodetypes>Tipus de node</nodetypes>
+        <affectedNodeTypeNames>Tipus de Node afectats</affectedNodeTypeNames>
       </label>
     </dialog>
   </EnableVersioning>
@@ -371,8 +371,8 @@
     <dialog>
       <label>
         <isDeep>Recursiu</isDeep>
-        <nodetypes>Node Types</nodetypes>
-        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
+        <nodetypes>Tipus de node</nodetypes>
+        <affectedNodeTypeNames>Tipus de Node afectats</affectedNodeTypeNames>
       </label>
     </dialog>
   </AutoVersioning>

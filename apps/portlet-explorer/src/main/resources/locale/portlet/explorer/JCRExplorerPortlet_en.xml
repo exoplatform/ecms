@@ -18,7 +18,7 @@
     </action>
     <msg>
       <not-support>You can't comment on this type of document.</not-support>
-      <not-checkedout>You must check out the node before commenting on it.</not-checkedout>
+      <not-checkedout>You must check out the document before commenting on it.</not-checkedout>
       <content-null>You cannot post an empty comment.</content-null>
     </msg>
   </UICommentForm>
@@ -46,7 +46,7 @@
     </button>
     <msg>
       <not-support>You cannot vote for this document type.</not-support>
-      <not-checkedout>You must check out the node before voting.</not-checkedout>
+      <not-checkedout>You must check out the document to vote.</not-checkedout>
       <vote-restriction>You cannot vote more than one time.</vote-restriction>
     </msg>
   </UIVoteForm>
@@ -59,9 +59,9 @@
   <UIJCRExplorer>
     <msg>
       <refresh-session-success>The session was refreshed successfully.</refresh-session-success>
-      <no-node-history>You are in the root node.</no-node-history>
+      <no-node-history>You are at the root.</no-node-history>
       <save-session-success>All changes have been saved.</save-session-success>
-      <target-path-not-found>You cannot access this node, either because it doesn't exist anymore or because you do not have the right to access it.</target-path-not-found>
+      <target-path-not-found>You can't access this path, either because it doesn't exist anymore or because you don't have access permissions.</target-path-not-found>
     </msg>
   </UIJCRExplorer>
   <!--
@@ -159,8 +159,8 @@
     <label>
       <enableStructure>Enable DMS Structure:</enableStructure>
       <showSideBar>Show Sidebar:</showSideBar>
-      <showHiddenNode>Show Hidden Nodes:</showHiddenNode>
-      <showNonDocument>Show Non-document Nodes:</showNonDocument>
+      <showHiddenNode>Show Hidden Items:</showHiddenNode>
+      <showNonDocument>Show Non-document Items:</showNonDocument>
       <showRefDocuments>Show Referenced Documents:</showRefDocuments>
       <enableDragAndDrop>Enable Drag &amp; Drop:</enableDragAndDrop>
       <sortBy>Sort by:</sortBy>
@@ -201,15 +201,15 @@
       <Back>#{word.back}</Back>
     </action>
     <msg>
-      <rename-successfull>Node '{0}' was renamed to '{1}' successfully.</rename-successfull>
-      <rename-denied>Access denied. You cannot rename this node.</rename-denied>
+      <rename-successfull>'{0}' was renamed to '{1}' successfully.</rename-successfull>
+      <rename-denied>Access denied. You can't rename this item.</rename-denied>
       <fileName-invalid>The new name contains some invalid characters.</fileName-invalid>
       <newName-same-oldName>The new name already exists. Please check again.</newName-same-oldName>
-      <version-exception>This node (or the ancestor of this node) is not checked out.</version-exception>
-      <lock-exception>This node is locked. Please unlock it before renaming.</lock-exception>
-      <constraintViolation-exception>An error occurred while renaming node '{0}'. Please check again.</constraintViolation-exception>
+      <version-exception>This document (or one of its ancestors) is not checked out.</version-exception>
+      <lock-exception>This document is locked. Please unlock it before renaming.</lock-exception>
+      <constraintViolation-exception>An error occurred while renaming '{0}'. Please check again.</constraintViolation-exception>
       <unknown-prefix>Prefix '{0}' has not been registered yet.</unknown-prefix>
-      <rename-error>An error occurred while renaming this node. Please check again.</rename-error>
+      <rename-error>An error occurred while renaming. Please check again.</rename-error>
     </msg>
   </UIRenameForm>
   <UIPopupWindow>
@@ -222,7 +222,7 @@
       <UIExportNode>Export</UIExportNode>
       <UINodeTypeInfo>Node Type Information</UINodeTypeInfo>
       <UIVersionInfo>Version Info</UIVersionInfo>
-      <UIActivateVersion>Activate Version</UIActivateVersion>
+      <UIActivateVersion>Activate Versioning</UIActivateVersion>
       <UIAuditingInfo>Auditing Information</UIAuditingInfo>
       <UIActivateAuditing>Activate Auditing</UIActivateAuditing>
       <UIPermissionManager>Permission Management</UIPermissionManager>
@@ -313,40 +313,40 @@
       <UploadNewVersion>Upload a new version</UploadNewVersion>
     </tooltip>
     <msg>
-      <cannot-action-in-rootnode>You cannot perform this action in the root node.</cannot-action-in-rootnode>
+      <cannot-action-in-rootnode>You can't perform this action at root.</cannot-action-in-rootnode>
       <node-checkedin>You must check out first.</node-checkedin>
-      <cannot-enable-version-rootnode>Cannot enable versioning for the root node.</cannot-enable-version-rootnode>
-      <cannot-enable-publication-rootnode>Cannot enable publication for the root node.</cannot-enable-publication-rootnode>
+      <cannot-enable-version-rootnode>Can't activate versioning on root.</cannot-enable-version-rootnode>
+      <cannot-enable-publication-rootnode>Can't activate publication at root.</cannot-enable-publication-rootnode>
       <manage-publication>
-        <not-supported-nodetype>The publication supports the document node only.</not-supported-nodetype>
+        <not-supported-nodetype>Only documents can be published.</not-supported-nodetype>
         <no-publication-lifecycle>No publication lifecycle is configured.</no-publication-lifecycle>
       </manage-publication>
-      <unsubcriber-lifecycle> The node was already unsubscribed.</unsubcriber-lifecycle>
-      <not-supported-nodetype>The unsubscriber lifecycle supports the document node only.</not-supported-nodetype>
-      <unsubcriber-lifecycle-finish>The node was unsubscribed successfully.</unsubcriber-lifecycle-finish>
-      <access-false>The node is not an article or checked in.</access-false>
+      <unsubcriber-lifecycle>The document was already unsubscribed.</unsubcriber-lifecycle>
+      <not-supported-nodetype>This operation is only supported for documents.</not-supported-nodetype>
+      <unsubcriber-lifecycle-finish>The document was unsubscribed successfully.</unsubcriber-lifecycle-finish>
+      <access-false>The document is not an article or checked in.</access-false>
       <unsupported-action>This action is not supported.</unsupported-action>
-      <not-relationable>This node has not yet had any related links to another node.</not-relationable>
-      <node-pasted>Node '{0}' has been pasted at the location '{1}'. This operation has already been saved.</node-pasted>
-      <no-node-selected>No node copied.</no-node-selected>
-      <unable-edit>Node'{0}' with nodetype '{1}' is not supported to edit.</unable-edit>
-      <not-support>Cannot edit the selected node.</not-support>
-      <template-null>This node has no dialog available.</template-null>
+      <not-relationable>This document has no relations.</not-relationable>
+      <node-pasted>'{0}' has been pasted at the location '{1}'. This operation has already been saved.</node-pasted>
+      <no-node-selected>Nothing to copy.</no-node-selected>
+      <unable-edit>Editing documents of type '{1}' like '{0}' is not supported.</unable-edit>
+      <not-support>Can't edit the selected item.</not-support>
+      <template-null>This document has no form template.</template-null>
       <keyword-null>There are no keywords to search.</keyword-null>
       <not-found>No results found.</not-found>
       <keyword-not-allow>This keyword is not allowed.</keyword-not-allow>
-      <is-not-referenable>Node '{0}' cannot be referenceable.</is-not-referenable>
-      <access-denied>Access denied. You do not have edit permission in this node.</access-denied>
-      <access-add-denied>Access denied. You do not have add permission in this node.</access-add-denied>
+      <is-not-referenable>'{0}' can't be referenceable.</is-not-referenable>
+      <access-denied>Access denied. You don't have edit permission for this item.</access-denied>
+      <access-add-denied>Access denied. You don't have permission to add items here.</access-add-denied>
       <item-existed>This node already exists. It cannot have the same name as its sibling.</item-existed>
       <removed-hidden-mixin>You removed the hidden mixin successfully.</removed-hidden-mixin>
       <added-hidden-mixin>You added the hidden mixin successfully.</added-hidden-mixin>
       <not-supported>This function is supported for the document type only.</not-supported>
-      <empty-file-type>You cannot add a document to this node.</empty-file-type>
-      <unsupported-watch>Only the document node can be watched.</unsupported-watch>
-      <watch-checkedin>You must check out the node before watching.</watch-checkedin>
-      <unsupported-tagging>Only the document node can be tagged.</unsupported-tagging>
-      <tagnode-checkedin>You must check out the node before tagging.</tagnode-checkedin>
+      <empty-file-type>You can't add a document here.</empty-file-type>
+      <unsupported-watch>Only documents can be watched.</unsupported-watch>
+      <watch-checkedin>You must check out the document before watching.</watch-checkedin>
+      <unsupported-tagging>Only documents can be tagged.</unsupported-tagging>
+      <tagnode-checkedin>You must check out the document before tagging.</tagnode-checkedin>
     </msg>
     <title>
       <select-tab>Select Tab</select-tab>
@@ -361,48 +361,48 @@
   </UIActionBar>
   <UIPopupMenu>
     <msg>
-      <has-not-permission>Access denied. You do not have add permission in this node.</has-not-permission>
-      <has-not-edit-permission>Access denied. You do not have edit permission in this node. Please contact the administrator.</has-not-edit-permission>
-      <cannot-login-node>You cannot access and paste the node here.</cannot-login-node>
-      <cannot-paste-nodetype>You cannot paste the node here.</cannot-paste-nodetype>
-      <has-not-permission-unlok>You do not have permission to unlock this node.</has-not-permission-unlok>
-      <bound-exception>You do not have permission to rename this node. Please contact the administrator.</bound-exception>
-      <bound-move-exception>You cannot move the node to itself or in its sub-node.</bound-move-exception>
-      <does-not-support-auditing>You cannot activate auditing on this node.</does-not-support-auditing>
-      <can-not-rename-node>You do not have permission to rename this node. Please contact the administrator to get the correct right.</can-not-rename-node>
-      <can-not-cut-node>You do not have permission to cut this node. Please contact the administrator.</can-not-cut-node>
-      <can-not-remove-node>You do not have permission to remove this node. Please contact the administrator.</can-not-remove-node>
-      <can-not-lock-node>You do not have permission to lock node {0}. Please contact the administrator.</can-not-lock-node>
-      <can-not-unlock-node>You do not have permission to unlock this node. Please contact the administrator.</can-not-unlock-node>
-      <no-node>Please select at least one node before pasting.</no-node>
-      <can-not-paste-node>You do not have permission to move to this node. Please contact the administrator.</can-not-paste-node>
-      <can-not-move-node>You do not have permission to move this node. Please contact the administrator.</can-not-move-node>
-      <does-not-support-versioning>You do not have permission to move to this node. Please contact the administrator.</does-not-support-versioning>
+      <has-not-permission>Access denied. You don't have permissions to add in this item.</has-not-permission>
+      <has-not-edit-permission>Access denied. You don't have edit permission here. Please contact the administrator.</has-not-edit-permission>
+      <cannot-login-node>You can't access and paste an item here.</cannot-login-node>
+      <cannot-paste-nodetype>You can't paste this type of item here.</cannot-paste-nodetype>
+      <has-not-permission-unlok>You don't have permission to unlock this document.</has-not-permission-unlok>
+      <bound-exception>You don't have the permission to rename this item. Please contact the administrator.</bound-exception>
+      <bound-move-exception>You can't move an item to itself or in a subfolder.</bound-move-exception>
+      <does-not-support-auditing>You can't activate auditing here.</does-not-support-auditing>
+      <can-not-rename-node>You don't have permission to rename this item. Please contact the administrator to get the necessary rights.</can-not-rename-node>
+      <can-not-cut-node>You don't have permission to cut this item. Please contact the administrator.</can-not-cut-node>
+      <can-not-remove-node>You don't have permission to remove this item. Please contact the administrator.</can-not-remove-node>
+      <can-not-lock-node>You don't have permission to lock {0}. Please contact the administrator.</can-not-lock-node>
+      <can-not-unlock-node>You don't have permission to unlock this item. Please contact the administrator.</can-not-unlock-node>
+      <no-node>Please select at least one item before pasting.</no-node>
+      <can-not-paste-node>You don't have permission to move to this item. Please contact the administrator.</can-not-paste-node>
+      <can-not-move-node>You don't have permission to move this item. Please contact the administrator.</can-not-move-node>
+      <does-not-support-versioning>You don't have permission to move. Please contact the administrator.</does-not-support-versioning>
       <path-not-found>This element was deleted or changed. Please click the Refresh button.</path-not-found>
-      <paste-lock-exception>You cannot paste '{0}' to this node because the source or the destination node is locked or is related to the locked node.</paste-lock-exception>
-      <can-not-checkin-node>You cannot check in this node. Please check that you have the right permissions.</can-not-checkin-node>
-      <can-not-checkout-node>You cannot check out this node. Please check that you have the right permissions.</can-not-checkout-node>
-      <move-constraint-exception>An error occurred while moving the node.</move-constraint-exception>
-      <not-lock-owner>You cannot unlock this node because you are not the lock owner.</not-lock-owner>
-      <is-checked-in>Please check out this node before renaming.</is-checked-in>
-      <is-checked-in-lock>Please check out this node before locking.</is-checked-in-lock>
-      <cant-lock>You cannot lock this node.</cant-lock>
+      <paste-lock-exception>'{0}' can't be pasted here. Make sure it is not locked nor this folder. Also check that no related document is locked.</paste-lock-exception>
+      <can-not-checkin-node>You can't check in this item. Please check that you have the necessary permissions.</can-not-checkin-node>
+      <can-not-checkout-node>You can't check out this itel. Please check that you have the necessary permissions.</can-not-checkout-node>
+      <move-constraint-exception>An error occurred while moving this item.</move-constraint-exception>
+      <not-lock-owner>You can't unlock this item because you are not the lock owner.</not-lock-owner>
+      <is-checked-in>Please check out this item before renaming.</is-checked-in>
+      <is-checked-in-lock>Please check out this item before locking.</is-checked-in-lock>
+      <cant-lock>You can't lock this document.</cant-lock>
       <node-locked>The item with the path {0} or upper level is locked.</node-locked>
-      <can-not-delete>Please close this node before deleting.</can-not-delete>
-      <can-not-delete-version>You cannot delete this node. It is versioning.</can-not-delete-version>
-      <not-support>You cannot delete the selected node. Please select another node.</not-support>
-      <current-node-not-allow-paste>You cannot paste the copied node type on the current node.</current-node-not-allow-paste>
-      <copied-node-in-versioning>You cannot paste the copied node. It is versioning.</copied-node-in-versioning>
-      <parent-node-locked>You do not have permission to unlock node '{0}'.</parent-node-locked>
-      <this-node-locked-by-parent>You cannot unlock this node. It is locked by the parent or ancestor node.</this-node-locked-by-parent>
-      <paste-node-same-name>You cannot paste a node with the same name as a node in the destination folder.</paste-node-same-name>
-      <has-not-add-permission>You do not have permission to add a new node.</has-not-add-permission>
-      <node-cutting>Node is being cut. You cannot paste it here.</node-cutting>
-      <access-denied>Access denied. You may not have permission in this node.</access-denied>
-      <remove-verion-exception>You cannot remove this node because it (or its ancestor) is checked in.</remove-verion-exception>
-      <remove-referentialIntegrityException>You cannot delete this node because it is currently the target of a Reference property.</remove-referentialIntegrityException>
-      <constraintviolation-exception>The mandatory item jcr:uuid was not found. The node may have been deleted or changed. Please click the Refresh button.</constraintviolation-exception>
-      <path-not-found-exception>This node was deleted or changed. Please click the Refresh button.</path-not-found-exception>
+      <can-not-delete>Please close this item before deleting.</can-not-delete>
+      <can-not-delete-version>You can't delete this document. It's versioned.</can-not-delete-version>
+      <not-support>You can't delete the selected item. Please select another one.</not-support>
+      <current-node-not-allow-paste>You can't paste the copied item there.</current-node-not-allow-paste>
+      <copied-node-in-versioning>You can't paste the copied item here because it's versioned.</copied-node-in-versioning>
+      <parent-node-locked>You don't have permission to unlock '{0}'.</parent-node-locked>
+      <this-node-locked-by-parent>You can't unlock this item. Parent folder is locked.</this-node-locked-by-parent>
+      <paste-node-same-name>Can't paste this item here. An item with the same name already exists in the destination folder.</paste-node-same-name>
+      <has-not-add-permission>You don't have the permission to add here.</has-not-add-permission>
+      <node-cutting>Item is being cut. You can't paste it here.</node-cutting>
+      <access-denied>Access denied. You may not have the permission.</access-denied>
+      <remove-verion-exception>You can't remove this document because it is checked in.</remove-verion-exception>
+      <remove-referentialIntegrityException>You can't delete this item because it is currently referenced by another one.</remove-referentialIntegrityException>
+      <constraintviolation-exception>The mandatory property jcr:uuid was not found. The document may have been deleted or changed. Please click the Refresh button.</constraintviolation-exception>
+      <path-not-found-exception>This document was deleted or changed. Please click the Refresh button.</path-not-found-exception>
       <not-exist-categories>The category does not exist.</not-exist-categories>
       <lock-node-read-only>This file is locked by user {0}. Open read-only ?</lock-node-read-only>
     </msg>
@@ -428,12 +428,12 @@
       <title-invalid>Please enter the folder title.</title-invalid>
       <name-not-allowed>This name is not allowed.</name-not-allowed>
       <fileName-error>The file name is invalid.</fileName-error>
-      <constraint-violation>The current node does not allow you to add the node type '{0}'.</constraint-violation>
+      <constraint-violation>You can't add a document of type '{0}' here.</constraint-violation>
       <repository-exception>An unexpected error occurred. Please contact your administrator for more details.</repository-exception>
-      <repository-exception-permission>You do not have permission to add a new folder to this node.</repository-exception-permission>
+      <repository-exception-permission>You don't have the permission to add a new folder here.</repository-exception-permission>
       <numberformat-exception>You cannot save this folder. The name provided must be in numerical format.</numberformat-exception>
       <!--DMS 2.4.x; ECM-3553-->
-      <not-allow-sameNameSibling>You cannot save the folder. This node does not accept two nodes with the same name.</not-allow-sameNameSibling>
+      <not-allow-sameNameSibling>You can't save the folder. An item with the same name already exists.</not-allow-sameNameSibling>
       <ntFolder-not-avaiable>You must select a custom type of folder</ntFolder-not-avaiable>
     </msg>
     <help>
@@ -500,26 +500,26 @@
       <feedback-restore>'{0}' was successfully restored.</feedback-restore>
       <feedback-restore-multi>{0} items were succesfully restored.</feedback-restore-multi>
       
-      <confirm-restore>A node with the same name already exists in the old location of node'{0}'. Are you sure you want to restore this node?</confirm-restore>
+      <confirm-restore>A '{0}' item already exists at the previous location. Are you sure you want to restore it?</confirm-restore>
       <confirm-move>Are you sure you want to move?</confirm-move>
-      <node-cut>Node '{0}' has been cut.</node-cut>
+      <node-cut>'{0}' has been cut.</node-cut>
       <execute-successfully>The custom action '{0}' has been executed.</execute-successfully>
-      <save-node-success>Node '{0}' has been saved.</save-node-success>
-      <move-problem>You cannot move node '{0}' to '{1}' because there was a problem with permission or constraint conditions.</move-problem>
+      <save-node-success>'{0}' has been saved.</save-node-success>
+      <move-problem>You can't move '{0}' to '{1}' because there was a problem with permissions or constraint conditions.</move-problem>
     </msg>
   </UIWorkingArea>
   <UIDocumentWorkspace>
     <label>
-      <no-children>This node does not have any child nodes.</no-children>
-      <no-children-but-has-hidden>This node does not have any child nodes, but there are some hidden files.</no-children-but-has-hidden>
+      <no-children>This item doesn't have children.</no-children>
+      <no-children-but-has-hidden>This folder does not have any item, but there are some hidden files.</no-children-but-has-hidden>
     </label>
     <msg>
-      <unable-save-node>Node '{0}' has been newly created. Please save session before performing this action.</unable-save-node>
-      <save-node-success>Node '{0}' has been saved.</save-node-success>
-      <node-copied>Node '{0}' has been copied.</node-copied>
-      <node-cut>Node '{0}' has been cut.</node-cut>
-      <remove-root>You cannot remove the root node.</remove-root>
-      <node-remove-success>Node '{0}' has been removed.</node-remove-success>
+      <unable-save-node>'{0}' has been created. Please save session to validate this action.</unable-save-node>
+      <save-node-success>'{0}' has been saved.</save-node-success>
+      <node-copied>'{0}' has been copied.</node-copied>
+      <node-cut>'{0}' has been cut.</node-cut>
+      <remove-root>You can't remove the root folder.</remove-root>
+      <node-remove-success>'{0}' has been removed.</node-remove-success>
     </msg>
     <tooltip>
       <Rename>Rename</Rename>
@@ -538,11 +538,11 @@
   </UIDocumentWorkspace>
   <UIDocumentInfo>
     <msg>
-      <access-denied>Access denied. You cannot access node '{0}'.</access-denied>
-      <null-exception>Item not found. It was either removed or changed, or you do not have permission to access this node.</null-exception>
+      <access-denied>Access denied. You can't access '{0}'.</access-denied>
+      <null-exception>Item not found. It was either removed or changed, or you don't have the access permission.</null-exception>
       <confirm-deleteattachment>Are you sure you want to remove this attachment file?</confirm-deleteattachment>
       <confirm-deleteattcomment>Are you sure you want to remove this comment?</confirm-deleteattcomment>
-      <access-denied-exception>Access denied. You may not have reading privileges, or the node may have been removed or changed.</access-denied-exception>
+      <access-denied-exception>Access denied. You may not have reading privileges, or the documen may have been removed or changed.</access-denied-exception>
       <path-not-found>This element was deleted or changed. Please click the Refresh button.</path-not-found>
     </msg>
     <tooltip>
@@ -601,7 +601,7 @@
       <OpenDocument>Remote Edit</OpenDocument>
       <EditProperty>Edit Document Properties</EditProperty>
       <UploadNewVersion>Upload a new version</UploadNewVersion>
-      <CreateNewVersion>Create a new version</CreateNewVersion>
+      <CreateNewVersion>Save as new version</CreateNewVersion>
     </event>
   </ECMContextMenu>
  
@@ -733,8 +733,8 @@
       <name-invalid>Please enter the property name.</name-invalid>
       <unable-create>Cannot add properties.</unable-create>
       <value-invalid>Please enter the value.</value-invalid>
-      <node-checkedin>You must check out this node before adding a property.</node-checkedin>
-      <can-not-add>You cannot add properties to this node. This is only allowed for the node type nt:unstructured.</can-not-add>
+      <node-checkedin>You must check out this item before adding a property.</node-checkedin>
+      <can-not-add>You can't add properties to this item. This is only allowed for the type nt:unstructured.</can-not-add>
       <propertyName-invalid>The property name must include namespace (e.g. namespace:name).</propertyName-invalid>
       <propertyName-exist>The property '{0}' already exists.</propertyName-exist>
       <propertyValu-null>Some values may be null.</propertyValu-null>
@@ -795,7 +795,7 @@
       <selectUser>Select User</selectUser>
     </label>
     <msg>
-      <not-change-owner>'{0}' is the owner of this node and has full control permission.</not-change-owner>
+      <not-change-owner>'{0}' is the owner of this item and has full control permission.</not-change-owner>
     </msg>
   </UIGroupSelector>
   <UIPermissionForm>
@@ -807,7 +807,7 @@
       <add_node>Modify Right</add_node>
       <remove>Remove Right</remove>
     </label>
-    <title>Add a permission to that node</title>
+    <title>Add a permission</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>#{word.save}</Save>
@@ -914,7 +914,7 @@
   </ViewSearch>
   <UISearchResult>
     <msg>
-      <not-support>There is no View template for this node.</not-support>
+      <not-support>There is no View template for this document.</not-support>
       <empty>No results found.</empty>
       <access-denied>You cannot open this folder, either because it no longer exists or because you do not have the right to access it.</access-denied>
       <query-invalid>The query is invalid.</query-invalid>
@@ -939,15 +939,15 @@
       <datecreatedDESC>Sort by created date in descending order</datecreatedDESC>
     </title>
     <tooltip>
-      <View>View this node</View>
+      <View>View this item</View>
       <OpenFolder>Go to folder</OpenFolder>
     </tooltip>
   </UISearchResult>
   <UIShowAllOwnedByUserResult>
     <msg>
-      <not-support>There is no View template for this node</not-support>
+      <not-support>There is no View template for this document</not-support>
       <empty>No results found.</empty>
-      <access-denied>You cannot view this node, either because this template is not supported or because access is denied.</access-denied>
+      <access-denied>You can't view this document, either because this template is not supported or because access is denied.</access-denied>
       <query-invalid>The query is invalid</query-invalid>
     </msg>
     <header>
@@ -970,15 +970,15 @@
       <datecreatedDESC>Sort by Created date in descending order</datecreatedDESC>
     </title>
     <tooltip>
-      <View>View this node</View>
+      <View>View this item</View>
       <OpenFolder>Go to Folder</OpenFolder>
     </tooltip>
   </UIShowAllOwnedByUserResult>
   <UIShowAllFavouriteResult>
     <msg>
-      <not-support>There is no View template for this node</not-support>
+      <not-support>There is no View template for this item</not-support>
       <empty>No results found</empty>
-      <access-denied>You cannot view this node, either because this template is not supported or because access is denied.</access-denied>
+      <access-denied>You can't view this item, either because this template is not supported or because access is denied.</access-denied>
       <query-invalid>The query is invalid</query-invalid>
     </msg>
     <header>
@@ -1001,15 +1001,15 @@
       <datecreatedDESC>Sort by created date in descending order</datecreatedDESC>
     </title>
     <tooltip>
-      <View>View this Node</View>
+      <View>View this item</View>
       <OpenFolder>Go to Folder</OpenFolder>
     </tooltip>
   </UIShowAllFavouriteResult>
   <UIShowAllHiddenResult>
     <msg>
-      <not-support>There is no View template for this node.</not-support>
+      <not-support>There is no View template for this item.</not-support>
       <empty>No results found.</empty>
-      <access-denied>You cannot view this node, either because this template is not supported or because access is denied.</access-denied>
+      <access-denied>You can't view this item, either because it has no View template or because you don't have access to it.</access-denied>
       <query-invalid>The query is invalid.</query-invalid>
     </msg>
     <header>
@@ -1033,16 +1033,16 @@
       <datecreatedDESC>Sort by created date in descending order</datecreatedDESC>
     </title>
     <tooltip>
-      <View>View this Node</View>
+      <View>View this Item</View>
       <OpenFolder>Go to Folder</OpenFolder>
       <RemoveHiddenAttribute>Remove Hidden Attribute</RemoveHiddenAttribute>
     </tooltip>
   </UIShowAllHiddenResult>
   <UIShowAllTrashResult>
     <msg>
-      <not-support>There is no View template for this node.</not-support>
+      <not-support>There is no View template for this item.</not-support>
       <empty>No results found</empty>
-      <access-denied>You cannot view this node, either because this template is not supported or because access is denied.</access-denied>
+      <access-denied>You can't view this item, either because it has no View template or because you don't have access to it.</access-denied>
       <query-invalid>The query is invalid.</query-invalid>
     </msg>
     <header>
@@ -1065,7 +1065,7 @@
       <datecreatedDESC>Sort by created date in descending order</datecreatedDESC>
     </title>
     <tooltip>
-      <View>View this Node</View>
+      <View>View this Item</View>
       <OpenFolder>Go to Folder</OpenFolder>
       <DeletePermanently>Delete permanently</DeletePermanently>
       <RestoreFromTrash>Restore from Trash</RestoreFromTrash>
@@ -1321,7 +1321,7 @@
       <Cancel>#{word.cancel}</Cancel>
       <Export>Export</Export>
     </action>
-    <title>Export Node</title>
+    <title>Export</title>
   </UIExportNode>
   <!--
   ###############################################################################
@@ -1366,8 +1366,8 @@
       <error-removing-referenced-version>This version is referenced and can't be removed.</error-removing-referenced-version>
       <confirm-restore>Are you sure you want to restore this version?</confirm-restore>
       <confirm-delete>Are you sure you want to remove this version?</confirm-delete>
-      <not-checked-out>You have to check out this node before restoring.</not-checked-out>
-      <invalid-item-state>You cannot restore this version, either because one or more items were deleted or moved during another session.</invalid-item-state>
+      <not-checked-out>You have to check out this document before restoring.</not-checked-out>
+      <invalid-item-state>You can't restore this version, either because one or more items were deleted or moved by another session.</invalid-item-state>
     </msg>
     <action>
       <close>#{word.close}</close>
@@ -1392,8 +1392,8 @@
       <noVersion>No Version</noVersion>
     </msg>
     <eventName>
-      <e_1>Node Added</e_1>
-      <e_2>Node Removed</e_2>
+      <e_1>Added</e_1>
+      <e_2>Document Removed</e_2>
       <e_4>Property Added</e_4>
       <e_16>Property Changed</e_16>
       <e_8>Property Removed</e_8>
@@ -1433,13 +1433,13 @@
   -->
   <UIActivateVersion>
     <label>
-      <note>Versioning has not been activated for this node.</note>
+      <note>Versioning has not been activated for this document.</note>
       <question>Are you sure you want to activate it?</question>
       <button-active>Activate</button-active>
       <button-cancel>#{word.cancel}</button-cancel>
     </label>
     <msg>
-      <access-denied>You do not have permission to activate versioning on this node</access-denied>
+      <access-denied>You don't have permission to activate versioning on this document</access-denied>
     </msg>
   </UIActivateVersion>
   <!--
@@ -1462,7 +1462,7 @@
       </msg>
     </grid>
     <msg>
-      <node-type-invalid>Only the document node type can be enrolled.</node-type-invalid>
+      <node-type-invalid>Only documents can be enrolled.</node-type-invalid>
       <already-enroled>This document has already been enrolled.</already-enroled>
     </msg>
   </UIActivePublication>
@@ -1473,7 +1473,7 @@
   -->
   <UIActivateAuditing>
     <label>
-      <note>Auditing has not been activated for this node.</note>
+      <note>Auditing has not been activated for this document.</note>
       <question>Are you sure you want to activate?</question>
     </label>
     <action>
@@ -1516,7 +1516,7 @@
       <Cancel>#{word.cancel}</Cancel>
       <Import>Import</Import>
     </action>
-    <title>Import Node</title>
+    <title>Import</title>
     <msg>
       <import-successful>Imported successfully.</import-successful>
       <filename-invalid>Browse an .xml file for the 'Upload File' field to import.</filename-invalid>
@@ -1524,8 +1524,8 @@
       <xml-invalid>There is an invalid character at position [row, column]:{0} in {1} file</xml-invalid>
       <mimetype-invalid>You can only import .xml or .zip files.</mimetype-invalid>
       <access-denied>Access denied. You are not allowed to import there.</access-denied>
-      <constraint-violation-exception>Impossible to import data. The type '{0}' is not allowed in this location.</constraint-violation-exception>
-      <item-exists-exception>An incoming referenceable node has the same UUID as an existing node in the workspace.</item-exists-exception>
+      <constraint-violation-exception>Impossible to import data. The type '{0}' is not allowed at this location.</constraint-violation-exception>
+      <item-exists-exception>An incoming item has the same UUID as an existing item in the workspace.</item-exists-exception>
     </msg>
   </UIImportNode>
   <!--
@@ -1573,7 +1573,7 @@
   <UIViewVersion>
     <label>
       <nodeType>Node Type</nodeType>
-      <nodeName>Node Name</nodeName>
+      <nodeName>Name</nodeName>
       <VersionNumber>Version Number</VersionNumber>
       <VersionLabels>Version Labels</VersionLabels>
       <VersionDate>Version Date</VersionDate>
@@ -1609,7 +1609,7 @@
       <action>Actions</action>
     </header>
     <msg>
-      <access-denied>Access denied. You do not have access permission in this node.</access-denied>
+      <access-denied>Access denied. You don't have access permission.</access-denied>
       <confirm-delete>Are you sure you want to delete this reference?</confirm-delete>
     </msg>
     <action>
@@ -1629,7 +1629,7 @@
       <action>Action</action>
     </header>
     <info>
-      <child-not-found>This node does not have any child nodes.</child-not-found>
+      <child-not-found>This item doesn't have any child.</child-not-found>
     </info>
   </UITreeList>
   <!--
@@ -1685,8 +1685,8 @@
       <clearall>Clear All</clearall>
     </action>
     <msg>
-      <unable-pasted>Cannot paste this node.</unable-pasted>
-      <node-pasted>Node {0} has been pasted at location {1}. This operation has already been saved.</node-pasted>
+      <unable-pasted>Can't paste this item.</unable-pasted>
+      <node-pasted>{0} has been pasted at location {1}. This operation has already been saved.</node-pasted>
     </msg>
   </UIClipboard>
   <!--
@@ -1727,15 +1727,15 @@
 </tooltip>
     <msg>
       <cannot-save>An error occurred while saving the document.</cannot-save>
-      <in-versioning>Please check out the current node before adding a new node.</in-versioning>
+      <in-versioning>Please check out the current folder before adding a new item.</in-versioning>
       <not-support>Cannot load the template of '{0}'.</not-support>
       <value-invalid>'{0}' is a needed value.</value-invalid>
       <repository-exception>An error occurred while saving the document.</repository-exception>
       <!--DMS 2.4.x; ECM-3543-->
-      <repository-exception-permission>You do not have permission to add a new document to this node.</repository-exception-permission>
+      <repository-exception-permission>You don't have permission to add a new document to this folder.</repository-exception-permission>
       <not-allowed-same-name-sibling>You cannot save this document. It is not allowed to have the same name as its sibling.</not-allowed-same-name-sibling>
       <numberformat-exception>You cannot save this document. The name provided must be in numerical format.</numberformat-exception>
-      <item-not-found>Item not found. This node (or its ancestor) may have been deleted. Please click the Refresh button.</item-not-found>
+      <item-not-found>Document not found. This document (or its ancestor) may have been deleted. Please click the Refresh button.</item-not-found>
     </msg>
   </UIDocumentForm>
   <!--
@@ -1800,7 +1800,7 @@
       <action>Action</action>
     </header>
     <msg>
-      <remove-popup-first>You must close the edit pop-up before deleting this node.</remove-popup-first>
+      <remove-popup-first>You must close the edit pop-up before deleting this item.</remove-popup-first>
       <confirm-delete-action>Are you sure you want to delete this action?</confirm-delete-action>
       <template-empty>The '{0}' template is null or empty.</template-empty>
       <template-null>The template is either null or you do not have permission to access this template.</template-null>
@@ -1826,7 +1826,7 @@
       <numberformat-exception>You cannot save this action. The name provided must be in numerical format.</numberformat-exception>
       <existed-action>The action name '{0}' already exists. Please select another one.</existed-action>
       <unable-add-action>Cannot add this action.</unable-add-action>
-      <unable-add>Cannot add this action. This node is either root or you do not have permision.</unable-add>
+      <unable-add>Can't add this action. This item is either the root folder or you don't have the permission to edit.</unable-add>
       <not-support>Dialog '{0}' is not supported.</not-support>
       <no-permission-add>Access denied. You do not have the right to add an action here.</no-permission-add>
       <access-denied>Access denied. You do not have permission to access this template.</access-denied>
@@ -1865,7 +1865,7 @@
   <UIAddressBar>
     <msg>
       <path-not-found>Path not found.</path-not-found>
-      <access-denied>Access denied. You do not have the right to read the node.</access-denied>
+      <access-denied>Access denied. You don't have the permission to read.</access-denied>
       <keyword-not-support>The keyword is invalid. Some characters are not supported.</keyword-not-support>
     </msg>
     <label>
@@ -1874,8 +1874,8 @@
     </label>
     <title>
       <exeButton>Go</exeButton>
-      <backButton>Back to the previous node</backButton>
-      <showHistory>Show the history address</showHistory>
+      <backButton>Back</backButton>
+      <showHistory>Show History</showHistory>
       <changeNode>Change Node</changeNode>
     </title>
   </UIAddressBar>
@@ -1937,7 +1937,7 @@
   -->
   <UIViewMetadataContainer>
     <msg>
-      <path-not-found>Node does not support this view.</path-not-found>
+      <path-not-found>The document does not support this view.</path-not-found>
     </msg>
   </UIViewMetadataContainer>
   <!--
@@ -1958,7 +1958,7 @@
   </metadataForm>
   <UIViewMetadataTemplate>
     <msg>
-      <access-denied>Access denied. You are either not the owner or do not have edit permission in this node.</access-denied>
+      <access-denied>Access denied. Either you are not the owner or don't have edit permission.</access-denied>
     </msg>
   </UIViewMetadataTemplate>
   <!--
@@ -2034,7 +2034,7 @@
       <private>Private</private>
       <state>State</state>
       <visibility>Visibility</visibility>
-      <nodeName>Node Name:</nodeName>
+      <nodeName>Name:</nodeName>
       <lifecycleName>Lifecycle Name</lifecycleName>
       <stateName>State Name</stateName>
     </label>
@@ -2058,7 +2058,7 @@
   </UIWorkspaceList>
   <pathSelector>
     <title>
-      <UIOneNodePathSelector>Node Selector</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Selector</UIOneNodePathSelector>
     </title>
   </pathSelector>
   <!--
@@ -2166,9 +2166,9 @@
     </label>
     <msg>
       <mimetype-incorrect>Incorrect file type. Thumbnails can only be created from .JPG, .PNG or .GIF files.</mimetype-incorrect>
-      <access-denied>Access denied. You do not have permission to add a thumbnail to this node.</access-denied>
+      <access-denied>Access denied. You don't have permission to add a thumbnail.</access-denied>
       <confirm-delete>Are you sure you want to remove this thumbnail?</confirm-delete>
-      <is-checked-in>This node is checked in. Please check out before performing any action.</is-checked-in>
+      <is-checked-in>This item is checked in. Please check out before performing any action.</is-checked-in>
       <fileName-error>Please select a file to upload.</fileName-error>
     </msg>
     <title>
@@ -2272,7 +2272,7 @@
 
   <PopupSelectPath>
     <title>
-      <UIOneNodePathSelector>Select Node</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Select Path</UIOneNodePathSelector>
     </title>
   </PopupSelectPath>
 
@@ -2302,7 +2302,7 @@
   <UISymLinkForm>
     <label>
       <symLinkName>Symlink Name</symLinkName>
-      <pathNode>Path Node</pathNode>
+      <pathNode>Path</pathNode>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -2313,16 +2313,16 @@
       <name-invalid>Please enter the symlink name.</name-invalid>
       <name-not-allowed>This name is not allowed.</name-not-allowed>
       <fileName-error>The file name is invalid.</fileName-error>
-      <constraint-violation>You cannot add the'{0}' node type to the current node.</constraint-violation>
-      <repository-exception>Access denied. You do not have permission to add symlink to this node.</repository-exception>
+      <constraint-violation>You can't add an item of type '{0}' here.</constraint-violation>
+      <repository-exception>Access denied. You don't have permission to add a symlink here.</repository-exception>
       <numberformat-exception>You cannot save this folder. The name provided must be in numerical format.</numberformat-exception>
-      <path-node-invalid>Please enter the path node.</path-node-invalid>
+      <path-node-invalid>Please enter the path.</path-node-invalid>
       <path-node-not-allowed>This name is not allowed.</path-node-not-allowed>
-      <non-node>Please select the trust target node; you may not have the right to read this node.</non-node>
-      <cannot-save>You cannot add a symlink for this node type.</cannot-save>
-      <item-exists-exception>The node name already exists.</item-exists-exception>
-      <translation-node-same-language-default>The translation node has the same language as the default language of current node.</translation-node-same-language-default>
-      <UnsupportedRepositoryOperationException>This target node is not referred.</UnsupportedRepositoryOperationException>
+      <non-node>Please select the trust target; you may not have the rights to read this item.</non-node>
+      <cannot-save>You can't add a symlink for this type of document.</cannot-save>
+      <item-exists-exception>An item with this name already exists.</item-exists-exception>
+      <translation-node-same-language-default>The translated document has the same language as the default language of current document.</translation-node-same-language-default>
+      <UnsupportedRepositoryOperationException>This target item is not referred.</UnsupportedRepositoryOperationException>
     </msg>
   </UISymLinkForm>
   
@@ -2342,22 +2342,22 @@
       <name-invalid>Please enter the symlink name.</name-invalid>
       <name-not-allowed>This name is not allowed.</name-not-allowed>
       <fileName-error>The file name is invalid.</fileName-error>
-      <constraint-violation>You cannot add the'{0}' node type to the current node.</constraint-violation>
-      <repository-exception>Access denied. You do not have permission to add symlink to this node.</repository-exception>
+      <constraint-violation>You can't add the '{0}' type to the current item.</constraint-violation>
+      <repository-exception>Access denied. You don't have permission to add a symlink to this item.</repository-exception>
       <numberformat-exception>You cannot save this folder. The name provided must be in numerical format.</numberformat-exception>
-      <path-node-invalid>Please enter the path node.</path-node-invalid>
+      <path-node-invalid>Please enter the path.</path-node-invalid>
       <path-node-not-allowed>This name is not allowed.</path-node-not-allowed>
-      <non-node>Please select the trust target node; you may not have the right to read this node.</non-node>
+      <non-node>Please select the trust target; you may not have the right to read this node.</non-node>
       <cannot-save>An error occurred while creating the symlink.</cannot-save>
-      <item-exists-exception>The node name already exists.</item-exists-exception>
-      <translation-node-same-language-default>The translation node has the same language as the default language of current node.</translation-node-same-language-default>
-      <UnsupportedRepositoryOperationException>This target node is not referred.</UnsupportedRepositoryOperationException>
+      <item-exists-exception>An item with this name already exists.</item-exists-exception>
+      <translation-node-same-language-default>The translated document has the same language as the default language of current document.</translation-node-same-language-default>
+      <UnsupportedRepositoryOperationException>This target item is not referred.</UnsupportedRepositoryOperationException>
     </msg>
   </UIAddTranslationForm>
 
   <UIPopupSymLink>
     <title>
-      <UIOneNodePathSelector>Select Target Node</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Select Target Item</UIOneNodePathSelector>
     </title>
   </UIPopupSymLink>
   <UIPopupSymLink>
@@ -2375,9 +2375,9 @@
 
   <UIWorkingArea>
     <msg>
-      <create-link-problem>You cannot create a link for node '{0}' at '{1}'.</create-link-problem>
-      <dest-node-is-link>The destination node '{0}' is already a symlink, so you cannot create a symlink inside it.</dest-node-is-link>
-      <selected-is-link>The selected node '{0}' is already a link. You cannot create a link that points to another link.</selected-is-link>
+      <create-link-problem>You can't create a link for '{0}' at '{1}'.</create-link-problem>
+      <dest-node-is-link>The destination '{0}' is already a symlink, so you cannot create a symlink inside it.</dest-node-is-link>
+      <selected-is-link>The selected item '{0}' is already a link. You can't create a link to another link.</selected-is-link>
       <confirm-create-link>Do you want to create a link to this location?</confirm-create-link>
     </msg>
   </UIWorkingArea>
@@ -2460,7 +2460,7 @@
 <ReadOnly>Open Read-only</ReadOnly>
 <Cancel>Cancel</Cancel>
       <KeepBoth>Keep Both</KeepBoth>
-      <CreateNewVersion>Create a new version</CreateNewVersion>
+      <CreateNewVersion>Save as new version</CreateNewVersion>
     </label>
   </UIConfirmMessage>
 
@@ -2516,7 +2516,7 @@
 
   <UIPopupMenu>
     <msg>
-      <node-locked-other-person>This node or its parent node is being locked by another user, so you cannot delete it.</node-locked-other-person>
+      <node-locked-other-person>This item or its parent folder is locked by another user, so you can't delete it.</node-locked-other-person>
     </msg>
   </UIPopupMenu>
 
@@ -2551,7 +2551,7 @@
 
   <UIPopupMenu>
     <msg>
-      <can-not-unlock-node-is-checked-in>You cannot unlock because the node '{0}' (or its ancestor) is checked in.</can-not-unlock-node-is-checked-in>
+      <can-not-unlock-node-is-checked-in>You can't unlock because the '{0}' (or its parent folder) is checked in.</can-not-unlock-node-is-checked-in>
     </msg>
   </UIPopupMenu>
 
@@ -2560,12 +2560,12 @@
   -->
   <UIActionBar>
     <msg>
-      <cannot-enable-version>Cannot enable versioning node.</cannot-enable-version>
+      <cannot-enable-version>Can't activate versioning on this document.</cannot-enable-version>
     </msg>
   </UIActionBar>
   <UIPopupMenu>
     <msg>
-        <cannot-readsource>You cannot read data from the source node.</cannot-readsource>
+        <cannot-readsource>You can't read data from the source.</cannot-readsource>
     </msg>
   </UIPopupMenu>
   <UIUploadForm>
@@ -2845,7 +2845,7 @@
 
     <UIPopupMenu>
     <msg>
-      <node-locked-editing>You cannot edit this node with the path {0}. It is being locked by another user.</node-locked-editing>
+      <node-locked-editing>You can't edit  {0}. It's locked by another user.</node-locked-editing>
     </msg>
   </UIPopupMenu>
   <UITagStyleForm>
@@ -2939,12 +2939,12 @@
   </PathNode>
   <UIPopupPathFoRestore>
     <title>
-      <UIOneNodePathSelector>Select Parent Node</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Select Parent</UIOneNodePathSelector>
     </title>
   </UIPopupPathFoRestore>
   <rootNodeInfo>
     <title>
-      <AddRootNode>Add Root Node</AddRootNode>
+      <AddRootNode>Add Root</AddRootNode>
     </title>
   </rootNodeInfo>
 
@@ -3156,9 +3156,9 @@
   </lifecyclePhase>
   <UIPopupMenu>
   	<msg>
-<can-not-remove-locked-node>Node {0} is locked. You cannot move it to the Trash.</can-not-remove-locked-node>
-<can-not-remove-checked-in-node>Node {0} or its parent is checked in. You cannot move it to the Trash.</can-not-remove-checked-in-node>
-<access-denied-to-delete>Access denied. You cannot move node {0} to the Trash.</access-denied-to-delete>
+<can-not-remove-locked-node>{0} is locked. You can't move it to the Trash.</can-not-remove-locked-node>
+<can-not-remove-checked-in-node>{0} or its parent folder is checked in. You can't move it to the Trash.</can-not-remove-checked-in-node>
+<access-denied-to-delete>Access denied. You can't move {0} to the Trash.</access-denied-to-delete>
   	</msg>
   </UIPopupMenu>
   <UIPropertyForm>
@@ -3168,8 +3168,8 @@
   </UIPropertyForm>
   <UIWatchDocumentForm>
     <msg>
-      <node-is-locked>This node is locked. You cannot watch it.</node-is-locked>
-      <unknown-error>Some errors have occurred. You cannot watch this node.</unknown-error>
+      <node-is-locked>This item is locked. You cannot watch it.</node-is-locked>
+      <unknown-error>Some errors have occurred. You can't watch this document.</unknown-error>
     </msg>
   </UIWatchDocumentForm>   
   <UIActionForm>
@@ -3194,7 +3194,7 @@
 	    <Keep>Keep both</Keep>
 	    <Replace>Replace</Replace>
 	    <Canceled>Canceled</Canceled>
-      <UploadNewVersion>Upload new version</UploadNewVersion>
+      <UploadNewVersion>Upload a new version</UploadNewVersion>
     <Cancel>#{word.cancel}</Cancel>
 	    <AbortAllConfirmation>Do you want to abort all files in progress?</AbortAllConfirmation>
   	</label>

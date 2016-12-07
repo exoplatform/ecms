@@ -18,7 +18,7 @@
     </action>
     <msg>
       <not-support>You can't comment on this type of document.</not-support>
-      <not-checkedout>Düğüm üzerinde yorum yapmadan önce kullanıma almanız gerekir.</not-checkedout>
+      <not-checkedout>You must check out the document before commenting on it.</not-checkedout>
       <content-null>Boş bir yorum yayınlayamazsınız.</content-null>
     </msg>
   </UICommentForm>
@@ -46,8 +46,8 @@
     </button>
     <msg>
       <not-support>Bu belge türü için oy kullanamazsınız.</not-support>
-      <not-checkedout>Oylama öncesinde düğümü kontrol etmelisiniz.</not-checkedout>
-      <vote-restriction>Birden çok kez oy kullanamazsınız.</vote-restriction>
+      <not-checkedout>You must check out the document to vote.</not-checkedout>
+      <vote-restriction>You cannot vote more than one time.</vote-restriction>
     </msg>
   </UIVoteForm>
  
@@ -59,9 +59,9 @@
   <UIJCRExplorer>
     <msg>
       <refresh-session-success>Oturumu başarıyla yenilenmiştir.</refresh-session-success>
-      <no-node-history>Kök düğümdesiniz.</no-node-history>
+      <no-node-history>You are at the root.</no-node-history>
       <save-session-success>Tüm değişiklikler kaydedildi.</save-session-success>
-      <target-path-not-found>Bu düğüme erişemezsiniz, çünkü artık yok veya erişim yetkiniz yok.</target-path-not-found>
+      <target-path-not-found>You can't access this path, either because it doesn't exist anymore or because you don't have access permissions.</target-path-not-found>
     </msg>
   </UIJCRExplorer>
   <!--
@@ -159,8 +159,8 @@
     <label>
       <enableStructure>DMS yapısı etkinleştir:</enableStructure>
       <showSideBar>Kenar çubuğunu göster:</showSideBar>
-      <showHiddenNode>Gizli düğümleri göster:</showHiddenNode>
-      <showNonDocument>Belge olmayan düğümleri göster:</showNonDocument>
+      <showHiddenNode>Show Hidden Items:</showHiddenNode>
+      <showNonDocument>Show Non-document Items:</showNonDocument>
       <showRefDocuments>Başvurulan Belgeleri Görüntüle:</showRefDocuments>
       <enableDragAndDrop>Sürükle &amp; Bırak' ı etkinleştir:</enableDragAndDrop>
       <sortBy>Sıralama:</sortBy>
@@ -201,15 +201,15 @@
       <Back>#{word.back}</Back>
     </action>
     <msg>
-      <rename-successfull>Düğüm '{0}' '{1}' olarak başarıyla yeniden adlandırıldı.</rename-successfull>
-      <rename-denied>Erişim engellendi. Bu düğüm adını değiştiremezsiniz.</rename-denied>
+      <rename-successfull>'{0}' was renamed to '{1}' successfully.</rename-successfull>
+      <rename-denied>Access denied. You can't rename this item.</rename-denied>
       <fileName-invalid>Yeni adı geçersiz bir karakter içeriyor.</fileName-invalid>
       <newName-same-oldName>Yeni ad zaten var. Lütfen tekrar kontrol edin.</newName-same-oldName>
-      <version-exception>Bu düğüm (veya bu düğümün atası) kullanıma alınmamış.</version-exception>
-      <lock-exception>Bu düğüm kilitli. Lütfen yeniden adlandırmadan önce kilidi açın.</lock-exception>
-      <constraintViolation-exception>Düğüm '{0}' yeniden adlandırırken bir hata oluştu. Lütfen tekrar kontrol edin.</constraintViolation-exception>
+      <version-exception>This document (or one of its ancestors) is not checked out.</version-exception>
+      <lock-exception>This document is locked. Please unlock it before renaming.</lock-exception>
+      <constraintViolation-exception>An error occurred while renaming '{0}'. Please check again.</constraintViolation-exception>
       <unknown-prefix>'{0}' Öneki henüz kayıtlı değil.</unknown-prefix>
-      <rename-error>Bu düğüm yeniden adlandırırken bir hata oluştu. Lütfen tekrar kontrol edin.</rename-error>
+      <rename-error>An error occurred while renaming. Please check again.</rename-error>
     </msg>
   </UIRenameForm>
   <UIPopupWindow>
@@ -222,7 +222,7 @@
       <UIExportNode>Dışa aktar</UIExportNode>
       <UINodeTypeInfo>Düğüm Türü Bilgileri</UINodeTypeInfo>
       <UIVersionInfo>Sürüm Bilgisi</UIVersionInfo>
-      <UIActivateVersion>Versiyon etkinleştirme</UIActivateVersion>
+      <UIActivateVersion>Activate Versioning</UIActivateVersion>
       <UIAuditingInfo>Denetim Bilgileri</UIAuditingInfo>
       <UIActivateAuditing>Denetimi Etkinleştir</UIActivateAuditing>
       <UIPermissionManager>İzin Yönetimi</UIPermissionManager>
@@ -313,40 +313,40 @@
       <UploadNewVersion>Yeni bir sürümünü yükle</UploadNewVersion>
     </tooltip>
     <msg>
-      <cannot-action-in-rootnode>Kök düğümde bu eylemi gerçekleştiremezsiniz.</cannot-action-in-rootnode>
+      <cannot-action-in-rootnode>You can't perform this action at root.</cannot-action-in-rootnode>
       <node-checkedin>Önce kontrol gerekir.</node-checkedin>
-      <cannot-enable-version-rootnode>Kök düğümü için sürüm oluşturma etkinleştirilemiyor.</cannot-enable-version-rootnode>
-      <cannot-enable-publication-rootnode>Kök düğümünün yayını etkinleştiremiyor.</cannot-enable-publication-rootnode>
+      <cannot-enable-version-rootnode>Can't activate versioning on root.</cannot-enable-version-rootnode>
+      <cannot-enable-publication-rootnode>Can't activate publication at root.</cannot-enable-publication-rootnode>
       <manage-publication>
-        <not-supported-nodetype>Yayın yalnızca belge düğümü destekler.</not-supported-nodetype>
+        <not-supported-nodetype>Only documents can be published.</not-supported-nodetype>
         <no-publication-lifecycle>Hiçbir yayın ömrü yapılandırılamadı.</no-publication-lifecycle>
       </manage-publication>
-      <unsubcriber-lifecycle>Düğümün aboneliği zaten yok.</unsubcriber-lifecycle>
-      <not-supported-nodetype>Abonelik iptali ömrü sadece belge düğümü desteklenir.</not-supported-nodetype>
-      <unsubcriber-lifecycle-finish>Düğümün aboneliği  başarıyla kaldırıldı.</unsubcriber-lifecycle-finish>
-      <access-false>Düğüm bir makale değil veya kontrol ediliyor.</access-false>
+      <unsubcriber-lifecycle>The document was already unsubscribed.</unsubcriber-lifecycle>
+      <not-supported-nodetype>This operation is only supported for documents.</not-supported-nodetype>
+      <unsubcriber-lifecycle-finish>The document was unsubscribed successfully.</unsubcriber-lifecycle-finish>
+      <access-false>The document is not an article or checked in.</access-false>
       <unsupported-action>Bu işlem desteklenmiyor.</unsupported-action>
-      <not-relationable>Bu düğüm, başka bir düğüm için ilgili bağlantıları henüz görmemiştir.</not-relationable>
-      <node-pasted>'{0}' Düğümü '{1}' konumuna yapıştırılmış. Bu işlem zaten kaydedildi.</node-pasted>
-      <no-node-selected>Hiçbir düğüm kopyalanamaz.</no-node-selected>
-      <unable-edit>'{0}' düğümü ile  '{1}' düğüm türü düzenlemek için desteklenmiyor.</unable-edit>
-      <not-support>Seçili düğümün düzenleyemezsiniz.</not-support>
-      <template-null>Bu düğümün kullanılabilir hiçbir iletişim yoktur.</template-null>
+      <not-relationable>This document has no relations.</not-relationable>
+      <node-pasted>'{0}' has been pasted at the location '{1}'. This operation has already been saved.</node-pasted>
+      <no-node-selected>Nothing to copy.</no-node-selected>
+      <unable-edit>Editing documents of type '{1}' like '{0}' is not supported.</unable-edit>
+      <not-support>Can't edit the selected item.</not-support>
+      <template-null>This document has no form template.</template-null>
       <keyword-null>Arama için hiçbir anahtar kelime yoktur.</keyword-null>
       <not-found>Sonuç bulunamadı.</not-found>
       <keyword-not-allow>Bu anahtar sözcüğe izin verilmez.</keyword-not-allow>
-      <is-not-referenable>Düğüm '{0}' referenceable olamaz.</is-not-referenable>
-      <access-denied>Erişim engellendi. Bu düğüme izin düzenleme yetkiniz bulunmamaktadır.</access-denied>
-      <access-add-denied>Erişim engellendi. Bu düğüme izin ekleme yetkiniz bulunmamaktadır.</access-add-denied>
+      <is-not-referenable>'{0}' can't be referenceable.</is-not-referenable>
+      <access-denied>Access denied. You don't have edit permission for this item.</access-denied>
+      <access-add-denied>Access denied. You don't have permission to add items here.</access-add-denied>
       <item-existed>Bu düğümü zaten var. Aynı adı iki kez kullanamazsınız.</item-existed>
       <removed-hidden-mixin>Gizli mixin başarıyla kaldırıldı.</removed-hidden-mixin>
       <added-hidden-mixin>Gizli mixin başarıyla eklendi.</added-hidden-mixin>
       <not-supported>Bu işlev yalnızca bu belge türü için destekleniyor.</not-supported>
-      <empty-file-type>Belgeyi bu düğüme ekleyemezsiniz.</empty-file-type>
-      <unsupported-watch>Yalnızca belge düğümü izlenebilir.</unsupported-watch>
-      <watch-checkedin>İzlemeden önce düğümü kontrol etmelisiniz.</watch-checkedin>
-      <unsupported-tagging>Yalnızca belge düğümü etiketlenebilir.</unsupported-tagging>
-      <tagnode-checkedin>Etiketlemeden önce düğümü kontrol etmelisiniz.</tagnode-checkedin>
+      <empty-file-type>You can't add a document here.</empty-file-type>
+      <unsupported-watch>Only documents can be watched.</unsupported-watch>
+      <watch-checkedin>You must check out the document before watching.</watch-checkedin>
+      <unsupported-tagging>Only documents can be tagged.</unsupported-tagging>
+      <tagnode-checkedin>You must check out the document before tagging.</tagnode-checkedin>
     </msg>
     <title>
       <select-tab>Sekmeyi Seçin</select-tab>
@@ -361,48 +361,48 @@
   </UIActionBar>
   <UIPopupMenu>
     <msg>
-      <has-not-permission>Erişim engellendi. Bu düğüme izin ekleme yetkiniz bulunmamaktadır.</has-not-permission>
-      <has-not-edit-permission>Erişim engellendi. Bu düğüm üzerinde düzenleme izniniz yok. Lütfen yöneticinize başvurun.</has-not-edit-permission>
-      <cannot-login-node>Düğüme erişemez ve yapıştıramazsınız.</cannot-login-node>
-      <cannot-paste-nodetype>Düğüme yapıştıramazsınız.</cannot-paste-nodetype>
-      <has-not-permission-unlok>Bu düğüm kilidini açmak için izniniz yok.</has-not-permission-unlok>
-      <bound-exception>Bu düğümü yeniden adlandırma izniniz yok. Lütfen yöneticinize başvurun.</bound-exception>
-      <bound-move-exception>Düğümü, alt düğüme taşıyamazsınız.</bound-move-exception>
-      <does-not-support-auditing>Bu düğüm üzerinde Denetimi etkinleştirilemezsiniz.</does-not-support-auditing>
-      <can-not-rename-node>Bu düğüm yeniden adlandırma izniniz yok. Yetki almak için yöneticinize başvurun.</can-not-rename-node>
-      <can-not-cut-node>Bu düğüm kesmek için izniniz yok. Lütfen yöneticinize başvurun.</can-not-cut-node>
-      <can-not-remove-node>Bu düğüm kaldırmak için yeterli izniniz yok. Lütfen yöneticinize başvurun.</can-not-remove-node>
-      <can-not-lock-node>Düğümü {0} kilitlemek için izniniz yok. Lütfen yöneticinize başvurun.</can-not-lock-node>
-      <can-not-unlock-node>Bu düğüm kilidini açmak için izniniz yok. Lütfen yöneticinize başvurun.</can-not-unlock-node>
-      <no-node>Lütfen yapıştırmadan önce en az bir düğüm seçin.</no-node>
-      <can-not-paste-node>Bu düğüm kaldırmak için yeterli izniniz yok. Lütfen yöneticinize başvurun.</can-not-paste-node>
-      <can-not-move-node>Bu düğüme taşımak için gerekli izniniz yok. Lütfen yöneticinize başvurun.</can-not-move-node>
-      <does-not-support-versioning>Bu düğüme taşımak için gerekli izniniz yok. Lütfen yöneticinize başvurun.</does-not-support-versioning>
+      <has-not-permission>Access denied. You don't have permissions to add in this item.</has-not-permission>
+      <has-not-edit-permission>Access denied. You don't have edit permission here. Please contact the administrator.</has-not-edit-permission>
+      <cannot-login-node>You can't access and paste an item here.</cannot-login-node>
+      <cannot-paste-nodetype>You can't paste this type of item here.</cannot-paste-nodetype>
+      <has-not-permission-unlok>You don't have permission to unlock this document.</has-not-permission-unlok>
+      <bound-exception>You don't have the permission to rename this item. Please contact the administrator.</bound-exception>
+      <bound-move-exception>You can't move an item to itself or in a subfolder.</bound-move-exception>
+      <does-not-support-auditing>You can't activate auditing here.</does-not-support-auditing>
+      <can-not-rename-node>You don't have permission to rename this item. Please contact the administrator to get the necessary rights.</can-not-rename-node>
+      <can-not-cut-node>You don't have permission to cut this item. Please contact the administrator.</can-not-cut-node>
+      <can-not-remove-node>You don't have permission to remove this item. Please contact the administrator.</can-not-remove-node>
+      <can-not-lock-node>You don't have permission to lock {0}. Please contact the administrator.</can-not-lock-node>
+      <can-not-unlock-node>You don't have permission to unlock this item. Please contact the administrator.</can-not-unlock-node>
+      <no-node>Please select at least one item before pasting.</no-node>
+      <can-not-paste-node>You don't have permission to move to this item. Please contact the administrator.</can-not-paste-node>
+      <can-not-move-node>You don't have permission to move this item. Please contact the administrator.</can-not-move-node>
+      <does-not-support-versioning>You don't have permission to move. Please contact the administrator.</does-not-support-versioning>
       <path-not-found>Bu öğe silinmiş veya değişmiş. Lütfen Yenile düğmesini tıklayın.</path-not-found>
-      <paste-lock-exception>Kaynak veya hedef düğüm kilitli olduğundan, '{0}' bu düğüme yapıştıramazsınız.</paste-lock-exception>
-      <can-not-checkin-node>Bu düğümü kontrol edemezsiniz. Lütfen doğru izinlere sahip olduğunuzu denetleyin.</can-not-checkin-node>
-      <can-not-checkout-node>Bu düğümü kontrol edemezsiniz. Lütfen doğru izinlere sahip olduğunuzu denetleyin.</can-not-checkout-node>
-      <move-constraint-exception>Düğümü taşırken hata oluştu.</move-constraint-exception>
-      <not-lock-owner>Düğümü siz kilitlemediğiniz için kilidi kaldıramazsınız.</not-lock-owner>
-      <is-checked-in>Bu düğümü yeniden adlandırmadan önce kontrol edin.</is-checked-in>
-      <is-checked-in-lock>Bu düğümü kilitlemeden önce kontrol edin.</is-checked-in-lock>
-      <cant-lock>Bu düğümü kilitleyemezsiniz.</cant-lock>
+      <paste-lock-exception>'{0}' can't be pasted here. Make sure it is not locked nor this folder. Also check that no related document is locked.</paste-lock-exception>
+      <can-not-checkin-node>You can't check in this item. Please check that you have the necessary permissions.</can-not-checkin-node>
+      <can-not-checkout-node>You can't check out this itel. Please check that you have the necessary permissions.</can-not-checkout-node>
+      <move-constraint-exception>An error occurred while moving this item.</move-constraint-exception>
+      <not-lock-owner>You can't unlock this item because you are not the lock owner.</not-lock-owner>
+      <is-checked-in>Please check out this item before renaming.</is-checked-in>
+      <is-checked-in-lock>Please check out this item before locking.</is-checked-in-lock>
+      <cant-lock>You can't lock this document.</cant-lock>
       <node-locked>Öğe yolu {0} veya üst düzey ile kilitlenir.</node-locked>
-      <can-not-delete>Lütfen bu düğümü silmeden önce kapatın.</can-not-delete>
-      <can-not-delete-version>Bu düğümü silemezsiniz. Sürüm yönetimi çalışmaktadır.</can-not-delete-version>
-      <not-support>Seçili düğümü silemezsiniz. Lütfen başka bir düğüm seçin.</not-support>
-      <current-node-not-allow-paste>Kopyalanan düğüm türünü geçerli düğüme yapıştıramazsınız.</current-node-not-allow-paste>
-      <copied-node-in-versioning>Kopyalanan düğümü yapıştıramazsınız. Sürüm yönetimi çalışmaktadır.</copied-node-in-versioning>
-      <parent-node-locked>Düğüm '{0}' kilidini açmak için izniniz yok.</parent-node-locked>
-      <this-node-locked-by-parent>Bu düğüm kilidi açılamıyor. Üst düğüm tarafından kilitlendi.</this-node-locked-by-parent>
-      <paste-node-same-name>Hedef klasörde aynı adlı bir düğüm yapıştıramazsınız.</paste-node-same-name>
-      <has-not-add-permission>Yeni bir düğüm eklemek için izniniz yok.</has-not-add-permission>
-      <node-cutting>Düğüm kesilmiştir. Buraya yapıştıramazsınız.</node-cutting>
-      <access-denied>Erişim engellendi. Bu düğümde izniniz olmayabilir.</access-denied>
-      <remove-verion-exception>Bu düğümü kaldıramzsınız çünkü düğüm (yada üstü)  kontrol ediliyor.</remove-verion-exception>
-      <remove-referentialIntegrityException>Bu düğümü silemezsiniz çünkü bir başvuru yapılmış.</remove-referentialIntegrityException>
-      <constraintviolation-exception>Zorunlu öğe jcr:uuid bulunamadı. Düğüm silinmiş veya değiştirmiş. Lütfen Yenile düğmesini tıklatın.</constraintviolation-exception>
-      <path-not-found-exception>Bu öğe silinmiş veya değişmiş. Lütfen Yenile düğmesini tıklatın.</path-not-found-exception>
+      <can-not-delete>Please close this item before deleting.</can-not-delete>
+      <can-not-delete-version>You can't delete this document. It's versioned.</can-not-delete-version>
+      <not-support>You can't delete the selected item. Please select another one.</not-support>
+      <current-node-not-allow-paste>You can't paste the copied item there.</current-node-not-allow-paste>
+      <copied-node-in-versioning>You can't paste the copied item here because it's versioned.</copied-node-in-versioning>
+      <parent-node-locked>You don't have permission to unlock '{0}'.</parent-node-locked>
+      <this-node-locked-by-parent>You can't unlock this item. Parent folder is locked.</this-node-locked-by-parent>
+      <paste-node-same-name>Can't paste this item here. An item with the same name already exists in the destination folder.</paste-node-same-name>
+      <has-not-add-permission>You don't have the permission to add here.</has-not-add-permission>
+      <node-cutting>Item is being cut. You can't paste it here.</node-cutting>
+      <access-denied>Access denied. You may not have the permission.</access-denied>
+      <remove-verion-exception>You can't remove this document because it is checked in.</remove-verion-exception>
+      <remove-referentialIntegrityException>You can't delete this item because it is currently referenced by another one.</remove-referentialIntegrityException>
+      <constraintviolation-exception>The mandatory property jcr:uuid was not found. The document may have been deleted or changed. Please click the Refresh button.</constraintviolation-exception>
+      <path-not-found-exception>This document was deleted or changed. Please click the Refresh button.</path-not-found-exception>
       <not-exist-categories>Kategori yok.</not-exist-categories>
       <lock-node-read-only>Bu dosya {0} kullanıcısı tarafından kilitlenmiştir. Salt okunur olarak açılsın mı?</lock-node-read-only>
     </msg>
@@ -428,12 +428,12 @@
       <title-invalid>Lütfen klasör başlığı girin.</title-invalid>
       <name-not-allowed>Bu ad geçerli değil.</name-not-allowed>
       <fileName-error>Dosya adı geçersiz.</fileName-error>
-      <constraint-violation>Geçerli düğüm '{0}' düğüm türünü eklemenize izin vermez.</constraint-violation>
+      <constraint-violation>You can't add a document of type '{0}' here.</constraint-violation>
       <repository-exception>Beklenmeyen bir hata oluştu. Daha fazla ayrıntı için yöneticinize başvurun.</repository-exception>
-      <repository-exception-permission>Bu düğüm için yeni bir klasör ekleme izniniz yok.</repository-exception-permission>
+      <repository-exception-permission>You don't have the permission to add a new folder here.</repository-exception-permission>
       <numberformat-exception>Bu eylem kaydedemezsiniz. Verilen adı sayısal biçiminde olması gerekir.</numberformat-exception>
       <!--DMS 2.4.x; ECM-3553-->
-      <not-allow-sameNameSibling>Klasöre kaydedemezsiniz. Bu düğüm, aynı ada sahip iki düğüm kabul etmez.</not-allow-sameNameSibling>
+      <not-allow-sameNameSibling>You can't save the folder. An item with the same name already exists.</not-allow-sameNameSibling>
       <ntFolder-not-avaiable>Özel bir klasör türünü seçmeniz gerekir</ntFolder-not-avaiable>
     </msg>
     <help>
@@ -500,26 +500,26 @@
       <feedback-restore>'{0}' başarıyla geri yüklendi.</feedback-restore>
       <feedback-restore-multi>{0} öğe başarıyla geri yüklendi.</feedback-restore-multi>
       
-      <confirm-restore>Aynı ada sahip bir düğüm '{0}' eski konumda zaten var. Bu düğüm geri yüklemek istediğinizden emin misiniz?</confirm-restore>
+      <confirm-restore>A '{0}' item already exists at the previous location. Are you sure you want to restore it?</confirm-restore>
       <confirm-move>Taşımak istediğinizden emin misiniz?</confirm-move>
-      <node-cut>Düğüm '{0}' kesilmiş.</node-cut>
+      <node-cut>'{0}' has been cut.</node-cut>
       <execute-successfully>Özel eylem '{0}' gerçekleştirildi.</execute-successfully>
-      <save-node-success>Düğüm '{0}' kaydedildi.</save-node-success>
-      <move-problem>İzin veya kısıtlama koşulları ile ilgili bir sorun oluştuğundan düğüm '{0}' '{1}' için taşıyamasınız.</move-problem>
+      <save-node-success>'{0}' has been saved.</save-node-success>
+      <move-problem>You can't move '{0}' to '{1}' because there was a problem with permissions or constraint conditions.</move-problem>
     </msg>
   </UIWorkingArea>
   <UIDocumentWorkspace>
     <label>
-      <no-children>Bu düğüm, alt düğüm içermemektedir.</no-children>
-      <no-children-but-has-hidden>Bu düğümde herhangi bir alt düğüm yoktur ancak bazı gizli dosyalar bulunmaktadır.</no-children-but-has-hidden>
+      <no-children>This item doesn't have children.</no-children>
+      <no-children-but-has-hidden>This folder does not have any item, but there are some hidden files.</no-children-but-has-hidden>
     </label>
     <msg>
-      <unable-save-node>Düğüm '{0}' yeni oluşturuldu. Bu eylemi gerçekleştirmeden önce oturumu kaydedin.</unable-save-node>
-      <save-node-success>Düğüm '{0}' kaydedildi.</save-node-success>
-      <node-copied>Düğüm '{0}' kopyalandı.</node-copied>
-      <node-cut>Düğüm '{0}' kesildi.</node-cut>
-      <remove-root>Kök düğümü kaldıramazsınız.</remove-root>
-      <node-remove-success>Düğüm '{0}' kaldırıldı.</node-remove-success>
+      <unable-save-node>'{0}' has been created. Please save session to validate this action.</unable-save-node>
+      <save-node-success>'{0}' has been saved.</save-node-success>
+      <node-copied>'{0}' has been copied.</node-copied>
+      <node-cut>'{0}' has been cut.</node-cut>
+      <remove-root>You can't remove the root folder.</remove-root>
+      <node-remove-success>'{0}' has been removed.</node-remove-success>
     </msg>
     <tooltip>
       <Rename>Yeniden Adlandır</Rename>
@@ -538,11 +538,11 @@
   </UIDocumentWorkspace>
   <UIDocumentInfo>
     <msg>
-      <access-denied>Erişim engellendi. Düğüm '{0}' erişemez.</access-denied>
-      <null-exception>Öğe bulunamadı. Öğe kaldırıldı, değişti ya da  bu düğüme erişmek için izniniz yok.</null-exception>
+      <access-denied>Access denied. You can't access '{0}'.</access-denied>
+      <null-exception>Item not found. It was either removed or changed, or you don't have the access permission.</null-exception>
       <confirm-deleteattachment>Bu ek dosyasını kaldırmak istediğinizden emin misiniz?</confirm-deleteattachment>
       <confirm-deleteattcomment>Bu yorumu kaldırmak istediğinizden emin misiniz?</confirm-deleteattcomment>
-      <access-denied-exception>Erişim engellendi. Okuma ayrıcalıklarına sahip olmayabilirsiniz veya düğüm kaldırılmış veya değiştirilmiş olabilir.</access-denied-exception>
+      <access-denied-exception>Access denied. You may not have reading privileges, or the documen may have been removed or changed.</access-denied-exception>
       <path-not-found>Bu öğe silinmiş veya değişmiş. Lütfen Yenile düğmesini tıklayın.</path-not-found>
     </msg>
     <tooltip>
@@ -601,7 +601,7 @@
       <OpenDocument>Uzaktan Düzenle</OpenDocument>
       <EditProperty>Dosya Özelliklerini Düzenle</EditProperty>
       <UploadNewVersion>Yeni bir sürümünü yükle</UploadNewVersion>
-      <CreateNewVersion>Yeni bir sürüm oluştur</CreateNewVersion>
+      <CreateNewVersion>Save as new version</CreateNewVersion>
     </event>
   </ECMContextMenu>
  
@@ -733,8 +733,8 @@
       <name-invalid>Lütfen özellik adı girin.</name-invalid>
       <unable-create>Özellikler eklenemiyor.</unable-create>
       <value-invalid>Lütfen değer giriniz.</value-invalid>
-      <node-checkedin>Bir özellik eklemeden önce bu ağı kontrol etmeniz gerekmektedir.</node-checkedin>
-      <can-not-add>Bu ağa özellik ekleyemezsiniz. Bu işlem sadece ağ tipi at:yapılandırılmamış olanlarda yapılabilir.</can-not-add>
+      <node-checkedin>You must check out this item before adding a property.</node-checkedin>
+      <can-not-add>You can't add properties to this item. This is only allowed for the type nt:unstructured.</can-not-add>
       <propertyName-invalid>Özellik adı ad boşluğunu içermelidir (ör. ad boşluğu:ad).</propertyName-invalid>
       <propertyName-exist>'{0}' özelliği halihazırda bulunmaktadır.</propertyName-exist>
       <propertyValu-null>Bazı değerler boş olabilir.</propertyValu-null>
@@ -795,7 +795,7 @@
       <selectUser>Kullanıcı Seçin</selectUser>
     </label>
     <msg>
-      <not-change-owner>'{0}' bu ağın sahibi konumundadır ve tam kontrol yetkisine sahiptir.</not-change-owner>
+      <not-change-owner>'{0}' is the owner of this item and has full control permission.</not-change-owner>
     </msg>
   </UIGroupSelector>
   <UIPermissionForm>
@@ -807,7 +807,7 @@
       <add_node>Değiştirme Hakkı</add_node>
       <remove>Silme Hakkı</remove>
     </label>
-    <title>Ağ üzerinde yetkilendirme ekle</title>
+    <title>Add a permission</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>#{word.save}</Save>
@@ -914,7 +914,7 @@
   </ViewSearch>
   <UISearchResult>
     <msg>
-      <not-support>Bu ağ için şablon Görüntüsü bulunmamaktadır.</not-support>
+      <not-support>There is no View template for this document.</not-support>
       <empty>Sonuç bulunamadı.</empty>
       <access-denied>Bu klasörü açamazsınız, ya klasör halihazırda mevcut değil ya da erişim için yetkiniz bulunmamaktadır.</access-denied>
       <query-invalid>Sorgu geçersiz.</query-invalid>
@@ -939,15 +939,15 @@
       <datecreatedDESC>Azalan düzende oluşturma tarihine göre sırala</datecreatedDESC>
     </title>
     <tooltip>
-      <View>Bu ağı görüntüle</View>
+      <View>View this item</View>
       <OpenFolder>Klasöre git</OpenFolder>
     </tooltip>
   </UISearchResult>
   <UIShowAllOwnedByUserResult>
     <msg>
-      <not-support>Bu ağ için şablon Görseli bulunmamaktadır</not-support>
+      <not-support>There is no View template for this document</not-support>
       <empty>Sonuç bulunamadı.</empty>
-      <access-denied>Bu ağı göremezsiniz, bu şablon desteklenmiyor ya da erişim engellendi.</access-denied>
+      <access-denied>You can't view this document, either because this template is not supported or because access is denied.</access-denied>
       <query-invalid>Sorgu geçersiz</query-invalid>
     </msg>
     <header>
@@ -970,15 +970,15 @@
       <datecreatedDESC>Azalan düzende Oluşturma tarihine göre sırala</datecreatedDESC>
     </title>
     <tooltip>
-      <View>Bu düğümü görüntüleyin</View>
+      <View>View this item</View>
       <OpenFolder>Klasöre Git</OpenFolder>
     </tooltip>
   </UIShowAllOwnedByUserResult>
   <UIShowAllFavouriteResult>
     <msg>
-      <not-support>Bu düğüm için görünüm şablonu bulunmamaktadır</not-support>
+      <not-support>There is no View template for this item</not-support>
       <empty>Sonuç bulunmadı</empty>
-      <access-denied>Bu düğümü, bu şablonu desteklenmediğinden veya erişim engellendiği için görüntüleyemezsiniz.</access-denied>
+      <access-denied>You can't view this item, either because this template is not supported or because access is denied.</access-denied>
       <query-invalid>Sorgu geçersizdir</query-invalid>
     </msg>
     <header>
@@ -1001,15 +1001,15 @@
       <datecreatedDESC>Oluşturma tarihini azalan düzende sırala</datecreatedDESC>
     </title>
     <tooltip>
-      <View>Ağı Görüntüle</View>
+      <View>View this item</View>
       <OpenFolder>Klasöre Git</OpenFolder>
     </tooltip>
   </UIShowAllFavouriteResult>
   <UIShowAllHiddenResult>
     <msg>
-      <not-support>Bu düğüm için görünüm şablonu bulunmamaktadır.</not-support>
+      <not-support>There is no View template for this item.</not-support>
       <empty>Sonuç bulunamadı.</empty>
-      <access-denied>Bu düğüm, bu şablonu desteklenmediğinden veya erişim engellendiği için görüntüleyemezsiniz.</access-denied>
+      <access-denied>You can't view this item, either because it has no View template or because you don't have access to it.</access-denied>
       <query-invalid>Sorgu geçersizdir.</query-invalid>
     </msg>
     <header>
@@ -1033,16 +1033,16 @@
       <datecreatedDESC>Oluşturma tarihini azalan düzende sırala</datecreatedDESC>
     </title>
     <tooltip>
-      <View>Bu düğümü görüntüleyin</View>
+      <View>View this Item</View>
       <OpenFolder>Klasöre git</OpenFolder>
       <RemoveHiddenAttribute>Gizlenmiş Özellikleri Kaldır</RemoveHiddenAttribute>
     </tooltip>
   </UIShowAllHiddenResult>
   <UIShowAllTrashResult>
     <msg>
-      <not-support>Bu düğüm için görünüm şablonu bulunmamaktadır.</not-support>
+      <not-support>There is no View template for this item.</not-support>
       <empty>Sonuç bulunamadı</empty>
-      <access-denied>Bu düğümü, bu şablonu desteklenmediğinden veya erişim engellendiği için görüntüleyemezsiniz.</access-denied>
+      <access-denied>You can't view this item, either because it has no View template or because you don't have access to it.</access-denied>
       <query-invalid>Sorgu geçersizdir.</query-invalid>
     </msg>
     <header>
@@ -1065,7 +1065,7 @@
       <datecreatedDESC>Oluşturma tarihini azalan düzende sırala</datecreatedDESC>
     </title>
     <tooltip>
-      <View>Bu düğümü görüntüleyin</View>
+      <View>View this Item</View>
       <OpenFolder>Klasöre git</OpenFolder>
       <DeletePermanently>Tamamen sil</DeletePermanently>
       <RestoreFromTrash>Çöp kutusundan geri yükleyin</RestoreFromTrash>
@@ -1321,7 +1321,7 @@
       <Cancel>#{word.cancel}</Cancel>
       <Export>Dışa aktar</Export>
     </action>
-    <title>Düğümü dışa aktar</title>
+    <title>Export</title>
   </UIExportNode>
   <!--
   ###############################################################################
@@ -1366,8 +1366,8 @@
       <error-removing-referenced-version>This version is referenced and can't be removed.</error-removing-referenced-version>
       <confirm-restore>Are you sure you want to restore this version?</confirm-restore>
       <confirm-delete>Bu sürümü kaldırmak istediğinizden emin misiniz?</confirm-delete>
-      <not-checked-out>Geri yüklemeden önce bu düğümü kontrol etmelisiniz.</not-checked-out>
-      <invalid-item-state>Bu sürüm geri yüklenemiyor çünkü ya bir veya daha fazla öğe silinmiş veya başka bir oturum sırasında taşındı.</invalid-item-state>
+      <not-checked-out>You have to check out this document before restoring.</not-checked-out>
+      <invalid-item-state>You can't restore this version, either because one or more items were deleted or moved by another session.</invalid-item-state>
     </msg>
     <action>
       <close>#{word.close}</close>
@@ -1392,8 +1392,8 @@
       <noVersion>Sürüm Yok</noVersion>
     </msg>
     <eventName>
-      <e_1>Düğüm Eklendi</e_1>
-      <e_2>Düğüm Kaldırıldı</e_2>
+      <e_1>Added</e_1>
+      <e_2>Document Removed</e_2>
       <e_4>Özelliği Eklendi</e_4>
       <e_16>Özellik Değiştirildi</e_16>
       <e_8>Özellik Kaldırıldı</e_8>
@@ -1433,13 +1433,13 @@
   -->
   <UIActivateVersion>
     <label>
-      <note>Bu düğüm için sürümleme etkinleştirilmedi.</note>
+      <note>Versioning has not been activated for this document.</note>
       <question>Etkinleştirmek istediğinizden emin misiniz?</question>
       <button-active>Etkinleştir</button-active>
       <button-cancel>#{word.cancel}</button-cancel>
     </label>
     <msg>
-      <access-denied>Sürümü etkinleştirme yetkiniz bulunmamaktadır</access-denied>
+      <access-denied>You don't have permission to activate versioning on this document</access-denied>
     </msg>
   </UIActivateVersion>
   <!--
@@ -1462,7 +1462,7 @@
       </msg>
     </grid>
     <msg>
-      <node-type-invalid>Yalnızca belge düğümü türü kayıtlı.</node-type-invalid>
+      <node-type-invalid>Only documents can be enrolled.</node-type-invalid>
       <already-enroled>Bu belge zaten kayıtlı.</already-enroled>
     </msg>
   </UIActivePublication>
@@ -1473,7 +1473,7 @@
   -->
   <UIActivateAuditing>
     <label>
-      <note>Bu düğüm için denetim etkinleştirilmedi.</note>
+      <note>Auditing has not been activated for this document.</note>
       <question>Etkinleştirmek istediğinizden emin misiniz?</question>
     </label>
     <action>
@@ -1516,7 +1516,7 @@
       <Cancel>#{word.cancel}</Cancel>
       <Import>İçe Aktar</Import>
     </action>
-    <title>Düğüm İçe Aktar</title>
+    <title>Import</title>
     <msg>
       <import-successful>Başarıyla aktarıldı.</import-successful>
       <filename-invalid>İçe Aktarmak için "Dosya Yükle" alanına bir .xml dosyası gözatın.</filename-invalid>
@@ -1524,8 +1524,8 @@
       <xml-invalid>{1} dosyasında geçersiz karakter [row, column]:{0}</xml-invalid>
       <mimetype-invalid>Sadece .zip veya .xml dosyaları içe aktarılabilir.</mimetype-invalid>
       <access-denied>Erişim engellendi. Oraya almak için izin verilmez.</access-denied>
-      <constraint-violation-exception>Verileri içeri aktarmak imkansız. '{0}' Türü, bu konumda kabul edilmiyor.</constraint-violation-exception>
-      <item-exists-exception>Gelen başvurulabilir düğüm Çalışma Alanında mevcut bir düğümle aynı UUID sahip .</item-exists-exception>
+      <constraint-violation-exception>Impossible to import data. The type '{0}' is not allowed at this location.</constraint-violation-exception>
+      <item-exists-exception>An incoming item has the same UUID as an existing item in the workspace.</item-exists-exception>
     </msg>
   </UIImportNode>
   <!--
@@ -1573,7 +1573,7 @@
   <UIViewVersion>
     <label>
       <nodeType>Düğüm Türü</nodeType>
-      <nodeName>Düğüm Adı</nodeName>
+      <nodeName>Name</nodeName>
       <VersionNumber>Sürüm Numarası</VersionNumber>
       <VersionLabels>Sürüm Etiketleri</VersionLabels>
       <VersionDate>Sürüm Tarihi</VersionDate>
@@ -1609,7 +1609,7 @@
       <action>Eylemler</action>
     </header>
     <msg>
-      <access-denied>Erişim engellendi. Bu düğümdeki erişim izniniz yok.</access-denied>
+      <access-denied>Access denied. You don't have access permission.</access-denied>
       <confirm-delete>Bu referans silmek istediğinizden emin misiniz?</confirm-delete>
     </msg>
     <action>
@@ -1629,7 +1629,7 @@
       <action>Eylem</action>
     </header>
     <info>
-      <child-not-found>Bu düğüm, alt düğüm içermemektedir.</child-not-found>
+      <child-not-found>This item doesn't have any child.</child-not-found>
     </info>
   </UITreeList>
   <!--
@@ -1685,8 +1685,8 @@
       <clearall>Tümünü Temizle</clearall>
     </action>
     <msg>
-      <unable-pasted>Bu düğümü yapıştıramazsınız.</unable-pasted>
-      <node-pasted>'{0}' Düğümü '{1}' konumuna yapıştırılmış. Bu işlem zaten kaydedildi.</node-pasted>
+      <unable-pasted>Can't paste this item.</unable-pasted>
+      <node-pasted>{0} has been pasted at location {1}. This operation has already been saved.</node-pasted>
     </msg>
   </UIClipboard>
   <!--
@@ -1727,15 +1727,15 @@
 </tooltip>
     <msg>
       <cannot-save>Belge kaydedilirken bir hata oluştu.</cannot-save>
-      <in-versioning>Geçerli düğümü yeni bir düğüm eklemeden önce kontrol edin.</in-versioning>
+      <in-versioning>Please check out the current folder before adding a new item.</in-versioning>
       <not-support>'{0}' Şablonu yüklenemiyor.</not-support>
       <value-invalid>'{0}' gerekli bir değerdir.</value-invalid>
       <repository-exception>Belge kaydedilirken bir hata oluştu.</repository-exception>
       <!--DMS 2.4.x; ECM-3543-->
-      <repository-exception-permission>Bu düğüm için yeni bir belge ekleme izniniz yok.</repository-exception-permission>
+      <repository-exception-permission>You don't have permission to add a new document to this folder.</repository-exception-permission>
       <not-allowed-same-name-sibling>Bu belgeyi kaydedemiyor. Aynı adı iki kez kullanamazsınız.</not-allowed-same-name-sibling>
       <numberformat-exception>Bu eylem kaydedemezsiniz. Verilen adı sayısal biçiminde olması gerekir.</numberformat-exception>
-      <item-not-found>Öğe bulunamadı. Bu düğüm (veya üst) silinmiş olabilir. Lütfen Yenile düğmesini tıklatın.</item-not-found>
+      <item-not-found>Document not found. This document (or its ancestor) may have been deleted. Please click the Refresh button.</item-not-found>
     </msg>
   </UIDocumentForm>
   <!--
@@ -1800,7 +1800,7 @@
       <action>Eylem</action>
     </header>
     <msg>
-      <remove-popup-first>Bu düğümü silmeden önce Pop-up düzenlemeyi kapatmalısınız.</remove-popup-first>
+      <remove-popup-first>You must close the edit pop-up before deleting this item.</remove-popup-first>
       <confirm-delete-action>Bu eylemi silmek istediğinizden emin misiniz?</confirm-delete-action>
       <template-empty>'{0}' Şablonu null veya boş.</template-empty>
       <template-null>Şablon nul veya şablona erişmek için izniniz yok.</template-null>
@@ -1826,7 +1826,7 @@
       <numberformat-exception>Bu eylem kaydedemezsiniz. Verilen adı sayısal biçiminde olması gerekir.</numberformat-exception>
       <existed-action>Eylem adı '{0}' zaten var. Lütfen başka bir ad seçin.</existed-action>
       <unable-add-action>Bu eylem eklenemiyor.</unable-add-action>
-      <unable-add>Bu eylem eklenemiyor. Bu her iki kök düğümdür veya yetkiniz yok.</unable-add>
+      <unable-add>Can't add this action. This item is either the root folder or you don't have the permission to edit.</unable-add>
       <not-support>İletişim '{0}' desteklenmiyor.</not-support>
       <no-permission-add>Erişim engellendi. Buraya eylem ekleme hakkınız yok.</no-permission-add>
       <access-denied>Erişim engellendi. Bu şablonun erişim iznine sahip değilsiniz.</access-denied>
@@ -1865,7 +1865,7 @@
   <UIAddressBar>
     <msg>
       <path-not-found>Yolu bulunamadı.</path-not-found>
-      <access-denied>Erişim engellendi. Düğüm okuma hakkı yok.</access-denied>
+      <access-denied>Access denied. You don't have the permission to read.</access-denied>
       <keyword-not-support>Anahtar geçersiz. Bazı karakterler desteklenmez.</keyword-not-support>
     </msg>
     <label>
@@ -1874,8 +1874,8 @@
     </label>
     <title>
       <exeButton>Git</exeButton>
-      <backButton>Önceki düğüme geri dön</backButton>
-      <showHistory>Geçmişi adres göster</showHistory>
+      <backButton>Back</backButton>
+      <showHistory>Show History</showHistory>
       <changeNode>Düğümü Değiştir</changeNode>
     </title>
   </UIAddressBar>
@@ -1937,7 +1937,7 @@
   -->
   <UIViewMetadataContainer>
     <msg>
-      <path-not-found>Düğüm bu görünümü desteklemiyor.</path-not-found>
+      <path-not-found>The document does not support this view.</path-not-found>
     </msg>
   </UIViewMetadataContainer>
   <!--
@@ -1958,7 +1958,7 @@
   </metadataForm>
   <UIViewMetadataTemplate>
     <msg>
-      <access-denied>Erişim engellendi. Sahibi veya bu düğümdeki düzenleme iznine sahip değilsiniz.</access-denied>
+      <access-denied>Access denied. Either you are not the owner or don't have edit permission.</access-denied>
     </msg>
   </UIViewMetadataTemplate>
   <!--
@@ -2034,7 +2034,7 @@
       <private>Özel</private>
       <state>Durum</state>
       <visibility>Görünürlük</visibility>
-      <nodeName>Düğüm Adı:</nodeName>
+      <nodeName>Name:</nodeName>
       <lifecycleName>Yaşam Döngüsü Adı</lifecycleName>
       <stateName>Durum Adı</stateName>
     </label>
@@ -2058,7 +2058,7 @@
   </UIWorkspaceList>
   <pathSelector>
     <title>
-      <UIOneNodePathSelector>Düğüm Seçici</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Selector</UIOneNodePathSelector>
     </title>
   </pathSelector>
   <!--
@@ -2166,9 +2166,9 @@
     </label>
     <msg>
       <mimetype-incorrect>Yanlış dosya türü. Küçük resim yalnızca .JPG, PNG veya GIF dosyalarından oluşturulabilir.</mimetype-incorrect>
-      <access-denied>Erişim engellendi. Bu düğüm için küçük resim ekleme izniniz yok.</access-denied>
+      <access-denied>Access denied. You don't have permission to add a thumbnail.</access-denied>
       <confirm-delete>Bu küçük resmi kaldırmak istediğinizden emin misiniz?</confirm-delete>
-      <is-checked-in>Bu düğüm kontrol ediliyor. Lütfen herhangi bir eylem gerçekleştirmeden önce bakın.</is-checked-in>
+      <is-checked-in>This item is checked in. Please check out before performing any action.</is-checked-in>
       <fileName-error>Lütfen yüklemek için bir dosya seçin.</fileName-error>
     </msg>
     <title>
@@ -2272,7 +2272,7 @@
 
   <PopupSelectPath>
     <title>
-      <UIOneNodePathSelector>Düğümü Seçin</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Select Path</UIOneNodePathSelector>
     </title>
   </PopupSelectPath>
 
@@ -2302,7 +2302,7 @@
   <UISymLinkForm>
     <label>
       <symLinkName>Sembolik Bağ Adı</symLinkName>
-      <pathNode>Yol Düğümü</pathNode>
+      <pathNode>Path</pathNode>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -2313,16 +2313,16 @@
       <name-invalid>Sembolik bağın adını giriniz.</name-invalid>
       <name-not-allowed>Bu ad geçerli değil.</name-not-allowed>
       <fileName-error>Dosya adı geçersiz.</fileName-error>
-      <constraint-violation>Geçerli düğüme '{0}' düğüm türü ekleyemezsiniz.</constraint-violation>
-      <repository-exception>Erişim engellendi. Sembolik bağı bu düğümü ekleme izniniz yok.</repository-exception>
+      <constraint-violation>You can't add an item of type '{0}' here.</constraint-violation>
+      <repository-exception>Access denied. You don't have permission to add a symlink here.</repository-exception>
       <numberformat-exception>Bu klasöre kaydedilemiyor. Verilen ad sayısal biçiminde olması gerekir.</numberformat-exception>
-      <path-node-invalid>Yol düğümü giriniz.</path-node-invalid>
+      <path-node-invalid>Please enter the path.</path-node-invalid>
       <path-node-not-allowed>Bu ad geçerli değil.</path-node-not-allowed>
-      <non-node>Bildiğiniz hedef düğümü seçiniz; Bu düğüme okuma yetkiniz olmayabilir.</non-node>
-      <cannot-save>Bu düğüm türü için bir sembolik bağ ekleyemezsiniz.</cannot-save>
-      <item-exists-exception>Bu düğüm adı zaten var.</item-exists-exception>
-      <translation-node-same-language-default>Çeviri düğümü geçerli düğümün varsayılan dil olarak aynı dili vardır.</translation-node-same-language-default>
-      <UnsupportedRepositoryOperationException>Bu hedef başvurulan düğüm değildir.</UnsupportedRepositoryOperationException>
+      <non-node>Please select the trust target; you may not have the rights to read this item.</non-node>
+      <cannot-save>You can't add a symlink for this type of document.</cannot-save>
+      <item-exists-exception>An item with this name already exists.</item-exists-exception>
+      <translation-node-same-language-default>The translated document has the same language as the default language of current document.</translation-node-same-language-default>
+      <UnsupportedRepositoryOperationException>This target item is not referred.</UnsupportedRepositoryOperationException>
     </msg>
   </UISymLinkForm>
   
@@ -2342,22 +2342,22 @@
       <name-invalid>Sembolik bağın adını giriniz.</name-invalid>
       <name-not-allowed>Bu ad geçerli değil.</name-not-allowed>
       <fileName-error>Dosya adı geçersiz.</fileName-error>
-      <constraint-violation>Geçerli düğüme '{0}' düğüm türü ekleyemezsiniz.</constraint-violation>
-      <repository-exception>Erişim engellendi. Sembolik bağı bu düğümü ekleme izniniz yok.</repository-exception>
+      <constraint-violation>You can't add the '{0}' type to the current item.</constraint-violation>
+      <repository-exception>Access denied. You don't have permission to add a symlink to this item.</repository-exception>
       <numberformat-exception>Bu eylem kaydedemezsiniz. Verilen adı sayısal biçiminde olması gerekir.</numberformat-exception>
-      <path-node-invalid>Yol düğümü giriniz.</path-node-invalid>
+      <path-node-invalid>Please enter the path.</path-node-invalid>
       <path-node-not-allowed>Bu ad geçerli değil.</path-node-not-allowed>
-      <non-node>Bildiğiniz hedef düğümü seçiniz; Bu düğüme okuma yetkiniz olmayabilir.</non-node>
+      <non-node>Please select the trust target; you may not have the right to read this node.</non-node>
       <cannot-save>Symlink oluşturulurken bir hata oluştu.</cannot-save>
-      <item-exists-exception>Bu düğüm adı zaten var.</item-exists-exception>
-      <translation-node-same-language-default>Çeviri düğümü geçerli düğümün varsayılan dil olarak aynı dili vardır.</translation-node-same-language-default>
-      <UnsupportedRepositoryOperationException>Bu hedef başvurulan düğüm değildir.</UnsupportedRepositoryOperationException>
+      <item-exists-exception>An item with this name already exists.</item-exists-exception>
+      <translation-node-same-language-default>The translated document has the same language as the default language of current document.</translation-node-same-language-default>
+      <UnsupportedRepositoryOperationException>This target item is not referred.</UnsupportedRepositoryOperationException>
     </msg>
   </UIAddTranslationForm>
 
   <UIPopupSymLink>
     <title>
-      <UIOneNodePathSelector>Hedef Düğüm Seçin</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Select Target Item</UIOneNodePathSelector>
     </title>
   </UIPopupSymLink>
   <UIPopupSymLink>
@@ -2375,9 +2375,9 @@
 
   <UIWorkingArea>
     <msg>
-      <create-link-problem>Bağlantı düğümü '{0}' için '{1}' oluşturamazsınız.</create-link-problem>
-      <dest-node-is-link>Hedef düğüm '{0}' zaten bir symlink, bu yüzden içinde bir symlink oluşturamazsınız.</dest-node-is-link>
-      <selected-is-link>Seçilen düğüm '{0}' zaten bir bağlantıdır. Başka bir bağlantıya bağlanan bir bağlantı oluşturamazsınız.</selected-is-link>
+      <create-link-problem>You can't create a link for '{0}' at '{1}'.</create-link-problem>
+      <dest-node-is-link>The destination '{0}' is already a symlink, so you cannot create a symlink inside it.</dest-node-is-link>
+      <selected-is-link>The selected item '{0}' is already a link. You can't create a link to another link.</selected-is-link>
       <confirm-create-link>Bu konuma bir bağlantı oluşturmak istiyor musunuz?</confirm-create-link>
     </msg>
   </UIWorkingArea>
@@ -2460,7 +2460,7 @@
 <ReadOnly>Salt Okunur Aç</ReadOnly>
 <Cancel>Cancel</Cancel>
       <KeepBoth>İkisi de kalsın</KeepBoth>
-      <CreateNewVersion>Yeni bir sürüm oluştur</CreateNewVersion>
+      <CreateNewVersion>Save as new version</CreateNewVersion>
     </label>
   </UIConfirmMessage>
 
@@ -2516,7 +2516,7 @@
 
   <UIPopupMenu>
     <msg>
-      <node-locked-other-person>Bu öğe veya üst öğesi başka bir kullanıcı tarafından kilitli, o yüzden silemezsiniz.</node-locked-other-person>
+      <node-locked-other-person>This item or its parent folder is locked by another user, so you can't delete it.</node-locked-other-person>
     </msg>
   </UIPopupMenu>
 
@@ -2551,7 +2551,7 @@
 
   <UIPopupMenu>
     <msg>
-      <can-not-unlock-node-is-checked-in>Kilit açılamıyor çünkü düğüm '{0}' (veya üst) kontrol ediliyor.</can-not-unlock-node-is-checked-in>
+      <can-not-unlock-node-is-checked-in>You can't unlock because the '{0}' (or its parent folder) is checked in.</can-not-unlock-node-is-checked-in>
     </msg>
   </UIPopupMenu>
 
@@ -2560,12 +2560,12 @@
   -->
   <UIActionBar>
     <msg>
-      <cannot-enable-version>Düğüm için sürümleme etkinleştirilemiyor.</cannot-enable-version>
+      <cannot-enable-version>Can't activate versioning on this document.</cannot-enable-version>
     </msg>
   </UIActionBar>
   <UIPopupMenu>
     <msg>
-        <cannot-readsource>Kaynak düğümden verileri okunamıyor.</cannot-readsource>
+        <cannot-readsource>You can't read data from the source.</cannot-readsource>
     </msg>
   </UIPopupMenu>
   <UIUploadForm>
@@ -2845,7 +2845,7 @@
 
     <UIPopupMenu>
     <msg>
-      <node-locked-editing>Bu düğümü  {0} yolu ile düzenleyemezsiniz. Başka bir kullanıcı tarafından kilitli.</node-locked-editing>
+      <node-locked-editing>You can't edit  {0}. It's locked by another user.</node-locked-editing>
     </msg>
   </UIPopupMenu>
   <UITagStyleForm>
@@ -2939,12 +2939,12 @@
   </PathNode>
   <UIPopupPathFoRestore>
     <title>
-      <UIOneNodePathSelector>Üst Düğüm Seçin</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Select Parent</UIOneNodePathSelector>
     </title>
   </UIPopupPathFoRestore>
   <rootNodeInfo>
     <title>
-      <AddRootNode>Kök Düğümü Ekle</AddRootNode>
+      <AddRootNode>Add Root</AddRootNode>
     </title>
   </rootNodeInfo>
 
@@ -3156,9 +3156,9 @@
   </lifecyclePhase>
   <UIPopupMenu>
   <msg>
-<can-not-remove-locked-node>{0} Düğümü kilitli. Çöp kutusuna taşıyamazsınız.</can-not-remove-locked-node>
-<can-not-remove-checked-in-node>{0} Düğümü veya üstü kontrol ediliyor. Çöp kutusuna taşıyamazsınız.</can-not-remove-checked-in-node>
-<access-denied-to-delete>Erişim engellendi. {0} Düğümü Çöp Kutusu'na taşınamıyor.</access-denied-to-delete>
+<can-not-remove-locked-node>{0} is locked. You can't move it to the Trash.</can-not-remove-locked-node>
+<can-not-remove-checked-in-node>{0} or its parent folder is checked in. You can't move it to the Trash.</can-not-remove-checked-in-node>
+<access-denied-to-delete>Access denied. You can't move {0} to the Trash.</access-denied-to-delete>
   </msg>
   </UIPopupMenu>
   <UIPropertyForm>
@@ -3168,8 +3168,8 @@
   </UIPropertyForm>
   <UIWatchDocumentForm>
     <msg>
-      <node-is-locked>Bu düğüm kilitli. Bunu izleme yapamazsınız.</node-is-locked>
-      <unknown-error>Bazı hatalar oluştu. Bu düğümü izleyemezsiniz.</unknown-error>
+      <node-is-locked>This item is locked. You cannot watch it.</node-is-locked>
+      <unknown-error>Some errors have occurred. You can't watch this document.</unknown-error>
     </msg>
   </UIWatchDocumentForm>   
   <UIActionForm>
@@ -3194,7 +3194,7 @@
     <Keep>Her ikisinide koru</Keep>
     <Replace>Değiştir</Replace>
     <Canceled>İptal edildi</Canceled>
-      <UploadNewVersion>Yeni sürüm yükle</UploadNewVersion>
+      <UploadNewVersion>Upload a new version</UploadNewVersion>
     <Cancel>#{word.cancel}</Cancel>
     <AbortAllConfirmation>Devam eden tüm dosyaları durdurmak istiyor musunuz?</AbortAllConfirmation>
   </label>

@@ -8,20 +8,20 @@
     
 <ECMContextMenu>
 <event>
-<ViewInfo>View Information</ViewInfo>
+<ViewInfo>Veure la Informació</ViewInfo>
 </event>
 </ECMContextMenu>
 <UIViewInfoContainer>
 <label>
-      <name>Name</name>
-      <title>Title</title>
-      <type>Type</type>
+      <name>Nom</name>
+      <title>Títol</title>
+      <type>Tipus</type>
       <size>Mida</size>
-      <owner>Owner</owner>
+      <owner>Propietari</owner>
       <lastModifier>Última modificació per</lastModifier>
       <created>Data de creació</created>
       <lastModified>Data de modificació més recent</lastModified>
-      <publicationState>Publication State</publicationState>
+      <publicationState>Estat de Publicació</publicationState>
 </label>
 <value>
       <folder>Carpeta</folder>

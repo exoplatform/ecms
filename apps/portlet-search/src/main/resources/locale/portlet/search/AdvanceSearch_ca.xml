@@ -4,7 +4,7 @@
     <label>
       <keyword>Paraula clau</keyword>
       <portal>Portal</portal>
-      <Page>Page</Page>
+      <Page>Pàgina</Page>
       <Document>Document</Document>
     </label>
     <action>
@@ -14,7 +14,7 @@
 
   <UIDefaultSearchResult>
     <label>
-      <Page>Page</Page>
+      <Page>Pàgina</Page>
       <Document>Document</Document>
       <DocumentAndPage>Document i Pàgina</DocumentAndPage>
       <documentandpage>Document i Pàgina</documentandpage>
@@ -24,9 +24,9 @@
       <timeUnitCaption>segons</timeUnitCaption>
       <similar>Pàgines on apareix el mateix contingut</similar>
       <editor>Editor</editor>
-      <date>Date</date>
-      <relevancy>Relevance</relevancy>
-      <title>Title</title>
+      <date>Data</date>
+      <relevancy>Rellevància</relevancy>
+      <title>Títol</title>
       <sortBy>Ordena per:</sortBy>
     </label>
     <action>
@@ -70,9 +70,9 @@
   </UISearchForm>
   <UIPaginatorDefault>
     <label>
-      <next>Next</next>
-      <previous>Previous</previous>
-      <more>More</more>
+      <next>Següent</next>
+      <previous>Anterior</previous>
+      <more>Més</more>
     </label>
   </UIPaginatorDefault>
   <UISearchPageLayoutDefault>

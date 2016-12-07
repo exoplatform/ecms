@@ -990,7 +990,7 @@
       <addSymLink>Add Sym Link</addSymLink>
       <checkIn>Inchecken</checkIn>
       <checkOut>Uitchecken</checkOut>
-      <shareDocuments>Share</shareDocuments>
+      <shareDocuments>Post</shareDocuments>
       <openDocument>Remote Edit</openDocument>
       <editProperty>Documenteigenschappen bewerken</editProperty>
       <uploadNewVersion>Een nieuwe versie uploaden</uploadNewVersion>

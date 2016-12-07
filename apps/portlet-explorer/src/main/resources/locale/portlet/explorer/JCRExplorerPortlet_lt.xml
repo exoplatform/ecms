@@ -18,7 +18,7 @@
     </action>
     <msg>
       <not-support>You can't comment on this type of document.</not-support>
-      <not-checkedout>Jūs turite patikrinti mazgą prieš komentuojant jame.</not-checkedout>
+      <not-checkedout>You must check out the document before commenting on it.</not-checkedout>
       <content-null>jūs negalite siųsti tuščio komentaro.</content-null>
     </msg>
   </UICommentForm>
@@ -46,8 +46,8 @@
     </button>
     <msg>
       <not-support>Jūs negalite balsuoti už šio dokumento tipą.</not-support>
-      <not-checkedout>Mazgas turi būti patikrintas prieš balsavimą.</not-checkedout>
-      <vote-restriction>Jūs negalite balsuoti daugiau nei vieną kartą.</vote-restriction>
+      <not-checkedout>You must check out the document to vote.</not-checkedout>
+      <vote-restriction>You cannot vote more than one time.</vote-restriction>
     </msg>
   </UIVoteForm>
  
@@ -59,9 +59,9 @@
   <UIJCRExplorer>
     <msg>
       <refresh-session-success>Sesija buvo sėkmingai atnaujinta.</refresh-session-success>
-      <no-node-history>Jūs esate šakniniame mazge.</no-node-history>
+      <no-node-history>You are at the root.</no-node-history>
       <save-session-success>Visi pakeitimai išsaugoti.</save-session-success>
-      <target-path-not-found>Negalite prieiti prie šio mazgo, nes jis nebeegzistuoja arba neturite priėjimo teisės.</target-path-not-found>
+      <target-path-not-found>You can't access this path, either because it doesn't exist anymore or because you don't have access permissions.</target-path-not-found>
     </msg>
   </UIJCRExplorer>
   <!--
@@ -159,8 +159,8 @@
     <label>
       <enableStructure>Įgalinti DMS struktūrą:</enableStructure>
       <showSideBar>Rodyti šoninę juostą:</showSideBar>
-      <showHiddenNode>Rodyti paslėptus mazgus:</showHiddenNode>
-      <showNonDocument>Rodyti ne dokumentų mazgus:</showNonDocument>
+      <showHiddenNode>Show Hidden Items:</showHiddenNode>
+      <showNonDocument>Show Non-document Items:</showNonDocument>
       <showRefDocuments>Rodyti nurodytus dokumentus:</showRefDocuments>
       <enableDragAndDrop>Įgalinti „Vilkti ir Mesti”:</enableDragAndDrop>
       <sortBy>Rūšiuoti pagal:</sortBy>
@@ -201,15 +201,15 @@
       <Back>#{word.back}</Back>
     </action>
     <msg>
-      <rename-successfull>Mazgas '{0}' buvo sėkmingai pervadintas į '{1}'.</rename-successfull>
-      <rename-denied>Prieiga uždrausta. Negalima pervadinti šiame mazge.</rename-denied>
+      <rename-successfull>'{0}' was renamed to '{1}' successfully.</rename-successfull>
+      <rename-denied>Access denied. You can't rename this item.</rename-denied>
       <fileName-invalid>Naujame pavadinime yra neleistinų simbolių.</fileName-invalid>
       <newName-same-oldName>Naujas pavadinimas jau egzistuoja. Prašome patikrinti dar kartą.</newName-same-oldName>
-      <version-exception>Šis mazgas (ar šio mazgo pradininkas) yra neišregistruotas.</version-exception>
-      <lock-exception>Šis mazgas yra užrakintas. Prašome atrakinti jį prieš pervadinant.</lock-exception>
-      <constraintViolation-exception>Pervadinant mazgą '{0}' įvyko klaida. Prašome patikrinti dar kartą.</constraintViolation-exception>
+      <version-exception>This document (or one of its ancestors) is not checked out.</version-exception>
+      <lock-exception>This document is locked. Please unlock it before renaming.</lock-exception>
+      <constraintViolation-exception>An error occurred while renaming '{0}'. Please check again.</constraintViolation-exception>
       <unknown-prefix>Priešdėlis '{0}' dar nebuvo registruotas.</unknown-prefix>
-      <rename-error>Pervardijant šį mazgą įvyko klaida. Prašome patikrinti dar kartą.</rename-error>
+      <rename-error>An error occurred while renaming. Please check again.</rename-error>
     </msg>
   </UIRenameForm>
   <UIPopupWindow>
@@ -222,7 +222,7 @@
       <UIExportNode>Eksportuoti</UIExportNode>
       <UINodeTypeInfo>Mazgo tipo informacija</UINodeTypeInfo>
       <UIVersionInfo>Versijos informacija</UIVersionInfo>
-      <UIActivateVersion>Aktyvuoti versiją</UIActivateVersion>
+      <UIActivateVersion>Activate Versioning</UIActivateVersion>
       <UIAuditingInfo>Audito informacija</UIAuditingInfo>
       <UIActivateAuditing>Aktyvuoti auditą</UIActivateAuditing>
       <UIPermissionManager>Teisių valdymas</UIPermissionManager>
@@ -313,40 +313,40 @@
       <UploadNewVersion>Upload a new version</UploadNewVersion>
     </tooltip>
     <msg>
-      <cannot-action-in-rootnode>Šio veiksmo negalima atlikti šaknėje skiltyje.</cannot-action-in-rootnode>
+      <cannot-action-in-rootnode>You can't perform this action at root.</cannot-action-in-rootnode>
       <node-checkedin>Jums pirmiau reikia išsiregistruoti.</node-checkedin>
-      <cannot-enable-version-rootnode>Negalite įgalinti versijavimo šakniniam mazgui.</cannot-enable-version-rootnode>
-      <cannot-enable-publication-rootnode>Negalite įgalinti šakninio mazgo paskelbimo.</cannot-enable-publication-rootnode>
+      <cannot-enable-version-rootnode>Can't activate versioning on root.</cannot-enable-version-rootnode>
+      <cannot-enable-publication-rootnode>Can't activate publication at root.</cannot-enable-publication-rootnode>
       <manage-publication>
-        <not-supported-nodetype>Paskelbimas palaiko tik dokumento mazgą.</not-supported-nodetype>
+        <not-supported-nodetype>Only documents can be published.</not-supported-nodetype>
         <no-publication-lifecycle>Paskelbimo gyvavimo ciklo nesukonfigūruotas.</no-publication-lifecycle>
       </manage-publication>
-      <unsubcriber-lifecycle>Mazgas jau yra neprinumeruojamas.</unsubcriber-lifecycle>
-      <not-supported-nodetype>Abonento gyvavimo ciklas palaiko tik dokumento mazgą.</not-supported-nodetype>
-      <unsubcriber-lifecycle-finish>Mazgo buvo sėkmingai atsisakyta.</unsubcriber-lifecycle-finish>
-      <access-false>Mazgas nėra straipsnyje arba priregistruotas.</access-false>
+      <unsubcriber-lifecycle>The document was already unsubscribed.</unsubcriber-lifecycle>
+      <not-supported-nodetype>This operation is only supported for documents.</not-supported-nodetype>
+      <unsubcriber-lifecycle-finish>The document was unsubscribed successfully.</unsubcriber-lifecycle-finish>
+      <access-false>The document is not an article or checked in.</access-false>
       <unsupported-action>Šis veiksmas yra nepalaikomas.</unsupported-action>
-      <not-relationable>Šis mazgas dar neturėjo jokios susijusios nuorodos į kitą mazgą.</not-relationable>
-      <node-pasted>Mazgas '{0}' buvo įterptas į vietą '{1}'. Ši operacija jau buvo išsaugota.</node-pasted>
-      <no-node-selected>Mazgas nenukopijuotas.</no-node-selected>
-      <unable-edit>Mazgas '{0}' su mazgo tipu "{1}" nepalaiko redagavimo.</unable-edit>
-      <not-support>Negalite redaguoti pažymėto mazgo.</not-support>
-      <template-null>Šis mazgas neturi dialogo lango.</template-null>
+      <not-relationable>This document has no relations.</not-relationable>
+      <node-pasted>'{0}' has been pasted at the location '{1}'. This operation has already been saved.</node-pasted>
+      <no-node-selected>Nothing to copy.</no-node-selected>
+      <unable-edit>Editing documents of type '{1}' like '{0}' is not supported.</unable-edit>
+      <not-support>Can't edit the selected item.</not-support>
+      <template-null>This document has no form template.</template-null>
       <keyword-null>Raktažodžių paieškai nėra.</keyword-null>
       <not-found>Rezultatų nerasta.</not-found>
       <keyword-not-allow>Šis raktinis žodis yra neleistinas.</keyword-not-allow>
-      <is-not-referenable>Mazgas '{0}' negali būti susietas.</is-not-referenable>
-      <access-denied>Prieiga uždrausta. Jūs neturite teisių redaguoti šiame mazge.</access-denied>
-      <access-add-denied>Prieiga uždrausta. Jūs neturite pridėjimo teisių šiame mazge.</access-add-denied>
+      <is-not-referenable>'{0}' can't be referenceable.</is-not-referenable>
+      <access-denied>Access denied. You don't have edit permission for this item.</access-denied>
+      <access-add-denied>Access denied. You don't have permission to add items here.</access-add-denied>
       <item-existed>Šis mazgas jau egzistuoja. Jis negali turėti to paties pavadinimo ar giminingo.</item-existed>
       <removed-hidden-mixin>Jūs pašalinote paslėptą mixin sėkmingai.</removed-hidden-mixin>
       <added-hidden-mixin>Pridėjote paslėptą mixin sėkmingai.</added-hidden-mixin>
       <not-supported>Ši funkcija palaiko tik dokumento tipą.</not-supported>
-      <empty-file-type>Jūs negalite pridėti dokumento šiame mazge.</empty-file-type>
-      <unsupported-watch>Tik dokumento mazgas gali būti stebimas.</unsupported-watch>
-      <watch-checkedin>Mazgas turi būti išregistruotas prieš stebėjimą.</watch-checkedin>
-      <unsupported-tagging>Tik dokumento mazgas gali būti pažymėtas.</unsupported-tagging>
-      <tagnode-checkedin>Mazgas turi būti išregistruotas prieš žymėjimą.</tagnode-checkedin>
+      <empty-file-type>You can't add a document here.</empty-file-type>
+      <unsupported-watch>Only documents can be watched.</unsupported-watch>
+      <watch-checkedin>You must check out the document before watching.</watch-checkedin>
+      <unsupported-tagging>Only documents can be tagged.</unsupported-tagging>
+      <tagnode-checkedin>You must check out the document before tagging.</tagnode-checkedin>
     </msg>
     <title>
       <select-tab>Pasirinkti skirtuką</select-tab>
@@ -361,48 +361,48 @@
   </UIActionBar>
   <UIPopupMenu>
     <msg>
-      <has-not-permission>Prieiga uždrausta. Jūs neturite leidimo šioje skiltyje pridėti.</has-not-permission>
-      <has-not-edit-permission>Prieiga uždrausta. Jūs neturite leidimo šioje skiltyje redaguoti. Prašome kreiptis į administratorių.</has-not-edit-permission>
-      <cannot-login-node>Čia negalite prieiti ir įklijuoti skilties.</cannot-login-node>
-      <cannot-paste-nodetype>Čia negalite įklijuoti skilties.</cannot-paste-nodetype>
-      <has-not-permission-unlok>Jūs neturite teisės atrakinti šios skilties.</has-not-permission-unlok>
-      <bound-exception>Jūs neturite teisės pervadinti šios skilties. Prašome kreiptis į administratorių.</bound-exception>
-      <bound-move-exception>Jūs negalite perkelti skilties į ją pačią arba į jos subsklitį.</bound-move-exception>
-      <does-not-support-auditing>Jūs negalite aktyvuoti audito šiame mazge.</does-not-support-auditing>
-      <can-not-rename-node>Jūs neturite teisių pervadinti šio mazgo. Prašome kreiptis į administratorių dėl reikiamų teisių.</can-not-rename-node>
-      <can-not-cut-node>Jūs neturite teisės iškirpti šio mazgo. Prašome susisiekti su administratoriumi.</can-not-cut-node>
-      <can-not-remove-node>Jūs neturite teisės pašalinti šio mazgo. Prašome susisiekti su administratoriumi.</can-not-remove-node>
-      <can-not-lock-node>Jūs neturite teisės užrakinti mazgą {0}. Prašome susisiekti su administratoriumi.</can-not-lock-node>
-      <can-not-unlock-node>Jūs neturite teisės atrakinti šio mazgo. Prašome susisiekti su administratoriumi.</can-not-unlock-node>
-      <no-node>Prašome pasirinkti bent vieną mazgą prieš įklijavimą.</no-node>
-      <can-not-paste-node>Jūs neturite teisės perkelti šio mazgo. Prašome susisiekti su administratoriumi.</can-not-paste-node>
-      <can-not-move-node>Jūs neturite teisės perkelti šio mazgo. Prašome susisiekti su administratoriumi.</can-not-move-node>
-      <does-not-support-versioning>Jūs neturite teisės perkelti šio mazgo. Prašome susisiekti su administratoriumi.</does-not-support-versioning>
+      <has-not-permission>Access denied. You don't have permissions to add in this item.</has-not-permission>
+      <has-not-edit-permission>Access denied. You don't have edit permission here. Please contact the administrator.</has-not-edit-permission>
+      <cannot-login-node>You can't access and paste an item here.</cannot-login-node>
+      <cannot-paste-nodetype>You can't paste this type of item here.</cannot-paste-nodetype>
+      <has-not-permission-unlok>You don't have permission to unlock this document.</has-not-permission-unlok>
+      <bound-exception>You don't have the permission to rename this item. Please contact the administrator.</bound-exception>
+      <bound-move-exception>You can't move an item to itself or in a subfolder.</bound-move-exception>
+      <does-not-support-auditing>You can't activate auditing here.</does-not-support-auditing>
+      <can-not-rename-node>You don't have permission to rename this item. Please contact the administrator to get the necessary rights.</can-not-rename-node>
+      <can-not-cut-node>You don't have permission to cut this item. Please contact the administrator.</can-not-cut-node>
+      <can-not-remove-node>You don't have permission to remove this item. Please contact the administrator.</can-not-remove-node>
+      <can-not-lock-node>You don't have permission to lock {0}. Please contact the administrator.</can-not-lock-node>
+      <can-not-unlock-node>You don't have permission to unlock this item. Please contact the administrator.</can-not-unlock-node>
+      <no-node>Please select at least one item before pasting.</no-node>
+      <can-not-paste-node>You don't have permission to move to this item. Please contact the administrator.</can-not-paste-node>
+      <can-not-move-node>You don't have permission to move this item. Please contact the administrator.</can-not-move-node>
+      <does-not-support-versioning>You don't have permission to move. Please contact the administrator.</does-not-support-versioning>
       <path-not-found>Šis elementas buvo ištrintas arba pakeistas. Spustelėkite mygtuką atnaujinti.</path-not-found>
-      <paste-lock-exception>Jūs negalite įklijuoti '{0}' į šį mazgą, nes šaltinis arba paskirties mazgas yra užrakintas arba susijęs su užrakintu mazgu.</paste-lock-exception>
-      <can-not-checkin-node>Nebegalite įregistruoti šio mazgo. Patikrinkite ar turite teises.</can-not-checkin-node>
-      <can-not-checkout-node>Nebegalite įregistruoti šio mazgo. Patikrinkite ar turite teises.</can-not-checkout-node>
-      <move-constraint-exception>Įvyko klaida perkeliant mazgą.</move-constraint-exception>
-      <not-lock-owner>Jūs negalite atrakinti šio mazgo, nes nesate savininkas, kuris užrakino.</not-lock-owner>
-      <is-checked-in>Prašome patikrinti šį mazgą prieš pervadinimą.</is-checked-in>
-      <is-checked-in-lock>Prašome išregistruoti šį mazgą prieš užrakinimą.</is-checked-in-lock>
-      <cant-lock>Jums negalima užrakinti šio mazgo.</cant-lock>
+      <paste-lock-exception>'{0}' can't be pasted here. Make sure it is not locked nor this folder. Also check that no related document is locked.</paste-lock-exception>
+      <can-not-checkin-node>You can't check in this item. Please check that you have the necessary permissions.</can-not-checkin-node>
+      <can-not-checkout-node>You can't check out this itel. Please check that you have the necessary permissions.</can-not-checkout-node>
+      <move-constraint-exception>An error occurred while moving this item.</move-constraint-exception>
+      <not-lock-owner>You can't unlock this item because you are not the lock owner.</not-lock-owner>
+      <is-checked-in>Please check out this item before renaming.</is-checked-in>
+      <is-checked-in-lock>Please check out this item before locking.</is-checked-in-lock>
+      <cant-lock>You can't lock this document.</cant-lock>
       <node-locked>Elementas {0} arba aukštesnis lygis yra užrakintas.</node-locked>
-      <can-not-delete>Uždarykite šį mazgą prieš ištrinant.</can-not-delete>
-      <can-not-delete-version>Šio mazgo ištrinti negalima. Tai versijavimas.</can-not-delete-version>
-      <not-support>Negalite naikinti pažymėto mazgo. Prašome pasirinkti kitą mazgą.</not-support>
-      <current-node-not-allow-paste>Negalite įklijuoti nukopijuoto mazgo tipo dabartiniame mazge.</current-node-not-allow-paste>
-      <copied-node-in-versioning>Negalite įklijuoti nukopijuoto mazgo. Tai versijavimas.</copied-node-in-versioning>
-      <parent-node-locked>Jūs neturite teisės atrakinti mazgo '{0}'.</parent-node-locked>
-      <this-node-locked-by-parent>Jūs negalite atrakinti šio mazgo. Jis yra užrakintas pradinio mazgo.</this-node-locked-by-parent>
-      <paste-node-same-name>Negalite įklijuoti mazgo tuo pačiu pavadinimu kaip mazgas paskirties aplanke.</paste-node-same-name>
-      <has-not-add-permission>Jūs neturite leidimo pridėti naujo mazgo.</has-not-add-permission>
-      <node-cutting>Mazgas yra iškirptas. Jūs negalite įklijuoti jo čia.</node-cutting>
-      <access-denied>Prieiga uždrausta. Galite neturėti teisės šiame mazge.</access-denied>
-      <remove-verion-exception>Jūs negalite pašalinti mazgo, nes jis (arba jo pradininkas) yra įregistruotas.</remove-verion-exception>
-      <remove-referentialIntegrityException>Šio mazgo negalima ištrinti, nes jis yra šiuo metu yra paskirtis į nuorodos ypatybę.</remove-referentialIntegrityException>
-      <constraintviolation-exception>Privalomas elementas jcr:uuid nerastas. Mazgas gali būti ištrintas arba pakeistas. Spustelėkite mygtuką atnaujinti.</constraintviolation-exception>
-      <path-not-found-exception>Šis mazgas buvo ištrintas arba pakeistas. Spustelėkite mygtuką atnaujinti.</path-not-found-exception>
+      <can-not-delete>Please close this item before deleting.</can-not-delete>
+      <can-not-delete-version>You can't delete this document. It's versioned.</can-not-delete-version>
+      <not-support>You can't delete the selected item. Please select another one.</not-support>
+      <current-node-not-allow-paste>You can't paste the copied item there.</current-node-not-allow-paste>
+      <copied-node-in-versioning>You can't paste the copied item here because it's versioned.</copied-node-in-versioning>
+      <parent-node-locked>You don't have permission to unlock '{0}'.</parent-node-locked>
+      <this-node-locked-by-parent>You can't unlock this item. Parent folder is locked.</this-node-locked-by-parent>
+      <paste-node-same-name>Can't paste this item here. An item with the same name already exists in the destination folder.</paste-node-same-name>
+      <has-not-add-permission>You don't have the permission to add here.</has-not-add-permission>
+      <node-cutting>Item is being cut. You can't paste it here.</node-cutting>
+      <access-denied>Access denied. You may not have the permission.</access-denied>
+      <remove-verion-exception>You can't remove this document because it is checked in.</remove-verion-exception>
+      <remove-referentialIntegrityException>You can't delete this item because it is currently referenced by another one.</remove-referentialIntegrityException>
+      <constraintviolation-exception>The mandatory property jcr:uuid was not found. The document may have been deleted or changed. Please click the Refresh button.</constraintviolation-exception>
+      <path-not-found-exception>This document was deleted or changed. Please click the Refresh button.</path-not-found-exception>
       <not-exist-categories>Kategorija neegzistuoja.</not-exist-categories>
       <lock-node-read-only>This file is locked by user {0}. Open read-only ?</lock-node-read-only>
     </msg>
@@ -428,12 +428,12 @@
       <title-invalid>Prašome įrašyti aplanko antraštę.</title-invalid>
       <name-not-allowed>Šis pavadinimas neleidžiamas.</name-not-allowed>
       <fileName-error>Failo pavadinimas yra klaidingas.</fileName-error>
-      <constraint-violation>Šis mazgas neleidžia jums pridėti mazgo tipo '{0}'.</constraint-violation>
+      <constraint-violation>You can't add a document of type '{0}' here.</constraint-violation>
       <repository-exception>Įvyko netikėta klaida. Dėl išsamesnės informacijos kreipkitės į administratorių.</repository-exception>
-      <repository-exception-permission>Jūs neturite teisės pridėti naujo aplanko į šį mazgą.</repository-exception-permission>
+      <repository-exception-permission>You don't have the permission to add a new folder here.</repository-exception-permission>
       <numberformat-exception>Jūs negalite išsaugoti šio dokumento. Pavadinimas turi būti skaitinio formato.</numberformat-exception>
       <!--DMS 2.4.x; ECM-3553-->
-      <not-allow-sameNameSibling>Negalima įrašyti į aplanką. Šio mazgas negali priimti dviejų mazgų tuo pačiu pavadinimu.</not-allow-sameNameSibling>
+      <not-allow-sameNameSibling>You can't save the folder. An item with the same name already exists.</not-allow-sameNameSibling>
       <ntFolder-not-avaiable>Pasirinkite pasirinktinį aplanko tipą</ntFolder-not-avaiable>
     </msg>
     <help>
@@ -500,26 +500,26 @@
       <feedback-restore>'{0}' sėkmingai atkurta.</feedback-restore>
       <feedback-restore-multi>{0} elementai sėkmingai atkurti.</feedback-restore-multi>
       
-      <confirm-restore>Mazgas tuo pačiu pavadinimu jau egzistuoja mazgo'{0}' senoje vietoje. Ar jūs norite atkurti šį mazgą?</confirm-restore>
+      <confirm-restore>A '{0}' item already exists at the previous location. Are you sure you want to restore it?</confirm-restore>
       <confirm-move>Ar jūs tikrai norite perkelti?</confirm-move>
-      <node-cut>Mazgas '{0}' iškirptas.</node-cut>
+      <node-cut>'{0}' has been cut.</node-cut>
       <execute-successfully>Pasirinktinis veiksmas '{0}' įvykdytas.</execute-successfully>
-      <save-node-success>Mazgas '{0}' išsaugotas.</save-node-success>
-      <move-problem>Jūs negalite perkelti mazgo '{0}' į '{1}', nes yra problemų su teisėmis arba apribojimo sąlygomis.</move-problem>
+      <save-node-success>'{0}' has been saved.</save-node-success>
+      <move-problem>You can't move '{0}' to '{1}' because there was a problem with permissions or constraint conditions.</move-problem>
     </msg>
   </UIWorkingArea>
   <UIDocumentWorkspace>
     <label>
-      <no-children>Šis mazgas neturi jokių antrinių mazgų.</no-children>
-      <no-children-but-has-hidden>Šis mazgas neturi jokių antrinių mazgų, bet yra keletas paslėptų failų.</no-children-but-has-hidden>
+      <no-children>This item doesn't have children.</no-children>
+      <no-children-but-has-hidden>This folder does not have any item, but there are some hidden files.</no-children-but-has-hidden>
     </label>
     <msg>
-      <unable-save-node>Mazgas '{0}' sukurtas iš naujo. Prašome išsaugoti sesiją prieš atliekant šį veiksmą.</unable-save-node>
-      <save-node-success>Mazgas '{0}' išsaugotas.</save-node-success>
-      <node-copied>Mazgas '{0}' nukopijuotas.</node-copied>
-      <node-cut>Mazgas '{0}' iškirptas.</node-cut>
-      <remove-root>Jūs negalite pašalinti šakninio mazgo.</remove-root>
-      <node-remove-success>Mazgas '{0}' pašalintas.</node-remove-success>
+      <unable-save-node>'{0}' has been created. Please save session to validate this action.</unable-save-node>
+      <save-node-success>'{0}' has been saved.</save-node-success>
+      <node-copied>'{0}' has been copied.</node-copied>
+      <node-cut>'{0}' has been cut.</node-cut>
+      <remove-root>You can't remove the root folder.</remove-root>
+      <node-remove-success>'{0}' has been removed.</node-remove-success>
     </msg>
     <tooltip>
       <Rename>Pervadinti</Rename>
@@ -538,11 +538,11 @@
   </UIDocumentWorkspace>
   <UIDocumentInfo>
     <msg>
-      <access-denied>Prieiga uždrausta. Jūs negalite prieiti prie mazgo '{0}'.</access-denied>
-      <null-exception>Elementas nerastas. Jis buvo pašalintas arba pakeistas, arba jūs neturite teisės pasiekti šio mazgo.</null-exception>
+      <access-denied>Access denied. You can't access '{0}'.</access-denied>
+      <null-exception>Item not found. It was either removed or changed, or you don't have the access permission.</null-exception>
       <confirm-deleteattachment>Ar jūs tikrai norite pašalinti šį pridėtinį failą?</confirm-deleteattachment>
       <confirm-deleteattcomment>Ar jūs tikrai norite pašalinti šį komentarą?</confirm-deleteattcomment>
-      <access-denied-exception>Prieiga uždrausta. Jūs negalite turėti skaitymo teisių, arba mazgas gali būti pašalintas arba pakeistas.</access-denied-exception>
+      <access-denied-exception>Access denied. You may not have reading privileges, or the documen may have been removed or changed.</access-denied-exception>
       <path-not-found>Šis elementas buvo ištrintas arba pakeistas. Spustelėkite mygtuką atnaujinti.</path-not-found>
     </msg>
     <tooltip>
@@ -601,7 +601,7 @@
       <OpenDocument>Remote Edit</OpenDocument>
       <EditProperty>Edit Document Properties</EditProperty>
       <UploadNewVersion>Upload a new version</UploadNewVersion>
-      <CreateNewVersion>Create a new version</CreateNewVersion>
+      <CreateNewVersion>Save as new version</CreateNewVersion>
     </event>
   </ECMContextMenu>
  
@@ -733,8 +733,8 @@
       <name-invalid>Please enter the property name.</name-invalid>
       <unable-create>Cannot add properties.</unable-create>
       <value-invalid>Please enter the value.</value-invalid>
-      <node-checkedin>You must check out this node before adding a property.</node-checkedin>
-      <can-not-add>You cannot add properties to this node. This is only allowed for the node type nt:unstructured.</can-not-add>
+      <node-checkedin>You must check out this item before adding a property.</node-checkedin>
+      <can-not-add>You can't add properties to this item. This is only allowed for the type nt:unstructured.</can-not-add>
       <propertyName-invalid>The property name must include namespace (e.g. namespace:name).</propertyName-invalid>
       <propertyName-exist>The property '{0}' already exists.</propertyName-exist>
       <propertyValu-null>Some values may be null.</propertyValu-null>
@@ -795,7 +795,7 @@
       <selectUser>Pasirinkti vartotoją</selectUser>
     </label>
     <msg>
-      <not-change-owner>'{0}' is the owner of this node and has full control permission.</not-change-owner>
+      <not-change-owner>'{0}' is the owner of this item and has full control permission.</not-change-owner>
     </msg>
   </UIGroupSelector>
   <UIPermissionForm>
@@ -807,7 +807,7 @@
       <add_node>Modify Right</add_node>
       <remove>Remove Right</remove>
     </label>
-    <title>Add a permission to that node</title>
+    <title>Add a permission</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>#{word.save}</Save>
@@ -914,7 +914,7 @@
   </ViewSearch>
   <UISearchResult>
     <msg>
-      <not-support>There is no View template for this node.</not-support>
+      <not-support>There is no View template for this document.</not-support>
       <empty>Rezultatų nerasta.</empty>
       <access-denied>You cannot open this folder, either because it no longer exists or because you do not have the right to access it.</access-denied>
       <query-invalid>The query is invalid.</query-invalid>
@@ -939,15 +939,15 @@
       <datecreatedDESC>Sort by created date in descending order</datecreatedDESC>
     </title>
     <tooltip>
-      <View>View this node</View>
+      <View>View this item</View>
       <OpenFolder>Go to folder</OpenFolder>
     </tooltip>
   </UISearchResult>
   <UIShowAllOwnedByUserResult>
     <msg>
-      <not-support>There is no View template for this node</not-support>
+      <not-support>There is no View template for this document</not-support>
       <empty>Rezultatų nerasta.</empty>
-      <access-denied>You cannot view this node, either because this template is not supported or because access is denied.</access-denied>
+      <access-denied>You can't view this document, either because this template is not supported or because access is denied.</access-denied>
       <query-invalid>The query is invalid</query-invalid>
     </msg>
     <header>
@@ -970,15 +970,15 @@
       <datecreatedDESC>Sort by Created date in descending order</datecreatedDESC>
     </title>
     <tooltip>
-      <View>Rodyti šį mazgą</View>
+      <View>View this item</View>
       <OpenFolder>Go to Folder</OpenFolder>
     </tooltip>
   </UIShowAllOwnedByUserResult>
   <UIShowAllFavouriteResult>
     <msg>
-      <not-support>Nėra jokių rodymo šablonų šiam mazgui</not-support>
+      <not-support>There is no View template for this item</not-support>
       <empty>No results found</empty>
-      <access-denied>Negalite peržiūrėti šio mazgo, nes šis šablonas yra nepalaikomas arba prieiga uždrausta.</access-denied>
+      <access-denied>You can't view this item, either because this template is not supported or because access is denied.</access-denied>
       <query-invalid>Užklausa yra klaidinga</query-invalid>
     </msg>
     <header>
@@ -1001,15 +1001,15 @@
       <datecreatedDESC>Rūšiuoti pagal sukūrimo datą mažėjančia tvarka</datecreatedDESC>
     </title>
     <tooltip>
-      <View>View this Node</View>
+      <View>View this item</View>
       <OpenFolder>Eiti į aplanką</OpenFolder>
     </tooltip>
   </UIShowAllFavouriteResult>
   <UIShowAllHiddenResult>
     <msg>
-      <not-support>Nėra jokių rodymo šablonų šiam mazgui.</not-support>
+      <not-support>There is no View template for this item.</not-support>
       <empty>Rezultatų nerasta.</empty>
-      <access-denied>Negalite peržiūrėti šio mazgo, nes šis šablonas yra nepalaikomas arba prieiga uždrausta.</access-denied>
+      <access-denied>You can't view this item, either because it has no View template or because you don't have access to it.</access-denied>
       <query-invalid>Užklausa yra klaidinga.</query-invalid>
     </msg>
     <header>
@@ -1033,16 +1033,16 @@
       <datecreatedDESC>Rūšiuoti pagal sukūrimo datą mažėjančia tvarka</datecreatedDESC>
     </title>
     <tooltip>
-      <View>Rodyti šį mazgą</View>
+      <View>View this Item</View>
       <OpenFolder>Eiti į aplanką</OpenFolder>
       <RemoveHiddenAttribute>Remove Hidden Attribute</RemoveHiddenAttribute>
     </tooltip>
   </UIShowAllHiddenResult>
   <UIShowAllTrashResult>
     <msg>
-      <not-support>Nėra jokių rodymo šablonų šiam mazgui.</not-support>
+      <not-support>There is no View template for this item.</not-support>
       <empty>Rezultatų nerasta</empty>
-      <access-denied>Negalite peržiūrėti šio mazgo, nes šis šablonas yra nepalaikomas arba prieiga uždrausta.</access-denied>
+      <access-denied>You can't view this item, either because it has no View template or because you don't have access to it.</access-denied>
       <query-invalid>Užklausa yra klaidinga.</query-invalid>
     </msg>
     <header>
@@ -1065,7 +1065,7 @@
       <datecreatedDESC>Rūšiuoti pagal sukūrimo datą mažėjančia tvarka</datecreatedDESC>
     </title>
     <tooltip>
-      <View>Rodyti šį mazgą</View>
+      <View>View this Item</View>
       <OpenFolder>Eiti į aplanką</OpenFolder>
       <DeletePermanently>Delete permanently</DeletePermanently>
       <RestoreFromTrash>Atkurti iš šiukšliadėžės</RestoreFromTrash>
@@ -1321,7 +1321,7 @@
       <Cancel>#{word.cancel}</Cancel>
       <Export>Eksportuoti</Export>
     </action>
-    <title>Eksportuoti mazgą</title>
+    <title>Export</title>
   </UIExportNode>
   <!--
   ###############################################################################
@@ -1366,8 +1366,8 @@
       <error-removing-referenced-version>This version is referenced and can't be removed.</error-removing-referenced-version>
       <confirm-restore>Are you sure you want to restore this version?</confirm-restore>
       <confirm-delete>Ar tikrai norite pašalinti šią versiją?</confirm-delete>
-      <not-checked-out>Jūs turite išregistruoti šį mazgą prieš atkurdami.</not-checked-out>
-      <invalid-item-state>Negalite atkurti šios versijos, arba todėl, kad vienas ar keli elementai buvo ištrinti arba perkelti kitur kitos sesijos metu.</invalid-item-state>
+      <not-checked-out>You have to check out this document before restoring.</not-checked-out>
+      <invalid-item-state>You can't restore this version, either because one or more items were deleted or moved by another session.</invalid-item-state>
     </msg>
     <action>
       <close>#{word.close}</close>
@@ -1392,8 +1392,8 @@
       <noVersion>Nėra versijos</noVersion>
     </msg>
     <eventName>
-      <e_1>Mazgas pridėtas</e_1>
-      <e_2>Mazgas pašalintas</e_2>
+      <e_1>Added</e_1>
+      <e_2>Document Removed</e_2>
       <e_4>Ypatybė pridėta</e_4>
       <e_16>Ypatybė pakeista</e_16>
       <e_8>Ypatybė pašalinta</e_8>
@@ -1433,13 +1433,13 @@
   -->
   <UIActivateVersion>
     <label>
-      <note>Versijavimas nėra aktyvuotas šiam mazgui.</note>
+      <note>Versioning has not been activated for this document.</note>
       <question>Ar tikrai norite aktyvuoti?</question>
       <button-active>Aktyvuoti</button-active>
       <button-cancel>#{word.cancel}</button-cancel>
     </label>
     <msg>
-      <access-denied>Jūs neturite teisės aktyvuoti versijavimo šiame mazge</access-denied>
+      <access-denied>You don't have permission to activate versioning on this document</access-denied>
     </msg>
   </UIActivateVersion>
   <!--
@@ -1462,7 +1462,7 @@
       </msg>
     </grid>
     <msg>
-      <node-type-invalid>Tik dokumento mazgo tipas gali būti įtrauktas.</node-type-invalid>
+      <node-type-invalid>Only documents can be enrolled.</node-type-invalid>
       <already-enroled>Šis dokumentas jau įtrauktas.</already-enroled>
     </msg>
   </UIActivePublication>
@@ -1473,7 +1473,7 @@
   -->
   <UIActivateAuditing>
     <label>
-      <note>Auditas šiam mazgui neaktyvuotas.</note>
+      <note>Auditing has not been activated for this document.</note>
       <question>Ar tikrai norite aktyvuoti?</question>
     </label>
     <action>
@@ -1516,7 +1516,7 @@
       <Cancel>#{word.cancel}</Cancel>
       <Import>Importuoti</Import>
     </action>
-    <title>Importuoti mazgą</title>
+    <title>Import</title>
     <msg>
       <import-successful>Sėkmingai importuotas.</import-successful>
       <filename-invalid>Pasirinkite .xml failą 'Įkelti failą' laukelyje, kad įkelti.</filename-invalid>
@@ -1524,8 +1524,8 @@
       <xml-invalid>There is an invalid character at position [row, column]:{0} in {1} file</xml-invalid>
       <mimetype-invalid>Galima įkelti tik .xml arba .zip failus.</mimetype-invalid>
       <access-denied>Prieiga uždrausta. Jums neleidžiama įkelti čia.</access-denied>
-      <constraint-violation-exception>Neįmanoma importuoti duomenų. Tipas '{0}' yra neleidžiamas šioje vietoje.</constraint-violation-exception>
-      <item-exists-exception>Įeinamasis susietas mazgas turi tą patį UUID kaip ir esamas mazgas darbo srityje.</item-exists-exception>
+      <constraint-violation-exception>Impossible to import data. The type '{0}' is not allowed at this location.</constraint-violation-exception>
+      <item-exists-exception>An incoming item has the same UUID as an existing item in the workspace.</item-exists-exception>
     </msg>
   </UIImportNode>
   <!--
@@ -1573,7 +1573,7 @@
   <UIViewVersion>
     <label>
       <nodeType>Mazgo tipas</nodeType>
-      <nodeName>Mazgo pavadinimas</nodeName>
+      <nodeName>Name</nodeName>
       <VersionNumber>Versijos numeris</VersionNumber>
       <VersionLabels>Versijos etiketės</VersionLabels>
       <VersionDate>Versijos data</VersionDate>
@@ -1609,7 +1609,7 @@
       <action>Veiksmai</action>
     </header>
     <msg>
-      <access-denied>Prieiga uždrausta. Jūs neturite priėjimo teisių šiame mazge.</access-denied>
+      <access-denied>Access denied. You don't have access permission.</access-denied>
       <confirm-delete>Ar tikrai norite ištrinti šią nuorodą?</confirm-delete>
     </msg>
     <action>
@@ -1629,7 +1629,7 @@
       <action>Veiksmas</action>
     </header>
     <info>
-      <child-not-found>Šis mazgas neturi jokių antrinių mazgų.</child-not-found>
+      <child-not-found>This item doesn't have any child.</child-not-found>
     </info>
   </UITreeList>
   <!--
@@ -1685,8 +1685,8 @@
       <clearall>Išvalyti viską</clearall>
     </action>
     <msg>
-      <unable-pasted>Negalima įklijuoti šio mazgo.</unable-pasted>
-      <node-pasted>Mazgas '{0}' buvo įterptas į vietą '{1}'. Ši operacija jau buvo išsaugota.</node-pasted>
+      <unable-pasted>Can't paste this item.</unable-pasted>
+      <node-pasted>{0} has been pasted at location {1}. This operation has already been saved.</node-pasted>
     </msg>
   </UIClipboard>
   <!--
@@ -1727,15 +1727,15 @@
 </tooltip>
     <msg>
       <cannot-save>Įvyko klaida išsaugojant dokumentą.</cannot-save>
-      <in-versioning>Prašome patikrinti dabartinį mazgą prieš pridedant naują.</in-versioning>
+      <in-versioning>Please check out the current folder before adding a new item.</in-versioning>
       <not-support>Nepavyko įkelti '{0}' šablono.</not-support>
       <value-invalid>'{0}' yra reikalinga reikšmė.</value-invalid>
       <repository-exception>Įvyko klaida išsaugojant dokumentą.</repository-exception>
       <!--DMS 2.4.x; ECM-3543-->
-      <repository-exception-permission>Jūs neturite teisės pridėti naują dokumentą į šį mazgą.</repository-exception-permission>
+      <repository-exception-permission>You don't have permission to add a new document to this folder.</repository-exception-permission>
       <not-allowed-same-name-sibling>Negalima išsaugoti šio dokumento. Neleidžiama turėti to pačio pavadinimo kaip ir giminaičio.</not-allowed-same-name-sibling>
       <numberformat-exception>Jūs negalite išsaugoti šio dokumento. Pavadinimas turi būti skaitinio formato.</numberformat-exception>
-      <item-not-found>Elementas nerastas. Šis mazgas (arba jo pradininkas) yra ištrintas. Prašome spustelėti perkrovimo mygtuką.</item-not-found>
+      <item-not-found>Document not found. This document (or its ancestor) may have been deleted. Please click the Refresh button.</item-not-found>
     </msg>
   </UIDocumentForm>
   <!--
@@ -1800,7 +1800,7 @@
       <action>Veiksmas</action>
     </header>
     <msg>
-      <remove-popup-first>Jūs turite uždaryti redagavimo iškylantįjį langą prieš ištrindami šį mazgą.</remove-popup-first>
+      <remove-popup-first>You must close the edit pop-up before deleting this item.</remove-popup-first>
       <confirm-delete-action>Ar tikrai norite ištrinti šį veiksmą?</confirm-delete-action>
       <template-empty>'{0}' šablonas yra negaliojantis arba tuščias.</template-empty>
       <template-null>Šablonas yra tuščias arba jūs neturite teisių pasiekti šį šabloną.</template-null>
@@ -1826,7 +1826,7 @@
       <numberformat-exception>Jūs negalite išsaugoti šio veiksmo. Pavadinimas turi būti skaitinio formato.</numberformat-exception>
       <existed-action>Veiksmo pavadinimas '{0}' jau egzistuoja. Prašome pasirinkti kitą pavadinimą.</existed-action>
       <unable-add-action>Negalima pridėti šio veiksmo.</unable-add-action>
-      <unable-add>Negalima pridėti šio veiksmo. Mazgas yra pagrindinis arba jūs neturite teisės.</unable-add>
+      <unable-add>Can't add this action. This item is either the root folder or you don't have the permission to edit.</unable-add>
       <not-support>Dialogas '{0}' yra nepalaikomas.</not-support>
       <no-permission-add>Prieiga uždrausta. Jūs neturite teisės pridėti veiksmo čia.</no-permission-add>
       <access-denied>Prieiga uždrausta. Jūs neturite teisės prieiti prie šio šablono.</access-denied>
@@ -1865,7 +1865,7 @@
   <UIAddressBar>
     <msg>
       <path-not-found>Kelias nerastas.</path-not-found>
-      <access-denied>Prieiga uždrausta. Jūs neturite teisės skaityti mazgo.</access-denied>
+      <access-denied>Access denied. You don't have the permission to read.</access-denied>
       <keyword-not-support>Raktinis žodis yra neteisingas. Kai kurie ženklai yra nepripažįstami.</keyword-not-support>
     </msg>
     <label>
@@ -1874,8 +1874,8 @@
     </label>
     <title>
       <exeButton>Eiti</exeButton>
-      <backButton>Grįžti į ankstesnę skiltį</backButton>
-      <showHistory>Rodyti istorijos adresą</showHistory>
+      <backButton>Back</backButton>
+      <showHistory>Show History</showHistory>
       <changeNode>Pakeisti mazgą</changeNode>
     </title>
   </UIAddressBar>
@@ -1937,7 +1937,7 @@
   -->
   <UIViewMetadataContainer>
     <msg>
-      <path-not-found>Mazgas nepalaiko šio rodinio.</path-not-found>
+      <path-not-found>The document does not support this view.</path-not-found>
     </msg>
   </UIViewMetadataContainer>
   <!--
@@ -1958,7 +1958,7 @@
   </metadataForm>
   <UIViewMetadataTemplate>
     <msg>
-      <access-denied>Prieiga uždrausta. Jūs esate ne savininkas arba neturite teisės redaguoti šiame mazge.</access-denied>
+      <access-denied>Access denied. Either you are not the owner or don't have edit permission.</access-denied>
     </msg>
   </UIViewMetadataTemplate>
   <!--
@@ -2034,7 +2034,7 @@
       <private>Privatus</private>
       <state>Būsena</state>
       <visibility>Matomumas</visibility>
-      <nodeName>Mazgo pavadinimas:</nodeName>
+      <nodeName>Name:</nodeName>
       <lifecycleName>Gyvavimo ciklo pavadinimas</lifecycleName>
       <stateName>Būsenos pavadinimas</stateName>
     </label>
@@ -2058,7 +2058,7 @@
   </UIWorkspaceList>
   <pathSelector>
     <title>
-      <UIOneNodePathSelector>Mazgo pasirinkimas</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Selector</UIOneNodePathSelector>
     </title>
   </pathSelector>
   <!--
@@ -2166,9 +2166,9 @@
     </label>
     <msg>
       <mimetype-incorrect>Neteisingas failo tipas. Miniatiūros gali būti sukurtos tik iš .JPG, .PNG arba .GIF failų.</mimetype-incorrect>
-      <access-denied>Prieiga uždrausta. Jūs neturite teisės pridėti miniatiūros į šį mazgą.</access-denied>
+      <access-denied>Access denied. You don't have permission to add a thumbnail.</access-denied>
       <confirm-delete>Ar tikrai norite pašalinti šią miniatiūrą?</confirm-delete>
-      <is-checked-in>Šis mazgas yra įregistruotas. Prašome patikrinti prieš atliekant bet kokį veiksmą.</is-checked-in>
+      <is-checked-in>This item is checked in. Please check out before performing any action.</is-checked-in>
       <fileName-error>Pasirinkite failą, kurį norite įkelti.</fileName-error>
     </msg>
     <title>
@@ -2272,7 +2272,7 @@
 
   <PopupSelectPath>
     <title>
-      <UIOneNodePathSelector>Pasirinkite mazgą</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Select Path</UIOneNodePathSelector>
     </title>
   </PopupSelectPath>
 
@@ -2302,7 +2302,7 @@
   <UISymLinkForm>
     <label>
       <symLinkName>Simbolinės nuorodos pavadinimas</symLinkName>
-      <pathNode>Kelio mazgas</pathNode>
+      <pathNode>Path</pathNode>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -2313,16 +2313,16 @@
       <name-invalid>Įveskite simbolinės nuorodos pavadinimą.</name-invalid>
       <name-not-allowed>Šis pavadinimas neleidžiamas.</name-not-allowed>
       <fileName-error>Failo pavadinimas yra klaidingas.</fileName-error>
-      <constraint-violation>Jūs negalite pridėti'{0}' mazgo tipo prie dabartinio mazgo.</constraint-violation>
-      <repository-exception>Prieiga uždrausta. Jūs neturite leidimo pridėti simbolinės nuorodos į šį mazgą.</repository-exception>
+      <constraint-violation>You can't add an item of type '{0}' here.</constraint-violation>
+      <repository-exception>Access denied. You don't have permission to add a symlink here.</repository-exception>
       <numberformat-exception>Jūs negalite išsaugoti šio dokumento. Pavadinimas turi būti skaitinio formato.</numberformat-exception>
-      <path-node-invalid>Prašome įvesti kelio mazgą.</path-node-invalid>
+      <path-node-invalid>Please enter the path.</path-node-invalid>
       <path-node-not-allowed>Šis pavadinimas neleidžiamas.</path-node-not-allowed>
-      <non-node>Prašome pasirinkti patikimą tikslinį mazgą; jūs galite neturėti teisės skaityti šio mazgo.</non-node>
-      <cannot-save>Jūs negalite pridėti simbolinės nuorodos šiam mazgo tipui.</cannot-save>
-      <item-exists-exception>Mazgo pavadinimas jau egzistuoja.</item-exists-exception>
-      <translation-node-same-language-default>Vertimo mazgas turi tą pačią kalbą kaip ir numatytoji dabartinio mazgo kalba.</translation-node-same-language-default>
-      <UnsupportedRepositoryOperationException>Šis tikslinis mazgas nebuvo paminėtas.</UnsupportedRepositoryOperationException>
+      <non-node>Please select the trust target; you may not have the rights to read this item.</non-node>
+      <cannot-save>You can't add a symlink for this type of document.</cannot-save>
+      <item-exists-exception>An item with this name already exists.</item-exists-exception>
+      <translation-node-same-language-default>The translated document has the same language as the default language of current document.</translation-node-same-language-default>
+      <UnsupportedRepositoryOperationException>This target item is not referred.</UnsupportedRepositoryOperationException>
     </msg>
   </UISymLinkForm>
   
@@ -2342,22 +2342,22 @@
       <name-invalid>Įveskite nuorodos pavadinimą.</name-invalid>
       <name-not-allowed>Šis pavadinimas neleidžiamas.</name-not-allowed>
       <fileName-error>Failo pavadinimas yra klaidingas.</fileName-error>
-      <constraint-violation>Jūs negalite pridėti'{0}' mazgo tipo prie dabartinio mazgo.</constraint-violation>
-      <repository-exception>Prieiga uždrausta. Jūs neturite leidimo pridėti nuorodą į šį mazgą.</repository-exception>
+      <constraint-violation>You can't add the '{0}' type to the current item.</constraint-violation>
+      <repository-exception>Access denied. You don't have permission to add a symlink to this item.</repository-exception>
       <numberformat-exception>Jūs negalite išsaugoti šio aplanko. Pavadinimas turi būti skaitinio formato.</numberformat-exception>
-      <path-node-invalid>Prašome įvesti kelio mazgą.</path-node-invalid>
+      <path-node-invalid>Please enter the path.</path-node-invalid>
       <path-node-not-allowed>Šis pavadinimas neleidžiamas.</path-node-not-allowed>
-      <non-node>Prašome pasirinkti tikslinį mazgą; jūs galite neturėti teisės skaityti šio mazgo.</non-node>
+      <non-node>Please select the trust target; you may not have the right to read this node.</non-node>
       <cannot-save>Sukuriant nuorodą įvyko klaida.</cannot-save>
-      <item-exists-exception>Mazgo pavadinimas jau egzistuoja.</item-exists-exception>
-      <translation-node-same-language-default>Vertimo mazgas turi tą pačią kalbą kaip ir numatytoji dabartinio mazgo kalba.</translation-node-same-language-default>
-      <UnsupportedRepositoryOperationException>Šis tikslinis mazgas nebuvo paminėtas.</UnsupportedRepositoryOperationException>
+      <item-exists-exception>An item with this name already exists.</item-exists-exception>
+      <translation-node-same-language-default>The translated document has the same language as the default language of current document.</translation-node-same-language-default>
+      <UnsupportedRepositoryOperationException>This target item is not referred.</UnsupportedRepositoryOperationException>
     </msg>
   </UIAddTranslationForm>
 
   <UIPopupSymLink>
     <title>
-      <UIOneNodePathSelector>Pasirinkite tikslinį mazgą</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Select Target Item</UIOneNodePathSelector>
     </title>
   </UIPopupSymLink>
   <UIPopupSymLink>
@@ -2375,9 +2375,9 @@
 
   <UIWorkingArea>
     <msg>
-      <create-link-problem>Negalima sukurti nuorodos mazgui '{0}' '{1}'.</create-link-problem>
-      <dest-node-is-link>Paskirties mazgas '{0}' yra jau simbolinė nuoroda, tad negalite sukurti simbolinės nuorodos jo viduje.</dest-node-is-link>
-      <selected-is-link>The selected node '{0}' is already a link. You cannot create a link that points to another link.</selected-is-link>
+      <create-link-problem>You can't create a link for '{0}' at '{1}'.</create-link-problem>
+      <dest-node-is-link>The destination '{0}' is already a symlink, so you cannot create a symlink inside it.</dest-node-is-link>
+      <selected-is-link>The selected item '{0}' is already a link. You can't create a link to another link.</selected-is-link>
       <confirm-create-link>Ar norite kurti nuorodą šioje vietoje?</confirm-create-link>
     </msg>
   </UIWorkingArea>
@@ -2460,7 +2460,7 @@
 <ReadOnly>Open Read-only</ReadOnly>
 <Cancel>Cancel</Cancel>
       <KeepBoth>Keep Both</KeepBoth>
-      <CreateNewVersion>Create a new version</CreateNewVersion>
+      <CreateNewVersion>Save as new version</CreateNewVersion>
     </label>
   </UIConfirmMessage>
 
@@ -2516,7 +2516,7 @@
 
   <UIPopupMenu>
     <msg>
-      <node-locked-other-person>Šį mazgą arba jo pirminį mazgą yra užrakinęs kitas vartotojas, todėl jų panaikinti negalėsite.</node-locked-other-person>
+      <node-locked-other-person>This item or its parent folder is locked by another user, so you can't delete it.</node-locked-other-person>
     </msg>
   </UIPopupMenu>
 
@@ -2551,7 +2551,7 @@
 
   <UIPopupMenu>
     <msg>
-      <can-not-unlock-node-is-checked-in>Jūs negalite atrakinti, nes mazgas '{0}' (arba jo pradininkas) yra įregistruotas.</can-not-unlock-node-is-checked-in>
+      <can-not-unlock-node-is-checked-in>You can't unlock because the '{0}' (or its parent folder) is checked in.</can-not-unlock-node-is-checked-in>
     </msg>
   </UIPopupMenu>
 
@@ -2560,12 +2560,12 @@
   -->
   <UIActionBar>
     <msg>
-      <cannot-enable-version>Negalima įjungti versijavimo mazgo.</cannot-enable-version>
+      <cannot-enable-version>Can't activate versioning on this document.</cannot-enable-version>
     </msg>
   </UIActionBar>
   <UIPopupMenu>
     <msg>
-        <cannot-readsource>Jūs negalite perskaityti duomenų iš šaltinio mazgo.</cannot-readsource>
+        <cannot-readsource>You can't read data from the source.</cannot-readsource>
     </msg>
   </UIPopupMenu>
   <UIUploadForm>
@@ -2845,7 +2845,7 @@
 
     <UIPopupMenu>
     <msg>
-      <node-locked-editing>Jūs negalite redaguoti šio mazgo kelyje {0}. Jį užrakinęs kitas vartotojas.</node-locked-editing>
+      <node-locked-editing>You can't edit  {0}. It's locked by another user.</node-locked-editing>
     </msg>
   </UIPopupMenu>
   <UITagStyleForm>
@@ -2939,12 +2939,12 @@
   </PathNode>
   <UIPopupPathFoRestore>
     <title>
-      <UIOneNodePathSelector>Pasirinkite pirminį mazgą</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Select Parent</UIOneNodePathSelector>
     </title>
   </UIPopupPathFoRestore>
   <rootNodeInfo>
     <title>
-      <AddRootNode>Pridėti šakninį mazgą</AddRootNode>
+      <AddRootNode>Add Root</AddRootNode>
     </title>
   </rootNodeInfo>
 
@@ -3156,9 +3156,9 @@
   </lifecyclePhase>
   <UIPopupMenu>
   <msg>
-<can-not-remove-locked-node>Mazgas {0} yra užrakintas. Negalima perkelti jo į šiukšliadėžę.</can-not-remove-locked-node>
-<can-not-remove-checked-in-node>Mazgas {0} arba jo pirminis mazgas yra įregistruoti. Negalima perkelti jo į šiukšliadėžę.</can-not-remove-checked-in-node>
-<access-denied-to-delete>Prieiga uždrausta. Mazgo {0} negalima perkelti į šiukšlinę.</access-denied-to-delete>
+<can-not-remove-locked-node>{0} is locked. You can't move it to the Trash.</can-not-remove-locked-node>
+<can-not-remove-checked-in-node>{0} or its parent folder is checked in. You can't move it to the Trash.</can-not-remove-checked-in-node>
+<access-denied-to-delete>Access denied. You can't move {0} to the Trash.</access-denied-to-delete>
   </msg>
   </UIPopupMenu>
   <UIPropertyForm>
@@ -3168,8 +3168,8 @@
   </UIPropertyForm>
   <UIWatchDocumentForm>
     <msg>
-      <node-is-locked>Šis mazgas yra užrakintas. Jūs negalite jo stebėti.</node-is-locked>
-      <unknown-error>Įvyko klaidų. Jūs negalite stebėti šio mazgo.</unknown-error>
+      <node-is-locked>This item is locked. You cannot watch it.</node-is-locked>
+      <unknown-error>Some errors have occurred. You can't watch this document.</unknown-error>
     </msg>
   </UIWatchDocumentForm>   
   <UIActionForm>
@@ -3194,7 +3194,7 @@
     <Keep>Pasilikti abu</Keep>
     <Replace>Pakeisti</Replace>
     <Canceled>Atšauktas</Canceled>
-      <UploadNewVersion>Upload new version</UploadNewVersion>
+      <UploadNewVersion>Upload a new version</UploadNewVersion>
     <Cancel>#{word.cancel}</Cancel>
     <AbortAllConfirmation>Ar norite nutraukti visus failus pažangoje?</AbortAllConfirmation>
   </label>

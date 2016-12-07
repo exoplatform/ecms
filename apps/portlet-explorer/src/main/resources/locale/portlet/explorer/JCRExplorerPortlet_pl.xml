@@ -18,7 +18,7 @@
     </action>
     <msg>
       <not-support>You can't comment on this type of document.</not-support>
-      <not-checkedout>Musisz sprawdzić węzeł przed skomentowaniem go.</not-checkedout>
+      <not-checkedout>You must check out the document before commenting on it.</not-checkedout>
       <content-null>Nie możesz opublikować pustego komentarza.</content-null>
     </msg>
   </UICommentForm>
@@ -46,7 +46,7 @@
     </button>
     <msg>
       <not-support>Nie możesz głosować na dokument tego typu.</not-support>
-      <not-checkedout>Musisz sprawdzić węzeł przed głosowaniem.</not-checkedout>
+      <not-checkedout>You must check out the document to vote.</not-checkedout>
       <vote-restriction>You cannot vote more than one time.</vote-restriction>
     </msg>
   </UIVoteForm>
@@ -59,9 +59,9 @@
   <UIJCRExplorer>
     <msg>
       <refresh-session-success>Sesja została pomyślnie odświeżona.</refresh-session-success>
-      <no-node-history>Jesteś w węźle głównym.</no-node-history>
+      <no-node-history>You are at the root.</no-node-history>
       <save-session-success>Wszystkie zmiany zostały zapisane.</save-session-success>
-      <target-path-not-found>Nie masz dostępu do tego węzła: albo dlatego, że on już nie istnieje, albo dlatego, że nie masz prawa dostępu do niego.</target-path-not-found>
+      <target-path-not-found>You can't access this path, either because it doesn't exist anymore or because you don't have access permissions.</target-path-not-found>
     </msg>
   </UIJCRExplorer>
   <!--
@@ -159,8 +159,8 @@
     <label>
       <enableStructure>Włącz strukturę DMS:</enableStructure>
       <showSideBar>Pokaż pasek boczny:</showSideBar>
-      <showHiddenNode>Pokaż ukryte węzły:</showHiddenNode>
-      <showNonDocument>Pokazywanie węzłów dla dokumentów:</showNonDocument>
+      <showHiddenNode>Show Hidden Items:</showHiddenNode>
+      <showNonDocument>Show Non-document Items:</showNonDocument>
       <showRefDocuments>Pokaż dokumenty odniesienia:</showRefDocuments>
       <enableDragAndDrop>Włącz Przeciągnij i Upuść:</enableDragAndDrop>
       <sortBy>Sortuj według:</sortBy>
@@ -201,15 +201,15 @@
       <Back>#{word.back}</Back>
     </action>
     <msg>
-      <rename-successfull>Węzeł '{0}' został zmieniony na '{1}' pomyślnie.</rename-successfull>
-      <rename-denied>Odmowa dostępu. Nie można zmienić nazwy tego węzła.</rename-denied>
+      <rename-successfull>'{0}' was renamed to '{1}' successfully.</rename-successfull>
+      <rename-denied>Access denied. You can't rename this item.</rename-denied>
       <fileName-invalid>Nowa nazwa zawiera pewne nieprawidłowe znaki.</fileName-invalid>
       <newName-same-oldName>Nowa nazwa już istnieje. Proszę sprawdzić ponownie.</newName-same-oldName>
-      <version-exception>Ten węzeł (lub przodek tego węzła) nie jest wyrejestrowany.</version-exception>
-      <lock-exception>Ten węzeł jest zablokowany. Proszę odblokować go przed zmianą nazwy.</lock-exception>
-      <constraintViolation-exception>Wystąpił błąd podczas zmiany nazwy węzła „{0}”. Proszę sprawdzić ponownie.</constraintViolation-exception>
+      <version-exception>This document (or one of its ancestors) is not checked out.</version-exception>
+      <lock-exception>This document is locked. Please unlock it before renaming.</lock-exception>
+      <constraintViolation-exception>An error occurred while renaming '{0}'. Please check again.</constraintViolation-exception>
       <unknown-prefix>Przedrostek '{0}' nie został jeszcze zarejestrowany.</unknown-prefix>
-      <rename-error>Wystąpił błąd podczas zmiany nazwy tego węzła. Proszę sprawdzić ponownie.</rename-error>
+      <rename-error>An error occurred while renaming. Please check again.</rename-error>
     </msg>
   </UIRenameForm>
   <UIPopupWindow>
@@ -222,7 +222,7 @@
       <UIExportNode>Eksportuj</UIExportNode>
       <UINodeTypeInfo>Typ węzła informacyjnego</UINodeTypeInfo>
       <UIVersionInfo>Informacje o wersji</UIVersionInfo>
-      <UIActivateVersion>Aktywuj wersję</UIActivateVersion>
+      <UIActivateVersion>Activate Versioning</UIActivateVersion>
       <UIAuditingInfo>Informacje o audycie</UIAuditingInfo>
       <UIActivateAuditing>Aktywuj audyt</UIActivateAuditing>
       <UIPermissionManager>Zarządzanie uprawnieniami</UIPermissionManager>
@@ -313,40 +313,40 @@
       <UploadNewVersion>Przekaż nową wersję</UploadNewVersion>
     </tooltip>
     <msg>
-      <cannot-action-in-rootnode>Nie można wykonać tej operacji w węźle głównym.</cannot-action-in-rootnode>
+      <cannot-action-in-rootnode>You can't perform this action at root.</cannot-action-in-rootnode>
       <node-checkedin>W pierwszej kolejności musisz sprawdzić.</node-checkedin>
-      <cannot-enable-version-rootnode>Nie można włączyć wersji dla węzła głównego.</cannot-enable-version-rootnode>
-      <cannot-enable-publication-rootnode>Nie można włączyć publikacji dla węzła głównego.</cannot-enable-publication-rootnode>
+      <cannot-enable-version-rootnode>Can't activate versioning on root.</cannot-enable-version-rootnode>
+      <cannot-enable-publication-rootnode>Can't activate publication at root.</cannot-enable-publication-rootnode>
       <manage-publication>
-        <not-supported-nodetype>Publikacja obsługuje tylko węzeł dokumentu.</not-supported-nodetype>
+        <not-supported-nodetype>Only documents can be published.</not-supported-nodetype>
         <no-publication-lifecycle>Publikacja na temat cyklu życia nie jest skonfigurowana.</no-publication-lifecycle>
       </manage-publication>
-      <unsubcriber-lifecycle>Węzeł był już wypisany.</unsubcriber-lifecycle>
-      <not-supported-nodetype>Rezygnacja z cyklu życia obsługuje tylko węzeł dokumentu.</not-supported-nodetype>
-      <unsubcriber-lifecycle-finish>Węzeł został wypisany z powodzeniem.</unsubcriber-lifecycle-finish>
-      <access-false>Węzeł nie dotyczy artykułu lub zameldowania.</access-false>
+      <unsubcriber-lifecycle>The document was already unsubscribed.</unsubcriber-lifecycle>
+      <not-supported-nodetype>This operation is only supported for documents.</not-supported-nodetype>
+      <unsubcriber-lifecycle-finish>The document was unsubscribed successfully.</unsubcriber-lifecycle-finish>
+      <access-false>The document is not an article or checked in.</access-false>
       <unsupported-action>To działanie nie jest obsługiwane.</unsupported-action>
-      <not-relationable>Ten węzeł nie miał jeszcze żadnych podobnych linków do innego węzła.</not-relationable>
-      <node-pasted>Węzeł „{0}” został wklejony w miejscu '{1}'. Operacja ta została już zapisana.</node-pasted>
-      <no-node-selected>Brak węzła do skopiowania.</no-node-selected>
-      <unable-edit>Węzeł '{0}' z NodeType '{1}' nie jest obsługiwany do edycji.</unable-edit>
-      <not-support>Nie można edytować wybranego węzła.</not-support>
-      <template-null>Ten węzeł nie ma okna dostępu.</template-null>
+      <not-relationable>This document has no relations.</not-relationable>
+      <node-pasted>'{0}' has been pasted at the location '{1}'. This operation has already been saved.</node-pasted>
+      <no-node-selected>Nothing to copy.</no-node-selected>
+      <unable-edit>Editing documents of type '{1}' like '{0}' is not supported.</unable-edit>
+      <not-support>Can't edit the selected item.</not-support>
+      <template-null>This document has no form template.</template-null>
       <keyword-null>Brak słów kluczowych do wyszukiwania.</keyword-null>
       <not-found>Nie znaleziono żadnych wyników.</not-found>
       <keyword-not-allow>To słowo kluczowe nie jest dozwolone.</keyword-not-allow>
-      <is-not-referenable>Węzeł '{0}' nie może być zmieniony.</is-not-referenable>
-      <access-denied>Odmowa dostępu. Nie masz uprawnień do edycji w tym węźle.</access-denied>
-      <access-add-denied>Odmowa dostępu. Nie masz pozwolenia na dodanie węzła w tej lokalizacji.</access-add-denied>
+      <is-not-referenable>'{0}' can't be referenceable.</is-not-referenable>
+      <access-denied>Access denied. You don't have edit permission for this item.</access-denied>
+      <access-add-denied>Access denied. You don't have permission to add items here.</access-add-denied>
       <item-existed>Ten węzeł już istnieje. To nie może mieć taką samą nazwę jak jego pokrewne.</item-existed>
       <removed-hidden-mixin>Usunięto ukrytą wstawkę z powodzeniem.</removed-hidden-mixin>
       <added-hidden-mixin>Dodano ukryte wstawki z powodzeniem.</added-hidden-mixin>
       <not-supported>Ta funkcja jest obsługiwana tylko dla danego typu dokumentów.</not-supported>
-      <empty-file-type>Nie możesz dodać dokumentu do tego węzła.</empty-file-type>
-      <unsupported-watch>Tylko węzeł dokumentu może być obserwowany.</unsupported-watch>
-      <watch-checkedin>Musisz sprawdzić węzeł przed obejrzeniem.</watch-checkedin>
-      <unsupported-tagging>Tylko węzeł dokumentu może być oznaczony.</unsupported-tagging>
-      <tagnode-checkedin>Musisz sprawdzić węzeł przed otagowaniem.</tagnode-checkedin>
+      <empty-file-type>You can't add a document here.</empty-file-type>
+      <unsupported-watch>Only documents can be watched.</unsupported-watch>
+      <watch-checkedin>You must check out the document before watching.</watch-checkedin>
+      <unsupported-tagging>Only documents can be tagged.</unsupported-tagging>
+      <tagnode-checkedin>You must check out the document before tagging.</tagnode-checkedin>
     </msg>
     <title>
       <select-tab>Wybierz kartę</select-tab>
@@ -361,48 +361,48 @@
   </UIActionBar>
   <UIPopupMenu>
     <msg>
-      <has-not-permission>Odmowa dostępu. Nie masz pozwolenia na dodanie węzła w tej lokalizacji.</has-not-permission>
-      <has-not-edit-permission>Odmowa dostępu. Nie masz uprawnień do dokonywania edycji w tym węźle. Proszę skontaktować się z administratorem.</has-not-edit-permission>
-      <cannot-login-node>Nie można uzyskać dostępu i wkleić tutaj węzła.</cannot-login-node>
-      <cannot-paste-nodetype>Nie można wkleić tutaj węzła.</cannot-paste-nodetype>
-      <has-not-permission-unlok>Nie masz uprawnień, aby odblokować ten węzeł.</has-not-permission-unlok>
-      <bound-exception>Nie masz uprawnień do zmiany nazwy tego węzła. Proszę skontaktować się z administratorem.</bound-exception>
-      <bound-move-exception>Nie można przenieść węzła do siebie lub do swojego sub-węzła.</bound-move-exception>
-      <does-not-support-auditing>Nie można włączyć inspekcji na tym węźle.</does-not-support-auditing>
-      <can-not-rename-node>Nie masz uprawnień do zmiany nazwy tego węzła. Skontaktuj się z administratorem, aby uzyskać prawidłowe prawo dostępu.</can-not-rename-node>
-      <can-not-cut-node>Nie masz uprawnień, aby wyciąć ten węzeł. Proszę skontaktować się z administratorem.</can-not-cut-node>
-      <can-not-remove-node>Nie masz uprawnień do usunięcia tego węzła. Proszę skontaktować się z administratorem.</can-not-remove-node>
-      <can-not-lock-node>Nie masz uprawnień, aby zablokować węzeł {0}. Proszę skontaktować się z administratorem.</can-not-lock-node>
-      <can-not-unlock-node>Nie masz uprawnień, aby odblokować ten węzeł. Proszę skontaktować się z administratorem.</can-not-unlock-node>
-      <no-node>Wybierz co najmniej jeden węzeł przed wklejeniem.</no-node>
-      <can-not-paste-node>Nie masz uprawnień, aby przejść do tego węzła. Proszę skontaktować się z administratorem.</can-not-paste-node>
-      <can-not-move-node>Nie masz uprawnień do przenoszenia tego węzła. Proszę skontaktować się z administratorem.</can-not-move-node>
-      <does-not-support-versioning>Nie masz uprawnień, aby przejść do tego węzła. Proszę skontaktować się z administratorem.</does-not-support-versioning>
+      <has-not-permission>Access denied. You don't have permissions to add in this item.</has-not-permission>
+      <has-not-edit-permission>Access denied. You don't have edit permission here. Please contact the administrator.</has-not-edit-permission>
+      <cannot-login-node>You can't access and paste an item here.</cannot-login-node>
+      <cannot-paste-nodetype>You can't paste this type of item here.</cannot-paste-nodetype>
+      <has-not-permission-unlok>You don't have permission to unlock this document.</has-not-permission-unlok>
+      <bound-exception>You don't have the permission to rename this item. Please contact the administrator.</bound-exception>
+      <bound-move-exception>You can't move an item to itself or in a subfolder.</bound-move-exception>
+      <does-not-support-auditing>You can't activate auditing here.</does-not-support-auditing>
+      <can-not-rename-node>You don't have permission to rename this item. Please contact the administrator to get the necessary rights.</can-not-rename-node>
+      <can-not-cut-node>You don't have permission to cut this item. Please contact the administrator.</can-not-cut-node>
+      <can-not-remove-node>You don't have permission to remove this item. Please contact the administrator.</can-not-remove-node>
+      <can-not-lock-node>You don't have permission to lock {0}. Please contact the administrator.</can-not-lock-node>
+      <can-not-unlock-node>You don't have permission to unlock this item. Please contact the administrator.</can-not-unlock-node>
+      <no-node>Please select at least one item before pasting.</no-node>
+      <can-not-paste-node>You don't have permission to move to this item. Please contact the administrator.</can-not-paste-node>
+      <can-not-move-node>You don't have permission to move this item. Please contact the administrator.</can-not-move-node>
+      <does-not-support-versioning>You don't have permission to move. Please contact the administrator.</does-not-support-versioning>
       <path-not-found>This element was deleted or changed. Please click the Refresh button.</path-not-found>
-      <paste-lock-exception>Nie można przenieść elementu {0} do tego węzła, ponieważ węzeł źródłowy lub docelowy są zablokowane lub są związane z zablokowanym węzłem.</paste-lock-exception>
-      <can-not-checkin-node>Nie można sprawdzić w tym węźle. Proszę sprawdzić, czy masz odpowiednie uprawnienia.</can-not-checkin-node>
-      <can-not-checkout-node>Nie można sprawdzić tego węzła. Proszę sprawdzić, czy masz odpowiednie uprawnienia.</can-not-checkout-node>
-      <move-constraint-exception>Wystąpił błąd podczas przesuwania węzła.</move-constraint-exception>
-      <not-lock-owner>Nie możesz odblokować tego węzła, ponieważ nie jesteś właścicielem blokady.</not-lock-owner>
-      <is-checked-in>Proszę sprawdzić ten węzeł przed zmianą nazwy.</is-checked-in>
-      <is-checked-in-lock>Proszę sprawdzić ten węzeł przed zablokowaniem.</is-checked-in-lock>
-      <cant-lock>Nie można zablokować tego węzła.</cant-lock>
+      <paste-lock-exception>'{0}' can't be pasted here. Make sure it is not locked nor this folder. Also check that no related document is locked.</paste-lock-exception>
+      <can-not-checkin-node>You can't check in this item. Please check that you have the necessary permissions.</can-not-checkin-node>
+      <can-not-checkout-node>You can't check out this itel. Please check that you have the necessary permissions.</can-not-checkout-node>
+      <move-constraint-exception>An error occurred while moving this item.</move-constraint-exception>
+      <not-lock-owner>You can't unlock this item because you are not the lock owner.</not-lock-owner>
+      <is-checked-in>Please check out this item before renaming.</is-checked-in>
+      <is-checked-in-lock>Please check out this item before locking.</is-checked-in-lock>
+      <cant-lock>You can't lock this document.</cant-lock>
       <node-locked>Element ze ścieżką {0} lub z górnego poziomu jest zablokowany.</node-locked>
-      <can-not-delete>Proszę zamknąć ten węzeł przed usunięciem.</can-not-delete>
-      <can-not-delete-version>Nie można usunąć tego węzła. Jest aktualnie wersjonowany.</can-not-delete-version>
-      <not-support>Nie można usunąć wybranego węzła. Proszę wybrać inny węzeł.</not-support>
-      <current-node-not-allow-paste>Nie można wkleić skopiowanego typu węzła w węźle bieżącym.</current-node-not-allow-paste>
-      <copied-node-in-versioning>Nie można wkleić tu skopiowanego węzła. Jest on obecnie wersjonowany.</copied-node-in-versioning>
-      <parent-node-locked>Nie masz uprawnień, aby odblokować węzeł „{0}”.</parent-node-locked>
-      <this-node-locked-by-parent>Nie możesz odblokować tego węzła. Jest on zablokowany przez węzeł nadrzędny.</this-node-locked-by-parent>
-      <paste-node-same-name>Nie można wkleić węzła o tej samej nazwie, co węzeł w folderze docelowym.</paste-node-same-name>
-      <has-not-add-permission>Nie masz uprawnień do dodawania nowego węzła.</has-not-add-permission>
-      <node-cutting>Węzeł jest wycięty. Nie można go tutaj wkleić.</node-cutting>
-      <access-denied>Odmowa dostępu. Możesz nie mieć uprawnień w tym węźle.</access-denied>
-      <remove-verion-exception>Nie można usunąć tego węzła, ponieważ jest on (lub jego element nadrzędny) zaznaczony.</remove-verion-exception>
-      <remove-referentialIntegrityException>Nie można usunąć tego węzła, ponieważ jest obecnie celem odniesienia właściwości.</remove-referentialIntegrityException>
-      <constraintviolation-exception>Obowiązkowa pozycja jcr: UUID nie została znaleziona. Węzeł mógł zostać usunięty lub zmieniony. Kliknij przycisk Odśwież.</constraintviolation-exception>
-      <path-not-found-exception>Ten węzeł został usunięty lub zmieniony. Kliknij przycisk Odśwież.</path-not-found-exception>
+      <can-not-delete>Please close this item before deleting.</can-not-delete>
+      <can-not-delete-version>You can't delete this document. It's versioned.</can-not-delete-version>
+      <not-support>You can't delete the selected item. Please select another one.</not-support>
+      <current-node-not-allow-paste>You can't paste the copied item there.</current-node-not-allow-paste>
+      <copied-node-in-versioning>You can't paste the copied item here because it's versioned.</copied-node-in-versioning>
+      <parent-node-locked>You don't have permission to unlock '{0}'.</parent-node-locked>
+      <this-node-locked-by-parent>You can't unlock this item. Parent folder is locked.</this-node-locked-by-parent>
+      <paste-node-same-name>Can't paste this item here. An item with the same name already exists in the destination folder.</paste-node-same-name>
+      <has-not-add-permission>You don't have the permission to add here.</has-not-add-permission>
+      <node-cutting>Item is being cut. You can't paste it here.</node-cutting>
+      <access-denied>Access denied. You may not have the permission.</access-denied>
+      <remove-verion-exception>You can't remove this document because it is checked in.</remove-verion-exception>
+      <remove-referentialIntegrityException>You can't delete this item because it is currently referenced by another one.</remove-referentialIntegrityException>
+      <constraintviolation-exception>The mandatory property jcr:uuid was not found. The document may have been deleted or changed. Please click the Refresh button.</constraintviolation-exception>
+      <path-not-found-exception>This document was deleted or changed. Please click the Refresh button.</path-not-found-exception>
       <not-exist-categories>Kategoria nie istnieje.</not-exist-categories>
       <lock-node-read-only>Ten plik jest zablokowany przez użytkownika {0}. Otworzyć tylko do odczytu ?</lock-node-read-only>
     </msg>
@@ -428,12 +428,12 @@
       <title-invalid>Wprowadź tytuł folderu.</title-invalid>
       <name-not-allowed>Nazwa ta nie jest dozwolona.</name-not-allowed>
       <fileName-error>Nazwa pliku jest nieprawidłowa.</fileName-error>
-      <constraint-violation>Obecny węzeł nie pozwala na to, aby dodać do niego węzeł typu „{0}”.</constraint-violation>
+      <constraint-violation>You can't add a document of type '{0}' here.</constraint-violation>
       <repository-exception>Wystąpił nieoczekiwany błąd. Proszę skontaktować się z administratorem po więcej szczegółów.</repository-exception>
-      <repository-exception-permission>Nie masz uprawnień, aby dodać nowy folder do tego węzła.</repository-exception-permission>
+      <repository-exception-permission>You don't have the permission to add a new folder here.</repository-exception-permission>
       <numberformat-exception>Nie można zapisać tego folderu. Nazwa musi być w formacie liczbowym.</numberformat-exception>
       <!--DMS 2.4.x; ECM-3553-->
-      <not-allow-sameNameSibling>Nie można zapisać folderu. Ten węzeł nie akceptuje dwóch węzłów o tej samej nazwie.</not-allow-sameNameSibling>
+      <not-allow-sameNameSibling>You can't save the folder. An item with the same name already exists.</not-allow-sameNameSibling>
       <ntFolder-not-avaiable>Musisz wybrać niestandardowy rodzaj folderu</ntFolder-not-avaiable>
     </msg>
     <help>
@@ -500,26 +500,26 @@
       <feedback-restore>Element „{0}” został przywrócony pomyślnie.</feedback-restore>
       <feedback-restore-multi>Elementy {0} zostały przywrócone pomyślnie.</feedback-restore-multi>
       
-      <confirm-restore>Węzeł o tej samej nazwie już istnieje w starej lokalizacji węzła „{0}”. Czy na pewno chcesz przywrócić ten węzeł?</confirm-restore>
+      <confirm-restore>A '{0}' item already exists at the previous location. Are you sure you want to restore it?</confirm-restore>
       <confirm-move>Czy na pewno chcesz przenieść?</confirm-move>
-      <node-cut>Węzeł „{0}” został wycięty.</node-cut>
+      <node-cut>'{0}' has been cut.</node-cut>
       <execute-successfully>Została wykonana niestandardowa akcja „{0}”.</execute-successfully>
-      <save-node-success>Węzeł „{0}” został zapisany.</save-node-success>
-      <move-problem>Nie można przenieść węzła '{0}' do '{1}', ponieważ pojawił się problem z warunkami uprawnień lub ograniczeń.</move-problem>
+      <save-node-success>'{0}' has been saved.</save-node-success>
+      <move-problem>You can't move '{0}' to '{1}' because there was a problem with permissions or constraint conditions.</move-problem>
     </msg>
   </UIWorkingArea>
   <UIDocumentWorkspace>
     <label>
-      <no-children>Ten węzeł nie ma żadnych węzłów potomnych.</no-children>
-      <no-children-but-has-hidden>Ten węzeł nie ma żadnych węzłów potomnych, ale istnieją pewne ukryte pliki.</no-children-but-has-hidden>
+      <no-children>This item doesn't have children.</no-children>
+      <no-children-but-has-hidden>This folder does not have any item, but there are some hidden files.</no-children-but-has-hidden>
     </label>
     <msg>
-      <unable-save-node>Węzeł „{0}” został utworzony na nowo. Proszę zapisać sesję przed wykonaniem tej czynności.</unable-save-node>
-      <save-node-success>Węzeł „{0}” został zapisany.</save-node-success>
-      <node-copied>Węzeł „{0}” został skopiowany.</node-copied>
-      <node-cut>Węzeł „{0}” został wycięty.</node-cut>
-      <remove-root>Nie można usunąć węzła głównego.</remove-root>
-      <node-remove-success>Węzeł „{0}” został usunięty.</node-remove-success>
+      <unable-save-node>'{0}' has been created. Please save session to validate this action.</unable-save-node>
+      <save-node-success>'{0}' has been saved.</save-node-success>
+      <node-copied>'{0}' has been copied.</node-copied>
+      <node-cut>'{0}' has been cut.</node-cut>
+      <remove-root>You can't remove the root folder.</remove-root>
+      <node-remove-success>'{0}' has been removed.</node-remove-success>
     </msg>
     <tooltip>
       <Rename>Zmień nazwę</Rename>
@@ -538,11 +538,11 @@
   </UIDocumentWorkspace>
   <UIDocumentInfo>
     <msg>
-      <access-denied>Odmowa dostępu. Nie masz dostępu do węzła „{0}”.</access-denied>
-      <null-exception>Nie znaleziono wymaganej pozycji. Została ona usunięta lub zmieniona, albo nie masz dostępu do tego węzła.</null-exception>
+      <access-denied>Access denied. You can't access '{0}'.</access-denied>
+      <null-exception>Item not found. It was either removed or changed, or you don't have the access permission.</null-exception>
       <confirm-deleteattachment>Czy na pewno chcesz usunąć ten plik załącznika?</confirm-deleteattachment>
       <confirm-deleteattcomment>Czy na pewno chcesz usunąć ten komentarz?</confirm-deleteattcomment>
-      <access-denied-exception>Odmowa dostępu. Możesz nie mieć uprawnień do czytania, albo węzeł został usunięty lub zmieniony.</access-denied-exception>
+      <access-denied-exception>Access denied. You may not have reading privileges, or the documen may have been removed or changed.</access-denied-exception>
       <path-not-found>This element was deleted or changed. Please click the Refresh button.</path-not-found>
     </msg>
     <tooltip>
@@ -601,7 +601,7 @@
       <OpenDocument>Edycja zdalna</OpenDocument>
       <EditProperty>Edytuj właściwości dokumentu</EditProperty>
       <UploadNewVersion>Przekaż nową wersję</UploadNewVersion>
-      <CreateNewVersion>Utwórz nową wersję</CreateNewVersion>
+      <CreateNewVersion>Save as new version</CreateNewVersion>
     </event>
   </ECMContextMenu>
  
@@ -733,8 +733,8 @@
       <name-invalid>Proszę wpisać nazwę właściwości.</name-invalid>
       <unable-create>Nie można dodać właściwości.</unable-create>
       <value-invalid>Proszę wprowadzić wartość.</value-invalid>
-      <node-checkedin>Musisz sprawdzić ten węzeł przed dodaniem właściwości.</node-checkedin>
-      <can-not-add>Nie można dodać właściwości do tego węzła. To działanie jest dozwolone tylko dla węzła niestrukturalnego typu NT.</can-not-add>
+      <node-checkedin>You must check out this item before adding a property.</node-checkedin>
+      <can-not-add>You can't add properties to this item. This is only allowed for the type nt:unstructured.</can-not-add>
       <propertyName-invalid>Nazwa obiektu musi zawierać nazwę (np. nazwa: nazwa).</propertyName-invalid>
       <propertyName-exist>Właściwość '{0}' już istnieje.</propertyName-exist>
       <propertyValu-null>Niektóre wartości mogą być niedostępne.</propertyValu-null>
@@ -795,7 +795,7 @@
       <selectUser>Select User</selectUser>
     </label>
     <msg>
-      <not-change-owner>„{0}” jest właścicielem tego węzła i ma uprawnienie „Pełna kontrola”.</not-change-owner>
+      <not-change-owner>'{0}' is the owner of this item and has full control permission.</not-change-owner>
     </msg>
   </UIGroupSelector>
   <UIPermissionForm>
@@ -807,7 +807,7 @@
       <add_node>Modyfikować prawo</add_node>
       <remove>Usuń prawo</remove>
     </label>
-    <title>Dodaj uprawnienia do tego węzła</title>
+    <title>Add a permission</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>#{word.save}</Save>
@@ -914,7 +914,7 @@
   </ViewSearch>
   <UISearchResult>
     <msg>
-      <not-support>Nie ma szablonu Widoku dla tego węzła.</not-support>
+      <not-support>There is no View template for this document.</not-support>
       <empty>No results found.</empty>
       <access-denied>Nie możesz otworzyć tego folderu dlatego, że już nie istnieje, albo dlatego, że nie masz prawa dostępu do niego.</access-denied>
       <query-invalid>Zapytanie jest nieprawidłowe.</query-invalid>
@@ -939,15 +939,15 @@
       <datecreatedDESC>Sortuj wg daty utworzenia w kolejności malejącej</datecreatedDESC>
     </title>
     <tooltip>
-      <View>Zobacz ten węzeł</View>
+      <View>View this item</View>
       <OpenFolder>Przejdź do folderu</OpenFolder>
     </tooltip>
   </UISearchResult>
   <UIShowAllOwnedByUserResult>
     <msg>
-      <not-support>Nie ma szablonu Widoku dla tego węzła</not-support>
+      <not-support>There is no View template for this document</not-support>
       <empty>No results found.</empty>
-      <access-denied>Nie można wyświetlić tego węzła, ponieważ szablon nie jest obsługiwany lub z powodu odmowy dostępu.</access-denied>
+      <access-denied>You can't view this document, either because this template is not supported or because access is denied.</access-denied>
       <query-invalid>Zapytanie jest nieprawidłowe</query-invalid>
     </msg>
     <header>
@@ -970,15 +970,15 @@
       <datecreatedDESC>Sortuj wg daty utworzenia w kolejności malejącej</datecreatedDESC>
     </title>
     <tooltip>
-      <View>View this node</View>
+      <View>View this item</View>
       <OpenFolder>Przejdź do folderu</OpenFolder>
     </tooltip>
   </UIShowAllOwnedByUserResult>
   <UIShowAllFavouriteResult>
     <msg>
-      <not-support>There is no View template for this node</not-support>
+      <not-support>There is no View template for this item</not-support>
       <empty>Brak wyników wyszukiwania</empty>
-      <access-denied>You cannot view this node, either because this template is not supported or because access is denied.</access-denied>
+      <access-denied>You can't view this item, either because this template is not supported or because access is denied.</access-denied>
       <query-invalid>The query is invalid</query-invalid>
     </msg>
     <header>
@@ -1001,15 +1001,15 @@
       <datecreatedDESC>Sort by created date in descending order</datecreatedDESC>
     </title>
     <tooltip>
-      <View>Zobacz ten węzeł</View>
+      <View>View this item</View>
       <OpenFolder>Przejdź do folderu</OpenFolder>
     </tooltip>
   </UIShowAllFavouriteResult>
   <UIShowAllHiddenResult>
     <msg>
-      <not-support>There is no View template for this node.</not-support>
+      <not-support>There is no View template for this item.</not-support>
       <empty>No results found.</empty>
-      <access-denied>You cannot view this node, either because this template is not supported or because access is denied.</access-denied>
+      <access-denied>You can't view this item, either because it has no View template or because you don't have access to it.</access-denied>
       <query-invalid>The query is invalid.</query-invalid>
     </msg>
     <header>
@@ -1033,16 +1033,16 @@
       <datecreatedDESC>Sort by created date in descending order</datecreatedDESC>
     </title>
     <tooltip>
-      <View>Zobacz ten węzeł</View>
+      <View>View this Item</View>
       <OpenFolder>Przejdź do folderu</OpenFolder>
       <RemoveHiddenAttribute>Usuń ukryty atrybut</RemoveHiddenAttribute>
     </tooltip>
   </UIShowAllHiddenResult>
   <UIShowAllTrashResult>
     <msg>
-      <not-support>There is no View template for this node.</not-support>
+      <not-support>There is no View template for this item.</not-support>
       <empty>Brak wyników wyszukiwania</empty>
-      <access-denied>You cannot view this node, either because this template is not supported or because access is denied.</access-denied>
+      <access-denied>You can't view this item, either because it has no View template or because you don't have access to it.</access-denied>
       <query-invalid>The query is invalid.</query-invalid>
     </msg>
     <header>
@@ -1065,7 +1065,7 @@
       <datecreatedDESC>Sort by created date in descending order</datecreatedDESC>
     </title>
     <tooltip>
-      <View>View this Node</View>
+      <View>View this Item</View>
       <OpenFolder>Go to Folder</OpenFolder>
       <DeletePermanently>Usuń trwale</DeletePermanently>
       <RestoreFromTrash>Restore from Trash</RestoreFromTrash>
@@ -1321,7 +1321,7 @@
       <Cancel>#{word.cancel}</Cancel>
       <Export>Eksportuj</Export>
     </action>
-    <title>Eksport węzła</title>
+    <title>Export</title>
   </UIExportNode>
   <!--
   ###############################################################################
@@ -1366,8 +1366,8 @@
       <error-removing-referenced-version>This version is referenced and can't be removed.</error-removing-referenced-version>
       <confirm-restore>Are you sure you want to restore this version?</confirm-restore>
       <confirm-delete>Czy na pewno chcesz usunąć tę wersję?</confirm-delete>
-      <not-checked-out>Musisz sprawdzić ten węzeł przed przywróceniem.</not-checked-out>
-      <invalid-item-state>Nie można przywrócić tej wersji, ponieważ jeden lub więcej elementów zostało usuniętych lub przeniesionych podczas innej sesji.</invalid-item-state>
+      <not-checked-out>You have to check out this document before restoring.</not-checked-out>
+      <invalid-item-state>You can't restore this version, either because one or more items were deleted or moved by another session.</invalid-item-state>
     </msg>
     <action>
       <close>#{word.close}</close>
@@ -1392,8 +1392,8 @@
       <noVersion>Brak wersji</noVersion>
     </msg>
     <eventName>
-      <e_1>Dodany węzeł</e_1>
-      <e_2>Usunięto węzeł</e_2>
+      <e_1>Added</e_1>
+      <e_2>Document Removed</e_2>
       <e_4>Dodano właściwość</e_4>
       <e_16>Zmieniono właściwość</e_16>
       <e_8>Usunięto właściwość</e_8>
@@ -1433,13 +1433,13 @@
   -->
   <UIActivateVersion>
     <label>
-      <note>Wersjonowanie nie zostało aktywowane na tym węźle.</note>
+      <note>Versioning has not been activated for this document.</note>
       <question>Czy na pewno chcesz go włączyć?</question>
       <button-active>Aktywuj</button-active>
       <button-cancel>#{word.cancel}</button-cancel>
     </label>
     <msg>
-      <access-denied>Nie masz uprawnień, aby włączyć wersjonowanie na tym węźle</access-denied>
+      <access-denied>You don't have permission to activate versioning on this document</access-denied>
     </msg>
   </UIActivateVersion>
   <!--
@@ -1462,7 +1462,7 @@
       </msg>
     </grid>
     <msg>
-      <node-type-invalid>Można przypisać tylko dokument węzła.</node-type-invalid>
+      <node-type-invalid>Only documents can be enrolled.</node-type-invalid>
       <already-enroled>Ten dokument został już zapisany.</already-enroled>
     </msg>
   </UIActivePublication>
@@ -1473,7 +1473,7 @@
   -->
   <UIActivateAuditing>
     <label>
-      <note>Audyt nie został włączony do tego węzła.</note>
+      <note>Auditing has not been activated for this document.</note>
       <question>Czy na pewno chcesz aktywować?</question>
     </label>
     <action>
@@ -1516,7 +1516,7 @@
       <Cancel>#{word.cancel}</Cancel>
       <Import>Importuj</Import>
     </action>
-    <title>Import węzła</title>
+    <title>Import</title>
     <msg>
       <import-successful>Zaimportowany.</import-successful>
       <filename-invalid>Przeglądaj plik .xml w polu „Dodaj plik”, aby importować.</filename-invalid>
@@ -1524,8 +1524,8 @@
       <xml-invalid>Nieprawidłowy znak w pozycji [wiersz, kolumna]:{0} w pliku {1}</xml-invalid>
       <mimetype-invalid>Możesz importować tylko pliki z rozszerzeniami .zip lub .xml.</mimetype-invalid>
       <access-denied>Odmowa dostępu. Nie masz uprawnień aby zaimportować.</access-denied>
-      <constraint-violation-exception>Importowanie danych jest niemożliwe. Typ '{0}' nie jest dozwolony w tym miejscu.</constraint-violation-exception>
-      <item-exists-exception>Przychodzący węzeł ma ten sam UUID, co węzeł istniejący w obszarze roboczym.</item-exists-exception>
+      <constraint-violation-exception>Impossible to import data. The type '{0}' is not allowed at this location.</constraint-violation-exception>
+      <item-exists-exception>An incoming item has the same UUID as an existing item in the workspace.</item-exists-exception>
     </msg>
   </UIImportNode>
   <!--
@@ -1573,7 +1573,7 @@
   <UIViewVersion>
     <label>
       <nodeType>Node Type</nodeType>
-      <nodeName>Nazwa węzła</nodeName>
+      <nodeName>Name</nodeName>
       <VersionNumber>Numer wersji</VersionNumber>
       <VersionLabels>Etykiety wersji</VersionLabels>
       <VersionDate>Data wersji</VersionDate>
@@ -1609,7 +1609,7 @@
       <action>Akcje</action>
     </header>
     <msg>
-      <access-denied>Odmowa dostępu. Nie masz uprawnień dostępu w tym węźle.</access-denied>
+      <access-denied>Access denied. You don't have access permission.</access-denied>
       <confirm-delete>Czy na pewno chcesz usunąć to odwołanie?</confirm-delete>
     </msg>
     <action>
@@ -1629,7 +1629,7 @@
       <action>Akcja</action>
     </header>
     <info>
-      <child-not-found>This node does not have any child nodes.</child-not-found>
+      <child-not-found>This item doesn't have any child.</child-not-found>
     </info>
   </UITreeList>
   <!--
@@ -1685,8 +1685,8 @@
       <clearall>Wyczyść wszystko</clearall>
     </action>
     <msg>
-      <unable-pasted>Nie można wkleić tego węzła.</unable-pasted>
-      <node-pasted>Węzeł {0} został wklejony w miejscu {1}. Operacja ta została już zapisana.</node-pasted>
+      <unable-pasted>Can't paste this item.</unable-pasted>
+      <node-pasted>{0} has been pasted at location {1}. This operation has already been saved.</node-pasted>
     </msg>
   </UIClipboard>
   <!--
@@ -1727,15 +1727,15 @@
 </tooltip>
     <msg>
       <cannot-save>Wystąpił błąd podczas zapisywania dokumentu.</cannot-save>
-      <in-versioning>Proszę sprawdzić bieżący węzeł przed dodaniem nowego węzła.</in-versioning>
+      <in-versioning>Please check out the current folder before adding a new item.</in-versioning>
       <not-support>Nie można załadować szablonu '{0}'.</not-support>
       <value-invalid>'{0}' jest potrzebną wartością.</value-invalid>
       <repository-exception>Wystąpił błąd podczas zapisywania dokumentu.</repository-exception>
       <!--DMS 2.4.x; ECM-3543-->
-      <repository-exception-permission>Nie masz uprawnień, aby dodać nowy dokument do tego węzła.</repository-exception-permission>
+      <repository-exception-permission>You don't have permission to add a new document to this folder.</repository-exception-permission>
       <not-allowed-same-name-sibling>Nie można zapisać dokumentu. Nie może on mieć takiej samej nazwy, jak jego rodzeństwo.</not-allowed-same-name-sibling>
       <numberformat-exception>Nie można zapisać dokumentu. Nazwa musi być w formacie liczbowym.</numberformat-exception>
-      <item-not-found>Nie znaleziono pozycji. Ten węzeł (lub jego przodek) mogły zostać usunięte. Kliknij przycisk „Odśwież”.</item-not-found>
+      <item-not-found>Document not found. This document (or its ancestor) may have been deleted. Please click the Refresh button.</item-not-found>
     </msg>
   </UIDocumentForm>
   <!--
@@ -1800,7 +1800,7 @@
       <action>Akcja</action>
     </header>
     <msg>
-      <remove-popup-first>Przed usunięciem tego węzła musisz zamknąć okno edycji.</remove-popup-first>
+      <remove-popup-first>You must close the edit pop-up before deleting this item.</remove-popup-first>
       <confirm-delete-action>Czy na pewno chcesz usunąć tę akcję?</confirm-delete-action>
       <template-empty>'{0}' szablon jest zerowy lub pusty.</template-empty>
       <template-null>Szablon jest zerowy lub pusty albo nie masz dostępu do tego szablonu.</template-null>
@@ -1826,7 +1826,7 @@
       <numberformat-exception>Nie można zapisać tej akcji. Nazwa musi być w formacie liczbowym.</numberformat-exception>
       <existed-action>Nazwa działania '{0}' już istnieje. Proszę wybrać inną nazwę.</existed-action>
       <unable-add-action>Nie można dodać tego działania.</unable-add-action>
-      <unable-add>Nie można dodać tego działania. Ten węzeł albo należy do użytkownika root, albo nie masz uprawnień.</unable-add>
+      <unable-add>Can't add this action. This item is either the root folder or you don't have the permission to edit.</unable-add>
       <not-support>Okno '{0}' nie jest obsługiwane.</not-support>
       <no-permission-add>Odmowa dostępu. Nie masz uprawnień do dodawania działania w tym miejscu.</no-permission-add>
       <access-denied>Odmowa dostępu. Nie masz dostępu do tego szablonu.</access-denied>
@@ -1865,7 +1865,7 @@
   <UIAddressBar>
     <msg>
       <path-not-found>Nie odnaleziono ścieżki.</path-not-found>
-      <access-denied>Odmowa dostępu. Nie masz uprawnień do czytania tego węzła.</access-denied>
+      <access-denied>Access denied. You don't have the permission to read.</access-denied>
       <keyword-not-support>Słowo kluczowe jest nieprawidłowe. Niektóre znaki nie są obsługiwane.</keyword-not-support>
     </msg>
     <label>
@@ -1874,8 +1874,8 @@
     </label>
     <title>
       <exeButton>Idź</exeButton>
-      <backButton>Powrót do poprzedniego węzła</backButton>
-      <showHistory>Pokaż historię adresu</showHistory>
+      <backButton>Back</backButton>
+      <showHistory>Show History</showHistory>
       <changeNode>Zmiana węzła</changeNode>
     </title>
   </UIAddressBar>
@@ -1937,7 +1937,7 @@
   -->
   <UIViewMetadataContainer>
     <msg>
-      <path-not-found>Węzeł nie obsługuje tego widoku.</path-not-found>
+      <path-not-found>The document does not support this view.</path-not-found>
     </msg>
   </UIViewMetadataContainer>
   <!--
@@ -1958,7 +1958,7 @@
   </metadataForm>
   <UIViewMetadataTemplate>
     <msg>
-      <access-denied>Odmowa dostępu. Nie jesteś właścicielem albo nie masz uprawnień w obrębie edycji w tym węźle.</access-denied>
+      <access-denied>Access denied. Either you are not the owner or don't have edit permission.</access-denied>
     </msg>
   </UIViewMetadataTemplate>
   <!--
@@ -2034,7 +2034,7 @@
       <private>Prywatny</private>
       <state>Status</state>
       <visibility>Widoczność</visibility>
-      <nodeName>Nazwa węzła:</nodeName>
+      <nodeName>Name:</nodeName>
       <lifecycleName>Nazwa cyklu życia</lifecycleName>
       <stateName>Nazwa stanu</stateName>
     </label>
@@ -2058,7 +2058,7 @@
   </UIWorkspaceList>
   <pathSelector>
     <title>
-      <UIOneNodePathSelector>Selektor węzła</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Selector</UIOneNodePathSelector>
     </title>
   </pathSelector>
   <!--
@@ -2166,9 +2166,9 @@
     </label>
     <msg>
       <mimetype-incorrect>Nieprawidłowy typ pliku. Miniatury mogą być tworzone tylko z plików .jpg, .png lub .GIF.</mimetype-incorrect>
-      <access-denied>Odmowa dostępu. Nie masz uprawnień do dodawania miniatury do tego węzła.</access-denied>
+      <access-denied>Access denied. You don't have permission to add a thumbnail.</access-denied>
       <confirm-delete>Czy na pewno chcesz usunąć tę miniaturkę?</confirm-delete>
-      <is-checked-in>Ten węzeł jest zaznaczony. Proszę to sprawdzić przed wykonaniem jakichkolwiek działań.</is-checked-in>
+      <is-checked-in>This item is checked in. Please check out before performing any action.</is-checked-in>
       <fileName-error>Proszę wybrać plik do przesłania.</fileName-error>
     </msg>
     <title>
@@ -2272,7 +2272,7 @@
 
   <PopupSelectPath>
     <title>
-      <UIOneNodePathSelector>Wybierz węzeł</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Select Path</UIOneNodePathSelector>
     </title>
   </PopupSelectPath>
 
@@ -2302,7 +2302,7 @@
   <UISymLinkForm>
     <label>
       <symLinkName>Nazwa linku symbolicznego</symLinkName>
-      <pathNode>Ścieżka węzła</pathNode>
+      <pathNode>Path</pathNode>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -2313,16 +2313,16 @@
       <name-invalid>Wprowadź nazwę dowiązania symbolicznego.</name-invalid>
       <name-not-allowed>This name is not allowed.</name-not-allowed>
       <fileName-error>The file name is invalid.</fileName-error>
-      <constraint-violation>Nie można dodać typu węzła '{0}' do węzła bieżącego.</constraint-violation>
-      <repository-exception>Odmowa dostępu. Nie masz uprawnień do dodawania dowiązania symbolicznego do tego węzła.</repository-exception>
+      <constraint-violation>You can't add an item of type '{0}' here.</constraint-violation>
+      <repository-exception>Access denied. You don't have permission to add a symlink here.</repository-exception>
       <numberformat-exception>You cannot save this folder. The name provided must be in numerical format.</numberformat-exception>
-      <path-node-invalid>Podaj węzeł ścieżki.</path-node-invalid>
+      <path-node-invalid>Please enter the path.</path-node-invalid>
       <path-node-not-allowed>This name is not allowed.</path-node-not-allowed>
-      <non-node>Proszę wybrać zaufany węzeł docelowy; możesz nie mieć prawa do odczytu tego węzła.</non-node>
-      <cannot-save>Nie możesz dodać dowiązania symbolicznego dla tego typu węzła.</cannot-save>
-      <item-exists-exception>Nazwa węzła już istnieje.</item-exists-exception>
-      <translation-node-same-language-default>Węzeł tłumaczenia ma ten sam język, co domyślny język bieżącego węzła.</translation-node-same-language-default>
-      <UnsupportedRepositoryOperationException>Miejsce docelowe tego węzła nie jest określone.</UnsupportedRepositoryOperationException>
+      <non-node>Please select the trust target; you may not have the rights to read this item.</non-node>
+      <cannot-save>You can't add a symlink for this type of document.</cannot-save>
+      <item-exists-exception>An item with this name already exists.</item-exists-exception>
+      <translation-node-same-language-default>The translated document has the same language as the default language of current document.</translation-node-same-language-default>
+      <UnsupportedRepositoryOperationException>This target item is not referred.</UnsupportedRepositoryOperationException>
     </msg>
   </UISymLinkForm>
   
@@ -2342,22 +2342,22 @@
       <name-invalid>Wprowadź nazwę dowiązania symbolicznego.</name-invalid>
       <name-not-allowed>Nazwa ta nie jest dozwolona.</name-not-allowed>
       <fileName-error>Nazwa pliku jest nieprawidłowa.</fileName-error>
-      <constraint-violation>Nie można dodać typu węzła '{0}' do węzła bieżącego.</constraint-violation>
-      <repository-exception>Odmowa dostępu. Nie masz uprawnień do dodawania dowiązania symbolicznego do tego węzła.</repository-exception>
+      <constraint-violation>You can't add the '{0}' type to the current item.</constraint-violation>
+      <repository-exception>Access denied. You don't have permission to add a symlink to this item.</repository-exception>
       <numberformat-exception>You cannot save this folder. The name provided must be in numerical format.</numberformat-exception>
-      <path-node-invalid>Podaj węzeł ścieżki.</path-node-invalid>
+      <path-node-invalid>Please enter the path.</path-node-invalid>
       <path-node-not-allowed>This name is not allowed.</path-node-not-allowed>
-      <non-node>Proszę wybrać zaufany węzeł docelowy; możesz nie mieć prawa do odczytu tego węzła.</non-node>
+      <non-node>Please select the trust target; you may not have the right to read this node.</non-node>
       <cannot-save>Wystąpił błąd podczas tworzenia dowiązań symbolicznych.</cannot-save>
-      <item-exists-exception>Nazwa węzła już istnieje.</item-exists-exception>
-      <translation-node-same-language-default>Węzeł tłumaczenia ma ten sam język, co domyślny język bieżącego węzła.</translation-node-same-language-default>
-      <UnsupportedRepositoryOperationException>Miejsce docelowe tego węzła nie jest określone.</UnsupportedRepositoryOperationException>
+      <item-exists-exception>An item with this name already exists.</item-exists-exception>
+      <translation-node-same-language-default>The translated document has the same language as the default language of current document.</translation-node-same-language-default>
+      <UnsupportedRepositoryOperationException>This target item is not referred.</UnsupportedRepositoryOperationException>
     </msg>
   </UIAddTranslationForm>
 
   <UIPopupSymLink>
     <title>
-      <UIOneNodePathSelector>Wybierz miejsce docelowe węzła</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Select Target Item</UIOneNodePathSelector>
     </title>
   </UIPopupSymLink>
   <UIPopupSymLink>
@@ -2375,9 +2375,9 @@
 
   <UIWorkingArea>
     <msg>
-      <create-link-problem>Nie można utworzyć łącza do węzła '{0}' na '{1}'.</create-link-problem>
-      <dest-node-is-link>Węzeł docelowy „{0}” jest już dowiązaniem symbolicznym, więc nie można utworzyć dowiązania symbolicznego wewnątrz niego.</dest-node-is-link>
-      <selected-is-link>Wybrany węzeł '{0}' jest już łączem. Nie możesz utworzyć łącza wskazującego na kolejne łącze.</selected-is-link>
+      <create-link-problem>You can't create a link for '{0}' at '{1}'.</create-link-problem>
+      <dest-node-is-link>The destination '{0}' is already a symlink, so you cannot create a symlink inside it.</dest-node-is-link>
+      <selected-is-link>The selected item '{0}' is already a link. You can't create a link to another link.</selected-is-link>
       <confirm-create-link>Czy chcesz utworzyć link do tej lokalizacji?</confirm-create-link>
     </msg>
   </UIWorkingArea>
@@ -2460,7 +2460,7 @@
 <ReadOnly>Otwórz tylko do odczytu</ReadOnly>
 <Cancel>Cancel</Cancel>
       <KeepBoth>Zatrzymaj obie</KeepBoth>
-      <CreateNewVersion>Utwórz nową wersję</CreateNewVersion>
+      <CreateNewVersion>Save as new version</CreateNewVersion>
     </label>
   </UIConfirmMessage>
 
@@ -2516,7 +2516,7 @@
 
   <UIPopupMenu>
     <msg>
-      <node-locked-other-person>Ten węzeł lub jego węzeł nadrzędny jest zablokowany przez innego użytkownika, więc nie można go usunąć.</node-locked-other-person>
+      <node-locked-other-person>This item or its parent folder is locked by another user, so you can't delete it.</node-locked-other-person>
     </msg>
   </UIPopupMenu>
 
@@ -2551,7 +2551,7 @@
 
   <UIPopupMenu>
     <msg>
-      <can-not-unlock-node-is-checked-in>Nie możesz odblokować, ponieważ węzeł '{0}' (lub jego przodek) jest zaznaczony.</can-not-unlock-node-is-checked-in>
+      <can-not-unlock-node-is-checked-in>You can't unlock because the '{0}' (or its parent folder) is checked in.</can-not-unlock-node-is-checked-in>
     </msg>
   </UIPopupMenu>
 
@@ -2560,12 +2560,12 @@
   -->
   <UIActionBar>
     <msg>
-      <cannot-enable-version>Nie można włączyć wersjonowania węzła.</cannot-enable-version>
+      <cannot-enable-version>Can't activate versioning on this document.</cannot-enable-version>
     </msg>
   </UIActionBar>
   <UIPopupMenu>
     <msg>
-        <cannot-readsource>Nie można odczytać danych z węzła źródłowego.</cannot-readsource>
+        <cannot-readsource>You can't read data from the source.</cannot-readsource>
     </msg>
   </UIPopupMenu>
   <UIUploadForm>
@@ -2845,7 +2845,7 @@
 
     <UIPopupMenu>
     <msg>
-      <node-locked-editing>Nie możesz edytować tego węzła ze ścieżką {0}. Jest on zablokowany przez innego użytkownika.</node-locked-editing>
+      <node-locked-editing>You can't edit  {0}. It's locked by another user.</node-locked-editing>
     </msg>
   </UIPopupMenu>
   <UITagStyleForm>
@@ -2939,12 +2939,12 @@
   </PathNode>
   <UIPopupPathFoRestore>
     <title>
-      <UIOneNodePathSelector>Wybierz węzeł nadrzędny</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Select Parent</UIOneNodePathSelector>
     </title>
   </UIPopupPathFoRestore>
   <rootNodeInfo>
     <title>
-      <AddRootNode>Dodaj węzeł główny</AddRootNode>
+      <AddRootNode>Add Root</AddRootNode>
     </title>
   </rootNodeInfo>
 
@@ -3156,9 +3156,9 @@
   </lifecyclePhase>
   <UIPopupMenu>
   <msg>
-<can-not-remove-locked-node>Węzeł {0} jest zablokowany. Nie można przenieść tego elementu do Kosza.</can-not-remove-locked-node>
-<can-not-remove-checked-in-node>Węzeł {0} lub jego rodzic jest zaznaczony. Nie można przenieść go do Kosza.</can-not-remove-checked-in-node>
-<access-denied-to-delete>Odmowa dostępu. Nie można przenieść węzła {0} do Kosza.</access-denied-to-delete>
+<can-not-remove-locked-node>{0} is locked. You can't move it to the Trash.</can-not-remove-locked-node>
+<can-not-remove-checked-in-node>{0} or its parent folder is checked in. You can't move it to the Trash.</can-not-remove-checked-in-node>
+<access-denied-to-delete>Access denied. You can't move {0} to the Trash.</access-denied-to-delete>
   </msg>
   </UIPopupMenu>
   <UIPropertyForm>
@@ -3168,8 +3168,8 @@
   </UIPropertyForm>
   <UIWatchDocumentForm>
     <msg>
-      <node-is-locked>Węzeł ten jest zablokowany. Nie można go obejrzeć.</node-is-locked>
-      <unknown-error>Wystąpiły błędy. Nie możesz oglądać tego węzła.</unknown-error>
+      <node-is-locked>This item is locked. You cannot watch it.</node-is-locked>
+      <unknown-error>Some errors have occurred. You can't watch this document.</unknown-error>
     </msg>
   </UIWatchDocumentForm>   
   <UIActionForm>
@@ -3194,7 +3194,7 @@
     <Keep>Zachowaj oba</Keep>
     <Replace>Replace</Replace>
     <Canceled>Canceled</Canceled>
-      <UploadNewVersion>Prześlij nową wersję</UploadNewVersion>
+      <UploadNewVersion>Upload a new version</UploadNewVersion>
     <Cancel>#{word.cancel}</Cancel>
     <AbortAllConfirmation>Czy chcesz, aby przerwać wszystkie pliki w toku?</AbortAllConfirmation>
   </label>
