@@ -990,7 +990,7 @@
       <addSymLink>Sembolik link ekle</addSymLink>
       <checkIn>Kaydet</checkIn>
       <checkOut>Kaydı Kaldır</checkOut>
-      <shareDocuments>Share</shareDocuments>
+      <shareDocuments>Post</shareDocuments>
       <openDocument>Uzaktan Düzenle</openDocument>
       <editProperty>Dosya Özelliklerini Düzenle</editProperty>
       <uploadNewVersion>Yeni bir sürümünü yükle</uploadNewVersion>

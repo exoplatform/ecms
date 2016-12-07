@@ -18,7 +18,7 @@
     </action>
     <msg>
       <not-support>You can't comment on this type of document.</not-support>
-      <not-checkedout>Você deve reservar o nó antes de comentar.</not-checkedout>
+      <not-checkedout>You must check out the document before commenting on it.</not-checkedout>
       <content-null>Você não pode publicar um comentário vazio.</content-null>
     </msg>
   </UICommentForm>
@@ -46,8 +46,8 @@
     </button>
     <msg>
       <not-support>Não é permitido votar nesse tipo de documento.</not-support>
-      <not-checkedout>Você deve reservar o nó antes de votar.</not-checkedout>
-      <vote-restriction>Você não pode votar mais de uma vez.</vote-restriction>
+      <not-checkedout>You must check out the document to vote.</not-checkedout>
+      <vote-restriction>You cannot vote more than one time.</vote-restriction>
     </msg>
   </UIVoteForm>
  
@@ -59,9 +59,9 @@
   <UIJCRExplorer>
     <msg>
       <refresh-session-success>A sessão foi atualizada com sucesso.</refresh-session-success>
-      <no-node-history>Você está no nó raíz.</no-node-history>
+      <no-node-history>You are at the root.</no-node-history>
       <save-session-success>Todas as alterações foram salvas.</save-session-success>
-      <target-path-not-found>Você não pode acessar esse nó, ou porque ele não existe mais ou porque você não tem permissão para acessá-lo.</target-path-not-found>
+      <target-path-not-found>You can't access this path, either because it doesn't exist anymore or because you don't have access permissions.</target-path-not-found>
     </msg>
   </UIJCRExplorer>
   <!--
@@ -159,8 +159,8 @@
     <label>
       <enableStructure>Habilitar estrutura do DMS:</enableStructure>
       <showSideBar>Mostrar barra lateral:</showSideBar>
-      <showHiddenNode>Mostrar nós ocultos</showHiddenNode>
-      <showNonDocument>Mostrar nós do tipo "não documento"</showNonDocument>
+      <showHiddenNode>Show Hidden Items:</showHiddenNode>
+      <showNonDocument>Show Non-document Items:</showNonDocument>
       <showRefDocuments>Mostrar documentos referenciados</showRefDocuments>
       <enableDragAndDrop>Habilitar Arrastar &amp; Soltar</enableDragAndDrop>
       <sortBy>Classificar por:</sortBy>
@@ -201,15 +201,15 @@
       <Back>#{word.back}</Back>
     </action>
     <msg>
-      <rename-successfull>O nó '{0}' foi renomeado para '{1}' com sucesso.</rename-successfull>
-      <rename-denied>Acesso negado. Você não pode renomear este nó.</rename-denied>
+      <rename-successfull>'{0}' was renamed to '{1}' successfully.</rename-successfull>
+      <rename-denied>Access denied. You can't rename this item.</rename-denied>
       <fileName-invalid>O novo nome contém alguns caracteres inválidos.</fileName-invalid>
       <newName-same-oldName>O novo nome já existe. Por favor, escolha outro nome.</newName-same-oldName>
-      <version-exception>Esse nó (ou o predecessor dele) não foi reservado.</version-exception>
-      <lock-exception>Este nó está bloqueado. Por favor, desbloqueie antes de renomeá-lo.</lock-exception>
-      <constraintViolation-exception>Erro ao renomear o nó '{0}'. Por favor, tente novamente.</constraintViolation-exception>
+      <version-exception>This document (or one of its ancestors) is not checked out.</version-exception>
+      <lock-exception>This document is locked. Please unlock it before renaming.</lock-exception>
+      <constraintViolation-exception>An error occurred while renaming '{0}'. Please check again.</constraintViolation-exception>
       <unknown-prefix>O Prefixo '{0}' não foi registrado ainda.</unknown-prefix>
-      <rename-error>Ocorreu um erro ao renomear este nó. Por favor, verifique novamente.</rename-error>
+      <rename-error>An error occurred while renaming. Please check again.</rename-error>
     </msg>
   </UIRenameForm>
   <UIPopupWindow>
@@ -222,7 +222,7 @@
       <UIExportNode>Exportar Node</UIExportNode>
       <UINodeTypeInfo>Informação de tipo de nó</UINodeTypeInfo>
       <UIVersionInfo>Informação de versão</UIVersionInfo>
-      <UIActivateVersion>Ativar versão</UIActivateVersion>
+      <UIActivateVersion>Activate Versioning</UIActivateVersion>
       <UIAuditingInfo>Informação de auditoria</UIAuditingInfo>
       <UIActivateAuditing>Ativar auditoria</UIActivateAuditing>
       <UIPermissionManager>Gerenciamento de permissões</UIPermissionManager>
@@ -313,40 +313,40 @@
       <UploadNewVersion>Carregar uma nova versão</UploadNewVersion>
     </tooltip>
     <msg>
-      <cannot-action-in-rootnode>Você não pode executar esta ação no nó raiz.</cannot-action-in-rootnode>
+      <cannot-action-in-rootnode>You can't perform this action at root.</cannot-action-in-rootnode>
       <node-checkedin>Você deve reservar o nó primeiro.</node-checkedin>
-      <cannot-enable-version-rootnode>Não é possível habilitar versionamento para o nó raíz.</cannot-enable-version-rootnode>
-      <cannot-enable-publication-rootnode>Não é possível habilitar publicação para o nó raíz.</cannot-enable-publication-rootnode>
+      <cannot-enable-version-rootnode>Can't activate versioning on root.</cannot-enable-version-rootnode>
+      <cannot-enable-publication-rootnode>Can't activate publication at root.</cannot-enable-publication-rootnode>
       <manage-publication>
-        <not-supported-nodetype>A publicação suporta apenas nós de documento.</not-supported-nodetype>
+        <not-supported-nodetype>Only documents can be published.</not-supported-nodetype>
         <no-publication-lifecycle>Não há ciclo de publicação configurado.</no-publication-lifecycle>
       </manage-publication>
-      <unsubcriber-lifecycle>O nó já foi retirado.</unsubcriber-lifecycle>
-      <not-supported-nodetype>O ciclo de vida do não-assinante suporta apenas o nó de documento.</not-supported-nodetype>
-      <unsubcriber-lifecycle-finish>Foi desfeita a inscrição do nó com sucesso.</unsubcriber-lifecycle-finish>
-      <access-false>O nó não é um artigo ou está reservado.</access-false>
+      <unsubcriber-lifecycle>The document was already unsubscribed.</unsubcriber-lifecycle>
+      <not-supported-nodetype>This operation is only supported for documents.</not-supported-nodetype>
+      <unsubcriber-lifecycle-finish>The document was unsubscribed successfully.</unsubcriber-lifecycle-finish>
+      <access-false>The document is not an article or checked in.</access-false>
       <unsupported-action>Essa ação não é suportada.</unsupported-action>
-      <not-relationable>Esse nó ainda não tem nenhum link relacionado com outro nó.</not-relationable>
-      <node-pasted>O node '{0}' foi colado na localização '{1}'. Esta operação já foi salva e você não precisa clicar no ícone salvar.</node-pasted>
-      <no-node-selected>Nenhum nó copiado.</no-node-selected>
-      <unable-edit>O nó '{0}' do tipo '{1}' não suporta edição.</unable-edit>
-      <not-support>O nó selecionado não pode ser editado.</not-support>
-      <template-null>Este nó não possui janela de criação disponível.</template-null>
+      <not-relationable>This document has no relations.</not-relationable>
+      <node-pasted>'{0}' has been pasted at the location '{1}'. This operation has already been saved.</node-pasted>
+      <no-node-selected>Nothing to copy.</no-node-selected>
+      <unable-edit>Editing documents of type '{1}' like '{0}' is not supported.</unable-edit>
+      <not-support>Can't edit the selected item.</not-support>
+      <template-null>This document has no form template.</template-null>
       <keyword-null>Não há palavras-chave para buscar.</keyword-null>
       <not-found>Nenhum resultado encontrado.</not-found>
       <keyword-not-allow>Está palavra-chave não é permitida.</keyword-not-allow>
-      <is-not-referenable>O nó '{0}' não pode ser referenciado.</is-not-referenable>
-      <access-denied>Acesso negado. Você não possui permissão para editar este nó.</access-denied>
-      <access-add-denied>Acesso negado. Você não possui permissão para adicionar neste nó.</access-add-denied>
+      <is-not-referenable>'{0}' can't be referenceable.</is-not-referenable>
+      <access-denied>Access denied. You don't have edit permission for this item.</access-denied>
+      <access-add-denied>Access denied. You don't have permission to add items here.</access-add-denied>
       <item-existed>Este nó já existe. Não pode ter o mesmo nome de seu irmão.</item-existed>
       <removed-hidden-mixin>Você removeu o mixin oculto com sucesso.</removed-hidden-mixin>
       <added-hidden-mixin>Você adicionou o mixin oculto com sucesso.</added-hidden-mixin>
       <not-supported>Essa função só é suportada pelo tipo documento.</not-supported>
-      <empty-file-type>Você não pode adicionar documentos neste nó.</empty-file-type>
-      <unsupported-watch>Apenas nós de documento podem ser acompanhados.</unsupported-watch>
-      <watch-checkedin>Você deve reservar o nó antes de passar a acompanhá-lo.</watch-checkedin>
-      <unsupported-tagging>Só é possível aplicar tags em nós do tipo documento.</unsupported-tagging>
-      <tagnode-checkedin>Você deve reservar o nó antes de rotulá-lo.</tagnode-checkedin>
+      <empty-file-type>You can't add a document here.</empty-file-type>
+      <unsupported-watch>Only documents can be watched.</unsupported-watch>
+      <watch-checkedin>You must check out the document before watching.</watch-checkedin>
+      <unsupported-tagging>Only documents can be tagged.</unsupported-tagging>
+      <tagnode-checkedin>You must check out the document before tagging.</tagnode-checkedin>
     </msg>
     <title>
       <select-tab>Selecionar aba</select-tab>
@@ -361,48 +361,48 @@
   </UIActionBar>
   <UIPopupMenu>
     <msg>
-      <has-not-permission>Acesso negado.  Você não tem permissão de adição neste nó.</has-not-permission>
-      <has-not-edit-permission>Acesso negado.  Você não tem permissão de editar neste nó. Por favor, entre em contato com um administrador.</has-not-edit-permission>
-      <cannot-login-node>Você não pode acessar e colar um nó aqui.</cannot-login-node>
-      <cannot-paste-nodetype>Você não pode colar o nó aqui.</cannot-paste-nodetype>
-      <has-not-permission-unlok>Você não tem permissão para desbloquear este nó.</has-not-permission-unlok>
-      <bound-exception>Você não tem permissão para renomear este nó. Por favor, entre em contato com o administrador.</bound-exception>
-      <bound-move-exception>Você não pode mover o nó para ele mesmo ou para seus subnós.</bound-move-exception>
-      <does-not-support-auditing>Você não pode ativar a auditoria neste nó.</does-not-support-auditing>
-      <can-not-rename-node>Você não tem permissão de renomear este nó. Por favor, entre em contato com o administrador para conseguir a permissão correta.</can-not-rename-node>
-      <can-not-cut-node>Você não tem permissão para recortar este nó. Por favor, contate o adiministrador para ter a permissão correta.</can-not-cut-node>
-      <can-not-remove-node>Você não tem permissão para remover este nó. Por favor, contate o adiministrador.</can-not-remove-node>
-      <can-not-lock-node>Você não tem permissão para bloquear o nó {0}. Por favor, contate o adiministrador para ter a permissão correta.</can-not-lock-node>
-      <can-not-unlock-node>Você não tem permissão para desbloquear este nó. Por favor, contate o adiministrador para ter a permissão correta.</can-not-unlock-node>
-      <no-node>Por favor, selecione ao menos um nó antes de colar.</no-node>
-      <can-not-paste-node>Você não possui permissão para mover para este nó. Por favor, contate o adiministrador para ter a permissão correta.</can-not-paste-node>
-      <can-not-move-node>Você não tem permissão para mover este nó. Entre em contato com o administrador.</can-not-move-node>
-      <does-not-support-versioning>Você não tem permissão para mover esse nó. Por favor, entre em contato com o administrador.</does-not-support-versioning>
+      <has-not-permission>Access denied. You don't have permissions to add in this item.</has-not-permission>
+      <has-not-edit-permission>Access denied. You don't have edit permission here. Please contact the administrator.</has-not-edit-permission>
+      <cannot-login-node>You can't access and paste an item here.</cannot-login-node>
+      <cannot-paste-nodetype>You can't paste this type of item here.</cannot-paste-nodetype>
+      <has-not-permission-unlok>You don't have permission to unlock this document.</has-not-permission-unlok>
+      <bound-exception>You don't have the permission to rename this item. Please contact the administrator.</bound-exception>
+      <bound-move-exception>You can't move an item to itself or in a subfolder.</bound-move-exception>
+      <does-not-support-auditing>You can't activate auditing here.</does-not-support-auditing>
+      <can-not-rename-node>You don't have permission to rename this item. Please contact the administrator to get the necessary rights.</can-not-rename-node>
+      <can-not-cut-node>You don't have permission to cut this item. Please contact the administrator.</can-not-cut-node>
+      <can-not-remove-node>You don't have permission to remove this item. Please contact the administrator.</can-not-remove-node>
+      <can-not-lock-node>You don't have permission to lock {0}. Please contact the administrator.</can-not-lock-node>
+      <can-not-unlock-node>You don't have permission to unlock this item. Please contact the administrator.</can-not-unlock-node>
+      <no-node>Please select at least one item before pasting.</no-node>
+      <can-not-paste-node>You don't have permission to move to this item. Please contact the administrator.</can-not-paste-node>
+      <can-not-move-node>You don't have permission to move this item. Please contact the administrator.</can-not-move-node>
+      <does-not-support-versioning>You don't have permission to move. Please contact the administrator.</does-not-support-versioning>
       <path-not-found>Este elemento foi excluído ou modificado. Por favor, clique no botão Atualizar.</path-not-found>
-      <paste-lock-exception>Você não pode colar '{0}' neste nó, porque a origem ou destino dele está bloqueado ou relacionado ao nó bloqueado.</paste-lock-exception>
-      <can-not-checkin-node>Você não pode liberar da reserva esse nó. Por favor, verifique se você possui as permissões necessárias.</can-not-checkin-node>
-      <can-not-checkout-node>Você não pode reservar o nó. Por favor, verifique se você tem as permissões necessárias.</can-not-checkout-node>
-      <move-constraint-exception>Algum erro ocorreu enquanto movia o nó.</move-constraint-exception>
-      <not-lock-owner>Você não pode desbloquear este node porque não foi você que o bloqueou.</not-lock-owner>
-      <is-checked-in>Por favor, reserve esse nó antes de renomeá-lo.</is-checked-in>
-      <is-checked-in-lock>Por favor, reserve esse nó antes de bloqueá-lo.</is-checked-in-lock>
-      <cant-lock>Você não pode bloquear este node.</cant-lock>
+      <paste-lock-exception>'{0}' can't be pasted here. Make sure it is not locked nor this folder. Also check that no related document is locked.</paste-lock-exception>
+      <can-not-checkin-node>You can't check in this item. Please check that you have the necessary permissions.</can-not-checkin-node>
+      <can-not-checkout-node>You can't check out this itel. Please check that you have the necessary permissions.</can-not-checkout-node>
+      <move-constraint-exception>An error occurred while moving this item.</move-constraint-exception>
+      <not-lock-owner>You can't unlock this item because you are not the lock owner.</not-lock-owner>
+      <is-checked-in>Please check out this item before renaming.</is-checked-in>
+      <is-checked-in-lock>Please check out this item before locking.</is-checked-in-lock>
+      <cant-lock>You can't lock this document.</cant-lock>
       <node-locked>O item com caminho {0} ou de nível superior está bloqueado.</node-locked>
-      <can-not-delete>Feche este nó antes de excluí-lo.</can-not-delete>
-      <can-not-delete-version>Não é possível excluir este nó, ele está versionado.</can-not-delete-version>
-      <not-support>Você não pode excluir o nó selecionado. Por favor, selecione outro nó.</not-support>
-      <current-node-not-allow-paste>Você não pode colar o tipo de nó copiado no nó atual.</current-node-not-allow-paste>
-      <copied-node-in-versioning>Você não pode colar o nó copiado. Ele está versionado.</copied-node-in-versioning>
-      <parent-node-locked>Você não tem permissão para desbloquear o nó '{0}'.</parent-node-locked>
-      <this-node-locked-by-parent>Você não pode desbloquear este nó. Ele está bloqueado por um nó antecessor ou um nó pai.</this-node-locked-by-parent>
-      <paste-node-same-name>Você não pode colar um nó com o mesmo nome de um nó que já existe na pasta de destino.</paste-node-same-name>
-      <has-not-add-permission>Você não possui permissão para adicionar novo nó.</has-not-add-permission>
-      <node-cutting>O nó está sendo recortado. Você não pode colá-lo aqui.</node-cutting>
-      <access-denied>Acesso negado. Talvez você não tenha permissão neste nó.</access-denied>
-      <remove-verion-exception>Você não pode remover este nó porque ele (ou seu antecessor) não está reservado.</remove-verion-exception>
-      <remove-referentialIntegrityException>Você não pode excluir este nó porque ele está sendo o alvo de uma propriedade de referência.</remove-referentialIntegrityException>
-      <constraintviolation-exception>O item obrigatório jcr:uiud não foi encontrado. Talvez o nó foi excluído ou modificado. Por favor, clique no botão Atualizar.</constraintviolation-exception>
-      <path-not-found-exception>Este nó foi excluído ou alterado. Por favor, clique no botão Atualizar.</path-not-found-exception>
+      <can-not-delete>Please close this item before deleting.</can-not-delete>
+      <can-not-delete-version>You can't delete this document. It's versioned.</can-not-delete-version>
+      <not-support>You can't delete the selected item. Please select another one.</not-support>
+      <current-node-not-allow-paste>You can't paste the copied item there.</current-node-not-allow-paste>
+      <copied-node-in-versioning>You can't paste the copied item here because it's versioned.</copied-node-in-versioning>
+      <parent-node-locked>You don't have permission to unlock '{0}'.</parent-node-locked>
+      <this-node-locked-by-parent>You can't unlock this item. Parent folder is locked.</this-node-locked-by-parent>
+      <paste-node-same-name>Can't paste this item here. An item with the same name already exists in the destination folder.</paste-node-same-name>
+      <has-not-add-permission>You don't have the permission to add here.</has-not-add-permission>
+      <node-cutting>Item is being cut. You can't paste it here.</node-cutting>
+      <access-denied>Access denied. You may not have the permission.</access-denied>
+      <remove-verion-exception>You can't remove this document because it is checked in.</remove-verion-exception>
+      <remove-referentialIntegrityException>You can't delete this item because it is currently referenced by another one.</remove-referentialIntegrityException>
+      <constraintviolation-exception>The mandatory property jcr:uuid was not found. The document may have been deleted or changed. Please click the Refresh button.</constraintviolation-exception>
+      <path-not-found-exception>This document was deleted or changed. Please click the Refresh button.</path-not-found-exception>
       <not-exist-categories>A categoria não existe</not-exist-categories>
       <lock-node-read-only>Este arquivo foi bloqueado pelo usuário {0}. Abrir como somente leitura?</lock-node-read-only>
     </msg>
@@ -428,12 +428,12 @@
       <title-invalid>Por favor digite o título da pasta.</title-invalid>
       <name-not-allowed>Este nome não é permitido.</name-not-allowed>
       <fileName-error>Nome do arquivo é inválido.</fileName-error>
-      <constraint-violation>O nó atual não permite a adição do tipo de nó '{0}'.</constraint-violation>
+      <constraint-violation>You can't add a document of type '{0}' here.</constraint-violation>
       <repository-exception>Um erro inesperado ocorreu. Por favor, entre em contato com seu administrador do sistema para mais detalhes.</repository-exception>
-      <repository-exception-permission>Você não possui permissão suficiente para adicionar uma pasta neste nó.</repository-exception-permission>
+      <repository-exception-permission>You don't have the permission to add a new folder here.</repository-exception-permission>
       <numberformat-exception>Não é possível salvar esta pasta. O nome deve ser de tipo numérico.</numberformat-exception>
       <!--DMS 2.4.x; ECM-3553-->
-      <not-allow-sameNameSibling>Não é possível salvar esta pasta. Este nó não permite 2 nós com mesmo nome.</not-allow-sameNameSibling>
+      <not-allow-sameNameSibling>You can't save the folder. An item with the same name already exists.</not-allow-sameNameSibling>
       <ntFolder-not-avaiable>Você deve selecionar um tipo personalizado de pasta</ntFolder-not-avaiable>
     </msg>
     <help>
@@ -500,26 +500,26 @@
       <feedback-restore>'{0}' foi restaurado com sucesso.</feedback-restore>
       <feedback-restore-multi>{0} itens foram restaurados com sucesso.</feedback-restore-multi>
       
-      <confirm-restore>Um nó com o mesmo nome já existe na antiga localização do nó '{0}'. Tem certeza que deseja restaurar este nó?</confirm-restore>
+      <confirm-restore>A '{0}' item already exists at the previous location. Are you sure you want to restore it?</confirm-restore>
       <confirm-move>Deseja mesmo mover?</confirm-move>
-      <node-cut>O nó '{0}' foi recortado.</node-cut>
+      <node-cut>'{0}' has been cut.</node-cut>
       <execute-successfully>A ação customizada '{0}' foi executada.</execute-successfully>
-      <save-node-success>O nó '{0}' foi salvo.</save-node-success>
-      <move-problem>Você não pode mover o nó '{0}' para '{1}' porque há algum problema de permissões ou restrições.</move-problem>
+      <save-node-success>'{0}' has been saved.</save-node-success>
+      <move-problem>You can't move '{0}' to '{1}' because there was a problem with permissions or constraint conditions.</move-problem>
     </msg>
   </UIWorkingArea>
   <UIDocumentWorkspace>
     <label>
-      <no-children>Este nó não possui nenhum nó filho.</no-children>
-      <no-children-but-has-hidden>Este nó não possui nenhum nó filho, mas há arquivos ocultos.</no-children-but-has-hidden>
+      <no-children>This item doesn't have children.</no-children>
+      <no-children-but-has-hidden>This folder does not have any item, but there are some hidden files.</no-children-but-has-hidden>
     </label>
     <msg>
-      <unable-save-node>O nó '{0}' é novo. É preciso salvar a sessão antes de executar esta ação.</unable-save-node>
-      <save-node-success>O nó '{0}' foi salvo.</save-node-success>
-      <node-copied>O nó '{0}' foi copiado.</node-copied>
-      <node-cut>O nó '{0}' foi recortado.</node-cut>
-      <remove-root>Você não pode remover o nó raíz.</remove-root>
-      <node-remove-success>O nó '{0}' foi removido.</node-remove-success>
+      <unable-save-node>'{0}' has been created. Please save session to validate this action.</unable-save-node>
+      <save-node-success>'{0}' has been saved.</save-node-success>
+      <node-copied>'{0}' has been copied.</node-copied>
+      <node-cut>'{0}' has been cut.</node-cut>
+      <remove-root>You can't remove the root folder.</remove-root>
+      <node-remove-success>'{0}' has been removed.</node-remove-success>
     </msg>
     <tooltip>
       <Rename>Renomear</Rename>
@@ -538,11 +538,11 @@
   </UIDocumentWorkspace>
   <UIDocumentInfo>
     <msg>
-      <access-denied>Acesso negado. Você não pode acessar o nó '{0}'.</access-denied>
-      <null-exception>Item não encontrado. Ele foi removido ou modificado, ou você não tem permissão para acessar este nó.</null-exception>
+      <access-denied>Access denied. You can't access '{0}'.</access-denied>
+      <null-exception>Item not found. It was either removed or changed, or you don't have the access permission.</null-exception>
       <confirm-deleteattachment>Você deseja remover este arquivo anexado?</confirm-deleteattachment>
       <confirm-deleteattcomment>Você deseja remover este comentário?</confirm-deleteattcomment>
-      <access-denied-exception>Acesso negado. Talvez você não tenha privilégios de leitura, ou o nó pode ter sido removido ou alterado.</access-denied-exception>
+      <access-denied-exception>Access denied. You may not have reading privileges, or the documen may have been removed or changed.</access-denied-exception>
       <path-not-found>Este elemento foi excluído ou modificado. Por favor, clique no botão Atualizar.</path-not-found>
     </msg>
     <tooltip>
@@ -601,7 +601,7 @@
       <OpenDocument>Edição remota</OpenDocument>
       <EditProperty>Editar propriedades do documento</EditProperty>
       <UploadNewVersion>Carregar uma nova versão</UploadNewVersion>
-      <CreateNewVersion>Criar uma nova versão</CreateNewVersion>
+      <CreateNewVersion>Save as new version</CreateNewVersion>
     </event>
   </ECMContextMenu>
  
@@ -733,8 +733,8 @@
       <name-invalid>Você deve colocar o nome !</name-invalid>
       <unable-create>Não pode adicionar propriedades !</unable-create>
       <value-invalid>Você deve colocar valor !</value-invalid>
-      <node-checkedin>Você deve fazer checkout deste node antes de adicionar uma propriedade</node-checkedin>
-      <can-not-add>Você não pode adicionar propriedades para este node. Apenas para nodes de tipo nt:unstructured</can-not-add>
+      <node-checkedin>You must check out this item before adding a property.</node-checkedin>
+      <can-not-add>You can't add properties to this item. This is only allowed for the type nt:unstructured.</can-not-add>
       <propertyName-invalid>Nome da propriedade deve incluir namespace (ex: namespace:nome)</propertyName-invalid>
       <propertyName-exist>A propriedade '{0}' já existe.</propertyName-exist>
       <propertyValu-null>Talvez alguns valores estejam nulos</propertyValu-null>
@@ -795,7 +795,7 @@
       <selectUser>Selecionar usuário</selectUser>
     </label>
     <msg>
-      <not-change-owner>'{0}' é dono deste node e possui permissão de controle total</not-change-owner>
+      <not-change-owner>'{0}' is the owner of this item and has full control permission.</not-change-owner>
     </msg>
   </UIGroupSelector>
   <UIPermissionForm>
@@ -807,7 +807,7 @@
       <add_node>Modificar o direito</add_node>
       <remove>Remover Direito</remove>
     </label>
-    <title>Adicionar uma permissão a esse node</title>
+    <title>Add a permission</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>#{word.save}</Save>
@@ -914,7 +914,7 @@
   </ViewSearch>
   <UISearchResult>
     <msg>
-      <not-support>Não há modelo de View para este node</not-support>
+      <not-support>There is no View template for this document.</not-support>
       <empty>Nenhum resultado encontrado.</empty>
       <access-denied>Você não pode ver este node porque este modelo não está suportado ou o acesso foi negado!</access-denied>
       <query-invalid>A query é inválida</query-invalid>
@@ -939,15 +939,15 @@
       <datecreatedDESC>Ordenar por data de criação descendente</datecreatedDESC>
     </title>
     <tooltip>
-      <View>Ver este node</View>
+      <View>View this item</View>
       <OpenFolder>Ir para pasta</OpenFolder>
     </tooltip>
   </UISearchResult>
   <UIShowAllOwnedByUserResult>
     <msg>
-      <not-support>Não há modelo de View para este node</not-support>
+      <not-support>There is no View template for this document</not-support>
       <empty>Nenhum resultado encontrado.</empty>
-      <access-denied>Você não pode ver este node porque este modelo não está suportado ou o acesso foi negado!</access-denied>
+      <access-denied>You can't view this document, either because this template is not supported or because access is denied.</access-denied>
       <query-invalid>A query é inválida</query-invalid>
     </msg>
     <header>
@@ -970,15 +970,15 @@
       <datecreatedDESC>Ordenar por data de criação descendente</datecreatedDESC>
     </title>
     <tooltip>
-      <View>Ver este nó</View>
+      <View>View this item</View>
       <OpenFolder>Ir para pasta</OpenFolder>
     </tooltip>
   </UIShowAllOwnedByUserResult>
   <UIShowAllFavouriteResult>
     <msg>
-      <not-support>Não há modelo de visualização para este nó</not-support>
+      <not-support>There is no View template for this item</not-support>
       <empty>Nenhum resultado encontrado!</empty>
-      <access-denied>Você não pode ver este nó, porque este modelo não é suportado ou o acesso foi negado.</access-denied>
+      <access-denied>You can't view this item, either because this template is not supported or because access is denied.</access-denied>
       <query-invalid>A consulta é inválida</query-invalid>
     </msg>
     <header>
@@ -1001,15 +1001,15 @@
       <datecreatedDESC>Ordenar por data de criação descendente</datecreatedDESC>
     </title>
     <tooltip>
-      <View>Ver este node</View>
+      <View>View this item</View>
       <OpenFolder>Ir para pasta</OpenFolder>
     </tooltip>
   </UIShowAllFavouriteResult>
   <UIShowAllHiddenResult>
     <msg>
-      <not-support>Não há modelo de visualização para este nó.</not-support>
+      <not-support>There is no View template for this item.</not-support>
       <empty>Nenhum resultado encontrado.</empty>
-      <access-denied>Você não pode ver este nó, porque este modelo não é suportado ou o acesso foi negado.</access-denied>
+      <access-denied>You can't view this item, either because it has no View template or because you don't have access to it.</access-denied>
       <query-invalid>A consulta é inválida</query-invalid>
     </msg>
     <header>
@@ -1033,16 +1033,16 @@
       <datecreatedDESC>Ordenar por data de criação descendente</datecreatedDESC>
     </title>
     <tooltip>
-      <View>Ver este nó</View>
+      <View>View this Item</View>
       <OpenFolder>Ir para pasta</OpenFolder>
       <RemoveHiddenAttribute>Remover atributo oculto</RemoveHiddenAttribute>
     </tooltip>
   </UIShowAllHiddenResult>
   <UIShowAllTrashResult>
     <msg>
-      <not-support>Não há modelo de visualização para este nó.</not-support>
+      <not-support>There is no View template for this item.</not-support>
       <empty>Nenhum resultado encontrado.</empty>
-      <access-denied>Você não pode ver este nó, porque este modelo é suportado ou o acesso foi negado.</access-denied>
+      <access-denied>You can't view this item, either because it has no View template or because you don't have access to it.</access-denied>
       <query-invalid>A consulta é inválida</query-invalid>
     </msg>
     <header>
@@ -1065,7 +1065,7 @@
       <datecreatedDESC>Ordenar por data de criação descendente</datecreatedDESC>
     </title>
     <tooltip>
-      <View>Ver este nó</View>
+      <View>View this Item</View>
       <OpenFolder>Ir para pasta</OpenFolder>
       <DeletePermanently>Excluir permanentemente</DeletePermanently>
       <RestoreFromTrash>Restaurar da lixeira</RestoreFromTrash>
@@ -1321,7 +1321,7 @@
       <Cancel>#{word.cancel}</Cancel>
       <Export>Exportar</Export>
     </action>
-    <title>Exportar nó</title>
+    <title>Export</title>
   </UIExportNode>
   <!--
   ###############################################################################
@@ -1366,8 +1366,8 @@
       <error-removing-referenced-version>This version is referenced and can't be removed.</error-removing-referenced-version>
       <confirm-restore>Are you sure you want to restore this version?</confirm-restore>
       <confirm-delete>Deseja mesmo remover esta versão?</confirm-delete>
-      <not-checked-out>Você deve reservar o nó antes de restaurar.</not-checked-out>
-      <invalid-item-state>Você não pode restaurar esta versão, porque um ou mais itens foram excluídos ou movidos durante outra sessão.</invalid-item-state>
+      <not-checked-out>You have to check out this document before restoring.</not-checked-out>
+      <invalid-item-state>You can't restore this version, either because one or more items were deleted or moved by another session.</invalid-item-state>
     </msg>
     <action>
       <close>#{word.close}</close>
@@ -1392,8 +1392,8 @@
       <noVersion>Sem versão</noVersion>
     </msg>
     <eventName>
-      <e_1>Nó adicionado</e_1>
-      <e_2>Nó removido</e_2>
+      <e_1>Added</e_1>
+      <e_2>Document Removed</e_2>
       <e_4>Propriedade adicionada</e_4>
       <e_16>Propriedade modificada</e_16>
       <e_8>Propriedade removida</e_8>
@@ -1433,13 +1433,13 @@
   -->
   <UIActivateVersion>
     <label>
-      <note>O versionamento não foi ativado para este nó.</note>
+      <note>Versioning has not been activated for this document.</note>
       <question>Você deseja ativá-lo ?</question>
       <button-active>Ativar</button-active>
       <button-cancel>#{word.cancel}</button-cancel>
     </label>
     <msg>
-      <access-denied>Você não tem permissão para ativar o versionamento neste nó</access-denied>
+      <access-denied>You don't have permission to activate versioning on this document</access-denied>
     </msg>
   </UIActivateVersion>
   <!--
@@ -1462,7 +1462,7 @@
       </msg>
     </grid>
     <msg>
-      <node-type-invalid>Apenas os nós do tipo documento podem ser registrados.</node-type-invalid>
+      <node-type-invalid>Only documents can be enrolled.</node-type-invalid>
       <already-enroled>Este documento já está registrado</already-enroled>
     </msg>
   </UIActivePublication>
@@ -1473,7 +1473,7 @@
   -->
   <UIActivateAuditing>
     <label>
-      <note>Auditoria não está ativada para este nó.</note>
+      <note>Auditing has not been activated for this document.</note>
       <question>Você deseja ativá-la?</question>
     </label>
     <action>
@@ -1516,7 +1516,7 @@
       <Cancel>#{word.cancel}</Cancel>
       <Import>Importar</Import>
     </action>
-    <title>Importar nó</title>
+    <title>Import</title>
     <msg>
       <import-successful>Importado com sucesso.</import-successful>
       <filename-invalid>Navegue até o arquivo .xml para o campo 'Envio de arquivo' para importar.</filename-invalid>
@@ -1524,8 +1524,8 @@
       <xml-invalid>Há um caractere inválido na posição [linha, coluna]:{0} no arquivo {1}</xml-invalid>
       <mimetype-invalid>Apenas arquivos .xml ou .zip são suportados na importação.</mimetype-invalid>
       <access-denied>Acesso negado. Você não está habilitado a importar aí.</access-denied>
-      <constraint-violation-exception>Impossível importar dados. O tipo '{0}' não é permitido neste local.</constraint-violation-exception>
-      <item-exists-exception>Um nó referenciável de entrada tem o mesmo UUID que um nó existente no espaço de trabalho.</item-exists-exception>
+      <constraint-violation-exception>Impossible to import data. The type '{0}' is not allowed at this location.</constraint-violation-exception>
+      <item-exists-exception>An incoming item has the same UUID as an existing item in the workspace.</item-exists-exception>
     </msg>
   </UIImportNode>
   <!--
@@ -1573,7 +1573,7 @@
   <UIViewVersion>
     <label>
       <nodeType>Tipo de nó</nodeType>
-      <nodeName>Nome do nó</nodeName>
+      <nodeName>Name</nodeName>
       <VersionNumber>Número de versão</VersionNumber>
       <VersionLabels>Etiqueta de versão</VersionLabels>
       <VersionDate>Data da versão</VersionDate>
@@ -1609,7 +1609,7 @@
       <action>Ações</action>
     </header>
     <msg>
-      <access-denied>Acesso negado. Você não possui permissão suficiente neste nó.</access-denied>
+      <access-denied>Access denied. You don't have access permission.</access-denied>
       <confirm-delete>Você realmente deseja excluir esta referência?</confirm-delete>
     </msg>
     <action>
@@ -1629,7 +1629,7 @@
       <action>Ação</action>
     </header>
     <info>
-      <child-not-found>Este nó não tem nenhum nó filho.</child-not-found>
+      <child-not-found>This item doesn't have any child.</child-not-found>
     </info>
   </UITreeList>
   <!--
@@ -1685,8 +1685,8 @@
       <clearall>Limpar todos</clearall>
     </action>
     <msg>
-      <unable-pasted>Não pode colar este nó.</unable-pasted>
-      <node-pasted>O nó {0} foi colado em {1}. Esta operação já foi salva e você não precisa apertar o botão salvar.</node-pasted>
+      <unable-pasted>Can't paste this item.</unable-pasted>
+      <node-pasted>{0} has been pasted at location {1}. This operation has already been saved.</node-pasted>
     </msg>
   </UIClipboard>
   <!--
@@ -1727,15 +1727,15 @@
 </tooltip>
     <msg>
       <cannot-save>Erro enquanto salvava o documento.</cannot-save>
-      <in-versioning>Por favor, reserve o nó atual antes de adicionar um novo nó.</in-versioning>
+      <in-versioning>Please check out the current folder before adding a new item.</in-versioning>
       <not-support>Não foi possível carregar o modelo de '{0}'.</not-support>
       <value-invalid>'{0}' é um valor obrigatório.</value-invalid>
       <repository-exception>Erro enquanto salvava o documento.</repository-exception>
       <!--DMS 2.4.x; ECM-3543-->
-      <repository-exception-permission>Você não tem permissão para adicionar um novo documento neste nó.</repository-exception-permission>
+      <repository-exception-permission>You don't have permission to add a new document to this folder.</repository-exception-permission>
       <not-allowed-same-name-sibling>Você não pode salvar este documento. Não é possível ter o mesmo nome que seu irmão.</not-allowed-same-name-sibling>
       <numberformat-exception>Não é possível salvar este documento. O nome provido deve ser numérico.</numberformat-exception>
-      <item-not-found>Item não encontrado. Talvez este nó (ou seu antecessor) foi excluído. Por favor, clique no botão Atualizar.</item-not-found>
+      <item-not-found>Document not found. This document (or its ancestor) may have been deleted. Please click the Refresh button.</item-not-found>
     </msg>
   </UIDocumentForm>
   <!--
@@ -1800,7 +1800,7 @@
       <action>Ação</action>
     </header>
     <msg>
-      <remove-popup-first>Você deve fechar a janela de edição antes de excluir esse nó.</remove-popup-first>
+      <remove-popup-first>You must close the edit pop-up before deleting this item.</remove-popup-first>
       <confirm-delete-action>Você realmente quer excluir esta ação?</confirm-delete-action>
       <template-empty>O modelo '{0}' está nulo ou vazio.</template-empty>
       <template-null>O modelo é nulo ou você não tem permissão para acessá-lo.</template-null>
@@ -1826,7 +1826,7 @@
       <numberformat-exception>Não pode salvar esta ação. O nome provido deve ser numérico.</numberformat-exception>
       <existed-action>O nome da ação '{0}' existe. Escolha outro nome, por favor.</existed-action>
       <unable-add-action>Não é possível adicionar esta ação.</unable-add-action>
-      <unable-add>Incapaz de adicionar esta ação. Este nó é o raiz ou você não tem permissão suficiente.</unable-add>
+      <unable-add>Can't add this action. This item is either the root folder or you don't have the permission to edit.</unable-add>
       <not-support>A janela de criação/edição '{0}' não é suportada.</not-support>
       <no-permission-add>Acesso negado. Você não tem permissão para adicionar uma ação aqui.</no-permission-add>
       <access-denied>Acesso negado. Você não tem permissão para acessar este modelo.</access-denied>
@@ -1865,7 +1865,7 @@
   <UIAddressBar>
     <msg>
       <path-not-found>Caminho não encontrado.</path-not-found>
-      <access-denied>Acesso negado. Você não tem permissão de leitura para este nó.</access-denied>
+      <access-denied>Access denied. You don't have the permission to read.</access-denied>
       <keyword-not-support>A palavra-chave é inválida. Alguns caracteres não são suportados.</keyword-not-support>
     </msg>
     <label>
@@ -1874,8 +1874,8 @@
     </label>
     <title>
       <exeButton>Ir</exeButton>
-      <backButton>Voltar para o nó anterior</backButton>
-      <showHistory>Mostrar histórico de endereço</showHistory>
+      <backButton>Back</backButton>
+      <showHistory>Show History</showHistory>
       <changeNode>Alterar nó</changeNode>
     </title>
   </UIAddressBar>
@@ -1937,7 +1937,7 @@
   -->
   <UIViewMetadataContainer>
     <msg>
-      <path-not-found>O nó não suporta esta visualização.</path-not-found>
+      <path-not-found>The document does not support this view.</path-not-found>
     </msg>
   </UIViewMetadataContainer>
   <!--
@@ -1958,7 +1958,7 @@
   </metadataForm>
   <UIViewMetadataTemplate>
     <msg>
-      <access-denied>Acesso negado. Você não é o dono ou não tem permissão de editar neste nó.</access-denied>
+      <access-denied>Access denied. Either you are not the owner or don't have edit permission.</access-denied>
     </msg>
   </UIViewMetadataTemplate>
   <!--
@@ -2034,7 +2034,7 @@
       <private>Privado</private>
       <state>Estado</state>
       <visibility>Visibilidade</visibility>
-      <nodeName>Nome do nó:</nodeName>
+      <nodeName>Name:</nodeName>
       <lifecycleName>Nome do ciclo de vida</lifecycleName>
       <stateName>Nome do estado</stateName>
     </label>
@@ -2058,7 +2058,7 @@
   </UIWorkspaceList>
   <pathSelector>
     <title>
-      <UIOneNodePathSelector>Seletor de nó</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Selector</UIOneNodePathSelector>
     </title>
   </pathSelector>
   <!--
@@ -2166,9 +2166,9 @@
     </label>
     <msg>
       <mimetype-incorrect>Tipo de arquivo incorreto. Miniaturas só podem ser criadas a partir de arquivos .JPG, .PNG ou .GIF.</mimetype-incorrect>
-      <access-denied>Acesso negado. Você não possui permissão para adicionar miniaturas para este nó.</access-denied>
+      <access-denied>Access denied. You don't have permission to add a thumbnail.</access-denied>
       <confirm-delete>Deseja remover esta miniatura?</confirm-delete>
-      <is-checked-in>Este nó está liberado. Por favor, reserve o nó antes de fazer qualquer coisa.</is-checked-in>
+      <is-checked-in>This item is checked in. Please check out before performing any action.</is-checked-in>
       <fileName-error>Por favor, selecione um arquivo para carregar.</fileName-error>
     </msg>
     <title>
@@ -2272,7 +2272,7 @@
 
   <PopupSelectPath>
     <title>
-      <UIOneNodePathSelector>Selecionar nó</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Select Path</UIOneNodePathSelector>
     </title>
   </PopupSelectPath>
 
@@ -2302,7 +2302,7 @@
   <UISymLinkForm>
     <label>
       <symLinkName>Nome do Link Simbólico</symLinkName>
-      <pathNode>Caminho do nó</pathNode>
+      <pathNode>Path</pathNode>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -2313,16 +2313,16 @@
       <name-invalid>Por favor, coloque o nome do link simbólico.</name-invalid>
       <name-not-allowed>Este nome não é permitido.</name-not-allowed>
       <fileName-error>Nome de arquivo inválido.</fileName-error>
-      <constraint-violation>Você não pode adicionar o tipo de nó '{0}' ao nó atual.</constraint-violation>
-      <repository-exception>Acesso negado. Você não tem permissão para adicionar link simbólico neste nó.</repository-exception>
+      <constraint-violation>You can't add an item of type '{0}' here.</constraint-violation>
+      <repository-exception>Access denied. You don't have permission to add a symlink here.</repository-exception>
       <numberformat-exception>Não pode salvar esta pasta. O nome provido deve ser numérico.</numberformat-exception>
-      <path-node-invalid>Por favor, insira o caminho do nó.</path-node-invalid>
+      <path-node-invalid>Please enter the path.</path-node-invalid>
       <path-node-not-allowed>Este nome não é permitido.</path-node-not-allowed>
-      <non-node>Por favor, escolha um alvo de confiança; você pode não ter permissão para leitura deste nó.</non-node>
-      <cannot-save>Você não pode adicionar um link simbólico para este tipo de nó.</cannot-save>
-      <item-exists-exception>O nó com o mesmo nome já existe.</item-exists-exception>
-      <translation-node-same-language-default>O nó de tradução tem o mesmo idioma que o idioma padrão do nó atual.</translation-node-same-language-default>
-      <UnsupportedRepositoryOperationException>Esse nó alvo não é referido.</UnsupportedRepositoryOperationException>
+      <non-node>Please select the trust target; you may not have the rights to read this item.</non-node>
+      <cannot-save>You can't add a symlink for this type of document.</cannot-save>
+      <item-exists-exception>An item with this name already exists.</item-exists-exception>
+      <translation-node-same-language-default>The translated document has the same language as the default language of current document.</translation-node-same-language-default>
+      <UnsupportedRepositoryOperationException>This target item is not referred.</UnsupportedRepositoryOperationException>
     </msg>
   </UISymLinkForm>
   
@@ -2342,22 +2342,22 @@
       <name-invalid>Por favor, coloque o nome do link simbólico.</name-invalid>
       <name-not-allowed>Este nome não é permitido.</name-not-allowed>
       <fileName-error>Nome do arquivo é inválido.</fileName-error>
-      <constraint-violation>Você não pode adicionar o tipo de nó '{0}' ao nó atual.</constraint-violation>
-      <repository-exception>Acesso negado. Você não tem permissão para adicionar link simbólico neste nó.</repository-exception>
+      <constraint-violation>You can't add the '{0}' type to the current item.</constraint-violation>
+      <repository-exception>Access denied. You don't have permission to add a symlink to this item.</repository-exception>
       <numberformat-exception>Não é possível salvar esta pasta. O nome deve ser de tipo numérico.</numberformat-exception>
-      <path-node-invalid>Por favor, insira o caminho do nó.</path-node-invalid>
+      <path-node-invalid>Please enter the path.</path-node-invalid>
       <path-node-not-allowed>Este nome não é permitido.</path-node-not-allowed>
-      <non-node>Por favor, escolha um alvo de confiança; você pode não ter permissão para leitura deste nó.</non-node>
+      <non-node>Please select the trust target; you may not have the right to read this node.</non-node>
       <cannot-save>Ocorreu um erro ao criar o link simbólico.</cannot-save>
-      <item-exists-exception>O nó com o mesmo nome já existe.</item-exists-exception>
-      <translation-node-same-language-default>O nó de tradução tem o mesmo idioma que o idioma padrão do nó atual.</translation-node-same-language-default>
-      <UnsupportedRepositoryOperationException>Esse nó alvo não é referido.</UnsupportedRepositoryOperationException>
+      <item-exists-exception>An item with this name already exists.</item-exists-exception>
+      <translation-node-same-language-default>The translated document has the same language as the default language of current document.</translation-node-same-language-default>
+      <UnsupportedRepositoryOperationException>This target item is not referred.</UnsupportedRepositoryOperationException>
     </msg>
   </UIAddTranslationForm>
 
   <UIPopupSymLink>
     <title>
-      <UIOneNodePathSelector>Escolher alvo do nó</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Select Target Item</UIOneNodePathSelector>
     </title>
   </UIPopupSymLink>
   <UIPopupSymLink>
@@ -2375,9 +2375,9 @@
 
   <UIWorkingArea>
     <msg>
-      <create-link-problem>Você não pode criar um link para o nó '{0}' em '{1}'.</create-link-problem>
-      <dest-node-is-link>O nó destino '{0}' já é um link simbólico. Você não pode criar um link simbólico dentro dele</dest-node-is-link>
-      <selected-is-link>O nó selecionado '{0}' já é um link. Você não pode criar um link que aponta para outro link.</selected-is-link>
+      <create-link-problem>You can't create a link for '{0}' at '{1}'.</create-link-problem>
+      <dest-node-is-link>The destination '{0}' is already a symlink, so you cannot create a symlink inside it.</dest-node-is-link>
+      <selected-is-link>The selected item '{0}' is already a link. You can't create a link to another link.</selected-is-link>
       <confirm-create-link>Você realmente deseja criar um link para este local?</confirm-create-link>
     </msg>
   </UIWorkingArea>
@@ -2460,7 +2460,7 @@
 <ReadOnly>Abrir como somente leitura</ReadOnly>
 <Cancel>Cancel</Cancel>
       <KeepBoth>Manter ambos</KeepBoth>
-      <CreateNewVersion>Criar uma nova versão</CreateNewVersion>
+      <CreateNewVersion>Save as new version</CreateNewVersion>
     </label>
   </UIConfirmMessage>
 
@@ -2516,7 +2516,7 @@
 
   <UIPopupMenu>
     <msg>
-      <node-locked-other-person>Este node ou o node pai está bloqueado por outro usuário, você não pode excluí-lo.</node-locked-other-person>
+      <node-locked-other-person>This item or its parent folder is locked by another user, so you can't delete it.</node-locked-other-person>
     </msg>
   </UIPopupMenu>
 
@@ -2551,7 +2551,7 @@
 
   <UIPopupMenu>
     <msg>
-      <can-not-unlock-node-is-checked-in>Você não pode desbloquear o nó '{0}' (ou seu antecessor), pois ele não está reservado.</can-not-unlock-node-is-checked-in>
+      <can-not-unlock-node-is-checked-in>You can't unlock because the '{0}' (or its parent folder) is checked in.</can-not-unlock-node-is-checked-in>
     </msg>
   </UIPopupMenu>
 
@@ -2560,12 +2560,12 @@
   -->
   <UIActionBar>
     <msg>
-      <cannot-enable-version>Não é possível habilitar o versionamento.</cannot-enable-version>
+      <cannot-enable-version>Can't activate versioning on this document.</cannot-enable-version>
     </msg>
   </UIActionBar>
   <UIPopupMenu>
     <msg>
-        <cannot-readsource>Você não pode ler dados do nó fonte.</cannot-readsource>
+        <cannot-readsource>You can't read data from the source.</cannot-readsource>
     </msg>
   </UIPopupMenu>
   <UIUploadForm>
@@ -2845,7 +2845,7 @@
 
     <UIPopupMenu>
     <msg>
-      <node-locked-editing>Você não pode editar este nó com o caminho {0}. Ele está bloqueado por outro usuário.</node-locked-editing>
+      <node-locked-editing>You can't edit  {0}. It's locked by another user.</node-locked-editing>
     </msg>
   </UIPopupMenu>
   <UITagStyleForm>
@@ -2939,12 +2939,12 @@
   </PathNode>
   <UIPopupPathFoRestore>
     <title>
-      <UIOneNodePathSelector>Selecione o nó pai</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Select Parent</UIOneNodePathSelector>
     </title>
   </UIPopupPathFoRestore>
   <rootNodeInfo>
     <title>
-      <AddRootNode>Adicionar o nó raíz</AddRootNode>
+      <AddRootNode>Add Root</AddRootNode>
     </title>
   </rootNodeInfo>
 
@@ -3156,9 +3156,9 @@
   </lifecyclePhase>
   <UIPopupMenu>
   <msg>
-<can-not-remove-locked-node>O nó {0} está bloqueado. Você não pode movê-lo para a Lixeira.</can-not-remove-locked-node>
-<can-not-remove-checked-in-node>O nó {0} (ou seu nó pai) não está reservado. Você não pode movê-lo para a Lixeira.</can-not-remove-checked-in-node>
-<access-denied-to-delete>Acesso negado. Você não pode mover o nó {0} para a Lixeira.</access-denied-to-delete>
+<can-not-remove-locked-node>{0} is locked. You can't move it to the Trash.</can-not-remove-locked-node>
+<can-not-remove-checked-in-node>{0} or its parent folder is checked in. You can't move it to the Trash.</can-not-remove-checked-in-node>
+<access-denied-to-delete>Access denied. You can't move {0} to the Trash.</access-denied-to-delete>
   </msg>
   </UIPopupMenu>
   <UIPropertyForm>
@@ -3168,8 +3168,8 @@
   </UIPropertyForm>
   <UIWatchDocumentForm>
     <msg>
-      <node-is-locked>Este nó está bloqueado. Você não pode acompanhá-lo.</node-is-locked>
-      <unknown-error>Ocorreram erros. Você não pode acompanhar este nó.</unknown-error>
+      <node-is-locked>This item is locked. You cannot watch it.</node-is-locked>
+      <unknown-error>Some errors have occurred. You can't watch this document.</unknown-error>
     </msg>
   </UIWatchDocumentForm>   
   <UIActionForm>
@@ -3194,7 +3194,7 @@
     <Keep>Manter os dois</Keep>
     <Replace>Substituir</Replace>
     <Canceled>Cancelado</Canceled>
-      <UploadNewVersion>Carregar uma nova versão</UploadNewVersion>
+      <UploadNewVersion>Upload a new version</UploadNewVersion>
     <Cancel>#{word.cancel}</Cancel>
     <AbortAllConfirmation>Você quer abortar todos os arquivos em andamento?</AbortAllConfirmation>
   </label>

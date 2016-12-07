@@ -990,7 +990,7 @@
       <addSymLink>Προσθήκη συντόμευσης</addSymLink>
       <checkIn>Δέσμευση</checkIn>
       <checkOut>Αποδέσμευση</checkOut>
-      <shareDocuments>Share</shareDocuments>
+      <shareDocuments>Post</shareDocuments>
       <openDocument>Remote Edit</openDocument>
       <editProperty>Edit Document Properties</editProperty>
       <uploadNewVersion>Upload a new version</uploadNewVersion>

@@ -18,7 +18,7 @@
     </action>
     <msg>
       <not-support>You can't comment on this type of document.</not-support>
-      <not-checkedout>شما باید گره را قبل از ثبت نظر در مورد آن، ترخیص کنید.</not-checkedout>
+      <not-checkedout>You must check out the document before commenting on it.</not-checkedout>
       <content-null>شما مجاز به ارسال نظر خالی نمی باشید.</content-null>
     </msg>
   </UICommentForm>
@@ -46,8 +46,8 @@
     </button>
     <msg>
       <not-support>شما نمی توانید به این نوع سند رای بدهید.</not-support>
-      <not-checkedout>شما باید گره را قبل از ثبت رای در مورد آن، ترخیص کنید.</not-checkedout>
-      <vote-restriction>شما نمی توانید بیش از یک بار رای بدهید.</vote-restriction>
+      <not-checkedout>You must check out the document to vote.</not-checkedout>
+      <vote-restriction>You cannot vote more than one time.</vote-restriction>
     </msg>
   </UIVoteForm>
  
@@ -59,9 +59,9 @@
   <UIJCRExplorer>
     <msg>
       <refresh-session-success>جلسه با موفقیت تازه سازی شد.</refresh-session-success>
-      <no-node-history>شما در گره ريشه هستید.</no-node-history>
+      <no-node-history>You are at the root.</no-node-history>
       <save-session-success>تمامی تغییرات ذخیره شده اند.</save-session-success>
-      <target-path-not-found>شما به این گره دسترسی ندارید، زیرا این گره وجود ندارد و یا شما مجوز دسترسی به آن را ندارید.</target-path-not-found>
+      <target-path-not-found>You can't access this path, either because it doesn't exist anymore or because you don't have access permissions.</target-path-not-found>
     </msg>
   </UIJCRExplorer>
   <!--
@@ -159,8 +159,8 @@
     <label>
       <enableStructure>فعالسازی ساختار DMS.</enableStructure>
       <showSideBar>نمایش نوار جانبی:</showSideBar>
-      <showHiddenNode>نمایش گره های پنهان:</showHiddenNode>
-      <showNonDocument>نمایش گره های غیر سندی:</showNonDocument>
+      <showHiddenNode>Show Hidden Items:</showHiddenNode>
+      <showNonDocument>Show Non-document Items:</showNonDocument>
       <showRefDocuments>نمایش اسناد مرجع:</showRefDocuments>
       <enableDragAndDrop>فعال کردن کشیدن و رها کردن:</enableDragAndDrop>
       <sortBy>مرتب سازی بر اساس:</sortBy>
@@ -201,15 +201,15 @@
       <Back>#{word.back}</Back>
     </action>
     <msg>
-      <rename-successfull>گره '{0}' به '{1}' با موفقیت تغییر نام یافت.</rename-successfull>
-      <rename-denied>دسترسی رد شد. نام این گره را تغییر دهید.</rename-denied>
+      <rename-successfull>'{0}' was renamed to '{1}' successfully.</rename-successfull>
+      <rename-denied>Access denied. You can't rename this item.</rename-denied>
       <fileName-invalid>نام جدید شامل کاراکترهای نامعتبر است.</fileName-invalid>
       <newName-same-oldName>نام جدید در حال حاضر وجود دارد. لطفا دوباره چک کنید.</newName-same-oldName>
-      <version-exception>این گره (یا والد این گره) هنوز ترخیص نشده است.</version-exception>
-      <lock-exception>این گره قفل شده است. لطفا آن را قبل از تغییر نام باز کنید.</lock-exception>
-      <constraintViolation-exception>در حین تغییر نام گره '{0}' خطایی رخ داده است. لطفا دوباره چک کنید.</constraintViolation-exception>
+      <version-exception>This document (or one of its ancestors) is not checked out.</version-exception>
+      <lock-exception>This document is locked. Please unlock it before renaming.</lock-exception>
+      <constraintViolation-exception>An error occurred while renaming '{0}'. Please check again.</constraintViolation-exception>
       <unknown-prefix>پیشوند '{0}' هنوز ثبت نشده است.</unknown-prefix>
-      <rename-error>در حین تغییر نام این گره خطایی رخ داده است. لطفا دوباره چک کنید.</rename-error>
+      <rename-error>An error occurred while renaming. Please check again.</rename-error>
     </msg>
   </UIRenameForm>
   <UIPopupWindow>
@@ -222,7 +222,7 @@
       <UIExportNode>استخراج</UIExportNode>
       <UINodeTypeInfo>اطلاعات نوع گره</UINodeTypeInfo>
       <UIVersionInfo>اطلاعات نسخه</UIVersionInfo>
-      <UIActivateVersion>فعال کردن نسخه</UIActivateVersion>
+      <UIActivateVersion>Activate Versioning</UIActivateVersion>
       <UIAuditingInfo>اطلاعات ممیزی</UIAuditingInfo>
       <UIActivateAuditing>فعال کردن ممیزی</UIActivateAuditing>
       <UIPermissionManager>مدیریت مجوز</UIPermissionManager>
@@ -313,40 +313,40 @@
       <UploadNewVersion>Upload a new version</UploadNewVersion>
     </tooltip>
     <msg>
-      <cannot-action-in-rootnode>قادر به انجام این اقدام در گره ریشه نیستید.</cannot-action-in-rootnode>
+      <cannot-action-in-rootnode>You can't perform this action at root.</cannot-action-in-rootnode>
       <node-checkedin>شما باید اول ترخیص کنید.</node-checkedin>
-      <cannot-enable-version-rootnode>نسخه بندی برای گره ریشه را نمی توان فعال کرد.</cannot-enable-version-rootnode>
-      <cannot-enable-publication-rootnode>قابلیت انتشار برای گره ریشه را نمی توان فعال کرد.</cannot-enable-publication-rootnode>
+      <cannot-enable-version-rootnode>Can't activate versioning on root.</cannot-enable-version-rootnode>
+      <cannot-enable-publication-rootnode>Can't activate publication at root.</cannot-enable-publication-rootnode>
       <manage-publication>
-        <not-supported-nodetype>قابلیت انتشار تنها از گره سندی پشتیبانی می کند.</not-supported-nodetype>
+        <not-supported-nodetype>Only documents can be published.</not-supported-nodetype>
         <no-publication-lifecycle>چرخه انتشار پیکربندی نشده است.</no-publication-lifecycle>
       </manage-publication>
-      <unsubcriber-lifecycle>گره لغو عضویت شده است.</unsubcriber-lifecycle>
-      <not-supported-nodetype>چرخه لغو عضویت تنها از گره سندی پشتیبانی می کند.</not-supported-nodetype>
-      <unsubcriber-lifecycle-finish>گره با موفقیت لغو عضویت شد.</unsubcriber-lifecycle-finish>
-      <access-false>گره یک مقاله نیست و یا ترخیص نشده است.</access-false>
+      <unsubcriber-lifecycle>The document was already unsubscribed.</unsubcriber-lifecycle>
+      <not-supported-nodetype>This operation is only supported for documents.</not-supported-nodetype>
+      <unsubcriber-lifecycle-finish>The document was unsubscribed successfully.</unsubcriber-lifecycle-finish>
+      <access-false>The document is not an article or checked in.</access-false>
       <unsupported-action>این عملکرد پشتیبانی نمی شود.</unsupported-action>
-      <not-relationable>این گره در حال حاضر هیچ پیوندی با گره دیگر ندارد.</not-relationable>
-      <node-pasted>گره '{0}' به محل "{1}" جابجا شده است. این عملیات ذخیره شده است.</node-pasted>
-      <no-node-selected>هیچ گره ای کپی نشده است.</no-node-selected>
-      <unable-edit>گره '{0}' با نوع گره '{1}' از ویرایش پشتیبانی نمی کند.</unable-edit>
-      <not-support>قادر به ویرایش گره انتخاب شده نمی باشید.</not-support>
-      <template-null>در این گره هیچ گفتگوی موجود نیست.</template-null>
+      <not-relationable>This document has no relations.</not-relationable>
+      <node-pasted>'{0}' has been pasted at the location '{1}'. This operation has already been saved.</node-pasted>
+      <no-node-selected>Nothing to copy.</no-node-selected>
+      <unable-edit>Editing documents of type '{1}' like '{0}' is not supported.</unable-edit>
+      <not-support>Can't edit the selected item.</not-support>
+      <template-null>This document has no form template.</template-null>
       <keyword-null>هیچ کلمه کلیدی برای جستجو وجود ندارد.</keyword-null>
       <not-found>هیچ نتیجه ای در بر نداشت.</not-found>
       <keyword-not-allow>این کلمه مجاز نمی باشد.</keyword-not-allow>
-      <is-not-referenable>گره '{0}' نمی تواند قابل ارجاع باشد.</is-not-referenable>
-      <access-denied>دسترسی رد شد. شما دسترسی ویرایش در این گره را ندارید.</access-denied>
-      <access-add-denied>دسترسی رد شد. شما دسترسی افزودن مجوز در این گره را ندارید.</access-add-denied>
+      <is-not-referenable>'{0}' can't be referenceable.</is-not-referenable>
+      <access-denied>Access denied. You don't have edit permission for this item.</access-denied>
+      <access-add-denied>Access denied. You don't have permission to add items here.</access-add-denied>
       <item-existed>این گره در حال حاضر وجود دارد. نامگذاری مشابه با گره های همرده مجاز نیست.</item-existed>
       <removed-hidden-mixin>شما mixin پنهان را با موفقیت حذف نمودید.</removed-hidden-mixin>
       <added-hidden-mixin>شما mixin پنهان را با موفقیت اضافه نمودید.</added-hidden-mixin>
       <not-supported>این عملکرد تنها توسط نوع سندی پشتیبانی می شود.</not-supported>
-      <empty-file-type>افزودن سند به این گره  مجاز نیست.</empty-file-type>
-      <unsupported-watch>تنها گره سندی قابلیت پاییده شدن را دارد.</unsupported-watch>
-      <watch-checkedin>گره باید قبل از پاییده شدن ترخیص گردد.</watch-checkedin>
-      <unsupported-tagging>تنها می توان به گره سندی بر چسب زد.</unsupported-tagging>
-      <tagnode-checkedin>گره قبل از برچسب خوردن باید ترخیص شود.</tagnode-checkedin>
+      <empty-file-type>You can't add a document here.</empty-file-type>
+      <unsupported-watch>Only documents can be watched.</unsupported-watch>
+      <watch-checkedin>You must check out the document before watching.</watch-checkedin>
+      <unsupported-tagging>Only documents can be tagged.</unsupported-tagging>
+      <tagnode-checkedin>You must check out the document before tagging.</tagnode-checkedin>
     </msg>
     <title>
       <select-tab>انتخاب برگه</select-tab>
@@ -361,48 +361,48 @@
   </UIActionBar>
   <UIPopupMenu>
     <msg>
-      <has-not-permission>دسترسی رد شد. شما دسترسی افزودن مجوز در این گره را ندارید.</has-not-permission>
-      <has-not-edit-permission>دسترسی رد شد. شما مجوز ویرایش در این گره را ندارید. لطفا با سرپرست تماس بگیرید.</has-not-edit-permission>
-      <cannot-login-node>شما نمی توانید در اینجا به گره دسترسی داشته و یا آن را به اینجا منتقل کنید.</cannot-login-node>
-      <cannot-paste-nodetype>شما نمی توانید گره را به اینجا منتقل کنید.</cannot-paste-nodetype>
-      <has-not-permission-unlok>شما مجوز لازم را برای باز کردن این گره ندارید.</has-not-permission-unlok>
-      <bound-exception>شما دارای مجوز تغییر نام این گره نیستید. لطفا با سرپرست تماس بگیرید.</bound-exception>
-      <bound-move-exception>امکان انتقال گره به خود آن و یا گره های فرزند آن وجود ندارد.</bound-move-exception>
-      <does-not-support-auditing>شما نمی توانید در این گره ممیزی را فعال کنید.</does-not-support-auditing>
-      <can-not-rename-node>شما مجوز لازم برای تغییر نام این گره را ندارید. لطفا برای گرفتن مجوز درست با مدیر سیستم تماس بگیرید.</can-not-rename-node>
-      <can-not-cut-node>شما دارای مجوز جابجایی این گره نیستید. لطفا با سرپرست تماس بگیرید.</can-not-cut-node>
-      <can-not-remove-node>شما دارای مجوز حذف این گره نیستید. لطفا با سرپرست تماس بگیرید.</can-not-remove-node>
-      <can-not-lock-node>شما مجوز لازم برای قفل کردن گره {0} را ندارید. لطفا با سرپرست تماس بگیرید.</can-not-lock-node>
-      <can-not-unlock-node>شما دارای مجوز باز کردن این گره نیستید. لطفا با سرپرست تماس بگیرید.</can-not-unlock-node>
-      <no-node>لطفا یک گره را قبل از اتمام عمل انتقال انتخاب نمایید.</no-node>
-      <can-not-paste-node>شما دارای مجوز جابجایی این گره نیستید. لطفا با سرپرست تماس بگیرید.</can-not-paste-node>
-      <can-not-move-node>شما دارای مجوز جابجایی این گره نیستید. لطفا با سرپرست تماس بگیرید.</can-not-move-node>
-      <does-not-support-versioning>شما دارای مجوز انتقال به این گره نیستید. لطفا با سرپرست تماس بگیرید.</does-not-support-versioning>
+      <has-not-permission>Access denied. You don't have permissions to add in this item.</has-not-permission>
+      <has-not-edit-permission>Access denied. You don't have edit permission here. Please contact the administrator.</has-not-edit-permission>
+      <cannot-login-node>You can't access and paste an item here.</cannot-login-node>
+      <cannot-paste-nodetype>You can't paste this type of item here.</cannot-paste-nodetype>
+      <has-not-permission-unlok>You don't have permission to unlock this document.</has-not-permission-unlok>
+      <bound-exception>You don't have the permission to rename this item. Please contact the administrator.</bound-exception>
+      <bound-move-exception>You can't move an item to itself or in a subfolder.</bound-move-exception>
+      <does-not-support-auditing>You can't activate auditing here.</does-not-support-auditing>
+      <can-not-rename-node>You don't have permission to rename this item. Please contact the administrator to get the necessary rights.</can-not-rename-node>
+      <can-not-cut-node>You don't have permission to cut this item. Please contact the administrator.</can-not-cut-node>
+      <can-not-remove-node>You don't have permission to remove this item. Please contact the administrator.</can-not-remove-node>
+      <can-not-lock-node>You don't have permission to lock {0}. Please contact the administrator.</can-not-lock-node>
+      <can-not-unlock-node>You don't have permission to unlock this item. Please contact the administrator.</can-not-unlock-node>
+      <no-node>Please select at least one item before pasting.</no-node>
+      <can-not-paste-node>You don't have permission to move to this item. Please contact the administrator.</can-not-paste-node>
+      <can-not-move-node>You don't have permission to move this item. Please contact the administrator.</can-not-move-node>
+      <does-not-support-versioning>You don't have permission to move. Please contact the administrator.</does-not-support-versioning>
       <path-not-found>این اِلمان حذف و یا تغییر کرده است. لطفاً روی دکمه تازه سازی کلیک کنید.</path-not-found>
-      <paste-lock-exception>نمی توان '{0}' را در این گره قرار داد، زیرا گره منبع یا مقصد قفل شده و یا با یک گره قفل شده ازتباط دارد.</paste-lock-exception>
-      <can-not-checkin-node>شما نمی توانید این گره را وارد کنید. لطفا دسترسی های خود را بررسی نمایید.</can-not-checkin-node>
-      <can-not-checkout-node>شما نمی توانید این گره را ترخیص کنید. لطفا دسترسی های خود را بررسی نمایید.</can-not-checkout-node>
-      <move-constraint-exception>در حین جابجایی گره خطایی رخ داده است.</move-constraint-exception>
-      <not-lock-owner>شما نمی توانید این گره را باز کنید زیرا مالک قفل آن نیستید.</not-lock-owner>
-      <is-checked-in>لطفا قبل از تغییر نام گره را ترخیص کنید.</is-checked-in>
-      <is-checked-in-lock>لطفا قبل از قفل کردن گره، آن را ترخیص کنید.</is-checked-in-lock>
-      <cant-lock>شما نمی توانید این گره را قفل کنید.</cant-lock>
+      <paste-lock-exception>'{0}' can't be pasted here. Make sure it is not locked nor this folder. Also check that no related document is locked.</paste-lock-exception>
+      <can-not-checkin-node>You can't check in this item. Please check that you have the necessary permissions.</can-not-checkin-node>
+      <can-not-checkout-node>You can't check out this itel. Please check that you have the necessary permissions.</can-not-checkout-node>
+      <move-constraint-exception>An error occurred while moving this item.</move-constraint-exception>
+      <not-lock-owner>You can't unlock this item because you are not the lock owner.</not-lock-owner>
+      <is-checked-in>Please check out this item before renaming.</is-checked-in>
+      <is-checked-in-lock>Please check out this item before locking.</is-checked-in-lock>
+      <cant-lock>You can't lock this document.</cant-lock>
       <node-locked>آیتم با مسیر {0} یا آیتمی در سطح بالاتر قفل شده است.</node-locked>
-      <can-not-delete>لطفا این گره را قبل از حذف قفل کنید.</can-not-delete>
-      <can-not-delete-version>نمی توانید این گره را حذف کنید. زیرا در حال نسخه بندی است.</can-not-delete-version>
-      <not-support>گره انتخاب شده حذف نمی شود. لطفا گره دیگری را انتخاب کنید.</not-support>
-      <current-node-not-allow-paste>نوع گره کپی شده را نمی توان به گره جاری منتقل کرد.</current-node-not-allow-paste>
-      <copied-node-in-versioning>گره کپی شده را نمی توان منتقل کرد. زیرا در حال نسخه بندی است.</copied-node-in-versioning>
-      <parent-node-locked>شما مجوز لازم را برای باز کردن گره '{0}' ندارید.</parent-node-locked>
-      <this-node-locked-by-parent>شما نمی توانید این گره را باز کنید. این گره توسط گره والد قفل شده است.</this-node-locked-by-parent>
-      <paste-node-same-name>گره با نام یکسان را نمی توان به عنوان یک گره به پوشه مقصد منتقل کرد.</paste-node-same-name>
-      <has-not-add-permission>شما مجوز لازم برای اضافه کردن یک گره جدید را ندارید.</has-not-add-permission>
-      <node-cutting>گره آماده جابجایی است. ولی نمی توانید آن را به اینجا منتقل کنید.</node-cutting>
-      <access-denied>دسترسی رد شد. شما ممکن است مجوز لازم در این گره را نداشته باشید.</access-denied>
-      <remove-verion-exception>گره حذف نمی شود، زیرا خود آن (و یا گره والد آن) رزرو شده است.</remove-verion-exception>
-      <remove-referentialIntegrityException>این گره حذف نمی شود، زیرا در حال حاضر مقصد یک ارجاع می باشد.</remove-referentialIntegrityException>
-      <constraintviolation-exception>آیتم اجباری Jcr:uuid پیدا شد. گره تغییر داده یا حذف شده است. لطفاً روی دکمه تازه سازی کلیک کنید.</constraintviolation-exception>
-      <path-not-found-exception>این اِلمان حذف و یا تغییر کرده است. لطفاً روی دکمه تازه سازی کلیک کنید.</path-not-found-exception>
+      <can-not-delete>Please close this item before deleting.</can-not-delete>
+      <can-not-delete-version>You can't delete this document. It's versioned.</can-not-delete-version>
+      <not-support>You can't delete the selected item. Please select another one.</not-support>
+      <current-node-not-allow-paste>You can't paste the copied item there.</current-node-not-allow-paste>
+      <copied-node-in-versioning>You can't paste the copied item here because it's versioned.</copied-node-in-versioning>
+      <parent-node-locked>You don't have permission to unlock '{0}'.</parent-node-locked>
+      <this-node-locked-by-parent>You can't unlock this item. Parent folder is locked.</this-node-locked-by-parent>
+      <paste-node-same-name>Can't paste this item here. An item with the same name already exists in the destination folder.</paste-node-same-name>
+      <has-not-add-permission>You don't have the permission to add here.</has-not-add-permission>
+      <node-cutting>Item is being cut. You can't paste it here.</node-cutting>
+      <access-denied>Access denied. You may not have the permission.</access-denied>
+      <remove-verion-exception>You can't remove this document because it is checked in.</remove-verion-exception>
+      <remove-referentialIntegrityException>You can't delete this item because it is currently referenced by another one.</remove-referentialIntegrityException>
+      <constraintviolation-exception>The mandatory property jcr:uuid was not found. The document may have been deleted or changed. Please click the Refresh button.</constraintviolation-exception>
+      <path-not-found-exception>This document was deleted or changed. Please click the Refresh button.</path-not-found-exception>
       <not-exist-categories>دسته وجود ندارد.</not-exist-categories>
       <lock-node-read-only>This file is locked by user {0}. Open read-only ?</lock-node-read-only>
     </msg>
@@ -428,12 +428,12 @@
       <title-invalid>لطفا عنوان پوشه را وارد کنید.</title-invalid>
       <name-not-allowed>این نام مجاز نیست.</name-not-allowed>
       <fileName-error>نام فایل نامعتبر است.</fileName-error>
-      <constraint-violation>گره فعلی به شما اجازه افزودن نوع گره '{0}' را نمی دهد.</constraint-violation>
+      <constraint-violation>You can't add a document of type '{0}' here.</constraint-violation>
       <repository-exception>یک خطای غیر منتظره رخ داده است. لطفا برای کسب اطلاعات بیشتر با سرپرست تماس بگیرید.</repository-exception>
-      <repository-exception-permission>شما دارای مجوز برای افزودن یک پوشه جدید به این گره نیستید.</repository-exception-permission>
+      <repository-exception-permission>You don't have the permission to add a new folder here.</repository-exception-permission>
       <numberformat-exception>پوشه ذخیره نمی شود. نام تعیین شده باید به فرمت عددی باشد.</numberformat-exception>
       <!--DMS 2.4.x; ECM-3553-->
-      <not-allow-sameNameSibling>پوشه ذخیره نمی شود. این گره، دو گره با نام یکسان را قبول نمی کند.</not-allow-sameNameSibling>
+      <not-allow-sameNameSibling>You can't save the folder. An item with the same name already exists.</not-allow-sameNameSibling>
       <ntFolder-not-avaiable>شما باید یک نوع سفارشی از پوشه را انتخاب کنید</ntFolder-not-avaiable>
     </msg>
     <help>
@@ -500,26 +500,26 @@
       <feedback-restore>'{0}' با موفقیت برگردانده شد.</feedback-restore>
       <feedback-restore-multi>آیتم های {0} با موفقیت بازیابی شدند.</feedback-restore-multi>
       
-      <confirm-restore>گره ای با همین نام در محل قبلی گره '{0}' وجود دارد. آیا از بازیابی این گره اطمینان دارید؟</confirm-restore>
+      <confirm-restore>A '{0}' item already exists at the previous location. Are you sure you want to restore it?</confirm-restore>
       <confirm-move>آیا می خواهید منتقل شود؟</confirm-move>
-      <node-cut>گره '{0}' قطع شده است.</node-cut>
+      <node-cut>'{0}' has been cut.</node-cut>
       <execute-successfully>اقدام سفارشی '{0}' اجرا شده است.</execute-successfully>
-      <save-node-success>گره '{0}' ذخیره شده است.</save-node-success>
-      <move-problem>گره '{0}' به '{1}' انتقال نمی یابد، زیرا مشکلی در مورد مجوز  و یا محدودیت ها وجود دارد.</move-problem>
+      <save-node-success>'{0}' has been saved.</save-node-success>
+      <move-problem>You can't move '{0}' to '{1}' because there was a problem with permissions or constraint conditions.</move-problem>
     </msg>
   </UIWorkingArea>
   <UIDocumentWorkspace>
     <label>
-      <no-children>این گره هیچ گره فرزندی ندارد.</no-children>
-      <no-children-but-has-hidden>این گره هیچ گره فرزندی ندارد، اما تعدادی پرونده پنهان در آن وجود دارد.</no-children-but-has-hidden>
+      <no-children>This item doesn't have children.</no-children>
+      <no-children-but-has-hidden>This folder does not have any item, but there are some hidden files.</no-children-but-has-hidden>
     </label>
     <msg>
-      <unable-save-node>گره '{0}' تازه ایجاد شده است. لطفا قبل از انجام این عمل جلسه را ذخیره کنید.</unable-save-node>
-      <save-node-success>گره '{0}' ذخیره شده است.</save-node-success>
-      <node-copied>گره '{0}' کپی شده است.</node-copied>
-      <node-cut>گره '{0}' قطع شده است.</node-cut>
-      <remove-root>قادر به حذف گره ریشه نیستید.</remove-root>
-      <node-remove-success>گره '{0}' حذف شده است.</node-remove-success>
+      <unable-save-node>'{0}' has been created. Please save session to validate this action.</unable-save-node>
+      <save-node-success>'{0}' has been saved.</save-node-success>
+      <node-copied>'{0}' has been copied.</node-copied>
+      <node-cut>'{0}' has been cut.</node-cut>
+      <remove-root>You can't remove the root folder.</remove-root>
+      <node-remove-success>'{0}' has been removed.</node-remove-success>
     </msg>
     <tooltip>
       <Rename>تغییر نام</Rename>
@@ -538,11 +538,11 @@
   </UIDocumentWorkspace>
   <UIDocumentInfo>
     <msg>
-      <access-denied>دسترسی رد شد. به گره '{0}' دسترسی ندارید.</access-denied>
-      <null-exception>موردی یافت نشد. تغییر داده یا حذف شده و یا شما اجازه دسترسی به این گره را ندارید.</null-exception>
+      <access-denied>Access denied. You can't access '{0}'.</access-denied>
+      <null-exception>Item not found. It was either removed or changed, or you don't have the access permission.</null-exception>
       <confirm-deleteattachment>آیا از حذف این فایل پیوست اطمینان دارید؟</confirm-deleteattachment>
       <confirm-deleteattcomment>آیا از حذف این نظر اطمینان دارید؟</confirm-deleteattcomment>
-      <access-denied-exception>دسترسی رد شد. شما ممکن است دارای مجوز خواندن  نبوده و یا گره حذف شده یا تغییر داده شده است.</access-denied-exception>
+      <access-denied-exception>Access denied. You may not have reading privileges, or the documen may have been removed or changed.</access-denied-exception>
       <path-not-found>این اِلمان حذف و یا تغییر کرده است. لطفاً روی دکمه تازه سازی کلیک کنید.</path-not-found>
     </msg>
     <tooltip>
@@ -601,7 +601,7 @@
       <OpenDocument>Remote Edit</OpenDocument>
       <EditProperty>Edit Document Properties</EditProperty>
       <UploadNewVersion>Upload a new version</UploadNewVersion>
-      <CreateNewVersion>Create a new version</CreateNewVersion>
+      <CreateNewVersion>Save as new version</CreateNewVersion>
     </event>
   </ECMContextMenu>
  
@@ -733,8 +733,8 @@
       <name-invalid>Please enter the property name.</name-invalid>
       <unable-create>Cannot add properties.</unable-create>
       <value-invalid>Please enter the value.</value-invalid>
-      <node-checkedin>You must check out this node before adding a property.</node-checkedin>
-      <can-not-add>You cannot add properties to this node. This is only allowed for the node type nt:unstructured.</can-not-add>
+      <node-checkedin>You must check out this item before adding a property.</node-checkedin>
+      <can-not-add>You can't add properties to this item. This is only allowed for the type nt:unstructured.</can-not-add>
       <propertyName-invalid>The property name must include namespace (e.g. namespace:name).</propertyName-invalid>
       <propertyName-exist>The property '{0}' already exists.</propertyName-exist>
       <propertyValu-null>Some values may be null.</propertyValu-null>
@@ -795,7 +795,7 @@
       <selectUser>انتخاب کاربر</selectUser>
     </label>
     <msg>
-      <not-change-owner>'{0}' is the owner of this node and has full control permission.</not-change-owner>
+      <not-change-owner>'{0}' is the owner of this item and has full control permission.</not-change-owner>
     </msg>
   </UIGroupSelector>
   <UIPermissionForm>
@@ -807,7 +807,7 @@
       <add_node>Modify Right</add_node>
       <remove>Remove Right</remove>
     </label>
-    <title>Add a permission to that node</title>
+    <title>Add a permission</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>#{word.save}</Save>
@@ -914,7 +914,7 @@
   </ViewSearch>
   <UISearchResult>
     <msg>
-      <not-support>There is no View template for this node.</not-support>
+      <not-support>There is no View template for this document.</not-support>
       <empty>هیچ نتیجه ای در بر نداشت.</empty>
       <access-denied>You cannot open this folder, either because it no longer exists or because you do not have the right to access it.</access-denied>
       <query-invalid>The query is invalid.</query-invalid>
@@ -939,15 +939,15 @@
       <datecreatedDESC>Sort by created date in descending order</datecreatedDESC>
     </title>
     <tooltip>
-      <View>View this node</View>
+      <View>View this item</View>
       <OpenFolder>Go to folder</OpenFolder>
     </tooltip>
   </UISearchResult>
   <UIShowAllOwnedByUserResult>
     <msg>
-      <not-support>There is no View template for this node</not-support>
+      <not-support>There is no View template for this document</not-support>
       <empty>هیچ نتیجه ای در بر نداشت.</empty>
-      <access-denied>You cannot view this node, either because this template is not supported or because access is denied.</access-denied>
+      <access-denied>You can't view this document, either because this template is not supported or because access is denied.</access-denied>
       <query-invalid>The query is invalid</query-invalid>
     </msg>
     <header>
@@ -970,15 +970,15 @@
       <datecreatedDESC>Sort by Created date in descending order</datecreatedDESC>
     </title>
     <tooltip>
-      <View>مشاهده این گره</View>
+      <View>View this item</View>
       <OpenFolder>Go to Folder</OpenFolder>
     </tooltip>
   </UIShowAllOwnedByUserResult>
   <UIShowAllFavouriteResult>
     <msg>
-      <not-support>هیچ قالب نمایی برای این گره وجود ندارد</not-support>
+      <not-support>There is no View template for this item</not-support>
       <empty>No results found</empty>
-      <access-denied>شما قادر به مشاهده این گره نیستید، زیرا این قالب پشتیبانی نمی شود یا اینکه دسترسی رد شده است.</access-denied>
+      <access-denied>You can't view this item, either because this template is not supported or because access is denied.</access-denied>
       <query-invalid>جستار غیرمعتبر می باشد</query-invalid>
     </msg>
     <header>
@@ -1001,15 +1001,15 @@
       <datecreatedDESC>مرتب سازی بر اساس تاریخ ایجاد به ترتیب نزولی</datecreatedDESC>
     </title>
     <tooltip>
-      <View>View this Node</View>
+      <View>View this item</View>
       <OpenFolder>برو به پوشه</OpenFolder>
     </tooltip>
   </UIShowAllFavouriteResult>
   <UIShowAllHiddenResult>
     <msg>
-      <not-support>هیچ قالب نمایی برای این گره وجود ندارد.</not-support>
+      <not-support>There is no View template for this item.</not-support>
       <empty>هیچ نتیجه ای در بر نداشت.</empty>
-      <access-denied>شما قادر به مشاهده این گره نیستید، زیرا این قالب پشتیبانی نمی شود یا اینکه دسترسی رد شده است.</access-denied>
+      <access-denied>You can't view this item, either because it has no View template or because you don't have access to it.</access-denied>
       <query-invalid>جستار غیرمعتبر می باشد.</query-invalid>
     </msg>
     <header>
@@ -1033,16 +1033,16 @@
       <datecreatedDESC>مرتب سازی بر اساس تاریخ ایجاد به ترتیب نزولی</datecreatedDESC>
     </title>
     <tooltip>
-      <View>مشاهده این گره</View>
+      <View>View this Item</View>
       <OpenFolder>برو به پوشه</OpenFolder>
       <RemoveHiddenAttribute>Remove Hidden Attribute</RemoveHiddenAttribute>
     </tooltip>
   </UIShowAllHiddenResult>
   <UIShowAllTrashResult>
     <msg>
-      <not-support>هیچ قالب نمایی برای این گره وجود ندارد.</not-support>
+      <not-support>There is no View template for this item.</not-support>
       <empty>هیچ نتیجه ای در بر نداشت</empty>
-      <access-denied>شما قادر به مشاهده این گره نیستید، زیرا این قالب پشتیبانی نمی شود یا اینکه دسترسی رد شده است.</access-denied>
+      <access-denied>You can't view this item, either because it has no View template or because you don't have access to it.</access-denied>
       <query-invalid>جستار غیرمعتبر می باشد.</query-invalid>
     </msg>
     <header>
@@ -1065,7 +1065,7 @@
       <datecreatedDESC>مرتب سازی بر اساس تاریخ ایجاد به ترتیب نزولی</datecreatedDESC>
     </title>
     <tooltip>
-      <View>مشاهده این گره</View>
+      <View>View this Item</View>
       <OpenFolder>برو به پوشه</OpenFolder>
       <DeletePermanently>Delete permanently</DeletePermanently>
       <RestoreFromTrash>بازیابی از سطل زباله</RestoreFromTrash>
@@ -1321,7 +1321,7 @@
       <Cancel>#{word.cancel}</Cancel>
       <Export>استخراج</Export>
     </action>
-    <title>استخراج گره</title>
+    <title>Export</title>
   </UIExportNode>
   <!--
   ###############################################################################
@@ -1366,8 +1366,8 @@
       <error-removing-referenced-version>This version is referenced and can't be removed.</error-removing-referenced-version>
       <confirm-restore>Are you sure you want to restore this version?</confirm-restore>
       <confirm-delete>آیا از حذف این نسخه اطمینان دارید؟</confirm-delete>
-      <not-checked-out>لطفا قبل از بازیابی گره، آن را ترخیص کنید.</not-checked-out>
-      <invalid-item-state>شما نمی توانید این نسخه را بازیابی نمایید، چون یک یا چند آیتم آن حذف شده و یا به جلسه دیگری منتقل شده اند.</invalid-item-state>
+      <not-checked-out>You have to check out this document before restoring.</not-checked-out>
+      <invalid-item-state>You can't restore this version, either because one or more items were deleted or moved by another session.</invalid-item-state>
     </msg>
     <action>
       <close>#{word.close}</close>
@@ -1392,8 +1392,8 @@
       <noVersion>بدون نسخه</noVersion>
     </msg>
     <eventName>
-      <e_1>گره اضافه شده</e_1>
-      <e_2>حذف گره</e_2>
+      <e_1>Added</e_1>
+      <e_2>Document Removed</e_2>
       <e_4>ویژگی اضافه شده</e_4>
       <e_16>تغییر ويژگي</e_16>
       <e_8>حذف ویژگی</e_8>
@@ -1433,13 +1433,13 @@
   -->
   <UIActivateVersion>
     <label>
-      <note>نسخه بندی برای این گره فعال شده است.</note>
+      <note>Versioning has not been activated for this document.</note>
       <question>آیا مطمئنید که می خواهید آن را فعال کنید؟</question>
       <button-active>فعال کردن</button-active>
       <button-cancel>#{word.cancel}</button-cancel>
     </label>
     <msg>
-      <access-denied>شما مچوز لازم برای فعال کردن نسخه بندی در این گره را ندارید</access-denied>
+      <access-denied>You don't have permission to activate versioning on this document</access-denied>
     </msg>
   </UIActivateVersion>
   <!--
@@ -1462,7 +1462,7 @@
       </msg>
     </grid>
     <msg>
-      <node-type-invalid>تنها نوع گره سند را می توان ثبت نمود.</node-type-invalid>
+      <node-type-invalid>Only documents can be enrolled.</node-type-invalid>
       <already-enroled>این سند در حال حاضر ثبت شده است.</already-enroled>
     </msg>
   </UIActivePublication>
@@ -1473,7 +1473,7 @@
   -->
   <UIActivateAuditing>
     <label>
-      <note>ممیزی برای این گره فعال نشده است.</note>
+      <note>Auditing has not been activated for this document.</note>
       <question>آیا مطمئنید که می خواهید آن را فعال کنید؟</question>
     </label>
     <action>
@@ -1516,7 +1516,7 @@
       <Cancel>#{word.cancel}</Cancel>
       <Import>وارد کردن</Import>
     </action>
-    <title>وارد کردن گره</title>
+    <title>Import</title>
     <msg>
       <import-successful>با موفقیت وارد شده.</import-successful>
       <filename-invalid>برای وارد کردن، یک فایل .xml را در فیلد 'آپلود فایل' جایگذاری نمایید.</filename-invalid>
@@ -1524,8 +1524,8 @@
       <xml-invalid>There is an invalid character at position [row, column]:{0} in {1} file</xml-invalid>
       <mimetype-invalid>فقط فایل های .xml یا فایل های فشرده را می توان وارد کرد.</mimetype-invalid>
       <access-denied>دسترسی رد شد. مجوز وارد کردن وجود ندارد.</access-denied>
-      <constraint-violation-exception>وارد کردن داده ممکن نیست. نوع '{0}' در این محل مجاز نیست.</constraint-violation-exception>
-      <item-exists-exception>یک گره قابل ارجاع ورودی، UUID یکسان با گره موجود در فضای کار را دارد.</item-exists-exception>
+      <constraint-violation-exception>Impossible to import data. The type '{0}' is not allowed at this location.</constraint-violation-exception>
+      <item-exists-exception>An incoming item has the same UUID as an existing item in the workspace.</item-exists-exception>
     </msg>
   </UIImportNode>
   <!--
@@ -1573,7 +1573,7 @@
   <UIViewVersion>
     <label>
       <nodeType>نوع گره</nodeType>
-      <nodeName>نام گره</nodeName>
+      <nodeName>Name</nodeName>
       <VersionNumber>شماره نسخه</VersionNumber>
       <VersionLabels>برچسب های نسخه</VersionLabels>
       <VersionDate>تاریخ نسخه</VersionDate>
@@ -1609,7 +1609,7 @@
       <action>اقدامات</action>
     </header>
     <msg>
-      <access-denied>دسترسی رد شد. شما مجوز دسترسی به این گره را ندارید.</access-denied>
+      <access-denied>Access denied. You don't have access permission.</access-denied>
       <confirm-delete>آیا از حذف این ارجاع اطمینان دارید؟</confirm-delete>
     </msg>
     <action>
@@ -1629,7 +1629,7 @@
       <action>اقدام</action>
     </header>
     <info>
-      <child-not-found>این گره هیچ گره فرزندی ندارد.</child-not-found>
+      <child-not-found>This item doesn't have any child.</child-not-found>
     </info>
   </UITreeList>
   <!--
@@ -1685,8 +1685,8 @@
       <clearall>پاک کردن همه</clearall>
     </action>
     <msg>
-      <unable-pasted>این گره قابل انتقال نیست.</unable-pasted>
-      <node-pasted>گره '{0}' به محل "{1}" جابجا شده است. این عملیات ذخیره شده است.</node-pasted>
+      <unable-pasted>Can't paste this item.</unable-pasted>
+      <node-pasted>{0} has been pasted at location {1}. This operation has already been saved.</node-pasted>
     </msg>
   </UIClipboard>
   <!--
@@ -1727,15 +1727,15 @@
 </tooltip>
     <msg>
       <cannot-save>خطایی هنگام ذخیره سند رخ داده است.</cannot-save>
-      <in-versioning>لطفاً گره حاضر را قبل از افزودن گره جدید ترخیص نمایید.</in-versioning>
+      <in-versioning>Please check out the current folder before adding a new item.</in-versioning>
       <not-support>قالب '{0}' را نمی توان بارگذاری کرد.</not-support>
       <value-invalid>'{0}' باید مقدار داشته باشد.</value-invalid>
       <repository-exception>خطایی هنگام ذخیره سند رخ داده است.</repository-exception>
       <!--DMS 2.4.x; ECM-3543-->
-      <repository-exception-permission>شما مجوز افزودن یک سند جدید به این گره را ندارید.</repository-exception-permission>
+      <repository-exception-permission>You don't have permission to add a new document to this folder.</repository-exception-permission>
       <not-allowed-same-name-sibling>قادر به ذخیره این نوشتار نمی باشید. نمی توان از یک نام یکسان در گره های هم رده استفاده نمود.</not-allowed-same-name-sibling>
       <numberformat-exception>سند ذخیره نمی شود. نام تعیین شده باید به فرمت عددی باشد.</numberformat-exception>
-      <item-not-found>آیتم یافت نشد. این گره (یا گره والد آن) حذف شده است. لطفاً روی دکمه تازه سازی کلیک کنید.</item-not-found>
+      <item-not-found>Document not found. This document (or its ancestor) may have been deleted. Please click the Refresh button.</item-not-found>
     </msg>
   </UIDocumentForm>
   <!--
@@ -1800,7 +1800,7 @@
       <action>اقدام</action>
     </header>
     <msg>
-      <remove-popup-first>قبل از حذف نود باید پنجره pop-up ویرایش را ببندید.</remove-popup-first>
+      <remove-popup-first>You must close the edit pop-up before deleting this item.</remove-popup-first>
       <confirm-delete-action>آیا مطمئنید که می خواهید این اقدام را حذف کنید؟</confirm-delete-action>
       <template-empty>قالب '{0}' خالی است.</template-empty>
       <template-null>قالب خالی است و یا شما به آن دسترسی ندارید.</template-null>
@@ -1826,7 +1826,7 @@
       <numberformat-exception>اقدام ذخیره نمی شود. نام تعیین شده باید به فرمت عددی باشد.</numberformat-exception>
       <existed-action>نام اقدام '{0}' در حال حاضر وجود دارد. لطفاً یکی دیگر را انتخاب کنید.</existed-action>
       <unable-add-action>این اقدام را نمی توان اضافه کرد.</unable-add-action>
-      <unable-add>این اقدام را نمی توان اضافه کرد. این گره ریشه یا است یا شما به آن دسترسی ندارید.</unable-add>
+      <unable-add>Can't add this action. This item is either the root folder or you don't have the permission to edit.</unable-add>
       <not-support>گفتگوی '{0}' پشتیبانی نمی شود.</not-support>
       <no-permission-add>دسترسی رد شد. شما مجوز افزودن اقدام در اینجا را ندارید.</no-permission-add>
       <access-denied>دسترسی رد شد. شما مجوز لازم برای دسترسی به این قالب را ندارید.</access-denied>
@@ -1865,7 +1865,7 @@
   <UIAddressBar>
     <msg>
       <path-not-found>مسیر یافت نشد.</path-not-found>
-      <access-denied>دسترسی رد شد. شما حق خواندن این گره را ندارید.</access-denied>
+      <access-denied>Access denied. You don't have the permission to read.</access-denied>
       <keyword-not-support>کلمه کلیدی نامعتبر است. برخی از کاراکترها معتبر نیستند.</keyword-not-support>
     </msg>
     <label>
@@ -1874,8 +1874,8 @@
     </label>
     <title>
       <exeButton>برو</exeButton>
-      <backButton>به گره قبلی</backButton>
-      <showHistory>نمایش آدرس تاریخچه</showHistory>
+      <backButton>Back</backButton>
+      <showHistory>Show History</showHistory>
       <changeNode>تغییر گره</changeNode>
     </title>
   </UIAddressBar>
@@ -1937,7 +1937,7 @@
   -->
   <UIViewMetadataContainer>
     <msg>
-      <path-not-found>گره این نما را پشتیبانی نمی کند.</path-not-found>
+      <path-not-found>The document does not support this view.</path-not-found>
     </msg>
   </UIViewMetadataContainer>
   <!--
@@ -1958,7 +1958,7 @@
   </metadataForm>
   <UIViewMetadataTemplate>
     <msg>
-      <access-denied>دسترسی رد شد. شما یا مالک این گره نیستید و یا مجوز ویرایش آن را ندارید.</access-denied>
+      <access-denied>Access denied. Either you are not the owner or don't have edit permission.</access-denied>
     </msg>
   </UIViewMetadataTemplate>
   <!--
@@ -2034,7 +2034,7 @@
       <private>خصوصی</private>
       <state>حالت</state>
       <visibility>وضعیت نمایش</visibility>
-      <nodeName>نام گره:</nodeName>
+      <nodeName>Name:</nodeName>
       <lifecycleName>نام چرخه</lifecycleName>
       <stateName>نام وضعیت</stateName>
     </label>
@@ -2058,7 +2058,7 @@
   </UIWorkspaceList>
   <pathSelector>
     <title>
-      <UIOneNodePathSelector>انتخاب گر گره</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Selector</UIOneNodePathSelector>
     </title>
   </pathSelector>
   <!--
@@ -2166,9 +2166,9 @@
     </label>
     <msg>
       <mimetype-incorrect>نوع فایل نادرست. تصاویر بندانگشتی تنها می توانند از فایل های .JPG، .PNG و یا .GIF درست شوند.</mimetype-incorrect>
-      <access-denied>دسترسی رد شد. شما مجوز برای افزودن تصویر بند انگشتی به این گره را ندارید.</access-denied>
+      <access-denied>Access denied. You don't have permission to add a thumbnail.</access-denied>
       <confirm-delete>آیا مایل به حذف این تصویر بند انگشتی هستید؟</confirm-delete>
-      <is-checked-in>این گره رزرو شده است. لطفا قبل از انجام هر گونه اقدام آن را ترخیص کنید.</is-checked-in>
+      <is-checked-in>This item is checked in. Please check out before performing any action.</is-checked-in>
       <fileName-error>لطفاً فایلی برای آپلود انتخاب کنید.</fileName-error>
     </msg>
     <title>
@@ -2272,7 +2272,7 @@
 
   <PopupSelectPath>
     <title>
-      <UIOneNodePathSelector>انتخاب گره</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Select Path</UIOneNodePathSelector>
     </title>
   </PopupSelectPath>
 
@@ -2302,7 +2302,7 @@
   <UISymLinkForm>
     <label>
       <symLinkName>نام Symlink</symLinkName>
-      <pathNode>مسیر گره</pathNode>
+      <pathNode>Path</pathNode>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -2313,16 +2313,16 @@
       <name-invalid>لطفا نام symlink را وارد کنید.</name-invalid>
       <name-not-allowed>این نام مجاز نیست.</name-not-allowed>
       <fileName-error>نام فایل نامعتبر است.</fileName-error>
-      <constraint-violation>قادر به افزودن نوع گره '{0}' به گره فعلی نیستید.</constraint-violation>
-      <repository-exception>دسترسی رد شد. شما مجوز برای اضافه کردن symlink به این گره را ندارید.</repository-exception>
+      <constraint-violation>You can't add an item of type '{0}' here.</constraint-violation>
+      <repository-exception>Access denied. You don't have permission to add a symlink here.</repository-exception>
       <numberformat-exception>پوشه ذخیره نمی شود. نام تعیین شده باید به فرمت عددی باشد.</numberformat-exception>
-      <path-node-invalid>لطفا گره مسیر را وارد کنید.</path-node-invalid>
+      <path-node-invalid>Please enter the path.</path-node-invalid>
       <path-node-not-allowed>این نام مجاز نیست.</path-node-not-allowed>
-      <non-node>لطفا گره مقصد مناسب را انتخاب نمایید، شما مجوز خواندن این گره را ندارید.</non-node>
-      <cannot-save>شما نمی توانید یک symlink به این نوع گره اضافه کنید.</cannot-save>
-      <item-exists-exception>نام گره در حال حاضر وجود دارد.</item-exists-exception>
-      <translation-node-same-language-default>گره ترجمه دارای زبان یکسان با زبان پیش فرض گره جاری است.</translation-node-same-language-default>
-      <UnsupportedRepositoryOperationException>به این گره هدف هیچ ارجاعی وجود ندارد.</UnsupportedRepositoryOperationException>
+      <non-node>Please select the trust target; you may not have the rights to read this item.</non-node>
+      <cannot-save>You can't add a symlink for this type of document.</cannot-save>
+      <item-exists-exception>An item with this name already exists.</item-exists-exception>
+      <translation-node-same-language-default>The translated document has the same language as the default language of current document.</translation-node-same-language-default>
+      <UnsupportedRepositoryOperationException>This target item is not referred.</UnsupportedRepositoryOperationException>
     </msg>
   </UISymLinkForm>
   
@@ -2342,22 +2342,22 @@
       <name-invalid>لطفا نام symlink را وارد کنید.</name-invalid>
       <name-not-allowed>این نام مجاز نیست.</name-not-allowed>
       <fileName-error>نام فایل نامعتبر است.</fileName-error>
-      <constraint-violation>قادر به افزودن نوع گره '{0}' به گره فعلی نیستید.</constraint-violation>
-      <repository-exception>دسترسی رد شد. شما مجوز برای اضافه کردن symlink به این گره را ندارید.</repository-exception>
+      <constraint-violation>You can't add the '{0}' type to the current item.</constraint-violation>
+      <repository-exception>Access denied. You don't have permission to add a symlink to this item.</repository-exception>
       <numberformat-exception>پوشه ذخیره نمی شود. نام تعیین شده باید به فرمت عددی باشد.</numberformat-exception>
-      <path-node-invalid>لطفا گره مسیر را وارد کنید.</path-node-invalid>
+      <path-node-invalid>Please enter the path.</path-node-invalid>
       <path-node-not-allowed>این نام مجاز نیست.</path-node-not-allowed>
-      <non-node>لطفا گره مقصد مناسب را انتخاب نمایید، شما مجوز خواندن این گره را ندارید.</non-node>
+      <non-node>Please select the trust target; you may not have the right to read this node.</non-node>
       <cannot-save>در هنگام ایجاد symlink خطایی رخ داده است.</cannot-save>
-      <item-exists-exception>نام گره در حال حاضر وجود دارد.</item-exists-exception>
-      <translation-node-same-language-default>گره ترجمه دارای زبان یکسان با زبان پیش فرض گره جاری است.</translation-node-same-language-default>
-      <UnsupportedRepositoryOperationException>به این گره هدف هیچ ارجاعی وجود ندارد.</UnsupportedRepositoryOperationException>
+      <item-exists-exception>An item with this name already exists.</item-exists-exception>
+      <translation-node-same-language-default>The translated document has the same language as the default language of current document.</translation-node-same-language-default>
+      <UnsupportedRepositoryOperationException>This target item is not referred.</UnsupportedRepositoryOperationException>
     </msg>
   </UIAddTranslationForm>
 
   <UIPopupSymLink>
     <title>
-      <UIOneNodePathSelector>انتخاب گره هدف</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Select Target Item</UIOneNodePathSelector>
     </title>
   </UIPopupSymLink>
   <UIPopupSymLink>
@@ -2375,9 +2375,9 @@
 
   <UIWorkingArea>
     <msg>
-      <create-link-problem>قادر به ایجاد لینک برای گره '{0}' در '{1}' نمی باشید.</create-link-problem>
-      <dest-node-is-link>گره مقصد '{0}' در حال حاضر symlink است، بنابراین شما قادر به ایجاد symlink داخل آن نیستید.</dest-node-is-link>
-      <selected-is-link>The selected node '{0}' is already a link. You cannot create a link that points to another link.</selected-is-link>
+      <create-link-problem>You can't create a link for '{0}' at '{1}'.</create-link-problem>
+      <dest-node-is-link>The destination '{0}' is already a symlink, so you cannot create a symlink inside it.</dest-node-is-link>
+      <selected-is-link>The selected item '{0}' is already a link. You can't create a link to another link.</selected-is-link>
       <confirm-create-link>آیا می خواهید یک لینک به این مکان ایجاد کنید؟</confirm-create-link>
     </msg>
   </UIWorkingArea>
@@ -2460,7 +2460,7 @@
 <ReadOnly>Open Read-only</ReadOnly>
 <Cancel>Cancel</Cancel>
       <KeepBoth>Keep Both</KeepBoth>
-      <CreateNewVersion>Create a new version</CreateNewVersion>
+      <CreateNewVersion>Save as new version</CreateNewVersion>
     </label>
   </UIConfirmMessage>
 
@@ -2516,7 +2516,7 @@
 
   <UIPopupMenu>
     <msg>
-      <node-locked-other-person>این گره و یا گره والد آن توسط کاربر دیگری قفل شده است، شما نمی توانید آن راحذف نمایید.</node-locked-other-person>
+      <node-locked-other-person>This item or its parent folder is locked by another user, so you can't delete it.</node-locked-other-person>
     </msg>
   </UIPopupMenu>
 
@@ -2551,7 +2551,7 @@
 
   <UIPopupMenu>
     <msg>
-      <can-not-unlock-node-is-checked-in>شما نمی توانید گره '{0}' (و یا گره والد آن) را باز کنید، زیرا رزرو شده است.</can-not-unlock-node-is-checked-in>
+      <can-not-unlock-node-is-checked-in>You can't unlock because the '{0}' (or its parent folder) is checked in.</can-not-unlock-node-is-checked-in>
     </msg>
   </UIPopupMenu>
 
@@ -2560,12 +2560,12 @@
   -->
   <UIActionBar>
     <msg>
-      <cannot-enable-version>گره نسخه بندی را نمی توان فعال کرد.</cannot-enable-version>
+      <cannot-enable-version>Can't activate versioning on this document.</cannot-enable-version>
     </msg>
   </UIActionBar>
   <UIPopupMenu>
     <msg>
-        <cannot-readsource>قادر به خواندن داده ها از گره منبع نیستید.</cannot-readsource>
+        <cannot-readsource>You can't read data from the source.</cannot-readsource>
     </msg>
   </UIPopupMenu>
   <UIUploadForm>
@@ -2845,7 +2845,7 @@
 
     <UIPopupMenu>
     <msg>
-      <node-locked-editing>قادر به ویرایش این گره با مسیر {0} نمی باشید. این گره توسط کاربر دیگری قفل شده است.</node-locked-editing>
+      <node-locked-editing>You can't edit  {0}. It's locked by another user.</node-locked-editing>
     </msg>
   </UIPopupMenu>
   <UITagStyleForm>
@@ -2939,12 +2939,12 @@
   </PathNode>
   <UIPopupPathFoRestore>
     <title>
-      <UIOneNodePathSelector>گره والد را انتخاب کنید</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Select Parent</UIOneNodePathSelector>
     </title>
   </UIPopupPathFoRestore>
   <rootNodeInfo>
     <title>
-      <AddRootNode>افزودن گره ریشه</AddRootNode>
+      <AddRootNode>Add Root</AddRootNode>
     </title>
   </rootNodeInfo>
 
@@ -3156,9 +3156,9 @@
   </lifecyclePhase>
   <UIPopupMenu>
   <msg>
-<can-not-remove-locked-node>گره {0} قفل شده است. نمی توانید آن را به سطل زباله انتقال دهید.</can-not-remove-locked-node>
-<can-not-remove-checked-in-node>گره {0} یا گره والد آن رزرو شده است. شما نمی توانید آن را به سطل زباله انتقال دهید.</can-not-remove-checked-in-node>
-<access-denied-to-delete>دسترسی رد شد. نمی توانیدگره  {0} را به سطل زباله انتقال دهید.</access-denied-to-delete>
+<can-not-remove-locked-node>{0} is locked. You can't move it to the Trash.</can-not-remove-locked-node>
+<can-not-remove-checked-in-node>{0} or its parent folder is checked in. You can't move it to the Trash.</can-not-remove-checked-in-node>
+<access-denied-to-delete>Access denied. You can't move {0} to the Trash.</access-denied-to-delete>
   </msg>
   </UIPopupMenu>
   <UIPropertyForm>
@@ -3168,8 +3168,8 @@
   </UIPropertyForm>
   <UIWatchDocumentForm>
     <msg>
-      <node-is-locked>این گره قفل شده است. شما نمی توانید آن را بپایید.</node-is-locked>
-      <unknown-error>خطایی رخ داده است. شما نمی توانید این گره را بپایید.</unknown-error>
+      <node-is-locked>This item is locked. You cannot watch it.</node-is-locked>
+      <unknown-error>Some errors have occurred. You can't watch this document.</unknown-error>
     </msg>
   </UIWatchDocumentForm>   
   <UIActionForm>
@@ -3194,7 +3194,7 @@
     <Keep>نگه داشتن هر دو</Keep>
     <Replace>جایگزین</Replace>
     <Canceled>لغو شد</Canceled>
-      <UploadNewVersion>Upload new version</UploadNewVersion>
+      <UploadNewVersion>Upload a new version</UploadNewVersion>
     <Cancel>#{word.cancel}</Cancel>
     <AbortAllConfirmation>آیا مایلید که تمام فایل های در حال انجام لغو شوند؟</AbortAllConfirmation>
   </label>

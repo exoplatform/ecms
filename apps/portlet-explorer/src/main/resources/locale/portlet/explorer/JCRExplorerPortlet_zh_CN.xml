@@ -18,7 +18,7 @@
     </action>
     <msg>
       <not-support>You can't comment on this type of document.</not-support>
-      <not-checkedout>您必须签出该节点之前对其进行评论。</not-checkedout>
+      <not-checkedout>You must check out the document before commenting on it.</not-checkedout>
       <content-null>你不能发布一个空的评论。</content-null>
     </msg>
   </UICommentForm>
@@ -46,8 +46,8 @@
     </button>
     <msg>
       <not-support>您不能为此文档类型投票。</not-support>
-      <not-checkedout>在表决前，您必须签出该节点。</not-checkedout>
-      <vote-restriction>您不能投票超过一次。</vote-restriction>
+      <not-checkedout>You must check out the document to vote.</not-checkedout>
+      <vote-restriction>You cannot vote more than one time.</vote-restriction>
     </msg>
   </UIVoteForm>
  
@@ -59,9 +59,9 @@
   <UIJCRExplorer>
     <msg>
       <refresh-session-success>会话已成功刷新。</refresh-session-success>
-      <no-node-history>你是根节点中。</no-node-history>
+      <no-node-history>You are at the root.</no-node-history>
       <save-session-success>已保存的所有更改。</save-session-success>
-      <target-path-not-found>您不能访问此节点，因为它已经不存在了，或者因为您没有访问它的权利。</target-path-not-found>
+      <target-path-not-found>You can't access this path, either because it doesn't exist anymore or because you don't have access permissions.</target-path-not-found>
     </msg>
   </UIJCRExplorer>
   <!--
@@ -159,8 +159,8 @@
     <label>
       <enableStructure>启用 DMS 结构：</enableStructure>
       <showSideBar>显示侧栏：</showSideBar>
-      <showHiddenNode>显示隐藏的节点：</showHiddenNode>
-      <showNonDocument>显示非文档节点：</showNonDocument>
+      <showHiddenNode>Show Hidden Items:</showHiddenNode>
+      <showNonDocument>Show Non-document Items:</showNonDocument>
       <showRefDocuments>显示引用的文档：</showRefDocuments>
       <enableDragAndDrop>启用拖 &amp; 拖放：</enableDragAndDrop>
       <sortBy>排序依据:</sortBy>
@@ -201,15 +201,15 @@
       <Back>#{word.back}</Back>
     </action>
     <msg>
-      <rename-successfull>节点"{0}"成功更名为 '{1}'。</rename-successfull>
-      <rename-denied>访问被拒绝。您不能重命名此节点。</rename-denied>
+      <rename-successfull>'{0}' was renamed to '{1}' successfully.</rename-successfull>
+      <rename-denied>Access denied. You can't rename this item.</rename-denied>
       <fileName-invalid>新名称中包含一些无效的字符。</fileName-invalid>
       <newName-same-oldName>新的名称已经存在。请再次检查。</newName-same-oldName>
-      <version-exception>此节点 （或此节点的祖先） 未签出。</version-exception>
-      <lock-exception>此节点将被锁定。请在重命名之前解锁。</lock-exception>
-      <constraintViolation-exception>重命名节点"{0}"时出错。请再次检查。</constraintViolation-exception>
+      <version-exception>This document (or one of its ancestors) is not checked out.</version-exception>
+      <lock-exception>This document is locked. Please unlock it before renaming.</lock-exception>
+      <constraintViolation-exception>An error occurred while renaming '{0}'. Please check again.</constraintViolation-exception>
       <unknown-prefix>前缀 '{0}' 尚未尚未注册。</unknown-prefix>
-      <rename-error>重命名此节点时出错。请再次检查。</rename-error>
+      <rename-error>An error occurred while renaming. Please check again.</rename-error>
     </msg>
   </UIRenameForm>
   <UIPopupWindow>
@@ -222,7 +222,7 @@
       <UIExportNode>导出</UIExportNode>
       <UINodeTypeInfo>节点类型信息</UINodeTypeInfo>
       <UIVersionInfo>版本信息</UIVersionInfo>
-      <UIActivateVersion>激活版本</UIActivateVersion>
+      <UIActivateVersion>Activate Versioning</UIActivateVersion>
       <UIAuditingInfo>审计信息</UIAuditingInfo>
       <UIActivateAuditing>激活的审核</UIActivateAuditing>
       <UIPermissionManager>权限管理</UIPermissionManager>
@@ -313,40 +313,40 @@
       <UploadNewVersion>Upload a new version</UploadNewVersion>
     </tooltip>
     <msg>
-      <cannot-action-in-rootnode>您不能在根节点中执行此操作。</cannot-action-in-rootnode>
+      <cannot-action-in-rootnode>You can't perform this action at root.</cannot-action-in-rootnode>
       <node-checkedin>您必须先签出。</node-checkedin>
-      <cannot-enable-version-rootnode>不能启用根节点的版本控制。</cannot-enable-version-rootnode>
-      <cannot-enable-publication-rootnode>不能启用用于根节点的出版物。</cannot-enable-publication-rootnode>
+      <cannot-enable-version-rootnode>Can't activate versioning on root.</cannot-enable-version-rootnode>
+      <cannot-enable-publication-rootnode>Can't activate publication at root.</cannot-enable-publication-rootnode>
       <manage-publication>
-        <not-supported-nodetype>发布功能支持仅限于文档节点。</not-supported-nodetype>
+        <not-supported-nodetype>Only documents can be published.</not-supported-nodetype>
         <no-publication-lifecycle>没有配置任何发布生命周期</no-publication-lifecycle>
       </manage-publication>
-      <unsubcriber-lifecycle>该节点已经被取消订阅。</unsubcriber-lifecycle>
-      <not-supported-nodetype>退订器生命周期支持仅限于文档节点。</not-supported-nodetype>
-      <unsubcriber-lifecycle-finish>该节点已被成功取消订阅。</unsubcriber-lifecycle-finish>
-      <access-false>该节点不是一篇文章或签入。</access-false>
+      <unsubcriber-lifecycle>The document was already unsubscribed.</unsubcriber-lifecycle>
+      <not-supported-nodetype>This operation is only supported for documents.</not-supported-nodetype>
+      <unsubcriber-lifecycle-finish>The document was unsubscribed successfully.</unsubcriber-lifecycle-finish>
+      <access-false>The document is not an article or checked in.</access-false>
       <unsupported-action>不支持此操作。</unsupported-action>
-      <not-relationable>此节点尚未有任何相关的链接到另一个节点。</not-relationable>
-      <node-pasted>节点 {0} 已粘贴到位置 {1}。已经保存了此操作。</node-pasted>
-      <no-node-selected>没有节点被复制。</no-node-selected>
-      <unable-edit>节点 '{0}' 与节点类型 '{1}' 不支持编辑。</unable-edit>
-      <not-support>不能编辑选定的节点。</not-support>
-      <template-null>此节点没有可用的对话窗体。</template-null>
+      <not-relationable>This document has no relations.</not-relationable>
+      <node-pasted>'{0}' has been pasted at the location '{1}'. This operation has already been saved.</node-pasted>
+      <no-node-selected>Nothing to copy.</no-node-selected>
+      <unable-edit>Editing documents of type '{1}' like '{0}' is not supported.</unable-edit>
+      <not-support>Can't edit the selected item.</not-support>
+      <template-null>This document has no form template.</template-null>
       <keyword-null>没有搜索的关键字。</keyword-null>
       <not-found>没有找到结果。</not-found>
       <keyword-not-allow>不允许使用此关键字。</keyword-not-allow>
-      <is-not-referenable>节点'{0}'不能是能被引用。</is-not-referenable>
-      <access-denied>访问被拒绝。你在此节点中没有编辑权限。</access-denied>
-      <access-add-denied>访问被拒绝。你在此节点中没有添加权限。</access-add-denied>
+      <is-not-referenable>'{0}' can't be referenceable.</is-not-referenable>
+      <access-denied>Access denied. You don't have edit permission for this item.</access-denied>
+      <access-add-denied>Access denied. You don't have permission to add items here.</access-add-denied>
       <item-existed>此节点已存在。它不能有相同的名称作为其兄弟。</item-existed>
       <removed-hidden-mixin>您删除成功隐藏米心。</removed-hidden-mixin>
       <added-hidden-mixin>您添加成功隐藏mixin。</added-hidden-mixin>
       <not-supported>此功能只支持文档类型。</not-supported>
-      <empty-file-type>您不能将文档添加到此节点。</empty-file-type>
-      <unsupported-watch>只有文档节点可以看。</unsupported-watch>
-      <watch-checkedin>在看之前，您必须签出该节点。</watch-checkedin>
-      <unsupported-tagging>只能给文档节点加标记。</unsupported-tagging>
-      <tagnode-checkedin>在加标记前，您必须签出该节点。</tagnode-checkedin>
+      <empty-file-type>You can't add a document here.</empty-file-type>
+      <unsupported-watch>Only documents can be watched.</unsupported-watch>
+      <watch-checkedin>You must check out the document before watching.</watch-checkedin>
+      <unsupported-tagging>Only documents can be tagged.</unsupported-tagging>
+      <tagnode-checkedin>You must check out the document before tagging.</tagnode-checkedin>
     </msg>
     <title>
       <select-tab>选择选项卡</select-tab>
@@ -361,48 +361,48 @@
   </UIActionBar>
   <UIPopupMenu>
     <msg>
-      <has-not-permission>访问被拒绝。你不能在此节点中添加权限。</has-not-permission>
-      <has-not-edit-permission>访问被拒绝。此节点中你没有编辑权限。请与管理员联系。</has-not-edit-permission>
-      <cannot-login-node>您不能访问并粘贴在这里的节点。</cannot-login-node>
-      <cannot-paste-nodetype>不能粘贴在这里的节点。</cannot-paste-nodetype>
-      <has-not-permission-unlok>您没有权限来解锁此节点。</has-not-permission-unlok>
-      <bound-exception>你并没有重命名此节点的权限。请与管理员联系。</bound-exception>
-      <bound-move-exception>对本身或它的子节点中，您不能移动节点。</bound-move-exception>
-      <does-not-support-auditing>您不能激活此节点上的审核。</does-not-support-auditing>
-      <can-not-rename-node>你并没有重命名此节点的权限。请与管理员联系以获取正确的权利。</can-not-rename-node>
-      <can-not-cut-node>你并没有重命名此节点的权限。请与管理员联系。</can-not-cut-node>
-      <can-not-remove-node>你并没有重命名此节点的权限。请与管理员联系。</can-not-remove-node>
-      <can-not-lock-node>你并没有锁定节点 {0} 的权限。请与管理员联系。</can-not-lock-node>
-      <can-not-unlock-node>你并没有重命名此节点的权限。请与管理员联系。</can-not-unlock-node>
-      <no-node>请选择至少一个节点在粘贴之前。</no-node>
-      <can-not-paste-node>你并没有将移到此节点的权限。请与管理员联系。</can-not-paste-node>
-      <can-not-move-node>你并没有重命名此节点的权限。请与管理员联系。</can-not-move-node>
-      <does-not-support-versioning>你并没有将移到此节点的权限。请与管理员联系。</does-not-support-versioning>
+      <has-not-permission>Access denied. You don't have permissions to add in this item.</has-not-permission>
+      <has-not-edit-permission>Access denied. You don't have edit permission here. Please contact the administrator.</has-not-edit-permission>
+      <cannot-login-node>You can't access and paste an item here.</cannot-login-node>
+      <cannot-paste-nodetype>You can't paste this type of item here.</cannot-paste-nodetype>
+      <has-not-permission-unlok>You don't have permission to unlock this document.</has-not-permission-unlok>
+      <bound-exception>You don't have the permission to rename this item. Please contact the administrator.</bound-exception>
+      <bound-move-exception>You can't move an item to itself or in a subfolder.</bound-move-exception>
+      <does-not-support-auditing>You can't activate auditing here.</does-not-support-auditing>
+      <can-not-rename-node>You don't have permission to rename this item. Please contact the administrator to get the necessary rights.</can-not-rename-node>
+      <can-not-cut-node>You don't have permission to cut this item. Please contact the administrator.</can-not-cut-node>
+      <can-not-remove-node>You don't have permission to remove this item. Please contact the administrator.</can-not-remove-node>
+      <can-not-lock-node>You don't have permission to lock {0}. Please contact the administrator.</can-not-lock-node>
+      <can-not-unlock-node>You don't have permission to unlock this item. Please contact the administrator.</can-not-unlock-node>
+      <no-node>Please select at least one item before pasting.</no-node>
+      <can-not-paste-node>You don't have permission to move to this item. Please contact the administrator.</can-not-paste-node>
+      <can-not-move-node>You don't have permission to move this item. Please contact the administrator.</can-not-move-node>
+      <does-not-support-versioning>You don't have permission to move. Please contact the administrator.</does-not-support-versioning>
       <path-not-found>此元素被删除或更改。请单击刷新按钮。</path-not-found>
-      <paste-lock-exception>你不能粘贴 '{0}' 到此节点，因为源或目标节点处于锁定状态或有关的锁定节点。</paste-lock-exception>
-      <can-not-checkin-node>您不能签入此节点。请检查您具有正确的权限。</can-not-checkin-node>
-      <can-not-checkout-node>您不能签入此节点。请检查您具有正确的权限。</can-not-checkout-node>
-      <move-constraint-exception>移动节点时出错。</move-constraint-exception>
-      <not-lock-owner>因为你不是锁的所有者，您无法解锁此节点。</not-lock-owner>
-      <is-checked-in>请在重命名之前查阅此节点。</is-checked-in>
-      <is-checked-in-lock>请锁定前签出此节点。</is-checked-in-lock>
-      <cant-lock>您不能锁定此节点。</cant-lock>
+      <paste-lock-exception>'{0}' can't be pasted here. Make sure it is not locked nor this folder. Also check that no related document is locked.</paste-lock-exception>
+      <can-not-checkin-node>You can't check in this item. Please check that you have the necessary permissions.</can-not-checkin-node>
+      <can-not-checkout-node>You can't check out this itel. Please check that you have the necessary permissions.</can-not-checkout-node>
+      <move-constraint-exception>An error occurred while moving this item.</move-constraint-exception>
+      <not-lock-owner>You can't unlock this item because you are not the lock owner.</not-lock-owner>
+      <is-checked-in>Please check out this item before renaming.</is-checked-in>
+      <is-checked-in-lock>Please check out this item before locking.</is-checked-in-lock>
+      <cant-lock>You can't lock this document.</cant-lock>
       <node-locked>具有路径 {0} 或上部级别的项被锁定。</node-locked>
-      <can-not-delete>请在删除之前，关闭此节点。</can-not-delete>
-      <can-not-delete-version>您不能删除此节点。这是版本控制。</can-not-delete-version>
-      <not-support>您不能删除选定的节点。请选择另一个节点。</not-support>
-      <current-node-not-allow-paste>您不能在当前节点上粘贴复制的节点类型。</current-node-not-allow-paste>
-      <copied-node-in-versioning>不能粘贴复制的节点。这是版本控制。</copied-node-in-versioning>
-      <parent-node-locked>您没有权限来解锁节点"{0}"。</parent-node-locked>
-      <this-node-locked-by-parent>你不能解锁此节点。由父或祖先节点将被锁定。</this-node-locked-by-parent>
-      <paste-node-same-name>您不能在目标文件夹中粘贴具有相同的名称作为一个节点的节点。</paste-node-same-name>
-      <has-not-add-permission>您没有权限添加一个新节点。</has-not-add-permission>
-      <node-cutting>节点正被削减。您不能将其粘贴在这里。</node-cutting>
-      <access-denied>访问被拒绝。您可能没有权限在此节点中。</access-denied>
-      <remove-verion-exception>您无法删除此节点，因为它 （或其祖先） 已签入。</remove-verion-exception>
-      <remove-referentialIntegrityException>不能删除此节点，因为它当前引用的属性的目标。</remove-referentialIntegrityException>
-      <constraintviolation-exception>找不到强制性项目 jcr:uuid。该节点可能已删除或更改。请单击刷新按钮。</constraintviolation-exception>
-      <path-not-found-exception>此节点已被删除或更改。请单击刷新按钮。</path-not-found-exception>
+      <can-not-delete>Please close this item before deleting.</can-not-delete>
+      <can-not-delete-version>You can't delete this document. It's versioned.</can-not-delete-version>
+      <not-support>You can't delete the selected item. Please select another one.</not-support>
+      <current-node-not-allow-paste>You can't paste the copied item there.</current-node-not-allow-paste>
+      <copied-node-in-versioning>You can't paste the copied item here because it's versioned.</copied-node-in-versioning>
+      <parent-node-locked>You don't have permission to unlock '{0}'.</parent-node-locked>
+      <this-node-locked-by-parent>You can't unlock this item. Parent folder is locked.</this-node-locked-by-parent>
+      <paste-node-same-name>Can't paste this item here. An item with the same name already exists in the destination folder.</paste-node-same-name>
+      <has-not-add-permission>You don't have the permission to add here.</has-not-add-permission>
+      <node-cutting>Item is being cut. You can't paste it here.</node-cutting>
+      <access-denied>Access denied. You may not have the permission.</access-denied>
+      <remove-verion-exception>You can't remove this document because it is checked in.</remove-verion-exception>
+      <remove-referentialIntegrityException>You can't delete this item because it is currently referenced by another one.</remove-referentialIntegrityException>
+      <constraintviolation-exception>The mandatory property jcr:uuid was not found. The document may have been deleted or changed. Please click the Refresh button.</constraintviolation-exception>
+      <path-not-found-exception>This document was deleted or changed. Please click the Refresh button.</path-not-found-exception>
       <not-exist-categories>该类别不存在。</not-exist-categories>
       <lock-node-read-only>This file is locked by user {0}. Open read-only ?</lock-node-read-only>
     </msg>
@@ -428,12 +428,12 @@
       <title-invalid>请输入文件夹的标题。</title-invalid>
       <name-not-allowed>此名称不是允许的。</name-not-allowed>
       <fileName-error>文件的名称是无效的。</fileName-error>
-      <constraint-violation>当前节点不允许您添加的节点类型 '{0}'。</constraint-violation>
+      <constraint-violation>You can't add a document of type '{0}' here.</constraint-violation>
       <repository-exception>出现意外的错误。为了更多详细信息，请与您的管理员联系。</repository-exception>
-      <repository-exception-permission>你没有将此节点添加一个新的文件夹的权限。</repository-exception-permission>
+      <repository-exception-permission>You don't have the permission to add a new folder here.</repository-exception-permission>
       <numberformat-exception>您不能保存此文件夹。提供的名称必须是数值格式。</numberformat-exception>
       <!--DMS 2.4.x; ECM-3553-->
-      <not-allow-sameNameSibling>您不能保存该文件夹。此节点不接受两个节点具有相同的名称。</not-allow-sameNameSibling>
+      <not-allow-sameNameSibling>You can't save the folder. An item with the same name already exists.</not-allow-sameNameSibling>
       <ntFolder-not-avaiable>您必须选择文件夹的自定义类型</ntFolder-not-avaiable>
     </msg>
     <help>
@@ -500,26 +500,26 @@
       <feedback-restore>'{0}' 成功恢复。</feedback-restore>
       <feedback-restore-multi>{0} 项目成功恢复。</feedback-restore-multi>
       
-      <confirm-restore>节点"{0}"的旧位置已存在具有相同名称的节点。是否确实要恢复此节点?</confirm-restore>
+      <confirm-restore>A '{0}' item already exists at the previous location. Are you sure you want to restore it?</confirm-restore>
       <confirm-move>确实要移动吗?</confirm-move>
-      <node-cut>节点"{0}"已被削减。</node-cut>
+      <node-cut>'{0}' has been cut.</node-cut>
       <execute-successfully>已执行自定义操作 '{0}'。</execute-successfully>
-      <save-node-success>节点"{0}"已被保存。</save-node-success>
-      <move-problem>因为没有权限或约束条件的问题，不能移动到 '{1}' 节点"{0}"。</move-problem>
+      <save-node-success>'{0}' has been saved.</save-node-success>
+      <move-problem>You can't move '{0}' to '{1}' because there was a problem with permissions or constraint conditions.</move-problem>
     </msg>
   </UIWorkingArea>
   <UIDocumentWorkspace>
     <label>
-      <no-children>此节点不具有任何子部分。</no-children>
-      <no-children-but-has-hidden>此节点不具有任何子节点，但有一些隐藏的文件。</no-children-but-has-hidden>
+      <no-children>This item doesn't have children.</no-children>
+      <no-children-but-has-hidden>This folder does not have any item, but there are some hidden files.</no-children-but-has-hidden>
     </label>
     <msg>
-      <unable-save-node>已新创建节点"{0}"。请保存会话之前执行此操作。</unable-save-node>
-      <save-node-success>节点"{0}"已被保存。</save-node-success>
-      <node-copied>已复制节点"{0}"。</node-copied>
-      <node-cut>节点"{0}"已被削减。</node-cut>
-      <remove-root>您不能删除的根节点。</remove-root>
-      <node-remove-success>节点"{0}"已被删除。</node-remove-success>
+      <unable-save-node>'{0}' has been created. Please save session to validate this action.</unable-save-node>
+      <save-node-success>'{0}' has been saved.</save-node-success>
+      <node-copied>'{0}' has been copied.</node-copied>
+      <node-cut>'{0}' has been cut.</node-cut>
+      <remove-root>You can't remove the root folder.</remove-root>
+      <node-remove-success>'{0}' has been removed.</node-remove-success>
     </msg>
     <tooltip>
       <Rename>重命名</Rename>
@@ -538,11 +538,11 @@
   </UIDocumentWorkspace>
   <UIDocumentInfo>
     <msg>
-      <access-denied>访问被拒绝。您不能访问节点"{0}"。</access-denied>
-      <null-exception>找不到项。它是在移除或更改，或您没有权限访问此节点。</null-exception>
+      <access-denied>Access denied. You can't access '{0}'.</access-denied>
+      <null-exception>Item not found. It was either removed or changed, or you don't have the access permission.</null-exception>
       <confirm-deleteattachment>确实要删除此附件文件吗?</confirm-deleteattachment>
       <confirm-deleteattcomment>是否确实要删除此注释?</confirm-deleteattcomment>
-      <access-denied-exception>访问被拒绝。您可能没有读取权限，或者该节点可能已删除或更改。</access-denied-exception>
+      <access-denied-exception>Access denied. You may not have reading privileges, or the documen may have been removed or changed.</access-denied-exception>
       <path-not-found>此元素被删除或更改。请单击刷新按钮。</path-not-found>
     </msg>
     <tooltip>
@@ -601,7 +601,7 @@
       <OpenDocument>Remote Edit</OpenDocument>
       <EditProperty>Edit Document Properties</EditProperty>
       <UploadNewVersion>Upload a new version</UploadNewVersion>
-      <CreateNewVersion>Create a new version</CreateNewVersion>
+      <CreateNewVersion>Save as new version</CreateNewVersion>
     </event>
   </ECMContextMenu>
  
@@ -733,8 +733,8 @@
       <name-invalid>请输入属性名称</name-invalid>
       <unable-create>不能添加属性</unable-create>
       <value-invalid>请输入值</value-invalid>
-      <node-checkedin>添加一个属性之前，您必须先检验节点。</node-checkedin>
-      <can-not-add>不能将属性添加到此节点。这唯一允许的节点类型 nt:unstructured</can-not-add>
+      <node-checkedin>You must check out this item before adding a property.</node-checkedin>
+      <can-not-add>You can't add properties to this item. This is only allowed for the type nt:unstructured.</can-not-add>
       <propertyName-invalid>The property name must include namespace (e.g. namespace:name).</propertyName-invalid>
       <propertyName-exist>The property '{0}' already exists.</propertyName-exist>
       <propertyValu-null>Some values may be null.</propertyValu-null>
@@ -795,7 +795,7 @@
       <selectUser>选择用户</selectUser>
     </label>
     <msg>
-      <not-change-owner>'{0}' 是此节点的所有者以及具有完全控制权限。</not-change-owner>
+      <not-change-owner>'{0}' is the owner of this item and has full control permission.</not-change-owner>
     </msg>
   </UIGroupSelector>
   <UIPermissionForm>
@@ -807,7 +807,7 @@
       <add_node>Modify Right</add_node>
       <remove>删除权利</remove>
     </label>
-    <title>将那节点添加权限</title>
+    <title>Add a permission</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>#{word.save}</Save>
@@ -914,7 +914,7 @@
   </ViewSearch>
   <UISearchResult>
     <msg>
-      <not-support>没有为此节点的视图模板。</not-support>
+      <not-support>There is no View template for this document.</not-support>
       <empty>没有找到结果。</empty>
       <access-denied>You cannot open this folder, either because it no longer exists or because you do not have the right to access it.</access-denied>
       <query-invalid>查询无效</query-invalid>
@@ -939,15 +939,15 @@
       <datecreatedDESC>按创建日期的降序排序</datecreatedDESC>
     </title>
     <tooltip>
-      <View>View this Node</View>
+      <View>View this item</View>
       <OpenFolder>Go to Folder</OpenFolder>
     </tooltip>
   </UISearchResult>
   <UIShowAllOwnedByUserResult>
     <msg>
-      <not-support>There is no View template for this node</not-support>
+      <not-support>There is no View template for this document</not-support>
       <empty>没有找到结果。</empty>
-      <access-denied>You cannot view this node, either because this template is not supported or because access is denied.</access-denied>
+      <access-denied>You can't view this document, either because this template is not supported or because access is denied.</access-denied>
       <query-invalid>The query is invalid</query-invalid>
     </msg>
     <header>
@@ -970,15 +970,15 @@
       <datecreatedDESC>按创建日期的降序排序</datecreatedDESC>
     </title>
     <tooltip>
-      <View>查看此节点</View>
+      <View>View this item</View>
       <OpenFolder>转到文件夹</OpenFolder>
     </tooltip>
   </UIShowAllOwnedByUserResult>
   <UIShowAllFavouriteResult>
     <msg>
-      <not-support>没有为此节点的视图模板</not-support>
+      <not-support>There is no View template for this item</not-support>
       <empty>No results found</empty>
-      <access-denied>您不能查看此节点，因为此模板不受支持，或由于访问被拒绝。</access-denied>
+      <access-denied>You can't view this item, either because this template is not supported or because access is denied.</access-denied>
       <query-invalid>查询无效</query-invalid>
     </msg>
     <header>
@@ -1001,15 +1001,15 @@
       <datecreatedDESC>按创建日期降序排序</datecreatedDESC>
     </title>
     <tooltip>
-      <View>查看此节点</View>
+      <View>View this item</View>
       <OpenFolder>转到文件夹</OpenFolder>
     </tooltip>
   </UIShowAllFavouriteResult>
   <UIShowAllHiddenResult>
     <msg>
-      <not-support>没有为此节点的视图模板。</not-support>
+      <not-support>There is no View template for this item.</not-support>
       <empty>没有找到结果。</empty>
-      <access-denied>您不能查看此节点，因为此模板不受支持，或由于访问被拒绝。</access-denied>
+      <access-denied>You can't view this item, either because it has no View template or because you don't have access to it.</access-denied>
       <query-invalid>查询无效</query-invalid>
     </msg>
     <header>
@@ -1033,16 +1033,16 @@
       <datecreatedDESC>按创建日期降序排序</datecreatedDESC>
     </title>
     <tooltip>
-      <View>查看此节点</View>
+      <View>View this Item</View>
       <OpenFolder>转到文件夹</OpenFolder>
       <RemoveHiddenAttribute>Remove Hidden Attribute</RemoveHiddenAttribute>
     </tooltip>
   </UIShowAllHiddenResult>
   <UIShowAllTrashResult>
     <msg>
-      <not-support>没有为此节点的视图模板</not-support>
+      <not-support>There is no View template for this item.</not-support>
       <empty>未找到任何结果</empty>
-      <access-denied>您不能查看此节点，因为此模板不受支持，或由于访问被拒绝。</access-denied>
+      <access-denied>You can't view this item, either because it has no View template or because you don't have access to it.</access-denied>
       <query-invalid>该查询是无效的。</query-invalid>
     </msg>
     <header>
@@ -1065,7 +1065,7 @@
       <datecreatedDESC>按创建日期的降序排序</datecreatedDESC>
     </title>
     <tooltip>
-      <View>查看此节点</View>
+      <View>View this Item</View>
       <OpenFolder>转到文件夹</OpenFolder>
       <DeletePermanently>Delete permanently</DeletePermanently>
       <RestoreFromTrash>从垃圾桶中还原</RestoreFromTrash>
@@ -1321,7 +1321,7 @@
       <Cancel>#{word.cancel}</Cancel>
       <Export>导出</Export>
     </action>
-    <title>出口节点</title>
+    <title>Export</title>
   </UIExportNode>
   <!--
   ###############################################################################
@@ -1366,8 +1366,8 @@
       <error-removing-referenced-version>This version is referenced and can't be removed.</error-removing-referenced-version>
       <confirm-restore>Are you sure you want to restore this version?</confirm-restore>
       <confirm-delete>是否确实要删除此版本?</confirm-delete>
-      <not-checked-out>您必须在恢复之前签出此节点。</not-checked-out>
-      <invalid-item-state>你不能还原此版本，因为在运行阶段一个或多个项目被删除或移动。</invalid-item-state>
+      <not-checked-out>You have to check out this document before restoring.</not-checked-out>
+      <invalid-item-state>You can't restore this version, either because one or more items were deleted or moved by another session.</invalid-item-state>
     </msg>
     <action>
       <close>#{word.close}</close>
@@ -1392,8 +1392,8 @@
       <noVersion>没有版本</noVersion>
     </msg>
     <eventName>
-      <e_1>添加节点</e_1>
-      <e_2>删除节点</e_2>
+      <e_1>Added</e_1>
+      <e_2>Document Removed</e_2>
       <e_4>添加属性</e_4>
       <e_16>属性更改</e_16>
       <e_8>删除属性</e_8>
@@ -1433,13 +1433,13 @@
   -->
   <UIActivateVersion>
     <label>
-      <note>不激活此节点的版本控制。</note>
+      <note>Versioning has not been activated for this document.</note>
       <question>确实想激活它吗?</question>
       <button-active>激活</button-active>
       <button-cancel>#{word.cancel}</button-cancel>
     </label>
     <msg>
-      <access-denied>您没有权限来激活此节点上的版本控制</access-denied>
+      <access-denied>You don't have permission to activate versioning on this document</access-denied>
     </msg>
   </UIActivateVersion>
   <!--
@@ -1462,7 +1462,7 @@
       </msg>
     </grid>
     <msg>
-      <node-type-invalid>只有文档节点类型可以被录取。</node-type-invalid>
+      <node-type-invalid>Only documents can be enrolled.</node-type-invalid>
       <already-enroled>此文档已被注册。</already-enroled>
     </msg>
   </UIActivePublication>
@@ -1473,7 +1473,7 @@
   -->
   <UIActivateAuditing>
     <label>
-      <note>节点审核功能尚未激活。</note>
+      <note>Auditing has not been activated for this document.</note>
       <question>确实需要激活它吗?</question>
     </label>
     <action>
@@ -1516,7 +1516,7 @@
       <Cancel>#{word.cancel}</Cancel>
       <Import>导入</Import>
     </action>
-    <title>导入节点</title>
+    <title>Import</title>
     <msg>
       <import-successful>已成功导入。</import-successful>
       <filename-invalid>浏览要导入的上载文件字段的.xml 文件。</filename-invalid>
@@ -1524,8 +1524,8 @@
       <xml-invalid>There is an invalid character at position [row, column]:{0} in {1} file</xml-invalid>
       <mimetype-invalid>您只可以导入.xml 或.zip 文件。</mimetype-invalid>
       <access-denied>访问被拒绝。你无权在这里导入。</access-denied>
-      <constraint-violation-exception>无法导入数据。在此位置不允许类型 '{0}'。</constraint-violation-exception>
-      <item-exists-exception>传入的可引用节点在工作区中有同一个 UUID 作为现有的节点。</item-exists-exception>
+      <constraint-violation-exception>Impossible to import data. The type '{0}' is not allowed at this location.</constraint-violation-exception>
+      <item-exists-exception>An incoming item has the same UUID as an existing item in the workspace.</item-exists-exception>
     </msg>
   </UIImportNode>
   <!--
@@ -1573,7 +1573,7 @@
   <UIViewVersion>
     <label>
       <nodeType>节点类型</nodeType>
-      <nodeName>节点名称</nodeName>
+      <nodeName>Name</nodeName>
       <VersionNumber>版本编号</VersionNumber>
       <VersionLabels>版本标签</VersionLabels>
       <VersionDate>版本日期</VersionDate>
@@ -1609,7 +1609,7 @@
       <action>操作</action>
     </header>
     <msg>
-      <access-denied>访问被拒绝。你没有访问此节点的权限。</access-denied>
+      <access-denied>Access denied. You don't have access permission.</access-denied>
       <confirm-delete>是否确实要删除此引用?</confirm-delete>
     </msg>
     <action>
@@ -1629,7 +1629,7 @@
       <action>操作</action>
     </header>
     <info>
-      <child-not-found>此节点不具有任何子部分。</child-not-found>
+      <child-not-found>This item doesn't have any child.</child-not-found>
     </info>
   </UITreeList>
   <!--
@@ -1685,8 +1685,8 @@
       <clearall>全部清除</clearall>
     </action>
     <msg>
-      <unable-pasted>不能粘贴此节点。</unable-pasted>
-      <node-pasted>节点 {0} 已粘贴到位置 {1}。已经保存了此操作。</node-pasted>
+      <unable-pasted>Can't paste this item.</unable-pasted>
+      <node-pasted>{0} has been pasted at location {1}. This operation has already been saved.</node-pasted>
     </msg>
   </UIClipboard>
   <!--
@@ -1727,15 +1727,15 @@
 </tooltip>
     <msg>
       <cannot-save>保存文档时出错。</cannot-save>
-      <in-versioning>请添加一个新的节点前，签出当前节点。</in-versioning>
+      <in-versioning>Please check out the current folder before adding a new item.</in-versioning>
       <not-support>无法加载 '{0}'的模板。</not-support>
       <value-invalid>'{0}' 是所需的值。</value-invalid>
       <repository-exception>保存文档时出错。</repository-exception>
       <!--DMS 2.4.x; ECM-3543-->
-      <repository-exception-permission>你并没有将此节点添加一个新的文档的权限。</repository-exception-permission>
+      <repository-exception-permission>You don't have permission to add a new document to this folder.</repository-exception-permission>
       <not-allowed-same-name-sibling>您不能保存此文档。它不被允许具有相同的名称作为其兄弟。</not-allowed-same-name-sibling>
       <numberformat-exception>您不能保存此文档。提供的名称必须是数值格式。</numberformat-exception>
-      <item-not-found>找不到项。此节点 （或其祖先） 可能已被删除。请单击刷新按钮。</item-not-found>
+      <item-not-found>Document not found. This document (or its ancestor) may have been deleted. Please click the Refresh button.</item-not-found>
     </msg>
   </UIDocumentForm>
   <!--
@@ -1800,7 +1800,7 @@
       <action>操作</action>
     </header>
     <msg>
-      <remove-popup-first>您必须在删除此节点之前关闭编辑弹出窗口。</remove-popup-first>
+      <remove-popup-first>You must close the edit pop-up before deleting this item.</remove-popup-first>
       <confirm-delete-action>是否确实要删除此操作?</confirm-delete-action>
       <template-empty>'{0}' 模板是无效或为空。</template-empty>
       <template-null>该模板为空或者您没有权限访问此模板。</template-null>
@@ -1826,7 +1826,7 @@
       <numberformat-exception>您不能保存此操作。提供的名称必须是数值格式。</numberformat-exception>
       <existed-action>操作 '{0}'已存在. 请选择另外名称.</existed-action>
       <unable-add-action>不能添加此操作。</unable-add-action>
-      <unable-add>不能添加此操作。此节点是根或您没有权限。</unable-add>
+      <unable-add>Can't add this action. This item is either the root folder or you don't have the permission to edit.</unable-add>
       <not-support>不支持对话框的 '{0}'。</not-support>
       <no-permission-add>访问被拒绝。你并没有在这里添加行动的权利。</no-permission-add>
       <access-denied>访问被拒绝。您没有权限访问此模板。</access-denied>
@@ -1865,7 +1865,7 @@
   <UIAddressBar>
     <msg>
       <path-not-found>找不到路径。</path-not-found>
-      <access-denied>访问被拒绝。你没有读取节点的权利。</access-denied>
+      <access-denied>Access denied. You don't have the permission to read.</access-denied>
       <keyword-not-support>关键字是无效的。不支持某些字符。</keyword-not-support>
     </msg>
     <label>
@@ -1874,8 +1874,8 @@
     </label>
     <title>
       <exeButton>前进</exeButton>
-      <backButton>返回到前一个节点</backButton>
-      <showHistory>显示历史记录地址</showHistory>
+      <backButton>Back</backButton>
+      <showHistory>Show History</showHistory>
       <changeNode>更改节点</changeNode>
     </title>
   </UIAddressBar>
@@ -1937,7 +1937,7 @@
   -->
   <UIViewMetadataContainer>
     <msg>
-      <path-not-found>节点不支持此视图。</path-not-found>
+      <path-not-found>The document does not support this view.</path-not-found>
     </msg>
   </UIViewMetadataContainer>
   <!--
@@ -1958,7 +1958,7 @@
   </metadataForm>
   <UIViewMetadataTemplate>
     <msg>
-      <access-denied>访问被拒绝。你不是所有者或没有节点中的编辑权限。</access-denied>
+      <access-denied>Access denied. Either you are not the owner or don't have edit permission.</access-denied>
     </msg>
   </UIViewMetadataTemplate>
   <!--
@@ -2034,7 +2034,7 @@
       <private>私人</private>
       <state>状态</state>
       <visibility>可见性</visibility>
-      <nodeName>节点名称：</nodeName>
+      <nodeName>Name:</nodeName>
       <lifecycleName>生命周期名称</lifecycleName>
       <stateName>状态名称</stateName>
     </label>
@@ -2058,7 +2058,7 @@
   </UIWorkspaceList>
   <pathSelector>
     <title>
-      <UIOneNodePathSelector>节点选择器</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Selector</UIOneNodePathSelector>
     </title>
   </pathSelector>
   <!--
@@ -2166,9 +2166,9 @@
     </label>
     <msg>
       <mimetype-incorrect>不正确的文件类型。仅可以从。JPG。PNG 或。GIF 文件。创建缩略图</mimetype-incorrect>
-      <access-denied>访问被拒绝。您没有权限将此节点添加一个缩略图。</access-denied>
+      <access-denied>Access denied. You don't have permission to add a thumbnail.</access-denied>
       <confirm-delete>确实要删除此缩略图吗?</confirm-delete>
-      <is-checked-in>此节点被签入。请在执行任何操作之前签出。</is-checked-in>
+      <is-checked-in>This item is checked in. Please check out before performing any action.</is-checked-in>
       <fileName-error>请选择要上载的文件。</fileName-error>
     </msg>
     <title>
@@ -2272,7 +2272,7 @@
 
   <PopupSelectPath>
     <title>
-      <UIOneNodePathSelector>选择节点</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Select Path</UIOneNodePathSelector>
     </title>
   </PopupSelectPath>
 
@@ -2302,7 +2302,7 @@
   <UISymLinkForm>
     <label>
       <symLinkName>符号链接名称</symLinkName>
-      <pathNode>路径节点</pathNode>
+      <pathNode>Path</pathNode>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -2313,16 +2313,16 @@
       <name-invalid>请输入符号链接名称。</name-invalid>
       <name-not-allowed>此名称不允许。</name-not-allowed>
       <fileName-error>文件的名称无效。</fileName-error>
-      <constraint-violation>不能将 '{0}' 节点类型添加到当前节点。</constraint-violation>
-      <repository-exception>访问被拒绝。你并没有将符号链接添加到此节点的权限。</repository-exception>
+      <constraint-violation>You can't add an item of type '{0}' here.</constraint-violation>
+      <repository-exception>Access denied. You don't have permission to add a symlink here.</repository-exception>
       <numberformat-exception>您不能保存此文件夹。提供的名称必须是数值格式。</numberformat-exception>
-      <path-node-invalid>请输入路径节点。</path-node-invalid>
+      <path-node-invalid>Please enter the path.</path-node-invalid>
       <path-node-not-allowed>此名称不是允许的。</path-node-not-allowed>
-      <non-node>请选择信任目标节点 ；您可能没有读取此节点的权限。</non-node>
-      <cannot-save>您不能将此节点类型添加符号链接。</cannot-save>
-      <item-exists-exception>节点名称已存在。</item-exists-exception>
-      <translation-node-same-language-default>翻译的节点跟当前节点的默认语言具有相同的语言。</translation-node-same-language-default>
-      <UnsupportedRepositoryOperationException>没有提到此目标节点。</UnsupportedRepositoryOperationException>
+      <non-node>Please select the trust target; you may not have the rights to read this item.</non-node>
+      <cannot-save>You can't add a symlink for this type of document.</cannot-save>
+      <item-exists-exception>An item with this name already exists.</item-exists-exception>
+      <translation-node-same-language-default>The translated document has the same language as the default language of current document.</translation-node-same-language-default>
+      <UnsupportedRepositoryOperationException>This target item is not referred.</UnsupportedRepositoryOperationException>
     </msg>
   </UISymLinkForm>
   
@@ -2342,22 +2342,22 @@
       <name-invalid>请输入符号链接名称。</name-invalid>
       <name-not-allowed>此名称不是允许的。</name-not-allowed>
       <fileName-error>文件的名称是无效的。</fileName-error>
-      <constraint-violation>不能将 '{0}' 节点类型添加到当前节点。</constraint-violation>
-      <repository-exception>访问被拒绝。你并没有将符号链接添加到此节点的权限。</repository-exception>
+      <constraint-violation>You can't add the '{0}' type to the current item.</constraint-violation>
+      <repository-exception>Access denied. You don't have permission to add a symlink to this item.</repository-exception>
       <numberformat-exception>您不能保存此文件夹。提供的名称必须是数值格式。</numberformat-exception>
-      <path-node-invalid>请输入路径节点。</path-node-invalid>
+      <path-node-invalid>Please enter the path.</path-node-invalid>
       <path-node-not-allowed>此名称不是允许的。</path-node-not-allowed>
-      <non-node>请选择信任目标节点 ；您可能没有读取此节点的权限。</non-node>
+      <non-node>Please select the trust target; you may not have the right to read this node.</non-node>
       <cannot-save>创建符号链接时出错。</cannot-save>
-      <item-exists-exception>节点名称已存在。</item-exists-exception>
-      <translation-node-same-language-default>翻译的节点跟当前节点的默认语言具有相同的语言。</translation-node-same-language-default>
-      <UnsupportedRepositoryOperationException>没有提到此目标节点。</UnsupportedRepositoryOperationException>
+      <item-exists-exception>An item with this name already exists.</item-exists-exception>
+      <translation-node-same-language-default>The translated document has the same language as the default language of current document.</translation-node-same-language-default>
+      <UnsupportedRepositoryOperationException>This target item is not referred.</UnsupportedRepositoryOperationException>
     </msg>
   </UIAddTranslationForm>
 
   <UIPopupSymLink>
     <title>
-      <UIOneNodePathSelector>选择目标节点</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Select Target Item</UIOneNodePathSelector>
     </title>
   </UIPopupSymLink>
   <UIPopupSymLink>
@@ -2375,9 +2375,9 @@
 
   <UIWorkingArea>
     <msg>
-      <create-link-problem>您不能在 '{1}' 创建节点"{0}"的链接。</create-link-problem>
-      <dest-node-is-link>目标节点"{0}"已经是一个符号连接，所以您不能创建一个符号连接里面。</dest-node-is-link>
-      <selected-is-link>The selected node '{0}' is already a link. You cannot create a link that points to another link.</selected-is-link>
+      <create-link-problem>You can't create a link for '{0}' at '{1}'.</create-link-problem>
+      <dest-node-is-link>The destination '{0}' is already a symlink, so you cannot create a symlink inside it.</dest-node-is-link>
+      <selected-is-link>The selected item '{0}' is already a link. You can't create a link to another link.</selected-is-link>
       <confirm-create-link>你想要创建一个链接到此位置吗？</confirm-create-link>
     </msg>
   </UIWorkingArea>
@@ -2460,7 +2460,7 @@
 <ReadOnly>Open Read-only</ReadOnly>
 <Cancel>关闭</Cancel>
       <KeepBoth>Keep Both</KeepBoth>
-      <CreateNewVersion>Create a new version</CreateNewVersion>
+      <CreateNewVersion>Save as new version</CreateNewVersion>
     </label>
   </UIConfirmMessage>
 
@@ -2516,7 +2516,7 @@
 
   <UIPopupMenu>
     <msg>
-      <node-locked-other-person>此节点或其父节点是正在被其他用户锁定，所以您不能删除它。</node-locked-other-person>
+      <node-locked-other-person>This item or its parent folder is locked by another user, so you can't delete it.</node-locked-other-person>
     </msg>
   </UIPopupMenu>
 
@@ -2551,7 +2551,7 @@
 
   <UIPopupMenu>
     <msg>
-      <can-not-unlock-node-is-checked-in>你不能解锁因为节点"{0}"(或其祖先) 已签入。</can-not-unlock-node-is-checked-in>
+      <can-not-unlock-node-is-checked-in>You can't unlock because the '{0}' (or its parent folder) is checked in.</can-not-unlock-node-is-checked-in>
     </msg>
   </UIPopupMenu>
 
@@ -2560,12 +2560,12 @@
   -->
   <UIActionBar>
     <msg>
-      <cannot-enable-version>不能启用版本控制节点。</cannot-enable-version>
+      <cannot-enable-version>Can't activate versioning on this document.</cannot-enable-version>
     </msg>
   </UIActionBar>
   <UIPopupMenu>
     <msg>
-        <cannot-readsource>您不能将源节点中读取数据。</cannot-readsource>
+        <cannot-readsource>You can't read data from the source.</cannot-readsource>
     </msg>
   </UIPopupMenu>
   <UIUploadForm>
@@ -2845,7 +2845,7 @@
 
     <UIPopupMenu>
     <msg>
-      <node-locked-editing>您不能编辑此路径 {0}的节点。它正被另一用户锁定。</node-locked-editing>
+      <node-locked-editing>You can't edit  {0}. It's locked by another user.</node-locked-editing>
     </msg>
   </UIPopupMenu>
   <UITagStyleForm>
@@ -2939,12 +2939,12 @@
   </PathNode>
   <UIPopupPathFoRestore>
     <title>
-      <UIOneNodePathSelector>选择父节点</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Select Parent</UIOneNodePathSelector>
     </title>
   </UIPopupPathFoRestore>
   <rootNodeInfo>
     <title>
-      <AddRootNode>添加根节点</AddRootNode>
+      <AddRootNode>Add Root</AddRootNode>
     </title>
   </rootNodeInfo>
 
@@ -3156,9 +3156,9 @@
   </lifecyclePhase>
   <UIPopupMenu>
   <msg>
-<can-not-remove-locked-node>节点 {0} 已被锁定。不能将它移动到垃圾桶。</can-not-remove-locked-node>
-<can-not-remove-checked-in-node>节点 {0} 或其父被签入。不能将它移动到垃圾桶。</can-not-remove-checked-in-node>
-<access-denied-to-delete>访问被拒绝。您不能将节点 {0}移动到垃圾桶。</access-denied-to-delete>
+<can-not-remove-locked-node>{0} is locked. You can't move it to the Trash.</can-not-remove-locked-node>
+<can-not-remove-checked-in-node>{0} or its parent folder is checked in. You can't move it to the Trash.</can-not-remove-checked-in-node>
+<access-denied-to-delete>Access denied. You can't move {0} to the Trash.</access-denied-to-delete>
   </msg>
   </UIPopupMenu>
   <UIPropertyForm>
@@ -3168,8 +3168,8 @@
   </UIPropertyForm>
   <UIWatchDocumentForm>
     <msg>
-      <node-is-locked>此节点将被锁定。您不能观看。</node-is-locked>
-      <unknown-error>出现了一些错误。您不能观看此节点。</unknown-error>
+      <node-is-locked>This item is locked. You cannot watch it.</node-is-locked>
+      <unknown-error>Some errors have occurred. You can't watch this document.</unknown-error>
     </msg>
   </UIWatchDocumentForm>   
   <UIActionForm>
@@ -3194,7 +3194,7 @@
     <Keep>留着两个</Keep>
     <Replace>替换</Replace>
     <Canceled>已取消</Canceled>
-      <UploadNewVersion>Upload new version</UploadNewVersion>
+      <UploadNewVersion>Upload a new version</UploadNewVersion>
     <Cancel>#{word.cancel}</Cancel>
     <AbortAllConfirmation>你想要中止进展中的所有文件吗？</AbortAllConfirmation>
   </label>

@@ -18,7 +18,7 @@
     </action>
     <msg>
       <not-support>You can't comment on this type of document.</not-support>
-      <not-checkedout>Πρέπει να ελέγξετε τον κόμβο πριν τον σχολιάσετε.</not-checkedout>
+      <not-checkedout>You must check out the document before commenting on it.</not-checkedout>
       <content-null>Δεν μπορείτε να δημοσιεύσετε ένα κενό σχόλιο.</content-null>
     </msg>
   </UICommentForm>
@@ -46,8 +46,8 @@
     </button>
     <msg>
       <not-support>Δεν μπορείτε να ψηφίσετε για αυτόν τον τύπο εγγράφου.</not-support>
-      <not-checkedout>Πρέπει να ελέγξετε τον κόμβο πριν τον αξιολογήσετε.</not-checkedout>
-      <vote-restriction>Δεν μπορείτε να ξαναψηφίσετε.</vote-restriction>
+      <not-checkedout>You must check out the document to vote.</not-checkedout>
+      <vote-restriction>You cannot vote more than one time.</vote-restriction>
     </msg>
   </UIVoteForm>
  
@@ -59,9 +59,9 @@
   <UIJCRExplorer>
     <msg>
       <refresh-session-success>Η συνεδρία ανανεώθηκε επιτυχώς.</refresh-session-success>
-      <no-node-history>Βρίσκεστε στον αρχικό κόμβο.</no-node-history>
+      <no-node-history>You are at the root.</no-node-history>
       <save-session-success>Όλες οι αλλαγές αποθηκεύτηκαν.</save-session-success>
-      <target-path-not-found>Δεν έχετε πρόσβαση σε αυτόν τον κόμβο, είτε γιατί δεν υπάρχει πια, είτε δεν έχετε τα απαραίτητα δικαιώματα.</target-path-not-found>
+      <target-path-not-found>You can't access this path, either because it doesn't exist anymore or because you don't have access permissions.</target-path-not-found>
     </msg>
   </UIJCRExplorer>
   <!--
@@ -159,8 +159,8 @@
     <label>
       <enableStructure>Ενεργοποίηση δομής Συστήματος Διαχείρισης Εγγράφων (DMS):</enableStructure>
       <showSideBar>Εμφάνιση πλευρικής μπάρας:</showSideBar>
-      <showHiddenNode>Εμφάνιση κρυφών κόμβων:</showHiddenNode>
-      <showNonDocument>Εμφάνιση κόμβων που δεν αφορούν έγγραφα:</showNonDocument>
+      <showHiddenNode>Show Hidden Items:</showHiddenNode>
+      <showNonDocument>Show Non-document Items:</showNonDocument>
       <showRefDocuments>Εμφάνιση αναφερόμενων εγγράφων:</showRefDocuments>
       <enableDragAndDrop>Ενεργοποίηση λειτουργίας "σύρσιμο &amp; απόθεση":</enableDragAndDrop>
       <sortBy>Ταξινόμηση κατά:</sortBy>
@@ -201,15 +201,15 @@
       <Back>#{word.back}</Back>
     </action>
     <msg>
-      <rename-successfull>Ο κόμβος '{0}' μετονομάστηκε σε '{1}' επιτυχώς.</rename-successfull>
-      <rename-denied>Δεν επιτρέπεται η πρόσβαση. Δεν μπορείτε να μετονομάσετε αυτόν τον κόμβο.</rename-denied>
+      <rename-successfull>'{0}' was renamed to '{1}' successfully.</rename-successfull>
+      <rename-denied>Access denied. You can't rename this item.</rename-denied>
       <fileName-invalid>Το νέο όνομα περιέχει κάποιους μη έγκυρους χαρακτήρες.</fileName-invalid>
       <newName-same-oldName>Το νέο όνομα υπάρχει ήδη. Ελέγξτε την καταχώρησή σας.</newName-same-oldName>
-      <version-exception>Αυτός ο κόμβος (ή ο κόμβος στον οποίο ανήκει) δεν έχει ελεγχθεί.</version-exception>
-      <lock-exception>Αυτός ο κόμβος είναι κλειδωμένος. Παρακαλώ ξεκλειδώστε τον πριν από τη μετονομασία.</lock-exception>
-      <constraintViolation-exception>Παρουσιάστηκε σφάλμα κατά την μετονομασία του κόμβου '{0}'. Ελέγξτε την καταχώρησή σας.</constraintViolation-exception>
+      <version-exception>This document (or one of its ancestors) is not checked out.</version-exception>
+      <lock-exception>This document is locked. Please unlock it before renaming.</lock-exception>
+      <constraintViolation-exception>An error occurred while renaming '{0}'. Please check again.</constraintViolation-exception>
       <unknown-prefix>Το πρόθεμα '{0}' δεν έχει καταχωρηθεί ακόμα.</unknown-prefix>
-      <rename-error>Παρουσιάστηκε σφάλμα κατά την μετονομασία αυτού του κόμβου. Ελέγξτε την καταχώρησή σας.</rename-error>
+      <rename-error>An error occurred while renaming. Please check again.</rename-error>
     </msg>
   </UIRenameForm>
   <UIPopupWindow>
@@ -222,7 +222,7 @@
       <UIExportNode>Εξαγωγή</UIExportNode>
       <UINodeTypeInfo>Πληροφορίες τύπου κόμβου</UINodeTypeInfo>
       <UIVersionInfo>Πληροφορίες έκδοσης</UIVersionInfo>
-      <UIActivateVersion>Ενεργοποίηση έκδοσης</UIActivateVersion>
+      <UIActivateVersion>Activate Versioning</UIActivateVersion>
       <UIAuditingInfo>Πληροφορίες ελέγχου</UIAuditingInfo>
       <UIActivateAuditing>Ενεργοποίηση ελέγχου</UIActivateAuditing>
       <UIPermissionManager>Διαχείριση δικαιωμάτων</UIPermissionManager>
@@ -313,40 +313,40 @@
       <UploadNewVersion>Upload a new version</UploadNewVersion>
     </tooltip>
     <msg>
-      <cannot-action-in-rootnode>Δεν μπορείτε να πραγματοποιήσετε αυτήν την ενέργεια στον κόμβο ρίζας.</cannot-action-in-rootnode>
+      <cannot-action-in-rootnode>You can't perform this action at root.</cannot-action-in-rootnode>
       <node-checkedin>Θα πρέπει πρώτα να δηλώσετε ότι ολοκληρώσατε.</node-checkedin>
-      <cannot-enable-version-rootnode>Δεν μπορεί να ενεργοποιηθεί η τήρηση ιστορικού εκδόσεων για κόμβο ρίζας.</cannot-enable-version-rootnode>
-      <cannot-enable-publication-rootnode>Δεν μπορεί να ενεργοποιηθεί η δημοσίευση για κόμβο ρίζας.</cannot-enable-publication-rootnode>
+      <cannot-enable-version-rootnode>Can't activate versioning on root.</cannot-enable-version-rootnode>
+      <cannot-enable-publication-rootnode>Can't activate publication at root.</cannot-enable-publication-rootnode>
       <manage-publication>
-        <not-supported-nodetype>Η δημοσίευση υποστηρίζει μόνο τον κόμβο τύπου εγγράφου.</not-supported-nodetype>
+        <not-supported-nodetype>Only documents can be published.</not-supported-nodetype>
         <no-publication-lifecycle>Δεν έχει ρυθμιστεί κύκλος ζωής δημοσίευσης.</no-publication-lifecycle>
       </manage-publication>
-      <unsubcriber-lifecycle>Ο κόμβος δεν έχει ενταχθεί σε κάποιο κύκλο ζωής δημοσίευσης.</unsubcriber-lifecycle>
-      <not-supported-nodetype>Μόνο οι κόμβοι τύπου εγγράφου μπορούν να μην ενταχθούν σε κύκλο ζωής δημοσίευσης.</not-supported-nodetype>
-      <unsubcriber-lifecycle-finish>Ο κόμβος δεν εντάσσεται πλέον στον κύκλο ζωής δημοσίευσης.</unsubcriber-lifecycle-finish>
-      <access-false>Ο κόμβος δεν είναι άρθρο ή δεν έχει ολοκληρωθεί.</access-false>
+      <unsubcriber-lifecycle>The document was already unsubscribed.</unsubcriber-lifecycle>
+      <not-supported-nodetype>This operation is only supported for documents.</not-supported-nodetype>
+      <unsubcriber-lifecycle-finish>The document was unsubscribed successfully.</unsubcriber-lifecycle-finish>
+      <access-false>The document is not an article or checked in.</access-false>
       <unsupported-action>Αυτή η ενέργεια δεν υποστηρίζεται.</unsupported-action>
-      <not-relationable>Αυτός ο κόμβος δεν είχε ακόμα κάποια παραπομπή σε έναν άλλο κόμβο.</not-relationable>
-      <node-pasted>Ο κόμβος '{0}' επικολλήθηκε στην τοποθεσία '{1}'. Αυτή η λειτουργία έχει ήδη αποθηκευτεί.</node-pasted>
-      <no-node-selected>Δεν έγινε αντιγραφή κανενός κόμβου.</no-node-selected>
-      <unable-edit>Ο κόμβος '{0}' με τύπο '{1}' δεν υποστηρίζεται για επεξεργασία.</unable-edit>
-      <not-support>Δεν είναι δυνατή η επεξεργασία του επιλεγμένου κόμβου.</not-support>
-      <template-null>Αυτός ο κόμβος δεν έχει παράθυρο διαλόγου.</template-null>
+      <not-relationable>This document has no relations.</not-relationable>
+      <node-pasted>'{0}' has been pasted at the location '{1}'. This operation has already been saved.</node-pasted>
+      <no-node-selected>Nothing to copy.</no-node-selected>
+      <unable-edit>Editing documents of type '{1}' like '{0}' is not supported.</unable-edit>
+      <not-support>Can't edit the selected item.</not-support>
+      <template-null>This document has no form template.</template-null>
       <keyword-null>Δεν υπάρχουν λέξεις-κλειδιά για την αναζήτηση.</keyword-null>
       <not-found>Δεν βρέθηκαν αποτελέσματα.</not-found>
       <keyword-not-allow>Δεν επιτρέπεται αυτή η λέξη-κλειδί.</keyword-not-allow>
-      <is-not-referenable>Ο κόμβος '{0}' δεν μπορεί να χρησιμοποιηθεί ως παραπομπή.</is-not-referenable>
-      <access-denied>Δεν επιτρέπεται η πρόσβαση. Δεν έχετε δικαιώματα επεξεργασίας σε αυτόν τον κόμβο.</access-denied>
-      <access-add-denied>Δεν επιτρέπεται η πρόσβαση. Δεν έχετε άδεια να προσθέσετε σε αυτόν τον κόμβο.</access-add-denied>
+      <is-not-referenable>'{0}' can't be referenceable.</is-not-referenable>
+      <access-denied>Access denied. You don't have edit permission for this item.</access-denied>
+      <access-add-denied>Access denied. You don't have permission to add items here.</access-add-denied>
       <item-existed>Αυτός ο κόμβος υπάρχει ήδη. Δεν μπορούν δύο κόμβοι στο ίδιο επίπεδο να έχουν το ίδιο όνομα.</item-existed>
       <removed-hidden-mixin>Ο κόμβος είναι πλέον ορατός.</removed-hidden-mixin>
       <added-hidden-mixin>Ο κόμβος είναι πλέον κρυφός.</added-hidden-mixin>
       <not-supported>Αυτή η λειτουργία υποστηρίζεται μόνο για τον τύπο εγγράφου.</not-supported>
-      <empty-file-type>Δεν μπορείτε να προσθέσετε έγγραφο σε αυτόν τον κόμβο.</empty-file-type>
-      <unsupported-watch>Μόνο ο κόμβος εγγράφου μπορεί να παρακολουθείται.</unsupported-watch>
-      <watch-checkedin>Πρέπει να αποδεσμεύσετε τον κόμβο πριν ξεκινήσετε να τον παρακολουθείτε.</watch-checkedin>
-      <unsupported-tagging>Μόνο στον κόμβο εγγράφου μπορούν να εισαχθούν ετικέτες.</unsupported-tagging>
-      <tagnode-checkedin>Πρέπει να αποδεσμεύσετε τον κόμβο πριν του βάλετε ετικέτες.</tagnode-checkedin>
+      <empty-file-type>You can't add a document here.</empty-file-type>
+      <unsupported-watch>Only documents can be watched.</unsupported-watch>
+      <watch-checkedin>You must check out the document before watching.</watch-checkedin>
+      <unsupported-tagging>Only documents can be tagged.</unsupported-tagging>
+      <tagnode-checkedin>You must check out the document before tagging.</tagnode-checkedin>
     </msg>
     <title>
       <select-tab>Επιλέξτε καρτέλα</select-tab>
@@ -361,48 +361,48 @@
   </UIActionBar>
   <UIPopupMenu>
     <msg>
-      <has-not-permission>Δεν επιτρέπεται η πρόσβαση. Δεν έχετε άδεια να προσθέσετε σε αυτόν τον κόμβο.</has-not-permission>
-      <has-not-edit-permission>Δεν επιτρέπεται η πρόσβαση. Δεν έχετε δικαιώματα επεξεργασίας σε αυτόν τον κόμβο. Επικοινωνήστε με το διαχειριστή.</has-not-edit-permission>
-      <cannot-login-node>Δεν μπορείτε να έχετε πρόσβαση και να επικολλήσετε το κόμβο εδώ.</cannot-login-node>
-      <cannot-paste-nodetype>Δεν μπορείτε να επικολλήσετε το κόμβο εδώ.</cannot-paste-nodetype>
-      <has-not-permission-unlok>Δεν έχετε άδεια για να ξεκλειδώσετε αυτόν τον κόμβο.</has-not-permission-unlok>
-      <bound-exception>Δεν έχετε άδεια να μετονομάσετε αυτόν τον κόμβο. Επικοινωνήστε με το διαχειριστή.</bound-exception>
-      <bound-move-exception>Δεν μπορείτε να μετακινήσετε τον κόμβο στον εαυτό του ή σε κόμβο που εμπεριέχει.</bound-move-exception>
-      <does-not-support-auditing>Δεν μπορείτε να ενεργοποιήσετε τον έλεγχο σε αυτόν τον κόμβο.</does-not-support-auditing>
-      <can-not-rename-node>Δεν έχετε άδεια να μετονομάσετε αυτόν τον κόμβο. Παρακαλώ επικοινωνήστε με το διαχειριστή για να πάρετε το σχετικό δικαίωμα.</can-not-rename-node>
-      <can-not-cut-node>Δεν έχετε άδεια να αποκόψετε αυτόν τον κόμβο. Επικοινωνήστε με το διαχειριστή.</can-not-cut-node>
-      <can-not-remove-node>Δεν έχετε άδεια να διαγράψετε αυτόν τον κόμβο. Επικοινωνήστε με το διαχειριστή.</can-not-remove-node>
-      <can-not-lock-node>Δεν έχετε άδεια να κλειδώσετε τον κόμβο {0}. Επικοινωνήστε με το διαχειριστή.</can-not-lock-node>
-      <can-not-unlock-node>Δεν έχετε άδεια για να ξεκλειδώσετε αυτόν τον κόμβο. Επικοινωνήστε με το διαχειριστή.</can-not-unlock-node>
-      <no-node>Παρακαλώ επιλέξτε τουλάχιστον έναν κόμβο πριν από την επικόλληση.</no-node>
-      <can-not-paste-node>Δεν έχετε άδεια να μετακινήσετε σε αυτόν τον κόμβο. Επικοινωνήστε με το διαχειριστή.</can-not-paste-node>
-      <can-not-move-node>Δεν έχετε άδεια να μετακινήσετε αυτόν τον κόμβο. Επικοινωνήστε με το διαχειριστή.</can-not-move-node>
-      <does-not-support-versioning>Δεν έχετε άδεια να μετακινήσετε σε αυτόν τον κόμβο. Επικοινωνήστε με το διαχειριστή.</does-not-support-versioning>
+      <has-not-permission>Access denied. You don't have permissions to add in this item.</has-not-permission>
+      <has-not-edit-permission>Access denied. You don't have edit permission here. Please contact the administrator.</has-not-edit-permission>
+      <cannot-login-node>You can't access and paste an item here.</cannot-login-node>
+      <cannot-paste-nodetype>You can't paste this type of item here.</cannot-paste-nodetype>
+      <has-not-permission-unlok>You don't have permission to unlock this document.</has-not-permission-unlok>
+      <bound-exception>You don't have the permission to rename this item. Please contact the administrator.</bound-exception>
+      <bound-move-exception>You can't move an item to itself or in a subfolder.</bound-move-exception>
+      <does-not-support-auditing>You can't activate auditing here.</does-not-support-auditing>
+      <can-not-rename-node>You don't have permission to rename this item. Please contact the administrator to get the necessary rights.</can-not-rename-node>
+      <can-not-cut-node>You don't have permission to cut this item. Please contact the administrator.</can-not-cut-node>
+      <can-not-remove-node>You don't have permission to remove this item. Please contact the administrator.</can-not-remove-node>
+      <can-not-lock-node>You don't have permission to lock {0}. Please contact the administrator.</can-not-lock-node>
+      <can-not-unlock-node>You don't have permission to unlock this item. Please contact the administrator.</can-not-unlock-node>
+      <no-node>Please select at least one item before pasting.</no-node>
+      <can-not-paste-node>You don't have permission to move to this item. Please contact the administrator.</can-not-paste-node>
+      <can-not-move-node>You don't have permission to move this item. Please contact the administrator.</can-not-move-node>
+      <does-not-support-versioning>You don't have permission to move. Please contact the administrator.</does-not-support-versioning>
       <path-not-found>Αυτό το στοιχείο έχει διαγραφεί ή έχει αλλάξει. Παρακαλώ κάντε κλικ στο κουμπί Ανανέωση.</path-not-found>
-      <paste-lock-exception>Δεν μπορείτε να επικολλήσετε '{0}' σε αυτόν τον κόμβο επειδή είτε ο αρχικός είτε ο προορισμός είναι κλειδωμένος ή σχετίζεται με κλειδωμένο κόμβο.</paste-lock-exception>
-      <can-not-checkin-node>Δεν μπορείτε να δεσμεύσετε αυτόν τον κόμβο. Παρακαλώ ελέγξτε ότι έχετε τα κατάλληλα δικαιώματα.</can-not-checkin-node>
-      <can-not-checkout-node>Δεν μπορείτε να αποδεσμεύσετε αυτόν τον κόμβο. Παρακαλώ ελέγξτε ότι έχετε τα κατάλληλα δικαιώματα.</can-not-checkout-node>
-      <move-constraint-exception>Παρουσιάστηκε σφάλμα κατά την μετακίνηση του κόμβου.</move-constraint-exception>
-      <not-lock-owner>Δεν μπορείτε να ξεκλειδώσετε αυτόν τον κόμβο, επειδή δεν είστε ο κάτοχος του κλειδώματος.</not-lock-owner>
-      <is-checked-in>Παρακαλώ αποδεσμεύστε τον κόμβο πριν τον μετονομάσετε.</is-checked-in>
-      <is-checked-in-lock>Παρακαλώ αποδεσμεύστε τον κόμβο πριν τον κλειδώσετε.</is-checked-in-lock>
-      <cant-lock>Δεν μπορείτε να κλειδώσετε αυτόν τον κόμβο.</cant-lock>
+      <paste-lock-exception>'{0}' can't be pasted here. Make sure it is not locked nor this folder. Also check that no related document is locked.</paste-lock-exception>
+      <can-not-checkin-node>You can't check in this item. Please check that you have the necessary permissions.</can-not-checkin-node>
+      <can-not-checkout-node>You can't check out this itel. Please check that you have the necessary permissions.</can-not-checkout-node>
+      <move-constraint-exception>An error occurred while moving this item.</move-constraint-exception>
+      <not-lock-owner>You can't unlock this item because you are not the lock owner.</not-lock-owner>
+      <is-checked-in>Please check out this item before renaming.</is-checked-in>
+      <is-checked-in-lock>Please check out this item before locking.</is-checked-in-lock>
+      <cant-lock>You can't lock this document.</cant-lock>
       <node-locked>Το στοιχείο με διαδρομή {0} ή ανώτερο επίπεδο είναι κλειδωμένο.</node-locked>
-      <can-not-delete>Παρακαλούμε κλείστε αυτόν τον κόμβο πριν από τη διαγραφή του.</can-not-delete>
-      <can-not-delete-version>Δεν μπορείτε να διαγράψετε αυτόν τον κόμβο. Πρόκειται για τήρηση ιστορικού εκδόσεων.</can-not-delete-version>
-      <not-support>Δεν μπορείτε να διαγράψετε τον επιλεγμένο κόμβο. Επιλέξτε έναν άλλο κόμβο.</not-support>
-      <current-node-not-allow-paste>Δεν μπορείτε να επικολλήσετε τον συγκεκριμένο τύπο κόμβου στον τρέχοντα κόμβο.</current-node-not-allow-paste>
-      <copied-node-in-versioning>Δεν μπορείτε να επικολλήσετε την συγκεκριμένο κόμβο. Πρόκειται για τήρηση ιστορικού εκδόσεων.</copied-node-in-versioning>
-      <parent-node-locked>Δεν έχετε άδεια για να ξεκλειδώσετε τον κόμβο '{0}'.</parent-node-locked>
-      <this-node-locked-by-parent>Δεν μπορείτε να ξεκλειδώσετε αυτόν τον κόμβο. Είναι κλειδωμένος από τον γονικό ή ανώτερο κόμβο.</this-node-locked-by-parent>
-      <paste-node-same-name>Δεν μπορείτε να επικολλήσετε έναν κόμβο με το ίδιο όνομα με έναν άλλον κόμβο στο φάκελο προορισμού.</paste-node-same-name>
-      <has-not-add-permission>Δεν έχετε άδεια για να προσθέσετε ένα νέο κόμβο.</has-not-add-permission>
-      <node-cutting>Ο κόμβος αποκόβεται αυτή τη στιγμή. Δεν μπορείτε να κάνετε επικόλληση εδώ.</node-cutting>
-      <access-denied>Δεν επιτρέπεται η πρόσβαση. Πιθανώς δεν έχετε άδεια σε αυτόν τον κόμβο.</access-denied>
-      <remove-verion-exception>Δεν μπορείτε να καταργήσετε αυτόν τον κόμβο επειδή αυτός (ή κάποιος ανώτερός του) είναι δεσμευμένος.</remove-verion-exception>
-      <remove-referentialIntegrityException>Δεν μπορείτε να διαγράψετε αυτόν τον κόμβο επειδή αυτή τη στιγμή στόχος μιας ιδιότητας αναφοράς.</remove-referentialIntegrityException>
-      <constraintviolation-exception>Το υποχρεωτικό στοιχείο jcr:uuid δεν βρέθηκε. Ο κόμβος μπορεί να έχει διαγραφεί ή αλλαχθεί. Παρακαλώ κάντε κλικ στο κουμπί Ανανέωση.</constraintviolation-exception>
-      <path-not-found-exception>Αυτός ο κόμβος έχει διαγραφεί ή αλλάξει. Παρακαλώ κάντε κλικ στο κουμπί Ανανέωση.</path-not-found-exception>
+      <can-not-delete>Please close this item before deleting.</can-not-delete>
+      <can-not-delete-version>You can't delete this document. It's versioned.</can-not-delete-version>
+      <not-support>You can't delete the selected item. Please select another one.</not-support>
+      <current-node-not-allow-paste>You can't paste the copied item there.</current-node-not-allow-paste>
+      <copied-node-in-versioning>You can't paste the copied item here because it's versioned.</copied-node-in-versioning>
+      <parent-node-locked>You don't have permission to unlock '{0}'.</parent-node-locked>
+      <this-node-locked-by-parent>You can't unlock this item. Parent folder is locked.</this-node-locked-by-parent>
+      <paste-node-same-name>Can't paste this item here. An item with the same name already exists in the destination folder.</paste-node-same-name>
+      <has-not-add-permission>You don't have the permission to add here.</has-not-add-permission>
+      <node-cutting>Item is being cut. You can't paste it here.</node-cutting>
+      <access-denied>Access denied. You may not have the permission.</access-denied>
+      <remove-verion-exception>You can't remove this document because it is checked in.</remove-verion-exception>
+      <remove-referentialIntegrityException>You can't delete this item because it is currently referenced by another one.</remove-referentialIntegrityException>
+      <constraintviolation-exception>The mandatory property jcr:uuid was not found. The document may have been deleted or changed. Please click the Refresh button.</constraintviolation-exception>
+      <path-not-found-exception>This document was deleted or changed. Please click the Refresh button.</path-not-found-exception>
       <not-exist-categories>Η κατηγορία δεν υπάρχει.</not-exist-categories>
       <lock-node-read-only>Αυτό το αρχείο είναι κλειδωμένο από το χρήστη {0}. Άνοιγμα μόνο για ανάγνωση;</lock-node-read-only>
     </msg>
@@ -428,12 +428,12 @@
       <title-invalid>Παρακαλούμε εισάγετε τον τίτλο του φακέλου.</title-invalid>
       <name-not-allowed>Αυτό το όνομα δεν επιτρέπεται.</name-not-allowed>
       <fileName-error>Το όνομα αρχείου δεν είναι έγκυρο.</fileName-error>
-      <constraint-violation>Ο τρέχον κόμβος δεν σας επιτρέπει να προσθέσετε τον τύπο κόμβου '{0}'.</constraint-violation>
+      <constraint-violation>You can't add a document of type '{0}' here.</constraint-violation>
       <repository-exception>Παρουσιάστηκε μη αναμενόμενο σφάλμα. Επικοινωνήστε με το διαχειριστή σας για περισσότερες λεπτομέρειες.</repository-exception>
-      <repository-exception-permission>Δεν έχετε άδεια για να προσθέσετε ένα νέο φάκελο σε αυτόν τον κόμβο.</repository-exception-permission>
+      <repository-exception-permission>You don't have the permission to add a new folder here.</repository-exception-permission>
       <numberformat-exception>Δεν μπορείτε να αποθηκεύσετε αυτό το φάκελο. Το όνομα που παρέχεται πρέπει να είναι σε αριθμητική μορφή.</numberformat-exception>
       <!--DMS 2.4.x; ECM-3553-->
-      <not-allow-sameNameSibling>Δεν μπορείτε να αποθηκεύσετε το φάκελο. Αυτός ο κόμβος δεν δέχεται δύο κόμβους με το ίδιο όνομα.</not-allow-sameNameSibling>
+      <not-allow-sameNameSibling>You can't save the folder. An item with the same name already exists.</not-allow-sameNameSibling>
       <ntFolder-not-avaiable>Πρέπει να επιλέξετε έναν προσαρμοσμένο τύπο φακέλου</ntFolder-not-avaiable>
     </msg>
     <help>
@@ -500,26 +500,26 @@
       <feedback-restore>'{0}' επαναφέρθηκε με επιτυχία.</feedback-restore>
       <feedback-restore-multi>{0} στοιχεία αποκαταστάθηκαν με επιτυχία.</feedback-restore-multi>
       
-      <confirm-restore>Ένας κόμβος με το ίδιο όνομα υπάρχει ήδη στην παλιά θέση του κόμβου '{0}'. Είστε βέβαιοι ότι θέλετε να επαναφέρετε αυτόν τον κόμβο;</confirm-restore>
+      <confirm-restore>A '{0}' item already exists at the previous location. Are you sure you want to restore it?</confirm-restore>
       <confirm-move>Είστε βέβαιοι ότι θέλετε να μετακινήσετε;</confirm-move>
-      <node-cut>Ο κόμβος '{0}' έχει αποκοπεί.</node-cut>
+      <node-cut>'{0}' has been cut.</node-cut>
       <execute-successfully>Η προσαρμοσμένη ενέργεια '{0}' έχει εκτελεσθεί.</execute-successfully>
-      <save-node-success>Ο κόμβος '{0}' έχει αποθηκευτεί.</save-node-success>
-      <move-problem>Δεν μπορείτε να μετακινήσετε τον κόμβο '{0}' στο '{1}', επειδή υπήρχε ένα πρόβλημα με τα δικαιώματα ή τους περιορισμούς.</move-problem>
+      <save-node-success>'{0}' has been saved.</save-node-success>
+      <move-problem>You can't move '{0}' to '{1}' because there was a problem with permissions or constraint conditions.</move-problem>
     </msg>
   </UIWorkingArea>
   <UIDocumentWorkspace>
     <label>
-      <no-children>Αυτός ο κόμβος δεν εμπεριέχει άλλους κόμβους.</no-children>
-      <no-children-but-has-hidden>Αυτός ο κόμβος δεν εμπεριέχει άλλους κόμβους, αλλά υπάρχουν μερικά κρυμμένα αρχεία.</no-children-but-has-hidden>
+      <no-children>This item doesn't have children.</no-children>
+      <no-children-but-has-hidden>This folder does not have any item, but there are some hidden files.</no-children-but-has-hidden>
     </label>
     <msg>
-      <unable-save-node>Ο κόμβος '{0}' έχει δημιουργηθεί πρόσφατα. Παρακαλούμε να αποθηκεύσετε την σύνοδο πριν από την εκτέλεση αυτής της ενέργειας.</unable-save-node>
-      <save-node-success>Ο κόμβος '{0}' έχει αποθηκευτεί.</save-node-success>
-      <node-copied>Ο κόμβος '{0}' έχει αντιγραφεί.</node-copied>
-      <node-cut>Ο κόμβος '{0}' έχει αποκοπεί.</node-cut>
-      <remove-root>Δεν μπορείτε να καταργήσετε τον κόμβο ρίζας.</remove-root>
-      <node-remove-success>Ο κόμβος '{0}' έχει αφαιρεθεί.</node-remove-success>
+      <unable-save-node>'{0}' has been created. Please save session to validate this action.</unable-save-node>
+      <save-node-success>'{0}' has been saved.</save-node-success>
+      <node-copied>'{0}' has been copied.</node-copied>
+      <node-cut>'{0}' has been cut.</node-cut>
+      <remove-root>You can't remove the root folder.</remove-root>
+      <node-remove-success>'{0}' has been removed.</node-remove-success>
     </msg>
     <tooltip>
       <Rename>Μετονομασία</Rename>
@@ -538,11 +538,11 @@
   </UIDocumentWorkspace>
   <UIDocumentInfo>
     <msg>
-      <access-denied>Δεν επιτρέπεται η πρόσβαση. Δεν μπορείτε να έχετε πρόσβαση στον κόμβο '{0}'.</access-denied>
-      <null-exception>Το στοιχείο δεν βρέθηκε. Είτε έχει αφαιρεθεί είτε αλλάξει ή δεν έχετε δικαίωμα πρόσβασης σε αυτόν τον κόμβο.</null-exception>
+      <access-denied>Access denied. You can't access '{0}'.</access-denied>
+      <null-exception>Item not found. It was either removed or changed, or you don't have the access permission.</null-exception>
       <confirm-deleteattachment>Είστε βέβαιοι ότι θέλετε να καταργήσετε αυτό το συνημμένο αρχείο;</confirm-deleteattachment>
       <confirm-deleteattcomment>Είστε βέβαιοι ότι θέλετε να καταργήσετε αυτό το σχόλιο;</confirm-deleteattcomment>
-      <access-denied-exception>Δεν επιτρέπεται η πρόσβαση. Πιθανώς δεν έχετε δικαιώματα ανάγνωσης ή ο κόμβος μπορεί να έχει καταργηθεί/τροποποιηθεί.</access-denied-exception>
+      <access-denied-exception>Access denied. You may not have reading privileges, or the documen may have been removed or changed.</access-denied-exception>
       <path-not-found>Αυτό το στοιχείο έχει διαγραφεί ή έχει αλλάξει. Παρακαλώ κάντε κλικ στο κουμπί Ανανέωση.</path-not-found>
     </msg>
     <tooltip>
@@ -601,7 +601,7 @@
       <OpenDocument>Απομακρυσμένη επεξεργασία</OpenDocument>
       <EditProperty>Edit Document Properties</EditProperty>
       <UploadNewVersion>Upload a new version</UploadNewVersion>
-      <CreateNewVersion>Create a new version</CreateNewVersion>
+      <CreateNewVersion>Save as new version</CreateNewVersion>
     </event>
   </ECMContextMenu>
  
@@ -733,8 +733,8 @@
       <name-invalid>Please enter the property name.</name-invalid>
       <unable-create>Cannot add properties.</unable-create>
       <value-invalid>Please enter the value.</value-invalid>
-      <node-checkedin>You must check out this node before adding a property.</node-checkedin>
-      <can-not-add>You cannot add properties to this node. This is only allowed for the node type nt:unstructured.</can-not-add>
+      <node-checkedin>You must check out this item before adding a property.</node-checkedin>
+      <can-not-add>You can't add properties to this item. This is only allowed for the type nt:unstructured.</can-not-add>
       <propertyName-invalid>The property name must include namespace (e.g. namespace:name).</propertyName-invalid>
       <propertyName-exist>The property '{0}' already exists.</propertyName-exist>
       <propertyValu-null>Some values may be null.</propertyValu-null>
@@ -795,7 +795,7 @@
       <selectUser>Επιλογή χρήστη</selectUser>
     </label>
     <msg>
-      <not-change-owner>'{0}' is the owner of this node and has full control permission.</not-change-owner>
+      <not-change-owner>'{0}' is the owner of this item and has full control permission.</not-change-owner>
     </msg>
   </UIGroupSelector>
   <UIPermissionForm>
@@ -807,7 +807,7 @@
       <add_node>Modify Right</add_node>
       <remove>Remove Right</remove>
     </label>
-    <title>Add a permission to that node</title>
+    <title>Add a permission</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>#{word.save}</Save>
@@ -914,7 +914,7 @@
   </ViewSearch>
   <UISearchResult>
     <msg>
-      <not-support>There is no View template for this node.</not-support>
+      <not-support>There is no View template for this document.</not-support>
       <empty>Δεν βρέθηκαν αποτελέσματα.</empty>
       <access-denied>You cannot open this folder, either because it no longer exists or because you do not have the right to access it.</access-denied>
       <query-invalid>The query is invalid.</query-invalid>
@@ -939,15 +939,15 @@
       <datecreatedDESC>Sort by created date in descending order</datecreatedDESC>
     </title>
     <tooltip>
-      <View>View this node</View>
+      <View>View this item</View>
       <OpenFolder>Go to folder</OpenFolder>
     </tooltip>
   </UISearchResult>
   <UIShowAllOwnedByUserResult>
     <msg>
-      <not-support>There is no View template for this node</not-support>
+      <not-support>There is no View template for this document</not-support>
       <empty>Δεν βρέθηκαν αποτελέσματα.</empty>
-      <access-denied>You cannot view this node, either because this template is not supported or because access is denied.</access-denied>
+      <access-denied>You can't view this document, either because this template is not supported or because access is denied.</access-denied>
       <query-invalid>The query is invalid</query-invalid>
     </msg>
     <header>
@@ -970,15 +970,15 @@
       <datecreatedDESC>Sort by Created date in descending order</datecreatedDESC>
     </title>
     <tooltip>
-      <View>Δείτε αυτόν τον κόμβο</View>
+      <View>View this item</View>
       <OpenFolder>Go to Folder</OpenFolder>
     </tooltip>
   </UIShowAllOwnedByUserResult>
   <UIShowAllFavouriteResult>
     <msg>
-      <not-support>Δεν υπάρχει πρότυπο προβολής για αυτόν τον κόμβο</not-support>
+      <not-support>There is no View template for this item</not-support>
       <empty>No results found</empty>
-      <access-denied>Δεν μπορείτε να δείτε αυτόν τον κόμβο, είτε επειδή αυτό το πρότυπο δεν υποστηρίζεται είτε δεν επιτρέπεται η πρόσβαση.</access-denied>
+      <access-denied>You can't view this item, either because this template is not supported or because access is denied.</access-denied>
       <query-invalid>Το ερώτημα δεν είναι έγκυρο</query-invalid>
     </msg>
     <header>
@@ -1001,15 +1001,15 @@
       <datecreatedDESC>Ταξινόμηση κατά ημερομηνία δημιουργίας σε φθίνουσα σειρά</datecreatedDESC>
     </title>
     <tooltip>
-      <View>View this Node</View>
+      <View>View this item</View>
       <OpenFolder>Άνοιγμα φακέλου</OpenFolder>
     </tooltip>
   </UIShowAllFavouriteResult>
   <UIShowAllHiddenResult>
     <msg>
-      <not-support>Δεν υπάρχει πρότυπο προβολής για αυτόν τον κόμβο.</not-support>
+      <not-support>There is no View template for this item.</not-support>
       <empty>Δεν βρέθηκαν αποτελέσματα.</empty>
-      <access-denied>Δεν μπορείτε να δείτε αυτόν τον κόμβο, είτε επειδή αυτό το πρότυπο δεν υποστηρίζεται είτε δεν επιτρέπεται η πρόσβαση.</access-denied>
+      <access-denied>You can't view this item, either because it has no View template or because you don't have access to it.</access-denied>
       <query-invalid>Το ερώτημα δεν είναι έγκυρο.</query-invalid>
     </msg>
     <header>
@@ -1033,16 +1033,16 @@
       <datecreatedDESC>Ταξινόμηση κατά ημερομηνία δημιουργίας σε φθίνουσα σειρά</datecreatedDESC>
     </title>
     <tooltip>
-      <View>Δείτε αυτόν τον κόμβο</View>
+      <View>View this Item</View>
       <OpenFolder>Άνοιγμα φακέλου</OpenFolder>
       <RemoveHiddenAttribute>Remove Hidden Attribute</RemoveHiddenAttribute>
     </tooltip>
   </UIShowAllHiddenResult>
   <UIShowAllTrashResult>
     <msg>
-      <not-support>Δεν υπάρχει πρότυπο προβολής για αυτόν τον κόμβο.</not-support>
+      <not-support>There is no View template for this item.</not-support>
       <empty>Δεν βρέθηκαν αποτελέσματα</empty>
-      <access-denied>Δεν μπορείτε να δείτε αυτόν τον κόμβο, είτε επειδή αυτό το πρότυπο δεν υποστηρίζεται είτε δεν επιτρέπεται η πρόσβαση.</access-denied>
+      <access-denied>You can't view this item, either because it has no View template or because you don't have access to it.</access-denied>
       <query-invalid>Το ερώτημα δεν είναι έγκυρο.</query-invalid>
     </msg>
     <header>
@@ -1065,7 +1065,7 @@
       <datecreatedDESC>Ταξινόμηση κατά ημερομηνία δημιουργίας σε φθίνουσα σειρά</datecreatedDESC>
     </title>
     <tooltip>
-      <View>Δείτε αυτόν τον κόμβο</View>
+      <View>View this Item</View>
       <OpenFolder>Άνοιγμα φακέλου</OpenFolder>
       <DeletePermanently>Delete permanently</DeletePermanently>
       <RestoreFromTrash>Επαναφορά από κάδο</RestoreFromTrash>
@@ -1321,7 +1321,7 @@
       <Cancel>#{word.cancel}</Cancel>
       <Export>Εξαγωγή</Export>
     </action>
-    <title>Εξαγωγή κόμβου</title>
+    <title>Export</title>
   </UIExportNode>
   <!--
   ###############################################################################
@@ -1366,8 +1366,8 @@
       <error-removing-referenced-version>This version is referenced and can't be removed.</error-removing-referenced-version>
       <confirm-restore>Are you sure you want to restore this version?</confirm-restore>
       <confirm-delete>Είστε βέβαιοι ότι θέλετε να καταργήσετε αυτήν την έκδοση;</confirm-delete>
-      <not-checked-out>Πρέπει να αποδεσμεύσετε τον κόμβο πριν τον επαναφέρετε.</not-checked-out>
-      <invalid-item-state>Δεν μπορείτε να επαναφέρετε αυτήν την έκδοση, διότι ένα ή περισσότερα στοιχεία έχουν διαγραφεί ή  μετακινηθεί κατά τη διάρκεια μιας άλλης περιόδου λειτουργίας.</invalid-item-state>
+      <not-checked-out>You have to check out this document before restoring.</not-checked-out>
+      <invalid-item-state>You can't restore this version, either because one or more items were deleted or moved by another session.</invalid-item-state>
     </msg>
     <action>
       <close>#{word.close}</close>
@@ -1392,8 +1392,8 @@
       <noVersion>Καμία έκδοση</noVersion>
     </msg>
     <eventName>
-      <e_1>Ο κόμβος προστέθηκε</e_1>
-      <e_2>Ο κόμβος αφαιρέθηκε</e_2>
+      <e_1>Added</e_1>
+      <e_2>Document Removed</e_2>
       <e_4>Η ιδιότητα προστέθηκε</e_4>
       <e_16>Η ιδιότητα μεταβλήθηκε</e_16>
       <e_8>Η ιδιότητα αφαιρέθηκε</e_8>
@@ -1433,13 +1433,13 @@
   -->
   <UIActivateVersion>
     <label>
-      <note>Η διαχείριση εκδόσεων δεν έχει ενεργοποιηθεί για αυτόν τον κόμβο.</note>
+      <note>Versioning has not been activated for this document.</note>
       <question>Είστε βέβαιοι ότι θέλετε να το ενεργοποιήσετε;</question>
       <button-active>Ενεργοποίηση</button-active>
       <button-cancel>#{word.cancel}</button-cancel>
     </label>
     <msg>
-      <access-denied>Δεν έχετε άδεια για να ενεργοποιήσετε την τήρηση ιστορικού εκδόσεων σε αυτόν τον κόμβο</access-denied>
+      <access-denied>You don't have permission to activate versioning on this document</access-denied>
     </msg>
   </UIActivateVersion>
   <!--
@@ -1462,7 +1462,7 @@
       </msg>
     </grid>
     <msg>
-      <node-type-invalid>Μπορούν να εγγραφούν μόνο οι κόμβοι με τύπο εγγράφου.</node-type-invalid>
+      <node-type-invalid>Only documents can be enrolled.</node-type-invalid>
       <already-enroled>Αυτό το έγγραφο έχει ήδη εγγραφεί.</already-enroled>
     </msg>
   </UIActivePublication>
@@ -1473,7 +1473,7 @@
   -->
   <UIActivateAuditing>
     <label>
-      <note>Ο έλεγχος δεν έχει ενεργοποιηθεί για αυτόν τον κόμβο.</note>
+      <note>Auditing has not been activated for this document.</note>
       <question>Είστε βέβαιοι ότι θέλετε να το ενεργοποιήσετε;</question>
     </label>
     <action>
@@ -1516,7 +1516,7 @@
       <Cancel>#{word.cancel}</Cancel>
       <Import>Εισαγωγή</Import>
     </action>
-    <title>Εισαγωγή κόμβου</title>
+    <title>Import</title>
     <msg>
       <import-successful>Η εισαγωγή ολοκληρώθηκε με επιτυχία.</import-successful>
       <filename-invalid>Περιηγηθείτε για ένα αρχείο .xml για το πεδίο "Ανέβασμα αρχείου" για την εισαγωγή.</filename-invalid>
@@ -1524,8 +1524,8 @@
       <xml-invalid>Υπάρχει ένας μη έγκυρος χαρακτήρας στη θέση [γραμμή, στήλη]: {0} στο αρχείο {1}</xml-invalid>
       <mimetype-invalid>Μπορούν να εισαχθούν μόνο αρχεία .xml ή .zip.</mimetype-invalid>
       <access-denied>Δεν επιτρέπεται η πρόσβαση. Δεν επιτρέπεται να κάνετε εισαγωγή εκεί.</access-denied>
-      <constraint-violation-exception>Αδύνατη εισαγωγή δεδομένων. Ο τύπος '{0}' δεν επιτρέπεται σε αυτήν τη θέση.</constraint-violation-exception>
-      <item-exists-exception>Ένας εισερχόμενος κόμβος έχει το ίδιο UUID με έναν υπάρχον κόμβο στο χώρο εργασίας.</item-exists-exception>
+      <constraint-violation-exception>Impossible to import data. The type '{0}' is not allowed at this location.</constraint-violation-exception>
+      <item-exists-exception>An incoming item has the same UUID as an existing item in the workspace.</item-exists-exception>
     </msg>
   </UIImportNode>
   <!--
@@ -1573,7 +1573,7 @@
   <UIViewVersion>
     <label>
       <nodeType>Τύπος κόμβου</nodeType>
-      <nodeName>Όνομα κόμβου</nodeName>
+      <nodeName>Name</nodeName>
       <VersionNumber>Αρıθμός έκδοσης</VersionNumber>
       <VersionLabels>Ετικέτες έκδοσης</VersionLabels>
       <VersionDate>Ημερομηνία έκδοσης</VersionDate>
@@ -1609,7 +1609,7 @@
       <action>Ενέργειες</action>
     </header>
     <msg>
-      <access-denied>Δεν επιτρέπεται η πρόσβαση. Δεν έχετε δικαίωμα πρόσβασης σε αυτόν τον κόμβο.</access-denied>
+      <access-denied>Access denied. You don't have access permission.</access-denied>
       <confirm-delete>Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτήν την αναφορά;</confirm-delete>
     </msg>
     <action>
@@ -1629,7 +1629,7 @@
       <action>Ενέργεια</action>
     </header>
     <info>
-      <child-not-found>Αυτός ο κόμβος δεν εμπεριέχει άλλους κόμβους.</child-not-found>
+      <child-not-found>This item doesn't have any child.</child-not-found>
     </info>
   </UITreeList>
   <!--
@@ -1685,8 +1685,8 @@
       <clearall>Εκκαθάριση όλων</clearall>
     </action>
     <msg>
-      <unable-pasted>Δεν είναι δυνατή η επικόλληση του κόμβου.</unable-pasted>
-      <node-pasted>Ο κόμβος '{0}' επικολλήθηκε στην τοποθεσία '{1}'. Αυτή η λειτουργία έχει ήδη αποθηκευτεί.</node-pasted>
+      <unable-pasted>Can't paste this item.</unable-pasted>
+      <node-pasted>{0} has been pasted at location {1}. This operation has already been saved.</node-pasted>
     </msg>
   </UIClipboard>
   <!--
@@ -1727,15 +1727,15 @@
 </tooltip>
     <msg>
       <cannot-save>Παρουσιάστηκε σφάλμα κατά την αποθήκευση του εγγράφου.</cannot-save>
-      <in-versioning>Παρακαλώ αποδεσμεύστε αυτόν τον κόμβο πριν προσθέσετε έναν καινούργιο.</in-versioning>
+      <in-versioning>Please check out the current folder before adding a new item.</in-versioning>
       <not-support>Δεν μπορεί να φορτωθεί το πρότυπο του '{0}'.</not-support>
       <value-invalid>'{0}' είναι υποχρεωτική τιμή.</value-invalid>
       <repository-exception>Παρουσιάστηκε σφάλμα κατά την αποθήκευση του εγγράφου.</repository-exception>
       <!--DMS 2.4.x; ECM-3543-->
-      <repository-exception-permission>Δεν έχετε άδεια για να προσθέσετε ένα νέο έγγραφο σε αυτόν τον κόμβο.</repository-exception-permission>
+      <repository-exception-permission>You don't have permission to add a new document to this folder.</repository-exception-permission>
       <not-allowed-same-name-sibling>Δεν μπορείτε να αποθηκεύσετε αυτό το έγγραφο. Δεν επιτρέπεται να έχουν το ίδιο όνομα στο ίδιο επίπεδο.</not-allowed-same-name-sibling>
       <numberformat-exception>Δεν μπορείτε να αποθηκεύσετε αυτό το έγγραφο. Το όνομα που παρέχεται πρέπει να είναι σε αριθμητική μορφή.</numberformat-exception>
-      <item-not-found>Το στοιχείο δεν βρέθηκε. Αυτός ο κόμβος (ή κάποιος ανώτερος) μπορεί να έχει διαγραφεί. Παρακαλώ κάντε κλικ στο κουμπί Ανανέωση.</item-not-found>
+      <item-not-found>Document not found. This document (or its ancestor) may have been deleted. Please click the Refresh button.</item-not-found>
     </msg>
   </UIDocumentForm>
   <!--
@@ -1800,7 +1800,7 @@
       <action>Ενέργεια</action>
     </header>
     <msg>
-      <remove-popup-first>Πρέπει να κλείσετε το παράθυρο της επεξεργασίας πριν από τη διαγραφή αυτού του κόμβου.</remove-popup-first>
+      <remove-popup-first>You must close the edit pop-up before deleting this item.</remove-popup-first>
       <confirm-delete-action>Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτήν την ενέργεια;</confirm-delete-action>
       <template-empty>Το πρότυπο '{0}' είναι κενό ή δεν έχει οριστεί.</template-empty>
       <template-null>Το πρότυπο δεν έχει οριστεί ή δεν έχετε δικαίωμα πρόσβασης σε αυτό το πρότυπο.</template-null>
@@ -1826,7 +1826,7 @@
       <numberformat-exception>Δεν μπορείτε να αποθηκεύσετε αυτή την ενέργεια. Το όνομα που παρέχεται πρέπει να είναι σε αριθμητική μορφή.</numberformat-exception>
       <existed-action>Το όνομα της ενέργειας '{0}' υπάρχει ήδη. Παρακαλώ επιλέξτε ένα άλλο όνομα.</existed-action>
       <unable-add-action>Δεν μπορώ να προσθέσω αυτήν την ενέργεια.</unable-add-action>
-      <unable-add>Δεν μπορώ να προσθέσω αυτήν την ενέργεια. Αυτός ο κόμβος είναι είτε ρίζα ή δεν έχετε άδεια.</unable-add>
+      <unable-add>Can't add this action. This item is either the root folder or you don't have the permission to edit.</unable-add>
       <not-support>Το παράθυρο διαλόγου '{0}' δεν υποστηρίζεται.</not-support>
       <no-permission-add>Δεν επιτρέπεται η πρόσβαση. Δεν έχετε το δικαίωμα να προσθέσετε μια ενέργεια εδώ.</no-permission-add>
       <access-denied>Δεν επιτρέπεται η πρόσβαση. Δεν έχετε δικαίωμα πρόσβασης σε αυτό το πρότυπο.</access-denied>
@@ -1865,7 +1865,7 @@
   <UIAddressBar>
     <msg>
       <path-not-found>Η διαδρομή δεν βρέθηκε.</path-not-found>
-      <access-denied>Δεν επιτρέπεται η πρόσβαση. Δεν έχετε το δικαίωμα να διαβάσετε τον κόμβο.</access-denied>
+      <access-denied>Access denied. You don't have the permission to read.</access-denied>
       <keyword-not-support>Η λέξη-κλειδί δεν είναι έγκυρη. Ορισμένοι χαρακτήρες δεν υποστηρίζονται.</keyword-not-support>
     </msg>
     <label>
@@ -1874,8 +1874,8 @@
     </label>
     <title>
       <exeButton>Εκτέλεση</exeButton>
-      <backButton>Επιστροφή στον προηγούμενο κόμβο</backButton>
-      <showHistory>Εμφάνιση ιστορικού διευθύνσεων</showHistory>
+      <backButton>Back</backButton>
+      <showHistory>Show History</showHistory>
       <changeNode>Αλλαγή του κόμβου</changeNode>
     </title>
   </UIAddressBar>
@@ -1937,7 +1937,7 @@
   -->
   <UIViewMetadataContainer>
     <msg>
-      <path-not-found>Ο κόμβος δεν υποστηρίζει αυτή την προβολή.</path-not-found>
+      <path-not-found>The document does not support this view.</path-not-found>
     </msg>
   </UIViewMetadataContainer>
   <!--
@@ -1958,7 +1958,7 @@
   </metadataForm>
   <UIViewMetadataTemplate>
     <msg>
-      <access-denied>Δεν επιτρέπεται η πρόσβαση. Είτε δεν είστε ιδιοκτήτης ή δεν έχετε δικαιώματα επεξεργασίας σε αυτόν τον κόμβο.</access-denied>
+      <access-denied>Access denied. Either you are not the owner or don't have edit permission.</access-denied>
     </msg>
   </UIViewMetadataTemplate>
   <!--
@@ -2034,7 +2034,7 @@
       <private>Ιδιωτικό</private>
       <state>Κατάσταση</state>
       <visibility>Ορατότητα</visibility>
-      <nodeName>Όνομα κόμβου:</nodeName>
+      <nodeName>Name:</nodeName>
       <lifecycleName>Όνομα του κύκλου ζωής</lifecycleName>
       <stateName>Όνομα κατάστασης</stateName>
     </label>
@@ -2058,7 +2058,7 @@
   </UIWorkspaceList>
   <pathSelector>
     <title>
-      <UIOneNodePathSelector>Επιλογέας κόμβου</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Selector</UIOneNodePathSelector>
     </title>
   </pathSelector>
   <!--
@@ -2166,9 +2166,9 @@
     </label>
     <msg>
       <mimetype-incorrect>Εσφαλμένο αρχείο τύπου. Οι μικρογραφίες μπορούν να δημιουργηθούν μόνο από αρχεία .JPG, .PNG ή .GIF.</mimetype-incorrect>
-      <access-denied>Δεν επιτρέπεται η πρόσβαση. Δεν έχετε άδεια για να προσθέσετε μια μικρογραφία σε αυτόν τον κόμβο.</access-denied>
+      <access-denied>Access denied. You don't have permission to add a thumbnail.</access-denied>
       <confirm-delete>Είστε βέβαιοι ότι θέλετε να καταργήσετε αυτή τη μικρογραφία;</confirm-delete>
-      <is-checked-in>Αυτός ο κόμβος είναι δεσμευμένος. Παρακαλώ αποδεσμεύστε τον πριν την εκτέλεση κάποιας ενέργειας.</is-checked-in>
+      <is-checked-in>This item is checked in. Please check out before performing any action.</is-checked-in>
       <fileName-error>Επιλέξτε ένα αρχείο για να φορτώσετε.</fileName-error>
     </msg>
     <title>
@@ -2272,7 +2272,7 @@
 
   <PopupSelectPath>
     <title>
-      <UIOneNodePathSelector>Επιλέξτε κόμβο</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Select Path</UIOneNodePathSelector>
     </title>
   </PopupSelectPath>
 
@@ -2302,7 +2302,7 @@
   <UISymLinkForm>
     <label>
       <symLinkName>Όνομα συντόμευσης</symLinkName>
-      <pathNode>Διαδρομή κόμβου</pathNode>
+      <pathNode>Path</pathNode>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -2313,16 +2313,16 @@
       <name-invalid>Παρακαλώ εισάγετε το όνομα για τη συντόμευση.</name-invalid>
       <name-not-allowed>Αυτό το όνομα δεν επιτρέπεται.</name-not-allowed>
       <fileName-error>Το όνομα αρχείου δεν είναι έγκυρο.</fileName-error>
-      <constraint-violation>Δεν μπορείτε να προσθέσετε τον τύπο κόμβου '{0}' στον τρέχοντα κόμβο.</constraint-violation>
-      <repository-exception>Δεν επιτρέπεται η πρόσβαση. Δεν έχετε άδεια για να προσθέσετε τη συντόμευση σε αυτόν τον κόμβο.</repository-exception>
+      <constraint-violation>You can't add an item of type '{0}' here.</constraint-violation>
+      <repository-exception>Access denied. You don't have permission to add a symlink here.</repository-exception>
       <numberformat-exception>Δεν μπορείτε να αποθηκεύσετε αυτό το φάκελο. Το όνομα που παρέχεται πρέπει να είναι σε αριθμητική μορφή.</numberformat-exception>
-      <path-node-invalid>Παρακαλούμε εισάγετε τη διαδρομή του κόμβου.</path-node-invalid>
+      <path-node-invalid>Please enter the path.</path-node-invalid>
       <path-node-not-allowed>Αυτό το όνομα δεν επιτρέπεται.</path-node-not-allowed>
-      <non-node>Παρακαλώ επιλέξτε τον κόμβο προορισμού. Πιθανόν να μην έχετε δικαίωμα να ανοίξετε τον γονικό κόμβο.</non-node>
-      <cannot-save>Δεν μπορείτε να προσθέσετε συντόμευση για αυτόν τον τύπο κόμβου.</cannot-save>
-      <item-exists-exception>Το όνομα του κόμβου υπάρχει ήδη.</item-exists-exception>
-      <translation-node-same-language-default>Ο μεταφρασμένος κόμβος έχει την ίδια προεπιλεγμένη γλώσσα με τον τρέχοντα κόμβο.</translation-node-same-language-default>
-      <UnsupportedRepositoryOperationException>Αυτός ο κόμβος προορισμού δεν αναφέρεται.</UnsupportedRepositoryOperationException>
+      <non-node>Please select the trust target; you may not have the rights to read this item.</non-node>
+      <cannot-save>You can't add a symlink for this type of document.</cannot-save>
+      <item-exists-exception>An item with this name already exists.</item-exists-exception>
+      <translation-node-same-language-default>The translated document has the same language as the default language of current document.</translation-node-same-language-default>
+      <UnsupportedRepositoryOperationException>This target item is not referred.</UnsupportedRepositoryOperationException>
     </msg>
   </UISymLinkForm>
   
@@ -2342,22 +2342,22 @@
       <name-invalid>Παρακαλώ εισάγετε το όνομα για τη συντόμευση.</name-invalid>
       <name-not-allowed>Αυτό το όνομα δεν επιτρέπεται.</name-not-allowed>
       <fileName-error>Το όνομα αρχείου δεν είναι έγκυρο.</fileName-error>
-      <constraint-violation>Δεν μπορείτε να προσθέσετε τον τύπο κόμβου '{0}' στον τρέχοντα κόμβο.</constraint-violation>
-      <repository-exception>Δεν επιτρέπεται η πρόσβαση. Δεν έχετε άδεια για να προσθέσετε τη συντόμευση σε αυτόν τον κόμβο.</repository-exception>
+      <constraint-violation>You can't add the '{0}' type to the current item.</constraint-violation>
+      <repository-exception>Access denied. You don't have permission to add a symlink to this item.</repository-exception>
       <numberformat-exception>Δεν μπορείτε να αποθηκεύσετε αυτό το φάκελο. Το όνομα που παρέχεται πρέπει να είναι σε αριθμητική μορφή.</numberformat-exception>
-      <path-node-invalid>Παρακαλούμε εισάγετε τη διαδρομή του κόμβου.</path-node-invalid>
+      <path-node-invalid>Please enter the path.</path-node-invalid>
       <path-node-not-allowed>Αυτό το όνομα δεν επιτρέπεται.</path-node-not-allowed>
-      <non-node>Παρακαλώ επιλέξτε τον κόμβο προορισμού. Πιθανόν να μην έχετε δικαίωμα να ανοίξετε τον γονικό κόμβο.</non-node>
+      <non-node>Please select the trust target; you may not have the right to read this node.</non-node>
       <cannot-save>Παρουσιάστηκε σφάλμα κατά τη δημιουργία της συντόμευσης.</cannot-save>
-      <item-exists-exception>Το όνομα του κόμβου υπάρχει ήδη.</item-exists-exception>
-      <translation-node-same-language-default>Ο μεταφρασμένος κόμβος έχει την ίδια προεπιλεγμένη γλώσσα με τον τρέχοντα κόμβο.</translation-node-same-language-default>
-      <UnsupportedRepositoryOperationException>Αυτός ο κόμβος προορισμού δεν αναφέρεται.</UnsupportedRepositoryOperationException>
+      <item-exists-exception>An item with this name already exists.</item-exists-exception>
+      <translation-node-same-language-default>The translated document has the same language as the default language of current document.</translation-node-same-language-default>
+      <UnsupportedRepositoryOperationException>This target item is not referred.</UnsupportedRepositoryOperationException>
     </msg>
   </UIAddTranslationForm>
 
   <UIPopupSymLink>
     <title>
-      <UIOneNodePathSelector>Επιλέξτε κόμβο προορισμού</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Select Target Item</UIOneNodePathSelector>
     </title>
   </UIPopupSymLink>
   <UIPopupSymLink>
@@ -2375,9 +2375,9 @@
 
   <UIWorkingArea>
     <msg>
-      <create-link-problem>Δεν μπορείτε να δημιουργήσετε μια σύνδεση για τον κόμβο '{0}' στο '{1}'.</create-link-problem>
-      <dest-node-is-link>Ο κόμβος προορισμού '{0}' είναι ήδη μια συντόμευση, συνεπώς δεν μπορείτε να δημιουργήσετε μια συντόμευση μέσα σ' αυτήν.</dest-node-is-link>
-      <selected-is-link>The selected node '{0}' is already a link. You cannot create a link that points to another link.</selected-is-link>
+      <create-link-problem>You can't create a link for '{0}' at '{1}'.</create-link-problem>
+      <dest-node-is-link>The destination '{0}' is already a symlink, so you cannot create a symlink inside it.</dest-node-is-link>
+      <selected-is-link>The selected item '{0}' is already a link. You can't create a link to another link.</selected-is-link>
       <confirm-create-link>Θέλετε να δημιουργήσετε μια συντόμευση σε αυτή τη θέση;</confirm-create-link>
     </msg>
   </UIWorkingArea>
@@ -2460,7 +2460,7 @@
 <ReadOnly>Άνοιγμα μόνο για ανάγνωση</ReadOnly>
 <Cancel>Cancel</Cancel>
       <KeepBoth>Keep Both</KeepBoth>
-      <CreateNewVersion>Create a new version</CreateNewVersion>
+      <CreateNewVersion>Save as new version</CreateNewVersion>
     </label>
   </UIConfirmMessage>
 
@@ -2516,7 +2516,7 @@
 
   <UIPopupMenu>
     <msg>
-      <node-locked-other-person>Αυτός ο κόμβος ή κάποιος ανώτερός του είναι κλειδωμένος από άλλο χρήστη, οπότε δεν μπορείτε να τον διαγράψετε.</node-locked-other-person>
+      <node-locked-other-person>This item or its parent folder is locked by another user, so you can't delete it.</node-locked-other-person>
     </msg>
   </UIPopupMenu>
 
@@ -2551,7 +2551,7 @@
 
   <UIPopupMenu>
     <msg>
-      <can-not-unlock-node-is-checked-in>Δεν μπορείτε να ξεκλειδώσετε επειδή ο κόμβος '{0}' (ή ανώτερος) είναι δεσμευμένος.</can-not-unlock-node-is-checked-in>
+      <can-not-unlock-node-is-checked-in>You can't unlock because the '{0}' (or its parent folder) is checked in.</can-not-unlock-node-is-checked-in>
     </msg>
   </UIPopupMenu>
 
@@ -2560,12 +2560,12 @@
   -->
   <UIActionBar>
     <msg>
-      <cannot-enable-version>Δεν μπορεί να ενεργοποιηθεί το ιστορικό εκδόσεων σε αυτό τον κόμβο.</cannot-enable-version>
+      <cannot-enable-version>Can't activate versioning on this document.</cannot-enable-version>
     </msg>
   </UIActionBar>
   <UIPopupMenu>
     <msg>
-        <cannot-readsource>Δεν μπορείτε να διαβάσετε δεδομένα από τον πηγαίο κόμβο.</cannot-readsource>
+        <cannot-readsource>You can't read data from the source.</cannot-readsource>
     </msg>
   </UIPopupMenu>
   <UIUploadForm>
@@ -2845,7 +2845,7 @@
 
     <UIPopupMenu>
     <msg>
-      <node-locked-editing>Δεν μπορείτε να επεξεργαστείτε αυτόν τον κόμβο με τη διαδρομή {0}. Είναι κλειδωμένος από άλλο χρήστη.</node-locked-editing>
+      <node-locked-editing>You can't edit  {0}. It's locked by another user.</node-locked-editing>
     </msg>
   </UIPopupMenu>
   <UITagStyleForm>
@@ -2939,12 +2939,12 @@
   </PathNode>
   <UIPopupPathFoRestore>
     <title>
-      <UIOneNodePathSelector>Επιλέξτε το γονικό κόμβο</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Select Parent</UIOneNodePathSelector>
     </title>
   </UIPopupPathFoRestore>
   <rootNodeInfo>
     <title>
-      <AddRootNode>Προσθήκη κόμβου-ρίζα</AddRootNode>
+      <AddRootNode>Add Root</AddRootNode>
     </title>
   </rootNodeInfo>
 
@@ -3156,9 +3156,9 @@
   </lifecyclePhase>
   <UIPopupMenu>
   <msg>
-<can-not-remove-locked-node>Ο κόμβος {0} είναι κλειδωμένος. Δεν μπορείτε να τον μετακινήσετε στον κάδο απορριμμάτων.</can-not-remove-locked-node>
-<can-not-remove-checked-in-node>Ο κόμβος {0} ή ο κόμβος στον οποίο ανήκει ελέγχεται. Δεν μπορείτε να τον μετακινήσετε στον κάδο απορριμμάτων.</can-not-remove-checked-in-node>
-<access-denied-to-delete>Δεν επιτρέπεται η πρόσβαση. Δεν μπορείτε να μετακινήσετε τον κόμβο {0} στον κάδο απορριμμάτων.</access-denied-to-delete>
+<can-not-remove-locked-node>{0} is locked. You can't move it to the Trash.</can-not-remove-locked-node>
+<can-not-remove-checked-in-node>{0} or its parent folder is checked in. You can't move it to the Trash.</can-not-remove-checked-in-node>
+<access-denied-to-delete>Access denied. You can't move {0} to the Trash.</access-denied-to-delete>
   </msg>
   </UIPopupMenu>
   <UIPropertyForm>
@@ -3168,8 +3168,8 @@
   </UIPropertyForm>
   <UIWatchDocumentForm>
     <msg>
-      <node-is-locked>Αυτός ο κόμβος είναι κλειδωμένος. Δεν μπορείτε να τον παρακολουθήσετε.</node-is-locked>
-      <unknown-error>Προέκυψαν σφάλματα. Δεν μπορείτε να παρακολουθήσετε αυτόν τον κόμβο.</unknown-error>
+      <node-is-locked>This item is locked. You cannot watch it.</node-is-locked>
+      <unknown-error>Some errors have occurred. You can't watch this document.</unknown-error>
     </msg>
   </UIWatchDocumentForm>   
   <UIActionForm>
@@ -3194,7 +3194,7 @@
     <Keep>Διατήρηση και των δύο</Keep>
     <Replace>Αντικατάσταση</Replace>
     <Canceled>Ακυρώθηκε</Canceled>
-      <UploadNewVersion>Upload new version</UploadNewVersion>
+      <UploadNewVersion>Upload a new version</UploadNewVersion>
     <Cancel>#{word.cancel}</Cancel>
     <AbortAllConfirmation>Θέλετε να ακυρώσετε όλα τα αρχεία σε εξέλιξη;</AbortAllConfirmation>
   </label>

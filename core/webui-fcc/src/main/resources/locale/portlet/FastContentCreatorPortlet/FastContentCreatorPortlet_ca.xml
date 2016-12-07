@@ -6,7 +6,7 @@
       <in-versioning>Si us plau comprovi el node actual abans d'afegir un de nou.</in-versioning>
       <cannot-save>S'ha produït un error mentre es desava el node.</cannot-save>
       <saved-successfully>{0}</saved-successfully>
-      <not-support>Cannot load the template of '{0}'.</not-support>
+      <not-support>No es pot carregar la plantilla de '{0}'.</not-support>
       <not-add-folder>Només es poden afegir fitxers a aquesta carpeta.</not-add-folder>
       <access-denied>Accés denegat. No té permís per afegir a '{0}'.</access-denied>
       <path-not-found>S'ha suprimit la ruta '{0}' o es invàlida.</path-not-found>
@@ -27,12 +27,12 @@
       <UIFCCWorkspaceFormSelectBox>Seleccioni un Espai de Treball</UIFCCWorkspaceFormSelectBox>
       <UIFCCTemplateField>Opcions de Plantilla</UIFCCTemplateField>
       <UIFCCLocationFormInputAction>Ubicació per desar</UIFCCLocationFormInputAction>
-      <UIFCCTemplateFormSelectBox>Select Template</UIFCCTemplateFormSelectBox>
+      <UIFCCTemplateFormSelectBox>Selecciona una plantilla</UIFCCTemplateFormSelectBox>
       <UIFCCSaveFormStringInput>Personalitza el botó de Desar</UIFCCSaveFormStringInput>
       <UIFCCMessageFormTextareaInput>Missatge de Desat personalitzat</UIFCCMessageFormTextareaInput>
       <UIFCCRedirectFormCheckboxInput>Redirigeix:</UIFCCRedirectFormCheckboxInput>
       <UIFCCRedirectPathFormStringInput>URL de redirecció:</UIFCCRedirectPathFormStringInput>
-      <UIFCCActionField>Actions</UIFCCActionField>
+      <UIFCCActionField>Accions</UIFCCActionField>
     </label>
     <msg>
       <save-successfully>Desat a les preferències del portlet satisfactòriament.</save-successfully>
@@ -58,10 +58,10 @@
 
   <UIFCCActionList>
     <header>
-      <name>Name</name>
+      <name>Nom</name>
       <description>Descripció</description>
       <instanceOf>Instància de</instanceOf>
-      <action>Action</action>
+      <action>Acció</action>
     </header>
     <action>
       <Add>Afegeix</Add>
@@ -84,7 +84,7 @@
 
   <UIWorkspaceList>
     <label>
-      <workspaceName>Workspace:</workspaceName>
+      <workspaceName>Àrea de treball:</workspaceName>
       <rootNodePath>Ruta a l'Arrel:</rootNodePath>
       <rootNodeInfo>Node arrel</rootNodeInfo>
     </label>
@@ -101,19 +101,19 @@
       <child-not-found>Aquest node encara no te cap de secundari.</child-not-found>
     </info>
     <header>
-      <name>Name</name>
-      <action>Action</action>
+      <name>Nom</name>
+      <action>Acció</action>
     </header>
   </UITreeList>
 
   <UIFCCActionPopupWindow>
     <title>
-      <UIFCCActionContainer>Add Action</UIFCCActionContainer>
+      <UIFCCActionContainer>Afegeix una acció</UIFCCActionContainer>
     </title>
   </UIFCCActionPopupWindow>
 
   <UIFCCActionForm>
-    <title>Add/Edit Action</title>
+    <title>Afegeix/Edita Acció</title>
     <action>
       <Save>#{word.save}</Save>
       <Close>#{word.close}</Close>
@@ -129,7 +129,7 @@
       <access-denied>Accés denegat. No té permís per accedir a aquesta plantilla.</access-denied>
     </msg>
     <validator>
-      <validator>Validator</validator>
+      <validator>Validador</validator>
       <destPath>Amb la ruta</destPath>
     </validator>
   </UIFCCActionForm>
@@ -139,7 +139,7 @@
       <actionType>Crea una acció de tipus</actionType>
     </label>
     <msg>
-      <not-support>Cannot load the template of '{0}'.</not-support>
+      <not-support>No es pot carregar la plantilla de '{0}'.</not-support>
       <do-not-permission>No té permís per carregar la plantilla de '{0}'.</do-not-permission>
     </msg>
   </UIFCCActionTypeForm>
@@ -160,8 +160,8 @@
 
   <UITabPane>
     <title>
-      <UICategoriesSelectPanel>Select Categories</UICategoriesSelectPanel>
-      <UISelectedCategoriesGrid>Referenced Categories</UISelectedCategoriesGrid>
+      <UICategoriesSelectPanel>Selecciona les categories</UICategoriesSelectPanel>
+      <UISelectedCategoriesGrid>Categories Referenciades</UISelectedCategoriesGrid>
     </title>
   </UITabPane>
 
@@ -179,13 +179,13 @@
 
   <PopupComponent>
     <title>
-      <UIOneTaxonomySelector>Add Categories</UIOneTaxonomySelector>
+      <UIOneTaxonomySelector>Afegeix Categories</UIOneTaxonomySelector>
     </title>
   </PopupComponent>
 
   <UITreeTaxonomyList>
     <label>
-      <taxonomyTree>Category Tree</taxonomyTree>
+      <taxonomyTree>Arbre de Categories</taxonomyTree>
     </label>
   </UITreeTaxonomyList>
 
