@@ -1724,7 +1724,7 @@
     </action>
 	<tooltip>
 		<FullScreen>Maximiser/Minimiser</FullScreen>
-	</tooltip>
+</tooltip>
     <msg>
       <cannot-save>Enregistrement impossible. Des contraintes ne sont pas respectées.</cannot-save>
       <in-versioning>Vous devez effectuer un checkout sur ce noeud avant de pouvoir lui en ajouter un autre</in-versioning>
@@ -2317,15 +2317,15 @@
       <repository-exception>Accès refusé. Vous n'avez pas la permission d'ajouter un lien symbolique vers ce noeud.</repository-exception>
       <numberformat-exception>Impossible d'enregistrer ce dossier. Vous devez saisir un format numérique.</numberformat-exception>
       <path-node-invalid>Veuillez saisir le chemin du noeud.</path-node-invalid>
-			<path-node-not-allowed>Ce nom n'est pas autorisé.</path-node-not-allowed>
+      <path-node-not-allowed>Ce nom n'est pas autorisé.</path-node-not-allowed>
       <non-node>Vous n'avez pas les droits d'accès au noeud cible.</non-node>
       <cannot-save>Impossible d'ajouter un lien symbolique pour ce type de noeud.</cannot-save>
       <item-exists-exception>Un noeud du même nom existe déjà.</item-exists-exception>
       <translation-node-same-language-default>Cette traduction possède la même langue que le contenu courant.</translation-node-same-language-default>
       <UnsupportedRepositoryOperationException>Cette cible ne peut pas être référencée.</UnsupportedRepositoryOperationException>
     </msg>
-	</UISymLinkForm>
-
+  </UISymLinkForm>
+  
   <UIAddTranslationForm>
     <label>
       <symLinkName>Nom du raccourci</symLinkName>
@@ -2354,7 +2354,7 @@
 			<UnsupportedRepositoryOperationException>Cette cible ne peut pas être référencée</UnsupportedRepositoryOperationException>
     </msg>
   </UIAddTranslationForm>
-  
+
 	<UIPopupSymLink>
 		<title>
       <UIOneNodePathSelector>Cible du Raccourci</UIOneNodePathSelector>
