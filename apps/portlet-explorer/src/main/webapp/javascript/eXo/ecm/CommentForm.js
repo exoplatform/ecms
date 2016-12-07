@@ -44,10 +44,16 @@
         });
         var MAX_LENGTH = 2000;
         // TODO this line is mandatory when a custom skin is defined, it should not be mandatory
+        var extraPlugins = 'simpleLink,simpleImage,suggester,hideBottomToolbar';
+        if ($(window).width() > $(window).height() && $(window).width() < 768) {
+            // Disable suggester on smart-phone landscape
+            extraPlugins = 'simpleLink,simpleImage';
+        }
         CKEDITOR.basePath = '/commons-extension/ckeditor/';
         $('textarea#comment').ckeditor({
             //TODO we should ensure adding external plugins for link and image
             customConfig: '/commons-extension/ckeditorCustom/config.js',
+            extraPlugins: extraPlugins,
             placeholder: placeholder,
             on: {
                 instanceReady: function (evt) {
@@ -66,43 +72,11 @@
                         }
                         $(CKEDITOR.instances["comment"].document.getBody().$).html(comment);
                     }
-                    $('#' + evt.editor.id + '_bottom').removeClass('cke_bottom_visible');
                 },
-                focus : function ( evt ) {
-                    // Show the editor toolbar, except for smartphones in landscape mode
-                    if ($(window).width() > 767 || $(window).width() < $(window).height()) {
-                        //$('#' + evt.editor.id + '_bottom').css('display', 'block');
-                        evt.editor.execCommand('autogrow');
-                        var $content = $('#' + evt.editor.id + '_contents');
-                        var contentHeight = $content.height();
-                        var $ckeBottom = $('#' + evt.editor.id + '_bottom');
-                        $ckeBottom[0].style.display = "block";
-                        // $ckeBottom.animate({
-                        //     height: "39"
-                        // }, {
-                        //     step: function (number, tween) {
-                        //         $content.height(contentHeight - number);
-                        //         if (number >= 9) {
-                        //             $ckeBottom.addClass('cke_bottom_visible');
-                        //         }
-                        //     }
-                        // });
-                    } else {
-                        $('#' + evt.editor.id + '_bottom').removeClass('cke_bottom_visible');
-                        $('#' + evt.editor.id + '_bottom')[0].style.display = "none";
-                    }
-                },
-                blur: function (evt) {
-                    /// Hide the editor toolbar
-                    if ($(window).width() > 767 || $(window).width() < $(window).height()) {
-                        //$('#' + evt.editor.id + '_contents').css('height', $('#' + evt.editor.id + '_contents').height() + 39);
-                        $('#' + evt.editor.id + '_bottom').css('height', '0px');
-                        $('#' + evt.editor.id + '_bottom').removeClass('cke_bottom_visible');
-                    }
-                },
-                change: function (evt) {
+                change: function( evt) {
                     var newData = evt.editor.getData();
                     var pureText = newData? newData.replace(/<[^>]*>/g, "").replace(/&nbsp;/g,"").trim() : "";
+
                     if (pureText.length <= MAX_LENGTH) {
                         evt.editor.getCommand('simpleImage').enable();
                     } else {
@@ -118,6 +92,7 @@
                         }
                     }
                 }
+
             }
         });
     };

@@ -110,7 +110,7 @@ public class UICommentForm extends UIForm implements UIPopupComponent {
     ResourceBundle resourceBundle = resourceBundleService.getResourceBundle("locale.ecm.dialogs", locale);
     String placeholder = resourceBundle.getString("UICommentForm.label.placeholder");
     requestContext.getJavascriptManager().require("SHARED/uiCommentForm", "commentForm")
-    .addScripts("eXo.ecm.CommentForm.init('" + placeholder + "');");
+    .addScripts("eXo.ecm.CommentForm.init('" + placeholder.replace("'", "\\'") + "');");
     if (isEdit()) {
       Node comment = getAncestorOfType(UIJCRExplorer.class).getNodeByPath(nodeCommentPath,
                                                                           NodeLocation.getNodeByLocation(document_).getSession());
