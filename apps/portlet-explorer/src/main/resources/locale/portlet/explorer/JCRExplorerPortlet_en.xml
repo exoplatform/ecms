@@ -47,7 +47,7 @@
     <msg>
       <not-support>You cannot vote for this document type.</not-support>
       <not-checkedout>You must check out the node before voting.</not-checkedout>
-      <vote-restriction>You cannot vote more than one time. </vote-restriction>
+      <vote-restriction>You cannot vote more than one time.</vote-restriction>
     </msg>
   </UIVoteForm>
  
@@ -1724,7 +1724,7 @@
     </action>
 	<tooltip>
 		<FullScreen>Maximize/Minimize</FullScreen>
-	</tooltip>
+</tooltip>
     <msg>
       <cannot-save>An error occurred while saving the document.</cannot-save>
       <in-versioning>Please check out the current node before adding a new node.</in-versioning>
@@ -2457,8 +2457,8 @@
       <ReplaceData>Replace Data</ReplaceData>
       <Back>Back to Rename</Back>
       <Keepfile>Keep both files</Keepfile>
-			<ReadOnly>Open Read-only</ReadOnly>
-			<Cancel>Cancel</Cancel>
+<ReadOnly>Open Read-only</ReadOnly>
+<Cancel>Cancel</Cancel>
       <KeepBoth>Keep Both</KeepBoth>
       <CreateNewVersion>Create a new version</CreateNewVersion>
     </label>
