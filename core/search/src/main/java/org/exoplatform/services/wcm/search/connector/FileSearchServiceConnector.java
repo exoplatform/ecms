@@ -16,12 +16,6 @@
  */
 package org.exoplatform.services.wcm.search.connector;
 
-import java.net.URLEncoder;
-
-import javax.jcr.Node;
-import javax.jcr.RepositoryException;
-import javax.jcr.Session;
-
 import org.exoplatform.commons.api.search.data.SearchContext;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.services.jcr.core.ManageableRepository;
@@ -30,6 +24,11 @@ import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.search.ResultNode;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+
+import javax.jcr.Node;
+import javax.jcr.RepositoryException;
+import javax.jcr.Session;
+import java.net.URLEncoder;
 
 /**
  * The search should be capable to match files of the DMS. \
@@ -91,7 +90,7 @@ public class FileSearchServiceConnector extends BaseContentSearchServiceConnecto
       authorUsername = node.getProperty("exo:owner").getString();
     }
 
-    StringBuilder url = new StringBuilder("javascript:require(['SHARED/social-ui-activity'], function(activity) {activity.previewDoc({doc:{");
+    StringBuilder url = new StringBuilder("javascript:require(['SHARED/social-ui-activity'], function(activity) {activity.previewDoc(event, {doc:{");
     if(node.isNodeType(NodetypeConstant.MIX_REFERENCEABLE)) {
       url.append("id:'").append(node.getUUID()).append("',");
     }
