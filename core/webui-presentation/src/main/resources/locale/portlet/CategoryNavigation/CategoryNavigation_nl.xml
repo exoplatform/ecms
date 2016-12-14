@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UICNContainer>
+    <title>
+      <QuickEdit>Snel bewerken</QuickEdit>
+    </title>
+  </UICNContainer>
+
+  <UICNConfigPopupWindow>
+    <title>
+      <UICategoryNavigationConfig>Category List Configuration</UICategoryNavigationConfig>
+    </title>
+  </UICNConfigPopupWindow>
+
+  <UICategoryNavigationTargetPathFormInputSet>
+    <title>
+      <SelectTargetPath/>
+    </title>
+  </UICategoryNavigationTargetPathFormInputSet>
+
+  <UICategoryNavigationConfig>
+    <label>
+      <UICategoryNavigationRepositoryFormSelectBox>Repository</UICategoryNavigationRepositoryFormSelectBox>
+      <UICategoryNavigationTreeNameSelectBox>Taxonomy Tree</UICategoryNavigationTreeNameSelectBox>
+      <UICategoryNavigationTreeTitleFormStringInput>Titel</UICategoryNavigationTreeTitleFormStringInput>
+  
+      <UICategoryNavigationTreeNameFormSelectBox>Tree Name</UICategoryNavigationTreeNameFormSelectBox>
+      <UICategoryNavigationTemplateFormSelectBox>Tree viewer template</UICategoryNavigationTemplateFormSelectBox>
+      
+      <UICategoryNavigationTargetPathFormInputSet>In pagina weergeven</UICategoryNavigationTargetPathFormInputSet>      
+      <TreeSelectionBlock>Tree Selection</TreeSelectionBlock>
+      <DisplaySettingBlock>Weergave-instellingen</DisplaySettingBlock>
+      <AdvancedBlock>Geavanceerde</AdvancedBlock>
+  
+  <UICategoryNavigationTreePathFormInputSet>Doelpad</UICategoryNavigationTreePathFormInputSet>
+  <UICategoryNavigationTreePathFormStringInput>Doelpad</UICategoryNavigationTreePathFormStringInput>
+  <UICategoryNavigationHeaderFormStringInput>Koptekst</UICategoryNavigationHeaderFormStringInput>
+  <UICategoryNavigationAutomaticDetectionCheckBoxInput>Automatic</UICategoryNavigationAutomaticDetectionCheckBoxInput>
+  <UICategoryNavigationDynamicNavigationLabel>Dynamische navigatie</UICategoryNavigationDynamicNavigationLabel>
+  <UICategoryNavigationWithClvFormStringInput>met</UICategoryNavigationWithClvFormStringInput>
+  <UICategoryNavigationTreepathPopupWindow>Doelpad</UICategoryNavigationTreepathPopupWindow>    
+      
+    </label>
+    <msg>
+      <not-support-encoding>Encoding is not supported.</not-support-encoding>
+      <render>An error occurred when rendering.</render>
+      <saving-success>The information was updated successfully.</saving-success>
+    </msg>
+    <action>
+      <Save>Opslaan</Save>
+    </action>
+  </UICategoryNavigationConfig>
+  <UICategoryNavigationTreeBase>
+    <msg>
+      <not-existed-category>Category does not exist</not-existed-category>
+    </msg>
+  </UICategoryNavigationTreeBase>
+</bundle>

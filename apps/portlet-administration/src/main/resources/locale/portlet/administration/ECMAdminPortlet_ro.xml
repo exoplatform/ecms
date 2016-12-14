@@ -200,7 +200,7 @@
     <msg>
       <register-unsuccessfull>Domeniul de nume sau URI există deja.</register-unsuccessfull>
       <prefix-null>Vă rugăm să specificaţi prefixul domeniului de nume.</prefix-null>
-      <uri-null>Vă rugăm să specificaţi URI-ul domeniului de nume.</uri-null>
+      <uri-null>Vă rugăm să specificaţi  URI-ul domeniului de nume.</uri-null>
     </msg>
   </UINamespaceForm>
   <!--
@@ -1200,7 +1200,7 @@
     <msg>
       <version-restored>Versiunea {0} a fost restaurată cu succes.</version-restored>
       <name-null>Vă rugăm să introduceţi numele scriptului.</name-null>
-      <name-exist>Numele scriptului '{0}' există deja.</name-exist>
+      <name-exist>Numele scriptului '{0}'  există deja.</name-exist>
       <fileName-invalid>Numele scriptului are unele caractere invalide.</fileName-invalid>
     </msg>
   </UIScriptForm>
@@ -1529,7 +1529,7 @@
     <msg>
       <confirm-delete>Doriți să ștergeți?</confirm-delete>
       <access-denied>Acces refuzat. Nu aveţi dreptul de a utiliza această funcţie.</access-denied>
-      <editing-template>Acces refuzat. Nu puteţi şterge şi edita simultan acest şablon.</editing-template>
+      <editing-template>Acces refuzat. Nu puteţi şterge şi edita  simultan acest şablon.</editing-template>
       <template-not-exist>Şablonul pe care încercaţi să-l ştergeţi nu există.</template-not-exist>
     </msg>
   </UITemplateList>
@@ -1547,7 +1547,7 @@
     <msg>
       <confirm-delete>Doriți să ștergeți?</confirm-delete>
       <access-denied>Acces refuzat. Nu aveţi dreptul de a utiliza această funcţie.</access-denied>
-      <editing-template>Acces refuzat. Nu puteţi şterge şi edita simultan acest şablon.</editing-template>
+      <editing-template>Acces refuzat. Nu puteţi şterge şi edita  simultan acest şablon.</editing-template>
       <template-not-exist>Şablonul pe care încercaţi să-l ştergeţi nu există.</template-not-exist>
     </msg>
   </UIActionsTemplateList>
@@ -1565,16 +1565,16 @@
     <msg>
       <confirm-delete>Doriți să ștergeți?</confirm-delete>
       <access-denied>Acces refuzat. Nu aveţi dreptul de a utiliza această funcţie.</access-denied>
-      <editing-template>Acces refuzat. Nu puteţi şterge şi edita simultan acest şablon.</editing-template>
+      <editing-template>Acces refuzat. Nu puteţi şterge şi edita  simultan acest şablon.</editing-template>
       <template-not-exist>Şablonul pe care încercaţi să-l ştergeţi nu există.</template-not-exist>
     </msg>
   </UIOthersTemplateList>
 
   <!--
-   ######################################################################################
-   #             org.exoplatform.ecm.webui.component.admin.templates.clv package #
-   ######################################################################################
-   -->
+ ######################################################################################
+ #             org.exoplatform.ecm.webui.component.admin.templates.clv package #
+ ######################################################################################
+ -->
 
   <UITabPane>
     <title>
@@ -1602,7 +1602,7 @@
     <msg>
       <confirm-delete>Sunteţi sigur că doriţi să ştergeţi acest şablon?</confirm-delete>
       <access-denied>Acces refuzat. Nu aveţi dreptul de a utiliza această funcţie.</access-denied>
-      <editing-template>Acces refuzat. Nu puteţi şterge şi edita simultan acest şablon.</editing-template>
+      <editing-template>Acces refuzat. Nu puteţi şterge şi edita  simultan acest şablon.</editing-template>
       <template-not-exist>Şablonul pe care încercaţi să-l ştergeţi nu există.</template-not-exist>
     </msg>
   </UICLVTemplateList>

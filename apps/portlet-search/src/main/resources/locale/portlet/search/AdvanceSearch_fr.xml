@@ -49,7 +49,7 @@
         <none>Aucun</none>
         <more>Plus</more>
         <pagination>Pagination</pagination>
-      </option>      
+      </option>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -60,13 +60,13 @@
     <title>
       <SelectBasePath>Sélectionnez le Chemin de Base</SelectBasePath>
     </title>
-  </searchResultBasePathInputSetAction>
-  <UISearchForm>
-  	 <message>
-  	    <keyword-not-support>Le mot clé est invalide. Certains caractères ne sont pas autorisés.</keyword-not-support>
-        <not-checked>Le type de recherche n'est pas sélectionné. Veuillez en choisir un.</not-checked>
+  </searchResultBasePathInputSetAction>  
+  <UISearchForm>  
+   <message>
+     <keyword-not-support>Le mot clé est invalide. Certains caractères ne sont pas autorisés.</keyword-not-support>
+     <not-checked>Le type de recherche n'est pas sélectionné. Veuillez en choisir un.</not-checked>
      <keyword-not-empty>Veuillez saisir un mot clé.</keyword-not-empty>
-  	 </message>
+   </message>
   </UISearchForm>
   <UIPaginatorDefault>
     <label>
@@ -79,7 +79,7 @@
     <label>
       <quickEditTitle>Modification Rapide</quickEditTitle>
     </label>
-  </UISearchPageLayoutDefault>  
+  </UISearchPageLayoutDefault>
   <searchOption>
     <label>
       <pageCheckBox>dans les Pages</pageCheckBox>
@@ -92,5 +92,5 @@
         <all>recherchez dans tous les sites</all>
       </option>  
     </label>  
-  </ViewMode>  
+  </ViewMode>
 </bundle>

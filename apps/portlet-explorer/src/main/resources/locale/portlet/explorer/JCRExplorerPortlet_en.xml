@@ -47,7 +47,7 @@
     <msg>
       <not-support>You cannot vote for this document type.</not-support>
       <not-checkedout>You must check out the document to vote.</not-checkedout>
-      <vote-restriction>You cannot vote more than one time.</vote-restriction>
+      <vote-restriction>You can't vote more than once.</vote-restriction>
     </msg>
   </UIVoteForm>
  
@@ -59,7 +59,7 @@
   <UIJCRExplorer>
     <msg>
       <refresh-session-success>The session was refreshed successfully.</refresh-session-success>
-      <no-node-history>You are at the root.</no-node-history>
+      <no-node-history>You are at the root folder.</no-node-history>
       <save-session-success>All changes have been saved.</save-session-success>
       <target-path-not-found>You can't access this path, either because it doesn't exist anymore or because you don't have access permissions.</target-path-not-found>
     </msg>
@@ -159,7 +159,7 @@
     <label>
       <enableStructure>Enable DMS Structure:</enableStructure>
       <showSideBar>Show Sidebar:</showSideBar>
-      <showHiddenNode>Show Hidden Items:</showHiddenNode>
+      <showHiddenNode>Show Hidden Documents:</showHiddenNode>
       <showNonDocument>Show Non-document Items:</showNonDocument>
       <showRefDocuments>Show Referenced Documents:</showRefDocuments>
       <enableDragAndDrop>Enable Drag &amp; Drop:</enableDragAndDrop>
@@ -381,14 +381,14 @@
       <path-not-found>This element was deleted or changed. Please click the Refresh button.</path-not-found>
       <paste-lock-exception>'{0}' can't be pasted here. Make sure it is not locked nor this folder. Also check that no related document is locked.</paste-lock-exception>
       <can-not-checkin-node>You can't check in this item. Please check that you have the necessary permissions.</can-not-checkin-node>
-      <can-not-checkout-node>You can't check out this itel. Please check that you have the necessary permissions.</can-not-checkout-node>
+      <can-not-checkout-node>You can't check out this item. Please check that you have the necessary permissions.</can-not-checkout-node>
       <move-constraint-exception>An error occurred while moving this item.</move-constraint-exception>
-      <not-lock-owner>You can't unlock this item because you are not the lock owner.</not-lock-owner>
-      <is-checked-in>Please check out this item before renaming.</is-checked-in>
-      <is-checked-in-lock>Please check out this item before locking.</is-checked-in-lock>
+      <not-lock-owner>You can't unlock this document because you are not the lock owner.</not-lock-owner>
+      <is-checked-in>Please check out this document before renaming.</is-checked-in>
+      <is-checked-in-lock>Please check out this document before locking.</is-checked-in-lock>
       <cant-lock>You can't lock this document.</cant-lock>
       <node-locked>The item with the path {0} or upper level is locked.</node-locked>
-      <can-not-delete>Please close this item before deleting.</can-not-delete>
+      <can-not-delete>Please close this document before deleting.</can-not-delete>
       <can-not-delete-version>You can't delete this document. It's versioned.</can-not-delete-version>
       <not-support>You can't delete the selected item. Please select another one.</not-support>
       <current-node-not-allow-paste>You can't paste the copied item there.</current-node-not-allow-paste>
@@ -1722,8 +1722,8 @@
       <Cancel>#{word.cancel}</Cancel>
       <Close>#{word.close}</Close>
     </action>
-	<tooltip>
-		<FullScreen>Maximize/Minimize</FullScreen>
+<tooltip>
+<FullScreen>Maximize/Minimize</FullScreen>
 </tooltip>
     <msg>
       <cannot-save>An error occurred while saving the document.</cannot-save>
@@ -1794,8 +1794,8 @@
     <header>
       <name>#{word.name}</name>
       <description>Description</description>
-	  <lifecycle>Life Cycle</lifecycle>
-	  <triggeredaction>Triggered Action</triggeredaction>
+  <lifecycle>Life Cycle</lifecycle>
+  <triggeredaction>Triggered Action</triggeredaction>
       <instanceOf>Instance of Action Type</instanceOf>
       <action>Action</action>
     </header>
@@ -1989,7 +1989,7 @@
     <msg>
       <empty-input>Please fill in the field '{0}'.</empty-input>
     </msg>
-  </EmptyFieldValidator>	
+  </EmptyFieldValidator>
   <CategoryValidator>
     <msg>
       <non-categories>Categories are wrong. Please select good categories.</non-categories>
@@ -3071,7 +3071,7 @@
   </UITagForm>
 
   <!--
-  	############  From WCM 2.1.0 ##############
+  ############  From WCM 2.1.0 ##############
   -->
   <UICategoryManagerSearch>
     <tab>
@@ -3082,20 +3082,20 @@
   </UICategoryManagerSearch>
 
   <UIPreferencesForm>
-  	 <action>
-    	 <HideAdvance>Hide Advanced</HideAdvance>
-    	 <ShowAdvance>Show Advanced</ShowAdvance>
+   <action>
+     <HideAdvance>Hide Advanced</HideAdvance>
+     <ShowAdvance>Show Advanced</ShowAdvance>
     </action>
     <label>
-    	<Advance>Advanced</Advance>
+    <Advance>Advanced</Advance>
     </label>
   </UIPreferencesForm>
 
   <UIJCRExplorerPortlet>
-	<msg>
-	  <file-access-denied>File access denied.</file-access-denied>
+<msg>
+  <file-access-denied>File access denied.</file-access-denied>
   <anonymous-access-denied>Anonymous user does not have permission to use this function.</anonymous-access-denied>
-	</msg>
+</msg>
   </UIJCRExplorerPortlet>
   <UIDrivesArea>
     <DrivesArea>
@@ -3116,11 +3116,11 @@
     </msg>
   </UIJcrExplorerEditForm>
   <UIDocumentForm>
-	  <msg>
-		  <confirm-close>The changes you made will be lost if you close this form.</confirm-close>
-		  <confirm-changeType>The changes you made will be lost if you change the content type.</confirm-changeType>
-		  <confirm-navigate>The changes you made will be lost if you navigate away from this page.</confirm-navigate>
-	  </msg>
+  <msg>
+  <confirm-close>The changes you made will be lost if you close this form.</confirm-close>
+  <confirm-changeType>The changes you made will be lost if you change the content type.</confirm-changeType>
+  <confirm-navigate>The changes you made will be lost if you navigate away from this page.</confirm-navigate>
+  </msg>
   </UIDocumentForm>
   <UploadFileMimeTypesValidator>
     <msg>
@@ -3129,41 +3129,41 @@
   </UploadFileMimeTypesValidator>
   <lifecyclePhase>
     <label>
-  	  <no>No</no>
-	  <yes>Yes</yes>
-	  <true>True</true>
-	  <false>False</false>
-	  <Electronic>Electronic</Electronic>
-	  <Paper>Paper</Paper>
-	  <NONE>None</NONE>
-	  <CLASSIFIED>Classified</CLASSIFIED>
+    <no>No</no>
+  <yes>Yes</yes>
+  <true>True</true>
+  <false>False</false>
+  <Electronic>Electronic</Electronic>
+  <Paper>Paper</Paper>
+  <NONE>None</NONE>
+  <CLASSIFIED>Classified</CLASSIFIED>
   <UNCLASSIFIED>Unclassified</UNCLASSIFIED>
-	  <NOCONTRACT>No Contract</NOCONTRACT>
-	  <one-minute>One Minute</one-minute>
-	  <hourly>Hourly</hourly>
-	  <daily>Daily</daily>
-	  <quarterly>Quarterly</quarterly>
-	  <yearly>Yearly</yearly>
-	  <ten-years>Ten Years</ten-years>
-	  <read>User Action</read>
-	  <schedule>Scheduler</schedule>
-	  <node_added>Content Addition</node_added>
-	  <node_removed>Content Removal</node_removed>
-	  <property_added>Property Addition</property_added>
-	  <property_removed>Property Removal</property_removed>
-	  <property_changed>Property Modification</property_changed>
-	</label>
+  <NOCONTRACT>No Contract</NOCONTRACT>
+  <one-minute>One Minute</one-minute>
+  <hourly>Hourly</hourly>
+  <daily>Daily</daily>
+  <quarterly>Quarterly</quarterly>
+  <yearly>Yearly</yearly>
+  <ten-years>Ten Years</ten-years>
+  <read>User Action</read>
+  <schedule>Scheduler</schedule>
+  <node_added>Content Addition</node_added>
+  <node_removed>Content Removal</node_removed>
+  <property_added>Property Addition</property_added>
+  <property_removed>Property Removal</property_removed>
+  <property_changed>Property Modification</property_changed>
+</label>
   </lifecyclePhase>
   <UIPopupMenu>
-  	<msg>
+  <msg>
 <can-not-remove-locked-node>{0} is locked. You can't move it to the Trash.</can-not-remove-locked-node>
 <can-not-remove-checked-in-node>{0} or its parent folder is checked in. You can't move it to the Trash.</can-not-remove-checked-in-node>
 <access-denied-to-delete>Access denied. You can't move {0} to the Trash.</access-denied-to-delete>
-  	</msg>
+  </msg>
   </UIPopupMenu>
   <UIPropertyForm>
-  	<msg>
-	  <unknown-error>An error occurred while editing this property.</unknown-error>
+  <msg>
+  <unknown-error>An error occurred while editing this property.</unknown-error>
     </msg>
   </UIPropertyForm>
   <UIWatchDocumentForm>
@@ -3178,34 +3178,34 @@
     </msg>
   </UIActionForm>
   <UIMultiUpload>
-  	<label>
-	    <AbortAll>Abort all</AbortAll>
+  <label>
+    <AbortAll>Abort all</AbortAll>
     <AbortAllFiles>Abort all Files</AbortAllFiles>
     <MaxFileSize>Maximum file size is</MaxFileSize>
-	    <InvalidCharacters>Invalid characters will be changed by '-'</InvalidCharacters>
-	    <DropFileMessage>Drop your files here in the current folder</DropFileMessage>
+    <InvalidCharacters>Invalid characters will be changed by '-'</InvalidCharacters>
+    <DropFileMessage>Drop your files here in the current folder</DropFileMessage>
     <Close>#{word.close}</Close>
-	    <in>in</in>
-	    <MaxFileSizeAlert>The file size exceeds the size limit of </MaxFileSizeAlert>
-	    <Waiting>Waiting</Waiting>
-	    <Error>Error</Error>
-	    <or>or</or>
-	    <AlreadyInUse>Already in use</AlreadyInUse>
-	    <Keep>Keep both</Keep>
-	    <Replace>Replace</Replace>
-	    <Canceled>Canceled</Canceled>
+    <in>in</in>
+    <MaxFileSizeAlert>The file size exceeds the limit of</MaxFileSizeAlert>
+    <Waiting>Waiting</Waiting>
+    <Error>Error</Error>
+    <or>or</or>
+    <AlreadyInUse>Already in use</AlreadyInUse>
+    <Keep>Keep both</Keep>
+    <Replace>Replace</Replace>
+    <Canceled>Canceled</Canceled>
       <UploadNewVersion>Upload a new version</UploadNewVersion>
     <Cancel>#{word.cancel}</Cancel>
-	    <AbortAllConfirmation>Do you want to abort all files in progress?</AbortAllConfirmation>
-  	</label>
+    <AbortAllConfirmation>Do you want to abort all files in progress?</AbortAllConfirmation>
+  </label>
   </UIMultiUpload>
   <UIDocumentNodeList>
-  	<label>
-  		<CreatedOn>Created on</CreatedOn>
-  		<Updated>Updated </Updated>
-  		<by>by</by>
-  		<you>you</you>
-  	</label>
+  <label>
+  <CreatedOn>Created on</CreatedOn>
+  <Updated>Updated</Updated>
+  <by>by</by>
+  <you>you</you>
+  </label>
   </UIDocumentNodeList>
   <FileView>
     <label>
@@ -3219,8 +3219,8 @@
     </label>
   </FileView>
   <UIPropertyForm>
-  	<msg>
-	  	<property-name-incorrect>The property name is incorrect, please enter another value for it!</property-name-incorrect>
+  <msg>
+  <property-name-incorrect>The property name is incorrect, please enter another value for it!</property-name-incorrect>
     </msg>
   </UIPropertyForm>
   <UIDocumentAutoVersionForm>
@@ -3242,6 +3242,6 @@
   ###################################################################################
   -->
   <VersionException>
-  	<msg>Cannot modify documents that are being checked in.</msg>  
+  <msg>Cannot modify documents that are being checked in.</msg>  
   </VersionException>
 </bundle>

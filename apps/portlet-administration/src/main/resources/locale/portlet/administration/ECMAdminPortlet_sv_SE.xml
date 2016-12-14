@@ -586,7 +586,7 @@
   </UIPropertyDefinitionForm>
   <UIChildNodeDefinitionForm>
     <msg>
-      <child-name>Nodnamnet för undernod krävs.</child-name>
+      <child-name>Nodnamnet  för undernod krävs.</child-name>
       <child-invalid>Nodnamnet för undernod innehåller ogiltiga tecken.</child-invalid>
       <default-node-type-not-found>Standard nodtypen finns inte.</default-node-type-not-found>
       <requiredPrimaryType>Den primära typen krävs.</requiredPrimaryType>
@@ -1348,7 +1348,7 @@
       <EditTaxonomyTree>Redigera kategoriträd</EditTaxonomyTree>
       <Delete>Ta bort kategoriträd</Delete>
     </tooltip>
-    <title>Bläddra i kategoriträdet</title>
+    <title>Bläddra  i kategoriträdet</title>
     <msg>
       <no-list>Ingen kategori träd har skapats.</no-list>
       <confirm-delete>Är du säker på att du vill ta bort kategoriträdet?</confirm-delete>
@@ -1571,10 +1571,10 @@
   </UIOthersTemplateList>
 
   <!--
-   ######################################################################################
-   #             org.exoplatform.ecm.webui.component.admin.templates.clv package #
-   ######################################################################################
-   -->
+ ######################################################################################
+ #             org.exoplatform.ecm.webui.component.admin.templates.clv package #
+ ######################################################################################
+ -->
 
   <UITabPane>
     <title>
@@ -1837,7 +1837,7 @@
     </header>
     <msg>
       <undeletable>Du kan inte ta bort {0} eftersom det är standarden.</undeletable>
-      <confirm-delete>Är du säker på att du vill ta bort den här dialogrutan?</confirm-delete>
+      <confirm-delete>Är du säker på att  du vill ta bort den här dialogrutan?</confirm-delete>
     </msg>
     <action>
       <title>

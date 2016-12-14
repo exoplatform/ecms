@@ -260,7 +260,7 @@
       <View>View</View>
     </title>
     <msg>
-    	<template-not-support>Cannot preview this content. The template is not supported</template-not-support>
+    <template-not-support>Cannot preview this content. The template is not supported</template-not-support>
     </msg>
   </UIContentSearchResult>
 
@@ -387,10 +387,10 @@
     <register>Register</register>
   </Signin>
   <UIDriveForm>
-	<label>
-		<wcm-category-view>Category View</wcm-category-view>	
-		<wcm-view>WCM Content View</wcm-view>
-	</label>
+<label>
+<wcm-category-view>Category View</wcm-category-view>
+<wcm-view>WCM Content View</wcm-view>
+</label>
   </UIDriveForm>
   
   <ContentSelector>
@@ -435,14 +435,14 @@
   </UIPortalApplication>    
   
   <CategoryNavigationTemplate>
-  	<label>
-  		<home>Home</home>
-  	</label>
+  <label>
+  <home>Home</home>
+  </label>
   </CategoryNavigationTemplate>
   
   <Breadcrumb>
-  	<label>
-  		<home>Home</home>
-  	</label>  
+  <label>
+  <home>Home</home>
+  </label>  
   </Breadcrumb>
 </bundle>

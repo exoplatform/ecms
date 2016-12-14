@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UICNContainer>
+    <title>
+      <QuickEdit>ویرایش سریع</QuickEdit>
+    </title>
+  </UICNContainer>
+
+  <UICNConfigPopupWindow>
+    <title>
+      <UICategoryNavigationConfig>Category List Configuration</UICategoryNavigationConfig>
+    </title>
+  </UICNConfigPopupWindow>
+
+  <UICategoryNavigationTargetPathFormInputSet>
+    <title>
+      <SelectTargetPath/>
+    </title>
+  </UICategoryNavigationTargetPathFormInputSet>
+
+  <UICategoryNavigationConfig>
+    <label>
+      <UICategoryNavigationRepositoryFormSelectBox>مخزن</UICategoryNavigationRepositoryFormSelectBox>
+      <UICategoryNavigationTreeNameSelectBox>درخت دسته بندی</UICategoryNavigationTreeNameSelectBox>
+      <UICategoryNavigationTreeTitleFormStringInput>عنوان</UICategoryNavigationTreeTitleFormStringInput>
+  
+      <UICategoryNavigationTreeNameFormSelectBox>Tree Name</UICategoryNavigationTreeNameFormSelectBox>
+      <UICategoryNavigationTemplateFormSelectBox>Tree viewer template</UICategoryNavigationTemplateFormSelectBox>
+      
+      <UICategoryNavigationTargetPathFormInputSet>نمایش در صفحه</UICategoryNavigationTargetPathFormInputSet>      
+      <TreeSelectionBlock>Tree Selection</TreeSelectionBlock>
+      <DisplaySettingBlock>تنظیمات نمایش</DisplaySettingBlock>
+      <AdvancedBlock>پیشرفته</AdvancedBlock>
+  
+  <UICategoryNavigationTreePathFormInputSet>مسیر مقصد</UICategoryNavigationTreePathFormInputSet>
+  <UICategoryNavigationTreePathFormStringInput>مسیر مقصد</UICategoryNavigationTreePathFormStringInput>
+  <UICategoryNavigationHeaderFormStringInput>سربرگ</UICategoryNavigationHeaderFormStringInput>
+  <UICategoryNavigationAutomaticDetectionCheckBoxInput>Automatic</UICategoryNavigationAutomaticDetectionCheckBoxInput>
+  <UICategoryNavigationDynamicNavigationLabel>لینک لیستِ پویا</UICategoryNavigationDynamicNavigationLabel>
+  <UICategoryNavigationWithClvFormStringInput>با</UICategoryNavigationWithClvFormStringInput>
+  <UICategoryNavigationTreepathPopupWindow>مسیر مقصد</UICategoryNavigationTreepathPopupWindow>    
+      
+    </label>
+    <msg>
+      <not-support-encoding>Encoding is not supported.</not-support-encoding>
+      <render>An error occurred when rendering.</render>
+      <saving-success>The information was updated successfully.</saving-success>
+    </msg>
+    <action>
+      <Save>ذخيره</Save>
+    </action>
+  </UICategoryNavigationConfig>
+  <UICategoryNavigationTreeBase>
+    <msg>
+      <not-existed-category>دسته وجود ندارد.</not-existed-category>
+    </msg>
+  </UICategoryNavigationTreeBase>
+</bundle>

@@ -44,7 +44,7 @@
       <get-template>Une erreur est survenue lors de l'accès au modèle.</get-template>
       <set-template-option>Erreur sur le modèle</set-template-option>
       <do-select>Erreur de sélection</do-select>
-    </msg>
+      </msg>
     <action>
       <Save>#{word.save}</Save>
     </action>

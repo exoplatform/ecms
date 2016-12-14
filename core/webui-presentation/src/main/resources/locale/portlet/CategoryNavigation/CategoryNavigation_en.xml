@@ -34,10 +34,10 @@
   
   <UICategoryNavigationTreePathFormInputSet>Target Path</UICategoryNavigationTreePathFormInputSet>
   <UICategoryNavigationTreePathFormStringInput>Target Path</UICategoryNavigationTreePathFormStringInput>
-	  <UICategoryNavigationHeaderFormStringInput>Header</UICategoryNavigationHeaderFormStringInput>
-	  <UICategoryNavigationAutomaticDetectionCheckBoxInput>Automatic</UICategoryNavigationAutomaticDetectionCheckBoxInput>
-	  <UICategoryNavigationDynamicNavigationLabel>Dynamic Navigation</UICategoryNavigationDynamicNavigationLabel>
-	  <UICategoryNavigationWithClvFormStringInput>with</UICategoryNavigationWithClvFormStringInput>
+  <UICategoryNavigationHeaderFormStringInput>Header</UICategoryNavigationHeaderFormStringInput>
+  <UICategoryNavigationAutomaticDetectionCheckBoxInput>Automatic</UICategoryNavigationAutomaticDetectionCheckBoxInput>
+  <UICategoryNavigationDynamicNavigationLabel>Dynamic Navigation</UICategoryNavigationDynamicNavigationLabel>
+  <UICategoryNavigationWithClvFormStringInput>with</UICategoryNavigationWithClvFormStringInput>
   <UICategoryNavigationTreepathPopupWindow>Target Path</UICategoryNavigationTreepathPopupWindow>    
       
     </label>

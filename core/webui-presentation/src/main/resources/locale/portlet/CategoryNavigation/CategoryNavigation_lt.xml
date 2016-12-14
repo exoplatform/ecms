@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UICNContainer>
+    <title>
+      <QuickEdit>Greitas redagavimas</QuickEdit>
+    </title>
+  </UICNContainer>
+
+  <UICNConfigPopupWindow>
+    <title>
+      <UICategoryNavigationConfig>Category List Configuration</UICategoryNavigationConfig>
+    </title>
+  </UICNConfigPopupWindow>
+
+  <UICategoryNavigationTargetPathFormInputSet>
+    <title>
+      <SelectTargetPath/>
+    </title>
+  </UICategoryNavigationTargetPathFormInputSet>
+
+  <UICategoryNavigationConfig>
+    <label>
+      <UICategoryNavigationRepositoryFormSelectBox>Saugykla</UICategoryNavigationRepositoryFormSelectBox>
+      <UICategoryNavigationTreeNameSelectBox>Kategorijos medis</UICategoryNavigationTreeNameSelectBox>
+      <UICategoryNavigationTreeTitleFormStringInput>Antraštė</UICategoryNavigationTreeTitleFormStringInput>
+  
+      <UICategoryNavigationTreeNameFormSelectBox>Tree Name</UICategoryNavigationTreeNameFormSelectBox>
+      <UICategoryNavigationTemplateFormSelectBox>Tree viewer template</UICategoryNavigationTemplateFormSelectBox>
+      
+      <UICategoryNavigationTargetPathFormInputSet>Rodyti puslapyje</UICategoryNavigationTargetPathFormInputSet>      
+      <TreeSelectionBlock>Tree Selection</TreeSelectionBlock>
+      <DisplaySettingBlock>Rodymo nustatymas</DisplaySettingBlock>
+      <AdvancedBlock>Papildomi</AdvancedBlock>
+  
+  <UICategoryNavigationTreePathFormInputSet>Tikslo kelias</UICategoryNavigationTreePathFormInputSet>
+  <UICategoryNavigationTreePathFormStringInput>Tikslo kelias</UICategoryNavigationTreePathFormStringInput>
+  <UICategoryNavigationHeaderFormStringInput>Antraštė</UICategoryNavigationHeaderFormStringInput>
+  <UICategoryNavigationAutomaticDetectionCheckBoxInput>Automatic</UICategoryNavigationAutomaticDetectionCheckBoxInput>
+  <UICategoryNavigationDynamicNavigationLabel>Dinaminė navigacija</UICategoryNavigationDynamicNavigationLabel>
+  <UICategoryNavigationWithClvFormStringInput>su</UICategoryNavigationWithClvFormStringInput>
+  <UICategoryNavigationTreepathPopupWindow>Tikslo kelias</UICategoryNavigationTreepathPopupWindow>    
+      
+    </label>
+    <msg>
+      <not-support-encoding>Encoding is not supported.</not-support-encoding>
+      <render>An error occurred when rendering.</render>
+      <saving-success>The information was updated successfully.</saving-success>
+    </msg>
+    <action>
+      <Save>Išsaugoti</Save>
+    </action>
+  </UICategoryNavigationConfig>
+  <UICategoryNavigationTreeBase>
+    <msg>
+      <not-existed-category>Kategorija neegzistuoja.</not-existed-category>
+    </msg>
+  </UICategoryNavigationTreeBase>
+</bundle>

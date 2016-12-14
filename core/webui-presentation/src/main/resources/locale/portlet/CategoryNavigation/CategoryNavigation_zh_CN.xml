@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UICNContainer>
+    <title>
+      <QuickEdit>快速编辑</QuickEdit>
+    </title>
+  </UICNContainer>
+
+  <UICNConfigPopupWindow>
+    <title>
+      <UICategoryNavigationConfig>Category List Configuration</UICategoryNavigationConfig>
+    </title>
+  </UICNConfigPopupWindow>
+
+  <UICategoryNavigationTargetPathFormInputSet>
+    <title>
+      <SelectTargetPath/>
+    </title>
+  </UICategoryNavigationTargetPathFormInputSet>
+
+  <UICategoryNavigationConfig>
+    <label>
+      <UICategoryNavigationRepositoryFormSelectBox>资源库</UICategoryNavigationRepositoryFormSelectBox>
+      <UICategoryNavigationTreeNameSelectBox>类别树</UICategoryNavigationTreeNameSelectBox>
+      <UICategoryNavigationTreeTitleFormStringInput>标题</UICategoryNavigationTreeTitleFormStringInput>
+  
+      <UICategoryNavigationTreeNameFormSelectBox>Tree Name</UICategoryNavigationTreeNameFormSelectBox>
+      <UICategoryNavigationTemplateFormSelectBox>Tree viewer template</UICategoryNavigationTemplateFormSelectBox>
+      
+      <UICategoryNavigationTargetPathFormInputSet>在页中显示</UICategoryNavigationTargetPathFormInputSet>      
+      <TreeSelectionBlock>Tree Selection</TreeSelectionBlock>
+      <DisplaySettingBlock>显示设置</DisplaySettingBlock>
+      <AdvancedBlock>高级设置</AdvancedBlock>
+  
+  <UICategoryNavigationTreePathFormInputSet>目标路径</UICategoryNavigationTreePathFormInputSet>
+  <UICategoryNavigationTreePathFormStringInput>目标路径</UICategoryNavigationTreePathFormStringInput>
+  <UICategoryNavigationHeaderFormStringInput>标头</UICategoryNavigationHeaderFormStringInput>
+  <UICategoryNavigationAutomaticDetectionCheckBoxInput>Automatic</UICategoryNavigationAutomaticDetectionCheckBoxInput>
+  <UICategoryNavigationDynamicNavigationLabel>动态导航</UICategoryNavigationDynamicNavigationLabel>
+  <UICategoryNavigationWithClvFormStringInput>与</UICategoryNavigationWithClvFormStringInput>
+  <UICategoryNavigationTreepathPopupWindow>目标路径</UICategoryNavigationTreepathPopupWindow>    
+      
+    </label>
+    <msg>
+      <not-support-encoding>Encoding is not supported.</not-support-encoding>
+      <render>An error occurred when rendering.</render>
+      <saving-success>The information was updated successfully.</saving-success>
+    </msg>
+    <action>
+      <Save>保存</Save>
+    </action>
+  </UICategoryNavigationConfig>
+  <UICategoryNavigationTreeBase>
+    <msg>
+      <not-existed-category>该类别不存在。</not-existed-category>
+    </msg>
+  </UICategoryNavigationTreeBase>
+</bundle>

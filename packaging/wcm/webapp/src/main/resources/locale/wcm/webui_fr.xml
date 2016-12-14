@@ -71,7 +71,7 @@
     </msg>
     <title>
       <select>Sélection</select>
-    </title>    
+    </title>
   </UIPageSelectorPanel>
 
   <UIContentDialogFormPopupWindow>
@@ -260,7 +260,7 @@
       <View>Affichage</View>
     </title>
     <msg>
-    	<template-not-support>Vous ne pouvez pas voir ce contenu en avant-permière. Ce masque de saisie n'est pas supporté</template-not-support>
+    <template-not-support>Vous ne pouvez pas voir ce contenu en avant-permière. Ce masque de saisie n'est pas supporté</template-not-support>
     </msg>
   </UIContentSearchResult>
 
@@ -387,10 +387,10 @@
     <register>S'inscrire</register>
   </Signin>
   <UIDriveForm>
-	<label>
+<label>
 <wcm-category-view>Affichage par Catégories</wcm-category-view>
 <wcm-view>Vue Contenu Web</wcm-view>
-	</label>
+</label>
   </UIDriveForm>
   
   <ContentSelector>
@@ -413,16 +413,16 @@
       <Systemfiles>Fichiers Système</Systemfiles>
       <ValidationRequestsDocumentsCenter>Centre des Documents en Attente de Validation</ValidationRequestsDocumentsCenter>
       <ManagedSites>Gestion des Sites</ManagedSites>
-      <SharedSite>Site Partagé</SharedSite>   
+      <SharedSite>Site Partagé</SharedSite>
     </title>
-   </ContentSelector>
-   
-   <UICategoryNavigationTargetPathPopupWindow>
+  </ContentSelector>
+  
+  <UICategoryNavigationTargetPathPopupWindow>
     <title>
       <UIPageSelector>Page sélecteur</UIPageSelector>
     </title>
   </UICategoryNavigationTargetPathPopupWindow>
- 
+  
   <UIDocumentInfo>
     <msg>
       <access-denied-exception>Accès refusé. Veuillez vérifier vos droits d'accès à ce noeud.</access-denied-exception>
@@ -432,17 +432,17 @@
     <title>
       <abort>Abandonner</abort>
     </title>
-  </UIPortalApplication>
+  </UIPortalApplication>    
   
   <CategoryNavigationTemplate>
-  	<label>
-  		<home>Accueil</home>
-  	</label>
-  </CategoryNavigationTemplate>  
+  <label>
+  <home>Accueil</home>
+  </label>
+  </CategoryNavigationTemplate>
   
   <Breadcrumb>
-  	<label>
-  		<home>Accueil</home>
-  	</label>  
+  <label>
+  <home>Accueil</home>
+  </label>  
   </Breadcrumb>
 </bundle>

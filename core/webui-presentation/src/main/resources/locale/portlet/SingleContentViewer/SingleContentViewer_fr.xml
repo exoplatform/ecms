@@ -1,48 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bundle>
- <UIPresentationContainer>
-  <title>
+  <UIPresentationContainer>
+    <title>
       <QuickEdit>Modifier dans l'Explorateur de Contenus</QuickEdit>
       <print>Imprimer cette Page</print>
-   <FastPublish>Publier</FastPublish>
-  </title>
-  <label>
+      <FastPublish>Publier</FastPublish>
+    </title>
+    <label>
       <draft>Brouillon</draft>
-   <print>Imprimer</print>
-  </label>
-  <msg>
-   <no-content>Aucun contenu</no-content>
-   <internal-server-error>Une erreur s'est produite lors de la sauvegarde.</internal-server-error>
-   <empty-title-error>Entrer un nouveau titre</empty-title-error>
-  </msg>
- </UIPresentationContainer>
+      <print>Imprimer</print>
+    </label>
+    <msg>
+      <no-content>Aucun contenu</no-content>
+      <internal-server-error>Une erreur s'est produite lors de la sauvegarde.</internal-server-error>
+      <empty-title-error>Entrer un nouveau titre</empty-title-error>
+    </msg>
+  </UIPresentationContainer>
   <CorrectContentSelectorPopupWindow>
-   <title>
+    <title>
       <UIContentSelectorOne>Choisissez un Contenu</UIContentSelectorOne>
-   </title>
+    </title>
   </CorrectContentSelectorPopupWindow>
   <UISingleContentViewerPortlet>
-  	 <msg>
-  	 		<AccessControlException>Vous n'avez pas les droits pour accéder au mode d'édition</AccessControlException>
-  	 </msg>
+    <msg>
+      <AccessControlException>Vous n'avez pas les droits pour accéder au mode d'édition</AccessControlException>
+    </msg>
   </UISingleContentViewerPortlet>
   <UISCVContextualRadioBox>
-  	<label>
-		<Enable>Activé</Enable>
-		<Disable>Désactivé</Disable>
-  	</label>
-  </UISCVContextualRadioBox>  
+    <label>
+      <Enable>Activé</Enable>
+      <Disable>Désactivé</Disable>
+    </label>
+  </UISCVContextualRadioBox>
   <UIPreferencesPopupWindows>
-	<title>
+    <title>
       <UISCVPreferences>Paramètres</UISCVPreferences>
-	</title>
+    </title>
   </UIPreferencesPopupWindows>
   <UISCVPreferences>
     <action>
       <Save>#{word.save}</Save>
-     <Abort>Annuler</Abort>
+      <Abort>Annuler</Abort>
       <Cancel>#{word.cancel}</Cancel>
-     <Print>Imprimer</Print>
+      <Print>Imprimer</Print>
       <Close>#{word.close}</Close>
     </action>
     <title>Préférences du contenu</title>
@@ -55,19 +55,19 @@
       <UISCVShowDateConfigurationCheckBox>Afficher la Date</UISCVShowDateConfigurationCheckBox>
       <UISCVShowOptionBarConfigurationCheckBox>Afficher la Barre d'Options</UISCVShowOptionBarConfigurationCheckBox>
       <DisplaySettingBlock>Contenu</DisplaySettingBlock>
-   	  <ContentPathBlock>Sélection de contenu</ContentPathBlock>
-   	  <UISCVConfigItemPathFormInputSet>Chemin du contenu</UISCVConfigItemPathFormInputSet>
-	  <UISCVContentPathConfigurationInputBox>Chemin du contenu</UISCVContentPathConfigurationInputBox>
+      <ContentPathBlock>Sélection de contenu</ContentPathBlock>
+      <UISCVConfigItemPathFormInputSet>Chemin du contenu</UISCVConfigItemPathFormInputSet>
+    <UISCVContentPathConfigurationInputBox>Chemin du contenu</UISCVContentPathConfigurationInputBox>
       <Advance>Paramètres Avancés</Advance>
-   	  <ContextCaption>Navigation Dynamique</ContextCaption>
-   	  <UISCVContextualRadioBox>Contenu Contextuel</UISCVContextualRadioBox>
-   	  <UISCVParameterInputBox>par</UISCVParameterInputBox>
+      <ContextCaption>Navigation Dynamique</ContextCaption>
+      <UISCVContextualRadioBox>Contenu Contextuel</UISCVContextualRadioBox>
+      <UISCVParameterInputBox>par</UISCVParameterInputBox>
       <PrintSettingBlock>Visibilité</PrintSettingBlock>
-   	  <UISCVPrintPageParameter>Avec</UISCVPrintPageParameter>
+      <UISCVPrintPageParameter>Avec</UISCVPrintPageParameter>
       <UISCVConfigPrintPageFormInputSet>Page de Détail</UISCVConfigPrintPageFormInputSet>
-	  <LockStatus>Verrouillage</LockStatus>
+      <LockStatus>Verrouillage</LockStatus>
       <CacheManagement>Filtrage des Contenus</CacheManagement>
-	  <UISCVCacheRadioBox>Partager les contenus entre les utilisateurs</UISCVCacheRadioBox>
+      <UISCVCacheRadioBox>Partager les contenus entre les utilisateurs</UISCVCacheRadioBox>
     </label>
     <help>
       <ContentPathBlock>Choisissez le contenu que vous souhaitez afficher. Ce contenu par défaut sera remplacé dynamiquement si vous activez la Navigation Dynamique  dans les Paramètres Avancés</ContentPathBlock>
@@ -75,7 +75,7 @@
       <ContextualHelp>Avec la Navigation dynamique, le chemin du contenu à afficher peut être indiqué via un paramètre de l'URL.</ContextualHelp>
       <ParameterHelp>Ce paramètre sera utilisé pour récupérer le contenu si la Navigation Dynamique est activée.</ParameterHelp>
     </help>
-	<msg>
+    <msg>
       <not-valid-path>Ce chemin de contenu est invalide</not-valid-path>
     </msg>
     <tab>
@@ -88,10 +88,10 @@
     </tab>
   </UISCVPreferences>
   <UISCVConfigItemPathFormInputSet>
-  	<title>
-  		<SelectFolderPath>Choisissez un dossier</SelectFolderPath>
+    <title>
+      <SelectFolderPath>Choisissez un dossier</SelectFolderPath>
       <AddPath>Ajouter un chemin</AddPath>
-  	</title>  	
+    </title>
   </UISCVConfigItemPathFormInputSet>
   <UISCVConfigPrintPageFormInputSet>
     <title>
@@ -116,9 +116,9 @@
     <published>Publié</published>
   </PublicationStates>
   <UISCVCacheRadioBox>
-  	<label>
+    <label>
       <Enable>Par Authentification</Enable>
       <Disable>Par Rôle</Disable>
-  	</label>
+    </label>
   </UISCVCacheRadioBox>
 </bundle>

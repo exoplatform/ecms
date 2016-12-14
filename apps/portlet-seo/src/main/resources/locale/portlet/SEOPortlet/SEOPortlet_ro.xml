@@ -2,16 +2,16 @@
 <bundle>
   <UISEOForm>
     <label>  
-      <title>Titlu:</title>
-      <description>Descriere:</description>
-      <keywords>Cuvinte cheie:</keywords>
-      <language>Limba:</language>
-      <robots>Roboţi:</robots>
-      <sitemap>hartă site:</sitemap>
+      <title>Title:</title>
+      <description>Description:</description>
+      <keywords>Keywords:</keywords>
+      <language>Language:</language>
+      <robots>Robots:</robots>
+      <sitemap>Sitemap:</sitemap>
       <sitemapvisible>Vizibil în harta site-ului</sitemapvisible>
     <isInherited>Moştenit de la pagina părinte</isInherited>
-      <priority>Prioritate:</priority>
-      <frequency>Frecvență:</frequency>
+      <priority>Priority:</priority>
+      <frequency>Frequency:</frequency>
       <select-language>Selectaţi o limbă</select-language>
       <option>
         <Always>Întotdeauna</Always>

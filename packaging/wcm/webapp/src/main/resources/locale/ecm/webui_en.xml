@@ -43,7 +43,7 @@
   </UISelectedCategoriesGrid>
   <!--
   ######################################################################
-  #	 org.exoplatform.ecm.webui.selector.UIPermissionSelector           #
+  # org.exoplatform.ecm.webui.selector.UIPermissionSelector           #
   ######################################################################
   -->
   <SelectUserOrGroup>
@@ -73,7 +73,7 @@
   </TaxoSelectUserOrGroup>
   <!--
   ######################################################################
-  #	 org.exoplatform.wcm.webui.clv.UICLVConfig        #
+  # org.exoplatform.wcm.webui.clv.UICLVConfig        #
   ######################################################################
   -->
   <UICLVConfigTargetPageSelectorPopupWindow>

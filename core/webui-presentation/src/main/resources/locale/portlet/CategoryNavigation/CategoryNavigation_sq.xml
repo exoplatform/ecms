@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UICNContainer>
+    <title>
+      <QuickEdit>crwdns6836768:0crwdne6836768:0</QuickEdit>
+    </title>
+  </UICNContainer>
+
+  <UICNConfigPopupWindow>
+    <title>
+      <UICategoryNavigationConfig>crwdns6836769:0crwdne6836769:0</UICategoryNavigationConfig>
+    </title>
+  </UICNConfigPopupWindow>
+
+  <UICategoryNavigationTargetPathFormInputSet>
+    <title>
+      <SelectTargetPath/>
+    </title>
+  </UICategoryNavigationTargetPathFormInputSet>
+
+  <UICategoryNavigationConfig>
+    <label>
+      <UICategoryNavigationRepositoryFormSelectBox>crwdns6836771:0crwdne6836771:0</UICategoryNavigationRepositoryFormSelectBox>
+      <UICategoryNavigationTreeNameSelectBox>crwdns6836772:0crwdne6836772:0</UICategoryNavigationTreeNameSelectBox>
+      <UICategoryNavigationTreeTitleFormStringInput>crwdns6836773:0crwdne6836773:0</UICategoryNavigationTreeTitleFormStringInput>
+  
+      <UICategoryNavigationTreeNameFormSelectBox>crwdns6836774:0crwdne6836774:0</UICategoryNavigationTreeNameFormSelectBox>
+      <UICategoryNavigationTemplateFormSelectBox>crwdns6839012:0crwdne6839012:0</UICategoryNavigationTemplateFormSelectBox>
+      
+      <UICategoryNavigationTargetPathFormInputSet>crwdns6836776:0crwdne6836776:0</UICategoryNavigationTargetPathFormInputSet>      
+      <TreeSelectionBlock>crwdns6836777:0crwdne6836777:0</TreeSelectionBlock>
+      <DisplaySettingBlock>crwdns6836778:0crwdne6836778:0</DisplaySettingBlock>
+      <AdvancedBlock>crwdns6839013:0crwdne6839013:0</AdvancedBlock>
+  
+  <UICategoryNavigationTreePathFormInputSet>crwdns6839014:0crwdne6839014:0</UICategoryNavigationTreePathFormInputSet>
+  <UICategoryNavigationTreePathFormStringInput>crwdns6839015:0crwdne6839015:0</UICategoryNavigationTreePathFormStringInput>
+  <UICategoryNavigationHeaderFormStringInput>crwdns6836782:0crwdne6836782:0</UICategoryNavigationHeaderFormStringInput>
+  <UICategoryNavigationAutomaticDetectionCheckBoxInput>crwdns6836783:0crwdne6836783:0</UICategoryNavigationAutomaticDetectionCheckBoxInput>
+  <UICategoryNavigationDynamicNavigationLabel>crwdns6836784:0crwdne6836784:0</UICategoryNavigationDynamicNavigationLabel>
+  <UICategoryNavigationWithClvFormStringInput>crwdns6836785:0crwdne6836785:0</UICategoryNavigationWithClvFormStringInput>
+  <UICategoryNavigationTreepathPopupWindow>crwdns6839016:0crwdne6839016:0</UICategoryNavigationTreepathPopupWindow>    
+      
+    </label>
+    <msg>
+      <not-support-encoding>crwdns6836787:0crwdne6836787:0</not-support-encoding>
+      <render>crwdns6836788:0crwdne6836788:0</render>
+      <saving-success>crwdns6839017:0crwdne6839017:0</saving-success>
+    </msg>
+    <action>
+      <Save>crwdns6836790:0crwdne6836790:0</Save>
+    </action>
+  </UICategoryNavigationConfig>
+  <UICategoryNavigationTreeBase>
+    <msg>
+      <not-existed-category>crwdns6839018:0crwdne6839018:0</not-existed-category>
+    </msg>
+  </UICategoryNavigationTreeBase>
+</bundle>

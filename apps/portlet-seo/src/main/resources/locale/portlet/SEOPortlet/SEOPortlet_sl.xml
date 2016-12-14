@@ -2,16 +2,16 @@
 <bundle>
   <UISEOForm>
     <label>  
-      <title>Naslov:</title>
-      <description>Opis:</description>
-      <keywords>Ključne besede:</keywords>
-      <language>Jezik:</language>
-      <robots>Roboti:</robots>
-      <sitemap>Kazalo:</sitemap>
+      <title>Title:</title>
+      <description>Description:</description>
+      <keywords>Keywords:</keywords>
+      <language>Language:</language>
+      <robots>Robots:</robots>
+      <sitemap>Sitemap:</sitemap>
       <sitemapvisible>Vidno v kazalu</sitemapvisible>
     <isInherited>Podedovano od nadrejene strani</isInherited>
-      <priority>Prednost:</priority>
-      <frequency>Pogostost:</frequency>
+      <priority>Priority:</priority>
+      <frequency>Frequency:</frequency>
       <select-language>Izberi jezik</select-language>
       <option>
         <Always>Vedno</Always>

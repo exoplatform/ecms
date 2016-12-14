@@ -1571,10 +1571,10 @@
   </UIOthersTemplateList>
 
   <!--
-   ######################################################################################
-   #             org.exoplatform.ecm.webui.component.admin.templates.clv package #
-   ######################################################################################
-   -->
+ ######################################################################################
+ #             org.exoplatform.ecm.webui.component.admin.templates.clv package #
+ ######################################################################################
+ -->
 
   <UITabPane>
     <title>
@@ -2446,7 +2446,7 @@
       <NextViewTree>Neste</NextViewTree>
     </action>
     <msg>
-      <xss-vulnerability-character>Feltet '{0}' inneholder XSS sårbare tegn</xss-vulnerability-character>
+      <xss-vulnerability-character>Feltet '{0}' inneholder  XSS sårbare tegn</xss-vulnerability-character>
       <xss-vulnerability-character-wo-label>Inndataene kan inneholde XSS sårbare tegn</xss-vulnerability-character-wo-label>
     </msg>
   </UIActionForm>
