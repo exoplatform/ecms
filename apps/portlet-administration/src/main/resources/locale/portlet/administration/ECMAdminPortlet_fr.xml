@@ -35,7 +35,7 @@
   </UIECMAdminControlPanel>
   <!--
   ################################################################################
-  #             org.exoplatform.ecm.webui.component.admin.UITaxonomy		 #
+  #             org.exoplatform.ecm.webui.component.admin.UITaxonomy #
   ################################################################################
   -->
   <UITaxonomyWorkingArea>
@@ -62,10 +62,10 @@
   </UITaxonomyManager>
 
   <!--
-################################################################################
-#    org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyTreeContainer#
-################################################################################
--->
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyTreeContainer#
+  ################################################################################
+  -->
   <UITaxonomyTreeContainer>
     <tab>
       <info>
@@ -168,7 +168,7 @@
 
   <!--
   ################################################################################
-  #             org.exoplatform.ecm.webui.component.admin.UITemplatesManager		 #
+  #             org.exoplatform.ecm.webui.component.admin.UITemplatesManager #
   ################################################################################
   -->
   <UITemplatesList>
@@ -179,7 +179,7 @@
   </UITemplatesList>
   <!--
   ################################################################################
-  #             org.exoplatform.ecm.webui.component.admin.UINamespaceForm		 		 #
+  #             org.exoplatform.ecm.webui.component.admin.UINamespaceForm  #
   ################################################################################
   -->
   <NameSpacePopup>
@@ -205,7 +205,7 @@
   </UINamespaceForm>
   <!--
   ################################################################################
-  #      org.exoplatform.ecm.webui.component.admin.namespace.UINamespaceList		 #
+  #      org.exoplatform.ecm.webui.component.admin.namespace.UINamespaceList #
   ################################################################################
   -->
   <UINamespaceList>
@@ -225,7 +225,7 @@
   </NamespacePopup>
   <!--
   ################################################################################
-  #             org.exoplatform.ecm.webui.component.admin.UIMetadataList				 #
+  #             org.exoplatform.ecm.webui.component.admin.UIMetadataList #
   ################################################################################
   -->
   <UIMetadataList>
@@ -275,7 +275,7 @@
   </MetataPermissionPopup>
   <!--
   ################################################################################
-  #    org.exoplatform.ecm.webui.component.admin.metadata.UIMetadataForm				 #
+  #    org.exoplatform.ecm.webui.component.admin.metadata.UIMetadataForm #
   ################################################################################
   -->
   <UIMetadataForm>
@@ -307,7 +307,7 @@
   </UIMetadataForm>
   <!--
   ################################################################################
-  #    org.exoplatform.ecm.webui.component.admin.metadata.UIMetadataView				 #
+  #    org.exoplatform.ecm.webui.component.admin.metadata.UIMetadataView #
   ################################################################################
   -->
   <UIMetadataView>
@@ -337,7 +337,7 @@
   </ViewMetadataPopup>
   <!--
   ################################################################################
-  #             org.exoplatform.ecm.webui.component.admin.UIDriveManager				 #
+  #             org.exoplatform.ecm.webui.component.admin.UIDriveManager #
   ################################################################################
   -->
   <UIDriveList>
@@ -434,7 +434,7 @@
 
   <!--
   ################################################################################
-  #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeManager			 #
+  #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeManager #
   ################################################################################
   -->
   <UINodeTypeManager>
@@ -449,7 +449,7 @@
   </UINodeTypeManager>
   <!--
   ################################################################################
-  #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeList				 #
+  #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeList #
   ################################################################################
   -->
   <UINodeTypeList>
@@ -480,7 +480,7 @@
   </UINodeTypeList>
   <!--
   ################################################################################
-  #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeOptionList	 #
+  #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeOptionList #
   ################################################################################
   -->
   <UINodeTypeOptionList>
@@ -496,7 +496,7 @@
   </UINodeTypeOptionList>
   <!--
   ################################################################################
-  #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeForm				 #
+  #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeForm #
   ################################################################################
   -->
   <UINodeTypeForm>
@@ -620,7 +620,7 @@
   </ViewNodeTypePopup>
   <!--
   ################################################################################
-  #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeExport		   #
+  #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeExport   #
   ################################################################################
   -->
   <UINodeTypeExport>
@@ -652,7 +652,7 @@
   -->
   <!--
   ################################################################################
-  #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeUpload		   #
+  #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeUpload   #
   ################################################################################
   -->
   <UINodeTypeUpload>
@@ -661,7 +661,7 @@
     </label>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Upload>Envoyer un Fichier</Upload>
+      <Upload>Uploader</Upload>
     </action>
     <title>Import des types de noeud à partir d'un fichier XML</title>
     <msg>
@@ -669,12 +669,12 @@
       <data-file-error>Seuls les fichiers XML ou ZIP sont supportés pour l'import</data-file-error>
       <data-invalid>Les données importées sont invalides</data-invalid>
       <nodetype-exist>Données invalides: Le type de noeud '{0}' existe déjà</nodetype-exist>
-      <namespace-invalid>Données invalides: L'espace de nommage '{0}' est inconnu</namespace-invalid>
+      <namespace-invalid>Données invalides:  L'espace de nommage '{0}' est inconnu</namespace-invalid>
     </msg>
   </UINodeTypeUpload>
   <!--
   ################################################################################
-  #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeImport		   #
+  #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeImport   #
   ################################################################################
   -->
   <UINodeTypeImport>
@@ -701,7 +701,7 @@
   </NodeTypeImportPopup>
   <!--
   ################################################################################
-  #             org.exoplatform.ecm.webui.component.admin.UIDriveForm						 #
+  #             org.exoplatform.ecm.webui.component.admin.UIDriveForm #
   ################################################################################
   -->
   <DriveInputSet>
@@ -719,7 +719,7 @@
   </DriveInputSet>
   <!--
   ###################################################################################
-  #             org.exoplatform.ecm.webui.component.admin.action.UIActionTypeList	#
+  #             org.exoplatform.ecm.webui.component.admin.action.UIActionTypeList#
   ###################################################################################
   -->
   <UIActionTypeList>
@@ -742,7 +742,7 @@
   </UIActionTypeList>
   <!--
   ######################################################################################
-  #             org.exoplatform.ecm.webui.component.admin.action.UIActionTypeForm		 #
+  #             org.exoplatform.ecm.webui.component.admin.action.UIActionTypeForm #
   ######################################################################################
   -->
   <ActionPopup>
@@ -776,7 +776,7 @@
   </UIActionTypeForm>
   <!--
   ######################################################################################
-  #             org.exoplatform.ecm.webui.component.admin.view.UIViewManager  		   #
+  #             org.exoplatform.ecm.webui.component.admin.view.UIViewManager     #
   ######################################################################################
   -->
   <UITabPane>
@@ -806,7 +806,7 @@
   </UITabPane>
   <!--
   ######################################################################################
-  #             org.exoplatform.ecm.webui.component.admin.view.UIViewList 				   #
+  #             org.exoplatform.ecm.webui.component.admin.view.UIViewList    #
   ######################################################################################
   -->
   <UIViewList>
@@ -916,7 +916,7 @@
 
   <!--
   ######################################################################################
-  #             org.exoplatform.ecm.webui.component.admin.view.UIViewFormTabPane	   #
+  #             org.exoplatform.ecm.webui.component.admin.view.UIViewFormTabPane   #
   ######################################################################################
   -->
   <UIViewForm>
@@ -957,7 +957,7 @@
       <addFolder>Ajouter un dossier</addFolder>
       <addDocument>Ajouter un document</addDocument>
       <editDocument>Modifier</editDocument>
-      <upload>Ajouter des Fichiers</upload>
+      <upload>Uploader</upload>
       <paste>Coller</paste>
       <search>Rechercher</search>
       <viewReferences>Voir les références</viewReferences>
@@ -1042,7 +1042,7 @@
   </tab_permission>
   <!--
   ######################################################################################
-  #             org.exoplatform.ecm.webui.component.admin.view.UIECMTemplateList	   #
+  #             org.exoplatform.ecm.webui.component.admin.view.UIECMTemplateList   #
   ######################################################################################
   -->
   <UIECMTemplateList>
@@ -1069,7 +1069,7 @@
   </UIECMTemplateList>
   <!--
   ################################################################################
-  #             org.exoplatform.ecm.webui.component.admin.view.UITemplateForm		 #
+  #             org.exoplatform.ecm.webui.component.admin.view.UITemplateForm #
   ################################################################################
   -->
   <UITemplateForm>
@@ -1109,7 +1109,7 @@
   </UITemplateForm>
   <!--
   ################################################################################
-  #             org.exoplatform.ecm.webui.component.admin.view.ecmTempForm			 #
+  #             org.exoplatform.ecm.webui.component.admin.view.ecmTempForm #
   ################################################################################
   -->
   <ecmTempForm>
@@ -1140,12 +1140,12 @@
 
   <!--
   ######################################################################################
-  #             org.exoplatform.ecm.webui.component.admin.script.UIScriptManager	 #
+  #             org.exoplatform.ecm.webui.component.admin.script.UIScriptManager #
   ######################################################################################
   -->
   <!--
   ######################################################################################
-  #             org.exoplatform.ecm.webui.component.admin.script.UIECMFilterForm		 #
+  #             org.exoplatform.ecm.webui.component.admin.script.UIECMFilterForm #
   ######################################################################################
   -->
   <UIECMFilterForm>
@@ -1155,7 +1155,7 @@
   </UIECMFilterForm>
   <!--
   ######################################################################################
-  #             org.exoplatform.ecm.webui.component.admin.script.UIScriptList		 #
+  #             org.exoplatform.ecm.webui.component.admin.script.UIScriptList #
   ######################################################################################
   -->
   <UIScriptList>
@@ -1180,7 +1180,7 @@
   </UIScriptList>
   <!--
   ######################################################################################
-  #             org.exoplatform.ecm.webui.component.admin.script.UIScriptForm		 #
+  #             org.exoplatform.ecm.webui.component.admin.script.UIScriptForm #
   ######################################################################################
   -->
   <uiECMScriptsPopup>
@@ -1206,7 +1206,7 @@
   </UIScriptForm>
   <!--
   ######################################################################################
-  #             org.exoplatform.ecm.webui.component.admin.script.CBScriptForm		 #
+  #             org.exoplatform.ecm.webui.component.admin.script.CBScriptForm #
   ######################################################################################
   -->
   <ScriptContainerPopup>
@@ -1225,7 +1225,7 @@
   </UIScriptForm>
   <!--
   ######################################################################################
-  #             org.exoplatform.ecm.webui.component.admin.script.ecmScriptForm	 #
+  #             org.exoplatform.ecm.webui.component.admin.script.ecmScriptForm #
   ######################################################################################
   -->
 
@@ -1240,7 +1240,7 @@
   </ecmScriptForm>
   <!--
   ######################################################################################
-  #             org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyForm			 #
+  #             org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyForm #
   ######################################################################################
   -->
   <UITaxonomyForm>
@@ -1331,7 +1331,7 @@
 
   <!--
   ######################################################################################
-  #             org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyTreeList	 #
+  #             org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyTreeList #
   ######################################################################################
   -->
   <UITaxonomyTreeList>
@@ -1513,7 +1513,7 @@
   </UITaxonomyManager>
   <!--
   ######################################################################################
-  #             org.exoplatform.ecm.webui.component.admin.templates.UITemplateList		 #
+  #             org.exoplatform.ecm.webui.component.admin.templates.UITemplateList #
   ######################################################################################
   -->
   <UITemplateList>
@@ -1571,10 +1571,10 @@
   </UIOthersTemplateList>
 
   <!--
-   ######################################################################################
-   #             org.exoplatform.ecm.webui.component.admin.templates.clv package #
-   ######################################################################################
-   -->
+ ######################################################################################
+ #             org.exoplatform.ecm.webui.component.admin.templates.clv package #
+ ######################################################################################
+ -->
 
   <UITabPane>
     <title>
@@ -1732,7 +1732,7 @@
 
   <!--
   ######################################################################################
-  #             org.exoplatform.ecm.webui.component.admin.templates.UITemplateForm		 #
+  #             org.exoplatform.ecm.webui.component.admin.templates.UITemplateForm #
   ######################################################################################
   -->
   <AddNewTemplatePermission>
@@ -1803,7 +1803,7 @@
   </UITemplatesManager>
   <!--
   ######################################################################################
-  #             org.exoplatform.ecm.webui.component.admin.templates.UIViewTemplate		 #
+  #             org.exoplatform.ecm.webui.component.admin.templates.UIViewTemplate #
   ######################################################################################
   -->
   <!--
@@ -1825,7 +1825,7 @@
   </UITemplateEditForm>
   <!--
   ######################################################################################
-  #             org.exoplatform.ecm.webui.component.admin.templates.UIDialogTab		 #
+  #             org.exoplatform.ecm.webui.component.admin.templates.UIDialogTab #
   ######################################################################################
   -->
   <UIDialogTab>
@@ -1848,7 +1848,7 @@
   </UIDialogTab>
   <!--
   ######################################################################################
-  #             org.exoplatform.ecm.webui.component.admin.templates.UIViewTab		 #
+  #             org.exoplatform.ecm.webui.component.admin.templates.UIViewTab #
   ######################################################################################
   -->
   <UIViewTab>
@@ -1871,7 +1871,7 @@
   </UIViewTab>
   <!--
   ######################################################################################
-  #             org.exoplatform.ecm.webui.component.admin.templates.UITemplateContent	 #
+  #             org.exoplatform.ecm.webui.component.admin.templates.UITemplateContent #
   ######################################################################################
   -->
   <UITemplateContent>
@@ -1894,17 +1894,17 @@
   </UITemplateContent>
   <!--
   ######################################################################################
-  #             org.exoplatform.ecm.webui.component.admin.templates.DialogForm	 #
+  #             org.exoplatform.ecm.webui.component.admin.templates.DialogForm #
   ######################################################################################
   -->
   <!--
   ######################################################################################
-  #             org.exoplatform.ecm.webui.component.admin.templates.ViewForm	 #
+  #             org.exoplatform.ecm.webui.component.admin.templates.ViewForm #
   ######################################################################################
   -->
   <!--
   ######################################################################################
-  #             org.exoplatform.ecm.webui.component.UIJCRBrowser											 #
+  #             org.exoplatform.ecm.webui.component.UIJCRBrowser #
   ######################################################################################
   -->
   <JCRBrowser>
@@ -1919,7 +1919,7 @@
   </JCRBrowserAssets>
   <!--
   ######################################################################################
-  #             org.exoplatform.ecm.webui.component.admin.queries											 #
+  #             org.exoplatform.ecm.webui.component.admin.queries #
   ######################################################################################
   -->
   <UIQueriesList>
@@ -1981,7 +1981,7 @@
   </PermissionPopup>
   <!--
   ######################################################################################
-  #             org.exoplatform.ecm.webui.component.admin.folksonomy									 #
+  #             org.exoplatform.ecm.webui.component.admin.folksonomy #
   ######################################################################################
   -->
   <UITagManager>
@@ -2039,7 +2039,7 @@
   </ECMPhoneFormatValidator>
   <!--
   ###################################################################################
-  # org.exoplatform.ecm.jcr.ECMNameValidator																			  #
+  # org.exoplatform.ecm.jcr.ECMNameValidator  #
   ###################################################################################
   -->
   <ECMNameValidator>
@@ -2055,7 +2055,7 @@
   </EmptyFieldValidator>
   <!--
   ###################################################################################
-  # org.exoplatform.ecm.jcr.PermissionValidator																			  #
+  # org.exoplatform.ecm.jcr.PermissionValidator  #
   ###################################################################################
   -->
   <PermissionValidator>
@@ -2065,7 +2065,7 @@
   </PermissionValidator>
   <!--
   ###################################################################################
-  # Repository																			  #
+  # Repository  #
   ###################################################################################
   -->
   <UIWorkspaceList>
@@ -2077,7 +2077,7 @@
   </UIWorkspaceList>
   <!--
   ###################################################################################
-  # Others																			  #
+  # Others  #
   ###################################################################################
   -->
   <UIFormInputSetWithAction>
@@ -2485,7 +2485,7 @@
       <Add>Ajouter</Add>
     </action>
     <label>
-      <userOrGroup>Rôles:</userOrGroup>
+      <userOrGroup>Rôles :</userOrGroup>
     </label>
     <msg>
       <userOrGroup-alreadyExists>Ce rôle existe déjà. Veuillez en choisir un autre.</userOrGroup-alreadyExists>

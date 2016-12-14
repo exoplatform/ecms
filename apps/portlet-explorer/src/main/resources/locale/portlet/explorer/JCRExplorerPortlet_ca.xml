@@ -18,7 +18,7 @@
     </action>
     <msg>
       <not-support>No pot fer comentaris en aquest tipus de document.</not-support>
-      <not-checkedout>You must check out the document before commenting on it.</not-checkedout>
+      <not-checkedout>Ha de desprotegir el document abans de comentar-hi.</not-checkedout>
       <content-null>No es pot publicar un comentari buit.</content-null>
     </msg>
   </UICommentForm>
@@ -46,8 +46,8 @@
     </button>
     <msg>
       <not-support>No pot votar aquest tipus de document.</not-support>
-      <not-checkedout>You must check out the document to vote.</not-checkedout>
-      <vote-restriction>You cannot vote more than one time.</vote-restriction>
+      <not-checkedout>Ha de desprotegir el document abans de votar.</not-checkedout>
+      <vote-restriction>You can't vote more than once.</vote-restriction>
     </msg>
   </UIVoteForm>
  
@@ -59,9 +59,9 @@
   <UIJCRExplorer>
     <msg>
       <refresh-session-success>La sessió va ser refrescada amb èxit.</refresh-session-success>
-      <no-node-history>You are at the root.</no-node-history>
+      <no-node-history>You are at the root folder.</no-node-history>
       <save-session-success>S'han desat tots els canvis.</save-session-success>
-      <target-path-not-found>You can't access this path, either because it doesn't exist anymore or because you don't have access permissions.</target-path-not-found>
+      <target-path-not-found>No pot accedir a aquesta ruta, o bé perquè ja no existeix, o perquè no té permisos per accedir-hi.</target-path-not-found>
     </msg>
   </UIJCRExplorer>
   <!--
@@ -159,8 +159,8 @@
     <label>
       <enableStructure>Activa l'Estructura DMS:</enableStructure>
       <showSideBar>Mostra Barra Lateral:</showSideBar>
-      <showHiddenNode>Show Hidden Items:</showHiddenNode>
-      <showNonDocument>Show Non-document Items:</showNonDocument>
+      <showHiddenNode>Show Hidden Documents:</showHiddenNode>
+      <showNonDocument>Mostra elements no de tipus document:</showNonDocument>
       <showRefDocuments>Mostra els documents referenciats:</showRefDocuments>
       <enableDragAndDrop>Permetre Arrossegar i Deixar:</enableDragAndDrop>
       <sortBy>Ordenar per:</sortBy>
@@ -201,15 +201,15 @@
       <Back>#{word.back}</Back>
     </action>
     <msg>
-      <rename-successfull>'{0}' was renamed to '{1}' successfully.</rename-successfull>
-      <rename-denied>Access denied. You can't rename this item.</rename-denied>
+      <rename-successfull>'{0}' s'ha reanomenat com '{1}' correctament.</rename-successfull>
+      <rename-denied>Accés denegat. No pot canviar el nom d'aquest element.</rename-denied>
       <fileName-invalid>El nou nom conté alguns caràcters no vàlids.</fileName-invalid>
       <newName-same-oldName>El nou nom ja existeix. Si us plau comprovi-ho de nou.</newName-same-oldName>
-      <version-exception>This document (or one of its ancestors) is not checked out.</version-exception>
-      <lock-exception>This document is locked. Please unlock it before renaming.</lock-exception>
-      <constraintViolation-exception>An error occurred while renaming '{0}'. Please check again.</constraintViolation-exception>
+      <version-exception>Aquest document (o una de les seves revisions) no està desprotegit.</version-exception>
+      <lock-exception>Aquest document està bloquetjat. Desbloquejeu-lo abans de reanomenar.</lock-exception>
+      <constraintViolation-exception>S'ha produït un error en reanomenar "{0}". Si us plau intenti-ho de nou.</constraintViolation-exception>
       <unknown-prefix>El Prefix "{0}" no està inscrit encara.</unknown-prefix>
-      <rename-error>An error occurred while renaming. Please check again.</rename-error>
+      <rename-error>S'ha produït un error en reanomenar. Si us plau intenti-ho de nou.</rename-error>
     </msg>
   </UIRenameForm>
   <UIPopupWindow>
@@ -313,40 +313,40 @@
       <UploadNewVersion>Puja una versió nova</UploadNewVersion>
     </tooltip>
     <msg>
-      <cannot-action-in-rootnode>You can't perform this action at root.</cannot-action-in-rootnode>
+      <cannot-action-in-rootnode>No pot realitzar aquesta acció a l'arrel.</cannot-action-in-rootnode>
       <node-checkedin>Ha de desprotegir primer.</node-checkedin>
-      <cannot-enable-version-rootnode>Can't activate versioning on root.</cannot-enable-version-rootnode>
-      <cannot-enable-publication-rootnode>Can't activate publication at root.</cannot-enable-publication-rootnode>
+      <cannot-enable-version-rootnode>No es pot activar el control de versions a l'arrel.</cannot-enable-version-rootnode>
+      <cannot-enable-publication-rootnode>No es pot activar la publicació a l'arrel.</cannot-enable-publication-rootnode>
       <manage-publication>
-        <not-supported-nodetype>Only documents can be published.</not-supported-nodetype>
+        <not-supported-nodetype>Només els documents poden ser publicats.</not-supported-nodetype>
         <no-publication-lifecycle>No s'ha configurat cap cicle de publicació.</no-publication-lifecycle>
       </manage-publication>
-      <unsubcriber-lifecycle>The document was already unsubscribed.</unsubcriber-lifecycle>
-      <not-supported-nodetype>This operation is only supported for documents.</not-supported-nodetype>
-      <unsubcriber-lifecycle-finish>The document was unsubscribed successfully.</unsubcriber-lifecycle-finish>
-      <access-false>The document is not an article or checked in.</access-false>
+      <unsubcriber-lifecycle>Ja es va cancel·lar la subscripció del document.</unsubcriber-lifecycle>
+      <not-supported-nodetype>Aquesta operació només s'admet per als documents.</not-supported-nodetype>
+      <unsubcriber-lifecycle-finish>S'ha cancel·lat la subscripció del document correctament.</unsubcriber-lifecycle-finish>
+      <access-false>El document no és un article o està protegit.</access-false>
       <unsupported-action>Aquesta acció no és suportada.</unsupported-action>
-      <not-relationable>This document has no relations.</not-relationable>
-      <node-pasted>'{0}' has been pasted at the location '{1}'. This operation has already been saved.</node-pasted>
-      <no-node-selected>Nothing to copy.</no-node-selected>
-      <unable-edit>Editing documents of type '{1}' like '{0}' is not supported.</unable-edit>
-      <not-support>Can't edit the selected item.</not-support>
-      <template-null>This document has no form template.</template-null>
+      <not-relationable>Aquest document no té relacions.</not-relationable>
+      <node-pasted>'{0}' ha estat enganxat a la localització '{1}'. Aquesta operació ja s'ha desat.</node-pasted>
+      <no-node-selected>Res a copiar.</no-node-selected>
+      <unable-edit>No està suportat editar documents de tipus '{1}' com '{0}'.</unable-edit>
+      <not-support>No pot editar l'element seleccionat.</not-support>
+      <template-null>Aquest document té cap plantilla de formulari.</template-null>
       <keyword-null>No hi han paraules clau per cercar.</keyword-null>
       <not-found>No s'han trobat resultats.</not-found>
       <keyword-not-allow>No es permet aquesta paraula clau.</keyword-not-allow>
-      <is-not-referenable>'{0}' can't be referenceable.</is-not-referenable>
-      <access-denied>Access denied. You don't have edit permission for this item.</access-denied>
-      <access-add-denied>Access denied. You don't have permission to add items here.</access-add-denied>
+      <is-not-referenable>'{0}' no es pot referenciar.</is-not-referenable>
+      <access-denied>Accés denegat. No té permís d'edició d'aquest element.</access-denied>
+      <access-add-denied>Accés denegat. No té permís per afegir elements aquí.</access-add-denied>
       <item-existed>Ja existeix un node associat amb aquest nom.</item-existed>
       <removed-hidden-mixin>El node es fa visible.</removed-hidden-mixin>
       <added-hidden-mixin>El node s'ha ocultat.</added-hidden-mixin>
       <not-supported>Aquesta funció només és compatible amb el tipus document.</not-supported>
-      <empty-file-type>You can't add a document here.</empty-file-type>
-      <unsupported-watch>Only documents can be watched.</unsupported-watch>
-      <watch-checkedin>You must check out the document before watching.</watch-checkedin>
-      <unsupported-tagging>Only documents can be tagged.</unsupported-tagging>
-      <tagnode-checkedin>You must check out the document before tagging.</tagnode-checkedin>
+      <empty-file-type>No pot afegir un document aquí.</empty-file-type>
+      <unsupported-watch>Només pot fer seguiment als documents.</unsupported-watch>
+      <watch-checkedin>Ha de desprotegir el document abans fer-li seguiment.</watch-checkedin>
+      <unsupported-tagging>Només els documents poden ser etiquetats.</unsupported-tagging>
+      <tagnode-checkedin>Ha de desprotegir el document abans d'etiquetar-lo.</tagnode-checkedin>
     </msg>
     <title>
       <select-tab>Selecciona la pestanya</select-tab>
@@ -361,40 +361,40 @@
   </UIActionBar>
   <UIPopupMenu>
     <msg>
-      <has-not-permission>Access denied. You don't have permissions to add in this item.</has-not-permission>
-      <has-not-edit-permission>Access denied. You don't have edit permission here. Please contact the administrator.</has-not-edit-permission>
-      <cannot-login-node>You can't access and paste an item here.</cannot-login-node>
-      <cannot-paste-nodetype>You can't paste this type of item here.</cannot-paste-nodetype>
-      <has-not-permission-unlok>You don't have permission to unlock this document.</has-not-permission-unlok>
-      <bound-exception>You don't have the permission to rename this item. Please contact the administrator.</bound-exception>
-      <bound-move-exception>You can't move an item to itself or in a subfolder.</bound-move-exception>
-      <does-not-support-auditing>You can't activate auditing here.</does-not-support-auditing>
-      <can-not-rename-node>You don't have permission to rename this item. Please contact the administrator to get the necessary rights.</can-not-rename-node>
-      <can-not-cut-node>You don't have permission to cut this item. Please contact the administrator.</can-not-cut-node>
-      <can-not-remove-node>You don't have permission to remove this item. Please contact the administrator.</can-not-remove-node>
-      <can-not-lock-node>You don't have permission to lock {0}. Please contact the administrator.</can-not-lock-node>
-      <can-not-unlock-node>You don't have permission to unlock this item. Please contact the administrator.</can-not-unlock-node>
-      <no-node>Please select at least one item before pasting.</no-node>
-      <can-not-paste-node>You don't have permission to move to this item. Please contact the administrator.</can-not-paste-node>
-      <can-not-move-node>You don't have permission to move this item. Please contact the administrator.</can-not-move-node>
-      <does-not-support-versioning>You don't have permission to move. Please contact the administrator.</does-not-support-versioning>
+      <has-not-permission>Accés denegat. No té permís per afegir en aquest element.</has-not-permission>
+      <has-not-edit-permission>Accés denegat. Aquí no té permís d'edició. Contacteu amb l'administrador.</has-not-edit-permission>
+      <cannot-login-node>No pot accedir i enganxar un element aquí.</cannot-login-node>
+      <cannot-paste-nodetype>No pots enganxar aquest tipus d'element aquí.</cannot-paste-nodetype>
+      <has-not-permission-unlok>No té permís per desbloquejar aquest document.</has-not-permission-unlok>
+      <bound-exception>No té permís per reanomenar aquest element. Contacta amb l'administrador.</bound-exception>
+      <bound-move-exception>No pot desplaçar un element sobre si mateix o a una subcarpeta.</bound-move-exception>
+      <does-not-support-auditing>No pot activar l'auditoria aquí.</does-not-support-auditing>
+      <can-not-rename-node>No té permís per canviar el nom d'aquest element. Si us plau, contacta amb l'administrador per obtenir els drets necessaris.</can-not-rename-node>
+      <can-not-cut-node>No té permís per tallar aquest element. Si us plau, contacta amb l'administrador.</can-not-cut-node>
+      <can-not-remove-node>No té permís per eliminar aquest element. Si us plau, contacta amb l'administrador.</can-not-remove-node>
+      <can-not-lock-node>No té permís per bloquejar {0}. Si us plau, contacta amb l'administrador.</can-not-lock-node>
+      <can-not-unlock-node>No té permís per desbloquejar aquest element. Si us plau, contacta amb l'administrador.</can-not-unlock-node>
+      <no-node>Si us plau, selecciona almenys un element abans d'enganxar-lo.</no-node>
+      <can-not-paste-node>No té permís per desplaçar aquest element. Si us plau, contacta amb l'administrador.</can-not-paste-node>
+      <can-not-move-node>No té permís per moure aquest element. Si us plau, contacta amb l'administrador.</can-not-move-node>
+      <does-not-support-versioning>No té permís per desplaçar aquest element. Si us plau, contacta amb l'administrador.</does-not-support-versioning>
       <path-not-found>Aquest element ha sigut suprimit o canviat. Si us plau, feu clic al botó Recarrega.</path-not-found>
-      <paste-lock-exception>'{0}' can't be pasted here. Make sure it is not locked nor this folder. Also check that no related document is locked.</paste-lock-exception>
-      <can-not-checkin-node>You can't check in this item. Please check that you have the necessary permissions.</can-not-checkin-node>
-      <can-not-checkout-node>You can't check out this itel. Please check that you have the necessary permissions.</can-not-checkout-node>
-      <move-constraint-exception>An error occurred while moving this item.</move-constraint-exception>
-      <not-lock-owner>You can't unlock this item because you are not the lock owner.</not-lock-owner>
-      <is-checked-in>Please check out this item before renaming.</is-checked-in>
-      <is-checked-in-lock>Please check out this item before locking.</is-checked-in-lock>
-      <cant-lock>You can't lock this document.</cant-lock>
+      <paste-lock-exception>No pot enganxar '{0}' aquí. Assegura't que no està bloquejat. També comprova la seva carpeta i que cap document relacionat tampoc ho està.</paste-lock-exception>
+      <can-not-checkin-node>No pot protegir aquest element. Si us plau, comprova que té els permisos adequats.</can-not-checkin-node>
+      <can-not-checkout-node>You can't check out this item. Please check that you have the necessary permissions.</can-not-checkout-node>
+      <move-constraint-exception>S'ha produït un error mentre es movia l'element.</move-constraint-exception>
+      <not-lock-owner>You can't unlock this document because you are not the lock owner.</not-lock-owner>
+      <is-checked-in>Please check out this document before renaming.</is-checked-in>
+      <is-checked-in-lock>Please check out this document before locking.</is-checked-in-lock>
+      <cant-lock>No pot bloquejar aquest document.</cant-lock>
       <node-locked>L'element amb la ruta {0} o d'una carpeta superior, està bloquejat.</node-locked>
-      <can-not-delete>Please close this item before deleting.</can-not-delete>
-      <can-not-delete-version>You can't delete this document. It's versioned.</can-not-delete-version>
-      <not-support>You can't delete the selected item. Please select another one.</not-support>
-      <current-node-not-allow-paste>You can't paste the copied item there.</current-node-not-allow-paste>
-      <copied-node-in-versioning>You can't paste the copied item here because it's versioned.</copied-node-in-versioning>
-      <parent-node-locked>You don't have permission to unlock '{0}'.</parent-node-locked>
-      <this-node-locked-by-parent>You can't unlock this item. Parent folder is locked.</this-node-locked-by-parent>
+      <can-not-delete>Please close this document before deleting.</can-not-delete>
+      <can-not-delete-version>No pot suprimir aquest document. És una versió.</can-not-delete-version>
+      <not-support>No pot suprimir l'element seleccionat. Si us plau, seleccioni un altre.</not-support>
+      <current-node-not-allow-paste>No pot enganxar l'element copiat aquí.</current-node-not-allow-paste>
+      <copied-node-in-versioning>No pot enganxar l'element copiat aquí perquè és una versió.</copied-node-in-versioning>
+      <parent-node-locked>No té permís per desbloquejar '{0}'.</parent-node-locked>
+      <this-node-locked-by-parent>No pot desprotegir aquest element. La carpeta que el conté està bloquejada.</this-node-locked-by-parent>
       <paste-node-same-name>Can't paste this item here. An item with the same name already exists in the destination folder.</paste-node-same-name>
       <has-not-add-permission>You don't have the permission to add here.</has-not-add-permission>
       <node-cutting>Item is being cut. You can't paste it here.</node-cutting>
@@ -502,9 +502,9 @@
       
       <confirm-restore>A '{0}' item already exists at the previous location. Are you sure you want to restore it?</confirm-restore>
       <confirm-move>Esta segur que vol moure?</confirm-move>
-      <node-cut>'{0}' has been cut.</node-cut>
+      <node-cut>'{0}' ha estat tallat.</node-cut>
       <execute-successfully>L'acció personalitzada '{0}' ha estat executada.</execute-successfully>
-      <save-node-success>'{0}' has been saved.</save-node-success>
+      <save-node-success>'{0}' s'ha desat.</save-node-success>
       <move-problem>You can't move '{0}' to '{1}' because there was a problem with permissions or constraint conditions.</move-problem>
     </msg>
   </UIWorkingArea>
@@ -515,9 +515,9 @@
     </label>
     <msg>
       <unable-save-node>'{0}' has been created. Please save session to validate this action.</unable-save-node>
-      <save-node-success>'{0}' has been saved.</save-node-success>
-      <node-copied>'{0}' has been copied.</node-copied>
-      <node-cut>'{0}' has been cut.</node-cut>
+      <save-node-success>'{0}' s'ha desat.</save-node-success>
+      <node-copied>'{0}' s'ha copiat.</node-copied>
+      <node-cut>'{0}' s'ha tallat.</node-cut>
       <remove-root>You can't remove the root folder.</remove-root>
       <node-remove-success>'{0}' has been removed.</node-remove-success>
     </msg>
@@ -601,7 +601,7 @@
       <OpenDocument>Edició remota</OpenDocument>
       <EditProperty>Edita les propietats del document</EditProperty>
       <UploadNewVersion>Puja una versió nova</UploadNewVersion>
-      <CreateNewVersion>Save as new version</CreateNewVersion>
+      <CreateNewVersion>Desa com a nova versió</CreateNewVersion>
     </event>
   </ECMContextMenu>
  
@@ -807,7 +807,7 @@
       <add_node>Drets d'escriptura</add_node>
       <remove>Elimina Drets</remove>
     </label>
-    <title>Add a permission</title>
+    <title>Afegeix un permís</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>#{word.save}</Save>
@@ -909,12 +909,12 @@
   </UISimpleSearch>
   <ViewSearch>
     <title>
-      <UIViewSearchResult>Veure plantilla</UIViewSearchResult>
+      <UIViewSearchResult>Plantilla Vista</UIViewSearchResult>
     </title>
   </ViewSearch>
   <UISearchResult>
     <msg>
-      <not-support>There is no View template for this document.</not-support>
+      <not-support>No hi ha cap plantilla de Vista per a aquest document.</not-support>
       <empty>No s'han trobat resultats.</empty>
       <access-denied>No pot obrir aquesta carpeta, o be ja no existeix o no té dret a accedir-hi.</access-denied>
       <query-invalid>La consulta no és vàlida.</query-invalid>
@@ -939,15 +939,15 @@
       <datecreatedDESC>Ordena per la data de creació en ordre descendent</datecreatedDESC>
     </title>
     <tooltip>
-      <View>View this item</View>
+      <View>Veure aquest element</View>
       <OpenFolder>Vés a la carpeta</OpenFolder>
     </tooltip>
   </UISearchResult>
   <UIShowAllOwnedByUserResult>
     <msg>
-      <not-support>There is no View template for this document</not-support>
+      <not-support>No hi ha cap plantilla de Vista per a aquest document</not-support>
       <empty>No s'han trobat resultats.</empty>
-      <access-denied>You can't view this document, either because this template is not supported or because access is denied.</access-denied>
+      <access-denied>No pot veure aquest document, perquè o bé aquesta plantilla no està suportada o perquè no hi té accés a ella.</access-denied>
       <query-invalid>La consulta no és vàlida</query-invalid>
     </msg>
     <header>
@@ -970,15 +970,15 @@
       <datecreatedDESC>Ordena per la data de creació en ordre descendent</datecreatedDESC>
     </title>
     <tooltip>
-      <View>View this item</View>
+      <View>Veure aquest element</View>
       <OpenFolder>Vés a la carpeta</OpenFolder>
     </tooltip>
   </UIShowAllOwnedByUserResult>
   <UIShowAllFavouriteResult>
     <msg>
-      <not-support>There is no View template for this item</not-support>
+      <not-support>No hi ha cap plantilla de Vista per a aquest element</not-support>
       <empty>No s'han trobat resultats</empty>
-      <access-denied>You can't view this item, either because this template is not supported or because access is denied.</access-denied>
+      <access-denied>No pot veure aquest element, perquè o bé aquesta plantilla no està suportada o perquè no hi té accés a ella.</access-denied>
       <query-invalid>La consulta no és vàlida</query-invalid>
     </msg>
     <header>
@@ -1001,15 +1001,15 @@
       <datecreatedDESC>Ordena per la data de creació en ordre descendent</datecreatedDESC>
     </title>
     <tooltip>
-      <View>View this item</View>
+      <View>Veure aquest element</View>
       <OpenFolder>Vés a la carpeta</OpenFolder>
     </tooltip>
   </UIShowAllFavouriteResult>
   <UIShowAllHiddenResult>
     <msg>
-      <not-support>There is no View template for this item.</not-support>
+      <not-support>No hi ha cap plantilla de Vista per a aquest element.</not-support>
       <empty>No s'han trobat resultats.</empty>
-      <access-denied>You can't view this item, either because it has no View template or because you don't have access to it.</access-denied>
+      <access-denied>No pot veure aquest element, o bé perquè no té una plantilla de Vista o perquè es nega l'accés.</access-denied>
       <query-invalid>La consulta no és vàlida.</query-invalid>
     </msg>
     <header>
@@ -1033,16 +1033,16 @@
       <datecreatedDESC>Ordena per la data de creació en ordre descendent</datecreatedDESC>
     </title>
     <tooltip>
-      <View>View this Item</View>
+      <View>Veure aquest element</View>
       <OpenFolder>Vés a la carpeta</OpenFolder>
       <RemoveHiddenAttribute>Fer-ho visible</RemoveHiddenAttribute>
     </tooltip>
   </UIShowAllHiddenResult>
   <UIShowAllTrashResult>
     <msg>
-      <not-support>There is no View template for this item.</not-support>
+      <not-support>No hi ha cap plantilla de vista per a aquest element.</not-support>
       <empty>No s'han trobat resultats</empty>
-      <access-denied>You can't view this item, either because it has no View template or because you don't have access to it.</access-denied>
+      <access-denied>No pot veure aquest element, perquè o bé no té cap plantilla de vista o perquè no hi té accés a ella.</access-denied>
       <query-invalid>La consulta no és vàlida.</query-invalid>
     </msg>
     <header>
@@ -1065,7 +1065,7 @@
       <datecreatedDESC>Ordena per la data de creació en ordre descendent</datecreatedDESC>
     </title>
     <tooltip>
-      <View>View this Item</View>
+      <View>Veure aquest element</View>
       <OpenFolder>Vés a la carpeta</OpenFolder>
       <DeletePermanently>Suprimeix permanentment</DeletePermanently>
       <RestoreFromTrash>Recupera de la Paperera</RestoreFromTrash>
@@ -1321,7 +1321,7 @@
       <Cancel>#{word.cancel}</Cancel>
       <Export>Exporta</Export>
     </action>
-    <title>Export</title>
+    <title>Exporta</title>
   </UIExportNode>
   <!--
   ###############################################################################
@@ -1366,7 +1366,7 @@
       <error-removing-referenced-version>Aquesta versió està referenciada i no es pot treure.</error-removing-referenced-version>
       <confirm-restore>Està segur que vol restaurar aquesta versió?</confirm-restore>
       <confirm-delete>Està segur que vol suprimir aquesta versió?</confirm-delete>
-      <not-checked-out>You have to check out this document before restoring.</not-checked-out>
+      <not-checked-out>Ha de desprotegir aquest document abans de restaurar-lo.</not-checked-out>
       <invalid-item-state>You can't restore this version, either because one or more items were deleted or moved by another session.</invalid-item-state>
     </msg>
     <action>
@@ -1392,8 +1392,8 @@
       <noVersion>Cap versió</noVersion>
     </msg>
     <eventName>
-      <e_1>Added</e_1>
-      <e_2>Document Removed</e_2>
+      <e_1>Afegit</e_1>
+      <e_2>Document eliminat</e_2>
       <e_4>Propietat afegida</e_4>
       <e_16>Propietat canviada</e_16>
       <e_8>Propietat eliminada</e_8>
@@ -1516,7 +1516,7 @@
       <Cancel>#{word.cancel}</Cancel>
       <Import>Importa</Import>
     </action>
-    <title>Import</title>
+    <title>Importa</title>
     <msg>
       <import-successful>Importat correctament.</import-successful>
       <filename-invalid>Selecciona un fitxer xml per importar-lo.</filename-invalid>
@@ -1573,7 +1573,7 @@
   <UIViewVersion>
     <label>
       <nodeType>Tipus de node</nodeType>
-      <nodeName>Name</nodeName>
+      <nodeName>Nom</nodeName>
       <VersionNumber>Número de versió</VersionNumber>
       <VersionLabels>Etiquetes de versió</VersionLabels>
       <VersionDate>Data de versió</VersionDate>
@@ -1629,7 +1629,7 @@
       <action>Acció</action>
     </header>
     <info>
-      <child-not-found>This item doesn't have any child.</child-not-found>
+      <child-not-found>Aquest element no te cap de secundari.</child-not-found>
     </info>
   </UITreeList>
   <!--
@@ -1874,7 +1874,7 @@
     </label>
     <title>
       <exeButton>Anar</exeButton>
-      <backButton>Back</backButton>
+      <backButton>Enrere</backButton>
       <showHistory>Mostra l'Historial</showHistory>
       <changeNode>Canvia Node</changeNode>
     </title>
@@ -1958,7 +1958,7 @@
   </metadataForm>
   <UIViewMetadataTemplate>
     <msg>
-      <access-denied>Access denied. Either you are not the owner or don't have edit permission.</access-denied>
+      <access-denied>Accés denegat. O bé no ets el propietari, o bé no té permís d'edició.</access-denied>
     </msg>
   </UIViewMetadataTemplate>
   <!--
@@ -2034,7 +2034,7 @@
       <private>Privat</private>
       <state>Estat</state>
       <visibility>Visibilitat</visibility>
-      <nodeName>Name:</nodeName>
+      <nodeName>Nom:</nodeName>
       <lifecycleName>Nom del cicle de vida</lifecycleName>
       <stateName>Nom de l'estat</stateName>
     </label>
@@ -2166,9 +2166,9 @@
     </label>
     <msg>
       <mimetype-incorrect>Tipus de fitxer incorrecte. Les miniatures només es poden crear a partir de .JPG, .PNG o arxius en format GIF.</mimetype-incorrect>
-      <access-denied>Access denied. You don't have permission to add a thumbnail.</access-denied>
+      <access-denied>Accés denegat. No té permís per afegir una miniatura.</access-denied>
       <confirm-delete>Està segur que vol suprimir aquesta miniatura?</confirm-delete>
-      <is-checked-in>This item is checked in. Please check out before performing any action.</is-checked-in>
+      <is-checked-in>Aquest element està protegit. Si us plau, desprotegeix-lo abans de realitzar cap acció.</is-checked-in>
       <fileName-error>Si us plau, selecciona el fitxer a pujar.</fileName-error>
     </msg>
     <title>
@@ -2272,7 +2272,7 @@
 
   <PopupSelectPath>
     <title>
-      <UIOneNodePathSelector>Select Path</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Selecciona una Ruta</UIOneNodePathSelector>
     </title>
   </PopupSelectPath>
 
@@ -2302,7 +2302,7 @@
   <UISymLinkForm>
     <label>
       <symLinkName>Nom del enllaç simbòlic</symLinkName>
-      <pathNode>Path</pathNode>
+      <pathNode>Ruta</pathNode>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -2313,10 +2313,10 @@
       <name-invalid>Si us plau, introdueix el nom de l'enllaç simbòlic.</name-invalid>
       <name-not-allowed>Aquest nom no està permès.</name-not-allowed>
       <fileName-error>El nom del fitxer no és vàlid.</fileName-error>
-      <constraint-violation>You can't add an item of type '{0}' here.</constraint-violation>
-      <repository-exception>Access denied. You don't have permission to add a symlink here.</repository-exception>
+      <constraint-violation>No pots afegir un element de tipus '{0}' aquí.</constraint-violation>
+      <repository-exception>Accés denegat. No té permís per afegir un enllaç simbòlic.</repository-exception>
       <numberformat-exception>No pot desar aquesta carpeta. El nom proporcionat ha de ser en format numèric.</numberformat-exception>
-      <path-node-invalid>Please enter the path.</path-node-invalid>
+      <path-node-invalid>Si us plau introdueix la ruta.</path-node-invalid>
       <path-node-not-allowed>Aquest nom no està permès.</path-node-not-allowed>
       <non-node>Please select the trust target; you may not have the rights to read this item.</non-node>
       <cannot-save>You can't add a symlink for this type of document.</cannot-save>
@@ -2357,7 +2357,7 @@
 
   <UIPopupSymLink>
     <title>
-      <UIOneNodePathSelector>Select Target Item</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Selecciona l'element de destí</UIOneNodePathSelector>
     </title>
   </UIPopupSymLink>
   <UIPopupSymLink>
@@ -2944,7 +2944,7 @@
   </UIPopupPathFoRestore>
   <rootNodeInfo>
     <title>
-      <AddRootNode>Add Root</AddRootNode>
+      <AddRootNode>Afegeix l'Arrel</AddRootNode>
     </title>
   </rootNodeInfo>
 
@@ -3007,7 +3007,7 @@
       <restore>Restaura</restore>
     </title>
     <msg>
-      <have-no-view-template>La plantilla de visualització no és compatible.</have-no-view-template>
+      <have-no-view-template>La plantilla de Vista no és compatible.</have-no-view-template>
       <restore-complete>Recuperació completada.</restore-complete>
     </msg>
   </UIPublicationPanel>
@@ -3186,7 +3186,7 @@
     <DropFileMessage>Deixa aquí els fitxers a la carpeta actual</DropFileMessage>
     <Close>#{word.close}</Close>
     <in>en</in>
-    <MaxFileSizeAlert>La mida del fitxer excedeix el límit de mida atorgada de</MaxFileSizeAlert>
+    <MaxFileSizeAlert>The file size exceeds the size limit of</MaxFileSizeAlert>
     <Waiting>Esperant</Waiting>
     <Error>Error</Error>
     <or>o</or>
@@ -3194,7 +3194,7 @@
     <Keep>Conserva'ls ambdós</Keep>
     <Replace>Substitueix</Replace>
     <Canceled>Cancel·lat</Canceled>
-      <UploadNewVersion>Upload a new version</UploadNewVersion>
+      <UploadNewVersion>Puja una versió nova</UploadNewVersion>
     <Cancel>#{word.cancel}</Cancel>
     <AbortAllConfirmation>Vol anul·lar tots els arxius en curs?</AbortAllConfirmation>
   </label>
@@ -3202,7 +3202,7 @@
   <UIDocumentNodeList>
   <label>
   <CreatedOn>Creat el</CreatedOn>
-  <Updated>Actualitzat el</Updated>
+  <Updated>Updated</Updated>
   <by>per</by>
   <you>tu</you>
   </label>

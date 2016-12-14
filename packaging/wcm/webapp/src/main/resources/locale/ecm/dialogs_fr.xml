@@ -20,7 +20,7 @@
       </label>
     </dialog>
   </Ecm>
- 
+  
   <UIDocumentForm>
     <label>
       <title>#{word.title}</title>
@@ -63,7 +63,7 @@
         <width>Largeur</width>
         <height>Hauteur</height>
         <content>#{word.content}</content>
-        <re-upload>Un fichier existe déjà. Vous pouvez le supprimer et envoyer un autre fichier à partir d'ici.</re-upload>
+        <re-upload>Un fichier existe déjà. Vous pouvez le supprimer et uploader un autre fichier à partir d'ici.</re-upload>
       </label>
     </dialog>
   </File>
@@ -90,7 +90,7 @@
       <actionName>#{word.name}</actionName>
     </label>
   </EditFormAction>
- 
+
   <!--
   ###################### resoucebundle for exo:addMetadataAction dialogs template ####
   -->
@@ -313,83 +313,83 @@
 
   ###################### resoucebundle exo:taxonomyAction dialogs template ####
   -->
-  <no>Non</no>
-	<yes>Oui</yes>
-	<true>Vrai</true>
-	<false>Faux</false>
-	<Electronic>Électronique</Electronic>
-	<Paper>Papier</Paper>
-	<NONE>Aucun</NONE>
-	<CLASSIFIED>Classé</CLASSIFIED>
-	<UNCLASSIFIED>Non classé</UNCLASSIFIED>
-	<NOCONTRACT>Aucun contrat</NOCONTRACT>
-	<one-minute>Une fois par Minute</one-minute>
-	<hourly>Une fois par heure</hourly>
+<no>Non</no>
+<yes>Oui</yes>
+<true>Vrai</true>
+<false>Faux</false>
+<Electronic>Électronique</Electronic>
+<Paper>Papier</Paper>
+<NONE>Aucun</NONE>
+<CLASSIFIED>Classé</CLASSIFIED>
+<UNCLASSIFIED>Non classé</UNCLASSIFIED>
+<NOCONTRACT>Aucun contrat</NOCONTRACT>
+<one-minute>Une fois par Minute</one-minute>
+<hourly>Une fois par heure</hourly>
 <daily>Quotidien</daily>
-	<quarterly>Trimestriel</quarterly>
-	<yearly>Annuel</yearly>
-	<ten-years>Tous les 10 ans</ten-years>
-	<read>Action Utilisateur</read>
-	    <schedule>Planificateur</schedule>
+<quarterly>Trimestriel</quarterly>
+<yearly>Annuel</yearly>
+<ten-years>Tous les 10 ans</ten-years>
+<read>Action Utilisateur</read>
+  <schedule>Planificateur</schedule>
   <node_added>Ajout de Contenu</node_added>
   <node_removed>Suppression de Contenu</node_removed>
   <property_added>Ajout de Propriété</property_added>
   <property_removed>Suppression de Propriété</property_removed>
   <property_changed>Modification de Propriété</property_changed>
-  
+
   <ScriptAction>
-   <dialog>
-     <label>
-							<isDeep>Récursif</isDeep>
+    <dialog>
+      <label>
+        <isDeep>Récursif</isDeep>
         <nodetypes>Types de noeud</nodetypes>
         <affectedNodeTypeNames>Types de noeud affectés</affectedNodeTypeNames>
-     </label>
-   </dialog>
+      </label>
+    </dialog>
   </ScriptAction>
 
   <AddMetadata>
-   <dialog>
-     <label>
-     		<isDeep>Récursif</isDeep>
+    <dialog>
+      <label>
+        <isDeep>Récursif</isDeep>
         <nodetypes>Types de noeud</nodetypes>
         <affectedNodeTypeNames>Types de noeud affectés</affectedNodeTypeNames>
-     </label>
-   </dialog>
+      </label>
+    </dialog>
   </AddMetadata>
 
   <EnableVersioning>
-   <dialog>
-     <label>
-     		<isDeep>Récursif</isDeep>
+    <dialog>
+      <label>
+        <isDeep>Récursif</isDeep>
         <nodetypes>Types de Noeud</nodetypes>
         <affectedNodeTypeNames>Types de Noeud Affectés</affectedNodeTypeNames>
-     </label>
-   </dialog>
+      </label>
+    </dialog>
   </EnableVersioning>
   
   <AutoVersioning>
-   <dialog>
-     <label>
-     		<isDeep>Récursif</isDeep>
+    <dialog>
+      <label>
+        <isDeep>Récursif</isDeep>
         <nodetypes>Types de Noeud</nodetypes>
         <affectedNodeTypeNames>Types de Noeud Affectés</affectedNodeTypeNames>
-     </label>
-   </dialog>
+      </label>
+    </dialog>
   </AutoVersioning>
-		
+
   <AccessibleMedia>
-  	<dialog>
-  		<label>
-  			<captions>Sous-titres</captions>
-				<audioDescription>Description audio</audioDescription>
-				<alternativeText>Texte alternatif</alternativeText>
-			</label>
-		</dialog>
-		<help>
-			<CaptionsHelp>Les sous-titres communiquent le contenu des dialogues mais aussi toutes informations audio importantes.</CaptionsHelp>
-			<AudioDescriptionHelp>Narration ajoutée à une piste sonore pour décrire les détails visuels importants.</AudioDescriptionHelp>
-			<AlternativeTextHelp>Fournir une alternative accessible pour présenter l'information</AlternativeTextHelp>
-		</help>
-	</AccessibleMedia>
+  <dialog>
+  <label>
+  <captions>Sous-titres</captions>
+<audioDescription>Description audio</audioDescription>
+<alternativeText>Texte alternatif</alternativeText>
+</label>
+</dialog>
+<help>
+<CaptionsHelp>Les sous-titres communiquent le contenu des dialogues mais aussi toutes informations audio importantes.</CaptionsHelp>
+<AudioDescriptionHelp>Narration ajoutée à une piste sonore pour décrire les détails visuels importants.</AudioDescriptionHelp>
+<AlternativeTextHelp>Fournir une alternative accessible pour présenter l'information</AlternativeTextHelp>
+</help>
+</AccessibleMedia>
   
 </bundle>

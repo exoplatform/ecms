@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bundle>
   <UISEOForm>
-    <label>
-      <title>Titre: </title>
-      <description>Description: </description>
-      <keywords>Mots clés: </keywords>
-      <language>Langue: </language>
-      <robots>Robots: </robots>
-      <sitemap>Sitemap: </sitemap>
+    <label>  
+      <title>Title:</title>
+      <description>Description:</description>
+      <keywords>Keywords:</keywords>
+      <language>Language:</language>
+      <robots>Robots:</robots>
+      <sitemap>Sitemap:</sitemap>
       <sitemapvisible>Visible dans le sitemap</sitemapvisible>
     <isInherited>Hérité de la page parent</isInherited>
-      <priority>Priorité: </priority>
-      <frequency>Fréquence: </frequency>
+      <priority>Priority:</priority>
+      <frequency>Frequency:</frequency>
       <select-language>Sélectionnez une langue</select-language>
       <option>
         <Always>Toujours</Always>
@@ -21,45 +21,45 @@
         <Monthly>Mensuel</Monthly>
         <Yearly>Annuel</Yearly>
         <Never>Jamais</Never>
-      </option>      
+      </option> 
     </label>
     <tip>
-        <priority>Valeurs valides de 0.0 à 1.0.</priority>
-    </tip>  
+  <priority>Valeurs valides de 0.0 à 1.0.</priority>
+  </tip>   
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
       <repository-exception>Une erreur inattendue s'est produite lors de l'enregistrement des métadonnées de la page.</repository-exception>
-      <confirm-delete>Êtes-vous sûr de vouloir supprimer les données SEO?</confirm-delete>   
+      <confirm-delete>Êtes-vous sûr de vouloir supprimer les données SEO?</confirm-delete>      
     </msg>
     <title>
-    	<seo-delete>Supprimer</seo-delete>
+    <seo-delete>Supprimer</seo-delete>
     </title>
-    <help> 
+  <help> 
   <priority>Valeurs valides de 0.0 à 1.0.</priority>
   <description>Aidez les utilisateurs des moteurs de recherche en leur montrant que cette page contient ce qu'ils recherchent.</description>
   <keywords>Termes les plus importants de la page séparés par une virgule.</keywords>  
-	  </help>	
+  </help>  
   </UISEOForm>
   <UISEOPopupWindow>
-    <title>
+  <title>
       <UISEOForm>Gestion SEO</UISEOForm>
-    </title>    
-  </UISEOPopupWindow>
+  </title>
+  </UISEOPopupWindow>    
   <UISEOToolbarForm>
-    <title>
+  <title>
       <seo>Gestion SEO</seo>
-    </title>
-    <label>
-  	  <seo>SEO</seo>
-  	</label>
-  </UISEOToolbarForm>
+  </title>
+  <label>
+    <seo>SEO</seo>
+  </label>
+  </UISEOToolbarForm>  
   <FloatNumberValidator>
     <msg>
       <Invalid-number>La valeur du champ Priorité doit être numérique. Les valeurs valides vont de 0.0 à 1.0.</Invalid-number>
     </msg>
-  </FloatNumberValidator> 
+  </FloatNumberValidator>  
   
 </bundle>

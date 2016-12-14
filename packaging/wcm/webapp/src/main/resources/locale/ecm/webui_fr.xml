@@ -43,7 +43,7 @@
   </UISelectedCategoriesGrid>
   <!--
   ######################################################################
-  #	 org.exoplatform.ecm.webui.selector.UIPermissionSelector		       #
+  # org.exoplatform.ecm.webui.selector.UIPermissionSelector           #
   ######################################################################
   -->
   <SelectUserOrGroup>
@@ -88,7 +88,7 @@
   -->
   <rootNodeInfo>
     <title>
-      <AddRootNode>Add Root</AddRootNode>
+      <AddRootNode>Ajouter le Dossier Racine</AddRootNode>
     </title>
   </rootNodeInfo>
   <!--

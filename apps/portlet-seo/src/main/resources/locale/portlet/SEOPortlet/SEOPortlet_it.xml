@@ -2,16 +2,16 @@
 <bundle>
   <UISEOForm>
     <label>  
-      <title>Titolo:</title>
-      <description>Descrizione:</description>
-      <keywords>Parole Chiave:</keywords>
-      <language>Lingua:</language>
-      <robots>Robot:</robots>
-      <sitemap>Mappa Sito:</sitemap>
+      <title>Title:</title>
+      <description>Description:</description>
+      <keywords>Keywords:</keywords>
+      <language>Language:</language>
+      <robots>Robots:</robots>
+      <sitemap>Sitemap:</sitemap>
       <sitemapvisible>Visibile nella Mappa Sito</sitemapvisible>
     <isInherited>Ereditato dalla pagina superiore</isInherited>
-      <priority>Priorità:</priority>
-      <frequency>Frequenza:</frequency>
+      <priority>Priority:</priority>
+      <frequency>Frequency:</frequency>
       <select-language>Seleziona una lingua</select-language>
       <option>
         <Always>Sempre</Always>

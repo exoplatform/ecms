@@ -191,7 +191,7 @@
       </label> 
     </view>
   </ScriptAction>
-  	
+  
   <AddMetadata>
     <view>
       <label>
@@ -202,7 +202,7 @@
       </label> 
     </view>
   </AddMetadata>
-		
+
   <EnableVersioning>
     <view>
       <label>
@@ -228,10 +228,10 @@
    <AccessibleMedia>
     <view>
       <label>
-      	<Play-audio-description-of-this-video>Audio description</Play-audio-description-of-this-video>
-      	<Read-more>Read more</Read-more>
-      	<Read-less>Read less</Read-less>
-      	<Switch-back-to-original-video>Original video</Switch-back-to-original-video>
+      <Play-audio-description-of-this-video>Audio description</Play-audio-description-of-this-video>
+      <Read-more>Read more</Read-more>
+      <Read-less>Read less</Read-less>
+      <Switch-back-to-original-video>Original video</Switch-back-to-original-video>
       </label>
       <tooltip>
       <A-second-media-file-is-available-as-audio-description>A second media file is available as an audio description</A-second-media-file-is-available-as-audio-description>

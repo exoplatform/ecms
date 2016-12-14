@@ -605,7 +605,7 @@
   </requiredPrimaryTypePopup>
   <superTypesPopup>
     <title>
-      <FormsuperTypesPopup>Süper Türleri Seçin</FormsuperTypesPopup>
+      <FormsuperTypesPopup>Süper Türleri  Seçin</FormsuperTypesPopup>
     </title>
   </superTypesPopup>
   <NodeTypePopup>
@@ -1391,7 +1391,7 @@
     </action>
     <msg>
       <checkbox-require>Lütfen en az bir izin seçin.</checkbox-require>
-      <userOrGroup-required>Lütfen izni kaydetmeden önce bir kullanıcı veya grup seçin.</userOrGroup-required>
+      <userOrGroup-required>Lütfen izni kaydetmeden önce  bir kullanıcı veya grup seçin.</userOrGroup-required>
       <not-change-permission>Bir izni ekleme hakkınız yok.</not-change-permission>
       <access-denied>Erişim engellendi. Bu izini kaldıramazsınız.</access-denied>
     </msg>
@@ -1494,7 +1494,7 @@
     </action>
     <msg>
       <checkbox-require>Lütfen en az bir izin seçin.</checkbox-require>
-      <userOrGroup-required>Lütfen izni kaydetmeden önce bir kullanıcı veya grup seçin.</userOrGroup-required>
+      <userOrGroup-required>Lütfen izni kaydetmeden önce  bir kullanıcı veya grup seçin.</userOrGroup-required>
       <not-change-permission>Bir izni ekleme hakkınız yok.</not-change-permission>
       <access-denied>Erişim engellendi. Bu izini kaldıramazsınız.</access-denied>
     </msg>
@@ -1571,10 +1571,10 @@
   </UIOthersTemplateList>
 
   <!--
-   ######################################################################################
-   #             org.exoplatform.ecm.webui.component.admin.templates.clv package #
-   ######################################################################################
-   -->
+ ######################################################################################
+ #             org.exoplatform.ecm.webui.component.admin.templates.clv package #
+ ######################################################################################
+ -->
 
   <UITabPane>
     <title>
@@ -2338,7 +2338,7 @@
   </UILockNodeList>
   <EditUnLockForm>
     <title>
-      <UIUnLockForm>Kilit Yönet</UIUnLockForm>
+      <UIUnLockForm>Kilit  Yönet</UIUnLockForm>
     </title>
   </EditUnLockForm>
   <UITabPane>
@@ -2346,7 +2346,7 @@
       <Close>#{word.close}</Close>
     </action>
     <title>
-      <UILockHolderContainer>Kilit Yönet</UILockHolderContainer>
+      <UILockHolderContainer>Kilit  Yönet</UILockHolderContainer>
       <UILockNodeList>Kilitli Düğüm</UILockNodeList>
     </title>
   </UITabPane>

@@ -157,10 +157,10 @@
       <Save>#{word.save}</Save>
     </action>
     <msg>
-      <name-not-allowed>Порожнє ім'я або спеціальні символи не допускаються в імені дії.</name-not-allowed>
+      <name-not-allowed>Порожнє  ім'я або спеціальні символи не допускаються в імені дії.</name-not-allowed>
       <path-invalid>Неприпустимий шлях.</path-invalid>
       <taxonomy-existed>Дерево категорій вже існує.</taxonomy-existed>
-      <taxonomy-node-existed>Вузол категорії вже існує.</taxonomy-node-existed>
+      <taxonomy-node-existed>Вузол  категорії вже існує.</taxonomy-node-existed>
       <no-permission-add>Ви не маєте право додати дію.</no-permission-add>
       <not-created-tree>Дерево категорій поки ще не створено.</not-created-tree>
     </msg>
@@ -199,7 +199,7 @@
     </action>
     <msg>
       <register-unsuccessfull>Простір імен або URI вже існує.</register-unsuccessfull>
-      <prefix-null>Будь ласка, укажіть префікс простору імен .</prefix-null>
+      <prefix-null>Будь ласка, укажіть префікс простору  імен .</prefix-null>
       <uri-null>Будь ласка, укажіть URI простору імен.</uri-null>
     </msg>
   </UINamespaceForm>
@@ -566,7 +566,7 @@
       <nodeType-name>Потрібне ім'я вузла.</nodeType-name>
       <fileName-invalid>Ім'я файлу містить деякі неприпустимі символи.</fileName-invalid>
       <node-type-exists>Тип вузла '{0}' уже існує.</node-type-exists>
-      <node-type-name>Ім'я типу вузла є неприпустимим.</node-type-name>
+      <node-type-name>Ім'я  типу вузла є неприпустимим.</node-type-name>
       <values-error>Будь ласка, виберіть лише один тип вузла для первинного типу за замовчуванням.</values-error>
       <confirm-delete-child>Ви дійсно бажаєте видалити цей дочірній вузол?</confirm-delete-child>
       <confirm-delete-property>Ви дійсно бажаєте видалити цю властивість?</confirm-delete-property>
@@ -610,7 +610,7 @@
   </superTypesPopup>
   <NodeTypePopup>
     <title>
-      <UINodeTypeForm>Додати/ Редагувати визначення типу вузла</UINodeTypeForm>
+      <UINodeTypeForm>Додати/ Редагувати  визначення типу вузла</UINodeTypeForm>
     </title>
   </NodeTypePopup>
   <ViewNodeTypePopup>
@@ -663,7 +663,7 @@
       <Cancel>#{word.cancel}</Cancel>
       <Upload>Завантажити</Upload>
     </action>
-    <title>Імпортувати вузол файлу типу XML</title>
+    <title>Імпортувати вузол файлу типу  XML</title>
     <msg>
       <filename-error>Огляд файлу типу вузла, який імпортується.</filename-error>
       <data-file-error>Лише .xml або .zip файли можуть бути імпортовані.</data-file-error>
@@ -696,7 +696,7 @@
   </UINodeTypeImport>
   <NodeTypeImportPopup>
     <title>
-      <UINodeTypeImportPopup>Імпортувати вузол файлу типу XML</UINodeTypeImportPopup>
+      <UINodeTypeImportPopup>Імпортувати вузол файлу типу  XML</UINodeTypeImportPopup>
     </title>
   </NodeTypeImportPopup>
   <!--
@@ -767,7 +767,7 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <action-type-added>Тип дії '{0}' був успішно доданий.</action-type-added>
+      <action-type-added>Тип дії '{0}'  був успішно доданий.</action-type-added>
       <action-type-create-error>Сталася помилка під час створення типу дії.</action-type-create-error>
       <action-name-invalid>"{0}", є неприпустимим. Ім'я має починатися з "exo:'.</action-name-invalid>
       <action-exist>Ця дія вже існує у системі ECM .</action-exist>
@@ -944,7 +944,7 @@
     <msg>
       <button-select-error>Будь ласка, виберіть принаймні одну функцію зі списку.</button-select-error>
       <tab-name-error>Ім'я вкладки потрібно.</tab-name-error>
-      <fileName-invalid>Нове Ім'я містить кілька неприпустимих символів.</fileName-invalid>
+      <fileName-invalid>Нове Ім'я  містить кілька неприпустимих символів.</fileName-invalid>
     </msg>
     <label>
       <version>Відновити версію</version>
@@ -1257,7 +1257,7 @@
       <exist>Категорія "{0}" уже існує.</exist>
       <name-null>Будь ласка, вкажіть ім'я категорії.</name-null>
       <name-invalid>Ім'я категорії має деякі неприпустимі символи.</name-invalid>
-      <name-too-long>Ім'я категорії має містити менше 30 символів.</name-too-long>
+      <name-too-long>Ім'я категорії має містити  менше 30 символів.</name-too-long>
     </msg>
   </UITaxonomyForm>
 
@@ -1571,10 +1571,10 @@
   </UIOthersTemplateList>
 
   <!--
-   ######################################################################################
-   #             org.exoplatform.ecm.webui.component.admin.templates.clv package #
-   ######################################################################################
-   -->
+ ######################################################################################
+ #             org.exoplatform.ecm.webui.component.admin.templates.clv package #
+ ######################################################################################
+ -->
 
   <UITabPane>
     <title>

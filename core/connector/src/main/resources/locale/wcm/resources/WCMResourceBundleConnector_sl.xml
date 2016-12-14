@@ -25,7 +25,7 @@
   </OpenInOfficeConnector>
   <DocumentAutoVersion>
     <msg>
-      <WrongMimeType>Vrstamime naložene datoteke je neznana. Nove različica {0} ne bo ustvarjena.</WrongMimeType>
+      <WrongMimeType>Vrsta mime naložene datoteke je neznana. Nove različica {0} ne bo ustvarjena.</WrongMimeType>
     </msg>
   </DocumentAutoVersion>
 </bundle>

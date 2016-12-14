@@ -586,7 +586,7 @@
   </UIPropertyDefinitionForm>
   <UIChildNodeDefinitionForm>
     <msg>
-      <child-name>اسم العقدة الإبن ضروري</child-name>
+      <child-name>اسم  العقدة الإبن ضروري</child-name>
       <child-invalid>الاسم يحتوي على حرف غير صالح</child-invalid>
       <default-node-type-not-found>نوع العقدة الإفتراضي غير موجود</default-node-type-not-found>
       <requiredPrimaryType>النوع الرئيسي ضروري</requiredPrimaryType>
@@ -663,7 +663,7 @@
       <Cancel>#{word.cancel}</Cancel>
       <Upload>تحميل</Upload>
     </action>
-    <title>'XML' إستيراد نوع عقدة من ملف ذات نوع</title>
+    <title>'XML' إستيراد  نوع عقدة من ملف ذات نوع</title>
     <msg>
       <filename-error>استعراض الملف نوع عقدة للاستيراد</filename-error>
       <data-file-error>معتمدة فقط أكس ملف أو ملف مضغوط لاستيراد.</data-file-error>
@@ -696,7 +696,7 @@
   </UINodeTypeImport>
   <NodeTypeImportPopup>
     <title>
-      <UINodeTypeImportPopup>إستيراد نوع عقدة من ملف من نوع 'XML'</UINodeTypeImportPopup>
+      <UINodeTypeImportPopup>إستيراد  نوع عقدة من ملف من نوع 'XML'</UINodeTypeImportPopup>
     </title>
   </NodeTypeImportPopup>
   <!--
@@ -826,7 +826,7 @@
       <AddView>إضافة مشهد</AddView>
     </action>
     <msg>
-      <access-denied>.غير مسموح بالدخول! ليس لديك الصلاحيّات الكافية لاستخدام هذه المُهمّة.</access-denied>
+      <access-denied>.غير مسموح بالدخول!  ليس لديك الصلاحيّات الكافية لاستخدام هذه المُهمّة.</access-denied>
       <template-in-use>لا يمكن حذف '{0}'. هو الآن بحالة إستخدام.</template-in-use>
       <confirm-delete>هل ترغب حقــا بتأكيد عملية الحذف؟</confirm-delete>
     </msg>
@@ -1086,7 +1086,7 @@
     <msg>
       <version-restored>إستعادة الإصدار {0} بنجاح.</version-restored>
       <role-require>يجب إختيار الصلاحية</role-require>
-      <template-name-exist>إسم القالب '{0}' موجود مُسبقــا.</template-name-exist>
+      <template-name-exist>إسم القالب '{0}'  موجود مُسبقــا.</template-name-exist>
       <add-permission-denied>ليس لديك الصلاحيّات الكافية لاضافة قالب جديد.</add-permission-denied>
       <edit-permission-denied>ليس لديك الصلاحيّات الكافية لتغيير '{0}' النموذج.</edit-permission-denied>
     </msg>
@@ -1390,7 +1390,7 @@
       <Reset>إعادة تعيين</Reset>
     </action>
     <msg>
-      <checkbox-require>يُرجى اختيار صلاحيّة واحدة على أقصى تقدير.</checkbox-require>
+      <checkbox-require>يُرجى اختيار صلاحيّة واحدة  على أقصى تقدير.</checkbox-require>
       <userOrGroup-required>يُرجى اختيار مستخدم أو مجموعة قبل حفظ الصلاحيّات</userOrGroup-required>
       <not-change-permission>ليس لديك الحق في اضافة صلاحيّة.</not-change-permission>
       <access-denied>غير مسموح بالدخول. لا يمكن حذف هذه الصلاحيّة.</access-denied>
@@ -1494,9 +1494,9 @@
     </action>
     <msg>
       <checkbox-require>يجب عليك إختيار صلاحية واحدة على الأقل</checkbox-require>
-      <userOrGroup-required>يجب عليك اختيار المستخدم أو المجموعة قبل حفظ هذه الصلاحية</userOrGroup-required>
+      <userOrGroup-required>يجب عليك اختيار المستخدم أو المجموعة  قبل حفظ هذه الصلاحية</userOrGroup-required>
       <not-change-permission>ليس لديك الحق في اضافة صلاحية</not-change-permission>
-      <access-denied>.غير مسموح بالدخول! لا يمكن حذف هذه الصلاحيّة</access-denied>
+      <access-denied>.غير مسموح بالدخول!  لا يمكن حذف هذه الصلاحيّة</access-denied>
     </msg>
   </UIPermissionForm>
 
@@ -1571,10 +1571,10 @@
   </UIOthersTemplateList>
 
   <!--
-   ######################################################################################
-   #             org.exoplatform.ecm.webui.component.admin.templates.clv package #
-   ######################################################################################
-   -->
+ ######################################################################################
+ #             org.exoplatform.ecm.webui.component.admin.templates.clv package #
+ ######################################################################################
+ -->
 
   <UITabPane>
     <title>
@@ -1959,7 +1959,7 @@
     <msg>
       <permission-require>يُرجى إختيار الصلاحيات</permission-require>
       <name-invalid>هناك بعض الأحرف الغير متاحة في المجال الخاص بالاسم.</name-invalid>
-      <name-existing>إسم الاستبيان موجود مُسبقًا. يُرجى اختيار اسمــًا آخرا.</name-existing>
+      <name-existing>إسم الاستبيان موجود مُسبقًا. يُرجى اختيار اسمــًا  آخرا.</name-existing>
       <invalid-query>صيغة الاستبيان غير صحيحة. يُرجى التثبّت منها.</invalid-query>
       <access-denied>غير مسموح بالدخول. ليس لديك الصلاحية الكافية للقيام بهذه العمليّة.</access-denied>
     </msg>

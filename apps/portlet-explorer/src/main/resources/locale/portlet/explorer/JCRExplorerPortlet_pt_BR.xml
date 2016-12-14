@@ -47,7 +47,7 @@
     <msg>
       <not-support>Não é permitido votar nesse tipo de documento.</not-support>
       <not-checkedout>You must check out the document to vote.</not-checkedout>
-      <vote-restriction>You cannot vote more than one time.</vote-restriction>
+      <vote-restriction>You can't vote more than once.</vote-restriction>
     </msg>
   </UIVoteForm>
  
@@ -59,7 +59,7 @@
   <UIJCRExplorer>
     <msg>
       <refresh-session-success>A sessão foi atualizada com sucesso.</refresh-session-success>
-      <no-node-history>You are at the root.</no-node-history>
+      <no-node-history>You are at the root folder.</no-node-history>
       <save-session-success>Todas as alterações foram salvas.</save-session-success>
       <target-path-not-found>You can't access this path, either because it doesn't exist anymore or because you don't have access permissions.</target-path-not-found>
     </msg>
@@ -159,7 +159,7 @@
     <label>
       <enableStructure>Habilitar estrutura do DMS:</enableStructure>
       <showSideBar>Mostrar barra lateral:</showSideBar>
-      <showHiddenNode>Show Hidden Items:</showHiddenNode>
+      <showHiddenNode>Show Hidden Documents:</showHiddenNode>
       <showNonDocument>Show Non-document Items:</showNonDocument>
       <showRefDocuments>Mostrar documentos referenciados</showRefDocuments>
       <enableDragAndDrop>Habilitar Arrastar &amp; Soltar</enableDragAndDrop>
@@ -381,14 +381,14 @@
       <path-not-found>Este elemento foi excluído ou modificado. Por favor, clique no botão Atualizar.</path-not-found>
       <paste-lock-exception>'{0}' can't be pasted here. Make sure it is not locked nor this folder. Also check that no related document is locked.</paste-lock-exception>
       <can-not-checkin-node>You can't check in this item. Please check that you have the necessary permissions.</can-not-checkin-node>
-      <can-not-checkout-node>You can't check out this itel. Please check that you have the necessary permissions.</can-not-checkout-node>
+      <can-not-checkout-node>You can't check out this item. Please check that you have the necessary permissions.</can-not-checkout-node>
       <move-constraint-exception>An error occurred while moving this item.</move-constraint-exception>
-      <not-lock-owner>You can't unlock this item because you are not the lock owner.</not-lock-owner>
-      <is-checked-in>Please check out this item before renaming.</is-checked-in>
-      <is-checked-in-lock>Please check out this item before locking.</is-checked-in-lock>
+      <not-lock-owner>You can't unlock this document because you are not the lock owner.</not-lock-owner>
+      <is-checked-in>Please check out this document before renaming.</is-checked-in>
+      <is-checked-in-lock>Please check out this document before locking.</is-checked-in-lock>
       <cant-lock>You can't lock this document.</cant-lock>
       <node-locked>O item com caminho {0} ou de nível superior está bloqueado.</node-locked>
-      <can-not-delete>Please close this item before deleting.</can-not-delete>
+      <can-not-delete>Please close this document before deleting.</can-not-delete>
       <can-not-delete-version>You can't delete this document. It's versioned.</can-not-delete-version>
       <not-support>You can't delete the selected item. Please select another one.</not-support>
       <current-node-not-allow-paste>You can't paste the copied item there.</current-node-not-allow-paste>
@@ -2966,7 +2966,7 @@
    </action>
   </UIPublicationContainer>
 
-<UIPublicationPanel>
+  <UIPublicationPanel>
     <button>
       <Close>#{word.close}</Close>
     </button>
@@ -3186,7 +3186,7 @@
     <DropFileMessage>Deixar seus arquivos na pasta atual</DropFileMessage>
     <Close>#{word.close}</Close>
     <in>em</in>
-    <MaxFileSizeAlert>O tamanho do arquivo excede o limite de tamanho de</MaxFileSizeAlert>
+    <MaxFileSizeAlert>The file size exceeds the size limit of</MaxFileSizeAlert>
     <Waiting>Esperando</Waiting>
     <Error>Erro</Error>
     <or>ou</or>
@@ -3202,7 +3202,7 @@
   <UIDocumentNodeList>
   <label>
   <CreatedOn>Criado em</CreatedOn>
-  <Updated>Atualizado</Updated>
+  <Updated>Updated</Updated>
   <by>por</by>
   <you>você</you>
   </label>

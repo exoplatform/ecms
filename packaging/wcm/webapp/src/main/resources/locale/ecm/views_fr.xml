@@ -107,7 +107,7 @@
       </label>
     </view>
   </ListView>
- 
+
   <!--
   ###################### resoucebundle for exo:addMetadataAction view template ####
   -->
@@ -121,7 +121,7 @@
       </label>
     </view>
   </AddMetadata>
- 
+
   <!--
   ###################### resoucebundle for exo:autoVersioning view template ####
   -->
@@ -182,61 +182,61 @@
   </ElementSet>
 
   <ScriptAction>
-   <view>
-     <label> 
-							<isDeep>Récursif</isDeep>
+    <view>
+      <label> 
+        <isDeep>Récursif</isDeep>
         <nodetypes>Types de noeud</nodetypes>
         <affectedNodeTypeNames>Types de noeud affectés</affectedNodeTypeNames>
         <nodeTypeName>Types de noeud</nodeTypeName>
-     </label> 
-   </view>
+      </label> 
+    </view>
   </ScriptAction>
-  	
+  
   <AddMetadata>
-   <view>
-     <label>
-							<isDeep>Récursif</isDeep>
+    <view>
+      <label>
+        <isDeep>Récursif</isDeep>
         <nodetypes>Types de noeud</nodetypes>
         <affectedNodeTypeNames>Types de noeud affectés</affectedNodeTypeNames>
         <nodeTypeName>Types de noeuds</nodeTypeName>
-     </label> 
-   </view>
+      </label> 
+    </view>
   </AddMetadata>
-		
+
   <EnableVersioning>
-   <view>
-     <label>
-							<isDeep>Récursif</isDeep>
+    <view>
+      <label>
+        <isDeep>Récursif</isDeep>
         <nodetypes>Types de noeud</nodetypes> 
         <affectedNodeTypeNames>Types de noeud affectés</affectedNodeTypeNames>
         <nodeTypeName>Types de noeud</nodeTypeName>
-     </label> 
-   </view>
+      </label> 
+    </view>
   </EnableVersioning>
   
   <AutoVersioning>
-   <view>
-     <label>
-     		<isDeep>Récursif</isDeep>
+    <view>
+      <label>
+        <isDeep>Récursif</isDeep>
         <nodetypes>Types de noeud</nodetypes>
         <affectedNodeTypeNames>Types de noeud affectés</affectedNodeTypeNames>
         <nodeTypeName>Types de noeud</nodeTypeName>
-     </label> 
-   </view>
+      </label> 
+    </view>
   </AutoVersioning>
   
-  <AccessibleMedia>
+   <AccessibleMedia>
     <view>
       <label>
-      	<Play-audio-description-of-this-video>Description audio</Play-audio-description-of-this-video>
-      	<Read-more>Lire la suite</Read-more>
-      	<Read-less>Réduire</Read-less>
-      	<Switch-back-to-original-video>Vidéo d'origine</Switch-back-to-original-video>
+      <Play-audio-description-of-this-video>Description audio</Play-audio-description-of-this-video>
+      <Read-more>Lire la suite</Read-more>
+      <Read-less>Réduire</Read-less>
+      <Switch-back-to-original-video>Vidéo d'origine</Switch-back-to-original-video>
       </label>
       <tooltip>
-      	<A-second-media-file-is-available-as-audio-description>Un second media est disponible comme description audio</A-second-media-file-is-available-as-audio-description>
+      <A-second-media-file-is-available-as-audio-description>Un second media est disponible comme description audio</A-second-media-file-is-available-as-audio-description>
       </tooltip>
     </view>
   </AccessibleMedia>
-  
+ 
 </bundle>

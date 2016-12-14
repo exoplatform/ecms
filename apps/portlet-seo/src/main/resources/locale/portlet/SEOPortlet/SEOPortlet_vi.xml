@@ -2,16 +2,16 @@
 <bundle>
   <UISEOForm>
     <label>  
-      <title>Tiêu đề:</title>
-      <description>Mô tả:</description>
-      <keywords>Từ khóa:</keywords>
-      <language>Ngôn ngữ:</language>
-      <robots>Các Robot:</robots>
-      <sitemap>Sơ đồ Trang:</sitemap>
+      <title>Title:</title>
+      <description>Description:</description>
+      <keywords>Keywords:</keywords>
+      <language>Language:</language>
+      <robots>Robots:</robots>
+      <sitemap>Sitemap:</sitemap>
       <sitemapvisible>Hiển thị trên Sơ đồ Trang</sitemapvisible>
     <isInherited>Được kế thừa từ trang mẹ</isInherited>
-      <priority>Độ ưu tiên:</priority>
-      <frequency>Tần suất:</frequency>
+      <priority>Priority:</priority>
+      <frequency>Frequency:</frequency>
       <select-language>Chọn Ngôn ngữ</select-language>
       <option>
         <Always>Luôn luôn</Always>

@@ -669,7 +669,7 @@
       <data-file-error>XMLファイルもしくはZIPファイルのみインポートすることがサポートされます。</data-file-error>
       <data-invalid>タンプノードをインポートする際の無効なデータ</data-invalid>
       <nodetype-exist>無効なデータ：ノードタイプは存在します : '{0}'</nodetype-exist>
-      <namespace-invalid>無効なデータ: 不明なネームスペース : '{0}'</namespace-invalid>
+      <namespace-invalid>無効なデータ:  不明なネームスペース : '{0}'</namespace-invalid>
     </msg>
   </UINodeTypeUpload>
   <!--
@@ -1571,10 +1571,10 @@
   </UIOthersTemplateList>
 
   <!--
-   ######################################################################################
-   #             org.exoplatform.ecm.webui.component.admin.templates.clv package #
-   ######################################################################################
-   -->
+ ######################################################################################
+ #             org.exoplatform.ecm.webui.component.admin.templates.clv package #
+ ######################################################################################
+ -->
 
   <UITabPane>
     <title>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <EditingPortlet>
+    <label>
+      <Editing>crwdns6836804:0crwdne6836804:0</Editing>
+    </label>
+    <msg>
+      <not-permission>crwdns6839021:0crwdne6839021:0</not-permission>
+    </msg>
+  </EditingPortlet>
+
+  <UIEditingForm>
+    <label>
+      <option>
+        <Draft>crwdns6836806:0crwdne6836806:0</Draft>
+        <Published>crwdns6836807:0crwdne6836807:0</Published>
+      </option>
+    </label>
+  </UIEditingForm>
+</bundle>

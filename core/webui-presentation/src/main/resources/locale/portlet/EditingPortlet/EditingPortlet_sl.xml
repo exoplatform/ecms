@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <EditingPortlet>
+    <label>
+      <Editing>Način:</Editing>
+    </label>
+    <msg>
+      <not-permission>Nimate dovoljenja za izvedbo te akcije.</not-permission>
+    </msg>
+  </EditingPortlet>
+
+  <UIEditingForm>
+    <label>
+      <option>
+        <Draft>Uredi</Draft>
+        <Published>Objavljeno</Published>
+      </option>
+    </label>
+  </UIEditingForm>
+</bundle>

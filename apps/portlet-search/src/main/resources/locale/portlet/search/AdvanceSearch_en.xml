@@ -62,11 +62,11 @@
     </title>
   </searchResultBasePathInputSetAction>  
   <UISearchForm>  
-  	 <message>
+   <message>
      <keyword-not-support>The keyword is invalid. Some characters are not recognized.</keyword-not-support>
-  	   <not-checked>Please select a search type.</not-checked>
+     <not-checked>Please select a search type.</not-checked>
      <keyword-not-empty>Please enter a keyword.</keyword-not-empty>
-  	 </message>
+   </message>
   </UISearchForm>
   <UIPaginatorDefault>
     <label>

@@ -117,8 +117,8 @@
   <UICLVConfigOrderTypeFormSelectBox>
     <label>
       <option>
-      <OrderDesc>Descendant</OrderDesc>
-      <OrderAsc>Ascendant</OrderAsc>
+        <OrderDesc>Descendant</OrderDesc>
+        <OrderAsc>Ascendant</OrderAsc>
       </option>
     </label>
   </UICLVConfigOrderTypeFormSelectBox>
@@ -163,10 +163,10 @@
     </title>
   </UIContentDialogFormPopupWindow>
   <UICLVConfigContextualFolderRadioBoxInput>
-  	<label>
-		  <contextualEnable>Activé</contextualEnable>
-		  <contextualDisable>Désactivé</contextualDisable>
-  	</label>
+    <label>
+      <contextualEnable>Activé</contextualEnable>
+      <contextualDisable>Désactivé</contextualDisable>
+    </label>
   </UICLVConfigContextualFolderRadioBoxInput>
   <PublicationStates>
     <archived>Archivé</archived>
@@ -181,9 +181,9 @@
     <published>Publié</published>
   </PublicationStates>
   <UICLVConfigCacheEnableRadioBoxInput>
-  	<label>
+    <label>
       <ENABLE>Par Authentification</ENABLE>
       <DISABLE>Par Rôle</DISABLE>
-  	</label>
+    </label>
   </UICLVConfigCacheEnableRadioBoxInput>
 </bundle>

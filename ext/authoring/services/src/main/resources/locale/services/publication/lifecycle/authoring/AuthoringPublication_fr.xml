@@ -5,12 +5,12 @@
       <changeState>
         <obsoleted>Le contenu est obsolète</obsoleted>
         <published>Le contenu est publié</published>
-				<unpublished>Le contenu est non publié</unpublished>
-				<archived>Le contenu est archivé</archived>
-				<staged>Le contenu est prêt à publier</staged>
-				<approved>Le contenu est validé</approved>
-				<pending>Le contenu est en attente de validation</pending>
-				<draft>Le contenu est brouillon</draft>
+<unpublished>Le contenu est non publié</unpublished>
+<archived>Le contenu est archivé</archived>
+<staged>Le contenu est prêt à publier</staged>
+<approved>Le contenu est validé</approved>
+<pending>Le contenu est en attente de validation</pending>
+<draft>Le contenu est brouillon</draft>
       </changeState>
     </AuthoringPublicationPlugin>
   </PublicationService>
