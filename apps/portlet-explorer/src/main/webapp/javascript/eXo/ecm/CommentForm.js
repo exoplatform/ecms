@@ -55,6 +55,7 @@
             customConfig: '/commons-extension/ckeditorCustom/config.js',
             extraPlugins: extraPlugins,
             placeholder: placeholder,
+            typeOfRelation: 'mention_comment',
             on: {
                 instanceReady: function (evt) {
                     // Hide the editor top bar.
