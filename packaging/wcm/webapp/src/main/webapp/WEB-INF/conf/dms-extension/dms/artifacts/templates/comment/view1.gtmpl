@@ -47,7 +47,7 @@ import org.exoplatform.web.application.Parameter ;
       Ignore: '${ignoreLabel}'
     } """;
 
-	  jsManager.require("SHARED/wcm-utils", "wcmutil").addScripts("wcmutil.WCMUtils.initUserProfilePopup($labels);");
+	  jsManager.require("SHARED/uiCommentForm", "commentForm").addScripts("eXo.ecm.CommentForm.initUserProfilePopup($labels);");
 %>
   <style>
 		<% _ctx.include(uicomponent.getTemplateSkin("exo:comments", "Stylesheet")); %>

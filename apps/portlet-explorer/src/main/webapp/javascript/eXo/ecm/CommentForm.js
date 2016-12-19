@@ -1,4 +1,4 @@
-(function ($, _) {
+(function ($, _, userPopupPlugin, socialUtil) {
     var CommentForm = function() {}
     //
     CommentForm.prototype.init = function(placeholder) {
@@ -105,6 +105,22 @@
         //editor.setData("<p><img class=\"pull-left\" src=\"https://exo.mybalsamiq.com/mockups/4569881.png?key&#61;249fdfb33bdb917511880603ded31e8ce185539b&amp;lastUpdate&#61;1469636847000#\" title=\"a\" />sdfs</p>↵↵<p>sdf</p>↵");
         //$(CKEDITOR.instances["comment"].document.getBody().$).html('');
     };
+    
+    CommentForm.prototype.initUserProfilePopup = function(globalLabels) {
+        var labels = {};
+        var profileLabels = $.extend(true, {}, labels, globalLabels);
+        $.each(profileLabels, function(key) {
+            profileLabels[key] =  window.decodeURIComponent(profileLabels[key]);
+        });
+        $("[type|='mentionedUser']").userPopup({
+            restURL: '//' + window.location.host + eXo.social.portal.context + '/' + eXo.social.portal.rest + '/social/people' + '/getPeopleInfo/{0}.json',
+            labels: profileLabels,
+            content: false,
+            defaultPosition: "left",
+            keepAlive: true,
+            maxWidth: "240px"
+        });
+    };
 
 
     eXo.ecm.CommentForm = new CommentForm();
@@ -112,4 +128,4 @@
         CommentForm : eXo.ecm.CommentForm
     };
 
-})($, mentions._);
+})($, mentions._, userPopupPlugin, socialUtil);
