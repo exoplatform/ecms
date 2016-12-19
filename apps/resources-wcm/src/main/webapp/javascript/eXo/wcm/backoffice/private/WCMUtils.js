@@ -1,4 +1,4 @@
-(function(gj, base, userPopupPlugin, socialUtil) {
+(function(gj, base) {
 	// WCMUtils
 	function WCMUtils(){
 		this.cmdEcmBundle = "/bundle/";
@@ -379,22 +379,6 @@
 			var commentor = gj(this).attr("commentor");
 			var img = gj(this).find("img:first")[0];
 			eXo.ecm.WCMUtils.loadAvartar(commentor, img);
-		});
-	};
-
-	WCMUtils.prototype.initUserProfilePopup = function(globalLabels) {
-		var labels = {};
-		var profileLabels = gj.extend(true, {}, labels, globalLabels);
-		gj.each(profileLabels, function(key) {
-			profileLabels[key] =  window.decodeURIComponent(profileLabels[key]);
-		});
-		gj("[type|='mentionedUser']").userPopup({
-			restURL: '//' + window.location.host + eXo.social.portal.context + '/' + eXo.social.portal.rest + '/social/people' + '/getPeopleInfo/{0}.json',
-			labels: profileLabels,
-			content: false,
-			defaultPosition: "left",
-			keepAlive: true,
-			maxWidth: "240px"
 		});
 	};
 
@@ -1041,5 +1025,5 @@
 		CKEditor : eXo.ecm.CKEditor,
 		SELocalization : eXo.ecm.SELocalization
 	};
-})(gj, base, userPopupPlugin, socialUtil);
+})(gj, base);
 
