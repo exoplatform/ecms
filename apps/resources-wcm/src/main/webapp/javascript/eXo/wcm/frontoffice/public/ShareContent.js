@@ -35,7 +35,7 @@
       }
     });
     gj("#AccessEntry .btn-toolbar").on("click", function (et) {
-      var elId = et.target.closest(".uiActionWithLabel").id.split("-")[1];
+      var elId = gj(et.target).closest(".uiActionWithLabel").attr("id").split("-")[1];
       var a = gj("#who .dropdown-menu");
       for (index = 0; index < a.length; ++index) {
         var element = gj("#who .dropdown-menu")[index];
@@ -45,7 +45,7 @@
         }
       }
       var parentTop = et.target.getClientRects()[0].top;
-      if (et.target.closest(".uiActionWithLabel").id.startsWith("view")) {
+      if (gj(et.target).closest(".uiActionWithLabel").attr("id").indexOf("view") == 0) {
         var element = gj("#canModify-" + elId + " .dropdown-menu")[0];
       } else {
         var element = gj("#canView-" + elId + " .dropdown-menu")[0];
@@ -53,7 +53,7 @@
       if (element.style.display == "block") {
         element.style.display = "none";
       } else {
-        var top = parentTop - element.closest(".UIPopupWindow").getClientRects()[0].top + 23;
+        var top = parentTop - gj(element).closest(".UIPopupWindow")[0].getClientRects()[0].top + 23;
         element.style.top = top + "px";
         if (window.screen.width > 420) {
           element.style.width = "25%";
