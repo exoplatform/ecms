@@ -19,15 +19,7 @@ package org.exoplatform.wcm.connector.fckeditor;
 import java.net.URLDecoder;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
-import java.util.MissingResourceException;
-import java.util.ResourceBundle;
+import java.util.*;
 
 import javax.annotation.security.RolesAllowed;
 import javax.jcr.Node;
@@ -121,7 +113,6 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
 
   public static final String TYPE_CONTENT = "multi";
 
-  public static final String ILLUSTRATED_WEBCONTENT = "exo:pictureOnHeadWebcontent";
   /** The log. */
   private static final Log LOG = ExoLogger.getLogger(DriverConnector.class.getName());
 
@@ -133,6 +124,9 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
 
   /** The file number limit on server side. */
   private int limitCountServer_ = 30;
+
+  private List<String> browsableContent =new ArrayList<String>();
+
 
   private ResourceBundleService resourceBundleService=null;
   private NodeFinder nodeFinder_ = null;
@@ -155,6 +149,9 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
     }
     if (params.getValueParam("upload.limit.count.server") != null) {
       limitCountServer_ = Integer.parseInt(params.getValueParam("upload.limit.count.server").getValue());
+    }
+    if (params.getValueParam("exo.ecms.content.browsable") != null) {
+      browsableContent = Arrays.asList((params.getValueParam("exo.ecms.content.browsable").getValue()).split("\\s*,\\s*"));
     }
   }
 
@@ -362,15 +359,15 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
     DateFormat dateFormat = new SimpleDateFormat(IF_MODIFIED_SINCE_DATE_FORMAT);
     return Response.ok().header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
   }
-  
+
   /**
    * Clean file name
-   * 
+   *
    * @param fileName original file name
    * @return the response
    */
-  
-  
+
+
   @GET
   @Path("/uploadFile/cleanName")
   @RolesAllowed("users")
@@ -781,9 +778,10 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
   private boolean isDocument(Node node, String type) throws RepositoryException {
     TemplateService templateService = WCMCoreUtils.getService(TemplateService.class);
     List<String> documentTypeList = templateService.getDocumentTemplates();
-    if (TYPE_EDITOR.equals(type)) {
-      documentTypeList.remove(NodetypeConstant.EXO_WEBCONTENT);
-      documentTypeList.remove(ILLUSTRATED_WEBCONTENT);
+    if (TYPE_EDITOR.equals(type) && browsableContent != null) {
+      for (String browsableDocument : browsableContent) {
+        documentTypeList.remove(browsableDocument);
+      }
     }
     for (String documentType : documentTypeList) {
       if (node.getPrimaryNodeType().isNodeType(documentType)) {
