@@ -5,14 +5,14 @@
    xsi:schemaLocation="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd http://www.exoplatform.org/xml/ns/kernel_1_2.xsd"
    xmlns="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd">
 
-  <component>    
+  <component>
     <type>org.exoplatform.ecm.connector.fckeditor.FCKCoreRESTConnector</type>
   </component>
-  
-  <component>    
+
+  <component>
     <type>org.exoplatform.ecm.webui.core.fckconfig.FCKConfigService</type>
   </component>
-  
+
   <component>
     <type>org.exoplatform.ecm.connector.MigrationConnector</type>
   </component>
@@ -95,7 +95,12 @@
       <value-param>
         <name>upload.limit.count.server</name>
         <description>Maximum number of the file uploading at a time</description>
-        <value> ${wcm.connector.drives.serverLimit:20}</value>
+        <value>${wcm.connector.drives.serverLimit:20}</value>
+      </value-param>
+      <value-param>
+        <name>exo.ecms.content.browsable</name>
+        <description>new browsable contents</description>
+        <value>${exo.ecms.content.browsable:exo:webContent,exo:pictureOnHeadWebcontent}</value>
       </value-param>
     </init-params>
   </component>
@@ -131,5 +136,5 @@
       <description>Add Dynamic Skin Plugins into FCK editor </description>
     </component-plugin>
   </external-component-plugins>
-  
+
 </configuration>
