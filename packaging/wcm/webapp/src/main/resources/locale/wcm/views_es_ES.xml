@@ -38,11 +38,11 @@
         <robots>Comportamiento del motor de búsqueda</robots>
       </label>
       <tooltip>
-        <add-edit>Agregar/Editar metadatos</add-edit>
+        <add-edit>Añadir/Editar metadatos</add-edit>
         <cancel>#{word.cancel}</cancel>
       </tooltip>
       <action>
-        <add-edit>Agregar/Editar</add-edit>
+        <add-edit>Añadir/Editar</add-edit>
         <cancel>#{word.cancel}</cancel>
       </action>
     </view>

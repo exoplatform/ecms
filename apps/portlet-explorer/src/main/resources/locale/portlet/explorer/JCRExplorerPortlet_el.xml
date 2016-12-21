@@ -157,15 +157,15 @@
   <UIPreferencesForm>
     <title>Ορίστε τις προτιμήσεις περιήγησης</title>
     <label>
-      <enableStructure>Ενεργοποίηση δομής Συστήματος Διαχείρισης Εγγράφων (DMS):</enableStructure>
-      <showSideBar>Εμφάνιση πλευρικής μπάρας:</showSideBar>
-      <showHiddenNode>Show Hidden Documents:</showHiddenNode>
-      <showNonDocument>Show Non-document Items:</showNonDocument>
-      <showRefDocuments>Εμφάνιση αναφερόμενων εγγράφων:</showRefDocuments>
+      <enableStructure>Browse in structure mode:</enableStructure>
+      <showSideBar>Show sidebar:</showSideBar>
+      <showHiddenNode>Show hidden items:</showHiddenNode>
+      <showNonDocument>Show non-document items:</showNonDocument>
+      <showRefDocuments>Show referenced items:</showRefDocuments>
       <enableDragAndDrop>Ενεργοποίηση λειτουργίας "σύρσιμο &amp; απόθεση":</enableDragAndDrop>
-      <sortBy>Ταξινόμηση κατά:</sortBy>
+      <sortBy>Sort order:</sortBy>
       <order>Ταξινόμηση κατά:</order>
-      <nodesPerPage>Items per Page:</nodesPerPage>
+      <nodesPerPage>Στοιχεία ανά σελίδα:</nodesPerPage>
     </label>
     <action>
       <Back>#{word.close}</Back>
@@ -240,7 +240,7 @@
       <UIViewMetadataManager>Προβολή μεταδεδομένων</UIViewMetadataManager>
       <UIVoteForm>Ψηφίστε το έγγραφο</UIVoteForm>
       <UICommentForm>Σχόλιο</UICommentForm>
-      <UIPreferencesForm>Προτιμήσεις</UIPreferencesForm>
+      <UIPreferencesForm>Documents Browsing Preferences</UIPreferencesForm>
       <UIPublicationManager>Διαχείριση δημοσίευσης</UIPublicationManager>
       <UIConfirmMessage>Διαγραφή;</UIConfirmMessage>
       <UIDeleteFileConfirmMessage>Διαγραφή αρχείου;</UIDeleteFileConfirmMessage>
@@ -250,7 +250,7 @@
       <UIActivePublication>Εγγραφείτε στην παρακολούθηση του κύκλου ζωής της δημοσίευσης</UIActivePublication>
       <UITaggingForm>Ετικέτες εγγράφου</UITaggingForm>
       <UIThumbnailForm>Προσθέστε εικόνα μικρογραφίας</UIThumbnailForm>
-      <UIAllItemsPreferenceForm>Preferences</UIAllItemsPreferenceForm>
+      <UIAllItemsPreferenceForm>Documents Browsing Preferences</UIAllItemsPreferenceForm>
       <UISelectRestorePath>Επιλέξτε διαδρομή για την επαναφορά</UISelectRestorePath>
       <UISEOForm>Διαχείριση βελτιστοποιήσεων μηχανών αναζήτησης (SEO)</UISEOForm>
       <UISEOToolbarForm>Διαχείριση βελτιστοποιήσεων μηχανών αναζήτησης (SEO)</UISEOToolbarForm>
@@ -1351,7 +1351,7 @@
     </summary>
     <tooltip>
       <version>Version</version>
-      <baseVersion>Base Version</baseVersion>
+      <baseVersion>current version</baseVersion>
       <addLabel>Προσθήκη ετικέτας</addLabel>
       <removeLable>Αφαίρεση ετικέτας</removeLable>
       <restoreVersion>Επαναφορά Έκδοσης</restoreVersion>
@@ -2895,7 +2895,7 @@
 
   <UIPreferencesForm>
       <label>
-            <queryType>Τύπος ερωτήματος:</queryType>
+            <queryType>Query language:</queryType>
             <SQL>SQL</SQL>
             <XPATH>XPATH</XPATH>
       </label>
@@ -3186,7 +3186,7 @@
     <DropFileMessage>Αποθέστε τα αρχεία σας εδώ, στον τρέχοντα φάκελο</DropFileMessage>
     <Close>#{word.close}</Close>
     <in>σε</in>
-    <MaxFileSizeAlert>The file size exceeds the size limit of</MaxFileSizeAlert>
+    <MaxFileSizeAlert>The file size exceeds the limit of</MaxFileSizeAlert>
     <Waiting>Αναμονή</Waiting>
     <Error>Σφάλμα</Error>
     <or>ή</or>

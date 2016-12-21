@@ -157,15 +157,15 @@
   <UIPreferencesForm>
     <title>تنظیم مشخصات نحوه نمایش خود</title>
     <label>
-      <enableStructure>فعالسازی ساختار DMS.</enableStructure>
-      <showSideBar>نمایش نوار جانبی:</showSideBar>
-      <showHiddenNode>Show Hidden Documents:</showHiddenNode>
-      <showNonDocument>Show Non-document Items:</showNonDocument>
-      <showRefDocuments>نمایش اسناد مرجع:</showRefDocuments>
+      <enableStructure>Browse in structure mode:</enableStructure>
+      <showSideBar>Show sidebar:</showSideBar>
+      <showHiddenNode>Show hidden items:</showHiddenNode>
+      <showNonDocument>Show non-document items:</showNonDocument>
+      <showRefDocuments>Show referenced items:</showRefDocuments>
       <enableDragAndDrop>فعال کردن کشیدن و رها کردن:</enableDragAndDrop>
-      <sortBy>مرتب سازی بر اساس:</sortBy>
+      <sortBy>Sort order:</sortBy>
       <order>مرتب کردن:</order>
-      <nodesPerPage>Items per Page:</nodesPerPage>
+      <nodesPerPage>آیتم ها در هر صفحه:</nodesPerPage>
     </label>
     <action>
       <Back>#{word.close}</Back>
@@ -240,7 +240,7 @@
       <UIViewMetadataManager>مشاهده فراداده</UIViewMetadataManager>
       <UIVoteForm>رای دادن به سند</UIVoteForm>
       <UICommentForm>نظر</UICommentForm>
-      <UIPreferencesForm>تنظیمات</UIPreferencesForm>
+      <UIPreferencesForm>Documents Browsing Preferences</UIPreferencesForm>
       <UIPublicationManager>مدیریت انتشار</UIPublicationManager>
       <UIConfirmMessage>حذف؟</UIConfirmMessage>
       <UIDeleteFileConfirmMessage>فایل حذف شود؟</UIDeleteFileConfirmMessage>
@@ -250,7 +250,7 @@
       <UIActivePublication>ثبت در چرخه انتشار</UIActivePublication>
       <UITaggingForm>برچسب سند</UITaggingForm>
       <UIThumbnailForm>اضافه کردن تصویر بند انگشتی</UIThumbnailForm>
-      <UIAllItemsPreferenceForm>Preferences</UIAllItemsPreferenceForm>
+      <UIAllItemsPreferenceForm>Documents Browsing Preferences</UIAllItemsPreferenceForm>
       <UISelectRestorePath>انتخاب مسیر بازیابی</UISelectRestorePath>
       <UISEOForm>مدیریت جستجوگرها</UISEOForm>
       <UISEOToolbarForm>مدیریت جستجوگرها</UISEOToolbarForm>
@@ -1351,7 +1351,7 @@
     </summary>
     <tooltip>
       <version>Version</version>
-      <baseVersion>Base Version</baseVersion>
+      <baseVersion>current version</baseVersion>
       <addLabel>افزودن برچسب</addLabel>
       <removeLable>حذف برچسب</removeLable>
       <restoreVersion>بازیابی نسخه</restoreVersion>
@@ -2895,7 +2895,7 @@
 
   <UIPreferencesForm>
       <label>
-            <queryType>نوع جستار:</queryType>
+            <queryType>Query language:</queryType>
             <SQL>SQL</SQL>
             <XPATH>XPATH</XPATH>
       </label>
@@ -3186,7 +3186,7 @@
     <DropFileMessage>فایل های خود را در اینجا در پوشه جاری قرار دهید</DropFileMessage>
     <Close>#{word.close}</Close>
     <in>در</in>
-    <MaxFileSizeAlert>The file size exceeds the size limit of</MaxFileSizeAlert>
+    <MaxFileSizeAlert>The file size exceeds the limit of</MaxFileSizeAlert>
     <Waiting>در حال انتظار</Waiting>
     <Error>خطا</Error>
     <or>یا</or>

@@ -157,15 +157,15 @@
   <UIPreferencesForm>
     <title>Set up your browsing preferences</title>
     <label>
-      <enableStructure>Enable DMS Structure:</enableStructure>
-      <showSideBar>Show Sidebar:</showSideBar>
-      <showHiddenNode>Show Hidden Documents:</showHiddenNode>
-      <showNonDocument>Show Non-document Items:</showNonDocument>
-      <showRefDocuments>Show Referenced Documents:</showRefDocuments>
+      <enableStructure>Browse in structure mode:</enableStructure>
+      <showSideBar>Show sidebar:</showSideBar>
+      <showHiddenNode>Show hidden items:</showHiddenNode>
+      <showNonDocument>Show non-document items:</showNonDocument>
+      <showRefDocuments>Show referenced items:</showRefDocuments>
       <enableDragAndDrop>Enable Drag &amp; Drop:</enableDragAndDrop>
-      <sortBy>Sort by:</sortBy>
+      <sortBy>Sort order:</sortBy>
       <order>Order by:</order>
-      <nodesPerPage>Items per Page:</nodesPerPage>
+      <nodesPerPage>Items per page:</nodesPerPage>
     </label>
     <action>
       <Back>#{word.close}</Back>
@@ -240,7 +240,7 @@
       <UIViewMetadataManager>View Metadata</UIViewMetadataManager>
       <UIVoteForm>Vote Document</UIVoteForm>
       <UICommentForm>Comment</UICommentForm>
-      <UIPreferencesForm>Preferences</UIPreferencesForm>
+      <UIPreferencesForm>Documents Browsing Preferences</UIPreferencesForm>
       <UIPublicationManager>Manage Publication</UIPublicationManager>
       <UIConfirmMessage>Delete ?</UIConfirmMessage>
       <UIDeleteFileConfirmMessage>Delete File ?</UIDeleteFileConfirmMessage>
@@ -250,7 +250,7 @@
       <UIActivePublication>Enroll to Publication Lifecycle</UIActivePublication>
       <UITaggingForm>Tag Document</UITaggingForm>
       <UIThumbnailForm>Add Thumbnail Image</UIThumbnailForm>
-      <UIAllItemsPreferenceForm>Preferences</UIAllItemsPreferenceForm>
+      <UIAllItemsPreferenceForm>Documents Browsing Preferences</UIAllItemsPreferenceForm>
       <UISelectRestorePath>Select Restore Path</UISelectRestorePath>
       <UISEOForm>Manage SEO</UISEOForm>
       <UISEOToolbarForm>Manage SEO</UISEOToolbarForm>
@@ -1351,7 +1351,7 @@
     </summary>
     <tooltip>
       <version>Version</version>
-      <baseVersion>Base Version</baseVersion>
+      <baseVersion>current version</baseVersion>
       <addLabel>Add Label</addLabel>
       <removeLable>Remove Label</removeLable>
       <restoreVersion>Restore Version</restoreVersion>
@@ -2895,7 +2895,7 @@
 
   <UIPreferencesForm>
       <label>
-            <queryType>Query Type:</queryType>
+            <queryType>Query language:</queryType>
             <SQL>SQL</SQL>
             <XPATH>XPATH</XPATH>
       </label>

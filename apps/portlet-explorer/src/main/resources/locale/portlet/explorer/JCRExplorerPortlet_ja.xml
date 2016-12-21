@@ -157,15 +157,15 @@
   <UIPreferencesForm>
     <title>ブラウジング設定のセットアップ</title>
     <label>
-      <enableStructure>DMS Structureの許可</enableStructure>
-      <showSideBar>スライドバーの表示</showSideBar>
-      <showHiddenNode>Show Hidden Documents:</showHiddenNode>
-      <showNonDocument>Show Non-document Items:</showNonDocument>
-      <showRefDocuments>参照ドキュメントの表示</showRefDocuments>
+      <enableStructure>Browse in structure mode:</enableStructure>
+      <showSideBar>Show sidebar:</showSideBar>
+      <showHiddenNode>Show hidden items:</showHiddenNode>
+      <showNonDocument>Show non-document items:</showNonDocument>
+      <showRefDocuments>Show referenced items:</showRefDocuments>
       <enableDragAndDrop>ドラッグ &amp; ドロップの許可</enableDragAndDrop>
-      <sortBy>ソート順</sortBy>
+      <sortBy>Sort order:</sortBy>
       <order>Order by</order>
-      <nodesPerPage>Items per Page:</nodesPerPage>
+      <nodesPerPage>Items per page:</nodesPerPage>
     </label>
     <action>
       <Back>#{word.close}</Back>
@@ -240,7 +240,7 @@
       <UIViewMetadataManager>メタデータ観覧</UIViewMetadataManager>
       <UIVoteForm>ドキュメント投票</UIVoteForm>
       <UICommentForm>コメントを書く</UICommentForm>
-      <UIPreferencesForm>設定</UIPreferencesForm>
+      <UIPreferencesForm>Documents Browsing Preferences</UIPreferencesForm>
       <UIPublicationManager>公開管理</UIPublicationManager>
       <UIConfirmMessage>削除の確認</UIConfirmMessage>
       <UIDeleteFileConfirmMessage>ファイルを削除しますか?</UIDeleteFileConfirmMessage>
@@ -250,7 +250,7 @@
       <UIActivePublication>公開ライフサイクルのための登録</UIActivePublication>
       <UITaggingForm>ドキュメントにタグ付け</UITaggingForm>
       <UIThumbnailForm>サムネイルイメージの追加</UIThumbnailForm>
-      <UIAllItemsPreferenceForm>Preferences</UIAllItemsPreferenceForm>
+      <UIAllItemsPreferenceForm>Documents Browsing Preferences</UIAllItemsPreferenceForm>
       <UISelectRestorePath>リストアパスの選択</UISelectRestorePath>
       <UISEOForm>SEO を管理</UISEOForm>
       <UISEOToolbarForm>SEO を管理</UISEOToolbarForm>
@@ -1351,7 +1351,7 @@
     </summary>
     <tooltip>
       <version>Version</version>
-      <baseVersion>Base Version</baseVersion>
+      <baseVersion>current version</baseVersion>
       <addLabel>ラベルの追加</addLabel>
       <removeLable>ラベルの削除</removeLable>
       <restoreVersion>バージョンのリストア</restoreVersion>
@@ -2895,7 +2895,7 @@
 
   <UIPreferencesForm>
       <label>
-            <queryType>クエリタイプ</queryType>
+            <queryType>Query language:</queryType>
             <SQL>SQL</SQL>
             <XPATH>XPATH</XPATH>
       </label>
@@ -3186,7 +3186,7 @@
     <DropFileMessage>あなたのファイルを現在のフォルダーにドロップします。</DropFileMessage>
     <Close>#{word.close}</Close>
     <in>で</in>
-    <MaxFileSizeAlert>The file size exceeds the size limit of</MaxFileSizeAlert>
+    <MaxFileSizeAlert>The file size exceeds the limit of</MaxFileSizeAlert>
     <Waiting>待機中です</Waiting>
     <Error>エラー</Error>
     <or>または</or>

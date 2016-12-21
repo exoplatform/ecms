@@ -36,8 +36,8 @@
     <label>
       <ManagedSites>Seitenmanagement</ManagedSites>
       <SharedSite>Gemeinsame Webseite</SharedSite>
-      <PersonalDocuments>Personal Documents</PersonalDocuments>
-      <UserDocuments>{0} Documents</UserDocuments>
+      <PersonalDocuments>Personenbezogene Unterlagen</PersonalDocuments>
+      <UserDocuments>{0} Dokumente</UserDocuments>
     </label>
   </Drives>
 

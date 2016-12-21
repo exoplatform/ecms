@@ -157,15 +157,15 @@
   <UIPreferencesForm>
     <title>Thiết lập tùy chọn hiển thị</title>
     <label>
-      <enableStructure>Hiển thị cấu trúc DMS:</enableStructure>
-      <showSideBar>Hiện Cây thư mục:</showSideBar>
-      <showHiddenNode>Show Hidden Documents:</showHiddenNode>
-      <showNonDocument>Show Non-document Items:</showNonDocument>
-      <showRefDocuments>Hiện Tài liệu được Tham chiếu:</showRefDocuments>
+      <enableStructure>Browse in structure mode:</enableStructure>
+      <showSideBar>Show sidebar:</showSideBar>
+      <showHiddenNode>Show hidden items:</showHiddenNode>
+      <showNonDocument>Show non-document items:</showNonDocument>
+      <showRefDocuments>Show referenced items:</showRefDocuments>
       <enableDragAndDrop>Bật tính năng Kéo Thả:</enableDragAndDrop>
-      <sortBy>Phân loại theo:</sortBy>
+      <sortBy>Sort order:</sortBy>
       <order>Xếp thứ tự theo:</order>
-      <nodesPerPage>Items per Page:</nodesPerPage>
+      <nodesPerPage>Số kết quả mỗi trang:</nodesPerPage>
     </label>
     <action>
       <Back>Đóng lại</Back>
@@ -240,7 +240,7 @@
       <UIViewMetadataManager>Xem Siêu dữ liệu</UIViewMetadataManager>
       <UIVoteForm>Bình chọn Tài liệu</UIVoteForm>
       <UICommentForm>Bình luận</UICommentForm>
-      <UIPreferencesForm>Tùy chọn Thiết lập</UIPreferencesForm>
+      <UIPreferencesForm>Documents Browsing Preferences</UIPreferencesForm>
       <UIPublicationManager>Quản lý Đăng tải</UIPublicationManager>
       <UIConfirmMessage>Có xóa không?</UIConfirmMessage>
       <UIDeleteFileConfirmMessage>Xóa Tệp tin?</UIDeleteFileConfirmMessage>
@@ -250,7 +250,7 @@
       <UIActivePublication>Đăng ký Chu trình Xuất bản</UIActivePublication>
       <UITaggingForm>Gán nhãn Tài liệu</UITaggingForm>
       <UIThumbnailForm>Thêm Ảnh Nhỏ</UIThumbnailForm>
-      <UIAllItemsPreferenceForm>Preferences</UIAllItemsPreferenceForm>
+      <UIAllItemsPreferenceForm>Documents Browsing Preferences</UIAllItemsPreferenceForm>
       <UISelectRestorePath>Chọn Đường dẫn Khôi phục</UISelectRestorePath>
       <UISEOForm>Quản lý SEO</UISEOForm>
       <UISEOToolbarForm>Quản lý SEO</UISEOToolbarForm>
@@ -1351,7 +1351,7 @@
     </summary>
     <tooltip>
       <version>Version</version>
-      <baseVersion>Base Version</baseVersion>
+      <baseVersion>current version</baseVersion>
       <addLabel>Thêm Nhãn</addLabel>
       <removeLable>Gỡ bỏ Nhãn</removeLable>
       <restoreVersion>Khôi phục Phiên bản</restoreVersion>
@@ -2895,7 +2895,7 @@
 
   <UIPreferencesForm>
       <label>
-            <queryType>Kiểu truy vấn:</queryType>
+            <queryType>Query language:</queryType>
             <SQL>SQL</SQL>
             <XPATH>XPATH</XPATH>
       </label>
@@ -3186,7 +3186,7 @@
     <DropFileMessage>Kéo thả tập tin vào đây để tải lên</DropFileMessage>
     <Close>#{word.close}</Close>
     <in>Trong</in>
-    <MaxFileSizeAlert>The file size exceeds the size limit of</MaxFileSizeAlert>
+    <MaxFileSizeAlert>The file size exceeds the limit of</MaxFileSizeAlert>
     <Waiting>Đợi</Waiting>
     <Error>Lỗi</Error>
     <or>hoặc</or>

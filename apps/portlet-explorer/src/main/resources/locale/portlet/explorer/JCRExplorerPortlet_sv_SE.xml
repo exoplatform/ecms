@@ -157,15 +157,15 @@
   <UIPreferencesForm>
     <title>Ställa in din webläsare</title>
     <label>
-      <enableStructure>Aktivera DMS struktur:</enableStructure>
-      <showSideBar>Visa sidofält:</showSideBar>
-      <showHiddenNode>Show Hidden Documents:</showHiddenNode>
-      <showNonDocument>Show Non-document Items:</showNonDocument>
-      <showRefDocuments>Visa dokument:</showRefDocuments>
+      <enableStructure>Browse in structure mode:</enableStructure>
+      <showSideBar>Show sidebar:</showSideBar>
+      <showHiddenNode>Show hidden items:</showHiddenNode>
+      <showNonDocument>Show non-document items:</showNonDocument>
+      <showRefDocuments>Show referenced items:</showRefDocuments>
       <enableDragAndDrop>Aktivera dra &amp; släpp:</enableDragAndDrop>
-      <sortBy>Sortera efter:</sortBy>
+      <sortBy>Sort order:</sortBy>
       <order>Ordna efter:</order>
-      <nodesPerPage>Items per Page:</nodesPerPage>
+      <nodesPerPage>Items per page:</nodesPerPage>
     </label>
     <action>
       <Back>#{word.close}</Back>
@@ -240,7 +240,7 @@
       <UIViewMetadataManager>Visa Metadata</UIViewMetadataManager>
       <UIVoteForm>Omröstning dokument</UIVoteForm>
       <UICommentForm>Kommentar</UICommentForm>
-      <UIPreferencesForm>Inställningar</UIPreferencesForm>
+      <UIPreferencesForm>Documents Browsing Preferences</UIPreferencesForm>
       <UIPublicationManager>Hantera publikation</UIPublicationManager>
       <UIConfirmMessage>Ta bort?</UIConfirmMessage>
       <UIDeleteFileConfirmMessage>Ta bort fil ?</UIDeleteFileConfirmMessage>
@@ -250,7 +250,7 @@
       <UIActivePublication>Registrera till publikation livscykel</UIActivePublication>
       <UITaggingForm>Tag dokument</UITaggingForm>
       <UIThumbnailForm>Lägga till miniatyrbild</UIThumbnailForm>
-      <UIAllItemsPreferenceForm>Preferences</UIAllItemsPreferenceForm>
+      <UIAllItemsPreferenceForm>Documents Browsing Preferences</UIAllItemsPreferenceForm>
       <UISelectRestorePath>Välj Återställ sökväg</UISelectRestorePath>
       <UISEOForm>Hantera SEO</UISEOForm>
       <UISEOToolbarForm>Hantera SEO</UISEOToolbarForm>
@@ -1351,7 +1351,7 @@
     </summary>
     <tooltip>
       <version>Version</version>
-      <baseVersion>Base Version</baseVersion>
+      <baseVersion>current version</baseVersion>
       <addLabel>Lägg till etikett</addLabel>
       <removeLable>Ta bort etikett</removeLable>
       <restoreVersion>Återställ Version</restoreVersion>
@@ -2895,7 +2895,7 @@
 
   <UIPreferencesForm>
       <label>
-            <queryType>Frågetyp:</queryType>
+            <queryType>Query language:</queryType>
             <SQL>SQL</SQL>
             <XPATH>XPATH</XPATH>
       </label>
@@ -3186,7 +3186,7 @@
     <DropFileMessage>Släpp dina filer här i den aktuella mappen</DropFileMessage>
     <Close>#{word.close}</Close>
     <in>in</in>
-    <MaxFileSizeAlert>The file size exceeds the size limit of</MaxFileSizeAlert>
+    <MaxFileSizeAlert>The file size exceeds the limit of</MaxFileSizeAlert>
     <Waiting>Väntar på</Waiting>
     <Error>Fel</Error>
     <or>eller</or>

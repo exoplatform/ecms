@@ -990,7 +990,7 @@
       <addSymLink>Додати символьне посилання</addSymLink>
       <checkIn>Зареєструватися</checkIn>
       <checkOut>Вийти</checkOut>
-      <shareDocuments>Post</shareDocuments>
+      <shareDocuments>Поділитися</shareDocuments>
       <openDocument>Віддалене редагування</openDocument>
       <editProperty>Змінити властивості документа</editProperty>
       <uploadNewVersion>Завантажити нову версію</uploadNewVersion>
@@ -1023,7 +1023,7 @@
   </UIViewFormTabPane>
   <PopupViewPermission>
     <title>
-      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
+      <UIPermissionSelector>Селектор прав доступу</UIPermissionSelector>
     </title>
   </PopupViewPermission>
 
@@ -1405,7 +1405,7 @@
 
   <PopupTaxonomyTreePermission>
     <title>
-      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
+      <UIPermissionSelector>Селектор прав доступу</UIPermissionSelector>
     </title>
   </PopupTaxonomyTreePermission>
 
@@ -1737,7 +1737,7 @@
   -->
   <AddNewTemplatePermission>
     <title>
-      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
+      <UIPermissionSelector>Селектор прав доступу</UIPermissionSelector>
     </title>
   </AddNewTemplatePermission>
   <TemplatePermission>
@@ -1778,12 +1778,12 @@
   </DialogForm>
   <DialogFormTemplatePermission>
     <title>
-      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
+      <UIPermissionSelector>Селектор прав доступу</UIPermissionSelector>
     </title>
   </DialogFormTemplatePermission>
   <ViewFormTemplatePermission>
     <title>
-      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
+      <UIPermissionSelector>Селектор прав доступу</UIPermissionSelector>
     </title>
   </ViewFormTemplatePermission>
   <TemplateContainerPopup>
@@ -1976,7 +1976,7 @@
   </EditQueryForm>
   <PermissionPopup>
     <title>
-      <UIGroupMemberSelector>Permission Selector</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Селектор прав доступу</UIGroupMemberSelector>
     </title>
   </PermissionPopup>
   <!--
@@ -2485,7 +2485,7 @@
       <Add>Додати</Add>
     </action>
     <label>
-      <userOrGroup>Memberships:</userOrGroup>
+      <userOrGroup>Членство:</userOrGroup>
     </label>
     <msg>
       <userOrGroup-alreadyExists>Це членство вже існує. Будь ласка, виберіть інше.</userOrGroup-alreadyExists>

@@ -157,15 +157,15 @@
   <UIPreferencesForm>
     <title>Nastavit předvolby prohlížeče</title>
     <label>
-      <enableStructure>Povolit strukturu DMS:</enableStructure>
-      <showSideBar>Zobrazit postranní panel:</showSideBar>
-      <showHiddenNode>Show Hidden Documents:</showHiddenNode>
-      <showNonDocument>Show Non-document Items:</showNonDocument>
-      <showRefDocuments>Zobrazit odkazované dokumenty:</showRefDocuments>
+      <enableStructure>Browse in structure mode:</enableStructure>
+      <showSideBar>Show sidebar:</showSideBar>
+      <showHiddenNode>Show hidden items:</showHiddenNode>
+      <showNonDocument>Show non-document items:</showNonDocument>
+      <showRefDocuments>Show referenced items:</showRefDocuments>
       <enableDragAndDrop>Povolit Drag &amp; Drop:</enableDragAndDrop>
-      <sortBy>Seřadit podle:</sortBy>
+      <sortBy>Sort order:</sortBy>
       <order>Seřadit podle:</order>
-      <nodesPerPage>Items per Page:</nodesPerPage>
+      <nodesPerPage>Položek na stránku:</nodesPerPage>
     </label>
     <action>
       <Back>#{word.close}</Back>
@@ -240,7 +240,7 @@
       <UIViewMetadataManager>Zobrazit Metadata</UIViewMetadataManager>
       <UIVoteForm>Hlasovat o dokumentu</UIVoteForm>
       <UICommentForm>Komentář</UICommentForm>
-      <UIPreferencesForm>Předvolby</UIPreferencesForm>
+      <UIPreferencesForm>Documents Browsing Preferences</UIPreferencesForm>
       <UIPublicationManager>Správa publikace</UIPublicationManager>
       <UIConfirmMessage>Odstranit ?</UIConfirmMessage>
       <UIDeleteFileConfirmMessage>Odstranit soubor ?</UIDeleteFileConfirmMessage>
@@ -250,7 +250,7 @@
       <UIActivePublication>Zapsat do publikačního cyklu</UIActivePublication>
       <UITaggingForm>Otagovat dokument</UITaggingForm>
       <UIThumbnailForm>Přidat miniaturu</UIThumbnailForm>
-      <UIAllItemsPreferenceForm>Předvolby</UIAllItemsPreferenceForm>
+      <UIAllItemsPreferenceForm>Documents Browsing Preferences</UIAllItemsPreferenceForm>
       <UISelectRestorePath>Vybrat místo obnovení</UISelectRestorePath>
       <UISEOForm>Správa SEO</UISEOForm>
       <UISEOToolbarForm>Správa SEO</UISEOToolbarForm>
@@ -1351,7 +1351,7 @@
     </summary>
     <tooltip>
       <version>Version</version>
-      <baseVersion>Base Version</baseVersion>
+      <baseVersion>current version</baseVersion>
       <addLabel>Přidat popisek</addLabel>
       <removeLable>Odebrat popisek</removeLable>
       <restoreVersion>Obnovit verzi</restoreVersion>
@@ -2895,7 +2895,7 @@
 
   <UIPreferencesForm>
       <label>
-            <queryType>Typ dotazu:</queryType>
+            <queryType>Query language:</queryType>
             <SQL>SQL</SQL>
             <XPATH>XPATH</XPATH>
       </label>
@@ -3186,7 +3186,7 @@
     <DropFileMessage>Umistěte své soubory sem do aktuální složky</DropFileMessage>
     <Close>#{word.close}</Close>
     <in>v</in>
-    <MaxFileSizeAlert>The file size exceeds the size limit of</MaxFileSizeAlert>
+    <MaxFileSizeAlert>The file size exceeds the limit of</MaxFileSizeAlert>
     <Waiting>Čeká se</Waiting>
     <Error>Chyba</Error>
     <or>nebo</or>

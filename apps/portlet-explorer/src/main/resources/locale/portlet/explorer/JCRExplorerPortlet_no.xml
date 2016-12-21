@@ -157,15 +157,15 @@
   <UIPreferencesForm>
     <title>Sett opp dine surfeinnstillinger</title>
     <label>
-      <enableStructure>Aktiver DMS struktur:</enableStructure>
-      <showSideBar>Vis sidestolpe:</showSideBar>
-      <showHiddenNode>Show Hidden Documents:</showHiddenNode>
-      <showNonDocument>Show Non-document Items:</showNonDocument>
-      <showRefDocuments>Vis refererte dokumenter:</showRefDocuments>
+      <enableStructure>Browse in structure mode:</enableStructure>
+      <showSideBar>Show sidebar:</showSideBar>
+      <showHiddenNode>Show hidden items:</showHiddenNode>
+      <showNonDocument>Show non-document items:</showNonDocument>
+      <showRefDocuments>Show referenced items:</showRefDocuments>
       <enableDragAndDrop>Aktiver dra &amp; slipp:</enableDragAndDrop>
-      <sortBy>Sorter etter:</sortBy>
+      <sortBy>Sort order:</sortBy>
       <order>Ordnet etter:</order>
-      <nodesPerPage>Items per Page:</nodesPerPage>
+      <nodesPerPage>Elementer per side:</nodesPerPage>
     </label>
     <action>
       <Back>#{word.close}</Back>
@@ -240,7 +240,7 @@
       <UIViewMetadataManager>Vis metadata</UIViewMetadataManager>
       <UIVoteForm>Stem på dokument</UIVoteForm>
       <UICommentForm>Kommentar</UICommentForm>
-      <UIPreferencesForm>Innstillinger</UIPreferencesForm>
+      <UIPreferencesForm>Documents Browsing Preferences</UIPreferencesForm>
       <UIPublicationManager>Håndter publisering</UIPublicationManager>
       <UIConfirmMessage>Slett?</UIConfirmMessage>
       <UIDeleteFileConfirmMessage>Slett filen?</UIDeleteFileConfirmMessage>
@@ -250,7 +250,7 @@
       <UIActivePublication>Registrer i publikasjonens livssyklus</UIActivePublication>
       <UITaggingForm>Tagg dokumentet</UITaggingForm>
       <UIThumbnailForm>Legge til miniatyrbilde</UIThumbnailForm>
-      <UIAllItemsPreferenceForm>Preferences</UIAllItemsPreferenceForm>
+      <UIAllItemsPreferenceForm>Documents Browsing Preferences</UIAllItemsPreferenceForm>
       <UISelectRestorePath>Velg gjenopprettings sti</UISelectRestorePath>
       <UISEOForm>Administrere SEO</UISEOForm>
       <UISEOToolbarForm>Administrere SEO</UISEOToolbarForm>
@@ -1351,7 +1351,7 @@
     </summary>
     <tooltip>
       <version>Version</version>
-      <baseVersion>Base Version</baseVersion>
+      <baseVersion>current version</baseVersion>
       <addLabel>Legge til etikett</addLabel>
       <removeLable>Fjern etikett</removeLable>
       <restoreVersion>Gjenopprett versjon</restoreVersion>
@@ -2895,7 +2895,7 @@
 
   <UIPreferencesForm>
       <label>
-            <queryType>Spørringstype:</queryType>
+            <queryType>Query language:</queryType>
             <SQL>SQL</SQL>
             <XPATH>XPATH</XPATH>
       </label>
@@ -3186,7 +3186,7 @@
     <DropFileMessage>Slipp filer her i gjeldende mappe</DropFileMessage>
     <Close>#{word.close}</Close>
     <in>i</in>
-    <MaxFileSizeAlert>The file size exceeds the size limit of</MaxFileSizeAlert>
+    <MaxFileSizeAlert>The file size exceeds the limit of</MaxFileSizeAlert>
     <Waiting>Venter</Waiting>
     <Error>Feil</Error>
     <or>eller</or>

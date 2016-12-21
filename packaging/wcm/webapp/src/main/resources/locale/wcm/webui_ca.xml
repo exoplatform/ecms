@@ -316,7 +316,7 @@
     <title>
       <SelectUser>Selecciona usuari/a</SelectUser>
       <SelectMember>Selecciona un membre</SelectMember>
-      <AddAny>Afegeix qualsevol permís</AddAny>
+      <AddAny>Tothom</AddAny>
     </title>
   </UIPermissionInputSetWithAction>
 

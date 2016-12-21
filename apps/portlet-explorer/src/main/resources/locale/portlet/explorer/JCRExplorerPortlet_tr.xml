@@ -157,15 +157,15 @@
   <UIPreferencesForm>
     <title>Tarama tercihlerinizi ayarlayın</title>
     <label>
-      <enableStructure>DMS yapısı etkinleştir:</enableStructure>
-      <showSideBar>Kenar çubuğunu göster:</showSideBar>
-      <showHiddenNode>Show Hidden Documents:</showHiddenNode>
-      <showNonDocument>Show Non-document Items:</showNonDocument>
-      <showRefDocuments>Başvurulan Belgeleri Görüntüle:</showRefDocuments>
+      <enableStructure>Browse in structure mode:</enableStructure>
+      <showSideBar>Show sidebar:</showSideBar>
+      <showHiddenNode>Show hidden items:</showHiddenNode>
+      <showNonDocument>Show non-document items:</showNonDocument>
+      <showRefDocuments>Show referenced items:</showRefDocuments>
       <enableDragAndDrop>Sürükle &amp; Bırak' ı etkinleştir:</enableDragAndDrop>
-      <sortBy>Sıralama:</sortBy>
+      <sortBy>Sort order:</sortBy>
       <order>Tarafından sipariş:</order>
-      <nodesPerPage>Sayfa başı öğe:</nodesPerPage>
+      <nodesPerPage>Items per page:</nodesPerPage>
     </label>
     <action>
       <Back>#{word.close}</Back>
@@ -240,7 +240,7 @@
       <UIViewMetadataManager>Meta verilerini görüntüle</UIViewMetadataManager>
       <UIVoteForm>Oylama belgesi</UIVoteForm>
       <UICommentForm>Yorum</UICommentForm>
-      <UIPreferencesForm>Tercihler</UIPreferencesForm>
+      <UIPreferencesForm>Documents Browsing Preferences</UIPreferencesForm>
       <UIPublicationManager>Yayını Yönet</UIPublicationManager>
       <UIConfirmMessage>Sil ?</UIConfirmMessage>
       <UIDeleteFileConfirmMessage>Dosya silinsin mi?</UIDeleteFileConfirmMessage>
@@ -250,7 +250,7 @@
       <UIActivePublication>Yayın Ömrü İçin Kayıt</UIActivePublication>
       <UITaggingForm>Etiket Belgesi</UITaggingForm>
       <UIThumbnailForm>Küçük Resim Ekle</UIThumbnailForm>
-      <UIAllItemsPreferenceForm>Preferences</UIAllItemsPreferenceForm>
+      <UIAllItemsPreferenceForm>Documents Browsing Preferences</UIAllItemsPreferenceForm>
       <UISelectRestorePath>Geri yükleme yolunu seçin</UISelectRestorePath>
       <UISEOForm>SEO' yu yönet</UISEOForm>
       <UISEOToolbarForm>SEO' yu yönet</UISEOToolbarForm>
@@ -1351,7 +1351,7 @@
     </summary>
     <tooltip>
       <version>Sürüm</version>
-      <baseVersion>Temel Sürüm</baseVersion>
+      <baseVersion>current version</baseVersion>
       <addLabel>Etiket Ekle</addLabel>
       <removeLable>Etiketi Kaldır</removeLable>
       <restoreVersion>Sürümü geri yükle</restoreVersion>
@@ -2895,7 +2895,7 @@
 
   <UIPreferencesForm>
       <label>
-            <queryType>Sorgu Türü:</queryType>
+            <queryType>Query language:</queryType>
             <SQL>SQL</SQL>
             <XPATH>XPATH</XPATH>
       </label>
@@ -3186,7 +3186,7 @@
     <DropFileMessage>Geçerli klasördeki dosyalarınızı buraya bırakın</DropFileMessage>
     <Close>#{word.close}</Close>
     <in>içinde</in>
-    <MaxFileSizeAlert>The file size exceeds the size limit of</MaxFileSizeAlert>
+    <MaxFileSizeAlert>The file size exceeds the limit of</MaxFileSizeAlert>
     <Waiting>Bekleyen</Waiting>
     <Error>Hata</Error>
     <or>ya da</or>

@@ -8,7 +8,7 @@
 
   <UICNConfigPopupWindow>
     <title>
-      <UICategoryNavigationConfig>Category List Configuration</UICategoryNavigationConfig>
+      <UICategoryNavigationConfig>Categorie lijstconfiguratie</UICategoryNavigationConfig>
     </title>
   </UICNConfigPopupWindow>
 
@@ -24,27 +24,27 @@
       <UICategoryNavigationTreeNameSelectBox>Taxonomy Tree</UICategoryNavigationTreeNameSelectBox>
       <UICategoryNavigationTreeTitleFormStringInput>Titel</UICategoryNavigationTreeTitleFormStringInput>
   
-      <UICategoryNavigationTreeNameFormSelectBox>Tree Name</UICategoryNavigationTreeNameFormSelectBox>
-      <UICategoryNavigationTemplateFormSelectBox>Tree viewer template</UICategoryNavigationTemplateFormSelectBox>
+      <UICategoryNavigationTreeNameFormSelectBox>Naam boomstructuur</UICategoryNavigationTreeNameFormSelectBox>
+      <UICategoryNavigationTemplateFormSelectBox>Kijker boomstructuur sjabloon</UICategoryNavigationTemplateFormSelectBox>
       
       <UICategoryNavigationTargetPathFormInputSet>In pagina weergeven</UICategoryNavigationTargetPathFormInputSet>      
-      <TreeSelectionBlock>Tree Selection</TreeSelectionBlock>
+      <TreeSelectionBlock>Boomstructuurselectie</TreeSelectionBlock>
       <DisplaySettingBlock>Weergave-instellingen</DisplaySettingBlock>
       <AdvancedBlock>Geavanceerde</AdvancedBlock>
   
   <UICategoryNavigationTreePathFormInputSet>Doelpad</UICategoryNavigationTreePathFormInputSet>
   <UICategoryNavigationTreePathFormStringInput>Doelpad</UICategoryNavigationTreePathFormStringInput>
   <UICategoryNavigationHeaderFormStringInput>Koptekst</UICategoryNavigationHeaderFormStringInput>
-  <UICategoryNavigationAutomaticDetectionCheckBoxInput>Automatic</UICategoryNavigationAutomaticDetectionCheckBoxInput>
+  <UICategoryNavigationAutomaticDetectionCheckBoxInput>Automatisch</UICategoryNavigationAutomaticDetectionCheckBoxInput>
   <UICategoryNavigationDynamicNavigationLabel>Dynamische navigatie</UICategoryNavigationDynamicNavigationLabel>
   <UICategoryNavigationWithClvFormStringInput>met</UICategoryNavigationWithClvFormStringInput>
   <UICategoryNavigationTreepathPopupWindow>Doelpad</UICategoryNavigationTreepathPopupWindow>    
       
     </label>
     <msg>
-      <not-support-encoding>Encoding is not supported.</not-support-encoding>
-      <render>An error occurred when rendering.</render>
-      <saving-success>The information was updated successfully.</saving-success>
+      <not-support-encoding>Codering wordt niet ondersteund.</not-support-encoding>
+      <render>Er is een fout opgetreden bij het renderen.</render>
+      <saving-success>De informatie is met succes bijgewerkt.</saving-success>
     </msg>
     <action>
       <Save>Opslaan</Save>

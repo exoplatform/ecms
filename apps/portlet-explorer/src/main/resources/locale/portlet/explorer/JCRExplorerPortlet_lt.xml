@@ -157,15 +157,15 @@
   <UIPreferencesForm>
     <title>Nustatyti jūsų naršymo nuostatas</title>
     <label>
-      <enableStructure>Įgalinti DMS struktūrą:</enableStructure>
-      <showSideBar>Rodyti šoninę juostą:</showSideBar>
-      <showHiddenNode>Show Hidden Documents:</showHiddenNode>
-      <showNonDocument>Show Non-document Items:</showNonDocument>
-      <showRefDocuments>Rodyti nurodytus dokumentus:</showRefDocuments>
+      <enableStructure>Browse in structure mode:</enableStructure>
+      <showSideBar>Show sidebar:</showSideBar>
+      <showHiddenNode>Show hidden items:</showHiddenNode>
+      <showNonDocument>Show non-document items:</showNonDocument>
+      <showRefDocuments>Show referenced items:</showRefDocuments>
       <enableDragAndDrop>Įgalinti „Vilkti ir Mesti”:</enableDragAndDrop>
-      <sortBy>Rūšiuoti pagal:</sortBy>
+      <sortBy>Sort order:</sortBy>
       <order>Rūšiuoti pagal:</order>
-      <nodesPerPage>Items per Page:</nodesPerPage>
+      <nodesPerPage>rezultatų kiekis puslapyje:</nodesPerPage>
     </label>
     <action>
       <Back>#{word.close}</Back>
@@ -240,7 +240,7 @@
       <UIViewMetadataManager>Peržiūrėti metaduomenis</UIViewMetadataManager>
       <UIVoteForm>Dokumento balsavimas</UIVoteForm>
       <UICommentForm>Komentuoti</UICommentForm>
-      <UIPreferencesForm>Nuostatos</UIPreferencesForm>
+      <UIPreferencesForm>Documents Browsing Preferences</UIPreferencesForm>
       <UIPublicationManager>Valdyti paskelbimą</UIPublicationManager>
       <UIConfirmMessage>Ištrinti ?</UIConfirmMessage>
       <UIDeleteFileConfirmMessage>Ištrinti failą ?</UIDeleteFileConfirmMessage>
@@ -250,7 +250,7 @@
       <UIActivePublication>Įregistruoti į paskelbimo gyvavimo ciklą</UIActivePublication>
       <UITaggingForm>Žymėti dokumentą</UITaggingForm>
       <UIThumbnailForm>Pridėti miniatiūrą</UIThumbnailForm>
-      <UIAllItemsPreferenceForm>Preferences</UIAllItemsPreferenceForm>
+      <UIAllItemsPreferenceForm>Documents Browsing Preferences</UIAllItemsPreferenceForm>
       <UISelectRestorePath>Pasirinkite atkūrimo kelią</UISelectRestorePath>
       <UISEOForm>Valdyti SEO</UISEOForm>
       <UISEOToolbarForm>Valdyti SEO</UISEOToolbarForm>
@@ -1351,7 +1351,7 @@
     </summary>
     <tooltip>
       <version>Version</version>
-      <baseVersion>Base Version</baseVersion>
+      <baseVersion>current version</baseVersion>
       <addLabel>Pridėti etiketę</addLabel>
       <removeLable>Pašalinti etiketę</removeLable>
       <restoreVersion>Atkurti versiją</restoreVersion>
@@ -2895,7 +2895,7 @@
 
   <UIPreferencesForm>
       <label>
-            <queryType>Užklausos tipas:</queryType>
+            <queryType>Query language:</queryType>
             <SQL>SQL</SQL>
             <XPATH>XPATH</XPATH>
       </label>
@@ -3186,7 +3186,7 @@
     <DropFileMessage>Numeskite failus esamame aplanke</DropFileMessage>
     <Close>#{word.close}</Close>
     <in>į</in>
-    <MaxFileSizeAlert>The file size exceeds the size limit of</MaxFileSizeAlert>
+    <MaxFileSizeAlert>The file size exceeds the limit of</MaxFileSizeAlert>
     <Waiting>Laukiama</Waiting>
     <Error>Klaida</Error>
     <or>ar</or>

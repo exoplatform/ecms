@@ -4,11 +4,11 @@
     <title>
       <QuickEdit>Bewerken in inhoud Explorer</QuickEdit>
       <print>Print deze pagina</print>
-      <FastPublish>Publish</FastPublish>
+      <FastPublish>Publiceren</FastPublish>
     </title>
     <label>
       <draft>Ontwerp</draft>
-      <print>Print</print>
+      <print>Afdrukken</print>
     </label>
     <msg>
       <no-content>Geen inhoud gevonden.</no-content>
@@ -42,13 +42,13 @@
       <Save>#{word.save}</Save>
       <Abort>Afbreken</Abort>
       <Cancel>#{word.cancel}</Cancel>
-      <Print>Print</Print>
+      <Print>Afdrukken</Print>
       <Close>#{word.close}</Close>
     </action>
     <title>Inhoud Detail voorkeuren</title>
     <label>
       <Back>Terug naar vorige pagina</Back>
-      <Edit>Edit</Edit>
+      <Edit>Bewerken</Edit>
       <Preferences>#{word.settings}</Preferences>
       <Title>Inhoud Detail voorkeuren</Title>
       <UISCVShowTitleConfigurationCheckBox>Titel tonen</UISCVShowTitleConfigurationCheckBox>
@@ -58,7 +58,7 @@
       <ContentPathBlock>Inhoud selectie</ContentPathBlock>
       <UISCVConfigItemPathFormInputSet>Pad naar inhoud</UISCVConfigItemPathFormInputSet>
     <UISCVContentPathConfigurationInputBox>Pad naar inhoud</UISCVContentPathConfigurationInputBox>
-      <Advance>Advanced</Advance>
+      <Advance>Geavanceerde</Advance>
       <ContextCaption>Dynamische navigatie</ContextCaption>
       <UISCVContextualRadioBox>Contextuele inhoud</UISCVContextualRadioBox>
       <UISCVParameterInputBox>door</UISCVParameterInputBox>
@@ -80,10 +80,10 @@
     </msg>
     <tab>
       <label>
-        <UISCVConfigContentFormInputSet>Content Selection</UISCVConfigContentFormInputSet>
-        <UISCVConfigDisplayFormInputSet>Display Settings</UISCVConfigDisplayFormInputSet>
-        <UISCVConfigPrintFormInputSet>Print Settings</UISCVConfigPrintFormInputSet>
-        <UISCVConfigAdvancedFormInputSet>Advanced</UISCVConfigAdvancedFormInputSet>
+        <UISCVConfigContentFormInputSet>Inhoud selectie</UISCVConfigContentFormInputSet>
+        <UISCVConfigDisplayFormInputSet>Weergave-instellingen</UISCVConfigDisplayFormInputSet>
+        <UISCVConfigPrintFormInputSet>Afdrukinstellingen</UISCVConfigPrintFormInputSet>
+        <UISCVConfigAdvancedFormInputSet>Geavanceerde</UISCVConfigAdvancedFormInputSet>
       </label>
     </tab>
   </UISCVPreferences>
@@ -95,25 +95,25 @@
   </UISCVConfigItemPathFormInputSet>
   <UISCVConfigPrintPageFormInputSet>
     <title>
-      <SelectTargetPage>Show in Page</SelectTargetPage>
+      <SelectTargetPage>In pagina weergeven</SelectTargetPage>
     </title>
   </UISCVConfigPrintPageFormInputSet>
   <UISCVConfigPrintPageSelectorPopupWindow>
     <title>
-      <UIPageSelector>Page Selector</UIPageSelector>
+      <UIPageSelector>Pagina selecteur</UIPageSelector>
     </title>
   </UISCVConfigPrintPageSelectorPopupWindow>
   <PublicationStates>
     <archived>Gearchiveerd</archived>
     <obsolete>Verouderde</obsolete>
     <unpublished>Niet-gepubliceerde</unpublished>
-    <enrolled>Enrolled</enrolled>
+    <enrolled>Ingeschreven</enrolled>
     <draft>Ontwerp</draft>
     <pending>In behandeling</pending>
-    <approved>Approved</approved>
+    <approved>Goedgekeurd</approved>
     <inreview>Onderzochte</inreview>
-    <staged>Staged</staged>
-    <published>Published</published>
+    <staged>Geënsceneerd</staged>
+    <published>Gepubliceerd</published>
   </PublicationStates>
   <UISCVCacheRadioBox>
     <label>

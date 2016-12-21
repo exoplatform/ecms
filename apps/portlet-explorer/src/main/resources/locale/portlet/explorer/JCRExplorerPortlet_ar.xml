@@ -17,7 +17,7 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <not-support>You can't comment on this type of document.</not-support>
+      <not-support>لا يمكنك التعليق على هذا النوع من الوثائق.</not-support>
       <not-checkedout>You must check out the document before commenting on it.</not-checkedout>
       <content-null>لا يمكن أن يكون التعليق خالي من محتوى أو فارغا.</content-null>
     </msg>
@@ -157,15 +157,15 @@
   <UIPreferencesForm>
     <title>إعداد خيارات التصفح الخاصة بك</title>
     <label>
-      <enableStructure>نمط الهيكل:</enableStructure>
-      <showSideBar>فتح اللوحة الجانبيّة:</showSideBar>
-      <showHiddenNode>Show Hidden Documents:</showHiddenNode>
-      <showNonDocument>Show Non-document Items:</showNonDocument>
-      <showRefDocuments>إظهار الوثائق الموصولة:</showRefDocuments>
+      <enableStructure>Browse in structure mode:</enableStructure>
+      <showSideBar>Show sidebar:</showSideBar>
+      <showHiddenNode>Show hidden items:</showHiddenNode>
+      <showNonDocument>Show non-document items:</showNonDocument>
+      <showRefDocuments>Show referenced items:</showRefDocuments>
       <enableDragAndDrop>اتاحة تقنية السحب و الإسقاط:</enableDragAndDrop>
-      <sortBy>الترتيب بحسب:</sortBy>
+      <sortBy>Sort order:</sortBy>
       <order>ترتيب بحسب:</order>
-      <nodesPerPage>عنصر بكل صفحة:</nodesPerPage>
+      <nodesPerPage>Items per page:</nodesPerPage>
     </label>
     <action>
       <Back>#{word.back}</Back>
@@ -240,7 +240,7 @@
       <UIViewMetadataManager>عرض قالب المعلومات القياسية</UIViewMetadataManager>
       <UIVoteForm>تصويت للوثيقة</UIVoteForm>
       <UICommentForm>أضف تعليق</UICommentForm>
-      <UIPreferencesForm>خيارات</UIPreferencesForm>
+      <UIPreferencesForm>Documents Browsing Preferences</UIPreferencesForm>
       <UIPublicationManager>إدارة النشر</UIPublicationManager>
       <UIConfirmMessage>تأكيد الحذف؟</UIConfirmMessage>
       <UIDeleteFileConfirmMessage>حذف الملف؟</UIDeleteFileConfirmMessage>
@@ -250,7 +250,7 @@
       <UIActivePublication>تسجيل دورة حياة النشر</UIActivePublication>
       <UITaggingForm>إضافة علامات لهذه الوثيقة</UITaggingForm>
       <UIThumbnailForm>إضافة صورة مصغرة</UIThumbnailForm>
-      <UIAllItemsPreferenceForm>Preferences</UIAllItemsPreferenceForm>
+      <UIAllItemsPreferenceForm>Documents Browsing Preferences</UIAllItemsPreferenceForm>
       <UISelectRestorePath>اختر المسار الخاص بالاستعادة</UISelectRestorePath>
       <UISEOForm>إدارة الـSEO</UISEOForm>
       <UISEOToolbarForm>إدارة الـSEO</UISEOToolbarForm>
@@ -1345,13 +1345,13 @@
   ###############################################################################
   -->
   <UIVersionInfo>
-    <title>Version history</title>
+    <title>تاريخ الإصدارات</title>
     <summary>
-      <empty>Click here to add a summary</empty>
+      <empty>انقر هنا لإضافة مُلخّص</empty>
     </summary>
     <tooltip>
       <version>إصدار</version>
-      <baseVersion>الإصدار الرئيسي</baseVersion>
+      <baseVersion>الإصدار الحالي.</baseVersion>
       <addLabel>إضافة رمز</addLabel>
       <removeLable>حذف رمز</removeLable>
       <restoreVersion>استعادة الإصدار</restoreVersion>
@@ -1362,9 +1362,9 @@
     <msg>
       <have-no-view-template>نموذج العرض غير متاح.</have-no-view-template>
       <cannot-remove-version>لا يمكن حذف الإصدار الرئيسي.</cannot-remove-version>
-      <error-removing-version>An error occurred while deleting this version.</error-removing-version>
-      <error-removing-referenced-version>This version is referenced and can't be removed.</error-removing-referenced-version>
-      <confirm-restore>Are you sure you want to restore this version?</confirm-restore>
+      <error-removing-version>حدث خطأ أثناء حذف هذا الاصدار.</error-removing-version>
+      <error-removing-referenced-version>هذا الإصدار مُشار إليه، و لا يمكن إزالته.</error-removing-referenced-version>
+      <confirm-restore>هل ترغب حقــا بحذف هذا الإصدار؟</confirm-restore>
       <confirm-delete>هل ترغب حقــا بحذف هذا الإصدار؟</confirm-delete>
       <not-checked-out>You have to check out this document before restoring.</not-checked-out>
       <invalid-item-state>You can't restore this version, either because one or more items were deleted or moved by another session.</invalid-item-state>
@@ -1372,12 +1372,12 @@
     <action>
       <close>#{word.close}</close>
       <close-view>إغلاق المشهد</close-view>
-      <compare-versions>Compare selected versions</compare-versions>
+      <compare-versions>مقارنة الإصدارات المختارة</compare-versions>
     </action>
     <labels>
       <version>إصدار</version>
       <date>تاريخ</date>
-      <author>Modified By</author>
+      <author>تمّ تغييره من طرف</author>
       <summary>مُلخّص</summary>
       <action>اجراء</action>
     </labels>
@@ -1488,16 +1488,16 @@
   -->
   <UIDiff>
     <label>
-      <backTo>Back to version history</backTo>
+      <backTo>العودة إلى تاريخ الإصدار</backTo>
       <diffTitle>مقارنة بين إصدارين</diffTitle>
-      <noContent>There is no content to compare</noContent>
+      <noContent>لم يتم العثور على أي محتوى</noContent>
       <compareVerion>إصدار</compareVerion>
       <can-not-compare>لم تتم المقارنة بين الإصدارين</can-not-compare>
-      <compare-unavailable>Version comparison is not available for this document</compare-unavailable>
-      <DateChange>On {0}</DateChange>
+      <compare-unavailable>مقارنة الإصدار غير متوفرة لهذا الملف</compare-unavailable>
+      <DateChange>في {0}</DateChange>
       <PreviousAndNextCompare>التّغييرات من {0} الى {1}</PreviousAndNextCompare>
       <ComparedWith>بالمقارنة مع</ComparedWith>
-      <restoredFrom>Restored from version {0}</restoredFrom>
+      <restoredFrom>استعادة من النسخة {0}</restoredFrom>
     </label>
   </UIDiff>
   <!--
@@ -1535,7 +1535,7 @@
   -->
   <UILabelForm>
     <label>
-      <label>رمز</label>
+      <label>Label</label>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -2895,7 +2895,7 @@
 
   <UIPreferencesForm>
       <label>
-            <queryType>Query Type</queryType>
+            <queryType>Query language:</queryType>
             <SQL>SQL</SQL>
             <XPATH>XPATH</XPATH>
       </label>
@@ -3104,7 +3104,7 @@
     <msg>
       <no-view-found>ليس هناك مشهد متاح لك و ذلك بالرّجوع الى خصائص صلاحيّاتك على القرص '{0}'.</no-view-found>
       <access-denied>Access denied. You may not have permission in the workspace of drive '{0}'.</access-denied>
-      <not-found>The document you are trying to access is no longer available.</not-found>
+      <not-found>الملف الذي تحاول الوصول إليه لم يعد متوفراً.</not-found>
       <empty-drives>استحالة الدخول. ليست هناك أقراص في هذا المستودع ، أو ربّما ليست لديك الصلاحيّات الكافية للدخول إلى محتوى أي قرص في مستودع البيانات الحالي.</empty-drives>
       <workspace-not-exist>Drive '{0}' was stored in one unrecognized workspace. Please reconfigure this drive.</workspace-not-exist>
     </msg>
@@ -3186,7 +3186,7 @@
     <DropFileMessage>إسقاط الملفات الخاصة بك في المجلد الحالي</DropFileMessage>
     <Close>#{word.close}</Close>
     <in>في</in>
-    <MaxFileSizeAlert>The file size exceeds the size limit of</MaxFileSizeAlert>
+    <MaxFileSizeAlert>The file size exceeds the limit of</MaxFileSizeAlert>
     <Waiting>في الانتظار</Waiting>
     <Error>خطأ</Error>
     <or>أو</or>

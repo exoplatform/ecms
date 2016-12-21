@@ -157,15 +157,15 @@
   <UIPreferencesForm>
     <title>Set up your browsing preferences</title>
     <label>
-      <enableStructure>Omogoči DMS strukturo:</enableStructure>
-      <showSideBar>Prikaži stransko vrstico:</showSideBar>
-      <showHiddenNode>Show Hidden Documents:</showHiddenNode>
-      <showNonDocument>Show Non-document Items:</showNonDocument>
-      <showRefDocuments>Prikaži sklicevane dokumente:</showRefDocuments>
+      <enableStructure>Browse in structure mode:</enableStructure>
+      <showSideBar>Show sidebar:</showSideBar>
+      <showHiddenNode>Show hidden items:</showHiddenNode>
+      <showNonDocument>Show non-document items:</showNonDocument>
+      <showRefDocuments>Show referenced items:</showRefDocuments>
       <enableDragAndDrop>Omogoči "povleci in spusti":</enableDragAndDrop>
-      <sortBy>Razvrsti po:</sortBy>
+      <sortBy>Sort order:</sortBy>
       <order>Vrstni red po:</order>
-      <nodesPerPage>Elementov po strani:</nodesPerPage>
+      <nodesPerPage>Items per page:</nodesPerPage>
     </label>
     <action>
       <Back>#{word.close}</Back>
@@ -240,7 +240,7 @@
       <UIViewMetadataManager>Ogled Metapodatkov</UIViewMetadataManager>
       <UIVoteForm>Glasujte za dokument</UIVoteForm>
       <UICommentForm>Komentar</UICommentForm>
-      <UIPreferencesForm>Nastavitve</UIPreferencesForm>
+      <UIPreferencesForm>Documents Browsing Preferences</UIPreferencesForm>
       <UIPublicationManager>Upravljanje objave</UIPublicationManager>
       <UIConfirmMessage>Izbriši?</UIConfirmMessage>
       <UIDeleteFileConfirmMessage>Izbriši datoteko?</UIDeleteFileConfirmMessage>
@@ -250,7 +250,7 @@
       <UIActivePublication>Vpiši se na življenjski cikel objave</UIActivePublication>
       <UITaggingForm>Označi dokument</UITaggingForm>
       <UIThumbnailForm>Dodaj sličico</UIThumbnailForm>
-      <UIAllItemsPreferenceForm>Preferences</UIAllItemsPreferenceForm>
+      <UIAllItemsPreferenceForm>Documents Browsing Preferences</UIAllItemsPreferenceForm>
       <UISelectRestorePath>Izberite pot za obnovitev</UISelectRestorePath>
       <UISEOForm>Upravljanje SEO</UISEOForm>
       <UISEOToolbarForm>Upravljanje SEO</UISEOToolbarForm>
@@ -1351,7 +1351,7 @@
     </summary>
     <tooltip>
       <version>Version</version>
-      <baseVersion>Base Version</baseVersion>
+      <baseVersion>current version</baseVersion>
       <addLabel>Dodaj oznako</addLabel>
       <removeLable>Odstrani oznako</removeLable>
       <restoreVersion>Obnovi različico</restoreVersion>
@@ -2895,7 +2895,7 @@
 
   <UIPreferencesForm>
       <label>
-            <queryType>Vrsta poizvedbe:</queryType>
+            <queryType>Query language:</queryType>
             <SQL>SQL</SQL>
             <XPATH>XPATH</XPATH>
       </label>
@@ -3186,7 +3186,7 @@
     <DropFileMessage>Spustite datoteke tukaj v trenutno mapo</DropFileMessage>
     <Close>#{word.close}</Close>
     <in>v</in>
-    <MaxFileSizeAlert>The file size exceeds the size limit of</MaxFileSizeAlert>
+    <MaxFileSizeAlert>The file size exceeds the limit of</MaxFileSizeAlert>
     <Waiting>Čakam</Waiting>
     <Error>Napaka</Error>
     <or>or</or>

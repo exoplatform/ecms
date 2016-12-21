@@ -25,17 +25,17 @@
       <UICategoryNavigationTreeTitleFormStringInput>Title</UICategoryNavigationTreeTitleFormStringInput>
   
       <UICategoryNavigationTreeNameFormSelectBox>Tree Name</UICategoryNavigationTreeNameFormSelectBox>
-      <UICategoryNavigationTemplateFormSelectBox>Tree viewer template</UICategoryNavigationTemplateFormSelectBox>
+      <UICategoryNavigationTemplateFormSelectBox>نماذج الفئات</UICategoryNavigationTemplateFormSelectBox>
       
       <UICategoryNavigationTargetPathFormInputSet>Show in Page</UICategoryNavigationTargetPathFormInputSet>      
-      <TreeSelectionBlock>Tree Selection</TreeSelectionBlock>
+      <TreeSelectionBlock>الإختيارات</TreeSelectionBlock>
       <DisplaySettingBlock>عرض الاعدادات</DisplaySettingBlock>
       <AdvancedBlock>إعدادات متقدمة</AdvancedBlock>
   
   <UICategoryNavigationTreePathFormInputSet>مسار الهدف</UICategoryNavigationTreePathFormInputSet>
   <UICategoryNavigationTreePathFormStringInput>مسار الهدف</UICategoryNavigationTreePathFormStringInput>
   <UICategoryNavigationHeaderFormStringInput>نموذج</UICategoryNavigationHeaderFormStringInput>
-  <UICategoryNavigationAutomaticDetectionCheckBoxInput>Automatic</UICategoryNavigationAutomaticDetectionCheckBoxInput>
+  <UICategoryNavigationAutomaticDetectionCheckBoxInput>تلقائي</UICategoryNavigationAutomaticDetectionCheckBoxInput>
   <UICategoryNavigationDynamicNavigationLabel>التصفّح الديناميكي</UICategoryNavigationDynamicNavigationLabel>
   <UICategoryNavigationWithClvFormStringInput>مع</UICategoryNavigationWithClvFormStringInput>
   <UICategoryNavigationTreepathPopupWindow>مسار الهدف</UICategoryNavigationTreepathPopupWindow>    
@@ -44,7 +44,7 @@
     <msg>
       <not-support-encoding>Encoding is not supported.</not-support-encoding>
       <render>An error occurred when rendering.</render>
-      <saving-success>The information was updated successfully.</saving-success>
+      <saving-success>تم تحديث المعلومات بنجاح.</saving-success>
     </msg>
     <action>
       <Save>Save</Save>

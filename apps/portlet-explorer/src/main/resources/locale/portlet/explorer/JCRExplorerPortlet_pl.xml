@@ -157,15 +157,15 @@
   <UIPreferencesForm>
     <title>Set up your browsing preferences</title>
     <label>
-      <enableStructure>Włącz strukturę DMS:</enableStructure>
-      <showSideBar>Pokaż pasek boczny:</showSideBar>
-      <showHiddenNode>Show Hidden Documents:</showHiddenNode>
-      <showNonDocument>Show Non-document Items:</showNonDocument>
-      <showRefDocuments>Pokaż dokumenty odniesienia:</showRefDocuments>
+      <enableStructure>Browse in structure mode:</enableStructure>
+      <showSideBar>Show sidebar:</showSideBar>
+      <showHiddenNode>Show hidden items:</showHiddenNode>
+      <showNonDocument>Show non-document items:</showNonDocument>
+      <showRefDocuments>Show referenced items:</showRefDocuments>
       <enableDragAndDrop>Włącz Przeciągnij i Upuść:</enableDragAndDrop>
-      <sortBy>Sortuj według:</sortBy>
+      <sortBy>Sort order:</sortBy>
       <order>Sortuj według:</order>
-      <nodesPerPage>Liczba pozycji na stronę:</nodesPerPage>
+      <nodesPerPage>Items per page:</nodesPerPage>
     </label>
     <action>
       <Back>#{word.close}</Back>
@@ -240,7 +240,7 @@
       <UIViewMetadataManager>Zobacz metadane</UIViewMetadataManager>
       <UIVoteForm>Użyj dokumentu</UIVoteForm>
       <UICommentForm>Komentarz</UICommentForm>
-      <UIPreferencesForm>Preferencje</UIPreferencesForm>
+      <UIPreferencesForm>Documents Browsing Preferences</UIPreferencesForm>
       <UIPublicationManager>Zarządzaj publikacją</UIPublicationManager>
       <UIConfirmMessage>Usunąć?</UIConfirmMessage>
       <UIDeleteFileConfirmMessage>Usunąć plik?</UIDeleteFileConfirmMessage>
@@ -250,7 +250,7 @@
       <UIActivePublication>Zapisz się do publikacji „Lifecycle”</UIActivePublication>
       <UITaggingForm>Znacznik dokumentu</UITaggingForm>
       <UIThumbnailForm>Dodaj miniaturę</UIThumbnailForm>
-      <UIAllItemsPreferenceForm>Preferences</UIAllItemsPreferenceForm>
+      <UIAllItemsPreferenceForm>Documents Browsing Preferences</UIAllItemsPreferenceForm>
       <UISelectRestorePath>Wybierz ścieżkę przywracania</UISelectRestorePath>
       <UISEOForm>Zarządzaj SEO</UISEOForm>
       <UISEOToolbarForm>Zarządzaj SEO</UISEOToolbarForm>
@@ -1351,7 +1351,7 @@
     </summary>
     <tooltip>
       <version>Wersja</version>
-      <baseVersion>Base Version</baseVersion>
+      <baseVersion>current version</baseVersion>
       <addLabel>Dodaj etykietę</addLabel>
       <removeLable>Usuń etykietę</removeLable>
       <restoreVersion>Przywróć wersję</restoreVersion>
@@ -2895,7 +2895,7 @@
 
   <UIPreferencesForm>
       <label>
-            <queryType>Rodzaj zapytania:</queryType>
+            <queryType>Query language:</queryType>
             <SQL>SQL</SQL>
             <XPATH>XPATH</XPATH>
       </label>
@@ -3186,7 +3186,7 @@
     <DropFileMessage>Upuścić pliki tutaj w bieżącym folderze</DropFileMessage>
     <Close>#{word.close}</Close>
     <in>in</in>
-    <MaxFileSizeAlert>The file size exceeds the size limit of</MaxFileSizeAlert>
+    <MaxFileSizeAlert>The file size exceeds the limit of</MaxFileSizeAlert>
     <Waiting>Czekaj</Waiting>
     <Error>Błąd</Error>
     <or>or</or>

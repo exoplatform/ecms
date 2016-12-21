@@ -24,7 +24,7 @@
     <view>
       <label>
         <url>URL</url>
-        <description>Description</description>
+        <description>Beschrijving</description>
       </label>
     </view>
   </WebLink>
@@ -32,10 +32,10 @@
   <SiteMetadata>
     <view>
       <label>
-        <title>Site Title</title>
-        <description>Site Description</description>
-        <keywords>Site Keywords</keywords>
-        <robots>Search Engine Behavior</robots>
+        <title>Titel van site</title>
+        <description>Website beschrijving</description>
+        <keywords>Website zoekwoorden</keywords>
+        <robots>Motor-zoekgedrag</robots>
       </label>
       <tooltip>
         <add-edit>Metagegevens toevoegen/bewerken</add-edit>

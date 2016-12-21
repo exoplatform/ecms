@@ -990,7 +990,7 @@
       <addSymLink>Aggiungi Collegamento Simbolico</addSymLink>
       <checkIn>Check-in</checkIn>
       <checkOut>Check-out</checkOut>
-      <shareDocuments>Post</shareDocuments>
+      <shareDocuments>Condividi</shareDocuments>
       <openDocument>Modifica remota</openDocument>
       <editProperty>Modifica proprietà documento</editProperty>
       <uploadNewVersion>Carica una nuova versione</uploadNewVersion>
@@ -1023,7 +1023,7 @@
   </UIViewFormTabPane>
   <PopupViewPermission>
     <title>
-      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
+      <UIPermissionSelector>Selettore dei permessi</UIPermissionSelector>
     </title>
   </PopupViewPermission>
 
@@ -1074,7 +1074,7 @@
   -->
   <UITemplateForm>
     <title>
-      <AddPermission>Add Permission</AddPermission>
+      <AddPermission>Aggiungere Permesso</AddPermission>
     </title>
     <action>
       <Save>#{word.save}</Save>
@@ -1405,7 +1405,7 @@
 
   <PopupTaxonomyTreePermission>
     <title>
-      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
+      <UIPermissionSelector>Selettore dei permessi</UIPermissionSelector>
     </title>
   </PopupTaxonomyTreePermission>
 
@@ -1737,7 +1737,7 @@
   -->
   <AddNewTemplatePermission>
     <title>
-      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
+      <UIPermissionSelector>Selettore dei permessi</UIPermissionSelector>
     </title>
   </AddNewTemplatePermission>
   <TemplatePermission>
@@ -1778,12 +1778,12 @@
   </DialogForm>
   <DialogFormTemplatePermission>
     <title>
-      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
+      <UIPermissionSelector>Selettore dei permessi</UIPermissionSelector>
     </title>
   </DialogFormTemplatePermission>
   <ViewFormTemplatePermission>
     <title>
-      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
+      <UIPermissionSelector>Selettore dei permessi</UIPermissionSelector>
     </title>
   </ViewFormTemplatePermission>
   <TemplateContainerPopup>
@@ -1976,7 +1976,7 @@
   </EditQueryForm>
   <PermissionPopup>
     <title>
-      <UIGroupMemberSelector>Permission Selector</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Selettore dei permessi</UIGroupMemberSelector>
     </title>
   </PermissionPopup>
   <!--
@@ -2485,7 +2485,7 @@
       <Add>Aggiungere</Add>
     </action>
     <label>
-      <userOrGroup>Memberships:</userOrGroup>
+      <userOrGroup>Appartenenza:</userOrGroup>
     </label>
     <msg>
       <userOrGroup-alreadyExists>La membership esiste già. Selezionane un'altra.</userOrGroup-alreadyExists>

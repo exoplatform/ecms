@@ -87,7 +87,7 @@
   <Vote>
     <view>
       <label>
-        <avg-rating>Note Moyenne</avg-rating>
+        <avg-rating>Note</avg-rating>
         <subscription>Nb Vote</subscription>
       </label>
     </view>

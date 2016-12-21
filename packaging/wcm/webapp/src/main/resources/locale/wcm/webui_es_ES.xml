@@ -102,7 +102,7 @@
       <Media>Multimedia</Media>
     </selectBoxValues>
     <msg>
-      <node-checkout>El nodo está desmarcado. Por favor seleccione el nodo antes de realizar esta función.</node-checkout>
+      <node-checkout>El nodo está desprotegido. Por favor, seleccione el nodo antes de realizar esta función.</node-checkout>
     </msg>
   </UIContentBrowsePanelOne>
 
@@ -272,8 +272,8 @@
       <Close>#{word.close}</Close>
     </action>
     <msg>
-      <access-denied>No tiene permiso para agregar categorías a este documento.</access-denied>
-      <exception>Error al agregar categorías a este documento.</exception>
+      <access-denied>No tiene permiso para añadir categorías a este documento.</access-denied>
+      <exception>Error al añadir categorías a este documento.</exception>
       <non-categories>Las categorías son erróneas.  Favor de seleccionar buenas categorías.</non-categories>
     </msg>
   </UIContentDialogForm>
@@ -308,7 +308,7 @@
       <node-locked>El elemento de la ruta {0} o uno de sus padres está bloqueado.</node-locked>
       <userOrGroup-required>Debe seleccionar  a un usuario o grupo.</userOrGroup-required>
       <checkbox-require>Debe establecer derechos.</checkbox-require>
-      <node-checkedin>Debe verificar primero.</node-checkedin>
+      <node-checkedin>Debe desprotegerlo primero.</node-checkedin>
     </msg>
   </UIPermissionManagerGrid>
 
@@ -316,7 +316,7 @@
     <title>
       <SelectUser>Seleccionar Usuario</SelectUser>
       <SelectMember>Seleccionar miembro</SelectMember>
-      <AddAny>Agregar cualquier permiso</AddAny>
+      <AddAny>Todos</AddAny>
     </title>
   </UIPermissionInputSetWithAction>
 

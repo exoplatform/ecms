@@ -106,7 +106,7 @@
   <UICLVConfigItemPathFormInputSet>
     <title>
       <SelectFolderPath>Seleccione la ruta de la carpeta</SelectFolderPath>
-      <AddPath>Agregar Ruta</AddPath>
+      <AddPath>Añadir Ruta</AddPath>
     </title>
   </UICLVConfigItemPathFormInputSet>
   <FolderPathSelectorPopupWindow>

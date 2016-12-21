@@ -157,15 +157,15 @@
   <UIPreferencesForm>
     <title>设置您的浏览喜好</title>
     <label>
-      <enableStructure>启用 DMS 结构：</enableStructure>
-      <showSideBar>显示侧栏：</showSideBar>
-      <showHiddenNode>Show Hidden Documents:</showHiddenNode>
-      <showNonDocument>Show Non-document Items:</showNonDocument>
-      <showRefDocuments>显示引用的文档：</showRefDocuments>
+      <enableStructure>Browse in structure mode:</enableStructure>
+      <showSideBar>Show sidebar:</showSideBar>
+      <showHiddenNode>Show hidden items:</showHiddenNode>
+      <showNonDocument>Show non-document items:</showNonDocument>
+      <showRefDocuments>Show referenced items:</showRefDocuments>
       <enableDragAndDrop>启用拖 &amp; 拖放：</enableDragAndDrop>
-      <sortBy>排序依据:</sortBy>
+      <sortBy>Sort order:</sortBy>
       <order>顺序:</order>
-      <nodesPerPage>Items per Page:</nodesPerPage>
+      <nodesPerPage>Items per page:</nodesPerPage>
     </label>
     <action>
       <Back>#{word.close}</Back>
@@ -240,7 +240,7 @@
       <UIViewMetadataManager>查看元数据</UIViewMetadataManager>
       <UIVoteForm>表决文档</UIVoteForm>
       <UICommentForm>评论</UICommentForm>
-      <UIPreferencesForm>首选项</UIPreferencesForm>
+      <UIPreferencesForm>Documents Browsing Preferences</UIPreferencesForm>
       <UIPublicationManager>管理出版物</UIPublicationManager>
       <UIConfirmMessage>删除吗？</UIConfirmMessage>
       <UIDeleteFileConfirmMessage>删除文件？</UIDeleteFileConfirmMessage>
@@ -250,7 +250,7 @@
       <UIActivePublication>注册到出版物生命周期</UIActivePublication>
       <UITaggingForm>标记文档</UITaggingForm>
       <UIThumbnailForm>添加缩略图图像</UIThumbnailForm>
-      <UIAllItemsPreferenceForm>首选项</UIAllItemsPreferenceForm>
+      <UIAllItemsPreferenceForm>Documents Browsing Preferences</UIAllItemsPreferenceForm>
       <UISelectRestorePath>选择恢复路径</UISelectRestorePath>
       <UISEOForm>管理 SEO</UISEOForm>
       <UISEOToolbarForm>管理 SEO</UISEOToolbarForm>
@@ -1351,7 +1351,7 @@
     </summary>
     <tooltip>
       <version>版本</version>
-      <baseVersion>基本版本</baseVersion>
+      <baseVersion>current version</baseVersion>
       <addLabel>添加标签</addLabel>
       <removeLable>移除标签</removeLable>
       <restoreVersion>还原的版本</restoreVersion>
@@ -2895,7 +2895,7 @@
 
   <UIPreferencesForm>
       <label>
-            <queryType>查询类型：</queryType>
+            <queryType>Query language:</queryType>
             <SQL>SQL</SQL>
             <XPATH>XPATH</XPATH>
       </label>
@@ -3186,7 +3186,7 @@
     <DropFileMessage>在当前文件夹中掉下您的文件</DropFileMessage>
     <Close>#{word.close}</Close>
     <in>在中</in>
-    <MaxFileSizeAlert>The file size exceeds the size limit of</MaxFileSizeAlert>
+    <MaxFileSizeAlert>The file size exceeds the limit of</MaxFileSizeAlert>
     <Waiting>等待中</Waiting>
     <Error>错误</Error>
     <or>或</or>
