@@ -416,6 +416,21 @@
       </value-param>
     </init-params>
   </component>
+
+  <component>
+    <key>org.exoplatform.services.wcm.skin.XSkinService</key>
+    <type>org.exoplatform.services.wcm.skin.XSkinService</type>
+  </component>
+
+  <component>
+    <key>org.exoplatform.web.application.javascript.JavascriptConfigService</key>
+    <type>org.exoplatform.web.application.javascript.JavascriptConfigService</type>
+  </component>
+
+  <component>
+    <key>org.exoplatform.services.wcm.javascript.XJavascriptService</key>
+    <type>org.exoplatform.services.wcm.javascript.XJavascriptService</type>
+  </component>
   
   <external-component-plugins>
     <target-component>org.exoplatform.services.cms.impl.DMSConfiguration</target-component>

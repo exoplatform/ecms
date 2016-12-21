@@ -234,7 +234,9 @@ public abstract class BaseSearchServiceConnector extends SearchServiceConnector 
   protected Calendar getDate(Node node) throws Exception {
     return node.hasProperty(NodetypeConstant.EXO_LAST_MODIFIED_DATE) ? 
                  node.getProperty(NodetypeConstant.EXO_LAST_MODIFIED_DATE).getDate() :
-                 node.getProperty(NodetypeConstant.EXO_DATE_CREATED).getDate();
+                 node.hasProperty(NodetypeConstant.EXO_DATE_CREATED) ?
+                 node.getProperty(NodetypeConstant.EXO_DATE_CREATED).getDate() :
+                 Calendar.getInstance();
   }
 
   /**
