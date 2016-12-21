@@ -87,7 +87,7 @@
   <Vote>
     <view>
       <label>
-        <avg-rating>Clasificación Avg</avg-rating>
+        <avg-rating>Valoración</avg-rating>
         <subscription>Votos</subscription>
       </label>
     </view>
@@ -171,7 +171,7 @@
         <languages>Idiomas</languages>
       </label>
       <action>
-        <add-edit>Agregar/Editar</add-edit>
+        <add-edit>Añadir/Editar</add-edit>
         <cancel>#{word.cancel}</cancel>
       </action>
       <tooltip>

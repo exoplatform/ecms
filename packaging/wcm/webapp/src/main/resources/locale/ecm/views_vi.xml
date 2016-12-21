@@ -87,7 +87,7 @@
   <Vote>
     <view>
       <label>
-        <avg-rating>Xếp loại Trung bình</avg-rating>
+        <avg-rating>Rate</avg-rating>
         <subscription>Số lượng bình chọn</subscription>
       </label>
     </view>

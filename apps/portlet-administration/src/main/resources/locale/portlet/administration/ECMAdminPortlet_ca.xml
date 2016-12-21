@@ -291,7 +291,7 @@
     </header>
     <label>
       <dialogTemplate>Plantilla de diàleg:</dialogTemplate>
-      <viewTemplate>Veure plantilla:</viewTemplate>
+      <viewTemplate>Plantilla de Vista:</viewTemplate>
       <metadataName>Nom de les metadades:</metadataName>
       <viewPermission>Permisos:</viewPermission>
       <permission>UIMetadataForm</permission>
@@ -301,7 +301,7 @@
       <label>
         <metadataTypeTab>Tipus de metadades</metadataTypeTab>
         <dialogTab>Plantilla de diàleg</dialogTab>
-        <viewTab>Veure plantilla</viewTab>
+        <viewTab>Plantilla de Vista</viewTab>
       </label>
     </tab>
   </UIMetadataForm>
@@ -546,7 +546,7 @@
       <Save>#{word.save}</Save>
       <SaveDraft>Desa com a esborrany</SaveDraft>
       <AddProperty>Afegeix Propietat</AddProperty>
-      <AddChild>Afegeix un node secundari</AddChild>
+      <AddChild>Afegeix Fill</AddChild>
       <AddConstraints>Afegeix limitacions</AddConstraints>
       <Back>#{word.back}</Back>
       <AddType>Afegeix un tipus</AddType>
@@ -1123,7 +1123,7 @@
   </ecmTempForm>
   <ecmTempFormPopup>
     <title>
-      <ecmTempForm>Afegeix/Edita la vista de plantilla</ecmTempForm>
+      <ecmTempForm>Afegeix/Edita la plantilla de vista</ecmTempForm>
     </title>
   </ecmTempFormPopup>
   <ecmTempFormAdd>

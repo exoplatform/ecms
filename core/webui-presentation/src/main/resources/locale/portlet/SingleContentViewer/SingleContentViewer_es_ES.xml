@@ -65,7 +65,7 @@
       <PrintSettingBlock>Configuración de impresión</PrintSettingBlock>
       <UISCVPrintPageParameter>con</UISCVPrintPageParameter>
       <UISCVConfigPrintPageFormInputSet>Mostrar en la página</UISCVConfigPrintPageFormInputSet>
-      <LockStatus>Bloqueo</LockStatus>
+      <LockStatus>Bloquear</LockStatus>
       <CacheManagement>Visibilidad de contenido</CacheManagement>
       <UISCVCacheRadioBox>Compartir contenido</UISCVCacheRadioBox>
     </label>
@@ -90,7 +90,7 @@
   <UISCVConfigItemPathFormInputSet>
     <title>
       <SelectFolderPath>Seleccione la ruta de la carpeta</SelectFolderPath>
-      <AddPath>Agregar Ruta</AddPath>
+      <AddPath>Añadir Ruta</AddPath>
     </title>
   </UISCVConfigItemPathFormInputSet>
   <UISCVConfigPrintPageFormInputSet>

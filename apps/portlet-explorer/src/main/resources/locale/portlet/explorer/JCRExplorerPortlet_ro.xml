@@ -157,15 +157,15 @@
   <UIPreferencesForm>
     <title>Configurați preferinţele dumneavoastră de navigare</title>
     <label>
-      <enableStructure>Activați structura DMS:</enableStructure>
-      <showSideBar>Arată bara laterală:</showSideBar>
-      <showHiddenNode>Show Hidden Documents:</showHiddenNode>
-      <showNonDocument>Show Non-document Items:</showNonDocument>
-      <showRefDocuments>Afișare documentele conexe:</showRefDocuments>
+      <enableStructure>Browse in structure mode:</enableStructure>
+      <showSideBar>Show sidebar:</showSideBar>
+      <showHiddenNode>Show hidden items:</showHiddenNode>
+      <showNonDocument>Show non-document items:</showNonDocument>
+      <showRefDocuments>Show referenced items:</showRefDocuments>
       <enableDragAndDrop>Activează Drag &amp; Drop:</enableDragAndDrop>
-      <sortBy>Sortează după:</sortBy>
+      <sortBy>Sort order:</sortBy>
       <order>Ordonare după:</order>
-      <nodesPerPage>Items per Page:</nodesPerPage>
+      <nodesPerPage>Articole pe pagină:</nodesPerPage>
     </label>
     <action>
       <Back>#{word.close}</Back>
@@ -240,7 +240,7 @@
       <UIViewMetadataManager>Afișează metadate</UIViewMetadataManager>
       <UIVoteForm>Votează documentul</UIVoteForm>
       <UICommentForm>Comentariu</UICommentForm>
-      <UIPreferencesForm>Preferinţe</UIPreferencesForm>
+      <UIPreferencesForm>Documents Browsing Preferences</UIPreferencesForm>
       <UIPublicationManager>Gestionați publicarea</UIPublicationManager>
       <UIConfirmMessage>Ştergeţi ?</UIConfirmMessage>
       <UIDeleteFileConfirmMessage>Ștergeţi fișierul ?</UIDeleteFileConfirmMessage>
@@ -250,7 +250,7 @@
       <UIActivePublication>Înscrieți-vă la procesul de publicare</UIActivePublication>
       <UITaggingForm>Etichetați Document</UITaggingForm>
       <UIThumbnailForm>Adaugă imagine miniatură</UIThumbnailForm>
-      <UIAllItemsPreferenceForm>Preferences</UIAllItemsPreferenceForm>
+      <UIAllItemsPreferenceForm>Documents Browsing Preferences</UIAllItemsPreferenceForm>
       <UISelectRestorePath>Selectaţi calea pentru restabilire</UISelectRestorePath>
       <UISEOForm>Gestionați SEO</UISEOForm>
       <UISEOToolbarForm>Gestionați SEO</UISEOToolbarForm>
@@ -1351,7 +1351,7 @@
     </summary>
     <tooltip>
       <version>Version</version>
-      <baseVersion>Base Version</baseVersion>
+      <baseVersion>current version</baseVersion>
       <addLabel>Adaugă eticheta</addLabel>
       <removeLable>Eliminaţi eticheta</removeLable>
       <restoreVersion>Restabilire versiune</restoreVersion>
@@ -2895,7 +2895,7 @@
 
   <UIPreferencesForm>
       <label>
-            <queryType>Tipul interogării:</queryType>
+            <queryType>Query language:</queryType>
             <SQL>SQL</SQL>
             <XPATH>XPATH</XPATH>
       </label>
@@ -3186,7 +3186,7 @@
     <DropFileMessage>Puneți fișierele aici în dosarul curent</DropFileMessage>
     <Close>#{word.close}</Close>
     <in>în</in>
-    <MaxFileSizeAlert>The file size exceeds the size limit of</MaxFileSizeAlert>
+    <MaxFileSizeAlert>The file size exceeds the limit of</MaxFileSizeAlert>
     <Waiting>În aşteptare</Waiting>
     <Error>Eroare</Error>
     <or>sau</or>

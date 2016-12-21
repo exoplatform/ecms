@@ -87,7 +87,7 @@
   <Vote>
     <view>
       <label>
-        <avg-rating>Avaliação Média</avg-rating>
+        <avg-rating>Rate</avg-rating>
         <subscription>Votos</subscription>
       </label>
     </view>

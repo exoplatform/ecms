@@ -87,7 +87,7 @@
   <Vote>
     <view>
       <label>
-        <avg-rating>Povprečna ocena</avg-rating>
+        <avg-rating>Rate</avg-rating>
         <subscription>Glasov</subscription>
       </label>
     </view>

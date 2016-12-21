@@ -157,15 +157,15 @@
   <UIPreferencesForm>
     <title>Configurar suas preferências de navegação</title>
     <label>
-      <enableStructure>Habilitar estrutura do DMS:</enableStructure>
-      <showSideBar>Mostrar barra lateral:</showSideBar>
-      <showHiddenNode>Show Hidden Documents:</showHiddenNode>
-      <showNonDocument>Show Non-document Items:</showNonDocument>
-      <showRefDocuments>Mostrar documentos referenciados</showRefDocuments>
+      <enableStructure>Browse in structure mode:</enableStructure>
+      <showSideBar>Show sidebar:</showSideBar>
+      <showHiddenNode>Show hidden items:</showHiddenNode>
+      <showNonDocument>Show non-document items:</showNonDocument>
+      <showRefDocuments>Show referenced items:</showRefDocuments>
       <enableDragAndDrop>Habilitar Arrastar &amp; Soltar</enableDragAndDrop>
-      <sortBy>Classificar por:</sortBy>
+      <sortBy>Sort order:</sortBy>
       <order>Ordenar por:</order>
-      <nodesPerPage>Itens por página:</nodesPerPage>
+      <nodesPerPage>Items per page:</nodesPerPage>
     </label>
     <action>
       <Back>#{word.close}</Back>
@@ -240,7 +240,7 @@
       <UIViewMetadataManager>Ver metadados</UIViewMetadataManager>
       <UIVoteForm>Votar no documento</UIVoteForm>
       <UICommentForm>Comentar</UICommentForm>
-      <UIPreferencesForm>Preferências</UIPreferencesForm>
+      <UIPreferencesForm>Documents Browsing Preferences</UIPreferencesForm>
       <UIPublicationManager>Gerenciar publicações</UIPublicationManager>
       <UIConfirmMessage>Excluir?</UIConfirmMessage>
       <UIDeleteFileConfirmMessage>Excluir arquivo ?</UIDeleteFileConfirmMessage>
@@ -250,7 +250,7 @@
       <UIActivePublication>Inscrever-se no ciclo de publicações</UIActivePublication>
       <UITaggingForm>Aplicar tag a este documento</UITaggingForm>
       <UIThumbnailForm>Adicionar miniatura</UIThumbnailForm>
-      <UIAllItemsPreferenceForm>Preferences</UIAllItemsPreferenceForm>
+      <UIAllItemsPreferenceForm>Documents Browsing Preferences</UIAllItemsPreferenceForm>
       <UISelectRestorePath>Selecionar caminho de restauração</UISelectRestorePath>
       <UISEOForm>Gerenciar SEO</UISEOForm>
       <UISEOToolbarForm>Gerenciar SEO</UISEOToolbarForm>
@@ -1351,7 +1351,7 @@
     </summary>
     <tooltip>
       <version>Versão</version>
-      <baseVersion>Versão base</baseVersion>
+      <baseVersion>current version</baseVersion>
       <addLabel>Adicionar rótulo</addLabel>
       <removeLable>Remover rótulo</removeLable>
       <restoreVersion>Restaurar versão</restoreVersion>
@@ -2895,7 +2895,7 @@
 
   <UIPreferencesForm>
       <label>
-            <queryType>Tipo de consulta</queryType>
+            <queryType>Query language:</queryType>
             <SQL>SQL</SQL>
             <XPATH>XPATH</XPATH>
       </label>
@@ -3186,7 +3186,7 @@
     <DropFileMessage>Deixar seus arquivos na pasta atual</DropFileMessage>
     <Close>#{word.close}</Close>
     <in>em</in>
-    <MaxFileSizeAlert>The file size exceeds the size limit of</MaxFileSizeAlert>
+    <MaxFileSizeAlert>The file size exceeds the limit of</MaxFileSizeAlert>
     <Waiting>Esperando</Waiting>
     <Error>Erro</Error>
     <or>ou</or>

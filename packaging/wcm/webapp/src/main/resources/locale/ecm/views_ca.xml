@@ -87,7 +87,7 @@
   <Vote>
     <view>
       <label>
-        <avg-rating>Qualificació mitjana</avg-rating>
+        <avg-rating>Valoració</avg-rating>
         <subscription>Vots</subscription>
       </label>
     </view>

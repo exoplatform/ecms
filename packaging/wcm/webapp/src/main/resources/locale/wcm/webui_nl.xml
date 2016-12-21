@@ -36,8 +36,8 @@
     <label>
       <ManagedSites>Sitebeheer</ManagedSites>
       <SharedSite>Gedeelde Site</SharedSite>
-      <PersonalDocuments>Personal Documents</PersonalDocuments>
-      <UserDocuments>{0} Documents</UserDocuments>
+      <PersonalDocuments>Persoonlijke documenten</PersonalDocuments>
+      <UserDocuments>{0} Documenten</UserDocuments>
     </label>
   </Drives>
 
@@ -108,8 +108,8 @@
 
   <UIContentBrowsePanelMulti>
     <selectBoxValues>
-      <FilterBy>Filter by</FilterBy>
-      <WebContent>Web Content</WebContent>
+      <FilterBy>Filteren op</FilterBy>
+      <WebContent>Webinhoud</WebContent>
       <DMSDocument>Documents</DMSDocument>
       <Media>Media</Media>
     </selectBoxValues>
@@ -131,7 +131,7 @@
 
   <UIContentBrowsePanelFolder>
     <label>
-      <LeftColumn>Select a folder to display its children as content.</LeftColumn>
+      <LeftColumn>Selecteer een map om haar kinderen als inhoud weer te geven.</LeftColumn>
       <RightColumn>De onderstaande map kan worden geselecteerd.</RightColumn>
     </label>
   </UIContentBrowsePanelFolder>
@@ -139,8 +139,8 @@
   <UISelectedContentGrid>
     <label>
       <name>#{word.name}</name>
-      <add>Add</add>
-      <delete>Delete</delete>
+      <add>Toevoegen</add>
+      <delete>Verwijderen</delete>
     </label>
     <msg>
       <no-content-found>Geen inhoud gevonden.</no-content-found>
@@ -180,12 +180,12 @@
   <UIContentSearchForm>
     <title>
       <Location>Sitenaam</Location>
-      <SearchByName>Search by Name</SearchByName>
+      <SearchByName>Zoek op naam</SearchByName>
       <Fulltext>Woord of zin in inhoud</Fulltext>
       <Property>Property</Property>
       <Contain>Bevat</Contain>
-      <FromDate>From Date</FromDate>
-      <ToDate>To Date</ToDate>
+      <FromDate>Van datum</FromDate>
+      <ToDate>Aan datum</ToDate>
       <DocumentType>Document Type</DocumentType>
     </title>
     <tooltip>
@@ -194,12 +194,12 @@
     </tooltip>    
     <label>
       <option>
-        <CREATED>Created</CREATED>
-        <MODIFIED>Modified</MODIFIED>
+        <CREATED>Aangemaakt</CREATED>
+        <MODIFIED>Gewijzigd</MODIFIED>
       </option>
     </label>
     <action>
-      <SearchWebContent>Search</SearchWebContent>
+      <SearchWebContent>Zoek</SearchWebContent>
     </action>
     <msg>
       <time-to-late>De zoeken tijd is te lang.</time-to-late>
@@ -214,7 +214,7 @@
       <invalid-date>"Tot op heden"moet uiterlijk"van datum"</invalid-date>
       <invalid-startDate>"Na" mag niet later dan vandaag</invalid-startDate>
       <invalid-nodeType>Het Nodetype "{0}" is ongeldig. Controleer het opnieuw.</invalid-nodeType>
-      <invalid-keyword>The keyword is invalid. Some characters are not supported.</invalid-keyword>
+      <invalid-keyword>Het sleutelwoord is ongeldig. Sommige tekens worden niet ondersteund.</invalid-keyword>
     </msg>
   </UIContentSearchForm>
 
@@ -226,7 +226,7 @@
 
   <UIContentPropertySelector>
     <action>
-      <Add>Add</Add>
+      <Add>Toevoegen</Add>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
@@ -252,7 +252,7 @@
     <header>
       <title>Titel</title>
       <score>Score</score>
-      <publicationstate>Publication State</publicationstate>
+      <publicationstate>Publicatie staat</publicationstate>
       <action>Actie</action>
     </header>
     <title>
@@ -322,7 +322,7 @@
 
   <UIUserSelectorPopupWindow>
     <title>
-      <UIUserContainer>User Selector</UIUserContainer>
+      <UIUserContainer>Kies een gebruiker</UIUserContainer>
     </title>
   </UIUserSelectorPopupWindow>
 
@@ -334,7 +334,7 @@
 
   <UIGroupMemberSelector>
     <label>
-      <selectGroup>Select Group</selectGroup>
+      <selectGroup>Selecteer Groep</selectGroup>
       <selectMembership>Selecteer lidmaatschap</selectMembership>
     </label>
   </UIGroupMemberSelector>
@@ -366,7 +366,7 @@
       <SingleContentViewer>Enkele inhoud kijker</SingleContentViewer>
       <ContentListViewer>Inhoudslijst Viewer</ContentListViewer>
       <Search>Zoeken</Search>
-      <Sitemap>Site Map</Sitemap>
+      <Sitemap>Sitemap</Sitemap>
       <TwoColumnsLayout>Twee-kolom lay-out</TwoColumnsLayout>
       <ThreeColumnsLayout>Drie kolommen lay-out</ThreeColumnsLayout>
       <TwoRowsLayout>Twee-rij-indeling</TwoRowsLayout>
@@ -384,7 +384,7 @@
     <login>Inloggen</login>
     <logout>Log uit</logout>
     <language>Verander taal</language>
-    <register>Register</register>
+    <register>Registreren</register>
   </Signin>
   <UIDriveForm>
 <label>
@@ -395,11 +395,11 @@
   
   <ContentSelector>
     <title>
-      <PersonalDrives>Personal Drives</PersonalDrives>
-      <GeneralDrives>General Drives</GeneralDrives>
-      <GroupDrives>Group Drives</GroupDrives>
-      <Private>Private</Private>
-      <Public>Public</Public>
+      <PersonalDrives>Persoonlijke stations</PersonalDrives>
+      <GeneralDrives>Algemene stations</GeneralDrives>
+      <GroupDrives>Groep schijven</GroupDrives>
+      <Private>Prive</Private>
+      <Public>Openbaar</Public>
       <BackupCenter>Back-up centrum</BackupCenter>
       <CategorizedDocumentsCenter>Gecategoriseerde documenten Center</CategorizedDocumentsCenter>
       <CollaborationCenter>Samenwerking Center</CollaborationCenter>
@@ -413,7 +413,7 @@
       <Systemfiles>System files</Systemfiles>
       <ValidationRequestsDocumentsCenter>Validatie verzoeken documenten Center</ValidationRequestsDocumentsCenter>
       <ManagedSites>Sitebeheer</ManagedSites>
-      <SharedSite>Shared Site</SharedSite>
+      <SharedSite>Gedeelde Site</SharedSite>
     </title>
   </ContentSelector>
   

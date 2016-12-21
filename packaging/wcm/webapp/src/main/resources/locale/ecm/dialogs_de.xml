@@ -35,7 +35,7 @@
  
   <UICommentForm>
     <label>
-      <placeholder>Use @ to mention someone in your comment</placeholder>
+      <placeholder>Verwenden Sie @, um jemanden in Ihrem Kommentar zu erwähnen</placeholder>
     </label>
   </UICommentForm>
  
@@ -112,7 +112,7 @@
   <AutoVersioning>
     <dialog>
       <label>
-        <id>Id</id>
+        <id>ID</id>
         <name>#{word.name}</name>
         <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
         <schedule-type>#{Ecm.dialog.label.schedule-type}</schedule-type>
@@ -131,7 +131,7 @@
   <EnableVersioning>
     <dialog>
       <label>
-        <id>Id</id>
+        <id>ID</id>
         <name>#{word.name}</name>
         <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
         <schedule-type>#{Ecm.dialog.label.schedule-type}</schedule-type>
@@ -293,7 +293,7 @@
   <ScriptAction>
     <dialog>
       <label>
-        <id>Id</id>
+        <id>ID</id>
         <name>Name</name>
         <lifecycle>Lebenszyklus</lifecycle>
         <homePath>Quellpfad</homePath>

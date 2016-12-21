@@ -982,7 +982,7 @@
       <comment>Commentaar</comment>
       <vote>Stem voor document</vote>
       <addCategory>Voeg categorie toe</addCategory>
-      <addLocalizationLink>Add Translation</addLocalizationLink>
+      <addLocalizationLink>Vertaling toevoegen</addLocalizationLink>
       <publicationRequestApproval>Goedkeuring aanvragen</publicationRequestApproval>
       <publicationApproveContent>Goedkeuren van inhoud</publicationApproveContent>
       <publicationPublish>Publiceren</publicationPublish>
@@ -990,8 +990,8 @@
       <addSymLink>Add Sym Link</addSymLink>
       <checkIn>Inchecken</checkIn>
       <checkOut>Uitchecken</checkOut>
-      <shareDocuments>Post</shareDocuments>
-      <openDocument>Remote Edit</openDocument>
+      <shareDocuments>Delen</shareDocuments>
+      <openDocument>Extern bewerken</openDocument>
       <editProperty>Documenteigenschappen bewerken</editProperty>
       <uploadNewVersion>Een nieuwe versie uploaden</uploadNewVersion>
     </label>
@@ -1048,7 +1048,7 @@
   <UIECMTemplateList>
     <title>
       <View>Tonen</View>
-      <EditInfo>Edit</EditInfo>
+      <EditInfo>Bewerken</EditInfo>
       <Delete>Verwijderen</Delete>
     </title>
     <header>
@@ -1074,7 +1074,7 @@
   -->
   <UITemplateForm>
     <title>
-      <AddPermission>Add Permission</AddPermission>
+      <AddPermission>Rechten toevoegen</AddPermission>
     </title>
     <action>
       <Save>#{word.save}</Save>
@@ -1405,7 +1405,7 @@
 
   <PopupTaxonomyTreePermission>
     <title>
-      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
+      <UIPermissionSelector>Permissie selecteur</UIPermissionSelector>
     </title>
   </PopupTaxonomyTreePermission>
 
@@ -1483,7 +1483,7 @@
       <permission>UIPermissionForm</permission>
       <userOrGroup>Gebruiker of Groep</userOrGroup>
       <read>Lees Recht</read>
-      <add_node>Modify</add_node>
+      <add_node>Wijzig</add_node>
       <remove>Verwijderen Recht</remove>
     </label>
     <title>Voeg een toestemming voor dat node</title>
@@ -1579,15 +1579,15 @@
   <UITabPane>
     <title>
       <ContentTemplateContainer>Inhoud</ContentTemplateContainer>
-      <CateTemplateContainer>Navigation</CateTemplateContainer>
+      <CateTemplateContainer>Navigatie</CateTemplateContainer>
       <PageTemplateContainer>Paginator</PageTemplateContainer>
     </title>
   </UITabPane>
 
   <UICLVTemplateList>
     <title>
-      <Edit>Edit</Edit>
-      <Delete>Delete</Delete>
+      <Edit>Bewerken</Edit>
+      <Delete>Verwijderen</Delete>
     </title>
     <header>
       <title>Naam</title>
@@ -1718,7 +1718,7 @@
     <label>
       <paginators>Paginator</paginators>
       <list>Inhoud</list>
-      <navigation>Navigation</navigation>
+      <navigation>Navigatie</navigation>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -1737,7 +1737,7 @@
   -->
   <AddNewTemplatePermission>
     <title>
-      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
+      <UIPermissionSelector>Permissie selecteur</UIPermissionSelector>
     </title>
   </AddNewTemplatePermission>
   <TemplatePermission>
@@ -1778,12 +1778,12 @@
   </DialogForm>
   <DialogFormTemplatePermission>
     <title>
-      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
+      <UIPermissionSelector>Permissie selecteur</UIPermissionSelector>
     </title>
   </DialogFormTemplatePermission>
   <ViewFormTemplatePermission>
     <title>
-      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
+      <UIPermissionSelector>Permissie selecteur</UIPermissionSelector>
     </title>
   </ViewFormTemplatePermission>
   <TemplateContainerPopup>
@@ -1999,7 +1999,7 @@
     </header>
     <title>
       <Edit>Bewerken</Edit>
-      <Delete>Delete</Delete>
+      <Delete>Verwijderen</Delete>
       <Remove>Verwijderen</Remove>
     </title>
     <action>
@@ -2446,7 +2446,7 @@
       <NextViewTree>Volgende</NextViewTree>
     </action>
     <msg>
-      <xss-vulnerability-character>Field '{0}' contains XSS vulnerability characters</xss-vulnerability-character>
+      <xss-vulnerability-character>Veld '{0}' bevat XSS kwetsbaarheid tekens</xss-vulnerability-character>
       <xss-vulnerability-character-wo-label>Uw input kan XSS kwetsbaarheid tekens bevatten</xss-vulnerability-character-wo-label>
     </msg>
   </UIActionForm>
@@ -2475,7 +2475,7 @@
       </title>
     </action>
     <msg>
-      <confirm-delete-permission>Are you sure you want to delete this permission?</confirm-delete-permission>
+      <confirm-delete-permission>Weet u zeker dat u wilt verwijderen van deze machtiging?</confirm-delete-permission>
     </msg>
   </UITagPermissionInfo>
   <UITagPermissionForm>
@@ -2485,7 +2485,7 @@
       <Add>Toevoegen</Add>
     </action>
     <label>
-      <userOrGroup>Memberships:</userOrGroup>
+      <userOrGroup>Lidmaatschappen:</userOrGroup>
     </label>
     <msg>
       <userOrGroup-alreadyExists>Dit lidmaatschap bestaat al. Selecteer een andere.</userOrGroup-alreadyExists>
@@ -2494,7 +2494,7 @@
 
   <UIGroupMemberSelector>
     <label>
-      <selectGroup>Select Group</selectGroup>
+      <selectGroup>Selecteer Groep</selectGroup>
       <selectMembership>Select membership</selectMembership>
     </label>
   </UIGroupMemberSelector>
@@ -2505,7 +2505,7 @@
     </msg>
     <action>
       <title>
-        <AddStyle>Add Style</AddStyle>
+        <AddStyle>Stijl toevoegen</AddStyle>
       </title>
     </action>
   </UIFolksonomyManager>

@@ -26,7 +26,7 @@
       <UIQueriesManager>Consultas</UIQueriesManager>
       <UIActionManager>Acciones</UIActionManager>
       <UIScriptManager>Secuencias de comandos</UIScriptManager>
-      <UIUnLockManager>Cerraduras</UIUnLockManager>
+      <UIUnLockManager>Bloqueos</UIUnLockManager>
       <UIFolksonomyManager>Etiquetas</UIFolksonomyManager>
     </label>
     <msg>
@@ -71,7 +71,7 @@
       <info>
         <UITaxonomyTreeMainForm>Especifique el nombre de la categoría, el espacio de trabajo y la ruta de inicio.</UITaxonomyTreeMainForm>
         <UIPermissionTreeManager>Establecer permisos para el árbol de la categoría.</UIPermissionTreeManager>
-        <UIActionTaxonomyManager>Agregar una acción al árbol de categorías para completar la creación o actualización.</UIActionTaxonomyManager>
+        <UIActionTaxonomyManager>Añadir una acción al árbol de categorías para completar la creación o actualización.</UIActionTaxonomyManager>
         <UITaxonomyTreeCreateChild>Editar el árbol de la taxonomía, añadiendo, copiando, cortando y seleccionando los permisos.</UITaxonomyTreeCreateChild>
       </info>
     </tab>
@@ -108,7 +108,7 @@
 
   <TaxonomyTreeHomePath>
     <title>
-      <AddPath>Agregar Ruta</AddPath>
+      <AddPath>Añadir Ruta</AddPath>
     </title>
   </TaxonomyTreeHomePath>
 
@@ -127,7 +127,7 @@
     <header>
       <usersOrGroups>Usuario o Grupo</usersOrGroups>
       <read>Leer</read>
-      <addNode>Agregar nodo</addNode>
+      <addNode>Añadir nodo</addNode>
       <setProperty>Establecer propiedades</setProperty>
       <remove>Eliminar</remove>
       <action>Acción</action>
@@ -152,7 +152,7 @@
   -->
 
   <UIActionForm>
-    <title>Agregar una acción al árbol de categorías</title>
+    <title>Añadir una acción al árbol de categorías</title>
     <action>
       <Save>#{word.save}</Save>
     </action>
@@ -161,7 +161,7 @@
       <path-invalid>Esta ruta no es válida.</path-invalid>
       <taxonomy-existed>El árbol de la categoría ya existe.</taxonomy-existed>
       <taxonomy-node-existed>La categoría para este nodo ya existe.</taxonomy-node-existed>
-      <no-permission-add>No tiene permiso para agregar una acción.</no-permission-add>
+      <no-permission-add>No tiene permiso para añadir una acción.</no-permission-add>
       <not-created-tree>El árbol de la categoría no ha sido creado todavía.</not-created-tree>
     </msg>
   </UIActionForm>
@@ -253,7 +253,7 @@
       <path-not-found-exception>Estos metadatos han sido eliminados o cambiados. Por favor, haga clic en el botón Actualizar.</path-not-found-exception>
     </msg>
     <action>
-      <Add>Agregar metadatos</Add>
+      <Add>Añadir metadatos</Add>
       <Cancel>#{word.cancel}</Cancel>
     </action>
   </UIMetadataList>
@@ -270,7 +270,7 @@
   <MetataPermissionPopup>
     <title>
       <MetadataPermission>Establecer permisos</MetadataPermission>
-      <QueriesPermissionBrowse>Añadir permisos</QueriesPermissionBrowse>
+      <QueriesPermissionBrowse>Añadir Permisos</QueriesPermissionBrowse>
     </title>
   </MetataPermissionPopup>
   <!--
@@ -291,7 +291,7 @@
     </header>
     <label>
       <dialogTemplate>Plantilla de diálogo:</dialogTemplate>
-      <viewTemplate>Ver Plantilla:</viewTemplate>
+      <viewTemplate>Plantilla de Vista:</viewTemplate>
       <metadataName>Nombre de metadatos:</metadataName>
       <viewPermission>Permiso:</viewPermission>
       <permission>UIMetadataForm</permission>
@@ -301,7 +301,7 @@
       <label>
         <metadataTypeTab>Tipo de metadatos</metadataTypeTab>
         <dialogTab>Plantilla de diálogo</dialogTab>
-        <viewTab>Ver Plantilla</viewTab>
+        <viewTab>Plantilla de Visualización</viewTab>
       </label>
     </tab>
   </UIMetadataForm>
@@ -546,10 +546,10 @@
       <Save>#{word.save}</Save>
       <SaveDraft>Guardar como Borrador</SaveDraft>
       <AddProperty>Añadir propiedad</AddProperty>
-      <AddChild>Agregar subnodo</AddChild>
+      <AddChild>Añadir hijo</AddChild>
       <AddConstraints>Añadir restricciones</AddConstraints>
       <Back>#{word.back}</Back>
-      <AddType>Agregar tipo</AddType>
+      <AddType>Añadir tipo</AddType>
       <AddValue>Añadir</AddValue>
       <CancelConstraints>#{word.cancel}</CancelConstraints>
       <CancelTab>#{word.cancel}</CancelTab>
@@ -714,7 +714,7 @@
       <AddPermission>Añadir Permisos</AddPermission>
       <RemovePermission>Quitar el permiso</RemovePermission>
       <AddIcon>Añadir icono</AddIcon>
-      <AddPath>Agregar Ruta</AddPath>
+      <AddPath>Añadir Ruta</AddPath>
     </title>
   </DriveInputSet>
   <!--
@@ -767,7 +767,7 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <action-type-added>El tipo de acción '{0}' se agregó correctamente.</action-type-added>
+      <action-type-added>El tipo de acción '{0}' se añadió correctamente.</action-type-added>
       <action-type-create-error>Error al crear el tipo de acción.</action-type-create-error>
       <action-name-invalid>'{0}' no es válido. El nombre debe empezar con 'exo:'.</action-name-invalid>
       <action-exist>Esta acción ya existe en el sistema de ECM.</action-exist>
@@ -928,7 +928,7 @@
       <view-name-invalid>Se requiere el nombre de la vista.</view-name-invalid>
       <fileName-invalid>El nuevo nombre contiene algunos caracteres inválidos.</fileName-invalid>
       <permission-not-empty>Por favor, seleccione un permiso para la vista.</permission-not-empty>
-      <mustbe-add-tab>Por favor agregar una etiqueta.</mustbe-add-tab>
+      <mustbe-add-tab>Por favor, añade una etiqueta.</mustbe-add-tab>
       <mustbe-add-permission>Por favor seleccione el permiso para esta vista</mustbe-add-permission>
       <view-exist>El nombre de la vista ya existe</view-exist>
     </msg>
@@ -954,7 +954,7 @@
       <tabs>pestañas</tabs>
       <template>Plantillas</template>
       <enableVersion>Habilitar la versión</enableVersion>
-      <addFolder>Agregar carpeta</addFolder>
+      <addFolder>Añadir carpeta</addFolder>
       <addDocument>Añadir Documento</addDocument>
       <editDocument>Editar Documento</editDocument>
       <upload>Subir</upload>
@@ -987,7 +987,7 @@
       <publicationApproveContent>Aprobar el contenido</publicationApproveContent>
       <publicationPublish>Publicar</publicationPublish>
       <contentNavigation>Navegación de contenido</contentNavigation>
-      <addSymLink>Agregar acceso directo</addSymLink>
+      <addSymLink>Añadir acceso directo</addSymLink>
       <checkIn>Proteger</checkIn>
       <checkOut>Desproteger</checkOut>
       <shareDocuments>Compartir</shareDocuments>
@@ -1029,7 +1029,7 @@
 
   <TabForm_Popup>
     <title>
-      <UITabForm>Agregar/Editar pestaña</UITabForm>
+      <UITabForm>Añadir/Editar pestaña</UITabForm>
     </title>
   </TabForm_Popup>
 
@@ -1211,7 +1211,7 @@
   -->
   <ScriptContainerPopup>
     <title>
-      <UIScriptForm>Agregar/Editar Script</UIScriptForm>
+      <UIScriptForm>Añadir/Editar Script</UIScriptForm>
     </title>
   </ScriptContainerPopup>
   <UIScriptForm>
@@ -1269,7 +1269,7 @@
 
   <AddTaxonomyTreePopup>
     <title>
-      <UITaxonomyTreeContainer>Agregar árbol de categoría</UITaxonomyTreeContainer>
+      <UITaxonomyTreeContainer>Añadir árbol de categoría</UITaxonomyTreeContainer>
     </title>
   </AddTaxonomyTreePopup>
 
@@ -1342,7 +1342,7 @@
       <action>Acción</action>
     </header>
     <action>
-      <AddTaxonomyTree>Agregar árbol de categoría</AddTaxonomyTree>
+      <AddTaxonomyTree>Añadir árbol de categoría</AddTaxonomyTree>
     </action>
     <tooltip>
       <EditTaxonomyTree>Editar el árbol de categorías</EditTaxonomyTree>
@@ -1657,19 +1657,19 @@
 
   <CLVTemplatePopup_ContentTemplateContainer>
     <title>
-      <UICLVTemplateForm_ContentTemplateContainer>Agregar plantilla de lista</UICLVTemplateForm_ContentTemplateContainer>
+      <UICLVTemplateForm_ContentTemplateContainer>Añadir plantilla de lista</UICLVTemplateForm_ContentTemplateContainer>
     </title>
   </CLVTemplatePopup_ContentTemplateContainer>
 
   <CLVTemplatePopup_CateTemplateContainer>
     <title>
-      <UICLVTemplateForm_CateTemplateContainer>Agregar plantilla de lista</UICLVTemplateForm_CateTemplateContainer>
+      <UICLVTemplateForm_CateTemplateContainer>Añadir Plantilla de Lista</UICLVTemplateForm_CateTemplateContainer>
     </title>
   </CLVTemplatePopup_CateTemplateContainer>
 
   <CLVTemplatePopup_PageTemplateContainer>
     <title>
-      <UICLVTemplateForm_PageTemplateContainer>Agregar plantilla de lista</UICLVTemplateForm_PageTemplateContainer>
+      <UICLVTemplateForm_PageTemplateContainer>Añadir Plantilla de Lista</UICLVTemplateForm_PageTemplateContainer>
     </title>
   </CLVTemplatePopup_PageTemplateContainer>
 
@@ -1761,7 +1761,7 @@
       <viewPermission>Permiso:</viewPermission>
       <enableVersion>Habilitar versiones</enableVersion>
     </label>
-    <title>Agregar/Editar vista</title>
+    <title>Añadir/Editar vista</title>
   </ViewForm>
   <DialogForm>
     <label>
@@ -1774,7 +1774,7 @@
       <viewPermission>Permiso:</viewPermission>
       <enableVersion>Habilitar versiones</enableVersion>
     </label>
-    <title>Agregar/ Editar el Diálogo</title>
+    <title>Añadir/ Editar el Diálogo</title>
   </DialogForm>
   <DialogFormTemplatePermission>
     <title>
@@ -2003,7 +2003,7 @@
       <Remove>Eliminar</Remove>
     </title>
     <action>
-      <AddStyle>Agregar un estilo</AddStyle>
+      <AddStyle>Añadir un estilo</AddStyle>
     </action>
   </UITagStyleList>
   <UITagStyleForm>
@@ -2108,7 +2108,7 @@
   <childNodeDefinition>
     <title>
       <AddRequiredType>Añadir tipo requerido</AddRequiredType>
-      <AddDefaultType>Agregar tipo por defecto</AddDefaultType>
+      <AddDefaultType>Añadir tipo por defecto</AddDefaultType>
     </title>
   </childNodeDefinition>
   <propertyDefinition>
@@ -2220,7 +2220,7 @@
   -->
   <UIViewFormTabPane>
     <label>
-      <addSymLink>Agregar Symlink</addSymLink>
+      <addSymLink>Añadir acceso directo</addSymLink>
     </label>
   </UIViewFormTabPane>
   <!--
@@ -2403,7 +2403,7 @@
       <viewPermission>Permiso:</viewPermission>
       <enableVersion>Habilitar versiones</enableVersion>
     </label>
-    <title>Agregar/Editar Apariencia</title>
+    <title>Añadir/Editar Apariencia</title>
   </SkinForm>
 
   <UITagManager>
@@ -2505,7 +2505,7 @@
     </msg>
     <action>
       <title>
-        <AddStyle>Agregar un estilo</AddStyle>
+        <AddStyle>Añadir Estilo</AddStyle>
       </title>
     </action>
   </UIFolksonomyManager>
@@ -2523,7 +2523,7 @@
   </NodeTypeNameValidator>
   <UIActionForm>
     <msg>
-      <constraint-violation-exception>El nodo '{0}' no se puede agregar a '{1}' en el espacio de trabajo '{2}'.  Hay un problema con los permisos o la condición de restricciones.</constraint-violation-exception>
+      <constraint-violation-exception>El nodo '{0}' no se puede añadir a '{1}' en el espacio de trabajo '{2}'.  Hay un problema con los permisos o la condición de restricciones.</constraint-violation-exception>
     </msg>
   </UIActionForm>
 

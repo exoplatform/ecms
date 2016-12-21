@@ -157,15 +157,15 @@
   <UIPreferencesForm>
     <title>設定您的瀏覽喜好</title>
     <label>
-      <enableStructure>啟用 DMS 結構：</enableStructure>
-      <showSideBar>顯示側邊欄：</showSideBar>
-      <showHiddenNode>Show Hidden Documents:</showHiddenNode>
-      <showNonDocument>Show Non-document Items:</showNonDocument>
-      <showRefDocuments>顯示參考的文件：</showRefDocuments>
+      <enableStructure>Browse in structure mode:</enableStructure>
+      <showSideBar>Show sidebar:</showSideBar>
+      <showHiddenNode>Show hidden items:</showHiddenNode>
+      <showNonDocument>Show non-document items:</showNonDocument>
+      <showRefDocuments>Show referenced items:</showRefDocuments>
       <enableDragAndDrop>啟用拖拉 &amp; 拖放：</enableDragAndDrop>
-      <sortBy>排序依據:</sortBy>
+      <sortBy>Sort order:</sortBy>
       <order>按順序</order>
-      <nodesPerPage>Items per Page:</nodesPerPage>
+      <nodesPerPage>每頁的項目</nodesPerPage>
     </label>
     <action>
       <Back>#{word.close}</Back>
@@ -240,7 +240,7 @@
       <UIViewMetadataManager>查看中繼資料</UIViewMetadataManager>
       <UIVoteForm>投票文件</UIVoteForm>
       <UICommentForm>評論</UICommentForm>
-      <UIPreferencesForm>偏好設定</UIPreferencesForm>
+      <UIPreferencesForm>Documents Browsing Preferences</UIPreferencesForm>
       <UIPublicationManager>管理出版</UIPublicationManager>
       <UIConfirmMessage>刪除嗎？</UIConfirmMessage>
       <UIDeleteFileConfirmMessage>刪除檔案嗎?</UIDeleteFileConfirmMessage>
@@ -250,7 +250,7 @@
       <UIActivePublication>參加出版週期</UIActivePublication>
       <UITaggingForm>標記文件</UITaggingForm>
       <UIThumbnailForm>增加縮略圖圖像</UIThumbnailForm>
-      <UIAllItemsPreferenceForm>Preferences</UIAllItemsPreferenceForm>
+      <UIAllItemsPreferenceForm>Documents Browsing Preferences</UIAllItemsPreferenceForm>
       <UISelectRestorePath>選擇復原路徑</UISelectRestorePath>
       <UISEOForm>管理 SEO</UISEOForm>
       <UISEOToolbarForm>管理 SEO</UISEOToolbarForm>
@@ -1351,7 +1351,7 @@
     </summary>
     <tooltip>
       <version>Version</version>
-      <baseVersion>Base Version</baseVersion>
+      <baseVersion>current version</baseVersion>
       <addLabel>增加標籤</addLabel>
       <removeLable>移除標籤</removeLable>
       <restoreVersion>還原的版本</restoreVersion>
@@ -2895,7 +2895,7 @@
 
   <UIPreferencesForm>
       <label>
-            <queryType>查詢類型：</queryType>
+            <queryType>Query language:</queryType>
             <SQL>SQL</SQL>
             <XPATH>XPATH</XPATH>
       </label>
@@ -3186,7 +3186,7 @@
     <DropFileMessage>在當前資料夾中刪除您的檔案</DropFileMessage>
     <Close>#{word.close}</Close>
     <in>在中</in>
-    <MaxFileSizeAlert>The file size exceeds the size limit of</MaxFileSizeAlert>
+    <MaxFileSizeAlert>The file size exceeds the limit of</MaxFileSizeAlert>
     <Waiting>等待中</Waiting>
     <Error>錯誤</Error>
     <or>或</or>

@@ -2,24 +2,24 @@
 <bundle>
   <UISEOForm>
     <label>  
-      <title>Title:</title>
-      <description>Description:</description>
+      <title>Titel:</title>
+      <description>Beschrijving</description>
       <keywords>Keywords:</keywords>
-      <language>Language:</language>
+      <language>Taal:</language>
       <robots>Robots:</robots>
       <sitemap>Sitemap:</sitemap>
       <sitemapvisible>Zichtbaar in Sitemap</sitemapvisible>
     <isInherited>Overgenomen van bovenliggende pagina</isInherited>
-      <priority>Priority:</priority>
-      <frequency>Frequency:</frequency>
+      <priority>Prioriteit: </priority>
+      <frequency>Frequentie:</frequency>
       <select-language>Selecteer een taal</select-language>
       <option>
         <Always>Altijd</Always>
-        <Hourly>Hourly</Hourly>
-        <Daily>Daily</Daily>
-        <Weekly>Weekly</Weekly>
+        <Hourly>Ieder uur</Hourly>
+        <Daily>Dagelijks</Daily>
+        <Weekly>Wekelijks</Weekly>
         <Monthly>Maandelijkse</Monthly>
-        <Yearly>Yearly</Yearly>
+        <Yearly>Jaarlijks</Yearly>
         <Never>Nooit</Never>
       </option> 
     </label>

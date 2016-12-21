@@ -157,15 +157,15 @@
   <UIPreferencesForm>
     <title>Préférences</title>
     <label>
-      <enableStructure>Mode Structure:</enableStructure>
+      <enableStructure>Mode structure:</enableStructure>
       <showSideBar>Panneau latéral:</showSideBar>
       <showHiddenNode>Montrer les documents cachés:</showHiddenNode>
       <showNonDocument>Montrer les fichiers système:</showNonDocument>
       <showRefDocuments>Montrer les documents référencés</showRefDocuments>
       <enableDragAndDrop>Activer le glisser-déposer:</enableDragAndDrop>
-      <sortBy>Trier par:</sortBy>
+      <sortBy>Ordre de tri:</sortBy>
       <order>Ordre</order>
-      <nodesPerPage>Elements par page:</nodesPerPage>
+      <nodesPerPage>Eléments par page:</nodesPerPage>
     </label>
     <action>
       <Back>#{word.close}</Back>
@@ -240,7 +240,7 @@
       <UIViewMetadataManager>Métadonnées</UIViewMetadataManager>
       <UIVoteForm>Vote</UIVoteForm>
       <UICommentForm>Ecrire un Commentaire</UICommentForm>
-      <UIPreferencesForm>Préférences</UIPreferencesForm>
+      <UIPreferencesForm>Préférences d'affichage</UIPreferencesForm>
       <UIPublicationManager>Gérer la Publication</UIPublicationManager>
       <UIConfirmMessage>Confirmer la suppression</UIConfirmMessage>
       <UIDeleteFileConfirmMessage>Supprimer ce Fichier ?</UIDeleteFileConfirmMessage>
@@ -250,7 +250,7 @@
       <UIActivePublication>Inscrire dans un cycle de publication</UIActivePublication>
       <UITaggingForm>Tagguer ce document</UITaggingForm>
       <UIThumbnailForm>Ajouter une Vignette</UIThumbnailForm>
-      <UIAllItemsPreferenceForm>Préférences</UIAllItemsPreferenceForm>
+      <UIAllItemsPreferenceForm>Préférences d'affichage</UIAllItemsPreferenceForm>
       <UISelectRestorePath>Choisir le Chemin de Restauration</UISelectRestorePath>
       <UISEOForm>Gérer SEO</UISEOForm>
       <UISEOToolbarForm>Gérer SEO</UISEOToolbarForm>
@@ -1351,7 +1351,7 @@
     </summary>
     <tooltip>
       <version>Version</version>
-      <baseVersion>Version de base</baseVersion>
+      <baseVersion>version courante</baseVersion>
       <addLabel>Ajouter un Libellé</addLabel>
       <removeLable>Supprimer le Libellé</removeLable>
       <restoreVersion>Restaurer cette Version</restoreVersion>
@@ -3186,7 +3186,7 @@
     <DropFileMessage>Déposez vos fichiers dans le dossier courant</DropFileMessage>
     <Close>#{word.close}</Close>
     <in>dans</in>
-    <MaxFileSizeAlert>The file size exceeds the size limit of</MaxFileSizeAlert>
+    <MaxFileSizeAlert>La taille du fichier excède la limite autorisée de</MaxFileSizeAlert>
     <Waiting>En attente</Waiting>
     <Error>Erreur</Error>
     <or>ou</or>
@@ -3202,7 +3202,7 @@
   <UIDocumentNodeList>
   <label>
   <CreatedOn>Créé le</CreatedOn>
-  <Updated>Updated</Updated>
+  <Updated>Mis à jour le</Updated>
   <by>par</by>
   <you>vous</you>
   </label>

@@ -36,8 +36,8 @@
     <label>
       <ManagedSites>Gestione del sito</ManagedSites>
       <SharedSite>Sito Condiviso</SharedSite>
-      <PersonalDocuments>Personal Documents</PersonalDocuments>
-      <UserDocuments>{0} Documents</UserDocuments>
+      <PersonalDocuments>Documenti Personali</PersonalDocuments>
+      <UserDocuments>{0} Documenti</UserDocuments>
     </label>
   </Drives>
 
@@ -436,13 +436,13 @@
   
   <CategoryNavigationTemplate>
   <label>
-  <home>Home</home>
+  <home>HomePage</home>
   </label>
   </CategoryNavigationTemplate>
   
   <Breadcrumb>
   <label>
-  <home>Home</home>
+  <home>HomePage</home>
   </label>  
   </Breadcrumb>
 </bundle>

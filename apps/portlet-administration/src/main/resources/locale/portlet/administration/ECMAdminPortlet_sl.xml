@@ -990,7 +990,7 @@
       <addSymLink>Dodaj simbolično povezavo</addSymLink>
       <checkIn>Sproščanje</checkIn>
       <checkOut>Rezervacija</checkOut>
-      <shareDocuments>Post</shareDocuments>
+      <shareDocuments>Share</shareDocuments>
       <openDocument>Remote Edit</openDocument>
       <editProperty>Urejanje lastnosti dokumenta</editProperty>
       <uploadNewVersion>Nalaganje nove različice</uploadNewVersion>

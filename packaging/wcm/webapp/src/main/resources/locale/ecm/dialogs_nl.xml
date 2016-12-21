@@ -35,7 +35,7 @@
  
   <UICommentForm>
     <label>
-      <placeholder>Use @ to mention someone in your comment</placeholder>
+      <placeholder>Gebruik @ om iemand te vermelden in uw commentaar</placeholder>
     </label>
   </UICommentForm>
  
@@ -317,18 +317,18 @@
 <yes>Ja</yes>
 <true>Waar</true>
 <false>Onwaar</false>
-<Electronic>Electronic</Electronic>
-<Paper>Paper</Paper>
+<Electronic>Elektronische</Electronic>
+<Paper>Papier</Paper>
 <NONE>Geen</NONE>
-<CLASSIFIED>Classified</CLASSIFIED>
+<CLASSIFIED>Geclassificeerde</CLASSIFIED>
 <UNCLASSIFIED>Un Classified</UNCLASSIFIED>
-<NOCONTRACT>No Contract</NOCONTRACT>
+<NOCONTRACT>Geen Contract</NOCONTRACT>
 <one-minute>Eén minuut</one-minute>
 <hourly>Per uur</hourly>
-<daily>Daily</daily>
-<quarterly>Quarterly</quarterly>
+<daily>Dagelijks</daily>
+<quarterly>Per kwartaal</quarterly>
 <yearly>Jaarlijks</yearly>
-<ten-years>Ten Years</ten-years>
+<ten-years>Tien jaar</ten-years>
 <read>Actie van de gebruiker</read>
   <schedule>Planner</schedule>
   <node_added>Inhoud toevoeging</node_added>
@@ -340,8 +340,8 @@
   <ScriptAction>
     <dialog>
       <label>
-        <isDeep>Is Deep</isDeep>
-        <nodetypes>Node Types</nodetypes>
+        <isDeep>Is diep</isDeep>
+        <nodetypes>Node type</nodetypes>
         <affectedNodeTypeNames>Node met probleem</affectedNodeTypeNames>
       </label>
     </dialog>
@@ -360,8 +360,8 @@
   <EnableVersioning>
     <dialog>
       <label>
-        <isDeep>Is Deep</isDeep>
-        <nodetypes>Node Types</nodetypes>
+        <isDeep>Is diep</isDeep>
+        <nodetypes>Node type</nodetypes>
         <affectedNodeTypeNames>Node met probleem</affectedNodeTypeNames>
       </label>
     </dialog>
@@ -370,8 +370,8 @@
   <AutoVersioning>
     <dialog>
       <label>
-        <isDeep>Is Deep</isDeep>
-        <nodetypes>Node Types</nodetypes>
+        <isDeep>Is diep</isDeep>
+        <nodetypes>Node type</nodetypes>
         <affectedNodeTypeNames>Node met probleem</affectedNodeTypeNames>
       </label>
     </dialog>

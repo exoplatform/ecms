@@ -3,14 +3,14 @@
   <UIFCCForm>
     <msg>
       <name-not-allowed>Este nombre no está permitido.</name-not-allowed>
-      <in-versioning>Por favor revise el nodo actual antes de agregar un nuevo nodo.</in-versioning>
+      <in-versioning>Por favor revise el nodo actual antes de añadir un nuevo nodo.</in-versioning>
       <cannot-save>Error al guardar el nodo.</cannot-save>
       <saved-successfully>{0}</saved-successfully>
       <not-support>No se puede cargar la plantilla de '{0}'.</not-support>
-      <not-add-folder>Sólo se pueden agregar archivos en esta carpeta.</not-add-folder>
-      <access-denied>Acceso denegado. No tiene permiso para agregar a {0}.</access-denied>
+      <not-add-folder>Sólo se pueden añadir archivos en esta carpeta.</not-add-folder>
+      <access-denied>Acceso denegado. No tiene permiso para añadir a '{0}'.</access-denied>
       <path-not-found>La ruta {0} fue eliminada o no es válida.</path-not-found>
-      <node-locked>El nodo '{0}' está bloqueado. Por favor desbloquear este nodo antes de crear documentos.</node-locked>
+      <node-locked>El nodo '{0}' está bloqueado. Por favor desbloquee este nodo antes de crear documentos.</node-locked>
       <node-isExist>Este nodo ya existe en '{0}' y no se permite que tenga el mismo nombre.</node-isExist>
       <get-dialog-path>Se produjo un error al obtener la ruta del diálogo.</get-dialog-path>
       <new-jcr-template>Error al crear una nueva plantilla.</new-jcr-template>
@@ -113,7 +113,7 @@
   </UIFCCActionPopupWindow>
 
   <UIFCCActionForm>
-    <title>Agregar/ Editar la Acción</title>
+    <title>Añadir/Editar Acción</title>
     <action>
       <Save>#{word.save}</Save>
       <Close>#{word.close}</Close>
@@ -122,8 +122,8 @@
       <repository-exception>No se puede guardar esta acción  El nombre provisto no puede tener un índice en su elemento final.</repository-exception>
       <numberformat-exception>No se puede guardar esta acción  El nombre provisto no puede tener  '[' o ']'.</numberformat-exception>
       <existed-action>El nombre de acción '{0}' ya existe. Por favor, seleccione otro.</existed-action>
-      <unable-add-action>No se ha podido agregar esta acción.</unable-add-action>
-      <unable-add>No se ha podido agregar esta acción. Este nodo es la raíz o no tiene el permiso.</unable-add>
+      <unable-add-action>No se ha podido añadir esta acción.</unable-add-action>
+      <unable-add>No se ha podido añadir esta acción. Este nodo es la raíz o no tiene el permiso.</unable-add>
       <not-support>El cuadro de diálogo '{0}' no es compatible.</not-support>
       <no-permission-add>Acceso denegado. No tiene derecho a añadir una acción aquí.</no-permission-add>
       <access-denied>Acceso denegado. No tiene permiso para acceder a esta plantilla.</access-denied>

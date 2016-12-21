@@ -87,7 +87,7 @@
   <Vote>
     <view>
       <label>
-        <avg-rating>平均评级</avg-rating>
+        <avg-rating>Rate</avg-rating>
         <subscription>票</subscription>
       </label>
     </view>

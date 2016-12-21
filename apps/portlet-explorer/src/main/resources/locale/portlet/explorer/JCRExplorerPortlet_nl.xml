@@ -17,8 +17,8 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <not-support>You can't comment on this type of document.</not-support>
-      <not-checkedout>You must check out the document before commenting on it.</not-checkedout>
+      <not-support>U kunt niet reageren op dit type document.</not-support>
+      <not-checkedout>U moet eerst een checkout doen van node voor u Commentaar plaatst</not-checkedout>
       <content-null>Commentaar inhoud is null of leeg. Geef commentaar</content-null>
     </msg>
   </UICommentForm>
@@ -46,8 +46,8 @@
     </button>
     <msg>
       <not-support>Stemmen niet toegelaten voor dit type document</not-support>
-      <not-checkedout>You must check out the document to vote.</not-checkedout>
-      <vote-restriction>You can't vote more than once.</vote-restriction>
+      <not-checkedout>U moet eerst check out node vooraleer u kunt stemmen</not-checkedout>
+      <vote-restriction>You can not vote more than one time</vote-restriction>
     </msg>
   </UIVoteForm>
  
@@ -59,9 +59,9 @@
   <UIJCRExplorer>
     <msg>
       <refresh-session-success>Session succesvol herladen</refresh-session-success>
-      <no-node-history>You are at the root folder.</no-node-history>
+      <no-node-history>U bent in root node.</no-node-history>
       <save-session-success>Alle wijzigingen werden opgeslaan</save-session-success>
-      <target-path-not-found>You can't access this path, either because it doesn't exist anymore or because you don't have access permissions.</target-path-not-found>
+      <target-path-not-found>You cannot access this node because it doesn't exist anymore or you have no right to access it.</target-path-not-found>
     </msg>
   </UIJCRExplorer>
   <!--
@@ -159,8 +159,8 @@
     <label>
       <enableStructure>JCR like structuur activeren</enableStructure>
       <showSideBar>Toon Sidebar</showSideBar>
-      <showHiddenNode>Show Hidden Documents:</showHiddenNode>
-      <showNonDocument>Show Non-document Items:</showNonDocument>
+      <showHiddenNode>Toon verborgen node</showHiddenNode>
+      <showNonDocument>Toon non document type</showNonDocument>
       <showRefDocuments>Toon referenced documenten</showRefDocuments>
       <enableDragAndDrop>Sleep &amp; Drop inschakelen:</enableDragAndDrop>
       <sortBy>Sorteer op</sortBy>
@@ -201,15 +201,15 @@
       <Back>#{word.back}</Back>
     </action>
     <msg>
-      <rename-successfull>'{0}' was renamed to '{1}' successfully.</rename-successfull>
-      <rename-denied>Access denied. You can't rename this item.</rename-denied>
+      <rename-successfull>Node '{0}' werd succesvol hernoemd naar '{1}'</rename-successfull>
+      <rename-denied>Toegang geweigerd! U kan deze node niet hernoemen</rename-denied>
       <fileName-invalid>Ongeldige karakters in nieuwe naam</fileName-invalid>
       <newName-same-oldName>Nieuwe naam is dezelfde als oude naam. Controleer</newName-same-oldName>
-      <version-exception>This document (or one of its ancestors) is not checked out.</version-exception>
-      <lock-exception>This document is locked. Please unlock it before renaming.</lock-exception>
-      <constraintViolation-exception>An error occurred while renaming '{0}'. Please check again.</constraintViolation-exception>
+      <version-exception>node is niet checked out of ancestor van deze node is niet checked out.</version-exception>
+      <lock-exception>node is op slot. Maak vrij voor u deze node hernoem</lock-exception>
+      <constraintViolation-exception>'{0}' is niet toegelaten als child's node type voor parent node type</constraintViolation-exception>
       <unknown-prefix>Prefix '{0}' is nog niet geregistreerd.</unknown-prefix>
-      <rename-error>An error occurred while renaming. Please check again.</rename-error>
+      <rename-error>Er is een fout opgetreden bij het hernoemen van dit knooppunt. Controleer nogmaals.</rename-error>
     </msg>
   </UIRenameForm>
   <UIPopupWindow>
@@ -222,7 +222,7 @@
       <UIExportNode>Exporteer Node</UIExportNode>
       <UINodeTypeInfo>NodeType Infomatie</UINodeTypeInfo>
       <UIVersionInfo>Versie Info</UIVersionInfo>
-      <UIActivateVersion>Activate Versioning</UIActivateVersion>
+      <UIActivateVersion>Activateer Versie</UIActivateVersion>
       <UIAuditingInfo>Auditing Informaties</UIAuditingInfo>
       <UIActivateAuditing>Controle activeren</UIActivateAuditing>
       <UIPermissionManager>Rechten beheer</UIPermissionManager>
@@ -250,7 +250,7 @@
       <UIActivePublication>Enrol to publication lifecycle</UIActivePublication>
       <UITaggingForm>Tagging dit document</UITaggingForm>
       <UIThumbnailForm>Thumbnail afbeelding toevoegen</UIThumbnailForm>
-      <UIAllItemsPreferenceForm>Preferences</UIAllItemsPreferenceForm>
+      <UIAllItemsPreferenceForm>Voorkeuren</UIAllItemsPreferenceForm>
       <UISelectRestorePath>Selecteer Restore pad</UISelectRestorePath>
       <UISEOForm>Beheren van SEO</UISEOForm>
       <UISEOToolbarForm>Beheren van SEO</UISEOToolbarForm>
@@ -313,40 +313,40 @@
       <UploadNewVersion>Een nieuwe versie uploaden</UploadNewVersion>
     </tooltip>
     <msg>
-      <cannot-action-in-rootnode>You can't perform this action at root.</cannot-action-in-rootnode>
+      <cannot-action-in-rootnode>U kan geen acties uitvoeren in root node</cannot-action-in-rootnode>
       <node-checkedin>U moet eerst check out</node-checkedin>
-      <cannot-enable-version-rootnode>Can't activate versioning on root.</cannot-enable-version-rootnode>
-      <cannot-enable-publication-rootnode>Can't activate publication at root.</cannot-enable-publication-rootnode>
+      <cannot-enable-version-rootnode>Kan versie niet activeren voor root node</cannot-enable-version-rootnode>
+      <cannot-enable-publication-rootnode>Can not enable publication for root node</cannot-enable-publication-rootnode>
       <manage-publication>
-        <not-supported-nodetype>Only documents can be published.</not-supported-nodetype>
+        <not-supported-nodetype>The publication support document node only.</not-supported-nodetype>
         <no-publication-lifecycle>Geen publicatie levenscyclus is geconfigureerd.</no-publication-lifecycle>
       </manage-publication>
-      <unsubcriber-lifecycle>The document was already unsubscribed.</unsubcriber-lifecycle>
-      <not-supported-nodetype>This operation is only supported for documents.</not-supported-nodetype>
-      <unsubcriber-lifecycle-finish>The document was unsubscribed successfully.</unsubcriber-lifecycle-finish>
-      <access-false>The document is not an article or checked in.</access-false>
+      <unsubcriber-lifecycle>Het node was al uitgeschreven.</unsubcriber-lifecycle>
+      <not-supported-nodetype>De levenscyclus van unsubscriber ondersteunt alleen het node.</not-supported-nodetype>
+      <unsubcriber-lifecycle-finish>Node was uitgeschreven met succes.</unsubcriber-lifecycle-finish>
+      <access-false>node is niet artikel of checked in !</access-false>
       <unsupported-action>node ondersteund niet relaties</unsupported-action>
-      <not-relationable>This document has no relations.</not-relationable>
-      <node-pasted>'{0}' has been pasted at the location '{1}'. This operation has already been saved.</node-pasted>
-      <no-node-selected>Nothing to copy.</no-node-selected>
-      <unable-edit>Editing documents of type '{1}' like '{0}' is not supported.</unable-edit>
-      <not-support>Can't edit the selected item.</not-support>
-      <template-null>This document has no form template.</template-null>
+      <not-relationable>Node nog geen relatie</not-relationable>
+      <node-pasted>Node '{0}' werd geplakt in locatie '{1}'. Verwerking werd al opgeslaan en u moet op floppy icoon klikken</node-pasted>
+      <no-node-selected>Geen node gekopieerd</no-node-selected>
+      <unable-edit>Node: '{0}' met nodetype '{1}' niet ondersteund actie wijzigen</unable-edit>
+      <not-support>Geselecteerde node kan niet gewijzigd worden</not-support>
+      <template-null>Node heeft geen dialoog beschikbaar</template-null>
       <keyword-null>Er zijn sleutelwoorden om te zoeken.</keyword-null>
       <not-found>Niets gevonden!</not-found>
       <keyword-not-allow>sleutelwoord niet toegelaten.</keyword-not-allow>
-      <is-not-referenable>'{0}' can't be referenceable.</is-not-referenable>
-      <access-denied>Access denied. You don't have edit permission for this item.</access-denied>
-      <access-add-denied>Access denied. You don't have permission to add items here.</access-add-denied>
+      <is-not-referenable>Node '{0}' is niet referentieerbaar</is-not-referenable>
+      <access-denied>toegang geweigerd. U hebt geen 'wijzig' rechten in deze node</access-denied>
+      <access-add-denied>toegang geweigerd. U hebt geen 'toevoegen' rechten in deze node</access-add-denied>
       <item-existed>Dit node bestaat al. Er kan niet dezelfde naam heeft als zijn broer.</item-existed>
       <removed-hidden-mixin>U hebt de verborgen mixin met succes verwijderd.</removed-hidden-mixin>
       <added-hidden-mixin>U hebt de verborgen mixin met succes toegevoegd.</added-hidden-mixin>
       <not-supported>Functie is alleen ondersteund voor document type</not-supported>
-      <empty-file-type>You can't add a document here.</empty-file-type>
-      <unsupported-watch>Only documents can be watched.</unsupported-watch>
-      <watch-checkedin>You must check out the document before watching.</watch-checkedin>
-      <unsupported-tagging>Only documents can be tagged.</unsupported-tagging>
-      <tagnode-checkedin>You must check out the document before tagging.</tagnode-checkedin>
+      <empty-file-type>Lkan document niet toevoegen aan deze node.</empty-file-type>
+      <unsupported-watch>Allen document node kan watched zijn</unsupported-watch>
+      <watch-checkedin>u moet eerst node check out voor watch</watch-checkedin>
+      <unsupported-tagging>Alleen document node kan getagged worden.</unsupported-tagging>
+      <tagnode-checkedin>u moet eerst check out node voor het tagging</tagnode-checkedin>
     </msg>
     <title>
       <select-tab>Select tab</select-tab>
@@ -361,48 +361,48 @@
   </UIActionBar>
   <UIPopupMenu>
     <msg>
-      <has-not-permission>Access denied. You don't have permissions to add in this item.</has-not-permission>
-      <has-not-edit-permission>Access denied. You don't have edit permission here. Please contact the administrator.</has-not-edit-permission>
-      <cannot-login-node>You can't access and paste an item here.</cannot-login-node>
-      <cannot-paste-nodetype>You can't paste this type of item here.</cannot-paste-nodetype>
-      <has-not-permission-unlok>You don't have permission to unlock this document.</has-not-permission-unlok>
-      <bound-exception>You don't have the permission to rename this item. Please contact the administrator.</bound-exception>
-      <bound-move-exception>You can't move an item to itself or in a subfolder.</bound-move-exception>
-      <does-not-support-auditing>You can't activate auditing here.</does-not-support-auditing>
-      <can-not-rename-node>You don't have permission to rename this item. Please contact the administrator to get the necessary rights.</can-not-rename-node>
-      <can-not-cut-node>You don't have permission to cut this item. Please contact the administrator.</can-not-cut-node>
-      <can-not-remove-node>You don't have permission to remove this item. Please contact the administrator.</can-not-remove-node>
-      <can-not-lock-node>You don't have permission to lock {0}. Please contact the administrator.</can-not-lock-node>
-      <can-not-unlock-node>You don't have permission to unlock this item. Please contact the administrator.</can-not-unlock-node>
-      <no-node>Please select at least one item before pasting.</no-node>
-      <can-not-paste-node>You don't have permission to move to this item. Please contact the administrator.</can-not-paste-node>
-      <can-not-move-node>You don't have permission to move this item. Please contact the administrator.</can-not-move-node>
-      <does-not-support-versioning>You don't have permission to move. Please contact the administrator.</does-not-support-versioning>
+      <has-not-permission>toegang geweigerd. U hebt geen 'toevoegen' rechten in deze node</has-not-permission>
+      <has-not-edit-permission>toegang geweigerd. U hebt geen 'wijzig' rechten in deze node. contacteer uw beheerder</has-not-edit-permission>
+      <cannot-login-node>U kunt node hier niet plakken</cannot-login-node>
+      <cannot-paste-nodetype>U kunt node hier niet plakken</cannot-paste-nodetype>
+      <has-not-permission-unlok>u hebt geen recht op deze node vrij te maken</has-not-permission-unlok>
+      <bound-exception>U kan dit niet knippen en plakken in zijn sub node</bound-exception>
+      <bound-move-exception>You can not move to itself or in its sub node</bound-move-exception>
+      <does-not-support-auditing>You cannot activate auditing on this node</does-not-support-auditing>
+      <can-not-rename-node>U hebt geen recht om deze node te hernoemen. contacteer uw beheerder</can-not-rename-node>
+      <can-not-cut-node>U hebt geen recht om deze node te knippen. contacteer uw beheerder</can-not-cut-node>
+      <can-not-remove-node>U hebt geen recht om deze node te verwijderen. contacteer uw beheerder</can-not-remove-node>
+      <can-not-lock-node>U bent niet gemachtigd om te vergrendelen node {0}. Neem contact op met de beheerder.</can-not-lock-node>
+      <can-not-unlock-node>U hebt geen recht om deze node vrij te maken. contacteer uw beheerder</can-not-unlock-node>
+      <no-node>Geen node is geselecteerd om te plakken</no-node>
+      <can-not-paste-node>U hebt geen recht om deze node te plakken. contacteer uw beheerder</can-not-paste-node>
+      <can-not-move-node>U hebt geen recht om deze node te verwijderen. contacteer uw beheerder.</can-not-move-node>
+      <does-not-support-versioning>Versioning is niet ondersteund voor deze node</does-not-support-versioning>
       <path-not-found>node werd verwijderd of gewijzigd. Klik op herlaad knop.</path-not-found>
-      <paste-lock-exception>'{0}' can't be pasted here. Make sure it is not locked nor this folder. Also check that no related document is locked.</paste-lock-exception>
-      <can-not-checkin-node>You can't check in this item. Please check that you have the necessary permissions.</can-not-checkin-node>
-      <can-not-checkout-node>You can't check out this item. Please check that you have the necessary permissions.</can-not-checkout-node>
-      <move-constraint-exception>An error occurred while moving this item.</move-constraint-exception>
-      <not-lock-owner>You can't unlock this document because you are not the lock owner.</not-lock-owner>
-      <is-checked-in>Please check out this document before renaming.</is-checked-in>
-      <is-checked-in-lock>Please check out this document before locking.</is-checked-in-lock>
-      <cant-lock>You can't lock this document.</cant-lock>
+      <paste-lock-exception>U kan '{0}' niet plakken aan deze node omdat de bron node of bestemming node is op slot of heeft relatie met een node op slot</paste-lock-exception>
+      <can-not-checkin-node>You can not check-in this node. Please check your right permission!</can-not-checkin-node>
+      <can-not-checkout-node>You can not check-out this node. Please check your right permission!</can-not-checkout-node>
+      <move-constraint-exception>Have problem with constraint violation when move node. Please check the source node and destination node.</move-constraint-exception>
+      <not-lock-owner>U kan deze niet node niet vrijmaken om dat u niet eigenaar bent van het slot.</not-lock-owner>
+      <is-checked-in>check out deze node voor het hernoemen!</is-checked-in>
+      <is-checked-in-lock>check out deze node voor het op slot zetten!</is-checked-in-lock>
+      <cant-lock>U kan deze node niet op slot zetten</cant-lock>
       <node-locked>object met pad {0} of hoger level is op slot.</node-locked>
-      <can-not-delete>Please close this document before deleting.</can-not-delete>
-      <can-not-delete-version>You can't delete this document. It's versioned.</can-not-delete-version>
-      <not-support>You can't delete the selected item. Please select another one.</not-support>
-      <current-node-not-allow-paste>You can't paste the copied item there.</current-node-not-allow-paste>
-      <copied-node-in-versioning>You can't paste the copied item here because it's versioned.</copied-node-in-versioning>
-      <parent-node-locked>You don't have permission to unlock '{0}'.</parent-node-locked>
-      <this-node-locked-by-parent>You can't unlock this item. Parent folder is locked.</this-node-locked-by-parent>
-      <paste-node-same-name>Can't paste this item here. An item with the same name already exists in the destination folder.</paste-node-same-name>
-      <has-not-add-permission>You don't have the permission to add here.</has-not-add-permission>
-      <node-cutting>Item is being cut. You can't paste it here.</node-cutting>
-      <access-denied>Access denied. You may not have the permission.</access-denied>
-      <remove-verion-exception>You can't remove this document because it is checked in.</remove-verion-exception>
-      <remove-referentialIntegrityException>You can't delete this item because it is currently referenced by another one.</remove-referentialIntegrityException>
-      <constraintviolation-exception>The mandatory property jcr:uuid was not found. The document may have been deleted or changed. Please click the Refresh button.</constraintviolation-exception>
-      <path-not-found-exception>This document was deleted or changed. Please click the Refresh button.</path-not-found-exception>
+      <can-not-delete>Sluit deze node voor het verwijderen.</can-not-delete>
+      <can-not-delete-version>Kan node niet verwijderen, versioning</can-not-delete-version>
+      <not-support>geselecteerde node kan niet gewijzigd worden, probeer een ander!</not-support>
+      <current-node-not-allow-paste>gekopieerde node type is niet toegelaten om op huidig node te plakken</current-node-not-allow-paste>
+      <copied-node-in-versioning>gekopieerde node in versioning, kan niet Plakken</copied-node-in-versioning>
+      <parent-node-locked>Er zijn geen rechten op node '{0}' vrij te maken</parent-node-locked>
+      <this-node-locked-by-parent>node is op slot door parent of ancestor node, kan niet vrijmaken!</this-node-locked-by-parent>
+      <paste-node-same-name>Bestemmings folder laate geen zelfde naam naam node</paste-node-same-name>
+      <has-not-add-permission>U hebt geen recht om nieuw node toe te voegen</has-not-add-permission>
+      <node-cutting>Node is aan het knippen. u kan hier niet Plakken!</node-cutting>
+      <access-denied>toegang geweigerd!</access-denied>
+      <remove-verion-exception>Kan node niet verwijderen omdat ancestor van deze node is checked-in</remove-verion-exception>
+      <remove-referentialIntegrityException>kan node niet verwijderen omdat deze momenteel het doel is van een REFERENTIE eigenschap</remove-referentialIntegrityException>
+      <constraintviolation-exception>Vereiste object jcr:uuid niet gevonden. node werd misschien verwijderd of gewijzigd. klik om te herladen</constraintviolation-exception>
+      <path-not-found-exception>node werd verwijderd of gewijzigd. Please klik om te herladen.</path-not-found-exception>
       <not-exist-categories>Category does not exist</not-exist-categories>
       <lock-node-read-only>Dit bestand is vergrendeld door gebruiker {0}. Dit is een alleen-lezen openen?</lock-node-read-only>
     </msg>
@@ -428,12 +428,12 @@
       <title-invalid>Voer de titel van de map.</title-invalid>
       <name-not-allowed>Deze naam is niet toegestaan.</name-not-allowed>
       <fileName-error>Ongeldig bestandsnaam</fileName-error>
-      <constraint-violation>You can't add a document of type '{0}' here.</constraint-violation>
+      <constraint-violation>Huidig node laat niet toe '{0}' node type toe te voegen</constraint-violation>
       <repository-exception>Kan niet naar dit folder opslaan. Naam heeft geen index of bestaat al</repository-exception>
-      <repository-exception-permission>You don't have the permission to add a new folder here.</repository-exception-permission>
+      <repository-exception-permission>U bent niet gemachtigd om een nieuwe map toevoegen aan dit knooppunt.</repository-exception-permission>
       <numberformat-exception>Kan niet naar dit folder opslaan. Naam mag geen '[' of ']' bevatten</numberformat-exception>
       <!--DMS 2.4.x; ECM-3553-->
-      <not-allow-sameNameSibling>You can't save the folder. An item with the same name already exists.</not-allow-sameNameSibling>
+      <not-allow-sameNameSibling>U kunt de map niet opslaan. Dit knooppunt accepteert geen twee knooppunten met dezelfde naam.</not-allow-sameNameSibling>
       <ntFolder-not-avaiable>U moet een aangepaste type map selecteren</ntFolder-not-avaiable>
     </msg>
     <help>
@@ -500,26 +500,26 @@
       <feedback-restore>'{0}' werd hersteld.</feedback-restore>
       <feedback-restore-multi>{0} items zijn met succes hersteld.</feedback-restore-multi>
       
-      <confirm-restore>A '{0}' item already exists at the previous location. Are you sure you want to restore it?</confirm-restore>
+      <confirm-restore>Een node met dezelfde naam bestaat al in de oude locatie van node '{0}'. Weet u zeker dat u wilt herstellen van dit node?</confirm-restore>
       <confirm-move>Weet u zeker dat u wilt verplaatsen?</confirm-move>
-      <node-cut>'{0}' has been cut.</node-cut>
+      <node-cut>Node '{0}' werd geknipt.</node-cut>
       <execute-successfully>Aangepaste actie '{0}' werd uitgevoerd.</execute-successfully>
-      <save-node-success>'{0}' has been saved.</save-node-success>
-      <move-problem>You can't move '{0}' to '{1}' because there was a problem with permissions or constraint conditions.</move-problem>
+      <save-node-success>Node '{0}' werd opgeslaan.</save-node-success>
+      <move-problem>U verplaatsen niet knooppunt '{0}' naar '{1}' omdat er een probleem met de machtiging of beperking voorwaarden was.</move-problem>
     </msg>
   </UIWorkingArea>
   <UIDocumentWorkspace>
     <label>
-      <no-children>This item doesn't have children.</no-children>
-      <no-children-but-has-hidden>This folder does not have any item, but there are some hidden files.</no-children-but-has-hidden>
+      <no-children>Node heeft geen enkele child</no-children>
+      <no-children-but-has-hidden>Node heeft geen enkele child maar heeft verborgen bestanden</no-children-but-has-hidden>
     </label>
     <msg>
-      <unable-save-node>'{0}' has been created. Please save session to validate this action.</unable-save-node>
-      <save-node-success>'{0}' has been saved.</save-node-success>
-      <node-copied>'{0}' has been copied.</node-copied>
-      <node-cut>'{0}' has been cut.</node-cut>
-      <remove-root>You can't remove the root folder.</remove-root>
-      <node-remove-success>'{0}' has been removed.</node-remove-success>
+      <unable-save-node>node '{0}' is een onlangs gecre�erd. Opslag sessie nodig vooraleer u deze actie kunt uitvoeren</unable-save-node>
+      <save-node-success>Node '{0}' werd opgeslaan.</save-node-success>
+      <node-copied>Node '{0}' werd gekopieerd.</node-copied>
+      <node-cut>Node '{0}' werd geknipt.</node-cut>
+      <remove-root>root node kan niet verwijderd worden</remove-root>
+      <node-remove-success>Node '{0}' werd verwijderd.</node-remove-success>
     </msg>
     <tooltip>
       <Rename>Hernoem</Rename>
@@ -538,11 +538,11 @@
   </UIDocumentWorkspace>
   <UIDocumentInfo>
     <msg>
-      <access-denied>Access denied. You can't access '{0}'.</access-denied>
-      <null-exception>Item not found. It was either removed or changed, or you don't have the access permission.</null-exception>
+      <access-denied>toegang geweigerd! U heeft geen toegang op node '{0}'</access-denied>
+      <null-exception>Object niet gevonden! Het werd verwijderd of gewijzigd of u hebt geen toegang tot deze node!</null-exception>
       <confirm-deleteattachment>Weet u zeker dat u wilt verwijderen van dit bestand?</confirm-deleteattachment>
       <confirm-deleteattcomment>Weet u zeker dat u wilt verwijderen van deze opmerking?</confirm-deleteattcomment>
-      <access-denied-exception>Access denied. You may not have reading privileges, or the documen may have been removed or changed.</access-denied-exception>
+      <access-denied-exception>toegang geweigerd! U hebt geen recht op lezen, verwijderen of wijzigen</access-denied-exception>
       <path-not-found>node werd miscchien verwijderd of gewijzigd! klik op herlaad knop</path-not-found>
     </msg>
     <tooltip>
@@ -597,11 +597,11 @@
       <RestoreFromTrash>Terughalen uit prullenbak</RestoreFromTrash>
       <EmptyTrash>Prullenbak leegmaken</EmptyTrash>
       <WebDavView>Download and allow edition</WebDavView>
-      <Download>Download</Download>
+      <Download>Downloaden</Download>
       <OpenDocument>Extern bewerken</OpenDocument>
       <EditProperty>Documenteigenschappen bewerken</EditProperty>
       <UploadNewVersion>Een nieuwe versie uploaden</UploadNewVersion>
-      <CreateNewVersion>Save as new version</CreateNewVersion>
+      <CreateNewVersion>Nieuwe versie aanmaken</CreateNewVersion>
     </event>
   </ECMContextMenu>
  
@@ -632,8 +632,8 @@
       <UIPublishingPanel>Publication Pane</UIPublishingPanel>
       <UIPublicationPanel>Revisie</UIPublicationPanel>
       <UIPublicationSchedule>Gepland</UIPublicationSchedule>
-      <UIPublicationPagesContainer>Pages</UIPublicationPagesContainer>
-      <UIPublicationHistory>History</UIPublicationHistory>
+      <UIPublicationPagesContainer>Pagina's</UIPublicationPagesContainer>
+      <UIPublicationHistory>Geschiedenis</UIPublicationHistory>
       <UIVersionViewer>Versie Viewer</UIVersionViewer>
 
       <UIPropertyTab>Eigenschappen</UIPropertyTab>
@@ -656,9 +656,9 @@
       <UIActionViewContainer>Actie info</UIActionViewContainer>
       <UIMultiLanguageForm>Toon taal</UIMultiLanguageForm>
       <UIAddLanguageContainer>taal toevoegen</UIAddLanguageContainer>
-      <UINonPublishedForm>State</UINonPublishedForm>
-      <UIPublishedForm>State</UIPublishedForm>
-      <UIPublicationLogList>History</UIPublicationLogList>
+      <UINonPublishedForm>Forum Staat</UINonPublishedForm>
+      <UIPublishedForm>Forum Staat</UIPublishedForm>
+      <UIPublicationLogList>Geschiedenis</UIPublicationLogList>
       <UIDocumentWithTree>bestandszicht</UIDocumentWithTree>
       <UIDocumentInfo>Document zicht</UIDocumentInfo>
       <UICategoriesSelectPanel>Select categories</UICategoriesSelectPanel>
@@ -733,8 +733,8 @@
       <name-invalid>Geef naam !</name-invalid>
       <unable-create>Kan geen eigenschap toevoegen!</unable-create>
       <value-invalid>Geef waarde!</value-invalid>
-      <node-checkedin>You must check out this item before adding a property.</node-checkedin>
-      <can-not-add>You can't add properties to this item. This is only allowed for the type nt:unstructured.</can-not-add>
+      <node-checkedin>U moet eerst checkout vooraleer u een eigenschap toevoegd</node-checkedin>
+      <can-not-add>U kan geen eigenschap aan deze node toevoegen. Alleen voor node's type is nt:ongestructureerd</can-not-add>
       <propertyName-invalid>Eigenschapsnaam moet namespace bevatten(ex: namespace:naam)</propertyName-invalid>
       <propertyName-exist>Eigenschap '{0}' bestaat reeds.</propertyName-exist>
       <propertyValu-null>Sommige waarden zijn null</propertyValu-null>
@@ -795,7 +795,7 @@
       <selectUser>Selecteer gebruiker</selectUser>
     </label>
     <msg>
-      <not-change-owner>'{0}' is the owner of this item and has full control permission.</not-change-owner>
+      <not-change-owner>'{0}' is eigenaar van deze node en heeft volmacht</not-change-owner>
     </msg>
   </UIGroupSelector>
   <UIPermissionForm>
@@ -807,7 +807,7 @@
       <add_node>Wijzigen van recht</add_node>
       <remove>Right verwijderen</remove>
     </label>
-    <title>Add a permission</title>
+    <title>Rechten toevoegen aan node</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>#{word.save}</Save>
@@ -914,7 +914,7 @@
   </ViewSearch>
   <UISearchResult>
     <msg>
-      <not-support>There is no View template for this document.</not-support>
+      <not-support>Er is geen weergave sjabloon voor deze node.</not-support>
       <empty>Geen resultaten gevonden!</empty>
       <access-denied>U kan deze node niet tonen omdat template is niet ondersteund of toegang geweigerd!</access-denied>
       <query-invalid>The query is ongeldig</query-invalid>
@@ -939,15 +939,15 @@
       <datecreatedDESC>Sort by Created date in descending</datecreatedDESC>
     </title>
     <tooltip>
-      <View>View this item</View>
+      <View>Toon node</View>
       <OpenFolder>ga naar folder</OpenFolder>
     </tooltip>
   </UISearchResult>
   <UIShowAllOwnedByUserResult>
     <msg>
-      <not-support>There is no View template for this document</not-support>
+      <not-support>Er is geen Toon template voor deze node</not-support>
       <empty>Niets gevonden!</empty>
-      <access-denied>You can't view this document, either because this template is not supported or because access is denied.</access-denied>
+      <access-denied>U kunt dit node, niet bekijken omdat deze sjabloon wordt niet ondersteund of omdat de toegang is geweigerd.</access-denied>
       <query-invalid>The query is ongeldig</query-invalid>
     </msg>
     <header>
@@ -970,16 +970,16 @@
       <datecreatedDESC>Gemaakt datum in aflopende volgorde sorteren</datecreatedDESC>
     </title>
     <tooltip>
-      <View>View this item</View>
+      <View>Toon node</View>
       <OpenFolder>Ga naar map</OpenFolder>
     </tooltip>
   </UIShowAllOwnedByUserResult>
   <UIShowAllFavouriteResult>
     <msg>
-      <not-support>There is no View template for this item</not-support>
+      <not-support>Er is geen Toon template voor deze node</not-support>
       <empty>Geen resultaten gevonden</empty>
-      <access-denied>You can't view this item, either because this template is not supported or because access is denied.</access-denied>
-      <query-invalid>The query is invalid</query-invalid>
+      <access-denied>U kunt dit node, niet bekijken omdat deze sjabloon wordt niet ondersteund of omdat de toegang is geweigerd.</access-denied>
+      <query-invalid>The query is ongeldig</query-invalid>
     </msg>
     <header>
       <name>#{word.name}</name>
@@ -1001,15 +1001,15 @@
       <datecreatedDESC>Sort by Created date in descending</datecreatedDESC>
     </title>
     <tooltip>
-      <View>View this item</View>
+      <View>Toon node</View>
       <OpenFolder>Ga naar map</OpenFolder>
     </tooltip>
   </UIShowAllFavouriteResult>
   <UIShowAllHiddenResult>
     <msg>
-      <not-support>There is no View template for this item.</not-support>
+      <not-support>Er is geen Toon template voor deze node</not-support>
       <empty>Niets gevonden!</empty>
-      <access-denied>You can't view this item, either because it has no View template or because you don't have access to it.</access-denied>
+      <access-denied>U kunt dit node, niet bekijken omdat deze sjabloon wordt niet ondersteund of omdat de toegang is geweigerd.</access-denied>
       <query-invalid>The query is ongeldig</query-invalid>
     </msg>
     <header>
@@ -1033,16 +1033,16 @@
       <datecreatedDESC>Gemaakt datum in aflopende volgorde sorteren</datecreatedDESC>
     </title>
     <tooltip>
-      <View>View this Item</View>
-      <OpenFolder>Go to Folder</OpenFolder>
+      <View>Toon node</View>
+      <OpenFolder>Ga naar map</OpenFolder>
       <RemoveHiddenAttribute>Verwijder verborgen kenmerk</RemoveHiddenAttribute>
     </tooltip>
   </UIShowAllHiddenResult>
   <UIShowAllTrashResult>
     <msg>
-      <not-support>There is no View template for this item.</not-support>
+      <not-support>Er is geen Toon template voor deze node</not-support>
       <empty>Geen resultaten gevonden</empty>
-      <access-denied>You can't view this item, either because it has no View template or because you don't have access to it.</access-denied>
+      <access-denied>U kunt dit node, niet bekijken omdat deze sjabloon wordt niet ondersteund of omdat de toegang is geweigerd.</access-denied>
       <query-invalid>The query is ongeldig</query-invalid>
     </msg>
     <header>
@@ -1065,8 +1065,8 @@
       <datecreatedDESC>Gemaakt datum in aflopende volgorde sorteren</datecreatedDESC>
     </title>
     <tooltip>
-      <View>View this Item</View>
-      <OpenFolder>Go to Folder</OpenFolder>
+      <View>Toon node</View>
+      <OpenFolder>Ga naar map</OpenFolder>
       <DeletePermanently>Permanent verwijderen</DeletePermanently>
       <RestoreFromTrash>Terughalen uit prullenbak</RestoreFromTrash>
     </tooltip>
@@ -1321,7 +1321,7 @@
       <Cancel>#{word.cancel}</Cancel>
       <Export>Exporteren</Export>
     </action>
-    <title>Export</title>
+    <title>Exporteer Node</title>
   </UIExportNode>
   <!--
   ###############################################################################
@@ -1330,7 +1330,7 @@
   -->
   <PopupUserSelector>
     <title>
-      <UIUserContainer>Permission Selector</UIUserContainer>
+      <UIUserContainer>Permissie selecteur</UIUserContainer>
     </title>
   </PopupUserSelector>
   <UIPopupTaxonomy>
@@ -1345,13 +1345,13 @@
   ###############################################################################
   -->
   <UIVersionInfo>
-    <title>Version history</title>
+    <title>Historiek versie</title>
     <summary>
-      <empty>Click here to add a summary</empty>
+      <empty>Klik hier om een ​​samenvatting toe te voegen</empty>
     </summary>
     <tooltip>
-      <version>Version</version>
-      <baseVersion>Base Version</baseVersion>
+      <version>Versie</version>
+      <baseVersion>Basis versie</baseVersion>
       <addLabel>Label toevoegen</addLabel>
       <removeLable>Label verwijdern</removeLable>
       <restoreVersion>Versie herstellen</restoreVersion>
@@ -1362,22 +1362,22 @@
     <msg>
       <have-no-view-template>Toon template of dit is niet ondersteund</have-no-view-template>
       <cannot-remove-version>Kan basis versie niet verwijderen</cannot-remove-version>
-      <error-removing-version>An error occurred while deleting this version.</error-removing-version>
-      <error-removing-referenced-version>This version is referenced and can't be removed.</error-removing-referenced-version>
-      <confirm-restore>Are you sure you want to restore this version?</confirm-restore>
+      <error-removing-version>Er is een fout opgetreden tijdens het verwijderen van deze versie.</error-removing-version>
+      <error-removing-referenced-version>Deze versie is een referentie en kan niet worden verwijderd.</error-removing-referenced-version>
+      <confirm-restore>Weet u zeker dat u deze versie wilt herstellen?</confirm-restore>
       <confirm-delete>Wilt u deze version verwijderen?</confirm-delete>
-      <not-checked-out>You have to check out this document before restoring.</not-checked-out>
-      <invalid-item-state>You can't restore this version, either because one or more items were deleted or moved by another session.</invalid-item-state>
+      <not-checked-out>U moet eerst check out deze node vooraleer u kunt herstellen.</not-checked-out>
+      <invalid-item-state>You can not restore this version. Probably one or more items was deleted or moved by another session.</invalid-item-state>
     </msg>
     <action>
       <close>#{word.close}</close>
       <close-view>Close view</close-view>
-      <compare-versions>Compare selected versions</compare-versions>
+      <compare-versions>Vergelijk geselecteerde versies</compare-versions>
     </action>
     <labels>
       <version>Versie</version>
       <date>Datum</date>
-      <author>Modified By</author>
+      <author>Aangepast door</author>
       <summary>Samenvatting</summary>
       <action>Actie</action>
     </labels>
@@ -1392,8 +1392,8 @@
       <noVersion>No version</noVersion>
     </msg>
     <eventName>
-      <e_1>Added</e_1>
-      <e_2>Document Removed</e_2>
+      <e_1>Node added</e_1>
+      <e_2>Node removed</e_2>
       <e_4>Property added</e_4>
       <e_16>Property changed</e_16>
       <e_8>Property removed</e_8>
@@ -1403,7 +1403,7 @@
       <e_256>Add mixin</e_256>
       <e_512>Remove mixin</e_512>
       <e_1024>Kloon</e_1024>
-      <e_2048>Update</e_2048>
+      <e_2048>Choose file</e_2048>
       <e_4096>Importeer Node</e_4096>
       <e_8192>Inchecken</e_8192>
       <e_16384>Uitchecken</e_16384>
@@ -1422,7 +1422,7 @@
       <operation>Operatie</operation>
       <userName>Gebruikersnaam</userName>
       <date>Datum</date>
-      <version>Version</version>
+      <version>Versie</version>
     </label>
   </UIAuditingInfo>
 
@@ -1433,13 +1433,13 @@
   -->
   <UIActivateVersion>
     <label>
-      <note>Versioning has not been activated for this document.</note>
+      <note>Node werd nog niet geactiveerd</note>
       <question>Wilt u activeren?</question>
       <button-active>Activeren</button-active>
       <button-cancel>#{word.cancel}</button-cancel>
     </label>
     <msg>
-      <access-denied>You don't have permission to activate versioning on this document</access-denied>
+      <access-denied>U hebt geen toestemming om te activeren versiebeheer op dit node</access-denied>
     </msg>
   </UIActivateVersion>
   <!--
@@ -1462,7 +1462,7 @@
       </msg>
     </grid>
     <msg>
-      <node-type-invalid>Only documents can be enrolled.</node-type-invalid>
+      <node-type-invalid>Alleen het type van document node type kan worden ingeschreven.</node-type-invalid>
       <already-enroled>Dit document heeft al zijn ingeschreven.</already-enroled>
     </msg>
   </UIActivePublication>
@@ -1473,7 +1473,7 @@
   -->
   <UIActivateAuditing>
     <label>
-      <note>Auditing has not been activated for this document.</note>
+      <note>Controle is niet geactiveerd voor deze Node.</note>
       <question>Weet u zeker dat u wilt activeren?</question>
     </label>
     <action>
@@ -1488,16 +1488,16 @@
   -->
   <UIDiff>
     <label>
-      <backTo>Back to version history</backTo>
+      <backTo>Terug naar historiek versie</backTo>
       <diffTitle>Vergelijk tussen 2 versies</diffTitle>
-      <noContent>There is no content to compare</noContent>
+      <noContent>Er is geen inhoud om te vergelijken</noContent>
       <compareVerion>Versie</compareVerion>
       <can-not-compare>Probleem bij het vergelijken van 2 versies</can-not-compare>
-      <compare-unavailable>Version comparison is not available for this document</compare-unavailable>
-      <DateChange>On {0}</DateChange>
+      <compare-unavailable>Versievergelijking is niet beschikbaar voor dit document</compare-unavailable>
+      <DateChange>Op {0}</DateChange>
       <PreviousAndNextCompare>Wijzigingen ten opzichte van {0} naar {1}</PreviousAndNextCompare>
       <ComparedWith>In vergelijking met</ComparedWith>
-      <restoredFrom>Restored from version {0}</restoredFrom>
+      <restoredFrom>Hersteld van versie {0}</restoredFrom>
     </label>
   </UIDiff>
   <!--
@@ -1516,7 +1516,7 @@
       <Cancel>#{word.cancel}</Cancel>
       <Import>Importeren</Import>
     </action>
-    <title>Import</title>
+    <title>Importeer Node</title>
     <msg>
       <import-successful>Importeer successvol!</import-successful>
       <filename-invalid>Blader een Xml-bestand voor het veld 'Upload bestand' om te importeren.</filename-invalid>
@@ -1524,8 +1524,8 @@
       <xml-invalid>Er is een ongeldig teken op positie [rij, kolom]:{0} in {1} bestand</xml-invalid>
       <mimetype-invalid>Alleen xml bestand of zip bestand zijn ondersteund om te importeren.</mimetype-invalid>
       <access-denied>toegang geweigerd! U kan hier niet importeren.</access-denied>
-      <constraint-violation-exception>Impossible to import data. The type '{0}' is not allowed at this location.</constraint-violation-exception>
-      <item-exists-exception>An incoming item has the same UUID as an existing item in the workspace.</item-exists-exception>
+      <constraint-violation-exception>Onmogelijk om gegevens te importeren. Het type '{0}' is niet toegestaan op deze locatie.</constraint-violation-exception>
+      <item-exists-exception>An incoming referenceable node has the same UUID as a node existing in the workspace! UUID: '{0}'</item-exists-exception>
     </msg>
   </UIImportNode>
   <!--
@@ -1568,12 +1568,12 @@
   ###############################################################################
   -->
   <UIVersionTree>
-    <title>Children Tree</title>
+    <title>Kinderen Boom</title>
   </UIVersionTree>
   <UIViewVersion>
     <label>
-      <nodeType>Node Type</nodeType>
-      <nodeName>Name</nodeName>
+      <nodeType>Node type</nodeType>
+      <nodeName>Node naam</nodeName>
       <VersionNumber>versie Nummer</VersionNumber>
       <VersionLabels>Versie Labels</VersionLabels>
       <VersionDate>versie Datum</VersionDate>
@@ -1609,7 +1609,7 @@
       <action>Acties</action>
     </header>
     <msg>
-      <access-denied>Access denied. You don't have access permission.</access-denied>
+      <access-denied>toegang geweigerd!U hebt geen recht in deze node</access-denied>
       <confirm-delete>Wilt u deze referentie verwijderen?</confirm-delete>
     </msg>
     <action>
@@ -1629,7 +1629,7 @@
       <action>Actie</action>
     </header>
     <info>
-      <child-not-found>This item doesn't have any child.</child-not-found>
+      <child-not-found>Node heeft geen enkele child</child-not-found>
     </info>
   </UITreeList>
   <!--
@@ -1685,8 +1685,8 @@
       <clearall>Alles wissen</clearall>
     </action>
     <msg>
-      <unable-pasted>Can't paste this item.</unable-pasted>
-      <node-pasted>{0} has been pasted at location {1}. This operation has already been saved.</node-pasted>
+      <unable-pasted>kan node niet Plakken</unable-pasted>
+      <node-pasted>node {0} werd op locatie {1} geplakt. Operatie werd al gesaved en u moet op floppy icoon drukken</node-pasted>
     </msg>
   </UIClipboard>
   <!--
@@ -1727,15 +1727,15 @@
 </tooltip>
     <msg>
       <cannot-save>Sommige beperkingen werden overtreden tijdens die actie</cannot-save>
-      <in-versioning>Please check out the current folder before adding a new item.</in-versioning>
+      <in-versioning>Huidige node moet checkout voor het toevoegen van nieuw node</in-versioning>
       <not-support>Kan niet laden de sjabloon van de '{0}'.</not-support>
       <value-invalid>'{0}' is vereist</value-invalid>
       <repository-exception>Kan document niet opslaan. naam moet index op het einde bevatten</repository-exception>
       <!--DMS 2.4.x; ECM-3543-->
-      <repository-exception-permission>You don't have permission to add a new document to this folder.</repository-exception-permission>
+      <repository-exception-permission>U bent niet gemachtigd om toe te voegen een nieuw document voor deze node.</repository-exception-permission>
       <not-allowed-same-name-sibling>Kan document niet opslaan. geen zelfde naam voor node</not-allowed-same-name-sibling>
       <numberformat-exception>Kan document niet opslaan. naam mag geen '[' or ']' bevatten.</numberformat-exception>
-      <item-not-found>Document not found. This document (or its ancestor) may have been deleted. Please click the Refresh button.</item-not-found>
+      <item-not-found>object niet gevonden! klik om te herladen</item-not-found>
     </msg>
   </UIDocumentForm>
   <!--
@@ -1800,7 +1800,7 @@
       <action>Actie</action>
     </header>
     <msg>
-      <remove-popup-first>You must close the edit pop-up before deleting this item.</remove-popup-first>
+      <remove-popup-first>U moet wijzig popup sluiten voor het verwijderen van deze node.</remove-popup-first>
       <confirm-delete-action>Wilt u deze actie verwijderen?</confirm-delete-action>
       <template-empty>Template va, '{0}' is null of leeg.</template-empty>
       <template-null>Template is null of i hebt geen toegang op deze template</template-null>
@@ -1826,7 +1826,7 @@
       <numberformat-exception>Kan actie niet opslaan. naam mag geen '[' or ']' bevatten.</numberformat-exception>
       <existed-action>naam bestaat reeds, probeer opnieuw!</existed-action>
       <unable-add-action>Onmogelijk om actie toe te voegen</unable-add-action>
-      <unable-add>Can't add this action. This item is either the root folder or you don't have the permission to edit.</unable-add>
+      <unable-add>onmogelijk om toe te voegen! controleer vereiste waarden</unable-add>
       <not-support>Dialoog '{0}' is niet ondersteund</not-support>
       <no-permission-add>toegang geweigerd ! U heeft geen recht op actie toe te voegen</no-permission-add>
       <access-denied>toegang geweigerd! U hebt geen toegang op deze template</access-denied>
@@ -1865,7 +1865,7 @@
   <UIAddressBar>
     <msg>
       <path-not-found>pad niet gevonden</path-not-found>
-      <access-denied>Access denied. You don't have the permission to read.</access-denied>
+      <access-denied>toegang geweigerd ! U hebt geen right lees node</access-denied>
       <keyword-not-support>Het sleutelwoord is ongeldig. Sommige tekens worden niet ondersteund.</keyword-not-support>
     </msg>
     <label>
@@ -1874,8 +1874,8 @@
     </label>
     <title>
       <exeButton>Ga</exeButton>
-      <backButton>Back</backButton>
-      <showHistory>Show History</showHistory>
+      <backButton>Terug naar vorige node</backButton>
+      <showHistory>Toon geschiedenis adres</showHistory>
       <changeNode>Verander Node</changeNode>
     </title>
   </UIAddressBar>
@@ -1937,7 +1937,7 @@
   -->
   <UIViewMetadataContainer>
     <msg>
-      <path-not-found>The document does not support this view.</path-not-found>
+      <path-not-found>Node doesn't support this view</path-not-found>
     </msg>
   </UIViewMetadataContainer>
   <!--
@@ -1958,7 +1958,7 @@
   </metadataForm>
   <UIViewMetadataTemplate>
     <msg>
-      <access-denied>Access denied. Either you are not the owner or don't have edit permission.</access-denied>
+      <access-denied>toegang geweigerd! U bent niet de eigenaar of hebt geen 'wijzigen' recht op deze node.</access-denied>
     </msg>
   </UIViewMetadataTemplate>
   <!--
@@ -2028,13 +2028,13 @@
   -->
   <UIPublicationForm>
     <label>
-      <published>Published</published>
+      <published>Gepubliceerd</published>
       <non-published>UnPublished</non-published>
-      <public>Public</public>
-      <private>Private</private>
-      <state>State</state>
+      <public>Openbaar</public>
+      <private>Prive</private>
+      <state>Forum Staat</state>
       <visibility>Zichtbaarheid</visibility>
-      <nodeName>Name:</nodeName>
+      <nodeName>Node naam:</nodeName>
       <lifecycleName>Lifecycle naam</lifecycleName>
       <stateName>Naam van staat</stateName>
     </label>
@@ -2058,7 +2058,7 @@
   </UIWorkspaceList>
   <pathSelector>
     <title>
-      <UIOneNodePathSelector>Selector</UIOneNodePathSelector>
+      <UIOneNodePathSelector>selecteer locatie</UIOneNodePathSelector>
     </title>
   </pathSelector>
   <!--
@@ -2145,8 +2145,8 @@
   -->
   <UIVersionTreeList>
     <header>
-      <version>Version</version>
-      <state>State</state>
+      <version>Versie</version>
+      <state>Forum Staat</state>
     </header>
   </UIVersionTreeList>
   <!--
@@ -2166,9 +2166,9 @@
     </label>
     <msg>
       <mimetype-incorrect>Onjuiste bestandstype. Miniaturen kunnen alleen van worden gemaakt. JPG. PNG of. GIF-bestanden.</mimetype-incorrect>
-      <access-denied>Access denied. You don't have permission to add a thumbnail.</access-denied>
+      <access-denied>De toegang is geweigerd. U bent niet gemachtigd om toe te voegen een miniatuur voor dit knooppunt.</access-denied>
       <confirm-delete>Weet u zeker dat u wilt verwijderen van deze miniatuur?</confirm-delete>
-      <is-checked-in>This item is checked in. Please check out before performing any action.</is-checked-in>
+      <is-checked-in>Dit node wordt ingecheckt. Gelieve te controleren voordat u een actie uitvoert.</is-checked-in>
       <fileName-error>Selecteer een bestand om te uploaden.</fileName-error>
     </msg>
     <title>
@@ -2248,7 +2248,7 @@
 
   <UIDriveSelector>
     <label>
-      <driveName>Drive Name</driveName>
+      <driveName>Drive Naam</driveName>
       <action>Actie</action>
       <adddrives>Drive toevoegen</adddrives>
     </label>
@@ -2272,7 +2272,7 @@
 
   <PopupSelectPath>
     <title>
-      <UIOneNodePathSelector>Select Path</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Select node</UIOneNodePathSelector>
     </title>
   </PopupSelectPath>
 
@@ -2302,7 +2302,7 @@
   <UISymLinkForm>
     <label>
       <symLinkName>Sym Link Name</symLinkName>
-      <pathNode>Path</pathNode>
+      <pathNode>Pad node</pathNode>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -2313,16 +2313,16 @@
       <name-invalid>Please enter Symbolic Link Name!</name-invalid>
       <name-not-allowed>Deze naam is niet toegestaan.</name-not-allowed>
       <fileName-error>Invalid file name</fileName-error>
-      <constraint-violation>You can't add an item of type '{0}' here.</constraint-violation>
-      <repository-exception>Access denied. You don't have permission to add a symlink here.</repository-exception>
+      <constraint-violation>Current node does not allow to add '{0}' node type</constraint-violation>
+      <repository-exception>De toegang is geweigerd. U bent niet gemachtigd om toe te voegen symlink naar dit node.</repository-exception>
       <numberformat-exception>Can not save this folder. The name provided must be a number format</numberformat-exception>
-      <path-node-invalid>Please enter the path.</path-node-invalid>
-      <path-node-not-allowed>This name is not allowed.</path-node-not-allowed>
-      <non-node>Please select the trust target; you may not have the rights to read this item.</non-node>
-      <cannot-save>You can't add a symlink for this type of document.</cannot-save>
-      <item-exists-exception>An item with this name already exists.</item-exists-exception>
-      <translation-node-same-language-default>The translated document has the same language as the default language of current document.</translation-node-same-language-default>
-      <UnsupportedRepositoryOperationException>This target item is not referred.</UnsupportedRepositoryOperationException>
+      <path-node-invalid>Please enter Path Node!</path-node-invalid>
+      <path-node-not-allowed>Deze naam is niet toegestaan.</path-node-not-allowed>
+      <non-node>Please choose trust target node Or you don't have enough rights to read this node</non-node>
+      <cannot-save>Some constraints were violated during that action.</cannot-save>
+      <item-exists-exception>The node with the same name already exists</item-exists-exception>
+      <translation-node-same-language-default>The translation node has same language with the default language of current node.</translation-node-same-language-default>
+      <UnsupportedRepositoryOperationException>Deze doelnode niet worden genoemd.</UnsupportedRepositoryOperationException>
     </msg>
   </UISymLinkForm>
   
@@ -2342,22 +2342,22 @@
       <name-invalid>Please enter Symbolic Link Name!</name-invalid>
       <name-not-allowed>Deze naam is niet toegestaan.</name-not-allowed>
       <fileName-error>Ongeldig bestandsnaam</fileName-error>
-      <constraint-violation>You can't add the '{0}' type to the current item.</constraint-violation>
-      <repository-exception>Access denied. You don't have permission to add a symlink to this item.</repository-exception>
+      <constraint-violation>Current node does not allow to add '{0}' node type</constraint-violation>
+      <repository-exception>Access denied! You do not have the permission to add symlink to this node.</repository-exception>
       <numberformat-exception>Kan niet naar dit folder opslaan. Naam mag geen '[' of ']' bevatten</numberformat-exception>
-      <path-node-invalid>Please enter the path.</path-node-invalid>
+      <path-node-invalid>Please enter Path Node!</path-node-invalid>
       <path-node-not-allowed>Deze naam is niet toegestaan.</path-node-not-allowed>
-      <non-node>Please select the trust target; you may not have the right to read this node.</non-node>
+      <non-node>Please choose trust target node Or you don't have enough rights to read this node</non-node>
       <cannot-save>Er is een fout opgetreden tijdens het maken van de symlink.</cannot-save>
-      <item-exists-exception>An item with this name already exists.</item-exists-exception>
-      <translation-node-same-language-default>The translated document has the same language as the default language of current document.</translation-node-same-language-default>
-      <UnsupportedRepositoryOperationException>This target item is not referred.</UnsupportedRepositoryOperationException>
+      <item-exists-exception>De node naam bestaat al.</item-exists-exception>
+      <translation-node-same-language-default>The translation node has same language with the default language of current node.</translation-node-same-language-default>
+      <UnsupportedRepositoryOperationException>This target node is not referenceable</UnsupportedRepositoryOperationException>
     </msg>
   </UIAddTranslationForm>
 
   <UIPopupSymLink>
     <title>
-      <UIOneNodePathSelector>Select Target Item</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Choose Target Node</UIOneNodePathSelector>
     </title>
   </UIPopupSymLink>
   <UIPopupSymLink>
@@ -2375,9 +2375,9 @@
 
   <UIWorkingArea>
     <msg>
-      <create-link-problem>You can't create a link for '{0}' at '{1}'.</create-link-problem>
-      <dest-node-is-link>The destination '{0}' is already a symlink, so you cannot create a symlink inside it.</dest-node-is-link>
-      <selected-is-link>The selected item '{0}' is already a link. You can't create a link to another link.</selected-is-link>
+      <create-link-problem>You can not create a link for node '{0}' at '{1}'</create-link-problem>
+      <dest-node-is-link>Het doelnode '{0}' is al een symlink, zodat u niet kunt een symlink erin maken.</dest-node-is-link>
+      <selected-is-link>Het geselecteerde knooppunt '{0}' is al een link. U kunt geen een link aanmaken die naar een andere koppeling verwijst.</selected-is-link>
       <confirm-create-link>Do you really want to create a link to this location?</confirm-create-link>
     </msg>
   </UIWorkingArea>
@@ -2420,7 +2420,7 @@
   <UISimpleCategoryManager>
     <tab>
       <label>
-        <UICategoriesAddedList>Referenced Categories</UICategoriesAddedList>
+        <UICategoriesAddedList>Referenced categories</UICategoriesAddedList>
         <UIOneNodePathSelector>Selecteer categorie</UIOneNodePathSelector>
       </label>
     </tab>
@@ -2460,7 +2460,7 @@
 <ReadOnly>Open alleen-lezen</ReadOnly>
 <Cancel>Annuleren</Cancel>
       <KeepBoth>Beide bewaren</KeepBoth>
-      <CreateNewVersion>Save as new version</CreateNewVersion>
+      <CreateNewVersion>Nieuwe versie aanmaken</CreateNewVersion>
     </label>
   </UIConfirmMessage>
 
@@ -2516,7 +2516,7 @@
 
   <UIPopupMenu>
     <msg>
-      <node-locked-other-person>This item or its parent folder is locked by another user, so you can't delete it.</node-locked-other-person>
+      <node-locked-other-person>This node or parent node is being locked by other user, you can not delete!</node-locked-other-person>
     </msg>
   </UIPopupMenu>
 
@@ -2551,7 +2551,7 @@
 
   <UIPopupMenu>
     <msg>
-      <can-not-unlock-node-is-checked-in>You can't unlock because the '{0}' (or its parent folder) is checked in.</can-not-unlock-node-is-checked-in>
+      <can-not-unlock-node-is-checked-in>Can not unlock because node '{0}' or ancestor of '{0}' is checked-in</can-not-unlock-node-is-checked-in>
     </msg>
   </UIPopupMenu>
 
@@ -2560,12 +2560,12 @@
   -->
   <UIActionBar>
     <msg>
-      <cannot-enable-version>Can't activate versioning on this document.</cannot-enable-version>
+      <cannot-enable-version>Can not enable version node</cannot-enable-version>
     </msg>
   </UIActionBar>
   <UIPopupMenu>
     <msg>
-        <cannot-readsource>You can't read data from the source.</cannot-readsource>
+        <cannot-readsource>Can not read data from source node</cannot-readsource>
     </msg>
   </UIPopupMenu>
   <UIUploadForm>
@@ -2681,7 +2681,7 @@
           <Alphabetic>Alphabetic</Alphabetic>
           <Type>Type</Type>
           <CreatedDate>Gemaakt datum</CreatedDate>
-          <ModifiedDate>Modified Date</ModifiedDate>
+          <ModifiedDate>Gewijzigd datum</ModifiedDate>
           <Ascending>Stijgend</Ascending>
           <Descending>Dalend</Descending>
       </label>
@@ -2689,7 +2689,7 @@
 
   <UISavedSearches>
     <title>
-      <savedSearches>Saved Searches</savedSearches>
+      <savedSearches>Opgeslagen zoekopdrachten</savedSearches>
     </title>
   </UISavedSearches>
   <DocumentType>
@@ -2749,10 +2749,10 @@
 
   <UIAllItemsPreferenceForm>
     <label>
-      <showOwnedByUser>Owned by me</showOwnedByUser>
-      <showFavourites>Favorites</showFavourites>
+      <showOwnedByUser>Waarvan ik eigenaar ben</showOwnedByUser>
+      <showFavourites>Favorieten</showFavourites>
       <showHiddens>Verborgen</showHiddens>
-      <showTrash>Trash</showTrash>
+      <showTrash>Vuilbak</showTrash>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -2787,8 +2787,8 @@
 
    <UITaggingForm>
     <label>
-      <Public>Public</Public>
-      <Private>Private</Private>
+      <Public>Openbaar</Public>
+      <Private>Prive</Private>
       <tagScopes>Tag Scopes</tagScopes>
     </label>
    </UITaggingForm>
@@ -2845,7 +2845,7 @@
 
     <UIPopupMenu>
     <msg>
-      <node-locked-editing>You can't edit  {0}. It's locked by another user.</node-locked-editing>
+      <node-locked-editing>This node with path {0} is being locked by other user for editing!</node-locked-editing>
     </msg>
   </UIPopupMenu>
   <UITagStyleForm>
@@ -2939,12 +2939,12 @@
   </PathNode>
   <UIPopupPathFoRestore>
     <title>
-      <UIOneNodePathSelector>Select Parent</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Selecteer het bovenliggende node</UIOneNodePathSelector>
     </title>
   </UIPopupPathFoRestore>
   <rootNodeInfo>
     <title>
-      <AddRootNode>Add Root</AddRootNode>
+      <AddRootNode>Toevoegen Root Node</AddRootNode>
     </title>
   </rootNodeInfo>
 
@@ -2971,19 +2971,19 @@
       <Close>#{word.close}</Close>
     </button>
     <revisions>
-      <version>Revisions</version>
+      <version>Herzieningen</version>
       <date>Datum</date>
-      <author>Author</author>
-      <status>Status</status>
+      <author>Auteur</author>
+      <status>Forum Status</status>
       <action>Actie</action>
-      <label>Revision</label>
+      <label>Revisie</label>
       <none>Geen revisies</none>
       <seeall>Zie alle versies</seeall>
       <currentVersion>Huidige revisie</currentVersion>
       <confirm>U verliest uw ontwerp werk. Weet u zeker dat u wilt vervangen door de huidige herziening?</confirm>
     </revisions>
     <status>
-      <version>Revision</version>
+      <version>Revisie</version>
       <title>Status</title>
       <archived>Gearchiveerd</archived>
       <obsolete>Verouderde</obsolete>
@@ -2991,7 +2991,7 @@
       <enrolled>Ingeschreven</enrolled>
       <draft>Ontwerp</draft>
       <pending>In behandeling</pending>
-      <approved>Approved</approved>
+      <approved>Goedgekeurd</approved>
       <inreview>In Review</inreview>
       <staged>Geënsceneerd</staged>
       <published>Gepubliceerd</published>
@@ -3016,8 +3016,8 @@
       <date>Datum</date>
       <versionName>Revisie naam</versionName>
       <currentState>Huidige toestand</currentState>
-      <user>Author</user>
-      <description>Description</description>
+      <user>Auteur</user>
+      <description>Beschrijving</description>
     </header>
     <create-version>Nieuwe versie is gemaakt</create-version>
   </UIPublicationHistory>
@@ -3104,7 +3104,7 @@
     <msg>
       <no-view-found>Er zijn geen zichtbaar toegepast voor uw toegangsmachtiging in station '{0}'.</no-view-found>
       <access-denied>Toegang geweigerd! U hebt misschien geen recht op werkruimte van schijf '{0}'.</access-denied>
-      <not-found>The document you are trying to access is no longer available.</not-found>
+      <not-found>Het document dat u probeert te openen is niet langer beschikbaar.</not-found>
       <empty-drives>Er is geen schijf in deze repository of u hebt geen toegang op schijven van deze repository.</empty-drives>
       <workspace-not-exist>Drive '{0}' werd opgeslagen in een niet-herkende werkruimte. Configureer dit drive.</workspace-not-exist>
     </msg>
@@ -3130,7 +3130,7 @@
   <lifecyclePhase>
     <label>
     <no>Nee</no>
-  <yes>Yes</yes>
+  <yes>Ja</yes>
   <true>Waar</true>
   <false>Valse</false>
   <Electronic>Elektronische</Electronic>
@@ -3156,9 +3156,9 @@
   </lifecyclePhase>
   <UIPopupMenu>
   <msg>
-<can-not-remove-locked-node>{0} is locked. You can't move it to the Trash.</can-not-remove-locked-node>
-<can-not-remove-checked-in-node>{0} or its parent folder is checked in. You can't move it to the Trash.</can-not-remove-checked-in-node>
-<access-denied-to-delete>Access denied. You can't move {0} to the Trash.</access-denied-to-delete>
+<can-not-remove-locked-node>Node {0} is locked, can not move it to Trash!</can-not-remove-locked-node>
+<can-not-remove-checked-in-node>Node {0} is checked in, can not move it to Trash!</can-not-remove-checked-in-node>
+<access-denied-to-delete>Access denied, can not move node {0} to Trash!</access-denied-to-delete>
   </msg>
   </UIPopupMenu>
   <UIPropertyForm>
@@ -3168,8 +3168,8 @@
   </UIPropertyForm>
   <UIWatchDocumentForm>
     <msg>
-      <node-is-locked>This item is locked. You cannot watch it.</node-is-locked>
-      <unknown-error>Some errors have occurred. You can't watch this document.</unknown-error>
+      <node-is-locked>Dit node wordt vergrendeld. U kan niet bekijken.</node-is-locked>
+      <unknown-error>Sommige fouten zijn opgetreden. U kan niet kijken naar dit knooppunt.</unknown-error>
     </msg>
   </UIWatchDocumentForm>   
   <UIActionForm>
@@ -3186,22 +3186,22 @@
     <DropFileMessage>Zet uw bestanden in de huidige map</DropFileMessage>
     <Close>#{word.close}</Close>
     <in>in</in>
-    <MaxFileSizeAlert>The file size exceeds the size limit of</MaxFileSizeAlert>
+    <MaxFileSizeAlert>De bestandsgrootte overschrijdt de limiet van</MaxFileSizeAlert>
     <Waiting>Wachten</Waiting>
     <Error>Foutmelding</Error>
-    <or>or</or>
+    <or>of</or>
     <AlreadyInUse>Reeds in gebruik</AlreadyInUse>
     <Keep>Houd zowel</Keep>
-    <Replace>Replace</Replace>
-    <Canceled>Canceled</Canceled>
-      <UploadNewVersion>Upload a new version</UploadNewVersion>
+    <Replace>Vervangen</Replace>
+    <Canceled>Geannuleerd</Canceled>
+      <UploadNewVersion>Een nieuwe versie uploaden</UploadNewVersion>
     <Cancel>#{word.cancel}</Cancel>
     <AbortAllConfirmation>Wilt u alle bestanden die bezig zijn nu afbreken?</AbortAllConfirmation>
   </label>
   </UIMultiUpload>
   <UIDocumentNodeList>
   <label>
-  <CreatedOn>Created on</CreatedOn>
+  <CreatedOn>Gecreëerd Datum</CreatedOn>
   <Updated>Updated</Updated>
   <by>door</by>
   <you>u</you>
@@ -3211,7 +3211,7 @@
     <label>
       <name>Naam</name>
       <date>Datum</date>
-      <size>Size</size>
+      <size>Grootte</size>
       <sortBy>Sorteer op</sortBy>
       <filesAreSelected>Bestanden zijn geselecteerd.</filesAreSelected>
       <ClearSelection>Keuze verwijderen</ClearSelection>

@@ -87,7 +87,7 @@
   <Vote>
     <view>
       <label>
-        <avg-rating>平均等級</avg-rating>
+        <avg-rating>Rate</avg-rating>
         <subscription>投票</subscription>
       </label>
     </view>

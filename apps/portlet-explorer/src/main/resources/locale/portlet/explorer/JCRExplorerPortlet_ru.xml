@@ -157,15 +157,15 @@
   <UIPreferencesForm>
     <title>Установить настройки просмотра</title>
     <label>
-      <enableStructure>Включить структуру DMS:</enableStructure>
-      <showSideBar>Показать боковую панель:</showSideBar>
-      <showHiddenNode>Show Hidden Documents:</showHiddenNode>
-      <showNonDocument>Show Non-document Items:</showNonDocument>
-      <showRefDocuments>Показать ссылочные документы:</showRefDocuments>
+      <enableStructure>Browse in structure mode:</enableStructure>
+      <showSideBar>Show sidebar:</showSideBar>
+      <showHiddenNode>Show hidden items:</showHiddenNode>
+      <showNonDocument>Show non-document items:</showNonDocument>
+      <showRefDocuments>Show referenced items:</showRefDocuments>
       <enableDragAndDrop>Включить перетаскивание:</enableDragAndDrop>
-      <sortBy>Упорядочить по:</sortBy>
+      <sortBy>Sort order:</sortBy>
       <order>Сортировать по:</order>
-      <nodesPerPage>Items per Page:</nodesPerPage>
+      <nodesPerPage>Результатов на странице:</nodesPerPage>
     </label>
     <action>
       <Back>#{word.close}</Back>
@@ -240,7 +240,7 @@
       <UIViewMetadataManager>Просмотр метаданных</UIViewMetadataManager>
       <UIVoteForm>Проголосовать за документ</UIVoteForm>
       <UICommentForm>Комментировать</UICommentForm>
-      <UIPreferencesForm>Настройки</UIPreferencesForm>
+      <UIPreferencesForm>Documents Browsing Preferences</UIPreferencesForm>
       <UIPublicationManager>Управление публикацией</UIPublicationManager>
       <UIConfirmMessage>Удалить ?</UIConfirmMessage>
       <UIDeleteFileConfirmMessage>Удалить файл ?</UIDeleteFileConfirmMessage>
@@ -250,7 +250,7 @@
       <UIActivePublication>Приобщить к жизненному циклу публикации</UIActivePublication>
       <UITaggingForm>Отметить документ</UITaggingForm>
       <UIThumbnailForm>Добавить изображение эскиза</UIThumbnailForm>
-      <UIAllItemsPreferenceForm>Preferences</UIAllItemsPreferenceForm>
+      <UIAllItemsPreferenceForm>Documents Browsing Preferences</UIAllItemsPreferenceForm>
       <UISelectRestorePath>Выберите путь восстановления</UISelectRestorePath>
       <UISEOForm>Управление SEO</UISEOForm>
       <UISEOToolbarForm>Управление SEO</UISEOToolbarForm>
@@ -1351,7 +1351,7 @@
     </summary>
     <tooltip>
       <version>Version</version>
-      <baseVersion>Base Version</baseVersion>
+      <baseVersion>current version</baseVersion>
       <addLabel>Добавить метку</addLabel>
       <removeLable>Удалить метку</removeLable>
       <restoreVersion>Восстановить версию</restoreVersion>
@@ -2895,7 +2895,7 @@
 
   <UIPreferencesForm>
       <label>
-            <queryType>Тип запроса:</queryType>
+            <queryType>Query language:</queryType>
             <SQL>SQL</SQL>
             <XPATH>XPATH</XPATH>
       </label>
@@ -3186,7 +3186,7 @@
     <DropFileMessage>Перетащите свои файлы в эту папку</DropFileMessage>
     <Close>#{word.close}</Close>
     <in>в</in>
-    <MaxFileSizeAlert>The file size exceeds the size limit of</MaxFileSizeAlert>
+    <MaxFileSizeAlert>The file size exceeds the limit of</MaxFileSizeAlert>
     <Waiting>В ожидании</Waiting>
     <Error>Ошибка</Error>
     <or>или</or>
