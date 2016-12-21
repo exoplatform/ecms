@@ -17,6 +17,7 @@
 package org.exoplatform.services.wcm.search.connector;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.GregorianCalendar;
 
@@ -36,6 +37,7 @@ import org.exoplatform.services.wcm.search.base.BaseSearchTest;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.controller.metadata.ControllerDescriptor;
 import org.exoplatform.web.controller.router.Router;
+
 import org.mockito.Mockito;
 
 /**
@@ -86,7 +88,50 @@ public class TestDocumentSearchServiceConnector extends BaseSearchTest {
     article3.addMixin(NodetypeConstant.EXO_DATETIME);
     article3.setProperty("exo:dateCreated",new GregorianCalendar());
     article3.setProperty("exo:dateModified",new GregorianCalendar());
+    Node article4 = parentNode.addNode("article4", "exo:article");
+    article4.setProperty("exo:title", "Albert Einstein");
+    article4.setProperty("exo:text", "Hopkins");
     session.save();
+
+    article4 = (Node) session.getItem(article4.getPath());
+
+    assertFalse(article4.hasProperty("exo:dateCreated"));
+    assertFalse(article4.hasProperty("exo:dateModified"));
+    assertFalse(article4.hasProperty("exo:lastModifiedDate"));
+  }
+
+  /**
+   * Test if returned date switch result is consistent
+   * @throws Exception
+   */
+  public void testSearchDate() throws Exception {
+    long calendarBeforeSearch = Calendar.getInstance().getTimeInMillis();
+
+    Collection<String> sites = new ArrayList<String>();
+    sites.add("classic");
+
+    Collection<SearchResult> ret 
+          = documentSearch_.search(new SearchContext(new Router(new ControllerDescriptor()), "classic"), "hopkins~",
+                                   sites,
+                                   0, 20, "title", "asc");
+    assertEquals(4, ret.size());//2
+
+    boolean matchFound = false;
+
+    for (SearchResult searchResult : ret) {
+      if(searchResult.getTitle().equals("Albert Einstein")) {
+        // Search result don't have exo:dateModified and exo:dateCreated properties
+        // The date should be added with a fake instance == now
+        assertTrue("Retuned search result has an incoherent modified date", searchResult.getDate() > calendarBeforeSearch);
+        matchFound = true;
+      } else {
+        // Search result have exo:dateModified and exo:dateCreated properties
+        // the modification date should be before running this test
+        assertTrue("Retuned search result has an incoherent modified date", searchResult.getDate() < calendarBeforeSearch);
+      }
+    }
+
+    assertTrue("'Albert Einstein' content was not matched", matchFound);
   }
     
   public void testSearchSingle() throws Exception {
