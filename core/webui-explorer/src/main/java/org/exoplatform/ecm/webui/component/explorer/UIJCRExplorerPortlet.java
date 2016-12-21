@@ -467,8 +467,8 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
     boolean isShowActionBar = isShowActionBar() ;
     uiActionbar.setTabOptions(viewList.get(0));
     uiActionbar.setRendered(isShowActionBar);
-    uiExplorer.setSelectNode(driveData.getWorkspace(), addressPath);
-
+    uiExplorer.clearNodeHistory(addressPath);
+    uiExplorer.setSelectNode(driveData.getWorkspace(), addressPath, homePath);
     UIDocumentWorkspace uiDocWorkspace = uiWorkingArea.getChild(UIDocumentWorkspace.class);
     uiDocWorkspace.setRenderedChild(UIDocumentContainer.class);
     uiDocWorkspace.setRendered(true);
