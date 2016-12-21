@@ -16,31 +16,6 @@
  */
 package org.exoplatform.ecm.webui.component.explorer ;
 
-import java.security.AccessControlException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
-
-import javax.jcr.Item;
-import javax.jcr.ItemNotFoundException;
-import javax.jcr.Node;
-import javax.jcr.NodeIterator;
-import javax.jcr.PathNotFoundException;
-import javax.jcr.RepositoryException;
-import javax.jcr.Session;
-import javax.jcr.Value;
-import javax.jcr.nodetype.NodeType;
-import javax.portlet.PortletPreferences;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-
 import org.exoplatform.ecm.jcr.TypeNodeComparator;
 import org.exoplatform.ecm.jcr.model.Preference;
 import org.exoplatform.ecm.resolver.JCRResourceResolver;
@@ -85,14 +60,17 @@ import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
-import org.exoplatform.webui.core.UIApplication;
-import org.exoplatform.webui.core.UIComponent;
-import org.exoplatform.webui.core.UIContainer;
-import org.exoplatform.webui.core.UIPageIterator;
-import org.exoplatform.webui.core.UIPopupContainer;
-import org.exoplatform.webui.core.UIPopupWindow;
+import org.exoplatform.webui.core.*;
 import org.exoplatform.webui.core.lifecycle.UIContainerLifecycle;
 import org.exoplatform.webui.event.Event;
+
+import javax.jcr.*;
+import javax.jcr.nodetype.NodeType;
+import javax.portlet.PortletPreferences;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import java.security.AccessControlException;
+import java.util.*;
 
 /**
  * Created by The eXo Platform SARL
@@ -827,6 +805,12 @@ public class UIJCRExplorer extends UIContainer {
     setLastWorkspace(lastWorkspaceName);
   }
 
+  public void setSelectNode(String workspaceName, String uri, String homePath) throws Exception {
+    String lastWorkspaceName = setTargetWorkspaceProperties(workspaceName);
+    setSelectNode(uri, homePath, false);
+    setLastWorkspace(lastWorkspaceName);
+  }
+
   public void setBackSelectNode(String workspaceName, String uri) throws Exception {
     String lastWorkspaceName = setTargetWorkspaceProperties(workspaceName);
     setSelectNode(uri, true);
@@ -899,6 +883,71 @@ public class UIJCRExplorer extends UIContainer {
           }
         }else{
           record(previousPath, lastWorkspaceName_);
+        }
+      }catch(PathNotFoundException e){
+        LOG.info("This node " + previousPath +" is no longer accessible ");
+      }
+    }
+  }
+
+  public void setSelectNode(String uri, String homePath, boolean back) throws Exception {
+    Node currentNode = null;
+    if(uri == null || uri.length() == 0) uri = "/";
+    // retrieve the path history to node from uri
+    String previousPath = uri.substring(0, uri.lastIndexOf("/"));
+    if (checkTargetForSymlink(uri)) {
+      try {
+        setCurrentPath(uri);
+        currentNode = getCurrentNode();
+      } catch (Exception e) {
+        if (LOG.isErrorEnabled()) {
+          LOG.error("Cannot find the node at " + uri, e);
+        }
+        setCurrentPath(LinkUtils.getParentPath(currentPath_));
+        currentNode = getCurrentNode();
+      }
+    } else {
+      currentNode = getCurrentNode();
+    }
+    if(currentNode.hasProperty(Utils.EXO_LANGUAGE)) {
+      setLanguage(currentNode.getProperty(Utils.EXO_LANGUAGE).getValue().getString());
+    }
+
+    // Store previous node path to history for backing
+    if(previousPath != null && !previousPath.isEmpty() && !back) {
+      try {
+        String historyPath = "";
+        // get the home path if the node is in personal drive of a user
+        if (homePath.contains("${userId}")) {
+          homePath = org.exoplatform.services.cms.impl.Utils.getPersonalDrivePath(homePath, previousPath.split("/")[5]);
+        }
+        if (!(uri.equals(homePath) || homePath.equals("/"))) {
+          // retrieve the relaive path to node from the home path
+          // (the logic is previousPath = previousPath - homePath)
+          previousPath = previousPath.replace(homePath, "");
+          historyPath = homePath;
+        }
+        // Store the home path at the head of history
+        if (this.hasPaginator(homePath, lastWorkspaceName_)) {
+          UIPageIterator pageIterator = this.findComponentById(UIDocumentInfo.CONTENT_PAGE_ITERATOR_ID);
+          if (pageIterator != null) {
+            record(homePath, lastWorkspaceName_, pageIterator.getCurrentPage());
+          }
+        } else {
+          record(homePath, lastWorkspaceName_);
+        }
+        // for each folder from the relative path to node, store the path to history
+        for (String folder : previousPath.split("/")) {
+          if (folder == null || folder.isEmpty()) continue;
+          historyPath += "/" + folder;
+          if (this.hasPaginator(historyPath, lastWorkspaceName_)) {
+            UIPageIterator pageIterator = this.findComponentById(UIDocumentInfo.CONTENT_PAGE_ITERATOR_ID);
+            if (pageIterator != null) {
+              record(historyPath, lastWorkspaceName_, pageIterator.getCurrentPage());
+            }
+          } else {
+            record(historyPath, lastWorkspaceName_);
+          }
         }
       }catch(PathNotFoundException e){
         LOG.info("This node " + previousPath +" is no longer accessible ");
