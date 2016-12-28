@@ -134,10 +134,12 @@
    */
   ShareContent.prototype.checkSelectedEntry = function(entry){
     correctSpacePos();
-    if("[]" === entry) {
-      gj(".PopupContent .uiActionBorder .btn-primary").attr("disabled","disabled");
-    }else{
-      gj(".PopupContent .uiActionBorder .btn-primary").removeAttr("disabled")
+    if (entry) {
+      if ("[]" === entry) {
+        gj(".PopupContent .uiActionBorder .btn-primary").attr("disabled", "disabled");
+      } else {
+        gj(".PopupContent .uiActionBorder .btn-primary").removeAttr("disabled")
+      }
     }
   }
 
