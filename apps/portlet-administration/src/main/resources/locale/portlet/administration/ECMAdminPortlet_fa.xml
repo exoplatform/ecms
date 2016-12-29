@@ -988,10 +988,10 @@
       <publicationPublish>انتشار</publicationPublish>
       <contentNavigation>هدایت محتوا</contentNavigation>
       <addSymLink>افزودن Symlink</addSymLink>
-      <checkIn>Check In</checkIn>
-      <checkOut>Check Out</checkOut>
-      <shareDocuments>Share</shareDocuments>
-      <openDocument>Remote Edit</openDocument>
+      <checkIn>ورود</checkIn>
+      <checkOut>بررسی</checkOut>
+      <shareDocuments>اشتراک</shareDocuments>
+      <openDocument>ویرایش از راه دور</openDocument>
       <editProperty>Edit Document Properties</editProperty>
       <uploadNewVersion>Upload a new version</uploadNewVersion>
     </label>
@@ -1023,7 +1023,7 @@
   </UIViewFormTabPane>
   <PopupViewPermission>
     <title>
-      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
+      <UIPermissionSelector>انتخابگر مجوز</UIPermissionSelector>
     </title>
   </PopupViewPermission>
 
@@ -1383,7 +1383,7 @@
       <set_property>مجوز تنظیم ویژگی</set_property>
       <remove>حذف مجوز</remove>
     </label>
-    <title>Add a permission to this node</title>
+    <title>افزودن یک مجوز به این گره</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>Save</Save>
@@ -1405,7 +1405,7 @@
 
   <PopupTaxonomyTreePermission>
     <title>
-      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
+      <UIPermissionSelector>انتخابگر مجوز</UIPermissionSelector>
     </title>
   </PopupTaxonomyTreePermission>
 
@@ -1486,7 +1486,7 @@
       <add_node>اصلاح</add_node>
       <remove>حذف</remove>
     </label>
-    <title>Add permission to this node</title>
+    <title>افزودن یک مجوز به این گره</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>#{word.save}</Save>
@@ -1737,7 +1737,7 @@
   -->
   <AddNewTemplatePermission>
     <title>
-      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
+      <UIPermissionSelector>انتخابگر مجوز</UIPermissionSelector>
     </title>
   </AddNewTemplatePermission>
   <TemplatePermission>
@@ -1778,12 +1778,12 @@
   </DialogForm>
   <DialogFormTemplatePermission>
     <title>
-      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
+      <UIPermissionSelector>انتخابگر مجوز</UIPermissionSelector>
     </title>
   </DialogFormTemplatePermission>
   <ViewFormTemplatePermission>
     <title>
-      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
+      <UIPermissionSelector>انتخابگر مجوز</UIPermissionSelector>
     </title>
   </ViewFormTemplatePermission>
   <TemplateContainerPopup>
@@ -1976,7 +1976,7 @@
   </EditQueryForm>
   <PermissionPopup>
     <title>
-      <UIGroupMemberSelector>Permission Selector</UIGroupMemberSelector>
+      <UIGroupMemberSelector>انتخابگر مجوز</UIGroupMemberSelector>
     </title>
   </PermissionPopup>
   <!--

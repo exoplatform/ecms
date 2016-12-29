@@ -44,7 +44,7 @@
       <no-taxonomy-selected>少なくとも一つのカテゴリのコピーかカットをする必要があります。</no-taxonomy-selected>
       <node-is-cutting>ここに貼付けることができません。恐らく、分類ノード '{0}' はカットされています。</node-is-cutting>
       <can-not-paste>貼付けるためのクリップボードにデータがありません。</can-not-paste>
-      <reference-exception>Cannot delete this category  because it is currently referenced by a content.</reference-exception>
+      <reference-exception>コンテンツによって参照されているために、このカテゴリを削除できません。</reference-exception>
       <path-error>分類ノードが削除されたので問題が発生している可能性があります。</path-error>
     </msg>
   </UITaxonomyWorkingArea>
@@ -161,7 +161,7 @@
       <path-invalid>パスは無効です。</path-invalid>
       <taxonomy-existed>分類ツリーは既に存在します。</taxonomy-existed>
       <taxonomy-node-existed>分類ノードは既に存在します。</taxonomy-node-existed>
-      <no-permission-add>You do not have the right to add an action.</no-permission-add>
+      <no-permission-add>アクションを追加する権限がありません。</no-permission-add>
       <not-created-tree>分類ツリーはまだ作成されていません。</not-created-tree>
     </msg>
   </UIActionForm>
@@ -398,7 +398,7 @@
       <viewSideBar>サイドバーの表示</viewSideBar>
       <permissions>権限</permissions>
       <showHiddenNode>隠しノードの表示</showHiddenNode>
-      <allowCreateFolders>Allow Folder Creation:</allowCreateFolders>
+      <allowCreateFolders>フォルダー作成を許可</allowCreateFolders>
       <Admin>管理者：</Admin>
       <Categories>カテゴリー:</Categories>
       <Icons>アイコン</Icons>
@@ -691,7 +691,7 @@
     <title>インポートノードタイプの選択</title>
     <msg>
       <no-nodetype-registered>登録されていないノードタイプ</no-nodetype-registered>
-      <nodetype-registered>Registration successful.</nodetype-registered>
+      <nodetype-registered>登録が成功しました。</nodetype-registered>
     </msg>
   </UINodeTypeImport>
   <NodeTypeImportPopup>
@@ -988,12 +988,12 @@
       <publicationPublish>公開</publicationPublish>
       <contentNavigation>コンテンツ ナビゲーション</contentNavigation>
       <addSymLink>Symリンクの追加</addSymLink>
-      <checkIn>Check In</checkIn>
-      <checkOut>Check Out</checkOut>
-      <shareDocuments>Share</shareDocuments>
-      <openDocument>Remote Edit</openDocument>
-      <editProperty>Edit Document Properties</editProperty>
-      <uploadNewVersion>Upload a new version</uploadNewVersion>
+      <checkIn>チェックイン</checkIn>
+      <checkOut>チェックアウト</checkOut>
+      <shareDocuments>共有</shareDocuments>
+      <openDocument>リモート編集</openDocument>
+      <editProperty>文書のプロパティを編集</editProperty>
+      <uploadNewVersion>新しいバージョンをアップロード</uploadNewVersion>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -1023,7 +1023,7 @@
   </UIViewFormTabPane>
   <PopupViewPermission>
     <title>
-      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
+      <UIPermissionSelector>権限の選択</UIPermissionSelector>
     </title>
   </PopupViewPermission>
 
@@ -1074,7 +1074,7 @@
   -->
   <UITemplateForm>
     <title>
-      <AddPermission>Add Permission</AddPermission>
+      <AddPermission>パーミッションを追加</AddPermission>
     </title>
     <action>
       <Save>#{word.save}</Save>
@@ -1220,7 +1220,7 @@
       <scriptContent>コンテンツ</scriptContent>
       <scriptLabel>名前</scriptLabel>
       <scriptName>名前</scriptName>
-      <enableVersion>Enable Versioning</enableVersion>
+      <enableVersion>バージョン管理を有効化</enableVersion>
     </label>
   </UIScriptForm>
   <!--
@@ -1235,7 +1235,7 @@
       <scriptContent>スクリプトコンテンツ</scriptContent>
       <scriptLabel>名前</scriptLabel>
       <scriptName>スクリプト名</scriptName>
-      <enableVersion>Enable Versioning</enableVersion>
+      <enableVersion>バージョン管理を有効化</enableVersion>
     </label>
   </ecmScriptForm>
   <!--
@@ -1285,8 +1285,8 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
-      <parentPath>Parent:</parentPath>
-      <taxonomyName>Category Name:</taxonomyName>
+      <parentPath>親フォルダ:</parentPath>
+      <taxonomyName>カテゴリ名:</taxonomyName>
     </label>
     <msg>
       <name-null>名前はnulllです。</name-null>
@@ -1383,7 +1383,7 @@
       <set_property>プロパティ権限のセット</set_property>
       <remove>削除権限</remove>
     </label>
-    <title>Add a permission to this node</title>
+    <title>このノードへ権限を追加</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>保存</Save>
@@ -1405,7 +1405,7 @@
 
   <PopupTaxonomyTreePermission>
     <title>
-      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
+      <UIPermissionSelector>権限の選択</UIPermissionSelector>
     </title>
   </PopupTaxonomyTreePermission>
 
@@ -1486,7 +1486,7 @@
       <add_node>変更</add_node>
       <remove>削除権限</remove>
     </label>
-    <title>Add permission to this node</title>
+    <title>このノードへ権限を追加</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>#{word.save}</Save>
@@ -1737,7 +1737,7 @@
   -->
   <AddNewTemplatePermission>
     <title>
-      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
+      <UIPermissionSelector>権限の選択</UIPermissionSelector>
     </title>
   </AddNewTemplatePermission>
   <TemplatePermission>
@@ -1759,7 +1759,7 @@
       <name>名前</name>
       <isDocumentTemplate>ドキュメントテンプレート</isDocumentTemplate>
       <viewPermission>権限</viewPermission>
-      <enableVersion>Versioning activated</enableVersion>
+      <enableVersion>バージョン管理を有効化</enableVersion>
     </label>
     <title>ビューの追加/編集</title>
   </ViewForm>
@@ -1772,18 +1772,18 @@
       <name>名前</name>
       <isDocumentTemplate>ドキュメントテンプレート</isDocumentTemplate>
       <viewPermission>権限</viewPermission>
-      <enableVersion>Enable Versioning</enableVersion>
+      <enableVersion>バージョン管理を有効化</enableVersion>
     </label>
     <title>ダイアログの追加/編集</title>
   </DialogForm>
   <DialogFormTemplatePermission>
     <title>
-      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
+      <UIPermissionSelector>権限の選択</UIPermissionSelector>
     </title>
   </DialogFormTemplatePermission>
   <ViewFormTemplatePermission>
     <title>
-      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
+      <UIPermissionSelector>権限の選択</UIPermissionSelector>
     </title>
   </ViewFormTemplatePermission>
   <TemplateContainerPopup>
@@ -1976,7 +1976,7 @@
   </EditQueryForm>
   <PermissionPopup>
     <title>
-      <UIGroupMemberSelector>Permission Selector</UIGroupMemberSelector>
+      <UIGroupMemberSelector>権限の選択</UIGroupMemberSelector>
     </title>
   </PermissionPopup>
   <!--
@@ -2008,9 +2008,9 @@
   </UITagStyleList>
   <UITagStyleForm>
     <label>
-      <styleName>Style Name:</styleName>
-      <documentRange>Number of Occurrences:</documentRange>
-      <styleHTML>HTML Style:</styleHTML>
+      <styleName>スタイル名:</styleName>
+      <documentRange>出現回数:</documentRange>
+      <styleHTML>HTML スタイル:</styleHTML>
     </label>
     <action>
       <UpdateStyle>更新</UpdateStyle>
@@ -2034,7 +2034,7 @@
   -->
   <ECMPhoneFormatValidator>
     <msg>
-      <Invalid>The field '{0}' contains an invalid Phone number. Please enter another value.</Invalid>
+      <Invalid>'{0}' フィールドに無効な電話番号が入力されています。他の値を入力してくだあい。</Invalid>
     </msg>
   </ECMPhoneFormatValidator>
   <!--
@@ -2401,7 +2401,7 @@
       <name>名前</name>
       <isDocumentTemplate>ドキュメントタイプ</isDocumentTemplate>
       <viewPermission>権限</viewPermission>
-      <enableVersion>Enable Versioning</enableVersion>
+      <enableVersion>バージョン管理を有効化</enableVersion>
     </label>
     <title>スキンの追加/編集</title>
   </SkinForm>
@@ -2447,7 +2447,7 @@
     </action>
     <msg>
       <xss-vulnerability-character>フィールド'{0}'は、クロスサイトスクリプティングの脆弱性文字が含まれています。</xss-vulnerability-character>
-      <xss-vulnerability-character-wo-label>Your input may contain XSS vulnerability characters</xss-vulnerability-character-wo-label>
+      <xss-vulnerability-character-wo-label>あなたが入力した文字列は、XSS 脆弱性を含んでいるかもしれません。</xss-vulnerability-character-wo-label>
     </msg>
   </UIActionForm>
 
@@ -2485,7 +2485,7 @@
       <Add>追加</Add>
     </action>
     <label>
-      <userOrGroup>Memberships:</userOrGroup>
+      <userOrGroup>メンバーシップ:</userOrGroup>
     </label>
     <msg>
       <userOrGroup-alreadyExists>メンバーシップは既に存在します。別の物を選択してください!</userOrGroup-alreadyExists>
@@ -2575,7 +2575,7 @@
   </UIScriptForm>
   <UINodeTypeList>
     <msg>
-      <no-list>There is no node type matching your search.</no-list>
+      <no-list>検索に一致するノードタイプはありません。</no-list>
     </msg>
   </UINodeTypeList>
   <UIActionForm>

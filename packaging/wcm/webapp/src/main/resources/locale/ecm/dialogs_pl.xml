@@ -73,7 +73,7 @@
       <description>#{word.description}</description>
       <port>Port</port>
       <userName>#{word.userName}</userName>
-      <password>Password</password>
+      <password>Hasło</password>
       <link>Link</link>
       <to>Wyślij e-mail do</to>
       <actionName>#{word.name}</actionName>
@@ -84,7 +84,7 @@
       <description>#{word.description}</description>
       <port>Port</port>
       <userName>#{word.userName}</userName>
-      <password>Password</password>
+      <password>Hasło</password>
       <link>Link</link>
       <to>Wyślij e-mail do</to>
       <actionName>#{word.name}</actionName>
@@ -100,7 +100,7 @@
         <id>Id</id>
         <name>#{word.name}</name>
         <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
-        <metadata>Metadata</metadata>
+        <metadata>Metadane</metadata>
         <description>#{word.description}</description>
       </label>
     </dialog>
@@ -200,8 +200,8 @@
   <Published>
     <dialog>
       <label>
-        <start-publication>Start Publication</start-publication>
-        <end-publication>End Publication</end-publication>
+        <start-publication>Zacznij publikację</start-publication>
+        <end-publication>Koniec publikacji</end-publication>
       </label>
     </dialog>
   </Published>
@@ -222,7 +222,7 @@
   <Relationable>
     <dialog>
       <label>
-        <relation>Relation</relation>
+        <relation>Relacja</relation>
       </label>
     </dialog>
   </Relationable>
@@ -244,8 +244,8 @@
   <Versionable>
     <dialog>
       <label>
-        <version-history>Version History</version-history>
-        <base-version>Base Version</base-version>
+        <version-history>Historia wersji</version-history>
+        <base-version>Wersja bazowa</base-version>
         <is-checked-out>Sprawdzono</is-checked-out>
         <predecessors>Przodkowie</predecessors>
         <merge-failed>Scalanie nie powiodło się</merge-failed>
@@ -315,27 +315,27 @@
   -->
 <no>Nie</no>
 <yes>Tak</yes>
-<true>True</true>
-<false>False</false>
-<Electronic>Electronic</Electronic>
-<Paper>Paper</Paper>
-<NONE>None</NONE>
-<CLASSIFIED>Classified</CLASSIFIED>
-<UNCLASSIFIED>Unclassified</UNCLASSIFIED>
-<NOCONTRACT>No Contract</NOCONTRACT>
-<one-minute>One Minute</one-minute>
+<true>Prawda</true>
+<false>Fałsz</false>
+<Electronic>Elektroniczny</Electronic>
+<Paper>Papierowy</Paper>
+<NONE>Brak</NONE>
+<CLASSIFIED>Sklasyfikowany</CLASSIFIED>
+<UNCLASSIFIED>Niesklasyfikowany</UNCLASSIFIED>
+<NOCONTRACT>Brak Kontraktu</NOCONTRACT>
+<one-minute>Minuta</one-minute>
 <hourly>Co godzinę</hourly>
 <daily>Codziennie</daily>
-<quarterly>Quarterly</quarterly>
+<quarterly>Kwartalnie</quarterly>
 <yearly>Rocznie</yearly>
-<ten-years>Ten Years</ten-years>
-<read>User Action</read>
-  <schedule>Scheduler</schedule>
-  <node_added>Content Addition</node_added>
-  <node_removed>Content Removal</node_removed>
-  <property_added>Property Addition</property_added>
-  <property_removed>Property Removal</property_removed>
-  <property_changed>Property Modification</property_changed>
+<ten-years>Dziesięć lat</ten-years>
+<read>Akcja użytkownika</read>
+  <schedule>Harmonogram</schedule>
+  <node_added>Dodawanie treści</node_added>
+  <node_removed>Usuwanie treści</node_removed>
+  <property_added>Dodawanie własności</property_added>
+  <property_removed>Usunięcie własności</property_removed>
+  <property_changed>Modyfikowanie własności</property_changed>
 
   <ScriptAction>
     <dialog>

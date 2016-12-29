@@ -34,7 +34,7 @@
 
   <Drives>
     <label>
-      <ManagedSites>Site Management</ManagedSites>
+      <ManagedSites>网站管理。</ManagedSites>
       <SharedSite>共享的网站</SharedSite>
       <PersonalDocuments>Personal Documents</PersonalDocuments>
       <UserDocuments>{0} Documents</UserDocuments>
@@ -204,15 +204,15 @@
     <msg>
       <time-to-late>搜索时间过长。</time-to-late>
       <empty-field>请输入有效的关键字进行搜索。</empty-field>
-      <empty-name>Please enter the name to search</empty-name>
-      <empty-content>Please enter a word or phrase to search</empty-content>
-      <empty-property>Please select a property</empty-property>
-      <empty-property-keyword>Please enter a keyword for the property</empty-property-keyword>
-      <empty-doctype>Please select a document type</empty-doctype>
-      <empty-startDate>"From Date" is required</empty-startDate>
+      <empty-name>请输入要搜索的名称</empty-name>
+      <empty-content>请输入一个单词或短语搜索</empty-content>
+      <empty-property>请选择一个属性</empty-property>
+      <empty-property-keyword>请输入属性的关键字</empty-property-keyword>
+      <empty-doctype>请选择一种文档类型</empty-doctype>
+      <empty-startDate>"开始日期"是必需的</empty-startDate>
       <invalid-format>在字段"{0}"无效的日期时间格式。</invalid-format>
       <invalid-date>"到日期"必须晚于"从日期"</invalid-date>
-      <invalid-startDate>"From Date" must not be later than today</invalid-startDate>
+      <invalid-startDate>"起始"日期不能晚于今天</invalid-startDate>
       <invalid-nodeType>节点类型"{0}"无效。请再次检查。</invalid-nodeType>
       <invalid-keyword>关键字是无效的。不支持某些字符。</invalid-keyword>
     </msg>

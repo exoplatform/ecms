@@ -18,8 +18,8 @@
       <Document>文档</Document>
       <DocumentAndPage>文档和页面</DocumentAndPage>
       <documentandpage>文档和页面</documentandpage>
-      <results>Results {0} to {1} for {2}</results>
-      <oneResult>Only one result for {0}</oneResult>
+      <results>{2} 结果 {0} 到 {1}</results>
+      <oneResult>只有一个结果为 {0}</oneResult>
       <ofAboutCaption>约</ofAboutCaption>
       <timeUnitCaption>秒</timeUnitCaption>
       <similar>网页相同的内容的显示位置</similar>

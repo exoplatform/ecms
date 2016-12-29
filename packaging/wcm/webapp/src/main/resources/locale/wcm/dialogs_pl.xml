@@ -26,7 +26,7 @@
         <MainContent>Główna zawartość</MainContent>
         <cssFile>default.css</cssFile>
         <jsFile>default.js</jsFile>
-        <Advanced>Advanced</Advanced>
+        <Advanced>Zaawansowane</Advanced>
         <Summary>Streszczenie</Summary>
         <name>#{word.name}</name>
         <title>Tytuł</title>
@@ -52,8 +52,8 @@
     <dialog>
       <label>
         <name>#{word.name}</name>
-        <active>Active</active>
-        <priority>Priority</priority>
+        <active>Aktywny</active>
+        <priority>Priorytet</priority>
         <content>Dane CSS</content>
       </label>
     </dialog>
@@ -63,8 +63,8 @@
     <dialog>
       <label>
         <name>#{word.name}</name>
-        <active>Active</active>
-        <priority>Priority</priority>
+        <active>Aktywny</active>
+        <priority>Priorytet</priority>
         <content>Dane JS</content>
       </label>
     </dialog>

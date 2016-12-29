@@ -293,10 +293,10 @@
   <ScriptAction>
     <dialog>
       <label>
-        <id>Id</id>
+        <id>ID</id>
         <name>Ime</name>
         <lifecycle>Življenjski cikel</lifecycle>
-        <homePath>Home Path</homePath>
+        <homePath>Pot domov</homePath>
         <targetWorkspace>Ciljni delovni prostor</targetWorkspace>
         <targetPath>Ciljna pot</targetPath>
       </label>
@@ -319,7 +319,7 @@
 <false>Napačno</false>
 <Electronic>Elektronska</Electronic>
 <Paper>Papir</Paper>
-<NONE>None</NONE>
+<NONE>Brez</NONE>
 <CLASSIFIED>Razvrščeni</CLASSIFIED>
 <UNCLASSIFIED>Nerazvrščeni</UNCLASSIFIED>
 <NOCONTRACT>Ni pogodbe</NOCONTRACT>
@@ -341,7 +341,7 @@
     <dialog>
       <label>
         <isDeep>Podrobneje</isDeep>
-        <nodetypes>Node Types</nodetypes>
+        <nodetypes>Vrste vozlišč</nodetypes>
         <affectedNodeTypeNames>Vpliva na vrste vozlišč</affectedNodeTypeNames>
       </label>
     </dialog>
@@ -351,7 +351,7 @@
     <dialog>
       <label>
         <isDeep>Podrobneje</isDeep>
-        <nodetypes>Node Types</nodetypes>
+        <nodetypes>Vrste vozlišč</nodetypes>
         <affectedNodeTypeNames>Vpliva na vrste vozlišč</affectedNodeTypeNames>
       </label>
     </dialog>
@@ -361,7 +361,7 @@
     <dialog>
       <label>
         <isDeep>Podrobneje</isDeep>
-        <nodetypes>Node Types</nodetypes>
+        <nodetypes>Vrste vozlišč</nodetypes>
         <affectedNodeTypeNames>Vpliva na vrste vozlišč</affectedNodeTypeNames>
       </label>
     </dialog>
@@ -371,7 +371,7 @@
     <dialog>
       <label>
         <isDeep>Podrobneje</isDeep>
-        <nodetypes>Node Types</nodetypes>
+        <nodetypes>Vrste vozlišč</nodetypes>
         <affectedNodeTypeNames>Vpliva na vrste vozlišč</affectedNodeTypeNames>
       </label>
     </dialog>

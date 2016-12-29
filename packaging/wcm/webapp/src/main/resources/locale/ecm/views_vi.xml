@@ -28,7 +28,7 @@
         <show-comments>Hiển thị bình luận</show-comments>
         <hide-comments>Ẩn bình luận</hide-comments>
         <comment-by>Bình luận bởi</comment-by>
-        <email>Email</email>
+        <email>Địa chỉ thư điện tử</email>
         <site>Trang</site>
         <lastComment>Last comment posted by {user} at {time}</lastComment>
         <Less_Than_A_Minute>chưa đến một phút trước</Less_Than_A_Minute>
@@ -54,7 +54,7 @@
         <pdf-max-size>The preview is not available for content larger than {0} MB.</pdf-max-size>
         <pdf-max-page>The preview is not available for content with over {0} pages.</pdf-max-page>
         <using-webDAV>hoặc mở bằng MS Office</using-webDAV>
-        <open-on-desktop>Open on Desktop</open-on-desktop>
+        <open-on-desktop>Mở trên máy tính</open-on-desktop>
         <open-in-documents>Open in Documents</open-in-documents>
         <open-in-documents-tooltip>Open this file in Documents app</open-in-documents-tooltip>
         <file-size-too-big>Nội dung của tệp tin này quá lớn. Bạn nên tải xuống và mở tại máy khách.</file-size-too-big>
@@ -87,7 +87,7 @@
   <Vote>
     <view>
       <label>
-        <avg-rating>Rate</avg-rating>
+        <avg-rating>Xếp loại Trung bình</avg-rating>
         <subscription>Số lượng bình chọn</subscription>
       </label>
     </view>

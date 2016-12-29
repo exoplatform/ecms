@@ -17,8 +17,8 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <not-support>You can't comment on this type of document.</not-support>
-      <not-checkedout>You must check out the document before commenting on it.</not-checkedout>
+      <not-support>あなたは、このタイプの文書にコメントすることができません。</not-support>
+      <not-checkedout>コメントする前にチェックアウトする必要があります。</not-checkedout>
       <content-null>コメントのコンテンツはnullか空です。コメントを入力してください。</content-null>
     </msg>
   </UICommentForm>
@@ -41,13 +41,13 @@
     </label>
     <button>
       <label>
-        <confirm>OK</confirm>
+        <confirm>Ok</confirm>
       </label>
     </button>
     <msg>
       <not-support>このタイプのドキュメントに対して投票は許されていません。</not-support>
-      <not-checkedout>You must check out the document to vote.</not-checkedout>
-      <vote-restriction>You can't vote more than once.</vote-restriction>
+      <not-checkedout>投票する前にチェックアウトする必要があります。</not-checkedout>
+      <vote-restriction>一度しか投票は出来ません。</vote-restriction>
     </msg>
   </UIVoteForm>
  
@@ -59,9 +59,9 @@
   <UIJCRExplorer>
     <msg>
       <refresh-session-success>セッションのリフレッシュに成功しました。</refresh-session-success>
-      <no-node-history>You are at the root folder.</no-node-history>
+      <no-node-history>ルートノードです。</no-node-history>
       <save-session-success>全ての変更は保存されました。</save-session-success>
-      <target-path-not-found>You can't access this path, either because it doesn't exist anymore or because you don't have access permissions.</target-path-not-found>
+      <target-path-not-found>ターゲットノードは見つかりません。</target-path-not-found>
     </msg>
   </UIJCRExplorer>
   <!--
@@ -109,14 +109,14 @@
   -->
   <UIDrivesBrowser>
     <title>
-      <PersonalDrives>Personal drives</PersonalDrives>
-      <GroupDrives>Group drives</GroupDrives>
-      <GeneralDrives>General drives</GeneralDrives>
+      <PersonalDrives>個人用ドライブ</PersonalDrives>
+      <GroupDrives>グループ用ドライブ</GroupDrives>
+      <GeneralDrives>一般用ドライブ</GeneralDrives>
     </title>
     <msg>
-      <no-view-found>There is no view available according to your access permissions in drive '{0}'.</no-view-found>
-      <access-denied>Access denied. You may not have permission in the workspace of drive '{0}'.</access-denied>
-      <workspace-not-exist>Drive '{0}' was stored in one unrecognized workspace. Please reconfigure this drive.</workspace-not-exist>
+      <no-view-found>ドライブ '{0}' のアクセス権限がないため表示できません。</no-view-found>
+      <access-denied>アクセスが拒否されました。ドライブ '{0}' のワークスペースの権限を持っていません。</access-denied>
+      <workspace-not-exist>ドライブ '{0}' は、 不明なワークスペースにストアされました。このドライブを再設定してください。</workspace-not-exist>
     </msg>
   </UIDrivesBrowser>
 
@@ -129,7 +129,7 @@
     <title>エクスプローラー</title>
     <label>
       <Root>ルート</Root>
-      <webDavView>Open in MS Office</webDavView>
+      <webDavView>MS Office で開く</webDavView>
     </label>
     <msg>
       <path-not-found>このノードは削除もしくは変更された可能性があります。リフレッシュボタンをクリックします。</path-not-found>
@@ -157,15 +157,15 @@
   <UIPreferencesForm>
     <title>ブラウジング設定のセットアップ</title>
     <label>
-      <enableStructure>Browse in structure mode:</enableStructure>
-      <showSideBar>Show sidebar:</showSideBar>
-      <showHiddenNode>Show hidden items:</showHiddenNode>
-      <showNonDocument>Show non-document items:</showNonDocument>
-      <showRefDocuments>Show referenced items:</showRefDocuments>
+      <enableStructure>DMS Structureの許可</enableStructure>
+      <showSideBar>スライドバーの表示</showSideBar>
+      <showHiddenNode>隠しノードの表示</showHiddenNode>
+      <showNonDocument>"non document"ノードの表示</showNonDocument>
+      <showRefDocuments>参照ドキュメントの表示</showRefDocuments>
       <enableDragAndDrop>ドラッグ &amp; ドロップの許可</enableDragAndDrop>
-      <sortBy>Sort order:</sortBy>
+      <sortBy>ソート順</sortBy>
       <order>Order by</order>
-      <nodesPerPage>Items per page:</nodesPerPage>
+      <nodesPerPage>ページ毎アイテム数:</nodesPerPage>
     </label>
     <action>
       <Back>#{word.close}</Back>
@@ -201,15 +201,15 @@
       <Back>#{word.back}</Back>
     </action>
     <msg>
-      <rename-successfull>'{0}' was renamed to '{1}' successfully.</rename-successfull>
-      <rename-denied>Access denied. You can't rename this item.</rename-denied>
+      <rename-successfull>ノード '{0}' は '{1}' への置き換えに成功しました</rename-successfull>
+      <rename-denied>アクセスできません。このノードの置き換えができません。</rename-denied>
       <fileName-invalid>新しい名前の中に無効な文字があります</fileName-invalid>
       <newName-same-oldName>新しい名前は古い名前と同じです。もう一度確認してください。</newName-same-oldName>
-      <version-exception>This document (or one of its ancestors) is not checked out.</version-exception>
-      <lock-exception>This document is locked. Please unlock it before renaming.</lock-exception>
-      <constraintViolation-exception>An error occurred while renaming '{0}'. Please check again.</constraintViolation-exception>
+      <version-exception>このノードはチェックアウトされていない可能性があります。</version-exception>
+      <lock-exception>このノードはロックされています。このノードを置き換える前にロックを解除してください。</lock-exception>
+      <constraintViolation-exception>'{0}' は親ノードタイプのため子ノードタイプとしてゆるされていません。</constraintViolation-exception>
       <unknown-prefix>接頭辞'{0}'はまだ登録されていません。</unknown-prefix>
-      <rename-error>An error occurred while renaming. Please check again.</rename-error>
+      <rename-error>エラーは、名前の変更は、このノード中に発生しました。もう一度確認してください。</rename-error>
     </msg>
   </UIRenameForm>
   <UIPopupWindow>
@@ -222,7 +222,7 @@
       <UIExportNode>ノードのエクスポート</UIExportNode>
       <UINodeTypeInfo>ノードタイプ情報</UINodeTypeInfo>
       <UIVersionInfo>バージョン情報</UIVersionInfo>
-      <UIActivateVersion>Activate Versioning</UIActivateVersion>
+      <UIActivateVersion>アクティベートバージョン</UIActivateVersion>
       <UIAuditingInfo>監査情報</UIAuditingInfo>
       <UIActivateAuditing>監査のアクティベート</UIActivateAuditing>
       <UIPermissionManager>権限管理</UIPermissionManager>
@@ -240,7 +240,7 @@
       <UIViewMetadataManager>メタデータ観覧</UIViewMetadataManager>
       <UIVoteForm>ドキュメント投票</UIVoteForm>
       <UICommentForm>コメントを書く</UICommentForm>
-      <UIPreferencesForm>Documents Browsing Preferences</UIPreferencesForm>
+      <UIPreferencesForm>設定</UIPreferencesForm>
       <UIPublicationManager>公開管理</UIPublicationManager>
       <UIConfirmMessage>削除の確認</UIConfirmMessage>
       <UIDeleteFileConfirmMessage>ファイルを削除しますか?</UIDeleteFileConfirmMessage>
@@ -250,12 +250,12 @@
       <UIActivePublication>公開ライフサイクルのための登録</UIActivePublication>
       <UITaggingForm>ドキュメントにタグ付け</UITaggingForm>
       <UIThumbnailForm>サムネイルイメージの追加</UIThumbnailForm>
-      <UIAllItemsPreferenceForm>Documents Browsing Preferences</UIAllItemsPreferenceForm>
+      <UIAllItemsPreferenceForm>設定</UIAllItemsPreferenceForm>
       <UISelectRestorePath>リストアパスの選択</UISelectRestorePath>
       <UISEOForm>SEO を管理</UISEOForm>
       <UISEOToolbarForm>SEO を管理</UISEOToolbarForm>
-      <UIReadOnlyFileConfirmMessage>Open Document</UIReadOnlyFileConfirmMessage>
-      <UIDocumentAutoVersionForm>Copy Document</UIDocumentAutoVersionForm>
+      <UIReadOnlyFileConfirmMessage>ドキュメントを開く</UIReadOnlyFileConfirmMessage>
+      <UIDocumentAutoVersionForm>文書のコピー</UIDocumentAutoVersionForm>
     </title>
     <header>
       <workspace>ワークスペース</workspace>
@@ -309,44 +309,44 @@
       <ViewMetadatas>メタデータ観覧</ViewMetadatas>
       <ViewRelations>関連の表示/隠す</ViewRelations>
       <ShowJCRStructure>Show/Hide Like JCR Structure</ShowJCRStructure>
-      <EditProperty>Edit Document Properties</EditProperty>
-      <UploadNewVersion>Upload a new version</UploadNewVersion>
+      <EditProperty>文書のプロパティを編集</EditProperty>
+      <UploadNewVersion>新しいバージョンをアップロード</UploadNewVersion>
     </tooltip>
     <msg>
-      <cannot-action-in-rootnode>You can't perform this action at root.</cannot-action-in-rootnode>
+      <cannot-action-in-rootnode>ルートノードでアクションできません。</cannot-action-in-rootnode>
       <node-checkedin>まず、チェックアウトする必要があります。</node-checkedin>
-      <cannot-enable-version-rootnode>Can't activate versioning on root.</cannot-enable-version-rootnode>
-      <cannot-enable-publication-rootnode>Can't activate publication at root.</cannot-enable-publication-rootnode>
+      <cannot-enable-version-rootnode>ルートノードでバージョンを許可することはできません。</cannot-enable-version-rootnode>
+      <cannot-enable-publication-rootnode>ルートノードで公開を許可することはできません。</cannot-enable-publication-rootnode>
       <manage-publication>
-        <not-supported-nodetype>Only documents can be published.</not-supported-nodetype>
+        <not-supported-nodetype>公開はドキュメントノードのみサポートされます。</not-supported-nodetype>
         <no-publication-lifecycle>未公開ライフサイクルは設定されています。</no-publication-lifecycle>
       </manage-publication>
-      <unsubcriber-lifecycle>The document was already unsubscribed.</unsubcriber-lifecycle>
-      <not-supported-nodetype>This operation is only supported for documents.</not-supported-nodetype>
-      <unsubcriber-lifecycle-finish>The document was unsubscribed successfully.</unsubcriber-lifecycle-finish>
-      <access-false>The document is not an article or checked in.</access-false>
+      <unsubcriber-lifecycle>ノードはもう購読されていません</unsubcriber-lifecycle>
+      <not-supported-nodetype>未購読のライフサイクルはドキュメントノードのみサポートしています</not-supported-nodetype>
+      <unsubcriber-lifecycle-finish>ノードは未サブスクライブすることに成功しました。</unsubcriber-lifecycle-finish>
+      <access-false>ノードは記事でないかチェックインされていません。</access-false>
       <unsupported-action>このノードは関連をサポートしていません。</unsupported-action>
-      <not-relationable>This document has no relations.</not-relationable>
-      <node-pasted>'{0}' has been pasted at the location '{1}'. This operation has already been saved.</node-pasted>
-      <no-node-selected>Nothing to copy.</no-node-selected>
-      <unable-edit>Editing documents of type '{1}' like '{0}' is not supported.</unable-edit>
-      <not-support>Can't edit the selected item.</not-support>
-      <template-null>This document has no form template.</template-null>
+      <not-relationable>このノードはまだ関連可能ではありません。</not-relationable>
+      <node-pasted>ノード '{0}' はロケーション '{1}'に貼り付けられました。このオペレーションは既に保存されており、フロッピーアイコンを押下する必要はありません。</node-pasted>
+      <no-node-selected>コピーされたノードなし</no-node-selected>
+      <unable-edit>ノードタイプ '{1}'のこのノード '{0}'は編集アクションをサポートしていません。</unable-edit>
+      <not-support>選択されたノードは編集できません。</not-support>
+      <template-null>このノードは有効なダイアログをもっていません。</template-null>
       <keyword-null>検索のためのキーワードはありません。</keyword-null>
       <not-found>検索結果なし！</not-found>
       <keyword-not-allow>このキーワードは許されていません。</keyword-not-allow>
-      <is-not-referenable>'{0}' can't be referenceable.</is-not-referenable>
-      <access-denied>Access denied. You don't have edit permission for this item.</access-denied>
-      <access-add-denied>Access denied. You don't have permission to add items here.</access-add-denied>
+      <is-not-referenable>ノード '{0}'は参照可能ではありません。</is-not-referenable>
+      <access-denied>アクセス出来ません. このノードの編集権限がありません。</access-denied>
+      <access-add-denied>アクセス出来ません. このノードの'追加'権限がありません。</access-add-denied>
       <item-existed>このノードは既に存在しています。ノード内で同じ名前を持つことはできません。</item-existed>
       <removed-hidden-mixin>隠し mixinの削除に成功しました！</removed-hidden-mixin>
       <added-hidden-mixin>隠し mixinの追加に成功しました！</added-hidden-mixin>
       <not-supported>この機能はドキュメントタイプのみサポートされました。</not-supported>
-      <empty-file-type>You can't add a document here.</empty-file-type>
-      <unsupported-watch>Only documents can be watched.</unsupported-watch>
-      <watch-checkedin>You must check out the document before watching.</watch-checkedin>
-      <unsupported-tagging>Only documents can be tagged.</unsupported-tagging>
-      <tagnode-checkedin>You must check out the document before tagging.</tagnode-checkedin>
+      <empty-file-type>このノードにドキュメントを追加することはできません。</empty-file-type>
+      <unsupported-watch>ドキュメントノードのみウオッチすることが出来ます。</unsupported-watch>
+      <watch-checkedin>ウオッチする前にノードをチェックアウトしなければなりません。</watch-checkedin>
+      <unsupported-tagging>ドキュメントノードのみタグ付け可能です。</unsupported-tagging>
+      <tagnode-checkedin>タギングの前にノードをチェックアウトしなければなりません。</tagnode-checkedin>
     </msg>
     <title>
       <select-tab>選択タブ</select-tab>
@@ -361,50 +361,50 @@
   </UIActionBar>
   <UIPopupMenu>
     <msg>
-      <has-not-permission>Access denied. You don't have permissions to add in this item.</has-not-permission>
-      <has-not-edit-permission>Access denied. You don't have edit permission here. Please contact the administrator.</has-not-edit-permission>
-      <cannot-login-node>You can't access and paste an item here.</cannot-login-node>
-      <cannot-paste-nodetype>You can't paste this type of item here.</cannot-paste-nodetype>
-      <has-not-permission-unlok>You don't have permission to unlock this document.</has-not-permission-unlok>
-      <bound-exception>You don't have the permission to rename this item. Please contact the administrator.</bound-exception>
-      <bound-move-exception>You can't move an item to itself or in a subfolder.</bound-move-exception>
-      <does-not-support-auditing>You can't activate auditing here.</does-not-support-auditing>
-      <can-not-rename-node>You don't have permission to rename this item. Please contact the administrator to get the necessary rights.</can-not-rename-node>
-      <can-not-cut-node>You don't have permission to cut this item. Please contact the administrator.</can-not-cut-node>
-      <can-not-remove-node>You don't have permission to remove this item. Please contact the administrator.</can-not-remove-node>
-      <can-not-lock-node>You don't have permission to lock {0}. Please contact the administrator.</can-not-lock-node>
-      <can-not-unlock-node>You don't have permission to unlock this item. Please contact the administrator.</can-not-unlock-node>
-      <no-node>Please select at least one item before pasting.</no-node>
-      <can-not-paste-node>You don't have permission to move to this item. Please contact the administrator.</can-not-paste-node>
-      <can-not-move-node>You don't have permission to move this item. Please contact the administrator.</can-not-move-node>
-      <does-not-support-versioning>You don't have permission to move. Please contact the administrator.</does-not-support-versioning>
+      <has-not-permission>アクセス出来ません. このノードの'追加'権限を持っていません。</has-not-permission>
+      <has-not-edit-permission>アクセス出来ません。このノードの編集権限を持っていません。正しい権限を得る為に管理者にコンタクトしてください。</has-not-edit-permission>
+      <cannot-login-node>このノードにアクセスおよび貼り付けることは出来ません。</cannot-login-node>
+      <cannot-paste-nodetype>ここにノードを貼付ける事ができません。</cannot-paste-nodetype>
+      <has-not-permission-unlok>このノードをロック解除するための権限がありません。</has-not-permission-unlok>
+      <bound-exception>サブノード内のそれ自身に切取りもしくは貼り付けできません。</bound-exception>
+      <bound-move-exception>それ自身、もしくはサブノードに移動することは出来ません。</bound-move-exception>
+      <does-not-support-auditing>このノードで監査機能を有効にすることは出来ません。</does-not-support-auditing>
+      <can-not-rename-node>このノードで名前変更するための権限がありません。正しい権限を得る為に管理者にコンタクトしてください。</can-not-rename-node>
+      <can-not-cut-node>このノードを切り取る権限がありません。正しい権限を得る為に管理者にコンタクトしてください。</can-not-cut-node>
+      <can-not-remove-node>このノードを削除する権限がありません。正しい権限を得る為に管理者にコンタクトしてください。</can-not-remove-node>
+      <can-not-lock-node>You do not have permission to lock node {0}. Please contact the administrator to get the correct right.</can-not-lock-node>
+      <can-not-unlock-node>このノードをロック解除する権限がありません。正しい権限を得る為に管理者にコンタクトしてください。</can-not-unlock-node>
+      <no-node>貼り付けるために選択されたノードがありません。</no-node>
+      <can-not-paste-node>このノードを貼り付ける権限がありません。正しい権限を得る為に管理者にコンタクトしてください。</can-not-paste-node>
+      <can-not-move-node>このノードを貼り付ける権限がありません。管理者に連絡して正しい権限を割り当ててもらってください。</can-not-move-node>
+      <does-not-support-versioning>バージョンニングはこのノードでサポートされていません。</does-not-support-versioning>
       <path-not-found>このノードは削除されたか変更されました。リフレッシュボタンをクリックしてください。</path-not-found>
-      <paste-lock-exception>'{0}' can't be pasted here. Make sure it is not locked nor this folder. Also check that no related document is locked.</paste-lock-exception>
-      <can-not-checkin-node>You can't check in this item. Please check that you have the necessary permissions.</can-not-checkin-node>
-      <can-not-checkout-node>You can't check out this item. Please check that you have the necessary permissions.</can-not-checkout-node>
-      <move-constraint-exception>An error occurred while moving this item.</move-constraint-exception>
-      <not-lock-owner>You can't unlock this document because you are not the lock owner.</not-lock-owner>
-      <is-checked-in>Please check out this document before renaming.</is-checked-in>
-      <is-checked-in-lock>Please check out this document before locking.</is-checked-in-lock>
-      <cant-lock>You can't lock this document.</cant-lock>
+      <paste-lock-exception>ソース・ノードまたは転送先のノードはロックされているか、ロックされたノードとの関連があるため、ノードに'{0}'を貼付けることができません。</paste-lock-exception>
+      <can-not-checkin-node>このノードにチェックインできません。正しい権限をチェックしてください！</can-not-checkin-node>
+      <can-not-checkout-node>このノードをチェックアウトできません。正しい権限をチェックしてください！</can-not-checkout-node>
+      <move-constraint-exception>ノードを移動する際の制限に関する問題が発生しました。ソースノードと転送先のノードをチェックしてください。</move-constraint-exception>
+      <not-lock-owner>このノードをロック解除できません。ロックオーナーではありません。</not-lock-owner>
+      <is-checked-in>名前を変更する前にこのノードをチェックアウトしてください。</is-checked-in>
+      <is-checked-in-lock>ロックする前にこのノードをチェックアウトしてください。</is-checked-in-lock>
+      <cant-lock>このノードはロックできません。</cant-lock>
       <node-locked>パス{0} もしくは上位レベルのアイテムはロックされています。</node-locked>
-      <can-not-delete>Please close this document before deleting.</can-not-delete>
-      <can-not-delete-version>You can't delete this document. It's versioned.</can-not-delete-version>
-      <not-support>You can't delete the selected item. Please select another one.</not-support>
-      <current-node-not-allow-paste>You can't paste the copied item there.</current-node-not-allow-paste>
-      <copied-node-in-versioning>You can't paste the copied item here because it's versioned.</copied-node-in-versioning>
-      <parent-node-locked>You don't have permission to unlock '{0}'.</parent-node-locked>
-      <this-node-locked-by-parent>You can't unlock this item. Parent folder is locked.</this-node-locked-by-parent>
-      <paste-node-same-name>Can't paste this item here. An item with the same name already exists in the destination folder.</paste-node-same-name>
-      <has-not-add-permission>You don't have the permission to add here.</has-not-add-permission>
-      <node-cutting>Item is being cut. You can't paste it here.</node-cutting>
-      <access-denied>Access denied. You may not have the permission.</access-denied>
-      <remove-verion-exception>You can't remove this document because it is checked in.</remove-verion-exception>
-      <remove-referentialIntegrityException>You can't delete this item because it is currently referenced by another one.</remove-referentialIntegrityException>
-      <constraintviolation-exception>The mandatory property jcr:uuid was not found. The document may have been deleted or changed. Please click the Refresh button.</constraintviolation-exception>
-      <path-not-found-exception>This document was deleted or changed. Please click the Refresh button.</path-not-found-exception>
+      <can-not-delete>削除する前にこのノードを閉じる。</can-not-delete>
+      <can-not-delete-version>このノードを削除することが出来ません。バージョニングです。</can-not-delete-version>
+      <not-support>選択されたノードは編集できません。他のものを選択してください！</not-support>
+      <current-node-not-allow-paste>コピーされたノードタイプはこのノードに貼り付けることを許されていませんでした。</current-node-not-allow-paste>
+      <copied-node-in-versioning>バージョニング中のコピーされたノードは貼り付け出来ません。</copied-node-in-versioning>
+      <parent-node-locked>ノード '{0}'をロック解除する為の権限がありません。</parent-node-locked>
+      <this-node-locked-by-parent>親もしくは他のノードにロックされたノードはロック解除できません。</this-node-locked-by-parent>
+      <paste-node-same-name>目標のフォルダは同じ名前の2つのノードを許しません。</paste-node-same-name>
+      <has-not-add-permission>新しいノードを追加するための権限を持っていません。</has-not-add-permission>
+      <node-cutting>ノードは切り抜きです。ここには貼り付けできません。</node-cutting>
+      <access-denied>アクセス出来ません! このノードの権限を持っていない可能性があります。</access-denied>
+      <remove-verion-exception>削除できません。このノード群はチェックインされています。</remove-verion-exception>
+      <remove-referentialIntegrityException>このノードを削除できません。リファレンスプロパティのターゲットです。</remove-referentialIntegrityException>
+      <constraintviolation-exception>必須アイテム jcr:uuid は見つかりません。削除されたか変更されたノードかもしれません。リフレッシュボタンをクリックしてください。</constraintviolation-exception>
+      <path-not-found-exception>このノードは削除もしくは変更されました。リフレッシュボタンをクリックしてください。</path-not-found-exception>
       <not-exist-categories>カテゴリは存在しません。</not-exist-categories>
-      <lock-node-read-only>This file is locked by user {0}. Open read-only ?</lock-node-read-only>
+      <lock-node-read-only>このファイルは、ユーザー {0} によってロックされています。読み取り専用として開きますか？</lock-node-read-only>
     </msg>
   </UIPopupMenu>
   <!--
@@ -428,12 +428,12 @@
       <title-invalid>タイトルを入力してください!</title-invalid>
       <name-not-allowed>この名前は許されていません。</name-not-allowed>
       <fileName-error>無効なファイル名</fileName-error>
-      <constraint-violation>You can't add a document of type '{0}' here.</constraint-violation>
+      <constraint-violation>現在のノードは '{0}' ノードタイプを追加することが許されていません。</constraint-violation>
       <repository-exception>アクセス出来ません！このフォルダに権限を追加できません。</repository-exception>
-      <repository-exception-permission>You don't have the permission to add a new folder here.</repository-exception-permission>
+      <repository-exception-permission>このノードに新しいフォルダを追加するための権限がありません。</repository-exception-permission>
       <numberformat-exception>フォルダを保存できません。与えられた名前はナンバーフォーマットである必要があります。</numberformat-exception>
       <!--DMS 2.4.x; ECM-3553-->
-      <not-allow-sameNameSibling>You can't save the folder. An item with the same name already exists.</not-allow-sameNameSibling>
+      <not-allow-sameNameSibling>保存できません。このノードは同じ名前で2つのノードが許されていません。</not-allow-sameNameSibling>
       <ntFolder-not-avaiable>カスタムフォルダーを選択してください。</ntFolder-not-avaiable>
     </msg>
     <help>
@@ -500,26 +500,26 @@
       <feedback-restore>'{0}' は、正常に復元されました。</feedback-restore>
       <feedback-restore-multi>{0} アイテムは、正常に復元されました。</feedback-restore-multi>
       
-      <confirm-restore>A '{0}' item already exists at the previous location. Are you sure you want to restore it?</confirm-restore>
+      <confirm-restore>同じ名前のノードがノード'{0}' の古いロケーションにも存在します。このノードをリストアしますか？</confirm-restore>
       <confirm-move>移動しますか？</confirm-move>
-      <node-cut>'{0}' has been cut.</node-cut>
+      <node-cut>ノード '{0}' を切取ります。</node-cut>
       <execute-successfully>カスタムアクション '{0}' は実行されます。</execute-successfully>
-      <save-node-success>'{0}' has been saved.</save-node-success>
-      <move-problem>You can't move '{0}' to '{1}' because there was a problem with permissions or constraint conditions.</move-problem>
+      <save-node-success>ノード '{0}' は保存されます。</save-node-success>
+      <move-problem>ノード '{0}' を '{1}' に移動する事が出来ません。権限もしくは、制約の条件に問題があります。</move-problem>
     </msg>
   </UIWorkingArea>
   <UIDocumentWorkspace>
     <label>
-      <no-children>This item doesn't have children.</no-children>
-      <no-children-but-has-hidden>This folder does not have any item, but there are some hidden files.</no-children-but-has-hidden>
+      <no-children>このノードは子を持っていません。</no-children>
+      <no-children-but-has-hidden>このノードは子を持っていませんが、いくつかの隠しファイルがあります。</no-children-but-has-hidden>
     </label>
     <msg>
-      <unable-save-node>'{0}' has been created. Please save session to validate this action.</unable-save-node>
-      <save-node-success>'{0}' has been saved.</save-node-success>
-      <node-copied>'{0}' has been copied.</node-copied>
-      <node-cut>'{0}' has been cut.</node-cut>
-      <remove-root>You can't remove the root folder.</remove-root>
-      <node-remove-success>'{0}' has been removed.</node-remove-success>
+      <unable-save-node>ノード '{0}' は新しく作成された物です。このアクションを実行する前にセッションを保存する必要があります。</unable-save-node>
+      <save-node-success>ノード '{0}' は保存されました。</save-node-success>
+      <node-copied>ノード '{0}'はコピーされています。.</node-copied>
+      <node-cut>ノード '{0}' は切り取られています。</node-cut>
+      <remove-root>ルートノードを取り除くことができません。</remove-root>
+      <node-remove-success>ノード '{0}' は取り除かれます。</node-remove-success>
     </msg>
     <tooltip>
       <Rename>名前変更</Rename>
@@ -538,11 +538,11 @@
   </UIDocumentWorkspace>
   <UIDocumentInfo>
     <msg>
-      <access-denied>Access denied. You can't access '{0}'.</access-denied>
-      <null-exception>Item not found. It was either removed or changed, or you don't have the access permission.</null-exception>
+      <access-denied>アクセス出来ません！ノード'{0}'にアクセスできません。</access-denied>
+      <null-exception>アイテムは見つかりません！削除されたかアイテムは変更された、もしくはこのノードにアクセスするための権限がありません。</null-exception>
       <confirm-deleteattachment>この添付ファイルを削除しますか？</confirm-deleteattachment>
       <confirm-deleteattcomment>このコメントを削除しますか？</confirm-deleteattcomment>
-      <access-denied-exception>Access denied. You may not have reading privileges, or the documen may have been removed or changed.</access-denied-exception>
+      <access-denied-exception>アクセス出来ません! 読み込み権限を持っていないかノードが削除されたもしくは変更された可能性があります。</access-denied-exception>
       <path-not-found>このノードは削除もしくは変更された可能性があります。リフレッシュボタンをクリックします。</path-not-found>
     </msg>
     <tooltip>
@@ -596,12 +596,12 @@
       <MoveToTrash>ゴミ箱へ移動</MoveToTrash>
       <RestoreFromTrash>ゴミ箱からリストア</RestoreFromTrash>
       <EmptyTrash>ゴミ箱を空にする</EmptyTrash>
-      <WebDavView>Open in MS Office</WebDavView>
-      <Download>Download</Download>
-      <OpenDocument>Remote Edit</OpenDocument>
-      <EditProperty>Edit Document Properties</EditProperty>
-      <UploadNewVersion>Upload a new version</UploadNewVersion>
-      <CreateNewVersion>Save as new version</CreateNewVersion>
+      <WebDavView>MS Office で開く</WebDavView>
+      <Download>ダウンロード</Download>
+      <OpenDocument>リモート編集</OpenDocument>
+      <EditProperty>文書のプロパティを編集</EditProperty>
+      <UploadNewVersion>新しいバージョンをアップロード</UploadNewVersion>
+      <CreateNewVersion>新しいバージョンとして保存</CreateNewVersion>
     </event>
   </ECMContextMenu>
  
@@ -712,17 +712,17 @@
       <namespace>ネームスペース</namespace>
       <multiple>複合</multiple>
       <property_select>新しいプロパティを追加</property_select>
-      <value0>Value 0</value0>
-      <value1>Value 1</value1>
-      <value2>Value 2</value2>
-      <value3>Value 3</value3>
-      <value4>Value 4</value4>
-      <value5>Value 5</value5>
-      <value6>Value 6</value6>
-      <value7>Value 7</value7>
-      <value8>Value 8</value8>
-      <value9>Value 9</value9>
-      <value10>Value 10</value10>
+      <value0>値 0</value0>
+      <value1>値 1</value1>
+      <value2>値 2</value2>
+      <value3>値 3</value3>
+      <value4>値 4</value4>
+      <value5>値 5</value5>
+      <value6>値 6</value6>
+      <value7>値 7</value7>
+      <value8>値 8</value8>
+      <value9>値 9</value9>
+      <value10>値 10</value10>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -733,8 +733,8 @@
       <name-invalid>名前を入力する必要があります！</name-invalid>
       <unable-create>プロパティの追加は出来ません！</unable-create>
       <value-invalid>値の入力は必須です！</value-invalid>
-      <node-checkedin>You must check out this item before adding a property.</node-checkedin>
-      <can-not-add>You can't add properties to this item. This is only allowed for the type nt:unstructured.</can-not-add>
+      <node-checkedin>プロパティを追加する前にこのノードをチェックアウトする必要があります。</node-checkedin>
+      <can-not-add>このノードのためにプロパティを追加することはできません。ノードタイプは nt:unstructured です。</can-not-add>
       <propertyName-invalid>プロパティ名はnamespace(ex: namespace:name)を含みます。</propertyName-invalid>
       <propertyName-exist>プロパティ '{0}' は存在します。</propertyName-exist>
       <propertyValu-null>いくつかの値がnullの可能性があります。</propertyValu-null>
@@ -795,7 +795,7 @@
       <selectUser>ユーザの選択</selectUser>
     </label>
     <msg>
-      <not-change-owner>'{0}' is the owner of this item and has full control permission.</not-change-owner>
+      <not-change-owner>'{0}' はノードのオーナーであり、すべてのコントロール権限を持っています。</not-change-owner>
     </msg>
   </UIGroupSelector>
   <UIPermissionForm>
@@ -807,7 +807,7 @@
       <add_node>右を変更</add_node>
       <remove>権限の削除</remove>
     </label>
-    <title>Add a permission</title>
+    <title>このノードへ権限を追加</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>#{word.save}</Save>
@@ -914,7 +914,7 @@
   </ViewSearch>
   <UISearchResult>
     <msg>
-      <not-support>There is no View template for this document.</not-support>
+      <not-support>このノードのためのビューテンプレートはありません。</not-support>
       <empty>結果はありません</empty>
       <access-denied>このノードを表示できません。なぜならこのテンプレートはサポートされていないかアクセスできません!</access-denied>
       <query-invalid>クエリは無効です。</query-invalid>
@@ -939,15 +939,15 @@
       <datecreatedDESC>降順の作成日付でソート</datecreatedDESC>
     </title>
     <tooltip>
-      <View>View this item</View>
+      <View>このノードの観覧</View>
       <OpenFolder>フォルダへ移動</OpenFolder>
     </tooltip>
   </UISearchResult>
   <UIShowAllOwnedByUserResult>
     <msg>
-      <not-support>There is no View template for this document</not-support>
+      <not-support>このノードのための観覧テンプレートはありません。</not-support>
       <empty>結果はありません</empty>
-      <access-denied>You can't view this document, either because this template is not supported or because access is denied.</access-denied>
+      <access-denied>このノードを表示できません。なぜならこのテンプレートはサポートされていないかアクセスできません!</access-denied>
       <query-invalid>クエリは無効です。</query-invalid>
     </msg>
     <header>
@@ -970,15 +970,15 @@
       <datecreatedDESC>降順の作成日付でソート</datecreatedDESC>
     </title>
     <tooltip>
-      <View>View this item</View>
+      <View>このノードの観覧</View>
       <OpenFolder>フォルダへ移動</OpenFolder>
     </tooltip>
   </UIShowAllOwnedByUserResult>
   <UIShowAllFavouriteResult>
     <msg>
-      <not-support>There is no View template for this item</not-support>
+      <not-support>このノードのための観覧テンプレートはありません。</not-support>
       <empty>結果はありません</empty>
-      <access-denied>You can't view this item, either because this template is not supported or because access is denied.</access-denied>
+      <access-denied>このノードを表示できません。なぜならこのテンプレートはサポートされていないかアクセスできません!</access-denied>
       <query-invalid>クエリは無効です。</query-invalid>
     </msg>
     <header>
@@ -1001,15 +1001,15 @@
       <datecreatedDESC>降順の作成日付でソート</datecreatedDESC>
     </title>
     <tooltip>
-      <View>View this item</View>
+      <View>このノードの観覧</View>
       <OpenFolder>フォルダへ移動</OpenFolder>
     </tooltip>
   </UIShowAllFavouriteResult>
   <UIShowAllHiddenResult>
     <msg>
-      <not-support>There is no View template for this item.</not-support>
+      <not-support>このノードのための観覧テンプレートはありません。</not-support>
       <empty>結果はありません</empty>
-      <access-denied>You can't view this item, either because it has no View template or because you don't have access to it.</access-denied>
+      <access-denied>このノードを表示できません。なぜならこのテンプレートはサポートされていないかアクセスできません!</access-denied>
       <query-invalid>クエリは無効です。</query-invalid>
     </msg>
     <header>
@@ -1033,16 +1033,16 @@
       <datecreatedDESC>降順の作成日付でソート</datecreatedDESC>
     </title>
     <tooltip>
-      <View>View this Item</View>
+      <View>このノードの観覧</View>
       <OpenFolder>フォルダへ移動</OpenFolder>
       <RemoveHiddenAttribute>隠し要素の削除</RemoveHiddenAttribute>
     </tooltip>
   </UIShowAllHiddenResult>
   <UIShowAllTrashResult>
     <msg>
-      <not-support>There is no View template for this item.</not-support>
+      <not-support>このノードのための観覧テンプレートはありません。</not-support>
       <empty>結果はありません</empty>
-      <access-denied>You can't view this item, either because it has no View template or because you don't have access to it.</access-denied>
+      <access-denied>このノードを表示できません。なぜならこのテンプレートはサポートされていないかアクセスできません!</access-denied>
       <query-invalid>クエリは無効です。</query-invalid>
     </msg>
     <header>
@@ -1065,7 +1065,7 @@
       <datecreatedDESC>降順の作成日付でソート</datecreatedDESC>
     </title>
     <tooltip>
-      <View>View this Item</View>
+      <View>このノードの観覧</View>
       <OpenFolder>フォルダへ移動</OpenFolder>
       <DeletePermanently>永続的な削除</DeletePermanently>
       <RestoreFromTrash>ゴミ箱からリストア</RestoreFromTrash>
@@ -1321,7 +1321,7 @@
       <Cancel>#{word.cancel}</Cancel>
       <Export>エクスポート</Export>
     </action>
-    <title>Export</title>
+    <title>ノードエクスポート</title>
   </UIExportNode>
   <!--
   ###############################################################################
@@ -1330,7 +1330,7 @@
   -->
   <PopupUserSelector>
     <title>
-      <UIUserContainer>Permission Selector</UIUserContainer>
+      <UIUserContainer>権限の選択</UIUserContainer>
     </title>
   </PopupUserSelector>
   <UIPopupTaxonomy>
@@ -1345,13 +1345,13 @@
   ###############################################################################
   -->
   <UIVersionInfo>
-    <title>Version history</title>
+    <title>バージョン履歴</title>
     <summary>
-      <empty>Click here to add a summary</empty>
+      <empty>ここをクリックして要約を追加します</empty>
     </summary>
     <tooltip>
-      <version>Version</version>
-      <baseVersion>current version</baseVersion>
+      <version>バージョン</version>
+      <baseVersion>ベースバージョン</baseVersion>
       <addLabel>ラベルの追加</addLabel>
       <removeLable>ラベルの削除</removeLable>
       <restoreVersion>バージョンのリストア</restoreVersion>
@@ -1362,22 +1362,22 @@
     <msg>
       <have-no-view-template>ビューテンプレートはサポートされていません。</have-no-view-template>
       <cannot-remove-version>ベースバージョンは削除できません。</cannot-remove-version>
-      <error-removing-version>An error occurred while deleting this version.</error-removing-version>
-      <error-removing-referenced-version>This version is referenced and can't be removed.</error-removing-referenced-version>
-      <confirm-restore>Are you sure you want to restore this version?</confirm-restore>
+      <error-removing-version>このバージョンを削除中にエラーが発生しました。</error-removing-version>
+      <error-removing-referenced-version>このバージョンが参照され、削除することはできません。</error-removing-referenced-version>
+      <confirm-restore>本当にこのバージョンを復元してもよろしいですか？</confirm-restore>
       <confirm-delete>本当にこのバージョンを削除しますか？</confirm-delete>
-      <not-checked-out>You have to check out this document before restoring.</not-checked-out>
-      <invalid-item-state>You can't restore this version, either because one or more items were deleted or moved by another session.</invalid-item-state>
+      <not-checked-out>リストアする前にこのノードをチェックアウトする必要があります。</not-checked-out>
+      <invalid-item-state>このバージョンをリストアできません。一つもしくは複数のアイテムが他のセッションで削除、もしくは削除された可能性があります。</invalid-item-state>
     </msg>
     <action>
       <close>#{word.close}</close>
       <close-view>ビューを閉じる</close-view>
-      <compare-versions>Compare selected versions</compare-versions>
+      <compare-versions>選択したバージョンを比較</compare-versions>
     </action>
     <labels>
       <version>バージョン</version>
       <date>日時</date>
-      <author>Modified By</author>
+      <author>更新者</author>
       <summary>サマリ</summary>
       <action>アクション</action>
     </labels>
@@ -1392,8 +1392,8 @@
       <noVersion>バージョンなし</noVersion>
     </msg>
     <eventName>
-      <e_1>Added</e_1>
-      <e_2>Document Removed</e_2>
+      <e_1>追加されたノード</e_1>
+      <e_2>削除されたノード</e_2>
       <e_4>追加されたプロパティ</e_4>
       <e_16>変更されたプロパティ</e_16>
       <e_8>削除されたプロパティ</e_8>
@@ -1433,13 +1433,13 @@
   -->
   <UIActivateVersion>
     <label>
-      <note>Versioning has not been activated for this document.</note>
+      <note>バージョニングはこのノードでアクティベートしませんでした。</note>
       <question>アクティベートしたいですか？</question>
       <button-active>アクティベート</button-active>
       <button-cancel>#{word.cancel}</button-cancel>
     </label>
     <msg>
-      <access-denied>You don't have permission to activate versioning on this document</access-denied>
+      <access-denied>このノード上のバージョン管理を有効にする権限がありません。</access-denied>
     </msg>
   </UIActivateVersion>
   <!--
@@ -1462,7 +1462,7 @@
       </msg>
     </grid>
     <msg>
-      <node-type-invalid>Only documents can be enrolled.</node-type-invalid>
+      <node-type-invalid>ドキュメントノードタイプだけが登録できます。</node-type-invalid>
       <already-enroled>このドキュメントは既に登録されています。</already-enroled>
     </msg>
   </UIActivePublication>
@@ -1473,7 +1473,7 @@
   -->
   <UIActivateAuditing>
     <label>
-      <note>Auditing has not been activated for this document.</note>
+      <note>監査はこのノードでアクティベートされません。</note>
       <question>アクティベートしたいですか？</question>
     </label>
     <action>
@@ -1488,16 +1488,16 @@
   -->
   <UIDiff>
     <label>
-      <backTo>Back to version history</backTo>
+      <backTo>バージョン履歴へ戻る</backTo>
       <diffTitle>2バージョン間の比較</diffTitle>
-      <noContent>There is no content to compare</noContent>
+      <noContent>比較するないコンテンツはありません</noContent>
       <compareVerion>バージョン</compareVerion>
       <can-not-compare>2バージョンの比較に失敗しました。</can-not-compare>
-      <compare-unavailable>Version comparison is not available for this document</compare-unavailable>
-      <DateChange>On {0}</DateChange>
-      <PreviousAndNextCompare>Changes from {0} to {1}</PreviousAndNextCompare>
+      <compare-unavailable>この文書ではバージョン比較ができません</compare-unavailable>
+      <DateChange>{0} に</DateChange>
+      <PreviousAndNextCompare>{0} から {1} へ変更</PreviousAndNextCompare>
       <ComparedWith>比較：</ComparedWith>
-      <restoredFrom>Restored from version {0}</restoredFrom>
+      <restoredFrom>バージョン{0}から復元</restoredFrom>
     </label>
   </UIDiff>
   <!--
@@ -1516,16 +1516,16 @@
       <Cancel>#{word.cancel}</Cancel>
       <Import>インポート</Import>
     </action>
-    <title>Import</title>
+    <title>ノードインポート</title>
     <msg>
       <import-successful>インポートに成功！</import-successful>
       <filename-invalid>インポートするための'アップロードファイル' フィールドの為のXMLファイルをブラウズ</filename-invalid>
       <filetype-error>アップロードされたファイルからノードをインポートできません。無効なファイルの可能性があります。</filetype-error>
-      <xml-invalid>There is an invalid character at position [row, column]:{0} in {1} file</xml-invalid>
+      <xml-invalid>ファイル {1} の[行と列]:{0} の位置に不正な文字が存在します。</xml-invalid>
       <mimetype-invalid>XMLファイルもしくはZIPファイルのみがインポートすることをサポートされています。</mimetype-invalid>
       <access-denied>アクセス出来ません! インポートする事が許されていません。</access-denied>
-      <constraint-violation-exception>Impossible to import data. The type '{0}' is not allowed at this location.</constraint-violation-exception>
-      <item-exists-exception>An incoming item has the same UUID as an existing item in the workspace.</item-exists-exception>
+      <constraint-violation-exception>データをインポートすることが出来ません。型 '{0}' は、この位置に許可されていません。</constraint-violation-exception>
+      <item-exists-exception>An incoming referenceable node has the same UUID as a node existing in the workspace! UUID: '{0}'</item-exists-exception>
     </msg>
   </UIImportNode>
   <!--
@@ -1573,7 +1573,7 @@
   <UIViewVersion>
     <label>
       <nodeType>ノードタイプ</nodeType>
-      <nodeName>Name</nodeName>
+      <nodeName>ノード名</nodeName>
       <VersionNumber>バージョン番号</VersionNumber>
       <VersionLabels>バージョンラベル</VersionLabels>
       <VersionDate>バージョン日付</VersionDate>
@@ -1609,7 +1609,7 @@
       <action>アクション</action>
     </header>
     <msg>
-      <access-denied>Access denied. You don't have access permission.</access-denied>
+      <access-denied>アクセス出来ません!このノードは十分な権限を持っていません。</access-denied>
       <confirm-delete>本当にこの関連を削除しますか？</confirm-delete>
     </msg>
     <action>
@@ -1629,7 +1629,7 @@
       <action>アクション</action>
     </header>
     <info>
-      <child-not-found>This item doesn't have any child.</child-not-found>
+      <child-not-found>このノードは子を持っていません。</child-not-found>
     </info>
   </UITreeList>
   <!--
@@ -1685,8 +1685,8 @@
       <clearall>全てをクリア</clearall>
     </action>
     <msg>
-      <unable-pasted>Can't paste this item.</unable-pasted>
-      <node-pasted>{0} has been pasted at location {1}. This operation has already been saved.</node-pasted>
+      <unable-pasted>このノードを貼り付け出来ません。</unable-pasted>
+      <node-pasted>ノード {0} はロケーション {1}に貼付ける事が出来ません。操作は既に保存され、フロッピーアイコンを押下する必要はありません。</node-pasted>
     </msg>
   </UIClipboard>
   <!--
@@ -1727,15 +1727,15 @@
 </tooltip>
     <msg>
       <cannot-save>制約はアクションの最中に破棄されました。</cannot-save>
-      <in-versioning>Please check out the current folder before adding a new item.</in-versioning>
+      <in-versioning>新しいノードを追加する前に現在のノードをチェックアウトする必要</in-versioning>
       <not-support>'{0}' のテンプレートをロード出来ませんでした。</not-support>
       <value-invalid>'{0}' は必要とされる値です。</value-invalid>
       <repository-exception>このドキュメントを保存できません。制約はアクションの最中に破棄されました。</repository-exception>
       <!--DMS 2.4.x; ECM-3543-->
-      <repository-exception-permission>You don't have permission to add a new document to this folder.</repository-exception-permission>
+      <repository-exception-permission>ノード上で新しいドキュメントを追加するための権限がありません。</repository-exception-permission>
       <not-allowed-same-name-sibling>このドキュメントを保存できません。 このノードは同じ名前を許されていません。</not-allowed-same-name-sibling>
       <numberformat-exception>このドキュメントを保存できません。与えられた名前はナンバーフォーマットである必要があります。</numberformat-exception>
-      <item-not-found>Document not found. This document (or its ancestor) may have been deleted. Please click the Refresh button.</item-not-found>
+      <item-not-found>アイテムは見つかりません！ノードは削除された可能性があります。リフレッシュボタンをクリックしてください。</item-not-found>
     </msg>
   </UIDocumentForm>
   <!--
@@ -1800,7 +1800,7 @@
       <action>アクション</action>
     </header>
     <msg>
-      <remove-popup-first>You must close the edit pop-up before deleting this item.</remove-popup-first>
+      <remove-popup-first>このノードを削除する前に編集ポップアップを閉じる必要があります。</remove-popup-first>
       <confirm-delete-action>このアクションを削除したいですか？</confirm-delete-action>
       <template-empty>'{0}' のテンプレートはnullか空です。</template-empty>
       <template-null>テンプレートはnullか、このテンプレートにアクセスするための十分な権限がありません。</template-null>
@@ -1826,7 +1826,7 @@
       <numberformat-exception>このアクションを保存できません。 提供された名前はナンバーフォーマットで無ければなりません。</numberformat-exception>
       <existed-action>アクション名 '{0}' は存在するため別の名前を選択してください。</existed-action>
       <unable-add-action>このアクションを追加できません</unable-add-action>
-      <unable-add>Can't add this action. This item is either the root folder or you don't have the permission to edit.</unable-add>
+      <unable-add>このアクションを追加できません! このノードはrootもしくは十分な権限がありません。</unable-add>
       <not-support>ダイアログ '{0}' はサポートされません。</not-support>
       <no-permission-add>アクセス出来ません! アクションを追加する権限がありません。</no-permission-add>
       <access-denied>アクセス出来ません! このテンプレートにアクセスするための権限がありません。</access-denied>
@@ -1865,7 +1865,7 @@
   <UIAddressBar>
     <msg>
       <path-not-found>パスは見つかりません</path-not-found>
-      <access-denied>Access denied. You don't have the permission to read.</access-denied>
+      <access-denied>アクセス出来ません! ノードを読む為の権限がありません。</access-denied>
       <keyword-not-support>検索キーワードが有効できはありません。認識されない文字列が存在しています。</keyword-not-support>
     </msg>
     <label>
@@ -1874,8 +1874,8 @@
     </label>
     <title>
       <exeButton>移動</exeButton>
-      <backButton>Back</backButton>
-      <showHistory>Show History</showHistory>
+      <backButton>前のノードの戻る</backButton>
+      <showHistory>履歴アドレスの表示</showHistory>
       <changeNode>変更ノード</changeNode>
     </title>
   </UIAddressBar>
@@ -1919,7 +1919,7 @@
     <msg>
       <name-exist>タグ名 '{0}' は存在します。</name-exist>
       <tagName-invalid>タグ名は無効な文字を含みます。</tagName-invalid>
-      <tagName-empty-or-invalid>The tag name is empty or contains some invalid characters.</tagName-empty-or-invalid>
+      <tagName-empty-or-invalid>タグ名が空か、不正な文字が含まれています。</tagName-empty-or-invalid>
       <tag-name-empty>タグ名は空です。</tag-name-empty>
       <tag-name-duplicate>入力されたタグ名が重複しています。</tag-name-duplicate>
       <tagName-too-long>入力されたタグの一つは長過ぎます。タグは長さ30文字未満でなければなりません。</tagName-too-long>
@@ -1937,7 +1937,7 @@
   -->
   <UIViewMetadataContainer>
     <msg>
-      <path-not-found>The document does not support this view.</path-not-found>
+      <path-not-found>ノードはこのビューをサポートしていません。</path-not-found>
     </msg>
   </UIViewMetadataContainer>
   <!--
@@ -1958,7 +1958,7 @@
   </metadataForm>
   <UIViewMetadataTemplate>
     <msg>
-      <access-denied>Access denied. Either you are not the owner or don't have edit permission.</access-denied>
+      <access-denied>アクセス出来ません! オーナーでないか、このノードの'編集'権限がありません。</access-denied>
     </msg>
   </UIViewMetadataTemplate>
   <!--
@@ -1968,7 +1968,7 @@
   -->
    <ECMPhoneFormatValidator>
      <msg>
-       <Invalid>The field '{0}' contains invalid an Phone number. Please enter another value.</Invalid>
+       <Invalid>'{0}' フィールドに無効な電話番号が入力されています。他の値を入力してくだあい。</Invalid>
      </msg>
   </ECMPhoneFormatValidator>
   <ECMNameValidator>
@@ -2034,7 +2034,7 @@
       <private>プライベート</private>
       <state>状態</state>
       <visibility>可視性</visibility>
-      <nodeName>Name:</nodeName>
+      <nodeName>ノード名:</nodeName>
       <lifecycleName>ライフサイクル名</lifecycleName>
       <stateName>状態名</stateName>
     </label>
@@ -2058,7 +2058,7 @@
   </UIWorkspaceList>
   <pathSelector>
     <title>
-      <UIOneNodePathSelector>Selector</UIOneNodePathSelector>
+      <UIOneNodePathSelector>ノードセレクター</UIOneNodePathSelector>
     </title>
   </pathSelector>
   <!--
@@ -2166,10 +2166,10 @@
     </label>
     <msg>
       <mimetype-incorrect>正しくないファイルタイプ。サムネイル(JPG, PNG, GIF)の追加のためにイメージタイプを選択してください。</mimetype-incorrect>
-      <access-denied>Access denied. You don't have permission to add a thumbnail.</access-denied>
+      <access-denied>アクセス出来ません。このノードにサムネイルを追加する権限がありません。</access-denied>
       <confirm-delete>このサムネイルを削除したいですか？</confirm-delete>
-      <is-checked-in>This item is checked in. Please check out before performing any action.</is-checked-in>
-      <fileName-error>Please select a file to upload.</fileName-error>
+      <is-checked-in>このノードはチェックインされています。アクションを起こす前にチェックアウトしてください。</is-checked-in>
+      <fileName-error>アップロードするファイルを選択してください。</fileName-error>
     </msg>
     <title>
       <remove-thumbnail>このサムネイルに削除</remove-thumbnail>
@@ -2272,7 +2272,7 @@
 
   <PopupSelectPath>
     <title>
-      <UIOneNodePathSelector>Select Path</UIOneNodePathSelector>
+      <UIOneNodePathSelector>ノードの選択</UIOneNodePathSelector>
     </title>
   </PopupSelectPath>
 
@@ -2302,7 +2302,7 @@
   <UISymLinkForm>
     <label>
       <symLinkName>Symリンク名</symLinkName>
-      <pathNode>Path</pathNode>
+      <pathNode>パスノード</pathNode>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -2313,16 +2313,16 @@
       <name-invalid>Symbolicリンク名を入力してください。</name-invalid>
       <name-not-allowed>この名前は許されていません。.</name-not-allowed>
       <fileName-error>無効なファイル名</fileName-error>
-      <constraint-violation>You can't add an item of type '{0}' here.</constraint-violation>
-      <repository-exception>Access denied. You don't have permission to add a symlink here.</repository-exception>
+      <constraint-violation>現在のノードは '{0}' ノードタイプを追加することを許していません。</constraint-violation>
+      <repository-exception>アクセスが拒否されました！このノードへのシンボリックリンクを追加する権限がありません。</repository-exception>
       <numberformat-exception>このフォルダを保存できません。名前は数字である必要があります。</numberformat-exception>
-      <path-node-invalid>Please enter the path.</path-node-invalid>
+      <path-node-invalid>パスノードを入力してください！</path-node-invalid>
       <path-node-not-allowed>この名前は許されていません</path-node-not-allowed>
-      <non-node>Please select the trust target; you may not have the rights to read this item.</non-node>
-      <cannot-save>You can't add a symlink for this type of document.</cannot-save>
-      <item-exists-exception>An item with this name already exists.</item-exists-exception>
-      <translation-node-same-language-default>The translated document has the same language as the default language of current document.</translation-node-same-language-default>
-      <UnsupportedRepositoryOperationException>This target item is not referred.</UnsupportedRepositoryOperationException>
+      <non-node>信頼できるターゲットノードを選択するか、もしくは、ノードを読める十分な権限がありません。</non-node>
+      <cannot-save>コンテンツはアクションの間に破棄されました。</cannot-save>
+      <item-exists-exception>同じ名前のノード名が既に存在します。</item-exists-exception>
+      <translation-node-same-language-default>The translation node has same language with the default language of current node.</translation-node-same-language-default>
+      <UnsupportedRepositoryOperationException>ターゲットノードは参照ではありません。</UnsupportedRepositoryOperationException>
     </msg>
   </UISymLinkForm>
   
@@ -2342,22 +2342,22 @@
       <name-invalid>Symbolicリンク名を入力してください。</name-invalid>
       <name-not-allowed>この名前は許されていません。</name-not-allowed>
       <fileName-error>無効なファイル名</fileName-error>
-      <constraint-violation>You can't add the '{0}' type to the current item.</constraint-violation>
-      <repository-exception>Access denied. You don't have permission to add a symlink to this item.</repository-exception>
+      <constraint-violation>現在のノードは '{0}' ノードタイプを追加することを許していません。</constraint-violation>
+      <repository-exception>アクセスが拒否されました！このノードへのシンボリックリンクを追加する権限がありません。</repository-exception>
       <numberformat-exception>フォルダを保存できません。与えられた名前はナンバーフォーマットである必要があります。</numberformat-exception>
-      <path-node-invalid>Please enter the path.</path-node-invalid>
+      <path-node-invalid>パスノードを入力してください！</path-node-invalid>
       <path-node-not-allowed>この名前は許されていません。</path-node-not-allowed>
-      <non-node>Please select the trust target; you may not have the right to read this node.</non-node>
+      <non-node>信頼できるターゲットノードを選択するか、もしくは、ノードを読める十分な権限がありません。</non-node>
       <cannot-save>symlink リンクの作成中にエラーが発生しました。</cannot-save>
-      <item-exists-exception>An item with this name already exists.</item-exists-exception>
-      <translation-node-same-language-default>The translated document has the same language as the default language of current document.</translation-node-same-language-default>
-      <UnsupportedRepositoryOperationException>This target item is not referred.</UnsupportedRepositoryOperationException>
+      <item-exists-exception>同じ名前のノード名が既に存在します。</item-exists-exception>
+      <translation-node-same-language-default>The translation node has same language with the default language of current node.</translation-node-same-language-default>
+      <UnsupportedRepositoryOperationException>ターゲットノードは参照ではありません。</UnsupportedRepositoryOperationException>
     </msg>
   </UIAddTranslationForm>
 
   <UIPopupSymLink>
     <title>
-      <UIOneNodePathSelector>Select Target Item</UIOneNodePathSelector>
+      <UIOneNodePathSelector>ターゲットノードの選択</UIOneNodePathSelector>
     </title>
   </UIPopupSymLink>
   <UIPopupSymLink>
@@ -2375,9 +2375,9 @@
 
   <UIWorkingArea>
     <msg>
-      <create-link-problem>You can't create a link for '{0}' at '{1}'.</create-link-problem>
-      <dest-node-is-link>The destination '{0}' is already a symlink, so you cannot create a symlink inside it.</dest-node-is-link>
-      <selected-is-link>The selected item '{0}' is already a link. You can't create a link to another link.</selected-is-link>
+      <create-link-problem>'{1}' にノード '{0}' のリンクを作成することができません。</create-link-problem>
+      <dest-node-is-link>ノード '{0}' は既にSymリンクです。このためSymリンクを作成できません。</dest-node-is-link>
+      <selected-is-link>選択した項目 '{0}' は、すでにリンクです。リンクを別のリンクにすることはできません。</selected-is-link>
       <confirm-create-link>本当にこのロケーションのためのリンクを作成しますか？</confirm-create-link>
     </msg>
   </UIWorkingArea>
@@ -2457,10 +2457,10 @@
       <ReplaceData>置き換えデータ</ReplaceData>
       <Back>リネームに戻る</Back>
       <Keepfile>両方のファイルをキープする</Keepfile>
-<ReadOnly>Open Read-only</ReadOnly>
-<Cancel>Cancel</Cancel>
-      <KeepBoth>Keep Both</KeepBoth>
-      <CreateNewVersion>Save as new version</CreateNewVersion>
+<ReadOnly>読み取り専用として開く</ReadOnly>
+<Cancel>キャンセル</Cancel>
+      <KeepBoth>どちらも保持する</KeepBoth>
+      <CreateNewVersion>新しいバージョンとして保存</CreateNewVersion>
     </label>
   </UIConfirmMessage>
 
@@ -2516,7 +2516,7 @@
 
   <UIPopupMenu>
     <msg>
-      <node-locked-other-person>This item or its parent folder is locked by another user, so you can't delete it.</node-locked-other-person>
+      <node-locked-other-person>このノードもしくは親ノードは他のユーザにロックされています。削除できません!</node-locked-other-person>
     </msg>
   </UIPopupMenu>
 
@@ -2551,7 +2551,7 @@
 
   <UIPopupMenu>
     <msg>
-      <can-not-unlock-node-is-checked-in>You can't unlock because the '{0}' (or its parent folder) is checked in.</can-not-unlock-node-is-checked-in>
+      <can-not-unlock-node-is-checked-in>ノード '{0}' もしくは '{0}' の原型はチェックインできないためロック解除できませんでした。</can-not-unlock-node-is-checked-in>
     </msg>
   </UIPopupMenu>
 
@@ -2560,12 +2560,12 @@
   -->
   <UIActionBar>
     <msg>
-      <cannot-enable-version>Can't activate versioning on this document.</cannot-enable-version>
+      <cannot-enable-version>バージョンノードを許可できません。</cannot-enable-version>
     </msg>
   </UIActionBar>
   <UIPopupMenu>
     <msg>
-        <cannot-readsource>You can't read data from the source.</cannot-readsource>
+        <cannot-readsource>ソースノードからデータが読めません。</cannot-readsource>
     </msg>
   </UIPopupMenu>
   <UIUploadForm>
@@ -2845,7 +2845,7 @@
 
     <UIPopupMenu>
     <msg>
-      <node-locked-editing>You can't edit  {0}. It's locked by another user.</node-locked-editing>
+      <node-locked-editing>このノード {0} は他のユーザが編集中のためロックされています。</node-locked-editing>
     </msg>
   </UIPopupMenu>
   <UITagStyleForm>
@@ -2895,7 +2895,7 @@
 
   <UIPreferencesForm>
       <label>
-            <queryType>Query language:</queryType>
+            <queryType>クエリタイプ</queryType>
             <SQL>SQL</SQL>
             <XPATH>XPATH</XPATH>
       </label>
@@ -2939,12 +2939,12 @@
   </PathNode>
   <UIPopupPathFoRestore>
     <title>
-      <UIOneNodePathSelector>Select Parent</UIOneNodePathSelector>
+      <UIOneNodePathSelector>親ノードの追加</UIOneNodePathSelector>
     </title>
   </UIPopupPathFoRestore>
   <rootNodeInfo>
     <title>
-      <AddRootNode>Add Root</AddRootNode>
+      <AddRootNode>ルートノードの追加</AddRootNode>
     </title>
   </rootNodeInfo>
 
@@ -3019,15 +3019,15 @@
       <user>作者</user>
       <description>説明</description>
     </header>
-    <create-version>New version is created</create-version>
+    <create-version>新しいバージョンが作成されます。</create-version>
   </UIPublicationHistory>
   
   <UIPublicationSchedule>
     <label>
       <introduction>ドキュメントの発行スケジュールを設定することができます。公開日付を選択してください。</introduction>
       <no-schedule-info>ドキュメントの公開スケジュールはありません。</no-schedule-info>
-      <UIPublicationPanelStartDateInput>Start Publication date</UIPublicationPanelStartDateInput>
-      <UIPublicationPanelEndDateInput>End Publication date</UIPublicationPanelEndDateInput>
+      <UIPublicationPanelStartDateInput>公開開始日</UIPublicationPanelStartDateInput>
+      <UIPublicationPanelEndDateInput>公開終了日</UIPublicationPanelEndDateInput>
     </label>
     <msg>
       <save-finished>新しいパブリケーション スケジュールは正常に保存されました。</save-finished>
@@ -3045,7 +3045,7 @@
       <end>公開の終了</end>
     </label>
     <msg>
-      <invalid-format>The date format is invalid. Please check again.</invalid-format>
+      <invalid-format>日付の形式が正しくありません。もう一度確認してください。</invalid-format>
       <fromDate-after-toDate>The From date has to be smaller than the To date.</fromDate-after-toDate>
     </msg>
   </UIPublicationPanel>
@@ -3102,11 +3102,11 @@
       <ShowDrives>ドライブの表示</ShowDrives>
     </DrivesArea>
     <msg>
-      <no-view-found>There are no views applied for your access permission in drive '{0}'.</no-view-found>
-      <access-denied>Access denied. You may not have permission in the workspace of drive '{0}'.</access-denied>
-      <not-found>The document you are trying to access is no longer available.</not-found>
-      <empty-drives>Access denied. Either there is no drive in this repository or you do not have permission to access any drives in this repository.</empty-drives>
-      <workspace-not-exist>Drive '{0}' was stored in one unrecognized workspace. Please reconfigure this drive.</workspace-not-exist>
+      <no-view-found>ドライブ '{0}' にアクセス権限がありません。</no-view-found>
+      <access-denied>アクセスが拒否されました。ドライブ '{0}' のワークスペースの権限を持っていません。</access-denied>
+      <not-found>アクセスしようとしている文書は使用できなくなりました。</not-found>
+      <empty-drives>アクセスが拒否されました。このリポジトリにはドライブがないか、このリポジトリ内の任意のドライブにアクセスする権限がありません。</empty-drives>
+      <workspace-not-exist>ドライブ '{0}' は、 不明なワークスペースにストアされました。このドライブを再設定してください。</workspace-not-exist>
     </msg>
   </UIDrivesArea>
   <UIJcrExplorerEditForm>
@@ -3156,9 +3156,9 @@
   </lifecyclePhase>
   <UIPopupMenu>
   <msg>
-<can-not-remove-locked-node>{0} is locked. You can't move it to the Trash.</can-not-remove-locked-node>
-<can-not-remove-checked-in-node>{0} or its parent folder is checked in. You can't move it to the Trash.</can-not-remove-checked-in-node>
-<access-denied-to-delete>Access denied. You can't move {0} to the Trash.</access-denied-to-delete>
+<can-not-remove-locked-node>Node {0} is locked, can not move it to Trash!</can-not-remove-locked-node>
+<can-not-remove-checked-in-node>Node {0} is checked in, can not move it to Trash!</can-not-remove-checked-in-node>
+<access-denied-to-delete>Access denied, can not move node {0} to Trash!</access-denied-to-delete>
   </msg>
   </UIPopupMenu>
   <UIPropertyForm>
@@ -3168,8 +3168,8 @@
   </UIPropertyForm>
   <UIWatchDocumentForm>
     <msg>
-      <node-is-locked>This item is locked. You cannot watch it.</node-is-locked>
-      <unknown-error>Some errors have occurred. You can't watch this document.</unknown-error>
+      <node-is-locked>The node is locked, you can not watch it!</node-is-locked>
+      <unknown-error>There are some error occurs, you can not watch this node!</unknown-error>
     </msg>
   </UIWatchDocumentForm>   
   <UIActionForm>
@@ -3186,7 +3186,7 @@
     <DropFileMessage>あなたのファイルを現在のフォルダーにドロップします。</DropFileMessage>
     <Close>#{word.close}</Close>
     <in>で</in>
-    <MaxFileSizeAlert>The file size exceeds the limit of</MaxFileSizeAlert>
+    <MaxFileSizeAlert>ファイル サイズの制限を超えています</MaxFileSizeAlert>
     <Waiting>待機中です</Waiting>
     <Error>エラー</Error>
     <or>または</or>
@@ -3194,7 +3194,7 @@
     <Keep>両方を維持します。</Keep>
     <Replace>置換</Replace>
     <Canceled>キャンセルされました</Canceled>
-      <UploadNewVersion>Upload a new version</UploadNewVersion>
+      <UploadNewVersion>新しいバージョンをアップロード</UploadNewVersion>
     <Cancel>#{word.cancel}</Cancel>
     <AbortAllConfirmation>進行中のすべてのファイルを中止しますか。</AbortAllConfirmation>
   </label>
@@ -3202,7 +3202,7 @@
   <UIDocumentNodeList>
   <label>
   <CreatedOn>に作成</CreatedOn>
-  <Updated>Updated</Updated>
+  <Updated>更新</Updated>
   <by>作成者</by>
   <you>あなた</you>
   </label>
@@ -3224,17 +3224,17 @@
     </msg>
   </UIPropertyForm>
   <UIDocumentAutoVersionForm>
-    <msg>A document {0} already exists. What do you want to do?</msg>
+    <msg>文書 {0} は既に存在します。どうしますか？</msg>
     <UIChkRememberNonVersioned>
-      <label>Remember my choice for all others non-versioned documents</label>
+      <label>すべての他のバージョン化されていない文書のために、私の選択肢を記憶</label>
     </UIChkRememberNonVersioned>
     <UIChkRememberVersioned>
-      <label>Remember my choice for all other versioned documents</label>
+      <label>すべてのバージョン化された文書のために、私の選択肢を記憶</label>
     </UIChkRememberVersioned>
   </UIDocumentAutoVersionForm>
   <DocumentAuto>
-    <message>A new version of the document {0} has been created successfully.</message>
-    <messageMultiFile>A new version of the document has been created.</messageMultiFile>
+    <message>この文書 {0} の新しいバージョンが、正常に作成されました。</message>
+    <messageMultiFile>この文書の新しいバージョンが作成されました。</messageMultiFile>
   </DocumentAuto>
   <!--
   ###################################################################################

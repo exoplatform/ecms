@@ -55,8 +55,8 @@
         <pdf-max-page>العرض المُسبق غير متوفّر لكلّ محتوى عدد صفحاته يفوق الـ {0} صفحة.</pdf-max-page>
         <using-webDAV>أو فتحه بواسطة مايكروسوفت أوفيس</using-webDAV>
         <open-on-desktop>فتح الملفّ على سطح المكتب</open-on-desktop>
-        <open-in-documents>Open in Documents</open-in-documents>
-        <open-in-documents-tooltip>Open this file in Documents app</open-in-documents-tooltip>
+        <open-in-documents>فتح في خدمة المستندات</open-in-documents>
+        <open-in-documents-tooltip>افتح هذا الملف في تطبيق المستندات</open-in-documents-tooltip>
         <file-size-too-big>محتوى هذا الملف كبير جدا. لتتمكن من عرضه يُرجى تنزيله</file-size-too-big>
         <webDAV>مشهد WebDAV</webDAV>
         <download>تنزيل هذا الملف</download>
@@ -87,7 +87,7 @@
   <Vote>
     <view>
       <label>
-        <avg-rating>Rate</avg-rating>
+        <avg-rating>تقييم</avg-rating>
         <subscription>الأصوات</subscription>
       </label>
     </view>

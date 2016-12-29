@@ -54,7 +54,7 @@
         <pdf-max-size>Η προεπισκόπηση δεν είναι διαθέσιμη για το περιεχόμενο που είναι μεγαλύτερο από {0} MB.</pdf-max-size>
         <pdf-max-page>Η προεπισκόπηση δεν είναι διαθέσιμη για περιεχόμενο με περισσότερες από {0} σελίδες.</pdf-max-page>
         <using-webDAV>ή άνοιγμα στο Office</using-webDAV>
-        <open-on-desktop>Open on Desktop</open-on-desktop>
+        <open-on-desktop>Άνοιγμα στην επιφάνεια εργασίας</open-on-desktop>
         <open-in-documents>Open in Documents</open-in-documents>
         <open-in-documents-tooltip>Open this file in Documents app</open-in-documents-tooltip>
         <file-size-too-big>Το περιεχόμενο αυτού του αρχείου είναι πολύ μεγάλο. Θα πρέπει να το κατεβάσετε και να το ανοίξετε στη συσκευή σας.</file-size-too-big>
@@ -87,7 +87,7 @@
   <Vote>
     <view>
       <label>
-        <avg-rating>Rate</avg-rating>
+        <avg-rating>Μέση βαθμολογία</avg-rating>
         <subscription>Ψήφοι</subscription>
       </label>
     </view>

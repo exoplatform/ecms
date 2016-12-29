@@ -30,7 +30,7 @@
         <comment-by>نظر توسط</comment-by>
         <email>ایمیل</email>
         <site>سایت</site>
-        <lastComment>Last comment posted by {user} at {time}</lastComment>
+        <lastComment>آخرین نظر ارسال شده توسط {user} در {time}</lastComment>
         <Less_Than_A_Minute>کمتر از یک دقیقه پیش</Less_Than_A_Minute>
         <About_A_Minute>حدود یک دقیقه پیش</About_A_Minute>
         <About_x_Minutes>حدود {0} دقيقه پیش</About_x_Minutes>
@@ -51,10 +51,10 @@
     <view>
       <label>
         <not-viewable>پیش نمایش این نوشتار موجود نمی باشد.</not-viewable>
-        <pdf-max-size>The preview is not available for content larger than {0} MB.</pdf-max-size>
-        <pdf-max-page>The preview is not available for content with over {0} pages.</pdf-max-page>
+        <pdf-max-size>پیش نمایش برای محتوای بزرگتر از {0} مگابایت امکان پذیر نیست.</pdf-max-size>
+        <pdf-max-page>پیش نمایش برای محتوای بالای {0} صفحه امکان پذیر نیست.</pdf-max-page>
         <using-webDAV>و یا باز کردن در مایکروسافت آفیس</using-webDAV>
-        <open-on-desktop>Open on Desktop</open-on-desktop>
+        <open-on-desktop>باز کردن روی میز کار</open-on-desktop>
         <open-in-documents>Open in Documents</open-in-documents>
         <open-in-documents-tooltip>Open this file in Documents app</open-in-documents-tooltip>
         <file-size-too-big>اندازه این فایل بیش از حد بزرگ است. شما باید آنرا دانلود و در سیستم خود باز کنید.</file-size-too-big>
@@ -87,7 +87,7 @@
   <Vote>
     <view>
       <label>
-        <avg-rating>Rate</avg-rating>
+        <avg-rating>امتیاز میانگین</avg-rating>
         <subscription>رأی ها</subscription>
       </label>
     </view>

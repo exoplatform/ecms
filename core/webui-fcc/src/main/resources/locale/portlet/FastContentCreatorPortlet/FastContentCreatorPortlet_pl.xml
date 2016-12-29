@@ -2,11 +2,11 @@
 <bundle>
   <UIFCCForm>
     <msg>
-      <name-not-allowed>This name is not allowed.</name-not-allowed>
+      <name-not-allowed>Nazwa ta nie jest dozwolona.</name-not-allowed>
       <in-versioning>Proszę sprawdzić aktualny węzeł przed dodaniem nowego węzła.</in-versioning>
       <cannot-save>Wystąpił błąd podczas zapisywania węzła.</cannot-save>
       <saved-successfully>{0}</saved-successfully>
-      <not-support>Cannot load the template of '{0}'.</not-support>
+      <not-support>Nie można załadować szablonu '{0}'.</not-support>
       <not-add-folder>Do tego folderu mogą być dodane tylko pliki.</not-add-folder>
       <access-denied>Odmowa dostępu. Nie masz uprawnień do dodawania w ‘{0}’.</access-denied>
       <path-not-found>„{0}” został usunięty lub ma nieprawidłową ścieżkę.</path-not-found>
@@ -52,7 +52,7 @@
 
   <UIFCCLocationFormInputAction>
     <title>
-      <SelectPath>Select Path</SelectPath>
+      <SelectPath>Wybierz ścieżkę</SelectPath>
     </title>
   </UIFCCLocationFormInputAction>
 
@@ -68,11 +68,11 @@
     </action>
     <msg>
       <empty>Brak akcji</empty>
-      <remove-popup-first>You must close the edit pop-up before deleting this node.</remove-popup-first>
-      <confirm-delete-action>Are you sure you want to delete this action?</confirm-delete-action>
+      <remove-popup-first>Przed usunięciem tego węzła musisz zamknąć okno edycji.</remove-popup-first>
+      <confirm-delete-action>Czy na pewno chcesz usunąć tę akcję?</confirm-delete-action>
       <template-empty>Szablon „{0}” jest zerowy lub pusty.</template-empty>
       <template-null>Szablon jest zerowy lub pusty, albo nie masz dostępu do tego szablonu.</template-null>
-      <access-denied>Access denied. You do not have permission to perform this action.</access-denied>
+      <access-denied>Odmowa dostępu. Nie masz uprawnień do wykonania tej czynności.</access-denied>
     </msg>
   </UIFCCActionList>
 
@@ -84,15 +84,15 @@
 
   <UIWorkspaceList>
     <label>
-      <workspaceName>Workspace:</workspaceName>
-      <rootNodePath>Root Path:</rootNodePath>
+      <workspaceName>Obszar roboczy:</workspaceName>
+      <rootNodePath>Ścieżka Root:</rootNodePath>
       <rootNodeInfo>Węzeł główny</rootNodeInfo>
     </label>
   </UIWorkspaceList>
 
   <rootNodeInfo>
     <title>
-      <AddRootNode>Add Root Node</AddRootNode>
+      <AddRootNode>Dodaj węzeł główny</AddRootNode>
     </title>
   </rootNodeInfo>
 
@@ -108,12 +108,12 @@
 
   <UIFCCActionPopupWindow>
     <title>
-      <UIFCCActionContainer>Add Action</UIFCCActionContainer>
+      <UIFCCActionContainer>Dodaj akcję</UIFCCActionContainer>
     </title>
   </UIFCCActionPopupWindow>
 
   <UIFCCActionForm>
-    <title>Add/Edit Action</title>
+    <title>Dodaj/Edytuj akcję</title>
     <action>
       <Save>#{word.save}</Save>
       <Close>#{word.close}</Close>
@@ -125,12 +125,12 @@
       <unable-add-action>Nie można dodać tego działania.</unable-add-action>
       <unable-add>Nie można dodać tego działania. Ten węzeł jest węzłem głównym lub nie masz uprawnień do tego typu czynności.</unable-add>
       <not-support>Okno dialogowe '{0}' nie jest obsługiwane.</not-support>
-      <no-permission-add>Access denied. You do not have the right to add an action here.</no-permission-add>
-      <access-denied>Access denied. You do not have permission to access this template.</access-denied>
+      <no-permission-add>Odmowa dostępu. Nie masz uprawnień do dodawania działania w tym miejscu.</no-permission-add>
+      <access-denied>Odmowa dostępu. Nie masz dostępu do tego szablonu.</access-denied>
     </msg>
     <validator>
       <validator>Validator</validator>
-      <destPath>With Path</destPath>
+      <destPath>Ze ścieżką</destPath>
     </validator>
   </UIFCCActionForm>
 
@@ -139,7 +139,7 @@
       <actionType>Utwórz Akcję Typu</actionType>
     </label>
     <msg>
-      <not-support>Cannot load the template of '{0}'.</not-support>
+      <not-support>Nie można załadować szablonu '{0}'.</not-support>
       <do-not-permission>Nie masz uprawnień, aby załadować szablon „{0}”.</do-not-permission>
     </msg>
   </UIFCCActionTypeForm>
@@ -147,7 +147,7 @@
   <PopupComponent>
     <title>
       <UIOneNodePathSelector>Wybierz lokalizację</UIOneNodePathSelector>
-      <UIPermissionSelector>Permission Browser</UIPermissionSelector>
+      <UIPermissionSelector>Przeglądarka uprawnień</UIPermissionSelector>
       <UICategoriesSelector>Dodaj kategorie</UICategoriesSelector>
     </title>
   </PopupComponent>
@@ -160,8 +160,8 @@
 
   <UITabPane>
     <title>
-      <UICategoriesSelectPanel>Select Categories</UICategoriesSelectPanel>
-      <UISelectedCategoriesGrid>Referenced Categories</UISelectedCategoriesGrid>
+      <UICategoriesSelectPanel>Wybierz kategorie</UICategoriesSelectPanel>
+      <UISelectedCategoriesGrid>Odnośne kategorie</UISelectedCategoriesGrid>
     </title>
   </UITabPane>
 
@@ -179,13 +179,13 @@
 
   <PopupComponent>
     <title>
-      <UIOneTaxonomySelector>Add Categories</UIOneTaxonomySelector>
+      <UIOneTaxonomySelector>Dodaj kategorie</UIOneTaxonomySelector>
     </title>
   </PopupComponent>
 
   <UITreeTaxonomyList>
     <label>
-      <taxonomyTree>Category Tree</taxonomyTree>
+      <taxonomyTree>Drzewo kategorii</taxonomyTree>
     </label>
   </UITreeTaxonomyList>
 

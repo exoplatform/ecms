@@ -117,8 +117,8 @@
   <UICLVConfigOrderTypeFormSelectBox>
     <label>
       <option>
-        <OrderDesc>Descendant</OrderDesc>
-        <OrderAsc>Ascendant</OrderAsc>
+        <OrderDesc>Padajoče</OrderDesc>
+        <OrderAsc>Naraščajoče</OrderAsc>
       </option>
     </label>
   </UICLVConfigOrderTypeFormSelectBox>

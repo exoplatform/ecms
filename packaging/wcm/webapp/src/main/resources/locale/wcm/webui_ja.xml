@@ -34,10 +34,10 @@
 
   <Drives>
     <label>
-      <ManagedSites>Site Management</ManagedSites>
+      <ManagedSites>サイト管理</ManagedSites>
       <SharedSite>共有サイト</SharedSite>
-      <PersonalDocuments>Personal Documents</PersonalDocuments>
-      <UserDocuments>{0} Documents</UserDocuments>
+      <PersonalDocuments>個人文書</PersonalDocuments>
+      <UserDocuments>{0} 文書</UserDocuments>
     </label>
   </Drives>
 
@@ -202,17 +202,17 @@
       <SearchWebContent>検索</SearchWebContent>
     </action>
     <msg>
-      <time-to-late>The searching time is too long.</time-to-late>
+      <time-to-late>検索に時間が掛かります。</time-to-late>
       <empty-field>正しい検索キーワードを入力してください</empty-field>
-      <empty-name>Please enter the name to search</empty-name>
-      <empty-content>Please enter a word or phrase to search</empty-content>
-      <empty-property>Please select a property</empty-property>
-      <empty-property-keyword>Please enter a keyword for the property</empty-property-keyword>
-      <empty-doctype>Please select a document type</empty-doctype>
-      <empty-startDate>"From Date" is required</empty-startDate>
+      <empty-name>検索する名前を入力してください。</empty-name>
+      <empty-content>検索する単語もしくは文章を入力してください。</empty-content>
+      <empty-property>プロパティを選択してください。</empty-property>
+      <empty-property-keyword>プロパティのキーワードを入力してください。</empty-property-keyword>
+      <empty-doctype>ドキュメント タイプを選択してください。</empty-doctype>
+      <empty-startDate>"開始日"が必要です。</empty-startDate>
       <invalid-format>不正な日時フォーマットです '{0}'</invalid-format>
       <invalid-date>"終了日は開始日より大きい必要があります"</invalid-date>
-      <invalid-startDate>"From Date" must not be later than today</invalid-startDate>
+      <invalid-startDate>「開始日」は、本日より後でなければなりません</invalid-startDate>
       <invalid-nodeType>ノードタイプ "{0}" が不正です。確認してください</invalid-nodeType>
       <invalid-keyword>検索キーワードが有効ではありません。文字列が認識されていません。</invalid-keyword>
     </msg>

@@ -18,7 +18,7 @@
     </action>
     <msg>
       <not-support>لا يمكنك التعليق على هذا النوع من الوثائق.</not-support>
-      <not-checkedout>You must check out the document before commenting on it.</not-checkedout>
+      <not-checkedout>يجب عليك مراجعة المستند قبل التعليق عليها</not-checkedout>
       <content-null>لا يمكن أن يكون التعليق خالي من محتوى أو فارغا.</content-null>
     </msg>
   </UICommentForm>
@@ -46,8 +46,8 @@
     </button>
     <msg>
       <not-support>لا يمكن التصويت على هذا النوع من الوثائق</not-support>
-      <not-checkedout>You must check out the document to vote.</not-checkedout>
-      <vote-restriction>You can't vote more than once.</vote-restriction>
+      <not-checkedout>يجب عليك مراجعة المستند للتصويت</not-checkedout>
+      <vote-restriction>لا يمكنك التصويت أكثر من مرّة واحدة.</vote-restriction>
     </msg>
   </UIVoteForm>
  
@@ -59,9 +59,9 @@
   <UIJCRExplorer>
     <msg>
       <refresh-session-success>تم تحديث الدورة بنجاح</refresh-session-success>
-      <no-node-history>You are at the root folder.</no-node-history>
+      <no-node-history>أنت الآن في المجلد الرئيسي.</no-node-history>
       <save-session-success>تم حفظ  جميع التغييرات.</save-session-success>
-      <target-path-not-found>You can't access this path, either because it doesn't exist anymore or because you don't have access permissions.</target-path-not-found>
+      <target-path-not-found>لا يمكنك الوصول إلى هذا المسار، أما لأنه غير موجود بعد الآن، أو رُبّما ليس لديك الصلاحيات الكافية للوصول إليه.</target-path-not-found>
     </msg>
   </UIJCRExplorer>
   <!--
@@ -157,15 +157,15 @@
   <UIPreferencesForm>
     <title>إعداد خيارات التصفح الخاصة بك</title>
     <label>
-      <enableStructure>Browse in structure mode:</enableStructure>
-      <showSideBar>Show sidebar:</showSideBar>
-      <showHiddenNode>Show hidden items:</showHiddenNode>
-      <showNonDocument>Show non-document items:</showNonDocument>
-      <showRefDocuments>Show referenced items:</showRefDocuments>
+      <enableStructure>تصفح في وضع الهيكل:</enableStructure>
+      <showSideBar>إضهار الشريط الجانبي:</showSideBar>
+      <showHiddenNode>إظهار العناصر المخفية:</showHiddenNode>
+      <showNonDocument>إظهار العناصر غير المستند:</showNonDocument>
+      <showRefDocuments>إظهار الوثائق الموصولة:</showRefDocuments>
       <enableDragAndDrop>اتاحة تقنية السحب و الإسقاط:</enableDragAndDrop>
-      <sortBy>Sort order:</sortBy>
+      <sortBy>الترتيب بحسب:</sortBy>
       <order>ترتيب بحسب:</order>
-      <nodesPerPage>Items per page:</nodesPerPage>
+      <nodesPerPage>عنصر بكل صفحة:</nodesPerPage>
     </label>
     <action>
       <Back>#{word.back}</Back>
@@ -201,15 +201,15 @@
       <Back>#{word.back}</Back>
     </action>
     <msg>
-      <rename-successfull>'{0}' was renamed to '{1}' successfully.</rename-successfull>
-      <rename-denied>Access denied. You can't rename this item.</rename-denied>
+      <rename-successfull>تم إعادة تسمية العقدة '{0}' الى '{1}' بنجاح.</rename-successfull>
+      <rename-denied>غير مسموح بإعادة تسمية هذا العنصر.</rename-denied>
       <fileName-invalid>هناك بعض الحروف الغير متاحة في هذا الإسم.</fileName-invalid>
       <newName-same-oldName>الاسم الجديد مطابق للاسم القديم. يُرجى التثبّت مرّة أخرى.</newName-same-oldName>
-      <version-exception>This document (or one of its ancestors) is not checked out.</version-exception>
-      <lock-exception>This document is locked. Please unlock it before renaming.</lock-exception>
-      <constraintViolation-exception>An error occurred while renaming '{0}'. Please check again.</constraintViolation-exception>
+      <version-exception>هذا المستند (أو سلف منه) لم يتم مراجعته بعد.</version-exception>
+      <lock-exception>هذا المستند مؤمن. الرجاء إلغاء تأمينه قبل إعادة تسميته.</lock-exception>
+      <constraintViolation-exception>طرأ خطأ أثناء اعادة التسمية '{0}'. يُرجى التثبّت مرّة أخرى.</constraintViolation-exception>
       <unknown-prefix>لم يتمّ تسجيل البادئة "{0}' الى حتى الآن.</unknown-prefix>
-      <rename-error>An error occurred while renaming. Please check again.</rename-error>
+      <rename-error>حدث خطأ أثناء إعادة التسمية. يرجى التحقق مرة أخرى.</rename-error>
     </msg>
   </UIRenameForm>
   <UIPopupWindow>
@@ -222,7 +222,7 @@
       <UIExportNode>تصدير</UIExportNode>
       <UINodeTypeInfo>معلومات حول نوع العقدة</UINodeTypeInfo>
       <UIVersionInfo>معلومات حول الإصدار</UIVersionInfo>
-      <UIActivateVersion>Activate Versioning</UIActivateVersion>
+      <UIActivateVersion>تفعيل الإصدار</UIActivateVersion>
       <UIAuditingInfo>تدقيق</UIAuditingInfo>
       <UIActivateAuditing>تفعيل التدقيق</UIActivateAuditing>
       <UIPermissionManager>ادارة الصلاحيّات</UIPermissionManager>
@@ -240,7 +240,7 @@
       <UIViewMetadataManager>عرض قالب المعلومات القياسية</UIViewMetadataManager>
       <UIVoteForm>تصويت للوثيقة</UIVoteForm>
       <UICommentForm>أضف تعليق</UICommentForm>
-      <UIPreferencesForm>Documents Browsing Preferences</UIPreferencesForm>
+      <UIPreferencesForm>تفضيلات تصفح المستند</UIPreferencesForm>
       <UIPublicationManager>إدارة النشر</UIPublicationManager>
       <UIConfirmMessage>تأكيد الحذف؟</UIConfirmMessage>
       <UIDeleteFileConfirmMessage>حذف الملف؟</UIDeleteFileConfirmMessage>
@@ -250,7 +250,7 @@
       <UIActivePublication>تسجيل دورة حياة النشر</UIActivePublication>
       <UITaggingForm>إضافة علامات لهذه الوثيقة</UITaggingForm>
       <UIThumbnailForm>إضافة صورة مصغرة</UIThumbnailForm>
-      <UIAllItemsPreferenceForm>Documents Browsing Preferences</UIAllItemsPreferenceForm>
+      <UIAllItemsPreferenceForm>تفضيلات تصفح المستند</UIAllItemsPreferenceForm>
       <UISelectRestorePath>اختر المسار الخاص بالاستعادة</UISelectRestorePath>
       <UISEOForm>إدارة الـSEO</UISEOForm>
       <UISEOToolbarForm>إدارة الـSEO</UISEOToolbarForm>
@@ -313,40 +313,40 @@
       <UploadNewVersion>تحميل نسخة جديدة</UploadNewVersion>
     </tooltip>
     <msg>
-      <cannot-action-in-rootnode>You can't perform this action at root.</cannot-action-in-rootnode>
+      <cannot-action-in-rootnode>لا يمكنك تنفيذ هذا الإجراء في الجذر.</cannot-action-in-rootnode>
       <node-checkedin>يجب عليك انهاء المراجعة أوّلا.</node-checkedin>
-      <cannot-enable-version-rootnode>Can't activate versioning on root.</cannot-enable-version-rootnode>
-      <cannot-enable-publication-rootnode>Can't activate publication at root.</cannot-enable-publication-rootnode>
+      <cannot-enable-version-rootnode>لا يمكن تنشيط عملية الإصدار في الجذر.</cannot-enable-version-rootnode>
+      <cannot-enable-publication-rootnode>لا يمكن تنشيط المنشور في الجذر.</cannot-enable-publication-rootnode>
       <manage-publication>
-        <not-supported-nodetype>Only documents can be published.</not-supported-nodetype>
+        <not-supported-nodetype>يمكن نشر المستندات فقط.</not-supported-nodetype>
         <no-publication-lifecycle>دورة حياة النشر غير مهيئة.</no-publication-lifecycle>
       </manage-publication>
-      <unsubcriber-lifecycle>The document was already unsubscribed.</unsubcriber-lifecycle>
-      <not-supported-nodetype>This operation is only supported for documents.</not-supported-nodetype>
-      <unsubcriber-lifecycle-finish>The document was unsubscribed successfully.</unsubcriber-lifecycle-finish>
-      <access-false>The document is not an article or checked in.</access-false>
+      <unsubcriber-lifecycle>تمّ بالفعل إلغاء الاشتراك من هذا المستند.</unsubcriber-lifecycle>
+      <not-supported-nodetype>هذه العملية معتمدة فقط للمستندات.</not-supported-nodetype>
+      <unsubcriber-lifecycle-finish>تمّ بالفعل إلغاء الاشتراك من هذا المستند بنجاح.</unsubcriber-lifecycle-finish>
+      <access-false>المستند ليس من نوع وثيقة أو ربّما يكون في حالة معالجة.</access-false>
       <unsupported-action>هذا الاجراء غير مدعوم.</unsupported-action>
-      <not-relationable>This document has no relations.</not-relationable>
-      <node-pasted>'{0}' has been pasted at the location '{1}'. This operation has already been saved.</node-pasted>
-      <no-node-selected>Nothing to copy.</no-node-selected>
-      <unable-edit>Editing documents of type '{1}' like '{0}' is not supported.</unable-edit>
-      <not-support>Can't edit the selected item.</not-support>
-      <template-null>This document has no form template.</template-null>
+      <not-relationable>لا يحتوي هذا المستند على أية علاقات.</not-relationable>
+      <node-pasted>تم لصق العقدة '{0}' في المسار '{1}'. لفد تمّ حفظ هذه العملية مُسبقـًا.</node-pasted>
+      <no-node-selected>لايوجد شيء للقيام بنسخة.</no-node-selected>
+      <unable-edit>تعديل مستندات نوع '{1}' مثل '{0}' غير معتمد.</unable-edit>
+      <not-support>لا يمكن تعديل العنصر المحدد.</not-support>
+      <template-null>هذا المستند ليس له واجهة للمستخدم</template-null>
       <keyword-null>لا توجد كلمات مفاتيح مختارة للبحث</keyword-null>
       <not-found>لم يتمّ العثور على أي نتيجة.</not-found>
       <keyword-not-allow>أحد الكلمات المفاتيح المختارة غير صحيح.</keyword-not-allow>
-      <is-not-referenable>'{0}' can't be referenceable.</is-not-referenable>
-      <access-denied>Access denied. You don't have edit permission for this item.</access-denied>
-      <access-add-denied>Access denied. You don't have permission to add items here.</access-add-denied>
+      <is-not-referenable>لا يمكن أن تكون '{0}' مرجعياً.</is-not-referenable>
+      <access-denied>غير مسموح بالدخول. ليس لديك الصلاحية الكافية لتغيير هذا العنصر.</access-denied>
+      <access-add-denied>غير مسموح بالدخول. ليس لديك الصلاحية الكافية للإضافة عناصر هنا.</access-add-denied>
       <item-existed>هذه العقدة موجودة مُسبقًـا. لا يمكن استعمال نفس الاسم مرّتين.</item-existed>
       <removed-hidden-mixin>تم حذف الميكسين المخفي ('hidden mixin') بنجاح.</removed-hidden-mixin>
       <added-hidden-mixin>تم إضافة الميكسين المخفي('hidden mixin') بنجاح.</added-hidden-mixin>
       <not-supported>هذه المهمة لا يمكن استعمالها إلا للوثائق فقط.</not-supported>
-      <empty-file-type>You can't add a document here.</empty-file-type>
-      <unsupported-watch>Only documents can be watched.</unsupported-watch>
-      <watch-checkedin>You must check out the document before watching.</watch-checkedin>
-      <unsupported-tagging>Only documents can be tagged.</unsupported-tagging>
-      <tagnode-checkedin>You must check out the document before tagging.</tagnode-checkedin>
+      <empty-file-type>لا يمكنك إضافة مستند هنا.</empty-file-type>
+      <unsupported-watch>لا يمكن متابعة إلا المستندات فقط.</unsupported-watch>
+      <watch-checkedin>يجب مراجعة المستند قبل المتابعة.</watch-checkedin>
+      <unsupported-tagging>لا يمكن إضافة علامات إلا للمستندات.</unsupported-tagging>
+      <tagnode-checkedin>يجب مراجعة المستند قبل إضافة العلامات.</tagnode-checkedin>
     </msg>
     <title>
       <select-tab>اختيار تبويبة</select-tab>
@@ -361,48 +361,48 @@
   </UIActionBar>
   <UIPopupMenu>
     <msg>
-      <has-not-permission>Access denied. You don't have permissions to add in this item.</has-not-permission>
-      <has-not-edit-permission>Access denied. You don't have edit permission here. Please contact the administrator.</has-not-edit-permission>
-      <cannot-login-node>You can't access and paste an item here.</cannot-login-node>
-      <cannot-paste-nodetype>You can't paste this type of item here.</cannot-paste-nodetype>
-      <has-not-permission-unlok>You don't have permission to unlock this document.</has-not-permission-unlok>
-      <bound-exception>You don't have the permission to rename this item. Please contact the administrator.</bound-exception>
-      <bound-move-exception>You can't move an item to itself or in a subfolder.</bound-move-exception>
-      <does-not-support-auditing>You can't activate auditing here.</does-not-support-auditing>
-      <can-not-rename-node>You don't have permission to rename this item. Please contact the administrator to get the necessary rights.</can-not-rename-node>
-      <can-not-cut-node>You don't have permission to cut this item. Please contact the administrator.</can-not-cut-node>
-      <can-not-remove-node>You don't have permission to remove this item. Please contact the administrator.</can-not-remove-node>
-      <can-not-lock-node>You don't have permission to lock {0}. Please contact the administrator.</can-not-lock-node>
-      <can-not-unlock-node>You don't have permission to unlock this item. Please contact the administrator.</can-not-unlock-node>
-      <no-node>Please select at least one item before pasting.</no-node>
-      <can-not-paste-node>You don't have permission to move to this item. Please contact the administrator.</can-not-paste-node>
-      <can-not-move-node>You don't have permission to move this item. Please contact the administrator.</can-not-move-node>
-      <does-not-support-versioning>You don't have permission to move. Please contact the administrator.</does-not-support-versioning>
+      <has-not-permission>غير مسموح بالدخول. ليس لديك الصلاحية الكافية للإضافة في هذا العنصر.</has-not-permission>
+      <has-not-edit-permission>غير مسموح بالدخول. ليس لديك الصلاحية هنا. اتصل بمدير النظام للحصول على الصلاحية الصحيحة.</has-not-edit-permission>
+      <cannot-login-node>لا يمكنك الدخول و إلصاق العنصر هنا.</cannot-login-node>
+      <cannot-paste-nodetype>لا يمكنك لصق هذا النوع من العنصر هنا.</cannot-paste-nodetype>
+      <has-not-permission-unlok>ليس لديك الصلاحية لفكّ تأمين هذا المستند.</has-not-permission-unlok>
+      <bound-exception>ليس لديك الصلاحية بإعادة تسمية هذا العنصر. يُرجى الاتّصال بمدير النّظام.</bound-exception>
+      <bound-move-exception>لا يمكنك نقل عنصر إلى نفسه أو في مجلد فرعي.</bound-move-exception>
+      <does-not-support-auditing>لا يمكن تفعيل التدقيق هنا.</does-not-support-auditing>
+      <can-not-rename-node>ليس لديك الصلاحية لإعادة تسمية  هذا العنصر. الرجاء الاتصال بمدير النظام للحصول على الصلاحية الضرورية.</can-not-rename-node>
+      <can-not-cut-node>ليس لديك الصلاحية الكافية لقص هذا العنصر. يُرجى الاتّصال بمدير النظام.</can-not-cut-node>
+      <can-not-remove-node>ليس لديك الصلاحية الكافية لحذف هذا العنصر.  يُرجى الاتّصال بمدير النظام.</can-not-remove-node>
+      <can-not-lock-node>ليس لديك الصلاحيّة الكافية لقفل {0}. يُرجى الاتّصال بمدير النظام.</can-not-lock-node>
+      <can-not-unlock-node>ليس لديك الصلاحية الكافية لفتح هذا العنصر. يُرجى الاتّصال بمدير النظام.</can-not-unlock-node>
+      <no-node>يُرجى اختيار على الأقلّ عنصر واحد قبل عمليّة اللصق.</no-node>
+      <can-not-paste-node>ليس لديك الصلاحية الكافية للانتقال إلى هذا العنصر. يُرجى الاتّصال بمدير النظام.</can-not-paste-node>
+      <can-not-move-node>ليس لديك الصلاحيّة الكافية لنقل هذا العنصر. يُرجى الاتّصال بمدير النظام.</can-not-move-node>
+      <does-not-support-versioning>ليس لديك الصلاحيّة الكافية للنقل.  يُرجى الاتّصال بمدير النظام.</does-not-support-versioning>
       <path-not-found>تمّ حذف أو تغيير هذا العنصر. يُرجى الضّغط على زرّ التّحديث.</path-not-found>
-      <paste-lock-exception>'{0}' can't be pasted here. Make sure it is not locked nor this folder. Also check that no related document is locked.</paste-lock-exception>
-      <can-not-checkin-node>You can't check in this item. Please check that you have the necessary permissions.</can-not-checkin-node>
-      <can-not-checkout-node>You can't check out this item. Please check that you have the necessary permissions.</can-not-checkout-node>
-      <move-constraint-exception>An error occurred while moving this item.</move-constraint-exception>
-      <not-lock-owner>You can't unlock this document because you are not the lock owner.</not-lock-owner>
-      <is-checked-in>Please check out this document before renaming.</is-checked-in>
-      <is-checked-in-lock>Please check out this document before locking.</is-checked-in-lock>
-      <cant-lock>You can't lock this document.</cant-lock>
+      <paste-lock-exception>لا يمكن لصق '{0}' هنا. تأكد من أنه لم يتم تأمين ولا هذا المجلد. تحقق أيضا من أن أي وثيقة الصلة مؤمنة.</paste-lock-exception>
+      <can-not-checkin-node>لا يمكنك مراجعة هذا العنصر . يُرجى التحقّق من امتلاكك للصلاحية الضرورية.</can-not-checkin-node>
+      <can-not-checkout-node>لا يمكنك إنهاء المراجعة .يُرجى التحقّق من امتلاكك للصلاحية المناسبة.</can-not-checkout-node>
+      <move-constraint-exception>طرأ خطأ أثناء هذا العنصر.</move-constraint-exception>
+      <not-lock-owner>لا يمكنك الغاء تأمين هذه العقدة لأنك لست مالك القفل.</not-lock-owner>
+      <is-checked-in>الرجاء مراجعة هذا المستند قبل إعادة تسمية.</is-checked-in>
+      <is-checked-in-lock>الرجاء مراجعة هذا المستند قبل القفل.</is-checked-in-lock>
+      <cant-lock>لا يمكنك تأمين هذا المستند.</cant-lock>
       <node-locked>هذا العنصر ذو المسار '{0}' أو أحد العقد الفوقيّة له قد تمّ تأمينه.</node-locked>
-      <can-not-delete>Please close this document before deleting.</can-not-delete>
-      <can-not-delete-version>You can't delete this document. It's versioned.</can-not-delete-version>
-      <not-support>You can't delete the selected item. Please select another one.</not-support>
-      <current-node-not-allow-paste>You can't paste the copied item there.</current-node-not-allow-paste>
-      <copied-node-in-versioning>You can't paste the copied item here because it's versioned.</copied-node-in-versioning>
-      <parent-node-locked>You don't have permission to unlock '{0}'.</parent-node-locked>
-      <this-node-locked-by-parent>You can't unlock this item. Parent folder is locked.</this-node-locked-by-parent>
-      <paste-node-same-name>Can't paste this item here. An item with the same name already exists in the destination folder.</paste-node-same-name>
-      <has-not-add-permission>You don't have the permission to add here.</has-not-add-permission>
-      <node-cutting>Item is being cut. You can't paste it here.</node-cutting>
-      <access-denied>Access denied. You may not have the permission.</access-denied>
-      <remove-verion-exception>You can't remove this document because it is checked in.</remove-verion-exception>
-      <remove-referentialIntegrityException>You can't delete this item because it is currently referenced by another one.</remove-referentialIntegrityException>
-      <constraintviolation-exception>The mandatory property jcr:uuid was not found. The document may have been deleted or changed. Please click the Refresh button.</constraintviolation-exception>
-      <path-not-found-exception>This document was deleted or changed. Please click the Refresh button.</path-not-found-exception>
+      <can-not-delete>يُرجى غلق هذا المستند قبل حذفه.</can-not-delete>
+      <can-not-delete-version>لا يمكنك حذف هذا المستند لأنه يحمل صفة الإصدار.</can-not-delete-version>
+      <not-support>لا يمكنك حذف العنصر المحدد. الرجاء تحديد آخر.</not-support>
+      <current-node-not-allow-paste>لا يمكنك لصق العنصر المنسوخ.</current-node-not-allow-paste>
+      <copied-node-in-versioning>لا يمكن لصق العقدة المنسوخة لأنها تحمل صفة الإصدار.</copied-node-in-versioning>
+      <parent-node-locked>ليس لديك الصلاحيّات الكافية لفتح  '{0}'.</parent-node-locked>
+      <this-node-locked-by-parent>يمكنك لا يمكن فتح هذا العنصر. مؤمن من المجلد الأصل.</this-node-locked-by-parent>
+      <paste-node-same-name>لا يمكن لصق هذا العنصر هنا. عنصر بنفس الاسم موجود بالفعل في مجلد الوجهة.</paste-node-same-name>
+      <has-not-add-permission>ليس لك الصلاحية المناسبة للإضافة هنا.</has-not-add-permission>
+      <node-cutting>تم قص العنصر. لا يمكن لصقه هنا.</node-cutting>
+      <access-denied>غير مسموح بالدخول، قد لا يكون لديك الصلاحية.</access-denied>
+      <remove-verion-exception>لا يمكنك حذف هذا المستند لأنها هي (أو أحد فروعها) في حالة مراجعة.</remove-verion-exception>
+      <remove-referentialIntegrityException>لا يمكن حذف هذا العنصر لأنه موصول بعنصر أخر.</remove-referentialIntegrityException>
+      <constraintviolation-exception>لم يتمّ العثور على العنصر 'jcr:uuid'. رُبّما تم تغيير أو حذف المستند. يرجى الضغط على زرّ التّحديث.</constraintviolation-exception>
+      <path-not-found-exception>تمّ حذف أو تغيير هذا المستند. يرجى الضغط على زرّ التّحديث.</path-not-found-exception>
       <not-exist-categories>هذه الفئة لا وجود لها.</not-exist-categories>
       <lock-node-read-only>هذا الملف مؤمن بواسطة المستخدم {0}. أترغب بفتحه بصيغة  القراءة فقط؟</lock-node-read-only>
     </msg>
@@ -428,12 +428,12 @@
       <title-invalid>رجــاءً أدخل عنوان المجلد.</title-invalid>
       <name-not-allowed>هذا الاسم غير متاح.</name-not-allowed>
       <fileName-error>صيغة اسم الملف غير صحيحة.</fileName-error>
-      <constraint-violation>You can't add a document of type '{0}' here.</constraint-violation>
+      <constraint-violation>لا يمكن إضافة مستند من نوع '{0}' هنا.</constraint-violation>
       <repository-exception>طرأ خطأ غير متوقّع. للمزيد من المعلومات، يُرجى الاتصال بمدير النّظام .</repository-exception>
-      <repository-exception-permission>You don't have the permission to add a new folder here.</repository-exception-permission>
+      <repository-exception-permission>ليس لديك الصلاحيّة الكافية لإضافة مجلد جديد هنا.</repository-exception-permission>
       <numberformat-exception>لا يمكن حفظ هذا المجلد. يجب أن يكون الاسم عدديّـا.</numberformat-exception>
       <!--DMS 2.4.x; ECM-3553-->
-      <not-allow-sameNameSibling>You can't save the folder. An item with the same name already exists.</not-allow-sameNameSibling>
+      <not-allow-sameNameSibling>لا يمكنك الحفظ في المجلد. عنصر بنفس الاسم موجود مسبقاً.</not-allow-sameNameSibling>
       <ntFolder-not-avaiable>يجب عليك تحديد نوع مخصص من المجلد</ntFolder-not-avaiable>
     </msg>
     <help>
@@ -500,26 +500,26 @@
       <feedback-restore>'{0}' تمّ استعادته بنجاح.</feedback-restore>
       <feedback-restore-multi>{0} عنصر تمّ استعادته بنجاح.</feedback-restore-multi>
       
-      <confirm-restore>A '{0}' item already exists at the previous location. Are you sure you want to restore it?</confirm-restore>
+      <confirm-restore>عنصر '{0}' موجود بالفعل في الموقع السابق. هل أنت متأكد من أنك تريد استعادته؟</confirm-restore>
       <confirm-move>هل ترغب حقــا بالقيام بعمليّة النقل؟</confirm-move>
-      <node-cut>'{0}' has been cut.</node-cut>
+      <node-cut>قد تم قطع '{0}'.</node-cut>
       <execute-successfully>تمّ تنفيذ الاجراء '{0}'.</execute-successfully>
-      <save-node-success>'{0}' has been saved.</save-node-success>
-      <move-problem>You can't move '{0}' to '{1}' because there was a problem with permissions or constraint conditions.</move-problem>
+      <save-node-success>لقد تم حفظ '{0}'.</save-node-success>
+      <move-problem>لا يمكنك نقل '{0}' إلى '{1}' بسبب مشكلة في الصلاحية المنسوبة إليك أو أنها مقيّدة بشروط.</move-problem>
     </msg>
   </UIWorkingArea>
   <UIDocumentWorkspace>
     <label>
-      <no-children>This item doesn't have children.</no-children>
-      <no-children-but-has-hidden>This folder does not have any item, but there are some hidden files.</no-children-but-has-hidden>
+      <no-children>هذا العنصر ليس لديه فروع.</no-children>
+      <no-children-but-has-hidden>هذا المجلد لا يحتوي أي بند من البنود، لكنّه يحتوي على ملفّات مخفيّة.</no-children-but-has-hidden>
     </label>
     <msg>
-      <unable-save-node>'{0}' has been created. Please save session to validate this action.</unable-save-node>
-      <save-node-success>'{0}' has been saved.</save-node-success>
-      <node-copied>'{0}' has been copied.</node-copied>
-      <node-cut>'{0}' has been cut.</node-cut>
-      <remove-root>You can't remove the root folder.</remove-root>
-      <node-remove-success>'{0}' has been removed.</node-remove-success>
+      <unable-save-node>قد تم إنشاء '{0}'. الرجاء حفظ الدورة للتحقق من صحة هذا الإجراء.</unable-save-node>
+      <save-node-success>لقد تم حفظ '{0}'.</save-node-success>
+      <node-copied>قد تم نسخ '{0}'.</node-copied>
+      <node-cut>قد تم قطع '{0}'.</node-cut>
+      <remove-root>لا يمكنك إزالة المجلد الجذر.</remove-root>
+      <node-remove-success>لقد تمت إزالة '{0}'.</node-remove-success>
     </msg>
     <tooltip>
       <Rename>إعادة التسمية</Rename>
@@ -538,11 +538,11 @@
   </UIDocumentWorkspace>
   <UIDocumentInfo>
     <msg>
-      <access-denied>Access denied. You can't access '{0}'.</access-denied>
-      <null-exception>Item not found. It was either removed or changed, or you don't have the access permission.</null-exception>
+      <access-denied>غير مسموح بالدخول. ليس لديك الصلاحية للوصول الى '{0}'.</access-denied>
+      <null-exception>عنصر غير موجود. تم حذفه أو تغييره أو ليس لك الصلاحية الكافية للوصول له.</null-exception>
       <confirm-deleteattachment>هل ترغب فعلا بحذف هذا الملفّ المُرفق؟</confirm-deleteattachment>
       <confirm-deleteattcomment>هل ترغب حقّـا بحذف هذا التّعليق؟</confirm-deleteattcomment>
-      <access-denied-exception>Access denied. You may not have reading privileges, or the documen may have been removed or changed.</access-denied-exception>
+      <access-denied-exception>تم رفض الوصول. قد لا يكون لديك امتيازات القراءة، أو مستند قد تم إزالة أو تغيير.</access-denied-exception>
       <path-not-found>ربما تمّ حذف هذه العقدة  أو تغييرها! الرجاء الضغط على زر التحديث.</path-not-found>
     </msg>
     <tooltip>
@@ -597,11 +597,11 @@
       <RestoreFromTrash>الاستعادة من سلّة المهملات</RestoreFromTrash>
       <EmptyTrash>إفراغ سلّة المهملات</EmptyTrash>
       <WebDavView>فتح الملف بواسطة مايكروسوفت أوفيس</WebDavView>
-      <Download>Download</Download>
+      <Download>تنزيل هذا الملف</Download>
       <OpenDocument>تغيير عن بعد</OpenDocument>
       <EditProperty>تغيير خصائص الملف</EditProperty>
       <UploadNewVersion>تحميل نسخة جديدة</UploadNewVersion>
-      <CreateNewVersion>Save as new version</CreateNewVersion>
+      <CreateNewVersion>تسجيل ضمن نسخة جديدة</CreateNewVersion>
     </event>
   </ECMContextMenu>
  
@@ -733,8 +733,8 @@
       <name-invalid>يُرجى ادخال اسم الخاصيّة.</name-invalid>
       <unable-create>لا يمكن اضافة خاصيّات.</unable-create>
       <value-invalid>يُرجى ادخال قيمة.</value-invalid>
-      <node-checkedin>You must check out this item before adding a property.</node-checkedin>
-      <can-not-add>You can't add properties to this item. This is only allowed for the type nt:unstructured.</can-not-add>
+      <node-checkedin>يجب مراجعة العنصر قبل إضافة الصفة.</node-checkedin>
+      <can-not-add>لا يمكنك إضافة خصائص لهذا العنصر. وهذا مسموح فقط للنوع nt:unstructured.</can-not-add>
       <propertyName-invalid>يجب أن يحتوي اسم الخاصيّة اسم الفضاء (مثال: namespace:name)</propertyName-invalid>
       <propertyName-exist>الخاصيّة '{0}' موجودة مُسبقـا.</propertyName-exist>
       <propertyValu-null>ربما بعض المحتويات فارغة.</propertyValu-null>
@@ -795,7 +795,7 @@
       <selectUser>اختيار مستخدم</selectUser>
     </label>
     <msg>
-      <not-change-owner>'{0}' is the owner of this item and has full control permission.</not-change-owner>
+      <not-change-owner>'{0}' هو صاحب هذا العنصر، و لديه السيطرة الكاملة على الصلاحية</not-change-owner>
     </msg>
   </UIGroupSelector>
   <UIPermissionForm>
@@ -807,7 +807,7 @@
       <add_node>أحقيّة التغيير</add_node>
       <remove>أحقيّة الحذف</remove>
     </label>
-    <title>Add a permission</title>
+    <title>إضافة صلاحية</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>#{word.save}</Save>
@@ -914,7 +914,7 @@
   </ViewSearch>
   <UISearchResult>
     <msg>
-      <not-support>There is no View template for this document.</not-support>
+      <not-support>لا يوجد نموذج عرض لهذا المستند.</not-support>
       <empty>لم يتم العثور على أي نتيجة.</empty>
       <access-denied>لا يمكنك مشاهدة هذه العقدة لأن هذا القالب غير متاح أو ربّما ليس لك الصلاحية الكافية للدخول.</access-denied>
       <query-invalid>صيغة الاستبيان غير صحيحة.</query-invalid>
@@ -939,15 +939,15 @@
       <datecreatedDESC>الترتيب حسب تاريخ الصنع بشكل تنازلي</datecreatedDESC>
     </title>
     <tooltip>
-      <View>View this item</View>
+      <View>عرض هذا العنصر</View>
       <OpenFolder>الذهاب إلى المجلد</OpenFolder>
     </tooltip>
   </UISearchResult>
   <UIShowAllOwnedByUserResult>
     <msg>
-      <not-support>There is no View template for this document</not-support>
+      <not-support>لا يوجد نموذج عرض لهذا المستند</not-support>
       <empty>لم يتم العثور على أي نتيجة.</empty>
-      <access-denied>You can't view this document, either because this template is not supported or because access is denied.</access-denied>
+      <access-denied>لا يمكنك عرض هذا المستند، إمّا لأن هذا القالب غير معتمد، أو لأنه تمّ رفض الوصول اليه.</access-denied>
       <query-invalid>صيغة الاستبيان غير صحيحة</query-invalid>
     </msg>
     <header>
@@ -970,15 +970,15 @@
       <datecreatedDESC>الترتيب حسب تاريخ الصنع  ترتيبا تنازليّا</datecreatedDESC>
     </title>
     <tooltip>
-      <View>View this item</View>
+      <View>عرض هذا العنصر</View>
       <OpenFolder>انتقل إلى المجلد</OpenFolder>
     </tooltip>
   </UIShowAllOwnedByUserResult>
   <UIShowAllFavouriteResult>
     <msg>
-      <not-support>There is no View template for this item</not-support>
+      <not-support>لا يوجد نموذج عرض لهذا العنصر</not-support>
       <empty>لم يتم العثور على نتائج</empty>
-      <access-denied>You can't view this item, either because this template is not supported or because access is denied.</access-denied>
+      <access-denied>لا يمكنك عرض هذا العنصر، أما لأنه لم يتم اعتماد هذا القالب أو لأنه تم رفض الوصول.</access-denied>
       <query-invalid>صيغة الاستبيان غير صحيحة</query-invalid>
     </msg>
     <header>
@@ -1001,15 +1001,15 @@
       <datecreatedDESC>الترتيب حسب تاريخ الصنع بشكل تنازلي</datecreatedDESC>
     </title>
     <tooltip>
-      <View>View this item</View>
+      <View>عرض هذا العنصر</View>
       <OpenFolder>انتقل إلى المجلد</OpenFolder>
     </tooltip>
   </UIShowAllFavouriteResult>
   <UIShowAllHiddenResult>
     <msg>
-      <not-support>There is no View template for this item.</not-support>
+      <not-support>لا يوجد نموذج عرض لهذا العنصر.</not-support>
       <empty>لم يتمّ العثور على أي نتيجة.</empty>
-      <access-denied>You can't view this item, either because it has no View template or because you don't have access to it.</access-denied>
+      <access-denied>لا يمكنك عرض هذا العنصر، إمّا لأن هذا القالب غير معتمد، أو لأنه تمّ رفض الوصول اليه.</access-denied>
       <query-invalid>صيغة الاستبيان غير صحيحة.</query-invalid>
     </msg>
     <header>
@@ -1033,16 +1033,16 @@
       <datecreatedDESC>الترتيب حسب تاريخ الصنع بشكل تنازلي</datecreatedDESC>
     </title>
     <tooltip>
-      <View>View this Item</View>
+      <View>عرض هذا العنصر</View>
       <OpenFolder>انتقل إلى المجلد</OpenFolder>
       <RemoveHiddenAttribute>إزالة السّمة المخفية</RemoveHiddenAttribute>
     </tooltip>
   </UIShowAllHiddenResult>
   <UIShowAllTrashResult>
     <msg>
-      <not-support>There is no View template for this item.</not-support>
+      <not-support>لا يوجد نموذج عرض لهذا العنصر.</not-support>
       <empty>لم يتم العثور على نتائج</empty>
-      <access-denied>You can't view this item, either because it has no View template or because you don't have access to it.</access-denied>
+      <access-denied>لا يمكنك عرض هذا العنصر، إمّا لأن هذا القالب غير معتمد، أو لأنه تمّ رفض الوصول اليه.</access-denied>
       <query-invalid>صيغة الاستبيان غير صحيحة.</query-invalid>
     </msg>
     <header>
@@ -1065,7 +1065,7 @@
       <datecreatedDESC>الترتيب حسب تاريخ الصنع بشكل تنازلي</datecreatedDESC>
     </title>
     <tooltip>
-      <View>View this Item</View>
+      <View>عرض هذا العنصر</View>
       <OpenFolder>انتقل إلى المجلد</OpenFolder>
       <DeletePermanently>حذف بشكل نهائي</DeletePermanently>
       <RestoreFromTrash>الاستعادة من سلّة المهملات</RestoreFromTrash>
@@ -1321,7 +1321,7 @@
       <Cancel>#{word.cancel}</Cancel>
       <Export>التصدير</Export>
     </action>
-    <title>Export</title>
+    <title>التصدير</title>
   </UIExportNode>
   <!--
   ###############################################################################
@@ -1330,7 +1330,7 @@
   -->
   <PopupUserSelector>
     <title>
-      <UIUserContainer>Permission Selector</UIUserContainer>
+      <UIUserContainer>منتق الصلاحية</UIUserContainer>
     </title>
   </PopupUserSelector>
   <UIPopupTaxonomy>
@@ -1366,8 +1366,8 @@
       <error-removing-referenced-version>هذا الإصدار مُشار إليه، و لا يمكن إزالته.</error-removing-referenced-version>
       <confirm-restore>هل ترغب حقــا بحذف هذا الإصدار؟</confirm-restore>
       <confirm-delete>هل ترغب حقــا بحذف هذا الإصدار؟</confirm-delete>
-      <not-checked-out>You have to check out this document before restoring.</not-checked-out>
-      <invalid-item-state>You can't restore this version, either because one or more items were deleted or moved by another session.</invalid-item-state>
+      <not-checked-out>يجب عليك المراجعة قبل استعادة هذا المستند.</not-checked-out>
+      <invalid-item-state>لا يمكن استعادة هذا الإصدار. ربما تم حذف أو تحويل عناصر عن طريق دورة أخرى.</invalid-item-state>
     </msg>
     <action>
       <close>#{word.close}</close>
@@ -1392,8 +1392,8 @@
       <noVersion>ما من إصدار</noVersion>
     </msg>
     <eventName>
-      <e_1>Added</e_1>
-      <e_2>Document Removed</e_2>
+      <e_1>تمت الأضافة</e_1>
+      <e_2>إزالة المستند</e_2>
       <e_4>تم إضافة الخاصيّة</e_4>
       <e_16>تم تغيير الخاصيّة</e_16>
       <e_8>تم حذف الخاصيّة</e_8>
@@ -1433,13 +1433,13 @@
   -->
   <UIActivateVersion>
     <label>
-      <note>Versioning has not been activated for this document.</note>
+      <note>لم يتم تنشيط الإصدارات لهذا المستند.</note>
       <question>هل تريد تفعيله؟</question>
       <button-active>تفعيل</button-active>
       <button-cancel>#{word.cancel}</button-cancel>
     </label>
     <msg>
-      <access-denied>You don't have permission to activate versioning on this document</access-denied>
+      <access-denied>ليس لديك الصلاحيّة لتفعيل عملية الإصدار في هذا المستند</access-denied>
     </msg>
   </UIActivateVersion>
   <!--
@@ -1462,7 +1462,7 @@
       </msg>
     </grid>
     <msg>
-      <node-type-invalid>Only documents can be enrolled.</node-type-invalid>
+      <node-type-invalid>لا يسمح بالتسجيل إلا للمستندات.</node-type-invalid>
       <already-enroled>سبق أن تمّ تسجيل هذه الوثيقة.</already-enroled>
     </msg>
   </UIActivePublication>
@@ -1473,7 +1473,7 @@
   -->
   <UIActivateAuditing>
     <label>
-      <note>Auditing has not been activated for this document.</note>
+      <note>لم يتم تفعيل التدقيق لهذا المستند.</note>
       <question>هل ترغب فعلا باجراء التفعيل؟</question>
     </label>
     <action>
@@ -1516,7 +1516,7 @@
       <Cancel>#{word.cancel}</Cancel>
       <Import>استيراد</Import>
     </action>
-    <title>Import</title>
+    <title>استيراد</title>
     <msg>
       <import-successful>تمّت عمليّة الاستيراد بنجاح.</import-successful>
       <filename-invalid>اختر ملف من نوع 'xml' قصد استيراده.</filename-invalid>
@@ -1524,8 +1524,8 @@
       <xml-invalid>يوجد حرف صيغته غير صالحة وهو متواجد في المكان الآتي [صف ، عمود]:{0} في الملف {1}</xml-invalid>
       <mimetype-invalid>يمكن استيراد ملفات من نوع 'xml' أو 'zip' فحسب.</mimetype-invalid>
       <access-denied>غير مسموح. لا يمكنك الاستيراد هناك.</access-denied>
-      <constraint-violation-exception>Impossible to import data. The type '{0}' is not allowed at this location.</constraint-violation-exception>
-      <item-exists-exception>An incoming item has the same UUID as an existing item in the workspace.</item-exists-exception>
+      <constraint-violation-exception>لا يمكنك استيراد البيانات. نوع '{0}' غير متاح في هذا المكان.</constraint-violation-exception>
+      <item-exists-exception>ورد عنصر ذو مرجع يحتوي على نفس الـمعرّف (UUID) مع عنصر موجود مُسبقا في فضاء التخزين.</item-exists-exception>
     </msg>
   </UIImportNode>
   <!--
@@ -1535,7 +1535,7 @@
   -->
   <UILabelForm>
     <label>
-      <label>Label</label>
+      <label>رمز</label>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -1573,7 +1573,7 @@
   <UIViewVersion>
     <label>
       <nodeType>نوع العقدة</nodeType>
-      <nodeName>Name</nodeName>
+      <nodeName>الاسم</nodeName>
       <VersionNumber>رقم الاصدار</VersionNumber>
       <VersionLabels>رموز الإصدار</VersionLabels>
       <VersionDate>تاريخ الإصدار</VersionDate>
@@ -1609,7 +1609,7 @@
       <action>الإجراءات</action>
     </header>
     <msg>
-      <access-denied>Access denied. You don't have access permission.</access-denied>
+      <access-denied>غير مسموح بالوصول. ليس لديك الصلاحيّات الكافية للوصول.</access-denied>
       <confirm-delete>هل تريد فعلا حذف هذا المرجع ؟</confirm-delete>
     </msg>
     <action>
@@ -1629,7 +1629,7 @@
       <action>اجراء</action>
     </header>
     <info>
-      <child-not-found>This item doesn't have any child.</child-not-found>
+      <child-not-found>هذا المستند ليس له فروع.</child-not-found>
     </info>
   </UITreeList>
   <!--
@@ -1685,8 +1685,8 @@
       <clearall>فسخ الكل</clearall>
     </action>
     <msg>
-      <unable-pasted>Can't paste this item.</unable-pasted>
-      <node-pasted>{0} has been pasted at location {1}. This operation has already been saved.</node-pasted>
+      <unable-pasted>لا يمكن لصق هذا العنصر.</unable-pasted>
+      <node-pasted>{0} تم لصقه في الموقع {1}. تم حفظ هذه العملية مُسبقًـا.</node-pasted>
     </msg>
   </UIClipboard>
   <!--
@@ -1727,15 +1727,15 @@
 </tooltip>
     <msg>
       <cannot-save>طرأ خطأ أثناء عمليّة حفظ الملف.</cannot-save>
-      <in-versioning>Please check out the current folder before adding a new item.</in-versioning>
+      <in-versioning>الرجاء التحقق من المجلد الحالي قبل إضافة عنصر جديد.</in-versioning>
       <not-support>لا يمكن قراءة النموذج '{0}'.</not-support>
       <value-invalid>مطلوب ادخال قيمة في المجال'{0}'.</value-invalid>
       <repository-exception>طرأ خطأ أثناء عمليّة حفظ هذا الملفّ.</repository-exception>
       <!--DMS 2.4.x; ECM-3543-->
-      <repository-exception-permission>You don't have permission to add a new document to this folder.</repository-exception-permission>
+      <repository-exception-permission>ليس لديك الصلاحيّة الكافية لإضافة مستند جديد إلى هذا المجلد.</repository-exception-permission>
       <not-allowed-same-name-sibling>لا يمكن حفظ هذه الوثيقة. ادخال نفس الاسم مرّتين أمر غير مُتاح.</not-allowed-same-name-sibling>
       <numberformat-exception>لا يمكن حفظ هذه الوثيقة. يجب ادخال اسما ذو صيغة عدديّة.</numberformat-exception>
-      <item-not-found>Document not found. This document (or its ancestor) may have been deleted. Please click the Refresh button.</item-not-found>
+      <item-not-found>هذا المستند غير موجود. ربما تمّ حذف هذا المستند أو أحد فروعه. يُرجى الضغط على زر التحديث.</item-not-found>
     </msg>
   </UIDocumentForm>
   <!--
@@ -1800,7 +1800,7 @@
       <action>إجراء</action>
     </header>
     <msg>
-      <remove-popup-first>You must close the edit pop-up before deleting this item.</remove-popup-first>
+      <remove-popup-first>يجب عليك إغلاق مشهد التغيير قبل حذف هذا العنصر.</remove-popup-first>
       <confirm-delete-action>هل تريد حقا حذف هذا الاجراء؟</confirm-delete-action>
       <template-empty>النموذج '{0}' بدون محتوى أو فارغ.</template-empty>
       <template-null>النموذج فارغ أو ربّما لا تملك الصلاحيّة الكافية للوصول الى هذا الأخير .</template-null>
@@ -1826,7 +1826,7 @@
       <numberformat-exception>لا يمكن حفظ هذا الاجراء. يجب أن يكون الاسم بصيغة عدد.</numberformat-exception>
       <existed-action>تمّ استعمال الاسم '{0}' مُسبقـا. يُرجى اختيار اسما آخرا.</existed-action>
       <unable-add-action>استحالة اضافة هذا الاجراء.</unable-add-action>
-      <unable-add>Can't add this action. This item is either the root folder or you don't have the permission to edit.</unable-add>
+      <unable-add>لا يمكن إضافة هذا الإجراء. هذا العنصر هو أما جذر المجلد أو رُبّما ليس لديك الصلاحيّات الكافية.</unable-add>
       <not-support>المشهد '{0}' غير مُتاح.</not-support>
       <no-permission-add>غير مسموح بالدخول. ليس لك الصلاحيّة الكافية لاضافة اجراء هنا.</no-permission-add>
       <access-denied>غير مسموح بالدخول. ليس لك الصلاحيّة الكفاية للوصول الى هذا النموذج.</access-denied>
@@ -1865,7 +1865,7 @@
   <UIAddressBar>
     <msg>
       <path-not-found>المسار غير موجود.</path-not-found>
-      <access-denied>Access denied. You don't have the permission to read.</access-denied>
+      <access-denied>غير مسموح بالدخول. ليس لك الصلاحيّة الكافية للقراءة.</access-denied>
       <keyword-not-support>الكلمة المفتاح غير صحيحة. لم يتم التعرّف على بعض الأحرف.</keyword-not-support>
     </msg>
     <label>
@@ -1874,8 +1874,8 @@
     </label>
     <title>
       <exeButton>الذهاب الى</exeButton>
-      <backButton>Back</backButton>
-      <showHistory>Show History</showHistory>
+      <backButton>السابق</backButton>
+      <showHistory>إظهار السجل</showHistory>
       <changeNode>تغيير العقدة</changeNode>
     </title>
   </UIAddressBar>
@@ -1937,7 +1937,7 @@
   -->
   <UIViewMetadataContainer>
     <msg>
-      <path-not-found>The document does not support this view.</path-not-found>
+      <path-not-found>هذا المستند لا يتحمّل هذا المشهد.</path-not-found>
     </msg>
   </UIViewMetadataContainer>
   <!--
@@ -1958,7 +1958,7 @@
   </metadataForm>
   <UIViewMetadataTemplate>
     <msg>
-      <access-denied>Access denied. Either you are not the owner or don't have edit permission.</access-denied>
+      <access-denied>غير مسموح بالدخول. ليس لك الصلاحيّات الكافية أما أنت لست المالك أو ليس لديك إذن لتعديل الصلاحيات.</access-denied>
     </msg>
   </UIViewMetadataTemplate>
   <!--
@@ -2034,7 +2034,7 @@
       <private>شخصي</private>
       <state>الحالة</state>
       <visibility>الرؤية</visibility>
-      <nodeName>Name:</nodeName>
+      <nodeName>الإسم:</nodeName>
       <lifecycleName>اسم دورة الحياة</lifecycleName>
       <stateName>اسم الحالة</stateName>
     </label>
@@ -2058,7 +2058,7 @@
   </UIWorkspaceList>
   <pathSelector>
     <title>
-      <UIOneNodePathSelector>Selector</UIOneNodePathSelector>
+      <UIOneNodePathSelector>محدد</UIOneNodePathSelector>
     </title>
   </pathSelector>
   <!--
@@ -2166,9 +2166,9 @@
     </label>
     <msg>
       <mimetype-incorrect>نوع الملف غير صحيح. اختر إحدى أنواع الصور المصغرة التالية(JPG, PNG, GIF)</mimetype-incorrect>
-      <access-denied>Access denied. You don't have permission to add a thumbnail.</access-denied>
+      <access-denied>غير مسموح بالدخول. ليس لك الصلاحيّات الكافية لاضافة صورة مصغرة.</access-denied>
       <confirm-delete>هل أنت متأكد من حذف الصورة المصغرة؟</confirm-delete>
-      <is-checked-in>This item is checked in. Please check out before performing any action.</is-checked-in>
+      <is-checked-in>هذا العنصر في حالة مراجعة. يُرجى انهاء المراجعة قبل الشروع في أي اجراء آخر.</is-checked-in>
       <fileName-error>الرجاء اختيار ملف لتحميله.</fileName-error>
     </msg>
     <title>
@@ -2272,7 +2272,7 @@
 
   <PopupSelectPath>
     <title>
-      <UIOneNodePathSelector>Select Path</UIOneNodePathSelector>
+      <UIOneNodePathSelector>اختيار المسار</UIOneNodePathSelector>
     </title>
   </PopupSelectPath>
 
@@ -2302,7 +2302,7 @@
   <UISymLinkForm>
     <label>
       <symLinkName>اسم الوصلة الرمزيّة</symLinkName>
-      <pathNode>Path</pathNode>
+      <pathNode>المسار</pathNode>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -2313,16 +2313,16 @@
       <name-invalid>الرجاء إدخال اسم الوصلة الرمزيّة</name-invalid>
       <name-not-allowed>هذا الاسم غير مُتاح.</name-not-allowed>
       <fileName-error>صيغة اسم الملف غير صحيحة.</fileName-error>
-      <constraint-violation>You can't add an item of type '{0}' here.</constraint-violation>
-      <repository-exception>Access denied. You don't have permission to add a symlink here.</repository-exception>
+      <constraint-violation>لا يمكنك إضافة عنصر من نوع '{0}' هنا.</constraint-violation>
+      <repository-exception>رفض الوصول. ليس لديك صلاحيّة لإضافة الوصلة الرمزيّة من هنا.</repository-exception>
       <numberformat-exception>لا يمكن حفظ هذا المجلد. يجب أن يكون الاسم على شكل أعداد.</numberformat-exception>
-      <path-node-invalid>Please enter the path.</path-node-invalid>
+      <path-node-invalid>الرجاء إدخال المسار.</path-node-invalid>
       <path-node-not-allowed>هذا الاسم غير مُتاح.</path-node-not-allowed>
-      <non-node>Please select the trust target; you may not have the rights to read this item.</non-node>
-      <cannot-save>You can't add a symlink for this type of document.</cannot-save>
-      <item-exists-exception>An item with this name already exists.</item-exists-exception>
-      <translation-node-same-language-default>The translated document has the same language as the default language of current document.</translation-node-same-language-default>
-      <UnsupportedRepositoryOperationException>This target item is not referred.</UnsupportedRepositoryOperationException>
+      <non-node>الرجاء تحديد الهدف؛ قد لا يكون لديك حقوق لقراءة هذا العنصر.</non-node>
+      <cannot-save>لا يمكن اضافة وصلة رمزيّة للهذا النوع من المستندات.</cannot-save>
+      <item-exists-exception>نفس اسم العنصر موجود مسبقا.</item-exists-exception>
+      <translation-node-same-language-default>هذه الترجمة لها نفس اللّغة مع اللغة الافتراضيّة للمستند الحالي.</translation-node-same-language-default>
+      <UnsupportedRepositoryOperationException>هذا ليس الهدف المشار إليه.</UnsupportedRepositoryOperationException>
     </msg>
   </UISymLinkForm>
   
@@ -2342,22 +2342,22 @@
       <name-invalid>الرجاء إدخال اسم الوصلة الرمزيّة</name-invalid>
       <name-not-allowed>هذا الاسم غير متاح.</name-not-allowed>
       <fileName-error>صيغة اسم الملف غير صحيحة.</fileName-error>
-      <constraint-violation>You can't add the '{0}' type to the current item.</constraint-violation>
-      <repository-exception>Access denied. You don't have permission to add a symlink to this item.</repository-exception>
+      <constraint-violation>لا يمكنك إضافة نوع '{0}' للعنصر الحالي.</constraint-violation>
+      <repository-exception>تم رفض الوصول. ليس لديك صلاحيّة لإضافة الوصلة الرمزيّة لهذا العنصر.</repository-exception>
       <numberformat-exception>لا يمكن حفظ هذا المجلد. يجب أن يكون الاسم عدديّـا.</numberformat-exception>
-      <path-node-invalid>Please enter the path.</path-node-invalid>
+      <path-node-invalid>الرجاء إدخال المسار.</path-node-invalid>
       <path-node-not-allowed>هذا الاسم غير متاح.</path-node-not-allowed>
-      <non-node>Please select the trust target; you may not have the right to read this node.</non-node>
+      <non-node>الرجاء اختيار العقدة الهدف الصحيحة،  أو ربّما لم يكن لديك ما يكفي من حقوق لقراءة هذه العقدة.</non-node>
       <cannot-save>طرأ خطأ أثناء انشاء الوصلة الرمزيّة.</cannot-save>
-      <item-exists-exception>An item with this name already exists.</item-exists-exception>
-      <translation-node-same-language-default>The translated document has the same language as the default language of current document.</translation-node-same-language-default>
-      <UnsupportedRepositoryOperationException>This target item is not referred.</UnsupportedRepositoryOperationException>
+      <item-exists-exception>عنصر بهذا الاسم موجود مسبقاً.</item-exists-exception>
+      <translation-node-same-language-default>الوثيقة المترجمة بنفس اللغة كلغة افتراضية للمستند الحالي.</translation-node-same-language-default>
+      <UnsupportedRepositoryOperationException>هذا ليس الهدف المشار إليه.</UnsupportedRepositoryOperationException>
     </msg>
   </UIAddTranslationForm>
 
   <UIPopupSymLink>
     <title>
-      <UIOneNodePathSelector>Select Target Item</UIOneNodePathSelector>
+      <UIOneNodePathSelector>حدد العنصر المستهدف</UIOneNodePathSelector>
     </title>
   </UIPopupSymLink>
   <UIPopupSymLink>
@@ -2375,9 +2375,9 @@
 
   <UIWorkingArea>
     <msg>
-      <create-link-problem>You can't create a link for '{0}' at '{1}'.</create-link-problem>
-      <dest-node-is-link>The destination '{0}' is already a symlink, so you cannot create a symlink inside it.</dest-node-is-link>
-      <selected-is-link>The selected item '{0}' is already a link. You can't create a link to another link.</selected-is-link>
+      <create-link-problem>لا يمكنك إنشاء  رابط بين'{0}' و '{1}'.</create-link-problem>
+      <dest-node-is-link>العقدة الهدف '{0} 'هي بالفعل وصلة رمزيّة، بحيث لا يمكنك إنشاء وصلة رمزيّة أخرى بداخله.</dest-node-is-link>
+      <selected-is-link>العنصر المحدد '{0}' بالفعل رابط. لا يمكنك إنشاء رابط إلى رابط آخر.</selected-is-link>
       <confirm-create-link>هل تريد حقاً انشاء رابط  نحو هذا الموقع؟</confirm-create-link>
     </msg>
   </UIWorkingArea>
@@ -2458,9 +2458,9 @@
       <Back>مرة أخرى لإعادة تسمية</Back>
       <Keepfile>ابقاء جميع الملفات</Keepfile>
 <ReadOnly>فتح للقراءة فقط</ReadOnly>
-<Cancel>Cancel</Cancel>
+<Cancel>الغاء</Cancel>
       <KeepBoth>الابقاء عليهما</KeepBoth>
-      <CreateNewVersion>Save as new version</CreateNewVersion>
+      <CreateNewVersion>تسجيل ضمن نسخة جديدة</CreateNewVersion>
     </label>
   </UIConfirmMessage>
 
@@ -2516,7 +2516,7 @@
 
   <UIPopupMenu>
     <msg>
-      <node-locked-other-person>This item or its parent folder is locked by another user, so you can't delete it.</node-locked-other-person>
+      <node-locked-other-person>هذا العنصر أو المجلد الأصل الخاص به مؤمن من قبل مستخدم آخر، لا يمكنك حذفه.</node-locked-other-person>
     </msg>
   </UIPopupMenu>
 
@@ -2551,7 +2551,7 @@
 
   <UIPopupMenu>
     <msg>
-      <can-not-unlock-node-is-checked-in>You can't unlock because the '{0}' (or its parent folder) is checked in.</can-not-unlock-node-is-checked-in>
+      <can-not-unlock-node-is-checked-in>لايمكن فكّ تأمين '{0}' (أو احدى أسْلافها) لأنها بصدد المراجعة.</can-not-unlock-node-is-checked-in>
     </msg>
   </UIPopupMenu>
 
@@ -2560,12 +2560,12 @@
   -->
   <UIActionBar>
     <msg>
-      <cannot-enable-version>Can't activate versioning on this document.</cannot-enable-version>
+      <cannot-enable-version>لا يمكن تنشيط عملية الإصدار في هذا المستند.</cannot-enable-version>
     </msg>
   </UIActionBar>
   <UIPopupMenu>
     <msg>
-        <cannot-readsource>You can't read data from the source.</cannot-readsource>
+        <cannot-readsource>لا يمكنك قراءة البيانات من المصدر.</cannot-readsource>
     </msg>
   </UIPopupMenu>
   <UIUploadForm>
@@ -2845,7 +2845,7 @@
 
     <UIPopupMenu>
     <msg>
-      <node-locked-editing>You can't edit  {0}. It's locked by another user.</node-locked-editing>
+      <node-locked-editing>لا يمكنك تعديل {0}. هو مؤمن بواسطة مستخدم آخر.</node-locked-editing>
     </msg>
   </UIPopupMenu>
   <UITagStyleForm>
@@ -2895,7 +2895,7 @@
 
   <UIPreferencesForm>
       <label>
-            <queryType>Query language:</queryType>
+            <queryType>لغة الاستبيان:</queryType>
             <SQL>SQL</SQL>
             <XPATH>XPATH</XPATH>
       </label>
@@ -2939,12 +2939,12 @@
   </PathNode>
   <UIPopupPathFoRestore>
     <title>
-      <UIOneNodePathSelector>Select Parent</UIOneNodePathSelector>
+      <UIOneNodePathSelector>حدد الأصل</UIOneNodePathSelector>
     </title>
   </UIPopupPathFoRestore>
   <rootNodeInfo>
     <title>
-      <AddRootNode>Add Root</AddRootNode>
+      <AddRootNode>إضافة الجذر</AddRootNode>
     </title>
   </rootNodeInfo>
 
@@ -3103,10 +3103,10 @@
     </DrivesArea>
     <msg>
       <no-view-found>ليس هناك مشهد متاح لك و ذلك بالرّجوع الى خصائص صلاحيّاتك على القرص '{0}'.</no-view-found>
-      <access-denied>Access denied. You may not have permission in the workspace of drive '{0}'.</access-denied>
+      <access-denied>غير مسموح بالدخول! ربما ، ليست لديك الصلاحيّات الكافية على مساحة العمل الخاصّة بالقرص '{0}'.</access-denied>
       <not-found>الملف الذي تحاول الوصول إليه لم يعد متوفراً.</not-found>
       <empty-drives>استحالة الدخول. ليست هناك أقراص في هذا المستودع ، أو ربّما ليست لديك الصلاحيّات الكافية للدخول إلى محتوى أي قرص في مستودع البيانات الحالي.</empty-drives>
-      <workspace-not-exist>Drive '{0}' was stored in one unrecognized workspace. Please reconfigure this drive.</workspace-not-exist>
+      <workspace-not-exist>تم تخزين القرص '{0}' في مساحة عمل أخرى غير معروفة. يرجى إعادة تهيئته.</workspace-not-exist>
     </msg>
   </UIDrivesArea>
   <UIJcrExplorerEditForm>
@@ -3156,9 +3156,9 @@
   </lifecyclePhase>
   <UIPopupMenu>
   <msg>
-<can-not-remove-locked-node>{0} is locked. You can't move it to the Trash.</can-not-remove-locked-node>
-<can-not-remove-checked-in-node>{0} or its parent folder is checked in. You can't move it to the Trash.</can-not-remove-checked-in-node>
-<access-denied-to-delete>Access denied. You can't move {0} to the Trash.</access-denied-to-delete>
+<can-not-remove-locked-node>{0} مؤمّنة. لا يمكن نقله الى سلّة المهملات.</can-not-remove-locked-node>
+<can-not-remove-checked-in-node>{0} أو أصله بحالة مراجعة. لا يمكن نقله الى سلّة المهملات.</can-not-remove-checked-in-node>
+<access-denied-to-delete>غير مسموح بالدخول. لا يمكن نقل {0}  الى سلّة المهملات.</access-denied-to-delete>
   </msg>
   </UIPopupMenu>
   <UIPropertyForm>
@@ -3168,8 +3168,8 @@
   </UIPropertyForm>
   <UIWatchDocumentForm>
     <msg>
-      <node-is-locked>This item is locked. You cannot watch it.</node-is-locked>
-      <unknown-error>Some errors have occurred. You can't watch this document.</unknown-error>
+      <node-is-locked>هذا العنصر مُؤمّن. لا يمكن تتبّعه.</node-is-locked>
+      <unknown-error>طرأ خطأ. لا يمكن تتبّع هذا المستند.</unknown-error>
     </msg>
   </UIWatchDocumentForm>   
   <UIActionForm>
@@ -3186,7 +3186,7 @@
     <DropFileMessage>إسقاط الملفات الخاصة بك في المجلد الحالي</DropFileMessage>
     <Close>#{word.close}</Close>
     <in>في</in>
-    <MaxFileSizeAlert>The file size exceeds the limit of</MaxFileSizeAlert>
+    <MaxFileSizeAlert>حجم الملف يتجاوز الحدّ الأقصى بحوالي</MaxFileSizeAlert>
     <Waiting>في الانتظار</Waiting>
     <Error>خطأ</Error>
     <or>أو</or>
@@ -3194,7 +3194,7 @@
     <Keep>الاحتفاظ بكليهما</Keep>
     <Replace>تعويض</Replace>
     <Canceled>تم إلغاؤها</Canceled>
-      <UploadNewVersion>Upload a new version</UploadNewVersion>
+      <UploadNewVersion>تحميل نسخة جديدة</UploadNewVersion>
     <Cancel>#{word.cancel}</Cancel>
     <AbortAllConfirmation>هل تريد أن تلغي تحميل جميع الملفات؟</AbortAllConfirmation>
   </label>
@@ -3202,7 +3202,7 @@
   <UIDocumentNodeList>
   <label>
   <CreatedOn>تمّ انشاؤه في</CreatedOn>
-  <Updated>Updated</Updated>
+  <Updated>تمّ تحديثه في</Updated>
   <by>بواسطة</by>
   <you>أنت</you>
   </label>

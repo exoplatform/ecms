@@ -18,8 +18,8 @@
       <Document>سند</Document>
       <DocumentAndPage>سند و صفحه</DocumentAndPage>
       <documentandpage>سند و صفحه</documentandpage>
-      <results>Results {0} to {1} for {2}</results>
-      <oneResult>Only one result for {0}</oneResult>
+      <results>نتایج از {0} به {1} برای {2}</results>
+      <oneResult>فقط یک نتیجه برای {0}</oneResult>
       <ofAboutCaption>حدود</ofAboutCaption>
       <timeUnitCaption>ثانیه</timeUnitCaption>
       <similar>صفحاتی که در آن محتوای مشابه وجود دارد</similar>

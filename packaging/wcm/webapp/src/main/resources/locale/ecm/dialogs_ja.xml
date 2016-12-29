@@ -35,7 +35,7 @@
  
   <UICommentForm>
     <label>
-      <placeholder>Use @ to mention someone in your comment</placeholder>
+      <placeholder>コメントに誰かをメンションするには。@ を使用します</placeholder>
     </label>
   </UICommentForm>
  
@@ -60,8 +60,8 @@
         <name>#{word.name}</name>
         <categories>カテゴリ</categories>
         <mimeType>#{Ecm.dialog.label.mimeType}</mimeType>
-        <width>Width</width>
-        <height>Height</height>
+        <width>幅</width>
+        <height>高さ</height>
         <content>#{word.content}</content>
         <re-upload>ファイルが既に存在します。再度アップロードすることで置き換えることができます。</re-upload>
       </label>

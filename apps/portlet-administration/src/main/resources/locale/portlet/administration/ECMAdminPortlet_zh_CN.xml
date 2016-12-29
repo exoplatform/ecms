@@ -988,12 +988,12 @@
       <publicationPublish>发布</publicationPublish>
       <contentNavigation>内容导航</contentNavigation>
       <addSymLink>添加符号链接</addSymLink>
-      <checkIn>Check In</checkIn>
-      <checkOut>Check Out</checkOut>
-      <shareDocuments>Share</shareDocuments>
-      <openDocument>Remote Edit</openDocument>
-      <editProperty>Edit Document Properties</editProperty>
-      <uploadNewVersion>Upload a new version</uploadNewVersion>
+      <checkIn>存入</checkIn>
+      <checkOut>取出</checkOut>
+      <shareDocuments>分享</shareDocuments>
+      <openDocument>远程编辑</openDocument>
+      <editProperty>编辑文档属性</editProperty>
+      <uploadNewVersion>上传新版本</uploadNewVersion>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -2034,7 +2034,7 @@
   -->
   <ECMPhoneFormatValidator>
     <msg>
-      <Invalid>The field '{0}' contains an invalid Phone number. Please enter another value.</Invalid>
+      <Invalid>'{0}' 字段包含一个无效的电话号码。请输入另一个值。</Invalid>
     </msg>
   </ECMPhoneFormatValidator>
   <!--

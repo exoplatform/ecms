@@ -2,7 +2,7 @@
 <bundle>
   <UICNContainer>
     <title>
-      <QuickEdit>Quick Edit</QuickEdit>
+      <QuickEdit>Sửa nhanh</QuickEdit>
     </title>
   </UICNContainer>
 
@@ -21,15 +21,15 @@
   <UICategoryNavigationConfig>
     <label>
       <UICategoryNavigationRepositoryFormSelectBox>Kho dữ liệu</UICategoryNavigationRepositoryFormSelectBox>
-      <UICategoryNavigationTreeNameSelectBox>Category Tree</UICategoryNavigationTreeNameSelectBox>
-      <UICategoryNavigationTreeTitleFormStringInput>Title</UICategoryNavigationTreeTitleFormStringInput>
+      <UICategoryNavigationTreeNameSelectBox>Cây phân loại</UICategoryNavigationTreeNameSelectBox>
+      <UICategoryNavigationTreeTitleFormStringInput>Tiêu đề</UICategoryNavigationTreeTitleFormStringInput>
   
-      <UICategoryNavigationTreeNameFormSelectBox>Tree Name</UICategoryNavigationTreeNameFormSelectBox>
+      <UICategoryNavigationTreeNameFormSelectBox>Cây phân loại</UICategoryNavigationTreeNameFormSelectBox>
       <UICategoryNavigationTemplateFormSelectBox>Tree viewer template</UICategoryNavigationTemplateFormSelectBox>
       
       <UICategoryNavigationTargetPathFormInputSet>Hiển thị trên Trang</UICategoryNavigationTargetPathFormInputSet>      
       <TreeSelectionBlock>Tree Selection</TreeSelectionBlock>
-      <DisplaySettingBlock>Display Settings</DisplaySettingBlock>
+      <DisplaySettingBlock>Display settings</DisplaySettingBlock>
       <AdvancedBlock>Nâng cao</AdvancedBlock>
   
   <UICategoryNavigationTreePathFormInputSet>Đường dẫn Đích</UICategoryNavigationTreePathFormInputSet>
@@ -42,12 +42,12 @@
       
     </label>
     <msg>
-      <not-support-encoding>Encoding is not supported.</not-support-encoding>
-      <render>An error occurred when rendering.</render>
+      <not-support-encoding>Không hỗ trợ</not-support-encoding>
+      <render>Có lỗi khi đang hiển thị</render>
       <saving-success>The information was updated successfully.</saving-success>
     </msg>
     <action>
-      <Save>Save</Save>
+      <Save>Lưu</Save>
     </action>
   </UICategoryNavigationConfig>
   <UICategoryNavigationTreeBase>

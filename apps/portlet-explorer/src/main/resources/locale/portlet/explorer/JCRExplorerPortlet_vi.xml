@@ -8,7 +8,7 @@
   <UICommentForm>
     <label>
       <name>Tên</name>
-      <email>Email</email>
+      <email>Địa chỉ thư điện tử</email>
       <website>Trang web</website>
       <comment>Bình luận</comment>
     </label>
@@ -18,7 +18,7 @@
     </action>
     <msg>
       <not-support>You can't comment on this type of document.</not-support>
-      <not-checkedout>You must check out the document before commenting on it.</not-checkedout>
+      <not-checkedout>Bạn phải checkout nút đó trước khi đưa ra bình luận.</not-checkedout>
       <content-null>Bạn không thể đăng tải một bình luận trống.</content-null>
     </msg>
   </UICommentForm>
@@ -41,13 +41,13 @@
     </label>
     <button>
       <label>
-        <confirm>OK</confirm>
+        <confirm>Đồng ý</confirm>
       </label>
     </button>
     <msg>
       <not-support>Không được phép bình chọn cho kiểu tài liệu này.</not-support>
-      <not-checkedout>You must check out the document to vote.</not-checkedout>
-      <vote-restriction>You can't vote more than once.</vote-restriction>
+      <not-checkedout>Bạn phải checkout nút đó trước khi bình chọn.</not-checkedout>
+      <vote-restriction>Bạn không thể bình chọn quá 1 lần.</vote-restriction>
     </msg>
   </UIVoteForm>
  
@@ -59,9 +59,9 @@
   <UIJCRExplorer>
     <msg>
       <refresh-session-success>Phiên làm việc đã được làm mới thành công.</refresh-session-success>
-      <no-node-history>You are at the root folder.</no-node-history>
+      <no-node-history>Bạn đang ở thư mục gốc.</no-node-history>
       <save-session-success>Tất cả thay đổi đã được lưu lại.</save-session-success>
-      <target-path-not-found>You can't access this path, either because it doesn't exist anymore or because you don't have access permissions.</target-path-not-found>
+      <target-path-not-found>Bạn không thể truy cập nút này vì nó không tồn tại nữa hoặc bạn không có quyền truy cập nó.</target-path-not-found>
     </msg>
   </UIJCRExplorer>
   <!--
@@ -157,13 +157,13 @@
   <UIPreferencesForm>
     <title>Thiết lập tùy chọn hiển thị</title>
     <label>
-      <enableStructure>Browse in structure mode:</enableStructure>
-      <showSideBar>Show sidebar:</showSideBar>
-      <showHiddenNode>Show hidden items:</showHiddenNode>
-      <showNonDocument>Show non-document items:</showNonDocument>
-      <showRefDocuments>Show referenced items:</showRefDocuments>
+      <enableStructure>Hiển thị cấu trúc DMS:</enableStructure>
+      <showSideBar>Hiện Cây thư mục:</showSideBar>
+      <showHiddenNode>Hiện Nút Ẩn:</showHiddenNode>
+      <showNonDocument>Hiển thị tất cả các kiểu nút:</showNonDocument>
+      <showRefDocuments>Hiện Tài liệu được Tham chiếu:</showRefDocuments>
       <enableDragAndDrop>Bật tính năng Kéo Thả:</enableDragAndDrop>
-      <sortBy>Sort order:</sortBy>
+      <sortBy>Phân loại theo:</sortBy>
       <order>Xếp thứ tự theo:</order>
       <nodesPerPage>Số kết quả mỗi trang:</nodesPerPage>
     </label>
@@ -201,15 +201,15 @@
       <Back>Quay lại</Back>
     </action>
     <msg>
-      <rename-successfull>'{0}' was renamed to '{1}' successfully.</rename-successfull>
-      <rename-denied>Access denied. You can't rename this item.</rename-denied>
+      <rename-successfull>Nút '{0}' được đổi tên thành công sang '{1}'.</rename-successfull>
+      <rename-denied>Truy nhập bị khước từ. Bạn không thể đổi tên nút này.</rename-denied>
       <fileName-invalid>Tên mới chứa một số ký tự không hợp lệ.</fileName-invalid>
       <newName-same-oldName>Tên mới đã tồn tại. Vui lòng kiểm tra lại.</newName-same-oldName>
-      <version-exception>This document (or one of its ancestors) is not checked out.</version-exception>
-      <lock-exception>This document is locked. Please unlock it before renaming.</lock-exception>
-      <constraintViolation-exception>An error occurred while renaming '{0}'. Please check again.</constraintViolation-exception>
+      <version-exception>Nút này hoặc nút cha của nó chưa được check out.</version-exception>
+      <lock-exception>Nút này đang bị khóa. Vui lòng mở khóa trước khi đổi tên.</lock-exception>
+      <constraintViolation-exception>Lỗi đã xảy ra khi đang đổi tên nút '{0}'. Vui lòng kiểm tra lại.</constraintViolation-exception>
       <unknown-prefix>Tiền tố '{0}' chưa được đăng ký.</unknown-prefix>
-      <rename-error>An error occurred while renaming. Please check again.</rename-error>
+      <rename-error>Lỗi đã xảy ra khi đang đổi tên nút này. Vui lòng kiểm tra lại.</rename-error>
     </msg>
   </UIRenameForm>
   <UIPopupWindow>
@@ -222,7 +222,7 @@
       <UIExportNode>Xuất dữ liệu ra</UIExportNode>
       <UINodeTypeInfo>Thông tin Kiểu Nút</UINodeTypeInfo>
       <UIVersionInfo>Thông tin Phiên bản</UIVersionInfo>
-      <UIActivateVersion>Activate Versioning</UIActivateVersion>
+      <UIActivateVersion>Kích hoạt Quản lý phiên bản</UIActivateVersion>
       <UIAuditingInfo>Kiểm tra thông tin</UIAuditingInfo>
       <UIActivateAuditing>Kích hoạt Ghi lại thay đổi</UIActivateAuditing>
       <UIPermissionManager>Quản lý Phân quyền</UIPermissionManager>
@@ -240,7 +240,7 @@
       <UIViewMetadataManager>Xem Siêu dữ liệu</UIViewMetadataManager>
       <UIVoteForm>Bình chọn Tài liệu</UIVoteForm>
       <UICommentForm>Bình luận</UICommentForm>
-      <UIPreferencesForm>Documents Browsing Preferences</UIPreferencesForm>
+      <UIPreferencesForm>Tùy chọn Thiết lập</UIPreferencesForm>
       <UIPublicationManager>Quản lý Đăng tải</UIPublicationManager>
       <UIConfirmMessage>Có xóa không?</UIConfirmMessage>
       <UIDeleteFileConfirmMessage>Xóa Tệp tin?</UIDeleteFileConfirmMessage>
@@ -250,11 +250,11 @@
       <UIActivePublication>Đăng ký Chu trình Xuất bản</UIActivePublication>
       <UITaggingForm>Gán nhãn Tài liệu</UITaggingForm>
       <UIThumbnailForm>Thêm Ảnh Nhỏ</UIThumbnailForm>
-      <UIAllItemsPreferenceForm>Documents Browsing Preferences</UIAllItemsPreferenceForm>
+      <UIAllItemsPreferenceForm>Tùy chọn Thiết lập</UIAllItemsPreferenceForm>
       <UISelectRestorePath>Chọn Đường dẫn Khôi phục</UISelectRestorePath>
       <UISEOForm>Quản lý SEO</UISEOForm>
       <UISEOToolbarForm>Quản lý SEO</UISEOToolbarForm>
-      <UIReadOnlyFileConfirmMessage>Open Document</UIReadOnlyFileConfirmMessage>
+      <UIReadOnlyFileConfirmMessage>Mở tài liệu</UIReadOnlyFileConfirmMessage>
       <UIDocumentAutoVersionForm>Copy Document</UIDocumentAutoVersionForm>
     </title>
     <header>
@@ -310,43 +310,43 @@
       <ViewRelations>Hiện/Ẩn Quan hệ</ViewRelations>
       <ShowJCRStructure>Hiện/Ẩn Cấu trúc Nội dung</ShowJCRStructure>
       <EditProperty>Edit Document Properties</EditProperty>
-      <UploadNewVersion>Upload a new version</UploadNewVersion>
+      <UploadNewVersion>Tải một phiên bản mới</UploadNewVersion>
     </tooltip>
     <msg>
-      <cannot-action-in-rootnode>You can't perform this action at root.</cannot-action-in-rootnode>
+      <cannot-action-in-rootnode>Bạn không thể thực hiện hành động này ở nút gốc.</cannot-action-in-rootnode>
       <node-checkedin>Bạn phải check out trước.</node-checkedin>
-      <cannot-enable-version-rootnode>Can't activate versioning on root.</cannot-enable-version-rootnode>
-      <cannot-enable-publication-rootnode>Can't activate publication at root.</cannot-enable-publication-rootnode>
+      <cannot-enable-version-rootnode>Không thể kích hoạt tính năng lập phiên bản cho nút gốc.</cannot-enable-version-rootnode>
+      <cannot-enable-publication-rootnode>Không thể kích hoạt tính năng xuất bản cho nút gốc.</cannot-enable-publication-rootnode>
       <manage-publication>
-        <not-supported-nodetype>Only documents can be published.</not-supported-nodetype>
+        <not-supported-nodetype>Tính năng quản lý xuất bản chỉ hỗ trợ nút tài liệu.</not-supported-nodetype>
         <no-publication-lifecycle>Không có chu trình xuất bản nào được thiết lập cấu hình.</no-publication-lifecycle>
       </manage-publication>
-      <unsubcriber-lifecycle>The document was already unsubscribed.</unsubcriber-lifecycle>
-      <not-supported-nodetype>This operation is only supported for documents.</not-supported-nodetype>
-      <unsubcriber-lifecycle-finish>The document was unsubscribed successfully.</unsubcriber-lifecycle-finish>
-      <access-false>The document is not an article or checked in.</access-false>
+      <unsubcriber-lifecycle>Nút đã bỏ đăng ký.</unsubcriber-lifecycle>
+      <not-supported-nodetype>Chu trình bỏ đăng ký chỉ hỗ trợ cho nút tài liệu.</not-supported-nodetype>
+      <unsubcriber-lifecycle-finish>Nút đã được ngừng đăng ký thành công.</unsubcriber-lifecycle-finish>
+      <access-false>Nút này không phải là một bài viết hoặc chưa được check in.</access-false>
       <unsupported-action>Hành động này không được hỗ trợ.</unsupported-action>
-      <not-relationable>This document has no relations.</not-relationable>
-      <node-pasted>'{0}' has been pasted at the location '{1}'. This operation has already been saved.</node-pasted>
-      <no-node-selected>Nothing to copy.</no-node-selected>
-      <unable-edit>Editing documents of type '{1}' like '{0}' is not supported.</unable-edit>
-      <not-support>Can't edit the selected item.</not-support>
-      <template-null>This document has no form template.</template-null>
+      <not-relationable>Nút này chưa có bất kỳ liên kết nào có quan hệ với nút khác.</not-relationable>
+      <node-pasted>Nút '{0}' đã được dán vào vị trí '{1}'. Thao tác này đã được lưu lại.</node-pasted>
+      <no-node-selected>Không có nút nào được sao chép.</no-node-selected>
+      <unable-edit>Nút '{0}' với kiểu nút '{1}' không được hỗ trợ để chỉnh sửa.</unable-edit>
+      <not-support>Không thể chỉnh sửa nút đã chọn.</not-support>
+      <template-null>Nút này không sẵn có hội thoại nào.</template-null>
       <keyword-null>Không có từ khóa nào để tìm kiếm.</keyword-null>
       <not-found>Không tìm thấy kết quả nào.</not-found>
       <keyword-not-allow>Không cho phép dùng từ khóa này.</keyword-not-allow>
-      <is-not-referenable>'{0}' can't be referenceable.</is-not-referenable>
-      <access-denied>Access denied. You don't have edit permission for this item.</access-denied>
-      <access-add-denied>Access denied. You don't have permission to add items here.</access-add-denied>
+      <is-not-referenable>Không thể tham chiếu được nút '{0}'.</is-not-referenable>
+      <access-denied>Truy cập bị khước từ. Bạn không được phân quyền chỉnh sửa trên nút này.</access-denied>
+      <access-add-denied>Truy cập bị từ chối. Bạn không được phân quyền thêm mới trên nút này.</access-add-denied>
       <item-existed>Nút này đã tồn tại vì không thể có cùng tên với nút khác.</item-existed>
       <removed-hidden-mixin>Bạn đã gỡ bỏ thành công nút mixin ẩn.</removed-hidden-mixin>
       <added-hidden-mixin>Bạn đã thêm thành công nút mixin ẩn.</added-hidden-mixin>
       <not-supported>Tính năng này chỉ hỗ trợ cho kiểu tài liệu.</not-supported>
-      <empty-file-type>You can't add a document here.</empty-file-type>
-      <unsupported-watch>Only documents can be watched.</unsupported-watch>
-      <watch-checkedin>You must check out the document before watching.</watch-checkedin>
-      <unsupported-tagging>Only documents can be tagged.</unsupported-tagging>
-      <tagnode-checkedin>You must check out the document before tagging.</tagnode-checkedin>
+      <empty-file-type>Bạn không thể thêm tài liệu vào nút này.</empty-file-type>
+      <unsupported-watch>Chỉ có thể theo dõi nút tài liệu.</unsupported-watch>
+      <watch-checkedin>Bạn phải check out nút trước khi theo dõi.</watch-checkedin>
+      <unsupported-tagging>Chỉ có thể gán nhãn cho nút tài liệu.</unsupported-tagging>
+      <tagnode-checkedin>Bạn phải check out nút trước khi gán nhãn.</tagnode-checkedin>
     </msg>
     <title>
       <select-tab>Chọn Tab</select-tab>
@@ -361,48 +361,48 @@
   </UIActionBar>
   <UIPopupMenu>
     <msg>
-      <has-not-permission>Access denied. You don't have permissions to add in this item.</has-not-permission>
-      <has-not-edit-permission>Access denied. You don't have edit permission here. Please contact the administrator.</has-not-edit-permission>
-      <cannot-login-node>You can't access and paste an item here.</cannot-login-node>
-      <cannot-paste-nodetype>You can't paste this type of item here.</cannot-paste-nodetype>
-      <has-not-permission-unlok>You don't have permission to unlock this document.</has-not-permission-unlok>
-      <bound-exception>You don't have the permission to rename this item. Please contact the administrator.</bound-exception>
-      <bound-move-exception>You can't move an item to itself or in a subfolder.</bound-move-exception>
-      <does-not-support-auditing>You can't activate auditing here.</does-not-support-auditing>
-      <can-not-rename-node>You don't have permission to rename this item. Please contact the administrator to get the necessary rights.</can-not-rename-node>
-      <can-not-cut-node>You don't have permission to cut this item. Please contact the administrator.</can-not-cut-node>
-      <can-not-remove-node>You don't have permission to remove this item. Please contact the administrator.</can-not-remove-node>
-      <can-not-lock-node>You don't have permission to lock {0}. Please contact the administrator.</can-not-lock-node>
-      <can-not-unlock-node>You don't have permission to unlock this item. Please contact the administrator.</can-not-unlock-node>
-      <no-node>Please select at least one item before pasting.</no-node>
-      <can-not-paste-node>You don't have permission to move to this item. Please contact the administrator.</can-not-paste-node>
-      <can-not-move-node>You don't have permission to move this item. Please contact the administrator.</can-not-move-node>
-      <does-not-support-versioning>You don't have permission to move. Please contact the administrator.</does-not-support-versioning>
+      <has-not-permission>Truy cập bị khước từ. Bạn không có quyền thêm mới trên nút này.</has-not-permission>
+      <has-not-edit-permission>Truy cập bị khước từ. Bạn không có quyền chỉnh sửa trên nút này. Vui lòng liên hệ với quản trị viên.</has-not-edit-permission>
+      <cannot-login-node>Bạn không thể truy cập và dán nút ở đây.</cannot-login-node>
+      <cannot-paste-nodetype>Bạn không thể dán nút ở đây.</cannot-paste-nodetype>
+      <has-not-permission-unlok>Bạn không được phân quyền để mở khóa nút này.</has-not-permission-unlok>
+      <bound-exception>Bạn không được phân quyền để đổi tên nút này. Vui lòng liên hệ với quản trị viên.</bound-exception>
+      <bound-move-exception>Bạn không thể di chuyển một nút đến chính nó hoặc đến nút con của nó.</bound-move-exception>
+      <does-not-support-auditing>Bạn không thể kích hoạt tính năng ghi lại thay đổi trên nút này.</does-not-support-auditing>
+      <can-not-rename-node>Bạn không được phân quyền để đổi tên nút này. Vui lòng liên hệ với quản trị viên để được phân quyền thích hợp.</can-not-rename-node>
+      <can-not-cut-node>Bạn không được phân quyền để cắt nút này. Vui lòng liên hệ với quản trị viên.</can-not-cut-node>
+      <can-not-remove-node>Bạn không được phân quyền để gỡ bỏ nút này. Vui lòng liên hệ với quản trị viên.</can-not-remove-node>
+      <can-not-lock-node>Bạn không được phân quyền để khóa nút {0}. Vui lòng liên hệ với quản trị viên.</can-not-lock-node>
+      <can-not-unlock-node>Bạn không được phân quyền để mở khóa nút này. Vui lòng liên hệ với quản trị viên.</can-not-unlock-node>
+      <no-node>Vui lòng chọn ít nhất một nút trước khi dán.</no-node>
+      <can-not-paste-node>Bạn không được phân quyền để chuyển đến nút này. Vui lòng liên hệ với quản trị viên.</can-not-paste-node>
+      <can-not-move-node>Bạn không được phân quyền để di chuyển nút này. Vui lòng liên hệ với quản trị viên.</can-not-move-node>
+      <does-not-support-versioning>Bạn không được phân quyền để chuyển đến nút này. Vui lòng liên hệ với quản trị viên.</does-not-support-versioning>
       <path-not-found>Thành phần này đã bị xóa hoặc thay đổi. Vui lòng nhấp nút Làm mới.</path-not-found>
-      <paste-lock-exception>'{0}' can't be pasted here. Make sure it is not locked nor this folder. Also check that no related document is locked.</paste-lock-exception>
-      <can-not-checkin-node>You can't check in this item. Please check that you have the necessary permissions.</can-not-checkin-node>
-      <can-not-checkout-node>You can't check out this item. Please check that you have the necessary permissions.</can-not-checkout-node>
-      <move-constraint-exception>An error occurred while moving this item.</move-constraint-exception>
-      <not-lock-owner>You can't unlock this document because you are not the lock owner.</not-lock-owner>
-      <is-checked-in>Please check out this document before renaming.</is-checked-in>
-      <is-checked-in-lock>Please check out this document before locking.</is-checked-in-lock>
-      <cant-lock>You can't lock this document.</cant-lock>
+      <paste-lock-exception>Bạn không thể dán '{0}' lên nút này vì nút nguồn hoặc nút đích đến bị khóa hoặc có liên quan với nút bị khóa.</paste-lock-exception>
+      <can-not-checkin-node>Bạn không thể checkin nút này. Hãy kiểm tra xem bạn có đúng quyền không.</can-not-checkin-node>
+      <can-not-checkout-node>Bạn không thể check out nút này. Hãy kiểm tra xem bạn có đúng quyền không.</can-not-checkout-node>
+      <move-constraint-exception>Lỗi đã xảy ra khi đang di chuyển nút.</move-constraint-exception>
+      <not-lock-owner>Bạn không thể mở khóa nút này vì bạn không phải là người thực hiện khóa nút.</not-lock-owner>
+      <is-checked-in>Vui lòng check out nút này trước khi đổi tên.</is-checked-in>
+      <is-checked-in-lock>Vui lòng check out nút này trước khi khóa.</is-checked-in-lock>
+      <cant-lock>Bạn không thể khóa nút này.</cant-lock>
       <node-locked>Mục với đường dẫn {0} hoặc có vị trí cao hơn đang bị khóa.</node-locked>
-      <can-not-delete>Please close this document before deleting.</can-not-delete>
-      <can-not-delete-version>You can't delete this document. It's versioned.</can-not-delete-version>
-      <not-support>You can't delete the selected item. Please select another one.</not-support>
-      <current-node-not-allow-paste>You can't paste the copied item there.</current-node-not-allow-paste>
-      <copied-node-in-versioning>You can't paste the copied item here because it's versioned.</copied-node-in-versioning>
-      <parent-node-locked>You don't have permission to unlock '{0}'.</parent-node-locked>
-      <this-node-locked-by-parent>You can't unlock this item. Parent folder is locked.</this-node-locked-by-parent>
-      <paste-node-same-name>Can't paste this item here. An item with the same name already exists in the destination folder.</paste-node-same-name>
-      <has-not-add-permission>You don't have the permission to add here.</has-not-add-permission>
-      <node-cutting>Item is being cut. You can't paste it here.</node-cutting>
-      <access-denied>Access denied. You may not have the permission.</access-denied>
-      <remove-verion-exception>You can't remove this document because it is checked in.</remove-verion-exception>
-      <remove-referentialIntegrityException>You can't delete this item because it is currently referenced by another one.</remove-referentialIntegrityException>
-      <constraintviolation-exception>The mandatory property jcr:uuid was not found. The document may have been deleted or changed. Please click the Refresh button.</constraintviolation-exception>
-      <path-not-found-exception>This document was deleted or changed. Please click the Refresh button.</path-not-found-exception>
+      <can-not-delete>Vui lòng đóng nút này trước khi xóa.</can-not-delete>
+      <can-not-delete-version>Bạn không thể xóa nút này vì nó đang được đánh phiên bản.</can-not-delete-version>
+      <not-support>Bạn không thể xóa nút đã chọn. Vui lòng chọn nút khác.</not-support>
+      <current-node-not-allow-paste>Bạn không thể dán kiểu nút đã sao chép trên nút hiện tại.</current-node-not-allow-paste>
+      <copied-node-in-versioning>Bạn không thể dán nút đã sao chép trong quá trình đánh phiên bản.</copied-node-in-versioning>
+      <parent-node-locked>Bạn không được phân quyền để mở khóa nút '{0}'.</parent-node-locked>
+      <this-node-locked-by-parent>Bạn không thể mở khóa nút này vì nó đã bị khóa bởi nút cha hoặc nút mức trên.</this-node-locked-by-parent>
+      <paste-node-same-name>Bạn không thể dán nút có cùng tên với nút trong thư mục đích đến.</paste-node-same-name>
+      <has-not-add-permission>Bạn không được phân quyền để thêm mới nút.</has-not-add-permission>
+      <node-cutting>Nút đang được cắt. Bạn không thể dán ở đây.</node-cutting>
+      <access-denied>Truy cập bị từ chối! Có thể bạn không được phân quyền trên nút này.</access-denied>
+      <remove-verion-exception>Không thể gỡ bỏ vì nút này (hoặc nút cha của nó) đang được checkin.</remove-verion-exception>
+      <remove-referentialIntegrityException>Bạn không thể xóa vì nút này hiện đang là đích đến của thuộc tính Tham chiếu.</remove-referentialIntegrityException>
+      <constraintviolation-exception>Không tìm thấy thuộc tính bắt buộc jcr:uuid. Có thể nút đã bị xóa hoặc thay đổi. Vui lòng nhấp nút Làm mới.</constraintviolation-exception>
+      <path-not-found-exception>Nút này đã bị xóa hoặc thay đổi. Vui lòng nhấp nút Làm mới.</path-not-found-exception>
       <not-exist-categories>Danh mục không tồn tại.</not-exist-categories>
       <lock-node-read-only>This file is locked by user {0}. Open read-only ?</lock-node-read-only>
     </msg>
@@ -428,12 +428,12 @@
       <title-invalid>Vui lòng nhập tiêu đề thư mục.</title-invalid>
       <name-not-allowed>Tên này không được phép.</name-not-allowed>
       <fileName-error>Tên tệp không hợp lệ.</fileName-error>
-      <constraint-violation>You can't add a document of type '{0}' here.</constraint-violation>
+      <constraint-violation>Nút hiện tại không cho phép bạn thêm kiểu nút '{0}'.</constraint-violation>
       <repository-exception>Lỗi đã xảy ra. Vui lòng liên hệ với quản trị viên của bạn để có thêm chi tiết.</repository-exception>
-      <repository-exception-permission>You don't have the permission to add a new folder here.</repository-exception-permission>
+      <repository-exception-permission>Bạn không được phân quyền để thêm mới thư mục vào nút này.</repository-exception-permission>
       <numberformat-exception>Bạn không thể lưu thư mục này. Tên đã cung cấp phải ở định dạng số.</numberformat-exception>
       <!--DMS 2.4.x; ECM-3553-->
-      <not-allow-sameNameSibling>You can't save the folder. An item with the same name already exists.</not-allow-sameNameSibling>
+      <not-allow-sameNameSibling>Quá trình lưu không thành công do thư mục hiện tại không cho phép trùng tên.</not-allow-sameNameSibling>
       <ntFolder-not-avaiable>Bạn phải chọn kiểu thư mục tùy chỉnh.</ntFolder-not-avaiable>
     </msg>
     <help>
@@ -500,26 +500,26 @@
       <feedback-restore>'{0}' đã được khôi phục thành công.</feedback-restore>
       <feedback-restore-multi>{0} mục đã được khôi phục thành công.</feedback-restore-multi>
       
-      <confirm-restore>A '{0}' item already exists at the previous location. Are you sure you want to restore it?</confirm-restore>
+      <confirm-restore>Một nút cùng tên đang tồn tại ở vị trí cũ của nút '{0}'. Bạn có chắc chắn muốn khôi phục nút này không?</confirm-restore>
       <confirm-move>Bạn có chắc chắn muốn di chuyển không?</confirm-move>
-      <node-cut>'{0}' has been cut.</node-cut>
+      <node-cut>Nút '{0}' đã được cắt.</node-cut>
       <execute-successfully>Hành động tùy chỉnh '{0}' đã được thực thi.</execute-successfully>
-      <save-node-success>'{0}' has been saved.</save-node-success>
-      <move-problem>You can't move '{0}' to '{1}' because there was a problem with permissions or constraint conditions.</move-problem>
+      <save-node-success>Nút '{0}' đã được lưu lại.</save-node-success>
+      <move-problem>Bạn không thể di chuyển nút '{0}' sang '{1}' vì có vấn đề với phân quyền hoặc điều kiện ràng buộc.</move-problem>
     </msg>
   </UIWorkingArea>
   <UIDocumentWorkspace>
     <label>
-      <no-children>This item doesn't have children.</no-children>
-      <no-children-but-has-hidden>This folder does not have any item, but there are some hidden files.</no-children-but-has-hidden>
+      <no-children>Nút này không có bất kì nút con nào.</no-children>
+      <no-children-but-has-hidden>Nút này không có bất kì nút con nào nhưng có một số tệp đã ẩn đi.</no-children-but-has-hidden>
     </label>
     <msg>
-      <unable-save-node>'{0}' has been created. Please save session to validate this action.</unable-save-node>
-      <save-node-success>'{0}' has been saved.</save-node-success>
-      <node-copied>'{0}' has been copied.</node-copied>
-      <node-cut>'{0}' has been cut.</node-cut>
-      <remove-root>You can't remove the root folder.</remove-root>
-      <node-remove-success>'{0}' has been removed.</node-remove-success>
+      <unable-save-node>Nút '{0}' vừa được tạo mới. Vui lòng lưu phiên làm việc trước khi thực hiện hành động này.</unable-save-node>
+      <save-node-success>Nút '{0}' đã được lưu lại.</save-node-success>
+      <node-copied>Nút '{0}' đã được sao chép.</node-copied>
+      <node-cut>Nút '{0}' đã được cắt.</node-cut>
+      <remove-root>Bạn không thể gỡ bỏ thư mục gốc.</remove-root>
+      <node-remove-success>Nút '{0}' đã được gỡ bỏ.</node-remove-success>
     </msg>
     <tooltip>
       <Rename>Đổi tên</Rename>
@@ -538,11 +538,11 @@
   </UIDocumentWorkspace>
   <UIDocumentInfo>
     <msg>
-      <access-denied>Access denied. You can't access '{0}'.</access-denied>
-      <null-exception>Item not found. It was either removed or changed, or you don't have the access permission.</null-exception>
+      <access-denied>Truy cập bị từ chối. Bạn không thể truy cập nút '{0}'.</access-denied>
+      <null-exception>Không tìm thấy mục nào vì nó đã bị gỡ bỏ hoặc thay đổi hoặc bạn không được phân quyền để truy cập nút này.</null-exception>
       <confirm-deleteattachment>Bạn có chắc chắn muốn gỡ bỏ tệp đính kèm này không?</confirm-deleteattachment>
       <confirm-deleteattcomment>Bạn có chắc chắn muốn gỡ bỏ bình luận này không?</confirm-deleteattcomment>
-      <access-denied-exception>Access denied. You may not have reading privileges, or the documen may have been removed or changed.</access-denied-exception>
+      <access-denied-exception>Truy cập bị từ chối. Bạn có thể không có quyền đọc hoặc nút này có thể đã bị gỡ bỏ hoặc thay đổi.</access-denied-exception>
       <path-not-found>Thành phần này đã bị xóa hoặc thay đổi. Hãy nhấp nút Làm mới.</path-not-found>
     </msg>
     <tooltip>
@@ -597,10 +597,10 @@
       <RestoreFromTrash>Khôi phục từ Thư mục Rác</RestoreFromTrash>
       <EmptyTrash>Xóa sạch Thư mục Rác?</EmptyTrash>
       <WebDavView>Mở bằng MS Office</WebDavView>
-      <Download>Download</Download>
+      <Download>Tải về</Download>
       <OpenDocument>Remote Edit</OpenDocument>
       <EditProperty>Edit Document Properties</EditProperty>
-      <UploadNewVersion>Upload a new version</UploadNewVersion>
+      <UploadNewVersion>Tải một phiên bản mới</UploadNewVersion>
       <CreateNewVersion>Save as new version</CreateNewVersion>
     </event>
   </ECMContextMenu>
@@ -733,8 +733,8 @@
       <name-invalid>Vui lòng nhập tên thuộc tính.</name-invalid>
       <unable-create>Không thể thêm các thuộc tính.</unable-create>
       <value-invalid>Vui lòng nhập giá trị.</value-invalid>
-      <node-checkedin>You must check out this item before adding a property.</node-checkedin>
-      <can-not-add>You can't add properties to this item. This is only allowed for the type nt:unstructured.</can-not-add>
+      <node-checkedin>Bạn phải checkout nút này trước khi thêm thuộc tính.</node-checkedin>
+      <can-not-add>Bạn không thể thêm thuộc tính cho nút này. Chức năng giới hạn chỉ cho kiểu nút là nt:unstructured hoặc những thuộc tính đang bị thiếu ở nút hiện tại.</can-not-add>
       <propertyName-invalid>Tên thuộc tính phải chứa định danh (như là namespace:name)</propertyName-invalid>
       <propertyName-exist>Thuộc tính '{0}' đã tồn tại.</propertyName-exist>
       <propertyValu-null>Một số giá trị có thể là rỗng.</propertyValu-null>
@@ -795,7 +795,7 @@
       <selectUser>Chọn Người dùng</selectUser>
     </label>
     <msg>
-      <not-change-owner>'{0}' is the owner of this item and has full control permission.</not-change-owner>
+      <not-change-owner>'{0}' là người tạo nút này và có đầy đủ các quyền trên nút.</not-change-owner>
     </msg>
   </UIGroupSelector>
   <UIPermissionForm>
@@ -807,7 +807,7 @@
       <add_node>Quyền Sửa</add_node>
       <remove>Quyền Xóa</remove>
     </label>
-    <title>Add a permission</title>
+    <title>Thêm phân quyền cho nút đó</title>
     <action>
       <Close>Đóng</Close>
       <Save>Lưu</Save>
@@ -914,7 +914,7 @@
   </ViewSearch>
   <UISearchResult>
     <msg>
-      <not-support>There is no View template for this document.</not-support>
+      <not-support>Mẫu hiển thị cho tài liệu này chưa được hỗ trợ.</not-support>
       <empty>Không tìm thấy kết quả nào.</empty>
       <access-denied>Bạn không thể mở thư mục này vì nó không tồn tại nữa hoặc bạn không có quyền truy cập nó.</access-denied>
       <query-invalid>Truy vấn không hợp lệ.</query-invalid>
@@ -939,15 +939,15 @@
       <datecreatedDESC>Phân loại theo ngày tạo có thứ tự giảm dần</datecreatedDESC>
     </title>
     <tooltip>
-      <View>View this item</View>
+      <View>Xem nút này</View>
       <OpenFolder>Đi đến thư mục</OpenFolder>
     </tooltip>
   </UISearchResult>
   <UIShowAllOwnedByUserResult>
     <msg>
-      <not-support>There is no View template for this document</not-support>
+      <not-support>Không có mẫu Giao diện xem nào cho nút này.</not-support>
       <empty>Không tìm thấy kết quả nào.</empty>
-      <access-denied>You can't view this document, either because this template is not supported or because access is denied.</access-denied>
+      <access-denied>Bạn không thể xem nút này vì mẫu thiết kế này không được hỗ trợ hoặc truy cập bị từ chối.</access-denied>
       <query-invalid>Truy vấn không hợp lệ</query-invalid>
     </msg>
     <header>
@@ -970,15 +970,15 @@
       <datecreatedDESC>Phân loại theo ngày Tạo có thứ tự giảm dần</datecreatedDESC>
     </title>
     <tooltip>
-      <View>View this item</View>
+      <View>Xem nút này</View>
       <OpenFolder>Đi đến Thư mục</OpenFolder>
     </tooltip>
   </UIShowAllOwnedByUserResult>
   <UIShowAllFavouriteResult>
     <msg>
-      <not-support>There is no View template for this item</not-support>
+      <not-support>Không có mẫu Giao diện xem nào cho nút này.</not-support>
       <empty>Không tìm thấy kết quả</empty>
-      <access-denied>You can't view this item, either because this template is not supported or because access is denied.</access-denied>
+      <access-denied>Bạn không thể xem nút này vì mẫu này không được hỗ trợ hoặc truy cập bị từ chối.</access-denied>
       <query-invalid>Truy vấn không hợp lệ</query-invalid>
     </msg>
     <header>
@@ -1001,15 +1001,15 @@
       <datecreatedDESC>Phân loại theo ngày tạo có thứ tự giảm dần</datecreatedDESC>
     </title>
     <tooltip>
-      <View>View this item</View>
+      <View>Xem Nút này</View>
       <OpenFolder>Đi đến Thư mục</OpenFolder>
     </tooltip>
   </UIShowAllFavouriteResult>
   <UIShowAllHiddenResult>
     <msg>
-      <not-support>There is no View template for this item.</not-support>
+      <not-support>Không có mẫu Giao diện xem nào cho nút này.</not-support>
       <empty>Không tìm thấy kết quả.</empty>
-      <access-denied>You can't view this item, either because it has no View template or because you don't have access to it.</access-denied>
+      <access-denied>Bạn không thể xem nút này vì mẫu này không được hỗ trợ hoặc truy cập bị từ chối.</access-denied>
       <query-invalid>Truy vấn không hợp lệ.</query-invalid>
     </msg>
     <header>
@@ -1033,16 +1033,16 @@
       <datecreatedDESC>Phân loại theo ngày tạo có thứ tự giảm dần</datecreatedDESC>
     </title>
     <tooltip>
-      <View>View this Item</View>
+      <View>Xem Nút này</View>
       <OpenFolder>Đi đến Thư mục</OpenFolder>
       <RemoveHiddenAttribute>Gỡ bỏ Thuộc tính Ẩn</RemoveHiddenAttribute>
     </tooltip>
   </UIShowAllHiddenResult>
   <UIShowAllTrashResult>
     <msg>
-      <not-support>There is no View template for this item.</not-support>
+      <not-support>Không có mẫu Giao diện xem nào cho nút này.</not-support>
       <empty>Không tìm thấy kết quả</empty>
-      <access-denied>You can't view this item, either because it has no View template or because you don't have access to it.</access-denied>
+      <access-denied>Bạn không thể xem nút này vì mẫu hiển thị không được hỗ trợ hoặc truy cập bị từ chối.</access-denied>
       <query-invalid>Truy vấn không hợp lệ.</query-invalid>
     </msg>
     <header>
@@ -1065,7 +1065,7 @@
       <datecreatedDESC>Phân loại theo ngày tạo có thứ tự giảm dần</datecreatedDESC>
     </title>
     <tooltip>
-      <View>View this Item</View>
+      <View>Xem Nút này</View>
       <OpenFolder>Đi đến Thư mục</OpenFolder>
       <DeletePermanently>Xóa vĩnh viễn</DeletePermanently>
       <RestoreFromTrash>Khôi phục từ Thư mục Rác</RestoreFromTrash>
@@ -1321,7 +1321,7 @@
       <Cancel>Hủy bỏ</Cancel>
       <Export>Xuất</Export>
     </action>
-    <title>Export</title>
+    <title>Kết xuất nút</title>
   </UIExportNode>
   <!--
   ###############################################################################
@@ -1330,7 +1330,7 @@
   -->
   <PopupUserSelector>
     <title>
-      <UIUserContainer>Permission Selector</UIUserContainer>
+      <UIUserContainer>Chọn Quyền</UIUserContainer>
     </title>
   </PopupUserSelector>
   <UIPopupTaxonomy>
@@ -1350,8 +1350,8 @@
       <empty>Click here to add a summary</empty>
     </summary>
     <tooltip>
-      <version>Version</version>
-      <baseVersion>current version</baseVersion>
+      <version>Phiên bản</version>
+      <baseVersion>Phiên bản Cơ sở</baseVersion>
       <addLabel>Thêm Nhãn</addLabel>
       <removeLable>Gỡ bỏ Nhãn</removeLable>
       <restoreVersion>Khôi phục Phiên bản</restoreVersion>
@@ -1366,8 +1366,8 @@
       <error-removing-referenced-version>This version is referenced and can't be removed.</error-removing-referenced-version>
       <confirm-restore>Are you sure you want to restore this version?</confirm-restore>
       <confirm-delete>Bạn có chắc chắn muốn xóa phiên bản này không?</confirm-delete>
-      <not-checked-out>You have to check out this document before restoring.</not-checked-out>
-      <invalid-item-state>You can't restore this version, either because one or more items were deleted or moved by another session.</invalid-item-state>
+      <not-checked-out>Bạn phải checkout nút này trước khi khôi phục.</not-checked-out>
+      <invalid-item-state>Bạn không thể khôi phục phiên bản này. Chắc chắn một số khoản mục đã bị xóa hoặc được di chuyển trong một phiên làm việc khác.</invalid-item-state>
     </msg>
     <action>
       <close>#{word.close}</close>
@@ -1392,8 +1392,8 @@
       <noVersion>Không có phiên bản</noVersion>
     </msg>
     <eventName>
-      <e_1>Added</e_1>
-      <e_2>Document Removed</e_2>
+      <e_1>Nút đã được thêm.</e_1>
+      <e_2>Nút đã được xóa</e_2>
       <e_4>Thuộc tính đã được thêm.</e_4>
       <e_16>Thuộc tính đã được thay đổi.</e_16>
       <e_8>Thuộc tính đã bị xóa bỏ</e_8>
@@ -1433,13 +1433,13 @@
   -->
   <UIActivateVersion>
     <label>
-      <note>Versioning has not been activated for this document.</note>
+      <note>Tính năng tạo phiên bản chưa được kích hoạt cho nút này.</note>
       <question>Bạn có chắc chắn muốn kích hoạt nó không?</question>
       <button-active>Kích hoạt</button-active>
       <button-cancel>#{word.cancel}</button-cancel>
     </label>
     <msg>
-      <access-denied>You don't have permission to activate versioning on this document</access-denied>
+      <access-denied>Bạn không được phân quyền để kích hoạt tính năng Tạo phiên bản trên nút này.</access-denied>
     </msg>
   </UIActivateVersion>
   <!--
@@ -1462,7 +1462,7 @@
       </msg>
     </grid>
     <msg>
-      <node-type-invalid>Only documents can be enrolled.</node-type-invalid>
+      <node-type-invalid>Chỉ loại nút tài liệu có thể được đưa vào chu trình.</node-type-invalid>
       <already-enroled>Tài liệu này đã được đưa vào chu trình.</already-enroled>
     </msg>
   </UIActivePublication>
@@ -1473,7 +1473,7 @@
   -->
   <UIActivateAuditing>
     <label>
-      <note>Auditing has not been activated for this document.</note>
+      <note>Việc ghi lại thay đổi chưa được kích hoạt đối với nút này.</note>
       <question>Bạn có chắc chắn muốn kích hoạt không?</question>
     </label>
     <action>
@@ -1516,16 +1516,16 @@
       <Cancel>Hủy bỏ</Cancel>
       <Import>Nhập</Import>
     </action>
-    <title>Import</title>
+    <title>Nhập Nút</title>
     <msg>
       <import-successful>Đã nhập thành công.</import-successful>
       <filename-invalid>Duyệt tệp tin .xml cho trường 'Tải tệp tin' để nhập vào.</filename-invalid>
       <filetype-error>Không thể nhập tệp tin đã tải lên. Tệp tin .xml này có thể không hợp lệ.</filetype-error>
-      <xml-invalid>There is an invalid character at position [row, column]:{0} in {1} file</xml-invalid>
+      <xml-invalid>Có một kí tự không hợp lệ ở vị trí [hàng, cột]:{0} ở tệp {1}.</xml-invalid>
       <mimetype-invalid>Bạn chỉ có thể nhập các tệp tin dạng .xml hoặc .zip.</mimetype-invalid>
       <access-denied>Truy nhập bị từ chối. Bạn không được phép nhập ở đây.</access-denied>
-      <constraint-violation-exception>Impossible to import data. The type '{0}' is not allowed at this location.</constraint-violation-exception>
-      <item-exists-exception>An incoming item has the same UUID as an existing item in the workspace.</item-exists-exception>
+      <constraint-violation-exception>Không thể nhập dữ liệu. Loại '{0}' không được cho phép trong vị trí này.</constraint-violation-exception>
+      <item-exists-exception>Một nút trong quá trình nhập có UUID trùng với một nút hiện đang tồn tại trong hệ thống.</item-exists-exception>
     </msg>
   </UIImportNode>
   <!--
@@ -1573,7 +1573,7 @@
   <UIViewVersion>
     <label>
       <nodeType>Kiểu nút</nodeType>
-      <nodeName>Name</nodeName>
+      <nodeName>Tên nút</nodeName>
       <VersionNumber>Số phiên bản</VersionNumber>
       <VersionLabels>Các nhãn của phiên bản</VersionLabels>
       <VersionDate>Ngày của phiên bản</VersionDate>
@@ -1609,7 +1609,7 @@
       <action>Các thao tác</action>
     </header>
     <msg>
-      <access-denied>Access denied. You don't have access permission.</access-denied>
+      <access-denied>Truy nhập bị hủy bỏ! Bạn không có đủ quyền trên nút này.</access-denied>
       <confirm-delete>Bạn có thực sự muốn xóa tham chiếu này?</confirm-delete>
     </msg>
     <action>
@@ -1629,7 +1629,7 @@
       <action>Thao tác</action>
     </header>
     <info>
-      <child-not-found>This item doesn't have any child.</child-not-found>
+      <child-not-found>Nút này không có bất kỳ nút con nào.</child-not-found>
     </info>
   </UITreeList>
   <!--
@@ -1685,8 +1685,8 @@
       <clearall>Xóa tất cả</clearall>
     </action>
     <msg>
-      <unable-pasted>Can't paste this item.</unable-pasted>
-      <node-pasted>{0} has been pasted at location {1}. This operation has already been saved.</node-pasted>
+      <unable-pasted>Không thể dán nút này.</unable-pasted>
+      <node-pasted>Nút {0} đã được dán vào vị trí {1}. Thao tác này đã được lưu và bạn không cần nhập biểu tượng đĩa.</node-pasted>
     </msg>
   </UIClipboard>
   <!--
@@ -1727,15 +1727,15 @@
 </tooltip>
     <msg>
       <cannot-save>Lỗi xảy ra khi lưu tài liệu.</cannot-save>
-      <in-versioning>Please check out the current folder before adding a new item.</in-versioning>
+      <in-versioning>Vui lòng checkout nút hiện thời trước khi thêm nút mới.</in-versioning>
       <not-support>Không thể tải mẫu của '{0}'.</not-support>
       <value-invalid>'{0}' là giá trị cần thiết.</value-invalid>
       <repository-exception>Lỗi xảy ra khi lưu tài liệu.</repository-exception>
       <!--DMS 2.4.x; ECM-3543-->
-      <repository-exception-permission>You don't have permission to add a new document to this folder.</repository-exception-permission>
+      <repository-exception-permission>Bạn không có quyền để thêm một tài liệu mới vào nút này.</repository-exception-permission>
       <not-allowed-same-name-sibling>Không thể lưu tài liệu này. Node này không được phép trùng tên.</not-allowed-same-name-sibling>
       <numberformat-exception>Bạn không thể lưu tài liệu này. Tên cung cấp phải ở định dạng số.</numberformat-exception>
-      <item-not-found>Document not found. This document (or its ancestor) may have been deleted. Please click the Refresh button.</item-not-found>
+      <item-not-found>Khoản mục không được tìm thấy! Có thể nút này hoặc nút cha đã bị xóa. Vui lòng nhấp vào nút làm mới.</item-not-found>
     </msg>
   </UIDocumentForm>
   <!--
@@ -1800,7 +1800,7 @@
       <action>Hành động</action>
     </header>
     <msg>
-      <remove-popup-first>You must close the edit pop-up before deleting this item.</remove-popup-first>
+      <remove-popup-first>Bạn phải đóng cửa sổ trước khi xóa nút.</remove-popup-first>
       <confirm-delete-action>Bạn có thực sự muốn xóa thao tác này?</confirm-delete-action>
       <template-empty>Mẫu của '(0)' là null hoặc rỗng.</template-empty>
       <template-null>Mẫu rỗng hoặc bạn không có quyền truy cập mẫu này.</template-null>
@@ -1826,7 +1826,7 @@
       <numberformat-exception>Không thể lưu thao tác này. Tên phải là kiểu số.</numberformat-exception>
       <existed-action>Tên thao tác '{0}' đã tồn tại. Vui lòng lựa chọn tên khác!</existed-action>
       <unable-add-action>Không thể thêm thao tác này.</unable-add-action>
-      <unable-add>Can't add this action. This item is either the root folder or you don't have the permission to edit.</unable-add>
+      <unable-add>Không thể thêm hành động này. Do nút hiện tại là nút gốc hoặc bạn không có quyền tạo hành động.</unable-add>
       <not-support>Hộp thoại '{0}' không được hỗ trợ</not-support>
       <no-permission-add>Truy nhập bị hủy bỏ. Bạn không có quyền thêm một thao tác ở đây.</no-permission-add>
       <access-denied>Truy nhập bị hủy bỏ. Bạn không có quyền truy cập mẫu này.</access-denied>
@@ -1865,7 +1865,7 @@
   <UIAddressBar>
     <msg>
       <path-not-found>Không tìm thấy đường dẫn.</path-not-found>
-      <access-denied>Access denied. You don't have the permission to read.</access-denied>
+      <access-denied>Truy cập bị từ chối. Bạn không có quyền để truy cập nút này.</access-denied>
       <keyword-not-support>Từ khóa không hợp lệ. Một số ký tự không được hỗ trợ.</keyword-not-support>
     </msg>
     <label>
@@ -1874,8 +1874,8 @@
     </label>
     <title>
       <exeButton>Chuyển</exeButton>
-      <backButton>Back</backButton>
-      <showHistory>Show History</showHistory>
+      <backButton>Trở về nút trước</backButton>
+      <showHistory>Hiện địa chỉ lược sử</showHistory>
       <changeNode>Thay đổi nút</changeNode>
     </title>
   </UIAddressBar>
@@ -1937,7 +1937,7 @@
   -->
   <UIViewMetadataContainer>
     <msg>
-      <path-not-found>The document does not support this view.</path-not-found>
+      <path-not-found>Nút không hỗ trợ kiểu hiển thị này.</path-not-found>
     </msg>
   </UIViewMetadataContainer>
   <!--
@@ -1958,7 +1958,7 @@
   </metadataForm>
   <UIViewMetadataTemplate>
     <msg>
-      <access-denied>Access denied. Either you are not the owner or don't have edit permission.</access-denied>
+      <access-denied>Truy cập bị từ chối. Bạn không phải là người tạo hoặc không có quyền sửa trên nút này.</access-denied>
     </msg>
   </UIViewMetadataTemplate>
   <!--
@@ -2034,7 +2034,7 @@
       <private>Riêng tư</private>
       <state>Trạng thái</state>
       <visibility>Khả năng hiển thị</visibility>
-      <nodeName>Name:</nodeName>
+      <nodeName>Tên Nút :</nodeName>
       <lifecycleName>Tên vòng đời</lifecycleName>
       <stateName>Tên tình trạng</stateName>
     </label>
@@ -2058,7 +2058,7 @@
   </UIWorkspaceList>
   <pathSelector>
     <title>
-      <UIOneNodePathSelector>Selector</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Chọn Nút</UIOneNodePathSelector>
     </title>
   </pathSelector>
   <!--
@@ -2166,9 +2166,9 @@
     </label>
     <msg>
       <mimetype-incorrect>Kiểu tệp tin không hợp lệ. Hệ thống chỉ chấp nhận tệp có định dạng JPG, PNG, hoặc GIF.</mimetype-incorrect>
-      <access-denied>Access denied. You don't have permission to add a thumbnail.</access-denied>
+      <access-denied>Truy nhập bị từ chối. Bạn không có quyền để thêm ảnh thu nhỏ cho nút này.</access-denied>
       <confirm-delete>Bạn muốn xóa ảnh thu nhỏ này?</confirm-delete>
-      <is-checked-in>This item is checked in. Please check out before performing any action.</is-checked-in>
+      <is-checked-in>Nút này hiện đang được checkin. Vui lòng checkout trước khi thực hiện bất kì thao tác nào.</is-checked-in>
       <fileName-error>Vui lòng chọn tệp tin để tải lên.</fileName-error>
     </msg>
     <title>
@@ -2272,7 +2272,7 @@
 
   <PopupSelectPath>
     <title>
-      <UIOneNodePathSelector>Select Path</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Chọn Nút</UIOneNodePathSelector>
     </title>
   </PopupSelectPath>
 
@@ -2302,7 +2302,7 @@
   <UISymLinkForm>
     <label>
       <symLinkName>Tên Symlink</symLinkName>
-      <pathNode>Path</pathNode>
+      <pathNode>Đường dẫn Nút</pathNode>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -2313,16 +2313,16 @@
       <name-invalid>Vui lòng nhập tên symlink.</name-invalid>
       <name-not-allowed>Tên này không được phép.</name-not-allowed>
       <fileName-error>Tên tệp tin không hợp lệ.</fileName-error>
-      <constraint-violation>You can't add an item of type '{0}' here.</constraint-violation>
-      <repository-exception>Access denied. You don't have permission to add a symlink here.</repository-exception>
+      <constraint-violation>Nút hiện tại không cho phép thêm mới kiểu nút là '{0}'</constraint-violation>
+      <repository-exception>Truy cập bị từ chối. Bạn không được phân quyền thêm mới symlink cho nút này.</repository-exception>
       <numberformat-exception>Bạn không thể lưu thư mục này. Tên cung cấp phải ở định dạng chữ số.</numberformat-exception>
-      <path-node-invalid>Please enter the path.</path-node-invalid>
+      <path-node-invalid>Vui lòng nhập đường dẫn.</path-node-invalid>
       <path-node-not-allowed>Tên này không được phép.</path-node-not-allowed>
-      <non-node>Please select the trust target; you may not have the rights to read this item.</non-node>
-      <cannot-save>You can't add a symlink for this type of document.</cannot-save>
-      <item-exists-exception>An item with this name already exists.</item-exists-exception>
-      <translation-node-same-language-default>The translated document has the same language as the default language of current document.</translation-node-same-language-default>
-      <UnsupportedRepositoryOperationException>This target item is not referred.</UnsupportedRepositoryOperationException>
+      <non-node>Bạn có thể không có quyền để đọc nút này. Vui lòng chọn nút đích tin cậy.</non-node>
+      <cannot-save>Bạn không thể thêm symlink cho kiểu nút này.</cannot-save>
+      <item-exists-exception>Tên nút này đã tồn tại.</item-exists-exception>
+      <translation-node-same-language-default>Nút dịch có cùng ngôn ngữ với ngôn ngữ mặc định của node hiện tại.</translation-node-same-language-default>
+      <UnsupportedRepositoryOperationException>Nút được liên kết không thể tham chiếu đến (có thể do bị khóa).</UnsupportedRepositoryOperationException>
     </msg>
   </UISymLinkForm>
   
@@ -2342,22 +2342,22 @@
       <name-invalid>Vui lòng nhập tên symlink.</name-invalid>
       <name-not-allowed>Tên này không được phép.</name-not-allowed>
       <fileName-error>Tên tệp không hợp lệ.</fileName-error>
-      <constraint-violation>You can't add the '{0}' type to the current item.</constraint-violation>
-      <repository-exception>Access denied. You don't have permission to add a symlink to this item.</repository-exception>
+      <constraint-violation>Không thể thêm kiểu nút '{0}' vào nút hiện tại.</constraint-violation>
+      <repository-exception>Truy cập bị từ chối. Bạn không được phân quyền để thêm symlink vào nút này.</repository-exception>
       <numberformat-exception>Bạn không thể lưu thư mục này. Tên cung cấp phải ở định dạng số.</numberformat-exception>
-      <path-node-invalid>Please enter the path.</path-node-invalid>
+      <path-node-invalid>Vui lòng nhập đường dẫn.</path-node-invalid>
       <path-node-not-allowed>Tên này không được phép.</path-node-not-allowed>
-      <non-node>Please select the trust target; you may not have the right to read this node.</non-node>
+      <non-node>Vui lòng chọn nút đích tin cậy. có thể bạn không có quyền để đọc nút này.</non-node>
       <cannot-save>Một lỗi đã xảy ra khi đang tạo symlink.</cannot-save>
-      <item-exists-exception>An item with this name already exists.</item-exists-exception>
-      <translation-node-same-language-default>The translated document has the same language as the default language of current document.</translation-node-same-language-default>
-      <UnsupportedRepositoryOperationException>This target item is not referred.</UnsupportedRepositoryOperationException>
+      <item-exists-exception>Tên nút này đã tồn tại.</item-exists-exception>
+      <translation-node-same-language-default>Nút dịch có cùng ngôn ngữ với ngôn ngữ mặc định của nút hiện tại.</translation-node-same-language-default>
+      <UnsupportedRepositoryOperationException>Nút được liên kết không thể tham chiếu đến (có thể do bị khóa).</UnsupportedRepositoryOperationException>
     </msg>
   </UIAddTranslationForm>
 
   <UIPopupSymLink>
     <title>
-      <UIOneNodePathSelector>Select Target Item</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Chọn Node Đích</UIOneNodePathSelector>
     </title>
   </UIPopupSymLink>
   <UIPopupSymLink>
@@ -2375,8 +2375,8 @@
 
   <UIWorkingArea>
     <msg>
-      <create-link-problem>You can't create a link for '{0}' at '{1}'.</create-link-problem>
-      <dest-node-is-link>The destination '{0}' is already a symlink, so you cannot create a symlink inside it.</dest-node-is-link>
+      <create-link-problem>Bạn không thể tạo liên kết cho nút '{0}' tại '{1}'.</create-link-problem>
+      <dest-node-is-link>Nút điểm đến '{0}' đã là một symlink. Vì vậy, bạn không thể tạo symlink bên trong nó.</dest-node-is-link>
       <selected-is-link>The selected item '{0}' is already a link. You can't create a link to another link.</selected-is-link>
       <confirm-create-link>Bạn có muốn tạo liên kết đến vị trí này không?</confirm-create-link>
     </msg>
@@ -2458,7 +2458,7 @@
       <Back>Quay lại đổi tên</Back>
       <Keepfile>Giữ cả hai tệp</Keepfile>
 <ReadOnly>Open Read-only</ReadOnly>
-<Cancel>Cancel</Cancel>
+<Cancel>Hủy bỏ</Cancel>
       <KeepBoth>Keep Both</KeepBoth>
       <CreateNewVersion>Save as new version</CreateNewVersion>
     </label>
@@ -2516,7 +2516,7 @@
 
   <UIPopupMenu>
     <msg>
-      <node-locked-other-person>This item or its parent folder is locked by another user, so you can't delete it.</node-locked-other-person>
+      <node-locked-other-person>Nút đang xét hoặc nút cha đang bị khóa bởi người dùng khác, Bạn không thể xóa!</node-locked-other-person>
     </msg>
   </UIPopupMenu>
 
@@ -2551,7 +2551,7 @@
 
   <UIPopupMenu>
     <msg>
-      <can-not-unlock-node-is-checked-in>You can't unlock because the '{0}' (or its parent folder) is checked in.</can-not-unlock-node-is-checked-in>
+      <can-not-unlock-node-is-checked-in>Không thể mở khóa vì nút '{0}' hoặc cha của '{0}' đang được checkin.</can-not-unlock-node-is-checked-in>
     </msg>
   </UIPopupMenu>
 
@@ -2560,12 +2560,12 @@
   -->
   <UIActionBar>
     <msg>
-      <cannot-enable-version>Can't activate versioning on this document.</cannot-enable-version>
+      <cannot-enable-version>Không cho phép tạo phiên bản</cannot-enable-version>
     </msg>
   </UIActionBar>
   <UIPopupMenu>
     <msg>
-        <cannot-readsource>You can't read data from the source.</cannot-readsource>
+        <cannot-readsource>Bạn không thể đọc dữ liệu từ nút nguồn.</cannot-readsource>
     </msg>
   </UIPopupMenu>
   <UIUploadForm>
@@ -2845,7 +2845,7 @@
 
     <UIPopupMenu>
     <msg>
-      <node-locked-editing>You can't edit  {0}. It's locked by another user.</node-locked-editing>
+      <node-locked-editing>Bạn không thể chỉnh sửa nút này với đường dẫn {0}. Nó đã bị khóa bởi người dùng khác.</node-locked-editing>
     </msg>
   </UIPopupMenu>
   <UITagStyleForm>
@@ -2895,7 +2895,7 @@
 
   <UIPreferencesForm>
       <label>
-            <queryType>Query language:</queryType>
+            <queryType>Kiểu truy vấn:</queryType>
             <SQL>SQL</SQL>
             <XPATH>XPATH</XPATH>
       </label>
@@ -2939,12 +2939,12 @@
   </PathNode>
   <UIPopupPathFoRestore>
     <title>
-      <UIOneNodePathSelector>Select Parent</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Chọn nút cha</UIOneNodePathSelector>
     </title>
   </UIPopupPathFoRestore>
   <rootNodeInfo>
     <title>
-      <AddRootNode>Add Root</AddRootNode>
+      <AddRootNode>Chọn nút gốc</AddRootNode>
     </title>
   </rootNodeInfo>
 
@@ -3103,10 +3103,10 @@
     </DrivesArea>
     <msg>
       <no-view-found>Bạn không có quyền truy cập khung nhìn nào cho ổ đĩa '{0}'.</no-view-found>
-      <access-denied>Access denied. You may not have permission in the workspace of drive '{0}'.</access-denied>
+      <access-denied>Truy cập bị từ chối. Có thể bạn không có quyền trong không gian làm việc của ổ đĩa '{0}'.</access-denied>
       <not-found>The document you are trying to access is no longer available.</not-found>
       <empty-drives>Không có ổ đĩa nào hoặc bạn không có quyền truy cập ổ đĩa nào trong kho dữ liệu này.</empty-drives>
-      <workspace-not-exist>Drive '{0}' was stored in one unrecognized workspace. Please reconfigure this drive.</workspace-not-exist>
+      <workspace-not-exist>Không thể nhận biết được không gian lưu trữ của ổ đĩa '{0}'. Vui lòng cấu hình lại ổ đĩa này.</workspace-not-exist>
     </msg>
   </UIDrivesArea>
   <UIJcrExplorerEditForm>
@@ -3156,9 +3156,9 @@
   </lifecyclePhase>
   <UIPopupMenu>
   <msg>
-<can-not-remove-locked-node>{0} is locked. You can't move it to the Trash.</can-not-remove-locked-node>
-<can-not-remove-checked-in-node>{0} or its parent folder is checked in. You can't move it to the Trash.</can-not-remove-checked-in-node>
-<access-denied-to-delete>Access denied. You can't move {0} to the Trash.</access-denied-to-delete>
+<can-not-remove-locked-node>Nút {0} bị khóa. Bạn không thể di chuyển nó vào thùng rác.</can-not-remove-locked-node>
+<can-not-remove-checked-in-node>Nút {0} hoặc nút cha của nó được đang được checkin. Bạn không thể di chuyển nó vào Thư mục Rác.</can-not-remove-checked-in-node>
+<access-denied-to-delete>Truy cập bị từ chối. Bạn không thể di chuyển nút {0} vào thùng rác.</access-denied-to-delete>
   </msg>
   </UIPopupMenu>
   <UIPropertyForm>
@@ -3168,8 +3168,8 @@
   </UIPropertyForm>
   <UIWatchDocumentForm>
     <msg>
-      <node-is-locked>This item is locked. You cannot watch it.</node-is-locked>
-      <unknown-error>Some errors have occurred. You can't watch this document.</unknown-error>
+      <node-is-locked>Nút này bị khóa, bạn không thể theo dõi nó!</node-is-locked>
+      <unknown-error>Có một số lỗi xảy ra, bạn không thể theo dõi nút này!</unknown-error>
     </msg>
   </UIWatchDocumentForm>   
   <UIActionForm>
@@ -3186,7 +3186,7 @@
     <DropFileMessage>Kéo thả tập tin vào đây để tải lên</DropFileMessage>
     <Close>#{word.close}</Close>
     <in>Trong</in>
-    <MaxFileSizeAlert>The file size exceeds the limit of</MaxFileSizeAlert>
+    <MaxFileSizeAlert>Kích thước của tập tin vượt quá giới hạn</MaxFileSizeAlert>
     <Waiting>Đợi</Waiting>
     <Error>Lỗi</Error>
     <or>hoặc</or>
@@ -3194,7 +3194,7 @@
     <Keep>Giữ cả hai</Keep>
     <Replace>Thay thế</Replace>
     <Canceled>Huỷ bỏ</Canceled>
-      <UploadNewVersion>Upload a new version</UploadNewVersion>
+      <UploadNewVersion>Tải một phiên bản mới</UploadNewVersion>
     <Cancel>#{word.cancel}</Cancel>
     <AbortAllConfirmation>Bạn có muốn hủy bỏ tất cả các tập tin đang được tải lên?</AbortAllConfirmation>
   </label>
@@ -3202,7 +3202,7 @@
   <UIDocumentNodeList>
   <label>
   <CreatedOn>Thời điểm tạo</CreatedOn>
-  <Updated>Updated</Updated>
+  <Updated>Sửa đổi</Updated>
   <by>bởi</by>
   <you>bạn</you>
   </label>

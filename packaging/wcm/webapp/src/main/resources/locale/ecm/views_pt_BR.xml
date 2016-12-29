@@ -55,8 +55,8 @@
         <pdf-max-page>A visualização não está disponível para conteúdo com mais de {0} páginas.</pdf-max-page>
         <using-webDAV>ou abrir no MS Office</using-webDAV>
         <open-on-desktop>Abrir na área de trabalho</open-on-desktop>
-        <open-in-documents>Open in Documents</open-in-documents>
-        <open-in-documents-tooltip>Open this file in Documents app</open-in-documents-tooltip>
+        <open-in-documents>Abrir Documento</open-in-documents>
+        <open-in-documents-tooltip>Abrir este arquivo no app de documentos</open-in-documents-tooltip>
         <file-size-too-big>O contéudo deste arquivo é muito grande. Você deve baixá-lo e abrí-lo no cliente.</file-size-too-big>
         <webDAV>Ver WebDAV</webDAV>
         <download>Baixar</download>
@@ -87,7 +87,7 @@
   <Vote>
     <view>
       <label>
-        <avg-rating>Rate</avg-rating>
+        <avg-rating>Avaliação Média</avg-rating>
         <subscription>Votos</subscription>
       </label>
     </view>

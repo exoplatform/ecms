@@ -36,8 +36,8 @@
     <label>
       <ManagedSites>Керування сайтом</ManagedSites>
       <SharedSite>Сайт спільного користування</SharedSite>
-      <PersonalDocuments>Personal Documents</PersonalDocuments>
-      <UserDocuments>{0} Documents</UserDocuments>
+      <PersonalDocuments>Особисті Документи</PersonalDocuments>
+      <UserDocuments>{0} Документи</UserDocuments>
     </label>
   </Drives>
 

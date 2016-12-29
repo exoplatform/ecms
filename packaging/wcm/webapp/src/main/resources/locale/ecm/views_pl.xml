@@ -27,8 +27,8 @@
         <comments>Komentarz(y)</comments>
         <show-comments>Pokaż komentarze</show-comments>
         <hide-comments>Ukryj komentarze</hide-comments>
-        <comment-by>Commented by</comment-by>
-        <email>Email</email>
+        <comment-by>Skomentowane przez</comment-by>
+        <email>Adres e-mail</email>
         <site>Witryna</site>
         <lastComment>Ostatni komentarz dodany przez {user} o godzinie {time}</lastComment>
         <Less_Than_A_Minute>mniej niż minutę temu</Less_Than_A_Minute>
@@ -59,7 +59,7 @@
         <open-in-documents-tooltip>Open this file in Documents app</open-in-documents-tooltip>
         <file-size-too-big>Zawartość tego pliku jest zbyt duża. Należy pobrać i otworzyć inny plik.</file-size-too-big>
         <webDAV>Widok WebDAV</webDAV>
-        <download>Download</download>
+        <download>Pobierz</download>
         <htmlview>Zobacz jako HTML</htmlview>
         <plaintextview>Zobacz jako zwykły tekst</plaintextview>
       </label>
@@ -87,8 +87,8 @@
   <Vote>
     <view>
       <label>
-        <avg-rating>Rate</avg-rating>
-        <subscription>Votes</subscription>
+        <avg-rating>Średnia ocena</avg-rating>
+        <subscription>Głosy</subscription>
       </label>
     </view>
   </Vote>
@@ -99,11 +99,11 @@
     <view>
       <label>
         <name>Nazwa</name>
-        <versionable>Versionable</versionable>
-        <exo_owner>Owner</exo_owner>
-        <exo_dateCreated>Date Created</exo_dateCreated>
+        <versionable>Wersja</versionable>
+        <exo_owner>Właściciel</exo_owner>
+        <exo_dateCreated>Data utworzenia</exo_dateCreated>
         <exo_dateModified>Data modyfikacji</exo_dateModified>
-        <auditing>Auditing</auditing>
+        <auditing>Audyt</auditing>
       </label>
     </view>
   </ListView>
@@ -116,7 +116,7 @@
       <label>
         <action-name>Nazwa akcji</action-name>
         <lifecycle>Cykl życiowy</lifecycle>
-        <metadata>Metadata</metadata>
+        <metadata>Metadane</metadata>
         <description>Opis</description>
       </label>
     </view>
@@ -152,31 +152,31 @@
   <ElementSet>
     <view>
       <label>
-        <not-avaliable>N/A</not-avaliable>
+        <not-avaliable>Nie dotyczy</not-avaliable>
         <core-elements>Elementy podstawowe</core-elements>
         <title>Tytuł</title>
         <creator>Twórca</creator>
-        <subject>Subject</subject>
+        <subject>Temat</subject>
         <source>Źródło</source>
         <contributor>Współtwórca</contributor>
         <resource-type>Typ zasobu</resource-type>
-        <date>Date</date>
+        <date>Data</date>
         <publisher>Wydawca</publisher>
         <description>Opis</description>
         <rights>Prawa</rights>
-        <relation>Relation</relation>
+        <relation>Relacja</relation>
         <format>Format</format>
         <coverage>Zasięg</coverage>
         <identifier>Identyfikator</identifier>
-        <languages>Languages</languages>
+        <languages>Języki</languages>
       </label>
       <action>
-        <add-edit>Add/Edit</add-edit>
+        <add-edit>Dodaj/Edytuj</add-edit>
         <cancel>#{word.cancel}</cancel>
       </action>
       <tooltip>
         <cancel>#{word.cancel}</cancel>
-        <add-edit>Add/Edit Properties</add-edit>
+        <add-edit>Dodaj/Edytuj Właściwości</add-edit>
       </tooltip>
     </view>
   </ElementSet>

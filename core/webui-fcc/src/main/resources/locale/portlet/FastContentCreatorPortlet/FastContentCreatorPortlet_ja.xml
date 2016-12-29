@@ -86,7 +86,7 @@
     <label>
       <workspaceName>ワークスペース</workspaceName>
       <rootNodePath>ルートパス</rootNodePath>
-      <rootNodeInfo>Root node</rootNodeInfo>
+      <rootNodeInfo>ルート ノード</rootNodeInfo>
     </label>
   </UIWorkspaceList>
 
