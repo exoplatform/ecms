@@ -90,7 +90,7 @@
   <UISCVConfigItemPathFormInputSet>
     <title>
       <SelectFolderPath>Izberi pot do mape</SelectFolderPath>
-      <AddPath>Add Path</AddPath>
+      <AddPath>Dodaj pot</AddPath>
     </title>
   </UISCVConfigItemPathFormInputSet>
   <UISCVConfigPrintPageFormInputSet>
@@ -100,7 +100,7 @@
   </UISCVConfigPrintPageFormInputSet>
   <UISCVConfigPrintPageSelectorPopupWindow>
     <title>
-      <UIPageSelector>Page Selector</UIPageSelector>
+      <UIPageSelector>Izbirnik strani</UIPageSelector>
     </title>
   </UISCVConfigPrintPageSelectorPopupWindow>
   <PublicationStates>

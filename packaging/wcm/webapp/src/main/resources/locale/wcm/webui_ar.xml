@@ -36,8 +36,8 @@
     <label>
       <ManagedSites>إدارة الموقع</ManagedSites>
       <SharedSite>المواقع المشتركة</SharedSite>
-      <PersonalDocuments>Personal Documents</PersonalDocuments>
-      <UserDocuments>{0} Documents</UserDocuments>
+      <PersonalDocuments>المستندات الشخصية</PersonalDocuments>
+      <UserDocuments>المستندات {0}</UserDocuments>
     </label>
   </Drives>
 

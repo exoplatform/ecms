@@ -34,10 +34,10 @@
 
   <Drives>
     <label>
-      <ManagedSites>Site Management</ManagedSites>
+      <ManagedSites>Управление сайтом</ManagedSites>
       <SharedSite>Сайт коллективного пользования</SharedSite>
-      <PersonalDocuments>Personal Documents</PersonalDocuments>
-      <UserDocuments>{0} Documents</UserDocuments>
+      <PersonalDocuments>Личные документы</PersonalDocuments>
+      <UserDocuments>{0} Документы</UserDocuments>
     </label>
   </Drives>
 
@@ -204,15 +204,15 @@
     <msg>
       <time-to-late>Слишком длительное время поиска.</time-to-late>
       <empty-field>Пожалуйста, введите действительное ключевое слово для поиска.</empty-field>
-      <empty-name>Please enter the name to search</empty-name>
-      <empty-content>Please enter a word or phrase to search</empty-content>
-      <empty-property>Please select a property</empty-property>
-      <empty-property-keyword>Please enter a keyword for the property</empty-property-keyword>
-      <empty-doctype>Please select a document type</empty-doctype>
-      <empty-startDate>"From Date" is required</empty-startDate>
+      <empty-name>Пожалуйста, введите имя для поиска</empty-name>
+      <empty-content>Пожалуйста, введите слово или фразу для поиска</empty-content>
+      <empty-property>Пожалуйста выберите свойство</empty-property>
+      <empty-property-keyword>Пожалуйста, введите ключевое слово для свойства</empty-property-keyword>
+      <empty-doctype>Пожалуйста, выберите тип документа</empty-doctype>
+      <empty-startDate>«Дата от» требуется для заполнения</empty-startDate>
       <invalid-format>Недопустимый формат даты в поле '{0}'.</invalid-format>
       <invalid-date>"Дата До" должна быть позже, чем "Дата От"</invalid-date>
-      <invalid-startDate>"From Date" must not be later than today</invalid-startDate>
+      <invalid-startDate>«Дата от" должна быть не позднее сегодня</invalid-startDate>
       <invalid-nodeType>Недопустимый тип узла "{0}". Пожалуйста, проверьте еще раз.</invalid-nodeType>
       <invalid-keyword>Неверное ключевое слово. Некоторые символы не поддерживаются.</invalid-keyword>
     </msg>

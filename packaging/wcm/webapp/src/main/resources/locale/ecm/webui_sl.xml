@@ -49,7 +49,7 @@
   <SelectUserOrGroup>
     <title>
       <UIPermissionUser>Izberi uporabnika</UIPermissionUser>
-      <UIPermissionMembership>Select Membership</UIPermissionMembership>
+      <UIPermissionMembership>Izberi članstvo</UIPermissionMembership>
       <TaxoSelectUserOrGroup>Izberi članstvo</TaxoSelectUserOrGroup>
     </title>
   </SelectUserOrGroup>
@@ -88,7 +88,7 @@
   -->
   <rootNodeInfo>
     <title>
-      <AddRootNode>Add Root</AddRootNode>
+      <AddRootNode>Dodaj korensko vozlišče</AddRootNode>
     </title>
   </rootNodeInfo>
   <!--
@@ -98,7 +98,7 @@
   -->
   <UIMetadataAnyPermission>
     <label>
-      <anyPermission>Any Permission</anyPermission>
+      <anyPermission>Vsa dovoljenja</anyPermission>
     </label>
   </UIMetadataAnyPermission>
 </bundle>

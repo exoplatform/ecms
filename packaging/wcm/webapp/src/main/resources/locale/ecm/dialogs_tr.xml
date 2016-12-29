@@ -35,7 +35,7 @@
  
   <UICommentForm>
     <label>
-      <placeholder>Use @ to mention someone in your comment</placeholder>
+      <placeholder>Yorumlarınızda birinden bahsetmek için @ kullanın</placeholder>
     </label>
   </UICommentForm>
  

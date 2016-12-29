@@ -988,12 +988,12 @@
       <publicationPublish>Опубликовать</publicationPublish>
       <contentNavigation>Навигация по содержимому</contentNavigation>
       <addSymLink>Добавить символьную ссылку</addSymLink>
-      <checkIn>Check In</checkIn>
-      <checkOut>Check Out</checkOut>
-      <shareDocuments>Share</shareDocuments>
-      <openDocument>Remote Edit</openDocument>
-      <editProperty>Edit Document Properties</editProperty>
-      <uploadNewVersion>Upload a new version</uploadNewVersion>
+      <checkIn>Зарегистрируйся</checkIn>
+      <checkOut>Выйди</checkOut>
+      <shareDocuments>Поделиться</shareDocuments>
+      <openDocument>Удаленное редактирование</openDocument>
+      <editProperty>Редактировать свойства документа</editProperty>
+      <uploadNewVersion>Загрузить новую версию</uploadNewVersion>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -1023,7 +1023,7 @@
   </UIViewFormTabPane>
   <PopupViewPermission>
     <title>
-      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
+      <UIPermissionSelector>Выбор разрешения</UIPermissionSelector>
     </title>
   </PopupViewPermission>
 
@@ -1074,7 +1074,7 @@
   -->
   <UITemplateForm>
     <title>
-      <AddPermission>Add Permission</AddPermission>
+      <AddPermission>Добавить права</AddPermission>
     </title>
     <action>
       <Save>#{word.save}</Save>
@@ -1383,7 +1383,7 @@
       <set_property>Установить право собственности</set_property>
       <remove>Удалить право</remove>
     </label>
-    <title>Add a permission to this node</title>
+    <title>Добавить права доступа для этого узла</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>Сохранить</Save>
@@ -1405,7 +1405,7 @@
 
   <PopupTaxonomyTreePermission>
     <title>
-      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
+      <UIPermissionSelector>Выбор разрешения</UIPermissionSelector>
     </title>
   </PopupTaxonomyTreePermission>
 
@@ -1486,7 +1486,7 @@
       <add_node>Изменить</add_node>
       <remove>Удалить</remove>
     </label>
-    <title>Add permission to this node</title>
+    <title>Добавить разрешение для этого узла</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>#{word.save}</Save>
@@ -1737,7 +1737,7 @@
   -->
   <AddNewTemplatePermission>
     <title>
-      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
+      <UIPermissionSelector>Выбор разрешения</UIPermissionSelector>
     </title>
   </AddNewTemplatePermission>
   <TemplatePermission>
@@ -1778,12 +1778,12 @@
   </DialogForm>
   <DialogFormTemplatePermission>
     <title>
-      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
+      <UIPermissionSelector>Выбор разрешения</UIPermissionSelector>
     </title>
   </DialogFormTemplatePermission>
   <ViewFormTemplatePermission>
     <title>
-      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
+      <UIPermissionSelector>Выбор разрешения</UIPermissionSelector>
     </title>
   </ViewFormTemplatePermission>
   <TemplateContainerPopup>
@@ -1976,7 +1976,7 @@
   </EditQueryForm>
   <PermissionPopup>
     <title>
-      <UIGroupMemberSelector>Permission Selector</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Выбор разрешения</UIGroupMemberSelector>
     </title>
   </PermissionPopup>
   <!--
@@ -2034,7 +2034,7 @@
   -->
   <ECMPhoneFormatValidator>
     <msg>
-      <Invalid>The field '{0}' contains an invalid Phone number. Please enter another value.</Invalid>
+      <Invalid>Поле «{0}» содержит недопустимый номер телефона. Пожалуйста, введите другое значение.</Invalid>
     </msg>
   </ECMPhoneFormatValidator>
   <!--
@@ -2485,7 +2485,7 @@
       <Add>Добавить</Add>
     </action>
     <label>
-      <userOrGroup>Memberships:</userOrGroup>
+      <userOrGroup>Членства:</userOrGroup>
     </label>
     <msg>
       <userOrGroup-alreadyExists>Это членство уже существует. Пожалуйста, выберите другое.</userOrGroup-alreadyExists>

@@ -8,7 +8,7 @@
 
   <UICNConfigPopupWindow>
     <title>
-      <UICategoryNavigationConfig>Category List Configuration</UICategoryNavigationConfig>
+      <UICategoryNavigationConfig>Kategori Listesi Yapılandırma</UICategoryNavigationConfig>
     </title>
   </UICNConfigPopupWindow>
 
@@ -24,27 +24,27 @@
       <UICategoryNavigationTreeNameSelectBox>Kategori Ağacı</UICategoryNavigationTreeNameSelectBox>
       <UICategoryNavigationTreeTitleFormStringInput>Başlık</UICategoryNavigationTreeTitleFormStringInput>
   
-      <UICategoryNavigationTreeNameFormSelectBox>Tree Name</UICategoryNavigationTreeNameFormSelectBox>
-      <UICategoryNavigationTemplateFormSelectBox>Tree viewer template</UICategoryNavigationTemplateFormSelectBox>
+      <UICategoryNavigationTreeNameFormSelectBox>Ağaç Adı</UICategoryNavigationTreeNameFormSelectBox>
+      <UICategoryNavigationTemplateFormSelectBox>Ağaç görünümü şablonu</UICategoryNavigationTemplateFormSelectBox>
       
       <UICategoryNavigationTargetPathFormInputSet>Sayfada Göster</UICategoryNavigationTargetPathFormInputSet>      
-      <TreeSelectionBlock>Tree Selection</TreeSelectionBlock>
+      <TreeSelectionBlock>Ağaç Seçimi</TreeSelectionBlock>
       <DisplaySettingBlock>Ayarları Görüntüle</DisplaySettingBlock>
       <AdvancedBlock>Gelişmiş</AdvancedBlock>
   
   <UICategoryNavigationTreePathFormInputSet>Hedef Yolu</UICategoryNavigationTreePathFormInputSet>
   <UICategoryNavigationTreePathFormStringInput>Hedef Yolu</UICategoryNavigationTreePathFormStringInput>
   <UICategoryNavigationHeaderFormStringInput>Başlık</UICategoryNavigationHeaderFormStringInput>
-  <UICategoryNavigationAutomaticDetectionCheckBoxInput>Automatic</UICategoryNavigationAutomaticDetectionCheckBoxInput>
+  <UICategoryNavigationAutomaticDetectionCheckBoxInput>Otomatik</UICategoryNavigationAutomaticDetectionCheckBoxInput>
   <UICategoryNavigationDynamicNavigationLabel>Dinamik Navigasyon</UICategoryNavigationDynamicNavigationLabel>
   <UICategoryNavigationWithClvFormStringInput>ile</UICategoryNavigationWithClvFormStringInput>
   <UICategoryNavigationTreepathPopupWindow>Hedef Yolu</UICategoryNavigationTreepathPopupWindow>    
       
     </label>
     <msg>
-      <not-support-encoding>Encoding is not supported.</not-support-encoding>
-      <render>An error occurred when rendering.</render>
-      <saving-success>The information was updated successfully.</saving-success>
+      <not-support-encoding>Kodlama desteklenmiyor.</not-support-encoding>
+      <render>İşlerken bir hata oluştu.</render>
+      <saving-success>Bilgiler başarıyla güncellendi.</saving-success>
     </msg>
     <action>
       <Save>Kaydet</Save>

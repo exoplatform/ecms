@@ -1351,7 +1351,7 @@
     </summary>
     <tooltip>
       <version>Versió</version>
-      <baseVersion>current version</baseVersion>
+      <baseVersion>versió actual</baseVersion>
       <addLabel>Afegeix una etiqueta</addLabel>
       <removeLable>Elimina l'Etiqueta</removeLable>
       <restoreVersion>Restaurar aquesta Versió</restoreVersion>

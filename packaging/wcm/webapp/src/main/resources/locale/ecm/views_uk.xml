@@ -55,8 +55,8 @@
         <pdf-max-page>Попередній перегляд недоступний для вмісту з понад {0} сторінок.</pdf-max-page>
         <using-webDAV>або відкрийте в MS Office</using-webDAV>
         <open-on-desktop>Відкрити на Робочому столі</open-on-desktop>
-        <open-in-documents>Open in Documents</open-in-documents>
-        <open-in-documents-tooltip>Open this file in Documents app</open-in-documents-tooltip>
+        <open-in-documents>Відкрити в Документах</open-in-documents>
+        <open-in-documents-tooltip>Відкрийте цей файл в додатку Документи</open-in-documents-tooltip>
         <file-size-too-big>Вміст цього файлу завеликий. Вам необхідно завантажити та відкрити у клієнті.</file-size-too-big>
         <webDAV>WebDAV подання</webDAV>
         <download>Завантажити</download>

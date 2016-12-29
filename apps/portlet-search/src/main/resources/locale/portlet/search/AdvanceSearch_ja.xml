@@ -18,8 +18,8 @@
       <Document>ドキュメント</Document>
       <DocumentAndPage>ドキュメントとページ</DocumentAndPage>
       <documentandpage>ドキュメントとページ</documentandpage>
-      <results>Results {0} to {1} for {2}</results>
-      <oneResult>Only one result for {0}</oneResult>
+      <results>結果 {0} は、{2} の {1} でした。</results>
+      <oneResult>{0} の結果は一つでした。</oneResult>
       <ofAboutCaption>について</ofAboutCaption>
       <timeUnitCaption>秒</timeUnitCaption>
       <similar>同じコンテンツが表示されるページ</similar>
@@ -33,7 +33,7 @@
       <edit>編集</edit>
     </action>
     <msg>
-      <search-not-match-type>Your search {0} does not match any {1}.</search-not-match-type>
+      <search-not-match-type>検索 {0} では、 {1} は一致しません。</search-not-match-type>
     </msg>
   </UIDefaultSearchResult>
   <UISearchPageLayoutManager>

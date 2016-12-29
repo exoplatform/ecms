@@ -36,8 +36,8 @@
     <label>
       <ManagedSites>Site Yönetimi</ManagedSites>
       <SharedSite>Paylaşılan Site</SharedSite>
-      <PersonalDocuments>Personal Documents</PersonalDocuments>
-      <UserDocuments>{0} Documents</UserDocuments>
+      <PersonalDocuments>Kişisel Belgeler</PersonalDocuments>
+      <UserDocuments>{0} Belgeleri</UserDocuments>
     </label>
   </Drives>
 

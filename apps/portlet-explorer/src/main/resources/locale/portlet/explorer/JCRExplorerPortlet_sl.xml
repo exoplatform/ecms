@@ -18,7 +18,7 @@
     </action>
     <msg>
       <not-support>You can't comment on this type of document.</not-support>
-      <not-checkedout>You must check out the document before commenting on it.</not-checkedout>
+      <not-checkedout>Pred komentiranjem si najprej rezervirajte vozlišče.</not-checkedout>
       <content-null>Praznega komentarja ne morete objaviti.</content-null>
     </msg>
   </UICommentForm>
@@ -46,8 +46,8 @@
     </button>
     <msg>
       <not-support>Ne more glasovati za to vrsto dokumenta.</not-support>
-      <not-checkedout>You must check out the document to vote.</not-checkedout>
-      <vote-restriction>You can't vote more than once.</vote-restriction>
+      <not-checkedout>Pred glasovanjem si najprej rezervirajte vozlišče.</not-checkedout>
+      <vote-restriction>Ne morete glasovati več kot enkrat.</vote-restriction>
     </msg>
   </UIVoteForm>
  
@@ -59,9 +59,9 @@
   <UIJCRExplorer>
     <msg>
       <refresh-session-success>Seja je bila uspešno osvežena.</refresh-session-success>
-      <no-node-history>You are at the root folder.</no-node-history>
+      <no-node-history>Ste v korenskem vozlišču.</no-node-history>
       <save-session-success>Vse spremembe so bile shranjene.</save-session-success>
-      <target-path-not-found>You can't access this path, either because it doesn't exist anymore or because you don't have access permissions.</target-path-not-found>
+      <target-path-not-found>Nimate dostopa do tega vozlišča, ker ne obstaja več ali pa nimate dovoljenja za dostop.</target-path-not-found>
     </msg>
   </UIJCRExplorer>
   <!--
@@ -142,7 +142,7 @@
   -->
   <UIViewRelationList>
     <label>
-      <languages-list>Translations</languages-list>
+      <languages-list>Prevodi</languages-list>
       <relation-list>Povezave</relation-list>
       <references-list>Sklici</references-list>
       <no-related-document>Ni povezanih dokumentov</no-related-document>
@@ -155,17 +155,17 @@
   #########################################################################################
   -->
   <UIPreferencesForm>
-    <title>Set up your browsing preferences</title>
+    <title>Nastavitve brskanja</title>
     <label>
-      <enableStructure>Browse in structure mode:</enableStructure>
-      <showSideBar>Show sidebar:</showSideBar>
-      <showHiddenNode>Show hidden items:</showHiddenNode>
-      <showNonDocument>Show non-document items:</showNonDocument>
-      <showRefDocuments>Show referenced items:</showRefDocuments>
+      <enableStructure>Omogoči DMS strukturo:</enableStructure>
+      <showSideBar>Prikaži stransko vrstico:</showSideBar>
+      <showHiddenNode>Prikaži skrita vozlišča:</showHiddenNode>
+      <showNonDocument>Prikaži ne-dokumentna vozlišča:</showNonDocument>
+      <showRefDocuments>Prikaži sklicevane dokumente:</showRefDocuments>
       <enableDragAndDrop>Omogoči "povleci in spusti":</enableDragAndDrop>
-      <sortBy>Sort order:</sortBy>
+      <sortBy>Razvrsti po:</sortBy>
       <order>Vrstni red po:</order>
-      <nodesPerPage>Items per page:</nodesPerPage>
+      <nodesPerPage>Elementov po strani:</nodesPerPage>
     </label>
     <action>
       <Back>#{word.close}</Back>
@@ -201,33 +201,33 @@
       <Back>#{word.back}</Back>
     </action>
     <msg>
-      <rename-successfull>'{0}' was renamed to '{1}' successfully.</rename-successfull>
-      <rename-denied>Access denied. You can't rename this item.</rename-denied>
+      <rename-successfull>Vozlišče '{0}' je bilo uspešno preimenovano v '{1}'.</rename-successfull>
+      <rename-denied>Dostop zavrnjen. Vozlišča ni mogoče preimenovati.</rename-denied>
       <fileName-invalid>Novo ime vsebuje neveljavne znake.</fileName-invalid>
       <newName-same-oldName>Novo ime že obstaja. Prosimo, preverite.</newName-same-oldName>
-      <version-exception>This document (or one of its ancestors) is not checked out.</version-exception>
-      <lock-exception>This document is locked. Please unlock it before renaming.</lock-exception>
-      <constraintViolation-exception>An error occurred while renaming '{0}'. Please check again.</constraintViolation-exception>
+      <version-exception>To vozlišče (ali njegovo nadrejeno vozlišče) je rezervirano.</version-exception>
+      <lock-exception>To vozlišče je zaklenjeno. Preden ga preimenujete ga morate odkleniti.</lock-exception>
+      <constraintViolation-exception>Med poskusom preimenovanja vozlišča '{0}' je prišlo do napake. Prosimo, preverite.</constraintViolation-exception>
       <unknown-prefix>Predpona '{0}' še ni bila registrirana.</unknown-prefix>
-      <rename-error>An error occurred while renaming. Please check again.</rename-error>
+      <rename-error>Med poskusom preimenovanja vozlišča je prišlo do napake. Prosimo, preverite.</rename-error>
     </msg>
   </UIRenameForm>
   <UIPopupWindow>
     <title>
       <UIRenameForm>Preimenuj</UIRenameForm>
       <UIActionContainer>Uredi dejanje</UIActionContainer>
-      <UIFolderForm>New Folder</UIFolderForm>
+      <UIFolderForm>Nova mapa</UIFolderForm>
       <UIUploadManager>Prenesi datoteko</UIUploadManager>
       <UIReferencesList>Seznam sklicev</UIReferencesList>
-      <UIExportNode>Export</UIExportNode>
+      <UIExportNode>Izvozi</UIExportNode>
       <UINodeTypeInfo>Podatki o vrsti vozlišča</UINodeTypeInfo>
       <UIVersionInfo>Informacije o različici</UIVersionInfo>
-      <UIActivateVersion>Activate Versioning</UIActivateVersion>
+      <UIActivateVersion>Aktiviraj različico</UIActivateVersion>
       <UIAuditingInfo>Informacije o nadzoru</UIAuditingInfo>
       <UIActivateAuditing>Vključi nadzor</UIActivateAuditing>
       <UIPermissionManager>Upravljanje dovoljenj</UIPermissionManager>
       <UIPropertiesManager>Upravljanje lastnosti</UIPropertiesManager>
-      <UIECMSearch>Advanced Search</UIECMSearch>
+      <UIECMSearch>Napredno iskanje</UIECMSearch>
       <UISavedQuery>Seznam shranjenih poizvedb</UISavedQuery>
       <UIWatchDocumentForm>Sledi dokumentu</UIWatchDocumentForm>
       <UIActionManager>Upravljaj dejanja</UIActionManager>
@@ -236,11 +236,11 @@
       <EditFormController>Uredi dokument</EditFormController>
       <UIRelationManager>Dodaj relacijo</UIRelationManager>
       <UICategoryManager>Dodaj Kategorijo</UICategoryManager>
-      <UIImportNode>Import</UIImportNode>
+      <UIImportNode>Uvozi</UIImportNode>
       <UIViewMetadataManager>Ogled Metapodatkov</UIViewMetadataManager>
       <UIVoteForm>Glasujte za dokument</UIVoteForm>
       <UICommentForm>Komentar</UICommentForm>
-      <UIPreferencesForm>Documents Browsing Preferences</UIPreferencesForm>
+      <UIPreferencesForm>Nastavitve</UIPreferencesForm>
       <UIPublicationManager>Upravljanje objave</UIPublicationManager>
       <UIConfirmMessage>Izbriši?</UIConfirmMessage>
       <UIDeleteFileConfirmMessage>Izbriši datoteko?</UIDeleteFileConfirmMessage>
@@ -250,7 +250,7 @@
       <UIActivePublication>Vpiši se na življenjski cikel objave</UIActivePublication>
       <UITaggingForm>Označi dokument</UITaggingForm>
       <UIThumbnailForm>Dodaj sličico</UIThumbnailForm>
-      <UIAllItemsPreferenceForm>Documents Browsing Preferences</UIAllItemsPreferenceForm>
+      <UIAllItemsPreferenceForm>Nastavitve</UIAllItemsPreferenceForm>
       <UISelectRestorePath>Izberite pot za obnovitev</UISelectRestorePath>
       <UISEOForm>Upravljanje SEO</UISEOForm>
       <UISEOToolbarForm>Upravljanje SEO</UISEOToolbarForm>
@@ -282,7 +282,7 @@
   -->
   <UIActionBar>
     <tooltip>
-      <AddFolder>New Folder</AddFolder>
+      <AddFolder>Nova mapa</AddFolder>
       <AddDocument>Nova vsebina</AddDocument>
       <EditDocument>Uredi</EditDocument>
       <Upload>Prenesi</Upload>
@@ -298,8 +298,8 @@
       <ManageCategories>Kategorije</ManageCategories>
       <ManageRelations>Relacije</ManageRelations>
       <ManageActions>Dejanja</ManageActions>
-      <ExportNode>Export</ExportNode>
-      <ImportNode>Import</ImportNode>
+      <ExportNode>Izvozi</ExportNode>
+      <ImportNode>Uvozi</ImportNode>
       <OverloadThumbnail>Nadomestna sličica</OverloadThumbnail>
       <ManageHidden>Pokaži/Skrij vsebino</ManageHidden>
       <ViewReferences>Sklici</ViewReferences>
@@ -313,45 +313,45 @@
       <UploadNewVersion>Naloži novo različico</UploadNewVersion>
     </tooltip>
     <msg>
-      <cannot-action-in-rootnode>You can't perform this action at root.</cannot-action-in-rootnode>
+      <cannot-action-in-rootnode>Tega dejanja ni mogoče izvesti v korenskem vozlišču.</cannot-action-in-rootnode>
       <node-checkedin>Vozlišče morate najprej rezervirati.</node-checkedin>
-      <cannot-enable-version-rootnode>Can't activate versioning on root.</cannot-enable-version-rootnode>
-      <cannot-enable-publication-rootnode>Can't activate publication at root.</cannot-enable-publication-rootnode>
+      <cannot-enable-version-rootnode>Za korensko vozlišče ni mogoče omogočiti različic.</cannot-enable-version-rootnode>
+      <cannot-enable-publication-rootnode>Za korensko vozlišče ne morete omogočiti objave.</cannot-enable-publication-rootnode>
       <manage-publication>
-        <not-supported-nodetype>Only documents can be published.</not-supported-nodetype>
+        <not-supported-nodetype>Objavljanje je omogočeno samo za dokumentna vozlišča.</not-supported-nodetype>
         <no-publication-lifecycle>Življenjski cikel objave ni konfiguriran.</no-publication-lifecycle>
       </manage-publication>
-      <unsubcriber-lifecycle>The document was already unsubscribed.</unsubcriber-lifecycle>
-      <not-supported-nodetype>This operation is only supported for documents.</not-supported-nodetype>
-      <unsubcriber-lifecycle-finish>The document was unsubscribed successfully.</unsubcriber-lifecycle-finish>
-      <access-false>The document is not an article or checked in.</access-false>
+      <unsubcriber-lifecycle>Vozlišče je že bilo odjavljeno.</unsubcriber-lifecycle>
+      <not-supported-nodetype>Odjave z življenjskega cikla so mogoče le za dokumentna vozlišča.</not-supported-nodetype>
+      <unsubcriber-lifecycle-finish>Vozlišče je uspešno odjavljeno.</unsubcriber-lifecycle-finish>
+      <access-false>To vozlišče ni članek oziroma ni sproščeno.</access-false>
       <unsupported-action>To dejanje ni podprto.</unsupported-action>
-      <not-relationable>This document has no relations.</not-relationable>
-      <node-pasted>'{0}' has been pasted at the location '{1}'. This operation has already been saved.</node-pasted>
-      <no-node-selected>Nothing to copy.</no-node-selected>
-      <unable-edit>Editing documents of type '{1}' like '{0}' is not supported.</unable-edit>
-      <not-support>Can't edit the selected item.</not-support>
-      <template-null>This document has no form template.</template-null>
+      <not-relationable>To vozlišče še ni imelo kakršne koli povezave na drugo vozlišče.</not-relationable>
+      <node-pasted>Vozlišče {0} je bilo prilepljeno na lokacijo {1}. Operacija je že bila shranjena.</node-pasted>
+      <no-node-selected>Nobeno vozlišče ni bilo kopirano.</no-node-selected>
+      <unable-edit>Vozlišča '{0}' tipa '{1}' ne morete urejati.</unable-edit>
+      <not-support>Izbranega vozlišča ni mogoče urejati.</not-support>
+      <template-null>To vozlišče nima na voljo pogovornega okna.</template-null>
       <keyword-null>Ni ključnih besed za iskanje.</keyword-null>
       <not-found>Ni rezultatov.</not-found>
       <keyword-not-allow>Ta ključna beseda ni dovoljena.</keyword-not-allow>
-      <is-not-referenable>'{0}' can't be referenceable.</is-not-referenable>
-      <access-denied>Access denied. You don't have edit permission for this item.</access-denied>
-      <access-add-denied>Access denied. You don't have permission to add items here.</access-add-denied>
+      <is-not-referenable>Na vozlišče '{0}' ni mogoče postaviti sklica.</is-not-referenable>
+      <access-denied>Dostop zavrnjen. Nimate dovoljenja za urejanje v tem vozlišču.</access-denied>
+      <access-add-denied>Dostop zavrnjen. Nimate dovoljenja za dodajanje v tem vozlišču.</access-add-denied>
       <item-existed>To vozlišče že obstaja. Ne more imeti enakega imena kot drug element.</item-existed>
       <removed-hidden-mixin>Uspešno ste odstranili skrit Mixin.</removed-hidden-mixin>
       <added-hidden-mixin>Uspešno ste dodali skrit Mixin.</added-hidden-mixin>
       <not-supported>Ta funkcija je dovoljena le za dokumente.</not-supported>
-      <empty-file-type>You can't add a document here.</empty-file-type>
-      <unsupported-watch>Only documents can be watched.</unsupported-watch>
-      <watch-checkedin>You must check out the document before watching.</watch-checkedin>
-      <unsupported-tagging>Only documents can be tagged.</unsupported-tagging>
-      <tagnode-checkedin>You must check out the document before tagging.</tagnode-checkedin>
+      <empty-file-type>Temu vozlišču ne morete dodati dokumenta.</empty-file-type>
+      <unsupported-watch>Sledite lahko le vozlišču dokumenta.</unsupported-watch>
+      <watch-checkedin>Pred pričetkom sledenja morate vozlišče sprostiti.</watch-checkedin>
+      <unsupported-tagging>Označite lahko le dokumente.</unsupported-tagging>
+      <tagnode-checkedin>Pred pričetkom označevanja morate vozlišče sprostiti.</tagnode-checkedin>
     </msg>
     <title>
       <select-tab>Izberite zavihek</select-tab>
       <SimpleSearch>Hitro iskanje</SimpleSearch>
-      <AdvanceSearch>Advanced Search</AdvanceSearch>
+      <AdvanceSearch>Napredno iskanje</AdvanceSearch>
       <SavedQueries>Shranjene poizvedbe</SavedQueries>
       <ShowAllOwnedByUser>Prikaži vse moje elemente</ShowAllOwnedByUser>
       <ShowAllFavourite>Prikaži vse priljubljene elemente</ShowAllFavourite>
@@ -361,48 +361,48 @@
   </UIActionBar>
   <UIPopupMenu>
     <msg>
-      <has-not-permission>Access denied. You don't have permissions to add in this item.</has-not-permission>
-      <has-not-edit-permission>Access denied. You don't have edit permission here. Please contact the administrator.</has-not-edit-permission>
-      <cannot-login-node>You can't access and paste an item here.</cannot-login-node>
-      <cannot-paste-nodetype>You can't paste this type of item here.</cannot-paste-nodetype>
-      <has-not-permission-unlok>You don't have permission to unlock this document.</has-not-permission-unlok>
-      <bound-exception>You don't have the permission to rename this item. Please contact the administrator.</bound-exception>
-      <bound-move-exception>You can't move an item to itself or in a subfolder.</bound-move-exception>
-      <does-not-support-auditing>You can't activate auditing here.</does-not-support-auditing>
-      <can-not-rename-node>You don't have permission to rename this item. Please contact the administrator to get the necessary rights.</can-not-rename-node>
-      <can-not-cut-node>You don't have permission to cut this item. Please contact the administrator.</can-not-cut-node>
-      <can-not-remove-node>You don't have permission to remove this item. Please contact the administrator.</can-not-remove-node>
-      <can-not-lock-node>You don't have permission to lock {0}. Please contact the administrator.</can-not-lock-node>
-      <can-not-unlock-node>You don't have permission to unlock this item. Please contact the administrator.</can-not-unlock-node>
-      <no-node>Please select at least one item before pasting.</no-node>
-      <can-not-paste-node>You don't have permission to move to this item. Please contact the administrator.</can-not-paste-node>
-      <can-not-move-node>You don't have permission to move this item. Please contact the administrator.</can-not-move-node>
-      <does-not-support-versioning>You don't have permission to move. Please contact the administrator.</does-not-support-versioning>
-      <path-not-found>This element was deleted or changed. Please click the Refresh button.</path-not-found>
-      <paste-lock-exception>'{0}' can't be pasted here. Make sure it is not locked nor this folder. Also check that no related document is locked.</paste-lock-exception>
-      <can-not-checkin-node>You can't check in this item. Please check that you have the necessary permissions.</can-not-checkin-node>
-      <can-not-checkout-node>You can't check out this item. Please check that you have the necessary permissions.</can-not-checkout-node>
-      <move-constraint-exception>An error occurred while moving this item.</move-constraint-exception>
-      <not-lock-owner>You can't unlock this document because you are not the lock owner.</not-lock-owner>
-      <is-checked-in>Please check out this document before renaming.</is-checked-in>
-      <is-checked-in-lock>Please check out this document before locking.</is-checked-in-lock>
-      <cant-lock>You can't lock this document.</cant-lock>
+      <has-not-permission>Dostop zavrnjen. Nimate dovoljenja za dodajanje v tem vozlišču.</has-not-permission>
+      <has-not-edit-permission>Dostop zavrnjen. Nimate dovoljenja za urejanje v tem vozlišču. Obrnite se na skrbnika.</has-not-edit-permission>
+      <cannot-login-node>Dostop zavrnjen. V tem vozlišču nimate dovoljenja za dodajanje.</cannot-login-node>
+      <cannot-paste-nodetype>Tukaj ne morete prilepiti vozlišča.</cannot-paste-nodetype>
+      <has-not-permission-unlok>Nimate dovoljenja za odklepanje tega vozlišča.</has-not-permission-unlok>
+      <bound-exception>Nimate dovoljenja za preimenovanje tega vozlišča. Obrnite se na skrbnika.</bound-exception>
+      <bound-move-exception>Vozlišča ne morete premakniti v samega sebe ali v podrejeno vozlišče.</bound-move-exception>
+      <does-not-support-auditing>Za to vozlišče ne morete aktivirati nadzora.</does-not-support-auditing>
+      <can-not-rename-node>Nimate dovoljenja za preimenovanje tega vozlišča. Obrnite se na skrbnika, da vam dodeli ustrezno dovoljenje.</can-not-rename-node>
+      <can-not-cut-node>Nimate dovoljenja, da bi izrezali to vozlišče. Obrnite se na skrbnika.</can-not-cut-node>
+      <can-not-remove-node>Nimate dovoljenja, da bi odstranili to vozlišče. Obrnite se na skrbnika.</can-not-remove-node>
+      <can-not-lock-node>Nimate dovoljenja za zaklepanje vozlišča {0}. Se obrnite na skrbnika.</can-not-lock-node>
+      <can-not-unlock-node>Nimate dovoljenja za odklepanje tega vozlišča. Se obrnite na skrbnika.</can-not-unlock-node>
+      <no-node>Prosimo, izberite vsaj eno vozlišče pred lepljenjem.</no-node>
+      <can-not-paste-node>Nimate dovoljenja za premikanje tega vozlišča. Obrnite se na skrbnika.</can-not-paste-node>
+      <can-not-move-node>Nimate dovoljenja za premikanje tega vozlišča. Obrnite se na skrbnika.</can-not-move-node>
+      <does-not-support-versioning>Nimate dovoljenja za premikanje tega vozlišča. Obrnite se na skrbnika.</does-not-support-versioning>
+      <path-not-found>Ta element je bil izbrisan ali spremenjen. Kliknite gumb Osveži.</path-not-found>
+      <paste-lock-exception>Na to vozlišče ne morete prilepiti '{0}' ker je izvorni ali ciljni element zaklenjen ali povezan z zaklenjenim elementom.</paste-lock-exception>
+      <can-not-checkin-node>Izbranega vozlišča ne morete sprostiti. Preverite, da imate ustrezna dovoljenja.</can-not-checkin-node>
+      <can-not-checkout-node>Izbranega vozlišča ne morete sprostiti. Preverite, da imate ustrezna dovoljenja.</can-not-checkout-node>
+      <move-constraint-exception>Pri premikanju vozlišča je prišlo do napke.</move-constraint-exception>
+      <not-lock-owner>Tega vozlišča ne morete odkleniti, ker ga niste vi zaklenili.</not-lock-owner>
+      <is-checked-in>Preden preimenujete vozlišče si ga rezervirajte.</is-checked-in>
+      <is-checked-in-lock>Preden zaklenete vozlišče ga sprostite.</is-checked-in-lock>
+      <cant-lock>Vozlišča ni mogoče zakleniti.</cant-lock>
       <node-locked>Predmet s potjo {0} ali njegov nadrejeni/višji nivo je zaklenjen.</node-locked>
-      <can-not-delete>Please close this document before deleting.</can-not-delete>
-      <can-not-delete-version>You can't delete this document. It's versioned.</can-not-delete-version>
-      <not-support>You can't delete the selected item. Please select another one.</not-support>
-      <current-node-not-allow-paste>You can't paste the copied item there.</current-node-not-allow-paste>
-      <copied-node-in-versioning>You can't paste the copied item here because it's versioned.</copied-node-in-versioning>
-      <parent-node-locked>You don't have permission to unlock '{0}'.</parent-node-locked>
-      <this-node-locked-by-parent>You can't unlock this item. Parent folder is locked.</this-node-locked-by-parent>
-      <paste-node-same-name>Can't paste this item here. An item with the same name already exists in the destination folder.</paste-node-same-name>
-      <has-not-add-permission>You don't have the permission to add here.</has-not-add-permission>
-      <node-cutting>Item is being cut. You can't paste it here.</node-cutting>
-      <access-denied>Access denied. You may not have the permission.</access-denied>
-      <remove-verion-exception>You can't remove this document because it is checked in.</remove-verion-exception>
-      <remove-referentialIntegrityException>You can't delete this item because it is currently referenced by another one.</remove-referentialIntegrityException>
-      <constraintviolation-exception>The mandatory property jcr:uuid was not found. The document may have been deleted or changed. Please click the Refresh button.</constraintviolation-exception>
-      <path-not-found-exception>This document was deleted or changed. Please click the Refresh button.</path-not-found-exception>
+      <can-not-delete>Preden lahko vozlišče izbrišete ga morate zapreti.</can-not-delete>
+      <can-not-delete-version>Ne morete izbrisati tega vozlišča, shranjujejo se različice.</can-not-delete-version>
+      <not-support>Izbranega vozlišča ne morete izbrisati. Izberite drugo vozlišče.</not-support>
+      <current-node-not-allow-paste>Kopiranega vozlišča ne morete prilepiti na trenutno vozlišče.</current-node-not-allow-paste>
+      <copied-node-in-versioning>Kopiranega vozlišča ne morete prilepiti, shranjujejo se različice.</copied-node-in-versioning>
+      <parent-node-locked>Nimate dovoljenja za odklepanje vozlišča '{0}'.</parent-node-locked>
+      <this-node-locked-by-parent>Tega vozlišča ne morete odkleniti. Zaklenjen je njegovo nadrejeno vozlišče.</this-node-locked-by-parent>
+      <paste-node-same-name>Vozlišča z istim imenom, kot že obstaja v ciljni mapi, ne morete prilepiti.</paste-node-same-name>
+      <has-not-add-permission>Nimate dovoljenja za dodajanje novega vozlišča.</has-not-add-permission>
+      <node-cutting>Vozlišče ste izrezali. Tukaj ga ne morete prilepiti.</node-cutting>
+      <access-denied>Dostop zavrnjen. Morda nimate dovoljenja v tem vozlišču.</access-denied>
+      <remove-verion-exception>Tega vozlišča ne morete odstraniti, ker je (ali njegov predhodnik) sproščen.</remove-verion-exception>
+      <remove-referentialIntegrityException>Tega vozlišča ne morete izbrisati, ker je trenutno cilj sklica.</remove-referentialIntegrityException>
+      <constraintviolation-exception>Obveznega elementa jcr:uuid ni bilo mogoče najti. Vozlišče je izbrisano ali spremenjeno. Kliknite gumb Osveži.</constraintviolation-exception>
+      <path-not-found-exception>To vozlišče je bilo izbrisano ali spremenjeno. Kliknite gumb Osveži.</path-not-found-exception>
       <not-exist-categories>Kategorija ne obstaja.</not-exist-categories>
       <lock-node-read-only>To datoteko je zaklenil uporabnik {0}. Odpri samo za branje?</lock-node-read-only>
     </msg>
@@ -428,12 +428,12 @@
       <title-invalid>Prosimo vnesite naslov mape.</title-invalid>
       <name-not-allowed>To ime ni dovoljeno.</name-not-allowed>
       <fileName-error>Ime datoteke ni veljavno.</fileName-error>
-      <constraint-violation>You can't add a document of type '{0}' here.</constraint-violation>
+      <constraint-violation>Trenutno vozlišče ne omogoča dodajanje vozlišča tipa '{0}'.</constraint-violation>
       <repository-exception>Prišlo je do nepričakovane napake. Obrnite se na skrbnika.</repository-exception>
-      <repository-exception-permission>You don't have the permission to add a new folder here.</repository-exception-permission>
+      <repository-exception-permission>Nimate dovoljenja za dodajanje nove mape v tem vozlišču.</repository-exception-permission>
       <numberformat-exception>Te mape ni mogoče shraniti. Ime mora biti v numerični obliki.</numberformat-exception>
       <!--DMS 2.4.x; ECM-3553-->
-      <not-allow-sameNameSibling>You can't save the folder. An item with the same name already exists.</not-allow-sameNameSibling>
+      <not-allow-sameNameSibling>Mape ne morete shraniti. To vozlišče že vsebuje vozlišče z istim imenom.</not-allow-sameNameSibling>
       <ntFolder-not-avaiable>Izbrati morate vrsto mape po meri</ntFolder-not-avaiable>
     </msg>
     <help>
@@ -447,7 +447,7 @@
   -->
   <UIWorkingArea>
     <title>
-      <Icon>Icon</Icon>
+      <Icon>Ikona</Icon>
     </title>
     <msg>
       <!-- Delte one node is not in trash and have no relation -->
@@ -500,26 +500,26 @@
       <feedback-restore>"{0}" je bila uspešno obnovljena.</feedback-restore>
       <feedback-restore-multi>{0} elementov je bilo uspešno obnovljenih.</feedback-restore-multi>
       
-      <confirm-restore>A '{0}' item already exists at the previous location. Are you sure you want to restore it?</confirm-restore>
+      <confirm-restore>Vozlišče z enakim imenom že obstaja na stari lokaciji vozlišča "{0}". Ali ste prepričani, da želite obnoviti to vozlišče?</confirm-restore>
       <confirm-move>Ali ste prepričani, da želite premakniti?</confirm-move>
-      <node-cut>'{0}' has been cut.</node-cut>
+      <node-cut>Vozlišče '{0}' je bilo izrezano.</node-cut>
       <execute-successfully>Dejanje po meri "{0}" je bilo izvršeno.</execute-successfully>
-      <save-node-success>'{0}' has been saved.</save-node-success>
-      <move-problem>You can't move '{0}' to '{1}' because there was a problem with permissions or constraint conditions.</move-problem>
+      <save-node-success>Vozlišče '{0}' je bilo shranjeno.</save-node-success>
+      <move-problem>Vozlišča '{0}' ne morete premakniti na '{1}' ker je prišlo do težav z dovoljenjem ali pa ima vozlišče omejitve.</move-problem>
     </msg>
   </UIWorkingArea>
   <UIDocumentWorkspace>
     <label>
-      <no-children>This item doesn't have children.</no-children>
-      <no-children-but-has-hidden>This folder does not have any item, but there are some hidden files.</no-children-but-has-hidden>
+      <no-children>To vozlišče nima podrejenega vozlišča.</no-children>
+      <no-children-but-has-hidden>To vozlišče nima podrejenih vozlišč, vendar pa obstaja nekaj skritih datotek.</no-children-but-has-hidden>
     </label>
     <msg>
-      <unable-save-node>'{0}' has been created. Please save session to validate this action.</unable-save-node>
-      <save-node-success>'{0}' has been saved.</save-node-success>
-      <node-copied>'{0}' has been copied.</node-copied>
-      <node-cut>'{0}' has been cut.</node-cut>
-      <remove-root>You can't remove the root folder.</remove-root>
-      <node-remove-success>'{0}' has been removed.</node-remove-success>
+      <unable-save-node>Vozlišče '{0}' je bilo na novo ustvarjeno. Prosimo, shranite sejo pred izvedbo tega dejanja.</unable-save-node>
+      <save-node-success>Vozlišče '{0}' je bilo shranjeno.</save-node-success>
+      <node-copied>Vozlišče '{0}' je bilo kopirano.</node-copied>
+      <node-cut>Vozlišče '{0}' je bilo izrezano.</node-cut>
+      <remove-root>Ne morete odstraniti korenskega vozlišča.</remove-root>
+      <node-remove-success>Vozlišče '{0}' je bilo odstranjeno.</node-remove-success>
     </msg>
     <tooltip>
       <Rename>Preimenuj</Rename>
@@ -532,18 +532,18 @@
       <Lock>Zakleni</Lock>
       <Unlock>Odkleni</Unlock>
       <EditDocument>Uredi</EditDocument>
-      <Paste>Paste</Paste>
+      <Paste>Prilepi</Paste>
       <LockedBy>Zaklenil</LockedBy>
     </tooltip>
   </UIDocumentWorkspace>
   <UIDocumentInfo>
     <msg>
-      <access-denied>Access denied. You can't access '{0}'.</access-denied>
-      <null-exception>Item not found. It was either removed or changed, or you don't have the access permission.</null-exception>
+      <access-denied>Dostop zavrnjen. Nimate dostopa do vozlišča '{0}'.</access-denied>
+      <null-exception>Elementa ni mogoče najti. Bil je odstranjen ali spremenjen, ali pa nimate dovoljenja za dostop do tega vozlišča.</null-exception>
       <confirm-deleteattachment>Ali ste prepričani, da želite odstraniti priloženo datoteko?</confirm-deleteattachment>
       <confirm-deleteattcomment>Ali ste prepričani, da želite odstraniti ta komentar?</confirm-deleteattcomment>
-      <access-denied-exception>Access denied. You may not have reading privileges, or the documen may have been removed or changed.</access-denied-exception>
-      <path-not-found>This element was deleted or changed. Please click the Refresh button.</path-not-found>
+      <access-denied-exception>Dostop zavrnjen. Morda nimate dovoljenja za branje, ali pa je bilo vozlišče odstranjeno ali spremenjeno.</access-denied-exception>
+      <path-not-found>Ta element je bil izbrisan ali spremenjen. Kliknite gumb Osveži.</path-not-found>
     </msg>
     <tooltip>
       <remove-attachment>Odstranite to priloženo datoteko</remove-attachment>
@@ -577,16 +577,16 @@
       <Delete>Izbriši</Delete>
       <Save>#{word.save}</Save>
       <Cut>Izreži</Cut>
-      <Paste>Paste</Paste>
+      <Paste>Prilepi</Paste>
       <CheckOut>Rezerviraj</CheckOut>
       <CheckIn>Sprosti</CheckIn>
       <WebDAV>Pogled WebDAV</WebDAV>
       <autoversion>Samodejno shranjevanje različic</autoversion>
       <Custom>Po meri</Custom>
-      <AddFolder>New Folder</AddFolder>
-      <AddDocument>New Content</AddDocument>
-      <Upload>Upload Files</Upload>
-      <MoveNode>Move</MoveNode>
+      <AddFolder>Nova mapa</AddFolder>
+      <AddDocument>Nova vsebina</AddDocument>
+      <Upload>Prenesi datoteke</Upload>
+      <MoveNode>Premakni</MoveNode>
       <UnLock>Odkleni</UnLock>
       <ViewProperties>Ogled lastnosti</ViewProperties>
       <GetURL>Kopiraj URL v odložišče</GetURL>
@@ -596,12 +596,12 @@
       <MoveToTrash>Premakni v koš</MoveToTrash>
       <RestoreFromTrash>Obnovi iz koša</RestoreFromTrash>
       <EmptyTrash>Izprazni koš</EmptyTrash>
-      <WebDavView>Open in MS Office</WebDavView>
-      <Download>Download</Download>
+      <WebDavView>Odpri v MS Office</WebDavView>
+      <Download>Prenesi</Download>
       <OpenDocument>Oddaljeno urejanje</OpenDocument>
       <EditProperty>Urejanje lastnosti dokumenta</EditProperty>
       <UploadNewVersion>Naloži novo različico</UploadNewVersion>
-      <CreateNewVersion>Save as new version</CreateNewVersion>
+      <CreateNewVersion>Ustvari novo različico</CreateNewVersion>
     </event>
   </ECMContextMenu>
  
@@ -615,8 +615,8 @@
       <no-references>Sklicevanja ni mogoče najti</no-references>
     </msg>
     <header>
-      <workspace>Workspace</workspace>
-      <path>Path</path>
+      <workspace>Delovni prostor</workspace>
+      <path>Pot</path>
     </header>
     <action>
       <Close>#{word.close}</Close>
@@ -642,9 +642,9 @@
       <UIUploadContent>Informacije o prenešeni datoteki</UIUploadContent>
       <UIJCRAdvancedSearch>Nova poizvedba</UIJCRAdvancedSearch>
       <UISavedQuery>Shranjena poizvedba</UISavedQuery>
-      <AdvancedSearchResult>Search Results</AdvancedSearchResult>
+      <AdvancedSearchResult>Rezultati iskanja</AdvancedSearchResult>
       <UISimpleSearch>Enostavno iskanje</UISimpleSearch>
-      <UISearchContainer>Advanced Search</UISearchContainer>
+      <UISearchContainer>Napredno iskanje</UISearchContainer>
       <UICategoryManagerSearch>Dodaj kategorijo iskanja</UICategoryManagerSearch>
       <UIConstraintsForm>Obrazec omejitev</UIConstraintsForm>
       <UIViewSearchResult>Ogled vsebin</UIViewSearchResult>
@@ -655,13 +655,13 @@
       <UIActionContainer>Dodaj dejanje</UIActionContainer>
       <UIActionViewContainer>Informacije o dejanju</UIActionViewContainer>
       <UIMultiLanguageForm>Ogled jezika</UIMultiLanguageForm>
-      <UIAddLanguageContainer>Add Language</UIAddLanguageContainer>
+      <UIAddLanguageContainer>Dodaj jezik</UIAddLanguageContainer>
       <UINonPublishedForm>Stanje</UINonPublishedForm>
       <UIPublishedForm>Stanje</UIPublishedForm>
       <UIPublicationLogList>Zgodovina</UIPublicationLogList>
       <UIDocumentWithTree>Ogled datoteke</UIDocumentWithTree>
       <UIDocumentInfo>Dokumentni pogled</UIDocumentInfo>
-      <UICategoriesSelectPanel>Select Categories</UICategoriesSelectPanel>
+      <UICategoriesSelectPanel>Izberite kategorije</UICategoriesSelectPanel>
       <UISelectedCategoriesGrid>Sklicevane kategorije</UISelectedCategoriesGrid>
       <UIWorkflowPublicationActionForm>Workflow Publication Action</UIWorkflowPublicationActionForm>
       <UIWorkflowPublicationViewForm>Workflow Publication View</UIWorkflowPublicationViewForm>
@@ -706,7 +706,7 @@
     <title>Dodaj/Uredi lastnost</title>
     <label>
       <name>Ime:</name>
-      <type>Type:</type>
+      <type>Vrsta:</type>
       <value>Vrednost:</value>
       <upload>Prenesi:</upload>
       <namespace>Imenski prostor:</namespace>
@@ -733,8 +733,8 @@
       <name-invalid>Vnesite ime lastnosti.</name-invalid>
       <unable-create>Lastnosti ni mogoče dodati.</unable-create>
       <value-invalid>Vnesite vrednost.</value-invalid>
-      <node-checkedin>You must check out this item before adding a property.</node-checkedin>
-      <can-not-add>You can't add properties to this item. This is only allowed for the type nt:unstructured.</can-not-add>
+      <node-checkedin>Pred dodajanjem lastnosti morate naprej rezervirati to vozlišče.</node-checkedin>
+      <can-not-add>Temu vozlišču ne morete dodati lastnosti. To je dovoljeno samo za vozlišča vrste nt: nestrukturiran.</can-not-add>
       <propertyName-invalid>Ime lastnosti mora vključevati imenski prostor (npr. imenski prostor:ime lastnosti).</propertyName-invalid>
       <propertyName-exist>Lastnost '{0}' že obstaja.</propertyName-exist>
       <propertyValu-null>Nekatere vrednosti so lahko nič/prazne.</propertyValu-null>
@@ -757,7 +757,7 @@
       </title>
     </action>
     <header>
-      <usersOrGroups>User or Group</usersOrGroups>
+      <usersOrGroups>Uporabnik ali skupina</usersOrGroups>
       <read>Branje</read>
       <addNode>Spreminjanje</addNode>
       <remove>Odstranjevanje</remove>
@@ -795,19 +795,19 @@
       <selectUser>Izberi uporabnika</selectUser>
     </label>
     <msg>
-      <not-change-owner>'{0}' is the owner of this item and has full control permission.</not-change-owner>
+      <not-change-owner>'{0}' je lastnik tega vozlišča in ima dovoljenje za poln nadzor.</not-change-owner>
     </msg>
   </UIGroupSelector>
   <UIPermissionForm>
     <label>
       <UIPopupWindow>Izberi</UIPopupWindow>
       <permission>UIPermissionForm</permission>
-      <userOrGroup>User or Group</userOrGroup>
+      <userOrGroup>Uporabnik ali skupina</userOrGroup>
       <read>Dovoljenje branja</read>
       <add_node>Dovoljenje spreminjanja</add_node>
       <remove>Dovoljenje odstranjevanja</remove>
     </label>
-    <title>Add a permission</title>
+    <title>Dodaj dovoljenje temu vozlišču</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>#{word.save}</Save>
@@ -817,7 +817,7 @@
       <checkbox-require>Izberite vsaj eno dovoljenje.</checkbox-require>
       <userOrGroup-required>Pred shranjevanjem tega dovoljenja izberite uporabnika ali skupino.</userOrGroup-required>
       <not-change-permission>Nimate pravice, da bi dodali dovoljenje.</not-change-permission>
-      <access-denied>Access denied. You cannot remove this permission.</access-denied>
+      <access-denied>Dostop zavrnjen. Ne morete odstraniti tega dovoljenja.</access-denied>
     </msg>
   </UIPermissionForm>
 
@@ -880,7 +880,7 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <keyword-not-allowed>This keyword is not allowed.</keyword-not-allowed>
+      <keyword-not-allowed>Ta ključna beseda ni dovoljena.</keyword-not-allowed>
     </msg>
   </UIContentNameSearch>
   <UISimpleSearch>
@@ -899,8 +899,8 @@
     </label>
     <msg>
       <keyword-null>Vnesite ključno besedo.</keyword-null>
-      <not-found>No results found.</not-found>
-      <keyword-not-allow>This keyword is not allowed.</keyword-not-allow>
+      <not-found>Ni rezultatov.</not-found>
+      <keyword-not-allow>Ta ključna beseda ni dovoljena.</keyword-not-allow>
       <value-null>Vnesite ključno besedo ali omejitve.</value-null>
       <value-save-null>Pred shranjevanjem te poizvedbe vnesite ključno besedo ali omejitve.</value-save-null>
       <inputSearch-invalid>V iskalnem pojmu so neveljavni znaki.</inputSearch-invalid>
@@ -914,19 +914,19 @@
   </ViewSearch>
   <UISearchResult>
     <msg>
-      <not-support>There is no View template for this document.</not-support>
-      <empty>No results found.</empty>
+      <not-support>Ni predloge prikaza za ta element.</not-support>
+      <empty>Ni rezultatov.</empty>
       <access-denied>Te mape ne morete odpreti, bodisi ker ne obstaja več ali pa nimate pravic za dostop.</access-denied>
       <query-invalid>Poizvedba ni veljavna.</query-invalid>
     </msg>
     <header>
       <name>#{word.name}</name>
-      <path>Path</path>
+      <path>Pot</path>
       <action>Dejanje</action>
-      <shortcutPath>Path</shortcutPath>
+      <shortcutPath>Pot</shortcutPath>
       <type>Vrsta</type>
       <dateCreated>Datum nastanka</dateCreated>
-      <score>Score</score>
+      <score>Rezultat</score>
     </header>
     <title>
       <typeASC>Razvrsti po vrsti dokumenta naraščajoče</typeASC>
@@ -939,87 +939,87 @@
       <datecreatedDESC>Razvrsti po datumu nastanka padajoče</datecreatedDESC>
     </title>
     <tooltip>
-      <View>View this item</View>
+      <View>Poglej to vozlišče</View>
       <OpenFolder>Pojdi v mapo</OpenFolder>
     </tooltip>
   </UISearchResult>
   <UIShowAllOwnedByUserResult>
     <msg>
-      <not-support>There is no View template for this document</not-support>
-      <empty>No results found.</empty>
-      <access-denied>You can't view this document, either because this template is not supported or because access is denied.</access-denied>
+      <not-support>Ni predloge prikaza za ta element</not-support>
+      <empty>Ni rezultatov.</empty>
+      <access-denied>Tega vozlišča si ne morete ogledati, bodisi predloga ni podprta ali pa nimate dovoljenja za ogled.</access-denied>
       <query-invalid>Poizvedba je neveljavna</query-invalid>
     </msg>
     <header>
       <name>#{word.name}</name>
-      <path>Path</path>
+      <path>Pot</path>
       <action>Dejanje</action>
-      <shortcutPath>Path</shortcutPath>
+      <shortcutPath>Pot</shortcutPath>
       <type>Vrsta</type>
-      <dateCreated>Date Created</dateCreated>
-      <score>Score</score>
+      <dateCreated>Datum nastanka</dateCreated>
+      <score>Rezultat</score>
     </header>
     <title>
-      <typeASC>Sort by document type in ascending order</typeASC>
-      <typeDESC>Sort by document type in descending order</typeDESC>
-      <scoreASC>Sort by score in ascending order</scoreASC>
-      <scoreDESC>Sort by score in descending order</scoreDESC>
-      <nameASC>Sort by name in ascending order</nameASC>
-      <nameDESC>Sort by name in descending order</nameDESC>
-      <datecreatedASC>Razvrsti po datumu nastanka naraščajoče</datecreatedASC>
-      <datecreatedDESC>Razvrsti po datumu nastanka padajoče</datecreatedDESC>
-    </title>
-    <tooltip>
-      <View>View this item</View>
-      <OpenFolder>Pojdi v mapo</OpenFolder>
-    </tooltip>
-  </UIShowAllOwnedByUserResult>
-  <UIShowAllFavouriteResult>
-    <msg>
-      <not-support>There is no View template for this item</not-support>
-      <empty>Ni rezultatov</empty>
-      <access-denied>You can't view this item, either because this template is not supported or because access is denied.</access-denied>
-      <query-invalid>The query is invalid</query-invalid>
-    </msg>
-    <header>
-      <name>#{word.name}</name>
-      <path>Path</path>
-      <action>Dejanje</action>
-      <shortcutPath>Path</shortcutPath>
-      <type>Vrsta</type>
-      <dateCreated>Date Created</dateCreated>
-      <score>Score</score>
-    </header>
-    <title>
-      <typeASC>Sort by document type in ascending order</typeASC>
-      <typeDESC>Sort by document type in descending order</typeDESC>
-      <scoreASC>Sort by score in ascending order</scoreASC>
-      <scoreDESC>Sort by score in descending order</scoreDESC>
+      <typeASC>Razvrsti po vrsti dokumenta naraščajoče</typeASC>
+      <typeDESC>Razvrsti po vrsti dokumenta padajoče</typeDESC>
+      <scoreASC>Razvrsti po rezultatu naraščajoče</scoreASC>
+      <scoreDESC>Razvrsti po rezultatu padajoče</scoreDESC>
       <nameASC>Razvrsti po imenu naraščajoče</nameASC>
       <nameDESC>Razvrsti po imenu padajoče</nameDESC>
       <datecreatedASC>Razvrsti po datumu nastanka naraščajoče</datecreatedASC>
       <datecreatedDESC>Razvrsti po datumu nastanka padajoče</datecreatedDESC>
     </title>
     <tooltip>
-      <View>View this item</View>
+      <View>Poglej to vozlišče</View>
+      <OpenFolder>Pojdi v mapo</OpenFolder>
+    </tooltip>
+  </UIShowAllOwnedByUserResult>
+  <UIShowAllFavouriteResult>
+    <msg>
+      <not-support>Ni predloge prikaza za ta element</not-support>
+      <empty>Ni rezultatov</empty>
+      <access-denied>Tega vozlišča si ne morete ogledati, bodisi predloga ni podprta ali pa nimate dovoljenja za ogled.</access-denied>
+      <query-invalid>Poizvedba je neveljavna</query-invalid>
+    </msg>
+    <header>
+      <name>#{word.name}</name>
+      <path>Pot</path>
+      <action>Dejanje</action>
+      <shortcutPath>Pot</shortcutPath>
+      <type>Vrsta</type>
+      <dateCreated>Datum nastanka</dateCreated>
+      <score>Rezultat</score>
+    </header>
+    <title>
+      <typeASC>Razvrsti po vrsti dokumenta naraščajoče</typeASC>
+      <typeDESC>Razvrsti po vrsti dokumenta padajoče</typeDESC>
+      <scoreASC>Razvrsti po rezultatu naraščajoče</scoreASC>
+      <scoreDESC>Razvrsti po rezultatu padajoče</scoreDESC>
+      <nameASC>Razvrsti po imenu naraščajoče</nameASC>
+      <nameDESC>Razvrsti po imenu padajoče</nameDESC>
+      <datecreatedASC>Razvrsti po datumu nastanka naraščajoče</datecreatedASC>
+      <datecreatedDESC>Razvrsti po datumu nastanka padajoče</datecreatedDESC>
+    </title>
+    <tooltip>
+      <View>Poglej to vozlišče</View>
       <OpenFolder>Pojdi v mapo</OpenFolder>
     </tooltip>
   </UIShowAllFavouriteResult>
   <UIShowAllHiddenResult>
     <msg>
-      <not-support>There is no View template for this item.</not-support>
-      <empty>No results found.</empty>
-      <access-denied>You can't view this item, either because it has no View template or because you don't have access to it.</access-denied>
-      <query-invalid>The query is invalid.</query-invalid>
+      <not-support>Ni predloge prikaza za ta element.</not-support>
+      <empty>Ni rezultatov.</empty>
+      <access-denied>Tega vozlišča si ne morete ogledati, bodisi predloga ni podprta ali pa nimate dovoljenja za ogled.</access-denied>
+      <query-invalid>Poizvedba ni veljavna.</query-invalid>
     </msg>
     <header>
       <name>#{word.name}</name>
-      <path>Path</path>
+      <path>Pot</path>
       <action>Dejanje</action>
-      <shortcutPath>Path</shortcutPath>
+      <shortcutPath>Pot</shortcutPath>
       <type>Vrsta</type>
-      <dateCreated>Date Created</dateCreated>
-      <score>Score</score>
+      <dateCreated>Datum nastanka</dateCreated>
+      <score>Rezultat</score>
       <AddRemoveFavourite>Dodaj v/Odstrani iz priljubljenih</AddRemoveFavourite>
     </header>
     <title>
@@ -1033,26 +1033,26 @@
       <datecreatedDESC>Razvrsti po datumu nastanka padajoče</datecreatedDESC>
     </title>
     <tooltip>
-      <View>View this Item</View>
+      <View>Poglej to vozlišče</View>
       <OpenFolder>Pojdi v mapo</OpenFolder>
       <RemoveHiddenAttribute>Odstranite skriti atribut</RemoveHiddenAttribute>
     </tooltip>
   </UIShowAllHiddenResult>
   <UIShowAllTrashResult>
     <msg>
-      <not-support>There is no View template for this item.</not-support>
+      <not-support>Ni predloge prikaza za ta element.</not-support>
       <empty>Ni rezultatov</empty>
-      <access-denied>You can't view this item, either because it has no View template or because you don't have access to it.</access-denied>
-      <query-invalid>The query is invalid.</query-invalid>
+      <access-denied>Tega vozlišča si ne morete ogledati, bodisi predloga ni podprta ali pa nimate dovoljenja za ogled.</access-denied>
+      <query-invalid>Poizvedba ni veljavna.</query-invalid>
     </msg>
     <header>
       <name>#{word.name}</name>
-      <path>Path</path>
+      <path>Pot</path>
       <action>Dejanje</action>
-      <shortcutPath>Path</shortcutPath>
+      <shortcutPath>Pot</shortcutPath>
       <type>Vrsta</type>
-      <dateCreated>Date Created</dateCreated>
-      <score>Score</score>
+      <dateCreated>Datum nastanka</dateCreated>
+      <score>Rezultat</score>
     </header>
     <title>
       <typeASC>Razvrsti po vrsti dokumenta naraščajoče</typeASC>
@@ -1065,10 +1065,10 @@
       <datecreatedDESC>Razvrsti po datumu nastanka padajoče</datecreatedDESC>
     </title>
     <tooltip>
-      <View>View this Item</View>
+      <View>Poglej to vozlišče</View>
       <OpenFolder>Pojdi v mapo</OpenFolder>
       <DeletePermanently>Trajno izbriši</DeletePermanently>
-      <RestoreFromTrash>Restore from Trash</RestoreFromTrash>
+      <RestoreFromTrash>Obnovi iz koša</RestoreFromTrash>
     </tooltip>
   </UIShowAllTrashResult>
   <UIConstraintsForm>
@@ -1127,7 +1127,7 @@
       <Category-label>Kategorija</Category-label>
       <created>Ustvarjeno</created>
       <modified>Spremenjeno</modified>
-      <and>And</and>
+      <and>In</and>
       <or>Ali</or>
     </label>
   </UIConstraintForm>
@@ -1138,7 +1138,7 @@
   </NodeTypePopup>
   <CategoryPopup>
     <title>
-      <UICategoryManagerSearch>Add Category to Search</UICategoryManagerSearch>
+      <UICategoryManagerSearch>Dodaj kategorijo iskanja</UICategoryManagerSearch>
       <UIOneNodePathSelector>Izberi kategorijo</UIOneNodePathSelector>
     </title>
   </CategoryPopup>
@@ -1166,7 +1166,7 @@
       <label-Cancel>#{word.cancel}</label-Cancel>
     </button>
     <msg>
-      <not-result-found>No results found.</not-result-found>
+      <not-result-found>Ni rezultatov.</not-result-found>
     </msg>
   </UICompareExactlyForm>
   <UIJCRAdvancedSearch>
@@ -1248,10 +1248,10 @@
   <UIECMSearch>
     <header>
       <name>Ime</name>
-      <language>Language</language>
-      <query>Query</query>
+      <language>Jezik</language>
+      <query>Poizvedba</query>
       <action>Dejanja</action>
-      <path>Path</path>
+      <path>Pot</path>
     </header>
   </UIECMSearch>
   <UIResult>
@@ -1294,7 +1294,7 @@
     </label>
     <msg>
       <confirm-delete-query>Ali ste prepričani, da želite izbrisati to poizvedbo?</confirm-delete-query>
-      <not-result-found>No results found.</not-result-found>
+      <not-result-found>Ni rezultatov.</not-result-found>
     </msg>
   </UISavedQuery>
   <UIQueryResultPageIterator>
@@ -1319,9 +1319,9 @@
     </label>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Export>Export</Export>
+      <Export>Izvozi</Export>
     </action>
-    <title>Export</title>
+    <title>Izvozi vozlišče</title>
   </UIExportNode>
   <!--
   ###############################################################################
@@ -1350,8 +1350,8 @@
       <empty>Click here to add a summary</empty>
     </summary>
     <tooltip>
-      <version>Version</version>
-      <baseVersion>current version</baseVersion>
+      <version>Različica</version>
+      <baseVersion>Osnovna različica</baseVersion>
       <addLabel>Dodaj oznako</addLabel>
       <removeLable>Odstrani oznako</removeLable>
       <restoreVersion>Obnovi različico</restoreVersion>
@@ -1366,8 +1366,8 @@
       <error-removing-referenced-version>This version is referenced and can't be removed.</error-removing-referenced-version>
       <confirm-restore>Are you sure you want to restore this version?</confirm-restore>
       <confirm-delete>Ali ste prepričani, da želite odstraniti to različico?</confirm-delete>
-      <not-checked-out>You have to check out this document before restoring.</not-checked-out>
-      <invalid-item-state>You can't restore this version, either because one or more items were deleted or moved by another session.</invalid-item-state>
+      <not-checked-out>Pred obnovitvijo si rezervirajte to vozlišče.</not-checked-out>
+      <invalid-item-state>Te različice ne morete obnoviti, ker je bila premaknjena ali pa izbrisana v drugi seji.</invalid-item-state>
     </msg>
     <action>
       <close>#{word.close}</close>
@@ -1392,19 +1392,19 @@
       <noVersion>Brez različice</noVersion>
     </msg>
     <eventName>
-      <e_1>Added</e_1>
-      <e_2>Document Removed</e_2>
+      <e_1>Dodano vozlišče</e_1>
+      <e_2>Vozlišče odstranjeno</e_2>
       <e_4>Lastnost dodana</e_4>
       <e_16>Lastnost spremenjena</e_16>
       <e_8>Lastnost odstranjena</e_8>
       <e_32>#{word.save}</e_32>
-      <e_64>Move</e_64>
+      <e_64>Premakni</e_64>
       <e_128>Kopiraj</e_128>
       <e_256>Dodaj Mixin</e_256>
       <e_512>Odstrani Mixin</e_512>
       <e_1024>Kloniraj</e_1024>
-      <e_2048>Update</e_2048>
-      <e_4096>Import</e_4096>
+      <e_2048>Posodobi</e_2048>
+      <e_4096>Uvozi</e_4096>
       <e_8192>Sprosti</e_8192>
       <e_16384>Rezerviraj</e_16384>
       <e_32768>Obnovi</e_32768>
@@ -1416,12 +1416,12 @@
       <e_2097152>Odstrani različico</e_2097152>
       <e_4194304>Zakleni</e_4194304>
       <e_8388608>Odkleni</e_8388608>
-      <e_16777216>Read</e_16777216>
+      <e_16777216>Branje</e_16777216>
     </eventName>
     <label>
       <operation>Operacija</operation>
-      <userName>Username</userName>
-      <date>Date</date>
+      <userName>Uporabniško ime</userName>
+      <date>Datum</date>
       <version>Različica</version>
     </label>
   </UIAuditingInfo>
@@ -1433,13 +1433,13 @@
   -->
   <UIActivateVersion>
     <label>
-      <note>Versioning has not been activated for this document.</note>
+      <note>Za to vozlišče različice niso bile aktivirane.</note>
       <question>Ali ste prepričani, da želite aktivirati?</question>
       <button-active>Aktiviraj</button-active>
       <button-cancel>#{word.cancel}</button-cancel>
     </label>
     <msg>
-      <access-denied>You don't have permission to activate versioning on this document</access-denied>
+      <access-denied>Nimate dovoljenja za aktiviranje različic na tem vozlišču</access-denied>
     </msg>
   </UIActivateVersion>
   <!--
@@ -1462,7 +1462,7 @@
       </msg>
     </grid>
     <msg>
-      <node-type-invalid>Only documents can be enrolled.</node-type-invalid>
+      <node-type-invalid>Vpisana je lahko samo dokumentna vrsta vozlišča.</node-type-invalid>
       <already-enroled>Ta dokument je že bil vpisan.</already-enroled>
     </msg>
   </UIActivePublication>
@@ -1473,7 +1473,7 @@
   -->
   <UIActivateAuditing>
     <label>
-      <note>Auditing has not been activated for this document.</note>
+      <note>Za to vozlišče nadzor še ni bil aktiviran.</note>
       <question>Ali ste prepričani, da želite aktivirati?</question>
     </label>
     <action>
@@ -1507,16 +1507,16 @@
   -->
   <UIImportNode>
     <label>
-      <format>Format</format>
+      <format>Oblika</format>
       <systemView>Sistemski pogled</systemView>
       <documentView>Dokumentni pogled</documentView>
       <upload>Prenesi datoteko</upload>
     </label>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Import>Import</Import>
+      <Import>Uvozi</Import>
     </action>
-    <title>Import</title>
+    <title>Uvozi vozlišče</title>
     <msg>
       <import-successful>Uspešno uvoženo.</import-successful>
       <filename-invalid>V polju 'Naloži datoteko' poiščite .xml datoteko za uvoz.</filename-invalid>
@@ -1524,8 +1524,8 @@
       <xml-invalid>Obstaja neveljaven znak na položaju [vrstica, stolpec]: {0} v datoteki {1}</xml-invalid>
       <mimetype-invalid>Uvozite lahko samo datoteke .xml ali .zip.</mimetype-invalid>
       <access-denied>Dostop zavrnjen. Na tem mestu ne morete uvažati datotek.</access-denied>
-      <constraint-violation-exception>Impossible to import data. The type '{0}' is not allowed at this location.</constraint-violation-exception>
-      <item-exists-exception>An incoming item has the same UUID as an existing item in the workspace.</item-exists-exception>
+      <constraint-violation-exception>Podatkov ni mogoče uvoziti. Vrsta '{0}' ni dovoljena na tej lokaciji.</constraint-violation-exception>
+      <item-exists-exception>Dohodno sklicno vozlišče ima enak UUID kot že obstoječe vozlišče v delovnem prostoru.</item-exists-exception>
     </msg>
   </UIImportNode>
   <!--
@@ -1541,7 +1541,7 @@
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
     </action>
-    <title>Add Label</title>
+    <title>Dodaj oznako</title>
     <msg>
       <label-invalid>Oznaka vsebuje nekaj neveljavnih znakov.</label-invalid>
       <label-exist>'{0}' že obstaja.</label-exist>
@@ -1553,7 +1553,7 @@
   ###############################################################################
   -->
   <UIRemoveLabelForm>
-    <title>Remove Label</title>
+    <title>Odstrani oznako</title>
     <label>
       <label>Izberi oznako</label>
     </label>
@@ -1572,8 +1572,8 @@
   </UIVersionTree>
   <UIViewVersion>
     <label>
-      <nodeType>Node Type</nodeType>
-      <nodeName>Name</nodeName>
+      <nodeType>Vrsta vozlišča</nodeType>
+      <nodeName>Ime vozlišča</nodeName>
       <VersionNumber>Številka različice</VersionNumber>
       <VersionLabels>Oznake različice</VersionLabels>
       <VersionDate>Datum različice</VersionDate>
@@ -1609,7 +1609,7 @@
       <action>Dejanja</action>
     </header>
     <msg>
-      <access-denied>Access denied. You don't have access permission.</access-denied>
+      <access-denied>Dostop zavrnjen. Nimate dovoljenja za dostop v tem vozlišču.</access-denied>
       <confirm-delete>Ali ste prepričani, da želite izbrisati ta sklic?</confirm-delete>
     </msg>
     <action>
@@ -1629,7 +1629,7 @@
       <action>Dejanje</action>
     </header>
     <info>
-      <child-not-found>This item doesn't have any child.</child-not-found>
+      <child-not-found>To vozlišče nima podrejenega vozlišča.</child-not-found>
     </info>
   </UITreeList>
   <!--
@@ -1674,7 +1674,7 @@
   -->
   <UIClipboard>
     <header>
-      <path>Path</path>
+      <path>Pot</path>
       <command>Cm</command>
       <action>Dejanje</action>
     </header>
@@ -1685,8 +1685,8 @@
       <clearall>Počisti vse</clearall>
     </action>
     <msg>
-      <unable-pasted>Can't paste this item.</unable-pasted>
-      <node-pasted>{0} has been pasted at location {1}. This operation has already been saved.</node-pasted>
+      <unable-pasted>Ne morete prilepiti tega vozlišča.</unable-pasted>
+      <node-pasted>Vozlišče {0} je bilo prilepljeno na lokacijo {1}. Operacija je že bila shranjena.</node-pasted>
     </msg>
   </UIClipboard>
   <!--
@@ -1727,15 +1727,15 @@
 </tooltip>
     <msg>
       <cannot-save>Pri shranjevanju dokumenta je prišlo do napake.</cannot-save>
-      <in-versioning>Please check out the current folder before adding a new item.</in-versioning>
+      <in-versioning>Pred dodajanjem novega vozlišča rezervirajte trenutno vozlišče.</in-versioning>
       <not-support>Ni mogoče naložiti predloge '{0}'.</not-support>
       <value-invalid>'{0}' je potrebna vrednost.</value-invalid>
       <repository-exception>Pri shranjevanju dokumenta je prišlo do napake.</repository-exception>
       <!--DMS 2.4.x; ECM-3543-->
-      <repository-exception-permission>You don't have permission to add a new document to this folder.</repository-exception-permission>
+      <repository-exception-permission>Nimate dovoljenja za dodajanje novega dokumenta v tem vozlišču.</repository-exception-permission>
       <not-allowed-same-name-sibling>Tega dokumenta ni mogoče shraniti. Ne sme imeti istega imena kot že obstoječ dokument.</not-allowed-same-name-sibling>
       <numberformat-exception>Tega dokumenta ni mogoče shraniti. Ime mora biti v številski obliki.</numberformat-exception>
-      <item-not-found>Document not found. This document (or its ancestor) may have been deleted. Please click the Refresh button.</item-not-found>
+      <item-not-found>Elementa ni mogoče najti. To vozlišče (ali njegovo nadrejeno) je morda izbrisano. Kliknite gumb Osveži.</item-not-found>
     </msg>
   </UIDocumentForm>
   <!--
@@ -1766,7 +1766,7 @@
   <UIQuerySaveForm>
     <title>Obrazec za shranjevanje poizvedbe</title>
     <label>
-      <query>Query</query>
+      <query>Poizvedba</query>
       <name>Ime poizvedbe</name>
     </label>
     <action>
@@ -1781,8 +1781,8 @@
   -->
   <editActionPopup>
     <title>
-      <UIActionForm>Edit Action</UIActionForm>
-      <EditFormAction>Edit Action</EditFormAction>
+      <UIActionForm>Uredi dejanje</UIActionForm>
+      <EditFormAction>Uredi dejanje</EditFormAction>
     </title>
   </editActionPopup>
   <UIActionViewContainer>
@@ -1800,7 +1800,7 @@
       <action>Dejanje</action>
     </header>
     <msg>
-      <remove-popup-first>You must close the edit pop-up before deleting this item.</remove-popup-first>
+      <remove-popup-first>Preden izbrišete to vozlišče morate zapreti urejevalno okno.</remove-popup-first>
       <confirm-delete-action>Ali ste prepričani, da želite izbrisati to dejanje?</confirm-delete-action>
       <template-empty>Predloga '{0}' je ničelna ali prazna.</template-empty>
       <template-null>Predloga je nič ali pa nimate dovoljenja za dostop do te predloge.</template-null>
@@ -1826,7 +1826,7 @@
       <numberformat-exception>Tega dejanja ni mogoče shraniti. Ime mora biti v številčni obliki.</numberformat-exception>
       <existed-action>Ime dejanja '{0}' že obstaja. Izberite drugo.</existed-action>
       <unable-add-action>Tega dejanja ni mogoče dodati.</unable-add-action>
-      <unable-add>Can't add this action. This item is either the root folder or you don't have the permission to edit.</unable-add>
+      <unable-add>Tega dejanja ni mogoče dodati. To vozlišče je bodisi koren ali pa nimate dovoljenja.</unable-add>
       <not-support>Pogovorno okno '{0}' ni podprto.</not-support>
       <no-permission-add>Dostop zavrnjen. Nimate dovoljenja, da bi tu dodali dejanje.</no-permission-add>
       <access-denied>Dostop zavrnjen. Nimate dovoljenja za dostop do te predloge.</access-denied>
@@ -1852,10 +1852,10 @@
   </PopupComponent>
   <EditFormAction>
     <validator>
-      <validator>Validator</validator>
-      <destPath>With Path</destPath>
+      <validator>Potrjevalnik</validator>
+      <destPath>S potjo</destPath>
     </validator>
-    <title>Action Form</title>
+    <title>Obrazec dejanj</title>
   </EditFormAction>
   <!--
   #############################################################################
@@ -1865,7 +1865,7 @@
   <UIAddressBar>
     <msg>
       <path-not-found>Poti ni mogoče najti.</path-not-found>
-      <access-denied>Access denied. You don't have the permission to read.</access-denied>
+      <access-denied>Dostop zavrnjen. Nimate dovoljenja za branje v tem vozlišču.</access-denied>
       <keyword-not-support>Ključna beseda ni veljavna. Nekateri znaki niso podprti.</keyword-not-support>
     </msg>
     <label>
@@ -1874,8 +1874,8 @@
     </label>
     <title>
       <exeButton>Pojdi</exeButton>
-      <backButton>Back</backButton>
-      <showHistory>Show History</showHistory>
+      <backButton>Nazaj na prejšnje vozlišče</backButton>
+      <showHistory>Prikaži zgodovino naslovov</showHistory>
       <changeNode>Spremeni vozlišče</changeNode>
     </title>
   </UIAddressBar>
@@ -1937,7 +1937,7 @@
   -->
   <UIViewMetadataContainer>
     <msg>
-      <path-not-found>The document does not support this view.</path-not-found>
+      <path-not-found>Vozlišče ne podpira tega pogleda.</path-not-found>
     </msg>
   </UIViewMetadataContainer>
   <!--
@@ -1958,7 +1958,7 @@
   </metadataForm>
   <UIViewMetadataTemplate>
     <msg>
-      <access-denied>Access denied. Either you are not the owner or don't have edit permission.</access-denied>
+      <access-denied>Dostop zavrnjen. Niste lastnik ali pa nimate dovoljenja za urejanje v tem vozlišču.</access-denied>
     </msg>
   </UIViewMetadataTemplate>
   <!--
@@ -2034,7 +2034,7 @@
       <private>Zasebno</private>
       <state>Stanje</state>
       <visibility>Vidnost</visibility>
-      <nodeName>Name:</nodeName>
+      <nodeName>Ime vozlišča:</nodeName>
       <lifecycleName>Ime življenjskega cikla</lifecycleName>
       <stateName>Ime stanja</stateName>
     </label>
@@ -2058,7 +2058,7 @@
   </UIWorkspaceList>
   <pathSelector>
     <title>
-      <UIOneNodePathSelector>Selector</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Izbirnik vozlišča</UIOneNodePathSelector>
     </title>
   </pathSelector>
   <!--
@@ -2127,11 +2127,11 @@
   -->
   <UIPublicationLogList>
     <header>
-      <date>Date</date>
+      <date>Datum</date>
       <newState>Novo stanje</newState>
       <user>Uporabnik</user>
       <description>Opis</description>
-      <version>Version</version>
+      <version>Različica</version>
       <visibility>Vidnost</visibility>
     </header>
     <action>
@@ -2145,7 +2145,7 @@
   -->
   <UIVersionTreeList>
     <header>
-      <version>Version</version>
+      <version>Različica</version>
       <state>Stanje</state>
     </header>
   </UIVersionTreeList>
@@ -2166,9 +2166,9 @@
     </label>
     <msg>
       <mimetype-incorrect>Nepravilna vrsta datoteke. Sličice lahko ustvarite le iz .JPG .PNG ali .GIF datotek.</mimetype-incorrect>
-      <access-denied>Access denied. You don't have permission to add a thumbnail.</access-denied>
+      <access-denied>Dostop zavrnjen. Nimate dovoljenja za dodajanje sličic v tem vozlišču.</access-denied>
       <confirm-delete>Ali ste prepričani, da želite odstraniti to sličico?</confirm-delete>
-      <is-checked-in>This item is checked in. Please check out before performing any action.</is-checked-in>
+      <is-checked-in>To vozlišče je sproščeno. Prosimo, rezervirajte ga, preden izvedete kakšno dejanje.</is-checked-in>
       <fileName-error>Izberi datoteko za prenos.</fileName-error>
     </msg>
     <title>
@@ -2272,7 +2272,7 @@
 
   <PopupSelectPath>
     <title>
-      <UIOneNodePathSelector>Select Path</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Izberi vozlišče</UIOneNodePathSelector>
     </title>
   </PopupSelectPath>
 
@@ -2302,7 +2302,7 @@
   <UISymLinkForm>
     <label>
       <symLinkName>Ime simbolične povezave</symLinkName>
-      <pathNode>Path</pathNode>
+      <pathNode>Vozlišče poti</pathNode>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -2313,16 +2313,16 @@
       <name-invalid>Vnesite ime simbolične povezave.</name-invalid>
       <name-not-allowed>To ime ni dovoljeno.</name-not-allowed>
       <fileName-error>Ime datoteke ni veljavno.</fileName-error>
-      <constraint-violation>You can't add an item of type '{0}' here.</constraint-violation>
-      <repository-exception>Access denied. You don't have permission to add a symlink here.</repository-exception>
+      <constraint-violation>Trenutnemu vozlišču ne morete dodati vrsto vozlišča "{0}".</constraint-violation>
+      <repository-exception>Dostop zavrnjen. Nimate dovoljenja za dodajanje simbolične povezave v tem vozlišču.</repository-exception>
       <numberformat-exception>Te mape ni mogoče shraniti. Ime mora biti v številčni obliki.</numberformat-exception>
-      <path-node-invalid>Please enter the path.</path-node-invalid>
+      <path-node-invalid>Vnesite vozlišče poti.</path-node-invalid>
       <path-node-not-allowed>To ime ni dovoljeno.</path-node-not-allowed>
-      <non-node>Please select the trust target; you may not have the rights to read this item.</non-node>
-      <cannot-save>You can't add a symlink for this type of document.</cannot-save>
-      <item-exists-exception>An item with this name already exists.</item-exists-exception>
-      <translation-node-same-language-default>The translated document has the same language as the default language of current document.</translation-node-same-language-default>
-      <UnsupportedRepositoryOperationException>This target item is not referred.</UnsupportedRepositoryOperationException>
+      <non-node>Izberite zaupanja vredno ciljno vozlišče; morda ne boste imeli dovoljenja za branje tega vozlišča.</non-node>
+      <cannot-save>Za to vrsto vozlišča ni mogoče dodati simbolične povezave.</cannot-save>
+      <item-exists-exception>To ime vozlišča že obstaja.</item-exists-exception>
+      <translation-node-same-language-default>Prevajano vozlišče ima isti jezik kot je privzeti jezik trenutnega vozlišča.</translation-node-same-language-default>
+      <UnsupportedRepositoryOperationException>Ni sklica na ciljno vozlišče.</UnsupportedRepositoryOperationException>
     </msg>
   </UISymLinkForm>
   
@@ -2342,22 +2342,22 @@
       <name-invalid>Vnesite ime simbolične povezave.</name-invalid>
       <name-not-allowed>To ime ni dovoljeno.</name-not-allowed>
       <fileName-error>Ime datoteke ni veljavno.</fileName-error>
-      <constraint-violation>You can't add the '{0}' type to the current item.</constraint-violation>
-      <repository-exception>Access denied. You don't have permission to add a symlink to this item.</repository-exception>
+      <constraint-violation>Trenutnemu vozlišču ne morete dodati vrsto vozlišča "{0}".</constraint-violation>
+      <repository-exception>Dostop zavrnjen. Nimate dovoljenja za dodajanje simbolične povezave v tem vozlišču.</repository-exception>
       <numberformat-exception>Tega dokumenta ni mogoče shraniti. Ime mora biti v številski obliki.</numberformat-exception>
-      <path-node-invalid>Please enter the path.</path-node-invalid>
+      <path-node-invalid>Vnesite pot vozlišča.</path-node-invalid>
       <path-node-not-allowed>To ime ni dovoljeno.</path-node-not-allowed>
-      <non-node>Please select the trust target; you may not have the right to read this node.</non-node>
+      <non-node>Izberite zaupanja vredno ciljno vozlišče; morda ne boste imeli dovoljenja za branje tega vozlišča.</non-node>
       <cannot-save>Pri ustvarjanju simbolične povezave je prišlo do napake.</cannot-save>
-      <item-exists-exception>An item with this name already exists.</item-exists-exception>
-      <translation-node-same-language-default>The translated document has the same language as the default language of current document.</translation-node-same-language-default>
-      <UnsupportedRepositoryOperationException>This target item is not referred.</UnsupportedRepositoryOperationException>
+      <item-exists-exception>To ime vozlišča že obstaja.</item-exists-exception>
+      <translation-node-same-language-default>Prevajano vozlišče ima isti jezik kot je privzeti jezik trenutnega vozlišča.</translation-node-same-language-default>
+      <UnsupportedRepositoryOperationException>Ni sklica na ciljno vozlišče.</UnsupportedRepositoryOperationException>
     </msg>
   </UIAddTranslationForm>
 
   <UIPopupSymLink>
     <title>
-      <UIOneNodePathSelector>Select Target Item</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Izberite ciljno vozlišče</UIOneNodePathSelector>
     </title>
   </UIPopupSymLink>
   <UIPopupSymLink>
@@ -2375,9 +2375,9 @@
 
   <UIWorkingArea>
     <msg>
-      <create-link-problem>You can't create a link for '{0}' at '{1}'.</create-link-problem>
-      <dest-node-is-link>The destination '{0}' is already a symlink, so you cannot create a symlink inside it.</dest-node-is-link>
-      <selected-is-link>The selected item '{0}' is already a link. You can't create a link to another link.</selected-is-link>
+      <create-link-problem>Ne morete ustvariti povezave za vozlišče "{0}" v "{1}".</create-link-problem>
+      <dest-node-is-link>Ciljno vozlišče "{0}" je že simbolična povezava, zato v njem ne morete ustvariti simbolične povezave.</dest-node-is-link>
+      <selected-is-link>Izbrano vozlišče '{0}' je že povezava. Ne morete ustvariti povezave, ki kaže na drugo povezavo.</selected-is-link>
       <confirm-create-link>Ali želite ustvariti povezavo na to lokacijo?</confirm-create-link>
     </msg>
   </UIWorkingArea>
@@ -2460,7 +2460,7 @@
 <ReadOnly>Odpri samo za branje</ReadOnly>
 <Cancel>Prekliči</Cancel>
       <KeepBoth>Zadrži oboje</KeepBoth>
-      <CreateNewVersion>Save as new version</CreateNewVersion>
+      <CreateNewVersion>Ustvari novo različico</CreateNewVersion>
     </label>
   </UIConfirmMessage>
 
@@ -2477,7 +2477,7 @@
 
   <PopupComponent>
     <title>
-      <UIOneTaxonomySelector>Add Categories</UIOneTaxonomySelector>
+      <UIOneTaxonomySelector>Dodaj kategorije</UIOneTaxonomySelector>
     </title>
   </PopupComponent>
 
@@ -2516,7 +2516,7 @@
 
   <UIPopupMenu>
     <msg>
-      <node-locked-other-person>This item or its parent folder is locked by another user, so you can't delete it.</node-locked-other-person>
+      <node-locked-other-person>To vozlišče ali njegovo nadrejeno vozlišče je zaklenil drug uporabnik, zato ga ne morete izbrisati.</node-locked-other-person>
     </msg>
   </UIPopupMenu>
 
@@ -2551,7 +2551,7 @@
 
   <UIPopupMenu>
     <msg>
-      <can-not-unlock-node-is-checked-in>You can't unlock because the '{0}' (or its parent folder) is checked in.</can-not-unlock-node-is-checked-in>
+      <can-not-unlock-node-is-checked-in>Ne morete odkleniti, ker je vozlišče "{0}" (ali njegov prednik) sproščeno.</can-not-unlock-node-is-checked-in>
     </msg>
   </UIPopupMenu>
 
@@ -2560,12 +2560,12 @@
   -->
   <UIActionBar>
     <msg>
-      <cannot-enable-version>Can't activate versioning on this document.</cannot-enable-version>
+      <cannot-enable-version>Shranjevanja različic vozlišča ni mogoče omogočiti.</cannot-enable-version>
     </msg>
   </UIActionBar>
   <UIPopupMenu>
     <msg>
-        <cannot-readsource>You can't read data from the source.</cannot-readsource>
+        <cannot-readsource>Ne morete prebrati podatkov iz vira vozlišča.</cannot-readsource>
     </msg>
   </UIPopupMenu>
   <UIUploadForm>
@@ -2623,7 +2623,7 @@
 
   <Comments>
     <tooltip>
-      <remove-comment>Remove this comment</remove-comment>
+      <remove-comment>Odstrani ta komentar</remove-comment>
       <edit-comment>Uredi ta komentar</edit-comment>
     </tooltip>
   </Comments>
@@ -2845,7 +2845,7 @@
 
     <UIPopupMenu>
     <msg>
-      <node-locked-editing>You can't edit  {0}. It's locked by another user.</node-locked-editing>
+      <node-locked-editing>Ne morete urejati tega vozlišča s potjo {0}, saj ga je zaklenil drug uporabnik.</node-locked-editing>
     </msg>
   </UIPopupMenu>
   <UITagStyleForm>
@@ -2895,7 +2895,7 @@
 
   <UIPreferencesForm>
       <label>
-            <queryType>Query language:</queryType>
+            <queryType>Vrsta poizvedbe:</queryType>
             <SQL>SQL</SQL>
             <XPATH>XPATH</XPATH>
       </label>
@@ -2939,12 +2939,12 @@
   </PathNode>
   <UIPopupPathFoRestore>
     <title>
-      <UIOneNodePathSelector>Select Parent</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Izberite nadrejeno vozlišče</UIOneNodePathSelector>
     </title>
   </UIPopupPathFoRestore>
   <rootNodeInfo>
     <title>
-      <AddRootNode>Add Root</AddRootNode>
+      <AddRootNode>Dodajte korensko vozlišče</AddRootNode>
     </title>
   </rootNodeInfo>
 
@@ -2972,7 +2972,7 @@
     </button>
     <revisions>
       <version>Revizije</version>
-      <date>Date</date>
+      <date>Datum</date>
       <author>Avtor</author>
       <status>Stanje</status>
       <action>Dejanje</action>
@@ -3004,7 +3004,7 @@
     </scheduled>
     <title>
       <preview>Predogled</preview>
-      <restore>Restore</restore>
+      <restore>Obnovi</restore>
     </title>
     <msg>
       <have-no-view-template>Predloga pogleda ni podprta.</have-no-view-template>
@@ -3013,7 +3013,7 @@
   </UIPublicationPanel>
   <UIPublicationHistory>
     <header>
-      <date>Date</date>
+      <date>Datum</date>
       <versionName>Ime revizije</versionName>
       <currentState>Trenutno stanje</currentState>
       <user>Avtor</user>
@@ -3052,7 +3052,7 @@
   <UIPopupWindow>
     <title>
       <UIPublicationContainer>Upravljanje objav</UIPublicationContainer>
-      <UIPublishingPanel>Manage Publication</UIPublishingPanel>
+      <UIPublishingPanel>Upravljanje objave</UIPublishingPanel>
     </title>
   </UIPopupWindow>
   <WCMContentView>
@@ -3135,7 +3135,7 @@
   <false>Napačno</false>
   <Electronic>Elektronsko</Electronic>
   <Paper>Papir</Paper>
-  <NONE>None</NONE>
+  <NONE>Brez</NONE>
   <CLASSIFIED>Razvrščeno</CLASSIFIED>
   <UNCLASSIFIED>Nerazvrščeno</UNCLASSIFIED>
   <NOCONTRACT>Ni pogodbe</NOCONTRACT>
@@ -3156,9 +3156,9 @@
   </lifecyclePhase>
   <UIPopupMenu>
   <msg>
-<can-not-remove-locked-node>{0} is locked. You can't move it to the Trash.</can-not-remove-locked-node>
-<can-not-remove-checked-in-node>{0} or its parent folder is checked in. You can't move it to the Trash.</can-not-remove-checked-in-node>
-<access-denied-to-delete>Access denied. You can't move {0} to the Trash.</access-denied-to-delete>
+<can-not-remove-locked-node>Vozlišče {0} je zaklenjeno, zato ga ne morete premakniti v smeti.</can-not-remove-locked-node>
+<can-not-remove-checked-in-node>Vozlišče {0} ali njegovo nadrejeno vozlišče je sproščeno. Ne morete ga premakniti v smetnjak.</can-not-remove-checked-in-node>
+<access-denied-to-delete>Dostop zavrnjen. Vozlišča {0} ni mogoče premakniti v smenjak.</access-denied-to-delete>
   </msg>
   </UIPopupMenu>
   <UIPropertyForm>
@@ -3168,8 +3168,8 @@
   </UIPropertyForm>
   <UIWatchDocumentForm>
     <msg>
-      <node-is-locked>This item is locked. You cannot watch it.</node-is-locked>
-      <unknown-error>Some errors have occurred. You can't watch this document.</unknown-error>
+      <node-is-locked>To vozlišče je zaklenjeno. Ne morete ga slediti.</node-is-locked>
+      <unknown-error>Prišlo je do nekaterih napak. Temu vozlišču ne morete slediti.</unknown-error>
     </msg>
   </UIWatchDocumentForm>   
   <UIActionForm>
@@ -3186,23 +3186,23 @@
     <DropFileMessage>Spustite datoteke tukaj v trenutno mapo</DropFileMessage>
     <Close>#{word.close}</Close>
     <in>v</in>
-    <MaxFileSizeAlert>The file size exceeds the limit of</MaxFileSizeAlert>
+    <MaxFileSizeAlert>Velikost datoteke presega omejitev velikosti</MaxFileSizeAlert>
     <Waiting>Čakam</Waiting>
     <Error>Napaka</Error>
-    <or>or</or>
+    <or>ali</or>
     <AlreadyInUse>Že v uporabi</AlreadyInUse>
     <Keep>Ohrani obe</Keep>
-    <Replace>Replace</Replace>
-    <Canceled>Canceled</Canceled>
-      <UploadNewVersion>Upload a new version</UploadNewVersion>
+    <Replace>Zamenjaj</Replace>
+    <Canceled>Preklicano</Canceled>
+      <UploadNewVersion>Naloži novo različico</UploadNewVersion>
     <Cancel>#{word.cancel}</Cancel>
     <AbortAllConfirmation>Ali želite prekiniti vse datoteke v teku?</AbortAllConfirmation>
   </label>
   </UIMultiUpload>
   <UIDocumentNodeList>
   <label>
-  <CreatedOn>Created on</CreatedOn>
-  <Updated>Updated</Updated>
+  <CreatedOn>Ustvarjeno dne</CreatedOn>
+  <Updated>Posodobljeno</Updated>
   <by>-</by>
   <you>jaz</you>
   </label>
@@ -3210,9 +3210,9 @@
   <FileView>
     <label>
       <name>Ime</name>
-      <date>Date</date>
-      <size>Size</size>
-      <sortBy>Sort by:</sortBy>
+      <date>Datum</date>
+      <size>Velikost</size>
+      <sortBy>Razvrsti po:</sortBy>
       <filesAreSelected>Izbrane so datoteke.</filesAreSelected>
       <ClearSelection>Počisti izbiro</ClearSelection>
       <more>Več</more>

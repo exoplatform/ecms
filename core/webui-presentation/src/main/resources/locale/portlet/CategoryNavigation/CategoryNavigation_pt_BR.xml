@@ -2,13 +2,13 @@
 <bundle>
   <UICNContainer>
     <title>
-      <QuickEdit>Quick Edit</QuickEdit>
+      <QuickEdit>Edição Rápida</QuickEdit>
     </title>
   </UICNContainer>
 
   <UICNConfigPopupWindow>
     <title>
-      <UICategoryNavigationConfig>Category List Configuration</UICategoryNavigationConfig>
+      <UICategoryNavigationConfig>Configuração da Lista de Categorias</UICategoryNavigationConfig>
     </title>
   </UICNConfigPopupWindow>
 
@@ -20,34 +20,34 @@
 
   <UICategoryNavigationConfig>
     <label>
-      <UICategoryNavigationRepositoryFormSelectBox>Repository</UICategoryNavigationRepositoryFormSelectBox>
-      <UICategoryNavigationTreeNameSelectBox>Category Tree</UICategoryNavigationTreeNameSelectBox>
-      <UICategoryNavigationTreeTitleFormStringInput>Title</UICategoryNavigationTreeTitleFormStringInput>
+      <UICategoryNavigationRepositoryFormSelectBox>Repositório</UICategoryNavigationRepositoryFormSelectBox>
+      <UICategoryNavigationTreeNameSelectBox>Árvore Taxonômica</UICategoryNavigationTreeNameSelectBox>
+      <UICategoryNavigationTreeTitleFormStringInput>Título</UICategoryNavigationTreeTitleFormStringInput>
   
-      <UICategoryNavigationTreeNameFormSelectBox>Tree Name</UICategoryNavigationTreeNameFormSelectBox>
-      <UICategoryNavigationTemplateFormSelectBox>Tree viewer template</UICategoryNavigationTemplateFormSelectBox>
+      <UICategoryNavigationTreeNameFormSelectBox>Nome da Árvore</UICategoryNavigationTreeNameFormSelectBox>
+      <UICategoryNavigationTemplateFormSelectBox>Modelo de visualizador de árvore</UICategoryNavigationTemplateFormSelectBox>
       
-      <UICategoryNavigationTargetPathFormInputSet>Show in Page</UICategoryNavigationTargetPathFormInputSet>      
-      <TreeSelectionBlock>Tree Selection</TreeSelectionBlock>
-      <DisplaySettingBlock>Display Settings</DisplaySettingBlock>
+      <UICategoryNavigationTargetPathFormInputSet>Mostrar na Página</UICategoryNavigationTargetPathFormInputSet>      
+      <TreeSelectionBlock>Seleção de Árvore</TreeSelectionBlock>
+      <DisplaySettingBlock>Definições de Exibição</DisplaySettingBlock>
       <AdvancedBlock>Avançado</AdvancedBlock>
   
   <UICategoryNavigationTreePathFormInputSet>Caminho de destino</UICategoryNavigationTreePathFormInputSet>
   <UICategoryNavigationTreePathFormStringInput>Caminho de destino</UICategoryNavigationTreePathFormStringInput>
   <UICategoryNavigationHeaderFormStringInput>Cabeçalho</UICategoryNavigationHeaderFormStringInput>
-  <UICategoryNavigationAutomaticDetectionCheckBoxInput>Automatic</UICategoryNavigationAutomaticDetectionCheckBoxInput>
-  <UICategoryNavigationDynamicNavigationLabel>Dynamic Navigation</UICategoryNavigationDynamicNavigationLabel>
-  <UICategoryNavigationWithClvFormStringInput>with</UICategoryNavigationWithClvFormStringInput>
+  <UICategoryNavigationAutomaticDetectionCheckBoxInput>Automático</UICategoryNavigationAutomaticDetectionCheckBoxInput>
+  <UICategoryNavigationDynamicNavigationLabel>Navegação Dinâmica</UICategoryNavigationDynamicNavigationLabel>
+  <UICategoryNavigationWithClvFormStringInput>com</UICategoryNavigationWithClvFormStringInput>
   <UICategoryNavigationTreepathPopupWindow>Caminho de destino</UICategoryNavigationTreepathPopupWindow>    
       
     </label>
     <msg>
-      <not-support-encoding>Encoding is not supported.</not-support-encoding>
-      <render>An error occurred when rendering.</render>
-      <saving-success>The information was updated successfully.</saving-success>
+      <not-support-encoding>Enconding não suportado.</not-support-encoding>
+      <render>Erro processando renderização.</render>
+      <saving-success>A informação foi atualizada com sucesso.</saving-success>
     </msg>
     <action>
-      <Save>Save</Save>
+      <Save>Salvar</Save>
     </action>
   </UICategoryNavigationConfig>
   <UICategoryNavigationTreeBase>

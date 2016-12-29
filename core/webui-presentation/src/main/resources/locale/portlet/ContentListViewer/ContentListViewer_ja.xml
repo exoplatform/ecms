@@ -135,8 +135,8 @@
   </UICLVBasePathPopupWindow>
   <UICLVPresentation>
     <msg>
-      <confirm-delete>Are you sure you want to delete this content?</confirm-delete>
-      <delete-content-successfully>Content deleted successfully.</delete-content-successfully>
+      <confirm-delete>このコンテンツを削除してもよろしいですか？</confirm-delete>
+      <delete-content-successfully>コンテンツは正常に削除されました。</delete-content-successfully>
     </msg>
     <label>
       <readmore>もっと読む</readmore>
@@ -154,7 +154,7 @@
   </UICLVPresentation>
   <CorrectContentSelectorPopupWindow>
     <title>
-      <UIContentSelectorMulti>Multiple Content Selector Panel</UIContentSelectorMulti>
+      <UIContentSelectorMulti>複数コンテンツ選択パネル</UIContentSelectorMulti>
     </title>
   </CorrectContentSelectorPopupWindow>
   <UIContentDialogFormPopupWindow>

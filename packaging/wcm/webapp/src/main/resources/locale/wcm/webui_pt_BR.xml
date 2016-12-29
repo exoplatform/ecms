@@ -36,8 +36,8 @@
     <label>
       <ManagedSites>Gestão de locais</ManagedSites>
       <SharedSite>Site Compartihado</SharedSite>
-      <PersonalDocuments>Personal Documents</PersonalDocuments>
-      <UserDocuments>{0} Documents</UserDocuments>
+      <PersonalDocuments>Documentos pessoais</PersonalDocuments>
+      <UserDocuments>{0} documentos</UserDocuments>
     </label>
   </Drives>
 

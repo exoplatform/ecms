@@ -30,7 +30,7 @@
         <comment-by>Комментатор</comment-by>
         <email>Эл. почта</email>
         <site>Сайт</site>
-        <lastComment>Last comment posted by {user} at {time}</lastComment>
+        <lastComment>Последний комментарий размещен {user} в {time}</lastComment>
         <Less_Than_A_Minute>меньше минуты назад</Less_Than_A_Minute>
         <About_A_Minute>около минуты назад</About_A_Minute>
         <About_x_Minutes>около {0} минут назад</About_x_Minutes>
@@ -51,12 +51,12 @@
     <view>
       <label>
         <not-viewable>Просмотр этого документа не доступен.</not-viewable>
-        <pdf-max-size>The preview is not available for content larger than {0} MB.</pdf-max-size>
-        <pdf-max-page>The preview is not available for content with over {0} pages.</pdf-max-page>
+        <pdf-max-size>Предварительный просмотр недоступен для файлов больше, чем {0} MB.</pdf-max-size>
+        <pdf-max-page>Предварительный просмотр недоступен для содержимого с более чем {0} страниц.</pdf-max-page>
         <using-webDAV>или открыть в MS Office</using-webDAV>
-        <open-on-desktop>Open on Desktop</open-on-desktop>
-        <open-in-documents>Open in Documents</open-in-documents>
-        <open-in-documents-tooltip>Open this file in Documents app</open-in-documents-tooltip>
+        <open-on-desktop>Открыть на рабочем столе</open-on-desktop>
+        <open-in-documents>Открыть в Документах</open-in-documents>
+        <open-in-documents-tooltip>Открыть этот файл в приложении Документы</open-in-documents-tooltip>
         <file-size-too-big>Слишком большой размер содержимого этой страницы. Вам необходимо скачать и открыть в клиенте.</file-size-too-big>
         <webDAV>Показать через WebDAV</webDAV>
         <download>Загрузить</download>
@@ -87,7 +87,7 @@
   <Vote>
     <view>
       <label>
-        <avg-rating>Rate</avg-rating>
+        <avg-rating>Средний рейтинг</avg-rating>
         <subscription>Голоса</subscription>
       </label>
     </view>

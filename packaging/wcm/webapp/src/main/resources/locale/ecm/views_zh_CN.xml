@@ -30,7 +30,7 @@
         <comment-by>发表评论</comment-by>
         <email>电子邮件</email>
         <site>站点</site>
-        <lastComment>Last comment posted by {user} at {time}</lastComment>
+        <lastComment>{user} 在 {time} 的最后一条批注</lastComment>
         <Less_Than_A_Minute>少于一分钟前</Less_Than_A_Minute>
         <About_A_Minute>大约一分钟前</About_A_Minute>
         <About_x_Minutes>关于 {0} 分钟前</About_x_Minutes>
@@ -51,10 +51,10 @@
     <view>
       <label>
         <not-viewable>本文档的预览不可用</not-viewable>
-        <pdf-max-size>The preview is not available for content larger than {0} MB.</pdf-max-size>
-        <pdf-max-page>The preview is not available for content with over {0} pages.</pdf-max-page>
+        <pdf-max-size>预览不可用于内容大于 {0} MB的文件。</pdf-max-size>
+        <pdf-max-page>预览不可用于与内容超过 {0} 页的文件。</pdf-max-page>
         <using-webDAV>或在 MS Office 中打开</using-webDAV>
-        <open-on-desktop>Open on Desktop</open-on-desktop>
+        <open-on-desktop>在桌面上打开</open-on-desktop>
         <open-in-documents>Open in Documents</open-in-documents>
         <open-in-documents-tooltip>Open this file in Documents app</open-in-documents-tooltip>
         <file-size-too-big>此文件的内容是太大。您应下载和在客户端中打开。</file-size-too-big>
@@ -87,7 +87,7 @@
   <Vote>
     <view>
       <label>
-        <avg-rating>Rate</avg-rating>
+        <avg-rating>平均评级</avg-rating>
         <subscription>票</subscription>
       </label>
     </view>

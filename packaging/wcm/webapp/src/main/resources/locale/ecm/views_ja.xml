@@ -30,7 +30,7 @@
         <comment-by>コメント</comment-by>
         <email>メール</email>
         <site>サイト</site>
-        <lastComment>Last comment posted by {user} at {time}</lastComment>
+        <lastComment>{time} に {user} に投稿された最新コメント</lastComment>
         <Less_Than_A_Minute>1 分以内</Less_Than_A_Minute>
         <About_A_Minute>約 1 分前</About_A_Minute>
         <About_x_Minutes>約 {0} 分前</About_x_Minutes>
@@ -50,13 +50,13 @@
   <File>
     <view>
       <label>
-        <not-viewable>The preview of this document is not available.</not-viewable>
-        <pdf-max-size>The preview is not available for content larger than {0} MB.</pdf-max-size>
-        <pdf-max-page>The preview is not available for content with over {0} pages.</pdf-max-page>
-        <using-webDAV>or Open in MS Office</using-webDAV>
-        <open-on-desktop>Open on Desktop</open-on-desktop>
-        <open-in-documents>Open in Documents</open-in-documents>
-        <open-in-documents-tooltip>Open this file in Documents app</open-in-documents-tooltip>
+        <not-viewable>このドキュメントのプレビューは使用できません。</not-viewable>
+        <pdf-max-size>プレビューは {0} MB より大きいコンテンツで使用できません。</pdf-max-size>
+        <pdf-max-page>プレビューは {0} ページを超えるコンテンツでは使用できません。</pdf-max-page>
+        <using-webDAV>または MS Office で開く</using-webDAV>
+        <open-on-desktop>デスクトップ上に開く</open-on-desktop>
+        <open-in-documents>文書で開きます</open-in-documents>
+        <open-in-documents-tooltip>文書アプリでこのファイルを開きます。</open-in-documents-tooltip>
         <file-size-too-big>ファイルのコンテンツが大きすぎます。ダウンロードし、クライアント上で開いて下さい。</file-size-too-big>
         <webDAV>WebDAV ビュー</webDAV>
         <download>ファイルをダウンロード</download>
@@ -87,7 +87,7 @@
   <Vote>
     <view>
       <label>
-        <avg-rating>Rate</avg-rating>
+        <avg-rating>平均評価</avg-rating>
         <subscription>投票</subscription>
       </label>
     </view>
@@ -153,7 +153,7 @@
     <view>
       <label>
         <not-avaliable>N/A</not-avaliable>
-        <core-elements>Core Elements</core-elements>
+        <core-elements>コア要素</core-elements>
         <title>タイトル</title>
         <creator>作成者</creator>
         <subject>題</subject>

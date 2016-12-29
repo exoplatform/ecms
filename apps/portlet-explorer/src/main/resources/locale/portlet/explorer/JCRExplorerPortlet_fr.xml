@@ -367,7 +367,7 @@
       <cannot-paste-nodetype>Impossible de coller ce type de document ici.</cannot-paste-nodetype>
       <has-not-permission-unlok>Vous n'avez pas les droits suffisants pour déverrouiller ce document.</has-not-permission-unlok>
       <bound-exception>Vous n'avez pas la permission de renommer cet élément. Veuillez contacter l'administrateur.</bound-exception>
-      <bound-move-exception>Vous ne pouvez pas déplacerun élément sur lui-même ou ses enfants.</bound-move-exception>
+      <bound-move-exception>Vous ne pouvez pas déplacer un élément sur lui-même ou dans un de ses sous-dossiers.</bound-move-exception>
       <does-not-support-auditing>Vous ne pouvez pas activer l'audit ici.</does-not-support-auditing>
       <can-not-rename-node>Vous n'avez pas les droits suffisants pour renommer cet élément.</can-not-rename-node>
       <can-not-cut-node>Vous n'avez pas les droits suffisants pour couper cet élément.</can-not-cut-node>
@@ -501,7 +501,7 @@
       <feedback-restore-multi>{0} éléments ont été restaurés avec succès.</feedback-restore-multi>
       
       <confirm-restore>Un élément nommé '{0}' existe déjà dans l'ancien emplacement'. Êtes-vous sûr de que vouloir restaurer ce nœud ?</confirm-restore>
-      <confirm-move>Souhaitez-vous vraiment déplacer ce(s) noeud(s)?</confirm-move>
+      <confirm-move>Souhaitez-vous vraiment déplacer ce(s) document(s) ?</confirm-move>
       <node-cut>'{0}' a été coupé.</node-cut>
       <execute-successfully>L'action '{0}' a été exécutée.</execute-successfully>
       <save-node-success>'{0}' a été enregistré.</save-node-success>
@@ -593,7 +593,7 @@
       <AddThumbnail>Ajouter/Supprimer une Vignette</AddThumbnail>
       <AddToFavourite>Ajouter à mes favoris</AddToFavourite>
       <RemoveFromFavourite>Supprimer</RemoveFromFavourite>
-      <MoveToTrash>Déplacer dans la Corbeille</MoveToTrash>
+      <MoveToTrash>Déplacer vers la Corbeille</MoveToTrash>
       <RestoreFromTrash>Restaurer</RestoreFromTrash>
       <EmptyTrash>Supprimer</EmptyTrash>
       <WebDavView>Ouvrir dans MS Office</WebDavView>
@@ -2168,7 +2168,7 @@
       <mimetype-incorrect>Type de fichier incorrect. Sélectionner une image de type JPG, PNG ou GIF.</mimetype-incorrect>
       <access-denied>Accès refusé. Vous n'avez pas la permission d'ajouter une vignette.</access-denied>
       <confirm-delete>Voulez-vous supprimer cette vignette?</confirm-delete>
-      <is-checked-in>Cet élement est checked-in. Veuillez faire un check-out avant de faire toute action.</is-checked-in>
+      <is-checked-in>Cet élément est checked-in. Veuillez faire un check-out avant de faire toute action.</is-checked-in>
       <fileName-error>Veuillez sélectionner un fichier à uploader.</fileName-error>
     </msg>
     <title>
@@ -2483,8 +2483,8 @@
 
   <UIWorkingArea>
     <msg>
-      <can-not-move-to-itself>Impossible de déplacer: La destination et la source sont identiques.</can-not-move-to-itself>
-      <is-editing>Vous ne pouvez pas déplacer un document en cours de modification.</is-editing>
+      <can-not-move-to-itself>Impossible de déplacer le fichier, car le dossier destinataire est identique à la source.</can-not-move-to-itself>
+      <is-editing>Vous ne pouvez pas déplacer un document qui est en cours de modification.  Veuillez le fermer avant.</is-editing>
     </msg>
   </UIWorkingArea>
 
@@ -3157,7 +3157,7 @@
   <UIPopupMenu>
   <msg>
 <can-not-remove-locked-node>{0} est verrouillé. vous ne pouvez pas le supprimer.</can-not-remove-locked-node>
-<can-not-remove-checked-in-node>{0} ou son dossier parent est checked in, vous ne pouvez pas le déplacer dans la corbeille.</can-not-remove-checked-in-node>
+<can-not-remove-checked-in-node>{0} ou son dossier parent est checked in, vous ne pouvez pas le déplacer vers la corbeille.</can-not-remove-checked-in-node>
 <access-denied-to-delete>Accès refusé. Vous ne pouvez pas supprimer {0}.</access-denied-to-delete>
   </msg>
   </UIPopupMenu>

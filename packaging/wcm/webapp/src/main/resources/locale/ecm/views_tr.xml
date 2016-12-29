@@ -55,8 +55,8 @@
         <pdf-max-page>{0} sayfadan daha fazla olan içerikler için ön izleme bulunmamaktadır.</pdf-max-page>
         <using-webDAV>veya MS Office ile Açın</using-webDAV>
         <open-on-desktop>Masaüstü'nde Aç</open-on-desktop>
-        <open-in-documents>Open in Documents</open-in-documents>
-        <open-in-documents-tooltip>Open this file in Documents app</open-in-documents-tooltip>
+        <open-in-documents>Belgeler'de Aç</open-in-documents>
+        <open-in-documents-tooltip>Bu dosyayı Belgeler uygulamasında aç</open-in-documents-tooltip>
         <file-size-too-big>Bu içerik çok büyük. İçeriği indirip görüntüleyebilirsiniz.</file-size-too-big>
         <webDAV>WebDAV Görünümü</webDAV>
         <download>İndir</download>
@@ -87,7 +87,7 @@
   <Vote>
     <view>
       <label>
-        <avg-rating>Rate</avg-rating>
+        <avg-rating>Ort. Puan</avg-rating>
         <subscription>Oylar</subscription>
       </label>
     </view>
@@ -116,7 +116,7 @@
       <label>
         <action-name>Eylem Adı</action-name>
         <lifecycle>Ömrü</lifecycle>
-        <metadata>Metadata</metadata>
+        <metadata>Metaveri</metadata>
         <description>Açıklama</description>
       </label>
     </view>

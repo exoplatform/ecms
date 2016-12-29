@@ -204,15 +204,15 @@
     <msg>
       <time-to-late>زمان جستجو بسیار طولانی است.</time-to-late>
       <empty-field>لطفا کلمه کلیدی معتبر برای جستجو وارد کنید.</empty-field>
-      <empty-name>Please enter the name to search</empty-name>
-      <empty-content>Please enter a word or phrase to search</empty-content>
-      <empty-property>Please select a property</empty-property>
-      <empty-property-keyword>Please enter a keyword for the property</empty-property-keyword>
-      <empty-doctype>Please select a document type</empty-doctype>
-      <empty-startDate>"From Date" is required</empty-startDate>
+      <empty-name>لطفا برای جست و جو، نام را وارد کنید</empty-name>
+      <empty-content>لطفاً کلمه یا عبارتی را برای جست و جو وارد کنید</empty-content>
+      <empty-property>لطفا یک ویژگی را انتخاب کنید</empty-property>
+      <empty-property-keyword>لطفاً یک کلمه کلیدی برای ویژگی وارد کنید</empty-property-keyword>
+      <empty-doctype>لطفاً نوع سند را انتخاب کنید</empty-doctype>
+      <empty-startDate>«تاریخ فرم» مورد نیاز است</empty-startDate>
       <invalid-format>فرمت غیرمعتبر تاریخ/زمان در فیلد '{0}'.</invalid-format>
       <invalid-date>""تا تاریخ" باید بعد از "از تاریخ" باشد"</invalid-date>
-      <invalid-startDate>"From Date" must not be later than today</invalid-startDate>
+      <invalid-startDate>«تاریخ فرم» نباید دیرتر از تاریخ امروز باشد</invalid-startDate>
       <invalid-nodeType>نوع گره "{0}" معتبر نیست. لطفا دوباره چک کنید.</invalid-nodeType>
       <invalid-keyword>کلمه کلیدی نامعتبر است. برخی از کاراکترها پشتیباتی نمی شوند.</invalid-keyword>
     </msg>
