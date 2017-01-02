@@ -391,6 +391,8 @@ public class DialogFormUtil {
       return EmailAddressValidator.class ;
     } else if (validatorType.equals("number")) {
       return NumberFormatValidator.class;
+    } else if (validatorType.equals("double")) {
+      return DoubleFormatValidator.class;
     } else if (validatorType.equals("empty")){
       return MandatoryValidator.class ;
     } else if(validatorType.equals("null")) {

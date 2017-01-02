@@ -443,4 +443,10 @@
   		<home>Home</home>
   	</label>  
   </Breadcrumb>
+
+  <UIViewMetadataForm>
+    <msg>
+      <Invalid-number>Please enter a valid double number.</Invalid-number>
+    </msg>
+  </UIViewMetadataForm>
 </bundle>
