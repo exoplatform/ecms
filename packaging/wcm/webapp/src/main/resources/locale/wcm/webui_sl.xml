@@ -36,8 +36,8 @@
     <label>
       <ManagedSites>Upravljanje mesta</ManagedSites>
       <SharedSite>Mesto v skupni rabi</SharedSite>
-      <PersonalDocuments>Personal Documents</PersonalDocuments>
-      <UserDocuments>{0} Documents</UserDocuments>
+      <PersonalDocuments>Osebni dokumenti</PersonalDocuments>
+      <UserDocuments>Dokumentov: {0}</UserDocuments>
     </label>
   </Drives>
 

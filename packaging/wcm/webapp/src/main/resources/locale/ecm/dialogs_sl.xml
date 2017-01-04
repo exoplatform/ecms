@@ -35,7 +35,7 @@
  
   <UICommentForm>
     <label>
-      <placeholder>Use @ to mention someone in your comment</placeholder>
+      <placeholder>Uporabite @, če želite omeniti nekoga v vašem komentarju</placeholder>
     </label>
   </UICommentForm>
  

@@ -55,8 +55,8 @@
         <pdf-max-page>Predogled ni na voljo za vsebine z več kot {0} strani.</pdf-max-page>
         <using-webDAV>ali Odpri v MS Office</using-webDAV>
         <open-on-desktop>Odpri na namizju</open-on-desktop>
-        <open-in-documents>Open in Documents</open-in-documents>
-        <open-in-documents-tooltip>Open this file in Documents app</open-in-documents-tooltip>
+        <open-in-documents>Odpri v Dokumentih</open-in-documents>
+        <open-in-documents-tooltip>Odprite to datoteko v aplikaciji Dokumenti</open-in-documents-tooltip>
         <file-size-too-big>Vsebina datoteke je prevelika. Prenesite jo in odprite v odjemalcu.</file-size-too-big>
         <webDAV>WebDAV pogled</webDAV>
         <download>Prenesi</download>
