@@ -2485,7 +2485,7 @@
       <Add>Dodaj</Add>
     </action>
     <label>
-      <userOrGroup>Memberships:</userOrGroup>
+      <userOrGroup>Članstva:</userOrGroup>
     </label>
     <msg>
       <userOrGroup-alreadyExists>To članstvo že obstaja. Izberite drugo.</userOrGroup-alreadyExists>

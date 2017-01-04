@@ -17,7 +17,7 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <not-support>You can't comment on this type of document.</not-support>
+      <not-support>Komentarji nad to vrsto dokumenta niso možni.</not-support>
       <not-checkedout>Pred komentiranjem si najprej rezervirajte vozlišče.</not-checkedout>
       <content-null>Praznega komentarja ne morete objaviti.</content-null>
     </msg>
@@ -1345,9 +1345,9 @@
   ###############################################################################
   -->
   <UIVersionInfo>
-    <title>Version history</title>
+    <title>Zgodovina različic</title>
     <summary>
-      <empty>Click here to add a summary</empty>
+      <empty>Kliknite tukaj, če želite dodati povzetek</empty>
     </summary>
     <tooltip>
       <version>Različica</version>
@@ -1362,9 +1362,9 @@
     <msg>
       <have-no-view-template>Predloga pogleda ni podprta.</have-no-view-template>
       <cannot-remove-version>Osnovne različice ne morete odstraniti.</cannot-remove-version>
-      <error-removing-version>An error occurred while deleting this version.</error-removing-version>
-      <error-removing-referenced-version>This version is referenced and can't be removed.</error-removing-referenced-version>
-      <confirm-restore>Are you sure you want to restore this version?</confirm-restore>
+      <error-removing-version>Napaka pri brisanju te različice.</error-removing-version>
+      <error-removing-referenced-version>Te različice ni mogoče odstraniti, ker je uporabljena v sklicu.</error-removing-referenced-version>
+      <confirm-restore>Ali ste prepričani, da želite obnoviti to različico?</confirm-restore>
       <confirm-delete>Ali ste prepričani, da želite odstraniti to različico?</confirm-delete>
       <not-checked-out>Pred obnovitvijo si rezervirajte to vozlišče.</not-checked-out>
       <invalid-item-state>Te različice ne morete obnoviti, ker je bila premaknjena ali pa izbrisana v drugi seji.</invalid-item-state>
@@ -1372,12 +1372,12 @@
     <action>
       <close>#{word.close}</close>
       <close-view>Zapri pogled</close-view>
-      <compare-versions>Compare selected versions</compare-versions>
+      <compare-versions>Primerjaj izbrane različice</compare-versions>
     </action>
     <labels>
       <version>Različica</version>
       <date>Datum</date>
-      <author>Modified By</author>
+      <author>Spremenil(a):</author>
       <summary>Povzetek</summary>
       <action>Dejanje</action>
     </labels>
@@ -1488,16 +1488,16 @@
   -->
   <UIDiff>
     <label>
-      <backTo>Back to version history</backTo>
+      <backTo>Nazaj v zgodovino različic</backTo>
       <diffTitle>Primerjava dveh različic</diffTitle>
-      <noContent>There is no content to compare</noContent>
+      <noContent>Ni vsebine za primerjavo</noContent>
       <compareVerion>Različica</compareVerion>
       <can-not-compare>Primerja dveh različic ni uspela</can-not-compare>
-      <compare-unavailable>Version comparison is not available for this document</compare-unavailable>
-      <DateChange>On {0}</DateChange>
+      <compare-unavailable>Primerjava različic za ta dokument ni na voljo</compare-unavailable>
+      <DateChange>Na {0}</DateChange>
       <PreviousAndNextCompare>Spremembe iz {0} na {1}</PreviousAndNextCompare>
       <ComparedWith>V primerjavi z</ComparedWith>
-      <restoredFrom>Restored from version {0}</restoredFrom>
+      <restoredFrom>Obnovljeno iz različice {0}</restoredFrom>
     </label>
   </UIDiff>
   <!--
@@ -3104,7 +3104,7 @@
     <msg>
       <no-view-found>Vaše dovoljenje za dostop nima nastavljenih pogledov za pogon "{0}".</no-view-found>
       <access-denied>Dostop zavrnjen. Morda nimate dovoljenja v delovnem prostoru pogona "{0}".</access-denied>
-      <not-found>The document you are trying to access is no longer available.</not-found>
+      <not-found>Dokument, do katerega želite dostopiti, ni več na voljo.</not-found>
       <empty-drives>Dostop zavrnjen. V skladišču bodisi ni nobenega pogona ali pa nimate dovoljenja za dostop do pogonov v skladišču.</empty-drives>
       <workspace-not-exist>Pogon "{0}" je bil shranjen v neprepoznan delovni prostor. Prosimo popravite ta pogon.</workspace-not-exist>
     </msg>
