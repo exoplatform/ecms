@@ -24,15 +24,6 @@
   String country = rcontext.getLocale().getCountry();
   if (country != null && country.length() > 0) {
     language += "_" + country;
-  }   
-    
-  int frequency = 15000;
-  int delay = 60000;
-  if(StringUtils.isNotEmpty(System.getProperty("user.status.ping.frequency"))) {
-    frequency = Integer.parseInt(System.getProperty("user.status.ping.frequency"));
-  }
-  if(StringUtils.isNotEmpty(System.getProperty("user.status.offline.delay"))) {
-    delay = Integer.parseInt(System.getProperty("user.status.offline.delay"));
   }
 %>
 <script type="text/javascript">
@@ -54,8 +45,6 @@
    }
   %>
 </div>
-<div id="user-status" user-status-ping-frequency="<%=frequency%>" user-status-offline-delay="<%=delay%>" style="display: none;"></div>
-
 
 <%
 def jsManager = rcontext.getJavascriptManager();
