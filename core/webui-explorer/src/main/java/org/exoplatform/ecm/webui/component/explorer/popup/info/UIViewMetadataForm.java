@@ -16,9 +16,31 @@
  */
 package org.exoplatform.ecm.webui.component.explorer.popup.info;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import org.apache.commons.lang.ArrayUtils;
+import org.apache.commons.lang.StringUtils;
+import org.exoplatform.commons.utils.HTMLSanitizer;
+import org.exoplatform.ecm.utils.lock.LockUtil;
+import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
+import org.exoplatform.ecm.webui.form.UIDialogForm;
+import org.exoplatform.resolver.ResourceResolver;
+import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
+import org.exoplatform.services.cms.metadata.MetadataService;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
+import org.exoplatform.services.wcm.core.NodetypeConstant;
+import org.exoplatform.web.application.ApplicationMessage;
+import org.exoplatform.webui.application.WebuiRequestContext;
+import org.exoplatform.webui.config.annotation.ComponentConfig;
+import org.exoplatform.webui.config.annotation.ComponentConfigs;
+import org.exoplatform.webui.config.annotation.EventConfig;
+import org.exoplatform.webui.core.UIApplication;
+import org.exoplatform.webui.core.UIPopupWindow;
+import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
+import org.exoplatform.webui.event.Event;
+import org.exoplatform.webui.event.Event.Phase;
+import org.exoplatform.webui.event.EventListener;
+import org.exoplatform.webui.form.*;
+import org.exoplatform.webui.form.input.UICheckBoxInput;
 
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
@@ -26,33 +48,9 @@ import javax.jcr.Value;
 import javax.jcr.ValueFormatException;
 import javax.jcr.nodetype.NodeTypeManager;
 import javax.jcr.nodetype.PropertyDefinition;
-
-import org.apache.commons.lang.ArrayUtils;
-import org.exoplatform.commons.utils.HTMLSanitizer;
-import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
-import org.exoplatform.ecm.webui.form.UIDialogForm;
-import org.exoplatform.ecm.utils.lock.LockUtil;
-import org.exoplatform.resolver.ResourceResolver;
-import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
-import org.exoplatform.services.cms.metadata.MetadataService;
-import org.exoplatform.services.log.ExoLogger;
-import org.exoplatform.services.log.Log;
-import org.exoplatform.services.wcm.core.NodetypeConstant;
-import org.exoplatform.webui.application.WebuiRequestContext;
-import org.exoplatform.webui.config.annotation.ComponentConfig;
-import org.exoplatform.webui.config.annotation.ComponentConfigs;
-import org.exoplatform.webui.config.annotation.EventConfig;
-import org.exoplatform.webui.core.UIPopupWindow;
-import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
-import org.exoplatform.webui.event.Event;
-import org.exoplatform.webui.event.Event.Phase;
-import org.exoplatform.webui.event.EventListener;
-import org.exoplatform.webui.form.UIFormDateTimeInput;
-import org.exoplatform.webui.form.UIFormInput;
-import org.exoplatform.webui.form.UIFormMultiValueInputSet;
-import org.exoplatform.webui.form.UIFormSelectBox;
-import org.exoplatform.webui.form.UIFormStringInput;
-import org.exoplatform.webui.form.input.UICheckBoxInput;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by The eXo Platform SARL
@@ -143,16 +141,16 @@ public class UIViewMetadataForm extends UIDialogForm {
                     !uiForm.isEqualsValueStringArrays(node.getProperty(name).getValues(), valuesReal)))
                   node.setProperty(name, valuesReal);
               } else {
-                List<String> values = (List<String>) ((UIFormMultiValueInputSet)uiInput).getValue();
-                if(!node.hasProperty(name) || (node.hasProperty(name) && 
-                    !uiForm.isEqualsValueStringArrays(node.getProperty(name).getValues(), 
-                                                      values.toArray(new String[values.size()]))))
+                List<String> values = (List<String>) ((UIFormMultiValueInputSet) uiInput).getValue();
+                if (!node.hasProperty(name) || (node.hasProperty(name) &&
+                    !uiForm.isEqualsValueStringArrays(node.getProperty(name).getValues(),
+                        values.toArray(new String[values.size()]))))
 
                   //--- Sanitize HTML input to avoid XSS attacks
                   for (int i = 0; i < values.size(); i++) {
-                    values.set(i,HTMLSanitizer.sanitize(values.get(i)));
+                    values.set(i, HTMLSanitizer.sanitize(values.get(i)));
                   }
-                  node.setProperty(name, values.toArray(new String[values.size()]));
+                node.setProperty(name, values.toArray(new String[values.size()]));
               }
             }
           } else {
@@ -181,6 +179,21 @@ public class UIViewMetadataForm extends UIDialogForm {
               value = HTMLSanitizer.sanitize(value);
               if(!node.hasProperty(name) || (node.hasProperty(name) && !node.getProperty(name).getString().equals(value)))
                 node.setProperty(name, value);
+            } else if (requiredType == 4) { // double
+              UIFormInput uiInput = uiForm.getUIInput(inputName);
+              double value = 0;
+              if (uiInput == null || StringUtils.isBlank((String) uiInput.getValue())) {
+                node.setProperty(name, (Value) null);
+              } else {
+                try {
+                  value = Double.parseDouble((String) uiInput.getValue());
+                  node.setProperty(name, value);
+                } catch (NumberFormatException e) {
+                  UIApplication uiapp = uiForm.getAncestorOfType(UIApplication.class);
+                  uiapp.addMessage(new ApplicationMessage("UIViewMetadataForm.msg.Invalid-number", null, ApplicationMessage.WARNING));
+                  LOG.error("Cannot save field '" + name + "'. The value '" + value + "' is not a number", e);
+                }
+              }
             }
           }
         }
