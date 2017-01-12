@@ -16,14 +16,6 @@
  */
 package org.exoplatform.ecm.webui.utils;
 
-import java.io.InputStream;
-import java.util.*;
-
-import javax.jcr.Node;
-import javax.jcr.PathNotFoundException;
-import javax.jcr.Property;
-import javax.jcr.PropertyType;
-
 import org.exoplatform.commons.utils.HTMLSanitizer;
 import org.exoplatform.commons.utils.IOUtil;
 import org.exoplatform.ecm.utils.text.Text;
@@ -41,6 +33,13 @@ import org.exoplatform.webui.form.UIFormSelectBox;
 import org.exoplatform.webui.form.input.UICheckBoxInput;
 import org.exoplatform.webui.form.input.UIUploadInput;
 import org.exoplatform.webui.form.validator.*;
+
+import javax.jcr.Node;
+import javax.jcr.PathNotFoundException;
+import javax.jcr.Property;
+import javax.jcr.PropertyType;
+import java.io.InputStream;
+import java.util.*;
 
 /*
  * Created by The eXo Platform SAS
@@ -387,6 +386,8 @@ public class DialogFormUtil {
       return EmailAddressValidator.class;
     } else if (validatorType.equals("number")) {
       return NumberFormatValidator.class;
+    } else if (validatorType.equals("double")) {
+      return DoubleFormatValidator.class;
     } else if (validatorType.equals("empty")) {
       return MandatoryValidator.class;
     } else if (validatorType.equals("null")) {
