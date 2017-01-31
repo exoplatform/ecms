@@ -407,36 +407,6 @@
         return placement;
     };
 
-    WCMUtils.prototype.pingUserStatus = function() {
-      var userStatus = gj("#user-status");
-      var frequency = 15000;
-      var delay = 60000;
-      if(userStatus.html() != undefined) {
-        frequency = gj(userStatus).attr("user-status-ping-frequency");
-        delay = gj(userStatus).attr("user-status-offline-delay");
-      }
-      eXo.ecm.WCMUtils.sendPing(frequency);
-    }
-
-    WCMUtils.prototype.sendPing = function(frequency) {
-      gj.ajax({
-        url: "/rest/state/ping/",
-        dataType: "json",
-        context: this,
-        success: function(data){
-          setTimeout(WCMUtils.prototype.sendPing, frequency, frequency);
-        },
-        error: function(xhr, status){
-          if (xhr.status >= 500) {
-            setTimeout(WCMUtils.prototype.sendPing, frequency * 2, frequency);
-          } else {
-            console.log("Last ping returns a status code " + xhr.status + ", stopping");
-          } 
-        }
-     });
-   };
-
-
     WCMUtils.prototype.showPopover = function (element) {
         gj(element).popover({template: '<div class="popover"><div class="arrow"></div><div class="inner"><h3 class="popover-title" style="display:none;"></h3><div class="popover-content"><p></p></div></div></div>'});
         gj(element).popover('show');
