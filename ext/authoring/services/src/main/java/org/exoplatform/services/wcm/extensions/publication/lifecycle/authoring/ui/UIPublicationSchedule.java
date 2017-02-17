@@ -16,6 +16,7 @@
  */
 package org.exoplatform.services.wcm.extensions.publication.lifecycle.authoring.ui;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import javax.jcr.ItemExistsException;
@@ -99,6 +100,9 @@ public class UIPublicationSchedule extends UIForm {
       String endValue = endPublication.getValue();
       Calendar startDate = startPublication.getCalendar();
       Calendar endDate = endPublication.getCalendar();
+      SimpleDateFormat format = new SimpleDateFormat(startPublication.getDatePattern_()+"Z");
+      startDate.setTime(format.parse(startValue));
+      endDate.setTime(format.parse(endValue));
       Node node = publicationPanel.getCurrentNode();
       try {
         if ((startDate == null && StringUtils.isNotEmpty(startValue))
