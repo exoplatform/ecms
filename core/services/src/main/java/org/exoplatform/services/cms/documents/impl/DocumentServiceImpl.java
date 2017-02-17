@@ -123,7 +123,7 @@ public class DocumentServiceImpl implements DocumentService {
 
   /**
    *
-   @Inherited
+   * {@inheritDoc}
    */
   public String getDocumentUrlInPersonalDocuments(Node currentNode, String username) throws Exception {
     Node rootNode = null;
@@ -144,7 +144,7 @@ public class DocumentServiceImpl implements DocumentService {
 
   /**
    *
-   @Inherited
+   * {@inheritDoc}
    */
   public String getDocumentUrlInSpaceDocuments(Node currentNode, String spaceId) throws Exception {
     Node rootNode = null;
