@@ -16,12 +16,11 @@
  */
 package org.exoplatform.services.cms.documents;
 
-import javax.jcr.Node;
-import javax.jcr.RepositoryException;
-
 import org.exoplatform.services.cms.documents.model.Document;
 import org.exoplatform.services.cms.drives.DriveData;
 
+import javax.jcr.Node;
+import javax.jcr.RepositoryException;
 import java.util.List;
 
 /**
@@ -39,6 +38,28 @@ public interface DocumentService {
    * @throws Exception
    */
   public String getShortLinkInDocumentsApp(String workspaceName, String nodeId) throws Exception;
+
+  /** return the URL of the shared document in the Shared Personal Documents folder of the user destination
+   *
+   * @param currentNode
+   * @param username
+   * @return
+   * @throws Exception
+   */
+  default String getDocumentUrlInPersonalDocuments(Node currentNode, String username) throws Exception {
+    return null;
+  }
+
+  /** return the URL of the shared document in the Shared Documents folder of the space destination
+   *
+   * @param currentNode
+   * @param spaceId
+   * @return
+   * @throws Exception
+   */
+  default String getDocumentUrlInSpaceDocuments(Node currentNode, String spaceId) throws Exception {
+    return null;
+  }
 
   /**
    * Get the link to display a document in the Documents app.
