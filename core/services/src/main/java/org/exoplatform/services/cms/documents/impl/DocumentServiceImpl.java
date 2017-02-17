@@ -23,16 +23,24 @@ import org.exoplatform.portal.config.UserPortalConfigService;
 import org.exoplatform.portal.mop.SiteKey;
 import org.exoplatform.portal.mop.user.UserNavigation;
 import org.exoplatform.portal.mop.user.UserPortalContext;
+import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.documents.DocumentService;
 import org.exoplatform.services.cms.documents.model.Document;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.drives.ManageDriveService;
 import org.exoplatform.services.cms.drives.impl.ManageDriveServiceImpl;
 import org.exoplatform.services.cms.impl.Utils;
+import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
+import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
+import org.exoplatform.services.jcr.impl.core.NodeImpl;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.services.security.ConversationState;
+import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.gatein.api.Portal;
 import org.gatein.api.navigation.Navigation;
@@ -40,12 +48,11 @@ import org.gatein.api.navigation.Nodes;
 import org.gatein.api.site.SiteId;
 
 import javax.jcr.Node;
+import javax.jcr.NodeIterator;
 import javax.jcr.RepositoryException;
+import javax.jcr.Session;
 import java.net.URLEncoder;
-import java.util.Calendar;
-import java.util.List;
-import java.util.Locale;
-import java.util.ResourceBundle;
+import java.util.*;
 
 /**
  * Created by The eXo Platform SAS Author : eXoPlatform exo@exoplatform.com Mar
@@ -63,13 +70,23 @@ public class DocumentServiceImpl implements DocumentService {
   public static final String CURRENT_STATE_PROP = "publication:currentState";
   public static final String DOCUMENTS_APP_NAVIGATION_NODE_NAME = "documents";
   public static final String DOCUMENT_NOT_FOUND = "?path=doc-not-found";
-
+  private static final String DOCUMENTS_NODE = "Documents";
+  private static final String SHARED_NODE = "Shared";
+  private static final Log LOG                 = ExoLogger.getLogger(DocumentServiceImpl.class);
   private ManageDriveService manageDriveService;
   private Portal portal;
+  private SessionProviderService sessionProviderService;
+  private RepositoryService repoService;
+  private NodeHierarchyCreator nodeHierarchyCreator;
+  private LinkManager linkManager;
 
-  public DocumentServiceImpl(ManageDriveService manageDriveService, Portal portal) {
+  public DocumentServiceImpl(ManageDriveService manageDriveService, Portal portal, SessionProviderService sessionProviderService, RepositoryService repoService, NodeHierarchyCreator nodeHierarchyCreator, LinkManager linkManager) {
     this.manageDriveService = manageDriveService;
+    this.sessionProviderService = sessionProviderService;
+    this.repoService = repoService;
+    this.nodeHierarchyCreator = nodeHierarchyCreator;
     this.portal = portal;
+    this.linkManager = linkManager;
   }
 
   @Override
@@ -102,6 +119,48 @@ public class DocumentServiceImpl implements DocumentService {
     Document doc = new Document(id, node.getName(), title, node.getPath(), 
                                 ws, state, author, lastEditor, lastModified, dateCreated);
     return doc;
+  }
+
+  /**
+   *
+   @Inherited
+   */
+  public String getDocumentUrlInPersonalDocuments(Node currentNode, String username) throws Exception {
+    Node rootNode = null;
+    try {
+      SessionProvider sessionProvider = sessionProviderService.getSystemSessionProvider(null);
+      ManageableRepository repository = repoService.getCurrentRepository();
+      Session session = sessionProvider.getSession(repository.getConfiguration().getDefaultWorkspaceName(), repository);
+      //add symlink to user folder destination
+      nodeHierarchyCreator.getJcrPath(BasePath.CMS_USERS_PATH);
+      rootNode = (Node) session.getItem(nodeHierarchyCreator.getJcrPath(BasePath.CMS_USERS_PATH) + getPrivatePath(username));
+      String sharedLink = getSharedLink(currentNode, rootNode);
+      return sharedLink;
+    } catch (Exception e) {
+      LOG.error(e.getMessage(), e);
+      return "";
+    }
+  }
+
+  /**
+   *
+   @Inherited
+   */
+  public String getDocumentUrlInSpaceDocuments(Node currentNode, String spaceId) throws Exception {
+    Node rootNode = null;
+    try {
+      SessionProvider sessionProvider = sessionProviderService.getSystemSessionProvider(null);
+      ManageableRepository repository = repoService.getCurrentRepository();
+      Session session = sessionProvider.getSession(repository.getConfiguration().getDefaultWorkspaceName(), repository);
+      //add symlink to space destination
+      nodeHierarchyCreator.getJcrPath(BasePath.CMS_GROUPS_PATH);
+      rootNode = (Node) session.getItem(nodeHierarchyCreator.getJcrPath(BasePath.CMS_GROUPS_PATH) + spaceId);
+      String sharedLink = getSharedLink(currentNode, rootNode);
+      return sharedLink;
+    } catch (Exception e) {
+      LOG.error(e.getMessage(), e);
+      return "";
+    }
   }
 
   /**
@@ -304,4 +363,46 @@ public class DocumentServiceImpl implements DocumentService {
     SiteKey siteKey = SiteKey.portal(prc.getPortalConfig().getName());
     return siteKey;
   }
+
+  private String getPrivatePath(String user) {
+    return "/" + user.substring(0, 1) + "___/" + user.substring(0, 2) + "___/" + user.substring(0, 3) + "___/" + user + "/Private";
+  }
+
+  private String getSharedLink(Node currentNode, Node rootNode) {
+    Node shared = null;
+    Node link = null;
+    try {
+      rootNode = rootNode.getNode(DOCUMENTS_NODE);
+      if (!rootNode.hasNode(SHARED_NODE)) {
+        shared = rootNode.addNode(SHARED_NODE);
+      } else {
+        shared = rootNode.getNode(SHARED_NODE);
+      }
+      if (currentNode.isNodeType(NodetypeConstant.EXO_SYMLINK)) {
+        currentNode = linkManager.getTarget(currentNode);
+      }
+      List<String> path = new ArrayList();
+      Node targetNode = null;
+      boolean existingSymlink = false;
+      for (NodeIterator it = shared.getNodes(); it.hasNext(); ) {
+        Node node = it.nextNode();
+        path.add(((NodeImpl) node).getInternalPath().getAsString());
+        if (path.contains(((NodeImpl) shared).getInternalPath().getAsString() + "[]" + currentNode.getName() + ":1")) {
+          existingSymlink = true;
+          targetNode = node;
+          break;
+        }
+      }
+      if (existingSymlink) {
+        link = targetNode;
+      } else {
+        link = linkManager.createLink(shared, currentNode);
+      }
+      return CommonsUtils.getCurrentDomain() + getShortLinkInDocumentsApp(link.getSession().getWorkspace().getName(), ((NodeImpl) link).getInternalIdentifier());
+    } catch (Exception e) {
+      LOG.error(e.getMessage(), e);
+      return "";
+    }
+  }
+
 }
