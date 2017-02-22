@@ -357,7 +357,7 @@
       <ColumnPageConfigs>Stulpelio puslapio konfigūracija</ColumnPageConfigs>
       <RowPageConfigs>Eilutės puslapio konfigūracija</RowPageConfigs>
       <TabsPageConfigs>Skirtukų puslapio konfigūracija</TabsPageConfigs>
-      <MixPageConfigs>Sumaišyto puslapio konfiguracija</MixPageConfigs>
+      <MixPageConfigs>Mixed</MixPageConfigs>
     </item>
   </UIDropDownPageTemp>
 
@@ -445,4 +445,10 @@
   <home>Pagrindinis</home>
   </label>  
   </Breadcrumb>
+
+  <UIViewMetadataForm>
+    <msg>
+      <Invalid-number>Please enter a valid number.</Invalid-number>
+    </msg>
+  </UIViewMetadataForm>
 </bundle>

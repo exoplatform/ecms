@@ -357,7 +357,7 @@
       <ColumnPageConfigs>Kolumn sid konfiguration</ColumnPageConfigs>
       <RowPageConfigs>Rad sidkonfiguration</RowPageConfigs>
       <TabsPageConfigs>Flik sid konfigurationer</TabsPageConfigs>
-      <MixPageConfigs>Mix sida konfigurationer</MixPageConfigs>
+      <MixPageConfigs>Mixed</MixPageConfigs>
     </item>
   </UIDropDownPageTemp>
 
@@ -445,4 +445,10 @@
   <home>Hem</home>
   </label>  
   </Breadcrumb>
+
+  <UIViewMetadataForm>
+    <msg>
+      <Invalid-number>Please enter a valid number.</Invalid-number>
+    </msg>
+  </UIViewMetadataForm>
 </bundle>

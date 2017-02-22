@@ -357,7 +357,7 @@
       <ColumnPageConfigs>Colonnes</ColumnPageConfigs>
       <RowPageConfigs>Lignes</RowPageConfigs>
       <TabsPageConfigs>Onglets</TabsPageConfigs>
-      <MixPageConfigs>Combinées</MixPageConfigs>
+      <MixPageConfigs>Mixte</MixPageConfigs>
     </item>
   </UIDropDownPageTemp>
 
@@ -448,7 +448,7 @@
 
   <UIViewMetadataForm>
     <msg>
-      <Invalid-number>Veuillez entrer un nombre valide.</Invalid-number>
+      <Invalid-number>Veuillez saisir un nombre valide.</Invalid-number>
     </msg>
   </UIViewMetadataForm>
 </bundle>

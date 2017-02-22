@@ -357,7 +357,7 @@
       <ColumnPageConfigs>Configurazioni Pagina Per Colonne</ColumnPageConfigs>
       <RowPageConfigs>Configurazioni Pagina Per Righe</RowPageConfigs>
       <TabsPageConfigs>Configurazioni Pagina Per Tab</TabsPageConfigs>
-      <MixPageConfigs>Configurazioni Pagina Miste</MixPageConfigs>
+      <MixPageConfigs>Mixed</MixPageConfigs>
     </item>
   </UIDropDownPageTemp>
 
@@ -445,4 +445,10 @@
   <home>HomePage</home>
   </label>  
   </Breadcrumb>
+
+  <UIViewMetadataForm>
+    <msg>
+      <Invalid-number>Please enter a valid number.</Invalid-number>
+    </msg>
+  </UIViewMetadataForm>
 </bundle>

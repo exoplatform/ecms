@@ -357,7 +357,7 @@
       <ColumnPageConfigs>Configuracions de Columnes de Pàgina</ColumnPageConfigs>
       <RowPageConfigs>Configuracions de Files de Pàgina</RowPageConfigs>
       <TabsPageConfigs>Configuracions de Pestanyes de Pàgina</TabsPageConfigs>
-      <MixPageConfigs>Configuracions Combinades de Pàgina</MixPageConfigs>
+      <MixPageConfigs>Mixed</MixPageConfigs>
     </item>
   </UIDropDownPageTemp>
 
@@ -445,4 +445,10 @@
   <home>Inici</home>
   </label>  
   </Breadcrumb>
+
+  <UIViewMetadataForm>
+    <msg>
+      <Invalid-number>Please enter a valid number.</Invalid-number>
+    </msg>
+  </UIViewMetadataForm>
 </bundle>

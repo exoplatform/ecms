@@ -357,7 +357,7 @@
       <ColumnPageConfigs>الاعدادات الخاصّة بعمود الصّفحة</ColumnPageConfigs>
       <RowPageConfigs>الاعدادات الخاصّة بأسطر الصّفحة</RowPageConfigs>
       <TabsPageConfigs>الاعدادات الخاصّة بعلامات التّبويب</TabsPageConfigs>
-      <MixPageConfigs>الاعدادات الخاصّة بمزيج الصفحة</MixPageConfigs>
+      <MixPageConfigs>Mixed</MixPageConfigs>
     </item>
   </UIDropDownPageTemp>
 
@@ -445,4 +445,10 @@
   <home>الصفحة الرئيسية</home>
   </label>  
   </Breadcrumb>
+
+  <UIViewMetadataForm>
+    <msg>
+      <Invalid-number>الرجاء إدخال رقم صحيح.</Invalid-number>
+    </msg>
+  </UIViewMetadataForm>
 </bundle>
