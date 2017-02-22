@@ -357,7 +357,7 @@
       <ColumnPageConfigs>Διαμορφώσεις στηλών σελίδων</ColumnPageConfigs>
       <RowPageConfigs>Διαμορφώσεις γραμμών σελίδων</RowPageConfigs>
       <TabsPageConfigs>Διαμορφώσεις καρτελών σελίδων</TabsPageConfigs>
-      <MixPageConfigs>Διαμορφώσεις μεικτών σελίδων</MixPageConfigs>
+      <MixPageConfigs>Mixed</MixPageConfigs>
     </item>
   </UIDropDownPageTemp>
 
@@ -445,4 +445,10 @@
   <home>Αρχική</home>
   </label>  
   </Breadcrumb>
+
+  <UIViewMetadataForm>
+    <msg>
+      <Invalid-number>Please enter a valid number.</Invalid-number>
+    </msg>
+  </UIViewMetadataForm>
 </bundle>

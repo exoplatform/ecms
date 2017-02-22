@@ -357,7 +357,7 @@
       <ColumnPageConfigs>Cấu hình Trang kiểu Cột</ColumnPageConfigs>
       <RowPageConfigs>Cấu hình Trang kiểu Hàng</RowPageConfigs>
       <TabsPageConfigs>Cấu hình Trang kiểu Tab</TabsPageConfigs>
-      <MixPageConfigs>Cấu hình Trang kiểu Hỗn hợp</MixPageConfigs>
+      <MixPageConfigs>Mixed</MixPageConfigs>
     </item>
   </UIDropDownPageTemp>
 
@@ -445,4 +445,10 @@
   <home>Trang chủ</home>
   </label>  
   </Breadcrumb>
+
+  <UIViewMetadataForm>
+    <msg>
+      <Invalid-number>Please enter a valid number.</Invalid-number>
+    </msg>
+  </UIViewMetadataForm>
 </bundle>

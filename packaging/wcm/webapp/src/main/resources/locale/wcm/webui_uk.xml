@@ -357,7 +357,7 @@
       <ColumnPageConfigs>Конфігурація стовпчиків</ColumnPageConfigs>
       <RowPageConfigs>Конфігурація рядків</RowPageConfigs>
       <TabsPageConfigs>Конфігурація вкладок</TabsPageConfigs>
-      <MixPageConfigs>Конфігурація змішаної сторінки</MixPageConfigs>
+      <MixPageConfigs>Mixed</MixPageConfigs>
     </item>
   </UIDropDownPageTemp>
 
@@ -445,4 +445,10 @@
   <home>Головна</home>
   </label>  
   </Breadcrumb>
+
+  <UIViewMetadataForm>
+    <msg>
+      <Invalid-number>Please enter a valid number.</Invalid-number>
+    </msg>
+  </UIViewMetadataForm>
 </bundle>

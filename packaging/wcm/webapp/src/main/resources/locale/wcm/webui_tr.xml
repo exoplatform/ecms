@@ -357,7 +357,7 @@
       <ColumnPageConfigs>Sütun Sayfa Yapılandırmaları</ColumnPageConfigs>
       <RowPageConfigs>Satır Sayfa Yapılandırmaları</RowPageConfigs>
       <TabsPageConfigs>Sekme Sayfa Yapılandırmaları</TabsPageConfigs>
-      <MixPageConfigs>Mix Sayfa Yapılandırmaları</MixPageConfigs>
+      <MixPageConfigs>Mixed</MixPageConfigs>
     </item>
   </UIDropDownPageTemp>
 
@@ -445,4 +445,10 @@
   <home>Ana Sayfa</home>
   </label>  
   </Breadcrumb>
+
+  <UIViewMetadataForm>
+    <msg>
+      <Invalid-number>Please enter a valid number.</Invalid-number>
+    </msg>
+  </UIViewMetadataForm>
 </bundle>

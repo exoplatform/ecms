@@ -357,7 +357,7 @@
       <ColumnPageConfigs>Konfiguracje kolumny strony</ColumnPageConfigs>
       <RowPageConfigs>Konfiguracje wiersza strony</RowPageConfigs>
       <TabsPageConfigs>Konfiguracje kart strony</TabsPageConfigs>
-      <MixPageConfigs>Zmień stronę konfiguracji</MixPageConfigs>
+      <MixPageConfigs>Mixed</MixPageConfigs>
     </item>
   </UIDropDownPageTemp>
 
@@ -445,4 +445,10 @@
   <home>Strona główna</home>
   </label>  
   </Breadcrumb>
+
+  <UIViewMetadataForm>
+    <msg>
+      <Invalid-number>Please enter a valid number.</Invalid-number>
+    </msg>
+  </UIViewMetadataForm>
 </bundle>

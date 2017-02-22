@@ -357,7 +357,7 @@
       <ColumnPageConfigs>列頁面配置</ColumnPageConfigs>
       <RowPageConfigs>行頁面配置</RowPageConfigs>
       <TabsPageConfigs>標籤頁面配置</TabsPageConfigs>
-      <MixPageConfigs>混合頁面配置</MixPageConfigs>
+      <MixPageConfigs>Mixed</MixPageConfigs>
     </item>
   </UIDropDownPageTemp>
 
@@ -445,4 +445,10 @@
   <home>首頁</home>
   </label>  
   </Breadcrumb>
+
+  <UIViewMetadataForm>
+    <msg>
+      <Invalid-number>Please enter a valid number.</Invalid-number>
+    </msg>
+  </UIViewMetadataForm>
 </bundle>

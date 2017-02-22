@@ -357,7 +357,7 @@
       <ColumnPageConfigs>تنظیمات ستون صفحه</ColumnPageConfigs>
       <RowPageConfigs>تنظیمات ردیف صفحه</RowPageConfigs>
       <TabsPageConfigs>تنظیمات زبانه صفحه</TabsPageConfigs>
-      <MixPageConfigs>تنظیمات ترکیب صفحه</MixPageConfigs>
+      <MixPageConfigs>Mixed</MixPageConfigs>
     </item>
   </UIDropDownPageTemp>
 
@@ -445,4 +445,10 @@
   <home>Home</home>
   </label>  
   </Breadcrumb>
+
+  <UIViewMetadataForm>
+    <msg>
+      <Invalid-number>Please enter a valid number.</Invalid-number>
+    </msg>
+  </UIViewMetadataForm>
 </bundle>

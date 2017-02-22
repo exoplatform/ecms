@@ -357,7 +357,7 @@
       <ColumnPageConfigs>Konfiguracije strani s stolpci</ColumnPageConfigs>
       <RowPageConfigs>Konfiguracije strani z vrsticami</RowPageConfigs>
       <TabsPageConfigs>Konfiguracije strani z zavihki</TabsPageConfigs>
-      <MixPageConfigs>Konfiguracije Mix strani</MixPageConfigs>
+      <MixPageConfigs>Mixed</MixPageConfigs>
     </item>
   </UIDropDownPageTemp>
 
@@ -445,4 +445,10 @@
   <home>Domov</home>
   </label>  
   </Breadcrumb>
+
+  <UIViewMetadataForm>
+    <msg>
+      <Invalid-number>Please enter a valid number.</Invalid-number>
+    </msg>
+  </UIViewMetadataForm>
 </bundle>

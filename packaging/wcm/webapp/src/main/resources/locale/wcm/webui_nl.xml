@@ -357,7 +357,7 @@
       <ColumnPageConfigs>Kolom pagina configuraties</ColumnPageConfigs>
       <RowPageConfigs>Rij pagina configuraties</RowPageConfigs>
       <TabsPageConfigs>Tabbladen pagina configuraties</TabsPageConfigs>
-      <MixPageConfigs>Mix pagina configuraties</MixPageConfigs>
+      <MixPageConfigs>Mixed</MixPageConfigs>
     </item>
   </UIDropDownPageTemp>
 
@@ -445,4 +445,10 @@
   <home>Home</home>
   </label>  
   </Breadcrumb>
+
+  <UIViewMetadataForm>
+    <msg>
+      <Invalid-number>Please enter a valid number.</Invalid-number>
+    </msg>
+  </UIViewMetadataForm>
 </bundle>
