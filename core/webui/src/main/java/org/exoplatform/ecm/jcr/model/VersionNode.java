@@ -16,19 +16,14 @@
  */
 package org.exoplatform.ecm.jcr.model;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
-import javax.jcr.Node;
-import javax.jcr.Property;
-import javax.jcr.RepositoryException;
-import javax.jcr.Session;
+import javax.jcr.*;
 import javax.jcr.version.Version;
 import javax.jcr.version.VersionIterator;
 
 import org.exoplatform.ecm.webui.utils.Utils;
+import org.exoplatform.services.cms.documents.VersionHistoryUtils;
 import org.exoplatform.services.cms.impl.DMSConfiguration;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
@@ -48,6 +43,8 @@ public class VersionNode {
   private Calendar          createdTime_;
 
   private String            name_          = "";
+
+  private String            displayName         = "";
 
   private String            path_          = "";
 
@@ -88,19 +85,44 @@ public class VersionNode {
       Version version = (Version) node;
       versionLabels_ = version.getContainingHistory().getVersionLabels(version);
     } else {
+      int maxVersion = 0;
+      Map<String, String> mapVersionName = new HashMap<String, String>();
+      if(node.isNodeType(VersionHistoryUtils.MIX_DISPLAY_VERSION_NAME)){
+        //maxVersion of root version
+        if(node.hasProperty(VersionHistoryUtils.MAX_VERSION_PROPERTY)){
+          maxVersion = (int) node.getProperty(VersionHistoryUtils.MAX_VERSION_PROPERTY).getLong();
+        }
+        //list of version name entries (jcrID, display version)
+        if(node.hasProperty(VersionHistoryUtils.LIST_VERSION_PROPERTY)){
+          Value[] values = node.getProperty(VersionHistoryUtils.LIST_VERSION_PROPERTY).getValues();
+          for (Value value : values){
+            mapVersionName.put(value.getString().split(VersionHistoryUtils.VERSION_SEPARATOR)[0],
+                    value.getString().split(VersionHistoryUtils.VERSION_SEPARATOR)[1]);
+          }
+        }
+      }
       Version rootVersion = node.getVersionHistory().getRootVersion();
       VersionIterator allVersions = node.getVersionHistory().getAllVersions();
       int maxIndex = 0;
       while (allVersions.hasNext()) {
         Version version = allVersions.nextVersion();
+        String versionOffset = mapVersionName.get(version.getName());
+
         if(version.getUUID().equals(rootVersion.getUUID())) {
           continue;
         }
         int versionIndex = Integer.parseInt(version.getName());
         maxIndex = Math.max(maxIndex , versionIndex);
-        children_.add(new VersionNode(version, session));
+        VersionNode versionNode = new VersionNode(version, session);
+        if(versionOffset != null) {
+          versionNode.setDisplayName(String.valueOf(versionOffset));
+        }else{
+          versionNode.setDisplayName(String.valueOf(versionIndex));
+        }
+        children_.add(versionNode);
       }
       name_ = String.valueOf(maxIndex + 1);
+      displayName = maxVersion > 0 ?  String.valueOf(maxVersion) : String.valueOf(maxIndex +1);
       versionLabels_ = node.getVersionHistory().getVersionLabels(rootVersion);
     }
   }
@@ -125,6 +147,14 @@ public class VersionNode {
 
   public String getName() {
     return name_;
+  }
+
+  public String getDisplayName() {
+    return displayName;
+  }
+
+  public void setDisplayName(String displayName_) {
+    this.displayName = displayName_;
   }
 
   public String getWs() {

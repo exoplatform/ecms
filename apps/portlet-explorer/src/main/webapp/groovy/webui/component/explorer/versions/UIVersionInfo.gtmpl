@@ -92,6 +92,7 @@ import java.util.Locale;
       boolean isBaseVersion = uicomponent.isBaseVersion(node);
 
       String versionNumber = uicomponent.isRootVersion(node) ? uicomponent.getRootVersionNum() : node.getName();
+      String displayNumber = node.getDisplayName();
       String emptySummary = _ctx.appRes("UIVersionInfo.summary.empty");
       String versionId = "version_"+versionNumber;
       String baseVersion = "";
@@ -130,7 +131,7 @@ import java.util.Locale;
       </td>
       <td >
         <label>
-            $versionNumber $baseVersion
+            $displayNumber $baseVersion
         </label>
       </td>
       <td><%=df.format(node.getCreatedTime().getTime())%></td>
