@@ -38,6 +38,7 @@ import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.cms.documents.AutoVersionService;
 import org.exoplatform.services.cms.documents.DocumentService;
+import org.exoplatform.services.cms.documents.VersionHistoryUtils;
 import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
 import org.exoplatform.services.jcr.impl.storage.JCRInvalidItemStateException;
 import org.exoplatform.services.listener.ListenerService;
@@ -145,12 +146,14 @@ public class UIVersionInfo extends UIContainer  {
 
   public String[] getVersionLabels(VersionNode version) throws Exception {
     VersionHistory vH = NodeLocation.getNodeByLocation(node_).getVersionHistory();
+    String[] labels;
     if (StringUtils.isNotBlank(version.getName()) && !getRootVersionNum().equals(version.getName())) {
       Version versionNode = vH.getVersion(version.getName());
-      return vH.getVersionLabels(versionNode);
+      labels = vH.getVersionLabels(versionNode);
     } else {
-      return vH.getVersionLabels(vH.getRootVersion());
+      labels= vH.getVersionLabels(vH.getRootVersion());
     }
+    return labels;
   }
 
   public boolean isBaseVersion(VersionNode versionNode) throws Exception {
@@ -335,14 +338,13 @@ public class UIVersionInfo extends UIContainer  {
         uiChild.setRendered(false);
       }
       String objectId = event.getRequestContext().getRequestParameter(OBJECTID);
-      uiVersionInfo.curentVersion_ = uiVersionInfo.rootVersion_.findVersionNode(objectId);
+      uiVersionInfo.curentVersion_ = uiVersionInfo.getRootVersionNode().findVersionNode(objectId);
       Node node = uiVersionInfo.getCurrentNode();
-      VersionHistory versionHistory = node.getVersionHistory();
       UIApplication app = uiVersionInfo.getAncestorOfType(UIApplication.class);
       try {
         node.getSession().save();
         node.getSession().refresh(false);
-        versionHistory.removeVersion(uiVersionInfo.curentVersion_.getName());
+        VersionHistoryUtils.removeVersion(uiVersionInfo.getCurrentNode(), uiVersionInfo.curentVersion_.getName() );
         uiVersionInfo.rootVersion_ = new VersionNode(node, uiExplorer.getSession());
         uiVersionInfo.curentVersion_ = uiVersionInfo.rootVersion_;
         if (!node.isCheckedOut())

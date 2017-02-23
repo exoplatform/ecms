@@ -26,6 +26,7 @@ import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.portal.webui.workspace.UIPortalApplication;
+import org.exoplatform.services.cms.documents.VersionHistoryUtils;
 import org.exoplatform.services.cms.link.*;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
@@ -265,18 +266,31 @@ public class UIDocumentNodeList extends UIContainer {
   }
 
   /**
-   * gets number of version of the node
+   * gets version number of the node
    * @param file the node
    * @return version number
    */
-  public String getVersionNumber(Node file) throws Exception {
-    if (file.isNodeType(NodetypeConstant.MIX_VERSIONABLE)) {
-      int size = (int)file.getVersionHistory().getAllVersions().getSize()-1;
-      return "V" + size;
-    } else {
-      return "";
+  protected String getVersionNumber(Node file) throws Exception {
+    String currentVersion = null;
+    if (file.isNodeType(NodetypeConstant.MIX_VERSIONABLE)){
+      try {
+        if (file.isNodeType(VersionHistoryUtils.MIX_DISPLAY_VERSION_NAME) &&
+                file.hasProperty(VersionHistoryUtils.MAX_VERSION_PROPERTY)) {
+          //Get max version ID
+          int max = (int) file.getProperty(VersionHistoryUtils.MAX_VERSION_PROPERTY).getLong();
+          currentVersion = String.valueOf(max-1);
+        }else {
+          currentVersion = file.getBaseVersion().getName();
+          if (currentVersion.contains("jcr:rootVersion")) currentVersion = "0";
+        }
+      }catch (Exception e) {
+        currentVersion ="0";
+      }
+      return "V"+currentVersion;
     }
+    return "";
   }
+
 
   public String getAuthorName(Node file) throws Exception {
     String userName = getAncestorOfType(UIDocumentInfo.class).getPropertyValue(file, NodetypeConstant.EXO_LAST_MODIFIER);
