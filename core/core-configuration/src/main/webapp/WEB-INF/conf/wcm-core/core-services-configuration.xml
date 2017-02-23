@@ -543,31 +543,6 @@
       </init-params>
     </component-plugin>
   </external-component-plugins>
-  
-  <!-- Configure Fragment service caches - Cluster mode -->
-  <external-component-plugins>
-   <target-component>org.exoplatform.services.cache.CacheService</target-component>
-    <component-plugin  profiles="cluster">
-      <name>addExoCacheConfig</name>
-      <set-method>addExoCacheConfig</set-method>
-      <type>org.exoplatform.services.cache.ExoCacheConfigPlugin</type>
-      <description>Configures the cache for FragmentCache Service</description>
-      <init-params>
-        <!-- Markup Cache -->
-        <object-param>
-          <name>cache.config.FragmentCacheService</name>
-          <description></description>
-          <object type="org.exoplatform.services.cache.impl.infinispan.generic.GenericExoCacheConfig">
-            <field name="name"><string>FragmentCacheService</string></field>
-            <field name="strategy"><string>LIRS</string></field>
-            <field name="maxEntries"><int>${wcm.cache.fragmentcacheservice.maxnodes:10000}</int></field>
-            <field name="lifespan"><long>${wcm.cache.fragmentcacheservice.expirationtimeout:30000}</long></field>
-            <field name="replicated"><boolean>true</boolean></field>
-          </object>          
-        </object-param>
-      </init-params>
-    </component-plugin>
-  </external-component-plugins>
 
   <external-component-plugins>
     <target-component>org.exoplatform.services.cache.CacheService</target-component>
