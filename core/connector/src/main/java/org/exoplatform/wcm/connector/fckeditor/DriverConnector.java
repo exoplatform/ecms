@@ -16,29 +16,7 @@
  */
 package org.exoplatform.wcm.connector.fckeditor;
 
-import java.net.URLDecoder;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.*;
-
-import javax.annotation.security.RolesAllowed;
-import javax.jcr.Node;
-import javax.jcr.NodeIterator;
-import javax.jcr.RepositoryException;
-import javax.jcr.Session;
-import javax.servlet.http.HttpServletRequest;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.CacheControl;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.transform.dom.DOMSource;
-
+import org.apache.commons.lang.StringUtils;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.ecm.connector.fckeditor.FCKUtils;
 import org.exoplatform.ecm.utils.text.Text;
@@ -72,7 +50,28 @@ import org.exoplatform.wcm.connector.handler.FCKFileHandler;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
-import org.apache.commons.lang.StringUtils;
+
+import javax.annotation.security.RolesAllowed;
+import javax.jcr.Node;
+import javax.jcr.NodeIterator;
+import javax.jcr.RepositoryException;
+import javax.jcr.Session;
+import javax.servlet.http.HttpServletRequest;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.CacheControl;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.transform.dom.DOMSource;
+import java.net.URLDecoder;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * Returns a list of drives/folders/documents in a specified location for a given user. Also, it processes the file uploading action.
@@ -646,8 +645,15 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
       files.setAttribute("isUpload", "true");
       Node sourceNode = null;
       Node checkNode = null;
+      Node targetNode = null;
+      if (node.isNodeType(NodetypeConstant.EXO_SYMLINK)) {
+        LinkManager linkManager = WCMCoreUtils.getService(LinkManager.class);
+        targetNode = linkManager.getTarget(node);
+      } else {
+        targetNode = node;
+      }
       List<Node> childList = new ArrayList<Node>();
-      for (NodeIterator iterator = node.getNodes(); iterator.hasNext();) {
+      for (NodeIterator iterator = targetNode.getNodes(); iterator.hasNext();) {
         childList.add(iterator.nextNode());
       }
       Collections.sort(childList,new NodeTitleComparator());
@@ -659,7 +665,6 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
           continue;
 
         if(child.isNodeType("exo:symlink") && child.hasProperty("exo:uuid")) {
-          LinkManager linkManager = WCMCoreUtils.getService(LinkManager.class);
           sourceNode = linkManager.getTarget(child);
         } else {
           sourceNode = child;
