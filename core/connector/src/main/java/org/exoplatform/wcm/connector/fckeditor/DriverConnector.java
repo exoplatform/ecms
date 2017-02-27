@@ -240,15 +240,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
       DriveData drive = manageDriveService.getDriveByName(Text.escapeIllegalJcrChars(driverName));
       workspaceName = drive.getWorkspace();
       Session session = sessionProvider.getSession(workspaceName, manageableRepository);
-
-      String driverHomePath = drive.getHomePath();
-      String itemPath = driverHomePath
-                        + ((currentFolder != null && !"".equals(currentFolder) && !driverHomePath.endsWith("/")) ? "/" : "")
-                        + currentFolder;
-      ConversationState conversationState = ConversationState.getCurrent();
-      String userId = conversationState.getIdentity().getUserId();
-      itemPath = Utils.getPersonalDrivePath(itemPath, userId);
-      Node node = (Node)session.getItem(Text.escapeIllegalJcrChars(itemPath));
+      Node node = getParentFolderNode(workspaceName, Text.escapeIllegalJcrChars(driverName), Text.escapeIllegalJcrChars(currentFolder));
       return buildXMLResponseForChildren(node,
                                          null,
                                          filterBy,
@@ -647,7 +639,6 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
       Node checkNode = null;
       Node targetNode = null;
       if (node.isNodeType(NodetypeConstant.EXO_SYMLINK)) {
-        LinkManager linkManager = WCMCoreUtils.getService(LinkManager.class);
         targetNode = linkManager.getTarget(node);
       } else {
         targetNode = node;
