@@ -1161,9 +1161,9 @@
 		  Self.uiResizeSideBar = gj(Self.uiWorkingArea).find("div.resizeBar:first")[0];
 		  if (!Self.uiLeftContainer || Self.uiLeftContainer.offsetHeight==0 || Self.uiLeftContainer.offsetWidth==0) return;
 		  if (Self.uiLeftContainer && Self.uiRightContainer && Self.uiWorkingArea) {
-				if (Self.uiLeftContainer.offsetWidth + Self.uiRightContainer.offsetWidth + Self.uiResizeSideBar.offsetWidth  > Self.uiWorkingArea) {
+				if (Self.uiLeftContainer.offsetWidth + Self.uiRightContainer.offsetWidth + Self.uiResizeSideBar.offsetWidth  > Self.uiWorkingArea.offsetWidth) {
 					Self.loadContainerWidth();
-				}else if (Self.uiLeftContainer.offsetWidth + Self.uiRightContainer.offsetWidth + Self.uiResizeSideBar.offsetWidth  < Self.uiWorkingArea -2) {
+				}else if (Self.uiLeftContainer.offsetWidth + Self.uiRightContainer.offsetWidth + Self.uiResizeSideBar.offsetWidth  < Self.uiWorkingArea.offsetWidth -2) {
 					Self.loadContainerWidth();
 				}else if (Self.uiLeftContainer.offsetTop < Self.uiRightContainer.offsetTop) {
 					Self.loadContainerWidth();
