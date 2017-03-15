@@ -33,6 +33,7 @@ import javax.jcr.nodetype.NodeType;
 import javax.jcr.query.Row;
 import javax.portlet.PortletPreferences;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.ws.commons.util.Base64;
 import org.exoplatform.commons.utils.PageList;
 import org.exoplatform.container.xml.PortalContainerInfo;
@@ -48,6 +49,7 @@ import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.services.cms.clipboard.ClipboardService;
 import org.exoplatform.services.cms.documents.AutoVersionService;
 import org.exoplatform.services.cms.drives.DriveData;
+import org.exoplatform.services.cms.drives.impl.ManageDriveServiceImpl;
 import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.link.LinkUtils;
@@ -56,6 +58,8 @@ import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.organization.OrganizationService;
+import org.exoplatform.services.organization.User;
 import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.search.base.SearchDataCreator;
@@ -159,19 +163,48 @@ public class UITreeExplorer extends UIContainer {
     DriveData driveData = getAncestorOfType(UIJCRExplorer.class).getDriveData();
     String id = driveData.getName();
     String path = driveData.getHomePath();
+
+    String driveLabelKey = "Drives.label." + id.replace(".", "").replace(" ", "");
     try {
-      return res.getString("Drives.label." + id.replace(".", "").replace(" ", ""));
-    } catch (MissingResourceException ex) {
-      try {
-        RepositoryService repoService = WCMCoreUtils.getService(RepositoryService.class);
-        Node groupNode = (Node)WCMCoreUtils.getSystemSessionProvider().getSession(
-                                                                                  repoService.getCurrentRepository().getConfiguration().getDefaultWorkspaceName(),
-                                                                                  repoService.getCurrentRepository()).getItem(path);
-        return groupNode.getProperty(NodetypeConstant.EXO_LABEL).getString();
-      } catch(Exception e) {
-        return id.replace(".", " / ");
+      if (ManageDriveServiceImpl.USER_DRIVE_NAME.equals(id)) {
+        // User Documents drive
+        driveLabelKey = "Drives.label.UserDocuments";
+        String userDisplayName = "";
+
+        String userIdPath = driveData.getParameters().get(ManageDriveServiceImpl.DRIVE_PARAMATER_USER_ID);
+        String userId = userIdPath != null ? userIdPath.substring(userIdPath.lastIndexOf("/") + 1) : null;
+        if (StringUtils.isNotEmpty(userId)) {
+          userDisplayName = userId;
+          User user = this.getApplicationComponent(OrganizationService.class).getUserHandler().findUserByName(userId);
+          if (user != null) {
+            userDisplayName = user.getDisplayName();
+          }
+        }
+        try {
+          return res.getString(driveLabelKey).replace("{0}", userDisplayName);
+        } catch (MissingResourceException mre) {
+          LOG.error("Cannot get resource string for " + driveLabelKey);
+        }
+
+      } else {
+        try {
+          return res.getString(driveLabelKey);
+        } catch (MissingResourceException ex) {
+          try {
+            RepositoryService repoService = WCMCoreUtils.getService(RepositoryService.class);
+            Node groupNode = (Node)WCMCoreUtils.getSystemSessionProvider().getSession(
+                    repoService.getCurrentRepository().getConfiguration().getDefaultWorkspaceName(),
+                    repoService.getCurrentRepository()).getItem(path);
+            return groupNode.getProperty(NodetypeConstant.EXO_LABEL).getString();
+          } catch(Exception e) {
+            return id.replace(".", " / ");
+          }
+        }
       }
+    } catch (Exception ex) {
+      LOG.warn("Can not find resource string for " + driveLabelKey, ex);
     }
+    return id.replace(".", " / ");
   }
 
   public boolean isAllowNodeTypesOnTree(Node node) throws RepositoryException {
