@@ -34,6 +34,7 @@ import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.documents.AutoVersionService;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.drives.ManageDriveService;
+import org.exoplatform.services.cms.drives.impl.ManageDriveServiceImpl;
 import org.exoplatform.services.cms.views.ManageViewService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
@@ -95,8 +96,12 @@ public class UIDrivesArea extends UIContainer {
   public String getLabel(String id)  {
     RequestContext context = RequestContext.getCurrentInstance();
     ResourceBundle res = context.getApplicationResourceBundle();
+    String userDisplayName = "";
+    if (ManageDriveServiceImpl.USER_DRIVE_NAME.equals(id)) {
+      userDisplayName = "Users";
+    }
     try {
-      return res.getString("Drives.label." + id.replace(" ", ""));
+      return res.getString("Drives.label." + id.replace(" ", "")).replace("{0}", userDisplayName);
     } catch (MissingResourceException ex) {
       return id;
     }
