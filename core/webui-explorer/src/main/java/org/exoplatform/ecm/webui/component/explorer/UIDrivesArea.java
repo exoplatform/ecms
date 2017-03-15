@@ -34,10 +34,14 @@ import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.documents.AutoVersionService;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.drives.ManageDriveService;
+import org.exoplatform.services.cms.drives.impl.ManageDriveServiceImpl;
 import org.exoplatform.services.cms.views.ManageViewService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
+import org.exoplatform.services.jcr.impl.quota.ExceededQuotaLimitException;
+import org.exoplatform.services.organization.OrganizationService;
+import org.exoplatform.services.organization.User;
 import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
@@ -95,8 +99,23 @@ public class UIDrivesArea extends UIContainer {
   public String getLabel(String id)  {
     RequestContext context = RequestContext.getCurrentInstance();
     ResourceBundle res = context.getApplicationResourceBundle();
+    String userDisplayName = "";
+    if (ManageDriveServiceImpl.USER_DRIVE_NAME.equals(id)) {
+      RequestContext ctx = Util.getPortalRequestContext();
+      if (ctx != null) {
+        String username = ctx.getRemoteUser();
+        try {
+          User user = this.getApplicationComponent(OrganizationService.class).getUserHandler().findUserByName(username);
+          if (user != null) {
+            userDisplayName = user.getDisplayName();
+          }
+        } catch (Exception ex) {
+          userDisplayName = username;
+        }
+      }
+    }
     try {
-      return res.getString("Drives.label." + id.replace(" ", ""));
+      return res.getString("Drives.label." + id.replace(" ", "")).replace("{0}", userDisplayName);
     } catch (MissingResourceException ex) {
       return id;
     }
@@ -221,6 +240,9 @@ public class UIDrivesArea extends UIContainer {
       String homePath = drive.getHomePath();
       if(homePath.contains("${userId}")) {
         homePath = org.exoplatform.services.cms.impl.Utils.getPersonalDrivePath(homePath, userId);
+        if (drive.getParameters().get(ManageDriveServiceImpl.DRIVE_PARAMATER_USER_ID) == null) {
+          drive.getParameters().put(ManageDriveServiceImpl.DRIVE_PARAMATER_USER_ID, homePath);
+        }
       }
       UIJCRExplorerPortlet uiParent = uiDrivesArea.getAncestorOfType(UIJCRExplorerPortlet.class);
       uiParent.setFlagSelect(true);

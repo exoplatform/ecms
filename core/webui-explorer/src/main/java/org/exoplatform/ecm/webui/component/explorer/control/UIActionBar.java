@@ -398,7 +398,7 @@ public class UIActionBar extends UIForm {
         String userDisplayName = "";
         String driveLabelKey = "Drives.label.UserDocuments";
         String userIdPath = drive.getParameters().get(ManageDriveServiceImpl.DRIVE_PARAMATER_USER_ID);
-        String userId = userIdPath.substring(userIdPath.lastIndexOf("/") + 1);
+        String userId = userIdPath != null ? userIdPath.substring(userIdPath.lastIndexOf("/") + 1) : null;
         if(StringUtils.isNotEmpty(userId)) {
           userDisplayName = userId;
           User user = organizationService.getUserHandler().findUserByName(userId);
@@ -418,8 +418,8 @@ public class UIActionBar extends UIForm {
         try {
           driveLabel = res.getString(driveLabelKey);
         } catch (MissingResourceException ex) {
-          LOG.error("Cannot get resource string for " + driveLabelKey + " : " + ex.getMessage(), ex);
-          driveLabel = driveLabelKey;
+          //
+          driveLabel = driveName.replace(".", "/");
         }
       }
     } catch(Exception e) {
