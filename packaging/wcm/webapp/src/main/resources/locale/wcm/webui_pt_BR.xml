@@ -357,7 +357,7 @@
       <ColumnPageConfigs>Colunas</ColumnPageConfigs>
       <RowPageConfigs>Linhas</RowPageConfigs>
       <TabsPageConfigs>Abas</TabsPageConfigs>
-      <MixPageConfigs>Mistas</MixPageConfigs>
+      <MixPageConfigs>Mixed</MixPageConfigs>
     </item>
   </UIDropDownPageTemp>
 
@@ -445,4 +445,10 @@
   <home>Principal</home>
   </label>  
   </Breadcrumb>
+
+  <UIViewMetadataForm>
+    <msg>
+      <Invalid-number>Please enter a valid number.</Invalid-number>
+    </msg>
+  </UIViewMetadataForm>
 </bundle>

@@ -357,7 +357,7 @@
       <ColumnPageConfigs>カラム ページ設定</ColumnPageConfigs>
       <RowPageConfigs>ロウ ページ設定</RowPageConfigs>
       <TabsPageConfigs>タブ ページ設定</TabsPageConfigs>
-      <MixPageConfigs>ミックス ページ設定</MixPageConfigs>
+      <MixPageConfigs>Mixed</MixPageConfigs>
     </item>
   </UIDropDownPageTemp>
 
@@ -445,4 +445,10 @@
   <home>ホーム</home>
   </label>  
   </Breadcrumb>
+
+  <UIViewMetadataForm>
+    <msg>
+      <Invalid-number>Please enter a valid number.</Invalid-number>
+    </msg>
+  </UIViewMetadataForm>
 </bundle>
