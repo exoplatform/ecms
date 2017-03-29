@@ -48,7 +48,7 @@ import java.util.Locale;
         if(identity != null && identity.getProfile() != null) {
           profileFullName = identity.getProfile().getFullName();
         }
-        return profileFullName;
+        return StringEscapeUtils.escapeHtml(profileFullName);
     }
 
   public void writeNodes() {

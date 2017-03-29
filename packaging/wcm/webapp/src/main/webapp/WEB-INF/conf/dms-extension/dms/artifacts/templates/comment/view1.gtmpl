@@ -23,7 +23,7 @@ import org.exoplatform.web.application.Parameter ;
         .addScripts("wcmutil.WCMUtils.onLoadComments();");
     def lastCommentLabel = _ctx.appRes("Comment.view.label.lastComment");
     def userLink = org.exoplatform.wcm.webui.Utils.getProfileLink(lastComment.getProperty("exo:commentor").getString());
-    def userName = lastComment.getProperty("exo:commentorFullName").getString();
+    def userName = StringEscapeUtils.escapeHtml(lastComment.getProperty("exo:commentorFullName").getString());
     def user = "<a href=" + userLink + ">" + userName + "</a>";
     def timeComment = "";
     if (lastComment.hasProperty("exo:commentDate")) {
@@ -77,12 +77,12 @@ import org.exoplatform.web.application.Parameter ;
 					  <div class="commentContainer clearfix">
 						<div class="commentBox">
 							<div class="avatarBox pull-left">
-								<a commentor="$commentor" class="avatarXSmall" data-placement="bottom" rel="tooltip" href="<%=org.exoplatform.wcm.webui.Utils.getProfileLink(commentor)%>" data-original-title="<%=comment.getProperty("exo:commentorFullName").getString()%>">
+								<a commentor="$commentor" class="avatarXSmall" data-placement="bottom" rel="tooltip" href="<%=org.exoplatform.wcm.webui.Utils.getProfileLink(commentor)%>" data-original-title="<%=StringEscapeUtils.escapeHtml(comment.getProperty("exo:commentorFullName").getString())%>">
 								<img src="$avatarURL">
 								</a>
 							</div>
 							<div class="commentInfo">
-								<strong><a href="<%=org.exoplatform.wcm.webui.Utils.getProfileLink(commentor)%>"><%=comment.getProperty("exo:commentorFullName").getString()%></a></strong>
+								<strong><a href="<%=org.exoplatform.wcm.webui.Utils.getProfileLink(commentor)%>"><%=StringEscapeUtils.escapeHtml(comment.getProperty("exo:commentorFullName").getString())%></a></strong>
 								<%
 									if(comment.hasProperty("exo:commentorSite")) {
 										String site = comment.getProperty("exo:commentorSite").getString() ;
