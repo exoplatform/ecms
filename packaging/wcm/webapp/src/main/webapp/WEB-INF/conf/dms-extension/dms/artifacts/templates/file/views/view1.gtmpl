@@ -109,7 +109,7 @@
           if (!(fileComponent == null || canViewPDF == false)) {
           %>
           <a href="javascript:eXo.ecm.ECMUtils.closeASPopup();" class="exit-document-preview"><i class="uiIconClose uiIconLightGray"></i></a>
-          <a class="pull-right dowload-link" href="$downloadLink"><i class="uiIconDownload uiIconLightGray"></i> <%=_ctx.appRes("File.view.label.download")%></a>
+          <a class="pull-right btn dowload-link" href="$downloadLink"><i class="uiIconDownload uiIconLightGray"></i> <%=_ctx.appRes("File.view.label.download")%></a>
         <%}%>
         <div class="vote-document"><% _ctx.include(uicomponent.getViewTemplate("mix:votable", "view1")); %></div>
       </div>
@@ -153,7 +153,8 @@
 <div class="fileContent document-preview-content-file">
     <div class="title clearfix">
       <a href="javascript:eXo.ecm.ECMUtils.closeASPopup();" class="exit-document-preview"><i class="uiIconClose uiIconLightGray"></i></a>
-      <div class="vote-document"><% _ctx.include(uicomponent.getViewTemplate("mix:votable", "view1")); %></div>
+        <div class="pull-right"><a class="btn" href="$downloadLink"><i class="uiIconDownload"></i> <%=_ctx.appRes("File.view.label.download")%></a> </div>
+        <div class="vote-document"><% _ctx.include(uicomponent.getViewTemplate("mix:votable", "view1")); %></div>
     </div>
     <div class="content uiContentBox">
         <%
