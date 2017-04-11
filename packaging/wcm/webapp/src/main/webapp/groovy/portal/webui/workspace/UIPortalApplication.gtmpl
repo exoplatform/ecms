@@ -33,7 +33,8 @@
   def portalName = Util.getPortalRequestContext().getUserPortalConfig().getPortalName();
   WCMSkinVisitor wcmSkinVisitor = new WCMSkinVisitor(Util.getUIPortal().getName(), skin);
   def portalSkins = uicomponent.getPortalSkins(wcmSkinVisitor);
-  def portletSkins = uicomponent.getPortletSkins();  
+  def portletSkins = uicomponent.getPortletSkins();
+  def customSkins = uicomponent.getCustomSkins();
   livePortalManagerService_ = WCMCoreUtils.getService(LivePortalManagerService.class);
   def portalNode = livePortalManagerService_.getLivePortal(WCMCoreUtils.getSystemSessionProvider(), portalName);
   def livePortalScript = WCMCoreUtils.getSiteGlobalActiveJs(portalNode);
@@ -135,6 +136,12 @@
     url.setOrientation(orientation);
     %>
       <link id="${portletSkin.id}" rel="stylesheet" type="text/css" href= "$url" />
+    <%}%>
+    <%for(customSkin in customSkins) {
+    def url = customSkin.createURL(rcontext.controllerContext);
+    url.setOrientation(orientation);
+    %>
+      <link id="${customSkin.id}" rel="stylesheet" type="text/css" href= "$url" />
     <%}%>
     <script type="text/javascript">
     var require = <%=jsConfig%>;
