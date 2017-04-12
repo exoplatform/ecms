@@ -29,6 +29,7 @@ import java.util.logging.Logger;
 
 import javax.jcr.Node;
 
+import org.apache.commons.lang.StringUtils;
 import org.artofsolving.jodconverter.office.OfficeException;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.container.xml.ValueParam;
@@ -165,16 +166,21 @@ public class PDFViewerService {
     String uuid = currentNode.getUUID();
     StringBuilder bd = new StringBuilder();
     StringBuilder bd1 = new StringBuilder();
+    StringBuilder bd2 = new StringBuilder();
     bd.append(repoName).append("/").append(wsName).append("/").append(uuid);
     bd1.append(bd).append("/jcr:lastModified");
+    bd2.append(bd).append("/jcr:baseVersion");
     String path = (String) pdfCache.get(new ObjectKey(bd.toString()));
     String lastModifiedTime = (String) pdfCache.get(new ObjectKey(bd1.toString()));
+    String cachedBaseVersion = (String) pdfCache.get(new ObjectKey(bd2.toString()));
     File content = null;
     String name = currentNode.getName().replaceAll(":", "_");
     Node contentNode = currentNode.getNode("jcr:content");
 
     String lastModified = Utils.getJcrContentLastModified(currentNode);
-    if (path == null || !(content = new File(path)).exists() || !lastModified.equals(lastModifiedTime)) {
+    String baseVersion = Utils.getJcrContentBaseVersion(currentNode);
+    if (path == null || !(content = new File(path)).exists() || !lastModified.equals(lastModifiedTime) ||
+            !StringUtils.equals(baseVersion, cachedBaseVersion)) {
       String mimeType = contentNode.getProperty("jcr:mimeType").getString();
       InputStream input = new BufferedInputStream(contentNode.getProperty("jcr:data").getStream());
       // Create temp file to store converted data of nt:file node
@@ -229,6 +235,7 @@ public class PDFViewerService {
           pdfCache.put(new ObjectKey(bd.toString()), content.getPath());
           pdfCache.put(new ObjectKey(bd1.toString()), lastModified);
         }
+        pdfCache.put(new ObjectKey(bd2.toString()), baseVersion);
       }
     }
     return content;

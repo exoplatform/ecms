@@ -855,6 +855,17 @@ public class Utils {
     }
     return lastModified;
   }
+
+  /**
+   *
+   * get jcr:baseVersion of a node
+   * @param node
+   * @return jcr:baseVersion of a node
+   * @throws Exception
+   */
+  public static String getJcrContentBaseVersion(Node node) throws Exception {
+    return node.hasProperty("jcr:baseVersion")? node.getProperty("jcr:baseVersion").getString() : null;
+  }
   
   
   public static Calendar getDate(Node node) throws Exception {
