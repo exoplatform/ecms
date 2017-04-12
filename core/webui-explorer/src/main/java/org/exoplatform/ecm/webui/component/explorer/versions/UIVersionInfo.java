@@ -16,6 +16,7 @@
  */
 package org.exoplatform.ecm.webui.component.explorer.versions;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -36,18 +37,24 @@ import org.exoplatform.ecm.jcr.model.VersionNode;
 import org.exoplatform.ecm.webui.component.explorer.UIDocumentWorkspace;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.utils.Utils;
+import org.exoplatform.services.cache.CacheService;
+import org.exoplatform.services.cache.ExoCache;
 import org.exoplatform.services.cms.documents.AutoVersionService;
 import org.exoplatform.services.cms.documents.DocumentService;
 import org.exoplatform.services.cms.documents.VersionHistoryUtils;
 import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
+import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.impl.storage.JCRInvalidItemStateException;
 import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.pdfviewer.ObjectKey;
+import org.exoplatform.services.pdfviewer.PDFViewerService;
 import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.security.MembershipEntry;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+import org.exoplatform.wcm.connector.viewer.PDFViewerRESTService;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -270,6 +277,14 @@ public class UIVersionInfo extends UIContainer  {
     public void execute(Event<UIVersionInfo> event) throws Exception {
       UIVersionInfo uiVersionInfo = event.getSource();
       UIJCRExplorer uiExplorer = uiVersionInfo.getAncestorOfType(UIJCRExplorer.class) ;
+      PDFViewerService pdfViewerService = WCMCoreUtils.getService(PDFViewerService.class);
+      CacheService caService = WCMCoreUtils.getService(CacheService.class);
+      ExoCache<Serializable, Object> pdfCache;
+      if(pdfViewerService != null){
+        pdfCache = pdfViewerService.getCache();
+      }else{
+        pdfCache = caService.getCacheInstance(PDFViewerRESTService.class.getName());
+      }
       for(UIComponent uiChild : uiVersionInfo.getChildren()) {
         uiChild.setRendered(false) ;
       }
@@ -289,6 +304,15 @@ public class UIVersionInfo extends UIContainer  {
         if(!currentNode.isCheckedOut()) {
           currentNode.checkout();
         }
+        StringBuilder bd = new StringBuilder();
+        bd.append(((ManageableRepository)currentNode.getSession().getRepository()).getConfiguration().getName()).
+                append("/").append(currentNode.getSession().getWorkspace().getName()).append("/").
+                append(currentNode.getUUID());
+        StringBuilder bd1 = new StringBuilder().append(bd).append("/jcr:lastModified");
+        StringBuilder bd2 = new StringBuilder().append(bd).append("/jcr:baseVersion");
+        pdfCache.remove(new ObjectKey(bd.toString()));
+        pdfCache.remove(new ObjectKey(bd1.toString()));
+        pdfCache.remove(new ObjectKey(bd2.toString()));
 
         int lastVersionIndice = Integer.parseInt(addedVersion.getName());
 
