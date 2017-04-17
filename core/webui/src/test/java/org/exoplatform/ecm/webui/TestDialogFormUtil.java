@@ -44,8 +44,8 @@ public class TestDialogFormUtil {
 
     // Then
     assertNotNull(map);
-    assertEquals(jcrExoName.getValue(), "name");
-    assertEquals(jcrExoTitle.getValue(), "title");
+    assertEquals(map.get("/node/exo:name").getValue(), "name");
+    assertEquals(map.get("/node/exo:title").getValue(), "title");
   }
 
   @Test

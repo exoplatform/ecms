@@ -194,14 +194,27 @@ public class DialogFormUtil {
                 inputValue = "";
               else if (option == null || option.indexOf(SANITIZATION_FLAG) < 0)
                 inputValue = HTMLSanitizer.sanitize(inputValue);
-              if (input.getName().equals("name") && input.getAncestorOfType(UIDialogForm.class).isAddNew() && properties.get("title") == null) {
-                JcrInputProperty jcrExoTitle = new JcrInputProperty();
-                jcrExoTitle.setJcrPath("/node/exo:title");
-                jcrExoTitle.setValue(inputValue);
-                properties.put("/node/exo:title", jcrExoTitle);
+              if (input.getName().equals("name") && input.getAncestorOfType(UIDialogForm.class).isAddNew()) {
+                JcrInputProperty titleInputProperty = (JcrInputProperty) properties.get("title");
+                if(titleInputProperty == null) {
+                  JcrInputProperty jcrExoTitle = new JcrInputProperty();
+                  jcrExoTitle.setJcrPath("/node/exo:title");
+                  jcrExoTitle.setValue(inputValue);
+                  properties.put("/node/exo:title", jcrExoTitle);
+                } else if(titleInputProperty.getValue() == null){
+                    JcrInputProperty jcrExoTitle = new JcrInputProperty();
+                    jcrExoTitle.setJcrPath(titleInputProperty.getJcrPath());
+                    jcrExoTitle.setValue(inputValue);
+                    properties.put("title", jcrExoTitle);
+                }
+                property.setValue(Text.escapeIllegalJcrChars(org.exoplatform.services.cms.impl.Utils.cleanString(inputValue)));
+              } else {
+                property.setValue(inputValue);
               }
-              property.setValue(inputValue);
             } else {
+              // The is already setted in the previous block, thus it needs to be skipped here.
+              if (input.getName() == "title")
+                continue;
               property.setValue(input.getValue());
             }
           }
