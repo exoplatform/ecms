@@ -27,7 +27,7 @@
 			<label class="control-label" for="name"><%=_ctx.appRes("CSSFile.dialog.label.name")%>:</label>
 			<div class="controls">
 				<%
-					String[] fieldName = ["jcrPath=/node", "nodetype=nt:file", "mixintype=exo:cssFile,mix:i18n","editable=if-null", "validate=name, empty"] ;
+					String[] fieldName = ["jcrPath=/node", "nodetype=nt:file", "mixintype=exo:cssFile,mix:i18n", "options=noSanitization","editable=if-null", "validate=name, empty"] ;
 					uicomponent.addTextField("name", fieldName) ; 
 				%>
 			</div>
