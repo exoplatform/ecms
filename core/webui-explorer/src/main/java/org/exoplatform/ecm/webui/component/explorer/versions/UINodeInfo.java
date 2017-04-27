@@ -16,6 +16,8 @@
  */
 package org.exoplatform.ecm.webui.component.explorer.versions;
 
+import java.util.Calendar;
+
 import org.exoplatform.ecm.webui.component.explorer.UIDocumentWorkspace;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -42,9 +44,12 @@ public class UINodeInfo extends UIForm {
   }
 
   public void update() throws Exception {
-    UIVersionInfo uiVersionInfo = getAncestorOfType(UIDocumentWorkspace.class).getChild(UIVersionInfo.class) ;
+    UIVersionInfo uiVersionInfo = getAncestorOfType(UIDocumentWorkspace.class).getChild(UIVersionInfo.class);
     node_ = NodeLocation.getNodeLocationByNode(uiVersionInfo.getCurrentNode());
-    versionCreatedDate_ = uiVersionInfo.getCurrentVersionNode().getCreatedTime().getTime().toString();
+    Calendar createdTime = uiVersionInfo.getCurrentVersionNode().getCreatedTime();
+    if (createdTime != null) {
+      versionCreatedDate_ = createdTime.getTime().toString();
+    }
   }
 
   public String getNodeType() throws Exception {

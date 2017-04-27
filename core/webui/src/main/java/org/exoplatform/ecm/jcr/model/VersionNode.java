@@ -59,7 +59,10 @@ public class VersionNode {
   public VersionNode(Node node, Session session) {
     Version version = node instanceof Version ? (Version) node : null;
     try {
-      createdTime_ = getProperty(node, EXO_LAST_MODIFIED_DATE).getDate();
+      Property property = getProperty(node, EXO_LAST_MODIFIED_DATE);
+      if (property != null) {
+        createdTime_ = property.getDate();
+      }
       name_ = version == null ? "" : version.getName();
       path_ = node.getPath();
       ws_ = node.getSession().getWorkspace().getName();
