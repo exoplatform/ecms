@@ -206,11 +206,11 @@ public class TestPortletFutureCache extends BasicTestCase {
     MarkupFragment nfragment;
     int cacheSize;
 
-    portletFutureCache = new PortletFutureCache(LOG, 1);
+    portletFutureCache = new PortletFutureCache(LOG, 2);
     portletFutureCache.start();
 
-    // 750ms, 1250ms, 2500ms retentions for objects
-    injectContents(750, 1250, 2500);
+    // 1000ms, 3500ms, 5100ms retentions for objects
+    injectContents(1000, 3500, 5100);
 
     // CacheSize should be 3
     assertEquals(3, portletFutureCache.getCacheSize());
@@ -230,7 +230,7 @@ public class TestPortletFutureCache extends BasicTestCase {
     // CacheSize should be 3
     assertEquals(3, portletFutureCache.getCacheSize());
 
-    Thread.sleep(1050); // Sleep 1050ms -> time for first cleanup pass
+    Thread.sleep(3000); // Sleep 3000 -> time for first cleanup passes
 
     // CacheSize should be 2 (2100 + 1100)
     cacheSize = portletFutureCache.getCacheSize();
@@ -254,7 +254,7 @@ public class TestPortletFutureCache extends BasicTestCase {
     System.out.println("After first eviction pass and gets, cacheSize=" + cacheSize);
     assertEquals(2, cacheSize);
 
-    Thread.sleep(1050); // Sleep 1050ms -> time for second  cleanup pass
+    Thread.sleep(2000); // Sleep 2000 -> time for second cleanup passes
 
     // CacheSize should be 1 (2100)
     cacheSize = portletFutureCache.getCacheSize();
@@ -278,7 +278,7 @@ public class TestPortletFutureCache extends BasicTestCase {
     System.out.println("After second eviction pass and gets, cacheSize=" + cacheSize);
     assertEquals(1, cacheSize);
 
-    Thread.sleep(1050); // Sleep 1050ms -> time for third  cleanup pass
+    Thread.sleep(2000); // Sleep 2000 -> time for third  cleanup pass
 
     // CacheSize should be 0, no more entries in cache
     cacheSize = portletFutureCache.getCacheSize();
