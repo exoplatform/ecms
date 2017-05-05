@@ -17,6 +17,7 @@
 package org.exoplatform.wcm.webui.seo;
 
 
+import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.portal.application.PortalRequestContext;
 import org.exoplatform.portal.mop.SiteKey;
@@ -153,7 +154,7 @@ public class UISEOToolbarForm extends UIForm {
           }
           contentValue = ContentReader.getXSSCompatibilityContent(contentValue);
           if(paramsArray !=null) {
-            paramsArray.add(contentValue);
+            paramsArray.add(Text.escapeIllegalJcrChars(contentValue));
           }
         }
       }
