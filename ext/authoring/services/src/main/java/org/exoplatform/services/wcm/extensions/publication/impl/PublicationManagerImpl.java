@@ -1,8 +1,8 @@
 package org.exoplatform.services.wcm.extensions.publication.impl;
 
+import java.time.OffsetDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,9 +22,6 @@ import org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.Lifecy
 import org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig.State;
 import org.exoplatform.services.wcm.publication.WCMComposer;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
-import org.joda.time.DateTime;
-import org.joda.time.format.DateTimeFormatter;
-import org.joda.time.format.ISODateTimeFormat;
 import org.picocontainer.Startable;
 
 /**
@@ -187,10 +184,10 @@ public class PublicationManagerImpl implements PublicationManager, Startable {
     }
 
     if (date!=null) {
-      Calendar cal = new GregorianCalendar();
-      cal.add(Calendar.DAY_OF_YEAR, Integer.parseInt(date));
-      query.append(" and publication:startPublishedDate<=TIMESTAMP '"+getISO8601Date(cal)+"'");
-      query.append(" order by publication:startPublishedDate asc");
+      OffsetDateTime startPublishedDateTime = OffsetDateTime.now().plusDays(Integer.parseInt(date));
+      query.append(" and publication:startPublishedDate<=TIMESTAMP '");
+      query.append(DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(startPublishedDateTime));
+      query.append("' order by publication:startPublishedDate asc");
     } else {
       query.append(" order by exo:dateModified desc");
     }
@@ -199,13 +196,5 @@ public class PublicationManagerImpl implements PublicationManager, Startable {
     List<Node> nodes = wcmComposer.getContents(workspace, "/", filters, WCMCoreUtils.getUserSessionProvider());
 
     return nodes;
-  }
-
-  private String getISO8601Date(Calendar cal) {
-    DateTime dt = new DateTime(cal.getTimeInMillis());
-    DateTimeFormatter fmt = ISODateTimeFormat.dateTime();
-    String str = fmt.print(dt);
-    return str;
-
   }
 }
