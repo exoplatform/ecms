@@ -249,7 +249,6 @@ public class WCMComposerImpl implements WCMComposer, Startable {
     String orderType = filters.get(FILTER_ORDER_TYPE);
     String visibility = filters.get(FILTER_VISIBILITY);
     long offset = (filters.get(FILTER_OFFSET)!=null)?new Long(filters.get(FILTER_OFFSET)):0;
-    long totalSize = (filters.get(FILTER_TOTAL)!=null)?new Long(filters.get(FILTER_TOTAL)):0;
 
     String remoteUser = getRemoteUser();
 
@@ -264,22 +263,15 @@ public class WCMComposerImpl implements WCMComposer, Startable {
 
     if (LOG.isDebugEnabled()) LOG.debug("##### "+path+":"+version+":"+remoteUser+":"+orderBy+":"+orderType);
 
-    NodeIterator nodeIterator ;
-    if (totalSize==0) {
-      SessionProvider systemProvider = WCMCoreUtils.getSystemSessionProvider();
-      nodeIterator = getViewableContents(workspace, path, filters, systemProvider, false);
-      if (nodeIterator != null) {
-        totalSize = nodeIterator.getSize();
-      }
-    }
+
 
     if (WCMComposer.VISIBILITY_PUBLIC.equals(visibility) && MODE_LIVE.equals(mode)) {
       sessionProvider = remoteUser == null?
                         aclSessionProviderService.getAnonymSessionProvider() :
                         aclSessionProviderService.getACLSessionProvider(getAnyUserACL());
     }
-
-    nodeIterator = getViewableContents(workspace, path, filters, sessionProvider, true);
+    long totalSize = getViewabaleContentsSize(path, workspace, filters, sessionProvider);
+    NodeIterator nodeIterator = getViewableContents(workspace, path, filters, sessionProvider, true);
     List<Node> nodes = new ArrayList<Node>();
     Node node = null, viewNode = null;
     if (nodeIterator != null) {
@@ -291,9 +283,57 @@ public class WCMComposerImpl implements WCMComposer, Startable {
         }
       }
     }
+
     Result result = new Result(nodes, offset, totalSize, nodeLocation, filters);
 
     return result;
+  }
+
+  /**
+   * get total contents' size
+   * @param path
+   * @param workspace
+   * @param filters
+   * @param sessionProvider
+   * @return
+   * @throws Exception
+   */
+  private long getViewabaleContentsSize(String path, String workspace,HashMap<String, String> filters,
+                                      SessionProvider sessionProvider) throws Exception {
+
+    ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
+    Session session = sessionProvider.getSession(workspace, manageableRepository);
+    Node currentFolder = null;
+    long totalSize = (filters.get(FILTER_TOTAL)!=null)?new Long(filters.get(FILTER_TOTAL)):0;
+
+    if (session.getRootNode().hasNode(path.substring(1))) {
+      currentFolder = session.getRootNode().getNode(path.substring(1));
+    }
+    //Needed to get all taxonomy nodes in order to obtain the correct totalSize after being
+    // filtered (No way to filter taxonomy in jcr side by publication properties).
+    if (currentFolder != null && currentFolder.isNodeType("exo:taxonomy")) {
+      NodeIterator taxonomyNodeIterator = getViewableContents(workspace, path, filters, sessionProvider, false);
+      List<Node> taxonomyNodes = new ArrayList<Node>();
+      Node taxonomyNode = null, taxonomyViewNode = null;
+      if (taxonomyNodeIterator != null) {
+        while (taxonomyNodeIterator.hasNext()) {
+          taxonomyNode = taxonomyNodeIterator.nextNode();
+          taxonomyViewNode = getViewableContent(taxonomyNode, filters);
+          if (taxonomyViewNode != null) {
+            taxonomyNodes.add(taxonomyViewNode);
+          }
+        }
+      }
+      totalSize = taxonomyNodes.size();
+    } else if (totalSize == 0) {
+      NodeIterator nodeIterator;
+      SessionProvider systemProvider = WCMCoreUtils.getSystemSessionProvider();
+      nodeIterator = getViewableContents(workspace, path, filters, systemProvider, false);
+      if (nodeIterator != null) {
+        totalSize = nodeIterator.getSize();
+      }
+    }
+    return totalSize;
   }
 
   /*

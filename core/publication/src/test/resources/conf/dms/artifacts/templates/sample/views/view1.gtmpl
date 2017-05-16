@@ -1,0 +1,253 @@
+<%
+	import java.text.SimpleDateFormat ;
+	import org.exoplatform.web.application.Parameter ;
+  import org.exoplatform.ecm.webui.utils.PermissionUtil;
+  
+	def node = uicomponent.getNode() ;
+	def originalNode = uicomponent.getOriginalNode()
+	SimpleDateFormat dateFormat = new SimpleDateFormat() ;
+%>
+	<style>
+		.WorkSample {
+			padding: 8px;
+		}
+		
+		label.text { 
+			font: normal bold 11px Verdana;
+			color: black; 
+			line-height: 18px;
+		}
+		
+		span.text  { 
+			font-size: 11px; 
+			vertical-align:bottom; 
+			color: #00000; 
+		}
+		
+		div.summary { 
+			width: 96%; 
+			height: 160px ; 
+			font-size: 11px; 
+			padding: 5px 5px 5px 10px;  /* orientation=lt */
+			padding: 5px 10px 5px 5px;  /* orientation=rt */
+			color: black ; 
+			font-weight: normal;
+			overflow: auto;
+		} 
+		
+		div.content { 
+			width: 96%; 
+			height: 160px ; 
+			font-size: 11px; 
+			padding: 5px 5px 5px 10px;  /* orientation=lt */
+			padding: 5px 10px 5px 5px;  /* orientation=rt */
+			color: black ; 
+			font-weight: normal;
+			overflow: auto;
+		}
+		
+		.HeaderSampleBG {
+			background: url('/eXoDMSResources/skin/images/event/EventFrameBG.gif') repeat-x;  /* orientation=lt */
+						
+		  margin-bottom: 2px;
+		  padding: 0px 5px 0px 5px; 
+		  height: 18px;
+		  border: solid 1px #bdbdbd;
+		  border-bottom: none;
+		  line-height: 18px;
+	  }
+	  
+	  .SampleBG {
+		  height: 25px;
+		  line-height: 25px;
+		  border-bottom: solid 1px #BDBDBD;
+	  }
+		.RemoveAttachments {
+		  background: url('/eXoDMSResources/skin/images/article/DustBin.gif') no-repeat left top;  /* orientation=lt */
+		  background: url('/eXoDMSResources/skin/images/article/DustBin.gif') no-repeat right top;  /* orientation=rt */
+		  margin: 0px 5px 0px 3px; /* orientation=lt */
+		  margin: 0px 3px 0px 2px; /* orientation=rt */
+		  padding-left: 18px; /* orientation=lt */
+		  padding-right: 18px; /* orientation=rt */
+		  height: 16px;
+		  cursor: pointer;
+		}
+		.WorkSample .RemoveNodeFloat{
+		float: left; /* orientation=lt */
+		float: right; /* orientation=rt */
+		}
+		.WorkSample .LableLeftDescription{
+		width: 47.5%; 
+		float: left; /* orientation=lt */
+		float: right; /* orientation=rt */
+		margin-top: 5px; 
+		border: 1px solid #bdbdbd
+		}
+		.WorkSample .LableRightDescription{
+		width: 47.5%; 
+		float: right; /* orientation=lt */
+		float: left; /* orientation=rt */
+		margin-top: 5px; 
+		border: 1px solid #bdbdbd
+		}
+		.WorkSample .LableLeftDescription p a {
+		  color: #058EE6;
+      text-decoration: underline;
+		}
+		.WorkSample .LableRightDescription p a {
+		  color: #058EE6;
+      text-decoration: underline;
+		}
+	</style>
+<div class="UIResizableBlock" id="$uicomponent.id">
+	<div class="WorkSample">
+		<div class="SampleBG">
+				<label class="text"><%=_ctx.appRes("Sample.view.label.node-name")%>: </label>
+				<span class="text"><%=originalNode.getName()%></span>
+		</div>
+		<div class="SampleBG">
+			<label class="text"><%=_ctx.appRes("Sample.view.label.title")%>: </label>
+			<span class="text">
+				<%if(node.hasProperty("exo:title")) {%>
+					<%=node.getProperty("exo:title").getString()%>
+				<%}%>
+			</span>
+		</div>
+		<div class="SampleBG">
+			<label class="text"><%=_ctx.appRes("Sample.view.label.date")%>: </label>
+			<span class="text">
+				<%if(node.hasProperty("exo:date")) {
+				  dateFormat.applyPattern("MMMMM dd yyyy") ;						
+				%>
+					<%=dateFormat.format(node.getProperty("exo:date").getDate().getTime())%>
+				<%}%>
+			</span>
+		</div>
+		<div class="SampleBG">
+			<label class="text"><%=_ctx.appRes("Sample.view.label.date-time")%>: </label>
+			<span class="text">
+				<%if(node.hasProperty("exo:datetime")) {
+					 dateFormat.applyPattern("MMMMM dd yyyy hh:mm:ss") ;		
+				%>
+					<%=dateFormat.format(node.getProperty("exo:datetime").getDate().getTime())%>
+				<%}%>	
+			</span>
+		</div>
+		<div style="overflow: hidden">
+			<div class="LableLeftDescription" >
+				<div class="TitleBG">
+					<label class="text" style="padding-left: 5px"><%=_ctx.appRes("Sample.view.label.description")%>:</label>
+				</div>
+				<div class="summary" >
+					<%if(node.hasProperty("exo:description")) {%>
+						<%=node.getProperty("exo:description").getString()%>
+					<%}%>
+				</div>
+			</div>
+			<% if(node.hasNode("exo:image")) {
+				 imgSrc = uicomponent.getImage(node) ;
+			%>
+					<div class="LableRightDescription">
+						<div class="TitleBG" >
+							<label class="text" style="padding-left: 5px"><%=_ctx.appRes("Sample.view.label.image")%>: </label>
+						</div>
+						<div style= "width: 95%; height: 160px ; text-align: center; padding: 5px;">
+			      	<image src="$imgSrc" width="250" height="150" alt=""/> 
+						</div>
+					</div>
+			<% } %>
+		</div>
+		<!-- div for  Summary and Image -->
+		<div style="overflow: hidden;">
+			<div class="LableLeftDescription">
+				<div class="TitleBG">
+					<label class="text" style="padding-left: 5px"><%=_ctx.appRes("Sample.view.label.summary")%>:</label>
+				</div>
+				<div class="summary" >
+					<%if(node.hasProperty("exo:summary")) {%>
+						<%=node.getProperty("exo:summary").getString()%>
+					<%}%>
+				</div>
+			</div>
+			<div class="LableRightDescription">
+				<div class="TitleBG" >
+					<label class="text" style="padding: 5px;"><%=_ctx.appRes("Sample.view.label.content")%>:</label>
+				</div>
+				<div class="content">
+					<%if(node.hasProperty("exo:content")) {%>
+						<%=node.getProperty("exo:content").getString()%>
+					<%}%>
+				</div>
+			</div>
+		</div>
+		<!-- div for Content -->
+		<!-- div for  relation and attackments -->
+		<div style="overflow: hidden;" class=" clearfix">
+			<div class="LableLeftDescription">
+				<div class="TitleBG" >
+					<label class="text" style="padding-left: 5px;"><%=_ctx.appRes("Sample.view.label.relation")%>: </label>
+				</div>
+				<%
+				  def relations = uicomponent.getRelations() ;
+				  if(relations.size() > 0) {
+				%>
+					<div style="width: 100%;" >
+						<%
+						  for(rel in relations) {
+							  if (rel != null) {
+							  String actionLink2 = uicomponent.event("ChangeNode", rel.getPath(), new Parameter("workspaceName", rel.getSession().getWorkspace().getName())) ;
+							%>
+								<div style="font-size: 12px; padding: 10px;">
+									-	<a href="$actionLink2" rel="tooltip" data-placement="bottom" title="<%=rel.getName()%>">
+											<%=rel.getName()%>
+										</a>
+								</div>
+								
+						<%  }
+						  }%>	  	
+					</div>		  
+				<%} else {%>
+					<div style="width: 100%; height: 20px;"> </div>
+			  <%}%>
+			</div>
+			<div class="LableRightDescription clearfix">
+				<div class="TitleBG" >
+					<label class="text" style="padding-left: 5px;"><%=_ctx.appRes("Sample.view.label.attachment")%>: </label>
+				</div>
+				<%
+				  def attachments = uicomponent.getAttachments() ;
+				  if(attachments.size() > 0) {
+				%>			
+					<div style="width: 100%" >
+						<%
+						  for(att in attachments) {
+						  String actionLink3 = uicomponent.event("ChangeNode", att.getPath(), new Parameter("workspaceName", att.getSession().getWorkspace().getName())) ;
+						  String removeLink = uicomponent.event("RemoveAttach", att.getPath(), new Parameter("workspaceName", att.getSession().getWorkspace().getName())) ;
+						%>
+							<div style="font-size: 12px; padding: 10px;">
+								<div class="RemoveNodeFloat">
+								 -<a href="$actionLink3" rel="tooltip" data-placement="bottom" title="<%=att.getName()%>">
+								 		<%=att.getName()%>
+								 	</a>
+								</div>
+								<div class="RemoveNodeFloat"> 	
+							 	 <% if (PermissionUtil.canRemoveNode(att)) {%>
+	                    <a rel="tooltip" data-placement="bottom" href="$removeLink" title="<%=_ctx.appRes(uicomponent.getId() + ".tooltip.remove-attachment")%>">
+	                      <div class="RemoveAttachments"><span></span></div>
+	                    </a>
+                <% } %>
+                </div>
+               
+							</div>
+						<%}%>	  	
+					</div>		  
+				<%} else { %>
+					<div style="width: 100%; height: 20px;"> </div>
+				<%}%>
+			</div>	
+			
+		</div>		
+	</div>
+	<div><% _ctx.include(uicomponent.getViewTemplate("mix:votable", "view1")); %></div>
+  <div><% _ctx.include(uicomponent.getViewTemplate("exo:comments", "view1")); %></div>
+</div>

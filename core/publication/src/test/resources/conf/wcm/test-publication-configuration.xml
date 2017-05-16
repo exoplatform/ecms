@@ -286,7 +286,7 @@
       <properties-param>
         <name>share.portal.config</name>
         <description>share portal name for each repository</description>
-        <property name="portalName" value="shared" />
+        <property name="portalName" value="categories" />
       </properties-param>
       <object-param>
         <name>live.portals.location.config</name>
@@ -412,7 +412,115 @@
       </component-plugin>
     </component-plugins>
   </component>
-  
+  <component>
+    <type>org.exoplatform.services.deployment.WCMContentInitializerService</type>
+  </component>
+
+  <component>
+    <key>org.exoplatform.services.wcm.portal.LivePortalManagerService</key>
+    <type>org.exoplatform.services.wcm.portal.impl.LivePortalManagerServiceImpl</type>
+  </component>
+
+  <component>
+    <key>org.exoplatform.services.wcm.portal.artifacts.CreatePortalArtifactsService</key>
+    <type>org.exoplatform.services.wcm.portal.artifacts.CreatePortalArtifactsServiceImpl</type>
+    <init-params>
+      <values-param>
+        <name>ignored.portals</name>
+        <description>initial portals. the service will not deploy data to the initial portal</description>
+        <value>classic</value>
+      </values-param>
+    </init-params>
+  </component>
+
+
+  <component>
+    <key>org.exoplatform.services.wcm.core.WebSchemaConfigService</key>
+    <type>org.exoplatform.services.wcm.core.impl.WebSchemaConfigServiceImpl</type>
+    <component-plugins>
+      <component-plugin>
+        <name>CSSFileHandler</name>
+        <set-method>addWebSchemaHandler</set-method>
+        <type>org.exoplatform.services.wcm.skin.CSSFileHandler</type>
+      </component-plugin>
+      <component-plugin>
+        <name>JSFileHandler</name>
+        <set-method>addWebSchemaHandler</set-method>
+        <type>org.exoplatform.services.wcm.javascript.JSFileHandler</type>
+      </component-plugin>
+      <component-plugin>
+        <name>WebContentSchemaHandler</name>
+        <set-method>addWebSchemaHandler</set-method>
+        <type>org.exoplatform.services.wcm.webcontent.WebContentSchemaHandler</type>
+      </component-plugin>
+      <component-plugin>
+        <name>HTMLFileSchemaHandler</name>
+        <set-method>addWebSchemaHandler</set-method>
+        <type>org.exoplatform.services.wcm.webcontent.HTMLFileSchemaHandler</type>
+      </component-plugin>
+      <component-plugin>
+        <name>PortalFolderSchemaHandler</name>
+        <set-method>addWebSchemaHandler</set-method>
+        <type>org.exoplatform.services.wcm.portal.PortalFolderSchemaHandler</type>
+      </component-plugin>
+    </component-plugins>
+  </component>
+
+  <component>
+    <key>org.exoplatform.services.wcm.skin.XSkinService</key>
+    <type>org.exoplatform.services.wcm.skin.XSkinService</type>
+  </component>
+
+  <component>
+    <key>org.exoplatform.web.application.javascript.JavascriptConfigService</key>
+    <type>org.exoplatform.web.application.javascript.JavascriptConfigService</type>
+  </component>
+
+  <component>
+    <key>org.exoplatform.services.wcm.javascript.XJavascriptService</key>
+    <type>org.exoplatform.services.wcm.javascript.XJavascriptService</type>
+  </component>
+
+  <component>
+    <key>org.exoplatform.services.cms.templates.TemplateService</key>
+    <type>org.exoplatform.services.cms.templates.impl.TemplateServiceImpl</type>
+  </component>
+
+  <component>
+    <type>org.exoplatform.groovyscript.text.TemplateService</type>
+  </component>
+
+  <component>
+    <type>org.exoplatform.groovyscript.text.TemplateStatisticService</type>
+    <init-params>
+      <value-param>
+        <name>name</name>
+        <value>false</value>
+      </value-param>
+    </init-params>
+  </component>
+
+  <external-component-plugins>
+    <target-component>org.exoplatform.services.listener.ListenerService</target-component>
+    <component-plugin>
+      <name>org.exoplatform.portal.config.DataStorage.portalConfigCreated</name>
+      <set-method>addListener</set-method>
+      <type>org.exoplatform.services.wcm.portal.listener.CreateLivePortalEventListener</type>
+      <description>this listener create new live portal content storage</description>
+    </component-plugin>
+    <component-plugin>
+      <name>org.exoplatform.portal.config.DataStorage.portalConfigRemoved</name>
+      <set-method>addListener</set-method>
+      <type>org.exoplatform.services.wcm.portal.listener.RemoveLivePortalEventListener</type>
+      <description>this listener new live portal content storage</description>
+    </component-plugin>
+    <component-plugin>
+      <name>org.exoplatform.portal.config.DataStorage.portalConfigUpdated</name>
+      <set-method>addListener</set-method>
+      <type>org.exoplatform.services.wcm.portal.listener.UpdateLivePortalEventListener</type>
+      <description>this listener new live portal content storage</description>
+    </component-plugin>
+  </external-component-plugins>
   
   <external-component-plugins>
  		<target-component>org.exoplatform.services.jcr.RepositoryService</target-component>
@@ -528,5 +636,41 @@
       </init-params>
     </component-plugin>
   </external-component-plugins>
-  
+
+  <external-component-plugins>
+    <target-component>org.exoplatform.services.deployment.WCMContentInitializerService</target-component>
+    <component-plugin>
+      <name>Content Initializer Service</name>
+      <set-method>addPlugin</set-method>
+      <type>org.exoplatform.services.deployment.plugins.XMLDeploymentPlugin</type>
+      <description>XML Deployment Plugin</description>
+      <init-params>
+        <value-param>
+          <name>override</name>
+          <description>indicates if this plugin will override data over legacy data, default value:false</description>
+          <value>false</value>
+        </value-param>
+        <object-param>
+          <name>acme web content test data</name>
+          <description>Deployment Descriptor</description>
+          <object type="org.exoplatform.services.deployment.DeploymentDescriptor">
+            <field name="target">
+              <object type="org.exoplatform.services.deployment.DeploymentDescriptor$Target">
+                <field name="workspace">
+                  <string>collaboration</string>
+                </field>
+                <field name="nodePath">
+                  <string>/sites content/live</string>
+                </field>
+              </object>
+            </field>
+            <field name="sourcePath">
+              <string>jar:/conf/wcm/content/webcontent.xml</string>
+            </field>
+          </object>
+        </object-param>
+      </init-params>
+    </component-plugin>
+  </external-component-plugins>
+  <import>classpath:/conf/wcm/test-templates-configuration.xml</import>
 </configuration>
