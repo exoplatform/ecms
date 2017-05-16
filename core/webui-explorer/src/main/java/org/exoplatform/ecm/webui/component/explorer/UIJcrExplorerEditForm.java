@@ -124,14 +124,10 @@ public class UIJcrExplorerEditForm extends UIForm implements UISelectable {
     uiFormCheckBoxFilter.setChecked(Boolean.parseBoolean(getPreference().getValue(UIJCRExplorerPortlet.SHOW_FILTER_BAR, "true")));
     addUIFormInput(uiFormCheckBoxFilter);
 
-    if (usecase.equals(UIJCRExplorerPortlet.JAILED)) {
-      setFlagSelectRender(true);
-    } else if(usecase.equals(UIJCRExplorerPortlet.PERSONAL)) {
+    if(usecase.equals(UIJCRExplorerPortlet.PERSONAL)) {
       driveNameInput.setRendered(false);
-      setFlagSelectRender(true);    
     } else if (usecase.equals(UIJCRExplorerPortlet.PARAMETERIZE)) {
       uiParamPathInput.setRendered(true);
-      setFlagSelectRender(true);
     }
     setActions(new  String[] {"Save", "Cancel"});
   }
