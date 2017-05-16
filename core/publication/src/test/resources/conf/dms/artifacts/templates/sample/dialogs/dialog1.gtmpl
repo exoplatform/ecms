@@ -1,0 +1,143 @@
+<%
+  String[] hiddenField1 = ["jcrPath=/node/exo:image", "nodetype=nt:resource", "visible=false"] ; 
+  String[] hiddenField2 = ["jcrPath=/node/exo:image/jcr:encoding", "visible=false", "UTF-8"] ;
+  String[] hiddenField3 = ["jcrPath=/node/exo:image/jcr:lastModified", "visible=false"] ;
+  uicomponent.addHiddenField("hiddenInput1", hiddenField1) ;
+  uicomponent.addHiddenField("hiddenInput2", hiddenField2) ;
+  uicomponent.addHiddenField("hiddenInput3", hiddenField3) ;
+%>
+<div class="UIForm LayoutContent">
+	<% uiform.begin() %>
+  <div class="HorizontalLayout">
+  	<table class="UIFormGrid">	  
+	    <tr>		          					
+	      <td class="FieldLabel"><%=_ctx.appRes("Sample.dialog.label.name")%></td>
+	      <td class="FieldComponent">
+		      <%
+		        String[] fieldName = ["jcrPath=/node", "mixintype=mix:votable,mix:commentable,mix:i18n", "editable=if-null", "validate=empty,name"] ;
+		        uicomponent.addTextField("name", fieldName) ;  
+		      %>
+		    </td>
+	    </tr>
+	    <%if(!uicomponent.getId().equals("UILanguageDialogForm")){%>
+		    <tr>
+		      <td class="FieldLabel"><%=_ctx.appRes("Sample.dialog.label.categories")%></td>
+		      <td class="FieldComponent">
+			      <% 
+			        String[] fieldCategories = ["jcrPath=/node/exo:category", "multiValues=true", "reference=true"];
+			        uicomponent.addTextField("categories", fieldCategories);
+			      %>
+			    </td>
+			  </tr>
+		  <%}%>
+	    <tr>		          					
+	      <td class="FieldLabel"><%=_ctx.appRes("Sample.dialog.label.title")%></td>
+	      <td class="FieldComponent">
+		      <%
+		        String[] fieldTitle = ["jcrPath=/node/exo:title", "validate=empty"] ;
+		        uicomponent.addTextField("title", fieldTitle) ;
+		      %>
+		    </td>
+	    </tr>
+	    <tr>		          					
+	      <td class="FieldLabel"><%=_ctx.appRes("Sample.dialog.label.description")%></td>
+	      <td class="FieldComponent">
+		      <%
+		        String[] fieldDescription = ["jcrPath=/node/exo:description"] ;
+		        uicomponent.addTextAreaField("description", fieldDescription) ;
+	      	%>
+	      </td>
+	    </tr>
+	    <tr>		          					
+	      <td class="FieldLabel"><%=_ctx.appRes("Sample.dialog.label.date")%></td>
+	      <td class="FieldComponent">
+		      <%
+		        String[] fieldDate = ["jcrPath=/node/exo:date", "validate=datetime", "visible=true"] ; 
+		        uicomponent.addCalendarField("date", fieldDate) ;
+		      %>
+		    </td>
+	    </tr>
+	    <tr>		          					
+	      <td class="FieldLabel"><%=_ctx.appRes("Sample.dialog.label.date-time")%></td>
+	      <td class="FieldComponent">
+		      <%
+		        String[] fieldDateTime = ["jcrPath=/node/exo:datetime", "options=displaytime", "validate=datetime", "visible=true"] ;
+		        uicomponent.addCalendarField("datetime", fieldDateTime) ;  
+		      %>
+		    </td>
+	    </tr>
+	    <tr>		          					
+	      <td class="FieldLabel"><%=_ctx.appRes("Sample.dialog.label.upload-image")%></td>
+	      <td class="FieldComponent">
+		      <%
+		        if(uicomponent.isEditing()) { 
+							def curNode = uicomponent.getNode() ;
+							if(curNode.hasNode("exo:image")) {
+								def imageNode = curNode.getNode("exo:image") ;
+								if(imageNode.getProperty("jcr:data").getStream().available() > 0) {
+									def imgSrc = uicomponent.getImage(curNode, "exo:image");
+									def actionLink = uicomponent.event("RemoveData", "/exo:image");
+						%>		
+									<div>
+										<image src="$imgSrc" width="100px" height="80px"/>
+									    <a class="actionIcon "  rel="tooltip" data-placement="bottom" title="remove" href="$actionLink" ><i class="uiIconRemove uiIconLightGray"></i></a>
+									</div>
+						<%
+								} else {
+					        String[] fieldImage = ["jcrPath=/node/exo:image/jcr:data"] ;
+					        uicomponent.addUploadField("image", fieldImage) ;								
+								}
+							}
+						} else {
+			        String[] fieldImage = ["jcrPath=/node/exo:image/jcr:data"] ;
+			        uicomponent.addUploadField("image", fieldImage) ;
+						}
+		      %>
+		    </td>
+	    </tr>
+	    <tr>		          					
+	      <td class="FieldLabel"><%=_ctx.appRes("Sample.dialog.label.mime-type")%></td>
+	      <td class="FieldComponent">
+		      <%
+		        String[] fieldMimeType = ["jcrPath=/node/exo:image/jcr:mimeType",  "image/gif", "options=image/gif,image/jpeg,image/png"] ;
+		        uicomponent.addSelectBoxField("mimetype", fieldMimeType) ;
+		      %>
+		    </td>
+	    </tr>
+	    <tr>		          					
+	      <td class="FieldLabel"><%=_ctx.appRes("Sample.dialog.label.summary")%></td>
+	      <td class="FieldComponent">
+			    <div class="UIFCKEditor">
+			      <%
+			        String[] fieldSummary = ["jcrPath=/node/exo:summary", "options=basic", ""] ;
+			        uicomponent.addRichtextField("summary", fieldSummary) ;        
+			      %>
+			    </div>
+		    </td>
+	    </tr>
+	    <tr>		          					
+	      <td class="FieldLabel"><%=_ctx.appRes("Sample.dialog.label.content")%></td>
+	      <td class="FieldComponent">
+			    <div class="UIFCKEditor">
+			      <%
+			        String[] fieldContent = ["jcrPath=/node/exo:content", "options=default", ""] ;
+			        uicomponent.addRichtextField("content", fieldContent) ;
+			      %>
+			    </div>
+		    </td>
+	    </tr>
+	  </table>
+		<%/* start render action*/%>
+		<div class="UIAction"> 
+			<% for(action in uicomponent.getActions()) { 
+			      		 String actionLabel = _ctx.appRes(uicomponent.getName() + ".action." + action) ;
+								 String link = uicomponent.event(action) ;
+			%>
+				<a  onclick="$link" class="ActionButton LightBlueStyle" href="javascript:void(0);">$actionLabel</a>
+			<%}%>          
+	    </div>
+	  <%/* end render action*/%>
+	  
+  </div>
+  <% uiform.end() %>
+</div>

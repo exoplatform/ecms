@@ -1,0 +1,506 @@
+
+<%
+  import org.exoplatform.ecm.webui.utils.PermissionUtil;
+%>
+<div id="$uicomponent.id" class="UIResizableBlock">
+	<style>
+		.UIArticle {
+			background: white;
+			padding: 8px;
+		}
+			
+		.UIArticle .ArticleTLDecorator {
+		  background: url('/eXoDMSResources/skin/images/article/BackgroundArticle.gif') no-repeat left top; /* orientation=lt */
+			background: url('/eXoDMSResources/skin/images/article/BackgroundArticle-rt.gif') no-repeat right top; /* orientation=rt */
+		  padding-left: 51px; /* orientation=lt */
+		  padding-right: 51px; /* orientation=rt */
+		}
+		
+		.UIArticle .ArticleTRDecorator {
+		  background: url('/eXoDMSResources/skin/images/article/BackgroundArticle.gif') no-repeat right top; /* orientation=lt */
+		  background: url('/eXoDMSResources/skin/images/article/BackgroundArticle-rt.gif') no-repeat left top; /* orientation=rt */	
+		  padding-right:154px; /* orientation=lt */
+		  padding-left:154px; /* orientation=rt */
+		}
+		
+		.UIArticle .ArticleTCDecorator {
+		  background: url('/eXoDMSResources/skin/images/article/BackgroundArticle.gif') repeat-x left -100px;  /* orientation=lt */
+		  background: url('/eXoDMSResources/skin/images/article/BackgroundArticle.gif') repeat-x right -100px;  /* orientation=rt */		 
+		  height: 100px;
+		}
+		
+		.UIArticle .ArticleTCDecorator .TitleLabel {
+		  padding-top: 38px;
+		  font: normal bold 16px Arial;
+		  color: #0467e2;
+		  text-align: left; /* orientation=lt */
+		  text-align: right; /* orientation=rt */
+		}
+		
+		.UIArticle .ArticleMLDecorator {
+		  background: url('/eXoDMSResources/skin/images/article/MiddleLeftArticle3x1.gif') repeat-y left; /* orientation=lt */
+			background: url('/eXoDMSResources/skin/images/article/MiddleLeftArticle3x1-rt.gif') repeat-y right; /* orientation=rt */
+		  padding-left: 3px ; /* orientation=lt */
+		 	padding-right: 3px ; /* orientation=rt */
+		}
+		
+		.UIArticle .ArticleMCDecorator {
+		  background: #fcfcfc;
+		}
+		
+		.UIArticle .ArticleMRDecorator {
+		  background: url('/eXoDMSResources/skin/images/article/MiddleRightArticle10x1.gif') repeat-y right; /* orientation=lt */
+			background: url('/eXoDMSResources/skin/images/article/MiddleRightArticle10x1-rt.gif') repeat-y left; /* orientation=rt */
+		  padding: 0px 10px 0px 3px; /* orientation=lt */
+			padding: 0px 3px 0px 10px; /* orientation=rt */
+		}
+		
+		.UIArticle .ArticleBLDecorator {
+		  background: url('/eXoDMSResources/skin/images/article/ImageArticle.gif') no-repeat left top; /* orientation=lt */
+		  background: url('/eXoDMSResources/skin/images/article/ImageArticle-rt.gif') no-repeat right top; /* orientation=rt */
+		  padding-left: 3px; /* orientation=lt */
+		  padding-right: 3px; /* orientation=rt */
+		}
+		
+		.UIArticle .ArticleBCDecorator {
+		  background: url('/eXoDMSResources/skin/images/article/ImageArticle.gif') repeat-x left -8px; /* orientation=lt */
+		  background: url('/eXoDMSResources/skin/images/article/ImageArticle.gif') repeat-x right -8px; /* orientation=rt */
+		  height: 8px;
+		  line-height: 8px;
+		}
+		
+		.UIArticle .ArticleBRDecorator {
+		  background: url('/eXoDMSResources/skin/images/article/ImageArticle.gif') no-repeat right top; /* orientation=lt */
+		  background: url('/eXoDMSResources/skin/images/article/ImageArticle-rt.gif') no-repeat left top; /* orientation=rt */
+		  padding-right: 10px ; /* orientation=lt */
+		  padding-left: 10px ; /* orientation=rt */ 
+		}
+		
+		.UIArticle .ArticleFrame {
+		  background: white;
+		  padding: 0px 10px;
+		  
+		}
+			
+		.UIArticle .ArticleFrame .TopLeftArticleFrame {
+		  background: url('/eXoDMSResources/skin/images/article/ImageArticle.gif') no-repeat left -16px; /* orientation=lt */
+		  background: url('/eXoDMSResources/skin/images/article/ImageArticle-rt.gif') no-repeat right -16px; /* orientation=rt */
+		  padding-left: 9px; /* orientation=lt */
+		  padding-right: 9px; /* orientation=rt */
+		}
+		
+		.UIArticle .ArticleFrame .TopRightArtictleFrame {
+		  background: url('/eXoDMSResources/skin/images/article/ImageArticle.gif') no-repeat right -16px; /* orientation=lt */
+		  background: url('/eXoDMSResources/skin/images/article/ImageArticle-rt.gif') no-repeat left -16px; /* orientation=rt */
+		  padding-right: 2px; /* orientation=lt */
+		  padding-left: 2px; /* orientation=rt */
+		}
+		
+		.UIArticle .ArticleFrame .TopCenterArticleFrame {
+		  background: url('/eXoDMSResources/skin/images/article/ImageArticle.gif') repeat-x right -32px; /* orientation=lt */
+		  background: url('/eXoDMSResources/skin/images/article/ImageArticle.gif') repeat-x left -32px; /* orientation=rt */
+		  
+		  height: 16px; 
+		}
+		
+		.UIArticle .ArticleFrame .ArticleFrameContainer {
+			border: solid 1px #e0e0e0;
+	    border-top: none;
+		}
+		
+		.UIArticle .TopCenterArticleFrame .ArticleField {
+		  padding: 0px 0px 0px 5px; /* orientation=lt */
+		  padding: 0px 5px 0px 0px; /* orientation=rt */
+		  width: 120px;
+		  background: #fff;
+		  height: 16px;
+		  float: right; /* orientation=rt */
+		  float: left; /* orientation=lt */
+		}
+		
+		.UIArticle .MidlleLeftArticleFrame  {
+	    background: white;
+		}
+		
+		.UIArticle .FieldLabel {
+		  float: left; /* orientation=lt */
+		  float: right; /* orientation=rt */
+      font-weight: bold;
+		}
+		
+		.UIArticle  .FieldIcon {
+	    float: left; /* orientation=lt */
+	    float: right; /* orientation=rt */
+	    margin-right: 5px; /* orientation=lt */
+	    margin-left: 5px; /* orientation=rt */
+	    width: 16px; 
+	    height: 16px;
+		}
+		
+		.UIArticle .SummaryIcon {
+		  background: url('/eXoDMSResources/skin/images/article/ImageArticle.gif') no-repeat left -48px; /* orientation=lt */
+		  background: url('/eXoDMSResources/skin/images/article/ImageArticle.gif') no-repeat right -48px; /* orientation=rt */
+		}
+		
+		.UIArticle .AttachmentsIcon {
+		  background: url('/eXoDMSResources/skin/images/article/ImageArticle.gif') no-repeat left -64px; /* orientation=lt */
+		  background: url('/eXoDMSResources/skin/images/article/ImageArticle.gif') no-repeat right -64px; /* orientation=rt */
+		}
+		
+		.UIArticle .RatingIcon {
+		  background: url('/eXoDMSResources/skin/images/article/Artitcle.gif') no-repeat left -64px; /* orientation=lt */
+		  background: url('/eXoDMSResources/skin/images/article/Artitcle.gif') no-repeat right -64px; /* orientation=rt */
+		}
+		
+		.UIArticle .AttachmentsContainer .AttachmentsContentIcon {
+		  background: url('/eXoDMSResources/skin/images/article/AttachmentsIcon.gif') no-repeat left top; /* orientation=lt */
+		  background: url('/eXoDMSResources/skin/images/article/AttachmentsIcon.gif') no-repeat left top; /* orientation=rt */
+		  margin: 0px 5px 0px 3px; /* orientation=lt */
+		  margin: 0px 3px 0px 5px; /* orientation=rt */
+		  padding-left: 18px; /* orientation=lt */
+		  padding-right: 18px; /* orientation=rt */
+		  height: 15px;
+		  float: left; /* orientation=lt */
+		  float: right; /* orientation=rt */
+		}
+		
+		.UIArticle .AttachmentsContainer .RemoveAttachments {
+		  background: url('/eXoDMSResources/skin/images/article/DustBin.gif') no-repeat left top; /* orientation=lt */
+		  background: url('/eXoDMSResources/skin/images/article/DustBin.gif') no-repeat right top; /* orientation=rt */
+		  margin: 0px 5px 0px 3px; /* orientation=lt */
+		  margin: 0px 3px 0px 5px; /* orientation=rt */
+		  padding-left: 18px; /* orientation=lt */
+		  padding-right: 18px; /* orientation=rt */
+		  height: 16px;
+		  cursor: pointer;
+		}
+		
+		.UIArticle .ContentIcon {
+		  background: url('/eXoDMSResources/skin/images/article/ImageArticle.gif') no-repeat left -96px; /* orientation=lt */
+		  background: url('/eXoDMSResources/skin/images/article/ImageArticle.gif') no-repeat right -96px; /* orientation=rt */
+		}
+		
+		.UIArticle .LinksIcon {
+		  background: url('/eXoDMSResources/skin/images/article/ImageArticle.gif') no-repeat left -80px; /* orientation=lt */
+		  background: url('/eXoDMSResources/skin/images/article/ImageArticle.gif') no-repeat right -80px; /* orientation=rt */
+		}
+		
+		.UIArticle .FieldContent {
+		  padding: 1px 50px 5px 0px; /* orientation=lt */
+		  padding: 1px 0px 5px 70px; /* orientation=rt */
+		  width: 90%;
+		}
+		
+		.UIArticle .FieldContent .FieldContainerContent {
+			font: normal 11px Verdana;
+		  background: white;
+		  margin: 5px 2px 3px 5px; /* orientation=lt */
+		  margin: 5px 5px 3px 2px; /* orientation=rt */
+		}
+		
+		.UIArticle .FieldContent .LabelContent{
+		 	padding: 5px 0px 0px 5px; /* orientation=lt */
+		 	padding: 5px 5px 0px 0px; /* orientation=rt */
+		 	overflow: auto;
+		 	text-align: left; /* orientation=lt */
+		 	text-align: right; /* orientation=rt */
+		}
+		
+		.UIArticle .LabelContent p a {
+		  color: #058EE6;
+      text-decoration: underline;
+		}
+		
+    .UIArticle .DocumentRating {
+  		margin-left: 150px; /* orientation=lt */
+  		margin-right: 150px; /* orientation=rt */
+  		width: 300px;
+		} 
+		
+    .UIArticle .ContainerLinks {
+		 	border-top: dotted 1px #dcdcdc;
+		 	margin: 12px  10px 0px 10px; /* orientation=lt */
+		 	margin: 12px  10px 12px 3px; /* orientation=rt */
+		 	padding: 5px;
+		}
+		
+		.UIArticle .ContentLinks {
+		  float: left; /* orientation=lt */
+		  float: right; /* orientation=rt */
+		  width: 75px;
+		}
+		
+		.UIArticle .WorkContentLinks {
+		  float: left; /* orientation=lt */
+		  float: right; /* orientation=rt */
+		  padding-left: 5px; /* orientation=lt */
+		  padding-right: 5px; /* orientation=rt */
+		}
+
+	 .UIArticle .Links div {
+  	  padding-bottom: 3px;
+  	}
+  	
+    .UIArticle .Links a {
+  	  text-decortaion: none;
+		  color: #058ee6;
+		}
+		
+		 .UIArticle .Links a:hover {
+  	  text-decortaion: underline;
+		  color: orange;
+		}
+		
+		.UIArticle .ArticleTCDecorator .Language {
+	    text-align: left; /* orientation=lt */
+	    text-align: right; /* orientation=rt */
+	    color: #7d7d7d;
+	    padding: 12px 0px 0px 10px; /* orientation=lt */
+	    padding: 12px 10px 0px 0px; /* orientation=rt */
+	    font-weight: bold;
+	  }
+	  
+	  .UIArticle  .Language a.LanguageTitle {
+	    text-align: left; /* orientation=lt */
+	    text-align: right; /* orientation=rt */
+	    color: #058ee6;
+	    font-weight: normal;
+	  }
+	  
+	  .UIArticle  .Language a:hover.LanguageTitle {
+	    text-align: left; /* orientation=lt */
+	    text-align: right; /* orientation=rt */
+	    color: #ffa21d;
+	    font-weight: normal;
+	  }
+	  
+	  .UIArticle  .Language a:hover.DefaultLanguageTitle {
+	    text-align: left; /* orientation=lt */
+	    text-align: right; /* orientation=rt */
+	    color: #ffa21d;
+	    font-weight: bold;
+	  }	  
+	  
+		.UIVoteForm .RatingInfo {
+			color: #0489d5;
+		}
+		
+		.UIArticle .UIRatingInfoContainer {
+			margin: 0px 0px 0px auto;
+		}
+		
+		.UIArticle .FieldContent .AttachmentsContainer {
+		  margin: 0px 6px 1px 0px; /* orientation=lt */
+		  margin: 0px 0px 1px 6px; /* orientation=rt */
+		  overflow-x: hidden;
+		}
+		
+		.UIArticle .AttachmentsContainer a {
+		  text-decortaion: none;
+		  color: #058ee6;
+		  float: left; /* orientation=lt */
+		  float: right; /* orientation=rt */
+		}
+		
+		.UIArticle .AttachmentsContainer a:hover {
+		  text-decortaion: underline;
+		  color: orange;
+		}
+  </style>  
+	<%
+	 def node = uicomponent.getNode() ;		
+	 def relations = uicomponent.getRelations() ;
+	 def attachments = uicomponent.getAttachments() ;
+	
+	 if(node.hasProperty("exo:title")) {
+	%>
+		<div class="UIArticle">
+			<div class="ArticleTLDecorator">
+				<div class="ArticleTRDecorator">
+					<div class="ArticleTCDecorator">
+		        <div class="TitleLabel"><%=node.getProperty("exo:title").getString()%></div>
+		        <%
+								def locals = uicomponent.getSupportedLocalise() ;
+								if(locals.size() > 0) {
+									println "<div class=\"Language\">" ;
+						%>
+									<%=_ctx.appRes("Article.view.label.languages")%>&nbsp;
+						<%
+									def actionChangeLang ;
+									def i = 0;
+									for(local in locals) {
+									  def title = "LanguageTitle" ;
+									  i = i + 1 ;
+									  actionChangeLang = uicomponent.event("ChangeLanguage", local) ;
+										if(i == 1) title = "DefaultLanguageTitle" ;
+										println "<a href=\"$actionChangeLang\" class=\"$title\">" ;
+										println  _ctx.appRes("View.label.languages." + local);
+										println "&nbsp;&nbsp;</a>" ;
+									}
+									println "</div>" ;
+								}	
+						%>
+	        </div>
+				</div>
+			</div>
+			<div class="ArticleMLDecorator">
+				<div class="ArticleMRDecorator">
+					<div class="ArticleMCDecorator">
+						<div class="ArticleFrame">
+						  <div class="TopLeftArticleFrame">
+						    <div class="TopRightArtictleFrame">
+						      <div class="TopCenterArticleFrame">
+						        <div class="ArticleField clearfix">
+						              <div class="FieldIcon SummaryIcon"><span></span></div>
+						              <div class="FieldLabel"><%=_ctx.appRes("Article.view.label.summary")%> :</div>
+						              
+				                </div>
+						      </div>
+						    </div>
+						  </div>
+						  <div class="MiddleLeftArticleFrame">
+						    <div class="MidlleRightArticleFrame">
+			            <div class="ArticleFrameContainer">
+			              <div class="FieldContent">
+			              	<div class="FieldContainerContent">
+			              		<div class="LabelContent">
+					                <%
+					                  if(node.hasProperty("exo:summary")) {
+					                    print node.getProperty("exo:summary").getString() ;
+					                  } else {
+					                %>
+					                  <%=_ctx.appRes("Article.view.label.none-summary")%>
+					                <%}%>
+					              </div>
+											</div>	
+			              </div>
+			            </div>
+			          </div>
+			        </div>
+	          </div>
+	          <div style="height: 10px;"><span></span></div>
+						<div class="ArticleFrame">
+						  <div class="TopLeftArticleFrame">
+						    <div class="TopRightArtictleFrame">
+						      <div class="TopCenterArticleFrame">
+						        <div class="ArticleField clearfix">
+					              <div class="FieldIcon ContentIcon"><span></span></div>
+					              <div class="FieldLabel"><%=_ctx.appRes("Article.view.label.content")%> :</div>
+					              
+					            </div>
+					          </div>
+						    </div>
+						  </div>
+						  <div class="MiddleLeftArticleFrame">
+						    <div class="MidlleRightArticleFrame">
+			            <div class="ArticleFrameContainer">
+			              <div class="FieldContent">
+			                <div class="FieldContainerContent">
+			                	<div class="LabelContent">
+					                <%
+					                  if(node.hasProperty("exo:text")) {
+					                    print node.getProperty("exo:text").getString() ;
+					                  } else {
+					                %>
+					                  <%=_ctx.appRes("Article.view.label.none-content")%>
+					                <%}%>
+				                </div>
+											</div>			                
+			                <div class="ContainerLinks clearfix">
+			                	<div class="ContentLinks clearfix">
+				                  <div class="FieldIcon LinksIcon"><span></span></div>
+					              <div class="FieldLabel"><%=_ctx.appRes("Article.view.label.link")%> :</div>
+					              
+							    </div>
+						        <div class="WorkContentLinks">
+					    			<%if(relations.size() > 0) {%>
+							            <div class="Links">
+											<%
+										       for(rel in relations) {
+											       if(rel != null) {
+														String wsName = rel.getSession().getWorkspace().getName() ;
+														String actionLink ;
+														String relPath = rel.getPath() ;
+														String relName = relPath.substring(relPath.lastIndexOf("/") + 1, relPath.length()) ; 
+													if(!uicomponent.isRssLink()) { 
+														String path = relPath + "&workspaceName=" + wsName ;
+														actionLink = uicomponent.event("ChangeNode", path) ;
+													} else { 
+														actionLink = uicomponent.getRssLink() + wsName + relPath ;
+													}
+											 %>
+			  									<div> - <a href="$actionLink">$relName</a></div>
+			  							    <%		}
+			  							    	}%>
+					              		</div>
+						          	<%}%>
+						        </div>
+
+				              </div>
+				            </div>
+			            </div>
+			          </div>
+			        </div>
+					  </div>
+	          <div style="height: 10px;"><span></span></div>
+	          <div class="ArticleFrame">
+						  <div class="TopLeftArticleFrame">
+						    <div class="TopRightArtictleFrame">
+						      <div class="TopCenterArticleFrame">
+					          <div class="ArticleField clearfix">
+					              <div class="FieldIcon AttachmentsIcon"><span></span></div>
+					              <div class="FieldLabel"><%=_ctx.appRes("Article.view.label.attachment")%> :</div>
+						          
+						      </div>
+			            </div>
+			          </div>
+					    </div> 
+					    <div class="MiddleLeftArticleFrame">
+						    <div class="MidlleRightArticleFrame">
+			            <div class="ArticleFrameContainer">
+			              <div class="FieldContent">
+			              	<div class="FieldContainerContent">
+						       <%if(attachments.size() > 0) {
+									for (att in attachments) {
+										if(att != null) {
+		  									String wsName = att.getSession().getWorkspace().getName() ;
+		  									String attPath = att.getPath() + "&workspaceName=" + wsName ;
+								%>
+										<div class="AttachmentsContainer clearfix">	
+							              <div class="AttachmentsContentIcon">
+							                 <a href="<%=uicomponent.event("ChangeNode", attPath)%>" rel="tooltip" data-placement="bottom" title="<%=att.getName()%>"><%=att.getName()%></a>
+							              </div>
+							                  <% if (PermissionUtil.canRemoveNode(att)) {%>
+							              <a href="<%=uicomponent.event("RemoveAttach", attPath)%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes(uicomponent.getId() + ".tooltip.remove-attachment")%>">
+							                  <div class="RemoveAttachments"><span></span></div>
+							              </a>
+                                <% } %>
+							              
+							             </div>
+						              <%	}
+						              	} 
+												 	}%>
+											</div>
+										</div>
+								  </div>
+							  </div>
+		          </div>
+		        </div>
+		        <div style="height: 10px;"><span></span></div>
+					</div>
+				</div>
+			</div>
+			<div class="ArticleBLDecorator">
+				<div class="ArticleBRDecorator">
+					<div class="ArticleBCDecorator"><span></span></div>
+				</div>
+			</div> 
+			<% _ctx.include(uicomponent.getViewTemplate("mix:votable", "view1")); %> 
+		</div>
+		<% _ctx.include(uicomponent.getViewTemplate("exo:comments", "view1")); %>
+  <%} else {%>
+      <div class="UIArticle">
+        <div class="FieldLabel"><%=_ctx.appRes("Article.msg.no-view")%> </div>
+      </div>
+  <%}%>
+</div>
