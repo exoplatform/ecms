@@ -270,16 +270,51 @@ public class WCMComposerImpl implements WCMComposer, Startable {
                         aclSessionProviderService.getAnonymSessionProvider() :
                         aclSessionProviderService.getACLSessionProvider(getAnyUserACL());
     }
-    long totalSize = getViewabaleContentsSize(path, workspace, filters, sessionProvider);
-    NodeIterator nodeIterator = getViewableContents(workspace, path, filters, sessionProvider, true);
+    ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
+    Session session = sessionProvider.getSession(workspace, manageableRepository);
+    Node currentFolder = null;
+    if (session.getRootNode().hasNode(path.substring(1))) {
+      currentFolder = session.getRootNode().getNode(path.substring(1));
+    }
+
     List<Node> nodes = new ArrayList<Node>();
-    Node node = null, viewNode = null;
-    if (nodeIterator != null) {
-      while (nodeIterator.hasNext()) {
-        node = nodeIterator.nextNode();
-        viewNode = getViewableContent(node, filters);
-        if (viewNode != null) {
-          nodes.add(viewNode);
+    long totalSize;
+    //Distinguish whether the targeted nodes are symlinks or not
+    if (currentFolder != null && currentFolder.isNodeType("exo:taxonomy")) {
+      NodeIterator taxonomyNodeIterator = getViewableContents(workspace, path, filters, sessionProvider, false);
+      List<Node> taxonomyNodes = new ArrayList<Node>();
+      Node taxonomyNode = null, taxonomyViewNode = null;
+      if (taxonomyNodeIterator != null) {
+        while (taxonomyNodeIterator.hasNext()) {
+          taxonomyNode = taxonomyNodeIterator.nextNode();
+          taxonomyViewNode = getViewableContent(taxonomyNode, filters);
+          if (taxonomyViewNode != null) {
+            taxonomyNodes.add(taxonomyViewNode);
+          }
+        }
+      }
+      int limit = (filters.get(FILTER_LIMIT)!=null)?new Integer(filters.get(FILTER_LIMIT)):0;
+      int max = (int) offset + limit;
+      totalSize = taxonomyNodes.size();
+      if (max > (int)(totalSize)){
+        max = (int)totalSize;
+      }
+      for (int i = (int) offset ; i < max ; i++ ){
+        nodes.add(taxonomyNodes.get(i));
+      }
+    }
+    else
+    {
+      totalSize = getViewabaleContentsSize(path, workspace, filters, sessionProvider);
+      NodeIterator nodeIterator = getViewableContents(workspace, path, filters, sessionProvider, true);
+      Node node = null, viewNode = null;
+      if (nodeIterator != null) {
+        while (nodeIterator.hasNext()) {
+          node = nodeIterator.nextNode();
+          viewNode = getViewableContent(node, filters);
+          if (viewNode != null) {
+            nodes.add(viewNode);
+          }
         }
       }
     }
@@ -301,31 +336,8 @@ public class WCMComposerImpl implements WCMComposer, Startable {
   private long getViewabaleContentsSize(String path, String workspace,HashMap<String, String> filters,
                                       SessionProvider sessionProvider) throws Exception {
 
-    ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
-    Session session = sessionProvider.getSession(workspace, manageableRepository);
-    Node currentFolder = null;
     long totalSize = (filters.get(FILTER_TOTAL)!=null)?new Long(filters.get(FILTER_TOTAL)):0;
-
-    if (session.getRootNode().hasNode(path.substring(1))) {
-      currentFolder = session.getRootNode().getNode(path.substring(1));
-    }
-    //Needed to get all taxonomy nodes in order to obtain the correct totalSize after being
-    // filtered (No way to filter taxonomy in jcr side by publication properties).
-    if (currentFolder != null && currentFolder.isNodeType("exo:taxonomy")) {
-      NodeIterator taxonomyNodeIterator = getViewableContents(workspace, path, filters, sessionProvider, false);
-      List<Node> taxonomyNodes = new ArrayList<Node>();
-      Node taxonomyNode = null, taxonomyViewNode = null;
-      if (taxonomyNodeIterator != null) {
-        while (taxonomyNodeIterator.hasNext()) {
-          taxonomyNode = taxonomyNodeIterator.nextNode();
-          taxonomyViewNode = getViewableContent(taxonomyNode, filters);
-          if (taxonomyViewNode != null) {
-            taxonomyNodes.add(taxonomyViewNode);
-          }
-        }
-      }
-      totalSize = taxonomyNodes.size();
-    } else if (totalSize == 0) {
+    if (totalSize == 0) {
       NodeIterator nodeIterator;
       SessionProvider systemProvider = WCMCoreUtils.getSystemSessionProvider();
       nodeIterator = getViewableContents(workspace, path, filters, systemProvider, false);
