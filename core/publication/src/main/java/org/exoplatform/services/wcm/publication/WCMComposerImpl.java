@@ -337,7 +337,8 @@ public class WCMComposerImpl implements WCMComposer, Startable {
   }
 
   /**
-   *
+   * return paginated result in case of document nodes. The nodes are filtered in jcr side. The publication statut is
+   * part of node's properties
    * @param nodeLocation
    * @param workspace
    * @param filters
