@@ -281,9 +281,7 @@ public class WCMComposerImpl implements WCMComposer, Startable {
     //Distinguish whether the targeted nodes are symlinks or not
     if (currentFolder != null && currentFolder.isNodeType("exo:taxonomy")) {
       result = getPaginatedTaxonomiesContent(nodeLocation, workspace, filters, sessionProvider);
-    }
-    else
-    {
+    } else {
       result = getPaginatedNodesContent(nodeLocation, workspace, filters, sessionProvider);
     }
 
@@ -301,7 +299,6 @@ public class WCMComposerImpl implements WCMComposer, Startable {
    * @return current page result with populating taxonomies
    * @throws Exception
    */
-
   private Result getPaginatedTaxonomiesContent(NodeLocation nodeLocation, String workspace,
                                                HashMap<String, String> filters,
                                                SessionProvider sessionProvider) throws Exception{
@@ -346,7 +343,6 @@ public class WCMComposerImpl implements WCMComposer, Startable {
    * @return current page result with populating nodes
    * @throws Exception
    */
-
   private Result getPaginatedNodesContent(NodeLocation nodeLocation, String workspace,
                                           HashMap<String, String> filters,
                                           SessionProvider sessionProvider) throws Exception{
