@@ -248,7 +248,7 @@ public class WCMComposerImpl implements WCMComposer, Startable {
     String orderBy = filters.get(FILTER_ORDER_BY);
     String orderType = filters.get(FILTER_ORDER_TYPE);
     String visibility = filters.get(FILTER_VISIBILITY);
-    long offset = (filters.get(FILTER_OFFSET)!=null)?new Long(filters.get(FILTER_OFFSET)):0;
+
 
     String remoteUser = getRemoteUser();
 
@@ -277,51 +277,98 @@ public class WCMComposerImpl implements WCMComposer, Startable {
       currentFolder = session.getRootNode().getNode(path.substring(1));
     }
 
-    List<Node> nodes = new ArrayList<Node>();
-    long totalSize;
+    Result result;
     //Distinguish whether the targeted nodes are symlinks or not
     if (currentFolder != null && currentFolder.isNodeType("exo:taxonomy")) {
-      NodeIterator taxonomyNodeIterator = getViewableContents(workspace, path, filters, sessionProvider, false);
-      List<Node> taxonomyNodes = new ArrayList<Node>();
-      Node taxonomyNode = null, taxonomyViewNode = null;
-      if (taxonomyNodeIterator != null) {
-        while (taxonomyNodeIterator.hasNext()) {
-          taxonomyNode = taxonomyNodeIterator.nextNode();
-          taxonomyViewNode = getViewableContent(taxonomyNode, filters);
-          if (taxonomyViewNode != null) {
-            taxonomyNodes.add(taxonomyViewNode);
-          }
-        }
-      }
-      int limit = (filters.get(FILTER_LIMIT)!=null)?new Integer(filters.get(FILTER_LIMIT)):0;
-      int max = (int) offset + limit;
-      totalSize = taxonomyNodes.size();
-      if (max > (int)(totalSize)){
-        max = (int)totalSize;
-      }
-      for (int i = (int) offset ; i < max ; i++ ){
-        nodes.add(taxonomyNodes.get(i));
-      }
+      result = getPaginatedTaxonomiesContent(nodeLocation, workspace, filters, sessionProvider);
     }
     else
     {
-      totalSize = getViewabaleContentsSize(path, workspace, filters, sessionProvider);
-      NodeIterator nodeIterator = getViewableContents(workspace, path, filters, sessionProvider, true);
-      Node node = null, viewNode = null;
-      if (nodeIterator != null) {
-        while (nodeIterator.hasNext()) {
-          node = nodeIterator.nextNode();
-          viewNode = getViewableContent(node, filters);
-          if (viewNode != null) {
-            nodes.add(viewNode);
-          }
+      result = getPaginatedNodesContent(nodeLocation, workspace, filters, sessionProvider);
+    }
+
+    return result;
+  }
+
+  /**
+   * return paginated result in case of taxonomies nodes. This nodes are loaded in memory from jcr then
+   * filtered against publication because the information about publication is not in the symlink but in its target
+   * node
+   * @param nodeLocation
+   * @param workspace
+   * @param filters
+   * @param sessionProvider
+   * @return current page result with populating taxonomies
+   * @throws Exception
+   */
+
+  private Result getPaginatedTaxonomiesContent(NodeLocation nodeLocation, String workspace,
+                                               HashMap<String, String> filters,
+                                               SessionProvider sessionProvider) throws Exception{
+    List<Node> nodes = new ArrayList<Node>();
+    long totalSize;
+    long offset = (filters.get(FILTER_OFFSET)!=null)?new Long(filters.get(FILTER_OFFSET)):0;
+    String path = nodeLocation.getPath();
+    NodeIterator taxonomyNodeIterator = getViewableContents(workspace, path, filters, sessionProvider, false);
+    List<Node> taxonomyNodes = new ArrayList<Node>();
+    Node taxonomyNode = null, taxonomyViewNode = null;
+    if (taxonomyNodeIterator != null) {
+      while (taxonomyNodeIterator.hasNext()) {
+        taxonomyNode = taxonomyNodeIterator.nextNode();
+        taxonomyViewNode = getViewableContent(taxonomyNode, filters);
+        if (taxonomyViewNode != null) {
+          taxonomyNodes.add(taxonomyViewNode);
+        }
+      }
+    }
+    long limit = (filters.get(FILTER_LIMIT)!=null)?new Integer(filters.get(FILTER_LIMIT)):0;
+    long max = offset + limit;
+    totalSize = taxonomyNodes.size();
+    if (max > totalSize){
+      max = totalSize;
+    }
+    for (long i = offset ; i < max ; i++ ){
+      nodes.add(taxonomyNodes.get((int)i));
+    }
+
+    Result result = new Result(nodes, offset, totalSize, nodeLocation, filters);
+    return result;
+
+  }
+
+  /**
+   *
+   * @param nodeLocation
+   * @param workspace
+   * @param filters
+   * @param sessionProvider
+   * @return current page result with populating nodes
+   * @throws Exception
+   */
+
+  private Result getPaginatedNodesContent(NodeLocation nodeLocation, String workspace,
+                                          HashMap<String, String> filters,
+                                          SessionProvider sessionProvider) throws Exception{
+    List<Node> nodes = new ArrayList<Node>();
+    long totalSize;
+    long offset = (filters.get(FILTER_OFFSET)!=null)?new Long(filters.get(FILTER_OFFSET)):0;
+    String path = nodeLocation.getPath();
+    totalSize = getViewabaleContentsSize(path, workspace, filters, sessionProvider);
+    NodeIterator nodeIterator = getViewableContents(workspace, path, filters, sessionProvider, true);
+    Node node = null, viewNode = null;
+    if (nodeIterator != null) {
+      while (nodeIterator.hasNext()) {
+        node = nodeIterator.nextNode();
+        viewNode = getViewableContent(node, filters);
+        if (viewNode != null) {
+          nodes.add(viewNode);
         }
       }
     }
 
     Result result = new Result(nodes, offset, totalSize, nodeLocation, filters);
-
     return result;
+
   }
 
   /**
