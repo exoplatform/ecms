@@ -22,6 +22,9 @@
 		this.eventNode = false;
 		this.uploadFile = "uploadFile/upload";
 		this.controlUpload = "uploadFile/control";
+		this.nodePath ="";
+		this.insertContentType ="";
+		this.subPath ="";
 		this.initDriverExpanded ="";
 		this.initPathExpanded ="";
 		this.initComponentIdExpanded ="";
@@ -94,8 +97,41 @@
 	    }
 	  }
 	};
-	
-	EcmContentSelector.prototype.initRequestXmlTree = function(typeObj, iDriver, iPath, iID) {
+
+        EcmContentSelector.prototype.buildECSTreeAccordingOfNodePath = function (nodePath, insertContentType, subPath) {
+          this.nodePath = nodePath;
+          this.insertContentType = insertContentType;
+          this.subPath = subPath;
+          var ECS = eXo.ecm.ECS;
+          var command = ECS.cmdEcmDriver + "getDriveOfNode?" + "nodePath=" + nodePath;
+          var url = ECS.hostName + ECS.connector + command;
+          $.ajax({
+                 type: 'GET',
+                 url: url,
+                 contentType: 'text/plain',
+                 dataType: 'text',
+                 success: eXo.ecm.ECS.RequestSucceeded,
+                 error: eXo.ecm.ECS.RequestFailed
+                 });
+        };
+
+        EcmContentSelector.prototype.RequestSucceeded  = function (result) {
+          var driveName = result;
+          var ECS = eXo.ecm.ECS;
+          var iPath = null;
+          if (ECS.insertContentType == "Image") {
+             iPath = ECS.subPath + '/medias/images/';
+          } else {
+             iPath = ECS.subPath + '/medias/';
+          }
+          ECS.initRequestXmlTree('editor', driveName, iPath, "uiHomeContentSelector");
+        };
+
+        EcmContentSelector.prototype.RequestFailed  = function (result) {
+          console.error(result.status + ' ' + result.statusText);
+        };
+ 
+        EcmContentSelector.prototype.initRequestXmlTree = function(typeObj, iDriver, iPath, iID) {
 	  this.initDriverExpanded =iDriver;
 	  this.initPathExpanded =iPath;
 	  this.initComponentIdExpanded =iID;

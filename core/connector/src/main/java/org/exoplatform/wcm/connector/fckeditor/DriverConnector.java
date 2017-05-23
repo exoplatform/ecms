@@ -21,6 +21,7 @@ import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.ecm.connector.fckeditor.FCKUtils;
 import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.services.cms.BasePath;
+import org.exoplatform.services.cms.documents.DocumentService;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.drives.ManageDriveService;
 import org.exoplatform.services.cms.impl.Utils;
@@ -52,10 +53,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
 import javax.annotation.security.RolesAllowed;
-import javax.jcr.Node;
-import javax.jcr.NodeIterator;
-import javax.jcr.RepositoryException;
-import javax.jcr.Session;
+import javax.jcr.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -136,12 +134,15 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
 
   private Locale lang = Locale.ENGLISH;
 
+  private DocumentService documentService;
+
   /**
    * Instantiates a new driver connector.
    *
    * @param params The init parameters.
    */
-  public DriverConnector(InitParams params) {
+  public DriverConnector(InitParams params, DocumentService documentService) {
+    this.documentService = documentService;
     limit = Integer.parseInt(params.getValueParam("upload.limit.size").getValue());
     if (params.getValueParam("upload.limit.count.client") != null) {
       limitCountClient_ = Integer.parseInt(params.getValueParam("upload.limit.count.client").getValue());
@@ -165,6 +166,25 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
    * @return The maximum number of files uploaded on the client side.
    */
   public int getMaxUploadCount() { return limitCountClient_; }
+
+  /**
+   * Returns the driveName according to the nodePath param which is composed by the driveHomePath and the path of the node
+   * @param nodePath the path of the webContent
+   * @return the driveName
+   * @throws Exception
+   */
+  @GET
+  @Path("/getDriveOfNode/")
+  @RolesAllowed("users")
+  public Response getDriveOfNode(@QueryParam("nodePath") String nodePath) throws Exception {
+    DriveData drive = documentService.getDriveOfNode(nodePath);
+    String driveName = null;
+    if (drive != null) {
+      driveName = drive.getName();
+    }
+    DateFormat dateFormat = new SimpleDateFormat(IF_MODIFIED_SINCE_DATE_FORMAT);
+    return Response.ok(driveName, MediaType.TEXT_PLAIN).header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
+  }
 
   /**
    * Returns a list of drives for the current user.
