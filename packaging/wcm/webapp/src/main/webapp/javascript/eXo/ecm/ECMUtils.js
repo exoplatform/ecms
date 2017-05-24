@@ -696,10 +696,11 @@
 			parentOfMovedNode.removeChild(movedItem);
 		}
 		/**
+		 * Handle for the resize event of Content Explorer
+		 * Calculate to determine which actionButton will be visible, which will be put
+		 * in HiddenActionList
+		 *
 		 * @function        actionbarContainer_OnResize
-		 * @purpose         Handle for the resize event of Content Explorer
-		 *                  Calculate to determine which actionButton will be visible, which will be put
-		 *                  in HiddenActionList
 		 * @author          vinh_nguyen@exoplatform.com
 		 */
 		ECMUtils.prototype.actionbarContainer_OnResize = function () {
@@ -738,10 +739,11 @@
 		};
 
 		/**
+		 * Handle for the resize event of Content Explorer
+		 * Calculate to determine which actionButton will be visible, which will be put
+		 * in HiddenActionList for context bar (when selecting nodes in TreeList template)
+		 *
 		 * @function       contextActionBarContainer_OnResize
-		 * @purpose        Handle for the resize event of Content Explorer
-		 *                  Calculate to determine which actionButton will be visible, which will be put
-		 *                  in HiddenActionList for context bar (when selecting nodes in TreeList template)
 		 */
 		ECMUtils.prototype.contextActionBarContainer_OnResize = function () {
 			var divAction = document.getElementById("ActionMenuPlaceHolder");
@@ -762,8 +764,9 @@
 			gj(visibleTabsChildren[visibleTabsChildren.length-1]).addClass("last");
 		};		
 		/**
+		 * Re-arrange the TabsContainer inside Right Container
+		 *
 		 * @function       tabsContainer_OnResize
-		 * @purpose        re-arrange the TabsContainer inside Right Container
 		 * @author         vinh_nguyen@exoplatform.com
 		 */
 		ECMUtils.prototype.tabsContainer_OnResize = function () {
@@ -780,8 +783,9 @@
 		  gj(visibleTabsChildren[visibleTabsChildren.length-1]).addClass("last");
 		}
 		/**
+		 * Re-arrange the a Container that contains visible items and dropdown list for the invisible items
+		 *
 		 * @function       containerWithDropDownItem_OnResize
-		 * @purpose        re-arrange the a Container that contains visible items and dropdown list for the invisible items
 		 * @author         vinh_nguyen@exoplatform.com
 		 */
 		ECMUtils.prototype.containerWithDropDownItem_OnResize = function (mainContainer, allowedSpace, listHiddenContainer, dropdownContainer, activeClass) {
@@ -863,8 +867,9 @@
 		}
 		
 		/**
+		 * Maintain object reference to some container which are accessed during resize
+		 *
 		 * @function        loadContainerReference
-		 * @purpose         Maintain object reference to some container which are accessed during resize
 		 * @author          vinh_nguyen@exoplatform.com
 		 */
 		ECMUtils.prototype.loadContainerReference = function () {
@@ -876,8 +881,9 @@
 		  Self.uiResizeSideBar = gj(Self.uiWorkingArea).find("div.resizeBar:first")[0];
 		}
 		/**
+		 * Load container width from cookies
+		 *
 		 * @function   loadContainerWidth
-		 * @purpose    Load container width from cookies
 		 * @author     vinh_nguyen@exoplatform.com
 		 */
 		ECMUtils.prototype.loadContainerWidth = function (leftWidth) {
@@ -1176,8 +1182,9 @@
 			window.UIBrokenCheckingHandler = window.setTimeout("eXo.ecm.ECMUtils.UIBrokenChecking();", Self.UIBrokenCheckingInterval);
 		}
 		/**
-		 * @fucntion   waitForContainer
-		 * @purpose    wait for leftContainer, RightContainer and other container related to resize ready
+		 * Wait for leftContainer, RightContainer and other container related to resize ready
+		 *
+		 * @function   waitForContainer
 		 * @author     vinh_nguyen@exoplatform.com
 		 */
 		ECMUtils.prototype.waitForContainer = function () {
@@ -1285,9 +1292,10 @@
 		}
 
 		/**
+		 * Adjust a invisible element which make the left container and right container
+		 * equal in height.
+		 *
 		 * function: adjustFillOutElement
-		 * purpose : adjust a invisible element which make the left container and right container 
-		 *           equal in height.
 		 */
 		ECMUtils.prototype.adjustFillOutElement = function () {
 			var checkMinHeight = eXo.ecm.ECMUtils.initWithoutLeftContainer();
