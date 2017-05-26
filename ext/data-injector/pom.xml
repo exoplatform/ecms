@@ -4,7 +4,7 @@
   <parent>
     <artifactId>ecms-ext</artifactId>
     <groupId>org.exoplatform.ecms</groupId>
-    <version>5.0.x-SNAPSHOT</version>
+    <version>5.0.0-M06</version>
   </parent>
   <artifactId>ecms-ext-data-injector</artifactId>
   <packaging>jar</packaging>
