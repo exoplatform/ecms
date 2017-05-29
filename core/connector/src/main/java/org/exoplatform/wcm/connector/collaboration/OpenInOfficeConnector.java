@@ -2,6 +2,7 @@ package org.exoplatform.wcm.connector.collaboration;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.tika.io.IOUtils;
+import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.services.cms.documents.DocumentTypeService;
 import org.exoplatform.services.cms.documents.impl.DocumentType;
 import org.exoplatform.services.cms.link.LinkManager;
@@ -79,7 +80,7 @@ public class OpenInOfficeConnector implements ResourceContainer, Startable {
           @QueryParam("lang") String language) throws Exception {
 
     //find from cached
-    objId = URLDecoder.decode(objId, "UTF-8");
+    objId = Text.escapeIllegalJcrChars(URLDecoder.decode(objId, "UTF-8"));
     String[] nodeInfo = objId.split(":");
     String workspace = nodeInfo[0];
     String filePath = nodeInfo[1];
