@@ -6326,9 +6326,9 @@ var PDFViewerApplication = {
     this.pdfViewer.currentScaleValue = newScale;
   },
 
-  /*get pagesCount() {
+  get pagesCount() {
     return this.pdfDocument.numPages;
-  },*/
+  },
 
   set page(val) {
     this.pdfLinkService.page = val;
