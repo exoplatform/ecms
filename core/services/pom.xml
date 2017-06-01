@@ -4,7 +4,7 @@
   <parent>
     <artifactId>ecms-core</artifactId>
     <groupId>org.exoplatform.ecms</groupId>
-    <version>5.0.x-SNAPSHOT</version>
+    <version>5.0.0-M07</version>
   </parent>
   <artifactId>ecms-core-services</artifactId>
   <name>eXo PLF:: CMS Service</name>
