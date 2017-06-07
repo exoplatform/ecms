@@ -29,6 +29,8 @@
 		this.initPathExpanded ="";
 		this.initComponentIdExpanded ="";
 		this.deleteConfirmationMsg="";
+		this.rememberedLocation = "rememberedLocation";
+		this.rememberedDriveName = "rememberedDriveName";
 	  this.switchView = false;
 	  if(this.viewType==undefined)
 		this.viewType="list";
@@ -130,7 +132,7 @@
         EcmContentSelector.prototype.RequestFailed  = function (result) {
           console.error(result.status + ' ' + result.statusText);
         };
- 
+
         EcmContentSelector.prototype.initRequestXmlTree = function(typeObj, iDriver, iPath, iID) {
 	  this.initDriverExpanded =iDriver;
 	  this.initPathExpanded =iPath;
@@ -264,6 +266,8 @@
 		eXo.ecm.ECS.strConnection = url;
 		eXo.ecm.ECS.renderSubTrees(currentNode, event, url);
 		eXo.ecm.ECS.renderBreadcrumbs(currentNode);
+		localStorage.setItem(eXo.ecm.ECS.rememberedLocation, eXo.ecm.ECS.currentFolder);
+		localStorage.setItem(eXo.ecm.ECS.rememberedDriveName, eXo.ecm.ECS.driverName);
 		gj(document).ready(function() { gj("*[rel='tooltip']").tooltip();});
 	};
 	
@@ -1023,6 +1027,8 @@
 						strHTML += "<a href=\"" + url+"\">"+name+"</a>";		
 					}		    		    
 					editor.insertHtml(strHTML);
+					localStorage.setItem(eXo.ecm.ECS.rememberedLocation, eXo.ecm.ECS.currentFolder);
+					localStorage.setItem(eXo.ecm.ECS.rememberedDriveName, eXo.ecm.ECS.driverName);
 					window.close();
 					editor.OnAfterSetHTML = window.close();				
 				}
@@ -1056,7 +1062,8 @@
 	 });
          document.getElementById(eXo.ecm.ECS.components).src=url;
          document.getElementById(eXo.ecm.ECS.components).style.display="block";
-         
+         localStorage.setItem(eXo.ecm.ECS.rememberedLocation, eXo.ecm.ECS.currentFolder);
+         localStorage.setItem(eXo.ecm.ECS.rememberedDriveName, eXo.ecm.ECS.driverName);
          window.close();
          editor.OnAfterSetHTML = window.close();
        }
