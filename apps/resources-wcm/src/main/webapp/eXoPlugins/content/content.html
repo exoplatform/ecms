@@ -97,7 +97,13 @@
                                         var insertContentType = getParameterByName('insertContentType', document.URL);
                                         var subPath = getParameterByName('subPath', document.URL);
                                         var ECS = eXo.ecm.ECS;
-                                        ECS.buildECSTreeAccordingOfNodePath(nodePath, insertContentType, subPath);
+                                        var rememberedLocation = localStorage.getItem(ECS.rememberedLocation);
+                                        var rememberedDriveName = localStorage.getItem(ECS.rememberedDriveName);
+                                        if (rememberedLocation && rememberedDriveName) {
+                                           ECS.initRequestXmlTree ('editor', rememberedDriveName, '/'+rememberedLocation+'/', 'uiHomeContentSelector');
+                                        } else {
+                                           ECS.buildECSTreeAccordingOfNodePath(nodePath, insertContentType, subPath);										          
+                                        }
                                                                       });
                                                                        
 								});

@@ -1,4 +1,4 @@
-(function(gj, uiForm) {	
+(function(gj, uiForm) {
 	/**
 	* Variable to check if Content Selector is opened in IE
 	* - true if Content Selector is opened
@@ -10,6 +10,8 @@
 	 * - true if some content has changed
 	 **/
 	var b_changed = false;
+	var rememberedLocation = "rememberedLocation";
+	var rememberedDriveName = "rememberedDriveName";
 	
 	/**
 	 * Change the current state to inform some content has changed
@@ -117,6 +119,10 @@
 	    this.ajaxPost(form, callback) ;
 	  } else {
 	    form.submit();
+	  }
+	  if (action.toLowerCase() == "saveandclose" || action.toLowerCase() == "close") {
+	    localStorage.removeItem(rememberedLocation);
+	    localStorage.removeItem(rememberedDriveName);
 	  }
 	} ;
 	
