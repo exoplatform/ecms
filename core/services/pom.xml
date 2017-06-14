@@ -93,12 +93,6 @@
       <groupId>org.exoplatform.jcr</groupId>
       <artifactId>exo.jcr.component.webdav</artifactId>
     </dependency>
-      <!-- remove it after migration to jcr 1.16.x-->
-      <dependency>
-          <groupId>org.exoplatform.kernel</groupId>
-          <artifactId>exo.kernel.component.ext.cache.impl.infinispan.v5</artifactId>
-      </dependency>
-      <!-- End remove-->
     <dependency>
       <groupId>org.exoplatform.kernel</groupId>
       <artifactId>exo.kernel.commons</artifactId>

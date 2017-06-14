@@ -451,15 +451,6 @@
         <type>pom</type>
         <scope>import</scope>
       </dependency>
-        <!-- This artifact isn't declared in kernel parent -->
-        <!-- We enforce it to have the good version in our packaging -->
-        <!-- remove it after migration to jcr 1.16.x-->
-        <dependency>
-            <groupId>org.exoplatform.kernel</groupId>
-            <artifactId>exo.kernel.component.ext.cache.impl.infinispan.v5</artifactId>
-            <version>${org.exoplatform.kernel.version}</version>
-        </dependency>
-      <!-- Use to generate some documentation -->
       <dependency>
         <groupId>org.exoplatform.doc</groupId>
         <artifactId>doc-style</artifactId>
