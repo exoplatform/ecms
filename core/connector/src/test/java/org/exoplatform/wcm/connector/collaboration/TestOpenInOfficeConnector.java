@@ -68,6 +68,32 @@ public class TestOpenInOfficeConnector extends BaseConnectorTestCase{
     assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
   }
 
+  public void testUpdateDocumentTitleWithIncorrectObjId() throws Exception{
+    String restPath = "/office/updateDocumentTitle?objId=/sites/test.doc&lang=en";
+    applyUserSession("john", "gtn", "collaboration");
+    manageableRepository = repositoryService.getCurrentRepository();
+    Session session = WCMCoreUtils.getSystemSessionProvider().getSession(COLLABORATION_WS, manageableRepository);
+    Node rootNode = session.getRootNode();
+    Node sites = rootNode.addNode("sites");
+    sites.addNode("test.doc");
+    rootNode.save();
+    ContainerResponse response = service(HTTPMethods.GET.toString(), restPath, StringUtils.EMPTY, null, null);
+    assertEquals(Response.Status.BAD_REQUEST.getStatusCode(), response.getStatus());
+  }
+
+  public void testUpdateDocumentTitleWithDocumentNamedWithColon() throws Exception{
+    String restPath = "/office/updateDocumentTitle?objId=collaboration:/sites/exo:colon.doc&lang=en";
+    applyUserSession("john", "gtn", "collaboration");
+    manageableRepository = repositoryService.getCurrentRepository();
+    Session session = WCMCoreUtils.getSystemSessionProvider().getSession(COLLABORATION_WS, manageableRepository);
+    Node rootNode = session.getRootNode();
+    Node sites = rootNode.addNode("sites");
+    sites.addNode("exo:colon.doc");
+    rootNode.save();
+    ContainerResponse response = service(HTTPMethods.GET.toString(), restPath, StringUtils.EMPTY, null, null);
+    assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
+  }
+
   public void testGetDocumentInfos() throws Exception{
     String word = "test.doc";
     String excel = "test.xls";
