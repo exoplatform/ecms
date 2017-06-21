@@ -313,6 +313,7 @@ public class DocumentServiceImpl implements DocumentService {
         if(groupDocumentsRootNodeName >= 0) {
           // extract group id for doc path
           String groupId = nodePath.substring(ManageDriveServiceImpl.GROUPS_DRIVE_ROOT_NODE.length() + 1, groupDocumentsRootNodeName);
+          nodeDrive = nodeDrive.clone();
           nodeDrive.getParameters().put(ManageDriveServiceImpl.DRIVE_PARAMATER_GROUP_ID, groupId);
         } else {
           throw new Exception("Cannot extract group id from node path " + nodePath);
@@ -323,7 +324,10 @@ public class DocumentServiceImpl implements DocumentService {
         } else {
           nodeDrive = manageDriveService.getDriveByName(ManageDriveServiceImpl.USER_DRIVE_NAME);
         }
-        nodeDrive.getParameters().put(ManageDriveServiceImpl.DRIVE_PARAMATER_USER_ID, splitedPath[2] + "/" + splitedPath[3] + "/" + splitedPath[4] + "/" + splitedPath[5]);
+        if (nodeDrive != null) {
+          nodeDrive = nodeDrive.clone();
+          nodeDrive.getParameters().put(ManageDriveServiceImpl.DRIVE_PARAMATER_USER_ID, splitedPath[2] + "/" + splitedPath[3] + "/" + splitedPath[4] + "/" + splitedPath[5]);
+        }
       }
     }
     if(nodeDrive == null) {
@@ -381,7 +385,7 @@ public class DocumentServiceImpl implements DocumentService {
       if (currentNode.isNodeType(NodetypeConstant.EXO_SYMLINK)) {
         currentNode = linkManager.getTarget(currentNode);
       }
-      List<String> path = new ArrayList();
+      List<String> path = new ArrayList<>();
       Node targetNode = null;
       boolean existingSymlink = false;
       for (NodeIterator it = shared.getNodes(); it.hasNext(); ) {

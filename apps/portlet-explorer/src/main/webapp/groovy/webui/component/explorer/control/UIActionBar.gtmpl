@@ -39,7 +39,7 @@
   jsManager.require("SHARED/ecm-utils", "ecmutil").require("SHARED/multiUpload", "multiUpload")
 	.require("SHARED/openDocumentInOffice", "openDocumentInOffice")
   .addScripts('multiUpload.displayCorrectUploadButton();')
-	.addScripts("eXo.ecm.OpenDocumentInOffice.updateLabel('"+currentNodePath+"');");
+	.addScripts("eXo.ecm.OpenDocumentInOffice.updateLabel('"+ org.exoplatform.ecm.utils.text.Text.escapeIllegalJcrChars(currentNodePath)+"');");
 
   def showUploadInput = false;
   

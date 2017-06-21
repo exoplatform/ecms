@@ -124,7 +124,7 @@ public class OpenInOfficeConnector implements ResourceContainer, Startable {
     String nodePath = filePath;
     boolean isFile=false;
     try{
-      node = (Node)nodeFinder.getItem(workspace, filePath);
+      node = (Node)nodeFinder.getItem(workspace, Text.unescapeIllegalJcrChars(filePath));
       if (linkManager.isLink(node)) node = linkManager.getTarget(node);
       nodePath = node.getPath();
       isFile = node.isNodeType(NodetypeConstant.NT_FILE);

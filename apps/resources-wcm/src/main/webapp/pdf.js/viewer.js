@@ -7429,7 +7429,10 @@ document.addEventListener('pagerendered', function (e) {
     Stats.add(pageNumber, pageView.stats);
   }
 
-  if (pageView.error) {
+  if (!pageView) {
+    PDFViewerApplication.error(mozL10n.get('rendering_error', null,
+    'An error occurred while rendering the page.'));
+  } else if (pageView.error) {
     PDFViewerApplication.error(mozL10n.get('rendering_error', null,
       'An error occurred while rendering the page.'), pageView.error);
   }

@@ -205,7 +205,7 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
                uiExplorer.getWorkspaceName()  + "','" + 
                uiExplorer.getDriveData().getName()  + "','" +
                uiTreeExplorer.getLabel()  + "','" +
-               uiExplorer.getCurrentPath() + "','" +
+               Text.escapeIllegalJcrChars(uiExplorer.getCurrentPath()) + "','" +
                org.exoplatform.services.cms.impl.Utils.getPersonalDrivePath(uiExplorer.getDriveData().getHomePath(),
                ConversationState.getCurrent().getIdentity().getUserId())+ "', '"+
               autoVersionService.isVersionSupport(uiExplorer.getCurrentPath(), uiExplorer.getCurrentWorkspace())+"');")
@@ -421,6 +421,9 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
         WCMCoreUtils.getUserSessionProvider().getSession(driveData.getWorkspace(), rservice.getCurrentRepository());
       // check if it exists
       // we assume that the path is a real path
+      if (!session.itemExists(contentRealPath) && session.itemExists(Text.unescapeIllegalJcrChars(contentRealPath))) {
+        contentRealPath = Text.unescapeIllegalJcrChars(contentRealPath);
+      }
       session.getItem(contentRealPath);
     } catch(AccessDeniedException ace) {
       Object[] args = { driveName };
