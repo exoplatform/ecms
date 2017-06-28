@@ -180,8 +180,8 @@
   <UIAllItemsPreferenceForm>
     <title>crwdns6790330:0crwdne6790330:0</title>
     <action>
-      <Cancel>crwdns6790331:0{word.cancel}crwdne6790331:0</Cancel>
-      <Save>crwdns6790332:0{word.save}crwdne6790332:0</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <Save>#{word.save}</Save>
     </action>
   </UIAllItemsPreferenceForm>
   <!--

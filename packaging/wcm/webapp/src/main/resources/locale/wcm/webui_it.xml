@@ -38,6 +38,8 @@
       <SharedSite>Sito Condiviso</SharedSite>
       <PersonalDocuments>Documenti Personali</PersonalDocuments>
       <UserDocuments>{0} Documenti</UserDocuments>
+      <Collaboration>Collaboration</Collaboration>
+      <Trash>Trash</Trash>
     </label>
   </Drives>
 

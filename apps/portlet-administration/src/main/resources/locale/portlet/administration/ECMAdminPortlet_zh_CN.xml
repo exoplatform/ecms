@@ -2426,15 +2426,12 @@
   <UITaxonomyTreeMainForm>
     <action>
       <NextViewPermission>下一个</NextViewPermission>
-      <Reset>Reset</Reset>
     </action>
   </UITaxonomyTreeMainForm>
 
   <UIPermissionTreeForm>
     <action>
-      <Save>Save</Save>
       <Cancel>#{word.cancel}</Cancel>
-      <Reset>Reset</Reset>
       <NextAddAction>下一个</NextAddAction>
       <Previous>上一个</Previous>
     </action>
@@ -2552,7 +2549,6 @@
   </UIDriveForm>
   <DriveInputSet>
     <title>
-      <RemovePermission>Remove Permission</RemovePermission>
       <ChooseNodeType>选择节点类型</ChooseNodeType>
       <RemoveNodeType>删除</RemoveNodeType>
     </title>

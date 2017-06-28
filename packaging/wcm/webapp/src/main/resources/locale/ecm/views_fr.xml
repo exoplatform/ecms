@@ -152,7 +152,7 @@
   <ElementSet>
     <view>
       <label>
-        <not-avaliable/>
+        <not-avaliable>N/A</not-avaliable>
         <core-elements>Dublin Core</core-elements>
         <title>Titre</title>
         <creator>Créateur</creator>

@@ -38,6 +38,8 @@
       <SharedSite>المواقع المشتركة</SharedSite>
       <PersonalDocuments>المستندات الشخصية</PersonalDocuments>
       <UserDocuments>المستندات {0}</UserDocuments>
+      <Collaboration>Collaboration</Collaboration>
+      <Trash>Trash</Trash>
     </label>
   </Drives>
 

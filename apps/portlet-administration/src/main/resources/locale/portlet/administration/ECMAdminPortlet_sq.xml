@@ -2426,15 +2426,12 @@
   <UITaxonomyTreeMainForm>
     <action>
       <NextViewPermission>crwdns6792726:0crwdne6792726:0</NextViewPermission>
-      <Reset>Reset</Reset>
     </action>
   </UITaxonomyTreeMainForm>
 
   <UIPermissionTreeForm>
     <action>
-      <Save>Save</Save>
       <Cancel>crwdns6824535:0{word.cancel}crwdne6824535:0</Cancel>
-      <Reset>Reset</Reset>
       <NextAddAction>crwdns6792727:0crwdne6792727:0</NextAddAction>
       <Previous>crwdns6792728:0crwdne6792728:0</Previous>
     </action>
@@ -2552,7 +2549,6 @@
   </UIDriveForm>
   <DriveInputSet>
     <title>
-      <RemovePermission>Remove Permission</RemovePermission>
       <ChooseNodeType>crwdns6792759:0crwdne6792759:0</ChooseNodeType>
       <RemoveNodeType>crwdns6792760:0crwdne6792760:0</RemoveNodeType>
     </title>

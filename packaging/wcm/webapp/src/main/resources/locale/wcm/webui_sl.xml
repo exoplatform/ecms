@@ -38,6 +38,8 @@
       <SharedSite>Mesto v skupni rabi</SharedSite>
       <PersonalDocuments>Osebni dokumenti</PersonalDocuments>
       <UserDocuments>Dokumentov: {0}</UserDocuments>
+      <Collaboration>Collaboration</Collaboration>
+      <Trash>Trash</Trash>
     </label>
   </Drives>
 

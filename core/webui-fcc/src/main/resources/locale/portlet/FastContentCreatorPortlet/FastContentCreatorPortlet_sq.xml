@@ -165,12 +165,6 @@
     </title>
   </UITabPane>
 
-  <PopupComponent>
-    <title>
-      <UICategoriesSelector>Add Categories</UICategoriesSelector>
-    </title>
-  </PopupComponent>
-
   <UICategoriesSelector>
     <action>
       <close>crwdns6793459:0{word.close}crwdne6793459:0</close>

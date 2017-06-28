@@ -87,7 +87,7 @@
 -->
   <UITaxonomyTreeMainForm>
     <action>
-      <Reset>#{word.reset}</Reset>
+      <Reset>Reset</Reset>
     </action>
     <msg>
       <name-not-allowed>Naam verboden</name-not-allowed>
@@ -1387,7 +1387,7 @@
     <action>
       <Close>#{word.close}</Close>
       <Save>Opslaan</Save>
-      <Reset>#{word.reset}</Reset>
+      <Reset>Reset</Reset>
     </action>
     <msg>
       <checkbox-require>YU moet ten minste een toestemming</checkbox-require>
@@ -2426,15 +2426,12 @@
   <UITaxonomyTreeMainForm>
     <action>
       <NextViewPermission>Volgende</NextViewPermission>
-      <Reset>Reset</Reset>
     </action>
   </UITaxonomyTreeMainForm>
 
   <UIPermissionTreeForm>
     <action>
-      <Save>Save</Save>
       <Cancel>#{word.cancel}</Cancel>
-      <Reset>Reset</Reset>
       <NextAddAction>Volgende</NextAddAction>
       <Previous>#{word.previous}</Previous>
     </action>
@@ -2552,7 +2549,6 @@
   </UIDriveForm>
   <DriveInputSet>
     <title>
-      <RemovePermission>Remove Permission</RemovePermission>
       <ChooseNodeType>Selecteer Node Type</ChooseNodeType>
       <RemoveNodeType>Verwijderen</RemoveNodeType>
     </title>

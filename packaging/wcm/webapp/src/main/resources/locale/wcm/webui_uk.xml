@@ -38,6 +38,8 @@
       <SharedSite>Сайт спільного користування</SharedSite>
       <PersonalDocuments>Особисті Документи</PersonalDocuments>
       <UserDocuments>{0} Документи</UserDocuments>
+      <Collaboration>Collaboration</Collaboration>
+      <Trash>Trash</Trash>
     </label>
   </Drives>
 

@@ -1675,7 +1675,7 @@
   <UIClipboard>
     <header>
       <path>Elément</path>
-      <command/>
+      <command>Cm</command>
       <action>Action</action>
     </header>
     <label>

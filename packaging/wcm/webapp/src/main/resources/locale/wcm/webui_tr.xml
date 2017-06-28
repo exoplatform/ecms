@@ -38,6 +38,8 @@
       <SharedSite>Paylaşılan Site</SharedSite>
       <PersonalDocuments>Kişisel Belgeler</PersonalDocuments>
       <UserDocuments>{0} Belgeleri</UserDocuments>
+      <Collaboration>Collaboration</Collaboration>
+      <Trash>Trash</Trash>
     </label>
   </Drives>
 

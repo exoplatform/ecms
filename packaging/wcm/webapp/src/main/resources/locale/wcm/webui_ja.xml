@@ -38,6 +38,8 @@
       <SharedSite>共有サイト</SharedSite>
       <PersonalDocuments>個人文書</PersonalDocuments>
       <UserDocuments>{0} 文書</UserDocuments>
+      <Collaboration>Collaboration</Collaboration>
+      <Trash>Trash</Trash>
     </label>
   </Drives>
 

@@ -38,6 +38,8 @@
       <SharedSite>Lloc Compartit</SharedSite>
       <PersonalDocuments>Documents personals</PersonalDocuments>
       <UserDocuments>{0} Documents</UserDocuments>
+      <Collaboration>Collaboration</Collaboration>
+      <Trash>Trash</Trash>
     </label>
   </Drives>
 
