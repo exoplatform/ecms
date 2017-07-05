@@ -16,11 +16,15 @@
   </RenameConnector>
   <OpenInOfficeConnector>
     <label>
-      <exo.remote-edit.word>Open in Word</exo.remote-edit.word>
-      <exo.remote-edit.excel>Open in Excel</exo.remote-edit.excel>
-      <exo.remote-edit.powerpoint>Open in Powerpoint</exo.remote-edit.powerpoint>
-      <exo.remote-edit.desktop>Open on Desktop</exo.remote-edit.desktop>
-      <exo.remote-edit.desktop-app>Open in {0}</exo.remote-edit.desktop-app>
+      <exo>
+        <remote-edit>
+          <word>Open in Word</word>
+          <excel>Open in Excel</excel>
+          <powerpoint>Open in Powerpoint</powerpoint>
+          <desktop>Open op bureau</desktop>
+          <desktop-app>Open in {0}</desktop-app>
+        </remote-edit>
+      </exo>
     </label>
   </OpenInOfficeConnector>
   <DocumentAutoVersion>

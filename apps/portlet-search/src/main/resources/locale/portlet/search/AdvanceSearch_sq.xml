@@ -52,8 +52,8 @@
       </option>
     </label>
     <action>
-      <Save>crwdns6793091:0{word.save}crwdne6793091:0</Save>
-      <Cancel>crwdns6793092:0{word.cancel}crwdne6793092:0</Cancel>
+      <Save>crwdns6793091:0#{word.save}crwdne6793091:0</Save>
+      <Cancel>crwdns6793092:0#{word.cancel}crwdne6793092:0</Cancel>
     </action>
   </UISearchPageLayoutManager>
   <searchResultBasePathInputSetAction>

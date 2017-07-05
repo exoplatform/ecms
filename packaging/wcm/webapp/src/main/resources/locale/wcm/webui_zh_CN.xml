@@ -38,6 +38,8 @@
       <SharedSite>共享的网站</SharedSite>
       <PersonalDocuments>Personal Documents</PersonalDocuments>
       <UserDocuments>{0} Documents</UserDocuments>
+      <Collaboration>合作</Collaboration>
+      <Trash>垃圾桶</Trash>
     </label>
   </Drives>
 

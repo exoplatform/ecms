@@ -38,6 +38,8 @@
       <SharedSite>Κοινόχρηστη τοποθεσία</SharedSite>
       <PersonalDocuments>Personal Documents</PersonalDocuments>
       <UserDocuments>{0} Documents</UserDocuments>
+      <Collaboration>Συνεργασία</Collaboration>
+      <Trash>Διαγραμμένα</Trash>
     </label>
   </Drives>
 

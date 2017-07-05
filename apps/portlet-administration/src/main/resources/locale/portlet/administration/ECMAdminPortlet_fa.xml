@@ -2426,15 +2426,12 @@
   <UITaxonomyTreeMainForm>
     <action>
       <NextViewPermission>بعدی</NextViewPermission>
-      <Reset>Reset</Reset>
     </action>
   </UITaxonomyTreeMainForm>
 
   <UIPermissionTreeForm>
     <action>
-      <Save>Save</Save>
       <Cancel>#{word.cancel}</Cancel>
-      <Reset>Reset</Reset>
       <NextAddAction>بعدی</NextAddAction>
       <Previous>قبلی</Previous>
     </action>
@@ -2552,7 +2549,6 @@
   </UIDriveForm>
   <DriveInputSet>
     <title>
-      <RemovePermission>Remove Permission</RemovePermission>
       <ChooseNodeType>انتخاب نوع گره</ChooseNodeType>
       <RemoveNodeType>حذف</RemoveNodeType>
     </title>

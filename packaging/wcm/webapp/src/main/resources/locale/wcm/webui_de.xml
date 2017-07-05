@@ -38,6 +38,8 @@
       <SharedSite>Gemeinsame Webseite</SharedSite>
       <PersonalDocuments>Personenbezogene Unterlagen</PersonalDocuments>
       <UserDocuments>{0} Dokumente</UserDocuments>
+      <Collaboration>Zusammenarbeit</Collaboration>
+      <Trash>Papierkorb</Trash>
     </label>
   </Drives>
 

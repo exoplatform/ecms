@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UIFCCForm>
+    <msg>
+      <name-not-allowed>This name is not allowed.</name-not-allowed>
+      <in-versioning>Por favor, verifique o nó atual antes de adicionar um novo nó.</in-versioning>
+      <cannot-save>Um erro ocorreu ao salvar o nó.</cannot-save>
+      <saved-successfully>{0}</saved-successfully>
+      <not-support>Não foi possível carregar o modelo de '{0}'.</not-support>
+      <not-add-folder>Somente arquivos podem ser adicionados a esta pasta.</not-add-folder>
+      <access-denied>Acesso negado! Você não tem permissão de adição em '{0}'</access-denied>
+      <path-not-found>O nó '{0}' está bloqueado. Desbloquei-o antes de criar documentos.</path-not-found>
+      <node-locked>O nó '{0}' está bloqueado. Desbloquei-o antes de criar documentos.</node-locked>
+      <node-isExist>O nó '{0}' está bloqueado. Desbloquei-o antes de criar documentos.</node-isExist>
+      <get-dialog-path>Erro ao carregar o formulário.</get-dialog-path>
+      <new-jcr-template>Um erro ocorreu ao criar um novo modelo.</new-jcr-template>
+    </msg>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIFCCForm>
+
+  <UIFCCConfig>
+    <label>
+      <UIFCCSaveLocationField>Salvar local</UIFCCSaveLocationField>
+      <UIFCCWorkspaceFormSelectBox>Selecionar Espaço de Trabalho</UIFCCWorkspaceFormSelectBox>
+      <UIFCCTemplateField>Opções de modelo</UIFCCTemplateField>
+      <UIFCCLocationFormInputAction>Local para salvar</UIFCCLocationFormInputAction>
+      <UIFCCTemplateFormSelectBox>Select Template</UIFCCTemplateFormSelectBox>
+      <UIFCCSaveFormStringInput>Customizar o botão Salvar</UIFCCSaveFormStringInput>
+      <UIFCCMessageFormTextareaInput>Mensagem de agradecimento</UIFCCMessageFormTextareaInput>
+      <UIFCCRedirectFormCheckboxInput>Redirect:</UIFCCRedirectFormCheckboxInput>
+      <UIFCCRedirectPathFormStringInput>Caminho de redirecionamento:</UIFCCRedirectPathFormStringInput>
+      <UIFCCActionField>Actions</UIFCCActionField>
+    </label>
+    <msg>
+      <save-successfully>Salvo nas preferências de portlets com sucesso</save-successfully>
+      <item-not-found>Este caminho é inválido!</item-not-found>
+      <fileType-empty>Você deve selecionar um tipo de arquivo antes de salvar esta configuração.</fileType-empty>
+      <ws-empty>Você deve escolher um espaço de trabalho.</ws-empty>
+      <action-empty>Você deve escolher uma pasta com uma ação</action-empty>
+      <message-empty>A mensagem não pode ser vazia quando você não seleciona a opção de redirecionamento, ou o caminho está vazio.</message-empty>
+      <get-template>Um erro ocorreu ao acessar o modelo.</get-template>
+      <set-template-option>Um erro occoreu ao configurar opções do modelo.</set-template-option>
+      <do-select>Um erro ocorreu ao selecionar local.</do-select>
+      </msg>
+    <action>
+      <Save>#{word.save}</Save>
+    </action>
+  </UIFCCConfig>
+
+  <UIFCCLocationFormInputAction>
+    <title>
+      <SelectPath>Selecionar caminho</SelectPath>
+    </title>
+  </UIFCCLocationFormInputAction>
+
+  <UIFCCActionList>
+    <header>
+      <name>Name</name>
+      <description>Description</description>
+      <instanceOf>Instance of</instanceOf>
+      <action>Action</action>
+    </header>
+    <action>
+      <Add>Add</Add>
+    </action>
+    <msg>
+      <empty>Sem ação</empty>
+      <remove-popup-first>Você deve fechar a pop up de edição antes de excluir este nó.</remove-popup-first>
+      <confirm-delete-action>Deseja realmente excluir esta ação?</confirm-delete-action>
+      <template-empty>Modelo de '{0}' é nulo ou vazio</template-empty>
+      <template-null>Modelo é nulo/vazio ou você não tem permissão para acessá-lo.</template-null>
+      <access-denied>Acesso negado! Você não tem permissão suficiente para efetuar esta ação.</access-denied>
+    </msg>
+  </UIFCCActionList>
+
+  <UIFCCSelectorPopupWindow>
+    <title>
+      <UIOneNodePathSelector>Selecionar local</UIOneNodePathSelector>
+    </title>
+  </UIFCCSelectorPopupWindow>
+
+  <UIWorkspaceList>
+    <label>
+      <workspaceName>Espaço de Trabalho:</workspaceName>
+      <rootNodePath>Caminho Raiz:</rootNodePath>
+      <rootNodeInfo>Nó Raiz</rootNodeInfo>
+    </label>
+  </UIWorkspaceList>
+
+  <rootNodeInfo>
+    <title>
+      <AddRootNode>Adionar Nó Raiz</AddRootNode>
+    </title>
+  </rootNodeInfo>
+
+  <UITreeList>
+    <info>
+      <child-not-found>Este nó não tem nenhum nó filho</child-not-found>
+    </info>
+    <header>
+      <name>Name</name>
+      <action>Action</action>
+    </header>
+  </UITreeList>
+
+  <UIFCCActionPopupWindow>
+    <title>
+      <UIFCCActionContainer>Adicionar a forma de ação</UIFCCActionContainer>
+    </title>
+  </UIFCCActionPopupWindow>
+
+  <UIFCCActionForm>
+    <title>Adicionar/Editar uma Ação</title>
+    <action>
+      <Save>#{word.save}</Save>
+      <Close>#{word.close}</Close>
+    </action>
+    <msg>
+      <repository-exception>Não foi possível salvar esta ação. O nome fornecido não deve conter um índice em seu elemento final.</repository-exception>
+      <numberformat-exception>Não foi possível salvar esta ação. O nome fornecido não deve ter '[' ou ']'.</numberformat-exception>
+      <existed-action>O nome da ação '{0}' já existe. Por favor, escolha outro nome.</existed-action>
+      <unable-add-action>Não foi possível adicionar esta ação</unable-add-action>
+      <unable-add>Não foi possível adicionar esta ação! Este nó é raiz ou você não tem permissão suficiente.</unable-add>
+      <not-support>O diálogo '{0}' não é suportado</not-support>
+      <no-permission-add>Acesso negado ! Você não tem permissão suficiente para adicionar uma ação aqui.</no-permission-add>
+      <access-denied>Acesso negado ! Você não tem permissão para acessar este modelo.</access-denied>
+    </msg>
+    <validator>
+      <validator>Validador</validator>
+      <destPath>Com caminho</destPath>
+    </validator>
+  </UIFCCActionForm>
+
+  <UIFCCActionTypeForm>
+    <label>
+      <actionType>Criar uma Ação de Tipo</actionType>
+    </label>
+    <msg>
+      <not-support>Não foi possível carregar o modelo de '{0}'.</not-support>
+      <do-not-permission>Você não tem permissão para carregar o modelo de '{0}'.</do-not-permission>
+    </msg>
+  </UIFCCActionTypeForm>
+
+  <PopupComponent>
+    <title>
+      <UIOneNodePathSelector>Selecionar Local</UIOneNodePathSelector>
+      <UIPermissionSelector>Navegador de Permissão</UIPermissionSelector>
+      <UICategoriesSelector>Adicionar categorias</UICategoriesSelector>
+    </title>
+  </PopupComponent>
+
+  <DateTimeValidator>
+    <msg>
+      <Invalid-input>O campo '{0}' com o valor '{1}' é inválido</Invalid-input>
+    </msg>
+  </DateTimeValidator>
+
+  <UITabPane>
+    <title>
+      <UICategoriesSelectPanel>Selecionar categorias</UICategoriesSelectPanel>
+      <UISelectedCategoriesGrid>Categorias referenciadas</UISelectedCategoriesGrid>
+    </title>
+  </UITabPane>
+
+  <UICategoriesSelector>
+    <action>
+      <close>#{word.close}</close>
+    </action>
+  </UICategoriesSelector>
+
+  <PopupComponent>
+    <title>
+      <UIOneTaxonomySelector>Adicionar Categorias</UIOneTaxonomySelector>
+    </title>
+  </PopupComponent>
+
+  <UITreeTaxonomyList>
+    <label>
+      <taxonomyTree>Árvore de Categorias</taxonomyTree>
+    </label>
+  </UITreeTaxonomyList>
+
+  <UIFCCTaxonomyPopupWindow>
+    <title>
+      <UIOneTaxonomySelector>Seletor de Categorias</UIOneTaxonomySelector>
+    </title>
+  </UIFCCTaxonomyPopupWindow>
+</bundle>

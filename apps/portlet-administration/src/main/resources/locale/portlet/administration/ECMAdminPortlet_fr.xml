@@ -2426,15 +2426,12 @@
   <UITaxonomyTreeMainForm>
     <action>
       <NextViewPermission>Suivant</NextViewPermission>
-      <Reset>Reset</Reset>
     </action>
   </UITaxonomyTreeMainForm>
 
   <UIPermissionTreeForm>
     <action>
-      <Save>Save</Save>
       <Cancel>#{word.cancel}</Cancel>
-      <Reset>Reset</Reset>
       <NextAddAction>Suivant</NextAddAction>
       <Previous>Précédent</Previous>
     </action>
@@ -2552,7 +2549,6 @@
   </UIDriveForm>
   <DriveInputSet>
     <title>
-      <RemovePermission>Remove Permission</RemovePermission>
       <ChooseNodeType>Choisir un type de noeud</ChooseNodeType>
       <RemoveNodeType>Supprimer</RemoveNodeType>
     </title>

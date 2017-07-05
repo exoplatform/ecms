@@ -81,8 +81,8 @@
       <ContentsVisibilityHelp>crwdns6793210:0crwdne6793210:0</ContentsVisibilityHelp>
     </help>
     <action>
-      <Save>crwdns6793211:0{word.save}crwdne6793211:0</Save>
-      <Cancel>crwdns6793212:0{word.cancel}crwdne6793212:0</Cancel>
+      <Save>crwdns6793211:0#{word.save}crwdne6793211:0</Save>
+      <Cancel>crwdns6793212:0#{word.cancel}crwdne6793212:0</Cancel>
       <delete>crwdns6793213:0crwdne6793213:0</delete>
     </action>
     <msg>

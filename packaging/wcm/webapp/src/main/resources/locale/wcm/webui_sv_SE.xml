@@ -38,6 +38,8 @@
       <SharedSite>Delad webbplats</SharedSite>
       <PersonalDocuments>Personal Documents</PersonalDocuments>
       <UserDocuments>{0} Documents</UserDocuments>
+      <Collaboration>Samarbete</Collaboration>
+      <Trash>Papperskorgen</Trash>
     </label>
   </Drives>
 

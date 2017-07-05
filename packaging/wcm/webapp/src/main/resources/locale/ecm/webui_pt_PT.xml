@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <!--
+  #####################################################################
+  # org.exoplatform.ecm.webui.tree.selectmany.UICategoriesSelectPanel #
+  #####################################################################
+  -->
+  <UITreeList>
+    <header>
+      <name>Name</name>
+      <action>Add</action>
+    </header>
+    <info>
+      <child-not-found>Sub-nó não encontrado!</child-not-found>
+    </info>
+    <action>
+      <title>
+        <select>Selecionar</select>
+      </title>
+    </action>
+  </UITreeList>
+  <!--
+  ######################################################################
+  # org.exoplatform.ecm.webui.tree.selectmany.UISelectedCategoriesGrid #
+  ######################################################################
+  -->
+  <UISelectedCategoriesGrid>
+    <header>
+      <categoryName>Nome da Categoria</categoryName>
+      <categoryPath>Caminho da Categoria</categoryPath>
+      <action>#{word.action}</action>
+    </header>
+    <action>
+      <SaveCategories>#{word.save}</SaveCategories>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <cannot-save>As categorias não foram salvas.</cannot-save>
+      <have-saved>As categorias foram salvas com sucesso</have-saved>
+      <non-categories>Por favor, selecione categorias válidas.</non-categories>
+      <confirm-delete>Você quer deletar esta categoria</confirm-delete>
+    </msg>
+  </UISelectedCategoriesGrid>
+  <!--
+  ######################################################################
+  # org.exoplatform.ecm.webui.selector.UIPermissionSelector           #
+  ######################################################################
+  -->
+  <SelectUserOrGroup>
+    <title>
+      <UIPermissionUser>Selecionar Usuário</UIPermissionUser>
+      <UIPermissionMembership>Selecionar associação</UIPermissionMembership>
+      <TaxoSelectUserOrGroup>Selecione Associação</TaxoSelectUserOrGroup>
+    </title>
+  </SelectUserOrGroup>
+  <UIPermissionUser>
+    <label>
+      <selectUser>Selecionar Usuário</selectUser>
+      <selectGroup>Selecionar grupo</selectGroup>
+    </label>
+  </UIPermissionUser>
+  <UIPermissionMembership>
+    <label>
+      <selectUser>Selecionar associação</selectUser>
+      <selectGroup>Selecionar grupo</selectGroup>
+    </label>
+  </UIPermissionMembership>
+  <TaxoSelectUserOrGroup>
+    <label>
+      <selectGroup>Select Group</selectGroup>
+      <selectMembership>Selecione Associação</selectMembership>
+    </label>
+  </TaxoSelectUserOrGroup>
+  <!--
+  ######################################################################
+  # org.exoplatform.wcm.webui.clv.UICLVConfig        #
+  ######################################################################
+  -->
+  <UICLVConfigTargetPageSelectorPopupWindow>
+    <title>
+      <UIPageSelector>Seletor de página</UIPageSelector>
+    </title>
+  </UICLVConfigTargetPageSelectorPopupWindow>
+  <!--
+  ###################################################################################
+  # Repository                                        #
+  ###################################################################################
+  -->
+  <rootNodeInfo>
+    <title>
+      <AddRootNode>Adicionar o nó raíz</AddRootNode>
+    </title>
+  </rootNodeInfo>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.UIMetadataList         #
+  ################################################################################
+  -->
+  <UIMetadataAnyPermission>
+    <label>
+      <anyPermission>Qualquer permissão</anyPermission>
+    </label>
+  </UIMetadataAnyPermission>
+</bundle>

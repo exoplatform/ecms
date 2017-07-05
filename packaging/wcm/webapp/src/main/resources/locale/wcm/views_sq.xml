@@ -39,11 +39,11 @@
       </label>
       <tooltip>
         <add-edit>crwdns6792776:0crwdne6792776:0</add-edit>
-        <cancel>crwdns6792777:0{word.cancel}crwdne6792777:0</cancel>
+        <cancel>crwdns6792777:0#{word.cancel}crwdne6792777:0</cancel>
       </tooltip>
       <action>
         <add-edit>crwdns6792778:0crwdne6792778:0</add-edit>
-        <cancel>crwdns6792779:0{word.cancel}crwdne6792779:0</cancel>
+        <cancel>crwdns6792779:0#{word.cancel}crwdne6792779:0</cancel>
       </action>
     </view>
   </SiteMetadata>

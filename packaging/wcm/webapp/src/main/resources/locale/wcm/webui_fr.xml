@@ -38,6 +38,8 @@
       <SharedSite>Espace Partagé</SharedSite>
       <PersonalDocuments>Documents Personnels</PersonalDocuments>
       <UserDocuments>{0} Documents</UserDocuments>
+      <Collaboration>Collaboration</Collaboration>
+      <Trash>Corbeille</Trash>
     </label>
   </Drives>
 

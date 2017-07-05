@@ -1,0 +1,3247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <!--
+  #############################################################################
+  #             org.exoplatform.ecm.webui.component.UICommentForm             #
+  #############################################################################
+  -->
+  <UICommentForm>
+    <label>
+      <name>Name</name>
+      <email>E-Mail</email>
+      <website>Web Site</website>
+      <comment>Comment</comment>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <not-support>Você não pode comentar sobre este tipo de documento.</not-support>
+      <not-checkedout>Você deve reservar o nó antes de comentar.</not-checkedout>
+      <content-null>Você não pode publicar um comentário vazio.</content-null>
+    </msg>
+  </UICommentForm>
+  <!--
+  #############################################################
+  # org.exoplatform.ecm.webui.component.UIVoteForm.gtmpl    #
+  #############################################################
+  -->
+  <UIVoteForm>
+    <title>
+      <normal>Ruim</normal>
+      <good>Below average</good>
+      <verygood>Médio</verygood>
+      <excellent>Above average</excellent>
+      <best>Bom</best>
+      <no-value>nenhum valor ainda</no-value>
+    </title>
+    <label>
+      <my-rating>Minha avaliação:</my-rating>
+    </label>
+    <button>
+      <label>
+        <confirm>Ok</confirm>
+      </label>
+    </button>
+    <msg>
+      <not-support>Não é permitido votar nesse tipo de documento.</not-support>
+      <not-checkedout>Você deve reservar o nó antes de votar.</not-checkedout>
+      <vote-restriction>Você não pode votar mais de uma vez.</vote-restriction>
+    </msg>
+  </UIVoteForm>
+ 
+  <!--
+  #############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer    #
+  #############################################################################
+  -->
+  <UIJCRExplorer>
+    <msg>
+      <refresh-session-success>The session was refreshed successfully.</refresh-session-success>
+      <no-node-history>Você está no nó raíz.</no-node-history>
+      <save-session-success>Todas as alterações foram salvas.</save-session-success>
+      <target-path-not-found>Você não pode acessar esse nó, ou porque ele não existe mais ou porque você não tem permissão para acessá-lo.</target-path-not-found>
+    </msg>
+  </UIJCRExplorer>
+  <!--
+  #############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UISideBar        #
+  #############################################################################
+  -->
+  <UISideBar>
+    <label>
+      <Relation>Relation</Relation>
+      <Explorer>Explorador de arquivos</Explorer>
+      <Close>Fechar barra lateral</Close>
+      <TagExplorer>Nuvem de tags</TagExplorer>
+      <Clipboard>Área de transferência</Clipboard>
+      <SavedSearches>Pesquisas salvas</SavedSearches>
+    </label>
+    <title>
+      <Control>Control Sidebar</Control>
+      <Close>Fechar barra lateral</Close>
+    </title>
+  </UISideBar>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIExplorerActionBar #
+  ################################################################################
+  -->
+  <UIViewBar>
+    <label>
+      <driveWorkspace>Unidade da Área de trabalho:</driveWorkspace>
+      <backToJCR>Voltar para as unidades principais da JCR</backToJCR>
+      <setUpBrowser>Configurar preferências de navegação</setUpBrowser>
+      <refesh>Refresh</refesh>
+      <currentDrive>Unidade atual</currentDrive>
+      <selectView>Selecionar visualização</selectView>
+      <showSideBar>Mostrar barra lateral</showSideBar>
+      <more>More</more>
+      <backTo>Voltar</backTo>
+    </label>
+  </UIViewBar>
+
+  <!--
+  #############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIDrivesArea  #
+  #############################################################################
+  -->
+  <UIDrivesBrowser>
+    <title>
+      <PersonalDrives>Unidades pessoais</PersonalDrives>
+      <GroupDrives>Unidades dos grupos</GroupDrives>
+      <GeneralDrives>General drives</GeneralDrives>
+    </title>
+    <msg>
+      <no-view-found>Não há nenhuma visualização disponível de acordo com suas permissões de acesso na unidade '{0}'.</no-view-found>
+      <access-denied>Acesso negado. Talvez você não tenha permissão na área de trabalho da unidade '{0}'.</access-denied>
+      <workspace-not-exist>Unidade '{0}' foi armazenada em um espaço de trabalho não reconhecido. Por favor reconfigure esta unidade.</workspace-not-exist>
+    </msg>
+  </UIDrivesBrowser>
+
+  <!--
+  #############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UITreeExplorer    #
+  #############################################################################
+  -->
+  <UITreeExplorer>
+    <title>Explorer</title>
+    <label>
+      <Root>Raíz</Root>
+      <webDavView>Abrir no MS Office</webDavView>
+    </label>
+    <msg>
+      <path-not-found>Este elemento foi excluído ou alterado. Por favor, clique no botão atualizar.</path-not-found>
+    </msg>
+  </UITreeExplorer>
+  <!--
+  ##################################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIViewRelationList    #
+  ##################################################################################
+  -->
+  <UIViewRelationList>
+    <label>
+      <languages-list>Lista de traduções</languages-list>
+      <relation-list>Lista de relações</relation-list>
+      <references-list>Lista de referências</references-list>
+      <no-related-document>Nenhum documento relacionado</no-related-document>
+      <related-document>Documentos relacionados</related-document>
+    </label>
+  </UIViewRelationList>
+  <!--
+  #########################################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.control.UIPreferencesForm  #
+  #########################################################################################
+  -->
+  <UIPreferencesForm>
+    <title>Configurar suas preferências de navegação</title>
+    <label>
+      <enableStructure>Habilitar estrutura do DMS:</enableStructure>
+      <showSideBar>Show sidebar:</showSideBar>
+      <showHiddenNode>Mostrar nós ocultos</showHiddenNode>
+      <showNonDocument>Mostrar nós do tipo "não documento"</showNonDocument>
+      <showRefDocuments>Mostrar documentos referenciados</showRefDocuments>
+      <enableDragAndDrop>Habilitar Arrastar &amp; Soltar</enableDragAndDrop>
+      <sortBy>Classificar por:</sortBy>
+      <order>Ordenar por:</order>
+      <nodesPerPage>Itens por página:</nodesPerPage>
+    </label>
+    <action>
+      <Back>#{word.close}</Back>
+      <Save>#{word.save}</Save>
+    </action>
+  </UIPreferencesForm>
+  <!--
+  #########################################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.control.UIPreferencesForm  #
+  #########################################################################################
+  -->
+  <UIAllItemsPreferenceForm>
+    <title>Configurar preferências de filtros</title>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Save>#{word.save}</Save>
+    </action>
+  </UIAllItemsPreferenceForm>
+  <!--
+  #########################################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIRenameForm  #
+  #########################################################################################
+  -->
+  <UIRenameForm>
+    <title>Renomear</title>
+    <label>
+      <nameField>Name</nameField>
+      <titleField>Título</titleField>
+    </label>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Save>#{word.save}</Save>
+      <Back>#{word.back}</Back>
+    </action>
+    <msg>
+      <rename-successfull>O nó '{0}' foi renomeado para '{1}' com sucesso.</rename-successfull>
+      <rename-denied>Acesso negado. Você não pode renomear este nó.</rename-denied>
+      <fileName-invalid>O novo nome contém alguns caracteres inválidos.</fileName-invalid>
+      <newName-same-oldName>O novo nome já existe. Por favor, escolha outro nome.</newName-same-oldName>
+      <version-exception>Esse nó (ou o predecessor dele) não foi reservado.</version-exception>
+      <lock-exception>Este nó está bloqueado. Por favor, desbloqueie antes de renomeá-lo.</lock-exception>
+      <constraintViolation-exception>Erro ao renomear o nó '{0}'. Por favor, tente novamente.</constraintViolation-exception>
+      <unknown-prefix>O Prefixo '{0}' não foi registrado ainda.</unknown-prefix>
+      <rename-error>Ocorreu um erro ao renomear este nó. Por favor, verifique novamente.</rename-error>
+    </msg>
+  </UIRenameForm>
+  <UIPopupWindow>
+    <title>
+      <UIRenameForm>Renomear</UIRenameForm>
+      <UIActionContainer>Editar ação</UIActionContainer>
+      <UIFolderForm>Adicionar uma pasta</UIFolderForm>
+      <UIUploadManager>Upload de arquivo</UIUploadManager>
+      <UIReferencesList>Lista de referências</UIReferencesList>
+      <UIExportNode>Exportar Node</UIExportNode>
+      <UINodeTypeInfo>Informação de tipo de nó</UINodeTypeInfo>
+      <UIVersionInfo>Informação de versão</UIVersionInfo>
+      <UIActivateVersion>Ativar versão</UIActivateVersion>
+      <UIAuditingInfo>Informação de auditoria</UIAuditingInfo>
+      <UIActivateAuditing>Ativar auditoria</UIActivateAuditing>
+      <UIPermissionManager>Gerenciamento de permissões</UIPermissionManager>
+      <UIPropertiesManager>Gerenciamento de propriedades</UIPropertiesManager>
+      <UIECMSearch>Busca avançada</UIECMSearch>
+      <UISavedQuery>Lista de consultas salvas</UISavedQuery>
+      <UIWatchDocumentForm>Acompanhar documento</UIWatchDocumentForm>
+      <UIActionManager>Gerenciar ações</UIActionManager>
+      <UIDocumentForm>Editar documento</UIDocumentForm>
+      <UIDocumentFormController>Adicionar novo documento</UIDocumentFormController>
+      <EditFormController>Editar documento</EditFormController>
+      <UIRelationManager>Adicionar relação</UIRelationManager>
+      <UICategoryManager>Adicionar categoria</UICategoryManager>
+      <UIImportNode>Importar</UIImportNode>
+      <UIViewMetadataManager>Ver metadados</UIViewMetadataManager>
+      <UIVoteForm>Votar no documento</UIVoteForm>
+      <UICommentForm>Comentar</UICommentForm>
+      <UIPreferencesForm>Preferências</UIPreferencesForm>
+      <UIPublicationManager>Gerenciar publicações</UIPublicationManager>
+      <UIConfirmMessage>Excluir?</UIConfirmMessage>
+      <UIDeleteFileConfirmMessage>Excluir arquivo ?</UIDeleteFileConfirmMessage>
+      <UIDeleteFolderConfirmMessage>Excluir pasta ?</UIDeleteFolderConfirmMessage>
+      <UIDeleteItemsConfirmMessage>Excluir itens?</UIDeleteItemsConfirmMessage>
+      <UIRestoreConfirmMessage>Confirmar restauração</UIRestoreConfirmMessage>
+      <UIActivePublication>Inscrever-se no ciclo de publicações</UIActivePublication>
+      <UITaggingForm>Aplicar tag a este documento</UITaggingForm>
+      <UIThumbnailForm>Adicionar miniatura</UIThumbnailForm>
+      <UIAllItemsPreferenceForm>Preferências</UIAllItemsPreferenceForm>
+      <UISelectRestorePath>Selecionar caminho de restauração</UISelectRestorePath>
+      <UISEOForm>Gerenciar SEO</UISEOForm>
+      <UISEOToolbarForm>Gerenciar SEO</UISEOToolbarForm>
+      <UIReadOnlyFileConfirmMessage>Abrir documento</UIReadOnlyFileConfirmMessage>
+      <UIDocumentAutoVersionForm>Copiar documento</UIDocumentAutoVersionForm>
+    </title>
+    <header>
+      <workspace>Espaço de trabalho</workspace>
+      <path>Caminho</path>
+    </header>
+  </UIPopupWindow>
+  <!--
+  #########################################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIResourceForm #
+  #########################################################################################
+  -->
+  <UIResourceForm>
+    <title>Editar o conteúdo do arquivo</title>
+    <label>
+      <name>Name</name>
+      <textToModify>Texto para modificar</textToModify>
+      <fileToUpload>Enviar novo conteúdo para esse documento (deve ser do mesmo mime-type)</fileToUpload>
+    </label>
+  </UIResourceForm>
+  <!--
+  ###################################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIActionBar      #
+  ###################################################################################
+  -->
+  <UIActionBar>
+    <tooltip>
+      <AddFolder>Nova pasta</AddFolder>
+      <AddDocument>Novo conteúdo</AddDocument>
+      <EditDocument>Edit</EditDocument>
+      <Upload>Enviar</Upload>
+      <Paste>Colar</Paste>
+      <Search>Buscar</Search>
+      <WatchDocument>Acompanhar/Deixar de acompanhar</WatchDocument>
+      <TaggingDocument>Marcação</TaggingDocument>
+      <Vote>Votar para esse documento</Vote>
+      <Comment>Comentar</Comment>
+      <ManageVersions>Versões</ManageVersions>
+      <ManageAuditing>Gerenciar auditoria</ManageAuditing>
+      <ManagePublications>Publicações</ManagePublications>
+      <ManageCategories>Categories</ManageCategories>
+      <ManageRelations>Relações</ManageRelations>
+      <ManageActions>Actions</ManageActions>
+      <ExportNode>Exportar</ExportNode>
+      <ImportNode>Importar</ImportNode>
+      <OverloadThumbnail>Substituir miniatura</OverloadThumbnail>
+      <ManageHidden>Esconder/Mostrar conteúdo</ManageHidden>
+      <ViewReferences>Referências</ViewReferences>
+      <ViewNodeType>Tipos</ViewNodeType>
+      <ViewPermissions>Permissões</ViewPermissions>
+      <ViewProperties>Propriedades</ViewProperties>
+      <ViewMetadatas>Metadados</ViewMetadatas>
+      <ViewRelations>Mostrar/Esconder relações</ViewRelations>
+      <ShowJCRStructure>Mostrar/Esconder estrutura JCR</ShowJCRStructure>
+      <EditProperty>Editar propriedades do documento</EditProperty>
+      <UploadNewVersion>Carregar uma nova versão</UploadNewVersion>
+    </tooltip>
+    <msg>
+      <cannot-action-in-rootnode>Você não pode executar esta ação no nó raiz.</cannot-action-in-rootnode>
+      <node-checkedin>Você deve reservar o nó primeiro.</node-checkedin>
+      <cannot-enable-version-rootnode>Não é possível habilitar versionamento para o nó raíz.</cannot-enable-version-rootnode>
+      <cannot-enable-publication-rootnode>Não é possível habilitar publicação para o nó raíz.</cannot-enable-publication-rootnode>
+      <manage-publication>
+        <not-supported-nodetype>A publicação suporta apenas nós de documento.</not-supported-nodetype>
+        <no-publication-lifecycle>Não há ciclo de publicação configurado.</no-publication-lifecycle>
+      </manage-publication>
+      <unsubcriber-lifecycle>O nó já foi retirado.</unsubcriber-lifecycle>
+      <not-supported-nodetype>O ciclo de vida do não-assinante suporta apenas o nó de documento.</not-supported-nodetype>
+      <unsubcriber-lifecycle-finish>Foi desfeita a inscrição do nó com sucesso.</unsubcriber-lifecycle-finish>
+      <access-false>O nó não é um artigo ou está reservado.</access-false>
+      <unsupported-action>Essa ação não é suportada.</unsupported-action>
+      <not-relationable>Esse nó ainda não tem nenhum link relacionado com outro nó.</not-relationable>
+      <node-pasted>O node '{0}' foi colado na localização '{1}'. Esta operação já foi salva e você não precisa clicar no ícone salvar.</node-pasted>
+      <no-node-selected>Nenhum nó copiado.</no-node-selected>
+      <unable-edit>O nó '{0}' do tipo '{1}' não suporta edição.</unable-edit>
+      <not-support>O nó selecionado não pode ser editado.</not-support>
+      <template-null>Este nó não possui janela de criação disponível.</template-null>
+      <keyword-null>Não há palavras-chave para buscar.</keyword-null>
+      <not-found>Nenhum resultado encontrado.</not-found>
+      <keyword-not-allow>Está palavra-chave não é permitida.</keyword-not-allow>
+      <is-not-referenable>O nó '{0}' não pode ser referenciado.</is-not-referenable>
+      <access-denied>Acesso negado. Você não possui permissão para editar este nó.</access-denied>
+      <access-add-denied>Acesso negado. Você não possui permissão para adicionar neste nó.</access-add-denied>
+      <item-existed>Este nó já existe. Não pode ter o mesmo nome de seu irmão.</item-existed>
+      <removed-hidden-mixin>Você removeu o mixin oculto com sucesso.</removed-hidden-mixin>
+      <added-hidden-mixin>Você adicionou o mixin oculto com sucesso.</added-hidden-mixin>
+      <not-supported>Essa função só é suportada pelo tipo documento.</not-supported>
+      <empty-file-type>Você não pode adicionar documentos neste nó.</empty-file-type>
+      <unsupported-watch>Apenas nós de documento podem ser acompanhados.</unsupported-watch>
+      <watch-checkedin>Você deve reservar o nó antes de passar a acompanhá-lo.</watch-checkedin>
+      <unsupported-tagging>Só é possível aplicar tags em nós do tipo documento.</unsupported-tagging>
+      <tagnode-checkedin>Você deve reservar o nó antes de rotulá-lo.</tagnode-checkedin>
+    </msg>
+    <title>
+      <select-tab>Selecionar aba</select-tab>
+      <SimpleSearch>Pesquisa rápida</SimpleSearch>
+      <AdvanceSearch>Busca avançada</AdvanceSearch>
+      <SavedQueries>Consultas salvas</SavedQueries>
+      <ShowAllOwnedByUser>Mostrar todos meus itens</ShowAllOwnedByUser>
+      <ShowAllFavourite>Mostrar todos os itens favoritos</ShowAllFavourite>
+      <ShowAllHidden>Mostrar todos os itens escondidos</ShowAllHidden>
+      <ShowAllFromTrash>Mostrar todos os itens da Lixeira</ShowAllFromTrash>
+    </title>
+  </UIActionBar>
+  <UIPopupMenu>
+    <msg>
+      <has-not-permission>Acesso negado.  Você não tem permissão de adição neste nó.</has-not-permission>
+      <has-not-edit-permission>Acesso negado.  Você não tem permissão de editar neste nó. Por favor, entre em contato com um administrador.</has-not-edit-permission>
+      <cannot-login-node>Você não pode acessar e colar um nó aqui.</cannot-login-node>
+      <cannot-paste-nodetype>Você não pode colar o nó aqui.</cannot-paste-nodetype>
+      <has-not-permission-unlok>Você não tem permissão para desbloquear este nó.</has-not-permission-unlok>
+      <bound-exception>Você não tem permissão para renomear este nó. Por favor, entre em contato com o administrador.</bound-exception>
+      <bound-move-exception>Você não pode mover o nó para ele mesmo ou para seus subnós.</bound-move-exception>
+      <does-not-support-auditing>Você não pode ativar a auditoria neste nó.</does-not-support-auditing>
+      <can-not-rename-node>Você não tem permissão de renomear este nó. Por favor, entre em contato com o administrador para conseguir a permissão correta.</can-not-rename-node>
+      <can-not-cut-node>Você não tem permissão para recortar este nó. Por favor, contate o adiministrador para ter a permissão correta.</can-not-cut-node>
+      <can-not-remove-node>Você não tem permissão para remover este nó. Por favor, contate o adiministrador.</can-not-remove-node>
+      <can-not-lock-node>Você não tem permissão para bloquear o nó {0}. Por favor, contate o adiministrador para ter a permissão correta.</can-not-lock-node>
+      <can-not-unlock-node>Você não tem permissão para desbloquear este nó. Por favor, contate o adiministrador para ter a permissão correta.</can-not-unlock-node>
+      <no-node>Por favor, selecione ao menos um nó antes de colar.</no-node>
+      <can-not-paste-node>Você não possui permissão para mover para este nó. Por favor, contate o adiministrador para ter a permissão correta.</can-not-paste-node>
+      <can-not-move-node>Você não tem permissão para mover este nó. Entre em contato com o administrador.</can-not-move-node>
+      <does-not-support-versioning>Você não tem permissão para mover esse nó. Por favor, entre em contato com o administrador.</does-not-support-versioning>
+      <path-not-found>Este elemento foi excluído ou modificado. Por favor, clique no botão Atualizar.</path-not-found>
+      <paste-lock-exception>Você não pode colar '{0}' neste nó, porque a origem ou destino dele está bloqueado ou relacionado ao nó bloqueado.</paste-lock-exception>
+      <can-not-checkin-node>Você não pode liberar da reserva esse nó. Por favor, verifique se você possui as permissões necessárias.</can-not-checkin-node>
+      <can-not-checkout-node>Você não pode reservar o nó. Por favor, verifique se você tem as permissões necessárias.</can-not-checkout-node>
+      <move-constraint-exception>Algum erro ocorreu enquanto movia o nó.</move-constraint-exception>
+      <not-lock-owner>Você não pode desbloquear este node porque não foi você que o bloqueou.</not-lock-owner>
+      <is-checked-in>Por favor, reserve esse nó antes de renomeá-lo.</is-checked-in>
+      <is-checked-in-lock>Por favor, reserve esse nó antes de bloqueá-lo.</is-checked-in-lock>
+      <cant-lock>Você não pode bloquear este node.</cant-lock>
+      <node-locked>O item com caminho {0} ou de nível superior está bloqueado.</node-locked>
+      <can-not-delete>Feche este nó antes de excluí-lo.</can-not-delete>
+      <can-not-delete-version>Não é possível excluir este nó, ele está versionado.</can-not-delete-version>
+      <not-support>Você não pode excluir o nó selecionado. Por favor, selecione outro nó.</not-support>
+      <current-node-not-allow-paste>Você não pode colar o tipo de nó copiado no nó atual.</current-node-not-allow-paste>
+      <copied-node-in-versioning>Você não pode colar o nó copiado. Ele está versionado.</copied-node-in-versioning>
+      <parent-node-locked>Você não tem permissão para desbloquear o nó '{0}'.</parent-node-locked>
+      <this-node-locked-by-parent>Você não pode desbloquear este nó. Ele está bloqueado por um nó antecessor ou um nó pai.</this-node-locked-by-parent>
+      <paste-node-same-name>Você não pode colar um nó com o mesmo nome de um nó que já existe na pasta de destino.</paste-node-same-name>
+      <has-not-add-permission>Você não possui permissão para adicionar novo nó.</has-not-add-permission>
+      <node-cutting>O nó está sendo recortado. Você não pode colá-lo aqui.</node-cutting>
+      <access-denied>Acesso negado. Talvez você não tenha permissão neste nó.</access-denied>
+      <remove-verion-exception>Você não pode remover este nó porque ele (ou seu antecessor) não está reservado.</remove-verion-exception>
+      <remove-referentialIntegrityException>Você não pode excluir este nó porque ele está sendo o alvo de uma propriedade de referência.</remove-referentialIntegrityException>
+      <constraintviolation-exception>O item obrigatório jcr:uiud não foi encontrado. Talvez o nó foi excluído ou modificado. Por favor, clique no botão Atualizar.</constraintviolation-exception>
+      <path-not-found-exception>Este nó foi excluído ou alterado. Por favor, clique no botão Atualizar.</path-not-found-exception>
+      <not-exist-categories>A categoria não existe</not-exist-categories>
+      <lock-node-read-only>Este arquivo foi bloqueado pelo usuário {0}. Abrir como somente leitura?</lock-node-read-only>
+    </msg>
+  </UIPopupMenu>
+  <!--
+  #############################################################################
+  #     org.exoplatform.ecm.webui.component.explorer.actions.UIFolderForm     #
+  #############################################################################
+  -->
+  <UIFolderForm>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Save>Criar pasta</Save>
+    </action>
+    <label>
+      <titleTextBox>Nome da pasta:</titleTextBox>
+      <customTypeCheckBox>Usar um tipo personalizado de pasta</customTypeCheckBox>
+    </label>
+    <title>Adicionar/Editar Pasta</title>
+    <msg>
+      <addFolder-successful>A pasta '{0}' foi adicionada com sucesso.</addFolder-successful>
+      <name-invalid>Por favor, coloque o nome da pasta.</name-invalid>
+      <title-invalid>Por favor digite o título da pasta.</title-invalid>
+      <name-not-allowed>Este nome não é permitido.</name-not-allowed>
+      <fileName-error>Nome do arquivo é inválido.</fileName-error>
+      <constraint-violation>O nó atual não permite a adição do tipo de nó '{0}'.</constraint-violation>
+      <repository-exception>Um erro inesperado ocorreu. Por favor, entre em contato com seu administrador do sistema para mais detalhes.</repository-exception>
+      <repository-exception-permission>Você não possui permissão suficiente para adicionar uma pasta neste nó.</repository-exception-permission>
+      <numberformat-exception>Não é possível salvar esta pasta. O nome deve ser de tipo numérico.</numberformat-exception>
+      <!--DMS 2.4.x; ECM-3553-->
+      <not-allow-sameNameSibling>Não é possível salvar esta pasta. Este nó não permite 2 nós com mesmo nome.</not-allow-sameNameSibling>
+      <ntFolder-not-avaiable>Você deve selecionar um tipo personalizado de pasta</ntFolder-not-avaiable>
+    </msg>
+    <help>
+      <customTypeCheckBoxHelp>Verifique se você pretende armazenar o conteúdos da web ou documentos personalizados nesta pasta</customTypeCheckBoxHelp>
+    </help>
+  </UIFolderForm>
+  <!--
+  ###################################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIDocumentWorkspace    #
+  ###################################################################################
+  -->
+  <UIWorkingArea>
+    <title>
+      <Icon>Ícone</Icon>
+    </title>
+    <msg>
+      <!-- Delte one node is not in trash and have no relation -->
+      <confirm-delete>Tem certeza que deseja excluir o item '{0}'?</confirm-delete>
+      <confirm-delete-file>Tem certeza que deseja excluir o arquivo '{0}'?</confirm-delete-file>
+      <confirm-delete-folder>Tem certeza que deseja excluir a pasta '{0}' e todas as subpastas?</confirm-delete-folder>
+      
+      <!-- Delte one node is in trash and have no relation -->
+      <confirm-delete-permanently>Tem certeza que deseja remover permanentemente o item '{0}'?</confirm-delete-permanently>
+      <confirm-delete-file-permanently>Tem certeza que deseja remover permanentemente o arquivo '{0}'?</confirm-delete-file-permanently>
+      <confirm-delete-folder-permanently>Tem certeza que deseja remover a pasta '{0}' e todas suas subpastas?</confirm-delete-folder-permanently>
+      
+      <!-- Delte one node is not in trash and have relations -->
+      <confirm-delete-has-relations>Tem certeza que deseja excluir o item '{0}' e suas referências?</confirm-delete-has-relations>
+      <confirm-delete-file-has-relations>Tem certeza que deseja excluir o arquivo '{0}' e suas referências?</confirm-delete-file-has-relations>
+      <confirm-delete-folder-has-relations>Tem certeza que deseja excluir a pasta '{0}' e suas referências?</confirm-delete-folder-has-relations>
+      
+      <!-- Delte multiple nodes, not in Trash, have no relations -->
+      <confirm-delete-multi-nodes-generic>Tem certeza que deseja remover permanentemente os '{0}' itens selecionados?</confirm-delete-multi-nodes-generic>  
+      <confirm-delete-multi-nodes-file>Tem certeza que deseja remover permanentemente os '{0}' arquivos selecionados?</confirm-delete-multi-nodes-file>
+      <confirm-delete-multi-nodes-folder>Tem certeza que deseja excluir as {0} pastas selecionadas e todas as subpastas?</confirm-delete-multi-nodes-folder>
+      <confirm-delete-multi-nodes-generic-and-file>Tem certeza que deseja remover permanentemente os '{0}' itens e arquivos selecionados?</confirm-delete-multi-nodes-generic-and-file>
+      <confirm-delete-multi-nodes-generic-and-folder>Tem certeza que deseja excluir os {0} itens  selecionados, pastas e todas as subpastas?</confirm-delete-multi-nodes-generic-and-folder>
+      <confirm-delete-multi-nodes-file-and-folder>Tem certeza que deseja excluir os {0} arquivos selecionados, pastas e todas suas subpastas?</confirm-delete-multi-nodes-file-and-folder>
+      <confirm-delete-multi-nodes-generic-and-file-and-folder>Tem certeza que deseja excluir os {0} itens selecionados, arquivos, pastas e todas as subpastas?</confirm-delete-multi-nodes-generic-and-file-and-folder>
+      
+      <!-- Delte multiple nodes, in Trash -->
+      <confirm-delete-multi-nodes-generic-permanently>Tem certeza que deseja remover permanentemente os '{0}' itens selecionados?</confirm-delete-multi-nodes-generic-permanently>  
+      <confirm-delete-multi-nodes-file-permanently>Tem certeza que deseja remover permanentemente os '{0}' arquivos selecionados?</confirm-delete-multi-nodes-file-permanently>
+      <confirm-delete-multi-nodes-folder-permanently>Tem certeza que deseja excluir permanentemente as {0} pastas selecionadas e todas subpastas?</confirm-delete-multi-nodes-folder-permanently>
+      <confirm-delete-multi-nodes-generic-and-file-permanently>Tem certeza que deseja remover permanentemente os '{0}' itens e arquivos selecionados?</confirm-delete-multi-nodes-generic-and-file-permanently>
+      <confirm-delete-multi-nodes-generic-and-folder-permanently>Tem certeza que deseja excluir permanentemente os {0} itens selecionados, pastas e todas subpastas?</confirm-delete-multi-nodes-generic-and-folder-permanently>
+      <confirm-delete-multi-nodes-file-and-folder-permanently>Tem certeza que deseja excluir permanentemente os {0} itens selecionados, pastas e todas subpastas?</confirm-delete-multi-nodes-file-and-folder-permanently>
+      <confirm-delete-multi-nodes-generic-and-file-and-folder-permanently>Tem certeza que deseja excluir permanentemente os {0} itens selecionados, arquivos, pastas e todas subpastas?</confirm-delete-multi-nodes-generic-and-file-and-folder-permanently>
+      
+      <!-- Delte multiple nodes, have relations -->
+      <confirm-delete-multi-nodes-generic-have-relations>Tem certeza que deseja remover permanentemente os '{0}' itens selecionados e suas referências?</confirm-delete-multi-nodes-generic-have-relations>  
+      <confirm-delete-multi-nodes-file-have-relations>Tem certeza que deseja remover permanentemente os '{0}' arquivos selecionados e suas referências?</confirm-delete-multi-nodes-file-have-relations>
+      <confirm-delete-multi-nodes-folder-have-relations>Tem certeza que deseja excluir permanentemente as {0}  pastas selecionadas, todas subpastas e todas suas referências?</confirm-delete-multi-nodes-folder-have-relations>
+      <confirm-delete-multi-nodes-generic-and-file-have-relations>Tem certeza que deseja remover permanentemente os '{0}' arquivos e itens selecionados, bem como suas referências?</confirm-delete-multi-nodes-generic-and-file-have-relations>
+      <confirm-delete-multi-nodes-generic-and-folder-have-relations>Tem certeza que deseja excluir permanentemente os {0} itens selecionados, suas referências, pastas e subpastas?</confirm-delete-multi-nodes-generic-and-folder-have-relations>
+      <confirm-delete-multi-nodes-file-and-folder-have-relations>Tem certeza que deseja excluir os {0} arquivos selecionados, suas referências, pastas e todas subpastas?</confirm-delete-multi-nodes-file-and-folder-have-relations>
+      <confirm-delete-multi-nodes-generic-and-file-and-folder-have-relations>Tem certeza que deseja excluir os {0} itens selecionados, arquivos, suas referências, pastas e todas subpastas?</confirm-delete-multi-nodes-generic-and-file-and-folder-have-relations>
+      
+      <feedback-delete>'{0}' foi excluído com sucesso.</feedback-delete>
+      <feedback-delete-multi>{0} itens foram excluídos com sucesso.</feedback-delete-multi>      
+      <feedback-delete-permanently>'{0}' foi removido permanentemente.</feedback-delete-permanently>
+      <feedback-delete-permanently-multi>{0} itens foram removidos permanentemente.</feedback-delete-permanently-multi>
+      <undo-delete>Desfazer</undo-delete>
+      <feedback-restore>'{0}' foi restaurado com sucesso.</feedback-restore>
+      <feedback-restore-multi>{0} itens foram restaurados com sucesso.</feedback-restore-multi>
+      
+      <confirm-restore>Um nó com o mesmo nome já existe na antiga localização do nó '{0}'. Tem certeza que deseja restaurar este nó?</confirm-restore>
+      <confirm-move>Deseja mesmo mover?</confirm-move>
+      <node-cut>O nó '{0}' foi recortado.</node-cut>
+      <execute-successfully>A ação customizada '{0}' foi executada.</execute-successfully>
+      <save-node-success>O nó '{0}' foi salvo.</save-node-success>
+      <move-problem>Você não pode mover o nó '{0}' para '{1}' porque há algum problema de permissões ou restrições.</move-problem>
+    </msg>
+  </UIWorkingArea>
+  <UIDocumentWorkspace>
+    <label>
+      <no-children>Este nó não possui nenhum nó filho.</no-children>
+      <no-children-but-has-hidden>Este nó não possui nenhum nó filho, mas há arquivos ocultos.</no-children-but-has-hidden>
+    </label>
+    <msg>
+      <unable-save-node>O nó '{0}' é novo. É preciso salvar a sessão antes de executar esta ação.</unable-save-node>
+      <save-node-success>O nó '{0}' foi salvo.</save-node-success>
+      <node-copied>O nó '{0}' foi copiado.</node-copied>
+      <node-cut>O nó '{0}' foi recortado.</node-cut>
+      <remove-root>Você não pode remover o nó raíz.</remove-root>
+      <node-remove-success>O nó '{0}' foi removido.</node-remove-success>
+    </msg>
+    <tooltip>
+      <Rename>Renomear</Rename>
+      <Cut>Recortar</Cut>
+      <Copy>Copiar</Copy>
+      <Save>#{word.save}</Save>
+      <RemoveNode>Excluir</RemoveNode>
+      <Checkin>Liberar da reserva</Checkin>
+      <Checkout>Reservado</Checkout>
+      <Lock>Bloquear</Lock>
+      <Unlock>Desbloquear</Unlock>
+      <EditDocument>Edit</EditDocument>
+      <Paste>Colar</Paste>
+      <LockedBy>Bloqueado por</LockedBy>
+    </tooltip>
+  </UIDocumentWorkspace>
+  <UIDocumentInfo>
+    <msg>
+      <access-denied>Acesso negado. Você não pode acessar o nó '{0}'.</access-denied>
+      <null-exception>Item não encontrado. Ele foi removido ou modificado, ou você não tem permissão para acessar este nó.</null-exception>
+      <confirm-deleteattachment>Você deseja remover este arquivo anexado?</confirm-deleteattachment>
+      <confirm-deleteattcomment>Você deseja remover este comentário?</confirm-deleteattcomment>
+      <access-denied-exception>Acesso negado. Talvez você não tenha privilégios de leitura, ou o nó pode ter sido removido ou alterado.</access-denied-exception>
+      <path-not-found>Este elemento foi excluído ou modificado. Por favor, clique no botão Atualizar.</path-not-found>
+    </msg>
+    <tooltip>
+      <remove-attachment>Remover este arquivo anexado</remove-attachment>
+      <remove-comment>Remover este comentário</remove-comment>
+    </tooltip>
+  </UIDocumentInfo>
+  <ListView>
+    <view>
+      <label>
+        <name>Name</name>
+        <versionable>Versionável</versionable>
+        <exo_owner>Dono</exo_owner>
+        <auditing>Auditoria</auditing>
+        <exo_dateCreated>Data de criação</exo_dateCreated>
+        <exo_dateModified>Data de modificação</exo_dateModified>
+      </label>
+    </view>
+  </ListView>
+  <!--
+  #############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.ECMContextMenu   #
+  #############################################################################
+  -->
+  <ECMContextMenu>
+    <event>
+      <Lock>Bloquear</Lock>
+      <Unlock>Desbloquear</Unlock>
+      <EditDocument>Edit</EditDocument>
+      <Copy>Copiar</Copy>
+      <Rename>Renomear</Rename>
+      <Delete>Excluir</Delete>
+      <Save>#{word.save}</Save>
+      <Cut>Recortar</Cut>
+      <Paste>Colar</Paste>
+      <CheckOut>Reservado</CheckOut>
+      <CheckIn>Liberar da reserva</CheckIn>
+      <WebDAV>Ver em WebDAV</WebDAV>
+      <autoversion>Auto versionamento</autoversion>
+      <Custom>Customizado</Custom>
+      <AddFolder>Adicionar pasta</AddFolder>
+      <AddDocument>Adicionar documento</AddDocument>
+      <Upload>Enviar arquivos</Upload>
+      <MoveNode>Mover</MoveNode>
+      <UnLock>Desbloquear</UnLock>
+      <ViewProperties>Ver propriedades</ViewProperties>
+      <GetURL>Copiar URL para área de transferência</GetURL>
+      <AddThumbnail>Adicionar/Remover miniatura</AddThumbnail>
+      <AddToFavourite>Adicionar aos favoritos</AddToFavourite>
+      <RemoveFromFavourite>Remover dos favoritos</RemoveFromFavourite>
+      <MoveToTrash>Mover para a Lixeira</MoveToTrash>
+      <RestoreFromTrash>Restaurar da Lixeira</RestoreFromTrash>
+      <EmptyTrash>Esvaziar a lixeira</EmptyTrash>
+      <WebDavView>Abrir no MS Office</WebDavView>
+      <Download>Baixar</Download>
+      <OpenDocument>Edição remota</OpenDocument>
+      <EditProperty>Editar propriedades do documento</EditProperty>
+      <UploadNewVersion>Carregar uma nova versão</UploadNewVersion>
+      <CreateNewVersion>Criar uma nova versão</CreateNewVersion>
+    </event>
+  </ECMContextMenu>
+ 
+  <!--
+  #############################################################################
+  #     org.exoplatform.ecm.webui.component.explorer.UIReferencesList         #
+  #############################################################################
+  -->
+  <UIReferencesList>
+    <msg>
+      <no-references>Referências não encontradas</no-references>
+    </msg>
+    <header>
+      <workspace>Espaço de trabalho</workspace>
+      <path>Caminho</path>
+    </header>
+    <action>
+      <Close>#{word.close}</Close>
+    </action>
+  </UIReferencesList>
+  <!--
+  #############################################################################
+  #         org.exoplatform.ecm.webui.component.explorer.UIPropertiesManager  #
+  #############################################################################
+  -->
+  <UITabPane>
+    <title>
+      <UIPublishingPanel>Publication Pane</UIPublishingPanel>
+      <UIPublicationPanel>Revisão</UIPublicationPanel>
+      <UIPublicationSchedule>Agendado</UIPublicationSchedule>
+      <UIPublicationPagesContainer>Páginas</UIPublicationPagesContainer>
+      <UIPublicationHistory>História</UIPublicationHistory>
+      <UIVersionViewer>Visualizador de versões</UIVersionViewer>
+
+      <UIPropertyTab>Propripedades</UIPropertyTab>
+      <UIMetadataTab>Metadados</UIMetadataTab>
+      <UIPropertyForm>Adicionar nova propriedade</UIPropertyForm>
+      <UIUploadContent>Informação do arquivo enviado</UIUploadContent>
+      <UIJCRAdvancedSearch>Nova consulta</UIJCRAdvancedSearch>
+      <UISavedQuery>Consulta salva</UISavedQuery>
+      <AdvancedSearchResult>Procurar Resultados</AdvancedSearchResult>
+      <UISimpleSearch>Busca simples</UISimpleSearch>
+      <UISearchContainer>Busca avançada</UISearchContainer>
+      <UICategoryManagerSearch>Adicionar categoria para busca</UICategoryManagerSearch>
+      <UIConstraintsForm>Formulário de restrições</UIConstraintsForm>
+      <UIViewSearchResult>Ver conteúdo</UIViewSearchResult>
+      <UIContentNameSearch>Busca por nome</UIContentNameSearch>
+      <UINodeInfo>Informação sobre a versão</UINodeInfo>
+      <UINodeProperty>Propriedade do nó</UINodeProperty>
+      <UIActionListContainer>Ações disponíveis</UIActionListContainer>
+      <UIActionContainer>Adicionar ação</UIActionContainer>
+      <UIActionViewContainer>Informações sobre a ação</UIActionViewContainer>
+      <UIMultiLanguageForm>Ver idioma</UIMultiLanguageForm>
+      <UIAddLanguageContainer>Adicionar língua</UIAddLanguageContainer>
+      <UINonPublishedForm>Estado</UINonPublishedForm>
+      <UIPublishedForm>Estado</UIPublishedForm>
+      <UIPublicationLogList>Histórico</UIPublicationLogList>
+      <UIDocumentWithTree>Visualização de arquivos</UIDocumentWithTree>
+      <UIDocumentInfo>Visualização de documentos</UIDocumentInfo>
+      <UICategoriesSelectPanel>Selecionar categorias</UICategoriesSelectPanel>
+      <UISelectedCategoriesGrid>Categorias referenciadas</UISelectedCategoriesGrid>
+      <UIWorkflowPublicationActionForm>Workflow Publication Action</UIWorkflowPublicationActionForm>
+      <UIWorkflowPublicationViewForm>Workflow Publication View</UIWorkflowPublicationViewForm>
+      <metadatasitemetadata>Metadado do site</metadatasitemetadata>
+      <dcelementset>O core do Dublin</dcelementset>
+    </title>
+  </UITabPane>
+  <UIPropertyTab>
+    <title>
+      <edit>Editar esta propriedade</edit>
+      <delete>Remover esta propriedade</delete>
+    </title>
+    <confirm>
+      <remove-property>Você deseja remover esta propriedade?</remove-property>
+    </confirm>
+    <header>
+      <name>Name</name>
+      <multiValue>Multi Valor</multiValue>
+      <value>Valor</value>
+      <action>Ação</action>
+    </header>
+    <label>
+      <binary>Dado binário</binary>
+      <notavailable>N/A</notavailable>
+      <cannotget>Não pode pegar os valores</cannotget>
+    </label>
+    <action>
+      <Close>#{word.close}</Close>
+    </action>
+  </UIPropertyTab>
+  <!--
+  #############################################################################
+  #         org.exoplatform.ecm.webui.component.explorer.UIPropertyTab     #
+  #############################################################################
+  -->
+  <!--
+  #############################################################################
+  #           org.exoplatform.ecm.webui.component.explorer.UIPropertyForm     #
+  #############################################################################
+  -->
+  <UIPropertyForm>
+    <title>Adicionar ou editar propriedade</title>
+    <label>
+      <name>Name:</name>
+      <type>Tipo:</type>
+      <value>Valor</value>
+      <upload>Arquivo:</upload>
+      <namespace>Namespace</namespace>
+      <multiple>Multiplo</multiple>
+      <property_select>Adicione nova propriedade:</property_select>
+      <value0>Valor 0</value0>
+      <value1>Valor 1</value1>
+      <value2>Valor 2</value2>
+      <value3>Valor 3</value3>
+      <value4>Valor 4</value4>
+      <value5>Valor 5</value5>
+      <value6>Valor 6</value6>
+      <value7>Valor 7</value7>
+      <value8>Valor 8</value8>
+      <value9>Valor 9</value9>
+      <value10>Valor 10</value10>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <Reset>Redefinir</Reset>
+    </action>
+    <msg>
+      <name-invalid>Você deve colocar o nome !</name-invalid>
+      <unable-create>Não pode adicionar propriedades !</unable-create>
+      <value-invalid>Você deve colocar valor !</value-invalid>
+      <node-checkedin>Você deve fazer checkout deste node antes de adicionar uma propriedade</node-checkedin>
+      <can-not-add>Você não pode adicionar propriedades para este node. Apenas para nodes de tipo nt:unstructured</can-not-add>
+      <propertyName-invalid>Nome da propriedade deve incluir namespace (ex: namespace:nome)</propertyName-invalid>
+      <propertyName-exist>A propriedade '{0}' já existe.</propertyName-exist>
+      <propertyValu-null>Talvez alguns valores estejam nulos</propertyValu-null>
+      <valueFormatEx>Você não pode atribuir múltiplos valores a uma propriedade de valor único.</valueFormatEx>
+      <number-format-exception>Seu valor de entrada tem um formato errado</number-format-exception>
+      <property-not-exist>A propriedade {0} não existe.</property-not-exist>
+    </msg>
+  </UIPropertyForm>
+
+  <!--
+  #############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIPermissionInfo #
+  #############################################################################
+  -->
+  <UIPermissionInfo>
+    <action>
+      <title>
+        <Edit>Edit</Edit>
+        <Delete>Remover permissão</Delete>
+      </title>
+    </action>
+    <header>
+      <usersOrGroups>Usuário ou Grupo</usersOrGroups>
+      <read>Ler</read>
+      <addNode>Modificar</addNode>
+      <remove>Remove</remove>
+      <action>Ação</action>
+    </header>
+    <msg>
+      <confirm-delete-permission>Deseja remover esta permissão?</confirm-delete-permission>
+      <no-permission-tochange>Você não tem direto de remover a permissão</no-permission-tochange>
+      <no-permission-remove>Você não pode remover o dono</no-permission-remove>
+      <access-denied>Acesso negado! Você não pode remover esta pemissão.</access-denied>
+    </msg>
+  </UIPermissionInfo>
+  <permission>
+    <title>
+      <SelectUser>Selecionar usuário</SelectUser>
+      <SelectMember>Selecionar membership</SelectMember>
+      <AddAny>Selecionar todos</AddAny>
+    </title>
+  </permission>
+  <!--
+  #############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIPermissionForm #
+  #############################################################################
+  -->
+  <SelectUserOrGroup>
+    <title>
+      <UIGroupSelector>Selecionar usuário</UIGroupSelector>
+      <UIPermissionSelector>Selecionar membro</UIPermissionSelector>
+      <UIGroupMemberSelector>Selecionar associação de cargo</UIGroupMemberSelector>
+    </title>
+  </SelectUserOrGroup>
+  <UIGroupSelector>
+    <label>
+      <selectGroup>Navegar e selecionar um grupo</selectGroup>
+      <selectUser>Selecionar usuário</selectUser>
+    </label>
+    <msg>
+      <not-change-owner>'{0}' é dono deste node e possui permissão de controle total</not-change-owner>
+    </msg>
+  </UIGroupSelector>
+  <UIPermissionForm>
+    <label>
+      <UIPopupWindow>Selecionar</UIPopupWindow>
+      <permission>UIPermissionForm</permission>
+      <userOrGroup>Usuário ou grupo</userOrGroup>
+      <read>Direito de Leitura</read>
+      <add_node>Modificar o direito</add_node>
+      <remove>Remover Direito</remove>
+    </label>
+    <title>Adicionar uma permissão a esse node</title>
+    <action>
+      <Close>#{word.close}</Close>
+      <Save>#{word.save}</Save>
+      <Reset>Limpar</Reset>
+    </action>
+    <msg>
+      <checkbox-require>Você deve selecionar ao menos uma permissão</checkbox-require>
+      <userOrGroup-required>Você deve selecionar usuário ou grupo antes de salvar esta permissão</userOrGroup-required>
+      <not-change-permission>Você não tem direito de adicionar permissão</not-change-permission>
+      <access-denied>Acesso negado. Você não pode remover esta permissão.</access-denied>
+    </msg>
+  </UIPermissionForm>
+
+  <!--
+  ###############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UINodeTypeInfo     #
+  ###############################################################################
+  -->
+  <UINodeTypeInfo>
+    <label>
+      <node-type>Tipo de Node</node-type>
+      <name>Name</name>
+      <item>Nome do Item Primário</item>
+      <super-types>Tipos dos Pais</super-types>
+      <mixin>Tipo de Node Mixin</mixin>
+      <orderable-children>Filhos Ordenáveis</orderable-children>
+      <property-def>Definição de Propriedade do Node</property-def>
+      <prop-name>Name</prop-name>
+      <prop-type>Type</prop-type>
+      <prop-multiple>Mul</prop-multiple>
+      <prop-mandatory>Man</prop-mandatory>
+      <prop-protected>Pr</prop-protected>
+      <prop-auto-create>AC</prop-auto-create>
+      <prop-default-values><![CDATA[<span title="Default Values">DV</span>]]></prop-default-values>
+      <prop-constraints><![CDATA[<span title="Constraints Values">CV</span>]]></prop-constraints>
+      <node-def>Definição de Node Filho</node-def>
+      <node-def-name>Name</node-def-name>
+      <node-def-opv>OPV</node-def-opv>
+      <node-def-ac>AC</node-def-ac>
+      <node-def-man>MAN</node-def-man>
+      <node-def-pr>PR</node-def-pr>
+      <node-def-dnt>DNT</node-def-dnt>
+    </label>
+    <action>
+      <Close>#{word.close}</Close>
+    </action>
+  </UINodeTypeInfo>
+  <!--
+  ###############################################################################
+  #                    org.exoplatform.ecm.webui.component.explorer.search      #
+  ###############################################################################
+  -->
+  <UICategoryManagerSearch>
+    <tab>
+      <label>
+        <UIOneNodePathSelector>Escolher categoria</UIOneNodePathSelector>
+      </label>
+    </tab>
+    <action>
+      <Close>#{word.close}</Close>
+    </action>
+  </UICategoryManagerSearch>
+  <UIContentNameSearch>
+    <label>
+      <keyword>Nome do Conteúdo</keyword>
+      <location>Procure nesta localização:</location>
+    </label>
+    <action>
+      <Search>Buscar</Search>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <keyword-not-allowed>Esta palavra chave não é permitida.</keyword-not-allowed>
+    </msg>
+  </UIContentNameSearch>
+  <UISimpleSearch>
+    <action>
+      <MoreConstraints>Mostrar/Esconder formulário de restrições</MoreConstraints>
+      <Search>Buscar</Search>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <label>
+      <moreConstraints>UISimpleSearch</moreConstraints>
+      <firstOperator>Operador</firstOperator>
+      <input>Uma palavra ou frase no conteúdo</input>
+      <constraints>Mais restrições</constraints>
+      <nodePath>Localização corrente</nodePath>
+    </label>
+    <msg>
+      <keyword-null>Por favor coloque sua palavra chave.</keyword-null>
+      <not-found>Nenhum resultado encontrado.</not-found>
+      <keyword-not-allow>Esta palavra chave não é permitida.</keyword-not-allow>
+      <value-null>Por favor coloque a palavra chave ou restrições.</value-null>
+      <value-save-null>Por favor coloque uma palavra chave ou restrições antes de salvar a query.</value-save-null>
+      <inputSearch-invalid>Há um caracter inválido na palavra buscada</inputSearch-invalid>
+      <query-invalid>A query é inválida. Por favor verifique suas restrições</query-invalid>
+    </msg>
+  </UISimpleSearch>
+  <ViewSearch>
+    <title>
+      <UIViewSearchResult>Modelo de View</UIViewSearchResult>
+    </title>
+  </ViewSearch>
+  <UISearchResult>
+    <msg>
+      <not-support>Não há modelo de View para este node</not-support>
+      <empty>Nenhum resultado encontrado.</empty>
+      <access-denied>Você não pode ver este node porque este modelo não está suportado ou o acesso foi negado!</access-denied>
+      <query-invalid>A query é inválida</query-invalid>
+    </msg>
+    <header>
+      <name>#{word.name}</name>
+      <path>Caminho</path>
+      <action>Ação</action>
+      <shortcutPath>Caminho</shortcutPath>
+      <type>Type</type>
+      <dateCreated>Data de criação</dateCreated>
+      <score>Pontuação</score>
+    </header>
+    <title>
+      <typeASC>Ordenar por tipo de documento ascendente</typeASC>
+      <typeDESC>Ordenar por tipo de documento descendente</typeDESC>
+      <scoreASC>Ordenar por score ascendente</scoreASC>
+      <scoreDESC>Ordenar por score descendente</scoreDESC>
+      <nameASC>Ordenar por nome ascendente</nameASC>
+      <nameDESC>Ordenar por nome descendente</nameDESC>
+      <datecreatedASC>Ordenar por data de criação ascendente</datecreatedASC>
+      <datecreatedDESC>Ordenar por data de criação descendente</datecreatedDESC>
+    </title>
+    <tooltip>
+      <View>Ver este node</View>
+      <OpenFolder>Ir para pasta</OpenFolder>
+    </tooltip>
+  </UISearchResult>
+  <UIShowAllOwnedByUserResult>
+    <msg>
+      <not-support>Não há modelo de View para este node</not-support>
+      <empty>Nenhum resultado encontrado.</empty>
+      <access-denied>Você não pode ver este node porque este modelo não está suportado ou o acesso foi negado!</access-denied>
+      <query-invalid>A query é inválida</query-invalid>
+    </msg>
+    <header>
+      <name>#{word.name}</name>
+      <path>Caminho</path>
+      <action>Ação</action>
+      <shortcutPath>Caminho</shortcutPath>
+      <type>Type</type>
+      <dateCreated>Data de criação</dateCreated>
+      <score>Pontuação</score>
+    </header>
+    <title>
+      <typeASC>Ordenar por tipo de documento na ordem ascendente</typeASC>
+      <typeDESC>Ordenar por tipo de documento na ordem descendente</typeDESC>
+      <scoreASC>Ordenar por pontuação ascendente</scoreASC>
+      <scoreDESC>Ordenar por pontuação descendente</scoreDESC>
+      <nameASC>Ordenar por nome ascendente</nameASC>
+      <nameDESC>Ordenar por nome descendente</nameDESC>
+      <datecreatedASC>Ordenar por data de criação ascendente</datecreatedASC>
+      <datecreatedDESC>Ordenar por data de criação descendente</datecreatedDESC>
+    </title>
+    <tooltip>
+      <View>Ver este nó</View>
+      <OpenFolder>Ir para pasta</OpenFolder>
+    </tooltip>
+  </UIShowAllOwnedByUserResult>
+  <UIShowAllFavouriteResult>
+    <msg>
+      <not-support>Não há modelo de visualização para este nó</not-support>
+      <empty>Nenhum resultado encontrado!</empty>
+      <access-denied>Você não pode ver este nó, porque este modelo não é suportado ou o acesso foi negado.</access-denied>
+      <query-invalid>A consulta é inválida</query-invalid>
+    </msg>
+    <header>
+      <name>#{word.name}</name>
+      <path>Caminho</path>
+      <action>Ação</action>
+      <shortcutPath>Caminho</shortcutPath>
+      <type>Type</type>
+      <dateCreated>Data de criação</dateCreated>
+      <score>Pontuação</score>
+    </header>
+    <title>
+      <typeASC>Ordenar por tipo de documento ascendente</typeASC>
+      <typeDESC>Ordenar por tipo de documento descendente</typeDESC>
+      <scoreASC>Ordenar por pontuação ascendente</scoreASC>
+      <scoreDESC>Ordenar por pontuação descendente</scoreDESC>
+      <nameASC>Ordenar por nome ascendente</nameASC>
+      <nameDESC>Ordenar por nome descendente</nameDESC>
+      <datecreatedASC>Ordenar por data de criação ascendente</datecreatedASC>
+      <datecreatedDESC>Ordenar por data de criação descendente</datecreatedDESC>
+    </title>
+    <tooltip>
+      <View>Ver este node</View>
+      <OpenFolder>Ir para pasta</OpenFolder>
+    </tooltip>
+  </UIShowAllFavouriteResult>
+  <UIShowAllHiddenResult>
+    <msg>
+      <not-support>Não há modelo de visualização para este nó.</not-support>
+      <empty>Nenhum resultado encontrado.</empty>
+      <access-denied>Você não pode ver este nó, porque este modelo não é suportado ou o acesso foi negado.</access-denied>
+      <query-invalid>A consulta é inválida</query-invalid>
+    </msg>
+    <header>
+      <name>#{word.name}</name>
+      <path>Caminho</path>
+      <action>Ação</action>
+      <shortcutPath>Caminho</shortcutPath>
+      <type>Type</type>
+      <dateCreated>Data de criação</dateCreated>
+      <score>Pontuação</score>
+      <AddRemoveFavourite>Adicionar/remover dos favoritos</AddRemoveFavourite>
+    </header>
+    <title>
+      <typeASC>Ordenar por tipo de documento ascendente</typeASC>
+      <typeDESC>Ordenar por tipo de documento descendente</typeDESC>
+      <scoreASC>Ordenar por pontuação ascendente</scoreASC>
+      <scoreDESC>Ordenar por pontuação descendente</scoreDESC>
+      <nameASC>Ordenar por nome ascendente</nameASC>
+      <nameDESC>Ordenar por nome descendente</nameDESC>
+      <datecreatedASC>Ordenar por data de criação ascendente</datecreatedASC>
+      <datecreatedDESC>Ordenar por data de criação descendente</datecreatedDESC>
+    </title>
+    <tooltip>
+      <View>Ver este nó</View>
+      <OpenFolder>Ir para pasta</OpenFolder>
+      <RemoveHiddenAttribute>Remover atributo oculto</RemoveHiddenAttribute>
+    </tooltip>
+  </UIShowAllHiddenResult>
+  <UIShowAllTrashResult>
+    <msg>
+      <not-support>Não há modelo de visualização para este nó.</not-support>
+      <empty>Nenhum resultado encontrado.</empty>
+      <access-denied>Você não pode ver este nó, porque este modelo é suportado ou o acesso foi negado.</access-denied>
+      <query-invalid>A consulta é inválida</query-invalid>
+    </msg>
+    <header>
+      <name>#{word.name}</name>
+      <path>Caminho</path>
+      <action>Ação</action>
+      <shortcutPath>Caminho</shortcutPath>
+      <type>Type</type>
+      <dateCreated>Data de criação</dateCreated>
+      <score>Pontuação</score>
+    </header>
+    <title>
+      <typeASC>Ordenar por tipo de documento ascendente</typeASC>
+      <typeDESC>Ordenar por tipo de documento descendente</typeDESC>
+      <scoreASC>Ordenar por pontuação ascendente</scoreASC>
+      <scoreDESC>Ordenar por pontuação descendente</scoreDESC>
+      <nameASC>Ordenar por nome ascendente</nameASC>
+      <nameDESC>Ordenar por nome descendente</nameDESC>
+      <datecreatedASC>Ordenar por data de criação ascendente</datecreatedASC>
+      <datecreatedDESC>Ordenar por data de criação descendente</datecreatedDESC>
+    </title>
+    <tooltip>
+      <View>Ver este nó</View>
+      <OpenFolder>Ir para pasta</OpenFolder>
+      <DeletePermanently>Excluir permanentemente</DeletePermanently>
+      <RestoreFromTrash>Restaurar da lixeira</RestoreFromTrash>
+    </tooltip>
+  </UIShowAllTrashResult>
+  <UIConstraintsForm>
+    <label>
+      <constraints>UIConstraintsForm</constraints>
+      <metadataProperty>Propriedades</metadataProperty>
+      <operator>Operador</operator>
+      <contains>Contém valor</contains>
+      <notcontains>NÃO contém valor</notcontains>
+    </label>
+    <action>
+      <Add>Add</Add>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <properties-required>Nome da propriedade é requerido</properties-required>
+      <value-required>Campo valor é requerido.</value-required>
+      <date-invalid>Data de origem deve ser menor que data destino.</date-invalid>
+      <fromDate-required>Data de origem é requerida</fromDate-required>
+      <must-choose-one>Você deve selecionar ao menos um tipo.</must-choose-one>
+      <properties-null>Selecione propriedades primeiro, e então filtre</properties-null>
+      <exactly-require>Você deve preencher o valor exatamente antes de salvar esta restrição</exactly-require>
+      <fromDate-invalid>Tipo inválido no campo 'Data de origem'. Por favor escolha ou coloque corretamente.</fromDate-invalid>
+      <toDate-invalid>Tipo inválido no campo 'Data de destino'. Por favor escolha ou e coloque corretamente.</toDate-invalid>
+    </msg>
+    <button>
+      <label-Add>Add</label-Add>
+      <label-Cancel>#{word.cancel}</label-Cancel>
+    </button>
+  </UIConstraintsForm>
+  <ConstraintsForm>
+    <action>
+      <Add>Add</Add>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </ConstraintsForm>
+  <UIConstraintForm>
+    <tooltip>
+      <AddMetadataType>Adicionar propriedade</AddMetadataType>
+      <AddNodeType>Adicionar tipo de node</AddNodeType>
+      <AddCategory>Adicionar categoria</AddCategory>
+      <FindExactly>Encontrar exatamente</FindExactly>
+    </tooltip>
+    <label>
+      <colon>:</colon>
+      <operator>Operador</operator>
+      <exactlyPro-properties>Propriedade</exactlyPro-properties>
+      <exactlyPro-ContainExactly>Contém exatamente</exactlyPro-ContainExactly>
+      <containPro-properties>Propriedade</containPro-properties>
+      <containPro-Contain>Contém</containPro-Contain>
+      <notContainPro-properties>Propriedade</notContainPro-properties>
+      <notContainPro-notContain>Não contém</notContainPro-notContain>
+      <ConstraintOption-From>De</ConstraintOption-From>
+      <ConstraintOption-To>Para</ConstraintOption-To>
+      <DocumentType-label>Tipo de documento</DocumentType-label>
+      <Category-label>Categoria</Category-label>
+      <created>Criado</created>
+      <modified>Modificado</modified>
+      <and>E</and>
+      <or>Ou</or>
+    </label>
+  </UIConstraintForm>
+  <NodeTypePopup>
+    <title>
+      <UINodeTypeSelectForm>Selecionar tipo de nó</UINodeTypeSelectForm>
+    </title>
+  </NodeTypePopup>
+  <CategoryPopup>
+    <title>
+      <UICategoryManagerSearch>Adicionar categoria à busca</UICategoryManagerSearch>
+      <UIOneNodePathSelector>Escolher categoria</UIOneNodePathSelector>
+    </title>
+  </CategoryPopup>
+  <SaveQueryPopup>
+    <title>
+      <UISaveQueryForm>Formulário de consultas</UISaveQueryForm>
+    </title>
+  </SaveQueryPopup>
+  <UINodeTypeSelectForm>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Save>#{word.save}</Save>
+    </action>
+  </UINodeTypeSelectForm>
+  <UICompareExactlyForm>
+    <label>
+      <filter>Filter:</filter>
+      <result>Resultados:</result>
+    </label>
+    <title>
+      <result>Filter</result>
+    </title>
+    <button>
+      <label-Select>Selecionar</label-Select>
+      <label-Cancel>#{word.cancel}</label-Cancel>
+    </button>
+    <msg>
+      <not-result-found>Nenhum resultado encontrado.</not-result-found>
+    </msg>
+  </UICompareExactlyForm>
+  <UIJCRAdvancedSearch>
+    <label>
+      <name>Name:</name>
+      <selectBox>Selecionar estilo de consulta:</selectBox>
+      <query>Consulta</query>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <Search>Buscar</Search>
+    </action>
+    <msg>
+      <!--DMS 2.4.x ECM-3566-->
+      <name-invalid>Nome é inválido.</name-invalid>
+      <query-added>Consulta adicionada</query-added>
+      <save_unSuccessful>Não é possível salvar a consulta. A declaração pode estar inválida ou esse nome de consulta pode já existir.</save_unSuccessful>
+      <invalid-queryStatement>Declaração inválida de consulta.</invalid-queryStatement>
+      <value-save-null>Por favor, insira a declaração de sua consulta.</value-save-null>
+      <query-name-null>Por favor, entre com o nome de sua consulta.</query-name-null>
+    </msg>
+  </UIJCRAdvancedSearch>
+  <EditQueryForm>
+    <label>
+      <name>Name</name>
+      <selectBox>Selecionar estilo de consulta</selectBox>
+      <query>Consulta</query>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </EditQueryForm>
+  <EditSavedQueryForm>
+    <title>
+      <EditQueryForm>Editar formulário de consulta</EditQueryForm>
+    </title>
+  </EditSavedQueryForm>
+  <UIMetadataSelectForm>
+    <label>
+      <metadataType>Tipo de metadado</metadataType>
+    </label>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Add>Add</Add>
+    </action>
+  </UIMetadataSelectForm>
+  <property1MetadataPopup>
+    <title>
+      <UISelectPropertyForm>Selecionar propriedade</UISelectPropertyForm>
+    </title>
+  </property1MetadataPopup>
+  <property2MetadataPopup>
+    <title>
+      <UISelectPropertyForm>Selecionar propriedade</UISelectPropertyForm>
+    </title>
+  </property2MetadataPopup>
+  <property3MetadataPopup>
+    <title>
+      <UISelectPropertyForm>Selecionar propriedade</UISelectPropertyForm>
+    </title>
+  </property3MetadataPopup>
+  <UISelectPropertyForm>
+    <label>
+      <metadataType>Tipo de metadado</metadataType>
+    </label>
+    <pLabel>Propriedades:</pLabel>
+    <action>
+      <Add>Add</Add>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UISelectPropertyForm>
+  <ExactlyFormPopup>
+    <title>
+      <UICompareExactlyForm>Formulário de filtro</UICompareExactlyForm>
+    </title>
+  </ExactlyFormPopup>
+  <UIECMSearch>
+    <header>
+      <name>Name</name>
+      <language>Idioma</language>
+      <query>Consulta</query>
+      <action>Actions</action>
+      <path>Caminho</path>
+    </header>
+  </UIECMSearch>
+  <UIResult>
+    <msg>
+      <not-found>Dado não encontrado.</not-found>
+    </msg>
+    <header>
+      <action>Ação</action>
+    </header>
+  </UIResult>
+  <UISaveQueryForm>
+    <msg>
+      <query-name-null>Por favor, entre com o nome da consulta para salvar.</query-name-null>
+      <access-denied>Acesso negado. Você não tem permissão para adicionar e salvar essa consulta.</access-denied>
+      <save-failed>Não é possível salvar a consulta, porque o essa declaração é inválida ou o nome da consulta já existe.</save-failed>
+    </msg>
+    <label>
+      <queryName>Nome da consulta</queryName>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UISaveQueryForm>
+  <UISavedQuery>
+    <header>
+      <name>Name</name>
+      <type>Type</type>
+      <statement>Declaração</statement>
+      <permission>Permissões</permission>
+      <action>Actions</action>
+    </header>
+    <tooltip>
+      <Execute>Executar</Execute>
+      <Edit>Edit</Edit>
+      <Delete>Excluir</Delete>
+    </tooltip>
+    <label>
+      <no-children>Não há consulta salva.</no-children>
+    </label>
+    <msg>
+      <confirm-delete-query>Deseja mesmo eliminar esta consulta?</confirm-delete-query>
+      <not-result-found>Nenhum resultado encontrado.</not-result-found>
+    </msg>
+  </UISavedQuery>
+  <UIQueryResultPageIterator>
+    <label>
+      <results>Resultados</results>
+      <of-about>de aproximadamente</of-about>
+      <of>de</of>
+    </label>
+  </UIQueryResultPageIterator>
+  <!--
+  ###############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.admin.UIExportNode #
+  ###############################################################################
+  -->
+  <UIExportNode>
+    <label>
+      <format>Formato</format>
+      <nodePath>Caminho para exportar</nodePath>
+      <zip>Zip</zip>
+      <systemView>Visualização do sistema</systemView>
+      <documentView>Visualização de documento</documentView>
+    </label>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Export>Exportar</Export>
+    </action>
+    <title>Exportar nó</title>
+  </UIExportNode>
+  <!--
+  ###############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIPopupAction     #
+  ###############################################################################
+  -->
+  <PopupUserSelector>
+    <title>
+      <UIUserContainer>Seletor de permissão</UIUserContainer>
+    </title>
+  </PopupUserSelector>
+  <UIPopupTaxonomy>
+    <title>
+      <UICategoriesSelector>Adicionar categorias</UICategoriesSelector>
+      <UIOneNodePathSelector>Adicionar categorias</UIOneNodePathSelector>
+    </title>
+  </UIPopupTaxonomy>
+  <!--
+  ###############################################################################
+  #   org.exoplatform.ecm.webui.component.explorer.versions.UIVersionInfo       #
+  ###############################################################################
+  -->
+  <UIVersionInfo>
+    <title>Histórico das versões</title>
+    <summary>
+      <empty>Clique aqui para adicionar um resumo</empty>
+    </summary>
+    <tooltip>
+      <version>Versão</version>
+      <baseVersion>current version</baseVersion>
+      <addLabel>Adicionar rótulo</addLabel>
+      <removeLable>Remover rótulo</removeLable>
+      <restoreVersion>Restaurar versão</restoreVersion>
+      <viewVersion>Visualizar informações da versão</viewVersion>
+      <deleteVersion>Excluir versão</deleteVersion>
+      <compareVersion>Comparar com a versão base</compareVersion>
+    </tooltip>
+    <msg>
+      <have-no-view-template>O modelo de visualização não é suportado.</have-no-view-template>
+      <cannot-remove-version>Não é possível remover a versão base.</cannot-remove-version>
+      <error-removing-version>Ocorreu um erro ao excluir esta versão.</error-removing-version>
+      <error-removing-referenced-version>Esta versão é referenciada e não pode ser removida.</error-removing-referenced-version>
+      <confirm-restore>Tens a certeza de que você deseja restaurar esta versão?</confirm-restore>
+      <confirm-delete>Deseja mesmo remover esta versão?</confirm-delete>
+      <not-checked-out>Você deve reservar o nó antes de restaurar.</not-checked-out>
+      <invalid-item-state>Você não pode restaurar esta versão, porque um ou mais itens foram excluídos ou movidos durante outra sessão.</invalid-item-state>
+    </msg>
+    <action>
+      <close>#{word.close}</close>
+      <close-view>Fechar visualização</close-view>
+      <compare-versions>Compare as versões selecionadas</compare-versions>
+    </action>
+    <labels>
+      <version>Versão</version>
+      <date>Data</date>
+      <author>Modificado por</author>
+      <summary>Sumário</summary>
+      <action>Ação</action>
+    </labels>
+  </UIVersionInfo>
+  <!--
+  ################################################################################
+  #  org.exoplatform.ecm.webui.component.explorer.auditing.UIAuditingInfo
+  ################################################################################
+  -->
+  <UIAuditingInfo>
+    <msg>
+      <noVersion>Sem versão</noVersion>
+    </msg>
+    <eventName>
+      <e_1>Nó adicionado</e_1>
+      <e_2>Nó removido</e_2>
+      <e_4>Propriedade adicionada</e_4>
+      <e_16>Propriedade modificada</e_16>
+      <e_8>Propriedade removida</e_8>
+      <e_32>#{word.save}</e_32>
+      <e_64>Mover</e_64>
+      <e_128>Copiar</e_128>
+      <e_256>Adicionar mixin</e_256>
+      <e_512>Remover mixin</e_512>
+      <e_1024>Clonar</e_1024>
+      <e_2048>Atualizar</e_2048>
+      <e_4096>Importar</e_4096>
+      <e_8192>Liberar da reserva</e_8192>
+      <e_16384>Reservar</e_16384>
+      <e_32768>Restaurar</e_32768>
+      <e_65536>Mesclar</e_65536>
+      <e_131072>Cancelar mesclagem</e_131072>
+      <e_262144>Mesclagem pronta</e_262144>
+      <e_524288>Adicionar etiqueta de versão</e_524288>
+      <e_1048576>Remover etiqueta de versão</e_1048576>
+      <e_2097152>Remover versão</e_2097152>
+      <e_4194304>Bloquear</e_4194304>
+      <e_8388608>Desbloquear</e_8388608>
+      <e_16777216>Ler</e_16777216>
+    </eventName>
+    <label>
+      <operation>Operação</operation>
+      <userName>Nome do usuário</userName>
+      <date>Data</date>
+      <version>Versão</version>
+    </label>
+  </UIAuditingInfo>
+
+  <!--
+  ###############################################################################
+  #   org.exoplatform.ecm.webui.component.explorer.versions.UIActivateVersion   #
+  ###############################################################################
+  -->
+  <UIActivateVersion>
+    <label>
+      <note>O versionamento não foi ativado para este nó.</note>
+      <question>Você deseja ativá-lo ?</question>
+      <button-active>Ativar</button-active>
+      <button-cancel>#{word.cancel}</button-cancel>
+    </label>
+    <msg>
+      <access-denied>Você não tem permissão para ativar o versionamento neste nó</access-denied>
+    </msg>
+  </UIActivateVersion>
+  <!--
+  ###############################################################################
+  #   org.exoplatform.ecm.webui.component.explorer.versions.UIActivePublication #
+  ###############################################################################
+  -->
+  <UIActivePublication>
+    <header>
+      <LifecycleName>Name</LifecycleName>
+      <LifecycleDesc>Description</LifecycleDesc>
+      <action>Ação</action>
+    </header>
+    <action>
+      <Cancel>#{word.close}</Cancel>
+    </action>
+    <grid>
+      <msg>
+        <empty>Nenhum plugin de publicação achado.</empty>
+      </msg>
+    </grid>
+    <msg>
+      <node-type-invalid>Apenas os nós do tipo documento podem ser registrados.</node-type-invalid>
+      <already-enroled>Este documento já está registrado</already-enroled>
+    </msg>
+  </UIActivePublication>
+  <!--
+  ###############################################################################
+  #   org.exoplatform.ecm.webui.component.explorer.versions.UIActivateAuditing  #
+  ###############################################################################
+  -->
+  <UIActivateAuditing>
+    <label>
+      <note>Auditoria não está ativada para este nó.</note>
+      <question>Você deseja ativá-la?</question>
+    </label>
+    <action>
+      <activate>Ativar</activate>
+      <cancel>#{word.cancel}</cancel>
+    </action>
+  </UIActivateAuditing>
+  <!--
+  ###############################################################################
+  #   org.exoplatform.ecm.webui.component.explorer.versions.UIDiff   #
+  ###############################################################################
+  -->
+  <UIDiff>
+    <label>
+      <backTo>Voltar à versão da história</backTo>
+      <diffTitle>Comparar entre 2 versões</diffTitle>
+      <noContent>Não há nenhum conteúdo para comparar</noContent>
+      <compareVerion>Versão</compareVerion>
+      <can-not-compare>Falha ao comparar 2 versões</can-not-compare>
+      <compare-unavailable>Comparação da versão não está disponível para este documento</compare-unavailable>
+      <DateChange>Em {0}</DateChange>
+      <PreviousAndNextCompare>Alterações de {0} para {1}</PreviousAndNextCompare>
+      <ComparedWith>Em comparação com</ComparedWith>
+      <restoredFrom>Restaurado a partir da versão {0}</restoredFrom>
+    </label>
+  </UIDiff>
+  <!--
+  ###############################################################################
+  #       org.exoplatform.ecm.webui.component.explorer.admin.UIImportNode      #
+  ###############################################################################
+  -->
+  <UIImportNode>
+    <label>
+      <format>Formato</format>
+      <systemView>Visualização do sistema</systemView>
+      <documentView>Visualização de documento</documentView>
+      <upload>Envio de arquivo</upload>
+    </label>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Import>Importar</Import>
+    </action>
+    <title>Importar nó</title>
+    <msg>
+      <import-successful>Importado com sucesso.</import-successful>
+      <filename-invalid>Navegue até o arquivo .xml para o campo 'Envio de arquivo' para importar.</filename-invalid>
+      <filetype-error>Não pode importar o arquivo enviado. Talvez este seja um arquivo .xml inválido.</filetype-error>
+      <xml-invalid>Há um caractere inválido na posição [linha, coluna]:{0} no arquivo {1}</xml-invalid>
+      <mimetype-invalid>Apenas arquivos .xml ou .zip são suportados na importação.</mimetype-invalid>
+      <access-denied>Acesso negado. Você não está habilitado a importar aí.</access-denied>
+      <constraint-violation-exception>Impossível importar dados. O tipo '{0}' não é permitido neste local.</constraint-violation-exception>
+      <item-exists-exception>Um nó referenciável de entrada tem o mesmo UUID que um nó existente no espaço de trabalho.</item-exists-exception>
+    </msg>
+  </UIImportNode>
+  <!--
+  ###############################################################################
+  #         org.exoplatform.ecm.webui.component.explorer.versions.UILabelForm   #
+  ###############################################################################
+  -->
+  <UILabelForm>
+    <label>
+      <label>Etiqueta</label>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <title>Adicionar Etiqueta</title>
+    <msg>
+      <label-invalid>Há alguns caracteres inválidos na etiqueta.</label-invalid>
+      <label-exist>'{0}' já existe.</label-exist>
+    </msg>
+  </UILabelForm>
+  <!--
+  ###############################################################################
+  #   org.exoplatform.ecm.webui.component.explorer.versions.UIRemoveLabelForm   #
+  ###############################################################################
+  -->
+  <UIRemoveLabelForm>
+    <title>Remover etiqueta</title>
+    <label>
+      <label>Selecionar etiqueta</label>
+    </label>
+    <action>
+      <Remove>Remove</Remove>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIRemoveLabelForm>
+  <!--
+  ###############################################################################
+  #    org.exoplatform.ecm.webui.component.explorer.versions.UIViewVersion      #
+  ###############################################################################
+  -->
+  <UIVersionTree>
+    <title>Árvore de filhos</title>
+  </UIVersionTree>
+  <UIViewVersion>
+    <label>
+      <nodeType>Tipo de nó</nodeType>
+      <nodeName>Nome do nó</nodeName>
+      <VersionNumber>Número de versão</VersionNumber>
+      <VersionLabels>Etiqueta de versão</VersionLabels>
+      <VersionDate>Data da versão</VersionDate>
+      <PropertyName>Nome da propriedade</PropertyName>
+      <PropertyValue>Valores da propriedade</PropertyValue>
+    </label>
+    <msg>
+      <not-supported>Esta função não suporta versionamento.</not-supported>
+    </msg>
+  </UIViewVersion>
+  <UIVersionList>
+    <title>Nome dos filhos</title>
+  </UIVersionList>
+  <!--
+  ################################################################################
+  #       org.exoplatform.ecm.webui.component.explorer.admin.UICategoryManager #
+  ################################################################################
+  -->
+  <UICategoryManager>
+    <action>
+      <Close>#{word.close}</Close>
+    </action>
+    <tab>
+      <label>
+        <UICategoriesAddedList>Categorias referenciadas</UICategoriesAddedList>
+        <UIOneNodePathSelector>Selecionar categoria</UIOneNodePathSelector>
+      </label>
+    </tab>
+  </UICategoryManager>
+  <UICategoriesAddedList>
+    <header>
+      <path>Categoria</path>
+      <action>Actions</action>
+    </header>
+    <msg>
+      <access-denied>Acesso negado. Você não possui permissão suficiente neste nó.</access-denied>
+      <confirm-delete>Você realmente deseja excluir esta referência?</confirm-delete>
+    </msg>
+    <action>
+      <title>
+        <Delete>Excluir</Delete>
+      </title>
+    </action>
+    <label>
+      <category>Categoria</category>
+      <actions>Ação</actions>
+      <delete>Excluir</delete>
+    </label>
+  </UICategoriesAddedList>
+  <UITreeList>
+    <header>
+      <name>Name</name>
+      <action>Ação</action>
+    </header>
+    <info>
+      <child-not-found>Este nó não tem nenhum nó filho.</child-not-found>
+    </info>
+  </UITreeList>
+  <!--
+  ################################################################################
+  #       org.exoplatform.ecm.webui.component.explorer.admin.UIRelationManager #
+  ################################################################################
+  -->
+  <UIRelationManager>
+    <action>
+      <Close>#{word.close}</Close>
+    </action>
+    <tab>
+      <label>
+        <UIOneNodePathSelector>Selecionar relação</UIOneNodePathSelector>
+      </label>
+    </tab>
+    <tab>
+      <label>
+        <UIRelationsAddedList>Lista de relação</UIRelationsAddedList>
+      </label>
+    </tab>
+  </UIRelationManager>
+  <UIRelationsAddedList>
+    <header>
+      <path>Relações</path>
+      <action>Actions</action>
+    </header>
+    <action>
+      <title>
+        <Delete>Excluir</Delete>
+      </title>
+    </action>
+    <msg>
+      <confirm-delete>Você realmente deseja excluir esta relação?</confirm-delete>
+      <can-not-add-itself>Você não pode adicionar a relação a si mesmo.</can-not-add-itself>
+    </msg>
+  </UIRelationsAddedList>
+  <!--
+  ###################################################################
+  #       org.exoplatform.ecm.webui.component.explorer.UIClipboard  #
+  ###################################################################
+  -->
+  <UIClipboard>
+    <header>
+      <path>Caminho</path>
+      <command>Cm</command>
+      <action>Ação</action>
+    </header>
+    <label>
+      <nocommand>Não há itens na área de transferência.</nocommand>
+    </label>
+    <action>
+      <clearall>Limpar todos</clearall>
+    </action>
+    <msg>
+      <unable-pasted>Não pode colar este nó.</unable-pasted>
+      <node-pasted>O nó {0} foi colado em {1}. Esta operação já foi salva e você não precisa apertar o botão salvar.</node-pasted>
+    </msg>
+  </UIClipboard>
+  <!--
+  ###################################################################
+  #       org.exoplatform.ecm.webui.component.explorer.UIPopupMenu  #
+  ###################################################################
+  -->
+  <!--
+  ###################################################################################
+  #org.exoplatform.ecm.webui.component.explorer.popup.actions.UISelectDocumentForm  #
+  ###################################################################################
+  -->
+  <UISelectDocumentForm>
+    <label>
+      <selectTemplate>Selecione seu modelo da lista abaixo.</selectTemplate>
+      <ThumbnailView>Ver miniaturas</ThumbnailView>
+      <ListView>Lista de exibição</ListView>
+      <Cancel>#{word.cancel}</Cancel>
+    </label>
+  </UISelectDocumentForm>
+  <!--
+  #######################################################################
+  #org.exoplatform.ecm.webui.component.explorerpopup.actions.UIDocumentForm  #
+  #######################################################################
+  -->
+  <UIDocumentForm>
+    <title>Adicionar novo documento</title>
+    <action>
+      <Save>#{word.save}</Save>
+      <SaveAndClose>Salvar &amp; Fechar</SaveAndClose>
+      <ChangeType>Alterar tipo de conteúdo</ChangeType>
+      <Fullscreen>Tela cheia</Fullscreen>
+      <Cancel>#{word.cancel}</Cancel>
+      <Close>#{word.close}</Close>
+    </action>
+<tooltip>
+<FullScreen>Maximizar/minimizar</FullScreen>
+</tooltip>
+    <msg>
+      <cannot-save>Erro enquanto salvava o documento.</cannot-save>
+      <in-versioning>Por favor, reserve o nó atual antes de adicionar um novo nó.</in-versioning>
+      <not-support>Não foi possível carregar o modelo de '{0}'.</not-support>
+      <value-invalid>'{0}' é um valor obrigatório.</value-invalid>
+      <repository-exception>Erro enquanto salvava o documento.</repository-exception>
+      <!--DMS 2.4.x; ECM-3543-->
+      <repository-exception-permission>Você não tem permissão para adicionar um novo documento neste nó.</repository-exception-permission>
+      <not-allowed-same-name-sibling>Você não pode salvar este documento. Não é possível ter o mesmo nome que seu irmão.</not-allowed-same-name-sibling>
+      <numberformat-exception>Não é possível salvar este documento. O nome provido deve ser numérico.</numberformat-exception>
+      <item-not-found>Item não encontrado. Talvez este nó (ou seu antecessor) foi excluído. Por favor, clique no botão Atualizar.</item-not-found>
+    </msg>
+  </UIDocumentForm>
+  <!--
+  #################################################################################
+  #org.exoplatform.ecm.webui.component.explorer.actions.UIViewDocumentController  #
+  #################################################################################
+  -->
+  <UIViewDocumentController>
+    <tab>
+      <label>
+        <UIViewDocumentInfo>Informação</UIViewDocumentInfo>
+      </label>
+    </tab>
+    <action>
+      <Close>#{word.close}</Close>
+    </action>
+  </UIViewDocumentController>
+  <!--
+  #############################################################################
+  #       org.exoplatform.ecm.webui.component.explorer.search.UI  #
+  #############################################################################
+  -->
+  <!--
+  #############################################################################
+  #    org.exoplatform.ecm.webui.component.explorer.search.UIQuerySaveForm    #
+  #############################################################################
+  -->
+  <UIQuerySaveForm>
+    <title>Salvar formulário de consulta</title>
+    <label>
+      <query>Consulta</query>
+      <name>Nome da consulta</name>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIQuerySaveForm>
+  <!--
+  #############################################################################
+  #       org.exoplatform.ecm.webui.component.explorer.admin.UIActionManager  #
+  #############################################################################
+  -->
+  <editActionPopup>
+    <title>
+      <UIActionForm>Editar a ação</UIActionForm>
+      <EditFormAction>Editar a ação</EditFormAction>
+    </title>
+  </editActionPopup>
+  <UIActionViewContainer>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIActionViewContainer>
+  <UIActionList>
+    <header>
+      <name>#{word.name}</name>
+      <description>Description</description>
+  <lifecycle>Ciclo de vida</lifecycle>
+  <triggeredaction>Ação desencadeada</triggeredaction>
+      <instanceOf>Instância do tipo de ação</instanceOf>
+      <action>Ação</action>
+    </header>
+    <msg>
+      <remove-popup-first>Você deve fechar a janela de edição antes de excluir esse nó.</remove-popup-first>
+      <confirm-delete-action>Você realmente quer excluir esta ação?</confirm-delete-action>
+      <template-empty>O modelo '{0}' está nulo ou vazio.</template-empty>
+      <template-null>O modelo é nulo ou você não tem permissão para acessá-lo.</template-null>
+      <access-denied>Acesso negado. Você não tem permissão suficiente para executar esta ação.</access-denied>
+    </msg>
+    <action>
+      <Close>#{word.close}</Close>
+      <View>Visualizar</View>
+      <Edit>Edit</Edit>
+      <Delete>Excluir</Delete>
+    </action>
+  </UIActionList>
+  <UIActionForm>
+    <action>
+      <Save>#{word.save}</Save>
+      <Back>#{word.back}</Back>
+    </action>
+    <label>
+      <name>Formulário de ação</name>
+    </label>
+    <msg>
+      <repository-exception>Não pode salvar esta ação. O nome provido possui algum caractere especial.</repository-exception>
+      <numberformat-exception>Não pode salvar esta ação. O nome provido deve ser numérico.</numberformat-exception>
+      <existed-action>O nome da ação '{0}' existe. Escolha outro nome, por favor.</existed-action>
+      <unable-add-action>Não é possível adicionar esta ação.</unable-add-action>
+      <unable-add>Incapaz de adicionar esta ação. Este nó é o raiz ou você não tem permissão suficiente.</unable-add>
+      <not-support>A janela de criação/edição '{0}' não é suportada.</not-support>
+      <no-permission-add>Acesso negado. Você não tem permissão para adicionar uma ação aqui.</no-permission-add>
+      <access-denied>Acesso negado. Você não tem permissão para acessar este modelo.</access-denied>
+      <lifecycle-invalid>Você não pode adicionar essa ação. A fase do ciclo de vida de ação é inválida.</lifecycle-invalid>
+    </msg>
+    <title>Adicionar/Editar uma ação</title>
+    <validator>
+      <validator>Validador</validator>
+      <destPath>Com caminho</destPath>
+    </validator>
+  </UIActionForm>
+  <UIActionTypeForm>
+    <label>
+      <actionType>Criar ação do tipo</actionType>
+    </label>
+  </UIActionTypeForm>
+  <PopupComponent>
+    <title>
+      <UIOneNodePathSelector>Selecionar local</UIOneNodePathSelector>
+      <UIPermissionSelector>Seletor de permissões</UIPermissionSelector>
+      <UICategoriesSelector>Adicionar categorias</UICategoriesSelector>
+    </title>
+  </PopupComponent>
+  <EditFormAction>
+    <validator>
+      <validator>Validador</validator>
+      <destPath>Com caminho</destPath>
+    </validator>
+    <title>Formulário de ação</title>
+  </EditFormAction>
+  <!--
+  #############################################################################
+  #       org.exoplatform.ecm.webui.component.explorer.control.UIAddressBar   #
+  #############################################################################
+  -->
+  <UIAddressBar>
+    <msg>
+      <path-not-found>Caminho não encontrado.</path-not-found>
+      <access-denied>Acesso negado. Você não tem permissão de leitura para este nó.</access-denied>
+      <keyword-not-support>A palavra-chave é inválida. Alguns caracteres não são suportados.</keyword-not-support>
+    </msg>
+    <label>
+      <exeButton>Ir</exeButton>
+      <address>Endereço:</address>
+    </label>
+    <title>
+      <exeButton>Ir</exeButton>
+      <backButton>Voltar</backButton>
+      <showHistory>Mostrar o histórico</showHistory>
+      <changeNode>Alterar nó</changeNode>
+    </title>
+  </UIAddressBar>
+  <!--
+  ###################################################################################
+  # org.exoplatform.ecm.webui.component.explorer.popup.actions.UIWatchDocumentForm  #
+  ###################################################################################
+  -->
+  <UIWatchDocumentForm>
+    <action>
+      <Watch>Acompanhar</Watch>
+      <Cancel>#{word.cancel}</Cancel>
+      <Continue>Continar</Continue>
+      <Unwatch>Deixar de acompanhar</Unwatch>
+    </action>
+    <label>
+      <notificationType>Tipo de notificação:</notificationType>
+    </label>
+    <msg>
+      <not-support>Este tipo de notificação não é suportado. Por favor, selecione outro.</not-support>
+      <watching-successfully>Você está acompanhando este documento.</watching-successfully>
+      <unwatching-successfully>Você deixou de acompanhar com sucesso.</unwatching-successfully>
+      <node-iswatching>O documento está sendo acompanhado.</node-iswatching>
+    </msg>
+  </UIWatchDocumentForm>
+  <!--
+  ###################################################################################
+  #   org.exoplatform.ecm.webui.component.explorer.popup.actions.UITaggingForm      #
+  ###################################################################################
+  -->
+  <UITaggingForm>
+    <label>
+      <names>Nomes das tags:</names>
+      <linked>Tags ligadas:</linked>
+      <tagSet>UITaggingForm</tagSet>
+    </label>
+    <action>
+      <AddTag>Add</AddTag>
+      <Cancel>#{word.close}</Cancel>
+    </action>
+    <msg>
+      <name-exist>Nome da tag '{0}' existe.</name-exist>
+      <tagName-invalid>Há alguns caracteres inválidos no nome da tag.</tagName-invalid>
+      <tagName-empty-or-invalid>O nome da tag está vazio, ou contém alguns caracteres inválidos.</tagName-empty-or-invalid>
+      <tag-name-empty>Seu nome de tag está vazio</tag-name-empty>
+      <tag-name-duplicate>Você informou tags duplicadas.</tag-name-duplicate>
+      <tagName-too-long>Uma das tags inseridas é muito longa. As tags devem ter menos de 30 caracteres.</tagName-too-long>
+      <path-not-found>Essa tag foi eliminada ou alterada. Por favor, clique no botão Atualizar.</path-not-found>
+    </msg>
+    <introduction>
+      <tagName>Separe múltiplas tags com vírgulas ","</tagName>
+    </introduction>
+  </UITaggingForm>
+
+  <!--
+  ###################################################################################
+  # org.exoplatform.ecm.webui.component.explorer.popup.info.UIMetadataContainer     #
+  ###################################################################################
+  -->
+  <UIViewMetadataContainer>
+    <msg>
+      <path-not-found>O nó não suporta esta visualização.</path-not-found>
+    </msg>
+  </UIViewMetadataContainer>
+  <!--
+  ###################################################################################
+  # org.exoplatform.ecm.webui.component.explorer.popup.info.UIViewMetadataForm      #
+  ###################################################################################
+  -->
+  <UIViewMetadataForm>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIViewMetadataForm>
+  <metadataForm>
+    <title>
+      <UIViewMetadataForm>Adicionar/Editar propriedades</UIViewMetadataForm>
+    </title>
+  </metadataForm>
+  <UIViewMetadataTemplate>
+    <msg>
+      <access-denied>Acesso negado. Você não é o dono ou não tem permissão de editar neste nó.</access-denied>
+    </msg>
+  </UIViewMetadataTemplate>
+  <!--
+  ###################################################################################
+  # Validator messages                                                              #
+  ###################################################################################
+  -->
+   <ECMPhoneFormatValidator>
+     <msg>
+       <Invalid>O campo '{0}' contém um número de telefone inválido. Insira outro valor.</Invalid>
+     </msg>
+  </ECMPhoneFormatValidator>
+  <ECMNameValidator>
+    <msg>
+      <Invalid-char>Há alguns caracteres inválidos no campo '{0}'. Coloque outro valor, por favor.</Invalid-char>
+      <empty-input>O valor do campo '{0}' está nulo ou vazio.</empty-input>
+    </msg>
+  </ECMNameValidator>
+  <DateTimeValidator>
+    <msg>
+      <Invalid-input>O campo '{0}' com valor '{1}' é inválido.</Invalid-input>
+    </msg>
+  </DateTimeValidator>
+  <CronExpressionValidator>
+    <invalid-input>Sua expressão de tarefa agendada é inválida. Por favor, verifique a sintaxe.</invalid-input>
+  </CronExpressionValidator>
+  <EmptyFieldValidator>
+    <msg>
+      <empty-input>Por favor, preencha o campo '{0}'.</empty-input>
+    </msg>
+  </EmptyFieldValidator>
+  <CategoryValidator>
+    <msg>
+      <non-categories>Categorias estão erradas. Por favor, selecione as categorias certas.</non-categories>
+    </msg>
+  </CategoryValidator>
+  <!--
+  ###################################################################################
+  # JCR Exceptions manager                                                              #
+  ###################################################################################
+  -->
+  <ReferentialIntegrityException>
+    <msg>A ação falhou. Ainda há alguns itens no espaço de trabalho.</msg>
+  </ReferentialIntegrityException>
+  <ItemExistsException>
+    <msg>Este item já existe.</msg>
+  </ItemExistsException>
+  <AccessControlException>
+    <msg>Acesso negado. Você não tem permissão suficiente para executar essa ação.</msg>
+  </AccessControlException>
+  <AccessDeniedException>
+    <msg>Acesso negado.</msg>
+  </AccessDeniedException>
+  <ItemNotFoundException>
+    <msg>Item não encontrado. Talvez ele foi removido ou modificado.</msg>
+  </ItemNotFoundException>
+  <PathNotFoundException>
+    <msg>Caminho não encontrado. Talvez ele foi removido ou alterado.</msg>
+  </PathNotFoundException>
+  <ConstraintViolationException>
+    <msg>Você não pode executar essa ação porque há algumas restrições.</msg>
+  </ConstraintViolationException>
+  <!--
+  ###################################################################################
+  # Publication Manage                                                              #
+  ###################################################################################
+  -->
+  <UIPublicationForm>
+    <label>
+      <published>Publicado</published>
+      <non-published>Não publicado</non-published>
+      <public>Public</public>
+      <private>Privado</private>
+      <state>Estado</state>
+      <visibility>Visibility</visibility>
+      <nodeName>Nome do nó:</nodeName>
+      <lifecycleName>Nome do ciclo de vida</lifecycleName>
+      <stateName>Nome do estado</stateName>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <UnsubcriberLifeCycle>Desfazer inscrição</UnsubcriberLifeCycle>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIPublicationForm>
+  <!--
+  ###################################################################################
+  # JCR Browser                                                             #
+  ###################################################################################
+  -->
+  <UIWorkspaceList>
+    <label>
+      <workspaceName>Espaço de Trabalho</workspaceName>
+      <rootNodeInfo>Caminho raíz:</rootNodeInfo>
+      <rootPath>Caminho raíz:</rootPath>
+    </label>
+  </UIWorkspaceList>
+  <pathSelector>
+    <title>
+      <UIOneNodePathSelector>Seletor de nó</UIOneNodePathSelector>
+    </title>
+  </pathSelector>
+  <!--
+  ###################################################################################
+  # Others                                                                          #
+  ###################################################################################
+  -->
+  <EmailAddressValidator>
+    <msg>
+      <Invalid-input>Endereço de email é inválido.</Invalid-input>
+    </msg>
+  </EmailAddressValidator>
+  <UIFormInputSetWithAction>
+    <msg>
+      <confirm-delete>Você realmente deseja excluir?</confirm-delete>
+    </msg>
+  </UIFormInputSetWithAction>
+  <RepeatCountValidator>
+    <msg>
+      <invalid-value>Valor inválido no campo 'Repetir contagem'. Somente inteiros ou -1 são suportados.</invalid-value>
+    </msg>
+  </RepeatCountValidator>
+  <RepeatIntervalValidator>
+    <msg>
+      <invalid-value>Valor do campo 'Intervalo de tempo' é inválido. Só são aceitos tipos longos (Long Types).</invalid-value>
+    </msg>
+  </RepeatIntervalValidator>
+  <UIPermissionSelector>
+    <label>
+      <selectGroup>Selecionar grupo</selectGroup>
+      <selectUser>Selecionar usuário</selectUser>
+      <selectMembership>Selecionar associação de cargo</selectMembership>
+    </label>
+  </UIPermissionSelector>
+  <!--
+  ###################################################################################
+  # org.exoplatform.ecm.jcr.ECMStandardPropertyNameValidator                        #
+  ###################################################################################
+  -->
+  <ECMStandardPropertyNameValidator>
+    <msg>
+      <empty-input>O valor do campo '{0}' é nulo ou vazio.</empty-input>
+      <Invalid-char>Há algum caractere inválido no campo '{0}'. Coloque outro valor, por favor.</Invalid-char>
+    </msg>
+  </ECMStandardPropertyNameValidator>
+  <!--
+  ###################################################################################
+  # org.exoplatform.ecm.jcr.SearchValidator                                     #
+  ###################################################################################
+  -->
+  <SearchValidator>
+    <msg>
+      <empty-input>O valor deste campo é nulo ou vazio.</empty-input>
+      <Invalid-char>Há algum caractere inválido neste campo. Coloque outro valor, por favor.</Invalid-char>
+      <Invalid-char2>O número deve ser seguido pelo caractere '~'.</Invalid-char2>
+      <Invalid-char1>O número seguido por '~' deve ser entre 0 e 1.</Invalid-char1>
+      <Invalid-char3>O número deve ser seguido pelo caractere '^'.</Invalid-char3>
+      <Invalid-char4>Espaços não são permitidos perto do caractere '~'.</Invalid-char4>
+      <Invalid-char5>Espaços não são permitidos perto do caractere '^'.</Invalid-char5>
+    </msg>
+  </SearchValidator>
+  <!--
+  ###################################################################################
+  # PublicationService                                                              #
+  ###################################################################################
+  -->
+  <UIPublicationLogList>
+    <header>
+      <date>Data</date>
+      <newState>Novo estado</newState>
+      <user>Usuário</user>
+      <description>Description</description>
+      <version>Versão</version>
+      <visibility>Visibility</visibility>
+    </header>
+    <action>
+      <Close>#{word.close}</Close>
+    </action>
+  </UIPublicationLogList>
+  <!--
+  ###################################################################################
+  # UIVersionTreeList                                                             #
+  ###################################################################################
+  -->
+  <UIVersionTreeList>
+    <header>
+      <version>Versão</version>
+      <state>Estado</state>
+    </header>
+  </UIVersionTreeList>
+  <!--
+  ###################################################################################
+  # UIThumbnailForm                                                             #
+  ###################################################################################
+  -->
+  <UIThumbnailForm>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <RemoveThumbnail>Remover miniatura</RemoveThumbnail>
+    </action>
+    <label>
+      <mediumSize>Miniatura</mediumSize>
+      <SelectFile>Escolha a imagem em miniatura</SelectFile>
+    </label>
+    <msg>
+      <mimetype-incorrect>Tipo de arquivo incorreto. Miniaturas só podem ser criadas a partir de arquivos .JPG, .PNG ou .GIF.</mimetype-incorrect>
+      <access-denied>Acesso negado. Você não possui permissão para adicionar miniaturas para este nó.</access-denied>
+      <confirm-delete>Deseja remover esta miniatura?</confirm-delete>
+      <is-checked-in>Este nó está liberado. Por favor, reserve o nó antes de fazer qualquer coisa.</is-checked-in>
+      <fileName-error>Por favor, selecione um arquivo para carregar.</fileName-error>
+    </msg>
+    <title>
+      <remove-thumbnail>Remover esta miniatura</remove-thumbnail>
+    </title>
+  </UIThumbnailForm>
+  <!--
+  ###################################################################################
+  # UIAnyPermission                                                                 #
+  ###################################################################################
+  -->
+  <UIAnyPermission>
+    <label>
+      <anyPermission>Qualquer permissão</anyPermission>
+    </label>
+  </UIAnyPermission>
+
+  <anyPermission>
+    <title>
+      <AddAnyPermission>Colocar qualquer permissão</AddAnyPermission>
+    </title>
+  </anyPermission>
+  <!--
+  ###################################################################################
+  # UICategoriesAddedList                                                           #
+  ###################################################################################
+  -->
+  <UICategoriesSelector>
+    <action>
+      <close>#{word.close}</close>
+    </action>
+  </UICategoriesSelector>
+  <!--
+  ###################################################################################
+  # Since ECM version 2.2                                                             #
+  ###################################################################################
+  -->
+  <UIGroupMemberSelector>
+    <label>
+      <selectGroup>Selecionar grupo</selectGroup>
+      <selectUser>Selecionar usuário</selectUser>
+      <selectMembership>Selecionar associação de cargo</selectMembership>
+    </label>
+  </UIGroupMemberSelector>
+  <!--
+  ###Since ECM version 2.2##############
+  -->
+ 
+  <!--
+  ### Since ECM version 2.3 Alpha##############
+  Access directly a JCR FE drive
+  -->
+  <UIJCRExplorerPortlet>
+    <nopermission>Não há unidade ou você não tem permissão de acessá-la.</nopermission>
+  </UIJCRExplorerPortlet>
+
+  <UIJcrExplorerEditForm>
+    <title>Edição do Explorador de Arquivo</title>
+    <action>
+      <Edit>Edit</Edit>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <label>
+      <uploadFileSizeLimitMB>O limite de tamanho do arquivo  enviado (MB)</uploadFileSizeLimitMB>
+      <isDirectlyDrive>Navegar diretamente</isDirectlyDrive>
+      <driveName>Nome da unidade</driveName>
+      <usecase>Selecionar tipo</usecase>
+      <SelectNodePath>Selecionar caminho</SelectNodePath>
+      <showTopBar>Mostrar barra de topo</showTopBar>
+      <showActionBar>Mostrar barra de ação</showActionBar>
+      <showSideBar>Mostrar barra da esquerda</showSideBar>
+      <showFilterBar>Mostrar barra de filtro</showFilterBar>
+      <nodePath>Selecionar caminho</nodePath>
+    </label>
+  </UIJcrExplorerEditForm>
+
+  <UIDriveSelector>
+    <label>
+      <driveName>Nome da unidade</driveName>
+      <action>Ação</action>
+      <adddrives>Adicionar unidades</adddrives>
+    </label>
+  </UIDriveSelector>
+  <UIJcrExplorerEditForm>
+    <label>
+      <DriveNameInput>UI JCR Explorer Edit Form</DriveNameInput>
+    </label>
+    <msg>
+      <personal-usecase>A unidade privada do usuário atual será usada quando você escolher um caso de uso pessoal.</personal-usecase>
+      <drive-edit-permission>Você não pode editar o nome da unidade. Por favor, clique no botão Editar.</drive-edit-permission>
+      <path-edit-permission>Você não pode editar o caminho. Por favor, clique no botão Editar.</path-edit-permission>
+    </msg>
+  </UIJcrExplorerEditForm>
+
+  <PopUpSelectDrive>
+    <title>
+      <UIDriveSelector>Selecionar unidade</UIDriveSelector>
+    </title>
+  </PopUpSelectDrive>
+
+  <PopupSelectPath>
+    <title>
+      <UIOneNodePathSelector>Selecionar nó</UIOneNodePathSelector>
+    </title>
+  </PopupSelectPath>
+
+  <DriveNameInput>
+    <title>
+      <SelectDrive>Selecionar unidade</SelectDrive>
+    </title>
+  </DriveNameInput>
+
+  <!--
+  ### Since ECM version 2.4.x ##############
+  -->
+  <UIActionBar>
+    <tooltip>
+      <AddSymLink>Adicionar link simbólico</AddSymLink>
+      <AddLocalizationLink>Adicionar tradução</AddLocalizationLink>
+    </tooltip>
+  </UIActionBar>
+
+  <UIPopupWindow>
+    <title>
+      <UISymLinkManager>Gerenciador de Links Simbólicos</UISymLinkManager>
+      <UIAddTranslationManager>Adicionar tradução</UIAddTranslationManager>
+    </title>
+  </UIPopupWindow>
+
+  <UISymLinkForm>
+    <label>
+      <symLinkName>Nome do Link Simbólico</symLinkName>
+      <pathNode>Caminho do nó</pathNode>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <addFolder-successful>O Link Simbólico '{0}' foi adicionado com sucesso.</addFolder-successful>
+      <name-invalid>Por favor, coloque o nome do link simbólico.</name-invalid>
+      <name-not-allowed>Este nome não é permitido.</name-not-allowed>
+      <fileName-error>Nome de arquivo inválido.</fileName-error>
+      <constraint-violation>Você não pode adicionar o tipo de nó '{0}' ao nó atual.</constraint-violation>
+      <repository-exception>Acesso negado. Você não tem permissão para adicionar link simbólico neste nó.</repository-exception>
+      <numberformat-exception>Não pode salvar esta pasta. O nome provido deve ser numérico.</numberformat-exception>
+      <path-node-invalid>Por favor, insira o caminho do nó.</path-node-invalid>
+      <path-node-not-allowed>Este nome não é permitido.</path-node-not-allowed>
+      <non-node>Por favor, escolha um alvo de confiança; você pode não ter permissão para leitura deste nó.</non-node>
+      <cannot-save>Você não pode adicionar um link simbólico para este tipo de nó.</cannot-save>
+      <item-exists-exception>O nó com o mesmo nome já existe.</item-exists-exception>
+      <translation-node-same-language-default>O nó de tradução tem o mesmo idioma que o idioma padrão do nó atual.</translation-node-same-language-default>
+      <UnsupportedRepositoryOperationException>Esse nó alvo não é referido.</UnsupportedRepositoryOperationException>
+    </msg>
+  </UISymLinkForm>
+  
+  <UIAddTranslationForm>
+    <label>
+      <symLinkName>Nome do Link Simbólico</symLinkName>
+      <pathNode>Caminho do documento:</pathNode>
+      <note>Selecione outro documento que servirá como a tradução</note>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <SelectDocument>Selecionar Documento</SelectDocument>
+    </action>
+    <msg>
+      <addFolder-successful>O link simbólico '{0}' foi adicionado com sucesso.</addFolder-successful>
+      <name-invalid>Por favor, coloque o nome do link simbólico.</name-invalid>
+      <name-not-allowed>Este nome não é permitido.</name-not-allowed>
+      <fileName-error>Nome do arquivo é inválido.</fileName-error>
+      <constraint-violation>Você não pode adicionar o tipo de nó '{0}' ao nó atual.</constraint-violation>
+      <repository-exception>Acesso negado. Você não tem permissão para adicionar link simbólico neste nó.</repository-exception>
+      <numberformat-exception>Não é possível salvar esta pasta. O nome deve ser de tipo numérico.</numberformat-exception>
+      <path-node-invalid>Por favor, insira o caminho do nó.</path-node-invalid>
+      <path-node-not-allowed>Este nome não é permitido.</path-node-not-allowed>
+      <non-node>Por favor, escolha um alvo de confiança; você pode não ter permissão para leitura deste nó.</non-node>
+      <cannot-save>Ocorreu um erro ao criar o link simbólico.</cannot-save>
+      <item-exists-exception>O nó com o mesmo nome já existe.</item-exists-exception>
+      <translation-node-same-language-default>O nó de tradução tem o mesmo idioma que o idioma padrão do nó atual.</translation-node-same-language-default>
+      <UnsupportedRepositoryOperationException>Esse nó alvo não é referido.</UnsupportedRepositoryOperationException>
+    </msg>
+  </UIAddTranslationForm>
+
+  <UIPopupSymLink>
+    <title>
+      <UIOneNodePathSelector>Escolher alvo do nó</UIOneNodePathSelector>
+    </title>
+  </UIPopupSymLink>
+  <UIPopupSymLink>
+    <title>
+      <UIContentSelectorOne>Selecionar Documento</UIContentSelectorOne>
+    </title>
+  </UIPopupSymLink>
+
+  <ECMContextMenu>
+    <event>
+      <AddSymLink>Adicionar link simbólico</AddSymLink>
+      <AddLocalizationLink>Adicionar tradução</AddLocalizationLink>
+    </event>
+  </ECMContextMenu>
+
+  <UIWorkingArea>
+    <msg>
+      <create-link-problem>Você não pode criar um link para o nó '{0}' em '{1}'.</create-link-problem>
+      <dest-node-is-link>O nó destino '{0}' já é um link simbólico. Você não pode criar um link simbólico dentro dele</dest-node-is-link>
+      <selected-is-link>O nó selecionado '{0}' já é um link. Você não pode criar um link que aponta para outro link.</selected-is-link>
+      <confirm-create-link>Você realmente deseja criar um link para este local?</confirm-create-link>
+    </msg>
+  </UIWorkingArea>
+
+  <ECMContextMenu>
+    <event>
+      <CreateLink>Criar link</CreateLink>
+    </event>
+  </ECMContextMenu>
+
+  <UIWorkspaceList>
+    <msg>
+      <AccessDeniedException>Acesso negado. Você não tem permissão de leitura nesse espaço de trabalho.</AccessDeniedException>
+    </msg>
+    <label>
+      <taxonomyTree>Árvore de categorias</taxonomyTree>
+    </label>
+  </UIWorkspaceList>
+
+  <UIPopupTaxonomy>
+    <title>
+      <UIOneTaxonomySelector>Adicionar categorias</UIOneTaxonomySelector>
+    </title>
+  </UIPopupTaxonomy>
+
+  <UITreeTaxonomyList>
+    <label>
+      <taxonomyTree>Árvore de categorias:</taxonomyTree>
+      <rootNodePath>Árvore raíz:</rootNodePath>
+      <rootNodeInfo>UITreeTaxonomyList</rootNodeInfo>
+    </label>
+  </UITreeTaxonomyList>
+
+  <UIActionBar>
+    <tooltip>
+      <ManageSimpleCategories>Gerenciar categorias simples</ManageSimpleCategories>
+    </tooltip>
+  </UIActionBar>
+
+  <UISimpleCategoryManager>
+    <tab>
+      <label>
+        <UICategoriesAddedList>Categorias referenciadas</UICategoriesAddedList>
+        <UIOneNodePathSelector>Selecionar categoria</UIOneNodePathSelector>
+      </label>
+    </tab>
+  </UISimpleCategoryManager>
+
+  <UICategoryManager>
+    <tab>
+      <label>
+        <UIOneTaxonomySelector>Selecionar categoria</UIOneTaxonomySelector>
+      </label>
+    </tab>
+  </UICategoryManager>
+
+  <UISimpleCategoryManager>
+    <action>
+      <Close>#{word.close}</Close>
+    </action>
+  </UISimpleCategoryManager>
+  <UIPopupWindow>
+    <title>
+      <UISimpleCategoryManager>Adicionar categoria</UISimpleCategoryManager>
+    </title>
+  </UIPopupWindow>
+  <UICategoriesAddedList>
+    <msg>
+      <ItemExistsException>Uma categoria com o mesmo nome já existe</ItemExistsException>
+    </msg>
+  </UICategoriesAddedList>
+
+  <UIConfirmMessage>
+    <label>
+      <Close>#{word.cancel}</Close>
+      <OK>Excluir</OK>
+      <ReplaceData>Substituir dado</ReplaceData>
+      <Back>Voltar para renomear</Back>
+      <Keepfile>Manter ambos arquivos</Keepfile>
+<ReadOnly>Abrir como somente leitura</ReadOnly>
+<Cancel>Cancelar</Cancel>
+      <KeepBoth>Manter ambos</KeepBoth>
+      <CreateNewVersion>Criar uma nova versão</CreateNewVersion>
+    </label>
+  </UIConfirmMessage>
+
+  <UIRestoreConfirmMessage>
+    <label>
+      <Close>#{word.close}</Close>
+      <OK>OK</OK>
+      <ReplaceData>Substituir dado</ReplaceData>
+      <Back>Voltar para renomear</Back>
+      <Keepfile>Manter ambos arquivos</Keepfile>
+    </label>
+  </UIRestoreConfirmMessage>
+
+
+  <PopupComponent>
+    <title>
+      <UIOneTaxonomySelector>Adicionar categorias</UIOneTaxonomySelector>
+    </title>
+  </PopupComponent>
+
+  <UIWorkingArea>
+    <msg>
+      <can-not-move-to-itself>Você não pode mover o arquivo, porque a pasta de destino é a mesma em que ele se encontra.</can-not-move-to-itself>
+      <is-editing>Você não pode mover um documento enquanto ele está sendo editado. Por favor, feche-o primeiro.</is-editing>
+    </msg>
+  </UIWorkingArea>
+
+  <UIImportNode>
+    <label>
+      <behavior>Comportamento do UUID</behavior>
+      <versionHistory>Histórico de versões</versionHistory>
+    </label>
+    <msg>
+      <history-invalid-type>Tipo de arquivo inválido no histórico de versões. Somente arquivos .zip são suportados.</history-invalid-type>
+      <history-invalid-content>Tipo de conteúdo inválido no histórico de versões. Você deve escolher o arquivo correto para importar.</history-invalid-content>
+    </msg>
+  </UIImportNode>
+
+  <Import>
+    <Behavior>
+      <type0>Criar novo</type0>
+      <type1>Remover existentes</type1>
+      <type2>Substituir existentes</type2>
+      <type3>Lançar exceção</type3>
+    </Behavior>
+  </Import>
+
+  <UIExportNode>
+    <action>
+      <ExportHistory>Expotar histórico de versão</ExportHistory>
+    </action>
+  </UIExportNode>
+
+  <UIPopupMenu>
+    <msg>
+      <node-locked-other-person>Este node ou o node pai está bloqueado por outro usuário, você não pode excluí-lo.</node-locked-other-person>
+    </msg>
+  </UIPopupMenu>
+
+  <Import>
+    <label>
+      <docview>Visualização de documento</docview>
+      <sysview>Visualização de sistema</sysview>
+    </label>
+  </Import>
+
+  <UIDocumentForm>
+    <msg>
+      <do-not-permission>Você não tem permissão para carregar o modelo '{0}'.</do-not-permission>
+    </msg>
+  </UIDocumentForm>
+
+  <!--
+  ###################################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIActionBar                #
+  #                           Localize tab                                                                                    #
+  ###################################################################################
+  -->
+  <UIActionBar>
+    <obtion>
+      <Admin>Administrador</Admin>
+      <Info>Informação</Info>
+      <Actions>Actions</Actions>
+      <Collaboration>Colaboração</Collaboration>
+      <Search>Buscar</Search>
+    </obtion>
+  </UIActionBar>
+
+  <UIPopupMenu>
+    <msg>
+      <can-not-unlock-node-is-checked-in>Você não pode desbloquear o nó '{0}' (ou seu antecessor), pois ele não está reservado.</can-not-unlock-node-is-checked-in>
+    </msg>
+  </UIPopupMenu>
+
+  <!--
+   #############  From DMS 2.5 #############
+  -->
+  <UIActionBar>
+    <msg>
+      <cannot-enable-version>Não é possível habilitar o versionamento.</cannot-enable-version>
+    </msg>
+  </UIActionBar>
+  <UIPopupMenu>
+    <msg>
+        <cannot-readsource>Você não pode ler dados do nó fonte.</cannot-readsource>
+    </msg>
+  </UIPopupMenu>
+  <UIUploadForm>
+    <msg>
+      <upload-not-null>Por favor, envie o arquivo antes de adicionar uma categoria.</upload-not-null>
+    </msg>
+  </UIUploadForm>
+  <UIActionBar>
+    <msg>
+      <allow-setProperty>Você deve selecionar uma propriedade para este grupo.</allow-setProperty>
+    </msg>
+  </UIActionBar>
+
+  <UIActionForm>
+    <msg>
+      <name-not-allowed>Este nome de ação não é permitido.</name-not-allowed>
+    </msg>
+  </UIActionForm>
+
+  <UISaveQueryForm>
+    <msg>
+      <name-not-allowed>Esse nome de consulta não é permitido.</name-not-allowed>
+    </msg>
+  </UISaveQueryForm>
+  <UISimpleSearch>
+    <msg>
+      <name-not-allowed>Uma palavra ou frase no conteúdo não é permitida.</name-not-allowed>
+    </msg>
+  </UISimpleSearch>
+
+ 
+    <!--
+   #############  From DMS 2.6 #############
+   -->
+  <ECMContextMenu>
+      <event>
+        <Permlink>Ver documento</Permlink>
+      </event>
+  </ECMContextMenu>
+  
+
+  <!--
+    ############  From DMS 2.6 ##############
+   -->
+  <UIFolderForm>
+    <label>
+      <nt_folder>Pasta de documentos</nt_folder>
+      <nt_unstructured>Pasta de conteúdo</nt_unstructured>
+      <exo_cssFolder>Pasta de CSS</exo_cssFolder>
+      <exo_jsFolder>Pasta de javascript</exo_jsFolder>
+      <exo_linkFolder>Link Folder</exo_linkFolder>
+      <exo_webFolder>Pasta de conteúdo Web</exo_webFolder>
+   </label>
+  </UIFolderForm>
+
+  <Comments>
+    <tooltip>
+      <remove-comment>Remover este comentário</remove-comment>
+      <edit-comment>Editar este comentário</edit-comment>
+    </tooltip>
+  </Comments>
+  <UIDocumentInfo>
+    <msg>
+      <confirm-deletecomment>Você realmente deseja excluir este comentário?</confirm-deletecomment>
+    </msg>
+  </UIDocumentInfo>
+
+ <UIExportNode>
+  <msg>
+    <OutOfMemoryError>Você deve escolher Visualização de Sistema enquanto exporta grandes quantidades de dados.</OutOfMemoryError>
+  </msg>
+ </UIExportNode>
+ <Taxonomy>
+    <msg>
+      <AccessDeniedException>Você não tem permissão para acessar estas categorias.</AccessDeniedException>
+    </msg>
+  </Taxonomy>
+
+  <UIJcrExplorerEditForm>
+    <msg>
+      <notNullDriveName>O nome da unidade é nulo ou vazio. Preencha o campo Nome da unidade, por favor.</notNullDriveName>
+      <notNullPath>O caminho é nulo ou vazio. Preencha o caminho, por favor.</notNullPath>
+    </msg>
+  </UIJcrExplorerEditForm>
+
+  <UIViewSearchResult>
+    <tooltip>
+      <remove-attachment>Você deseja remover este arquivo anexado?</remove-attachment>
+    </tooltip>
+  </UIViewSearchResult>
+
+  <SameNamePopup>
+    <title>
+      <UIUploadBehaviorWithSameName>Enviar arquivo</UIUploadBehaviorWithSameName>
+    </title>
+  </SameNamePopup>
+
+  <UIAllItems>
+    <label>
+      <OwnedByMe>Meus itens</OwnedByMe>
+      <Favourites>Favoritos</Favourites>
+      <Hidden>Oculto</Hidden>
+      <Trash>Lixeira</Trash>
+      <Configuration>Definir preferências</Configuration>
+    </label>
+    <title>
+      <allItems>Todos os Itens</allItems>
+    </title>
+  </UIAllItems>
+
+  <UIPreferencesForm>
+      <label>
+          <Alphabetic>Alfabético</Alphabetic>
+          <Type>Type</Type>
+          <CreatedDate>Data de Criação</CreatedDate>
+          <ModifiedDate>Data de Modificação</ModifiedDate>
+          <Ascending>Ascendente</Ascending>
+          <Descending>Descendente</Descending>
+      </label>
+  </UIPreferencesForm>
+
+  <UISavedSearches>
+    <title>
+      <savedSearches>Buscas salvas</savedSearches>
+    </title>
+  </UISavedSearches>
+  <DocumentType>
+    <label>
+       <Images>Imagens</Images>
+       <Video>Vídeo</Video>
+       <Music>Música</Music>
+       <Documents>Documentos</Documents>
+       <Content>Conteúdo</Content>
+    </label>
+  </DocumentType>
+
+  <UIDocumentFilterForm>
+    <label>
+      <Images>Imagens</Images>
+      <Video>Vídeos</Video>
+      <Music>Música</Music>
+      <Documents>Documentos</Documents>
+      <Content>Conteúdo</Content>
+    </label>
+    <title>Definir preferências de filtro</title>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIDocumentFilterForm>
+
+  <UIAllItemsByType>
+    <label>
+    <ByType>Filtrar por tipo</ByType>
+      <DocumentFilterConfiguration>Definir preferências de filtro</DocumentFilterConfiguration>
+    </label>
+    <title>
+      <ShowVideo>Mostrar todos os arquivos de vídeo</ShowVideo>
+      <ShowMusic>Mostrar todos os arquivos de música</ShowMusic>
+      <ShowImages>Mostrar todos os arquivos de imagem</ShowImages>
+      <ShowDocuments>Mostrar todos os arquivos de documento</ShowDocuments>
+      <ShowContent>Mostrar todos os tipos de documento</ShowContent>
+    </title>
+  </UIAllItemsByType>
+
+  <Views>
+    <label>
+      <slide-show>Slide show</slide-show>
+    </label>
+  </Views>
+  <ECMContextMenu>
+    <event>
+      <PlayMedia>Executar mídia</PlayMedia>
+    </event>
+  </ECMContextMenu>
+  <UIPopupWindow>
+    <title>
+      <UIDocumentFilterForm>Filtrar tipo de documento</UIDocumentFilterForm>
+    </title>
+  </UIPopupWindow>
+
+  <UIAllItemsPreferenceForm>
+    <label>
+      <showOwnedByUser>Minha propriedade</showOwnedByUser>
+      <showFavourites>Favoritos</showFavourites>
+      <showHiddens>Oculto</showHiddens>
+      <showTrash>Lixeira</showTrash>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIAllItemsPreferenceForm>
+
+  <EmptyTrashManageComponent>
+    <msg>
+      <confirm-delete>Esvaziar todos itens da lixeira?</confirm-delete>
+    </msg>
+  </EmptyTrashManageComponent>
+  <UICategoryForm>
+    <label>
+      <name>Nome da categoria</name>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UICategoryForm>
+  <UIPopupWindow>
+    <title>
+      <UICategoryForm>Adicionar categoria</UICategoryForm>
+    </title>
+  </UIPopupWindow>
+  <UIActionBar>
+    <tooltip>
+      <AddCategory>Adicionar categoria</AddCategory>
+    </tooltip>
+   </UIActionBar>
+
+   <UITaggingForm>
+    <label>
+      <Public>Public</Public>
+      <Private>Privado</Private>
+      <tagScopes>Escopo de tags</tagScopes>
+    </label>
+   </UITaggingForm>
+
+  <UITagExplorer>
+    <title>
+      <PublicTags>Tags</PublicTags>
+      <EditPublicTags>Editar tags</EditPublicTags>
+      <PrivateTags>Tags privadas</PrivateTags>
+    </title>
+  </UITagExplorer>
+
+  <UIEditingTagsForm>
+    <header>
+      <name>Name</name>
+      <relatedDocuments>Documentos relacionados</relatedDocuments>
+      <action>Ação</action>
+    </header>
+    <action>
+      <title>
+        <EditTag>Editar tag</EditTag>
+        <RemoveTag>Remover tag</RemoveTag>
+        <AddTag>Adicionar tag</AddTag>
+      </title>
+    </action>
+    <msg>
+      <confirm-remove>Tem certeza que deseja excluir este rótulo?</confirm-remove>
+    </msg>
+  </UIEditingTagsForm>
+
+
+  <UIPopupWindow>
+    <title>
+      <UIEditingTagsForm>Editar tag</UIEditingTagsForm>
+    </title>
+  </UIPopupWindow>
+
+  <UITagForm>
+    <action>
+      <UpdateTag>#{word.save}</UpdateTag>
+      <Cancel>#{word.close}</Cancel>
+    </action>
+    <label>
+      <tagName>Nome de tag:</tagName>
+      <relatedDocuments>Documentos relacionados</relatedDocuments>
+    </label>
+  </UITagForm>
+
+  <TagPopup>
+    <title>
+      <UITagForm>Marcação</UITagForm>
+    </title>
+  </TagPopup>
+
+    <UIPopupMenu>
+    <msg>
+      <node-locked-editing>Você não pode editar este nó com o caminho {0}. Ele está bloqueado por outro usuário.</node-locked-editing>
+    </msg>
+  </UIPopupMenu>
+  <UITagStyleForm>
+    <msg>
+      <error-update>Erro enquanto tentava atualizar o estilo de tag.</error-update>
+    </msg>
+  </UITagStyleForm>
+
+  <UIPopupMenu>
+    <msg>
+      <editTagAccessDenied>Acesso negado.</editTagAccessDenied>
+    </msg>
+  </UIPopupMenu>
+
+  <UIPopupWindow>
+    <title>
+      <UITaggingFormContainer>Gerenciador de Tag</UITaggingFormContainer>
+    </title>
+  </UIPopupWindow>
+
+    <PopupComponent>
+    <title>
+      <UINodeTypeSelector>Selecionar tipo de nó</UINodeTypeSelector>
+    </title>
+  </PopupComponent>
+
+    <UIActionForm>
+    <title>
+      <ShowComponent>Mostrar componente</ShowComponent>
+      <removeReference>Remove</removeReference>
+    </title>
+  </UIActionForm>
+
+  <EditFormAction>
+    <title>
+      <ShowComponent>Mostrar componente</ShowComponent>
+      <removeReference>Remove</removeReference>
+    </title>
+  </EditFormAction>
+
+  <NodeTypeNameValidator>
+    <msg>
+      <Invalid-char>Há alguns caracteres inválidos. Coloque outro valor, por favor.</Invalid-char>
+      <empty-input>O valor do campo é nulo ou vazio.</empty-input>
+    </msg>
+  </NodeTypeNameValidator>
+
+  <UIPreferencesForm>
+      <label>
+            <queryType>Tipo de consulta</queryType>
+            <SQL>SQL</SQL>
+            <XPATH>XPATH</XPATH>
+      </label>
+  </UIPreferencesForm>
+
+  <UIDocumentInfo>
+    <msg>
+      <repository-error>Aconteceu um erro. A informação sobre o repositório foi perdida.</repository-error>
+    </msg>
+  </UIDocumentInfo>
+
+  <UITreeExplorer>
+    <msg>
+      <repository-error>Aconteceu um erro. A informação sobre o repositório foi perdida.</repository-error>
+    </msg>
+  </UITreeExplorer>
+  <UIDocumentForm>
+    <msg>
+      <constraintviolation-exception>Você não pode salvar documento. Entrada de dados não encontrada ou inválida.</constraintviolation-exception>
+    </msg>
+  </UIDocumentForm>
+  <UIActionForm>
+    <msg>
+      <constraintviolation-exception>Você não pode salvar o documento. Entrada de dados não encontrada ou inválida.</constraintviolation-exception>
+    </msg>
+  </UIActionForm>
+
+  <UISelectRestorePath>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <label>
+      <formInput>Caminho antigo perdido. Por favor, escolha um novo.</formInput>
+    </label>
+  </UISelectRestorePath>
+  <PathNode>
+    <title>
+      <Add>Add</Add>
+    </title>
+  </PathNode>
+  <UIPopupPathFoRestore>
+    <title>
+      <UIOneNodePathSelector>Selecione o nó pai</UIOneNodePathSelector>
+    </title>
+  </UIPopupPathFoRestore>
+  <rootNodeInfo>
+    <title>
+      <AddRootNode>Adicionar o nó raíz</AddRootNode>
+    </title>
+  </rootNodeInfo>
+
+  <UIActionForm>
+    <msg>
+      <homePath-emty>O caminho raíz está vazio.</homePath-emty>
+      <targetPath-emty>O caminho alvo está vazio.</targetPath-emty>
+    </msg>
+    </UIActionForm>
+    <UIActionBar>
+      <msg>
+        <not-exist-categories>Não há nenhuma categoria.</not-exist-categories>
+      </msg>
+    </UIActionBar>
+
+  <UIPublicationContainer>
+   <action>
+    <Close>#{word.close}</Close>
+   </action>
+  </UIPublicationContainer>
+
+  <UIPublicationPanel>
+    <button>
+      <Close>#{word.close}</Close>
+    </button>
+    <revisions>
+      <version>Revisões</version>
+      <date>Data</date>
+      <author>Autor</author>
+      <status>Status</status>
+      <action>Ação</action>
+      <label>Revisão</label>
+      <none>Sem revisões</none>
+      <seeall>Ver todas versões</seeall>
+      <currentVersion>Revisão atual</currentVersion>
+      <confirm>Você perderá o seu trabalho em rascunho. Quer realmente restaurar esta revisão e substituir a revisão atual?</confirm>
+    </revisions>
+    <status>
+      <version>Revisão</version>
+      <title>Status</title>
+      <archived>Archived</archived>
+      <obsolete>Obsolete</obsolete>
+      <unpublished>Não publicado</unpublished>
+      <enrolled>Registrado</enrolled>
+      <draft>Rascunho</draft>
+      <pending>Pending</pending>
+      <approved>Aprovado</approved>
+      <inreview>Em revisão</inreview>
+      <staged>Organizado</staged>
+      <published>Publicado</published>
+      <live>Publicado</live>
+    </status>
+    <scheduled>
+      <title>Agendado</title>
+      <from>De</from>
+      <to>Para</to>
+    </scheduled>
+    <title>
+      <preview>Prévia</preview>
+      <restore>Restaurar</restore>
+    </title>
+    <msg>
+      <have-no-view-template>O modelo de visualização não é suportado.</have-no-view-template>
+      <restore-complete>Restauração completa.</restore-complete>
+    </msg>
+  </UIPublicationPanel>
+  <UIPublicationHistory>
+    <header>
+      <date>Data</date>
+      <versionName>Nome da revisão</versionName>
+      <currentState>Estado atual</currentState>
+      <user>Autor</user>
+      <description>Description</description>
+    </header>
+    <create-version>Nova versão criada</create-version>
+  </UIPublicationHistory>
+  
+  <UIPublicationSchedule>
+    <label>
+      <introduction>Você pode agendar a publicação do seu documento. Selecione as datas que você gostaria de ver seu documento publicado</introduction>
+      <no-schedule-info>Não há nenhuma agenda de publicação para o seu documento</no-schedule-info>
+      <UIPublicationPanelStartDateInput>Início da publicação</UIPublicationPanelStartDateInput>
+      <UIPublicationPanelEndDateInput>Término da publicação</UIPublicationPanelEndDateInput>
+    </label>
+    <msg>
+      <save-finished>Seu novo horário de publicação foi salvo com sucesso.</save-finished>
+    </msg>
+    <action>
+      <Save>#{word.save}</Save>
+      <Reset>Limpar</Reset>
+    </action>
+  </UIPublicationSchedule>
+
+  <UIPublicationPanel>
+    <label>
+      <header>Data e hora de publicação</header>
+      <start>Começar publicação</start>
+      <end>Finalizar publicação</end>
+    </label>
+    <msg>
+      <invalid-format>O formato da data é inválido. Por favor, verifique novamente.</invalid-format>
+      <fromDate-after-toDate>A data de início deve ser anterior a data final.</fromDate-after-toDate>
+    </msg>
+  </UIPublicationPanel>
+  <UIPopupWindow>
+    <title>
+      <UIPublicationContainer>Gerenciar publicação</UIPublicationContainer>
+      <UIPublishingPanel>Gerenciar publicação</UIPublishingPanel>
+    </title>
+  </UIPopupWindow>
+  <WCMContentView>
+    <header>
+      <status>Status</status>
+      <author>Autor</author>
+      <date>Data de criação</date>
+      <title>Título do documento</title>
+      <lastUser>Último usuário</lastUser>
+    </header>
+  </WCMContentView>
+  <UITagForm>
+    <msg>
+      <NameAlreadyExist>Nome da tag já existe.</NameAlreadyExist>
+    </msg>
+  </UITagForm>
+
+  <!--
+  ############  From WCM 2.1.0 ##############
+  -->
+  <UICategoryManagerSearch>
+    <tab>
+      <label>
+        <UIOneTaxonomySelector>Escolher categoria</UIOneTaxonomySelector>
+      </label>
+    </tab>
+  </UICategoryManagerSearch>
+
+  <UIPreferencesForm>
+   <action>
+     <HideAdvance>Ocultar avançado</HideAdvance>
+     <ShowAdvance>Mostrar avançado</ShowAdvance>
+    </action>
+    <label>
+    <Advance>Avançado</Advance>
+    </label>
+  </UIPreferencesForm>
+
+  <UIJCRExplorerPortlet>
+<msg>
+  <file-access-denied>Acesso ao arquivo negado.</file-access-denied>
+  <anonymous-access-denied>Usuário anônimo não tem permissão para usar essa função.</anonymous-access-denied>
+</msg>
+  </UIJCRExplorerPortlet>
+  <UIDrivesArea>
+    <DrivesArea>
+      <ShowDrives>Mostrar unidades</ShowDrives>
+    </DrivesArea>
+    <msg>
+      <no-view-found>Não existe visualização aplicada para sua permissão de acesso na unidade '{0}'.</no-view-found>
+      <access-denied>Acesso negado. Talvez você não tenha permissão no espaço de trabalho da unidade '{0}'.</access-denied>
+      <not-found>O documento que você está tentando acessar não está mais disponível.</not-found>
+      <empty-drives>Acesso negado. Não há nenhuma unidade neste repositório ou você não tem permissão para acessar quaisquer unidades neste repositório.</empty-drives>
+      <workspace-not-exist>Unidade '{0}' foi armazenada em um espaço de trabalho não reconhecido. Por favor reconfigure esta unidade.</workspace-not-exist>
+    </msg>
+  </UIDrivesArea>
+  <UIJcrExplorerEditForm>
+    <msg>
+      <fields-saved>Todos os valores dos campos salvos.</fields-saved>
+      <fields-cancelled>Todos os valores cancelados.</fields-cancelled>
+    </msg>
+  </UIJcrExplorerEditForm>
+  <UIDocumentForm>
+  <msg>
+  <confirm-close>As mudanças que você fez serão perdidas se você fechar este formulário.</confirm-close>
+  <confirm-changeType>As alterações feitas serão perdidas se você alterar o tipo de conteúdo.</confirm-changeType>
+  <confirm-navigate>As mudanças que você fez serão perdidas se você ir para outra página.</confirm-navigate>
+  </msg>
+  </UIDocumentForm>
+  <UploadFileMimeTypesValidator>
+    <msg>
+      <wrong-mimetype>Mime type {0} não é permitido para o campo {1}. Favor enviar outro arquivo</wrong-mimetype>
+    </msg>
+  </UploadFileMimeTypesValidator>
+  <lifecyclePhase>
+    <label>
+    <no>Não</no>
+  <yes>Sim</yes>
+  <true>Verdadeiro</true>
+  <false>Falso</false>
+  <Electronic>Eletrônico</Electronic>
+  <Paper>Papel</Paper>
+  <NONE>Nenhum</NONE>
+  <CLASSIFIED>Classificado</CLASSIFIED>
+  <UNCLASSIFIED>Não classificado</UNCLASSIFIED>
+  <NOCONTRACT>Sem Contrato</NOCONTRACT>
+  <one-minute>Um minuto</one-minute>
+  <hourly>Por hora</hourly>
+  <daily>Diariamente</daily>
+  <quarterly>Trimestral</quarterly>
+  <yearly>Anualmente</yearly>
+  <ten-years>Dez anos</ten-years>
+  <read>Ação do usuário</read>
+  <schedule>Agendador</schedule>
+  <node_added>Adição de conteúdo</node_added>
+  <node_removed>Remoção de conteúdo</node_removed>
+  <property_added>Adição de propriedade</property_added>
+  <property_removed>Remoção de propriedade</property_removed>
+  <property_changed>Modificação de propriedade</property_changed>
+</label>
+  </lifecyclePhase>
+  <UIPopupMenu>
+  <msg>
+<can-not-remove-locked-node>O nó {0} está bloqueado. Você não pode movê-lo para a Lixeira.</can-not-remove-locked-node>
+<can-not-remove-checked-in-node>O nó {0} (ou seu nó pai) não está reservado. Você não pode movê-lo para a Lixeira.</can-not-remove-checked-in-node>
+<access-denied-to-delete>Acesso negado. Você não pode mover o nó {0} para a Lixeira.</access-denied-to-delete>
+  </msg>
+  </UIPopupMenu>
+  <UIPropertyForm>
+  <msg>
+  <unknown-error>Um erro ocorreu enquanto editava esta propriedade.</unknown-error>
+    </msg>
+  </UIPropertyForm>
+  <UIWatchDocumentForm>
+    <msg>
+      <node-is-locked>Este nó está bloqueado. Você não pode acompanhá-lo.</node-is-locked>
+      <unknown-error>Ocorreram erros. Você não pode acompanhar este nó.</unknown-error>
+    </msg>
+  </UIWatchDocumentForm>   
+  <UIActionForm>
+    <msg>
+      <xss-vulnerability-character>Campo '{0}' contém caracteres de vulnerabilidade XSS</xss-vulnerability-character>
+    </msg>
+  </UIActionForm>
+  <UIMultiUpload>
+  <label>
+    <AbortAll>Abortar tudo</AbortAll>
+    <AbortAllFiles>Abortar todos os arquivos</AbortAllFiles>
+    <MaxFileSize>O tamanho máximo de arquivo é</MaxFileSize>
+    <InvalidCharacters>Caracteres inválidos serão alterados por '-'</InvalidCharacters>
+    <DropFileMessage>Deixar seus arquivos na pasta atual</DropFileMessage>
+    <Close>#{word.close}</Close>
+    <in>em</in>
+    <MaxFileSizeAlert>O tamanho do arquivo excede o limite de tamanho de</MaxFileSizeAlert>
+    <Waiting>Esperando</Waiting>
+    <Error>Erro</Error>
+    <or>ou</or>
+    <AlreadyInUse>Já em uso</AlreadyInUse>
+    <Keep>Manter os dois</Keep>
+    <Replace>Substituir</Replace>
+    <Canceled>Cancelado</Canceled>
+      <UploadNewVersion>Carregar uma nova versão</UploadNewVersion>
+    <Cancel>#{word.cancel}</Cancel>
+    <AbortAllConfirmation>Você quer abortar todos os arquivos em andamento?</AbortAllConfirmation>
+  </label>
+  </UIMultiUpload>
+  <UIDocumentNodeList>
+  <label>
+  <CreatedOn>Criado em</CreatedOn>
+  <Updated>Atualizado</Updated>
+  <by>por</by>
+  <you>você</you>
+  </label>
+  </UIDocumentNodeList>
+  <FileView>
+    <label>
+      <name>Name</name>
+      <date>Data</date>
+      <size>Tamanho</size>
+      <sortBy>Ordenar por:</sortBy>
+      <filesAreSelected>Arquivos estão selecionados.</filesAreSelected>
+      <ClearSelection>Limpar seleção</ClearSelection>
+      <more>More</more>
+    </label>
+  </FileView>
+  <UIPropertyForm>
+  <msg>
+  <property-name-incorrect>A propriedade nome está incorreta, por favor, entre com outro valor!</property-name-incorrect>
+    </msg>
+  </UIPropertyForm>
+  <UIDocumentAutoVersionForm>
+    <msg>Um documento {0} já existe. O que você deseja fazer?</msg>
+    <UIChkRememberNonVersioned>
+      <label>Lembrar da minha escolha para todos os demais documentos sem versão</label>
+    </UIChkRememberNonVersioned>
+    <UIChkRememberVersioned>
+      <label>Lembrar da minha escolha para todos os demais documentos com versão</label>
+    </UIChkRememberVersioned>
+  </UIDocumentAutoVersionForm>
+  <DocumentAuto>
+    <message>Uma nova versão do documento {0} foi criada com sucesso.</message>
+    <messageMultiFile>Uma nova versão do documento {0} foi criada com sucesso.</messageMultiFile>
+  </DocumentAuto>
+  <!--
+  ###################################################################################
+  # JCR Exceptions manager                                                              #
+  ###################################################################################
+  -->
+  <VersionException>
+  <msg>Não é possível modificar documentos que estão sendo verificados.</msg>  
+  </VersionException>
+</bundle>

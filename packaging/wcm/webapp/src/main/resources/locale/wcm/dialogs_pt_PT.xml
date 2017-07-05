@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Copyright (C) 2009 eXo Platform SAS.
+    
+    This is free software; you can redistribute it and/or modify it
+    under the terms of the GNU Lesser General Public License as
+    published by the Free Software Foundation; either version 2.1 of
+    the License, or (at your option) any later version.
+    
+    This software is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+    Lesser General Public License for more details.
+    
+    You should have received a copy of the GNU Lesser General Public
+    License along with this software; if not, write to the Free
+    Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+    02110-1301 USA, or see the FSF site: http://www.fsf.org.
+
+-->
+<bundle>
+  <WebContent>
+    <dialog>
+      <label>
+        <MainContent>Main Content</MainContent>
+        <cssFile>default.css</cssFile>
+        <jsFile>default.js</jsFile>
+        <Advanced>Advanced</Advanced>
+        <Summary>Sumário</Summary>
+        <name>#{word.name}</name>
+        <title>Título</title>
+        <ContentCSS>Dados de CSS</ContentCSS>
+        <hintCSS>Você pode especificar a folha de estilo principal de seu conteúdo da web. Este estilo irá substituir as folhas de estilo definidas no nível do site e no nível partilhado.</hintCSS>
+        <ContentJS>Dados de JS</ContentJS>
+        <hintJS>Você pode especificar alguns códigos JavaScript que podem ser executados antes de seu conteúdo da web ser processado.</hintJS>
+        <WebContentHtml>Conteúdo Principal</WebContentHtml>
+        <Illustration>Illustration</Illustration>
+        <hintIllustration>Você pode especificar uma imagem que será mostrada quando o seu conteúdo web for exibido na lista. Você também pode inserir um texto para acompanhar a imagem.</hintIllustration>
+        <confirm-delete>Tem certeza que deseja excluir esta ilustração?</confirm-delete>
+        <illustrationImage>Illustration Image</illustrationImage>
+        <imageMimeType>Image Type</imageMimeType>
+        <image>Enviar imagem</image>
+        <imageWidth>Largura da imagem</imageWidth>
+        <imageHeight>Altura da imagem</imageHeight>
+        <Synchronize>Synchronize with CSS and HTML</Synchronize>
+      </label>
+    </dialog>
+  </WebContent>
+
+  <CSSFile>
+    <dialog>
+      <label>
+        <name>#{word.name}</name>
+        <active>Ativo</active>
+        <priority>Priority</priority>
+        <content>Dados de CSS</content>
+      </label>
+    </dialog>
+  </CSSFile>
+
+  <JSFile>
+    <dialog>
+      <label>
+        <name>#{word.name}</name>
+        <active>Active</active>
+        <priority>Prioridade</priority>
+        <content>Dados de JS</content>
+      </label>
+    </dialog>
+  </JSFile>
+
+  <WebLink>
+    <dialog>
+      <label>
+        <name>#{word.name}</name>
+        <url>URL</url>
+        <description>Description</description>
+      </label>
+    </dialog>
+  </WebLink>
+
+  <SiteMetadata>
+    <dialog>
+      <label>
+        <title>Site Title</title>
+        <description>Site Description</description>
+        <keywords>Palavras Chave do Site</keywords>
+        <robots>Comportamento do motor de busca</robots>
+      </label>
+    </dialog>
+  </SiteMetadata>
+</bundle>

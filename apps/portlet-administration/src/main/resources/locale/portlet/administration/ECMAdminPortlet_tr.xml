@@ -2426,15 +2426,12 @@
   <UITaxonomyTreeMainForm>
     <action>
       <NextViewPermission>Sonraki</NextViewPermission>
-      <Reset>Reset</Reset>
     </action>
   </UITaxonomyTreeMainForm>
 
   <UIPermissionTreeForm>
     <action>
-      <Save>Save</Save>
       <Cancel>#{word.cancel}</Cancel>
-      <Reset>Reset</Reset>
       <NextAddAction>Sonraki</NextAddAction>
       <Previous>Önceki</Previous>
     </action>
@@ -2552,7 +2549,6 @@
   </UIDriveForm>
   <DriveInputSet>
     <title>
-      <RemovePermission>Remove Permission</RemovePermission>
       <ChooseNodeType>Düğüm Türleri Seçin</ChooseNodeType>
       <RemoveNodeType>Kaldır</RemoveNodeType>
     </title>

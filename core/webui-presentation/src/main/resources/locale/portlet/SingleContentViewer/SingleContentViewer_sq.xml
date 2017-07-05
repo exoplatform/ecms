@@ -39,11 +39,11 @@
   </UIPreferencesPopupWindows>
   <UISCVPreferences>
     <action>
-      <Save>crwdns6792990:0{word.save}crwdne6792990:0</Save>
+      <Save>crwdns6792990:0#{word.save}crwdne6792990:0</Save>
       <Abort>crwdns6792991:0crwdne6792991:0</Abort>
-      <Cancel>crwdns6792992:0{word.cancel}crwdne6792992:0</Cancel>
+      <Cancel>crwdns6792992:0#{word.cancel}crwdne6792992:0</Cancel>
       <Print>crwdns6792993:0crwdne6792993:0</Print>
-      <Close>crwdns6792994:0{word.close}crwdne6792994:0</Close>
+      <Close>crwdns6792994:0#{word.close}crwdne6792994:0</Close>
     </action>
     <title>crwdns6792995:0crwdne6792995:0</title>
     <label>

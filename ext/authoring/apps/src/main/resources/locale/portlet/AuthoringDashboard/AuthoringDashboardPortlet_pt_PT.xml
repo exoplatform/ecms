@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UIDashboardForm>
+    <label>
+      <title>Author Dashboard</title>
+      <nocontent>Sem contéudo</nocontent>
+      <mydraft>Meus Conteúdos Rascunhos</mydraft>
+      <waitingapproval>Esperando Por Minha Aprovação</waitingapproval>
+      <approve>Approve</approve>
+      <publishedtomorrow>To Be Published Tomorrow</publishedtomorrow>
+      <refresh>#{word.refresh}</refresh>
+    </label>
+  </UIDashboardForm>
+</bundle>

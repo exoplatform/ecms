@@ -16,8 +16,8 @@
       <new-jcr-template>crwdns6793393:0crwdne6793393:0</new-jcr-template>
     </msg>
     <action>
-      <Save>crwdns6793394:0{word.save}crwdne6793394:0</Save>
-      <Cancel>crwdns6793395:0{word.cancel}crwdne6793395:0</Cancel>
+      <Save>crwdns6793394:0#{word.save}crwdne6793394:0</Save>
+      <Cancel>crwdns6793395:0#{word.cancel}crwdne6793395:0</Cancel>
     </action>
   </UIFCCForm>
 
@@ -46,7 +46,7 @@
       <do-select>crwdns6793414:0crwdne6793414:0</do-select>
       </msg>
     <action>
-      <Save>crwdns6793415:0{word.save}crwdne6793415:0</Save>
+      <Save>crwdns6793415:0#{word.save}crwdne6793415:0</Save>
     </action>
   </UIFCCConfig>
 
@@ -115,8 +115,8 @@
   <UIFCCActionForm>
     <title>crwdns6793437:0crwdne6793437:0</title>
     <action>
-      <Save>crwdns6793438:0{word.save}crwdne6793438:0</Save>
-      <Close>crwdns6793439:0{word.close}crwdne6793439:0</Close>
+      <Save>crwdns6793438:0#{word.save}crwdne6793438:0</Save>
+      <Close>crwdns6793439:0#{word.close}crwdne6793439:0</Close>
     </action>
     <msg>
       <repository-exception>crwdns6793440:0crwdne6793440:0</repository-exception>
@@ -165,15 +165,9 @@
     </title>
   </UITabPane>
 
-  <PopupComponent>
-    <title>
-      <UICategoriesSelector>Add Categories</UICategoriesSelector>
-    </title>
-  </PopupComponent>
-
   <UICategoriesSelector>
     <action>
-      <close>crwdns6793459:0{word.close}crwdne6793459:0</close>
+      <close>crwdns6793459:0#{word.close}crwdne6793459:0</close>
     </action>
   </UICategoriesSelector>
 

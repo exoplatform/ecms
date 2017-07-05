@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <ContentSelector>
+    <msg>
+      <no-file-selected>Você deve selecionar pelo menos um conteúdo.</no-file-selected>
+    </msg>
+  </ContentSelector>
+  <RenameConnector>
+    <label>
+      <rename>Rename</rename>
+      <cancel>Cancel</cancel>
+    </label>
+    <msg>
+      <renaming>Renomeando...</renaming>
+    </msg>
+  </RenameConnector>
+  <OpenInOfficeConnector>
+    <label>
+      <exo>
+        <remote-edit>
+          <word>Abri no Word</word>
+          <excel>Open in Excel</excel>
+          <powerpoint>Abrir no Powerpoint</powerpoint>
+          <desktop>Abrir na área de trabalho</desktop>
+          <desktop-app>Open in {0}</desktop-app>
+        </remote-edit>
+      </exo>
+    </label>
+  </OpenInOfficeConnector>
+  <DocumentAutoVersion>
+    <msg>
+      <WrongMimeType>O tipo MIME do arquivo carregado é desconhecido. Não será criada nenhuma nova versão de {0}.</WrongMimeType>
+    </msg>
+  </DocumentAutoVersion>
+</bundle>

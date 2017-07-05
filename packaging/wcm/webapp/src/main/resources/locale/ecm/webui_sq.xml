@@ -28,11 +28,11 @@
     <header>
       <categoryName>crwdns6793360:0crwdne6793360:0</categoryName>
       <categoryPath>crwdns6793361:0crwdne6793361:0</categoryPath>
-      <action>crwdns6793362:0{word.action}crwdne6793362:0</action>
+      <action>crwdns6793362:0#{word.action}crwdne6793362:0</action>
     </header>
     <action>
-      <SaveCategories>crwdns6793363:0{word.save}crwdne6793363:0</SaveCategories>
-      <Cancel>crwdns6793364:0{word.cancel}crwdne6793364:0</Cancel>
+      <SaveCategories>crwdns6793363:0#{word.save}crwdne6793363:0</SaveCategories>
+      <Cancel>crwdns6793364:0#{word.cancel}crwdne6793364:0</Cancel>
     </action>
     <msg>
       <cannot-save>crwdns6793365:0crwdne6793365:0</cannot-save>

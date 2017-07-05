@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UICNContainer>
+    <title>
+      <QuickEdit>Edição Rápida</QuickEdit>
+    </title>
+  </UICNContainer>
+
+  <UICNConfigPopupWindow>
+    <title>
+      <UICategoryNavigationConfig>Configuração da Lista de Categorias</UICategoryNavigationConfig>
+    </title>
+  </UICNConfigPopupWindow>
+
+  <UICategoryNavigationTargetPathFormInputSet>
+    <title>
+      <SelectTargetPath/>
+    </title>
+  </UICategoryNavigationTargetPathFormInputSet>
+
+  <UICategoryNavigationConfig>
+    <label>
+      <UICategoryNavigationRepositoryFormSelectBox>Repositório</UICategoryNavigationRepositoryFormSelectBox>
+      <UICategoryNavigationTreeNameSelectBox>Árvore Taxonômica</UICategoryNavigationTreeNameSelectBox>
+      <UICategoryNavigationTreeTitleFormStringInput>Título</UICategoryNavigationTreeTitleFormStringInput>
+  
+      <UICategoryNavigationTreeNameFormSelectBox>Nome da Árvore</UICategoryNavigationTreeNameFormSelectBox>
+      <UICategoryNavigationTemplateFormSelectBox>Modelo de visualizador de árvore</UICategoryNavigationTemplateFormSelectBox>
+      
+      <UICategoryNavigationTargetPathFormInputSet>Mostrar na Página</UICategoryNavigationTargetPathFormInputSet>      
+      <TreeSelectionBlock>Seleção de Árvore</TreeSelectionBlock>
+      <DisplaySettingBlock>Definições de Exibição</DisplaySettingBlock>
+      <AdvancedBlock>Avançado</AdvancedBlock>
+  
+  <UICategoryNavigationTreePathFormInputSet>Caminho de destino</UICategoryNavigationTreePathFormInputSet>
+  <UICategoryNavigationTreePathFormStringInput>Caminho de destino</UICategoryNavigationTreePathFormStringInput>
+  <UICategoryNavigationHeaderFormStringInput>Cabeçalho</UICategoryNavigationHeaderFormStringInput>
+  <UICategoryNavigationAutomaticDetectionCheckBoxInput>Automático</UICategoryNavigationAutomaticDetectionCheckBoxInput>
+  <UICategoryNavigationDynamicNavigationLabel>Navegação Dinâmica</UICategoryNavigationDynamicNavigationLabel>
+  <UICategoryNavigationWithClvFormStringInput>com</UICategoryNavigationWithClvFormStringInput>
+  <UICategoryNavigationTreepathPopupWindow>Caminho de destino</UICategoryNavigationTreepathPopupWindow>    
+      
+    </label>
+    <msg>
+      <not-support-encoding>Enconding não suportado.</not-support-encoding>
+      <render>Erro processando renderização.</render>
+      <saving-success>A informação foi atualizada com sucesso.</saving-success>
+    </msg>
+    <action>
+      <Save>Salvar</Save>
+    </action>
+  </UICategoryNavigationConfig>
+  <UICategoryNavigationTreeBase>
+    <msg>
+      <not-existed-category>A categoria não existe</not-existed-category>
+    </msg>
+  </UICategoryNavigationTreeBase>
+</bundle>

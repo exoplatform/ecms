@@ -38,6 +38,8 @@
       <SharedSite>Delt nettsted</SharedSite>
       <PersonalDocuments>Personal Documents</PersonalDocuments>
       <UserDocuments>{0} Documents</UserDocuments>
+      <Collaboration>Samhandling</Collaboration>
+      <Trash>Søppel</Trash>
     </label>
   </Drives>
 

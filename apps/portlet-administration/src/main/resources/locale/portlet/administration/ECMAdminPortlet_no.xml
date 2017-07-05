@@ -2426,15 +2426,12 @@
   <UITaxonomyTreeMainForm>
     <action>
       <NextViewPermission>Neste</NextViewPermission>
-      <Reset>Reset</Reset>
     </action>
   </UITaxonomyTreeMainForm>
 
   <UIPermissionTreeForm>
     <action>
-      <Save>Save</Save>
       <Cancel>#{word.cancel}</Cancel>
-      <Reset>Reset</Reset>
       <NextAddAction>Neste</NextAddAction>
       <Previous>Forrige</Previous>
     </action>
@@ -2552,7 +2549,6 @@
   </UIDriveForm>
   <DriveInputSet>
     <title>
-      <RemovePermission>Remove Permission</RemovePermission>
       <ChooseNodeType>Velg nodetype</ChooseNodeType>
       <RemoveNodeType>Fjern</RemoveNodeType>
     </title>

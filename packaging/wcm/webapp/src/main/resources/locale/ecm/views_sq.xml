@@ -172,10 +172,10 @@
       </label>
       <action>
         <add-edit>crwdns6793329:0crwdne6793329:0</add-edit>
-        <cancel>crwdns6793330:0{word.cancel}crwdne6793330:0</cancel>
+        <cancel>crwdns6793330:0#{word.cancel}crwdne6793330:0</cancel>
       </action>
       <tooltip>
-        <cancel>crwdns6793331:0{word.cancel}crwdne6793331:0</cancel>
+        <cancel>crwdns6793331:0#{word.cancel}crwdne6793331:0</cancel>
         <add-edit>crwdns6793332:0crwdne6793332:0</add-edit>
       </tooltip>
     </view>

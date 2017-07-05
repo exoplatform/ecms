@@ -38,6 +38,8 @@
       <SharedSite>Sdílený web</SharedSite>
       <PersonalDocuments>Personal Documents</PersonalDocuments>
       <UserDocuments>{0} Documents</UserDocuments>
+      <Collaboration>Spolupráce</Collaboration>
+      <Trash>Koš</Trash>
     </label>
   </Drives>
 
