@@ -231,7 +231,7 @@
     <!-- /508 Compliancy -->
  </head>
 
- <body style="height: 100%;">
+ <body style="height: 100%;" class="collapse-left-bar">
  <div class="visible-tablet"></div><div class="visible-tabletL"></div><div class="visible-phone"></div><div class="visible-phone-small"></div>
  <div class="$uicomponent.skin" id="UIPortalApplication" style="!height: 100%;">
      
