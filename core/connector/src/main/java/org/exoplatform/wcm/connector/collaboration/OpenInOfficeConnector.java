@@ -80,7 +80,13 @@ public class OpenInOfficeConnector implements ResourceContainer, Startable {
           @QueryParam("lang") String language) throws Exception {
 
     //find from cached
-    objId = Text.escapeIllegalJcrChars(URLDecoder.decode(objId, "UTF-8"));
+    try {
+      objId = URLDecoder.decode(objId, "UTF-8");
+    } catch (Exception e) {
+      // the path contains % character but not encoded,
+      // This is an expected behavior
+    }
+    objId = Text.escapeIllegalJcrChars(objId);
     int indexColon = objId.indexOf(":/");
     if(indexColon < 0) {
       return Response.status(Response.Status.BAD_REQUEST)

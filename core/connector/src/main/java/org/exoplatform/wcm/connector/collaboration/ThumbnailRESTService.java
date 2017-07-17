@@ -26,7 +26,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-import javax.activation.MimetypesFileTypeMap;
 import javax.jcr.ItemNotFoundException;
 import javax.jcr.Node;
 import javax.jcr.Session;
@@ -45,14 +44,11 @@ import org.exoplatform.services.cms.thumbnail.ThumbnailService;
 import org.exoplatform.services.cms.thumbnail.impl.ThumbnailUtils;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
-import org.exoplatform.services.jcr.ext.app.SessionProviderService;
-import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.impl.core.NodeImpl;
-import org.exoplatform.services.rest.resource.ResourceContainer;
-import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
-import org.exoplatform.wcm.connector.viewer.PDFViewerRESTService;
+import org.exoplatform.services.rest.resource.ResourceContainer;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
  * Returns a responding data as a thumbnail image.
