@@ -1,6 +1,7 @@
 package org.exoplatform.wcm.connector.collaboration;
 
 import java.io.InputStream;
+import java.net.URLDecoder;
 import java.net.URLEncoder;
 
 import javax.jcr.AccessDeniedException;
@@ -55,6 +56,7 @@ public class DownloadConnector implements ResourceContainer{
     ManageableRepository manageableRepository = WCMCoreUtils.getRepository();
     Session session = sessionProvider.getSession(workspace, manageableRepository);
 
+    path = URLDecoder.decode(path,"UTF-8");
     if (!path.startsWith("/")) {
       path = "/" + path;
     }
