@@ -17,6 +17,7 @@
 package org.exoplatform.ecm.webui.utils;
 
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.text.DecimalFormat;
 import java.util.*;
@@ -1134,10 +1135,7 @@ public class Utils {
     if (ndPath.startsWith("/")) {
       ndPath = ndPath.substring(1);
     }
-    String encodedPath = URLEncoder.encode(ndPath, "utf-8");
-    encodedPath = encodedPath.replaceAll("%2F", "/"); // we won't encode the
-                                                      // slash characters in the
-                                                      // path
+    String encodedPath = encodePath(ndPath,"UTF-8");
     sb.append("/").append(restContextName).append("/contents/download/");
     sb.append(currentNode.getSession().getWorkspace().getName()).append("/").append(encodedPath);
     if (node.isNodeType("nt:frozenNode")) {
@@ -1257,6 +1255,17 @@ public class Utils {
 
   public static void logUnavaiblePreview(String path) {
     LOG.warn("Can not preview the document having path : " + path);
+  }
+
+  public static String encodePath(String path, String encoding) {
+    try {
+      String doubleEncodedPath = URLEncoder.encode(URLEncoder.encode(path,encoding));
+      doubleEncodedPath.replaceAll("%252F","/");
+      return doubleEncodedPath;
+    } catch (UnsupportedEncodingException e){
+      LOG.error("Failed to encode path '" + path + "' with encoding '" + encoding + "'",e);
+    }
+    return null;
   }
 
   static public class NodeTypeNameComparator implements Comparator<NodeType> {

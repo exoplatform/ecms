@@ -71,8 +71,7 @@
     ndPath = ndPath.substring(1);
   }
   
-  def encodedPath = URLEncoder.encode(ndPath, "utf-8");
-  encodedPath = encodedPath.replaceAll ("%2F", "/"); //we won't encode the slash characters in the path
+  def encodedPath = Utils.encodePath(ndPath,"UTF-8");
   
   sb.append("/").append(restContextName).append("/contents/download/");
   sb.append(currentNode.getSession().getWorkspace().getName()).append("/").append(encodedPath);
