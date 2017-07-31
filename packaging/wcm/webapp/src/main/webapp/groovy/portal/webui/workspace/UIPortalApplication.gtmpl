@@ -231,7 +231,17 @@
     <!-- /508 Compliancy -->
  </head>
 
- <body style="height: 100%;" class="collapse-left-bar">
+ <body style="height: 100%;">
+ <script type="text/javascript">
+  //need this script to avoid animation of humgerger menu
+  var collapseClass = 'collapse-left-bar';
+  var collapsed = window.sessionStorage.getItem('<%=rcontext.getRemoteUser()%>' + collapseClass);
+  if (collapsed === 'false') {
+    document.body.className = '';
+  } else if (document.body.className.search(collapseClass) == -1) {
+    document.body.className = collapseClass;
+  }
+ </script>
  <div class="visible-tablet"></div><div class="visible-tabletL"></div><div class="visible-phone"></div><div class="visible-phone-small"></div>
  <div class="$uicomponent.skin" id="UIPortalApplication" style="!height: 100%;">
      
