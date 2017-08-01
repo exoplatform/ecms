@@ -69,47 +69,47 @@
       dataType: "text",
       type: "GET",
       async:false,
-      cache:false
-    })
-        .success(function (data) {
-          data = gj.parseJSON(data);
-          var elClass = "uiIconEcmsOpenDocument";
-          var isRightClick="";
+      cache:false,
+      success: function (data) {
+        data = gj.parseJSON(data);
+        var elClass = "uiIconEcmsOpenDocument";
+        var isRightClick="";
 
-          if(activityId != null && activityId != "undefined" && activityId != "") elClass +="_"+activityId;
-          if(rightClick) {
-            isRightClick="#ECMContextMenu";
-            openDocument = gj(isRightClick+" ."+elClass).parent();
-          }else{
-            openDocument = gj("."+elClass).closest("a");
-          }
-          var html = "<i class=\"uiIcon16x16FileDefault uiIcon16x16nt_file ";
-		  if("uiIcon16x16FileDefault" === data.ico){
-			html+="uiIconOpenOnDesktop ";
-		  }
-		  html+= data.ico+" "+elClass+"\"></i>\n"+data.title;
-          openDocument.html(html);
+        if(activityId != null && activityId != "undefined" && activityId != "") elClass +="_"+activityId;
+        if(rightClick) {
+          isRightClick="#ECMContextMenu";
+          openDocument = gj(isRightClick+" ."+elClass).parent();
+        }else{
+          openDocument = gj("."+elClass).closest("a");
+        }
+        var html = "<i class=\"uiIcon16x16FileDefault uiIcon16x16nt_file ";
+        if("uiIcon16x16FileDefault" === data.ico){
+          html+="uiIconOpenOnDesktop ";
+        }
+        html+= data.ico+" "+elClass+"\"></i>\n"+data.title;
+        openDocument.html(html);
 
-          if (!data.isFile) {
+        if (!data.isFile) {
+          openDocument.addClass("hidden");
+          return;
+        }
+        if(eXo.ecm.ECMWebDav !== undefined) {
+          //showButton
+          //console.log("ITHIT detected!");
+          gj(openDocument).removeClass("hidden");
+          gj(openDocument).closest("li").show();
+          if (data.isLocked) return;//can not edit, just show popup(do not change href)
+        }else{
+          if(!data.isMsoffice){
             openDocument.addClass("hidden");
-            return;
-          }
-          if(eXo.ecm.ECMWebDav !== undefined) {
-            //showButton
-            //console.log("ITHIT detected!");
-            gj(openDocument).removeClass("hidden");
-            gj(openDocument).closest("li").show();
-            if (data.isLocked) return;//can not edit, just show popup(do not change href)
           }else{
-            if(!data.isMsoffice){
-              openDocument.addClass("hidden");
-            }else{
-              openDocument.removeClass("hidden");
-            }
-            //console.log("ITHIT not detected!");
-            defaultEnviromentFilter(openDocument);//only show with support enviroment.
+            openDocument.removeClass("hidden");
           }
-        });
+          //console.log("ITHIT not detected!");
+          defaultEnviromentFilter(openDocument);//only show with support enviroment.
+        }
+      }
+    });
         uiWorkingAreaWidth    = gj("#UIWorkingArea").width();
         uiRightContainerWidth = gj(".rightContainer").width();
         uiRightContainerStyle = gj(".rightContainer").attr("style");

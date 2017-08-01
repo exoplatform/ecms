@@ -357,21 +357,22 @@
 		  return false;
 		};
 	};
-	
-		
-	WCMUtils.prototype.loadAvartar = function(userId, imgTag) {
-	  var command = this.cmdSocialPeople + this.cmdGetPeople + userId + ".json";
-	  var restUrl = eXo.ecm.WCMUtils.getRestContext() + command;
-		gj.ajax({
-			 type: "GET",
-			 url: restUrl
-		}).complete(function (jqXHR) {
-			 if (jqXHR.readyState === 4) {
-				 var userData = gj.parseJSON(jqXHR.responseText);
-				 gj(imgTag).attr("src", userData.avatarURL);
-			 }
-		});
-	};
+
+
+  WCMUtils.prototype.loadAvartar = function (userId, imgTag) {
+    var command = this.cmdSocialPeople + this.cmdGetPeople + userId + ".json";
+    var restUrl = eXo.ecm.WCMUtils.getRestContext() + command;
+    gj.ajax({
+      type: "GET",
+      url: restUrl,
+      complete: function (jqXHR) {
+        if (jqXHR.readyState === 4) {
+          var userData = gj.parseJSON(jqXHR.responseText);
+          gj(imgTag).attr("src", userData.avatarURL);
+        }
+      }
+    });
+  };
 	
 	WCMUtils.prototype.onLoadComments = function() {
 		var comments = gj('#UIDocumentWorkspace').find("div.comments:first")[0];
