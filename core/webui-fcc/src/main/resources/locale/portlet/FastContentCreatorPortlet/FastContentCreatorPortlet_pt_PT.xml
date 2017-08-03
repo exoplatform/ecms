@@ -2,12 +2,12 @@
 <bundle>
   <UIFCCForm>
     <msg>
-      <name-not-allowed>This name is not allowed.</name-not-allowed>
+      <name-not-allowed>Este nome não é permitido.</name-not-allowed>
       <in-versioning>Por favor, verifique o nó atual antes de adicionar um novo nó.</in-versioning>
-      <cannot-save>Um erro ocorreu ao salvar o nó.</cannot-save>
+      <cannot-save>Um erro ocorreu ao gravar o nó.</cannot-save>
       <saved-successfully>{0}</saved-successfully>
       <not-support>Não foi possível carregar o modelo de '{0}'.</not-support>
-      <not-add-folder>Somente arquivos podem ser adicionados a esta pasta.</not-add-folder>
+      <not-add-folder>Só pode adicionar ficheiros a esta pasta.</not-add-folder>
       <access-denied>Acesso negado! Você não tem permissão de adição em '{0}'</access-denied>
       <path-not-found>O nó '{0}' está bloqueado. Desbloquei-o antes de criar documentos.</path-not-found>
       <node-locked>O nó '{0}' está bloqueado. Desbloquei-o antes de criar documentos.</node-locked>
@@ -23,21 +23,21 @@
 
   <UIFCCConfig>
     <label>
-      <UIFCCSaveLocationField>Salvar local</UIFCCSaveLocationField>
+      <UIFCCSaveLocationField>Gravar localização</UIFCCSaveLocationField>
       <UIFCCWorkspaceFormSelectBox>Selecionar Espaço de Trabalho</UIFCCWorkspaceFormSelectBox>
       <UIFCCTemplateField>Opções de modelo</UIFCCTemplateField>
-      <UIFCCLocationFormInputAction>Local para salvar</UIFCCLocationFormInputAction>
-      <UIFCCTemplateFormSelectBox>Select Template</UIFCCTemplateFormSelectBox>
-      <UIFCCSaveFormStringInput>Customizar o botão Salvar</UIFCCSaveFormStringInput>
+      <UIFCCLocationFormInputAction>Local para gravar</UIFCCLocationFormInputAction>
+      <UIFCCTemplateFormSelectBox>Selecionar Modelo</UIFCCTemplateFormSelectBox>
+      <UIFCCSaveFormStringInput>Customizar o botão Gravar</UIFCCSaveFormStringInput>
       <UIFCCMessageFormTextareaInput>Mensagem de agradecimento</UIFCCMessageFormTextareaInput>
-      <UIFCCRedirectFormCheckboxInput>Redirect:</UIFCCRedirectFormCheckboxInput>
+      <UIFCCRedirectFormCheckboxInput>Redirecionar:</UIFCCRedirectFormCheckboxInput>
       <UIFCCRedirectPathFormStringInput>Caminho de redirecionamento:</UIFCCRedirectPathFormStringInput>
-      <UIFCCActionField>Actions</UIFCCActionField>
+      <UIFCCActionField>Ações</UIFCCActionField>
     </label>
     <msg>
       <save-successfully>Salvo nas preferências de portlets com sucesso</save-successfully>
       <item-not-found>Este caminho é inválido!</item-not-found>
-      <fileType-empty>Você deve selecionar um tipo de arquivo antes de salvar esta configuração.</fileType-empty>
+      <fileType-empty>Selecione um tipo de ficheiro antes de gravar esta configuração.</fileType-empty>
       <ws-empty>Você deve escolher um espaço de trabalho.</ws-empty>
       <action-empty>Você deve escolher uma pasta com uma ação</action-empty>
       <message-empty>A mensagem não pode ser vazia quando você não seleciona a opção de redirecionamento, ou o caminho está vazio.</message-empty>
@@ -58,13 +58,13 @@
 
   <UIFCCActionList>
     <header>
-      <name>Name</name>
-      <description>Description</description>
-      <instanceOf>Instance of</instanceOf>
-      <action>Action</action>
+      <name>Nome</name>
+      <description>Descrição</description>
+      <instanceOf>Instância de</instanceOf>
+      <action>Ação</action>
     </header>
     <action>
-      <Add>Add</Add>
+      <Add>Adicionar</Add>
     </action>
     <msg>
       <empty>Sem ação</empty>
@@ -101,8 +101,8 @@
       <child-not-found>Este nó não tem nenhum nó filho</child-not-found>
     </info>
     <header>
-      <name>Name</name>
-      <action>Action</action>
+      <name>Nome</name>
+      <action>Ação</action>
     </header>
   </UITreeList>
 
@@ -119,8 +119,8 @@
       <Close>#{word.close}</Close>
     </action>
     <msg>
-      <repository-exception>Não foi possível salvar esta ação. O nome fornecido não deve conter um índice em seu elemento final.</repository-exception>
-      <numberformat-exception>Não foi possível salvar esta ação. O nome fornecido não deve ter '[' ou ']'.</numberformat-exception>
+      <repository-exception>Não foi possível gravar esta ação. O nome fornecido não pode conter um índice no seu elemento final.</repository-exception>
+      <numberformat-exception>Não foi possível gravar esta ação. O nome fornecido não deve ter '[' ou ']'.</numberformat-exception>
       <existed-action>O nome da ação '{0}' já existe. Por favor, escolha outro nome.</existed-action>
       <unable-add-action>Não foi possível adicionar esta ação</unable-add-action>
       <unable-add>Não foi possível adicionar esta ação! Este nó é raiz ou você não tem permissão suficiente.</unable-add>

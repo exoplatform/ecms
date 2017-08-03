@@ -8,23 +8,23 @@
   <UIECMAdminControlPanel>
     <tab>
       <label>
-        <Templates>Templates</Templates>
+        <Templates>Modelos</Templates>
         <Explorer>Navegador</Explorer>
-        <Repository>Repository</Repository>
-        <Advanced>Advanced</Advanced>
+        <Repository>Repositório</Repository>
+        <Advanced>Avançado</Advanced>
       </label>
     </tab>
     <label>
-      <UITaxonomyManagerTrees>Categories</UITaxonomyManagerTrees>
-      <UIMetadataManager>Metadata</UIMetadataManager>
+      <UITaxonomyManagerTrees>Categorias</UITaxonomyManagerTrees>
+      <UIMetadataManager>Metadados</UIMetadataManager>
       <UINamespaceManager>Espaço para nomes</UINamespaceManager>
       <UINodeTypeManager>Tipos de Nó</UINodeTypeManager>
       <UITemplatesManager>Documentos</UITemplatesManager>
-      <UICLVTemplatesManager>List</UICLVTemplatesManager>
-      <UIViewManager>Views</UIViewManager>
-      <UIDriveManager>Drives</UIDriveManager>
-      <UIQueriesManager>Queries</UIQueriesManager>
-      <UIActionManager>Actions</UIActionManager>
+      <UICLVTemplatesManager>Lista</UICLVTemplatesManager>
+      <UIViewManager>Visualizações</UIViewManager>
+      <UIDriveManager>Unidades</UIDriveManager>
+      <UIQueriesManager>Consultas</UIQueriesManager>
+      <UIActionManager>Ações</UIActionManager>
       <UIScriptManager>Scripts</UIScriptManager>
       <UIUnLockManager>Bloqueios</UIUnLockManager>
       <UIFolksonomyManager>Tags</UIFolksonomyManager>
@@ -40,7 +40,7 @@
   -->
   <UITaxonomyWorkingArea>
     <msg>
-      <referential-integrity>Não é possível ler a partir do arquivo fonte ou a categoria de destino é uma subcategoria.</referential-integrity>
+      <referential-integrity>Não é possível ler a partir do ficheiro fonte ou a categoria de destino é uma subcategoria.</referential-integrity>
       <no-taxonomy-selected>Você deve copiar ou colar pelo menos uma categoria.</no-taxonomy-selected>
       <node-is-cutting>Não é possível copiar aqui. A categoria selecionada '{0}' provavelmente foi movida ou excluída.</node-is-cutting>
       <can-not-paste>Não há dado na área de transferência para ser colado.</can-not-paste>
@@ -53,10 +53,10 @@
       <confirm-delete>Deseja mesmo excluir esta categoria?</confirm-delete>
     </msg>
     <title>
-      <add>Add</add>
-      <paste>Paste</paste>
+      <add>Adicionar</add>
+      <paste>Colar</paste>
       <cut>Cortar</cut>
-      <copy>Copy</copy>
+      <copy>Copiar</copy>
       <remove>Excluir</remove>
     </title>
   </UITaxonomyManager>
@@ -100,15 +100,15 @@
 
   <TaxonomyTreeMainForm>
     <label>
-      <TaxoTreeName>Name</TaxoTreeName>
-      <TaxoTreeWorkspace>Workspace</TaxoTreeWorkspace>
+      <TaxoTreeName>Nome</TaxoTreeName>
+      <TaxoTreeWorkspace>Espaço de Trabalho</TaxoTreeWorkspace>
       <TaxoTreeHomePath>Caminho Raiz</TaxoTreeHomePath>
     </label>
   </TaxonomyTreeMainForm>
 
   <TaxonomyTreeHomePath>
     <title>
-      <AddPath>Add Path</AddPath>
+      <AddPath>Adicionar Caminho</AddPath>
     </title>
   </TaxonomyTreeHomePath>
 
@@ -121,16 +121,16 @@
     <action>
       <title>
         <Delete>Excluir</Delete>
-        <Edit>Edit</Edit>
+        <Edit>Editar</Edit>
       </title>
     </action>
     <header>
       <usersOrGroups>Usuário ou Grupo</usersOrGroups>
-      <read>Read</read>
-      <addNode>Add Node</addNode>
+      <read>Ler</read>
+      <addNode>Adicionar nó</addNode>
       <setProperty>Atribuir Propriedade</setProperty>
-      <remove>Remove</remove>
-      <action>Action</action>
+      <remove>Remover</remove>
+      <action>Ação</action>
     </header>
   </UIPermissionTreeInfo>
 
@@ -174,7 +174,7 @@
   <UITemplatesList>
     <header>
       <name>Nome do Modelo</name>
-      <action>Actions</action>
+      <action>Ações</action>
     </header>
   </UITemplatesList>
   <!--
@@ -237,13 +237,13 @@
     </label>
     <title>
       <view>Visualizar</view>
-      <edit>Edit</edit>
+      <edit>Editar</edit>
       <delete>Excluir</delete>
     </title>
     <header>
       <icon>Ícone</icon>
       <name>Metadados</name>
-      <type>Type</type>
+      <type>Tipo</type>
       <internalUse>Uso Interno</internalUse>
       <action>Excluir</action>
     </header>
@@ -313,13 +313,13 @@
   <UIMetadataView>
     <header>
       <name>Nome do elemento</name>
-      <type>Type</type>
-      <description>Description</description>
+      <type>Tipo</type>
+      <description>Descrição</description>
       <isMixin>É do tipo Mixin</isMixin>
       <orderable>Subnós ordenáveis</orderable>
     </header>
     <info>
-      <description>Description</description>
+      <description>Descrição</description>
     </info>
     <tab>
       <element>Elementos</element>
@@ -343,7 +343,7 @@
   <UIDriveList>
     <header>
       <icon>Ícone</icon>
-      <name>Name</name>
+      <name>Nome</name>
       <workspace>Espaço de Trabalho</workspace>
       <homePath>Caminho Raíz</homePath>
       <permissions>Permissão</permissions>
@@ -352,7 +352,7 @@
     </header>
     <tooltip>
       <Delete>Excluir</Delete>
-      <EditInfo>Edit</EditInfo>
+      <EditInfo>Editar</EditInfo>
     </tooltip>
     <msg>
       <confirm-delete>Deseja realmente excluir essa unidade?</confirm-delete>
@@ -389,13 +389,13 @@
       </label>
     </tab>
     <label>
-      <name>Name:</name>
+      <name>Nome:</name>
       <workspace>Espaço de trabalho:</workspace>
       <homePath>Caminho raíz:</homePath>
       <icon>Ícone do espaço de trabalho:</icon>
       <viewPreferences>Mostrar documentos mencionados:</viewPreferences>
       <viewNonDocument>Mostrar todos os tipos de nós:</viewNonDocument>
-      <viewSideBar>Show Sidebar:</viewSideBar>
+      <viewSideBar>Mostrar barra lateral:</viewSideBar>
       <permissions>Permissões:</permissions>
       <showHiddenNode>Mostrar nós ocultos</showHiddenNode>
       <allowCreateFolders>Permitir criação de pasta:</allowCreateFolders>
@@ -421,14 +421,14 @@
       <child-not-found>Nó filho não encontrado.</child-not-found>
     </info>
     <header>
-      <name>Name</name>
+      <name>Nome</name>
       <action>Ação</action>
     </header>
   </UITreeList>
 
   <UIRepositoryList>
     <titlebar>
-      <label>Gerenciar as funções principais do ECM</label>
+      <label>Gerir as funções principais do ECM</label>
     </titlebar>
   </UIRepositoryList>
 
@@ -467,11 +467,11 @@
     <action>
       <Export>Exportar Node</Export>
       <Import>Importar</Import>
-      <Add>Add</Add>
+      <Add>Adicionar</Add>
     </action>
     <tooltip>
       <View>Visualizar</View>
-      <Edit>Edit</Edit>
+      <Edit>Editar</Edit>
       <Delete>Excluir</Delete>
     </tooltip>
     <msg>
@@ -486,7 +486,7 @@
   <UINodeTypeOptionList>
     <action>
       <Save>#{word.save}</Save>
-      <Add>Add</Add>
+      <Add>Adicionar</Add>
     </action>
     <header>
       <icon>Ícone</icon>
@@ -544,13 +544,13 @@
     <action>
       <Cancel>#{word.cancel}</Cancel>
       <Save>#{word.save}</Save>
-      <SaveDraft>Salvar Rascunho</SaveDraft>
+      <SaveDraft>Gravar como Rascunho</SaveDraft>
       <AddProperty>Adicionar Propriedade</AddProperty>
       <AddChild>Adicionar Filho</AddChild>
       <AddConstraints>Adicionar Restrição</AddConstraints>
       <Back>#{word.back}</Back>
       <AddType>Adicionar Tipo</AddType>
-      <AddValue>Add</AddValue>
+      <AddValue>Adicionar</AddValue>
       <CancelConstraints>#{word.cancel}</CancelConstraints>
       <CancelTab>#{word.cancel}</CancelTab>
       <UpdateChild>#{word.update}</UpdateChild>
@@ -657,17 +657,17 @@
   -->
   <UINodeTypeUpload>
     <label>
-      <upload>Nome do Arquivo</upload>
+      <upload>Nome do Ficheiro</upload>
     </label>
     <action>
       <Cancel>#{word.cancel}</Cancel>
       <Upload>Enviar</Upload>
     </action>
-    <title>Importar tipo de nó de um arquivo XML</title>
+    <title>Importar tipo de nó de um ficheiro XML</title>
     <msg>
-      <filename-error>Navegar pelos arquivos para importação.</filename-error>
-      <data-file-error>Apenas arquivos .xml ou .zip podem ser importados.</data-file-error>
-      <data-invalid>Dado inválido. Por favor, verifique o tipo de arquivo e tente novamente.</data-invalid>
+      <filename-error>Procurar um ficheiro tipo nó para importar.</filename-error>
+      <data-file-error>Apenas ficheiros .xml ou .zip podem ser importados.</data-file-error>
+      <data-invalid>Dado inválido. Por favor, verifique o tipo de ficheiro e tente novamente.</data-invalid>
       <nodetype-exist>O tipo de nó '{0}' já existe.</nodetype-exist>
       <namespace-invalid>Dado inválido: espaço de nomes '{0}' desconhecido.</namespace-invalid>
     </msg>
@@ -696,7 +696,7 @@
   </UINodeTypeImport>
   <NodeTypeImportPopup>
     <title>
-      <UINodeTypeImportPopup>Importar tipo de nó de um arquivo XML</UINodeTypeImportPopup>
+      <UINodeTypeImportPopup>Importar tipo de nó de um ficheiro XML</UINodeTypeImportPopup>
     </title>
   </NodeTypeImportPopup>
   <!--
@@ -725,11 +725,11 @@
   <UIActionTypeList>
     <header>
       <name>Script</name>
-      <label>Name</label>
-      <action>Actions</action>
+      <label>Nome</label>
+      <action>Ações</action>
     </header>
     <title>
-      <Edit>Edit</Edit>
+      <Edit>Editar</Edit>
       <Delete>Excluir</Delete>
     </title>
     <action>
@@ -789,7 +789,7 @@
       <UITemplateEditForm>Modelo</UITemplateEditForm>
       <UITemplateForm>Modelo</UITemplateForm>
       <UITemplateContainer>Documentos</UITemplateContainer>
-      <UIActionsTemplateContainer>Actions</UIActionsTemplateContainer>
+      <UIActionsTemplateContainer>Ações</UIActionsTemplateContainer>
       <UIOthersTemplateContainer>Outros</UIOthersTemplateContainer>
       <UIActionScriptContainer>Ação</UIActionScriptContainer>
       <UIWidgetScriptContainer>Componentes</UIWidgetScriptContainer>
@@ -812,11 +812,11 @@
   <UIViewList>
     <title>
       <View>Visualizar</View>
-      <EditInfo>Edit</EditInfo>
+      <EditInfo>Editar</EditInfo>
       <Delete>Excluir</Delete>
     </title>
     <header>
-      <name>Name</name>
+      <name>Nome</name>
       <permissions>Permissões</permissions>
       <tabList>Aba ação</tabList>
       <baseVersion>Versão base</baseVersion>
@@ -850,16 +850,16 @@
 
   <UITabList>
     <title>
-      <Edit>Edit</Edit>
+      <Edit>Editar</Edit>
       <Delete>Excluir</Delete>
     </title>
     <header>
       <tabName>Aba</tabName>
-      <localizeButtons>Description</localizeButtons>
-      <action>Actions</action>
+      <localizeButtons>Descrição</localizeButtons>
+      <action>Ações</action>
     </header>
     <action>
-      <AddTab>Add</AddTab>
+      <AddTab>Adicionar</AddTab>
     </action>
     <msg>
       <confirm-delete>Tem certeza de que deseja excluir esta aba?</confirm-delete>
@@ -904,7 +904,7 @@
 
   <UIViewPermissionForm>
     <action>
-      <Add>Add</Add>
+      <Add>Adicionar</Add>
     </action>
     <label>
       <userOrGroup>Usuário ou Grupo</userOrGroup>
@@ -933,7 +933,7 @@
       <view-exist>Esse nome já foi usado para uma visualização.</view-exist>
     </msg>
     <label>
-      <viewName>Name</viewName>
+      <viewName>Nome</viewName>
       <template>Modelo</template>
       <version>Restaurar versão</version>
       <enableVersion>Ativar a versão</enableVersion>
@@ -948,7 +948,7 @@
     </msg>
     <label>
       <version>Restaurar versão</version>
-      <viewName>Name</viewName>
+      <viewName>Nome</viewName>
       <tabName>Nome da aba</tabName>
       <permission>Permissão</permission>
       <tabs>Abas</tabs>
@@ -964,12 +964,12 @@
       <viewNodeType>Visualizar tipo de nó</viewNodeType>
       <viewPermissions>Exibir permissões</viewPermissions>
       <viewProperties>Exibir propriedades</viewProperties>
-      <manageVersions>Gerenciar versões</manageVersions>
-      <manageAuditing>Gerenciar a auditoria</manageAuditing>
-      <managePublications>Gerenciar publicações</managePublications>
-      <manageCategories>Gerenciar categorias</manageCategories>
+      <manageVersions>Gerir versões</manageVersions>
+      <manageAuditing>Gerir a auditoria</manageAuditing>
+      <managePublications>Gerir publicações</managePublications>
+      <manageCategories>Gerir categorias</manageCategories>
       <manageRelations>Gerenciar relações</manageRelations>
-      <manageActions>Gerenciar ações</manageActions>
+      <manageActions>Gerir ações</manageActions>
       <exportNode>Exportar nó</exportNode>
       <importNode>Importar nó</importNode>
       <viewRelations>Visualizar relações</viewRelations>
@@ -979,7 +979,7 @@
       <viewMetadatas>Ver metadados</viewMetadatas>
       <overloadThumbnail>Substituir miniatura</overloadThumbnail>
       <manageHidden>Esconder/Mostrar conteúdo</manageHidden>
-      <comment>Comment</comment>
+      <comment>Comentário</comment>
       <vote>Votar</vote>
       <addCategory>Adicionar Categoria</addCategory>
       <addLocalizationLink>Adicionar tradução</addLocalizationLink>
@@ -990,7 +990,7 @@
       <addSymLink>Adicionar link simbólico</addSymLink>
       <checkIn>Entrar</checkIn>
       <checkOut>Sair</checkOut>
-      <shareDocuments>Compartilhar</shareDocuments>
+      <shareDocuments>Partilhar</shareDocuments>
       <openDocument>Edição remota</openDocument>
       <editProperty>Editar propriedades do documento</editProperty>
       <uploadNewVersion>Carregar uma nova versão</uploadNewVersion>
@@ -1048,17 +1048,17 @@
   <UIECMTemplateList>
     <title>
       <View>Visualizar</View>
-      <EditInfo>Edit</EditInfo>
+      <EditInfo>Editar</EditInfo>
       <Delete>Excluir</Delete>
     </title>
     <header>
-      <name>Name</name>
+      <name>Nome</name>
       <path>Valor</path>
       <baseVersion>Versão base</baseVersion>
       <action>Ação</action>
     </header>
     <action>
-      <Add>Add</Add>
+      <Add>Adicionar</Add>
     </action>
     <msg>
       <template-in-use>Não é possível excluir o template {0}: Pois está sendo usado.</template-in-use>
@@ -1098,7 +1098,7 @@
       </label>
     </tab>
     <label>
-      <name>Name:</name>
+      <name>Nome:</name>
       <label>Rótulo:</label>
       <isDocumentTemplate>É documento modelo:</isDocumentTemplate>
       <dialog>Conteúdo do diálogo</dialog>
@@ -1116,7 +1116,7 @@
     <label>
       <version>Selecionar versão</version>
       <content>Conteúdo:</content>
-      <name>Name:</name>
+      <name>Nome:</name>
       <homeTemplate>Tipo de modelo</homeTemplate>
       <enableVersion>Habilitar versão:</enableVersion>
     </label>
@@ -1168,13 +1168,13 @@
       <confirm-delete>Deseja realmente excluir?</confirm-delete>
     </msg>
     <header>
-      <scriptName>Name</scriptName>
+      <scriptName>Nome</scriptName>
       <path>Script</path>
       <baseVersion>Versão base</baseVersion>
-      <action>Actions</action>
+      <action>Ações</action>
     </header>
     <tooltip>
-      <Edit>Edit</Edit>
+      <Edit>Editar</Edit>
       <Delete>Excluir</Delete>
     </tooltip>
   </UIScriptList>
@@ -1218,7 +1218,7 @@
     <label>
       <selectVersion>Versões</selectVersion>
       <scriptContent>Conteúdo</scriptContent>
-      <scriptLabel>Name</scriptLabel>
+      <scriptLabel>Nome</scriptLabel>
       <scriptName>Script</scriptName>
       <enableVersion>Habilitar versionamento</enableVersion>
     </label>
@@ -1233,7 +1233,7 @@
     <label>
       <selectVersion>Versões</selectVersion>
       <scriptContent>Conteúdo do Script</scriptContent>
-      <scriptLabel>Name</scriptLabel>
+      <scriptLabel>Nome</scriptLabel>
       <scriptName>Nome do Script</scriptName>
       <enableVersion>Habilitar versionamento</enableVersion>
     </label>
@@ -1363,7 +1363,7 @@
   -->
   <UITaxonomyTreeForm>
     <label>
-      <name>Name</name>
+      <name>Nome</name>
       <workspace>Espaço de trabalho</workspace>
       <homePath>Caminho raíz</homePath>
       <permissions>Permissões</permissions>
@@ -1386,12 +1386,12 @@
     <title>Adicionar uma permissão para este nó</title>
     <action>
       <Close>#{word.close}</Close>
-      <Save>Salvar</Save>
+      <Save>Gravar</Save>
       <Reset>Limpar</Reset>
     </action>
     <msg>
       <checkbox-require>Você deve selecionar ao menos uma permissão.</checkbox-require>
-      <userOrGroup-required>Você deve selecionar um usuário ou grupo antes de salvar a permissão.</userOrGroup-required>
+      <userOrGroup-required>Selecione um utilizador ou grupo antes de gravar a permissão.</userOrGroup-required>
       <not-change-permission>Você não tem privilégio suficiente para adicionar uma permissão.</not-change-permission>
       <access-denied>Acesso negado. Você não pode remover esta permissão.</access-denied>
     </msg>
@@ -1418,20 +1418,20 @@
 
   <UIPopupWindow>
     <title>
-      <UIPermissionManager>Gerenciamento de permissões</UIPermissionManager>
+      <UIPermissionManager>Gestão de permissões</UIPermissionManager>
     </title>
   </UIPopupWindow>
 
   <PopupUserSelector>
     <title>
-      <UIUserContainer>Gerenciamento de permissões</UIUserContainer>
+      <UIUserContainer>Gestão de permissões</UIUserContainer>
     </title>
   </PopupUserSelector>
 
   <UIPermissionInfo>
     <action>
       <title>
-        <Edit>Edit</Edit>
+        <Edit>Editar</Edit>
         <Delete>Remover permissão</Delete>
       </title>
     </action>
@@ -1439,7 +1439,7 @@
       <usersOrGroups>Usuário ou grupo</usersOrGroups>
       <read>Ler</read>
       <addNode>Modificar nó</addNode>
-      <remove>Remove</remove>
+      <remove>Remover</remove>
       <action>Ação</action>
     </header>
     <msg>
@@ -1453,7 +1453,7 @@
     <title>
       <SelectUser>Selecionar usuário</SelectUser>
       <SelectMember>Selecionar tipo de associação</SelectMember>
-      <AddAny>Everyone</AddAny>
+      <AddAny>Todos</AddAny>
     </title>
   </permission>
   <!--
@@ -1484,7 +1484,7 @@
       <userOrGroup>Usuário ou grupo</userOrGroup>
       <read>Leitura</read>
       <add_node>Modificar</add_node>
-      <remove>Remove</remove>
+      <remove>Remover</remove>
     </label>
     <title>Adicionar permissão ao nó</title>
     <action>
@@ -1494,7 +1494,7 @@
     </action>
     <msg>
       <checkbox-require>Você deve selecionar ao menos uma permissão.</checkbox-require>
-      <userOrGroup-required>Você deve selecionar um usuário ou grupo antes de salvar a permissão</userOrGroup-required>
+      <userOrGroup-required>Selecione um utilizador ou grupo antes de gravar a permissão.</userOrGroup-required>
       <not-change-permission>Você não tem permissão para adicionar uma permissão.</not-change-permission>
       <access-denied>Acesso negado. Você não pode remover esta permissão.</access-denied>
     </msg>
@@ -1508,7 +1508,7 @@
 
   <UITaxonomyManager>
     <title>
-      <permission>Gerenciamento de permissões</permission>
+      <permission>Gestão de permissões</permission>
     </title>
   </UITaxonomyManager>
   <!--
@@ -1518,7 +1518,7 @@
   -->
   <UITemplateList>
     <header>
-      <name>Type</name>
+      <name>Tipo</name>
       <action>Ação</action>
       <label>Modelo</label>
       <icon>Ícone</icon>
@@ -1536,7 +1536,7 @@
 
   <UIActionsTemplateList>
     <header>
-      <name>Type</name>
+      <name>Tipo</name>
       <action>Ação</action>
       <label>Modelo</label>
       <icon>Ícone</icon>
@@ -1554,7 +1554,7 @@
 
   <UIOthersTemplateList>
     <header>
-      <name>Type</name>
+      <name>Tipo</name>
       <label>Modelo</label>
       <icon>Ícone</icon>
       <action>Ação</action>
@@ -1586,17 +1586,17 @@
 
   <UICLVTemplateList>
     <title>
-      <Edit>Edit</Edit>
+      <Edit>Editar</Edit>
       <Delete>Excluir</Delete>
     </title>
     <header>
-      <title>Name</title>
+      <title>Nome</title>
       <action>Ação</action>
       <template>Modelo</template>
     </header>
     <action>
       <AddTemplate>Adicionar modelo</AddTemplate>
-      <Edit>Edit</Edit>
+      <Edit>Editar</Edit>
       <Delete>Excluir</Delete>
     </action>
     <msg>
@@ -1609,30 +1609,30 @@
 
   <CateTemplateList>
     <header>
-      <title>Name</title>
+      <title>Nome</title>
       <action>Ação</action>
       <template>Modelo</template>
     </header>
     <title>
-      <Edit>Edit</Edit>
+      <Edit>Editar</Edit>
       <Delete>Excluir</Delete>
     </title>
     <action>
       <AddTemplate>Adicionar modelo</AddTemplate>
-      <Edit>Edit</Edit>
+      <Edit>Editar</Edit>
       <Delete>Excluir</Delete>
     </action>
   </CateTemplateList>
 
   <PageTemplateList>
     <header>
-      <title>Name</title>
+      <title>Nome</title>
       <action>Ação</action>
       <template>Modelo</template>
     </header>
     <action>
       <AddTemplate>Adicionar modelo</AddTemplate>
-      <Edit>Edit</Edit>
+      <Edit>Editar</Edit>
       <Delete>Excluir</Delete>
     </action>
   </PageTemplateList>
@@ -1680,7 +1680,7 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
-      <title>Name</title>
+      <title>Nome</title>
       <template>Nome do Modelo</template>
       <content>Conteúdo</content>
       <type>Tipo de modelo</type>
@@ -1694,7 +1694,7 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
-      <title>Name</title>
+      <title>Nome</title>
       <template>Nome do Modelo</template>
       <content>Conteúdo</content>
       <type>Tipo de modelo</type>
@@ -1708,7 +1708,7 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
-      <title>Name</title>
+      <title>Nome</title>
       <template>Nome do Modelo</template>
       <content>Conteúdo</content>
       <type>Tipo de modelo</type>
@@ -1756,7 +1756,7 @@
       <UIPopupWindow>Visualizar permissão</UIPopupWindow>
       <selectVersion>Versões</selectVersion>
       <content>Conteúdo:</content>
-      <name>Name:</name>
+      <name>Nome:</name>
       <isDocumentTemplate>É um documento modelo</isDocumentTemplate>
       <viewPermission>Permissão:</viewPermission>
       <enableVersion>Versionamento ativado</enableVersion>
@@ -1769,7 +1769,7 @@
       <UIPopupWindow>Popup de permissão</UIPopupWindow>
       <selectVersion>Versões</selectVersion>
       <content>Conteúdo:</content>
-      <name>Name:</name>
+      <name>Nome:</name>
       <isDocumentTemplate>É um documento modelo</isDocumentTemplate>
       <viewPermission>Permissão:</viewPermission>
       <enableVersion>Habilitar versionamento</enableVersion>
@@ -1797,7 +1797,7 @@
   </TemplateContainerPopup>
   <UITemplatesManager>
     <title>
-      <Edit>Edit</Edit>
+      <Edit>Editar</Edit>
       <Delete>Excluir</Delete>
     </title>
   </UITemplatesManager>
@@ -1813,7 +1813,7 @@
   -->
   <UITemplateEditForm>
     <label>
-      <name>Name:</name>
+      <name>Nome:</name>
       <label>Rótulo:</label>
       <isDocumentTemplate>É um documento modelo:</isDocumentTemplate>
     </label>
@@ -1830,10 +1830,10 @@
   -->
   <UIDialogTab>
     <header>
-      <name>Name</name>
+      <name>Nome</name>
       <roles>Funções</roles>
       <baseVersion>Versão</baseVersion>
-      <action>Actions</action>
+      <action>Ações</action>
     </header>
     <msg>
       <undeletable>'{0}' não pode ser excluído, pois ele é padrão.</undeletable>
@@ -1841,7 +1841,7 @@
     </msg>
     <action>
       <title>
-        <Edit>Edit</Edit>
+        <Edit>Editar</Edit>
         <Delete>Excluir</Delete>
       </title>
     </action>
@@ -1853,10 +1853,10 @@
   -->
   <UIViewTab>
     <header>
-      <name>Name</name>
+      <name>Nome</name>
       <roles>Funções</roles>
       <baseVersion>Versão</baseVersion>
-      <action>Actions</action>
+      <action>Ações</action>
     </header>
     <msg>
       <undeletable>'{0}' não pode ser excluído, pois ele é padrão.</undeletable>
@@ -1864,7 +1864,7 @@
     </msg>
     <action>
       <title>
-        <Edit>Edit</Edit>
+        <Edit>Editar</Edit>
         <Delete>Excluir</Delete>
       </title>
     </action>
@@ -1924,11 +1924,11 @@
   -->
   <UIQueriesList>
     <header>
-      <name>Name</name>
-      <type>Type</type>
+      <name>Nome</name>
+      <type>Tipo</type>
       <statement>Declaração</statement>
       <permission>Permissões</permission>
-      <action>Actions</action>
+      <action>Ações</action>
     </header>
     <action>
       <AddQuery>Adicionar consulta</AddQuery>
@@ -1998,9 +1998,9 @@
       <action>Ação</action>
     </header>
     <title>
-      <Edit>Edit</Edit>
+      <Edit>Editar</Edit>
       <Delete>Excluir</Delete>
-      <Remove>Remove</Remove>
+      <Remove>Remover</Remove>
     </title>
     <action>
       <AddStyle>Adicionar estilo</AddStyle>
@@ -2019,7 +2019,7 @@
     <msg>
       <range-validator>Intervalo inválido. O formato de alcance válido é: a..b com a, b sendo inteiros positivos. Você pode usar * ao invés de b para indicar infinito.</range-validator>
       <error-update>Erro na atualização. Sua informação é inválida.</error-update>
-      <item-not-existing>Você não pode salvar as alterações para esta tag, já que ela não existe mais no banco de dados.</item-not-existing>
+      <item-not-existing>Não pode galvar as alterações para esta etiqueta, dado que já não existe mais na base de dados.</item-not-existing>
     </msg>
   </UITagStyleForm>
   <FolksonomyPopup>
@@ -2127,7 +2127,7 @@
   <UIViewContainer>
     <title>
       <View>Visualização</View>
-      <EditInfo>Edit</EditInfo>
+      <EditInfo>Editar</EditInfo>
       <Delete>Excluir</Delete>
     </title>
     <label>
@@ -2136,7 +2136,7 @@
   </UIViewContainer>
   <ECMTemplate>
     <title>
-      <EditInfo>Edit</EditInfo>
+      <EditInfo>Editar</EditInfo>
       <Delete>Excluir</Delete>
     </title>
   </ECMTemplate>
@@ -2293,7 +2293,7 @@
   <UIECMAdminControlPanel>
     <tab>
       <label>
-        <ManageUnLock>Gerenciar bloqueios</ManageUnLock>
+        <ManageUnLock>Gerir bloqueios</ManageUnLock>
       </label>
     </tab>
   </UIECMAdminControlPanel>
@@ -2338,7 +2338,7 @@
   </UILockNodeList>
   <EditUnLockForm>
     <title>
-      <UIUnLockForm>Gerenciar bloqueio</UIUnLockForm>
+      <UIUnLockForm>Gerir bloqueio</UIUnLockForm>
     </title>
   </EditUnLockForm>
   <UITabPane>
@@ -2346,7 +2346,7 @@
       <Close>#{word.close}</Close>
     </action>
     <title>
-      <UILockHolderContainer>Gerenciar bloqueio</UILockHolderContainer>
+      <UILockHolderContainer>Gerir bloqueio</UILockHolderContainer>
       <UILockNodeList>Nó bloqueado</UILockNodeList>
     </title>
   </UITabPane>
@@ -2375,10 +2375,10 @@
 
   <UISkinTab>
     <header>
-      <name>Name</name>
+      <name>Nome</name>
       <roles>Funções</roles>
       <baseVersion>Versão</baseVersion>
-      <action>Actions</action>
+      <action>Ações</action>
     </header>
     <msg>
       <undeletable>Você não pode excluir '{0}', pois ele é padrão.</undeletable>
@@ -2386,7 +2386,7 @@
     </msg>
     <action>
       <title>
-        <Edit>Edit</Edit>
+        <Edit>Editar</Edit>
         <Delete>Excluir</Delete>
       </title>
     </action>
@@ -2398,7 +2398,7 @@
       <UIPopupWindow>Permissão de estilo</UIPopupWindow>
       <selectVersion>Versões</selectVersion>
       <content>Conteúdo:</content>
-      <name>Name:</name>
+      <name>Nome:</name>
       <isDocumentTemplate>É um documento modelo</isDocumentTemplate>
       <viewPermission>Permissão:</viewPermission>
       <enableVersion>Habilitar versionamento</enableVersion>
@@ -2409,7 +2409,7 @@
   <UITagManager>
     <action>
       <title>
-        <RemoveStyle>Remove</RemoveStyle>
+        <RemoveStyle>Remover</RemoveStyle>
         <AddStyle>Adicionar estilo</AddStyle>
       </title>
     </action>
@@ -2479,7 +2479,7 @@
     <title>Adicionar permissão</title>
     <action>
       <Save>#{word.save}</Save>
-      <Add>Add</Add>
+      <Add>Adicionar</Add>
     </action>
     <label>
       <userOrGroup>Associados:</userOrGroup>
@@ -2509,7 +2509,7 @@
   <UIActionForm>
     <title>
       <ShowComponent>Abrir janela</ShowComponent>
-      <removeReference>Remove</removeReference>
+      <removeReference>Remover</removeReference>
     </title>
   </UIActionForm>
   <NodeTypeNameValidator>
@@ -2550,7 +2550,7 @@
   <DriveInputSet>
     <title>
       <ChooseNodeType>Escolher tipos de nó</ChooseNodeType>
-      <RemoveNodeType>Remove</RemoveNodeType>
+      <RemoveNodeType>Remover</RemoveNodeType>
     </title>
   </DriveInputSet>
   <PopupNodeTypeSelector>

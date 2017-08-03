@@ -5,11 +5,11 @@
       <changeState>
         <obsoleted>O conteúdo está obsoleto</obsoleted>
         <published>O conteúdo está publicado</published>
-<unpublished>The content is unpublished</unpublished>
-<archived>The content is archived</archived>
+<unpublished>O conteúdo não está publicado</unpublished>
+<archived>O conteúdo está arquivado</archived>
 <staged>O conteúdo está pronto para ser publicado</staged>
-<approved>The content is approved</approved>
-<pending>The content is pending</pending>
+<approved>O conteúdo está aprovado</approved>
+<pending>O conteúdo está pendente</pending>
 <draft>O conteúdo é um rascunho</draft>
       </changeState>
     </AuthoringPublicationPlugin>

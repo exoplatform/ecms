@@ -23,10 +23,10 @@
   <WebContent>
     <dialog>
       <label>
-        <MainContent>Main Content</MainContent>
+        <MainContent>Conteúdo Principal</MainContent>
         <cssFile>default.css</cssFile>
         <jsFile>default.js</jsFile>
-        <Advanced>Advanced</Advanced>
+        <Advanced>Avançado</Advanced>
         <Summary>Sumário</Summary>
         <name>#{word.name}</name>
         <title>Título</title>
@@ -35,15 +35,15 @@
         <ContentJS>Dados de JS</ContentJS>
         <hintJS>Você pode especificar alguns códigos JavaScript que podem ser executados antes de seu conteúdo da web ser processado.</hintJS>
         <WebContentHtml>Conteúdo Principal</WebContentHtml>
-        <Illustration>Illustration</Illustration>
+        <Illustration>Ilustração</Illustration>
         <hintIllustration>Você pode especificar uma imagem que será mostrada quando o seu conteúdo web for exibido na lista. Você também pode inserir um texto para acompanhar a imagem.</hintIllustration>
         <confirm-delete>Tem certeza que deseja excluir esta ilustração?</confirm-delete>
-        <illustrationImage>Illustration Image</illustrationImage>
-        <imageMimeType>Image Type</imageMimeType>
+        <illustrationImage>Imagem de Ilustração</illustrationImage>
+        <imageMimeType>Tipo de Imagem</imageMimeType>
         <image>Enviar imagem</image>
         <imageWidth>Largura da imagem</imageWidth>
         <imageHeight>Altura da imagem</imageHeight>
-        <Synchronize>Synchronize with CSS and HTML</Synchronize>
+        <Synchronize>Sincronizar com CSS e HTML</Synchronize>
       </label>
     </dialog>
   </WebContent>
@@ -53,7 +53,7 @@
       <label>
         <name>#{word.name}</name>
         <active>Ativo</active>
-        <priority>Priority</priority>
+        <priority>Prioridade</priority>
         <content>Dados de CSS</content>
       </label>
     </dialog>
@@ -63,7 +63,7 @@
     <dialog>
       <label>
         <name>#{word.name}</name>
-        <active>Active</active>
+        <active>Ativo</active>
         <priority>Prioridade</priority>
         <content>Dados de JS</content>
       </label>
@@ -75,7 +75,7 @@
       <label>
         <name>#{word.name}</name>
         <url>URL</url>
-        <description>Description</description>
+        <description>Descrição</description>
       </label>
     </dialog>
   </WebLink>
@@ -83,8 +83,8 @@
   <SiteMetadata>
     <dialog>
       <label>
-        <title>Site Title</title>
-        <description>Site Description</description>
+        <title>Título do Site</title>
+        <description>Descrição do Site</description>
         <keywords>Palavras Chave do Site</keywords>
         <robots>Comportamento do motor de busca</robots>
       </label>

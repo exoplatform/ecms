@@ -7,8 +7,8 @@
   </ContentSelector>
   <RenameConnector>
     <label>
-      <rename>Rename</rename>
-      <cancel>Cancel</cancel>
+      <rename>Renomear</rename>
+      <cancel>Cancelar</cancel>
     </label>
     <msg>
       <renaming>Renomeando...</renaming>
@@ -19,17 +19,17 @@
       <exo>
         <remote-edit>
           <word>Abri no Word</word>
-          <excel>Open in Excel</excel>
+          <excel>Abrir no Excel</excel>
           <powerpoint>Abrir no Powerpoint</powerpoint>
           <desktop>Abrir na área de trabalho</desktop>
-          <desktop-app>Open in {0}</desktop-app>
+          <desktop-app>Abrir em {0}</desktop-app>
         </remote-edit>
       </exo>
     </label>
   </OpenInOfficeConnector>
   <DocumentAutoVersion>
     <msg>
-      <WrongMimeType>O tipo MIME do arquivo carregado é desconhecido. Não será criada nenhuma nova versão de {0}.</WrongMimeType>
+      <WrongMimeType>O tipo Mime do ficheiro carregado é desconhecido. Não será criada nenhuma nova versão de {0}.</WrongMimeType>
     </msg>
   </DocumentAutoVersion>
 </bundle>

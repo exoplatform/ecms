@@ -2,9 +2,9 @@
 <bundle>
   <UICLVContainer>
     <label>
-      <Preferences>Preferences</Preferences>
+      <Preferences>Preferências</Preferences>
       <AddContent>Adicionar Conteúdo</AddContent>
-      <ManageContent>Gerenciar Conteúdo</ManageContent>
+      <ManageContent>Gerir Conteúdo</ManageContent>
     </label>
     <msg>
       <non-contents>Não existem publicações disponíveis.</non-contents>
@@ -22,40 +22,40 @@
     <label>
       <Title>Preferências</Title>
       <ContentSelectionBlock>Seleção de contéudos</ContentSelectionBlock>
-      <UICLVConfigDisplayModeFormRadioBoxInput>Mode</UICLVConfigDisplayModeFormRadioBoxInput>
-      <UICLVConfigItemPathFormInputSet>Folder Path</UICLVConfigItemPathFormInputSet>
+      <UICLVConfigDisplayModeFormRadioBoxInput>Modo</UICLVConfigDisplayModeFormRadioBoxInput>
+      <UICLVConfigItemPathFormInputSet>Caminho da Pasta</UICLVConfigItemPathFormInputSet>
     <UICLVConfigItemPathFormStringInput>Caminho da Pasta</UICLVConfigItemPathFormStringInput>
       <UICLVConfigOrderByFormSelectBox>Ordenar por</UICLVConfigOrderByFormSelectBox>
       <option>
         <exo:title>Título</exo:title>
-        <exo:dateCreated>Created Date</exo:dateCreated>
+        <exo:dateCreated>Data de Criação</exo:dateCreated>
         <exo:lastModifiedDate>Data de Modificação</exo:lastModifiedDate>
         <publication:liveDate>Data de publicação</publication:liveDate>
-        <exo:startEvent>Event Date</exo:startEvent>
-        <exo:index>Index</exo:index>
+        <exo:startEvent>Data do Evento</exo:startEvent>
+        <exo:index>Índice</exo:index>
         <DESC>Crescente</DESC>
         <ASC>Crescente</ASC>
       </option>
       <DisplaySettingBlock>Definições de Exibição</DisplaySettingBlock>
-      <UICLVConfigHeaderFormStringInput>Header</UICLVConfigHeaderFormStringInput>
-      <UICLVConfigDisplayTemplateFormSelectBox>Template</UICLVConfigDisplayTemplateFormSelectBox>
-      <UICLVConfigPaginatorTemplateFormSelectBox>Paginator</UICLVConfigPaginatorTemplateFormSelectBox>
+      <UICLVConfigHeaderFormStringInput>Cabeçalho</UICLVConfigHeaderFormStringInput>
+      <UICLVConfigDisplayTemplateFormSelectBox>Modelo</UICLVConfigDisplayTemplateFormSelectBox>
+      <UICLVConfigPaginatorTemplateFormSelectBox>Paginador</UICLVConfigPaginatorTemplateFormSelectBox>
       <UICLVConfigItemsPerPageFormStringInput>Itens por página</UICLVConfigItemsPerPageFormStringInput>
       <UICLVConfigShowIllustrationFormCheckboxInput>Show Image</UICLVConfigShowIllustrationFormCheckboxInput>
       <UICLVConfigShowSummaryFormCheckboxInput>Show Summary</UICLVConfigShowSummaryFormCheckboxInput>
       <UICLVConfigShowHeaderFormCheckboxInput>Show Header</UICLVConfigShowHeaderFormCheckboxInput>
       <UICLVConfigShowRefreshFormCheckboxInput>Show Refresh</UICLVConfigShowRefreshFormCheckboxInput>
       <UICLVConfigShowTitleFormCheckboxInput>Mostrar Título</UICLVConfigShowTitleFormCheckboxInput>
-      <UICLVConfigShowDateCreatedFormCheckboxInput>Show Date</UICLVConfigShowDateCreatedFormCheckboxInput>
+      <UICLVConfigShowDateCreatedFormCheckboxInput>Mostrar Data</UICLVConfigShowDateCreatedFormCheckboxInput>
       <UICLVConfigShowLinkFormCheckboxInput>Show Link</UICLVConfigShowLinkFormCheckboxInput>
       <UICLVConfigShowReadmoreFormCheckboxInput>Show More Links</UICLVConfigShowReadmoreFormCheckboxInput>
       <UICLVConfigAllowDynamicUrlStringInput>Allow Dynamic URL</UICLVConfigAllowDynamicUrlStringInput>
       <UICLVConfigShowRssLinkFormCheckboxInput>Show RSS Link</UICLVConfigShowRssLinkFormCheckboxInput>
       <UICLVConfigShowAutomaticDetectionCheckboxInput>Automatic Detection</UICLVConfigShowAutomaticDetectionCheckboxInput>
-      <AdvancedBlock>Advanced</AdvancedBlock>
+      <AdvancedBlock>Avançado</AdvancedBlock>
       <UICLVConfigDynamicNavigationLabel>Navegação Dinâmica</UICLVConfigDynamicNavigationLabel>
       <UICLVConfigContextualFolderRadioBoxInput>Contextual Folder</UICLVConfigContextualFolderRadioBoxInput>
-      <UICLVConfigShowCLVByStringInput>by</UICLVConfigShowCLVByStringInput>
+      <UICLVConfigShowCLVByStringInput>por</UICLVConfigShowCLVByStringInput>
       <UICLVConfigshowSCVWithStringInput>com</UICLVConfigshowSCVWithStringInput>
       <UICLVConfigTargetPageFormInputSet>Mostrar na página</UICLVConfigTargetPageFormInputSet>
       <content-not-found>Content not found.</content-not-found>
@@ -143,7 +143,7 @@
       <rssFeed>RSS Feed</rssFeed>
     </label>
     <action>
-      <refresh>Refresh</refresh>
+      <refresh>Atualizar</refresh>
       <edit>Editar</edit>
       <delete>Excluir</delete>
       <publish>Publicar</publish>
@@ -169,14 +169,14 @@
     </label>
   </UICLVConfigContextualFolderRadioBoxInput>
   <PublicationStates>
-    <archived>Archived</archived>
-    <obsolete>Obsolete</obsolete>
+    <archived>Arquivado</archived>
+    <obsolete>Obsoleto</obsolete>
     <unpublished>Não publicado</unpublished>
     <enrolled>Registrado</enrolled>
     <draft>Rascunho</draft>
-    <pending>Pending</pending>
+    <pending>Pendente</pending>
     <approved>Aprovado</approved>
-    <inreview>In Review</inreview>
+    <inreview>Em Revisão</inreview>
     <staged>Pronto para publicação</staged>
     <published>Publicado</published>
   </PublicationStates>

@@ -13,18 +13,18 @@
 </ECMContextMenu>
 <UIViewInfoContainer>
 <label>
-      <name>Name</name>
+      <name>Nome</name>
       <title>Título</title>
-      <type>Type</type>
-      <size>Size</size>
-      <owner>Owner</owner>
+      <type>Tipo</type>
+      <size>Tamanho</size>
+      <owner>Proprietário</owner>
       <lastModifier>Último a modificar</lastModifier>
       <created>Data de criação</created>
       <lastModified>Última modificação</lastModified>
       <publicationState>Status da Publicação</publicationState>
 </label>
 <value>
-      <folder>Folder</folder>
+      <folder>Pasta</folder>
 </value>
 <action>
 <Close>#{word.close}</Close>

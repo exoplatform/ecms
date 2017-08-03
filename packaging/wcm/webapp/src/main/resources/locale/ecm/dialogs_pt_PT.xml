@@ -7,7 +7,7 @@
     <dialog>
       <label>
         <end-time>Hora de fim</end-time>
-        <start-time>Start Time</start-time>
+        <start-time>Hora de início</start-time>
         <lifecycle>Ciclo de vida</lifecycle>
         <mimeType>Tipo Mime</mimeType>
         <repeat-count>Contagem de testes</repeat-count>
@@ -28,8 +28,8 @@
       <contentHtml>#{word.content}</contentHtml>
       <content>#{word.content}</content>
       <contentPlain>#{word.content}</contentPlain>
-      <name>Name</name>
-    <categories>Categories</categories>
+      <name>Nome</name>
+    <categories>Categorias</categories>
     </label>
   </UIDocumentForm>
  
@@ -45,7 +45,7 @@
   <HtmlFile>
     <dialog>
       <label>
-        <name>Name</name>
+        <name>Nome</name>
         <content>Conteúdo</content>
       </label>
     </dialog>
@@ -58,12 +58,12 @@
     <dialog>
       <label>
         <name>#{word.name}</name>
-        <categories>Categories</categories>
+        <categories>Categorias</categories>
         <mimeType>#{Ecm.dialog.label.mimeType}</mimeType>
-        <width>Width</width>
-        <height>Height</height>
+        <width>Largura</width>
+        <height>Altura</height>
         <content>#{word.content}</content>
-        <re-upload>O arquivo já existe. Você pode excluí-lo e enviar outro arquivo a partir daqui.</re-upload>
+        <re-upload>O ficheiro já existe. Pode eliminá-lo e enviar outro ficheiro.</re-upload>
       </label>
     </dialog>
   </File>
@@ -71,7 +71,7 @@
   <UIActionForm>
     <label>
       <description>#{word.description}</description>
-      <port>Port</port>
+      <port>Porta</port>
       <userName>#{word.userName}</userName>
       <password>Senha</password>
       <link>Link</link>
@@ -84,7 +84,7 @@
       <description>#{word.description}</description>
       <port>Porta</port>
       <userName>#{word.userName}</userName>
-      <password>Password</password>
+      <password>Palavra-passe</password>
       <link>Link</link>
       <to>Enviar email para</to>
       <actionName>#{word.name}</actionName>
@@ -260,7 +260,7 @@
   <ResouceContainer>
     <dialog>
       <label>
-        <name>Name</name>
+        <name>Nome</name>
         <autoload>Auto Carregar</autoload>
         <minetype>Tipo MIME</minetype>
         <content>Conteúdo</content>
@@ -294,7 +294,7 @@
     <dialog>
       <label>
         <id>Id</id>
-        <name>Name</name>
+        <name>Nome</name>
         <lifecycle>Ciclo de Vida</lifecycle>
         <homePath>Caminho Base</homePath>
         <targetWorkspace>Espaço de Trabalho destino</targetWorkspace>
@@ -304,7 +304,7 @@
   </ScriptAction>
   <UIDialogForm>
    <form>
-   <DialogFormException>Não foi possível salvar este documento. Talvez há um problema com o interceptador de salvamento prévio</DialogFormException>
+   <DialogFormException>Não foi possível gravar este documento. Pode haver um problema com o interceptador de pre-gravação.</DialogFormException>
    </form>
   </UIDialogForm>
 

@@ -47,25 +47,25 @@
     <label>
       <wcm-view>Web</wcm-view>
       <admin-view>Administrador</admin-view>
-      <icon-view>Icons</icon-view>
-      <thumbails-view>Thumbnails</thumbails-view>
-      <list-view>List</list-view>
+      <icon-view>Ícones</icon-view>
+      <thumbails-view>Miniaturas</thumbails-view>
+      <list-view>Lista</list-view>
       <authoring-view>Autor</authoring-view>
-      <wcm-category-view>Categories</wcm-category-view>
-      <file-view>Visualizar arquivo</file-view>
+      <wcm-category-view>Categorias</wcm-category-view>
+      <file-view>Visualizar ficheiro</file-view>
     </label>
   </Views>
 
   <UIActionBar>
     <obtion>
-      <Publication>Publication</Publication>
+      <Publication>Publicação</Publication>
       <System>Sistema</System>
     </obtion>
   </UIActionBar>
 
   <UIPageSelectorPanel>
     <header>
-      <path>Path</path>
+      <path>Caminho</path>
       <action>#{word.action}</action>
     </header>
     <msg>
@@ -92,15 +92,15 @@
       <UIContentViewer>Pré-visualização de contéudo</UIContentViewer>
       <WebContentMetadataPopup>Seletor de propriedade</WebContentMetadataPopup>
       <WebContentNodeTypePopup>Seletor de tipo de nó</WebContentNodeTypePopup>
-      <UIPermissionManager>Gerenciamento de permissões</UIPermissionManager>
+      <UIPermissionManager>Gestão de permissões</UIPermissionManager>
     </title>
   </UITabPane>
 
   <UIContentBrowsePanelOne>
     <selectBoxValues>
-      <FilterBy>Filter by</FilterBy>
+      <FilterBy>Filtrar por</FilterBy>
       <WebContent>Conteúdo Web</WebContent>
-      <DMSDocument>Document</DMSDocument>
+      <DMSDocument>Documento</DMSDocument>
       <Media>Mídia</Media>
     </selectBoxValues>
     <msg>
@@ -112,7 +112,7 @@
     <selectBoxValues>
       <FilterBy>Filtrar por</FilterBy>
       <WebContent>Conteúdo Web</WebContent>
-      <DMSDocument>Document</DMSDocument>
+      <DMSDocument>Documento</DMSDocument>
       <Media>Mídia</Media>
     </selectBoxValues>
   </UIContentBrowsePanelMulti>
@@ -141,7 +141,7 @@
   <UISelectedContentGrid>
     <label>
       <name>#{word.name}</name>
-      <add>Add</add>
+      <add>Adicionar</add>
       <delete>Excluir</delete>
     </label>
     <msg>
@@ -161,10 +161,10 @@
     <header>
       <name>#{word.name}</name>
       <publicationstate>Estado de publicação</publicationstate>
-      <action>Action</action>
+      <action>Ação</action>
     </header>
     <msg>
-      <child-not-found>No Content Found</child-not-found>
+      <child-not-found>Nenhum conteúdo encontrado</child-not-found>
     </msg>
   </UIContentBrowsePathSelector>
 
@@ -181,7 +181,7 @@
 
   <UIContentSearchForm>
     <title>
-      <Location>Site Name</Location>
+      <Location>Nome do Site</Location>
       <SearchByName>Buscar por nome</SearchByName>
       <Fulltext>Uma palavra ou frase no contexto</Fulltext>
       <Property>Propriedade</Property>
@@ -228,7 +228,7 @@
 
   <UIContentPropertySelector>
     <action>
-      <Add>Add</Add>
+      <Add>Adicionar</Add>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
@@ -268,7 +268,7 @@
 
   <UIContentDialogForm>
     <action>
-      <SaveDraft>Salvar Rascunho</SaveDraft>
+      <SaveDraft>Gravar Rascunho</SaveDraft>
       <FastPublish>Publicação Rápida</FastPublish>
       <Preferences>Preferências</Preferences>
       <Close>#{word.close}</Close>
@@ -290,7 +290,7 @@
       <Save>#{word.save}</Save>
       <Clear>Limpar</Clear>
       <title>
-        <Edit>Edit</Edit>
+        <Edit>Editar</Edit>
         <Delete>Excluir</Delete>
       </title>
     </action>
@@ -359,7 +359,7 @@
       <ColumnPageConfigs>Colunas</ColumnPageConfigs>
       <RowPageConfigs>Linhas</RowPageConfigs>
       <TabsPageConfigs>Abas</TabsPageConfigs>
-      <MixPageConfigs>Mixed</MixPageConfigs>
+      <MixPageConfigs>Mistas</MixPageConfigs>
     </item>
   </UIDropDownPageTemp>
 
@@ -401,18 +401,18 @@
       <GeneralDrives>Unidades Gerais</GeneralDrives>
       <GroupDrives>Unidades dos Grupos</GroupDrives>
       <Private>Privado</Private>
-      <Public>Public</Public>
+      <Public>Público</Public>
       <BackupCenter>Centro de Backup</BackupCenter>
       <CategorizedDocumentsCenter>Centro de Documentos Categorizados</CategorizedDocumentsCenter>
       <CollaborationCenter>Centro de Colaboração</CollaborationCenter>
-      <DigitalAssetsManagementCenter>Centro de Gerenciamento de Conteúdos Digitais</DigitalAssetsManagementCenter>
+      <DigitalAssetsManagementCenter>Centro de Gestão de Conteúdos Digitais</DigitalAssetsManagementCenter>
       <DMSAdministration>Administração do GED</DMSAdministration>
-      <DocumentsManagementCenter>Centro de Gerenciamento de Documentos</DocumentsManagementCenter>
+      <DocumentsManagementCenter>Centro de Gestão de Documentos</DocumentsManagementCenter>
       <LiveDocumentsCenter>Centro de Documentos Ativos</LiveDocumentsCenter>
       <PendingDocumentsCenter>Centro de Documentos Pendentes</PendingDocumentsCenter>
-      <RecordsManagementCenter>Centro de Gerenciamento de Registros</RecordsManagementCenter>
+      <RecordsManagementCenter>Centro de Gestão de Registos</RecordsManagementCenter>
       <SharedUsersSpace>Espaço partilhado dos Utilizadores</SharedUsersSpace>
-      <Systemfiles>Arquivos do Sistema</Systemfiles>
+      <Systemfiles>Ficheiros de Sistema</Systemfiles>
       <ValidationRequestsDocumentsCenter>Centro de Documentos de Requisições de Validação</ValidationRequestsDocumentsCenter>
       <ManagedSites>Gestão de Sites</ManagedSites>
       <SharedSite>Site Compartihado</SharedSite>
@@ -450,7 +450,7 @@
 
   <UIViewMetadataForm>
     <msg>
-      <Invalid-number>Please enter a valid number.</Invalid-number>
+      <Invalid-number>Por favor, insira um número válido.</Invalid-number>
     </msg>
   </UIViewMetadataForm>
 </bundle>

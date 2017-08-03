@@ -4,8 +4,8 @@
     <label>
       <keyword>Palavra chave</keyword>
       <portal>Portal</portal>
-      <Page>Page</Page>
-      <Document>Document</Document>
+      <Page>Página</Page>
+      <Document>Documento</Document>
     </label>
     <action>
       <Search>Buscar</Search>
@@ -15,22 +15,22 @@
   <UIDefaultSearchResult>
     <label>
       <Page>Página</Page>
-      <Document>Document</Document>
-      <DocumentAndPage>Document and Page</DocumentAndPage>
-      <documentandpage>Document and Page</documentandpage>
+      <Document>Documento</Document>
+      <DocumentAndPage>Documento e Página</DocumentAndPage>
+      <documentandpage>Documento e Página</documentandpage>
       <results>{0} resultados de {1} para {2}</results>
       <oneResult>Somente um resultado para {0}</oneResult>
       <ofAboutCaption>de cerca de</ofAboutCaption>
-      <timeUnitCaption>seconds</timeUnitCaption>
+      <timeUnitCaption>segundos</timeUnitCaption>
       <similar>Páginas onde o mesmo conteúdo aparece</similar>
       <editor>Editor</editor>
       <date>Data</date>
       <relevancy>Relevância</relevancy>
       <title>Título</title>
-      <sortBy>Sort By:</sortBy>
+      <sortBy>Ordenar por:</sortBy>
     </label>
     <action>
-      <edit>Edit</edit>
+      <edit>Editar</edit>
     </action>
     <msg>
       <search-not-match-type>Sua pesquisa {0} não coincide com {1}.</search-not-match-type>
@@ -47,8 +47,8 @@
       <pageMode>Modo página</pageMode>
       <option>
         <none>Nenhum</none>
-        <more>More</more>
-        <pagination>Pagination</pagination>
+        <more>Mais</more>
+        <pagination>Paginação</pagination>
       </option>
     </label>
     <action>
@@ -72,7 +72,7 @@
     <label>
       <next>Próximo</next>
       <previous>Anterior</previous>
-      <more>More</more>
+      <more>Mais</more>
     </label>
   </UIPaginatorDefault>
   <UISearchPageLayoutDefault>

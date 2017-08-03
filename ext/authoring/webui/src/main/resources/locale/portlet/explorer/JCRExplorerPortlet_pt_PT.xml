@@ -9,7 +9,7 @@
     <tooltip>
       <PublicationRequestApproval>Solicitar aprovação</PublicationRequestApproval>
       <PublicationApproveContent>Aprovar Conteúdo</PublicationApproveContent>
-      <PublicationPublish>Publish</PublicationPublish>
+      <PublicationPublish>Publicar</PublicationPublish>
     </tooltip>
   </UIActionBar>
 </bundle>

@@ -3,12 +3,12 @@
   <UIPresentationContainer>
     <title>
       <QuickEdit>Editar no Gerenciador de Conteúdo</QuickEdit>
-      <print>Print This Page</print>
-      <FastPublish>Publish</FastPublish>
+      <print>Imprimir esta página</print>
+      <FastPublish>Publicar</FastPublish>
     </title>
     <label>
-      <draft>Draft</draft>
-      <print>Print</print>
+      <draft>Rascunho</draft>
+      <print>Imprimir</print>
     </label>
     <msg>
       <no-content>Nenhum conteúdo encontrado.</no-content>
@@ -18,7 +18,7 @@
   </UIPresentationContainer>
   <CorrectContentSelectorPopupWindow>
     <title>
-      <UIContentSelectorOne>Select Content</UIContentSelectorOne>
+      <UIContentSelectorOne>Selecionar Conteúdo</UIContentSelectorOne>
     </title>
   </CorrectContentSelectorPopupWindow>
   <UISingleContentViewerPortlet>
@@ -42,32 +42,32 @@
       <Save>#{word.save}</Save>
       <Abort>Interromper</Abort>
       <Cancel>#{word.cancel}</Cancel>
-      <Print>Print</Print>
+      <Print>Imprimir</Print>
       <Close>#{word.close}</Close>
     </action>
     <title>Preferências</title>
     <label>
       <Back>Voltar para página anterior</Back>
-      <Edit>Edit</Edit>
-      <Preferences>Preferences</Preferences>
+      <Edit>Editar</Edit>
+      <Preferences>Preferências</Preferences>
       <Title>Preferências</Title>
-      <UISCVShowTitleConfigurationCheckBox>Show Title</UISCVShowTitleConfigurationCheckBox>
-      <UISCVShowDateConfigurationCheckBox>Show Date</UISCVShowDateConfigurationCheckBox>
+      <UISCVShowTitleConfigurationCheckBox>Mostrar Título</UISCVShowTitleConfigurationCheckBox>
+      <UISCVShowDateConfigurationCheckBox>Mostrar Data</UISCVShowDateConfigurationCheckBox>
       <UISCVShowOptionBarConfigurationCheckBox>Mostrar Barra de Opções</UISCVShowOptionBarConfigurationCheckBox>
       <DisplaySettingBlock>Mostrar Configurações</DisplaySettingBlock>
       <ContentPathBlock>Seleção de Conteúdo</ContentPathBlock>
       <UISCVConfigItemPathFormInputSet>Caminho de Conteúdo</UISCVConfigItemPathFormInputSet>
     <UISCVContentPathConfigurationInputBox>Caminho do Conteúdo</UISCVContentPathConfigurationInputBox>
-      <Advance>Advanced</Advance>
-      <ContextCaption>Dynamic Navigation</ContextCaption>
-      <UISCVContextualRadioBox>Contextual Content</UISCVContextualRadioBox>
-      <UISCVParameterInputBox>by</UISCVParameterInputBox>
-      <PrintSettingBlock>Print Settings</PrintSettingBlock>
-      <UISCVPrintPageParameter>with</UISCVPrintPageParameter>
+      <Advance>Avançado</Advance>
+      <ContextCaption>Navegação Dinâmica</ContextCaption>
+      <UISCVContextualRadioBox>Conteúdo Contextual</UISCVContextualRadioBox>
+      <UISCVParameterInputBox>por</UISCVParameterInputBox>
+      <PrintSettingBlock>Configurações de Impressão</PrintSettingBlock>
+      <UISCVPrintPageParameter>com</UISCVPrintPageParameter>
       <UISCVConfigPrintPageFormInputSet>Mostrar na página</UISCVConfigPrintPageFormInputSet>
-      <LockStatus>Lock</LockStatus>
+      <LockStatus>Bloquear</LockStatus>
       <CacheManagement>Visibilidade do conteúdo</CacheManagement>
-      <UISCVCacheRadioBox>Compartilhar conteúdo</UISCVCacheRadioBox>
+      <UISCVCacheRadioBox>Partilhar Conteúdo</UISCVCacheRadioBox>
     </label>
     <help>
       <ContentPathBlock>Selecionar o conteúdo que você quer mostrar. Este conteúdo padrão será substituído dinamicamente se você ativar a Navegação dinâmica (ver abaixo modo avançado).</ContentPathBlock>
@@ -76,14 +76,14 @@
       <ParameterHelp>Este parâmetro será usado para obter o conteúdo se a Navegação Dinâmica estiver ativada.</ParameterHelp>
     </help>
     <msg>
-      <not-valid-path>The item path is invalid.</not-valid-path>
+      <not-valid-path>Caminho inválido.</not-valid-path>
     </msg>
     <tab>
       <label>
         <UISCVConfigContentFormInputSet>Seleção de Conteúdo</UISCVConfigContentFormInputSet>
         <UISCVConfigDisplayFormInputSet>Definições de Exibição</UISCVConfigDisplayFormInputSet>
         <UISCVConfigPrintFormInputSet>Configurações de impressão</UISCVConfigPrintFormInputSet>
-        <UISCVConfigAdvancedFormInputSet>Advanced</UISCVConfigAdvancedFormInputSet>
+        <UISCVConfigAdvancedFormInputSet>Avançado</UISCVConfigAdvancedFormInputSet>
       </label>
     </tab>
   </UISCVPreferences>
@@ -104,12 +104,12 @@
     </title>
   </UISCVConfigPrintPageSelectorPopupWindow>
   <PublicationStates>
-    <archived>Archived</archived>
-    <obsolete>Obsolete</obsolete>
+    <archived>Arquivado</archived>
+    <obsolete>Obsoleto</obsolete>
     <unpublished>Não publicado</unpublished>
     <enrolled>Registrado</enrolled>
     <draft>Rascunho</draft>
-    <pending>Pending</pending>
+    <pending>Pendente</pending>
     <approved>Aprovado</approved>
     <inreview>Em Revisão</inreview>
     <staged>Pronto para publicação</staged>

@@ -7,8 +7,8 @@
   -->
   <UITreeList>
     <header>
-      <name>Name</name>
-      <action>Add</action>
+      <name>Nome</name>
+      <action>Adicionar</action>
     </header>
     <info>
       <child-not-found>Sub-nó não encontrado!</child-not-found>
@@ -67,7 +67,7 @@
   </UIPermissionMembership>
   <TaxoSelectUserOrGroup>
     <label>
-      <selectGroup>Select Group</selectGroup>
+      <selectGroup>Selecionar Grupo</selectGroup>
       <selectMembership>Selecione Associação</selectMembership>
     </label>
   </TaxoSelectUserOrGroup>

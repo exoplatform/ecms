@@ -4,14 +4,14 @@
   <View>
     <label>
       <languages>
-        <en>English</en>
-        <fr>French</fr>
-        <ru>Russian</ru>
-        <vi>Vietnamese</vi>
-        <nl>Dutch</nl>
-        <de>German</de>
-        <uk>Ukrainian</uk>
-        <ar>Arabic</ar>
+        <en>Inglês</en>
+        <fr>Francês</fr>
+        <ru>Russo</ru>
+        <vi>Vietnamita</vi>
+        <nl>Holandês</nl>
+        <de>Alemão</de>
+        <uk>Ucraniano</uk>
+        <ar>Árabe</ar>
       </languages>
     </label>
   </View>
@@ -23,10 +23,10 @@
     <view>
       <label>
         <postedBy>Último comentário postado por</postedBy>
-        <at>at</at>
+        <at>em</at>
         <comments>Comentários</comments>
-        <show-comments>Show comments</show-comments>
-        <hide-comments>Hide comments</hide-comments>
+        <show-comments>Mostrar comentários</show-comments>
+        <hide-comments>Ocultar comentários</hide-comments>
         <comment-by>Comentado por</comment-by>
         <email>E-mail</email>
         <site>Site</site>
@@ -56,11 +56,11 @@
         <using-webDAV>ou abrir no MS Office</using-webDAV>
         <open-on-desktop>Abrir na área de trabalho</open-on-desktop>
         <open-in-documents>Abrir Documento</open-in-documents>
-        <open-in-documents-tooltip>Abrir este arquivo no app de documentos</open-in-documents-tooltip>
-        <file-size-too-big>O contéudo deste arquivo é muito grande. Você deve baixá-lo e abrí-lo no cliente.</file-size-too-big>
-        <webDAV>WebDAV View</webDAV>
+        <open-in-documents-tooltip>Abrir este ficheiro na aplicação de documentos</open-in-documents-tooltip>
+        <file-size-too-big>O contéudo deste ficheiro é muito grande.</file-size-too-big>
+        <webDAV>Ver WebDAV</webDAV>
         <download>Baixar</download>
-        <htmlview>View as HTML</htmlview>
+        <htmlview>Ver como HTML</htmlview>
         <plaintextview>Ver como Texto simples</plaintextview>
       </label>
     </view>
@@ -73,11 +73,11 @@
     <view>
       <label>
         <from>De:</from>
-        <to>To:</to>
+        <to>Para:</to>
         <cc>Cc:</cc>
-        <date>Date:</date>
-        <subject>Subject:</subject>
-        <attachment>Attachments:</attachment>
+        <date>Data:</date>
+        <subject>Assunto:</subject>
+        <attachment>Anexos:</attachment>
       </label>
     </view>
   </Mail>
@@ -98,11 +98,11 @@
   <ListView>
     <view>
       <label>
-        <name>Name</name>
+        <name>Nome</name>
         <versionable>Versionável</versionable>
         <exo_owner>Proprietário</exo_owner>
-        <exo_dateCreated>Date Created</exo_dateCreated>
-        <exo_dateModified>Date Modified</exo_dateModified>
+        <exo_dateCreated>Data de Criação</exo_dateCreated>
+        <exo_dateModified>Data de Modificação</exo_dateModified>
         <auditing>Auditar</auditing>
       </label>
     </view>
@@ -115,9 +115,9 @@
     <view>
       <label>
         <action-name>Nome da ação</action-name>
-        <lifecycle>Lifecycle</lifecycle>
+        <lifecycle>Ciclo de Vida</lifecycle>
         <metadata>Metadado</metadata>
-        <description>Description</description>
+        <description>Descrição</description>
       </label>
     </view>
   </AddMetadata>
@@ -130,7 +130,7 @@
       <label>
         <action-name>Nome da ação</action-name>
         <lifecycle>Ciclo de Vida</lifecycle>
-        <description>Description</description>
+        <description>Descrição</description>
       </label>
     </view>
   </AutoVersioning>
@@ -140,9 +140,9 @@
   <EnableVersioning>
     <view>
       <label>
-        <action-name>Name</action-name>
+        <action-name>Nome</action-name>
         <lifecycle>Ciclo de Vida</lifecycle>
-        <description>Description</description>
+        <description>Descrição</description>
       </label>
     </view>
   </EnableVersioning>
@@ -155,14 +155,14 @@
         <not-avaliable>N/D</not-avaliable>
         <core-elements>Elementos centrais</core-elements>
         <title>Título</title>
-        <creator>Creator</creator>
+        <creator>Criador</creator>
         <subject>Assunto</subject>
-        <source>Source</source>
+        <source>Fonte</source>
         <contributor>Colaborador</contributor>
-        <resource-type>Resource Type</resource-type>
+        <resource-type>Tipo de Recurso</resource-type>
         <date>Data</date>
         <publisher>Publicador</publisher>
-        <description>Description</description>
+        <description>Descrição</description>
         <rights>Direitos</rights>
         <relation>Relação</relation>
         <format>Formato</format>
@@ -234,7 +234,7 @@
       <Switch-back-to-original-video>Vídeo original</Switch-back-to-original-video>
       </label>
       <tooltip>
-      <A-second-media-file-is-available-as-audio-description>Um segundo arquivo de mídia está disponível como uma áudio-descrição</A-second-media-file-is-available-as-audio-description>
+      <A-second-media-file-is-available-as-audio-description>Um segundo ficheiro de media está disponível como uma áudio-descrição</A-second-media-file-is-available-as-audio-description>
       </tooltip>
     </view>
   </AccessibleMedia>

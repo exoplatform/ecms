@@ -47,7 +47,7 @@
       <saving-success>A informação foi atualizada com sucesso.</saving-success>
     </msg>
     <action>
-      <Save>Salvar</Save>
+      <Save>Gravar</Save>
     </action>
   </UICategoryNavigationConfig>
   <UICategoryNavigationTreeBase>
