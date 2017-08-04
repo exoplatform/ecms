@@ -18,14 +18,18 @@ package org.exoplatform.services.cms.permission;
 
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
+import javax.jcr.RepositoryException;
+import java.util.*;
 
 import org.exoplatform.container.xml.InitParams;
+import org.exoplatform.services.jcr.access.AccessControlEntry;
 import org.exoplatform.services.jcr.access.PermissionType;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.jcr.impl.core.NodeImpl;
 import org.exoplatform.services.organization.User;
 import org.exoplatform.services.organization.UserEventListener;
+import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 public class AdjustDrivePermissionNewUserListener extends UserEventListener {
@@ -53,9 +57,30 @@ public class AdjustDrivePermissionNewUserListener extends UserEventListener {
     NodeIterator nodeIter = userNode.getNodes();
     while (nodeIter.hasNext()) {
       NodeImpl nodeImpl = (NodeImpl) nodeIter.next();
+      if (nodeImpl.canAddMixin(NodetypeConstant.EXO_PRIVILEGEABLE)) {
+        nodeImpl.addMixin(NodetypeConstant.EXO_PRIVILEGEABLE);
+        Map<String, String[]> permissions = buildPermissions(nodeImpl);
+        nodeImpl.setPermissions(permissions);
+        nodeImpl.save();
+      }
       nodeImpl.removePermission(userName, PermissionType.REMOVE);
     }
   }
+
   public void preDelete(User user) throws Exception {
+  }
+
+  public Map<String, String[]> buildPermissions(NodeImpl node) throws RepositoryException{
+    Map<String, String[]> permissions = new HashMap<String, String[]>();
+    List<String> permsList = new ArrayList<String>();
+    String key = null;
+    for (AccessControlEntry entry : node.getACL().getPermissionEntries()) {
+      key = entry.getIdentity();
+      if(!permissions.containsKey(key)) {
+        permsList = node.getACL().getPermissions(key);
+        permissions.put(key, permsList.toArray(new String[permsList.size()]));
+      }
+    }
+    return permissions;
   }
 }
