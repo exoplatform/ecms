@@ -265,7 +265,7 @@ if (maximumPage > 0 && maximumPage <= pdfViewerService.getMaxPages() && fileSize
     def pageMsg = _ctx.appRes("File.view.label.pdf-max-page");
     pageMsg = pageMsg.replace("{0}", (String) pdfViewerService.getMaxPages());
     def sizeMsg = _ctx.appRes("File.view.label.pdf-max-size");
-    sizeMsg = sizeMsg.replace("{0}", (String) pdfViewerService.getMaxFileSize()/(1024*1024));
+    sizeMsg = sizeMsg.replace("{0}", (String) (pdfViewerService.getMaxFileSize()/(1024*1024)));
     if (maximumPage > pdfViewerService.getMaxPages()) {
       errorMessage = pageMsg;
     } else if (fileSize > pdfViewerService.getMaxFileSize()) {
