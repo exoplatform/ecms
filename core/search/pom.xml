@@ -4,7 +4,7 @@
   <parent>
     <artifactId>ecms-core</artifactId>
     <groupId>org.exoplatform.ecms</groupId>
-    <version>4.4.x-SNAPSHOT</version>
+    <version>4.4.3-RC03</version>
   </parent>
   <artifactId>ecms-core-search</artifactId>
   <name>eXo PLF:: WCM Search Service</name>
