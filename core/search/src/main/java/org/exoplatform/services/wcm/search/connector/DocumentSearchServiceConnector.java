@@ -144,7 +144,7 @@ public class DocumentSearchServiceConnector extends BaseContentSearchServiceConn
       authorUsername = node.getProperty("exo:owner").getString();
     }
 
-    StringBuilder url = new StringBuilder("javascript:require(['SHARED/social-ui-activity'], function(activity) {activity.previewDoc(event, {doc:{");
+    StringBuilder url = new StringBuilder("javascript:require(['SHARED/documentPreview'], function(documentPreview) {documentPreview.init({doc:{");
     if(node.isNodeType(NodetypeConstant.MIX_REFERENCEABLE)) {
       url.append("id:'").append(node.getUUID()).append("',");
     }

@@ -147,7 +147,7 @@ import java.util.Locale;
                     }
                     def docDownloadUrl = org.exoplatform.wcm.webui.Utils.getDownloadLink(currentVersionNode);
                     def docOpenUri = uicomponent.getLinkInDocumentsApp(currentNode.getPath());
-                    def docPreviewUri = "javascript:require(['SHARED/social-ui-activity'], function(activity) {activity.previewDoc(event, {doc: {id:'" + currentVersionNode.getUUID() + "', fileType: '" + fileType +"', repository:'" + repository + "', workspace:'" + preferenceWS + "', path:'" + currentNode.getPath() + "', title:'" + currentNode.getName() + "', downloadUrl:'" + docDownloadUrl + "', openUrl:'" + docOpenUri + "'}, version: {number:'" + versionNumber + "'}, author: {username:'" + authorUserName + "', fullname:'" + authorFullName + "', avatarUrl:'" + avatarURL + "', profileUrl:'" + profileURL + "'}})})";
+                    def docPreviewUri = "javascript:require(['SHARED/documentPreview'], function(documentPreview) {documentPreview.init({doc: {id:'" + currentVersionNode.getUUID() + "', fileType: '" + fileType +"', repository:'" + repository + "', workspace:'" + preferenceWS + "', path:'" + currentNode.getPath() + "', title:'" + currentNode.getName() + "', downloadUrl:'" + docDownloadUrl + "', openUrl:'" + docOpenUri + "'}, version: {number:'" + versionNumber + "'}, author: {username:'" + authorUserName + "', fullname:'" + authorFullName + "', avatarUrl:'" + avatarURL + "', profileUrl:'" + profileURL + "'}})})";
                 %>
                 <a class="btn" onclick="<%=docPreviewUri %>" rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes('UIVersionInfo.tooltip.viewVersion'); %>"><i class="uiIconWatch uiIconLightGray"></i></a>
                 <%
