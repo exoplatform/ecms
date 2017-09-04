@@ -55,8 +55,6 @@ public abstract class AbstractPageList<E> extends PageList<E> {
   protected String sortByField;
   /** oder to sort */
   protected String order;
-  /** total nodes returned by query, (have not passed the filter yet) */
-  protected long totalNodes;
   /** The offset */
   protected int offset_;
   
@@ -128,14 +126,6 @@ public abstract class AbstractPageList<E> extends PageList<E> {
   
   public void setSearchDataCreator(SearchDataCreator<E> searchDataCreator) {
     this.searchDataCreator = searchDataCreator;
-  }
-  
-  public long getTotalNodes() { 
-    return totalNodes;
-  }
-  
-  public void setTotalNodes(long value) {
-    totalNodes = value;
   }
   
   @SuppressWarnings("unchecked")

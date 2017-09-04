@@ -16,21 +16,8 @@
  */
 package org.exoplatform.services.wcm.search.base;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.jcr.LoginException;
-import javax.jcr.NoSuchWorkspaceException;
-import javax.jcr.Node;
-import javax.jcr.NodeIterator;
-import javax.jcr.RepositoryException;
-import javax.jcr.Session;
-import javax.jcr.query.Query;
-import javax.jcr.query.QueryManager;
-import javax.jcr.query.QueryResult;
-import javax.jcr.query.Row;
-import javax.jcr.query.RowIterator;
-
+import org.exoplatform.commons.api.search.data.SearchResult;
+import org.exoplatform.commons.utils.CommonsUtils;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.impl.core.query.QueryImpl;
 import org.exoplatform.services.log.ExoLogger;
@@ -38,7 +25,12 @@ import org.exoplatform.services.log.Log;
 import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.wcm.search.QueryCriteria;
 import org.exoplatform.services.wcm.search.SiteSearchService;
+import org.exoplatform.services.wcm.search.connector.FileApplicationSearchServiceConnector;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+
+import javax.jcr.*;
+import javax.jcr.query.*;
+import java.util.*;
 
 /**
  * Created by The eXo Platform SAS
@@ -58,43 +50,40 @@ public class PageListFactory {
                                                        SearchDataCreator<E> dataCreator,
                                                        int pageSize,
                                                        int bufferSize,
-                                                       QueryCriteria criteria) throws LoginException,
-                                                                      NoSuchWorkspaceException,
-                                                                      RepositoryException {
+                                                       QueryCriteria criteria) throws RepositoryException {
+    SiteSearchService siteSearchService = WCMCoreUtils.getService(SiteSearchService.class);
+
     if (pageSize == 0) {
       pageSize = AbstractPageList.DEFAULT_PAGE_SIZE;
     }
-    if (bufferSize < pageSize) {
-      bufferSize = Math.max(pageSize, AbstractPageList.DEAFAULT_BUFFER_SIZE);
-    }
-    SessionProvider sessionProvider = isSystemSession ? WCMCoreUtils.getSystemSessionProvider() :
-                                                          WCMCoreUtils.getUserSessionProvider();
-    Session session = sessionProvider.getSession(workspace, WCMCoreUtils.getRepository());
-    QueryManager queryManager = session.getWorkspace().getQueryManager();
-    Query query = queryManager.createQuery(queryStatement, language);
-    int offset = 0;
-    if (criteria != null) {
-      if (criteria.getOffset() > 0) { ((QueryImpl)query).setOffset(criteria.getOffset()); }
-      else {
-        if (criteria.getOffset() < 0) {
-          // WCMAdvancedSearch takes the default value (-1) of QueryCriteria's offset
-          // reset it to 0 to align with the default value of Unified Search
-          criteria.setOffset(0);
-        }
-        SiteSearchService searchService = WCMCoreUtils.getService(SiteSearchService.class);
-        searchService.clearCache(ConversationState.getCurrent().getIdentity().getUserId(), queryStatement);
-      }
-      offset = (int)criteria.getOffset();
-    }  else {
-      SiteSearchService searchService = WCMCoreUtils.getService(SiteSearchService.class);
-      searchService.clearCache(ConversationState.getCurrent().getIdentity().getUserId(), queryStatement);
-    }
-    ((QueryImpl)query).setLimit(AbstractPageList.RESULT_SIZE_SEPARATOR + 1);
-    QueryResult result = query.execute();
-    int totalNodes = (int)result.getNodes().getSize();
-    QueryData queryData = new QueryData(queryStatement, workspace, language, isSystemSession, offset);
-      return new ArrayNodePageList<E>(result, pageSize, filter, dataCreator, queryData);
 
+    if (criteria != null) {
+      if (criteria.getOffset() <= 0) {
+        // WCMAdvancedSearch takes the default value (-1) of QueryCriteria's offset
+        // reset it to 0 to align with the default value of Unified Search
+        criteria.setOffset(0);
+        siteSearchService.clearCache(ConversationState.getCurrent().getIdentity().getUserId(), queryStatement);
+      }
+    } else {
+      siteSearchService.clearCache(ConversationState.getCurrent().getIdentity().getUserId(), queryStatement);
+    }
+
+    // search in JCR
+    List<E> results = searchInJCR(queryStatement, workspace, language, isSystemSession, filter, dataCreator, criteria);
+
+    if(criteria != null && !criteria.isSearchWebpage()) {
+      // search in ES
+      results.addAll(searchInES(workspace, isSystemSession, filter, dataCreator, criteria));
+    }
+
+    // remove duplications
+    results = new ArrayList<>(new LinkedHashSet<>(results));
+
+    if(criteria != null && criteria.getOffset() > 0) {
+      results = results.subList((int) criteria.getOffset(), results.size());
+    }
+
+    return new ArrayNodePageList<>(results, pageSize);
   }
   
   public static <E> AbstractPageList<E> createPageList(String queryStatement,
@@ -165,7 +154,7 @@ public class PageListFactory {
         Node node = nodeIterator.nextNode();
         Row row = rowIterator.nextRow();
         if (dataCreator != null && node != null) { 
-          E data = dataCreator.createData(node, row);
+          E data = dataCreator.createData(node, row, null);
           if (data != null) {
             dataList.add(data);
           }
@@ -183,5 +172,116 @@ public class PageListFactory {
                                                        SearchDataCreator<E> dataCreator) {
     return new LazyPageList<E>(queryData, nodePerPage, dataCreator);
   }
-  
+
+  /**
+   * Search in JCR
+   * @param queryStatement
+   * @param workspace
+   * @param language
+   * @param isSystemSession
+   * @param filter
+   * @param dataCreator
+   * @param criteria
+   * @param <E>
+   * @return
+   * @throws RepositoryException
+   */
+  protected static <E> List<E> searchInJCR(String queryStatement,
+                                    String workspace,
+                                    String language,
+                                    boolean isSystemSession,
+                                    NodeSearchFilter filter,
+                                    SearchDataCreator<E> dataCreator,
+                                    QueryCriteria criteria) throws RepositoryException {
+    SessionProvider sessionProvider = isSystemSession ? WCMCoreUtils.getSystemSessionProvider() :
+            WCMCoreUtils.getUserSessionProvider();
+    Session session = sessionProvider.getSession(workspace, WCMCoreUtils.getRepository());
+    QueryManager queryManager = session.getWorkspace().getQueryManager();
+    Query query = queryManager.createQuery(queryStatement, language);
+
+    long offset = criteria != null ? criteria.getOffset() : 0;
+    ((QueryImpl) query).setOffset(0);
+    ((QueryImpl) query).setLimit(offset + AbstractPageList.RESULT_SIZE_SEPARATOR + 1);
+    QueryResult result = query.execute();
+
+    List<E> dataList = new ArrayList<>();
+
+    try {
+      NodeIterator nodeIterator = result.getNodes();
+      RowIterator rowIterator = result.getRows();
+      while (nodeIterator.hasNext()) {
+        Node node = nodeIterator.nextNode();
+        Row row = rowIterator.nextRow();
+        if (filter != null) {
+          node = filter.filterNodeToDisplay(node);
+        }
+        if (dataCreator != null && node != null) {
+          E data = dataCreator.createData(node, row, null);
+          if (data != null) {
+            dataList.add(data);
+          }
+        }
+      }
+    } catch (RepositoryException e) {
+      if (LOG.isWarnEnabled()) {
+        LOG.warn(e.getMessage());
+      }
+    }
+
+    return dataList;
+  }
+
+  /**
+   *
+   * @param workspace
+   * @param isSystemSession
+   * @param filter
+   * @param dataCreator
+   * @param criteria
+   * @param <E>
+   * @return
+   * @throws RepositoryException
+   */
+  protected static <E> List<E> searchInES(String workspace,
+                                   boolean isSystemSession,
+                                   NodeSearchFilter filter,
+                                   SearchDataCreator<E> dataCreator,
+                                   QueryCriteria criteria) throws RepositoryException {
+    SessionProvider sessionProvider = isSystemSession ? WCMCoreUtils.getSystemSessionProvider() :
+            WCMCoreUtils.getUserSessionProvider();
+    Session session = sessionProvider.getSession(workspace, WCMCoreUtils.getRepository());
+
+    FileApplicationSearchServiceConnector fileSearchInternalServiceConnector = CommonsUtils.getService(FileApplicationSearchServiceConnector.class);
+    int offset = criteria != null ? (int) criteria.getOffset() : 0;
+    Collection<SearchResult> results = fileSearchInternalServiceConnector.appSearch(workspace,
+            criteria != null ? criteria.getSearchPath() : "",
+            criteria != null ? criteria.getKeyword() : "",
+            0,
+            offset + AbstractPageList.RESULT_SIZE_SEPARATOR + 1,
+            null,
+            null);
+
+    List<E> filteredResults = new ArrayList<>();
+
+    results.forEach(result -> {
+      EcmsSearchResult searchResult = (EcmsSearchResult) result;
+      // JCR score is calculated as (lucene score)*1000 , so we do the same thing for ES results to have a more accurate comparison
+      searchResult.setRelevancy(searchResult.getRelevancy() * 1000);
+      String nodePath = searchResult.getNodePath();
+      Node node = null;
+      try {
+        node = session.getRootNode().getNode(nodePath.substring(1, nodePath.length()));
+      } catch (RepositoryException e) {
+        LOG.error("Cannot get node " + nodePath, e);
+      }
+      if(node != null) {
+        if (filter != null) {
+          node = filter.filterNodeToDisplay(node);
+        }
+        filteredResults.add(dataCreator.createData(node, null, searchResult));
+      }
+    });
+
+    return filteredResults;
+  }
 }

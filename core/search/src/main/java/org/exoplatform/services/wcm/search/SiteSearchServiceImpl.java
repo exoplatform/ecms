@@ -17,29 +17,21 @@
 package org.exoplatform.services.wcm.search;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.CopyOnWriteArraySet;
+import java.util.stream.Collectors;
 
-import javax.jcr.Node;
-import javax.jcr.RepositoryException;
-import javax.jcr.Session;
-import javax.jcr.Value;
+import javax.jcr.*;
 import javax.jcr.nodetype.NodeType;
 import javax.jcr.nodetype.NodeTypeIterator;
 import javax.jcr.nodetype.NodeTypeManager;
-import javax.jcr.query.Query;
-import javax.jcr.query.QueryManager;
-import javax.jcr.query.Row;
-import javax.jcr.query.RowIterator;
+import javax.jcr.query.*;
 import javax.portlet.PortletRequest;
 
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
+import org.exoplatform.commons.api.search.data.SearchResult;
+import org.exoplatform.commons.utils.CommonsUtils;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.container.xml.ValueParam;
 import org.exoplatform.portal.application.PortalRequestContext;
@@ -52,8 +44,10 @@ import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.jcr.impl.core.query.QueryImpl;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
@@ -63,12 +57,9 @@ import org.exoplatform.services.wcm.publication.WCMComposer;
 import org.exoplatform.services.wcm.search.QueryCriteria.DATE_RANGE_SELECTED;
 import org.exoplatform.services.wcm.search.QueryCriteria.DatetimeRange;
 import org.exoplatform.services.wcm.search.QueryCriteria.QueryProperty;
-import org.exoplatform.services.wcm.search.base.AbstractPageList;
-import org.exoplatform.services.wcm.search.base.ArrayNodePageList;
-import org.exoplatform.services.wcm.search.base.NodeSearchFilter;
-import org.exoplatform.services.wcm.search.base.PageListFactory;
-import org.exoplatform.services.wcm.search.base.SearchDataCreator;
+import org.exoplatform.services.wcm.search.base.*;
 import org.exoplatform.services.wcm.search.connector.BaseSearchServiceConnector;
+import org.exoplatform.services.wcm.search.connector.FileSearchServiceConnector;
 import org.exoplatform.services.wcm.utils.SQLQueryBuilder;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.services.wcm.utils.AbstractQueryBuilder.COMPARISON_TYPE;
@@ -175,6 +166,7 @@ public class SiteSearchServiceImpl implements SiteSearchService {
    * addExcludeIncludeDataTypePlugin
    * (org.exoplatform.services.wcm.search.ExcludeIncludeDataTypePlugin)
    */
+  @Override
   public void addExcludeIncludeDataTypePlugin(ExcludeIncludeDataTypePlugin plugin) {
     excludeNodeTypes.addAll(plugin.getExcludeNodeTypes());
     excludeMimeTypes.addAll(plugin.getExcludeMimeTypes());
@@ -189,6 +181,7 @@ public class SiteSearchServiceImpl implements SiteSearchService {
    * (org.exoplatform.services.wcm.search.QueryCriteria,
    * org.exoplatform.services.jcr.ext.common.SessionProvider, int)
    */
+  @Override
   public AbstractPageList<ResultNode> searchSiteContents(SessionProvider sessionProvider,
                                                     QueryCriteria queryCriteria,
                                                     int pageSize,
@@ -225,6 +218,7 @@ public class SiteSearchServiceImpl implements SiteSearchService {
   /**
    * 
    */
+  @Override
   public AbstractPageList<ResultNode> searchPageContents(SessionProvider sessionProvider,
                                                       QueryCriteria queryCriteria,
                                                       int pageSize,
@@ -255,6 +249,35 @@ public class SiteSearchServiceImpl implements SiteSearchService {
     pageList.setQueryTime(queryTime);
     pageList.setSpellSuggestion(suggestion);
     return pageList;
+  }
+
+  @Override
+  public Map<?, Integer> getFoundNodes(String userId, String queryStatement) {
+    String key = new StringBuilder('(').append(userId).append(';').append(queryStatement).append(')').toString();
+    Map<?, Integer> ret = foundNodeCache.get(key);
+    if (ret == null) {
+      ret = new HashMap<Integer, Integer>();
+      foundNodeCache.put(key, ret);
+    };
+    return ret;
+  }
+
+  @Override
+  public Map<Integer, Integer> getDropNodes(String userId, String queryStatement) {
+    String key = new StringBuilder('(').append(userId).append(';').append(queryStatement).append(')').toString();
+    Map<Integer, Integer> ret = dropNodeCache.get(key);
+    if (ret == null) {
+      ret = new HashMap<Integer, Integer>();
+      dropNodeCache.put(key, ret);
+    };
+    return ret;
+  }
+
+  @Override
+  public void clearCache(String userId, String queryStatement) {
+    String key = new StringBuilder('(').append(userId).append(';').append(queryStatement).append(')').toString();
+    foundNodeCache.remove(key);
+    dropNodeCache.remove(key);
   }
   
   private Query createSearchPageQuery(QueryCriteria queryCriteria, QueryManager queryManager) throws Exception {
@@ -778,10 +801,14 @@ public class SiteSearchServiceImpl implements SiteSearchService {
           }
         }
         String[] contentTypes = queryCriteria.getContentTypes();
-        for (String contentType : contentTypes) {
-          if(displayNode.isNodeType(contentType)) {
-            return displayNode;
+        if(contentTypes != null && contentTypes.length > 0) {
+          for (String contentType : contentTypes) {
+            if (displayNode.isNodeType(contentType)) {
+              return displayNode;
+            }
           }
+        } else {
+          return displayNode;
         }
         return null;
     }
@@ -814,7 +841,7 @@ public class SiteSearchServiceImpl implements SiteSearchService {
   public static class DataCreator implements SearchDataCreator<ResultNode> {
 
     @Override
-    public ResultNode createData(Node node, Row row) {
+    public ResultNode createData(Node node, Row row, SearchResult searchResult) {
       try {
         return new ResultNode(node, row);
       } catch (Exception e) {
@@ -833,7 +860,7 @@ public class SiteSearchServiceImpl implements SiteSearchService {
     }
     
     @Override
-    public ResultNode createData(Node node, Row row) {
+    public ResultNode createData(Node node, Row row, SearchResult searchResult) {
       try {
 //        PortalRequestContext portalRequestContext = Util.getPortalRequestContext();        
 //        PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
@@ -898,7 +925,7 @@ public class SiteSearchServiceImpl implements SiteSearchService {
   public static class PageTitleDataCreator implements SearchDataCreator<String> {
 
     @Override
-    public String createData(Node node, Row row) {
+    public String createData(Node node, Row row, SearchResult searchResult) {
       try {
         UserACL userACL = WCMCoreUtils.getService(UserACL.class);
         if (node.hasProperty("gtn:access-permissions")) {
@@ -916,34 +943,6 @@ public class SiteSearchServiceImpl implements SiteSearchService {
       }
     }
     
-  }
-
-  @Override
-  public Map<?, Integer> getFoundNodes(String userId, String queryStatement) {
-    String key = new StringBuilder('(').append(userId).append(';').append(queryStatement).append(')').toString();
-    Map<?, Integer> ret = foundNodeCache.get(key);
-    if (ret == null) { 
-      ret = new HashMap<Integer, Integer>();
-      foundNodeCache.put(key, ret);
-    };
-    return ret;
-  }
-  
-  @Override
-  public Map<Integer, Integer> getDropNodes(String userId, String queryStatement) {
-    String key = new StringBuilder('(').append(userId).append(';').append(queryStatement).append(')').toString();
-    Map<Integer, Integer> ret = dropNodeCache.get(key);
-    if (ret == null) { 
-      ret = new HashMap<Integer, Integer>();
-      dropNodeCache.put(key, ret);
-    };
-    return ret;
-  }
-  
-  public void clearCache(String userId, String queryStatement) {
-    String key = new StringBuilder('(').append(userId).append(';').append(queryStatement).append(')').toString();
-    foundNodeCache.remove(key);
-    dropNodeCache.remove(key);
   }
   
 }

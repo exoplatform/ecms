@@ -32,6 +32,7 @@ import javax.jcr.query.Query;
 import javax.jcr.query.Row;
 
 import org.apache.commons.lang.StringUtils;
+import org.exoplatform.commons.api.search.data.SearchResult;
 import org.exoplatform.ecm.jcr.model.Preference;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.cms.documents.DocumentTypeService;
@@ -339,7 +340,7 @@ public class DocumentProviderUtils {
     }
     
     @Override
-    public NodeLinkAware createData(Node node, Row row) {
+    public NodeLinkAware createData(Node node, Row row, SearchResult searchResult) {
       try {
         return (NodeLinkAware)parent.getNode(StringUtils.substringAfterLast(node.getPath(), "/"));
       } catch (PathNotFoundException e) {

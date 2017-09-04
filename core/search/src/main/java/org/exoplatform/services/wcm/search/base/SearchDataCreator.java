@@ -16,6 +16,8 @@
  */
 package org.exoplatform.services.wcm.search.base;
 
+import org.exoplatform.commons.api.search.data.SearchResult;
+
 import javax.jcr.Node;
 import javax.jcr.query.Row;
 
@@ -27,6 +29,6 @@ import javax.jcr.query.Row;
  */
 public interface SearchDataCreator<E> {
   
-  public E createData(Node node, Row row);
+  public E createData(Node node, Row row, SearchResult searchResult);
 
 }

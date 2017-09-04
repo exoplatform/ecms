@@ -35,6 +35,7 @@ import javax.portlet.PortletPreferences;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.ws.commons.util.Base64;
+import org.exoplatform.commons.api.search.data.SearchResult;
 import org.exoplatform.commons.utils.PageList;
 import org.exoplatform.container.xml.PortalContainerInfo;
 import org.exoplatform.ecm.jcr.model.Preference;
@@ -97,7 +98,7 @@ public class UITreeExplorer extends UIContainer {
   private class TreeNodeDataCreater implements SearchDataCreator<TreeNode>{
 
     @Override
-    public TreeNode createData(Node node, Row row){
+    public TreeNode createData(Node node, Row row, SearchResult searchResult){
       try {
         return new TreeNode(node);
       } catch (RepositoryException e) {

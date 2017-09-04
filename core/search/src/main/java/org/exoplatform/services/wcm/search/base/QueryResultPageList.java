@@ -66,7 +66,6 @@ public class QueryResultPageList<E> extends AbstractPageList<E> {
   public QueryResultPageList(int pageSize, QueryData queryData, int total, int bufferSize,
                              NodeSearchFilter filter, SearchDataCreator creator) {
     super(pageSize);
-    setTotalNodes(total);
     queryData_ = queryData.clone();
     offset_ = (int)queryData.getOffset();
     bufferSize_ = bufferSize;
@@ -178,7 +177,7 @@ public class QueryResultPageList<E> extends AbstractPageList<E> {
           newNode = filter.filterNodeToDisplay(newNode);
         }
         if (newNode != null && searchDataCreator != null) {
-          E data = searchDataCreator.createData(newNode, newRow);
+          E data = searchDataCreator.createData(newNode, newRow, null);
           if (data != null && !dataSet.containsKey(data) && (found == null || !found.containsKey(data) || ((Integer)found.get(data)) >= page)) {
             buffer.add(data);
             dataSet.put(data, page);
@@ -193,12 +192,6 @@ public class QueryResultPageList<E> extends AbstractPageList<E> {
             if (position % getPageSize() == 0) { page++; }
           } else { if (drop.containsKey(page)) drop.put(page, drop.get(page) + 1); }
         } else if (newNode == null) { if (drop.containsKey(page)) drop.put(page, drop.get(page) + 1); }
-      }
-      if (count + offset_ > totalNodes) {
-        totalNodes = count + offset_;
-        int currentP = currentPage_;
-        setAvailablePage((int)totalNodes);
-        currentPage_ = currentP;
       }
       /* already query all data */
       if (size == prevSize) {

@@ -91,7 +91,7 @@ public class LazyPageList<E> extends PageList{
         NodeIterator iter = ret.getNodes();
         RowIterator rowIter = ret.getRows();
         while (iter.hasNext()) {
-          currentListPage_.add(dataCreator_.createData(iter.nextNode(), rowIter.nextRow()));
+          currentListPage_.add(dataCreator_.createData(iter.nextNode(), rowIter.nextRow(), null));
         }
       } catch (Exception e) {
         if (LOG.isErrorEnabled()) {

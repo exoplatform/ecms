@@ -56,10 +56,9 @@ public class ArrayNodePageList<E> extends AbstractPageList<E> {
   }
 
   /** Constructor */
-  public ArrayNodePageList(List<E> nodes, int pageSize) {
+  public ArrayNodePageList(List<E> results, int pageSize) {
     super(pageSize);
-    setTotalNodes(nodes.size());
-    dataList = nodes;
+    dataList = results;
     setAvailablePage(dataList.size());
     removeRedundantPages(dataList.size() / pageSize);
     currentListPage_ = null;
@@ -70,68 +69,20 @@ public class ArrayNodePageList<E> extends AbstractPageList<E> {
   public ArrayNodePageList(List<Node> nodes, int pageSize, 
                            NodeSearchFilter filter, SearchDataCreator<E> dataCreator) {
     super(pageSize, filter, dataCreator);
-    setTotalNodes(nodes.size());
-    dataList = new ArrayList<E>();
+    dataList = new ArrayList<>();
     try {
       for (Node node : nodes) {
         if (filter != null) {
           node = filter.filterNodeToDisplay(node);
         }
         if (searchDataCreator != null && node != null) { 
-          E data = searchDataCreator.createData(node, null);
+          E data = searchDataCreator.createData(node, null, null);
           if (data != null) {
             dataList.add(data);
           }
         }
       }
     } catch (Exception e) {
-      if (LOG.isWarnEnabled()) {
-        LOG.warn(e.getMessage());
-      }
-    }
-    setAvailablePage(dataList.size());
-    removeRedundantPages(dataList.size() / pageSize);
-    currentListPage_ = null;
-  }  
-  
-  /** Constructor */
-  public ArrayNodePageList(QueryResult queryResult, int pageSize, 
-                           NodeSearchFilter filter, SearchDataCreator<E> dataCreator, QueryData queryData) {
-    super(pageSize, filter, dataCreator);
-    dataList = new ArrayList<E>();
-    SiteSearchService siteSearchService = WCMCoreUtils.getService(SiteSearchService.class);
-    Map found = siteSearchService.getFoundNodes(ConversationState.getCurrent().getIdentity().getUserId(),
-                                                                queryData.getQueryStatement());
-    int offset = (int)queryData.getOffset();
-    int position = offset;
-    int page = (position)/getPageSize() + 1;    
-    try {
-      setTotalNodes(queryResult.getNodes().getSize());
-      NodeIterator nodeIterator = queryResult.getNodes();
-      RowIterator rowIterator = queryResult.getRows();
-      while (nodeIterator.hasNext()) {
-        Node node = nodeIterator.nextNode();
-//        if (page != prevPage) {
-//          prevPage = page;
-//        }
-        if (filter != null) {
-          node = filter.filterNodeToDisplay(node);
-        }
-        Row row = rowIterator.nextRow();
-        if (searchDataCreator != null && node != null) { 
-          E data = searchDataCreator.createData(node, row);
-          if (data != null && (found == null || !found.containsKey(data) || ((Integer)found.get(data)) >= page)) {
-            position++;
-            page = (position-1)/getPageSize() + 1;
-            dataList.add(data);
-            found.put(data, page);
-            // increase page number for the last item
-            if (position % getPageSize() == 0) { page++; }
-          }
-        }
-      }
-      dataList = removeDuplication(dataList);
-    } catch (RepositoryException e) {
       if (LOG.isWarnEnabled()) {
         LOG.warn(e.getMessage());
       }
@@ -153,7 +104,7 @@ public class ArrayNodePageList<E> extends AbstractPageList<E> {
 
   @Override
   protected void populateCurrentPage(int page) throws Exception {
-    currentListPage_ = new ArrayList<E>();
+    currentListPage_ = new ArrayList<>();
     int count = 0;
     if (dataList != null) {
         for(int i = ((page - 1)*this.getPageSize()); i < dataList.size(); i++) {
@@ -180,20 +131,6 @@ public class ArrayNodePageList<E> extends AbstractPageList<E> {
         }
       }
     }  
-  }
-  
-  private List<E> removeDuplication(List<E> srcList) {
-    List<E> ret = new ArrayList<E>();
-    Set<E> set = new HashSet<E>();
-    if (srcList != null) {
-      for (E elem : srcList) {
-        if (!set.contains(elem)) {
-          set.add(elem);
-          ret.add(elem);
-        }
-      }
-    }
-    return ret;
   }
 
   @Override
