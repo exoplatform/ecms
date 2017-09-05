@@ -1,3 +1,19 @@
+/* ADDING CLOUD ICON FONT */
+/**/
+@font-face {
+	font-family: 'icomoon';
+	src:  url('fonts/icomoon.eot?p3wb3b');
+	src:  url('fonts/icomoon.eot?p3wb3b#iefix') format('embedded-opentype'),
+	url('fonts/icomoon.ttf?p3wb3b') format('truetype'),
+	url('fonts/icomoon.woff?p3wb3b') format('woff'),
+	url('fonts/icomoon.svg?p3wb3b#icomoon') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+/**/
+/* END CLOUD ICON FONT */
+/**/
+
 /* Deprecated (not used) style for red badge on Refresh icon in ECMS explorer when drive has been changed */
 .uiCloudDriveChanges {
 	position: relative;
@@ -24,9 +40,10 @@
 }
 
 [class^="uiIconEcmsConnectDialog-"] {
-	width: 34px;
-	max-height:25px;
+	width: 24px;
+	max-height: 25px;
 	overflow: hidden;
+	margin-right: 5px;
 }
 
 [class^="uiIcon16x16CloudDrive-"], [class^="uiIcon24x24CloudDrive-"], [class^="uiIcon64x64CloudDrive-"] {
@@ -34,7 +51,19 @@
 }
 
 .uiIconEcmsViewSharing:before {
-	content: url("icons/clouddrive-logo-lightgray-14x14.png");
+	/* use !important to prevent issues with browser extensions that change fonts */
+	font-family: 'icomoon' !important;
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	content: "\e900";
 }
 
 .fileContent .content, .mediaContent .content #CloudFileViewer {
