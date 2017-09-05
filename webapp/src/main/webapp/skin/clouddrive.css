@@ -1,276 +1,372 @@
-.uiIconEcmsConnectGDrive {
-	height: 14px !important;
-	width: 14px !important;
+/* ADDING GDRIVE ICON FONT */
+/**/
+@font-face {
+    font-family: 'icomoon';
+    src: url('icons-font/icomoon.eot?7hmhfi');
+    src: url('icons-font/icomoon.eot?7hmhfi#iefix') format('embedded-opentype'),
+    url('icons-font/icomoon.ttf?7hmhfi') format('truetype'),
+    url('icons-font/icomoon.woff?7hmhfi') format('woff'),
+    url('icons-font/icomoon.svg?7hmhfi#icomoon') format('svg');
+    font-weight: normal;
+    font-style: normal;
 }
+
+/**/
+/* END GDRIVE ICON FONT */
+/**/
+
 .uiIconEcmsConnectGDrive:before {
-	content: url("icons/googledrive-gray-14x14.png");
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'icomoon' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    content: "\e901";
 }
 
 .uiIconEcmsConnectDialog-gdrive:before {
-	content: url("icons/googledrive-gray-24x24.png");
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'icomoon' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    content: "\e901";
+
+    color: #8e8e8e;
+    font-size: 20px;
 }
 
 .uiIcon16x16CloudFile-gdrive {
-	top: 2px;
+    top: 2px;
 }
+
 .uiIcon16x16CloudFile-gdrive:before {
-	content: url("icons/googledrive-gray-14x14.png");
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'icomoon' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    content: "\e901";
 }
 
 .uiIcon16x16CloudDrive-gdrive:before {
-	left: -15px;
-  top: 0px;
-	width: 16px;
-  height: 16px;
-  position: absolute !important;
-	-webkit-transform: scale(0.36);
-  -moz-transform: scale(0.36);
-  -o-transform: scale(0.36);
-  -ms-transform: scale(0.36);
-  transform: scale(0.36);
-	content: url("icons/googledrive-lightgray-16x16.png");
+    left: -15px;
+    top: 0px;
+    width: 16px;
+    height: 16px;
+    position: absolute !important;
+    -webkit-transform: scale(0.36);
+    -moz-transform: scale(0.36);
+    -o-transform: scale(0.36);
+    -ms-transform: scale(0.36);
+    transform: scale(0.36);
+    /
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'icomoon' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    content: "\e901";
 }
 
 .uiIcon24x24CloudDrive-gdrive:before {
-	left: 2px;
-  top: -21px;
-  width: 20px;
-  height: 20px;
-  position: relative !important;
-  display: inline-block;
-	-webkit-transform: scale(0.7);
-  -moz-transform: scale(0.7);
-  -o-transform: scale(0.7);
-  -ms-transform: scale(0.7);
-  transform: scale(0.7);
-  content: url("icons/googledrive-lightgray-16x16.png");
+    left: 2px;
+    top: -21px;
+    width: 20px;
+    height: 20px;
+    position: relative !important;
+    display: inline-block;
+    -webkit-transform: scale(0.7);
+    -moz-transform: scale(0.7);
+    -o-transform: scale(0.7);
+    -ms-transform: scale(0.7);
+    transform: scale(0.7);
+
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'icomoon' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    content: "\e901";
 }
 
 .uiIcon64x64CloudDrive-gdrive:before {
-	left: -50px;
-  top: 3px;
-	width: 40px;
-  height: 40px;
-  position: absolute !important;
-	-webkit-transform: scale(0.7);
-  -moz-transform: scale(0.7);
-  -o-transform: scale(0.7);
-  -ms-transform: scale(0.7);
-  transform: scale(0.7);
-  content: url("icons/googledrive-lightgray-32x32.png");
+    left: -50px;
+    top: 3px;
+    width: 40px;
+    height: 40px;
+    position: absolute !important;
+    -webkit-transform: scale(0.7);
+    -moz-transform: scale(0.7);
+    -o-transform: scale(0.7);
+    -ms-transform: scale(0.7);
+    transform: scale(0.7);
+
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'icomoon' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    content: "\e901";
 }
 
 /*
  * Responsive styles
  */
 @media (min-width: 481px) and (max-width: 1024px) {
-	.uiIcon16x16CloudDrive-gdrive:before {
-		left: -17px;
-		top: 2px;
-		-webkit-transform: scale(0.45);
-		-moz-transform: scale(0.45);
-		-o-transform: scale(0.45);
-		-ms-transform: scale(0.45);
-		transform: scale(0.45);
-	}
-	
-	.uiIcon24x24CloudDrive-gdrive:before {
-		left: 7px;
-	  top: -30px;
-	  -webkit-transform: scale(0.9);
-		-moz-transform: scale(0.9);
-		-o-transform: scale(0.9);
-		-ms-transform: scale(0.9);
-		transform: scale(0.9);
-	}
-	
-	.uiIcon64x64CloudDrive-gdrive:before {
-		left: -57px;
-    top: -5px;
-		-webkit-transform: scale(0.9);
-		-moz-transform: scale(0.9);
-		-o-transform: scale(0.9);
-		-ms-transform: scale(0.9);
-		transform: scale(0.9);
-	}
+    .uiIcon16x16CloudDrive-gdrive:before {
+        left: -17px;
+        top: 2px;
+        -webkit-transform: scale(0.45);
+        -moz-transform: scale(0.45);
+        -o-transform: scale(0.45);
+        -ms-transform: scale(0.45);
+        transform: scale(0.45);
+    }
+
+    .uiIcon24x24CloudDrive-gdrive:before {
+        left: 7px;
+        top: -30px;
+        -webkit-transform: scale(0.9);
+        -moz-transform: scale(0.9);
+        -o-transform: scale(0.9);
+        -ms-transform: scale(0.9);
+        transform: scale(0.9);
+    }
+
+    .uiIcon64x64CloudDrive-gdrive:before {
+        left: -57px;
+        top: -5px;
+        -webkit-transform: scale(0.9);
+        -moz-transform: scale(0.9);
+        -o-transform: scale(0.9);
+        -ms-transform: scale(0.9);
+        transform: scale(0.9);
+    }
 }
 
 /*************************** NodeType Icons for Google Drive documents ***********************/
 
 [class*="uiIcon16x16applicationvndgoogle-"] {
-  top: 1px;
+    top: 1px;
 }
 
 [class*="uiIcon24x24applicationvndgoogle-"] {
-	width: 32px;
-  height: 32px;
-  left: -4px;
-  -webkit-transform: scale(0.8);
-  -moz-transform: scale(0.8);
-  -o-transform: scale(0.8);
-  -ms-transform: scale(0.8);
-  transform: scale(0.8);
+    width: 32px;
+    height: 32px;
+    left: -4px;
+    -webkit-transform: scale(0.8);
+    -moz-transform: scale(0.8);
+    -o-transform: scale(0.8);
+    -ms-transform: scale(0.8);
+    transform: scale(0.8);
 }
 
 [class*="uiIcon64x64applicationvndgoogle-"] {
-	width: 128px;
-	height: 128px;
-	-webkit-transform: scale(0.5);
-  -moz-transform: scale(0.5);
-  -o-transform: scale(0.5);
-  -ms-transform: scale(0.5);
-  transform: scale(0.5);
+    width: 128px;
+    height: 128px;
+    -webkit-transform: scale(0.5);
+    -moz-transform: scale(0.5);
+    -o-transform: scale(0.5);
+    -ms-transform: scale(0.5);
+    transform: scale(0.5);
 }
 
 /* XXX workaround link "chain" location and size to look like others in eXo */
-[class*="uiIcon24x24applicationvndgoogle-"]>.LinkSmall, [class*="uiIcon16x16applicationvndgoogle-"]>.LinkSmall {
-  -webkit-transform: scale(1.4);
-  -moz-transform: scale(1.4);
-  -o-transform: scale(1.4);
-  -ms-transform: scale(1.4);
-  transform: scale(1.4);
+[class*="uiIcon24x24applicationvndgoogle-"] > .LinkSmall, [class*="uiIcon16x16applicationvndgoogle-"] > .LinkSmall {
+    -webkit-transform: scale(1.4);
+    -moz-transform: scale(1.4);
+    -o-transform: scale(1.4);
+    -ms-transform: scale(1.4);
+    transform: scale(1.4);
 }
-[class*="uiIcon64x64applicationvndgoogle-"]>.Link {
-	-webkit-transform: scale(2);
-  -moz-transform: scale(2);
-  -o-transform: scale(2);
-  -ms-transform: scale(2);
-  transform: scale(2);
-  right: -16px !important;
-}	
+
+[class*="uiIcon64x64applicationvndgoogle-"] > .Link {
+    -webkit-transform: scale(2);
+    -moz-transform: scale(2);
+    -o-transform: scale(2);
+    -ms-transform: scale(2);
+    transform: scale(2);
+    right: -16px !important;
+}
 
 .uiIcon16x16applicationvndgoogle-appspresentation:before {
-	content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_presentation_x16.png");
+    content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_presentation_x16.png");
 }
+
 .uiIcon24x24applicationvndgoogle-appspresentation:before {
-	/*https://ssl.gstatic.com/docs/doclist/images/icon_11_presentation_list.png*/
-  content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_presentation_x32.png");
+    /*https://ssl.gstatic.com/docs/doclist/images/icon_11_presentation_list.png*/
+    content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_presentation_x32.png");
 }
 
 .uiIcon64x64applicationvndgoogle-appspresentation:before {
-	content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_presentation_x128.png");
+    content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_presentation_x128.png");
 }
 
 .uiIcon16x16applicationvndgoogle-appsdocument:before {
-	content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_document_x16.png");
+    content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_document_x16.png");
 }
+
 .uiIcon24x24applicationvndgoogle-appsdocument:before {
-	content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_document_x32.png");
+    content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_document_x32.png");
 }
 
 .uiIcon64x64applicationvndgoogle-appsdocument::before {
-	content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_document_x128.png");
+    content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_document_x128.png");
 }
 
 .uiIcon16x16applicationvndgoogle-appsphoto:before {
-	content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_image_x16.png");
+    content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_image_x16.png");
 }
 
 .uiIcon24x24applicationvndgoogle-appsphoto:before {
-	content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_image_x32.png");
+    content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_image_x32.png");
 }
 
 .uiIcon64x64applicationvndgoogle-appsphoto:before {
-	content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_image_x128.png");
+    content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_image_x128.png");
 }
 
 .uiIcon16x16applicationvndgoogle-appsscript:before {
-	content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_script_x16.png");
+    content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_script_x16.png");
 }
 
 .uiIcon24x24applicationvndgoogle-appsscript:before {
-	content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_script_x32.png");
+    content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_script_x32.png");
 }
 
 .uiIcon64x64applicationvndgoogle-appsscript:before {
-	content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_script_x128.png");
+    content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_script_x128.png");
 }
 
 .uiIcon16x16applicationvndgoogle-appsspreadsheet:before {
-	content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_spreadsheet_x16.png");
+    content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_spreadsheet_x16.png");
 }
 
 .uiIcon24x24applicationvndgoogle-appsspreadsheet:before {
-	/*https://ssl.gstatic.com/docs/doclist/images/icon_11_spreadsheet_list.png*/
-	content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_spreadsheet_x32.png");
+    /*https://ssl.gstatic.com/docs/doclist/images/icon_11_spreadsheet_list.png*/
+    content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_spreadsheet_x32.png");
 }
 
 .uiIcon64x64applicationvndgoogle-appsspreadsheet:before {
-	content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_spreadsheet_x128.png");
+    content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_spreadsheet_x128.png");
 }
 
 .uiIcon16x16applicationvndgoogle-appsvideo:before {
-	content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_video_x16.png");
+    content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_video_x16.png");
 }
 
 .uiIcon24x24applicationvndgoogle-appsvideo:before {
-	content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_video_x32.png");
+    content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_video_x32.png");
 }
 
 .uiIcon64x64applicationvndgoogle-appsvideo:before {
-	content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_video_x128.png");
+    content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_video_x128.png");
 }
 
 .uiIcon16x16applicationvndgoogle-appsaudio:before {
-	content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_audio_x16.png");
+    content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_audio_x16.png");
 }
 
 .uiIcon24x24applicationvndgoogle-appsaudio:before {
-	content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_audio_x32.png");
+    content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_audio_x32.png");
 }
 
 .uiIcon64x64applicationvndgoogle-appsaudio:before {
-	content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_audio_x128.png");
+    content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_audio_x128.png");
 }
 
 .uiIcon16x16applicationvndgoogle-appsdrawing:before {
-	content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_drawing_x16.png");
+    content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_drawing_x16.png");
 }
 
 .uiIcon24x24applicationvndgoogle-appsdrawing:before {
-	content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_drawing_x32.png");
+    content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_drawing_x32.png");
 }
 
 .uiIcon64x64applicationvndgoogle-appsdrawing:before {
-	content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_drawing_x128.png");
+    content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_drawing_x128.png");
 }
 
 .uiIcon16x16applicationvndgoogle-appsform:before {
-	content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_2_form_x16.png");
+    content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_2_form_x16.png");
 }
 
 .uiIcon24x24applicationvndgoogle-appsform:before {
-	/* https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_form_x32.png */
-	/* https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_2_form_x32.png */
-	/* https://ssl.gstatic.com/docs/doclist/images/icon_11_form_list.png */
-	content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_2_form_x32.png");
+    /* https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_form_x32.png */
+    /* https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_2_form_x32.png */
+    /* https://ssl.gstatic.com/docs/doclist/images/icon_11_form_list.png */
+    content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_2_form_x32.png");
 }
 
 .uiIcon64x64applicationvndgoogle-appsform:before {
-	content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_2_form_x128.png");
+    content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_2_form_x128.png");
 }
-	
+
 .uiIcon16x16applicationvndgoogle-appsmap:before {
-	content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_map_x16.png");
+    content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_map_x16.png");
 }
-	
+
 .uiIcon24x24applicationvndgoogle-appsmap:before {
-	content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_map_x32.png");
+    content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_map_x32.png");
 }
 
 .uiIcon64x64applicationvndgoogle-appsmap:before {
-	content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_map_x128.png");
+    content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_map_x128.png");
 }
 
 .uiIcon16x16applicationvndgoogle-appsunknown:before, .uiIcon16x16applicationvndgoogle-appsfile:before {
-	content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_2_generic_x16.png");
+    content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_2_generic_x16.png");
 }
 
 .uiIcon24x24applicationvndgoogle-appsunknown:before, .uiIcon24x24applicationvndgoogle-appsfile:before {
-	content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_2_generic_x32.png");
+    content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_2_generic_x32.png");
 }
 
-.uiIcon64x64applicationvndgoogle-appsunknown:before,.uiIcon64x64applicationvndgoogle-appsfile:before {
-	content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_2_generic_x128.png");
+.uiIcon64x64applicationvndgoogle-appsunknown:before, .uiIcon64x64applicationvndgoogle-appsfile:before {
+    content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_2_generic_x128.png");
 }
 
