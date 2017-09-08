@@ -12,16 +12,16 @@
 <div class="uiContentBox">
   <div class="tagContainer"> 
         <%
-          def tagStyle = uicomponent.getTagStyle() ; 
           for(tag in uicomponent.getPublicTagLink()){
-            String tagLink = uicomponent.event('ViewTag',tag.getPath()) ;
+            String tagLink = uicomponent.event('ViewTag',tag.getPath());
+            boolean selected = uicomponent.isTagSelected(tag.getPath());
+            String tagClass = selected ? "selected" : "";
             int tagCount = 0;
             String style = "";
             if(tag.hasProperty("exo:total")) {
-              tagCount = (int)tag.getProperty("exo:total").getValue().getLong();
-              style = "Style = '" + uicomponent.getTagHtmlStyle(tagStyle, tagCount)+ "'";
+              style = "Style = '" + uicomponent.getTagHtmlStyle(tag)+ "'";
             }
-            println "<a href=\"$tagLink\" $style>$tag.name</a>" ;
+            println "<div class=\"$tagClass\" onclick=\"$tagLink\" $style>$tag.name</div>" ;
           }
         %>
   </div>

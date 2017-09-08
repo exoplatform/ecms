@@ -17,6 +17,7 @@
 package org.exoplatform.ecm.webui.component.explorer.popup.actions;
 
 import org.exoplatform.ecm.jcr.model.Preference;
+import org.exoplatform.ecm.webui.component.explorer.UIDocumentInfo;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.sidebar.UISideBar;
 import org.exoplatform.ecm.webui.component.explorer.sidebar.UITagExplorer;
@@ -136,13 +137,17 @@ public class UIEditingTagsForm extends UIContainer implements UIPopupComponent {
       String selectedName = event.getRequestContext().getRequestParameter(OBJECTID);
       removeTagFromNode(WCMCoreUtils.getRemoteUser(), uiExplorer.getTagScope(), selectedName, uiEdit);
       uiEdit.getChild(UIEditingTagList.class).updateGrid();
-      uiExplorer.setTagPath(uiExplorer.getCurrentPath());
       Preference preferences = uiExplorer.getPreference();
       if (preferences.isShowSideBar()) {
         UISideBar uiSideBar = uiExplorer.findFirstComponentOfType(UISideBar.class);
         event.getRequestContext().addUIComponentToUpdateByAjax(uiSideBar);
+        UIDocumentInfo uiDocumentInfo = uiExplorer.findFirstComponentOfType(UIDocumentInfo.class);
+        if (uiDocumentInfo != null) {
+          uiDocumentInfo.updatePageListData();
+          uiExplorer.refreshExplorer();
+        }
       }
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiEdit);
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiExplorer);
     }
 
     public void removeTagFromNode(String userID, int scope, String tagName, UIEditingTagsForm uiForm) throws Exception {
@@ -163,7 +168,9 @@ public class UIEditingTagsForm extends UIContainer implements UIPopupComponent {
         tagPath = newFolksonomyService.getDataDistributionType().getDataNode(userFolksonomyNode, tagName).getPath();
         newFolksonomyService.removeTag(tagPath, workspace);
       }
-      uiForm.getAncestorOfType(UIJCRExplorer.class).findFirstComponentOfType(UITagExplorer.class).updateTagList();
+      UIJCRExplorer uiExplorer = uiForm.getAncestorOfType(UIJCRExplorer.class);
+      uiExplorer.removeTagPath(tagPath);
+      uiExplorer.findFirstComponentOfType(UITagExplorer.class).updateTagList();
     }
 
     private Node getUserFolksonomyFolder(String userName, UIEditingTagsForm uiForm) throws Exception {

@@ -903,14 +903,14 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
     int nodesPerPage = pref.getNodesPerPage();
     List<Node> nodeList = new ArrayList<Node>();
 
-    if(!uiExplorer.isViewTag()) {
+    if (uiExplorer.isViewTag() && uiExplorer.getTagPaths() != null && !uiExplorer.getTagPaths().isEmpty()) {
+      nodeList = uiExplorer.getDocumentByTag();
+    } else {
       Set<String> allItemByTypeFilterMap = uiExplorer.getAllItemByTypeFilterMap();
       if (allItemByTypeFilterMap.size() > 0)
         nodeList = filterNodeList(uiExplorer.getChildrenList(path, !pref.isShowPreferenceDocuments()));
       else
         nodeList = filterNodeList(uiExplorer.getChildrenList(path, pref.isShowPreferenceDocuments()));
-    } else { // if (uiExplorer.isViewTag())
-      nodeList = uiExplorer.getDocumentByTag();
     }
 
     ListAccess<Object> nodeAccList = new ListAccessImpl<Object>(Object.class,

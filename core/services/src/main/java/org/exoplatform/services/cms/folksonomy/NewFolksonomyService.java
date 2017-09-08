@@ -17,6 +17,7 @@
 package org.exoplatform.services.cms.folksonomy;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.jcr.Node;
 
@@ -165,6 +166,23 @@ public interface NewFolksonomyService {
    * @throws Exception The exception
    */
   public List<Node> getAllSiteTags(String siteName, String workspace) throws Exception;
+
+  /**
+   * Gets all documents which are marked with given tags and that are located in a selected path.
+   * 
+   * @param selectedPath Parent path to filter nodes
+   * @param tagPaths list of tags JCR paths
+   * @param workspace the workspace of resulted nodes
+   * @param sessionProvider use session provider to query JCR
+   * 
+   * @return the filtered {@link List} of {@link Node}
+   * 
+   * @throws Exception
+   */
+  List<Node> getAllDocumentsByTagsAndPath(String selectedPath,
+                                           Set<String> tagPaths,
+                                           String workspace,
+                                           SessionProvider sessionProvider) throws Exception;
 
   /**
    * Gets all documents which are marked with a given tag.
@@ -364,5 +382,5 @@ public interface NewFolksonomyService {
    * @return The type of data distribution.
    */
   public DataDistributionType getDataDistributionType();
-    
+
 }

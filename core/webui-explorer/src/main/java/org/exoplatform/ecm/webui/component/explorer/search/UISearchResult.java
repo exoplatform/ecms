@@ -22,13 +22,16 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 
 import javax.jcr.AccessDeniedException;
 import javax.jcr.Item;
 import javax.jcr.ItemNotFoundException;
 import javax.jcr.Node;
+import javax.jcr.NodeIterator;
 import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
@@ -36,24 +39,29 @@ import javax.jcr.query.Query;
 import javax.jcr.query.QueryManager;
 import javax.jcr.query.QueryResult;
 import javax.jcr.query.Row;
-import org.exoplatform.ecm.jcr.model.Preference;
 
 import org.apache.commons.lang.StringUtils;
+
+import org.exoplatform.ecm.jcr.model.Preference;
 import org.exoplatform.ecm.webui.component.explorer.UIDocumentContainer;
 import org.exoplatform.ecm.webui.component.explorer.UIDocumentWorkspace;
 import org.exoplatform.ecm.webui.component.explorer.UIDrivesArea;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
+import org.exoplatform.ecm.webui.component.explorer.sidebar.UISideBar;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.portal.webui.workspace.UIPortalApplication;
 import org.exoplatform.services.cms.BasePath;
+import org.exoplatform.services.cms.folksonomy.NewFolksonomyService;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.link.LinkUtils;
 import org.exoplatform.services.cms.link.NodeFinder;
 import org.exoplatform.services.cms.taxonomy.TaxonomyService;
 import org.exoplatform.services.cms.templates.TemplateService;
+import org.exoplatform.services.jcr.RepositoryService;
+import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.jcr.impl.core.JCRPath;
 import org.exoplatform.services.jcr.impl.core.SessionImpl;
@@ -172,15 +180,23 @@ public class UISearchResult extends UIContainer {
   public void updateGrid() throws Exception {
     TemplateService templateService = WCMCoreUtils.getService(TemplateService.class);
     List<String> documentList = templateService.getDocumentTemplates();
-     pageList =
-      PageListFactory.createPageList(queryData_.getQueryStatement(),
-                             queryData_.getWorkSpace(),
-                             queryData_.getLanguage_(),
-                             queryData_.isSystemSession(),
-                             new NodeFilter(categoryPathList, keyword, documentList),
-                             new RowDataCreator(),
-                             PAGE_SIZE,
-                             0);
+    UIJCRExplorer uiExplorer = getAncestorOfType(UIJCRExplorer.class);
+    UISideBar uiSideBar = uiExplorer.findFirstComponentOfType(UISideBar.class);
+
+    Set<String> tagPathsUsedInSearch = null;
+    if (uiSideBar != null && uiSideBar.isRendered()
+        && StringUtils.equals(uiSideBar.getSelectedComp(), UISideBar.UI_TAG_EXPLORER)) {
+      tagPathsUsedInSearch = uiExplorer.getTagPaths();
+    }
+
+    pageList = PageListFactory.createPageList(queryData_.getQueryStatement(),
+                                              queryData_.getWorkSpace(),
+                                              queryData_.getLanguage_(),
+                                              queryData_.isSystemSession(),
+                                              new NodeFilter(categoryPathList, tagPathsUsedInSearch, keyword, documentList),
+                                              new RowDataCreator(),
+                                              PAGE_SIZE,
+                                              0);
     uiPageIterator_.setPageList(pageList);
   }
 
@@ -378,8 +394,11 @@ public class UISearchResult extends UIContainer {
   public static class NodeFilter implements NodeSearchFilter {
 
     private List<String> categoryPathList;
+    private Set<String> tagPaths;
     private TaxonomyService taxonomyService;
     private NodeHierarchyCreator nodeHierarchyCreator;
+    private RepositoryService repositoryService;
+    private NewFolksonomyService folksonomyService;
     private String rootTreePath;
     private LinkManager linkManager = null;
     private String keyword ="";
@@ -393,6 +412,18 @@ public class UISearchResult extends UIContainer {
     final static private String  CHECK_LINK_MATCH_QUERY2 = "select * from nt:base where jcr:path like '$0/%' "
                                                              + "and ( contains(*, '$1') or lower(exo:name) like '%$2%' "
                                                              + "or lower(exo:title) like '%$2%')";
+    public NodeFilter(List<String> categories, Set<String> tagPaths, String keyword, List<String> documentTypes) {
+      taxonomyService = WCMCoreUtils.getService(TaxonomyService.class);
+      nodeHierarchyCreator = WCMCoreUtils.getService(NodeHierarchyCreator.class);
+      linkManager = WCMCoreUtils.getService(LinkManager.class);
+      repositoryService = WCMCoreUtils.getService(RepositoryService.class);
+      folksonomyService = WCMCoreUtils.getService(NewFolksonomyService.class);
+      rootTreePath = nodeHierarchyCreator.getJcrPath(BasePath.TAXONOMIES_TREE_STORAGE_PATH);
+      categoryPathList = categories;
+      this.tagPaths = tagPaths;
+      this.keyword = keyword;
+      this.documentTypes = documentTypes;
+    }
 
     public NodeFilter(List<String> categories, String keyword, List<String> documentTypes) {
       taxonomyService = WCMCoreUtils.getService(TaxonomyService.class);
@@ -407,6 +438,29 @@ public class UISearchResult extends UIContainer {
       try {
         if (node == null || node.getPath().contains("/jcr:system/")) return null;
         if (node != null) {
+          if ((tagPaths != null) && (tagPaths.size() > 0)) {
+            ManageableRepository repository = repositoryService.getCurrentRepository();
+            String workspaceName = repository.getConfiguration().getDefaultWorkspaceName();
+            if (node.isNodeType(Utils.EXO_SYMLINK)
+                || ((Node) node.getAncestor(1)).isNodeType(NodetypeConstant.EXO_TRASH_FOLDER)) {
+              return null;
+            } else {
+              for (String tagPath : tagPaths) {
+                List<Node> taggedDocuments = folksonomyService.getAllDocumentsByTag(tagPath,
+                                                                                    workspaceName,
+                                                                                    WCMCoreUtils.getUserSessionProvider());
+                boolean nodeExistsInTag = false;
+                Iterator<Node> nodesIterator = taggedDocuments.iterator();
+                while (nodesIterator.hasNext() && !nodeExistsInTag) {
+                  Node taggedNode = nodesIterator.next();
+                  nodeExistsInTag = taggedNode.isSame(node);
+                }
+                if (!nodeExistsInTag) {
+                  return null;
+                }
+              }
+            }
+          }
           if ((categoryPathList != null) && (categoryPathList.size() > 0)){
             for (String categoryPath : categoryPathList) {
               int index = categoryPath.indexOf("/");
@@ -448,13 +502,12 @@ public class UISearchResult extends UIContainer {
             }
           }
         }
-      } catch (RepositoryException e) {
-        if (LOG.isWarnEnabled()) {
+      } catch (Exception e) {
           LOG.warn(e.getMessage());
-        }
       }
       return null;
     }
+
     /**
      * Check a symlink/taxonomylink if its target matches with keyword for searching ...link
      * @param symlinkNode
