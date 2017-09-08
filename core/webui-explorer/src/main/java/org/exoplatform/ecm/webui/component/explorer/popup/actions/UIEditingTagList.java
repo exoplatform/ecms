@@ -66,9 +66,12 @@ public class UIEditingTagList extends UIGrid {
                       newFolksonomyService.getAllPrivateTags(WCMCoreUtils.getRemoteUser()) :
                       newFolksonomyService.getAllPublicTags(publicTagNodePath, workspace);
     List<TagData> tagDataList = new ArrayList<TagData>();
+    List<String> tagPaths = new ArrayList<String>();
     for (Node tag : tags) {
       tagDataList.add(new TagData(tag.getName()));
+      tagPaths.add(tag.getPath());
     }
+    uiExplorer.getTagPaths().retainAll(tagPaths);
 
     ListAccess<TagData> tagList = new ListAccessImpl<TagData>(TagData.class, tagDataList);
     LazyPageList<TagData> dataPageList = new LazyPageList<TagData>(tagList, 10);

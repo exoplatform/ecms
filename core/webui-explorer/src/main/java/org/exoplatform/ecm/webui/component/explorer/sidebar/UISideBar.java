@@ -58,6 +58,8 @@ import org.exoplatform.webui.ext.manager.UIAbstractManagerComponent;
     }
 )
 public class UISideBar extends UIContainer {
+  public static final String UI_TAG_EXPLORER = "TagExplorer";
+
   private String                           currentComp;
 
   private static final Log                 LOG            = ExoLogger.getLogger(UISideBar.class.getName());
@@ -141,7 +143,7 @@ public class UISideBar extends UIContainer {
       selectedComp = "Explorer";
     }
     if (isHideExplorerPanel() && "Explorer".equals(selectedComp)) {
-      selectedComp = "TagExplorer";
+      selectedComp = UI_TAG_EXPLORER;
     }
     return selectedComp;
   }

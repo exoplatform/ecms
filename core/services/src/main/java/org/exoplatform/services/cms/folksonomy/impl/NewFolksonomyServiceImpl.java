@@ -21,11 +21,12 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeSet;
-import java.util.Map.Entry;
 
 import javax.jcr.ItemExistsException;
 import javax.jcr.ItemNotFoundException;
@@ -38,8 +39,13 @@ import javax.jcr.query.Query;
 import javax.jcr.query.QueryManager;
 import javax.jcr.query.QueryResult;
 
+import org.apache.commons.lang.StringUtils;
+import org.picocontainer.Startable;
+
 import org.exoplatform.container.component.ComponentPlugin;
 import org.exoplatform.container.xml.InitParams;
+import org.exoplatform.services.cache.CacheService;
+import org.exoplatform.services.cache.ExoCache;
 import org.exoplatform.services.cms.folksonomy.NewFolksonomyService;
 import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
 import org.exoplatform.services.cms.link.LinkManager;
@@ -55,9 +61,6 @@ import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
-import org.picocontainer.Startable;
-import org.exoplatform.services.cache.CacheService;
-import org.exoplatform.services.cache.ExoCache;
 /**
  * Created by The eXo Platform SARL
  * Author : Dang Van Minh
@@ -302,11 +305,89 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
   /**
    * {@inheritDoc}
    */
+  @Override
+  public List<Node> getAllDocumentsByTagsAndPath(String selectedPath,
+                                                  Set<String> tagPaths,
+                                                  String workspace,
+                                                 SessionProvider sessionProvider) throws Exception {
+    if (StringUtils.isBlank(selectedPath)) {
+      throw new IllegalArgumentException("Parent path is empty");
+    }
+    if (tagPaths == null || tagPaths.isEmpty()) {
+      throw new IllegalArgumentException("Tags is empty");
+    }
+    // The Parent Node must ends with '/' and the original selected node path
+    // without '/'
+    String selectedParentPath = selectedPath;
+    if (selectedPath.endsWith("/")) {
+      selectedPath = selectedPath.substring(0, selectedPath.length() - 1);
+    } else {
+      selectedParentPath += "/";
+    }
+
+    List<Node> ret = new ArrayList<Node>();
+    Set<String> nodesPaths = new HashSet<>();
+    boolean firstSearch = true;
+    Iterator<String> tagPathsIterator = tagPaths.iterator();
+    while (tagPathsIterator.hasNext()) {
+      String tagPath = (String) tagPathsIterator.next();
+      Node tagNode = getNode(workspace, tagPath, sessionProvider);
+      if (tagNode == null) {
+        tagPathsIterator.remove();
+        continue;
+      }
+      NodeIterator nodeIter = tagNode.getNodes();
+
+      Set<String> singleTagNodesPaths = new HashSet<>();
+      while (nodeIter.hasNext()) {
+        Node node = nodeIter.nextNode();
+        if (linkManager.isLink(node)) {
+          Node targetNode = null;
+          try {
+            targetNode = linkManager.getTarget(node);
+          } catch (Exception e) {
+            if (LOG.isWarnEnabled()) {
+              LOG.warn(e.getMessage());
+            }
+          }
+          if (targetNode != null && !((Node) targetNode.getAncestor(1)).isNodeType(EXO_TRASH_FOLDER)
+              && targetNode.getSession().getWorkspace().getName().equals(workspace)
+              && (targetNode.getPath().equals(selectedPath) || targetNode.getPath().startsWith(selectedParentPath))) {
+            if (firstSearch) {
+              ret.add(targetNode);
+            }
+            singleTagNodesPaths.add(targetNode.getPath());
+          }
+        }
+      }
+      if (firstSearch) {
+        nodesPaths.addAll(singleTagNodesPaths);
+      } else {
+        nodesPaths.retainAll(singleTagNodesPaths);
+      }
+      firstSearch = false;
+    }
+    Iterator<Node> nodesIterator = ret.iterator();
+    while (nodesIterator.hasNext()) {
+      Node node = nodesIterator.next();
+      if (!nodesPaths.contains(node.getPath())) {
+        nodesIterator.remove();
+      }
+    }
+    return ret;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
   public List<Node> getAllDocumentsByTag(String tagPath,
                                          String workspace,
                                          SessionProvider sessionProvider) throws Exception {
     List<Node> ret = new ArrayList<Node>();
     Node tagNode = getNode(workspace, tagPath, sessionProvider);
+    if (tagNode == null) {
+      return Collections.emptyList();
+    }
     NodeIterator nodeIter = tagNode.getNodes();
 
     while (nodeIter.hasNext()) {
@@ -697,16 +778,14 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
   }
 
   private Node getNode(String workspace, String path) throws Exception {
-    ManageableRepository manageableRepository = WCMCoreUtils.getRepository();
-
-    SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
-    return (Node) sessionProvider.getSession(workspace, manageableRepository).getItem(path);
+    return getNode(workspace, path, WCMCoreUtils.getSystemSessionProvider());
   }
 
   private Node getNode(String workspace, String path, SessionProvider sessionProvider) throws Exception {
     ManageableRepository manageableRepository = WCMCoreUtils.getRepository();
+    Session session = sessionProvider.getSession(workspace, manageableRepository);
 
-    return (Node) sessionProvider.getSession(workspace, manageableRepository).getItem(path);
+    return session.itemExists(path) ? ((Node) session.getItem(path)) : null;
   }
 
   private boolean existSymlink(Node parentNode, Node targetNode) throws Exception {

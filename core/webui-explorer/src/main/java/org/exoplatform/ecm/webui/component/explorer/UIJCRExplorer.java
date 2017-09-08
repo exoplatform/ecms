@@ -106,7 +106,7 @@ public class UIJCRExplorer extends UIContainer {
   private String currentDriveRepositoryName_ ;
   private String documentInfoTemplate_ ;
   private String language_ ;
-  private String tagPath_ ;
+  private Set<String> tagPaths_ = new HashSet<>();
   private String referenceWorkspace_ ;
 
   private boolean isViewTag_;
@@ -795,6 +795,10 @@ public class UIJCRExplorer extends UIContainer {
     currentPath_ = currentPath;
   }
 
+  public void clearTagSelection() {
+    tagPaths_.clear();
+  }
+
   public String rewind() { return nodesHistory_.removeLast() ; }
 
   public String previousWsName() { return wsHistory_.removeLast(); }
@@ -1094,9 +1098,25 @@ public class UIJCRExplorer extends UIContainer {
     return node;
   }
 
-  public void setTagPath(String tagPath) { tagPath_ = tagPath ; }
+  public void setTagPath(String tagPath) {
+    if (tagPaths_.contains(tagPath)) {
+      tagPaths_.remove(tagPath);
+    } else {
+      tagPaths_.add(tagPath);
+    }
+  }
 
-  public String getTagPath() { return tagPath_ ; }
+  public Set<String> getTagPaths() {
+    return tagPaths_;
+  }
+
+  public String getTagPath() {
+    return tagPaths_.size() == 0 ? null : tagPaths_.iterator().next();
+  }
+
+  public void removeTagPath(String tagPath) {
+    tagPaths_.remove(tagPath);
+  }
 
   public List<Node> getDocumentByTag()throws Exception {
     NewFolksonomyService newFolksonomyService = getApplicationComponent(NewFolksonomyService.class) ;
@@ -1107,9 +1127,11 @@ public class UIJCRExplorer extends UIContainer {
     SessionProvider sessionProvider = (ctx.getRemoteUser() == null) ?
                                                                      WCMCoreUtils.createAnonimProvider() :
                                                                        WCMCoreUtils.getUserSessionProvider();
-                                                                     for (Node node : newFolksonomyService.getAllDocumentsByTag(tagPath_,
-                                                                                                                                getRepository().getConfiguration().getDefaultWorkspaceName(),
-                                                                                                                                sessionProvider)) {
+                                                                     
+                                                                     for (Node node : newFolksonomyService.getAllDocumentsByTagsAndPath(getCurrentPath(),
+                                                                                                                                         tagPaths_,
+                                                                                                                                         getRepository().getConfiguration().getDefaultWorkspaceName(),
+                                                                                                                                         sessionProvider)) {
                                                                        if (documentsType.contains(node.getPrimaryNodeType().getName())
                                                                            && PermissionUtil.canRead(node)) {
                                                                          documentsOnTag.add(node);
@@ -1118,7 +1140,12 @@ public class UIJCRExplorer extends UIContainer {
                                                                      return documentsOnTag ;
   }
 
-  public void setIsViewTag(boolean isViewTag) { isViewTag_ = isViewTag ; }
+  public void setIsViewTag(boolean isViewTag) {
+    isViewTag_ = isViewTag;
+    if (!isViewTag_) {
+      tagPaths_.clear();
+    }
+  }
 
   public boolean isViewTag() { return isViewTag_ ; }
 

@@ -20,8 +20,13 @@ import org.apache.commons.lang.StringUtils;
 import org.exoplatform.commons.utils.LazyPageList;
 import org.exoplatform.commons.utils.ListAccess;
 import org.exoplatform.commons.utils.ListAccessImpl;
+import org.exoplatform.ecm.webui.component.explorer.UIDocumentContainer;
+import org.exoplatform.ecm.webui.component.explorer.UIDocumentWorkspace;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
+import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
+import org.exoplatform.ecm.webui.component.explorer.control.UIAddressBar;
 import org.exoplatform.ecm.webui.component.explorer.popup.actions.UIEditingTagsForm;
+import org.exoplatform.ecm.webui.component.explorer.search.UISearchResult;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.cms.folksonomy.NewFolksonomyService;
 import org.exoplatform.services.cms.impl.DMSConfiguration;
@@ -46,6 +51,7 @@ import javax.jcr.PathNotFoundException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.StringTokenizer;
 import java.util.Map.Entry;
 
 /**
@@ -103,10 +109,31 @@ public class UITagExplorer extends UIContainer {
     return tagStyle ;
   }
 
-  public String getTagHtmlStyle(Map<String, String> tagStyles, int tagCount) throws Exception {
-    for (Entry<String, String> entry : tagStyles.entrySet()) {
-      if (checkTagRate(tagCount, entry.getKey()))
-        return entry.getValue();
+  public String inverseBGColorByFontColor(String tagStyle) {
+    StringBuilder result = new StringBuilder();
+    StringTokenizer stringTokenizer = new StringTokenizer(tagStyle, ":|;", true);
+    while (stringTokenizer.hasMoreTokens()) {
+      String token = stringTokenizer.nextToken().trim();
+      if (token.equals("color")) {
+        token = "background-color";
+      } else if (token.equals("background-color")) {
+        token = "color";
+      }
+      result.append(token);
+    }
+    return result.toString();
+  }
+
+  public String getTagHtmlStyle(Node tag) throws Exception {
+    int tagCount = (int)tag.getProperty("exo:total").getValue().getLong();
+    for (Entry<String, String> entry : getTagStyle().entrySet()) {
+      if (checkTagRate(tagCount, entry.getKey())) {
+        String tagStyle = entry.getValue();
+        if(isTagSelected(tag.getPath())) {
+          tagStyle = inverseBGColorByFontColor(tagStyle);
+        }
+        return tagStyle;
+      }
     }
     return "";
   }
@@ -134,6 +161,11 @@ public class UITagExplorer extends UIContainer {
                       NodeLocation.getLocationsByNodeList(folksonomyService.getAllPublicTags(publicTagNodePath, workspace)));
     LazyPageList<NodeLocation> publicPageList = new LazyPageList<NodeLocation>(publicTagList, TAG_PAGE_SIZE);
     publicTagPageIterator_.setPageList(publicPageList);   
+  }
+
+  public boolean isTagSelected(String tagPath) {
+    UIJCRExplorer uiExplorer = getAncestorOfType(UIJCRExplorer.class) ;
+    return uiExplorer.getTagPaths().contains(tagPath);
   }
 
   /**
@@ -177,15 +209,26 @@ public class UITagExplorer extends UIContainer {
       UITagExplorer uiTagExplorer = event.getSource() ;
       UIApplication uiApp = uiTagExplorer.getAncestorOfType(UIApplication.class);
       String tagPath = event.getRequestContext().getRequestParameter(OBJECTID) ;
-      UIJCRExplorer uiExplorer = uiTagExplorer.getAncestorOfType(UIJCRExplorer.class) ;
-      uiExplorer.setSelectRootNode();
+      UIJCRExplorer uiExplorer = uiTagExplorer.getAncestorOfType(UIJCRExplorer.class);
       uiExplorer.setTagPath(tagPath);
-      uiExplorer.setIsViewTag(true);
-      try {
-        uiExplorer.updateAjax(event);
-      } catch(PathNotFoundException pne) {
-      	uiApp.addMessage(new ApplicationMessage("UITaggingForm.msg.path-not-found", null, ApplicationMessage.WARNING)) ;
-      	return;
+      UIWorkingArea uiWorkingArea = uiExplorer.getChild(UIWorkingArea.class);
+      UIDocumentContainer uiDocumentContainer = uiExplorer.findFirstComponentOfType(UIDocumentContainer.class);
+      if(uiDocumentContainer.isDocumentNode()) {
+        Node currentNode = uiExplorer.getCurrentNode();
+        uiExplorer.setSelectNode(currentNode.getParent().getPath());
+      }
+      UIDocumentWorkspace uiDocumentWorkspace = uiWorkingArea.getChild(UIDocumentWorkspace.class);
+      UISearchResult uiSearchResult = uiDocumentWorkspace.getChildById(UIDocumentWorkspace.SIMPLE_SEARCH_RESULT);
+      if(uiSearchResult != null && uiSearchResult.isRendered()) {
+        uiSearchResult.updateGrid();
+      } else {
+        uiExplorer.setIsViewTag(uiExplorer.getTagPaths() != null && !uiExplorer.getTagPaths().isEmpty());
+        try {
+          uiExplorer.updateAjax(event);
+        } catch(PathNotFoundException pne) {
+          uiApp.addMessage(new ApplicationMessage("UITaggingForm.msg.path-not-found", null, ApplicationMessage.WARNING)) ;
+          return;
+        }
       }
     }
   }

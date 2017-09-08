@@ -133,7 +133,10 @@ public class UITagForm extends UIForm {
             //always public tags
             String publicTagNodePath = nodeHierarchyCreator.getJcrPath(PUBLIC_TAG_NODE_PATH);
             Node newTagNode = newFolksonomyService.modifyPublicTagName(uiForm.oldTagPath_, tagName, workspace, publicTagNodePath);
-            uiExplorer.setTagPath(newTagNode.getPath());
+            if (uiExplorer.getTagPaths().contains(uiForm.oldTagPath_)) {
+              uiExplorer.removeTagPath(uiForm.oldTagPath_);
+              uiExplorer.setTagPath(newTagNode.getPath());
+            }
 //            }            
           } else if (!tagName.equals(uiForm.oldName_)) {
             uiApp.addMessage(new ApplicationMessage("UITagForm.msg.NameAlreadyExist", null,

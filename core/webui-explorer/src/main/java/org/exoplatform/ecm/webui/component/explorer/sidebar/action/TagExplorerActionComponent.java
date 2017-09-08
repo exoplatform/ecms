@@ -19,9 +19,15 @@ package org.exoplatform.ecm.webui.component.explorer.sidebar.action;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.jcr.PathNotFoundException;
+
+import org.exoplatform.ecm.webui.component.explorer.UIDocumentWorkspace;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
+import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
+import org.exoplatform.ecm.webui.component.explorer.search.UISearchResult;
 import org.exoplatform.ecm.webui.component.explorer.sidebar.UISideBar;
 import org.exoplatform.ecm.webui.component.explorer.sidebar.UITagExplorer;
+import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.event.Event;
@@ -55,13 +61,29 @@ public class TagExplorerActionComponent extends UIAbstractManagerComponent {
       UISideBar uiSideBar = event.getSource().getAncestorOfType(UISideBar.class);
       UIJCRExplorer uiExplorer = uiSideBar.getAncestorOfType(UIJCRExplorer.class);
       uiExplorer.setCurrentState();
-      uiSideBar.setCurrentComp(uiSideBar.getChild(UITagExplorer.class).getId());
-      uiSideBar.setSelectedComp(event.getSource().getUIExtensionName());
-      uiSideBar.getChild(UITagExplorer.class).updateTagList();
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiSideBar.getParent());
+      UITagExplorer uiTagExplorer = uiSideBar.getChild(UITagExplorer.class);
+      if (uiTagExplorer != null) {
+        uiSideBar.setCurrentComp(uiTagExplorer.getId());
+        uiSideBar.setSelectedComp(event.getSource().getUIExtensionName());
+      }
 
+      UIWorkingArea uiWorkingArea = uiExplorer.getChild(UIWorkingArea.class);
+      UIDocumentWorkspace uiDocumentWorkspace = uiWorkingArea.getChild(UIDocumentWorkspace.class);
+      UISearchResult uiSearchResult = uiDocumentWorkspace.getChildById(UIDocumentWorkspace.SIMPLE_SEARCH_RESULT);
+      if(uiSearchResult != null && uiSearchResult.isRendered()) {
+        uiSearchResult.updateGrid();
+      } else if(uiTagExplorer != null) {
+        uiTagExplorer.updateTagList();
+
+        uiExplorer.setIsViewTag(uiExplorer.getTagPaths() != null && !uiExplorer.getTagPaths().isEmpty());
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiSideBar.getParent());
+        try {
+          uiExplorer.updateAjax(event);
+        } catch(PathNotFoundException pne) {
+          return;
+        }
+      }
     }
-
   }
 
   @Override

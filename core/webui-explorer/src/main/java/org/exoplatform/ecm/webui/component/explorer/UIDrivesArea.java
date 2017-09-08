@@ -269,6 +269,7 @@ public class UIDrivesArea extends UIContainer {
       uiJCRExplorer.setDriveData(drive);
       uiJCRExplorer.setIsReferenceNode(false);
       uiJCRExplorer.setPreferencesSaved(true);
+      uiJCRExplorer.clearTagSelection();
 
       ManageableRepository repository = rservice.getCurrentRepository();
       try {
