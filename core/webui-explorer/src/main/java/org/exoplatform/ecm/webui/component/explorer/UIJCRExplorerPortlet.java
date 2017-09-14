@@ -291,6 +291,7 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
       if (requestParamName.equals("path")) {
         String nodePathParam = pcontext.getRequestParameter("path");
         String currentRepo = WCMCoreUtils.getRepository().getConfiguration().getName();
+        String userId = Util.getPortalRequestContext().getRemoteUser();
         if (nodePathParam != null && nodePathParam.length() > 0) {
           Pattern patternUrl = Pattern.compile("([^/]+)/(.*)");
           matcher = patternUrl.matcher(nodePathParam);
@@ -298,6 +299,7 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
             mapParam.put("repository", currentRepo);
             mapParam.put("drive", matcher.group(1));
             mapParam.put("path", matcher.group(2));
+            mapParam.put("userId",userId);
           } else {
             patternUrl = Pattern.compile("(.*)");
             matcher = patternUrl.matcher(nodePathParam);
