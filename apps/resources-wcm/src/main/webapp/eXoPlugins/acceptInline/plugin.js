@@ -1,4 +1,4 @@
-require(['/eXoResources/javascript/jquery-1.7.1.js']);
+require(['/eXoResources/javascript/jquery-3.2.1.js']);
 
 
 
