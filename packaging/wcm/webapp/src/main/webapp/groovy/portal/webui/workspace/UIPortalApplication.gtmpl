@@ -236,7 +236,7 @@
   //need this script to avoid animation of humgerger menu
   (function() {
     var collapseClass = 'collapse-left-bar';
-    var collapsed = window.localStorage.getItem('<%=rcontext.getRemoteUser()%>' + collapseClass);
+    var collapsed = window.localStorage.getItem('exo-platform-left-menu-collapsed' + '/<%=rcontext.getRemoteUser()%>');
     if (collapsed === 'false') {
       document.body.className = 'expand-left-bar';
     } else if (document.body.className.search(collapseClass) == -1) {
