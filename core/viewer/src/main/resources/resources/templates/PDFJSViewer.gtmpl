@@ -261,10 +261,10 @@ if (maximumPage > 0 && maximumPage <= pdfViewerService.getMaxPages() && fileSize
     def remoteEditClass=_documentInfos[1];
     def remoteEditTitle=_ctx.appRes(_documentInfos[0]);
 
-    def errorMessage = _ctx.appRes("File.view.label.not-viewable");
-    def pageMsg = _ctx.appRes("File.view.label.pdf-max-page");
-    pageMsg = pageMsg.replace("{0}", (String) pdfViewerService.getMaxPages());
-    def sizeMsg = _ctx.appRes("File.view.label.pdf-max-size");
+    def errorMessage = uicomponent.getResource("File.view.label.not-viewable");
+    def pageMsg = uicomponent.getResource("File.view.label.pdf-max-page");
+    pageMsg = pageMsg.replace("{0}", (String) (pdfViewerService.getMaxPages()));
+    def sizeMsg = uicomponent.getResource("File.view.label.pdf-max-size");
     sizeMsg = sizeMsg.replace("{0}", (String) (pdfViewerService.getMaxFileSize()/(1024*1024)));
     if (maximumPage > pdfViewerService.getMaxPages()) {
       errorMessage = pageMsg;
