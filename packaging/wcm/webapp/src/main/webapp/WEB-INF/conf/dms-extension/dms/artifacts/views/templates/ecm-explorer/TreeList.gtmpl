@@ -19,7 +19,7 @@
   import org.exoplatform.services.wcm.utils.WCMCoreUtils;
   import org.apache.commons.lang.StringUtils;
   import org.exoplatform.services.cms.link.NodeFinder;
-  
+
   def linkManager = WCMCoreUtils.getService(LinkManager.class);
   def nodeFinder = WCMCoreUtils.getService(NodeFinder.class);
   def uiWorkingArea = uicomponent.getAncestorOfType(UIWorkingArea.class);
@@ -45,10 +45,10 @@
   addScripts('uiFileView.UIFileView.clearCheckboxes();').
   addScripts("uiFileView.UIFileView.initStickBreadcrumb();").
   addScripts('uiFileView.UIFileView.clearOpenDivs();');
-  
-  
+
+
 	//Config to display columns with format: ["${column};${width}"]
-	//Default 
+	//Default
 	String[] arrColumns = ["exo:owner;95px","exo:dateModified;123px","exo:dateCreated;121px"];
 	def absNodePath = uiExplorer.getCurrentPath();
 	def relNodePath = uiExplorer.filterPath(absNodePath);
@@ -63,7 +63,7 @@
 	}
 %>
 <div id="$componentId">
-	<div id="${componentId}-$viewComponentId" class="uiFileView $componentId">	
+	<div id="${componentId}-$viewComponentId" class="uiFileView $componentId">
 		<div class="uiListGrid" style="min-height:400px">
 				<div class="titleTable clearfix" id="FileViewBreadcrumb">
 
@@ -85,12 +85,12 @@
                   <% if (currentPage > 1) {%>
                     <a href="javascript:void(0);" onclick="<%=pageIterator.event("ShowPage","${currentPage - 1}")%>" class="prevPageIcon" title="<%=_ctx.appRes("UIPageIterator.label.previous")%>"><%=_ctx.appRes("UIPageIterator.label.previous")%></a>
                   <%}%>
-                  <!--End of prev-->                  
-                  
+                  <!--End of prev-->
+
                   <!--Begin of drop down list-->
                     <div class="btn-group">
                       <button data-toggle="dropdown" class="btn dropdown-toggle">
-                        $currentPage of $availablePage  
+                        $currentPage of $availablePage
                         <i class="uiIconMiniArrowDown uiIconLightGray"></i>
                       </button>
                       <ul class="dropdown-menu" style="max-height:290px;min-width:80px;overflow:auto">
@@ -162,11 +162,11 @@
               </div>
             <!--===============Sort By label =================-->
 						<div class="sortByLabel pull-right">
-							<%=_ctx.appRes("FileView.label.sortBy")%> 
+							<%=_ctx.appRes("FileView.label.sortBy")%>
 						</div>
             <!--Breadcrumb links-->
             <div class="breadcrumbLink">
-							<i class="uiIconTree uiIconLightGray"></i> 
+							<i class="uiIconTree uiIconLightGray"></i>
               <a class="nodeLabel" data-placement="bottom" rel="tooltip"
                  onclick="<%=uicomponent.event("ChangeNode", drivePath.toString(), new Parameter("workspaceName", uiExplorer.getDriveData().getWorkspace()))%>"
                  title="<%=uiExplorer.findFirstComponentOfType(UITreeExplorer.class).getLabel()%>">
@@ -196,36 +196,36 @@
             </div>
             <!--End of Breadcrumb links-->
           <!--=======================================================-->
-            
-			   <!--End of ClearFix-->			    
+
+			   <!--End of ClearFix-->
 		    <!--=======================================================-->
 			    <div style="position: relative; top: 0px; left: 0px; width: 0px; height: 0px; display: none;">
 						<div class="Mask" style="position: absolute; top: 0px; left: 0px; width: 0px; height: 0px"></div>
 
 						<ul>
   					  <li id="hiddenMoreButton" class="dropdown pull-right listHiddenActionsContainer">
-    					  <a data-toggle="dropdown" class="dropdown-toggle" href="#"><%=_ctx.appRes("UIViewBar.label.more")%>  <i class="uiIconMiniArrowDown uiIconLightGray"></i></a>
+    					  <a data-toggle="dropdown" class="dropdown-toggle"><%=_ctx.appRes("UIViewBar.label.more")%>  <i class="uiIconMiniArrowDown uiIconLightGray"></i></a>
     					  <ul class="dropdown-menu">
     					    <!-- <li><a data-toggle="tab" href="#dropdown1_4">Tab demo1</a></li> -->
     					  </ul>
   					  </li>
 						</ul>
-						
-						<div class="JCRMoveAction" 
-								 style="display: none;" 
-								 request="<%=uiWorkingArea.getJCRMoveAction().event(UIWorkingArea.MOVE_NODE)%>" 
+
+						<div class="JCRMoveAction"
+								 style="display: none;"
+								 request="<%=uiWorkingArea.getJCRMoveAction().event(UIWorkingArea.MOVE_NODE)%>"
 								 symlink="<%=uiWorkingArea.getCreateLinkAction().event(UIWorkingArea.CREATE_LINK)%>">
 						</div>
-						
+
             <div class="ItemContextMenu" style="position: absolute; top: 0px; left: 0px; display: none;">
               <div class="uiRightClickPopupMenu" style="display: block;">
-                <ul class="dropdown-menu uiRightPopupMenuContainer" onmousedown="event.cancelBubble = true;" onkeydown="event.cancelBubble = true;">                  
+                <ul class="dropdown-menu uiRightPopupMenuContainer" onmousedown="event.cancelBubble = true;" onkeydown="event.cancelBubble = true;">
                       <%
                         for(itemContext in managersMultiItemContext) {
                           action = itemContext.getUIExtensionName();
                       %>
-                        <li class="menuItem" style="block">   
-                          <a onclick=eXo.ecm.UIFileView.postGroupAction("<%=itemContext.event(action)%>")>  
+                        <li class="menuItem" style="block">
+                          <a onclick=eXo.ecm.UIFileView.postGroupAction("<%=itemContext.event(action)%>")>
                             <i class="uiIconEcms${action}"></i> <%=_ctx.appRes("ECMContextMenu.event." + action)%>
                           </a>
                         </li>
@@ -233,12 +233,12 @@
                         }
                       %>
                       <li class="dropdown pull-right listHiddenActionsContainer">
-                        <a data-toggle="dropdown" class="dropdown-toggle" href="#"><%=_ctx.appRes("UIViewBar.label.more")%> <i class="uiIconMiniArrowDown uiIconLightGray"></i></a>
+                        <a data-toggle="dropdown" class="dropdown-toggle"><%=_ctx.appRes("UIViewBar.label.more")%> <i class="uiIconMiniArrowDown uiIconLightGray"></i></a>
                         <ul class="dropdown-menu">
                           <!-- <li><a data-toggle="tab" href="#dropdown1_4">Tab demo1</a></li> -->
                         </ul>
                       </li>
-                 </ul>  
+                 </ul>
                </div>
                <!--==================-->
                <div id="FileViewStatus" class="fileViewStatus">
@@ -251,28 +251,28 @@
                  <div id="FileViewItemCount" class="fileViewItemCount pull-right">
                    <span></span>
                  </div>
-               </div>               
+               </div>
             </div><!--end of item context menu-->
             <div class="GroundContextMenu" style="position: absolute; top: 0px; left: 0px; display: none;">
             <div class="uiRightClickPopupMenu" style="display: block;">
-              <ul class="dropdown-menu uiRightPopupMenuContainer" onmousedown="event.cancelBubble = true;" onkeydown="event.cancelBubble = true;">          
+              <ul class="dropdown-menu uiRightPopupMenuContainer" onmousedown="event.cancelBubble = true;" onkeydown="event.cancelBubble = true;">
                 <%
                       for(itemGroundContext in managersGroundContext) {
                       action = itemGroundContext.getUIExtensionName();
                 %>
-                <li class="menuItem" style="block">   
-                  <a href="javascript:void(0);" onclick="<%=itemGroundContext.event(action)%>">   
+                <li class="menuItem" style="block">
+                  <a href="javascript:void(0);" onclick="<%=itemGroundContext.event(action)%>">
                     <i class="uiIconEcms${action}"></i> <%=_ctx.appRes("ECMContextMenu.event." + action)%>
                   </a>
                 </li>
                 <%}%>
                 <li class="dropdown pull-right listHiddenActionsContainer">
-                  <a data-toggle="dropdown" class="dropdown-toggle" href="#"><%=_ctx.appRes("UIViewBar.label.more")%> <i class="uiIconMiniArrowDown uiIconLightGray"></i></a>
+                  <a data-toggle="dropdown" class="dropdown-toggle"><%=_ctx.appRes("UIViewBar.label.more")%> <i class="uiIconMiniArrowDown uiIconLightGray"></i></a>
                   <ul class="dropdown-menu">
                     <!-- <li><a data-toggle="tab" href="#dropdown1_4">Tab demo1</a></li> -->
                   </ul>
                 </li>
-              </ul> 
+              </ul>
             </div>
             <!--==================-->
             <div id="FileViewStatus" class="pull-right">
@@ -289,17 +289,17 @@
         </div><!--end of ground context menu-->
       </div>
 		</div><!--TitleTable-->
-      <%      	
+      <%
         def uiDocumentNodeList = uicomponent.getChild(UIDocumentNodeList.class);
         if (uiDocumentNodeList != null) {
           uicomponent.renderChild(uiDocumentNodeList);
         }
         %>
 	      </div>
-	 <% 
+	 <%
 	 //re-initialize action
 	 	uiWorkingArea.initialize(); %>
 		</div>
 
-</div>	
+</div>
 
