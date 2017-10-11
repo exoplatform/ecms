@@ -165,6 +165,23 @@ public class UIThumbnailForm extends UIForm implements UIPopupComponent {
     return currentPreviewLink;
   }
 
+  /**
+   * return the Modified date property of the selected node
+   *
+   * @param node the thumbnail node of the selected node
+   * @return the Modified date property
+   * @throws Exception
+   */
+  public String getThumbnailModifiedTime(Node node) throws Exception {
+    boolean hasLastModifiedProperty = node.hasProperty(ThumbnailService.THUMBNAIL_LAST_MODIFIED);
+    if (hasLastModifiedProperty) {
+      return node.getProperty(ThumbnailService.THUMBNAIL_LAST_MODIFIED).getDate().getTime().toString();
+    } else {
+      LOG.warn("Thumbnail last modified property of the node " + node.getPath() + " doesn't exist.");
+      return null;
+    }
+  }
+
   static  public class SaveActionListener extends EventListener<UIThumbnailForm> {
     public void execute(Event<UIThumbnailForm> event) throws Exception {
       UIThumbnailForm uiForm = event.getSource();
