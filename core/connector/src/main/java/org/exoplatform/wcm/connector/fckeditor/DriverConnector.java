@@ -266,6 +266,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
                                          filterBy,
                                          session,
                                          currentPortal,
+                                         currentFolder,
                                          Text.escapeIllegalJcrChars(driverName), type);
 
     } catch (Exception e) {
@@ -643,6 +644,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
                                                String filterBy,
                                                Session session,
                                                String currentPortal,
+                                               String currentParentFolder,
                                                String nodeDriveName,
                                                String type) throws Exception {
       TemplateService templateService = WCMCoreUtils.getService(TemplateService.class);
@@ -683,11 +685,16 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
 
         checkNode = sourceNode != null ? sourceNode : child;
 
+        String folderPath = child.getPath();
+        folderPath = folderPath.substring(folderPath.lastIndexOf("/") + 1, folderPath.length());
+        String childRelativePath = StringUtils.isEmpty(currentParentFolder) ? folderPath : currentParentFolder.concat("/")
+                                                                                    .concat(folderPath);
+
         if (isFolder(checkNode, type)) {
           // Get node name from node path to fix same name problem (ECMS-3586)
           String nodePath = child.getPath();
           Element folder = createFolderElement(document, checkNode, checkNode.getPrimaryNodeType().getName(),
-                        nodePath.substring(nodePath.lastIndexOf("/") + 1, nodePath.length()), nodeDriveName, type);
+                        nodePath.substring(nodePath.lastIndexOf("/") + 1, nodePath.length()),  childRelativePath, nodeDriveName, type);
           folders.appendChild(folder);
         }
 
@@ -715,7 +722,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
           }
 
         if (fileType != null) {
-          Element file = FCKFileHandler.createFileElement(document, fileType, checkNode, child, currentPortal, linkManager);
+          Element file = FCKFileHandler.createFileElement(document, fileType, checkNode, child, currentPortal, childRelativePath, linkManager);
           files.appendChild(file);
         }
       }
@@ -964,6 +971,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
                                       Node child,
                                       String folderType,
                                       String childName,
+                                      String childCurrentFolder,
                                       String nodeDriveName,
                                       String type) throws Exception {
       Element folder = document.createElement("Folder");
@@ -972,6 +980,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
       folder.setAttribute("title", Utils.getTitle(child).replaceAll("%", "%25"));
       folder.setAttribute("url", FCKUtils.createWebdavURL(child));
       folder.setAttribute("folderType", folderType);
+      folder.setAttribute("currentFolder", childCurrentFolder);
 
       if(TYPE_FOLDER.equals(type) || TYPE_CONTENT.equals(type)) {
         boolean hasFolderChild = (getChildOfType(child, NodetypeConstant.NT_UNSTRUCTURED, type) != null)

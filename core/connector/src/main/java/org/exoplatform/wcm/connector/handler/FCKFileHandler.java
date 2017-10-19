@@ -27,7 +27,7 @@ public class FCKFileHandler {
       Node sourceNode,
       Node displayNode,
       String currentPortal) throws Exception {
-    return createFileElement(document, fileType, sourceNode, displayNode, currentPortal, null);
+    return createFileElement(document, fileType, sourceNode, displayNode, currentPortal, null, null);
   }
 
   public static Element createFileElement(Document document,
@@ -35,10 +35,14 @@ public class FCKFileHandler {
                                           Node sourceNode,
                                           Node displayNode,
                                           String currentPortal,
+                                          String childRelativePath,
                                           LinkManager linkManager) throws Exception {
     Element file = document.createElement("File");
     AutoVersionService autoVersionService=WCMCoreUtils.getService(AutoVersionService.class);
     file.setAttribute("name", Utils.getTitle(displayNode));
+    if (childRelativePath != null) {
+      file.setAttribute("currentFolder", childRelativePath);
+    }
     SimpleDateFormat formatter = (SimpleDateFormat) SimpleDateFormat.getDateTimeInstance(SimpleDateFormat.SHORT,
                                                                                          SimpleDateFormat.SHORT);
     if(sourceNode.hasProperty("exo:dateCreated")){
@@ -91,6 +95,8 @@ public class FCKFileHandler {
     }else{
       file.setAttribute("isVersioned", String.valueOf(false));
     }
+    file.setAttribute("title", Utils.getTitle(sourceNode).replaceAll("%", "%25"));
+    file.setAttribute("nodeTypeCssClass", Utils.getNodeTypeIcon(sourceNode, "uiBgd64x64"));
     file.setAttribute("isVersionSupport", String.valueOf(autoVersionService.isVersionSupport(sourceNode.getPath(), sourceNode.getSession().getWorkspace().getName())));
     return file;
   }
