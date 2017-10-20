@@ -248,7 +248,7 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
       allDrives = (List<DriveData>) drivesCache_.get(getRepoName() + "_" + ALL_DRIVES_CACHED);
     }
     if ((allDrives != null) && (allDrives.size() > 0) && (groupDriveTemplate_ != null)) {
-      return new ArrayList<DriveData>(allDrives);
+      return cloneArrayList(allDrives);
     }
 
     // Get from jcr
@@ -277,10 +277,10 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
         groupDriveTemplate_ = data.clone();
         // Include group drive template if necessary
         if (withVirtualDrives) {
-          driveList.add(data);
+          driveList.add(data.clone());
         }
       } else {
-        driveList.add(data) ;
+        driveList.add(data.clone());
       }
     }
 
@@ -291,7 +291,7 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
       drivesCache_.put(getRepoName() + "_" + ALL_DRIVES_CACHED, driveList);
     }
     session.logout();
-    return new ArrayList<DriveData>(driveList);
+    return cloneArrayList(driveList);
   }
 
   /**
@@ -474,10 +474,10 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
   /**
    * {@inheritDoc}
    */
-  @SuppressWarnings("unchecked")
   public List<DriveData> getDriveByUserRoles(String userId, List<String> userRoles) throws Exception {
     Object drivesByRoles = drivesCache_.get(getRepoName() + "_" + userId + ALL_DRIVES_CACHED_BY_ROLES);
-    if(drivesByRoles != null) return new ArrayList<DriveData>((List<DriveData>) drivesByRoles);
+    if (drivesByRoles != null)
+      return cloneArrayList(drivesByRoles);
     List<DriveData> driveList = new ArrayList<DriveData>();
     if (userId != null) {
       // We will improve ManageDrive service to allow getAllDriveByUser
@@ -520,21 +520,20 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
     }
     Collections.sort(driveList);
     drivesCache_.put(getRepoName() + "_" + userId + ALL_DRIVES_CACHED_BY_ROLES, driveList);
-    return new ArrayList<DriveData>(driveList);
+    return cloneArrayList(driveList);
   }
 
   /**
    * {@inheritDoc}
    */
-  @SuppressWarnings("unchecked")
   public List<DriveData> getGroupDrives(String userId, List<String> userRoles) throws Exception {
     Object drives = drivesCache_.get(getRepoName() + "_" + userId + ALL_GROUP_CACHED_DRIVES);
     if (drives != null)
-      return new ArrayList<DriveData>((List<DriveData>) drives);
+      return cloneArrayList(drives);
     List<DriveData> groupDrives = new ArrayList<DriveData>();
     DriveData groupDrive = getDriveByName(GROUPS_DRIVE_NAME);
     if(groupDrive == null){
-      return groupDrives;
+      return cloneArrayList(groupDrives);
     }
 
     boolean flag = hasPermissionOnDrive(groupDrive, userRoles);
@@ -553,7 +552,7 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
     }  
     Collections.sort(groupDrives);
     drivesCache_.put(getRepoName() + "_" + userId + ALL_GROUP_CACHED_DRIVES, groupDrives);
-    return new ArrayList<DriveData>(groupDrives);
+    return cloneArrayList(groupDrives);
   }
 
   /**
@@ -566,10 +565,9 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
   /**
    * {@inheritDoc}
    */
-  @SuppressWarnings("unchecked")
   public List<DriveData> getMainDrives(String userId, List<String> userRoles) throws Exception {
     Object drives = drivesCache_.get(getRepoName() + "_" + userId + ALL_MAIN_CACHED_DRIVE);
-    if(drives != null) return new ArrayList<DriveData>((List<DriveData>) drives);
+    if(drives != null) return cloneArrayList(drives);
     List<DriveData> generalDrives = new ArrayList<DriveData>();
     List<DriveData> groupDrives = this.getGroupDrives(userId, userRoles);
     List<DriveData> personalDrives = this.getPersonalDrives(userId);
@@ -580,18 +578,17 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
     }
     Collections.sort(generalDrives);
     drivesCache_.put(getRepoName() + "_" + userId + ALL_MAIN_CACHED_DRIVE, generalDrives);
-    return new ArrayList<DriveData>(generalDrives);
+    return cloneArrayList(generalDrives);
   }
 
   /**
    * {@inheritDoc}
    */
-  @SuppressWarnings("unchecked")
   public List<DriveData> getPersonalDrives(String userId) throws Exception {
     SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
     Node userNode = nodeHierarchyCreator_.getUserNode(sessionProvider, userId);
     Object drives = drivesCache_.get(getRepoName() + "_" + userId + ALL_PERSONAL_CACHED_DRIVE);
-    if(drives != null) return new ArrayList<>((List<DriveData>) drives);
+    if(drives != null) return cloneArrayList(drives);
 
     String cmsUserPath = nodeHierarchyCreator_.getJcrPath(BasePath.CMS_USERS_PATH);
     List<String> memberships = getUserMemberships(userId);
@@ -607,7 +604,7 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
     }
     Collections.sort(personalDrives);
     drivesCache_.put(getRepoName() + "_" + userId + ALL_PERSONAL_CACHED_DRIVE, personalDrives);
-    return new ArrayList<DriveData>(personalDrives);
+    return cloneArrayList(personalDrives);
   }
 
   protected boolean hasPermissionOnDrive(DriveData drive, List<String> userMemberships) {
@@ -704,5 +701,15 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
    */
   private void updateDeletedDrivesLog(String driveName) throws Exception {
     Utils.addEditedConfiguredData(driveName, this.getClass().getSimpleName(), DELETED_DRIVE_NAMES, true);
+  }
+
+  private List<DriveData> cloneArrayList(Object drivesByRoles) {
+    @SuppressWarnings("unchecked")
+    ArrayList<DriveData> drivesByRolesList = (ArrayList<DriveData>) drivesByRoles;
+    List<DriveData> drivesList = new ArrayList<>();
+    for (DriveData driveData : drivesByRolesList) {
+      drivesList.add(driveData.clone());
+    }
+    return drivesList;
   }
 }

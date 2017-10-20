@@ -16,7 +16,43 @@
  */
 package org.exoplatform.wcm.connector.fckeditor;
 
+import java.net.URLDecoder;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
+import java.util.MissingResourceException;
+import java.util.ResourceBundle;
+
+import javax.annotation.security.RolesAllowed;
+import javax.jcr.Node;
+import javax.jcr.NodeIterator;
+import javax.jcr.RepositoryException;
+import javax.jcr.Session;
+import javax.servlet.http.HttpServletRequest;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.CacheControl;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.transform.dom.DOMSource;
+
 import org.apache.commons.lang.StringUtils;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.ecm.connector.fckeditor.FCKUtils;
 import org.exoplatform.ecm.utils.text.Text;
@@ -48,28 +84,6 @@ import org.exoplatform.services.wcm.webcontent.WebContentSchemaHandler;
 import org.exoplatform.wcm.connector.BaseConnector;
 import org.exoplatform.wcm.connector.FileUploadHandler;
 import org.exoplatform.wcm.connector.handler.FCKFileHandler;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
-
-import javax.annotation.security.RolesAllowed;
-import javax.jcr.*;
-import javax.servlet.http.HttpServletRequest;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.CacheControl;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.transform.dom.DOMSource;
-import java.net.URLDecoder;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.*;
 
 /**
  * Returns a list of drives/folders/documents in a specified location for a given user. Also, it processes the file uploading action.
@@ -130,9 +144,6 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
   private LinkManager linkManager_ = null;
 
   private String resourceBundleNames[];
-  private ResourceBundle sharedResourceBundle=null;
-
-  private Locale lang = Locale.ENGLISH;
 
   private DocumentService documentService;
 
@@ -519,17 +530,23 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
   }
 
   private String resolveDriveLabel(String name, String lang) {
-    if (resourceBundleService ==null) {
+    if (resourceBundleService == null) {
       resourceBundleService = WCMCoreUtils.getService(ResourceBundleService.class);
       resourceBundleNames = resourceBundleService.getSharedResourceBundleNames();
-      sharedResourceBundle = resourceBundleService.getResourceBundle(resourceBundleNames, this.lang);
     }
+    if (StringUtils.isBlank(lang)) {
+      lang = Locale.ENGLISH.getLanguage();
+    }
+    Locale locale = new Locale(lang);
+    ResourceBundle sharedResourceBundle = resourceBundleService.getResourceBundle(resourceBundleNames, locale);
     try {
-      if(!this.lang.getLanguage().equals(lang)){
-        this.lang = new Locale(lang);
-        sharedResourceBundle = resourceBundleService.getResourceBundle(resourceBundleNames, this.lang);
+      sharedResourceBundle = resourceBundleService.getResourceBundle(resourceBundleNames, locale);
+      String key = "ContentSelector.title." + name.replaceAll(" ", "");
+      if(sharedResourceBundle.containsKey(key)) {
+        return sharedResourceBundle.getString(key);
+      } else {
+          return getDriveTitle(name);
       }
-      return sharedResourceBundle.getString("ContentSelector.title." + name.replaceAll(" ", ""));
     } catch (MissingResourceException e) {
       if (LOG.isDebugEnabled()) {
         LOG.debug(e.getMessage());
@@ -573,7 +590,8 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
     ManageDriveService driveService = WCMCoreUtils.getService(ManageDriveService.class);
     String currentUserId = ConversationState.getCurrent().getIdentity().getUserId();
     List<String> userRoles = this.getMemberships(currentUserId);
-    return driveService.getGroupDrives(currentUserId, userRoles);
+    List<DriveData> groupDrives = driveService.getGroupDrives(currentUserId, userRoles);
+    return groupDrives;
   }
 
   /**
@@ -1049,4 +1067,64 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
       }
     }
   }
+
+  public String getDriveTitle(String name) {
+    if (name.startsWith(".")) {
+      String groupLabel = getGroupLabel(name);
+      if (groupLabel == null) {
+        groupLabel = getGroupLabel(name, !name.startsWith("/spaces"));
+      }
+      return groupLabel;
+    } else {
+      return name;
+    }
+  }
+
+  public String getGroupLabel(String groupId, boolean isFull) {
+    String ret = groupId.replace(".", " / ");
+    if (!isFull) {
+      if (ret.startsWith(" / spaces")) {
+        return ret.substring(ret.lastIndexOf("/") + 1).trim();
+      }
+      int count = 0;
+      int slashPosition = -1;
+      for (int i = 0; i < ret.length(); i++) {
+        if ('/' == ret.charAt(i)) {
+          if (++count == 4) {
+            slashPosition = i;
+            break;
+          }
+        }
+      }
+      if (slashPosition > 0) {
+        ret = ret.substring(0, slashPosition) + "...";
+      } else if (ret.length() > 70) {
+        ret = ret.substring(0, 70) + "...";
+      }
+    }
+    return ret;
+  }
+
+  public String getGroupLabel(String name) {
+    try {
+      RepositoryService repoService = WCMCoreUtils.getService(RepositoryService.class);
+      NodeHierarchyCreator nodeHierarchyCreator = WCMCoreUtils.getService(NodeHierarchyCreator.class);
+      String groupPath = nodeHierarchyCreator.getJcrPath(BasePath.CMS_GROUPS_PATH);
+      String absPath = groupPath + name.replace(".", "/");
+      ManageableRepository currentRepository = repoService.getCurrentRepository();
+      String workspace = currentRepository.getConfiguration().getDefaultWorkspaceName();
+
+      return getNode(workspace, absPath).getProperty(NodetypeConstant.EXO_LABEL).getString();
+    } catch (Exception e) {
+      return null;
+    }
+  }
+
+  public Node getNode(String workspace, String absPath) throws Exception {
+    RepositoryService repoService = WCMCoreUtils.getService(RepositoryService.class);
+    ManageableRepository currentRepository = repoService.getCurrentRepository();
+    Node groupNode = (Node) WCMCoreUtils.getSystemSessionProvider().getSession(workspace, currentRepository).getItem(absPath);
+    return groupNode;
+  }
+
 }
