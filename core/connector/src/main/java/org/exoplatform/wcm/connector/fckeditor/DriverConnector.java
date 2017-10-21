@@ -545,7 +545,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
       if(sharedResourceBundle.containsKey(key)) {
         return sharedResourceBundle.getString(key);
       } else {
-          return getDriveTitle(name);
+        return getDriveTitle(name);
       }
     } catch (MissingResourceException e) {
       if (LOG.isDebugEnabled()) {
@@ -590,8 +590,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
     ManageDriveService driveService = WCMCoreUtils.getService(ManageDriveService.class);
     String currentUserId = ConversationState.getCurrent().getIdentity().getUserId();
     List<String> userRoles = this.getMemberships(currentUserId);
-    List<DriveData> groupDrives = driveService.getGroupDrives(currentUserId, userRoles);
-    return groupDrives;
+    return driveService.getGroupDrives(currentUserId, userRoles);
   }
 
   /**

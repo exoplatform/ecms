@@ -986,7 +986,7 @@
 		  		  	eXo.ecm.MultiUpload.restContext + "/thumbnailImage/small/repository/" +
 		  		  	eXo.ecm.MultiUpload.ws + nodePath + "'>";
 		  		  // If can not preview image, set back to default icon
-		  		  gj(gj(icon).find("img:first")[0]).error(function() {
+		  		  gj(gj(icon).find("img:first")[0]).on("error", function() {
 							gj(icon).html(iconHTMLForImageLoadFail);
 							var iDiv = gj("i", icon);
 							var className = iDiv.attr('class');

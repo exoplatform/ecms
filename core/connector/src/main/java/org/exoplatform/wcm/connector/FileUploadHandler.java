@@ -48,6 +48,7 @@ import org.exoplatform.ecm.connector.fckeditor.FCKUtils;
 import org.exoplatform.ecm.utils.lock.LockUtil;
 import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.services.cms.documents.AutoVersionService;
+import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
 import org.exoplatform.services.cms.mimetype.DMSMimeTypeResolver;
 import org.exoplatform.services.cms.templates.TemplateService;
@@ -283,7 +284,7 @@ public class FileUploadHandler {
     DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
     DocumentBuilder builder = factory.newDocumentBuilder();
     Document fileExistence = builder.newDocument();
-    fileName = cleanNameUtil(fileName);
+    fileName = Utils.cleanNameWithAccents(fileName);
     Element rootElement = fileExistence.createElement(
                               parent.hasNode(fileName) ? "Existed" : "NotExisted");
     if(parent.hasNode(fileName)){
@@ -318,7 +319,7 @@ public class FileUploadHandler {
     DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
     DocumentBuilder builder = factory.newDocumentBuilder();
     Document cleanedFilename = builder.newDocument(); 
-    fileName = cleanNameUtil(fileName);
+    fileName = Utils.cleanNameWithAccents(fileName);
     Element rootElement = cleanedFilename.createElement("name");
     cleanedFilename.appendChild(rootElement);
     rootElement.setTextContent(fileName);
@@ -449,7 +450,7 @@ public class FileUploadHandler {
       boolean fileCreated = false;
       String exoTitle = fileName;
       
-      fileName = cleanNameUtil(fileName);
+      fileName = Utils.cleanNameWithAccents(fileName);
       DMSMimeTypeResolver mimeTypeResolver = DMSMimeTypeResolver.getInstance();
       String mimetype = mimeTypeResolver.getMimeType(resource.getFileName());
       String nodeName = fileName;
@@ -626,22 +627,6 @@ public class FileUploadHandler {
     rootElement.setAttribute("mimetype", mimeType);
     doc.appendChild(rootElement);
     return new DOMSource(doc);
-  }
-
-  /** Return name after cleaning
-   * @param fileName file name
-   * @return cleaned name
-   */
-  private String cleanNameUtil(String fileName) {
-    Transliterator accentsconverter = Transliterator.getInstance("Latin; NFD; [:Nonspacing Mark:] Remove; NFC;");
-    if (fileName.indexOf('.') > 0) {
-      String ext = fileName.substring(fileName.lastIndexOf('.'));
-      fileName = accentsconverter.transliterate(fileName.substring(0, fileName.lastIndexOf('.'))).concat(ext);
-    } else {
-      fileName = accentsconverter.transliterate(fileName);
-    }
-    return Text.escapeIllegalJcrChars(fileName);
-
   }
   
 }
