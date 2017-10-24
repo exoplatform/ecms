@@ -65,9 +65,6 @@
         <module>uiSimpleView</module>
       </depends>
       <depends>
-        <module>zeroClipboard</module>
-      </depends>
-      <depends>
         <module>rename</module>
       </depends>
       <depends>

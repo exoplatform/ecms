@@ -50,21 +50,6 @@
         <module>webui-ext</module>
       </depends>      
    </module>
-   
-  <module>
-    <name>zeroClipboard</name>
-    <as>zeroClipboard</as>
-    <script>
-      <path>/javascript/eXo/ecm/ZeroClipboard.js</path>
-    </script>
-    <depends>
-      <module>jquery</module>
-      <as>gj</as>
-    </depends>
-    <depends>
-      <module>ecm-utils</module>
-    </depends>
-  </module>
   
    <module>
       <name>ecm-browser</name>
