@@ -448,25 +448,28 @@
 			my_window.document.write('<script> window.location.href = "' + downloadLink + '"; </script>');
 		};
 
-    ECMUtils.prototype.initClipboard = function () {
-      // Clear clipboard first
-      gj(".zeroClipboard").remove();
-
-      // Init clipboard for copying url
-      var contextMenu = document.getElementById('ECMContextMenu');
-      gj(contextMenu).find("i.uiIconEcmsCopyUrlToClipboard").each(function() {
-        var parent = gj(this).closest('a');
-        var isFlash = navigator.plugins["Shockwave Flash"];
-        if(isFlash === undefined) {
-          // ECMS-7362. Hide Copy URL to clipboard button when browser is not installed the adobe flash player
-          gj(parent).closest('.RightClickCustomItem').hide();
-          return;
+      /**
+       * Init clipboard for copying url
+       */
+      ECMUtils.prototype.initClipboard = function () {
+        var contextMenu = document.getElementById('ECMContextMenu');
+        var copyUrlsButtons = contextMenu.querySelectorAll('i.uiIconEcmsCopyUrlToClipboard');
+        for(var i = 0; i < copyUrlsButtons.length; i++) {
+          var parent = copyUrlsButtons[i].parentNode;
+          parent.addEventListener('click', function() {
+            var urlInput = document.createElement('input');
+            // DOM element cannot be hidden so we move it outside of the screen to hide it
+            urlInput.style.position = 'absolute';
+            urlInput.style.left = '-9999px';
+            urlInput.setAttribute('value', parent.getAttribute('path'));
+            parent.appendChild(urlInput);
+            urlInput.select();
+            // copy selected content in clipboard
+            document.execCommand('copy');
+            parent.removeChild(urlInput);
+          }, false);
         }
-        var clip = new ZeroClipboard.Client();
-        clip.glue(gj(parent).attr('id'));
-        clip.setText(gj(parent).attr('path'));
-      });
-    };
+      };
 
     ECMUtils.prototype.closeContextMenu = function (element) {
         var contextMenu = document.getElementById("ECMContextMenu");
