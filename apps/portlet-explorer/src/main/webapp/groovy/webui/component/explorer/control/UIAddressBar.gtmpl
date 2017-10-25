@@ -8,8 +8,7 @@
   
   jsmanager.require("SHARED/ecm-utils", "ecmutil").
   addScripts('ecmutil.ECMUtils.onKeyAddressBarPress();').
-  addScripts('ecmutil.ECMUtils.onKeySimpleSearchPress();').
-  addScripts('ecmutil.ECMUtils.onLoadUIAddressBar();') ;
+  addScripts('ecmutil.ECMUtils.onKeySimpleSearchPress();');
 
 %>
 <% uiform.begin() %>

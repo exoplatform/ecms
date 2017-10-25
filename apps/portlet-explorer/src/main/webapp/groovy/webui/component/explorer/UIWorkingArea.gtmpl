@@ -29,11 +29,21 @@
   def enableDragAndDrop = pref.isEnableDragAndDrop();
   def userName = rcontext.getRemoteUser();
   def leftContainerWidth = Utils.getCookieByCookieName(userName + "_leftContainerWidth");
+  def showLeftContainer = Utils.getCookieByCookieName(userName + "_CEShowSideBar");
   def savedLeftContainerWidthStyle  = leftContainerWidth!=null?"style=\"width:" + leftContainerWidth + "px\"":"";
+  def leftContainerClass = "";
+  def resizeBarClass = "";
+  def arrowClassPosition = 'Left';
   def initWithoutLeftContainer = uicomponent.isShowSideBar();
 
   String componentId = uicomponent.getId();
   def jsManager = rcontext.getJavascriptManager();
+
+  if (showLeftContainer == 'false') {
+    leftContainerClass =  ' collapsed';
+    resizeBarClass = ' resizeNoneBorder';
+    arrowClassPosition = 'Right';
+  }
   
   if(uiTreeExplorer != null && uicomponent.isShowSideBar()) {
     def focusNode = uiTreeExplorer.getEncodeCurrentPath();
@@ -75,16 +85,16 @@
 	  uicomponent.renderChild(UIRightClickPopupMenu.class) ;
 
 	  if( uicomponent.isShowSideBar() ) {
-	    println "<div class=\"leftContainer\" id=\"LeftContainer\" $savedLeftContainerWidthStyle >" ;
+	    println "<div class=\"leftContainer$leftContainerClass\" id=\"LeftContainer\" $savedLeftContainerWidthStyle >" ;
 	  	uicomponent.renderChild(UISideBar.class) ;
 	  	println "</div>" ;
 	  }
 
 	if( uicomponent.isShowSideBar() ) {
     %>
-      <div class="resizeBar" onmousedown="eXo.ecm.ECMUtils.resizeSideBar(event)">
+      <div class="resizeBar$resizeBarClass" onmousedown="eXo.ecm.ECMUtils.resizeSideBar(event)">
 				<div class="resizeBarContent">
-					<a class="resizeButton" onmousedown="eXo.ecm.ECMUtils.showHideSideBar(event);"><i class="uiIconArrowLeft"></i></a>
+					<a class="resizeButton" onmousedown="eXo.ecm.ECMUtils.showHideSideBar(event);"><i class="uiIconArrow$arrowClassPosition"></i></a>
 				</div>
       </div>
     <%

@@ -36,5 +36,4 @@
 	<div id="CloseConfirmationMsg" style="display:none">${messageClose}</div>
   <div id="ChangeTypeConfirmationMsg" style="display:none">${messageChangeType}</div>
 	<div id="NavigateConfirmationMsg" style="display:none">${messageNavigate}</div>
-	<div class="FillOutElement">&nbsp;</div>
 </div>

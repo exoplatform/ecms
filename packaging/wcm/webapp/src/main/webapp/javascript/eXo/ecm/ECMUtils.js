@@ -8,7 +8,7 @@
 		var Browser = eXo.core.Browser;
 		Self.waitContainerRetry = 0;
 		Self.waitContainerRetryMax = 200;
-		Self.MiniumLeftContainerWidth = 250;
+		Self.MiniumLeftContainerWidth = 240;
 		Self.MiniumRightContainerWidth = 251;
 		Self.waitInterval              = 25;
 		Self.UIBrokenCheckingInterval  = 150;
@@ -561,12 +561,6 @@
 		ECMUtils.prototype.resizeMouseMoveSideBar = function (event) {
 		  var event = event || window.event;
 		  if (Self.initWithoutLeftContainer()) return;
-		  var resizableBlock = gj(Self.uiLeftContainer).find("div.uiResizableBlock:first")[0];
-		  var deltaX = event.clientX - eXo.ecm.ECMUtils.currentMouseX;
-		  eXo.ecm.ECMUtils.savedResizeDistance = deltaX;
-		  eXo.ecm.ECMUtils.savedResizableMouseX = eXo.ecm.ECMUtils.resizableBlockWidth + deltaX + "px";
-		  eXo.ecm.ECMUtils.savedLeftContainer = eXo.ecm.ECMUtils.currentWidth + deltaX + "px";
-		  eXo.ecm.ECMUtils.isResizedLeft = false;
 
 			var allowedWidth = parseInt(Self.uiWorkingArea.offsetWidth) - Self.MiniumRightContainerWidth;
 			// Fix minimium width can be resized
@@ -637,11 +631,6 @@
 		      }
 		    }
 		  }
-		  if (!showSideBar) {
-		    container.style.display = 'none';
-		    var resizeButton = gj(Self.uiWorkingArea).find("a.resizeButton:first")[0];
-		    if (resizeButton) resizeButton.className = "resizeButton";
-		  }
 		}
 
 		ECMUtils.prototype.moveItemToDropDown = function (movedItem) {
@@ -707,14 +696,10 @@
 			var divAction = document.getElementById("uiActionsBarContainer");
 			
 			var actionbar= gj('#UIActionBar');
-			if (actionbar) { //VinhNT workaround for the un-expand width of ActionBar problem, should be improved later
-			  actionbar.width(actionbar.parent().width());
-			}
 			var viewbar = gj('#UIViewBarContainer')[0];
 			var uiMainActionContainer   = gj(divAction).find("ul.nav-pills")[0];
 			if (!uiMainActionContainer) return; 
 			var listHiddenActionContainer = gj(uiMainActionContainer).find("li.listHiddenActionsContainer:first")[0];
-			gj(listHiddenActionContainer).css("margin-right", viewbar.offsetWidth + "px");
 			var uiDropdownContainer   = gj(listHiddenActionContainer).find("ul.dropdown-menu:first")[0];
 			var allowedSpace  = uiMainActionContainer.offsetWidth - viewbar.offsetWidth - 20 ; //left&right padding
 			Self.containerWithDropDownItem_OnResize(uiMainActionContainer, allowedSpace, listHiddenActionContainer, uiDropdownContainer, "active");
@@ -748,9 +733,6 @@
 		ECMUtils.prototype.contextActionBarContainer_OnResize = function () {
 			var divAction = document.getElementById("ActionMenuPlaceHolder");
 			var actionbar= gj('#UIActionBar')[0];
-//			if (actionbar) { //VinhNT workaround for the un-expand width of ActionBar problem, should be improved later
-//			  actionbar.width(actionbar.parent().width()-2);
-//			}
 			var uiMainActionContainer   = gj(divAction).find("ul.dropdown-menu")[0];
 			if (!uiMainActionContainer) return; 
 			var listHiddenActionContainer = gj(uiMainActionContainer).find("li.listHiddenActionsContainer:first")[0];
@@ -892,55 +874,27 @@
 
 		  if (leftWidth) {
 		    leftContainerWidth = leftWidth;
-		  } else {
-		    leftContainerWidth = Self.getCookie(eXo.env.portal.userName + "_leftContainerWidth");
-		    showSideBar = Self.getCookie(eXo.env.portal.userName + "_CEShowSideBar") != "false";
 		  }
-		  if (Self.initWithoutLeftContainer()) {
-		    if (Self.uiWorkingArea)
-		      Self.uiRightContainer.style.width = Self.uiWorkingArea.offsetWidth + "px";
-		  } else {
+		  if (!Self.initWithoutLeftContainer()) {
 		    if (leftContainerWidth) {
 		      if (Self.uiWorkingArea.offsetWidth - leftContainerWidth < Self.MiniumRightContainerWidth) {
 		        leftContainerWidth = Self.uiWorkingArea.offsetWidth - Self.MiniumRightContainerWidth;
 		        Self.setCookie(eXo.env.portal.userName + "_leftContainerWidth", leftContainerWidth, 20);
 		      }
-		      Self.uiLeftContainer.style.width = (leftContainerWidth - 15) + "px";
+		      Self.uiLeftContainer.style.width = leftContainerWidth + "px";
 		    }
 		    if (Self.uiLeftContainer.offsetWidth > 0 || Self.uiLeftContainer.offsetHeight > 0) {
 		      actualLeftContainerWidth = Self.uiLeftContainer.offsetWidth;
 		    } else {
 		      actualLeftContainerWidth = 0;
 		    }
-		    Self.uiRightContainer.style.width = (Self.uiWorkingArea.offsetWidth - actualLeftContainerWidth - Self.uiResizeSideBar.offsetWidth) + "px";
-		    var resizeButton = gj(Self.uiResizeSideBar).find("a.resizeButton:first")[0];
-		    var iArrow = gj(resizeButton).children("i:first")[0];
-		    if (showSideBar) {
-		      Self.uiResizeSideBar.style.height = Self.uiLeftContainer.offsetHeight + "px";
-		      if (iArrow) iArrow.className = "uiIconArrowLeft";
-		      var resizeBarContent = gj(Self.uiResizeSideBar).find("div.resizeBarContent:first")[0];
-		      gj(resizeBarContent).css("height", Self.uiResizeSideBar.offsetHeight + "px");
-		    } else {
-		      gj(Self.uiResizeSideBar).css("height", "");
-		      var resizeBarContent = gj(Self.uiResizeSideBar).find("div.resizeBarContent:first")[0];
-		      gj(resizeBarContent).css("height", "");
-		      if (iArrow) iArrow.className = "uiIconArrowRight";    
-		      gj(Self.uiResizeSideBar).addClass("resizeNoneBorder");
-		    }
 		  }
-		  if (Self.uiDocumentWorkspace) {
-		    Self.uiDocumentWorkspace.style.width = (Self.uiRightContainer.offsetWidth - 10) + "px";
-		  }
-		  if (Self.uiDrivesArea) {
-		    Self.uiDrivesArea.style.width = (Self.uiRightContainer.offsetWidth - 10) + "px";
-		  }
+		  
 		  Self.resizeVisibleComponent();
 		  Self.actionbarContainer_OnResize();
 		  Self.contextActionBarContainer_OnResize();
 		  if (Self.documentContainer_OnResize) Self.documentContainer_OnResize();
 		  Self.tabsContainer_OnResize();
-		  Self.clearFillOutElement();
-		  Self.adjustFillOutElement();
 		  if (eXo.core.Browser.isIE()) {
 		    var jcrContainer = document.getElementById("UIJCRExplorerPortlet");
 		    if (jcrContainer) gj(jcrContainer).css("height", "100%");
@@ -1001,17 +955,16 @@
 		  var resizeButton = gj(Self.uiWorkingArea).find("a.resizeButton:first")[0];
 		  var iArrow = gj(resizeButton).children("i")[0];
 		  // The bellow block are updated
-		  if (leftContainer.style.display == 'none') {
-		    leftContainer.style.display = 'block';
-		    gj(Self.uiResizeSideBar).removeClass("resizeNoneBorder");
-		    Self.uiResizeSideBar.style.height = leftContainer.offsetHeight + "px";
-		    showSideBar = true;
+		  if (gj(leftContainer).hasClass('collapsed')) {
+		  	gj(leftContainer).removeClass('collapsed');
+		  	gj(Self.uiResizeSideBar).removeClass("resizeNoneBorder");
+		  	showSideBar = true;
 		    if (iArrow) iArrow.className = "uiIconArrowLeft";
 		  } else {
-		    leftContainer.style.display = 'none';
+		    gj(leftContainer).addClass('collapsed');
 		    gj(Self.uiResizeSideBar).addClass("resizeNoneBorder");
 		    showSideBar = false;
-				if (iArrow) iArrow.className = "uiIconArrowRight";
+			if (iArrow) iArrow.className = "uiIconArrowRight";
 		  }
 		  Self.setCookie(eXo.env.portal.userName + "_CEShowSideBar", showSideBar, 20);
 		  Self.loadContainerWidth();
@@ -1120,7 +1073,6 @@
 			var arrowIcon = gj(midBox).find("i")[0];
 			var expandChild = gjTop.find("div.uiContentBox:last")[0];
 			var selectItemsBar = gjTop.find("div.uiSelectContent")[0];
-			Self.clearFillOutElement();
 			if (bottomBox.style.display == 'none') {
 				gj(expandChild).css("height", "");
 				if (gjTop.attr("savedHeight")) {
@@ -1138,7 +1090,6 @@
 				gj(expandChild).css("height", currentExpandChildHeight + deltaHeight + "px");
 				arrowIcon.className = "uiIconArrowUp";
 			}
-			Self.adjustFillOutElement();
 		}
 
 		//get SideBarContent for resizing
@@ -1268,60 +1219,6 @@
 				noticeElem.style.marginLeft = "-" + noticeElem.offsetWidth/2 + "px";
 			      }
 		}
-		}
-
-		ECMUtils.prototype.appendFillOutElement =function(parentID, tabClass) {
-			var divContainer = document.getElementById(parentID);
-			if (!divContainer) return;
-			var visibleTab = gj(divContainer).find("div." + tabClass + ":visible");
-			if (!visibleTab) return;
-			if ( visibleTab.length==0) return;
-			window.clearTimeout(window.UIBrokenCheckingHandler);
-			gj('div.FillOutElement').remove();
-			gj(visibleTab).append("<div class=\"FillOutElement\">&nbsp;</div>");
-			eXo.ecm.ECMUtils.clearFillOutElement();
-			eXo.ecm.ECMUtils.adjustFillOutElement();
-			window.UIBrokenCheckingHandler = window.setTimeout("eXo.ecm.ECMUtils.UIBrokenChecking();", eXo.ecm.ECMUtils.UIBrokenCheckingInterval);
-		}
-		ECMUtils.prototype.clearFillOutElement = function () {
-			var fillOutElement = gj('div.FillOutElement');
-			if (fillOutElement) {
-			  fillOutElement.css("height", "0px");
-			  fillOutElement.css("width", "0px");
-			}
-		}
-
-		/**
-		 * Adjust a invisible element which make the left container and right container
-		 * equal in height.
-		 *
-		 * function: adjustFillOutElement
-		 */
-		ECMUtils.prototype.adjustFillOutElement = function () {
-			var checkMinHeight = eXo.ecm.ECMUtils.initWithoutLeftContainer();
-			var workingArea = document.getElementById('UIWorkingArea');
-			var leftContainer = gj(workingArea).find("div.leftContainer:first")[0];
-			checkMinHeight = checkMinHeight || !leftContainer;
-			if (checkMinHeight) {
-				gj("div.UIDocumentInfo").css("min-height", "500px");
-			} else {
-				if (gj(leftContainer).css("display")=="none") {
-					gj("div.UIDocumentInfo").css("min-height", "500px");
-				}else { 
-					gj("div.UIDocumentInfo").css("min-height", "");
-					var rightContainer = gj(workingArea).find("div.rightContainer:first")[0];
-					if (rightContainer.offsetHeight < leftContainer.offsetHeight) {
-						var fillOutElement = gj('div.FillOutElement');
-						if (fillOutElement) {
-							if (leftContainer.offsetHeight - rightContainer.offsetHeight>0){
-								fillOutElement.css("height", leftContainer.offsetHeight - rightContainer.offsetHeight + "px");
-							} else {
-								fillOutElement.css("width", "0px");
-							}
-						}
-					}
-				}
-			}
 		}
 
 		ECMUtils.prototype.disableAutocomplete = function (id) {
@@ -1461,18 +1358,6 @@
 	ECMUtils.prototype.ajaxRedirect = function(url) {
 		url =	url.replace(/&amp;/g, "&") ;
 		window.location.href = url ;
-	};
-
-	ECMUtils.prototype.onLoadUIAddressBar = function() {
-		// 
-		var uiAddressBar = gj("#UIAddressBar");
-		if (uiAddressBar) {
-			var detailViewIcon = gj(uiAddressBar).find('td.detailViewIcon');
-			if (detailViewIcon) {
-				var detailViewBtnGroup = gj(detailViewIcon).find('div.btn-group');
-				gj(detailViewIcon).width(gj(detailViewBtnGroup).width());
-			}
-		}
 	};
 
         ECMUtils.prototype.initTagsTypeAhead = function(tags) {

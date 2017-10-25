@@ -92,14 +92,6 @@ UIFileView.prototype.initAllEvent = function(actionAreaId, enableDragAndDrop) {
 		}
 	});
 	
-	var listGrid = gj(actionArea).find("div.uiListGrid:first")[0];
-	if (listGrid) {
-		var fillOutElement = document.createElement('div');
-		fillOutElement.className = "FillOutElement";
-		gj("div.FillOutElement").remove();
-		listGrid.appendChild(fillOutElement);
-	}
-	
 	//remove context menu
 	var contextMenu = document.getElementById(Self.contextMenuId);
 	if (contextMenu) contextMenu.parentNode.removeChild(contextMenu);
@@ -781,20 +773,15 @@ UIFileView.prototype.initStickBreadcrumb = function() {
 		
 		if (scroll_top >= eXo.ecm.UIFileView.minActionbarTop) {
 			actionbar.css({ 'position': 'fixed','z-index': '2', 'top':0});
-			actionbar.width(actionbar.parent().width());
 			breadcrumb.css({ 'position': 'fixed', 'top':actionbar.height(), zIndex:1});
 			breadcrumb.width(breadcrumb.parent().width());
 		} else {
-			actionbar.css({ 'position': 'relative' });  
-			breadcrumb.css({ 'position': 'relative', 'top' :0 });  
+			actionbar.css({ 'position': 'relative' });
+			breadcrumb.css({ 'position': 'relative', 'top' :0, 'width': 'auto' });
 		}   
 	};
 	stickBreadcrumb;
 	gj(window).scroll(stickBreadcrumb);
-	var breadcrumb = gj('#FileViewBreadcrumb');
-	breadcrumb.width(breadcrumb.parent().width());
-	var actionbar= gj('#UIActionBar');
-	actionbar.width(actionbar.parent().width());
 };
 
 UIFileView.prototype.toggleCheckboxes = function(checkbox, evt) {

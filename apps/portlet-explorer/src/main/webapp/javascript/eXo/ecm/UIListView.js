@@ -58,13 +58,6 @@
       actionArea.onmousedown = Self.mouseDownGround;
       actionArea.onkeydown = Self.mouseDownGround;
       actionArea.onmouseup = Self.mouseUpGround;
-      var listGrid = gj(actionArea).find("div.uiListGrid:first")[0];
-			if (listGrid) {
-				var fillOutElement = document.createElement('div');
-				fillOutElement.className = "FillOutElement";
-				gj("div.FillOutElement").remove();
-				listGrid.appendChild(fillOutElement);
-			}
   
       //remove context menu
       var contextMenu = document.getElementById(Self.contextMenuId);
@@ -1057,7 +1050,6 @@
       if (totalWidth < uiListGrid.offsetWidth-2) {
         totalWidth = uiListGrid.offsetWidth-2;
       }
-      gj(tableBox).css("width", totalWidth + "px");
       //update width of uiListGrid
       eXo.ecm.ECMUtils.updateListGridWidth();  
   
@@ -1091,7 +1083,6 @@
       if (totalWidth < uiListGrid.offsetWidth-2) {
         totalWidth = uiListGrid.offsetWidth-2;
       }
-      gj(tableBox).css("width", totalWidth + "px");
     }
     
     eXo.ecm.ECMUtils.documentContainer_OnResize = function(){
@@ -1109,14 +1100,8 @@
       if (totalWidth < uiListGrid.offsetWidth-2) {
         totalWidth = uiListGrid.offsetWidth-2;
       }
-      gj(tableBox).css("width", totalWidth + "px");
-      eXo.ecm.ECMUtils.updateListGridWidth();
-      var breadcrumb = gj('#FileViewBreadcrumb');
-      if (breadcrumb) {
-          breadcrumb.width(breadcrumb.parent().width());
-        }        
-      var actionbar= gj('#UIActionBar');
-      actionbar.width(actionbar.parent().width());
+      eXo.ecm.ECMUtils.updateListGridWidth();      
+      
       var menubar = gj('div.uiFileViewActionBar');
       if (menubar) {
           menubar.width(gj("div#UIActionBar").width()-2);
