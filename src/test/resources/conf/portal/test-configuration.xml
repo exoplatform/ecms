@@ -57,7 +57,13 @@
       </properties-param>
     </init-params>
   </component>
-
+  
+  <!-- Required for tests since Platform 4.4, for Commons's org.exoplatform.settings.impl.SettingServiceImpl -->
+  <component>
+    <key>org.exoplatform.commons.chromattic.ChromatticManager</key>
+    <type>org.exoplatform.commons.chromattic.ChromatticManager</type>
+  </component>
+  
   <external-component-plugins>
     <target-component>org.exoplatform.services.jcr.impl.ext.action.SessionActionCatalog</target-component>
     <component-plugin>

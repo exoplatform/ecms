@@ -6,7 +6,21 @@
 
   <nodeType name="exo:trashFolder" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
   </nodeType>
-
+  
+  <!-- JCR nodetype exo:datetime was required in Platform 4.3 but is not for 4.4.-->
+  <!-- nodeType name="exo:datetime" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
+    <propertyDefinitions>
+      <propertyDefinition name="exo:dateCreated" requiredType="Date" autoCreated="true" mandatory="false"
+        onParentVersion="COPY" protected="false" multiple="false">
+        <valueConstraints/>       
+      </propertyDefinition>
+      <propertyDefinition name="exo:dateModified" requiredType="Date" autoCreated="true" mandatory="false"
+        onParentVersion="COPY" protected="false" multiple="false">
+        <valueConstraints/>       
+      </propertyDefinition>
+    </propertyDefinitions>
+  </nodeType -->
+  
   <nodeType name="exo:modify" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
     <propertyDefinitions>
       <propertyDefinition name="exo:lastModifiedDate" requiredType="Date" autoCreated="true"
