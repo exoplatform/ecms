@@ -50,12 +50,18 @@
                 left: 0, 
                 top: 0, 
                 width: obj.width ? obj.width : obj.offsetWidth, 
-                height: obj.height ? obj.height : obj.offsetHeight
+                height: obj.height ? obj.height : obj.offsetHeight,
+                position:'absolute'
             };
 
             while (obj) {
                 info.left += obj.offsetLeft;
                 info.top += obj.offsetTop;
+                if (obj.id=="UIActionBar") {
+                    if (window.getComputedStyle(obj).position=="fixed") {
+                        info.position="fixed";
+                    }
+                }
                 obj = obj.offsetParent;
             }
 
@@ -105,7 +111,7 @@
             // create floating DIV above element
             this.div = document.createElement('div');
             var style = this.div.style;
-            style.position = 'absolute';
+            style.position = box.position;
             style.left = '' + box.left + 'px';
             style.top = '' + box.top + 'px';
             style.width = '' + box.width + 'px';
