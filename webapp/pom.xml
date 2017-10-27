@@ -23,10 +23,11 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>org.exoplatform.addons</groupId>
+    <groupId>org.exoplatform.addons.clouddrive</groupId>
     <artifactId>exo-clouddrive-gdrive</artifactId>
-    <version>1.5.x-SNAPSHOT</version>
+    <version>1.6.x-SNAPSHOT</version>
   </parent>
+  
   <artifactId>exo-clouddrive-gdrive-webapp</artifactId>
   <packaging>war</packaging>
   <name>eXo Cloud Drive :: Connectors :: Google Drive :: Webapp</name>
@@ -34,7 +35,7 @@
   
   <dependencies>
     <dependency>
-      <groupId>org.exoplatform.addons</groupId>
+      <groupId>org.exoplatform.addons.clouddrive</groupId>
       <artifactId>exo-clouddrive-gdrive-services</artifactId>
       <scope>provided</scope>
       <type>jar</type>
