@@ -27,20 +27,15 @@ import javax.jcr.observation.EventListener;
 import javax.jcr.observation.EventListenerIterator;
 import javax.jcr.observation.ObservationManager;
 
-import junit.framework.TestCase;
-
-import org.exoplatform.container.PortalContainer;
-import org.exoplatform.services.jcr.RepositoryService;
+import org.exoplatform.clouddrive.BaseCloudDriveTest;
+import org.exoplatform.component.test.ConfigurationUnit;
+import org.exoplatform.component.test.ConfiguredBy;
+import org.exoplatform.component.test.ContainerScope;
 import org.exoplatform.services.jcr.core.ManageableRepository;
-import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
-import org.exoplatform.services.security.Authenticator;
 import org.exoplatform.services.security.ConversationState;
-import org.exoplatform.services.security.Credential;
-import org.exoplatform.services.security.PasswordCredential;
-import org.exoplatform.services.security.UsernameCredential;
 
 /**
  * Created by The eXo Platform SAS.
@@ -48,57 +43,36 @@ import org.exoplatform.services.security.UsernameCredential;
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
  * @version $Id: TestJCRRemoveObservation.java 00000 Sep 12, 2012 pnedonosko $
  */
-public class TestJCRRemoveObservation extends TestCase {
+@ConfiguredBy({ @ConfigurationUnit(scope = ContainerScope.ROOT, path = "conf/configuration.xml"),
+    @ConfigurationUnit(scope = ContainerScope.ROOT, path = "conf/test-clouddrive-configuration.xml"),
+    @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/portal/configuration.xml"),
+    @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/portal/test-clouddrive-configuration.xml") })
+public class TestJCRRemoveObservation extends BaseCloudDriveTest {
 
-  protected final Log            LOG = ExoLogger.getLogger(TestJCRRemoveObservation.class);
+  protected final Log LOG = ExoLogger.getLogger(TestJCRRemoveObservation.class);
 
-  private RepositoryService      repositoryService;
+  private Session     testSession;
 
-  private SessionProviderService sessionProviders;
-
-  private Session                session;
-
-  private Session                testSession;
-
-  private Node                   testRoot;
+  private Node        testRoot;
 
   /**
    * setUp.
    * 
    * @throws java.lang.Exception
    */
-  protected void setUp() throws Exception {
+  public void setUp() throws Exception {
     super.setUp();
-
-    PortalContainer container = PortalContainer.getInstance();
-    repositoryService = (RepositoryService) container.getComponentInstanceOfType(RepositoryService.class);
-    repositoryService.setCurrentRepositoryName(System.getProperty("gatein.jcr.repository.default"));
-
-    sessionProviders = (SessionProviderService) container.getComponentInstanceOfType(SessionProviderService.class);
-
-    // login via Authenticator
-    Authenticator authr = (Authenticator) container.getComponentInstanceOfType(Authenticator.class);
-    String user = authr.validateUser(new Credential[] { new UsernameCredential("root"),
-        new PasswordCredential("") });
-    ConversationState.setCurrent(new ConversationState(authr.createIdentity(user)));
-
-    // and set session provider to the service
-    SessionProvider sessionProvider = new SessionProvider(ConversationState.getCurrent());
-    sessionProvider.setCurrentRepository(repositoryService.getCurrentRepository());
-    sessionProvider.setCurrentWorkspace("collaboration");
-    sessionProviders.setSessionProvider(null, sessionProvider);
-
-    session = sessionProviders.getSessionProvider(null).getSession(sessionProvider.getCurrentWorkspace(),
-                                                                   sessionProvider.getCurrentRepository());
 
     testRoot = session.getRootNode().addNode("testRemoveObservation", "nt:unstructured");
     testRoot.addNode("test1");
     session.save();
 
-    SessionProvider testSessionProvider = new SessionProvider(ConversationState.getCurrent());
-    testSessionProvider.setCurrentRepository(repositoryService.getCurrentRepository());
-    testSessionProvider.setCurrentWorkspace("collaboration");
-    testSession = testSessionProvider.getSession("collaboration", repositoryService.getCurrentRepository());
+    // SessionProvider testSessionProvider = new SessionProvider(ConversationState.getCurrent());
+    // testSessionProvider.setCurrentRepository(repositoryService.getCurrentRepository());
+    // testSessionProvider.setCurrentWorkspace("collaboration");
+    // testSession = testSessionProvider.getSession("collaboration",
+    // repositoryService.getCurrentRepository());
+    testSession = repositoryService.getRepository(REPO_NAME).getSystemSession(WORKSPACE_NAME);
   }
 
   /**
@@ -109,7 +83,6 @@ public class TestJCRRemoveObservation extends TestCase {
   protected void tearDown() throws Exception {
     testRoot.remove();
     session.save();
-    session.logout();
 
     testSession.logout();
 
@@ -133,19 +106,13 @@ public class TestJCRRemoveObservation extends TestCase {
     }
 
     ObservationManager observationManager = session.getWorkspace().getObservationManager();
-    
+
     // and register dummy listener
-    observationManager.addEventListener(new DummyListener(),
-                             Event.NODE_ADDED,
-                             testRoot.getPath(),
-                             false,
-                             null,
-                             null,
-                             true);
+    observationManager.addEventListener(new DummyListener(), Event.NODE_ADDED, testRoot.getPath(), false, null, null, true);
 
     // register self-removing listener
-    final ConversationState currentConvo = ConversationState.getCurrent();
-    final ManageableRepository currentRepository = repositoryService.getCurrentRepository();
+    //final ConversationState currentConvo = ConversationState.getCurrent();
+    //final ManageableRepository currentRepository = repositoryService.getCurrentRepository();
     EventListener selfRemoving = new EventListener() {
       @Override
       public void onEvent(EventIterator events) {
@@ -154,14 +121,16 @@ public class TestJCRRemoveObservation extends TestCase {
         try {
           LOG.info("Removing listener " + this);
 
-          SessionProvider listenerSP = new SessionProvider(currentConvo);
-          Session listenerSession = listenerSP.getSession("collaboration", currentRepository);
+          //SessionProvider listenerSP = new SessionProvider(currentConvo);
+          //Session listenerSession = listenerSP.getSession("collaboration", currentRepository);
+          Session listenerSession = repositoryService.getRepository(REPO_NAME).getSystemSession(WORKSPACE_NAME);
+          
           ObservationManager om = listenerSession.getWorkspace().getObservationManager();
           om.removeEventListener(this);
 
           for (EventListenerIterator listeners = om.getRegisteredEventListeners(); listeners.hasNext();) {
             EventListener l = listeners.nextEventListener();
-            // LOG.info(l);
+            LOG.info("Left EventListener: " + l);
           }
 
           listenerSession.logout();
@@ -173,18 +142,14 @@ public class TestJCRRemoveObservation extends TestCase {
     observationManager.addEventListener(selfRemoving, Event.NODE_REMOVED, testRoot.getPath(), false, null, null, true);
 
     // one more dummy listener
-    observationManager.addEventListener(new DummyListener(),
-                             Event.NODE_REMOVED,
-                             testRoot.getPath(),
-                             false,
-                             null,
-                             null,
-                             true);
+    observationManager.addEventListener(new DummyListener(), Event.NODE_REMOVED, testRoot.getPath(), false, null, null, true);
 
     // test it in another session (listeners above are noLocal=true)
     testSession.refresh(false);
     try {
-      testSession.getItem(testRoot.getPath() + "/test1").remove();
+      String path = testRoot.getPath() + "/test1";
+      testSession.getItem(path).remove();
+      LOG.info("Removed node: " + path);
       testSession.save();
       Thread.sleep(2000); // wait for async observation
     } catch (Throwable e) {
@@ -194,10 +159,11 @@ public class TestJCRRemoveObservation extends TestCase {
     // Ensure node was removed even more than smoothly
     assertFalse("Node test1 should be removed", testRoot.hasNode("test1"));
 
-    // Ensure listener is not more registered (even in registration session) 
+    // Ensure listener is not more registered (even in registration session)
+    LOG.info("Listener selfRemoving: " + selfRemoving);
     for (EventListenerIterator listeners = observationManager.getRegisteredEventListeners(); listeners.hasNext();) {
       EventListener l = listeners.nextEventListener();
-      // LOG.info(l);
+      LOG.info("Still existing EventListener: " + l);
       assertNotSame("Listener " + selfRemoving + " should be already removed", selfRemoving, l);
     }
 

@@ -23,9 +23,9 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>org.exoplatform.addons</groupId>
+    <groupId>org.exoplatform.addons.clouddrive</groupId>
     <artifactId>exo-clouddrive-services</artifactId>
-    <version>1.5.x-SNAPSHOT</version>
+    <version>1.6.x-SNAPSHOT</version>
   </parent>
   <artifactId>exo-clouddrive-services-core</artifactId>
   <packaging>jar</packaging>
@@ -102,14 +102,14 @@
       <scope>compile</scope>
       <type>jar</type>
     </dependency>
-    <!-- dependency>
-      <groupId>org.apache.tomcat</groupId>
-      <artifactId>catalina</artifactId>
-      <scope>provided</scope>
-      <type>jar</type>
-    </dependency -->
 
     <!-- for tests -->
+    <dependency>
+      <groupId>org.exoplatform.commons</groupId>
+      <artifactId>commons-testing</artifactId>
+      <scope>test</scope>
+      <type>jar</type>
+    </dependency>
     <dependency>
       <groupId>org.hsqldb</groupId>
       <artifactId>hsqldb</artifactId>
@@ -122,12 +122,6 @@
       <scope>test</scope>
       <type>jar</type>
     </dependency>
-    <!-- dependency>
-      <groupId>org.exoplatform.platform</groupId>
-      <artifactId>exo.platform.component.organization</artifactId>
-      <scope>test</scope>
-      <type>jar</type>
-    </dependency -->
     <dependency>
       <groupId>org.exoplatform</groupId>
       <artifactId>exo-jcr-services</artifactId>
@@ -266,7 +260,7 @@
                 <java.security.auth.login.config>${project.build.directory}/test-classes/conf/jaas.conf</java.security.auth.login.config>
               </systemPropertyVariables>
               <includes>
-                <include>**/**/*Spec.java</include>
+                <include>**/**/*NO_Spec.java</include>
               </includes>
               <excludes>
                 <exclude>**/**/UploadSpec.java</exclude>
