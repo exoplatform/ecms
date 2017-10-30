@@ -31,11 +31,8 @@ import org.exoplatform.clouddrive.BaseCloudDriveTest;
 import org.exoplatform.component.test.ConfigurationUnit;
 import org.exoplatform.component.test.ConfiguredBy;
 import org.exoplatform.component.test.ContainerScope;
-import org.exoplatform.services.jcr.core.ManageableRepository;
-import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
-import org.exoplatform.services.security.ConversationState;
 
 /**
  * Created by The eXo Platform SAS.
@@ -63,16 +60,12 @@ public class TestJCRRemoveObservation extends BaseCloudDriveTest {
   public void setUp() throws Exception {
     super.setUp();
 
-    testRoot = session.getRootNode().addNode("testRemoveObservation", "nt:unstructured");
+    testRoot = root.addNode("testRemoveObservation", "nt:unstructured");
     testRoot.addNode("test1");
-    session.save();
+    root.save();
 
-    // SessionProvider testSessionProvider = new SessionProvider(ConversationState.getCurrent());
-    // testSessionProvider.setCurrentRepository(repositoryService.getCurrentRepository());
-    // testSessionProvider.setCurrentWorkspace("collaboration");
-    // testSession = testSessionProvider.getSession("collaboration",
-    // repositoryService.getCurrentRepository());
-    testSession = repositoryService.getRepository(REPO_NAME).getSystemSession(WORKSPACE_NAME);
+    // Use system session to work under another (root) user
+    testSession = systemSession();
   }
 
   /**
@@ -111,8 +104,6 @@ public class TestJCRRemoveObservation extends BaseCloudDriveTest {
     observationManager.addEventListener(new DummyListener(), Event.NODE_ADDED, testRoot.getPath(), false, null, null, true);
 
     // register self-removing listener
-    //final ConversationState currentConvo = ConversationState.getCurrent();
-    //final ManageableRepository currentRepository = repositoryService.getCurrentRepository();
     EventListener selfRemoving = new EventListener() {
       @Override
       public void onEvent(EventIterator events) {
@@ -121,10 +112,8 @@ public class TestJCRRemoveObservation extends BaseCloudDriveTest {
         try {
           LOG.info("Removing listener " + this);
 
-          //SessionProvider listenerSP = new SessionProvider(currentConvo);
-          //Session listenerSession = listenerSP.getSession("collaboration", currentRepository);
-          Session listenerSession = repositoryService.getRepository(REPO_NAME).getSystemSession(WORKSPACE_NAME);
-          
+          Session listenerSession = systemSession();
+
           ObservationManager om = listenerSession.getWorkspace().getObservationManager();
           om.removeEventListener(this);
 

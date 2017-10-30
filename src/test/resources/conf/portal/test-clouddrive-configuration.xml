@@ -30,7 +30,7 @@
     <init-params>
       <value-param>
         <name>properties.url</name>
-        <value>classpath:/conf/configuration.properties</value>
+        <value>jar:/conf/exo-clouddrive.properties</value>
       </value-param>
     </init-params>
   </component>
@@ -249,8 +249,8 @@
     </component-plugin>
   </external-component-plugins>
 
-  <import>classpath:/conf/portal/test-jcr-configuration.xml</import>
-  <import>classpath:/conf/portal/test-organization-configuration.xml</import>
+  <import>jar:/conf/portal/test-jcr-configuration.xml</import>
+  <import>jar:/conf/portal/test-organization-configuration.xml</import>
   
   <!-- remove-configuration>org.exoplatform.commons.api.persistence.DataInitializer</remove-configuration -->
   <remove-configuration>org.exoplatform.wcm.ext.component.document.service.ContentViewerRESTService</remove-configuration>

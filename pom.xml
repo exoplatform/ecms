@@ -221,6 +221,8 @@
             <classpathDependencyExclude>org.exoplatform.platform:platform-component-common</classpathDependencyExclude>
           </classpathDependencyExcludes>
           <useFile>false</useFile>
+          <!-- workingDirectory>${project.build.directory}</workingDirectory>
+          <basedir>${project.build.directory}</basedir -->
           <argLine>${env.MAVEN_OPTS} -Djava.security.manager=org.exoplatform.commons.test.TestSecurityManager
             -Djava.security.policy=${project.build.directory}/test-classes/conf/test.policy</argLine>
           <systemPropertyVariables>
@@ -229,7 +231,7 @@
             <java.security.auth.login.config>${project.build.directory}/test-classes/conf/jaas.conf</java.security.auth.login.config>
           </systemPropertyVariables>
           <includes>
-            <include>**/**/Test*.java</include>
+            <include>**/**/TestJCRRemoveObservation.java</include>
           </includes>
           <forkCount>0</forkCount>
         </configuration>
@@ -256,7 +258,6 @@
                 <exo.test.type>integration</exo.test.type><!-- to separate HSQL and Indexer files in JCR -->
                 <maven.exoplatform.dir>${project.build.directory}</maven.exoplatform.dir>
                 <exo.conf.dir.name>test-classes/conf</exo.conf.dir.name>
-                <!-- exo.shared.dir>${project.build.directory}</exo.shared.dir  -->
                 <java.security.auth.login.config>${project.build.directory}/test-classes/conf/jaas.conf</java.security.auth.login.config>
               </systemPropertyVariables>
               <includes>

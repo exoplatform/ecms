@@ -48,7 +48,7 @@
         <property name="log4j.appender.stdout.layout.ConversionPattern" value="%d{dd.MM.yyyy HH:mm:ss} *%-5p* [%t] %c{1}: %m (%F, line %L) %n" />
 
         <property name="log4j.appender.file" value="org.apache.log4j.FileAppender" />
-        <property name="log4j.appender.file.File" value="target/jcr.log" />
+        <property name="log4j.appender.file.File" value="${exo.shared.dir}/jcr.log" />
 
         <property name="log4j.appender.file.layout" value="org.apache.log4j.PatternLayout" />
         <property name="log4j.appender.file.layout.ConversionPattern" value="%d{dd.MM.yyyy HH:mm:ss} *%-5p* [%t] %c{1}: %m (%F, line %L) %n" />
@@ -183,15 +183,11 @@
           <description>ref-addresses</description>
           <property name="driverClassName" value="org.hsqldb.jdbcDriver" />
           <property name="url"
-            value="jdbc:hsqldb:file:${gatein.data.dir}/hsqldb/${exo.test.type:test}/${gatein.jcr.repository.default}" />
+            value="jdbc:hsqldb:file:${gatein.data.dir}/hsqldb/${exo.test.type:clouddrive_test}/${gatein.jcr.repository.default}" />
           <property name="username" value="sa" />
           <property name="password" value="" />
         </properties-param>
       </init-params>
     </component-plugin>
   </external-component-plugins>
-  
-  <!-- Remove DataInitializer in root config of commons-component-common -->
-  <remove-configuration>org.exoplatform.commons.api.persistence.DataInitializer</remove-configuration>
-  
 </configuration>

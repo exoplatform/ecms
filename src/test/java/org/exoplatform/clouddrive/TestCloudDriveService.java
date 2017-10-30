@@ -70,7 +70,7 @@ public class TestCloudDriveService extends BaseCloudDriveTest {
   public static final String   USER2_NAME        = "user2";
 
   public static final String   FILE_NAME_PATTERN = "test_file";
-
+  
   protected CloudDriveService  cdService;
 
   protected Node               testRoot;
@@ -92,9 +92,7 @@ public class TestCloudDriveService extends BaseCloudDriveTest {
     super.setUp();
 
     testRoot = root.addNode("testCloudDriveService", "nt:folder");
-    session.save();
-    // testWorkspace = session.getWorkspace().getName();
-    // testPath = testRoot.getPath();
+    root.save();
 
     cdService = (CloudDriveService) container.getComponentInstanceOfType(CloudDriveService.class);
 

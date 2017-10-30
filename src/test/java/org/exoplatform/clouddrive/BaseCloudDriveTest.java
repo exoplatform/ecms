@@ -22,9 +22,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.jcr.LoginException;
+import javax.jcr.NoSuchWorkspaceException;
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
 import javax.jcr.RepositoryException;
+import javax.jcr.Session;
 
 import org.exoplatform.clouddrive.exodrive.service.FileStore;
 import org.exoplatform.commons.testing.BaseCommonsTestCase;
@@ -49,6 +52,8 @@ public abstract class BaseCloudDriveTest extends BaseCommonsTestCase {
   protected static final Log       LOG = ExoLogger.getLogger(BaseCloudDriveTest.class);
 
   protected SessionProviderService sessionProviders;
+  
+  protected String workspaceName; 
 
   /**
    * setUp.
@@ -66,18 +71,37 @@ public abstract class BaseCloudDriveTest extends BaseCommonsTestCase {
 
     // login via Authenticator
     Authenticator authr = (Authenticator) container.getComponentInstanceOfType(Authenticator.class);
-    String user = authr.validateUser(new Credential[] { new UsernameCredential("root"), new PasswordCredential("") });
-    ConversationState.setCurrent(new ConversationState(authr.createIdentity(user)));
+    String johnUser = authr.validateUser(new Credential[] { new UsernameCredential("john"), new PasswordCredential("") });
+    ConversationState.setCurrent(new ConversationState(authr.createIdentity(johnUser)));
 
     // and set session provider to the service
     SessionProvider sessionProvider = new SessionProvider(ConversationState.getCurrent());
     sessionProvider.setCurrentRepository(repositoryService.getCurrentRepository());
-    sessionProvider.setCurrentWorkspace("collaboration");
+    workspaceName = System.getProperty("gatein.jcr.workspace.default");
+    sessionProvider.setCurrentWorkspace(workspaceName);
     sessionProviders.setSessionProvider(null, sessionProvider);
-
-    // TODO need it?
-    // session = sessionProviders.getSessionProvider(null).getSession(sessionProvider.getCurrentWorkspace(),
-    // sessionProvider.getCurrentRepository());
+    
+    session = userSession();
+    root = session.getRootNode();
+  }
+  
+  protected void tearDown() throws Exception {
+    // Remove in user session, not Commons's system session to another workspace (portal-test)
+    NodeIterator iter = root.getNodes();
+    while (iter.hasNext()) {
+      Node node = iter.nextNode();
+      node.remove();
+    }
+    session.save();
+    super.tearDown();
+  }
+  
+  protected Session userSession() throws LoginException, NoSuchWorkspaceException, RepositoryException {
+    return sessionProviders.getSessionProvider(null).getSession(workspaceName, repositoryService.getCurrentRepository());
+  }
+  
+  protected Session systemSession() throws LoginException, NoSuchWorkspaceException, RepositoryException {
+    return repositoryService.getCurrentRepository().getSystemSession(workspaceName);
   }
 
   protected void assertNodesExist(NodeIterator nodes, String... expected) throws RepositoryException {

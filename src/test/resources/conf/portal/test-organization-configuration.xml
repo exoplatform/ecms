@@ -283,13 +283,13 @@
                       <string></string>
                     </field>
                     <field name="firstName">
-                      <string>Support</string>
+                      <string>Super</string>
                     </field>
                     <field name="lastName">
-                      <string>Bot</string>
+                      <string>User</string>
                     </field>
                     <field name="email">
-                      <string>support@cloud-workspaces.com</string>
+                      <string>super@acme</string>
                     </field>
                     <field name="groups">
                       <string>*:/platform/administrators,*:/platform/users,*:/platform/web-contributors,*:/organization/employees</string>
@@ -308,7 +308,7 @@
                       <string>John</string>
                     </field>
                     <field name="lastName">
-                      <string>Dou</string>
+                      <string>Smith</string>
                     </field>
                     <field name="email">
                       <string>john@acme</string>
@@ -321,19 +321,19 @@
                 <value>
                   <object type="org.exoplatform.services.organization.OrganizationConfig$User">
                     <field name="userName">
-                      <string>mark</string>
+                      <string>mary</string>
                     </field>
                     <field name="password">
                       <string></string>
                     </field>
                     <field name="firstName">
-                      <string>Mark</string>
+                      <string>Mary</string>
                     </field>
                     <field name="lastName">
-                      <string>Kovalsky</string>
+                      <string>Williams</string>
                     </field>
                     <field name="email">
-                      <string>mark@acme</string>
+                      <string>mary@acme</string>
                     </field>
                     <field name="groups">
                       <string>*:/platform/administrators,*:/platform/users,*:/platform/web-contributors,*:/organization/employees</string>
