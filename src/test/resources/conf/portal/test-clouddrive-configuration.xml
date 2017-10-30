@@ -86,6 +86,10 @@
     <type>org.exoplatform.commons.chromattic.ChromatticManager</type>
   </component>
   
+  <component>
+    <type>org.exoplatform.commons.persistence.impl.EntityManagerService</type>
+  </component>
+  
   <!-- For eXo Platform stack -->
   <component>
     <key>org.exoplatform.services.naming.InitialContextInitializer</key>

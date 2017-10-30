@@ -260,7 +260,8 @@
                 <java.security.auth.login.config>${project.build.directory}/test-classes/conf/jaas.conf</java.security.auth.login.config>
               </systemPropertyVariables>
               <includes>
-                <include>**/**/*NO_Spec.java</include>
+                <!-- TODO specs need adoption to PLF 5 configurations (JPA and Commons test env) -->
+                <include>**/**/*Spec.java</include>
               </includes>
               <excludes>
                 <exclude>**/**/UploadSpec.java</exclude>
