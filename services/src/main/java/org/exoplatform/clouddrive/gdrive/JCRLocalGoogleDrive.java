@@ -186,7 +186,7 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
                                            gf.getId(),
                                            gf.getTitle(),
                                            gf.getAlternateLink(),
-                                           gf.getAlternateLink(),
+                                           isEditableType(gf.getMimeType()) ? gf.getAlternateLink() : null,
                                            gf.getEmbedLink(),
                                            gf.getThumbnailLink(),
                                            gf.getMimeType(),
@@ -537,7 +537,7 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
                                        gf.getId(),
                                        gf.getTitle(),
                                        gf.getAlternateLink(),
-                                       gf.getAlternateLink(),
+                                       isEditableType(gf.getMimeType()) ? gf.getAlternateLink() : null,
                                        gf.getEmbedLink(),
                                        gf.getThumbnailLink(),
                                        gf.getMimeType(),
@@ -690,7 +690,7 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
                                    gf.getId(),
                                    gf.getTitle(),
                                    link,
-                                   link,
+                                   isEditableType(gf.getMimeType()) ? link : null,
                                    gf.getEmbedLink(),
                                    gf.getThumbnailLink(),
                                    gf.getMimeType(),
@@ -792,7 +792,7 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
                                      gf.getId(),
                                      gf.getTitle(),
                                      link,
-                                     link,
+                                     isEditableType(gf.getMimeType()) ? link : null,
                                      gf.getEmbedLink(),
                                      gf.getThumbnailLink(),
                                      gf.getMimeType(),
@@ -900,7 +900,7 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
                                      gf.getId(),
                                      gf.getTitle(),
                                      link,
-                                     link,
+                                     isEditableType(gf.getMimeType()) ? link : null,
                                      gf.getEmbedLink(),
                                      gf.getThumbnailLink(),
                                      gf.getMimeType(),
@@ -960,7 +960,7 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
                                    gf.getId(),
                                    gf.getTitle(),
                                    link,
-                                   link,
+                                   isEditableType(gf.getMimeType()) ? link : null,
                                    gf.getEmbedLink(),
                                    gf.getThumbnailLink(),
                                    gf.getMimeType(),
@@ -1190,7 +1190,7 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
                                        gf.getId(),
                                        gf.getTitle(),
                                        link,
-                                       link,
+                                       isEditableType(gf.getMimeType()) ? link : null,
                                        gf.getEmbedLink(),
                                        gf.getThumbnailLink(),
                                        gf.getMimeType(),
@@ -1580,9 +1580,9 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
   /**
    * {@inheritDoc}
    */
-  protected String editLink(String fileLink, Node fileNode) throws RepositoryException {
+  protected String editLink(String fileLink, String type, Node fileNode) throws RepositoryException {
     // file link and edit link are the same for Google Drive as for 28.01.2015
-    return fileLink;
+    return isEditableType(type) ? fileLink : null;
   }
 
   /**
@@ -1601,5 +1601,15 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
       }
     }
     return size;
+  }
+  
+  /**
+   * Checks if is editable type of file type.
+   *
+   * @param mimeType the mime type
+   * @return true, if is editable type
+   */
+  protected boolean isEditableType(String mimeType) {
+    return mimeType != null && mimeType.startsWith("application/vnd.google-apps.");
   }
 }
