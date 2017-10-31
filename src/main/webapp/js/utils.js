@@ -60,7 +60,7 @@
 			if (document.createStyleSheet) {
 				document.createStyleSheet(cssUrl); // IE way
 			} else {
-				if ($("head").find("link[href='"+cssUrl+"']").size() == 0) {
+				if ($("head").find("link[href='"+cssUrl+"']").length == 0) {
 					var headElems = document.getElementsByTagName("head");
 					var style = document.createElement("link");
 					style.type = "text/css";

@@ -1410,7 +1410,7 @@
 					});
 					// filter Context Menu common items: JCRContextMenu located in action bar
 					var $items = $("#JCRContextMenu li.menuItem a i");
-					var itemsCount = $items.size();
+					var itemsCount = $items.length;
 					$items.not(allowed).each(function() {
 						$(this).parent().css("display", "none");
 						itemsCount--;
@@ -1489,7 +1489,7 @@
 
 			// List/Admin view
 			var $listView = $("div.fileViewRowView");
-			if ($listView.size() > 0) {
+			if ($listView.length > 0) {
 				$listView.each(function() {
 					$(this).removeClass("notCloudFile cloudFileDisabled");
 					$(this).find("span.syncingListView").remove();
@@ -1507,7 +1507,7 @@
 				});
 			}
 			// List/Admin view - fix file size
-			if ($listView.size() > 0) {
+			if ($listView.length > 0) {
 				$listView.each(function() {
 					var objectId = decodeString($(this).attr("objectid"));
 					// find all info lines with 1K size and replace the size with real value
@@ -1524,7 +1524,7 @@
 
 			// Icon view
 			var $iconView = $("div.actionIconBox");
-			if ($iconView.size() > 0) {
+			if ($iconView.length > 0) {
 				$iconView.each(function() {
 					$(this).removeClass("notCloudFile cloudFileDisabled");
 					$(this).find("div.syncingIconView").remove();
@@ -1543,10 +1543,10 @@
 			}
 
 			// Icon view - fix file size (nasty way)
-			if ($iconView.size() > 0) {
+			if ($iconView.length > 0) {
 				$("#UIPopupContainer").on("DOMSubtreeModified propertychange", function() {
 					var $info = $("#UIViewInfoManager");
-					if ($info.size() > 0 && !$info.data("cd_data_sizefixed")) {// avoid loops caused by text modification below
+					if ($info.length > 0 && !$info.data("cd_data_sizefixed")) {// avoid loops caused by text modification below
 						$info.find("td").filter("td:contains(' Byte(s)'), td:contains(' KB'), td:contains(' MB'), td:contains(' GB')").each(function() {
 							var file = cloudDrive.getContextFile();
 							if (file) {
@@ -1646,7 +1646,7 @@
 				$actionBar.find("li a.actionIcon i").not(allowed).each(function() {// div ul li
 					$(this).parent().css("display", "none");
 				});
-				if ($actionBar.find("li a:visible").size() == 0) {
+				if ($actionBar.find("li a:visible").length == 0) {
 					// hack to prevent empty menu bar
 					$actionBar.append("<li style='display: block;'><a class='actionIcon' style='height: 18px;'><i></i> </a></li>");
 				}
@@ -1654,7 +1654,7 @@
 				// add sync call to Refresh action
 				$("a.refreshIcon").click(function() {
 					var $refreshChanges = $("span.uiCloudDriveChanges");
-					if ($refreshChanges.size() > 0) {
+					if ($refreshChanges.length > 0) {
 						var currentDate = new Date();
 						var syncDate = $refreshChanges.data("timestamp");
 						if (syncDate && (currentDate.getMilliseconds() - syncDate.getMilliseconds() <= 60000)) {
@@ -1667,7 +1667,7 @@
 
 				// File Viewer
 				var $viewer = $("#CloudFileViewer");
-				if ($viewer.size() > 0 && !$viewer.data("initialized")) {
+				if ($viewer.length > 0 && !$viewer.data("initialized")) {
 					var $vswitch = $("#ViewerSwitch");
 					var file = cloudDrive.getContextFile();
 					var openOnProvider = $viewer.attr("file-open-on");
@@ -1689,7 +1689,7 @@
 
 					// fix activity file views: Download icon, text and link
 					var $activityDownload = $("#UIDocumentPreview .downloadBtn>a");
-					if ($activityDownload.size() > 0) {
+					if ($activityDownload.length > 0) {
 						iconColor = "uiIconWhite";
 						openOnIcon.push($activityDownload.find("i.uiIconDownload"));
 						openOn.push($activityDownload);
@@ -1711,6 +1711,8 @@
 						$a.attr("target", "_blank");
 						$a.css("font-weight", "normal");
 					});
+					
+					$vswitch.addClass("btn");
 
 					var $viewIcon = $("<i class='uiIconWatch'></i>");
 					$viewIcon.addClass(iconColor);
@@ -1719,7 +1721,7 @@
 
 					var $iframe = $viewer.find("iframe");
 					// file link as edit link
-					if ($vswitch.size() > 0 && file.editLink && file.previewLink && file.editLink != file.previewLink) {
+					if ($vswitch.length > 0 && file.editLink && file.previewLink && file.editLink != file.previewLink) {
 						// init Edit/View mode
 						$iframe.attr("src", file.previewLink);
 						$vswitch.click(function() {
@@ -1765,7 +1767,7 @@
 			var $viewer = $("#WebContent");
 			var $code = $viewer.find("#TabCode");
 
-			if ($viewer.size() > 0) {
+			if ($viewer.length > 0) {
 				// load Codemirror styles only if text editor tab exists
 				// and only in window (not in iframe as gadgets may do)
 				if (window == top) {
@@ -1823,7 +1825,7 @@
 
 			var $codeSwitch = $("#FileCodeSwitch");
 			$codeSwitch.click(function() {
-				if ($code.size() > 0 && $code.children().size() == 0) {
+				if ($code.length > 0 && $code.children().length == 0) {
 					var codeURL = $viewer.find("iframe").attr("src");
 					createViewer(codeURL);
 				}
@@ -1864,9 +1866,9 @@
 		 * contain such element.
 		 */
 		var personalDocumentsLink = function() {
-			var link = $("a.refreshIcon");
-			if (link.size() > 0) {
-				return link.attr("href");
+			var $link = $("a.refreshIcon");
+			if ($link.length > 0) {
+				return $link.attr("href");
 			}
 		};
 
@@ -1879,8 +1881,8 @@
 				$("a.refreshIcon i.uiIconRefresh").click();
 			} else {
 				// don't refresh if user actions active or if file view active
-				if ($("div#UIDocumentInfo:visible").size() > 0) {
-					if ($("div#UIPopupWindow:visible, div#UIRenameWindowPopup, span.loading").size() == 0) {
+				if ($("div#UIDocumentInfo:visible").length > 0) {
+					if ($("div#UIPopupWindow:visible, div#UIRenameWindowPopup, span.loading").length == 0) {
 						// refresh view w/o popup
 						$("#ECMContextMenu a[exo\\:attr='RefreshView'] i").click();
 					}
@@ -2424,31 +2426,33 @@
 			// map: name = providerId
 			var files = [];
 			var styleSize;
-			var target = $("div.actionIconBox");
-			var tree;
-			if (target.size() > 0) {
+			var $target, $tree;
+			var $files = $("#UIDocumentInfo");
+			var $activeViewBtn = $("#UIAddressBar .detailViewIcon .btn.active");
+			if ($activeViewBtn.find(".uiIconEcmsViewIcons").length > 0) {
 				// Icon view
 				styleSize = "uiIcon64x64";
-				tree = $("#UITreeExplorer li.node");
+				$target = $files.find(".actionIconBox");
+				$tree = $("#UITreeExplorer .node");
 			} else {
 				// List or Admin view
 				styleSize = "uiIcon24x24";
-				target = $("div.rowView");
+				$target = $files.find(".rowView");
 			}
 			for (name in map) {
 				if (map.hasOwnProperty(name)) {
 					var providerId = map[name];
 					var cname = styleSize + "CloudDrive-" + providerId;
-					$(target).each(function(i, item) {
-						if ($(item).find("span.nodeName:contains('" + name + "')").size() > 0) {
+					$target.each(function(i, item) {
+						if ($(item).find("span.nodeName:contains('" + name + "')").length > 0) {
 							$(item).find("div." + styleSize + "nt_folder:not(:has(div." + cname + "))").each(function() {
 								$("<div class='" + cname + "'></div>").appendTo(this);
 							});
 						}
 					});
-					if (tree) {
+					if ($tree) {
 						cname = "uiIcon16x16CloudDrive-" + providerId;
-						$(tree).each(function() {
+						$tree.each(function() {
 							$(this).find("span.nodeName:contains('" + name + "')").each(function() {
 								$(this).siblings("i.uiIcon16x16nt_folder:not(:has(div." + cname + "))").each(function() {
 									$("<div class='" + cname + "'></div>").appendTo(this);
@@ -2462,7 +2466,7 @@
 
 		this.initSharing = function() {
 			var $permission = $("#UISharingManager .permission");
-			if ($permission.size() > 0) {
+			if ($permission.length > 0) {
 				$permission.find("label.checkbox").hide();
 				if ($permission.find("input[name='userOrGroup']").val().length > 0) {
 					$permission.find("input[name='read']").prop("checked", true);
