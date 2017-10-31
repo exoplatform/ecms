@@ -5246,8 +5246,8 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
     String typeMode = isFolder ? null : mimeTypes.getMimeTypeMode(type, title);
     String link = link(fileNode);
     // folder has no preview/edit links by definition (we rely on ECMS doc views)
-    String previewLink = isFolder ? null : previewLink(fileNode);
-    String editLink = isFolder ? null : editLink(link, fileNode);
+    String previewLink = isFolder ? null : previewLink(type, fileNode);
+    String editLink = isFolder ? null : editLink(link, type, fileNode);
     long size = size(fileNode);
 
     return new JCRLocalCloudFile(fileNode.getPath(),
@@ -5603,12 +5603,13 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
    * Return provider specific link for a file preview. By default this method will try read value of
    * <code>ecd:previewUrl</code> property and if not such property exists <code>null</code> will be returned.
    * Actual connector implementation may override this logic.
-   *
+   * @param type {@link String} file mime type or <code>null</code>
    * @param fileNode {@link String} cloud file node
+   *
    * @return String with a link should be used for file preview.
    * @throws RepositoryException the repository exception
    */
-  protected String previewLink(Node fileNode) throws RepositoryException {
+  protected String previewLink(String type, Node fileNode) throws RepositoryException {
     try {
       return fileNode.getProperty("ecd:previewUrl").getString();
     } catch (PathNotFoundException e) {
@@ -5662,11 +5663,12 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
    * editing not supported.
    *
    * @param fileLink {@link String} file link, can be used to build edit link by the connector implementation
+   * @param type {@link String} file mime type or <code>null</code>
    * @param fileNode {@link Node}
    * @return {@link String} an URL to edit cloud file or <code>null</code> if editing not supported
    * @throws RepositoryException the repository exception
    */
-  protected String editLink(String fileLink, Node fileNode) throws RepositoryException {
+  protected String editLink(String fileLink, String type, Node fileNode) throws RepositoryException {
     return null;
   }
 

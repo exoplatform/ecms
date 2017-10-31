@@ -18,11 +18,11 @@
  */
 package org.exoplatform.clouddrive.jcr;
 
-import org.exoplatform.clouddrive.CloudFile;
-
 import java.util.Calendar;
 
 import javax.jcr.Node;
+
+import org.exoplatform.clouddrive.CloudFile;
 
 /**
  * A POJO providing information about a cloud file stored in JCR.

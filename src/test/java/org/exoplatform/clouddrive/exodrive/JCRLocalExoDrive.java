@@ -233,7 +233,7 @@ public class JCRLocalExoDrive extends JCRLocalCloudDrive {
                                      fs.getId(),
                                      fs.getName(),
                                      fs.getLink(),
-                                     previewLink(fileNode),
+                                     previewLink(null, fileNode),
                                      fs.getLink(),
                                      fs.getType(),
                                      mimeTypes.getMimeTypeMode(fs.getType(), fs.getName()),
