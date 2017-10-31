@@ -39,4 +39,11 @@ public interface UserTokenRefreshListener {
    */
   void onUserTokenRefresh(UserToken token) throws CloudDriveException;
   
+  /**
+   * Action on token removal by provider.
+   *
+   * @throws CloudDriveException the cloud drive exception
+   */
+  void onUserTokenRemove() throws CloudDriveException;
+  
 }
