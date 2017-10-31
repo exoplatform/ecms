@@ -1711,8 +1711,6 @@
 						$a.attr("target", "_blank");
 						$a.css("font-weight", "normal");
 					});
-					
-					$vswitch.addClass("btn");
 
 					var $viewIcon = $("<i class='uiIconWatch'></i>");
 					$viewIcon.addClass(iconColor);
