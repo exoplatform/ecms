@@ -26,10 +26,10 @@
 
   <!-- Javascript for Cloud Drive UI support in WCM -->
   <module>
-    <name>jqueryPnotify</name>
+    <name>cloudDriveJqueryPnotify</name>
     <load-group>cloudDriveGRP</load-group>
     <script>
-      <path>/js/jquery.pnotify.min.js</path>
+      <path>/js/jquery.pnotify.js</path>
     </script>
     <depends>
       <module>jquery</module>
@@ -46,7 +46,7 @@
       <module>jquery</module>
     </depends>
     <depends>
-      <module>jqueryPnotify</module>
+      <module>cloudDriveJqueryPnotify</module>
     </depends>
   </module>
   <module>
