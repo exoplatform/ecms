@@ -18,13 +18,20 @@
  */
 package org.exoplatform.clouddrive.gdrive;
 
-import com.google.api.client.http.InputStreamContent;
-import com.google.api.client.util.DateTime;
-import com.google.api.services.drive.model.About;
-import com.google.api.services.drive.model.ChildReference;
-import com.google.api.services.drive.model.File;
-import com.google.api.services.drive.model.ParentReference;
-import com.google.api.services.drive.model.User;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+
+import javax.jcr.Node;
+import javax.jcr.NodeIterator;
+import javax.jcr.PathNotFoundException;
+import javax.jcr.RepositoryException;
 
 import org.exoplatform.clouddrive.CloudDriveAccessException;
 import org.exoplatform.clouddrive.CloudDriveException;
@@ -46,21 +53,13 @@ import org.exoplatform.clouddrive.oauth2.UserTokenRefreshListener;
 import org.exoplatform.clouddrive.utils.ExtendedMimeTypeResolver;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
-
-import javax.jcr.Node;
-import javax.jcr.NodeIterator;
-import javax.jcr.PathNotFoundException;
-import javax.jcr.RepositoryException;
+import com.google.api.client.http.InputStreamContent;
+import com.google.api.client.util.DateTime;
+import com.google.api.services.drive.model.About;
+import com.google.api.services.drive.model.ChildReference;
+import com.google.api.services.drive.model.File;
+import com.google.api.services.drive.model.ParentReference;
+import com.google.api.services.drive.model.User;
 
 /**
  * JCR local storage for Google Drive. Created by The eXo Platform SAS.
@@ -187,7 +186,7 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
                                            gf.getId(),
                                            gf.getTitle(),
                                            gf.getAlternateLink(),
-                                           gf.getAlternateLink(),
+                                           isEditableType(gf.getMimeType()) ? gf.getAlternateLink() : null,
                                            gf.getEmbedLink(),
                                            gf.getThumbnailLink(),
                                            gf.getMimeType(),
@@ -317,13 +316,11 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
             if (hasRemoved(gf.getId())) {
               cleanRemoved(gf.getId());
               if (LOG.isDebugEnabled()) {
-                LOG.debug(">> Returned file trashing " + gf.getId() + " " + gf.getTitle() + " "
-                    + ch.getModificationDate().toStringRfc3339());
+                LOG.debug(">> Returned file trashing " + gf.getId() + " " + gf.getTitle() + " " + ch.getModificationDate().toStringRfc3339());
               }
             } else {
               if (LOG.isDebugEnabled()) {
-                LOG.debug(">> File trashing " + gf.getId() + " " + gf.getTitle() + " "
-                    + ch.getModificationDate().toStringRfc3339());
+                LOG.debug(">> File trashing " + gf.getId() + " " + gf.getTitle() + " " + ch.getModificationDate().toStringRfc3339());
               }
             }
             deleteFile(gf.getId());
@@ -331,13 +328,11 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
             if (hasUpdated(gf.getId())) {
               cleanUpdated(gf.getId());
               if (LOG.isDebugEnabled()) {
-                LOG.debug(">> Returned file update " + gf.getId() + " " + gf.getTitle() + " "
-                    + ch.getModificationDate().toStringRfc3339());
+                LOG.debug(">> Returned file update " + gf.getId() + " " + gf.getTitle() + " " + ch.getModificationDate().toStringRfc3339());
               }
             } else {
               if (LOG.isDebugEnabled()) {
-                LOG.debug(">> File update " + gf.getId() + " " + gf.getTitle() + " "
-                    + ch.getModificationDate().toStringRfc3339());
+                LOG.debug(">> File update " + gf.getId() + " " + gf.getTitle() + " " + ch.getModificationDate().toStringRfc3339());
               }
               updateFile(gf, parents);
             }
@@ -512,17 +507,18 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
                        gf.getLastModifyingUserName(),
                        created,
                        modified);
-            file = new JCRLocalCloudFile(fileNode.getPath(),
-                                         gf.getId(),
-                                         gf.getTitle(),
-                                         gf.getAlternateLink(),
-                                         gf.getMimeType(),
-                                         gf.getLastModifyingUserName(),
-                                         gf.getOwnerNames().get(0),
-                                         created,
-                                         modified,
-                                         fileNode,
-                                         true);
+            file =
+                 new JCRLocalCloudFile(fileNode.getPath(),
+                                       gf.getId(),
+                                       gf.getTitle(),
+                                       gf.getAlternateLink(),
+                                       gf.getMimeType(),
+                                       gf.getLastModifyingUserName(),
+                                       gf.getOwnerNames().get(0),
+                                       created,
+                                       modified,
+                                       fileNode,
+                                       true);
           } else {
             initFile(fileNode,
                      gf.getId(),
@@ -536,22 +532,23 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
                      created,
                      modified,
                      size);
-            file = new JCRLocalCloudFile(fileNode.getPath(),
-                                         gf.getId(),
-                                         gf.getTitle(),
-                                         gf.getAlternateLink(),
-                                         gf.getAlternateLink(),
-                                         gf.getEmbedLink(),
-                                         gf.getThumbnailLink(),
-                                         gf.getMimeType(),
-                                         null, // typeMode not required for GoogleDrive
-                                         gf.getLastModifyingUserName(),
-                                         gf.getOwnerNames().get(0),
-                                         created,
-                                         modified,
-                                         size,
-                                         fileNode,
-                                         true);
+            file =
+                 new JCRLocalCloudFile(fileNode.getPath(),
+                                       gf.getId(),
+                                       gf.getTitle(),
+                                       gf.getAlternateLink(),
+                                       isEditableType(gf.getMimeType()) ? gf.getAlternateLink() : null,
+                                       gf.getEmbedLink(),
+                                       gf.getThumbnailLink(),
+                                       gf.getMimeType(),
+                                       null, // typeMode not required for GoogleDrive
+                                       gf.getLastModifyingUserName(),
+                                       gf.getOwnerNames().get(0),
+                                       created,
+                                       modified,
+                                       size,
+                                       fileNode,
+                                       true);
           }
           synced.add(fileNode);
           addChanged(file);
@@ -649,11 +646,8 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
      * {@inheritDoc}
      */
     @Override
-    public CloudFile createFile(Node fileNode,
-                                Calendar created,
-                                Calendar modified,
-                                String mimeType,
-                                InputStream content) throws CloudDriveException, RepositoryException {
+    public CloudFile createFile(Node fileNode, Calendar created, Calendar modified, String mimeType, InputStream content) throws CloudDriveException,
+                                                                                                                          RepositoryException {
 
       // File's metadata.
       File gf = new File();
@@ -696,7 +690,7 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
                                    gf.getId(),
                                    gf.getTitle(),
                                    link,
-                                   link,
+                                   isEditableType(gf.getMimeType()) ? link : null,
                                    gf.getEmbedLink(),
                                    gf.getThumbnailLink(),
                                    gf.getMimeType(),
@@ -798,7 +792,7 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
                                      gf.getId(),
                                      gf.getTitle(),
                                      link,
-                                     link,
+                                     isEditableType(gf.getMimeType()) ? link : null,
                                      gf.getEmbedLink(),
                                      gf.getThumbnailLink(),
                                      gf.getMimeType(),
@@ -869,10 +863,8 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
      * {@inheritDoc}
      */
     @Override
-    public CloudFile updateFileContent(Node fileNode,
-                                       Calendar modified,
-                                       String mimeType,
-                                       InputStream content) throws CloudDriveException, RepositoryException {
+    public CloudFile updateFileContent(Node fileNode, Calendar modified, String mimeType, InputStream content) throws CloudDriveException,
+                                                                                                               RepositoryException {
       // Update existing file content and related metadata.
       File gf = api.file(getId(fileNode));
       gf.setMimeType(mimeType);
@@ -908,7 +900,7 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
                                      gf.getId(),
                                      gf.getTitle(),
                                      link,
-                                     link,
+                                     isEditableType(gf.getMimeType()) ? link : null,
                                      gf.getEmbedLink(),
                                      gf.getThumbnailLink(),
                                      gf.getMimeType(),
@@ -968,7 +960,7 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
                                    gf.getId(),
                                    gf.getTitle(),
                                    link,
-                                   link,
+                                   isEditableType(gf.getMimeType()) ? link : null,
                                    gf.getEmbedLink(),
                                    gf.getThumbnailLink(),
                                    gf.getMimeType(),
@@ -1198,7 +1190,7 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
                                        gf.getId(),
                                        gf.getTitle(),
                                        link,
-                                       link,
+                                       isEditableType(gf.getMimeType()) ? link : null,
                                        gf.getEmbedLink(),
                                        gf.getThumbnailLink(),
                                        gf.getMimeType(),
@@ -1292,7 +1284,8 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
                                 Node driveNode,
                                 SessionProviderService sessionProviders,
                                 NodeFinder finder,
-                                ExtendedMimeTypeResolver mimeTypes) throws CloudDriveException, RepositoryException {
+                                ExtendedMimeTypeResolver mimeTypes)
+      throws CloudDriveException, RepositoryException {
     super(user, driveNode, sessionProviders, finder, mimeTypes);
     getUser().api().getToken().addListener(this);
   }
@@ -1316,7 +1309,7 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
                                 SessionProviderService sessionProviders,
                                 NodeFinder finder,
                                 ExtendedMimeTypeResolver mimeTypes)
-                                    throws RepositoryException, GoogleDriveException, CloudDriveException {
+      throws RepositoryException, GoogleDriveException, CloudDriveException {
     super(loadUser(apiBuilder, provider, driveNode), driveNode, sessionProviders, finder, mimeTypes);
     getUser().api().getToken().addListener(this);
   }
@@ -1378,6 +1371,40 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
       } catch (RepositoryException e) {
         rollback(driveNode);
         throw new CloudDriveException("Error updating access key: " + e.getMessage(), e);
+      }
+    } catch (DriveRemovedException e) {
+      throw new CloudDriveException("Error openning drive node: " + e.getMessage(), e);
+    } catch (RepositoryException e) {
+      throw new CloudDriveException("Error reading drive node: " + e.getMessage(), e);
+    } finally {
+      jcrListener.enable();
+    }
+  }
+
+  /**
+   * {@inheritDoc}
+   * 
+   */
+  @Override
+  public void onUserTokenRemove() throws CloudDriveException {
+    try {
+      jcrListener.disable();
+      Node driveNode = rootNode();
+      try {
+        if (driveNode.hasProperty("gdrive:oauth2AccessToken")) {
+          driveNode.getProperty("gdrive:oauth2AccessToken").remove();
+        }
+        if (driveNode.hasProperty("gdrive:oauth2RefreshToken")) {
+          driveNode.getProperty("gdrive:oauth2RefreshToken").remove();
+        }
+        if (driveNode.hasProperty("gdrive:oauth2TokenExpirationTime")) {
+          driveNode.getProperty("gdrive:oauth2TokenExpirationTime").remove();
+        }
+
+        driveNode.save();
+      } catch (RepositoryException e) {
+        rollback(driveNode);
+        throw new CloudDriveException("Error removing access key: " + e.getMessage(), e);
       }
     } catch (DriveRemovedException e) {
       throw new CloudDriveException("Error openning drive node: " + e.getMessage(), e);
@@ -1460,9 +1487,7 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
    * @throws RefreshAccessException the refresh access exception
    * @throws DriveRemovedException the drive removed exception
    */
-  protected boolean checkAccessScope(CloudDriveAccessException cause) throws RepositoryException,
-                                                                      RefreshAccessException,
-                                                                      DriveRemovedException {
+  protected boolean checkAccessScope(CloudDriveAccessException cause) throws RepositoryException, RefreshAccessException, DriveRemovedException {
     if (cause != null && !isAccessScopeMatch()) {
       throw new RefreshAccessException("Renew access key to Google Drive", cause);
     }
@@ -1536,9 +1561,7 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
    * @param localParentIds {@link List} of parent ids locally
    * @return the list
    */
-  protected List<ParentReference> mergeParents(String parentId,
-                                               List<ParentReference> cloudParents,
-                                               Collection<String> localParentIds) {
+  protected List<ParentReference> mergeParents(String parentId, List<ParentReference> cloudParents, Collection<String> localParentIds) {
     // we take remote parents and leave only such that exists locally
     // parentId also *may be* included to localParentIds collection (if it is saved)
     List<ParentReference> parents = new ArrayList<ParentReference>();
@@ -1557,9 +1580,9 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
   /**
    * {@inheritDoc}
    */
-  protected String editLink(String fileLink, Node fileNode) throws RepositoryException {
+  protected String editLink(String fileLink, String type, Node fileNode) throws RepositoryException {
     // file link and edit link are the same for Google Drive as for 28.01.2015
-    return fileLink;
+    return isEditableType(type) ? fileLink : null;
   }
 
   /**
@@ -1578,5 +1601,15 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
       }
     }
     return size;
+  }
+  
+  /**
+   * Checks if is editable type of file type.
+   *
+   * @param mimeType the mime type
+   * @return true, if is editable type
+   */
+  protected boolean isEditableType(String mimeType) {
+    return mimeType != null && mimeType.startsWith("application/vnd.google-apps.");
   }
 }

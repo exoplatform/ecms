@@ -259,6 +259,18 @@ class GoogleDriveAPI implements DataStoreFactory {
     final Store store = new Store();
 
     /**
+     * Clear token.
+     *
+     */
+    void clearToken() {
+      try {
+        clear();
+      } catch (CloudDriveException e) {
+        LOG.error("Error removing credential", e);
+      }
+    }
+    
+    /**
      * Store.
      *
      * @param credential the credential
@@ -306,10 +318,15 @@ class GoogleDriveAPI implements DataStoreFactory {
     @Override
     public void onTokenErrorResponse(Credential credential, TokenErrorResponse tokenErrorResponse) throws IOException {
       // TODO clean token keys to let them be re-requested to the user
+      if (tokenErrorResponse != null) {
       String errDescription = tokenErrorResponse.getErrorDescription();
       String errURI = tokenErrorResponse.getErrorUri();
-      LOG.error("Error refreshing credentials: " + tokenErrorResponse.getError()
-          + (errDescription != null ? " " + errDescription : "") + (errURI != null ? ". Error URI: " + errURI : ""));
+        LOG.error("Error refreshing credentials: " + tokenErrorResponse.getError()
+            + (errDescription != null ? " " + errDescription : "") + (errURI != null ? ". Error URI: " + errURI : ""));
+      } else {
+        LOG.error("Error refreshing credentials for Google Drive [tokenErrorResponse was null]");
+      }
+      clearToken();
     }
 
     /**
