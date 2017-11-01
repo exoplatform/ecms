@@ -980,6 +980,10 @@
 				try {
 					// load provider styles
 					utils.loadStyle("/cloud-drive-" + id + "/skin/clouddrive.css");
+					// XXX load Enterprise Skin if required
+					if (eXo.env && eXo.env.client && eXo.env.client.skin == "Enterprise") {
+						utils.loadStyle("/cloud-drive-" + id + "/skin/clouddrive-enterprise.css");
+					}
 				} catch(e) {
 					utils.log("Error loading provider (" + id + ") style.", e);
 				}
