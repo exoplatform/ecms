@@ -51,19 +51,20 @@
 }
 
 .uiIcon16x16CloudFile-gdrive {
-    top: 2px;
+    /*top: 2px;*/
 }
 
 .uiIcon16x16CloudFile-gdrive:before {
     /* use !important to prevent issues with browser extensions that change fonts */
     font-family: 'icomoon' !important;
     speak: none;
+    text-transform: none;
+    line-height: 1;
     font-style: normal;
     font-weight: normal;
     font-variant: normal;
-    text-transform: none;
-    line-height: 1;
-
+    font-size: 14px;
+    
     /* Better Font Rendering =========== */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -76,21 +77,18 @@
     width: 16px;
     height: 16px;
     position: absolute !important;
-    -webkit-transform: scale(0.36);
-    -moz-transform: scale(0.36);
-    -o-transform: scale(0.36);
-    -ms-transform: scale(0.36);
-    transform: scale(0.36);
     
     /* use !important to prevent issues with browser extensions that change fonts */
     font-family: 'icomoon' !important;
     speak: none;
+    text-transform: none;
+    line-height: 1;
     font-style: normal;
     font-weight: normal;
     font-variant: normal;
-    text-transform: none;
-    line-height: 1;
-
+    font-size: 8px;
+    color: #ffffff;
+    
     /* Better Font Rendering =========== */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -99,30 +97,28 @@
 }
 
 .uiIcon24x24CloudDrive-gdrive:before {
-    left: 2px;
-    top: -21px;
+    left: 5px;
+    top: -24px;
     width: 20px;
     height: 20px;
     position: relative !important;
     display: inline-block;
-    -webkit-transform: scale(0.7);
-    -moz-transform: scale(0.7);
-    -o-transform: scale(0.7);
-    -ms-transform: scale(0.7);
-    transform: scale(0.7);
-
+    
     /* use !important to prevent issues with browser extensions that change fonts */
     font-family: 'icomoon' !important;
     speak: none;
+    text-transform: none;
+    line-height: 1;
     font-style: normal;
     font-weight: normal;
     font-variant: normal;
-    text-transform: none;
-    line-height: 1;
-
+    font-size: 12px;
+    color: #ffffff;
+    
     /* Better Font Rendering =========== */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    
     content: "\e901";
 }
 
@@ -132,24 +128,22 @@
     width: 40px;
     height: 40px;
     position: absolute !important;
-    -webkit-transform: scale(0.7);
-    -moz-transform: scale(0.7);
-    -o-transform: scale(0.7);
-    -ms-transform: scale(0.7);
-    transform: scale(0.7);
-
+    
     /* use !important to prevent issues with browser extensions that change fonts */
     font-family: 'icomoon' !important;
     speak: none;
+    text-transform: none;
+    line-height: 1;
     font-style: normal;
     font-weight: normal;
     font-variant: normal;
-    text-transform: none;
-    line-height: 1;
-
+    font-size: 30px;
+    color: #ffffff;
+    
     /* Better Font Rendering =========== */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    
     content: "\e901";
 }
 
@@ -163,8 +157,8 @@
 	}
 	
 	.uiIcon24x24CloudDrive-gdrive:before {
-		left: 6px;
-    	top: -30px;
+		left: 8px;
+    	top: -33px;
 	}
 	
 	.uiIcon64x64CloudDrive-gdrive:before {
@@ -174,6 +168,24 @@
 }
 
 /*************************** NodeType Icons for Google Drive documents ***********************/
+
+/* PLF 5 activity stream has own style classes for file mimetypes, these elements also .uiCloudFileActivity */
+[class*="uiBgd64x64applicationvndgoogle-"] {
+    width: 50px;
+    height: 50px;
+    /*margin-top: -8px;
+    -webkit-transform: scale(0.6);
+    -moz-transform: scale(0.6);
+    -o-transform: scale(0.6);
+    -ms-transform: scale(0.6);
+    transform: scale(0.6);*/
+}
+
+.uiBgd64x64applicationvndgoogle-appsdocument {
+    background-image: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_document_x128.png");
+}
+
+/* ECMS Documents Explorer styles */
 
 [class*="uiIcon16x16applicationvndgoogle-"] {
     top: 1px;
@@ -227,7 +239,7 @@
     content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_presentation_x32.png");
 }
 
-.uiIcon64x64applicationvndgoogle-appspresentation:before {
+.uiIcon64x64applicationvndgoogle-appspresentation:before, .uiBgd64x64applicationvndgoogle-appspresentation:before {
     content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_presentation_x128.png");
 }
 
@@ -239,7 +251,7 @@
     content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_document_x32.png");
 }
 
-.uiIcon64x64applicationvndgoogle-appsdocument::before {
+.uiIcon64x64applicationvndgoogle-appsdocument:before, .uiBgd64x64applicationvndgoogle-appsdocumentX:before {
     content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_document_x128.png");
 }
 
@@ -251,7 +263,7 @@
     content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_image_x32.png");
 }
 
-.uiIcon64x64applicationvndgoogle-appsphoto:before {
+.uiIcon64x64applicationvndgoogle-appsphoto:before, .uiBgd64x64applicationvndgoogle-appsphoto:before {
     content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_image_x128.png");
 }
 
@@ -263,7 +275,7 @@
     content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_script_x32.png");
 }
 
-.uiIcon64x64applicationvndgoogle-appsscript:before {
+.uiIcon64x64applicationvndgoogle-appsscript:before, .uiBgd64x64applicationvndgoogle-appsscript:before {
     content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_script_x128.png");
 }
 
@@ -276,7 +288,7 @@
     content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_spreadsheet_x32.png");
 }
 
-.uiIcon64x64applicationvndgoogle-appsspreadsheet:before {
+.uiIcon64x64applicationvndgoogle-appsspreadsheet:before, .uiBgd64x64applicationvndgoogle-appsspreadsheet:before {
     content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_spreadsheet_x128.png");
 }
 
@@ -288,7 +300,7 @@
     content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_video_x32.png");
 }
 
-.uiIcon64x64applicationvndgoogle-appsvideo:before {
+.uiIcon64x64applicationvndgoogle-appsvideo:before, .uiBgd64x64applicationvndgoogle-appsvideo:before {
     content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_video_x128.png");
 }
 
@@ -300,7 +312,7 @@
     content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_audio_x32.png");
 }
 
-.uiIcon64x64applicationvndgoogle-appsaudio:before {
+.uiIcon64x64applicationvndgoogle-appsaudio:before, .uiBgd64x64applicationvndgoogle-appsaudio:before {
     content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_audio_x128.png");
 }
 
@@ -312,7 +324,7 @@
     content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_drawing_x32.png");
 }
 
-.uiIcon64x64applicationvndgoogle-appsdrawing:before {
+.uiIcon64x64applicationvndgoogle-appsdrawing:before, .uiBgd64x64applicationvndgoogle-appsdrawing:before {
     content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_drawing_x128.png");
 }
 
@@ -327,7 +339,7 @@
     content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_2_form_x32.png");
 }
 
-.uiIcon64x64applicationvndgoogle-appsform:before {
+.uiIcon64x64applicationvndgoogle-appsform:before, .uiBgd64x64applicationvndgoogle-appsform:before {
     content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_2_form_x128.png");
 }
 
@@ -339,7 +351,7 @@
     content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_map_x32.png");
 }
 
-.uiIcon64x64applicationvndgoogle-appsmap:before {
+.uiIcon64x64applicationvndgoogle-appsmap:before, .uiBgd64x64applicationvndgoogle-appsmap:before {
     content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_map_x128.png");
 }
 
@@ -351,7 +363,7 @@
     content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_2_generic_x32.png");
 }
 
-.uiIcon64x64applicationvndgoogle-appsunknown:before, .uiIcon64x64applicationvndgoogle-appsfile:before {
+.uiIcon64x64applicationvndgoogle-appsunknown:before, .uiIcon64x64applicationvndgoogle-appsfile:before, .uiBgd64x64applicationvndgoogle-appsunknown:before, .uiBgd64x64applicationvndgoogle-appsfile:before {
     content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_2_generic_x128.png");
 }
 
