@@ -1,0 +1,21 @@
+/* Enterprise Skin styles */
+
+.uiIcon16x16CloudDrive-gdrive:before {
+	left: -17px;
+    top: 2px;
+}
+
+.uiIcon64x64CloudDrive-gdrive:before {
+	left: -50px;
+    top: 1px;
+}
+
+/*
+ * Responsive styles
+ */
+@media (min-width: 481px) and (max-width: 1024px) {
+	.uiIcon64x64CloudDrive-gdrive:before {
+		left: -57px;
+    	top: -8px;
+	}
+}
