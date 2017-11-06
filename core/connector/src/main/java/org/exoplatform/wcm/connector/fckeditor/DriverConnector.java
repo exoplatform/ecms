@@ -112,11 +112,17 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
   /** The Constant FILE_TYPE_IMAGE. */
   public static final String FILE_TYPE_IMAGE                       = "Image";
 
+  /** The Constant FILE_TYPE_SIMPLE_IMAGE for JPG/JPEG, PNG and GIF. */
+  public static final String FILE_TYPE_SIMPLE_IMAGE                       = "SimpleImage";
+
   /** The Constant MEDIA_MIMETYPE. */
   public static final String[] MEDIA_MIMETYPE = new String[]{"application", "image", "audio", "video"};
 
   /** The Constant MEDIA_MIMETYPE. */
   public static final String[] IMAGE_MIMETYPE = new String[]{"image"};
+
+  /** The Constant MEDIA_MIMETYPE. */
+  public static final String[] SIMPLE_IMAGE_MIMETYPE = new String[]{"image/png", "image/jpg", "image/jpeg", "image/gif"};
 
   public static final String TYPE_FOLDER = "folder";
 
@@ -714,11 +720,11 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
                         nodePath.substring(nodePath.lastIndexOf("/") + 1, nodePath.length()),  childRelativePath, nodeDriveName, type);
           folders.appendChild(folder);
         }
-
-      if (FILE_TYPE_ALL.equals(filterBy)
-          && (checkNode.isNodeType(NodetypeConstant.EXO_WEBCONTENT) || !isFolder(checkNode, type))) {
-        fileType = FILE_TYPE_ALL;
-      }
+  
+        if (FILE_TYPE_ALL.equals(filterBy)
+            && (checkNode.isNodeType(NodetypeConstant.EXO_WEBCONTENT) || !isFolder(checkNode, type))) {
+          fileType = FILE_TYPE_ALL;
+        }
 
         if (FILE_TYPE_WEBCONTENT.equals(filterBy)) {
           if(checkNode.isNodeType(NodetypeConstant.EXO_WEBCONTENT)) {
@@ -735,8 +741,12 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
         }
 
         if (FILE_TYPE_IMAGE.equals(filterBy) && isImageType(checkNode)) {
-            fileType = FILE_TYPE_IMAGE;
-          }
+          fileType = FILE_TYPE_IMAGE;
+        }
+
+        if (FILE_TYPE_SIMPLE_IMAGE.equals(filterBy) && isSimpleImageType(checkNode)) {
+          fileType = FILE_TYPE_SIMPLE_IMAGE;
+        }
 
         if (fileType != null) {
           Element file = FCKFileHandler.createFileElement(document, fileType, checkNode, child, currentPortal, childRelativePath, linkManager);
@@ -849,6 +859,31 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
 
     for(String type: MEDIA_MIMETYPE) {
       if(mimeType.contains(type)){
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+  /**
+   * Checks if is image of type JPG, JPEG, PNG or GIF.
+   *
+   * @param node the node
+   *
+   * @return true, if is simple image type
+   */
+  private boolean isSimpleImageType(Node node){
+    String mimeType = "";
+
+    try {
+      mimeType = node.getNode("jcr:content").getProperty("jcr:mimeType").getString();
+    } catch (Exception e) {
+      return false;
+    }
+
+    for(String type: SIMPLE_IMAGE_MIMETYPE) {
+      if(mimeType.equalsIgnoreCase(type)){
         return true;
       }
     }
