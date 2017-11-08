@@ -16,7 +16,43 @@
  */
 package org.exoplatform.wcm.connector.fckeditor;
 
+import java.net.URLDecoder;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
+import java.util.MissingResourceException;
+import java.util.ResourceBundle;
+
+import javax.annotation.security.RolesAllowed;
+import javax.jcr.Node;
+import javax.jcr.NodeIterator;
+import javax.jcr.RepositoryException;
+import javax.jcr.Session;
+import javax.servlet.http.HttpServletRequest;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.CacheControl;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.transform.dom.DOMSource;
+
 import org.apache.commons.lang.StringUtils;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.ecm.connector.fckeditor.FCKUtils;
 import org.exoplatform.ecm.utils.text.Text;
@@ -48,28 +84,6 @@ import org.exoplatform.services.wcm.webcontent.WebContentSchemaHandler;
 import org.exoplatform.wcm.connector.BaseConnector;
 import org.exoplatform.wcm.connector.FileUploadHandler;
 import org.exoplatform.wcm.connector.handler.FCKFileHandler;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
-
-import javax.annotation.security.RolesAllowed;
-import javax.jcr.*;
-import javax.servlet.http.HttpServletRequest;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.CacheControl;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.transform.dom.DOMSource;
-import java.net.URLDecoder;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.*;
 
 /**
  * Returns a list of drives/folders/documents in a specified location for a given user. Also, it processes the file uploading action.
@@ -98,11 +112,17 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
   /** The Constant FILE_TYPE_IMAGE. */
   public static final String FILE_TYPE_IMAGE                       = "Image";
 
+  /** The Constant FILE_TYPE_SIMPLE_IMAGE for JPG/JPEG, PNG and GIF. */
+  public static final String FILE_TYPE_SIMPLE_IMAGE                       = "SimpleImage";
+
   /** The Constant MEDIA_MIMETYPE. */
   public static final String[] MEDIA_MIMETYPE = new String[]{"application", "image", "audio", "video"};
 
   /** The Constant MEDIA_MIMETYPE. */
   public static final String[] IMAGE_MIMETYPE = new String[]{"image"};
+
+  /** The Constant MEDIA_MIMETYPE. */
+  public static final String[] SIMPLE_IMAGE_MIMETYPE = new String[]{"image/png", "image/jpg", "image/jpeg", "image/gif"};
 
   public static final String TYPE_FOLDER = "folder";
 
@@ -130,9 +150,6 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
   private LinkManager linkManager_ = null;
 
   private String resourceBundleNames[];
-  private ResourceBundle sharedResourceBundle=null;
-
-  private Locale lang = Locale.ENGLISH;
 
   private DocumentService documentService;
 
@@ -266,6 +283,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
                                          filterBy,
                                          session,
                                          currentPortal,
+                                         currentFolder,
                                          Text.escapeIllegalJcrChars(driverName), type);
 
     } catch (Exception e) {
@@ -518,17 +536,23 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
   }
 
   private String resolveDriveLabel(String name, String lang) {
-    if (resourceBundleService ==null) {
+    if (resourceBundleService == null) {
       resourceBundleService = WCMCoreUtils.getService(ResourceBundleService.class);
       resourceBundleNames = resourceBundleService.getSharedResourceBundleNames();
-      sharedResourceBundle = resourceBundleService.getResourceBundle(resourceBundleNames, this.lang);
     }
+    if (StringUtils.isBlank(lang)) {
+      lang = Locale.ENGLISH.getLanguage();
+    }
+    Locale locale = new Locale(lang);
+    ResourceBundle sharedResourceBundle = resourceBundleService.getResourceBundle(resourceBundleNames, locale);
     try {
-      if(!this.lang.getLanguage().equals(lang)){
-        this.lang = new Locale(lang);
-        sharedResourceBundle = resourceBundleService.getResourceBundle(resourceBundleNames, this.lang);
+      sharedResourceBundle = resourceBundleService.getResourceBundle(resourceBundleNames, locale);
+      String key = "ContentSelector.title." + name.replaceAll(" ", "");
+      if(sharedResourceBundle.containsKey(key)) {
+        return sharedResourceBundle.getString(key);
+      } else {
+        return getDriveTitle(name);
       }
-      return sharedResourceBundle.getString("ContentSelector.title." + name.replaceAll(" ", ""));
     } catch (MissingResourceException e) {
       if (LOG.isDebugEnabled()) {
         LOG.debug(e.getMessage());
@@ -643,6 +667,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
                                                String filterBy,
                                                Session session,
                                                String currentPortal,
+                                               String currentParentFolder,
                                                String nodeDriveName,
                                                String type) throws Exception {
       TemplateService templateService = WCMCoreUtils.getService(TemplateService.class);
@@ -683,18 +708,23 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
 
         checkNode = sourceNode != null ? sourceNode : child;
 
+        String folderPath = child.getPath();
+        folderPath = folderPath.substring(folderPath.lastIndexOf("/") + 1, folderPath.length());
+        String childRelativePath = StringUtils.isEmpty(currentParentFolder) ? folderPath : currentParentFolder.concat("/")
+                                                                                    .concat(folderPath);
+
         if (isFolder(checkNode, type)) {
           // Get node name from node path to fix same name problem (ECMS-3586)
           String nodePath = child.getPath();
           Element folder = createFolderElement(document, checkNode, checkNode.getPrimaryNodeType().getName(),
-                        nodePath.substring(nodePath.lastIndexOf("/") + 1, nodePath.length()), nodeDriveName, type);
+                        nodePath.substring(nodePath.lastIndexOf("/") + 1, nodePath.length()),  childRelativePath, nodeDriveName, type);
           folders.appendChild(folder);
         }
-
-      if (FILE_TYPE_ALL.equals(filterBy)
-          && (checkNode.isNodeType(NodetypeConstant.EXO_WEBCONTENT) || !isFolder(checkNode, type))) {
-        fileType = FILE_TYPE_ALL;
-      }
+  
+        if (FILE_TYPE_ALL.equals(filterBy)
+            && (checkNode.isNodeType(NodetypeConstant.EXO_WEBCONTENT) || !isFolder(checkNode, type))) {
+          fileType = FILE_TYPE_ALL;
+        }
 
         if (FILE_TYPE_WEBCONTENT.equals(filterBy)) {
           if(checkNode.isNodeType(NodetypeConstant.EXO_WEBCONTENT)) {
@@ -711,11 +741,15 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
         }
 
         if (FILE_TYPE_IMAGE.equals(filterBy) && isImageType(checkNode)) {
-            fileType = FILE_TYPE_IMAGE;
-          }
+          fileType = FILE_TYPE_IMAGE;
+        }
+
+        if (FILE_TYPE_SIMPLE_IMAGE.equals(filterBy) && isSimpleImageType(checkNode)) {
+          fileType = FILE_TYPE_SIMPLE_IMAGE;
+        }
 
         if (fileType != null) {
-          Element file = FCKFileHandler.createFileElement(document, fileType, checkNode, child, currentPortal, linkManager);
+          Element file = FCKFileHandler.createFileElement(document, fileType, checkNode, child, currentPortal, childRelativePath, linkManager);
           files.appendChild(file);
         }
       }
@@ -825,6 +859,31 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
 
     for(String type: MEDIA_MIMETYPE) {
       if(mimeType.contains(type)){
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+  /**
+   * Checks if is image of type JPG, JPEG, PNG or GIF.
+   *
+   * @param node the node
+   *
+   * @return true, if is simple image type
+   */
+  private boolean isSimpleImageType(Node node){
+    String mimeType = "";
+
+    try {
+      mimeType = node.getNode("jcr:content").getProperty("jcr:mimeType").getString();
+    } catch (Exception e) {
+      return false;
+    }
+
+    for(String type: SIMPLE_IMAGE_MIMETYPE) {
+      if(mimeType.equalsIgnoreCase(type)){
         return true;
       }
     }
@@ -964,6 +1023,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
                                       Node child,
                                       String folderType,
                                       String childName,
+                                      String childCurrentFolder,
                                       String nodeDriveName,
                                       String type) throws Exception {
       Element folder = document.createElement("Folder");
@@ -972,6 +1032,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
       folder.setAttribute("title", Utils.getTitle(child).replaceAll("%", "%25"));
       folder.setAttribute("url", FCKUtils.createWebdavURL(child));
       folder.setAttribute("folderType", folderType);
+      folder.setAttribute("currentFolder", childCurrentFolder);
 
       if(TYPE_FOLDER.equals(type) || TYPE_CONTENT.equals(type)) {
         boolean hasFolderChild = (getChildOfType(child, NodetypeConstant.NT_UNSTRUCTURED, type) != null)
@@ -1040,4 +1101,64 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
       }
     }
   }
+
+  public String getDriveTitle(String name) {
+    if (name.startsWith(".")) {
+      String groupLabel = getGroupLabel(name);
+      if (groupLabel == null) {
+        groupLabel = getGroupLabel(name, !name.startsWith("/spaces"));
+      }
+      return groupLabel;
+    } else {
+      return name;
+    }
+  }
+
+  public String getGroupLabel(String groupId, boolean isFull) {
+    String ret = groupId.replace(".", " / ");
+    if (!isFull) {
+      if (ret.startsWith(" / spaces")) {
+        return ret.substring(ret.lastIndexOf("/") + 1).trim();
+      }
+      int count = 0;
+      int slashPosition = -1;
+      for (int i = 0; i < ret.length(); i++) {
+        if ('/' == ret.charAt(i)) {
+          if (++count == 4) {
+            slashPosition = i;
+            break;
+          }
+        }
+      }
+      if (slashPosition > 0) {
+        ret = ret.substring(0, slashPosition) + "...";
+      } else if (ret.length() > 70) {
+        ret = ret.substring(0, 70) + "...";
+      }
+    }
+    return ret;
+  }
+
+  public String getGroupLabel(String name) {
+    try {
+      RepositoryService repoService = WCMCoreUtils.getService(RepositoryService.class);
+      NodeHierarchyCreator nodeHierarchyCreator = WCMCoreUtils.getService(NodeHierarchyCreator.class);
+      String groupPath = nodeHierarchyCreator.getJcrPath(BasePath.CMS_GROUPS_PATH);
+      String absPath = groupPath + name.replace(".", "/");
+      ManageableRepository currentRepository = repoService.getCurrentRepository();
+      String workspace = currentRepository.getConfiguration().getDefaultWorkspaceName();
+
+      return getNode(workspace, absPath).getProperty(NodetypeConstant.EXO_LABEL).getString();
+    } catch (Exception e) {
+      return null;
+    }
+  }
+
+  public Node getNode(String workspace, String absPath) throws Exception {
+    RepositoryService repoService = WCMCoreUtils.getService(RepositoryService.class);
+    ManageableRepository currentRepository = repoService.getCurrentRepository();
+    Node groupNode = (Node) WCMCoreUtils.getSystemSessionProvider().getSession(workspace, currentRepository).getItem(absPath);
+    return groupNode;
+  }
+
 }

@@ -699,6 +699,23 @@ public class Utils {
     }
     return ret.toString();
   }
+
+  /** Return name after cleaning
+   * @param fileName file name
+   * @return cleaned name
+   */
+  public static String cleanNameWithAccents(String fileName) {
+    Transliterator accentsconverter = Transliterator.getInstance("Latin; NFD; [:Nonspacing Mark:] Remove; NFC;");
+    if (fileName.indexOf('.') > 0) {
+      String ext = fileName.substring(fileName.lastIndexOf('.'));
+      fileName = accentsconverter.transliterate(fileName.substring(0, fileName.lastIndexOf('.'))).concat(ext);
+    } else {
+      fileName = accentsconverter.transliterate(fileName);
+    }
+    return Text.escapeIllegalJcrChars(fileName);
+
+  }
+
   public static List<String> getMemberships() throws Exception {
     List<String> userMemberships = new ArrayList<String>();
     String userId = ConversationState.getCurrent().getIdentity().getUserId();
