@@ -35,13 +35,9 @@
   RepositoryService rService = uicomponent.getApplicationComponent(RepositoryService.class);
   String repository = rService.getCurrentRepository().getConfiguration().getName();
   def binarySrc = Utils.getWebdavURL(currentNode);
-  def homeAsStyle = "";
-  if (uicomponent.getAncestorOfType(org.exoplatform.social.webui.activity.BaseUIActivity.class) != null) {
-    homeAsStyle = "style='width:330px; height: 200px'";
-  }
 %>
 
-  <video src="$binarySrc" controls="controls" class="videoContent" $homeAsStyle>
+  <video src="$binarySrc" controls="controls" class="videoContent">
   your browser does not support the video tag
   </video>
   
