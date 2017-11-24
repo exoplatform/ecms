@@ -37,13 +37,11 @@ public class NewGroupEventListener extends GroupEventListener {
     driveService_ = driveService;
   }
   
-  @SuppressWarnings("unused")
-  public void preSave(Group group, boolean isNew) throws Exception {
+  public void postSave(Group group, boolean isNew) throws Exception {
     clearGroupCache();
   }
 
-  @SuppressWarnings("unused")
-  public void preDelete(Group group) throws Exception {
+  public void postDelete(Group group) throws Exception {
     clearGroupCache();
   }
   

@@ -305,35 +305,36 @@ public class DocumentServiceImpl implements DocumentService {
 
     // Manage special cases
     String[] splitedPath = nodePath.split("/");
-    if (splitedPath != null && splitedPath.length >= 2) {
-      if (splitedPath[1].equals(ManageDriveServiceImpl.GROUPS_DRIVE_ROOT_NODE)) {
-        nodeDrive = manageDriveService.getGroupDriveTemplate();
-
-        int groupDocumentsRootNodeName = nodePath.indexOf("/Documents");
-        if(groupDocumentsRootNodeName >= 0) {
-          // extract group id for doc path
-          String groupId = nodePath.substring(ManageDriveServiceImpl.GROUPS_DRIVE_ROOT_NODE.length() + 1, groupDocumentsRootNodeName);
-          nodeDrive = nodeDrive.clone();
-          nodeDrive.getParameters().put(ManageDriveServiceImpl.DRIVE_PARAMATER_GROUP_ID, groupId);
-        } else {
-          throw new Exception("Cannot extract group id from node path " + nodePath);
-        }
-      } else if (splitedPath != null && splitedPath.length >= 6 && splitedPath[1].equals(ManageDriveServiceImpl.PERSONAL_DRIVE_ROOT_NODE)) {
-        if(splitedPath[5].equals(userId)) {
-          nodeDrive = manageDriveService.getDriveByName(ManageDriveServiceImpl.PERSONAL_DRIVE_NAME);
-        } else {
-          nodeDrive = manageDriveService.getDriveByName(ManageDriveServiceImpl.USER_DRIVE_NAME);
-        }
-        if (nodeDrive != null) {
-          nodeDrive = nodeDrive.clone();
-          nodeDrive.getParameters().put(ManageDriveServiceImpl.DRIVE_PARAMATER_USER_ID, splitedPath[2] + "/" + splitedPath[3] + "/" + splitedPath[4] + "/" + splitedPath[5]);
-        }
+    if (splitedPath != null && splitedPath.length >= 2 && splitedPath.length >= 6
+        && splitedPath[1].equals(ManageDriveServiceImpl.PERSONAL_DRIVE_ROOT_NODE)) {
+      if (splitedPath[5].equals(userId)) {
+        nodeDrive = manageDriveService.getDriveByName(ManageDriveServiceImpl.PERSONAL_DRIVE_NAME);
+      } else {
+        nodeDrive = manageDriveService.getDriveByName(ManageDriveServiceImpl.USER_DRIVE_NAME);
+      }
+      if (nodeDrive != null) {
+        nodeDrive = nodeDrive.clone();
+        nodeDrive.getParameters().put(ManageDriveServiceImpl.DRIVE_PARAMATER_USER_ID,
+                                      splitedPath[2] + "/" + splitedPath[3] + "/" + splitedPath[4] + "/" + splitedPath[5]);
       }
     }
-    if(nodeDrive == null) {
+    if (splitedPath != null && splitedPath.length >= 2 && splitedPath[1].equals(ManageDriveServiceImpl.GROUPS_DRIVE_ROOT_NODE)) {
+      nodeDrive = manageDriveService.getGroupDriveTemplate();
+
+      int groupDocumentsRootNodeName = nodePath.indexOf("/Documents");
+      if(groupDocumentsRootNodeName >= 0) {
+        // extract group id for doc path
+        String groupId = nodePath.substring(ManageDriveServiceImpl.GROUPS_DRIVE_ROOT_NODE.length() + 1, groupDocumentsRootNodeName);
+        nodeDrive = nodeDrive.clone();
+        nodeDrive.getParameters().put(ManageDriveServiceImpl.DRIVE_PARAMATER_GROUP_ID, groupId);
+      } else {
+        throw new Exception("Cannot extract group id from node path " + nodePath);
+      }
+    }
+    if (nodeDrive == null) {
       for (DriveData drive : drives) {
-        if (nodePath.startsWith(drive.getHomePath())) {
-          if (nodeDrive == null || nodeDrive.getHomePath().length() < drive.getHomePath().length()) {
+        if (nodePath.startsWith(drive.getResolvedHomePath())) {
+          if (nodeDrive == null || nodeDrive.getResolvedHomePath().length() < drive.getResolvedHomePath().length()) {
             nodeDrive = drive;
           }
         }

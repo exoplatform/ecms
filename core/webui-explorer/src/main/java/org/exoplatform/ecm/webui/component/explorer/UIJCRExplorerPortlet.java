@@ -26,6 +26,7 @@ import org.exoplatform.ecm.webui.component.explorer.control.action.AddDocumentAc
 import org.exoplatform.ecm.webui.component.explorer.control.action.EditDocumentActionComponent;
 import org.exoplatform.ecm.webui.component.explorer.control.action.EditPropertyActionComponent;
 import org.exoplatform.ecm.webui.component.explorer.sidebar.UITreeExplorer;
+import org.exoplatform.ecm.webui.component.explorer.versions.UIVersionInfo;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.portal.application.PortalRequestContext;
@@ -500,8 +501,12 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
         
       }
     }
-
     boolean isAddNew = Boolean.valueOf(Util.getPortalRequestContext().getRequestParameter("addNew"));
+
+    if(!isAddNew && !isEdit) {
+      showVersionHistory(selectedNode, uiWorkingArea);
+    }
+
     if (!isEdit && isAddNew) {
       if (canManageNode(selectedNode, uiApp, uiExplorer, uiActionbar, context, AddDocumentActionComponent.getFilters())) {
         AddDocumentActionComponent.addDocument(null, uiExplorer, uiApp, this, context);
@@ -512,6 +517,22 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
       }
     }
     uiExplorer.refreshExplorer(null, (isAddNew && isEdit));
+  }
+
+  private void showVersionHistory(Node selectedNode, UIWorkingArea uiWorkingArea) throws Exception {
+    Boolean isDisplayVersionHistory = Boolean.valueOf(Util.getPortalRequestContext().getRequestParameter("versions"));
+    if (isDisplayVersionHistory && selectedNode.isNodeType(Utils.MIX_VERSIONABLE)) {
+      UIDocumentWorkspace uiDocumentWorkspace = uiWorkingArea.getChild(UIDocumentWorkspace.class);
+      if (uiDocumentWorkspace != null) {
+        UIVersionInfo uiVersionInfo = uiDocumentWorkspace.getChild(UIVersionInfo.class);
+        if (uiVersionInfo != null) {
+          uiVersionInfo.setCurrentNode(selectedNode);
+          uiVersionInfo.setRootOwner(selectedNode.getProperty(Utils.EXO_LASTMODIFIER).getString());
+          uiVersionInfo.activate();
+          uiDocumentWorkspace.setRenderedChild(UIVersionInfo.class);
+        }
+      }
+    }
   }
 
   private boolean canManageNode(Node selectedNode,
