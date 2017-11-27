@@ -52,9 +52,6 @@ public class UIUserMemberSelector extends UIContainer implements ComponentSelect
   /** The is multi. */
   private boolean isMulti = true;
 
-  /** The is show search group. */
-  private boolean isShowSearchGroup = true;
-
   /** The is show search user. */
   private boolean isShowSearchUser = true;
 
@@ -77,7 +74,6 @@ public class UIUserMemberSelector extends UIContainer implements ComponentSelect
       uiUserSelector = addChild(UIUserSelector.class, null, null);
     }
     uiUserSelector.setMulti(isMulti);
-    uiUserSelector.setShowSearchGroup(isShowSearchGroup);
     uiUserSelector.setShowSearchUser(isShowSearchUser);
     uiUserSelector.setShowSearch(isShowSearch);
   }
@@ -116,24 +112,6 @@ public class UIUserMemberSelector extends UIContainer implements ComponentSelect
    */
   public void setMulti(boolean isMulti) {
     this.isMulti = isMulti;
-  }
-
-  /**
-   * Checks if is show search group.
-   *
-   * @return true, if is show search group
-   */
-  public boolean isShowSearchGroup() {
-    return isShowSearchGroup;
-  }
-
-  /**
-   * Sets the show search group.
-   *
-   * @param isShowSearchGroup the new show search group
-   */
-  public void setShowSearchGroup(boolean isShowSearchGroup) {
-    this.isShowSearchGroup = isShowSearchGroup;
   }
 
   /**
