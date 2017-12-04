@@ -1062,7 +1062,7 @@
            gj(this.parentNode).width(gj(this).width());
            gj(this.parentNode).height(gj(this).height());
         }).each(function() {
-          if(this.complete) gj(this).load();
+           if(this.complete) gj(this).trigger('load');
            gj(this).parents(".loadingProgressIcon").addClass("hidden-loading");
         });
     };
