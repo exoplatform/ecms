@@ -24,6 +24,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.Callable;
 
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
@@ -32,6 +33,9 @@ import javax.jcr.observation.EventIterator;
 import javax.jcr.observation.EventListener;
 import javax.portlet.PortletRequest;
 
+import org.exoplatform.commons.api.notification.service.NotificationCompletionService;
+import org.exoplatform.commons.notification.impl.NotificationSessionManager;
+import org.exoplatform.commons.utils.CommonsUtils;
 import org.exoplatform.portal.application.PortalRequestContext;
 import org.exoplatform.portal.mop.SiteType;
 import org.exoplatform.portal.mop.user.UserNavigation;
@@ -42,6 +46,8 @@ import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.drives.ManageDriveService;
 import org.exoplatform.services.cms.watch.WatchDocumentService;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
+import org.exoplatform.services.jcr.impl.core.observation.EventImpl;
+import org.exoplatform.services.jcr.impl.util.EntityCollection;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.mail.MailService;
@@ -70,6 +76,8 @@ public class EmailNotifyListener implements EventListener {
 
   private NodeLocation observedNode_ ;
 
+  private NotificationCompletionService notificationCompletionService;
+
   final public static String  EMAIL_WATCHERS_PROP = "exo:emailWatcher";
 
   private static final String SITE_EXPLORER       = "siteExplorer";
@@ -79,8 +87,19 @@ public class EmailNotifyListener implements EventListener {
 
   private static final Log    LOG                 = ExoLogger.getLogger(EmailNotifyListener.class.getName());
 
+  /** list of modified properties when editing a document*/
+  private static final String EXO_LANGUAGE_PROPERTY   = "exo:language";
+  private static final String JCR_DATA_PROPERTY       = "jcr:content/jcr:data";
+  private static final String DC_SOURCE_PROPERTY      = "jcr:content/dc:source";
+  private static final String DC_DESCRIPTION_PROPERTY = "jcr:content/dc:description";
+  private static final String DC_TITLE_PROPERTY   = "jcr:content/dc:title";
+  private static final String DC_CREATOR_PROPERTY   = "jcr:content/dc:creator";
+
+
   public EmailNotifyListener(Node oNode) {
     observedNode_ = NodeLocation.getNodeLocationByNode(oNode);
+    notificationCompletionService = CommonsUtils.getService(NotificationCompletionService.class);
+
   }
 
   /**
@@ -88,17 +107,38 @@ public class EmailNotifyListener implements EventListener {
    * message is sent to list of email
    */
   public void onEvent(EventIterator arg0) {
+    List<EventImpl> entities = ((EntityCollection) arg0).getList();
     MailService mailService = WCMCoreUtils.getService(MailService.class);
     WatchDocumentServiceImpl watchService = (WatchDocumentServiceImpl)WCMCoreUtils.getService(WatchDocumentService.class);
     MessageConfig messageConfig = watchService.getMessageConfig();
-    List<String> emailList = getEmailList(NodeLocation.getNodeByLocation(observedNode_));
-    for (String receiver : emailList) {
-      try {
-        Message message = createMessage(receiver, messageConfig);
-        mailService.sendMessage(message);
-      } catch (Exception e) {
-        if (LOG.isErrorEnabled()) {
-          LOG.error("Unexpected error", e);
+    Callable<Boolean> task = null;
+    //check the modified properties when an action is done
+    for(EventImpl entity : entities) {
+      if ((entity.getPath().contains(EXO_LANGUAGE_PROPERTY)) || (entity.getPath().contains(JCR_DATA_PROPERTY)) || (entity.getPath().contains(DC_SOURCE_PROPERTY)) ||
+              (entity.getPath().contains(DC_DESCRIPTION_PROPERTY)) || (entity.getPath().contains(DC_TITLE_PROPERTY)) || (entity.getPath().contains(DC_CREATOR_PROPERTY))) {
+        List<String> emailList = getEmailList(NodeLocation.getNodeByLocation(observedNode_));
+        for (String receiver : emailList) {
+          try {
+            Message message = createMessage(receiver, messageConfig);
+            task = new Callable<Boolean>() {
+              @Override
+              public Boolean call() throws Exception {
+                boolean created = NotificationSessionManager.createSystemProvider();
+                try {
+                  mailService.sendMessage(message);
+                } catch (Exception e) {
+                  LOG.error("Failed to send a message", e);
+                  return false;
+                } finally {
+                  NotificationSessionManager.closeSessionProvider(created);
+                }
+                return true;
+              }
+            };
+            notificationCompletionService.addTask(task);
+          } catch (Exception e) {
+            LOG.error("Unexpected error while sending notification email to " + receiver);
+          }
         }
       }
     }
