@@ -7579,37 +7579,6 @@ window.addEventListener('hashchange', function webViewerHashchange(evt) {
   }
 });
 
-window.addEventListener('change', function webViewerChange(evt) {
-  var files = evt.target.files;
-  if (!files || files.length === 0) {
-    return;
-  }
-  var file = files[0];
-
-  if (!PDFJS.disableCreateObjectURL &&
-      typeof URL !== 'undefined' && URL.createObjectURL) {
-    PDFViewerApplication.open(URL.createObjectURL(file));
-  } else {
-    // Read the local file into a Uint8Array.
-    var fileReader = new FileReader();
-    fileReader.onload = function webViewerChangeFileReaderOnload(evt) {
-      var buffer = evt.target.result;
-      var uint8Array = new Uint8Array(buffer);
-      PDFViewerApplication.open(uint8Array);
-    };
-    fileReader.readAsArrayBuffer(file);
-  }
-
-  PDFViewerApplication.setTitleUsingUrl(file.name);
-
-  // URL does not reflect proper document location - hiding some icons.
-  document.getElementById('viewBookmark').setAttribute('hidden', 'true');
-  document.getElementById('secondaryViewBookmark').
-    setAttribute('hidden', 'true');
-  document.getElementById('download').setAttribute('hidden', 'true');
-  document.getElementById('secondaryDownload').setAttribute('hidden', 'true');
-}, true);
-
 function selectScaleOption(value) {
   var options = document.getElementById('scaleSelect').options;
   var predefinedValueFound = false;
