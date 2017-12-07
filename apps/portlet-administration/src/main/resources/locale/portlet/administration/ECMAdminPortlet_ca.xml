@@ -992,7 +992,7 @@
       <checkOut>Desprotegir</checkOut>
       <shareDocuments>Compartir</shareDocuments>
       <openDocument>Edició remota</openDocument>
-      <editProperty>Edita les propietats del document</editProperty>
+      <editProperty>Propietats del document</editProperty>
       <uploadNewVersion>Puja una versió nova</uploadNewVersion>
     </label>
     <action>

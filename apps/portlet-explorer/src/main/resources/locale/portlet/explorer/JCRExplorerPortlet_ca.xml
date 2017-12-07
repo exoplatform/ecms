@@ -308,8 +308,8 @@
       <ViewProperties>Propietats</ViewProperties>
       <ViewMetadatas>Metadades</ViewMetadatas>
       <ViewRelations>Mostra/Amaga les relacions</ViewRelations>
-      <ShowJCRStructure>Mostra/Amaga l'Estructuració de Continguts</ShowJCRStructure>
-      <EditProperty>Edita les propietats del document</EditProperty>
+      <ShowJCRStructure>Mostra/Amaga estructura</ShowJCRStructure>
+      <EditProperty>Propietats del document</EditProperty>
       <UploadNewVersion>Puja una versió nova</UploadNewVersion>
     </tooltip>
     <msg>
@@ -599,7 +599,7 @@
       <WebDavView>Obre-ho a MS Office</WebDavView>
       <Download>Descarrega</Download>
       <OpenDocument>Edició remota</OpenDocument>
-      <EditProperty>Edita les propietats del document</EditProperty>
+      <EditProperty>Propietats del document</EditProperty>
       <UploadNewVersion>Puja una versió nova</UploadNewVersion>
       <CreateNewVersion>Desa com a nova versió</CreateNewVersion>
     </event>

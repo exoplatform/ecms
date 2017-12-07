@@ -992,7 +992,7 @@
       <checkOut>Desproteger</checkOut>
       <shareDocuments>Compartir</shareDocuments>
       <openDocument>Edición remota</openDocument>
-      <editProperty>Editar propiedades del documento</editProperty>
+      <editProperty>Propiedades del documento</editProperty>
       <uploadNewVersion>Subir nueva versión</uploadNewVersion>
     </label>
     <action>

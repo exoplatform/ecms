@@ -308,8 +308,8 @@
       <ViewProperties>Propiedades</ViewProperties>
       <ViewMetadatas>Metadatos</ViewMetadatas>
       <ViewRelations>Mostrar/Esconder Relaciones</ViewRelations>
-      <ShowJCRStructure>Mostrar/Ocultar la estructura de contenidos</ShowJCRStructure>
-      <EditProperty>Editar propiedades del documento</EditProperty>
+      <ShowJCRStructure>Mostrar/Ocultar estructura</ShowJCRStructure>
+      <EditProperty>Propiedades del documento</EditProperty>
       <UploadNewVersion>Subir nueva versión</UploadNewVersion>
     </tooltip>
     <msg>
@@ -599,7 +599,7 @@
       <WebDavView>Abrir en MS Office</WebDavView>
       <Download>Descargar</Download>
       <OpenDocument>Edición remota</OpenDocument>
-      <EditProperty>Editar propiedades del documento</EditProperty>
+      <EditProperty>Propiedades del documento</EditProperty>
       <UploadNewVersion>Subir nueva versión</UploadNewVersion>
       <CreateNewVersion>Guardar como una versión nueva</CreateNewVersion>
     </event>
