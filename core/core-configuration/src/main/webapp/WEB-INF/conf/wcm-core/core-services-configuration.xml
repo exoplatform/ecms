@@ -370,6 +370,26 @@
     <!-- Configures live time for query service cache -->
     <external-component-plugins>
         <target-component>org.exoplatform.services.cache.CacheService</target-component>
+        <!-- Configure drive service cache - Standalone mode -->
+        <component-plugin>
+            <name>addExoCacheConfig</name>
+            <set-method>addExoCacheConfig</set-method>
+            <type>org.exoplatform.services.cache.ExoCacheConfigPlugin</type>
+            <description>Configures the cache for query service</description>
+            <init-params>
+                <object-param>
+                    <name>cache.config.ecm.query</name>
+                    <description>The standalone cache configuration</description>
+                    <object type="org.exoplatform.services.cache.ExoCacheConfig">
+                        <field name="name"><string>ecm.query</string></field>
+                        <field name="maxSize"><int>${wcm.cache.queryservice.capacity:5000}</int></field>
+                        <field name="liveTime"><long>${wcm.cache.queryservice.timetolive:600000}</long></field>
+                        <field name="implementation"><string>org.exoplatform.services.cache.concurrent.ConcurrentFIFOExoCache</string></field>
+                    </object>
+                </object-param>
+            </init-params>
+        </component-plugin>
+        <!-- Configure drive service cache - Cluster mode -->
         <component-plugin  profiles="cluster">
             <name>addExoCacheConfig</name>
             <set-method>addExoCacheConfig</set-method>
@@ -380,11 +400,11 @@
                     <name>cache.config.ecm.query</name>
                     <description>The clustered cache configuration</description>
                     <object type="org.exoplatform.services.cache.impl.infinispan.generic.GenericExoCacheConfig">
-                        <field name="name"><string>default</string></field>
+                        <field name="name"><string>ecm.query</string></field>
                         <field name="strategy"><string>LIRS</string></field>
                         <field name="maxEntries"><int>${wcm.cache.queryservice.maxnodes:5000}</int></field>
                         <field name="lifespan"><long>${wcm.cache.queryservice.expirationtimeout:600000}</long></field>
-                        <field name="replicated"><boolean>true</boolean></field>
+                        <field name="cacheMode"><string>${exo.cache.ecms.queryservice.cacheMode:replication}</string></field>
                     </object>
                 </object-param>
             </init-params>
@@ -427,7 +447,7 @@
                         <field name="strategy"><string>LIRS</string></field>
                         <field name="maxEntries"><int>${wcm.cache.managedrive.maxnodes:5000}</int></field>
                         <field name="lifespan"><long>${wcm.cache.managedrive.expirationtimeout:600000}</long></field>
-                        <field name="replicated"><boolean>true</boolean></field>
+                        <field name="cacheMode"><string>${exo.cache.ecms.managedrive.cacheMode:replication}</string></field>
                     </object>
                 </object-param>
             </init-params>
@@ -497,7 +517,7 @@
             <field name="strategy"><string>LIRS</string></field>
             <field name="maxEntries"><int>${wcm.cache.templateservice.maxnodes:300}</int></field>
             <field name="lifespan"><long>${wcm.cache.templateservice.expirationtimeout:600000}</long></field>
-            <field name="replicated"><boolean>true</boolean></field>
+            <field name="cacheMode"><string>${exo.cache.ecms.templateservice.cacheMode:replication}</string></field>
           </object>
         </object-param>
         
@@ -510,7 +530,7 @@
             <field name="strategy"><string>LIRS</string></field>
             <field name="maxEntries"><int>${wcm.cache.webcontent.initialwebcontentplugin.maxnodes:300}</int></field>
             <field name="lifespan"><long>${wcm.cache.webcontent.initialwebcontentplugin.expirationtimeout:600000}</long></field>
-            <field name="replicated"><boolean>true</boolean></field>
+            <field name="cacheMode"><string>${exo.cache.ecms.initialwebcontentplugin.cacheMode:replication}</string></field>
           </object>
         </object-param>
         
@@ -658,7 +678,7 @@
             <field name="strategy"><string>LIRS</string></field>
             <field name="maxEntries"><int>${wcm.cache.pdfviewer.maxnodes:300}</int></field>
             <field name="lifespan"><long>${wcm.cache.pdfviewer.expirationtimeout:600000}</long></field>
-            <field name="replicated"><boolean>true</boolean></field>
+            <field name="cacheMode"><string>${exo.cache.ecms.pdfviewer.cacheMode:replication}</string></field>
           </object>          
         </object-param>
       </init-params>
@@ -703,7 +723,7 @@
             <field name="strategy"><string>LIRS</string></field>
             <field name="maxEntries"><int>${wcm.cache.lockservice.maxnodes:300}</int></field>
             <field name="lifespan"><long>${wcm.cache.lockservice.expirationtimeout:-1}</long></field>
-            <field name="replicated"><boolean>true</boolean></field>
+            <field name="cacheMode"><string>${exo.cache.ecms.lockservice.cacheMode:replication}</string></field>
           </object>
         </object-param>
       </init-params>
@@ -749,7 +769,7 @@
             <field name="strategy"><string>LIRS</string></field>
             <field name="maxEntries"><int>${wcm.cache.folkservice.maxnodes:300}</int></field>
             <field name="lifespan"><long>${wcm.cache.folkservice.expirationtimeout:-1}</long></field>
-            <field name="replicated"><boolean>true</boolean></field>
+            <field name="cacheMode"><string>${exo.cache.ecms.folkservice.cacheMode:replication}</string></field>
           </object>
         </object-param>
       </init-params>

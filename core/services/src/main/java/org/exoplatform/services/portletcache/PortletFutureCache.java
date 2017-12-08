@@ -192,6 +192,11 @@ class PortletFutureCache extends FutureCache<WindowKey, MarkupFragment, PortletR
     }
   }
 
+  @Override
+  protected void putOnly(WindowKey key, MarkupFragment value) {
+    put(key, value);
+  }
+
   public void start()
   {
     if (scheduled == null)
