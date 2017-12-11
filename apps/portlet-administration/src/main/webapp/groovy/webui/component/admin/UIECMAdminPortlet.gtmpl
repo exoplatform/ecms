@@ -28,7 +28,7 @@
 	    <div class="<%=(uicomponent.isShowSideBar() ? "CollapseSideBar" : "ExpandSideBar")%>" onclick="<%=uicomponent.event('ShowHide')%>"><span></span></div>
 	  </div>
 	  <div class="$sideBar">
-		  <div style="overflow: auto; width: 97%; height: 100%;">
+		  <div>
 		      <% 
 		      if(uicomponent.getChild(UIECMAdminWorkingArea.class) != null) uicomponent.renderChild(UIECMAdminWorkingArea.class); %>
 		  </div>
