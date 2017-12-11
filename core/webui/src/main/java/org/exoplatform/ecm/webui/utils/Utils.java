@@ -19,6 +19,7 @@ package org.exoplatform.ecm.webui.utils;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.security.AccessControlException;
 import java.text.DecimalFormat;
 import java.util.*;
 import java.util.regex.Matcher;
@@ -45,6 +46,7 @@ import org.exoplatform.download.DownloadService;
 import org.exoplatform.download.InputStreamDownloadResource;
 import org.exoplatform.ecm.webui.form.UIOpenDocumentForm;
 import org.exoplatform.portal.webui.util.Util;
+import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.documents.TrashService;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.link.LinkManager;
@@ -54,7 +56,9 @@ import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.jcr.impl.Constants;
+import org.exoplatform.services.jcr.impl.core.NodeImpl;
 import org.exoplatform.services.jcr.impl.core.nodetype.NodeTypeImpl;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
@@ -327,6 +331,14 @@ public class Utils {
 
   final static public String   WORKSPACE_PARAM            = "workspaceName";
 
+  final static public String   SPACE_GROUP                 = "/spaces";
+
+  final static public String   SITES_PATH                 = "/sites";
+
+  final static public String   COLLABORATION_WS           = "collaboration";
+
+  final static public int      USER_DEPTH                 = 4;
+
   final static public String   EMPTY                      = "";
 
   final static public String   PUBLIC                     = "Public";
@@ -353,7 +365,6 @@ public class Utils {
   protected static final String POST_HTML         = "post_html";
   protected static final String FAST_PUBLISH_LINK = "fast_publish";
   private static final Log     LOG                        = ExoLogger.getLogger(Utils.class.getName());
-  public Map<String, Object>   maps_                      = new HashMap<String, Object>();
 
   public static String encodeHTML(String text) {
     return text.replaceAll("&", "&amp;").replaceAll("\"", "&quot;").replaceAll("<", "&lt;").replaceAll(">", "&gt;");
@@ -1225,9 +1236,22 @@ public class Utils {
     String filePath = httpServletRequest.getScheme() + "://" + httpServletRequest.getServerName() + ":"
         + httpServletRequest.getServerPort() + "/" + WCMCoreUtils.getRestContextName() + "/private/jcr/" + repo + "/" + ws
         + nodePath;
-    String mountPath = httpServletRequest.getScheme()+ "://" + httpServletRequest.getServerName() + ":"
+    String workspaceMountPath = httpServletRequest.getScheme()+ "://" + httpServletRequest.getServerName() + ":"
         + httpServletRequest.getServerPort() + "/"
         + WCMCoreUtils.getRestContextName()+ "/private/jcr/" + repo + "/" + ws;
+
+    NodeHierarchyCreator nodeHierarchyCreator = WCMCoreUtils.getService(NodeHierarchyCreator.class);
+
+    String mountPath;
+
+    if(((NodeImpl)currentNode.getParent()).isRoot()) {
+      mountPath = workspaceMountPath;
+    }
+    else{
+      mountPath = workspaceMountPath + checkMountPath(currentNode, generateMountURL(nodePath, ws, nodeHierarchyCreator.getJcrPath(BasePath.CMS_USERS_PATH),
+              nodeHierarchyCreator.getJcrPath(BasePath.CMS_GROUPS_PATH)));
+    }
+
 
     if (currentNode.isLocked()) {
       String[] userLock = { currentNode.getLock().getLockOwner() };
@@ -1273,6 +1297,80 @@ public class Utils {
       String name1 = n1.getName();
       String name2 = n2.getName();
       return name1.compareToIgnoreCase(name2);
+    }
+  }
+
+  /**
+   * Generate the webdav mount  URL
+   * @param nodePath : jcr path
+   * @param ws :  workspace name
+   * @return
+   */
+  public static String generateMountURL(String nodePath, String ws, String userPath, String groupPath) {
+    if (StringUtils.isNotBlank(nodePath) && COLLABORATION_WS.equals(ws)) {
+      StringBuilder mountPath = new StringBuilder();
+      String[] ancestors = nodePath.substring(1).split("/");
+
+      if (ancestors.length <= 1)
+        return "/";
+      //User folder mount
+      if (nodePath.startsWith(userPath)) {
+        if (ancestors.length >= USER_DEPTH + 1)
+          mountPath.append(nodePath.substring(0, nodePath.indexOf(ancestors[USER_DEPTH + 1])-1));
+        else
+          mountPath.append(nodePath.substring(0, nodePath.indexOf(ancestors[ancestors.length-1])-1));
+      }
+      //Space folder mount
+      else if (nodePath.startsWith(groupPath + SPACE_GROUP)) {
+        if (ancestors.length > 3)
+          mountPath.append(nodePath.substring(0, nodePath.indexOf(ancestors[3])-1));
+        else
+          mountPath.append(groupPath + SPACE_GROUP);
+      }
+      //Group folder mount
+      else if (nodePath.startsWith(groupPath)) {
+        if (ancestors.length > 2)
+          mountPath.append(nodePath.substring(0, nodePath.indexOf(ancestors[2])-1));
+        else
+          mountPath.append(groupPath);
+      }
+      //Site folder mount
+      else if (nodePath.startsWith(SITES_PATH)) {
+        if (ancestors.length > 2)
+          mountPath.append(nodePath.substring(0, nodePath.indexOf(ancestors[2])-1));
+        else
+          mountPath.append(SITES_PATH);
+      }
+      //other case mount level -1
+      else{
+        if (ancestors.length > 4){
+          mountPath.append(nodePath.substring(0, nodePath.indexOf(ancestors[3])-1));
+        }else if (ancestors.length > 1){
+          mountPath.append(nodePath.substring(0, nodePath.indexOf(ancestors[ancestors.length-1])-1));
+        }
+      }
+      return mountPath.toString();
+    }
+
+    return "/";
+  }
+
+  private static String checkMountPath(Node node, String mountPath) throws AccessControlException, RepositoryException {
+    NodeImpl parent = (NodeImpl) node.getParent();
+    boolean hasPermission = false;
+
+    while (PermissionUtil.canRead(parent)) {
+      hasPermission = true;
+      if(mountPath.equals(parent.getPath()) || parent.isRoot())
+        break;
+
+      parent = parent.getParent();
+    }
+    if (hasPermission) {
+      return parent.getPath();
+    } else {
+      LOG.warn("Cannot mount webdav path {} You don't have read permission access", parent.getPath());
+      throw new AccessControlException("You don't have read permission access to " + parent.getPath());
     }
   }
 }
