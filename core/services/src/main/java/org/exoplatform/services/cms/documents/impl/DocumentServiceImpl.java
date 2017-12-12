@@ -319,16 +319,11 @@ public class DocumentServiceImpl implements DocumentService {
       }
     }
     if (splitedPath != null && splitedPath.length >= 2 && splitedPath[1].equals(ManageDriveServiceImpl.GROUPS_DRIVE_ROOT_NODE)) {
-      nodeDrive = manageDriveService.getGroupDriveTemplate();
-
       int groupDocumentsRootNodeName = nodePath.indexOf("/Documents");
       if(groupDocumentsRootNodeName >= 0) {
         // extract group id for doc path
         String groupId = nodePath.substring(ManageDriveServiceImpl.GROUPS_DRIVE_ROOT_NODE.length() + 1, groupDocumentsRootNodeName);
-        nodeDrive = nodeDrive.clone();
-        nodeDrive.getParameters().put(ManageDriveServiceImpl.DRIVE_PARAMATER_GROUP_ID, groupId);
-      } else {
-        throw new Exception("Cannot extract group id from node path " + nodePath);
+        nodeDrive = manageDriveService.getDriveByName(groupId.replaceAll("/", "."));
       }
     }
     if (nodeDrive == null) {
