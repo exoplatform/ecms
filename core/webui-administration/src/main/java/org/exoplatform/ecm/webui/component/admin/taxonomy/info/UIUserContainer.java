@@ -48,7 +48,6 @@ public class UIUserContainer extends UIContainer implements UIPopupComponent  {
       uiUserSelector = addChild(UIUserSelector.class, null, null);
     }
     uiUserSelector.setMulti(false);
-    uiUserSelector.setShowSearchGroup(true);
     uiUserSelector.setShowSearchUser(true);
     uiUserSelector.setShowSearch(true);
   }

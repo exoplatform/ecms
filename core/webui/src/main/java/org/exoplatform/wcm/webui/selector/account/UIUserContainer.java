@@ -62,7 +62,6 @@ public class UIUserContainer extends UIContainer {
   public UIUserContainer() throws Exception {
     UIUserSelector userSelector = addChild(UIUserSelector.class, null, null);
     userSelector.setMulti(false);
-    userSelector.setShowSearchGroup(true);
     userSelector.setShowSearchUser(true);
     userSelector.setShowSearch(true);
   }
