@@ -134,18 +134,31 @@ public class UICLVFolderMode extends UICLVContainer {
         return new Result(new ArrayList<Node>(), 0, 0, null, null);
       }
       folderPath = folderPath.replace("{siteName}", Util.getPortalRequestContext().getSiteName());
-      NodeLocation nodeLocation = new NodeLocation();
-      nodeLocation.setWorkspace(workspace);
-      nodeLocation.setPath("/");
-      nodeLocation.setSystemSession(false);
       String strQuery = this.getAncestorOfType(UICLVPortlet.class).getQueryStatement(query);
-      strQuery = strQuery.replaceAll("\"", "'");
+      if (strQuery != null) strQuery = strQuery.replaceAll("\"", "'");
       if (UICLVPortlet.PREFERENCE_CONTEXTUAL_FOLDER_ENABLE.equals(contextualMode)
-          && org.exoplatform.wcm.webui.Utils.checkQuery(workspace, strQuery, Query.SQL)) {
-        filters.put(WCMComposer.FILTER_QUERY_FULL, strQuery);
-        return wcmComposer.getPaginatedContents(nodeLocation,
-                                                filters,
-                                                WCMCoreUtils.getUserSessionProvider());
+              && org.exoplatform.wcm.webui.Utils.checkQuery(workspace, strQuery, Query.SQL)) {
+        String[] contentList = null;
+        if (preferences.getValue(UICLVPortlet.PREFERENCE_ITEM_PATH, null) != null) {
+          contentList = preferences.getValue(UICLVPortlet.PREFERENCE_ITEM_PATH, null).split(";");
+        }
+        if (contentList != null && contentList.length != 0) {
+          for (String itemPath : contentList) {
+            itemPath = itemPath.replace("{siteName}", Util.getPortalRequestContext().getSiteName());
+            Node currentNode = NodeLocation.getNodeByExpression(itemPath);
+            NodeLocation nodeLocation = new NodeLocation();
+            if (currentNode != null) {
+              String path = currentNode.getPath();
+              nodeLocation.setPath(path);
+              nodeLocation.setWorkspace(workspace);
+              nodeLocation.setSystemSession(false);
+            }
+            filters.put(WCMComposer.FILTER_QUERY_FULL, strQuery);
+            return wcmComposer.getPaginatedContents(nodeLocation,
+                    filters,
+                    WCMCoreUtils.getUserSessionProvider());
+          }
+        }
       }
     }
     String folderPath = this.getAncestorOfType(UICLVPortlet.class).getFolderPath();
