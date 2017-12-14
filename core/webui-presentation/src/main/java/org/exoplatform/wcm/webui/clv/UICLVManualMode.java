@@ -94,36 +94,49 @@ public class UICLVManualMode extends UICLVContainer {
 
     String strQuery = this.getAncestorOfType(UICLVPortlet.class).getQueryStatement(query);
     if (strQuery != null) strQuery = strQuery.replaceAll("\"", "'");
+    String[] contentList = null;
+    if (portletPreferences.getValue(UICLVPortlet.PREFERENCE_ITEM_PATH, null) != null) {
+      contentList = portletPreferences.getValue(UICLVPortlet.PREFERENCE_ITEM_PATH, null).split(";");
+    }
     if (this.getAncestorOfType(UICLVPortlet.class).isQueryApplication()
         && UICLVPortlet.PREFERENCE_CONTEXTUAL_FOLDER_ENABLE.equals(contextualMode)
         && org.exoplatform.wcm.webui.Utils.checkQuery(workspace, strQuery, Query.SQL)) {
-      NodeLocation nodeLocation = new NodeLocation();
-      nodeLocation.setWorkspace(workspace);
-      nodeLocation.setPath("/");
-      nodeLocation.setSystemSession(false);
-      filters.put(WCMComposer.FILTER_QUERY_FULL, strQuery);
-      Result rNodes = WCMCoreUtils.getService(WCMComposer.class)
-          .getPaginatedContents(nodeLocation, filters, WCMCoreUtils.getUserSessionProvider());
-      if(rNodes.getNumTotal() == 0) messageKey = "UICLVContainer.msg.non-contents";
-      PaginatedResultIterator paginatedResultIterator = new PaginatedResultIterator(rNodes, itemsPerPage);
-      getChildren().clear();
-      ResourceResolver resourceResolver = getTemplateResourceResolver();
-      PortletRequestContext pContext = (PortletRequestContext) WebuiRequestContext.getCurrentInstance();
-      UICLVPresentation clvPresentation =
-          addChild(UICLVPresentation.class,
-                   null,
-                   UICLVPresentation.class.getSimpleName() + "_" + pContext.getWindowId()
-              );
-      clvPresentation.init(resourceResolver, paginatedResultIterator);
+      if (contentList != null && contentList.length != 0) {
+        for (String itemPath : contentList) {
+          itemPath = itemPath.replace("{siteName}", Util.getPortalRequestContext().getSiteName());
+          Node currentNode = NodeLocation.getNodeByExpression(itemPath);
+          NodeLocation nodeLocation = new NodeLocation();
+          if (currentNode != null) {
+            String path = currentNode.getPath();
+            nodeLocation.setPath(path);
+            nodeLocation.setWorkspace(workspace);
+            nodeLocation.setSystemSession(false);
+          }
 
-      return;
+          filters.put(WCMComposer.FILTER_QUERY_FULL, strQuery);
+          Result rNodes = WCMCoreUtils.getService(WCMComposer.class)
+                  .getPaginatedContents(nodeLocation, filters, WCMCoreUtils.getUserSessionProvider());
+          if (rNodes.getNumTotal() == 0) messageKey = "UICLVContainer.msg.non-contents";
+          PaginatedResultIterator paginatedResultIterator = new PaginatedResultIterator(rNodes, itemsPerPage);
+          getChildren().clear();
+          ResourceResolver resourceResolver = getTemplateResourceResolver();
+          PortletRequestContext pContext = (PortletRequestContext) WebuiRequestContext.getCurrentInstance();
+          UICLVPresentation clvPresentation =
+                  addChild(UICLVPresentation.class,
+                          null,
+                          UICLVPresentation.class.getSimpleName() + "_" + pContext.getWindowId()
+                  );
+          clvPresentation.init(resourceResolver, paginatedResultIterator);
+
+          return;
+        }
+      }
     } else {
-      String[] listContent = portletPreferences.getValue(UICLVPortlet.PREFERENCE_ITEM_PATH, null).split(";");
       LinkManager linkManager = WCMCoreUtils.getService(LinkManager.class);
       //get node to sort
       List<Node> originalList = new ArrayList<Node>();
-      if (listContent != null && listContent.length != 0) {
-        for (String itemPath : listContent) {
+      if (contentList != null && contentList.length != 0) {
+        for (String itemPath : contentList) {
           itemPath = itemPath.replace("{siteName}", Util.getPortalRequestContext().getSiteName());
           Node currentNode = NodeLocation.getNodeByExpression(itemPath);
           if(currentNode != null){
