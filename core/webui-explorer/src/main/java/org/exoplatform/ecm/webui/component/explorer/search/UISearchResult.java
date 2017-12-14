@@ -27,14 +27,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 
-import javax.jcr.AccessDeniedException;
-import javax.jcr.Item;
-import javax.jcr.ItemNotFoundException;
-import javax.jcr.Node;
-import javax.jcr.NodeIterator;
-import javax.jcr.PathNotFoundException;
-import javax.jcr.RepositoryException;
-import javax.jcr.Session;
+import javax.jcr.*;
 import javax.jcr.query.Query;
 import javax.jcr.query.QueryManager;
 import javax.jcr.query.QueryResult;
@@ -42,6 +35,7 @@ import javax.jcr.query.Row;
 
 import org.apache.commons.lang.StringUtils;
 
+import org.exoplatform.commons.api.search.data.SearchResult;
 import org.exoplatform.ecm.jcr.model.Preference;
 import org.exoplatform.ecm.webui.component.explorer.UIDocumentContainer;
 import org.exoplatform.ecm.webui.component.explorer.UIDocumentWorkspace;
@@ -68,6 +62,7 @@ import org.exoplatform.services.jcr.impl.core.SessionImpl;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
+import org.exoplatform.services.wcm.search.QueryCriteria;
 import org.exoplatform.services.wcm.search.base.AbstractPageList;
 import org.exoplatform.services.wcm.search.base.NodeSearchFilter;
 import org.exoplatform.services.wcm.search.base.PageListFactory;
@@ -189,6 +184,11 @@ public class UISearchResult extends UIContainer {
       tagPathsUsedInSearch = uiExplorer.getTagPaths();
     }
 
+    QueryCriteria queryCriteria = new QueryCriteria();
+    queryCriteria.setKeyword(keyword);
+    queryCriteria.setSearchPath(uiExplorer.getCurrentPath());
+    queryCriteria.setSearchWebpage(false);
+
     pageList = PageListFactory.createPageList(queryData_.getQueryStatement(),
                                               queryData_.getWorkSpace(),
                                               queryData_.getLanguage_(),
@@ -196,7 +196,8 @@ public class UISearchResult extends UIContainer {
                                               new NodeFilter(categoryPathList, tagPathsUsedInSearch, keyword, documentList),
                                               new RowDataCreator(),
                                               PAGE_SIZE,
-                                              0);
+                                              0,
+                                              queryCriteria);
     uiPageIterator_.setPageList(pageList);
   }
 
@@ -561,8 +562,8 @@ public class UISearchResult extends UIContainer {
 
   public static class RowDataCreator implements SearchDataCreator<RowData> {
 
-    public RowData createData(Node node, Row row) {
-      return new RowData(row, node);
+    public RowData createData(Node node, Row row, SearchResult searchResult) {
+      return new RowData(row, node, searchResult);
     }
 
   }
@@ -574,10 +575,10 @@ public class UISearchResult extends UIContainer {
     private String jcrPrimaryType = "";
 
     public RowData(Row row) {
-      this(row, null);
+      this(row, null, null);
     }
     
-    public RowData(Row row, Node node) {
+    public RowData(Row row, Node node, SearchResult result) {
       try {
         jcrPath = node != null ? node.getPath() : row.getValue("jcr:path").getString();
       } catch (Exception e) {
@@ -586,24 +587,42 @@ public class UISearchResult extends UIContainer {
         }
       }
       try {
-        repExcerpt = row.getValue("rep:excerpt(.)").getString();
+        if(row != null) {
+          Value rowExcerptValue = row.getValue("rep:excerpt(.)");
+          repExcerpt = rowExcerptValue != null ? rowExcerptValue.getString() : "";
+        }
+        if(StringUtils.isEmpty(repExcerpt) && result != null) {
+          repExcerpt = result.getExcerpt();
+        }
       } catch (Exception e) {
         if (LOG.isWarnEnabled()) {
-          LOG.warn(e.getMessage());
+          LOG.warn("Cannot get excerpt of node " + jcrPath, e);
         }
       }
       try {
-        jcrScore = row.getValue("jcr:score").getLong();
+        if(row != null) {
+          Value rowScoreValue = row.getValue("jcr:score");
+          jcrScore = rowScoreValue != null ? rowScoreValue.getLong() : 0;
+        }
+        if(jcrScore == 0 && result != null) {
+          jcrScore = result.getRelevancy();
+        }
       } catch (Exception e) {
         if (LOG.isWarnEnabled()) {
-          LOG.warn(e.getMessage());
+          LOG.warn("Cannot get excerpt of node " + jcrPath, e);
         }
       }
       try {
-        jcrPrimaryType = row.getValue("jcr:primaryType").getString();
+        if(row != null) {
+          Value rowPrimaryTypeValue = row.getValue("jcr:primaryType");
+          jcrPrimaryType = rowPrimaryTypeValue != null ? rowPrimaryTypeValue.getString() : "";
+        }
+        if(StringUtils.isEmpty(jcrPrimaryType) && result != null) {
+          jcrPrimaryType = node.getPrimaryNodeType().getName();
+        }
       } catch (Exception e) {
         if (LOG.isWarnEnabled()) {
-          LOG.warn(e.getMessage());
+          LOG.warn("Cannot get excerpt of node " + jcrPath, e);
         }
       }
     }

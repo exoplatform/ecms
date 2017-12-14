@@ -17,93 +17,172 @@
 package org.exoplatform.services.wcm.search.connector;
 
 import org.exoplatform.commons.api.search.data.SearchContext;
+import org.exoplatform.commons.api.search.data.SearchResult;
+import org.exoplatform.commons.search.es.ElasticSearchServiceConnector;
+import org.exoplatform.commons.search.es.client.ElasticSearchingClient;
 import org.exoplatform.container.xml.InitParams;
-import org.exoplatform.services.jcr.core.ManageableRepository;
+import org.exoplatform.services.cms.documents.DocumentService;
+import org.exoplatform.services.cms.drives.DriveData;
+import org.exoplatform.services.cms.impl.Utils;
+import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
-import org.exoplatform.services.wcm.core.NodetypeConstant;
-import org.exoplatform.services.wcm.search.ResultNode;
+import org.exoplatform.services.wcm.search.base.EcmsSearchResult;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+import org.json.simple.JSONObject;
 
-import javax.jcr.Node;
 import javax.jcr.RepositoryException;
-import javax.jcr.Session;
+import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
- * The search should be capable to match files of the DMS. \
+ * Search connector for files
  */
-public class FileSearchServiceConnector extends BaseContentSearchServiceConnector {
+public class FileSearchServiceConnector extends ElasticSearchServiceConnector {
   
   private static final Log LOG = ExoLogger.getLogger(FileSearchServiceConnector.class.getName());
 
-  public FileSearchServiceConnector(InitParams initParams) throws Exception {
-    super(initParams);
-  }
+  private RepositoryService repositoryService;
 
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  protected String[] getSearchedDocTypes() {
-    return new String[]{NodetypeConstant.NT_FILE};
-  }
-  
-  protected String[] getNodeTypes() {
-    return new String[]{NodetypeConstant.NT_FILE};
-  }
-  
-  /**
-   * {@inheritDoc}
-   * @throws RepositoryException 
-   */
-  @Override
-  protected ResultNode filterNode(ResultNode node) throws RepositoryException {
-    return node.isNodeType(NodetypeConstant.NT_FILE) ? node : null;
-  }
-  
-  /**
-   * {@inheritDoc}
-   * @throws RepositoryException 
-   */
-  @Override
-  protected String getPath(ResultNode node, SearchContext context) throws Exception {
-    return documentService.getLinkInDocumentsApp(node.getPath());
+  private DocumentService documentService;
+
+  public FileSearchServiceConnector(InitParams initParams, ElasticSearchingClient client, RepositoryService repositoryService, DocumentService documentService) {
+    super(initParams, client);
+    this.repositoryService = repositoryService;
+    this.documentService = documentService;
   }
 
   @Override
-  protected String getPreviewUrl(ResultNode node, SearchContext context) throws Exception {
+  protected String getSourceFields() {
+    List<String> fields = Arrays.asList("name",
+            "title",
+            "workspace",
+            "path",
+            "author",
+            "createdDate",
+            "lastUpdatedDate",
+            "fileType",
+            "fileSize");
+
+    return fields.stream().map(field -> "\"" + field + "\"").collect(Collectors.joining(","));
+  }
+
+  @Override
+  protected SearchResult buildHit(JSONObject jsonHit, SearchContext searchContext) {
+    SearchResult searchResult = super.buildHit(jsonHit, searchContext);
+
+    JSONObject hitSource = (JSONObject) jsonHit.get("_source");
+    String workspace = (String) hitSource.get("workspace");
+    String nodePath = (String) hitSource.get("path");
+    String fileType = (String) hitSource.get("fileType");
+    String fileSize = (String) hitSource.get("fileSize");
+    String createdDate = (String) hitSource.get("createdDate");
+
+    String driveName = "";
+    try {
+      DriveData driveOfNode = documentService.getDriveOfNode(nodePath);
+      if(driveOfNode != null) {
+        driveName = driveOfNode.getName() + " - ";
+      }
+    } catch (Exception e) {
+      LOG.warn("Cannot get drive of node " + nodePath, e);
+    }
+
+    String detail = driveName + getFormattedFileSize(fileSize) + " - " + getFormattedDate(createdDate);
+
+    SearchResult ecmsSearchResult = new EcmsSearchResult(getUrl(nodePath),
+            getPreviewUrl(jsonHit, searchContext),
+            searchResult.getTitle(),
+            searchResult.getExcerpt(),
+            detail,
+            getImageUrl(workspace, nodePath),
+            searchResult.getDate(),
+            searchResult.getRelevancy(),
+            fileType,
+            nodePath);
+
+    return ecmsSearchResult;
+  }
+
+  protected String getUrl(String nodePath) {
+    String url = "";
+    try {
+      url = documentService.getLinkInDocumentsApp(nodePath);
+    } catch (Exception e) {
+      LOG.error("Cannot get url of document " + nodePath, e);
+    }
+    return url;
+  }
+
+  protected String getFormattedDate(String createdDate) {
+    try {
+      Long createdDateTime = Long.parseLong(createdDate);
+      DateTimeFormatter df = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.FULL, FormatStyle.SHORT).withZone(ZoneId.systemDefault());
+      return df.format(Instant.ofEpochMilli(createdDateTime));
+    } catch (Exception e) {
+      LOG.error("Cannot format date for timestamp " + createdDate, e);
+      return "";
+    }
+  }
+
+  protected String getFormattedFileSize(String fileSize) {
+    try {
+      Long size = Long.parseLong(fileSize);
+      return Utils.formatSize(size);
+    } catch (Exception e) {
+      LOG.error("Cannot format file size " + fileSize, e);
+      return "";
+    }
+  }
+
+  protected String getPreviewUrl(JSONObject jsonHit, SearchContext context) {
+    JSONObject hitSource = (JSONObject) jsonHit.get("_source");
+
+    String id = (String) jsonHit.get("_id");
+    String author = (String) hitSource.get("author");
+    String title = (String) hitSource.get("title");
+    String workspace = (String) hitSource.get("workspace");
+    String nodePath = (String) hitSource.get("path");
+    String fileType = (String) hitSource.get("fileType");
+
     String restContextName =  WCMCoreUtils.getRestContextName();
-
-    Session session = node.getSession();
-    String repositoryName = ((ManageableRepository) session.getRepository()).getConfiguration().getName();
-    String workspaceName = node.getSession().getWorkspace().getName();
+    String repositoryName = null;
+    try {
+      repositoryName = repositoryService.getCurrentRepository().getConfiguration().getName();
+    } catch (RepositoryException e) {
+      LOG.error("Cannot get repository name", e);
+    }
 
     StringBuffer downloadUrl = new StringBuffer();
     downloadUrl.append('/').append(restContextName).append("/jcr/").
-            append(WCMCoreUtils.getRepository().getConfiguration().getName()).append('/').
-            append(workspaceName).append(node.getPath());
-
-    // get document author
-    String authorUsername = null;
-    if(node.hasProperty("exo:owner")) {
-      authorUsername = node.getProperty("exo:owner").getString();
-    }
+            append(repositoryName).append('/').
+            append(workspace).append(nodePath);
 
     StringBuilder url = new StringBuilder("javascript:require(['SHARED/documentPreview'], function(documentPreview) {documentPreview.init({doc:{");
-    if(node.isNodeType(NodetypeConstant.MIX_REFERENCEABLE)) {
-      url.append("id:'").append(node.getUUID()).append("',");
+    url.append("id:'").append(id).append("',");
+    url.append("fileType:'").append(fileType).append("',");
+    url.append("title:'").append(title).append("',");
+    String linkInDocumentsApp = "";
+    try {
+      linkInDocumentsApp = documentService.getLinkInDocumentsApp(nodePath);
+    } catch (Exception e) {
+      LOG.error("Cannot get link in document app for node " + nodePath, e);
     }
-    url.append("fileType:'").append(getFileType(node)).append("',");
-    url.append("title:'").append(getTitleResult(node)).append("',");
-    url.append("path:'").append(node.getPath())
+    url.append("path:'").append(nodePath)
             .append("', repository:'").append(repositoryName)
-            .append("', workspace:'").append(workspaceName)
+            .append("', workspace:'").append(workspace)
             .append("', downloadUrl:'").append(downloadUrl.toString())
-            .append("', openUrl:'").append(documentService.getLinkInDocumentsApp(node.getPath()))
+            .append("', openUrl:'").append(linkInDocumentsApp)
             .append("'}");
-    if(authorUsername != null) {
-      url.append(",author:{username:'").append(authorUsername).append("'}");
+    if(author != null) {
+      url.append(",author:{username:'").append(author).append("'}");
     }
     //add void(0) to make firefox execute js
     url.append("})});void(0);");
@@ -111,28 +190,24 @@ public class FileSearchServiceConnector extends BaseContentSearchServiceConnecto
     return url.toString();
   }
 
-  /**
-   * gets the image url
-   * @return
-   */
-  @Override
-  protected String getImageUrl(Node node) {
+  protected String getImageUrl(String workspace, String nodePath) {
     try {
-      String path = node.getPath().replaceAll("'", "\\\\'");
+      String path = nodePath.replaceAll("'", "\\\\'");
       String encodedPath = URLEncoder.encode(path, "utf-8");
       encodedPath = encodedPath.replaceAll ("%2F", "/");    //we won't encode the slash characters in the path
-      String portalName = WCMCoreUtils.getPortalName();
       String restContextName = WCMCoreUtils.getRestContextName();
-      String preferenceWS = node.getSession().getWorkspace().getName();
-      String thumbnailImage = "/" + restContextName + "/thumbnailImage/medium/" + 
-                              WCMCoreUtils.getRepository().getConfiguration().getName() + 
-                              "/" + preferenceWS + encodedPath;
-      return thumbnailImage;
-    } catch (Exception e) {
-      if (LOG.isWarnEnabled()) {
-        LOG.warn("Can not get image link", e);
+      String repositoryName = null;
+      try {
+        repositoryName = repositoryService.getCurrentRepository().getConfiguration().getName();
+      } catch (RepositoryException e) {
+        LOG.error("Cannot get repository name", e);
       }
-      return super.getImageUrl(node);
+      String thumbnailImage = "/" + restContextName + "/thumbnailImage/medium/" +
+                              repositoryName + "/" + workspace + encodedPath;
+      return thumbnailImage;
+    } catch (UnsupportedEncodingException e) {
+      LOG.error("Cannot encode path " + nodePath, e);
+      return "";
     }
   }
 }

@@ -16,176 +16,249 @@
  */
 package org.exoplatform.services.wcm.search.connector;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
-import java.util.GregorianCalendar;
-
-import javax.jcr.Node;
-import javax.jcr.NodeIterator;
-
-import org.exoplatform.commons.api.search.SearchServiceConnector;
 import org.exoplatform.commons.api.search.data.SearchContext;
 import org.exoplatform.commons.api.search.data.SearchResult;
-import org.exoplatform.component.test.ConfigurationUnit;
-import org.exoplatform.component.test.ConfiguredBy;
-import org.exoplatform.component.test.ContainerScope;
+import org.exoplatform.commons.search.es.client.ElasticSearchingClient;
+import org.exoplatform.container.xml.InitParams;
+import org.exoplatform.container.xml.PropertiesParam;
+import org.exoplatform.services.cms.documents.DocumentService;
+import org.exoplatform.services.jcr.RepositoryService;
+import org.exoplatform.services.jcr.config.RepositoryEntry;
+import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.security.Identity;
-import org.exoplatform.services.wcm.core.NodetypeConstant;
-import org.exoplatform.services.wcm.search.base.BaseSearchTest;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.controller.metadata.ControllerDescriptor;
 import org.exoplatform.web.controller.router.Router;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.powermock.api.mockito.PowerMockito;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.junit4.PowerMockRunner;
 
-/**
- * Created by The eXo Platform SAS
- * Author : eXoPlatform
- *          exo@exoplatform.com
- * Feb 5, 2013  
- */
-@ConfiguredBy({
-  @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/exo.portal.component.portal-configuration.xml"),
-  @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/exo.portal.component.identity-configuration.xml"),
-  @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/standalone/ecms-test-configuration.xml"),
-  @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/wcm/test-search-configuration.xml")
-})
-public class TestFileSearchServiceConnector extends BaseSearchTest {
+import javax.jcr.RepositoryException;
+import java.util.Collection;
+import java.util.Iterator;
 
-  private SearchServiceConnector fileSearch_;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.mockito.Mockito.anyString;
+import static org.mockito.Mockito.when;
 
-  public void setUp() throws Exception {
-    super.setUp();
-    applyUserSession("john", "gtn",COLLABORATION_WS);
-    ConversationState c = new ConversationState(new Identity(session.getUserID()));
-    ConversationState.setCurrent(c);
-    fileSearch_ = WCMCoreUtils.getService(FileSearchServiceConnector.class);
-  }
-  
-  public void tearDown() throws Exception {
-    NodeIterator iterator = null;
-    Node classicPortal = (Node)session.getItem("/sites content/live/classic");
-    iterator = classicPortal.getNodes();
-    while (iterator.hasNext()) {
-      iterator.nextNode().remove();
-    }
+@RunWith(PowerMockRunner.class)
+@PrepareForTest(WCMCoreUtils.class)
+public class TestFileSearchServiceConnector {
 
-    Node sharedPortal = (Node)session.getItem("/sites content/live/shared");
-    iterator = sharedPortal.getNodes();
-    while (iterator.hasNext()) {
-      iterator.nextNode().remove();
-    }
-    session.save();
-    super.tearDown();
-  }
-  
-  protected void addDocuments() throws Exception {
-    Node classicPortal = (Node)session.getItem("/sites content/live/classic");
-    addChildNodes(classicPortal);
+  public static final String ES_RESPONSE_EMPTY = "{ \"hits\": { \"hits\": [] } }";
 
-    Node sharedPortal = (Node)session.getItem("/sites content/live/shared");
-    addChildNodes(sharedPortal);
-  }
-  
-  @Override
-  protected void addChildNodes(Node parentNode) throws Exception{
-    addFile(parentNode, "file1", "john Smith");
-    addFile(parentNode, "file2", "cjohn Felix Anthony Cena");
-    addFile(parentNode, "file3", "anthony Hopkins");
-  }
-  
-  private void addFile(Node parentNode, String name, String data) throws Exception {
-    Node file = parentNode.addNode(name, "nt:file");
-    file.addMixin("exo:sortable");
-    file.setProperty("exo:title", name);
-    Node content = file.addNode("jcr:content", "nt:resource");
-    content.setProperty("jcr:encoding", "UTF-8");
-    content.setProperty("jcr:mimeType", "text/html");
-    content.setProperty("jcr:lastModified", new Date().getTime());
-    content.setProperty("jcr:data", data);
-    file.addMixin(NodetypeConstant.EXO_DATETIME);
-    file.setProperty("exo:dateCreated",new GregorianCalendar());
-    file.setProperty("exo:dateModified",new GregorianCalendar());
-    session.save();
-  }
-    
-  public void testSearchSingle() throws Exception {
-    Collection<String> sites = new ArrayList<String>();
-    sites.add("classic");
-    Collection<SearchResult> ret 
-          = fileSearch_.search(new SearchContext(new Router(new ControllerDescriptor()), "classic"), "anthony~",
-                                   sites, 
-                                   0, 20, "title", "asc");
-    assertEquals(4, ret.size());//2
-  }
-  
-  public void testSearchSingleWithOffset() throws Exception {
-    Collection<String> sites = new ArrayList<String>();
-    sites.add("classic");
-    Collection<SearchResult> ret 
-          = fileSearch_.search(new SearchContext(new Router(new ControllerDescriptor()), "classic"), "anthony~",
-                                   sites, 
-                                   1, 20, "title", "asc");
-    assertEquals(3, ret.size());//1
-  }
-  
-  public void testSearchSingleWithLimit() throws Exception {
-    Collection<String> sites = new ArrayList<String>();
-    sites.add("classic");
-    Collection<SearchResult> ret 
-          = fileSearch_.search(new SearchContext(new Router(new ControllerDescriptor()), "classic"), "anthony~",
-                                   sites, 
-                                   0, 1, "title", "asc");
-    assertEquals(1, ret.size());
-  }
-  
-  public void testSearchMultiple() throws Exception {
-    Collection<String> sites = new ArrayList<String>();
-    sites.add("classic");
-    Collection<SearchResult> ret 
-          = fileSearch_.search(new SearchContext(new Router(new ControllerDescriptor()), "classic"), "anthony cjohn~",
-                                   sites, 
-                                   0, 20, "title", "asc");
-    assertEquals(2, ret.size());//3
-  }
-  
-  public void testSearchMultipleWithOffset() throws Exception {
-    Collection<String> sites = new ArrayList<String>();
-    sites.add("classic");
-    Collection<SearchResult> ret 
-          = fileSearch_.search(new SearchContext(new Router(new ControllerDescriptor()), "classic"), "anthony cjohn~",
-                                   sites, 
-                                   1, 20, "title", "asc");
-    assertEquals(1, ret.size());//2
-  }
-  
-  public void testSearchMultipleWithLimit() throws Exception {
-    Collection<String> sites = new ArrayList<String>();
-    sites.add("classic");
-    Collection<SearchResult> ret 
-          = fileSearch_.search(new SearchContext(new Router(new ControllerDescriptor()), "classic"), "anthony cjohn~",
-                                   sites, 
-                                   0, 1, "title", "asc");
-    assertEquals(1, ret.size());
-  }  
+  public static final String ES_RESPONSE_ONE_DOC = "{ \"hits\": { \"hits\":  [\n" +
+          "           {\n" +
+          "            \"_index\": \"file\",\n" +
+          "            \"_type\": \"file\",\n" +
+          "            \"_id\": \"7b9b54017f00010102ba5027fa2c5944\",\n" +
+          "            \"_score\": 0.45138216,\n" +
+          "            \"_source\": {\n" +
+          "               \"workspace\": \"collaboration\",\n" +
+          "               \"author\": \"john\",\n" +
+          "               \"dc:creator\": \"cairo 1.9.5 (http://cairographics.org)\",\n" +
+          "               \"repository\": \"repository\",\n" +
+          "               \"title\": \"exo-documentation.pdf\",\n" +
+          "               \"path\": \"/sites/intranet/documents/exo-documentation.pdf\",\n" +
+          "               \"lastUpdatedDate\": 1505312333066,\n" +
+          "               \"createdDate\": \"1505312330756\",\n" +
+          "               \"attachment\": {\n" +
+          "                  \"content\": \"eXo Platform Documentation\"\n" +
+          "               },\n" +
+          "               \"fileSize\": \"94842\",\n" +
+          "               \"permissions\": [\n" +
+          "                  \"john\",\n" +
+          "                  \"*:/platform/web-contributors\",\n" +
+          "                  \"*:/platform/administrators\",\n" +
+          "                  \"any\"\n" +
+          "               ],\n" +
+          "               \"name\": \"exo-documentation.pdf\",\n" +
+          "               \"exo:internalUse\": \"false\",\n" +
+          "               \"fileType\": \"application/pdf\",\n" +
+          "               \"dc:publisher\": \"cairo 1.9.5 (http://cairographics.org)\"\n" +
+          "            }\n" +
+          "          }\n" +
+          "        ]\n" +
+          "      } }";
 
-  public void testSearchPhrase() throws Exception {
-    Collection<String> sites = new ArrayList<String>();
-    sites.add("classic");
-    Collection<SearchResult> ret 
-          = fileSearch_.search(new SearchContext(new Router(new ControllerDescriptor()), "classic"), "\"anthony cena\"",
-                                   sites, 
-                                   0, 20, "title", "asc");
-    assertEquals(2, ret.size());//1
+  public static final String ES_RESPONSE_TWO_DOCS = "{ \"hits\": { \"hits\":  [\n" +
+          "           {\n" +
+          "            \"_index\": \"file\",\n" +
+          "            \"_type\": \"file\",\n" +
+          "            \"_id\": \"7b9b54017f00010102ba5027fa2c5944\",\n" +
+          "            \"_score\": 0.45138216,\n" +
+          "            \"_source\": {\n" +
+          "               \"workspace\": \"collaboration\",\n" +
+          "               \"author\": \"john\",\n" +
+          "               \"dc:creator\": \"cairo 1.9.5 (http://cairographics.org)\",\n" +
+          "               \"repository\": \"repository\",\n" +
+          "               \"title\": \"exo-documentation.pdf\",\n" +
+          "               \"path\": \"/sites/intranet/documents/exo-documentation.pdf\",\n" +
+          "               \"lastUpdatedDate\": 1505312333066,\n" +
+          "               \"createdDate\": \"1505312330756\",\n" +
+          "               \"attachment\": {\n" +
+          "                  \"content\": \"eXo Platform Documentation\"\n" +
+          "               },\n" +
+          "               \"fileSize\": \"94842\",\n" +
+          "               \"permissions\": [\n" +
+          "                  \"john\",\n" +
+          "                  \"*:/platform/web-contributors\",\n" +
+          "                  \"*:/platform/administrators\",\n" +
+          "                  \"any\"\n" +
+          "               ],\n" +
+          "               \"name\": \"exo-documentation.pdf\",\n" +
+          "               \"exo:internalUse\": \"false\",\n" +
+          "               \"fileType\": \"application/pdf\",\n" +
+          "               \"dc:publisher\": \"cairo 1.9.5 (http://cairographics.org)\"\n" +
+          "            }\n" +
+          "          },\n" +
+          "           {\n" +
+          "            \"_index\": \"file\",\n" +
+          "            \"_type\": \"file\",\n" +
+          "            \"_id\": \"7b9b54017f00010102ba5027fa2c5945\",\n" +
+          "            \"_score\": 0.65568216,\n" +
+          "            \"_source\": {\n" +
+          "               \"workspace\": \"collaboration\",\n" +
+          "               \"author\": \"mary\",\n" +
+          "               \"repository\": \"repository\",\n" +
+          "               \"title\": \"exo-training.pdf\",\n" +
+          "               \"path\": \"/sites/intranet/documents/exo-training.pdf\",\n" +
+          "               \"lastUpdatedDate\": 1505312333166,\n" +
+          "               \"createdDate\": \"1505312330856\",\n" +
+          "               \"attachment\": {\n" +
+          "                  \"content\": \"eXo Platform Training\"\n" +
+          "               },\n" +
+          "               \"fileSize\": \"250842\",\n" +
+          "               \"permissions\": [\n" +
+          "                  \"mary\",\n" +
+          "                  \"any\"\n" +
+          "               ],\n" +
+          "               \"name\": \"exo-training.pdf\",\n" +
+          "               \"exo:internalUse\": \"false\",\n" +
+          "               \"fileType\": \"application/pdf\",\n" +
+          "            }\n" +
+          "          }\n" +
+          "        ]\n" +
+          "      } }";
+
+  @Mock
+  ElasticSearchingClient elasticSearchingClient;
+
+  @Mock
+  RepositoryService repositoryService;
+
+  @Mock
+  ManageableRepository repository;
+
+  @Mock
+  DocumentService documentService;
+
+  @Before
+  public void setUp() throws RepositoryException {
+    PowerMockito.mockStatic(WCMCoreUtils.class);
+    when(WCMCoreUtils.getRestContextName()).thenReturn("rest");
+
+    RepositoryEntry repositoryEntry = new RepositoryEntry();
+    repositoryEntry.setName("repository");
+    when(repository.getConfiguration()).thenReturn(repositoryEntry);
+    when(repositoryService.getCurrentRepository()).thenReturn(repository);
   }
 
-  public void testSearchPhraseWithOffset() throws Exception {
-    Collection<String> sites = new ArrayList<String>();
-    sites.add("classic");
-    Collection<SearchResult> ret 
-          = fileSearch_.search(new SearchContext(new Router(new ControllerDescriptor()), "classic"), "\"anthony cena\"",
-                                   sites, 
-                                   1, 20, "title", "asc");
-    assertEquals(1, ret.size());//0
+  @After
+  public void tearDown() {
+  }
+
+  @Test
+  public void shouldReturnNoResultWhenNoDocInES() throws Exception {
+    // Given
+    startSessionAs("john");
+    InitParams initParams = buildInitParams();
+    when(elasticSearchingClient.sendRequest(anyString(), anyString(), anyString())).thenReturn(ES_RESPONSE_EMPTY);
+
+    FileSearchServiceConnector fileSearchServiceConnector = new FileSearchServiceConnector(initParams, elasticSearchingClient, repositoryService, documentService);
+
+    // When
+    Collection<SearchResult> search = fileSearchServiceConnector.search(new SearchContext(new Router(new ControllerDescriptor()), "site"), "*", null, 0, -1, "", "");
+
+    // Then
+    assertNotNull(search);
+    assertEquals(0, search.size());
+  }
+
+  @Test
+  public void shouldReturnOneResultWhenOneDocInES() throws Exception {
+    // Given
+    startSessionAs("john");
+    InitParams initParams = buildInitParams();
+    when(elasticSearchingClient.sendRequest(anyString(), anyString(), anyString())).thenReturn(ES_RESPONSE_ONE_DOC);
+
+    FileSearchServiceConnector fileSearchServiceConnector = new FileSearchServiceConnector(initParams, elasticSearchingClient, repositoryService, documentService);
+
+    // When
+    Collection<SearchResult> searchResults = fileSearchServiceConnector.search(new SearchContext(new Router(new ControllerDescriptor()), "site"), "", null, 0, -1, "", "");
+
+    // Then
+    assertNotNull(searchResults);
+    assertEquals(1, searchResults.size());
+    SearchResult searchResult = searchResults.iterator().next();
+    assertEquals("exo-documentation.pdf", searchResult.getTitle());
+    assertEquals(1505312333066L, searchResult.getDate());
+    assertEquals("/rest/thumbnailImage/medium/repository/collaboration/sites/intranet/documents/exo-documentation.pdf", searchResult.getImageUrl());
+  }
+
+  @Test
+  public void shouldReturnTwoResultsWhenTwoDocsInES() throws Exception {
+    // Given
+    startSessionAs("john");
+    InitParams initParams = buildInitParams();
+    when(elasticSearchingClient.sendRequest(anyString(), anyString(), anyString())).thenReturn(ES_RESPONSE_TWO_DOCS);
+
+    FileSearchServiceConnector fileSearchServiceConnector = new FileSearchServiceConnector(initParams, elasticSearchingClient, repositoryService, documentService);
+
+    // When
+    Collection<SearchResult> searchResults = fileSearchServiceConnector.search(new SearchContext(new Router(new ControllerDescriptor()), "site"), "", null, 0, -1, "", "");
+
+    // Then
+    assertNotNull(searchResults);
+    assertEquals(2, searchResults.size());
+    Iterator<SearchResult> searchResultIterator = searchResults.iterator();
+    SearchResult searchResult1 = searchResultIterator.next();
+    assertEquals("exo-documentation.pdf", searchResult1.getTitle());
+    assertEquals(1505312333066L, searchResult1.getDate());
+    assertEquals("/rest/thumbnailImage/medium/repository/collaboration/sites/intranet/documents/exo-documentation.pdf", searchResult1.getImageUrl());
+    SearchResult searchResult2 = searchResultIterator.next();
+    assertEquals("exo-training.pdf", searchResult2.getTitle());
+    assertEquals(1505312333166L, searchResult2.getDate());
+    assertEquals("/rest/thumbnailImage/medium/repository/collaboration/sites/intranet/documents/exo-training.pdf", searchResult2.getImageUrl());
+  }
+
+  /**
+   * Build default init params
+   * @return The InitParams object for search connector
+   */
+  public InitParams buildInitParams() {
+    InitParams initParams = new InitParams();
+    PropertiesParam propertiesParam = new PropertiesParam();
+    propertiesParam.setProperty("searchType", FileindexingConnector.TYPE);
+    propertiesParam.setProperty("displayName", "Files");
+    propertiesParam.setProperty("searchFields", "name,title,attachment.content");
+    initParams.put("constructor.params", propertiesParam);
+    return initParams;
+  }
+
+  /**
+   * Start a session with the given username
+   *
+   * @param username Username of the user to start a session for
+   */
+  private void startSessionAs(String username) {
+    ConversationState.setCurrent(new ConversationState(new Identity(username)));
   }
 }
