@@ -62,16 +62,22 @@ public class FileIndexerAction implements AdvancedAction {
       case Event.PROPERTY_ADDED:
       case Event.PROPERTY_CHANGED:
       case Event.PROPERTY_REMOVED:
-        node = ((PropertyImpl)context.get(InvocationContext.CURRENT_ITEM)).getParent();
-        if(node != null && !trashService.isInTrash(node)) {
-          if(node.getPrimaryNodeType().getName().equals(NodetypeConstant.NT_FILE)) {
-            indexingService.reindex(FileindexingConnector.TYPE, node.getInternalIdentifier());
-          }
-          // reindex children nodes when permissions has been changed (exo:permissions) - it is required
-          // to update permissions of the nodes in the indexing engine
-          String propertyName = node.getPath().substring(node.getPath().lastIndexOf("/") + 1);
-          if(propertyName != null && propertyName.equals("exo:permissions")) {
-            applyIndexingOperationOnNodes(node, n -> indexingService.reindex(FileindexingConnector.TYPE, n.getInternalIdentifier()));
+        PropertyImpl property = (PropertyImpl) context.get(InvocationContext.CURRENT_ITEM);
+        if(property != null) {
+          node = property.getParent();
+          if (node != null && !trashService.isInTrash(node)) {
+            if (node.isNodeType(NodetypeConstant.NT_RESOURCE)) {
+              node = node.getParent();
+            }
+            if (node.isNodeType(NodetypeConstant.NT_FILE)) {
+              indexingService.reindex(FileindexingConnector.TYPE, node.getInternalIdentifier());
+            }
+            // reindex children nodes when permissions has been changed (exo:permissions) - it is required
+            // to update permissions of the nodes in the indexing engine
+            String propertyName = property.getName();
+            if (propertyName != null && propertyName.equals("exo:permissions")) {
+              applyIndexingOperationOnNodes(node, n -> indexingService.reindex(FileindexingConnector.TYPE, n.getInternalIdentifier()));
+            }
           }
         }
         break;
