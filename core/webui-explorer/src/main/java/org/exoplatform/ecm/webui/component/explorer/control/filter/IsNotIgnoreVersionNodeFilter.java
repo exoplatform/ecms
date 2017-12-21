@@ -16,16 +16,23 @@
  */
 package org.exoplatform.ecm.webui.component.explorer.control.filter;
 
-import java.util.Map;
-
-import javax.jcr.Node;
-import javax.jcr.nodetype.NoSuchNodeTypeException;
-
+import org.apache.commons.lang.StringUtils;
 import org.exoplatform.services.jcr.core.nodetype.ExtendedNodeTypeManager;
 import org.exoplatform.services.jcr.impl.core.NodeImpl;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.webui.ext.filter.UIExtensionFilter;
 import org.exoplatform.webui.ext.filter.UIExtensionFilterType;
+
+import javax.jcr.AccessDeniedException;
+import javax.jcr.Node;
+import javax.jcr.RepositoryException;
+import javax.jcr.nodetype.NoSuchNodeTypeException;
+import javax.jcr.nodetype.NodeType;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by The eXo Platform SAS
@@ -35,40 +42,58 @@ import org.exoplatform.webui.ext.filter.UIExtensionFilterType;
  */
 public class IsNotIgnoreVersionNodeFilter implements UIExtensionFilter {
 
+  private static final Log LOG = ExoLogger.getLogger(IsNotIgnoreVersionNodeFilter.class);
+
+  public static final String NODETYPES_IGNOREVERSION_PARAM = "wcm.nodetypes.ignoreversion";
+
+  private List<NodeType> ignoredNodetypes = new ArrayList<>();
+
+  public IsNotIgnoreVersionNodeFilter() {
+    String nodetypes = System.getProperty(NODETYPES_IGNOREVERSION_PARAM);
+    if(StringUtils.isBlank(nodetypes)) {
+      nodetypes = "exo:webContent";
+    }
+
+    String[] arrNodetypes = nodetypes.split(",");
+
+    for (String nodetype : arrNodetypes) {
+      ExtendedNodeTypeManager ntmanager = WCMCoreUtils.getRepository().getNodeTypeManager();
+      try {
+        ignoredNodetypes.add(ntmanager.getNodeType(nodetype));
+      } catch (NoSuchNodeTypeException e) {
+        LOG.warn("Nodetype '{}' configured in wcm.nodetypes.ignoreversion does not exist");
+      } catch (RepositoryException e) {
+        LOG.error("Error while fetching nodetype '" + nodetype + "'", e);
+      }
+    }
+  }
+
  public boolean accept(Map<String, Object> context) throws Exception {
-   if (context == null) return true;
-   boolean ignore_version = true;
-   Node currentNode = (Node) context.get(Node.class.getName());
-   Node parrentNode = null;
-   try{
-     parrentNode = currentNode.getParent();
-   }catch(Exception ex){
-     return false;
-   }
-   ExtendedNodeTypeManager ntmanager = WCMCoreUtils.getRepository().getNodeTypeManager();
-   String nodetypes = System.getProperty("wcm.nodetypes.ignoreversion");
-   if(nodetypes == null || nodetypes.length() == 0)
-     nodetypes = "exo:webContent";
-   String[] arrNodetypes = nodetypes.split(",");
-   for (String nodetype: arrNodetypes) {
-     try {
-       ntmanager.getNodeType(nodetype);
-     } catch (NoSuchNodeTypeException e) {
-       ignore_version = true;
-     }
-     while (!((NodeImpl) parrentNode).isRoot()) {
-       if (parrentNode.isNodeType(nodetype)) {
-         return false;
-       }
-       try {
-         parrentNode = parrentNode.getParent();
-       }catch(Exception ex){
-         return false;
-       }
-     }
+   if (context == null) {
+     return true;
    }
 
-   return ignore_version;
+   Node currentNode = (Node) context.get(Node.class.getName());
+   Node parentNode = currentNode;
+
+   do {
+     for(NodeType nodetype : ignoredNodetypes) {
+       if (parentNode.isNodeType(nodetype.getName())) {
+         return false;
+       }
+     }
+     try {
+       parentNode = parentNode.getParent();
+     } catch(AccessDeniedException ex) {
+       // if we cannot access the parent it means we are not in the content anymore
+       return true;
+     } catch(Exception ex) {
+       LOG.error("Error while getting parent of node " + parentNode.getPath(), ex);
+       return false;
+     }
+   } while (!((NodeImpl) parentNode).isRoot());
+
+   return true;
  }
 
  public UIExtensionFilterType getType() {
