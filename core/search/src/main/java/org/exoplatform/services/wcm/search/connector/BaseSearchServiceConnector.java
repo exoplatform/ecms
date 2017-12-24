@@ -17,6 +17,7 @@
 package org.exoplatform.services.wcm.search.connector;
 
 import java.text.DateFormat;
+import java.text.Normalizer;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -288,7 +289,19 @@ public abstract class BaseSearchServiceConnector extends SearchServiceConnector 
       return id.replace(".", " / ");
     }
   }
-  
+
+  /**
+   * Remove accents from query
+   * 
+   * @param query
+   * @return
+   */
+  protected static String removeAccents(String query) {
+    query = Normalizer.normalize(query, Normalizer.Form.NFD);
+    query = query.replaceAll("[\\p{InCombiningDiacriticalMarks}]", "");
+    return query;
+  }
+
   /**
    * returns path of node in format: "{drivename}/{relative path from drive root node}
    * @param node the node
@@ -335,5 +348,5 @@ public abstract class BaseSearchServiceConnector extends SearchServiceConnector 
    * @throws Exception
    */
   protected abstract String getDetails(ResultNode node, SearchContext context) throws Exception;
-  
+
 }

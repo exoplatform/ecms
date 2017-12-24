@@ -56,7 +56,7 @@ public class PageSearchServiceConnector extends BaseSearchServiceConnector {
     //set content types
     criteria.setContentTypes(new String[] {"gtn:language", "exo:pageMetadata"});
     criteria.setFulltextSearchProperty(new String[] {"exo:metaKeywords", "exo:metaDescription", "gtn:name"});
-    criteria.setKeyword(query.toLowerCase());
+    criteria.setKeyword(removeAccents(query.toLowerCase()));
     criteria.setSearchWebpage(true);
     criteria.setSearchDocument(false);
     criteria.setSearchWebContent(false);
