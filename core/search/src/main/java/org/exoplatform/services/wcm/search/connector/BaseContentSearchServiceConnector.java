@@ -16,6 +16,7 @@
  */
 package org.exoplatform.services.wcm.search.connector;
 
+import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -58,7 +59,7 @@ public abstract class BaseContentSearchServiceConnector extends BaseSearchServic
     //set content types
     criteria.setContentTypes(getSearchedDocTypes());
     criteria.setNodeTypes(getNodeTypes());
-    criteria.setKeyword(query.toLowerCase());
+    criteria.setKeyword(removeAccents(query.toLowerCase()));
     criteria.setSearchWebpage(false);
     criteria.setSearchDocument(true);
     criteria.setSearchWebContent(true);
@@ -76,7 +77,7 @@ public abstract class BaseContentSearchServiceConnector extends BaseSearchServic
     }
     return criteria;
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -128,6 +129,6 @@ public abstract class BaseContentSearchServiceConnector extends BaseSearchServic
     Calendar date = getDate(retNode);
     return getDriveTitle(driveData) + fileSize(retNode) + formatDate(date);
   } 
-  
+
 }
 
