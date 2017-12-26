@@ -144,7 +144,7 @@ public class UIEditingTagsForm extends UIContainer implements UIPopupComponent {
         UIDocumentInfo uiDocumentInfo = uiExplorer.findFirstComponentOfType(UIDocumentInfo.class);
         if (uiDocumentInfo != null) {
           uiDocumentInfo.updatePageListData();
-          uiExplorer.refreshExplorer();
+          uiExplorer.refreshExplorerWithoutClosingPopup();
         }
       }
       event.getRequestContext().addUIComponentToUpdateByAjax(uiExplorer);
