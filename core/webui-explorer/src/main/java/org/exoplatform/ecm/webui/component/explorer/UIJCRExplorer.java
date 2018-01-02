@@ -351,9 +351,6 @@ public class UIJCRExplorer extends UIContainer {
   public Collection<HistoryEntry> getHistory() { return addressPath_.values() ; }
 
   public SessionProvider getSessionProvider() {
-    if(WCMCoreUtils.getRemoteUser().equals(WCMCoreUtils.getSuperUser())) {
-      return getSystemProvider();
-    }
     return WCMCoreUtils.getUserSessionProvider();
   }
 
