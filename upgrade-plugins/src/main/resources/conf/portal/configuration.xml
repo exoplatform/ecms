@@ -215,6 +215,16 @@
                     <description>The plugin execution order</description>
                     <value>2</value>
                 </value-param>
+                <value-param>
+                    <name>plugin.upgrade.execute.once</name>
+                    <description>Execute plugin only once</description>
+                    <value>true</value>
+                </value-param>
+                <value-param>
+                    <name>plugin.upgrade.target.version</name>
+                    <description>Targeted version</description>
+                    <value>5.0.0</value>
+                </value-param>
             </init-params>
         </component-plugin>
         <component-plugin>
