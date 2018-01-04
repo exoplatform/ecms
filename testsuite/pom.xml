@@ -4,7 +4,7 @@
   <parent>
     <artifactId>ecms</artifactId>
     <groupId>org.exoplatform.ecms</groupId>
-    <version>5.0.x-SNAPSHOT</version>
+    <version>5.0.0-RC04</version>
   </parent>
   <artifactId>ecms-testsuite</artifactId>
   <packaging>pom</packaging>
