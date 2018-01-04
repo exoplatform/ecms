@@ -242,8 +242,16 @@ public class DriveData implements Comparable<DriveData>, Serializable {
   }
 
   public String getResolvedHomePath() {
-    return homePath.replaceAll(Pattern.quote("${userId}"), parameters.get("userId"))
-            .replaceAll(Pattern.quote("${groupId}"), parameters.get("groupId"));
+    String resolvedHomePath = homePath;
+    if (parameters != null) {
+      if (parameters.containsKey("userId") && homePath.contains("${userId}")) {
+        resolvedHomePath = resolvedHomePath.replaceAll(Pattern.quote("${userId}"), parameters.get("userId"));
+      }
+      if (parameters.containsKey("groupId") && homePath.contains("${groupId}")) {
+        resolvedHomePath = resolvedHomePath.replaceAll(Pattern.quote("${groupId}"), parameters.get("groupId"));
+      }
+    }
+    return resolvedHomePath;
   }
 
   public int compareTo(DriveData arg) {
