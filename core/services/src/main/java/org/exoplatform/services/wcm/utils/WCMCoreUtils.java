@@ -433,9 +433,20 @@ public class WCMCoreUtils {
    * @throws Exception
    */
   public static String getSiteGlobalActiveJs(Node siteNode) throws Exception {
+    return getSiteGlobalActiveJs(siteNode, getSystemSessionProvider());
+  }
+
+  /**
+   * gets the global javascript of given site node. For example, if the site is acme<br>
+   * we then return all javascript code only inside acme/js
+   * @param siteNode the root node of the site
+   * @return global javascript code inside this site
+   * @throws Exception
+   */
+  public static String getSiteGlobalActiveJs(Node siteNode, SessionProvider sessionProvider) throws Exception {
     StringBuilder buffer = new StringBuilder();
     LivePortalManagerService livePortalService = getService(LivePortalManagerService.class);
-    buffer.append(getSiteActiveJs(livePortalService.getLiveSharedPortal(getUserSessionProvider()))).append(getSiteActiveJs(siteNode));
+    buffer.append(getSiteActiveJs(livePortalService.getLiveSharedPortal(sessionProvider))).append(getSiteActiveJs(siteNode));
     return buffer.toString();
   }
 

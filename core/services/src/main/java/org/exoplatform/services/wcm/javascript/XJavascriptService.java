@@ -29,9 +29,13 @@ import javax.jcr.ValueFormatException;
 import javax.jcr.query.Query;
 import javax.jcr.query.QueryManager;
 import javax.jcr.query.QueryResult;
-import javax.servlet.ServletContext;
 
 import org.apache.commons.lang.StringUtils;
+import org.picocontainer.Startable;
+
+import org.exoplatform.services.cache.CacheService;
+import org.exoplatform.services.cache.ExoCache;
+import org.exoplatform.services.handler.SiteJavascriptHandler;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
@@ -43,7 +47,6 @@ import org.exoplatform.services.wcm.core.WCMConfigurationService;
 import org.exoplatform.services.wcm.portal.LivePortalManagerService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.javascript.JavascriptConfigService;
-import org.picocontainer.Startable;
 
 /**
  * Created by The eXo Platform SAS
@@ -73,14 +76,13 @@ public class XJavascriptService implements Startable {
 
   private LivePortalManagerService livePortalManagerService_;
 
-  /** The servlet context. */
-  private ServletContext servletContext;
-
   /** The log. */
   private static final Log LOG = ExoLogger.getLogger(XJavascriptService.class.getName());
 
   private Set<String> loadedJSModule = new HashSet<String>();
   private Set<String> loadedSharedJSModule = new HashSet<String>();
+
+  private ExoCache<String, Object> jsCache_;
 
   /**
    * Instantiates a new x javascript service.
@@ -89,13 +91,14 @@ public class XJavascriptService implements Startable {
    *
    * @throws Exception the exception
    */
-  public XJavascriptService(LivePortalManagerService livePortalService) throws Exception{
+  public XJavascriptService(WCMConfigurationService wcmConfigurationService, JavascriptConfigService javascriptConfigService, LivePortalManagerService livePortalService) throws Exception{
     this.livePortalManagerService_ = livePortalService;
-    this.jsConfigService = WCMCoreUtils.getService(JavascriptConfigService.class);
-    this.jsConfigService.addResourceResolver(
-      new WCMJavascriptResourceResolver(livePortalManagerService_, jsConfigService));
-    this.configurationService = WCMCoreUtils.getService(WCMConfigurationService.class);
-    this.servletContext = WCMCoreUtils.getService(ServletContext.class);
+    this.jsConfigService = javascriptConfigService;
+    this.configurationService = wcmConfigurationService;
+
+    jsCache_ = WCMCoreUtils.getService(CacheService.class).getCacheInstance(SiteJavascriptHandler.CACHE_REGION);
+
+    this.jsConfigService.addResourceResolver(new WCMJavascriptResourceResolver(livePortalManagerService_, jsConfigService));
   }
 
   /**
@@ -185,6 +188,7 @@ public class XJavascriptService implements Startable {
 //        new PortalJScript(moduleName, javascriptPath,"/" + servletContext.getServletContextName(),
 //                          10, portalNode.getName()));
     }
+    jsCache_.clearCache();
   }
 
   /**
@@ -205,6 +209,7 @@ public class XJavascriptService implements Startable {
 //      jsConfigService.addCommonJScript(
 //         new Javascript(moduleName, javascriptPath,"/" + servletContext.getServletContextName(), 10));
     }
+    jsCache_.clearCache();
   }
 
   private String getActivedJSData(Node jsFile) throws ValueFormatException,
@@ -239,9 +244,7 @@ public class XJavascriptService implements Startable {
         LOG.warn("Exception when merging inside Portal : WCM init is not completed.");
       }
     } catch (Exception e) {
-      if (LOG.isErrorEnabled()) {
-        LOG.error("Exception when start XJavascriptService");
-      }
+      LOG.error("Exception when start XJavascriptService", e);
     } finally {
       sessionProvider.close();
     }
@@ -252,4 +255,5 @@ public class XJavascriptService implements Startable {
    */
   public void stop() {
   }
+
 }

@@ -21,10 +21,14 @@ import java.io.PrintWriter;
 import javax.jcr.Node;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringUtils;
+
 import org.exoplatform.ecm.utils.MessageDigester;
 import org.exoplatform.services.cache.CacheService;
 import org.exoplatform.services.cache.ExoCache;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.security.ConversationState;
+import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.services.wcm.portal.LivePortalManagerService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.ControllerContext;
@@ -45,7 +49,7 @@ public class SiteJavascriptHandler extends WebRequestHandler {
 
   private LivePortalManagerService livePortalManagerService_;
 
-  private static final String      CACHE_REGION = "ecms.site.javascript.cache";
+  public static final String       CACHE_REGION = "ecms.site.javascript.cache";
 
   @Override
   public String getHandlerName() {
@@ -59,19 +63,29 @@ public class SiteJavascriptHandler extends WebRequestHandler {
                              .getCacheInstance(SiteJavascriptHandler.CACHE_REGION);
     }
     siteName_ = context.getParameter(QualifiedName.create("gtn", "sitename"));
-    SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
-    livePortalManagerService_ = WCMCoreUtils.getService(LivePortalManagerService.class);
-    Node portalNode = null;
-    if ("shared".equals(siteName_)) {
-      portalNode = livePortalManagerService_.getLiveSharedPortal(sessionProvider);
-    } else {
-      portalNode = livePortalManagerService_.getLivePortal(sessionProvider, siteName_);  
+
+    String username = IdentityConstants.ANONIM;
+    ConversationState conversationState = ConversationState.getCurrent();
+    if (conversationState != null && conversationState.getIdentity() != null) {
+      username = conversationState.getIdentity().getUserId();
+      if (StringUtils.isBlank(username)) {
+        username = IdentityConstants.ANONIM;
+      }
     }
-    
-    String jsData = (String)jsCache_.get(MessageDigester.getHash(siteName_));
+    String key = MessageDigester.getHash(siteName_) + MessageDigester.getHash(username);
+    String jsData = (String) jsCache_.get(key);
     if (jsData == null || jsData.trim().length() == 0) {
-      jsData = WCMCoreUtils.getSiteGlobalActiveJs(portalNode);
-      jsCache_.put(MessageDigester.getHash(siteName_), jsData);
+      SessionProvider sessionProvider = IdentityConstants.ANONIM.equals(username) ? WCMCoreUtils.createAnonimProvider()
+                                                                                  : WCMCoreUtils.getUserSessionProvider();
+      livePortalManagerService_ = WCMCoreUtils.getService(LivePortalManagerService.class);
+      Node portalNode = null;
+      if ("shared".equals(siteName_)) {
+        portalNode = livePortalManagerService_.getLiveSharedPortal(sessionProvider);
+      } else {
+        portalNode = livePortalManagerService_.getLivePortal(sessionProvider, siteName_);  
+      }
+      jsData = WCMCoreUtils.getSiteGlobalActiveJs(portalNode, sessionProvider);
+      jsCache_.put(key, jsData);
     }
     HttpServletResponse res = context.getResponse();
     res.setContentType("text/javascript");
