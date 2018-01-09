@@ -9,6 +9,7 @@ import org.exoplatform.services.jcr.impl.core.NodeImpl;
 import org.exoplatform.services.jcr.impl.core.PropertyImpl;
 import org.exoplatform.services.jcr.impl.ext.action.AdvancedAction;
 import org.exoplatform.services.jcr.impl.ext.action.AdvancedActionException;
+import org.exoplatform.services.jcr.observation.ExtendedEvent;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.core.NodeLocation;
@@ -20,6 +21,7 @@ import javax.jcr.NodeIterator;
 import javax.jcr.RepositoryException;
 import javax.jcr.observation.Event;
 import java.util.function.Consumer;
+import java.util.function.Predicate;
 
 /**
  *  JCR action which listens on all nodes events to index them
@@ -47,16 +49,16 @@ public class FileIndexerAction implements AdvancedAction {
         node = (NodeImpl)context.get(InvocationContext.CURRENT_ITEM);
         if(node != null) {
           if (trashService.isInTrash(node)) {
-            applyIndexingOperationOnNodes(node, n -> indexingService.unindex(FileindexingConnector.TYPE, n.getInternalIdentifier()));
+            applyIndexingOperationOnNodes(node, n -> indexingService.unindex(FileindexingConnector.TYPE, n.getInternalIdentifier()), n -> true);
           } else {
-            applyIndexingOperationOnNodes(node, n -> indexingService.index(FileindexingConnector.TYPE, n.getInternalIdentifier()));
+            applyIndexingOperationOnNodes(node, n -> indexingService.index(FileindexingConnector.TYPE, n.getInternalIdentifier()), n -> true);
           }
         }
         break;
       case Event.NODE_REMOVED:
         node = (NodeImpl)context.get(InvocationContext.CURRENT_ITEM);
         if(node != null) {
-          applyIndexingOperationOnNodes(node, n -> indexingService.unindex(FileindexingConnector.TYPE, n.getInternalIdentifier()));
+          applyIndexingOperationOnNodes(node, n -> indexingService.unindex(FileindexingConnector.TYPE, n.getInternalIdentifier()), n -> true);
         }
         break;
       case Event.PROPERTY_ADDED:
@@ -72,13 +74,16 @@ public class FileIndexerAction implements AdvancedAction {
             if (node.isNodeType(NodetypeConstant.NT_FILE)) {
               indexingService.reindex(FileindexingConnector.TYPE, node.getInternalIdentifier());
             }
-            // reindex children nodes when permissions has been changed (exo:permissions) - it is required
-            // to update permissions of the nodes in the indexing engine
-            String propertyName = property.getName();
-            if (propertyName != null && propertyName.equals("exo:permissions")) {
-              applyIndexingOperationOnNodes(node, n -> indexingService.reindex(FileindexingConnector.TYPE, n.getInternalIdentifier()));
-            }
           }
+        }
+        break;
+      case ExtendedEvent.PERMISSION_CHANGED:
+        node = (NodeImpl)context.get(InvocationContext.CURRENT_ITEM);
+        if (node != null && !trashService.isInTrash(node)) {
+          indexingService.reindex(FileindexingConnector.TYPE, node.getInternalIdentifier());
+          // reindex children nodes when permissions has been changed (exo:permissions) - it is required
+          // to update permissions of the nodes in the indexing engine
+          applyIndexingOperationOnNodes(node, n -> indexingService.reindex(FileindexingConnector.TYPE, n.getInternalIdentifier()), n -> hasNotPrivilegeableMixin(n));
         }
         break;
     }
@@ -98,15 +103,16 @@ public class FileIndexerAction implements AdvancedAction {
   /**
    * Apply the given indexing operation (index|reindex|unindex) on all children of a node, only for nt:file nodes
    * @param node The root node to operate on
+   * @param filter skip process node if filter return true
    * @param indexingOperation Indexing operation (index|reindex|unindex) to apply on the nodes
    */
-  protected void applyIndexingOperationOnNodes(NodeImpl node, Consumer<NodeImpl> indexingOperation) {
+  protected void applyIndexingOperationOnNodes(NodeImpl node, Consumer<NodeImpl> indexingOperation, Predicate<NodeImpl> filter) {
     if (node == null) {
       return;
     }
 
     try {
-      if (node.getPrimaryNodeType().getName().equals(NodetypeConstant.NT_FILE)) {
+      if (node.isNodeType(NodetypeConstant.NT_FILE)) {
         indexingOperation.accept(node);
       }
     } catch (RepositoryException e) {
@@ -117,10 +123,21 @@ public class FileIndexerAction implements AdvancedAction {
       NodeIterator nodeIterator = node.getNodes();
       while(nodeIterator.hasNext()) {
         NodeImpl childNode = (NodeImpl) nodeIterator.nextNode();
-        applyIndexingOperationOnNodes(childNode, indexingOperation);
+        if(! filter.test(childNode))
+          continue;
+        applyIndexingOperationOnNodes(childNode, indexingOperation, filter);
       }
     } catch (RepositoryException e) {
       LOGGER.error("Cannot get child nodes of node " + node.getInternalIdentifier(), e);
     }
+  }
+  // Check if the node has exo:privilegeable mixin
+  private boolean hasNotPrivilegeableMixin(NodeImpl node) {
+    try {
+      return ! node.isNodeType(NodetypeConstant.EXO_PRIVILEGEABLE);
+    } catch (RepositoryException e) {
+      LOGGER.error("Error while check privilegeable mixin ", e);
+    }
+    return true;
   }
 }

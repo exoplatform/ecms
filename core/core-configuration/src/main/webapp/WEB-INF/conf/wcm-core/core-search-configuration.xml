@@ -167,7 +167,7 @@
                                 <value>
                                     <object type="org.exoplatform.services.jcr.impl.ext.action.ActionConfiguration">
                                         <field  name="workspace"><string>collaboration</string></field>
-                                        <field  name="eventTypes"><string>addNode,removeNode,addProperty,changeProperty,removeProperty</string></field>
+                                        <field  name="eventTypes"><string>addNode,removeNode,addProperty,changeProperty,removeProperty,changePermission</string></field>
                                         <field  name="path"><string>/</string></field>
                                         <field  name="isDeep"><boolean>true</boolean></field>
                                         <field  name="actionClassName"><string>org.exoplatform.services.wcm.search.connector.FileIndexerAction</string></field>
