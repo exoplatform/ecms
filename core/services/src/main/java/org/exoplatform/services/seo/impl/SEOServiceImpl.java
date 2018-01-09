@@ -53,6 +53,8 @@ import org.exoplatform.services.seo.SEOConfig;
 import org.exoplatform.services.seo.SEOService;
 import org.exoplatform.services.wcm.portal.LivePortalManagerService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+
+import org.apache.commons.lang.StringUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
@@ -63,6 +65,7 @@ import org.w3c.dom.Element;
 public class SEOServiceImpl implements SEOService {
   private ExoCache<String, Object> cache;
 
+  public static final String EMPTY_CACHE_ENTRY = "EMPTY";
   public static String METADATA_BASE_PATH = "SEO";
   final static public String LANGUAGES    = "seo-languages";
   public static String METADATA_PAGE_PATH = "pages";
@@ -125,7 +128,16 @@ public class SEOServiceImpl implements SEOService {
   public void storeMetadata(PageMetadataModel metaModel, String portalName,
                             boolean onContent, String language) throws Exception {
     String uri = metaModel.getUri();
+    String cachedHash = getPageOrContentCacheKey(uri, language);
+    if (cache.get(cachedHash) != null) {
+      cache.remove(cachedHash);
+    }
     String pageReference = metaModel.getPageReference();
+    cachedHash = getPageOrContentCacheKey(metaModel.getPageReference(), language);
+    if (cache.get(cachedHash) != null) {
+      cache.remove(cachedHash);
+    }
+
     // Inherit from parent page
     /*
      * if(!onContent) { if(metaModel.getPageParent() != null &&
@@ -200,9 +212,9 @@ public class SEOServiceImpl implements SEOService {
       }
       String hash = null;
       if (onContent)
-        hash = getHash(uri + language);
+        hash = cachedHash;
       else
-        hash = getHash(pageReference + language);
+        hash = getPageOrContentCacheKey(pageReference, language);
       if (hash != null)
         cache.put(hash, metaModel);
     } else {
@@ -222,12 +234,16 @@ public class SEOServiceImpl implements SEOService {
         seoNode.setProperty("exo:metaPriority", priority);
         seoNode.setProperty("exo:metaFrequency", frequency);
         updateSiteMap(uri, priority, frequency, sitemap, portalName);
-        hash = getHash(pageReference + language);
+        hash = getPageOrContentCacheKey(pageReference, language);
       }
       if (hash != null)
         cache.put(hash, metaModel);
     }
     session.save();
+  }
+
+  private String getPageOrContentCacheKey(String uri, String language) throws Exception {
+    return getHash(uri + language);
   } 
 
   public String getState(String path, String language, boolean onContent) throws Exception{
@@ -237,14 +253,16 @@ public class SEOServiceImpl implements SEOService {
     PageMetadataModel metaModel = null;
     if(onContent) {
       node = getContentNode(path);
-      hash = getHash(node.getUUID() + language);
-      if (cache.get(hash) != null) metaModel = (PageMetadataModel) cache.get(hash);
+      hash = node == null ? StringUtils.EMPTY : getPageOrContentCacheKey(node.getUUID(), language);
+      metaModel = (PageMetadataModel) getCachedEntry(hash, false);
       if(metaModel != null) return metaModel.getFullStatus();
 
     } else {
-      hash = getHash(path + language);
-      if (cache.get(hash) != null)
-        metaModel = (PageMetadataModel) cache.get(hash);
+      hash = getPageOrContentCacheKey(path, language);
+      metaModel = (PageMetadataModel) getCachedEntry(hash, true);
+      if (isNullObject(metaModel)) {
+        return null;
+      }
       if(metaModel != null) return metaModel.getFullStatus();
       SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
       Session session = sessionProvider.getSession("portal-system",
@@ -258,6 +276,22 @@ public class SEOServiceImpl implements SEOService {
         return seoNode.getProperty("exo:metaFully").getString();  			
     }
     return state;
+  }
+
+  private boolean isNullObject(PageMetadataModel metaModel) {
+    return metaModel == PageMetadataModel.NULL_PAGE_METADATA_MODEL;
+  }
+
+  private Object getCachedEntry(String hash, boolean cacheNull) {
+    Object object = cache.get(hash);
+    if (cacheNull) {
+      if( object == null) {
+        cache.put(hash, EMPTY_CACHE_ENTRY);
+      } else if(EMPTY_CACHE_ENTRY.equals(object)) {
+        return PageMetadataModel.NULL_PAGE_METADATA_MODEL;
+      }
+    }
+    return object;
   }
 
   public PageMetadataModel getMetadata(ArrayList<String> params,
@@ -291,9 +325,8 @@ public class SEOServiceImpl implements SEOService {
     if (!contentNode.isNodeType("mix:referenceable")) {
       contentNode.addMixin("mix:referenceable");
     }
-    String hash = getHash(contentNode.getUUID() + language);
-    if (cache.get(hash) != null)
-      metaModel = (PageMetadataModel) cache.get(hash);
+    String hash = getPageOrContentCacheKey(contentNode.getUUID(), language);
+    metaModel = (PageMetadataModel) getCachedEntry(hash, false);
 
     if (metaModel == null && contentNode.hasNode(LANGUAGES+"/"+language)) {
       //Getting seo node by language
@@ -337,9 +370,11 @@ public class SEOServiceImpl implements SEOService {
    */
   public PageMetadataModel getPageMetadata(String pageUri, String language) throws Exception {
     PageMetadataModel metaModel = null;
-    String hash = getHash(pageUri + language);
-    if (cache.get(hash) != null)
-      metaModel = (PageMetadataModel) cache.get(hash);
+    String hash = getPageOrContentCacheKey(pageUri, language);
+    metaModel = (PageMetadataModel) getCachedEntry(hash, true);
+    if (isNullObject(metaModel)) {
+      return null;
+    }
     if (metaModel == null) {
       SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
       Session session = sessionProvider.getSession("portal-system",
@@ -646,7 +681,7 @@ public class SEOServiceImpl implements SEOService {
     }
 
     if (sitemapData != null && sitemapData.length() > 0) {
-      String hash = getHash(portalName + SITEMAP_NAME);
+      String hash = getSiteMapCacheKey(portalName);
       cache.put(hash, sitemapData);
     }
     session.save();
@@ -684,18 +719,20 @@ public class SEOServiceImpl implements SEOService {
       }
       robotsNode.setProperty("jcr:data", robotsContent.toString());
       robotsNode.setProperty("jcr:lastModified", new GregorianCalendar());
-      cache.put(getHash(portalName + ROBOTS_NAME), robotsContent.toString());
+      cache.put(getRobotsCacheKey(portalName), robotsContent.toString());
     }
+  }
+
+  private String getRobotsCacheKey(String portalName) throws Exception {
+    return getHash(portalName + ROBOTS_NAME);
   }
 
   /**
    * {@inheritDoc}
    */
   public String getSitemap(String portalName) throws Exception {
-    String sitemapContent = null;
-    String hash = getHash(portalName + SITEMAP_NAME);
-    if (cache.get(hash) != null)
-      sitemapContent = (String) cache.get(hash);
+    String hash = getSiteMapCacheKey(portalName);
+    String sitemapContent = (String) getCachedEntry(hash, false);
 
     if (sitemapContent == null || sitemapContent.length() == 0) {
       SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
@@ -742,14 +779,16 @@ public class SEOServiceImpl implements SEOService {
     return sitemapContent;
   }
 
+  private String getSiteMapCacheKey(String portalName) throws Exception {
+    return getHash(portalName + SITEMAP_NAME);
+  }
+
   /**
    * {@inheritDoc}
    */
   public String getRobots(String portalName) throws Exception {
-    String hash = getHash(portalName + ROBOTS_NAME);
-    String robotsCache = null;
-    if (cache.get(hash) != null)
-      robotsCache = (String) cache.get(hash);
+    String hash = getRobotsCacheKey(portalName);
+    String robotsCache = (String) getCachedEntry(hash, false);
 
     if (robotsCache != null && robotsCache.trim().length() > 0) {
       return robotsCache;
