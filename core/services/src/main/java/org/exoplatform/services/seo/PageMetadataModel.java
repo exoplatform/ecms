@@ -26,6 +26,8 @@ import java.io.Serializable;
  */
 public class PageMetadataModel implements Serializable {
  
+  public static final PageMetadataModel NULL_PAGE_METADATA_MODEL = new PageMetadataModel();
+
   private static final long serialVersionUID = -2765258183491567699L;
 
   private String uri = null;
