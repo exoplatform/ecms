@@ -300,7 +300,7 @@
       <ManageActions>アクション管理</ManageActions>
       <ExportNode>ノードエクスポート</ExportNode>
       <ImportNode>ノードインポート</ImportNode>
-      <OverloadThumbnail>オーバーロード サムネイル</OverloadThumbnail>
+      <OverloadThumbnail>Change Icon Image</OverloadThumbnail>
       <ManageHidden>コンテンツを隠す/表示</ManageHidden>
       <ViewReferences>リファレンス観覧</ViewReferences>
       <ViewNodeType>ノードタイプ観覧</ViewNodeType>

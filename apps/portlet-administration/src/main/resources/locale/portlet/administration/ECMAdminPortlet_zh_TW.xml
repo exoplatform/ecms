@@ -977,7 +977,7 @@
       <watchDocument>觀看文件</watchDocument>
       <taggingDocument>標記文件</taggingDocument>
       <viewMetadatas>查看中繼資料</viewMetadatas>
-      <overloadThumbnail>超載的縮圖</overloadThumbnail>
+      <overloadThumbnail>Change Icon Image</overloadThumbnail>
       <manageHidden>隱藏/顯示內容</manageHidden>
       <comment>評論</comment>
       <vote>投票</vote>

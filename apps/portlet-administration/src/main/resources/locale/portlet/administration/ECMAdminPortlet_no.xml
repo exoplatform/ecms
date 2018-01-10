@@ -977,7 +977,7 @@
       <watchDocument>Se dokument</watchDocument>
       <taggingDocument>Tagg dokumentet</taggingDocument>
       <viewMetadatas>Vis metadata</viewMetadatas>
-      <overloadThumbnail>Bytt miniatyrbilde</overloadThumbnail>
+      <overloadThumbnail>Change Icon Image</overloadThumbnail>
       <manageHidden>Skjul/vis innhold</manageHidden>
       <comment>Kommentar</comment>
       <vote>Stem</vote>

@@ -977,7 +977,7 @@
       <watchDocument>ドキュメント観覧</watchDocument>
       <taggingDocument>ドキュメントにタグ付け</taggingDocument>
       <viewMetadatas>メタデータ観覧</viewMetadatas>
-      <overloadThumbnail>オーバーロード サムネイル</overloadThumbnail>
+      <overloadThumbnail>Change Icon Image</overloadThumbnail>
       <manageHidden>コンテンツの表示/非表示</manageHidden>
       <comment>コメント</comment>
       <vote>ドキュメントに投票</vote>

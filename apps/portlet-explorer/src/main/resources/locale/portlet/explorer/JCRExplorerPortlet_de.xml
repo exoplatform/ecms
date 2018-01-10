@@ -300,7 +300,7 @@
       <ManageActions>Aktionen</ManageActions>
       <ExportNode>Exportieren</ExportNode>
       <ImportNode>Importieren</ImportNode>
-      <OverloadThumbnail>Miniaturansicht überladen</OverloadThumbnail>
+      <OverloadThumbnail>Change Icon Image</OverloadThumbnail>
       <ManageHidden>Inhalt anzeigen/ausblenden</ManageHidden>
       <ViewReferences>Referenzen</ViewReferences>
       <ViewNodeType>Typen</ViewNodeType>

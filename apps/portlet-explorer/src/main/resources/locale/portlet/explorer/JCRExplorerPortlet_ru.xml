@@ -300,7 +300,7 @@
       <ManageActions>Действия</ManageActions>
       <ExportNode>Экспорт</ExportNode>
       <ImportNode>Импорт</ImportNode>
-      <OverloadThumbnail>Совместить эскиз</OverloadThumbnail>
+      <OverloadThumbnail>Change Icon Image</OverloadThumbnail>
       <ManageHidden>Показать/скрыть содержание</ManageHidden>
       <ViewReferences>Ссылки</ViewReferences>
       <ViewNodeType>Типы</ViewNodeType>

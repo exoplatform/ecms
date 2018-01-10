@@ -300,7 +300,7 @@
       <ManageActions>Veiksmai</ManageActions>
       <ExportNode>Eksportuoti</ExportNode>
       <ImportNode>Importuoti</ImportNode>
-      <OverloadThumbnail>Perkrovos miniatūra</OverloadThumbnail>
+      <OverloadThumbnail>Change Icon Image</OverloadThumbnail>
       <ManageHidden>Rodyti/slėpti turinį</ManageHidden>
       <ViewReferences>Nuorodos</ViewReferences>
       <ViewNodeType>Tipai</ViewNodeType>

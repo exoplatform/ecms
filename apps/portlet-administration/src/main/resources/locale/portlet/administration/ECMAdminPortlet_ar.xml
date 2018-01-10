@@ -977,7 +977,7 @@
       <watchDocument>تتبّع الوثيقة</watchDocument>
       <taggingDocument>إضافة علامات لهذه الوثيقة</taggingDocument>
       <viewMetadatas>عرض دليل المعلومات</viewMetadatas>
-      <overloadThumbnail>زيادة صورة مصغرة</overloadThumbnail>
+      <overloadThumbnail>Change Icon Image</overloadThumbnail>
       <manageHidden>إخفاء/عرض المحتوى</manageHidden>
       <comment>تعليق</comment>
       <vote>تصويت</vote>

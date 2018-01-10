@@ -300,7 +300,7 @@
       <ManageActions>Akcje</ManageActions>
       <ExportNode>Eksportuj</ExportNode>
       <ImportNode>Importuj</ImportNode>
-      <OverloadThumbnail>Miniatura przeciążenia</OverloadThumbnail>
+      <OverloadThumbnail>Change Icon Image</OverloadThumbnail>
       <ManageHidden>Pokaż/Ukryj zawartość</ManageHidden>
       <ViewReferences>Referencje</ViewReferences>
       <ViewNodeType>Rodzaje</ViewNodeType>

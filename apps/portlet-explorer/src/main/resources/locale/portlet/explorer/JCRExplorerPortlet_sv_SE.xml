@@ -300,7 +300,7 @@
       <ManageActions>Åtgärder</ManageActions>
       <ExportNode>Exportera</ExportNode>
       <ImportNode>Importera</ImportNode>
-      <OverloadThumbnail>Lägg till miniatyrbild</OverloadThumbnail>
+      <OverloadThumbnail>Change Icon Image</OverloadThumbnail>
       <ManageHidden>Visa/Dölj innehåll</ManageHidden>
       <ViewReferences>Referenser</ViewReferences>
       <ViewNodeType>Typer</ViewNodeType>

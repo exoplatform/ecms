@@ -300,7 +300,7 @@
       <ManageActions>Acciones</ManageActions>
       <ExportNode>Exportar</ExportNode>
       <ImportNode>Importar</ImportNode>
-      <OverloadThumbnail>Sobrecargar viñeta</OverloadThumbnail>
+      <OverloadThumbnail>Change Icon Image</OverloadThumbnail>
       <ManageHidden>Mostrar/ Ocultar Contenido</ManageHidden>
       <ViewReferences>Referencias</ViewReferences>
       <ViewNodeType>Tipos</ViewNodeType>
