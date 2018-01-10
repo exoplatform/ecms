@@ -300,7 +300,7 @@
       <ManageActions>Accions</ManageActions>
       <ExportNode>Exporta</ExportNode>
       <ImportNode>Importa</ImportNode>
-      <OverloadThumbnail>Sobrecàrrega la miniatura</OverloadThumbnail>
+      <OverloadThumbnail>Change Icon Image</OverloadThumbnail>
       <ManageHidden>Mostra/Amaga el contingut</ManageHidden>
       <ViewReferences>Referències</ViewReferences>
       <ViewNodeType>Tipus</ViewNodeType>

@@ -300,7 +300,7 @@
       <ManageActions>Ενέργειες</ManageActions>
       <ExportNode>Εξαγωγή</ExportNode>
       <ImportNode>Εισαγωγή</ImportNode>
-      <OverloadThumbnail>Υπερφόρτωση μικρογραφίας</OverloadThumbnail>
+      <OverloadThumbnail>Change Icon Image</OverloadThumbnail>
       <ManageHidden>Εμφάνιση/απόκρυψη περιεχομένου</ManageHidden>
       <ViewReferences>Αναφορές</ViewReferences>
       <ViewNodeType>Τύποι</ViewNodeType>

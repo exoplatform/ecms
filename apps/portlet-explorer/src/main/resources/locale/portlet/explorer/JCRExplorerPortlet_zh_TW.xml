@@ -300,7 +300,7 @@
       <ManageActions>操作</ManageActions>
       <ExportNode>匯出</ExportNode>
       <ImportNode>匯入</ImportNode>
-      <OverloadThumbnail>超載的縮圖</OverloadThumbnail>
+      <OverloadThumbnail>Change Icon Image</OverloadThumbnail>
       <ManageHidden>顯示/隱藏內容</ManageHidden>
       <ViewReferences>参考</ViewReferences>
       <ViewNodeType>類型</ViewNodeType>

@@ -977,7 +977,7 @@
       <watchDocument>Отслеживать документ</watchDocument>
       <taggingDocument>Отметить документ</taggingDocument>
       <viewMetadatas>Просмотр метаданных</viewMetadatas>
-      <overloadThumbnail>Совместить эскиз</overloadThumbnail>
+      <overloadThumbnail>Change Icon Image</overloadThumbnail>
       <manageHidden>Скрыть/Показать контент</manageHidden>
       <comment>Комментировать</comment>
       <vote>Голосовать</vote>

@@ -300,7 +300,7 @@
       <ManageActions>Handlinger</ManageActions>
       <ExportNode>Eksporter</ExportNode>
       <ImportNode>Importer</ImportNode>
-      <OverloadThumbnail>Bytt miniatyrbilde</OverloadThumbnail>
+      <OverloadThumbnail>Change Icon Image</OverloadThumbnail>
       <ManageHidden>Vis/Skjul innhold</ManageHidden>
       <ViewReferences>Referanser</ViewReferences>
       <ViewNodeType>Typer</ViewNodeType>

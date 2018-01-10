@@ -300,7 +300,7 @@
       <ManageActions>Eylemler</ManageActions>
       <ExportNode>Dışa Aktar</ExportNode>
       <ImportNode>İçe aktar</ImportNode>
-      <OverloadThumbnail>Çok küçük resim</OverloadThumbnail>
+      <OverloadThumbnail>Change Icon Image</OverloadThumbnail>
       <ManageHidden>İçeriği göster/gizle</ManageHidden>
       <ViewReferences>Referanslar</ViewReferences>
       <ViewNodeType>Türler</ViewNodeType>

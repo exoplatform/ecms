@@ -300,7 +300,7 @@
       <ManageActions>الاجراءات</ManageActions>
       <ExportNode>تصدير</ExportNode>
       <ImportNode>استيراد</ImportNode>
-      <OverloadThumbnail>زيادة صورة مصغرة</OverloadThumbnail>
+      <OverloadThumbnail>Change Icon Image</OverloadThumbnail>
       <ManageHidden>إخفاء/عرض المحتوى</ManageHidden>
       <ViewReferences>المراجع</ViewReferences>
       <ViewNodeType>الأنواع</ViewNodeType>

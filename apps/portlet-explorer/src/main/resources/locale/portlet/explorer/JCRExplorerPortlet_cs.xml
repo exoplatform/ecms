@@ -300,7 +300,7 @@
       <ManageActions>Akce</ManageActions>
       <ExportNode>Exportovat</ExportNode>
       <ImportNode>Importovat</ImportNode>
-      <OverloadThumbnail>Miniatura přetížení</OverloadThumbnail>
+      <OverloadThumbnail>Change Icon Image</OverloadThumbnail>
       <ManageHidden>Zobrazit/Skrýt obsah</ManageHidden>
       <ViewReferences>Odkazy</ViewReferences>
       <ViewNodeType>Typy</ViewNodeType>

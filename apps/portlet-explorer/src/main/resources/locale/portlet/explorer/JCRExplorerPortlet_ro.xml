@@ -300,7 +300,7 @@
       <ManageActions>Acţiuni</ManageActions>
       <ExportNode>Export</ExportNode>
       <ImportNode>Import</ImportNode>
-      <OverloadThumbnail>Suprascrie mini-imaginea</OverloadThumbnail>
+      <OverloadThumbnail>Change Icon Image</OverloadThumbnail>
       <ManageHidden>Arată/ascunde conţinutul</ManageHidden>
       <ViewReferences>Referințe</ViewReferences>
       <ViewNodeType>Tipuri</ViewNodeType>

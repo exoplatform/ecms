@@ -300,7 +300,7 @@
       <ManageActions>Gestisci Azioni</ManageActions>
       <ExportNode>Esporta Nodo</ExportNode>
       <ImportNode>Importa Nodo</ImportNode>
-      <OverloadThumbnail>Carica Anteprima</OverloadThumbnail>
+      <OverloadThumbnail>Change Icon Image</OverloadThumbnail>
       <ManageHidden>Nascondi/Mostra Contenuto</ManageHidden>
       <ViewReferences>Vedi Referenze</ViewReferences>
       <ViewNodeType>Vedi Tipi Nodo</ViewNodeType>
