@@ -33,8 +33,6 @@ import org.exoplatform.services.cms.JcrInputProperty;
 import org.exoplatform.services.cms.comments.CommentsService;
 import org.exoplatform.services.cms.i18n.MultiLanguageService;
 import org.exoplatform.services.wcm.BaseWCMTestCase;
-import org.junit.FixMethodOrder;
-import org.junit.runners.MethodSorters;
 
 /**
  * Created by eXo Platform
@@ -77,9 +75,9 @@ public class TestCommentService extends BaseWCMTestCase {
   
   public void setUp() throws Exception {
     super.setUp();
-    commentsService = (CommentsService) container.getComponentInstanceOfType(CommentsService.class);
-    multiLangService = (MultiLanguageService) container.getComponentInstanceOfType(MultiLanguageService.class);
-    applySystemSession();
+    commentsService = container.getComponentInstanceOfType(CommentsService.class);
+    multiLangService = container.getComponentInstanceOfType(MultiLanguageService.class);
+    applyUserSession("john", "gtn", "collaboration");
     initNode();
   }
 
@@ -97,7 +95,7 @@ public class TestCommentService extends BaseWCMTestCase {
       test.addMixin(I18NMixin);
     }
     session.save();
-    commentsService.addComment(test, "root", "root@explatform.com", null, "Hello", multiLangService.getDefault(test));
+    commentsService.addComment(test, "john", "john@explatform.com", null, "Hello", multiLangService.getDefault(test));
     commentsService.addComment(test, "marry", "marry@explatform.com", null, "Thanks", multiLangService.getDefault(test));
     NodeIterator iter = test.getNode(COMMENT).getNodes();
     int i = 0;
@@ -122,12 +120,12 @@ public class TestCommentService extends BaseWCMTestCase {
       test.addMixin(I18NMixin);
     }
     session.save();
-    commentsService.addComment(test, "root", "root@explatform.com", null, "Hello", "jp");
+    commentsService.addComment(test, "john", "john@explatform.com", null, "Hello", "jp");
     NodeIterator iter = test.getNode(COMMENT).getNodes();
     while (iter.hasNext()) {
       Node node = iter.nextNode();
-      assertEquals("root", node.getProperty(COMMENTOR).getString());
-      assertEquals("root@explatform.com", node.getProperty(COMMENTOR_EMAIL).getString());
+      assertEquals("john", node.getProperty(COMMENTOR).getString());
+      assertEquals("john@explatform.com", node.getProperty(COMMENTOR_EMAIL).getString());
       assertEquals("Hello", node.getProperty(COMMENTOR_MESSAGES).getString());
     }
   }
@@ -141,10 +139,6 @@ public class TestCommentService extends BaseWCMTestCase {
    */
   public void testAddComment3() throws Exception{
     Node test = session.getRootNode().getNode("test");
-    if(test.canAddMixin(I18NMixin)){
-      test.addMixin(I18NMixin);
-    }
-    session.save();
     commentsService.addComment(test, null, "null@explatform.com", null, "Hello", multiLangService.getDefault(test));
     commentsService.addComment(test, null, "abc@explatform.com", null, "Hello", multiLangService.getDefault(test));
     List<Node> listCommentNode = commentsService.getComments(test, multiLangService.getDefault(test));
@@ -165,10 +159,7 @@ public class TestCommentService extends BaseWCMTestCase {
    */
   public void testUpdateComment() throws Exception{
     Node test = session.getRootNode().getNode("test");
-    if(test.canAddMixin(I18NMixin)){
-      test.addMixin(I18NMixin);
-    }
-    commentsService.addComment(test, "root", "root@explatform.com", null, "Hello", multiLangService.getDefault(test));
+    commentsService.addComment(test, "john", "john@explatform.com", null, "Hello", multiLangService.getDefault(test));
     List<Node> nodes = commentsService.getComments(test, multiLangService.getDefault(test));
     commentsService.updateComment(nodes.get(0), "Ciao");
     nodes = commentsService.getComments(test, multiLangService.getDefault(test));
@@ -184,13 +175,14 @@ public class TestCommentService extends BaseWCMTestCase {
    */
   public void testDeleteComment() throws Exception{
     Node test = session.getRootNode().getNode("test");
-    commentsService.addComment(test, "root", "root@explatform.com", null, "Hello", multiLangService.getDefault(test));
+    commentsService.addComment(test, "john", "john@explatform.com", null, "Hello", multiLangService.getDefault(test));
     List<Node> nodes = commentsService.getComments(test, multiLangService.getDefault(test));
     assertEquals(1, nodes.size());
     commentsService.deleteComment(nodes.get(0));
     nodes = commentsService.getComments(test, multiLangService.getDefault(test));
     assertEquals(0, nodes.size());
   }
+
   /**
    * Test Method: getComments()
    * Input: Test node doesn't have languages node, so adding comment nodes will be set default
@@ -200,11 +192,7 @@ public class TestCommentService extends BaseWCMTestCase {
    */
   public void testGetComments1() throws Exception{
     Node test = session.getRootNode().getNode("test");
-    if(test.canAddMixin(I18NMixin)){
-      test.addMixin(I18NMixin);
-    }
-    session.save();
-    commentsService.addComment(test, "root", "root@explatform.com", null, "Hello", multiLangService.getDefault(test));
+    commentsService.addComment(test, "john", "john@explatform.com", null, "Hello", multiLangService.getDefault(test));
     commentsService.addComment(test, "marry", "marry@explatform.com", null, "Thanks", multiLangService.getDefault(test));
     List<Node> listCommentNode = commentsService.getComments(test, multiLangService.getDefault(test));
     Collections.sort(listCommentNode, new NameComparator());
@@ -223,12 +211,8 @@ public class TestCommentService extends BaseWCMTestCase {
    */
   public void testGetComments2() throws Exception{
     Node test = session.getRootNode().getNode("test");
-    if(test.canAddMixin(I18NMixin)){
-      test.addMixin(I18NMixin);
-    }
-    session.save();
     multiLangService.addLanguage(test, createMapInput(), "jp", false);
-    commentsService.addComment(test, "root", "root@explatform.com", null, "Hello", "jp");
+    commentsService.addComment(test, "john", "john@explatform.com", null, "Hello", "jp");
     commentsService.addComment(test, "marry", "marry@explatform.com", null, "Thanks", "jp");
 
     List<Node> listCommentNode = commentsService.getComments(test, "jp");
@@ -298,8 +282,8 @@ public class TestCommentService extends BaseWCMTestCase {
   private void check(int i, Node node) throws Exception{
     switch (i) {
     case 0:
-      assertEquals("root", node.getProperty(COMMENTOR).getString());
-      assertEquals("root@explatform.com", node.getProperty(COMMENTOR_EMAIL).getString());
+      assertEquals("john", node.getProperty(COMMENTOR).getString());
+      assertEquals("john@explatform.com", node.getProperty(COMMENTOR_EMAIL).getString());
       assertEquals("Hello", node.getProperty(COMMENTOR_MESSAGES).getString());
       break;
     case 1:
