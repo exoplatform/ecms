@@ -85,11 +85,8 @@ public class CommentsServiceImpl implements CommentsService {
       listenerService = WCMCoreUtils.getService(ListenerService.class);
     }
     Session session = node.getSession();
-    ManageableRepository  repository = (ManageableRepository)session.getRepository();
-    //TODO check if really need delegate to system session
-    Session systemSession = repository.getSystemSession(session.getWorkspace().getName()) ;
     try {
-      Node document = (Node)systemSession.getItem(node.getPath()) ;
+      Node document = (Node)session.getItem(node.getPath());
       if(!document.isNodeType(COMMENTABLE)) {
         if(document.canAddMixin(COMMENTABLE)) document.addMixin(COMMENTABLE) ;
         else throw new Exception("This node does not support comments.") ;
@@ -145,7 +142,7 @@ public class CommentsServiceImpl implements CommentsService {
         newComment.setProperty(COMMENTOR_SITE,site) ;
       }
       document.save();
-      systemSession.save();
+      session.save();
       if (listenerService!=null) {
         try {
           if (activityService.isAcceptedNode(document) 
@@ -164,8 +161,6 @@ public class CommentsServiceImpl implements CommentsService {
       if (LOG.isErrorEnabled()) {
         LOG.error("Unexpected problem happen when try to add comment", e);
       }
-    } finally {
-      systemSession.logout();
     }
 
   }
