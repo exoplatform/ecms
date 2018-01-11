@@ -80,7 +80,6 @@ public class FileIndexerAction implements AdvancedAction {
       case ExtendedEvent.PERMISSION_CHANGED:
         node = (NodeImpl)context.get(InvocationContext.CURRENT_ITEM);
         if (node != null && !trashService.isInTrash(node)) {
-          indexingService.reindex(FileindexingConnector.TYPE, node.getInternalIdentifier());
           // reindex children nodes when permissions has been changed (exo:permissions) - it is required
           // to update permissions of the nodes in the indexing engine
           applyIndexingOperationOnNodes(node, n -> indexingService.reindex(FileindexingConnector.TYPE, n.getInternalIdentifier()), n -> hasNotPrivilegeableMixin(n));
