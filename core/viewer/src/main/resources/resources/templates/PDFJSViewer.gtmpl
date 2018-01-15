@@ -39,9 +39,11 @@ if (uiParent != null) {
   
   PortalRequestContext portalRequestContext = Util.getPortalRequestContext();
   def lang = portalRequestContext.getLocale().getLanguage();
+  def jsManager = rqcontext.getJavascriptManager();
+  jsManager.require("SHARED/ecm-utils", "utils")
+    .addScripts("eXo.ecm.ECMUtils.fixPDFViewerHeight();");
 
 if (maximumPage > 0 && maximumPage <= pdfViewerService.getMaxPages() && fileSize <= pdfViewerService.getMaxFileSize()) {
-  def jsManager = rqcontext.getJavascriptManager();
   jsManager.require("SHARED/jquery", "gj").addScripts("gj(document).ready(function() { gj(\"*[rel='tooltip']\").tooltip();});");
 %>
     <link rel="stylesheet" href="/eXoWCMResources/pdf.js/viewer.css" />
@@ -273,7 +275,6 @@ if (maximumPage > 0 && maximumPage <= pdfViewerService.getMaxPages() && fileSize
     }
 
     def currentNodePath = currentNode.getSession().getWorkspace().getName()+":"+currentNode.getPath();
-    def jsManager = _ctx.getRequestContext().getJavascriptManager();
     jsManager.require("SHARED/openDocumentInOffice", "openDocumentInOffice")
     .addScripts("eXo.ecm.OpenDocumentInOffice.updateLabel('"+ org.exoplatform.ecm.utils.text.Text.escapeIllegalJcrChars(currentNodePath) +"');");
 
