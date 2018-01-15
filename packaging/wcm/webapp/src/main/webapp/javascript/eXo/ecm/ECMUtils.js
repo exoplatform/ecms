@@ -85,6 +85,13 @@
 		  var c_value = escape(value) + ((exdays == null) ? "" : "; expires=" + exdate.toUTCString());
 		  document.cookie = c_name + "=" + c_value;
 		}
+		ECMUtils.prototype.fixPDFViewerHeight = function() {
+      if (gj('#outerContainer').is(':visible') && gj('#UIJCRExplorer').length > 0) {
+        gj('#outerContainer')
+            .css('min-height',
+                'calc(100vh - ' + (gj('#outerContainer').offset().top + 60) + 'px)');
+      }
+		}
 		ECMUtils.prototype.fixHeight = function (portletId) {
 		  var portlet = document.getElementById(portletId);
 		  var refElement = gj(portlet).parents(".UIApplication:first")[0];
