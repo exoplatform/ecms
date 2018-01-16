@@ -59,7 +59,7 @@ public class IsNotIgnoreVersionNodeFilterTest extends BaseECMSTestCase {
     assertTrue(accept);
   }
 
-  public void testShouldReturnFalseWhenNoParamAndNodeWebContent() throws Exception {
+  public void testShouldReturnTrueWhenNoParamAndNodeWebContent() throws Exception {
     // Given
     System.clearProperty(IsNotIgnoreVersionNodeFilter.NODETYPES_IGNOREVERSION_PARAM);
 
@@ -77,7 +77,7 @@ public class IsNotIgnoreVersionNodeFilterTest extends BaseECMSTestCase {
     boolean accept = filter.accept(context);
 
     // Then
-    assertFalse(accept);
+    assertTrue(accept);
   }
 
   public void testShouldReturnFalseWhenNodeChildOfWebContent() throws Exception {
