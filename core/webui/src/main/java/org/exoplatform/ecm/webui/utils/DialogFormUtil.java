@@ -207,7 +207,7 @@ public class DialogFormUtil {
                     jcrExoTitle.setValue(inputValue);
                     properties.put("title", jcrExoTitle);
                 }
-                property.setValue(Text.escapeIllegalJcrChars(org.exoplatform.services.cms.impl.Utils.cleanString(inputValue)));
+                property.setValue(Text.escapeIllegalJcrChars(inputValue));
               } else {
                 property.setValue(inputValue);
               }
