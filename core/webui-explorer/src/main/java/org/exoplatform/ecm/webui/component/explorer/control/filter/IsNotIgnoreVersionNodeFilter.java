@@ -35,10 +35,12 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by The eXo Platform SAS
- * Author : Ha Quang Tan
- *          tanhq@exoplatform.com
- * Mar 6, 2012
+ * This filter excludes all the child nodes of the nodes having a node type defined in "wcm.nodetypes.ignoreversion".
+ * The node types defined in this property must be separated by comas.
+ * The default value is "exo:webContent".
+ * The goal is to not manage versions in child nodes of a complex type. For example a exo:webContent node has some
+ * child nodes which compose the content (html, css, js, images, ...). The versions must be managed at the webContent
+ * level, not on each of these child nodes.
  */
 public class IsNotIgnoreVersionNodeFilter implements UIExtensionFilter {
 
@@ -77,11 +79,6 @@ public class IsNotIgnoreVersionNodeFilter implements UIExtensionFilter {
    Node parentNode = currentNode;
 
    do {
-     for(NodeType nodetype : ignoredNodetypes) {
-       if (parentNode.isNodeType(nodetype.getName())) {
-         return false;
-       }
-     }
      try {
        parentNode = parentNode.getParent();
      } catch(AccessDeniedException ex) {
@@ -90,6 +87,11 @@ public class IsNotIgnoreVersionNodeFilter implements UIExtensionFilter {
      } catch(Exception ex) {
        LOG.error("Error while getting parent of node " + parentNode.getPath(), ex);
        return false;
+     }
+     for(NodeType nodetype : ignoredNodetypes) {
+       if (parentNode.isNodeType(nodetype.getName())) {
+         return false;
+       }
      }
    } while (!((NodeImpl) parentNode).isRoot());
 
