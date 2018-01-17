@@ -125,6 +125,10 @@ public class UITreeExplorer extends UIContainer {
     return getAncestorOfType(UIWorkingArea.class);
   }
 
+  private UISideBar getSideBar() {
+    return getWorkingArea().findFirstComponentOfType(UISideBar.class);
+  }
+
   UIComponent getCustomAction() throws Exception {
     return getAncestorOfType(UIWorkingArea.class).getCustomAction();
   }
@@ -350,6 +354,9 @@ public class UITreeExplorer extends UIContainer {
   }
 
   private void buildTree(String path) throws Exception {
+    if(getSideBar() == null || !getSideBar().isRenderComponent("Explorer")) {
+      return;
+    }
     UIJCRExplorer jcrExplorer = getAncestorOfType(UIJCRExplorer.class);
     int nodePerPages = jcrExplorer.getPreference().getNodesPerPage();
     TreeNode treeRoot = new TreeNode(getRootNode());
