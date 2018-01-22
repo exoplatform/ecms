@@ -91,7 +91,7 @@
 
   <div class="uiAction uiActionBorder" >
         <% for(action in uicomponent.getActions()) { %>
-			<button onclick="<%=uicomponent.event(action)%>" class="btn"><%=uicomponent.getResource("UINodeTypeList.action." + action)%></button>
+			<a href="<%=uicomponent.event(action)%>" class="btn btn-link"><%=uicomponent.getResource("UINodeTypeList.action." + action)%></a>
 		 <% } %>
     </div>
   <%uiform.end()%>
