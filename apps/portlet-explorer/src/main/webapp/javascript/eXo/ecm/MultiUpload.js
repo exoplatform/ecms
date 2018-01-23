@@ -231,7 +231,7 @@
 		//the abort all button and popup
 		gj("#MultiUploadAbortAll").click(eXo.ecm.MultiUpload.abortAll);
 		gj("#uiMultiUploadAbortAllPopupClosePopup").click(eXo.ecm.MultiUpload.abortAllCancel);
-		gj("#" + eXo.ecm.MultiUpload.ABORT_POPUP_ID).hide();
+		gj("#" + eXo.ecm.MultiUpload.ABORT_POPUP_ID).parents(".uiPopupWrapper").hide();
 		gj("#" + eXo.ecm.MultiUpload.ABORT_POPUP_OK_ID).click(eXo.ecm.MultiUpload.abortAllOK);
 		gj("#" + eXo.ecm.MultiUpload.ABORT_POPUP_CANCEL_ID).click(eXo.ecm.MultiUpload.abortAllCancel);
 	};
@@ -1092,6 +1092,7 @@
 			return;
 		}
 		uiPopupWindow.show(eXo.ecm.MultiUpload.ABORT_POPUP_ID, false, null, null);
+		gj("#" + eXo.ecm.MultiUpload.ABORT_POPUP_ID).parents(".uiPopupWrapper").show();
 //		gj("#" + eXo.ecm.MultiUpload.ABORT_POPUP_ID).show();
 //		var ret = confirm(eXo.ecm.MultiUpload.ABORT_ALL);
 	};
@@ -1103,12 +1104,12 @@
 			e = eXo.ecm.MultiUpload.handleReaderAbort(i, eXo.ecm.MultiUpload.CANCEL_TXT, event);
 			e(event);
 		};
-		gj("#" + eXo.ecm.MultiUpload.ABORT_POPUP_ID).hide();
+		gj("#" + eXo.ecm.MultiUpload.ABORT_POPUP_ID).parents(".uiPopupWrapper").hide();
 	};
 	
 	// close the AbortAll popup
 	MultiUpload.prototype.abortAllCancel = function(event) {
-		gj("#" + eXo.ecm.MultiUpload.ABORT_POPUP_ID).hide();
+		gj("#" + eXo.ecm.MultiUpload.ABORT_POPUP_ID).parents(".uiPopupWrapper").hide();
 	};
 	
 	//-------------------------------------------------------------
