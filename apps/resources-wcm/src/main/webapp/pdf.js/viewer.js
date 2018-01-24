@@ -2231,8 +2231,8 @@ var SecondaryToolbar = {
   },*/
 
   printClick: function secondaryToolbarPrintClick(evt) {
-    var w = window.open("/eXoWCMResources/pdf.js/print.html?file=" + PDFJS.pdfFile +
-      "&origin=" + PDFJS.downloadLink);
+    var w = window.open("/eXoWCMResources/pdf.js/print.html?file=" + encodeURIComponent(PDFJS.pdfFile) +
+      "&origin=" + encodeURIComponent(PDFJS.downloadLink));
     this.close();
   },
 
