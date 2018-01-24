@@ -16,6 +16,7 @@
  */
 package org.exoplatform.services.wcm.search.connector;
 
+import org.codehaus.groovy.util.ListHashMap;
 import org.exoplatform.commons.api.search.data.SearchContext;
 import org.exoplatform.commons.api.search.data.SearchResult;
 import org.exoplatform.commons.search.es.ElasticSearchServiceConnector;
@@ -27,10 +28,12 @@ import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.search.base.EcmsSearchResult;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.json.simple.JSONObject;
 
+import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -38,8 +41,7 @@ import java.time.Instant;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -106,7 +108,8 @@ public class FileSearchServiceConnector extends ElasticSearchServiceConnector {
             searchResult.getDate(),
             searchResult.getRelevancy(),
             fileType,
-            nodePath);
+            nodePath,
+            getBreadcrumb(nodePath));
 
     return ecmsSearchResult;
   }
@@ -209,5 +212,62 @@ public class FileSearchServiceConnector extends ElasticSearchServiceConnector {
       LOG.error("Cannot encode path " + nodePath, e);
       return "";
     }
+  }
+
+  /**
+   * Build the breadcrumb of the file.
+   * The map keys contains the node path and the map value contains the node title and the node link.
+   * @param nodePath Path of the node to build the breadcrumb
+   * @return The breadcrumb
+   */
+  protected Map<String, List<String>> getBreadcrumb(String nodePath) {
+    Map<String, List<String>> uris = new ListHashMap<>();
+
+    try {
+      if (nodePath.endsWith("/")) {
+        nodePath = nodePath.substring(0, nodePath.length() - 1);
+      }
+
+      DriveData drive = documentService.getDriveOfNode(nodePath);
+
+      String nodePathFromDrive = nodePath;
+
+      String driveHomePath = drive.getResolvedHomePath();
+      if(nodePath.startsWith(driveHomePath)) {
+        nodePathFromDrive = nodePath.substring(driveHomePath.length());
+      }
+
+      if (nodePathFromDrive.startsWith("/")) {
+        nodePathFromDrive = nodePathFromDrive.substring(1);
+      }
+
+      String path = driveHomePath;
+      for (String nodeName : nodePathFromDrive.split("/")) {
+        path += "/" + nodeName;
+        try {
+          Node docNode = NodeLocation.getNodeByExpression(
+                  WCMCoreUtils.getRepository().getConfiguration().getName() + ":" +
+                          drive.getWorkspace() + ":" + path);
+          if(docNode != null) {
+            String nodeTitle = Utils.getTitle(docNode);
+
+            String docLink = documentService.getLinkInDocumentsApp(path, drive);
+
+            List<String> titleAndLink = new ArrayList<>();
+            titleAndLink.add(nodeTitle);
+            titleAndLink.add(docLink);
+
+            uris.put(path, titleAndLink);
+          }
+        } catch (Exception e) {
+          LOG.error("Cannot get title and link of node " + nodeName, e);
+        }
+      }
+
+    } catch (Exception e){
+      LOG.error("Error while building breadcrumb of file " + nodePath, e);
+    }
+
+    return uris;
   }
 }
