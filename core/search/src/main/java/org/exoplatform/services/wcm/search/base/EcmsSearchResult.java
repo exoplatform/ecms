@@ -18,6 +18,9 @@ package org.exoplatform.services.wcm.search.base;
 
 import org.exoplatform.commons.api.search.data.SearchResult;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * Created by The eXo Platform SAS
  * Author : eXoPlatform
@@ -26,9 +29,10 @@ import org.exoplatform.commons.api.search.data.SearchResult;
  */
 public class EcmsSearchResult extends SearchResult {
 
-  private String fileType_;
+  private String fileType;
   private String nodePath;
-  
+  private Map<String, List<String>> breadcrumb;
+
   public EcmsSearchResult(String url,
                           String urlOnImage,
                           String title,
@@ -39,17 +43,32 @@ public class EcmsSearchResult extends SearchResult {
                           long relevancy,
                           String fileType,
                           String nodePath) {
+    this(url, urlOnImage, title, excerpt, detail, imageUrl, date, relevancy, fileType, nodePath, null);
+  }
+
+  public EcmsSearchResult(String url,
+                          String urlOnImage,
+                          String title,
+                          String excerpt,
+                          String detail,
+                          String imageUrl,
+                          long date,
+                          long relevancy,
+                          String fileType,
+                          String nodePath,
+                          Map<String, List<String>> breadcrumb) {
     super(url, urlOnImage, title, excerpt, detail, imageUrl, date, relevancy);
-    this.fileType_ = fileType;
+    this.fileType = fileType;
     this.nodePath = nodePath;
+    this.breadcrumb = breadcrumb;
   }
   
   public String getFileType() {
-    return this.fileType_;
+    return this.fileType;
   }
   
   public void setFileType(String fileType) {
-    this.fileType_ = fileType;
+    this.fileType = fileType;
   }
 
   public String getNodePath() {
@@ -59,5 +78,12 @@ public class EcmsSearchResult extends SearchResult {
   public void setNodePath(String nodePath) {
     this.nodePath = nodePath;
   }
-  
+
+  public Map<String, List<String>> getBreadcrumb() {
+    return breadcrumb;
+  }
+
+  public void setBreadcrumb(Map<String, List<String>> breadcrumb) {
+    this.breadcrumb = breadcrumb;
+  }
 }
