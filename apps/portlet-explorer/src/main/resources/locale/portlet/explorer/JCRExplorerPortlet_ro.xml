@@ -1355,7 +1355,7 @@
       <addLabel>Adaugă eticheta</addLabel>
       <removeLable>Eliminaţi eticheta</removeLable>
       <restoreVersion>Restabilire versiune</restoreVersion>
-      <viewVersion>Afișează info Versiune</viewVersion>
+      <viewVersion>View Version</viewVersion>
       <deleteVersion>Ştergeţi versiunea</deleteVersion>
       <compareVersion>Compară cu versiunea de bază</compareVersion>
     </tooltip>

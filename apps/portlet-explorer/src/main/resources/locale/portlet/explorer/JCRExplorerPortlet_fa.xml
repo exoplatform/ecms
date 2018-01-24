@@ -1355,7 +1355,7 @@
       <addLabel>افزودن برچسب</addLabel>
       <removeLable>حذف برچسب</removeLable>
       <restoreVersion>بازیابی نسخه</restoreVersion>
-      <viewVersion>مشاهده اطلاعات نسخه</viewVersion>
+      <viewVersion>View Version</viewVersion>
       <deleteVersion>حذف نسخه</deleteVersion>
       <compareVersion>مقایسه با نسخه پایه</compareVersion>
     </tooltip>

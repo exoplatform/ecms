@@ -1355,7 +1355,7 @@
       <addLabel>Add Label</addLabel>
       <removeLable>Remove Label</removeLable>
       <restoreVersion>Restore Version</restoreVersion>
-      <viewVersion>View Version Info</viewVersion>
+      <viewVersion>View Version</viewVersion>
       <deleteVersion>Delete Version</deleteVersion>
       <compareVersion>Compare with the  base version</compareVersion>
     </tooltip>

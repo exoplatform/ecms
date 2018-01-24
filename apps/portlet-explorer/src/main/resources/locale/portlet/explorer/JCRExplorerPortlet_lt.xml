@@ -1355,7 +1355,7 @@
       <addLabel>Pridėti etiketę</addLabel>
       <removeLable>Pašalinti etiketę</removeLable>
       <restoreVersion>Atkurti versiją</restoreVersion>
-      <viewVersion>Rodyti versijos informaciją</viewVersion>
+      <viewVersion>View Version</viewVersion>
       <deleteVersion>Ištrinti versiją</deleteVersion>
       <compareVersion>Palyginti su bazine versija</compareVersion>
     </tooltip>

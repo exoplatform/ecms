@@ -1355,7 +1355,7 @@
       <addLabel>Añadir etiqueta</addLabel>
       <removeLable>Eliminar la Etiqueta</removeLable>
       <restoreVersion>Restablecer la Versión</restoreVersion>
-      <viewVersion>Ver información de versión</viewVersion>
+      <viewVersion>View Version</viewVersion>
       <deleteVersion>Borrar versión</deleteVersion>
       <compareVersion>Comparar con la versión de base</compareVersion>
     </tooltip>

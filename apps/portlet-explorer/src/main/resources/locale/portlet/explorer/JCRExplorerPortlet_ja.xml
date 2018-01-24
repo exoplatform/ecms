@@ -1355,7 +1355,7 @@
       <addLabel>ラベルの追加</addLabel>
       <removeLable>ラベルの削除</removeLable>
       <restoreVersion>バージョンのリストア</restoreVersion>
-      <viewVersion>バージョン情報観覧</viewVersion>
+      <viewVersion>View Version</viewVersion>
       <deleteVersion>バージョンの削除</deleteVersion>
       <compareVersion>バージョンの比較</compareVersion>
     </tooltip>

@@ -1355,7 +1355,7 @@
       <addLabel>Legge til etikett</addLabel>
       <removeLable>Fjern etikett</removeLable>
       <restoreVersion>Gjenopprett versjon</restoreVersion>
-      <viewVersion>Vis versjonsinfo</viewVersion>
+      <viewVersion>View Version</viewVersion>
       <deleteVersion>Slett versjon</deleteVersion>
       <compareVersion>Sammenligne med baseversjonen</compareVersion>
     </tooltip>

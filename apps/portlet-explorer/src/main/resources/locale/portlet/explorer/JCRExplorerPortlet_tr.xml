@@ -1355,7 +1355,7 @@
       <addLabel>Etiket Ekle</addLabel>
       <removeLable>Etiketi Kaldır</removeLable>
       <restoreVersion>Sürümü geri yükle</restoreVersion>
-      <viewVersion>Sürüm bilgilerini görüntüle</viewVersion>
+      <viewVersion>View Version</viewVersion>
       <deleteVersion>Sürümü Sil</deleteVersion>
       <compareVersion>Temel sürüm ile karşılaştır</compareVersion>
     </tooltip>

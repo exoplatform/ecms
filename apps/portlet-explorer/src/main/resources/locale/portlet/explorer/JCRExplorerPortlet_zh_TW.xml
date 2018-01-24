@@ -1355,7 +1355,7 @@
       <addLabel>增加標籤</addLabel>
       <removeLable>移除標籤</removeLable>
       <restoreVersion>還原的版本</restoreVersion>
-      <viewVersion>查看版本資訊</viewVersion>
+      <viewVersion>View Version</viewVersion>
       <deleteVersion>刪除版本</deleteVersion>
       <compareVersion>與基礎版本比較</compareVersion>
     </tooltip>

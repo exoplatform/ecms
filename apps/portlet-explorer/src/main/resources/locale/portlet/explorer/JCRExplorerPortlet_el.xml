@@ -1355,7 +1355,7 @@
       <addLabel>Προσθήκη ετικέτας</addLabel>
       <removeLable>Αφαίρεση ετικέτας</removeLable>
       <restoreVersion>Επαναφορά Έκδοσης</restoreVersion>
-      <viewVersion>Προβολή πληροφοριών έκδοσης</viewVersion>
+      <viewVersion>View Version</viewVersion>
       <deleteVersion>Διαγραφή έκδοσης</deleteVersion>
       <compareVersion>Συγκρίνετε με την βασική έκδοση</compareVersion>
     </tooltip>
