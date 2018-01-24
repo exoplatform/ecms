@@ -81,4 +81,10 @@ public class TestUtils {
         result = Utils.generateMountURL(other2, "collaboration" , "/Users", "/Groups");
         assertEquals("/" , result);
     }
+
+    @Test
+    public void testEncodePath() {
+        assertEquals("/path1/path2/path3", Utils.encodePath("/path1/path2/path3", "UTF-8"));
+        assertEquals("/path1/path2%2B/path%2B3", Utils.encodePath("/path1/path2+/path+3", "UTF-8"));
+    }
 }
