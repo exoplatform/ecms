@@ -1355,7 +1355,7 @@
       <addLabel>Adicionar rótulo</addLabel>
       <removeLable>Remover rótulo</removeLable>
       <restoreVersion>Restaurar versão</restoreVersion>
-      <viewVersion>Visualizar informações da versão</viewVersion>
+      <viewVersion>View Version</viewVersion>
       <deleteVersion>Excluir versão</deleteVersion>
       <compareVersion>Comparar com a versão base</compareVersion>
     </tooltip>

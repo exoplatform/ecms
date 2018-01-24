@@ -1355,7 +1355,7 @@
       <addLabel>Thêm Nhãn</addLabel>
       <removeLable>Gỡ bỏ Nhãn</removeLable>
       <restoreVersion>Khôi phục Phiên bản</restoreVersion>
-      <viewVersion>Xem Thông tin Phiên bản</viewVersion>
+      <viewVersion>View Version</viewVersion>
       <deleteVersion>Xóa Phiên bản</deleteVersion>
       <compareVersion>So sánh với phiên bản cơ sở</compareVersion>
     </tooltip>

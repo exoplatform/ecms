@@ -1355,7 +1355,7 @@
       <addLabel>Label toevoegen</addLabel>
       <removeLable>Label verwijdern</removeLable>
       <restoreVersion>Versie herstellen</restoreVersion>
-      <viewVersion>Toon Versie Info</viewVersion>
+      <viewVersion>View Version</viewVersion>
       <deleteVersion>Versie verwijderen</deleteVersion>
       <compareVersion>Vergelijk met basis versie</compareVersion>
     </tooltip>

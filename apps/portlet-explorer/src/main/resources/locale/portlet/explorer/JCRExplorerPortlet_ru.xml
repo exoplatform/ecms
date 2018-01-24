@@ -1355,7 +1355,7 @@
       <addLabel>Добавить метку</addLabel>
       <removeLable>Удалить метку</removeLable>
       <restoreVersion>Восстановить версию</restoreVersion>
-      <viewVersion>Просмотреть сведения о версии</viewVersion>
+      <viewVersion>View Version</viewVersion>
       <deleteVersion>Удалить версию</deleteVersion>
       <compareVersion>Сравнить с базовой версией</compareVersion>
     </tooltip>

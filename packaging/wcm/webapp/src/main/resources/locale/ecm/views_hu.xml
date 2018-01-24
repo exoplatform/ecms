@@ -31,6 +31,15 @@
         <email>Email</email>
         <site>Site</site>
         <lastComment>Last comment posted by {user} at {time}</lastComment>
+        <Less_Than_A_Minute>less than a minute ago</Less_Than_A_Minute>
+        <About_A_Minute>about a minute ago</About_A_Minute>
+        <About_x_Minutes>about {0} minutes ago</About_x_Minutes>
+        <About_An_Hour>about an hour ago</About_An_Hour>
+        <About_x_Hours>about {0} hours ago</About_x_Hours>
+        <About_A_Day>about a day ago</About_A_Day>
+        <About_x_Days>about {0} days ago</About_x_Days>
+        <About_A_Month>about a month ago</About_A_Month>
+        <About_x_Months>about {0} months ago</About_x_Months>
       </label>
     </view>
   </Comment>
@@ -46,6 +55,8 @@
         <pdf-max-page>The preview is not available for content with over {0} pages.</pdf-max-page>
         <using-webDAV>or Open in MS Office</using-webDAV>
         <open-on-desktop>Open on Desktop</open-on-desktop>
+        <open-in-documents>Open in Documents</open-in-documents>
+        <open-in-documents-tooltip>Open this file in Documents app</open-in-documents-tooltip>
         <file-size-too-big>The content of this file is too big. You should download and open in the client.</file-size-too-big>
         <webDAV>WebDAV View</webDAV>
         <download>Download</download>
@@ -76,7 +87,7 @@
   <Vote>
     <view>
       <label>
-        <avg-rating>Avg. Rating</avg-rating>
+        <avg-rating>Rate</avg-rating>
         <subscription>Votes</subscription>
       </label>
     </view>

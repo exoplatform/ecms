@@ -36,6 +36,10 @@
     <label>
       <ManagedSites>Site Management</ManagedSites>
       <SharedSite>Shared Site</SharedSite>
+      <PersonalDocuments>Personal Documents</PersonalDocuments>
+      <UserDocuments>{0} Documents</UserDocuments>
+      <Collaboration>Collaboration</Collaboration>
+      <Trash>Trash</Trash>
     </label>
   </Drives>
 
@@ -355,7 +359,7 @@
       <ColumnPageConfigs>Column Page Configurations</ColumnPageConfigs>
       <RowPageConfigs>Row Page Configurations</RowPageConfigs>
       <TabsPageConfigs>Tabs Page Configurations</TabsPageConfigs>
-      <MixPageConfigs>Mix Page Configurations</MixPageConfigs>
+      <MixPageConfigs>Mixed</MixPageConfigs>
     </item>
   </UIDropDownPageTemp>
 
@@ -443,4 +447,10 @@
   <home>Home</home>
   </label>  
   </Breadcrumb>
+
+  <UIViewMetadataForm>
+    <msg>
+      <Invalid-number>Please enter a valid number.</Invalid-number>
+    </msg>
+  </UIViewMetadataForm>
 </bundle>

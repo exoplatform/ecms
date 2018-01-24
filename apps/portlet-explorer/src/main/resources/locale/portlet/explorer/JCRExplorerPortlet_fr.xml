@@ -1355,7 +1355,7 @@
       <addLabel>Ajouter un Libellé</addLabel>
       <removeLable>Supprimer le Libellé</removeLable>
       <restoreVersion>Restaurer cette Version</restoreVersion>
-      <viewVersion>Voir les infos de version</viewVersion>
+      <viewVersion>Voir la version</viewVersion>
       <deleteVersion>Supprimer cette version</deleteVersion>
       <compareVersion>Comparer avec la version de base</compareVersion>
     </tooltip>

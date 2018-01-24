@@ -1355,7 +1355,7 @@
       <addLabel>Lägg till etikett</addLabel>
       <removeLable>Ta bort etikett</removeLable>
       <restoreVersion>Återställ Version</restoreVersion>
-      <viewVersion>Visa Versionsinfo</viewVersion>
+      <viewVersion>View Version</viewVersion>
       <deleteVersion>Ta bort Version</deleteVersion>
       <compareVersion>Jämför med basversionen</compareVersion>
     </tooltip>

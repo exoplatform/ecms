@@ -1355,7 +1355,7 @@
       <addLabel>Přidat popisek</addLabel>
       <removeLable>Odebrat popisek</removeLable>
       <restoreVersion>Obnovit verzi</restoreVersion>
-      <viewVersion>Zobrazit informace o verzi</viewVersion>
+      <viewVersion>View Version</viewVersion>
       <deleteVersion>Odstranit verzi</deleteVersion>
       <compareVersion>Porovnat se základní verzí</compareVersion>
     </tooltip>
