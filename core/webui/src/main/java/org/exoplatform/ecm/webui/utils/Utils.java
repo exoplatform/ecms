@@ -1283,9 +1283,9 @@ public class Utils {
 
   public static String encodePath(String path, String encoding) {
     try {
-      String doubleEncodedPath = URLEncoder.encode(URLEncoder.encode(path,encoding));
-      doubleEncodedPath.replaceAll("%252F","/");
-      return doubleEncodedPath;
+      String encodedPath = URLEncoder.encode(path,encoding);
+      encodedPath = encodedPath.replaceAll("%2F","/");
+      return encodedPath;
     } catch (UnsupportedEncodingException e){
       LOG.error("Failed to encode path '" + path + "' with encoding '" + encoding + "'",e);
     }

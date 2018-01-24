@@ -44,7 +44,7 @@ public class DownloadConnector implements ResourceContainer{
    * @anchor DownloadConnector.download
    */
   @GET
-  @Path("/download/{workspace}/{path:.*}/")
+  @Path("/download/{workspace}/{path:.*}")
   public Response download(@PathParam("workspace") String workspace,
                            @PathParam("path") String path,
                            @QueryParam("version") String version) throws Exception {
@@ -56,7 +56,6 @@ public class DownloadConnector implements ResourceContainer{
     ManageableRepository manageableRepository = WCMCoreUtils.getRepository();
     Session session = sessionProvider.getSession(workspace, manageableRepository);
 
-    path = URLDecoder.decode(path,"UTF-8");
     if (!path.startsWith("/")) {
       path = "/" + path;
     }

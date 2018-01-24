@@ -331,14 +331,11 @@
         var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
             results = regex
             .exec(location.search);
-        return results === null ? "" : decodeURIComponent(results[1]
-            .replace(/\+/g, " "));
+        return results === null ? "" : decodeURIComponent(results[1]);
     }
 
-    PDFJS.pdfFile = getParameterByName('path');
-    PDFJS.downloadLink = getParameterByName('origin');
-    document.title = PDFJS.downloadLink.split('/')[PDFJS.downloadLink
-        .split('/').length - 1];
+    var downloadLink = decodeURIComponent(getParameterByName('origin'));
+    document.title = downloadLink.split('/')[downloadLink.split('/').length - 1];
 
     window.onload = function() {
         function printDocument() {
