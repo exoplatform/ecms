@@ -4,7 +4,7 @@
   <parent>
     <artifactId>ecms-packaging-wcm</artifactId>
     <groupId>org.exoplatform.ecms</groupId>
-    <version>5.0.x-SNAPSHOT</version>
+    <version>5.0.0-RC08</version>
   </parent>
   <artifactId>ecms-packaging-wcm-webapp</artifactId>
   <packaging>war</packaging>
