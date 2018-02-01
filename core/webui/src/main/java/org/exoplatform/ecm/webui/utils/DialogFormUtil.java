@@ -16,12 +16,37 @@
  */
 package org.exoplatform.ecm.webui.utils;
 
+import java.io.InputStream;
+import java.net.URLDecoder;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
+
+import javax.jcr.Node;
+import javax.jcr.PathNotFoundException;
+import javax.jcr.Property;
+import javax.jcr.PropertyType;
+
+import org.apache.commons.lang.StringEscapeUtils;
+
 import org.exoplatform.commons.utils.HTMLSanitizer;
 import org.exoplatform.commons.utils.IOUtil;
 import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.ecm.webui.form.UIDialogForm;
 import org.exoplatform.ecm.webui.form.UIFormUploadInputNoUploadButton;
-import org.exoplatform.ecm.webui.form.validator.*;
+import org.exoplatform.ecm.webui.form.validator.CategoryValidator;
+import org.exoplatform.ecm.webui.form.validator.CronExpressionValidator;
+import org.exoplatform.ecm.webui.form.validator.DateValidator;
+import org.exoplatform.ecm.webui.form.validator.ECMNameValidator;
+import org.exoplatform.ecm.webui.form.validator.PhoneFormatValidator;
+import org.exoplatform.ecm.webui.form.validator.RepeatCountValidator;
+import org.exoplatform.ecm.webui.form.validator.RepeatIntervalValidator;
+import org.exoplatform.ecm.webui.form.validator.XSSValidator;
 import org.exoplatform.services.cms.JcrInputProperty;
 import org.exoplatform.upload.UploadResource;
 import org.exoplatform.wcm.webui.Utils;
@@ -32,14 +57,13 @@ import org.exoplatform.webui.form.UIFormMultiValueInputSet;
 import org.exoplatform.webui.form.UIFormSelectBox;
 import org.exoplatform.webui.form.input.UICheckBoxInput;
 import org.exoplatform.webui.form.input.UIUploadInput;
-import org.exoplatform.webui.form.validator.*;
-
-import javax.jcr.Node;
-import javax.jcr.PathNotFoundException;
-import javax.jcr.Property;
-import javax.jcr.PropertyType;
-import java.io.InputStream;
-import java.util.*;
+import org.exoplatform.webui.form.validator.DateTimeValidator;
+import org.exoplatform.webui.form.validator.DoubleFormatValidator;
+import org.exoplatform.webui.form.validator.EmailAddressValidator;
+import org.exoplatform.webui.form.validator.MandatoryValidator;
+import org.exoplatform.webui.form.validator.NullFieldValidator;
+import org.exoplatform.webui.form.validator.NumberFormatValidator;
+import org.exoplatform.webui.form.validator.StringLengthValidator;
 
 /*
  * Created by The eXo Platform SAS
@@ -192,8 +216,10 @@ public class DialogFormUtil {
               boolean isEmpty = Utils.isEmptyContent(inputValue);
               if (isEmpty)
                 inputValue = "";
-              else if (option == null || option.indexOf(SANITIZATION_FLAG) < 0)
+              else if (option == null || option.indexOf(SANITIZATION_FLAG) < 0) {
                 inputValue = HTMLSanitizer.sanitize(inputValue);
+                inputValue = StringEscapeUtils.unescapeHtml(inputValue);
+              }
               if (input.getName().equals("name") && input.getAncestorOfType(UIDialogForm.class).isAddNew()) {
                 JcrInputProperty titleInputProperty = (JcrInputProperty) properties.get("title");
                 if(titleInputProperty == null) {
