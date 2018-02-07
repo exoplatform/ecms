@@ -12,7 +12,7 @@
             <description>Configures the cache for javascript</description>
             <init-params>
                 <object-param>
-                    <name>cache.config.wcm.seo</name>
+                    <name>cache.config.ecms.javascript</name>
                     <description>The default cache configuration</description>
                     <object type="org.exoplatform.services.cache.ExoCacheConfig">
                         <field name="name">
@@ -33,7 +33,7 @@
                     </object>
                 </object-param>
                 <object-param profiles="cluster">
-                    <name>cache.config.wcm.seo</name>
+                    <name>cache.config.ecms.javascript</name>
                     <description></description>
                     <object type="org.exoplatform.services.cache.impl.infinispan.generic.GenericExoCacheConfig">
                         <field name="name">
