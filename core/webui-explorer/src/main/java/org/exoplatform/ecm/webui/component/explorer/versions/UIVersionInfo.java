@@ -273,6 +273,14 @@ public class UIVersionInfo extends UIContainer  {
     return rootVersionNum_;
   }
 
+  private boolean isWebContent() throws Exception {
+    Node currentNode = getCurrentNode();
+    if (currentNode != null) {
+      return currentNode.isNodeType(Utils.EXO_WEBCONTENT);
+    }
+    return false;
+  }
+
   static  public class RestoreVersionActionListener extends EventListener<UIVersionInfo> {
     public void execute(Event<UIVersionInfo> event) throws Exception {
       UIVersionInfo uiVersionInfo = event.getSource();
