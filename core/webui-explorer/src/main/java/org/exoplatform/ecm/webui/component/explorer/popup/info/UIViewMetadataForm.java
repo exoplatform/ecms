@@ -131,31 +131,37 @@ public class UIViewMetadataForm extends UIDialogForm {
           if (prop.isMultiple()) {
             if (requiredType == 5) { // date
               UIFormDateTimeInput uiFormDateTime = (UIFormDateTimeInput) uiForm.getUIInput(inputName);
+              if(uiFormDateTime == null)
+                continue;
               valueList.add(uiJCRExplorer.getSession().getValueFactory().createValue(uiFormDateTime.getCalendar()));
-              node.setProperty(name, valueList.toArray(new Value[] {}));
+              if(! node.hasProperty(name) || node.getProperty(name).getValues()[0].getDate().compareTo(valueList.get(0).getDate()) != 0){
+                node.setProperty(name, valueList.toArray(new Value[] {}));
+              }
             } else {
               UIFormInput uiInput = uiForm.getUIInput(inputName);
               if(uiInput instanceof UIFormSelectBox) {
                 String[] valuesReal = ((UIFormSelectBox)uiInput).getSelectedValues();
-                if(!node.hasProperty(name) || (node.hasProperty(name) && 
+                if((!node.hasProperty(name) && valuesReal.length > 0) || (node.hasProperty(name) &&
                     !uiForm.isEqualsValueStringArrays(node.getProperty(name).getValues(), valuesReal)))
                   node.setProperty(name, valuesReal);
               } else {
                 List<String> values = (List<String>) ((UIFormMultiValueInputSet) uiInput).getValue();
-                if (!node.hasProperty(name) || (node.hasProperty(name) &&
+                if ((!node.hasProperty(name) && values.size() > 0) || (node.hasProperty(name) &&
                     !uiForm.isEqualsValueStringArrays(node.getProperty(name).getValues(),
-                        values.toArray(new String[values.size()]))))
+                        values.toArray(new String[values.size()])))){
 
                   //--- Sanitize HTML input to avoid XSS attacks
                   for (int i = 0; i < values.size(); i++) {
                     values.set(i, HTMLSanitizer.sanitize(values.get(i)));
                   }
                 node.setProperty(name, values.toArray(new String[values.size()]));
-              }
+              }}
             }
           } else {
             if (requiredType == 6) { // boolean
               UIFormInput uiInput = uiForm.getUIInput(inputName);
+              if(uiInput == null)
+                continue;
               boolean value = false;
               //2 cases to return true, UIFormSelectBox with value true or UICheckBoxInput checked
               if(uiInput instanceof UIFormSelectBox){
@@ -168,7 +174,11 @@ public class UIViewMetadataForm extends UIDialogForm {
 	            }
             } else if (requiredType == 5) { // date
               UIFormDateTimeInput cal = (UIFormDateTimeInput) uiForm.getUIInput(inputName);
-              node.setProperty(name, cal.getCalendar());
+              if(cal == null)
+                continue;
+              if( !node.hasProperty(name) || cal.getCalendar().compareTo(node.getProperty(name).getDate()) != 0){
+                node.setProperty(name, cal.getCalendar());
+              }
             } else if(requiredType == 1){
               String value = "";
               if (uiForm.getUIInput(inputName) != null) {
@@ -182,12 +192,14 @@ public class UIViewMetadataForm extends UIDialogForm {
             } else if (requiredType == 4) { // double
               UIFormInput uiInput = uiForm.getUIInput(inputName);
               double value = 0;
-              if (uiInput == null || StringUtils.isBlank((String) uiInput.getValue())) {
+              if((uiInput == null || StringUtils.isBlank((String) uiInput.getValue())) && node.hasProperty(name)) {
                 node.setProperty(name, (Value) null);
               } else {
                 try {
                   value = Double.parseDouble((String) uiInput.getValue());
-                  node.setProperty(name, value);
+                  if(node.getProperty(name).getDouble() != value){
+                    node.setProperty(name, value);
+                  }
                 } catch (NumberFormatException e) {
                   UIApplication uiapp = uiForm.getAncestorOfType(UIApplication.class);
                   uiapp.addMessage(new ApplicationMessage("UIViewMetadataForm.msg.Invalid-number", null, ApplicationMessage.WARNING));
