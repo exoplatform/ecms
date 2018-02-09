@@ -145,11 +145,11 @@ public class UICommentForm extends UIForm implements UIPopupComponent {
 
   /**
    * Overrides method processRender of UIForm, loads javascript module
-   * wcm-webui-ext
+   * wcm-webui-extension
    */
   @Override
   public void processRender(WebuiRequestContext context) throws Exception {
-    context.getJavascriptManager().loadScriptResource("wcm-webui-ext");
+    context.getJavascriptManager().loadScriptResource("wcm-webui-extension");
     super.processRender(context);
   }
 

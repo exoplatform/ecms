@@ -19,13 +19,13 @@
     <name>SEOToolbarPortlet</name>
     <module>
       <depends>
-        <module>ecm-seo</module>
+        <module>ecm-seo-popup</module>
       </depends>
     </module>
   </portlet>
 
   <module>
-    <name>ecm-seo</name>
+    <name>ecm-seo-popup</name>
     <as>ecmSeo</as>
     <script>
       <path>/javascript/eXo/webui/WCMUIPopupWindow.js</path>
