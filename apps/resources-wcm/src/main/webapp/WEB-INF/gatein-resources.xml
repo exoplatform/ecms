@@ -106,7 +106,7 @@
   </module>
   
   <module>
-    <name>wcm-webui-ext</name>
+    <name>wcm-webui-extension</name>
     <as>wcm_webui_ext</as>
     <script>
       <path>/javascript/eXo/wcm/backoffice/private/CloseEvents.js</path>
@@ -144,8 +144,8 @@
   </module>
   
   <module>
-    <name>ui-vertical-slide-tab</name>
-    <as>ui_vertical_slide_tab</as>
+    <name>ui-vertical-slide-tabs</name>
+    <as>ui_vertical_slide_tabs</as>
     <script>
       <path>/javascript/eXo/wcm/backoffice/private/UIVerticalSlideTabs.js</path>
     </script>

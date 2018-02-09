@@ -279,7 +279,7 @@ public class UIFCCForm extends UIDialogForm implements UISelectable {
 
   @Override
   public void processRender(WebuiRequestContext context) throws Exception {
-    context.getJavascriptManager().loadScriptResource("wcm-webui-ext");
+    context.getJavascriptManager().loadScriptResource("wcm-webui-extension");
     context.getJavascriptManager().addCustomizedOnLoadScript("changeWarning();");
     super.processRender(context);
   }  

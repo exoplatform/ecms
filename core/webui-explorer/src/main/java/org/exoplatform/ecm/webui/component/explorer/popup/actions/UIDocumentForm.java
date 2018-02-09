@@ -248,7 +248,7 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
     addScripts("uiDocumentForm.UIDocForm.UpdateGUI();").
     addScripts("uiDocumentForm.UIDocForm.AutoFocus();");
 
-    context.getJavascriptManager().loadScriptResource("wcm-webui-ext");
+    context.getJavascriptManager().loadScriptResource("wcm-webui-extension");
     context.getJavascriptManager().addCustomizedOnLoadScript("changeWarning();");
     super.processRender(context);
   }
