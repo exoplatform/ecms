@@ -43,8 +43,10 @@ public class ContentReader {
    * 
    */
   public static String getEscapeHtmlContent(String content) {
-    if (content != null)
+    if (content != null) {
+      content = StringEscapeUtils.unescapeHtml(content);
       content = StringEscapeUtils.escapeHtml(content);
+    }
     return content;
   }
   /**
