@@ -760,6 +760,7 @@ UIFileView.prototype.initStickBreadcrumb = function() {
 	var stickBreadcrumb = function() {
 		var breadcrumb = gj('#FileViewBreadcrumb');
 		var actionbar = gj('#UIActionBar');
+        var topNavHeight = gj('.UIToolbarContainer:first').height();
 		if (!breadcrumb) return;
 		if (!breadcrumb.offset()) return;
 		var breadCrumbOffTop = breadcrumb.offset().top;
@@ -772,11 +773,11 @@ UIFileView.prototype.initStickBreadcrumb = function() {
 		var scroll_top = gj(window).scrollTop(); // our current vertical position from the top
 		
 		if (scroll_top >= eXo.ecm.UIFileView.minActionbarTop) {
-			actionbar.css({ 'position': 'fixed','z-index': '2', 'top':0});
-			breadcrumb.css({ 'position': 'fixed', 'top':actionbar.height(), zIndex:1});
+			actionbar.css({ 'padding-bottom': breadcrumb.height() });
+			breadcrumb.css({ 'position': 'fixed', 'top': topNavHeight, zIndex:1});
 			breadcrumb.width(breadcrumb.parent().width());
 		} else {
-			actionbar.css({ 'position': 'relative' });
+			actionbar.css({ 'padding-bottom': '' });
 			breadcrumb.css({ 'position': 'relative', 'top' :0, 'width': 'auto' });
 		}   
 	};
