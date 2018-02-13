@@ -16,6 +16,7 @@
  */
 package org.exoplatform.ecm.webui.component.explorer;
 
+import org.apache.commons.lang.StringUtils;
 import org.exoplatform.ecm.jcr.model.Preference;
 import org.exoplatform.ecm.webui.component.explorer.control.UIActionBar;
 import org.exoplatform.ecm.webui.component.explorer.control.UIAddressBar;
@@ -128,7 +129,8 @@ public class UIJcrExplorerContainer extends UIContainer {
       //Check to make sure new behavior will be also correct with the legacy data
       //By default all the group drive will be point to Documents folder. 
       //Therefore in the case spaces drives we no need to specify the nodepath or consider it is equals "/"
-      if(drive.getHomePath().startsWith("/Groups/spaces/")) nodePath = "/";
+      if(drive.getHomePath().startsWith("/Groups/spaces/") &&
+              (StringUtils.isBlank(nodePath) || nodePath.equals("Documents") || nodePath.equals("/Documents"))) nodePath = "/";
       if (nodePath != null && nodePath.length() > 0 && !nodePath.equals("/"))
         homePathBuf.append("/").append(nodePath);
       String homePath = homePathBuf.toString().replaceAll("//", "/");
