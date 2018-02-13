@@ -155,12 +155,12 @@ Self.t1 = d.getTime();
 			//toggle current node's check box
 			gj("input:checkbox", element).each(function(index, elem) {
 				var value = Self.selectBoxType;
-				gj(elem).attr("checked", value);
+				gj(elem).prop("checked", value);
 			});
 		} 
 		else if (!Self.clickCheckBox) {
 			gj("input:checkbox", element).each(function(index, elem) {
-				gj(elem).attr("checked", !elem.checked);
+				gj(elem).prop("checked", !elem.checked);
 			});
 		}
 
@@ -250,11 +250,11 @@ UIFileView.prototype.clickItem = function(event, element, callback) {
 	//uncheck all checkboxes
 	var uiDocInfo = gj("#UIDocumentInfo")[0] || gj("#UIDocumentWithTree")[0];
 	gj("input", uiDocInfo).each(function(index, elem) {
-		gj(elem).attr("checked", false);
+		gj(elem).prop("checked", false);
 	});
 	//check current checkbox
 	gj("input:checkbox", element).each(function(index, elem) {
-		gj(elem).attr("checked", true);
+		gj(elem).prop("checked", true);
 	});
 	Self.checkAllCheckbox();
 	//eXo.core.Browser.setOpacity(element, 100);
@@ -334,6 +334,9 @@ UIFileView.prototype.mouseUpItem = function(evt) {
 				if (Array.prototype[i]) continue;
 				//Self.itemsSelected[i].style.background = Self.colorSelected;
 				gj(Self.itemsSelected[i]).addClass(eXo.ecm.UIFileView.active);
+				if(!Self.clickCheckBox) {
+					gj(Self.itemsSelected[i]).find(".checkbox").each(function(){this.checked = true;});
+				}
 				//eXo.core.Browser.setOpacity(Self.itemsSelected[i], 100);
 			}
 		}
@@ -811,12 +814,12 @@ UIFileView.prototype.clearCheckboxes = function(evt) {
 	var uiFileView = gj(".uiFileView")[0];
 	if (uiFileView) {
 		resetArrayItemsSelected();
-		gj("#UIFileViewCheckBox").attr("checked", false);
-		gj("#UIDocumentInfo").find(".checkbox").attr("checked", false);
+		gj("#UIFileViewCheckBox").prop("checked", false);
+		gj("#UIDocumentInfo").find(".checkbox").prop("checked", false);
 		//gj("#UIDocumentInfo").find(".rowView").css("backgroundColor","#FFF");
 		gj("#UIDocumentInfo").find(".rowView").removeClass(eXo.ecm.UIFileView.active);
 		//case with tree
-		gj("#UIDocumentWithTree").find(".checkbox").attr("checked", false);
+		gj("#UIDocumentWithTree").find(".checkbox").prop("checked", false);
 		//gj("#UIDocumentWithTree").find(".rowView").css("backgroundColor","#FFF");
 		gj("#UIDocumentWithTree").find(".rowView").removeClass(eXo.ecm.UIFileView.active);
 		
@@ -935,9 +938,9 @@ UIFileView.prototype.clickRightMouse = function(event, elemt, menuId, objId, whi
 
 UIFileView.prototype.checkAllCheckbox = function() {
 	if (Self.itemsSelected.length == Self.allItems.length) {
-		gj("#UIFileViewCheckBox").attr("checked", true);
+		gj("#UIFileViewCheckBox").prop("checked", true);
 	} else {
-		gj("#UIFileViewCheckBox").attr("checked", false);
+		gj("#UIFileViewCheckBox").prop("checked", false);
 	}
 };
 
