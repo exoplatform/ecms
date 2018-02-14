@@ -1355,7 +1355,7 @@
       <addLabel>Dodaj oznako</addLabel>
       <removeLable>Odstrani oznako</removeLable>
       <restoreVersion>Obnovi različico</restoreVersion>
-      <viewVersion>View Version</viewVersion>
+      <viewVersion>Informacije o različici</viewVersion>
       <deleteVersion>Izbriši različico</deleteVersion>
       <compareVersion>Primerjaj z osnovno različico</compareVersion>
     </tooltip>

@@ -300,7 +300,7 @@
       <ManageActions>アクション管理</ManageActions>
       <ExportNode>ノードエクスポート</ExportNode>
       <ImportNode>ノードインポート</ImportNode>
-      <OverloadThumbnail>Change Icon Image</OverloadThumbnail>
+      <OverloadThumbnail>アイコン画像を変更</OverloadThumbnail>
       <ManageHidden>コンテンツを隠す/表示</ManageHidden>
       <ViewReferences>リファレンス観覧</ViewReferences>
       <ViewNodeType>ノードタイプ観覧</ViewNodeType>
@@ -1355,7 +1355,7 @@
       <addLabel>ラベルの追加</addLabel>
       <removeLable>ラベルの削除</removeLable>
       <restoreVersion>バージョンのリストア</restoreVersion>
-      <viewVersion>View Version</viewVersion>
+      <viewVersion>バージョン情報を表示</viewVersion>
       <deleteVersion>バージョンの削除</deleteVersion>
       <compareVersion>バージョンの比較</compareVersion>
     </tooltip>

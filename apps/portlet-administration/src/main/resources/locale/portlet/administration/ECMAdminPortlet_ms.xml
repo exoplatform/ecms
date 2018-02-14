@@ -8,26 +8,26 @@
   <UIECMAdminControlPanel>
     <tab>
       <label>
-        <Templates>Ang Templates</Templates>
-        <Explorer>I-explorer</Explorer>
-        <Repository>Ang repositoryo</Repository>
-        <Advanced>Na-una</Advanced>
+        <Templates>Templates</Templates>
+        <Explorer>Explorer</Explorer>
+        <Repository>Repository</Repository>
+        <Advanced>Advanced</Advanced>
       </label>
     </tab>
     <label>
-      <UITaxonomyManagerTrees>Ang mga kategorya</UITaxonomyManagerTrees>
-      <UIMetadataManager>Ang Metadata</UIMetadataManager>
-      <UINamespaceManager>Espasyo sa pangalan</UINamespaceManager>
-      <UINodeTypeManager>Ang mga tipo ng noda</UINodeTypeManager>
-      <UITemplatesManager>Ang mga dokumento</UITemplatesManager>
-      <UICLVTemplatesManager>Ang listahan</UICLVTemplatesManager>
+      <UITaxonomyManagerTrees>Categories</UITaxonomyManagerTrees>
+      <UIMetadataManager>Metadata</UIMetadataManager>
+      <UINamespaceManager>Namespaces</UINamespaceManager>
+      <UINodeTypeManager>Node Types</UINodeTypeManager>
+      <UITemplatesManager>Documents</UITemplatesManager>
+      <UICLVTemplatesManager>List</UICLVTemplatesManager>
       <UIViewManager>Views</UIViewManager>
-      <UIDriveManager>Ang mga drive</UIDriveManager>
+      <UIDriveManager>Drives</UIDriveManager>
       <UIQueriesManager>Queries</UIQueriesManager>
-      <UIActionManager>Ang mga aksyon</UIActionManager>
+      <UIActionManager>Actions</UIActionManager>
       <UIScriptManager>Scripts</UIScriptManager>
-      <UIUnLockManager>Ang mga kandado</UIUnLockManager>
-      <UIFolksonomyManager>I-tag</UIFolksonomyManager>
+      <UIUnLockManager>Locks</UIUnLockManager>
+      <UIFolksonomyManager>Tags</UIFolksonomyManager>
     </label>
     <msg>
       <access-denied>Access denied. You do not have permission to perform this action.</access-denied>
@@ -40,24 +40,24 @@
   -->
   <UITaxonomyWorkingArea>
     <msg>
-      <referential-integrity>Hindi mabasa ang pinag mulan ng payl. o ang distinasyon ng kategorya ay isang sub-category.</referential-integrity>
-      <no-taxonomy-selected>Dapat mong kopyahin o putulin kahit isang kategorya.</no-taxonomy-selected>
-      <node-is-cutting>Hinid pwedeng i-paste dito. ang kategorya ng noda '{0}' maaaring i-cat.</node-is-cutting>
-      <can-not-paste>Walang datos sa klipbord para i-paste.</can-not-paste>
-      <reference-exception>Hindi maaalis ang kategoryang ito dahil sa kasalukuyan na isinangguni ang nilalaman.</reference-exception>
-      <path-error>May isang maling nagawa habang nagtatanggal ng isang kategorya ng noda.</path-error>
+      <referential-integrity>Cannot read from the source file, or the destination category is a sub-category.</referential-integrity>
+      <no-taxonomy-selected>You must copy or cut at least one category.</no-taxonomy-selected>
+      <node-is-cutting>You cannot paste here. The category node '{0}' might be cut.</node-is-cutting>
+      <can-not-paste>There is no data in the clipboard to paste.</can-not-paste>
+      <reference-exception>Cannot delete this category  because it is currently referenced by a content.</reference-exception>
+      <path-error>An error occurred while removing this category node.</path-error>
     </msg>
   </UITaxonomyWorkingArea>
   <UITaxonomyManager>
     <msg>
-      <confirm-delete>Sigurado ka ba na gusto mong alisin ang kategoryang ito?</confirm-delete>
+      <confirm-delete>Are you sure you want to delete this category?</confirm-delete>
     </msg>
     <title>
-      <add>Idagdag</add>
-      <paste>I-paste</paste>
-      <cut>Putulin</cut>
-      <copy>Kopya</copy>
-      <remove>Alisin</remove>
+      <add>Add</add>
+      <paste>Paste</paste>
+      <cut>Cut</cut>
+      <copy>Copy</copy>
+      <remove>Delete</remove>
     </title>
   </UITaxonomyManager>
 
@@ -69,14 +69,14 @@
   <UITaxonomyTreeContainer>
     <tab>
       <info>
-        <UITaxonomyTreeMainForm>Tukuyin ang pangalan ng kategorya, lugar ng landas ng bahay.</UITaxonomyTreeMainForm>
-        <UIPermissionTreeManager>Magtakda ng pahintulot para sa puno ngkategorya.</UIPermissionTreeManager>
-        <UIActionTaxonomyManager>Magdagdag ng kilos para sa punung kategorya para makompleto ang pag gawa o i-update.</UIActionTaxonomyManager>
-        <UITaxonomyTreeCreateChild>Baguhin ang puno ng taxonomy sa pamamagitan ng pagdagdag. pagkopya, putulin at kolektahin ang mga permiso.</UITaxonomyTreeCreateChild>
+        <UITaxonomyTreeMainForm>Specify the category name, workspace and home path.</UITaxonomyTreeMainForm>
+        <UIPermissionTreeManager>Set permission for the category tree.</UIPermissionTreeManager>
+        <UIActionTaxonomyManager>Add an action to the category tree to complete the creation or update.</UIActionTaxonomyManager>
+        <UITaxonomyTreeCreateChild>Edit the taxonomy tree by adding, copying, cutting and selecting permissions.</UITaxonomyTreeCreateChild>
       </info>
     </tab>
     <msg>
-      <not-exist-tree>Ang puno ng kategorya ay hindi umiiral.</not-exist-tree>
+      <not-exist-tree>The category tree does not exist.</not-exist-tree>
     </msg>
   </UITaxonomyTreeContainer>
 
@@ -87,28 +87,28 @@
 -->
   <UITaxonomyTreeMainForm>
     <action>
-      <Reset>Baguhin</Reset>
+      <Reset>Reset</Reset>
     </action>
     <msg>
-      <name-not-allowed>Ang pinagbabawal na pangalan</name-not-allowed>
-      <name-emty>Ang pangalan ng puno ay kinakaylangan.</name-emty>
-      <homePath-emty>Ang landas ng bahay ay kinakailangan.</homePath-emty>
-      <targetPath-emty>Ang target ng landas ay kailangan.</targetPath-emty>
-      <taxonomytree-existed>Ang pangalan ng punong kategorya ay umiiral na.</taxonomytree-existed>
+      <name-not-allowed>Forbidden Name</name-not-allowed>
+      <name-emty>The tree name is required.</name-emty>
+      <homePath-emty>The home path is required.</homePath-emty>
+      <targetPath-emty>The target path is required.</targetPath-emty>
+      <taxonomytree-existed>The category tree name already exists.</taxonomytree-existed>
     </msg>
   </UITaxonomyTreeMainForm>
 
   <TaxonomyTreeMainForm>
     <label>
-      <TaxoTreeName>Ang Pangalan</TaxoTreeName>
+      <TaxoTreeName>Name</TaxoTreeName>
       <TaxoTreeWorkspace>Workspace</TaxoTreeWorkspace>
-      <TaxoTreeHomePath>Ang landas sa bahay</TaxoTreeHomePath>
+      <TaxoTreeHomePath>Home Path</TaxoTreeHomePath>
     </label>
   </TaxonomyTreeMainForm>
 
   <TaxonomyTreeHomePath>
     <title>
-      <AddPath>Magdagdag ng daan</AddPath>
+      <AddPath>Add Path</AddPath>
     </title>
   </TaxonomyTreeHomePath>
 
@@ -120,17 +120,17 @@
   <UIPermissionTreeInfo>
     <action>
       <title>
-        <Delete>Alisin</Delete>
-        <Edit>Baguhin</Edit>
+        <Delete>Delete</Delete>
+        <Edit>Edit</Edit>
       </title>
     </action>
     <header>
-      <usersOrGroups>Gumagamit o grupo</usersOrGroups>
-      <read>Bumasa</read>
-      <addNode>Idagdag ang node</addNode>
-      <setProperty>Itakda ang ari-arian</setProperty>
-      <remove>Tanggalin</remove>
-      <action>Ang Aksyon</action>
+      <usersOrGroups>User or Group</usersOrGroups>
+      <read>Read</read>
+      <addNode>Add Node</addNode>
+      <setProperty>Set Property</setProperty>
+      <remove>Remove</remove>
+      <action>Action</action>
     </header>
   </UIPermissionTreeInfo>
 
@@ -141,7 +141,7 @@
   -->
   <UIPermissionTreeForm>
     <msg>
-      <have-not-any-permission>Pakiusap tukuyin sa kahit isang permiso para sa noda na ito.</have-not-any-permission>
+      <have-not-any-permission>Please specify at least one permission for this node.</have-not-any-permission>
     </msg>
   </UIPermissionTreeForm>
 
@@ -152,17 +152,17 @@
   -->
 
   <UIActionForm>
-    <title>Magdagdag ng aksyon sa puno ng kategorya</title>
+    <title>Add an action to the category tree</title>
     <action>
       <Save>#{word.save}</Save>
     </action>
     <msg>
-      <name-not-allowed>Ang walang pangalan o ang espesyal na mga karakter ay hindi pinapayagan sa ngalan ng aksyon.</name-not-allowed>
-      <path-invalid>Ang landas ay imbalido.</path-invalid>
-      <taxonomy-existed>Ang puno ng kategorya ay umiiral na.</taxonomy-existed>
-      <taxonomy-node-existed>Ang kategoryang node ay umiiral na.</taxonomy-node-existed>
-      <no-permission-add>Wala kang karapatan para magdagdag ng aksyon.</no-permission-add>
-      <not-created-tree>Ang puno ng kategorya ay hindi nagawa.</not-created-tree>
+      <name-not-allowed>Empty name or special characters are not allowed in the action name.</name-not-allowed>
+      <path-invalid>The path is invalid.</path-invalid>
+      <taxonomy-existed>The category tree already exists.</taxonomy-existed>
+      <taxonomy-node-existed>The category node already exists.</taxonomy-node-existed>
+      <no-permission-add>You do not have the right to add an action.</no-permission-add>
+      <not-created-tree>The category tree has not yet been created.</not-created-tree>
     </msg>
   </UIActionForm>
 
@@ -173,8 +173,8 @@
   -->
   <UITemplatesList>
     <header>
-      <name>Pangalan ng template</name>
-      <action>Ang mga kilos</action>
+      <name>Template Name</name>
+      <action>Actions</action>
     </header>
   </UITemplatesList>
   <!--
@@ -188,19 +188,19 @@
     </title>
   </NameSpacePopup>
   <UINamespaceForm>
-    <title>Magrehistro ng bagong namespace</title>
+    <title>Register New Namespace</title>
     <label>
       <namespace>Namespace Prefix</namespace>
-      <uri>URl</uri>
+      <uri>URI</uri>
     </label>
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <register-unsuccessfull>Ang namespace o URl ay nag umiiral na.</register-unsuccessfull>
-      <prefix-null>Paki tukoy ng maigi ang namespace's prefix.</prefix-null>
-      <uri-null>Paki tukoy ang namespace's ng URl.</uri-null>
+      <register-unsuccessfull>Namespace or URI already exists.</register-unsuccessfull>
+      <prefix-null>Please specify the namespace's prefix.</prefix-null>
+      <uri-null>Please specify the namespace's URI.</uri-null>
     </msg>
   </UINamespaceForm>
   <!--
@@ -210,17 +210,17 @@
   -->
   <UINamespaceList>
     <header>
-      <prefix>Unlapi</prefix>
-      <uri>Namespace URl</uri>
-      <action>Ang kilos</action>
+      <prefix>Prefix</prefix>
+      <uri>Namespace URI</uri>
+      <action>Action</action>
     </header>
     <action>
-      <AddNamespace>Magparehistro</AddNamespace>
+      <AddNamespace>Register</AddNamespace>
     </action>
   </UINamespaceList>
   <NamespacePopup>
     <title>
-      <UINamespaceForm>Magrehistro ng bagong namespace</UINamespaceForm>
+      <UINamespaceForm>Register New Namespace</UINamespaceForm>
     </title>
   </NamespacePopup>
   <!--
@@ -230,30 +230,30 @@
   -->
   <UIMetadataList>
     <label>
-      <false>huwad</false>
-      <true>totoo</true>
-      <True>totoo</True>
-      <False>huwad</False>
+      <false>false</false>
+      <true>true</true>
+      <True>true</True>
+      <False>false</False>
     </label>
     <title>
-      <view>Tignan</view>
-      <edit>I-Edit</edit>
-      <delete>Alisin</delete>
+      <view>View</view>
+      <edit>Edit</edit>
+      <delete>Delete</delete>
     </title>
     <header>
       <icon>Icon</icon>
-      <name>Ang metadata</name>
-      <type>Ang uri</type>
-      <internalUse>Panloob na gamit</internalUse>
-      <action>Ang mga kilos</action>
+      <name>Metadata</name>
+      <type>Type</type>
+      <internalUse>Internal Use</internalUse>
+      <action>Actions</action>
     </header>
     <msg>
-      <confirm-delete>Sigurado ka ba na gusto mong burahin itong metadata?</confirm-delete>
-      <delete-successful>Ang templates ng '{0}' ay matagumpay na nabura.</delete-successful>
-      <path-not-found-exception>Ang metadata na ito ay nabura na or napalitan na. paki pindot ang refresh na buton.</path-not-found-exception>
+      <confirm-delete>Are you sure you want to delete this metadata?</confirm-delete>
+      <delete-successful>The templates of '{0}' were deleted successfully.</delete-successful>
+      <path-not-found-exception>This metadata was deleted or changed. Please click the Refresh button.</path-not-found-exception>
     </msg>
     <action>
-      <Add>Magdagdag ng metadata</Add>
+      <Add>Add Metadata</Add>
       <Cancel>#{word.cancel}</Cancel>
     </action>
   </UIMetadataList>
@@ -264,13 +264,13 @@
   </MetadataPopupAddNew>
   <MetadataPopupEdit>
     <title>
-      <UIMetadataForm>I-edit ang mga metadata template</UIMetadataForm>
+      <UIMetadataForm>Edit Metadata's Template</UIMetadataForm>
     </title>
   </MetadataPopupEdit>
   <MetataPermissionPopup>
     <title>
-      <MetadataPermission>Itakda ang mga pahintulot</MetadataPermission>
-      <QueriesPermissionBrowse>Magdagdag ng mga pahintulot</QueriesPermissionBrowse>
+      <MetadataPermission>Set Permissions</MetadataPermission>
+      <QueriesPermissionBrowse>Add Permissions</QueriesPermissionBrowse>
     </title>
   </MetataPermissionPopup>
   <!--
@@ -279,29 +279,29 @@
   ################################################################################
   -->
   <UIMetadataForm>
-    <title>Pagma-map ng metadata</title>
+    <title>Mapping Metadata</title>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Save>Mag-apply</Save>
+      <Save>Apply</Save>
     </action>
     <header>
-      <icon>Ang icon</icon>
-      <label>Ang pangalan ng node</label>
-      <input>Ang kilos</input>
+      <icon>Icon</icon>
+      <label>Node name</label>
+      <input>Action</input>
     </header>
     <label>
-      <dialogTemplate>Ang template ng salitaan:</dialogTemplate>
-      <viewTemplate>Tingnan ang tempalte:</viewTemplate>
-      <metadataName>Ang pangalan ng metadata:</metadataName>
-      <viewPermission>Ang pahintulot:</viewPermission>
+      <dialogTemplate>Dialog Template:</dialogTemplate>
+      <viewTemplate>View Template:</viewTemplate>
+      <metadataName>Metadata Name:</metadataName>
+      <viewPermission>Permission:</viewPermission>
       <permission>UIMetadataForm</permission>
-      <metadataLabel>Ang tatak:</metadataLabel>
+      <metadataLabel>Label:</metadataLabel>
     </label>
     <tab>
       <label>
-        <metadataTypeTab>Ang Uri ng metadata</metadataTypeTab>
-        <dialogTab>Ang dialogong template</dialogTab>
-        <viewTab>Tingnan ang tempalate</viewTab>
+        <metadataTypeTab>Metadata Type</metadataTypeTab>
+        <dialogTab>Dialog Template</dialogTab>
+        <viewTab>View Template</viewTab>
       </label>
     </tab>
   </UIMetadataForm>
@@ -312,18 +312,18 @@
   -->
   <UIMetadataView>
     <header>
-      <name>Ang pngalan ng elemento</name>
-      <type>Ang tipo</type>
-      <description>Ang paglalarawan</description>
-      <isMixin>Ang uri ng mixin</isMixin>
-      <orderable>Ang maayos na mga bata</orderable>
+      <name>Element Name</name>
+      <type>Type</type>
+      <description>Description</description>
+      <isMixin>Is Mixin Type</isMixin>
+      <orderable>Orderable children</orderable>
     </header>
     <info>
-      <description>Ang paglalarawan</description>
+      <description>Description</description>
     </info>
     <tab>
-      <element>Ang mga elemento</element>
-      <metadataView>Ang kaalaman ng metadata</metadataView>
+      <element>Elements</element>
+      <metadataView>Metadata Information</metadataView>
     </tab>
     <action>
       <Cancel>#{word.close}</Cancel>
@@ -332,7 +332,7 @@
   </UIMetadataView>
   <ViewMetadataPopup>
     <title>
-      <UIMetadataView>Ang Impormasyon ng metadata</UIMetadataView>
+      <UIMetadataView>Metadata Information</UIMetadataView>
     </title>
   </ViewMetadataPopup>
   <!--
@@ -342,26 +342,26 @@
   -->
   <UIDriveList>
     <header>
-      <icon>Ang icon</icon>
-      <name>Ang pangalan</name>
+      <icon>Icon</icon>
+      <name>Name</name>
       <workspace>Workspace</workspace>
-      <homePath>Ang landas sa bahay</homePath>
-      <permissions>Ang mga pahintulot</permissions>
-      <views>Tanawin</views>
-      <action>Ang kilos</action>
+      <homePath>Home Path</homePath>
+      <permissions>Kebenaran</permissions>
+      <views>View</views>
+      <action>Action</action>
     </header>
     <tooltip>
-      <Delete>Tanggalin</Delete>
-      <EditInfo>Baguhin</EditInfo>
+      <Delete>Delete</Delete>
+      <EditInfo>Edit</EditInfo>
     </tooltip>
     <msg>
-      <confirm-delete>Sigurado ka ba na gusto mo ng burahin itong drive?</confirm-delete>
+      <confirm-delete>Are you sure you want to delete this drive?</confirm-delete>
     </msg>
     <action>
-      <AddDrive>Magdagdag ng drive</AddDrive>
+      <AddDrive>Add Drive</AddDrive>
     </action>
     <label>
-      <permission>{0} sa {1}</permission>
+      <permission>{0} in {1}</permission>
     </label>
   </UIDriveList>
   <UIDriveForm>
@@ -372,63 +372,63 @@
       <Refresh>#{word.refresh}</Refresh>
     </action>
     <msg>
-      <drive-exists>Ang drive ay umiiral na.</drive-exists>
-      <workspace-path-invalid>Ang workspace na landas ay hindi balido.</workspace-path-invalid>
-      <drive-views-invalid>Mangyaring pumili ng isang tanawin.</drive-views-invalid>
-      <icon-not-found>Hindi makita ang icon.</icon-not-found>
-      <permission-null>Kailangan mong ilagay ang pahintulot para sa drive na ito.</permission-null>
-      <allowCreateFolders>Kailangan mo pumili ng uri ng polder.</allowCreateFolders>
-      <name-null>Paki pasok ang pangalan ng driver.</name-null>
-      <fileName-invalid>Ang pangalan ng driver ay may ilang di-wastong mga karakter.</fileName-invalid>
+      <drive-exists>The drive already exists.</drive-exists>
+      <workspace-path-invalid>The workspace path is invalid.</workspace-path-invalid>
+      <drive-views-invalid>Please select a view.</drive-views-invalid>
+      <icon-not-found>Icon not found.</icon-not-found>
+      <permission-null>You must set the permission for this drive.</permission-null>
+      <allowCreateFolders>You must select the folder type.</allowCreateFolders>
+      <name-null>Please enter the drive name.</name-null>
+      <fileName-invalid>The drive name has some invalid characters.</fileName-invalid>
     </msg>
     <tab>
       <label>
-        <DriveInputSet>Ang drive</DriveInputSet>
-        <ViewsInputSet>Mag-aplay ng mga tanawin</ViewsInputSet>
-        <PermissionInputSet>Itakda ang mga pahintulot</PermissionInputSet>
+        <DriveInputSet>Drive</DriveInputSet>
+        <ViewsInputSet>Apply Views</ViewsInputSet>
+        <PermissionInputSet>Set Permissions</PermissionInputSet>
       </label>
     </tab>
     <label>
-      <name>Ang pangalan:</name>
-      <workspace>Lugar gawaan:</workspace>
-      <homePath>Landas ng bahay:</homePath>
-      <icon>Ang imahe ng lugar gawaan:</icon>
-      <viewPreferences>Ipakita ang Mga Dokumentadong Inirerekumenda:</viewPreferences>
-      <viewNonDocument>Ipakita ang Mga Non-document Node:</viewNonDocument>
-      <viewSideBar>Ipakita ang sidebar:</viewSideBar>
-      <permissions>Mga pahintulot:</permissions>
-      <showHiddenNode>Ipakita ang mga Nakatagong Node:</showHiddenNode>
-      <allowCreateFolders>Payagan ang Paglikha ng Folder:</allowCreateFolders>
-      <Admin>Tagapangasiwa:</Admin>
-      <Categories>Mga kategorya:</Categories>
-      <Icons>Mga imahe:</Icons>
-      <List>Listahan:</List>
+      <name>Name:</name>
+      <workspace>Workspace:</workspace>
+      <homePath>Home Path:</homePath>
+      <icon>Workspace Icon:</icon>
+      <viewPreferences>Show Referenced Documents:</viewPreferences>
+      <viewNonDocument>Show Non-document Nodes:</viewNonDocument>
+      <viewSideBar>Show Sidebar:</viewSideBar>
+      <permissions>Permissions:</permissions>
+      <showHiddenNode>Show Hidden Nodes:</showHiddenNode>
+      <allowCreateFolders>Allow Folder Creation:</allowCreateFolders>
+      <Admin>Admin:</Admin>
+      <Categories>Categories:</Categories>
+      <Icons>Icons:</Icons>
+      <List>List:</List>
       <Web>Web:</Web>
     </label>
   </UIDriveForm>
   <AddDriveManagerPopup>
     <title>
-      <UIDriveForm>Magdagdag ng drive</UIDriveForm>
+      <UIDriveForm>Add Drive</UIDriveForm>
     </title>
   </AddDriveManagerPopup>
   <EditDriveManagerPopup>
     <title>
-      <UIDriveForm>I-Edit ang drive</UIDriveForm>
+      <UIDriveForm>Edit Drive</UIDriveForm>
     </title>
   </EditDriveManagerPopup>
   <UITreeList>
     <info>
-      <child-not-found>Hindi nakita ang node ng bata.</child-not-found>
+      <child-not-found>Child node not found.</child-not-found>
     </info>
     <header>
-      <name>Ang pangalan</name>
-      <action>Ang aksyon</action>
+      <name>Name</name>
+      <action>Action</action>
     </header>
   </UITreeList>
 
   <UIRepositoryList>
     <titlebar>
-      <label>Pamahalaan ang Pangunahing Mga Tungkulin ng ECM</label>
+      <label>Manage ECM Main Functions</label>
     </titlebar>
   </UIRepositoryList>
 
@@ -439,9 +439,9 @@
   -->
   <UINodeTypeManager>
     <header>
-      <icon>Ang imahe</icon>
-      <label>Ang pangalan ng node</label>
-      <input>Ang kilos</input>
+      <icon>Icon</icon>
+      <label>Node Name</label>
+      <input>Action</input>
     </header>
     <action>
       <Save>#{word.save}</Save>
@@ -454,28 +454,28 @@
   -->
   <UINodeTypeList>
     <label>
-      <true>Totoo</true>
-      <false>Huwad</false>
+      <true>True</true>
+      <false>False</false>
     </label>
     <header>
-      <icon>Ang imahe</icon>
-      <nodeType>Ang uri ng node</nodeType>
-      <mixinType>Ang uri ng mixin</mixinType>
-      <orderable>Maayos na mga node ng bata</orderable>
-      <action>Ang aksyon</action>
+      <icon>Icon</icon>
+      <nodeType>Node Type</nodeType>
+      <mixinType>Mixin Type</mixinType>
+      <orderable>Orderable Child Nodes</orderable>
+      <action>Action</action>
     </header>
     <action>
-      <Export>I-luwas</Export>
-      <Import>Angkat</Import>
-      <Add>Magdagdag</Add>
+      <Export>Export</Export>
+      <Import>Import</Import>
+      <Add>Add</Add>
     </action>
     <tooltip>
-      <View>Ang tanawin</View>
-      <Edit>Baguhin</Edit>
-      <Delete>Tangalin</Delete>
+      <View>View</View>
+      <Edit>Edit</Edit>
+      <Delete>Delete</Delete>
     </tooltip>
     <msg>
-      <confirm-delete>Sigurado ka ba na gusto mong burahin ang uri ng node na ito?</confirm-delete>
+      <confirm-delete>Are you sure you want to delete this node type?</confirm-delete>
     </msg>
   </UINodeTypeList>
   <!--
@@ -486,12 +486,12 @@
   <UINodeTypeOptionList>
     <action>
       <Save>#{word.save}</Save>
-      <Add>Magdagdag</Add>
+      <Add>Add</Add>
     </action>
     <header>
-      <icon>Ang imahe</icon>
-      <label>Ang pangalan ng node</label>
-      <input>Ang aksyon</input>
+      <icon>Icon</icon>
+      <label>Node Name</label>
+      <input>Action</input>
     </header>
   </UINodeTypeOptionList>
   <!--
@@ -502,55 +502,55 @@
   <UINodeTypeForm>
     <tab>
       <label>
-        <nodeTypeDefinition>Ang uri ng node</nodeTypeDefinition>
-        <propertyDefinition>Ang pag aari</propertyDefinition>
-        <childNodeDefinition>Ang child node</childNodeDefinition>
-        <superTypeTab>Ang mahusay na mga uri</superTypeTab>
-        <DefaultTypeTab>Ang default primary</DefaultTypeTab>
-        <RequiredTypeTab>Ang pangunahing kailangan</RequiredTypeTab>
-        <Contraints>Ang mga hadlang</Contraints>
+        <nodeTypeDefinition>Node Type</nodeTypeDefinition>
+        <propertyDefinition>Property</propertyDefinition>
+        <childNodeDefinition>Child Node</childNodeDefinition>
+        <superTypeTab>Super Types</superTypeTab>
+        <DefaultTypeTab>Default Primary</DefaultTypeTab>
+        <RequiredTypeTab>Required Primary</RequiredTypeTab>
+        <Contraints>Constraints</Contraints>
       </label>
     </tab>
     <label>
-      <propertiesDefinitions>Ang mga kahulugan ng ari-arian</propertiesDefinitions>
-      <childDefinitions>Ang mga Kahulugan ng Child Node</childDefinitions>
-      <namespace>Ang espasyo ng pangalan</namespace>
-      <propertyNamespace>Ang espasyo ng pangalan</propertyNamespace>
-      <nodeTypeName>Ang uri ng pangalan ng node</nodeTypeName>
-      <mixinType>Ang uri ng mixin</mixinType>
-      <hasOrderableChildNodes>Maayos na mga node ng bata</hasOrderableChildNodes>
-      <primaryItemName>Ang pangunahing bilang ng pangalan</primaryItemName>
-      <superTypes>Ang mahusay na uri</superTypes>
-      <propertyname>Ang kahulugan ng pangalan</propertyname>
-      <requiredType>Ang uri ng kailangan</requiredType>
-      <multiple>Maramihan</multiple>
-      <mandatory>Ay sapilitan</mandatory>
-      <autoCreated>Ay palaging naka kusa</autoCreated>
-      <parentversion>Sa bersyon ng magulang</parentversion>
-      <protected>Ay protektado</protected>
-      <constraints>Ang mga Halaga</constraints>
+      <propertiesDefinitions>Property Definitions</propertiesDefinitions>
+      <childDefinitions>Child Node Definitions</childDefinitions>
+      <namespace>Name Space</namespace>
+      <propertyNamespace>Name Space</propertyNamespace>
+      <nodeTypeName>Node Type Name</nodeTypeName>
+      <mixinType>Is Mixin Type</mixinType>
+      <hasOrderableChildNodes>Orderable Child Nodes</hasOrderableChildNodes>
+      <primaryItemName>Primary Item Name</primaryItemName>
+      <superTypes>Super Types</superTypes>
+      <propertyname>Definition Name</propertyname>
+      <requiredType>Required Type</requiredType>
+      <multiple>Is Multiple</multiple>
+      <mandatory>Is Mandatory</mandatory>
+      <autoCreated>Is Auto-created</autoCreated>
+      <parentversion>On parent version</parentversion>
+      <protected>Is Protected</protected>
+      <constraints>Values</constraints>
       <UIFormTableInputSet>UIFormTableInputSet</UIFormTableInputSet>
-      <sameNameSiblings>Ay magkaparehong pangalan ng kapatid</sameNameSiblings>
-      <childNamespace>Ang espasyo ng pangalan</childNamespace>
-      <childMandatory>Ay sapilitan</childMandatory>
-      <childAutocreated>Ay palaging naka kusa</childAutocreated>
-      <childParentversion>Sa bersyon ng magulang</childParentversion>
-      <childProtected>Ay protektado</childProtected>
-      <childNodename>Ang kahulugan ng pangalan</childNodename>
-      <requiredPrimaryType>Kinakailangang Pangunahing Uri</requiredPrimaryType>
-      <defaultPrimaryType>Default na Pangunahing Uri</defaultPrimaryType>
-      <valueconstraints>Ang mga Limitasyon ng Halaga</valueconstraints>
+      <sameNameSiblings>Is same name sibling</sameNameSiblings>
+      <childNamespace>Name Space</childNamespace>
+      <childMandatory>Is Mandatory</childMandatory>
+      <childAutocreated>Is Auto-created</childAutocreated>
+      <childParentversion>On parent version</childParentversion>
+      <childProtected>Is Protected</childProtected>
+      <childNodename>Definition Name</childNodename>
+      <requiredPrimaryType>Required Primary Type</requiredPrimaryType>
+      <defaultPrimaryType>Default Primary Type</defaultPrimaryType>
+      <valueconstraints>Value Constraints</valueconstraints>
     </label>
     <action>
       <Cancel>#{word.cancel}</Cancel>
       <Save>#{word.save}</Save>
-      <SaveDraft>I-save bilang Draft</SaveDraft>
-      <AddProperty>Magdagdag ng ari-arian</AddProperty>
-      <AddChild>Magdagdag ng bata</AddChild>
-      <AddConstraints>Magdagdag ng Limitasyon</AddConstraints>
+      <SaveDraft>Save as Draft</SaveDraft>
+      <AddProperty>Add Property</AddProperty>
+      <AddChild>Add Child</AddChild>
+      <AddConstraints>Add Constraints</AddConstraints>
       <Back>#{word.back}</Back>
-      <AddType>Magdagdag ng Uri</AddType>
-      <AddValue>Dagdag</AddValue>
+      <AddType>Add Type</AddType>
+      <AddValue>Add</AddValue>
       <CancelConstraints>#{word.cancel}</CancelConstraints>
       <CancelTab>#{word.cancel}</CancelTab>
       <UpdateChild>#{word.update}</UpdateChild>
@@ -560,62 +560,62 @@
       <Close>#{word.close}</Close>
     </action>
     <msg>
-      <register-successfully>Ang '{0}' na uri ng node ay matagumpay na nakarehistro.</register-successfully>
-      <supertype-is-madatory>Ang super na uri ay kailangan kung ikaw ay magrerehistro ng bagong uri ng node. Mangyaring pumili ng kahit isang super na uri.</supertype-is-madatory>
-      <register-failed>Ang pagrehistro ng uri ng node ay hindi matagumpay. Ito posibleng umiiral na o ang super na uri ay hindi wasto.</register-failed>
-      <nodeType-name>Ang pangalan ng uri ng node ay kinakailangan.</nodeType-name>
-      <fileName-invalid>Ang pangalan ng file ay mayroong hindi wastong mga karakter.</fileName-invalid>
-      <node-type-exists>Ang '{0}' na uri ng node ay umiiral na.</node-type-exists>
-      <node-type-name>Ang pangalan ng uri ng node ay hindi wasto.</node-type-name>
-      <values-error>Mangyaring pumili ng kahit isang uri ng node para sa default na pangunahing uri.</values-error>
-      <confirm-delete-child>Sigurado ka bang gusto mong burahin ang anak na node na ito?</confirm-delete-child>
-      <confirm-delete-property>Sigurado ka bang gusto mong burahin ang katangiang ito?</confirm-delete-property>
+      <register-successfully>The '{0}' node type was registered successfully.</register-successfully>
+      <supertype-is-madatory>The super type is mandatory when you register a new node type. Please select at least one super type.</supertype-is-madatory>
+      <register-failed>The node type registration was unsuccessful. It either already exists or the super type is invalid.</register-failed>
+      <nodeType-name>The node type name is required.</nodeType-name>
+      <fileName-invalid>The file name has some invalid characters.</fileName-invalid>
+      <node-type-exists>The '{0}' node type already exists.</node-type-exists>
+      <node-type-name>The node type name is invalid.</node-type-name>
+      <values-error>Please select only one node type for the default primary type.</values-error>
+      <confirm-delete-child>Are you sure you want to delete this child node?</confirm-delete-child>
+      <confirm-delete-property>Are you sure you want to delete this property?</confirm-delete-property>
     </msg>
   </UINodeTypeForm>
   <UIPropertyDefinitionForm>
     <tab>
       <label>
-        <constraints>Ang mga limitasyon</constraints>
-        <UIFormMultiValueInputSet>Ang mga Limitasyon</UIFormMultiValueInputSet>
+        <constraints>Constraints</constraints>
+        <UIFormMultiValueInputSet>Constraints</UIFormMultiValueInputSet>
       </label>
     </tab>
     <msg>
-      <property-name>Ang pangalan ng deskripsyon ng katangian ay hindi wasto.</property-name>
-      <not-supported-value-constraints>Ang kinakailangan na uring ito ay hindi sumusuporta sa mga limitasyon ng halaga.</not-supported-value-constraints>
+      <property-name>The property definition's name was invalid.</property-name>
+      <not-supported-value-constraints>This required type does not support value constraints.</not-supported-value-constraints>
     </msg>
   </UIPropertyDefinitionForm>
   <UIChildNodeDefinitionForm>
     <msg>
-      <child-name>Ang pangalan ng bata na node ay kinakailangan.</child-name>
-      <child-invalid>Ang pangalan ng bata na node ay naglalaman ng iilang hindi wastong mga karakter.</child-invalid>
-      <default-node-type-not-found>Ang default na uri ng node ay hindi matagpuan.</default-node-type-not-found>
-      <requiredPrimaryType>Ang kailangang na pangunahing uri ay kinakailangan.</requiredPrimaryType>
-      <defaultPrimaryType>Ang default ng pangunahing uri ay kinanakailangan.</defaultPrimaryType>
+      <child-name>The child node name is required.</child-name>
+      <child-invalid>The child node name contains some invalid characters.</child-invalid>
+      <default-node-type-not-found>The default node type is not found.</default-node-type-not-found>
+      <requiredPrimaryType>The required primary type is required.</requiredPrimaryType>
+      <defaultPrimaryType>The default primary type is required.</defaultPrimaryType>
     </msg>
   </UIChildNodeDefinitionForm>
   <defaultPrimaryTypePopup>
     <title>
-      <FormdefaultPrimaryTypePopup>Pumili ng Default na Pangunahing Uri</FormdefaultPrimaryTypePopup>
+      <FormdefaultPrimaryTypePopup>Select Default Primary Type</FormdefaultPrimaryTypePopup>
     </title>
   </defaultPrimaryTypePopup>
   <requiredPrimaryTypePopup>
     <title>
-      <FormrequiredPrimaryTypePopup>Pumili ng Kinakailangan na Pangunahing Uri</FormrequiredPrimaryTypePopup>
+      <FormrequiredPrimaryTypePopup>Select Required Primary Type</FormrequiredPrimaryTypePopup>
     </title>
   </requiredPrimaryTypePopup>
   <superTypesPopup>
     <title>
-      <FormsuperTypesPopup>Pumili ng mga pinakamahusay na uri</FormsuperTypesPopup>
+      <FormsuperTypesPopup>Select Super Types</FormsuperTypesPopup>
     </title>
   </superTypesPopup>
   <NodeTypePopup>
     <title>
-      <UINodeTypeForm>Magdagdag/baguhin ang mga Kahulugan ng Uri ng Node</UINodeTypeForm>
+      <UINodeTypeForm>Add/Edit Node Type Definitions</UINodeTypeForm>
     </title>
   </NodeTypePopup>
   <ViewNodeTypePopup>
     <title>
-      <UINodeTypeForm>Ipakita ang Impormasyon ng Uri ng Node</UINodeTypeForm>
+      <UINodeTypeForm>View Node Type Information</UINodeTypeForm>
     </title>
   </ViewNodeTypePopup>
   <!--
@@ -625,24 +625,24 @@
   -->
   <UINodeTypeExport>
     <header>
-      <icon>Ang imahe</icon>
-      <label>Ang pangalan ng node</label>
-      <input>Ang aksyon</input>
+      <icon>Icon</icon>
+      <label>Node name</label>
+      <input>Action</input>
     </header>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Export>Luwas</Export>
-      <UncheckAll>Hindi pagsuri sa lahat</UncheckAll>
-      <CheckAll>Suriin ang lahat</CheckAll>
+      <Export>Export</Export>
+      <UncheckAll>Uncheck all</UncheckAll>
+      <CheckAll>Check all</CheckAll>
     </action>
-    <title>I-luwas ang mga Uri ng Node</title>
+    <title>Export Node Types</title>
     <msg>
-      <item-null>Mangyaring pumili ng kahit isang node na gusto mong i-luwas.</item-null>
+      <item-null>Please select at least one node that you want to export.</item-null>
     </msg>
   </UINodeTypeExport>
   <NodeTypeExportPopup>
     <title>
-      <UINodeTypeExport>I-luwas ang mga Uri ng Node</UINodeTypeExport>
+      <UINodeTypeExport>Export Node Types</UINodeTypeExport>
     </title>
   </NodeTypeExportPopup>
   <!--
@@ -657,19 +657,19 @@
   -->
   <UINodeTypeUpload>
     <label>
-      <upload>Ang pangalan ng file</upload>
+      <upload>File Name</upload>
     </label>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Upload>I-upload</Upload>
+      <Upload>Upload</Upload>
     </action>
-    <title>I-import ang Uri ng Node mula sa XML payl</title>
+    <title>Import Node Type From XML File</title>
     <msg>
-      <filename-error>Mag-browse ng uri ng node na file para i-import.</filename-error>
-      <data-file-error>Ang .xml o ang mga .zip payl lamang ang maaaring i-angkat.</data-file-error>
-      <data-invalid>Ang data ay hindi wasto. Mangyaring suriin ang tipo ng iyong file at subukan ulit.</data-invalid>
-      <nodetype-exist>Ang '{0}' na uri ng node ay umiiral na.</nodetype-exist>
-      <namespace-invalid>Ang '{0}' na namespace ay hindi wasto.</namespace-invalid>
+      <filename-error>Browse a node type file to import.</filename-error>
+      <data-file-error>Only .xml or .zip files can be imported.</data-file-error>
+      <data-invalid>The data is invalid. Please check your file type and try again.</data-invalid>
+      <nodetype-exist>The '{0}' node type already exists.</nodetype-exist>
+      <namespace-invalid>The '{0}' namespace is invalid.</namespace-invalid>
     </msg>
   </UINodeTypeUpload>
   <!--
@@ -680,23 +680,23 @@
   <UINodeTypeImport>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Import>Angkat</Import>
-      <Upload>I-upload muli</Upload>
+      <Import>Import</Import>
+      <Upload>Re-upload</Upload>
     </action>
     <header>
-      <icon>Ang imahe</icon>
-      <label>Pangalan ng node</label>
-      <input>Ang kilos</input>
+      <icon>Icon</icon>
+      <label>Node Name</label>
+      <input>Action</input>
     </header>
-    <title>Pumili ng angkat na Uri ng Node</title>
+    <title>Select Import Node Type</title>
     <msg>
-      <no-nodetype-registered>Walang mga uri ng node na nakarehistro.</no-nodetype-registered>
-      <nodetype-registered>Matagumpay ang pagrehistro.</nodetype-registered>
+      <no-nodetype-registered>There are no node types registered.</no-nodetype-registered>
+      <nodetype-registered>Registration successful.</nodetype-registered>
     </msg>
   </UINodeTypeImport>
   <NodeTypeImportPopup>
     <title>
-      <UINodeTypeImportPopup>I-import ang Uri ng Node mula sa XML payl</UINodeTypeImportPopup>
+      <UINodeTypeImportPopup>Import Node Type From XML File</UINodeTypeImportPopup>
     </title>
   </NodeTypeImportPopup>
   <!--
@@ -708,13 +708,13 @@
     <label>
       <both>Both</both>
       <folderOnly>Folder</folderOnly>
-      <unstructuredFolder>Unstructured na polder</unstructuredFolder>
+      <unstructuredFolder>Unstructured Folder</unstructuredFolder>
     </label>
     <title>
-      <AddPermission>Magdagdag ng Pahintulot</AddPermission>
-      <RemovePermission>Tanggalin ang pahintulot</RemovePermission>
-      <AddIcon>Magdagdag ng imahe</AddIcon>
-      <AddPath>Magdagdag ng landas</AddPath>
+      <AddPermission>Tambah kebenaran</AddPermission>
+      <RemovePermission>Remove Permission</RemovePermission>
+      <AddIcon>Add Icon</AddIcon>
+      <AddPath>Add Path</AddPath>
     </title>
   </DriveInputSet>
   <!--
@@ -724,20 +724,20 @@
   -->
   <UIActionTypeList>
     <header>
-      <name>Ang iskrip</name>
-      <label>Ang pangalan</label>
-      <action>Ang mga Aksyon</action>
+      <name>Script</name>
+      <label>Name</label>
+      <action>Actions</action>
     </header>
     <title>
-      <Edit>Baguhin</Edit>
-      <Delete>Burahin</Delete>
+      <Edit>Edit</Edit>
+      <Delete>Delete</Delete>
     </title>
     <action>
-      <AddAction>Magdagdag ng Uri ng Aksyon</AddAction>
+      <AddAction>Add Action Type</AddAction>
     </action>
     <msg>
-      <confirm-delete>Sigurado ka bang gusto mong burahin ang uri ng aksyon na ito?</confirm-delete>
-      <cannot-delete>Hindi mo mabubura ang tipo ng aksyon na ito dahil ito ay ginagamit pa ng sistema.</cannot-delete>
+      <confirm-delete>Are you sure you want to delete this action type?</confirm-delete>
+      <cannot-delete>You cannot remove this action type because the system is still using it.</cannot-delete>
     </msg>
   </UIActionTypeList>
   <!--
@@ -747,31 +747,31 @@
   -->
   <ActionPopup>
     <title>
-      <UIActionTypeForm>Magdagdag ng Uri ng Aksyon</UIActionTypeForm>
+      <UIActionTypeForm>Add Action Type</UIActionTypeForm>
     </title>
   </ActionPopup>
   <UIActionTypeForm>
-    <title>Magdagdag ng Uri ng Aksyon</title>
+    <title>Add Action Type</title>
     <label>
-      <actionType>Palawakin ang Uri ng Aksyon:</actionType>
-      <name>Ang pangalan:</name>
-      <isMove>ay Galaw ng Aksyon:</isMove>
-      <variables>Ang baryabols:</variables>
-      <exo_businessProcessAction>Ang mga Proseso ng Negosyo:</exo_businessProcessAction>
-      <exo_scriptAction>Ang Groovy na mga Script:</exo_scriptAction>
-      <exo_ruleAction>Nakatukoy na mga Tuntunin:</exo_ruleAction>
-      <script>Ang iskrip:</script>
+      <actionType>Extend Action Type:</actionType>
+      <name>Name:</name>
+      <isMove>is Action Move:</isMove>
+      <variables>Variables:</variables>
+      <exo_businessProcessAction>Business Processes:</exo_businessProcessAction>
+      <exo_scriptAction>Groovy Scripts:</exo_scriptAction>
+      <exo_ruleAction>Defined Rules:</exo_ruleAction>
+      <script>Script:</script>
     </label>
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <action-type-added>Ang '{0}' na uri ng aksyon ay matagumpay na naidagdag.</action-type-added>
-      <action-type-create-error>May maling naganap habang gumagawa ng uri ng aksyon.</action-type-create-error>
-      <action-name-invalid>'{0}' ay hindi wasto. Ang pangalan dapat nagsisimula sa 'exo:'.</action-name-invalid>
-      <action-exist>Ang aksyon na ito ay umiiral na sa ECM na sistema.</action-exist>
-      <fileName-invalid>Ang pangalan ng aksyon ay naglalaman ng iilang maling mga karakter.</fileName-invalid>
+      <action-type-added>The '{0}' action type was added successfully.</action-type-added>
+      <action-type-create-error>An error occurred while creating the action type.</action-type-create-error>
+      <action-name-invalid>'{0}' is invalid. The name must begin with 'exo:'.</action-name-invalid>
+      <action-exist>This action already exists in the ECM system.</action-exist>
+      <fileName-invalid>The action name contains some invalid characters.</fileName-invalid>
     </msg>
   </UIActionTypeForm>
   <!--
@@ -781,27 +781,27 @@
   -->
   <UITabPane>
     <title>
-      <UIViewContainer>Ang mga tanawin</UIViewContainer>
-      <ECMTemplate>Eksplorer ng mgaTemplate</ECMTemplate>
-      <UIScriptForm>Ang mga iskrip</UIScriptForm>
-      <UIDialogTab>Ang diyalogo</UIDialogTab>
-      <UIViewTab>Tanawin</UIViewTab>
-      <UITemplateEditForm>Ang template</UITemplateEditForm>
-      <UITemplateForm>Ang template</UITemplateForm>
-      <UITemplateContainer>Ang mga dokumento</UITemplateContainer>
-      <UIActionsTemplateContainer>Ang mga Aksyon</UIActionsTemplateContainer>
-      <UIOthersTemplateContainer>Ang mga iba pa</UIOthersTemplateContainer>
-      <UIActionScriptContainer>Ang aksyon</UIActionScriptContainer>
-      <UIWidgetScriptContainer>Ang mga Widget</UIWidgetScriptContainer>
-      <UIInterceptorScriptContainer>Ang mga Interceptor</UIInterceptorScriptContainer>
+      <UIViewContainer>Views</UIViewContainer>
+      <ECMTemplate>Explorer Templates</ECMTemplate>
+      <UIScriptForm>Scripts</UIScriptForm>
+      <UIDialogTab>Dialog</UIDialogTab>
+      <UIViewTab>View</UIViewTab>
+      <UITemplateEditForm>Template</UITemplateEditForm>
+      <UITemplateForm>Template</UITemplateForm>
+      <UITemplateContainer>Documents</UITemplateContainer>
+      <UIActionsTemplateContainer>Actions</UIActionsTemplateContainer>
+      <UIOthersTemplateContainer>Others</UIOthersTemplateContainer>
+      <UIActionScriptContainer>Action</UIActionScriptContainer>
+      <UIWidgetScriptContainer>Widgets</UIWidgetScriptContainer>
+      <UIInterceptorScriptContainer>Interceptors</UIInterceptorScriptContainer>
 
-      <nodeTypeDefinition>Ang uri ng node</nodeTypeDefinition>
-      <propertyDefinition>Ang pag aari</propertyDefinition>
-      <childNodeDefinition>Ang child node</childNodeDefinition>
-      <SuperTypeTab>Pinakamahusay na mga uri</SuperTypeTab>
-      <DefaultTypeTab>Ang default primary</DefaultTypeTab>
-      <RequiredTypeTab>Ang pangunahing kailangan</RequiredTypeTab>
-      <Contraints>Ang mga limitasyon</Contraints>
+      <nodeTypeDefinition>Node Type</nodeTypeDefinition>
+      <propertyDefinition>Property</propertyDefinition>
+      <childNodeDefinition>Child Node</childNodeDefinition>
+      <SuperTypeTab>Super Types</SuperTypeTab>
+      <DefaultTypeTab>Default Primary</DefaultTypeTab>
+      <RequiredTypeTab>Required Primary</RequiredTypeTab>
+      <Contraints>Constraints</Contraints>
     </title>
   </UITabPane>
   <!--
@@ -811,106 +811,106 @@
   -->
   <UIViewList>
     <title>
-      <View>Ang tanaw</View>
-      <EditInfo>Baguhin</EditInfo>
-      <Delete>Burahin</Delete>
+      <View>View</View>
+      <EditInfo>Edit</EditInfo>
+      <Delete>Delete</Delete>
     </title>
     <header>
-      <name>Ang pangalan</name>
-      <permissions>Ang mga Pahintulot</permissions>
-      <tabList>Ang aksyon ng Tab</tabList>
-      <baseVersion>Base na Bersyon</baseVersion>
-      <action>Ang aksyon</action>
+      <name>Name</name>
+      <permissions>Kebenaran</permissions>
+      <tabList>Action Tab</tabList>
+      <baseVersion>Base Version</baseVersion>
+      <action>Action</action>
     </header>
     <action>
-      <AddView>Magdagdag ng View</AddView>
+      <AddView>Add View</AddView>
     </action>
     <msg>
-      <access-denied>Ang pag-access ay tinanggihan. Wala kang permiso para gamitin ang function na ito.</access-denied>
-      <template-in-use>Hindi maaaring burahin ang {0}. Ito ay kasalukuyang ginagamit.</template-in-use>
-      <confirm-delete>Sigurado ka bang gusto mong burahin ang view na ito?</confirm-delete>
+      <access-denied>Access denied. You do not have permission to use this function.</access-denied>
+      <template-in-use>Cannot delete {0}. It is currently in use.</template-in-use>
+      <confirm-delete>Are you sure you want to delete this view?</confirm-delete>
     </msg>
   </UIViewList>
   <ViewPopup>
     <title>
-      <UIViewFormTabPane>Tignan</UIViewFormTabPane>
+      <UIViewFormTabPane>View</UIViewFormTabPane>
     </title>
   </ViewPopup>
   <AddPopup>
     <title>
-      <UIViewFormTabPane>Magdagdag ng View</UIViewFormTabPane>
-      <AddPopup>Magdagdag ng template</AddPopup>
+      <UIViewFormTabPane>Add View</UIViewFormTabPane>
+      <AddPopup>Add Template</AddPopup>
     </title>
   </AddPopup>
   <EditPopup>
     <title>
-      <UIViewFormTabPane>Baguhin ang View</UIViewFormTabPane>
+      <UIViewFormTabPane>Edit View</UIViewFormTabPane>
     </title>
   </EditPopup>
 
   <UITabList>
     <title>
-      <Edit>Baguhin</Edit>
-      <Delete>Burahin</Delete>
+      <Edit>Edit</Edit>
+      <Delete>Delete</Delete>
     </title>
     <header>
       <tabName>Tab</tabName>
-      <localizeButtons>Ang paglalarawan</localizeButtons>
-      <action>Ang mga Aksyon</action>
+      <localizeButtons>Description</localizeButtons>
+      <action>Actions</action>
     </header>
     <action>
-      <AddTab>Dagdag</AddTab>
+      <AddTab>Add</AddTab>
     </action>
     <msg>
-      <confirm-delete>Sigurado ka bang gusto mong burahin ang tab na ito?</confirm-delete>
+      <confirm-delete>Are you sure you want to delete this tab?</confirm-delete>
     </msg>
     <grid>
       <msg>
-        <empty>Walang tab sa view na ito</empty>
+        <empty>There is no tab on this view</empty>
       </msg>
     </grid>
   </UITabList>
 
   <UIViewPermissionList>
-    <title>Pumili ng May-ari na may mga pahintulot sa view na ito:</title>
+    <title>Select Owner with permissions on this view:</title>
     <label>
-      <permission>{0} sa {1}</permission>
+      <permission>{0} in {1}</permission>
     </label>
     <msg>
-      <confirm-delete>Sigurado ka bang gusto mong burahin ang pahintulot na ito?</confirm-delete>
-      <permission-cannot-empty>Ang pahintulot na view ay kinakailangan at hindi dapat walang laman.</permission-cannot-empty>
+      <confirm-delete>Are you sure you want to delete this permission?</confirm-delete>
+      <permission-cannot-empty>View permission is required and cannot be empty.</permission-cannot-empty>
     </msg>
   </UIViewPermissionList>
 
   <UIViewPermissionList>
     <title>
-      <Delete>Burahin</Delete>
+      <Delete>Delete</Delete>
     </title>
     <header>
-      <friendlyPermission>Ang mga pahintulot</friendlyPermission>
-      <action>Ang aksyon</action>
+      <friendlyPermission>Kebenaran</friendlyPermission>
+      <action>Action</action>
     </header>
     <action>
       <title>
-        <Delete>Burahin</Delete>
+        <Delete>Delete</Delete>
       </title>
     </action>
     <grid>
       <msg>
-        <empty>Walang pahintulot para sa view na ito</empty>
+        <empty>There is no permission on this view</empty>
       </msg>
     </grid>
   </UIViewPermissionList>
 
   <UIViewPermissionForm>
     <action>
-      <Add>Magdagdag</Add>
+      <Add>Add</Add>
     </action>
     <label>
-      <userOrGroup>Ang gumagamit or ang pangkat</userOrGroup>
+      <userOrGroup>User or Group</userOrGroup>
     </label>
     <msg>
-      <permission-exist>Ang pahintulot na '{0}' ay umiiral na sa listahan.</permission-exist>
+      <permission-exist>The permission '{0}' already exists in the list.</permission-exist>
     </msg>
   </UIViewPermissionForm>
 
@@ -921,79 +921,79 @@
   -->
   <UIViewForm>
     <title>
-      <AddPermission>Magdagdag ng Pahhintulot</AddPermission>
-      <RemovePermission>Tanggalin ang pahintulot</RemovePermission>
+      <AddPermission>Tambah kebenaran</AddPermission>
+      <RemovePermission>Remove Permission</RemovePermission>
     </title>
     <msg>
-      <view-name-invalid>Ang pangalan ng view ay kinakailangan.</view-name-invalid>
-      <fileName-invalid>Ang pangalan ng view ay naglalaman ng iilang maling mga karakter.</fileName-invalid>
-      <permission-not-empty>Mangyaring pumili ng permiso para sa view.</permission-not-empty>
-      <mustbe-add-tab>Mangyaring magdagdag ng tab.</mustbe-add-tab>
-      <mustbe-add-permission>Mangyaring pumili ng permiso para sa view na ito</mustbe-add-permission>
-      <view-exist>Ang pangalan ng view ay umiiral na.</view-exist>
+      <view-name-invalid>The view name is required.</view-name-invalid>
+      <fileName-invalid>The view name contains some invalid characters.</fileName-invalid>
+      <permission-not-empty>Please select a permission for the view.</permission-not-empty>
+      <mustbe-add-tab>Please add a tab.</mustbe-add-tab>
+      <mustbe-add-permission>Please select permission for this view</mustbe-add-permission>
+      <view-exist>The view name already exists.</view-exist>
     </msg>
     <label>
-      <viewName>Ang pangalan</viewName>
-      <template>Ang template</template>
-      <version>Ibalik ang bersyon</version>
-      <enableVersion>Paganahin ang Bersyon</enableVersion>
-      <hideExplorerPanel>Itago ang eksplorer na panel sa side bar</hideExplorerPanel>
+      <viewName>Name</viewName>
+      <template>Template</template>
+      <version>Restore Version</version>
+      <enableVersion>Enable Version</enableVersion>
+      <hideExplorerPanel>Hide explorer panel in side bar</hideExplorerPanel>
     </label>
   </UIViewForm>
   <UITabForm>
     <msg>
-      <button-select-error>Mangyaring pumili ng kahit isang function mula sa listahan.</button-select-error>
-      <tab-name-error>Ang pangalan ng tab ay kinakailangan.</tab-name-error>
-      <fileName-invalid>Ang pangalan ng tab ay naglalaman ng iilang maling mga karakter.</fileName-invalid>
+      <button-select-error>Please select at least one function from the list.</button-select-error>
+      <tab-name-error>The tab name is required.</tab-name-error>
+      <fileName-invalid>The tab name contains some invalid characters.</fileName-invalid>
     </msg>
     <label>
-      <version>Ibalik ang bersyon</version>
-      <viewName>Ang pangalan</viewName>
-      <tabName>Ang pangalang ng Tab</tabName>
-      <permission>Ang pahintulot</permission>
-      <tabs>Ang mga Tab</tabs>
-      <template>Ang mga Template</template>
-      <enableVersion>Paganahin ang Bersyon</enableVersion>
-      <addFolder>Magdagdag ng polder</addFolder>
-      <addDocument>Magdagdag ng Dokumento</addDocument>
-      <editDocument>Baguhin ang Dokumento</editDocument>
-      <upload>I-upload</upload>
-      <paste>Idikit</paste>
-      <search>Hanapin</search>
-      <viewReferences>Tingnan ang Mga sanggunian</viewReferences>
-      <viewNodeType>Tingnan ang Uri ng Node</viewNodeType>
-      <viewPermissions>Tingnan ang mga pahintulot</viewPermissions>
-      <viewProperties>Tingnan ang mga ari-arian</viewProperties>
-      <manageVersions>Pangasiwaan ang mga Bersyon</manageVersions>
-      <manageAuditing>Pangasiwaan ang Pag-audit</manageAuditing>
-      <managePublications>Pamahala sa Publikasyon</managePublications>
-      <manageCategories>Pangasiwaan ang mga Kategorya</manageCategories>
-      <manageRelations>Pangasiwaan ang mga Relasyon</manageRelations>
-      <manageActions>Mamahala sa mga Aksyon</manageActions>
-      <exportNode>I-luwas ang Node</exportNode>
-      <importNode>I-angkat ang Node</importNode>
-      <viewRelations>Tingnan ang mga Relasyon</viewRelations>
-      <showJCRStructure>Ipakita ang JCT Structure</showJCRStructure>
-      <watchDocument>Tingnan ang Dokumento</watchDocument>
-      <taggingDocument>I-tag ang Dokumento</taggingDocument>
-      <viewMetadatas>Tingnan ang Metadata</viewMetadatas>
-      <overloadThumbnail>Baguhin ang Larawan ng Icon</overloadThumbnail>
-      <manageHidden>Itago/Ipakita ang Nilalaman</manageHidden>
-      <comment>Ang komento</comment>
-      <vote>Bumoto</vote>
-      <addCategory>Magdagdag ng kategorya</addCategory>
-      <addLocalizationLink>Magdagdag ng Pagsasalin</addLocalizationLink>
-      <publicationRequestApproval>Ang pag-apruba ng Kahilingan</publicationRequestApproval>
-      <publicationApproveContent>Ang pag-apruba ng Nilalaman</publicationApproveContent>
-      <publicationPublish>I-publish</publicationPublish>
-      <contentNavigation>Ang nabigasyon ng nilalaman</contentNavigation>
-      <addSymLink>Magdagdag ng Symlink</addSymLink>
+      <version>Restore Version</version>
+      <viewName>Name</viewName>
+      <tabName>Tab Name</tabName>
+      <permission>Permission</permission>
+      <tabs>Tabs</tabs>
+      <template>Templates</template>
+      <enableVersion>Enable Version</enableVersion>
+      <addFolder>Add Folder</addFolder>
+      <addDocument>Add Document</addDocument>
+      <editDocument>Edit Document</editDocument>
+      <upload>Upload</upload>
+      <paste>Paste</paste>
+      <search>Search</search>
+      <viewReferences>View References</viewReferences>
+      <viewNodeType>View Node Type</viewNodeType>
+      <viewPermissions>View Permissions</viewPermissions>
+      <viewProperties>View Properties</viewProperties>
+      <manageVersions>Manage Versions</manageVersions>
+      <manageAuditing>Manage Auditing</manageAuditing>
+      <managePublications>Manage Publication</managePublications>
+      <manageCategories>Manage Categories</manageCategories>
+      <manageRelations>Manage Relations</manageRelations>
+      <manageActions>Manage Actions</manageActions>
+      <exportNode>Export Node</exportNode>
+      <importNode>Import Node</importNode>
+      <viewRelations>View Relations</viewRelations>
+      <showJCRStructure>Show JCR Structure</showJCRStructure>
+      <watchDocument>Watch Document</watchDocument>
+      <taggingDocument>Tag Document</taggingDocument>
+      <viewMetadatas>View Metadata</viewMetadatas>
+      <overloadThumbnail>Change Icon Image</overloadThumbnail>
+      <manageHidden>Hide/Show Content</manageHidden>
+      <comment>Comment</comment>
+      <vote>Vote</vote>
+      <addCategory>Add Category</addCategory>
+      <addLocalizationLink>Add Translation</addLocalizationLink>
+      <publicationRequestApproval>Request Approval</publicationRequestApproval>
+      <publicationApproveContent>Approve Content</publicationApproveContent>
+      <publicationPublish>Publish</publicationPublish>
+      <contentNavigation>Content Navigation</contentNavigation>
+      <addSymLink>Add Symlink</addSymLink>
       <checkIn>Check In</checkIn>
       <checkOut>Check Out</checkOut>
-      <shareDocuments>Ibahagi</shareDocuments>
-      <openDocument>Ang remote na Pag-edit</openDocument>
-      <editProperty>Baguhin ang mga Katangian ng Dokumento</editProperty>
-      <uploadNewVersion>Mag-upload ng bagong bersyon</uploadNewVersion>
+      <shareDocuments>Share</shareDocuments>
+      <openDocument>Remote Edit</openDocument>
+      <editProperty>Edit Document Properties</editProperty>
+      <uploadNewVersion>Upload a new version</uploadNewVersion>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -1008,36 +1008,36 @@
   <UIViewFormTabPane>
     <tab>
       <label>
-        <UITabContainer>Ang aksyon</UITabContainer>
-        <UIViewForm>Tignan</UIViewForm>
-        <UIViewPermissionContainer>Ang pahintulot</UIViewPermissionContainer>
+        <UITabContainer>Action</UITabContainer>
+        <UIViewForm>View</UIViewForm>
+        <UIViewPermissionContainer>Permission</UIViewPermissionContainer>
       </label>
     </tab>
     <action>
       <Save>#{word.save}</Save>
-      <Reset>I-reset</Reset>
+      <Reset>Reset</Reset>
       <Cancel>#{word.cancel}</Cancel>
       <Close>#{word.close}</Close>
-      <Restore>Ibalik</Restore>
+      <Restore>Restore</Restore>
     </action>
   </UIViewFormTabPane>
   <PopupViewPermission>
     <title>
-      <UIPermissionSelector>Ang tagapili ng Pahintulot</UIPermissionSelector>
+      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
     </title>
   </PopupViewPermission>
 
   <TabForm_Popup>
     <title>
-      <UITabForm>Magdagdag/baguhin ng Tab</UITabForm>
+      <UITabForm>Add/Edit Tab</UITabForm>
     </title>
   </TabForm_Popup>
 
   <tab_permission>
     <title>
-      <SelectUser>Pumili ng tagagamit</SelectUser>
-      <SelectMember>Pumili ng Miyembro</SelectMember>
-      <AddAny>Kahit ano</AddAny>
+      <SelectUser>Select User</SelectUser>
+      <SelectMember>Select Member</SelectMember>
+      <AddAny>Any</AddAny>
     </title>
   </tab_permission>
   <!--
@@ -1047,24 +1047,24 @@
   -->
   <UIECMTemplateList>
     <title>
-      <View>Tignan</View>
-      <EditInfo>Baguhin</EditInfo>
-      <Delete>Burahin</Delete>
+      <View>View</View>
+      <EditInfo>Edit</EditInfo>
+      <Delete>Delete</Delete>
     </title>
     <header>
-      <name>Pangalan</name>
-      <path>Ang halaga</path>
-      <baseVersion>Base na Bersyon</baseVersion>
-      <action>Ang aksyon</action>
+      <name>Name</name>
+      <path>Value</path>
+      <baseVersion>Base Version</baseVersion>
+      <action>Action</action>
     </header>
     <action>
-      <Add>Dagdag</Add>
+      <Add>Add</Add>
     </action>
     <msg>
-      <template-in-use>Hindi maaaring burahin ang {0}. Ito ay kasalukuyang ginagamit.</template-in-use>
-      <confirm-delete>Sigurado ka bang gusto mong burahin ang template na ito?</confirm-delete>
-      <access-denied>Ang pag-access ay tinanggihan. Wala kang pahintulot para gamitin ang function na ito.</access-denied>
-      <delete-permission-denied>Wala kang pahintulot para burahin ang '{0}' na template.</delete-permission-denied>
+      <template-in-use>Cannot delete {0}. It is currently in use.</template-in-use>
+      <confirm-delete>Are you sure you want to delete this template?</confirm-delete>
+      <access-denied>Access denied. You do not have permission to use this function.</access-denied>
+      <delete-permission-denied>You do not have permission to delete '{0}' template.</delete-permission-denied>
     </msg>
   </UIECMTemplateList>
   <!--
@@ -1074,37 +1074,37 @@
   -->
   <UITemplateForm>
     <title>
-      <AddPermission>Magdagdag ng Pahhintulot</AddPermission>
+      <AddPermission>Tambah kebenaran</AddPermission>
     </title>
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
-      <Reset>I-reset</Reset>
-      <Restore>Ibalik</Restore>
+      <Reset>Reset</Reset>
+      <Restore>Restore</Restore>
       <Refresh>#{word.refresh}</Refresh>
     </action>
     <msg>
-      <version-restored>Bersyon na {0} ay matagumpay na naibalik.</version-restored>
-      <role-require>Mangyaring pumili ng pahintulot.</role-require>
-      <template-name-exist>Ang pangalan ng template na '{0}' ay umiiral na.</template-name-exist>
-      <add-permission-denied>Wala kang pahintulot para magdagdag ng bagong template.</add-permission-denied>
-      <edit-permission-denied>Wala kang pahintulot para baguhin ang '{0}' na template.</edit-permission-denied>
+      <version-restored>Version {0} was restored successfully.</version-restored>
+      <role-require>Please select a permission.</role-require>
+      <template-name-exist>The template name '{0}' already exists.</template-name-exist>
+      <add-permission-denied>You do not have permission to add a new template.</add-permission-denied>
+      <edit-permission-denied>You do not have permission to modify '{0}' template.</edit-permission-denied>
     </msg>
     <tab>
       <label>
-        <template>Ang template</template>
-        <defaultDialog>Ang diyalogo</defaultDialog>
-        <defaultView>Ang tanaw</defaultView>
+        <template>Template</template>
+        <defaultDialog>Dialog</defaultDialog>
+        <defaultView>View</defaultView>
       </label>
     </tab>
     <label>
-      <name>Ang pangalan:</name>
-      <label>Ang tatak:</label>
-      <isDocumentTemplate>ay Dokumentong Template:</isDocumentTemplate>
-      <dialog>Ang nilalaman ng Diyalogo</dialog>
-      <view>Tingnan ang Nilalaman</view>
-      <permission>Ang pahintulot:</permission>
-      <selectPemistion>Ang pahintulot</selectPemistion>
+      <name>Name:</name>
+      <label>Label:</label>
+      <isDocumentTemplate>is Document Template:</isDocumentTemplate>
+      <dialog>Dialog Content</dialog>
+      <view>View Content</view>
+      <permission>Permission:</permission>
+      <selectPemistion>Permission</selectPemistion>
     </label>
   </UITemplateForm>
   <!--
@@ -1114,27 +1114,27 @@
   -->
   <ecmTempForm>
     <label>
-      <version>Pumili ng Bersyon:</version>
-      <content>Ang nilalaman:</content>
-      <name>Ang pangalan:</name>
-      <homeTemplate>Ang uri ng Template:</homeTemplate>
-      <enableVersion>Ang pinaganang Bersyon:</enableVersion>
+      <version>Select Version:</version>
+      <content>Content:</content>
+      <name>Name:</name>
+      <homeTemplate>Template Type:</homeTemplate>
+      <enableVersion>Enabled Version:</enableVersion>
     </label>
   </ecmTempForm>
   <ecmTempFormPopup>
     <title>
-      <ecmTempForm>Magdagdag/I-edit ang View Template</ecmTempForm>
+      <ecmTempForm>Add/Edit View Template</ecmTempForm>
     </title>
   </ecmTempFormPopup>
   <ecmTempFormAdd>
     <title>
-      <ecmTempForm>Magdagdag ng Explorer Template</ecmTempForm>
-      <ecmTempFormAdd>Magdagdag ng Explorer Template</ecmTempFormAdd>
+      <ecmTempForm>Add Explorer Template</ecmTempForm>
+      <ecmTempFormAdd>Add Explorer Template</ecmTempFormAdd>
     </title>
   </ecmTempFormAdd>
   <ecmTempFormEdit>
     <title>
-      <ecmTempForm>I-edit ang Explorer sa Template</ecmTempForm>
+      <ecmTempForm>Edit Explorer Template</ecmTempForm>
     </title>
   </ecmTempFormEdit>
 
@@ -1150,7 +1150,7 @@
   -->
   <UIECMFilterForm>
     <label>
-      <selectScript>Pumili ng Kategorya</selectScript>
+      <selectScript>Select Category</selectScript>
     </label>
   </UIECMFilterForm>
   <!--
@@ -1162,20 +1162,20 @@
     <action>
       <Edit>#{word.edit}</Edit>
       <Delete>#{word.delete}</Delete>
-      <AddNew>Magdagdag ng Script</AddNew>
+      <AddNew>Add Script</AddNew>
     </action>
     <msg>
-      <confirm-delete>Sigurado ka bang gusto mong burahin ang script na ito?</confirm-delete>
+      <confirm-delete>Are you sure you want to delete this script?</confirm-delete>
     </msg>
     <header>
-      <scriptName>Ang pangalan</scriptName>
-      <path>Ang iskrip</path>
-      <baseVersion>Base sa Bersyon</baseVersion>
-      <action>Ang mga Aksyon</action>
+      <scriptName>Name</scriptName>
+      <path>Script</path>
+      <baseVersion>Base Version</baseVersion>
+      <action>Actions</action>
     </header>
     <tooltip>
-      <Edit>Baguhin</Edit>
-      <Delete>Burahin</Delete>
+      <Edit>Edit</Edit>
+      <Delete>Delete</Delete>
     </tooltip>
   </UIScriptList>
   <!--
@@ -1195,13 +1195,13 @@
       <Restore>#{word.restore}</Restore>
       <Cancel>#{word.cancel}</Cancel>
       <Refresh>#{word.refresh}</Refresh>
-      <Change>Ang palitan</Change>
+      <Change>Change</Change>
     </action>
     <msg>
-      <version-restored>Ang Bersyon {0} ay matagumpay na naibalik.</version-restored>
-      <name-null>Mangyaring ipasok ang pangalan ng iskrip.</name-null>
-      <name-exist>Ang pangalan ng script na '{0}' ay umiiral na.</name-exist>
-      <fileName-invalid>Ang pangalan ng script ay mayroong hindi wastong mga karakter.</fileName-invalid>
+      <version-restored>Version {0} was restored successfully.</version-restored>
+      <name-null>Please enter the script name.</name-null>
+      <name-exist>The script name '{0}' already exists.</name-exist>
+      <fileName-invalid>The script name has some invalid characters.</fileName-invalid>
     </msg>
   </UIScriptForm>
   <!--
@@ -1211,16 +1211,16 @@
   -->
   <ScriptContainerPopup>
     <title>
-      <UIScriptForm>Magdagdag/baguhin ang iskrip</UIScriptForm>
+      <UIScriptForm>Add/Edit Script</UIScriptForm>
     </title>
   </ScriptContainerPopup>
   <UIScriptForm>
     <label>
-      <selectVersion>Ang mga Bersyon</selectVersion>
-      <scriptContent>Ang nilalaman</scriptContent>
-      <scriptLabel>Ang pangalan</scriptLabel>
-      <scriptName>Ang iskrip</scriptName>
-      <enableVersion>Paganahin ang Pagbe-bersyon</enableVersion>
+      <selectVersion>Versions</selectVersion>
+      <scriptContent>Content</scriptContent>
+      <scriptLabel>Name</scriptLabel>
+      <scriptName>Script</scriptName>
+      <enableVersion>Enable Versioning</enableVersion>
     </label>
   </UIScriptForm>
   <!--
@@ -1231,11 +1231,11 @@
 
   <ecmScriptForm>
     <label>
-      <selectVersion>Ang mga Bersyon</selectVersion>
-      <scriptContent>Ang nilalaman</scriptContent>
-      <scriptLabel>Ang pangalan</scriptLabel>
-      <scriptName>Ang iskrip</scriptName>
-      <enableVersion>Paganahin ang Pagbe-bersyon</enableVersion>
+      <selectVersion>Versions</selectVersion>
+      <scriptContent>Content</scriptContent>
+      <scriptLabel>Name</scriptLabel>
+      <scriptName>Script</scriptName>
+      <enableVersion>Enable Versioning</enableVersion>
     </label>
   </ecmScriptForm>
   <!--
@@ -1248,34 +1248,34 @@
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
     </action>
-    <title>Magdagdag ng kategorya</title>
+    <title>Add Category</title>
     <label>
-      <taxonomyName>Ang pangalan ng Kategorya</taxonomyName>
-      <parentPath>Ang magulang</parentPath>
+      <taxonomyName>Category Name</taxonomyName>
+      <parentPath>Parent</parentPath>
     </label>
     <msg>
-      <exist>Ang "{0}" na kategorya ay umiiral na.</exist>
-      <name-null>Mangyaring tukuyin ang pangalan ng kategorya.</name-null>
-      <name-invalid>Ang pangalan ng kategorya ay mayroong hindi wastong mga karakter.</name-invalid>
-      <name-too-long>Ang pangalan ng kategorya ay dapat mayroong hindi aabot sa 30 na mga karakter.</name-too-long>
+      <exist>The "{0}" category already exists.</exist>
+      <name-null>Please specify the category name.</name-null>
+      <name-invalid>The category name has some invalid characters.</name-invalid>
+      <name-too-long>The category name must have less than 30 characters.</name-too-long>
     </msg>
   </UITaxonomyForm>
 
   <EditTaxonomyTreePopup>
     <title>
-      <UITaxonomyTreeContainer>Baguhin ang Puno ng Kategorya</UITaxonomyTreeContainer>
+      <UITaxonomyTreeContainer>Edit Category Tree</UITaxonomyTreeContainer>
     </title>
   </EditTaxonomyTreePopup>
 
   <AddTaxonomyTreePopup>
     <title>
-      <UITaxonomyTreeContainer>Magdagdag ng Puno ng Kategorya</UITaxonomyTreeContainer>
+      <UITaxonomyTreeContainer>Add Category Tree</UITaxonomyTreeContainer>
     </title>
   </AddTaxonomyTreePopup>
 
   <TaxonomyPopupCreateChild>
     <title>
-      <UITaxonomyTreeCreateChildForm>Baguhin ang Puno ng Kategorya</UITaxonomyTreeCreateChildForm>
+      <UITaxonomyTreeCreateChildForm>Edit Category Tree</UITaxonomyTreeCreateChildForm>
     </title>
   </TaxonomyPopupCreateChild>
 
@@ -1285,27 +1285,27 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
-      <parentPath>Ang magulang:</parentPath>
-      <taxonomyName>Ang pangalan ng kategorya:</taxonomyName>
+      <parentPath>Parent:</parentPath>
+      <taxonomyName>Category Name:</taxonomyName>
     </label>
     <msg>
-      <name-null>Ang pangalan ng kategorya ay walang laman.</name-null>
-      <name-invalid>Ang pangalan ng kategorya ay hindi wasto.</name-invalid>
-      <name-too-long>Ang pangalan ng kategorya ay dapat hindi lalagpas sa {0} na mga character.</name-too-long>
-      <exist>Umiiral na ang pangalan ng kategorya.</exist>
+      <name-null>The category name is empty.</name-null>
+      <name-invalid>The category name is invalid.</name-invalid>
+      <name-too-long>The category name must not have more than {0} characters.</name-too-long>
+      <exist>The category name already exists.</exist>
     </msg>
   </UITaxonomyTreeCreateChildForm>
 
   <PopupComponent>
     <title>
-      <UIOneNodePathSelector>Pumili ng daanan</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Select Path</UIOneNodePathSelector>
     </title>
   </PopupComponent>
 
   <TaxoPopupUserSelector>
     <title>
-      <TaxoTreeSelectUserOrGroup>Pumili ng gumagamit</TaxoTreeSelectUserOrGroup>
-      <UIPermissionTreeSelectUser>Pumili ng gumagamit</UIPermissionTreeSelectUser>
+      <TaxoTreeSelectUserOrGroup>Select User</TaxoTreeSelectUserOrGroup>
+      <UIPermissionTreeSelectUser>Select User</UIPermissionTreeSelectUser>
     </title>
   </TaxoPopupUserSelector>
 
@@ -1366,7 +1366,7 @@
       <name>Name</name>
       <workspace>Workspace</workspace>
       <homePath>Path</homePath>
-      <permissions>Permissions</permissions>
+      <permissions>Kebenaran</permissions>
     </label>
     <msg>
       <homapath-emty>Input Path</homapath-emty>
@@ -1386,7 +1386,7 @@
     <title>Add a permission to this node</title>
     <action>
       <Close>#{word.close}</Close>
-      <Save>Save</Save>
+      <Save>Simpan</Save>
       <Reset>Reset</Reset>
     </action>
     <msg>
@@ -1411,7 +1411,7 @@
 
   <PopupDrivePermission>
     <title>
-      <AddDrivePermissionSelector>Add Permission</AddDrivePermissionSelector>
+      <AddDrivePermissionSelector>Tambah kebenaran</AddDrivePermissionSelector>
       <UIPermissionSelector>Select Permission</UIPermissionSelector>
     </title>
   </PopupDrivePermission>
@@ -1520,7 +1520,7 @@
     <header>
       <name>Type</name>
       <action>Action</action>
-      <label>Ang template</label>
+      <label>Template</label>
       <icon>Icon</icon>
     </header>
     <action>
@@ -1528,7 +1528,7 @@
     </action>
     <msg>
       <confirm-delete>Do you really want to delete?</confirm-delete>
-      <access-denied>Ang pag-access ay tinanggihan. Wala kang permiso para gamitin ang function na ito.</access-denied>
+      <access-denied>Access denied. You do not have permission to use this function.</access-denied>
       <editing-template>Access denied. You cannot delete and edit the template simultaneously.</editing-template>
       <template-not-exist>The template that you are trying to delete doesn't exist.</template-not-exist>
     </msg>
@@ -1538,7 +1538,7 @@
     <header>
       <name>Type</name>
       <action>Action</action>
-      <label>Ang template</label>
+      <label>Template</label>
       <icon>Icon</icon>
     </header>
     <action>
@@ -1546,7 +1546,7 @@
     </action>
     <msg>
       <confirm-delete>Do you really want to delete?</confirm-delete>
-      <access-denied>Ang pag-access ay tinanggihan. Wala kang permiso para gamitin ang function na ito.</access-denied>
+      <access-denied>Access denied. You do not have permission to use this function.</access-denied>
       <editing-template>Access denied. You cannot delete and edit this template simultaneously.</editing-template>
       <template-not-exist>The template that you are trying to delete doesn't exist.</template-not-exist>
     </msg>
@@ -1555,7 +1555,7 @@
   <UIOthersTemplateList>
     <header>
       <name>Type</name>
-      <label>Ang template</label>
+      <label>Template</label>
       <icon>Icon</icon>
       <action>Action</action>
     </header>
@@ -1564,7 +1564,7 @@
     </action>
     <msg>
       <confirm-delete>Do you really want to delete?</confirm-delete>
-      <access-denied>Ang pag-access ay tinanggihan. Wala kang permiso para gamitin ang function na ito.</access-denied>
+      <access-denied>Access denied. You do not have permission to use this function.</access-denied>
       <editing-template>Access denied. You cannot delete and edit this template simultaneously.</editing-template>
       <template-not-exist>The template that you are trying to delete doesn't exist.</template-not-exist>
     </msg>
@@ -1592,7 +1592,7 @@
     <header>
       <title>Name</title>
       <action>Action</action>
-      <template>Ang template</template>
+      <template>Template</template>
     </header>
     <action>
       <AddTemplate>Add Template</AddTemplate>
@@ -1601,7 +1601,7 @@
     </action>
     <msg>
       <confirm-delete>Are you sure you want to delete this template?</confirm-delete>
-      <access-denied>Ang pag-access ay tinanggihan. Wala kang permiso para gamitin ang function na ito.</access-denied>
+      <access-denied>Access denied. You do not have permission to use this function.</access-denied>
       <editing-template>Access denied. You cannot delete and edit this template simultaneously.</editing-template>
       <template-not-exist>The template that you are trying to delete doesn't exist.</template-not-exist>
     </msg>
@@ -1611,7 +1611,7 @@
     <header>
       <title>Name</title>
       <action>Action</action>
-      <template>Ang template</template>
+      <template>Template</template>
     </header>
     <title>
       <Edit>Edit</Edit>
@@ -1628,7 +1628,7 @@
     <header>
       <title>Name</title>
       <action>Action</action>
-      <template>Ang template</template>
+      <template>Template</template>
     </header>
     <action>
       <AddTemplate>Add Template</AddTemplate>
@@ -1755,7 +1755,7 @@
       <UITemplateContent>ViewForm</UITemplateContent>
       <UIPopupWindow>View Permission</UIPopupWindow>
       <selectVersion>Versions</selectVersion>
-      <content>Ang nilalaman:</content>
+      <content>Content:</content>
       <name>Name:</name>
       <isDocumentTemplate>is Document Template</isDocumentTemplate>
       <viewPermission>Permission:</viewPermission>
@@ -1768,11 +1768,11 @@
       <UITemplateContent>DialogForm</UITemplateContent>
       <UIPopupWindow>Dialog Permission</UIPopupWindow>
       <selectVersion>Versions</selectVersion>
-      <content>Ang nilalaman:</content>
+      <content>Content:</content>
       <name>Name:</name>
       <isDocumentTemplate>is Document Template</isDocumentTemplate>
       <viewPermission>Permission:</viewPermission>
-      <enableVersion>Paganahin ang Pagbe-bersyon</enableVersion>
+      <enableVersion>Enable Versioning</enableVersion>
     </label>
     <title>Add/Edit Dialog</title>
   </DialogForm>
@@ -1815,7 +1815,7 @@
     <label>
       <name>Name:</name>
       <label>Label:</label>
-      <isDocumentTemplate>ay Dokumentong Template:</isDocumentTemplate>
+      <isDocumentTemplate>is Document Template:</isDocumentTemplate>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -1884,11 +1884,11 @@
     <msg>
       <name-invalid>The field name must not contain special characters.</name-invalid>
       <roles-invalid>The Permission field is required.</roles-invalid>
-      <version-restored>Bersyon na {0} ay matagumpay na naibalik.</version-restored>
+      <version-restored>Version {0} was restored successfully.</version-restored>
       <name-exist>The name '{0}' already exists.</name-exist>
     </msg>
     <title>
-      <AddPermission>Add Permission</AddPermission>
+      <AddPermission>Tambah kebenaran</AddPermission>
       <RemovePermission>Remove Permission</RemovePermission>
     </title>
   </UITemplateContent>
@@ -1927,7 +1927,7 @@
       <name>Name</name>
       <type>Type</type>
       <statement>Statement</statement>
-      <permission>Permissions</permission>
+      <permission>Kebenaran</permission>
       <action>Actions</action>
     </header>
     <action>
@@ -1949,7 +1949,7 @@
       <type>Query Type</type>
       <statement>Statement</statement>
       <cache>Enable Cache Results</cache>
-      <permissions>Permissions</permissions>
+      <permissions>Kebenaran</permissions>
       <PermissionButton>UIQueriesForm</PermissionButton>
     </label>
     <action>
@@ -2087,17 +2087,17 @@
   </UIFormInputSetWithAction>
   <template>
     <title>
-      <AddPermission>Add Permission</AddPermission>
+      <AddPermission>Tambah kebenaran</AddPermission>
     </title>
   </template>
   <metadataTypeTab>
     <title>
-      <AddPermission>Add Permission</AddPermission>
+      <AddPermission>Tambah kebenaran</AddPermission>
     </title>
   </metadataTypeTab>
   <PermissionButton>
     <title>
-      <AddPermission>Add Permission</AddPermission>
+      <AddPermission>Tambah kebenaran</AddPermission>
     </title>
   </PermissionButton>
   <nodeTypeDefinition>
@@ -2113,7 +2113,7 @@
   </childNodeDefinition>
   <propertyDefinition>
     <title>
-      <AddConstraints>Magdagdag ng Limitasyon</AddConstraints>
+      <AddConstraints>Add Constraints</AddConstraints>
     </title>
   </propertyDefinition>
   <authInputSet>
@@ -2142,7 +2142,7 @@
   </ECMTemplate>
   <step1>
     <title>
-      <AddPermission>Add Permission</AddPermission>
+      <AddPermission>Tambah kebenaran</AddPermission>
     </title>
   </step1>
   <step2>
@@ -2280,7 +2280,7 @@
   </DriveInputSet>
   <UIPermissionTreeInfo>
     <msg>
-      <confirm-delete-permission>Sigurado ka bang gusto mong burahin ang pahintulot na ito?</confirm-delete-permission>
+      <confirm-delete-permission>Are you sure you want to delete this permission?</confirm-delete-permission>
       <no-permission-remove>You cannot remove the owner or the system user.</no-permission-remove>
     </msg>
   </UIPermissionTreeInfo>
@@ -2300,7 +2300,7 @@
   <UIUnLockForm>
     <label>
       <name>Path Node</name>
-      <permissions>Permissions</permissions>
+      <permissions>Kebenaran</permissions>
       <PermissionButton>UI Unlock Form</PermissionButton>
     </label>
     <action>
@@ -2397,11 +2397,11 @@
       <UITemplateContent>SkinForm</UITemplateContent>
       <UIPopupWindow>Skin Permission</UIPopupWindow>
       <selectVersion>Versions</selectVersion>
-      <content>Ang nilalaman:</content>
+      <content>Content:</content>
       <name>Name:</name>
       <isDocumentTemplate>is Document Template</isDocumentTemplate>
       <viewPermission>Permission:</viewPermission>
-      <enableVersion>Paganahin ang Pagbe-bersyon</enableVersion>
+      <enableVersion>Enable Versioning</enableVersion>
     </label>
     <title>Add/Edit Skin</title>
   </SkinForm>
@@ -2476,7 +2476,7 @@
     </msg>
   </UITagPermissionInfo>
   <UITagPermissionForm>
-    <title>Add Permission</title>
+    <title>Tambah kebenaran</title>
     <action>
       <Save>#{word.save}</Save>
       <Add>Add</Add>
