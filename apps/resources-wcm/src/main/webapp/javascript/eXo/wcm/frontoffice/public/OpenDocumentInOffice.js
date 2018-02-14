@@ -65,7 +65,7 @@
   OpenDocumentInOffice.prototype.updateLabel = function(objId, activityId, rightClick){
     var currentDocumentObj = {};
     gj.ajax({
-      url: restPrefix+"/office/updateDocumentTitle?objId=" + encodeURI(objId)+"&lang="+eXo.env.portal.language,
+      url: restPrefix+"/office/updateDocumentTitle?objId=" + encodeURIComponent(objId)+"&lang="+eXo.env.portal.language,
       dataType: "text",
       type: "GET",
       async:false,
