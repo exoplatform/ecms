@@ -359,7 +359,7 @@
       <ColumnPageConfigs>カラム ページ設定</ColumnPageConfigs>
       <RowPageConfigs>ロウ ページ設定</RowPageConfigs>
       <TabsPageConfigs>タブ ページ設定</TabsPageConfigs>
-      <MixPageConfigs>Mixed</MixPageConfigs>
+      <MixPageConfigs>ミックス</MixPageConfigs>
     </item>
   </UIDropDownPageTemp>
 
@@ -370,14 +370,14 @@
       <Search>検索</Search>
       <Sitemap>サイトマップ</Sitemap>
       <TwoColumnsLayout>2カラム　レイアウト</TwoColumnsLayout>
-      <ThreeColumnsLayout>3カラム　レイアウト</ThreeColumnsLayout>
+      <ThreeColumnsLayout>3列 レイアウト</ThreeColumnsLayout>
       <TwoRowsLayout>2ロウ　レイアウト</TwoRowsLayout>
       <ThreeRowsLayout>3ロウ　レイアウト</ThreeRowsLayout>
       <TwoTabsLayout>2タブ　レイアウト</TwoTabsLayout>
       <ThreeTabsLayout>3タブ　レイアウト</ThreeTabsLayout>
       <TwoColumnsOneRowLayout>2カラム 1ロウ レイアウト</TwoColumnsOneRowLayout>
-      <OneRowTwoColumnsLayout>1ロウ 2カラム レイアウト</OneRowTwoColumnsLayout>
-      <ThreeRowsTwoColumnsLayout>3ロウ 2カラム レイアウト</ThreeRowsTwoColumnsLayout>
+      <OneRowTwoColumnsLayout>1行 &amp; 2列 レイアウト</OneRowTwoColumnsLayout>
+      <ThreeRowsTwoColumnsLayout>3行 &amp; 2列 レイアウト</ThreeRowsTwoColumnsLayout>
     </label>
   </UIWizardPageSelectLayoutForm>
 
@@ -450,7 +450,7 @@
 
   <UIViewMetadataForm>
     <msg>
-      <Invalid-number>Please enter a valid number.</Invalid-number>
+      <Invalid-number>有効な番号を入力してください。</Invalid-number>
     </msg>
   </UIViewMetadataForm>
 </bundle>

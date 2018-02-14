@@ -16,8 +16,8 @@
     </tab>
     <label>
       <UITaxonomyManagerTrees>カテゴリー</UITaxonomyManagerTrees>
-      <UIMetadataManager>メタデータ観覧</UIMetadataManager>
-      <UINamespaceManager>名前空間</UINamespaceManager>
+      <UIMetadataManager>メタデータ</UIMetadataManager>
+      <UINamespaceManager>ネームスペース</UINamespaceManager>
       <UINodeTypeManager>ノードタイプ</UINodeTypeManager>
       <UITemplatesManager>ドキュメント</UITemplatesManager>
       <UICLVTemplatesManager>一覧</UICLVTemplatesManager>
@@ -26,11 +26,11 @@
       <UIQueriesManager>クエリ</UIQueriesManager>
       <UIActionManager>アクション</UIActionManager>
       <UIScriptManager>スクリプト</UIScriptManager>
-      <UIUnLockManager>ロックの管理</UIUnLockManager>
-      <UIFolksonomyManager>パブリックタグ</UIFolksonomyManager>
+      <UIUnLockManager>ロック</UIUnLockManager>
+      <UIFolksonomyManager>タグ</UIFolksonomyManager>
     </label>
     <msg>
-      <access-denied>アクセスできません！権限がありません</access-denied>
+      <access-denied>アクセスが拒否されました: このアクションを実行する権限がありません。</access-denied>
     </msg>
   </UIECMAdminControlPanel>
   <!--
@@ -40,7 +40,7 @@
   -->
   <UITaxonomyWorkingArea>
     <msg>
-      <referential-integrity>ソースフォルダから読めないか、目的のカテゴリはサブカテゴリです。</referential-integrity>
+      <referential-integrity>ソースファイルから読めないか、目的のカテゴリはサブカテゴリです。</referential-integrity>
       <no-taxonomy-selected>少なくとも一つのカテゴリのコピーかカットをする必要があります。</no-taxonomy-selected>
       <node-is-cutting>ここに貼付けることができません。恐らく、分類ノード '{0}' はカットされています。</node-is-cutting>
       <can-not-paste>貼付けるためのクリップボードにデータがありません。</can-not-paste>
@@ -977,7 +977,7 @@
       <watchDocument>ドキュメント観覧</watchDocument>
       <taggingDocument>ドキュメントにタグ付け</taggingDocument>
       <viewMetadatas>メタデータ観覧</viewMetadatas>
-      <overloadThumbnail>Change Icon Image</overloadThumbnail>
+      <overloadThumbnail>アイコン画像の変更</overloadThumbnail>
       <manageHidden>コンテンツの表示/非表示</manageHidden>
       <comment>コメント</comment>
       <vote>ドキュメントに投票</vote>

@@ -245,7 +245,7 @@
     <dialog>
       <label>
         <version-history>Version History</version-history>
-        <base-version>Base na Bersyon</base-version>
+        <base-version>Base Version</base-version>
         <is-checked-out>Is Checked out</is-checked-out>
         <predecessors>Predecessors</predecessors>
         <merge-failed>Merge Failed</merge-failed>
