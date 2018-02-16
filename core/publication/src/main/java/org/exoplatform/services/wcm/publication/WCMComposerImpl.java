@@ -382,9 +382,7 @@ public class WCMComposerImpl implements WCMComposer, Startable {
 
     long totalSize = (filters.get(FILTER_TOTAL)!=null)?new Long(filters.get(FILTER_TOTAL)):0;
     if (totalSize == 0) {
-      NodeIterator nodeIterator;
-      SessionProvider systemProvider = WCMCoreUtils.getSystemSessionProvider();
-      nodeIterator = getViewableContents(workspace, path, filters, systemProvider, false);
+      NodeIterator nodeIterator = getViewableContents(workspace, path, filters, sessionProvider, false);
       if (nodeIterator != null) {
         totalSize = nodeIterator.getSize();
       }
