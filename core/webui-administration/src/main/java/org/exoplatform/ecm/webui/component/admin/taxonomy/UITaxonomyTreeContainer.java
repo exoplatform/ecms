@@ -43,8 +43,11 @@ import org.exoplatform.services.cms.taxonomy.TaxonomyTreeData;
 import org.exoplatform.services.cms.taxonomy.impl.TaxonomyAlreadyExistsException;
 import org.exoplatform.services.cms.taxonomy.impl.TaxonomyNodeAlreadyExistsException;
 import org.exoplatform.services.jcr.RepositoryService;
+import org.exoplatform.services.jcr.access.AccessControlEntry;
+import org.exoplatform.services.jcr.access.AccessControlList;
 import org.exoplatform.services.jcr.access.PermissionType;
 import org.exoplatform.services.jcr.core.ExtendedNode;
+import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -236,20 +239,31 @@ public class UITaxonomyTreeContainer extends UIContainer implements UISelectable
       if (PermissionUtil.canChangePermission(node)) {
         if (node.canAddMixin("exo:privilegeable")){
           node.addMixin("exo:privilegeable");
-          node.setPermission(Utils.getNodeOwner(node),PermissionType.ALL);
         }
-        if(PermissionUtil.canChangePermission(node)) {
-          for(PermissionBean permBean : permBeans) {
-            List<String> permsList = new ArrayList<String>();
-            if (permBean.isRead()) permsList.add(PermissionType.READ);
-            if (permBean.isAddNode()) permsList.add(PermissionType.ADD_NODE);
-            if (permBean.isRemove()) permsList.add(PermissionType.REMOVE);
-//            if (permBean.isSetProperty()) permsList.add(PermissionType.SET_PROPERTY);
+        if (node.isNodeType("exo:privilegeable")) {
+          AccessControlList acl = node.getACL();
+          List<AccessControlEntry> permissionEntries = acl.getPermissionEntries();
+          String nodeOwner = Utils.getNodeOwner(node);
+          for (AccessControlEntry accessControlEntry : permissionEntries) {
+            String identity = accessControlEntry.getIdentity();
+            if (IdentityConstants.SYSTEM.equals(identity) || identity.equals(nodeOwner)) {
+              continue;
+            }
+            node.removePermission(identity);
+          }
+          node.setPermission(nodeOwner,PermissionType.ALL);
+          if(PermissionUtil.canChangePermission(node)) {
+            for(PermissionBean permBean : permBeans) {
+              List<String> permsList = new ArrayList<String>();
+              if (permBean.isRead()) permsList.add(PermissionType.READ);
+              if (permBean.isAddNode()) permsList.add(PermissionType.ADD_NODE);
+              if (permBean.isRemove()) permsList.add(PermissionType.REMOVE);
+  //            if (permBean.isSetProperty()) permsList.add(PermissionType.SET_PROPERTY);
               if (permsList.size() > 0) {
                 node.setPermission(permBean.getUsersOrGroups(), permsList.toArray(new String[permsList.size()]));
               }
             }
-
+          }
           node.save();
         }
       }
