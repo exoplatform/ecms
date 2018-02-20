@@ -192,7 +192,7 @@ public class InitialWebContentPlugin extends CreatePortalPlugin {
       if(!mimeType.startsWith("text") && !mimeType.startsWith("application/x-javascript")) continue;
       String jcrData = ntResource.getProperty("jcr:data").getString();
       
-      jcrData = replace(jcrData, "{portalName}", siteName);
+      jcrData = replace(jcrData, "{portalName}", WCMCoreUtils.getPortalName());
       jcrData = replace(jcrData, "{restContextName}", WCMCoreUtils.getRestContextName());
       jcrData = replace(jcrData, "{repositoryName}", WCMCoreUtils.getRepository().getConfiguration().getName());
       jcrData = replace(jcrData, "{workspaceName}", targetNode.getSession().getWorkspace().getName());
