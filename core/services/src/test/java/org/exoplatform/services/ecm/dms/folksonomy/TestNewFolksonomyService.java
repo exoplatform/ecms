@@ -27,11 +27,14 @@ import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 
+import org.exoplatform.services.cms.documents.TrashService;
 import org.exoplatform.services.cms.folksonomy.NewFolksonomyService;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.ext.distribution.DataDistributionType;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
+import org.exoplatform.services.security.ConversationState;
+import org.exoplatform.services.security.Identity;
 import org.exoplatform.services.wcm.BaseWCMTestCase;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
@@ -52,6 +55,7 @@ public class TestNewFolksonomyService extends BaseWCMTestCase {
   private NewFolksonomyService newFolksonomyService_;
   private LinkManager linkManager;
   private NodeHierarchyCreator      nodeHierarchyCreator;
+  private TrashService      trashService;
   private Node test, test2;
   private Node folksonomyNode;
   private Node groupAFolksonomyNode;
@@ -63,11 +67,13 @@ public class TestNewFolksonomyService extends BaseWCMTestCase {
   public void setUp() throws Exception {
     super.setUp();
     newFolksonomyService_ = (NewFolksonomyService) container.getComponentInstanceOfType(NewFolksonomyService.class);
+    trashService = (TrashService) container.getComponentInstanceOfType(TrashService.class);
     this.nodeHierarchyCreator = WCMCoreUtils.getService(NodeHierarchyCreator.class);
     linkManager = (LinkManager) container.getComponentInstanceOfType(LinkManager.class);
     applyUserSession("john", "gtn", COLLABORATION_WS);
 //    String userName = session.getUserID();
     Node root = session.getRootNode();
+    root.addNode("Trash");
     Node applicationData = root.hasNode("Application Data") ?
                            root.getNode("Application Data") :
                            root.addNode("Application Data");
@@ -118,7 +124,7 @@ public class TestNewFolksonomyService extends BaseWCMTestCase {
                     root.addNode("SiteTags");
     siteFolksonomyNode = siteTags.addNode(site);
     session.save();
-    
+    ConversationState.setCurrent(new ConversationState(new Identity("john")));
   }
 
   /**
@@ -760,6 +766,48 @@ public class TestNewFolksonomyService extends BaseWCMTestCase {
   /**
    * Test Method : removeTag()
    * Input: Node 'test',
+   * Test action: add 1 tag 'sport' in public and move node 'test' to trash
+   * Expected Result: tag deleted
+   */
+  public void testRemoveEmptyTag() throws Exception {
+    String[] tags = { "sport"};
+    String publicFolksonomyTreePath = "/Application Data/Tags";
+    newFolksonomyService_.addPublicTag(publicFolksonomyTreePath,
+                                       tags,
+                                       test,
+                                       COLLABORATION_WS);
+    //-------------------------get sportTagNode-------------------------------
+    Node sportTagNode = null;
+    try {
+      sportTagNode = dataDistributionType.getDataNode(publicFolksonomyNode, "sport");
+    } catch (PathNotFoundException e) {
+      sportTagNode = null;
+    }
+    //------------------------------------------------------------------------
+
+    //-------------------------remove test node-------------------------------
+    trashService.moveToTrash(test, sessionProvider);
+    //------------------------------------------------------------------------
+
+    newFolksonomyService_.removeTag(sportTagNode.getPath(), COLLABORATION_WS);
+
+    //-------------------------get sportTagNode-------------------------------
+    sportTagNode = null;
+    try {
+      sportTagNode = dataDistributionType.getDataNode(publicFolksonomyNode, "sport");
+    } catch (PathNotFoundException e) {
+      sportTagNode = null;
+    }
+    //------------------------------------------------------------------------
+    assertNull("testRemoveTag failed! ", sportTagNode);
+
+    List<Node> tagList = newFolksonomyService_.getAllPublicTags(publicFolksonomyTreePath, COLLABORATION_WS);
+    assertEquals("testRemoveTag failed! ", 0, tagList.size());
+  }
+
+  /**
+   * Test Method : removeTag()
+   * Input: Node 'test',
    * Test action: add 3 tags 'sport', 'nobita' and 'weather' for node 'test' in public
    *               remove  tag 'sport'
    *               get all public tags
@@ -1148,8 +1196,8 @@ public class TestNewFolksonomyService extends BaseWCMTestCase {
     Node userNode = nodeHierarchyCreator.getUserNode(sessionProvider, "john");
     String[] nodes = {"/Application Data/Tags",
                       "/Groups/platform/users/ApplicationData/Tags",
-                      "/Groups/platform/guests/ApplicationData/Tags", "/SiteTags",
-                      "/test","/test2", userNode.getNode("Private/" + TEST).getPath(), userNode.getNode("Private/" + TEST2).getPath(),
+                      "/Groups/platform/guests/ApplicationData/Tags", "/SiteTags", "/Trash",
+                      "/test","/test2", userNode.getPath() + "/Private/" + TEST, userNode.getPath() + "/Private/" + TEST2,
                       userNode.getNode("Private/Folksonomy").getPath(),
                       session.getUserID()};
     for (String node : nodes)
