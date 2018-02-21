@@ -9,7 +9,8 @@
   	import org.exoplatform.portal.application.PortalRequestContext;
   	import org.exoplatform.portal.webui.util.Util;
   	import org.exoplatform.webui.application.WebuiRequestContext;
-		import org.exoplatform.services.wcm.publication.PublicationDefaultStates;
+    import org.exoplatform.services.wcm.publication.PublicationDefaultStates;
+    import org.exoplatform.ecm.utils.permission.PermissionUtil;
 		def rcontext = _ctx.getRequestContext();
     def jsManager = rcontext.getJavascriptManager();
     jsManager.loadScriptResource("quick-edit");
@@ -55,14 +56,14 @@
 			
 			<div class="UIPresentationContainer" id="$uicomponent.id">
 			
-			<%		
-			
+			<%
+				if (Utils.isShowQuickEdit() && !LockUtil.isLocked(node) && PermissionUtil.canSetProperty(node)) {
 			  jsManager.require("SHARED/wcm-utils", "wcmutil");      
 		    jsManager.require("SHARED/jquery", "gj").addScripts("gj('#"+uicomponent.id+"').mouseenter( function() {eXo.ecm.WCMUtils.changeStyleClass('$uicomponent.id','UIPresentationContainer $hoverClass');});").
 		    addScripts("gj('#"+uicomponent.id+"').mouseleave( function() {eXo.ecm.WCMUtils.changeStyleClass('$uicomponent.id','UIPresentationContainer');});").
 		    addScripts("wcmutil.WCMUtils.setZIndex(10);");
         
-			  if (Utils.isShowQuickEdit() && !LockUtil.isLocked(node)) {	%>	
+			  	%>
 				 <div class="edittingToolBarContainer" style="$edittingStyle">
 					 <div class="edittingToolBar clearfix">
 						<div class="edittingCurrentState pull-left">
