@@ -623,17 +623,22 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
     Node tagNode = getNode(workspace, tagPath);
     NodeIterator nodeIterator = tagNode.getNodes();
     Exception e = null;
-    while (nodeIterator.hasNext()) {
-      try {
-        Node document = linkManager.getTarget(nodeIterator.nextNode());
-        removeTagOfDocument(tagPath, document, workspace);
-      }catch(Exception exception){
-        if(e!=null) {
-          e.addSuppressed(exception);
-        }else{
-          e = exception;
+    if (nodeIterator.hasNext()) {
+      while (nodeIterator.hasNext()) {
+        try {
+          Node document = linkManager.getTarget(nodeIterator.nextNode());
+          removeTagOfDocument(tagPath, document, workspace);
+        }catch(Exception exception){
+          if(e!=null) {
+            e.addSuppressed(exception);
+          }else{
+            e = exception;
+          }
         }
       }
+    } else {
+      tagNode.remove();
+      tagNode.getSession().save();
     }
     if(e!=null) throw e;
   }
