@@ -22,131 +22,131 @@
 <bundle>
   <UIExoStart>
     <tooltip>
-      <homepage>Homepage</homepage>
+      <homepage>Ang Homepage</homepage>
     </tooltip>
   </UIExoStart>
 
   <UIFormInputSetWithAction>
     <msg>
-      <confirm-delete>Are you sure you want to delete this item?</confirm-delete>
+      <confirm-delete>Ikaw ba ay sigurado na gusto mong burahin ang aytem na ito?</confirm-delete>
     </msg>
   </UIFormInputSetWithAction>
 
   <Drives>
     <label>
-      <ManagedSites>Site Management</ManagedSites>
-      <SharedSite>Shared Site</SharedSite>
-      <PersonalDocuments>Personal Documents</PersonalDocuments>
-      <UserDocuments>{0} Documents</UserDocuments>
-      <Collaboration>Collaboration</Collaboration>
-      <Trash>Trash</Trash>
+      <ManagedSites>Ang Pangangasiwa ng sayt</ManagedSites>
+      <SharedSite>Ang Sayt ay ibahagi</SharedSite>
+      <PersonalDocuments>Ang Mga Personal na Dokumento</PersonalDocuments>
+      <UserDocuments>ang {0} na mga Dokumento</UserDocuments>
+      <Collaboration>Pagtutulungan</Collaboration>
+      <Trash>Basura</Trash>
     </label>
   </Drives>
 
   <Views>
     <label>
-      <wcm-view>Web</wcm-view>
-      <admin-view>Admin</admin-view>
-      <icon-view>Icons</icon-view>
-      <thumbails-view>Thumbnails</thumbails-view>
-      <list-view>List</list-view>
-      <authoring-view>Authoring</authoring-view>
-      <wcm-category-view>Categories</wcm-category-view>
-      <file-view>File Management View</file-view>
+      <wcm-view>Ang Web</wcm-view>
+      <admin-view>Ang tagapangasiwa</admin-view>
+      <icon-view>Ang mga imahe</icon-view>
+      <thumbails-view>Nag Thumbnails</thumbails-view>
+      <list-view>Ang Listahan</list-view>
+      <authoring-view>Awtorisado</authoring-view>
+      <wcm-category-view>Ang mga kategorya</wcm-category-view>
+      <file-view>Tignan ang namamahala sa mga payl</file-view>
     </label>
   </Views>
 
   <UIActionBar>
     <obtion>
-      <Publication>Publication</Publication>
-      <System>System</System>
+      <Publication>Publikasyon</Publication>
+      <System>Ang Sistema</System>
     </obtion>
   </UIActionBar>
 
   <UIPageSelectorPanel>
     <header>
-      <path>Path</path>
+      <path>Ang Landas</path>
       <action>#{word.action}</action>
     </header>
     <msg>
-      <child-not-found>No Page Found.</child-not-found>
+      <child-not-found>Walang pahina na natagpuan.</child-not-found>
     </msg>
     <title>
-      <select>Select</select>
+      <select>Pumili</select>
     </title>
   </UIPageSelectorPanel>
 
   <UIContentDialogFormPopupWindow>
     <title>
-      <UIContentDialogPreference>Web Content Preference</UIContentDialogPreference>
+      <UIContentDialogPreference>Ang nilalaman ng web preference</UIContentDialogPreference>
     </title>
   </UIContentDialogFormPopupWindow>
 
   <UITabPane>
     <title>
-      <UIContentBrowsePanelOne>Content Browser</UIContentBrowsePanelOne>
-      <UIContentBrowsePanelMulti>Content Browser</UIContentBrowsePanelMulti>
-      <UIContentBrowsePanelFolder>Folder Browser</UIContentBrowsePanelFolder>
-      <UIContentSearchForm>Content Search Form</UIContentSearchForm>
-      <UIContentSearchResult>Search Result</UIContentSearchResult>
-      <UIContentViewer>Preview Content</UIContentViewer>
-      <WebContentMetadataPopup>Property Selector</WebContentMetadataPopup>
-      <WebContentNodeTypePopup>Nodetype Selector</WebContentNodeTypePopup>
-      <UIPermissionManager>Permission Manager</UIPermissionManager>
+      <UIContentBrowsePanelOne>Ang nilalaman ng browser</UIContentBrowsePanelOne>
+      <UIContentBrowsePanelMulti>Ang nilalaman ng browser</UIContentBrowsePanelMulti>
+      <UIContentBrowsePanelFolder>Ang polder ng Browser</UIContentBrowsePanelFolder>
+      <UIContentSearchForm>Ang porm para sa Paghahanap ng Nilalaman</UIContentSearchForm>
+      <UIContentSearchResult>Hanapi ang resulta</UIContentSearchResult>
+      <UIContentViewer>I-preview ang Nilalaman</UIContentViewer>
+      <WebContentMetadataPopup>Ang Tagapili ng Katangian</WebContentMetadataPopup>
+      <WebContentNodeTypePopup>Ang Tagapili ng Nodetype</WebContentNodeTypePopup>
+      <UIPermissionManager>Tagapangasiwa ng Pahintulot</UIPermissionManager>
     </title>
   </UITabPane>
 
   <UIContentBrowsePanelOne>
     <selectBoxValues>
-      <FilterBy>Filter by</FilterBy>
-      <WebContent>Web Content</WebContent>
-      <DMSDocument>Document</DMSDocument>
-      <Media>Media</Media>
+      <FilterBy>I-filter sa pamamagitan ng</FilterBy>
+      <WebContent>Ang Nilalaman ng Web</WebContent>
+      <DMSDocument>Dokumento</DMSDocument>
+      <Media>Medya</Media>
     </selectBoxValues>
     <msg>
-      <node-checkout>The node is checked out. Please check the node before performing this function.</node-checkout>
+      <node-checkout>Ang node na ito ay nka-check out. Mangyaring suriin ang node bago isagawa ang function na ito.</node-checkout>
     </msg>
   </UIContentBrowsePanelOne>
 
   <UIContentBrowsePanelMulti>
     <selectBoxValues>
-      <FilterBy>Filter by</FilterBy>
-      <WebContent>Web Content</WebContent>
-      <DMSDocument>Document</DMSDocument>
-      <Media>Media</Media>
+      <FilterBy>Ang medya</FilterBy>
+      <WebContent>Ang Nilalaman ng Web</WebContent>
+      <DMSDocument>Ang Dokumento</DMSDocument>
+      <Media>Medya</Media>
     </selectBoxValues>
   </UIContentBrowsePanelMulti>
 
   <UIContentBrowsePanelOne>
     <label>
-      <LeftColumn>Select a folder to display its children as content.</LeftColumn>
-      <RightColumn>The content below can be selected.</RightColumn>
+      <LeftColumn>Pumili ng polder upang ipakita ang mga anak nito bilang nilalaman.</LeftColumn>
+      <RightColumn>Ang nilalaman sa ibaba ay maaaring piliin.</RightColumn>
     </label>
   </UIContentBrowsePanelOne>
 
   <UIContentBrowsePanelMulti>
     <label>
-      <LeftColumn>Select a folder to display its children as content.</LeftColumn>
-      <RightColumn>The content below can be selected.</RightColumn>
+      <LeftColumn>Pumili ng polder upang ipakita ang mga anak nito bilang nilalaman.</LeftColumn>
+      <RightColumn>Ang nilalaman sa ibaba ay maaaring piliin.</RightColumn>
     </label>
   </UIContentBrowsePanelMulti>
 
   <UIContentBrowsePanelFolder>
     <label>
-      <LeftColumn>Select a folder to display its children as content.</LeftColumn>
-      <RightColumn>The folder below can be selected.</RightColumn>
+      <LeftColumn>Pumili ng polder upang ipakita ang mga anak nito bilang nilalaman.</LeftColumn>
+      <RightColumn>Ang polder sa ibaba ay puwedeng piliin.</RightColumn>
     </label>
   </UIContentBrowsePanelFolder>
 
   <UISelectedContentGrid>
     <label>
       <name>#{word.name}</name>
-      <add>Add</add>
-      <delete>Delete</delete>
+      <add>Magdagdag</add>
+      <delete>Burahin</delete>
     </label>
     <msg>
-      <no-content-found>No content found.</no-content-found>
-      <non-content>You have not selected any content.</non-content>
+      <no-content-found>Walang nilalaman na nakita.</no-content-found>
+      <non-content>Ikaw ay walang napili na maski anong nilalaman.</non-content>
     </msg>
   </UISelectedContentGrid>
 
@@ -160,86 +160,86 @@
   <UIContentBrowsePathSelector>
     <header>
       <name>#{word.name}</name>
-      <publicationstate>Publication State</publicationstate>
-      <action>Action</action>
+      <publicationstate>Ang estado ng publikasyon</publicationstate>
+      <action>Ang kilos</action>
     </header>
     <msg>
-      <child-not-found>No Content Found</child-not-found>
+      <child-not-found>Walang nakitang nilalaman</child-not-found>
     </msg>
   </UIContentBrowsePathSelector>
 
   <UIContentBrowsePathSelectorFolder>
     <header>
       <name>#{word.name}</name>
-      <publicationstate>Publication State</publicationstate>
-      <action>Action</action>
+      <publicationstate>Ang estado ng publikasyon</publicationstate>
+      <action>Ang kilos</action>
     </header>
     <msg>
-      <child-not-found>No Folder Found</child-not-found>
+      <child-not-found>Hindi Nakita ang polder</child-not-found>
     </msg>
   </UIContentBrowsePathSelectorFolder>
 
   <UIContentSearchForm>
     <title>
-      <Location>Site Name</Location>
-      <SearchByName>Search by Name</SearchByName>
-      <Fulltext>A word or phrase in context</Fulltext>
-      <Property>Property</Property>
-      <Contain>Contain</Contain>
-      <FromDate>From Date</FromDate>
-      <ToDate>To Date</ToDate>
-      <DocumentType>Document Type</DocumentType>
+      <Location>Ang Pangalan ng Sayt</Location>
+      <SearchByName>Maghanap ayon sa Pangalan</SearchByName>
+      <Fulltext>Isang salita o parirala sa konteksto</Fulltext>
+      <Property>Ang pag aari</Property>
+      <Contain>Naglalaman</Contain>
+      <FromDate>Ang Petsa mula sa</FromDate>
+      <ToDate>Ang Petsa sa</ToDate>
+      <DocumentType>Uri ng Dokumento</DocumentType>
     </title>
     <tooltip>
-      <AddMetadataType>Add Property</AddMetadataType>
-      <AddNodeType>Add Node Type</AddNodeType>
+      <AddMetadataType>Magdagdag ng Katangian</AddMetadataType>
+      <AddNodeType>Magdagdag ng Uri ng Node</AddNodeType>
     </tooltip>    
     <label>
       <option>
-        <CREATED>Created</CREATED>
-        <MODIFIED>Modified</MODIFIED>
+        <CREATED>Ang Nalikha</CREATED>
+        <MODIFIED>Binago</MODIFIED>
       </option>
     </label>
     <action>
-      <SearchWebContent>Search</SearchWebContent>
+      <SearchWebContent>Hanapin</SearchWebContent>
     </action>
     <msg>
-      <time-to-late>The searching time is too long.</time-to-late>
-      <empty-field>Please input a valid keyword for search.</empty-field>
-      <empty-name>Please enter the name to search</empty-name>
-      <empty-content>Please enter a word or phrase to search</empty-content>
-      <empty-property>Please select a property</empty-property>
-      <empty-property-keyword>Please enter a keyword for the property</empty-property-keyword>
-      <empty-doctype>Please select a document type</empty-doctype>
-      <empty-startDate>"From Date" is required</empty-startDate>
-      <invalid-format>Invalid date/time format in field '{0}'.</invalid-format>
-      <invalid-date>"To Date" must be later than "From Date"</invalid-date>
-      <invalid-startDate>"From Date" must not be later than today</invalid-startDate>
-      <invalid-nodeType>The node type "{0}" is invalid. Please check again.</invalid-nodeType>
-      <invalid-keyword>The keyword is invalid. Some characters are not supported.</invalid-keyword>
+      <time-to-late>Ang oras ng paghahanap ay sobrang haba.</time-to-late>
+      <empty-field>Mangyaring maglagay ng isang balidong keyword para sa paghahanap.</empty-field>
+      <empty-name>Mangyaring maglagay ng pangalan na hahanapin</empty-name>
+      <empty-content>Mangyaring maglagay ng isang salita o parirala na hahanapin</empty-content>
+      <empty-property>Mangyaring pumili ng isang katangian</empty-property>
+      <empty-property-keyword>Mangyaring maglagay ng isang keyword para sa katangian</empty-property-keyword>
+      <empty-doctype>Mangyaring pumili ng isang uri ng dokumento</empty-doctype>
+      <empty-startDate>Kailangan ang "Mula sa Petsa"</empty-startDate>
+      <invalid-format>Hindi balidong pormat ng petsa/oras sa field '{0}'.</invalid-format>
+      <invalid-date>"Ang Hanggang sa Petsa" ay kailangang mas huli sa "Mula sa Petsa"</invalid-date>
+      <invalid-startDate>Ang "Mula sa Petsa" ay kinakailangang hindi lalampas ngayong araw</invalid-startDate>
+      <invalid-nodeType>Ang uri ng node na "{0}" ay hindi balido. Mangyaring suriin muli.</invalid-nodeType>
+      <invalid-keyword>Ang keyword ay hindi wasto. Ang ilang mga karakter ay hindi suportado.</invalid-keyword>
     </msg>
   </UIContentSearchForm>
 
   <WebContentMetadataPopup>
     <title>
-      <UIContentPropertySelector>Property Selector</UIContentPropertySelector>
+      <UIContentPropertySelector>Ang Tagapili ng Katangian</UIContentPropertySelector>
     </title>
   </WebContentMetadataPopup>
 
   <UIContentPropertySelector>
     <action>
-      <Add>Add</Add>
+      <Add>Dagdagan</Add>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
-      <metadataType>Metadata Type</metadataType>
-      <property_select>Property</property_select>
+      <metadataType>Uri ng metadata</metadataType>
+      <property_select>Ang pag aari</property_select>
     </label>
   </UIContentPropertySelector>
 
   <WebContentNodeTypePopup>
     <title>
-      <UIContentNodeTypeSelector>Node Type Selector</UIContentNodeTypeSelector>
+      <UIContentNodeTypeSelector>Uri ng node na tagapili</UIContentNodeTypeSelector>
     </title>
   </WebContentNodeTypePopup>
 
@@ -252,205 +252,205 @@
 
   <UIContentSearchResult>
     <header>
-      <title>Title</title>
-      <score>Score</score>
-      <publicationstate>Publication State</publicationstate>
-      <action>Action</action>
+      <title>Titulo</title>
+      <score>Ang Puntos</score>
+      <publicationstate>Ang estado ng publikasyon</publicationstate>
+      <action>Ang Aksyon</action>
     </header>
     <title>
-      <Select>Select</Select>
-      <View>View</View>
+      <Select>Pumili</Select>
+      <View>Tignan</View>
     </title>
     <msg>
-    <template-not-support>Cannot preview this content. The template is not supported</template-not-support>
+    <template-not-support>Hindi ma-preview ang nilalaman na ito. Ang template ay hindi suportado</template-not-support>
     </msg>
   </UIContentSearchResult>
 
   <UIContentDialogForm>
     <action>
-      <SaveDraft>Save Draft</SaveDraft>
-      <FastPublish>Fast Publish</FastPublish>
-      <Preferences>Preferences</Preferences>
+      <SaveDraft>I-save ang Draft</SaveDraft>
+      <FastPublish>Mabilis na Paglathala</FastPublish>
+      <Preferences>Ang Mga preperensya</Preferences>
       <Close>#{word.close}</Close>
     </action>
     <msg>
-      <access-denied>You do not have permission to add categories to this document.</access-denied>
-      <exception>An error occurred while adding categories to this document.</exception>
-      <non-categories>Categories are wrong. Please select appropriate categories.</non-categories>
+      <access-denied>Ikaw ay walang pahintulot na magdagdag ng mga kategorya sa dokumentong ito.</access-denied>
+      <exception>May maling naganap habang idinadagdag ang mga kategorya sa dokumentong ito.</exception>
+      <non-categories>Ang mga kategorya ay mali. Mangyaring pumili ng angkop na mga kategorya.</non-categories>
     </msg>
   </UIContentDialogForm>
 
   <UIPermissionManager>
     <label>
-      <UIPermissionInputSetWithAction>Permission</UIPermissionInputSetWithAction>
-      <UIAccessibleCheckboxInput>Access Right</UIAccessibleCheckboxInput>
-      <UIEditableCheckboxInput>Edit Right</UIEditableCheckboxInput>
+      <UIPermissionInputSetWithAction>Pahintulot</UIPermissionInputSetWithAction>
+      <UIAccessibleCheckboxInput>I-access ang Karapatan</UIAccessibleCheckboxInput>
+      <UIEditableCheckboxInput>I-edit ang Karapatan</UIEditableCheckboxInput>
     </label>
     <action>
       <Save>#{word.save}</Save>
-      <Clear>Clear</Clear>
+      <Clear>Linawin</Clear>
       <title>
         <Edit>Edit</Edit>
-        <Delete>Delete</Delete>
+        <Delete>Burahin</Delete>
       </title>
     </action>
   </UIPermissionManager>
 
   <UIPermissionManagerGrid>
     <header>
-      <owner>Permission</owner>
-      <accessible>Accessible</accessible>
-      <editable>Editable</editable>
-      <action>Action</action>
+      <owner>Pahintulot</owner>
+      <accessible>Maaaring Ma-access</accessible>
+      <editable>Maaaring Ma-edit</editable>
+      <action>Ang Aksyon</action>
     </header>
     <msg>
       <confirm-delete-permission>Sigurado ka bang gusto mong burahin ang pahintulot na ito?</confirm-delete-permission>
-      <no-permission-remove>You do not have permission.</no-permission-remove>
-      <access-denied>Access denied.</access-denied>
-      <node-locked>The path element {0} or one of its parents is locked.</node-locked>
-      <userOrGroup-required>You must select a user or group.</userOrGroup-required>
-      <checkbox-require>You must set rights.</checkbox-require>
-      <node-checkedin>You must check out first.</node-checkedin>
+      <no-permission-remove>Ikaw ay walang pahintulot.</no-permission-remove>
+      <access-denied>Ang pag-access ay hindi pinayagan.</access-denied>
+      <node-locked>Ang path na elemento {0} o ang isa sa mga magulang nito ay nakakandado.</node-locked>
+      <userOrGroup-required>Ikaw ay kailangang pumili ng isang gumagamit o grupo.</userOrGroup-required>
+      <checkbox-require>Ikaw ay kailangang magtakda ng mga karapatan.</checkbox-require>
+      <node-checkedin>Kailangan mo munang suriin ito.</node-checkedin>
     </msg>
   </UIPermissionManagerGrid>
 
   <UIPermissionInputSetWithAction>
     <title>
-      <SelectUser>Select User</SelectUser>
-      <SelectMember>Select Member</SelectMember>
-      <AddAny>Add Any Permission</AddAny>
+      <SelectUser>Pumili ng user</SelectUser>
+      <SelectMember>Piliin ang Miyembro</SelectMember>
+      <AddAny>Magdagdag ng kahit anong Pahintulot</AddAny>
     </title>
   </UIPermissionInputSetWithAction>
 
   <UIUserSelectorPopupWindow>
     <title>
-      <UIUserContainer>User Selector</UIUserContainer>
+      <UIUserContainer>Selector ng User</UIUserContainer>
     </title>
   </UIUserSelectorPopupWindow>
 
   <UIGroupSelectorPopupWindow>
     <title>
-      <UIGroupMemberSelector>Group Selector</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Ang tagapili ng Grupo</UIGroupMemberSelector>
     </title>
   </UIGroupSelectorPopupWindow>
 
   <UIGroupMemberSelector>
     <label>
-      <selectGroup>Select Group</selectGroup>
-      <selectMembership>Select Membership</selectMembership>
+      <selectGroup>Pumili ng grupo</selectGroup>
+      <selectMembership>Pumili ng Membership</selectMembership>
     </label>
   </UIGroupMemberSelector>
 
   <UIContentDialogPreference>
     <action>
-      <Back>Back</Back>
+      <Back>Likod</Back>
     </action>
   </UIContentDialogPreference>
 
   <ZeroValidator>
     <msg>
-      <Invalid-number>Zero is not accepted in the field '{0}'.</Invalid-number>
+      <Invalid-number>Ang sero ay hindi tinatanggap sa field na '{0}'.</Invalid-number>
     </msg>
   </ZeroValidator>
 
   <UIDropDownPageTemp>
     <item>
-      <WCMPageConfigs>WCM Page Configurations</WCMPageConfigs>
-      <ColumnPageConfigs>Column Page Configurations</ColumnPageConfigs>
-      <RowPageConfigs>Row Page Configurations</RowPageConfigs>
-      <TabsPageConfigs>Tabs Page Configurations</TabsPageConfigs>
-      <MixPageConfigs>Mixed</MixPageConfigs>
+      <WCMPageConfigs>Ang Mga Kumpigurasyon ng WCM na Pahina</WCMPageConfigs>
+      <ColumnPageConfigs>Ang Mga Kumpigurasyon ng Hanay na Pahina</ColumnPageConfigs>
+      <RowPageConfigs>Ang Mga Kumpigurasyon ng Hilera na Pahina</RowPageConfigs>
+      <TabsPageConfigs>Ang Mga Kumpigurasyon ng Tabs na Pahina</TabsPageConfigs>
+      <MixPageConfigs>Pinaghalo</MixPageConfigs>
     </item>
   </UIDropDownPageTemp>
 
   <UIWizardPageSelectLayoutForm>
     <label>
-      <SingleContentViewer>Single Content Viewer</SingleContentViewer>
-      <ContentListViewer>Content List Viewer</ContentListViewer>
-      <Search>Search</Search>
-      <Sitemap>Site Map</Sitemap>
-      <TwoColumnsLayout>Two-column Layout</TwoColumnsLayout>
-      <ThreeColumnsLayout>Three-column Layout</ThreeColumnsLayout>
-      <TwoRowsLayout>Two-row Layout</TwoRowsLayout>
-      <ThreeRowsLayout>Three-row Layout</ThreeRowsLayout>
-      <TwoTabsLayout>Two-tab layout</TwoTabsLayout>
-      <ThreeTabsLayout>Three-tab Layout</ThreeTabsLayout>
-      <TwoColumnsOneRowLayout>Two-column &amp; One-row Layout</TwoColumnsOneRowLayout>
-      <OneRowTwoColumnsLayout>One-row &amp; Two-column Layout</OneRowTwoColumnsLayout>
-      <ThreeRowsTwoColumnsLayout>Three-row &amp; Two-column Layout</ThreeRowsTwoColumnsLayout>
+      <SingleContentViewer>Pang-isang Viewer ng Nilalaman</SingleContentViewer>
+      <ContentListViewer>Tagamasid ng nilalaman ng listahan</ContentListViewer>
+      <Search>Hanapin</Search>
+      <Sitemap>Ang Site Map</Sitemap>
+      <TwoColumnsLayout>Dalawang hanay na Layout</TwoColumnsLayout>
+      <ThreeColumnsLayout>Tatlong hanay na Layout</ThreeColumnsLayout>
+      <TwoRowsLayout>Dalawang hilera na Layout</TwoRowsLayout>
+      <ThreeRowsLayout>Tatlong hilera na Layout</ThreeRowsLayout>
+      <TwoTabsLayout>Dalawang tab na layout</TwoTabsLayout>
+      <ThreeTabsLayout>Tatlong tab na Layout</ThreeTabsLayout>
+      <TwoColumnsOneRowLayout>Dalawang hanay at Isang hilera na Layout</TwoColumnsOneRowLayout>
+      <OneRowTwoColumnsLayout>Isang hilera at Dalawang Hanay na Layout</OneRowTwoColumnsLayout>
+      <ThreeRowsTwoColumnsLayout>Tatlong hilera at Dalawang hanay na Layout</ThreeRowsTwoColumnsLayout>
     </label>
   </UIWizardPageSelectLayoutForm>
 
   <Signin>
-    <welcome>Welcome</welcome>
-    <login>Login</login>
-    <logout>Logout</logout>
-    <language>Change Language</language>
-    <register>Register</register>
+    <welcome>Maligayang pagdating</welcome>
+    <login>Mag-login</login>
+    <logout>Mag-logout</logout>
+    <language>Magpalit ng Lengguwahe</language>
+    <register>Rehistro</register>
   </Signin>
   <UIDriveForm>
 <label>
-<wcm-category-view>Category View</wcm-category-view>
-<wcm-view>WCM Content View</wcm-view>
+<wcm-category-view>Ang Pagtanaw ng Kategorya</wcm-category-view>
+<wcm-view>Ang Pagtanaw ng Nilalaman ng WCM</wcm-view>
 </label>
   </UIDriveForm>
   
   <ContentSelector>
     <title>
-      <PersonalDrives>Personal Drives</PersonalDrives>
-      <GeneralDrives>General Drives</GeneralDrives>
-      <GroupDrives>Group Drives</GroupDrives>
-      <Private>Private</Private>
-      <Public>Public</Public>
-      <BackupCenter>Backup Center</BackupCenter>
-      <CategorizedDocumentsCenter>Categorized Documents Center</CategorizedDocumentsCenter>
-      <CollaborationCenter>Collaboration Center</CollaborationCenter>
-      <DigitalAssetsManagementCenter>Digital Assets Management Center</DigitalAssetsManagementCenter>
-      <DMSAdministration>DMS Administration</DMSAdministration>
-      <DocumentsManagementCenter>Documents Management Center</DocumentsManagementCenter>
-      <LiveDocumentsCenter>Live Documents Center</LiveDocumentsCenter>
-      <PendingDocumentsCenter>Pending Documents Center</PendingDocumentsCenter>
-      <RecordsManagementCenter>Records Management Center</RecordsManagementCenter>
-      <SharedUsersSpace>Shared Users Space</SharedUsersSpace>
-      <Systemfiles>System Files</Systemfiles>
-      <ValidationRequestsDocumentsCenter>Validation Requests Documents Center</ValidationRequestsDocumentsCenter>
-      <ManagedSites>Sites Management</ManagedSites>
-      <SharedSite>Shared Site</SharedSite>
+      <PersonalDrives>Pang personal na mga drive</PersonalDrives>
+      <GeneralDrives>Pangkalahatang mga driver</GeneralDrives>
+      <GroupDrives>Ang mga driver ng grupo</GroupDrives>
+      <Private>Ang Pribado</Private>
+      <Public>Ang Publiko</Public>
+      <BackupCenter>Ang Sentro ng Pag-backup</BackupCenter>
+      <CategorizedDocumentsCenter>Sentro ng mga Dokumentong may Kategorya</CategorizedDocumentsCenter>
+      <CollaborationCenter>Sentro ng Pagtutulungan</CollaborationCenter>
+      <DigitalAssetsManagementCenter>Ang Sentro ng Pangangasiwa ng mga Digital na Asset</DigitalAssetsManagementCenter>
+      <DMSAdministration>Ang pamamahala ng DMS</DMSAdministration>
+      <DocumentsManagementCenter>Ang Sentro ng Pangangasiwa ng mga Dokumento</DocumentsManagementCenter>
+      <LiveDocumentsCenter>Sentro ng mga Live na mga Dokumento</LiveDocumentsCenter>
+      <PendingDocumentsCenter>Ang Sentro ng mga Nakabinbin na Dokumento</PendingDocumentsCenter>
+      <RecordsManagementCenter>Ang Sentro ng Pangangasiwa ng mga Rekord</RecordsManagementCenter>
+      <SharedUsersSpace>Nakabahagi na Space ng mga Gumagamit</SharedUsersSpace>
+      <Systemfiles>Ang Mga payl ng Sistema</Systemfiles>
+      <ValidationRequestsDocumentsCenter>Ang Sentro ng mga patunay ng Kahilingan na Dokumento</ValidationRequestsDocumentsCenter>
+      <ManagedSites>Ang pamamahala ng mga sayt</ManagedSites>
+      <SharedSite>Ang sayt ay ibahagi</SharedSite>
     </title>
   </ContentSelector>
   
   <UICategoryNavigationTargetPathPopupWindow>
     <title>
-      <UIPageSelector>Page Selector</UIPageSelector>
+      <UIPageSelector>Tagapili ng pahina</UIPageSelector>
     </title>
   </UICategoryNavigationTargetPathPopupWindow>
   
   <UIDocumentInfo>
     <msg>
-      <access-denied-exception>Access denied. You maybe not have read permission, or the node may have been removed or changed.</access-denied-exception>
+      <access-denied-exception>Ang pag-access ay hindi pinayagan. Maaaring ikaw ay walang pahintulot ng pagbasa, o kaya ay ang node ay tinanggal o pinalitan na.</access-denied-exception>
     </msg>
   </UIDocumentInfo>
   <UIPortalApplication>
     <title>
-      <abort>Abort</abort>
+      <abort>I-abort</abort>
     </title>
   </UIPortalApplication>    
   
   <CategoryNavigationTemplate>
   <label>
-  <home>Home</home>
+  <home>Ang Tahanan</home>
   </label>
   </CategoryNavigationTemplate>
   
   <Breadcrumb>
   <label>
-  <home>Home</home>
+  <home>Ang Tahanan</home>
   </label>  
   </Breadcrumb>
 
   <UIViewMetadataForm>
     <msg>
-      <Invalid-number>Please enter a valid number.</Invalid-number>
+      <Invalid-number>Manyaring maglagay ng balidong numero.</Invalid-number>
     </msg>
   </UIViewMetadataForm>
 </bundle>

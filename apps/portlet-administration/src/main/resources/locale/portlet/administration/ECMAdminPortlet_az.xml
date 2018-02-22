@@ -8,7 +8,7 @@
   <UIECMAdminControlPanel>
     <tab>
       <label>
-        <Templates>Templates</Templates>
+        <Templates>Şablonlar</Templates>
         <Explorer>Explorer</Explorer>
         <Repository>Repository</Repository>
         <Advanced>Advanced</Advanced>
@@ -53,10 +53,10 @@
       <confirm-delete>Are you sure you want to delete this category?</confirm-delete>
     </msg>
     <title>
-      <add>Add</add>
+      <add>Əlavə Et</add>
       <paste>Paste</paste>
       <cut>Cut</cut>
-      <copy>Copy</copy>
+      <copy>Kopyala</copy>
       <remove>Delete</remove>
     </title>
   </UITaxonomyManager>
@@ -129,7 +129,7 @@
       <read>Read</read>
       <addNode>Add Node</addNode>
       <setProperty>Set Property</setProperty>
-      <remove>Remove</remove>
+      <remove>Sil</remove>
       <action>Action</action>
     </header>
   </UIPermissionTreeInfo>
@@ -314,12 +314,12 @@
     <header>
       <name>Element Name</name>
       <type>Type</type>
-      <description>Description</description>
+      <description>Açıqlama</description>
       <isMixin>Is Mixin Type</isMixin>
       <orderable>Orderable children</orderable>
     </header>
     <info>
-      <description>Description</description>
+      <description>Açıqlama</description>
     </info>
     <tab>
       <element>Elements</element>
@@ -346,7 +346,7 @@
       <name>Name</name>
       <workspace>Workspace</workspace>
       <homePath>Home Path</homePath>
-      <permissions>Kebenaran</permissions>
+      <permissions>Permissions</permissions>
       <views>View</views>
       <action>Action</action>
     </header>
@@ -467,7 +467,7 @@
     <action>
       <Export>Export</Export>
       <Import>Import</Import>
-      <Add>Add</Add>
+      <Add>Əlavə Et</Add>
     </action>
     <tooltip>
       <View>View</View>
@@ -486,7 +486,7 @@
   <UINodeTypeOptionList>
     <action>
       <Save>#{word.save}</Save>
-      <Add>Add</Add>
+      <Add>Əlavə Et</Add>
     </action>
     <header>
       <icon>Icon</icon>
@@ -550,7 +550,7 @@
       <AddConstraints>Add Constraints</AddConstraints>
       <Back>#{word.back}</Back>
       <AddType>Add Type</AddType>
-      <AddValue>Add</AddValue>
+      <AddValue>Əlavə Et</AddValue>
       <CancelConstraints>#{word.cancel}</CancelConstraints>
       <CancelTab>#{word.cancel}</CancelTab>
       <UpdateChild>#{word.update}</UpdateChild>
@@ -711,7 +711,7 @@
       <unstructuredFolder>Unstructured Folder</unstructuredFolder>
     </label>
     <title>
-      <AddPermission>Tambah kebenaran</AddPermission>
+      <AddPermission>Add Permission</AddPermission>
       <RemovePermission>Remove Permission</RemovePermission>
       <AddIcon>Add Icon</AddIcon>
       <AddPath>Add Path</AddPath>
@@ -817,7 +817,7 @@
     </title>
     <header>
       <name>Name</name>
-      <permissions>Kebenaran</permissions>
+      <permissions>Permissions</permissions>
       <tabList>Action Tab</tabList>
       <baseVersion>Base Version</baseVersion>
       <action>Action</action>
@@ -839,7 +839,7 @@
   <AddPopup>
     <title>
       <UIViewFormTabPane>Add View</UIViewFormTabPane>
-      <AddPopup>Add Template</AddPopup>
+      <AddPopup>Şablon Əlavə Et</AddPopup>
     </title>
   </AddPopup>
   <EditPopup>
@@ -855,11 +855,11 @@
     </title>
     <header>
       <tabName>Tab</tabName>
-      <localizeButtons>Description</localizeButtons>
+      <localizeButtons>Açıqlama</localizeButtons>
       <action>Actions</action>
     </header>
     <action>
-      <AddTab>Add</AddTab>
+      <AddTab>Əlavə Et</AddTab>
     </action>
     <msg>
       <confirm-delete>Are you sure you want to delete this tab?</confirm-delete>
@@ -887,7 +887,7 @@
       <Delete>Delete</Delete>
     </title>
     <header>
-      <friendlyPermission>Kebenaran</friendlyPermission>
+      <friendlyPermission>Permissions</friendlyPermission>
       <action>Action</action>
     </header>
     <action>
@@ -904,7 +904,7 @@
 
   <UIViewPermissionForm>
     <action>
-      <Add>Add</Add>
+      <Add>Əlavə Et</Add>
     </action>
     <label>
       <userOrGroup>User or Group</userOrGroup>
@@ -921,7 +921,7 @@
   -->
   <UIViewForm>
     <title>
-      <AddPermission>Tambah kebenaran</AddPermission>
+      <AddPermission>Add Permission</AddPermission>
       <RemovePermission>Remove Permission</RemovePermission>
     </title>
     <msg>
@@ -952,7 +952,7 @@
       <tabName>Tab Name</tabName>
       <permission>Permission</permission>
       <tabs>Tabs</tabs>
-      <template>Templates</template>
+      <template>Şablonlar</template>
       <enableVersion>Enable Version</enableVersion>
       <addFolder>Add Folder</addFolder>
       <addDocument>Add Document</addDocument>
@@ -1058,7 +1058,7 @@
       <action>Action</action>
     </header>
     <action>
-      <Add>Add</Add>
+      <Add>Əlavə Et</Add>
     </action>
     <msg>
       <template-in-use>Cannot delete {0}. It is currently in use.</template-in-use>
@@ -1074,7 +1074,7 @@
   -->
   <UITemplateForm>
     <title>
-      <AddPermission>Tambah kebenaran</AddPermission>
+      <AddPermission>Add Permission</AddPermission>
     </title>
     <action>
       <Save>#{word.save}</Save>
@@ -1366,7 +1366,7 @@
       <name>Name</name>
       <workspace>Workspace</workspace>
       <homePath>Path</homePath>
-      <permissions>Kebenaran</permissions>
+      <permissions>Permissions</permissions>
     </label>
     <msg>
       <homapath-emty>Input Path</homapath-emty>
@@ -1386,8 +1386,8 @@
     <title>Add a permission to this node</title>
     <action>
       <Close>#{word.close}</Close>
-      <Save>Simpan</Save>
-      <Reset>Tetapkan semula</Reset>
+      <Save>Save</Save>
+      <Reset>Reset</Reset>
     </action>
     <msg>
       <checkbox-require>Please select at least one permission.</checkbox-require>
@@ -1411,7 +1411,7 @@
 
   <PopupDrivePermission>
     <title>
-      <AddDrivePermissionSelector>Tambah kebenaran</AddDrivePermissionSelector>
+      <AddDrivePermissionSelector>Add Permission</AddDrivePermissionSelector>
       <UIPermissionSelector>Select Permission</UIPermissionSelector>
     </title>
   </PopupDrivePermission>
@@ -1439,7 +1439,7 @@
       <usersOrGroups>User or Group</usersOrGroups>
       <read>Read</read>
       <addNode>Modify Node</addNode>
-      <remove>Remove</remove>
+      <remove>Sil</remove>
       <action>Action</action>
     </header>
     <msg>
@@ -1484,7 +1484,7 @@
       <userOrGroup>User or Group</userOrGroup>
       <read>Read</read>
       <add_node>Modify</add_node>
-      <remove>Remove</remove>
+      <remove>Sil</remove>
     </label>
     <title>Add permission to this node</title>
     <action>
@@ -1524,7 +1524,7 @@
       <icon>Icon</icon>
     </header>
     <action>
-      <AddNew>Add Template</AddNew>
+      <AddNew>Şablon Əlavə Et</AddNew>
     </action>
     <msg>
       <confirm-delete>Do you really want to delete?</confirm-delete>
@@ -1542,7 +1542,7 @@
       <icon>Icon</icon>
     </header>
     <action>
-      <AddNew>Add Template</AddNew>
+      <AddNew>Şablon Əlavə Et</AddNew>
     </action>
     <msg>
       <confirm-delete>Do you really want to delete?</confirm-delete>
@@ -1560,7 +1560,7 @@
       <action>Action</action>
     </header>
     <action>
-      <AddNew>Add Template</AddNew>
+      <AddNew>Şablon Əlavə Et</AddNew>
     </action>
     <msg>
       <confirm-delete>Do you really want to delete?</confirm-delete>
@@ -1595,7 +1595,7 @@
       <template>Template</template>
     </header>
     <action>
-      <AddTemplate>Add Template</AddTemplate>
+      <AddTemplate>Şablon Əlavə Et</AddTemplate>
       <Edit>Edit</Edit>
       <Delete>Delete</Delete>
     </action>
@@ -1618,7 +1618,7 @@
       <Delete>Delete</Delete>
     </title>
     <action>
-      <AddTemplate>Add Template</AddTemplate>
+      <AddTemplate>Şablon Əlavə Et</AddTemplate>
       <Edit>Edit</Edit>
       <Delete>Delete</Delete>
     </action>
@@ -1631,7 +1631,7 @@
       <template>Template</template>
     </header>
     <action>
-      <AddTemplate>Add Template</AddTemplate>
+      <AddTemplate>Şablon Əlavə Et</AddTemplate>
       <Edit>Edit</Edit>
       <Delete>Delete</Delete>
     </action>
@@ -1888,7 +1888,7 @@
       <name-exist>The name '{0}' already exists.</name-exist>
     </msg>
     <title>
-      <AddPermission>Tambah kebenaran</AddPermission>
+      <AddPermission>Add Permission</AddPermission>
       <RemovePermission>Remove Permission</RemovePermission>
     </title>
   </UITemplateContent>
@@ -1927,7 +1927,7 @@
       <name>Name</name>
       <type>Type</type>
       <statement>Statement</statement>
-      <permission>Kebenaran</permission>
+      <permission>Permissions</permission>
       <action>Actions</action>
     </header>
     <action>
@@ -1949,7 +1949,7 @@
       <type>Query Type</type>
       <statement>Statement</statement>
       <cache>Enable Cache Results</cache>
-      <permissions>Kebenaran</permissions>
+      <permissions>Permissions</permissions>
       <PermissionButton>UIQueriesForm</PermissionButton>
     </label>
     <action>
@@ -2000,7 +2000,7 @@
     <title>
       <Edit>Edit</Edit>
       <Delete>Delete</Delete>
-      <Remove>Remove</Remove>
+      <Remove>Sil</Remove>
     </title>
     <action>
       <AddStyle>Add Style</AddStyle>
@@ -2087,17 +2087,17 @@
   </UIFormInputSetWithAction>
   <template>
     <title>
-      <AddPermission>Tambah kebenaran</AddPermission>
+      <AddPermission>Add Permission</AddPermission>
     </title>
   </template>
   <metadataTypeTab>
     <title>
-      <AddPermission>Tambah kebenaran</AddPermission>
+      <AddPermission>Add Permission</AddPermission>
     </title>
   </metadataTypeTab>
   <PermissionButton>
     <title>
-      <AddPermission>Tambah kebenaran</AddPermission>
+      <AddPermission>Add Permission</AddPermission>
     </title>
   </PermissionButton>
   <nodeTypeDefinition>
@@ -2142,7 +2142,7 @@
   </ECMTemplate>
   <step1>
     <title>
-      <AddPermission>Tambah kebenaran</AddPermission>
+      <AddPermission>Add Permission</AddPermission>
     </title>
   </step1>
   <step2>
@@ -2253,8 +2253,8 @@
         <firstName>#{word.firstName}</firstName>
         <email>#{word.email}</email>
       </option>
-      <group>Group</group>
-      <searchUser>User</searchUser>
+      <group>Qrup</group>
+      <searchUser>İstifadəçi</searchUser>
       <userName>#{word.userName}</userName>
       <lastName>#{word.lastName}</lastName>
       <firstName>#{word.firstName}</firstName>
@@ -2300,7 +2300,7 @@
   <UIUnLockForm>
     <label>
       <name>Path Node</name>
-      <permissions>Kebenaran</permissions>
+      <permissions>Permissions</permissions>
       <PermissionButton>UI Unlock Form</PermissionButton>
     </label>
     <action>
@@ -2409,7 +2409,7 @@
   <UITagManager>
     <action>
       <title>
-        <RemoveStyle>Remove</RemoveStyle>
+        <RemoveStyle>Sil</RemoveStyle>
         <AddStyle>Add Style</AddStyle>
       </title>
     </action>
@@ -2476,10 +2476,10 @@
     </msg>
   </UITagPermissionInfo>
   <UITagPermissionForm>
-    <title>Tambah kebenaran</title>
+    <title>Add Permission</title>
     <action>
       <Save>#{word.save}</Save>
-      <Add>Add</Add>
+      <Add>Əlavə Et</Add>
     </action>
     <label>
       <userOrGroup>Memberships:</userOrGroup>
@@ -2509,7 +2509,7 @@
   <UIActionForm>
     <title>
       <ShowComponent>Open Window</ShowComponent>
-      <removeReference>Remove</removeReference>
+      <removeReference>Sil</removeReference>
     </title>
   </UIActionForm>
   <NodeTypeNameValidator>
@@ -2550,7 +2550,7 @@
   <DriveInputSet>
     <title>
       <ChooseNodeType>Select Node Types</ChooseNodeType>
-      <RemoveNodeType>Remove</RemoveNodeType>
+      <RemoveNodeType>Sil</RemoveNodeType>
     </title>
   </DriveInputSet>
   <PopupNodeTypeSelector>

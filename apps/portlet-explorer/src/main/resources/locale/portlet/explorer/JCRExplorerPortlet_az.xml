@@ -17,9 +17,9 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <not-support>Anda tidak dapat berkomentar tentang jenis dokumen ini.</not-support>
-      <not-checkedout>Anda harus memeriksa dokumen terlebih dahulu sebelum mengomentarinya.</not-checkedout>
-      <content-null>Anda tidak dapat memposting pesan.</content-null>
+      <not-support>You can't comment on this type of document.</not-support>
+      <not-checkedout>You must check out the document before commenting on it.</not-checkedout>
+      <content-null>You cannot post an empty comment.</content-null>
     </msg>
   </UICommentForm>
   <!--
@@ -61,7 +61,7 @@
       <refresh-session-success>The session was refreshed successfully.</refresh-session-success>
       <no-node-history>You are at the root folder.</no-node-history>
       <save-session-success>All changes have been saved.</save-session-success>
-      <target-path-not-found>Kamu tidak dapat mengakses jalan ini, entah karena tidak ada lagi atau karena Kamu tidak memiliki hak akses.</target-path-not-found>
+      <target-path-not-found>You can't access this path, either because it doesn't exist anymore or because you don't have access permissions.</target-path-not-found>
     </msg>
   </UIJCRExplorer>
   <!--
@@ -71,7 +71,7 @@
   -->
   <UISideBar>
     <label>
-      <Relation>Relasi</Relation>
+      <Relation>Relation</Relation>
       <Explorer>File Explorer</Explorer>
       <Close>Close Sidebar</Close>
       <TagExplorer>Tag Cloud</TagExplorer>
@@ -114,9 +114,9 @@
       <GeneralDrives>General drives</GeneralDrives>
     </title>
     <msg>
-      <no-view-found>Ada tidak ada pemandangan yang tersedia menurut Anda izin akses dalam drive '{0}'.</no-view-found>
-      <access-denied>Akses ditolak. Mungkin kamu tidak memiliki izin kerja dari drive '{0}'.</access-denied>
-      <workspace-not-exist>Berkendara '{0}' disimpan dalam satu workspace tidak diakui. Harap mengkonfigurasi ulang drive ini.</workspace-not-exist>
+      <no-view-found>There is no view available according to your access permissions in drive '{0}'.</no-view-found>
+      <access-denied>Access denied. You may not have permission in the workspace of drive '{0}'.</access-denied>
+      <workspace-not-exist>Drive '{0}' was stored in one unrecognized workspace. Please reconfigure this drive.</workspace-not-exist>
     </msg>
   </UIDrivesBrowser>
 
@@ -132,7 +132,7 @@
       <webDavView>Open in MS Office</webDavView>
     </label>
     <msg>
-      <path-not-found>Elemen ini sudah dihapus atau diganti. Silahkan klik tombol Refresh.</path-not-found>
+      <path-not-found>This element was deleted or changed. Please click the Refresh button.</path-not-found>
     </msg>
   </UITreeExplorer>
   <!--
@@ -159,9 +159,9 @@
     <label>
       <enableStructure>Browse in structure mode:</enableStructure>
       <showSideBar>Show sidebar:</showSideBar>
-      <showHiddenNode>Munculkan item yang tersembunyi:</showHiddenNode>
-      <showNonDocument>Munculkan item bukan dokumen:</showNonDocument>
-      <showRefDocuments>Munculkan direferensikan item:</showRefDocuments>
+      <showHiddenNode>Show hidden items:</showHiddenNode>
+      <showNonDocument>Show non-document items:</showNonDocument>
+      <showRefDocuments>Show referenced items:</showRefDocuments>
       <enableDragAndDrop>Enable Drag &amp; Drop:</enableDragAndDrop>
       <sortBy>Sort order:</sortBy>
       <order>Order by:</order>
@@ -201,15 +201,15 @@
       <Back>#{word.back}</Back>
     </action>
     <msg>
-      <rename-successfull>'{0}' diubah namanya menjadi '{1}' dengan berhasil.</rename-successfull>
-      <rename-denied>Akses ditolak. Kamu tidak dapat mengubah nama item ini.</rename-denied>
-      <fileName-invalid>Nama baru berisi beberapa karakter yang tidak sah.</fileName-invalid>
-      <newName-same-oldName>Nama baru sudah ada. Silakan diperiksa lagi.</newName-same-oldName>
-      <version-exception>Dokumen ini (atau salah satu leluhurnya) tidak diperiksa.</version-exception>
+      <rename-successfull>'{0}' was renamed to '{1}' successfully.</rename-successfull>
+      <rename-denied>Access denied. You can't rename this item.</rename-denied>
+      <fileName-invalid>The new name contains some invalid characters.</fileName-invalid>
+      <newName-same-oldName>The new name already exists. Please check again.</newName-same-oldName>
+      <version-exception>This document (or one of its ancestors) is not checked out.</version-exception>
       <lock-exception>This document is locked. Please unlock it before renaming.</lock-exception>
       <constraintViolation-exception>An error occurred while renaming '{0}'. Please check again.</constraintViolation-exception>
       <unknown-prefix>Prefix '{0}' has not been registered yet.</unknown-prefix>
-      <rename-error>Sebuah kesalahan terjadi saat mengganti nama. Silahkan Periksa lagi.</rename-error>
+      <rename-error>An error occurred while renaming. Please check again.</rename-error>
     </msg>
   </UIRenameForm>
   <UIPopupWindow>
@@ -313,20 +313,20 @@
       <UploadNewVersion>Upload a new version</UploadNewVersion>
     </tooltip>
     <msg>
-      <cannot-action-in-rootnode>Kamu tidak dapat melakukan tindakan pada akar ini.</cannot-action-in-rootnode>
+      <cannot-action-in-rootnode>You can't perform this action at root.</cannot-action-in-rootnode>
       <node-checkedin>You must check out first.</node-checkedin>
       <cannot-enable-version-rootnode>Can't activate versioning on root.</cannot-enable-version-rootnode>
-      <cannot-enable-publication-rootnode>Tidak dapat mengaktifkan publikasi di root.</cannot-enable-publication-rootnode>
+      <cannot-enable-publication-rootnode>Can't activate publication at root.</cannot-enable-publication-rootnode>
       <manage-publication>
-        <not-supported-nodetype>Hanya dokumen yang dapat diterbitkan.</not-supported-nodetype>
+        <not-supported-nodetype>Only documents can be published.</not-supported-nodetype>
         <no-publication-lifecycle>No publication lifecycle is configured.</no-publication-lifecycle>
       </manage-publication>
-      <unsubcriber-lifecycle>Dokumen itu sudah berhenti berlangganan.</unsubcriber-lifecycle>
+      <unsubcriber-lifecycle>The document was already unsubscribed.</unsubcriber-lifecycle>
       <not-supported-nodetype>This operation is only supported for documents.</not-supported-nodetype>
-      <unsubcriber-lifecycle-finish>Dokumen itu berhenti berlangganan dengan sukses.</unsubcriber-lifecycle-finish>
-      <access-false>Dokumen ini bukan artikel atau lapor masuk.</access-false>
+      <unsubcriber-lifecycle-finish>The document was unsubscribed successfully.</unsubcriber-lifecycle-finish>
+      <access-false>The document is not an article or checked in.</access-false>
       <unsupported-action>This action is not supported.</unsupported-action>
-      <not-relationable>Dokumen ini tidak memiliki hubungan.</not-relationable>
+      <not-relationable>This document has no relations.</not-relationable>
       <node-pasted>'{0}' has been pasted at the location '{1}'. This operation has already been saved.</node-pasted>
       <no-node-selected>Nothing to copy.</no-node-selected>
       <unable-edit>Editing documents of type '{1}' like '{0}' is not supported.</unable-edit>
@@ -383,14 +383,14 @@
       <can-not-checkin-node>You can't check in this item. Please check that you have the necessary permissions.</can-not-checkin-node>
       <can-not-checkout-node>You can't check out this item. Please check that you have the necessary permissions.</can-not-checkout-node>
       <move-constraint-exception>An error occurred while moving this item.</move-constraint-exception>
-      <not-lock-owner>Kamu tidak bisa membuka kunci dokumen ini karena Kamu bukan pemilik kunci.</not-lock-owner>
-      <is-checked-in>Silakan diperiksa dokumen ini sebelum memberi nama baru.</is-checked-in>
-      <is-checked-in-lock>Silakan diperiksa dokumen ini sebelum melakukan penguncian.</is-checked-in-lock>
-      <cant-lock>Kamu tidak bisa mengunci dokumen ini.</cant-lock>
-      <node-locked>Item dengan jalur {0} atau tingkat atas terkunci.</node-locked>
-      <can-not-delete>Silahkan tutup dokumen ini sebelum menghapusnya.</can-not-delete>
-      <can-not-delete-version>Kamu tidak bisa menghapus dokumen ini. Ini berversi.</can-not-delete-version>
-      <not-support>Kamu tidak bisa menghapus item yang dipilih. Silahkan pilih yang lain.</not-support>
+      <not-lock-owner>You can't unlock this document because you are not the lock owner.</not-lock-owner>
+      <is-checked-in>Please check out this document before renaming.</is-checked-in>
+      <is-checked-in-lock>Please check out this document before locking.</is-checked-in-lock>
+      <cant-lock>You can't lock this document.</cant-lock>
+      <node-locked>The item with the path {0} or upper level is locked.</node-locked>
+      <can-not-delete>Please close this document before deleting.</can-not-delete>
+      <can-not-delete-version>You can't delete this document. It's versioned.</can-not-delete-version>
+      <not-support>You can't delete the selected item. Please select another one.</not-support>
       <current-node-not-allow-paste>You can't paste the copied item there.</current-node-not-allow-paste>
       <copied-node-in-versioning>You can't paste the copied item here because it's versioned.</copied-node-in-versioning>
       <parent-node-locked>You don't have permission to unlock '{0}'.</parent-node-locked>
@@ -399,10 +399,10 @@
       <has-not-add-permission>You don't have the permission to add here.</has-not-add-permission>
       <node-cutting>Item is being cut. You can't paste it here.</node-cutting>
       <access-denied>Access denied. You may not have the permission.</access-denied>
-      <remove-verion-exception>Kamu tidak bisa menghapus dokumen ini karena sudah diperiksa.</remove-verion-exception>
-      <remove-referentialIntegrityException>Kamu tidak bisa menghapus item ini karena saat ini direferensikan oleh yang lain.</remove-referentialIntegrityException>
+      <remove-verion-exception>You can't remove this document because it is checked in.</remove-verion-exception>
+      <remove-referentialIntegrityException>You can't delete this item because it is currently referenced by another one.</remove-referentialIntegrityException>
       <constraintviolation-exception>The mandatory property jcr:uuid was not found. The document may have been deleted or changed. Please click the Refresh button.</constraintviolation-exception>
-      <path-not-found-exception>Dokumen ini sudah dihapus atau diubah. Silahkan klik tombol Refresh.</path-not-found-exception>
+      <path-not-found-exception>This document was deleted or changed. Please click the Refresh button.</path-not-found-exception>
       <not-exist-categories>The category does not exist.</not-exist-categories>
       <lock-node-read-only>This file is locked by user {0}. Open read-only ?</lock-node-read-only>
     </msg>
@@ -428,7 +428,7 @@
       <title-invalid>Please enter the folder title.</title-invalid>
       <name-not-allowed>This name is not allowed.</name-not-allowed>
       <fileName-error>The file name is invalid.</fileName-error>
-      <constraint-violation>Anda tidak dapat menambahkan dokumen tipe ini '{0}' di sini.</constraint-violation>
+      <constraint-violation>You can't add a document of type '{0}' here.</constraint-violation>
       <repository-exception>An unexpected error occurred. Please contact your administrator for more details.</repository-exception>
       <repository-exception-permission>You don't have the permission to add a new folder here.</repository-exception-permission>
       <numberformat-exception>You cannot save this folder. The name provided must be in numerical format.</numberformat-exception>
@@ -451,12 +451,12 @@
     </title>
     <msg>
       <!-- Delte one node is not in trash and have no relation -->
-      <confirm-delete>Apakah Kamu yakin ingin menghapus item ini '{0}'?</confirm-delete>
-      <confirm-delete-file>Kamu Yakin ingin menghapus berkas ini '{0}'?</confirm-delete-file>
-      <confirm-delete-folder>Yakin ingin menghapus folder ini '{0}' dan semua subfoldernya?</confirm-delete-folder>
+      <confirm-delete>Are you sure you want to delete the item '{0}'?</confirm-delete>
+      <confirm-delete-file>Are you sure you want to delete the file '{0}'?</confirm-delete-file>
+      <confirm-delete-folder>Are you sure you want to delete the folder '{0}' and all subfolders?</confirm-delete-folder>
       
       <!-- Delte one node is in trash and have no relation -->
-      <confirm-delete-permanently>Apakah Anda yakin Anda ingin menghapus item ini '{0}' secara permanen?</confirm-delete-permanently>
+      <confirm-delete-permanently>Are you sure you want to permanently remove the item '{0}'?</confirm-delete-permanently>
       <confirm-delete-file-permanently>Are you sure you want to permanently remove the file '{0}'?</confirm-delete-file-permanently>
       <confirm-delete-folder-permanently>Are you sure you want to permanently remove the folder '{0}' and all subfolders?</confirm-delete-folder-permanently>
       
@@ -524,7 +524,7 @@
     <tooltip>
       <Rename>Rename</Rename>
       <Cut>Cut</Cut>
-      <Copy>Copy</Copy>
+      <Copy>Kopyala</Copy>
       <Save>#{word.save}</Save>
       <RemoveNode>Delete</RemoveNode>
       <Checkin>Checkin</Checkin>
@@ -572,7 +572,7 @@
       <Lock>Lock</Lock>
       <Unlock>UnLock</Unlock>
       <EditDocument>Edit</EditDocument>
-      <Copy>Copy</Copy>
+      <Copy>Kopyala</Copy>
       <Rename>Rename</Rename>
       <Delete>Delete</Delete>
       <Save>#{word.save}</Save>
@@ -655,7 +655,7 @@
       <UIActionContainer>Add Action</UIActionContainer>
       <UIActionViewContainer>Action Info</UIActionViewContainer>
       <UIMultiLanguageForm>View Language</UIMultiLanguageForm>
-      <UIAddLanguageContainer>Add Language</UIAddLanguageContainer>
+      <UIAddLanguageContainer>Dil Əlavə Et</UIAddLanguageContainer>
       <UINonPublishedForm>State</UINonPublishedForm>
       <UIPublishedForm>State</UIPublishedForm>
       <UIPublicationLogList>History</UIPublicationLogList>
@@ -760,7 +760,7 @@
       <usersOrGroups>User or Group</usersOrGroups>
       <read>Read</read>
       <addNode>Modify</addNode>
-      <remove>Remove</remove>
+      <remove>Sil</remove>
       <action>Action</action>
     </header>
     <msg>
@@ -1080,7 +1080,7 @@
       <notcontains>Not Contain Value</notcontains>
     </label>
     <action>
-      <Add>Add</Add>
+      <Add>Əlavə Et</Add>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
@@ -1095,13 +1095,13 @@
       <toDate-invalid>Invalid type in the 'To' field. Please reselect or type correctly.</toDate-invalid>
     </msg>
     <button>
-      <label-Add>Add</label-Add>
+      <label-Add>Əlavə Et</label-Add>
       <label-Cancel>#{word.cancel}</label-Cancel>
     </button>
   </UIConstraintsForm>
   <ConstraintsForm>
     <action>
-      <Add>Add</Add>
+      <Add>Əlavə Et</Add>
       <Cancel>#{word.cancel}</Cancel>
     </action>
   </ConstraintsForm>
@@ -1212,7 +1212,7 @@
     </label>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Add>Add</Add>
+      <Add>Əlavə Et</Add>
     </action>
   </UIMetadataSelectForm>
   <property1MetadataPopup>
@@ -1236,7 +1236,7 @@
     </label>
     <pLabel>Properties:</pLabel>
     <action>
-      <Add>Add</Add>
+      <Add>Əlavə Et</Add>
       <Cancel>#{word.cancel}</Cancel>
     </action>
   </UISelectPropertyForm>
@@ -1399,7 +1399,7 @@
       <e_8>Property Removed</e_8>
       <e_32>#{word.save}</e_32>
       <e_64>Move</e_64>
-      <e_128>Copy</e_128>
+      <e_128>Kopyala</e_128>
       <e_256>Add Mixin</e_256>
       <e_512>Remove Mixin</e_512>
       <e_1024>Clone</e_1024>
@@ -1450,7 +1450,7 @@
   <UIActivePublication>
     <header>
       <LifecycleName>Name</LifecycleName>
-      <LifecycleDesc>Description</LifecycleDesc>
+      <LifecycleDesc>Açıqlama</LifecycleDesc>
       <action>Action</action>
     </header>
     <action>
@@ -1558,7 +1558,7 @@
       <label>Select Label</label>
     </label>
     <action>
-      <Remove>Remove</Remove>
+      <Remove>Sil</Remove>
       <Cancel>#{word.cancel}</Cancel>
     </action>
   </UIRemoveLabelForm>
@@ -1793,7 +1793,7 @@
   <UIActionList>
     <header>
       <name>#{word.name}</name>
-      <description>Description</description>
+      <description>Açıqlama</description>
   <lifecycle>Life Cycle</lifecycle>
   <triggeredaction>Triggered Action</triggeredaction>
       <instanceOf>Instance of Action Type</instanceOf>
@@ -1913,7 +1913,7 @@
       <tagSet>UITaggingForm</tagSet>
     </label>
     <action>
-      <AddTag>Add</AddTag>
+      <AddTag>Əlavə Et</AddTag>
       <Cancel>#{word.close}</Cancel>
     </action>
     <msg>
@@ -2129,8 +2129,8 @@
     <header>
       <date>Date</date>
       <newState>New State</newState>
-      <user>User</user>
-      <description>Description</description>
+      <user>İstifadəçi</user>
+      <description>Açıqlama</description>
       <version>Version</version>
       <visibility>Visibility</visibility>
     </header>
@@ -2458,7 +2458,7 @@
       <Back>Back to Rename</Back>
       <Keepfile>Keep both files</Keepfile>
 <ReadOnly>Open Read-only</ReadOnly>
-<Cancel>Cancel</Cancel>
+<Cancel>Ləğv Et</Cancel>
       <KeepBoth>Keep Both</KeepBoth>
       <CreateNewVersion>Save as new version</CreateNewVersion>
     </label>
@@ -2875,14 +2875,14 @@
     <UIActionForm>
     <title>
       <ShowComponent>Show Component</ShowComponent>
-      <removeReference>Remove</removeReference>
+      <removeReference>Sil</removeReference>
     </title>
   </UIActionForm>
 
   <EditFormAction>
     <title>
       <ShowComponent>Show Component</ShowComponent>
-      <removeReference>Remove</removeReference>
+      <removeReference>Sil</removeReference>
     </title>
   </EditFormAction>
 
@@ -2934,7 +2934,7 @@
   </UISelectRestorePath>
   <PathNode>
     <title>
-      <Add>Add</Add>
+      <Add>Əlavə Et</Add>
     </title>
   </PathNode>
   <UIPopupPathFoRestore>
@@ -3017,7 +3017,7 @@
       <versionName>Revision Name</versionName>
       <currentState>Current State</currentState>
       <user>Author</user>
-      <description>Description</description>
+      <description>Açıqlama</description>
     </header>
     <create-version>New version is created</create-version>
   </UIPublicationHistory>

@@ -23,11 +23,11 @@
   <WebContent>
     <dialog>
       <label>
-        <MainContent>Isi utama</MainContent>
+        <MainContent>Main Content</MainContent>
         <cssFile>default.css</cssFile>
         <jsFile>default.js</jsFile>
-        <Advanced>Maju</Advanced>
-        <Summary>Ringkasan</Summary>
+        <Advanced>Advanced</Advanced>
+        <Summary>Summary</Summary>
         <name>#{word.name}</name>
         <title>Title</title>
         <ContentCSS>CSS Data</ContentCSS>
@@ -54,7 +54,7 @@
         <name>#{word.name}</name>
         <active>Active</active>
         <priority>Priority</priority>
-        <content>Data CSS</content>
+        <content>CSS Data</content>
       </label>
     </dialog>
   </CSSFile>
@@ -63,9 +63,9 @@
     <dialog>
       <label>
         <name>#{word.name}</name>
-        <active>Aktif</active>
-        <priority>Prioritas</priority>
-        <content>Data JS</content>
+        <active>Active</active>
+        <priority>Priority</priority>
+        <content>JS Data</content>
       </label>
     </dialog>
   </JSFile>
@@ -75,7 +75,7 @@
       <label>
         <name>#{word.name}</name>
         <url>URL</url>
-        <description>Deskripsi</description>
+        <description>Açıqlama</description>
       </label>
     </dialog>
   </WebLink>
@@ -83,10 +83,10 @@
   <SiteMetadata>
     <dialog>
       <label>
-        <title>Judul situs</title>
-        <description>Deskripsi situs</description>
-        <keywords>Kata kunci situs</keywords>
-        <robots>Perilaku mesin pencari</robots>
+        <title>Site Title</title>
+        <description>Site Description</description>
+        <keywords>Site Keywords</keywords>
+        <robots>Search Engine Behavior</robots>
       </label>
     </dialog>
   </SiteMetadata>
