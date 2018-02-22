@@ -4,11 +4,11 @@
     <title>
       <QuickEdit>Edit in Content Explorer</QuickEdit>
       <print>Print This Page</print>
-      <FastPublish>I-publish</FastPublish>
+      <FastPublish>Publish</FastPublish>
     </title>
     <label>
       <draft>Draft</draft>
-      <print>Imprinta</print>
+      <print>Print</print>
     </label>
     <msg>
       <no-content>No contents found.</no-content>
@@ -40,9 +40,9 @@
   <UISCVPreferences>
     <action>
       <Save>#{word.save}</Save>
-      <Abort>I-abort</Abort>
+      <Abort>Abort</Abort>
       <Cancel>#{word.cancel}</Cancel>
-      <Print>Imprinta</Print>
+      <Print>Print</Print>
       <Close>#{word.close}</Close>
     </action>
     <title>Content Detail Preferences</title>
@@ -61,11 +61,11 @@
       <Advance>Advanced</Advance>
       <ContextCaption>Dynamic Navigation</ContextCaption>
       <UISCVContextualRadioBox>Contextual Content</UISCVContextualRadioBox>
-      <UISCVParameterInputBox>ni</UISCVParameterInputBox>
+      <UISCVParameterInputBox>by</UISCVParameterInputBox>
       <PrintSettingBlock>Print Settings</PrintSettingBlock>
       <UISCVPrintPageParameter>with</UISCVPrintPageParameter>
       <UISCVConfigPrintPageFormInputSet>Show in Page</UISCVConfigPrintPageFormInputSet>
-      <LockStatus>Ikandado</LockStatus>
+      <LockStatus>Lock</LockStatus>
       <CacheManagement>Content Visibility</CacheManagement>
       <UISCVCacheRadioBox>Share Content</UISCVCacheRadioBox>
     </label>
@@ -100,17 +100,17 @@
   </UISCVConfigPrintPageFormInputSet>
   <UISCVConfigPrintPageSelectorPopupWindow>
     <title>
-      <UIPageSelector>Tagapili ng pahina</UIPageSelector>
+      <UIPageSelector>Page Selector</UIPageSelector>
     </title>
   </UISCVConfigPrintPageSelectorPopupWindow>
   <PublicationStates>
     <archived>Archived</archived>
     <obsolete>Obsolete</obsolete>
     <unpublished>Unpublished</unpublished>
-    <enrolled>Nakapag enrol na</enrolled>
+    <enrolled>Enrolled</enrolled>
     <draft>Draft</draft>
     <pending>Pending</pending>
-    <approved>Inaprubahan</approved>
+    <approved>Approved</approved>
     <inreview>Under Review</inreview>
     <staged>Staged</staged>
     <published>Published</published>

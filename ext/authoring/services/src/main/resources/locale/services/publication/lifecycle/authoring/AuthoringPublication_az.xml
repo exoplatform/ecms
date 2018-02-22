@@ -3,14 +3,14 @@
   <PublicationService>
     <AuthoringPublicationPlugin>
       <changeState>
-        <obsoleted>Konten itu sudah usang</obsoleted>
-        <published>Konten itu dipublikasikan</published>
-<unpublished>Konten tidak dipublikasikan</unpublished>
-<archived>Konten diarsipkan</archived>
-<staged>Konten dipentaskan</staged>
+        <obsoleted>The content is obsolete</obsoleted>
+        <published>The content is published</published>
+<unpublished>The content is unpublished</unpublished>
+<archived>The content is archived</archived>
+<staged>The content is staged</staged>
 <approved>The content is approved</approved>
-<pending>Kontennya tertunda</pending>
-<draft>Isinya ada dalam bentuk draft</draft>
+<pending>The content is pending</pending>
+<draft>The content is in draft form</draft>
       </changeState>
     </AuthoringPublicationPlugin>
   </PublicationService>

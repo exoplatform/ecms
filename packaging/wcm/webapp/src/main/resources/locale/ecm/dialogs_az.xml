@@ -35,7 +35,7 @@
  
   <UICommentForm>
     <label>
-      <placeholder>Gamit ang @ para banggitin ang isang tao sa iyong komento</placeholder>
+      <placeholder>Use @ to mention someone in your comment</placeholder>
     </label>
   </UICommentForm>
  
@@ -164,7 +164,7 @@
         <format>#{word.format}:</format>
         <coverage>Coverage:</coverage>
         <identifier>Identifier:</identifier>
-        <language>Ang Wika:</language>
+        <language>Language:</language>
       </label>
     </dialog>
   </ElementSet>
@@ -200,8 +200,8 @@
   <Published>
     <dialog>
       <label>
-        <start-publication>Simula ng Paglathala</start-publication>
-        <end-publication>Katapusan ng Paglathala</end-publication>
+        <start-publication>Start Publication</start-publication>
+        <end-publication>End Publication</end-publication>
       </label>
     </dialog>
   </Published>
@@ -222,7 +222,7 @@
   <Relationable>
     <dialog>
       <label>
-        <relation>Ang kaugnayan</relation>
+        <relation>Relation</relation>
       </label>
     </dialog>
   </Relationable>
@@ -244,8 +244,8 @@
   <Versionable>
     <dialog>
       <label>
-        <version-history>Ang kasaysayan ng Bersyon</version-history>
-        <base-version>Base na Bersyon</base-version>
+        <version-history>Version History</version-history>
+        <base-version>Base Version</base-version>
         <is-checked-out>Is Checked out</is-checked-out>
         <predecessors>Predecessors</predecessors>
         <merge-failed>Merge Failed</merge-failed>
@@ -317,25 +317,25 @@
 <yes>Yes</yes>
 <true>True</true>
 <false>False</false>
-<Electronic>Elektronik</Electronic>
-<Paper>Ang Papel</Paper>
+<Electronic>Electronic</Electronic>
+<Paper>Paper</Paper>
 <NONE>None</NONE>
-<CLASSIFIED>Paguuri</CLASSIFIED>
-<UNCLASSIFIED>Hindi nauuri</UNCLASSIFIED>
-<NOCONTRACT>Walang kontrata</NOCONTRACT>
-<one-minute>Isang Minuto</one-minute>
-<hourly>Oras-Oras</hourly>
+<CLASSIFIED>Classified</CLASSIFIED>
+<UNCLASSIFIED>Unclassified</UNCLASSIFIED>
+<NOCONTRACT>No Contract</NOCONTRACT>
+<one-minute>One Minute</one-minute>
+<hourly>Hourly</hourly>
 <daily>Daily</daily>
-<quarterly>Kada tatlong buwan</quarterly>
+<quarterly>Quarterly</quarterly>
 <yearly>Yearly</yearly>
-<ten-years>Mga sampung taon</ten-years>
-<read>Ang Aksyon ang gumagamit</read>
-  <schedule>Taga-schedule</schedule>
-  <node_added>Ang Pagdagdag ng Nilalaman</node_added>
-  <node_removed>Ang Pagtanggal ng Nilalaman</node_removed>
-  <property_added>Ang Pagdagdag ng Katangian</property_added>
-  <property_removed>Pagtanggal ng Katangian</property_removed>
-  <property_changed>Pagbabago ng Katangian</property_changed>
+<ten-years>Ten Years</ten-years>
+<read>User Action</read>
+  <schedule>Scheduler</schedule>
+  <node_added>Content Addition</node_added>
+  <node_removed>Content Removal</node_removed>
+  <property_added>Property Addition</property_added>
+  <property_removed>Property Removal</property_removed>
+  <property_changed>Property Modification</property_changed>
 
   <ScriptAction>
     <dialog>

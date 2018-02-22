@@ -2,29 +2,29 @@
 <bundle>
 <UIPopupWindow>
 <title>
-<UIViewInfoManager>View Information</UIViewInfoManager>
+<UIViewInfoManager>Tingnan ang Impormasyon</UIViewInfoManager>
 </title>
 </UIPopupWindow>
     
 <ECMContextMenu>
 <event>
-<ViewInfo>View Information</ViewInfo>
+<ViewInfo>Tingnan ang Impormasyon</ViewInfo>
 </event>
 </ECMContextMenu>
 <UIViewInfoContainer>
 <label>
-      <name>Name</name>
-      <title>Title</title>
-      <type>Type</type>
-      <size>Size</size>
-      <owner>Owner</owner>
-      <lastModifier>Last Modifier</lastModifier>
-      <created>Created Date</created>
-      <lastModified>Last Modified Date</lastModified>
-      <publicationState>Publication State</publicationState>
+      <name>Ang pangalan</name>
+      <title>Ang Titulo</title>
+      <type>Ang tipo</type>
+      <size>Ang Sukat</size>
+      <owner>Ang May-ari</owner>
+      <lastModifier>Ang Huling Nabago</lastModifier>
+      <created>Ang petsa ng pagkakagawa</created>
+      <lastModified>Huling Petsa ng Pagbago</lastModified>
+      <publicationState>Ang Publikasyon ng Estado sa Publikasyon</publicationState>
 </label>
 <value>
-      <folder>Folder</folder>
+      <folder>Ang Polder</folder>
 </value>
 <action>
 <Close>#{word.close}</Close>

@@ -27,9 +27,9 @@
         <comments>Comment(s)</comments>
         <show-comments>Show comments</show-comments>
         <hide-comments>Hide comments</hide-comments>
-        <comment-by>Ang komento ni</comment-by>
+        <comment-by>Commented by</comment-by>
         <email>Email</email>
-        <site>Ang Sayt</site>
+        <site>Site</site>
         <lastComment>Last comment posted by {user} at {time}</lastComment>
         <Less_Than_A_Minute>less than a minute ago</Less_Than_A_Minute>
         <About_A_Minute>about a minute ago</About_A_Minute>
@@ -99,11 +99,11 @@
     <view>
       <label>
         <name>Name</name>
-        <versionable>Nababago</versionable>
+        <versionable>Versionable</versionable>
         <exo_owner>Owner</exo_owner>
-        <exo_dateCreated>Petsa ng Paglikha</exo_dateCreated>
+        <exo_dateCreated>Date Created</exo_dateCreated>
         <exo_dateModified>Date Modified</exo_dateModified>
-        <auditing>Mag-odit</auditing>
+        <auditing>Auditing</auditing>
       </label>
     </view>
   </ListView>
@@ -117,7 +117,7 @@
         <action-name>Action Name</action-name>
         <lifecycle>Lifecycle</lifecycle>
         <metadata>Metadata</metadata>
-        <description>Description</description>
+        <description>Açıqlama</description>
       </label>
     </view>
   </AddMetadata>
@@ -130,7 +130,7 @@
       <label>
         <action-name>Action Name</action-name>
         <lifecycle>Lifecycle</lifecycle>
-        <description>Description</description>
+        <description>Açıqlama</description>
       </label>
     </view>
   </AutoVersioning>
@@ -142,7 +142,7 @@
       <label>
         <action-name>Name</action-name>
         <lifecycle>Lifecycle</lifecycle>
-        <description>Description</description>
+        <description>Açıqlama</description>
       </label>
     </view>
   </EnableVersioning>
@@ -162,13 +162,13 @@
         <resource-type>Resource Type</resource-type>
         <date>Date</date>
         <publisher>Publisher</publisher>
-        <description>Description</description>
+        <description>Açıqlama</description>
         <rights>Rights</rights>
-        <relation>Ang kaugnayan</relation>
+        <relation>Relation</relation>
         <format>Format</format>
         <coverage>Coverage</coverage>
         <identifier>Identifier</identifier>
-        <languages>Ang mga Wika</languages>
+        <languages>Languages</languages>
       </label>
       <action>
         <add-edit>Add/Edit</add-edit>
@@ -176,7 +176,7 @@
       </action>
       <tooltip>
         <cancel>#{word.cancel}</cancel>
-        <add-edit>Magdagdag/Mag-edit ng mga Katangian</add-edit>
+        <add-edit>Add/Edit Properties</add-edit>
       </tooltip>
     </view>
   </ElementSet>
