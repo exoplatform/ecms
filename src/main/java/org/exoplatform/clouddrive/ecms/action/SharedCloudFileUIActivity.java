@@ -150,7 +150,9 @@ public class SharedCloudFileUIActivity extends SharedFileUIActivity {
     // formats
     CloudFile file = cloudFile(getContentNode(i));
     if (file != null) {
-      return new StringBuilder("javascript:window.open('").append(file.getLink()).append("')").toString();
+      // In PLF 5.0 we need fix the download URL link in Javascript to open it in new window
+      //return new StringBuilder("javascript:window.open('").append(file.getLink()).append("')").toString();
+      return file.getLink(); 
     } else {
       return super.getDownloadLink(i);
     }
