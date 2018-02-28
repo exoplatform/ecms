@@ -37,7 +37,7 @@ if (drive) {
 	def viewable = uicomponent.isViewable()
 %>
 <div id="CloudFileViewer" file-open-on="${openOn} ${serviceName}"
-		style="position: relative; padding-top: 0; padding-bottom: 0; height: <%=viewable ? "100%" : "200px"%>; overflow: hidden;">
+		style="height: <%=viewable ? "100%" : "200px"%>;">
 	<%
 	if(viewable) {
 	  // preview/edit view
@@ -46,7 +46,6 @@ if (drive) {
 	%>
 	<div style="display: none;" class="file-content">
     <a id="ViewerSwitch" view-title="${viewFile}" edit-title="${editFile}"
-      style="position: relative; padding-left: 7px; padding-right: 7px; font-weight: normal;"
       class="btn pull-right">
       ${editFile}
     </a>
