@@ -66,13 +66,29 @@
 	content: "\e900";
 }
 
+/*
+ * File View style
+ */
+#CloudFileViewer {
+	position: relative; 
+	padding-top: 0; 
+	padding-bottom: 0; 
+	overflow: hidden;	
+}
+
 .fileContent .content, .mediaContent .content #CloudFileViewer {
 	text-align: left !important;
 }
 
-/*
- * File View style
- */
+#ViewerSwitch {
+	position: relative;
+	padding-left: 7px;
+	padding-right: 7px;
+	padding-bottom: 4px;
+	margin-right: 4px;
+	font-weight: normal;
+}
+
 .file-content {
 	position: relative;
 	min-height: 600px;
