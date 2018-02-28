@@ -59,6 +59,7 @@ import org.exoplatform.clouddrive.utils.IdentityHelper;
 import org.exoplatform.clouddrive.viewer.ContentReader;
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
+import org.exoplatform.container.component.RequestLifeCycle;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
@@ -197,7 +198,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
   /**
    * Number of files, after reaching it, a command can save the drive.
    */
-  public static final int        COMMAND_CHANGES_CHUNK = 30;
+  public static final int        COMMAND_CHANGES_CHUNK = 15; // was 30, Feb 9 2018
 
   /** The Constant DUMMY_DATA. */
   public static final String     DUMMY_DATA            = "".intern();
@@ -932,7 +933,6 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
      */
     @Override
     public void prepare(Command command) throws CloudDriveException {
-      super.prepare(command);
       ExoJCRSettings settings = config.get(command);
       if (settings != null) {
         settings.prevConversation = ConversationState.getCurrent();
@@ -941,15 +941,19 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
         // set correct container
         settings.prevContainer = ExoContainerContext.getCurrentContainerIfPresent();
         ExoContainerContext.setCurrentContainer(settings.container);
+        
+        // Begin lifecycle
+        RequestLifeCycle.begin(settings.container);
 
         // set correct SessionProvider
         settings.prevSessions = sessionProviders.getSessionProvider(null);
-        SessionProvider sp = new SessionProvider(settings.conversation);
-        sessionProviders.setSessionProvider(null, sp);
+        sessionProviders.setSessionProvider(null, new SessionProvider(settings.conversation));
       } else {
         throw new CloudDriveException(this.getClass().getName() + " setting not configured for " + command
             + " to be prepared.");
       }
+      // Super (chained env) prepare after this env as they may depends on the current
+      super.prepare(command);
     }
 
     /**
@@ -957,18 +961,37 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
      */
     @Override
     public void cleanup(Command command) throws CloudDriveException {
-      ExoJCRSettings settings = config.get(command);
-      if (settings != null) {
-        ConversationState.setCurrent(settings.prevConversation);
-        ExoContainerContext.setCurrentContainer(settings.prevContainer);
-        SessionProvider sp = sessionProviders.getSessionProvider(null);
-        sessionProviders.setSessionProvider(null, settings.prevSessions);
-        sp.close();
-      } else {
-        throw new CloudDriveException(this.getClass().getName() + " setting not configured for " + command
-            + " to be cleaned.");
+      // Let super (chained env) cleanup first as it may depend on this env  
+      CloudDriveException superError = null;
+      RuntimeException superRuntimeError = null;
+      try {
+        super.cleanup(command);
+      } catch(CloudDriveException cde) {
+        superError = cde;
+      } catch(RuntimeException ue) {
+        superRuntimeError = ue; 
+      } finally {
+        ExoJCRSettings settings = config.get(command);
+        if (settings != null) {
+          SessionProvider sp = sessionProviders.getSessionProvider(null);
+          RequestLifeCycle.end();
+          sessionProviders.setSessionProvider(null, settings.prevSessions);
+          ExoContainerContext.setCurrentContainer(settings.prevContainer);
+          ConversationState.setCurrent(settings.prevConversation);
+          sp.close();
+        } else {
+          String message = this.getClass().getName() + " setting not configured for " + command + " to be cleaned";
+          if (superError != null) {
+            LOG.warn(message + ". But another error raised: " + superError.getMessage());
+            throw superError;
+          }
+          if (superRuntimeError != null) {
+            LOG.warn(message + ". But runtime error raised: " + superRuntimeError.getMessage());
+            throw superRuntimeError;
+          }
+          throw new CloudDriveException(message);
+        }        
       }
-      super.cleanup(command);
     }
   }
 
