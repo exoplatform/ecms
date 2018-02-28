@@ -661,7 +661,7 @@
 							syncProcess.fail(function(e) {
 								delete autoSyncs[syncName];
 								// cancel and cleanup
-								utils.log("ERROR: " + (e.message ? e.message : e) + ". Auto-sync canceled for " + syncName);
+								utils.log("ERROR: " + (e && e.message ? e.message : e) + ". Auto-sync canceled for " + syncName);
 							});
 						}, syncTimeout);
 					}
