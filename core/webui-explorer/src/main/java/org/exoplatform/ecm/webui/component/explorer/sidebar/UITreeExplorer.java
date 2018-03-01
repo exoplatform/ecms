@@ -251,6 +251,11 @@ public class UITreeExplorer extends UIContainer {
       UITreeNodePageIterator pageIterator = findComponentById(treeNode.getPath());
       return pageIterator.getCurrentPageData();
     }
+    if(isShowChildren(treeNode) && treeNode.getChildrenSize() > 0 && treeNode.getChildren().size() == 0) {
+      UIJCRExplorer jcrExplorer = getAncestorOfType(UIJCRExplorer.class);
+      treeNode.setChildren(jcrExplorer.getChildrenList(treeNode.getPath(), false));
+      return treeNode.getChildren();
+    }
     return treeNode.getChildren();
   }
 
@@ -291,10 +296,10 @@ public class UITreeExplorer extends UIContainer {
     return prefixWebDAV ;
   }
   
-  public boolean isShowChildren(String path){
+  public boolean isShowChildren(TreeNode treeNode){
     UIJCRExplorer jcrExplorer = getAncestorOfType(UIJCRExplorer.class);
     String currentPath = jcrExplorer.getCurrentPath();
-    return currentPath.startsWith(path);
+    return treeNode.isExpanded() || currentPath.startsWith(treeNode.getPath());
   }
 
   public String getRepository() {

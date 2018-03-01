@@ -963,13 +963,7 @@ public class UIJCRExplorer extends UIContainer {
     NodeIterator childrenIterator = node.getNodes();
     List<Node> childrenList  = new ArrayList<Node>() ;
     NodeType nodeType = node.getPrimaryNodeType();
-    NodeType[] superTypes = nodeType.getSupertypes();
-    boolean isFolder = false ;
-    for(NodeType superType : superTypes) {
-      if(superType.getName().equals(Utils.NT_FOLDER) || superType.getName().equals(Utils.NT_UNSTRUCTURED)) {
-        isFolder = true ;
-      }
-    }
+    boolean isFolder = node.isNodeType(Utils.NT_FOLDER) || node.isNodeType(Utils.NT_UNSTRUCTURED) ;
     if(!preferences_.isJcrEnable() &&
         templateService.isManagedNodeType(nodeType.getName()) && !isFolder) {
       return childrenList ;

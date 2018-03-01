@@ -40,6 +40,7 @@ public class TreeNode {
   //TODO Need use this class for BC TreeNode
   private boolean isExpanded_ ;
   private String path_;
+  private String prefix;
   private NodeLocation node_ ;
   private NodeLinkAware node;
   private String name_;
@@ -71,6 +72,7 @@ public class TreeNode {
     name_ = getName(node);
     isExpanded_ = false ;
     path_ = path;
+    prefix =  path_.equals("/") ? "" : path_;
   }
 
   public boolean isExpanded() { return isExpanded_; }
@@ -126,12 +128,14 @@ public class TreeNode {
     for(TreeNode child : children_) {
       if(child.getName().equals(name)) return child ;
     }
-    return null;
+    Node tempNode = this.getNode().getNode(name);
+    if (tempNode == null) return null;
+    TreeNode tempTreeNode = new TreeNode(tempNode, prefix + "/" + getName(tempNode));
+    return tempTreeNode;
   }
 
   public void setChildren(List<Node> children) throws Exception {
     setExpanded(true) ;
-    String prefix = path_.equals("/") ? "" : path_;
     for(Node child : children) {
       children_.add(new TreeNode(child, prefix  + "/" + getName(child))) ;
     }
