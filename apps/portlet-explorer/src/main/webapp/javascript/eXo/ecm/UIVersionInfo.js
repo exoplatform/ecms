@@ -20,6 +20,15 @@
     $(me.compareButton).attr('disabled', true);
   };
 
+  UIVersionInfo.prototype.sendVersionSummary = function(params) {
+    var actionUrl = params.actionUrl
+              + "&name=" + encodeURIComponent(params.name)
+              + "&value=" + encodeURIComponent(params.value)
+              + "&objectId=" + encodeURIComponent(params.path)
+              + "&pk=" + encodeURIComponent(params.pk);
+    ajaxGet(actionUrl);
+  };
+
   UIVersionInfo.prototype.onCheck = function(evt) {
     var me = eXo.ecm.UIVersionInfo;
     var evt = evt || window.event;
