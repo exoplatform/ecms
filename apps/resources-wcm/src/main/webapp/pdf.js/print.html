@@ -349,15 +349,8 @@
             }
 
             var alertNotReady = false;
-            if (!PDFView.pages.length) {
+            if (!PDFView.downloadComplete) {
                 alertNotReady = true;
-            } else {
-                for (var i = 0, ii = PDFView.pages.length; i < ii; ++i) {
-                    if (!PDFView.pages[i].pdfPage) {
-                        alertNotReady = true;
-                        break;
-                    }
-                }
             }
             if (alertNotReady) {
                 var notReadyMessage = mozL10n.get('printing_not_ready', null,
