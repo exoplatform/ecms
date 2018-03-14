@@ -300,7 +300,7 @@
       <ManageActions>Acties beheren</ManageActions>
       <ExportNode>Exporteer Node</ExportNode>
       <ImportNode>Importeer Node</ImportNode>
-      <OverloadThumbnail>Change Icon Image</OverloadThumbnail>
+      <OverloadThumbnail>Overload thumbnail</OverloadThumbnail>
       <ManageHidden>Hide/Show content</ManageHidden>
       <ViewReferences>Toon Referenties</ViewReferences>
       <ViewNodeType>Toon Node Types</ViewNodeType>
@@ -1355,7 +1355,7 @@
       <addLabel>Label toevoegen</addLabel>
       <removeLable>Label verwijdern</removeLable>
       <restoreVersion>Versie herstellen</restoreVersion>
-      <viewVersion>View Version</viewVersion>
+      <viewVersion>Toon Versie Info</viewVersion>
       <deleteVersion>Versie verwijderen</deleteVersion>
       <compareVersion>Vergelijk met basis versie</compareVersion>
     </tooltip>

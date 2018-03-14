@@ -22,24 +22,24 @@
 <bundle>
   <UIExoStart>
     <tooltip>
-      <homepage>Homepage</homepage>
+      <homepage>Halaman depan</homepage>
     </tooltip>
   </UIExoStart>
 
   <UIFormInputSetWithAction>
     <msg>
-      <confirm-delete>Are you sure you want to delete this item?</confirm-delete>
+      <confirm-delete>Apakah anda yakin untuk menghapus item ini?</confirm-delete>
     </msg>
   </UIFormInputSetWithAction>
 
   <Drives>
     <label>
-      <ManagedSites>Site Management</ManagedSites>
-      <SharedSite>Shared Site</SharedSite>
-      <PersonalDocuments>Personal Documents</PersonalDocuments>
-      <UserDocuments>{0} Documents</UserDocuments>
-      <Collaboration>Collaboration</Collaboration>
-      <Trash>Trash</Trash>
+      <ManagedSites>Manajemen situs</ManagedSites>
+      <SharedSite>Situs Berbagi</SharedSite>
+      <PersonalDocuments>Dokumen pribadi</PersonalDocuments>
+      <UserDocuments>{0} Dokumen</UserDocuments>
+      <Collaboration>Kolaborasi</Collaboration>
+      <Trash>Sampah</Trash>
     </label>
   </Drives>
 
@@ -47,19 +47,19 @@
     <label>
       <wcm-view>Web</wcm-view>
       <admin-view>Admin</admin-view>
-      <icon-view>Icons</icon-view>
-      <thumbails-view>Thumbnails</thumbails-view>
-      <list-view>List</list-view>
-      <authoring-view>Authoring</authoring-view>
-      <wcm-category-view>Categories</wcm-category-view>
-      <file-view>File Management View</file-view>
+      <icon-view>Ikon</icon-view>
+      <thumbails-view>Gambar kecil</thumbails-view>
+      <list-view>Daftar</list-view>
+      <authoring-view>Pengarang</authoring-view>
+      <wcm-category-view>Kategori</wcm-category-view>
+      <file-view>Tampilan Manajemen File</file-view>
     </label>
   </Views>
 
   <UIActionBar>
     <obtion>
-      <Publication>Publication</Publication>
-      <System>System</System>
+      <Publication>Publikasi</Publication>
+      <System>Sistem</System>
     </obtion>
   </UIActionBar>
 
@@ -69,84 +69,84 @@
       <action>#{word.action}</action>
     </header>
     <msg>
-      <child-not-found>No Page Found.</child-not-found>
+      <child-not-found>Halaman Tidak Ditemukan.</child-not-found>
     </msg>
     <title>
-      <select>Select</select>
+      <select>Pilih</select>
     </title>
   </UIPageSelectorPanel>
 
   <UIContentDialogFormPopupWindow>
     <title>
-      <UIContentDialogPreference>Web Content Preference</UIContentDialogPreference>
+      <UIContentDialogPreference>Preferensi Konten Web</UIContentDialogPreference>
     </title>
   </UIContentDialogFormPopupWindow>
 
   <UITabPane>
     <title>
-      <UIContentBrowsePanelOne>Content Browser</UIContentBrowsePanelOne>
-      <UIContentBrowsePanelMulti>Content Browser</UIContentBrowsePanelMulti>
-      <UIContentBrowsePanelFolder>Folder Browser</UIContentBrowsePanelFolder>
-      <UIContentSearchForm>Content Search Form</UIContentSearchForm>
-      <UIContentSearchResult>Search Result</UIContentSearchResult>
-      <UIContentViewer>Preview Content</UIContentViewer>
-      <WebContentMetadataPopup>Property Selector</WebContentMetadataPopup>
-      <WebContentNodeTypePopup>Nodetype Selector</WebContentNodeTypePopup>
-      <UIPermissionManager>Permission Manager</UIPermissionManager>
+      <UIContentBrowsePanelOne>Pencarian Konten</UIContentBrowsePanelOne>
+      <UIContentBrowsePanelMulti>Pencarian Konten</UIContentBrowsePanelMulti>
+      <UIContentBrowsePanelFolder>Folder Pencari</UIContentBrowsePanelFolder>
+      <UIContentSearchForm>Form Pencarian Konten</UIContentSearchForm>
+      <UIContentSearchResult>Hasil pencarian</UIContentSearchResult>
+      <UIContentViewer>Pratinjau Konten</UIContentViewer>
+      <WebContentMetadataPopup>Pemilihan Properti</WebContentMetadataPopup>
+      <WebContentNodeTypePopup>Pemilihan Jenis Simpul</WebContentNodeTypePopup>
+      <UIPermissionManager>Izin Mengelola</UIPermissionManager>
     </title>
   </UITabPane>
 
   <UIContentBrowsePanelOne>
     <selectBoxValues>
-      <FilterBy>Filter by</FilterBy>
-      <WebContent>Web Content</WebContent>
-      <DMSDocument>Document</DMSDocument>
+      <FilterBy>Saring menurut</FilterBy>
+      <WebContent>Konten web</WebContent>
+      <DMSDocument>Dokumen</DMSDocument>
       <Media>Media</Media>
     </selectBoxValues>
     <msg>
-      <node-checkout>The node is checked out. Please check the node before performing this function.</node-checkout>
+      <node-checkout>Simpulnya diperiksa keluar. Silahkan periksa simpul sebelum melakukan fungsi ini.</node-checkout>
     </msg>
   </UIContentBrowsePanelOne>
 
   <UIContentBrowsePanelMulti>
     <selectBoxValues>
-      <FilterBy>Filter by</FilterBy>
-      <WebContent>Web Content</WebContent>
-      <DMSDocument>Document</DMSDocument>
+      <FilterBy>Filter menurut</FilterBy>
+      <WebContent>Konten web</WebContent>
+      <DMSDocument>Dokumen</DMSDocument>
       <Media>Media</Media>
     </selectBoxValues>
   </UIContentBrowsePanelMulti>
 
   <UIContentBrowsePanelOne>
     <label>
-      <LeftColumn>Select a folder to display its children as content.</LeftColumn>
-      <RightColumn>The content below can be selected.</RightColumn>
+      <LeftColumn>Pilih sebuah folder untuk menampilkan anak-anaknya sebagai konten.</LeftColumn>
+      <RightColumn>Konten di bawah ini dapat dipilih.</RightColumn>
     </label>
   </UIContentBrowsePanelOne>
 
   <UIContentBrowsePanelMulti>
     <label>
-      <LeftColumn>Select a folder to display its children as content.</LeftColumn>
-      <RightColumn>The content below can be selected.</RightColumn>
+      <LeftColumn>Pilih sebuah map untuk menampilkan anak-anaknya sebagai konten.</LeftColumn>
+      <RightColumn>Isi di bawah ini bisa dipilih.</RightColumn>
     </label>
   </UIContentBrowsePanelMulti>
 
   <UIContentBrowsePanelFolder>
     <label>
-      <LeftColumn>Select a folder to display its children as content.</LeftColumn>
-      <RightColumn>The folder below can be selected.</RightColumn>
+      <LeftColumn>Pilih folder untuk menampilkan anak-anaknya sebagai konten.</LeftColumn>
+      <RightColumn>Folder di bawah ini dapat dipilih.</RightColumn>
     </label>
   </UIContentBrowsePanelFolder>
 
   <UISelectedContentGrid>
     <label>
       <name>#{word.name}</name>
-      <add>Add</add>
-      <delete>Delete</delete>
+      <add>Tambah</add>
+      <delete>Hapus</delete>
     </label>
     <msg>
-      <no-content-found>No content found.</no-content-found>
-      <non-content>You have not selected any content.</non-content>
+      <no-content-found>Konten tidak ditemukan</no-content-found>
+      <non-content>Anda belum memilih konten apa pun.</non-content>
     </msg>
   </UISelectedContentGrid>
 
@@ -160,86 +160,86 @@
   <UIContentBrowsePathSelector>
     <header>
       <name>#{word.name}</name>
-      <publicationstate>Publication State</publicationstate>
-      <action>Action</action>
+      <publicationstate>Publikasi Negara</publicationstate>
+      <action>Tindakan</action>
     </header>
     <msg>
-      <child-not-found>No Content Found</child-not-found>
+      <child-not-found>Tidak ditemukan konten</child-not-found>
     </msg>
   </UIContentBrowsePathSelector>
 
   <UIContentBrowsePathSelectorFolder>
     <header>
       <name>#{word.name}</name>
-      <publicationstate>Publication State</publicationstate>
-      <action>Action</action>
+      <publicationstate>Publikasi Negara</publicationstate>
+      <action>Tindakan</action>
     </header>
     <msg>
-      <child-not-found>No Folder Found</child-not-found>
+      <child-not-found>Folder tidak ditemukan</child-not-found>
     </msg>
   </UIContentBrowsePathSelectorFolder>
 
   <UIContentSearchForm>
     <title>
-      <Location>Site Name</Location>
-      <SearchByName>Search by Name</SearchByName>
-      <Fulltext>A word or phrase in context</Fulltext>
-      <Property>Property</Property>
-      <Contain>Contain</Contain>
-      <FromDate>From Date</FromDate>
-      <ToDate>To Date</ToDate>
-      <DocumentType>Document Type</DocumentType>
+      <Location>Nama situs</Location>
+      <SearchByName>Cari berdasarkan nama</SearchByName>
+      <Fulltext>Sebuah kata atau ungkapan dalam konteks</Fulltext>
+      <Property>Milik</Property>
+      <Contain>Berisi</Contain>
+      <FromDate>Dari tanggal</FromDate>
+      <ToDate>Saat ini</ToDate>
+      <DocumentType>Jenis Dokumen</DocumentType>
     </title>
     <tooltip>
-      <AddMetadataType>Add Property</AddMetadataType>
-      <AddNodeType>Add Node Type</AddNodeType>
+      <AddMetadataType>Tambahkan Properti</AddMetadataType>
+      <AddNodeType>Tambahkan Jenis Node</AddNodeType>
     </tooltip>    
     <label>
       <option>
-        <CREATED>Created</CREATED>
-        <MODIFIED>Modified</MODIFIED>
+        <CREATED>Dibuat</CREATED>
+        <MODIFIED>Dimodifikasi</MODIFIED>
       </option>
     </label>
     <action>
-      <SearchWebContent>Search</SearchWebContent>
+      <SearchWebContent>Cari</SearchWebContent>
     </action>
     <msg>
-      <time-to-late>The searching time is too long.</time-to-late>
-      <empty-field>Please input a valid keyword for search.</empty-field>
-      <empty-name>Please enter the name to search</empty-name>
-      <empty-content>Please enter a word or phrase to search</empty-content>
-      <empty-property>Please select a property</empty-property>
-      <empty-property-keyword>Please enter a keyword for the property</empty-property-keyword>
-      <empty-doctype>Please select a document type</empty-doctype>
-      <empty-startDate>"From Date" is required</empty-startDate>
-      <invalid-format>Invalid date/time format in field '{0}'.</invalid-format>
-      <invalid-date>"To Date" must be later than "From Date"</invalid-date>
-      <invalid-startDate>"From Date" must not be later than today</invalid-startDate>
-      <invalid-nodeType>The node type "{0}" is invalid. Please check again.</invalid-nodeType>
-      <invalid-keyword>The keyword is invalid. Some characters are not supported.</invalid-keyword>
+      <time-to-late>Waktu pencariannya ialah terlalu lama.</time-to-late>
+      <empty-field>Silahkan masukan sebuah kata kunci yang sah untuk pencarian.</empty-field>
+      <empty-name>Silahkan masukkan nama untuk mencari</empty-name>
+      <empty-content>Silahkan masukkan sebuah kata atau ungkapan untuk mencari</empty-content>
+      <empty-property>Silahkan pilih sebuah properti</empty-property>
+      <empty-property-keyword>Silahkan masukkan sebuah kata kunci untuk properti</empty-property-keyword>
+      <empty-doctype>Silahkan pilih sebuah jenis dokumen</empty-doctype>
+      <empty-startDate>"Tanggal mulai" diperlukan</empty-startDate>
+      <invalid-format>Format tanggal / waktu yang tidak valid di bidang '{0}'.</invalid-format>
+      <invalid-date>"Saat ini "harus lebih dari"Tanggal mulai"</invalid-date>
+      <invalid-startDate>"Tanggal mulai" tidak boleh lebih dari hari ini</invalid-startDate>
+      <invalid-nodeType>Jenis simpulnya "{0}" adalah tidak valid. Silahkan periksa lagi.</invalid-nodeType>
+      <invalid-keyword>Kata kuncinya adalah tidak sah. Beberapa karakter tidak didukung.</invalid-keyword>
     </msg>
   </UIContentSearchForm>
 
   <WebContentMetadataPopup>
     <title>
-      <UIContentPropertySelector>Property Selector</UIContentPropertySelector>
+      <UIContentPropertySelector>Pemilihan Properti</UIContentPropertySelector>
     </title>
   </WebContentMetadataPopup>
 
   <UIContentPropertySelector>
     <action>
-      <Add>Add</Add>
+      <Add>Tambah</Add>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
-      <metadataType>Metadata Type</metadataType>
-      <property_select>Property</property_select>
+      <metadataType>Jenis Metadata</metadataType>
+      <property_select>Properti</property_select>
     </label>
   </UIContentPropertySelector>
 
   <WebContentNodeTypePopup>
     <title>
-      <UIContentNodeTypeSelector>Node Type Selector</UIContentNodeTypeSelector>
+      <UIContentNodeTypeSelector>Pemilihan Jenis simpul</UIContentNodeTypeSelector>
     </title>
   </WebContentNodeTypePopup>
 
@@ -252,205 +252,205 @@
 
   <UIContentSearchResult>
     <header>
-      <title>Title</title>
-      <score>Score</score>
-      <publicationstate>Publication State</publicationstate>
-      <action>Action</action>
+      <title>Judul</title>
+      <score>Skor</score>
+      <publicationstate>Publikasi Negara</publicationstate>
+      <action>Tindakan</action>
     </header>
     <title>
-      <Select>Select</Select>
-      <View>View</View>
+      <Select>Memilih</Select>
+      <View>Lihat</View>
     </title>
     <msg>
-    <template-not-support>Cannot preview this content. The template is not supported</template-not-support>
+    <template-not-support>Tidak dapat melihat pratinjau konten ini. Template ini tidak didukung</template-not-support>
     </msg>
   </UIContentSearchResult>
 
   <UIContentDialogForm>
     <action>
-      <SaveDraft>Save Draft</SaveDraft>
-      <FastPublish>Fast Publish</FastPublish>
-      <Preferences>Preferences</Preferences>
+      <SaveDraft>Simpan konsep</SaveDraft>
+      <FastPublish>Publikasi cepat</FastPublish>
+      <Preferences>Preferensi</Preferences>
       <Close>#{word.close}</Close>
     </action>
     <msg>
-      <access-denied>You do not have permission to add categories to this document.</access-denied>
-      <exception>An error occurred while adding categories to this document.</exception>
-      <non-categories>Categories are wrong. Please select appropriate categories.</non-categories>
+      <access-denied>Anda tidak memiliki izin untuk menambah kategori ke dokumen ini.</access-denied>
+      <exception>Terjadi kesalahan saat menambah kategori untuk dokumen ini.</exception>
+      <non-categories>Kategori yang salah. Silakan pilih kategori yang sesuai.</non-categories>
     </msg>
   </UIContentDialogForm>
 
   <UIPermissionManager>
     <label>
-      <UIPermissionInputSetWithAction>Permission</UIPermissionInputSetWithAction>
-      <UIAccessibleCheckboxInput>Access Right</UIAccessibleCheckboxInput>
-      <UIEditableCheckboxInput>Edit Right</UIEditableCheckboxInput>
+      <UIPermissionInputSetWithAction>Ijin</UIPermissionInputSetWithAction>
+      <UIAccessibleCheckboxInput>Akses kanan</UIAccessibleCheckboxInput>
+      <UIEditableCheckboxInput>Edit Benar</UIEditableCheckboxInput>
     </label>
     <action>
       <Save>#{word.save}</Save>
-      <Clear>Clear</Clear>
+      <Clear>Bersih</Clear>
       <title>
-        <Edit>Edit</Edit>
-        <Delete>Delete</Delete>
+        <Edit>Ubah</Edit>
+        <Delete>Hapus</Delete>
       </title>
     </action>
   </UIPermissionManager>
 
   <UIPermissionManagerGrid>
     <header>
-      <owner>Permission</owner>
-      <accessible>Accessible</accessible>
-      <editable>Editable</editable>
-      <action>Action</action>
+      <owner>Ijin</owner>
+      <accessible>Dapat diakses</accessible>
+      <editable>Bisa diedit</editable>
+      <action>Tindakan</action>
     </header>
     <msg>
-      <confirm-delete-permission>Are you sure you want to delete this permission?</confirm-delete-permission>
-      <no-permission-remove>You do not have permission.</no-permission-remove>
-      <access-denied>Access denied.</access-denied>
-      <node-locked>The path element {0} or one of its parents is locked.</node-locked>
-      <userOrGroup-required>You must select a user or group.</userOrGroup-required>
-      <checkbox-require>You must set rights.</checkbox-require>
-      <node-checkedin>You must check out first.</node-checkedin>
+      <confirm-delete-permission>Apakah anda yakin  ingin menghapus izin ini?</confirm-delete-permission>
+      <no-permission-remove>Kamu tidak mempunyai izin.</no-permission-remove>
+      <access-denied>Akses ditolak.</access-denied>
+      <node-locked>Elemen path {0} atau salah satu orang tuanya yang terkunci.</node-locked>
+      <userOrGroup-required>Kamu harus pilih kelompok atau pengguna.</userOrGroup-required>
+      <checkbox-require>Kamu harus menetapkan hak.</checkbox-require>
+      <node-checkedin>Kamu harus keluar terlebih dahulu.</node-checkedin>
     </msg>
   </UIPermissionManagerGrid>
 
   <UIPermissionInputSetWithAction>
     <title>
-      <SelectUser>Select User</SelectUser>
-      <SelectMember>Select Member</SelectMember>
-      <AddAny>Add Any Permission</AddAny>
+      <SelectUser>Memilih Pengguna</SelectUser>
+      <SelectMember>Pilih Anggota</SelectMember>
+      <AddAny>Tambahkan Izin Lainnya</AddAny>
     </title>
   </UIPermissionInputSetWithAction>
 
   <UIUserSelectorPopupWindow>
     <title>
-      <UIUserContainer>User Selector</UIUserContainer>
+      <UIUserContainer>Memilih Pengguna</UIUserContainer>
     </title>
   </UIUserSelectorPopupWindow>
 
   <UIGroupSelectorPopupWindow>
     <title>
-      <UIGroupMemberSelector>Group Selector</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Memilih grup</UIGroupMemberSelector>
     </title>
   </UIGroupSelectorPopupWindow>
 
   <UIGroupMemberSelector>
     <label>
-      <selectGroup>Select Group</selectGroup>
-      <selectMembership>Select Membership</selectMembership>
+      <selectGroup>Pilih Kelompok</selectGroup>
+      <selectMembership>Pilih Keanggotaan</selectMembership>
     </label>
   </UIGroupMemberSelector>
 
   <UIContentDialogPreference>
     <action>
-      <Back>Back</Back>
+      <Back>Kembali</Back>
     </action>
   </UIContentDialogPreference>
 
   <ZeroValidator>
     <msg>
-      <Invalid-number>Zero is not accepted in the field '{0}'.</Invalid-number>
+      <Invalid-number>Nol tidak diterima di kolom '{0}'.</Invalid-number>
     </msg>
   </ZeroValidator>
 
   <UIDropDownPageTemp>
     <item>
-      <WCMPageConfigs>WCM Page Configurations</WCMPageConfigs>
-      <ColumnPageConfigs>Column Page Configurations</ColumnPageConfigs>
-      <RowPageConfigs>Row Page Configurations</RowPageConfigs>
-      <TabsPageConfigs>Tabs Page Configurations</TabsPageConfigs>
-      <MixPageConfigs>Mixed</MixPageConfigs>
+      <WCMPageConfigs>Konfigurasi Halaman WCM</WCMPageConfigs>
+      <ColumnPageConfigs>Konfigurasi Kolom Halaman</ColumnPageConfigs>
+      <RowPageConfigs>Konfigurasi Baris Halaman</RowPageConfigs>
+      <TabsPageConfigs>Konfigurasi Tab Halaman</TabsPageConfigs>
+      <MixPageConfigs>Campuran</MixPageConfigs>
     </item>
   </UIDropDownPageTemp>
 
   <UIWizardPageSelectLayoutForm>
     <label>
-      <SingleContentViewer>Single Content Viewer</SingleContentViewer>
-      <ContentListViewer>Content List Viewer</ContentListViewer>
-      <Search>Search</Search>
-      <Sitemap>Site Map</Sitemap>
-      <TwoColumnsLayout>Two-column Layout</TwoColumnsLayout>
-      <ThreeColumnsLayout>Three-column Layout</ThreeColumnsLayout>
-      <TwoRowsLayout>Two-row Layout</TwoRowsLayout>
-      <ThreeRowsLayout>Three-row Layout</ThreeRowsLayout>
-      <TwoTabsLayout>Two-tab layout</TwoTabsLayout>
-      <ThreeTabsLayout>Three-tab Layout</ThreeTabsLayout>
-      <TwoColumnsOneRowLayout>Two-column &amp; One-row Layout</TwoColumnsOneRowLayout>
-      <OneRowTwoColumnsLayout>One-row &amp; Two-column Layout</OneRowTwoColumnsLayout>
-      <ThreeRowsTwoColumnsLayout>Three-row &amp; Two-column Layout</ThreeRowsTwoColumnsLayout>
+      <SingleContentViewer>Tampilkan Konten Tunggal</SingleContentViewer>
+      <ContentListViewer>Tampilkan daftar konten</ContentListViewer>
+      <Search>Cari</Search>
+      <Sitemap>Peta Situs</Sitemap>
+      <TwoColumnsLayout>Dua Kolom tata letak</TwoColumnsLayout>
+      <ThreeColumnsLayout>Tata letak tiga kolom</ThreeColumnsLayout>
+      <TwoRowsLayout>Tata letak dua baris</TwoRowsLayout>
+      <ThreeRowsLayout>Tata letak tiga baris</ThreeRowsLayout>
+      <TwoTabsLayout>Tata letak dua tab</TwoTabsLayout>
+      <ThreeTabsLayout>Tata letak tiga tab</ThreeTabsLayout>
+      <TwoColumnsOneRowLayout>Tata letak dua kolom &amp; satu baris</TwoColumnsOneRowLayout>
+      <OneRowTwoColumnsLayout>Tata letak satu baris &amp; dua kolom</OneRowTwoColumnsLayout>
+      <ThreeRowsTwoColumnsLayout>Tata letak tiga baris &amp; dua kolom</ThreeRowsTwoColumnsLayout>
     </label>
   </UIWizardPageSelectLayoutForm>
 
   <Signin>
-    <welcome>Welcome</welcome>
-    <login>Login</login>
-    <logout>Logout</logout>
-    <language>Change Language</language>
-    <register>Register</register>
+    <welcome>Selamat Datang</welcome>
+    <login>Masuk</login>
+    <logout>Keluar</logout>
+    <language>Ganti Bahasa</language>
+    <register>Daftar</register>
   </Signin>
   <UIDriveForm>
 <label>
-<wcm-category-view>Category View</wcm-category-view>
-<wcm-view>WCM Content View</wcm-view>
+<wcm-category-view>Tampilan Kategori</wcm-category-view>
+<wcm-view>Tampilan Konten WCM</wcm-view>
 </label>
   </UIDriveForm>
   
   <ContentSelector>
     <title>
-      <PersonalDrives>Personal Drives</PersonalDrives>
-      <GeneralDrives>General Drives</GeneralDrives>
-      <GroupDrives>Group Drives</GroupDrives>
-      <Private>Private</Private>
-      <Public>Public</Public>
-      <BackupCenter>Backup Center</BackupCenter>
-      <CategorizedDocumentsCenter>Categorized Documents Center</CategorizedDocumentsCenter>
-      <CollaborationCenter>Collaboration Center</CollaborationCenter>
-      <DigitalAssetsManagementCenter>Digital Assets Management Center</DigitalAssetsManagementCenter>
-      <DMSAdministration>DMS Administration</DMSAdministration>
-      <DocumentsManagementCenter>Documents Management Center</DocumentsManagementCenter>
-      <LiveDocumentsCenter>Live Documents Center</LiveDocumentsCenter>
-      <PendingDocumentsCenter>Pending Documents Center</PendingDocumentsCenter>
-      <RecordsManagementCenter>Records Management Center</RecordsManagementCenter>
-      <SharedUsersSpace>Shared Users Space</SharedUsersSpace>
-      <Systemfiles>System Files</Systemfiles>
-      <ValidationRequestsDocumentsCenter>Validation Requests Documents Center</ValidationRequestsDocumentsCenter>
-      <ManagedSites>Sites Management</ManagedSites>
-      <SharedSite>Shared Site</SharedSite>
+      <PersonalDrives>Drive pribadi</PersonalDrives>
+      <GeneralDrives>Drive Umum</GeneralDrives>
+      <GroupDrives>Kelompok drive</GroupDrives>
+      <Private>Pribadi</Private>
+      <Public>Umum</Public>
+      <BackupCenter>Pusat Cadangan</BackupCenter>
+      <CategorizedDocumentsCenter>Pusat Kategori Dokumen</CategorizedDocumentsCenter>
+      <CollaborationCenter>Pusat Kolaborasi</CollaborationCenter>
+      <DigitalAssetsManagementCenter>Pusat Manajemen Aset Digital</DigitalAssetsManagementCenter>
+      <DMSAdministration>Administrasi DMS</DMSAdministration>
+      <DocumentsManagementCenter>Pusat Pengelolaan Dokumen</DocumentsManagementCenter>
+      <LiveDocumentsCenter>Pusat Dokumen Langsung</LiveDocumentsCenter>
+      <PendingDocumentsCenter>Pusat Dokumen yang Tertunda</PendingDocumentsCenter>
+      <RecordsManagementCenter>Pusat Manajemen Rekaman</RecordsManagementCenter>
+      <SharedUsersSpace>Ruang Pengguna Bersama</SharedUsersSpace>
+      <Systemfiles>Berkas Sistem</Systemfiles>
+      <ValidationRequestsDocumentsCenter>Pusat Dokumen Permintaan Validasi</ValidationRequestsDocumentsCenter>
+      <ManagedSites>Pengelolaan Situs</ManagedSites>
+      <SharedSite>Situs bersama</SharedSite>
     </title>
   </ContentSelector>
   
   <UICategoryNavigationTargetPathPopupWindow>
     <title>
-      <UIPageSelector>Page Selector</UIPageSelector>
+      <UIPageSelector>Pemilihan halaman</UIPageSelector>
     </title>
   </UICategoryNavigationTargetPathPopupWindow>
   
   <UIDocumentInfo>
     <msg>
-      <access-denied-exception>Access denied. You maybe not have read permission, or the node may have been removed or changed.</access-denied-exception>
+      <access-denied-exception>Akses ditolak. Kamu mungkin tidak memiliki izin membaca, atau mungkin simpul telah dihapus atau diubah.</access-denied-exception>
     </msg>
   </UIDocumentInfo>
   <UIPortalApplication>
     <title>
-      <abort>Abort</abort>
+      <abort>Menggugurkan</abort>
     </title>
   </UIPortalApplication>    
   
   <CategoryNavigationTemplate>
   <label>
-  <home>Home</home>
+  <home>Halaman Utama</home>
   </label>
   </CategoryNavigationTemplate>
   
   <Breadcrumb>
   <label>
-  <home>Home</home>
+  <home>Halaman Utama</home>
   </label>  
   </Breadcrumb>
 
   <UIViewMetadataForm>
     <msg>
-      <Invalid-number>Please enter a valid number.</Invalid-number>
+      <Invalid-number>Silahkan masukkan nomor yang benar.</Invalid-number>
     </msg>
   </UIViewMetadataForm>
 </bundle>

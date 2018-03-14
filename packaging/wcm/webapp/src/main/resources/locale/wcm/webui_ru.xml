@@ -359,7 +359,7 @@
       <ColumnPageConfigs>Конфигурация страницы колонок</ColumnPageConfigs>
       <RowPageConfigs>Конфигурация страницы строк</RowPageConfigs>
       <TabsPageConfigs>Конфигурация страницы вкладок</TabsPageConfigs>
-      <MixPageConfigs>Mixed</MixPageConfigs>
+      <MixPageConfigs>Смешанный</MixPageConfigs>
     </item>
   </UIDropDownPageTemp>
 
@@ -450,7 +450,7 @@
 
   <UIViewMetadataForm>
     <msg>
-      <Invalid-number>Please enter a valid number.</Invalid-number>
+      <Invalid-number>Введите допустимое число.</Invalid-number>
     </msg>
   </UIViewMetadataForm>
 </bundle>

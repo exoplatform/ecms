@@ -23,27 +23,27 @@
   <WebContent>
     <dialog>
       <label>
-        <MainContent>Main Content</MainContent>
+        <MainContent>Pangunahing Nilalaman</MainContent>
         <cssFile>default.css</cssFile>
         <jsFile>default.js</jsFile>
-        <Advanced>Advanced</Advanced>
-        <Summary>Summary</Summary>
+        <Advanced>Ang pinahusay</Advanced>
+        <Summary>Buod</Summary>
         <name>#{word.name}</name>
-        <title>Title</title>
-        <ContentCSS>CSS Data</ContentCSS>
-        <hintCSS>You can specify the main style sheet for your web content. This style will override the style sheets defined at the site level and at the shared level.</hintCSS>
-        <ContentJS>JS Data</ContentJS>
-        <hintJS>You can specify some JavaScript codes that can be executed before your web content is rendered.</hintJS>
-        <WebContentHtml>Main Content</WebContentHtml>
-        <Illustration>Illustration</Illustration>
-        <hintIllustration>You can specify an image that will be shown when your web content is displayed in the list. You can also specify some summary texts to go with this image.</hintIllustration>
-        <confirm-delete>Are you sure you want to delete this illustration?</confirm-delete>
+        <title>Titulo</title>
+        <ContentCSS>CSS na Datos</ContentCSS>
+        <hintCSS>Maaari mong tukuyin ang pangunahing style sheet para sa iyong web content. Ang estilo na ito ay papalitan ang mga style sheet na tinutukoy sa site na level at sa ibinahagi na level.</hintCSS>
+        <ContentJS>JS na Datos</ContentJS>
+        <hintJS>Maaari mong tukuyin ang ilang mga Javascript na code na maaaring patakbuhin bago ipakita ang mga nilalaman ng iyong web.</hintJS>
+        <WebContentHtml>Pangunahing Nilalaman</WebContentHtml>
+        <Illustration>Ilustrasyon</Illustration>
+        <hintIllustration>Maaari kang pumili ng imahe na ipapakita kapag ang iyong web content ay naipakita sa listahan. Maaari mo ring tukuyin ang ilang mga buod na teksto na isasama sa imahe na ito.</hintIllustration>
+        <confirm-delete>Sigurado ka bang gusto mong burahin ang ilustrasyon na ito?</confirm-delete>
         <illustrationImage>Ilustrasyon ng larawan</illustrationImage>
-        <imageMimeType>Image Type</imageMimeType>
-        <image>Upload Image</image>
-        <imageWidth>Image Width</imageWidth>
-        <imageHeight>Image Height</imageHeight>
-        <Synchronize>Synchronize with CSS and HTML</Synchronize>
+        <imageMimeType>Uri ng Imahe</imageMimeType>
+        <image>Mag-upload ng Imahe</image>
+        <imageWidth>Lapad ng Imahe</imageWidth>
+        <imageHeight>Taas ng Imahe</imageHeight>
+        <Synchronize>Gawing mgkatugma sa CSS at HTML</Synchronize>
       </label>
     </dialog>
   </WebContent>
@@ -53,8 +53,8 @@
       <label>
         <name>#{word.name}</name>
         <active>Gawing aktibo</active>
-        <priority>Priority</priority>
-        <content>CSS Data</content>
+        <priority>Prayoridad</priority>
+        <content>CSS na Datos</content>
       </label>
     </dialog>
   </CSSFile>
@@ -64,8 +64,8 @@
       <label>
         <name>#{word.name}</name>
         <active>Gawing aktibo</active>
-        <priority>Priority</priority>
-        <content>JS Data</content>
+        <priority>Prayoridad</priority>
+        <content>JS na Datos</content>
       </label>
     </dialog>
   </JSFile>
@@ -75,7 +75,7 @@
       <label>
         <name>#{word.name}</name>
         <url>URL</url>
-        <description>Description</description>
+        <description>Paglalarawan</description>
       </label>
     </dialog>
   </WebLink>
@@ -83,10 +83,10 @@
   <SiteMetadata>
     <dialog>
       <label>
-        <title>Site Title</title>
-        <description>Site Description</description>
-        <keywords>Site Keywords</keywords>
-        <robots>Search Engine Behavior</robots>
+        <title>Ang Pamagat ng Site</title>
+        <description>Ang Paglalarawan sa Site</description>
+        <keywords>Ang mga Keyword ng Site</keywords>
+        <robots>Gawi ng Search Engine</robots>
       </label>
     </dialog>
   </SiteMetadata>

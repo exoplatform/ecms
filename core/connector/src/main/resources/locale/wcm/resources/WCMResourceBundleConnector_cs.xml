@@ -18,18 +18,18 @@
     <label>
       <exo>
         <remote-edit>
-          <word>Open in Word</word>
-          <excel>Open in Excel</excel>
-          <powerpoint>Open in Powerpoint</powerpoint>
-          <desktop>Open on Desktop</desktop>
-          <desktop-app>Open in {0}</desktop-app>
+          <word>Otevřít v aplikaci Word</word>
+          <excel>Otevřít v aplikaci Excel</excel>
+          <powerpoint>Otevřít v aplikaci Powerpoint</powerpoint>
+          <desktop>Otevřít na ploše</desktop>
+          <desktop-app>Otevřít v {0}</desktop-app>
         </remote-edit>
       </exo>
     </label>
   </OpenInOfficeConnector>
   <DocumentAutoVersion>
     <msg>
-      <WrongMimeType>The mimetype of the file uploaded is unknown. No new version of {0} will be created.</WrongMimeType>
+      <WrongMimeType>Mimikovaný typ nahraného souboru není znám. Nebude vytvořena žádná nová verze {0}.</WrongMimeType>
     </msg>
   </DocumentAutoVersion>
 </bundle>

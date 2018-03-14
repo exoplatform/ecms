@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UISEOForm>
+    <label>  
+      <title>Ang Pamagat:</title>
+      <description>Ang Deskripsyon:</description>
+      <keywords>Ang mga Keyword:</keywords>
+      <language>Ang Wika:</language>
+      <robots>Ang mga Robot:</robots>
+      <sitemap>Ang Sitemap:</sitemap>
+      <sitemapvisible>Makikita sa Sitemap</sitemapvisible>
+    <isInherited>Naimana mula sa magulang na pahina</isInherited>
+      <priority>Ang Prayoridad:</priority>
+      <frequency>Ang Prikwensiya:</frequency>
+      <select-language>Pumili ng lengwahe</select-language>
+      <option>
+        <Always>Palagi</Always>
+        <Hourly>Oras-oras</Hourly>
+        <Daily>Araw-araw</Daily>
+        <Weekly>Kada linggo</Weekly>
+        <Monthly>Buwanang</Monthly>
+        <Yearly>Taunan</Yearly>
+        <Never>Hindi kailanman</Never>
+      </option> 
+    </label>
+    <tip>
+  <priority>Ang mga wastong halaga ay mula sa 0.0 hanggan 1.0</priority>
+  </tip>   
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <repository-exception>Isang hindi inaasahang problema ang nangyari habang nagse-save ng metadata ng pahina.</repository-exception>
+      <confirm-delete>Sigurado ka na bang gusto mong tanggalin ang mga data ng SEO na ito?</confirm-delete>      
+    </msg>
+    <title>
+    <seo-delete>I-delete</seo-delete>
+    </title>
+  <help> 
+  <priority>Ang balidong mga balyu ay mula sa 0.0 hanggang 1.0.</priority>
+  <description>Tulungan ang mga naghahanap: ipaalam sa kanila na ang sumusunod na pahina ay naglalaman link na kanilang hinahanap.</description>
+  <keywords>Ang pinakamahalagang termino sa pahina na pinaghihiwalay ng kuwit.</keywords>  
+  </help>  
+  </UISEOForm>
+  <UISEOPopupWindow>
+  <title>
+      <UISEOForm>Ang Pamamahala ng SEO</UISEOForm>
+  </title>
+  </UISEOPopupWindow>    
+  <UISEOToolbarForm>
+  <title>
+      <seo>Ang Pamamahala ng SEO</seo>
+  </title>
+  <label>
+    <seo>Ang SEO</seo>
+  </label>
+  </UISEOToolbarForm>  
+  <FloatNumberValidator>
+    <msg>
+      <Invalid-number>Ang balyu ng Priority field ay dapat nasa isang numero na format. Ang balidong saklaw ng mga balyu ay mula 0.0 hanggang 1.0.</Invalid-number>
+    </msg>
+  </FloatNumberValidator>  
+  
+</bundle>

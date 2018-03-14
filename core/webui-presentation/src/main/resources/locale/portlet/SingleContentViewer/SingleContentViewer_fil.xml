@@ -2,39 +2,39 @@
 <bundle>
   <UIPresentationContainer>
     <title>
-      <QuickEdit>Edit in Content Explorer</QuickEdit>
-      <print>Print This Page</print>
+      <QuickEdit>Baguhin ang Nilalaman ng Explorer</QuickEdit>
+      <print>Ang i-print ang Pahina na Ito</print>
       <FastPublish>I-publish</FastPublish>
     </title>
     <label>
-      <draft>Draft</draft>
+      <draft>I-Draft</draft>
       <print>Imprinta</print>
     </label>
     <msg>
-      <no-content>No contents found.</no-content>
-      <internal-server-error>An error occurred while requesting the data from the sever.</internal-server-error>
-      <empty-title-error>Please specify the new title.</empty-title-error>
+      <no-content>Walang matagpuan sa mga nilalaman.</no-content>
+      <internal-server-error>May mali na nagaganap habang ang kahilingan ng data mulsa sa server.</internal-server-error>
+      <empty-title-error>Pakiusap na tukuyin ang bagong pamagat.</empty-title-error>
     </msg>
   </UIPresentationContainer>
   <CorrectContentSelectorPopupWindow>
     <title>
-      <UIContentSelectorOne>Select Content</UIContentSelectorOne>
+      <UIContentSelectorOne>Ang Pumili ng Nilalaman</UIContentSelectorOne>
     </title>
   </CorrectContentSelectorPopupWindow>
   <UISingleContentViewerPortlet>
     <msg>
-      <AccessControlException>You do not have permission to access the Edit mode.</AccessControlException>
+      <AccessControlException>Wala kang Pahintulot na mag-access sa Pagbago ng mode.</AccessControlException>
     </msg>
   </UISingleContentViewerPortlet>
   <UISCVContextualRadioBox>
     <label>
-      <Enable>Enabled</Enable>
-      <Disable>Disabled</Disable>
+      <Enable>Ang Paganahin</Enable>
+      <Disable>I-Disabled</Disable>
     </label>
   </UISCVContextualRadioBox>
   <UIPreferencesPopupWindows>
     <title>
-      <UISCVPreferences>Content Detail Preferences</UISCVPreferences>
+      <UISCVPreferences>Mga Detalye sa mga Kagustuhan ng Nilalaman</UISCVPreferences>
     </title>
   </UIPreferencesPopupWindows>
   <UISCVPreferences>
@@ -45,57 +45,57 @@
       <Print>Imprinta</Print>
       <Close>#{word.close}</Close>
     </action>
-    <title>Content Detail Preferences</title>
+    <title>Ang Nilalaman ng detalye sa mga Kagustuhan</title>
     <label>
-      <Back>Back to previous page</Back>
-      <Edit>Edit</Edit>
-      <Preferences>Preferences</Preferences>
-      <Title>Content Detail Preferences</Title>
-      <UISCVShowTitleConfigurationCheckBox>Show Title</UISCVShowTitleConfigurationCheckBox>
-      <UISCVShowDateConfigurationCheckBox>Show Date</UISCVShowDateConfigurationCheckBox>
-      <UISCVShowOptionBarConfigurationCheckBox>Show Option Bar</UISCVShowOptionBarConfigurationCheckBox>
-      <DisplaySettingBlock>Display Settings</DisplaySettingBlock>
-      <ContentPathBlock>Content Selection</ContentPathBlock>
-      <UISCVConfigItemPathFormInputSet>Content Path</UISCVConfigItemPathFormInputSet>
-    <UISCVContentPathConfigurationInputBox>Content Path</UISCVContentPathConfigurationInputBox>
-      <Advance>Advanced</Advance>
-      <ContextCaption>Dynamic Navigation</ContextCaption>
-      <UISCVContextualRadioBox>Contextual Content</UISCVContextualRadioBox>
+      <Back>Ang Bumaliksa mga nakaraang pahina</Back>
+      <Edit>Baguhin</Edit>
+      <Preferences>Ang mga kagustuhan</Preferences>
+      <Title>Mga Kagustuhan ng Detalye ng Nilalaman</Title>
+      <UISCVShowTitleConfigurationCheckBox>Ang Ipakita ang Titulo</UISCVShowTitleConfigurationCheckBox>
+      <UISCVShowDateConfigurationCheckBox>Ang Ipakita ang Petsa</UISCVShowDateConfigurationCheckBox>
+      <UISCVShowOptionBarConfigurationCheckBox>Ang Ipakita ang Opsyon sa Bar</UISCVShowOptionBarConfigurationCheckBox>
+      <DisplaySettingBlock>Ang I-display ang mga Setting</DisplaySettingBlock>
+      <ContentPathBlock>Ang Pagpipili ng Nilalaman</ContentPathBlock>
+      <UISCVConfigItemPathFormInputSet>Ang Nilalaman ng Landas</UISCVConfigItemPathFormInputSet>
+    <UISCVContentPathConfigurationInputBox>Ang Nilalaman ng landas</UISCVContentPathConfigurationInputBox>
+      <Advance>Pinahusay</Advance>
+      <ContextCaption>Ang Dinamika sa Nabigasyon</ContextCaption>
+      <UISCVContextualRadioBox>Ang Nilalaman ng Kasinghulugan</UISCVContextualRadioBox>
       <UISCVParameterInputBox>ni</UISCVParameterInputBox>
-      <PrintSettingBlock>Print Settings</PrintSettingBlock>
-      <UISCVPrintPageParameter>with</UISCVPrintPageParameter>
-      <UISCVConfigPrintPageFormInputSet>Show in Page</UISCVConfigPrintPageFormInputSet>
+      <PrintSettingBlock>I-print ang mga Setting</PrintSettingBlock>
+      <UISCVPrintPageParameter>ang kasama</UISCVPrintPageParameter>
+      <UISCVConfigPrintPageFormInputSet>Ang Ipakita sa Pahina</UISCVConfigPrintPageFormInputSet>
       <LockStatus>Ikandado</LockStatus>
-      <CacheManagement>Content Visibility</CacheManagement>
-      <UISCVCacheRadioBox>Share Content</UISCVCacheRadioBox>
+      <CacheManagement>Ang Pagkakakita ng Nilalaman</CacheManagement>
+      <UISCVCacheRadioBox>Ang Nilalaman ay Ibahagi</UISCVCacheRadioBox>
     </label>
     <help>
-      <ContentPathBlock>Select the content you want to show. This default content will be replaced dynamically if you activate the Dynamic Navigation option (see the Advanced mode below).</ContentPathBlock>
-      <DisplaySettingBlock>You can show or hide the Option bar used to show the print link. Title and Date displays are also optional.</DisplaySettingBlock>
-      <ContextualHelp>Activates Dynamic Navigation. The content can be changed dynamically by another URL-based parameter.</ContextualHelp>
-      <ParameterHelp>This parameter will be used to get the content if the Dynamic Navigation is activated.</ParameterHelp>
+      <ContentPathBlock>Pumili ng nilalaman na nais mong ipakita. Ang nilalaman ng default na ito ay mapapalitan ang dinamika kung ang iyong aktibo na Dinamika ng Nabigasyon ay pagpipilian ( tignan ang pinahusay na mode sa baba).</ContentPathBlock>
+      <DisplaySettingBlock>Maaari mong ipakita o itago ang pagpipilian sa bar na ginamit upang ipakita ang naka imprinta na link. Ang Titulo at Petsa na mga naka-display ay opsyonal lamang.</DisplaySettingBlock>
+      <ContextualHelp>Nag-Activate ang mga Nabigasyon sa Dinamika. Ang Nilalaman ay maaaring mabago sa dinamika gamit ang ibang URL-base sa parametro.</ContextualHelp>
+      <ParameterHelp>Ang parametro na ito ay gamit para makuha ang nilalaman ng Daynamikong Nabigasyon na aktibo.</ParameterHelp>
     </help>
     <msg>
-      <not-valid-path>The item path is invalid.</not-valid-path>
+      <not-valid-path>Ang item ng landas ay imabalido.</not-valid-path>
     </msg>
     <tab>
       <label>
-        <UISCVConfigContentFormInputSet>Content Selection</UISCVConfigContentFormInputSet>
-        <UISCVConfigDisplayFormInputSet>Display Settings</UISCVConfigDisplayFormInputSet>
-        <UISCVConfigPrintFormInputSet>Print Settings</UISCVConfigPrintFormInputSet>
-        <UISCVConfigAdvancedFormInputSet>Advanced</UISCVConfigAdvancedFormInputSet>
+        <UISCVConfigContentFormInputSet>Ang Pagpipili ng Nilalaman</UISCVConfigContentFormInputSet>
+        <UISCVConfigDisplayFormInputSet>Ang I-display ang mga Setting</UISCVConfigDisplayFormInputSet>
+        <UISCVConfigPrintFormInputSet>I-print ang mga Setting</UISCVConfigPrintFormInputSet>
+        <UISCVConfigAdvancedFormInputSet>Pinahusay</UISCVConfigAdvancedFormInputSet>
       </label>
     </tab>
   </UISCVPreferences>
   <UISCVConfigItemPathFormInputSet>
     <title>
-      <SelectFolderPath>Select Folder Path</SelectFolderPath>
-      <AddPath>Add Path</AddPath>
+      <SelectFolderPath>Ang Pumili ng Landas sa Folder</SelectFolderPath>
+      <AddPath>Ang Magdagdag ng Landas</AddPath>
     </title>
   </UISCVConfigItemPathFormInputSet>
   <UISCVConfigPrintPageFormInputSet>
     <title>
-      <SelectTargetPage>Show in Page</SelectTargetPage>
+      <SelectTargetPage>Ang Ipakita sa Pahina</SelectTargetPage>
     </title>
   </UISCVConfigPrintPageFormInputSet>
   <UISCVConfigPrintPageSelectorPopupWindow>
@@ -104,21 +104,21 @@
     </title>
   </UISCVConfigPrintPageSelectorPopupWindow>
   <PublicationStates>
-    <archived>Archived</archived>
-    <obsolete>Obsolete</obsolete>
-    <unpublished>Unpublished</unpublished>
+    <archived>I-archive</archived>
+    <obsolete>Ang Laos na</obsolete>
+    <unpublished>Ang Hindi Nalathala</unpublished>
     <enrolled>Nakapag enrol na</enrolled>
-    <draft>Draft</draft>
-    <pending>Pending</pending>
+    <draft>I-Draft</draft>
+    <pending>Ang Nakabinbin</pending>
     <approved>Inaprubahan</approved>
-    <inreview>Under Review</inreview>
-    <staged>Staged</staged>
-    <published>Published</published>
+    <inreview>Ang Pagsusuri sa Ilalim</inreview>
+    <staged>Ang naglunsad</staged>
+    <published>Ang Nailathala</published>
   </PublicationStates>
   <UISCVCacheRadioBox>
     <label>
-      <Enable>Restricted by Authentication</Enable>
-      <Disable>Restricted by User roles</Disable>
+      <Enable>Ang Pinagbabawal na Pagpapatunay</Enable>
+      <Disable>Ang Paghigpit gamit ang mga panukala</Disable>
     </label>
   </UISCVCacheRadioBox>
 </bundle>

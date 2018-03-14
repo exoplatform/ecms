@@ -359,7 +359,7 @@
       <ColumnPageConfigs>Kolom pagina configuraties</ColumnPageConfigs>
       <RowPageConfigs>Rij pagina configuraties</RowPageConfigs>
       <TabsPageConfigs>Tabbladen pagina configuraties</TabsPageConfigs>
-      <MixPageConfigs>Mixed</MixPageConfigs>
+      <MixPageConfigs>Mix pagina configuraties</MixPageConfigs>
     </item>
   </UIDropDownPageTemp>
 
@@ -450,7 +450,7 @@
 
   <UIViewMetadataForm>
     <msg>
-      <Invalid-number>Please enter a valid number.</Invalid-number>
+      <Invalid-number>Voer alstublieft een geldig bedrag in (bijv 19.99)</Invalid-number>
     </msg>
   </UIViewMetadataForm>
 </bundle>

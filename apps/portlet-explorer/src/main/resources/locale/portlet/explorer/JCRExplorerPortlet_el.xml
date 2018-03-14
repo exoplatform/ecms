@@ -300,7 +300,7 @@
       <ManageActions>Ενέργειες</ManageActions>
       <ExportNode>Εξαγωγή</ExportNode>
       <ImportNode>Εισαγωγή</ImportNode>
-      <OverloadThumbnail>Change Icon Image</OverloadThumbnail>
+      <OverloadThumbnail>Υπερφόρτωση μικρογραφίας</OverloadThumbnail>
       <ManageHidden>Εμφάνιση/απόκρυψη περιεχομένου</ManageHidden>
       <ViewReferences>Αναφορές</ViewReferences>
       <ViewNodeType>Τύποι</ViewNodeType>
@@ -1355,7 +1355,7 @@
       <addLabel>Προσθήκη ετικέτας</addLabel>
       <removeLable>Αφαίρεση ετικέτας</removeLable>
       <restoreVersion>Επαναφορά Έκδοσης</restoreVersion>
-      <viewVersion>View Version</viewVersion>
+      <viewVersion>Προβολή πληροφοριών έκδοσης</viewVersion>
       <deleteVersion>Διαγραφή έκδοσης</deleteVersion>
       <compareVersion>Συγκρίνετε με την βασική έκδοση</compareVersion>
     </tooltip>

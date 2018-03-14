@@ -977,7 +977,7 @@
       <watchDocument>Sledovat dokument</watchDocument>
       <taggingDocument>Otagovat dokument</taggingDocument>
       <viewMetadatas>Zobrazit Metadata</viewMetadatas>
-      <overloadThumbnail>Change Icon Image</overloadThumbnail>
+      <overloadThumbnail>Miniatura přetížení</overloadThumbnail>
       <manageHidden>Skrýt/zobrazit obsah</manageHidden>
       <comment>Komentář</comment>
       <vote>Hlasovat</vote>
@@ -988,12 +988,12 @@
       <publicationPublish>Zveřejnit</publicationPublish>
       <contentNavigation>Navigace obsahu</contentNavigation>
       <addSymLink>Přidat symlink</addSymLink>
-      <checkIn>Check In</checkIn>
-      <checkOut>Check Out</checkOut>
-      <shareDocuments>Share</shareDocuments>
-      <openDocument>Remote Edit</openDocument>
-      <editProperty>Edit Document Properties</editProperty>
-      <uploadNewVersion>Upload a new version</uploadNewVersion>
+      <checkIn>Přihlášení</checkIn>
+      <checkOut>Odhlášení</checkOut>
+      <shareDocuments>Sdílet</shareDocuments>
+      <openDocument>Vzdálená úprava</openDocument>
+      <editProperty>Upravit vlastnosti dokumentu</editProperty>
+      <uploadNewVersion>Nahrát novou verzi</uploadNewVersion>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -2034,7 +2034,7 @@
   -->
   <ECMPhoneFormatValidator>
     <msg>
-      <Invalid>The field '{0}' contains an invalid Phone number. Please enter another value.</Invalid>
+      <Invalid>Pole '{0}' obsahuje neplatné telefonní číslo. Zadejte jinou hodnotu.</Invalid>
     </msg>
   </ECMPhoneFormatValidator>
   <!--
@@ -2482,7 +2482,7 @@
       <Add>Přidat</Add>
     </action>
     <label>
-      <userOrGroup>Memberships:</userOrGroup>
+      <userOrGroup>Členství:</userOrGroup>
     </label>
     <msg>
       <userOrGroup-alreadyExists>Toto členství již existuje. Vyberte jinou kombinaci.</userOrGroup-alreadyExists>

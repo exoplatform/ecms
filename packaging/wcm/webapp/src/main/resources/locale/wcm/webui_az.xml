@@ -316,7 +316,7 @@
 
   <UIPermissionInputSetWithAction>
     <title>
-      <SelectUser>Select User</SelectUser>
+      <SelectUser>İstifadəçini seç</SelectUser>
       <SelectMember>Select Member</SelectMember>
       <AddAny>Add Any Permission</AddAny>
     </title>
@@ -324,7 +324,7 @@
 
   <UIUserSelectorPopupWindow>
     <title>
-      <UIUserContainer>User Selector</UIUserContainer>
+      <UIUserContainer>İstifadəçi seçimi</UIUserContainer>
     </title>
   </UIUserSelectorPopupWindow>
 
@@ -336,8 +336,8 @@
 
   <UIGroupMemberSelector>
     <label>
-      <selectGroup>Select Group</selectGroup>
-      <selectMembership>Select Membership</selectMembership>
+      <selectGroup>Qrupu seç</selectGroup>
+      <selectMembership>Üzvlüyü seç</selectMembership>
     </label>
   </UIGroupMemberSelector>
 

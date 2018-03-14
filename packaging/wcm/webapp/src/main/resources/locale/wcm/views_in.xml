@@ -24,7 +24,7 @@
     <view>
       <label>
         <url>URL</url>
-        <description>Description</description>
+        <description>Deskripsi</description>
       </label>
     </view>
   </WebLink>
@@ -32,17 +32,17 @@
   <SiteMetadata>
     <view>
       <label>
-        <title>Site Title</title>
-        <description>Site Description</description>
-        <keywords>Site Keywords</keywords>
-        <robots>Search Engine Behavior</robots>
+        <title>Judul situs</title>
+        <description>Deskripsi situs</description>
+        <keywords>Kata kunci situs</keywords>
+        <robots>Perilaku Mesin Pencari</robots>
       </label>
       <tooltip>
-        <add-edit>Add/Edit Metadata</add-edit>
+        <add-edit>Tambahkan/Edit Metadata</add-edit>
         <cancel>#{word.cancel}</cancel>
       </tooltip>
       <action>
-        <add-edit>Add/Edit</add-edit>
+        <add-edit>Tambah/Edit</add-edit>
         <cancel>#{word.cancel}</cancel>
       </action>
     </view>
@@ -50,13 +50,13 @@
 
   <Category>
     <view>
-      <label>Category</label>
+      <label>Kategori</label>
     </view>
   </Category>
 
   <Tag>
     <view>
-      <label>Tag</label>
+      <label>Menandai</label>
     </view>
   </Tag>
 </bundle>

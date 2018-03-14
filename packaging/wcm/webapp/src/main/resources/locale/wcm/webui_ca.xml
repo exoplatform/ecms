@@ -359,7 +359,7 @@
       <ColumnPageConfigs>Configuracions de Columnes de Pàgina</ColumnPageConfigs>
       <RowPageConfigs>Configuracions de Files de Pàgina</RowPageConfigs>
       <TabsPageConfigs>Configuracions de Pestanyes de Pàgina</TabsPageConfigs>
-      <MixPageConfigs>Mixed</MixPageConfigs>
+      <MixPageConfigs>Mixte</MixPageConfigs>
     </item>
   </UIDropDownPageTemp>
 
@@ -450,7 +450,7 @@
 
   <UIViewMetadataForm>
     <msg>
-      <Invalid-number>Please enter a valid number.</Invalid-number>
+      <Invalid-number>Si us plau, introdeix un número vàlid.</Invalid-number>
     </msg>
   </UIViewMetadataForm>
 </bundle>

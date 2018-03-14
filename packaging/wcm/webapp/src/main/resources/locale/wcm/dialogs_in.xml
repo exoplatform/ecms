@@ -29,21 +29,21 @@
         <Advanced>Maju</Advanced>
         <Summary>Ringkasan</Summary>
         <name>#{word.name}</name>
-        <title>Title</title>
-        <ContentCSS>CSS Data</ContentCSS>
-        <hintCSS>You can specify the main style sheet for your web content. This style will override the style sheets defined at the site level and at the shared level.</hintCSS>
-        <ContentJS>JS Data</ContentJS>
-        <hintJS>You can specify some JavaScript codes that can be executed before your web content is rendered.</hintJS>
-        <WebContentHtml>Main Content</WebContentHtml>
-        <Illustration>Illustration</Illustration>
-        <hintIllustration>You can specify an image that will be shown when your web content is displayed in the list. You can also specify some summary texts to go with this image.</hintIllustration>
-        <confirm-delete>Are you sure you want to delete this illustration?</confirm-delete>
-        <illustrationImage>Illustration Image</illustrationImage>
-        <imageMimeType>Image Type</imageMimeType>
-        <image>Upload Image</image>
-        <imageWidth>Image Width</imageWidth>
-        <imageHeight>Image Height</imageHeight>
-        <Synchronize>Synchronize with CSS and HTML</Synchronize>
+        <title>Judul</title>
+        <ContentCSS>Data CSS</ContentCSS>
+        <hintCSS>Anda bisa menentukan lembar gaya utama untuk konten web anda. Gaya ini akan menimpa lembar gaya yang dedifinisikan di tingkat situs dan pada tingkat bersama.</hintCSS>
+        <ContentJS>Data JS</ContentJS>
+        <hintJS>Anda dapat menentukan beberapa kode bahwa JavaScript bisa dieksekusi sebelum web anda dan konten yang diberikan.</hintJS>
+        <WebContentHtml>Konten utama</WebContentHtml>
+        <Illustration>Ilustrasi</Illustration>
+        <hintIllustration>Anda dapat menentukan sebuah gambar yang akan ditunjukkan saat konten web anda ditampilkan dalam daftar. anda juga dapat menentukan beberapa teks ringkasan untuk pergi dengan gambar ini.</hintIllustration>
+        <confirm-delete>Apakah anda yakin ingin untuk menghapus ilustrasi ini?</confirm-delete>
+        <illustrationImage>Gambar Ilustrasi</illustrationImage>
+        <imageMimeType>Jenis gambar</imageMimeType>
+        <image>Unggah gambar</image>
+        <imageWidth>Lebar gambar</imageWidth>
+        <imageHeight>Tinggi gambar</imageHeight>
+        <Synchronize>Cocokkan dengan CSS dan HTML</Synchronize>
       </label>
     </dialog>
   </WebContent>
@@ -52,8 +52,8 @@
     <dialog>
       <label>
         <name>#{word.name}</name>
-        <active>Active</active>
-        <priority>Priority</priority>
+        <active>Aktif</active>
+        <priority>Prioritas</priority>
         <content>Data CSS</content>
       </label>
     </dialog>

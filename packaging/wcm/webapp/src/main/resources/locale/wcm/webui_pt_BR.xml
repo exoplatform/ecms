@@ -359,7 +359,7 @@
       <ColumnPageConfigs>Colunas</ColumnPageConfigs>
       <RowPageConfigs>Linhas</RowPageConfigs>
       <TabsPageConfigs>Abas</TabsPageConfigs>
-      <MixPageConfigs>Mixed</MixPageConfigs>
+      <MixPageConfigs>Mistas</MixPageConfigs>
     </item>
   </UIDropDownPageTemp>
 
@@ -450,7 +450,7 @@
 
   <UIViewMetadataForm>
     <msg>
-      <Invalid-number>Please enter a valid number.</Invalid-number>
+      <Invalid-number>Digite um número válido.</Invalid-number>
     </msg>
   </UIViewMetadataForm>
 </bundle>

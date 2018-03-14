@@ -8,7 +8,7 @@
 
   <UICNConfigPopupWindow>
     <title>
-      <UICategoryNavigationConfig>Category List Configuration</UICategoryNavigationConfig>
+      <UICategoryNavigationConfig>Configurarea listei de categorii</UICategoryNavigationConfig>
     </title>
   </UICNConfigPopupWindow>
 
@@ -24,27 +24,27 @@
       <UICategoryNavigationTreeNameSelectBox>Mulțimea de categorii</UICategoryNavigationTreeNameSelectBox>
       <UICategoryNavigationTreeTitleFormStringInput>Titlu</UICategoryNavigationTreeTitleFormStringInput>
   
-      <UICategoryNavigationTreeNameFormSelectBox>Tree Name</UICategoryNavigationTreeNameFormSelectBox>
-      <UICategoryNavigationTemplateFormSelectBox>Tree viewer template</UICategoryNavigationTemplateFormSelectBox>
+      <UICategoryNavigationTreeNameFormSelectBox>Numele rădăcinii</UICategoryNavigationTreeNameFormSelectBox>
+      <UICategoryNavigationTemplateFormSelectBox>Vizualizare șablon rădăcină</UICategoryNavigationTemplateFormSelectBox>
       
       <UICategoryNavigationTargetPathFormInputSet>Arată în pagină</UICategoryNavigationTargetPathFormInputSet>      
-      <TreeSelectionBlock>Tree Selection</TreeSelectionBlock>
+      <TreeSelectionBlock>Selectarea rădăcinii</TreeSelectionBlock>
       <DisplaySettingBlock>Setările de afişare</DisplaySettingBlock>
       <AdvancedBlock>Setări avansate</AdvancedBlock>
   
   <UICategoryNavigationTreePathFormInputSet>Calea țintă</UICategoryNavigationTreePathFormInputSet>
   <UICategoryNavigationTreePathFormStringInput>Calea țintă</UICategoryNavigationTreePathFormStringInput>
   <UICategoryNavigationHeaderFormStringInput>Antet</UICategoryNavigationHeaderFormStringInput>
-  <UICategoryNavigationAutomaticDetectionCheckBoxInput>Automatic</UICategoryNavigationAutomaticDetectionCheckBoxInput>
+  <UICategoryNavigationAutomaticDetectionCheckBoxInput>Automat</UICategoryNavigationAutomaticDetectionCheckBoxInput>
   <UICategoryNavigationDynamicNavigationLabel>Navigare dinamică</UICategoryNavigationDynamicNavigationLabel>
   <UICategoryNavigationWithClvFormStringInput>cu</UICategoryNavigationWithClvFormStringInput>
   <UICategoryNavigationTreepathPopupWindow>Calea țintă</UICategoryNavigationTreepathPopupWindow>    
       
     </label>
     <msg>
-      <not-support-encoding>Encoding is not supported.</not-support-encoding>
-      <render>An error occurred when rendering.</render>
-      <saving-success>The information was updated successfully.</saving-success>
+      <not-support-encoding>Codarea nu este suportată.</not-support-encoding>
+      <render>A apărut o eroare în timpul renderingului.</render>
+      <saving-success>Informațiile au fost actualizate cu succes.</saving-success>
     </msg>
     <action>
       <Save>Salvaţi</Save>

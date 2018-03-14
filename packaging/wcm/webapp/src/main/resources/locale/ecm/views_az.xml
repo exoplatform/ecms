@@ -4,7 +4,7 @@
   <View>
     <label>
       <languages>
-        <en>English</en>
+        <en>İngilis Dili</en>
         <fr>French</fr>
         <ru>Russian</ru>
         <vi>Vietnamese</vi>
@@ -28,7 +28,7 @@
         <show-comments>Show comments</show-comments>
         <hide-comments>Hide comments</hide-comments>
         <comment-by>Commented by</comment-by>
-        <email>Email</email>
+        <email>E-poçt</email>
         <site>Site</site>
         <lastComment>Last comment posted by {user} at {time}</lastComment>
         <Less_Than_A_Minute>less than a minute ago</Less_Than_A_Minute>
@@ -100,7 +100,7 @@
       <label>
         <name>Name</name>
         <versionable>Versionable</versionable>
-        <exo_owner>Owner</exo_owner>
+        <exo_owner>Sahib</exo_owner>
         <exo_dateCreated>Date Created</exo_dateCreated>
         <exo_dateModified>Date Modified</exo_dateModified>
         <auditing>Auditing</auditing>

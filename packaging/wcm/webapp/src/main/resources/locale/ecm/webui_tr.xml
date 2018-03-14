@@ -56,7 +56,7 @@
   <UIPermissionUser>
     <label>
       <selectUser>Kullanıcı Seçin</selectUser>
-      <selectGroup>Göz Atın ve Bir Grup Seçin</selectGroup>
+      <selectGroup>Bir gruba göz atın ve bir grup seçin</selectGroup>
     </label>
   </UIPermissionUser>
   <UIPermissionMembership>

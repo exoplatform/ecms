@@ -30,7 +30,7 @@
         <comment-by>Komentoval</comment-by>
         <email>E-mail</email>
         <site>Web</site>
-        <lastComment>Last comment posted by {user} at {time}</lastComment>
+        <lastComment>Poslední komentář odeslal {user} v {time}</lastComment>
         <Less_Than_A_Minute>před méně než minutou</Less_Than_A_Minute>
         <About_A_Minute>asi před minutou</About_A_Minute>
         <About_x_Minutes>asi před {0} minutami</About_x_Minutes>
@@ -51,12 +51,12 @@
     <view>
       <label>
         <not-viewable>Náhled na tento dokument není k dispozici.</not-viewable>
-        <pdf-max-size>The preview is not available for content larger than {0} MB.</pdf-max-size>
-        <pdf-max-page>The preview is not available for content with over {0} pages.</pdf-max-page>
+        <pdf-max-size>Náhled není k dispozici pro obsah větší než {0} MB.</pdf-max-size>
+        <pdf-max-page>Náhled není dostupný pro obsah s více než {0} stránkami.</pdf-max-page>
         <using-webDAV>nebo otevřete v MS Office</using-webDAV>
-        <open-on-desktop>Open on Desktop</open-on-desktop>
-        <open-in-documents>Open in Documents</open-in-documents>
-        <open-in-documents-tooltip>Open this file in Documents app</open-in-documents-tooltip>
+        <open-on-desktop>Otevřít na ploše</open-on-desktop>
+        <open-in-documents>Otevřít v Dokumentech</open-in-documents>
+        <open-in-documents-tooltip>Otevřít tento soubor v aplikaci Dokumenty</open-in-documents-tooltip>
         <file-size-too-big>Obsah tohoto souboru je příliš velký. Měli byste jej stáhnout a otevřít v klientovi.</file-size-too-big>
         <webDAV>WebDAV zobrazení</webDAV>
         <download>Stáhnout</download>
@@ -87,7 +87,7 @@
   <Vote>
     <view>
       <label>
-        <avg-rating>Rate</avg-rating>
+        <avg-rating>Prům. Hodnocení</avg-rating>
         <subscription>Hlasy</subscription>
       </label>
     </view>

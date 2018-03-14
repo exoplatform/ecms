@@ -18,8 +18,8 @@
       <Document>Dokument</Document>
       <DocumentAndPage>Dokument a stránka</DocumentAndPage>
       <documentandpage>Dokument a stránka</documentandpage>
-      <results>Results {0} to {1} for {2}</results>
-      <oneResult>Only one result for {0}</oneResult>
+      <results>Výsledky {0} až {1} pro {2}</results>
+      <oneResult>Pouze jeden výsledek pro {0}</oneResult>
       <ofAboutCaption>asi</ofAboutCaption>
       <timeUnitCaption>sekund</timeUnitCaption>
       <similar>Stránky, kde je uveden stejný obsah</similar>

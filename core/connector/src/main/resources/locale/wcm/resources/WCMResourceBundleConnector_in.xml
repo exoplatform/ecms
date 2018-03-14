@@ -2,34 +2,34 @@
 <bundle>
   <ContentSelector>
     <msg>
-      <no-file-selected>There is no content selected. Please select at least one.</no-file-selected>
+      <no-file-selected>Disana tidak ada isi yang dipilih. Silahkan pilih minimal satu.</no-file-selected>
     </msg>
   </ContentSelector>
   <RenameConnector>
     <label>
-      <rename>Rename</rename>
-      <cancel>Cancel</cancel>
+      <rename>Ganti nama</rename>
+      <cancel>Batal</cancel>
     </label>
     <msg>
-      <renaming>Renaming...</renaming>
+      <renaming>Mengubah nama...</renaming>
     </msg>
   </RenameConnector>
   <OpenInOfficeConnector>
     <label>
       <exo>
         <remote-edit>
-          <word>Open in Word</word>
-          <excel>Open in Excel</excel>
-          <powerpoint>Open in Powerpoint</powerpoint>
-          <desktop>Open on Desktop</desktop>
-          <desktop-app>Open in {0}</desktop-app>
+          <word>Buka di word</word>
+          <excel>Buka di Excel</excel>
+          <powerpoint>Buka di Powerpoint</powerpoint>
+          <desktop>Buka pada Desktop</desktop>
+          <desktop-app>Buka dalam {0}</desktop-app>
         </remote-edit>
       </exo>
     </label>
   </OpenInOfficeConnector>
   <DocumentAutoVersion>
     <msg>
-      <WrongMimeType>The mimetype of the file uploaded is unknown. No new version of {0} will be created.</WrongMimeType>
+      <WrongMimeType>Jenis mime dari berkas yang diunggah itu adalah tidak diketahui. Tidak ada versi baru dari {0} yang akan dibuat.</WrongMimeType>
     </msg>
   </DocumentAutoVersion>
 </bundle>

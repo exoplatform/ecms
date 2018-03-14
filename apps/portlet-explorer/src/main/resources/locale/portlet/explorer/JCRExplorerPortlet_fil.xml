@@ -1118,7 +1118,7 @@
       <exactlyPro-properties>Ang pag-aari</exactlyPro-properties>
       <exactlyPro-ContainExactly>Naglalaman ng Eksakto</exactlyPro-ContainExactly>
       <containPro-properties>Ang pag aari</containPro-properties>
-      <containPro-Contain>Contain</containPro-Contain>
+      <containPro-Contain>Ang Nilalaman</containPro-Contain>
       <notContainPro-properties>Ang pag aari</notContainPro-properties>
       <notContainPro-notContain>Hindi Naglalaman</notContainPro-notContain>
       <ConstraintOption-From>Mula</ConstraintOption-From>
@@ -2544,7 +2544,7 @@
       <Admin>Ang Admin</Admin>
       <Info>Impormasyon</Info>
       <Actions>Ang mga Aksyon</Actions>
-      <Collaboration>Collaboration</Collaboration>
+      <Collaboration>Ang Kolaborasyon</Collaboration>
       <Search>Hanapin</Search>
     </obtion>
   </UIActionBar>
@@ -2668,7 +2668,7 @@
       <OwnedByMe>Pag-aari ko</OwnedByMe>
       <Favourites>Ang mga paborito</Favourites>
       <Hidden>Magtago</Hidden>
-      <Trash>Trash</Trash>
+      <Trash>Ang Basura</Trash>
       <Configuration>Itakda ang mga kagustuhan</Configuration>
     </label>
     <title>
@@ -2697,7 +2697,7 @@
        <Images>Larawan</Images>
        <Video>Video</Video>
        <Music>Musika</Music>
-       <Documents>Document</Documents>
+       <Documents>Ang Dokumento</Documents>
        <Content>Ang Nilalaman</Content>
     </label>
   </DocumentType>
@@ -2707,7 +2707,7 @@
       <Images>Larawan</Images>
       <Video>Video</Video>
       <Music>Musika</Music>
-      <Documents>Document</Documents>
+      <Documents>Ang Dokumento</Documents>
       <Content>Ang nilalaman</Content>
     </label>
     <title>Itakda ang Filter para sa mga Preperensiya</title>
@@ -2752,7 +2752,7 @@
       <showOwnedByUser>Pag-aari ko</showOwnedByUser>
       <showFavourites>Ang Mga Paborito</showFavourites>
       <showHiddens>Ang Nakatago</showHiddens>
-      <showTrash>Trash</showTrash>
+      <showTrash>Ang Basura</showTrash>
     </label>
     <action>
       <Save>#{word.save}</Save>

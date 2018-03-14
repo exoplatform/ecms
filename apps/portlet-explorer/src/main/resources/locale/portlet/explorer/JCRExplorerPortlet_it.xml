@@ -300,7 +300,7 @@
       <ManageActions>Gestisci Azioni</ManageActions>
       <ExportNode>Esporta Nodo</ExportNode>
       <ImportNode>Importa Nodo</ImportNode>
-      <OverloadThumbnail>Change Icon Image</OverloadThumbnail>
+      <OverloadThumbnail>Carica Anteprima</OverloadThumbnail>
       <ManageHidden>Nascondi/Mostra Contenuto</ManageHidden>
       <ViewReferences>Vedi Referenze</ViewReferences>
       <ViewNodeType>Vedi Tipi Nodo</ViewNodeType>
@@ -1355,7 +1355,7 @@
       <addLabel>Aggiungi Etichetta</addLabel>
       <removeLable>Rimuovi Etichetta</removeLable>
       <restoreVersion>Ripristina Versione</restoreVersion>
-      <viewVersion>View Version</viewVersion>
+      <viewVersion>Visualizza Informazioni Versione</viewVersion>
       <deleteVersion>Elimina Versione</deleteVersion>
       <compareVersion>Confronta con la versione base</compareVersion>
     </tooltip>

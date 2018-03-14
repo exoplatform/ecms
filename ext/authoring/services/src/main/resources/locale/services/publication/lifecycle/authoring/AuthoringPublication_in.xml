@@ -8,7 +8,7 @@
 <unpublished>Konten tidak dipublikasikan</unpublished>
 <archived>Konten diarsipkan</archived>
 <staged>Konten dipentaskan</staged>
-<approved>The content is approved</approved>
+<approved>Konten telah disetujui</approved>
 <pending>Kontennya tertunda</pending>
 <draft>Isinya ada dalam bentuk draft</draft>
       </changeState>
@@ -17,7 +17,7 @@
   <Publication>
     <log>
       <description>
-        <enrolled>The content enrolls in Publication life cycle</enrolled>
+        <enrolled>Kontennya masuk dalam publikasi siklus kehidupan</enrolled>
       </description>
     </log>
   </Publication>

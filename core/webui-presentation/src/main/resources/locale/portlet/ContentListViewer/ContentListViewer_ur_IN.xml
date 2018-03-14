@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UICLVContainer>
+    <label>
+      <Preferences>ترجیحات</Preferences>
+      <AddContent>مواد جوڑ دیں</AddContent>
+      <ManageContent>موادکابندوبست کریں</ManageContent>
+    </label>
+    <msg>
+      <non-contents>معاف کیجئے گا، کوئی مضامین دستیاب نہیں ہیں ۔.</non-contents>
+      <item-not-found>شے نہیں ملی ۔.</item-not-found>
+      <no-permission>آپ کو اس نوڈ تک رسائی کی اجازت نہیں ہے.</no-permission>
+      <category-back>پچھلے پر جائیں</category-back>
+    </msg>
+  </UICLVContainer>
+  <UIViewerManagementPopupWindow>
+    <title>
+      <UICLVConfig>مشمول فہرست ترجیحات</UICLVConfig>
+    </title>
+  </UIViewerManagementPopupWindow>
+  <UICLVConfig>
+    <label>
+      <Title>مشمول فہرست ترجیحات</Title>
+      <ContentSelectionBlock>مشمول انتخاب</ContentSelectionBlock>
+      <UICLVConfigDisplayModeFormRadioBoxInput>نوع</UICLVConfigDisplayModeFormRadioBoxInput>
+      <UICLVConfigItemPathFormInputSet>فولڈر کا راستہ</UICLVConfigItemPathFormInputSet>
+    <UICLVConfigItemPathFormStringInput>فولڈر کا راستہ</UICLVConfigItemPathFormStringInput>
+      <UICLVConfigOrderByFormSelectBox>کی طرف سے آرڈر</UICLVConfigOrderByFormSelectBox>
+      <option>
+        <exo:title>عنوان</exo:title>
+        <exo:dateCreated>تشکیلتشکیل کی تاریخ</exo:dateCreated>
+        <exo:lastModifiedDate>ترمیمی تاریخ</exo:lastModifiedDate>
+        <publication:liveDate>شائع شدہ تاریخ</publication:liveDate>
+        <exo:startEvent>تقریب کی تاریخ</exo:startEvent>
+        <exo:index>فہرست</exo:index>
+        <DESC>نزولی</DESC>
+        <ASC>صعودی</ASC>
+      </option>
+      <DisplaySettingBlock>ڈسپلے ترتیبات</DisplaySettingBlock>
+      <UICLVConfigHeaderFormStringInput>سرتحریر</UICLVConfigHeaderFormStringInput>
+      <UICLVConfigDisplayTemplateFormSelectBox>سانچا</UICLVConfigDisplayTemplateFormSelectBox>
+      <UICLVConfigPaginatorTemplateFormSelectBox>صفحہ سازی</UICLVConfigPaginatorTemplateFormSelectBox>
+      <UICLVConfigItemsPerPageFormStringInput>اشیاءفی صفحہ</UICLVConfigItemsPerPageFormStringInput>
+      <UICLVConfigShowIllustrationFormCheckboxInput>Show Image</UICLVConfigShowIllustrationFormCheckboxInput>
+      <UICLVConfigShowSummaryFormCheckboxInput>Show Summary</UICLVConfigShowSummaryFormCheckboxInput>
+      <UICLVConfigShowHeaderFormCheckboxInput>Show Header</UICLVConfigShowHeaderFormCheckboxInput>
+      <UICLVConfigShowRefreshFormCheckboxInput>Show Refresh</UICLVConfigShowRefreshFormCheckboxInput>
+      <UICLVConfigShowTitleFormCheckboxInput>عنوان نمایش کریں</UICLVConfigShowTitleFormCheckboxInput>
+      <UICLVConfigShowDateCreatedFormCheckboxInput>تاریخ کی نمایش کریں</UICLVConfigShowDateCreatedFormCheckboxInput>
+      <UICLVConfigShowLinkFormCheckboxInput>Show Link</UICLVConfigShowLinkFormCheckboxInput>
+      <UICLVConfigShowReadmoreFormCheckboxInput>Show More Links</UICLVConfigShowReadmoreFormCheckboxInput>
+      <UICLVConfigAllowDynamicUrlStringInput>Allow Dynamic URL</UICLVConfigAllowDynamicUrlStringInput>
+      <UICLVConfigShowRssLinkFormCheckboxInput>Show RSS Link</UICLVConfigShowRssLinkFormCheckboxInput>
+      <UICLVConfigShowAutomaticDetectionCheckboxInput>Automatic Detection</UICLVConfigShowAutomaticDetectionCheckboxInput>
+      <AdvancedBlock>پیشگی</AdvancedBlock>
+      <UICLVConfigDynamicNavigationLabel>متحرک سمت شناسی</UICLVConfigDynamicNavigationLabel>
+      <UICLVConfigContextualFolderRadioBoxInput>Contextual Folder</UICLVConfigContextualFolderRadioBoxInput>
+      <UICLVConfigShowCLVByStringInput>سے</UICLVConfigShowCLVByStringInput>
+      <UICLVConfigshowSCVWithStringInput>ساتھ</UICLVConfigshowSCVWithStringInput>
+      <UICLVConfigTargetPageFormInputSet>صفحہ میں دکھائیں</UICLVConfigTargetPageFormInputSet>
+      <content-not-found>Content not found.</content-not-found>
+      <ContentPath>مشمول راہ</ContentPath>
+      <Up>اوپر</Up>
+      <Down>نیچے</Down>
+      <UICLVConfigCacheManagementLabel>مشمول رویت</UICLVConfigCacheManagementLabel>
+      <UICLVContentByQueryLabel>Content by Query</UICLVContentByQueryLabel>
+      <UICLVConfigWorkspaceFormSelectBox>کام کی جگہ</UICLVConfigWorkspaceFormSelectBox>
+      <UICLVConfigContentByQueryTextArea>by query</UICLVConfigContentByQueryTextArea>
+      <UICLVConfigCacheEnableRadioBoxInput>Share content between users</UICLVConfigCacheEnableRadioBoxInput>
+    </label>
+    <help>
+      <ModeSelectionHelp>مواد دکھانے کے لئے دو طریقے دستیاب ہیں. "فولڈر کی طرف سے" آپ کے منتخب شدہ فولڈر / زمرہ میں دستیاب تمام مواد لے جائے گا. "مواد کی طرف سے" آپ کو دستی طور جو مواد آپ ظاہر کرنا چاہتے ہیں کو منتخب کرنے کی اجازت دیتا ہے.</ModeSelectionHelp>
+      <FolderPathHelp>وہ مواد منتخب کریں جو آپ ظاہر کرنا چاہتے ہیں. اگر آپ متحرک سمت شناسی اختیار کو فعال کرتے ہیں تو پہلے سے طے شدہ انتخاب کو متحرک طور پر تبدیل کیا جائے گا( نیچے پیشگی طرز دیکھیں).</FolderPathHelp>
+      <HeaderOptionHelp>مواد کی فہرست کے اوپر ہیڈر دکھائیں. اگر آپ خود کار طریقے سے پتہ لگانے کے اختیار کو فعال کرتے ہیں، تو یہ موجودہ انتخاب کی بنیاد پر ہیڈر کو تلاش کرنے کی کوشش کرے گی.</HeaderOptionHelp>
+      <GeneralOptionHelp>Select the graphical elements you want to show in your list. Note that, depending on your selected template, some elements may not be available.</GeneralOptionHelp>
+      <ContextualHelp>متحرک سمت شناسی اختیار کو فعال کرتا ہے. دوسروں کو یو آر ایل پیرامیٹر پر متحرک طور پر مواد کو تبدیل کر سکتا ہے.</ContextualHelp>
+      <ParameterHelp>اگر متحرک سمت شناسی(نیویگیشن) فعال ہے تو اس متعین مقدار (پیرا میٹر) کو مواد تک رسائی حاصل کرنے کے لیےاستعمال کیا جائے گا.</ParameterHelp>
+      <ShowDetailInPageHelp>مواد پر کلک کرنے سے صارف کو ایک تفصیل صفحہ پر ری ڈائریکٹ کیا جاتا ہے. مواد دکھانے کے لئے آپ کے پاس "مواد بذریعے یوآرایل" پوٹ لٹ مع متحرک سمت (نیویگیشن) ہدف صفحہ پر فعال ہونا لازمی ہے.</ShowDetailInPageHelp>
+      <DetailParameterHelp>اس متعین مقدار (پیرامیٹر) میں تفصیل کے صفحے پر منسلک مواد کا راستہ ہوگا. یہ پیرامیٹر صفحے کے "یو آر ایل کے مواد" کے پورٹلٹ میں استعمال کیے گئے پیرامیٹر سے مشابہ ہونا چاہیے.</DetailParameterHelp>
+      <ContentByQueryHelp>مواد کو متحرک طور پر حاصل کرنے کے لئے آپ ایک SQL سوال مرتب کرسکتے ہیں. مندرجہ مندرجہ ذیل متعین مقدار (پیرامیٹرس) کی اجازت ہے {: ${user}, ${lang یا پارام ${PARAM} سےگیرا ہوا کوئی بھی حاصل پیرامیٹر.</ContentByQueryHelp>
+      <ContentsVisibilityHelp>"توثیق کی طرف سے پابند" مواد کی تصدیق کی بنیاد پر فلٹر کرے گا. اگر آپ سائن ان نہیں کرتے ہیں تو، آپ صرف عوامی مواد دیکھیں گے. اگر آپ لاگ ان ہیں تو آپ انٹرانیٹ کے صارفین کے ذریعہ دکھائے جانے والے سبھی مواد دیکھتے ہیں (لیکن سب کی طرف سے مشترکہ)."صارف کےکار منصبی (رولز) سے پابند" کا مطلب یہ ہے کہ آپ اپنے حقوق کے مطابق مواد دیکھیں گے. اکثر صورتوں میں یہ اختیار استعمال نہیں کرنا چاہیے کیونکہ یہ مجموعی کارکردگی کو گھٹا دیتا ہیے.</ContentsVisibilityHelp>
+    </help>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <delete>حذف کریں</delete>
+    </action>
+    <msg>
+      <not-valid-path>The Folder Path is invalid.</not-valid-path>
+      <saving-success>The portlet's preferences are saved.</saving-success>
+    </msg>
+    <tab>
+      <label>
+        <clvContentTab>مشمول انتخاب</clvContentTab>
+        <clvDisplayTab>ڈسپلے ترتیبات</clvDisplayTab>
+        <clvAdvancedTab>پیشگی</clvAdvancedTab>
+      </label>
+    </tab>
+  </UICLVConfig>
+  <UICLVConfigDisplayModeFormRadioBoxInput>
+    <label>
+      <AutoViewerMode>By Folder</AutoViewerMode>
+      <ManualViewerMode>By Content</ManualViewerMode>
+    </label>
+  </UICLVConfigDisplayModeFormRadioBoxInput>
+  <UICLVConfigItemPathFormInputSet>
+    <title>
+      <SelectFolderPath>فولڈر راستہ کا انتخاب کریں</SelectFolderPath>
+      <AddPath>راستہ شامل کریں</AddPath>
+    </title>
+  </UICLVConfigItemPathFormInputSet>
+  <FolderPathSelectorPopupWindow>
+    <title>
+      <UIContentSelectorFolder>پوشہ براؤزر</UIContentSelectorFolder>
+    </title>
+  </FolderPathSelectorPopupWindow>
+  <UICLVConfigOrderTypeFormSelectBox>
+    <label>
+      <option>
+        <OrderDesc>نزولی</OrderDesc>
+        <OrderAsc>صعودی</OrderAsc>
+      </option>
+    </label>
+  </UICLVConfigOrderTypeFormSelectBox>
+  <UICLVConfigTargetPageFormInputSet>
+    <title>
+      <SelectBasePath>بنیادی راستہ منتخب کریں</SelectBasePath>
+      <SelectTargetPage>بنیادی راستہ منتخب کریں</SelectTargetPage>
+    </title>
+  </UICLVConfigTargetPageFormInputSet>
+  <UICLVBasePathPopupWindow>
+    <title>
+      <UIPageSelector>صفحہ انتخاب کار</UIPageSelector>
+    </title>
+  </UICLVBasePathPopupWindow>
+  <UICLVPresentation>
+    <msg>
+      <confirm-delete>کیا آپ واقعی یہ مواد حذف کرنا چاہتے ہیں?</confirm-delete>
+      <delete-content-successfully>مشمول کامیابی سے حذف کر دیا گیا.</delete-content-successfully>
+    </msg>
+    <label>
+      <readmore>Read more</readmore>
+      <rssFeed>RSS Feed</rssFeed>
+    </label>
+    <action>
+      <refresh>تازہ کریں</refresh>
+      <edit>مشمول ایکسپلورر میں تدوین کریں</edit>
+      <delete>حذف کریں</delete>
+      <publish>شائع کریں</publish>
+    </action>
+    <label>
+      <draft>مسودہ</draft>
+    </label>
+  </UICLVPresentation>
+  <CorrectContentSelectorPopupWindow>
+    <title>
+      <UIContentSelectorMulti>متعدد مواد منتخب کنندہ پینل</UIContentSelectorMulti>
+    </title>
+  </CorrectContentSelectorPopupWindow>
+  <UIContentDialogFormPopupWindow>
+    <title>
+      <UIContentDialogForm>Web Content Form</UIContentDialogForm>
+    </title>
+  </UIContentDialogFormPopupWindow>
+  <UICLVConfigContextualFolderRadioBoxInput>
+    <label>
+      <contextualEnable>فعال</contextualEnable>
+      <contextualDisable>غیر فعال</contextualDisable>
+    </label>
+  </UICLVConfigContextualFolderRadioBoxInput>
+  <PublicationStates>
+    <archived>محفوظ کردہ</archived>
+    <obsolete>متروک</obsolete>
+    <unpublished>غیر مطبوعہ</unpublished>
+    <enrolled>اندراج</enrolled>
+    <draft>مسودہ</draft>
+    <pending>زیر التواء</pending>
+    <approved>منظور ہوگیا</approved>
+    <inreview>نظرثانی میں</inreview>
+    <staged>مرحلہ</staged>
+    <published>مطبوعہ</published>
+  </PublicationStates>
+  <UICLVConfigCacheEnableRadioBoxInput>
+    <label>
+      <ENABLE>توثیق کی طرف سے پابند</ENABLE>
+      <DISABLE>Restricted by User Roles</DISABLE>
+    </label>
+  </UICLVConfigCacheEnableRadioBoxInput>
+</bundle>

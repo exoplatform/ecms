@@ -300,7 +300,7 @@
       <ManageActions>Dejanja</ManageActions>
       <ExportNode>Izvozi</ExportNode>
       <ImportNode>Uvozi</ImportNode>
-      <OverloadThumbnail>Change Icon Image</OverloadThumbnail>
+      <OverloadThumbnail>Nadomestna sličica</OverloadThumbnail>
       <ManageHidden>Pokaži/Skrij vsebino</ManageHidden>
       <ViewReferences>Sklici</ViewReferences>
       <ViewNodeType>Vrste</ViewNodeType>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UIDefaultSearchForm>
+    <label>
+      <keyword>کلیدی الفاظ</keyword>
+      <portal>پورٹل/ چوکھٹ</portal>
+      <Page>صفحہ</Page>
+      <Document>دستاویز</Document>
+    </label>
+    <action>
+      <Search>تلاش کریں</Search>
+    </action>
+  </UIDefaultSearchForm>
+
+  <UIDefaultSearchResult>
+    <label>
+      <Page>صفحہ</Page>
+      <Document>دستاویز</Document>
+      <DocumentAndPage>دستاویز اور صفحہ</DocumentAndPage>
+      <documentandpage>دستاویز اور صفحہ</documentandpage>
+      <results>نتائج {0} تا{1} {2} کے لیے</results>
+      <oneResult>صرف ایک نتیجہ{0} کیلئے</oneResult>
+      <ofAboutCaption>متعلق/ بارے میں</ofAboutCaption>
+      <timeUnitCaption>سیکنڈ</timeUnitCaption>
+      <similar>صفحات جہاں ایک ہی مواد ظاہر ہوتا ہے</similar>
+      <editor>مدیر</editor>
+      <date>تاریخ</date>
+      <relevancy>مطابقت</relevancy>
+      <title>عنوان</title>
+      <sortBy>بہ ترتیب:</sortBy>
+    </label>
+    <action>
+      <edit>ترمیم</edit>
+    </action>
+    <msg>
+      <search-not-match-type>آپ کی تلاش {0} کسی بھی {1} سے میل نہیں کھاتا.</search-not-match-type>
+    </msg>
+  </UIDefaultSearchResult>
+  <UISearchPageLayoutManager>
+    <label>
+      <itemsPerPageSelector>اشیاءفی صفحہ</itemsPerPageSelector>
+      <searchFormSelector>سانچہ سے تلاش کریں</searchFormSelector>
+      <searchResultSelector>سا نچہ تلاش نتیجہ</searchResultSelector>
+      <searchPaginatorSelector>تلاش پییجینیٹر سا نچہ</searchPaginatorSelector>
+      <searchPageLayoutSelector>تلاش کے صفحے کا وضع قطع سانچہ</searchPageLayoutSelector>
+      <searchResultBasePathInputSetAction>بنیادی راستہ</searchResultBasePathInputSetAction>
+      <pageMode>صفحہ طرز</pageMode>
+      <option>
+        <none>کوئی نہیں</none>
+        <more>مزید</more>
+        <pagination>صفحہ سازی</pagination>
+      </option>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UISearchPageLayoutManager>
+  <searchResultBasePathInputSetAction>
+    <title>
+      <SelectBasePath>بنیادی راستہ منتخب کریں</SelectBasePath>
+    </title>
+  </searchResultBasePathInputSetAction>  
+  <UISearchForm>  
+   <message>
+     <keyword-not-support>مطلوبہ لفظ غلط ہے- کچھ کرداروں کی شناخت نہیں ہو رہی ہے.</keyword-not-support>
+     <not-checked>براۓ مہربانی تلاش کی قسم منتخب کریں.</not-checked>
+     <keyword-not-empty>براۓ مہربانی مطلوبہ لفظ درج کریں.</keyword-not-empty>
+   </message>
+  </UISearchForm>
+  <UIPaginatorDefault>
+    <label>
+      <next>اگلا</next>
+      <previous>پچھلا</previous>
+      <more>مزید</more>
+    </label>
+  </UIPaginatorDefault>
+  <UISearchPageLayoutDefault>
+    <label>
+      <quickEditTitle>فوری ترمیم</quickEditTitle>
+    </label>
+  </UISearchPageLayoutDefault>
+  <searchOption>
+    <label>
+      <pageCheckBox>صفحات میں</pageCheckBox>
+      <documentCheckBox>مواد میں</documentCheckBox>
+    </label>
+  </searchOption>
+  <ViewMode>
+    <label>
+      <option>
+        <all>تمام سائٹس تلاش کریں</all>
+      </option>  
+    </label>  
+  </ViewMode>
+</bundle>
