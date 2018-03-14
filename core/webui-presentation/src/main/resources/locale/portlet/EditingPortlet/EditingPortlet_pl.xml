@@ -2,10 +2,10 @@
 <bundle>
   <EditingPortlet>
     <label>
-      <Editing>Mode:</Editing>
+      <Editing>Tryb:</Editing>
     </label>
     <msg>
-      <not-permission>You don't have permission to do this action.</not-permission>
+      <not-permission>Nie masz uprawnień aby wykonać tę akcję.</not-permission>
     </msg>
   </EditingPortlet>
 

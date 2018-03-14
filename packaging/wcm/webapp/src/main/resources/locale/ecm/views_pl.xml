@@ -55,8 +55,8 @@
         <pdf-max-page>Podgląd jest niedostępny dla treści o zawartości ponad {0} stron.</pdf-max-page>
         <using-webDAV>lub Otwórz w MS Office</using-webDAV>
         <open-on-desktop>Otwórz na Pulpicie</open-on-desktop>
-        <open-in-documents>Open in Documents</open-in-documents>
-        <open-in-documents-tooltip>Open this file in Documents app</open-in-documents-tooltip>
+        <open-in-documents>Otwórz w Dokumentach</open-in-documents>
+        <open-in-documents-tooltip>Otwórz ten plik w aplikacji Dokumenty</open-in-documents-tooltip>
         <file-size-too-big>Zawartość tego pliku jest zbyt duża. Należy pobrać i otworzyć inny plik.</file-size-too-big>
         <webDAV>Widok WebDAV</webDAV>
         <download>Pobierz</download>

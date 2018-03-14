@@ -300,7 +300,7 @@
       <ManageActions>Ações</ManageActions>
       <ExportNode>Exportar</ExportNode>
       <ImportNode>Importar</ImportNode>
-      <OverloadThumbnail>Change Icon Image</OverloadThumbnail>
+      <OverloadThumbnail>Substituir miniatura</OverloadThumbnail>
       <ManageHidden>Esconder/Mostrar conteúdo</ManageHidden>
       <ViewReferences>Referências</ViewReferences>
       <ViewNodeType>Tipos</ViewNodeType>
@@ -1351,11 +1351,11 @@
     </summary>
     <tooltip>
       <version>Versão</version>
-      <baseVersion>current version</baseVersion>
+      <baseVersion>versão atual</baseVersion>
       <addLabel>Adicionar rótulo</addLabel>
       <removeLable>Remover rótulo</removeLable>
       <restoreVersion>Restaurar versão</restoreVersion>
-      <viewVersion>View Version</viewVersion>
+      <viewVersion>Visualizar informações da versão</viewVersion>
       <deleteVersion>Excluir versão</deleteVersion>
       <compareVersion>Comparar com a versão base</compareVersion>
     </tooltip>

@@ -1,0 +1,2597 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.UIECMAdminControlPanel #
+  ################################################################################
+  -->
+  <UIECMAdminControlPanel>
+    <tab>
+      <label>
+        <Templates>Ang mga templates</Templates>
+        <Explorer>Ang Manunuhid</Explorer>
+        <Repository>Ang Repository</Repository>
+        <Advanced>Nag-una</Advanced>
+      </label>
+    </tab>
+    <label>
+      <UITaxonomyManagerTrees>Ang mga kategorya</UITaxonomyManagerTrees>
+      <UIMetadataManager>Ang Metadata</UIMetadataManager>
+      <UINamespaceManager>Ang mga Namespaces</UINamespaceManager>
+      <UINodeTypeManager>Ang mga Klase sa Nodes</UINodeTypeManager>
+      <UITemplatesManager>Ang mga dokumento</UITemplatesManager>
+      <UICLVTemplatesManager>Ang Listahan</UICLVTemplatesManager>
+      <UIViewManager>Ang mga tan-awanan</UIViewManager>
+      <UIDriveManager>Ang mga Drive</UIDriveManager>
+      <UIQueriesManager>Mga pangutana</UIQueriesManager>
+      <UIActionManager>Mga aksyon</UIActionManager>
+      <UIScriptManager>Mga Skrip</UIScriptManager>
+      <UIUnLockManager>Ang mga Lock</UIUnLockManager>
+      <UIFolksonomyManager>Ang mga tag</UIFolksonomyManager>
+    </label>
+    <msg>
+      <access-denied>Walay pagtugot sa pag-akses. Wala kay permiso nga mo buhat niining aksyon.</access-denied>
+    </msg>
+  </UIECMAdminControlPanel>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.UITaxonomy #
+  ################################################################################
+  -->
+  <UITaxonomyWorkingArea>
+    <msg>
+      <referential-integrity>Dili makabasa gikan sa gigikanan sa file, o ang distinasyon usa ka sub nga kategorya.</referential-integrity>
+      <no-taxonomy-selected>Kinahanglan ka mokopya ug magputol ug bisan usa lang ka kategorya.</no-taxonomy-selected>
+      <node-is-cutting>Dili ka pwede makabutang anhi. Siguro ang node sa kategorya '{0}' kai naputol.</node-is-cutting>
+      <can-not-paste>Walay datus sa clipboard para maka-paste.</can-not-paste>
+      <reference-exception>Dili maka-delete niining kategorya tungod kay kasamtangang nai-reperens sa iyang sulod.</reference-exception>
+      <path-error>Naay error samtang nagtangtang sa kategorya sa node.</path-error>
+    </msg>
+  </UITaxonomyWorkingArea>
+  <UITaxonomyManager>
+    <msg>
+      <confirm-delete>Sigurado baka nga imung tangtangon kining maong kategorya?</confirm-delete>
+    </msg>
+    <title>
+      <add>Pag-dungag</add>
+      <paste>Pagbutang</paste>
+      <cut>Pagputol</cut>
+      <copy>Pagkopya</copy>
+      <remove>Pagtangtang</remove>
+    </title>
+  </UITaxonomyManager>
+
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyTreeContainer#
+  ################################################################################
+  -->
+  <UITaxonomyTreeContainer>
+    <tab>
+      <info>
+        <UITaxonomyTreeMainForm>Ibutang ang ngalan sa kategorya, workspace ug ang home path.</UITaxonomyTreeMainForm>
+        <UIPermissionTreeManager>Pagbutang ug permiso para sa category tree.</UIPermissionTreeManager>
+        <UIActionTaxonomyManager>Pagpuno ug aksyon sa category tree para makumpleto ang pagbuhat o pag-update.</UIActionTaxonomyManager>
+        <UITaxonomyTreeCreateChild>Usba ang taxonomy tree pinaagi sa pagpuno, pagkopya, pagputol ug pagpili ug mga permiso.</UITaxonomyTreeCreateChild>
+      </info>
+    </tab>
+    <msg>
+      <not-exist-tree>Dili makita kining category tree.</not-exist-tree>
+    </msg>
+  </UITaxonomyTreeContainer>
+
+  <!--
+##########################################################################################
+#     org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyTreeMainForm          #
+##########################################################################################
+-->
+  <UITaxonomyTreeMainForm>
+    <action>
+      <Reset>Ibalik sa kaniadto</Reset>
+    </action>
+    <msg>
+      <name-not-allowed>Ang Gidili nga Ngalan</name-not-allowed>
+      <name-emty>Gikinahanglan ang ngalan sa tree.</name-emty>
+      <homePath-emty>Gikinahanglan ang home path.</homePath-emty>
+      <targetPath-emty>Gikinahanglan ang target path.</targetPath-emty>
+      <taxonomytree-existed>Nitumaw na ang ngalan sa category tree.</taxonomytree-existed>
+    </msg>
+  </UITaxonomyTreeMainForm>
+
+  <TaxonomyTreeMainForm>
+    <label>
+      <TaxoTreeName>Ang Ngalan</TaxoTreeName>
+      <TaxoTreeWorkspace>Ang Workspace</TaxoTreeWorkspace>
+      <TaxoTreeHomePath>Ang Home Path</TaxoTreeHomePath>
+    </label>
+  </TaxonomyTreeMainForm>
+
+  <TaxonomyTreeHomePath>
+    <title>
+      <AddPath>Pagpuno ug Path</AddPath>
+    </title>
+  </TaxonomyTreeHomePath>
+
+  <!--
+##########################################################################################
+#     org.exoplatform.ecm.webui.component.admin.taxonomy.tree.info.UIPermissionTreeInfo  #
+##########################################################################################
+-->
+  <UIPermissionTreeInfo>
+    <action>
+      <title>
+        <Delete>Tangtanga</Delete>
+        <Edit>Ang pag-usab</Edit>
+      </title>
+    </action>
+    <header>
+      <usersOrGroups>Ang Nigamit o Grupo</usersOrGroups>
+      <read>Pagbasa</read>
+      <addNode>Pagpuno ug Node</addNode>
+      <setProperty>Pagbutang ug Property</setProperty>
+      <remove>Ang Pagtangtang</remove>
+      <action>Ang aksyon</action>
+    </header>
+  </UIPermissionTreeInfo>
+
+  <!--
+  ##########################################################################################
+  #     org.exoplatform.ecm.webui.component.admin.taxonomy.tree.info.UIPermissionTreeForm  #
+  ##########################################################################################
+  -->
+  <UIPermissionTreeForm>
+    <msg>
+      <have-not-any-permission>Palihug pagbutang ug bisan usa ka permiso para ani nga node.</have-not-any-permission>
+    </msg>
+  </UIPermissionTreeForm>
+
+  <!--
+  ################################################################################
+  #     org.exoplatform.ecm.webui.component.admin.taxonomy.UIActionForm          #
+  ################################################################################
+  -->
+
+  <UIActionForm>
+    <title>Pagpuno ug aksyon para sa category tree</title>
+    <action>
+      <Save>#{word.save}</Save>
+    </action>
+    <msg>
+      <name-not-allowed>Ang walay sulod nga ngalan o mga espesyal nga karakter kay dili pwede sa ngalan sa aksyon.</name-not-allowed>
+      <path-invalid>Imbalido ang agianan o path.</path-invalid>
+      <taxonomy-existed>Ang category tree kay nitumaw na.</taxonomy-existed>
+      <taxonomy-node-existed>Ang category node kay nitumaw na.</taxonomy-node-existed>
+      <no-permission-add>Wala kay permiso ng magpuno ug aksyon.</no-permission-add>
+      <not-created-tree>Wala pa mabuhat ang category tree.</not-created-tree>
+    </msg>
+  </UIActionForm>
+
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.UITemplatesManager #
+  ################################################################################
+  -->
+  <UITemplatesList>
+    <header>
+      <name>Ang Ngalan sa Template</name>
+      <action>Ang mga Aksyon</action>
+    </header>
+  </UITemplatesList>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.UINamespaceForm  #
+  ################################################################################
+  -->
+  <NameSpacePopup>
+    <title>
+      <UINamespaceForm>Ang Form sa Namespace</UINamespaceForm>
+    </title>
+  </NameSpacePopup>
+  <UINamespaceForm>
+    <title>Magregister ug Bag-ong Namespace</title>
+    <label>
+      <namespace>Ang Prefix sa Namespace</namespace>
+      <uri>Ang URI</uri>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <register-unsuccessfull>Nitumaw na ang Namespaces ug ang URI.</register-unsuccessfull>
+      <prefix-null>Palihug i-specify ang prefix sa namespace.</prefix-null>
+      <uri-null>Palihug i-specify ang URI sa namespace.</uri-null>
+    </msg>
+  </UINamespaceForm>
+  <!--
+  ################################################################################
+  #      org.exoplatform.ecm.webui.component.admin.namespace.UINamespaceList #
+  ################################################################################
+  -->
+  <UINamespaceList>
+    <header>
+      <prefix>Ang Prefix</prefix>
+      <uri>Ang Namespace URI</uri>
+      <action>Ang Aksyon</action>
+    </header>
+    <action>
+      <AddNamespace>Magrehistro</AddNamespace>
+    </action>
+  </UINamespaceList>
+  <NamespacePopup>
+    <title>
+      <UINamespaceForm>Magregister ug Bag-ong Namespace</UINamespaceForm>
+    </title>
+  </NamespacePopup>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.UIMetadataList #
+  ################################################################################
+  -->
+  <UIMetadataList>
+    <label>
+      <false>dili tinood</false>
+      <true>tinood</true>
+      <True>tinood</True>
+      <False>dili tinood</False>
+    </label>
+    <title>
+      <view>Tan-awa</view>
+      <edit>Ang pag-usab</edit>
+      <delete>Tangtanga</delete>
+    </title>
+    <header>
+      <icon>Ang aykon</icon>
+      <name>Ang Metadata</name>
+      <type>Ang Klase</type>
+      <internalUse>Ang Gamit para sa Sulod</internalUse>
+      <action>Ang mga aksyon</action>
+    </header>
+    <msg>
+      <confirm-delete>Sigurado baka nga imung tangtangon ang metadata?</confirm-delete>
+      <delete-successful>Ang mga template sa '{0}' kay malampuson nga na-delete.</delete-successful>
+      <path-not-found-exception>Kini nga metadata kay na-delete na o nausab na. Palihu pinduta ang Refresh nga pindutanan.</path-not-found-exception>
+    </msg>
+    <action>
+      <Add>Pagpuno ug Metadata</Add>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIMetadataList>
+  <MetadataPopupAddNew>
+    <title>
+      <UIMetadataForm>Add New Metadata's Template</UIMetadataForm>
+    </title>
+  </MetadataPopupAddNew>
+  <MetadataPopupEdit>
+    <title>
+      <UIMetadataForm>Usba ang Template sa Metadata</UIMetadataForm>
+    </title>
+  </MetadataPopupEdit>
+  <MetataPermissionPopup>
+    <title>
+      <MetadataPermission>Magbutang ug mga Pagtugot</MetadataPermission>
+      <QueriesPermissionBrowse>Pagpuno ug mga Pagtugot</QueriesPermissionBrowse>
+    </title>
+  </MetataPermissionPopup>
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.metadata.UIMetadataForm #
+  ################################################################################
+  -->
+  <UIMetadataForm>
+    <title>Pag-map sa Metadata</title>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Save>I-aplay</Save>
+    </action>
+    <header>
+      <icon>Ang aykon</icon>
+      <label>Ang Ngalan sa Node</label>
+      <input>Ang Aksyon</input>
+    </header>
+    <label>
+      <dialogTemplate>Ang Template sa Dayalogo:</dialogTemplate>
+      <viewTemplate>Tan-awa ang Template:</viewTemplate>
+      <metadataName>Ang Ngalan sa Metadata:</metadataName>
+      <viewPermission>Ang Pagtugot:</viewPermission>
+      <permission>UIMetadataForm</permission>
+      <metadataLabel>Ang Ilhanan:</metadataLabel>
+    </label>
+    <tab>
+      <label>
+        <metadataTypeTab>Ang Klase sa Metadata</metadataTypeTab>
+        <dialogTab>Ang Template sa Dayalogo</dialogTab>
+        <viewTab>Tan-awa ang Template</viewTab>
+      </label>
+    </tab>
+  </UIMetadataForm>
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.metadata.UIMetadataView #
+  ################################################################################
+  -->
+  <UIMetadataView>
+    <header>
+      <name>Ang Ngalan sa Elemento</name>
+      <type>Ang Klase</type>
+      <description>Ang Deskripsyon</description>
+      <isMixin>Ang Klase ng Mixin</isMixin>
+      <orderable>Ang Maayo nga mga Bata</orderable>
+    </header>
+    <info>
+      <description>Ang Deskripsyon</description>
+    </info>
+    <tab>
+      <element>Ang mga elemento</element>
+      <metadataView>Ang Impormasyon sa Metadata</metadataView>
+    </tab>
+    <action>
+      <Cancel>#{word.close}</Cancel>
+      <Back>#{word.back}</Back>
+    </action>
+  </UIMetadataView>
+  <ViewMetadataPopup>
+    <title>
+      <UIMetadataView>Ang Impormasyon sa Metadata</UIMetadataView>
+    </title>
+  </ViewMetadataPopup>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.UIDriveManager #
+  ################################################################################
+  -->
+  <UIDriveList>
+    <header>
+      <icon>Ang Aykon</icon>
+      <name>Ang Ngalan</name>
+      <workspace>Ang Workspace</workspace>
+      <homePath>Ang Home Path</homePath>
+      <permissions>Ang mga permiso</permissions>
+      <views>Ang pagtan-aw</views>
+      <action>Ang Aksyon</action>
+    </header>
+    <tooltip>
+      <Delete>Tangtanga</Delete>
+      <EditInfo>Ang pag-usab</EditInfo>
+    </tooltip>
+    <msg>
+      <confirm-delete>Sigurado kaba nga gusto nimung tangtangon kining drive?</confirm-delete>
+    </msg>
+    <action>
+      <AddDrive>Pagpuno ug Drive</AddDrive>
+    </action>
+    <label>
+      <permission>{0} sa {1}</permission>
+    </label>
+  </UIDriveList>
+  <UIDriveForm>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Save>#{word.save}</Save>
+      <Back>#{word.back}</Back>
+      <Refresh>#{word.refresh}</Refresh>
+    </action>
+    <msg>
+      <drive-exists>Nitumaw na ang drive.</drive-exists>
+      <workspace-path-invalid>Ang path sa workspace kay dili balid.</workspace-path-invalid>
+      <drive-views-invalid>Palihug pagpili ug tan-awanan.</drive-views-invalid>
+      <icon-not-found>Dili makita ang aykon.</icon-not-found>
+      <permission-null>Kinahanglan magbutang ka ug permiso ning maong drive.</permission-null>
+      <allowCreateFolders>Kinahanglan mupili ka ug klase sa folder.</allowCreateFolders>
+      <name-null>Palihug i-enter ang ngalan sa drive.</name-null>
+      <fileName-invalid>Ang ngalan sa drive adunay mga dili balid nga mga karakter.</fileName-invalid>
+    </msg>
+    <tab>
+      <label>
+        <DriveInputSet>Ang Drive</DriveInputSet>
+        <ViewsInputSet>Pagbutang ug mga Tan-awan</ViewsInputSet>
+        <PermissionInputSet>Magbutang ug mga Pagtugot</PermissionInputSet>
+      </label>
+    </tab>
+    <label>
+      <name>Ang Ngalan:</name>
+      <workspace>Ang Workspace:</workspace>
+      <homePath>Ang Home Path:</homePath>
+      <icon>Ang Aykon sa Workspace:</icon>
+      <viewPreferences>Ipakita ang Reperensiya sa mga Dokumento:</viewPreferences>
+      <viewNonDocument>Ipakita ang Non-document nga mga Nodes:</viewNonDocument>
+      <viewSideBar>Ipakita ang Sidebar:</viewSideBar>
+      <permissions>Ang mga permiso:</permissions>
+      <showHiddenNode>Ipakita ang Nakatago nga mga Nodes:</showHiddenNode>
+      <allowCreateFolders>Pagtugot sa Pagbuhat ug Folder:</allowCreateFolders>
+      <Admin>Ang Admin:</Admin>
+      <Categories>Ang mga kategorya:</Categories>
+      <Icons>Ang mga aykon:</Icons>
+      <List>Ang listahan:</List>
+      <Web>Ang Web:</Web>
+    </label>
+  </UIDriveForm>
+  <AddDriveManagerPopup>
+    <title>
+      <UIDriveForm>Pagpuno ug Drive</UIDriveForm>
+    </title>
+  </AddDriveManagerPopup>
+  <EditDriveManagerPopup>
+    <title>
+      <UIDriveForm>Usba ang Drive</UIDriveForm>
+    </title>
+  </EditDriveManagerPopup>
+  <UITreeList>
+    <info>
+      <child-not-found>Dili makita ang Child node.</child-not-found>
+    </info>
+    <header>
+      <name>Ang Ngalan</name>
+      <action>Ang Aksyon</action>
+    </header>
+  </UITreeList>
+
+  <UIRepositoryList>
+    <titlebar>
+      <label>Imaniho ang ECM Main Function</label>
+    </titlebar>
+  </UIRepositoryList>
+
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeManager #
+  ################################################################################
+  -->
+  <UINodeTypeManager>
+    <header>
+      <icon>Ang Aykon</icon>
+      <label>Ang Ngalan sa Node</label>
+      <input>Ang Aksyon</input>
+    </header>
+    <action>
+      <Save>#{word.save}</Save>
+    </action>
+  </UINodeTypeManager>
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeList #
+  ################################################################################
+  -->
+  <UINodeTypeList>
+    <label>
+      <true>Tinood</true>
+      <false>Dili Tinood</false>
+    </label>
+    <header>
+      <icon>Ang Aykon</icon>
+      <nodeType>Ang Klase sa Node</nodeType>
+      <mixinType>Ang Klase sa Mixin</mixinType>
+      <orderable>Ang Maayo nga mga Child Nodes</orderable>
+      <action>Ang Aksyon</action>
+    </header>
+    <action>
+      <Export>I-eksport</Export>
+      <Import>I-import</Import>
+      <Add>Pag-puno</Add>
+    </action>
+    <tooltip>
+      <View>Tan-awa</View>
+      <Edit>Ang pag-usab</Edit>
+      <Delete>Tangtanga</Delete>
+    </tooltip>
+    <msg>
+      <confirm-delete>Sigurado baka nga imu tangtangon kini nga klase sa node?</confirm-delete>
+    </msg>
+  </UINodeTypeList>
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeOptionList #
+  ################################################################################
+  -->
+  <UINodeTypeOptionList>
+    <action>
+      <Save>#{word.save}</Save>
+      <Add>Pag-dungag</Add>
+    </action>
+    <header>
+      <icon>Ang Aykon</icon>
+      <label>Ang Ngalan sa Node</label>
+      <input>Ang Aksyon</input>
+    </header>
+  </UINodeTypeOptionList>
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeForm #
+  ################################################################################
+  -->
+  <UINodeTypeForm>
+    <tab>
+      <label>
+        <nodeTypeDefinition>Ang Node Type</nodeTypeDefinition>
+        <propertyDefinition>Ang Property</propertyDefinition>
+        <childNodeDefinition>Ang Child Node</childNodeDefinition>
+        <superTypeTab>Ang Super Types</superTypeTab>
+        <DefaultTypeTab>I-default ang Nahauna</DefaultTypeTab>
+        <RequiredTypeTab>Gikinahanglan ang Nahauna</RequiredTypeTab>
+        <Contraints>Ang mga babag</Contraints>
+      </label>
+    </tab>
+    <label>
+      <propertiesDefinitions>Ang mga Depinasyon sa Property</propertiesDefinitions>
+      <childDefinitions>Ang mga Depinasyon sa Child Node</childDefinitions>
+      <namespace>Ang Name Space</namespace>
+      <propertyNamespace>Ang Name Space</propertyNamespace>
+      <nodeTypeName>Ang Ngalan sa Klase sa Node</nodeTypeName>
+      <mixinType>Ang Klase ng Mixin</mixinType>
+      <hasOrderableChildNodes>Ang Maayo nga mga Child Nodes</hasOrderableChildNodes>
+      <primaryItemName>Ang Nahaunang Ngalan sa Aytem</primaryItemName>
+      <superTypes>Ang Super Types</superTypes>
+      <propertyname>Ang Ngalan sa Depinasyon</propertyname>
+      <requiredType>Ang Klase nga Gikinahanglan</requiredType>
+      <multiple>Daghan</multiple>
+      <mandatory>Gikinahanglan</mandatory>
+      <autoCreated>Awtomatiko nga Pagbuhat</autoCreated>
+      <parentversion>Sa gigikanan nga bersyon</parentversion>
+      <protected>Protektado</protected>
+      <constraints>Ang mga balyu</constraints>
+      <UIFormTableInputSet>UIFormTableInputSet</UIFormTableInputSet>
+      <sameNameSiblings>Adunay managsama nga pangalan sa igsoon</sameNameSiblings>
+      <childNamespace>Ang Name Space</childNamespace>
+      <childMandatory>Gikinahanglan</childMandatory>
+      <childAutocreated>Awtomatiko nga Pagbuhat</childAutocreated>
+      <childParentversion>Sa gigikanan nga bersyon</childParentversion>
+      <childProtected>Protektado</childProtected>
+      <childNodename>Ang Ngalan sa Depinasyon</childNodename>
+      <requiredPrimaryType>Gikinahanglan ang Gauna nga Klase</requiredPrimaryType>
+      <defaultPrimaryType>I-default ang Nahauna nga Klase</defaultPrimaryType>
+      <valueconstraints>Ang mga Babag sa Balyu</valueconstraints>
+    </label>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Save>#{word.save}</Save>
+      <SaveDraft>I-save isip usa ka Draft</SaveDraft>
+      <AddProperty>Pagpuno ug Property</AddProperty>
+      <AddChild>Pagpuno ug Bata</AddChild>
+      <AddConstraints>Pagpuno ug mga Babag</AddConstraints>
+      <Back>#{word.back}</Back>
+      <AddType>Pagpuno ug Klase</AddType>
+      <AddValue>Pagpuno</AddValue>
+      <CancelConstraints>#{word.cancel}</CancelConstraints>
+      <CancelTab>#{word.cancel}</CancelTab>
+      <UpdateChild>#{word.update}</UpdateChild>
+      <CancelChild>#{word.cancel}</CancelChild>
+      <UpdateProperty>#{word.update}</UpdateProperty>
+      <CancelProperty>#{word.cancel}</CancelProperty>
+      <Close>#{word.close}</Close>
+    </action>
+    <msg>
+      <register-successfully>Ang '{0}' nga klase sa node kay malampuson nga narehistro.</register-successfully>
+      <supertype-is-madatory>Ang super type kay kinahanglan sa pagrehistro ug bag-o nga klase sa node. Palihug pagpili ug bisan usa ka super type.</supertype-is-madatory>
+      <register-failed>Ang pagrehistro sa node kay wala nilampos. Siguro tungod kay naanaa na kini o ang super type kai dili balido.</register-failed>
+      <nodeType-name>Ang ngalan sa klase sa node kay gikinahanglan.</nodeType-name>
+      <fileName-invalid>Ang ngalan sa file adunay mga dili balido nga karakter.</fileName-invalid>
+      <node-type-exists>Ang '{0}' nga klase sa node kay nitumaw na.</node-type-exists>
+      <node-type-name>Ang klase sa node kay dili balido.</node-type-name>
+      <values-error>Palihug pagpili lang ug usa ka klase sa node para sa default nga nahaunang klase.</values-error>
+      <confirm-delete-child>Sigurado baka nga imuhang tangtangon kining child node?</confirm-delete-child>
+      <confirm-delete-property>Sigurado baka nga imunha ning tangtangon ang kini nga property?</confirm-delete-property>
+    </msg>
+  </UINodeTypeForm>
+  <UIPropertyDefinitionForm>
+    <tab>
+      <label>
+        <constraints>Ang mga babag</constraints>
+        <UIFormMultiValueInputSet>Ang mga babag</UIFormMultiValueInputSet>
+      </label>
+    </tab>
+    <msg>
+      <property-name>Ang ngalan sa depinasyon sa property kay dili balido.</property-name>
+      <not-supported-value-constraints>Ang kining gikinahanglan nga klase wala nagsuporta sa mga babag sa balyu.</not-supported-value-constraints>
+    </msg>
+  </UIPropertyDefinitionForm>
+  <UIChildNodeDefinitionForm>
+    <msg>
+      <child-name>Ang ngalan sa child node kay gikinahanglan.</child-name>
+      <child-invalid>Ang child node adunay mga dili balido nga mga karakter.</child-invalid>
+      <default-node-type-not-found>Wala makita ang default nga klase sa node.</default-node-type-not-found>
+      <requiredPrimaryType>Ang required primary type kay gikinahanglan.</requiredPrimaryType>
+      <defaultPrimaryType>Ang default primary type kay gikinahanglan.</defaultPrimaryType>
+    </msg>
+  </UIChildNodeDefinitionForm>
+  <defaultPrimaryTypePopup>
+    <title>
+      <FormdefaultPrimaryTypePopup>Pagpili ug Default Primary Type</FormdefaultPrimaryTypePopup>
+    </title>
+  </defaultPrimaryTypePopup>
+  <requiredPrimaryTypePopup>
+    <title>
+      <FormrequiredPrimaryTypePopup>Pagpili ug Required Primary Type</FormrequiredPrimaryTypePopup>
+    </title>
+  </requiredPrimaryTypePopup>
+  <superTypesPopup>
+    <title>
+      <FormsuperTypesPopup>Pagpili ug Super Types</FormsuperTypesPopup>
+    </title>
+  </superTypesPopup>
+  <NodeTypePopup>
+    <title>
+      <UINodeTypeForm>Pagpuno/Pag-usab ug mga Depinasyon sa Klase sa Node</UINodeTypeForm>
+    </title>
+  </NodeTypePopup>
+  <ViewNodeTypePopup>
+    <title>
+      <UINodeTypeForm>Tan-awa ang Impormasyon sa Klase sa Node</UINodeTypeForm>
+    </title>
+  </ViewNodeTypePopup>
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeExport   #
+  ################################################################################
+  -->
+  <UINodeTypeExport>
+    <header>
+      <icon>Ang aykon</icon>
+      <label>Ang Ngalan sa Node</label>
+      <input>Ang aksyon</input>
+    </header>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Export>I-export</Export>
+      <UncheckAll>Kuahai ug tsek ang tanan</UncheckAll>
+      <CheckAll>I-tsek ang tanan</CheckAll>
+    </action>
+    <title>Mag-eksport ug Node Types</title>
+    <msg>
+      <item-null>Palihug pagpili lang ug labing gamay usa ka node nga gusto nimu nga i-eksport.</item-null>
+    </msg>
+  </UINodeTypeExport>
+  <NodeTypeExportPopup>
+    <title>
+      <UINodeTypeExport>Mag-eksport ug Node Types</UINodeTypeExport>
+    </title>
+  </NodeTypeExportPopup>
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeOptionList   #
+  ################################################################################
+  -->
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeUpload   #
+  ################################################################################
+  -->
+  <UINodeTypeUpload>
+    <label>
+      <upload>Ang Ngalan sa File</upload>
+    </label>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Upload>I-upload</Upload>
+    </action>
+    <title>I-import ang Node Type Gikan sa XML nga File</title>
+    <msg>
+      <filename-error>Pangita ug node nga klase sa file nga i-import.</filename-error>
+      <data-file-error>Ang .xml ug .zip nga mga files lang ang pwede nga ma-import.</data-file-error>
+      <data-invalid>Ang datus kay dili balido. Palihug i-tsek ang klase sa imung file ug suwayi ug balik.</data-invalid>
+      <nodetype-exist>Ang '{0}' nga klase sa node kay nitumaw na.</nodetype-exist>
+      <namespace-invalid>Ang '{0}' namespase kay dili balido.</namespace-invalid>
+    </msg>
+  </UINodeTypeUpload>
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeImport   #
+  ################################################################################
+  -->
+  <UINodeTypeImport>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Import>Mag-import</Import>
+      <Upload>Ibalik ug upload</Upload>
+    </action>
+    <header>
+      <icon>Ang Aykon</icon>
+      <label>Ang Ngalan sa Node</label>
+      <input>Ang Aksyon</input>
+    </header>
+    <title>Pagpili ug Klase sa Node nga I-import</title>
+    <msg>
+      <no-nodetype-registered>Walay nakarehistro nga mga klase sa node.</no-nodetype-registered>
+      <nodetype-registered>Malampuson ang pagparehistro.</nodetype-registered>
+    </msg>
+  </UINodeTypeImport>
+  <NodeTypeImportPopup>
+    <title>
+      <UINodeTypeImportPopup>I-import ang Klase sa Node gikan sa XML File</UINodeTypeImportPopup>
+    </title>
+  </NodeTypeImportPopup>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.UIDriveForm #
+  ################################################################################
+  -->
+  <DriveInputSet>
+    <label>
+      <both>Both</both>
+      <folderOnly>Folder</folderOnly>
+      <unstructuredFolder>Wala Nagkadimao nga Folder</unstructuredFolder>
+    </label>
+    <title>
+      <AddPermission>Pagpuno ug mga Pagtugot</AddPermission>
+      <RemovePermission>Tangtanga ang Pagtugot</RemovePermission>
+      <AddIcon>Pagpuno ug Aykon</AddIcon>
+      <AddPath>Pagpuno ug Path</AddPath>
+    </title>
+  </DriveInputSet>
+  <!--
+  ###################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.action.UIActionTypeList#
+  ###################################################################################
+  -->
+  <UIActionTypeList>
+    <header>
+      <name>Ang Skrip</name>
+      <label>Ang Ngalan</label>
+      <action>Ang mga Aksyon</action>
+    </header>
+    <title>
+      <Edit>Ang pag-usab</Edit>
+      <Delete>Tangtanga</Delete>
+    </title>
+    <action>
+      <AddAction>Pagpuno ug Klase sa Aksyon</AddAction>
+    </action>
+    <msg>
+      <confirm-delete>Sigurado baka nga imu tangtangon kini nga klase sa aksyon?</confirm-delete>
+      <cannot-delete>Dili ka makatangtang ani nga klase sa aksyon tungod kay gigamit pani sa system.</cannot-delete>
+    </msg>
+  </UIActionTypeList>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.action.UIActionTypeForm #
+  ######################################################################################
+  -->
+  <ActionPopup>
+    <title>
+      <UIActionTypeForm>Pagpuno ug Klase sa Aksyon</UIActionTypeForm>
+    </title>
+  </ActionPopup>
+  <UIActionTypeForm>
+    <title>Pagpuno ug Klase sa Aksyon</title>
+    <label>
+      <actionType>Patas-i ang Klase sa Aksyon:</actionType>
+      <name>Ang Ngalan:</name>
+      <isMove>ang Pagsibog sa Aksyon:</isMove>
+      <variables>Ang mga baryabol:</variables>
+      <exo_businessProcessAction>Ang mga Proseso sa Negosyo:</exo_businessProcessAction>
+      <exo_scriptAction>Ang Groovy nga mga Skrip:</exo_scriptAction>
+      <exo_ruleAction>Ang Gipatim-aw nga Balaod:</exo_ruleAction>
+      <script>Ang Skrip:</script>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <action-type-added>Ang '{0}' klase sa aksyon kay malampuson nga gidungag.</action-type-added>
+      <action-type-create-error>Adunay error samtang nagbuhat ug klase sa aksyon.</action-type-create-error>
+      <action-name-invalid>'{0}' kay dili balido. Ang ngalan kinahanglan magsugod sa 'exo:'.</action-name-invalid>
+      <action-exist>Nitumaw na kini nga aksyon sa ECM system.</action-exist>
+      <fileName-invalid>Ang ngalan sa aksyon adunay mga karakter nga dili balido.</fileName-invalid>
+    </msg>
+  </UIActionTypeForm>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.view.UIViewManager     #
+  ######################################################################################
+  -->
+  <UITabPane>
+    <title>
+      <UIViewContainer>Ang mga tan-awanan</UIViewContainer>
+      <ECMTemplate>Ang mga Template sa Eksplorer</ECMTemplate>
+      <UIScriptForm>Mga Skrip</UIScriptForm>
+      <UIDialogTab>Ang Dayalogo</UIDialogTab>
+      <UIViewTab>Ang Tan-awan</UIViewTab>
+      <UITemplateEditForm>Ang Template</UITemplateEditForm>
+      <UITemplateForm>Ang Template</UITemplateForm>
+      <UITemplateContainer>Ang mga dokumento</UITemplateContainer>
+      <UIActionsTemplateContainer>Ang mga aksyon</UIActionsTemplateContainer>
+      <UIOthersTemplateContainer>Uban pa</UIOthersTemplateContainer>
+      <UIActionScriptContainer>Ang aksyon</UIActionScriptContainer>
+      <UIWidgetScriptContainer>Ang mga widgets</UIWidgetScriptContainer>
+      <UIInterceptorScriptContainer>Ang mga interseptor</UIInterceptorScriptContainer>
+
+      <nodeTypeDefinition>Ang Klase sa Node</nodeTypeDefinition>
+      <propertyDefinition>Ang property</propertyDefinition>
+      <childNodeDefinition>Ang Child Node</childNodeDefinition>
+      <SuperTypeTab>Ang Super Types</SuperTypeTab>
+      <DefaultTypeTab>I-default ang Nahauna</DefaultTypeTab>
+      <RequiredTypeTab>Gikinahanglan ang Nahauna</RequiredTypeTab>
+      <Contraints>Ang mga babag</Contraints>
+    </title>
+  </UITabPane>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.view.UIViewList    #
+  ######################################################################################
+  -->
+  <UIViewList>
+    <title>
+      <View>Ang Tan-awan</View>
+      <EditInfo>Ang pag-usab</EditInfo>
+      <Delete>Tangtanga</Delete>
+    </title>
+    <header>
+      <name>Ang Ngalan</name>
+      <permissions>Ang mga permiso</permissions>
+      <tabList>Ang Action Tab</tabList>
+      <baseVersion>Ang Bashihan sa Bersyon</baseVersion>
+      <action>Ang Aksyon</action>
+    </header>
+    <action>
+      <AddView>Pagdungag ug Tan-awan</AddView>
+    </action>
+    <msg>
+      <access-denied>Wala tuguti ang pag-akses. Wala kay permiso nga mugamit aning maong punksiyon.</access-denied>
+      <template-in-use>Dili maka-delete {0}. Gigamit pa kini sa pagkakaron.</template-in-use>
+      <confirm-delete>Sigurado ka nga imuhang tangtangon kini nga tan-awan o view?</confirm-delete>
+    </msg>
+  </UIViewList>
+  <ViewPopup>
+    <title>
+      <UIViewFormTabPane>Ang Tan-awan</UIViewFormTabPane>
+    </title>
+  </ViewPopup>
+  <AddPopup>
+    <title>
+      <UIViewFormTabPane>Pagdungag ug Tan-awan</UIViewFormTabPane>
+      <AddPopup>Magpuno ug Template</AddPopup>
+    </title>
+  </AddPopup>
+  <EditPopup>
+    <title>
+      <UIViewFormTabPane>Usaba ang Tan-awan</UIViewFormTabPane>
+    </title>
+  </EditPopup>
+
+  <UITabList>
+    <title>
+      <Edit>Ang Pag-usab</Edit>
+      <Delete>Tangtanga</Delete>
+    </title>
+    <header>
+      <tabName>Ang Tab</tabName>
+      <localizeButtons>Ang Deskripsyon</localizeButtons>
+      <action>Ang mga aksyon</action>
+    </header>
+    <action>
+      <AddTab>Pagpuno</AddTab>
+    </action>
+    <msg>
+      <confirm-delete>Sigurado ka nga imuha ning tantangon ang tab?</confirm-delete>
+    </msg>
+    <grid>
+      <msg>
+        <empty>Walay tab sa in ani nga view</empty>
+      </msg>
+    </grid>
+  </UITabList>
+
+  <UIViewPermissionList>
+    <title>Pagpili ug Tag-iya nga adunay permiso sa kani nga view:</title>
+    <label>
+      <permission>{0} sa {1}</permission>
+    </label>
+    <msg>
+      <confirm-delete>Sigurado ka nga imung tangtangon ang permiso?</confirm-delete>
+      <permission-cannot-empty>Ang pagtan-aw sa permiso kay gikinahanglan ug dili pwede nga walay sulod.</permission-cannot-empty>
+    </msg>
+  </UIViewPermissionList>
+
+  <UIViewPermissionList>
+    <title>
+      <Delete>Tangtanga</Delete>
+    </title>
+    <header>
+      <friendlyPermission>Ang mga permiso</friendlyPermission>
+      <action>Ang aksyon</action>
+    </header>
+    <action>
+      <title>
+        <Delete>Tangtanga</Delete>
+      </title>
+    </action>
+    <grid>
+      <msg>
+        <empty>There is no permission on this view</empty>
+      </msg>
+    </grid>
+  </UIViewPermissionList>
+
+  <UIViewPermissionForm>
+    <action>
+      <Add>Add</Add>
+    </action>
+    <label>
+      <userOrGroup>Ang Nigamit o Grupo</userOrGroup>
+    </label>
+    <msg>
+      <permission-exist>The permission '{0}' already exists in the list.</permission-exist>
+    </msg>
+  </UIViewPermissionForm>
+
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.view.UIViewFormTabPane   #
+  ######################################################################################
+  -->
+  <UIViewForm>
+    <title>
+      <AddPermission>Add Permission</AddPermission>
+      <RemovePermission>Remove Permission</RemovePermission>
+    </title>
+    <msg>
+      <view-name-invalid>The view name is required.</view-name-invalid>
+      <fileName-invalid>The view name contains some invalid characters.</fileName-invalid>
+      <permission-not-empty>Please select a permission for the view.</permission-not-empty>
+      <mustbe-add-tab>Please add a tab.</mustbe-add-tab>
+      <mustbe-add-permission>Please select permission for this view</mustbe-add-permission>
+      <view-exist>The view name already exists.</view-exist>
+    </msg>
+    <label>
+      <viewName>Name</viewName>
+      <template>Ang Template</template>
+      <version>Restore Version</version>
+      <enableVersion>Enable Version</enableVersion>
+      <hideExplorerPanel>Hide explorer panel in side bar</hideExplorerPanel>
+    </label>
+  </UIViewForm>
+  <UITabForm>
+    <msg>
+      <button-select-error>Please select at least one function from the list.</button-select-error>
+      <tab-name-error>The tab name is required.</tab-name-error>
+      <fileName-invalid>The tab name contains some invalid characters.</fileName-invalid>
+    </msg>
+    <label>
+      <version>Restore Version</version>
+      <viewName>Name</viewName>
+      <tabName>Tab Name</tabName>
+      <permission>Permission</permission>
+      <tabs>Tabs</tabs>
+      <template>Ang mga Template</template>
+      <enableVersion>Enable Version</enableVersion>
+      <addFolder>Add Folder</addFolder>
+      <addDocument>Add Document</addDocument>
+      <editDocument>I-edit ang Dokumento</editDocument>
+      <upload>Upload</upload>
+      <paste>I-paste</paste>
+      <search>Search</search>
+      <viewReferences>View References</viewReferences>
+      <viewNodeType>View Node Type</viewNodeType>
+      <viewPermissions>View Permissions</viewPermissions>
+      <viewProperties>View Properties</viewProperties>
+      <manageVersions>Manage Versions</manageVersions>
+      <manageAuditing>Manage Auditing</manageAuditing>
+      <managePublications>Idumala ang Publikasyon</managePublications>
+      <manageCategories>Manage Categories</manageCategories>
+      <manageRelations>Manage Relations</manageRelations>
+      <manageActions>Idumala ang mga Aksyon</manageActions>
+      <exportNode>Export Node</exportNode>
+      <importNode>Import Node</importNode>
+      <viewRelations>View Relations</viewRelations>
+      <showJCRStructure>Show JCR Structure</showJCRStructure>
+      <watchDocument>Tan-awa ang Dokumento</watchDocument>
+      <taggingDocument>Mag-tag ug Dokumento</taggingDocument>
+      <viewMetadatas>Tan-awa ang Metadata</viewMetadatas>
+      <overloadThumbnail>Usba ang Hulagway sa Aykon</overloadThumbnail>
+      <manageHidden>Hide/Show Content</manageHidden>
+      <comment>Ang Komento</comment>
+      <vote>Ang Boto</vote>
+      <addCategory>Pagdungag ug Kategorya</addCategory>
+      <addLocalizationLink>Pagdungag ug Translation</addLocalizationLink>
+      <publicationRequestApproval>Request Approval</publicationRequestApproval>
+      <publicationApproveContent>Approve Content</publicationApproveContent>
+      <publicationPublish>Publish</publicationPublish>
+      <contentNavigation>Content Navigation</contentNavigation>
+      <addSymLink>Add Symlink</addSymLink>
+      <checkIn>Check In</checkIn>
+      <checkOut>Check Out</checkOut>
+      <shareDocuments>Share</shareDocuments>
+      <openDocument>Remote Edit</openDocument>
+      <editProperty>I-edit ang mga Property sa Dokumento</editProperty>
+      <uploadNewVersion>Pag-upload ug bag-o nga bersyon</uploadNewVersion>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UITabForm>
+  <UIPermissionForm>
+    <label>
+      <permission>UIPermissionForm</permission>
+    </label>
+  </UIPermissionForm>
+  <UIViewFormTabPane>
+    <tab>
+      <label>
+        <UITabContainer>Action</UITabContainer>
+        <UIViewForm>View</UIViewForm>
+        <UIViewPermissionContainer>Permission</UIViewPermissionContainer>
+      </label>
+    </tab>
+    <action>
+      <Save>#{word.save}</Save>
+      <Reset>Reset</Reset>
+      <Cancel>#{word.cancel}</Cancel>
+      <Close>#{word.close}</Close>
+      <Restore>Restore</Restore>
+    </action>
+  </UIViewFormTabPane>
+  <PopupViewPermission>
+    <title>
+      <UIPermissionSelector>Ang Tigpili ug Permiso</UIPermissionSelector>
+    </title>
+  </PopupViewPermission>
+
+  <TabForm_Popup>
+    <title>
+      <UITabForm>Add/Edit Tab</UITabForm>
+    </title>
+  </TabForm_Popup>
+
+  <tab_permission>
+    <title>
+      <SelectUser>Select User</SelectUser>
+      <SelectMember>Select Member</SelectMember>
+      <AddAny>Any</AddAny>
+    </title>
+  </tab_permission>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.view.UIECMTemplateList   #
+  ######################################################################################
+  -->
+  <UIECMTemplateList>
+    <title>
+      <View>View</View>
+      <EditInfo>Edit</EditInfo>
+      <Delete>Delete</Delete>
+    </title>
+    <header>
+      <name>Name</name>
+      <path>Value</path>
+      <baseVersion>Ang Bashihan sa Bersyon</baseVersion>
+      <action>Action</action>
+    </header>
+    <action>
+      <Add>Add</Add>
+    </action>
+    <msg>
+      <template-in-use>Dili maka-delete {0}. Gigamit pa kini sa pagkakaron.</template-in-use>
+      <confirm-delete>Sigurado baka nga imung deleton kining maong template?</confirm-delete>
+      <access-denied>Wala tuguti ang pag-akses. Wala kay permiso nga mugamit aning maong punksiyon.</access-denied>
+      <delete-permission-denied>You do not have permission to delete '{0}' template.</delete-permission-denied>
+    </msg>
+  </UIECMTemplateList>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.view.UITemplateForm #
+  ################################################################################
+  -->
+  <UITemplateForm>
+    <title>
+      <AddPermission>Add Permission</AddPermission>
+    </title>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <Reset>Reset</Reset>
+      <Restore>Restore</Restore>
+      <Refresh>#{word.refresh}</Refresh>
+    </action>
+    <msg>
+      <version-restored>Version {0} was restored successfully.</version-restored>
+      <role-require>Please select a permission.</role-require>
+      <template-name-exist>The template name '{0}' already exists.</template-name-exist>
+      <add-permission-denied>You do not have permission to add a new template.</add-permission-denied>
+      <edit-permission-denied>You do not have permission to modify '{0}' template.</edit-permission-denied>
+    </msg>
+    <tab>
+      <label>
+        <template>Ang Template</template>
+        <defaultDialog>Ang Dayalogo</defaultDialog>
+        <defaultView>View</defaultView>
+      </label>
+    </tab>
+    <label>
+      <name>Name:</name>
+      <label>Ang Ilhanan:</label>
+      <isDocumentTemplate>is Document Template:</isDocumentTemplate>
+      <dialog>Dialog Content</dialog>
+      <view>View Content</view>
+      <permission>Ang Pagtugot:</permission>
+      <selectPemistion>Permission</selectPemistion>
+    </label>
+  </UITemplateForm>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.view.ecmTempForm #
+  ################################################################################
+  -->
+  <ecmTempForm>
+    <label>
+      <version>Select Version:</version>
+      <content>Content:</content>
+      <name>Name:</name>
+      <homeTemplate>Template Type:</homeTemplate>
+      <enableVersion>Enabled Version:</enableVersion>
+    </label>
+  </ecmTempForm>
+  <ecmTempFormPopup>
+    <title>
+      <ecmTempForm>Add/Edit View Template</ecmTempForm>
+    </title>
+  </ecmTempFormPopup>
+  <ecmTempFormAdd>
+    <title>
+      <ecmTempForm>Add Explorer Template</ecmTempForm>
+      <ecmTempFormAdd>Add Explorer Template</ecmTempFormAdd>
+    </title>
+  </ecmTempFormAdd>
+  <ecmTempFormEdit>
+    <title>
+      <ecmTempForm>Edit Explorer Template</ecmTempForm>
+    </title>
+  </ecmTempFormEdit>
+
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.script.UIScriptManager #
+  ######################################################################################
+  -->
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.script.UIECMFilterForm #
+  ######################################################################################
+  -->
+  <UIECMFilterForm>
+    <label>
+      <selectScript>Select Category</selectScript>
+    </label>
+  </UIECMFilterForm>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.script.UIScriptList #
+  ######################################################################################
+  -->
+  <UIScriptList>
+    <action>
+      <Edit>#{word.edit}</Edit>
+      <Delete>#{word.delete}</Delete>
+      <AddNew>Add Script</AddNew>
+    </action>
+    <msg>
+      <confirm-delete>Are you sure you want to delete this script?</confirm-delete>
+    </msg>
+    <header>
+      <scriptName>Name</scriptName>
+      <path>Ang Skrip</path>
+      <baseVersion>Ang Bashihan sa Bersyon</baseVersion>
+      <action>Actions</action>
+    </header>
+    <tooltip>
+      <Edit>Edit</Edit>
+      <Delete>Delete</Delete>
+    </tooltip>
+  </UIScriptList>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.script.UIScriptForm #
+  ######################################################################################
+  -->
+  <uiECMScriptsPopup>
+    <title>
+      <ecmScriptForm>ECM Script</ecmScriptForm>
+    </title>
+  </uiECMScriptsPopup>
+
+  <UIScriptForm>
+    <action>
+      <Save>#{word.save}</Save>
+      <Restore>#{word.restore}</Restore>
+      <Cancel>#{word.cancel}</Cancel>
+      <Refresh>#{word.refresh}</Refresh>
+      <Change>Change</Change>
+    </action>
+    <msg>
+      <version-restored>Version {0} was restored successfully.</version-restored>
+      <name-null>Please enter the script name.</name-null>
+      <name-exist>The script name '{0}' already exists.</name-exist>
+      <fileName-invalid>The script name has some invalid characters.</fileName-invalid>
+    </msg>
+  </UIScriptForm>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.script.CBScriptForm #
+  ######################################################################################
+  -->
+  <ScriptContainerPopup>
+    <title>
+      <UIScriptForm>Add/Edit Script</UIScriptForm>
+    </title>
+  </ScriptContainerPopup>
+  <UIScriptForm>
+    <label>
+      <selectVersion>Ang mga Bersyon</selectVersion>
+      <scriptContent>Content</scriptContent>
+      <scriptLabel>Name</scriptLabel>
+      <scriptName>Ang Skrip</scriptName>
+      <enableVersion>Enable Versioning</enableVersion>
+    </label>
+  </UIScriptForm>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.script.ecmScriptForm #
+  ######################################################################################
+  -->
+
+  <ecmScriptForm>
+    <label>
+      <selectVersion>Ang mga Bersyon</selectVersion>
+      <scriptContent>Content</scriptContent>
+      <scriptLabel>Name</scriptLabel>
+      <scriptName>Ang Skrip</scriptName>
+      <enableVersion>Enable Versioning</enableVersion>
+    </label>
+  </ecmScriptForm>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyForm #
+  ######################################################################################
+  -->
+  <UITaxonomyForm>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <title>Add Category</title>
+    <label>
+      <taxonomyName>Category Name</taxonomyName>
+      <parentPath>Parent</parentPath>
+    </label>
+    <msg>
+      <exist>The "{0}" category already exists.</exist>
+      <name-null>Please specify the category name.</name-null>
+      <name-invalid>The category name has some invalid characters.</name-invalid>
+      <name-too-long>The category name must have less than 30 characters.</name-too-long>
+    </msg>
+  </UITaxonomyForm>
+
+  <EditTaxonomyTreePopup>
+    <title>
+      <UITaxonomyTreeContainer>Edit Category Tree</UITaxonomyTreeContainer>
+    </title>
+  </EditTaxonomyTreePopup>
+
+  <AddTaxonomyTreePopup>
+    <title>
+      <UITaxonomyTreeContainer>Add Category Tree</UITaxonomyTreeContainer>
+    </title>
+  </AddTaxonomyTreePopup>
+
+  <TaxonomyPopupCreateChild>
+    <title>
+      <UITaxonomyTreeCreateChildForm>Edit Category Tree</UITaxonomyTreeCreateChildForm>
+    </title>
+  </TaxonomyPopupCreateChild>
+
+  <UITaxonomyTreeCreateChildForm>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <label>
+      <parentPath>Parent:</parentPath>
+      <taxonomyName>Category Name:</taxonomyName>
+    </label>
+    <msg>
+      <name-null>The category name is empty.</name-null>
+      <name-invalid>The category name is invalid.</name-invalid>
+      <name-too-long>The category name must not have more than {0} characters.</name-too-long>
+      <exist>The category name already exists.</exist>
+    </msg>
+  </UITaxonomyTreeCreateChildForm>
+
+  <PopupComponent>
+    <title>
+      <UIOneNodePathSelector>Select Path</UIOneNodePathSelector>
+    </title>
+  </PopupComponent>
+
+  <TaxoPopupUserSelector>
+    <title>
+      <TaxoTreeSelectUserOrGroup>Select User</TaxoTreeSelectUserOrGroup>
+      <UIPermissionTreeSelectUser>Select User</UIPermissionTreeSelectUser>
+    </title>
+  </TaxoPopupUserSelector>
+
+  <TaxoTreeSelectUserOrGroupPopup>
+    <title>
+      <TaxoTreeSelectUserOrGroup>Select Membership</TaxoTreeSelectUserOrGroup>
+    </title>
+  </TaxoTreeSelectUserOrGroupPopup>
+
+  <TaxoTreeAnyPermission>
+    <label>
+      <any>Any Permission</any>
+      <anyPermission>TaxoTreeAnyPermission</anyPermission>
+    </label>
+  </TaxoTreeAnyPermission>
+
+  <TaxoTreeSelectUserOrGroup>
+    <label>
+      <selectGroup>Select Group</selectGroup>
+      <selectMembership>Select Membership</selectMembership>
+    </label>
+  </TaxoTreeSelectUserOrGroup>
+
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyTreeList #
+  ######################################################################################
+  -->
+  <UITaxonomyTreeList>
+    <header>
+      <name>Category Tree</name>
+      <workspace>Ang Workspace</workspace>
+      <homePath>Ang Path</homePath>
+      <action>Action</action>
+    </header>
+    <action>
+      <AddTaxonomyTree>Add Category Tree</AddTaxonomyTree>
+    </action>
+    <tooltip>
+      <EditTaxonomyTree>Edit Category Tree</EditTaxonomyTree>
+      <Delete>Delete Category Tree</Delete>
+    </tooltip>
+    <title>Browse Category Tree</title>
+    <msg>
+      <no-list>No category trees have been created.</no-list>
+      <confirm-delete>Are you sure you want to delete the category tree?</confirm-delete>
+      <is-in-trash>This category tree has been moved to the Trash.</is-in-trash>
+    </msg>
+  </UITaxonomyTreeList>
+
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyTreeForm  #
+  ######################################################################################
+  -->
+  <UITaxonomyTreeForm>
+    <label>
+      <name>Name</name>
+      <workspace>Ang Workspace</workspace>
+      <homePath>Ang Path</homePath>
+      <permissions>Permissions</permissions>
+    </label>
+    <msg>
+      <homapath-emty>Input Path</homapath-emty>
+    </msg>
+  </UITaxonomyTreeForm>
+
+  <UIPermissionTreeForm>
+    <label>
+      <UIPopupWindow>Pagpili</UIPopupWindow>
+      <permission>UIPermissionTreeForm</permission>
+      <userOrGroup>User Or Group</userOrGroup>
+      <read>Read Right</read>
+      <add_node>Add Node Right</add_node>
+      <set_property>Set Property Right</set_property>
+      <remove>Remove Right</remove>
+    </label>
+    <title>Add a permission to this node</title>
+    <action>
+      <Close>#{word.close}</Close>
+      <Save>Save</Save>
+      <Reset>Reset</Reset>
+    </action>
+    <msg>
+      <checkbox-require>Please select at least one permission.</checkbox-require>
+      <userOrGroup-required>Please select a user or group before saving the permission.</userOrGroup-required>
+      <not-change-permission>You do not have the right to add a permission.</not-change-permission>
+      <access-denied>Access denied. You cannot remove this permission.</access-denied>
+    </msg>
+  </UIPermissionTreeForm>
+
+  <PopupTaxonomyJCRBrowser>
+    <title>
+      <UIOneNodePathSelector>Select Home Path</UIOneNodePathSelector>
+    </title>
+  </PopupTaxonomyJCRBrowser>
+
+  <PopupTaxonomyTreePermission>
+    <title>
+      <UIPermissionSelector>Ang Tigpili ug Permiso</UIPermissionSelector>
+    </title>
+  </PopupTaxonomyTreePermission>
+
+  <PopupDrivePermission>
+    <title>
+      <AddDrivePermissionSelector>Add Permission</AddDrivePermissionSelector>
+      <UIPermissionSelector>Select Permission</UIPermissionSelector>
+    </title>
+  </PopupDrivePermission>
+
+  <UIPopupWindow>
+    <title>
+      <UIPermissionManager>Ang Pagdumala sa Permiso</UIPermissionManager>
+    </title>
+  </UIPopupWindow>
+
+  <PopupUserSelector>
+    <title>
+      <UIUserContainer>Ang Pagdumala sa Permiso</UIUserContainer>
+    </title>
+  </PopupUserSelector>
+
+  <UIPermissionInfo>
+    <action>
+      <title>
+        <Edit>Edit</Edit>
+        <Delete>Remove Permission</Delete>
+      </title>
+    </action>
+    <header>
+      <usersOrGroups>Ang Nigamit o Grupo</usersOrGroups>
+      <read>Read</read>
+      <addNode>Modify Node</addNode>
+      <remove>Remove</remove>
+      <action>Action</action>
+    </header>
+    <msg>
+      <confirm-delete-permission>Are you sure you want to remove this permission?</confirm-delete-permission>
+      <no-permission-tochange>You do not have the right to remove this permission.</no-permission-tochange>
+      <no-permission-remove>You cannot remove the owner or the system user.</no-permission-remove>
+      <access-denied>Access denied. You cannot remove this permission.</access-denied>
+    </msg>
+  </UIPermissionInfo>
+  <permission>
+    <title>
+      <SelectUser>Select User</SelectUser>
+      <SelectMember>Select Membership</SelectMember>
+      <AddAny>Ang Tanan</AddAny>
+    </title>
+  </permission>
+  <!--
+  #############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIPermissionForm #
+  #############################################################################
+  -->
+  <SelectUserOrGroup>
+    <title>
+      <UIGroupSelector>Select User</UIGroupSelector>
+      <UIPermissionSelector>Select Member</UIPermissionSelector>
+      <UIGroupMemberSelector>Select Membership</UIGroupMemberSelector>
+    </title>
+  </SelectUserOrGroup>
+  <UIGroupSelector>
+    <label>
+      <selectGroup>Select Group</selectGroup>
+      <selectUser>Select User</selectUser>
+    </label>
+    <msg>
+      <not-change-owner>'{0}' is the owner of this node and has full control permission.</not-change-owner>
+    </msg>
+  </UIGroupSelector>
+  <UIPermissionForm>
+    <label>
+      <UIPopupWindow>Pagpili</UIPopupWindow>
+      <permission>UIPermissionForm</permission>
+      <userOrGroup>Ang Nigamit o Grupo</userOrGroup>
+      <read>Read</read>
+      <add_node>Modify</add_node>
+      <remove>Remove</remove>
+    </label>
+    <title>Add permission to this node</title>
+    <action>
+      <Close>#{word.close}</Close>
+      <Save>#{word.save}</Save>
+      <Reset>Reset</Reset>
+    </action>
+    <msg>
+      <checkbox-require>Please select at least one permission.</checkbox-require>
+      <userOrGroup-required>Please select a user or group before saving the permission.</userOrGroup-required>
+      <not-change-permission>You do not have the right to add a permission.</not-change-permission>
+      <access-denied>Access denied. You cannot remove this permission.</access-denied>
+    </msg>
+  </UIPermissionForm>
+
+  <TaxonomyPopup>
+    <title>
+      <UITaxonomyForm>Add Category</UITaxonomyForm>
+    </title>
+  </TaxonomyPopup>
+
+  <UITaxonomyManager>
+    <title>
+      <permission>Ang Pagdumala sa Permiso</permission>
+    </title>
+  </UITaxonomyManager>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.UITemplateList #
+  ######################################################################################
+  -->
+  <UITemplateList>
+    <header>
+      <name>Ang Klase</name>
+      <action>Action</action>
+      <label>Ang Template</label>
+      <icon>Ang icon</icon>
+    </header>
+    <action>
+      <AddNew>Magpuno ug Template</AddNew>
+    </action>
+    <msg>
+      <confirm-delete>Do you really want to delete?</confirm-delete>
+      <access-denied>Wala tuguti ang pag-akses. Wala kay permiso nga mugamit aning maong punksiyon.</access-denied>
+      <editing-template>Access denied. You cannot delete and edit the template simultaneously.</editing-template>
+      <template-not-exist>The template that you are trying to delete doesn't exist.</template-not-exist>
+    </msg>
+  </UITemplateList>
+
+  <UIActionsTemplateList>
+    <header>
+      <name>Ang Klase</name>
+      <action>Action</action>
+      <label>Ang Template</label>
+      <icon>Ang icon</icon>
+    </header>
+    <action>
+      <AddNew>Magpuno ug Template</AddNew>
+    </action>
+    <msg>
+      <confirm-delete>Do you really want to delete?</confirm-delete>
+      <access-denied>Wala tuguti ang pag-akses. Wala kay permiso nga mugamit aning maong punksiyon.</access-denied>
+      <editing-template>Access denied. You cannot delete and edit this template simultaneously.</editing-template>
+      <template-not-exist>The template that you are trying to delete doesn't exist.</template-not-exist>
+    </msg>
+  </UIActionsTemplateList>
+
+  <UIOthersTemplateList>
+    <header>
+      <name>Ang Klase</name>
+      <label>Ang Template</label>
+      <icon>Ang icon</icon>
+      <action>Action</action>
+    </header>
+    <action>
+      <AddNew>Magpuno ug Template</AddNew>
+    </action>
+    <msg>
+      <confirm-delete>Do you really want to delete?</confirm-delete>
+      <access-denied>Wala tuguti ang pag-akses. Wala kay permiso nga mugamit aning maong punksiyon.</access-denied>
+      <editing-template>Access denied. You cannot delete and edit this template simultaneously.</editing-template>
+      <template-not-exist>The template that you are trying to delete doesn't exist.</template-not-exist>
+    </msg>
+  </UIOthersTemplateList>
+
+  <!--
+ ######################################################################################
+ #             org.exoplatform.ecm.webui.component.admin.templates.clv package #
+ ######################################################################################
+ -->
+
+  <UITabPane>
+    <title>
+      <ContentTemplateContainer>Content</ContentTemplateContainer>
+      <CateTemplateContainer>Navigation</CateTemplateContainer>
+      <PageTemplateContainer>Paginator</PageTemplateContainer>
+    </title>
+  </UITabPane>
+
+  <UICLVTemplateList>
+    <title>
+      <Edit>Edit</Edit>
+      <Delete>Delete</Delete>
+    </title>
+    <header>
+      <title>Name</title>
+      <action>Action</action>
+      <template>Ang Template</template>
+    </header>
+    <action>
+      <AddTemplate>Magpuno ug Template</AddTemplate>
+      <Edit>Edit</Edit>
+      <Delete>Delete</Delete>
+    </action>
+    <msg>
+      <confirm-delete>Sigurado baka nga imung deleton kining maong template?</confirm-delete>
+      <access-denied>Wala tuguti ang pag-akses. Wala kay permiso nga mugamit aning maong punksiyon.</access-denied>
+      <editing-template>Access denied. You cannot delete and edit this template simultaneously.</editing-template>
+      <template-not-exist>The template that you are trying to delete doesn't exist.</template-not-exist>
+    </msg>
+  </UICLVTemplateList>
+
+  <CateTemplateList>
+    <header>
+      <title>Name</title>
+      <action>Action</action>
+      <template>Ang Template</template>
+    </header>
+    <title>
+      <Edit>Edit</Edit>
+      <Delete>Delete</Delete>
+    </title>
+    <action>
+      <AddTemplate>Magpuno ug Template</AddTemplate>
+      <Edit>Edit</Edit>
+      <Delete>Delete</Delete>
+    </action>
+  </CateTemplateList>
+
+  <PageTemplateList>
+    <header>
+      <title>Name</title>
+      <action>Action</action>
+      <template>Ang Template</template>
+    </header>
+    <action>
+      <AddTemplate>Magpuno ug Template</AddTemplate>
+      <Edit>Edit</Edit>
+      <Delete>Delete</Delete>
+    </action>
+  </PageTemplateList>
+
+  <EditCLVTemplatePopup_ContentTemplateContainer>
+    <title>
+      <UICLVTemplateForm_ContentTemplateContainer>Edit List Template</UICLVTemplateForm_ContentTemplateContainer>
+    </title>
+  </EditCLVTemplatePopup_ContentTemplateContainer>
+
+  <EditCLVTemplatePopup_CateTemplateContainer>
+    <title>
+      <UICLVTemplateForm_CateTemplateContainer>Edit List Template</UICLVTemplateForm_CateTemplateContainer>
+    </title>
+  </EditCLVTemplatePopup_CateTemplateContainer>
+
+  <EditCLVTemplatePopup_PageTemplateContainer>
+    <title>
+      <UICLVTemplateForm_PageTemplateContainer>Edit List Template</UICLVTemplateForm_PageTemplateContainer>
+    </title>
+  </EditCLVTemplatePopup_PageTemplateContainer>
+
+  <CLVTemplatePopup_ContentTemplateContainer>
+    <title>
+      <UICLVTemplateForm_ContentTemplateContainer>Add List Template</UICLVTemplateForm_ContentTemplateContainer>
+    </title>
+  </CLVTemplatePopup_ContentTemplateContainer>
+
+  <CLVTemplatePopup_CateTemplateContainer>
+    <title>
+      <UICLVTemplateForm_CateTemplateContainer>Add List Template</UICLVTemplateForm_CateTemplateContainer>
+    </title>
+  </CLVTemplatePopup_CateTemplateContainer>
+
+  <CLVTemplatePopup_PageTemplateContainer>
+    <title>
+      <UICLVTemplateForm_PageTemplateContainer>Add List Template</UICLVTemplateForm_PageTemplateContainer>
+    </title>
+  </CLVTemplatePopup_PageTemplateContainer>
+
+  <UICLVTemplateForm_ContentTemplateContainer>
+    <action>
+      <Save>#{word.save}</Save>
+      <Reset>Reset</Reset>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <label>
+      <title>Name</title>
+      <template>Ang Ngalan sa Template</template>
+      <content>Content</content>
+      <type>Template Type</type>
+    </label>
+  </UICLVTemplateForm_ContentTemplateContainer>
+
+  <UICLVTemplateForm_PageTemplateContainer>
+    <action>
+      <Save>#{word.save}</Save>
+      <Reset>Reset</Reset>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <label>
+      <title>Name</title>
+      <template>Ang Ngalan sa Template</template>
+      <content>Content</content>
+      <type>Template Type</type>
+    </label>
+  </UICLVTemplateForm_PageTemplateContainer>
+
+  <UICLVTemplateForm_CateTemplateContainer>
+    <action>
+      <Save>#{word.save}</Save>
+      <Reset>Reset</Reset>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <label>
+      <title>Name</title>
+      <template>Ang Ngalan sa Template</template>
+      <content>Content</content>
+      <type>Template Type</type>
+    </label>
+  </UICLVTemplateForm_CateTemplateContainer>
+  <UICLVTemplateForm>
+    <label>
+      <paginators>Paginator</paginators>
+      <list>Content</list>
+      <navigation>Navigation</navigation>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Reset>Reset</Reset>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <template-existing>This template name already exists. Please select another one.</template-existing>
+    </msg>
+  </UICLVTemplateForm>
+
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.UITemplateForm #
+  ######################################################################################
+  -->
+  <AddNewTemplatePermission>
+    <title>
+      <UIPermissionSelector>Ang Tigpili ug Permiso</UIPermissionSelector>
+    </title>
+  </AddNewTemplatePermission>
+  <TemplatePermission>
+    <title>
+      <UIPermissionSelector>Select Permission</UIPermissionSelector>
+    </title>
+  </TemplatePermission>
+  <TemplateContainerPopup>
+    <title>
+      <UITemplateForm>Template Form</UITemplateForm>
+    </title>
+  </TemplateContainerPopup>
+  <ViewForm>
+    <label>
+      <UITemplateContent>ViewForm</UITemplateContent>
+      <UIPopupWindow>View Permission</UIPopupWindow>
+      <selectVersion>Ang mga Bersyon</selectVersion>
+      <content>Content:</content>
+      <name>Name:</name>
+      <isDocumentTemplate>is Document Template</isDocumentTemplate>
+      <viewPermission>Ang Pagtugot:</viewPermission>
+      <enableVersion>Versioning activated</enableVersion>
+    </label>
+    <title>Add/Edit View</title>
+  </ViewForm>
+  <DialogForm>
+    <label>
+      <UITemplateContent>DialogForm</UITemplateContent>
+      <UIPopupWindow>Dialog Permission</UIPopupWindow>
+      <selectVersion>Ang mga Bersyon</selectVersion>
+      <content>Content:</content>
+      <name>Name:</name>
+      <isDocumentTemplate>is Document Template</isDocumentTemplate>
+      <viewPermission>Ang Pagtugot:</viewPermission>
+      <enableVersion>Enable Versioning</enableVersion>
+    </label>
+    <title>Add/Edit Dialog</title>
+  </DialogForm>
+  <DialogFormTemplatePermission>
+    <title>
+      <UIPermissionSelector>Ang Tigpili ug Permiso</UIPermissionSelector>
+    </title>
+  </DialogFormTemplatePermission>
+  <ViewFormTemplatePermission>
+    <title>
+      <UIPermissionSelector>Ang Tigpili ug Permiso</UIPermissionSelector>
+    </title>
+  </ViewFormTemplatePermission>
+  <TemplateContainerPopup>
+    <title>
+      <UIViewTemplate_UITemplateContainer><![CDATA[View & Edit Template]]></UIViewTemplate_UITemplateContainer>
+      <UIViewTemplate_UIActionsTemplateContainer>
+        <![CDATA[View & Edit Template]]></UIViewTemplate_UIActionsTemplateContainer>
+      <UIViewTemplate_UIOthersTemplateContainer>
+        <![CDATA[View & Edit Template]]></UIViewTemplate_UIOthersTemplateContainer>
+    </title>
+  </TemplateContainerPopup>
+  <UITemplatesManager>
+    <title>
+      <Edit>Edit</Edit>
+      <Delete>Delete</Delete>
+    </title>
+  </UITemplatesManager>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.UIViewTemplate #
+  ######################################################################################
+  -->
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.UITemplateEditForm #
+  ######################################################################################
+  -->
+  <UITemplateEditForm>
+    <label>
+      <name>Name:</name>
+      <label>Ang Ilhanan:</label>
+      <isDocumentTemplate>is Document Template:</isDocumentTemplate>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <Refresh>#{word.refresh}</Refresh>
+    </action>
+  </UITemplateEditForm>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.UIDialogTab #
+  ######################################################################################
+  -->
+  <UIDialogTab>
+    <header>
+      <name>Name</name>
+      <roles>Roles</roles>
+      <baseVersion>Version</baseVersion>
+      <action>Actions</action>
+    </header>
+    <msg>
+      <undeletable>You cannot delete '{0}' because it is the default one.</undeletable>
+      <confirm-delete>Are you sure you want to delete this dialog?</confirm-delete>
+    </msg>
+    <action>
+      <title>
+        <Edit>Edit</Edit>
+        <Delete>Delete</Delete>
+      </title>
+    </action>
+  </UIDialogTab>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.UIViewTab #
+  ######################################################################################
+  -->
+  <UIViewTab>
+    <header>
+      <name>Name</name>
+      <roles>Roles</roles>
+      <baseVersion>Version</baseVersion>
+      <action>Actions</action>
+    </header>
+    <msg>
+      <undeletable>'{0}' cannot be deleted, it is the default one.</undeletable>
+      <confirm-delete>Do you really want to delete?</confirm-delete>
+    </msg>
+    <action>
+      <title>
+        <Edit>Edit</Edit>
+        <Delete>Delete</Delete>
+      </title>
+    </action>
+  </UIViewTab>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.UITemplateContent #
+  ######################################################################################
+  -->
+  <UITemplateContent>
+    <action>
+      <Save>#{word.save}</Save>
+      <Restore>#{word.restore}</Restore>
+      <Cancel>#{word.cancel}</Cancel>
+      <Refresh>#{word.refresh}</Refresh>
+    </action>
+    <msg>
+      <name-invalid>The field name must not contain special characters.</name-invalid>
+      <roles-invalid>The Permission field is required.</roles-invalid>
+      <version-restored>Version {0} was restored successfully.</version-restored>
+      <name-exist>The name '{0}' already exists.</name-exist>
+    </msg>
+    <title>
+      <AddPermission>Add Permission</AddPermission>
+      <RemovePermission>Remove Permission</RemovePermission>
+    </title>
+  </UITemplateContent>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.DialogForm #
+  ######################################################################################
+  -->
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.ViewForm #
+  ######################################################################################
+  -->
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.UIJCRBrowser #
+  ######################################################################################
+  -->
+  <JCRBrowser>
+    <title>
+      <UIOneNodePathSelector>Select Home Path</UIOneNodePathSelector>
+    </title>
+  </JCRBrowser>
+  <JCRBrowserAssets>
+    <title>
+      <UIOneNodePathSelector>Select Icon</UIOneNodePathSelector>
+    </title>
+  </JCRBrowserAssets>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.queries #
+  ######################################################################################
+  -->
+  <UIQueriesList>
+    <header>
+      <name>Name</name>
+      <type>Ang Klase</type>
+      <statement>Statement</statement>
+      <permission>Permissions</permission>
+      <action>Actions</action>
+    </header>
+    <action>
+      <AddQuery>Add Query</AddQuery>
+    </action>
+    <tooltip>
+      <Edit>Edit this Query</Edit>
+      <Delete>Delete this Query</Delete>
+    </tooltip>
+    <msg>
+      <confirm-delete>Are you sure you want to delete this query?</confirm-delete>
+      <query-not-existed>The query does not exist anymore.</query-not-existed>
+      <can-not-remove>An error occurred while deleting the query. Please contact the administrator for information.</can-not-remove>
+    </msg>
+  </UIQueriesList>
+  <UIQueriesForm>
+    <label>
+      <name>Query Name</name>
+      <type>Query Type</type>
+      <statement>Statement</statement>
+      <cache>Enable Cache Results</cache>
+      <permissions>Permissions</permissions>
+      <PermissionButton>UIQueriesForm</PermissionButton>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <permission-require>Please select permissions.</permission-require>
+      <name-invalid>The Name field cannot contain special characters.</name-invalid>
+      <name-existing>This query name already exists. Please select another one.</name-existing>
+      <invalid-query>The query is invalid. Please check your query statement.</invalid-query>
+      <access-denied>Access denied. You do not have permission to perform this operation.</access-denied>
+    </msg>
+  </UIQueriesForm>
+  <AddQueryForm>
+    <title>
+      <UIQueriesForm>Add Query</UIQueriesForm>
+    </title>
+  </AddQueryForm>
+  <EditQueryForm>
+    <title>
+      <UIQueriesForm>Edit Query</UIQueriesForm>
+    </title>
+  </EditQueryForm>
+  <PermissionPopup>
+    <title>
+      <UIGroupMemberSelector>Ang Tigpili ug Permiso</UIGroupMemberSelector>
+    </title>
+  </PermissionPopup>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.folksonomy #
+  ######################################################################################
+  -->
+  <UITagManager>
+    <title>
+      <EditStyle>Edit Style</EditStyle>
+      <RemoveStyle>Remove Style</RemoveStyle>
+    </title>
+  </UITagManager>
+  <UITagStyleList>
+    <header>
+      <name>Style Name</name>
+      <documentRange>Number of Occurrences</documentRange>
+      <tagHTML>Tag Style</tagHTML>
+      <action>Action</action>
+    </header>
+    <title>
+      <Edit>Edit</Edit>
+      <Delete>Delete</Delete>
+      <Remove>Remove</Remove>
+    </title>
+    <action>
+      <AddStyle>Add Style</AddStyle>
+    </action>
+  </UITagStyleList>
+  <UITagStyleForm>
+    <label>
+      <styleName>Style Name:</styleName>
+      <documentRange>Number of Occurrences:</documentRange>
+      <styleHTML>HTML Style:</styleHTML>
+    </label>
+    <action>
+      <UpdateStyle>Update</UpdateStyle>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <range-validator>The range is invalid. The format must be: a..b, among which a, b are positive integers. You can use * instead of b to indicate that the range is unlimited.</range-validator>
+      <error-update>Update failed. Your information is invalid.</error-update>
+      <item-not-existing>You cannot save changes to this tag since it no longer exists in the database.</item-not-existing>
+    </msg>
+  </UITagStyleForm>
+  <FolksonomyPopup>
+    <title>
+      <UITagStyleForm>Edit Tag Style Configuration</UITagStyleForm>
+    </title>
+  </FolksonomyPopup>
+  <!--
+  ###################################################################################
+  # ECMPhoneFormatValidator                                       #
+  ###################################################################################
+  -->
+  <ECMPhoneFormatValidator>
+    <msg>
+      <Invalid>The field '{0}' contains an invalid Phone number. Please enter another value.</Invalid>
+    </msg>
+  </ECMPhoneFormatValidator>
+  <!--
+  ###################################################################################
+  # org.exoplatform.ecm.jcr.ECMNameValidator  #
+  ###################################################################################
+  -->
+  <ECMNameValidator>
+    <msg>
+      <Invalid-char>The field '{0}' has some invalid characters. Please type another value.</Invalid-char>
+      <empty-input>The value of the field '{0}' is empty.</empty-input>
+    </msg>
+  </ECMNameValidator>
+  <EmptyFieldValidator>
+    <msg>
+      <empty-input>Please enter the value into the field '{0}'.</empty-input>
+    </msg>
+  </EmptyFieldValidator>
+  <!--
+  ###################################################################################
+  # org.exoplatform.ecm.jcr.PermissionValidator  #
+  ###################################################################################
+  -->
+  <PermissionValidator>
+    <msg>
+      <permission-path-invalid>The permission '{0}' is invalid.</permission-path-invalid>
+    </msg>
+  </PermissionValidator>
+  <!--
+  ###################################################################################
+  # Repository  #
+  ###################################################################################
+  -->
+  <UIWorkspaceList>
+    <label>
+      <workspaceName>Workspace:</workspaceName>
+      <rootNodeInfo>UIWorkspaceList</rootNodeInfo>
+      <rootNodePath>Root Path:</rootNodePath>
+    </label>
+  </UIWorkspaceList>
+  <!--
+  ###################################################################################
+  # Others  #
+  ###################################################################################
+  -->
+  <UIFormInputSetWithAction>
+    <msg>
+      <confirm-delete>Are you sure you want to delete?</confirm-delete>
+    </msg>
+  </UIFormInputSetWithAction>
+  <template>
+    <title>
+      <AddPermission>Add Permission</AddPermission>
+    </title>
+  </template>
+  <metadataTypeTab>
+    <title>
+      <AddPermission>Add Permission</AddPermission>
+    </title>
+  </metadataTypeTab>
+  <PermissionButton>
+    <title>
+      <AddPermission>Add Permission</AddPermission>
+    </title>
+  </PermissionButton>
+  <nodeTypeDefinition>
+    <title>
+      <AddSuperType>Add Super Type</AddSuperType>
+    </title>
+  </nodeTypeDefinition>
+  <childNodeDefinition>
+    <title>
+      <AddRequiredType>Add Required Type</AddRequiredType>
+      <AddDefaultType>Add Default Type</AddDefaultType>
+    </title>
+  </childNodeDefinition>
+  <propertyDefinition>
+    <title>
+      <AddConstraints>Pagpuno ug mga Babag</AddConstraints>
+    </title>
+  </propertyDefinition>
+  <authInputSet>
+    <title>
+      <Select>Pagpili</Select>
+    </title>
+  </authInputSet>
+  <!--
+  #grid with action
+  -->
+  <UIViewContainer>
+    <title>
+      <View>View</View>
+      <EditInfo>Edit</EditInfo>
+      <Delete>Delete</Delete>
+    </title>
+    <label>
+      <permission>{0} sa {1}</permission>
+    </label>
+  </UIViewContainer>
+  <ECMTemplate>
+    <title>
+      <EditInfo>Edit</EditInfo>
+      <Delete>Delete</Delete>
+    </title>
+  </ECMTemplate>
+  <step1>
+    <title>
+      <AddPermission>Add Permission</AddPermission>
+    </title>
+  </step1>
+  <step2>
+    <title>
+      <SelectContainer>Select Container</SelectContainer>
+      <SelectStore>Select Store</SelectStore>
+    </title>
+  </step2>
+  <step3>
+    <title>
+      <SelectQueryHandler>Select Query Handler</SelectQueryHandler>
+    </title>
+  </step3>
+  <UIDrivePermissionSelector>
+    <label>
+      <selectGroup>Select Group</selectGroup>
+      <selectUser>Select User</selectUser>
+      <selectMembership>Select Membership</selectMembership>
+    </label>
+  </UIDrivePermissionSelector>
+
+  <UIPermissionSelector>
+    <label>
+      <selectGroup>Select Group</selectGroup>
+      <selectUser>Select User</selectUser>
+      <selectMembership>Select Membership</selectMembership>
+    </label>
+  </UIPermissionSelector>
+
+  <UIAnyPermission>
+    <label>
+      <anyPermission>Any Permission</anyPermission>
+    </label>
+  </UIAnyPermission>
+
+  <UIMDriveAnyPermission>
+    <label>
+      <anyPermission>Any Permission</anyPermission>
+    </label>
+  </UIMDriveAnyPermission>
+
+  <UIQueriesAnyPermission>
+    <label>
+      <anyPermission>Any Permission</anyPermission>
+    </label>
+  </UIQueriesAnyPermission>
+
+  <MetadataPermission>
+    <label>
+      <selectGroup>Select Group</selectGroup>
+    </label>
+  </MetadataPermission>
+  <MetadataPermission>
+    <label>
+      <selectMembership>Select Membership</selectMembership>
+    </label>
+  </MetadataPermission>
+  <anyPermission>
+    <title>
+      <AddAnyPermission>Set any Permission</AddAnyPermission>
+    </title>
+  </anyPermission>
+  <!--
+  #########Since ECM 2.3##################
+  -->
+  <QueriesPermissionBrowse>
+    <label>
+      <selectGroup>Select Group</selectGroup>
+      <selectUser>Select User</selectUser>
+      <selectMembership>Select Membership</selectMembership>
+    </label>
+  </QueriesPermissionBrowse>
+  <!--
+  #########Since ECM 2.4##################
+  -->
+  <UIViewFormTabPane>
+    <label>
+      <addSymLink>Add Symlink</addSymLink>
+    </label>
+  </UIViewFormTabPane>
+  <!--
+  #########Since ECM 2.5##################
+  -->
+
+  <UIDriveForm>
+    <msg>
+      <permission-path-invalid>The permission '{0}' is invalid.</permission-path-invalid>
+    </msg>
+  </UIDriveForm>
+
+  <UITaxonomyTreeMainForm>
+    <msg>
+      <homepath-emty>Gikinahanglan ang home path.</homepath-emty>
+      <targetpath-emty>Gikinahanglan ang target path.</targetpath-emty>
+    </msg>
+  </UITaxonomyTreeMainForm>
+  <UITaxonomyWorkingArea>
+    <msg>
+      <exist>This tree node already exists.</exist>
+    </msg>
+  </UITaxonomyWorkingArea>
+
+  <PermissionTreeSelectUser>
+    <label>
+      <option>
+        <userName>#{word.userName}</userName>
+        <lastName>#{word.lastName}</lastName>
+        <firstName>#{word.firstName}</firstName>
+        <email>#{word.email}</email>
+      </option>
+      <group>Group</group>
+      <searchUser>User</searchUser>
+      <userName>#{word.userName}</userName>
+      <lastName>#{word.lastName}</lastName>
+      <firstName>#{word.firstName}</firstName>
+      <email>#{word.email}</email>
+      <action>#{word.action}</action>
+      <Add>#{word.Add}</Add>
+      <Close>#{word.Close}</Close>
+    </label>
+  </PermissionTreeSelectUser>
+
+  <!--
+  #########Since ECM 2.6 ##################
+  -->
+  <DriveInputSet>
+    <label>
+      <nt_folder>Document Folder</nt_folder>
+      <nt_unstructured>Content Folder</nt_unstructured>
+      <exo_cssFolder>CSS Folder</exo_cssFolder>
+      <exo_jsFolder>Javascript Folder</exo_jsFolder>
+      <exo_linkFolder>Link Folder</exo_linkFolder>
+      <exo_webFolder>Web Content Folder</exo_webFolder>
+    </label>
+  </DriveInputSet>
+  <UIPermissionTreeInfo>
+    <msg>
+      <confirm-delete-permission>Sigurado ka nga imung tangtangon ang permiso?</confirm-delete-permission>
+      <no-permission-remove>You cannot remove the owner or the system user.</no-permission-remove>
+    </msg>
+  </UIPermissionTreeInfo>
+  <UITaxonomyTreeMainForm>
+    <msg>
+      <no-right-target-path>Please select another home path.</no-right-target-path>
+    </msg>
+  </UITaxonomyTreeMainForm>
+
+  <UIECMAdminControlPanel>
+    <tab>
+      <label>
+        <ManageUnLock>Manage Locks</ManageUnLock>
+      </label>
+    </tab>
+  </UIECMAdminControlPanel>
+  <UIUnLockForm>
+    <label>
+      <name>Path Node</name>
+      <permissions>Permissions</permissions>
+      <PermissionButton>UI Unlock Form</PermissionButton>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <permission-require>You must select permissions.</permission-require>
+    </msg>
+  </UIUnLockForm>
+  <UILockHolderList>
+    <header>
+      <name>Groups or Users</name>
+      <action>Action</action>
+    </header>
+    <tooltip>
+      <DeleteLock>Delete Group</DeleteLock>
+    </tooltip>
+    <msg>
+      <can-not-delete-lock-holder>Cannot delete the group {0}.</can-not-delete-lock-holder>
+    </msg>
+  </UILockHolderList>
+  <UILockNodeList>
+    <header>
+      <name>Title</name>
+      <hoderLock>Lock Owner</hoderLock>
+      <action>Action</action>
+    </header>
+    <tooltip>
+      <UnLock>UnLock</UnLock>
+    </tooltip>
+    <msg>
+      <access-denied-exception>You do not have permission to access the node with the path {0}, or this node is deleted.</access-denied-exception>
+    </msg>
+  </UILockNodeList>
+  <EditUnLockForm>
+    <title>
+      <UIUnLockForm>Manage Lock</UIUnLockForm>
+    </title>
+  </EditUnLockForm>
+  <UITabPane>
+    <action>
+      <Close>#{word.close}</Close>
+    </action>
+    <title>
+      <UILockHolderContainer>Manage Lock</UILockHolderContainer>
+      <UILockNodeList>Locked Node</UILockNodeList>
+    </title>
+  </UITabPane>
+
+  <UIViewFormTabPane>
+    <action>
+      <AddTabForm>Add Tab</AddTabForm>
+      <AddTab>#{word.save}</AddTab>
+      <BackViewForm>Back</BackViewForm>
+    </action>
+  </UIViewFormTabPane>
+
+  <UITemplateForm>
+    <tab>
+      <label>
+        <defaultSkin>CSS</defaultSkin>
+      </label>
+    </tab>
+  </UITemplateForm>
+
+  <UITabPane>
+    <title>
+      <UISkinTab>CSS</UISkinTab>
+    </title>
+  </UITabPane>
+
+  <UISkinTab>
+    <header>
+      <name>Name</name>
+      <roles>Roles</roles>
+      <baseVersion>Version</baseVersion>
+      <action>Actions</action>
+    </header>
+    <msg>
+      <undeletable>You cannot delete '{0}' because it is the default one.</undeletable>
+      <confirm-delete>Are you sure you want to delete this skin?</confirm-delete>
+    </msg>
+    <action>
+      <title>
+        <Edit>Edit</Edit>
+        <Delete>Delete</Delete>
+      </title>
+    </action>
+  </UISkinTab>
+
+  <SkinForm>
+    <label>
+      <UITemplateContent>SkinForm</UITemplateContent>
+      <UIPopupWindow>Skin Permission</UIPopupWindow>
+      <selectVersion>Ang mga Bersyon</selectVersion>
+      <content>Content:</content>
+      <name>Name:</name>
+      <isDocumentTemplate>is Document Template</isDocumentTemplate>
+      <viewPermission>Ang Pagtugot:</viewPermission>
+      <enableVersion>Enable Versioning</enableVersion>
+    </label>
+    <title>Add/Edit Skin</title>
+  </SkinForm>
+
+  <UITagManager>
+    <action>
+      <title>
+        <RemoveStyle>Remove</RemoveStyle>
+        <AddStyle>Add Style</AddStyle>
+      </title>
+    </action>
+    <msg>
+      <confirm-delete>Are you sure you want to delete this tag style?</confirm-delete>
+    </msg>
+  </UITagManager>
+
+  <UITaxonomyTreeContainer>
+    <action>
+      <Cancel>#{word.close}</Cancel>
+    </action>
+  </UITaxonomyTreeContainer>
+  <UITaxonomyTreeMainForm>
+    <action>
+      <NextViewPermission>Next</NextViewPermission>
+    </action>
+  </UITaxonomyTreeMainForm>
+
+  <UIPermissionTreeForm>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <NextAddAction>Next</NextAddAction>
+      <Previous>Previous</Previous>
+    </action>
+  </UIPermissionTreeForm>
+
+  <UIActionForm>
+    <action>
+      <PreviousViewPermission>Previous</PreviousViewPermission>
+      <NextViewTree>Next</NextViewTree>
+    </action>
+    <msg>
+      <xss-vulnerability-character>Field '{0}' contains XSS vulnerability characters</xss-vulnerability-character>
+      <xss-vulnerability-character-wo-label>Your input may contain XSS vulnerability characters</xss-vulnerability-character-wo-label>
+    </msg>
+  </UIActionForm>
+
+  <UITaxonomyTreeWorkingArea>
+    <action>
+      <Previous>Previous</Previous>
+    </action>
+  </UITaxonomyTreeWorkingArea>
+
+  <UITabPane>
+    <title>
+      <UITagManager>Tag Manager</UITagManager>
+      <UITagPermissionManager>Tag Permission Manager</UITagPermissionManager>
+    </title>
+  </UITabPane>
+
+  <UITagPermissionInfo>
+    <header>
+      <usersOrGroups>Ang Nigamit o Grupo</usersOrGroups>
+      <action>Action</action>
+    </header>
+    <action>
+      <title>
+        <Delete>Delete</Delete>
+      </title>
+    </action>
+    <msg>
+      <confirm-delete-permission>Sigurado ka nga imung tangtangon ang permiso?</confirm-delete-permission>
+    </msg>
+  </UITagPermissionInfo>
+  <UITagPermissionForm>
+    <title>Add Permission</title>
+    <action>
+      <Save>#{word.save}</Save>
+      <Add>Add</Add>
+    </action>
+    <label>
+      <userOrGroup>Memberships:</userOrGroup>
+    </label>
+    <msg>
+      <userOrGroup-alreadyExists>This membership already exists. Please select another one.</userOrGroup-alreadyExists>
+    </msg>
+  </UITagPermissionForm>
+
+  <UIGroupMemberSelector>
+    <label>
+      <selectGroup>Select Group</selectGroup>
+      <selectMembership>Select Membership</selectMembership>
+    </label>
+  </UIGroupMemberSelector>
+
+  <UIFolksonomyManager>
+    <msg>
+      <confirm-delete>Are you sure you want to delete this style?</confirm-delete>
+    </msg>
+    <action>
+      <title>
+        <AddStyle>Add Style</AddStyle>
+      </title>
+    </action>
+  </UIFolksonomyManager>
+  <UIActionForm>
+    <title>
+      <ShowComponent>Open Window</ShowComponent>
+      <removeReference>Remove</removeReference>
+    </title>
+  </UIActionForm>
+  <NodeTypeNameValidator>
+    <msg>
+      <Invalid-char>There are some invalid characters. Please enter another value.</Invalid-char>
+      <empty-input>The value of the field is empty.</empty-input>
+    </msg>
+  </NodeTypeNameValidator>
+  <UIActionForm>
+    <msg>
+      <constraint-violation-exception>The node '{0}' cannot be added to '{1}' in the workspace '{2}'.  There is a problem with the permissions or constraints condition.</constraint-violation-exception>
+    </msg>
+  </UIActionForm>
+
+  <UIWorkspaceWizard>
+    <msg>
+      <name-not-allowed>Ang Gidili nga Ngalan</name-not-allowed>
+    </msg>
+  </UIWorkspaceWizard>
+  <UIRepositoryForm>
+    <msg>
+      <not-complete-repository>The repository is being created. You need to wait a few minutes before creating another one.</not-complete-repository>
+    </msg>
+  </UIRepositoryForm>
+
+  <UIViewFormTabPane>
+    <label>
+      <addCategory>Add Category</addCategory>
+      <addLocalizationLink>Add Translation</addLocalizationLink>
+    </label>
+  </UIViewFormTabPane>
+
+  <UIDriveForm>
+    <label>
+      <allowNodeTypesOnTree>Allowance nodetype on left tree:</allowNodeTypesOnTree>
+    </label>
+  </UIDriveForm>
+  <DriveInputSet>
+    <title>
+      <ChooseNodeType>Select Node Types</ChooseNodeType>
+      <RemoveNodeType>Remove</RemoveNodeType>
+    </title>
+  </DriveInputSet>
+  <PopupNodeTypeSelector>
+    <title>
+      <UINodeTypeSelector>Select Node Types</UINodeTypeSelector>
+      <PopupNodeTypeSelector>Select Node Types</PopupNodeTypeSelector>
+    </title>
+  </PopupNodeTypeSelector>
+  <UINodeTypeSelector>
+    <label>
+      <selectedAllNodeTypes>Select All Node Types</selectedAllNodeTypes>
+    </label>
+  </UINodeTypeSelector>
+  <UIScriptForm>
+    <msg>
+      <PathNotFoundException>The script already exists in the '{0}' folder.</PathNotFoundException>
+    </msg>
+  </UIScriptForm>
+  <UINodeTypeList>
+    <msg>
+      <no-list>There is no node type matching your search.</no-list>
+    </msg>
+  </UINodeTypeList>
+  <UIActionForm>
+    <msg>
+      <canotChangeActionId>You cannot change the Action ID.</canotChangeActionId>
+    </msg>
+  </UIActionForm>
+  <PopupComponent>
+    <title>
+      <UINodeTypeSelector>Node Type Selector</UINodeTypeSelector>
+    </title>
+  </PopupComponent>
+  <UIPageIterator>
+    <label>
+      <maxPageSize>Maximum Page Size</maxPageSize>
+    </label>
+  </UIPageIterator>
+  <UILockNodeList>
+    <msg>
+      <can-not-unlock-node>You do not have permission to unlock this node. Please contact the administrator to get the correct right.</can-not-unlock-node>
+    </msg>
+  </UILockNodeList>
+</bundle>

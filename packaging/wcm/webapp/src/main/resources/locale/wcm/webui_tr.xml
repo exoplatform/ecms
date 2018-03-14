@@ -270,7 +270,7 @@
     <action>
       <SaveDraft>Taslaklara Kaydet</SaveDraft>
       <FastPublish>Hızlı Yayın</FastPublish>
-      <Preferences>Tercihler</Preferences>
+      <Preferences>Seçenekler</Preferences>
       <Close>#{word.close}</Close>
     </action>
     <msg>
@@ -359,7 +359,7 @@
       <ColumnPageConfigs>Sütun Sayfa Yapılandırmaları</ColumnPageConfigs>
       <RowPageConfigs>Satır Sayfa Yapılandırmaları</RowPageConfigs>
       <TabsPageConfigs>Sekme Sayfa Yapılandırmaları</TabsPageConfigs>
-      <MixPageConfigs>Mixed</MixPageConfigs>
+      <MixPageConfigs>Mix Sayfa Yapılandırmaları</MixPageConfigs>
     </item>
   </UIDropDownPageTemp>
 
@@ -450,7 +450,7 @@
 
   <UIViewMetadataForm>
     <msg>
-      <Invalid-number>Please enter a valid number.</Invalid-number>
+      <Invalid-number>Lütfen geçerli bir sayı girin.</Invalid-number>
     </msg>
   </UIViewMetadataForm>
 </bundle>

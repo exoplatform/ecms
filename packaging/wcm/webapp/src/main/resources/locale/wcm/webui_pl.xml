@@ -36,8 +36,8 @@
     <label>
       <ManagedSites>Zarządzanie witryną</ManagedSites>
       <SharedSite>Podgląd strony</SharedSite>
-      <PersonalDocuments>Personal Documents</PersonalDocuments>
-      <UserDocuments>{0} Documents</UserDocuments>
+      <PersonalDocuments>Dokumenty osobiste</PersonalDocuments>
+      <UserDocuments>{0} Dokumenty</UserDocuments>
       <Collaboration>Współpraca</Collaboration>
       <Trash>Kosz</Trash>
     </label>
@@ -359,7 +359,7 @@
       <ColumnPageConfigs>Konfiguracje kolumny strony</ColumnPageConfigs>
       <RowPageConfigs>Konfiguracje wiersza strony</RowPageConfigs>
       <TabsPageConfigs>Konfiguracje kart strony</TabsPageConfigs>
-      <MixPageConfigs>Mixed</MixPageConfigs>
+      <MixPageConfigs>Zmień stronę konfiguracji</MixPageConfigs>
     </item>
   </UIDropDownPageTemp>
 
@@ -450,7 +450,7 @@
 
   <UIViewMetadataForm>
     <msg>
-      <Invalid-number>Please enter a valid number.</Invalid-number>
+      <Invalid-number>Wprowadź poprawny numer.</Invalid-number>
     </msg>
   </UIViewMetadataForm>
 </bundle>

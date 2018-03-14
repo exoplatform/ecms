@@ -977,7 +977,7 @@
       <watchDocument>Urmărește documentul</watchDocument>
       <taggingDocument>Marcaj Document</taggingDocument>
       <viewMetadatas>Afișează metadate</viewMetadatas>
-      <overloadThumbnail>Change Icon Image</overloadThumbnail>
+      <overloadThumbnail>Suprascrie mini-imaginea</overloadThumbnail>
       <manageHidden>Ascundere/Afişare conţinut</manageHidden>
       <comment>Comentariu</comment>
       <vote>Vot</vote>
@@ -988,12 +988,12 @@
       <publicationPublish>Publică</publicationPublish>
       <contentNavigation>Navigare în conținut</contentNavigation>
       <addSymLink>Adaugă Symlink</addSymLink>
-      <checkIn>Check In</checkIn>
-      <checkOut>Check Out</checkOut>
-      <shareDocuments>Share</shareDocuments>
-      <openDocument>Remote Edit</openDocument>
-      <editProperty>Edit Document Properties</editProperty>
-      <uploadNewVersion>Upload a new version</uploadNewVersion>
+      <checkIn>Înregistrează-te</checkIn>
+      <checkOut>Ieși</checkOut>
+      <shareDocuments>Distribuie</shareDocuments>
+      <openDocument>Modifică de la distanță</openDocument>
+      <editProperty>Modifică proprietățile documentului</editProperty>
+      <uploadNewVersion>Încarcă o nouă versiune</uploadNewVersion>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -1023,7 +1023,7 @@
   </UIViewFormTabPane>
   <PopupViewPermission>
     <title>
-      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
+      <UIPermissionSelector>Selector de drepturi</UIPermissionSelector>
     </title>
   </PopupViewPermission>
 
@@ -1383,7 +1383,7 @@
       <set_property>Drept de setare a proprităților</set_property>
       <remove>Drept de ștergere</remove>
     </label>
-    <title>Add a permission to this node</title>
+    <title>Adaugă o permisiune acestui terminal</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>Salvaţi</Save>
@@ -1405,7 +1405,7 @@
 
   <PopupTaxonomyTreePermission>
     <title>
-      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
+      <UIPermissionSelector>Selector de drepturi</UIPermissionSelector>
     </title>
   </PopupTaxonomyTreePermission>
 
@@ -1486,7 +1486,7 @@
       <add_node>Modifică</add_node>
       <remove>Elimină</remove>
     </label>
-    <title>Add permission to this node</title>
+    <title>Adaugă permisiuni acestui terminal</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>#{word.save}</Save>
@@ -1737,7 +1737,7 @@
   -->
   <AddNewTemplatePermission>
     <title>
-      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
+      <UIPermissionSelector>Selector de drepturi</UIPermissionSelector>
     </title>
   </AddNewTemplatePermission>
   <TemplatePermission>
@@ -1778,12 +1778,12 @@
   </DialogForm>
   <DialogFormTemplatePermission>
     <title>
-      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
+      <UIPermissionSelector>Selector de drepturi</UIPermissionSelector>
     </title>
   </DialogFormTemplatePermission>
   <ViewFormTemplatePermission>
     <title>
-      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
+      <UIPermissionSelector>Selector de drepturi</UIPermissionSelector>
     </title>
   </ViewFormTemplatePermission>
   <TemplateContainerPopup>
@@ -1976,7 +1976,7 @@
   </EditQueryForm>
   <PermissionPopup>
     <title>
-      <UIGroupMemberSelector>Permission Selector</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Selector de drepturi</UIGroupMemberSelector>
     </title>
   </PermissionPopup>
   <!--
@@ -2034,7 +2034,7 @@
   -->
   <ECMPhoneFormatValidator>
     <msg>
-      <Invalid>The field '{0}' contains an invalid Phone number. Please enter another value.</Invalid>
+      <Invalid>Câmpul '{0}' conține un număr de telefon invalid. Te rugăm introdu altul.</Invalid>
     </msg>
   </ECMPhoneFormatValidator>
   <!--
@@ -2482,7 +2482,7 @@
       <Add>Adaugă</Add>
     </action>
     <label>
-      <userOrGroup>Memberships:</userOrGroup>
+      <userOrGroup>Membrii:</userOrGroup>
     </label>
     <msg>
       <userOrGroup-alreadyExists>Apartenența există deja. Vă rugăm să selectaţi alta.</userOrGroup-alreadyExists>

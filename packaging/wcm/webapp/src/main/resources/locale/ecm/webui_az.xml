@@ -48,27 +48,27 @@
   -->
   <SelectUserOrGroup>
     <title>
-      <UIPermissionUser>Select User</UIPermissionUser>
-      <UIPermissionMembership>Select Membership</UIPermissionMembership>
-      <TaxoSelectUserOrGroup>Select Membership</TaxoSelectUserOrGroup>
+      <UIPermissionUser>İstifadəçini seç</UIPermissionUser>
+      <UIPermissionMembership>Üzvlüyü seç</UIPermissionMembership>
+      <TaxoSelectUserOrGroup>Üzvlüyü seç</TaxoSelectUserOrGroup>
     </title>
   </SelectUserOrGroup>
   <UIPermissionUser>
     <label>
-      <selectUser>Select User</selectUser>
+      <selectUser>İstifadəçini seç</selectUser>
       <selectGroup>Browse and select a group</selectGroup>
     </label>
   </UIPermissionUser>
   <UIPermissionMembership>
     <label>
-      <selectUser>Select Membership</selectUser>
+      <selectUser>Üzvlüyü seç</selectUser>
       <selectGroup>Browse and select a group</selectGroup>
     </label>
   </UIPermissionMembership>
   <TaxoSelectUserOrGroup>
     <label>
-      <selectGroup>Select Group</selectGroup>
-      <selectMembership>Select Membership</selectMembership>
+      <selectGroup>Qrupu seç</selectGroup>
+      <selectMembership>Üzvlüyü seç</selectMembership>
     </label>
   </TaxoSelectUserOrGroup>
   <!--

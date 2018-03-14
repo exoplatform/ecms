@@ -6,17 +6,17 @@
   <Ecm>
     <dialog>
       <label>
-        <end-time>End Time</end-time>
-        <start-time>Start Time</start-time>
-        <lifecycle>Lifecycle</lifecycle>
-        <mimeType>Mime Type</mimeType>
-        <repeat-count>Repeat Count</repeat-count>
-        <time-interval>Time Interval</time-interval>
-        <query-items>Query Items</query-items>
-        <schedule-type>Schedule Type</schedule-type>
-        <remove>Remove Item</remove>
-        <add>Add Item</add>
-        <expand>Expand This</expand>
+        <end-time>Tapusin ang Oras</end-time>
+        <start-time>Umpisa ng Oras</start-time>
+        <lifecycle>Ang Ikot ng Buhay</lifecycle>
+        <mimeType>Ang Uri ng Mime</mimeType>
+        <repeat-count>Ulitin ang Pagbibilang</repeat-count>
+        <time-interval>Ang Pagitan sa Oras</time-interval>
+        <query-items>Katanungan sa mga Aytem</query-items>
+        <schedule-type>Ang Uri ng Iskedyul</schedule-type>
+        <remove>Alisin ang aytem</remove>
+        <add>Magdagdag ng aytem</add>
+        <expand>Ang Palawakin Ito</expand>
       </label>
     </dialog>
   </Ecm>
@@ -24,12 +24,12 @@
   <UIDocumentForm>
     <label>
       <title>#{word.title}</title>
-      <link>Link</link>
+      <link>Ang Link</link>
       <contentHtml>#{word.content}</contentHtml>
       <content>#{word.content}</content>
       <contentPlain>#{word.content}</contentPlain>
-      <name>Name</name>
-    <categories>Categories</categories>
+      <name>Ang pangalan</name>
+    <categories>Mga kategorya</categories>
     </label>
   </UIDocumentForm>
  
@@ -45,8 +45,8 @@
   <HtmlFile>
     <dialog>
       <label>
-        <name>Name</name>
-        <content>Content</content>
+        <name>Pangalan</name>
+        <content>Ang Nilalaman</content>
       </label>
     </dialog>
   </HtmlFile>
@@ -58,12 +58,12 @@
     <dialog>
       <label>
         <name>#{word.name}</name>
-        <categories>Categories</categories>
+        <categories>Mga Kategorya</categories>
         <mimeType>#{Ecm.dialog.label.mimeType}</mimeType>
-        <width>Width</width>
-        <height>Height</height>
+        <width>Ang Lapad</width>
+        <height>Ang Taas</height>
         <content>#{word.content}</content>
-        <re-upload>The file already exists. You can delete it and upload another file.</re-upload>
+        <re-upload>Ang Payl ay umiiral na. Maari mong burahin at i-upload ang ibang payl.</re-upload>
       </label>
     </dialog>
   </File>
@@ -71,22 +71,22 @@
   <UIActionForm>
     <label>
       <description>#{word.description}</description>
-      <port>Port</port>
+      <port>Ang Port</port>
       <userName>#{word.userName}</userName>
       <password>Password</password>
-      <link>Link</link>
-      <to>Send Mail To</to>
+      <link>Ang Link</link>
+      <to>Ipadala ang Liham</to>
       <actionName>#{word.name}</actionName>
     </label>
   </UIActionForm>
   <EditFormAction>
     <label>
       <description>#{word.description}</description>
-      <port>Port</port>
+      <port>Ang Port</port>
       <userName>#{word.userName}</userName>
       <password>Password</password>
-      <link>Link</link>
-      <to>Send Mail To</to>
+      <link>Ang Link</link>
+      <to>Ipadala ang Liham</to>
       <actionName>#{word.name}</actionName>
     </label>
   </EditFormAction>
@@ -97,10 +97,10 @@
   <AddMetadata>
     <dialog>
       <label>
-        <id>Id</id>
+        <id>Ang Id</id>
         <name>#{word.name}</name>
         <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
-        <metadata>Metadata</metadata>
+        <metadata>Ang Metadata</metadata>
         <description>#{word.description}</description>
       </label>
     </dialog>
@@ -112,7 +112,7 @@
   <AutoVersioning>
     <dialog>
       <label>
-        <id>Id</id>
+        <id>Ang Id</id>
         <name>#{word.name}</name>
         <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
         <schedule-type>#{Ecm.dialog.label.schedule-type}</schedule-type>
@@ -120,7 +120,7 @@
         <end-time>#{Ecm.dialog.label.end-time}</end-time>
         <repeat-count>#{Ecm.dialog.label.repeat-count}</repeat-count>
         <time-inteval>#{Ecm.dialog.label.time-interval}</time-inteval>
-        <cron-expression>Cron expression</cron-expression>
+        <cron-expression>Paghayag ng Cron</cron-expression>
         <description>#{word.description}</description>
       </label>
     </dialog>
@@ -131,7 +131,7 @@
   <EnableVersioning>
     <dialog>
       <label>
-        <id>Id</id>
+        <id>Ang Id</id>
         <name>#{word.name}</name>
         <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
         <schedule-type>#{Ecm.dialog.label.schedule-type}</schedule-type>
@@ -151,19 +151,19 @@
     <dialog>
       <label>
         <title>#{word.title}:</title>
-        <creator>Creator:</creator>
+        <creator>Tagalikha:</creator>
         <subject>#{word.subject}:</subject>
-        <source>Source:</source>
-        <contributor>Contributor:</contributor>
-        <resource-type>Resource Type:</resource-type>
+        <source>Ang Pinagmulan:</source>
+        <contributor>Ang Tagaambag:</contributor>
+        <resource-type>Ang Uri ng Pinagmulan:</resource-type>
         <date>#{word.date}:</date>
-        <publisher>Publisher:</publisher>
+        <publisher>Ang Tagapaglathala:</publisher>
         <description>#{word.description}:</description>
-        <rights>Rights:</rights>
-        <relation>Relation:</relation>
+        <rights>Ang Mga Karapatan:</rights>
+        <relation>Ang Kaugnayan:</relation>
         <format>#{word.format}:</format>
-        <coverage>Coverage:</coverage>
-        <identifier>Identifier:</identifier>
+        <coverage>Ang Nasasakupan:</coverage>
+        <identifier>Ang Pagkakakilanlan:</identifier>
         <language>Ang Wika:</language>
       </label>
     </dialog>
@@ -175,8 +175,8 @@
   <Actionable>
     <dialog>
       <label>
-        <primary-type>Primary Type</primary-type>
-        <mixin-types>Mixin Types</mixin-types>
+        <primary-type>Ang Pangunahin na Uri</primary-type>
+        <mixin-types>Ang mga Uri ay I-Mixin</mixin-types>
       </label>
     </dialog>
   </Actionable>
@@ -187,10 +187,10 @@
   <Move>
     <dialog>
       <label>
-        <destination-workpsace>Destination Workspace</destination-workpsace>
-        <destination-path>Destination Path</destination-path>
-        <primary-type>Primary Type</primary-type>
-        <mixin-types>Mixin Types</mixin-types>
+        <destination-workpsace>Ang Destinasyon na Workspace</destination-workpsace>
+        <destination-path>Ang Destinasyon na Landas</destination-path>
+        <primary-type>Ang Pangunahin na Uri</primary-type>
+        <mixin-types>Ang mga Uri ay I-Mixin</mixin-types>
       </label>
     </dialog>
   </Move>
@@ -232,7 +232,7 @@
   <RssEnable>
     <dialog>
       <label>
-        <title>Title</title>
+        <title>Ang Pamagat</title>
         <summary>#{word.summary}</summary>
       </label>
     </dialog>
@@ -246,9 +246,9 @@
       <label>
         <version-history>Ang kasaysayan ng Bersyon</version-history>
         <base-version>Base na Bersyon</base-version>
-        <is-checked-out>Is Checked out</is-checked-out>
-        <predecessors>Predecessors</predecessors>
-        <merge-failed>Merge Failed</merge-failed>
+        <is-checked-out>Ay Suriin</is-checked-out>
+        <predecessors>Ang Mga Predecessor</predecessors>
+        <merge-failed>Ang Nabigong Pagsama-sama</merge-failed>
         <uuid>UUID</uuid>
       </label>
     </dialog>
@@ -260,10 +260,10 @@
   <ResouceContainer>
     <dialog>
       <label>
-        <name>Name</name>
-        <autoload>Auto Load</autoload>
-        <minetype>MIME Type</minetype>
-        <content>Content</content>
+        <name>Pangalan</name>
+        <autoload>I-load ng Awtomatiko</autoload>
+        <minetype>Ang Uri ng MIME</minetype>
+        <content>Ang Nilalaman</content>
       </label>
     </dialog>
   </ResouceContainer>
@@ -272,17 +272,17 @@
   -->
   <EmailAddressValidator>
     <msg>
-      <Invalid-input>The email address is invalid.</Invalid-input>
+      <Invalid-input>Embalido ang email address.</Invalid-input>
     </msg>
   </EmailAddressValidator>
   <EmptyFieldValidator>
     <msg>
-      <empty-input>The field '{0}' is required. Please enter your value.</empty-input>
+      <empty-input>Ang field '{0}' ay kinakailangan. Pakiusap na maglagay ng iyong halaga.</empty-input>
     </msg>
   </EmptyFieldValidator>
   <NumberFormatValidator>
     <msg>
-      <Invalid-number>The field '{0}' is invalid.</Invalid-number>
+      <Invalid-number>Ang field '{0}' ay hindi balido.</Invalid-number>
     </msg>
   </NumberFormatValidator>
   <!--
@@ -293,18 +293,18 @@
   <ScriptAction>
     <dialog>
       <label>
-        <id>Id</id>
-        <name>Name</name>
+        <id>Ang Id</id>
+        <name>Pangalan</name>
         <lifecycle>Lifecycle</lifecycle>
-        <homePath>Home Path</homePath>
-        <targetWorkspace>Target Workspace</targetWorkspace>
-        <targetPath>Target Path</targetPath>
+        <homePath>Landas papunta sa bahay</homePath>
+        <targetWorkspace>Ang Target sa Workspace</targetWorkspace>
+        <targetPath>Target sa Landas</targetPath>
       </label>
     </dialog>
   </ScriptAction>
   <UIDialogForm>
    <form>
-   <DialogFormException>Cannot save this document. There may be a problem with the pre-save interceptor.</DialogFormException>
+   <DialogFormException>Hindi ma-save ang dokumento na ito. Maaaring may problema sa pre-save na interceptor.</DialogFormException>
    </form>
   </UIDialogForm>
 
@@ -313,21 +313,21 @@
 
   ###################### resoucebundle exo:taxonomyAction dialogs template ####
   -->
-<no>No</no>
-<yes>Yes</yes>
-<true>True</true>
-<false>False</false>
+<no>Hindi</no>
+<yes>Oo</yes>
+<true>Tunay</true>
+<false>Hindi totoo</false>
 <Electronic>Elektronik</Electronic>
 <Paper>Ang Papel</Paper>
-<NONE>None</NONE>
+<NONE>Wala</NONE>
 <CLASSIFIED>Paguuri</CLASSIFIED>
 <UNCLASSIFIED>Hindi nauuri</UNCLASSIFIED>
 <NOCONTRACT>Walang kontrata</NOCONTRACT>
 <one-minute>Isang Minuto</one-minute>
 <hourly>Oras-Oras</hourly>
-<daily>Daily</daily>
+<daily>Ang Araw-araw</daily>
 <quarterly>Kada tatlong buwan</quarterly>
-<yearly>Yearly</yearly>
+<yearly>Ang Taon-taon</yearly>
 <ten-years>Mga sampung taon</ten-years>
 <read>Ang Aksyon ang gumagamit</read>
   <schedule>Taga-schedule</schedule>
@@ -340,9 +340,9 @@
   <ScriptAction>
     <dialog>
       <label>
-        <isDeep>Is Deep</isDeep>
-        <nodetypes>Node Types</nodetypes>
-        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
+        <isDeep>Ay Malalim</isDeep>
+        <nodetypes>Tipo ng mga node</nodetypes>
+        <affectedNodeTypeNames>Ang mga Apektado na Uri ng Node</affectedNodeTypeNames>
       </label>
     </dialog>
   </ScriptAction>
@@ -350,9 +350,9 @@
   <AddMetadata>
     <dialog>
       <label>
-        <isDeep>Is Deep</isDeep>
-        <nodetypes>Node Types</nodetypes>
-        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
+        <isDeep>Ay Malalim</isDeep>
+        <nodetypes>Tipo ng mga node</nodetypes>
+        <affectedNodeTypeNames>Ang Apektado na mga Uri ng Node</affectedNodeTypeNames>
       </label>
     </dialog>
   </AddMetadata>
@@ -360,9 +360,9 @@
   <EnableVersioning>
     <dialog>
       <label>
-        <isDeep>Is Deep</isDeep>
-        <nodetypes>Node Types</nodetypes>
-        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
+        <isDeep>Ay Malalim</isDeep>
+        <nodetypes>Tipo ng mga Node</nodetypes>
+        <affectedNodeTypeNames>Mga apektado na uri ng node</affectedNodeTypeNames>
       </label>
     </dialog>
   </EnableVersioning>
@@ -370,9 +370,9 @@
   <AutoVersioning>
     <dialog>
       <label>
-        <isDeep>Is Deep</isDeep>
-        <nodetypes>Node Types</nodetypes>
-        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
+        <isDeep>Ay Malalim</isDeep>
+        <nodetypes>Ang Tipo ng mga Node</nodetypes>
+        <affectedNodeTypeNames>Mga Apektado na Uri ng Node</affectedNodeTypeNames>
       </label>
     </dialog>
   </AutoVersioning>
@@ -380,15 +380,15 @@
   <AccessibleMedia>
   <dialog>
   <label>
-  <captions>Captions</captions>
-<audioDescription>Audio description</audioDescription>
-<alternativeText>Alternative text</alternativeText>
+  <captions>Ang Mga Kapsiyon</captions>
+<audioDescription>Ang Paglalarawan sa audio</audioDescription>
+<alternativeText>Ang Alternatibong teksto</alternativeText>
 </label>
 </dialog>
 <help>
-<CaptionsHelp>Captions should provide text of dialog and important sounds</CaptionsHelp>
-<AudioDescriptionHelp>An audio description is a narrated track of the video</AudioDescriptionHelp>
-<AlternativeTextHelp>Provide an accessible, alternative way of presenting the information</AlternativeTextHelp>
+<CaptionsHelp>Ang mga Paliwanag ay kinakailangan na ilaan sa diyalogo ng teksto at mga importante na tunog</CaptionsHelp>
+<AudioDescriptionHelp>Ang paglalarawan sa audio ay nagsasalay sa track ng video</AudioDescriptionHelp>
+<AlternativeTextHelp>Ang Maglaan ng malalapitn, Alternatibong paraan sa pag presenta ng impormasyon</AlternativeTextHelp>
 </help>
 </AccessibleMedia>
   

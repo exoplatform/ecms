@@ -8,7 +8,7 @@
 
   <UICNConfigPopupWindow>
     <title>
-      <UICategoryNavigationConfig>Category List Configuration</UICategoryNavigationConfig>
+      <UICategoryNavigationConfig>Konfiguracja listy kategorii</UICategoryNavigationConfig>
     </title>
   </UICNConfigPopupWindow>
 
@@ -24,27 +24,27 @@
       <UICategoryNavigationTreeNameSelectBox>Drzewo kategorii</UICategoryNavigationTreeNameSelectBox>
       <UICategoryNavigationTreeTitleFormStringInput>Tytuł</UICategoryNavigationTreeTitleFormStringInput>
   
-      <UICategoryNavigationTreeNameFormSelectBox>Tree Name</UICategoryNavigationTreeNameFormSelectBox>
-      <UICategoryNavigationTemplateFormSelectBox>Tree viewer template</UICategoryNavigationTemplateFormSelectBox>
+      <UICategoryNavigationTreeNameFormSelectBox>Nazwa drzewa</UICategoryNavigationTreeNameFormSelectBox>
+      <UICategoryNavigationTemplateFormSelectBox>Szablon przeglądarki drzew</UICategoryNavigationTemplateFormSelectBox>
       
       <UICategoryNavigationTargetPathFormInputSet>Pokaż na stronie</UICategoryNavigationTargetPathFormInputSet>      
-      <TreeSelectionBlock>Tree Selection</TreeSelectionBlock>
+      <TreeSelectionBlock>Wybór drzewa</TreeSelectionBlock>
       <DisplaySettingBlock>Ustawienia wyświetlania</DisplaySettingBlock>
       <AdvancedBlock>Zaawansowane</AdvancedBlock>
   
   <UICategoryNavigationTreePathFormInputSet>Ścieżka docelowa</UICategoryNavigationTreePathFormInputSet>
   <UICategoryNavigationTreePathFormStringInput>Ścieżka docelowa</UICategoryNavigationTreePathFormStringInput>
   <UICategoryNavigationHeaderFormStringInput>Nagłówek</UICategoryNavigationHeaderFormStringInput>
-  <UICategoryNavigationAutomaticDetectionCheckBoxInput>Automatic</UICategoryNavigationAutomaticDetectionCheckBoxInput>
+  <UICategoryNavigationAutomaticDetectionCheckBoxInput>Automatyczny</UICategoryNavigationAutomaticDetectionCheckBoxInput>
   <UICategoryNavigationDynamicNavigationLabel>Nawigacja dynamiczna</UICategoryNavigationDynamicNavigationLabel>
   <UICategoryNavigationWithClvFormStringInput>z</UICategoryNavigationWithClvFormStringInput>
   <UICategoryNavigationTreepathPopupWindow>Ścieżka docelowa</UICategoryNavigationTreepathPopupWindow>    
       
     </label>
     <msg>
-      <not-support-encoding>Encoding is not supported.</not-support-encoding>
-      <render>An error occurred when rendering.</render>
-      <saving-success>The information was updated successfully.</saving-success>
+      <not-support-encoding>Kodowanie nie jest obsługiwane.</not-support-encoding>
+      <render>Wystąpił błąd podczas renderowania.</render>
+      <saving-success>Informacje zostały pomyślnie zaktualizowane.</saving-success>
     </msg>
     <action>
       <Save>Zapisz</Save>

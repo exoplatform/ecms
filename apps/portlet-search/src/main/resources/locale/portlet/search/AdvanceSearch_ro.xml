@@ -18,8 +18,8 @@
       <Document>Document</Document>
       <DocumentAndPage>Document şi pagină</DocumentAndPage>
       <documentandpage>Document şi pagină</documentandpage>
-      <results>Results {0} to {1} for {2}</results>
-      <oneResult>Only one result for {0}</oneResult>
+      <results>Rezultate {0} până la {1} pentru {2}</results>
+      <oneResult>Doar un rezultat pentru {0}</oneResult>
       <ofAboutCaption>de aproximativ</ofAboutCaption>
       <timeUnitCaption>secunde</timeUnitCaption>
       <similar>Pagini în care apare același conținut</similar>

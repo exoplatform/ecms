@@ -2,26 +2,26 @@
 <bundle>
 <UIPopupWindow>
 <title>
-<UIViewInfoManager>View Information</UIViewInfoManager>
+<UIViewInfoManager>Tampilan Informasi</UIViewInfoManager>
 </title>
 </UIPopupWindow>
     
 <ECMContextMenu>
 <event>
-<ViewInfo>View Information</ViewInfo>
+<ViewInfo>Tampilan Informasi</ViewInfo>
 </event>
 </ECMContextMenu>
 <UIViewInfoContainer>
 <label>
-      <name>Name</name>
-      <title>Title</title>
-      <type>Type</type>
-      <size>Size</size>
-      <owner>Owner</owner>
-      <lastModifier>Last Modifier</lastModifier>
-      <created>Created Date</created>
-      <lastModified>Last Modified Date</lastModified>
-      <publicationState>Publication State</publicationState>
+      <name>Nama</name>
+      <title>Judul</title>
+      <type>Tipe</type>
+      <size>Ukuran</size>
+      <owner>Pemilik</owner>
+      <lastModifier>Pengubah terakhir</lastModifier>
+      <created>Tanggal Dibuat</created>
+      <lastModified>Tanggal Perubahan Terakhir</lastModified>
+      <publicationState>Publikasi Negara</publicationState>
 </label>
 <value>
       <folder>Folder</folder>

@@ -629,7 +629,7 @@
   -->
   <UITabPane>
     <title>
-      <UIPublishingPanel>Publication Pane</UIPublishingPanel>
+      <UIPublishingPanel>Dados de Publicação</UIPublishingPanel>
       <UIPublicationPanel>Revisão</UIPublicationPanel>
       <UIPublicationSchedule>Agendado</UIPublicationSchedule>
       <UIPublicationPagesContainer>Páginas</UIPublicationPagesContainer>

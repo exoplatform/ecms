@@ -47,7 +47,7 @@
       <saving-success>Bilgiler başarıyla güncellendi.</saving-success>
     </msg>
     <action>
-      <Save>Kaydet</Save>
+      <Save>Save</Save>
     </action>
   </UICategoryNavigationConfig>
   <UICategoryNavigationTreeBase>

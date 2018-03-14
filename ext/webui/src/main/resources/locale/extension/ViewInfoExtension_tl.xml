@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+<UIPopupWindow>
+<title>
+<UIViewInfoManager>View Information</UIViewInfoManager>
+</title>
+</UIPopupWindow>
+    
+<ECMContextMenu>
+<event>
+<ViewInfo>View Information</ViewInfo>
+</event>
+</ECMContextMenu>
+<UIViewInfoContainer>
+<label>
+      <name>Name</name>
+      <title>Ang Pamagat</title>
+      <type>Type</type>
+      <size>Size</size>
+      <owner>Owner</owner>
+      <lastModifier>Last Modifier</lastModifier>
+      <created>Petsa ng paglikha</created>
+      <lastModified>Last Modified Date</lastModified>
+      <publicationState>Estado ng paglalathala</publicationState>
+</label>
+<value>
+      <folder>Folder</folder>
+</value>
+<action>
+<Close>#{word.close}</Close>
+</action>
+</UIViewInfoContainer>
+</bundle>

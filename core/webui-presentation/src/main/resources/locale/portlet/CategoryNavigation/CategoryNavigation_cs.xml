@@ -8,7 +8,7 @@
 
   <UICNConfigPopupWindow>
     <title>
-      <UICategoryNavigationConfig>Category List Configuration</UICategoryNavigationConfig>
+      <UICategoryNavigationConfig>Konfigurace seznamu kategorií</UICategoryNavigationConfig>
     </title>
   </UICNConfigPopupWindow>
 
@@ -24,27 +24,27 @@
       <UICategoryNavigationTreeNameSelectBox>Strom kategorií</UICategoryNavigationTreeNameSelectBox>
       <UICategoryNavigationTreeTitleFormStringInput>Nadpis</UICategoryNavigationTreeTitleFormStringInput>
   
-      <UICategoryNavigationTreeNameFormSelectBox>Tree Name</UICategoryNavigationTreeNameFormSelectBox>
-      <UICategoryNavigationTemplateFormSelectBox>Tree viewer template</UICategoryNavigationTemplateFormSelectBox>
+      <UICategoryNavigationTreeNameFormSelectBox>Název stromu</UICategoryNavigationTreeNameFormSelectBox>
+      <UICategoryNavigationTemplateFormSelectBox>Šablona zobrazení stromu</UICategoryNavigationTemplateFormSelectBox>
       
       <UICategoryNavigationTargetPathFormInputSet>Zobrazit na stránce</UICategoryNavigationTargetPathFormInputSet>      
-      <TreeSelectionBlock>Tree Selection</TreeSelectionBlock>
+      <TreeSelectionBlock>Výběr stromu</TreeSelectionBlock>
       <DisplaySettingBlock>Nastavení zobrazení</DisplaySettingBlock>
       <AdvancedBlock>Pokročilé nastavení</AdvancedBlock>
   
   <UICategoryNavigationTreePathFormInputSet>Cílová cesta</UICategoryNavigationTreePathFormInputSet>
   <UICategoryNavigationTreePathFormStringInput>Cílová cesta</UICategoryNavigationTreePathFormStringInput>
   <UICategoryNavigationHeaderFormStringInput>Nadpis</UICategoryNavigationHeaderFormStringInput>
-  <UICategoryNavigationAutomaticDetectionCheckBoxInput>Automatic</UICategoryNavigationAutomaticDetectionCheckBoxInput>
+  <UICategoryNavigationAutomaticDetectionCheckBoxInput>Automatická</UICategoryNavigationAutomaticDetectionCheckBoxInput>
   <UICategoryNavigationDynamicNavigationLabel>Dynamická navigace</UICategoryNavigationDynamicNavigationLabel>
   <UICategoryNavigationWithClvFormStringInput>s</UICategoryNavigationWithClvFormStringInput>
   <UICategoryNavigationTreepathPopupWindow>Cílová cesta</UICategoryNavigationTreepathPopupWindow>    
       
     </label>
     <msg>
-      <not-support-encoding>Encoding is not supported.</not-support-encoding>
-      <render>An error occurred when rendering.</render>
-      <saving-success>The information was updated successfully.</saving-success>
+      <not-support-encoding>Kódování není podporováno.</not-support-encoding>
+      <render>Při vykreslování došlo k chybě.</render>
+      <saving-success>Informace byly úspěšně aktualizovány.</saving-success>
     </msg>
     <action>
       <Save>Uložit</Save>

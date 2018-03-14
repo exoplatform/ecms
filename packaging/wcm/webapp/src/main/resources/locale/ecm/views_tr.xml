@@ -31,7 +31,7 @@
         <email>E-posta</email>
         <site>Site</site>
         <lastComment>Son yorum {user} kullanıcısı tarafından {time} tarihinde yapıldı</lastComment>
-        <Less_Than_A_Minute>bir dakikadan az önce</Less_Than_A_Minute>
+        <Less_Than_A_Minute>bir dakika önce</Less_Than_A_Minute>
         <About_A_Minute>yaklaşık bir dakika önce</About_A_Minute>
         <About_x_Minutes>yaklaşık {0} dakika önce</About_x_Minutes>
         <About_An_Hour>yaklaşık bir saat önce</About_An_Hour>
@@ -50,7 +50,7 @@
   <File>
     <view>
       <label>
-        <not-viewable>Bu belgenin önizlemesi mevcut değildir.</not-viewable>
+        <not-viewable>The preview of this document is not available.</not-viewable>
         <pdf-max-size>{0} MB'den büyük içerikler için ön izleme bulunmamaktadır.</pdf-max-size>
         <pdf-max-page>{0} sayfadan daha fazla olan içerikler için ön izleme bulunmamaktadır.</pdf-max-page>
         <using-webDAV>veya MS Office ile Açın</using-webDAV>

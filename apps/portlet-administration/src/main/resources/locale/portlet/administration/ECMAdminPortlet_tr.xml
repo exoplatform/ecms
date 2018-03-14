@@ -951,7 +951,7 @@
       <viewName>Adı</viewName>
       <tabName>Sekme Adı</tabName>
       <permission>İzin</permission>
-      <tabs>Sekmeler</tabs>
+      <tabs>Tabs</tabs>
       <template>Şablonlar</template>
       <enableVersion>Sürüm Kontrolü Etkinleştir</enableVersion>
       <addFolder>Klasör Ekle</addFolder>
@@ -977,7 +977,7 @@
       <watchDocument>Belgeyi İzle</watchDocument>
       <taggingDocument>Etiket Belgesi</taggingDocument>
       <viewMetadatas>Meta verilerini görüntüle</viewMetadatas>
-      <overloadThumbnail>Change Icon Image</overloadThumbnail>
+      <overloadThumbnail>İkon Görüntüsünü Değiştir</overloadThumbnail>
       <manageHidden>İçeriği Gizle/Göster</manageHidden>
       <comment>Yorum</comment>
       <vote>Oyla</vote>
@@ -1386,7 +1386,7 @@
     <title>Bu ağa bir izin ekle</title>
     <action>
       <Close>#{word.close}</Close>
-      <Save>Kaydet</Save>
+      <Save>Save</Save>
       <Reset>Sıfırla</Reset>
     </action>
     <msg>
@@ -1412,7 +1412,7 @@
   <PopupDrivePermission>
     <title>
       <AddDrivePermissionSelector>İzin Ekle</AddDrivePermissionSelector>
-      <UIPermissionSelector>Yetkileri Seç</UIPermissionSelector>
+      <UIPermissionSelector>Yetki Seç</UIPermissionSelector>
     </title>
   </PopupDrivePermission>
 

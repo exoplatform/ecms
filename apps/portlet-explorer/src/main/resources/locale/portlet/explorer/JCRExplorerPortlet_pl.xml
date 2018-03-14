@@ -17,7 +17,7 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <not-support>You can't comment on this type of document.</not-support>
+      <not-support>Nie możesz dodać komentarza dla tego typu dokumentu.</not-support>
       <not-checkedout>Musisz sprawdzić węzeł przed skomentowaniem go.</not-checkedout>
       <content-null>Nie możesz opublikować pustego komentarza.</content-null>
     </msg>
@@ -300,7 +300,7 @@
       <ManageActions>Akcje</ManageActions>
       <ExportNode>Eksportuj</ExportNode>
       <ImportNode>Importuj</ImportNode>
-      <OverloadThumbnail>Change Icon Image</OverloadThumbnail>
+      <OverloadThumbnail>Zmień ikonę obrazu</OverloadThumbnail>
       <ManageHidden>Pokaż/Ukryj zawartość</ManageHidden>
       <ViewReferences>Referencje</ViewReferences>
       <ViewNodeType>Rodzaje</ViewNodeType>
@@ -1345,26 +1345,26 @@
   ###############################################################################
   -->
   <UIVersionInfo>
-    <title>Version history</title>
+    <title>Historia wersji</title>
     <summary>
-      <empty>Click here to add a summary</empty>
+      <empty>Kliknij tutaj aby dodać podsumowanie</empty>
     </summary>
     <tooltip>
       <version>Wersja</version>
-      <baseVersion>current version</baseVersion>
+      <baseVersion>aktualna wersja</baseVersion>
       <addLabel>Dodaj etykietę</addLabel>
       <removeLable>Usuń etykietę</removeLable>
       <restoreVersion>Przywróć wersję</restoreVersion>
-      <viewVersion>View Version</viewVersion>
+      <viewVersion>Zobacz wersję</viewVersion>
       <deleteVersion>Usuń wersję</deleteVersion>
       <compareVersion>Porównaj z wersją podstawową</compareVersion>
     </tooltip>
     <msg>
       <have-no-view-template>Widok szablonu nie jest obsługiwany.</have-no-view-template>
       <cannot-remove-version>Nie można usunąć wersji podstawowej.</cannot-remove-version>
-      <error-removing-version>An error occurred while deleting this version.</error-removing-version>
-      <error-removing-referenced-version>This version is referenced and can't be removed.</error-removing-referenced-version>
-      <confirm-restore>Are you sure you want to restore this version?</confirm-restore>
+      <error-removing-version>Wystąpił błąd podczas usuwania tej wersji.</error-removing-version>
+      <error-removing-referenced-version>Ta wersja jest używana jako odniesienie i nie może być usunięta.</error-removing-referenced-version>
+      <confirm-restore>Czy na pewno chcesz przywrócić tę wersję?</confirm-restore>
       <confirm-delete>Czy na pewno chcesz usunąć tę wersję?</confirm-delete>
       <not-checked-out>Musisz sprawdzić ten węzeł przed przywróceniem.</not-checked-out>
       <invalid-item-state>Nie można przywrócić tej wersji, ponieważ jeden lub więcej elementów zostało usuniętych lub przeniesionych podczas innej sesji.</invalid-item-state>
@@ -1372,12 +1372,12 @@
     <action>
       <close>#{word.close}</close>
       <close-view>Zamknij Widok</close-view>
-      <compare-versions>Compare selected versions</compare-versions>
+      <compare-versions>Porównaj wybrane wersje</compare-versions>
     </action>
     <labels>
       <version>Wersja</version>
       <date>Data</date>
-      <author>Modified By</author>
+      <author>Zmodyfikowane przez</author>
       <summary>Streszczenie</summary>
       <action>Akcja</action>
     </labels>
@@ -1488,16 +1488,16 @@
   -->
   <UIDiff>
     <label>
-      <backTo>Back to version history</backTo>
+      <backTo>Powróć do historii wersji</backTo>
       <diffTitle>Porównanie dwóch wersji</diffTitle>
-      <noContent>There is no content to compare</noContent>
+      <noContent>Brak zawartości do porównania</noContent>
       <compareVerion>Wersja</compareVerion>
       <can-not-compare>Porównanie dwóch wersji nie powiodło się</can-not-compare>
-      <compare-unavailable>Version comparison is not available for this document</compare-unavailable>
-      <DateChange>On {0}</DateChange>
+      <compare-unavailable>Porównanie wersji nie jest dostępne dla tego dokumentu</compare-unavailable>
+      <DateChange>Włączone {0}</DateChange>
       <PreviousAndNextCompare>Zmiany od {0} do {1}</PreviousAndNextCompare>
       <ComparedWith>W porównaniu z</ComparedWith>
-      <restoredFrom>Restored from version {0}</restoredFrom>
+      <restoredFrom>Przywrócone z wersji {0}</restoredFrom>
     </label>
   </UIDiff>
   <!--
@@ -3104,7 +3104,7 @@
     <msg>
       <no-view-found>Brak wyświetleń stosowanych do twoich uprawnień dostępu w dysku '{0}'.</no-view-found>
       <access-denied>Odmowa dostępu. Możesz nie mieć uprawnień w obszarze roboczym napędu „{0}”.</access-denied>
-      <not-found>The document you are trying to access is no longer available.</not-found>
+      <not-found>Dokument do którego próbujesz uzyskać dostęp nie istnieje.</not-found>
       <empty-drives>Odmowa dostępu. W tym dysku brakuje repozytorium lub nie masz dostępu do żadnych dysków w tym repozytorium.</empty-drives>
       <workspace-not-exist>Napęd „{0}” został zapisany w jednej nierozpoznanej przestrzeni roboczej. Proszę zmienić konfigurację tego napędu.</workspace-not-exist>
     </msg>

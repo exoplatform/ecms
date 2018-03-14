@@ -7,15 +7,15 @@
   -->
   <UITreeList>
     <header>
-      <name>Name</name>
-      <action>Add</action>
+      <name>Pangalan</name>
+      <action>Magdagdag</action>
     </header>
     <info>
-      <child-not-found>Child not found!</child-not-found>
+      <child-not-found>Hindi matagpuan ang bata!</child-not-found>
     </info>
     <action>
       <title>
-        <select>Select</select>
+        <select>Piliin</select>
       </title>
     </action>
   </UITreeList>
@@ -26,8 +26,8 @@
   -->
   <UISelectedCategoriesGrid>
     <header>
-      <categoryName>Category name</categoryName>
-      <categoryPath>Category path</categoryPath>
+      <categoryName>Pangalan ng Kategorya</categoryName>
+      <categoryPath>Kategorya sa landas</categoryPath>
       <action>#{word.action}</action>
     </header>
     <action>
@@ -35,10 +35,10 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <cannot-save>Categories were not saved.</cannot-save>
-      <have-saved>Categories were saved successfully</have-saved>
-      <non-categories>Categories are wrong. Please select the appropriate categories.</non-categories>
-      <confirm-delete>Do you want to delete this category?</confirm-delete>
+      <cannot-save>Mga kategorya ay hindi na-save.</cannot-save>
+      <have-saved>Mga kategorya ay tagumpay na na-save</have-saved>
+      <non-categories>Ang mga kategorya ay mali. Pakiusap na pumili ng wasto na mga kategorya.</non-categories>
+      <confirm-delete>Nais mo ba na burahin ang kategorya na ito?</confirm-delete>
     </msg>
   </UISelectedCategoriesGrid>
   <!--
@@ -48,27 +48,27 @@
   -->
   <SelectUserOrGroup>
     <title>
-      <UIPermissionUser>Select User</UIPermissionUser>
-      <UIPermissionMembership>Select Membership</UIPermissionMembership>
-      <TaxoSelectUserOrGroup>Select Membership</TaxoSelectUserOrGroup>
+      <UIPermissionUser>Pumili ng gumagamit</UIPermissionUser>
+      <UIPermissionMembership>Pumili ng Pagpapamiyembro</UIPermissionMembership>
+      <TaxoSelectUserOrGroup>Pumili ng Pagpapamiyembro</TaxoSelectUserOrGroup>
     </title>
   </SelectUserOrGroup>
   <UIPermissionUser>
     <label>
-      <selectUser>Select User</selectUser>
-      <selectGroup>Browse and select a group</selectGroup>
+      <selectUser>Pumili ng gumagamit</selectUser>
+      <selectGroup>Mag-browse at pumili ng pangkat</selectGroup>
     </label>
   </UIPermissionUser>
   <UIPermissionMembership>
     <label>
-      <selectUser>Select Membership</selectUser>
-      <selectGroup>Browse and select a group</selectGroup>
+      <selectUser>Pumili ng Pagpapamiyembro</selectUser>
+      <selectGroup>Mag-browse at pumili ng pangkat</selectGroup>
     </label>
   </UIPermissionMembership>
   <TaxoSelectUserOrGroup>
     <label>
-      <selectGroup>Select Group</selectGroup>
-      <selectMembership>Select Membership</selectMembership>
+      <selectGroup>Pumili ng pangkat</selectGroup>
+      <selectMembership>Pumili sa Pagiging Kasapi</selectMembership>
     </label>
   </TaxoSelectUserOrGroup>
   <!--

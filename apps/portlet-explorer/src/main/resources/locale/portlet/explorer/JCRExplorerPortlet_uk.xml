@@ -300,7 +300,7 @@
       <ManageActions>Дії</ManageActions>
       <ExportNode>Експорт</ExportNode>
       <ImportNode>Import</ImportNode>
-      <OverloadThumbnail>Change Icon Image</OverloadThumbnail>
+      <OverloadThumbnail>Змінити Зображення Значка</OverloadThumbnail>
       <ManageHidden>Показати/Приховати зміст</ManageHidden>
       <ViewReferences>Посилання</ViewReferences>
       <ViewNodeType>Типи</ViewNodeType>
@@ -1355,7 +1355,7 @@
       <addLabel>Додати мітку</addLabel>
       <removeLable>Видалити мітку</removeLable>
       <restoreVersion>Відновити версію</restoreVersion>
-      <viewVersion>View Version</viewVersion>
+      <viewVersion>Перегляд Версії</viewVersion>
       <deleteVersion>Видалення версії</deleteVersion>
       <compareVersion>Порівняти з базовою версією</compareVersion>
     </tooltip>

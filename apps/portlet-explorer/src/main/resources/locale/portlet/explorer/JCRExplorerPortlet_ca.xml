@@ -300,7 +300,7 @@
       <ManageActions>Accions</ManageActions>
       <ExportNode>Exporta</ExportNode>
       <ImportNode>Importa</ImportNode>
-      <OverloadThumbnail>Change Icon Image</OverloadThumbnail>
+      <OverloadThumbnail>Personalitza l'icone</OverloadThumbnail>
       <ManageHidden>Mostra/Amaga el contingut</ManageHidden>
       <ViewReferences>Referències</ViewReferences>
       <ViewNodeType>Tipus</ViewNodeType>
@@ -1355,7 +1355,7 @@
       <addLabel>Afegeix una etiqueta</addLabel>
       <removeLable>Elimina l'Etiqueta</removeLable>
       <restoreVersion>Restaurar aquesta Versió</restoreVersion>
-      <viewVersion>View Version</viewVersion>
+      <viewVersion>Veure la versió</viewVersion>
       <deleteVersion>Suprimeix aquesta versió</deleteVersion>
       <compareVersion>Compara amb la versió de base</compareVersion>
     </tooltip>

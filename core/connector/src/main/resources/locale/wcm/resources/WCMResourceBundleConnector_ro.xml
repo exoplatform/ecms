@@ -18,18 +18,18 @@
     <label>
       <exo>
         <remote-edit>
-          <word>Open in Word</word>
-          <excel>Open in Excel</excel>
-          <powerpoint>Open in Powerpoint</powerpoint>
-          <desktop>Open on Desktop</desktop>
-          <desktop-app>Open in {0}</desktop-app>
+          <word>Deschide în Word</word>
+          <excel>Deschide în Excel</excel>
+          <powerpoint>Deschide în Powerpoint</powerpoint>
+          <desktop>Deschide pe Desktop</desktop>
+          <desktop-app>Deschide în {0}</desktop-app>
         </remote-edit>
       </exo>
     </label>
   </OpenInOfficeConnector>
   <DocumentAutoVersion>
     <msg>
-      <WrongMimeType>The mimetype of the file uploaded is unknown. No new version of {0} will be created.</WrongMimeType>
+      <WrongMimeType>Mimetype-ul fișierului încărcat este necunoscut. Nicio versiune noua a {0} nu va fi creată.</WrongMimeType>
     </msg>
   </DocumentAutoVersion>
 </bundle>

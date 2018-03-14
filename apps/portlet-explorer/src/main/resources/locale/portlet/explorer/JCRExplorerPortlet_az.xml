@@ -8,7 +8,7 @@
   <UICommentForm>
     <label>
       <name>Name</name>
-      <email>Email</email>
+      <email>E-poçt</email>
       <website>Website</website>
       <comment>Comment</comment>
     </label>
@@ -304,7 +304,7 @@
       <ManageHidden>Show/Hide Content</ManageHidden>
       <ViewReferences>References</ViewReferences>
       <ViewNodeType>Types</ViewNodeType>
-      <ViewPermissions>Permissions</ViewPermissions>
+      <ViewPermissions>İcazələr</ViewPermissions>
       <ViewProperties>Properties</ViewProperties>
       <ViewMetadatas>Metadata</ViewMetadatas>
       <ViewRelations>Show/Hide Relations</ViewRelations>
@@ -350,7 +350,7 @@
     </msg>
     <title>
       <select-tab>Select Tab</select-tab>
-      <SimpleSearch>Quick Search</SimpleSearch>
+      <SimpleSearch>Sürətli Axtarış</SimpleSearch>
       <AdvanceSearch>Advanced Search</AdvanceSearch>
       <SavedQueries>Saved Queries</SavedQueries>
       <ShowAllOwnedByUser>Show All My Items</ShowAllOwnedByUser>
@@ -555,7 +555,7 @@
       <label>
         <name>Name</name>
         <versionable>Versionable</versionable>
-        <exo_owner>Owner</exo_owner>
+        <exo_owner>Sahib</exo_owner>
         <auditing>Auditing</auditing>
         <exo_dateCreated>Date Created</exo_dateCreated>
         <exo_dateModified>Date Modifed</exo_dateModified>
@@ -585,7 +585,7 @@
       <Custom>Custom</Custom>
       <AddFolder>New Folder</AddFolder>
       <AddDocument>New Content</AddDocument>
-      <Upload>Upload Files</Upload>
+      <Upload>Faylları yüklə</Upload>
       <MoveNode>Move</MoveNode>
       <UnLock>Unlock</UnLock>
       <ViewProperties>View Properties</ViewProperties>
@@ -708,7 +708,7 @@
       <name>Name:</name>
       <type>Type:</type>
       <value>Value:</value>
-      <upload>Upload:</upload>
+      <upload>Yüklə:</upload>
       <namespace>Namespace:</namespace>
       <multiple>Multiple:</multiple>
       <property_select>Add New Property:</property_select>
@@ -772,8 +772,8 @@
   </UIPermissionInfo>
   <permission>
     <title>
-      <SelectUser>Select User</SelectUser>
-      <SelectMember>Select Membership</SelectMember>
+      <SelectUser>İstifadəçini seç</SelectUser>
+      <SelectMember>Üzvlüyü seç</SelectMember>
       <AddAny>Select Everyone</AddAny>
     </title>
   </permission>
@@ -784,15 +784,15 @@
   -->
   <SelectUserOrGroup>
     <title>
-      <UIGroupSelector>Select User</UIGroupSelector>
+      <UIGroupSelector>İstifadəçini seç</UIGroupSelector>
       <UIPermissionSelector>Select Member</UIPermissionSelector>
-      <UIGroupMemberSelector>Select Membership</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Üzvlüyü seç</UIGroupMemberSelector>
     </title>
   </SelectUserOrGroup>
   <UIGroupSelector>
     <label>
       <selectGroup>Browse and Select a Group</selectGroup>
-      <selectUser>Select User</selectUser>
+      <selectUser>İstifadəçini seç</selectUser>
     </label>
     <msg>
       <not-change-owner>'{0}' is the owner of this item and has full control permission.</not-change-owner>
@@ -1281,7 +1281,7 @@
       <name>Name</name>
       <type>Type</type>
       <statement>Statement</statement>
-      <permission>Permissions</permission>
+      <permission>İcazələr</permission>
       <action>Actions</action>
     </header>
     <tooltip>
@@ -1420,7 +1420,7 @@
     </eventName>
     <label>
       <operation>Operation</operation>
-      <userName>Username</userName>
+      <userName>İstifadəçi Adı</userName>
       <date>Date</date>
       <version>Version</version>
     </label>
@@ -2088,9 +2088,9 @@
   </RepeatIntervalValidator>
   <UIPermissionSelector>
     <label>
-      <selectGroup>Select Group</selectGroup>
-      <selectUser>Select User</selectUser>
-      <selectMembership>Select Membership</selectMembership>
+      <selectGroup>Qrupu seç</selectGroup>
+      <selectUser>İstifadəçini seç</selectUser>
+      <selectMembership>Üzvlüyü seç</selectMembership>
     </label>
   </UIPermissionSelector>
   <!--
@@ -2208,9 +2208,9 @@
   -->
   <UIGroupMemberSelector>
     <label>
-      <selectGroup>Select Group</selectGroup>
-      <selectUser>Select User</selectUser>
-      <selectMembership>Select Membership</selectMembership>
+      <selectGroup>Qrupu seç</selectGroup>
+      <selectUser>İstifadəçini seç</selectUser>
+      <selectMembership>Üzvlüyü seç</selectMembership>
     </label>
   </UIGroupMemberSelector>
   <!--
@@ -3185,11 +3185,11 @@
     <InvalidCharacters>Invalid characters will be changed by '-'</InvalidCharacters>
     <DropFileMessage>Drop your files here in the current folder</DropFileMessage>
     <Close>#{word.close}</Close>
-    <in>in</in>
+    <in>içində</in>
     <MaxFileSizeAlert>The file size exceeds the limit of</MaxFileSizeAlert>
     <Waiting>Waiting</Waiting>
     <Error>Error</Error>
-    <or>or</or>
+    <or>və ya</or>
     <AlreadyInUse>Already in use</AlreadyInUse>
     <Keep>Keep both</Keep>
     <Replace>Replace</Replace>

@@ -34,10 +34,10 @@
 
   <Drives>
     <label>
-      <ManagedSites>Site Management</ManagedSites>
+      <ManagedSites>Správa stránky</ManagedSites>
       <SharedSite>Sdílený web</SharedSite>
-      <PersonalDocuments>Personal Documents</PersonalDocuments>
-      <UserDocuments>{0} Documents</UserDocuments>
+      <PersonalDocuments>Osobní dokumenty</PersonalDocuments>
+      <UserDocuments>{0} Dokumenty</UserDocuments>
       <Collaboration>Spolupráce</Collaboration>
       <Trash>Koš</Trash>
     </label>
@@ -206,15 +206,15 @@
     <msg>
       <time-to-late>Doba hledání je příliš dlouhá.</time-to-late>
       <empty-field>Zadejte platné klíčové slovo pro vyhledávání.</empty-field>
-      <empty-name>Please enter the name to search</empty-name>
-      <empty-content>Please enter a word or phrase to search</empty-content>
-      <empty-property>Please select a property</empty-property>
-      <empty-property-keyword>Please enter a keyword for the property</empty-property-keyword>
-      <empty-doctype>Please select a document type</empty-doctype>
-      <empty-startDate>"From Date" is required</empty-startDate>
+      <empty-name>Zadejte název, který chcete vyhledat</empty-name>
+      <empty-content>Zadejte slovo nebo frázi, kterou chcete vyhledat</empty-content>
+      <empty-property>Zvolte vlastnost</empty-property>
+      <empty-property-keyword>Zadejte klíčové slovo pro danou vlastnost</empty-property-keyword>
+      <empty-doctype>Zvolte typ dokumentu</empty-doctype>
+      <empty-startDate>„Od data“ je povinné</empty-startDate>
       <invalid-format>Neplatný formát data/času v poli '{0}'.</invalid-format>
       <invalid-date>"K datu" musí být pozdější než "Datum od"</invalid-date>
-      <invalid-startDate>"From Date" must not be later than today</invalid-startDate>
+      <invalid-startDate>„Od data“ nesmí být pozdější než dnes</invalid-startDate>
       <invalid-nodeType>Typ uzlu "{0}" je neplatný. Zkontrolujte znovu.</invalid-nodeType>
       <invalid-keyword>Klíčové slovo je neplatné. Některé znaky nejsou podporovány.</invalid-keyword>
     </msg>
@@ -359,7 +359,7 @@
       <ColumnPageConfigs>Nastavení sloupcové stránky</ColumnPageConfigs>
       <RowPageConfigs>Nastavení řádkové stránky</RowPageConfigs>
       <TabsPageConfigs>Nastavení stránky s taby</TabsPageConfigs>
-      <MixPageConfigs>Mixed</MixPageConfigs>
+      <MixPageConfigs>Nastavení smíšené stránky</MixPageConfigs>
     </item>
   </UIDropDownPageTemp>
 
@@ -450,7 +450,7 @@
 
   <UIViewMetadataForm>
     <msg>
-      <Invalid-number>Please enter a valid number.</Invalid-number>
+      <Invalid-number>Zadejte platné číslo.</Invalid-number>
     </msg>
   </UIViewMetadataForm>
 </bundle>

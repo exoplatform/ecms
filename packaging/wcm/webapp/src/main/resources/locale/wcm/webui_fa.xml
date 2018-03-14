@@ -359,7 +359,7 @@
       <ColumnPageConfigs>تنظیمات ستون صفحه</ColumnPageConfigs>
       <RowPageConfigs>تنظیمات ردیف صفحه</RowPageConfigs>
       <TabsPageConfigs>تنظیمات زبانه صفحه</TabsPageConfigs>
-      <MixPageConfigs>Mixed</MixPageConfigs>
+      <MixPageConfigs>تنظیمات ترکیب صفحه</MixPageConfigs>
     </item>
   </UIDropDownPageTemp>
 

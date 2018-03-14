@@ -6,17 +6,17 @@
   <Ecm>
     <dialog>
       <label>
-        <end-time>End Time</end-time>
-        <start-time>Start Time</start-time>
-        <lifecycle>Lifecycle</lifecycle>
-        <mimeType>Mime Type</mimeType>
-        <repeat-count>Repeat Count</repeat-count>
-        <time-interval>Time Interval</time-interval>
-        <query-items>Query Items</query-items>
-        <schedule-type>Schedule Type</schedule-type>
-        <remove>Remove Item</remove>
-        <add>Add Item</add>
-        <expand>Expand This</expand>
+        <end-time>Waktu berakhir</end-time>
+        <start-time>Waktu mulai</start-time>
+        <lifecycle>Lingkaran kehidupan</lifecycle>
+        <mimeType>Jenis Mime</mimeType>
+        <repeat-count>Menghitung ulang</repeat-count>
+        <time-interval>Jarak waktu</time-interval>
+        <query-items>Item Kueri</query-items>
+        <schedule-type>Jenis Jadwal</schedule-type>
+        <remove>Hapus Item</remove>
+        <add>Tambah Item</add>
+        <expand>Perluas ini</expand>
       </label>
     </dialog>
   </Ecm>
@@ -24,12 +24,12 @@
   <UIDocumentForm>
     <label>
       <title>#{word.title}</title>
-      <link>Link</link>
+      <link>Tautan</link>
       <contentHtml>#{word.content}</contentHtml>
       <content>#{word.content}</content>
       <contentPlain>#{word.content}</contentPlain>
-      <name>Name</name>
-    <categories>Categories</categories>
+      <name>Nama</name>
+    <categories>Kategori</categories>
     </label>
   </UIDocumentForm>
  
@@ -45,8 +45,8 @@
   <HtmlFile>
     <dialog>
       <label>
-        <name>Name</name>
-        <content>Content</content>
+        <name>Nama</name>
+        <content>Isi</content>
       </label>
     </dialog>
   </HtmlFile>
@@ -58,12 +58,12 @@
     <dialog>
       <label>
         <name>#{word.name}</name>
-        <categories>Categories</categories>
+        <categories>Kategori</categories>
         <mimeType>#{Ecm.dialog.label.mimeType}</mimeType>
-        <width>Width</width>
-        <height>Height</height>
+        <width>Lebar</width>
+        <height>Tinggi</height>
         <content>#{word.content}</content>
-        <re-upload>The file already exists. You can delete it and upload another file.</re-upload>
+        <re-upload>Berkasnya sudah ada. anda dapat menghapus dan mengupload berkas lain.</re-upload>
       </label>
     </dialog>
   </File>
@@ -71,22 +71,22 @@
   <UIActionForm>
     <label>
       <description>#{word.description}</description>
-      <port>Port</port>
+      <port>Pelabuhan</port>
       <userName>#{word.userName}</userName>
-      <password>Password</password>
-      <link>Link</link>
-      <to>Send Mail To</to>
+      <password>Kata Sandi</password>
+      <link>Tautan</link>
+      <to>Kirim Surat ke</to>
       <actionName>#{word.name}</actionName>
     </label>
   </UIActionForm>
   <EditFormAction>
     <label>
       <description>#{word.description}</description>
-      <port>Port</port>
+      <port>Pelabuhan</port>
       <userName>#{word.userName}</userName>
-      <password>Password</password>
-      <link>Link</link>
-      <to>Send Mail To</to>
+      <password>Kata Sandi</password>
+      <link>Tautan</link>
+      <to>Kirim Surat ke</to>
       <actionName>#{word.name}</actionName>
     </label>
   </EditFormAction>
@@ -120,7 +120,7 @@
         <end-time>#{Ecm.dialog.label.end-time}</end-time>
         <repeat-count>#{Ecm.dialog.label.repeat-count}</repeat-count>
         <time-inteval>#{Ecm.dialog.label.time-interval}</time-inteval>
-        <cron-expression>Cron expression</cron-expression>
+        <cron-expression>Cron ekspresi</cron-expression>
         <description>#{word.description}</description>
       </label>
     </dialog>
@@ -151,19 +151,19 @@
     <dialog>
       <label>
         <title>#{word.title}:</title>
-        <creator>Creator:</creator>
+        <creator>Pencipta:</creator>
         <subject>#{word.subject}:</subject>
-        <source>Source:</source>
-        <contributor>Contributor:</contributor>
-        <resource-type>Resource Type:</resource-type>
+        <source>Sumber:</source>
+        <contributor>Penyumbang:</contributor>
+        <resource-type>Jenis Sumber Daya:</resource-type>
         <date>#{word.date}:</date>
-        <publisher>Publisher:</publisher>
+        <publisher>Penerbit:</publisher>
         <description>#{word.description}:</description>
-        <rights>Rights:</rights>
-        <relation>Relation:</relation>
+        <rights>Hak:</rights>
+        <relation>Hubungan:</relation>
         <format>#{word.format}:</format>
-        <coverage>Coverage:</coverage>
-        <identifier>Identifier:</identifier>
+        <coverage>Cakupan:</coverage>
+        <identifier>Pengenal:</identifier>
         <language>Language:</language>
       </label>
     </dialog>
@@ -175,8 +175,8 @@
   <Actionable>
     <dialog>
       <label>
-        <primary-type>Primary Type</primary-type>
-        <mixin-types>Mixin Types</mixin-types>
+        <primary-type>Jenis utama</primary-type>
+        <mixin-types>Jenis Campuran</mixin-types>
       </label>
     </dialog>
   </Actionable>
@@ -187,10 +187,10 @@
   <Move>
     <dialog>
       <label>
-        <destination-workpsace>Destination Workspace</destination-workpsace>
-        <destination-path>Destination Path</destination-path>
-        <primary-type>Primary Type</primary-type>
-        <mixin-types>Mixin Types</mixin-types>
+        <destination-workpsace>Tujuan kerja</destination-workpsace>
+        <destination-path>Jalur Tujuan</destination-path>
+        <primary-type>Tipe utama</primary-type>
+        <mixin-types>Jenis Campuran</mixin-types>
       </label>
     </dialog>
   </Move>
@@ -200,8 +200,8 @@
   <Published>
     <dialog>
       <label>
-        <start-publication>Start Publication</start-publication>
-        <end-publication>End Publication</end-publication>
+        <start-publication>Mulai Publikasi</start-publication>
+        <end-publication>Publikasi Akhir</end-publication>
       </label>
     </dialog>
   </Published>
@@ -222,7 +222,7 @@
   <Relationable>
     <dialog>
       <label>
-        <relation>Relation</relation>
+        <relation>Hubungan</relation>
       </label>
     </dialog>
   </Relationable>
@@ -232,7 +232,7 @@
   <RssEnable>
     <dialog>
       <label>
-        <title>Title</title>
+        <title>Judul</title>
         <summary>#{word.summary}</summary>
       </label>
     </dialog>
@@ -244,11 +244,11 @@
   <Versionable>
     <dialog>
       <label>
-        <version-history>Version History</version-history>
-        <base-version>Base Version</base-version>
-        <is-checked-out>Is Checked out</is-checked-out>
-        <predecessors>Predecessors</predecessors>
-        <merge-failed>Merge Failed</merge-failed>
+        <version-history>Sejarah Versi</version-history>
+        <base-version>Versi dasar</base-version>
+        <is-checked-out>Apakah periksa</is-checked-out>
+        <predecessors>Pendahulu</predecessors>
+        <merge-failed>Gabung Gagal</merge-failed>
         <uuid>UUID</uuid>
       </label>
     </dialog>
@@ -260,10 +260,10 @@
   <ResouceContainer>
     <dialog>
       <label>
-        <name>Name</name>
-        <autoload>Auto Load</autoload>
-        <minetype>MIME Type</minetype>
-        <content>Content</content>
+        <name>Nama</name>
+        <autoload>Beban otomatis</autoload>
+        <minetype>Jenis MIME</minetype>
+        <content>Konten</content>
       </label>
     </dialog>
   </ResouceContainer>
@@ -272,17 +272,17 @@
   -->
   <EmailAddressValidator>
     <msg>
-      <Invalid-input>The email address is invalid.</Invalid-input>
+      <Invalid-input>Alamat emailnya tidak valid.</Invalid-input>
     </msg>
   </EmailAddressValidator>
   <EmptyFieldValidator>
     <msg>
-      <empty-input>The field '{0}' is required. Please enter your value.</empty-input>
+      <empty-input>Bidangnya '{0}' ialah diperlukan. Silahkan masukkan nilai anda.</empty-input>
     </msg>
   </EmptyFieldValidator>
   <NumberFormatValidator>
     <msg>
-      <Invalid-number>The field '{0}' is invalid.</Invalid-number>
+      <Invalid-number>Bidangnya '{0}' tidak valid.</Invalid-number>
     </msg>
   </NumberFormatValidator>
   <!--
@@ -294,17 +294,17 @@
     <dialog>
       <label>
         <id>Id</id>
-        <name>Name</name>
-        <lifecycle>Lifecycle</lifecycle>
-        <homePath>Home Path</homePath>
-        <targetWorkspace>Target Workspace</targetWorkspace>
-        <targetPath>Target Path</targetPath>
+        <name>Nama</name>
+        <lifecycle>Lingkaran kehidupan</lifecycle>
+        <homePath>Jalur rumah</homePath>
+        <targetWorkspace>Sasaran ruang kerja</targetWorkspace>
+        <targetPath>Jalur Sasaran</targetPath>
       </label>
     </dialog>
   </ScriptAction>
   <UIDialogForm>
    <form>
-   <DialogFormException>Cannot save this document. There may be a problem with the pre-save interceptor.</DialogFormException>
+   <DialogFormException>Tidak dapat menyimpan dokumen ini. Mungkin ada masalah dengan sebuah pencegat pra-simpan.</DialogFormException>
    </form>
   </UIDialogForm>
 
@@ -313,36 +313,36 @@
 
   ###################### resoucebundle exo:taxonomyAction dialogs template ####
   -->
-<no>No</no>
-<yes>Yes</yes>
-<true>True</true>
-<false>False</false>
-<Electronic>Electronic</Electronic>
-<Paper>Paper</Paper>
-<NONE>None</NONE>
-<CLASSIFIED>Classified</CLASSIFIED>
-<UNCLASSIFIED>Unclassified</UNCLASSIFIED>
-<NOCONTRACT>No Contract</NOCONTRACT>
-<one-minute>One Minute</one-minute>
-<hourly>Hourly</hourly>
-<daily>Daily</daily>
-<quarterly>Quarterly</quarterly>
-<yearly>Yearly</yearly>
-<ten-years>Ten Years</ten-years>
-<read>User Action</read>
-  <schedule>Scheduler</schedule>
-  <node_added>Content Addition</node_added>
-  <node_removed>Content Removal</node_removed>
-  <property_added>Property Addition</property_added>
-  <property_removed>Property Removal</property_removed>
-  <property_changed>Property Modification</property_changed>
+<no>Tidak</no>
+<yes>iya nih</yes>
+<true>Benar</true>
+<false>Salah</false>
+<Electronic>Elektronik</Electronic>
+<Paper>Kertas</Paper>
+<NONE>Tak satupun</NONE>
+<CLASSIFIED>Rahasia</CLASSIFIED>
+<UNCLASSIFIED>Tidak diklasifikasikan</UNCLASSIFIED>
+<NOCONTRACT>Tidak ada kontrak</NOCONTRACT>
+<one-minute>Satu menit</one-minute>
+<hourly>Sejam</hourly>
+<daily>Harian</daily>
+<quarterly>Triwulanan</quarterly>
+<yearly>Tahunan</yearly>
+<ten-years>Sepuluh tahun</ten-years>
+<read>Aksi Pengguna</read>
+  <schedule>Penjadwal</schedule>
+  <node_added>Penambahan konten</node_added>
+  <node_removed>Penghapusan Konten</node_removed>
+  <property_added>Penambahan Properti</property_added>
+  <property_removed>Penghapusan Properti</property_removed>
+  <property_changed>Modifikasi Properti</property_changed>
 
   <ScriptAction>
     <dialog>
       <label>
-        <isDeep>Is Deep</isDeep>
-        <nodetypes>Node Types</nodetypes>
-        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
+        <isDeep>Apakah Dalam</isDeep>
+        <nodetypes>Jenis simpul</nodetypes>
+        <affectedNodeTypeNames>Jenis simpul yang terkena</affectedNodeTypeNames>
       </label>
     </dialog>
   </ScriptAction>
@@ -350,9 +350,9 @@
   <AddMetadata>
     <dialog>
       <label>
-        <isDeep>Is Deep</isDeep>
-        <nodetypes>Node Types</nodetypes>
-        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
+        <isDeep>Apakah Dalam</isDeep>
+        <nodetypes>Jenis simpul</nodetypes>
+        <affectedNodeTypeNames>Dipengaruhi jenis simpul</affectedNodeTypeNames>
       </label>
     </dialog>
   </AddMetadata>
@@ -360,9 +360,9 @@
   <EnableVersioning>
     <dialog>
       <label>
-        <isDeep>Is Deep</isDeep>
-        <nodetypes>Node Types</nodetypes>
-        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
+        <isDeep>Apakah Dalam</isDeep>
+        <nodetypes>Jenis simpul</nodetypes>
+        <affectedNodeTypeNames>Jenis simpul yang terkena</affectedNodeTypeNames>
       </label>
     </dialog>
   </EnableVersioning>
@@ -370,9 +370,9 @@
   <AutoVersioning>
     <dialog>
       <label>
-        <isDeep>Is Deep</isDeep>
-        <nodetypes>Node Types</nodetypes>
-        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
+        <isDeep>Apakah Dalam</isDeep>
+        <nodetypes>Jenis simpul</nodetypes>
+        <affectedNodeTypeNames>Jenis simpul yang terkena</affectedNodeTypeNames>
       </label>
     </dialog>
   </AutoVersioning>
@@ -380,15 +380,15 @@
   <AccessibleMedia>
   <dialog>
   <label>
-  <captions>Captions</captions>
-<audioDescription>Audio description</audioDescription>
-<alternativeText>Alternative text</alternativeText>
+  <captions>Keterangan</captions>
+<audioDescription>Deskripsi suara</audioDescription>
+<alternativeText>Teks alternatif</alternativeText>
 </label>
 </dialog>
 <help>
-<CaptionsHelp>Captions should provide text of dialog and important sounds</CaptionsHelp>
-<AudioDescriptionHelp>An audio description is a narrated track of the video</AudioDescriptionHelp>
-<AlternativeTextHelp>Provide an accessible, alternative way of presenting the information</AlternativeTextHelp>
+<CaptionsHelp>Keterangan harus menyediakan teks percakapan dan suara penting</CaptionsHelp>
+<AudioDescriptionHelp>Sebuah deskripsi audio ialah sebuah diriwayatkan lacak dari video</AudioDescriptionHelp>
+<AlternativeTextHelp>Menyediakan sebuah tempat yang mudah diakses, cara alternatif dari penyajian informasi</AlternativeTextHelp>
 </help>
 </AccessibleMedia>
   

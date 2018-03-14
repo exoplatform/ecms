@@ -977,7 +977,7 @@
       <watchDocument>Przeglądaj dokument</watchDocument>
       <taggingDocument>Znacznik dokumentu</taggingDocument>
       <viewMetadatas>Zobacz metadane</viewMetadatas>
-      <overloadThumbnail>Change Icon Image</overloadThumbnail>
+      <overloadThumbnail>Miniatura przeciążenia</overloadThumbnail>
       <manageHidden>Ukryj/Pokaż zawartość</manageHidden>
       <comment>Komentarz</comment>
       <vote>Głosuj</vote>
@@ -2482,7 +2482,7 @@
       <Add>Dodaj</Add>
     </action>
     <label>
-      <userOrGroup>Memberships:</userOrGroup>
+      <userOrGroup>Członkostwo:</userOrGroup>
     </label>
     <msg>
       <userOrGroup-alreadyExists>To członkostwo już istnieje. Proszę wybrać inne.</userOrGroup-alreadyExists>

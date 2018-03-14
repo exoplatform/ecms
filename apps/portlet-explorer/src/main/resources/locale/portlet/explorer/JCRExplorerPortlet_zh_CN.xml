@@ -300,7 +300,7 @@
       <ManageActions>操作</ManageActions>
       <ExportNode>导出</ExportNode>
       <ImportNode>导入</ImportNode>
-      <OverloadThumbnail>Change Icon Image</OverloadThumbnail>
+      <OverloadThumbnail>超载的缩略图</OverloadThumbnail>
       <ManageHidden>显示/隐藏内容</ManageHidden>
       <ViewReferences>引用</ViewReferences>
       <ViewNodeType>类型</ViewNodeType>
@@ -1355,7 +1355,7 @@
       <addLabel>添加标签</addLabel>
       <removeLable>移除标签</removeLable>
       <restoreVersion>还原的版本</restoreVersion>
-      <viewVersion>View Version</viewVersion>
+      <viewVersion>查看版本信息</viewVersion>
       <deleteVersion>删除版本</deleteVersion>
       <compareVersion>与基础版本比较</compareVersion>
     </tooltip>

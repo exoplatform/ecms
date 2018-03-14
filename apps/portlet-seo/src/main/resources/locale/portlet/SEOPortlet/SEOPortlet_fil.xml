@@ -3,44 +3,44 @@
   <UISEOForm>
     <label>  
       <title>Ang Pamagat:</title>
-      <description>Description:</description>
+      <description>Ang Paglalarawan:</description>
       <keywords>Ang mga Keyword:</keywords>
       <language>Ang Wika:</language>
       <robots>Ang Mga Robot:</robots>
       <sitemap>Ang Saytmap:</sitemap>
-      <sitemapvisible>Visible in Sitemap</sitemapvisible>
+      <sitemapvisible>Ang nakikita sa Sitemap</sitemapvisible>
     <isInherited>Ang mana mula sa magulang na pahina</isInherited>
-      <priority>Priority:</priority>
+      <priority>Ang Prayoridad:</priority>
       <frequency>Ang Dalas:</frequency>
-      <select-language>Select a language</select-language>
+      <select-language>Ang Pumili ng lenggwahe</select-language>
       <option>
-        <Always>Always</Always>
+        <Always>Ang Palagi</Always>
         <Hourly>Oras-Oras</Hourly>
-        <Daily>Daily</Daily>
-        <Weekly>Weekly</Weekly>
-        <Monthly>Monthly</Monthly>
-        <Yearly>Yearly</Yearly>
-        <Never>Never</Never>
+        <Daily>Ang Araw-araw</Daily>
+        <Weekly>Ang Linggo-linggo</Weekly>
+        <Monthly>Ang Buwanan</Monthly>
+        <Yearly>Ang Taon-taon</Yearly>
+        <Never>Kailanma'y Hindi</Never>
       </option> 
     </label>
     <tip>
-  <priority>Valid values range from 0.0 to 1.0</priority>
+  <priority>Ang Balido na halaga mula sa 0.0 hanggang sa 1.0</priority>
   </tip>   
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <repository-exception>An unexpected error occurred while saving the page metadata.</repository-exception>
+      <repository-exception>Ang hindi inaasahan na mali habang nagaganap ang pag-save ng metadata sa pahina.</repository-exception>
       <confirm-delete>Sigurado ka bang gusto mong burahin itong mga SEO data?</confirm-delete>      
     </msg>
     <title>
-    <seo-delete>Delete</seo-delete>
+    <seo-delete>Ang Burahin</seo-delete>
     </title>
   <help> 
   <priority>Wastong hanay ay mula sa 0.0 hanggang sa 1.0.</priority>
-  <description>Help searchers: let them know that the following page has a link that they are looking for.</description>
-  <keywords>Most important terms in the page separated by a comma.</keywords>  
+  <description>Tulungan ang mga nagsasaliksik: hayaan sila na malaman ang mga sumusunod na pahina sa naka-link na kanilang hinahanap.</description>
+  <keywords>Ang pinaka importante sa mga tema na nasa pahina ay pinaghiwalay ng kuwit.</keywords>  
   </help>  
   </UISEOForm>
   <UISEOPopupWindow>
@@ -58,7 +58,7 @@
   </UISEOToolbarForm>  
   <FloatNumberValidator>
     <msg>
-      <Invalid-number>The value of the Priority field must be in a numerical format. The valid values range is from 0.0 to 1.0.</Invalid-number>
+      <Invalid-number>Ang halaga ng Prayoridad sa patlang ay kinakailangan na naka pormat sa numero. Ang balidona mga halaga ay mula sa 0.0 hanggang sa 1.0.</Invalid-number>
     </msg>
   </FloatNumberValidator>  
   

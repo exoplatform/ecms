@@ -359,7 +359,7 @@
       <ColumnPageConfigs>Διαμορφώσεις στηλών σελίδων</ColumnPageConfigs>
       <RowPageConfigs>Διαμορφώσεις γραμμών σελίδων</RowPageConfigs>
       <TabsPageConfigs>Διαμορφώσεις καρτελών σελίδων</TabsPageConfigs>
-      <MixPageConfigs>Mixed</MixPageConfigs>
+      <MixPageConfigs>Διαμορφώσεις μεικτών σελίδων</MixPageConfigs>
     </item>
   </UIDropDownPageTemp>
 

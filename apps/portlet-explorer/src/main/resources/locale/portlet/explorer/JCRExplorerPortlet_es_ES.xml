@@ -300,7 +300,7 @@
       <ManageActions>Acciones</ManageActions>
       <ExportNode>Exportar</ExportNode>
       <ImportNode>Importar</ImportNode>
-      <OverloadThumbnail>Change Icon Image</OverloadThumbnail>
+      <OverloadThumbnail>Cambiar Imagen del Icono</OverloadThumbnail>
       <ManageHidden>Mostrar/ Ocultar Contenido</ManageHidden>
       <ViewReferences>Referencias</ViewReferences>
       <ViewNodeType>Tipos</ViewNodeType>
@@ -1355,7 +1355,7 @@
       <addLabel>Añadir etiqueta</addLabel>
       <removeLable>Eliminar la Etiqueta</removeLable>
       <restoreVersion>Restablecer la Versión</restoreVersion>
-      <viewVersion>View Version</viewVersion>
+      <viewVersion>Ver Versión</viewVersion>
       <deleteVersion>Borrar versión</deleteVersion>
       <compareVersion>Comparar con la versión de base</compareVersion>
     </tooltip>

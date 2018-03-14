@@ -30,7 +30,7 @@
         <comment-by>Comentat de către</comment-by>
         <email>E-mail</email>
         <site>Site-ul</site>
-        <lastComment>Last comment posted by {user} at {time}</lastComment>
+        <lastComment>Ultimul comentariu a fost postat de {user} la {time}</lastComment>
         <Less_Than_A_Minute>mai puţin de un minut în urmă</Less_Than_A_Minute>
         <About_A_Minute>aproximativ cu un minut în urmă</About_A_Minute>
         <About_x_Minutes>aproximativ {0} minute în urmă</About_x_Minutes>
@@ -51,12 +51,12 @@
     <view>
       <label>
         <not-viewable>Acest document nu poate fi previzualizat.</not-viewable>
-        <pdf-max-size>The preview is not available for content larger than {0} MB.</pdf-max-size>
-        <pdf-max-page>The preview is not available for content with over {0} pages.</pdf-max-page>
+        <pdf-max-size>Vizualizarea nu este disponibilă pentru conținut mai mare de {0} MB.</pdf-max-size>
+        <pdf-max-page>Vizualizarea nu este disponibilă pentru conținut cu peste {0} pagini.</pdf-max-page>
         <using-webDAV>sau deschide în Office</using-webDAV>
-        <open-on-desktop>Open on Desktop</open-on-desktop>
-        <open-in-documents>Open in Documents</open-in-documents>
-        <open-in-documents-tooltip>Open this file in Documents app</open-in-documents-tooltip>
+        <open-on-desktop>Deschide pe Desktop</open-on-desktop>
+        <open-in-documents>Deschide în Documente</open-in-documents>
+        <open-in-documents-tooltip>Deschide acest fișier în aplicația de documente</open-in-documents-tooltip>
         <file-size-too-big>Conținutul acestui fișier este prea mare. Ar trebui să-l salvați și să-l deschideți pe calculator.</file-size-too-big>
         <webDAV>Vizualizare WebDAV</webDAV>
         <download>Descarcă</download>
@@ -87,7 +87,7 @@
   <Vote>
     <view>
       <label>
-        <avg-rating>Rate</avg-rating>
+        <avg-rating>Rating mediu</avg-rating>
         <subscription>Voturi</subscription>
       </label>
     </view>

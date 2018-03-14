@@ -977,7 +977,7 @@
       <watchDocument>Controlla Documento</watchDocument>
       <taggingDocument>Tagga Documento</taggingDocument>
       <viewMetadatas>Visualizza Metadati</viewMetadatas>
-      <overloadThumbnail>Change Icon Image</overloadThumbnail>
+      <overloadThumbnail>Carica Anteprima</overloadThumbnail>
       <manageHidden>Mostra/Nascondi contenuto</manageHidden>
       <comment>Commenta</comment>
       <vote>Vota Documento</vote>
