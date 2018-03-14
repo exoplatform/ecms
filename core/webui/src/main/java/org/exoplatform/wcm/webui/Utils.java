@@ -68,6 +68,8 @@ import org.exoplatform.services.cms.mimetype.DMSMimeTypeResolver;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.access.PermissionType;
 import org.exoplatform.services.jcr.core.ExtendedNode;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.services.security.Identity;
 import org.exoplatform.services.security.IdentityRegistry;
 import org.exoplatform.services.security.MembershipEntry;
@@ -100,6 +102,8 @@ public class Utils {
 
   /** The Quick edit attribute for HTTPSession */
   public static final String TURN_ON_QUICK_EDIT = "turnOnQuickEdit";
+
+  private static final Log LOG = ExoLogger.getExoLogger(Utils.class);
 
   private static final String SQL_PARAM_PATTERN = "\\$\\{([^\\$\\{\\}])+\\}";
   
@@ -407,12 +411,25 @@ public class Utils {
    * @throws RepositoryException
    * @throws AccessControlException
    */
-  public static boolean isShowDelete(Node content) throws AccessControlException, RepositoryException {
+  public static boolean isShowDelete(Node content) throws RepositoryException {
     boolean isEditMode = false;
     if (WCMComposer.MODE_EDIT.equals(getCurrentMode())) isEditMode = true;
-    ((ExtendedNode) content).checkPermission(PermissionType.SET_PROPERTY);
-    ((ExtendedNode) content).checkPermission(PermissionType.ADD_NODE);
-    ((ExtendedNode) content).checkPermission(PermissionType.REMOVE);
+    try {
+      ((ExtendedNode) content).checkPermission(PermissionType.SET_PROPERTY);
+      ((ExtendedNode) content).checkPermission(PermissionType.ADD_NODE);
+      ((ExtendedNode) content).checkPermission(PermissionType.REMOVE);
+    } catch (AccessControlException e) {
+      isEditMode = false;
+    } catch (Exception e) {
+      String nodePath = null;
+      try {
+        nodePath = content.getPath();
+      } catch (Exception e1) {
+        // Nothing to log
+      }
+      LOG.error("Error while checking permissions on node " + nodePath, e);
+      isEditMode = false;
+    }
     return isEditMode;
   }
 
