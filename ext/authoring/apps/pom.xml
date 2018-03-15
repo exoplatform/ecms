@@ -4,7 +4,7 @@
   <parent>
     <artifactId>ecms-ext-authoring</artifactId>
     <groupId>org.exoplatform.ecms</groupId>
-    <version>5.0.x-SNAPSHOT</version>
+    <version>5.0.0-RC14</version>
   </parent>
   <artifactId>ecms-ext-authoring-apps</artifactId>
   <packaging>war</packaging>
