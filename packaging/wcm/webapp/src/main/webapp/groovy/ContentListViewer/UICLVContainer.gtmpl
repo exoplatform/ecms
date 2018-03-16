@@ -24,9 +24,9 @@
     def manageContentBlockId = portletId + "-ManageContentBlock";   
     
     boolean isShowInfoBar = uicomponent.isShowInfoBar();    
-    def edittingStyle = "z-index: 10";
+    def edittingStyle = "z-index: 1000";
       if (isShowInfoBar)
-        edittingStyle = "z-index: 10; top:20px";
+        edittingStyle = "z-index: 1000; top:20px";
     if (Utils.isShowQuickEdit()) {
     %>
    <div class="edittingToolBarContainer" style="$edittingStyle">

@@ -49,9 +49,9 @@
         jsManager.require("SHARED/quick-edit", "quickEdit").
         addScripts("quickEdit.InlineEditor.loadLanguage(" + multiLangMsg + ");");
       }			
-			def edittingStyle = "z-index: 5";
+			def edittingStyle = "z-index: 1000";
 			if (isShowInfoBar)
-				edittingStyle = "z-index: 5; top:20px";
+				edittingStyle = "z-index: 1000; top:20px";
 			%>			
 			
 			<div class="UIPresentationContainer" id="$uicomponent.id">
@@ -164,7 +164,7 @@
 	      <div class="UIPresentationContainer" id="$uicomponent.id" 
 	      	onmouseover="this.className = 'UIPresentationContainer $hoverClass'" onmouseout="this.className = 'UIPresentationContainer' "
 	      	onfocus="this.className = 'UIPresentationContainer $hoverClass'" onblur="this.className = 'UIPresentationContainer' ">
-  				<div class="edittingToolBarContainer" style=" z-index: 5">
+  				<div class="edittingToolBarContainer" style=" z-index: 1000">
 						<div class="edittingToolBar" >
 							<div class="btn-group">
 								<a class="btn" href="<%= uicomponent.event("Preferences")%>">
