@@ -843,7 +843,11 @@ public class SiteSearchServiceImpl implements SiteSearchService {
     @Override
     public ResultNode createData(Node node, Row row, SearchResult searchResult) {
       try {
-        return new ResultNode(node, row);
+        if(row == null && searchResult != null) {
+          return new ResultNode(node, searchResult.getRelevancy(), searchResult.getExcerpt());
+        } else {
+          return new ResultNode(node, row);
+        }
       } catch (Exception e) {
         return null;
       }
