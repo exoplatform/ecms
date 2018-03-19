@@ -16,20 +16,6 @@
  */
 package org.exoplatform.services.cms.timeline.impl;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.List;
-
-import javax.jcr.Node;
-import javax.jcr.NodeIterator;
-import javax.jcr.RepositoryException;
-import javax.jcr.Session;
-import javax.jcr.query.Query;
-import javax.jcr.query.QueryManager;
-import javax.jcr.query.QueryResult;
-
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.cms.timeline.TimelineService;
@@ -39,6 +25,20 @@ import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.impl.core.query.QueryImpl;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+
+import javax.jcr.Node;
+import javax.jcr.NodeIterator;
+import javax.jcr.RepositoryException;
+import javax.jcr.Session;
+import javax.jcr.query.Query;
+import javax.jcr.query.QueryManager;
+import javax.jcr.query.QueryResult;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.List;
 
 /**
  * Created by The eXo Platform SARL
@@ -55,14 +55,10 @@ public class TimelineServiceImpl implements TimelineService {
   private static final String EXO_OWNER = "exo:owner";
   private static final String SELECT_QUERY = "SELECT * FROM " + EXO_DATETIME + " WHERE ";
   private static final String TIME_FORMAT_TAIL = "T00:00:00.000";
-  private static final SimpleDateFormat formatDateTime = new SimpleDateFormat();
+  private static final DateTimeFormatter formatDateTime = DateTimeFormatter.ofPattern("yyyy-MM-dd");
   private RepositoryService repositoryService_;
   private TemplateService templateService_;
   private int itemPerTimeline = 5;
-
-  static {
-    formatDateTime.applyPattern("yyyy-MM-dd");
-  }
 
   public TimelineServiceImpl(RepositoryService repoService, TemplateService templateService,
       InitParams initParams) throws Exception {
@@ -368,8 +364,8 @@ public class TimelineServiceImpl implements TimelineService {
     return sb.toString();
   }
 
-  private String getStrTodayTime(Calendar time) {
-    String currentDate = formatDateTime.format(time.getTime());
+  private String getStrTodayTime(Calendar calendar) {
+    String currentDate = LocalDateTime.ofInstant(calendar.getTime().toInstant(), calendar.getTimeZone().toZoneId()).format(formatDateTime);
     return currentDate + TIME_FORMAT_TAIL;
   }
 
@@ -378,34 +374,34 @@ public class TimelineServiceImpl implements TimelineService {
     return "jcr:path LIKE '" + nodePath + "/%" + "'";
   }
 
-  private String getStrYesterdayTime(Calendar time) {
-    Calendar yesterday = (Calendar)time.clone();
+  private String getStrYesterdayTime(Calendar calendar) {
+    Calendar yesterday = (Calendar)calendar.clone();
     yesterday.add(Calendar.DATE, -1);
-    String yesterdayDate = formatDateTime.format(yesterday.getTime());
+    String yesterdayDate = LocalDateTime.ofInstant(yesterday.getTime().toInstant(), yesterday.getTimeZone().toZoneId()).format(formatDateTime);
     return yesterdayDate + TIME_FORMAT_TAIL;
   }
 
-  private String getStrBeginningOfThisWeekTime(Calendar time) {
-    Calendar monday = (Calendar)time.clone();
-    while (monday.get(Calendar.WEEK_OF_YEAR) == time.get(Calendar.WEEK_OF_YEAR)) {
+  private String getStrBeginningOfThisWeekTime(Calendar calendar) {
+    Calendar monday = (Calendar)calendar.clone();
+    while (monday.get(Calendar.WEEK_OF_YEAR) == calendar.get(Calendar.WEEK_OF_YEAR)) {
       monday.add(Calendar.DATE, -1);
     }
     monday.add(Calendar.DATE, 1);
-    String mondayDate = formatDateTime.format(monday.getTime());
+    String mondayDate = LocalDateTime.ofInstant(monday.getTime().toInstant(), monday.getTimeZone().toZoneId()).format(formatDateTime);
     return mondayDate + TIME_FORMAT_TAIL;
   }
 
-  private String getStrBeginningOfThisMonthTime(Calendar time) {
-    Calendar theFirst = (Calendar)time.clone();
-    theFirst.set(time.get(Calendar.YEAR), time.get(Calendar.MONTH), 1, 0, 0, 0);
-    String theFirstDate = formatDateTime.format(theFirst.getTime());
+  private String getStrBeginningOfThisMonthTime(Calendar calendar) {
+    Calendar theFirst = (Calendar)calendar.clone();
+    theFirst.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), 1, 0, 0, 0);
+    String theFirstDate = LocalDateTime.ofInstant(theFirst.getTime().toInstant(), theFirst.getTimeZone().toZoneId()).format(formatDateTime);
     return theFirstDate + TIME_FORMAT_TAIL;
   }
 
-  private String getStrBeginningOfThisYearTime(Calendar time) {
-    Calendar theFirst = (Calendar)time.clone();
-    theFirst.set(time.get(Calendar.YEAR), 0, 1, 0, 0, 0);
-    String theFirstDate = formatDateTime.format(theFirst.getTime());
+  private String getStrBeginningOfThisYearTime(Calendar calendar) {
+    Calendar theFirst = (Calendar)calendar.clone();
+    theFirst.set(calendar.get(Calendar.YEAR), 0, 1, 0, 0, 0);
+    String theFirstDate = LocalDateTime.ofInstant(theFirst.getTime().toInstant(), theFirst.getTimeZone().toZoneId()).format(formatDateTime);
     return theFirstDate + TIME_FORMAT_TAIL;
   }
 
