@@ -81,9 +81,11 @@ public class ResultNode implements Node{
    */
   public ResultNode(Node node, Row row) throws RepositoryException{
     this.nodeLocation = NodeLocation.getNodeLocationByNode(node);
-    Value excerpt = row.getValue("rep:excerpt(.)");
-    this.excerpt = excerpt == null ? "" : excerpt.getString();
-    this.score = row.getValue("jcr:score").getLong();
+    if(row != null) {
+      Value excerpt = row.getValue("rep:excerpt(.)");
+      this.excerpt = excerpt == null ? "" : excerpt.getString();
+      this.score = row.getValue("jcr:score").getLong();
+    }
   }
 
   public ResultNode(Node node, float score, String excerpt) {
