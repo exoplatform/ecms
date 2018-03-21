@@ -20,6 +20,8 @@
 package org.exoplatform.services.portletcache;
 
 import java.io.Serializable;
+import java.util.Arrays;
+import java.util.Objects;
 
 /**
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
@@ -40,5 +42,19 @@ class MarkupFragment implements Serializable
   {
     this.expirationTimeMillis = expirationTimeMillis;
     this.data = data;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    MarkupFragment that = (MarkupFragment) o;
+    return expirationTimeMillis == that.expirationTimeMillis &&
+            Arrays.equals(data, that.data);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(expirationTimeMillis, data);
   }
 }
