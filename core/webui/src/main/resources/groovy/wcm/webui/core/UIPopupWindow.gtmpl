@@ -36,16 +36,13 @@
   def String widthStyle = "";
   if(width > 0) widthStyle = "width:" + width + "px;";
 	
-	String show = "none";
-	if(uicomponent.isShow()) show = "block";
-	
     if (isMiddle) {
       jsManager.require("SHARED/jquery", "gj")
         .addScripts("var top = gj('#" + popupId + "').offset().top; var left = Math.floor(window.innerWidth / 2) - Math.floor(gj('#" + popupId + "').width() / 2); gj('#" + popupId + "').offset({ top: top, left: left});");
      }
 %>
 
-<div class="UIPopupWindow uiPopup UIDragObject NormalStyle" exo:minWidth="200" exo:minHeight="200" id="$popupId" style="$widthStyle display: $show;">
+<div class="UIPopupWindow uiPopup UIDragObject NormalStyle" exo:minWidth="200" exo:minHeight="200" id="$popupId" style="$widthStyle display: none;">
 	<div class="popupHeader">
 		<%if( true) {%>
 		<a class="uiIconClose pull-right" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIPopupWindow.Close")%>" onclick="<%=uicomponent.event(uicomponent.getCloseEvent())%>"></a>
