@@ -16,10 +16,14 @@
  */
 package org.exoplatform.wcm.connector.collaboration;
 
+import java.net.URLEncoder;
+
 import javax.ws.rs.core.Response;
 
 import org.apache.commons.lang.StringUtils;
+
 import org.exoplatform.BaseConnectorTestCase;
+import org.exoplatform.services.jcr.util.Text;
 import org.exoplatform.services.rest.impl.ContainerResponse;
 import org.exoplatform.services.rest.wadl.research.HTTPMethods;
 import org.exoplatform.services.security.ConversationState;
@@ -39,7 +43,16 @@ public class TestThumbnailRESTService extends BaseConnectorTestCase{
     ThumbnailRESTService restService = (ThumbnailRESTService) this.container.getComponentInstanceOfType(ThumbnailRESTService.class);
     this.binder.addResource(restService, null);
   }
-  
+
+  public void testGetOriginImageSpecialCharacter() throws Exception{
+    String restPath = "/thumbnailImage/origin/repository/collaboration/" + URLEncoder.encode(Text.escapeIllegalJcrChars("~!@%23$%^()`=}{-%22,.___ -.png"), "UTF-8");
+    ConversationState.setCurrent(new ConversationState(new Identity("john")));
+    applyUserSession("john", "gtn", "collaboration");
+    /* Prepare the favourite nodes */
+    ContainerResponse response = service(HTTPMethods.GET.toString(), restPath, StringUtils.EMPTY, null, null);
+    assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
+  }
+
   public void testGetOriginImage() throws Exception{
     String restPath = "/thumbnailImage/origin/repository/collaboration/offices.jpg";
     ConversationState.setCurrent(new ConversationState(new Identity("john")));

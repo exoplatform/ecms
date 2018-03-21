@@ -474,6 +474,26 @@
         </object-param>
         
         <object-param>
+          <name>Jpg Document content with special chars in name</name>
+          <description>Deployment Descriptor</description>
+          <object type="org.exoplatform.services.deployment.DeploymentDescriptor">
+            <field name="target">
+              <object type="org.exoplatform.services.deployment.DeploymentDescriptor$Target">
+                <field name="workspace">
+                  <string>collaboration</string>
+                </field>
+                <field name="nodePath">
+                  <string>/</string>
+                </field>
+              </object>
+            </field>
+            <field name="sourcePath">
+              <string>classpath:/conf/wcm/deployment/DocJpgSpeciaChar.xml</string>
+            </field>
+          </object>
+        </object-param>
+
+        <object-param>
           <name>Word document content</name>
           <description>Deployment Descriptor</description>
           <object type="org.exoplatform.services.deployment.DeploymentDescriptor">

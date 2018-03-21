@@ -28,6 +28,7 @@ import java.util.Date;
 
 import javax.jcr.ItemNotFoundException;
 import javax.jcr.Node;
+import javax.jcr.PathNotFoundException;
 import javax.jcr.Session;
 import javax.ws.rs.GET;
 import javax.ws.rs.HeaderParam;
@@ -215,7 +216,7 @@ public class ThumbnailRESTService implements ResourceContainer {
     DateFormat dateFormat = new SimpleDateFormat(IF_MODIFIED_SINCE_DATE_FORMAT);
     if (!thumbnailService_.isEnableThumbnail())
       return Response.ok().header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
-    Node showingNode = getShowingNode(workspaceName, getNodePath(nodePath));
+    Node showingNode = getShowingNode(workspaceName, nodePath);
     Node targetNode = getTargetNode(showingNode);
     if (targetNode.isNodeType("nt:file") || targetNode.isNodeType("nt:resource")) {
       Node content = targetNode;
@@ -288,7 +289,7 @@ public class ThumbnailRESTService implements ResourceContainer {
     DateFormat dateFormat = new SimpleDateFormat(IF_MODIFIED_SINCE_DATE_FORMAT);
     if (!thumbnailService_.isEnableThumbnail())
       return Response.ok().header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
-    Node showingNode = getShowingNode(workspaceName, getNodePath(nodePath));
+    Node showingNode = getShowingNode(workspaceName, nodePath);
     Node parentNode = showingNode.getParent();
     String identifier = ((NodeImpl) showingNode).getInternalIdentifier();
     Node targetNode = getTargetNode(showingNode);
@@ -409,7 +410,14 @@ public class ThumbnailRESTService implements ResourceContainer {
     Node showingNode = null;
     if(nodePath.equals("/")) showingNode = session.getRootNode();
     else {
-      showingNode = (Node) nodeFinder_.getItem(session, nodePath);
+      if (!nodePath.startsWith("/")) {
+        nodePath = "/" + nodePath;
+      }
+      try {
+        showingNode = (Node) nodeFinder_.getItem(session, nodePath);
+      } catch (PathNotFoundException e) {
+        showingNode = (Node) nodeFinder_.getItem(session, getNodePath(nodePath));
+      }
     }
     return showingNode;
   }

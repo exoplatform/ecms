@@ -18,6 +18,7 @@ import org.picocontainer.Startable;
 
 import javax.annotation.security.RolesAllowed;
 import javax.jcr.Node;
+import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 import javax.servlet.http.HttpServletRequest;
@@ -80,13 +81,6 @@ public class OpenInOfficeConnector implements ResourceContainer, Startable {
           @QueryParam("lang") String language) throws Exception {
 
     //find from cached
-    try {
-      objId = URLDecoder.decode(objId, "UTF-8");
-    } catch (Exception e) {
-      // the path contains % character but not encoded,
-      // This is an expected behavior
-    }
-    objId = Text.escapeIllegalJcrChars(objId);
     int indexColon = objId.indexOf(":/");
     if(indexColon < 0) {
       return Response.status(Response.Status.BAD_REQUEST)
@@ -130,7 +124,11 @@ public class OpenInOfficeConnector implements ResourceContainer, Startable {
     String nodePath = filePath;
     boolean isFile=false;
     try{
-      node = (Node)nodeFinder.getItem(workspace, Text.unescapeIllegalJcrChars(filePath));
+      try {
+        node = (Node)nodeFinder.getItem(workspace, filePath);
+      } catch (PathNotFoundException e) {
+        node = (Node)nodeFinder.getItem(workspace, Text.unescapeIllegalJcrChars(filePath));
+      }
       if (linkManager.isLink(node)) node = linkManager.getTarget(node);
       nodePath = node.getPath();
       isFile = node.isNodeType(NodetypeConstant.NT_FILE);
