@@ -83,7 +83,7 @@
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
-      <delete>Padam</delete>
+      <delete>Delete</delete>
     </action>
     <msg>
       <not-valid-path>The Folder Path is invalid.</not-valid-path>
@@ -145,7 +145,7 @@
     <action>
       <refresh>Refresh</refresh>
       <edit>Edit in Content Explorer</edit>
-      <delete>Padam</delete>
+      <delete>Delete</delete>
       <publish>Publish</publish>
     </action>
     <label>

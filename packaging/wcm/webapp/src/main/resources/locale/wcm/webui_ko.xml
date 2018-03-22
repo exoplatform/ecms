@@ -142,7 +142,7 @@
     <label>
       <name>#{word.name}</name>
       <add>Add</add>
-      <delete>Padam</delete>
+      <delete>Delete</delete>
     </label>
     <msg>
       <no-content-found>No content found.</no-content-found>
@@ -290,8 +290,8 @@
       <Save>#{word.save}</Save>
       <Clear>Clear</Clear>
       <title>
-        <Edit>Sunting</Edit>
-        <Delete>Padam</Delete>
+        <Edit>Edit</Edit>
+        <Delete>Delete</Delete>
       </title>
     </action>
   </UIPermissionManager>

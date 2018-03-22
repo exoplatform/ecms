@@ -237,8 +237,8 @@
     </label>
     <title>
       <view>View</view>
-      <edit>Sunting</edit>
-      <delete>Padam</delete>
+      <edit>Edit</edit>
+      <delete>Delete</delete>
     </title>
     <header>
       <icon>Icon</icon>
@@ -346,13 +346,13 @@
       <name>Name</name>
       <workspace>Workspace</workspace>
       <homePath>Home Path</homePath>
-      <permissions>Kebenaran</permissions>
+      <permissions>Permissions</permissions>
       <views>View</views>
       <action>Action</action>
     </header>
     <tooltip>
-      <Delete>Padam</Delete>
-      <EditInfo>Sunting</EditInfo>
+      <Delete>Delete</Delete>
+      <EditInfo>Edit</EditInfo>
     </tooltip>
     <msg>
       <confirm-delete>Are you sure you want to delete this drive?</confirm-delete>
@@ -471,8 +471,8 @@
     </action>
     <tooltip>
       <View>View</View>
-      <Edit>Sunting</Edit>
-      <Delete>Padam</Delete>
+      <Edit>Edit</Edit>
+      <Delete>Delete</Delete>
     </tooltip>
     <msg>
       <confirm-delete>Are you sure you want to delete this node type?</confirm-delete>
@@ -711,7 +711,7 @@
       <unstructuredFolder>Unstructured Folder</unstructuredFolder>
     </label>
     <title>
-      <AddPermission>Tambah kebenaran</AddPermission>
+      <AddPermission>Add Permission</AddPermission>
       <RemovePermission>Remove Permission</RemovePermission>
       <AddIcon>Add Icon</AddIcon>
       <AddPath>Add Path</AddPath>
@@ -729,8 +729,8 @@
       <action>Actions</action>
     </header>
     <title>
-      <Edit>Sunting</Edit>
-      <Delete>Padam</Delete>
+      <Edit>Edit</Edit>
+      <Delete>Delete</Delete>
     </title>
     <action>
       <AddAction>Add Action Type</AddAction>
@@ -812,12 +812,12 @@
   <UIViewList>
     <title>
       <View>View</View>
-      <EditInfo>Sunting</EditInfo>
-      <Delete>Padam</Delete>
+      <EditInfo>Edit</EditInfo>
+      <Delete>Delete</Delete>
     </title>
     <header>
       <name>Name</name>
-      <permissions>Kebenaran</permissions>
+      <permissions>Permissions</permissions>
       <tabList>Action Tab</tabList>
       <baseVersion>Base Version</baseVersion>
       <action>Action</action>
@@ -850,8 +850,8 @@
 
   <UITabList>
     <title>
-      <Edit>Sunting</Edit>
-      <Delete>Padam</Delete>
+      <Edit>Edit</Edit>
+      <Delete>Delete</Delete>
     </title>
     <header>
       <tabName>Tab</tabName>
@@ -884,15 +884,15 @@
 
   <UIViewPermissionList>
     <title>
-      <Delete>Padam</Delete>
+      <Delete>Delete</Delete>
     </title>
     <header>
-      <friendlyPermission>Kebenaran</friendlyPermission>
+      <friendlyPermission>Permissions</friendlyPermission>
       <action>Action</action>
     </header>
     <action>
       <title>
-        <Delete>Padam</Delete>
+        <Delete>Delete</Delete>
       </title>
     </action>
     <grid>
@@ -921,7 +921,7 @@
   -->
   <UIViewForm>
     <title>
-      <AddPermission>Tambah kebenaran</AddPermission>
+      <AddPermission>Add Permission</AddPermission>
       <RemovePermission>Remove Permission</RemovePermission>
     </title>
     <msg>
@@ -1048,8 +1048,8 @@
   <UIECMTemplateList>
     <title>
       <View>View</View>
-      <EditInfo>Sunting</EditInfo>
-      <Delete>Padam</Delete>
+      <EditInfo>Edit</EditInfo>
+      <Delete>Delete</Delete>
     </title>
     <header>
       <name>Name</name>
@@ -1074,7 +1074,7 @@
   -->
   <UITemplateForm>
     <title>
-      <AddPermission>Tambah kebenaran</AddPermission>
+      <AddPermission>Add Permission</AddPermission>
     </title>
     <action>
       <Save>#{word.save}</Save>
@@ -1174,8 +1174,8 @@
       <action>Actions</action>
     </header>
     <tooltip>
-      <Edit>Sunting</Edit>
-      <Delete>Padam</Delete>
+      <Edit>Edit</Edit>
+      <Delete>Delete</Delete>
     </tooltip>
   </UIScriptList>
   <!--
@@ -1366,7 +1366,7 @@
       <name>Name</name>
       <workspace>Workspace</workspace>
       <homePath>Path</homePath>
-      <permissions>Kebenaran</permissions>
+      <permissions>Permissions</permissions>
     </label>
     <msg>
       <homapath-emty>Input Path</homapath-emty>
@@ -1386,8 +1386,8 @@
     <title>Add a permission to this node</title>
     <action>
       <Close>#{word.close}</Close>
-      <Save>Simpan</Save>
-      <Reset>Tetapkan semula</Reset>
+      <Save>Save</Save>
+      <Reset>Reset</Reset>
     </action>
     <msg>
       <checkbox-require>Please select at least one permission.</checkbox-require>
@@ -1411,7 +1411,7 @@
 
   <PopupDrivePermission>
     <title>
-      <AddDrivePermissionSelector>Tambah kebenaran</AddDrivePermissionSelector>
+      <AddDrivePermissionSelector>Add Permission</AddDrivePermissionSelector>
       <UIPermissionSelector>Select Permission</UIPermissionSelector>
     </title>
   </PopupDrivePermission>
@@ -1431,7 +1431,7 @@
   <UIPermissionInfo>
     <action>
       <title>
-        <Edit>Sunting</Edit>
+        <Edit>Edit</Edit>
         <Delete>Remove Permission</Delete>
       </title>
     </action>
@@ -1586,8 +1586,8 @@
 
   <UICLVTemplateList>
     <title>
-      <Edit>Sunting</Edit>
-      <Delete>Padam</Delete>
+      <Edit>Edit</Edit>
+      <Delete>Delete</Delete>
     </title>
     <header>
       <title>Name</title>
@@ -1596,8 +1596,8 @@
     </header>
     <action>
       <AddTemplate>Add Template</AddTemplate>
-      <Edit>Sunting</Edit>
-      <Delete>Padam</Delete>
+      <Edit>Edit</Edit>
+      <Delete>Delete</Delete>
     </action>
     <msg>
       <confirm-delete>Are you sure you want to delete this template?</confirm-delete>
@@ -1614,13 +1614,13 @@
       <template>Template</template>
     </header>
     <title>
-      <Edit>Sunting</Edit>
-      <Delete>Padam</Delete>
+      <Edit>Edit</Edit>
+      <Delete>Delete</Delete>
     </title>
     <action>
       <AddTemplate>Add Template</AddTemplate>
-      <Edit>Sunting</Edit>
-      <Delete>Padam</Delete>
+      <Edit>Edit</Edit>
+      <Delete>Delete</Delete>
     </action>
   </CateTemplateList>
 
@@ -1632,8 +1632,8 @@
     </header>
     <action>
       <AddTemplate>Add Template</AddTemplate>
-      <Edit>Sunting</Edit>
-      <Delete>Padam</Delete>
+      <Edit>Edit</Edit>
+      <Delete>Delete</Delete>
     </action>
   </PageTemplateList>
 
@@ -1797,8 +1797,8 @@
   </TemplateContainerPopup>
   <UITemplatesManager>
     <title>
-      <Edit>Sunting</Edit>
-      <Delete>Padam</Delete>
+      <Edit>Edit</Edit>
+      <Delete>Delete</Delete>
     </title>
   </UITemplatesManager>
   <!--
@@ -1841,8 +1841,8 @@
     </msg>
     <action>
       <title>
-        <Edit>Sunting</Edit>
-        <Delete>Padam</Delete>
+        <Edit>Edit</Edit>
+        <Delete>Delete</Delete>
       </title>
     </action>
   </UIDialogTab>
@@ -1864,8 +1864,8 @@
     </msg>
     <action>
       <title>
-        <Edit>Sunting</Edit>
-        <Delete>Padam</Delete>
+        <Edit>Edit</Edit>
+        <Delete>Delete</Delete>
       </title>
     </action>
   </UIViewTab>
@@ -1888,7 +1888,7 @@
       <name-exist>The name '{0}' already exists.</name-exist>
     </msg>
     <title>
-      <AddPermission>Tambah kebenaran</AddPermission>
+      <AddPermission>Add Permission</AddPermission>
       <RemovePermission>Remove Permission</RemovePermission>
     </title>
   </UITemplateContent>
@@ -1927,7 +1927,7 @@
       <name>Name</name>
       <type>Type</type>
       <statement>Statement</statement>
-      <permission>Kebenaran</permission>
+      <permission>Permissions</permission>
       <action>Actions</action>
     </header>
     <action>
@@ -1949,7 +1949,7 @@
       <type>Query Type</type>
       <statement>Statement</statement>
       <cache>Enable Cache Results</cache>
-      <permissions>Kebenaran</permissions>
+      <permissions>Permissions</permissions>
       <PermissionButton>UIQueriesForm</PermissionButton>
     </label>
     <action>
@@ -1998,8 +1998,8 @@
       <action>Action</action>
     </header>
     <title>
-      <Edit>Sunting</Edit>
-      <Delete>Padam</Delete>
+      <Edit>Edit</Edit>
+      <Delete>Delete</Delete>
       <Remove>Remove</Remove>
     </title>
     <action>
@@ -2087,17 +2087,17 @@
   </UIFormInputSetWithAction>
   <template>
     <title>
-      <AddPermission>Tambah kebenaran</AddPermission>
+      <AddPermission>Add Permission</AddPermission>
     </title>
   </template>
   <metadataTypeTab>
     <title>
-      <AddPermission>Tambah kebenaran</AddPermission>
+      <AddPermission>Add Permission</AddPermission>
     </title>
   </metadataTypeTab>
   <PermissionButton>
     <title>
-      <AddPermission>Tambah kebenaran</AddPermission>
+      <AddPermission>Add Permission</AddPermission>
     </title>
   </PermissionButton>
   <nodeTypeDefinition>
@@ -2128,7 +2128,7 @@
     <title>
       <View>View</View>
       <EditInfo>Edit</EditInfo>
-      <Delete>Padam</Delete>
+      <Delete>Delete</Delete>
     </title>
     <label>
       <permission>{0} in {1}</permission>
@@ -2136,13 +2136,13 @@
   </UIViewContainer>
   <ECMTemplate>
     <title>
-      <EditInfo>Sunting</EditInfo>
-      <Delete>Padam</Delete>
+      <EditInfo>Edit</EditInfo>
+      <Delete>Delete</Delete>
     </title>
   </ECMTemplate>
   <step1>
     <title>
-      <AddPermission>Tambah kebenaran</AddPermission>
+      <AddPermission>Add Permission</AddPermission>
     </title>
   </step1>
   <step2>
@@ -2300,7 +2300,7 @@
   <UIUnLockForm>
     <label>
       <name>Path Node</name>
-      <permissions>Kebenaran</permissions>
+      <permissions>Permissions</permissions>
       <PermissionButton>UI Unlock Form</PermissionButton>
     </label>
     <action>
@@ -2386,8 +2386,8 @@
     </msg>
     <action>
       <title>
-        <Edit>Sunting</Edit>
-        <Delete>Padam</Delete>
+        <Edit>Edit</Edit>
+        <Delete>Delete</Delete>
       </title>
     </action>
   </UISkinTab>
@@ -2468,7 +2468,7 @@
     </header>
     <action>
       <title>
-        <Delete>Padam</Delete>
+        <Delete>Delete</Delete>
       </title>
     </action>
     <msg>
@@ -2476,7 +2476,7 @@
     </msg>
   </UITagPermissionInfo>
   <UITagPermissionForm>
-    <title>Tambah kebenaran</title>
+    <title>Add Permission</title>
     <action>
       <Save>#{word.save}</Save>
       <Add>Add</Add>
