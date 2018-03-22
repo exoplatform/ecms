@@ -284,7 +284,7 @@
     <tooltip>
       <AddFolder>New Folder</AddFolder>
       <AddDocument>New Content</AddDocument>
-      <EditDocument>Sunting</EditDocument>
+      <EditDocument>Edit</EditDocument>
       <Upload>Upload</Upload>
       <Paste>Paste</Paste>
       <Search>Search</Search>
@@ -304,7 +304,7 @@
       <ManageHidden>Show/Hide Content</ManageHidden>
       <ViewReferences>References</ViewReferences>
       <ViewNodeType>Types</ViewNodeType>
-      <ViewPermissions>Kebenaran</ViewPermissions>
+      <ViewPermissions>Permissions</ViewPermissions>
       <ViewProperties>Properties</ViewProperties>
       <ViewMetadatas>Metadata</ViewMetadatas>
       <ViewRelations>Show/Hide Relations</ViewRelations>
@@ -526,12 +526,12 @@
       <Cut>Cut</Cut>
       <Copy>Copy</Copy>
       <Save>#{word.save}</Save>
-      <RemoveNode>Padam</RemoveNode>
+      <RemoveNode>Delete</RemoveNode>
       <Checkin>Checkin</Checkin>
       <Checkout>Checkout</Checkout>
       <Lock>Lock</Lock>
       <Unlock>Unlock</Unlock>
-      <EditDocument>Sunting</EditDocument>
+      <EditDocument>Edit</EditDocument>
       <Paste>Paste</Paste>
       <LockedBy>Locked by</LockedBy>
     </tooltip>
@@ -555,7 +555,7 @@
       <label>
         <name>Name</name>
         <versionable>Versionable</versionable>
-        <exo_owner>Pemilik</exo_owner>
+        <exo_owner>Owner</exo_owner>
         <auditing>Auditing</auditing>
         <exo_dateCreated>Date Created</exo_dateCreated>
         <exo_dateModified>Date Modifed</exo_dateModified>
@@ -571,10 +571,10 @@
     <event>
       <Lock>Lock</Lock>
       <Unlock>UnLock</Unlock>
-      <EditDocument>Sunting</EditDocument>
+      <EditDocument>Edit</EditDocument>
       <Copy>Copy</Copy>
       <Rename>Rename</Rename>
-      <Delete>Padam</Delete>
+      <Delete>Delete</Delete>
       <Save>#{word.save}</Save>
       <Cut>Cut</Cut>
       <Paste>Paste</Paste>
@@ -752,7 +752,7 @@
   <UIPermissionInfo>
     <action>
       <title>
-        <Edit>Sunting</Edit>
+        <Edit>Edit</Edit>
         <Delete>Remove Permission</Delete>
       </title>
     </action>
@@ -1281,13 +1281,13 @@
       <name>Name</name>
       <type>Type</type>
       <statement>Statement</statement>
-      <permission>Kebenaran</permission>
+      <permission>Permissions</permission>
       <action>Actions</action>
     </header>
     <tooltip>
       <Execute>Execute</Execute>
-      <Edit>Sunting</Edit>
-      <Delete>Padam</Delete>
+      <Edit>Edit</Edit>
+      <Delete>Delete</Delete>
     </tooltip>
     <label>
       <no-children>No query is saved.</no-children>
@@ -1614,13 +1614,13 @@
     </msg>
     <action>
       <title>
-        <Delete>Padam</Delete>
+        <Delete>Delete</Delete>
       </title>
     </action>
     <label>
       <category>Category</category>
       <actions>Action</actions>
-      <delete>Padam</delete>
+      <delete>Delete</delete>
     </label>
   </UICategoriesAddedList>
   <UITreeList>
@@ -1659,7 +1659,7 @@
     </header>
     <action>
       <title>
-        <Delete>Padam</Delete>
+        <Delete>Delete</Delete>
       </title>
     </action>
     <msg>
@@ -1809,8 +1809,8 @@
     <action>
       <Close>#{word.close}</Close>
       <View>View</View>
-      <Edit>Sunting</Edit>
-      <Delete>Padam</Delete>
+      <Edit>Edit</Edit>
+      <Delete>Delete</Delete>
     </action>
   </UIActionList>
   <UIActionForm>
@@ -2228,7 +2228,7 @@
   <UIJcrExplorerEditForm>
     <title>Edit File Explorer</title>
     <action>
-      <Edit>Sunting</Edit>
+      <Edit>Edit</Edit>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
     </action>
@@ -2453,12 +2453,12 @@
   <UIConfirmMessage>
     <label>
       <Close>#{word.cancel}</Close>
-      <OK>Padam</OK>
+      <OK>Delete</OK>
       <ReplaceData>Replace Data</ReplaceData>
       <Back>Back to Rename</Back>
       <Keepfile>Keep both files</Keepfile>
 <ReadOnly>Open Read-only</ReadOnly>
-<Cancel>Batal</Cancel>
+<Cancel>Cancel</Cancel>
       <KeepBoth>Keep Both</KeepBoth>
       <CreateNewVersion>Save as new version</CreateNewVersion>
     </label>
