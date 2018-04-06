@@ -50,7 +50,6 @@ public class UIPermissionTreeSelectUser extends UIContainer implements UIPopupCo
       uiUserSelector = addChild(UIUserSelector.class, null, USER_SELECTOR_ID);
     }
     uiUserSelector.setMulti(false);
-    uiUserSelector.setShowSearchGroup(true);
     uiUserSelector.setShowSearchUser(true);
     uiUserSelector.setShowSearch(true);
   }
