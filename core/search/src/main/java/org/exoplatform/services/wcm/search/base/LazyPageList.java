@@ -28,6 +28,7 @@ import javax.jcr.query.RowIterator;
 import org.exoplatform.commons.utils.PageList;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.impl.core.query.QueryImpl;
+import org.exoplatform.services.jcr.impl.core.query.lucene.QueryResultImpl;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
@@ -63,8 +64,15 @@ public class LazyPageList<E> extends PageList{
       try {
         SessionProvider provider = WCMCoreUtils.getUserSessionProvider();
         Session session = provider.getSession(queryData.getWorkSpace(), WCMCoreUtils.getRepository());
+        //In JCR, For performances reason, the permissions are not checked when
+        // the order is set in the query. In order to take the permissions in consideration,
+        // We need to suppress the orderBy from the Query statement
+        String querySizeStatement = queryData.getQueryStatement();
+        if (querySizeStatement.indexOf("ORDER BY") > 0) {
+          querySizeStatement = querySizeStatement.substring(0,querySizeStatement.indexOf("ORDER BY"));
+        }
         total_ = (int)session.getWorkspace().getQueryManager().
-        createQuery(queryData.getQueryStatement(), queryData.getLanguage_()).execute().getRows().getSize();
+        createQuery(querySizeStatement, queryData.getLanguage_()).execute().getRows().getSize();
       } catch (Exception e) {
         if (LOG.isErrorEnabled()) {
           LOG.error("Can not execute the query: " + queryData.getQueryStatement(), e);
