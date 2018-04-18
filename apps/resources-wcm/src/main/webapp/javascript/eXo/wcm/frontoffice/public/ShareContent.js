@@ -28,14 +28,17 @@
       evt.stopPropagation();
     });
     gj(".mention-input").on("change", function (event) {
-      if (gj("#user").val() != "") {
-        gj("#addActionBtn").removeAttr('disabled');
-      } else {
-        gj("#addActionBtn").attr('disabled','disabled');
+      if (event.target.value !== "") {
+        gj(".PopupContent .uiActionBorder .btn-primary").removeAttr("disabled");
       }
     });
+    gj('.sharePermission .dropdown-toggle').on('click', function () {
+        var $dropdown = gj(this).parent().find('.dropdown-menu');
+        $dropdown.css('left', -1 * $dropdown.width() + gj(this).parent().width());
+    });
     gj("#AccessEntry .btn-toolbar").on("click", function (et) {
-      var elId = gj(et.target).closest(".uiActionWithLabel").attr("id").split("-")[1];
+      var $button = gj(et.target).closest(".uiActionWithLabel");
+      var elId = $button.attr("id").split("-")[1];
       var a = gj("#who .dropdown-menu");
       for (index = 0; index < a.length; ++index) {
         var element = gj("#who .dropdown-menu")[index];
@@ -44,7 +47,7 @@
           element.style.display = "none";
         }
       }
-      var parentTop = et.target.getClientRects()[0].top;
+      var parentTop = $button[0].getClientRects()[0].top;
       if (gj(et.target).closest(".uiActionWithLabel").attr("id").indexOf("view") == 0) {
         var element = gj("#canModify-" + elId + " .dropdown-menu")[0];
       } else {
@@ -53,15 +56,10 @@
       if (element.style.display == "block") {
         element.style.display = "none";
       } else {
-        var top = parentTop - gj(element).closest(".UIPopupWindow")[0].getClientRects()[0].top + 23;
+        var $popup = gj(element).closest(".UIPopupWindow");
+        var top = parentTop - $popup[0].getClientRects()[0].top + 25;
         element.style.top = top + "px";
-        if (window.screen.width > 420) {
-          element.style.width = "25%";
-          element.style.marginLeft = "61%";
-        } else {
-          element.style.width = "38%";
-          element.style.marginLeft = "54%";
-        }
+        element.style.left = ($button[0].getClientRects()[0].left - $popup[0].getClientRects()[0].left) + 'px';
         element.style.display = "block";
       }
     });
@@ -111,10 +109,8 @@
       },
       messages : window.eXo.social.I18n.mentions
     });
-    if (gj("#user").val() == "") {
-      gj("#addActionBtn").attr('disabled','disabled');
-    } else {
-      gj("#addActionBtn").removeAttr('disabled');
+    if (gj("#userSuggester").val() != "") {
+      eXo.ecm.ShareContent.checkUpdatedEntry();
     }
   }
 
