@@ -48,8 +48,8 @@
                         <field name="lifespan">
                             <long>${cache.exo.ecms.javascript.liveTime:600}</long>
                         </field>
-                        <field name="replicated">
-                            <boolean>true</boolean>
+                        <field name="cacheMode">
+                            <string>${exo.cache.ecms.javascript.cacheMode:replication}</string>
                         </field>
                     </object>
                 </object-param>
