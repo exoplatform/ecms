@@ -117,7 +117,10 @@ public class UIPermissionForm extends UIPermissionFormBase implements UISelectab
       if (PermissionUtil.canChangePermission(node)) {
         if (node.canAddMixin("exo:privilegeable")){
           node.addMixin("exo:privilegeable");
-          node.setPermission(Utils.getNodeOwner(node),PermissionType.ALL);
+          String nodeOwner = Utils.getNodeOwner(node);
+          if (nodeOwner != null) {
+            node.setPermission(nodeOwner, PermissionType.ALL);
+          }
         }
         for (String perm : permsRemoveList) {
           try {
