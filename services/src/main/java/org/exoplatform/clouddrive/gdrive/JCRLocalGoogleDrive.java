@@ -220,12 +220,6 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
     protected ChangesIterator      changes;
 
     /**
-     * Ids of removed/trashed files. Used to skip updates of sub-files returned for removed folders.
-     */
-    // TODO cleanup
-    // protected Set<String> removedIds = new HashSet<String>();
-
-    /**
      * Last change ID fetched and applied to the drive. Used by {@link #preSaveChunk()}.
      */
     protected Long                 lastChangeId;
@@ -380,8 +374,8 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
               }
             } // else will be removed below
           }
-          removeLinks(en); // explicitly remove file links outside the drive
-          en.remove();
+          // explicitly remove file links outside the drive, then the node itself
+          removeNode(en);
           addRemoved(enpath);
         }
         nodes.remove(fileId);
@@ -561,7 +555,7 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
           Node n = niter.next();
           if (!synced.contains(n)) {
             String path = n.getPath();
-            n.remove();
+            removeNode(n);
             addRemoved(path);
             niter.remove();
           }

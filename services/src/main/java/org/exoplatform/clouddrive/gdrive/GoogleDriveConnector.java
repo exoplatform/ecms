@@ -164,13 +164,13 @@ public class GoogleDriveConnector extends CloudDriveConnector {
     }
     authURL.append("&redirect_uri=");
     try {
-      authURL.append(URLEncoder.encode(redirectURL.toString(), "UTF-8"));
+      authURL.append(URLEncoder.encode(redirectURL, "UTF-8"));
     } catch (UnsupportedEncodingException e) {
-      LOG.warn("Cannot encode redirect URL " + redirectURL.toString() + ":" + e);
+      LOG.warn("Cannot encode redirect URL " + redirectURL + ":" + e);
       authURL.append(redirectURL);
     }
 
-    return new GoogleProvider(getProviderId(), getProviderName(), authURL.toString(), redirectURL.toString(), jcrService);
+    return new GoogleProvider(getProviderId(), getProviderName(), authURL.toString(), redirectURL, jcrService);
   }
 
   /**
