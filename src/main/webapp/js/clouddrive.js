@@ -265,12 +265,25 @@
 			return initRequest(request);
 		};
 
-		var serviceGet = function(url, data) {
+		var serviceGet = function(url, data, contentType) {
 			var request = $.ajax({
 				async : true,
 				type : "GET",
 				url : url,
 				dataType : "json",
+				contentType : contentType ? contentType : undefined,
+				data : data ? data : {}
+			});
+			return initRequest(request);
+		};
+		
+		var servicePost = function(url, data, contentType) {
+			var request = $.ajax({
+				async : true,
+				type : "POST",
+				url : url,
+				dataType : "json",
+				contentType : contentType ? contentType : undefined,
 				data : data ? data : {}
 			});
 			return initRequest(request);
@@ -325,7 +338,7 @@
 					// 2 wait for authentication
 					var auth = waitAuth(authWindow);
 					auth.done(function() {
-						utils.log(provider.serviceName + " user authenticated.");
+						utils.log(provider.name + " user authenticated.");
 						// 3 and finally connect the drive
 						// set initial progress	with dummy state object
 						process.notify({
@@ -344,7 +357,7 @@
 								utils.log("Connect requested: " + status + ". ");
 								if (state) {
 									if (status == 201) {
-										utils.log("DONE: " + provider.serviceName + " successfully connected.");
+										utils.log("DONE: " + provider.name + " successfully connected.");
 										contextDrive = state.drive;
 										process.resolve(state);
 									} else if (status == 202) {
@@ -363,12 +376,12 @@
 										utils.log("WARN: unexpected state returned from connect service " + status);
 									}
 								} else {
-									utils.log("ERROR: " + provider.serviceName + " connect return null state.");
-									process.reject("Cannot connect " + provider.serviceName + ". Server return empty response.");
+									utils.log("ERROR: " + provider.name + " connect return null state.");
+									process.reject("Cannot connect " + provider.name + ". Server return empty response.");
 								}
 							});
 							post.fail(function(state, error, errorText) {
-								utils.log("ERROR: " + provider.serviceName + " connect failed: " + error + ". ");
+								utils.log("ERROR: " + provider.name + " connect failed: " + error + ". ");
 								if ( typeof state === "string") {
 									process.reject(state);
 								} else {
@@ -376,12 +389,12 @@
 								}
 							});
 						} else {
-							process.reject("Connect to " + provider.serviceName + " canceled.");
+							process.reject("Connect to " + provider.name + " canceled.");
 						}
 					});
 					auth.fail(function(message) {
 						if (message) {
-							utils.log("ERROR: " + provider.serviceName + " authentication error: " + message);
+							utils.log("ERROR: " + provider.name + " authentication error: " + message);
 						}
 						process.reject(message);
 					});
@@ -450,11 +463,11 @@
 						if (status == "201" || status == "200") {
 							// created or ok - drive successfully connected or appears as already connected (by another request)
 							process.resolve(state);
-							utils.log("DONE: " + status + " " + state.drive.provider.serviceName + " connected successfully.");
+							utils.log("DONE: " + status + " " + state.drive.provider.name + " connected successfully.");
 						} else if (status == "202") {
 							// else inform progress and continue
 							process.notify(state);
-							utils.log("PROGRESS: " + status + " " + state.drive.provider.serviceName + " connectCheck progress " + state.progress);
+							utils.log("PROGRESS: " + status + " " + state.drive.provider.name + " connectCheck progress " + state.progress);
 						} else {
 							// unexpected status, wait for created
 							utils.log("WARN: unexpected status in connectCheck:" + status);
@@ -462,8 +475,8 @@
 					} else {
 						utils.log("ERROR: " + status + " connectCheck return wrong state.");
 						var driveName;
-						if (state.drive && state.drive.provider && state.drive.provider.serviceName) {
-							driveName = state.drive.provider.serviceName;
+						if (state.drive && state.drive.provider && state.drive.provider.name) {
+							driveName = state.drive.provider.name;
 						} else {
 							driveName = "Cloud Drive";
 						}
@@ -651,14 +664,12 @@
 					// sync scheduler
 					function scheduleSync() {
 						autoSyncs[syncName] = setTimeout(function() {
-							var syncProcess = syncFunc();
-							syncProcess.done(function() {
+							syncFunc().done(function() {
 								if (autoSyncs[syncName]) {
 									// re-schedule only if enabled
 									scheduleSync();
 								}
-							});
-							syncProcess.fail(function(e) {
+							}).fail(function(e) {
 								delete autoSyncs[syncName];
 								// cancel and cleanup
 								utils.log("ERROR: " + (e && e.message ? e.message : e) + ". Auto-sync canceled for " + syncName);
@@ -699,29 +710,28 @@
 							if (client && client.onChange && client.hasOwnProperty("onChange")) {
 								// apply custom client algorithm
 								// sync in 10sec
-								syncTimeout = 10000;
+								var defaultSyncTimeout = 10000;
+								syncTimeout = defaultSyncTimeout;
 								syncFunc = function() {
 									var process = $.Deferred();
-									// Run first sync now and then schedule a next one by change from client
-									var sync = doSync();
-									sync.fail(function(e) {
-										process.reject(e);
-									});
 									// We chain actual sync to the sync initiator from client.
 									// The initiator should return jQuery Promise: it will be resolved if changes appear and rejected on error.
 									// We use jQuery.when() to deal if not Promise returned (it's bad case - sync will run each 5sec forever).
 									var initiator = client.onChange(drive);
-									$.when(initiator).done(function() {
+									$.when(initiator).done(function(nextTimeout) {
+										// nextTimeout - is optional
+										if (nextTimeout && typeof nextTimeout === "number") {
+											syncTimeout = nextTimeout;
+										} else {
+											syncTimeout = defaultSyncTimeout;
+										}
 										// changes happen remotely - it's time to sync
-										var sync = doSync();
-										sync.done(function() {
+										doSync().done(function() {
 											process.resolve();
-										});
-										sync.fail(function(e) {
+										}).fail(function(e) {
 											process.reject(e);
 										});
-									});
-									$.when(initiator).fail(function(e) {
+									}).fail(function(e) {
 										process.reject(e);
 									});
 									return process.promise();
@@ -781,75 +791,80 @@
 					activeSyncs.push(sync);
 					var currentPath = currentNode ? currentNode.path : nodePath;
 					sync.done(function(drive, status) {
-						var changed = 0;
-						var updated = 0;
-						// updated in context node
-
-						// init files by the client if applicable
-						var provider = providers[contextDrive.provider.id];
-						if (provider) {
-							provider.clientModule.done(function(client) {
-								if (client && client.initFile && client.hasOwnProperty("initFile")) {
-									for (fpath in drive.files) {
-										client.initFile(drive.files[fpath]);
+						try {
+							var changed = 0;
+							var updated = 0;
+							// updated in context node
+	
+							// init files by the client if applicable
+							var provider = providers[contextDrive.provider.id];
+							if (provider) {
+								provider.clientModule.done(function(client) {
+									if (client && client.initFile && client.hasOwnProperty("initFile")) {
+										for (fpath in drive.files) {
+											client.initFile(drive.files[fpath]);
+										}
+									}
+								});
+							}
+	
+							// calculate the whole drive changes and updated in current folder
+							for (fpath in drive.files) {
+								if (drive.files.hasOwnProperty(fpath)) {
+									changed++;
+									if (currentPath && fpath.indexOf(currentPath) == 0) {
+										updated++;
 									}
 								}
-							});
-						}
-
-						// calculate the whole drive changes and updated in current folder
-						for (fpath in drive.files) {
-							if (drive.files.hasOwnProperty(fpath)) {
-								changed++;
-								if (currentPath && fpath.indexOf(currentPath) == 0) {
+							}
+	
+							// count removed as changed
+							changed += drive.removed.length;
+							for (var i = 0; i < drive.removed.length; i++) {
+								if (currentPath && drive.removed[i].indexOf(currentPath) == 0) {
 									updated++;
 								}
 							}
-						}
-
-						// count removed as changed
-						changed += drive.removed.length;
-						for (var i = 0; i < drive.removed.length; i++) {
-							if (currentPath && drive.removed[i].indexOf(currentPath) == 0) {
-								updated++;
-							}
-						}
-
-						// copy already cached but not synced files to the new drive
-						nextCached:
-						for (fpath in sync.contextDrive.files) {
-							if (!drive.files[fpath]) {
-								for (var fi = 0; fi < drive.removed.length; fi++) {
-									if (fpath.indexOf(drive.removed[fi]) == 0) {
-										// skip already removed, including subtree files
-										continue nextCached;
+	
+							// copy already cached but not synced files to the new drive
+							nextCached:
+							for (fpath in sync.contextDrive.files) {
+								if (!drive.files[fpath]) {
+									for (var fi = 0; fi < drive.removed.length; fi++) {
+										if (fpath.indexOf(drive.removed[fi]) == 0) {
+											// skip already removed, including subtree files
+											continue nextCached;
+										}
+									}
+									for (var ui = 0; ui < drive.state.updating.length; ui++) {
+										if (fpath === drive.state.updating[ui]) {
+											// skip currently syncing to let them be requested from the server later
+											continue nextCached;
+										}
+									}
+									if (!drive.files.hasOwnProperty(fpath)) {
+										drive.files[fpath] = sync.contextDrive.files[fpath];
 									}
 								}
-								for (var ui = 0; ui < drive.state.updating.length; ui++) {
-									if (fpath === drive.state.updating[ui]) {
-										// skip currently syncing to let them be requested from the server later
-										continue nextCached;
-									}
-								}
-								if (!drive.files.hasOwnProperty(fpath)) {
-									drive.files[fpath] = sync.contextDrive.files[fpath];
-								}
 							}
+	
+							utils.log("DONE: Synchronized " + changed + " changes from Cloud Drive associated with " + nodeWorkspace + ":" + nodePath + ". " + updated + " updated in current folder.");
+	
+							if (sync.contextDrive == contextDrive) {
+								// using new drive in the context (only if context wasn't changed)
+								contextDrive = drive;
+							}
+	
+							checkAutoSynchronize();
+	
+							process.resolve(updated, drive);
+						} catch(err) {
+							utils.log("ERROR: synchronization error: " + (err.message ? err.message : err), err);
+							process.reject(err, status);
 						}
-
-						utils.log("DONE: Synchronized " + changed + " changes from Cloud Drive associated with " + nodeWorkspace + ":" + nodePath + ". " + updated + " updated in current folder.");
-
-						if (sync.contextDrive == contextDrive) {
-							// using new drive in the context (only if context wasn't changed)
-							contextDrive = drive;
-						}
-
-						checkAutoSynchronize();
-
-						process.resolve(updated, drive);
 					});
 					sync.fail(function(response, status, err) {
-						utils.log("ERROR: synchronization error: " + err + ", " + status + ", " + JSON.stringify(response));
+						utils.log("ERROR: synchronization failed: " + err + ", " + status + ", " + JSON.stringify(response));
 						if (status == 403) {
 							if (response.id) {
 								updateProvider = response;
@@ -932,38 +947,35 @@
 		/**
 		 * Connect to Cloud Drive.
 		 */
-		this.connect = function(providerId, authURL, userNode, userWorkspace) {
+		this.connect = function(providerId) {
 			utils.log("Connecting Cloud Drive...");
 
-			if (!authURL) {
-				var provider = providers[providerId];
-				if (provider) {
-					authURL = provider.authURL;
+			var failure = $.Deferred();
+			var provider = providers[providerId];
+			if (provider) {
+				var authURL = provider.authURL;
+				if (authURL) {
 					if (authURL.indexOf(prefixUrl) == 0) {
 						// XXX warm-up the portal with its ajax request :)
 						serviceGet(authURL + "&ajaxRequest=true");
 					}
+					
+					// reset previous drive context
+					contextDrive = null;
+					excluded = {};
+					
+					var process = connectDrive(providerId, authURL);
+					cloudDriveUI.connectProcess(process);
+					return process;
 				} else {
-					utils.log("ERROR: Provider cannot be for id " + providerId);
-					return;
+					utils.log("ERROR: Provider has no authURL " + providerId);
+					failure.reject("Provider has no authentication URL");
 				}
+			} else {
+				utils.log("ERROR: Provider not found " + providerId);
+				failure.reject("Provider not found");
 			}
-
-			// set connect node explicitly
-			if (userNode && userWorkspace) {
-				contextNode = {
-					workspace : userWorkspace,
-					path : userNode
-				};
-			}
-
-			// reset previous drive context
-			contextDrive = null;
-			excluded = {};
-
-			var process = connectDrive(providerId, authURL);
-			cloudDriveUI.connectProcess(process);
-			return process;
+			return failure.promise();
 		};
 
 		this.state = function(checkUrl) {
@@ -1150,9 +1162,12 @@
 		/**
 		 * Helper for AJAX GET requests.
 		 * */
-		this.ajaxGet = function(url, data) {
-			return serviceGet(url, data);
-		};
+		this.ajaxGet = serviceGet;
+		
+		/**
+		 * Helper for AJAX POST requests.
+		 * */
+		this.ajaxPost = servicePost;
 
 		/**
 		 * Request current state of given drive and return jQuery promise to the request.
@@ -1316,7 +1331,7 @@
 						});
 					}
 					var $i = $(this).find("i");
-					text = text + drive.provider.serviceName;
+					text = text + drive.provider.name;
 					$(this).text(text);
 					$(this).prepend($i);
 					if (cloudDrive.isContextUpdating()) {
@@ -1332,7 +1347,7 @@
 						$(this).data("cd_action_prefix", text);
 					}
 					var $i = $(this).find("i");
-					text = text + drive.provider.serviceName;
+					text = text + drive.provider.name;
 					$(this).text(text);
 					$(this).prepend($i);
 				});
@@ -1347,7 +1362,7 @@
 						$(this).data("cd_action_prefix", text);
 					}
 					var $i = $(this).find("i");
-					text = text + drive.provider.serviceName;
+					text = text + drive.provider.name;
 					$(this).text(text);
 					$(this).prepend($i);
 				});
@@ -1934,7 +1949,7 @@
 					message = "Find your drive in Personal Documents";
 				}
 				$.pnotify({
-					title : "Your " + state.drive.provider.serviceName + " connected!",
+					title : "Your " + state.drive.provider.name + " connected!",
 					type : "success",
 					text : message,
 					icon : "picon picon-task-complete",
@@ -1950,7 +1965,7 @@
 			state.fail(function(state) {
 				var message;
 				if (state.drive && state.drive.provider) {
-					message = "Error connecting your " + state.drive.provider.serviceName;
+					message = "Error connecting your " + state.drive.provider.name;
 				} else {
 					message = "Error connecting your drive";
 				}
@@ -2036,7 +2051,7 @@
 					// start progress
 					progress = state.progress;
 					if (progress > 0) {
-						driveName = state.drive.provider.serviceName;
+						driveName = state.drive.provider.name;
 
 						notice.pnotify({
 							title : "Connecting Your " + driveName,
@@ -2065,7 +2080,7 @@
 					}
 				} else {
 					// continue progress
-					driveName = state.drive.provider.serviceName;
+					driveName = state.drive.provider.name;
 					// need update drive name
 					progress = state.progress;
 				}
