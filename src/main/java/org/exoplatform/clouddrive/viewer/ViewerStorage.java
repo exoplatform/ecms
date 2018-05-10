@@ -702,15 +702,6 @@ public class ViewerStorage {
     }
 
     /**
-     * Removes the file.
-     *
-     * @param file the file
-     */
-    void removeFile(PDFFile file) {
-      files.remove(file.getName());
-    }
-
-    /**
      * Clean all.
      */
     void cleanAll() {
@@ -966,12 +957,11 @@ public class ViewerStorage {
           FileInputStream tempStream = new FileInputStream(tempFile);
           try {
             Document pdf = buildDocumentImage(tempStream, tempFile.getName());
-            try {
+            try { 
               pdfFile = new PDFFile(key, tempFile, cleanName, lastModified, pdf);
 
               // listen the drive for file removal/updates to clean the storage
               addDriveListener(drive, pdfFile);
-
             } finally {
               pdf.dispose();
             }

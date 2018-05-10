@@ -973,7 +973,7 @@ public class ConnectService implements ResourceContainer {
                     "Cloud Drive init ID",
                     INIT_COOKIE_EXPIRE,
                     false);
-        return resp.entity(new ProviderInfo(provider)).ok().build();
+        return resp.entity(provider).ok().build();
       } else {
         LOG.warn("ConversationState not set to initialize connect to " + provider.getName());
         return resp.error("User not authenticated to connect " + provider.getName()).status(Status.UNAUTHORIZED).build();

@@ -31,6 +31,11 @@ package org.exoplatform.clouddrive;
 public class NotAcceptableException extends ConstraintException {
 
   /**
+   * 
+   */
+  private static final long serialVersionUID = 6205072118481683658L;
+
+  /**
    * Instantiates a new not acceptable exception.
    *
    * @param message the message

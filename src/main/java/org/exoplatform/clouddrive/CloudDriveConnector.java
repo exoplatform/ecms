@@ -414,7 +414,7 @@ public abstract class CloudDriveConnector extends BaseComponentPlugin {
     if (convo != null) {
       return convo.getIdentity().getUserId();
     } else {
-      return null; // shouldn't happen
+      return null; // shouldn't happen for authenticated users
     }
   }
 

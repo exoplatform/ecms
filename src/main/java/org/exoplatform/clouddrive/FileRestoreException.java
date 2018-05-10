@@ -32,6 +32,11 @@ package org.exoplatform.clouddrive;
 public class FileRestoreException extends ConstraintException {
 
   /**
+   * 
+   */
+  private static final long serialVersionUID = 3867881453167036088L;
+
+  /**
    * Instantiates a new file restore exception.
    *
    * @param message the message

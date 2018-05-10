@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003-2016 eXo Platform SAS.
+ * Copyright (C) 2003-2018 eXo Platform SAS.
  *
  * This is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as
@@ -37,7 +37,7 @@ import javax.jcr.RepositoryException;
 public interface CloudFileAPI {
 
   /**
-   * Gets the id.
+   * Gets the ID of local file.
    *
    * @param fileNode the file node
    * @return the id
@@ -46,7 +46,7 @@ public interface CloudFileAPI {
   String getId(Node fileNode) throws RepositoryException;
 
   /**
-   * Gets the title.
+   * Gets the title of local file.
    *
    * @param fileNode the file node
    * @return the title
@@ -55,7 +55,7 @@ public interface CloudFileAPI {
   String getTitle(Node fileNode) throws RepositoryException;
 
   /**
-   * Gets the parent id.
+   * Gets the parent ID of local file.
    *
    * @param fileNode the file node
    * @return the parent id
@@ -64,7 +64,7 @@ public interface CloudFileAPI {
   String getParentId(Node fileNode) throws RepositoryException;
 
   /**
-   * Gets the created.
+   * Gets the created date of local file.
    *
    * @param fileNode the file node
    * @return the created
@@ -73,16 +73,34 @@ public interface CloudFileAPI {
   Calendar getCreated(Node fileNode) throws RepositoryException;
 
   /**
-   * Gets the modified.
+   * Gets the modified date of local file.
    *
    * @param fileNode the file node
    * @return the modified
    * @throws RepositoryException the repository exception
    */
   Calendar getModified(Node fileNode) throws RepositoryException;
-  
+
   /**
-   * Gets the type.
+   * Gets the author of local file.
+   *
+   * @param fileNode the file node
+   * @return the author
+   * @throws RepositoryException the repository exception
+   */
+  String getAuthor(Node fileNode) throws RepositoryException;
+
+  /**
+   * Gets the last user of local file.
+   *
+   * @param fileNode the file node
+   * @return the last user
+   * @throws RepositoryException the repository exception
+   */
+  String getLastUser(Node fileNode) throws RepositoryException;
+
+  /**
+   * Gets the type of local file node.
    *
    * @param fileNode the file node
    * @return the type
@@ -91,7 +109,7 @@ public interface CloudFileAPI {
   String getType(Node fileNode) throws RepositoryException;
 
   /**
-   * Find parents.
+   * Find IDs of local file parents.
    *
    * @param id the id
    * @return the collection
@@ -101,7 +119,7 @@ public interface CloudFileAPI {
   Collection<String> findParents(String id) throws DriveRemovedException, RepositoryException;
 
   /**
-   * Checks if is drive.
+   * Checks if is a drive node.
    *
    * @param node the node
    * @return true, if is drive
@@ -110,7 +128,7 @@ public interface CloudFileAPI {
   boolean isDrive(Node node) throws RepositoryException;
 
   /**
-   * Checks if is folder.
+   * Checks if is local folder node.
    *
    * @param node the node
    * @return true, if is folder
@@ -119,7 +137,7 @@ public interface CloudFileAPI {
   boolean isFolder(Node node) throws RepositoryException;
 
   /**
-   * Checks if is file.
+   * Checks if is local file node.
    *
    * @param node the node
    * @return true, if is file
@@ -128,7 +146,7 @@ public interface CloudFileAPI {
   boolean isFile(Node node) throws RepositoryException;
 
   /**
-   * Checks if is file resource.
+   * Checks if is a local file resource.
    *
    * @param node the node
    * @return true, if is file resource
@@ -137,7 +155,7 @@ public interface CloudFileAPI {
   boolean isFileResource(Node node) throws RepositoryException;
 
   /**
-   * Checks if is ignored.
+   * Checks if is local file node ignored.
    *
    * @param node the node
    * @return true, if is ignored
@@ -146,7 +164,7 @@ public interface CloudFileAPI {
   boolean isIgnored(Node node) throws RepositoryException;
 
   /**
-   * Mark given file as ignored.
+   * Mark given local file node as ignored.
    *
    * @param node {@link Node}
    * @return boolean <code>true</code> if file was ignored, <code>false</code> if it is already ignored
@@ -155,7 +173,7 @@ public interface CloudFileAPI {
   boolean ignore(Node node) throws RepositoryException;
 
   /**
-   * Remove ignorance mark on given file.
+   * Remove ignorance mark on given local file node.
    *
    * @param node {@link Node}
    * @return boolean <code>true</code> if file unignored, <code>false</code> if file not ignored
@@ -164,7 +182,7 @@ public interface CloudFileAPI {
   boolean unignore(Node node) throws RepositoryException;
 
   /**
-   * Removes the file.
+   * Removes the file on cloud side.
    *
    * @param id the id
    * @return true, if successful
@@ -174,7 +192,7 @@ public interface CloudFileAPI {
   boolean removeFile(String id) throws CloudDriveException, RepositoryException;
 
   /**
-   * Removes the folder.
+   * Removes the folder on cloud side.
    *
    * @param id the id
    * @return true, if successful
@@ -191,7 +209,7 @@ public interface CloudFileAPI {
   boolean isTrashSupported();
 
   /**
-   * Trash file.
+   * Trash file on cloud side.
    *
    * @param id the id
    * @return true, if successful
@@ -201,7 +219,7 @@ public interface CloudFileAPI {
   boolean trashFile(String id) throws CloudDriveException, RepositoryException;
 
   /**
-   * Trash folder.
+   * Trash folder on cloud side.
    *
    * @param id the id
    * @return true, if successful
@@ -211,7 +229,7 @@ public interface CloudFileAPI {
   boolean trashFolder(String id) throws CloudDriveException, RepositoryException;
 
   /**
-   * Untrash file.
+   * Untrash file on cloud side.
    *
    * @param fileNode the file node
    * @return the cloud file
@@ -221,7 +239,8 @@ public interface CloudFileAPI {
   CloudFile untrashFile(Node fileNode) throws CloudDriveException, RepositoryException;
 
   /**
-   * Untrash folder.
+   * Untrash folder on cloud side. It may untrash folder children recursive (depending on a provider
+   * capabilities).
    *
    * @param fileNode the file node
    * @return the cloud file
@@ -231,7 +250,7 @@ public interface CloudFileAPI {
   CloudFile untrashFolder(Node fileNode) throws CloudDriveException, RepositoryException;
 
   /**
-   * Creates the file.
+   * Creates the file on cloud side.
    *
    * @param fileNode the file node
    * @param created the created
@@ -242,14 +261,11 @@ public interface CloudFileAPI {
    * @throws CloudDriveException the cloud drive exception
    * @throws RepositoryException the repository exception
    */
-  CloudFile createFile(Node fileNode,
-                       Calendar created,
-                       Calendar modified,
-                       String mimeType,
-                       InputStream content) throws CloudDriveException, RepositoryException;
+  CloudFile createFile(Node fileNode, Calendar created, Calendar modified, String mimeType, InputStream content) throws CloudDriveException,
+                                                                                                                 RepositoryException;
 
   /**
-   * Creates the folder.
+   * Creates the folder on cloud side.
    *
    * @param folderNode the folder node
    * @param created the created
@@ -260,7 +276,7 @@ public interface CloudFileAPI {
   CloudFile createFolder(Node folderNode, Calendar created) throws CloudDriveException, RepositoryException;
 
   /**
-   * Update folder.
+   * Update folder on cloud side.
    *
    * @param folderNode the folder node
    * @param modified the modified
@@ -271,7 +287,7 @@ public interface CloudFileAPI {
   CloudFile updateFolder(Node folderNode, Calendar modified) throws CloudDriveException, RepositoryException;
 
   /**
-   * Update file.
+   * Update file on cloud side.
    *
    * @param fileNode the file node
    * @param modified the modified
@@ -282,7 +298,7 @@ public interface CloudFileAPI {
   CloudFile updateFile(Node fileNode, Calendar modified) throws CloudDriveException, RepositoryException;
 
   /**
-   * Update file content.
+   * Update file content on cloud side.
    *
    * @param fileNode the file node
    * @param modified the modified
@@ -292,12 +308,10 @@ public interface CloudFileAPI {
    * @throws CloudDriveException the cloud drive exception
    * @throws RepositoryException the repository exception
    */
-  CloudFile updateFileContent(Node fileNode, Calendar modified, String mimeType, InputStream content)
-                                                                                                      throws CloudDriveException,
-                                                                                                      RepositoryException;
+  CloudFile updateFileContent(Node fileNode, Calendar modified, String mimeType, InputStream content) throws CloudDriveException, RepositoryException;
 
   /**
-   * Copy file.
+   * Copy file on cloud side.
    *
    * @param srcFileNode the src file node
    * @param destFileNode the dest file node
@@ -308,7 +322,7 @@ public interface CloudFileAPI {
   CloudFile copyFile(Node srcFileNode, Node destFileNode) throws CloudDriveException, RepositoryException;
 
   /**
-   * Copy folder.
+   * Copy folder on cloud side.
    *
    * @param srcFolderNode the src folder node
    * @param destFolderNode the dest folder node
@@ -319,15 +333,20 @@ public interface CloudFileAPI {
   CloudFile copyFolder(Node srcFolderNode, Node destFolderNode) throws CloudDriveException, RepositoryException;
 
   /**
-   * Restore.
+   * Restore the file from cloud side. If file exists remotely it should be restored locally at right location
+   * and its {@link CloudFile} returned, otherwise locally existing file(s) should be removed and
+   * <code>null</code> returned.
+   * <br>
+   * This method will be used by synchronization of local-to-remote changes in case of a failure and need to
+   * restore the state from cloud side. Method should care about removal of all file duplicates if this
+   * may have a place during the sync.
    *
    * @param id the id
    * @param path the path
-   * @return the cloud file
-   * @throws NotFoundException the not found exception
+   * @return the cloud file of a restore item or <code>null</code> if it was removed
    * @throws CloudDriveException the cloud drive exception
    * @throws RepositoryException the repository exception
    */
-  CloudFile restore(String id, String path) throws NotFoundException, CloudDriveException, RepositoryException;
+  CloudFile restore(String id, String path) throws CloudDriveException, RepositoryException;
 
 }

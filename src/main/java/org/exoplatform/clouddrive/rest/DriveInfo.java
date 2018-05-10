@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003-2016 eXo Platform SAS.
+ * Copyright (C) 2003-2018 eXo Platform SAS.
  *
  * This is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as
@@ -23,6 +23,7 @@ import org.exoplatform.clouddrive.CloudDrive;
 import org.exoplatform.clouddrive.CloudDriveException;
 import org.exoplatform.clouddrive.CloudDriveMessage;
 import org.exoplatform.clouddrive.CloudFile;
+import org.exoplatform.clouddrive.CloudProvider;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -42,7 +43,7 @@ import javax.jcr.RepositoryException;
 public class DriveInfo {
 
   /** The provider. */
-  final ProviderInfo                  provider;
+  final CloudProvider                  provider;
 
   /** The files. */
   final Map<String, CloudFile>        files;
@@ -86,7 +87,7 @@ public class DriveInfo {
             String path,
             Object state,
             boolean connected,
-            ProviderInfo provider,
+            CloudProvider provider,
             Map<String, CloudFile> files,
             Collection<String> removed,
             Collection<CloudDriveMessage> messages) {
@@ -128,7 +129,7 @@ public class DriveInfo {
                          drive.getPath(),
                          drive.getState(),
                          drive.isConnected(),
-                         new ProviderInfo(drive.getUser()),
+                         drive.getUser().getProvider(),
                          driveFiles,
                          removed,
                          messages);
@@ -176,7 +177,7 @@ public class DriveInfo {
    *
    * @return the provider
    */
-  public ProviderInfo getProvider() {
+  public CloudProvider getProvider() {
     return provider;
   }
 

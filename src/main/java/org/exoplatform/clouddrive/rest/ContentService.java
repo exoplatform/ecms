@@ -380,10 +380,14 @@ public class ContentService implements ResourceContainer {
               String repository = jcrService.getCurrentRepository().getConfiguration().getName();
               ContentFile viewFile = viewerStorage.getFile(repository, workspace, drive, contentId);
               if (viewFile != null && viewFile.isPDF()) {
+                String filename = viewFile.getName();
+                if (!filename.endsWith(".pdf")) {
+                  filename = new StringBuilder(filename).append(".pdf").toString();
+                }
                 ResponseBuilder resp = Response.ok(viewFile.getStream(), viewFile.getMimeType())
                                                .header("Last-Modified", viewFile.getLastModified())
                                                .header("Content-Length", viewFile.getLength());
-                resp.header("Content-Disposition", "attachment; filename=\"" + viewFile.getName() + "\"");
+                resp.header("Content-Disposition", "attachment; filename=\"" + filename + "\"");
                 return resp.build();
               } else {
                 // PDF representation not available

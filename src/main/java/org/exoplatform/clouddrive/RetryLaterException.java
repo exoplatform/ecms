@@ -1,5 +1,6 @@
+
 /*
- * Copyright (C) 2003-2016 eXo Platform SAS.
+ * Copyright (C) 2003-2018 eXo Platform SAS.
  *
  * This is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as
@@ -19,38 +20,52 @@
 package org.exoplatform.clouddrive;
 
 /**
- * Cloud provider's constraint or similar error was handled but related sub-tree should be ignored in
- * synchronization. It is internal exception, it should not be thrown to an user in public API.<br>
+ * Retry needed for an operation at Cloud provider side.
  * 
- * Created by The eXo Platform SAS
+ * Created by The eXo Platform SAS.
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
- * @version $Id: SkipConstraintException.java 00000 Dec 10, 2014 pnedonosko $
+ * @version $Id: RetryLaterException.java 00000 Apr 13, 2018 pnedonosko $
  * 
  */
-public class SkipChangeException extends ConstraintException {
+public class RetryLaterException extends CloudDriveException {
 
   /**
    * 
    */
-  private static final long serialVersionUID = 2262629500908854296L;
+  private static final long serialVersionUID = 1790305980466041648L;
+
+  /** The timeout. */
+  protected final long      timeout;
 
   /**
-   * Instantiates a new skip change exception.
+   * Instantiates a new retry exception.
    *
    * @param message the message
+   * @param timeout the timeout
    */
-  public SkipChangeException(String message) {
+  public RetryLaterException(String message, long timeout) {
     super(message);
+    this.timeout = timeout;
   }
 
   /**
-   * Instantiates a new skip change exception.
+   * Instantiates a new retry exception.
    *
    * @param message the message
+   * @param timeout the timeout
    * @param cause the cause
    */
-  public SkipChangeException(String message, Throwable cause) {
+  public RetryLaterException(String message, long timeout, Throwable cause) {
     super(message, cause);
+    this.timeout = timeout;
   }
+
+  /**
+   * @return the timeout
+   */
+  public long getTimeout() {
+    return timeout;
+  }
+
 }
