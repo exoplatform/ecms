@@ -197,6 +197,11 @@
                         2
                     </value>
                 </value-param>
+                <value-param>
+                  <name>plugin.upgrade.target.version</name>
+                  <description>Target version of the plugin</description>
+                  <value>4.0.0</value>
+                </value-param>
             </init-params>
         </component-plugin>
         <component-plugin>
@@ -301,6 +306,11 @@
                         2
                     </value>
                 </value-param>
+                <value-param>
+                  <name>plugin.upgrade.target.version</name>
+                  <description>Target version of the plugin</description>
+                  <value>4.0.0</value>
+                </value-param>
             </init-params>
         </component-plugin>
         <component-plugin>
@@ -361,6 +371,11 @@
                         /sites
                     </value>
                 </value-param>
+                <value-param>
+                  <name>plugin.upgrade.target.version</name>
+                  <description>Target version of the plugin</description>
+                  <value>4.0.2</value>
+                </value-param>
             </init-params>
         </component-plugin>
         <component-plugin>
@@ -399,6 +414,11 @@
                         2
                     </value>
                 </value-param>
+                <value-param>
+                  <name>plugin.upgrade.target.version</name>
+                  <description>Target version of the plugin</description>
+                  <value>4.0.0</value>
+                </value-param>
             </init-params>
         </component-plugin>
         <component-plugin>
@@ -436,6 +456,16 @@
                     <value>
                         2
                     </value>
+                </value-param>
+                <value-param>
+                  <name>plugin.upgrade.execute.once</name>
+                  <description>Execute this upgrade pluginonly once</description>
+                  <value>true</value>
+                </value-param>
+                <value-param>
+                  <name>plugin.upgrade.target.version</name>
+                  <description>Target version of the plugin</description>
+                  <value>4.1.0</value>
                 </value-param>
             </init-params>
         </component-plugin>
@@ -476,6 +506,11 @@
                         2
                     </value>
                 </value-param>
+                <value-param>
+                  <name>plugin.upgrade.target.version</name>
+                  <description>Target version of the plugin</description>
+                  <value>4.1.0</value>
+                </value-param>
             </init-params>
         </component-plugin>
 	
@@ -514,6 +549,16 @@
                     <value>
                         2
                     </value>
+                </value-param>
+                <value-param>
+                  <name>plugin.upgrade.execute.once</name>
+                  <description>Execute this upgrade pluginonly once</description>
+                  <value>true</value>
+                </value-param>
+                <value-param>
+                  <name>plugin.upgrade.target.version</name>
+                  <description>Target version of the plugin</description>
+                  <value>4.0.3</value>
                 </value-param>
             </init-params>
         </component-plugin>
@@ -554,6 +599,16 @@
                         2
                     </value>
                 </value-param>
+                <value-param>
+                  <name>plugin.upgrade.execute.once</name>
+                  <description>Execute this upgrade pluginonly once</description>
+                  <value>true</value>
+                </value-param>
+                <value-param>
+                  <name>plugin.upgrade.target.version</name>
+                  <description>Target version of the plugin</description>
+                  <value>4.0.1</value>
+                </value-param>
             </init-params>
         </component-plugin>
         
@@ -572,6 +627,16 @@
                     <name>plugin.execution.order</name>
                     <description>The plugin execution order</description>
                     <value>2</value>
+                </value-param>
+                <value-param>
+                  <name>plugin.upgrade.execute.once</name>
+                  <description>Execute this upgrade pluginonly once</description>
+                  <value>true</value>
+                </value-param>
+                <value-param>
+                  <name>plugin.upgrade.target.version</name>
+                  <description>Target version of the plugin</description>
+                  <value>4.0.2</value>
                 </value-param>
             </init-params>
         </component-plugin>
@@ -592,6 +657,16 @@
                     <description>The plugin execution order</description>
                     <value>2</value>
                 </value-param>
+                <value-param>
+                  <name>plugin.upgrade.execute.once</name>
+                  <description>Execute this upgrade pluginonly once</description>
+                  <value>true</value>
+                </value-param>
+                <value-param>
+                  <name>plugin.upgrade.target.version</name>
+                  <description>Target version of the plugin</description>
+                  <value>4.0.5</value>
+                </value-param>
             </init-params>
         </component-plugin>
 
@@ -611,6 +686,16 @@
                     <description>The plugin execution order</description>
                     <value>2</value>
                 </value-param>
+                <value-param>
+                  <name>plugin.upgrade.execute.once</name>
+                  <description>Execute this upgrade pluginonly once</description>
+                  <value>true</value>
+                </value-param>
+                <value-param>
+                  <name>plugin.upgrade.target.version</name>
+                  <description>Target version of the plugin</description>
+                  <value>4.0.5</value>
+                </value-param>
             </init-params>
         </component-plugin>
         <component-plugin>
@@ -629,6 +714,16 @@
                     <description>The plugin execution order</description>
                     <value>2</value>
                 </value-param>
+                <value-param>
+                  <name>plugin.upgrade.execute.once</name>
+                  <description>Execute this upgrade pluginonly once</description>
+                  <value>true</value>
+                </value-param>
+                <value-param>
+                  <name>plugin.upgrade.target.version</name>
+                  <description>Target version of the plugin</description>
+                  <value>4.1.0</value>
+                </value-param>
             </init-params>
         </component-plugin>
         <component-plugin>
@@ -646,6 +741,16 @@
                     <name>plugin.execution.order</name>
                     <description>The plugin execution order</description>
                     <value>2</value>
+                </value-param>
+                <value-param>
+                  <name>plugin.upgrade.execute.once</name>
+                  <description>Execute this upgrade pluginonly once</description>
+                  <value>true</value>
+                </value-param>
+                <value-param>
+                  <name>plugin.upgrade.target.version</name>
+                  <description>Target version of the plugin</description>
+                  <value>4.0.7</value>
                 </value-param>
             </init-params>
         </component-plugin>
@@ -666,6 +771,16 @@
             <description>The plugin execution order</description>
             <value>2</value>
           </value-param>
+          <value-param>
+            <name>plugin.upgrade.execute.once</name>
+            <description>Execute this upgrade pluginonly once</description>
+            <value>true</value>
+          </value-param>
+          <value-param>
+            <name>plugin.upgrade.target.version</name>
+            <description>Target version of the plugin</description>
+            <value>4.1.0</value>
+          </value-param>
         </init-params>
       </component-plugin>
 
@@ -684,6 +799,16 @@
             <name>plugin.execution.order</name>
             <description>The plugin execution order</description>
             <value>2</value>
+          </value-param>
+          <value-param>
+            <name>plugin.upgrade.execute.once</name>
+            <description>Execute this upgrade pluginonly once</description>
+            <value>true</value>
+          </value-param>
+          <value-param>
+            <name>plugin.upgrade.target.version</name>
+            <description>Target version of the plugin</description>
+            <value>4.2.0</value>
           </value-param>
         </init-params>
       </component-plugin>
