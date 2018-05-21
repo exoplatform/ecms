@@ -42,7 +42,7 @@ public class UIVersionInfoTest extends BaseECMSTestCase {
 
         VersionNode versionNode = new VersionNode(file, session);
         //root Version
-        assertEquals("3", versionNode.getDisplayName());
+        assertEquals("2", versionNode.getDisplayName());
         List<VersionNode> versionNodes= versionNode.getChildren();
         assertEquals(2, versionNodes.size());
 
@@ -57,11 +57,11 @@ public class UIVersionInfoTest extends BaseECMSTestCase {
         versionNodes.sort(comparator);
 
         assertEquals("1", versionNodes.get(0).getName());
-        assertEquals("1", versionNodes.get(0).getDisplayName());
+        assertEquals("0", versionNodes.get(0).getDisplayName());
 
         //base Version
         assertEquals("2", versionNodes.get(1).getName());
-        assertEquals("2", versionNodes.get(1).getDisplayName());
+        assertEquals("1", versionNodes.get(1).getDisplayName());
 
         //remove Base Version
         VersionHistoryUtils.removeVersion(file,"2");
@@ -77,7 +77,7 @@ public class UIVersionInfoTest extends BaseECMSTestCase {
         versionNodes.sort(comparator);
 
         assertEquals("1", versionNodes.get(0).getName());
-        assertEquals("1", versionNodes.get(0).getDisplayName());
+        assertEquals("0", versionNodes.get(0).getDisplayName());
 
         //add new Version
         VersionHistoryUtils.createVersion(file);
@@ -93,7 +93,7 @@ public class UIVersionInfoTest extends BaseECMSTestCase {
         versionNodes.sort(comparator);
 
         assertEquals("1", versionNodes.get(0).getName());
-        assertEquals("1", versionNodes.get(0).getDisplayName());
+        assertEquals("0", versionNodes.get(0).getDisplayName());
 
         //base Version : nt:version name 2; display name 3
         assertEquals("2", versionNodes.get(1).getName());

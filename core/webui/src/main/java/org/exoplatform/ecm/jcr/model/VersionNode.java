@@ -114,7 +114,7 @@ public class VersionNode {
         if(version.getUUID().equals(rootVersion.getUUID())) {
           continue;
         }
-        int versionIndex = Integer.parseInt(version.getName());
+        int versionIndex = Integer.parseInt(version.getName()) -1;
         maxIndex = Math.max(maxIndex , versionIndex);
         VersionNode versionNode = new VersionNode(version, session);
         if(versionOffset != null) {

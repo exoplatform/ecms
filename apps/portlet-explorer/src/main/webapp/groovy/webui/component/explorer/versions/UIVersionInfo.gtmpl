@@ -92,7 +92,12 @@ import java.util.Locale;
       boolean isBaseVersion = uicomponent.isBaseVersion(node);
 
       String versionNumber = uicomponent.isRootVersion(node) ? uicomponent.getRootVersionNum() : node.getName();
-      String displayNumber = node.getDisplayName();
+      String displayNumber = "";
+      if (node.getDisplayName().equals("0")) {
+        displayNumber = _ctx.appRes("UIVersionInfo.tooltip.original");
+      }else {
+        displayNumber = node.getDisplayName();
+      }
       String emptySummary = _ctx.appRes("UIVersionInfo.summary.empty");
       String versionId = "version_"+versionNumber;
       String baseVersion = "";
