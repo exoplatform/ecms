@@ -67,7 +67,6 @@ public class TestFavoriteService extends BaseWCMTestCase {
     List<Node> favoritesOfJohn = favoriteService.getAllFavoriteNodesByUser(session.getWorkspace().getName(), REPO_NAME, "john");
     for (Node node : favoritesOfJohn) {
       favoriteService.removeFavorite(node, "john");
-      node.remove();
     }
     session.save();
     super.tearDown();

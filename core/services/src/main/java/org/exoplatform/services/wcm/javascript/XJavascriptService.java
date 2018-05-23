@@ -199,17 +199,13 @@ public class XJavascriptService implements Startable {
    * @param isStartup
    */
   private void addSharedPortalJavascript(Node portalNode, Node jsFile, boolean isStartup) throws Exception {
-    String javascriptPath = StringUtils.replaceOnce(PATH, "{portalName}", portalNode.getName());
-    String moduleName = MODULE_NAME + '.' + portalNode.getName();
-//    jsConfigService.invalidateMergedCommonJScripts();
-//    jsConfigService.invalidateCachedJScript("/" + servletContext.getServletContextName() +
-//                                            javascriptPath);
-    if (!loadedSharedJSModule.contains(moduleName)) {
-      loadedSharedJSModule.add(moduleName);
-//      jsConfigService.addCommonJScript(
-//         new Javascript(moduleName, javascriptPath,"/" + servletContext.getServletContextName(), 10));
+    if (portalNode != null) {
+      String moduleName = MODULE_NAME + '.' + portalNode.getName();
+      if (!loadedSharedJSModule.contains(moduleName)) {
+        loadedSharedJSModule.add(moduleName);
+      }
+      jsCache_.clearCache();
     }
-    jsCache_.clearCache();
   }
 
   private String getActivedJSData(Node jsFile) throws ValueFormatException,

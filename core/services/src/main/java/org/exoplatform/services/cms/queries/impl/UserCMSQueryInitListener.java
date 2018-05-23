@@ -25,12 +25,14 @@ import javax.jcr.Session;
 import javax.jcr.query.Query;
 import javax.jcr.query.QueryManager;
 
+import org.exoplatform.container.ExoContainer;
+import org.exoplatform.container.component.RequestLifeCycle;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
-import org.exoplatform.services.organization.User;
-import org.exoplatform.services.organization.UserEventListener;
+import org.exoplatform.services.listener.*;
+import org.exoplatform.services.organization.*;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.gatein.common.logging.Logger;
@@ -39,32 +41,51 @@ import org.gatein.common.logging.LoggerFactory;
 /**
  * @author Benjamin Mestrallet benjamin.mestrallet@exoplatform.com
  */
-public class NewUserListener extends UserEventListener {
-  
-  private static final Logger LOG = LoggerFactory.getLogger(NewUserListener.class);
+@Asynchronous
+public class UserCMSQueryInitListener extends Listener<OrganizationService, String> {
+
+  private static final Logger LOG = LoggerFactory.getLogger(UserCMSQueryInitListener.class);
 
   private NewUserConfig config_;
   private NodeHierarchyCreator nodeHierarchyCreator_;
   private RepositoryService repositoryService_ ;
   private String relativePath_;
+  private ExoContainer container;
 
-  public NewUserListener(RepositoryService repositoryService,
+  public UserCMSQueryInitListener(RepositoryService repositoryService,
                          NodeHierarchyCreator nodeHierarchyCreator,
+                         ExoContainer container,
                          InitParams params)    throws Exception {
     nodeHierarchyCreator_ = nodeHierarchyCreator;
     repositoryService_ = repositoryService;
+    this.container = container;
     config_ = params.getObjectParamValues(NewUserConfig.class).get(0);
     relativePath_ = params.getValueParam("relativePath").getValue();
   }
 
-  public void preSave(User user, boolean isNew)
-      throws Exception {
-    initSystemData(user.getUserName());
+  @Override
+  public void onEvent(Event<OrganizationService, String> event) throws Exception {
+    RequestLifeCycle.begin(container);
+    try {
+      initSystemData(event.getData());
+    } finally {
+      RequestLifeCycle.end();
+    }
   }
 
-  private void initSystemData(String userName) throws Exception{
+  private void initSystemData(String userName) throws Exception {
     SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
     Node userNode = nodeHierarchyCreator_.getUserNode(sessionProvider, userName);
+    if (!userNode.hasNode(relativePath_)) {
+      Node userQueryHome = userNode.addNode(relativePath_);
+      userQueryHome.addMixin("exo:searchFolder");
+      userQueryHome.addMixin("exo:hiddenable");
+      userNode.save();
+      return;
+    }
+    if (config_ == null) {
+      return;
+    }
     if (userNode.hasNode(relativePath_)) {
       Node queriesHome =  userNode.getNode(relativePath_) ;
       boolean userFound = false;
@@ -89,11 +110,11 @@ public class NewUserListener extends UserEventListener {
     }
   }
 
-  public void importQueries(Node queriesHome, List<NewUserConfig.Query> queries) throws Exception {
+  private void importQueries(Node queriesHome, List<NewUserConfig.Query> queries) throws Exception {
     importQueries(queriesHome, queries, queriesHome.getSession().getWorkspace().getName());
   }
   
-  public void importQueries(Node queriesHome, List<NewUserConfig.Query> queries, 
+  private void importQueries(Node queriesHome, List<NewUserConfig.Query> queries, 
       String workspaceName) throws Exception {
     QueryManager manager = getSession(workspaceName).getWorkspace().getQueryManager();
     for (NewUserConfig.Query query:queries) {

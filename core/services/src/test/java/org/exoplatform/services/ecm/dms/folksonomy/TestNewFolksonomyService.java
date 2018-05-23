@@ -1200,15 +1200,16 @@ public class TestNewFolksonomyService extends BaseWCMTestCase {
                       "/test","/test2", userNode.getPath() + "/Private/" + TEST, userNode.getPath() + "/Private/" + TEST2,
                       userNode.getNode("Private/Folksonomy").getPath(),
                       session.getUserID()};
+    Session systemSession = sessionProviderService_.getSystemSessionProvider(null).getSession(COLLABORATION_WS, repository);
     for (String node : nodes)
-      if (session.itemExists(node)) {
+      if (systemSession.itemExists(node)) {
         //System.out.println("Delete: -----------------------------" + node);
-        Node n = (Node)session.getItem(node);
+        Node n = (Node)systemSession.getItem(node);
         n.remove();
-        session.save();
+        systemSession.save();
       }
 
-    Session dmsSession = sessionProvider.getSession(DMSSYSTEM_WS, repository);
+    Session dmsSession = sessionProviderService_.getSystemSessionProvider(null).getSession(DMSSYSTEM_WS, repository);
     String tagStylesPath = "/jcr:system/exo:ecm/exo:folksonomies/exo:tagStyle";
     if (dmsSession.itemExists(tagStylesPath)) {
       Node tagStylesNode = (Node)dmsSession.getItem(tagStylesPath);
