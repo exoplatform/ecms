@@ -46,6 +46,7 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 public class CommentsServiceImpl implements CommentsService {
 
   private static final Log LOG = ExoLogger.getLogger(CommentsServiceImpl.class.getName());
+  private static final String CACHE_NAME = "ecms.CommentsService" ;
 
   private final static String COMMENTS = "comments" ;
   private final static String COMMENTABLE = "mix:commentable" ;
@@ -71,7 +72,7 @@ public class CommentsServiceImpl implements CommentsService {
    */
   public CommentsServiceImpl(CacheService cacheService,
                              MultiLanguageService multiLangService) throws Exception {
-    commentsCache_ = cacheService.getCacheInstance(CommentsService.class.getName()) ;
+    commentsCache_ = cacheService.getCacheInstance(CACHE_NAME) ;
     multiLangService_ = multiLangService ;
     activityService = WCMCoreUtils.getService(ActivityCommonService.class);
   }

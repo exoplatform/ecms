@@ -63,6 +63,7 @@ import java.util.Set;
 public class TrashServiceImpl implements TrashService {
 
   private static final String FILE_EXPLORER_PORTLET = "FileExplorerPortlet";
+  private final static String CACHE_NAME = "ecms.seo";
   final static public String EXO_TOTAL = "exo:total";
   final static public String MIX_REFERENCEABLE = "mix:referenceable";
   final static public String TAXONOMY_LINK   = "exo:taxonomyLink";
@@ -91,7 +92,7 @@ public class TrashServiceImpl implements TrashService {
     this.taxonomyService_ = taxonomyService;
     this.trashWorkspace_ = initParams.getValueParam("trashWorkspace").getValue();
     this.trashHome_ = initParams.getValueParam("trashHomeNodePath").getValue();
-    cache = WCMCoreUtils.getService(CacheService.class).getCacheInstance("wcm.seo");
+    cache = WCMCoreUtils.getService(CacheService.class).getCacheInstance(CACHE_NAME);
     ExoContainer manager = ExoContainerContext.getCurrentContainer();
     PortletInvoker portletInvoker = (PortletInvoker)manager.getComponentInstance(PortletInvoker.class);
     if (portletInvoker != null) {

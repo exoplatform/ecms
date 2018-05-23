@@ -57,6 +57,8 @@ public abstract class BaseResourceLoaderService implements Startable{
 
   private static final String EDITED_CONFIGURED_SCRIPTS = "EditedConfiguredScripts";
 
+  private static final String CACHE_NAME = "ecms.BaseResourceCache";
+
   /**
    * DMS configuration which used to store informations
    */
@@ -78,7 +80,7 @@ public abstract class BaseResourceLoaderService implements Startable{
     nodeHierarchyCreator_ = nodeHierarchyCreator;
     repositoryService_ = repositoryService;
     cservice_ = cservice;
-    resourceCache_ = cacheService.getCacheInstance(this.getClass().getName());
+    resourceCache_ = cacheService.getCacheInstance(CACHE_NAME);
     dmsConfiguration_ = dmsConfiguration;
   }
 

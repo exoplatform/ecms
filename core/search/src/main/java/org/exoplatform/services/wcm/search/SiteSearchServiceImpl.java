@@ -75,6 +75,10 @@ import org.exoplatform.webui.application.portlet.PortletRequestContext;
  */
 public class SiteSearchServiceImpl implements SiteSearchService {
 
+  private static final String  SITE_SEARCH_FOUND_CACHE = "ecms.SiteSearchService.found";
+
+  private static final String  SITE_SEARCH_DROP_CACHE = "ecms.SiteSearchService.drop";
+
   /** Allow administrators to enable/disable the fuzzy search mechanism. */
   private static final String IS_ENABLED_FUZZY_SEARCH = "isEnabledFuzzySearch";
 
@@ -137,8 +141,8 @@ public class SiteSearchServiceImpl implements SiteSearchService {
     this.templateService = templateService;
     this.repositoryService = repositoryService;
     this.configurationService = configurationService;
-    this.foundNodeCache = caService.getCacheInstance(SiteSearchService.class.getSimpleName() + ".found");
-    this.dropNodeCache = caService.getCacheInstance(SiteSearchService.class.getSimpleName() + ".drop");
+    this.foundNodeCache = caService.getCacheInstance(SITE_SEARCH_FOUND_CACHE);
+    this.dropNodeCache = caService.getCacheInstance(SITE_SEARCH_DROP_CACHE);
     if (initParams != null) {
       ValueParam isEnabledFuzzySearchValue = initParams.getValueParam(IS_ENABLED_FUZZY_SEARCH);
       if (isEnabledFuzzySearchValue != null)

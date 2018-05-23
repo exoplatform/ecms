@@ -84,6 +84,8 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
 
   private static final String       TAG_PERMISSION_LIST    = "tagPermissionList";
 
+  private static final String       CACHE_NAME             = "ecms.FolksonomyService";
+
   private static final Log          LOG                    = ExoLogger.getLogger(NewFolksonomyServiceImpl.class.getName());
 
   private NodeHierarchyCreator      nodeHierarchyCreator;
@@ -118,7 +120,7 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
     this.initParams_ = initParams;
     listenerService = WCMCoreUtils.getService(ListenerService.class);
     this.activityService = WCMCoreUtils.getService(ActivityCommonService.class);
-    this.tagPermissionList = cacheService.getCacheInstance(NewFolksonomyServiceImpl.class.getName());
+    this.tagPermissionList = cacheService.getCacheInstance(CACHE_NAME);
     //get the DataDistributionType object;
     if (initParams != null && initParams.getValueParam("tagDistributionMode") != null) {
       String strTagDistributionMode = initParams.getValueParam("tagDistributionMode").getValue();

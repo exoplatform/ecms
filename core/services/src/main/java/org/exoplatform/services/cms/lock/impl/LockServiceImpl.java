@@ -60,6 +60,7 @@ public class LockServiceImpl implements LockService, Startable {
 
   private final String SETTING_LOCK="SETTING_LOCK";
   private final String PRE_SETTING_LOCK="PRE_SETTING_LOCK";
+  private final String CACHE_NAME = "ecms.LockService";
 
   private ExoCache<String, List<String>> settingLockList;
   private List<LockGroupsOrUsersPlugin> lockGroupsOrUsersPlugin_ = new ArrayList<LockGroupsOrUsersPlugin>();
@@ -73,7 +74,7 @@ public class LockServiceImpl implements LockService, Startable {
    */
   public LockServiceImpl(InitParams params, CacheService cacheService) throws Exception {
     //group_ = params.getValueParam("group").getValue();
-    settingLockList = cacheService.getCacheInstance(LockServiceImpl.class.getName());
+    settingLockList = cacheService.getCacheInstance(CACHE_NAME);
   }
 
   /**

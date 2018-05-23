@@ -52,12 +52,14 @@ public class FragmentCacheService implements Startable {
   /** . */
   private static final Log LOG                   = ExoLogger.getLogger(FragmentCacheService.class.getName());
 
+  private final static String CACHE_NAME = "ecms.FragmentCacheService";
+
   /** . */
   private ExoCache<WindowKey, MarkupFragment> markupCache_;
   private FutureCache<WindowKey, MarkupFragment, PortletRenderContext> futureCache;
   
   public FragmentCacheService(CacheService cacheService, InitParams params) {
-    markupCache_ = cacheService.getCacheInstance(FragmentCacheService.class.getSimpleName());
+    markupCache_ = cacheService.getCacheInstance(CACHE_NAME);
     futureCache = new FutureExoCache<WindowKey, MarkupFragment, PortletRenderContext>(new PortletRenderer(LOG), markupCache_);
   }
   

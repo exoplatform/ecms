@@ -75,6 +75,7 @@ public class PDFViewerRESTService implements ResourceContainer {
 
   private static final int MAX_NAME_LENGTH= 150;
   private static final String LASTMODIFIED = "Last-Modified";
+  private static final String PDF_VIEWER_CACHE = "ecms.PDFViewerRestService";
   private RepositoryService repositoryService_;
   private ExoCache<Serializable, Object> pdfCache;
   private JodConverterService jodConverter_;
@@ -89,7 +90,7 @@ public class PDFViewerRESTService implements ResourceContainer {
     if(pdfViewerService != null){
       pdfCache = pdfViewerService.getCache();
     }else{
-      pdfCache = caService.getCacheInstance(PDFViewerRESTService.class.getName());
+      pdfCache = caService.getCacheInstance(PDF_VIEWER_CACHE);
     }
   }
 

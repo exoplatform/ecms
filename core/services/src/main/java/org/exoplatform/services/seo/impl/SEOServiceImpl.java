@@ -75,6 +75,8 @@ public class SEOServiceImpl implements SEOService {
   private static String PUBLIC_MODE = "public";
   private static String PRIVATE_MODE = "private";
 
+  private final static String CACHE_NAME = "ecms.seo";
+
   private List<String> robotsindex = new ArrayList<String>();
   private List<String> robotsfollow = new ArrayList<String>();
   private List<String> frequency = new ArrayList<String>();
@@ -98,7 +100,7 @@ public class SEOServiceImpl implements SEOService {
       frequency = seoConfig.getFrequency();
     }
     cache = WCMCoreUtils.getService(CacheService.class).getCacheInstance(
-        "wcm.seo");
+            CACHE_NAME);
   }
 
   /**

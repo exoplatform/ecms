@@ -13,42 +13,21 @@
             <init-params>
                 <object-param>
                     <name>cache.config.ecms.javascript</name>
-                    <description>The default cache configuration</description>
-                    <object type="org.exoplatform.services.cache.ExoCacheConfig">
-                        <field name="name">
-                            <string>ecms.site.javascript.cache</string>
-                        </field>
-                        <field name="maxSize">
-                            <int>${cache.exo.ecms.javascript.maxSize:300}</int>
-                        </field>
-                        <field name="liveTime">
-                            <long>${cache.exo.ecms.javascript.liveTime:600}</long>
-                        </field>
-                        <field name="distributed">
-                            <boolean>false</boolean>
-                        </field>
-                        <field name="implementation">
-                            <string>org.exoplatform.services.cache.concurrent.ConcurrentFIFOExoCache</string>
-                        </field>
-                    </object>
-                </object-param>
-                <object-param profiles="cluster">
-                    <name>cache.config.ecms.javascript</name>
                     <description></description>
                     <object type="org.exoplatform.services.cache.impl.infinispan.generic.GenericExoCacheConfig">
                         <field name="name">
                             <string>ecms.site.javascript.cache</string>
                         </field>
-                        <field name="strategy">
-                            <string>LIRS</string>
+                        <field name="strategy"  profiles="cluster">
+                            <string>${exo.cache.ecms.javascript.strategy:LIRS}</string>
                         </field>
                         <field name="maxEntries">
-                            <int>${cache.exo.ecms.javascript.maxSize:300}</int>
+                            <int>${exo.cache.ecms.javascript.MaxNodes:100}</int>
                         </field>
                         <field name="lifespan">
-                            <long>${cache.exo.ecms.javascript.liveTime:600}</long>
+                            <long>${exo.cache.ecms.javascript.TimeToLive:-1}</long>
                         </field>
-                        <field name="cacheMode">
+                        <field name="cacheMode"  profiles="cluster">
                             <string>${exo.cache.ecms.javascript.cacheMode:replication}</string>
                         </field>
                     </object>

@@ -45,8 +45,8 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 public class ClipboardServiceImpl implements ClipboardService {
   
   private static final Log       LOG  = ExoLogger.getLogger(ClipboardServiceImpl.class.getName());
-  private static final String CLIPBOARD_CACHE = "ClipboardServiceCache";
-  private static final String CLIPBOARD_CACHE_VIRTUAL = "ClipboardServiceCacheVirtual";
+  private static final String CLIPBOARD_CACHE = "ecms.ClipboardServiceCache";
+  private static final String CLIPBOARD_CACHE_VIRTUAL = "ecms.ClipboardServiceCacheVirtual";
   
   private CacheService cacheService_;
   

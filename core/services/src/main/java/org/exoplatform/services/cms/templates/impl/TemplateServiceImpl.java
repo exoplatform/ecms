@@ -94,6 +94,8 @@ public class TemplateServiceImpl implements TemplateService, Startable {
 
   private static final Log LOG  = ExoLogger.getLogger(TemplateService.class.getName());
 
+  private final static String CACHE_NAME = "ecms.TemplateService";
+
   /**
    * DMS configuration which used to store informations
    */
@@ -127,7 +129,7 @@ public class TemplateServiceImpl implements TemplateService, Startable {
     this.templateService = templateService;
     dmsConfiguration_ = dmsConfiguration;
     localeConfigService_ = localeConfigService;
-    nodeTypeListCached = caService.getCacheInstance(TemplateService.class.getName());
+    nodeTypeListCached = caService.getCacheInstance(CACHE_NAME);
   }
 
   /**

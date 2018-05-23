@@ -60,6 +60,8 @@ public class InitialWebContentPlugin extends CreatePortalPlugin {
   private RepositoryService repositoryService;
   private ExoCache<String, String> artifactsCache;
   private LivePortalManagerService livePortalManagerService;
+
+  private final static String CACHE_NAME = "ecms.InitialWebContentPlugin";
   /**
    * Instantiates a new initial web content plugin.
    *
@@ -76,7 +78,7 @@ public class InitialWebContentPlugin extends CreatePortalPlugin {
     this.initParams = initParams;
     this.configurationManager = configurationManager;
     this.repositoryService = repositoryService;
-    this.artifactsCache = cacheService.getCacheInstance(this.getClass().getName());
+    this.artifactsCache = cacheService.getCacheInstance(CACHE_NAME);
     this.livePortalManagerService = livePortalManagerService;
   }
 

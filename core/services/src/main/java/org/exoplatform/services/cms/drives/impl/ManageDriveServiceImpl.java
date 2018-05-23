@@ -128,6 +128,8 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
   public static final String DRIVE_PARAMATER_USER_ID = "userId";
   public static final String DRIVE_PARAMATER_GROUP_ID = "groupId";
 
+  private final static String CACHE_NAME = "ecms.drive";
+
   /**
    * List of ManageDrivePlugin
    */
@@ -184,7 +186,7 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
     nodeHierarchyCreator_ = nodeHierarchyCreator ;
     baseDrivePath_ = nodeHierarchyCreator_.getJcrPath(BasePath.EXO_DRIVES_PATH);
     dmsConfiguration_ = dmsConfiguration;
-    drivesCache_ = caService.getCacheInstance("wcm.drive");
+    drivesCache_ = caService.getCacheInstance(CACHE_NAME);
     this.organizationService = organizationService;
   }
 

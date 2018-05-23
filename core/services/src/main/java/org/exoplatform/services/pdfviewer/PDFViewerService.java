@@ -61,6 +61,8 @@ public class PDFViewerService {
 
   public static final String             MAX_PAGES_PARAM_NAME     = "maxPages";
 
+  private static final String CACHE_NAME = "ecms.PDFViewerService";
+
   private JodConverterService            jodConverter_;
 
   private ExoCache<Serializable, Object> pdfCache;
@@ -74,7 +76,7 @@ public class PDFViewerService {
                           JodConverterService jodConverter,
                           InitParams initParams) throws Exception {
     jodConverter_ = jodConverter;
-    pdfCache = caService.getCacheInstance(PDFViewerService.class.getName());
+    pdfCache = caService.getCacheInstance(CACHE_NAME);
 
     maxFileSize = DEFAULT_MAX_FILE_SIZE;
     maxPages = DEFAULT_MAX_PAGES;

@@ -63,6 +63,8 @@ public class TestDriveService extends BaseWCMTestCase {
   private static String ALL_PERSONAL_CACHED_DRIVE = "_personalDrives";
   private static String ALL_GROUP_CACHED_DRIVES = "_groupDrives";
 
+  private static String CACHE_NAME = "ecms.drive";
+
   /**
    * Set up for testing
    *
@@ -522,7 +524,7 @@ public class TestDriveService extends BaseWCMTestCase {
 
     driveService.getGroupDrives("john", userRoles);
 
-    Object drivesInCache = caService.getCacheInstance("wcm.drive").get(REPO_NAME + "_" + "john" + ALL_GROUP_CACHED_DRIVES);
+    Object drivesInCache = caService.getCacheInstance(CACHE_NAME).get(REPO_NAME + "_" + "john" + ALL_GROUP_CACHED_DRIVES);
     assertTrue(drivesInCache != null);
     assertEquals(((List<DriveData>)drivesInCache).size(), 4);
    }
@@ -602,7 +604,7 @@ public class TestDriveService extends BaseWCMTestCase {
 
     driveService.getPersonalDrives("john");
     driveService.getPersonalDrives("john");
-    Object drivesInCache = caService.getCacheInstance("wcm.drive").get(REPO_NAME + "_" + "john" + ALL_PERSONAL_CACHED_DRIVE);
+    Object drivesInCache = caService.getCacheInstance(CACHE_NAME).get(REPO_NAME + "_" + "john" + ALL_PERSONAL_CACHED_DRIVE);
     assertTrue(drivesInCache != null);
     assertEquals(((List<DriveData>)drivesInCache).size(), 3);
   }
@@ -724,7 +726,7 @@ public class TestDriveService extends BaseWCMTestCase {
     driveService.getMainDrives("john", userRoles);
     driveService.getMainDrives("john", userRoles);
 
-    Object drivesInCache = caService.getCacheInstance("wcm.drive").get(REPO_NAME + "_" + "john" + ALL_MAIN_CACHED_DRIVE);
+    Object drivesInCache = caService.getCacheInstance("ecms.drive").get(REPO_NAME + "_" + "john" + ALL_MAIN_CACHED_DRIVE);
     assertEquals(((List<DriveData>)drivesInCache).size(), 2);
   }
 
@@ -832,7 +834,7 @@ public class TestDriveService extends BaseWCMTestCase {
     driveService.getDriveByUserRoles("marry", userRoles);
     driveService.getDriveByUserRoles("marry", userRoles);
 
-    Object drivesInCache = caService.getCacheInstance("wcm.drive").get(REPO_NAME + "_" + "marry" + ALL_DRIVES_CACHED_BY_ROLES);
+    Object drivesInCache = caService.getCacheInstance(CACHE_NAME).get(REPO_NAME + "_" + "marry" + ALL_DRIVES_CACHED_BY_ROLES);
     assertEquals(((List<DriveData>)drivesInCache).size(), 6);
 
   }

@@ -71,6 +71,8 @@ public class LiveLinkManagerServiceImpl implements LiveLinkManagerService {
   /** The log. */
   final private static Log LOG = ExoLogger.getLogger(LiveLinkManagerServiceImpl.class.getName());
 
+  private final static String CACHE_NAME = "ecms.LiveLinkManagerService";
+
   /**
    * Instantiates a new live link manager service impl.
    *
@@ -91,7 +93,7 @@ public class LiveLinkManagerServiceImpl implements LiveLinkManagerService {
     this.configurationService = configurationService;
     this.repositoryService = repositoryService;
     this.livePortalManagerService = livePortalManagerService;
-    this.brokenLinksCache = cacheService.getCacheInstance(this.getClass().getName());
+    this.brokenLinksCache = cacheService.getCacheInstance(CACHE_NAME);
 
     PropertiesParam propertiesParam = initParams.getPropertiesParam("server.config");
     String scheme = propertiesParam.getProperty("scheme");

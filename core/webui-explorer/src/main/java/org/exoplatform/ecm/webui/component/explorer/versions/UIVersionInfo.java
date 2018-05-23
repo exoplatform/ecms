@@ -96,6 +96,9 @@ public class UIVersionInfo extends UIContainer  {
   private UIPageIterator uiPageIterator_ ;
   private List<VersionNode> listVersion = new ArrayList<VersionNode>() ;
 
+  private static final String CACHE_NAME = "ecms.PDFViewerRestService";
+
+
   public UIVersionInfo() throws Exception {
     uiPageIterator_ = addChild(UIPageIterator.class, null, "VersionInfoIterator").setRendered(false);
   }
@@ -292,7 +295,7 @@ public class UIVersionInfo extends UIContainer  {
       if(pdfViewerService != null){
         pdfCache = pdfViewerService.getCache();
       }else{
-        pdfCache = caService.getCacheInstance(PDFViewerRESTService.class.getName());
+        pdfCache = caService.getCacheInstance(CACHE_NAME);
       }
       for(UIComponent uiChild : uiVersionInfo.getChildren()) {
         uiChild.setRendered(false) ;
