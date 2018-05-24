@@ -21,10 +21,10 @@
                         <field name="strategy"  profiles="cluster">
                             <string>${exo.cache.ecms.javascript.strategy:LIRS}</string>
                         </field>
-                        <field name="maxEntries">
+                        <field name="maxSize">
                             <int>${exo.cache.ecms.javascript.MaxNodes:100}</int>
                         </field>
-                        <field name="lifespan">
+                        <field name="liveTime">
                             <long>${exo.cache.ecms.javascript.TimeToLive:-1}</long>
                         </field>
                         <field name="cacheMode"  profiles="cluster">
