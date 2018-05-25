@@ -31,6 +31,8 @@ import org.exoplatform.commons.utils.ISO8601;
 import org.exoplatform.services.cms.CmsService;
 import org.exoplatform.services.cms.JcrInputProperty;
 import org.exoplatform.services.wcm.BaseWCMTestCase;
+
+import org.apache.commons.lang3.StringUtils;
 import org.junit.FixMethodOrder;
 import org.junit.runners.MethodSorters;
 
@@ -325,7 +327,9 @@ public class TestCmsService extends BaseWCMTestCase {
     assertTrue(session.itemExists(path2));
 
     session.getItem(path1).remove();
-    session.getItem(path2).remove();
+    if(!StringUtils.equals(path1, path2)) {
+      session.getItem(path2).remove();
+    }
     referencedNode.remove();
     session.save();
   }
