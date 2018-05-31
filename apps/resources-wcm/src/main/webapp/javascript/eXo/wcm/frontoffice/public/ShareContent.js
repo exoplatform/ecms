@@ -34,7 +34,9 @@
     });
     gj('.sharePermission .dropdown-toggle').on('click', function () {
         var $dropdown = gj(this).parent().find('.dropdown-menu');
-        $dropdown.css('left', -1 * $dropdown.width() + gj(this).parent().width());
+        if (gj(window).width() > 420) {
+          $dropdown.css('left', -1 * $dropdown.width() + gj(this).parent().width());
+        }
     });
     gj("#AccessEntry .btn-toolbar").on("click", function (et) {
       var $button = gj(et.target).closest(".uiActionWithLabel");
