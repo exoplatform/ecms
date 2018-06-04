@@ -1350,6 +1350,7 @@
       <empty>ここをクリックして要約を追加します</empty>
     </summary>
     <tooltip>
+      <original>元のバージョン</original>
       <version>バージョン</version>
       <baseVersion>ベースバージョン</baseVersion>
       <addLabel>ラベルの追加</addLabel>

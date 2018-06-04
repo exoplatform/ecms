@@ -1350,6 +1350,7 @@
       <empty>Faceți clic aici pentru a adăuga un rezumat</empty>
     </summary>
     <tooltip>
+      <original>Original Version</original>
       <version>Versiune</version>
       <baseVersion>Versiunea de bază</baseVersion>
       <addLabel>Adaugă eticheta</addLabel>

@@ -1350,6 +1350,7 @@
       <empty>Click here to add a summary</empty>
     </summary>
     <tooltip>
+      <original>Original Version</original>
       <version>نسخه</version>
       <baseVersion>نسخه پایه</baseVersion>
       <addLabel>افزودن برچسب</addLabel>

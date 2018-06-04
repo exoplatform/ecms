@@ -1350,6 +1350,7 @@
       <empty>انقر هنا لإضافة مُلخّص</empty>
     </summary>
     <tooltip>
+      <original>Original Version</original>
       <version>إصدار</version>
       <baseVersion>الإصدار الحالي.</baseVersion>
       <addLabel>إضافة رمز</addLabel>

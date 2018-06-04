@@ -1350,6 +1350,7 @@
       <empty>Özet eklemek için buraya tıklayın</empty>
     </summary>
     <tooltip>
+      <original>Original Version</original>
       <version>Sürüm</version>
       <baseVersion>geçerli sürüm</baseVersion>
       <addLabel>Etiket Ekle</addLabel>

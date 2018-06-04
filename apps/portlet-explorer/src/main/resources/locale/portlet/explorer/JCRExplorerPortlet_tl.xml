@@ -1350,6 +1350,7 @@
       <empty>I-klik dito para makapagdagdag ng buod</empty>
     </summary>
     <tooltip>
+      <original>Original Version</original>
       <version>Ang Bersyon</version>
       <baseVersion>ang kasalukuyang bersyon</baseVersion>
       <addLabel>Magdagdag ng Label</addLabel>

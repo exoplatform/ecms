@@ -1350,6 +1350,7 @@
       <empty>Feu clic aquí per afegir un resum</empty>
     </summary>
     <tooltip>
+      <original>Original Version</original>
       <version>Versió</version>
       <baseVersion>versió actual</baseVersion>
       <addLabel>Afegeix una etiqueta</addLabel>

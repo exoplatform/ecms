@@ -1350,6 +1350,7 @@
       <empty>Click here to add a summary</empty>
     </summary>
     <tooltip>
+      <original>Original Version</original>
       <version>Phiên bản</version>
       <baseVersion>Phiên bản Cơ sở</baseVersion>
       <addLabel>Thêm Nhãn</addLabel>

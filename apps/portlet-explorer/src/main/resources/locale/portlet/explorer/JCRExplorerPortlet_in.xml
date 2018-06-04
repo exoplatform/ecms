@@ -1351,6 +1351,7 @@
       <empty>Klik disini untuk menambahkan ringkasan</empty>
     </summary>
     <tooltip>
+      <original>Original Version</original>
       <version>Versi</version>
       <baseVersion>versi saat ini</baseVersion>
       <addLabel>Tambahkan Label</addLabel>

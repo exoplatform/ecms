@@ -1350,6 +1350,7 @@
       <empty>Klicken Sie hier, um eine Zusammenfassung hinzuzufügen</empty>
     </summary>
     <tooltip>
+      <original>Original Version</original>
       <version>Version</version>
       <baseVersion>Basisversion</baseVersion>
       <addLabel>Label hinzufügen</addLabel>
