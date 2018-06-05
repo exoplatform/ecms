@@ -52,7 +52,7 @@ public class GoogleDriveConnector extends CloudDriveConnector {
    * API builder.
    */
   class API {
-    
+
     /** The code. */
     String code;
 
@@ -121,7 +121,8 @@ public class GoogleDriveConnector extends CloudDriveConnector {
                               SessionProviderService sessionProviders,
                               NodeFinder finder,
                               ExtendedMimeTypeResolver mimeTypes,
-                              InitParams params) throws ConfigurationException {
+                              InitParams params)
+      throws ConfigurationException {
     super(jcrService, sessionProviders, finder, mimeTypes, params);
   }
 

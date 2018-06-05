@@ -24,7 +24,7 @@ import org.exoplatform.clouddrive.CloudProviderException;
  * Indicates a problem on provider side or communication problem.
  */
 public class GoogleDriveException extends CloudProviderException {
-  
+
   /** The Constant serialVersionUID. */
   private static final long serialVersionUID = -4550294718482983340L;
 
@@ -46,7 +46,7 @@ public class GoogleDriveException extends CloudProviderException {
   public GoogleDriveException(String message, Throwable cause) {
     super(message, cause);
   }
-  
+
   /**
    * Instantiates a new google drive exception.
    *

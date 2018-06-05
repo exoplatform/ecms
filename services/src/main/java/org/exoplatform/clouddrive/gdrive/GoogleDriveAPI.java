@@ -41,7 +41,6 @@ import com.google.api.client.util.store.DataStoreFactory;
 import com.google.api.services.drive.Drive;
 import com.google.api.services.drive.Drive.Changes;
 import com.google.api.services.drive.Drive.Children;
-import com.google.api.services.drive.Drive.Files.Delete;
 import com.google.api.services.drive.Drive.Realtime.Get;
 import com.google.api.services.drive.DriveRequest;
 import com.google.api.services.drive.DriveScopes;
@@ -269,7 +268,7 @@ class GoogleDriveAPI implements DataStoreFactory {
         LOG.error("Error removing credential", e);
       }
     }
-    
+
     /**
      * Store.
      *
@@ -319,10 +318,10 @@ class GoogleDriveAPI implements DataStoreFactory {
     public void onTokenErrorResponse(Credential credential, TokenErrorResponse tokenErrorResponse) throws IOException {
       // TODO clean token keys to let them be re-requested to the user
       if (tokenErrorResponse != null) {
-      String errDescription = tokenErrorResponse.getErrorDescription();
-      String errURI = tokenErrorResponse.getErrorUri();
-        LOG.error("Error refreshing credentials: " + tokenErrorResponse.getError()
-            + (errDescription != null ? " " + errDescription : "") + (errURI != null ? ". Error URI: " + errURI : ""));
+        String errDescription = tokenErrorResponse.getErrorDescription();
+        String errURI = tokenErrorResponse.getErrorUri();
+        LOG.error("Error refreshing credentials: " + tokenErrorResponse.getError() + (errDescription != null ? " " + errDescription : "")
+            + (errURI != null ? ". Error URI: " + errURI : ""));
       } else {
         LOG.error("Error refreshing credentials for Google Drive [tokenErrorResponse was null]");
       }
@@ -349,7 +348,7 @@ class GoogleDriveAPI implements DataStoreFactory {
    * The Class ChildIterator.
    */
   class ChildIterator extends ChunkIterator<ChildReference> {
-    
+
     /** The request. */
     final Children.List request;
 
@@ -401,7 +400,7 @@ class GoogleDriveAPI implements DataStoreFactory {
    * The Class ChangesIterator.
    */
   class ChangesIterator extends ChunkIterator<Change> {
-    
+
     /** The request. */
     final Changes.List request;
 
@@ -770,8 +769,7 @@ class GoogleDriveAPI implements DataStoreFactory {
    * @throws GoogleDriveException if authentication failed for any reason.
    * @throws CloudDriveException if credentials store exception happen
    */
-  GoogleDriveAPI(String clientId, String clientSecret, String authCode, String redirectUri)
-      throws GoogleDriveException, CloudDriveException {
+  GoogleDriveAPI(String clientId, String clientSecret, String authCode, String redirectUri) throws GoogleDriveException, CloudDriveException {
     // use clean token, it will be populated with actual credentials as CredentialRefreshListener
     this.token = new AuthToken();
 
@@ -797,12 +795,8 @@ class GoogleDriveAPI implements DataStoreFactory {
     }
 
     // XXX .setHttpRequestInitializer(new RequestInitializer() this causes OAuth2 401 Unauthorized
-    this.drive = new Drive.Builder(new NetHttpTransport(), new JacksonFactory(), this.credential)
-                                                                                                 .setApplicationName(APP_NAME)
-                                                                                                 .build();
-    this.oauth2 = new Oauth2.Builder(new NetHttpTransport(), new JacksonFactory(), this.credential)
-                                                                                                   .setApplicationName(APP_NAME)
-                                                                                                   .build();
+    this.drive = new Drive.Builder(new NetHttpTransport(), new JacksonFactory(), this.credential).setApplicationName(APP_NAME).build();
+    this.oauth2 = new Oauth2.Builder(new NetHttpTransport(), new JacksonFactory(), this.credential).setApplicationName(APP_NAME).build();
   }
 
   /**
@@ -815,8 +809,7 @@ class GoogleDriveAPI implements DataStoreFactory {
    * @param expirationTime long, token expiration time on milliseconds
    * @throws CloudDriveException if credentials store exception happen
    */
-  GoogleDriveAPI(String clientId, String clientSecret, String accessToken, String refreshToken, long expirationTime)
-      throws CloudDriveException {
+  GoogleDriveAPI(String clientId, String clientSecret, String accessToken, String refreshToken, long expirationTime) throws CloudDriveException {
     this.token = new AuthToken();
     this.token.load(accessToken, refreshToken, expirationTime);
 
@@ -834,10 +827,8 @@ class GoogleDriveAPI implements DataStoreFactory {
     }
 
     // XXX .setHttpRequestInitializer(new RequestInitializer() this causes OAuth2 401 Unauthorized
-    this.drive = new Drive.Builder(new NetHttpTransport(), new JacksonFactory(), credential).setApplicationName(APP_NAME)
-                                                                                            .build();
-    this.oauth2 = new Oauth2.Builder(new NetHttpTransport(), new JacksonFactory(), credential).setApplicationName(APP_NAME)
-                                                                                              .build();
+    this.drive = new Drive.Builder(new NetHttpTransport(), new JacksonFactory(), credential).setApplicationName(APP_NAME).build();
+    this.oauth2 = new Oauth2.Builder(new NetHttpTransport(), new JacksonFactory(), credential).setApplicationName(APP_NAME).build();
   }
 
   /**
@@ -877,11 +868,7 @@ class GoogleDriveAPI implements DataStoreFactory {
     HttpTransport httpTransport = new NetHttpTransport();
     JacksonFactory jsonFactory = new JacksonFactory();
 
-    GoogleAuthorizationCodeFlow.Builder flow = new GoogleAuthorizationCodeFlow.Builder(httpTransport,
-                                                                                       jsonFactory,
-                                                                                       clientId,
-                                                                                       clientSecret,
-                                                                                       SCOPES);
+    GoogleAuthorizationCodeFlow.Builder flow = new GoogleAuthorizationCodeFlow.Builder(httpTransport, jsonFactory, clientId, clientSecret, SCOPES);
     // (access_type=offline) if application needs to refresh access tokens
     // when the user is not present at the browser.
     // If the value "approval_prompt" is force, then the user sees a
@@ -916,8 +903,7 @@ class GoogleDriveAPI implements DataStoreFactory {
       throw new GoogleDriveException("Error getting userinfo: " + error.getMessage() + " (" + error.getCode() + ").", e);
     } catch (HttpResponseException e) {
       // No Json body was returned by the API.
-      throw new GoogleDriveException("Error handling userinfo response: " + e.getMessage() + " (" + e.getStatusCode() + ").",
-                                     e);
+      throw new GoogleDriveException("Error handling userinfo response: " + e.getMessage() + " (" + e.getStatusCode() + ").", e);
     } catch (IOException e) {
       throw new GoogleDriveException("Error requesting userinfo: " + e.getMessage(), e);
     }
@@ -1010,8 +996,8 @@ class GoogleDriveAPI implements DataStoreFactory {
       return drive.files().insert(file, content).execute();
     } catch (GoogleJsonResponseException e) {
       if (isInsufficientPermissions(e)) {
-        throw new CloudDriveAccessException("Insufficient permissions to inserting file with content in Files service. "
-            + e.getStatusMessage() + " (" + e.getStatusCode() + ")");
+        throw new CloudDriveAccessException("Insufficient permissions to inserting file with content in Files service. " + e.getStatusMessage() + " ("
+            + e.getStatusCode() + ")");
       } else {
         // TODO we want be sure that file not inserted
         // need generate ID by Google (https://developers.google.com/drive/v2/reference/files/generateIds)
@@ -1049,8 +1035,8 @@ class GoogleDriveAPI implements DataStoreFactory {
       return drive.files().insert(file).execute();
     } catch (GoogleJsonResponseException e) {
       if (isInsufficientPermissions(e)) {
-        throw new CloudDriveAccessException("Insufficient permissions to insert file to Files service. "
-            + e.getStatusMessage() + " (" + e.getStatusCode() + ")");
+        throw new CloudDriveAccessException("Insufficient permissions to insert file to Files service. " + e.getStatusMessage() + " ("
+            + e.getStatusCode() + ")");
       } else {
         // TODO we want be sure that file not inserted
         // need generate ID by Google (https://developers.google.com/drive/v2/reference/files/generateIds)
@@ -1080,9 +1066,7 @@ class GoogleDriveAPI implements DataStoreFactory {
    * @throws NotFoundException the not found exception
    * @throws CloudDriveAccessException the cloud drive access exception
    */
-  void update(File file, AbstractInputStreamContent content) throws GoogleDriveException,
-                                                             NotFoundException,
-                                                             CloudDriveAccessException {
+  void update(File file, AbstractInputStreamContent content) throws GoogleDriveException, NotFoundException, CloudDriveAccessException {
     // TODO use If-Match with local ETag to esnure consistency
     // http://stackoverflow.com/questions/15723284/google-drive-sdk-check-etag-when-uploading-synchronizing
     String fileId = file.getId();
@@ -1091,8 +1075,8 @@ class GoogleDriveAPI implements DataStoreFactory {
       drive.files().update(fileId, file, content).execute();
     } catch (GoogleJsonResponseException e) {
       if (isInsufficientPermissions(e)) {
-        throw new CloudDriveAccessException("Insufficient permissions to update file in Files service. "
-            + e.getStatusMessage() + " (" + e.getStatusCode() + ")");
+        throw new CloudDriveAccessException("Insufficient permissions to update file in Files service. " + e.getStatusMessage() + " ("
+            + e.getStatusCode() + ")");
       } else if (e.getStatusCode() == 404) {
         throw new NotFoundException("Cloud file not found for updating: " + fileId, e);
       } else {
@@ -1120,8 +1104,8 @@ class GoogleDriveAPI implements DataStoreFactory {
       drive.files().update(fileId, file).execute();
     } catch (GoogleJsonResponseException e) {
       if (isInsufficientPermissions(e)) {
-        throw new CloudDriveAccessException("Insufficient permissions to update file in Files service. "
-            + e.getStatusMessage() + " (" + e.getStatusCode() + ")");
+        throw new CloudDriveAccessException("Insufficient permissions to update file in Files service. " + e.getStatusMessage() + " ("
+            + e.getStatusCode() + ")");
       } else if (e.getStatusCode() == 404) {
         throw new NotFoundException("Cloud file not found for updating: " + fileId, e);
       } else {
@@ -1149,8 +1133,8 @@ class GoogleDriveAPI implements DataStoreFactory {
       return drive.files().copy(srcFileId, destFile).execute();
     } catch (GoogleJsonResponseException e) {
       if (isInsufficientPermissions(e)) {
-        throw new CloudDriveAccessException("Insufficient permissions to copy file in Files service. " + e.getStatusMessage()
-            + " (" + e.getStatusCode() + ")");
+        throw new CloudDriveAccessException("Insufficient permissions to copy file in Files service. " + e.getStatusMessage() + " ("
+            + e.getStatusCode() + ")");
       } else if (e.getStatusCode() == 404) {
         throw new NotFoundException("Cloud file not found for copying: " + srcFileId, e);
       } else {
@@ -1174,8 +1158,8 @@ class GoogleDriveAPI implements DataStoreFactory {
       drive.files().delete(fileId).execute();
     } catch (GoogleJsonResponseException e) {
       if (isInsufficientPermissions(e)) {
-        throw new CloudDriveAccessException("Insufficient permissions to delete file in Files service. "
-            + e.getStatusMessage() + " (" + e.getStatusCode() + ")");
+        throw new CloudDriveAccessException("Insufficient permissions to delete file in Files service. " + e.getStatusMessage() + " ("
+            + e.getStatusCode() + ")");
       } else if (e.getStatusCode() == 404) {
         throw new NotFoundException("Cloud file not found for deleting: " + fileId, e);
       } else {
@@ -1200,8 +1184,8 @@ class GoogleDriveAPI implements DataStoreFactory {
       return drive.files().trash(fileId).execute();
     } catch (GoogleJsonResponseException e) {
       if (isInsufficientPermissions(e)) {
-        throw new CloudDriveAccessException("Insufficient permissions to trash file in Files service. "
-            + e.getStatusMessage() + " (" + e.getStatusCode() + ")");
+        throw new CloudDriveAccessException("Insufficient permissions to trash file in Files service. " + e.getStatusMessage() + " ("
+            + e.getStatusCode() + ")");
       } else if (e.getStatusCode() == 404) {
         throw new NotFoundException("Cloud file not found for trashing: " + fileId, e);
       } else {
@@ -1226,8 +1210,8 @@ class GoogleDriveAPI implements DataStoreFactory {
       return drive.files().untrash(fileId).execute();
     } catch (GoogleJsonResponseException e) {
       if (isInsufficientPermissions(e)) {
-        throw new CloudDriveAccessException("Insufficient permissions to untrash file in Files service. "
-            + e.getStatusMessage() + " (" + e.getStatusCode() + ")");
+        throw new CloudDriveAccessException("Insufficient permissions to untrash file in Files service. " + e.getStatusMessage() + " ("
+            + e.getStatusCode() + ")");
       } else if (e.getStatusCode() == 404) {
         throw new NotFoundException("Cloud file not found for untrashing: " + fileId, e);
       } else {
@@ -1269,8 +1253,8 @@ class GoogleDriveAPI implements DataStoreFactory {
         }
       } catch (GoogleJsonResponseException e) {
         if (isInsufficientPermissions(e)) {
-          throw new CloudDriveAccessException("Insufficient permissions to generate file IDs by Files service. "
-              + e.getStatusMessage() + " (" + e.getStatusCode() + ")");
+          throw new CloudDriveAccessException("Insufficient permissions to generate file IDs by Files service. " + e.getStatusMessage() + " ("
+              + e.getStatusCode() + ")");
         } else {
           throw new GoogleDriveException("Error to generate file IDs by Files service: " + e.getMessage(), e);
         }
