@@ -756,7 +756,10 @@
 		};
 
 		var checkAutoSynchronize = function() {
-			if (contextDrive) {
+			// Check auto-sync only on Document Explorer pages, otherwise sync will not be started automatically.
+			// FYI By doing this we don't let sync start from activity stream where shared drive files may appear
+			// and where many drives may have its files (thus several drives in the context - what isn't supported).
+			if (eXo.ecm && eXo.ecm.UIJCRExplorer && contextDrive) {
 				var syncName = contextDrive.workspace + ":" + contextDrive.path;
 				if (!autoSyncs[syncName]) {
 					var autosync = featuresIsAutosync(contextDrive.workspace, contextDrive.path);
