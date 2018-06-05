@@ -1833,6 +1833,35 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
     }
 
     /**
+     * Removes the node with its links and cached children in local nodes map. The removed node path will be
+     * added to collection of removed in this command.
+     *
+     * @param node the node
+     * @throws RepositoryException the repository exception
+     * @throws CloudDriveException the cloud drive exception
+     */
+    protected void removeLocalNode(Node node) throws RepositoryException, CloudDriveException {
+      String npath = node.getPath();
+      if (nodes != null) {
+        for (Iterator<List<Node>> cnliter = nodes.values().iterator(); cnliter.hasNext() && !Thread.currentThread().isInterrupted();) {
+          List<Node> cnl = cnliter.next();
+          for (Iterator<Node> ecniter = cnl.iterator(); ecniter.hasNext();) {
+            Node cn = ecniter.next();
+            if (cn.getPath().startsWith(npath)) {
+              ecniter.remove();
+            }
+          }
+          if (cnl.size() == 0) {
+            cnliter.remove();
+          }
+        }
+      }
+      // explicitly remove file links outside the drive, then the node itself
+      removeNode(node);
+      addRemoved(npath);
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override
@@ -5142,7 +5171,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
   }
 
   /**
-   * Move file with its subtree in scope of existing JCR session. If a node already exists at destination and
+   * Move file node with its subtree in scope of existing JCR session. If a node already exists at destination and
    * its id and title the same as given, then move will not be performed and existing node will be returned.
    *
    * @param id {@link String} a file id of the Node
@@ -5165,6 +5194,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
       Session session = destParent.getSession();
       String destPath = destParent.getPath() + "/" + nodeName;
       session.move(source.getPath(), destPath);
+      source.refresh(true);
       return source; // node will reflect a new destination
     } // else node with such id and title already exists at destParent
 
@@ -5172,45 +5202,59 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
   }
 
   /**
-   * Copy node with its subtree in scope of existing JCR session.
+   * Copy file node with its subtree in scope of existing JCR session.
    *
    * @param node {@link Node}
    * @param destParent {@link Node}
    * @return a {@link Node} from the destination
    * @throws RepositoryException the repository exception
+   * @throws CloudDriveException the cloud drive exception
    */
-  protected Node copyNode(Node node, Node destParent) throws RepositoryException {
-    // copy Node
-    Node nodeCopy = destParent.addNode(node.getName(), node.getPrimaryNodeType().getName());
-    for (NodeType mixin : node.getMixinNodeTypes()) {
-      String mixinName = mixin.getName();
-      if (!nodeCopy.isNodeType(mixinName)) { // check if not already set by JCR actions
-        nodeCopy.addMixin(mixin.getName());
-      }
-    }
-    // copy its properties
-    for (PropertyIterator piter = node.getProperties(); piter.hasNext();) {
-      Property ep = piter.nextProperty();
-      PropertyDefinition pdef = ep.getDefinition();
-      if (!pdef.isProtected()) {
-        // if not protected, copy it
-        if (pdef.isMultiple()) {
-          nodeCopy.setProperty(ep.getName(), ep.getValues());
-        } else {
-          nodeCopy.setProperty(ep.getName(), ep.getValue());
+  protected Node copyFile(Node node, Node destParent) throws RepositoryException, CloudDriveException {
+    // copy Node, with its ID and title
+    String id = fileAPI.getId(node);
+    String title = fileAPI.getTitle(node);
+    Node place = openNode(id, title, destParent, NT_FILE); // nt:file here, it will be removed anyway
+    if (place.isNew() && !place.hasProperty("ecd:id")) {
+      // this node was just created in openNode method, use its name as destination name
+      // which already will have an index-suffix to deal with same-name siblings on own way
+      String nodeName = place.getName();
+      removeLinks(place);
+      place.remove(); // clean the place (just created or not cloud file (yet?))
+      
+      // FYI We add a node, don't make JCR copy of existing, to manage naming as done by openNode() above
+      Node nodeCopy = destParent.addNode(nodeName, node.getPrimaryNodeType().getName());
+      for (NodeType mixin : node.getMixinNodeTypes()) {
+        String mixinName = mixin.getName();
+        if (!nodeCopy.isNodeType(mixinName)) { // check if not already set by JCR actions
+          nodeCopy.addMixin(mixin.getName());
         }
       }
-    }
-    // copy child nodes
-    for (NodeIterator niter = node.getNodes(); niter.hasNext();) {
-      Node ecn = niter.nextNode();
-      NodeDefinition ndef = ecn.getDefinition();
-      if (!ndef.isProtected()) {
-        // if not protected, copy it recursive
-        copyNode(ecn, nodeCopy);
+      // copy its properties
+      for (PropertyIterator piter = node.getProperties(); piter.hasNext();) {
+        Property ep = piter.nextProperty();
+        PropertyDefinition pdef = ep.getDefinition();
+        if (!pdef.isProtected()) {
+          // if not protected, copy it
+          if (pdef.isMultiple()) {
+            nodeCopy.setProperty(ep.getName(), ep.getValues());
+          } else {
+            nodeCopy.setProperty(ep.getName(), ep.getValue());
+          }
+        }
       }
-    }
-    return nodeCopy;
+      // copy child nodes
+      for (NodeIterator niter = node.getNodes(); niter.hasNext();) {
+        Node ecn = niter.nextNode();
+        NodeDefinition ndef = ecn.getDefinition();
+        if (!ndef.isProtected()) {
+          // if not protected, copy it recursive
+          copyFile(ecn, nodeCopy);
+        }
+      }
+      return nodeCopy;
+    } // else node with such id and title already exists at destParent
+    return place;
   }
 
   /**
@@ -5229,12 +5273,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
       Node node = getOrCleanFileNode(niter.nextNode());
       if (node != null) {
         String fileId = fileAPI.getId(node);
-        List<Node> nodeList = nodes.get(fileId);
-        if (nodeList == null) {
-          nodeList = new ArrayList<Node>();
-          nodes.put(fileId, nodeList);
-        }
-        nodeList.add(node);
+        nodes.computeIfAbsent(fileId, k -> new ArrayList<>()).add(node);
         if (deep && fileAPI.isFolder(node)) {
           readNodes(node, nodes, deep);
         }
