@@ -123,7 +123,7 @@ public class FileindexingConnector extends ElasticIndexingServiceConnector {
       ExtendedSession session = (ExtendedSession) WCMCoreUtils.getSystemSessionProvider().getSession("collaboration", repositoryService.getCurrentRepository());
       Node node = session.getNodeByIdentifier(id);
 
-      if(node == null || node.getPrimaryNodeType().equals(NodetypeConstant.NT_FILE) || trashService.isInTrash(node)) {
+      if(node == null || !node.isNodeType(NodetypeConstant.NT_FILE) || trashService.isInTrash(node)) {
         return null;
       }
 
