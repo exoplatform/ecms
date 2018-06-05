@@ -19,6 +19,25 @@
 
 package org.exoplatform.clouddrive.gdrive;
 
+import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Collection;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Queue;
+import java.util.Set;
+import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.atomic.AtomicReference;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import com.google.api.client.auth.oauth2.AuthorizationCodeFlow.CredentialCreatedListener;
 import com.google.api.client.auth.oauth2.Credential;
 import com.google.api.client.auth.oauth2.CredentialRefreshListener;
@@ -61,25 +80,6 @@ import org.exoplatform.clouddrive.oauth2.UserToken;
 import org.exoplatform.clouddrive.utils.ChunkIterator;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
-
-import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Collection;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Queue;
-import java.util.Set;
-import java.util.concurrent.ConcurrentLinkedQueue;
-import java.util.concurrent.atomic.AtomicReference;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Covers calls to Google Drive services and handles related exceptions. <br>
@@ -253,13 +253,13 @@ class GoogleDriveAPI implements DataStoreFactory {
     }
 
     /**
-     * Facade-implementation of {@link DataStore} to actual value stored in enclosing {@link UserToken}.
+     * Facade-implementation of {@link DataStore} to actual value stored in
+     * enclosing {@link UserToken}.
      */
     final Store store = new Store();
 
     /**
      * Clear token.
-     *
      */
     void clearToken() {
       try {
@@ -320,8 +320,8 @@ class GoogleDriveAPI implements DataStoreFactory {
       if (tokenErrorResponse != null) {
         String errDescription = tokenErrorResponse.getErrorDescription();
         String errURI = tokenErrorResponse.getErrorUri();
-        LOG.error("Error refreshing credentials: " + tokenErrorResponse.getError() + (errDescription != null ? " " + errDescription : "")
-            + (errURI != null ? ". Error URI: " + errURI : ""));
+        LOG.error("Error refreshing credentials: " + tokenErrorResponse.getError()
+            + (errDescription != null ? " " + errDescription : "") + (errURI != null ? ". Error URI: " + errURI : ""));
       } else {
         LOG.error("Error refreshing credentials for Google Drive [tokenErrorResponse was null]");
       }
@@ -416,7 +416,9 @@ class GoogleDriveAPI implements DataStoreFactory {
     ChangesIterator(long startChangeId) throws GoogleDriveException {
       try {
         this.request = drive.changes().list();
-        this.request.setIncludeSubscribed(false); // get changes of files only explicitly added to user drive
+        this.request.setIncludeSubscribed(false); // get changes of files only
+                                                  // explicitly added to user
+                                                  // drive
         this.request.setIncludeDeleted(true);
         this.request.setStartChangeId(startChangeId);
       } catch (IOException e) {
@@ -624,14 +626,14 @@ class GoogleDriveAPI implements DataStoreFactory {
     private static final String REST_PATH = "files/generateIds";
 
     /**
-     * Requests generation of a set of file IDs which can be provided in insert requests as JSON.
-     *
-     * This request holds the parameters needed by the the drive server. After setting any optional
-     * parameters, call the {@link Get#execute()} method to invoke the remote operation.
+     * Requests generation of a set of file IDs which can be provided in insert
+     * requests as JSON. This request holds the parameters needed by the the
+     * drive server. After setting any optional parameters, call the
+     * {@link Get#execute()} method to invoke the remote operation.
      * <p>
-     * {@link
-     * Get#initialize(com.google.api.client.googleapis.services.AbstractGoogleClientRequest)} must be
-     * called to initialize this instance immediately after invoking the constructor.
+     * {@link Get#initialize(com.google.api.client.googleapis.services.AbstractGoogleClientRequest)}
+     * must be called to initialize this instance immediately after invoking the
+     * constructor.
      * </p>
      */
     protected FilesGenerateIds() {
@@ -720,7 +722,8 @@ class GoogleDriveAPI implements DataStoreFactory {
   }
 
   static {
-    // hack to force ProGuard to consider GeneratedIds used, since otherwise it would be stripped out
+    // hack to force ProGuard to consider GeneratedIds used, since otherwise it
+    // would be stripped out
     // see http://code.google.com/p/google-api-java-client/issues/detail?id=528
     com.google.api.client.util.Data.nullOf(GeneratedIds.class);
   }
@@ -744,9 +747,11 @@ class GoogleDriveAPI implements DataStoreFactory {
   final Oauth2                        oauth2;
 
   /**
-   * Timezone regexp pattern for adapting Google's date format to SimpleDateFormatter supported.
+   * Timezone regexp pattern for adapting Google's date format to
+   * SimpleDateFormatter supported.
    */
-  // full date pattern: \\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d\\.\\d+([+-][0-2]\\d:[0-5]\\d|Z)
+  // full date pattern:
+  // \\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d\\.\\d+([+-][0-2]\\d:[0-5]\\d|Z)
   final Pattern                       tzPattern       = Pattern.compile("([+-][0-2]\\d:[0-5]\\d|Z)$");
 
   /**
@@ -769,8 +774,10 @@ class GoogleDriveAPI implements DataStoreFactory {
    * @throws GoogleDriveException if authentication failed for any reason.
    * @throws CloudDriveException if credentials store exception happen
    */
-  GoogleDriveAPI(String clientId, String clientSecret, String authCode, String redirectUri) throws GoogleDriveException, CloudDriveException {
-    // use clean token, it will be populated with actual credentials as CredentialRefreshListener
+  GoogleDriveAPI(String clientId, String clientSecret, String authCode, String redirectUri)
+      throws GoogleDriveException, CloudDriveException {
+    // use clean token, it will be populated with actual credentials as
+    // CredentialRefreshListener
     this.token = new AuthToken();
 
     GoogleAuthorizationCodeFlow authFlow;
@@ -794,9 +801,12 @@ class GoogleDriveAPI implements DataStoreFactory {
       throw new CloudDriveException("Error storing user credential: " + e.getMessage(), e);
     }
 
-    // XXX .setHttpRequestInitializer(new RequestInitializer() this causes OAuth2 401 Unauthorized
-    this.drive = new Drive.Builder(new NetHttpTransport(), new JacksonFactory(), this.credential).setApplicationName(APP_NAME).build();
-    this.oauth2 = new Oauth2.Builder(new NetHttpTransport(), new JacksonFactory(), this.credential).setApplicationName(APP_NAME).build();
+    // XXX .setHttpRequestInitializer(new RequestInitializer() this causes
+    // OAuth2 401 Unauthorized
+    this.drive = new Drive.Builder(new NetHttpTransport(), new JacksonFactory(), this.credential).setApplicationName(APP_NAME)
+                                                                                                 .build();
+    this.oauth2 = new Oauth2.Builder(new NetHttpTransport(), new JacksonFactory(), this.credential).setApplicationName(APP_NAME)
+                                                                                                   .build();
   }
 
   /**
@@ -809,7 +819,8 @@ class GoogleDriveAPI implements DataStoreFactory {
    * @param expirationTime long, token expiration time on milliseconds
    * @throws CloudDriveException if credentials store exception happen
    */
-  GoogleDriveAPI(String clientId, String clientSecret, String accessToken, String refreshToken, long expirationTime) throws CloudDriveException {
+  GoogleDriveAPI(String clientId, String clientSecret, String accessToken, String refreshToken, long expirationTime)
+      throws CloudDriveException {
     this.token = new AuthToken();
     this.token.load(accessToken, refreshToken, expirationTime);
 
@@ -826,9 +837,11 @@ class GoogleDriveAPI implements DataStoreFactory {
       throw new CloudDriveException("Error loading Google user credentials: " + e.getMessage(), e);
     }
 
-    // XXX .setHttpRequestInitializer(new RequestInitializer() this causes OAuth2 401 Unauthorized
+    // XXX .setHttpRequestInitializer(new RequestInitializer() this causes
+    // OAuth2 401 Unauthorized
     this.drive = new Drive.Builder(new NetHttpTransport(), new JacksonFactory(), credential).setApplicationName(APP_NAME).build();
-    this.oauth2 = new Oauth2.Builder(new NetHttpTransport(), new JacksonFactory(), credential).setApplicationName(APP_NAME).build();
+    this.oauth2 =
+                new Oauth2.Builder(new NetHttpTransport(), new JacksonFactory(), credential).setApplicationName(APP_NAME).build();
   }
 
   /**
@@ -855,8 +868,8 @@ class GoogleDriveAPI implements DataStoreFactory {
   }
 
   /**
-   * Build an authorization flow optionally using provided {@link AuthToken}, then store it as a static
-   * class attribute.
+   * Build an authorization flow optionally using provided {@link AuthToken},
+   * then store it as a static class attribute.
    *
    * @param clientId the client id
    * @param clientSecret the client secret
@@ -868,7 +881,12 @@ class GoogleDriveAPI implements DataStoreFactory {
     HttpTransport httpTransport = new NetHttpTransport();
     JacksonFactory jsonFactory = new JacksonFactory();
 
-    GoogleAuthorizationCodeFlow.Builder flow = new GoogleAuthorizationCodeFlow.Builder(httpTransport, jsonFactory, clientId, clientSecret, SCOPES);
+    GoogleAuthorizationCodeFlow.Builder flow =
+                                             new GoogleAuthorizationCodeFlow.Builder(httpTransport,
+                                                                                     jsonFactory,
+                                                                                     clientId,
+                                                                                     clientSecret,
+                                                                                     SCOPES);
     // (access_type=offline) if application needs to refresh access tokens
     // when the user is not present at the browser.
     // If the value "approval_prompt" is force, then the user sees a
@@ -989,25 +1007,29 @@ class GoogleDriveAPI implements DataStoreFactory {
    * @throws CloudDriveAccessException the cloud drive access exception
    */
   File insert(File file, AbstractInputStreamContent content) throws GoogleDriveException, CloudDriveAccessException {
-    // generate file ID by Google to check later does the file created in case of Google error
+    // generate file ID by Google to check later does the file created in case
+    // of Google error
     String id = generateFileId();
     file.setId(id);
     try {
       return drive.files().insert(file, content).execute();
     } catch (GoogleJsonResponseException e) {
       if (isInsufficientPermissions(e)) {
-        throw new CloudDriveAccessException("Insufficient permissions to inserting file with content in Files service. " + e.getStatusMessage() + " ("
-            + e.getStatusCode() + ")");
+        throw new CloudDriveAccessException("Insufficient permissions to inserting file with content in Files service. "
+            + e.getStatusMessage() + " (" + e.getStatusCode() + ")");
       } else {
         // TODO we want be sure that file not inserted
-        // need generate ID by Google (https://developers.google.com/drive/v2/reference/files/generateIds)
-        // and use them for file inserting, and then if failed and try again it will return conflict (409)
+        // need generate ID by Google
+        // (https://developers.google.com/drive/v2/reference/files/generateIds)
+        // and use them for file inserting, and then if failed and try again it
+        // will return conflict (409)
         // error
         try {
           return waitFile(id);
         } catch (GoogleDriveException wfe) {
           LOG.warn("Error reading file after attempting to upload it " + id + " (" + file.getTitle() + ")", e);
-          // in case of Google error while reading the file, we throw the exception we've got above
+          // in case of Google error while reading the file, we throw the
+          // exception we've got above
         } catch (NotFoundException e1) {
           // file not found - throw the exception we've got above
         }
@@ -1019,8 +1041,8 @@ class GoogleDriveAPI implements DataStoreFactory {
   }
 
   /**
-   * Insert a new file to Files service. This method will create an empty file or a folder (if given file
-   * object has such mimetype).
+   * Insert a new file to Files service. This method will create an empty file
+   * or a folder (if given file object has such mimetype).
    *
    * @param file {@link File} file metadata
    * @return {@link File} resulting file
@@ -1028,25 +1050,29 @@ class GoogleDriveAPI implements DataStoreFactory {
    * @throws CloudDriveAccessException the cloud drive access exception
    */
   File insert(File file) throws GoogleDriveException, CloudDriveAccessException {
-    // generate file ID by Google to check later does the file created in case of Google error
+    // generate file ID by Google to check later does the file created in case
+    // of Google error
     String id = generateFileId();
     file.setId(id);
     try {
       return drive.files().insert(file).execute();
     } catch (GoogleJsonResponseException e) {
       if (isInsufficientPermissions(e)) {
-        throw new CloudDriveAccessException("Insufficient permissions to insert file to Files service. " + e.getStatusMessage() + " ("
-            + e.getStatusCode() + ")");
+        throw new CloudDriveAccessException("Insufficient permissions to insert file to Files service. " + e.getStatusMessage()
+            + " (" + e.getStatusCode() + ")");
       } else {
         // TODO we want be sure that file not inserted
-        // need generate ID by Google (https://developers.google.com/drive/v2/reference/files/generateIds)
-        // and use them for file inserting, and then if failed and try again it will return conflict (409)
+        // need generate ID by Google
+        // (https://developers.google.com/drive/v2/reference/files/generateIds)
+        // and use them for file inserting, and then if failed and try again it
+        // will return conflict (409)
         // error
         try {
           return waitFile(id);
         } catch (GoogleDriveException wfe) {
           LOG.warn("Error reading file after attempting to create it " + id + " (" + file.getTitle() + ")", e);
-          // in case of Google error while reading the file, we throw the exception we've got above
+          // in case of Google error while reading the file, we throw the
+          // exception we've got above
         } catch (NotFoundException e1) {
           // file not found - throw the exception we've got above
         }
@@ -1066,7 +1092,9 @@ class GoogleDriveAPI implements DataStoreFactory {
    * @throws NotFoundException the not found exception
    * @throws CloudDriveAccessException the cloud drive access exception
    */
-  void update(File file, AbstractInputStreamContent content) throws GoogleDriveException, NotFoundException, CloudDriveAccessException {
+  void update(File file, AbstractInputStreamContent content) throws GoogleDriveException,
+                                                             NotFoundException,
+                                                             CloudDriveAccessException {
     // TODO use If-Match with local ETag to esnure consistency
     // http://stackoverflow.com/questions/15723284/google-drive-sdk-check-etag-when-uploading-synchronizing
     String fileId = file.getId();
@@ -1075,8 +1103,8 @@ class GoogleDriveAPI implements DataStoreFactory {
       drive.files().update(fileId, file, content).execute();
     } catch (GoogleJsonResponseException e) {
       if (isInsufficientPermissions(e)) {
-        throw new CloudDriveAccessException("Insufficient permissions to update file in Files service. " + e.getStatusMessage() + " ("
-            + e.getStatusCode() + ")");
+        throw new CloudDriveAccessException("Insufficient permissions to update file in Files service. " + e.getStatusMessage()
+            + " (" + e.getStatusCode() + ")");
       } else if (e.getStatusCode() == 404) {
         throw new NotFoundException("Cloud file not found for updating: " + fileId, e);
       } else {
@@ -1104,8 +1132,8 @@ class GoogleDriveAPI implements DataStoreFactory {
       drive.files().update(fileId, file).execute();
     } catch (GoogleJsonResponseException e) {
       if (isInsufficientPermissions(e)) {
-        throw new CloudDriveAccessException("Insufficient permissions to update file in Files service. " + e.getStatusMessage() + " ("
-            + e.getStatusCode() + ")");
+        throw new CloudDriveAccessException("Insufficient permissions to update file in Files service. " + e.getStatusMessage()
+            + " (" + e.getStatusCode() + ")");
       } else if (e.getStatusCode() == 404) {
         throw new NotFoundException("Cloud file not found for updating: " + fileId, e);
       } else {
@@ -1133,8 +1161,8 @@ class GoogleDriveAPI implements DataStoreFactory {
       return drive.files().copy(srcFileId, destFile).execute();
     } catch (GoogleJsonResponseException e) {
       if (isInsufficientPermissions(e)) {
-        throw new CloudDriveAccessException("Insufficient permissions to copy file in Files service. " + e.getStatusMessage() + " ("
-            + e.getStatusCode() + ")");
+        throw new CloudDriveAccessException("Insufficient permissions to copy file in Files service. " + e.getStatusMessage()
+            + " (" + e.getStatusCode() + ")");
       } else if (e.getStatusCode() == 404) {
         throw new NotFoundException("Cloud file not found for copying: " + srcFileId, e);
       } else {
@@ -1158,8 +1186,8 @@ class GoogleDriveAPI implements DataStoreFactory {
       drive.files().delete(fileId).execute();
     } catch (GoogleJsonResponseException e) {
       if (isInsufficientPermissions(e)) {
-        throw new CloudDriveAccessException("Insufficient permissions to delete file in Files service. " + e.getStatusMessage() + " ("
-            + e.getStatusCode() + ")");
+        throw new CloudDriveAccessException("Insufficient permissions to delete file in Files service. " + e.getStatusMessage()
+            + " (" + e.getStatusCode() + ")");
       } else if (e.getStatusCode() == 404) {
         throw new NotFoundException("Cloud file not found for deleting: " + fileId, e);
       } else {
@@ -1184,8 +1212,8 @@ class GoogleDriveAPI implements DataStoreFactory {
       return drive.files().trash(fileId).execute();
     } catch (GoogleJsonResponseException e) {
       if (isInsufficientPermissions(e)) {
-        throw new CloudDriveAccessException("Insufficient permissions to trash file in Files service. " + e.getStatusMessage() + " ("
-            + e.getStatusCode() + ")");
+        throw new CloudDriveAccessException("Insufficient permissions to trash file in Files service. " + e.getStatusMessage()
+            + " (" + e.getStatusCode() + ")");
       } else if (e.getStatusCode() == 404) {
         throw new NotFoundException("Cloud file not found for trashing: " + fileId, e);
       } else {
@@ -1210,8 +1238,8 @@ class GoogleDriveAPI implements DataStoreFactory {
       return drive.files().untrash(fileId).execute();
     } catch (GoogleJsonResponseException e) {
       if (isInsufficientPermissions(e)) {
-        throw new CloudDriveAccessException("Insufficient permissions to untrash file in Files service. " + e.getStatusMessage() + " ("
-            + e.getStatusCode() + ")");
+        throw new CloudDriveAccessException("Insufficient permissions to untrash file in Files service. " + e.getStatusMessage()
+            + " (" + e.getStatusCode() + ")");
       } else if (e.getStatusCode() == 404) {
         throw new NotFoundException("Cloud file not found for untrashing: " + fileId, e);
       } else {
@@ -1244,7 +1272,8 @@ class GoogleDriveAPI implements DataStoreFactory {
           GeneratedIds newIds = request.execute();
           id = newIds.nextId();
           if (id != null) {
-            // set newly generated IDs, even if there is no more IDs it will be checked next time in the above
+            // set newly generated IDs, even if there is no more IDs it will be
+            // checked next time in the above
             // code and request generation of a new list of IDs in Google
             generatedIds.set(newIds);
           } else {
@@ -1253,8 +1282,8 @@ class GoogleDriveAPI implements DataStoreFactory {
         }
       } catch (GoogleJsonResponseException e) {
         if (isInsufficientPermissions(e)) {
-          throw new CloudDriveAccessException("Insufficient permissions to generate file IDs by Files service. " + e.getStatusMessage() + " ("
-              + e.getStatusCode() + ")");
+          throw new CloudDriveAccessException("Insufficient permissions to generate file IDs by Files service. "
+              + e.getStatusMessage() + " (" + e.getStatusCode() + ")");
         } else {
           throw new GoogleDriveException("Error to generate file IDs by Files service: " + e.getMessage(), e);
         }
@@ -1270,7 +1299,8 @@ class GoogleDriveAPI implements DataStoreFactory {
   /**
    * Check credentials isn't expired and refresh them if required.
    * 
-   * @throws GoogleDriveException if error during communication with the provider
+   * @throws GoogleDriveException if error during communication with the
+   *           provider
    */
   void refreshAccess() throws GoogleDriveException {
     Long expirationTime = credential.getExpiresInSeconds();
@@ -1342,7 +1372,8 @@ class GoogleDriveAPI implements DataStoreFactory {
       return calendar;
     }
 
-    // Google keep dates in form "2014-12-24T13:45:13.620+02:00" - we need convert timezone to RFC 822 form
+    // Google keep dates in form "2014-12-24T13:45:13.620+02:00" - we need
+    // convert timezone to RFC 822 form
     Matcher dm = tzPattern.matcher(datestring);
     if (dm.find() && dm.groupCount() >= 1) {
       String tz = dm.group(1);

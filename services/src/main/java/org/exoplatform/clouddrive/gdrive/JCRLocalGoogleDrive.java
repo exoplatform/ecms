@@ -18,6 +18,21 @@
  */
 package org.exoplatform.clouddrive.gdrive;
 
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+
+import javax.jcr.Node;
+import javax.jcr.NodeIterator;
+import javax.jcr.PathNotFoundException;
+import javax.jcr.RepositoryException;
+
 import com.google.api.client.http.InputStreamContent;
 import com.google.api.client.util.DateTime;
 import com.google.api.services.drive.model.About;
@@ -45,21 +60,6 @@ import org.exoplatform.clouddrive.oauth2.UserToken;
 import org.exoplatform.clouddrive.oauth2.UserTokenRefreshListener;
 import org.exoplatform.clouddrive.utils.ExtendedMimeTypeResolver;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
-
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
-
-import javax.jcr.Node;
-import javax.jcr.NodeIterator;
-import javax.jcr.PathNotFoundException;
-import javax.jcr.RepositoryException;
 
 /**
  * JCR local storage for Google Drive. Created by The eXo Platform SAS.
@@ -190,7 +190,8 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
                                            gf.getEmbedLink(),
                                            gf.getThumbnailLink(),
                                            gf.getMimeType(),
-                                           null, // typeMode not required for GoogleDrive
+                                           null, // typeMode not required for
+                                                 // GoogleDrive
                                            gf.getLastModifyingUserName(),
                                            gf.getOwnerNames().get(0),
                                            created,
@@ -220,7 +221,8 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
     protected ChangesIterator      changes;
 
     /**
-     * Last change ID fetched and applied to the drive. Used by {@link #preSaveChunk()}.
+     * Last change ID fetched and applied to the drive. Used by
+     * {@link #preSaveChunk()}.
      */
     protected Long                 lastChangeId;
 
@@ -290,9 +292,12 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
 
         String[] parents;
 
-        // if parents empty - file deleted or shared file was removed from user drive (My Drive)
-        // if file in Trash - proceed to delete also, inside it should be checked for the same ETag
-        // proceed for deletion also in case of returned removal/trash - it will do nothing if no file found
+        // if parents empty - file deleted or shared file was removed from user
+        // drive (My Drive)
+        // if file in Trash - proceed to delete also, inside it should be
+        // checked for the same ETag
+        // proceed for deletion also in case of returned removal/trash - it will
+        // do nothing if no file found
         if (ch.getDeleted() || (parents = getParents(gf)).length == 0) {
           if (hasRemoved(ch.getFileId())) {
             cleanRemoved(ch.getFileId());
@@ -310,11 +315,13 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
             if (hasRemoved(gf.getId())) {
               cleanRemoved(gf.getId());
               if (LOG.isDebugEnabled()) {
-                LOG.debug(">> Returned file trashing " + gf.getId() + " " + gf.getTitle() + " " + ch.getModificationDate().toStringRfc3339());
+                LOG.debug(">> Returned file trashing " + gf.getId() + " " + gf.getTitle() + " "
+                    + ch.getModificationDate().toStringRfc3339());
               }
             } else {
               if (LOG.isDebugEnabled()) {
-                LOG.debug(">> File trashing " + gf.getId() + " " + gf.getTitle() + " " + ch.getModificationDate().toStringRfc3339());
+                LOG.debug(">> File trashing " + gf.getId() + " " + gf.getTitle() + " "
+                    + ch.getModificationDate().toStringRfc3339());
               }
             }
             deleteFile(gf.getId());
@@ -322,11 +329,13 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
             if (hasUpdated(gf.getId())) {
               cleanUpdated(gf.getId());
               if (LOG.isDebugEnabled()) {
-                LOG.debug(">> Returned file update " + gf.getId() + " " + gf.getTitle() + " " + ch.getModificationDate().toStringRfc3339());
+                LOG.debug(">> Returned file update " + gf.getId() + " " + gf.getTitle() + " "
+                    + ch.getModificationDate().toStringRfc3339());
               }
             } else {
               if (LOG.isDebugEnabled()) {
-                LOG.debug(">> File update " + gf.getId() + " " + gf.getTitle() + " " + ch.getModificationDate().toStringRfc3339());
+                LOG.debug(">> File update " + gf.getId() + " " + gf.getTitle() + " "
+                    + ch.getModificationDate().toStringRfc3339());
               }
               updateFile(gf, parents);
             }
@@ -341,7 +350,8 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
      */
     protected void preSaveChunk() throws CloudDriveException, RepositoryException {
       if (lastChangeId != null) {
-        // if chunk will be saved then we also save the current change id as last applied in the drive
+        // if chunk will be saved then we also save the current change id as
+        // last applied in the drive
         setChangeId(lastChangeId);
       }
     }
@@ -357,7 +367,8 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
       List<Node> existing = nodes.remove(fileId);
       if (existing != null) {
         // remove existing file,
-        // also clean the nodes map from the descendants (they can be recorded in delta)
+        // also clean the nodes map from the descendants (they can be recorded
+        // in delta)
         for (Node en : existing) {
           removeLocalNode(en);
         }
@@ -395,14 +406,17 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
               continue nextParent;
             }
 
-            // check if parent or its ancestor was removed - skip this parent if so
+            // check if parent or its ancestor was removed - skip this parent if
+            // so
             if (isRemoved(gparent)) {
               continue nextParent;
             }
 
-            // check if it is not shared file and thus its parent may be outside My Drive (not found locally)
+            // check if it is not shared file and thus its parent may be outside
+            // My Drive (not found locally)
             if (gf.getShared()) {
-              // for shared file check its parent owner and if not me, then skip the parent
+              // for shared file check its parent owner and if not me, then skip
+              // the parent
               GoogleUser me = getUser();
               boolean notMine = false;
               List<User> parentOwners = gparent.getOwners();
@@ -424,7 +438,8 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
               }
             }
 
-            // TODO should we run full sync and restore the drive from the cloud side?
+            // TODO should we run full sync and restore the drive from the cloud
+            // side?
             throw new CloudDriveException("Inconsistent changes: cannot find parent Node for '" + gf.getTitle() + "'");
           }
         }
@@ -447,13 +462,16 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
           }
 
           if (fileNode == null) {
-            // create new Node in local JCR or move from another location (this will save the file links)
+            // create new Node in local JCR or move from another location (this
+            // will save the file links)
             if (fileNodeOther != null) {
               if (parentIds.length > existing.size()) {
-                // It's added new parent to the file remotely - we copy from local other
+                // It's added new parent to the file remotely - we copy from
+                // local other
                 fileNode = copyFile(fileNodeOther, fp);
               } else {
-                // Otherwise we assume need of move from local old parent (other) to a new one (fp here)
+                // Otherwise we assume need of move from local old parent
+                // (other) to a new one (fp here)
                 existing.remove(fileNodeOther);
                 fileNode = moveFile(gf.getId(), gf.getTitle(), fileNodeOther, fp);
               }
@@ -502,7 +520,6 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
                                          modified,
                                          fileNode,
                                          true);
-
           } else {
             initFile(fileNode,
                      gf.getId(),
@@ -524,7 +541,8 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
                                          gf.getEmbedLink(),
                                          gf.getThumbnailLink(),
                                          gf.getMimeType(),
-                                         null, // typeMode not required for GoogleDrive
+                                         null, // typeMode not required for
+                                               // GoogleDrive
                                          gf.getLastModifyingUserName(),
                                          gf.getOwnerNames().get(0),
                                          created,
@@ -570,12 +588,12 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
     }
 
     /**
-     * Check if file isn't deleted/trashed in Google Drive, explicitly or as a part of its
-     * ancestor deletion/trashing.
+     * Check if file isn't deleted/trashed in Google Drive, explicitly or as a
+     * part of its ancestor deletion/trashing.
      *
      * @param gfile the gfile
-     * @return {@link Boolean} <code>true</code> if the file or its ancestor was deleted or trashed,
-     *         <code>false</code> otherwise
+     * @return {@link Boolean} <code>true</code> if the file or its ancestor was
+     *         deleted or trashed, <code>false</code> otherwise
      * @throws GoogleDriveException the google drive exception
      */
     protected boolean isRemoved(File gfile) throws GoogleDriveException {
@@ -591,7 +609,8 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
                 if (isRemoved(gparent)) {
                   return true;
                 }
-              } // else, we reached the root - this file nor its ancestor is not removed
+              } // else, we reached the root - this file nor its ancestor is not
+                // removed
             }
           } else {
             // it is shared parent was removed from user drive (My Drive)
@@ -626,8 +645,11 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
      * {@inheritDoc}
      */
     @Override
-    public CloudFile createFile(Node fileNode, Calendar created, Calendar modified, String mimeType, InputStream content) throws CloudDriveException,
-                                                                                                                          RepositoryException {
+    public CloudFile createFile(Node fileNode,
+                                Calendar created,
+                                Calendar modified,
+                                String mimeType,
+                                InputStream content) throws CloudDriveException, RepositoryException {
 
       // File's metadata.
       File gf = new File();
@@ -646,7 +668,10 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
         throw e;
       }
 
-      modified = api.parseDate(gf.getModifiedDate().toStringRfc3339()); // use actual from Google
+      modified = api.parseDate(gf.getModifiedDate().toStringRfc3339()); // use
+                                                                        // actual
+                                                                        // from
+                                                                        // Google
 
       long size = fileSize(gf);
 
@@ -843,8 +868,10 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
      * {@inheritDoc}
      */
     @Override
-    public CloudFile updateFileContent(Node fileNode, Calendar modified, String mimeType, InputStream content) throws CloudDriveException,
-                                                                                                               RepositoryException {
+    public CloudFile updateFileContent(Node fileNode,
+                                       Calendar modified,
+                                       String mimeType,
+                                       InputStream content) throws CloudDriveException, RepositoryException {
       // Update existing file content and related metadata.
       File gf = api.file(getId(fileNode));
       gf.setMimeType(mimeType);
@@ -959,7 +986,8 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
      */
     @Override
     public CloudFile copyFolder(Node srcFolderNode, Node destFolderNode) throws CloudDriveException, RepositoryException {
-      // FYI Aug 25, 2015: in Google copy of folder has not sense as folder hasn't a content and copying it
+      // FYI Aug 25, 2015: in Google copy of folder has not sense as folder
+      // hasn't a content and copying it
       // we only "link" to one more parent in Google Drive
 
       // do actual copy with deep traversing
@@ -1035,7 +1063,8 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
             gfile.setTitle(getTitle(node));
             gfile.setParents(Arrays.asList(new ParentReference().setId(gfolder.getId())));
             try {
-              // this node has file id the same as its source locally, thus we can use it here and update with
+              // this node has file id the same as its source locally, thus we
+              // can use it here and update with
               // the actual value after the copy
               String srcId = getId(node);
               gfile = api.copy(srcId, gfile);
@@ -1271,7 +1300,8 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
    * @param finder the finder
    * @param mimeTypes the mime types
    * @throws RepositoryException if local storage error
-   * @throws GoogleDriveException if error communicating with Google Drive services
+   * @throws GoogleDriveException if error communicating with Google Drive
+   *           services
    * @throws CloudDriveException if cannot load tokens stored locally
    */
   protected JCRLocalGoogleDrive(API apiBuilder,
@@ -1326,7 +1356,6 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
 
   /**
    * {@inheritDoc}
-   * 
    */
   @Override
   public void onUserTokenRefresh(UserToken token) throws CloudDriveException {
@@ -1354,7 +1383,6 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
 
   /**
    * {@inheritDoc}
-   * 
    */
   @Override
   public void onUserTokenRemove() throws CloudDriveException {
@@ -1432,7 +1460,8 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
   }
 
   /**
-   * Check if currently coded scope match the one used by the drive access tokens.
+   * Check if currently coded scope match the one used by the drive access
+   * tokens.
    *
    * @return true, if is access scope match
    * @throws RepositoryException the repository exception
@@ -1448,17 +1477,20 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
   }
 
   /**
-   * Throw {@link RefreshAccessException} if currently coded scope doesn't match the one used by the drive
-   * access tokens.
+   * Throw {@link RefreshAccessException} if currently coded scope doesn't match
+   * the one used by the drive access tokens.
    *
    * @param cause {@link CloudDriveAccessException}
-   * @return <code>false</code> if access coded and currently used access scopes match, otherwise
-   *         {@link RefreshAccessException} will be thrown with given cause {@link CloudDriveAccessException}
+   * @return <code>false</code> if access coded and currently used access scopes
+   *         match, otherwise {@link RefreshAccessException} will be thrown with
+   *         given cause {@link CloudDriveAccessException}
    * @throws RepositoryException the repository exception
    * @throws RefreshAccessException the refresh access exception
    * @throws DriveRemovedException the drive removed exception
    */
-  protected boolean checkAccessScope(CloudDriveAccessException cause) throws RepositoryException, RefreshAccessException, DriveRemovedException {
+  protected boolean checkAccessScope(CloudDriveAccessException cause) throws RepositoryException,
+                                                                      RefreshAccessException,
+                                                                      DriveRemovedException {
     if (cause != null && !isAccessScopeMatch()) {
       throw new RefreshAccessException("Renew access key to Google Drive", cause);
     }
@@ -1532,9 +1564,12 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
    * @param localParentIds {@link List} of parent ids locally
    * @return the list
    */
-  protected List<ParentReference> mergeParents(String parentId, List<ParentReference> cloudParents, Collection<String> localParentIds) {
+  protected List<ParentReference> mergeParents(String parentId,
+                                               List<ParentReference> cloudParents,
+                                               Collection<String> localParentIds) {
     // we take remote parents and leave only such that exists locally
-    // parentId also *may be* included to localParentIds collection (if it is saved)
+    // parentId also *may be* included to localParentIds collection (if it is
+    // saved)
     List<ParentReference> parents = new ArrayList<ParentReference>();
     if (cloudParents != null) {
       for (ParentReference cp : cloudParents) {
@@ -1557,8 +1592,9 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
   }
 
   /**
-   * Google Drive manages consumed size differently for uploaded (stored in content) and native documents.
-   * File stored in content has a size, but native document has usage of quota only.
+   * Google Drive manages consumed size differently for uploaded (stored in
+   * content) and native documents. File stored in content has a size, but
+   * native document has usage of quota only.
    * 
    * @param gf {@link File}
    * @return file size or consumed quota if the size not available

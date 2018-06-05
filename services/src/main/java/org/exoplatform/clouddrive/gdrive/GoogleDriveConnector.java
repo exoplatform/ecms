@@ -18,6 +18,13 @@
  */
 package org.exoplatform.clouddrive.gdrive;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.util.Map;
+
+import javax.jcr.Node;
+import javax.jcr.RepositoryException;
+
 import com.google.api.services.oauth2.model.Userinfoplus;
 
 import org.exoplatform.clouddrive.CloudDrive;
@@ -32,13 +39,6 @@ import org.exoplatform.clouddrive.utils.ExtendedMimeTypeResolver;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
-
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-import java.util.Map;
-
-import javax.jcr.Node;
-import javax.jcr.RepositoryException;
 
 /**
  * GoogleDrive connector implementation. Created by The eXo Platform SAS.
@@ -93,7 +93,8 @@ public class GoogleDriveConnector extends CloudDriveConnector {
      * Build API.
      * 
      * @return {@link GoogleDriveAPI}
-     * @throws GoogleDriveException if error happen during communication with Google Drive services
+     * @throws GoogleDriveException if error happen during communication with
+     *           Google Drive services
      * @throws CloudDriveException if cannot load local tokens
      */
     GoogleDriveAPI build() throws GoogleDriveException, CloudDriveException {

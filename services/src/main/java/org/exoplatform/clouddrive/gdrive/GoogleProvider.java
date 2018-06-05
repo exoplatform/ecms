@@ -19,11 +19,11 @@
 
 package org.exoplatform.clouddrive.gdrive;
 
+import javax.jcr.RepositoryException;
+
 import org.exoplatform.clouddrive.CloudDriveException;
 import org.exoplatform.clouddrive.CloudProvider;
 import org.exoplatform.services.jcr.RepositoryService;
-
-import javax.jcr.RepositoryException;
 
 /**
  * Created by The eXo Platform SAS.

@@ -36,14 +36,12 @@ public class ConnectGDriveActionComponent extends BaseConnectActionComponent {
   protected static final String PROVIDER_ID = "gdrive";
 
   /**
-   * The listener interface for receiving connectGDriveAction events.
-   * The class that is interested in processing a connectGDriveAction
-   * event implements this interface, and the object created
-   * with that class is registered with a component using the
-   * component's <code>addConnectGDriveActionListener</code> method. When
-   * the connectGDriveAction event occurs, that object's appropriate
-   * method is invoked.
-   *
+   * The listener interface for receiving connectGDriveAction events. The class
+   * that is interested in processing a connectGDriveAction event implements
+   * this interface, and the object created with that class is registered with a
+   * component using the component's <code>addConnectGDriveActionListener</code>
+   * method. When the connectGDriveAction event occurs, that object's
+   * appropriate method is invoked.
    */
   public static class ConnectGDriveActionListener extends UIActionBarActionListener<ConnectGDriveActionComponent> {
 
