@@ -28,35 +28,30 @@ import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.event.Event;
 
 /**
- * Move node support for Cloud Drive files. Instead of moving the cloud file node we create a symlink to the
- * file in drive folder.<br>
- * 
+ * Move node support for Cloud Drive files. Instead of moving the cloud file
+ * node we create a symlink to the file in drive folder.<br>
  * Created by The eXo Platform SAS
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
  * @version $Id: MoveNodeManageComponent.java 00000 May 19, 2014 pnedonosko $
- * 
  */
-@ComponentConfig(
-                 events = { @EventConfig(
-                                         listeners = CloudDriveMoveNodeManageComponent.MoveNodeActionListener.class,
-                                         confirm = "UIWorkingArea.msg.confirm-move") })
+@ComponentConfig(events = {
+    @EventConfig(listeners = CloudDriveMoveNodeManageComponent.MoveNodeActionListener.class, confirm = "UIWorkingArea.msg.confirm-move") })
 public class CloudDriveMoveNodeManageComponent extends MoveNodeManageComponent {
 
   /** The Constant LOG. */
   protected static final Log LOG = ExoLogger.getLogger(CloudDriveMoveNodeManageComponent.class);
 
   /**
-   * The listener interface for receiving moveNodeAction events.
-   * The class that is interested in processing a moveNodeAction
-   * event implements this interface, and the object created
-   * with that class is registered with a component using the
-   * component's <code>addMoveNodeActionListener</code> method. When
-   * the moveNodeAction event occurs, that object's appropriate
+   * The listener interface for receiving moveNodeAction events. The class that
+   * is interested in processing a moveNodeAction event implements this
+   * interface, and the object created with that class is registered with a
+   * component using the component's <code>addMoveNodeActionListener</code>
+   * method. When the moveNodeAction event occurs, that object's appropriate
    * method is invoked.
    */
   public static class MoveNodeActionListener extends MoveNodeManageComponent.MoveNodeActionListener {
-    
+
     /**
      * {@inheritDoc}
      */
@@ -83,7 +78,8 @@ public class CloudDriveMoveNodeManageComponent extends MoveNodeManageComponent {
           return;
         } // else default logic
       } catch (CloudFileActionException e) {
-        // this exception is a part of logic and it interrupts the move operation
+        // this exception is a part of logic and it interrupts the move
+        // operation
         LOG.warn(e.getMessage());
         UIApplication uiApp = uiExplorer.getAncestorOfType(UIApplication.class);
         uiApp.addMessage(e.getUIMessage());

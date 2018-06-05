@@ -18,6 +18,15 @@
  */
 package org.exoplatform.clouddrive.ecms.action;
 
+import java.util.LinkedHashSet;
+import java.util.ResourceBundle;
+import java.util.Set;
+import java.util.regex.Matcher;
+
+import javax.jcr.Node;
+import javax.jcr.RepositoryException;
+import javax.jcr.Session;
+
 import org.exoplatform.clouddrive.CloudDrive;
 import org.exoplatform.clouddrive.CloudDriveManager;
 import org.exoplatform.clouddrive.CloudDriveService;
@@ -40,26 +49,16 @@ import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.web.application.RequestContext;
 import org.exoplatform.webui.application.WebuiRequestContext;
 
-import java.util.LinkedHashSet;
-import java.util.ResourceBundle;
-import java.util.Set;
-import java.util.regex.Matcher;
-
-import javax.jcr.Node;
-import javax.jcr.RepositoryException;
-import javax.jcr.Session;
-
 /**
- * Support of Cloud Drive file operations (move, copy and linking) in ECMS. If not a cloud file then this
- * helper return
- * <code>false</code> and the caller code should apply default logic for the file. <br>
- * Code parts of this class based on original {@link PasteManageComponent} and {@link MoveNodeManageComponent}
- * (state of ECMS 4.0.4).<br>
+ * Support of Cloud Drive file operations (move, copy and linking) in ECMS. If
+ * not a cloud file then this helper return <code>false</code> and the caller
+ * code should apply default logic for the file. <br>
+ * Code parts of this class based on original {@link PasteManageComponent} and
+ * {@link MoveNodeManageComponent} (state of ECMS 4.0.4).<br>
  * Created by The eXo Platform SAS.
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
  * @version $Id: CloudFileAction.java 00000 May 12, 2014 pnedonosko $
- * 
  */
 public class CloudFileAction {
 
@@ -73,8 +72,8 @@ public class CloudFileAction {
   protected final UIJCRExplorer uiExplorer;
 
   /**
-   * Set of source nodes for the operation. We rely on proper implementation of Node's hash code and equality
-   * to avoid duplicates.
+   * Set of source nodes for the operation. We rely on proper implementation of
+   * Node's hash code and equality to avoid duplicates.
    */
   protected final Set<Node>     srcNodes    = new LinkedHashSet<Node>();
 
@@ -157,7 +156,8 @@ public class CloudFileAction {
    * @param destInfo {@link String} in format of portal request ObjectId, see
    *          {@link UIWorkingArea#FILE_EXPLORER_URL_SYNTAX}
    * @return the cloud file action
-   * @throws Exception if cannot find node by given path or cannot read its metadata
+   * @throws Exception if cannot find node by given path or cannot read its
+   *           metadata
    */
   public CloudFileAction setDestination(String destInfo) throws Exception {
     // FYI take real target node, not the link
@@ -165,7 +165,8 @@ public class CloudFileAction {
   }
 
   /**
-   * Link behaviour as instead of "move" operation. Behaviour of "copy" by default.
+   * Link behaviour as instead of "move" operation. Behaviour of "copy" by
+   * default.
    *
    * @return the cloud file action
    */
@@ -175,10 +176,12 @@ public class CloudFileAction {
   }
 
   /**
-   * Return symlink-node created by {@link #apply()} method if it returned <code>true</code>. This method has
-   * sense only after calling the mentioned method, otherwise this method returns <code>null</code>.
+   * Return symlink-node created by {@link #apply()} method if it returned
+   * <code>true</code>. This method has sense only after calling the mentioned
+   * method, otherwise this method returns <code>null</code>.
    * 
-   * @return the link {@link Node} or <code>null</code> if link not yet created or creation wasn't successful.
+   * @return the link {@link Node} or <code>null</code> if link not yet created
+   *         or creation wasn't successful.
    */
   public Node getLink() {
     return link;
@@ -221,13 +224,16 @@ public class CloudFileAction {
   }
 
   /**
-   * Apply an action for all added source files: move, copy or link from source to destination.
-   * This method will save the session of destination node in case of symlink creation.
+   * Apply an action for all added source files: move, copy or link from source
+   * to destination. This method will save the session of destination node in
+   * case of symlink creation.
    *
-   * @return <code>true</code> if all sources were linked in destination successfully, <code>false</code>
-   *         otherwise. If nothing applied return <code>false</code> also.
-   * @throws CloudFileActionException if destination cannot be created locally, this exception will contain
-   *           detailed message and a internationalized text for WebUI application.
+   * @return <code>true</code> if all sources were linked in destination
+   *         successfully, <code>false</code> otherwise. If nothing applied
+   *         return <code>false</code> also.
+   * @throws CloudFileActionException if destination cannot be created locally,
+   *           this exception will contain detailed message and a
+   *           internationalized text for WebUI application.
    * @throws Exception the exception
    */
   public boolean apply() throws CloudFileActionException, Exception {
@@ -258,8 +264,7 @@ public class CloudFileAction {
             if (!destPath.startsWith(srcPath)) {
               if (srcLocal != null && srcLocal.isDrive(srcNode)) {
                 // it is a drive node as source - reject it
-                throw new CloudFileActionException("Copy or move of cloud drive not supported: " + srcPath + " to "
-                    + destPath,
+                throw new CloudFileActionException("Copy or move of cloud drive not supported: " + srcPath + " to " + destPath,
                                                    new ApplicationMessage("CloudFile.msg.CloudDriveCopyMoveNotSupported",
                                                                           null,
                                                                           ApplicationMessage.WARNING));
@@ -270,23 +275,26 @@ public class CloudFileAction {
               // paste outside a cloud drive
               if (srcLocal != null && !linkManager.isLink(srcNode)) {
                 // if cloud file, not a link to it...
-                // it is also not a cloud drive root node as was checked above...
+                // it is also not a cloud drive root node as was checked
+                // above...
                 // then move not supported for the moment!
                 if (move) {
                   if (srcLocal.hasFile(srcPath)) {
-                    throw new CloudFileActionException("Move of cloud file to outside the cloud drive not supported: "
-                        + srcPath + " -> " + destPath,
+                    throw new CloudFileActionException("Move of cloud file to outside the cloud drive not supported: " + srcPath
+                        + " -> " + destPath,
                                                        new ApplicationMessage("CloudFile.msg.MoveToOutsideDriveNotSupported",
                                                                               null,
                                                                               ApplicationMessage.WARNING));
-                  } // else, it's local (ignored) node in the drive folder - use default behaviour for it
+                  } // else, it's local (ignored) node in the drive folder - use
+                    // default behaviour for it
                 } else {
                   // it's copy... check if it is the same workspace
                   String srcWorkspace = srcNode.getSession().getWorkspace().getName();
                   if (srcWorkspace.equals(destWorkspace)) {
                     // need create symlink into destNode
                     if (groupId != null) {
-                      // it's link in group documents (e.g. space documents): need share with the group
+                      // it's link in group documents (e.g. space documents):
+                      // need share with the group
                       String[] driveIdentity = documentsDrive.getAllPermissions();
                       actions.shareCloudFile(srcNode, srcLocal, driveIdentity);
                       this.link = actions.linkFile(srcNode, destNode, groupId);
@@ -298,7 +306,8 @@ public class CloudFileAction {
                     actions.postSharedActivity(srcNode, link, "");
                     linksCreated++;
                   } else {
-                    // else, we don't support cross-workspaces paste for cloud drive
+                    // else, we don't support cross-workspaces paste for cloud
+                    // drive
                     throw new CloudFileActionException("Linking between workspaces not supported for Cloud Drive files. "
                         + srcWorkspace + ":" + srcPath + " -> " + destWorkspace + ":" + destPath,
                                                        new ApplicationMessage("CloudFile.msg.MoveBetweenWorkspacesNotSupported",
@@ -306,32 +315,39 @@ public class CloudFileAction {
                                                                               ApplicationMessage.WARNING));
                   }
                 }
-              } // else, dest and src nulls means this happens not with cloud drive files at all
+              } // else, dest and src nulls means this happens not with cloud
+                // drive files at all
             } else {
               // it's paste to a cloud drive sub-tree...
               if (srcLocal != null) {
                 if (srcLocal.equals(destLocal)) {
                   if (!move) {
-                    // track "paste" fact for copy-behaviour and then let original code work
+                    // track "paste" fact for copy-behaviour and then let
+                    // original code work
                     new CloudDriveManager(destLocal).initCopy(srcNode, destNode);
                   }
                 } else {
                   // TODO implement support copy/move to another drive
-                  // TODO if implement, do we need inform activities (via ContentMovedActivityListener etc)?
+                  // TODO if implement, do we need inform activities (via
+                  // ContentMovedActivityListener etc)?
                   // if (activityService.isAcceptedNode(desNode) ||
-                  // desNode.getPrimaryNodeType().getName().equals(NodetypeConstant.NT_FILE)) {
-                  // listenerService.broadcast(ActivityCommonService.NODE_MOVED_ACTIVITY, desNode,
+                  // desNode.getPrimaryNodeType().getName().equals(NodetypeConstant.NT_FILE))
+                  // {
+                  // listenerService.broadcast(ActivityCommonService.NODE_MOVED_ACTIVITY,
+                  // desNode,
                   // desNode.getPath());
                   // }
-                  // TODO for support of move also need refresh paths of all items in clipboard to reflect the
+                  // TODO for support of move also need refresh paths of all
+                  // items in clipboard to reflect the
                   // moved parents, see PasteManageComponent.updateClipboard()
-                  throw new CloudFileActionException("Copy or move of cloud file to another cloud drive not supported: "
-                      + srcPath + " -> " + destPath,
+                  throw new CloudFileActionException("Copy or move of cloud file to another cloud drive not supported: " + srcPath
+                      + " -> " + destPath,
                                                      new ApplicationMessage("CloudFile.msg.MoveToAnotherDriveNotSupported",
                                                                             null,
                                                                             ApplicationMessage.WARNING));
                 }
-              } // otherwise, let original code to copy the file to cloud drive sub-tree
+              } // otherwise, let original code to copy the file to cloud drive
+                // sub-tree
               // TODO do links need special handling for copy-to-drive?)
             }
           }

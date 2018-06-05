@@ -18,12 +18,6 @@
  */
 package org.exoplatform.clouddrive.ecms.rest;
 
-import org.exoplatform.clouddrive.CloudProvider;
-import org.exoplatform.services.log.ExoLogger;
-import org.exoplatform.services.log.Log;
-import org.exoplatform.services.resources.ResourceBundleService;
-import org.exoplatform.services.rest.resource.ResourceContainer;
-
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Locale;
@@ -41,9 +35,15 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.UriInfo;
 
+import org.exoplatform.clouddrive.CloudProvider;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
+import org.exoplatform.services.resources.ResourceBundleService;
+import org.exoplatform.services.rest.resource.ResourceContainer;
+
 /**
- * REST service providing access to UI resources. Created by The eXo
- * Platform SAS.
+ * REST service providing access to UI resources. Created by The eXo Platform
+ * SAS.
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
  * @version $Id: ResourceService.java 00000 Apr 20, 2016 pnedonosko $
@@ -59,7 +59,7 @@ public class ResourceService implements ResourceContainer {
    * The Class LocaleBundle.
    */
   public static class LocaleBundle {
-    
+
     /** The data. */
     protected final Map<String, String> data;
 
@@ -152,9 +152,7 @@ public class ResourceService implements ResourceContainer {
       }
     } catch (Throwable e) {
       LOG.error("Error returning locale bundle for " + locale + ": " + e.getMessage());
-      return Response.status(Status.INTERNAL_SERVER_ERROR)
-                     .entity("Error getting bundle for " + locale.toLanguageTag())
-                     .build();
+      return Response.status(Status.INTERNAL_SERVER_ERROR).entity("Error getting bundle for " + locale.toLanguageTag()).build();
     }
   }
 

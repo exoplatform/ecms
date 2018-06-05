@@ -19,19 +19,20 @@
 
 package org.exoplatform.clouddrive.webui;
 
-import org.exoplatform.container.PortalContainer;
-import org.exoplatform.portal.application.PortalApplication;
-import org.exoplatform.web.WebAppController;
-import org.exoplatform.web.filter.Filter;
-import org.gatein.common.logging.Logger;
-import org.gatein.common.logging.LoggerFactory;
-
 import java.io.IOException;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+
+import org.gatein.common.logging.Logger;
+import org.gatein.common.logging.LoggerFactory;
+
+import org.exoplatform.container.PortalContainer;
+import org.exoplatform.portal.application.PortalApplication;
+import org.exoplatform.web.WebAppController;
+import org.exoplatform.web.filter.Filter;
 
 /**
  * Created by The eXo Platform SAS.
@@ -48,8 +49,7 @@ public class CloudDriveContextFilter implements Filter {
    * {@inheritDoc}
    */
   @Override
-  public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException,
-                                                                                            ServletException {
+  public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 
     PortalContainer container = PortalContainer.getInstance();
     WebAppController controller = (WebAppController) container.getComponentInstanceOfType(WebAppController.class);

@@ -18,14 +18,6 @@
  */
 package org.exoplatform.clouddrive.ecms.thumbnail;
 
-import org.exoplatform.clouddrive.CloudDriveService;
-import org.exoplatform.ecm.utils.text.Text;
-import org.exoplatform.services.cms.link.LinkManager;
-import org.exoplatform.services.cms.link.NodeFinder;
-import org.exoplatform.services.cms.thumbnail.ThumbnailService;
-import org.exoplatform.services.jcr.RepositoryService;
-import org.exoplatform.wcm.connector.collaboration.ThumbnailRESTService;
-
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -38,11 +30,20 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Response;
 
+import org.exoplatform.clouddrive.CloudDriveService;
+import org.exoplatform.ecm.utils.text.Text;
+import org.exoplatform.services.cms.link.LinkManager;
+import org.exoplatform.services.cms.link.NodeFinder;
+import org.exoplatform.services.cms.thumbnail.ThumbnailService;
+import org.exoplatform.services.jcr.RepositoryService;
+import org.exoplatform.wcm.connector.collaboration.ThumbnailRESTService;
+
 /**
  * Created by The eXo Platform SAS.
  *
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
- * @version $Id: CloudDriveThumbnailRESTService.java 00000 May 21, 2014 pnedonosko $
+ * @version $Id: CloudDriveThumbnailRESTService.java 00000 May 21, 2014
+ *          pnedonosko $
  */
 @Path("/thumbnailImage/")
 public class CloudDriveThumbnailRESTService extends ThumbnailRESTService {

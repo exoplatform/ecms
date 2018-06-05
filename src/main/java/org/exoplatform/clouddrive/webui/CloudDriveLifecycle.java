@@ -33,14 +33,12 @@ import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.UIComponentDecorator;
 
 /**
- * This listener should hide navigation toolbar in the Platform page. The code is similar to the one in
- * Outlook add-in.<br>
- * 
+ * This listener should hide navigation toolbar in the Platform page. The code
+ * is similar to the one in Outlook add-in.<br>
  * Created by The eXo Platform SAS.
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
  * @version $Id: CloudDriveLifecycle.java 00000 Nov 17, 2016 pnedonosko $
- * 
  */
 public class CloudDriveLifecycle implements ApplicationLifecycle<WebuiRequestContext> {
 

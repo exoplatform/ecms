@@ -29,8 +29,8 @@ import org.exoplatform.web.application.ApplicationMessage;
 public class CloudFileActionException extends Exception {
 
   /** The Constant serialVersionUID. */
-  private static final long serialVersionUID = 24966321739068360L;
-  
+  private static final long          serialVersionUID = 24966321739068360L;
+
   /** The ui message. */
   protected final ApplicationMessage uiMessage;
 

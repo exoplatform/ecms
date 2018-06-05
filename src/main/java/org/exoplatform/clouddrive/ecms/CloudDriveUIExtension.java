@@ -18,25 +18,22 @@
  */
 package org.exoplatform.clouddrive.ecms;
 
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
+
 import org.exoplatform.container.component.BaseComponentPlugin;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.container.xml.ValuesParam;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
-
 /**
- * Configuration of Cloud Drive menu in ECMS.
- * 
- * Created by The eXo Platform SAS.
+ * Configuration of Cloud Drive menu in ECMS. Created by The eXo Platform SAS.
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
  * @version $Id: CloudDriveUIExtension.java 00000 Jan 31, 2014 pnedonosko $
- * 
  */
 public class CloudDriveUIExtension extends BaseComponentPlugin {
 

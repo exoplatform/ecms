@@ -18,6 +18,9 @@
  */
 package org.exoplatform.clouddrive.ecms.filters;
 
+import javax.jcr.Node;
+import javax.jcr.RepositoryException;
+
 import org.exoplatform.clouddrive.CloudDrive;
 import org.exoplatform.clouddrive.CloudDriveService;
 import org.exoplatform.clouddrive.DriveRemovedException;
@@ -27,9 +30,6 @@ import org.exoplatform.clouddrive.NotYetCloudFileException;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
-
-import javax.jcr.Node;
-import javax.jcr.RepositoryException;
 
 /**
  * Filter for cloud files.
@@ -64,28 +64,25 @@ public class NotCloudDriveOrFileFilter extends AbstractCloudDriveNodeFilter {
         } catch (DriveRemovedException e) {
           // don't accept it!
           if (LOG.isDebugEnabled()) {
-            LOG.debug(">> NotCloudDriveOrFileFilter.accept(" + node.getPath() + ") drive removed " + drive
-                + ": " + e.getMessage());
+            LOG.debug(">> NotCloudDriveOrFileFilter.accept(" + node.getPath() + ") drive removed " + drive + ": "
+                + e.getMessage());
           }
           return false;
         } catch (NotYetCloudFileException e) {
           // don't accept it!
           if (LOG.isDebugEnabled()) {
-            LOG.debug(">> NotCloudDriveOrFileFilter.accept(" + node.getPath() + ") not yet cloud file: "
-                + e.getMessage());
+            LOG.debug(">> NotCloudDriveOrFileFilter.accept(" + node.getPath() + ") not yet cloud file: " + e.getMessage());
           }
           return false;
         } catch (NotCloudFileException e) {
           // accept it
           if (LOG.isDebugEnabled()) {
-            LOG.debug(">> NotCloudDriveOrFileFilter.accept(" + node.getPath() + ") not cloud file: "
-                + e.getMessage());
+            LOG.debug(">> NotCloudDriveOrFileFilter.accept(" + node.getPath() + ") not cloud file: " + e.getMessage());
           }
         } catch (NotCloudDriveException e) {
           // accept it
           if (LOG.isDebugEnabled()) {
-            LOG.debug(">> NotCloudDriveOrFileFilter.accept(" + node.getPath() + ") not in cloud drive: "
-                + e.getMessage());
+            LOG.debug(">> NotCloudDriveOrFileFilter.accept(" + node.getPath() + ") not in cloud drive: " + e.getMessage());
           }
         }
       }

@@ -23,12 +23,10 @@ import java.util.List;
 
 /**
  * Filter files with size larger of configured.<br>
- * 
  * Created by The eXo Platform SAS
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
  * @version $Id: FileSizeSmallerOfFilter.java 00000 Jul 27, 2015 pnedonosko $
- * 
  */
 public class CloudFileLargerFilter extends CloudFileFilter {
 

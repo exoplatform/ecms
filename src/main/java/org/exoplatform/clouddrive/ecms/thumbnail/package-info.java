@@ -17,6 +17,7 @@
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
 /**
- * Cloud Drive specifics for ECMS's {@link org.exoplatform.services.cms.thumbnail.ThumbnailService}. 
+ * Cloud Drive specifics for ECMS's
+ * {@link org.exoplatform.services.cms.thumbnail.ThumbnailService}.
  */
 package org.exoplatform.clouddrive.ecms.thumbnail;

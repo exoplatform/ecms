@@ -18,6 +18,12 @@
  */
 package org.exoplatform.clouddrive.ecms;
 
+import java.util.Arrays;
+import java.util.List;
+
+import javax.jcr.Item;
+import javax.jcr.Node;
+
 import org.exoplatform.clouddrive.CloudDrive;
 import org.exoplatform.clouddrive.CloudDriveService;
 import org.exoplatform.clouddrive.CloudDriveStorage;
@@ -41,24 +47,17 @@ import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.ext.filter.UIExtensionFilter;
 import org.exoplatform.webui.ext.filter.UIExtensionFilters;
 
-import java.util.Arrays;
-import java.util.List;
-
-import javax.jcr.Item;
-import javax.jcr.Node;
-
 /**
- * PushCloudFile action in working area used to force ignored nodes inside Cloud Drive to push to cloud side.<br>
- * 
+ * PushCloudFile action in working area used to force ignored nodes inside Cloud
+ * Drive to push to cloud side.<br>
  * Created by The eXo Platform SAS.
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
- * @version $Id: PushCloudFileManagerComponent.java 00000 Dec 15, 2014 pnedonosko $
+ * @version $Id: PushCloudFileManagerComponent.java 00000 Dec 15, 2014
+ *          pnedonosko $
  */
-@ComponentConfig(
-                 lifecycle = UIContainerLifecycle.class,
-                 events = { @EventConfig(
-                                         listeners = PushCloudFileManagerComponent.PushCloudFileActionListener.class) })
+@ComponentConfig(lifecycle = UIContainerLifecycle.class, events = {
+    @EventConfig(listeners = PushCloudFileManagerComponent.PushCloudFileActionListener.class) })
 public class PushCloudFileManagerComponent extends BaseCloudDriveManagerComponent {
 
   /** The Constant LOG. */
@@ -71,16 +70,15 @@ public class PushCloudFileManagerComponent extends BaseCloudDriveManagerComponen
   protected static final List<UIExtensionFilter> FILTERS    = Arrays.asList(new UIExtensionFilter[] { new LocalNodeFilter() });
 
   /**
-   * The listener interface for receiving pushCloudFileAction events.
-   * The class that is interested in processing a pushCloudFileAction
-   * event implements this interface, and the object created
-   * with that class is registered with a component using the
-   * component's <code>addPushCloudFileActionListener</code> method. When
-   * the pushCloudFileAction event occurs, that object's appropriate
-   * method is invoked.
+   * The listener interface for receiving pushCloudFileAction events. The class
+   * that is interested in processing a pushCloudFileAction event implements
+   * this interface, and the object created with that class is registered with a
+   * component using the component's <code>addPushCloudFileActionListener</code>
+   * method. When the pushCloudFileAction event occurs, that object's
+   * appropriate method is invoked.
    */
   public static class PushCloudFileActionListener extends EventListener<PushCloudFileManagerComponent> {
-    
+
     /**
      * {@inheritDoc}
      */
@@ -118,7 +116,9 @@ public class PushCloudFileManagerComponent extends BaseCloudDriveManagerComponen
             }
           }
 
-          // code adopted from UIAddressBar.RefreshSessionActionListener.execute() -- effect of refresh here
+          // code adopted from
+          // UIAddressBar.RefreshSessionActionListener.execute() -- effect of
+          // refresh here
           explorer.refreshExplorer();
           UIWorkingArea workingArea = explorer.getChild(UIWorkingArea.class);
           UIActionBar actionBar = workingArea.getChild(UIActionBar.class);

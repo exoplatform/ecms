@@ -23,13 +23,12 @@ import org.exoplatform.clouddrive.CloudDrive;
 import org.exoplatform.clouddrive.CloudFile;
 
 /**
- * Support for file viewers to show Cloud Drive files preview embedded in ECMS Documents.<br>
- * 
+ * Support for file viewers to show Cloud Drive files preview embedded in ECMS
+ * Documents.<br>
  * Created by The eXo Platform SAS.
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
  * @version $Id: CloudFileViewer.java 00000 Nov 18, 2014 pnedonosko $
- * 
  */
 public interface CloudFileViewer {
 
@@ -41,5 +40,5 @@ public interface CloudFileViewer {
    * @throws Exception the exception
    */
   void initFile(CloudDrive drive, CloudFile file) throws Exception;
-  
+
 }

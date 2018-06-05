@@ -17,6 +17,6 @@
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
 /**
- * CloudDrive/File viwers for WebUI. 
+ * CloudDrive/File viwers for WebUI.
  */
 package org.exoplatform.clouddrive.ecms.viewer;

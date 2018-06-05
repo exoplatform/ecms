@@ -18,15 +18,15 @@
  */
 package org.exoplatform.clouddrive.webui;
 
+import java.util.Collections;
+import java.util.Map;
+import java.util.WeakHashMap;
+
 import org.exoplatform.clouddrive.CloudDrive.Command;
 import org.exoplatform.clouddrive.CloudDriveEnvironment;
 import org.exoplatform.clouddrive.CloudDriveException;
 import org.exoplatform.web.application.RequestContext;
 import org.exoplatform.webui.application.WebuiRequestContext;
-
-import java.util.Collections;
-import java.util.Map;
-import java.util.WeakHashMap;
 
 /**
  * Created by The eXo Platform SAS.
@@ -40,7 +40,7 @@ public class PortalEnvironment extends CloudDriveEnvironment {
    * The Class Settings.
    */
   protected class Settings {
-    
+
     /** The context. */
     final RequestContext context;
 
@@ -86,8 +86,7 @@ public class PortalEnvironment extends CloudDriveEnvironment {
       settings.prevContext = WebuiRequestContext.getCurrentInstance();
       WebuiRequestContext.setCurrentInstance(settings.context);
     } else {
-      throw new CloudDriveException(this.getClass().getName() + " setting not configured for " + command
-          + " to be prepared.");
+      throw new CloudDriveException(this.getClass().getName() + " setting not configured for " + command + " to be prepared.");
     }
   }
 
@@ -100,8 +99,7 @@ public class PortalEnvironment extends CloudDriveEnvironment {
     if (settings != null) {
       WebuiRequestContext.setCurrentInstance(settings.prevContext);
     } else {
-      throw new CloudDriveException(this.getClass().getName() + " setting not configured for " + command
-          + " to be cleaned.");
+      throw new CloudDriveException(this.getClass().getName() + " setting not configured for " + command + " to be cleaned.");
     }
     super.cleanup(command);
   }

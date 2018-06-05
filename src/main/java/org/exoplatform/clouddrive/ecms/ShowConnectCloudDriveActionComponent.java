@@ -30,24 +30,21 @@ import org.exoplatform.webui.ext.manager.UIAbstractManager;
 /**
  * The Class ShowConnectCloudDriveActionComponent.
  */
-@ComponentConfig(
-                 events = { @EventConfig(
-                                         listeners = ShowConnectCloudDriveActionComponent.ShowConnectCloudDriveActionListener.class) })
-public class ShowConnectCloudDriveActionComponent extends BaseCloudDriveManagerComponent implements
-    CloudDriveUIMenuAction {
+@ComponentConfig(events = {
+    @EventConfig(listeners = ShowConnectCloudDriveActionComponent.ShowConnectCloudDriveActionListener.class) })
+public class ShowConnectCloudDriveActionComponent extends BaseCloudDriveManagerComponent implements CloudDriveUIMenuAction {
 
   /**
    * The listener interface for receiving showConnectCloudDriveAction events.
    * The class that is interested in processing a showConnectCloudDriveAction
-   * event implements this interface, and the object created
-   * with that class is registered with a component using the
-   * component's <code>addShowConnectCloudDriveActionListener</code> method. When
-   * the showConnectCloudDriveAction event occurs, that object's appropriate
-   * method is invoked.
+   * event implements this interface, and the object created with that class is
+   * registered with a component using the component's
+   * <code>addShowConnectCloudDriveActionListener</code> method. When the
+   * showConnectCloudDriveAction event occurs, that object's appropriate method
+   * is invoked.
    */
-  public static class ShowConnectCloudDriveActionListener
-                                                         extends
-                                                         UIActionBarActionListener<ShowConnectCloudDriveActionComponent> {
+  public static class ShowConnectCloudDriveActionListener extends
+                                                          UIActionBarActionListener<ShowConnectCloudDriveActionComponent> {
 
     /**
      * {@inheritDoc}

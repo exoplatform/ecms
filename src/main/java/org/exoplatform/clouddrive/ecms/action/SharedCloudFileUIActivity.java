@@ -27,6 +27,7 @@ import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 
 import org.apache.commons.io.FileUtils;
+
 import org.exoplatform.clouddrive.CloudDrive;
 import org.exoplatform.clouddrive.CloudDriveService;
 import org.exoplatform.clouddrive.CloudFile;
@@ -58,17 +59,16 @@ import org.exoplatform.webui.ext.UIExtensionManager;
  * @version $Id: SharedCloudFileUIActivity.java 00000 Apr 15, 2016 pnedonosko $
  */
 @ComponentConfigs({
-    @ComponentConfig(lifecycle = UIFormLifecycle.class, template = "classpath:groovy/ecm/social-integration/UISharedFile.gtmpl",
-                     events = { @EventConfig(listeners = FileUIActivity.ViewDocumentActionListener.class),
-                         @EventConfig(listeners = BaseUIActivity.LoadLikesActionListener.class),
-                         @EventConfig(listeners = BaseUIActivity.ToggleDisplayCommentFormActionListener.class),
-                         @EventConfig(listeners = BaseUIActivity.LikeActivityActionListener.class),
-                         @EventConfig(listeners = BaseUIActivity.SetCommentListStatusActionListener.class),
-                         @EventConfig(listeners = BaseUIActivity.PostCommentActionListener.class),
-                         @EventConfig(listeners = BaseUIActivity.DeleteActivityActionListener.class),
-                         @EventConfig(listeners = BaseUIActivity.DeleteCommentActionListener.class) }),
-    @ComponentConfig(type = UIPopupWindow.class, template = "system:/groovy/webui/core/UIPopupWindow.gtmpl",
-                     events = @EventConfig(listeners = SharedCloudFileUIActivity.CloseActionListener.class, name = "ClosePopup")) })
+    @ComponentConfig(lifecycle = UIFormLifecycle.class, template = "classpath:groovy/ecm/social-integration/UISharedFile.gtmpl", events = {
+        @EventConfig(listeners = FileUIActivity.ViewDocumentActionListener.class),
+        @EventConfig(listeners = BaseUIActivity.LoadLikesActionListener.class),
+        @EventConfig(listeners = BaseUIActivity.ToggleDisplayCommentFormActionListener.class),
+        @EventConfig(listeners = BaseUIActivity.LikeActivityActionListener.class),
+        @EventConfig(listeners = BaseUIActivity.SetCommentListStatusActionListener.class),
+        @EventConfig(listeners = BaseUIActivity.PostCommentActionListener.class),
+        @EventConfig(listeners = BaseUIActivity.DeleteActivityActionListener.class),
+        @EventConfig(listeners = BaseUIActivity.DeleteCommentActionListener.class) }),
+    @ComponentConfig(type = UIPopupWindow.class, template = "system:/groovy/webui/core/UIPopupWindow.gtmpl", events = @EventConfig(listeners = SharedCloudFileUIActivity.CloseActionListener.class, name = "ClosePopup")) })
 public class SharedCloudFileUIActivity extends SharedFileUIActivity {
 
   /** The Constant ACTIVITY_CSS_CLASS. */
@@ -112,7 +112,8 @@ public class SharedCloudFileUIActivity extends SharedFileUIActivity {
    */
   @Override
   public String getWebdavURL(int i) throws Exception {
-    // XXX we return link to Google Drive page here, but Google also can offer content download for some
+    // XXX we return link to Google Drive page here, but Google also can offer
+    // content download for some
     // formats
     CloudFile file = cloudFile(getContentNode(i));
     if (file != null) {
@@ -136,8 +137,10 @@ public class SharedCloudFileUIActivity extends SharedFileUIActivity {
     } catch (Throwable e) {
       LOG.error("Error initializing current node for shared cloud file link: " + fileName, e);
     }
-    // XXX we add a special CSS class to let the JS client decorator recognize file icons in
-    // activity stream for proper sizing (if required, e.g. for Google Docs icons)
+    // XXX we add a special CSS class to let the JS client decorator recognize
+    // file icons in
+    // activity stream for proper sizing (if required, e.g. for Google Docs
+    // icons)
     return new StringBuilder(super.getCssClassIconFile(fileName, fileType, i)).append(' ').append(ACTIVITY_CSS_CLASS).toString();
   }
 
@@ -146,13 +149,16 @@ public class SharedCloudFileUIActivity extends SharedFileUIActivity {
    */
   @Override
   public String getDownloadLink(int i) {
-    // XXX we return link to Google Drive page here, but Google also can offer content download for some
+    // XXX we return link to Google Drive page here, but Google also can offer
+    // content download for some
     // formats
     CloudFile file = cloudFile(getContentNode(i));
     if (file != null) {
-      // In PLF 5.0 we need fix the download URL link in Javascript to open it in new window
-      //return new StringBuilder("javascript:window.open('").append(file.getLink()).append("')").toString();
-      return file.getLink(); 
+      // In PLF 5.0 we need fix the download URL link in Javascript to open it
+      // in new window
+      // return new
+      // StringBuilder("javascript:window.open('").append(file.getLink()).append("')").toString();
+      return file.getLink();
     } else {
       return super.getDownloadLink(i);
     }
@@ -164,7 +170,8 @@ public class SharedCloudFileUIActivity extends SharedFileUIActivity {
   @Override
   public boolean isFileSupportPreview(Node data) throws Exception {
     if (data != null) {
-      // code adapted from the super's method but with adding a node in to context
+      // code adapted from the super's method but with adding a node in to
+      // context
       UIExtensionManager manager = getApplicationComponent(UIExtensionManager.class);
       List<UIExtension> extensions = manager.getUIExtensions(Utils.FILE_VIEWER_EXTENSION_TYPE);
 
@@ -173,7 +180,8 @@ public class SharedCloudFileUIActivity extends SharedFileUIActivity {
       context.put(Utils.MIME_TYPE, data.getNode(Utils.JCR_CONTENT).getProperty(Utils.JCR_MIMETYPE).getString());
 
       for (UIExtension extension : extensions) {
-        if (manager.accept(Utils.FILE_VIEWER_EXTENSION_TYPE, extension.getName(), context) && !"Text".equals(extension.getName())) {
+        if (manager.accept(Utils.FILE_VIEWER_EXTENSION_TYPE, extension.getName(), context)
+            && !"Text".equals(extension.getName())) {
           return true;
         }
       }
@@ -212,7 +220,9 @@ public class SharedCloudFileUIActivity extends SharedFileUIActivity {
         }
       }
     } catch (RepositoryException e) {
-      LOG.error("Error getting cloud file node " + node, e); // TODO use global workspace, docPath
+      LOG.error("Error getting cloud file node " + node, e); // TODO use global
+                                                             // workspace,
+                                                             // docPath
     }
     return null;
   }

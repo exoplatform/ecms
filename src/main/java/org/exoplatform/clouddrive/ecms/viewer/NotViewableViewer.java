@@ -22,13 +22,10 @@ package org.exoplatform.clouddrive.ecms.viewer;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 
 /**
- * Viewer showing no preview form.
- * 
- * Created by The eXo Platform SAS
+ * Viewer showing no preview form. Created by The eXo Platform SAS
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
  * @version $Id: LargeFilesViewer.java 00000 Jul 27, 2015 pnedonosko $
- * 
  */
 @ComponentConfig(template = "classpath:groovy/templates/DefaultFileViewer.gtmpl")
 public class NotViewableViewer extends DefaultFileViewer {

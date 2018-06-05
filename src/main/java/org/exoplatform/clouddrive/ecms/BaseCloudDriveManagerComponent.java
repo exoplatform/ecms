@@ -27,7 +27,8 @@ import org.exoplatform.webui.ext.manager.UIAbstractManagerComponent;
  * Created by The eXo Platform SAS.
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
- * @version $Id: BaseCloudDriveManagerComponent.java 00000 Sep 26, 2012 pnedonosko $
+ * @version $Id: BaseCloudDriveManagerComponent.java 00000 Sep 26, 2012
+ *          pnedonosko $
  */
 public abstract class BaseCloudDriveManagerComponent extends UIAbstractManagerComponent {
 

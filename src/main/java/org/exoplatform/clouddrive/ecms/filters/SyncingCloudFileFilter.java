@@ -18,6 +18,11 @@
  */
 package org.exoplatform.clouddrive.ecms.filters;
 
+import java.util.List;
+
+import javax.jcr.Node;
+import javax.jcr.RepositoryException;
+
 import org.exoplatform.clouddrive.CloudDrive;
 import org.exoplatform.clouddrive.CloudDriveService;
 import org.exoplatform.clouddrive.CloudFile;
@@ -30,14 +35,8 @@ import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.webui.application.WebuiRequestContext;
 
-import java.util.List;
-
-import javax.jcr.Node;
-import javax.jcr.RepositoryException;
-
 /**
  * Filter for cloud files currently synchronizing.
- * 
  */
 public class SyncingCloudFileFilter extends AbstractCloudDriveNodeFilter {
 
@@ -80,13 +79,15 @@ public class SyncingCloudFileFilter extends AbstractCloudDriveNodeFilter {
               // attribute may be used in UI
               rcontext.setAttribute(CloudFile.class, file);
             } catch (NotYetCloudFileException e) {
-              // newly creating file we accept: UI should render it properly according file existence
+              // newly creating file we accept: UI should render it properly
+              // according file existence
               return true;
             }
 
             // FilesState driveState = drive.getState();
             // return driveState != null ? driveState.isUpdating(path) : false;
-            // XXX accept only "not yet cloud files", thus synchronizing first time only
+            // XXX accept only "not yet cloud files", thus synchronizing first
+            // time only
             return false;
           } catch (DriveRemovedException e) {
             // doesn't accept

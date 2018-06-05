@@ -18,6 +18,9 @@
  */
 package org.exoplatform.clouddrive.ecms;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.exoplatform.clouddrive.ecms.filters.CloudFileFilter;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
@@ -27,14 +30,12 @@ import org.exoplatform.webui.core.lifecycle.UIContainerLifecycle;
 import org.exoplatform.webui.ext.filter.UIExtensionFilter;
 import org.exoplatform.webui.ext.filter.UIExtensionFilters;
 
-import java.util.Arrays;
-import java.util.List;
-
 /**
  * Created by The eXo Platform SAS.
  *
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
- * @version $Id: OpenCloudFileManagerComponent.java 00000 Sep 26, 2012 pnedonosko $
+ * @version $Id: OpenCloudFileManagerComponent.java 00000 Sep 26, 2012
+ *          pnedonosko $
  */
 @ComponentConfig(lifecycle = UIContainerLifecycle.class)
 public class OpenCloudFileManagerComponent extends BaseCloudDriveManagerComponent {

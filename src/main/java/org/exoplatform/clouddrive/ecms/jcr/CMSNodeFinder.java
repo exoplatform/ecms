@@ -19,16 +19,6 @@
 
 package org.exoplatform.clouddrive.ecms.jcr;
 
-import org.exoplatform.clouddrive.jcr.NodeFinder;
-import org.exoplatform.ecm.utils.text.Text;
-import org.exoplatform.services.cms.impl.Utils;
-import org.exoplatform.services.cms.link.LinkManager;
-import org.exoplatform.services.cms.link.impl.NodeFinderImpl;
-import org.exoplatform.services.jcr.RepositoryService;
-import org.exoplatform.services.jcr.ext.app.SessionProviderService;
-import org.exoplatform.services.jcr.ext.common.SessionProvider;
-import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
-
 import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -44,14 +34,22 @@ import javax.jcr.query.Query;
 import javax.jcr.query.QueryManager;
 import javax.jcr.query.QueryResult;
 
+import org.exoplatform.clouddrive.jcr.NodeFinder;
+import org.exoplatform.ecm.utils.text.Text;
+import org.exoplatform.services.cms.impl.Utils;
+import org.exoplatform.services.cms.link.LinkManager;
+import org.exoplatform.services.cms.link.impl.NodeFinderImpl;
+import org.exoplatform.services.jcr.RepositoryService;
+import org.exoplatform.services.jcr.ext.app.SessionProviderService;
+import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
+
 /**
  * Node finder based on original implementation from ECMS.<br>
- * 
  * Created by The eXo Platform SAS.
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
  * @version $Id: CMSNodeFinder.java 00000 Feb 26, 2013 pnedonosko $
- * 
  */
 public class CMSNodeFinder extends NodeFinderImpl implements NodeFinder {
 
@@ -83,7 +81,8 @@ public class CMSNodeFinder extends NodeFinderImpl implements NodeFinder {
    */
   public String cleanName(String name) {
     // Align name to ECMS conventions
-    // we keep using the dot character as separator between name and extension for backward compatibility
+    // we keep using the dot character as separator between name and extension
+    // for backward compatibility
     int extIndex = name.lastIndexOf('.');
     StringBuilder jcrName = new StringBuilder();
     if (extIndex >= 0 && extIndex < name.length() - 1) {

@@ -18,6 +18,11 @@
  */
 package org.exoplatform.clouddrive.ecms.viewer;
 
+import java.util.Locale;
+import java.util.ResourceBundle;
+
+import javax.ws.rs.core.MediaType;
+
 import org.exoplatform.clouddrive.CloudDrive;
 import org.exoplatform.clouddrive.CloudFile;
 import org.exoplatform.clouddrive.ecms.BaseCloudDriveForm;
@@ -26,11 +31,6 @@ import org.exoplatform.portal.webui.workspace.UIPortalApplication;
 import org.exoplatform.services.resources.ResourceBundleService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.webui.application.WebuiRequestContext;
-
-import java.util.Locale;
-import java.util.ResourceBundle;
-
-import javax.ws.rs.core.MediaType;
 
 /**
  * Base support for WebUI forms based on Cloud Drive file.
@@ -108,9 +108,8 @@ public abstract class AbstractFileForm extends BaseCloudDriveForm implements Clo
   public String getResourceBundle(String key) {
     Locale locale = Util.getUIPortal().getAncestorOfType(UIPortalApplication.class).getLocale();
     ResourceBundleService resourceBundleService = WCMCoreUtils.getService(ResourceBundleService.class);
-    ResourceBundle resourceBundle = resourceBundleService.getResourceBundle(localeFile(),
-                                                                            locale,
-                                                                            this.getClass().getClassLoader());
+    ResourceBundle resourceBundle =
+                                  resourceBundleService.getResourceBundle(localeFile(), locale, this.getClass().getClassLoader());
     return resourceBundle.getString(key);
   }
 

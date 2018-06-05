@@ -19,22 +19,21 @@
  */
 package org.exoplatform.clouddrive.ecms.action;
 
+import java.util.List;
+
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.ext.filter.UIExtensionFilter;
 import org.exoplatform.webui.ext.filter.UIExtensionFilters;
 
-import java.util.List;
-
 /**
- * Overrides original ECMS component to replace {@link IsVersionableOrAncestorFilter} with safe version that
- * can work with symlinks to private user Cloud Drive files.<br>
- * 
+ * Overrides original ECMS component to replace
+ * {@link IsVersionableOrAncestorFilter} with safe version that can work with
+ * symlinks to private user Cloud Drive files.<br>
  * Created by The eXo Platform SAS
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
  * @version $Id: CheckInManageComponent.java 00000 Jul 8, 2015 pnedonosko $
- * 
  */
 @ComponentConfig(events = { @EventConfig(listeners = CheckInManageComponent.CheckInActionListener.class) })
 public class CheckInManageComponent extends

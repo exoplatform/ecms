@@ -18,6 +18,11 @@
  */
 package org.exoplatform.clouddrive.ecms.filters;
 
+import java.util.List;
+
+import javax.jcr.Node;
+import javax.jcr.RepositoryException;
+
 import org.exoplatform.clouddrive.CloudDrive;
 import org.exoplatform.clouddrive.CloudDriveService;
 import org.exoplatform.clouddrive.CloudFile;
@@ -30,17 +35,11 @@ import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.webui.application.WebuiRequestContext;
 
-import java.util.List;
-
-import javax.jcr.Node;
-import javax.jcr.RepositoryException;
-
 /**
  * Filter for cloud files.
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
  * @version $Id: CloudFileFilter.java 00000 Nov 5, 2012 pnedonosko $
- * 
  */
 public class CloudFileFilter extends AbstractCloudDriveNodeFilter {
 
@@ -108,24 +107,28 @@ public class CloudFileFilter extends AbstractCloudDriveNodeFilter {
         } catch (DriveRemovedException e) {
           // doesn't accept
           // if (LOG.isDebugEnabled()) {
-          // LOG.debug(">> CloudFileFilter.accept(" + node.getPath() + ") drive removed " + drive + ": "
+          // LOG.debug(">> CloudFileFilter.accept(" + node.getPath() + ") drive
+          // removed " + drive + ": "
           // + e.getMessage());
           // }
         } catch (NotYetCloudFileException e) {
           // doesn't accept
           // if (LOG.isDebugEnabled()) {
-          // LOG.debug(">> CloudFileFilter.accept(" + node.getPath() + ") not yet cloud file: "
+          // LOG.debug(">> CloudFileFilter.accept(" + node.getPath() + ") not
+          // yet cloud file: "
           // + e.getMessage());
           // }
         } catch (NotCloudFileException e) {
           // doesn't accept
           // if (LOG.isDebugEnabled()) {
-          // LOG.debug(">> CloudFileFilter.accept(" + node.getPath() + ") not cloud file: " + e.getMessage());
+          // LOG.debug(">> CloudFileFilter.accept(" + node.getPath() + ") not
+          // cloud file: " + e.getMessage());
           // }
         } catch (NotCloudDriveException e) {
           // doesn't accept
           // if (LOG.isDebugEnabled()) {
-          // LOG.debug(">> CloudFileFilter.accept(" + node.getPath() + ") not in cloud drive: "
+          // LOG.debug(">> CloudFileFilter.accept(" + node.getPath() + ") not in
+          // cloud drive: "
           // + e.getMessage());
           // }
         }

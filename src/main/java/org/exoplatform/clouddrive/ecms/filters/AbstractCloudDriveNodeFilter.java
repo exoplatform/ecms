@@ -18,6 +18,13 @@
  */
 package org.exoplatform.clouddrive.ecms.filters;
 
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+
+import javax.jcr.Node;
+import javax.jcr.RepositoryException;
+
 import org.exoplatform.clouddrive.CloudProvider;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.UIJcrExplorerContainer;
@@ -28,13 +35,6 @@ import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.ext.filter.UIExtensionFilter;
 import org.exoplatform.webui.ext.filter.UIExtensionFilterType;
-
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-
-import javax.jcr.Node;
-import javax.jcr.RepositoryException;
 
 /**
  * Filter for cloud files.
@@ -124,7 +124,7 @@ public abstract class AbstractCloudDriveNodeFilter implements UIExtensionFilter 
               if (uiPopupContainer != null) {
                 UIBaseNodePresentation docViewer = uiPopupContainer.findComponentById("UIDocViewer");
                 if (docViewer != null) {
-                  contextNode = docViewer.getNode(); 
+                  contextNode = docViewer.getNode();
                 }
               }
             }

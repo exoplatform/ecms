@@ -19,6 +19,9 @@
  */
 package org.exoplatform.clouddrive.ecms.action;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.exoplatform.clouddrive.ecms.BaseCloudDriveManagerComponent;
 import org.exoplatform.clouddrive.ecms.CloudDriveUIMenuAction;
 import org.exoplatform.clouddrive.ecms.action.ViewSharingActionComponent.ViewSharingActionListener;
@@ -34,20 +37,14 @@ import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.ext.filter.UIExtensionFilter;
 import org.exoplatform.webui.ext.filter.UIExtensionFilters;
 
-import java.util.Arrays;
-import java.util.List;
-
 /**
  * Show sharing options (including permissions) of cloud file.<br>
- * 
  * Created by The eXo Platform SAS
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
  * @version $Id: ViewSharingActionComponent.java 00000 Jul 9, 2015 pnedonosko $
- * 
  */
-@ComponentConfig(lifecycle = UIContainerLifecycle.class,
-                 events = { @EventConfig(listeners = ViewSharingActionListener.class) })
+@ComponentConfig(lifecycle = UIContainerLifecycle.class, events = { @EventConfig(listeners = ViewSharingActionListener.class) })
 public class ViewSharingActionComponent extends BaseCloudDriveManagerComponent implements CloudDriveUIMenuAction {
 
   /** The Constant FILTERS. */
@@ -65,16 +62,15 @@ public class ViewSharingActionComponent extends BaseCloudDriveManagerComponent i
   }
 
   /**
-   * The listener interface for receiving viewSharingAction events.
-   * The class that is interested in processing a viewSharingAction
-   * event implements this interface, and the object created
-   * with that class is registered with a component using the
-   * component's <code>addViewSharingActionListener</code> method. When
-   * the viewSharingAction event occurs, that object's appropriate
+   * The listener interface for receiving viewSharingAction events. The class
+   * that is interested in processing a viewSharingAction event implements this
+   * interface, and the object created with that class is registered with a
+   * component using the component's <code>addViewSharingActionListener</code>
+   * method. When the viewSharingAction event occurs, that object's appropriate
    * method is invoked.
    */
   public static class ViewSharingActionListener extends UIActionBarActionListener<ViewSharingActionComponent> {
-    
+
     /**
      * {@inheritDoc}
      */

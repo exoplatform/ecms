@@ -18,6 +18,12 @@
  */
 package org.exoplatform.clouddrive.ecms.action;
 
+import java.util.Deque;
+import java.util.Iterator;
+import java.util.LinkedHashSet;
+import java.util.LinkedList;
+import java.util.Set;
+
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.rightclick.manager.PasteManageComponent;
 import org.exoplatform.services.cms.clipboard.ClipboardService;
@@ -31,23 +37,16 @@ import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.event.Event;
 
-import java.util.Deque;
-import java.util.Iterator;
-import java.util.LinkedHashSet;
-import java.util.LinkedList;
-import java.util.Set;
-
 /**
- * Support of Cloud Drive files pasting from ECMS Clipboard. If not a cloud file then original behaviour of
- * {@link PasteManageComponent} will be
- * applied. <br>
- * Code parts of this class based on original {@link PasteManageComponent} (state of ECMS
- * 4.0.4).<br>
+ * Support of Cloud Drive files pasting from ECMS Clipboard. If not a cloud file
+ * then original behaviour of {@link PasteManageComponent} will be applied. <br>
+ * Code parts of this class based on original {@link PasteManageComponent}
+ * (state of ECMS 4.0.4).<br>
  * Created by The eXo Platform SAS.
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
- * @version $Id: CloudDrivePasteManageComponent.java 00000 May 12, 2014 pnedonosko $
- * 
+ * @version $Id: CloudDrivePasteManageComponent.java 00000 May 12, 2014
+ *          pnedonosko $
  */
 @ComponentConfig(events = { @EventConfig(listeners = CloudDrivePasteManageComponent.PasteActionListener.class) })
 public class CloudDrivePasteManageComponent extends PasteManageComponent {
@@ -56,13 +55,11 @@ public class CloudDrivePasteManageComponent extends PasteManageComponent {
   protected static final Log LOG = ExoLogger.getLogger(CloudDrivePasteManageComponent.class);
 
   /**
-   * The listener interface for receiving pasteAction events.
-   * The class that is interested in processing a pasteAction
-   * event implements this interface, and the object created
-   * with that class is registered with a component using the
-   * component's <code>addPasteActionListener</code> method. When
-   * the pasteAction event occurs, that object's appropriate
-   * method is invoked.
+   * The listener interface for receiving pasteAction events. The class that is
+   * interested in processing a pasteAction event implements this interface, and
+   * the object created with that class is registered with a component using the
+   * component's <code>addPasteActionListener</code> method. When the
+   * pasteAction event occurs, that object's appropriate method is invoked.
    */
   public static class PasteActionListener extends PasteManageComponent.PasteActionListener {
 
@@ -83,11 +80,12 @@ public class CloudDrivePasteManageComponent extends PasteManageComponent {
 
         String userId = ConversationState.getCurrent().getIdentity().getUserId();
         ClipboardService clipboardService = WCMCoreUtils.getService(ClipboardService.class);
-        Deque<ClipboardCommand> allClipboards = new LinkedList<ClipboardCommand>(clipboardService.getClipboardList(userId,
-                                                                                                                   false));
+        Deque<ClipboardCommand> allClipboards =
+                                              new LinkedList<ClipboardCommand>(clipboardService.getClipboardList(userId, false));
         if (allClipboards.size() > 0) {
           Set<ClipboardCommand> virtClipboards = clipboardService.getClipboardList(userId, true);
-          ClipboardCommand current = null; // will refer to last attempted to link
+          ClipboardCommand current = null; // will refer to last attempted to
+                                           // link
           if (virtClipboards.isEmpty()) { // single file
             current = allClipboards.getLast();
             boolean isCut = ClipboardCommand.CUT.equals(current.getType());
@@ -98,7 +96,8 @@ public class CloudDrivePasteManageComponent extends PasteManageComponent {
             if (action.apply()) {
               // file was linked
               if (isCut) {
-                // TODO should not happen until we will support cut-paste between drives
+                // TODO should not happen until we will support cut-paste
+                // between drives
                 virtClipboards.clear();
                 allClipboards.remove(current);
               }
@@ -120,7 +119,8 @@ public class CloudDrivePasteManageComponent extends PasteManageComponent {
                 action.addSource(current.getWorkspace(), current.getSrcPath());
                 linked.add(current);
               } else {
-                // we have unexpected state when items in group clipboard have different types of operation
+                // we have unexpected state when items in group clipboard have
+                // different types of operation
                 LOG.warn("Cannot handle different types of clipboard operations for group action. Files "
                     + (isCut ? " cut-paste" : " copy-paste") + " already started but "
                     + (isThisCut ? " cut-paste" : " copy-paste") + " found for " + current.getSrcPath());
@@ -136,7 +136,8 @@ public class CloudDrivePasteManageComponent extends PasteManageComponent {
               if (action.apply()) {
                 // files was successfully linked
                 if (isCut) {
-                  // TODO should not happen until we will support cut-paste between drives
+                  // TODO should not happen until we will support cut-paste
+                  // between drives
                   virtClipboards.clear();
                   for (ClipboardCommand c : linked) {
                     allClipboards.remove(c);

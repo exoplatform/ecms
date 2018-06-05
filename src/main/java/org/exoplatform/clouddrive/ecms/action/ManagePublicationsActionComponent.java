@@ -18,24 +18,24 @@
  */
 package org.exoplatform.clouddrive.ecms.action;
 
+import java.util.List;
+
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.ext.filter.UIExtensionFilter;
 import org.exoplatform.webui.ext.filter.UIExtensionFilters;
 
-import java.util.List;
-
 /**
- * Overrides original ECMS component to replace {@link IsNotIgnoreVersionNodeFilter} with safe version that
- * can work with symlinks to private user Cloud Drive files.<br>
- * 
+ * Overrides original ECMS component to replace
+ * {@link IsNotIgnoreVersionNodeFilter} with safe version that can work with
+ * symlinks to private user Cloud Drive files.<br>
  * Created by The eXo Platform SAS
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
- * @version $Id: ManagePublicationsActionComponent.java 00000 Jul 6, 2015 pnedonosko $
+ * @version $Id: ManagePublicationsActionComponent.java 00000 Jul 6, 2015
+ *          pnedonosko $
  */
-@ComponentConfig(events = {
-    @EventConfig(listeners = ManagePublicationsActionComponent.ManagePublicationsActionListener.class) })
+@ComponentConfig(events = { @EventConfig(listeners = ManagePublicationsActionComponent.ManagePublicationsActionListener.class) })
 public class ManagePublicationsActionComponent extends
                                                org.exoplatform.ecm.webui.component.explorer.control.action.ManagePublicationsActionComponent {
 

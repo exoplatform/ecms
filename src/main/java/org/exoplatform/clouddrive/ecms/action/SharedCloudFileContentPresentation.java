@@ -19,6 +19,12 @@
  */
 package org.exoplatform.clouddrive.ecms.action;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.jcr.Node;
+
 import org.exoplatform.wcm.ext.component.activity.ContentPresentation;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.UIComponent;
@@ -26,20 +32,16 @@ import org.exoplatform.webui.core.lifecycle.Lifecycle;
 import org.exoplatform.webui.ext.UIExtension;
 import org.exoplatform.webui.ext.UIExtensionManager;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.jcr.Node;
-
 /**
- * Add extra logic to original {@link ContentPresentation} class to handle Cloud files properly.<br>
+ * Add extra logic to original {@link ContentPresentation} class to handle Cloud
+ * files properly.<br>
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
- * @version $Id: SharedCloudFileContentPresentation.java 00000 Apr 18, 2016 pnedonosko $
- * 
+ * @version $Id: SharedCloudFileContentPresentation.java 00000 Apr 18, 2016
+ *          pnedonosko $
  */
-@Deprecated // TODO NOT USED, experimental for showing cloud file view directly in activity stream
+@Deprecated // TODO NOT USED, experimental for showing cloud file view directly
+            // in activity stream
 @ComponentConfig(lifecycle = Lifecycle.class)
 public class SharedCloudFileContentPresentation extends ContentPresentation {
 
@@ -72,7 +74,5 @@ public class SharedCloudFileContentPresentation extends ContentPresentation {
 
     return super.getUIComponent(mimeType);
   }
-  
-  
 
 }

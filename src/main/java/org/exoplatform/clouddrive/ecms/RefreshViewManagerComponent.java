@@ -18,6 +18,9 @@
  */
 package org.exoplatform.clouddrive.ecms;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.exoplatform.clouddrive.ecms.filters.CloudDriveFilter;
 import org.exoplatform.clouddrive.ecms.filters.CloudFileFilter;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
@@ -36,22 +39,16 @@ import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.ext.filter.UIExtensionFilter;
 import org.exoplatform.webui.ext.filter.UIExtensionFilters;
 
-import java.util.Arrays;
-import java.util.List;
-
 /**
- * RefreshView hidden action in working area used by Cloud Drive Javascript to refresh the user view
- * automatically.
- * 
- * Created by The eXo Platform SAS.
+ * RefreshView hidden action in working area used by Cloud Drive Javascript to
+ * refresh the user view automatically. Created by The eXo Platform SAS.
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
- * @version $Id: RefreshCloudDriveManagerComponent.java 00000 Nov 05, 2012 pnedonosko $
+ * @version $Id: RefreshCloudDriveManagerComponent.java 00000 Nov 05, 2012
+ *          pnedonosko $
  */
-@ComponentConfig(
-                 lifecycle = UIContainerLifecycle.class,
-                 events = { @EventConfig(
-                                         listeners = RefreshViewManagerComponent.RefreshViewActionListener.class) })
+@ComponentConfig(lifecycle = UIContainerLifecycle.class, events = {
+    @EventConfig(listeners = RefreshViewManagerComponent.RefreshViewActionListener.class) })
 public class RefreshViewManagerComponent extends BaseCloudDriveManagerComponent {
 
   /** The Constant LOG. */
@@ -61,20 +58,19 @@ public class RefreshViewManagerComponent extends BaseCloudDriveManagerComponent 
   public static final String                     EVENT_NAME = "RefreshView";
 
   /** The Constant FILTERS. */
-  protected static final List<UIExtensionFilter> FILTERS    = Arrays.asList(new UIExtensionFilter[] {
-      new CloudDriveFilter(), new CloudFileFilter()        });
+  protected static final List<UIExtensionFilter> FILTERS    = Arrays.asList(new UIExtensionFilter[] { new CloudDriveFilter(),
+      new CloudFileFilter() });
 
   /**
-   * The listener interface for receiving refreshViewAction events.
-   * The class that is interested in processing a refreshViewAction
-   * event implements this interface, and the object created
-   * with that class is registered with a component using the
-   * component's <code>addRefreshViewActionListener</code> method. When
-   * the refreshViewAction event occurs, that object's appropriate
+   * The listener interface for receiving refreshViewAction events. The class
+   * that is interested in processing a refreshViewAction event implements this
+   * interface, and the object created with that class is registered with a
+   * component using the component's <code>addRefreshViewActionListener</code>
+   * method. When the refreshViewAction event occurs, that object's appropriate
    * method is invoked.
    */
   public static class RefreshViewActionListener extends EventListener<RefreshViewManagerComponent> {
-    
+
     /**
      * {@inheritDoc}
      */

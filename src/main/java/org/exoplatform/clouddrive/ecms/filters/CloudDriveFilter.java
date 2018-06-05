@@ -18,6 +18,11 @@
  */
 package org.exoplatform.clouddrive.ecms.filters;
 
+import java.util.List;
+
+import javax.jcr.Node;
+import javax.jcr.RepositoryException;
+
 import org.exoplatform.clouddrive.CloudDrive;
 import org.exoplatform.clouddrive.CloudDriveService;
 import org.exoplatform.clouddrive.DriveRemovedException;
@@ -25,19 +30,12 @@ import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
-import java.util.List;
-
-import javax.jcr.Node;
-import javax.jcr.RepositoryException;
-
 /**
  * Accept only ecd:cloudDrive nodes.<br>
- * 
  * Created by The eXo Platform SAS.
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
  * @version $Id: CloudDriveFiler.java 00000 Nov 5, 2012 pnedonosko $
- * 
  */
 public class CloudDriveFilter extends AbstractCloudDriveNodeFilter {
 
@@ -69,13 +67,11 @@ public class CloudDriveFilter extends AbstractCloudDriveNodeFilter {
     CloudDrive drive = driveService.findDrive(node);
     try {
       // accept only exactly the drive node
-      return drive != null && acceptProvider(drive.getUser().getProvider())
-          && drive.getPath().equals(node.getPath());
+      return drive != null && acceptProvider(drive.getUser().getProvider()) && drive.getPath().equals(node.getPath());
     } catch (DriveRemovedException e) {
       // doesn't accept removed
       if (LOG.isDebugEnabled()) {
-        LOG.debug(">> CloudDriveFilter.accept(" + node.getPath() + ") drive removed " + drive + ": "
-            + e.getMessage());
+        LOG.debug(">> CloudDriveFilter.accept(" + node.getPath() + ") drive removed " + drive + ": " + e.getMessage());
       }
     }
     return false;

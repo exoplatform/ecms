@@ -54,15 +54,18 @@ public abstract class BaseConnectActionComponent extends BaseCloudDriveManagerCo
    */
   @Override
   public String renderEventURL(boolean ajax, String name, String beanId, Parameter[] params) throws Exception {
-    // this action hasn't a template, so we initialize request context on rendering phase
+    // this action hasn't a template, so we initialize request context on
+    // rendering phase
     CloudDriveService drivesService = WCMCoreUtils.getService(CloudDriveService.class);
     if (drivesService != null) {
       try {
         CloudProvider provider = drivesService.getProvider(getProviderId());
         initContext();
 
-        // XXX do workaround here, need point an id of the provider for this Connect component
-        // this could be better to do by HTML attribute, but we cannot do this for the moment
+        // XXX do workaround here, need point an id of the provider for this
+        // Connect component
+        // this could be better to do by HTML attribute, but we cannot do this
+        // for the moment
         return "javascript:void(0);//" + provider.getId() + "//objectId";
       } catch (ProviderNotAvailableException e) {
         // if no such provider, cannot do anything - default link
@@ -79,7 +82,6 @@ public abstract class BaseConnectActionComponent extends BaseCloudDriveManagerCo
    * Gets the name.
    *
    * @return the name
-   * 
    */
   @Override
   public String getName() {

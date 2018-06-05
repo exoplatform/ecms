@@ -18,6 +18,11 @@
  */
 package org.exoplatform.clouddrive.ecms.filters;
 
+import java.util.Map;
+
+import javax.jcr.Item;
+import javax.jcr.Node;
+
 import org.exoplatform.clouddrive.ecms.CloudDriveContext;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.portal.webui.util.Util;
@@ -30,11 +35,6 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.ext.filter.UIExtensionFilter;
 import org.exoplatform.webui.ext.filter.UIExtensionFilterType;
-
-import java.util.Map;
-
-import javax.jcr.Item;
-import javax.jcr.Node;
 
 /**
  * Filter for personal drives.
@@ -69,7 +69,8 @@ public class PersonalDocumentsFilter implements UIExtensionFilter {
     if (contextPath.startsWith(userNode.getPath())) {
       String driveRootPath = Utils.getPersonalDrivePath(uiExplorer.getDriveData().getHomePath(), userId);
       boolean isRoot = contextNode.getPath().equals(driveRootPath);
-      // additionally we initialize all already connected drives in the context, they can be used for drive
+      // additionally we initialize all already connected drives in the context,
+      // they can be used for drive
       // folder icons rendering or other similar purpose
       if (isRoot) {
         CloudDriveContext.initConnected(WebuiRequestContext.getCurrentInstance(), contextNode);

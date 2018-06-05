@@ -18,15 +18,15 @@
  */
 package org.exoplatform.clouddrive.ecms.filters;
 
+import java.util.Map;
+
+import javax.jcr.Node;
+
 import org.exoplatform.ecm.utils.permission.PermissionUtil;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.webui.ext.filter.UIExtensionFilter;
 import org.exoplatform.webui.ext.filter.UIExtensionFilterType;
-
-import java.util.Map;
-
-import javax.jcr.Node;
 
 /**
  * Filter nodes where current user can set properties and change permissions.

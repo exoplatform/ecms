@@ -18,6 +18,8 @@
  */
 package org.exoplatform.clouddrive.ecms.action;
 
+import javax.jcr.Node;
+
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.sidebar.UIClipboard;
 import org.exoplatform.services.cms.clipboard.jcr.model.ClipboardCommand;
@@ -28,39 +30,33 @@ import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.event.Event;
 
-import javax.jcr.Node;
-
 /**
- * Extended ECMS clipboard with support of Cloud Drive files pasting as symlinks. This class used as component
- * config for actual {@link UIClipboard} in {@link CloudDriveClipboardActionComponent}.<br>
- * 
+ * Extended ECMS clipboard with support of Cloud Drive files pasting as
+ * symlinks. This class used as component config for actual {@link UIClipboard}
+ * in {@link CloudDriveClipboardActionComponent}.<br>
  * Created by The eXo Platform SAS.
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
  * @version $Id: UICloudDriveClipboard.java 00000 May 13, 2014 pnedonosko $
- * 
  */
-@ComponentConfig(template = "app:/groovy/webui/component/explorer/sidebar/UIClipboard.gtmpl",
-                 events = { @EventConfig(listeners = UICloudDriveClipboard.PasteActionListener.class),
-                     @EventConfig(listeners = UIClipboard.DeleteActionListener.class),
-                     @EventConfig(listeners = UIClipboard.ClearAllActionListener.class) })
+@ComponentConfig(template = "app:/groovy/webui/component/explorer/sidebar/UIClipboard.gtmpl", events = {
+    @EventConfig(listeners = UICloudDriveClipboard.PasteActionListener.class),
+    @EventConfig(listeners = UIClipboard.DeleteActionListener.class),
+    @EventConfig(listeners = UIClipboard.ClearAllActionListener.class) })
 public class UICloudDriveClipboard extends UIClipboard {
 
   /** The Constant LOG. */
   protected static final Log LOG = ExoLogger.getLogger(UICloudDriveClipboard.class);
 
   /**
-   * The listener interface for receiving pasteAction events.
-   * The class that is interested in processing a pasteAction
-   * event implements this interface, and the object created
-   * with that class is registered with a component using the
-   * component's <code>addPasteActionListener</code> method. When
-   * the pasteAction event occurs, that object's appropriate
-   * method is invoked.
-   *
+   * The listener interface for receiving pasteAction events. The class that is
+   * interested in processing a pasteAction event implements this interface, and
+   * the object created with that class is registered with a component using the
+   * component's <code>addPasteActionListener</code> method. When the
+   * pasteAction event occurs, that object's appropriate method is invoked.
    */
   public static class PasteActionListener extends UIClipboard.PasteActionListener {
-    
+
     /**
      * {@inheritDoc}
      */
@@ -88,7 +84,8 @@ public class UICloudDriveClipboard extends UIClipboard {
           return;
         }
       } catch (CloudFileActionException e) {
-        // this exception is a part of logic and it interrupts the move operation
+        // this exception is a part of logic and it interrupts the move
+        // operation
         LOG.warn(e.getMessage());
         UIApplication uiApp = uiExplorer.getAncestorOfType(UIApplication.class);
         uiApp.addMessage(e.getUIMessage());

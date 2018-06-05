@@ -19,6 +19,17 @@
 
 package org.exoplatform.clouddrive.ecms;
 
+import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Set;
+
+import javax.jcr.Node;
+import javax.jcr.NodeIterator;
+import javax.jcr.RepositoryException;
+
+import org.json.JSONObject;
+
 import org.exoplatform.clouddrive.CloudDrive;
 import org.exoplatform.clouddrive.CloudDriveException;
 import org.exoplatform.clouddrive.CloudDriveService;
@@ -34,20 +45,9 @@ import org.exoplatform.web.application.RequestContext;
 import org.exoplatform.web.application.RequireJS;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.core.UIComponent;
-import org.json.JSONObject;
-
-import java.util.HashSet;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Set;
-
-import javax.jcr.Node;
-import javax.jcr.NodeIterator;
-import javax.jcr.RepositoryException;
 
 /**
  * Initialize Cloud Drive support in portal request.<br>
- * 
  * Created by The eXo Platform SAS.
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
@@ -82,16 +82,15 @@ public class CloudDriveContext {
     }
     if (contextNode != null) {
       // we store current node in the context
-      init(WebuiRequestContext.getCurrentInstance(),
-           contextNode.getSession().getWorkspace().getName(),
-           contextNode.getPath());
+      init(WebuiRequestContext.getCurrentInstance(), contextNode.getSession().getWorkspace().getName(), contextNode.getPath());
     } else {
       LOG.error("Cannot find ancestor context node in component " + uiComponent + ", parent: " + uiComponent.getParent());
     }
   }
 
   /**
-   * Initialize request with Cloud Drive support for given JCR location and {@link CloudProvider}.
+   * Initialize request with Cloud Drive support for given JCR location and
+   * {@link CloudProvider}.
    * 
    * @param requestContext {@link RequestContext}
    * @param workspace {@link String}
@@ -107,7 +106,8 @@ public class CloudDriveContext {
       CloudDriveFeatures features = WCMCoreUtils.getService(CloudDriveFeatures.class);
       CloudDriveService service = WCMCoreUtils.getService(CloudDriveService.class);
       boolean initContext = false;
-      // add all providers to let related UI works for already connected and linked files
+      // add all providers to let related UI works for already connected and
+      // linked files
       for (CloudProvider provider : service.getProviders()) {
         // init cloud drive if we can connect to this user
         if (features.canCreateDrive(workspace, nodePath, requestContext.getRemoteUser(), provider)) {
@@ -138,13 +138,14 @@ public class CloudDriveContext {
   }
 
   /**
-   * Initialize already connected drives for a request and given JCR location. This method assumes that
-   * request already initialized by {@link #init(RequestContext, String, String)} method.
+   * Initialize already connected drives for a request and given JCR location.
+   * This method assumes that request already initialized by
+   * {@link #init(RequestContext, String, String)} method.
    *
    * @param requestContext {@link RequestContext}
    * @param parent {@link Node}
-   * @return boolean <code>true</code> if nodes successfully initialized, <code>false</code> if nodes already
-   *         initialized
+   * @return boolean <code>true</code> if nodes successfully initialized,
+   *         <code>false</code> if nodes already initialized
    * @throws RepositoryException the repository exception
    * @throws CloudDriveException the cloud drive exception
    * @see #init(RequestContext, String, String)

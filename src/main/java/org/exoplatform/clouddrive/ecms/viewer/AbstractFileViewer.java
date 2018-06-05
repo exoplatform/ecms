@@ -18,12 +18,12 @@
  */
 package org.exoplatform.clouddrive.ecms.viewer;
 
+import javax.ws.rs.core.MediaType;
+
 import org.exoplatform.clouddrive.CloudDrive;
 import org.exoplatform.clouddrive.CloudFile;
 import org.exoplatform.clouddrive.ecms.BaseCloudDriveManagerComponent;
 import org.exoplatform.webui.application.WebuiRequestContext;
-
-import javax.ws.rs.core.MediaType;
 
 /**
  * Base class for Cloud Drive file viewers.

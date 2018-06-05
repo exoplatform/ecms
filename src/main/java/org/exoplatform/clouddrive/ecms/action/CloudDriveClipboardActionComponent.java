@@ -26,27 +26,23 @@ import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.event.Event;
 
 /**
- * Override ECMS's {@link ClipboardActionComponent} to extend {@link UIClipboard} Paste-action to support
- * Cloud Drive file linking instead of copying or moving the file.<br>
- * 
+ * Override ECMS's {@link ClipboardActionComponent} to extend
+ * {@link UIClipboard} Paste-action to support Cloud Drive file linking instead
+ * of copying or moving the file.<br>
  * Created by The eXo Platform SAS.
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
  * @version $Id: ClipboardActionComponent.java 00000 May 12, 2014 pnedonosko $
- * 
  */
-@ComponentConfig(
-                 events = { @EventConfig(
-                                         listeners = CloudDriveClipboardActionComponent.ClipboardActionListener.class) })
+@ComponentConfig(events = { @EventConfig(listeners = CloudDriveClipboardActionComponent.ClipboardActionListener.class) })
 public class CloudDriveClipboardActionComponent extends ClipboardActionComponent {
 
   /**
-   * The listener interface for receiving clipboardAction events.
-   * The class that is interested in processing a clipboardAction
-   * event implements this interface, and the object created
-   * with that class is registered with a component using the
-   * component's <code>addClipboardActionListener</code> method. When
-   * the clipboardAction event occurs, that object's appropriate
+   * The listener interface for receiving clipboardAction events. The class that
+   * is interested in processing a clipboardAction event implements this
+   * interface, and the object created with that class is registered with a
+   * component using the component's <code>addClipboardActionListener</code>
+   * method. When the clipboardAction event occurs, that object's appropriate
    * method is invoked.
    */
   public static class ClipboardActionListener extends ClipboardActionComponent.ClipboardActionListener {

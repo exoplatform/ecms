@@ -18,6 +18,14 @@
  */
 package org.exoplatform.clouddrive.ecms.viewer;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+
+import javax.jcr.RepositoryException;
+
 import org.exoplatform.clouddrive.CloudDrive;
 import org.exoplatform.clouddrive.CloudDriveException;
 import org.exoplatform.clouddrive.CloudFile;
@@ -38,26 +46,19 @@ import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.form.UIFormSelectBox;
 import org.exoplatform.webui.form.UIFormStringInput;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-
-import javax.jcr.RepositoryException;
-
 /**
- * PDF Viewer component which will be used to display PDF and office files from Cloud Drive.
+ * PDF Viewer component which will be used to display PDF and office files from
+ * Cloud Drive.
  */
-@ComponentConfig(lifecycle = UIFormLifecycle.class, template = "classpath:groovy/templates/PDFViewer.gtmpl",
-                 events = { @EventConfig(listeners = PDFViewer.NextPageActionListener.class, phase = Phase.DECODE),
-                     @EventConfig(listeners = PDFViewer.PreviousPageActionListener.class, phase = Phase.DECODE),
-                     @EventConfig(listeners = PDFViewer.GotoPageActionListener.class, phase = Phase.DECODE),
-                     @EventConfig(listeners = PDFViewer.RotateRightPageActionListener.class, phase = Phase.DECODE),
-                     @EventConfig(listeners = PDFViewer.RotateLeftPageActionListener.class, phase = Phase.DECODE),
-                     @EventConfig(listeners = PDFViewer.ScalePageActionListener.class, phase = Phase.DECODE),
-                     @EventConfig(listeners = PDFViewer.ZoomInPageActionListener.class, phase = Phase.DECODE),
-                     @EventConfig(listeners = PDFViewer.ZoomOutPageActionListener.class, phase = Phase.DECODE) })
+@ComponentConfig(lifecycle = UIFormLifecycle.class, template = "classpath:groovy/templates/PDFViewer.gtmpl", events = {
+    @EventConfig(listeners = PDFViewer.NextPageActionListener.class, phase = Phase.DECODE),
+    @EventConfig(listeners = PDFViewer.PreviousPageActionListener.class, phase = Phase.DECODE),
+    @EventConfig(listeners = PDFViewer.GotoPageActionListener.class, phase = Phase.DECODE),
+    @EventConfig(listeners = PDFViewer.RotateRightPageActionListener.class, phase = Phase.DECODE),
+    @EventConfig(listeners = PDFViewer.RotateLeftPageActionListener.class, phase = Phase.DECODE),
+    @EventConfig(listeners = PDFViewer.ScalePageActionListener.class, phase = Phase.DECODE),
+    @EventConfig(listeners = PDFViewer.ZoomInPageActionListener.class, phase = Phase.DECODE),
+    @EventConfig(listeners = PDFViewer.ZoomOutPageActionListener.class, phase = Phase.DECODE) })
 public class PDFViewer extends AbstractFileForm {
 
   /** The Constant PAGE_NUMBER. */
@@ -142,15 +143,16 @@ public class PDFViewer extends AbstractFileForm {
       ContentFile contentFile = storage.createFile(repository, workspace, drive, file);
       if (contentFile.isPDF()) {
         this.pdfFile = contentFile.asPDF();
-        
-        // FYI preview link can be provider specific, thus we use exactly our Content service
-        //String previewLink = file.getPreviewLink();
+
+        // FYI preview link can be provider specific, thus we use exactly our
+        // Content service
+        // String previewLink = file.getPreviewLink();
         String contentLink = ContentService.contentLink(workspace, file.getPath(), file.getId());
         this.pdfLink = ContentService.pdfLink(contentLink);
         this.pdfPageLink = ContentService.pdfPageLink(contentLink);
       } else {
         LOG.warn("Current file view is not of PDF format " + file.getPath());
-      }      
+      }
     } catch (DocumentNotFoundException e) {
       LOG.error("Error preparing PDF viewer", e);
     } catch (RepositoryException e) {
@@ -294,17 +296,15 @@ public class PDFViewer extends AbstractFileForm {
   }
 
   /**
-   * The listener interface for receiving previousPageAction events.
-   * The class that is interested in processing a previousPageAction
-   * event implements this interface, and the object created
-   * with that class is registered with a component using the
-   * component's <code>addPreviousPageActionListener</code> method. When
-   * the previousPageAction event occurs, that object's appropriate
+   * The listener interface for receiving previousPageAction events. The class
+   * that is interested in processing a previousPageAction event implements this
+   * interface, and the object created with that class is registered with a
+   * component using the component's <code>addPreviousPageActionListener</code>
+   * method. When the previousPageAction event occurs, that object's appropriate
    * method is invoked.
-   *
    */
   public static class PreviousPageActionListener extends EventListener<PDFViewer> {
-    
+
     /**
      * {@inheritDoc}
      */
@@ -321,17 +321,15 @@ public class PDFViewer extends AbstractFileForm {
   }
 
   /**
-   * The listener interface for receiving nextPageAction events.
-   * The class that is interested in processing a nextPageAction
-   * event implements this interface, and the object created
-   * with that class is registered with a component using the
-   * component's <code>addNextPageActionListener</code> method. When
-   * the nextPageAction event occurs, that object's appropriate
+   * The listener interface for receiving nextPageAction events. The class that
+   * is interested in processing a nextPageAction event implements this
+   * interface, and the object created with that class is registered with a
+   * component using the component's <code>addNextPageActionListener</code>
+   * method. When the nextPageAction event occurs, that object's appropriate
    * method is invoked.
-   *
    */
   static public class NextPageActionListener extends EventListener<PDFViewer> {
-    
+
     /**
      * {@inheritDoc}
      */
@@ -348,16 +346,15 @@ public class PDFViewer extends AbstractFileForm {
   }
 
   /**
-   * The listener interface for receiving gotoPageAction events.
-   * The class that is interested in processing a gotoPageAction
-   * event implements this interface, and the object created
-   * with that class is registered with a component using the
-   * component's <code>addGotoPageActionListener</code> method. When
-   * the gotoPageAction event occurs, that object's appropriate
+   * The listener interface for receiving gotoPageAction events. The class that
+   * is interested in processing a gotoPageAction event implements this
+   * interface, and the object created with that class is registered with a
+   * component using the component's <code>addGotoPageActionListener</code>
+   * method. When the gotoPageAction event occurs, that object's appropriate
    * method is invoked.
    */
   static public class GotoPageActionListener extends EventListener<PDFViewer> {
-    
+
     /**
      * {@inheritDoc}
      */
@@ -381,16 +378,16 @@ public class PDFViewer extends AbstractFileForm {
   }
 
   /**
-   * The listener interface for receiving rotateRightPageAction events.
-   * The class that is interested in processing a rotateRightPageAction
-   * event implements this interface, and the object created
-   * with that class is registered with a component using the
-   * component's <code>addRotateRightPageActionListener</code> method. When
-   * the rotateRightPageAction event occurs, that object's appropriate
-   * method is invoked.
+   * The listener interface for receiving rotateRightPageAction events. The
+   * class that is interested in processing a rotateRightPageAction event
+   * implements this interface, and the object created with that class is
+   * registered with a component using the component's
+   * <code>addRotateRightPageActionListener</code> method. When the
+   * rotateRightPageAction event occurs, that object's appropriate method is
+   * invoked.
    */
   static public class RotateRightPageActionListener extends EventListener<PDFViewer> {
-    
+
     /**
      * {@inheritDoc}
      */
@@ -402,16 +399,16 @@ public class PDFViewer extends AbstractFileForm {
   }
 
   /**
-   * The listener interface for receiving rotateLeftPageAction events.
-   * The class that is interested in processing a rotateLeftPageAction
-   * event implements this interface, and the object created
-   * with that class is registered with a component using the
-   * component's <code>addRotateLeftPageActionListener</code> method. When
-   * the rotateLeftPageAction event occurs, that object's appropriate
-   * method is invoked.
+   * The listener interface for receiving rotateLeftPageAction events. The class
+   * that is interested in processing a rotateLeftPageAction event implements
+   * this interface, and the object created with that class is registered with a
+   * component using the component's
+   * <code>addRotateLeftPageActionListener</code> method. When the
+   * rotateLeftPageAction event occurs, that object's appropriate method is
+   * invoked.
    */
   static public class RotateLeftPageActionListener extends EventListener<PDFViewer> {
-    
+
     /**
      * {@inheritDoc}
      */
@@ -423,16 +420,15 @@ public class PDFViewer extends AbstractFileForm {
   }
 
   /**
-   * The listener interface for receiving scalePageAction events.
-   * The class that is interested in processing a scalePageAction
-   * event implements this interface, and the object created
-   * with that class is registered with a component using the
-   * component's <code>addScalePageActionListener</code> method. When
-   * the scalePageAction event occurs, that object's appropriate
+   * The listener interface for receiving scalePageAction events. The class that
+   * is interested in processing a scalePageAction event implements this
+   * interface, and the object created with that class is registered with a
+   * component using the component's <code>addScalePageActionListener</code>
+   * method. When the scalePageAction event occurs, that object's appropriate
    * method is invoked.
    */
   static public class ScalePageActionListener extends EventListener<PDFViewer> {
-    
+
     /**
      * {@inheritDoc}
      */
@@ -445,16 +441,15 @@ public class PDFViewer extends AbstractFileForm {
   }
 
   /**
-   * The listener interface for receiving zoomInPageAction events.
-   * The class that is interested in processing a zoomInPageAction
-   * event implements this interface, and the object created
-   * with that class is registered with a component using the
-   * component's <code>addZoomInPageActionListener</code> method. When
-   * the zoomInPageAction event occurs, that object's appropriate
+   * The listener interface for receiving zoomInPageAction events. The class
+   * that is interested in processing a zoomInPageAction event implements this
+   * interface, and the object created with that class is registered with a
+   * component using the component's <code>addZoomInPageActionListener</code>
+   * method. When the zoomInPageAction event occurs, that object's appropriate
    * method is invoked.
    */
   static public class ZoomInPageActionListener extends EventListener<PDFViewer> {
-    
+
     /**
      * {@inheritDoc}
      */
@@ -476,16 +471,15 @@ public class PDFViewer extends AbstractFileForm {
   }
 
   /**
-   * The listener interface for receiving zoomOutPageAction events.
-   * The class that is interested in processing a zoomOutPageAction
-   * event implements this interface, and the object created
-   * with that class is registered with a component using the
-   * component's <code>addZoomOutPageActionListener</code> method. When
-   * the zoomOutPageAction event occurs, that object's appropriate
+   * The listener interface for receiving zoomOutPageAction events. The class
+   * that is interested in processing a zoomOutPageAction event implements this
+   * interface, and the object created with that class is registered with a
+   * component using the component's <code>addZoomOutPageActionListener</code>
+   * method. When the zoomOutPageAction event occurs, that object's appropriate
    * method is invoked.
    */
   static public class ZoomOutPageActionListener extends EventListener<PDFViewer> {
-    
+
     /**
      * {@inheritDoc}
      */

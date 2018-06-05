@@ -18,6 +18,13 @@
  */
 package org.exoplatform.clouddrive.ecms.action;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+import javax.jcr.InvalidItemStateException;
+import javax.jcr.Node;
+
 import org.exoplatform.clouddrive.CloudDrive;
 import org.exoplatform.clouddrive.CloudDriveException;
 import org.exoplatform.clouddrive.CloudDriveService;
@@ -37,21 +44,12 @@ import org.exoplatform.webui.core.UIGrid;
 import org.exoplatform.webui.core.lifecycle.UIContainerLifecycle;
 import org.exoplatform.webui.event.Event;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
-import javax.jcr.InvalidItemStateException;
-import javax.jcr.Node;
-
 /**
  * The Class UIPermissionInfo.
  */
-@ComponentConfig(lifecycle = UIContainerLifecycle.class,
-                 events = {
-                     @EventConfig(listeners = UIPermissionInfo.DeleteActionListener.class,
-                                  confirm = "UIPermissionInfo.msg.confirm-delete-permission"),
-                     @EventConfig(listeners = UIPermissionInfo.EditActionListener.class) })
+@ComponentConfig(lifecycle = UIContainerLifecycle.class, events = {
+    @EventConfig(listeners = UIPermissionInfo.DeleteActionListener.class, confirm = "UIPermissionInfo.msg.confirm-delete-permission"),
+    @EventConfig(listeners = UIPermissionInfo.EditActionListener.class) })
 public class UIPermissionInfo extends org.exoplatform.ecm.webui.component.explorer.popup.info.UIPermissionInfo {
 
   /** The permission bean field. */
@@ -59,9 +57,7 @@ public class UIPermissionInfo extends org.exoplatform.ecm.webui.component.explor
                                                                                                  // PermissionType.REMOVE
 
   /**
-   * The
-   * permission
-   * action.
+   * The permission action.
    */
   protected static String[]  PERMISSION_ACTION     = { "Delete" };
 
@@ -69,13 +65,11 @@ public class UIPermissionInfo extends org.exoplatform.ecm.webui.component.explor
   protected static final Log LOG                   = ExoLogger.getLogger(UIPermissionInfo.class);
 
   /**
-   * The listener interface for receiving deleteAction events.
-   * The class that is interested in processing a deleteAction
-   * event implements this interface, and the object created
-   * with that class is registered with a component using the
-   * component's <code>addDeleteActionListener</code> method. When
-   * the deleteAction event occurs, that object's appropriate
-   * method is invoked.
+   * The listener interface for receiving deleteAction events. The class that is
+   * interested in processing a deleteAction event implements this interface,
+   * and the object created with that class is registered with a component using
+   * the component's <code>addDeleteActionListener</code> method. When the
+   * deleteAction event occurs, that object's appropriate method is invoked.
    */
   public static class DeleteActionListener extends
                                            org.exoplatform.ecm.webui.component.explorer.popup.info.UIPermissionInfo.DeleteActionListener {
@@ -102,7 +96,8 @@ public class UIPermissionInfo extends org.exoplatform.ecm.webui.component.explor
       CloudDrive localDrive = cloudDrives.findDrive(currentNode);
       if (localDrive != null) {
         try {
-          // FYI bad idea to use the original action logic: it does lot of bad work
+          // FYI bad idea to use the original action logic: it does lot of bad
+          // work
           // DeleteActionListener.super.execute(event);
 
           CloudFileActionService actions = uiComp.getApplicationComponent(CloudFileActionService.class);
@@ -171,11 +166,13 @@ public class UIPermissionInfo extends org.exoplatform.ecm.webui.component.explor
               String gidentity = gids[1];
               if (identity.equals(gidentity)) {
                 if (!membership.equals(gmembership)) {
-                  // skip manager permission from first loop as we already have this group
+                  // skip manager permission from first loop as we already have
+                  // this group
                   // with another membership in gdp - will be added in the loop
                   filtered = true;
                   continue next;
-                } // otherwise, it is only manager permission for this group - will be added below
+                } // otherwise, it is only manager permission for this group -
+                  // will be added below
               }
             }
           }
@@ -183,7 +180,8 @@ public class UIPermissionInfo extends org.exoplatform.ecm.webui.component.explor
       }
       permBeans.add(permBean);
     }
-    // apply filtered permissions (same code as in UIPermissionInfoBase.updateGrid())
+    // apply filtered permissions (same code as in
+    // UIPermissionInfoBase.updateGrid())
     if (filtered) {
       ListAccess<PermissionBean> permList = new ListAccessImpl<PermissionBean>(PermissionBean.class, permBeans);
       dataPageList = new LazyPageList<PermissionBean>(permList, 10);

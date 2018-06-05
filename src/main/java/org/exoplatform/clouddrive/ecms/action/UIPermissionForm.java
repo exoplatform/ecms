@@ -18,6 +18,13 @@
  */
 package org.exoplatform.clouddrive.ecms.action;
 
+import java.security.AccessControlException;
+import java.util.ResourceBundle;
+
+import javax.jcr.AccessDeniedException;
+import javax.jcr.Node;
+import javax.jcr.RepositoryException;
+
 import org.exoplatform.clouddrive.CloudDrive;
 import org.exoplatform.clouddrive.CloudDriveException;
 import org.exoplatform.clouddrive.CloudDriveService;
@@ -48,38 +55,28 @@ import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.Event.Phase;
 
-import java.security.AccessControlException;
-import java.util.ResourceBundle;
-
-import javax.jcr.AccessDeniedException;
-import javax.jcr.Node;
-import javax.jcr.RepositoryException;
-
 /**
  * The Class UIPermissionForm.
  */
-@ComponentConfig(lifecycle = UIFormLifecycle.class, template = "classpath:groovy/wcm/webui/core/UIPermissionForm.gtmpl",
-                 events = { @EventConfig(listeners = UIPermissionForm.SaveActionListener.class),
-                     @EventConfig(phase = Phase.DECODE, listeners = UIPermissionForm.ResetActionListener.class),
-                     @EventConfig(phase = Phase.DECODE, listeners = UIPermissionForm.CloseActionListener.class),
-                     @EventConfig(phase = Phase.DECODE, listeners = UIPermissionForm.SelectUserActionListener.class),
-                     @EventConfig(phase = Phase.DECODE, listeners = UIPermissionForm.SelectMemberActionListener.class),
-                     @EventConfig(phase = Phase.DECODE, listeners = UIPermissionForm.AddAnyActionListener.class),
-                     @EventConfig(phase = Phase.DECODE, listeners = UIPermissionInputSet.OnChangeActionListener.class) })
+@ComponentConfig(lifecycle = UIFormLifecycle.class, template = "classpath:groovy/wcm/webui/core/UIPermissionForm.gtmpl", events = {
+    @EventConfig(listeners = UIPermissionForm.SaveActionListener.class),
+    @EventConfig(phase = Phase.DECODE, listeners = UIPermissionForm.ResetActionListener.class),
+    @EventConfig(phase = Phase.DECODE, listeners = UIPermissionForm.CloseActionListener.class),
+    @EventConfig(phase = Phase.DECODE, listeners = UIPermissionForm.SelectUserActionListener.class),
+    @EventConfig(phase = Phase.DECODE, listeners = UIPermissionForm.SelectMemberActionListener.class),
+    @EventConfig(phase = Phase.DECODE, listeners = UIPermissionForm.AddAnyActionListener.class),
+    @EventConfig(phase = Phase.DECODE, listeners = UIPermissionInputSet.OnChangeActionListener.class) })
 public class UIPermissionForm extends org.exoplatform.ecm.webui.component.explorer.popup.info.UIPermissionForm {
 
   /** The Constant LOG. */
   protected static final Log LOG = ExoLogger.getLogger(UIPermissionForm.class);
 
   /**
-   * The listener interface for receiving saveAction events.
-   * The class that is interested in processing a saveAction
-   * event implements this interface, and the object created
-   * with that class is registered with a component using the
-   * component's <code>addSaveActionListener</code> method. When
-   * the saveAction event occurs, that object's appropriate
-   * method is invoked.
-   *
+   * The listener interface for receiving saveAction events. The class that is
+   * interested in processing a saveAction event implements this interface, and
+   * the object created with that class is registered with a component using the
+   * component's <code>addSaveActionListener</code> method. When the saveAction
+   * event occurs, that object's appropriate method is invoked.
    */
   public static class SaveActionListener extends
                                          org.exoplatform.ecm.webui.component.explorer.popup.info.UIPermissionForm.SaveActionListener {
@@ -108,9 +105,7 @@ public class UIPermissionForm extends org.exoplatform.ecm.webui.component.explor
                                    .getValue();
 
         if (Utils.isNameEmpty(userOrGroup)) {
-          uiApp.addMessage(new ApplicationMessage("UIPermissionForm.msg.userOrGroup-required",
-                                                  null,
-                                                  ApplicationMessage.WARNING));
+          uiApp.addMessage(new ApplicationMessage("UIPermissionForm.msg.userOrGroup-required", null, ApplicationMessage.WARNING));
           return;
         }
 
@@ -136,13 +131,15 @@ public class UIPermissionForm extends org.exoplatform.ecm.webui.component.explor
                 documentsDrive = documentDrives.getDriveByName(groupId.replace('/', '.'));
                 if (documentsDrive != null) {
                   // 3. if drive found, share with the drive:
-                  // we don't use documentsDrive.getAllPermissions() as user already chosen the permission
+                  // we don't use documentsDrive.getAllPermissions() as user
+                  // already chosen the permission
                   // identity in the form
                   // check if link(s) in it exist
                   // FIXME links should not exist if not shared to the drive
                   Node newLink, docsDriveRoot;
                   if (actions.getCloudFileLinks(node, groupId, true).getSize() == 0) {
-                    // 3.1 if no links create an one in drive root using linkFile()
+                    // 3.1 if no links create an one in drive root using
+                    // linkFile()
                     docsDriveRoot = (Node) node.getSession().getItem(documentsDrive.getHomePath());
                     if (PermissionUtil.canAddNode(docsDriveRoot)) {
                       actions.shareCloudFile(node, localDrive, userOrGroup);
@@ -172,10 +169,10 @@ public class UIPermissionForm extends org.exoplatform.ecm.webui.component.explor
                       text = new ApplicationMessage("CloudFile.msg.FileLinksSharedInSpace",
                                                     new String[] { "", actions.documentName(docsDriveRoot),
                                                         space.getDisplayName() });
-                    } else { 
-                      text = new ApplicationMessage("CloudFile.msg.FileLinksSharedInSpace",
-                                                    new String[] { "", actions.documentName(docsDriveRoot),
-                                                        group.getGroupName() });
+                    } else {
+                      text =
+                           new ApplicationMessage("CloudFile.msg.FileLinksSharedInSpace",
+                                                  new String[] { "", actions.documentName(docsDriveRoot), group.getGroupName() });
                     }
                     ResourceBundle res = rcontext.getApplicationResourceBundle();
                     title.setResourceBundle(res);
@@ -186,10 +183,12 @@ public class UIPermissionForm extends org.exoplatform.ecm.webui.component.explor
               }
             }
             if (documentsDrive == null) {
-              // 4. if no drive found, then we check is it an user in org service
+              // 4. if no drive found, then we check is it an user in org
+              // service
               User user = org.getUserHandler().findUserByName(userOrGroup);
               if (user != null) {
-                // 5. if user found, use linkShareToUser() to share to the user home dir
+                // 5. if user found, use linkShareToUser() to share to the user
+                // home dir
                 Node link = actions.linkShareToUser(node, localDrive, userOrGroup);
                 actions.postSharedActivity(node, link, "");
                 // notification info for user
@@ -245,8 +244,7 @@ public class UIPermissionForm extends org.exoplatform.ecm.webui.component.explor
      * @throws RepositoryException the repository exception
      * @throws CloudDriveException the cloud drive exception
      */
-    protected void initContext(WebuiRequestContext context, Node currentNode) throws RepositoryException,
-                                                                              CloudDriveException {
+    protected void initContext(WebuiRequestContext context, Node currentNode) throws RepositoryException, CloudDriveException {
       String path = currentNode.getPath();
       String workspace = currentNode.getSession().getWorkspace().getName();
       CloudDriveContext.init(context, workspace, path);
@@ -274,7 +272,8 @@ public class UIPermissionForm extends org.exoplatform.ecm.webui.component.explor
    */
   @Override
   protected void checkAll(boolean check) {
-    // this method has no sense for Cloud File sharing permissions, they are READ only always
+    // this method has no sense for Cloud File sharing permissions, they are
+    // READ only always
   }
 
   /**
@@ -292,7 +291,8 @@ public class UIPermissionForm extends org.exoplatform.ecm.webui.component.explor
    */
   @Override
   protected void lockForm(boolean isLock) {
-    // XXX we expect NPE in permission checkboxes traversing inside, they are last it's OK
+    // XXX we expect NPE in permission checkboxes traversing inside, they are
+    // last it's OK
     try {
       super.lockForm(isLock);
     } catch (NullPointerException e) {

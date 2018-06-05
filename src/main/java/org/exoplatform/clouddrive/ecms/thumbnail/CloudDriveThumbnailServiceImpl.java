@@ -18,23 +18,21 @@
  */
 package org.exoplatform.clouddrive.ecms.thumbnail;
 
-import org.exoplatform.clouddrive.CloudDriveService;
-import org.exoplatform.container.xml.InitParams;
-import org.exoplatform.services.cms.thumbnail.impl.ThumbnailServiceImpl;
-
 import java.awt.image.BufferedImage;
 import java.io.InputStream;
 
 import javax.jcr.Node;
 
+import org.exoplatform.clouddrive.CloudDriveService;
+import org.exoplatform.container.xml.InitParams;
+import org.exoplatform.services.cms.thumbnail.impl.ThumbnailServiceImpl;
+
 /**
- * TODO not finished! not used.
- * 
- * Created by The eXo Platform SAS
+ * TODO not finished! not used. Created by The eXo Platform SAS
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
- * @version $Id: CloudDriveThumbnailServiceImpl.java 00000 May 21, 2014 pnedonosko $
- * 
+ * @version $Id: CloudDriveThumbnailServiceImpl.java 00000 May 21, 2014
+ *          pnedonosko $
  */
 public class CloudDriveThumbnailServiceImpl extends ThumbnailServiceImpl {
 

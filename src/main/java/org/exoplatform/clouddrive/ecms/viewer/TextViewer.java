@@ -60,12 +60,12 @@ public class TextViewer extends AbstractFileViewer {
    */
   public boolean isFormattedText() {
     String mimeType = file.getType();
+    // text/x- can be used for various programming languages
     return (mimeType.startsWith("text/") && file.getTypeMode() != null)
-        || (mimeType.startsWith("application/") && file.getTypeMode() != null)
-        // text/x- can be used for various programming languages
-        || mimeType.startsWith("text/x-") || mimeType.startsWith("application/x-sh")
-        || mimeType.startsWith("text/javascript") || mimeType.startsWith("application/javascript")
-        || mimeType.startsWith("text/json") || mimeType.startsWith("application/json");
+        || (mimeType.startsWith("application/") && file.getTypeMode() != null) || mimeType.startsWith("text/x-")
+        || mimeType.startsWith("application/x-sh") || mimeType.startsWith("text/javascript")
+        || mimeType.startsWith("application/javascript") || mimeType.startsWith("text/json")
+        || mimeType.startsWith("application/json");
   }
 
   /**

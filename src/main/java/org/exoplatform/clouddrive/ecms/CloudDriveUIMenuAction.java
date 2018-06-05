@@ -20,13 +20,11 @@
 package org.exoplatform.clouddrive.ecms;
 
 /**
- * Action in ECMS menu action bar for Cloud Drive UI.
- * 
- * Created by The eXo Platform SAS
+ * Action in ECMS menu action bar for Cloud Drive UI. Created by The eXo
+ * Platform SAS
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
  * @version $Id: CloudDriveUIAction.java 00000 Feb 28, 2014 pnedonosko $
- * 
  */
 public interface CloudDriveUIMenuAction {
 
@@ -36,5 +34,5 @@ public interface CloudDriveUIMenuAction {
    * @return String
    */
   String getName();
-  
+
 }

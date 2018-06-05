@@ -18,6 +18,9 @@
  */
 package org.exoplatform.clouddrive.ecms.viewer;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.exoplatform.clouddrive.ecms.filters.CloudFileFilter;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
@@ -26,13 +29,9 @@ import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.ext.filter.UIExtensionFilter;
 import org.exoplatform.webui.ext.filter.UIExtensionFilters;
 
-import java.util.Arrays;
-import java.util.List;
-
 /**
- * Default WebUI component for Cloud Drive files. It shows content of remote file by its URL in iframe on file
- * page in eXo Documents.<br>
- * 
+ * Default WebUI component for Cloud Drive files. It shows content of remote
+ * file by its URL in iframe on file page in eXo Documents.<br>
  * Created by The eXo Platform SAS.
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
@@ -48,8 +47,7 @@ public class DefaultFileViewer extends AbstractFileViewer {
   public static final String                     EVENT_NAME = "ShowCloudFile";
 
   /** The Constant FILTERS. */
-  protected static final List<UIExtensionFilter> FILTERS    = Arrays.asList(new UIExtensionFilter[] {
-      new CloudFileFilter() });
+  protected static final List<UIExtensionFilter> FILTERS    = Arrays.asList(new UIExtensionFilter[] { new CloudFileFilter() });
 
   /**
    * Instantiates a new default file viewer.

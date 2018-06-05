@@ -32,21 +32,19 @@ import org.exoplatform.webui.event.EventListener;
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
  * @version $Id: UISharingManager.java 00000 Jul 9, 2015 pnedonosko $
  */
-@ComponentConfig(template = "classpath:groovy/wcm/webui/core/UIPermissionManager.gtmpl",
-                 events = { @EventConfig(listeners = UISharingManager.CloseActionListener.class) })
+@ComponentConfig(template = "classpath:groovy/wcm/webui/core/UIPermissionManager.gtmpl", events = {
+    @EventConfig(listeners = UISharingManager.CloseActionListener.class) })
 public class UISharingManager extends UIPermissionManagerBase {
 
   /**
-   * The listener interface for receiving closeAction events.
-   * The class that is interested in processing a closeAction
-   * event implements this interface, and the object created
-   * with that class is registered with a component using the
-   * component's <code>addCloseActionListener</code> method. When
-   * the closeAction event occurs, that object's appropriate
-   * method is invoked.
+   * The listener interface for receiving closeAction events. The class that is
+   * interested in processing a closeAction event implements this interface, and
+   * the object created with that class is registered with a component using the
+   * component's <code>addCloseActionListener</code> method. When the
+   * closeAction event occurs, that object's appropriate method is invoked.
    */
   public static class CloseActionListener extends EventListener<UISharingManager> {
-    
+
     /**
      * {@inheritDoc}
      */

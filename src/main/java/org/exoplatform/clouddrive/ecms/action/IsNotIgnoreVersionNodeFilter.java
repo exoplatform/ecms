@@ -19,18 +19,18 @@
  */
 package org.exoplatform.clouddrive.ecms.action;
 
-import org.exoplatform.clouddrive.ecms.filters.NotCloudDriveOrFileFilter;
-
 import java.util.Map;
 
+import org.exoplatform.clouddrive.ecms.filters.NotCloudDriveOrFileFilter;
+
 /**
- * Overrides original ECMS's filter to do not accept Cloud Drive and its files.<br>
- * 
+ * Overrides original ECMS's filter to do not accept Cloud Drive and its
+ * files.<br>
  * Created by The eXo Platform SAS
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
- * @version $Id: IsNotIgnoreVersionNodeFilter.java 00000 Jul 6, 2015 pnedonosko $
- * 
+ * @version $Id: IsNotIgnoreVersionNodeFilter.java 00000 Jul 6, 2015 pnedonosko
+ *          $
  */
 public class IsNotIgnoreVersionNodeFilter extends
                                           org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotIgnoreVersionNodeFilter {

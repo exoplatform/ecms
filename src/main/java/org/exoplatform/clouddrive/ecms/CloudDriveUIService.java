@@ -18,6 +18,19 @@
  */
 package org.exoplatform.clouddrive.ecms;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
+
+import javax.jcr.Node;
+import javax.jcr.RepositoryException;
+import javax.jcr.Session;
+
+import org.picocontainer.Startable;
+
 import org.exoplatform.clouddrive.CloudDriveService;
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.component.ComponentPlugin;
@@ -34,29 +47,18 @@ import org.exoplatform.services.log.Log;
 import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.ext.UIExtension;
 import org.exoplatform.webui.ext.UIExtensionManager;
-import org.picocontainer.Startable;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
-
-import javax.jcr.Node;
-import javax.jcr.RepositoryException;
-import javax.jcr.Session;
 
 /**
- * Add ImportCloudDocument button in ListView. We're doing this by hack of already stored DMS
- * navigation.
+ * Add ImportCloudDocument button in ListView. We're doing this by hack of
+ * already stored DMS navigation.
  */
 public class CloudDriveUIService implements Startable {
 
   /**
-   * Instance of this class will be registered in ECMS's system workspace of JCR repository. It has maximum
-   * priority and will be suspended on a repository stop first. It invokes ECMS menu restoration to remove CD
-   * actions for a case of the extension uninstallation.
+   * Instance of this class will be registered in ECMS's system workspace of JCR
+   * repository. It has maximum priority and will be suspended on a repository
+   * stop first. It invokes ECMS menu restoration to remove CD actions for a
+   * case of the extension uninstallation.
    */
   class ViewRestorer implements Suspendable {
 
@@ -98,7 +100,8 @@ public class CloudDriveUIService implements Startable {
      */
     @Override
     public int getPriority() {
-      return Integer.MAX_VALUE; // it should be very first (sure it's not 100% this way)
+      return Integer.MAX_VALUE; // it should be very first (sure it's not 100%
+                                // this way)
     }
   }
 
@@ -174,8 +177,7 @@ public class CloudDriveUIService implements Startable {
       CloudDriveUIExtension ext = (CloudDriveUIExtension) plugin;
       defaultMenuActions.addAll(ext.getDefaultActions());
     } else {
-      LOG.warn("Cannot recognize component plugin for " + plugin.getName() + ": type " + plugin.getClass()
-          + " not supported");
+      LOG.warn("Cannot recognize component plugin for " + plugin.getName() + ": type " + plugin.getClass() + " not supported");
     }
   }
 
@@ -217,16 +219,15 @@ public class CloudDriveUIService implements Startable {
   }
 
   /**
-   * Read all buttons actions from given node, in buttons property, to given string builder.
+   * Read all buttons actions from given node, in buttons property, to given
+   * string builder.
    *
    * @param node {@link Node}
    * @param buttons {@link String}
    * @param actionsStr {@link StringBuilder}
    * @throws RepositoryException the repository exception
    */
-  protected void readViewActions(Node node,
-                                 String buttons,
-                                 StringBuilder actionsStr) throws RepositoryException {
+  protected void readViewActions(Node node, String buttons, StringBuilder actionsStr) throws RepositoryException {
     if (node.hasProperty(buttons)) {
       String[] actions = node.getProperty(buttons).getString().split(";");
       for (int i = 0; i < actions.length; i++) {
@@ -243,8 +244,8 @@ public class CloudDriveUIService implements Startable {
   }
 
   /**
-   * Split buttons actions on Cloud Drive's and other from given node, in buttons property, to given string
-   * builder.
+   * Split buttons actions on Cloud Drive's and other from given node, in
+   * buttons property, to given string builder.
    *
    * @param node {@link Node}
    * @param buttons {@link String}
@@ -271,7 +272,8 @@ public class CloudDriveUIService implements Startable {
               }
               cdActions.append(a);
             }
-          } else if (otherActions.indexOf(a) < 0) { // add only if not already exists
+          } else if (otherActions.indexOf(a) < 0) { // add only if not already
+                                                    // exists
             if (otherActions.length() > 0) {
               otherActions.append(';');
               otherActions.append(' ');
@@ -286,9 +288,10 @@ public class CloudDriveUIService implements Startable {
   }
 
   /**
-   * Add Cloud Drive actions to ECMS actions menu if they are not already there. This method adds Cloud Drive
-   * actions saved in previous container execution (saved on container stop, see {@link #restoreViews()} ). If
-   * no saved actions, then defaults will be added from configuration.
+   * Add Cloud Drive actions to ECMS actions menu if they are not already there.
+   * This method adds Cloud Drive actions saved in previous container execution
+   * (saved on container stop, see {@link #restoreViews()} ). If no saved
+   * actions, then defaults will be added from configuration.
    *
    * @throws Exception the exception
    */
@@ -343,7 +346,8 @@ public class CloudDriveUIService implements Startable {
           }
           viewNode.setProperty(ECD_DEFAULT_BUTTONS, cdButtons);
         } else {
-          // check if we don't have new defaults in configuration (actual for upgrades since 1.3.0)
+          // check if we don't have new defaults in configuration (actual for
+          // upgrades since 1.3.0)
           StringBuilder defaultSavedActions = new StringBuilder();
           readViewActions(viewNode, ECD_DEFAULT_BUTTONS, defaultSavedActions);
 
@@ -389,8 +393,9 @@ public class CloudDriveUIService implements Startable {
   }
 
   /**
-   * Remove Cloud Drive actions from ECMS actions menu and store them in dedicated property. We remove actions
-   * to make the add-on uninstallation safe (don't leave our menu actions in the content).
+   * Remove Cloud Drive actions from ECMS actions menu and store them in
+   * dedicated property. We remove actions to make the add-on uninstallation
+   * safe (don't leave our menu actions in the content).
    *
    * @throws Exception the exception
    */
@@ -402,7 +407,8 @@ public class CloudDriveUIService implements Startable {
         Node viewNode = manageView.getViewByName(view, jcrSessions);
         StringBuilder newActions = new StringBuilder();
         StringBuilder cdActions = new StringBuilder();
-        // split current actions, including customized by user, to Cloud Drive's and others
+        // split current actions, including customized by user, to Cloud Drive's
+        // and others
         splitViewActions(viewNode, EXO_BUTTONS, cdActions, newActions);
         if (LOG.isDebugEnabled()) {
           LOG.debug("Stored user buttons: " + cdActions.toString());
@@ -453,9 +459,9 @@ public class CloudDriveUIService implements Startable {
       prepareViews();
 
       // also register menu restorer...
-      // XXX yeah, we do nasty things for this as Startable.stop() works later, when JCR already stopped.
-      List<?> repoContainers = ExoContainerContext.getCurrentContainer()
-                                                  .getComponentInstancesOfType(RepositoryContainer.class);
+      // XXX yeah, we do nasty things for this as Startable.stop() works later,
+      // when JCR already stopped.
+      List<?> repoContainers = ExoContainerContext.getCurrentContainer().getComponentInstancesOfType(RepositoryContainer.class);
       for (Object rco : repoContainers) {
         RepositoryContainer rc = (RepositoryContainer) rco;
         WorkspaceContainer wc = rc.getWorkspaceContainer(DMS_SYSTEM_WORKSPACE);

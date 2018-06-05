@@ -18,22 +18,20 @@
  */
 package org.exoplatform.clouddrive.ecms.filters;
 
+import java.util.Map;
+import java.util.Set;
+
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.webui.ext.filter.UIExtensionFilter;
 import org.exoplatform.webui.ext.filter.UIExtensionFilterType;
 
-import java.util.Map;
-import java.util.Set;
-
 /**
  * Filter files by MIME type including wildcard types. <br>
- * 
  * Created by The eXo Platform SAS.
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
  * @version $Id: FileTypeFilter.java 00000 Nov 24, 2014 pnedonosko $
- * 
  */
 public class FileTypeFilter implements UIExtensionFilter {
 
@@ -50,7 +48,7 @@ public class FileTypeFilter implements UIExtensionFilter {
     if (context == null) {
       return true;
     }
-    
+
     if (mimeTypes == null || mimeTypes.isEmpty()) {
       return true;
     }
