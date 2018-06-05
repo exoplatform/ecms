@@ -19,13 +19,11 @@
 package org.exoplatform.clouddrive;
 
 /**
- * Lister for {@link CloudDrive} events, such as removal or synchronization with its provider.
- * 
- * Created by The eXo Platform SAS
+ * Lister for {@link CloudDrive} events, such as removal or synchronization with
+ * its provider. Created by The eXo Platform SAS
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
  * @version $Id: CloudDriveListener.java 00000 Dec 13, 2012 pnedonosko $
- * 
  */
 public interface CloudDriveListener {
 
@@ -37,7 +35,8 @@ public interface CloudDriveListener {
   void onConnect(CloudDriveEvent event);
 
   /**
-   * Will be fired after successful disconnection of a drive from remote provider.
+   * Will be fired after successful disconnection of a drive from remote
+   * provider.
    * 
    * @param event {@link CloudDriveEvent}
    */
@@ -58,15 +57,18 @@ public interface CloudDriveListener {
   void onSynchronized(CloudDriveEvent event);
 
   /**
-   * Will be fired on an error happened during connect or synchronization of {@link CloudDrive}.<br>
-   * This action can be useful for asynchronous calls or to invoke additional cleanup when regular try-catch
-   * approach on mentioned operations not applicable.
+   * Will be fired on an error happened during connect or synchronization of
+   * {@link CloudDrive}.<br>
+   * This action can be useful for asynchronous calls or to invoke additional
+   * cleanup when regular try-catch approach on mentioned operations not
+   * applicable.
    * 
    * @param event {@link CloudDriveEvent}
-   * @param error {@link Throwable}, an error happened during connect or synchronization. Check type of the
-   *          underlying error to handle a specific exceptions.
-   * @param operationName {@link String} name of an operation when this error happened
-   * 
+   * @param error {@link Throwable}, an error happened during connect or
+   *          synchronization. Check type of the underlying error to handle a
+   *          specific exceptions.
+   * @param operationName {@link String} name of an operation when this error
+   *          happened
    * @see CloudDrive#connect()
    * @see CloudDrive#synchronize()
    */

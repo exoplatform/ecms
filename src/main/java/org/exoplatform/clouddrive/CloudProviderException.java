@@ -19,13 +19,11 @@
 package org.exoplatform.clouddrive;
 
 /**
- * Exception indicating some error happened on cloud provider side.
- * 
- * Created by The eXo Platform SAS.
+ * Exception indicating some error happened on cloud provider side. Created by
+ * The eXo Platform SAS.
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
  * @version $Id: CloudProviderException.java 00000 Dec 10, 2012 pnedonosko $
- * 
  */
 public class CloudProviderException extends CloudDriveException {
 
@@ -40,7 +38,7 @@ public class CloudProviderException extends CloudDriveException {
   public CloudProviderException(String message) {
     super(message);
   }
-  
+
   /**
    * Instantiates a new cloud provider exception.
    *
@@ -50,7 +48,7 @@ public class CloudProviderException extends CloudDriveException {
   public CloudProviderException(String message, Throwable cause) {
     super(message, cause);
   }
-  
+
   /**
    * Instantiates a new cloud provider exception.
    *

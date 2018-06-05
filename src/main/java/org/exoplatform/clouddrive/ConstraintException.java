@@ -20,13 +20,12 @@
 package org.exoplatform.clouddrive;
 
 /**
- * Cloud provider constraint doesn't allow create, modify or remove the cloud drive resource.<br> 
- * 
+ * Cloud provider constraint doesn't allow create, modify or remove the cloud
+ * drive resource.<br>
  * Created by The eXo Platform SAS
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
  * @version $Id: ConstraintException.java 00000 Nov 28, 2014 pnedonosko $
- * 
  */
 public class ConstraintException extends CloudDriveException {
 

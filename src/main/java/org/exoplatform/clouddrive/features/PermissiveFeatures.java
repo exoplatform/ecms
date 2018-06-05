@@ -22,13 +22,10 @@ import org.exoplatform.clouddrive.CloudDrive;
 import org.exoplatform.clouddrive.CloudProvider;
 
 /**
- * Specification with all features permitted.
- * 
- * Created by The eXo Platform SAS
+ * Specification with all features permitted. Created by The eXo Platform SAS
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
  * @version $Id: PermissiveFeatures.java 00000 Jan 30, 2014 pnedonosko $
- * 
  */
 public class PermissiveFeatures implements CloudDriveFeatures {
 

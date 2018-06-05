@@ -21,9 +21,8 @@ package org.exoplatform.clouddrive;
 import javax.jcr.RepositoryException;
 
 /**
- * General abstraction for an user of cloud drive. It provides integration points between cloud provider and
- * local cloud drive storage. <br>
- * 
+ * General abstraction for an user of cloud drive. It provides integration
+ * points between cloud provider and local cloud drive storage. <br>
  * Created by The eXo Platform SAS.
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
@@ -108,9 +107,10 @@ public abstract class CloudUser {
   }
 
   /**
-   * Connected service name for human-readable uses. Service name is the same as the provider name by default,
-   * but it also can be more precise description of the app the user connected to. For instance: the
-   * same type of provider can connect to different instances of the app and the service name may
+   * Connected service name for human-readable uses. Service name is the same as
+   * the provider name by default, but it also can be more precise description
+   * of the app the user connected to. For instance: the same type of provider
+   * can connect to different instances of the app and the service name may
    * describe each one connected in runtime.<br>
    * 
    * @return String with the provider's service name (app instance name)
@@ -120,8 +120,8 @@ public abstract class CloudUser {
   }
 
   /**
-   * Create a title for Cloud Drive root node. By default it is 'SERVICE_NAME - EMAIL', but implementation
-   * may change it for more detailed.
+   * Create a title for Cloud Drive root node. By default it is 'SERVICE_NAME -
+   * EMAIL', but implementation may change it for more detailed.
    *
    * @return String with a text of root node for the user
    * @throws RepositoryException the repository exception
@@ -139,8 +139,8 @@ public abstract class CloudUser {
   public boolean equals(Object obj) {
     if (obj instanceof CloudUser) {
       CloudUser other = (CloudUser) obj;
-      return this.id.equals(other.id) && this.username.equals(other.username)
-          && this.email.equals(other.email) && this.provider.equals(other.provider);
+      return this.id.equals(other.id) && this.username.equals(other.username) && this.email.equals(other.email)
+          && this.provider.equals(other.provider);
     }
     return false;
   }

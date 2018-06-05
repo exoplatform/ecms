@@ -19,11 +19,6 @@
 
 package org.exoplatform.clouddrive.jcr;
 
-import org.exoplatform.services.jcr.RepositoryService;
-import org.exoplatform.services.jcr.ext.app.SessionProviderService;
-import org.exoplatform.services.jcr.ext.common.SessionProvider;
-import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
-
 import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -36,12 +31,16 @@ import javax.jcr.PropertyIterator;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 
+import org.exoplatform.services.jcr.RepositoryService;
+import org.exoplatform.services.jcr.ext.app.SessionProviderService;
+import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
+
 /**
  * Created by The eXo Platform SAS.
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
  * @version $Id: JCRNodeFinder.java 00000 Feb 26, 2013 pnedonosko $
- * 
  */
 public class JCRNodeFinder implements NodeFinder {
 
@@ -80,8 +79,7 @@ public class JCRNodeFinder implements NodeFinder {
    * @throws RepositoryException the repository exception
    */
   @Override
-  public Item getItem(Session userSession, String path, boolean symlinkTarget) throws PathNotFoundException,
-                                                                               RepositoryException {
+  public Item getItem(Session userSession, String path, boolean symlinkTarget) throws PathNotFoundException, RepositoryException {
     return userSession.getItem(path);
   }
 

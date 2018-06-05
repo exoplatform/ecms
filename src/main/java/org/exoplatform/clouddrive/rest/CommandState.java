@@ -21,15 +21,13 @@ package org.exoplatform.clouddrive.rest;
 
 /**
  * Bean used for creation of connect and state request entity in JSON.<br>
- * 
  * Created by The eXo Platform SAS.
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
  * @version $Id: CommandState.java 00000 Jan 17, 2013 pnedonosko $
- * 
  */
 public class CommandState {
-  
+
   /** The service url. */
   final String    serviceUrl;
 

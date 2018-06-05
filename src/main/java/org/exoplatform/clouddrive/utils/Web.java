@@ -19,14 +19,14 @@
  */
 package org.exoplatform.clouddrive.utils;
 
-import org.exoplatform.services.log.ExoLogger;
-import org.exoplatform.services.log.Log;
-
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 
 /**
  * Created by The eXo Platform SAS.
@@ -46,10 +46,12 @@ public class Web {
   }
 
   /**
-   * Encode given string into application/x-www-form-urlencoded format using a UTF-8 encoding scheme.
+   * Encode given string into application/x-www-form-urlencoded format using a
+   * UTF-8 encoding scheme.
    *
    * @param str the str
-   * @return encoded string or the same string if UTF-8 scheme not available (will be logged as warning)
+   * @return encoded string or the same string if UTF-8 scheme not available
+   *         (will be logged as warning)
    */
   public static String formEncode(String str) {
     try {
@@ -61,10 +63,12 @@ public class Web {
   }
 
   /**
-   * Decode given string from application/x-www-form-urlencoded format using a UTF-8 encoding scheme.
+   * Decode given string from application/x-www-form-urlencoded format using a
+   * UTF-8 encoding scheme.
    *
    * @param str the str
-   * @return decoded string or the same string if UTF-8 scheme not available (will be logged as warning)
+   * @return decoded string or the same string if UTF-8 scheme not available
+   *         (will be logged as warning)
    */
   public static String formDecode(String str) {
     try {
@@ -90,7 +94,7 @@ public class Web {
       return path;
     }
   }
-  
+
   /**
    * Decode given string from URL path format to raw form.
    *

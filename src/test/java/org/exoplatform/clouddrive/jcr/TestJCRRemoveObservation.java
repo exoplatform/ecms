@@ -83,8 +83,8 @@ public class TestJCRRemoveObservation extends BaseCloudDriveTest {
   }
 
   /**
-   * Test if JCR Observation respects self-removing listeners. To prototype real env using few dummy listeners
-   * also.
+   * Test if JCR Observation respects self-removing listeners. To prototype real
+   * env using few dummy listeners also.
    * 
    * @throws RepositoryException
    */

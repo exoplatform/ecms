@@ -41,9 +41,9 @@ import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.rest.resource.ResourceContainer;
 
-
 /**
- * REST service with anonymous access to eXo Drive. Created by The eXo Platform SAS.
+ * REST service with anonymous access to eXo Drive. Created by The eXo Platform
+ * SAS.
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
  * @version $Id: ExoDrivePublicService.java 00000 Oct 17, 2012 pnedonosko $
@@ -65,9 +65,7 @@ public class ExoDrivePublicService implements ResourceContainer {
   @GET
   @Path("/{user}/{filename}")
   @Produces(MediaType.TEXT_HTML)
-  public Response get(@Context UriInfo uriInfo,
-                           @PathParam("user") String user,
-                           @PathParam("filename") String filename) {
+  public Response get(@Context UriInfo uriInfo, @PathParam("user") String user, @PathParam("filename") String filename) {
 
     try {
       ExoDriveRepository repo = service.read(jcrService.getCurrentRepository().getConfiguration().getName());

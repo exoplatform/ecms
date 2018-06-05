@@ -29,7 +29,8 @@ import javax.jcr.Session;
 
 /**
  * An abstraction for a {@link Node} lookup in JCR repository.<br>
- * We need this to decouple WCM's NodeFinder from dependencies of Cloud Drive core. <br>
+ * We need this to decouple WCM's NodeFinder from dependencies of Cloud Drive
+ * core. <br>
  * Created by The eXo Platform SAS.
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
@@ -42,18 +43,18 @@ public interface NodeFinder {
    *
    * @param userSession {@link Session}
    * @param path {@link String}
-   * @param symlinkTarget boolean, if {@code true} and found item is a symlink node, return the symlink target
-   *          node, if {@code false} just return the item obtained from the session
+   * @param symlinkTarget boolean, if {@code true} and found item is a symlink
+   *          node, return the symlink target node, if {@code false} just return
+   *          the item obtained from the session
    * @return the item
    * @throws PathNotFoundException if item not found by given path
    * @throws RepositoryException if repository error eccurs
    */
-  Item getItem(Session userSession, String path, boolean symlinkTarget) throws PathNotFoundException,
-                                                                       RepositoryException;
+  Item getItem(Session userSession, String path, boolean symlinkTarget) throws PathNotFoundException, RepositoryException;
 
   /**
-   * Find JCR item by given path, if the path points to a symlink this method return a target node of the
-   * link.
+   * Find JCR item by given path, if the path points to a symlink this method
+   * return a target node of the link.
    *
    * @param userSession {@link Session}
    * @param path {@link String}
@@ -75,13 +76,14 @@ public interface NodeFinder {
   Collection<Node> findLinked(Session session, String uuid) throws PathNotFoundException, RepositoryException;
 
   /**
-   * Align given name to current repository conventions by removing or escaping forbidden characters.
+   * Align given name to current repository conventions by removing or escaping
+   * forbidden characters.
    * 
    * @param name {@link String}
    * @return {@link String} cleaned name
    */
   String cleanName(String name);
-  
+
   /**
    * Return user home node of given user.
    *

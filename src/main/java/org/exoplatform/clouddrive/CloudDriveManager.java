@@ -23,12 +23,10 @@ import javax.jcr.RepositoryException;
 
 /**
  * Integration helper for Cloud Drive file operations support.<br>
- * 
  * Created by The eXo Platform SAS
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
  * @version $Id: CloudDriveManager.java 00000 May 15, 2014 pnedonosko $
- * 
  */
 public class CloudDriveManager {
 

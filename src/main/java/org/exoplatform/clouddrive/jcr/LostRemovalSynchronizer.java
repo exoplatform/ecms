@@ -18,6 +18,9 @@
  */
 package org.exoplatform.clouddrive.jcr;
 
+import javax.jcr.Node;
+import javax.jcr.RepositoryException;
+
 import org.exoplatform.clouddrive.CloudDriveException;
 import org.exoplatform.clouddrive.CloudFile;
 import org.exoplatform.clouddrive.CloudFileAPI;
@@ -27,21 +30,16 @@ import org.exoplatform.clouddrive.SyncNotSupportedException;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 
-import javax.jcr.Node;
-import javax.jcr.RepositoryException;
-
 /**
- * Synchronizer created to handle cases when stored class of {@link CloudFileSynchronizer} cannot be loaded
- * and file node doesn't exists.
+ * Synchronizer created to handle cases when stored class of
+ * {@link CloudFileSynchronizer} cannot be loaded and file node doesn't exists.
  * This synchronizer does nothing but call {@link CloudFileAPI} methods for
  * {@link #remove(String, String, boolean, CloudFileAPI)} and
  * {@link #trash(String, String, boolean, CloudFileAPI)} invocations.<br>
- * 
  * Created by The eXo Platform SAS.
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
  * @version $Id: LostRemovalSynchronizer.java 00000 Apr 22, 2014 pnedonosko $
- * 
  */
 public final class LostRemovalSynchronizer implements CloudFileSynchronizer {
 
@@ -74,7 +72,7 @@ public final class LostRemovalSynchronizer implements CloudFileSynchronizer {
    */
   @Override
   public boolean remove(String filePath, String fileId, boolean isFolder, CloudFileAPI api) throws CloudDriveException,
-                                                                                           RepositoryException {
+                                                                                            RepositoryException {
     if (isFolder) {
       api.removeFolder(fileId);
     } else {
@@ -87,7 +85,7 @@ public final class LostRemovalSynchronizer implements CloudFileSynchronizer {
    * {@inheritDoc}
    */
   public boolean trash(String filePath, String fileId, boolean isFolder, CloudFileAPI api) throws RepositoryException,
-                                                                                          CloudDriveException {
+                                                                                           CloudDriveException {
     if (isFolder) {
       return api.trashFolder(fileId);
     } else {
@@ -129,8 +127,7 @@ public final class LostRemovalSynchronizer implements CloudFileSynchronizer {
    * {@inheritDoc}
    */
   @Override
-  public CloudFile copy(Node srcFile, Node destFile, CloudFileAPI api) throws CloudDriveException,
-                                                                      RepositoryException {
+  public CloudFile copy(Node srcFile, Node destFile, CloudFileAPI api) throws CloudDriveException, RepositoryException {
     throw new SyncNotSupportedException("Not supported");
   }
 

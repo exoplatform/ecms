@@ -18,14 +18,13 @@
  */
 
 package org.exoplatform.clouddrive;
+
 /**
- * Indicate that user not approved access to his remote Cloud Drive (e.g. in OAuth2 authorization window).
- * 
- * Created by The eXo Platform SAS
+ * Indicate that user not approved access to his remote Cloud Drive (e.g. in
+ * OAuth2 authorization window). Created by The eXo Platform SAS
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
  * @version $Id: NotApprovedException.java 00000 Jul 16, 2015 pnedonosko $
- * 
  */
 public class NotApprovedException extends CloudDriveAccessException {
 

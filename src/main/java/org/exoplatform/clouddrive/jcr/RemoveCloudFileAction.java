@@ -18,7 +18,11 @@
  */
 package org.exoplatform.clouddrive.jcr;
 
+import javax.jcr.ItemNotFoundException;
+import javax.jcr.Node;
+
 import org.apache.commons.chain.Context;
+
 import org.exoplatform.clouddrive.CloudDrive;
 import org.exoplatform.clouddrive.CloudDriveManager;
 import org.exoplatform.clouddrive.CloudDriveService;
@@ -28,11 +32,9 @@ import org.exoplatform.services.jcr.observation.ExtendedEvent;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 
-import javax.jcr.ItemNotFoundException;
-import javax.jcr.Node;
-
 /**
- * Care about ecd:cloudFile nodes removal - this action should remove the file on cloud provider side. <br>
+ * Care about ecd:cloudFile nodes removal - this action should remove the file
+ * on cloud provider side. <br>
  * Created by The eXo Platform SAS
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
@@ -83,7 +85,8 @@ public class RemoveCloudFileAction extends AbstractJCRAction {
           // it's internal work on this file/drive
           return true;
         }
-      } // drive not found, may be this file in Trash folder and user is cleaning it, do nothing
+      } // drive not found, may be this file in Trash folder and user is
+        // cleaning it, do nothing
     } else {
       LOG.warn(RemoveCloudFileAction.class.getName() + " supports only node removal. Check configuration. Item skipped: "
           + fileNode.getPath());

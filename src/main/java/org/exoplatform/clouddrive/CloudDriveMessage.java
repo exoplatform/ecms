@@ -20,31 +20,33 @@ package org.exoplatform.clouddrive;
 
 /**
  * Message should be send to an user as result of Cloud Drive command work.<br>
- * 
  * Created by The eXo Platform SAS
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
  * @version $Id: CloudDriveMessage.java 00000 Nov 29, 2014 pnedonosko $
- * 
  */
 public class CloudDriveMessage {
 
   /**
    * The Enum Type.
    */
-  public enum Type {/** The error. */
-ERROR, /** The info. */
- INFO, /** The warn. */
- WARN};
-  
+  public enum Type {
+    /** The error. */
+    ERROR,
+    /** The info. */
+    INFO,
+    /** The warn. */
+    WARN
+  };
+
   /** The type. */
   protected final String type;
 
   /** The text. */
   protected final String text;
-  
+
   /** The hash code. */
-  protected final int hashCode;
+  protected final int    hashCode;
 
   /**
    * Instantiates a new cloud drive message.
@@ -55,7 +57,7 @@ ERROR, /** The info. */
   public CloudDriveMessage(Type type, String text) {
     this.type = type.name();
     this.text = text;
-    
+
     int hc = 1;
     hc = hc * 31 + type.hashCode();
     hc = hc * 31 + text.hashCode();

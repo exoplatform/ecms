@@ -22,8 +22,8 @@ package org.exoplatform.clouddrive.exodrive.service;
  * Created by The eXo Platform SAS.
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
- * @version $Id: ExoDriveConfigurationException.java 00000 Oct 5, 2012 pnedonosko $
- * 
+ * @version $Id: ExoDriveConfigurationException.java 00000 Oct 5, 2012
+ *          pnedonosko $
  */
 public class ExoDriveException extends Exception {
 

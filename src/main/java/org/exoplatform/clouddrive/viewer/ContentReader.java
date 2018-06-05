@@ -23,12 +23,10 @@ import java.io.InputStream;
 
 /**
  * An access to Cloud File content connected with particular drive instance.<br>
- * 
  * Created by The eXo Platform SAS
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
  * @version $Id: ContentReader.java 00000 Nov 19, 2014 pnedonosko $
- * 
  */
 public interface ContentReader {
 
@@ -38,21 +36,22 @@ public interface ContentReader {
    * @return {@link InputStream}
    */
   InputStream getStream();
-  
+
   /**
    * Content type in MIME format.
    * 
    * @return {@link String}
    */
   String getMimeType();
-  
+
   /**
-   * Optional representation (UI) mode for this content type. Can be <code>null</code>.
+   * Optional representation (UI) mode for this content type. Can be
+   * <code>null</code>.
    * 
    * @return {@link String} a type mode or <code>null</code> if not available.
    */
   String getTypeMode();
-  
+
   /**
    * Content length in bytes.
    * 

@@ -20,18 +20,16 @@ package org.exoplatform.clouddrive.rest;
 
 /**
  * Host management for Cloud Drive connections.<br>
- * 
  * Created by The eXo Platform SAS.
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
  * @version $Id: DriveServiceLocator.java 00000 May 22, 2013 pnedonosko $
- * 
  */
 public class DriveServiceLocator {
 
   /**
-   * Base host name or <code>null</code> if base should be obtained from a request. This method can be
-   * overridden for context depended locators.
+   * Base host name or <code>null</code> if base should be obtained from a
+   * request. This method can be overridden for context depended locators.
    * 
    * @return {@link String}
    */
@@ -40,8 +38,9 @@ public class DriveServiceLocator {
   }
 
   /**
-   * Compile service host name from given request's host, optionally taking in account context. This method
-   * can be overridden for context depended locators. See also {@link #isRedirect(String)}.
+   * Compile service host name from given request's host, optionally taking in
+   * account context. This method can be overridden for context depended
+   * locators. See also {@link #isRedirect(String)}.
    * 
    * @param context {@link String}
    * @param requestURI {@link String}
@@ -53,11 +52,12 @@ public class DriveServiceLocator {
   }
 
   /**
-   * Answers whether the request (to given host) should be redirected to its contextual link. See also
-   * {@link #getServiceLink(String, String)}.
+   * Answers whether the request (to given host) should be redirected to its
+   * contextual link. See also {@link #getServiceLink(String, String)}.
    *
    * @param requestHost the request host
-   * @return boolean, <code>true</code> if request should be redirected, <code>false</code> otherwise.
+   * @return boolean, <code>true</code> if request should be redirected,
+   *         <code>false</code> otherwise.
    */
   public final boolean isRedirect(String requestHost) {
     String baseHost = getBaseHost();
@@ -72,7 +72,8 @@ public class DriveServiceLocator {
    * Return host name for given request URI.
    * 
    * @param requestHost {@link String}
-   * @return String with the host's domain name or empty string if it's <code>localhost</code>
+   * @return String with the host's domain name or empty string if it's
+   *         <code>localhost</code>
    */
   public final String getServiceHost(String requestHost) {
     String host = getBaseHost();
@@ -80,7 +81,8 @@ public class DriveServiceLocator {
       host = requestHost;
     }
     if (host.equalsIgnoreCase("localhost")) {
-      // empty host for localhost domain, see http://curl.haxx.se/rfc/cookie_spec.html
+      // empty host for localhost domain, see
+      // http://curl.haxx.se/rfc/cookie_spec.html
       host = "";
     }
     return host;

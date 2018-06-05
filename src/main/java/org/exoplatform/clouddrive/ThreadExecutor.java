@@ -18,9 +18,6 @@
  */
 package org.exoplatform.clouddrive;
 
-import org.exoplatform.services.log.ExoLogger;
-import org.exoplatform.services.log.Log;
-
 import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
@@ -32,14 +29,15 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
+
 /**
  * Manages fixed pool of threads for Cloud Drive tasks.<br>
- * 
  * Created by The eXo Platform SAS.
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
  * @version $Id: Synchronizer.java 00000 Nov 8, 2013 pnedonosko $
- * 
  */
 public class ThreadExecutor {
 
@@ -49,7 +47,8 @@ public class ThreadExecutor {
   public static final long        SYNC_PERIOD             = 10000;
 
   /**
-   * A timeout to wait for scheduler stop in milliseconds. It is four times bigger of SYNC_PERIOD.
+   * A timeout to wait for scheduler stop in milliseconds. It is four times
+   * bigger of SYNC_PERIOD.
    */
   public static final long        STOP_TIMEOUT            = 4 * SYNC_PERIOD;
 
@@ -62,7 +61,7 @@ public class ThreadExecutor {
    * Minimum threads per CPU.
    */
   public static final int         MIN_FACTOR              = 4;
-  
+
   /**
    * Default maximum threads per CPU.
    */
@@ -88,7 +87,7 @@ public class ThreadExecutor {
    * Command thread factory adapted from {@link Executors#DefaultThreadFactory}.
    */
   static class CommandThreadFactory implements ThreadFactory {
-    
+
     /** The group. */
     final ThreadGroup   group;
 
@@ -188,11 +187,13 @@ public class ThreadExecutor {
     this.queueFactor = queueFactor;
     this.threadNamePrefix = threadNamePrefix;
 
-    // Executor will queue all commands and run them in maximum ten threads. Two threads will be maintained
+    // Executor will queue all commands and run them in maximum ten threads. Two
+    // threads will be maintained
     // online even idle, other inactive will be stopped in two minutes.
     int cpus = Runtime.getRuntime().availableProcessors();
     int poolThreads = cpus; // Math.round(cpus * 1f * MIN_FACTOR);
-    // use scale factor 25... we know our threads will not create high CPU load, as they are HTTP callers
+    // use scale factor 25... we know our threads will not create high CPU load,
+    // as they are HTTP callers
     // mainly and we want good parallelization
     int maxThreads = Math.round(cpus * 1f * maxFactor);
     maxThreads = maxThreads > 0 ? maxThreads : 1;

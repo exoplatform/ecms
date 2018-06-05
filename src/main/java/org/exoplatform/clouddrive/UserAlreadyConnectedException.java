@@ -19,12 +19,13 @@
 package org.exoplatform.clouddrive;
 
 /**
- * Indicates that an user already have a Cloud Drive but connected to another node. 
- * <br>
+ * Indicates that an user already have a Cloud Drive but connected to another
+ * node. <br>
  * Created by The eXo Platform SAS.
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
- * @version $Id: UserAlreadyConnectedException.java 00000 Sep 11, 2012 pnedonosko $
+ * @version $Id: UserAlreadyConnectedException.java 00000 Sep 11, 2012
+ *          pnedonosko $
  */
 public class UserAlreadyConnectedException extends CloudDriveException {
 

@@ -18,11 +18,11 @@
  */
 package org.exoplatform.clouddrive.tree;
 
-import junit.framework.TestCase;
-
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
+
+import junit.framework.TestCase;
 
 /**
  * Created by The eXo Platform SAS.
@@ -62,31 +62,31 @@ public class TestTreeMapHierarchy extends TestCase {
    */
   public void testOrdering() throws Exception {
     int index = 0;
-//    treeMap.put("/folder2/fileB1", 1);
-//    treeMap.put("/folder2/fileB2", 2);
+    // treeMap.put("/folder2/fileB1", 1);
+    // treeMap.put("/folder2/fileB2", 2);
     treeMap.put("/folder1/folder2/file21", index++);
     treeMap.put("/folder1/folder2", index++);
     treeMap.put("/folder1/fileA2", index++);
     treeMap.put("/folder1/fileA1", index++);
     treeMap.put("/folder1/fileA3", index++);
-    //treeMap.put("/folder1", index++);
-//    treeMap.put("/file2", index++);
-//    treeMap.put("/file1", index++);
-//    treeMap.put("/folder2", index++);
-//    treeMap.put("/folder3", index++);
-//    treeMap.put("/afolder1/file-ajdksajdlsjd", 8);
-//    treeMap.put("/afolder1/file-bdssajdksjd", 9);
-//    treeMap.put("/afolder1/folder-ctest", 10);
-//    treeMap.put("/zfolder1/ajdskjdksj", 11);
-//    treeMap.put("/zfolder1/bcjdcidjciijcidjic", 12);
-//    treeMap.put("/zfolder1/c", 13);
-//    treeMap.put("/afolder1/FOLDER-czdsaa", 14);
-//    treeMap.put("/afolder1/file-deerrrrllkl-kjshasjahskhasjhakshkh", 15);
-//    treeMap.put("/afolder1/folder-ctest/f1-sjdksjdksj", 16);
-//    treeMap.put("/afolder1/folder-ctest/f2-ldksjdksj", 17);
-//    treeMap.put("/afolder1/folder-ctest/afile1", 18);
-//    treeMap.put("/afolder1/folder-ctest/n-file1", 19);
-//    treeMap.put("/afolder1/folder-ctest/s-fileA", 20);
+    // treeMap.put("/folder1", index++);
+    // treeMap.put("/file2", index++);
+    // treeMap.put("/file1", index++);
+    // treeMap.put("/folder2", index++);
+    // treeMap.put("/folder3", index++);
+    // treeMap.put("/afolder1/file-ajdksajdlsjd", 8);
+    // treeMap.put("/afolder1/file-bdssajdksjd", 9);
+    // treeMap.put("/afolder1/folder-ctest", 10);
+    // treeMap.put("/zfolder1/ajdskjdksj", 11);
+    // treeMap.put("/zfolder1/bcjdcidjciijcidjic", 12);
+    // treeMap.put("/zfolder1/c", 13);
+    // treeMap.put("/afolder1/FOLDER-czdsaa", 14);
+    // treeMap.put("/afolder1/file-deerrrrllkl-kjshasjahskhasjhakshkh", 15);
+    // treeMap.put("/afolder1/folder-ctest/f1-sjdksjdksj", 16);
+    // treeMap.put("/afolder1/folder-ctest/f2-ldksjdksj", 17);
+    // treeMap.put("/afolder1/folder-ctest/afile1", 18);
+    // treeMap.put("/afolder1/folder-ctest/n-file1", 19);
+    // treeMap.put("/afolder1/folder-ctest/s-fileA", 20);
 
     String target = "/folder1/folder2";
 

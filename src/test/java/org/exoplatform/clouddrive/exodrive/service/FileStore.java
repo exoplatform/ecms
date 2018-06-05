@@ -39,7 +39,6 @@ import java.util.Properties;
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
  * @version $Id: FileStore.java 00000 Oct 5, 2012 pnedonosko $
- * 
  */
 public class FileStore {
 
@@ -64,10 +63,10 @@ public class FileStore {
   public static final String         TYPE_FOLDER         = "application/vnd.exoplatform.exodrive-folder";
 
   public static final String         FILE_SEPARATOR      = "/";                                           // the
-                                                                                                           // same
-                                                                                                           // as
-                                                                                                           // in
-                                                                                                           // JCR!
+                                                                                                          // same
+                                                                                                          // as
+                                                                                                          // in
+                                                                                                          // JCR!
 
   /**
    * I/O buffer size for internal operations (16K).
@@ -154,7 +153,8 @@ public class FileStore {
           FileChannel outch = out.getChannel();
           ReadableByteChannel inch;
 
-          // compare classes as in Java6 Channels.newChannel(), Java5 has a bug in newChannel().
+          // compare classes as in Java6 Channels.newChannel(), Java5 has a bug
+          // in newChannel().
           if (content instanceof FileInputStream && FileInputStream.class.equals(content.getClass())) {
             // it's user file
             inch = ((FileInputStream) content).getChannel();
@@ -243,8 +243,9 @@ public class FileStore {
 
           OutputStream out = new FileOutputStream(meta);
           try {
-            metap.store(out, "Metadata for " + local.getAbsolutePath() + ". Generated at "
-                + METAFILE_DATEFORMAT.format(Calendar.getInstance().getTime()));
+            metap.store(out,
+                        "Metadata for " + local.getAbsolutePath() + ". Generated at "
+                            + METAFILE_DATEFORMAT.format(Calendar.getInstance().getTime()));
           } finally {
             out.close();
           }

@@ -22,8 +22,9 @@ import org.exoplatform.container.component.BaseComponentPlugin;
 
 /**
  * Basic class for Feature API specifications.<br>
- * 
- * See also <a href='http://en.wikipedia.org/wiki/Specification_pattern'>Specification pattern</a>.<br>
+ * See also
+ * <a href='http://en.wikipedia.org/wiki/Specification_pattern'>Specification
+ * pattern</a>.<br>
  * Created by The eXo Platform SAS.<br>
  *
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
@@ -38,7 +39,7 @@ public abstract class FeatureSpec<T> extends BaseComponentPlugin {
    * @param <C> the generic type
    */
   static abstract class CompositeSpec<C> extends FeatureSpec<C> {
-    
+
     /** The one. */
     final FeatureSpec<C> one;
 
@@ -63,7 +64,7 @@ public abstract class FeatureSpec<T> extends BaseComponentPlugin {
    * @param <C> the generic type
    */
   static class AndSpec<C> extends CompositeSpec<C> {
-    
+
     /**
      * Instantiates a new and spec.
      *
@@ -88,7 +89,7 @@ public abstract class FeatureSpec<T> extends BaseComponentPlugin {
    * @param <C> the generic type
    */
   static class OrSpec<C> extends CompositeSpec<C> {
-    
+
     /**
      * Instantiates a new or spec.
      *
@@ -113,7 +114,7 @@ public abstract class FeatureSpec<T> extends BaseComponentPlugin {
    * @param <C> the generic type
    */
   class NotSpec<C> extends FeatureSpec<C> {
-    
+
     /** The one. */
     final FeatureSpec<C> one;
 
@@ -149,8 +150,8 @@ public abstract class FeatureSpec<T> extends BaseComponentPlugin {
   public abstract boolean isSatisfiedBy(T target);
 
   /**
-   * Cascade this and other spec in logical AND specification. If both will satisfy then only this will does
-   * also.
+   * Cascade this and other spec in logical AND specification. If both will
+   * satisfy then only this will does also.
    * 
    * @param other FeatureSpec
    * @return FeatureSpec
@@ -160,8 +161,8 @@ public abstract class FeatureSpec<T> extends BaseComponentPlugin {
   }
 
   /**
-   * Cascade this and other spec in logical OR specification. If any of both will satisfy then only this will
-   * does also.
+   * Cascade this and other spec in logical OR specification. If any of both
+   * will satisfy then only this will does also.
    * 
    * @param other FeatureSpec
    * @return FeatureSpec
@@ -171,7 +172,8 @@ public abstract class FeatureSpec<T> extends BaseComponentPlugin {
   }
 
   /**
-   * Create a specification opposite to this one. The new spec will satisfy only if this one will not.
+   * Create a specification opposite to this one. The new spec will satisfy only
+   * if this one will not.
    * 
    * @return FeatureSpec
    */

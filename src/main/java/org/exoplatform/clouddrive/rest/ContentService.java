@@ -18,11 +18,25 @@
  */
 package org.exoplatform.clouddrive.rest;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
+import javax.annotation.security.RolesAllowed;
+import javax.jcr.LoginException;
+import javax.jcr.RepositoryException;
+import javax.ws.rs.DefaultValue;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.ResponseBuilder;
+import javax.ws.rs.core.Response.Status;
+
 import org.exoplatform.clouddrive.CloudDrive;
 import org.exoplatform.clouddrive.CloudDriveException;
 import org.exoplatform.clouddrive.CloudDriveService;
 import org.exoplatform.clouddrive.CloudDriveStorage;
-import org.exoplatform.clouddrive.DriveRemovedException;
 import org.exoplatform.clouddrive.NotFoundException;
 import org.exoplatform.clouddrive.features.CloudDriveFeatures;
 import org.exoplatform.clouddrive.utils.ExtendedMimeTypeResolver;
@@ -39,24 +53,8 @@ import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.rest.resource.ResourceContainer;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-
-import javax.annotation.security.RolesAllowed;
-import javax.jcr.LoginException;
-import javax.jcr.RepositoryException;
-import javax.ws.rs.DefaultValue;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.ResponseBuilder;
-import javax.ws.rs.core.Response.Status;
-
 /**
  * RESTful service to access file content in Cloud Drive operations.<br>
- * 
  */
 @Path("/clouddrive/content")
 public class ContentService implements ResourceContainer {
@@ -112,8 +110,8 @@ public class ContentService implements ResourceContainer {
   }
 
   /**
-   * Create a link to get this file content via eXo REST service as a proxy to remote drive. It is a path
-   * relative to the current server.
+   * Create a link to get this file content via eXo REST service as a proxy to
+   * remote drive. It is a path relative to the current server.
    *
    * @param workspace {@link String}
    * @param path {@link String}
@@ -150,7 +148,7 @@ public class ContentService implements ResourceContainer {
 
     return link.toString();
   }
-  
+
   /**
    * Create a link to get this file representation in PDF form. It is a path
    * relative to the current server.
@@ -162,10 +160,10 @@ public class ContentService implements ResourceContainer {
   public static String pdfLink(String contentLink) {
     return contentLink.replace(ContentService.SERVICE_PATH, ContentService.SERVICE_PATH + "/pdf");
   }
-  
+
   /**
-   * Create a link to get this file representation in PDF pages converted to images. It is a path
-   * relative to the current server.
+   * Create a link to get this file representation in PDF pages converted to
+   * images. It is a path relative to the current server.
    *
    * @param contentLink {@link String}
    * @return {@link String}
@@ -189,7 +187,8 @@ public class ContentService implements ResourceContainer {
   public Response get(@PathParam("workspace") String workspace,
                       @PathParam("path") String path,
                       @QueryParam("contentId") String contentId) {
-    // TODO support for range and if-modified, if-match... in WebDAV fashion, for browser players etc.
+    // TODO support for range and if-modified, if-match... in WebDAV fashion,
+    // for browser players etc.
     if (workspace != null) {
       if (path != null) {
         path = normalizePath(path);
@@ -224,14 +223,10 @@ public class ContentService implements ResourceContainer {
             return Response.status(Status.BAD_REQUEST).entity("Error reading file content. " + e.getMessage()).build();
           } catch (RepositoryException e) {
             LOG.error("Error reading file content " + workspace + ":" + path, e);
-            return Response.status(Status.INTERNAL_SERVER_ERROR)
-                           .entity("Error reading file content: storage error.")
-                           .build();
+            return Response.status(Status.INTERNAL_SERVER_ERROR).entity("Error reading file content: storage error.").build();
           } catch (Throwable e) {
             LOG.error("Error reading file content " + workspace + ":" + path, e);
-            return Response.status(Status.INTERNAL_SERVER_ERROR)
-                           .entity("Error reading file content: runtime error.")
-                           .build();
+            return Response.status(Status.INTERNAL_SERVER_ERROR).entity("Error reading file content: runtime error.").build();
           }
         } else {
           return Response.status(Status.BAD_REQUEST).entity("Null fileId.").build();
@@ -245,9 +240,10 @@ public class ContentService implements ResourceContainer {
   }
 
   /**
-   * Return image (PNG) representation of cloud file content (page) reading it from local PDF storage. File
-   * should be previously created in the storage to be successfully returned by this method, an empty response
-   * (204 No Content) will be returned otherwise.<br>
+   * Return image (PNG) representation of cloud file content (page) reading it
+   * from local PDF storage. File should be previously created in the storage to
+   * be successfully returned by this method, an empty response (204 No Content)
+   * will be returned otherwise.<br>
    *
    * @param workspace the workspace
    * @param path the path
@@ -356,8 +352,9 @@ public class ContentService implements ResourceContainer {
 
   /**
    * Return cloud file representation reading it from local PDF storage. File
-   * should be previously created in the storage to be successfully returned by this method, an empty response
-   * (204 No Content) will be returned otherwise.<br>
+   * should be previously created in the storage to be successfully returned by
+   * this method, an empty response (204 No Content) will be returned
+   * otherwise.<br>
    *
    * @param workspace the workspace
    * @param path the path

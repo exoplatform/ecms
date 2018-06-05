@@ -24,14 +24,13 @@ import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 
 /**
- * Support different environments for Cloud Drive commands execution. Three phases can be implemented:
- * preparation of a {@link Command}, cleanup on success or failure on error.<br>
- * 
+ * Support different environments for Cloud Drive commands execution. Three
+ * phases can be implemented: preparation of a {@link Command}, cleanup on
+ * success or failure on error.<br>
  * Created by The eXo Platform SAS.
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
  * @version $Id: CloudDriveEnvironment.java 00000 Jan 15, 2014 pnedonosko $
- * 
  */
 public abstract class CloudDriveEnvironment extends BaseComponentPlugin {
 
@@ -48,8 +47,8 @@ public abstract class CloudDriveEnvironment extends BaseComponentPlugin {
   }
 
   /**
-   * Configure environment for a command execution. If this configuration will fail the command execution will
-   * fail also with this exception.<br>
+   * Configure environment for a command execution. If this configuration will
+   * fail the command execution will fail also with this exception.<br>
    * This operation should gather required settings to apply them later in
    * {@link CloudDriveEnvironment#prepare(Command)} method.
    *
@@ -63,9 +62,11 @@ public abstract class CloudDriveEnvironment extends BaseComponentPlugin {
   }
 
   /**
-   * Prepare environment for a command execution. If this preparation will fail the command execution will
-   * fail also with this exception. This method should be invoked in a thread where the command runs.<br>
-   * Preparation does apply settings gathered in {@link CloudDriveEnvironment#configure(Command)} method.
+   * Prepare environment for a command execution. If this preparation will fail
+   * the command execution will fail also with this exception. This method
+   * should be invoked in a thread where the command runs.<br>
+   * Preparation does apply settings gathered in
+   * {@link CloudDriveEnvironment#configure(Command)} method.
    *
    * @param command the command
    * @throws CloudDriveException the cloud drive exception
@@ -77,9 +78,11 @@ public abstract class CloudDriveEnvironment extends BaseComponentPlugin {
   }
 
   /**
-   * Clean environment after a command execution. This cleanup will be called in case of command success. This
-   * method should be invoked in a thread where the command runs.<br>
-   * Cleanup does restore setting applied in {@link CloudDriveEnvironment#prepare(Command)} method.
+   * Clean environment after a command execution. This cleanup will be called in
+   * case of command success. This method should be invoked in a thread where
+   * the command runs.<br>
+   * Cleanup does restore setting applied in
+   * {@link CloudDriveEnvironment#prepare(Command)} method.
    *
    * @param command {@link Command}
    * @throws CloudDriveException the cloud drive exception
@@ -91,11 +94,12 @@ public abstract class CloudDriveEnvironment extends BaseComponentPlugin {
   }
 
   /**
-   * Command failed and here it can be reported or some special action applied regarding the error. This
-   * method should be invoked in a thread where the command runs.<br>
+   * Command failed and here it can be reported or some special action applied
+   * regarding the error. This method should be invoked in a thread where the
+   * command runs.<br>
    * Fail <strong>should not</strong> restore setting applied in
-   * {@link CloudDriveEnvironment#prepare(Command)} method, this should
-   * be done by {@link #cleanup(Command)} call from try-finally block for example.
+   * {@link CloudDriveEnvironment#prepare(Command)} method, this should be done
+   * by {@link #cleanup(Command)} call from try-finally block for example.
    *
    * @param command {@link Command}
    * @param error {@link Throwable}
@@ -108,8 +112,9 @@ public abstract class CloudDriveEnvironment extends BaseComponentPlugin {
   }
 
   /**
-   * Chain next environment support to this environment. Next env will create or continue a chain of already
-   * chained. It's not possible to chain to itself but no checks will be performed for repeated sub-chains.
+   * Chain next environment support to this environment. Next env will create or
+   * continue a chain of already chained. It's not possible to chain to itself
+   * but no checks will be performed for repeated sub-chains.
    * 
    * @param next {@link CloudDriveEnvironment} a next env in chain.
    */

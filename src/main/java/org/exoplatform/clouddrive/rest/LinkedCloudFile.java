@@ -18,17 +18,18 @@
  */
 package org.exoplatform.clouddrive.rest;
 
-import org.exoplatform.clouddrive.CloudFile;
-
 import java.util.Calendar;
 
 import javax.jcr.Node;
 
+import org.exoplatform.clouddrive.CloudFile;
+
 /**
- * Wraps fields from another {@link CloudFile} and replace its path with a path of that file {@link Node}
- * symlink node.<br>
- * NOTE: we cannot wrap instance of another another {@link CloudFile} as it leads to StackOverflowError in WS
- * JsonGeneratorImpl. Created by The eXo Platform SAS.<br>
+ * Wraps fields from another {@link CloudFile} and replace its path with a path
+ * of that file {@link Node} symlink node.<br>
+ * NOTE: we cannot wrap instance of another another {@link CloudFile} as it
+ * leads to StackOverflowError in WS JsonGeneratorImpl. Created by The eXo
+ * Platform SAS.<br>
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
  * @version $Id: LinkedCloudFile.java 00000 Jan 24, 2013 pnedonosko $

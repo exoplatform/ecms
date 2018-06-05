@@ -22,7 +22,8 @@ package org.exoplatform.clouddrive;
  * Created by The eXo Platform SAS.
  *
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
- * @version $Id: ProviderNotAvailableException.java 00000 Sep 13, 2012 pnedonosko $
+ * @version $Id: ProviderNotAvailableException.java 00000 Sep 13, 2012
+ *          pnedonosko $
  */
 public class ProviderNotAvailableException extends CloudDriveException {
 
@@ -36,6 +37,6 @@ public class ProviderNotAvailableException extends CloudDriveException {
    */
   public ProviderNotAvailableException(String message) {
     super(message);
-  } 
-  
+  }
+
 }

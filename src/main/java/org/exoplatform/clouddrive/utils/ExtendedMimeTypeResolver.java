@@ -18,16 +18,6 @@
  */
 package org.exoplatform.clouddrive.utils;
 
-import org.exoplatform.commons.utils.MimeTypeResolver;
-import org.exoplatform.commons.utils.SecurityHelper;
-import org.exoplatform.container.component.BaseComponentPlugin;
-import org.exoplatform.container.configuration.ConfigurationException;
-import org.exoplatform.container.configuration.ConfigurationManager;
-import org.exoplatform.container.xml.InitParams;
-import org.exoplatform.container.xml.ValuesParam;
-import org.exoplatform.services.log.ExoLogger;
-import org.exoplatform.services.log.Log;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.security.PrivilegedExceptionAction;
@@ -43,14 +33,22 @@ import java.util.Set;
 import javax.activation.MimeType;
 import javax.activation.MimeTypeParseException;
 
+import org.exoplatform.commons.utils.MimeTypeResolver;
+import org.exoplatform.commons.utils.SecurityHelper;
+import org.exoplatform.container.component.BaseComponentPlugin;
+import org.exoplatform.container.configuration.ConfigurationException;
+import org.exoplatform.container.configuration.ConfigurationManager;
+import org.exoplatform.container.xml.InitParams;
+import org.exoplatform.container.xml.ValuesParam;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
+
 /**
- * Extended copy of eXo Kernel's MimeTypeResolver.
- * 
- * Created by The eXo Platform SAS
+ * Extended copy of eXo Kernel's MimeTypeResolver. Created by The eXo Platform
+ * SAS
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
  * @version $Id: ExtendedMimeTypeResolver.java 00000 Nov 22, 2014 pnedonosko $
- * 
  */
 public class ExtendedMimeTypeResolver {
 
@@ -87,8 +85,8 @@ public class ExtendedMimeTypeResolver {
         }
         this.paths = paths;
       } else {
-        throw new ConfigurationException("Values param mimetypes-properties required in "
-            + this.getClass().getName() + " plugin");
+        throw new ConfigurationException("Values param mimetypes-properties required in " + this.getClass().getName()
+            + " plugin");
       }
     }
 
@@ -157,8 +155,7 @@ public class ExtendedMimeTypeResolver {
                 }
               }
             } catch (IOException e) {
-              throw new IOException("Error loadinng extended mimetypes from path " + path + ": "
-                  + e.getMessage(), e);
+              throw new IOException("Error loadinng extended mimetypes from path " + path + ": " + e.getMessage(), e);
             }
           }
           return null;
@@ -170,9 +167,10 @@ public class ExtendedMimeTypeResolver {
   }
 
   /**
-   * Get MIMEType which corresponds to file extension. If file extension is unknown the default
-   * MIMEType will be returned. If there are more than one MIMETypes for specific extension the
-   * first occurred in the list will be returned.
+   * Get MIMEType which corresponds to file extension. If file extension is
+   * unknown the default MIMEType will be returned. If there are more than one
+   * MIMETypes for specific extension the first occurred in the list will be
+   * returned.
    *
    * @param filename the filename
    * @return String MIMEType
@@ -193,8 +191,8 @@ public class ExtendedMimeTypeResolver {
   }
 
   /**
-   * Get MIMEType which corresponds to file content. If file content
-   * does not allow to determine MIMEtype, the default MIMEType will be returned.
+   * Get MIMEType which corresponds to file content. If file content does not
+   * allow to determine MIMEtype, the default MIMEType will be returned.
    *
    * @param filename the filename
    * @param is the is
@@ -210,14 +208,13 @@ public class ExtendedMimeTypeResolver {
 
   /**
    * Get file extension corresponds to MIMEType. If MIMEType is empty or equals
-   * default MIMEType empty string will be returned. If there is no file extension
-   * for specific MIMEType the empty string will be returned also. In case when
-   * there are more than one extension for specific MIMEType the first occurred
-   * extension in the list will be returned if MIMEType ends with this extension
-   * otherwise just first occurred.
+   * default MIMEType empty string will be returned. If there is no file
+   * extension for specific MIMEType the empty string will be returned also. In
+   * case when there are more than one extension for specific MIMEType the first
+   * occurred extension in the list will be returned if MIMEType ends with this
+   * extension otherwise just first occurred.
    * 
-   * @param mimeType
-   *          MIMEType
+   * @param mimeType MIMEType
    * @return file extension
    */
   public String getExtension(String mimeType) {
@@ -269,26 +266,29 @@ public class ExtendedMimeTypeResolver {
   }
 
   /**
-   * Return optional representation (UI) mode parameter (x-type-mode) for given mime type or <code>null</code>
-   * if mode cannot be determined.
+   * Return optional representation (UI) mode parameter (x-type-mode) for given
+   * mime type or <code>null</code> if mode cannot be determined.
    * 
    * @param type {@link String} a mime-type string
-   * @return {@link String} with UI mode for given mime-type or <code>null</code> if mode cannot be determined
+   * @return {@link String} with UI mode for given mime-type or
+   *         <code>null</code> if mode cannot be determined
    */
   public String getMimeTypeMode(String type) {
     return getMimeTypeMode(type, null);
   }
 
   /**
-   * Return optional representation (UI) mode parameter (x-type-mode) for given MIME type or/and a file name.
-   * If type is <code>null</code> then the type will be defined from given file name first. If mode cannot be
-   * determined for given type and file name not <code>null</code>, then an attempt will be tried for a type
-   * defined for this name. Method returns <code>null</code> if mode cannot be determined from given
-   * parameters.
+   * Return optional representation (UI) mode parameter (x-type-mode) for given
+   * MIME type or/and a file name. If type is <code>null</code> then the type
+   * will be defined from given file name first. If mode cannot be determined
+   * for given type and file name not <code>null</code>, then an attempt will be
+   * tried for a type defined for this name. Method returns <code>null</code> if
+   * mode cannot be determined from given parameters.
    * 
    * @param type {@link String} a MIME type string or <code>null</code>
    * @param name {@link String} a file name or <code>null</code>
-   * @return {@link String} with UI mode for given MIME type or <code>null</code> if mode cannot be determined
+   * @return {@link String} with UI mode for given MIME type or
+   *         <code>null</code> if mode cannot be determined
    */
   public String getMimeTypeMode(String type, String name) {
     if (type == null && name != null) {
@@ -313,7 +313,8 @@ public class ExtendedMimeTypeResolver {
               tryResolved = true;
               name = null; // null to do not repeat this attempt
             } else if (modeList != null && modeList.size() > 0) {
-              // worse case: we have several modes for given type and need choose... first one
+              // worse case: we have several modes for given type and need
+              // choose... first one
               return modeList.iterator().next();
             }
           } else {

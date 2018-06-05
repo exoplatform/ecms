@@ -21,12 +21,10 @@ package org.exoplatform.clouddrive;
 
 /**
  * Node doesn't represent a Cloud Drive root node or its file.<br>
- * 
  * Created by The eXo Platform SAS
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
  * @version $Id: NotCloudDriveException.java 00000 Dec 19, 2014 pnedonosko $
- * 
  */
 public class NotCloudDriveException extends CloudDriveException {
 

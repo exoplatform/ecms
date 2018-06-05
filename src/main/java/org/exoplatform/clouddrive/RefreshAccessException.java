@@ -19,8 +19,8 @@
 package org.exoplatform.clouddrive;
 
 /**
- * No refresh token has been found, it was revoked or access scope changed and an access
- * should be granted by the user again.
+ * No refresh token has been found, it was revoked or access scope changed and
+ * an access should be granted by the user again.
  */
 public class RefreshAccessException extends CloudDriveAccessException {
 

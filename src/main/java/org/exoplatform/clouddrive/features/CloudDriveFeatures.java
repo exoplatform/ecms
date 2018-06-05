@@ -23,43 +23,45 @@ import org.exoplatform.clouddrive.CloudDrive;
 import org.exoplatform.clouddrive.CloudProvider;
 
 /**
- * Cloud Drive features specified as managed. It is a composite on top of per-feature
- * specifications registered as plugins.
- * 
- * Each feature specification will be calculated in runtime using permissive policy: if something
- * not restricted then it is permitted. If some feature has exactly configured specifications then all of them
- * should allow it. At least one forbidding will forbid the feature.
- * 
- * Created by The eXo Platform SAS.
+ * Cloud Drive features specified as managed. It is a composite on top of
+ * per-feature specifications registered as plugins. Each feature specification
+ * will be calculated in runtime using permissive policy: if something not
+ * restricted then it is permitted. If some feature has exactly configured
+ * specifications then all of them should allow it. At least one forbidding will
+ * forbid the feature. Created by The eXo Platform SAS.
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
  * @version $Id: CloudDriveFeatures.java 00000 Jan 30, 2014 pnedonosko $
- * 
  */
 public interface CloudDriveFeatures {
 
   /**
-   * Answer to: can create a drive for given user in the given node optionally taking in account his user id
-   * and requested provider.
+   * Answer to: can create a drive for given user in the given node optionally
+   * taking in account his user id and requested provider.
    * 
    * @param workspace {@link String}
    * @param nodePath {@link String}
-   * @param userId {@link String} can be <code>null</code>, then the specification should take a decision
-   *          using own source of the user id
-   * @param provider {@link CloudProvider} can be <code>null</code>, then the specification should take a
-   *          decision assuming any provider.
-   * @return boolean, <code>true</code> if drive can be created, <code>false</code> otherwise.
-   * @throws CannotCreateDriveException if drive can not be created (optional alternative to returning
-   *           <code>false</code> value.
+   * @param userId {@link String} can be <code>null</code>, then the
+   *          specification should take a decision using own source of the user
+   *          id
+   * @param provider {@link CloudProvider} can be <code>null</code>, then the
+   *          specification should take a decision assuming any provider.
+   * @return boolean, <code>true</code> if drive can be created,
+   *         <code>false</code> otherwise.
+   * @throws CannotCreateDriveException if drive can not be created (optional
+   *           alternative to returning <code>false</code> value.
    */
-  boolean canCreateDrive(String workspace, String nodePath, String userId, CloudProvider provider) throws CannotCreateDriveException;
+  boolean canCreateDrive(String workspace,
+                         String nodePath,
+                         String userId,
+                         CloudProvider provider) throws CannotCreateDriveException;
 
   /**
    * Answer is auto-synchronization should be enabled for given drive.
    * 
    * @param drive {@link CloudDrive}
-   * @return boolean, <code>true</code> if enable auto synchronization for the drive, <code>false</code>
-   *         otherwise.
+   * @return boolean, <code>true</code> if enable auto synchronization for the
+   *         drive, <code>false</code> otherwise.
    */
   boolean isAutosyncEnabled(CloudDrive drive);
 

@@ -21,13 +21,11 @@ package org.exoplatform.clouddrive.oauth2;
 import org.exoplatform.clouddrive.CloudDriveException;
 
 /**
- * Listen for user token updates caused by provider service.
- * 
- * Created by The eXo Platform SAS
+ * Listen for user token updates caused by provider service. Created by The eXo
+ * Platform SAS
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
  * @version $Id: UserTokenRefreshListener.java 00000 Sep 3, 2013 pnedonosko $
- * 
  */
 public interface UserTokenRefreshListener {
 
@@ -38,12 +36,12 @@ public interface UserTokenRefreshListener {
    * @throws CloudDriveException the cloud drive exception
    */
   void onUserTokenRefresh(UserToken token) throws CloudDriveException;
-  
+
   /**
    * Action on token removal by provider.
    *
    * @throws CloudDriveException the cloud drive exception
    */
   void onUserTokenRemove() throws CloudDriveException;
-  
+
 }

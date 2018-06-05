@@ -18,17 +18,17 @@
  */
 package org.exoplatform.clouddrive.utils;
 
-import org.exoplatform.clouddrive.CloudDriveException;
-
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.concurrent.atomic.AtomicLong;
 
+import org.exoplatform.clouddrive.CloudDriveException;
+
 /**
- * Iterator over whole set of items possibly split on chunks. This iterator hides next-chunk logic for
- * consumer code. <br>
- * Iterator methods can throw {@link CloudDriveException} in case of remote or communication errors.<br>
- * 
+ * Iterator over whole set of items possibly split on chunks. This iterator
+ * hides next-chunk logic for consumer code. <br>
+ * Iterator methods can throw {@link CloudDriveException} in case of remote or
+ * communication errors.<br>
  * Created by The eXo Platform SAS
  *
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
@@ -44,13 +44,14 @@ public abstract class ChunkIterator<I> {
   protected I           next;
 
   /**
-   * Forecast of available items in the iterator. Calculated on each {@link #nextChunk()}. Used for progress
-   * indicator.
+   * Forecast of available items in the iterator. Calculated on each
+   * {@link #nextChunk()}. Used for progress indicator.
    */
   protected AtomicLong  available = new AtomicLong();
 
   /**
-   * Totally fetched items. Changes on each {@link #next()}. Used for progress indicator.
+   * Totally fetched items. Changes on each {@link #next()}. Used for progress
+   * indicator.
    */
   protected AtomicLong  fetched   = new AtomicLong();
 
@@ -114,7 +115,8 @@ public abstract class ChunkIterator<I> {
   }
 
   /**
-   * Calculate a forecast of items available to fetch. Call it on each {@link #nextChunk()}.
+   * Calculate a forecast of items available to fetch. Call it on each
+   * {@link #nextChunk()}.
    * 
    * @param newValue long
    */
@@ -133,7 +135,8 @@ public abstract class ChunkIterator<I> {
   }
 
   /**
-   * Return currently available items to fetch. Value can be inaccurate and for information only.
+   * Return currently available items to fetch. Value can be inaccurate and for
+   * information only.
    * 
    * @return long
    */

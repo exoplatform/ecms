@@ -20,10 +20,9 @@
 package org.exoplatform.clouddrive;
 
 /**
- * Indicates that some file (usually designated by path) lies in Cloud Drive folder but does not belong to it
- * yet and in progress of creation (upload) to the cloud site.
- * 
- * <br>
+ * Indicates that some file (usually designated by path) lies in Cloud Drive
+ * folder but does not belong to it yet and in progress of creation (upload) to
+ * the cloud site. <br>
  * Created by The eXo Platform SAS.
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>

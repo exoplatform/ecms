@@ -23,12 +23,10 @@ import java.util.Map;
 
 /**
  * Base POJO for web-service errors.<br>
- * 
  * Created by The eXo Platform SAS
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
  * @version $Id: ErrorEntiry.java 00000 Dec 21, 2014 pnedonosko $
- * 
  */
 public class ErrorEntiry {
 
@@ -46,9 +44,9 @@ public class ErrorEntiry {
 
   /** The Constant NOT_YET_CLOUD_FILE. */
   public static final String NOT_YET_CLOUD_FILE = "not-yet_cloud-file";
-  
+
   /** The Constant ACCESS_DENIED. */
-  public static final String ACCESS_DENIED = "access-denied";
+  public static final String ACCESS_DENIED      = "access-denied";
 
   /**
    * Acess denied.
@@ -62,7 +60,7 @@ public class ErrorEntiry {
     err.message = message;
     return err;
   }
-  
+
   /**
    * Error.
    *
@@ -133,7 +131,7 @@ public class ErrorEntiry {
     err.message = message;
     return err;
   }
-  
+
   /**
    * Node not found.
    *

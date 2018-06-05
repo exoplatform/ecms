@@ -18,29 +18,6 @@
  */
 package org.exoplatform.clouddrive.rest;
 
-import org.exoplatform.clouddrive.BaseCloudDriveListener;
-import org.exoplatform.clouddrive.CannotConnectDriveException;
-import org.exoplatform.clouddrive.CloudDrive;
-import org.exoplatform.clouddrive.CloudDrive.Command;
-import org.exoplatform.clouddrive.CloudDriveConnector;
-import org.exoplatform.clouddrive.CloudDriveEvent;
-import org.exoplatform.clouddrive.CloudDriveException;
-import org.exoplatform.clouddrive.CloudDriveService;
-import org.exoplatform.clouddrive.CloudProvider;
-import org.exoplatform.clouddrive.CloudUser;
-import org.exoplatform.clouddrive.DriveRemovedException;
-import org.exoplatform.clouddrive.ProviderNotAvailableException;
-import org.exoplatform.clouddrive.UserAlreadyConnectedException;
-import org.exoplatform.clouddrive.jcr.JCRLocalCloudDrive;
-import org.exoplatform.clouddrive.jcr.NodeFinder;
-import org.exoplatform.services.jcr.RepositoryService;
-import org.exoplatform.services.jcr.ext.app.SessionProviderService;
-import org.exoplatform.services.jcr.ext.common.SessionProvider;
-import org.exoplatform.services.log.ExoLogger;
-import org.exoplatform.services.log.Log;
-import org.exoplatform.services.rest.resource.ResourceContainer;
-import org.exoplatform.services.security.ConversationState;
-
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -75,8 +52,32 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.UriInfo;
 
+import org.exoplatform.clouddrive.BaseCloudDriveListener;
+import org.exoplatform.clouddrive.CannotConnectDriveException;
+import org.exoplatform.clouddrive.CloudDrive;
+import org.exoplatform.clouddrive.CloudDrive.Command;
+import org.exoplatform.clouddrive.CloudDriveConnector;
+import org.exoplatform.clouddrive.CloudDriveEvent;
+import org.exoplatform.clouddrive.CloudDriveException;
+import org.exoplatform.clouddrive.CloudDriveService;
+import org.exoplatform.clouddrive.CloudProvider;
+import org.exoplatform.clouddrive.CloudUser;
+import org.exoplatform.clouddrive.DriveRemovedException;
+import org.exoplatform.clouddrive.ProviderNotAvailableException;
+import org.exoplatform.clouddrive.UserAlreadyConnectedException;
+import org.exoplatform.clouddrive.jcr.JCRLocalCloudDrive;
+import org.exoplatform.clouddrive.jcr.NodeFinder;
+import org.exoplatform.services.jcr.RepositoryService;
+import org.exoplatform.services.jcr.ext.app.SessionProviderService;
+import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
+import org.exoplatform.services.rest.resource.ResourceContainer;
+import org.exoplatform.services.security.ConversationState;
+
 /**
- * REST service responsible for connection of cloud drives to local JCR nodes. <br>
+ * REST service responsible for connection of cloud drives to local JCR nodes.
+ * <br>
  * Handles following workflow:
  * <ul>
  * <li>Initiate user request</li>
@@ -136,7 +137,7 @@ public class ConnectService implements ResourceContainer {
    * Response builder for connect and state.
    */
   class ConnectResponse extends ServiceResponse {
-    
+
     /** The service url. */
     String    serviceUrl;
 
@@ -280,10 +281,11 @@ public class ConnectService implements ResourceContainer {
   }
 
   /**
-   * Connect initialization record used during establishment of connect workflow.
+   * Connect initialization record used during establishment of connect
+   * workflow.
    */
   class ConnectInit {
-    
+
     /** The local user. */
     final String        localUser;
 
@@ -308,10 +310,11 @@ public class ConnectService implements ResourceContainer {
   }
 
   /**
-   * Connect process record used in connect workflow. Also used to answer on state request.
+   * Connect process record used in connect workflow. Also used to answer on
+   * state request.
    */
   class ConnectProcess extends BaseCloudDriveListener {
-    
+
     /** The drive. */
     final CloudDrive drive;
 
@@ -415,7 +418,7 @@ public class ConnectService implements ResourceContainer {
    * The Class Cleaner.
    */
   protected class Cleaner implements Runnable {
-    
+
     /**
      * {@inheritDoc}
      */
@@ -560,7 +563,8 @@ public class ConnectService implements ResourceContainer {
                 // search drive by found node to take in account symlinks!
                 CloudDrive existing = cloudDrives.findDrive(userNode);
                 if (existing != null) {
-                  // drive already exists - it's re-connect to update access keys
+                  // drive already exists - it's re-connect to update access
+                  // keys
                   driveNode = (Node) userSession.getItem(existing.getPath());
                   userNode = driveNode.getParent();
                   name = driveNode.getName();
@@ -575,7 +579,8 @@ public class ConnectService implements ResourceContainer {
 
                 ConnectProcess connect = active.get(processId);
                 if (connect == null || connect.error != null) {
-                  // initiate connect process if it is not already active or a previous had an exception
+                  // initiate connect process if it is not already active or a
+                  // previous had an exception
 
                   if (driveNode == null) {
                     try {
@@ -587,8 +592,8 @@ public class ConnectService implements ResourceContainer {
                         userNode.save();
                       } catch (RepositoryException e) {
                         rollback(userNode, null);
-                        LOG.error("Error creating node for the drive of user " + user.getEmail()
-                            + ". Cannot create node under " + path, e);
+                        LOG.error("Error creating node for the drive of user " + user.getEmail() + ". Cannot create node under "
+                            + path, e);
                         return resp.connectError("Error creating node for the drive: storage error.", cid.toString(), host)
                                    .status(Status.INTERNAL_SERVER_ERROR)
                                    .build();
@@ -636,8 +641,10 @@ public class ConnectService implements ResourceContainer {
                         .status(Status.INTERNAL_SERVER_ERROR);
                   }
                 } else {
-                  // else, such connect already in progress (probably was started by another request)
-                  // client can warn the user or try use check url to get that work status
+                  // else, such connect already in progress (probably was
+                  // started by another request)
+                  // client can warn the user or try use check url to get that
+                  // work status
                   String message = "Connect to " + connect.title + " already posted and currently in progress.";
                   LOG.warn(message);
                   try {
@@ -721,7 +728,8 @@ public class ConnectService implements ResourceContainer {
         int progress = connect.process.getProgress();
         resp.progress(progress);
 
-        // lock to prevent async process to remove the drive (on its fail) while doing state response
+        // lock to prevent async process to remove the drive (on its fail) while
+        // doing state response
         connect.lock.lock();
         try {
           if (connect.error != null) {
@@ -762,7 +770,8 @@ public class ConnectService implements ResourceContainer {
             // return OK: connected
             resp.progress(Command.COMPLETE).drive(DriveInfo.create(workspace, drive)).ok();
           } else {
-            // return OK: drive not found, disconnected or belong to another user
+            // return OK: drive not found, disconnected or belong to another
+            // user
             LOG.warn("Item " + workspace + ":" + path + " not a cloud file or drive not connected.");
             resp.status(Status.NO_CONTENT);
           }
@@ -789,9 +798,10 @@ public class ConnectService implements ResourceContainer {
   }
 
   /**
-   * Returns connecting cloud user page. It's an empty page with attributes on the body for client-side code
-   * handling the connect procedure. Some providers use this service url as callback after authorization
-   * (Google Drive). <br>
+   * Returns connecting cloud user page. It's an empty page with attributes on
+   * the body for client-side code handling the connect procedure. Some
+   * providers use this service url as callback after authorization (Google
+   * Drive). <br>
    * This method is GET because of possibility of redirect on it.
    *
    * @param uriInfo - request info
@@ -894,7 +904,8 @@ public class ConnectService implements ResourceContainer {
                                       provider.getName(),
                                       iid.toString(),
                                       baseHost)
-                           .status(Status.BAD_REQUEST).build();
+                           .status(Status.BAD_REQUEST)
+                           .build();
               }
             } else {
               // we have an error from provider
@@ -913,7 +924,8 @@ public class ConnectService implements ResourceContainer {
                                   provider.getName(),
                                   iid.toString(),
                                   baseHost)
-                       .status(Status.INTERNAL_SERVER_ERROR).build();
+                       .status(Status.INTERNAL_SERVER_ERROR)
+                       .build();
           }
         } else {
           LOG.warn("Authentication not initiated for " + providerId + " and id " + initId);
@@ -934,8 +946,9 @@ public class ConnectService implements ResourceContainer {
   }
 
   /**
-   * Initiates connection to cloud drive. Used to get a Provider and remember a user connect request in the
-   * service. It will be used later for authentication.
+   * Initiates connection to cloud drive. Used to get a Provider and remember a
+   * user connect request in the service. It will be used later for
+   * authentication.
    *
    * @param uriInfo - request with base URI
    * @param providerId - provider name see more in {@link CloudProvider}
@@ -966,13 +979,7 @@ public class ConnectService implements ResourceContainer {
         initiated.put(initId, new ConnectInit(localUser, provider, host));
         timeline.put(initId, System.currentTimeMillis() + (INIT_COOKIE_EXPIRE * 1000) + 5000);
 
-        resp.cookie(INIT_COOKIE,
-                    initId.toString(),
-                    INIT_COOKIE_PATH,
-                    host,
-                    "Cloud Drive init ID",
-                    INIT_COOKIE_EXPIRE,
-                    false);
+        resp.cookie(INIT_COOKIE, initId.toString(), INIT_COOKIE_PATH, host, "Cloud Drive init ID", INIT_COOKIE_EXPIRE, false);
         return resp.entity(provider).ok().build();
       } else {
         LOG.warn("ConversationState not set to initialize connect to " + provider.getName());

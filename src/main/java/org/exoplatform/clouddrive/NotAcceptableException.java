@@ -20,13 +20,12 @@
 package org.exoplatform.clouddrive;
 
 /**
- * Cloud provider doesn't accept creation, modification or removal if the cloud drive resource.<br>
- * 
+ * Cloud provider doesn't accept creation, modification or removal if the cloud
+ * drive resource.<br>
  * Created by The eXo Platform SAS
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
  * @version $Id: NotAcceptableException.java 00000 Jul 21, 2015 pnedonosko $
- * 
  */
 public class NotAcceptableException extends ConstraintException {
 

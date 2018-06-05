@@ -19,14 +19,13 @@
 package org.exoplatform.clouddrive;
 
 /**
- * Cloud provider's constraint or similar error was handled but related sub-tree should be ignored in
- * synchronization. It is internal exception, it should not be thrown to an user in public API.<br>
- * 
+ * Cloud provider's constraint or similar error was handled but related sub-tree
+ * should be ignored in synchronization. It is internal exception, it should not
+ * be thrown to an user in public API.<br>
  * Created by The eXo Platform SAS
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
  * @version $Id: SkipConstraintException.java 00000 Dec 10, 2014 pnedonosko $
- * 
  */
 public class SkipChangeException extends ConstraintException {
 

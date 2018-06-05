@@ -23,12 +23,10 @@ import java.io.InputStream;
 
 /**
  * Cloud File content for reading locally.<br>
- * 
  * Created by The eXo Platform SAS
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
  * @version $Id: CloudFileContent.java 00000 Jul 26, 2015 pnedonosko $
- * 
  */
 public class CloudFileContent implements ContentReader {
 

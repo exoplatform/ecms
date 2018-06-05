@@ -19,13 +19,12 @@
 package org.exoplatform.clouddrive;
 
 /**
- * Context cloud drive was moved to eXo Trash (exo:trashFolder nodetype) and should be cleaned there.<br>
- * 
+ * Context cloud drive was moved to eXo Trash (exo:trashFolder nodetype) and
+ * should be cleaned there.<br>
  * Created by The eXo Platform SAS
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
  * @version $Id: DriveTrashedException.java 00000 Dec 1, 2014 pnedonosko $
- * 
  */
 public class DriveTrashedException extends DriveRemovedException {
 

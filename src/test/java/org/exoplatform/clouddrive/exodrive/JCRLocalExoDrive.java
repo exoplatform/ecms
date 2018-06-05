@@ -18,6 +18,13 @@
  */
 package org.exoplatform.clouddrive.exodrive;
 
+import java.io.InputStream;
+import java.util.Calendar;
+import java.util.List;
+
+import javax.jcr.Node;
+import javax.jcr.RepositoryException;
+
 import org.exoplatform.clouddrive.CloudDriveException;
 import org.exoplatform.clouddrive.CloudFile;
 import org.exoplatform.clouddrive.CloudFileAPI;
@@ -34,20 +41,9 @@ import org.exoplatform.clouddrive.jcr.NodeFinder;
 import org.exoplatform.clouddrive.utils.ExtendedMimeTypeResolver;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 
-import java.io.InputStream;
-import java.util.Calendar;
-import java.util.List;
-
-import javax.jcr.Node;
-import javax.jcr.RepositoryException;
-
 /**
- * Exo Drive for internal use.
- * 
- * <br>
- * !NOT TESTED! after CLDINT-879 rework.
- * 
- * <br>
+ * Exo Drive for internal use. <br>
+ * !NOT TESTED! after CLDINT-879 rework. <br>
  * Created by The eXo Platform SAS.
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
@@ -87,20 +83,20 @@ public class JCRLocalExoDrive extends JCRLocalCloudDrive {
                    0);
           // FYI it is a sole parent in this connector
           addConnected(DUMMY_DATA, new JCRLocalCloudFile(localNode.getPath(),
-                                           f.getId(),
-                                           f.getName(),
-                                           f.getType(),
-                                           null,
-                                           f.getLink(),
-                                           f.getLink(),
-                                           f.getLink(),
-                                           f.getAuthor(),
-                                           f.getAuthor(),
-                                           f.getCreateDate(),
-                                           f.getModifiedDate(),
-                                           0,
-                                           localNode,
-                                           false));
+                                                         f.getId(),
+                                                         f.getName(),
+                                                         f.getType(),
+                                                         null,
+                                                         f.getLink(),
+                                                         f.getLink(),
+                                                         f.getLink(),
+                                                         f.getAuthor(),
+                                                         f.getAuthor(),
+                                                         f.getCreateDate(),
+                                                         f.getModifiedDate(),
+                                                         0,
+                                                         localNode,
+                                                         false));
           complete++;
         }
       } catch (ExoDriveException e) {
@@ -279,9 +275,11 @@ public class JCRLocalExoDrive extends JCRLocalCloudDrive {
     public CloudFile updateFile(Node fileNode, Calendar modified) throws CloudDriveException, RepositoryException {
       // TODO
       // try {
-      // FileStore fs = service.create(user.getUsername(), filePath(fileNode), mimeType, created);
+      // FileStore fs = service.create(user.getUsername(), filePath(fileNode),
+      // mimeType, created);
       // } catch (ExoDriveException e) {
-      // throw new CloudDriveException("Error creating cloud file " + getTitle(fileNode), e);
+      // throw new CloudDriveException("Error creating cloud file " +
+      // getTitle(fileNode), e);
       // }
       return null;
     }
@@ -415,7 +413,8 @@ public class JCRLocalExoDrive extends JCRLocalCloudDrive {
                           SessionProviderService sessionProviders,
                           NodeFinder finder,
                           ExtendedMimeTypeResolver mimeTypes,
-                          Node driveNode) throws CloudDriveException, RepositoryException {
+                          Node driveNode)
+      throws CloudDriveException, RepositoryException {
     super(user, driveNode, sessionProviders, finder, mimeTypes);
     this.service = service;
   }
@@ -444,11 +443,15 @@ public class JCRLocalExoDrive extends JCRLocalCloudDrive {
                           SessionProviderService sessionProviders,
                           NodeFinder finder,
                           ExtendedMimeTypeResolver mimeTypes,
-                          Node driveNode) throws CloudDriveException, RepositoryException {
+                          Node driveNode)
+      throws CloudDriveException, RepositoryException {
     super(new ExoDriveUser(driveNode.getProperty("ecd:cloudUserName").getString(),
                            driveNode.getProperty("ecd:userEmail").getString(),
                            provider),
-          driveNode, sessionProviders, finder, mimeTypes);
+          driveNode,
+          sessionProviders,
+          finder,
+          mimeTypes);
     this.service = service;
   }
 

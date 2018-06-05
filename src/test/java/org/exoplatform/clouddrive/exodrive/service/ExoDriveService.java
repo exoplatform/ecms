@@ -23,6 +23,8 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.picocontainer.Startable;
+
 import org.exoplatform.clouddrive.CloudDriveService;
 import org.exoplatform.clouddrive.exodrive.ExoDriveConnector;
 import org.exoplatform.commons.utils.MimeTypeResolver;
@@ -30,13 +32,12 @@ import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.container.xml.PropertiesParam;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
-import org.picocontainer.Startable;
-
 
 /**
  * Server-side for eXo Drive implementation of Cloud Drive. It is independent to
- * {@link CloudDriveService} component handling read and write operations to local files as to
- * remote cloud drive.</br> This service consumed by {@link ExoDriveConnector}. Created by The eXo
+ * {@link CloudDriveService} component handling read and write operations to
+ * local files as to remote cloud drive.</br>
+ * This service consumed by {@link ExoDriveConnector}. Created by The eXo
  * Platform SAS.
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
@@ -52,13 +53,11 @@ public class ExoDriveService implements Startable {
 
   public static final String                      PATTERN_REPOSITORY_CURRENT_NAME = "REPOSITORY_CURRENT_NAME";
 
-  protected static final Log                      LOG                             =
-                                                                                      ExoLogger.getLogger(ExoDriveService.class);
+  protected static final Log                      LOG                             = ExoLogger.getLogger(ExoDriveService.class);
 
   protected final Map<String, String>             config;
 
-  protected final Map<String, ExoDriveRepository> repositories                    =
-                                                                                      new HashMap<String, ExoDriveRepository>();
+  protected final Map<String, ExoDriveRepository> repositories                    = new HashMap<String, ExoDriveRepository>();
 
   protected final File                            storageRoot;
 

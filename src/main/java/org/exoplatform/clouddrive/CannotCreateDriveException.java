@@ -22,13 +22,11 @@ package org.exoplatform.clouddrive;
 import org.exoplatform.clouddrive.features.CloudDriveFeatures;
 
 /**
- * Cannot create a Cloud Drive due to false response from {@link CloudDriveFeatures}.
- * 
- * Created by The eXo Platform SAS
+ * Cannot create a Cloud Drive due to false response from
+ * {@link CloudDriveFeatures}. Created by The eXo Platform SAS
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
  * @version $Id: CannotCreateDriveException.java 00000 Feb 10, 2014 pnedonosko $
- * 
  */
 public class CannotCreateDriveException extends CloudDriveException {
 

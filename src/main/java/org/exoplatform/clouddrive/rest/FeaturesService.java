@@ -18,19 +18,6 @@
  */
 package org.exoplatform.clouddrive.rest;
 
-import org.exoplatform.clouddrive.CannotCreateDriveException;
-import org.exoplatform.clouddrive.CloudDrive;
-import org.exoplatform.clouddrive.CloudDriveService;
-import org.exoplatform.clouddrive.CloudProvider;
-import org.exoplatform.clouddrive.ProviderNotAvailableException;
-import org.exoplatform.clouddrive.features.CloudDriveFeatures;
-import org.exoplatform.services.jcr.RepositoryService;
-import org.exoplatform.services.jcr.ext.app.SessionProviderService;
-import org.exoplatform.services.log.ExoLogger;
-import org.exoplatform.services.log.Log;
-import org.exoplatform.services.rest.resource.ResourceContainer;
-import org.exoplatform.services.security.ConversationState;
-
 import javax.annotation.security.RolesAllowed;
 import javax.jcr.LoginException;
 import javax.jcr.RepositoryException;
@@ -44,14 +31,25 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.UriInfo;
 
+import org.exoplatform.clouddrive.CannotCreateDriveException;
+import org.exoplatform.clouddrive.CloudDrive;
+import org.exoplatform.clouddrive.CloudDriveService;
+import org.exoplatform.clouddrive.CloudProvider;
+import org.exoplatform.clouddrive.ProviderNotAvailableException;
+import org.exoplatform.clouddrive.features.CloudDriveFeatures;
+import org.exoplatform.services.jcr.RepositoryService;
+import org.exoplatform.services.jcr.ext.app.SessionProviderService;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
+import org.exoplatform.services.rest.resource.ResourceContainer;
+import org.exoplatform.services.security.ConversationState;
+
 /**
  * REST service providing discovery of Cloud Drive features.<br>
- * 
  * Created by The eXo Platform SAS
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
  * @version $Id: FeaturesService.java 00000 Jan 31, 2014 pnedonosko $
- * 
  */
 @Path("/clouddrive/features")
 @Produces(MediaType.APPLICATION_JSON)
@@ -123,16 +121,14 @@ public class FeaturesService implements ResourceContainer {
 
         ConversationState currentConvo = ConversationState.getCurrent();
         try {
-          boolean result = features.canCreateDrive(workspace,
-                                                   path,
-                                                   currentConvo != null ? currentConvo.getIdentity()
-                                                                                      .getUserId() : null,
-                                                   provider);
+          boolean result =
+                         features.canCreateDrive(workspace,
+                                                 path,
+                                                 currentConvo != null ? currentConvo.getIdentity().getUserId() : null,
+                                                 provider);
           return Response.ok().entity("{\"result\":\"" + result + "\"}").build();
         } catch (CannotCreateDriveException e) {
-          return Response.ok()
-                         .entity("{\"result\":\"false\", \"message\":\"" + e.getMessage() + "\"}")
-                         .build();
+          return Response.ok().entity("{\"result\":\"false\", \"message\":\"" + e.getMessage() + "\"}").build();
         }
       } else {
         return Response.status(Status.BAD_REQUEST).entity("Null path.").build();
@@ -172,14 +168,10 @@ public class FeaturesService implements ResourceContainer {
           return Response.status(Status.UNAUTHORIZED).entity("Authentication error.").build();
         } catch (RepositoryException e) {
           LOG.error("Error getting autosync status of a drive " + workspace + ":" + path, e);
-          return Response.status(Status.INTERNAL_SERVER_ERROR)
-                         .entity("Error reading drive: storage error.")
-                         .build();
+          return Response.status(Status.INTERNAL_SERVER_ERROR).entity("Error reading drive: storage error.").build();
         } catch (Throwable e) {
           LOG.error("Error getting autosync status of a drive " + workspace + ":" + path, e);
-          return Response.status(Status.INTERNAL_SERVER_ERROR)
-                         .entity("Error reading drive: runtime error.")
-                         .build();
+          return Response.status(Status.INTERNAL_SERVER_ERROR).entity("Error reading drive: runtime error.").build();
         }
       } else {
         return Response.status(Status.BAD_REQUEST).entity("Null path.").build();

@@ -20,12 +20,10 @@ package org.exoplatform.clouddrive;
 
 /**
  * Empty implementation of {@link CloudDriveListener}.<br>
- * 
  * Created by The eXo Platform SAS
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
  * @version $Id: BaseCloudDriveListener.java 00000 Jan 8, 2013 pnedonosko $
- * 
  */
 public class BaseCloudDriveListener implements CloudDriveListener {
 

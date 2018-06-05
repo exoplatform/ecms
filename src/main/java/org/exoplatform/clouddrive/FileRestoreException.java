@@ -20,14 +20,12 @@
 package org.exoplatform.clouddrive;
 
 /**
- * File cannot be successfully restored (e.g. from trash) on Cloud provider side and should be restored locally
- * to the remote state.<br>
- * 
+ * File cannot be successfully restored (e.g. from trash) on Cloud provider side
+ * and should be restored locally to the remote state.<br>
  * Created by The eXo Platform SAS
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
  * @version $Id: FileRestoreException.java 00000 Jul 21, 2015 pnedonosko $
- * 
  */
 public class FileRestoreException extends ConstraintException {
 

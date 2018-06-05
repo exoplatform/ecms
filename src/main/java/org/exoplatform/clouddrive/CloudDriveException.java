@@ -47,7 +47,7 @@ public class CloudDriveException extends Exception {
   public CloudDriveException(String message, Throwable cause) {
     super(message, cause);
   }
-  
+
   /**
    * Instantiates a new cloud drive exception.
    *

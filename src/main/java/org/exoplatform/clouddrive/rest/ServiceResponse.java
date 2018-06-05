@@ -103,7 +103,7 @@ public class ServiceResponse {
     this.entity = entity;
     return this;
   }
-  
+
   /**
    * Adds the header.
    *
@@ -139,13 +139,7 @@ public class ServiceResponse {
    * @param secure the secure
    * @return the service response
    */
-  ServiceResponse cookie(String name,
-                         String value,
-                         String path,
-                         String domain,
-                         String comment,
-                         int maxAge,
-                         boolean secure) {
+  ServiceResponse cookie(String name, String value, String path, String domain, String comment, int maxAge, boolean secure) {
     cookies.add(new NewCookie(name, value, path, domain, comment, maxAge, secure));
     return this;
   }
@@ -168,8 +162,8 @@ public class ServiceResponse {
 
     for (Map.Entry<String, String> he : headers.entrySet()) {
       builder.header(he.getKey(), he.getValue());
-    } 
-    
+    }
+
     return builder.build();
   }
 

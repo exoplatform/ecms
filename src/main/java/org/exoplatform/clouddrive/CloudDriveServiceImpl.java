@@ -18,20 +18,6 @@
  */
 package org.exoplatform.clouddrive;
 
-import org.exoplatform.clouddrive.features.CloudDriveFeatures;
-import org.exoplatform.clouddrive.features.PermissiveFeatures;
-import org.exoplatform.clouddrive.jcr.JCRLocalCloudDrive;
-import org.exoplatform.clouddrive.jcr.NtFileSynchronizer;
-import org.exoplatform.container.component.ComponentPlugin;
-import org.exoplatform.services.jcr.RepositoryService;
-import org.exoplatform.services.jcr.config.WorkspaceEntry;
-import org.exoplatform.services.jcr.core.ManageableRepository;
-import org.exoplatform.services.jcr.ext.app.SessionProviderService;
-import org.exoplatform.services.jcr.ext.common.SessionProvider;
-import org.exoplatform.services.log.ExoLogger;
-import org.exoplatform.services.log.Log;
-import org.picocontainer.Startable;
-
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -50,6 +36,21 @@ import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 import javax.jcr.query.Query;
 
+import org.picocontainer.Startable;
+
+import org.exoplatform.clouddrive.features.CloudDriveFeatures;
+import org.exoplatform.clouddrive.features.PermissiveFeatures;
+import org.exoplatform.clouddrive.jcr.JCRLocalCloudDrive;
+import org.exoplatform.clouddrive.jcr.NtFileSynchronizer;
+import org.exoplatform.container.component.ComponentPlugin;
+import org.exoplatform.services.jcr.RepositoryService;
+import org.exoplatform.services.jcr.config.WorkspaceEntry;
+import org.exoplatform.services.jcr.core.ManageableRepository;
+import org.exoplatform.services.jcr.ext.app.SessionProviderService;
+import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
+
 /**
  * Service implementing {@link CloudDriveService} and {@link Startable}.<br>
  * Created by The eXo Platform SAS.
@@ -60,8 +61,9 @@ import javax.jcr.query.Query;
 public class CloudDriveServiceImpl implements CloudDriveService, Startable {
 
   /**
-   * Listener for disconnects and removals of local drives made not via {@link CloudDriveService} (i.e. by
-   * move the drive's node to Trash and following removal from the JCR).
+   * Listener for disconnects and removals of local drives made not via
+   * {@link CloudDriveService} (i.e. by move the drive's node to Trash and
+   * following removal from the JCR).
    *
    * @see LocalDrivesEvent
    */
@@ -121,20 +123,24 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
   /**
    * Registered CloudDrive connectors.
    */
-  protected final Map<CloudProvider, CloudDriveConnector>    connectors        = new LinkedHashMap<CloudProvider, CloudDriveConnector>();
+  protected final Map<CloudProvider, CloudDriveConnector>    connectors        =
+                                                                        new LinkedHashMap<CloudProvider, CloudDriveConnector>();
 
   /**
-   * In-memory multiton for drives created per repository and per user. Only connected drives here.
+   * In-memory multiton for drives created per repository and per user. Only
+   * connected drives here.
    */
-  protected final Map<String, Map<CloudUser, CloudDrive>>    repositoryDrives  = new ConcurrentHashMap<String, Map<CloudUser, CloudDrive>>();
+  protected final Map<String, Map<CloudUser, CloudDrive>>    repositoryDrives  =
+                                                                              new ConcurrentHashMap<String, Map<CloudUser, CloudDrive>>();
 
   /**
-   * User-in-repositoryDrives reference map for unregistration of disconnected and removed drives (via
-   * {@link LocalDrivesListener}).
+   * User-in-repositoryDrives reference map for unregistration of disconnected
+   * and removed drives (via {@link LocalDrivesListener}).
    * 
    * @see #repositoryDrives
    */
-  protected final Map<CloudUser, Map<CloudUser, CloudDrive>> userDrives        = new ConcurrentHashMap<CloudUser, Map<CloudUser, CloudDrive>>();
+  protected final Map<CloudUser, Map<CloudUser, CloudDrive>> userDrives        =
+                                                                        new ConcurrentHashMap<CloudUser, Map<CloudUser, CloudDrive>>();
 
   /** The drives listeners. */
   protected final Set<CloudDriveListener>                    drivesListeners   = new LinkedHashSet<CloudDriveListener>();
@@ -165,13 +171,15 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
     this.jcrService = jcrService;
     this.sessionProviders = sessionProviders;
 
-    // Add internal listener for handling consistency in users-per-repository map (on drive disconnect or
+    // Add internal listener for handling consistency in users-per-repository
+    // map (on drive disconnect or
     // removal)
     this.drivesListeners.add(new LocalDrivesListener());
 
     this.features = features;
 
-    this.fileSynchronizers.add(new NtFileSynchronizer()); // default one for nt:file + nt:folder
+    this.fileSynchronizers.add(new NtFileSynchronizer()); // default one for
+                                                          // nt:file + nt:folder
   }
 
   /**
@@ -230,12 +238,14 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
         LOG.info("Cloud Drive connector removed: " + removed.getName());
       }
     } else if (plugin instanceof CloudDriveListener) {
-      // TODO global listeners removal may not work from configuration (as equals/hashCode may differ)
+      // TODO global listeners removal may not work from configuration (as
+      // equals/hashCode may differ)
       if (drivesListeners.remove((CloudDriveListener) plugin)) {
         LOG.info("Cloud Drive listener removed: " + plugin.getClass().getName());
       }
     } else if (plugin instanceof CloudFileSynchronizer) {
-      // TODO sync plugin removal may not work from configuration (as equals/hashCode may differ)
+      // TODO sync plugin removal may not work from configuration (as
+      // equals/hashCode may differ)
       if (fileSynchronizers.remove((CloudFileSynchronizer) plugin)) {
         LOG.info("Cloud Drive synchronizer removed: " + plugin.getClass().getName());
       }
@@ -341,8 +351,8 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
    * {@inheritDoc}
    */
   @Override
-  public CloudUser authenticate(CloudProvider cloudProvider,
-                                Map<String, String> params) throws ProviderNotAvailableException, CloudDriveException {
+  public CloudUser authenticate(CloudProvider cloudProvider, Map<String, String> params) throws ProviderNotAvailableException,
+                                                                                         CloudDriveException {
     CloudDriveConnector conn = connectors.get(cloudProvider);
     if (conn != null) {
       return conn.authenticate(params);
@@ -373,17 +383,22 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
             // drive exists
             if (local.isConnected()) {
               // and already connected
-              // it's the same user, this could happen if the access was revoked and user want to get this
-              // access again, thus we update access key from this new user instance.
-              // XXX this usecase based on GoogleDrive workflow and can be changed
+              // it's the same user, this could happen if the access was revoked
+              // and user want to get this
+              // access again, thus we update access key from this new user
+              // instance.
+              // XXX this usecase based on GoogleDrive workflow and can be
+              // changed
               local.updateAccess(user);
-            } // else, local not null but not connected, just return it to the user
+            } // else, local not null but not connected, just return it to the
+              // user
             return local;
           } else {
-            // given user already connected to another node (possible if node was renamed in JCR), we cannot
+            // given user already connected to another node (possible if node
+            // was renamed in JCR), we cannot
             // proceed
-            LOG.warn("User " + user.getEmail() + " already connected to another node " + localPath
-                + ", cannot connect it to " + driveNode.getPath());
+            LOG.warn("User " + user.getEmail() + " already connected to another node " + localPath + ", cannot connect it to "
+                + driveNode.getPath());
             throw new UserAlreadyConnectedException("User " + user.getEmail() + " already connected to another node "
                 + localPath);
           }
@@ -491,7 +506,8 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
   }
 
   /**
-   * Load all ecd:cloudDrive nodes into connected map if ecd:connected is true for each of them.
+   * Load all ecd:cloudDrive nodes into connected map if ecd:connected is true
+   * for each of them.
    * 
    * @param jcrRepository {@link ManageableRepository}
    */
@@ -506,15 +522,17 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
           Session session = sp.getSession(w.getName(), jcrRepository);
           try {
             // gather all drive nodes from the jcr repo
-            Query q = session.getWorkspace()
-                             .getQueryManager()
-                             .createQuery("select * from " + JCRLocalCloudDrive.ECD_CLOUDDRIVE, Query.SQL);
+            Query q = session.getWorkspace().getQueryManager().createQuery("select * from " + JCRLocalCloudDrive.ECD_CLOUDDRIVE,
+                                                                           Query.SQL);
             NodeIterator r = q.execute().getNodes();
             while (r.hasNext()) {
               Node drive = r.nextNode();
-              // We're reading nodes directly here. Much pretty it would be to do this in connectors,
-              // but then it will cause more reads of the same items, thus will affects the
-              // performance a bit. So, to avoid reading of the same we do it here once.
+              // We're reading nodes directly here. Much pretty it would be to
+              // do this in connectors,
+              // but then it will cause more reads of the same items, thus will
+              // affects the
+              // performance a bit. So, to avoid reading of the same we do it
+              // here once.
               if (drive.getProperty("ecd:connected").getBoolean()) {
                 String providerId = drive.getProperty("ecd:provider").getString();
                 try {

@@ -20,13 +20,11 @@
 package org.exoplatform.clouddrive;
 
 /**
- * Retry needed for an operation at Cloud provider side.
- * 
- * Created by The eXo Platform SAS.
+ * Retry needed for an operation at Cloud provider side. Created by The eXo
+ * Platform SAS.
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
  * @version $Id: RetryLaterException.java 00000 Apr 13, 2018 pnedonosko $
- * 
  */
 public class RetryLaterException extends CloudDriveException {
 

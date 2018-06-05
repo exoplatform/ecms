@@ -19,14 +19,12 @@
 package org.exoplatform.clouddrive;
 
 /**
- * Resource in conflicted state on Cloud provider side. This can mean that file already exists or cannot be
- * modified for some reason.
- * 
- * Created by The eXo Platform SAS.
+ * Resource in conflicted state on Cloud provider side. This can mean that file
+ * already exists or cannot be modified for some reason. Created by The eXo
+ * Platform SAS.
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
  * @version $Id: ConflictException.java 00000 Apr 8, 2014 pnedonosko $
- * 
  */
 public class ConflictException extends CloudDriveException {
 

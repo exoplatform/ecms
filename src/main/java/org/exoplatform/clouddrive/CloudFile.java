@@ -22,7 +22,6 @@ import java.util.Calendar;
 
 /**
  * General abstraction of a cloud file.
- * 
  */
 public interface CloudFile {
 
@@ -41,32 +40,35 @@ public interface CloudFile {
   String getTitle();
 
   /**
-   * Link to a file on cloud provider. This link can be used for opening a file in new window or access it via
-   * the provider API.
+   * Link to a file on cloud provider. This link can be used for opening a file
+   * in new window or access it via the provider API.
    * 
    * @return {@link String}
    */
   String getLink();
 
   /**
-   * Link for editing a file on cloud provider. This link can be used for opening a file in new window or
-   * embedding.
+   * Link for editing a file on cloud provider. This link can be used for
+   * opening a file in new window or embedding.
    * 
-   * @return {@link String} remote editor link or <code>null</code> if edit not supported
+   * @return {@link String} remote editor link or <code>null</code> if edit not
+   *         supported
    */
   String getEditLink();
 
   /**
    * Preview link of a file if cloud provider supports such feature.
    * 
-   * @return {@link String} a preview link or <code>null</code> if preview not offered
+   * @return {@link String} a preview link or <code>null</code> if preview not
+   *         offered
    */
   String getPreviewLink();
 
   /**
    * File thumbnail link if cloud provider supports such feature.
    *
-   * @return {@link String} a thumbnail link or <code>null</code> if thumbnail support not offered
+   * @return {@link String} a thumbnail link or <code>null</code> if thumbnail
+   *         support not offered
    */
   String getThumbnailLink();
 
@@ -78,7 +80,8 @@ public interface CloudFile {
   String getType();
 
   /**
-   * Optional representation (UI) mode associated with the file type. Can be <code>null</code>.
+   * Optional representation (UI) mode associated with the file type. Can be
+   * <code>null</code>.
    * 
    * @return {@link String} a type mode or <code>null</code> if not available.
    */
@@ -120,10 +123,11 @@ public interface CloudFile {
   String getPath();
 
   /**
-   * File size in bytes. It is an actual file size from cloud side. If size not available or it is a folder
-   * then size is -1.
+   * File size in bytes. It is an actual file size from cloud side. If size not
+   * available or it is a folder then size is -1.
    * 
-   * @return {@link Long} file size in bytes (-1 for folder or when cannot be determined)
+   * @return {@link Long} file size in bytes (-1 for folder or when cannot be
+   *         determined)
    */
   long getSize();
 

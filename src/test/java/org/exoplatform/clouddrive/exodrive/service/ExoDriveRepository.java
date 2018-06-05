@@ -18,6 +18,7 @@
  */
 package org.exoplatform.clouddrive.exodrive.service;
 
+import static org.exoplatform.clouddrive.exodrive.service.FileStore.FILE_SEPARATOR;
 import static org.exoplatform.clouddrive.exodrive.service.FileStore.METADIR_NAME;
 import static org.exoplatform.clouddrive.exodrive.service.FileStore.METAFILE_DATEFORMAT;
 import static org.exoplatform.clouddrive.exodrive.service.FileStore.METAFILE_EXT;
@@ -27,12 +28,7 @@ import static org.exoplatform.clouddrive.exodrive.service.FileStore.META_ID;
 import static org.exoplatform.clouddrive.exodrive.service.FileStore.META_LASTUSER;
 import static org.exoplatform.clouddrive.exodrive.service.FileStore.META_MODIFIEDDATE;
 import static org.exoplatform.clouddrive.exodrive.service.FileStore.META_TYPE;
-import static org.exoplatform.clouddrive.exodrive.service.FileStore.FILE_SEPARATOR;
 import static org.exoplatform.clouddrive.exodrive.service.FileStore.TYPE_FOLDER;
-
-import org.exoplatform.commons.utils.MimeTypeResolver;
-import org.exoplatform.services.log.ExoLogger;
-import org.exoplatform.services.log.Log;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -49,14 +45,15 @@ import java.util.List;
 import java.util.Properties;
 import java.util.UUID;
 
+import org.exoplatform.commons.utils.MimeTypeResolver;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
+
 /**
- * Exo Drive repository abstraction.
- * 
- * Created by The eXo Platform SAS.
+ * Exo Drive repository abstraction. Created by The eXo Platform SAS.
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
  * @version $Id: ExoDriveServices.java 00000 Oct 18, 2012 pnedonosko $
- * 
  */
 public class ExoDriveRepository {
 
@@ -75,7 +72,8 @@ public class ExoDriveRepository {
   /**
    * @throws ExoDriveConfigurationException
    */
-  ExoDriveRepository(String name, File baseDir, String baseUrl, MimeTypeResolver mimeResolver) throws ExoDriveConfigurationException {
+  ExoDriveRepository(String name, File baseDir, String baseUrl, MimeTypeResolver mimeResolver)
+      throws ExoDriveConfigurationException {
     this.name = name;
     this.baseUrl = baseUrl;
     this.baseDir = baseDir;
@@ -99,11 +97,11 @@ public class ExoDriveRepository {
   // ********* internal methods ************
 
   /**
-   * Read file to {@link FileStore}. Here we assume the file exists and it's a {@link File}.
+   * Read file to {@link FileStore}. Here we assume the file exists and it's a
+   * {@link File}.
    * 
    * @param ownerName
    * @param file
-   * 
    * @return
    * @throws ExoDriveException
    */
@@ -129,16 +127,8 @@ public class ExoDriveRepository {
         Calendar createDate = METAFILE_DATEFORMAT.parseCalendar(metap.getProperty(META_CREATEDATE));
         Calendar modifiedDate = METAFILE_DATEFORMAT.parseCalendar(metap.getProperty(META_MODIFIEDDATE));
 
-        if (id != null && type != null && author != null && lastUser != null && createDate != null
-            && modifiedDate != null) {
-          return new FileStore(file,
-                               id,
-                               fileLink(ownerName, file.getName()),
-                               type,
-                               author,
-                               author,
-                               createDate,
-                               createDate);
+        if (id != null && type != null && author != null && lastUser != null && createDate != null && modifiedDate != null) {
+          return new FileStore(file, id, fileLink(ownerName, file.getName()), type, author, author, createDate, createDate);
         }
       } catch (ParseException e) {
         throw new ExoDriveException("Cloud file storage " + file + " metadata inconsistent.", e);
@@ -183,12 +173,10 @@ public class ExoDriveRepository {
             // ok, it's a folder in the file path
             parent = pf;
           } else {
-            throw new ExoDriveException("File found on the parent path '" + path + "', folder expected: "
-                + pf.getPath());
+            throw new ExoDriveException("File found on the parent path '" + path + "', folder expected: " + pf.getPath());
           }
         } else {
-          throw new ExoDriveException("Parent path not found '" + path + "', folder doesn't exist: "
-              + pf.getPath());
+          throw new ExoDriveException("Parent path not found '" + path + "', folder doesn't exist: " + pf.getPath());
         }
       } else {
         if (pf.exists()) {
@@ -204,8 +192,8 @@ public class ExoDriveRepository {
   // ********* service methods *************
 
   /**
-   * Tells if a file or folder exists in the user drive. If name is null then it answers if the user
-   * drive exists at all.
+   * Tells if a file or folder exists in the user drive. If name is null then it
+   * answers if the user drive exists at all.
    * 
    * @param ownerName
    * @param path
@@ -294,8 +282,9 @@ public class ExoDriveRepository {
 
         OutputStream out = new FileOutputStream(meta);
         try {
-          metap.store(out, "Metadata for " + file.getAbsolutePath() + ". Generated at "
-              + METAFILE_DATEFORMAT.format(Calendar.getInstance().getTime()));
+          metap.store(out,
+                      "Metadata for " + file.getAbsolutePath() + ". Generated at "
+                          + METAFILE_DATEFORMAT.format(Calendar.getInstance().getTime()));
         } finally {
           out.close();
         }
@@ -305,8 +294,8 @@ public class ExoDriveRepository {
         throw new ExoDriveException("Cannot create file in storage " + file, ioe);
       }
     } else {
-      LOG.warn("User not found: " + ownerName + ". Requested file not created '" + path
-          + "' as parent not found " + userDir.getAbsolutePath());
+      LOG.warn("User not found: " + ownerName + ". Requested file not created '" + path + "' as parent not found "
+          + userDir.getAbsolutePath());
       throw new NotFoundException("User not found: " + ownerName + ". Requested file not created " + path);
     }
   }
@@ -318,8 +307,7 @@ public class ExoDriveRepository {
       return openStore(ownerName, file);
     } else {
       LOG.warn("User not found: " + ownerName + ". Requested storage not exists " + userDir.getAbsolutePath());
-      throw new NotFoundException((userDir.exists() ? "Cloud file " + path + " not found."
-                                                   : "User not found " + ownerName));
+      throw new NotFoundException((userDir.exists() ? "Cloud file " + path + " not found." : "User not found " + ownerName));
     }
   }
 

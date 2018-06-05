@@ -70,7 +70,8 @@ public class JCRLocalCloudFile implements CloudFile {
   /** The size. */
   private final long               size;
 
-  // FYI transient fields will not appear in serialized forms like JSON object on client side
+  // FYI transient fields will not appear in serialized forms like JSON object
+  // on client side
 
   /** The created date. */
   private final transient Calendar createdDate;
@@ -250,7 +251,8 @@ public class JCRLocalCloudFile implements CloudFile {
   }
 
   /**
-   * Local cloud folder (without edit, preview, thumbnail links, type mode and size).
+   * Local cloud folder (without edit, preview, thumbnail links, type mode and
+   * size).
    * 
    * @param path {@link String}
    * @param id {@link String}
@@ -418,9 +420,11 @@ public class JCRLocalCloudFile implements CloudFile {
   }
 
   /**
-   * JCR Node that represent this Cloud File in the storage. Returned {@link Node} instance can be treated
-   * as valid only in a short time span - just after the operation on the file internally in
-   * {@link JCRLocalCloudDrive}. Otherwise need check does the node's session valid (not expired for example).
+   * JCR Node that represent this Cloud File in the storage. Returned
+   * {@link Node} instance can be treated as valid only in a short time span -
+   * just after the operation on the file internally in
+   * {@link JCRLocalCloudDrive}. Otherwise need check does the node's session
+   * valid (not expired for example).
    * 
    * @return the node that represent this Cloud File in the storage.
    */
@@ -429,8 +433,8 @@ public class JCRLocalCloudFile implements CloudFile {
   }
 
   /**
-   * Indicate does this Cloud File was changed (<code>true</code>) or read (<code>false</code>) from the
-   * storage. Used internally only!
+   * Indicate does this Cloud File was changed (<code>true</code>) or read
+   * (<code>false</code>) from the storage. Used internally only!
    * 
    * @return the changed flag
    */

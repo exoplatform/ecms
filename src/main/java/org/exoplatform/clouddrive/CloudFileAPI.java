@@ -26,13 +26,12 @@ import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 
 /**
- * An API to synchronize cloud files with its state on provider side. This API is a part of Connector API.<br>
- * 
+ * An API to synchronize cloud files with its state on provider side. This API
+ * is a part of Connector API.<br>
  * Created by The eXo Platform SAS.
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
  * @version $Id: CloudFileAPI.java 00000 Mar 21, 2014 pnedonosko $
- * 
  */
 public interface CloudFileAPI {
 
@@ -167,7 +166,8 @@ public interface CloudFileAPI {
    * Mark given local file node as ignored.
    *
    * @param node {@link Node}
-   * @return boolean <code>true</code> if file was ignored, <code>false</code> if it is already ignored
+   * @return boolean <code>true</code> if file was ignored, <code>false</code>
+   *         if it is already ignored
    * @throws RepositoryException the repository exception
    */
   boolean ignore(Node node) throws RepositoryException;
@@ -176,7 +176,8 @@ public interface CloudFileAPI {
    * Remove ignorance mark on given local file node.
    *
    * @param node {@link Node}
-   * @return boolean <code>true</code> if file unignored, <code>false</code> if file not ignored
+   * @return boolean <code>true</code> if file unignored, <code>false</code> if
+   *         file not ignored
    * @throws RepositoryException the repository exception
    */
   boolean unignore(Node node) throws RepositoryException;
@@ -239,8 +240,8 @@ public interface CloudFileAPI {
   CloudFile untrashFile(Node fileNode) throws CloudDriveException, RepositoryException;
 
   /**
-   * Untrash folder on cloud side. It may untrash folder children recursive (depending on a provider
-   * capabilities).
+   * Untrash folder on cloud side. It may untrash folder children recursive
+   * (depending on a provider capabilities).
    *
    * @param fileNode the file node
    * @return the cloud file
@@ -261,8 +262,11 @@ public interface CloudFileAPI {
    * @throws CloudDriveException the cloud drive exception
    * @throws RepositoryException the repository exception
    */
-  CloudFile createFile(Node fileNode, Calendar created, Calendar modified, String mimeType, InputStream content) throws CloudDriveException,
-                                                                                                                 RepositoryException;
+  CloudFile createFile(Node fileNode,
+                       Calendar created,
+                       Calendar modified,
+                       String mimeType,
+                       InputStream content) throws CloudDriveException, RepositoryException;
 
   /**
    * Creates the folder on cloud side.
@@ -308,7 +312,8 @@ public interface CloudFileAPI {
    * @throws CloudDriveException the cloud drive exception
    * @throws RepositoryException the repository exception
    */
-  CloudFile updateFileContent(Node fileNode, Calendar modified, String mimeType, InputStream content) throws CloudDriveException, RepositoryException;
+  CloudFile updateFileContent(Node fileNode, Calendar modified, String mimeType, InputStream content) throws CloudDriveException,
+                                                                                                      RepositoryException;
 
   /**
    * Copy file on cloud side.
@@ -333,17 +338,19 @@ public interface CloudFileAPI {
   CloudFile copyFolder(Node srcFolderNode, Node destFolderNode) throws CloudDriveException, RepositoryException;
 
   /**
-   * Restore the file from cloud side. If file exists remotely it should be restored locally at right location
-   * and its {@link CloudFile} returned, otherwise locally existing file(s) should be removed and
-   * <code>null</code> returned.
-   * <br>
-   * This method will be used by synchronization of local-to-remote changes in case of a failure and need to
-   * restore the state from cloud side. Method should care about removal of all file duplicates if this
-   * may have a place during the sync.
+   * Restore the file from cloud side. If file exists remotely it should be
+   * restored locally at right location and its {@link CloudFile} returned,
+   * otherwise locally existing file(s) should be removed and <code>null</code>
+   * returned. <br>
+   * This method will be used by synchronization of local-to-remote changes in
+   * case of a failure and need to restore the state from cloud side. Method
+   * should care about removal of all file duplicates if this may have a place
+   * during the sync.
    *
    * @param id the id
    * @param path the path
-   * @return the cloud file of a restore item or <code>null</code> if it was removed
+   * @return the cloud file of a restore item or <code>null</code> if it was
+   *         removed
    * @throws CloudDriveException the cloud drive exception
    * @throws RepositoryException the repository exception
    */

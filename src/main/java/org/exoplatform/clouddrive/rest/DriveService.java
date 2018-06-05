@@ -18,25 +18,6 @@
  */
 package org.exoplatform.clouddrive.rest;
 
-import org.exoplatform.clouddrive.CloudDrive;
-import org.exoplatform.clouddrive.CloudDrive.Command;
-import org.exoplatform.clouddrive.CloudDriveException;
-import org.exoplatform.clouddrive.CloudDriveMessage;
-import org.exoplatform.clouddrive.CloudDriveService;
-import org.exoplatform.clouddrive.CloudFile;
-import org.exoplatform.clouddrive.CloudProvider;
-import org.exoplatform.clouddrive.DriveRemovedException;
-import org.exoplatform.clouddrive.NotCloudFileException;
-import org.exoplatform.clouddrive.NotConnectedException;
-import org.exoplatform.clouddrive.NotYetCloudFileException;
-import org.exoplatform.clouddrive.RefreshAccessException;
-import org.exoplatform.services.jcr.RepositoryService;
-import org.exoplatform.services.jcr.ext.app.SessionProviderService;
-import org.exoplatform.services.jcr.ext.common.SessionProvider;
-import org.exoplatform.services.log.ExoLogger;
-import org.exoplatform.services.log.Log;
-import org.exoplatform.services.rest.resource.ResourceContainer;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -64,8 +45,28 @@ import javax.ws.rs.core.Response.ResponseBuilder;
 import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.UriInfo;
 
+import org.exoplatform.clouddrive.CloudDrive;
+import org.exoplatform.clouddrive.CloudDrive.Command;
+import org.exoplatform.clouddrive.CloudDriveException;
+import org.exoplatform.clouddrive.CloudDriveMessage;
+import org.exoplatform.clouddrive.CloudDriveService;
+import org.exoplatform.clouddrive.CloudFile;
+import org.exoplatform.clouddrive.CloudProvider;
+import org.exoplatform.clouddrive.DriveRemovedException;
+import org.exoplatform.clouddrive.NotCloudFileException;
+import org.exoplatform.clouddrive.NotConnectedException;
+import org.exoplatform.clouddrive.NotYetCloudFileException;
+import org.exoplatform.clouddrive.RefreshAccessException;
+import org.exoplatform.services.jcr.RepositoryService;
+import org.exoplatform.services.jcr.ext.app.SessionProviderService;
+import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
+import org.exoplatform.services.rest.resource.ResourceContainer;
+
 /**
- * REST service providing information about providers. Created by The eXo Platform SAS.
+ * REST service providing information about providers. Created by The eXo
+ * Platform SAS.
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
  * @version $Id: DriveService.java 00000 Oct 22, 2012 pnedonosko $
@@ -96,9 +97,7 @@ public class DriveService implements ResourceContainer {
    * @param jcrService {@link RepositoryService}
    * @param sessionProviders {@link SessionProviderService}
    */
-  public DriveService(CloudDriveService cloudDrives,
-                      RepositoryService jcrService,
-                      SessionProviderService sessionProviders) {
+  public DriveService(CloudDriveService cloudDrives, RepositoryService jcrService, SessionProviderService sessionProviders) {
     this.cloudDrives = cloudDrives;
     this.jcrService = jcrService;
     this.sessionProviders = sessionProviders;
@@ -114,9 +113,7 @@ public class DriveService implements ResourceContainer {
    */
   @GET
   @RolesAllowed("users")
-  public Response getDrive(@Context UriInfo uriInfo,
-                           @QueryParam("workspace") String workspace,
-                           @QueryParam("path") String path) {
+  public Response getDrive(@Context UriInfo uriInfo, @QueryParam("workspace") String workspace, @QueryParam("path") String path) {
 
     if (workspace != null) {
       if (path != null) {
@@ -130,7 +127,8 @@ public class DriveService implements ResourceContainer {
   }
 
   /**
-   * Synchronized cloud drive or its file/folder and return result for client refresh.
+   * Synchronized cloud drive or its file/folder and return result for client
+   * refresh.
    *
    * @param uriInfo {@link UriInfo}
    * @param workspace {@link String} Drive Node workspace
@@ -155,14 +153,17 @@ public class DriveService implements ResourceContainer {
     }
   }
 
-  // *********************************** internals *************************************
+  // *********************************** internals
+  // *************************************
 
   /**
-   * Read cloud drive and optionally synchronized it before. Drive will contain a file from it will asked,
+   * Read cloud drive and optionally synchronized it before. Drive will contain
+   * a file from it will asked,
    * 
    * @param workspace {@link String} Drive workspace
    * @param path {@link String} path of a Node in the Drive
-   * @param synchronize {@link Boolean} flag to synch before the read (true to force sync)
+   * @param synchronize {@link Boolean} flag to synch before the read (true to
+   *          force sync)
    * @return {@link Response} REST response
    */
   protected Response readDrive(String workspace, String path, boolean synchronize) {
@@ -191,7 +192,8 @@ public class DriveService implements ResourceContainer {
               Throwable cause = err.getCause();
               LOG.warn("Access to cloud drive expired, forbidden or revoked. " + err.getMessage()
                   + (cause != null ? ". " + cause.getMessage() : ""));
-              // client should treat this status in special way and obtain new credentials using given
+              // client should treat this status in special way and obtain new
+              // credentials using given
               // provider
               return Response.status(Status.FORBIDDEN).entity(local.getUser().getProvider()).build();
             } else if (err instanceof NotConnectedException) {
@@ -242,7 +244,8 @@ public class DriveService implements ResourceContainer {
               CloudFile file = local.getFile(path);
               files.add(file);
               if (!file.getPath().equals(path)) {
-                files.add(new LinkedCloudFile(file, path)); // it's symlink, add it also
+                files.add(new LinkedCloudFile(file, path)); // it's symlink, add
+                                                            // it also
               }
             }
           } catch (NotYetCloudFileException e) {
@@ -262,18 +265,14 @@ public class DriveService implements ResourceContainer {
         if (LOG.isDebugEnabled()) {
           LOG.debug("Item " + workspace + ":" + path + " not a cloud file or drive not connected.");
         }
-        return Response.status(Status.NOT_FOUND)
-                       .entity(ErrorEntiry.notCloudDrive("Not connected", workspace, path))
-                       .build();
+        return Response.status(Status.NOT_FOUND).entity(ErrorEntiry.notCloudDrive("Not connected", workspace, path)).build();
       }
     } catch (LoginException e) {
       LOG.warn("Error login to read drive " + workspace + ":" + path + ". " + e.getMessage());
       return Response.status(Status.UNAUTHORIZED).entity(ErrorEntiry.message("Authentication error")).build();
     } catch (DriveRemovedException e) {
       LOG.error("Drive removed " + workspace + ":" + path, e);
-      return Response.status(Status.NOT_FOUND)
-                     .entity(ErrorEntiry.driveRemoved("Drive removed", workspace, path))
-                     .build();
+      return Response.status(Status.NOT_FOUND).entity(ErrorEntiry.driveRemoved("Drive removed", workspace, path)).build();
     } catch (PathNotFoundException e) {
       LOG.warn("Error reading file " + workspace + ":" + path + ". " + e.getMessage());
       return Response.status(Status.NOT_FOUND)
@@ -293,8 +292,9 @@ public class DriveService implements ResourceContainer {
   }
 
   /**
-   * Return file information. Returned file may be not yet created in cloud (accepted for
-   * creation), then this service response will be with status ACCEPTED, otherwise it's OK response.
+   * Return file information. Returned file may be not yet created in cloud
+   * (accepted for creation), then this service response will be with status
+   * ACCEPTED, otherwise it's OK response.
    *
    * @param uriInfo the uri info
    * @param workspace {@link String} Drive Node workspace
@@ -304,9 +304,7 @@ public class DriveService implements ResourceContainer {
   @GET
   @Path("/file/")
   @RolesAllowed("users")
-  public Response getFile(@Context UriInfo uriInfo,
-                          @QueryParam("workspace") String workspace,
-                          @QueryParam("path") String path) {
+  public Response getFile(@Context UriInfo uriInfo, @QueryParam("workspace") String workspace, @QueryParam("path") String path) {
     if (workspace != null) {
       if (path != null) {
         try {
@@ -321,29 +319,21 @@ public class DriveService implements ResourceContainer {
             } catch (NotYetCloudFileException e) {
               return Response.status(Status.ACCEPTED).entity(new AcceptedCloudFile(path)).build();
             } catch (NotCloudFileException e) {
-              return Response.status(Status.NOT_FOUND)
-                             .entity(ErrorEntiry.notCloudFile(e.getMessage(), workspace, path))
-                             .build();
+              return Response.status(Status.NOT_FOUND).entity(ErrorEntiry.notCloudFile(e.getMessage(), workspace, path)).build();
             }
           }
           if (LOG.isDebugEnabled()) {
             LOG.debug("Item " + workspace + ":" + path + " not a cloud file or drive not connected.");
           }
           return Response.status(Status.NOT_FOUND)
-                         .entity(ErrorEntiry.notCloudDrive("Not a cloud file or drive not connected",
-                                                           workspace,
-                                                           path))
+                         .entity(ErrorEntiry.notCloudDrive("Not a cloud file or drive not connected", workspace, path))
                          .build();
         } catch (LoginException e) {
           LOG.warn("Error login to read drive file " + workspace + ":" + path + ": " + e.getMessage());
-          return Response.status(Status.UNAUTHORIZED)
-                         .entity(ErrorEntiry.message("Authentication error"))
-                         .build();
+          return Response.status(Status.UNAUTHORIZED).entity(ErrorEntiry.message("Authentication error")).build();
         } catch (CloudDriveException e) {
           LOG.warn("Error reading file " + workspace + ":" + path, e);
-          return Response.status(Status.BAD_REQUEST)
-                         .entity(ErrorEntiry.message("Error reading file. " + e.getMessage()))
-                         .build();
+          return Response.status(Status.BAD_REQUEST).entity(ErrorEntiry.message("Error reading file. " + e.getMessage())).build();
         } catch (RepositoryException e) {
           LOG.error("Error reading file " + workspace + ":" + path, e);
           return Response.status(Status.INTERNAL_SERVER_ERROR)
@@ -364,9 +354,11 @@ public class DriveService implements ResourceContainer {
   }
 
   /**
-   * Return list of files in given folder. Returned files may be not yet created in cloud (accepted for
-   * creation), then this service response will be with status ACCEPTED, otherwise it's OK response. This
-   * service will not return files for nodes that do not belong to the cloud drive associated with this path.
+   * Return list of files in given folder. Returned files may be not yet created
+   * in cloud (accepted for creation), then this service response will be with
+   * status ACCEPTED, otherwise it's OK response. This service will not return
+   * files for nodes that do not belong to the cloud drive associated with this
+   * path.
    *
    * @param uriInfo the uri info
    * @param workspace {@link String} Drive Node workspace
@@ -376,9 +368,7 @@ public class DriveService implements ResourceContainer {
   @GET
   @Path("/files/")
   @RolesAllowed("users")
-  public Response getFiles(@Context UriInfo uriInfo,
-                           @QueryParam("workspace") String workspace,
-                           @QueryParam("path") String path) {
+  public Response getFiles(@Context UriInfo uriInfo, @QueryParam("workspace") String workspace, @QueryParam("path") String path) {
     if (workspace != null) {
       if (path != null) {
         try {
@@ -431,9 +421,7 @@ public class DriveService implements ResourceContainer {
           if (LOG.isDebugEnabled()) {
             LOG.debug("Item " + workspace + ":" + path + " not a cloud file or drive not connected.");
           }
-          return Response.status(Status.NOT_FOUND)
-                         .entity(ErrorEntiry.notCloudDrive("Not connected", workspace, path))
-                         .build();
+          return Response.status(Status.NOT_FOUND).entity(ErrorEntiry.notCloudDrive("Not connected", workspace, path)).build();
         } catch (LoginException e) {
           LOG.warn("Error login to read drive files in " + workspace + ":" + path + ": " + e.getMessage());
           return Response.status(Status.UNAUTHORIZED).entity("Authentication error.").build();
@@ -442,14 +430,10 @@ public class DriveService implements ResourceContainer {
           return Response.status(Status.BAD_REQUEST).entity("Error reading files. " + e.getMessage()).build();
         } catch (RepositoryException e) {
           LOG.error("Error reading files in " + workspace + ":" + path, e);
-          return Response.status(Status.INTERNAL_SERVER_ERROR)
-                         .entity("Error reading files: storage error.")
-                         .build();
+          return Response.status(Status.INTERNAL_SERVER_ERROR).entity("Error reading files: storage error.").build();
         } catch (Throwable e) {
           LOG.error("Error reading files in " + workspace + ":" + path, e);
-          return Response.status(Status.INTERNAL_SERVER_ERROR)
-                         .entity("Error reading file: runtime error.")
-                         .build();
+          return Response.status(Status.INTERNAL_SERVER_ERROR).entity("Error reading file: runtime error.").build();
         }
       } else {
         return Response.status(Status.BAD_REQUEST).entity(ErrorEntiry.message("Null path")).build();
@@ -470,9 +454,7 @@ public class DriveService implements ResourceContainer {
   @GET
   @Path("/state/")
   @RolesAllowed("users")
-  public Response getState(@Context UriInfo uriInfo,
-                           @QueryParam("workspace") String workspace,
-                           @QueryParam("path") String path) {
+  public Response getState(@Context UriInfo uriInfo, @QueryParam("workspace") String workspace, @QueryParam("path") String path) {
 
     if (workspace != null) {
       if (path != null) {
@@ -485,7 +467,8 @@ public class DriveService implements ResourceContainer {
               Throwable cause = e.getCause();
               LOG.warn("Access to cloud drive expired, forbidden or revoked. " + e.getMessage()
                   + (cause != null ? ". " + cause.getMessage() : ""));
-              // client should treat this status in special way and obtain new credentials using given
+              // client should treat this status in special way and obtain new
+              // credentials using given
               // provider
               return Response.status(Status.FORBIDDEN).entity(local.getUser().getProvider()).build();
             } catch (CloudDriveException e) {
@@ -498,23 +481,17 @@ public class DriveService implements ResourceContainer {
             if (LOG.isDebugEnabled()) {
               LOG.debug("Item " + workspace + ":" + path + " not a cloud file or drive not connected.");
             }
-            return Response.status(Status.NOT_FOUND)
-                           .entity(ErrorEntiry.notCloudDrive("Not connected", workspace, path))
-                           .build();
+            return Response.status(Status.NOT_FOUND).entity(ErrorEntiry.notCloudDrive("Not connected", workspace, path)).build();
           }
         } catch (LoginException e) {
           LOG.warn("Error login to read drive " + workspace + ":" + path + ". " + e.getMessage());
           return Response.status(Status.UNAUTHORIZED).entity("Authentication error.").build();
         } catch (RepositoryException e) {
           LOG.error("Error reading drive " + workspace + ":" + path, e);
-          return Response.status(Status.INTERNAL_SERVER_ERROR)
-                         .entity("Error reading drive: storage error.")
-                         .build();
+          return Response.status(Status.INTERNAL_SERVER_ERROR).entity("Error reading drive: storage error.").build();
         } catch (Throwable e) {
           LOG.error("Error reading drive " + workspace + ":" + path, e);
-          return Response.status(Status.INTERNAL_SERVER_ERROR)
-                         .entity("Error reading drive: runtime error.")
-                         .build();
+          return Response.status(Status.INTERNAL_SERVER_ERROR).entity("Error reading drive: runtime error.").build();
         }
       } else {
         return Response.status(Status.BAD_REQUEST).entity(ErrorEntiry.message("Null path")).build();

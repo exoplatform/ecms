@@ -18,29 +18,6 @@
  */
 package org.exoplatform.clouddrive.viewer;
 
-import org.artofsolving.jodconverter.office.OfficeException;
-import org.exoplatform.clouddrive.BaseCloudDriveListener;
-import org.exoplatform.clouddrive.CloudDrive;
-import org.exoplatform.clouddrive.CloudDriveEvent;
-import org.exoplatform.clouddrive.CloudDriveException;
-import org.exoplatform.clouddrive.CloudDriveStorage;
-import org.exoplatform.clouddrive.CloudFile;
-import org.exoplatform.clouddrive.DriveRemovedException;
-import org.exoplatform.clouddrive.jcr.JCRLocalCloudDrive;
-import org.exoplatform.services.cache.CacheService;
-import org.exoplatform.services.cache.ExoCache;
-import org.exoplatform.services.cms.jodconverter.JodConverterService;
-import org.exoplatform.services.log.ExoLogger;
-import org.exoplatform.services.log.Log;
-import org.exoplatform.services.pdfviewer.PDFViewerService;
-import org.icepdf.core.exceptions.PDFException;
-import org.icepdf.core.exceptions.PDFSecurityException;
-import org.icepdf.core.pobjects.Document;
-import org.icepdf.core.pobjects.PInfo;
-import org.icepdf.core.pobjects.Page;
-import org.icepdf.core.pobjects.Stream;
-import org.icepdf.core.util.GraphicsRenderingHints;
-
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
@@ -68,23 +45,47 @@ import javax.imageio.ImageIO;
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 
+import org.artofsolving.jodconverter.office.OfficeException;
+import org.icepdf.core.exceptions.PDFException;
+import org.icepdf.core.exceptions.PDFSecurityException;
+import org.icepdf.core.pobjects.Document;
+import org.icepdf.core.pobjects.PInfo;
+import org.icepdf.core.pobjects.Page;
+import org.icepdf.core.pobjects.Stream;
+import org.icepdf.core.util.GraphicsRenderingHints;
+
+import org.exoplatform.clouddrive.BaseCloudDriveListener;
+import org.exoplatform.clouddrive.CloudDrive;
+import org.exoplatform.clouddrive.CloudDriveEvent;
+import org.exoplatform.clouddrive.CloudDriveException;
+import org.exoplatform.clouddrive.CloudDriveStorage;
+import org.exoplatform.clouddrive.CloudFile;
+import org.exoplatform.clouddrive.DriveRemovedException;
+import org.exoplatform.clouddrive.jcr.JCRLocalCloudDrive;
+import org.exoplatform.services.cache.CacheService;
+import org.exoplatform.services.cache.ExoCache;
+import org.exoplatform.services.cms.jodconverter.JodConverterService;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
+import org.exoplatform.services.pdfviewer.PDFViewerService;
+
 /**
- * Store cloud file previews in temporary local file on the file system. This file can be used
- * for remote file representation in eXo Platform. <br>
- * This class build on an idea of ECMS {@link org.exoplatform.services.pdfviewer.PDFViewerService} but uses
+ * Store cloud file previews in temporary local file on the file system. This
+ * file can be used for remote file representation in eXo Platform. <br>
+ * This class build on an idea of ECMS
+ * {@link org.exoplatform.services.pdfviewer.PDFViewerService} but uses
  * {@link CloudFile} instead of JCR {@link Node} for file data.<br>
- * This service uses {@link ExoCache} as a weak storage of spooled locally cloud files. The storage will be
- * cleaned if file/drive will be removed or the cache will be evicted.<br>
+ * This service uses {@link ExoCache} as a weak storage of spooled locally cloud
+ * files. The storage will be cleaned if file/drive will be removed or the cache
+ * will be evicted.<br>
  * Local files will be stored in JVM temporary folder in a tree hiearachy:
  * repository/workspace/username/driveTitle/fileId.<br>
- * If remote file is not in PDF, image or text format it will be attempted to convert it to the PDF by
- * {@link JodConverterService}. <br>
- * 
+ * If remote file is not in PDF, image or text format it will be attempted to
+ * convert it to the PDF by {@link JodConverterService}. <br>
  * Created by The eXo Platform SAS
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
  * @version $Id: ViewerStorage.java 00000 Jul 23, 2015 pnedonosko $
- * 
  */
 public class ViewerStorage {
 
@@ -443,7 +444,7 @@ public class ViewerStorage {
      * The Class ImageFile.
      */
     public class ImageFile {
-      
+
       /** The file. */
       protected final File   file;
 
@@ -824,8 +825,7 @@ public class ViewerStorage {
    * @throws DriveRemovedException the drive removed exception
    * @throws RepositoryException the repository exception
    */
-  public ContentFile getFile(String repository, String workspace, CloudDrive drive, String fileId)
-                                                                                                   throws DriveRemovedException,
+  public ContentFile getFile(String repository, String workspace, CloudDrive drive, String fileId) throws DriveRemovedException,
                                                                                                    RepositoryException {
     FileKey key = new FileKey(repository, workspace, drive.getLocalUser(), drive.getTitle(), fileId);
     return spool.get(key);
@@ -844,13 +844,10 @@ public class ViewerStorage {
    * @throws RepositoryException the repository exception
    * @throws IOException Signals that an I/O exception has occurred.
    */
-  public ContentFile createFile(String repository,
-                                String workspace,
-                                CloudDrive drive,
-                                CloudFile file) throws CloudDriveException,
-                                                DriveRemovedException,
-                                                RepositoryException,
-                                                IOException {
+  public ContentFile createFile(String repository, String workspace, CloudDrive drive, CloudFile file) throws CloudDriveException,
+                                                                                                       DriveRemovedException,
+                                                                                                       RepositoryException,
+                                                                                                       IOException {
     long lastModified = file.getModifiedDate().getTimeInMillis();
 
     // TODO lock creation of the same file to avoid double spooling
@@ -866,19 +863,22 @@ public class ViewerStorage {
         if (lastModified <= spooledFile.getLastModified() && isPDF) {
           pdfFile = (PDFFile) spooledFile;
         } else {
-          // file preview outdated or has wrong format in the storage - reset it and create a fresh
+          // file preview outdated or has wrong format in the storage - reset it
+          // and create a fresh
           // representation
           if (spooledFile.remove()) {
             // null file only if it was successfully removed,
             pdfFile = null;
           } else if (isPDF) {
             // otherwise file in use and we stay use the old version
-            // TODO create a new representation and forget about this old file (will be cleaned on server
+            // TODO create a new representation and forget about this old file
+            // (will be cleaned on server
             // restart)
             LOG.warn("Cannot remove view of cloud file from the storage: " + file);
             pdfFile = (PDFFile) spooledFile;
           } else {
-            // TODO ensure this file will be removed by the evicter (see for PDF above also)
+            // TODO ensure this file will be removed by the evicter (see for PDF
+            // above also)
             LOG.warn("Cannot remove view of cloud file from the storage: " + file);
             spool.remove(key);
             pdfFile = null;
@@ -926,7 +926,8 @@ public class ViewerStorage {
         }
       } while (tempFile == null);
 
-      // spool remote content to temp file, convert to PDF if required (from office formats)
+      // spool remote content to temp file, convert to PDF if required (from
+      // office formats)
       try {
         ContentReader content = ((CloudDriveStorage) drive).getFileContent(file.getId());
         if (file.getType().startsWith(PDF_TYPE) || file.getType().startsWith("text/pdf")
@@ -934,13 +935,16 @@ public class ViewerStorage {
           // copy content directly
           spoolToFile(content.getStream(), tempFile);
         } else {
-          // we assuming office document here: convert to PDF using Jod converter
-          // spool original content of cloud file to local file (file required by Jod)
+          // we assuming office document here: convert to PDF using Jod
+          // converter
+          // spool original content of cloud file to local file (file required
+          // by Jod)
           File origFile = new File(parent, name + "-tmp");
           try {
             spoolToFile(content.getStream(), origFile);
             boolean success = jodConverter.convert(origFile, tempFile, "pdf");
-            // If the converting was failure then delete the content temporary file
+            // If the converting was failure then delete the content temporary
+            // file
             if (!success) {
               tempFile.delete();
             }
@@ -957,7 +961,7 @@ public class ViewerStorage {
           FileInputStream tempStream = new FileInputStream(tempFile);
           try {
             Document pdf = buildDocumentImage(tempStream, tempFile.getName());
-            try { 
+            try {
               pdfFile = new PDFFile(key, tempFile, cleanName, lastModified, pdf);
 
               // listen the drive for file removal/updates to clean the storage
@@ -1013,13 +1017,10 @@ public class ViewerStorage {
    * @throws IOException Signals that an I/O exception has occurred.
    */
   @Deprecated
-  public ContentFile saveFile(String repository,
-                              String workspace,
-                              CloudDrive drive,
-                              CloudFile file) throws CloudDriveException,
-                                              DriveRemovedException,
-                                              RepositoryException,
-                                              IOException {
+  public ContentFile saveFile(String repository, String workspace, CloudDrive drive, CloudFile file) throws CloudDriveException,
+                                                                                                     DriveRemovedException,
+                                                                                                     RepositoryException,
+                                                                                                     IOException {
     long lastModified = file.getModifiedDate().getTimeInMillis();
 
     String userId = drive.getLocalUser();
@@ -1028,7 +1029,8 @@ public class ViewerStorage {
     if (viewFile != null) {
       if (viewFile.exists()) {
         if (lastModified > viewFile.getLastModified()) {
-          // file preview outdated in the storage - reset it and create a fresh representation
+          // file preview outdated in the storage - reset it and create a fresh
+          // representation
           if (viewFile.remove()) {
             // null file only if it was successfully removed,
             viewFile = null;
@@ -1076,7 +1078,8 @@ public class ViewerStorage {
       } while (tempFile == null);
 
       try {
-        // spool remote content to temp file, convert to images if required and possible
+        // spool remote content to temp file, convert to images if required and
+        // possible
         ContentReader content = ((CloudDriveStorage) drive).getFileContent(file.getId());
         spoolToFile(content.getStream(), tempFile);
 
@@ -1162,8 +1165,8 @@ public class ViewerStorage {
   }
 
   /**
-   * Read IcePDF document from given file.
-   * Method adopted from {@link PDFViewerService}.
+   * Read IcePDF document from given file. Method adopted from
+   * {@link PDFViewerService}.
    *
    * @param input {@link File}
    * @param name {@link String}
@@ -1173,7 +1176,8 @@ public class ViewerStorage {
   private Document buildDocumentImage(InputStream input, String name) throws IOException {
     Document document = new Document();
 
-    // Turn off Log of org.icepdf.core.pobjects.Document to avoid printing error stack trace in case viewing
+    // Turn off Log of org.icepdf.core.pobjects.Document to avoid printing error
+    // stack trace in case viewing
     // a PDF file which use new Public Key Security Handler.
     // TODO: Remove this statement after IcePDF fix this
     Logger.getLogger(Document.class.toString()).setLevel(Level.OFF);
@@ -1201,8 +1205,8 @@ public class ViewerStorage {
   }
 
   /**
-   * Convert given page of PDF document to PNG image file.
-   * Method adapted from {@link PDFViewerRESTService}.
+   * Convert given page of PDF document to PNG image file. Method adapted from
+   * {@link PDFViewerRESTService}.
    *
    * @param input the input
    * @param page the page
@@ -1242,7 +1246,8 @@ public class ViewerStorage {
       // convert requested page to PNG image
       Document document = buildDocumentImage(inputStream, name);
 
-      // Turn off Log of org.icepdf.core.pobjects.Stream to not print error stack trace in case
+      // Turn off Log of org.icepdf.core.pobjects.Stream to not print error
+      // stack trace in case
       // viewing a PDF file including CCITT (Fax format) images
       // TODO: Remove these statement and comments after IcePDF fix ECMS-3765
       Logger.getLogger(Stream.class.toString()).setLevel(Level.OFF);
@@ -1308,7 +1313,8 @@ public class ViewerStorage {
       name = nodePath;
     }
     String cleanName = JCRLocalCloudDrive.cleanName(name);
-    // max file length with a space for lastModified and page/rotation/scale suffix: all < 250
+    // max file length with a space for lastModified and page/rotation/scale
+    // suffix: all < 250
     return cleanName.length() > MAX_FILENAME_LENGTH ? cleanName.substring(0, MAX_FILENAME_LENGTH) : cleanName;
   }
 

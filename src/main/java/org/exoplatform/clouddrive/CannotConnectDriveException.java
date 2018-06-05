@@ -19,14 +19,13 @@
 package org.exoplatform.clouddrive;
 
 /**
- * Existing node (folder) cannot be connected as a Cloud Drive root.
- * This error means that this existing node was created by another user or for another drive. <br>
- * 
+ * Existing node (folder) cannot be connected as a Cloud Drive root. This error
+ * means that this existing node was created by another user or for another
+ * drive. <br>
  * Created by The eXo Platform SAS
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
  * @version $Id: AnotherDriveException.java 00000 Dec 18, 2014 pnedonosko $
- * 
  */
 public class CannotConnectDriveException extends CloudDriveException {
 

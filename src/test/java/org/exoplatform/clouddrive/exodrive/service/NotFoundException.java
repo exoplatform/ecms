@@ -24,7 +24,6 @@ package org.exoplatform.clouddrive.exodrive.service;
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
  * @version $Id: NotFoundException.java 00000 Oct 17, 2012 pnedonosko $
- * 
  */
 public class NotFoundException extends ExoDriveException {
 

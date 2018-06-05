@@ -19,13 +19,12 @@
 package org.exoplatform.clouddrive;
 
 /**
- * Cloud user not authorized to create, modify or remove the cloud drive resource.<br>
- * 
+ * Cloud user not authorized to create, modify or remove the cloud drive
+ * resource.<br>
  * Created by The eXo Platform SAS
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
  * @version $Id: UnauthorizedException.java 00000 Feb 15, 2015 pnedonosko $
- * 
  */
 public class UnauthorizedException extends ConstraintException {
 

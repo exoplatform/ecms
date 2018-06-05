@@ -19,9 +19,8 @@
 package org.exoplatform.clouddrive;
 
 /**
- * Will be thrown when {@link CloudDrive} node was removed but the drive object still in use.
- * 
- * Created by The eXo Platform SAS.
+ * Will be thrown when {@link CloudDrive} node was removed but the drive object
+ * still in use. Created by The eXo Platform SAS.
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
  * @version $Id: NotConnectedException.java 00000 Sep 11, 2012 pnedonosko $

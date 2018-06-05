@@ -18,13 +18,14 @@
  */
 package org.exoplatform.clouddrive.rest;
 
-import org.exoplatform.clouddrive.CloudFile;
-
 import java.util.Calendar;
 
+import org.exoplatform.clouddrive.CloudFile;
+
 /**
- * Not yet cloud file. It is a file that accepted to be a cloud file, but currently is creating (uploading) to
- * the cloud and this operation not completed.<br>
+ * Not yet cloud file. It is a file that accepted to be a cloud file, but
+ * currently is creating (uploading) to the cloud and this operation not
+ * completed.<br>
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
  * @version $Id: LinkedCloudFile.java 00000 May 26, 2014 pnedonosko $

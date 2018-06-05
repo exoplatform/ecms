@@ -18,20 +18,6 @@
  */
 package org.exoplatform.clouddrive;
 
-import org.exoplatform.clouddrive.jcr.NodeFinder;
-import org.exoplatform.clouddrive.utils.ExtendedMimeTypeResolver;
-import org.exoplatform.container.PortalContainer;
-import org.exoplatform.container.component.BaseComponentPlugin;
-import org.exoplatform.container.xml.InitParams;
-import org.exoplatform.container.xml.ObjectParameter;
-import org.exoplatform.container.xml.PropertiesParam;
-import org.exoplatform.services.jcr.RepositoryService;
-import org.exoplatform.services.jcr.ext.app.SessionProviderService;
-import org.exoplatform.services.jcr.ext.common.SessionProvider;
-import org.exoplatform.services.log.ExoLogger;
-import org.exoplatform.services.log.Log;
-import org.exoplatform.services.security.ConversationState;
-
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
@@ -47,8 +33,23 @@ import javax.jcr.InvalidItemStateException;
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 
+import org.exoplatform.clouddrive.jcr.NodeFinder;
+import org.exoplatform.clouddrive.utils.ExtendedMimeTypeResolver;
+import org.exoplatform.container.PortalContainer;
+import org.exoplatform.container.component.BaseComponentPlugin;
+import org.exoplatform.container.xml.InitParams;
+import org.exoplatform.container.xml.ObjectParameter;
+import org.exoplatform.container.xml.PropertiesParam;
+import org.exoplatform.services.jcr.RepositoryService;
+import org.exoplatform.services.jcr.ext.app.SessionProviderService;
+import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
+import org.exoplatform.services.security.ConversationState;
+
 /**
- * Base class for {@link CloudDrive} implementations. It's eXo Container plugin to {@link CloudDriveService}.
+ * Base class for {@link CloudDrive} implementations. It's eXo Container plugin
+ * to {@link CloudDriveService}.
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
  * @version $Id: CloudDriveConnector.java 00000 Sep 13, 2012 pnedonosko $
@@ -56,10 +57,11 @@ import javax.jcr.RepositoryException;
 public abstract class CloudDriveConnector extends BaseComponentPlugin {
 
   /**
-   * Predefined cloud provider configuration. Can be used for hosted providers that require point the service
-   * host URL and related settings. Predefined configuration is designed for use in final connector
-   * implementation. The configuration it is a set of objects describing the service, type of an object can be
-   * any and should reflect the final provider needs.
+   * Predefined cloud provider configuration. Can be used for hosted providers
+   * that require point the service host URL and related settings. Predefined
+   * configuration is designed for use in final connector implementation. The
+   * configuration it is a set of objects describing the service, type of an
+   * object can be any and should reflect the final provider needs.
    */
   public static class PredefinedServices {
 
@@ -113,8 +115,8 @@ public abstract class CloudDriveConnector extends BaseComponentPlugin {
   public static final String               CONFIG_DISABLE                   = "disable";
 
   /**
-   * Force SSO for user login. It is optional parameter for those providers that need force SSO explicitly
-   * (e.g. Box).
+   * Force SSO for user login. It is optional parameter for those providers that
+   * need force SSO explicitly (e.g. Box).
    */
   public static final String               CONFIG_LOGIN_SSO                 = "login-sso";
 
@@ -134,9 +136,8 @@ public abstract class CloudDriveConnector extends BaseComponentPlugin {
   public static final String               OAUTH2_ERROR_DESCRIPTION         = "error_description";
 
   /**
-   * The Constant PROVIDER_REQUEST_ATTEMPTS.
-   * CLDINT-1051 increased from 3 to 5, later decreased to 3 again (due to closed JCR session in case of
-   * retry)
+   * The Constant PROVIDER_REQUEST_ATTEMPTS. CLDINT-1051 increased from 3 to 5,
+   * later decreased to 3 again (due to closed JCR session in case of retry)
    */
   public static final int                  PROVIDER_REQUEST_ATTEMPTS        = 3;
 
@@ -422,16 +423,17 @@ public abstract class CloudDriveConnector extends BaseComponentPlugin {
    * Create {@link CloudProvider}. Used internally by constructor.
    * 
    * @return {@link CloudProvider}
-   * @throws ConfigurationException when cannot get initial parameters from runtime or configuration
-   *           (including error of getting current repository name)
+   * @throws ConfigurationException when cannot get initial parameters from
+   *           runtime or configuration (including error of getting current
+   *           repository name)
    */
   protected abstract CloudProvider createProvider() throws ConfigurationException;
 
   /**
-   * Authenticate an user using parameters from OAuth2 redirect (including code, state, error,
-   * error_description etc).
-   * As result an instance of {@link CloudUser} will be returned, in case of fail an exception will be thrown
-   * {@link CloudDriveException}.
+   * Authenticate an user using parameters from OAuth2 redirect (including code,
+   * state, error, error_description etc). As result an instance of
+   * {@link CloudUser} will be returned, in case of fail an exception will be
+   * thrown {@link CloudDriveException}.
    *
    * @param params {@link Map}
    * @return {@link CloudUser}
@@ -440,26 +442,30 @@ public abstract class CloudDriveConnector extends BaseComponentPlugin {
   protected abstract CloudUser authenticate(Map<String, String> params) throws CloudDriveException;
 
   /**
-   * Create Cloud Drive instance for given user. This instance will be connected to local storage
-   * under existing {@link Node} <code>driveRoot</code> by {@link CloudDrive#connect()} method.
-   * This node can be of any type, the creation procedure will add special nodetypes to it to allow CLoud
-   * Drive specifics.<br>
-   * To connect the drive use {@link CloudDrive#connect()}. Node will be actually saved by
-   * {@link CloudDrive#connect()} method.
+   * Create Cloud Drive instance for given user. This instance will be connected
+   * to local storage under existing {@link Node} <code>driveRoot</code> by
+   * {@link CloudDrive#connect()} method. This node can be of any type, the
+   * creation procedure will add special nodetypes to it to allow CLoud Drive
+   * specifics.<br>
+   * To connect the drive use {@link CloudDrive#connect()}. Node will be
+   * actually saved by {@link CloudDrive#connect()} method.
    *
    * @param user {@link CloudUser} connecting user
    * @param driveNode the drive node
-   * @return {@link CloudDrive} local Cloud Drive instance initialized to local JCR node.
+   * @return {@link CloudDrive} local Cloud Drive instance initialized to local
+   *         JCR node.
    * @throws CloudDriveException if drive error happens
    * @throws RepositoryException if storage error happens
    */
   protected abstract CloudDrive createDrive(CloudUser user, Node driveNode) throws CloudDriveException, RepositoryException;
 
   /**
-   * Load Cloud Drive from local storage under existing {@link Node} <code>driveRoot</code>.
+   * Load Cloud Drive from local storage under existing {@link Node}
+   * <code>driveRoot</code>.
    *
    * @param driveNode the drive node
-   * @return {@link CloudDrive} local Cloud Drive instance connected to local JCR node.
+   * @return {@link CloudDrive} local Cloud Drive instance connected to local
+   *         JCR node.
    * @throws CloudDriveException if drive error happens
    * @throws RepositoryException if storage error happens
    */

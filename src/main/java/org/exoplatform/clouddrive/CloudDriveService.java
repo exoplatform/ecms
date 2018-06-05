@@ -33,7 +33,8 @@ import javax.jcr.RepositoryException;
 public interface CloudDriveService {
 
   /**
-   * Authenticate an user to given cloud provider using OAuth2 authorization code.
+   * Authenticate an user to given cloud provider using OAuth2 authorization
+   * code.
    *
    * @param cloudProvider {@link CloudProvider} target provider
    * @param code {@link String} OAuth2 authorization code
@@ -44,12 +45,12 @@ public interface CloudDriveService {
   CloudUser authenticate(CloudProvider cloudProvider, String code) throws ProviderNotAvailableException, CloudDriveException;
 
   /**
-   * Authenticate an user to given cloud provider using OAuth2 parameters (including code, state, error,
-   * error_description etc).
+   * Authenticate an user to given cloud provider using OAuth2 parameters
+   * (including code, state, error, error_description etc).
    *
    * @param cloudProvider {@link CloudProvider} target provider
-   * @param params {@link Map} of data returned by OAuth2 authorization request (e.g. grabbed from the
-   *          redirect request)
+   * @param params {@link Map} of data returned by OAuth2 authorization request
+   *          (e.g. grabbed from the redirect request)
    * @return {@link CloudUser} user instance
    * @throws ProviderNotAvailableException the provider not available exception
    * @throws CloudDriveException the cloud drive exception
@@ -63,9 +64,10 @@ public interface CloudDriveService {
    * @param user {@link CloudUser}
    * @param driveNode {@link Node}, existing node
    * @return instance of {@link CloudDrive}
-   * @throws UserAlreadyConnectedException if user already connected to another node
-   * @throws CannotConnectDriveException if node cannot be connected due to incompatible existing content in
-   *           it
+   * @throws UserAlreadyConnectedException if user already connected to another
+   *           node
+   * @throws CannotConnectDriveException if node cannot be connected due to
+   *           incompatible existing content in it
    * @throws ProviderNotAvailableException the provider not available exception
    * @throws CloudDriveException the cloud drive exception
    * @throws RepositoryException the repository exception
@@ -78,24 +80,27 @@ public interface CloudDriveService {
                                                          RepositoryException;
 
   /**
-   * Find {@link CloudDrive} instance connected to given {@link Node}. If drive not found, if it exists but
-   * not connected to this node, or connected under another user - the {@code null} will be returned.
+   * Find {@link CloudDrive} instance connected to given {@link Node}. If drive
+   * not found, if it exists but not connected to this node, or connected under
+   * another user - the {@code null} will be returned.
    * 
    * @param node {@link Node}, user node
-   * @return {@link CloudDrive} or {@code null} if given Node isn't connected to cloud user.
+   * @return {@link CloudDrive} or {@code null} if given Node isn't connected to
+   *         cloud user.
    * @throws RepositoryException if storage exception happened
    */
   CloudDrive findDrive(Node node) throws RepositoryException;
 
   /**
-   * Find {@link CloudDrive} instance connected to {@link Node} pointed by given workspace and path. If drive
-   * not found, if it exists but not connected to this node, or connected under another user - the
-   * {@code null} will be returned.
+   * Find {@link CloudDrive} instance connected to {@link Node} pointed by given
+   * workspace and path. If drive not found, if it exists but not connected to
+   * this node, or connected under another user - the {@code null} will be
+   * returned.
    * 
    * @param workspace {@link String} node workspace
    * @param path {@link String} node path
-   * @return {@link CloudDrive} or {@code null} if node at given path not found or isn't connected to cloud
-   *         user.
+   * @return {@link CloudDrive} or {@code null} if node at given path not found
+   *         or isn't connected to cloud user.
    * @throws RepositoryException if storage exception happened
    */
   CloudDrive findDrive(String workspace, String path) throws RepositoryException;

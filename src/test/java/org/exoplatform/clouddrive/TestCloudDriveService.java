@@ -40,8 +40,17 @@ import org.exoplatform.clouddrive.exodrive.service.FileStore;
 import org.exoplatform.component.test.ConfigurationUnit;
 import org.exoplatform.component.test.ConfiguredBy;
 import org.exoplatform.component.test.ContainerScope;
+import org.exoplatform.container.PortalContainer;
+import org.exoplatform.services.jcr.RepositoryService;
+import org.exoplatform.services.jcr.ext.app.SessionProviderService;
+import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.security.Authenticator;
+import org.exoplatform.services.security.ConversationState;
+import org.exoplatform.services.security.Credential;
+import org.exoplatform.services.security.PasswordCredential;
+import org.exoplatform.services.security.UsernameCredential;
 
 /**
  * Created by The eXo Platform SAS.
@@ -54,13 +63,17 @@ import org.exoplatform.services.log.Log;
     @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/portal/configuration.xml"),
     @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/portal/test-clouddrive-configuration.xml") })
 /*
- * With this setup we still have an error in Root container, but, so far, it doesn't prevent the work (Oct 27, 2017, PLF 5.0.0-M27, CloudDrive 1.6.x)
- * 27.10.2017 17:55:25 *ERROR* [main] LiquibaseDataInitializer: Cannot find datasource java:/comp/env/exo-jpa_portal - Cause : 
- * Need to specify class name in environment or system property, or as an applet parameter, or in an application resource file:  
- * java.naming.factory.initial (LiquibaseDataInitializer.java, line 175)
- * javax.naming.NoInitialContextException: Need to specify class name in environment or system property, or as an applet parameter, 
- * or in an application resource file:  java.naming.factory.initial
- * */
+ * With this setup we still have an error in Root container, but, so far, it
+ * doesn't prevent the work (Oct 27, 2017, PLF 5.0.0-M27, CloudDrive 1.6.x)
+ * 27.10.2017 17:55:25 *ERROR* [main] LiquibaseDataInitializer: Cannot find
+ * datasource java:/comp/env/exo-jpa_portal - Cause : Need to specify class name
+ * in environment or system property, or as an applet parameter, or in an
+ * application resource file: java.naming.factory.initial
+ * (LiquibaseDataInitializer.java, line 175)
+ * javax.naming.NoInitialContextException: Need to specify class name in
+ * environment or system property, or as an applet parameter, or in an
+ * application resource file: java.naming.factory.initial
+ */
 public class TestCloudDriveService extends BaseCloudDriveTest {
 
   protected static final Log   LOG               = ExoLogger.getLogger(TestCloudDriveService.class);
@@ -70,7 +83,7 @@ public class TestCloudDriveService extends BaseCloudDriveTest {
   public static final String   USER2_NAME        = "user2";
 
   public static final String   FILE_NAME_PATTERN = "test_file";
-  
+
   protected CloudDriveService  cdService;
 
   protected Node               testRoot;
@@ -90,9 +103,6 @@ public class TestCloudDriveService extends BaseCloudDriveTest {
    */
   public void setUp() throws Exception {
     super.setUp();
-
-    testRoot = root.addNode("testCloudDriveService", "nt:folder");
-    root.save();
 
     cdService = (CloudDriveService) container.getComponentInstanceOfType(CloudDriveService.class);
 
@@ -155,6 +165,20 @@ public class TestCloudDriveService extends BaseCloudDriveTest {
 
     if (names.size() > 0) {
       fail("Expected nodes not exist: " + names);
+    }
+  }
+
+  protected void assertFilesExist(List<FileStore> files, String... expectedNames) {
+    List<String> names = Arrays.asList(expectedNames);
+    List<String> expected = new ArrayList<String>();
+    for (FileStore f : files) {
+      if (names.contains(f.getName())) {
+        expected.add(f.getName());
+      }
+    }
+
+    if (expected.size() != expectedNames.length) {
+      fail("Expected files not exist: " + expectedNames);
     }
   }
 

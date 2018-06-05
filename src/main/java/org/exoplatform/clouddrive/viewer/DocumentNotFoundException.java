@@ -19,14 +19,13 @@
 package org.exoplatform.clouddrive.viewer;
 
 /**
- * Document cannot be found in Viewer storage. It can be not created previously or removed for unknown reason.
- * It is not expected exception, thus it is instance of {@link RuntimeException}.<br>
- * 
+ * Document cannot be found in Viewer storage. It can be not created previously
+ * or removed for unknown reason. It is not expected exception, thus it is
+ * instance of {@link RuntimeException}.<br>
  * Created by The eXo Platform SAS
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
  * @version $Id: DocumentNotFoundException.java 00000 Nov 27, 2014 pnedonosko $
- * 
  */
 public class DocumentNotFoundException extends IllegalStateException {
 

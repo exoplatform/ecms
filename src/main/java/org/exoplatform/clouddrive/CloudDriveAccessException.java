@@ -19,8 +19,9 @@
 package org.exoplatform.clouddrive;
 
 /**
- * Indicates that an access to the drive has been revoked or changed by the user. To handle this
- * exception need obtain new access rights and retry the underlying operation.
+ * Indicates that an access to the drive has been revoked or changed by the
+ * user. To handle this exception need obtain new access rights and retry the
+ * underlying operation.
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
  * @version $Id: CloudDriveAccessException.java 00000 20 Nov 2012 peter $

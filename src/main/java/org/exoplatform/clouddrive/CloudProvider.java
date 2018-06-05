@@ -19,9 +19,7 @@
 package org.exoplatform.clouddrive;
 
 /**
- * Cloud Drive provider entity.
- * 
- * Created by The eXo Platform SAS.
+ * Cloud Drive provider entity. Created by The eXo Platform SAS.
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
  * @version $Id: CloudProvider.java 00000 Oct 4, 2012 pnedonosko $
@@ -64,7 +62,8 @@ public abstract class CloudProvider {
    * String with authentication URL.
    * 
    * @return String with valid authentication URL.
-   * @throws CloudDriveException when cannot build the auth url (e.g. cannot obtain current repository name)
+   * @throws CloudDriveException when cannot build the auth url (e.g. cannot
+   *           obtain current repository name)
    */
   public abstract String getAuthURL() throws CloudDriveException;
 
@@ -87,8 +86,8 @@ public abstract class CloudProvider {
   }
 
   /**
-   * Provider specific message for given JVM exception (Throwable). By default this method uses
-   * {@link Throwable#getMessage()}.
+   * Provider specific message for given JVM exception (Throwable). By default
+   * this method uses {@link Throwable#getMessage()}.
    *
    * @param error the error
    * @return String with the error message
@@ -98,8 +97,8 @@ public abstract class CloudProvider {
   }
 
   /**
-   * Provider specific message for given error string and description. By default this method returns
-   * concatenated error and description string.
+   * Provider specific message for given error string and description. By
+   * default this method returns concatenated error and description string.
    *
    * @param error the error
    * @param errorDescription the error description
@@ -144,7 +143,8 @@ public abstract class CloudProvider {
   }
 
   /**
-   * Tells if some operation against the provider service should be retried on failure. <br>
+   * Tells if some operation against the provider service should be retried on
+   * failure. <br>
    * This method for internal use.
    * 
    * @return boolean, {@code true} if need retry on operation failure.

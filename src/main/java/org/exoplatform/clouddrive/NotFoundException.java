@@ -20,13 +20,10 @@
 package org.exoplatform.clouddrive;
 
 /**
- * Resource not found on Cloud provider side.
- * 
- * Created by The eXo Platform SAS.
+ * Resource not found on Cloud provider side. Created by The eXo Platform SAS.
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
  * @version $Id: NotFoundException.java 00000 Apr 8, 2014 pnedonosko $
- * 
  */
 public class NotFoundException extends CloudDriveException {
 

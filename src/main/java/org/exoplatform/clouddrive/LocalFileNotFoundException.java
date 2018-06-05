@@ -21,12 +21,10 @@ package org.exoplatform.clouddrive;
 
 /**
  * Local cloud file canot be found by given search criteria (id or path).
- * 
  * Created by The eXo Platform SAS
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
  * @version $Id: LocalFileNotFoundException.java 00000 Jul 17, 2015 pnedonosko $
- * 
  */
 public class LocalFileNotFoundException extends CloudDriveException {
 

@@ -20,13 +20,11 @@
 package org.exoplatform.clouddrive;
 
 /**
- * Trashed file was actually removed on cloud provider. It means that the file should be also removed locally.
- * 
- * Created by The eXo Platform SAS
+ * Trashed file was actually removed on cloud provider. It means that the file
+ * should be also removed locally. Created by The eXo Platform SAS
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
  * @version $Id: FileTrashRemovedException.java 00000 Apr 11, 2014 pnedonosko $
- * 
  */
 public class FileTrashRemovedException extends CloudDriveException {
 

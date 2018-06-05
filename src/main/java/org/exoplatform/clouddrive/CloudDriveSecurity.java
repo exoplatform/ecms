@@ -24,28 +24,28 @@ import javax.jcr.RepositoryException;
 
 /**
  * Security operations applicable to {@link CloudDrive} instance. <br>
- * 
  * Created by The eXo Platform SAS
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
  * @version $Id: CloudDriveSecurity.java 00000 Aug 11, 2015 pnedonosko $
- * 
  */
 public interface CloudDriveSecurity {
 
   /**
    * Tells if sharing in cloud provider API supported.<br>
    * 
-   * @return <code>true</code> if sharing supported, <code>false</code> otherwise
+   * @return <code>true</code> if sharing supported, <code>false</code>
+   *         otherwise
    */
   boolean isSharingSupported();
 
   /**
-   * Share cloud file in cloud provider API. If sharing not supported {@link CloudDriveException} will be
-   * thrown.<br>
+   * Share cloud file in cloud provider API. If sharing not supported
+   * {@link CloudDriveException} will be thrown.<br>
    *
    * @param fileNode {@link Node} file node
-   * @param identities array of {@link String} with organization identities in eXo Platform
+   * @param identities array of {@link String} with organization identities in
+   *          eXo Platform
    * @throws RepositoryException the repository exception
    * @throws CloudDriveException the cloud drive exception
    * @see #isSharingSupported()

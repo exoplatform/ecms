@@ -18,19 +18,17 @@
  */
 package org.exoplatform.clouddrive.oauth2;
 
-import org.exoplatform.clouddrive.CloudDriveException;
-
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import org.exoplatform.clouddrive.CloudDriveException;
+
 /**
- * OAuth2 token data (access and refresh tokens).
- * 
- * Created by The eXo Platform SAS
+ * OAuth2 token data (access and refresh tokens). Created by The eXo Platform
+ * SAS
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
  * @version $Id: UserToken.java 00000 Sep 2, 2013 pnedonosko $
- * 
  */
 public abstract class UserToken {
 
@@ -85,7 +83,7 @@ public abstract class UserToken {
     this.refreshToken = refreshToken;
     this.expirationTime = expirationTime;
   }
-  
+
   /**
    * Store new OAuth2 token data.
    *
@@ -98,7 +96,7 @@ public abstract class UserToken {
     load(accessToken, refreshToken, expirationTime);
     fireListenersRefresh();
   }
-  
+
   /**
    * Clear current OAuth2 token data.
    *
@@ -110,13 +108,15 @@ public abstract class UserToken {
   }
 
   /**
-   * Import OAuth2 tokens from a new {@link UserToken} and unregister listeners of that instance.
+   * Import OAuth2 tokens from a new {@link UserToken} and unregister listeners
+   * of that instance.
    *
    * @param newToken {@link UserToken}
    * @throws CloudDriveException the cloud drive exception
    */
   public void merge(UserToken newToken) throws CloudDriveException {
-    newToken.removeListeners(); // May 4 2014, remove listeners on newToken (was on this instance)
+    newToken.removeListeners(); // May 4 2014, remove listeners on newToken (was
+                                // on this instance)
     store(newToken.getAccessToken(), newToken.getRefreshToken(), newToken.getExpirationTime());
   }
 
@@ -175,7 +175,7 @@ public abstract class UserToken {
       listener.onUserTokenRefresh(this);
     }
   }
-  
+
   /**
    * Fire listeners remove event.
    *

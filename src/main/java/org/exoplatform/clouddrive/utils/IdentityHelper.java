@@ -18,13 +18,13 @@
  */
 package org.exoplatform.clouddrive.utils;
 
-import org.exoplatform.services.jcr.access.AccessControlList;
-import org.exoplatform.services.security.IdentityConstants;
-
 import javax.jcr.Node;
 import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
+
+import org.exoplatform.services.jcr.access.AccessControlList;
+import org.exoplatform.services.security.IdentityConstants;
 
 /**
  * Created by The eXo Platform SAS.
@@ -53,8 +53,8 @@ public class IdentityHelper {
   }
 
   /**
-   * Compare user names and return <code>true</code> if they match. Also will be <code>true</code> if one of
-   * user names is system account id or root.
+   * Compare user names and return <code>true</code> if they match. Also will be
+   * <code>true</code> if one of user names is system account id or root.
    * 
    * @param user1 {@link String}
    * @param user2 {@link String}
@@ -66,14 +66,17 @@ public class IdentityHelper {
   }
 
   /**
-   * Make the node owned by the current user (user of the node session) if current owner is a system account.
-   * Does nothing otherwise.
+   * Make the node owned by the current user (user of the node session) if
+   * current owner is a system account. Does nothing otherwise.
    *
-   * @param node {@link Node} target node, its session will be used to set a new (current) owner
-   * @param systemSession {@link Session} system session, it will be used to reset the current owner
+   * @param node {@link Node} target node, its session will be used to set a new
+   *          (current) owner
+   * @param systemSession {@link Session} system session, it will be used to
+   *          reset the current owner
    * @return {@link Node} fixed node (same as in the given in the parameter)
-   * @throws PathNotFoundException if exo:owner property cannot be found on exo:owneable node, or if the node
-   *           cannot be found by path via system session.
+   * @throws PathNotFoundException if exo:owner property cannot be found on
+   *           exo:owneable node, or if the node cannot be found by path via
+   *           system session.
    * @throws RepositoryException the repository exception
    */
   public static Node ensureOwned(Node node, Session systemSession) throws PathNotFoundException, RepositoryException {
@@ -82,13 +85,15 @@ public class IdentityHelper {
     if (!currentUser.equals(IdentityHelper.SYSTEM_USER_ID)) {
       if (node.isNodeType(EXO_OWNEABLE) && node.getProperty(EXO_USER).getString().equals(IdentityHelper.SYSTEM_USER_ID)) {
         // owned not by the drive user
-        // we need this as it may happen with ECMS that the node will be owned by system account
+        // we need this as it may happen with ECMS that the node will be owned
+        // by system account
         // remove in system session
         Node snode = (Node) systemSession.getItem(node.getPath());
         snode.removeMixin(EXO_OWNEABLE);
         snode.save();
-        // FIXME this will remove pending changes related to the node and childs (e.g. added mixin)
-        node.refresh(true); 
+        // FIXME this will remove pending changes related to the node and childs
+        // (e.g. added mixin)
+        node.refresh(true);
         // add in current user session
         node.addMixin(EXO_OWNEABLE);
         node.save();
