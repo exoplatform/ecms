@@ -28,6 +28,7 @@ import org.exoplatform.services.cms.link.NodeFinder;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
+import org.exoplatform.services.jcr.util.Text;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
@@ -149,12 +150,22 @@ public class NodeFinderImpl implements NodeFinder {
    * @param giveTarget Indicates if the target must be returned in case the item is a link
    * @return the item corresponding to the path
    */
-  private Item getItem(Session session,
+  public Item getItem(Session session,
                        String absPath,
                        boolean giveTarget,
                        int fromIdx,
                        boolean system) throws PathNotFoundException, RepositoryException {
-    if (session.itemExists(absPath)) {
+    if(absPath.contains("\\'")) {
+      absPath = absPath.replaceAll("\\\\'", "'");
+    }
+
+    boolean itemExists = session.itemExists(absPath);
+    if (!itemExists && absPath.contains("%") && session.itemExists(Text.unescapeIllegalJcrChars(absPath))) {
+      absPath = Text.unescapeIllegalJcrChars(absPath);
+      itemExists = session.itemExists(absPath);
+    }
+
+    if (itemExists) {
       // The item corresponding to absPath can be found
       Item item = session.getItem(absPath);
       if (giveTarget && linkManager_.isLink(item)) {
@@ -204,7 +215,7 @@ public class NodeFinderImpl implements NodeFinder {
    * @param workspace
    * @throws RepositoryException
    */
-  private Session getSession(ManageableRepository manageableRepository, String workspace) throws RepositoryException {
+  public Session getSession(ManageableRepository manageableRepository, String workspace) throws RepositoryException {
     SessionProviderService service = WCMCoreUtils.getService(SessionProviderService.class);
     return service.getSessionProvider(null).getSession(workspace, manageableRepository);
   }
@@ -214,9 +225,8 @@ public class NodeFinderImpl implements NodeFinder {
    *
    * @param splitString
    * @param toIdx
-   * @throws NullPointerException, ArrayIndexOutOfBoundsException
    */
-  private String makePath(String[] splitString, int toIdx) {
+  public String makePath(String[] splitString, int toIdx) {
     StringBuilder buffer = new StringBuilder(1024);
     for(int i = 0; i <= toIdx; i++) {
       buffer.append('/').append(splitString[i]);
