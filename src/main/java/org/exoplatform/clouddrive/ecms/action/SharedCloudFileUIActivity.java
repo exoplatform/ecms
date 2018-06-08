@@ -1,6 +1,6 @@
 
 /*
- * Copyright (C) 2003-2016 eXo Platform SAS.
+ * Copyright (C) 2003-2018 eXo Platform SAS.
  *
  * This is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as
@@ -19,15 +19,18 @@
  */
 package org.exoplatform.clouddrive.ecms.action;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TimeZone;
 
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 
 import org.apache.commons.io.FileUtils;
-
 import org.exoplatform.clouddrive.CloudDrive;
 import org.exoplatform.clouddrive.CloudDriveService;
 import org.exoplatform.clouddrive.CloudFile;
@@ -104,6 +107,13 @@ public class SharedCloudFileUIActivity extends SharedFileUIActivity {
   @Override
   protected double getFileSize(Node node) {
     CloudFile file = cloudFile(node);
+    // XXX In PLF 4.4.4 shared files appear w/o small preview in activity stream
+    // -
+    // this done by size 0 (template prints preview for size > 0)
+    // But we send real size anyway, as we want show an icon (which may describe
+    // a drive type, like gdoc icon)
+    // and in JS we'll remove the click action and Preview button.
+    // return file != null ? 0 : super.getFileSize(node);
     return file != null ? (file.getSize() > 0 ? file.getSize() : 1) : super.getFileSize(node);
   }
 
@@ -156,8 +166,7 @@ public class SharedCloudFileUIActivity extends SharedFileUIActivity {
     if (file != null) {
       // In PLF 5.0 we need fix the download URL link in Javascript to open it
       // in new window
-      // return new
-      // StringBuilder("javascript:window.open('").append(file.getLink()).append("')").toString();
+      // return new StringBuilder("javascript:window.open(\\'").append(file.getLink()).append("\\')").toString();
       return file.getLink();
     } else {
       return super.getDownloadLink(i);
@@ -187,6 +196,31 @@ public class SharedCloudFileUIActivity extends SharedFileUIActivity {
       }
     }
     return super.isFileSupportPreview(data);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected String getDocAuthor(Node node) {
+    CloudFile file = cloudFile(node);
+    return file != null ? getUserFullName(file.getAuthor()) : super.getDocAuthor(node);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected String getDocUpdateDate(Node node) {
+    CloudFile file = cloudFile(node);
+    if (file != null) {
+      Calendar modified = file.getModifiedDate();
+      TimeZone tz = modified.getTimeZone();
+      ZoneId zid = tz == null ? ZoneId.systemDefault() : tz.toZoneId();
+      LocalDateTime parsedDate = LocalDateTime.ofInstant(modified.toInstant(), zid);
+      return parsedDate.format(getDateTimeFormatter());
+    }
+    return super.getDocUpdateDate(node);
   }
 
   // ************* internals *************
@@ -225,6 +259,25 @@ public class SharedCloudFileUIActivity extends SharedFileUIActivity {
                                                              // docPath
     }
     return null;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public String getUserFullName(String userName) {
+    // In different cloud drives user name can be a full name or an user account
+    // name, which itself can be the same as eXo user name or an email, thus we
+    // do the best to show a full name and if not possible show it as is.
+    if (userName.indexOf(' ') == -1 && userName.indexOf('@') == -1) {
+      // Assume it's eXo user name...
+      String fullName = super.getUserFullName(userName);
+      if (fullName == null || fullName.length() == 0) {
+        fullName = userName; // it is not
+      }
+      return fullName;
+    } else {
+      return userName;
+    }
   }
 
 }
