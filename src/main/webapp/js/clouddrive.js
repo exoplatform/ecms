@@ -1709,7 +1709,7 @@
 						openOn.push($title.find("a.dowload-link"));
 					}
 
-					// fix activity file views: Download icon, text and link
+					// fix activity file preview: Download icon, text and link
 					var $activityDownload = $("#UIDocumentPreview .downloadBtn>a");
 					if ($activityDownload.length > 0) {
 						iconColor = "uiIconWhite";
@@ -1864,17 +1864,28 @@
 		};
 
 		var initActivity = function() {
-			// Remove Download link all cloud file activities
+			// Remove Download link in cloud file activities, remove Preview button and such link on the icon
+			// If description empty - remove this element to do not eat space by empty bar.
 			try {
 				$("i.uiCloudFileActivity").each(function() {
 					var $elem = $(this);
 					// five parents higher in DOM we  have ActivityContextBox div
-					var $i = $elem.parent().parent().parent().parent().parent().find(".actionBar>.statusAction i.uiIconDownload");
+					var $media = $elem.parent().parent();
+					var isMediaContent = $media.is(".mediaContent");
+					$media.removeClass("mediaContent").removeAttr("onclick");
+					$media.children("a").removeAttr("href");
+					$media.find("button.btn.doc-preview-thumbnail-footer").hide();
+					var $description = $media.siblings(".text").find(".descriptionText");
+					if ($description.text().length == 0) {
+						$description.remove();
+					}
+					var $i = $media.parent().parent().parent().find(".actionBar>.statusAction i.uiIconDownload");
 					$i.parent().parent().hide();
-					// TODO show Open On PROVIDER link? 
-					//$a.text(" " + openOnProvider);
-					//$i.attr("class", "uiIcon16x16CloudFile-" + drive.provider.id);
-					//$a.prepend($i);
+					// ensure icon shown not a thumbnail (as it's not supported by the core)
+					if (isMediaContent) {
+						$media.children("span").children("img").parent().hide();
+						$media.children("span.fallbackImage").show();
+					}
 				});
 			} catch(e) {
 				utils.log("Error initializing activity stream " + e, e);
