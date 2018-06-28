@@ -364,42 +364,8 @@
 			                </collection>
 			              </field>   			               
 	              	</object>
-              	</value>              		          
-                <value>               
-                  <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$JcrPath">                 
-                    <field  name="alias"><string>exoApplicationDataNode</string></field>
-                    <field  name="path"><string>/Application Data</string></field>
-                    <field name="mixinTypes">
-                      <collection type="java.util.ArrayList">
-                        <value><string>exo:hiddenable</string></value>
-                      </collection>
-                    </field>
-                    <field name="permissions">
-                      <collection type="java.util.ArrayList">               
-                        <value>                            
-                          <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$Permission">             
-                            <field name="identity"><string>*:/platform/administrators</string></field>
-                            <field name="read"><string>true</string></field>                
-                            <field name="addNode"><string>true</string></field>                
-                            <field name="setProperty"><string>true</string></field>                
-                            <field name="remove"><string>true</string></field>                
-                          </object>  
-                        </value>
-                        <value>                            
-                          <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$Permission">             
-                            <field name="identity"><string>*:/platform/users</string></field>
-                            <field name="read"><string>true</string></field>                
-                            <field name="addNode"><string>true</string></field>                
-                            <field name="setProperty"><string>true</string></field>                
-                            <field name="remove"><string>true</string></field>                
-                          </object>  
-                        </value>
-                      </collection>
-                    </field>                       
-                  </object>
-                </value>
-                
-                <value>               
+              	</value>
+                <value>
                   <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$JcrPath">                 
                     <field  name="alias"><string>exoPublicTagNode</string></field>
                     <field  name="path"><string>/tags</string></field>
