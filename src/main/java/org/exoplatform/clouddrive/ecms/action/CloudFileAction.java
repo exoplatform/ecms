@@ -38,6 +38,7 @@ import org.exoplatform.ecm.webui.component.explorer.rightclick.manager.PasteMana
 import org.exoplatform.ecm.webui.utils.PermissionUtil;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.link.LinkManager;
+import org.exoplatform.services.jcr.access.PermissionType;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.organization.Group;
@@ -45,6 +46,7 @@ import org.exoplatform.services.organization.OrganizationService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.social.core.space.model.Space;
 import org.exoplatform.social.core.space.spi.SpaceService;
+import org.exoplatform.wcm.ext.component.document.service.IShareDocumentService;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.web.application.RequestContext;
 import org.exoplatform.webui.application.WebuiRequestContext;
@@ -292,19 +294,30 @@ public class CloudFileAction {
                   String srcWorkspace = srcNode.getSession().getWorkspace().getName();
                   if (srcWorkspace.equals(destWorkspace)) {
                     // need create symlink into destNode
-                    if (groupId != null) {
+                    if (groupId != null && destSpace != null) {
                       // it's link in group documents (e.g. space documents):
                       // need share with the group
-                      String[] driveIdentity = documentsDrive.getAllPermissions();
-                      actions.shareCloudFile(srcNode, srcLocal, driveIdentity);
-                      this.link = actions.linkFile(srcNode, destNode, groupId);
-                      actions.setAllPermissions(link, driveIdentity);
+                      IShareDocumentService shareService = WCMCoreUtils.getService(IShareDocumentService.class);
+                      shareService.publishDocumentToSpace(groupId, srcNode, "", PermissionType.READ);
+                      // TODO cleanup use of deprecated methods
+                      // String[] driveIdentity =
+                      // documentsDrive.getAllPermissions();
+                      // actions.shareCloudFile(srcNode, srcLocal,
+                      // driveIdentity);
+                      // this.link = actions.linkFile(srcNode, destNode,
+                      // groupId);
+                      // actions.setAllPermissions(link, driveIdentity);
+                      linksCreated++;
                     } else {
-                      this.link = actions.linkFile(srcNode, destNode, null);
+                      // else, since 1.6.0 we don't support sharing cloud files
+                      // to non space groups (due to PLF5 UI limitation in
+                      // ECMS's UIShareDocuments)
+                      throw new CloudFileActionException("Linking to not space groups not supported for Cloud Drive files. "
+                          + srcWorkspace + ":" + srcPath + " -> " + destWorkspace + ":" + destPath,
+                                                         new ApplicationMessage("CloudFile.msg.FileLinksNotSupportedToThisDestination",
+                                                                                null,
+                                                                                ApplicationMessage.ERROR));
                     }
-                    // TODO can we provider a comment from real user?
-                    actions.postSharedActivity(srcNode, link, "");
-                    linksCreated++;
                   } else {
                     // else, we don't support cross-workspaces paste for cloud
                     // drive
@@ -328,16 +341,7 @@ public class CloudFileAction {
                   }
                 } else {
                   // TODO implement support copy/move to another drive
-                  // TODO if implement, do we need inform activities (via
-                  // ContentMovedActivityListener etc)?
-                  // if (activityService.isAcceptedNode(desNode) ||
-                  // desNode.getPrimaryNodeType().getName().equals(NodetypeConstant.NT_FILE))
-                  // {
-                  // listenerService.broadcast(ActivityCommonService.NODE_MOVED_ACTIVITY,
-                  // desNode,
-                  // desNode.getPath());
-                  // }
-                  // TODO for support of move also need refresh paths of all
+                  // For support of move also need refresh paths of all
                   // items in clipboard to reflect the
                   // moved parents, see PasteManageComponent.updateClipboard()
                   throw new CloudFileActionException("Copy or move of cloud file to another cloud drive not supported: " + srcPath
@@ -348,7 +352,7 @@ public class CloudFileAction {
                 }
               } // otherwise, let original code to copy the file to cloud drive
                 // sub-tree
-              // TODO do links need special handling for copy-to-drive?)
+              // TODO do links need special handling for copy-to-drive?
             }
           }
 

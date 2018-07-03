@@ -54,7 +54,9 @@ import org.exoplatform.clouddrive.CloudDriveStorage.Change;
 import org.exoplatform.clouddrive.DriveRemovedException;
 import org.exoplatform.clouddrive.NotCloudDriveException;
 import org.exoplatform.clouddrive.ThreadExecutor;
+import org.exoplatform.clouddrive.jcr.JCRLocalCloudDrive;
 import org.exoplatform.clouddrive.jcr.NodeFinder;
+import org.exoplatform.ecm.connector.platform.ManageDocumentService;
 import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.CmsService;
 import org.exoplatform.services.cms.documents.TrashService;
@@ -62,6 +64,7 @@ import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.drives.ManageDriveService;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.jcr.RepositoryService;
+import org.exoplatform.services.jcr.access.AccessControlEntry;
 import org.exoplatform.services.jcr.access.PermissionType;
 import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.jcr.core.ManageableRepository;
@@ -86,26 +89,26 @@ import org.exoplatform.web.application.ApplicationMessage;
  */
 public class CloudFileActionService implements Startable {
 
+  /** The Constant ECD_CLOUDFILELINK. */
+  public static final String      ECD_CLOUDFILELINK        = "ecd:cloudFileLink";
+
+  /** The Constant ECD_SHAREIDENTITY. */
+  public static final String      ECD_SHAREIDENTITY        = "ecd:shareIdentity";
+
+  /** The Constant SHARE_CLOUD_FILES_SPACES. */
+  public static final String      SHARE_CLOUD_FILES_SPACES = "sharecloudfiles:spaces";
+
   /** The Constant LOG. */
   protected static final Log      LOG                      = ExoLogger.getLogger(CloudFileActionService.class);
 
   /** The Constant SPACES_GROUP. */
   protected static final String   SPACES_GROUP             = "spaces";
 
-  /** The Constant SHARE_CLOUD_FILES_SPACES. */
-  protected static final String   SHARE_CLOUD_FILES_SPACES = "sharecloudfiles:spaces";
-
   /** The Constant EXO_OWNEABLE. */
   protected static final String   EXO_OWNEABLE             = "exo:owneable";
 
   /** The Constant EXO_PRIVILEGEABLE. */
   protected static final String   EXO_PRIVILEGEABLE        = "exo:privilegeable";
-
-  /** The Constant ECD_CLOUDFILELINK. */
-  protected static final String   ECD_CLOUDFILELINK        = "ecd:cloudFileLink";
-
-  /** The Constant ECD_SHAREIDENTITY. */
-  protected static final String   ECD_SHAREIDENTITY        = "ecd:shareIdentity";
 
   /** The Constant MIX_VERSIONABLE. */
   protected static final String   MIX_VERSIONABLE          = "mix:versionable";
@@ -117,7 +120,8 @@ public class CloudFileActionService implements Startable {
   protected static final String[] READER_PERMISSION        = new String[] { PermissionType.READ };
 
   /** The Constant MANAGER_PERMISSION. */
-  protected static final String[] MANAGER_PERMISSION       = new String[] { PermissionType.READ, PermissionType.REMOVE };
+  protected static final String[] MANAGER_PERMISSION       = new String[] { PermissionType.READ, PermissionType.REMOVE,
+      PermissionType.SET_PROPERTY };
 
   /**
    * Act on ecd:cloudFileLinkGroup property removal on a cloud file symlink and
@@ -145,10 +149,9 @@ public class CloudFileActionService implements Startable {
               String identity = removedShared.get(cloudFileUUID);
               if (identity != null) {
                 // was marked by RemoveCloudFileLinkAction
-                Session session = systemSession();
                 try {
-                  Node fileNode = session.getNodeByUUID(cloudFileUUID);
-                  CloudDrive localDrive = cloudDrive.findDrive(fileNode);
+                  Node fileNode = systemSession().getNodeByUUID(cloudFileUUID);
+                  CloudDrive localDrive = cloudDrives.findDrive(fileNode);
                   if (localDrive != null) {
                     if (getCloudFileLinks(fileNode, identity, true).getSize() == 0) {
                       // unshare only if no more links found for given identity
@@ -156,15 +159,15 @@ public class CloudFileActionService implements Startable {
                       DriveData documentDrive = null;
                       if (identity.startsWith("/")) {
                         // it's group drive
-                        documentDrive = documentDrives.getDriveByName(identity.replace('/', '.'));
+                        documentDrive = getGroupDrive(identity);
                         if (documentDrive != null) {
-                          unshareCloudFile(fileNode, localDrive, documentDrive.getAllPermissions());
+                          removeCloudFilePermission(fileNode, localDrive, new StringBuilder("*:").append(identity).toString());
                         }
                       } else {
                         // try as user drive
                         documentDrive = getUserDrive(identity);
                         if (documentDrive != null) {
-                          unshareCloudFile(fileNode, localDrive, identity);
+                          removeCloudFilePermission(fileNode, localDrive, identity);
                         }
                       }
                       if (documentDrive == null) {
@@ -182,8 +185,6 @@ public class CloudFileActionService implements Startable {
                   LOG.warn("Cloud File unsharing not possible for not cloud drives: " + e.getMessage() + ". Path: " + eventPath);
                 } catch (Throwable e) {
                   LOG.error("Cloud File unsharing error: " + e.getMessage() + ". Path: " + eventPath, e);
-                } finally {
-                  session.logout();
                 }
               }
             }
@@ -192,6 +193,26 @@ public class CloudFileActionService implements Startable {
           LOG.error("Symlink removal listener error: " + e.getMessage(), e);
         }
       }
+    }
+
+    protected void removeCloudFilePermission(final Node fileNode,
+                                             final CloudDrive cloudDrive,
+                                             final String sharedIndentity) throws NotCloudDriveException,
+                                                                           DriveRemovedException,
+                                                                           RepositoryException,
+                                                                           CloudDriveException {
+      if (LOG.isDebugEnabled()) {
+        LOG.debug("Unsharing Cloud File " + fileNode.getPath() + " of " + cloudDrive + " from " + " " + sharedIndentity);
+      }
+      // avoid firing Cloud Drive synchronization
+      CloudDriveStorage cdStorage = (CloudDriveStorage) cloudDrive;
+      cdStorage.localChange(new Change<Void>() {
+        @Override
+        public Void apply() throws RepositoryException {
+          removePermission(fileNode, sharedIndentity);
+          return null;
+        }
+      });
     }
   }
 
@@ -212,12 +233,11 @@ public class CloudFileActionService implements Startable {
         Event event = events.nextEvent();
         try {
           final String eventPath = event.getPath();
-          Session session = systemSession();
-          Item linkItem = session.getItem(eventPath);
+          Item linkItem = systemSession().getItem(eventPath);
           if (linkItem.isNode() && linkManager.isLink(linkItem)) {
             try {
               Node fileNode = linkManager.getTarget((Node) linkItem, true);
-              CloudDrive localDrive = cloudDrive.findDrive(fileNode);
+              CloudDrive localDrive = cloudDrives.findDrive(fileNode);
               if (localDrive != null) {
                 if (localDrive.isConnected()) {
                   if (LOG.isDebugEnabled()) {
@@ -240,6 +260,8 @@ public class CloudFileActionService implements Startable {
                           if (linkItem.isNode()) {
                             Node linkNode = (Node) linkItem;
                             Node parent = linkNode.getParent();
+                            // FYI target node permissions will be updated by
+                            // LinkRemoveListener
                             linkNode.remove();
                             parent.save();
                             if (LOG.isDebugEnabled()) {
@@ -286,7 +308,7 @@ public class CloudFileActionService implements Startable {
   }
 
   /** The cloud drive. */
-  protected final CloudDriveService      cloudDrive;
+  protected final CloudDriveService      cloudDrives;
 
   /** The jcr service. */
   protected final RepositoryService      jcrService;
@@ -321,7 +343,7 @@ public class CloudFileActionService implements Startable {
   protected final Map<String, String>    removedLinks   = new ConcurrentHashMap<String, String>();
 
   /**
-   * Cloud file UUID to shared group name mappings.
+   * Cloud file UUID to shared group/user name mappings.
    */
   protected final Map<String, String>    removedShared  = new ConcurrentHashMap<String, String>();
 
@@ -344,7 +366,7 @@ public class CloudFileActionService implements Startable {
   /**
    * Instantiates a new cloud file action service.
    *
-   * @param cloudDrive the cloud drive
+   * @param cloudDrives the cloud drive
    * @param jcrService the jcr service
    * @param sessionProviders the session providers
    * @param orgService the org service
@@ -356,7 +378,7 @@ public class CloudFileActionService implements Startable {
    * @param listeners the listeners
    * @param cmsService the cms service
    */
-  public CloudFileActionService(CloudDriveService cloudDrive,
+  public CloudFileActionService(CloudDriveService cloudDrives,
                                 RepositoryService jcrService,
                                 SessionProviderService sessionProviders,
                                 OrganizationService orgService,
@@ -367,7 +389,7 @@ public class CloudFileActionService implements Startable {
                                 TrashService trash,
                                 ListenerService listeners,
                                 CmsService cmsService) {
-    this.cloudDrive = cloudDrive;
+    this.cloudDrives = cloudDrives;
     this.jcrService = jcrService;
     this.orgService = orgService;
     this.sessionProviders = sessionProviders;
@@ -404,6 +426,26 @@ public class CloudFileActionService implements Startable {
   }
 
   /**
+   * Checks if is group path.
+   *
+   * @param path the path
+   * @return true, if is group path
+   */
+  public boolean isGroupPath(String path) {
+    return path.startsWith(groupsPath);
+  }
+
+  /**
+   * Checks if is user path.
+   *
+   * @param path the path
+   * @return true, if is user path
+   */
+  public boolean isUserPath(String path) {
+    return path.startsWith(usersPath);
+  }
+
+  /**
    * Link share to user.
    *
    * @param fileNode the file node
@@ -412,6 +454,7 @@ public class CloudFileActionService implements Startable {
    * @return the node
    * @throws Exception the exception
    */
+  @Deprecated
   public Node linkShareToUser(Node fileNode, CloudDrive fileDrive, String userName) throws Exception {
     Node userDocs = getUserPublicNode(userName);
 
@@ -427,6 +470,17 @@ public class CloudFileActionService implements Startable {
       link = links.nextNode();
     }
     return link;
+  }
+
+  /**
+   * Gets the group drive.
+   *
+   * @param groupId the group id
+   * @return the space drive
+   * @throws Exception the exception
+   */
+  public DriveData getGroupDrive(String groupId) throws Exception {
+    return documentDrives.getDriveByName(groupId.replace('/', '.'));
   }
 
   /**
@@ -476,21 +530,70 @@ public class CloudFileActionService implements Startable {
   }
 
   /**
-   * Removes the links.
+   * Share cloud file to an user by its ID.
    *
    * @param fileNode the file node
-   * @param shareIdentity the share identity
+   * @param userId the user id
    * @throws RepositoryException the repository exception
    */
-  public void removeLinks(Node fileNode, String shareIdentity) throws RepositoryException {
+  public void shareToUser(Node fileNode, String userId) throws RepositoryException {
+    setUserFilePermission(fileNode, userId, true);
+    fileNode.save();
+    // initialize files links in the user docs
+    try {
+      DriveData userDrive = getUserDrive(userId);
+      if (userDrive != null) {
+        initCloudFileLink(fileNode, userId, userDrive.getHomePath());
+      }
+    } catch (Exception e) {
+      LOG.error("Error reading Cloud File links of " + fileNode.getPath(), e);
+    }
+  }
+
+  public void unshareToUser(Node fileNode, String userId) throws RepositoryException {
     // remove all copied/linked symlinks from the original shared to given
     // identity (or all if it is null)
-    for (NodeIterator niter = getCloudFileLinks(fileNode, shareIdentity, true); niter.hasNext();) {
-      Node linkNode = niter.nextNode();
-      Node parent = linkNode.getParent();
-      linkNode.remove();
-      parent.save();
+    removeLinks(fileNode, userId);
+    // remove sharing permissions
+    removePermission(fileNode, userId);
+  }
+
+  /**
+   * Share cloud file to a group by its ID.
+   *
+   * @param fileNode the file node
+   * @param groupId the group id
+   * @throws RepositoryException the repository exception
+   */
+  public void shareToGroup(Node fileNode, String groupId) throws RepositoryException {
+    // set permission on the cloud file
+    setGroupFilePermission(fileNode, groupId, true);
+    fileNode.save();
+    // initialize files links in space docs
+    try {
+      DriveData documentDrive = getGroupDrive(groupId);
+      if (documentDrive != null) {
+        initCloudFileLink(fileNode, groupId, documentDrive.getHomePath());
+      }
+    } catch (Exception e) {
+      LOG.error("Error reading Cloud File links of " + fileNode.getPath(), e);
     }
+  }
+
+  /**
+   * Unshare to space.
+   *
+   * @param fileNode the file node
+   * @param groupId the group id
+   * @throws RepositoryException the repository exception
+   */
+  public void unshareToSpace(Node fileNode, String groupId) throws RepositoryException {
+    String identity = new StringBuilder("*:").append(groupId).toString();
+    // remove all copied/linked symlinks from the original shared to given
+    // identity (or all if it is null)
+    removeLinks(fileNode, identity);
+    // remove sharing permissions
+    removePermission(fileNode, identity);
   }
 
   /**
@@ -500,6 +603,7 @@ public class CloudFileActionService implements Startable {
    * @return the node drive
    * @throws Exception the exception
    */
+  @Deprecated // not complete logic
   public DriveData getNodeDrive(Node node) throws Exception {
     String groupId = getDriveNameFromPath(node.getPath());
     // TODO in case of user drive its home path may be not filled with actual
@@ -556,6 +660,7 @@ public class CloudFileActionService implements Startable {
    * @throws RepositoryException the repository exception
    * @throws CloudDriveException the cloud drive exception
    */
+  @Deprecated
   public Node linkFile(Node srcNode, Node destNode, String destIdentity) throws NotCloudDriveException,
                                                                          DriveRemovedException,
                                                                          RepositoryException,
@@ -624,6 +729,7 @@ public class CloudFileActionService implements Startable {
    * @throws RepositoryException the repository exception
    * @throws CloudDriveException the cloud drive exception
    */
+  @Deprecated
   public void shareCloudFile(final Node fileNode,
                              final CloudDrive cloudDrive,
                              final String... identities) throws NotCloudDriveException,
@@ -666,6 +772,7 @@ public class CloudFileActionService implements Startable {
    * @throws RepositoryException the repository exception
    * @throws CloudDriveException the cloud drive exception
    */
+  @Deprecated
   public void unshareCloudFile(final Node fileNode,
                                final CloudDrive cloudDrive,
                                final String... identities) throws NotCloudDriveException,
@@ -700,6 +807,7 @@ public class CloudFileActionService implements Startable {
    * @return the string
    * @throws CloudDriveException the cloud drive exception
    */
+  @Deprecated
   public String postSharedActivity(Node node, Node link, String comment) throws CloudDriveException {
     try {
       Utils.setActivityType(SHARE_CLOUD_FILES_SPACES);
@@ -742,26 +850,21 @@ public class CloudFileActionService implements Startable {
    * @throws RepositoryException the repository exception
    */
   protected void listenFileLinks() throws RepositoryException {
-    Session session = systemSession();
-    try {
-      ObservationManager observation = session.getWorkspace().getObservationManager();
-      observation.addEventListener(new LinkTrashListener(),
-                                   Event.NODE_ADDED,
-                                   null,
-                                   false,
-                                   null,
-                                   new String[] { EXO_TRASHFOLDER },
-                                   false);
-      observation.addEventListener(new LinkRemoveListener(),
-                                   Event.PROPERTY_REMOVED,
-                                   null,
-                                   false,
-                                   null,
-                                   new String[] { ECD_CLOUDFILELINK },
-                                   false);
-    } finally {
-      session.logout();
-    }
+    ObservationManager observation = systemSession().getWorkspace().getObservationManager();
+    observation.addEventListener(new LinkTrashListener(),
+                                 Event.NODE_ADDED,
+                                 null,
+                                 false,
+                                 null,
+                                 new String[] { EXO_TRASHFOLDER },
+                                 false);
+    observation.addEventListener(new LinkRemoveListener(),
+                                 Event.PROPERTY_REMOVED,
+                                 null,
+                                 false,
+                                 null,
+                                 new String[] { ECD_CLOUDFILELINK },
+                                 false);
   }
 
   /**
@@ -777,6 +880,7 @@ public class CloudFileActionService implements Startable {
    * @throws AccessControlException the access control exception
    * @throws RepositoryException the repository exception
    */
+  @Deprecated
   protected void setPermissions(Node node, String... identities) throws AccessControlException, RepositoryException {
     setPermissions(node, true, true, identities);
   }
@@ -800,6 +904,7 @@ public class CloudFileActionService implements Startable {
    * @throws AccessControlException the access control exception
    * @throws RepositoryException the repository exception
    */
+  @Deprecated
   protected void setPermissions(Node node, boolean deep, boolean forcePrivilegeable, String... identities)
                                                                                                            throws AccessControlException,
                                                                                                            RepositoryException {
@@ -815,17 +920,10 @@ public class CloudFileActionService implements Startable {
     } // else, already exo:privilegeable
     if (setPermissions) {
       for (String identity : identities) {
-        // It is for special debug cases
-        // if (LOG.isDebugEnabled()) {
-        // LOG.debug(">>> hasPermission " + identity + " identity: "
-        // + IdentityHelper.hasPermission(target.getACL(), identity,
-        // PermissionType.READ));
-        // }
         String[] ids = identity.split(":");
         if (ids.length == 2) {
           // it's group and we want allow given identity read only and
-          // additionally let managers remove the
-          // link
+          // additionally let managers remove the link
           String managerMembership;
           try {
             MembershipType managerType = orgService.getMembershipTypeHandler().findMembershipType("manager");
@@ -866,6 +964,7 @@ public class CloudFileActionService implements Startable {
    * @throws AccessControlException the access control exception
    * @throws RepositoryException the repository exception
    */
+  @Deprecated
   protected void removePermissions(Node node, boolean deep, String... identities) throws AccessControlException,
                                                                                   RepositoryException {
     ExtendedNode target = (ExtendedNode) node;
@@ -920,6 +1019,7 @@ public class CloudFileActionService implements Startable {
    * @throws AccessControlException the access control exception
    * @throws RepositoryException the repository exception
    */
+  @Deprecated
   protected void setParentPermissions(Node parent, String... identities) throws AccessControlException, RepositoryException {
     // first we go through all sub-files/folders and enabled exo:privilegeable,
     // this will copy current
@@ -945,6 +1045,7 @@ public class CloudFileActionService implements Startable {
    * @throws AccessControlException the access control exception
    * @throws RepositoryException the repository exception
    */
+  @Deprecated
   protected void setAllPermissions(Node node, String... identities) throws AccessControlException, RepositoryException {
     ExtendedNode target = (ExtendedNode) node;
     if (target.canAddMixin(EXO_PRIVILEGEABLE)) {
@@ -1021,6 +1122,241 @@ public class CloudFileActionService implements Startable {
     Query query = queryManager.createQuery(queryCode.toString(), Query.SQL);
     QueryResult queryResult = query.execute();
     return queryResult.getNodes();
+  }
+
+  /**
+   * Removes the links.
+   *
+   * @param fileNode the file node
+   * @param shareIdentity the share identity
+   * @throws RepositoryException the repository exception
+   */
+  protected void removeLinks(Node fileNode, String shareIdentity) throws RepositoryException {
+    // remove all copied/linked symlinks from the original shared to given
+    // identity (or all if it is null)
+    for (NodeIterator niter = getCloudFileLinks(fileNode, shareIdentity, true); niter.hasNext();) {
+      Node linkNode = niter.nextNode();
+      Node parent = linkNode.getParent();
+      linkNode.remove();
+      parent.save();
+    }
+  }
+
+  /**
+   * Gets organizational membership name by its type name.
+   *
+   * @param membershipType the membership type
+   * @return the membership name
+   */
+  protected String getMembershipName(String membershipType) {
+    try {
+      return orgService.getMembershipTypeHandler().findMembershipType(membershipType).getName();
+    } catch (Exception e) {
+      LOG.error("Error finding manager membership in organization service. "
+          + "Will use any (*) to remove permissions of shared cloud file link", e);
+      return "*";
+    }
+  }
+
+  /**
+   * Removes the permission of an identity on given node.
+   *
+   * @param node the node, expected {@link ExtendedNode} here
+   * @param identity the identity
+   */
+  protected void removePermission(Node node, String identity) {
+    try {
+      ExtendedNode target = (ExtendedNode) node;
+      target.removePermission(identity);
+      target.save();
+    } catch (Exception e) {
+      LOG.warn("Failed to remove permissions on " + node + " for " + identity, e);
+    }
+  }
+
+  /**
+   * Adds the user permission.
+   *
+   * @param fileNode the file node
+   * @param userId the user id
+   * @param forcePrivilegeable if need force adding of exo:privilegeable mixin
+   *          to the node
+   * @throws RepositoryException the repository exception
+   */
+  protected void setUserFilePermission(Node fileNode, String userId, boolean forcePrivilegeable) throws RepositoryException {
+    ExtendedNode target = (ExtendedNode) fileNode;
+
+    boolean setPermission = false;
+    if (target.canAddMixin(EXO_PRIVILEGEABLE)) {
+      if (forcePrivilegeable) {
+        target.addMixin(EXO_PRIVILEGEABLE);
+        setPermission = true;
+      } // else will not set permissions on this node, but will check the child
+        // nodes
+    } else if (target.isNodeType(EXO_PRIVILEGEABLE)) {
+      // already exo:privilegeable
+      setPermission = true;
+    }
+    if (setPermission) {
+      // clean what ShareDocumentService could add
+      removeWritePermissions(target, userId);
+      target.setPermission(userId, READER_PERMISSION);
+    }
+
+    // For folders we do recursive (in 1.6.0 this is not actual as UI will not
+    // let to share a folder to other user)
+    if (fileNode.isNodeType(JCRLocalCloudDrive.NT_FOLDER)) {
+      // check the all children but don't force adding exo:privilegeable
+      for (NodeIterator niter = target.getNodes(); niter.hasNext();) {
+        Node child = niter.nextNode();
+        setGroupFilePermission(child, userId, false);
+      }
+    }
+    // Don't save the all here, do this once in the caller
+    // target.save();
+  }
+
+  /**
+   * Adds the group permission for cloud file.
+   *
+   * @param fileNode the node
+   * @param groupId the group id
+   * @param forcePrivilegeable if need force adding of exo:privilegeable mixin
+   *          to the node
+   * @throws RepositoryException the repository exception
+   */
+  protected void setGroupFilePermission(Node fileNode, String groupId, boolean forcePrivilegeable) throws RepositoryException {
+    ExtendedNode target = (ExtendedNode) fileNode;
+
+    boolean setPermission = false;
+    if (target.canAddMixin(EXO_PRIVILEGEABLE)) {
+      if (forcePrivilegeable) {
+        target.addMixin(EXO_PRIVILEGEABLE);
+        setPermission = true;
+      } // else will not set permissions on this node, but will check the child
+        // nodes
+    } else if (target.isNodeType(EXO_PRIVILEGEABLE)) {
+      // already exo:privilegeable
+      setPermission = true;
+    }
+    if (setPermission) {
+      // clean what ShareDocumentService could add
+      removeWritePermissions(target, groupId);
+      target.setPermission(new StringBuilder("*:").append(groupId).toString(), READER_PERMISSION);
+    }
+
+    // For folders we do recursive
+    if (fileNode.isNodeType(JCRLocalCloudDrive.NT_FOLDER)) {
+      // check the all children but don't force adding exo:privilegeable
+      for (NodeIterator niter = target.getNodes(); niter.hasNext();) {
+        Node child = niter.nextNode();
+        setGroupFilePermission(child, groupId, false);
+      }
+    }
+
+    // Don't save the all here, do this once in the caller
+    // target.save();
+  }
+
+  /**
+   * Adds the permission for a cloud file link: user who shared and to whom or
+   * group manager have full permissions, others can read only.
+   *
+   * @param linkNode the node
+   * @param ownerId the owner id
+   * @param sharedIdentity the group id
+   * @param forcePrivilegeable the force adding of exo:privilegeable mixin to
+   *          the node
+   * @throws AccessControlException the access control exception
+   * @throws RepositoryException the repository exception
+   */
+  protected void setLinkPermission(Node linkNode, String ownerId, String sharedIdentity) throws AccessControlException,
+                                                                                         RepositoryException {
+    ExtendedNode target = (ExtendedNode) linkNode;
+    boolean setPermission = false;
+    if (target.canAddMixin(EXO_PRIVILEGEABLE)) {
+      target.addMixin(EXO_PRIVILEGEABLE);
+      setPermission = true;
+    } else if (target.isNodeType(EXO_PRIVILEGEABLE)) {
+      // already exo:privilegeable
+      setPermission = true;
+    }
+    if (setPermission) {
+      if (sharedIdentity.startsWith("/")) {
+        // space link
+        // Remove write to all
+        removeWritePermissions(target, sharedIdentity);
+        // Allow any member read only
+        target.setPermission(new StringBuilder("*:").append(sharedIdentity).toString(), READER_PERMISSION);
+        // Owner like manager
+        target.setPermission(ownerId, MANAGER_PERMISSION);
+        // Space manager
+        String managerMembership = getMembershipName("manager");
+        target.setPermission(new StringBuilder(managerMembership).append(':').append(sharedIdentity).toString(),
+                             MANAGER_PERMISSION);
+      } else {
+        // user link
+        // Owner like manager
+        target.setPermission(ownerId, MANAGER_PERMISSION);
+        // Target user also has full rights
+        target.setPermission(sharedIdentity, MANAGER_PERMISSION);
+      }
+    }
+    // Don't save the all here, do this once in the caller
+    // target.save();
+  }
+
+  /**
+   * Adds the cloud file link node (mixin node type and permissions).
+   *
+   * @param fileNode the file node
+   * @param sharedIdentity the identity this link was shared to
+   * @param targetPath the target path
+   */
+  protected void initCloudFileLink(Node fileNode, String sharedIdentity, String targetPath) {
+    try {
+      // FYI link(s) should be created by CloudDriveShareDocumentService
+      List<Node> links = linkManager.getAllLinks(fileNode, ManageDocumentService.EXO_SYMLINK);
+      for (Node linkNode : links) {
+        // do only for a target (space or user)
+        if (linkNode.getPath().startsWith(targetPath)) {
+          if (linkNode.canAddMixin(CloudFileActionService.ECD_CLOUDFILELINK)) {
+            linkNode.addMixin(CloudFileActionService.ECD_CLOUDFILELINK);
+            if (sharedIdentity != null) {
+              linkNode.setProperty(CloudFileActionService.ECD_SHAREIDENTITY, sharedIdentity);
+            }
+            setLinkPermission(linkNode, ((ExtendedNode) fileNode).getACL().getOwner(), sharedIdentity);
+            linkNode.save();
+          } else {
+            // TODO it seems a normal case, should we update ECD_SHAREIDENTITY
+            // on existing link?
+            LOG.warn("Cannot add mixin " + CloudFileActionService.ECD_CLOUDFILELINK + " to symlink " + linkNode.getPath());
+          }
+        }
+      }
+    } catch (Exception e) {
+      LOG.error("Error initializing cloud file link: " + fileNode, e);
+    }
+  }
+
+  /**
+   * Remove write permissions for all kinds of membership for this group or
+   * user.
+   *
+   * @param target the target
+   * @param groupOrUserId the group or user id
+   * @throws RepositoryException the repository exception
+   */
+  protected void removeWritePermissions(ExtendedNode target, String groupOrUserId) throws RepositoryException {
+    for (AccessControlEntry acle : target.getACL().getPermissionEntries()) {
+      if (acle.getIdentity().equals(groupOrUserId)
+          || (acle.getMembershipEntry() != null && acle.getMembershipEntry().getGroup().equals(groupOrUserId))) {
+        if (PermissionType.ADD_NODE.equals(acle.getPermission()) || PermissionType.REMOVE.equals(acle.getPermission())
+            || PermissionType.SET_PROPERTY.equals(acle.getPermission())) {
+          target.removePermission(acle.getIdentity(), acle.getPermission());
+        }
+      }
+    }
   }
 
 }

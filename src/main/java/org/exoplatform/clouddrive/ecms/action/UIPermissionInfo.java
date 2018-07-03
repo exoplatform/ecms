@@ -47,6 +47,7 @@ import org.exoplatform.webui.event.Event;
 /**
  * The Class UIPermissionInfo.
  */
+@Deprecated // TODO not required
 @ComponentConfig(lifecycle = UIContainerLifecycle.class, events = {
     @EventConfig(listeners = UIPermissionInfo.DeleteActionListener.class, confirm = "UIPermissionInfo.msg.confirm-delete-permission"),
     @EventConfig(listeners = UIPermissionInfo.EditActionListener.class) })
@@ -97,12 +98,11 @@ public class UIPermissionInfo extends org.exoplatform.ecm.webui.component.explor
       if (localDrive != null) {
         try {
           // FYI bad idea to use the original action logic: it does lot of bad
-          // work
-          // DeleteActionListener.super.execute(event);
+          // work DeleteActionListener.super.execute(event);
 
           CloudFileActionService actions = uiComp.getApplicationComponent(CloudFileActionService.class);
           // 1. remove all links to the cloud file for given user/group identity
-          actions.removeLinks(currentNode, identity);// actions.getUserPublicNode(identity).getNodes()
+          actions.removeLinks(currentNode, identity);
           // 2. unshare the file
           actions.unshareCloudFile(currentNode, localDrive, userOrGroup);
         } catch (Exception e) {

@@ -44,6 +44,7 @@ import org.exoplatform.webui.ext.filter.UIExtensionFilters;
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
  * @version $Id: ViewSharingActionComponent.java 00000 Jul 9, 2015 pnedonosko $
  */
+@Deprecated // TODO not used
 @ComponentConfig(lifecycle = UIContainerLifecycle.class, events = { @EventConfig(listeners = ViewSharingActionListener.class) })
 public class ViewSharingActionComponent extends BaseCloudDriveManagerComponent implements CloudDriveUIMenuAction {
 

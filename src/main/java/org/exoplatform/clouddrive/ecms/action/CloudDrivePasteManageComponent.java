@@ -84,8 +84,8 @@ public class CloudDrivePasteManageComponent extends PasteManageComponent {
                                               new LinkedList<ClipboardCommand>(clipboardService.getClipboardList(userId, false));
         if (allClipboards.size() > 0) {
           Set<ClipboardCommand> virtClipboards = clipboardService.getClipboardList(userId, true);
-          ClipboardCommand current = null; // will refer to last attempted to
-                                           // link
+          // will refer to last attempted to link
+          ClipboardCommand current = null;
           if (virtClipboards.isEmpty()) { // single file
             current = allClipboards.getLast();
             boolean isCut = ClipboardCommand.CUT.equals(current.getType());

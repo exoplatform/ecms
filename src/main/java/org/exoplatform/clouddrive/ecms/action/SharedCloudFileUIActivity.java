@@ -31,6 +31,7 @@ import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 
 import org.apache.commons.io.FileUtils;
+
 import org.exoplatform.clouddrive.CloudDrive;
 import org.exoplatform.clouddrive.CloudDriveService;
 import org.exoplatform.clouddrive.CloudFile;
@@ -160,13 +161,11 @@ public class SharedCloudFileUIActivity extends SharedFileUIActivity {
   @Override
   public String getDownloadLink(int i) {
     // XXX we return link to Google Drive page here, but Google also can offer
-    // content download for some
-    // formats
+    // content download for some formats
     CloudFile file = cloudFile(getContentNode(i));
     if (file != null) {
       // In PLF 5.0 we need fix the download URL link in Javascript to open it
       // in new window
-      // return new StringBuilder("javascript:window.open(\\'").append(file.getLink()).append("\\')").toString();
       return file.getLink();
     } else {
       return super.getDownloadLink(i);

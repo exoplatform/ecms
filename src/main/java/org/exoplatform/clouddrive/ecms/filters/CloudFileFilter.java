@@ -106,31 +106,12 @@ public class CloudFileFilter extends AbstractCloudDriveNodeFilter {
           }
         } catch (DriveRemovedException e) {
           // doesn't accept
-          // if (LOG.isDebugEnabled()) {
-          // LOG.debug(">> CloudFileFilter.accept(" + node.getPath() + ") drive
-          // removed " + drive + ": "
-          // + e.getMessage());
-          // }
         } catch (NotYetCloudFileException e) {
           // doesn't accept
-          // if (LOG.isDebugEnabled()) {
-          // LOG.debug(">> CloudFileFilter.accept(" + node.getPath() + ") not
-          // yet cloud file: "
-          // + e.getMessage());
-          // }
         } catch (NotCloudFileException e) {
           // doesn't accept
-          // if (LOG.isDebugEnabled()) {
-          // LOG.debug(">> CloudFileFilter.accept(" + node.getPath() + ") not
-          // cloud file: " + e.getMessage());
-          // }
         } catch (NotCloudDriveException e) {
           // doesn't accept
-          // if (LOG.isDebugEnabled()) {
-          // LOG.debug(">> CloudFileFilter.accept(" + node.getPath() + ") not in
-          // cloud drive: "
-          // + e.getMessage());
-          // }
         }
       }
     }

@@ -46,6 +46,18 @@ public class CloudFileActionException extends Exception {
   }
 
   /**
+   * Instantiates a new cloud file action exception.
+   *
+   * @param message the message
+   * @param uiMessage the ui message
+   * @param cause the cause
+   */
+  public CloudFileActionException(String message, ApplicationMessage uiMessage, Throwable cause) {
+    super(message, cause);
+    this.uiMessage = uiMessage;
+  }
+
+  /**
    * Gets the UI message.
    *
    * @return the uiMessage

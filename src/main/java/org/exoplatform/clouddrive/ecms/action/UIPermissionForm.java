@@ -58,6 +58,7 @@ import org.exoplatform.webui.event.Event.Phase;
 /**
  * The Class UIPermissionForm.
  */
+@Deprecated // TODO not required
 @ComponentConfig(lifecycle = UIFormLifecycle.class, template = "classpath:groovy/wcm/webui/core/UIPermissionForm.gtmpl", events = {
     @EventConfig(listeners = UIPermissionForm.SaveActionListener.class),
     @EventConfig(phase = Phase.DECODE, listeners = UIPermissionForm.ResetActionListener.class),
@@ -113,7 +114,6 @@ public class UIPermissionForm extends org.exoplatform.ecm.webui.component.explor
         if (PermissionUtil.canChangePermission(node)) {
           if (node.canAddMixin("exo:privilegeable")) {
             node.addMixin("exo:privilegeable");
-            // node.setPermission(Utils.getNodeOwner(node),PermissionType.ALL);
           }
           try {
             CloudFileActionService actions = uiForm.getApplicationComponent(CloudFileActionService.class);

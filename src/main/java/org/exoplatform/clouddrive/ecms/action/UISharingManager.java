@@ -32,6 +32,7 @@ import org.exoplatform.webui.event.EventListener;
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
  * @version $Id: UISharingManager.java 00000 Jul 9, 2015 pnedonosko $
  */
+@Deprecated // TODO not required
 @ComponentConfig(template = "classpath:groovy/wcm/webui/core/UIPermissionManager.gtmpl", events = {
     @EventConfig(listeners = UISharingManager.CloseActionListener.class) })
 public class UISharingManager extends UIPermissionManagerBase {

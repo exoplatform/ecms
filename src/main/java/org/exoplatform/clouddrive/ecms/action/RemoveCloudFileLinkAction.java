@@ -53,8 +53,7 @@ public class RemoveCloudFileLinkAction extends AbstractJCRAction {
     if (ExtendedEvent.NODE_REMOVED == (Integer) context.get(InvocationContext.EVENT)) {
       TrashService trash = getComponent(context, TrashService.class);
       // Don't care about removal from Trash: it can be Cloud Drive itself when
-      // removing cloud file by sync
-      // op.
+      // removing cloud file by sync op.
       if (!trash.getTrashHomeNode().isSame(linkNode.getParent())) {
         CloudFileActionService actions = getComponent(context, CloudFileActionService.class);
         Node targetNode = actions.markRemoveLink(linkNode);

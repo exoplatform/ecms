@@ -72,8 +72,10 @@
       <FileLinksSharedInSpace>File link{0} shared in {1} of {2} space</FileLinksSharedInSpace>
       <FileLinksSharedInGroup>File link{0} shared in {1} of {2} group</FileLinksSharedInGroup>
       <FileLinksSharedWithUser>File link{0} shared with user {2} in his {1} folder</FileLinksSharedWithUser>
+      <FileLinksNotSupportedToThisDestination>File linking not supported to this destination</FileLinksNotSupportedToThisDestination>
       <ErrorReadingDrives>Error reading document drives</ErrorReadingDrives>
       <CannotFindUser>Cannot find user {0}</CannotFindUser>
+      <ErrorReadingFileLinks>Error reading file links</ErrorReadingFileLinks>
     </msg>
   </CloudFile>
   <ConnectCloudDriveForm>
