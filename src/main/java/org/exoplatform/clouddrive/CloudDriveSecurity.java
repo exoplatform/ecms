@@ -51,5 +51,17 @@ public interface CloudDriveSecurity {
    * @see #isSharingSupported()
    */
   void shareFile(Node fileNode, String... identities) throws RepositoryException, CloudDriveException;
+  
+  /**
+   * Unshare Cloud file in cloud provider API. If sharing not supported
+   * {@link CloudDriveException} will be thrown.<br>
+   *
+   * @param fileNode the file node
+   * @param identities array of {@link String} with organization identities in
+   *          eXo Platform
+   * @throws RepositoryException the repository exception
+   * @throws CloudDriveException the cloud drive exception
+   */
+  void unshareFile(Node fileNode, String... identities) throws RepositoryException, CloudDriveException;
 
 }

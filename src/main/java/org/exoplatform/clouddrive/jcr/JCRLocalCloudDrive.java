@@ -203,7 +203,11 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
   /**
    * Number of files, after reaching it, a command can save the drive.
    */
-  public static final int        COMMAND_CHANGES_CHUNK = 15; // was 30, Feb 9 2018
+  public static final int        COMMAND_CHANGES_CHUNK = 15;                      // was
+                                                                                  // 30,
+                                                                                  // Feb
+                                                                                  // 9
+                                                                                  // 2018
 
   /** The Constant DUMMY_DATA. */
   public static final String     DUMMY_DATA            = "".intern();
@@ -4227,6 +4231,14 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
    * {@inheritDoc}
    */
   @Override
+  public void unshareFile(Node fileNode, String... users) throws RepositoryException, CloudDriveException {
+    throw new CloudDriveException("Sharing not supported");
+  }
+  
+  /**
+   * {@inheritDoc}
+   */
+  @Override
   public boolean isSharingSupported() {
     return false;
   }
@@ -6304,9 +6316,8 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
       } else {
         String path = node.getPath();
         try {
-          Item target = finder.findItem(node.getSession(), path); // take
-                                                                  // symlinks in
-                                                                  // account
+          // take symlinks in account
+          Item target = finder.findItem(node.getSession(), path);
           if (target.isNode()) {
             node = (Node) target;
             // 22.05.2014 removed check: && fileNode(node) != null
