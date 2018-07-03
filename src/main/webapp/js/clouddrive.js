@@ -1240,14 +1240,14 @@
 		var MENU_REFRESH_DRIVE = "RefreshCloudDrive";
 		var DRIVE_MENU_ACTIONS = [MENU_OPEN_FILE, MENU_REFRESH_DRIVE];
 		var ALLOWED_DRIVE_MENU_ACTIONS = [MENU_OPEN_FILE, MENU_PUSH_FILE, MENU_REFRESH_DRIVE, "Delete", "Paste", "AddToFavourite", "RemoveFromFavourite", "ViewInfo"];
-		var ALLOWED_FILE_MENU_ACTIONS = [MENU_OPEN_FILE, MENU_PUSH_FILE, MENU_REFRESH_DRIVE, "Delete", "Rename", "Copy", "Cut", "Paste", "AddToFavourite", "RemoveFromFavourite", "ViewInfo", "ViewSharing"];
+		var ALLOWED_FILE_MENU_ACTIONS = [MENU_OPEN_FILE, MENU_PUSH_FILE, MENU_REFRESH_DRIVE, "Delete", "Rename", "Copy", "Cut", "Paste", "AddToFavourite", "RemoveFromFavourite", "ViewInfo", "ShareDocuments" ]; // "ViewSharing"
 		var ALLOWED_SYMLINK_MENU_ACTIONS = ["Delete"];
 		var ALLOWED_LOCAL_FILE_MENU_ACTIONS = [MENU_PUSH_FILE, "Delete", "Cut", "RemoveFromFavourite", "ViewInfo"];
 
 		// Menu items managed via view's showItemContextMenu() method (multi-selection)
 		// 21.05.2014 "uiIconEcmsOverloadThumbnail" removed from allowed
 		var ALLOWED_DMS_MENU_COMMON_ACTION_CLASSES = ["uiIconEcmsUpload", "uiIconEcmsAddFolder", "uiIconEcmsAddToFavourite", "uiIconEcmsRemoveFromFavourite", "uiIconEcmsManageActions", "uiIconEcmsManageRelations", "uiIconEcmsViewProperties", "uiIconEcmsManageAuditing"];
-		var ALLOWED_DMS_MENU_FILE_ACTION_CLASSES = ["uiIconEcmsOpenCloudFile", "uiIconEcmsPushCloudFile", "uiIconEcmsTaggingDocument", "uiIconEcmsWatchDocument", "uiIconEcmsViewMetadatas", "uiIconEcmsVote", "uiIconEcmsComment", "uiIconEcmsCopy", "uiIconEcmsPaste", "uiIconEcmsCut", "uiIconEcmsDelete", "uiIconEcmsRename", "uiIconEcmsViewSharing"];
+		var ALLOWED_DMS_MENU_FILE_ACTION_CLASSES = ["uiIconEcmsOpenCloudFile", "uiIconEcmsPushCloudFile", "uiIconEcmsTaggingDocument", "uiIconEcmsWatchDocument", "uiIconEcmsViewMetadatas", "uiIconEcmsVote", "uiIconEcmsComment", "uiIconEcmsCopy", "uiIconEcmsPaste", "uiIconEcmsCut", "uiIconEcmsDelete", "uiIconEcmsRename", "uiIconEcmsShareDocuments" ]; // "uiIconEcmsViewSharing"
 		var ALLOWED_DMS_MENU_DRIVE_ACTION_CLASSES = ["uiIconEcmsRefreshCloudDrive", "DeleteNodeIcon"];
 		var ALLOWED_DMS_MENU_LOCAL_FILE_ACTION_CLASSES = ["uiIconEcmsPushCloudFile", "uiIconEcmsViewMetadatas", "uiIconEcmsCut", "uiIconEcmsDelete", "uiIconEcmsRemoveFromFavourite", "uiIconEcmsViewProperties"];
 
@@ -1869,13 +1869,20 @@
 			try {
 				$("i.uiCloudFileActivity").each(function() {
 					var $elem = $(this);
-					// five parents higher in DOM we  have ActivityContextBox div
+					// five parents higher in DOM we have ActivityContextBox div
 					var $media = $elem.parent().parent();
+					var $text = $media.siblings(".text");
 					var isMediaContent = $media.is(".mediaContent");
 					$media.removeClass("mediaContent").removeAttr("onclick");
-					$media.children("a").removeAttr("href");
+					var $mediaLink = $media.children("a");
+					$mediaLink.removeAttr("rel");
+					//$mediaLink.removeAttr("href");
+					$mediaLink.css("cursor", "pointer");
+					$mediaLink.click(function() {
+						window.open($text.find("a.linkTitle").attr("href"));
+					});
 					$media.find("button.btn.doc-preview-thumbnail-footer").hide();
-					var $description = $media.siblings(".text").find(".descriptionText");
+					var $description = $text.find(".descriptionText");
 					if ($description.text().length == 0) {
 						$description.remove();
 					}

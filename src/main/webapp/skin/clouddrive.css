@@ -82,9 +82,9 @@
 
 #ViewerSwitch {
 	position: relative;
-	padding-left: 7px;
+	/*padding-left: 7px;
 	padding-right: 7px;
-	padding-bottom: 4px;
+	padding-bottom: 4px;*/
 	margin-right: 4px;
 	font-weight: normal;
 }

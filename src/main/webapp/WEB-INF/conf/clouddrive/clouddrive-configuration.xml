@@ -1,0 +1,590 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+
+  Copyright (C) 2018 eXo Platform SAS.
+  
+  This is free software; you can redistribute it and/or modify it
+  under the terms of the GNU Lesser General Public License as
+  published by the Free Software Foundation; either version 2.1 of
+  the License, or (at your option) any later version.
+  
+  This software is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+  Lesser General Public License for more details.
+  
+  You should have received a copy of the GNU Lesser General Public
+  License along with this software; if not, write to the Free
+  Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+  02110-1301 USA, or see the FSF site: http://www.fsf.org.
+
+-->
+
+<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd http://www.exoplatform.org/xml/ns/kernel_1_2.xsd"
+  xmlns="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd">
+
+  <component>
+    <key>org.exoplatform.clouddrive.CloudDriveService</key>
+    <type>org.exoplatform.clouddrive.CloudDriveServiceImpl</type>
+  </component>
+  <component>
+    <key>org.exoplatform.clouddrive.CloudDriveFeatures</key>
+    <type>org.exoplatform.clouddrive.features.PermissiveFeatures</type>
+  </component>
+  <component>
+    <key>org.exoplatform.clouddrive.jcr.NodeFinder</key>
+    <type>org.exoplatform.clouddrive.ecms.jcr.CMSNodeFinder</type>
+  </component>
+  <component>
+    <type>org.exoplatform.clouddrive.utils.ExtendedMimeTypeResolver</type>
+  </component>
+  <component>
+    <type>org.exoplatform.clouddrive.viewer.ViewerStorage</type>
+  </component>
+  <component>
+    <type>org.exoplatform.clouddrive.rest.ConnectService</type>
+  </component>
+  <component>
+    <type>org.exoplatform.clouddrive.rest.ProviderService</type>
+  </component>
+  <component>
+    <type>org.exoplatform.clouddrive.rest.DriveService</type>
+  </component>
+  <component>
+    <type>org.exoplatform.clouddrive.rest.FeaturesService</type>
+  </component>
+  <component>
+    <type>org.exoplatform.clouddrive.rest.DriveServiceLocator</type>
+  </component>
+  <component>
+    <type>org.exoplatform.clouddrive.rest.ContentService</type>
+  </component>
+  <component>
+    <type>org.exoplatform.clouddrive.ecms.rest.ResourceService</type>
+  </component>
+  
+  <!-- ECMS integration -->
+  <component>
+    <key>org.exoplatform.clouddrive.ecms.CloudDriveUIService</key>
+    <type>org.exoplatform.clouddrive.ecms.CloudDriveUIService</type>
+  </component>
+  <component>
+    <key>org.exoplatform.clouddrive.ecms.action.CloudFileActionService</key>
+    <type>org.exoplatform.clouddrive.ecms.action.CloudFileActionService</type>
+  </component>
+
+  <external-component-plugins>
+    <target-component>org.exoplatform.services.jcr.impl.ext.action.SessionActionCatalog</target-component>
+    <component-plugin>
+      <name>addActions</name>
+      <set-method>addPlugin</set-method>
+      <type>org.exoplatform.services.jcr.impl.ext.action.AddActionsPlugin</type>
+      <description>add Cloud File removal action</description>
+      <init-params>
+        <object-param>
+          <name>actions</name>
+          <object type="org.exoplatform.services.jcr.impl.ext.action.AddActionsPlugin$ActionsConfig">
+            <field name="actions">
+              <collection type="java.util.ArrayList">
+                <value>
+                  <object type="org.exoplatform.services.jcr.impl.ext.action.ActionConfiguration">
+                    <field name="eventTypes">
+                      <string>removeNode</string>
+                    </field>
+                    <field name="nodeTypes">
+                      <string>ecd:cloudFile</string>
+                    </field>
+                    <field name="isDeep">
+                      <boolean>true</boolean>
+                    </field>
+                    <field name="actionClassName">
+                      <string>org.exoplatform.clouddrive.jcr.RemoveCloudFileAction</string>
+                    </field>
+                  </object>
+                </value>
+              </collection>
+            </field>
+          </object>
+        </object-param>
+      </init-params>
+    </component-plugin>
+    <component-plugin>
+      <name>addActions</name>
+      <set-method>addPlugin</set-method>
+      <type>org.exoplatform.services.jcr.impl.ext.action.AddActionsPlugin</type>
+      <description>add Cloud File symlink removal action</description>
+      <init-params>
+        <object-param>
+          <name>actions</name>
+          <object type="org.exoplatform.services.jcr.impl.ext.action.AddActionsPlugin$ActionsConfig">
+            <field name="actions">
+              <collection type="java.util.ArrayList">
+                <value>
+                  <object type="org.exoplatform.services.jcr.impl.ext.action.ActionConfiguration">
+                    <field name="eventTypes">
+                      <string>removeNode</string>
+                    </field>
+                    <field name="nodeTypes">
+                      <string>ecd:cloudFileLink</string>
+                    </field>
+                    <field name="isDeep">
+                      <boolean>false</boolean>
+                    </field>
+                    <field name="actionClassName">
+                      <string>org.exoplatform.clouddrive.ecms.action.RemoveCloudFileLinkAction</string>
+                    </field>
+                  </object>
+                </value>
+              </collection>
+            </field>
+          </object>
+        </object-param>
+      </init-params>
+    </component-plugin>
+  </external-component-plugins>
+  <external-component-plugins>
+    <target-component>org.exoplatform.services.jcr.RepositoryService</target-component>
+    <component-plugin>
+      <name>add.namespaces</name>
+      <set-method>addPlugin</set-method>
+      <type>org.exoplatform.services.jcr.impl.AddNamespacesPlugin</type>
+      <init-params>
+        <properties-param>
+          <name>namespaces</name>
+          <property name="ecd" value="http://www.exoplatform.com/jcr/clouddrive/1.0/" />
+        </properties-param>
+      </init-params>
+    </component-plugin>
+    <component-plugin>
+      <name>add.gadget.services.nodeType</name>
+      <set-method>addPlugin</set-method>
+      <type>org.exoplatform.services.jcr.impl.AddNodeTypePlugin</type>
+      <init-params>
+        <values-param>
+          <name>autoCreatedInNewRepository</name>
+          <description>Cloud Drive node types configuration file</description>
+          <value>jar:/conf/portal/jcr/clouddrive-nodetypes.xml</value>
+          <value>jar:/conf/portal/jcr/clouddrive-ui-nodetypes.xml</value>
+        </values-param>
+      </init-params>
+    </component-plugin>
+  </external-component-plugins>
+
+  <!-- use this plugin in external configuration, e.g. an extension -->
+  <external-component-plugins>
+    <target-component>org.exoplatform.clouddrive.CloudDriveService</target-component>
+    <component-plugin>
+      <name>add.portalenv</name>
+      <set-method>addPlugin</set-method>
+      <type>org.exoplatform.clouddrive.webui.PortalEnvironment</type>
+    </component-plugin>
+  </external-component-plugins>
+
+  <external-component-plugins>
+    <target-component>org.exoplatform.clouddrive.utils.ExtendedMimeTypeResolver</target-component>
+    <component-plugin>
+      <name>add.namespaces</name>
+      <set-method>addPlugin</set-method>
+      <type>org.exoplatform.clouddrive.utils.ExtendedMimeTypeResolver$MimeTypeMap</type>
+      <init-params>
+        <values-param>
+          <name>mimetypes-properties</name>
+          <description>Mimetype property files, path can be any format supported by eXo configuration</description>
+          <value>jar:/conf/clouddrive/mimetypes.properties</value>
+        </values-param>
+      </init-params>
+    </component-plugin>
+  </external-component-plugins>
+  
+  <!-- ECMS integration -->
+  <!-- Mandatory ECMS menu actions for Cloud Drive (TODO not required as ViewSharing not used anymore) -->
+  <!-- external-component-plugins>
+    <target-component>org.exoplatform.clouddrive.ecms.CloudDriveUIService</target-component>
+    <component-plugin>
+      <name>add.clouddrive.ecms.menu.mandatory</name>
+      <set-method>addPlugin</set-method>
+      <type>org.exoplatform.clouddrive.ecms.CloudDriveUIExtension</type>
+      <init-params>
+        <values-param>
+          <name>default-actions</name>
+          <description>Names of mandatory ECMS menu actions enabled (WebUI extensions)</description>
+          <value>ViewSharing</value>
+        </values-param>
+      </init-params>
+    </component-plugin>
+  </external-component-plugins -->
+  <external-component-plugins>
+    <target-component>org.exoplatform.webui.ext.UIExtensionManager</target-component>
+    <component-plugin>
+      <name>Add CloudDrive Actions</name>
+      <set-method>registerUIExtensionPlugin</set-method>
+      <type>org.exoplatform.webui.ext.UIExtensionPlugin</type>
+      <init-params>
+        <object-param>
+          <name>ShowConnectCloudDrive</name>
+          <object type="org.exoplatform.webui.ext.UIExtension">
+            <field name="type">
+              <string>org.exoplatform.ecm.dms.UIActionBar</string>
+            </field>
+            <field name="name">
+              <string>ShowConnectCloudDrive</string>
+            </field>
+            <field name="component">
+              <string>org.exoplatform.clouddrive.ecms.ShowConnectCloudDriveActionComponent</string>
+            </field>
+            <field name="extendedFilters">
+              <collection type="java.util.ArrayList">
+                <value>
+                  <object type="org.exoplatform.clouddrive.ecms.filters.PersonalDocumentsFilter"></object>
+                </value>
+              </collection>
+            </field>
+          </object>
+        </object-param>
+        <!-- Override ECMS actions that require special handling for Cloud Drive files: ManagePublications, ManageVersions -->
+        <object-param>
+          <name>ManagePublications</name>
+          <object type="org.exoplatform.webui.ext.UIExtension">
+            <field name="type">
+              <string>org.exoplatform.ecm.dms.UIActionBar</string>
+            </field>
+            <field name="name">
+              <string>ManagePublications</string>
+            </field>
+            <field name="rank">
+              <int>65</int>
+            </field>
+            <field name="component">
+              <string>org.exoplatform.clouddrive.ecms.action.ManagePublicationsActionComponent</string>
+            </field>
+          </object>
+        </object-param>
+        <object-param>
+          <name>ManageVersions</name>
+          <object type="org.exoplatform.webui.ext.UIExtension">
+            <field name="type">
+              <string>org.exoplatform.ecm.dms.UIActionBar</string>
+            </field>
+            <field name="name">
+              <string>ManageVersions</string>
+            </field>
+            <field name="rank">
+              <int>65</int>
+            </field>
+            <field name="component">
+              <string>org.exoplatform.clouddrive.ecms.action.ManageVersionsActionComponent</string>
+            </field>
+          </object>
+        </object-param>
+        <object-param>
+          <name>CheckIn</name>
+          <object type="org.exoplatform.webui.ext.UIExtension">
+            <field name="type">
+              <string>org.exoplatform.ecm.dms.UIActionBar</string>
+            </field>
+            <field name="rank">
+              <int>80</int>
+            </field>
+            <field name="name">
+              <string>CheckIn</string>
+            </field>
+            <field name="component">
+              <string>org.exoplatform.clouddrive.ecms.action.CheckInManageComponent</string>
+            </field>
+          </object>
+        </object-param>
+        <!-- object-param> // TODO not used, PLF 5 ShareDocuments used instead
+          <name>ViewSharing</name>
+          <object type="org.exoplatform.webui.ext.UIExtension">
+            <field name="type">
+              <string>org.exoplatform.ecm.dms.UIActionBar</string>
+            </field>
+            <field name="name">
+              <string>ViewSharing</string>
+            </field>
+            <field name="component">
+              <string>org.exoplatform.clouddrive.ecms.action.ViewSharingActionComponent</string>
+            </field>
+            <field name="rank">
+              <int>10</int>
+            </field>
+          </object>
+        </object-param -->
+        <object-param>
+          <name>OpenCloudFile</name>
+          <object type="org.exoplatform.webui.ext.UIExtension">
+            <field name="type">
+              <string>org.exoplatform.ecm.dms.UIWorkingArea</string>
+            </field>
+            <field name="name">
+              <string>OpenCloudFile</string>
+            </field>
+            <field name="component">
+              <string>org.exoplatform.clouddrive.ecms.OpenCloudFileManagerComponent</string>
+            </field>
+            <field name="category">
+              <string>ItemContextMenu_SingleSelection</string>
+            </field>
+            <field name="rank">
+              <int>10</int>
+            </field>
+          </object>
+        </object-param>
+        <object-param>
+          <name>RefreshCloudDrive</name>
+          <object type="org.exoplatform.webui.ext.UIExtension">
+            <field name="type">
+              <string>org.exoplatform.ecm.dms.UIWorkingArea</string>
+            </field>
+            <field name="name">
+              <string>RefreshCloudDrive</string>
+            </field>
+            <field name="component">
+              <string>org.exoplatform.clouddrive.ecms.RefreshCloudDriveManagerComponent</string>
+            </field>
+            <field name="category">
+              <string>ItemContextMenu_SingleSelection</string>
+            </field>
+            <field name="rank">
+              <int>11</int><!-- should be first in list of exts in UIExtensionManagerImpl -->
+            </field>
+          </object>
+        </object-param>
+        <object-param>
+          <name>RefreshView</name>
+          <object type="org.exoplatform.webui.ext.UIExtension">
+            <field name="type">
+              <string>org.exoplatform.ecm.dms.UIWorkingArea</string>
+            </field>
+            <field name="name">
+              <string>RefreshView</string>
+            </field>
+            <field name="component">
+              <!-- Invisible action used by Cloud Drive JS to refresh user session on auto-sync -->
+              <string>org.exoplatform.clouddrive.ecms.RefreshViewManagerComponent</string>
+            </field>
+            <field name="category">
+              <string>GroundContextMenu</string>
+            </field>
+            <field name="rank">
+              <int>1</int><!-- should be first in list of exts in UIExtensionManagerImpl -->
+            </field>
+          </object>
+        </object-param>
+        <object-param>
+          <name>SyncingFile</name>
+          <object type="org.exoplatform.webui.ext.UIExtension">
+            <field name="type">
+              <string>org.exoplatform.ecm.dms.UIWorkingArea</string>
+            </field>
+            <field name="name">
+              <string>SyncingFile</string>
+            </field>
+            <field name="component">
+              <!-- Invisible action used by Cloud Drive JS to mark synchronizing files -->
+              <string>org.exoplatform.clouddrive.ecms.SyncingFileManagerComponent</string>
+            </field>
+            <field name="category">
+              <string>ItemContextMenu_SingleSelection</string>
+            </field>
+            <field name="rank">
+              <int>1</int><!-- should be first in list of exts in UIExtensionManagerImpl -->
+            </field>
+          </object>
+        </object-param>
+        <object-param>
+          <name>PushCloudFile</name>
+          <object type="org.exoplatform.webui.ext.UIExtension">
+            <field name="type">
+              <string>org.exoplatform.ecm.dms.UIWorkingArea</string>
+            </field>
+            <field name="name">
+              <string>PushCloudFile</string>
+            </field>
+            <field name="component">
+              <string>org.exoplatform.clouddrive.ecms.PushCloudFileManagerComponent</string>
+            </field>
+            <field name="category">
+              <string>ItemContextMenu_SingleSelection</string>
+            </field>
+            <field name="rank">
+              <int>10</int>
+            </field>
+          </object>
+        </object-param>
+        <object-param>
+          <name>ShowLargeFile</name>
+          <object type="org.exoplatform.webui.ext.UIExtension">
+            <field name="type">
+              <string>org.exoplatform.ecm.dms.FileViewer</string>
+            </field>
+            <field name="name">
+              <string>ShowLargeFile</string>
+            </field>
+            <field name="component">
+              <string>org.exoplatform.clouddrive.ecms.viewer.NotViewableViewer</string>
+            </field>
+            <field name="category">
+              <string>FileViewer</string>
+            </field>
+            <field name="rank">
+              <int>45</int>
+            </field>
+            <field name="extendedFilters">
+              <collection type="java.util.ArrayList">
+                <value>
+                  <object type="org.exoplatform.clouddrive.ecms.filters.CloudFileLargerFilter">
+                    <field name="minSize">
+                      <long>209715200</long><!-- 200MB -->
+                    </field>
+                  </object>
+                </value>
+              </collection>
+            </field>
+          </object>
+        </object-param>
+        <object-param>
+          <name>ShowCloudFile</name>
+          <object type="org.exoplatform.webui.ext.UIExtension">
+            <field name="type">
+              <string>org.exoplatform.ecm.dms.FileViewer</string>
+            </field>
+            <field name="name">
+              <string>ShowCloudFile</string>
+            </field>
+            <field name="component">
+              <string>org.exoplatform.clouddrive.ecms.viewer.DefaultFileViewer</string>
+            </field>
+            <field name="category">
+              <string>FileViewer</string>
+            </field>
+            <field name="rank">
+              <int>50</int>
+            </field>
+          </object>
+        </object-param>
+        <object-param>
+          <name>MoveNode</name>
+          <object type="org.exoplatform.webui.ext.UIExtension">
+            <field name="type">
+              <string>org.exoplatform.ecm.dms.UIWorkingArea</string>
+            </field>
+            <field name="rank">
+              <int>13</int>
+            </field>
+            <field name="name">
+              <string>MoveNode</string>
+            </field>
+            <field name="category">
+              <string>JCRMoveAction</string>
+            </field>
+            <field name="component">
+              <string>org.exoplatform.clouddrive.ecms.action.CloudDriveMoveNodeManageComponent</string>
+            </field>
+          </object>
+        </object-param>
+        <object-param>
+          <name>Paste</name>
+          <object type="org.exoplatform.webui.ext.UIExtension">
+            <field name="type">
+              <string>org.exoplatform.ecm.dms.UIWorkingArea</string>
+            </field>
+            <field name="name">
+              <string>Paste</string>
+            </field>
+            <field name="component">
+              <string>org.exoplatform.clouddrive.ecms.action.CloudDrivePasteManageComponent</string>
+            </field>
+            <field name="category">
+              <string>ItemGroundContextMenu</string>
+            </field>
+            <field name="rank">
+              <int>12</int>
+            </field>
+          </object>
+        </object-param>
+        <object-param>
+          <name>Delete</name>
+          <object type="org.exoplatform.webui.ext.UIExtension">
+            <field name="type">
+              <string>org.exoplatform.ecm.dms.UIWorkingArea</string>
+            </field>
+            <field name="rank">
+              <int>95</int><!-- original rank 95 -->
+            </field>
+            <field name="name">
+              <string>Delete</string>
+            </field>
+            <field name="category">
+              <string>ItemContextMenu</string>
+            </field>
+            <field name="component">
+              <string>org.exoplatform.clouddrive.ecms.action.CloudDriveDeleteManageComponent</string>
+            </field>
+          </object>
+        </object-param>
+        <object-param>
+          <name>Clipboard</name>
+          <object type="org.exoplatform.webui.ext.UIExtension">
+            <field name="type">
+              <string>org.exoplatform.ecm.dms.UISideBar</string>
+            </field>
+            <field name="name">
+              <string>Clipboard</string>
+            </field>
+            <field name="rank">
+              <int>150</int>
+            </field>
+            <field name="component">
+              <!-- this component sets a new config of UIClipboard in UISideBar to UICloudDriveClipboard to -->
+              <string>org.exoplatform.clouddrive.ecms.action.CloudDriveClipboardActionComponent</string>
+            </field>
+          </object>
+        </object-param>
+        <!-- Activity stream handler for shared links to cloud files -->
+        <object-param>
+          <name>Share File Activity</name>
+          <object type="org.exoplatform.social.webui.activity.UIActivityExtension">
+            <field name="type">
+              <string>org.exoplatform.social.webui.activity.BaseUIActivity</string>
+            </field>
+            <field name="name">
+              <string>sharecloudfiles:spaces</string>
+            </field>
+            <field name="component">
+              <string>org.exoplatform.clouddrive.ecms.action.SharedCloudFileUIActivity</string>
+            </field>
+            <field name="activityBuiderClass">
+              <string>org.exoplatform.wcm.ext.component.activity.UISharedFileBuilder</string>
+            </field>
+          </object>
+        </object-param>
+      </init-params>
+    </component-plugin>
+  </external-component-plugins>
+  <external-component-plugins>
+    <target-component>org.exoplatform.services.resources.ResourceBundleService</target-component>
+    <component-plugin>
+      <name>ResourceBundle Plugin</name>
+      <set-method>addResourceBundle</set-method>
+      <type>org.exoplatform.services.resources.impl.BaseResourceBundlePlugin</type>
+      <init-params>
+        <values-param>
+          <name>init.resources</name>
+          <description>Store the following resources into the db for the first launch</description>
+          <value>locale.clouddrive.CloudDrive</value>
+          <value>locale.ecm.views</value><!-- From ECMS -->
+        </values-param>
+        <values-param>
+          <name>portal.resource.names</name>
+          <description>The properties files of the portal , those file will be merged into one ResoruceBundle
+            properties</description>
+          <value>locale.clouddrive.CloudDrive</value>
+          <value>locale.ecm.views</value><!-- From ECMS -->
+        </values-param>
+      </init-params>
+    </component-plugin>
+  </external-component-plugins>
+  
+</configuration>
