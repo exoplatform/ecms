@@ -31,6 +31,7 @@ import org.exoplatform.clouddrive.DriveRemovedException;
 import org.exoplatform.clouddrive.NotCloudDriveException;
 import org.exoplatform.clouddrive.ecms.action.CloudFileActionService;
 import org.exoplatform.clouddrive.jcr.JCRLocalCloudDrive;
+import org.exoplatform.commons.utils.ActivityTypeUtils;
 import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.jcr.RepositoryService;
@@ -40,7 +41,9 @@ import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.social.core.activity.model.ExoSocialActivity;
+import org.exoplatform.social.core.identity.provider.SpaceIdentityProvider;
 import org.exoplatform.social.core.manager.ActivityManager;
+import org.exoplatform.social.core.manager.IdentityManager;
 import org.exoplatform.wcm.ext.component.document.service.ShareDocumentService;
 
 /**
@@ -55,13 +58,19 @@ import org.exoplatform.wcm.ext.component.document.service.ShareDocumentService;
 public class CloudDriveShareDocumentService extends ShareDocumentService {
 
   /** The Constant LOG. */
-  protected static final Log             LOG = ExoLogger.getLogger(CloudDriveShareDocumentService.class);
+  protected static final Log             LOG                     = ExoLogger.getLogger(CloudDriveShareDocumentService.class);
+
+  /** The Constant SHARE_PERMISSION_MODIFY (copied from UIShareDocuments). */
+  protected static final String          SHARE_PERMISSION_MODIFY = "modify";
 
   /** The activity manager. */
   protected final ActivityManager        activityManager;
 
   /** The link manager. */
   protected final LinkManager            linkManager;
+
+  /** The identity manager. */
+  protected final IdentityManager        identityManager;
 
   /** The cloud drive service. */
   protected final CloudDriveService      cloudDrives;
@@ -86,6 +95,7 @@ public class CloudDriveShareDocumentService extends ShareDocumentService {
    * @param sessionProviderService the session provider service
    * @param activityManager the activity manager
    * @param hierarchyCreator the hierarchy creator
+   * @param identityManager the identity manager
    * @param cloudDrives the cloud drive service
    * @param cloudFileActions the cloud file actions
    */
@@ -94,12 +104,14 @@ public class CloudDriveShareDocumentService extends ShareDocumentService {
                                         SessionProviderService sessionProviderService,
                                         ActivityManager activityManager,
                                         NodeHierarchyCreator hierarchyCreator,
+                                        IdentityManager identityManager,
                                         CloudDriveService cloudDrives,
                                         CloudFileActionService cloudFileActions) {
     super(repoService, linkManager, sessionProviderService);
     this.activityManager = activityManager;
     this.linkManager = linkManager;
     this.hierarchyCreator = hierarchyCreator;
+    this.identityManager = identityManager;
     this.cloudDrives = cloudDrives;
     this.cloudFileActions = cloudFileActions;
 
@@ -112,6 +124,22 @@ public class CloudDriveShareDocumentService extends ShareDocumentService {
    */
   @Override
   public String publishDocumentToSpace(String groupId, Node node, String comment, String perm) {
+    // TODO There is a problem how UIShareDocuments updates the permission of
+    // already shared file: it calls unpublishDocumentToSpace() then
+    // publishDocumentToSpace(), by doing this it causes removal of all links
+    // (including copied, moved and renamed) and then creation of an one in
+    // Shared folder. This way we don't respect what user did by pasting or
+    // copying, moving, renaming the links - so we have bad UX.
+    // This could be solved by extending UIShareDocuments in the addon and
+    // overriding it's Change and Confirm listeners together with
+    // updatePermission() and removePermission() methods - by these methods we
+    // could know is it an update or just a sole addition/removal, and then in
+    // Change listener we could inform our CloudDriveShareDocumentService (via
+    // setting thread-local internally) that it's need of an update (of
+    // permissions update actually) and don't unpublish then publish but just
+    // make required updates. This should be done before invoking the super's
+    // method unpublishDocumentToSpace() then publishDocumentToSpace().
+    // The same story for sharing with user.
     CloudDrive localDrive = findCloudDrive(node);
     if (localDrive != null) {
       return applyInDrive(localDrive, new Change<String>() {
@@ -124,16 +152,23 @@ public class CloudDriveShareDocumentService extends ShareDocumentService {
           // We fix what super did to allow only read the cloud
           // file (instead of read, add node, set property and remove for 'Can
           // Write' option).
-          cloudFileActions.shareToGroup(node, groupId);
-          // We change activity type to CloudDrive's one
+          cloudFileActions.shareToGroup(node, groupId, SHARE_PERMISSION_MODIFY.equalsIgnoreCase(perm));
+          // We change activity type to CloudDrive's one...
           ExoSocialActivity activity = activityManager.getActivity(activityId);
           if (activity != null && !CloudFileActionService.SHARE_CLOUD_FILES_SPACES.equals(activity.getType())) {
             activity.setType(CloudFileActionService.SHARE_CLOUD_FILES_SPACES);
+            // ...and update activity in the space stream
+            // XXX first we do update in the ActivityManager to clear its
+            // storage cache, then we need saveActivityNoReturn() to save the
+            // new type as updateActivity() doesn't do this.
             activityManager.updateActivity(activity);
+            activityManager.saveActivityNoReturn(identityManager.getOrCreateIdentity(SpaceIdentityProvider.NAME,
+                                                                                     activity.getActivityStream().getPrettyId(),
+                                                                                     true),
+                                                 activity);
           }
           // Finally share if the drive supports this
           shareInDrive(node, localDrive, groupId);
-          // TODO do we need CloudDriveContext.init() here ?
           return activityId;
         }
       });
@@ -159,7 +194,7 @@ public class CloudDriveShareDocumentService extends ShareDocumentService {
           // We fix what super did to allow only read the cloud
           // file (instead of read, add node, set property and remove for 'Can
           // Write' option).
-          cloudFileActions.shareToUser(node, userId);
+          cloudFileActions.shareToUser(node, userId, SHARE_PERMISSION_MODIFY.equalsIgnoreCase(perm));
           // Finally share if the drive supports this
           shareInDrive(node, localDrive, userId);
           // TODO do we need CloudDriveContext.init() here ?

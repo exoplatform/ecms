@@ -86,7 +86,7 @@ public class UICloudDriveClipboard extends UIClipboard {
       } catch (CloudFileActionException e) {
         // this exception is a part of logic and it interrupts the move
         // operation
-        LOG.warn(e.getMessage());
+        LOG.warn(e.getMessage(), e);
         UIApplication uiApp = uiExplorer.getAncestorOfType(UIApplication.class);
         uiApp.addMessage(e.getUIMessage());
         symlinks.rollback();

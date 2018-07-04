@@ -23,7 +23,9 @@ import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.regex.Matcher;
 
+import javax.jcr.ItemExistsException;
 import javax.jcr.Node;
+import javax.jcr.NodeIterator;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 
@@ -299,14 +301,39 @@ public class CloudFileAction {
                       // need share with the group
                       IShareDocumentService shareService = WCMCoreUtils.getService(IShareDocumentService.class);
                       shareService.publishDocumentToSpace(groupId, srcNode, "", PermissionType.READ);
-                      // TODO cleanup use of deprecated methods
-                      // String[] driveIdentity =
-                      // documentsDrive.getAllPermissions();
-                      // actions.shareCloudFile(srcNode, srcLocal,
-                      // driveIdentity);
-                      // this.link = actions.linkFile(srcNode, destNode,
-                      // groupId);
-                      // actions.setAllPermissions(link, driveIdentity);
+                      // ShareDocumentService will create a link into Shared
+                      // folder of the space docs, so we need move it to a right
+                      // place at pointed destination by Paste action.
+                      // XXX we use names hardcoded in
+                      // ShareDocumentService.publishDocumentToSpace()
+                      try {
+                        String sharedFolderPath = documentsDrive.getHomePath() + "/Shared";
+                        for (NodeIterator niter = actions.getCloudFileLinks(srcNode, groupId, true); niter.hasNext();) {
+                          Node link = niter.nextNode();
+                          if (link.getParent().getPath().equals(sharedFolderPath)) {
+                            Session sysSession = link.getSession();
+                            sysSession.refresh(true);
+                            try {
+                              sysSession.move(link.getPath(), destNode.getPath() + "/" + link.getName());
+                              sysSession.save();
+                            } catch (ItemExistsException e) {
+                              throw new CloudFileActionException("Cannot move pasted Cloud File to a destination. " + srcWorkspace
+                                  + ":" + srcPath + " -> " + destWorkspace + ":" + destPath,
+                                                                 new ApplicationMessage("CloudFile.msg.DestinationItemNameExists",
+                                                                                        null,
+                                                                                        ApplicationMessage.ERROR), e);
+                            }
+                            // don't touch others, assume the first is ours
+                            break;
+                          }
+                        }
+                      } catch (Exception e) {
+                        throw new CloudFileActionException("Error moving pasted Cloud File to a destination. " + srcWorkspace
+                            + ":" + srcPath + " -> " + destWorkspace + ":" + destPath,
+                                                           new ApplicationMessage("CloudFile.msg.ErrorMoveToDestination",
+                                                                                  null,
+                                                                                  ApplicationMessage.ERROR), e);
+                      }
                       linksCreated++;
                     } else {
                       // else, since 1.6.0 we don't support sharing cloud files

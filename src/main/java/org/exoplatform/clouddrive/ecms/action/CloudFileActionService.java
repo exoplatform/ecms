@@ -56,6 +56,10 @@ import org.exoplatform.clouddrive.NotCloudDriveException;
 import org.exoplatform.clouddrive.ThreadExecutor;
 import org.exoplatform.clouddrive.jcr.JCRLocalCloudDrive;
 import org.exoplatform.clouddrive.jcr.NodeFinder;
+import org.exoplatform.commons.utils.ActivityTypeUtils;
+import org.exoplatform.container.ExoContainer;
+import org.exoplatform.container.ExoContainerContext;
+import org.exoplatform.container.component.RequestLifeCycle;
 import org.exoplatform.ecm.connector.platform.ManageDocumentService;
 import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.CmsService;
@@ -250,23 +254,29 @@ public class CloudFileActionService implements Startable {
                     removedLinks.values().remove(cloudFileUUID);
                     removedLinks.put(eventPath, cloudFileUUID);
                     // remove symlink with a delay in another thread
+                    final ExoContainer container = ExoContainerContext.getCurrentContainer();
                     workerExecutor.submit(new Runnable() {
                       @Override
                       public void run() {
                         try {
                           Thread.sleep(1000 * 2); // wait a bit for ECMS actions
-
-                          Item linkItem = systemSession().getItem(eventPath);
-                          if (linkItem.isNode()) {
-                            Node linkNode = (Node) linkItem;
-                            Node parent = linkNode.getParent();
-                            // FYI target node permissions will be updated by
-                            // LinkRemoveListener
-                            linkNode.remove();
-                            parent.save();
-                            if (LOG.isDebugEnabled()) {
-                              LOG.debug("Cloud File link '" + linkItem.getName() + "' successfully removed from the Trash.");
+                          ExoContainerContext.setCurrentContainer(container);
+                          RequestLifeCycle.begin(container);
+                          try {
+                            Item linkItem = systemSession().getItem(eventPath);
+                            if (linkItem.isNode()) {
+                              Node linkNode = (Node) linkItem;
+                              Node parent = linkNode.getParent();
+                              // FYI target node permissions will be updated by
+                              // LinkRemoveListener
+                              linkNode.remove();
+                              parent.save();
+                              if (LOG.isDebugEnabled()) {
+                                LOG.debug("Cloud File link '" + linkItem.getName() + "' successfully removed from the Trash.");
+                              }
                             }
+                          } finally {
+                            RequestLifeCycle.end();
                           }
                         } catch (PathNotFoundException e) {
                           // node already deleted
@@ -534,16 +544,18 @@ public class CloudFileActionService implements Startable {
    *
    * @param fileNode the file node
    * @param userId the user id
+   * @param canEdit the can edit flag, if <code>true</code> then user should be
+   *          able to modify the shared link node, read-only link otherwise
    * @throws RepositoryException the repository exception
    */
-  public void shareToUser(Node fileNode, String userId) throws RepositoryException {
+  public void shareToUser(Node fileNode, String userId, boolean canEdit) throws RepositoryException {
     setUserFilePermission(fileNode, userId, true);
     fileNode.save();
     // initialize files links in the user docs
     try {
       DriveData userDrive = getUserDrive(userId);
       if (userDrive != null) {
-        initCloudFileLink(fileNode, userId, userDrive.getHomePath());
+        initCloudFileLink(fileNode, userId, userDrive.getHomePath(), canEdit);
       }
     } catch (Exception e) {
       LOG.error("Error reading Cloud File links of " + fileNode.getPath(), e);
@@ -559,13 +571,17 @@ public class CloudFileActionService implements Startable {
   }
 
   /**
-   * Share cloud file to a group by its ID.
+   * Share cloud file to a group by its ID and create a symlink in the target
+   * space.
    *
    * @param fileNode the file node
    * @param groupId the group id
+   * @param canEdit the can edit flag, if <code>true</code> then group members
+   *          should be able to modify the shared link node, read-only link
+   *          otherwise
    * @throws RepositoryException the repository exception
    */
-  public void shareToGroup(Node fileNode, String groupId) throws RepositoryException {
+  public void shareToGroup(Node fileNode, String groupId, boolean canEdit) throws RepositoryException {
     // set permission on the cloud file
     setGroupFilePermission(fileNode, groupId, true);
     fileNode.save();
@@ -573,7 +589,7 @@ public class CloudFileActionService implements Startable {
     try {
       DriveData documentDrive = getGroupDrive(groupId);
       if (documentDrive != null) {
-        initCloudFileLink(fileNode, groupId, documentDrive.getHomePath());
+        initCloudFileLink(fileNode, groupId, documentDrive.getHomePath(), canEdit);
       }
     } catch (Exception e) {
       LOG.error("Error reading Cloud File links of " + fileNode.getPath(), e);
@@ -588,12 +604,11 @@ public class CloudFileActionService implements Startable {
    * @throws RepositoryException the repository exception
    */
   public void unshareToSpace(Node fileNode, String groupId) throws RepositoryException {
-    String identity = new StringBuilder("*:").append(groupId).toString();
     // remove all copied/linked symlinks from the original shared to given
     // identity (or all if it is null)
-    removeLinks(fileNode, identity);
+    removeLinks(fileNode, groupId);
     // remove sharing permissions
-    removePermission(fileNode, identity);
+    removePermission(fileNode, new StringBuilder("*:").append(groupId).toString());
   }
 
   /**
@@ -820,6 +835,39 @@ public class CloudFileActionService implements Startable {
     } catch (Exception e) {
       throw new CloudDriveException("Error posting stared activity: " + e.getMessage(), e);
     }
+  }
+
+  /**
+   * Gets the cloud file links.
+   *
+   * @param targetNode the target node
+   * @param shareIdentity the share identity
+   * @param useSystemSession the use system session
+   * @return the cloud file links
+   * @throws RepositoryException the repository exception
+   */
+  public NodeIterator getCloudFileLinks(Node targetNode,
+                                        String shareIdentity,
+                                        boolean useSystemSession) throws RepositoryException {
+    StringBuilder queryCode = new StringBuilder().append("SELECT * FROM ")
+                                                 .append(ECD_CLOUDFILELINK)
+                                                 .append(" WHERE exo:uuid='")
+                                                 .append(targetNode.getUUID())
+                                                 .append("'");
+    if (shareIdentity != null && shareIdentity.length() > 0) {
+      queryCode.append(" AND " + ECD_SHAREIDENTITY + "='").append(shareIdentity).append("'");
+    }
+
+    QueryManager queryManager;
+    if (useSystemSession) {
+      queryManager = systemSession().getWorkspace().getQueryManager();
+    } else {
+      queryManager = targetNode.getSession().getWorkspace().getQueryManager();
+    }
+
+    Query query = queryManager.createQuery(queryCode.toString(), Query.SQL);
+    QueryResult queryResult = query.execute();
+    return queryResult.getNodes();
   }
 
   /**
@@ -1092,51 +1140,26 @@ public class CloudFileActionService implements Startable {
   }
 
   /**
-   * Gets the cloud file links.
-   *
-   * @param targetNode the target node
-   * @param shareIdentity the share identity
-   * @param useSystemSession the use system session
-   * @return the cloud file links
-   * @throws RepositoryException the repository exception
-   */
-  protected NodeIterator getCloudFileLinks(Node targetNode,
-                                           String shareIdentity,
-                                           boolean useSystemSession) throws RepositoryException {
-    StringBuilder queryCode = new StringBuilder().append("SELECT * FROM ")
-                                                 .append(ECD_CLOUDFILELINK)
-                                                 .append(" WHERE exo:uuid='")
-                                                 .append(targetNode.getUUID())
-                                                 .append("'");
-    if (shareIdentity != null && shareIdentity.length() > 0) {
-      queryCode.append(" AND " + ECD_SHAREIDENTITY + "='").append(shareIdentity).append("'");
-    }
-
-    QueryManager queryManager;
-    if (useSystemSession) {
-      queryManager = systemSession().getWorkspace().getQueryManager();
-    } else {
-      queryManager = targetNode.getSession().getWorkspace().getQueryManager();
-    }
-
-    Query query = queryManager.createQuery(queryCode.toString(), Query.SQL);
-    QueryResult queryResult = query.execute();
-    return queryResult.getNodes();
-  }
-
-  /**
    * Removes the links.
    *
    * @param fileNode the file node
-   * @param shareIdentity the share identity
+   * @param identity the shared identity
    * @throws RepositoryException the repository exception
    */
-  protected void removeLinks(Node fileNode, String shareIdentity) throws RepositoryException {
+  protected void removeLinks(Node fileNode, String identity) throws RepositoryException {
     // remove all copied/linked symlinks from the original shared to given
     // identity (or all if it is null)
-    for (NodeIterator niter = getCloudFileLinks(fileNode, shareIdentity, true); niter.hasNext();) {
+    for (NodeIterator niter = getCloudFileLinks(fileNode, identity, true); niter.hasNext();) {
       Node linkNode = niter.nextNode();
+      // Care about Social activity removal (avoid showing null activity posts),
+      // do it safe for the logic
+      try {
+        Utils.deleteFileActivity(linkNode);
+      } catch (Throwable e) {
+        LOG.warn("Failed to remove unpublished file activity: " + linkNode.getPath(), e);
+      }
       Node parent = linkNode.getParent();
+      // Remove the link itself
       linkNode.remove();
       parent.save();
     }
@@ -1162,15 +1185,17 @@ public class CloudFileActionService implements Startable {
    * Removes the permission of an identity on given node.
    *
    * @param node the node, expected {@link ExtendedNode} here
-   * @param identity the identity
+   * @param permIdentity the identity, it should include membership if actual
+   *          (e.g. for space it's <code>*:/space/my_team</code>, but simply
+   *          <code>john</code> for an user)
    */
-  protected void removePermission(Node node, String identity) {
+  protected void removePermission(Node node, String permIdentity) {
     try {
       ExtendedNode target = (ExtendedNode) node;
-      target.removePermission(identity);
+      target.removePermission(permIdentity);
       target.save();
     } catch (Exception e) {
-      LOG.warn("Failed to remove permissions on " + node + " for " + identity, e);
+      LOG.warn("Failed to remove permissions on " + node + " for " + permIdentity, e);
     }
   }
 
@@ -1184,32 +1209,35 @@ public class CloudFileActionService implements Startable {
    * @throws RepositoryException the repository exception
    */
   protected void setUserFilePermission(Node fileNode, String userId, boolean forcePrivilegeable) throws RepositoryException {
-    ExtendedNode target = (ExtendedNode) fileNode;
+    ExtendedNode file = (ExtendedNode) fileNode;
 
     boolean setPermission = false;
-    if (target.canAddMixin(EXO_PRIVILEGEABLE)) {
+    if (file.canAddMixin(EXO_PRIVILEGEABLE)) {
       if (forcePrivilegeable) {
-        target.addMixin(EXO_PRIVILEGEABLE);
+        file.addMixin(EXO_PRIVILEGEABLE);
         setPermission = true;
       } // else will not set permissions on this node, but will check the child
         // nodes
-    } else if (target.isNodeType(EXO_PRIVILEGEABLE)) {
+    } else if (file.isNodeType(EXO_PRIVILEGEABLE)) {
       // already exo:privilegeable
       setPermission = true;
     }
     if (setPermission) {
-      // clean what ShareDocumentService could add
-      removeWritePermissions(target, userId);
-      target.setPermission(userId, READER_PERMISSION);
+      // XXX we DON'T clean what ShareDocumentService could add to let
+      // UIShareDocuments show permissions correctly,
+      // we only ensure that required rights are OK
+      if (!file.getACL().getPermissions(userId).contains(PermissionType.READ)) {
+        file.getACL().addPermissions(userId, READER_PERMISSION);
+      }
     }
 
     // For folders we do recursive (in 1.6.0 this is not actual as UI will not
     // let to share a folder to other user)
     if (fileNode.isNodeType(JCRLocalCloudDrive.NT_FOLDER)) {
       // check the all children but don't force adding exo:privilegeable
-      for (NodeIterator niter = target.getNodes(); niter.hasNext();) {
+      for (NodeIterator niter = file.getNodes(); niter.hasNext();) {
         Node child = niter.nextNode();
-        setGroupFilePermission(child, userId, false);
+        setUserFilePermission(child, userId, false);
       }
     }
     // Don't save the all here, do this once in the caller
@@ -1226,29 +1254,33 @@ public class CloudFileActionService implements Startable {
    * @throws RepositoryException the repository exception
    */
   protected void setGroupFilePermission(Node fileNode, String groupId, boolean forcePrivilegeable) throws RepositoryException {
-    ExtendedNode target = (ExtendedNode) fileNode;
+    ExtendedNode file = (ExtendedNode) fileNode;
 
     boolean setPermission = false;
-    if (target.canAddMixin(EXO_PRIVILEGEABLE)) {
+    if (file.canAddMixin(EXO_PRIVILEGEABLE)) {
       if (forcePrivilegeable) {
-        target.addMixin(EXO_PRIVILEGEABLE);
+        file.addMixin(EXO_PRIVILEGEABLE);
         setPermission = true;
       } // else will not set permissions on this node, but will check the child
         // nodes
-    } else if (target.isNodeType(EXO_PRIVILEGEABLE)) {
+    } else if (file.isNodeType(EXO_PRIVILEGEABLE)) {
       // already exo:privilegeable
       setPermission = true;
     }
     if (setPermission) {
-      // clean what ShareDocumentService could add
-      removeWritePermissions(target, groupId);
-      target.setPermission(new StringBuilder("*:").append(groupId).toString(), READER_PERMISSION);
+      // XXX we DON'T clean what ShareDocumentService could add to let
+      // UIShareDocuments show permissions correctly,
+      // we only ensure that required rights are OK
+      String identity = new StringBuilder("*:").append(groupId).toString();
+      if (!file.getACL().getPermissions(identity).contains(PermissionType.READ)) {
+        file.getACL().addPermissions(identity, READER_PERMISSION);
+      }
     }
 
     // For folders we do recursive
     if (fileNode.isNodeType(JCRLocalCloudDrive.NT_FOLDER)) {
       // check the all children but don't force adding exo:privilegeable
-      for (NodeIterator niter = target.getNodes(); niter.hasNext();) {
+      for (NodeIterator niter = file.getNodes(); niter.hasNext();) {
         Node child = niter.nextNode();
         setGroupFilePermission(child, groupId, false);
       }
@@ -1265,41 +1297,48 @@ public class CloudFileActionService implements Startable {
    * @param linkNode the node
    * @param ownerId the owner id
    * @param sharedIdentity the group id
-   * @param forcePrivilegeable the force adding of exo:privilegeable mixin to
-   *          the node
+   * @param canEdit the can edit flag
    * @throws AccessControlException the access control exception
    * @throws RepositoryException the repository exception
    */
-  protected void setLinkPermission(Node linkNode, String ownerId, String sharedIdentity) throws AccessControlException,
-                                                                                         RepositoryException {
-    ExtendedNode target = (ExtendedNode) linkNode;
+  protected void setLinkPermission(Node linkNode, String ownerId, String sharedIdentity, boolean canEdit)
+                                                                                                          throws AccessControlException,
+                                                                                                          RepositoryException {
+    ExtendedNode link = (ExtendedNode) linkNode;
     boolean setPermission = false;
-    if (target.canAddMixin(EXO_PRIVILEGEABLE)) {
-      target.addMixin(EXO_PRIVILEGEABLE);
+    if (link.canAddMixin(EXO_PRIVILEGEABLE)) {
+      link.addMixin(EXO_PRIVILEGEABLE);
       setPermission = true;
-    } else if (target.isNodeType(EXO_PRIVILEGEABLE)) {
+    } else if (link.isNodeType(EXO_PRIVILEGEABLE)) {
       // already exo:privilegeable
       setPermission = true;
     }
     if (setPermission) {
       if (sharedIdentity.startsWith("/")) {
-        // space link
-        // Remove write to all
-        removeWritePermissions(target, sharedIdentity);
-        // Allow any member read only
-        target.setPermission(new StringBuilder("*:").append(sharedIdentity).toString(), READER_PERMISSION);
-        // Owner like manager
-        target.setPermission(ownerId, MANAGER_PERMISSION);
-        // Space manager
-        String managerMembership = getMembershipName("manager");
-        target.setPermission(new StringBuilder(managerMembership).append(':').append(sharedIdentity).toString(),
+        // It's space link
+        // File owner can do everything in any case
+        link.setPermission(ownerId, PermissionType.ALL);
+        if (canEdit) {
+          // Allow any member to modify the link node
+          link.setPermission(new StringBuilder("*:").append(sharedIdentity).toString(), MANAGER_PERMISSION);
+        } else {
+          // First remove write rights to anybody of the group
+          removeWritePermissions(link, sharedIdentity);
+          // Allow any member read only (this includes copy)
+          link.setPermission(new StringBuilder("*:").append(sharedIdentity).toString(), READER_PERMISSION);
+          // But space manager should be able to move/rename/delete and change
+          // properties also
+          String managerMembership = getMembershipName("manager");
+          link.setPermission(new StringBuilder(managerMembership).append(':').append(sharedIdentity).toString(),
                              MANAGER_PERMISSION);
+        }
       } else {
-        // user link
-        // Owner like manager
-        target.setPermission(ownerId, MANAGER_PERMISSION);
-        // Target user also has full rights
-        target.setPermission(sharedIdentity, MANAGER_PERMISSION);
+        // It's user link
+        // File owner can do everything
+        link.setPermission(ownerId, PermissionType.ALL);
+        // Target user should be able to move/rename/delete and change
+        // properties
+        link.setPermission(sharedIdentity, MANAGER_PERMISSION);
       }
     }
     // Don't save the all here, do this once in the caller
@@ -1307,25 +1346,28 @@ public class CloudFileActionService implements Startable {
   }
 
   /**
-   * Adds the cloud file link node (mixin node type and permissions).
+   * Initialize the cloud file link node (mixin node type and permissions).
    *
    * @param fileNode the file node
-   * @param sharedIdentity the identity this link was shared to
+   * @param identity the identity this link was shared to
    * @param targetPath the target path
+   * @param canEdit the can edit flag
    */
-  protected void initCloudFileLink(Node fileNode, String sharedIdentity, String targetPath) {
+  protected void initCloudFileLink(Node fileNode, String identity, String targetPath, boolean canEdit) {
     try {
-      // FYI link(s) should be created by CloudDriveShareDocumentService
-      List<Node> links = linkManager.getAllLinks(fileNode, ManageDocumentService.EXO_SYMLINK);
+      // FYI link(s) should be created by CloudDriveShareDocumentService, it
+      // creates them under system session, thus we will do the same.
+      SessionProvider systemSession = sessionProviders.getSystemSessionProvider(null);
+      List<Node> links = linkManager.getAllLinks(fileNode, ManageDocumentService.EXO_SYMLINK, systemSession);
       for (Node linkNode : links) {
         // do only for a target (space or user)
         if (linkNode.getPath().startsWith(targetPath)) {
           if (linkNode.canAddMixin(CloudFileActionService.ECD_CLOUDFILELINK)) {
             linkNode.addMixin(CloudFileActionService.ECD_CLOUDFILELINK);
-            if (sharedIdentity != null) {
-              linkNode.setProperty(CloudFileActionService.ECD_SHAREIDENTITY, sharedIdentity);
+            if (identity != null) {
+              linkNode.setProperty(CloudFileActionService.ECD_SHAREIDENTITY, identity);
             }
-            setLinkPermission(linkNode, ((ExtendedNode) fileNode).getACL().getOwner(), sharedIdentity);
+            setLinkPermission(linkNode, ((ExtendedNode) fileNode).getACL().getOwner(), identity, canEdit);
             linkNode.save();
           } else {
             // TODO it seems a normal case, should we update ECD_SHAREIDENTITY

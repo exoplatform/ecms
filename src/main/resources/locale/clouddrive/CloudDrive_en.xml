@@ -24,7 +24,6 @@
     <label>
       <!-- Used in Administration-Content-Explorer in Views settings a popup with actions list -->
       <showConnectCloudDrive>Connect Cloud Documents</showConnectCloudDrive>
-      <viewSharing>Cloud File Sharing</viewSharing>
     </label>
   </UITabForm>
   <UIPopupWindow>
@@ -37,7 +36,6 @@
   <UIActionBar>
     <tooltip>
       <ShowConnectCloudDrive>Connect Cloud Documents</ShowConnectCloudDrive>
-      <ViewSharing>Cloud File Sharing</ViewSharing>
     </tooltip>
   </UIActionBar>
   <ECMContextMenu>
@@ -46,7 +44,6 @@
       <SyncingFile>Synchronizing file...</SyncingFile>
       <PushCloudFile>Push to</PushCloudFile>
       <RefreshCloudDrive>Sync with </RefreshCloudDrive>
-      <ViewSharing>Sharing</ViewSharing>
       <RefreshView>Refresh view</RefreshView>
     </event>
   </ECMContextMenu>
@@ -67,6 +64,8 @@
       <DestinationNotWrittable>Cannot write in destination folder</DestinationNotWrittable>
       <DestinationNotDefined>Destination folder not defined</DestinationNotDefined>
       <SourceNotDefined>Source file not defined</SourceNotDefined>
+      <ErrorMoveToDestination>Error moving shared link to destination</ErrorMoveToDestination>
+      <DestinationItemNameExists>Such item name already exists at destination</DestinationItemNameExists>
       <LinkCreated>Link{0} created</LinkCreated>
       <FileLinksCreated>File{0} linked in {1}</FileLinksCreated>
       <FileLinksSharedInSpace>File link{0} shared in {1} of {2} space</FileLinksSharedInSpace>

@@ -139,7 +139,6 @@ public class CloudDriveUIService implements Startable {
   protected final UIExtensionManager uiExtensions;
 
   /** The default menu actions. */
-  @Deprecated // TODO not required
   protected final Set<String>        defaultMenuActions         = new HashSet<String>();
 
   /** The views. */
@@ -172,7 +171,6 @@ public class CloudDriveUIService implements Startable {
    *
    * @param plugin the plugin
    */
-  @Deprecated // TODO not used
   public void addPlugin(ComponentPlugin plugin) {
     if (plugin instanceof CloudDriveUIExtension) {
       // default menu action to initialize
@@ -189,7 +187,6 @@ public class CloudDriveUIService implements Startable {
    * @return List of Strings with action names
    * @throws Exception the exception
    */
-  @Deprecated // TODO not required
   protected Set<String> getDefaultActions() throws Exception {
     // find all Cloud Drive actions configured by default for action bar
     Set<String> cdActions = new LinkedHashSet<String>();
@@ -300,7 +297,6 @@ public class CloudDriveUIService implements Startable {
   protected void prepareViews() throws Exception {
     SessionProvider jcrSessions = SessionProvider.createSystemProvider();
     try {
-      // TODO don't use deprecated
       Set<String> defaultConfiguredActions = getDefaultActions();
       Session session = jcrSessions.getSession(DMS_SYSTEM_WORKSPACE, jcrService.getCurrentRepository());
       for (String view : VIEWS) {
