@@ -1,22 +1,21 @@
 /* Enterprise Skin styles */
-
 .uiIcon16x16CloudDrive-gdrive:before {
 	left: -13px;
-    top: 7px;
+	top: 7px;
 }
 
 .uiIcon64x64CloudDrive-gdrive:before {
 	left: -50px;
-    top: 22px;
+	top: 22px;
 }
 
 /*
  * Responsive styles
  */
-@media (min-width: 481px) and (max-width: 1024px) {
+@media ( min-width : 481px) and (max-width: 1024px) {
 	.uiIcon64x64CloudDrive-gdrive:before {
 		left: -58px;
-    	top: 30px;
-    	font-size: 34px;
+		top: 30px;
+		font-size: 34px;
 	}
 }
