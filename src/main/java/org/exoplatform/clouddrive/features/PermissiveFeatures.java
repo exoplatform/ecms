@@ -20,6 +20,7 @@ package org.exoplatform.clouddrive.features;
 
 import org.exoplatform.clouddrive.CloudDrive;
 import org.exoplatform.clouddrive.CloudProvider;
+import org.exoplatform.services.security.ConversationState;
 
 /**
  * Specification with all features permitted. Created by The eXo Platform SAS
@@ -48,7 +49,14 @@ public class PermissiveFeatures implements CloudDriveFeatures {
    */
   @Override
   public boolean isAutosyncEnabled(CloudDrive drive) {
-    return true;
+    // Allow only drive owner run automatic synchronization
+    try {
+      ConversationState cs = ConversationState.getCurrent();
+      return cs != null && drive.getLocalUser().equals(cs.getIdentity().getUserId());
+    } catch (Throwable e) {
+      // ignore here
+    }
+    return false;
   }
 
 }

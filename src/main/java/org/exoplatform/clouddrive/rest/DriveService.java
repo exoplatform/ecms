@@ -244,8 +244,8 @@ public class DriveService implements ResourceContainer {
               CloudFile file = local.getFile(path);
               files.add(file);
               if (!file.getPath().equals(path)) {
-                files.add(new LinkedCloudFile(file, path)); // it's symlink, add
-                                                            // it also
+                // it's symlink, add it also
+                files.add(new LinkedCloudFile(file, path));
               }
             }
           } catch (NotYetCloudFileException e) {

@@ -424,7 +424,9 @@ public class JCRLocalCloudFile implements CloudFile {
    * {@link Node} instance can be treated as valid only in a short time span -
    * just after the operation on the file internally in
    * {@link JCRLocalCloudDrive}. Otherwise need check does the node's session
-   * valid (not expired for example).
+   * valid (not expired for example).<br>
+   * Take in account that the node can be obtained via a system session and so
+   * all changes over it will be done on behalf of system user.
    * 
    * @return the node that represent this Cloud File in the storage.
    */

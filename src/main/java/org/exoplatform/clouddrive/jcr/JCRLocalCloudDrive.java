@@ -191,23 +191,17 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
   /** The Constant CURRENT_LOCALFORMAT. */
   public static final double     CURRENT_LOCALFORMAT   = 1.1d;
 
-  /** The Constant HISTORY_EXPIRATION. */
-  public static final long       HISTORY_EXPIRATION    = 1000 * 60 * 60 * 24 * 8; // 8
-                                                                                  // days
+  /** The Constant HISTORY_EXPIRATION - 8 days. */
+  public static final long       HISTORY_EXPIRATION    = 1000 * 60 * 60 * 24 * 8;
 
   /** The Constant HISTORY_MAX_LENGTH. */
-  public static final int        HISTORY_MAX_LENGTH    = 1000;                    // 1000
-                                                                                  // file
-                                                                                  // modification
+  public static final int        HISTORY_MAX_LENGTH    = 1000;
 
   /**
-   * Number of files, after reaching it, a command can save the drive.
+   * Number of files, after reaching it, a command can save the drive (was 30
+   * before Feb 2018).
    */
-  public static final int        COMMAND_CHANGES_CHUNK = 15;                      // was
-                                                                                  // 30,
-                                                                                  // Feb
-                                                                                  // 9
-                                                                                  // 2018
+  public static final int        COMMAND_CHANGES_CHUNK = 15;
 
   /** The Constant DUMMY_DATA. */
   public static final String     DUMMY_DATA            = "".intern();
@@ -3628,6 +3622,9 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
   /** The root node holder. */
   protected final ThreadLocal<SoftReference<Node>>        rootNodeHolder;
 
+  /** The root system node holder. */
+  protected final ThreadLocal<SoftReference<Node>>        rootSystemNodeHolder;
+
   /** The jcr listener. */
   protected final JCRListener                             jcrListener;
 
@@ -3744,14 +3741,6 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
   protected final Queue<CloudDriveMessage>                syncFilesMessages   = new ConcurrentLinkedQueue<CloudDriveMessage>();
 
   /**
-   * Files updated by last executed {@link SyncFilesCommand} for next command
-   * that will be returned to an user (next sync).
-   */
-  // TODO cleanup
-  // protected final Queue<CloudFile> syncFilesChanged = new
-  // ConcurrentLinkedQueue<CloudFile>();
-
-  /**
    * Drive commands active currently {@link Command}. Used for awaiting the
    * drive readiness (not accurate, for tests or information purpose only).
    */
@@ -3830,6 +3819,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
     this.rootUUID = driveNode.getUUID();
     this.rootNodeHolder = new ThreadLocal<SoftReference<Node>>();
     this.rootNodeHolder.set(new SoftReference<Node>(driveNode));
+    this.rootSystemNodeHolder = new ThreadLocal<SoftReference<Node>>();
 
     // add drive trash listener
     this.jcrListener = addJCRListener(driveNode);
@@ -3846,7 +3836,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
    */
   @Override
   public String getTitle() throws DriveRemovedException, RepositoryException {
-    return rootNode().getProperty("exo:title").getString();
+    return rootNode(true).getProperty("exo:title").getString();
   }
 
   /**
@@ -3854,7 +3844,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
    */
   @Override
   public String getLink() throws DriveRemovedException, NotConnectedException, RepositoryException {
-    Node rootNode = rootNode();
+    Node rootNode = rootNode(true);
     try {
       return rootNode.getProperty("ecd:url").getString();
     } catch (PathNotFoundException e) {
@@ -3870,7 +3860,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
    * {@inheritDoc}
    */
   public String getId() throws DriveRemovedException, NotConnectedException, RepositoryException {
-    Node rootNode = rootNode();
+    Node rootNode = rootNode(true);
     try {
       return rootNode.getProperty("ecd:id").getString();
     } catch (PathNotFoundException e) {
@@ -3890,8 +3880,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
    * @throws RepositoryException the repository exception
    */
   public String getLocalUser() throws DriveRemovedException, RepositoryException {
-    return rootNode().getProperty("ecd:localUserName").getString();
-
+    return rootNode(true).getProperty("ecd:localUserName").getString();
   }
 
   /**
@@ -3902,21 +3891,21 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
    * @throws RepositoryException the repository exception
    */
   public Calendar getInitDate() throws DriveRemovedException, RepositoryException {
-    return rootNode().getProperty("ecd:initDate").getDate();
+    return rootNode(true).getProperty("ecd:initDate").getDate();
   }
 
   /**
    * {@inheritDoc}
    */
   public String getPath() throws DriveRemovedException, RepositoryException {
-    return rootNode().getPath();
+    return rootNode(true).getPath();
   }
 
   /**
    * {@inheritDoc}
    */
   public String getWorkspace() throws DriveRemovedException, RepositoryException {
-    return rootNode().getSession().getWorkspace().getName();
+    return rootNode(true).getSession().getWorkspace().getName();
   }
 
   /**
@@ -3929,7 +3918,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
    */
   public Calendar getConnectDate() throws DriveRemovedException, NotConnectedException, RepositoryException {
     if (isConnected()) {
-      return rootNode().getProperty("ecd:connectDate").getDate();
+      return rootNode(true).getProperty("ecd:connectDate").getDate();
     } else {
       throw new NotConnectedException("Drive '" + title() + "' not connected.");
     }
@@ -3968,10 +3957,9 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
                                         NotCloudFileException,
                                         NotYetCloudFileException,
                                         RepositoryException {
-    Node driveNode = rootNode();
-    Item target = finder.findItem(driveNode.getSession(), path); // take
-                                                                 // symlinks in
-                                                                 // account
+    Node driveNode = rootNode(true);
+    // take symlinks in account
+    Item target = finder.findItem(driveNode.getSession(), path);
     String nodePath = target.getPath();
     String drivePath = driveNode.getPath();
     if (nodePath.length() > drivePath.length() && nodePath.startsWith(drivePath)) {
@@ -4008,11 +3996,10 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
    */
   @Override
   public boolean hasFile(String path) throws DriveRemovedException, RepositoryException {
-    Node driveNode = rootNode();
+    Node driveNode = rootNode(true);
     try {
-      Item target = finder.findItem(driveNode.getSession(), path); // take
-                                                                   // symlinks
-                                                                   // in account
+      // take symlinks in account
+      Item target = finder.findItem(driveNode.getSession(), path);
       String nodePath = target.getPath();
       String drivePath = driveNode.getPath();
       if (nodePath.length() > drivePath.length() && nodePath.startsWith(drivePath)) {
@@ -4036,7 +4023,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
    */
   @Override
   public List<CloudFile> listFiles() throws DriveRemovedException, CloudDriveException, RepositoryException {
-    return listFiles(rootNode());
+    return listFiles(rootNode(true));
   }
 
   // ****** CloudDriveStorage ******
@@ -4063,7 +4050,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
                                       NotCloudFileException,
                                       DriveRemovedException {
     String nodePath = node.getPath();
-    String drivePath = rootNode().getPath();
+    String drivePath = rootNode(true).getPath();
     if (nodePath.length() > drivePath.length() && nodePath.startsWith(drivePath)) {
       return fileAPI.isIgnored(node);
     } else {
@@ -4234,7 +4221,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
   public void unshareFile(Node fileNode, String... users) throws RepositoryException, CloudDriveException {
     throw new CloudDriveException("Sharing not supported");
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -4405,7 +4392,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
       // implemented respecting the cloud provider sharing capabilities
       // (possible in dedicated connectors).
       String currentUser = currentUserName();
-      String driveOwner = rootNode().getProperty("ecd:localUserName").getString();
+      String driveOwner = rootNode(true).getProperty("ecd:localUserName").getString();
       if (driveOwner.equals(currentUser)) {
         refreshAccess();
 
@@ -4437,7 +4424,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
    * {@inheritDoc}
    */
   public boolean isConnected() throws DriveRemovedException, RepositoryException {
-    return rootNode().getProperty("ecd:connected").getBoolean();
+    return rootNode(true).getProperty("ecd:connected").getBoolean();
   }
 
   /**
@@ -5096,10 +5083,8 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
     Node driveNode = rootNode(true);
     if (driveNode.getSession().getWorkspace().getName().equals(workspace)) {
       try {
-        Item target = finder.findItem(driveNode.getSession(), path); // take
-                                                                     // symlinks
-                                                                     // in
-                                                                     // account
+        // take symlinks in account
+        Item target = finder.findItem(driveNode.getSession(), path);
         if (target.isNode()) {
           Node node = (Node) target;
           if (isConnected()) {
@@ -5216,40 +5201,64 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
    * @throws RepositoryException the repository exception
    */
   protected Node rootNode(boolean systemSession) throws DriveRemovedException, RepositoryException {
-    SoftReference<Node> rootNodeRef = rootNodeHolder.get();
-    Node rootNode;
-    if (rootNodeRef != null) {
-      rootNode = rootNodeRef.get();
-      String currentUser = currentUserName();
-      if (rootNode != null && rootNode.getSession().isLive() && currentUser != null
-          && IdentityHelper.isUserMatch(rootNode.getSession().getUserID(), currentUser)) {
-        try {
-          // FYI as more light alternative rootNode.getIndex() can be used to
-          // force state check, but refresh is good for long living nodes (and
-          // soft ref will do long live until memory will be available)
-          // XXX Node.refresh(true) discards added mixin on the drive sub-nodes
-          // (ecd:cloudFile on a file node)
-          // rootNode.refresh(true);
-          rootNode.getIndex();
-          return rootNode;
-        } catch (InvalidItemStateException e) {
-          // probably root node already removed
-          throw new DriveRemovedException("Drive " + title() + " was removed.", e);
-        } catch (RepositoryException e) {
-          // if JCR error - need new node instance
+    if (systemSession) {
+      SoftReference<Node> rootNodeRef = rootSystemNodeHolder.get();
+      Node rootNode;
+      if (rootNodeRef != null) {
+        rootNode = rootNodeRef.get();
+        if (rootNode != null && rootNode.getSession().isLive() && isPrivilegedUser(rootNode.getSession().getUserID())) {
+          try {
+            // FYI as more light alternative rootNode.getIndex() can be used to
+            // force state check, but refresh is good for long living nodes (and
+            // soft ref will do long live until memory will be available)
+            // XXX Node.refresh(true) discards added mixin on the drive
+            // sub-nodes (ecd:cloudFile on a file node)
+            rootNode.getIndex();
+            return rootNode;
+          } catch (InvalidItemStateException e) {
+            // probably root node already removed
+            throw new DriveRemovedException("Drive " + title() + " was removed.", e);
+          } catch (RepositoryException e) {
+            // if JCR error - need new node instance
+          }
         }
       }
+      try {
+        rootNode = systemSession().getNodeByUUID(rootUUID);
+      } catch (ItemNotFoundException e) {
+        // it is already removed
+        throw new DriveRemovedException("Drive " + title() + " was removed.", e);
+      }
+      rootSystemNodeHolder.set(new SoftReference<Node>(rootNode));
+      return rootNode;
+    } else {
+      SoftReference<Node> rootNodeRef = rootNodeHolder.get();
+      Node rootNode;
+      if (rootNodeRef != null) {
+        rootNode = rootNodeRef.get();
+        String currentUser = currentUserName();
+        if (rootNode != null && rootNode.getSession().isLive() && currentUser != null
+            && currentUser.equals(rootNode.getSession().getUserID())) {
+          try {
+            rootNode.getIndex(); // validate the state
+            return rootNode;
+          } catch (InvalidItemStateException e) {
+            // probably root node already removed
+            throw new DriveRemovedException("Drive " + title() + " was removed.", e);
+          } catch (RepositoryException e) {
+            // if JCR error - need new node instance
+          }
+        }
+      }
+      try {
+        rootNode = session().getNodeByUUID(rootUUID);
+      } catch (ItemNotFoundException e) {
+        // it is already removed
+        throw new DriveRemovedException("Drive " + title() + " was removed.", e);
+      }
+      rootNodeHolder.set(new SoftReference<Node>(rootNode));
+      return rootNode;
     }
-
-    Session session = systemSession ? systemSession() : session();
-    try {
-      rootNode = session.getNodeByUUID(rootUUID);
-    } catch (ItemNotFoundException e) {
-      // it is already removed
-      throw new DriveRemovedException("Drive " + title() + " was removed.", e);
-    }
-    rootNodeHolder.set(new SoftReference<Node>(rootNode));
-    return rootNode;
   }
 
   /**
@@ -5703,7 +5712,9 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
   }
 
   /**
-   * Read file.
+   * Read cloud file from given node for use outside the drive. Note that
+   * returned {@link JCRLocalCloudFile} instance will not have set its node
+   * instance.
    *
    * @param fileNode the file node
    * @return the JCR local cloud file
@@ -5736,7 +5747,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
                                  fileAPI.getModified(fileNode),
                                  isFolder,
                                  size,
-                                 fileNode,
+                                 null, // fileNode, Jul 5, 2018
                                  false);
   }
 
@@ -6624,4 +6635,13 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
     return parentPath;
   }
 
+  /**
+   * Check if is privileged user (root or system account).
+   *
+   * @param userId the user id
+   * @return true, if is privileged user
+   */
+  protected boolean isPrivilegedUser(String userId) {
+    return IdentityHelper.SYSTEM_USER_ID.equals(userId) || IdentityHelper.ROOT_USER_ID.equals(userId);
+  }
 }
