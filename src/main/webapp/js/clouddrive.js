@@ -1875,12 +1875,15 @@
 					var isMediaContent = $media.is(".mediaContent");
 					$media.removeClass("mediaContent").removeAttr("onclick");
 					var $mediaLink = $media.children("a");
-					$mediaLink.removeAttr("rel");
-					//$mediaLink.removeAttr("href");
-					$mediaLink.css("cursor", "pointer");
-					$mediaLink.click(function() {
-						window.open($text.find("a.linkTitle").attr("href"));
-					});
+					if ($mediaLink.length > 0) {
+						$mediaLink.removeAttr("rel");
+						$mediaLink.removeAttr("href");
+						// We do a single UX for all cloud files: use can click file name to load its Documents page
+						//$mediaLink.css("cursor", "pointer");
+						//$mediaLink.click(function() {
+						//	window.open($text.find("a.linkTitle").attr("href"));
+						//});
+					}
 					$media.find("button.btn.doc-preview-thumbnail-footer").hide();
 					var $description = $text.find(".descriptionText");
 					if ($description.text().length == 0) {

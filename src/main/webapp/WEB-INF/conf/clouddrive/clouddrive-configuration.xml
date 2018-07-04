@@ -198,22 +198,6 @@
   </external-component-plugins>
   
   <!-- ECMS integration -->
-  <!-- Mandatory ECMS menu actions for Cloud Drive (TODO not required as ViewSharing not used anymore) -->
-  <!-- external-component-plugins>
-    <target-component>org.exoplatform.clouddrive.ecms.CloudDriveUIService</target-component>
-    <component-plugin>
-      <name>add.clouddrive.ecms.menu.mandatory</name>
-      <set-method>addPlugin</set-method>
-      <type>org.exoplatform.clouddrive.ecms.CloudDriveUIExtension</type>
-      <init-params>
-        <values-param>
-          <name>default-actions</name>
-          <description>Names of mandatory ECMS menu actions enabled (WebUI extensions)</description>
-          <value>ViewSharing</value>
-        </values-param>
-      </init-params>
-    </component-plugin>
-  </external-component-plugins -->
   <external-component-plugins>
     <target-component>org.exoplatform.webui.ext.UIExtensionManager</target-component>
     <component-plugin>
@@ -294,23 +278,6 @@
             </field>
           </object>
         </object-param>
-        <!-- object-param> // TODO not used, PLF 5 ShareDocuments used instead
-          <name>ViewSharing</name>
-          <object type="org.exoplatform.webui.ext.UIExtension">
-            <field name="type">
-              <string>org.exoplatform.ecm.dms.UIActionBar</string>
-            </field>
-            <field name="name">
-              <string>ViewSharing</string>
-            </field>
-            <field name="component">
-              <string>org.exoplatform.clouddrive.ecms.action.ViewSharingActionComponent</string>
-            </field>
-            <field name="rank">
-              <int>10</int>
-            </field>
-          </object>
-        </object-param -->
         <object-param>
           <name>OpenCloudFile</name>
           <object type="org.exoplatform.webui.ext.UIExtension">
