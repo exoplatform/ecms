@@ -46,6 +46,7 @@ import org.exoplatform.ecm.webui.component.explorer.UIDrivesArea;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorerPortlet;
 import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
+import org.exoplatform.ecm.webui.component.explorer.UIDocumentInfo;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.services.cms.clipboard.ClipboardService;
 import org.exoplatform.services.cms.documents.AutoVersionService;
@@ -74,6 +75,7 @@ import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.UIContainer;
 import org.exoplatform.webui.core.UIRightClickPopupMenu;
+import org.exoplatform.webui.core.UIPageIterator;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.services.wcm.search.base.LazyPageList;
@@ -487,6 +489,10 @@ public class UITreeExplorer extends UIContainer {
       //      UIDocumentContainer uiDocumentContainer = uiDocumentWorkspace.getChild(UIDocumentContainer.class);
       //      UIDocumentInfo uiDocumentInfo = uiDocumentContainer.getChildById("UIDocumentInfo") ;
 
+      UIPageIterator contentPageIterator = uiExplorer.findComponentById(UIDocumentInfo.CONTENT_PAGE_ITERATOR_ID);
+      if(contentPageIterator != null) {
+        contentPageIterator.setCurrentPage(1);
+      }
       uiExplorer.updateAjax(event);
       event.getRequestContext().getJavascriptManager().
       require("SHARED/multiUpload", "multiUpload").
