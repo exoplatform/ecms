@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003-2016 eXo Platform SAS.
+ * Copyright (C) 2003-2018 eXo Platform SAS.
  *
  * This is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as
@@ -34,7 +34,6 @@ import org.exoplatform.clouddrive.CloudDrive;
 import org.exoplatform.clouddrive.CloudDriveException;
 import org.exoplatform.clouddrive.CloudDriveService;
 import org.exoplatform.clouddrive.CloudProvider;
-import org.exoplatform.clouddrive.features.CloudDriveFeatures;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.presentation.UIBaseNodePresentation;
 import org.exoplatform.services.log.ExoLogger;
@@ -89,36 +88,40 @@ public class CloudDriveContext {
   }
 
   /**
+   * Initialize request with Cloud Drive support (global settings only).
+   *
+   * @param requestContext the request context
+   * @throws CloudDriveException the cloud drive exception
+   */
+  public static void init(RequestContext requestContext) throws CloudDriveException {
+    init(requestContext, null, null);
+  }
+
+  /**
    * Initialize request with Cloud Drive support for given JCR location and
    * {@link CloudProvider}.
    * 
    * @param requestContext {@link RequestContext}
-   * @param workspace {@link String}
-   * @param nodePath {@link String}
+   * @param workspace {@link String} can be <code>null</code>
+   * @param nodePath {@link String} can be <code>null</code>
    * @throws CloudDriveException if cannot auth url from the provider
    */
   public static void init(RequestContext requestContext, String workspace, String nodePath) throws CloudDriveException {
-
     Object obj = requestContext.getAttribute(JAVASCRIPT);
     if (obj == null) {
       CloudDriveContext context = new CloudDriveContext(requestContext);
 
-      CloudDriveFeatures features = WCMCoreUtils.getService(CloudDriveFeatures.class);
       CloudDriveService service = WCMCoreUtils.getService(CloudDriveService.class);
-      boolean initContext = false;
       // add all providers to let related UI works for already connected and
       // linked files
       for (CloudProvider provider : service.getProviders()) {
-        // init cloud drive if we can connect to this user
-        if (features.canCreateDrive(workspace, nodePath, requestContext.getRemoteUser(), provider)) {
-          initContext = true;
-          context.addProvider(provider);
-        } // else, drive will be not initialized - thus not able to connect
+        context.addProvider(provider);
       }
 
-      // init cloud drive if at least one provider available
-      if (initContext) {
+      if (workspace != null && nodePath != null) {
         context.init(workspace, nodePath);
+      } else {
+        context.init();
       }
 
       Map<String, String> contextMessages = messages.get();
@@ -130,9 +133,10 @@ public class CloudDriveContext {
       }
 
       requestContext.setAttribute(JAVASCRIPT, context);
-    } else {
-      if (LOG.isDebugEnabled()) {
-        LOG.debug("Request context already initialized");
+    } else if (CloudDriveContext.class.isAssignableFrom(obj.getClass())) {
+      CloudDriveContext context = CloudDriveContext.class.cast(obj);
+      if (!context.hasContextNode() && workspace != null && nodePath != null) {
+        context.init(workspace, nodePath);
       }
     }
   }
@@ -211,6 +215,8 @@ public class CloudDriveContext {
   /** The providers. */
   private final Set<String>                             providers = new HashSet<String>();
 
+  private boolean                                       hasContextNode;
+
   /**
    * Internal constructor.
    * 
@@ -219,10 +225,21 @@ public class CloudDriveContext {
   private CloudDriveContext(RequestContext requestContext) {
     JavascriptManager js = ((WebuiRequestContext) requestContext).getJavascriptManager();
     this.require = js.require("SHARED/cloudDrive", "cloudDrive");
+    this.hasContextNode = false;
   }
 
   /**
-   * Inits the.
+   * Inits the only global context.
+   *
+   * @return the cloud drive context
+   */
+  private CloudDriveContext init() {
+    require.addScripts("\ncloudDrive.init();\n");
+    return this;
+  }
+
+  /**
+   * Inits the context with a node.
    *
    * @param workspace the workspace
    * @param nodePath the node path
@@ -230,7 +247,17 @@ public class CloudDriveContext {
    */
   private CloudDriveContext init(String workspace, String nodePath) {
     require.addScripts("\ncloudDrive.init('" + workspace + "','" + nodePath + "');\n");
+    hasContextNode = true;
     return this;
+  }
+
+  /**
+   * Checks for context node.
+   *
+   * @return true, if successful
+   */
+  private boolean hasContextNode() {
+    return hasContextNode;
   }
 
   /**
