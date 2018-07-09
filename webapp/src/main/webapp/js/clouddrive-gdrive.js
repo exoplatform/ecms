@@ -53,10 +53,7 @@
 			try {
 				$("i[class*='uiIcon64x64applicationvndgoogle-'].uiCloudFileActivity").each(function() {
 					var $elem = $(this);
-					// add absolute position to the icon (i.uiCloudFileActivity) to fit the activity box
-					$elem.css("top", "-30px");
-					$elem.css("left", "-35px");
-					// to decrease activity box size, set size to fileTypeContent
+					// decrease activity box size, set size to fileTypeContent
 					// (fileTypeContent>a>i.uiCloudFileActivity)
 					$elem.parent().parent().css({
 					  "width" : "60px",

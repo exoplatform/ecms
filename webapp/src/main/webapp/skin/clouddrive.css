@@ -148,6 +148,17 @@
 }
 
 /*************************** NodeType Icons for Google Drive documents ***********************/
+
+i[class*='uiIcon64x64applicationvndgoogle-'].uiCloudFileActivity {
+	top: -30px;
+	left: -35px;
+}
+
+#searchPortlet i[class*='uiIcon64x64applicationvndgoogle-'] {
+	top: -30px;
+	left: -30px;
+}
+
 [class*="uiIcon16x16applicationvndgoogle-"] {
 	top: 1px;
 }
