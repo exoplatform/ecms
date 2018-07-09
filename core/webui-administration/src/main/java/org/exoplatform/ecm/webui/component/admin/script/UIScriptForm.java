@@ -91,7 +91,6 @@ public class UIScriptForm extends UIForm implements UIPopupComponent {
     contents.addValidator(MandatoryValidator.class) ;
     UICheckBoxInput isVersion = new UICheckBoxInput(FIELD_ENABLE_VERSION , FIELD_ENABLE_VERSION, null) ;
     UIFormStringInput scriptLabel = new UIFormStringInput(FIELD_SCRIPT_LABEL, FIELD_SCRIPT_LABEL, null) ;
-    scriptLabel.addValidator(XSSValidator.class);
     UIFormStringInput scriptName = new UIFormStringInput(FIELD_SCRIPT_NAME, FIELD_SCRIPT_NAME, null) ;
     scriptName.addValidator(MandatoryValidator.class).addValidator(ECMNameValidator.class).addValidator(XSSValidator.class);
     versions.setOnChange("Change") ;

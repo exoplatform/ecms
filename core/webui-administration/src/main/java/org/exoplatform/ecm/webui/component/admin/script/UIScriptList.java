@@ -16,6 +16,7 @@
  */
 package org.exoplatform.ecm.webui.component.admin.script;
 
+import org.apache.commons.lang.StringEscapeUtils;
 import org.exoplatform.commons.utils.LazyPageList;
 import org.exoplatform.commons.utils.ListAccess;
 import org.exoplatform.commons.utils.ListAccessImpl;
@@ -129,7 +130,7 @@ public class UIScriptList extends UIComponentDecorator {
       } catch(PathNotFoundException pne) {
         scriptDescription = scriptNode.getName();
       }
-      scriptData.add(new ScriptData(scriptNode.getName(), scriptNode.getPath(), scriptDescription)) ;
+      scriptData.add(new ScriptData(scriptNode.getName(), scriptNode.getPath(), StringEscapeUtils.escapeHtml(scriptDescription)));
     }
     return scriptData ;
   }
