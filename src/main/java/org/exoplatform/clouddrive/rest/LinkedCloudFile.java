@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003-2016 eXo Platform SAS.
+ * Copyright (C) 2003-2018 eXo Platform SAS.
  *
  * This is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as
@@ -28,8 +28,8 @@ import org.exoplatform.clouddrive.CloudFile;
  * Wraps fields from another {@link CloudFile} and replace its path with a path
  * of that file {@link Node} symlink node.<br>
  * NOTE: we cannot wrap instance of another another {@link CloudFile} as it
- * leads to StackOverflowError in WS JsonGeneratorImpl. Created by The eXo
- * Platform SAS.<br>
+ * leads to StackOverflowError in WS JsonGeneratorImpl.<br>
+ * Created by The eXo Platform SAS.<br>
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
  * @version $Id: LinkedCloudFile.java 00000 Jan 24, 2013 pnedonosko $
@@ -66,6 +66,8 @@ public class LinkedCloudFile implements CloudFile {
   /** The size. */
   private final long               size;
 
+  // FYI transient fields will not appear in serialized forms like JSON object
+  // on client side
   /** The created date. */
   private final transient Calendar createdDate;
 
@@ -107,7 +109,9 @@ public class LinkedCloudFile implements CloudFile {
   }
 
   /**
-   * {@inheritDoc}
+   * Checks if is symlink.
+   *
+   * @return true, if is symlink
    */
   public boolean isSymlink() {
     return isSymlink;

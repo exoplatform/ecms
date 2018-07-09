@@ -72,7 +72,6 @@ public class JCRLocalCloudFile implements CloudFile {
 
   // FYI transient fields will not appear in serialized forms like JSON object
   // on client side
-
   /** The created date. */
   private final transient Calendar createdDate;
 

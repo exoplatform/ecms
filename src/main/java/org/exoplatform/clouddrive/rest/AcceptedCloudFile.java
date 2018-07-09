@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003-2016 eXo Platform SAS.
+ * Copyright (C) 2003-2018 eXo Platform SAS.
  *
  * This is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as
@@ -33,7 +33,15 @@ import org.exoplatform.clouddrive.CloudFile;
 public class AcceptedCloudFile implements CloudFile {
 
   /** The path. */
-  private final String path;
+  private final String     path;
+
+  // FYI transient fields will not appear in serialized forms like JSON object
+  // on client side
+  /** The created date. */
+  final transient Calendar createdDate  = null;
+
+  /** The modified date. */
+  final transient Calendar modifiedDate = null;
 
   /**
    * Instantiates a new accepted cloud file.
@@ -45,7 +53,9 @@ public class AcceptedCloudFile implements CloudFile {
   }
 
   /**
-   * {@inheritDoc}
+   * Checks if is symlink.
+   *
+   * @return true, if is symlink
    */
   public boolean isSymlink() {
     return false;

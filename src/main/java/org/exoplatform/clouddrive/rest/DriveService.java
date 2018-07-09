@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003-2016 eXo Platform SAS.
+ * Copyright (C) 2003-2018 eXo Platform SAS.
  *
  * This is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as
@@ -92,7 +92,7 @@ public class DriveService implements ResourceContainer {
 
   /**
    * REST cloudDrives uses {@link CloudDriveService} for actual job.
-   * 
+   *
    * @param cloudDrives {@link CloudDriveService}
    * @param jcrService {@link RepositoryService}
    * @param sessionProviders {@link SessionProviderService}
@@ -455,7 +455,6 @@ public class DriveService implements ResourceContainer {
   @Path("/state/")
   @RolesAllowed("users")
   public Response getState(@Context UriInfo uriInfo, @QueryParam("workspace") String workspace, @QueryParam("path") String path) {
-
     if (workspace != null) {
       if (path != null) {
         try {
