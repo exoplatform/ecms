@@ -31,7 +31,7 @@
   def file = uicomponent.file
   if (drive && file) {
     def serviceName = drive.user.serviceName
-    def openOn = _ctx.appRes("CloudFileViewer.event.OpenOn")
+    def openOn = uicomponent.appRes("CloudFileViewer.event.OpenOn")
     def viewable = uicomponent.isViewable()
 %>
 <div id="CloudFileViewer" file-open-on="${openOn} ${serviceName}" 
@@ -41,8 +41,8 @@
 %>
 	<div id="WebContent" class="uiTabNormal">
 		<ul class="nav nav-tabs">
-			<li class="active"><a data-toggle="tab" href="#TabHTML"><%=_ctx.appRes("File.view.label.htmlview")%></a></li>
-			<li><a id="FileCodeSwitch" data-toggle="tab" href="#TabCode"><%=_ctx.appRes("File.view.label.plaintextview")%></a></li> 
+			<li class="active"><a data-toggle="tab" href="#TabHTML"><%=uicomponent.appRes("File.view.label.htmlview")%></a></li>
+			<li><a id="FileCodeSwitch" data-toggle="tab" href="#TabCode"><%=uicomponent.appRes("File.view.label.plaintextview")%></a></li> 
 		</ul>
 		<div class="tab-content file-content" style="display: none;">
 			<div id="TabHTML" class="tab-pane fade in active">      
@@ -55,8 +55,8 @@
   %>
 	<div id="WebContent" class="uiTabNormal">
 		<ul class="nav nav-tabs">
-			<li class="active"><a id="FileCodeSwitch" data-toggle="tab" href="#TabCode"><%=_ctx.appRes("File.view.label.sourceview")%></a></li> 
-			<li><a data-toggle="tab" href="#TabHTML"><%=_ctx.appRes("File.view.label.webview")%></a></li>
+			<li class="active"><a id="FileCodeSwitch" data-toggle="tab" href="#TabCode"><%=uicomponent.appRes("File.view.label.sourceview")%></a></li> 
+			<li><a data-toggle="tab" href="#TabHTML"><%=uicomponent.appRes("File.view.label.webview")%></a></li>
 		</ul>
 		<div class="tab-content file-content" style="display: none;">
 			<div id="TabCode" class="tab-pane fade in active"></div>
@@ -86,8 +86,8 @@
 			  <i class="<%=Utils.getNodeTypeIcon(uicomponent.getParent().node, "uiIcon64x64")%>"></i>
 			</div>
 			<div class="detailContainer">
-			  <h4><%=_ctx.appRes("File.view.label.file-size-too-big")%></h4>
-			  <a class="btn btn-primary" href="$file.link"><%=_ctx.appRes("File.view.label.download")%></a>
+			  <h4><%=uicomponent.appRes("File.view.label.file-size-too-big")%></h4>
+			  <a class="btn btn-primary" href="$file.link"><%=uicomponent.appRes("File.view.label.download")%></a>
 		  </div>
 		</div>
 	</div>

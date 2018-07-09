@@ -33,7 +33,7 @@ def rcontext = _ctx.getRequestContext()
 def drive = rcontext.getAttribute(CloudDrive.class)  
 if (drive) {
 	def serviceName = drive.user.serviceName
-	def openOn = _ctx.appRes("CloudFileViewer.event.OpenOn")
+	def openOn = uicomponent.appRes("CloudFileViewer.event.OpenOn")
 	def viewable = uicomponent.isViewable()
 %>
 <div id="CloudFileViewer" file-open-on="${openOn} ${serviceName}"
@@ -41,8 +41,8 @@ if (drive) {
 	<%
 	if(viewable) {
 	  // preview/edit view
-  	def viewFile = _ctx.appRes("CloudFileViewer.event.ViewFile")
-  	def editFile = _ctx.appRes("CloudFileViewer.event.EditFile")
+  	def viewFile = uicomponent.appRes("CloudFileViewer.event.ViewFile")
+  	def editFile = uicomponent.appRes("CloudFileViewer.event.EditFile")
 	%>
 	<div style="display: none;" class="file-content">
     <a id="ViewerSwitch" view-title="${viewFile}" edit-title="${editFile}"

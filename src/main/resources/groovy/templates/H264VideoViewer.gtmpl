@@ -32,7 +32,7 @@ def file = uicomponent.file
 if (drive && file) {
   def title = ContentReader.getXSSCompatibilityContent(file.title)
   def serviceName = drive.user.serviceName
-  def openOn = _ctx.appRes("CloudFileViewer.event.OpenOn")
+  def openOn = uicomponent.appRes("CloudFileViewer.event.OpenOn")
 %>
 <div id="CloudFileViewer" file-open-on="${openOn} ${serviceName}" style="position: relative; height: 100%; overflow: hidden;">
   <div style="text-align:center; display: none;" class="file-content" title="$title">

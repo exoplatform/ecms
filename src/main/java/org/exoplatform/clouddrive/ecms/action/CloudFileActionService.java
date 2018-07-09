@@ -1,6 +1,6 @@
 
 /*
- * Copyright (C) 2003-2016 eXo Platform SAS.
+ * Copyright (C) 2003-2018 eXo Platform SAS.
  *
  * This is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as
@@ -838,39 +838,6 @@ public class CloudFileActionService implements Startable {
   }
 
   /**
-   * Gets the cloud file links.
-   *
-   * @param targetNode the target node
-   * @param shareIdentity the share identity
-   * @param useSystemSession the use system session
-   * @return the cloud file links
-   * @throws RepositoryException the repository exception
-   */
-  public NodeIterator getCloudFileLinks(Node targetNode,
-                                        String shareIdentity,
-                                        boolean useSystemSession) throws RepositoryException {
-    StringBuilder queryCode = new StringBuilder().append("SELECT * FROM ")
-                                                 .append(ECD_CLOUDFILELINK)
-                                                 .append(" WHERE exo:uuid='")
-                                                 .append(targetNode.getUUID())
-                                                 .append("'");
-    if (shareIdentity != null && shareIdentity.length() > 0) {
-      queryCode.append(" AND " + ECD_SHAREIDENTITY + "='").append(shareIdentity).append("'");
-    }
-
-    QueryManager queryManager;
-    if (useSystemSession) {
-      queryManager = systemSession().getWorkspace().getQueryManager();
-    } else {
-      queryManager = targetNode.getSession().getWorkspace().getQueryManager();
-    }
-
-    Query query = queryManager.createQuery(queryCode.toString(), Query.SQL);
-    QueryResult queryResult = query.execute();
-    return queryResult.getNodes();
-  }
-
-  /**
    * {@inheritDoc}
    */
   @Override
@@ -1164,7 +1131,45 @@ public class CloudFileActionService implements Startable {
       parent.save();
     }
   }
+  /**
+   * Gets the cloud file links.
+   * 
+   * @param targetNode the target node
+   * @param shareIdentity the share identity
+   * @param scopePath the scope path (only nodes from this sub-tree will be
+   *          searched)
+   * @param useSystemSession the use system session
+   * @return the cloud file links
+   * @throws RepositoryException the repository exception
+   */
+  public NodeIterator getCloudFileLinks(Node targetNode,
+                                        String shareIdentity,
+                                        String scopePath,
+                                        boolean useSystemSession) throws RepositoryException {
+    StringBuilder queryCode = new StringBuilder().append("SELECT * FROM ")
+                                                 .append(ECD_CLOUDFILELINK)
+                                                 .append(" WHERE exo:uuid='")
+                                                 .append(targetNode.getUUID())
+                                                 .append("'");
+    if (shareIdentity != null && shareIdentity.length() > 0) {
+      queryCode.append(" AND " + ECD_SHAREIDENTITY + "='").append(shareIdentity).append("'");
+    }
+    if (scopePath != null && scopePath.length() > 0) {
+      queryCode.append(" AND jcr:path LIKE '").append(scopePath).append("/%'");
+    }
+    
+    QueryManager queryManager;
+    if (useSystemSession) {
+      queryManager = systemSession().getWorkspace().getQueryManager();
+    } else {
+      queryManager = targetNode.getSession().getWorkspace().getQueryManager();
+    }
 
+    Query query = queryManager.createQuery(queryCode.toString(), Query.SQL);
+    QueryResult queryResult = query.execute();
+    return queryResult.getNodes();
+  }
+  
   /**
    * Gets organizational membership name by its type name.
    *
@@ -1399,6 +1404,21 @@ public class CloudFileActionService implements Startable {
         }
       }
     }
+  }
+
+  /**
+   * Gets the cloud file links.
+   *
+   * @param targetNode the target node
+   * @param shareIdentity the share identity
+   * @param useSystemSession the use system session
+   * @return the cloud file links
+   * @throws RepositoryException the repository exception
+   */
+  public NodeIterator getCloudFileLinks(Node targetNode,
+                                        String shareIdentity,
+                                        boolean useSystemSession) throws RepositoryException {
+    return getCloudFileLinks(targetNode, shareIdentity, null, useSystemSession);
   }
 
 }

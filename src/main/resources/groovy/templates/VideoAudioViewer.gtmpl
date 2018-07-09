@@ -32,7 +32,7 @@ def file = uicomponent.file
 if (drive && file) {
   def title = ContentReader.getXSSCompatibilityContent(file.title)
   def serviceName = drive.user.serviceName
-  def openOn = _ctx.appRes("CloudFileViewer.event.OpenOn")
+  def openOn = uicomponent.appRes("CloudFileViewer.event.OpenOn")
   
   Calendar lCDateCalendar = Calendar.getInstance()
   def timeCreated = lCDateCalendar.getTimeInMillis()

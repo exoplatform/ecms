@@ -105,7 +105,7 @@ public abstract class AbstractFileForm extends BaseCloudDriveForm implements Clo
    * @param key the key
    * @return the resource bundle
    */
-  public String getResourceBundle(String key) {
+  public String appRes(String key) {
     Locale locale = Util.getUIPortal().getAncestorOfType(UIPortalApplication.class).getLocale();
     ResourceBundleService resourceBundleService = WCMCoreUtils.getService(ResourceBundleService.class);
     ResourceBundle resourceBundle =

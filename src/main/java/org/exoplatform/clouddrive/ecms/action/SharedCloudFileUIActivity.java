@@ -127,7 +127,7 @@ public class SharedCloudFileUIActivity extends SharedFileUIActivity {
     // content download for some formats
     CloudFile file = cloudFile(getContentNode(i));
     if (file != null) {
-      return file.getLink();
+      return file.getLink(); // it can be a page on cloud provider site
     } else {
       return super.getWebdavURL(i);
     }
@@ -164,7 +164,7 @@ public class SharedCloudFileUIActivity extends SharedFileUIActivity {
     // content download for some formats
     CloudFile file = cloudFile(getContentNode(i));
     if (file != null) {
-      // In PLF 5.0 we need fix the download URL link in Javascript to open it
+      // TODO In PLF 5.0 we need fix the download URL link in Javascript to open it
       // in new window
       return file.getLink();
     } else {

@@ -18,11 +18,18 @@
  */
 package org.exoplatform.clouddrive.ecms.viewer;
 
+import java.util.Locale;
+import java.util.ResourceBundle;
+
 import javax.ws.rs.core.MediaType;
 
 import org.exoplatform.clouddrive.CloudDrive;
 import org.exoplatform.clouddrive.CloudFile;
 import org.exoplatform.clouddrive.ecms.BaseCloudDriveManagerComponent;
+import org.exoplatform.portal.webui.util.Util;
+import org.exoplatform.portal.webui.workspace.UIPortalApplication;
+import org.exoplatform.services.resources.ResourceBundleService;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.webui.application.WebuiRequestContext;
 
 /**
@@ -109,6 +116,23 @@ public abstract class AbstractFileViewer extends BaseCloudDriveManagerComponent 
   public boolean isViewable() {
     String mimeType = file.getType();
     return file.getSize() <= viewableMaxSize && !mimeType.startsWith(MediaType.APPLICATION_OCTET_STREAM);
+  }
+
+  /**
+   * Gets the resource bundle.
+   *
+   * @param key the key
+   * @return the resource bundle
+   */
+  public String appRes(String key) {
+    Locale locale = Util.getUIPortal().getAncestorOfType(UIPortalApplication.class).getLocale();
+    ResourceBundleService resourceBundleService = WCMCoreUtils.getService(ResourceBundleService.class);
+    ResourceBundle resourceBundle = resourceBundleService.getResourceBundle(
+                                                                            new String[] { "locale.clouddrive.CloudDrive",
+                                                                                "locale.ecm.views" },
+                                                                            locale,
+                                                                            this.getClass().getClassLoader());
+    return resourceBundle.getString(key);
   }
 
 }

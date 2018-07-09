@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003-2016 eXo Platform SAS.
+ * Copyright (C) 2003-2018 eXo Platform SAS.
  *
  * This is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as
@@ -22,6 +22,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import javax.jcr.AccessDeniedException;
+import javax.jcr.ItemNotFoundException;
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 
@@ -29,6 +31,13 @@ import org.exoplatform.clouddrive.CloudProvider;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.UIJcrExplorerContainer;
 import org.exoplatform.ecm.webui.presentation.UIBaseNodePresentation;
+import org.exoplatform.portal.application.PortalApplication;
+import org.exoplatform.portal.application.PortalRequestContext;
+import org.exoplatform.services.jcr.RepositoryService;
+import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.social.webui.activity.UIActivitiesContainer;
 import org.exoplatform.social.webui.composer.PopupContainer;
 import org.exoplatform.webui.application.WebuiRequestContext;
@@ -44,14 +53,19 @@ import org.exoplatform.webui.ext.filter.UIExtensionFilterType;
  */
 public abstract class AbstractCloudDriveNodeFilter implements UIExtensionFilter {
 
+  protected static final Log    LOG                     = ExoLogger.getLogger(AbstractCloudDriveNodeFilter.class);
+
+  /** The Constant CONTENTVIEWER_REST_PATH. */
+  protected static final String CONTENTVIEWER_REST_PATH = "/contentviewer/";
+
   /** The min size. */
-  protected long         minSize;
+  protected long                minSize;
 
   /** The max size. */
-  protected long         maxSize;
+  protected long                maxSize;
 
   /** The providers. */
-  protected List<String> providers;
+  protected List<String>        providers;
 
   /**
    * Instantiates a new abstract cloud drive node filter.
@@ -115,7 +129,6 @@ public abstract class AbstractCloudDriveNodeFilter implements UIExtensionFilter 
             UIJCRExplorer jcrExplorer = jcrExplorerContainer.getChild(UIJCRExplorer.class);
             contextNode = jcrExplorer.getCurrentNode();
           }
-
           // case of file preview in Social activity stream
           if (contextNode == null) {
             UIActivitiesContainer uiActivitiesContainer = uiApp.findFirstComponentOfType(UIActivitiesContainer.class);
@@ -126,6 +139,35 @@ public abstract class AbstractCloudDriveNodeFilter implements UIExtensionFilter 
                 if (docViewer != null) {
                   contextNode = docViewer.getNode();
                 }
+              }
+            }
+          }
+          // case of ContentViewerRESTService (actual for PLF 4.4 and PLF 5.0)
+          if (contextNode == null && PortalRequestContext.class.isAssignableFrom(reqContext.getClass())) {
+            try {
+              PortalRequestContext portalReqContext = PortalRequestContext.class.cast(reqContext);
+              String reqPathInfo = portalReqContext.getControllerContext().getRequest().getPathInfo();
+              if (reqPathInfo.startsWith(CONTENTVIEWER_REST_PATH)) {
+                // It's string of content like:
+                // /contentviewer/repository/collaboration/4e6a36fcc0a8016529a3148700beecec
+                String[] reqParams = reqPathInfo.substring(CONTENTVIEWER_REST_PATH.length()).split("/");
+                if (reqParams.length >= 3) {
+                  String repository = reqParams[0];
+                  String workspace = reqParams[1];
+                  String uuid = reqParams[2];
+                  RepositoryService repositoryService = WCMCoreUtils.getService(RepositoryService.class);
+                  SessionProvider sp = WCMCoreUtils.getUserSessionProvider();
+                  contextNode = sp.getSession(workspace, repositoryService.getRepository(repository)).getNodeByUUID(uuid);
+                }
+              }
+            } catch (AccessDeniedException e) {
+              // no access for current user
+            } catch (ItemNotFoundException e) {
+              // such item not found
+            } catch (Throwable e) {
+              // ignore and assume we don't have a context node
+              if (LOG.isDebugEnabled()) {
+                LOG.debug("Cannot find context node in the request: " + e.getMessage());
               }
             }
           }
