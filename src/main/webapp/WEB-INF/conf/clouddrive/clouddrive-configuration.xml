@@ -63,6 +63,9 @@
   <component>
     <type>org.exoplatform.clouddrive.ecms.rest.ResourceService</type>
   </component>
+  <component>
+    <type>org.exoplatform.clouddrive.ecms.rest.FileService</type>
+  </component>
   
   <!-- ECMS integration -->
   <component>
