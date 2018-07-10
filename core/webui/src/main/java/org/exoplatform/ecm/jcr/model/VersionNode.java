@@ -83,13 +83,28 @@ public class VersionNode {
     }
   }
 
+  /**
+   * Add versions of the given node as children with the right name and display name, and set
+   * the name dan display name of the current version.
+   * If the node has a property exo:maxVersion, it means some versions have been removed and
+   * we must use this value as the current version.
+   * If the node has a property exo:versionList, it means some versions have been removed then
+   * some others have been created. Since the display name of the versions does not follow the sequential numbering
+   * anymore (for example 1,3,4 if version 2 has been removed), the property exo:versionList maps the
+   * version name with the correct display name.
+   * To be noted : display name is always decremented by 1 from the version index of offset since
+   * we want the display name to start from 0
+   * @param node JCR node
+   * @param session JCR session
+   * @throws RepositoryException
+   */
   private void addVersions(Node node, Session session) throws RepositoryException {
     if(node instanceof Version) {
       Version version = (Version) node;
       versionLabels_ = version.getContainingHistory().getVersionLabels(version);
     } else {
       int maxVersion = 0;
-      Map<String, String> mapVersionName = new HashMap<String, String>();
+      Map<String, String> mapVersionName = new HashMap<>();
       if(node.isNodeType(VersionHistoryUtils.MIX_DISPLAY_VERSION_NAME)){
         //maxVersion of root version
         if(node.hasProperty(VersionHistoryUtils.MAX_VERSION_PROPERTY)){
@@ -109,23 +124,26 @@ public class VersionNode {
       int maxIndex = 0;
       while (allVersions.hasNext()) {
         Version version = allVersions.nextVersion();
-        String versionOffset = mapVersionName.get(version.getName());
 
         if(version.getUUID().equals(rootVersion.getUUID())) {
           continue;
         }
-        int versionIndex = Integer.parseInt(version.getName()) -1;
+
+        int versionIndex = Integer.parseInt(version.getName());
         maxIndex = Math.max(maxIndex , versionIndex);
+
+        String versionOffset = mapVersionName.get(version.getName());
+
         VersionNode versionNode = new VersionNode(version, session);
         if(versionOffset != null) {
-          versionNode.setDisplayName(String.valueOf(versionOffset));
-        }else{
-          versionNode.setDisplayName(String.valueOf(versionIndex));
+          versionNode.setDisplayName(String.valueOf(Integer.parseInt(versionOffset) - 1));
+        } else {
+          versionNode.setDisplayName(String.valueOf(versionIndex - 1));
         }
         children_.add(versionNode);
       }
       name_ = String.valueOf(maxIndex + 1);
-      displayName = maxVersion > 0 ?  String.valueOf(maxVersion) : String.valueOf(maxIndex +1);
+      displayName = maxVersion > 0 ?  String.valueOf(maxVersion - 1) : String.valueOf(maxIndex);
       versionLabels_ = node.getVersionHistory().getVersionLabels(rootVersion);
     }
   }

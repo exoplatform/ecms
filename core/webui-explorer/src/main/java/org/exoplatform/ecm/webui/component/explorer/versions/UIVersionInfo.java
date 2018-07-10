@@ -120,8 +120,7 @@ public class UIVersionInfo extends UIContainer  {
       int lastVersionNum = Integer.parseInt(listVersion.get(0).getName());
       setRootVersionNum(String.valueOf(++lastVersionNum));
     } else {
-      setRootVersionNum(String.valueOf(listVersion.size() + 1));
-      currentNodeTuple.setDisplayName("0");
+      setRootVersionNum("1");
     }
     listVersion.add(0, currentNodeTuple);
 
