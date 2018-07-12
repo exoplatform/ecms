@@ -68,7 +68,7 @@ public class TestFileSearchServiceConnector {
           "               \"title\": \"exo-documentation.pdf\",\n" +
           "               \"path\": \"/sites/intranet/documents/exo-documentation.pdf\",\n" +
           "               \"lastUpdatedDate\": 1505312333066,\n" +
-          "               \"createdDate\": \"1505312330756\",\n" +
+          "               \"createdDate\": \"1505310310756\",\n" +
           "               \"attachment\": {\n" +
           "                  \"content\": \"eXo Platform Documentation\"\n" +
           "               },\n" +
@@ -102,7 +102,7 @@ public class TestFileSearchServiceConnector {
           "               \"title\": \"exo-documentation.pdf\",\n" +
           "               \"path\": \"/sites/intranet/documents/exo-documentation.pdf\",\n" +
           "               \"lastUpdatedDate\": 1505312333066,\n" +
-          "               \"createdDate\": \"1505312330756\",\n" +
+          "               \"createdDate\": \"1505310310756\",\n" +
           "               \"attachment\": {\n" +
           "                  \"content\": \"eXo Platform Documentation\"\n" +
           "               },\n" +

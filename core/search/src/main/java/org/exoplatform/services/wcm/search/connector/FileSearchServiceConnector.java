@@ -85,7 +85,6 @@ public class FileSearchServiceConnector extends ElasticSearchServiceConnector {
     String nodePath = (String) hitSource.get("path");
     String fileType = (String) hitSource.get("fileType");
     String fileSize = (String) hitSource.get("fileSize");
-    String createdDate = (String) hitSource.get("createdDate");
 
     String driveName = "";
     try {
@@ -97,7 +96,7 @@ public class FileSearchServiceConnector extends ElasticSearchServiceConnector {
       LOG.warn("Cannot get drive of node " + nodePath, e);
     }
 
-    String detail = driveName + getFormattedFileSize(fileSize) + " - " + getFormattedDate(createdDate);
+    String detail = driveName + getFormattedFileSize(fileSize) + " - " + getFormattedDate(searchResult.getDate());
 
     SearchResult ecmsSearchResult = new EcmsSearchResult(getUrl(nodePath),
             getPreviewUrl(jsonHit, searchContext),
@@ -124,13 +123,12 @@ public class FileSearchServiceConnector extends ElasticSearchServiceConnector {
     return url;
   }
 
-  protected String getFormattedDate(String createdDate) {
+  protected String getFormattedDate(long createdDateTime) {
     try {
-      Long createdDateTime = Long.parseLong(createdDate);
       DateTimeFormatter df = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.FULL, FormatStyle.SHORT).withZone(ZoneId.systemDefault());
       return df.format(Instant.ofEpochMilli(createdDateTime));
     } catch (Exception e) {
-      LOG.error("Cannot format date for timestamp " + createdDate, e);
+      LOG.error("Cannot format date for timestamp " + createdDateTime, e);
       return "";
     }
   }
