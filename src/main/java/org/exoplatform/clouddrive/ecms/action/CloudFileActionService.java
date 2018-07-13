@@ -56,7 +56,6 @@ import org.exoplatform.clouddrive.NotCloudDriveException;
 import org.exoplatform.clouddrive.ThreadExecutor;
 import org.exoplatform.clouddrive.jcr.JCRLocalCloudDrive;
 import org.exoplatform.clouddrive.jcr.NodeFinder;
-import org.exoplatform.commons.utils.ActivityTypeUtils;
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.component.RequestLifeCycle;
@@ -531,10 +530,22 @@ public class CloudFileActionService implements Startable {
    * @throws Exception the exception
    */
   public Node getUserPublicNode(String userName) throws Exception {
+    Node profileNode = getUserProfileNode(userName);
+    String userPublic = hierarchyCreator.getJcrPath("userPublic");
+    return profileNode.getNode(userPublic != null ? userPublic : "Public");
+  }
+
+  /**
+   * Gets the user profile node (a node where /Private and /Public nodes live).
+   *
+   * @param userName the user name
+   * @return the user profile node
+   * @throws Exception the exception
+   */
+  public Node getUserProfileNode(String userName) throws Exception {
     SessionProvider ssp = sessionProviders.getSystemSessionProvider(null);
     if (ssp != null) {
-      String userPublic = hierarchyCreator.getJcrPath("userPublic");
-      return hierarchyCreator.getUserNode(ssp, userName).getNode(userPublic != null ? userPublic : "Public");
+      return hierarchyCreator.getUserNode(ssp, userName);
     }
     throw new RepositoryException("Cannot get session provider.");
   }
@@ -562,6 +573,13 @@ public class CloudFileActionService implements Startable {
     }
   }
 
+  /**
+   * Unshare to user.
+   *
+   * @param fileNode the file node
+   * @param userId the user id
+   * @throws RepositoryException the repository exception
+   */
   public void unshareToUser(Node fileNode, String userId) throws RepositoryException {
     // remove all copied/linked symlinks from the original shared to given
     // identity (or all if it is null)
@@ -1131,6 +1149,7 @@ public class CloudFileActionService implements Startable {
       parent.save();
     }
   }
+
   /**
    * Gets the cloud file links.
    * 
@@ -1157,7 +1176,7 @@ public class CloudFileActionService implements Startable {
     if (scopePath != null && scopePath.length() > 0) {
       queryCode.append(" AND jcr:path LIKE '").append(scopePath).append("/%'");
     }
-    
+
     QueryManager queryManager;
     if (useSystemSession) {
       queryManager = systemSession().getWorkspace().getQueryManager();
@@ -1169,7 +1188,7 @@ public class CloudFileActionService implements Startable {
     QueryResult queryResult = query.execute();
     return queryResult.getNodes();
   }
-  
+
   /**
    * Gets organizational membership name by its type name.
    *

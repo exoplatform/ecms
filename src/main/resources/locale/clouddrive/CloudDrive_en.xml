@@ -54,6 +54,10 @@
       <EditFile>Edit</EditFile>
       <ViewFile>View</ViewFile>
     </event>
+    <label>
+      <sourceview>View source code</sourceview>
+      <webview>View as Web page</webview>
+    </label>
   </CloudFileViewer>
   <CloudFile>
     <msg>

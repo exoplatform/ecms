@@ -133,7 +133,7 @@ public class FileService implements ResourceContainer {
                 file = new LinkedCloudFile(file, path); // it's symlink
               } else {
                 Identity currentIdentity = ConversationState.getCurrent().getIdentity();
-                if (!local.getUser().equals(currentIdentity.getUserId())) {
+                if (!local.getLocalUser().equals(currentIdentity.getUserId())) {
                   // XXX for shared file we need return also a right open link
                   // It's a workaround for PLF-8078
                   ExtendedNode fileNode = (ExtendedNode) ((JCRLocalCloudFile) file).getNode();
@@ -155,7 +155,7 @@ public class FileService implements ResourceContainer {
                                                                                    groupDrive.getHomePath(),
                                                                                    false); niter.hasNext();) {
                             Node linkNode = niter.nextNode();
-                            filePath = linkNode.getPath(); 
+                            filePath = linkNode.getPath();
                             openLink = documentService.getLinkInDocumentsApp(linkNode.getPath(), groupDrive);
                             break nextAce;
                           }
@@ -163,16 +163,20 @@ public class FileService implements ResourceContainer {
                       }
                     } else if (ace.getIdentity().equals(currentIdentity.getUserId())) {
                       // user, url to the symlink in current user docs
-                      DriveData userDrive = cloudActions.getUserDrive(currentIdentity.getUserId());
-                      if (userDrive != null) {
-                        for (NodeIterator niter = cloudActions.getCloudFileLinks(fileNode,
-                                                                                 currentIdentity.getUserId(),
-                                                                                 userDrive.getHomePath(),
-                                                                                 false); niter.hasNext();) {
-                          Node linkNode = niter.nextNode();
-                          filePath = linkNode.getPath();
-                          openLink = documentService.getLinkInDocumentsApp(linkNode.getPath(), userDrive);
+                      Node profileNode = cloudActions.getUserProfileNode(currentIdentity.getUserId());
+                      String userPath = profileNode.getPath();
+                      for (NodeIterator niter = cloudActions.getCloudFileLinks(fileNode,
+                                                                               currentIdentity.getUserId(),
+                                                                               userPath,
+                                                                               false); niter.hasNext();) {
+                        Node linkNode = niter.nextNode();
+                        filePath = linkNode.getPath();
+                        DriveData linkDrive = documentService.getDriveOfNode(filePath);
+                        if (linkDrive != null) {
+                          openLink = documentService.getLinkInDocumentsApp(linkNode.getPath(), linkDrive);
                           break nextAce;
+                        } else {
+                          LOG.warn("Cannot find Documents drive for shared Cloud File: " + filePath);
                         }
                       }
                     }
