@@ -335,7 +335,12 @@ public class UIJCRExplorer extends UIContainer {
    */
   public boolean hasPaginator(String nodePath, String workspaceName) throws Exception {
     int nodePerPages = this.getPreference().getNodesPerPage();
-    return getNodeByPath(nodePath, this.getSessionByWorkspace(workspaceName)).getNodes().getSize() > nodePerPages;
+    Node node = getNodeByPath(nodePath, this.getSessionByWorkspace(workspaceName));
+    if (node != null) {
+      return node.getNodes().getSize() > nodePerPages;
+    } else {
+      return false;
+    }
   }
 
   public void setDriveData(DriveData driveData) { driveData_ = driveData ; }
