@@ -1914,8 +1914,26 @@
 					var $media = $elem.parent().parent();
 					var $text = $media.siblings(".text");
 					var isMediaContent = $media.is(".mediaContent");
-					$media.removeClass("mediaContent").removeAttr("onclick").off("mouseenter");
-					$media.children("a").removeAttr("href").off("mouseenter");
+					// Logic similar with initSearch()
+					var $link, onClick;
+					var jsClick = $media.attr("onclick");
+					if (!jsClick || jsClick.indexOf("javascript:void(") == 0) {
+						$link = $media.children("a");
+						jsClick = $link.attr("href");
+						onClick = false;
+					} else {
+						$link = $media;
+						onClick = true;
+					}
+					if (jsClick) {
+						var item = findItemInfo(jsClick);
+						if (item) {
+							$link.click(function() {
+								initFileViewerWait(item.workspace, item.path);
+							});	
+						}
+					}
+					$link.off("mouseenter"); // disabale hover stuff on cloud files
 					$media.find("button.btn.doc-preview-thumbnail-footer").hide();
 					var $description = $text.find(".descriptionText");
 					if ($description.text().length == 0) {
@@ -1937,28 +1955,29 @@
 		var findMappedText = function(key, text) {
 			var regex = new RegExp(key + "[ ]*:[ ]*'([^']*)'", "g");
 			var res = regex.exec(text);
-			return res[1];
+			return res && res.length > 0 ? res[1] : null;
 		};
 		
 		var findItemInfo = function(jsCode) {
-			var path = findMappedText("path", jsCode);
-			var openUrl = findMappedText("openUrl", jsCode);
-			var workspace = findMappedText("workspace", jsCode);
-			var downloadUrl = findMappedText("downloadUrl", jsCode);
-			if (workspace && path && openUrl) {
-				return {
-					workspace : workspace, 
-					path : path,
-					openUrl : openUrl,
-					downloadUrl : downloadUrl
-				};
-			} else {
-				return null;
+			if (jsCode.indexOf("javascript") == 0) {
+				var path = findMappedText("path", jsCode);
+				var openUrl = findMappedText("openUrl", jsCode);
+				var workspace = findMappedText("workspace", jsCode);
+				var downloadUrl = findMappedText("downloadUrl", jsCode);
+				if (workspace && path && openUrl && downloadUrl) {
+					return {
+						workspace : workspace, 
+						path : path,
+						openUrl : openUrl,
+						downloadUrl : downloadUrl
+					};
+				}	
 			}
+			return null;
 		};
 		
 		var initFileViewerWait = function(workspace, path) {
-			var attempts = 20;
+			var attempts = 120; // wait 30sec
 			function tryInit() {
 				var $viewer = $("#CloudFileViewer");
 				if ($viewer.length == 0 || !$viewer.is(":visible")) {
@@ -1994,6 +2013,13 @@
 						if (item) {
 							cloudDrive.getDocument(item.workspace, item.path).done(function(file) {
 								if (file) {
+									// XXX fix the CSS class (PLF 5.0.0 case)
+									$link.children("i[class*='uiIcon']").each(function(i, elem) {
+										var $i = $(elem);
+										var iclass = $i.attr("class");
+										iclass = iclass.replace(/[\/.]/g, "");
+										$i.attr("class", iclass);
+									});
 									jsClick = jsClick.replace("path:'" + item.path + "'", "path:'" + file.path + "'");
 									jsClick = jsClick.replace("downloadUrl:'" + item.downloadUrl + "'", "downloadUrl:'" + file.link + "'");
 									if (file.openLink) {
