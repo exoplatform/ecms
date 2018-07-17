@@ -5747,7 +5747,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
                                  fileAPI.getModified(fileNode),
                                  isFolder,
                                  size,
-                                 null, // fileNode, Jul 5, 2018
+                                 fileNode,
                                  false);
   }
 
