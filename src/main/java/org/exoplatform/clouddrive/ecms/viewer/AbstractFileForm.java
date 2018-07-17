@@ -108,8 +108,11 @@ public abstract class AbstractFileForm extends BaseCloudDriveForm implements Clo
   public String appRes(String key) {
     Locale locale = Util.getUIPortal().getAncestorOfType(UIPortalApplication.class).getLocale();
     ResourceBundleService resourceBundleService = WCMCoreUtils.getService(ResourceBundleService.class);
-    ResourceBundle resourceBundle =
-                                  resourceBundleService.getResourceBundle(localeFile(), locale, this.getClass().getClassLoader());
+    ResourceBundle resourceBundle = resourceBundleService.getResourceBundle(
+                                                                            new String[] { "locale.clouddrive.CloudDrive",
+                                                                                "locale.ecm.views", localeFile() },
+                                                                            locale,
+                                                                            this.getClass().getClassLoader());
     return resourceBundle.getString(key);
   }
 

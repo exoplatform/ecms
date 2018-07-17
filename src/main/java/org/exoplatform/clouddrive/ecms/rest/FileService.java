@@ -19,9 +19,12 @@
 package org.exoplatform.clouddrive.ecms.rest;
 
 import javax.annotation.security.RolesAllowed;
+import javax.jcr.Item;
 import javax.jcr.LoginException;
+import javax.jcr.NoSuchWorkspaceException;
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
+import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -50,6 +53,7 @@ import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.access.AccessControlEntry;
 import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
+import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.rest.resource.ResourceContainer;
@@ -136,53 +140,60 @@ public class FileService implements ResourceContainer {
                 if (!local.getLocalUser().equals(currentIdentity.getUserId())) {
                   // XXX for shared file we need return also a right open link
                   // It's a workaround for PLF-8078
-                  ExtendedNode fileNode = (ExtendedNode) ((JCRLocalCloudFile) file).getNode();
-                  // Find is the node shared via a group or via a personal
-                  // documents to current user - generate open link accordingly
-                  // We'll use a first one as in search context it has less
-                  // sense.
-                  String openLink = null;
-                  String filePath = null;
-                  nextAce: for (AccessControlEntry ace : fileNode.getACL().getPermissionEntries()) {
-                    MembershipEntry me = ace.getMembershipEntry();
-                    if (me != null) {
-                      // it's group - url to group docs with the link
-                      if (currentIdentity.getGroups().contains(me.getGroup())) {
-                        DriveData groupDrive = cloudActions.getGroupDrive(me.getGroup());
-                        if (groupDrive != null) {
-                          for (NodeIterator niter = cloudActions.getCloudFileLinks(fileNode,
-                                                                                   me.getGroup(),
-                                                                                   groupDrive.getHomePath(),
-                                                                                   false); niter.hasNext();) {
-                            Node linkNode = niter.nextNode();
-                            filePath = linkNode.getPath();
-                            openLink = documentService.getLinkInDocumentsApp(linkNode.getPath(), groupDrive);
+                  ExtendedNode fileNode = fileNode(file, workspace);
+                  if (fileNode != null) {
+                    // Find is the node shared via a group or via a personal
+                    // documents to current user - generate open link
+                    // accordingly
+                    // We'll use a first one as in search context it has less
+                    // sense.
+                    String openLink = null;
+                    String filePath = null;
+                    nextAce: for (AccessControlEntry ace : fileNode.getACL().getPermissionEntries()) {
+                      MembershipEntry me = ace.getMembershipEntry();
+                      if (me != null) {
+                        // it's group - url to group docs with the link
+                        if (currentIdentity.getGroups().contains(me.getGroup())) {
+                          DriveData groupDrive = cloudActions.getGroupDrive(me.getGroup());
+                          if (groupDrive != null) {
+                            for (NodeIterator niter = cloudActions.getCloudFileLinks(fileNode,
+                                                                                     me.getGroup(),
+                                                                                     groupDrive.getHomePath(),
+                                                                                     false); niter.hasNext();) {
+                              Node linkNode = niter.nextNode();
+                              filePath = linkNode.getPath();
+                              openLink = documentService.getLinkInDocumentsApp(linkNode.getPath(), groupDrive);
+                              break nextAce;
+                            }
+                          }
+                        }
+                      } else if (ace.getIdentity().equals(currentIdentity.getUserId())) {
+                        // user, url to the symlink in current user docs
+                        Node profileNode = cloudActions.getUserProfileNode(currentIdentity.getUserId());
+                        String userPath = profileNode.getPath();
+                        for (NodeIterator niter = cloudActions.getCloudFileLinks(fileNode,
+                                                                                 currentIdentity.getUserId(),
+                                                                                 userPath,
+                                                                                 false); niter.hasNext();) {
+                          Node linkNode = niter.nextNode();
+                          filePath = linkNode.getPath();
+                          DriveData linkDrive = documentService.getDriveOfNode(filePath);
+                          if (linkDrive != null) {
+                            openLink = documentService.getLinkInDocumentsApp(linkNode.getPath(), linkDrive);
                             break nextAce;
+                          } else {
+                            LOG.warn("Cannot find Documents drive for shared Cloud File: " + filePath);
                           }
                         }
                       }
-                    } else if (ace.getIdentity().equals(currentIdentity.getUserId())) {
-                      // user, url to the symlink in current user docs
-                      Node profileNode = cloudActions.getUserProfileNode(currentIdentity.getUserId());
-                      String userPath = profileNode.getPath();
-                      for (NodeIterator niter = cloudActions.getCloudFileLinks(fileNode,
-                                                                               currentIdentity.getUserId(),
-                                                                               userPath,
-                                                                               false); niter.hasNext();) {
-                        Node linkNode = niter.nextNode();
-                        filePath = linkNode.getPath();
-                        DriveData linkDrive = documentService.getDriveOfNode(filePath);
-                        if (linkDrive != null) {
-                          openLink = documentService.getLinkInDocumentsApp(linkNode.getPath(), linkDrive);
-                          break nextAce;
-                        } else {
-                          LOG.warn("Cannot find Documents drive for shared Cloud File: " + filePath);
-                        }
-                      }
                     }
-                  }
-                  if (openLink != null) {
-                    file = new SharedCloudFile(file, filePath, openLink);
+                    if (openLink != null) {
+                      file = new SharedCloudFile(file, filePath, openLink);
+                    }
+                  } else {
+                    return Response.status(Status.INTERNAL_SERVER_ERROR)
+                                   .entity(ErrorEntiry.message("File node cannot be found."))
+                                   .build();
                   }
                 }
               }
@@ -222,6 +233,43 @@ public class FileService implements ResourceContainer {
     } else {
       return Response.status(Status.BAD_REQUEST).entity(ErrorEntiry.message("Null workspace")).build();
     }
+  }
+
+  /**
+   * Read cloud file node.
+   *
+   * @param file the file
+   * @param workspace the workspace
+   * @return the node
+   * @throws PathNotFoundException the path not found exception
+   * @throws LoginException the login exception
+   * @throws NoSuchWorkspaceException the no such workspace exception
+   * @throws RepositoryException the repository exception
+   */
+  protected ExtendedNode fileNode(CloudFile file, String workspace) throws PathNotFoundException,
+                                                                    LoginException,
+                                                                    NoSuchWorkspaceException,
+                                                                    RepositoryException {
+    ExtendedNode node;
+    if (JCRLocalCloudFile.class.isAssignableFrom(file.getClass())) {
+      node = ExtendedNode.class.cast(JCRLocalCloudFile.class.cast(file).getNode());
+    } else {
+      node = null;
+    }
+    if (node == null) {
+      SessionProvider sp = sessionProviders.getSessionProvider(null);
+      if (sp != null) {
+        Item item = sp.getSession(workspace, jcrService.getCurrentRepository()).getItem(file.getPath());
+        if (ExtendedNode.class.isAssignableFrom(item.getClass())) {
+          node = ExtendedNode.class.cast(item);
+        } else {
+          LOG.warn("Cannot cast cloud file node from item: " + item);
+        }
+      } else {
+        LOG.warn("Cannot get session provider to read cloud file node: " + file.getPath());
+      }
+    }
+    return node;
   }
 
 }

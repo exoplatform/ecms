@@ -83,7 +83,7 @@ public class CloudDriveContext {
       // we store current node in the context
       init(WebuiRequestContext.getCurrentInstance(), contextNode.getSession().getWorkspace().getName(), contextNode.getPath());
     } else {
-      LOG.error("Cannot find ancestor context node in component " + uiComponent + ", parent: " + uiComponent.getParent());
+      LOG.warn("Cannot find ancestor context node in component " + uiComponent + ", parent: " + uiComponent.getParent());
     }
   }
 

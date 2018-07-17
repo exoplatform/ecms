@@ -31,7 +31,6 @@ import org.exoplatform.clouddrive.DriveRemovedException;
 import org.exoplatform.clouddrive.NotCloudDriveException;
 import org.exoplatform.clouddrive.ecms.action.CloudFileActionService;
 import org.exoplatform.clouddrive.jcr.JCRLocalCloudDrive;
-import org.exoplatform.commons.utils.ActivityTypeUtils;
 import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.jcr.RepositoryService;
@@ -197,7 +196,6 @@ public class CloudDriveShareDocumentService extends ShareDocumentService {
           cloudFileActions.shareToUser(node, userId, SHARE_PERMISSION_MODIFY.equalsIgnoreCase(perm));
           // Finally share if the drive supports this
           shareInDrive(node, localDrive, userId);
-          // TODO do we need CloudDriveContext.init() here ?
           return null;
         }
       });

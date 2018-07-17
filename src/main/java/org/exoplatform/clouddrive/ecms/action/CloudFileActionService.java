@@ -20,7 +20,6 @@
 package org.exoplatform.clouddrive.ecms.action;
 
 import java.security.AccessControlException;
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -47,7 +46,6 @@ import org.picocontainer.Startable;
 
 import org.exoplatform.clouddrive.CloudDrive;
 import org.exoplatform.clouddrive.CloudDriveException;
-import org.exoplatform.clouddrive.CloudDriveSecurity;
 import org.exoplatform.clouddrive.CloudDriveService;
 import org.exoplatform.clouddrive.CloudDriveStorage;
 import org.exoplatform.clouddrive.CloudDriveStorage.Change;
@@ -77,11 +75,8 @@ import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
-import org.exoplatform.services.organization.MembershipType;
 import org.exoplatform.services.organization.OrganizationService;
-import org.exoplatform.social.core.activity.model.ExoSocialActivity;
 import org.exoplatform.wcm.ext.component.activity.listener.Utils;
-import org.exoplatform.web.application.ApplicationMessage;
 
 /**
  * Integration of Cloud Drive with eXo Platform apps.<br>
@@ -455,33 +450,6 @@ public class CloudFileActionService implements Startable {
   }
 
   /**
-   * Link share to user.
-   *
-   * @param fileNode the file node
-   * @param fileDrive the file drive
-   * @param userName the user name
-   * @return the node
-   * @throws Exception the exception
-   */
-  @Deprecated
-  public Node linkShareToUser(Node fileNode, CloudDrive fileDrive, String userName) throws Exception {
-    Node userDocs = getUserPublicNode(userName);
-
-    shareCloudFile(fileNode, fileDrive, userName);
-    Node link;
-    NodeIterator links = getCloudFileLinks(fileNode, userName, true);
-    if (links.getSize() == 0) {
-      link = linkFile((Node) systemSession().getItem(fileNode.getPath()), userDocs, userName);
-      // set all permissions on the link to the target user
-      setAllPermissions(link, userName);
-      userDocs.save();
-    } else {
-      link = links.nextNode();
-    }
-    return link;
-  }
-
-  /**
    * Gets the group drive.
    *
    * @param groupId the group id
@@ -630,89 +598,6 @@ public class CloudFileActionService implements Startable {
   }
 
   /**
-   * Gets the node drive.
-   *
-   * @param node the node
-   * @return the node drive
-   * @throws Exception the exception
-   */
-  @Deprecated // not complete logic
-  public DriveData getNodeDrive(Node node) throws Exception {
-    String groupId = getDriveNameFromPath(node.getPath());
-    // TODO in case of user drive its home path may be not filled with actual
-    // value (contains $userId
-    // instead)
-    return groupId != null ? documentDrives.getDriveByName(groupId) : null;
-  }
-
-  /**
-   * Gets the drive name from path.
-   *
-   * @param nodePath the node path
-   * @return the drive name from path
-   * @throws CloudFileActionException the cloud file action exception
-   */
-  @Deprecated // TODO not complete logic
-  public String getDriveNameFromPath(String nodePath) throws CloudFileActionException {
-    List<DriveData> allDrives;
-    try {
-      allDrives = documentDrives.getAllDrives();
-    } catch (Exception e) {
-      throw new CloudFileActionException("Error reading document drives: "
-          + e.getMessage(), new ApplicationMessage("CloudFile.msg.ErrorReadingDrives", null, ApplicationMessage.ERROR));
-    }
-    for (DriveData drive : allDrives) {
-      String drivePath = drive.getHomePath();
-      if (nodePath.startsWith(drivePath)) {
-        // StringBuilder groupName = new StringBuilder();
-        if (drivePath.startsWith(groupsPath)) {
-          // XXX Names hardcoded as they already did in other places in eXo
-          // group drives have path /Groups${groupId}/Documents
-          // String[] gpp = drivePath.substring(drivePath.indexOf(groupsPath),
-          // groupsPath.length()).split("/");
-        } else if (drivePath.startsWith(usersPath)) {
-          // personal drives have path /Users/${userId}/Private
-          // String[] upp = drivePath.substring(drivePath.indexOf(usersPath),
-          // usersPath.length()).split("/");
-        }
-        return drive.getName();
-      }
-    }
-    return null;
-  }
-
-  /**
-   * Link file.
-   *
-   * @param srcNode the src node
-   * @param destNode the dest node
-   * @param destIdentity the dest identity
-   * @return the node
-   * @throws NotCloudDriveException the not cloud drive exception
-   * @throws DriveRemovedException the drive removed exception
-   * @throws RepositoryException the repository exception
-   * @throws CloudDriveException the cloud drive exception
-   */
-  @Deprecated
-  public Node linkFile(Node srcNode, Node destNode, String destIdentity) throws NotCloudDriveException,
-                                                                         DriveRemovedException,
-                                                                         RepositoryException,
-                                                                         CloudDriveException {
-    String linkName = srcNode.getName();
-    String linkTitle = documentName(srcNode);
-    Node linkNode = linkManager.createLink(destNode, null, srcNode, linkName, linkTitle);
-    if (linkNode.canAddMixin(ECD_CLOUDFILELINK)) {
-      linkNode.addMixin(ECD_CLOUDFILELINK);
-      if (destIdentity != null) {
-        linkNode.setProperty(ECD_SHAREIDENTITY, destIdentity);
-      }
-    } else {
-      LOG.warn("Cannot add mixin " + ECD_CLOUDFILELINK + " to symlink " + linkNode.getPath());
-    }
-    return linkNode;
-  }
-
-  /**
    * Mark remove link.
    *
    * @param linkNode the link node
@@ -749,110 +634,6 @@ public class CloudFileActionService implements Startable {
       LOG.warn("Not cloud file link: node " + linkNode.getPath() + " not of type " + ECD_CLOUDFILELINK);
     }
     return null;
-  }
-
-  /**
-   * Share cloud file.
-   *
-   * @param fileNode the file node
-   * @param cloudDrive the cloud drive
-   * @param identities the identities
-   * @throws NotCloudDriveException the not cloud drive exception
-   * @throws DriveRemovedException the drive removed exception
-   * @throws RepositoryException the repository exception
-   * @throws CloudDriveException the cloud drive exception
-   */
-  @Deprecated
-  public void shareCloudFile(final Node fileNode,
-                             final CloudDrive cloudDrive,
-                             final String... identities) throws NotCloudDriveException,
-                                                         DriveRemovedException,
-                                                         RepositoryException,
-                                                         CloudDriveException {
-    if (LOG.isDebugEnabled()) {
-      LOG.debug("Sharing Cloud File " + fileNode.getPath() + " of " + cloudDrive + " to " + " " + Arrays.toString(identities));
-    }
-
-    // set local file node permissions in JCR
-    // avoid firing Cloud Drive synchronization
-    CloudDriveStorage srcStorage = (CloudDriveStorage) cloudDrive;
-    srcStorage.localChange(new Change<Void>() {
-      @Override
-      public Void apply() throws RepositoryException {
-        Node parent = fileNode.getParent();
-        // we keep access to all sub-files of the src parent restricted
-        setParentPermissions(parent, identities);
-        setPermissions(fileNode, identities);
-        parent.save(); // save everything here!
-        return null;
-      }
-    });
-    // share file in cloud provider (if applicable)
-    CloudDriveSecurity srcSecurity = (CloudDriveSecurity) cloudDrive;
-    if (srcSecurity.isSharingSupported()) {
-      srcSecurity.shareFile(fileNode, identities);
-    }
-  }
-
-  /**
-   * Unshare cloud file.
-   *
-   * @param fileNode the file node
-   * @param cloudDrive the cloud drive
-   * @param identities the identities
-   * @throws NotCloudDriveException the not cloud drive exception
-   * @throws DriveRemovedException the drive removed exception
-   * @throws RepositoryException the repository exception
-   * @throws CloudDriveException the cloud drive exception
-   */
-  @Deprecated
-  public void unshareCloudFile(final Node fileNode,
-                               final CloudDrive cloudDrive,
-                               final String... identities) throws NotCloudDriveException,
-                                                           DriveRemovedException,
-                                                           RepositoryException,
-                                                           CloudDriveException {
-    if (LOG.isDebugEnabled()) {
-      LOG.debug("Unsharing Cloud File " + fileNode.getPath() + " of " + cloudDrive + " from " + " "
-          + Arrays.toString(identities));
-    }
-    // avoid firing Cloud Drive synchronization
-    CloudDriveStorage srcStorage = (CloudDriveStorage) cloudDrive;
-    srcStorage.localChange(new Change<Void>() {
-      @Override
-      public Void apply() throws RepositoryException {
-        Node parent = fileNode.getParent();
-        // we remove access for this drive to all sub-files of the src parent
-        removePermissions(fileNode, true, identities);
-        removePermissions(parent, false, identities);
-        parent.save(); // save everything here!
-        return null;
-      }
-    });
-  }
-
-  /**
-   * Post shared activity.
-   *
-   * @param node the node
-   * @param link the link
-   * @param comment the comment
-   * @return the string
-   * @throws CloudDriveException the cloud drive exception
-   */
-  @Deprecated
-  public String postSharedActivity(Node node, Node link, String comment) throws CloudDriveException {
-    try {
-      Utils.setActivityType(SHARE_CLOUD_FILES_SPACES);
-      ExoSocialActivity activity = Utils.postFileActivity(link, "", true, false, comment, "");
-      if (activity != null) {
-        return activity.getId();
-      } else {
-        return null;
-      }
-    } catch (Exception e) {
-      throw new CloudDriveException("Error posting stared activity: " + e.getMessage(), e);
-    }
   }
 
   /**
@@ -898,195 +679,6 @@ public class CloudFileActionService implements Startable {
                                  null,
                                  new String[] { ECD_CLOUDFILELINK },
                                  false);
-  }
-
-  /**
-   * Set read permissions on the target node to all given identities (e.g. space
-   * group members). If node not yet <code>exo:privilegeable</code> it will add
-   * such mixin to allow set the permissions first. Requested permissions will
-   * be set to all children nodes if the child already
-   * <code>exo:privilegeable</code>.<br>
-   *
-   * @param node {@link Node} link target node
-   * @param identities array of {@link String} with user identifiers (names or
-   *          memberships)
-   * @throws AccessControlException the access control exception
-   * @throws RepositoryException the repository exception
-   */
-  @Deprecated
-  protected void setPermissions(Node node, String... identities) throws AccessControlException, RepositoryException {
-    setPermissions(node, true, true, identities);
-  }
-
-  /**
-   * Set read permissions on the target node to all given identities (e.g. space
-   * group members). Permissions will not be set if target not
-   * <code>exo:privilegeable</code> and <code>forcePrivilegeable</code> is
-   * <code>false</code>. If <code>deep</code> is <code>true</code> the target
-   * children nodes will be checked also for a need to set the requested
-   * permissions. <br>
-   *
-   * @param node {@link Node} link target node
-   * @param deep {@link Boolean} if <code>true</code> then also children nodes
-   *          will be set to the requested permissions
-   * @param forcePrivilegeable {@link Boolean} if <code>true</code> and node not
-   *          yet <code>exo:privilegeable</code> it will add such mixin to allow
-   *          set the permissions.
-   * @param identities array of {@link String} with user identifiers (names or
-   *          memberships)
-   * @throws AccessControlException the access control exception
-   * @throws RepositoryException the repository exception
-   */
-  @Deprecated
-  protected void setPermissions(Node node, boolean deep, boolean forcePrivilegeable, String... identities)
-                                                                                                           throws AccessControlException,
-                                                                                                           RepositoryException {
-    ExtendedNode target = (ExtendedNode) node;
-    boolean setPermissions = true;
-    if (target.canAddMixin(EXO_PRIVILEGEABLE)) {
-      if (forcePrivilegeable) {
-        target.addMixin(EXO_PRIVILEGEABLE);
-      } else {
-        // will not set permissions on this node, but will check the child nodes
-        setPermissions = false;
-      }
-    } // else, already exo:privilegeable
-    if (setPermissions) {
-      for (String identity : identities) {
-        String[] ids = identity.split(":");
-        if (ids.length == 2) {
-          // it's group and we want allow given identity read only and
-          // additionally let managers remove the link
-          String managerMembership;
-          try {
-            MembershipType managerType = orgService.getMembershipTypeHandler().findMembershipType("manager");
-            managerMembership = managerType.getName();
-          } catch (Exception e) {
-            LOG.error("Error finding manager membership in organization service. "
-                + "Will use any (*) to allow remove shared cloud file link", e);
-            managerMembership = "*";
-          }
-          target.setPermission(new StringBuilder(managerMembership).append(':').append(ids[1]).toString(), MANAGER_PERMISSION);
-          target.setPermission(identity, READER_PERMISSION);
-        } else {
-          // in other cases, we assume it's user identity and user should be
-          // able to remove the link
-          target.setPermission(identity, MANAGER_PERMISSION);
-        }
-      }
-    }
-    if (deep) {
-      // check the all children also, but don't force adding exo:privilegeable
-      for (NodeIterator niter = target.getNodes(); niter.hasNext();) {
-        Node child = niter.nextNode();
-        setPermissions(child, true, false, identities);
-      }
-    }
-  }
-
-  /**
-   * Remove read permissions on the target node for all given identities (e.g.
-   * space group members). If <code>deep</code> is <code>true</code> then
-   * permissions will be removed on all ancestor nodes (sub-tree for folders).
-   *
-   * @param node {@link Node} link target node
-   * @param deep {@link Boolean} if <code>true</code> then also remove the
-   *          permissions from children nodes
-   * @param identities array of {@link String} with user identifiers (names or
-   *          memberships)
-   * @throws AccessControlException the access control exception
-   * @throws RepositoryException the repository exception
-   */
-  @Deprecated
-  protected void removePermissions(Node node, boolean deep, String... identities) throws AccessControlException,
-                                                                                  RepositoryException {
-    ExtendedNode target = (ExtendedNode) node;
-    if (target.isNodeType(EXO_PRIVILEGEABLE)) {
-      for (String identity : identities) {
-        String[] ids = identity.split(":");
-        if (ids.length == 2) {
-          // it's group and we should remove read link permissions for given
-          // identity and additionally remove
-          // link for managers (see setPermissions())
-          String managerMembership;
-          try {
-            MembershipType managerType = orgService.getMembershipTypeHandler().findMembershipType("manager");
-            managerMembership = managerType.getName();
-          } catch (Exception e) {
-            LOG.error("Error finding manager membership in organization service. "
-                + "Will use any (*) to remove permissions of shared cloud file link", e);
-            managerMembership = "*";
-          }
-          String managerId = new StringBuilder(managerMembership).append(':').append(ids[1]).toString();
-          target.removePermission(managerId, PermissionType.READ);
-          target.removePermission(managerId, PermissionType.REMOVE);
-          target.removePermission(identity, PermissionType.READ);
-        } else {
-          // in other cases, we assume it's user identity and remove both read
-          // and remove link permissions
-          target.removePermission(identity, PermissionType.READ);
-          target.removePermission(identity, PermissionType.REMOVE);
-        }
-      }
-    }
-    if (deep) {
-      for (NodeIterator niter = target.getNodes(); niter.hasNext();) {
-        Node child = niter.nextNode();
-        removePermissions(child, true, identities);
-      }
-    }
-  }
-
-  /**
-   * Set permissions on a parent node of a link target: all child nodes will
-   * become exo:privilegeable (thus copy permissions from its priviligeable
-   * parent). If a child already of priviligeable type - nothing will be
-   * performed, by this we assume its permissions already handled as required.
-   * After this read permissions will be added to the parent node.<br>
-   * This method SHOULD be used before setting permissions to a link target node
-   * in this parent. In this way we will keep permission of the target in
-   * consistent state.
-   *
-   * @param parent the parent
-   * @param identities the identities
-   * @throws AccessControlException the access control exception
-   * @throws RepositoryException the repository exception
-   */
-  @Deprecated
-  protected void setParentPermissions(Node parent, String... identities) throws AccessControlException, RepositoryException {
-    // first we go through all sub-files/folders and enabled exo:privilegeable,
-    // this will copy current
-    // parent permissions to the child nodes for those that aren't privilegeable
-    // already.
-    for (NodeIterator citer = parent.getNodes(); citer.hasNext();) {
-      ExtendedNode child = (ExtendedNode) citer.nextNode();
-      if (child.canAddMixin(EXO_PRIVILEGEABLE)) {
-        child.addMixin(EXO_PRIVILEGEABLE);
-      } // else, this child already has permissions, we assume they are OK and
-        // do nothing
-    }
-
-    // then we set read permissions to the parent only
-    setPermissions(parent, false, true, identities);
-  }
-
-  /**
-   * Set all available permissions to given node for given identities.
-   *
-   * @param node the node
-   * @param identities the identities
-   * @throws AccessControlException the access control exception
-   * @throws RepositoryException the repository exception
-   */
-  @Deprecated
-  protected void setAllPermissions(Node node, String... identities) throws AccessControlException, RepositoryException {
-    ExtendedNode target = (ExtendedNode) node;
-    if (target.canAddMixin(EXO_PRIVILEGEABLE)) {
-      target.addMixin(EXO_PRIVILEGEABLE);
-    }
-    for (String identity : identities) {
-      target.setPermission(identity, PermissionType.ALL);
-    }
   }
 
   /**

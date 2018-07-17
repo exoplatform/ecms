@@ -168,7 +168,7 @@
 
 	if (drive && file) {
 	  def serviceName = drive.user.serviceName
-    def openOn = _ctx.appRes("CloudFileViewer.event.OpenOn")
+    def openOn = uicomponent.appRes("CloudFileViewer.event.OpenOn")
 
 %>
 <div id="CloudFileViewer" file-open-on="${openOn} ${serviceName}" style="height: 100%; ">
@@ -232,7 +232,7 @@
 			<div class="ControlButton" rel="tooltip" data-placement="bottom" title="<%=uicomponent.appRes("PDFViewer.label.viewInfor")%>">
 				<div class="InfoIcon" onclick="javascript:eXo.ecm.ECMUtils.showDocumentInformation(this, event);"><span></span></div>
 			</div>
-			<div class="DownLoadIcon"><a href="$pdfLink"><%=_ctx.appRes("File.view.label.download") /*PDFViewer.label.downloadFile*/%></a></div>
+			<div class="DownLoadIcon"><a href="$pdfLink"><%=uicomponent.appRes("File.view.label.download")%></a></div>
 		</div>
 		<div class="InfoPopup" id="metadatas" style="display: none; position: absolute;">
 			<div class="Metadata"><span class="metaKey"><%=uicomponent.appRes("PDFViewer.metadata.fileName")%></span>: <span class="metaValue">$title</span></div>
@@ -255,8 +255,8 @@
 	    <i class="<%=Utils.getNodeTypeIcon(currentNode, "uiIcon64x64")%>"></i>
 	  </div>
 	  <div class="detailContainer">
-	    <h4><%=_ctx.appRes("File.view.label.not-viewable")%></h4>
-	    <a class="btn btn-primary" href="$file.previewLink"><%=_ctx.appRes("File.view.label.download")%></a>
+	    <h4><%=uicomponent.appRes("File.view.label.not-viewable")%></h4>
+	    <a class="btn btn-primary" href="$file.previewLink"><%=uicomponent.appRes("File.view.label.download")%></a>
 	  </div>
 	</div>
 <%  }
