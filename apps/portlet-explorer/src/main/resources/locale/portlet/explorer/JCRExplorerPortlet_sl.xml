@@ -1350,7 +1350,7 @@
       <empty>Kliknite tukaj, če želite dodati povzetek</empty>
     </summary>
     <tooltip>
-      <original>Original Version</original>
+      <original>Izvirnik</original>
       <version>Različica</version>
       <baseVersion>Osnovna različica</baseVersion>
       <addLabel>Dodaj oznako</addLabel>
