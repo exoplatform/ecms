@@ -26,10 +26,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-import javax.jcr.ItemNotFoundException;
-import javax.jcr.Node;
-import javax.jcr.PathNotFoundException;
-import javax.jcr.Session;
+import javax.jcr.*;
 import javax.ws.rs.GET;
 import javax.ws.rs.HeaderParam;
 import javax.ws.rs.Path;
@@ -290,9 +287,16 @@ public class ThumbnailRESTService implements ResourceContainer {
     if (!thumbnailService_.isEnableThumbnail())
       return Response.ok().header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
     Node showingNode = getShowingNode(workspaceName, nodePath);
-    Node parentNode = showingNode.getParent();
     String identifier = ((NodeImpl) showingNode).getInternalIdentifier();
     Node targetNode = getTargetNode(showingNode);
+    Node parentNode = null;
+    try {
+      parentNode = showingNode.getParent();
+    } catch (AccessDeniedException e) {
+      Session session = WCMCoreUtils.getSystemSessionProvider().getSession(workspaceName,
+                                                                           repositoryService_.getCurrentRepository());
+      parentNode = session.getItem(showingNode.getPath()).getParent();
+    }
     if(targetNode.isNodeType("nt:file")) {
       Node content = targetNode.getNode("jcr:content");
       String mimeType = content.getProperty("jcr:mimeType").getString();
