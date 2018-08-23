@@ -24,6 +24,7 @@ import java.util.List;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 
+import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang.StringUtils;
 
 import org.exoplatform.commons.api.search.data.SearchContext;
@@ -148,8 +149,10 @@ public class DocumentSearchServiceConnector extends BaseContentSearchServiceConn
     if(node.isNodeType(NodetypeConstant.MIX_REFERENCEABLE)) {
       url.append("id:'").append(node.getUUID()).append("',");
     }
+
+    String title = StringEscapeUtils.escapeHtml(getTitleResult(node)).replace("'", "\\'");
     url.append("fileType:'").append(getFileType(node)).append("',");
-    url.append("title:'").append(getTitleResult(node)).append("',");
+    url.append("title:'").append(title).append("',");
     url.append("path:'").append(node.getPath())
             .append("', repository:'").append(repositoryName)
             .append("', workspace:'").append(workspaceName)

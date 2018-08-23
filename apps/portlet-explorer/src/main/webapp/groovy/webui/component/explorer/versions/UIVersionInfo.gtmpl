@@ -1,10 +1,10 @@
 <%
 	/**
  * Created by The eXo Platform SARL
- * Author : lxchiati  
+ * Author : lxchiati
  *          lebienthuy@gmail.com
  * Sep 29, 2006
- * 11:57:24 AM 
+ * 11:57:24 AM
  */
 
 import javax.jcr.Node
@@ -75,7 +75,6 @@ import java.util.Locale;
     jsManager.require("SHARED/UIVersionInfo", "uiVersionInfo").addScripts("uiVersionInfo.init(\""+uicomponent.id+"\");")
            .addScripts("uiVersionInfo.initUserProfilePopup($labels);")
            .addScripts("uiVersionInfo.compareEventUrl(\""+actionCompareLink+"\");");
-    String clazz = "" ;
     Locale currentLocale = Util.getPortalRequestContext().getLocale();
     DateFormat df = DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT, currentLocale);
     println "<a class=\"hidden-phone\" id=\"CompareVersion\" class=\"btn btn-primary disabled\" disabled>"+_ctx.appRes("UIVersionInfo.action.compare-versions")+"</a>" ;
@@ -84,11 +83,8 @@ import java.util.Locale;
     def fileType = org.exoplatform.services.cms.impl.Utils.getFileType(currentNode);
     def preferenceWS  = currentNode.getSession().getWorkspace().getName();
     def repository = ((ManageableRepository)currentNode.getSession().getRepository()).getConfiguration().getName();
+    def docPreviewTitle = uicomponent.getTitle(currentNode);
     for(node in uicomponent.getListRecords()) {
-      if(clazz == "Even")
-        clazz = "";
-      else
-        clazz = "Even" ;
       boolean isBaseVersion = uicomponent.isBaseVersion(node);
 
       String versionNumber = uicomponent.isRootVersion(node) ? uicomponent.getRootVersionNum() : node.getName();
@@ -153,7 +149,7 @@ import java.util.Locale;
                     def docDownloadUrl = org.exoplatform.wcm.webui.Utils.getDownloadLink(currentVersionNode);
                     def docOpenUri = uicomponent.getLinkInDocumentsApp(currentNode.getPath());
                     def isWebContent = uicomponent.isWebContent();
-                    def docPreviewUri = "javascript:require(['SHARED/documentPreview'], function(documentPreview) {documentPreview.init({doc: {id:'" + currentVersionNode.getUUID() + "', fileType: '" + fileType +"', repository:'" + repository + "', workspace:'" + preferenceWS + "', path:'" + currentNode.getPath() + "', title:'" + currentNode.getName() + "', downloadUrl:'" + docDownloadUrl + "', openUrl:'" + docOpenUri + "', isWebContent: " + isWebContent + "}, version: {number:'" + versionNumber + "'}, author: {username:'" + authorUserName + "', fullname:'" + authorFullName + "', avatarUrl:'" + avatarURL + "', profileUrl:'" + profileURL + "'}})})";
+                    def docPreviewUri = "javascript:require(['SHARED/documentPreview'], function(documentPreview) {documentPreview.init({doc: {id:'" + currentVersionNode.getUUID() + "', fileType: '" + fileType +"', repository:'" + repository + "', workspace:'" + preferenceWS + "', path:'" + currentNode.getPath() + "', title:'" + docPreviewTitle.replace("'", "\\'") + "', downloadUrl:'" + docDownloadUrl + "', openUrl:'" + docOpenUri + "', isWebContent: " + isWebContent + "}, version: {number:'" + versionNumber + "'}, author: {username:'" + authorUserName + "', fullname:'" + authorFullName + "', avatarUrl:'" + avatarURL + "', profileUrl:'" + profileURL + "'}})})";
                 %>
                 <a class="btn" onclick="<%=docPreviewUri %>" rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes('UIVersionInfo.tooltip.viewVersion'); %>"><i class="uiIconWatch uiIconLightGray"></i></a>
                 <%
@@ -205,7 +201,7 @@ import java.util.Locale;
 	</div>
 
 	<%
-		uicomponent.renderChildren(); 
+		uicomponent.renderChildren();
 	%>
 		<% if(uicomponent.getUIPageIterator().getAvailablePage() > 1) { %>
 		<div>
