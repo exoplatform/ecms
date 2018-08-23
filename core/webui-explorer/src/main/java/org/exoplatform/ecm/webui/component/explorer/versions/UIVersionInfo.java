@@ -127,6 +127,10 @@ public class UIVersionInfo extends UIContainer  {
     uiPageIterator_.setPageList(dataPageList);
   }
 
+  public String getTitle(Node node) throws Exception {
+    return org.exoplatform.ecm.webui.utils.Utils.getTitle(node);
+  }
+
   private boolean isRestoredVersions(List<VersionNode> list)  {
     try {
       for (int i = 0; i < list.size(); i++) {
