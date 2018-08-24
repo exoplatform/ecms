@@ -161,7 +161,7 @@
   		  if (uicomponent.hasBackButton()) {%>
   		  <a class ="urlBackToButton actionIcon pull-right" href="<%=uicomponent.event("BackTo")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIViewBar.label.backTo")%>"><i class="uiIconEcmsReturn uiIconEcmsLightGray"></i></a>
   		  <%}%>  	      
-  	    <a class="setupPreferencesButton actionIcon pull-right" href="<%=uicomponent.event("Preferences")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIViewBar.label.setUpBrowser")%>"><i class="uiIconSetting uiIconLightGray"></i></a>
+  	    <a class="setupPreferencesButton actionIcon pull-right" href="<%=uicomponent.event("Preferences")%>" rel="tooltip" data-container="body" data-placement="bottom" title="<%=_ctx.appRes("UIViewBar.label.setUpBrowser")%>"><i class="uiIconSetting uiIconLightGray"></i></a>
 
 		   <%if (!uicomponent.isDirectlyDrive()) {
 				   def styleDrive = "";
