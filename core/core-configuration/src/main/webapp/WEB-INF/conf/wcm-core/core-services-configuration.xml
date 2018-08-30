@@ -430,7 +430,7 @@
               <object type="org.exoplatform.services.cache.impl.infinispan.generic.GenericExoCacheConfig">
                   <field name="name"><string>ecms.Scriptservice</string></field>
                   <field name="maxSize"><int>${exo.cache.ecms.scriptservice.MaxNodes:300}</int></field>
-                  <field name="liveTime"><long>${exo.cache.ecms.scriptservice.timetolive:86400}</long></field>
+                  <field name="liveTime"><long>${exo.cache.ecms.scriptservice.TimeToLive:86400}</long></field>
               </object>
           </object-param>
           <object-param>
