@@ -115,7 +115,7 @@ public class UIDashboardForm extends UIContainer {
     new LazyPageList<NodeLocation>(draftNodes,  pageSize_));
 
     ListAccess<NodeLocation> waitingNodes = new ListAccessImpl<NodeLocation>(NodeLocation.class,
-    NodeLocation.getLocationsByNodeList(getContents("pending", "approved")));
+    NodeLocation.getLocationsByNodeList(getContents("pending")));
     children.get(1).getUIPageIterator().setPageList(
     new LazyPageList<NodeLocation>(waitingNodes, pageSize_));
 
