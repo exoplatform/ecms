@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.jcr.AccessDeniedException;
 import javax.jcr.Item;
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
@@ -207,7 +208,9 @@ public class ActivityCommonService {
       try{
         node = node.getParent();
         result = !isDocumentNodeType(node);
-      }catch (RepositoryException ex){
+      }catch (AccessDeniedException ex){
+        return result;
+      }catch (RepositoryException ex) {
         return !isDocumentNodeType(node);
       }
     }
