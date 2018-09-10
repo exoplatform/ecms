@@ -30,6 +30,9 @@
       var mousedown = null;
       var keydown = null;
       Self.allItems = gj(actionArea).find("div.actionIconBox");
+      if (Self.allItems.length == 0) {
+        registerMouseDownOnEmptyFolder();
+      }
       Self.allItems.each(function(i, elem){
         if (!Array.prototype[i]) {
         var item = Self.allItems[i];
@@ -113,6 +116,12 @@
         element.onmouseout = Self.mouseOutTree;
               element.onfocus = Self.mouseOverTree;
               element.onblur = Self.mouseOutTree;
+      });
+    };
+
+    registerMouseDownOnEmptyFolder = function () {
+      gj("#UIDocumentInfo").contextmenu(function(event) {
+        Self.mouseUpGround(event);
       });
     };
 
@@ -677,6 +686,8 @@
     };
 
     SimpleView.prototype.mouseUpGround = function(evt) {
+      evt.preventDefault();
+      evt.stopPropagation();
       eval("var event = ''");
       event = evt || window.event;
       var element = this;
@@ -688,6 +699,9 @@
       document.onselectstart = function(){return true};
 
       var mask = gj(element).find("div.Mask:first")[0];
+      if (!mask) {
+        mask = gj(element)[0].allItems.prevObject.find("div.Mask:first")[0];
+      }
       addStyle(mask, {width: "0px", height: "0px", top: "0px", left: "0px", border: "none"});
       //collect item
       var item = null;
