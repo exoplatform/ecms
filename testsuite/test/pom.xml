@@ -4,7 +4,7 @@
   <parent>
     <artifactId>ecms-testsuite</artifactId>
     <groupId>org.exoplatform.ecms</groupId>
-    <version>5.0.x-SNAPSHOT</version>
+    <version>5.0.3</version>
   </parent>
   <artifactId>ecms-testsuite-test</artifactId>
   <name>eXo PLF:: ECMS Testing</name>
