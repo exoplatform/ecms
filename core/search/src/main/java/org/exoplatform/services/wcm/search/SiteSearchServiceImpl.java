@@ -40,6 +40,7 @@ import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cache.CacheService;
 import org.exoplatform.services.cache.ExoCache;
 import org.exoplatform.services.cms.documents.TrashService;
+import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
@@ -493,6 +494,9 @@ public class SiteSearchServiceImpl implements SiteSearchService {
     String keyword = queryCriteria.getKeyword();
     if (keyword == null || keyword.length() == 0)
       return;
+
+    keyword = Utils.escapeIllegalCharacterInQuery(keyword);
+
     QueryTermHelper queryTermHelper = new QueryTermHelper();
     String queryTerm = null;
     if (isEnabledFuzzySearch) {
