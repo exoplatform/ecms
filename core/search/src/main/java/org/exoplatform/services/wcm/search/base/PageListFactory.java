@@ -31,6 +31,8 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import javax.jcr.*;
 import javax.jcr.query.*;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by The eXo Platform SAS
