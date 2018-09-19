@@ -16,6 +16,7 @@
  */
 package org.exoplatform.services.wcm.search.connector;
 
+import org.apache.commons.lang.LocaleUtils;
 import org.codehaus.groovy.util.ListHashMap;
 import org.exoplatform.commons.api.search.data.SearchContext;
 import org.exoplatform.commons.api.search.data.SearchResult;
@@ -31,6 +32,7 @@ import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.search.base.EcmsSearchResult;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+import org.exoplatform.web.controller.QualifiedName;
 import org.json.simple.JSONObject;
 
 import javax.jcr.Node;
@@ -96,7 +98,8 @@ public class FileSearchServiceConnector extends ElasticSearchServiceConnector {
       LOG.warn("Cannot get drive of node " + nodePath, e);
     }
 
-    String detail = driveName + getFormattedFileSize(fileSize) + " - " + getFormattedDate(searchResult.getDate());
+    String lang = searchContext.getParamValue(SearchContext.RouterParams.LANG.create());
+    String detail = driveName + getFormattedFileSize(fileSize) + " - " + getFormattedDate(searchResult.getDate(), lang);
 
     SearchResult ecmsSearchResult = new EcmsSearchResult(getUrl(nodePath),
             getPreviewUrl(jsonHit, searchContext),
@@ -123,9 +126,10 @@ public class FileSearchServiceConnector extends ElasticSearchServiceConnector {
     return url;
   }
 
-  protected String getFormattedDate(long createdDateTime) {
+  protected String getFormattedDate(long createdDateTime, String lang) {
     try {
-      DateTimeFormatter df = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.FULL, FormatStyle.SHORT).withZone(ZoneId.systemDefault());
+      Locale locale = LocaleUtils.toLocale(lang);
+      DateTimeFormatter df = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.FULL, FormatStyle.SHORT).withLocale(locale).withZone(ZoneId.systemDefault());
       return df.format(Instant.ofEpochMilli(createdDateTime));
     } catch (Exception e) {
       LOG.error("Cannot format date for timestamp " + createdDateTime, e);
