@@ -46,7 +46,6 @@ import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.social.webui.activity.BaseUIActivity;
 import org.exoplatform.wcm.ext.component.activity.FileUIActivity;
-import org.exoplatform.wcm.ext.component.activity.SharedFileUIActivity;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.ComponentConfigs;
@@ -71,9 +70,10 @@ import org.exoplatform.webui.ext.UIExtensionManager;
         @EventConfig(listeners = BaseUIActivity.SetCommentListStatusActionListener.class),
         @EventConfig(listeners = BaseUIActivity.PostCommentActionListener.class),
         @EventConfig(listeners = BaseUIActivity.DeleteActivityActionListener.class),
-        @EventConfig(listeners = BaseUIActivity.DeleteCommentActionListener.class) }),
-    @ComponentConfig(type = UIPopupWindow.class, template = "system:/groovy/webui/core/UIPopupWindow.gtmpl", events = @EventConfig(listeners = SharedCloudFileUIActivity.CloseActionListener.class, name = "ClosePopup")) })
-public class SharedCloudFileUIActivity extends SharedFileUIActivity {
+        @EventConfig(listeners = BaseUIActivity.DeleteCommentActionListener.class) })/*,
+    @ComponentConfig(type = UIPopupWindow.class, template = "system:/groovy/webui/core/UIPopupWindow.gtmpl", events = @EventConfig(listeners = SharedCloudFileUIActivity.CloseActionListener.class, name = "ClosePopup"))*/ 
+    })
+public class SharedCloudFileUIActivity extends FileUIActivity {
 
   /** The Constant ACTIVITY_CSS_CLASS. */
   public static final String        ACTIVITY_CSS_CLASS = "uiCloudFileActivity";
@@ -201,9 +201,9 @@ public class SharedCloudFileUIActivity extends SharedFileUIActivity {
    * {@inheritDoc}
    */
   @Override
-  protected String getDocAuthor(Node node) {
-    CloudFile file = cloudFile(node);
-    return file != null ? getUserFullName(file.getAuthor()) : super.getDocAuthor(node);
+  public String getAuthor(int i) {
+    CloudFile file = cloudFile(getContentNode(i));
+    return file != null ? getUserFullName(file.getAuthor()) : super.getAuthor(i);
   }
 
   /**
