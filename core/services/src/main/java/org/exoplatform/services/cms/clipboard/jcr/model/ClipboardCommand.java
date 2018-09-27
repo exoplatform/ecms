@@ -71,7 +71,7 @@ public class ClipboardCommand {
   }
   
   public boolean equals(Object o) {
-    if (o != null || o instanceof ClipboardCommand) {
+    if (o != null && o instanceof ClipboardCommand) {
       ClipboardCommand cObject = ClipboardCommand.class.cast(o);
       if (wsName == null && cObject.wsName != null || wsName != null && cObject.wsName == null) return false;
       if (srcPath == null && cObject.srcPath != null || srcPath != null && cObject.srcPath == null) return false;

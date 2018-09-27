@@ -16,6 +16,7 @@
  */
 package org.exoplatform.services.cms.drives.impl;
 
+import org.apache.commons.lang3.StringUtils;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.services.cms.drives.ManageDriveService;
 import org.exoplatform.services.jcr.RepositoryService;
@@ -63,7 +64,7 @@ public class NewGroupListener extends GroupEventListener {
     String workspace = initParams_.getValueParam("workspace").getValue();
     String permissions = "*:".concat(groupId);
     String extpermissions = initParams_.getValueParam("permissions").getValue();
-    if(extpermissions != null || extpermissions.length() >0) {
+    if(StringUtils.isNotBlank(extpermissions)) {
       permissions.concat(",").concat(extpermissions);
     }
     String homePath = groupsPath_ + groupId ;

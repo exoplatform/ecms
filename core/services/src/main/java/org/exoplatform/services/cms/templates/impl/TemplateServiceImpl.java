@@ -541,7 +541,9 @@ public class TemplateServiceImpl implements TemplateService, Startable {
    * {@inheritDoc}
    */
   public String buildDialogForm(String nodeTypeName) throws Exception {
-    if (plugins_ == null && plugins_.size() == 0) throw new Exception("Cannot find plugin for template");
+    if (plugins_ == null || plugins_.size() == 0) {
+      throw new Exception("Cannot find plugin for template");
+    }
     TemplatePlugin templatePlugin = plugins_.get(0);
     ManageableRepository manageRepo = repositoryService_.getCurrentRepository();
     NodeType nodeType = manageRepo.getNodeTypeManager().getNodeType(nodeTypeName);
@@ -552,7 +554,9 @@ public class TemplateServiceImpl implements TemplateService, Startable {
    * {@inheritDoc}
    */
   public String buildViewForm(String nodeTypeName) throws Exception {
-    if (plugins_ == null && plugins_.size() == 0) throw new Exception("Cannot find plugin for template");
+    if (plugins_ == null || plugins_.size() == 0) {
+      throw new Exception("Cannot find plugin for template");
+    }
     TemplatePlugin templatePlugin = plugins_.get(0);
     ManageableRepository manageRepo = repositoryService_.getCurrentRepository();
     NodeType nodeType = manageRepo.getNodeTypeManager().getNodeType(nodeTypeName);
@@ -563,7 +567,9 @@ public class TemplateServiceImpl implements TemplateService, Startable {
    * {@inheritDoc}
    */
   public String buildStyleSheet(String nodeTypeName) throws Exception {
-    if (plugins_ == null && plugins_.size() == 0) throw new Exception("Cannot find plugin for template");
+    if (plugins_ == null || plugins_.size() == 0) {
+      throw new Exception("Cannot find plugin for template");
+    }
     TemplatePlugin templatePlugin = plugins_.get(0);
     return templatePlugin.buildStyleSheet(null);
   }

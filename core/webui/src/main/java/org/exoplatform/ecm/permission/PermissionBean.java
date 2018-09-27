@@ -17,6 +17,8 @@
  **************************************************************************/
 package org.exoplatform.ecm.permission;
 
+import java.util.Objects;
+
 /**
  * Created by The eXo Platform SARL
  * Author : Hoang Van Hung hunghvit@gmail.com
@@ -80,5 +82,10 @@ public class PermissionBean {
       return this.getUsersOrGroups().equals(permBean.getUsersOrGroups());
     }
     return false;
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(usersOrGroups);
   }
 }
