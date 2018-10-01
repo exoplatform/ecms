@@ -9,6 +9,9 @@
   <artifactId>ecms-core-webui</artifactId>
   <name>eXo PLF:: DMS webui component</name>
   <description>eXo DMS webui extension</description>
+  <properties>
+    <exo.test.coverage.ratio>0.02</exo.test.coverage.ratio>
+  </properties>
   <dependencies>
     <dependency>
       <groupId>com.ibm.icu</groupId>

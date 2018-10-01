@@ -9,6 +9,9 @@
   <artifactId>ecms-ext-authoring-services</artifactId>
   <packaging>jar</packaging>
   <name>eXo PLF:: ECMS Extensions Staging</name>
+  <properties>
+    <exo.test.coverage.ratio>0.21</exo.test.coverage.ratio>
+  </properties>
   <dependencies>
     <dependency>
       <groupId>commons-lang</groupId>

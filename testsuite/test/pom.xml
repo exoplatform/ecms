@@ -8,6 +8,9 @@
   </parent>
   <artifactId>ecms-testsuite-test</artifactId>
   <name>eXo PLF:: ECMS Testing</name>
+  <properties>
+    <exo.test.coverage.ratio>0.89</exo.test.coverage.ratio>
+  </properties>
   <dependencies>
     <dependency>
       <groupId>javax.jcr</groupId>

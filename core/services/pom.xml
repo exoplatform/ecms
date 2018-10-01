@@ -9,6 +9,9 @@
   <artifactId>ecms-core-services</artifactId>
   <name>eXo PLF:: CMS Service</name>
   <description>eXo CMS Service</description>
+  <properties>
+    <exo.test.coverage.ratio>0.45</exo.test.coverage.ratio>
+  </properties>
   <dependencies>
     <dependency>
       <groupId>com.ibm.icu</groupId>

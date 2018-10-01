@@ -10,6 +10,9 @@
   <packaging>jar</packaging>
   <name>eXo PLF:: Explorer Portlet Java Content</name>
   <description>eXo Explorer Portlet Java Content: File Explorer</description>
+  <properties>
+    <exo.test.coverage.ratio>0.00</exo.test.coverage.ratio>
+  </properties>
   <dependencies>
     <dependency>
       <groupId>commons-lang</groupId>
