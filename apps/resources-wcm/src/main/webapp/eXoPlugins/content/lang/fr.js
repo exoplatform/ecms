@@ -40,6 +40,14 @@ var UserLanguage = {
 	LabelAlert						: 	"Veuillez choisir un fichier avant l'upload",
 	LabelName						: 	"Nom",
 	SelectFile						:	"Choisir un fichier",
+
+	//Document Auto Versioning
+	DocumentAuto_label_existing:"Fichier existant",
+	DocumentAuto_label_keepBoth:"Garder les deux",
+	DocumentAuto_label_createVersion:"Créer une nouvelle version",
+	DocumentAuto_label_replace:"Remplacer",
+	DocumentAuto_label_or:"ou",
+	DocumentAuto_label_cancel:"Annuler"
 }
 
 CKEDITOR.plugins.setLang( 'content', 'fr',
