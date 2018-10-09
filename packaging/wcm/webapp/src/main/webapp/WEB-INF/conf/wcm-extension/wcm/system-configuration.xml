@@ -152,7 +152,10 @@
         <property name="mail.smtp.port" value="${gatein.email.smtp.port}" />
         <property name="mail.smtp.starttls.enable" value="${gatein.email.smtp.starttls.enable}" />
         <property name="mail.smtp.auth" value="${gatein.email.smtp.auth}" />
-        <property name="mail.smtp.debug" value="false" />
+        <property name="mail.smtp.connectiontimeout" value="${gatein.email.smtp.connectiontimeout}" />
+        <property name="mail.smtp.timeout" value="${gatein.email.smtp.timeout}" />
+        <property name="mail.smtp.writetimeout" value="${gatein.email.smtp.writetimeout}" />
+        <property name="mail.smtp.debug" value="${gatein.email.smtp.debug}" />
         <property name="mail.smtp.socketFactory.port" value="${gatein.email.smtp.socketFactory.port}" />
         <property name="mail.smtp.socketFactory.class" value="${gatein.email.smtp.socketFactory.class}" />
         <property name="mail.smtp.socketFactory.fallback" value="false" />
