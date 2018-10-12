@@ -75,8 +75,7 @@ public class SiteJavascriptHandler extends WebRequestHandler {
     String key = MessageDigester.getHash(siteName_) + MessageDigester.getHash(username);
     String jsData = (String) jsCache_.get(key);
     if (jsData == null) {
-      SessionProvider sessionProvider = IdentityConstants.ANONIM.equals(username) ? WCMCoreUtils.createAnonimProvider()
-                                                                                  : WCMCoreUtils.getUserSessionProvider();
+      SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
       livePortalManagerService_ = WCMCoreUtils.getService(LivePortalManagerService.class);
       Node portalNode = null;
       if ("shared".equals(siteName_)) {
