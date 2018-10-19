@@ -38,10 +38,7 @@ import org.exoplatform.services.jcr.util.VersionHistoryImporter;
 import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
-import org.exoplatform.services.security.ConversationState;
-import org.exoplatform.services.security.Identity;
-import org.exoplatform.services.security.IdentityRegistry;
-import org.exoplatform.services.security.MembershipEntry;
+import org.exoplatform.services.security.*;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
@@ -298,7 +295,7 @@ public class Utils {
   }
 
   public static String getPersonalDrivePath(String parameterizedDrivePath, String userId) throws Exception {
-    SessionProvider sessionProvider = WCMCoreUtils.getUserSessionProvider();
+    SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
     NodeHierarchyCreator nodeHierarchyCreator = WCMCoreUtils.getService(NodeHierarchyCreator.class);
     Node userNode = nodeHierarchyCreator.getUserNode(sessionProvider, userId);
     return StringUtils.replaceOnce(parameterizedDrivePath,
@@ -761,7 +758,7 @@ public class Utils {
     if (linkManager.isLink(node)) {
       try {
         nodeType = node.getProperty(NodetypeConstant.EXO_PRIMARYTYPE).getString();
-        node = linkManager.getTarget(node);
+        node = linkManager.getTarget(node, IdentityConstants.SYSTEM.equals(node.getSession().getUserID()));
         if (node == null)
           return "";
       } catch (Exception e) {

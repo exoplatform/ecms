@@ -316,7 +316,7 @@ public class SessionLinkAware implements ExtendedSession, NamespaceAccessor {
    */
   public String getUserID() {
     try {
-      return getOriginalSession().getUserID();
+      return getSession().getUserID();
     } catch (Exception e) {
       return null;
     }

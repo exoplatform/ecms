@@ -32,6 +32,7 @@ import javax.jcr.nodetype.ConstraintViolationException;
 import javax.jcr.nodetype.NoSuchNodeTypeException;
 import javax.jcr.version.VersionException;
 
+import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.wcm.core.ItemLocation;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
@@ -72,8 +73,13 @@ public abstract class ItemLinkAware implements Item {
   }
   
   public Session getOriginalSession() throws RepositoryException {
-    return WCMCoreUtils.getUserSessionProvider().
-                                        getSession(originalWorkspaceName, WCMCoreUtils.getRepository());
+    SessionProvider sessionProvider;
+    if (itemLocation.isSystemSession()) {
+      sessionProvider = WCMCoreUtils.getSystemSessionProvider();
+    } else {
+      sessionProvider = WCMCoreUtils.getUserSessionProvider();
+    }
+    return sessionProvider.getSession(originalWorkspaceName, WCMCoreUtils.getRepository());
   }
   
   /**
