@@ -175,7 +175,7 @@ public class DocumentServiceImpl implements DocumentService {
     StringBuilder url = new StringBuilder();
     url.append("/")
             .append(CommonsUtils.getRestContextName())
-            .append("/documents/view/")
+            .append("/private/documents/view/")
             .append(workspaceName)
             .append("/")
             .append(nodeId);
