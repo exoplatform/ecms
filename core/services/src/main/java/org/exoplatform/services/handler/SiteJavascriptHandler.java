@@ -64,15 +64,7 @@ public class SiteJavascriptHandler extends WebRequestHandler {
     }
     siteName_ = context.getParameter(QualifiedName.create("gtn", "sitename"));
 
-    String username = IdentityConstants.ANONIM;
-    ConversationState conversationState = ConversationState.getCurrent();
-    if (conversationState != null && conversationState.getIdentity() != null) {
-      username = conversationState.getIdentity().getUserId();
-      if (StringUtils.isBlank(username)) {
-        username = IdentityConstants.ANONIM;
-      }
-    }
-    String key = MessageDigester.getHash(siteName_) + MessageDigester.getHash(username);
+    String key = MessageDigester.getHash(siteName_);
     String jsData = (String) jsCache_.get(key);
     if (jsData == null) {
       SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
