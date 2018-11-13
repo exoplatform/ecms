@@ -47,7 +47,7 @@ public class EditFilePropertyActivityAction implements Action{
     if(!node.getPrimaryNodeType().getName().equals(NodetypeConstant.NT_FILE)) return false;
     if(propertyName.equals(NodetypeConstant.JCR_DATA)) {
       // Save temporary data in current session for system session can see the update
-      node.getSession().save();
+      node.save();
 
       SessionProvider systemSessionProvider = WCMCoreUtils.getSystemSessionProvider();
       Session systemSession = systemSessionProvider.getSession(node.getSession().getWorkspace().getName(), WCMCoreUtils.getRepository());

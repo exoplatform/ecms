@@ -524,7 +524,7 @@ public class FileUploadHandler {
       if (activityService.isBroadcastNTFileEvents(file) && !CREATE_VERSION.equals(existenceAction)) {
         listenerService.broadcast(ActivityCommonService.FILE_CREATED_ACTIVITY, null, file);
       }
-      file.getSession().save();
+      file.save();
       return Response.ok(createDOMResponse("Result", mimetype), MediaType.TEXT_XML)
           .cacheControl(cacheControl)
           .header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date()))
@@ -615,7 +615,7 @@ public class FileUploadHandler {
   
   /**
    * returns a DOMSource object containing given message
-   * @param message the message
+   * @param name the message
    * @return DOMSource object
    * @throws Exception
    */
