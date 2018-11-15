@@ -48,6 +48,7 @@ public class SecureJCRFoldersUpgradePlugin extends UpgradeProductPlugin {
   private NodeHierarchyCreator nodeHierarchyCreator;
 
   private static final Log LOG = ExoLogger.getLogger(SecureJCRFoldersUpgradePlugin.class.getName());
+  private SessionProvider sessionProvider;
 
   public SecureJCRFoldersUpgradePlugin(OrganizationService orgService, RepositoryService repoService, DMSConfiguration dmsConfiguration,
                                        NodeHierarchyCreator nodeHierarchyCreator, InitParams initParams) {
@@ -73,8 +74,9 @@ public class SecureJCRFoldersUpgradePlugin extends UpgradeProductPlugin {
     migrateDigitalAssets();
   }
 
+  // Remove public access and normal users access permissions from ECM nodes
   private void migrateECMSystem() {
-    SessionProvider sessionProvider = SessionProvider.createSystemProvider();
+    SessionProvider sessionProvider = getSessionProvider();
     try {
       Session session = sessionProvider.getSession(dmsConfiguration.getConfig().getSystemWorkspace(),
           repoService.getCurrentRepository());
@@ -101,8 +103,9 @@ public class SecureJCRFoldersUpgradePlugin extends UpgradeProductPlugin {
     }
   }
 
+  // Remove public access permission from Sites node
   private void migrateSites() {
-    SessionProvider sessionProvider = SessionProvider.createSystemProvider();;
+    SessionProvider sessionProvider = getSessionProvider();
     try {
       String ws = repoService.getCurrentRepository().getConfiguration().getDefaultWorkspaceName();
       Session session = sessionProvider.getSession(ws, repoService.getCurrentRepository());
@@ -122,8 +125,9 @@ public class SecureJCRFoldersUpgradePlugin extends UpgradeProductPlugin {
     }
   }
 
+  // Remove normal users permission from /Groups node and public access permission from its descendant nodes.
   private void migrateGroups() {
-    SessionProvider sessionProvider = SessionProvider.createSystemProvider();
+    SessionProvider sessionProvider = getSessionProvider();
     try {
       String ws = repoService.getCurrentRepository().getConfiguration().getDefaultWorkspaceName();
       Session session = sessionProvider.getSession(ws, repoService.getCurrentRepository());
@@ -143,6 +147,7 @@ public class SecureJCRFoldersUpgradePlugin extends UpgradeProductPlugin {
     }
   }
 
+
   private void migrateGroup(Node groupNode, Group group) throws Exception {
     // If it is NOT the root group
     if (group != null) {
@@ -155,7 +160,7 @@ public class SecureJCRFoldersUpgradePlugin extends UpgradeProductPlugin {
     if (children != null) {
       for (Group childGroup: children) {
         try {
-          Node childGroupNode = groupNode.getNode(group.getGroupName());
+          Node childGroupNode = groupNode.getNode(childGroup.getGroupName());
           migrateGroup(childGroupNode, childGroup);
         } catch (PathNotFoundException e) {
           LOG.warn("Could not find the group node: " + groupNode.getPath() + group.getGroupName());
@@ -164,8 +169,9 @@ public class SecureJCRFoldersUpgradePlugin extends UpgradeProductPlugin {
     }
   }
 
+  // Remove normal users permission from digital nodes
   private void migrateDigitalAssets() {
-    SessionProvider sessionProvider = SessionProvider.createSystemProvider();
+    SessionProvider sessionProvider = getSessionProvider();
     try {
       String ws = repoService.getCurrentRepository().getConfiguration().getDefaultWorkspaceName();
       Session session = sessionProvider.getSession(ws, repoService.getCurrentRepository());
@@ -202,5 +208,17 @@ public class SecureJCRFoldersUpgradePlugin extends UpgradeProductPlugin {
     } else {
       LOG.warn("Could not find the node path: " + rootedNode.getPath() + relativePath);
     }
+  }
+
+  public SessionProvider getSessionProvider() {
+    if (sessionProvider == null) {
+      sessionProvider = SessionProvider.createSystemProvider();
+    }
+
+    return sessionProvider;
+  }
+
+  public void setSessionProvider(SessionProvider sessionProvider) {
+    this.sessionProvider = sessionProvider;
   }
 }
