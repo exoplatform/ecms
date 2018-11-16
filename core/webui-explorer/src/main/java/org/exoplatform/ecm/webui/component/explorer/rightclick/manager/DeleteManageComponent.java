@@ -534,7 +534,6 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
       uiWorkingArea.setWCMNotice(deleteNotice);
     }
     uiExplorer.updateAjax(event);
-    uiExplorer.getSession().save();
   }
   /**
    * Get undo link to restore nodes that deleted
