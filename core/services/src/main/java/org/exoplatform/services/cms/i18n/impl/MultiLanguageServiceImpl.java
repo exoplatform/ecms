@@ -681,6 +681,7 @@ public class MultiLanguageServiceImpl implements MultiLanguageService {
       try {
         ntFileLangNode = newLanguageNode.getNode(fileName) ;
       } catch(PathNotFoundException pe) {
+        node.save();
         if(isDefault) {
           ntFileLangNode = addNewFileNode(olfFileName,
                                           newLanguageNode,
@@ -1006,6 +1007,7 @@ public class MultiLanguageServiceImpl implements MultiLanguageService {
         if(!jcrContentNode.getProperty(JCR_MIMETYPE).getString().startsWith("text")) {
           newLang = languagesNode.addNode(defaultLanguage);
           selectedLangNode = getFileLangNode(selectedLangNode) ;
+          node.save();
           newLang = addNewFileNode(node.getName(), newLang, jcrContentNode.getProperty(JCRDATA).getValue(),
               new GregorianCalendar(), jcrContentNode.getProperty(JCR_MIMETYPE).getString(), repositoryName) ;
           Node newJcrContent = newLang.getNode(JCRCONTENT) ;

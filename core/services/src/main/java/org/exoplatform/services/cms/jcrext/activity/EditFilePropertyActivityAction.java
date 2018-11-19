@@ -16,6 +16,7 @@
  */
 package org.exoplatform.services.cms.jcrext.activity;
 
+import javax.jcr.Item;
 import javax.jcr.Node;
 import javax.jcr.Property;
 import javax.jcr.Session;
@@ -37,18 +38,16 @@ public class EditFilePropertyActivityAction implements Action{
   }
   @Override
   public boolean execute(Context context) throws Exception {
-    Object item = context.get("currentItem");
-    Node node = (item instanceof Property) ?((Property)item).getParent():(Node)item;
-    String propertyName = (item instanceof Property) ?((Property)item).getName():((Node)item).getName();
+    Item item = (Item) context.get("currentItem");
+    Node node = (item instanceof Property) ? item.getParent() : (Node) item;
+    String propertyName = item.getName();
+
     // Do not create / update activity for bellow cases
-    if (!activityService.isAcceptedFileProperties(propertyName)) return false;
-    if (ConversationState.getCurrent() == null) return false;    
+    if (!activityService.isAcceptedFileProperties(propertyName) || ConversationState.getCurrent() == null) return false;
+
     if(node.isNodeType(NodetypeConstant.NT_RESOURCE)) node = node.getParent();
     if(!node.getPrimaryNodeType().getName().equals(NodetypeConstant.NT_FILE)) return false;
     if(propertyName.equals(NodetypeConstant.JCR_DATA)) {
-      // Save temporary data in current session for system session can see the update
-      node.save();
-
       SessionProvider systemSessionProvider = WCMCoreUtils.getSystemSessionProvider();
       Session systemSession = systemSessionProvider.getSession(node.getSession().getWorkspace().getName(), WCMCoreUtils.getRepository());
 

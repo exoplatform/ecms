@@ -210,7 +210,7 @@ public class CmsServiceImpl implements CmsService {
       currentNode.setProperty(ActivityCommonService.MIX_COMMENT_ACTIVITY_ID, StringUtils.EMPTY);
     }
 
-    session.save();
+    storeHomeNode.save();
     return currentNode.getPath();
   }
 
@@ -239,7 +239,7 @@ public class CmsServiceImpl implements CmsService {
     }
     listenerService.broadcast(POST_EDIT_CONTENT_EVENT, this, storeNode);
     //add lastModified property to jcr:content
-    session.save();
+    storeNode.save();
     return storeNode.getPath();
   }
 
@@ -572,12 +572,12 @@ public class CmsServiceImpl implements CmsService {
           if(input.getMixintype()!= null) {
             mixinTypes = input.getMixintype().split(",") ;
           }
-          Node childNode = doAddNode(currentNode, (String)input.getValue(), nodeType.getName(), mixinTypes) ;
+          Node childNode = doAddNode(currentNode, (String)input.getValue(), nodeType.getName(), mixinTypes);
           if (childNode != null && !childItemPaths.contains(childItemPath))
             processNodeRecursively(create, childItemPath, childNode, childNode.getPrimaryNodeType(), jcrVariables);
           childItemPaths.add(childItemPath);
         }
-      }else {
+      } else {
         String childNodeName = null;
         if (obj instanceof Node) {
           childNodeName = ((Node) obj).getName();
@@ -602,7 +602,7 @@ public class CmsServiceImpl implements CmsService {
         } else {
           nodeType = nodeTypeManger.getNodeType(nodeTypeName);
         }
-        Node childNode = doAddNode(currentNode, childNodeName, nodeType.getName(), mixinTypes) ;
+        Node childNode = doAddNode(currentNode, childNodeName, nodeType.getName(), mixinTypes);
         if (!childItemPaths.contains(newItemPath))
           processNodeRecursively(create, newItemPath, childNode, childNode.getPrimaryNodeType(), jcrVariables);
         childItemPaths.add(newItemPath);
@@ -1388,8 +1388,8 @@ public class CmsServiceImpl implements CmsService {
   /**
    * Compare if content of Value array equal to String array
    *
-   * @param values Value array
-   * @param strings String array
+   * @param arrValues Value array
+   * @param arrStrings String array
    * @return true: equal, false: not equal
    * @throws ValueFormatException
    * @throws IllegalStateException

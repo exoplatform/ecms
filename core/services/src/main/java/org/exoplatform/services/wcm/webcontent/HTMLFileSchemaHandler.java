@@ -172,8 +172,7 @@ public class HTMLFileSchemaHandler extends BaseWebSchemaHandler {
       Node contentNode = node.getNode("jcr:content");
       contentNode.setProperty("jcr:lastModified",new GregorianCalendar());
       contentNode.setProperty("jcr:mimeType", "text/html");
-      contentNode.getSession().save();
-    } 	
+    }
 
     Node parent = node.getParent();
     if(!parent.isNodeType("exo:webContent"))
