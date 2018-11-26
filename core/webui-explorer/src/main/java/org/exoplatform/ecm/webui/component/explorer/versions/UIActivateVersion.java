@@ -66,8 +66,6 @@ public class UIActivateVersion extends UIContainer implements UIPopupComponent {
       try {
         currentNode.addMixin(Utils.MIX_VERSIONABLE);
         currentNode.save() ;
-        currentNode.getSession().save();
-        currentNode.getSession().refresh(true) ;
         UIWorkingArea uiWorkingArea = uiExplorer.getChild(UIWorkingArea.class);
         UIDocumentWorkspace uiDocumentWorkspace = uiWorkingArea.getChild(UIDocumentWorkspace.class);
         UIVersionInfo uiVersionInfo = uiDocumentWorkspace.getChild(UIVersionInfo.class);
