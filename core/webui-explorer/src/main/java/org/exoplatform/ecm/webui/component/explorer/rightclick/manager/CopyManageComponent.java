@@ -110,30 +110,13 @@ public class CopyManageComponent extends UIAbstractManagerComponent {
       
       return;
     }
-    try {
-      ClipboardCommand clipboard = new ClipboardCommand(ClipboardCommand.COPY, srcPath, wsName);
-      ClipboardService clipboardService = WCMCoreUtils.getService(ClipboardService.class);
-      String userId = ConversationState.getCurrent().getIdentity().getUserId();
-      clipboardService.addClipboardCommand(userId, clipboard, false);
-      if (isMultiSelect) {
-        clipboardService.addClipboardCommand(userId, clipboard, true);
-      }
-      uiExplorer.getSession().save();
-    } catch(ConstraintViolationException cons) {
-      uiExplorer.getSession().refresh(false);
-      uiExplorer.refreshExplorer();
-      uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.constraintviolation-exception",
-          null,ApplicationMessage.WARNING));
-      
-      uiExplorer.updateAjax(event);
-      return;
-    } catch(Exception e) {
-      if (LOG.isErrorEnabled()) {
-        LOG.error("an unexpected error occurs", e);
-      }
-      JCRExceptionManager.process(uiApp, e);
-      
-      uiExplorer.updateAjax(event);
+
+    ClipboardCommand clipboard = new ClipboardCommand(ClipboardCommand.COPY, srcPath, wsName);
+    ClipboardService clipboardService = WCMCoreUtils.getService(ClipboardService.class);
+    String userId = ConversationState.getCurrent().getIdentity().getUserId();
+    clipboardService.addClipboardCommand(userId, clipboard, false);
+    if (isMultiSelect) {
+      clipboardService.addClipboardCommand(userId, clipboard, true);
     }
   }
 
