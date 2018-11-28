@@ -133,8 +133,6 @@ public class CutManageComponent extends UIAbstractManagerComponent {
       clipboardService.addClipboardCommand(userId, clipboard, false);
       if (isMultiSelect) {
         clipboardService.addClipboardCommand(userId, clipboard, true);
-      } else {
-        session.save();
       }
     } catch (Exception e) {
       JCRExceptionManager.process(uiApp, e);
