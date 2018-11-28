@@ -653,7 +653,7 @@ public class UICLVConfig extends UIFormTabPane  implements UISelectable {
     ApplicationTemplateManagerService templateManagerService = getApplicationComponent(ApplicationTemplateManagerService.class);
     List<Node> templateNodeList = templateManagerService.getTemplatesByCategory(portletName,
                                                                                 category,
-                                                                                WCMCoreUtils.getUserSessionProvider());
+                                                                                WCMCoreUtils.getSystemSessionProvider());
 
     for (Node templateNode : templateNodeList) {
       SelectItemOption<String> template = new SelectItemOption<String>();
