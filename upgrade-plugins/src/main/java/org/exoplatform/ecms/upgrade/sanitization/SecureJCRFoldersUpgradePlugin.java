@@ -67,8 +67,6 @@ public class SecureJCRFoldersUpgradePlugin extends UpgradeProductPlugin {
 
     migrateECMSystem();
 
-    migrateSites();
-
     migrateGroups();
 
     migrateDigitalAssets();
@@ -95,28 +93,6 @@ public class SecureJCRFoldersUpgradePlugin extends UpgradeProductPlugin {
     } catch (Exception e) {
       if (LOG.isErrorEnabled()) {
         LOG.error("An unexpected error occurs when migrate /exo:ecm storage system", e);
-      }
-    } finally {
-      if (sessionProvider != null) {
-        sessionProvider.close();
-      }
-    }
-  }
-
-  // Remove public access permission from Sites node
-  private void migrateSites() {
-    SessionProvider sessionProvider = getSessionProvider();
-    try {
-      String ws = repoService.getCurrentRepository().getConfiguration().getDefaultWorkspaceName();
-      Session session = sessionProvider.getSession(ws, repoService.getCurrentRepository());
-
-      removePermission((Node) session.getItem(nodeHierarchyCreator.getJcrPath("siteContent")),
-          null, IdentityConstants.ANY);
-      removePermission((Node) session.getItem(nodeHierarchyCreator.getJcrPath("liveSiteContent")),
-          null, IdentityConstants.ANY);
-    } catch (Exception e) {
-      if (LOG.isErrorEnabled()) {
-        LOG.error("An unexpected error occurs when migrate Sites", e);
       }
     } finally {
       if (sessionProvider != null) {

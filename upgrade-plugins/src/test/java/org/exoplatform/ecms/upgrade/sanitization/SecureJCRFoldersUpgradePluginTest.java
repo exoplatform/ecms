@@ -60,12 +60,6 @@ public class SecureJCRFoldersUpgradePluginTest {
     when(ecmNode.getNode("exo:taxonomyTrees/storage")).thenReturn(subEcmNode);
 
     //
-    ExtendedNode sitesNode = mock(ExtendedNode.class);
-    when(nodeHierarchyCreator.getJcrPath("siteContent")).thenReturn("/sites");
-    when(nodeHierarchyCreator.getJcrPath("liveSiteContent")).thenReturn("/sites");
-    when(session.getItem("/sites")).thenReturn(sitesNode);
-
-    //
     ExtendedNode groupsNode = mock(ExtendedNode.class);
     when(nodeHierarchyCreator.getJcrPath(BasePath.CMS_GROUPS_PATH)).thenReturn("/Groups");
     when(session.getItem("/Groups")).thenReturn(groupsNode);
@@ -99,8 +93,6 @@ public class SecureJCRFoldersUpgradePluginTest {
     verify(ecmNode, times(1)).removePermission(IdentityConstants.ANY);
     verify(subEcmNode, times(14)).removePermission(IdentityConstants.ANY);
     verify(subEcmNode, times(1)).removePermission("*:/platform/users");
-
-    verify(sitesNode, times(2)).removePermission(IdentityConstants.ANY);
 
     verify(groupsNode, times(1)).removePermission("*:/platform/users");
     verify(groupNode, times(4)).removePermission(IdentityConstants.ANY);
