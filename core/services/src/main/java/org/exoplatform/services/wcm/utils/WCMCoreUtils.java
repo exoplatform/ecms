@@ -567,8 +567,8 @@ public class WCMCoreUtils {
             Session session = sessionProvider.getSession(src[1], repository);
             ManageableRepository repository2 = repositoryService.getCurrentRepository();
             Session session2 = sessionProvider.getSession(tgt[1], repository2);
-            Node nodeSrc = session.getRootNode().getNode(src[2].substring(1));
-            Node nodeTgt = session2.getRootNode().getNode(tgt[2].substring(1));
+            Node nodeSrc = (Node) session.getItem(src[2]);
+            Node nodeTgt = (Node) session2.getItem(tgt[2]);
             Node tnode = (Node) session.getItem(nodeTgt.getPath());
             //check if the link node already exist then remove it 
             if (overrideData && tnode.hasNode(nodeSrc.getName())) {

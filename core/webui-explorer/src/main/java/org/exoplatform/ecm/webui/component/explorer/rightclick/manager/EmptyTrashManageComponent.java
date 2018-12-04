@@ -142,7 +142,7 @@ public class EmptyTrashManageComponent extends UIAbstractManagerComponent {
     TrashService trashService = uiExplorer.getApplicationComponent(TrashService.class);
     trashService.removeRelations(node, uiExplorer.getSystemProvider());
     node.remove();
-    session.save();
+    parentNode.save();
     uiExplorer.updateAjax(event);
   }
 

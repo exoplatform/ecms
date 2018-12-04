@@ -169,7 +169,7 @@ public class AutoVersionServiceImpl implements AutoVersionService{
     if(oldVersionLabels != null) {
       for (String oldVersionLabel : oldVersionLabels) {
         versionHistory.addVersionLabel(createdVersion.getName(), oldVersionLabel, true);
-        versionHistory.getSession().save();
+        currentNode.save();
       }
     }
   }

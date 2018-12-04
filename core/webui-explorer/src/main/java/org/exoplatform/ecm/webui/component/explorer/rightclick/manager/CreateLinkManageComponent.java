@@ -163,9 +163,6 @@ public class CreateLinkManageComponent extends UIAbstractManagerComponent {
       destNode = uiExplorer.getNodeByPath(destPath, session);
       // Reset the path to manage the links that potentially create virtual path
       destPath = destNode.getPath();
-      // Reset the session to manage the links that potentially change of
-      // workspace
-      session = destNode.getSession();
     } catch (PathNotFoundException path) {
       uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.path-not-found-exception", null,
           ApplicationMessage.WARNING));
@@ -200,7 +197,7 @@ public class CreateLinkManageComponent extends UIAbstractManagerComponent {
       } else {
         createLink(nodePath, destNode, event);
       }
-      session.save();
+      destNode.save();
       uiExplorer.updateAjax(event);
     } catch (AccessDeniedException ace) {
       Object[] arg = { destPath };

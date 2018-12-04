@@ -412,8 +412,9 @@ public class ThumbnailRESTService implements ResourceContainer {
     ManageableRepository repository = repositoryService_.getCurrentRepository();
     Session session = WCMCoreUtils.getUserSessionProvider().getSession(workspaceName, repository);
     Node showingNode = null;
-    if(nodePath.equals("/")) showingNode = session.getRootNode();
-    else {
+    if(nodePath.equals("/")) {
+      showingNode = session.getRootNode();
+    } else {
       if (!nodePath.startsWith("/")) {
         nodePath = "/" + nodePath;
       }

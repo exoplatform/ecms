@@ -165,7 +165,7 @@ public class FileUploadHandler {
     jcrContent.setProperty("jcr:data",new ByteArrayInputStream(uploadData));
     jcrContent.setProperty("jcr:lastModified",new GregorianCalendar());
     jcrContent.setProperty("jcr:mimeType",mimetype);
-    parent.getSession().save();
+    parent.save();
     uploadService.removeUploadResource(uploadId);
     return Response.ok(null, new MediaType("text", "xml"))
                    .cacheControl(cacheControl)

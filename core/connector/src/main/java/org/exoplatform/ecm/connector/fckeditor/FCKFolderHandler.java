@@ -111,7 +111,7 @@ public class FCKFolderHandler {
                        .build();
       }
       currentNode.addNode(newFolderName, FCKUtils.NT_FOLDER);
-      currentNode.getSession().save();
+      currentNode.save();
 
       Element rootElement = FCKUtils.createRootElement("createFolder", currentNode,
           getFolderType(currentNode));

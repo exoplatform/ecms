@@ -101,7 +101,6 @@ public class CmsServiceImpl implements CmsService {
     Node storeHomeNode = (Node) session.getItem(storePath);
     String path = storeNode(nodeTypeName, storeHomeNode, mappings, true);
     storeHomeNode.save();
-    session.save();
     session.logout();
     return path;
   }
@@ -317,7 +316,7 @@ public class CmsServiceImpl implements CmsService {
     }
 
     String uuid = currentNode.getUUID();
-    session.save();
+    storeHomeNode.save();
     return uuid;
   }
 
@@ -800,8 +799,9 @@ public class CmsServiceImpl implements CmsService {
           referenceWorksapce = ((String) value).split(":/")[0];
           referenceNodeName = ((String) value).split(":/")[1];
           Session session2 = jcrService.getCurrentRepository().getSystemSession(referenceWorksapce);
-          if (session2.getRootNode().hasNode(referenceNodeName)) {
-            Node referenceNode = session2.getRootNode().getNode(referenceNodeName);
+          Node rootNode = session2.getRootNode();
+          if (rootNode.hasNode(referenceNodeName)) {
+            Node referenceNode = rootNode.getNode(referenceNodeName);
             if (referenceNode != null) {
               if(!referenceNode.isNodeType(MIX_REFERENCEABLE)) {
                 referenceNode.addMixin(MIX_REFERENCEABLE);
@@ -832,7 +832,7 @@ public class CmsServiceImpl implements CmsService {
             node.setProperty(propertyName, session.getValueFactory().createValue(value.toString()));
           }
         }
-        session.save();
+        node.save();
       } else if(value instanceof String[]) {
         String[] values = (String[]) value;
         String referenceWorksapce = null;
@@ -845,16 +845,18 @@ public class CmsServiceImpl implements CmsService {
             referenceWorksapce = v.split(":/")[0];
             referenceNodeName = v.split(":/")[1];
             Session session2 = jcrService.getCurrentRepository().getSystemSession(referenceWorksapce);
-            if(session2.getRootNode().hasNode(referenceNodeName)) {
-              Node referenceNode = session2.getRootNode().getNode(referenceNodeName);
+            Node rootNode = session2.getRootNode();
+            if(rootNode.hasNode(referenceNodeName)) {
+              Node referenceNode = rootNode.getNode(referenceNodeName);
               valueObj = session2.getValueFactory().createValue(referenceNode);
             }else {
               valueObj = session2.getValueFactory().createValue(v);
             }
             session2.logout();
           }else {
-            if(session.getRootNode().hasNode(v)) {
-              Node referenceNode = session.getRootNode().getNode(v);
+            Node rootNode = session.getRootNode();
+            if(rootNode.hasNode(v)) {
+              Node referenceNode = rootNode.getNode(v);
               valueObj = session.getValueFactory().createValue(referenceNode);
             }else {
               valueObj = session.getValueFactory().createValue(v);
@@ -1102,8 +1104,9 @@ public class CmsServiceImpl implements CmsService {
           referenceWorksapce = ((String) value).split(":/")[0];
           referenceNodeName = ((String) value).split(":/")[1];
           Session session2 = jcrService.getCurrentRepository().getSystemSession(referenceWorksapce);
-          if(session2.getRootNode().hasNode(referenceNodeName)) {
-            Node referenceNode = session2.getRootNode().getNode(referenceNodeName);
+          Node rootNode = session2.getRootNode();
+          if(rootNode.hasNode(referenceNodeName)) {
+            Node referenceNode = rootNode.getNode(referenceNodeName);
             Value value2add = session2.getValueFactory().createValue(referenceNode);
             if(!property.getValue().getString().equals(value2add)) {
               node.setProperty(propertyName, value2add);
@@ -1136,7 +1139,7 @@ public class CmsServiceImpl implements CmsService {
             }
           }
         }
-        session.save();
+        node.save();
       } else if(value instanceof String[]) {
         String[] values = (String[]) value;
         String referenceWorksapce = null;
@@ -1149,18 +1152,20 @@ public class CmsServiceImpl implements CmsService {
             referenceWorksapce = v.split(":/")[0];
             referenceNodeName = v.split(":/")[1];
             Session session2 = jcrService.getCurrentRepository().getSystemSession(referenceWorksapce);
-            if(session2.getRootNode().hasNode(referenceNodeName)) {
-              Node referenceNode = session2.getRootNode().getNode(referenceNodeName);
+            Node rootNode = session2.getRootNode();
+            if(rootNode.hasNode(referenceNodeName)) {
+              Node referenceNode = rootNode.getNode(referenceNodeName);
               valueObj = session2.getValueFactory().createValue(referenceNode);
             }else {
               valueObj = session2.getValueFactory().createValue(v);
             }
             session2.logout();
-          }else {
-            if(session.getRootNode().hasNode(v)) {
-              Node referenceNode = session.getRootNode().getNode(v);
+          } else {
+            Node rootNode = session.getRootNode();
+            if(rootNode.hasNode(v)) {
+              Node referenceNode = rootNode.getNode(v);
               valueObj = session.getValueFactory().createValue(referenceNode);
-            }else {
+            } else {
               valueObj = session.getValueFactory().createValue(v);
             }
           }
@@ -1169,7 +1174,7 @@ public class CmsServiceImpl implements CmsService {
         if (!property.getValues().equals(list.toArray(new Value[list.size()]))) {
           node.setProperty(propertyName, list.toArray(new Value[list.size()]));
         }
-        session.save();
+        node.save();
       }
       break ;
     default:
@@ -1315,7 +1320,6 @@ public class CmsServiceImpl implements CmsService {
       }
       rootNode = rootNode.getNode(splittedName[i]) ;
     }
-    session.save() ;
   }
 
   /**

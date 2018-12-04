@@ -991,8 +991,7 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
                                                    .getValue(), manageableRepository);
 
       String[] paths = initParams_.getValueParam("path").getValue().split("/");
-      Node rootNode = session.getRootNode();
-      Node currentNode = rootNode;
+      Node currentNode = session.getRootNode();
       int depth = 0;
       for (String path : paths) {
         if (path.length() > 0) {

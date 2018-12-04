@@ -74,7 +74,6 @@ public class FlashNodeTypeUpgradePlugin extends UpgradeProductPlugin {
               flashNode.save();
             }
           }
-          session.save();
         }
       }      
     } catch (Exception e) {

@@ -145,7 +145,6 @@ public class CutManageComponent extends UIAbstractManagerComponent {
     for(int i=0; i< nodePaths.length; i++) {
       processCut(nodePaths[i], event, uiExplorer, true);
     }
-    uiExplorer.getSession().save();
   }
 
   public static void cutManage(Event<CutManageComponent> event, UIJCRExplorer uiExplorer) throws Exception {

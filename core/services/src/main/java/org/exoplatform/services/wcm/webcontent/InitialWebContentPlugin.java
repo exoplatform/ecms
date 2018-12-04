@@ -150,12 +150,12 @@ public class InitialWebContentPlugin extends CreatePortalPlugin {
             Utils.processImportHistory(currentNode,
                                        configurationManager.getInputStream(versionHistoryPath),
                                        mapHistoryValue);
-          }       
+          }
         session.save();
       }
       Node portalNode = livePortalManagerService.getLivePortal(sessionProvider, portalName);
       configure(portalNode, portalName);
-      portalNode.getSession().save();
+      portalNode.save();
     } catch (Exception ex) {
       if (LOG.isErrorEnabled()) {
         LOG.error("deploy the portal "
@@ -173,15 +173,6 @@ public class InitialWebContentPlugin extends CreatePortalPlugin {
     }
   }
 
-  /**
-   * Configure.
-   *
-   * @param session the session
-   * @param folderPath the folder path
-   * @param portalName the portal name
-   *
-   * @throws Exception the exception
-   */
   private void configure(Node targetNode, String siteName) throws Exception{
     String statement = "select * from nt:resource where jcr:path like '" + targetNode.getPath()
         + "/%' order by jcr:dateModified ASC";

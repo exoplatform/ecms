@@ -464,15 +464,15 @@ public class TestCmsService extends BaseWCMTestCase {
   * @throws Exception
   */
   public void testMoveNode() throws Exception {
-    Node test1 = session.getRootNode().addNode("test1");
+    Node test1 = session.getRootNode().addNode("source");
     session.save();
     Session session2 = sessionProviderService_.getSystemSessionProvider(null).getSession(SYSTEM_WS, repository);
-    Node test2 = session.getRootNode().addNode("test2");
+    Node test2 = session.getRootNode().addNode("target");
     session2.save();
     String destPath = test2.getPath() + test1.getPath();
     cmsService.moveNode(test1.getPath(), COLLABORATION_WS, SYSTEM_WS, destPath);
     assertTrue(session2.itemExists(destPath));
-    assertTrue(!session.itemExists("/test1"));
+    assertTrue(!session.itemExists("/source"));
 
     test2.remove();
     session.save();

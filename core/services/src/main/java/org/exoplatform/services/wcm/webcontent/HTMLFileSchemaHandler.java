@@ -143,7 +143,7 @@ public class HTMLFileSchemaHandler extends BaseWebSchemaHandler {
     Node tempFolder = webFolder.addNode(tempFolderName, NT_UNSTRUCTURED);
     String tempPath = tempFolder.getPath() + "/" +file.getName();
     session.move(file.getPath(),tempPath);
-    session.save();
+    webFolder.save();
     //rename the folder
     Node webContent = webFolder.addNode(fileName, "exo:webContent");
     addMixin(webContent,"exo:privilegeable");
@@ -152,13 +152,13 @@ public class HTMLFileSchemaHandler extends BaseWebSchemaHandler {
     WebSchemaConfigService schemaConfigService = WCMCoreUtils.getService(WebSchemaConfigService.class);
     WebContentSchemaHandler contentSchemaHandler = schemaConfigService.getWebSchemaHandlerByType(WebContentSchemaHandler.class);
     contentSchemaHandler.createSchema(webContent);
-    session.save();
+    webFolder.save();
     //the htmlFile become default.html file for the web content
     String htmlFilePath = webContent.getPath() + "/default.html";
     session.move(tempPath, htmlFilePath);
     tempFolder.remove();
     createDefautWebData(webContent);
-    session.save();
+    webFolder.save();
   }
 
   /*
