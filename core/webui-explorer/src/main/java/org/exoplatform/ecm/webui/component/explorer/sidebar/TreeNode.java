@@ -128,8 +128,13 @@ public class TreeNode {
     for(TreeNode child : children_) {
       if(child.getName().equals(name)) return child ;
     }
-    Node tempNode = this.getNode().getNode(name);
-    if (tempNode == null) return null;
+    Node tempNode = null;
+    if(this.getNode().hasNode(name)) {
+      tempNode = this.getNode().getNode(name);
+    }
+    if (tempNode == null) {
+      return null;
+    }
     TreeNode tempTreeNode = new TreeNode(tempNode, prefix + "/" + getName(tempNode));
     return tempTreeNode;
   }
