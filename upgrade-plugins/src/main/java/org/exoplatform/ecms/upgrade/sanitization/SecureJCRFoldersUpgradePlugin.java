@@ -64,17 +64,19 @@ public class SecureJCRFoldersUpgradePlugin extends UpgradeProductPlugin {
     if (LOG.isInfoEnabled()) {
       LOG.info("Start " + this.getClass().getName() + ".............");
     }
+    SessionProvider sessionProvider = SessionProvider.createSystemProvider();
 
-    migrateECMSystem();
+    migrateECMSystem(sessionProvider);
 
-    migrateGroups();
+    migrateGroups(sessionProvider);
 
-    migrateDigitalAssets();
+    migrateDigitalAssets(sessionProvider);
+
+    sessionProvider.close();
   }
 
   // Remove public access and normal users access permissions from ECM nodes
-  private void migrateECMSystem() {
-    SessionProvider sessionProvider = getSessionProvider();
+  private void migrateECMSystem(SessionProvider sessionProvider) {
     try {
       Session session = sessionProvider.getSession(dmsConfiguration.getConfig().getSystemWorkspace(),
           repoService.getCurrentRepository());
@@ -94,16 +96,11 @@ public class SecureJCRFoldersUpgradePlugin extends UpgradeProductPlugin {
       if (LOG.isErrorEnabled()) {
         LOG.error("An unexpected error occurs when migrate /exo:ecm storage system", e);
       }
-    } finally {
-      if (sessionProvider != null) {
-        sessionProvider.close();
-      }
     }
   }
 
   // Remove normal users permission from /Groups node and public access permission from its descendant nodes.
-  private void migrateGroups() {
-    SessionProvider sessionProvider = getSessionProvider();
+  private void migrateGroups(SessionProvider sessionProvider) {
     try {
       String ws = repoService.getCurrentRepository().getConfiguration().getDefaultWorkspaceName();
       Session session = sessionProvider.getSession(ws, repoService.getCurrentRepository());
@@ -115,10 +112,6 @@ public class SecureJCRFoldersUpgradePlugin extends UpgradeProductPlugin {
     } catch (Exception e) {
       if (LOG.isErrorEnabled()) {
         LOG.error("An unexpected error occurs when migrate /Groups", e);
-      }
-    } finally {
-      if (sessionProvider != null) {
-        sessionProvider.close();
       }
     }
   }
@@ -146,8 +139,7 @@ public class SecureJCRFoldersUpgradePlugin extends UpgradeProductPlugin {
   }
 
   // Remove normal users permission from digital nodes
-  private void migrateDigitalAssets() {
-    SessionProvider sessionProvider = getSessionProvider();
+  private void migrateDigitalAssets(SessionProvider sessionProvider) {
     try {
       String ws = repoService.getCurrentRepository().getConfiguration().getDefaultWorkspaceName();
       Session session = sessionProvider.getSession(ws, repoService.getCurrentRepository());
@@ -162,10 +154,6 @@ public class SecureJCRFoldersUpgradePlugin extends UpgradeProductPlugin {
     } catch (Exception e) {
       if (LOG.isErrorEnabled()) {
         LOG.error("An unexpected error occurs when migrate /Digital Assets", e);
-      }
-    } finally {
-      if (sessionProvider != null) {
-        sessionProvider.close();
       }
     }
   }
@@ -184,17 +172,5 @@ public class SecureJCRFoldersUpgradePlugin extends UpgradeProductPlugin {
     } else {
       LOG.warn("Could not find the node path: " + rootedNode.getPath() + relativePath);
     }
-  }
-
-  public SessionProvider getSessionProvider() {
-    if (sessionProvider == null) {
-      sessionProvider = SessionProvider.createSystemProvider();
-    }
-
-    return sessionProvider;
-  }
-
-  public void setSessionProvider(SessionProvider sessionProvider) {
-    this.sessionProvider = sessionProvider;
   }
 }

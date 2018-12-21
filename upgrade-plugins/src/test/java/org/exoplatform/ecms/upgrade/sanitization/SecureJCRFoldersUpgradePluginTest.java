@@ -7,8 +7,8 @@ import org.exoplatform.services.cms.impl.DMSRepositoryConfiguration;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.config.RepositoryEntry;
 import org.exoplatform.services.jcr.core.ExtendedNode;
+import org.exoplatform.services.jcr.core.ExtendedSession;
 import org.exoplatform.services.jcr.core.ManageableRepository;
-import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.organization.GroupHandler;
 import org.exoplatform.services.organization.OrganizationService;
@@ -16,11 +16,7 @@ import org.exoplatform.services.organization.impl.GroupImpl;
 import org.exoplatform.services.security.IdentityConstants;
 import org.junit.Test;
 
-import javax.jcr.RepositoryException;
-import javax.jcr.Session;
-
 import java.util.Arrays;
-import java.util.Collections;
 
 import static org.mockito.Mockito.*;
 
@@ -31,20 +27,22 @@ public class SecureJCRFoldersUpgradePluginTest {
     // Given
     OrganizationService orgService = mock(OrganizationService.class);
 
+    DMSRepositoryConfiguration config = new DMSRepositoryConfiguration();
+    config.setSystemWorkspace("system");
     DMSConfiguration dmsConfiguration = mock(DMSConfiguration.class);
-    when(dmsConfiguration.getConfig()).thenReturn(new DMSRepositoryConfiguration());
+    when(dmsConfiguration.getConfig()).thenReturn(config);
 
     NodeHierarchyCreator nodeHierarchyCreator = mock(NodeHierarchyCreator.class);
-    ManageableRepository repo = mock(ManageableRepository.class);
     RepositoryEntry entry = mock(RepositoryEntry.class);
+    when(entry.getDefaultWorkspaceName()).thenReturn("collaboration");
+
+    ExtendedSession session = mock(ExtendedSession.class);
+    ManageableRepository repo = mock(ManageableRepository.class);
     when(repo.getConfiguration()).thenReturn(entry);
+    when(repo.getSystemSession(any())).thenReturn(session);
 
     RepositoryService repositoryService = mock(RepositoryService.class);
     when(repositoryService.getCurrentRepository()).thenReturn(repo);
-
-    SessionProvider sessionProvider = mock(SessionProvider.class);
-    Session session = mock(Session.class);
-    when(sessionProvider.getSession(anyString(), any())).thenReturn(session);
 
     //
     ExtendedNode ecmNode = mock(ExtendedNode.class);
@@ -86,7 +84,6 @@ public class SecureJCRFoldersUpgradePluginTest {
 
     // When
     SecureJCRFoldersUpgradePlugin plugin = new SecureJCRFoldersUpgradePlugin(orgService, repositoryService, dmsConfiguration, nodeHierarchyCreator, new InitParams());
-    plugin.setSessionProvider(sessionProvider);
     plugin.processUpgrade("5.1.0", "5.2.0");
 
     // Then
