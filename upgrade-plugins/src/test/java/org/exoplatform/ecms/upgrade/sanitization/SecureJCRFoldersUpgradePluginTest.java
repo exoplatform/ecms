@@ -16,6 +16,7 @@ import org.exoplatform.services.organization.impl.GroupImpl;
 import org.exoplatform.services.security.IdentityConstants;
 import org.junit.Test;
 
+import javax.jcr.PathNotFoundException;
 import java.util.Arrays;
 
 import static org.mockito.Mockito.*;
@@ -64,11 +65,12 @@ public class SecureJCRFoldersUpgradePluginTest {
 
     GroupHandler groupHandler = mock(GroupHandler.class);
     when(orgService.getGroupHandler()).thenReturn(groupHandler);
-    when(groupHandler.findGroups(null)).thenReturn(Arrays.asList(new GroupImpl("platform"), new GroupImpl("organization")));
+    when(groupHandler.findGroups(null)).thenReturn(Arrays.asList(new GroupImpl("platform"), new GroupImpl("organization"), new GroupImpl("management")));
 
     ExtendedNode groupNode = mock(ExtendedNode.class);
     when(groupsNode.getNode("platform")).thenReturn(groupNode);
     when(groupsNode.getNode("organization")).thenReturn(groupNode);
+    when(groupsNode.getNode("management")).thenThrow(PathNotFoundException.class);
     when(groupNode.getNode("ApplicationData/Tags")).thenReturn(groupNode);
     when(groupNode.getNode("SharedData")).thenReturn(groupNode);
 

@@ -132,7 +132,7 @@ public class SecureJCRFoldersUpgradePlugin extends UpgradeProductPlugin {
           Node childGroupNode = groupNode.getNode(childGroup.getGroupName());
           migrateGroup(childGroupNode, childGroup);
         } catch (PathNotFoundException e) {
-          LOG.warn("Could not find the group node: " + groupNode.getPath() + group.getGroupName());
+          LOG.warn("Could not find the group node: " + groupNode.getPath() + "/" + childGroup.getGroupName());
         }
       }
     }
@@ -159,9 +159,13 @@ public class SecureJCRFoldersUpgradePlugin extends UpgradeProductPlugin {
   }
 
   private void removePermission(Node rootedNode, String relativePath, String permission) throws RepositoryException {
-    ExtendedNode node;
+    ExtendedNode node = null;
     if (relativePath != null) {
-      node = (ExtendedNode) rootedNode.getNode(relativePath);
+      try {
+        node = (ExtendedNode) rootedNode.getNode(relativePath);
+      } catch (PathNotFoundException ex) {
+        LOG.warn("Could not find the node path: " + rootedNode.getPath() + "/" + relativePath);
+      }
     } else {
       node = (ExtendedNode) rootedNode;
     }
@@ -169,8 +173,6 @@ public class SecureJCRFoldersUpgradePlugin extends UpgradeProductPlugin {
     if (node != null) {
       node.removePermission(permission);
       node.save();
-    } else {
-      LOG.warn("Could not find the node path: " + rootedNode.getPath() + relativePath);
     }
   }
 }
