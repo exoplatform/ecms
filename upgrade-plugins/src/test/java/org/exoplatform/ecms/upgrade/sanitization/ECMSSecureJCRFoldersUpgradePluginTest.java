@@ -21,7 +21,7 @@ import java.util.Arrays;
 
 import static org.mockito.Mockito.*;
 
-public class SecureJCRFoldersUpgradePluginTest {
+public class ECMSSecureJCRFoldersUpgradePluginTest {
 
   @Test
   public void testSecureJCRFoldersMigration() throws Exception {
@@ -85,7 +85,7 @@ public class SecureJCRFoldersUpgradePluginTest {
     }
 
     // When
-    SecureJCRFoldersUpgradePlugin plugin = new SecureJCRFoldersUpgradePlugin(orgService, repositoryService, dmsConfiguration, nodeHierarchyCreator, new InitParams());
+    ECMSSecureJCRFoldersUpgradePlugin plugin = new ECMSSecureJCRFoldersUpgradePlugin(orgService, repositoryService, dmsConfiguration, nodeHierarchyCreator, new InitParams());
     plugin.processUpgrade("5.1.0", "5.2.0");
 
     // Then

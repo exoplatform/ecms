@@ -423,13 +423,13 @@
         </component-plugin>
         <component-plugin>
             <name>
-                SecureJCRFoldersUpgradePlugin
+                ECMSSecureJCRFoldersUpgradePlugin
             </name>
             <set-method>
                 addUpgradePlugin
             </set-method>
             <type>
-                org.exoplatform.ecms.upgrade.sanitization.SecureJCRFoldersUpgradePlugin
+                org.exoplatform.ecms.upgrade.sanitization.ECMSSecureJCRFoldersUpgradePlugin
             </type>
             <description>
                 A upgrade plugin to secure JCR folders

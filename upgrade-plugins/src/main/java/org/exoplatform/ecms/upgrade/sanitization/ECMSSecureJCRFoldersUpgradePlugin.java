@@ -38,20 +38,19 @@ import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 import java.util.Collection;
-import java.util.Iterator;
 
-public class SecureJCRFoldersUpgradePlugin extends UpgradeProductPlugin {
+public class ECMSSecureJCRFoldersUpgradePlugin extends UpgradeProductPlugin {
 
   private OrganizationService orgService;
   private DMSConfiguration dmsConfiguration;
   private RepositoryService repoService;
   private NodeHierarchyCreator nodeHierarchyCreator;
 
-  private static final Log LOG = ExoLogger.getLogger(SecureJCRFoldersUpgradePlugin.class.getName());
+  private static final Log LOG = ExoLogger.getLogger(ECMSSecureJCRFoldersUpgradePlugin.class.getName());
   private SessionProvider sessionProvider;
 
-  public SecureJCRFoldersUpgradePlugin(OrganizationService orgService, RepositoryService repoService, DMSConfiguration dmsConfiguration,
-                                       NodeHierarchyCreator nodeHierarchyCreator, InitParams initParams) {
+  public ECMSSecureJCRFoldersUpgradePlugin(OrganizationService orgService, RepositoryService repoService, DMSConfiguration dmsConfiguration,
+                                           NodeHierarchyCreator nodeHierarchyCreator, InitParams initParams) {
     super(initParams);
     this.orgService = orgService;
     this.repoService = repoService;
