@@ -238,7 +238,7 @@ public class ApplicationTemplateManagerServiceImpl implements ApplicationTemplat
       }
     }
     managedApplicationNames.put(repository,managedApplicationsPerRepo);
-    storedTemplateHomeNode.getSession().save();
+    storedTemplateHomeNode.save();
   }
   
   /**

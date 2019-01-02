@@ -138,6 +138,6 @@
     </dependency>
   </dependencies>
   <build>
-    <finalName>gatein-exo-wcm-${project.version}</finalName>
+    <finalName>ecm-wcm-extension</finalName>
   </build>
 </project>

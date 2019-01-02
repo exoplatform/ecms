@@ -85,8 +85,9 @@ public class UINodeTypeList extends UIPagingGridDecorator {
     }
     Collections.sort(nodeList, new NodeTypeNameComparator()) ;
     Session session = mRepository.getSystemSession(mRepository.getConfiguration().getSystemWorkspaceName()) ;
-    if(session.getRootNode().hasNode(DRAFTNODETYPE)) {
-      Node draftNode = session.getRootNode().getNode(DRAFTNODETYPE) ;
+    Node rootNode = session.getRootNode();
+    if(rootNode.hasNode(DRAFTNODETYPE)) {
+      Node draftNode = rootNode.getNode(DRAFTNODETYPE) ;
       NodeIterator nodeIter = draftNode.getNodes() ;
       while(nodeIter.hasNext()) {
         nodeList.add(nodeIter.nextNode()) ;
@@ -118,8 +119,9 @@ public class UINodeTypeList extends UIPagingGridDecorator {
       getApplicationComponent(RepositoryService.class).getCurrentRepository() ;
     Session session = manaRepository.getSystemSession(manaRepository.getConfiguration().getSystemWorkspaceName()) ;
     if(name != null) {
-      if(session.getRootNode().hasNode(DRAFTNODETYPE)) {
-        Node draftNode = session.getRootNode().getNode(DRAFTNODETYPE) ;
+      Node rootNode = session.getRootNode();
+      if(rootNode.hasNode(DRAFTNODETYPE)) {
+        Node draftNode = rootNode.getNode(DRAFTNODETYPE) ;
         if(draftNode.hasNode(name)) {
           Node deleteNode = draftNode.getNode(name) ;
           deleteNode.remove() ;
@@ -225,8 +227,9 @@ public class UINodeTypeList extends UIPagingGridDecorator {
         uiNodeList.getApplicationComponent(RepositoryService.class).getCurrentRepository();
       Session session = manaRepository.getSystemSession(manaRepository.getConfiguration().getSystemWorkspaceName()) ;
       String nodeName = event.getRequestContext().getRequestParameter(OBJECTID) ;
-      if(session.getRootNode().hasNode(DRAFTNODETYPE)) {
-        Node draftNode = session.getRootNode().getNode(DRAFTNODETYPE) ;
+      Node rootNode = session.getRootNode();
+      if(rootNode.hasNode(DRAFTNODETYPE)) {
+        Node draftNode = rootNode.getNode(DRAFTNODETYPE) ;
         Node deleteNode = draftNode.getNode(nodeName) ;
         deleteNode.remove() ;
         draftNode.save() ;

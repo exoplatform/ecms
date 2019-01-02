@@ -42,9 +42,10 @@ public class DocumentAutoVersionJob implements Job {
       Session session = WCMCoreUtils.getUserSessionProvider().getSession(workspace, WCMCoreUtils.getRepository());
       Node currentNode = session.getNodeByUUID(nodeUUID);
       if(currentNode.getBaseVersion().getCreated().before(day) || currentNode.getBaseVersion().getCreated().equals(day)){
+        Node parent = currentNode.getParent();
         currentNode.remove();
         log.info("delete node path: "+currentNode.getPath(), " uuid: "+currentNode.getUUID());
-        currentNode.getSession().save();
+        parent.save();
       }
     }catch(RepositoryException re){
 

@@ -224,7 +224,7 @@ public class UIJCRExplorer extends UIContainer {
    * @return the root node itself if it is not a link otherwise the target node (= resolve the link)
    */
   public Node getRootNode() throws Exception {
-    return getNodeByPath(currentRootPath_, getSession()) ;
+    return getNodeByPath(currentRootPath_, getSystemSession()) ;
   }
 
   /**
@@ -369,8 +369,7 @@ public class UIJCRExplorer extends UIContainer {
   }
 
   public Session getSession() throws Exception {
-    if(isReferenceNode_) return getSessionProvider().getSession(referenceWorkspace_, getRepository()) ;
-    return getSessionProvider().getSession(currentDriveWorkspaceName_, getRepository()) ;
+    return getSessionProvider().getSession(getWorkspaceName(), getRepository()) ;
   }
 
   public String getWorkspaceName() {
@@ -378,8 +377,7 @@ public class UIJCRExplorer extends UIContainer {
   }
 
   public Session getSystemSession() throws Exception {
-    if(isReferenceNode_) return getSystemProvider().getSession(referenceWorkspace_, getRepository()) ;
-    return getSystemProvider().getSession(currentDriveWorkspaceName_, getRepository()) ;
+    return getSystemProvider().getSession(getWorkspaceName(), getRepository()) ;
   }
 
   public String getDocumentInfoTemplate() { return documentInfoTemplate_ ; }
@@ -964,7 +962,7 @@ public class UIJCRExplorer extends UIContainer {
   public List<Node> getChildrenList(String path, boolean isReferences) throws Exception {
     RepositoryService repositoryService = getApplicationComponent(RepositoryService.class) ;
     TemplateService templateService = getApplicationComponent(TemplateService.class) ;
-    Node node = (Node) ItemLinkAware.newInstance(getWorkspaceName(), path, getNodeByPath(path, getSession()));
+    Node node = (Node) ItemLinkAware.newInstance(getWorkspaceName(), path, getNodeByPath(path, getSystemSession()));
     NodeIterator childrenIterator = node.getNodes();
     List<Node> childrenList  = new ArrayList<Node>() ;
     NodeType nodeType = node.getPrimaryNodeType();

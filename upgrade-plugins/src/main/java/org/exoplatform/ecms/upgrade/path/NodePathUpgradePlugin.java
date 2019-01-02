@@ -49,13 +49,14 @@ public class NodePathUpgradePlugin extends UpgradeProductPlugin {
     SessionProvider sessionProvider = SessionProvider.createSystemProvider();
     try{
       ExtendedSession session = (ExtendedSession)sessionProvider.getSession(workspace, repositoryService_.getCurrentRepository());
-      Node sourceNode = session.getRootNode().getNode(nodePath.substring(1));
+      Node rootNode = session.getRootNode();
+      Node sourceNode = rootNode.getNode(nodePath.substring(1));
       Node targetNode = null;
       try {
-    	targetNode = session.getRootNode().getNode(destNode.substring(1));
-      } catch(PathNotFoundException pne) {
-    	targetNode = session.getRootNode().addNode("sites"); 
-    	session.getRootNode().save();
+        targetNode = rootNode.getNode(destNode.substring(1));
+      } catch (PathNotFoundException pne) {
+        targetNode = rootNode.addNode("sites");
+        rootNode.save();
       }
       if (sourceNode.hasNodes()){
         NodeIterator iter = sourceNode.getNodes();

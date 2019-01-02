@@ -44,9 +44,8 @@ public class WebContentSchemaHandler extends BaseWebSchemaHandler {
   }
 
   public void onCreateNode(SessionProvider sessionProvider, final Node webContent) throws Exception {
-    Session session = webContent.getSession();
     createSchema(webContent);
-    session.save();
+    webContent.getParent().save();
   }
 
   public Node getCSSFolder(final Node webContent) throws Exception {

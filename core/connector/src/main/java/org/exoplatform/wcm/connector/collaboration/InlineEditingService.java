@@ -234,7 +234,7 @@ public class InlineEditingService implements ResourceContainer{
               ConversationState conversationState = ConversationState.getCurrent();
               conversationState.setAttribute("siteName", siteName);
               listenerService.broadcast(POST_EDIT_CONTENT_EVENT, null, node);
-              session.save();
+              node.save();
             }
           }
         } else {

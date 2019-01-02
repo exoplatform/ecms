@@ -79,7 +79,7 @@ public class PublicationUtils {
             if (src.length == 2) {
               ManageableRepository repository = repositoryService.getCurrentRepository();
               Session session = sessionProvider.getSession(src[0], repository);
-              Node nodeSrc = session.getRootNode().getNode(src[1].substring(1));
+              Node nodeSrc = (Node) session.getItem(src[1]);
               if(publicationService.isNodeEnrolledInLifecycle(nodeSrc)) publicationService.unsubcribeLifecycle(nodeSrc);
               wcmPublicationService.updateLifecyleOnChangeContent(nodeSrc, "default", "__system", "published");
               nodeSrc.save();

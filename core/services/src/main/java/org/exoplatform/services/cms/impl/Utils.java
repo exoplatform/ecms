@@ -38,20 +38,11 @@ import org.exoplatform.services.jcr.util.VersionHistoryImporter;
 import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
-import org.exoplatform.services.security.ConversationState;
-import org.exoplatform.services.security.Identity;
-import org.exoplatform.services.security.IdentityRegistry;
-import org.exoplatform.services.security.MembershipEntry;
+import org.exoplatform.services.security.*;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
-import javax.jcr.ItemNotFoundException;
-import javax.jcr.Node;
-import javax.jcr.NodeIterator;
-import javax.jcr.PathNotFoundException;
-import javax.jcr.RepositoryException;
-import javax.jcr.Session;
-import javax.jcr.ValueFormatException;
+import javax.jcr.*;
 import javax.jcr.nodetype.NodeType;
 import javax.jcr.nodetype.PropertyDefinition;
 import javax.ws.rs.core.MediaType;
@@ -298,7 +289,7 @@ public class Utils {
   }
 
   public static String getPersonalDrivePath(String parameterizedDrivePath, String userId) throws Exception {
-    SessionProvider sessionProvider = WCMCoreUtils.getUserSessionProvider();
+    SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
     NodeHierarchyCreator nodeHierarchyCreator = WCMCoreUtils.getService(NodeHierarchyCreator.class);
     Node userNode = nodeHierarchyCreator.getUserNode(sessionProvider, userId);
     return StringUtils.replaceOnce(parameterizedDrivePath,
@@ -519,31 +510,33 @@ public class Utils {
         systemProvider.getSession(repository.getConfiguration().getDefaultWorkspaceName(), repository);
     Node serviceLogContentNode = null;
 
-    if (session.getRootNode().hasNode("exo:services")) {
+    try {
       // Get service folder
-      Node  serviceFolder = session.getRootNode().getNode("exo:services");
+      Node serviceFolder = (Node) session.getItem("/exo:services");
 
       // Get service node
       Node serviceNode = serviceFolder.hasNode(serviceName) ?
-                                                             serviceFolder.getNode(serviceName) : serviceFolder.addNode(serviceName, NodetypeConstant.NT_UNSTRUCTURED);
+          serviceFolder.getNode(serviceName) : serviceFolder.addNode(serviceName, NodetypeConstant.NT_UNSTRUCTURED);
 
-                                                             // Get log node of service
-                                                             String serviceLogName =  serviceName + "_" + logType;
-                                                             Node serviceLogNode = serviceNode.hasNode(serviceLogName) ?
-                                                                                                                        serviceNode.getNode(serviceLogName) : serviceNode.addNode(serviceLogName, NodetypeConstant.NT_FILE);
+      // Get log node of service
+      String serviceLogName = serviceName + "_" + logType;
+      Node serviceLogNode = serviceNode.hasNode(serviceLogName) ?
+          serviceNode.getNode(serviceLogName) : serviceNode.addNode(serviceLogName, NodetypeConstant.NT_FILE);
 
-                                                                                                                        // Get service log content
-                                                                                                                        if (serviceLogNode.hasNode(NodetypeConstant.JCR_CONTENT)) {
-                                                                                                                          serviceLogContentNode = serviceLogNode.getNode(NodetypeConstant.JCR_CONTENT);
-                                                                                                                        } else {
-                                                                                                                          serviceLogContentNode = serviceLogNode.addNode(NodetypeConstant.JCR_CONTENT, NodetypeConstant.NT_RESOURCE);
-                                                                                                                          serviceLogContentNode.setProperty(NodetypeConstant.JCR_ENCODING, "UTF-8");
-                                                                                                                          serviceLogContentNode.setProperty(NodetypeConstant.JCR_MIME_TYPE, MediaType.TEXT_PLAIN);
-                                                                                                                          serviceLogContentNode.setProperty(NodetypeConstant.JCR_DATA, StringUtils.EMPTY);
-                                                                                                                          serviceLogContentNode.setProperty(NodetypeConstant.JCR_LAST_MODIFIED, new Date().getTime());
-                                                                                                                        }
+      // Get service log content
+      if (serviceLogNode.hasNode(NodetypeConstant.JCR_CONTENT)) {
+        serviceLogContentNode = serviceLogNode.getNode(NodetypeConstant.JCR_CONTENT);
+      } else {
+        serviceLogContentNode = serviceLogNode.addNode(NodetypeConstant.JCR_CONTENT, NodetypeConstant.NT_RESOURCE);
+        serviceLogContentNode.setProperty(NodetypeConstant.JCR_ENCODING, "UTF-8");
+        serviceLogContentNode.setProperty(NodetypeConstant.JCR_MIME_TYPE, MediaType.TEXT_PLAIN);
+        serviceLogContentNode.setProperty(NodetypeConstant.JCR_DATA, StringUtils.EMPTY);
+        serviceLogContentNode.setProperty(NodetypeConstant.JCR_LAST_MODIFIED, new Date().getTime());
+      }
+      session.save();
+    } catch (PathNotFoundException ex) {
+      LOG.warn("Could not find /exo:services node");
     }
-    session.save();
     return serviceLogContentNode;
   }
   /**
@@ -761,7 +754,7 @@ public class Utils {
     if (linkManager.isLink(node)) {
       try {
         nodeType = node.getProperty(NodetypeConstant.EXO_PRIMARYTYPE).getString();
-        node = linkManager.getTarget(node);
+        node = linkManager.getTarget(node, IdentityConstants.SYSTEM.equals(node.getSession().getUserID()));
         if (node == null)
           return "";
       } catch (Exception e) {
@@ -776,8 +769,7 @@ public class Utils {
       nodeType = NodetypeConstant.EXO_FAVOURITE_FOLDER;
     }
     else if (nodeType.equals(NodetypeConstant.NT_UNSTRUCTURED) || nodeType.equals(NodetypeConstant.NT_FOLDER)) {
-      if ((PRIVATE.equals(node.getName()) || PUBLIC.equals(node.getName()))
-           && node.getParent().isNodeType("exo:userFolder")) {
+      if (PRIVATE.equals(node.getName()) || PUBLIC.equals(node.getName())) {
           nodeType = String.format("exo:%sFolder", node.getName().toLowerCase());
       } else {
         for (String specificFolder : NodetypeConstant.SPECIFIC_FOLDERS) {

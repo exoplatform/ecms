@@ -270,17 +270,16 @@ public class PageListFactory {
       // JCR score is calculated as (lucene score)*1000 , so we do the same thing for ES results to have a more accurate comparison
       searchResult.setRelevancy(searchResult.getRelevancy() * 1000);
       String nodePath = searchResult.getNodePath();
-      Node node = null;
       try {
-        node = session.getRootNode().getNode(nodePath.substring(1, nodePath.length()));
+        Node node = (Node) session.getItem(nodePath);
+        if(node != null) {
+          if (filter != null) {
+            node = filter.filterNodeToDisplay(node);
+          }
+          filteredResults.add(dataCreator.createData(node, null, searchResult));
+        }
       } catch (RepositoryException e) {
         LOG.error("Cannot get node " + nodePath, e);
-      }
-      if(node != null) {
-        if (filter != null) {
-          node = filter.filterNodeToDisplay(node);
-        }
-        filteredResults.add(dataCreator.createData(node, null, searchResult));
       }
     });
 

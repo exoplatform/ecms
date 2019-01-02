@@ -137,7 +137,6 @@ public abstract class BaseResourceLoaderService implements Startable{
       session.getItem(resourcesPath + "/" + firstResourceName);
       return;
     } catch (PathNotFoundException e) {
-      Node root = session.getRootNode();
       Node resourcesHome = (Node) session.getItem(resourcesPath);
       String warPath = location + resourcesPath.substring(resourcesPath.lastIndexOf("/")) ;
       for (ResourceConfig.Resource resource : resources) {
@@ -150,7 +149,7 @@ public abstract class BaseResourceLoaderService implements Startable{
         InputStream in = cservice_.getInputStream(path);
         addResource(resourcesHome, name, description, in);
       }
-      root.save();
+      resourcesHome.save();
     }
   }
 

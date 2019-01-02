@@ -319,7 +319,7 @@ public class UIDocumentNodeList extends UIContainer {
                uiExplorer.getAllItemFilterMap(), 
                uiExplorer.getAllItemByTypeFilterMap(),
                (NodeLinkAware) ItemLinkAware.newInstance(uiExplorer.getWorkspaceName(), path, 
-                                                uiExplorer.getNodeByPath(path, uiExplorer.getSession())));
+                                                uiExplorer.getNodeByPath(path, uiExplorer.getSystemSession())));
 
     }
     

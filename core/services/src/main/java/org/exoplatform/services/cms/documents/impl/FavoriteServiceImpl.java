@@ -137,7 +137,7 @@ public class FavoriteServiceImpl implements FavoriteService {
            targetNode = getTargetNode(childNode);
             if (node.isSame(targetNode)) {
               childNode.remove();
-              userFavoriteNode.getSession().save();
+              userFavoriteNode.save();
               return;
             }
           }
