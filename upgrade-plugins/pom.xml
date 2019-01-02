@@ -10,6 +10,9 @@
   <packaging>jar</packaging>
   <name>eXo PLF:: ECMS Upgrade Plugins</name>
   <description>eXo ECMS Upgrade Plugins</description>
+  <properties>
+    <exo.test.coverage.ratio>0.05</exo.test.coverage.ratio>
+  </properties>
   <dependencies>
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
