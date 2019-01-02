@@ -273,9 +273,8 @@ public class WCMComposerImpl implements WCMComposer, Startable {
     ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
     Session session = sessionProvider.getSession(workspace, manageableRepository);
     Node currentFolder = null;
-    try {
-      currentFolder = (Node) session.getItem(path);
-    } catch (PathNotFoundException ex) {
+    if (session.getRootNode().hasNode(path.substring(1))) {
+      currentFolder = session.getRootNode().getNode(path.substring(1));
     }
 
     Result result;
@@ -423,12 +422,10 @@ public class WCMComposerImpl implements WCMComposer, Startable {
         Node currentFolder = null;
         if ("/".equals(path)) {
           currentFolder = session.getRootNode();
+        } else if (session.getRootNode().hasNode(path.substring(1))) {
+          currentFolder = session.getRootNode().getNode(path.substring(1));
         } else {
-          try {
-            currentFolder = (Node) session.getItem(path);
-          } catch (PathNotFoundException ex) {
-            return null;
-          }
+          return null;
         }
 
         if (currentFolder != null && currentFolder.isNodeType("exo:taxonomy")) {
