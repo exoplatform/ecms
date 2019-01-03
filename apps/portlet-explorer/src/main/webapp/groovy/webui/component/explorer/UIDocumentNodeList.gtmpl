@@ -139,8 +139,8 @@ public void writeNodes(level, i, data, uiWorkingArea, linkManager, restContextNa
     }            
   }
 
-  String encodedPath =URLEncoder.encode(Utils.formatNodeName(data.getPath()), "UTF-8");
-  encodedPath=encodedPath.replaceAll ("%2F", "/");//we won't encode the slash characters in the path
+  String encodedPath = URLEncoder.encode(Utils.formatNodeName(data.getPath()), "UTF-8");
+  encodedPath = encodedPath.replaceAll("%2F", "/"); //we won't encode the slash characters in the path
   if (!data.isNodeType(Utils.EXO_RESTORELOCATION) && !Utils.isTrashHomeNode(data)) {
     String serverUrl= uiDocumentInfo.getWebDAVServerPrefix();
     String clipboardLink =serverUrl + "/" + restContextName + "/private/jcr/" + repository + "/" + preferenceWS + encodedPath;

@@ -157,8 +157,8 @@
                   strActs += "</li>";                  
                   }            
                 }
-                String encodedPath =URLEncoder.encode(Utils.formatNodeName(data.getPath()), "UTF-8");
-                encodedPath=encodedPath.replaceAll ("%2F", "/");//we won't encode the slash characters in the path
+                String encodedPath = URLEncoder.encode(Utils.formatNodeName(data.getPath()), "UTF-8");
+                encodedPath = encodedPath.replaceAll("%2F", "/"); //we won't encode the slash characters in the path
               if (!data.isNodeType(Utils.EXO_RESTORELOCATION) && !Utils.isTrashHomeNode(data)) {
 
               	String clipboardLink = serverUrl + "/" + restContextName + "/private/jcr/" + repository + "/" + preferenceWS + encodedPath;
