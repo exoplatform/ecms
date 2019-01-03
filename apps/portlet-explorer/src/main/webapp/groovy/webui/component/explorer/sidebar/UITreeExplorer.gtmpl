@@ -118,9 +118,9 @@
   			  }				    
   	    }
 
-  	    String encodedPath = URLEncoder.encode(Utils.formatNodeName(node.getPath()), "UTF-8");
-           encodedPath = encodedPath.replaceAll("%2F", "/"); //we won't encode the slash characters in the path
-  	    String clipboardLink = serverPath + "/" + restContextName + "/private/jcr/" + repository + "/" + preferenceWS + encodedPath;
+  	        String encodedPath = URLEncoder.encode(Utils.formatNodeName(node.getPath()), "UTF-8");
+               encodedPath = encodedPath.replaceAll("%2F", "/"); //we won't encode the slash characters in the path
+  	        String clipboardLink = serverPath + "/" + restContextName + "/private/jcr/" + repository + "/" + preferenceWS + encodedPath;
   		int depthChild = node.getDepth();
         if (!node.isNodeType(Utils.EXO_RESTORELOCATION) && !Utils.isTrashHomeNode(node)) {
           strActs +=  "<li class='menuItem'>";
