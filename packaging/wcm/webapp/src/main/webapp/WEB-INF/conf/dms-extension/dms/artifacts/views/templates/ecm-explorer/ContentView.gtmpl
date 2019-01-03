@@ -282,9 +282,10 @@
               strActs += "</li>";
             }            
           }
-          
+          String encodedPath =URLEncoder.encode(Utils.formatNodeName(data.getPath()), "UTF-8");
+          encodedPath=encodedPath.replaceAll ("%2F", "/");//we won't encode the slash characters in the path
           if (!data.isNodeType(Utils.EXO_RESTORELOCATION) && !Utils.isTrashHomeNode(data)) {
-          	String clipboardLink = serverUrl + "/" + restContextName + "/private/jcr/" + repository + "/" + preferenceWS + data.getPath();
+          	String clipboardLink = serverUrl + "/" + restContextName + "/private/jcr/" + repository + "/" + preferenceWS + encodedPath;
           	strActs +=  "<li class='menuItem'>";
           	strActs +=  "<a exo:attr='CopyUrlToClipboard' style='display: block;' id='clip_button1$i' path='$clipboardLink'>" ;
           	strActs +=  " <i class='uiIconEcmsCopyUrlToClipboard uiIconEcmsLightGray'>" ;

@@ -157,10 +157,11 @@
                   strActs += "</li>";                  
                   }            
                 }
+                String encodedPath =URLEncoder.encode(Utils.formatNodeName(data.getPath()), "UTF-8");
+                encodedPath=encodedPath.replaceAll ("%2F", "/");//we won't encode the slash characters in the path
               if (!data.isNodeType(Utils.EXO_RESTORELOCATION) && !Utils.isTrashHomeNode(data)) {
-                String encodedLink =URLEncoder.encode(data.getPath(), "UTF-8");
-                encodedLink=encodedLink.replaceAll ("%2F", "/");
-              	String clipboardLink = serverUrl + "/" + restContextName + "/private/jcr/" + repository + "/" + preferenceWS + encodedLink;
+
+              	String clipboardLink = serverUrl + "/" + restContextName + "/private/jcr/" + repository + "/" + preferenceWS + encodedPath;
               	strActs +=  "<li class='menuItem'>";
               	strActs +=  "<a exo:attr='CopyUrlToClipboard' style='display: block;' id='clip_button1$i' path='$clipboardLink'>" ;
               	strActs +=  " <i class='uiIconEcmsCopyUrlToClipboard uiIconEcmsLightGray'>";
@@ -185,8 +186,7 @@
 							<div class="nodeLabel">
 								<div class="thumbnailImage">
                   <%
-                    def encodedPath = URLEncoder.encode(Utils.formatNodeName(data.getPath()), "utf-8");
-                    encodedPath = encodedPath.replaceAll ("%2F", "/");    //we won't encode the slash characters in the path
+
                     
 									  String thumbnailImage = "/" + portalName + "/" + restContextName + "/thumbnailImage/medium/" + repository + "/" + preferenceWS + encodedPath;
 									  if(!"".equals(time)) thumbnailImage = thumbnailImage + "?" + time;
