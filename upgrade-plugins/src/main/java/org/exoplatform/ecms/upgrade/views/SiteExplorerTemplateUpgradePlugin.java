@@ -83,6 +83,8 @@ public class SiteExplorerTemplateUpgradePlugin extends UpgradeProductPlugin {
     }
     try {
       Set<String> unchangedViewSet = new HashSet<String>();
+      // Force load all configured templates
+      manageViewService_.init();
       Set<String> configuredTemplates = manageViewService_.getConfiguredTemplates();
       List<Node> removedNodes = new ArrayList<Node>();
       for (String unchangedView : unchangedViews.split(",")) {
