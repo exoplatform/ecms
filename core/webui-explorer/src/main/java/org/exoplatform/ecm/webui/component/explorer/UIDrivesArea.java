@@ -16,6 +16,20 @@
  */
 package org.exoplatform.ecm.webui.component.explorer;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.MissingResourceException;
+import java.util.ResourceBundle;
+import java.util.stream.Collectors;
+
+import javax.jcr.AccessDeniedException;
+import javax.jcr.NoSuchWorkspaceException;
+import javax.jcr.Node;
+import javax.jcr.Session;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+
 import org.exoplatform.container.definition.PortalContainerConfig;
 import org.exoplatform.container.xml.PortalContainerInfo;
 import org.exoplatform.ecm.jcr.model.Preference;
@@ -39,7 +53,6 @@ import org.exoplatform.services.cms.views.ManageViewService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
-import org.exoplatform.services.jcr.impl.quota.ExceededQuotaLimitException;
 import org.exoplatform.services.organization.OrganizationService;
 import org.exoplatform.services.organization.User;
 import org.exoplatform.services.security.ConversationState;
@@ -54,17 +67,6 @@ import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.UIContainer;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
-
-import javax.jcr.AccessDeniedException;
-import javax.jcr.NoSuchWorkspaceException;
-import javax.jcr.Node;
-import javax.jcr.Session;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.MissingResourceException;
-import java.util.ResourceBundle;
 
 /**
  * Created by The eXo Platform SARL
@@ -121,7 +123,7 @@ public class UIDrivesArea extends UIContainer {
     }
   }
 
-  public String getGroupLabel(DriveData driveData) throws Exception{
+  public String getGroupLabel(DriveData driveData) {
     try {
       RepositoryService repoService = WCMCoreUtils.getService(RepositoryService.class);
       NodeHierarchyCreator nodeHierarchyCreator = WCMCoreUtils.getService(NodeHierarchyCreator.class);
@@ -184,20 +186,32 @@ public class UIDrivesArea extends UIContainer {
     ManageDriveService driveService = getApplicationComponent(ManageDriveService.class);
     List<String> userRoles = getUserRoles(false);
     String userId = Util.getPortalRequestContext().getRemoteUser();
-    return driveService.getMainDrives(userId, userRoles);
+    return driveService.getMainDrives(userId, userRoles)
+                       .stream()
+                       .peek(x -> x.setLabel(getLabel(x.getName())))
+                       .sorted(Comparator.comparing(DriveData::getLabel))
+                       .collect(Collectors.toList());
   }
 
   public List<DriveData> groupDrives() throws Exception {
     ManageDriveService driveService = getApplicationComponent(ManageDriveService.class);
     List<String> userRoles = getUserRoles(driveService.newRoleUpdated());
     String userId = Util.getPortalRequestContext().getRemoteUser();
-    return driveService.getGroupDrives(userId, userRoles);
+    return driveService.getGroupDrives(userId, userRoles)
+                       .stream()
+                       .peek(x -> x.setLabel(getGroupLabel(x)))
+                       .sorted(Comparator.comparing(DriveData::getLabel))
+                       .collect(Collectors.toList());
   }
 
   public List<DriveData> personalDrives() throws Exception {
     ManageDriveService driveService = getApplicationComponent(ManageDriveService.class);
     String userId = Util.getPortalRequestContext().getRemoteUser();
-    return driveService.getPersonalDrives(userId);
+    return driveService.getPersonalDrives(userId)
+                       .stream()
+                       .peek(x -> x.setLabel(getLabel(x.getName())))
+                       .sorted(Comparator.comparing(DriveData::getLabel))
+                       .collect(Collectors.toList());
   }
 
   static  public class SelectDriveActionListener extends EventListener<UIDrivesArea> {
