@@ -35,7 +35,6 @@ import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotInTrashF
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotTrashHomeNodeFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.listener.UIWorkingAreaActionListener;
 import org.exoplatform.ecm.webui.utils.Utils;
-import org.exoplatform.ecm.webui.viewer.VideoAudioViewer;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -112,10 +111,6 @@ public class PlayMediaComponent  extends UIAbstractManagerComponent {
             return;
           }
         }
-        VideoAudioViewer uiViewer = uiDocumentWorkspace.addChild(VideoAudioViewer.class, null, "PlayMedia");
-        uiViewer.setPresentNodes(nodes);
-        uiViewer.setRepository(uiExplorer.getRepositoryName());
-        uiDocumentWorkspace.setRenderedChild(VideoAudioViewer.class);
       } else {
         matcher = UIWorkingArea.FILE_EXPLORER_URL_SYNTAX.matcher(srcPath);
         if (matcher.find()) {
