@@ -264,9 +264,9 @@ public class MultiLanguageServiceImpl implements MultiLanguageService {
         Session session = node.getSession();
         Node catNode = null;
         String itemPath = value.toString();
-        if ((itemPath != null)&& (itemPath.length() > 0)) {
-          if (value.toString().indexOf(":/") > -1){
-            if (value.toString().split(":/").length > 0) itemPath = "/" + value.toString().split(":/")[1];
+        if ((itemPath != null) && (itemPath.length() > 0)) {
+          if (itemPath.indexOf(":/") > -1) {
+            if (itemPath.split(":/").length > 0) itemPath = "/" + itemPath.split(":/")[1];
           }
           try {
             catNode = (Node)session.getItem(itemPath);
@@ -681,6 +681,7 @@ public class MultiLanguageServiceImpl implements MultiLanguageService {
       try {
         ntFileLangNode = newLanguageNode.getNode(fileName) ;
       } catch(PathNotFoundException pe) {
+        node.save();
         if(isDefault) {
           ntFileLangNode = addNewFileNode(olfFileName,
                                           newLanguageNode,
@@ -1006,6 +1007,7 @@ public class MultiLanguageServiceImpl implements MultiLanguageService {
         if(!jcrContentNode.getProperty(JCR_MIMETYPE).getString().startsWith("text")) {
           newLang = languagesNode.addNode(defaultLanguage);
           selectedLangNode = getFileLangNode(selectedLangNode) ;
+          node.save();
           newLang = addNewFileNode(node.getName(), newLang, jcrContentNode.getProperty(JCRDATA).getValue(),
               new GregorianCalendar(), jcrContentNode.getProperty(JCR_MIMETYPE).getString(), repositoryName) ;
           Node newJcrContent = newLang.getNode(JCRCONTENT) ;

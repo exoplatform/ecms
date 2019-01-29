@@ -725,7 +725,6 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
           workspace.move(srcPath, destPath);
         }
         LockUtil.changeLockToken(srcPath, (Node)session.getItem(destPath));
-        session.save();
       } catch (ArrayIndexOutOfBoundsException e) {
         throw new MessageException(new ApplicationMessage("UIPopupMenu.msg.node-cutting", null,
             ApplicationMessage.WARNING));
@@ -773,7 +772,6 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
         clipboardService.clearClipboardList(userId, true);
       }
     }
-    session.save();
     clipboardService.getClipboardList(userId, false).remove(currentClipboard);
     updateClipboard(clipboardService.getClipboardList(userId, true), mapVirtualClipboardNode);
     updateClipboard(clipboardService.getClipboardList(userId, false), mapAllClipboardNode);

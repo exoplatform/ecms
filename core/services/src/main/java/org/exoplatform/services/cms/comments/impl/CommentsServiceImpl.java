@@ -143,7 +143,6 @@ public class CommentsServiceImpl implements CommentsService {
         newComment.setProperty(COMMENTOR_SITE,site) ;
       }
       document.save();
-      session.save();
       if (listenerService!=null) {
         try {
           if (activityService.isAcceptedNode(document) 

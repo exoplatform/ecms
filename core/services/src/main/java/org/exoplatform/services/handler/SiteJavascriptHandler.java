@@ -64,19 +64,10 @@ public class SiteJavascriptHandler extends WebRequestHandler {
     }
     siteName_ = context.getParameter(QualifiedName.create("gtn", "sitename"));
 
-    String username = IdentityConstants.ANONIM;
-    ConversationState conversationState = ConversationState.getCurrent();
-    if (conversationState != null && conversationState.getIdentity() != null) {
-      username = conversationState.getIdentity().getUserId();
-      if (StringUtils.isBlank(username)) {
-        username = IdentityConstants.ANONIM;
-      }
-    }
-    String key = MessageDigester.getHash(siteName_) + MessageDigester.getHash(username);
+    String key = MessageDigester.getHash(siteName_);
     String jsData = (String) jsCache_.get(key);
     if (jsData == null) {
-      SessionProvider sessionProvider = IdentityConstants.ANONIM.equals(username) ? WCMCoreUtils.createAnonimProvider()
-                                                                                  : WCMCoreUtils.getUserSessionProvider();
+      SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
       livePortalManagerService_ = WCMCoreUtils.getService(LivePortalManagerService.class);
       Node portalNode = null;
       if ("shared".equals(siteName_)) {

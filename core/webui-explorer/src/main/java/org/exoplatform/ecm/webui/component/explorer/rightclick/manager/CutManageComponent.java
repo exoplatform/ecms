@@ -133,8 +133,6 @@ public class CutManageComponent extends UIAbstractManagerComponent {
       clipboardService.addClipboardCommand(userId, clipboard, false);
       if (isMultiSelect) {
         clipboardService.addClipboardCommand(userId, clipboard, true);
-      } else {
-        session.save();
       }
     } catch (Exception e) {
       JCRExceptionManager.process(uiApp, e);
@@ -147,7 +145,6 @@ public class CutManageComponent extends UIAbstractManagerComponent {
     for(int i=0; i< nodePaths.length; i++) {
       processCut(nodePaths[i], event, uiExplorer, true);
     }
-    uiExplorer.getSession().save();
   }
 
   public static void cutManage(Event<CutManageComponent> event, UIJCRExplorer uiExplorer) throws Exception {

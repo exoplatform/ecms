@@ -445,15 +445,14 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
       CmsService cmsService = documentForm.getApplicationComponent(CmsService.class);
       cmsService.getPreProperties().clear();
       String addedPath = "";
-      if(WCMCoreUtils.canAccessParentNode(documentForm.getCurrentNode()) ||
-          StringUtils.equals("/", documentForm.getCurrentNode().getPath())) {
-        if(documentForm.isAddNew()) {
-          addedPath = cmsService.storeNode(nodeType, homeNode, inputProperties, documentForm.isAddNew());
-        }else{
-          addedPath = cmsService.storeNode(nodeType, homeNode.getParent(), inputProperties, documentForm.isAddNew());
+      if(documentForm.isAddNew()) {
+        addedPath = cmsService.storeNode(nodeType, homeNode, inputProperties, true);
+      } else {
+        if(WCMCoreUtils.canAccessParentNode(currentNode)) {
+          addedPath = cmsService.storeNode(nodeType, homeNode.getParent(), inputProperties, false);
+        } else {
+          addedPath = cmsService.storeEditedNode(nodeType, homeNode, inputProperties, documentForm.isAddNew());
         }
-      }else{
-        addedPath = cmsService.storeEditedNode(nodeType, homeNode, inputProperties, documentForm.isAddNew());
       }
       try {
         newNode = (Node)currentNode.getSession().getItem(addedPath);
@@ -487,8 +486,8 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
             }
           }
         }
-        if(WCMCoreUtils.canAccessParentNode(documentForm.getCurrentNode())) {
-          if (hasCategories && !documentForm.getCurrentNode().getParent().isNodeType("exo:taxonomy")) {
+        if (WCMCoreUtils.canAccessParentNode(currentNode)) {
+          if (hasCategories && !currentNode.getParent().isNodeType("exo:taxonomy")) {
             for (String removedCate : documentForm.getRemovedListCategory(listTaxonomy, listExistingTaxonomy)) {
               index = removedCate.indexOf("/");
               if (index != -1) {
@@ -528,10 +527,10 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
         uiExplorer.updateAjax(event);
         return newNode;
       } catch(Exception e) {
-        uiExplorer.getSession().refresh(false);
+        currentNode.refresh(false);
         uiExplorer.updateAjax(event);
       }
-      uiExplorer.getSession().save();
+      currentNode.save();
       uiExplorer.updateAjax(event);
     } catch (AccessControlException ace) {
       throw new AccessDeniedException(ace.getMessage());

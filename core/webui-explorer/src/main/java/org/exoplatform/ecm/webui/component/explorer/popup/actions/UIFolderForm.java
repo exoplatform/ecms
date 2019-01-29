@@ -259,7 +259,7 @@ public class UIFolderForm extends UIForm implements UIPopupComponent {
         }
         addedNode.setProperty(Utils.EXO_TITLE, title);
 
-        currentNode.getSession().save();
+        currentNode.save();
         uiExplorer.updateAjax(event);
       } catch(ConstraintViolationException cve) {
         Object[] arg = { uiFolderForm.getSelectedType() };

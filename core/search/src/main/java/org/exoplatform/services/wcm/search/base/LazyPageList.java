@@ -87,7 +87,7 @@ public class LazyPageList<E> extends PageList{
     currentListPage_ = new ArrayList<E>();
     if (queryData_.getQueryStatement() != null) {
       try {
-        SessionProvider provider = WCMCoreUtils.getUserSessionProvider();
+        SessionProvider provider = WCMCoreUtils.getSystemSessionProvider();
         Session session = provider.getSession(queryData_.getWorkSpace(), WCMCoreUtils.getRepository());
         Query query = session.getWorkspace().getQueryManager().
         createQuery(queryData_.getQueryStatement(), queryData_.getLanguage_());

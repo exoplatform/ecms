@@ -101,7 +101,6 @@ public class CmsServiceImpl implements CmsService {
     Node storeHomeNode = (Node) session.getItem(storePath);
     String path = storeNode(nodeTypeName, storeHomeNode, mappings, true);
     storeHomeNode.save();
-    session.save();
     session.logout();
     return path;
   }
@@ -210,7 +209,7 @@ public class CmsServiceImpl implements CmsService {
       currentNode.setProperty(ActivityCommonService.MIX_COMMENT_ACTIVITY_ID, StringUtils.EMPTY);
     }
 
-    session.save();
+    storeHomeNode.save();
     return currentNode.getPath();
   }
 
@@ -239,7 +238,7 @@ public class CmsServiceImpl implements CmsService {
     }
     listenerService.broadcast(POST_EDIT_CONTENT_EVENT, this, storeNode);
     //add lastModified property to jcr:content
-    session.save();
+    storeNode.save();
     return storeNode.getPath();
   }
 
@@ -317,7 +316,7 @@ public class CmsServiceImpl implements CmsService {
     }
 
     String uuid = currentNode.getUUID();
-    session.save();
+    storeHomeNode.save();
     return uuid;
   }
 
@@ -572,12 +571,12 @@ public class CmsServiceImpl implements CmsService {
           if(input.getMixintype()!= null) {
             mixinTypes = input.getMixintype().split(",") ;
           }
-          Node childNode = doAddNode(currentNode, (String)input.getValue(), nodeType.getName(), mixinTypes) ;
+          Node childNode = doAddNode(currentNode, (String)input.getValue(), nodeType.getName(), mixinTypes);
           if (childNode != null && !childItemPaths.contains(childItemPath))
             processNodeRecursively(create, childItemPath, childNode, childNode.getPrimaryNodeType(), jcrVariables);
           childItemPaths.add(childItemPath);
         }
-      }else {
+      } else {
         String childNodeName = null;
         if (obj instanceof Node) {
           childNodeName = ((Node) obj).getName();
@@ -602,7 +601,7 @@ public class CmsServiceImpl implements CmsService {
         } else {
           nodeType = nodeTypeManger.getNodeType(nodeTypeName);
         }
-        Node childNode = doAddNode(currentNode, childNodeName, nodeType.getName(), mixinTypes) ;
+        Node childNode = doAddNode(currentNode, childNodeName, nodeType.getName(), mixinTypes);
         if (!childItemPaths.contains(newItemPath))
           processNodeRecursively(create, newItemPath, childNode, childNode.getPrimaryNodeType(), jcrVariables);
         childItemPaths.add(newItemPath);
@@ -800,8 +799,9 @@ public class CmsServiceImpl implements CmsService {
           referenceWorksapce = ((String) value).split(":/")[0];
           referenceNodeName = ((String) value).split(":/")[1];
           Session session2 = jcrService.getCurrentRepository().getSystemSession(referenceWorksapce);
-          if (session2.getRootNode().hasNode(referenceNodeName)) {
-            Node referenceNode = session2.getRootNode().getNode(referenceNodeName);
+          Node rootNode = session2.getRootNode();
+          if (rootNode.hasNode(referenceNodeName)) {
+            Node referenceNode = rootNode.getNode(referenceNodeName);
             if (referenceNode != null) {
               if(!referenceNode.isNodeType(MIX_REFERENCEABLE)) {
                 referenceNode.addMixin(MIX_REFERENCEABLE);
@@ -832,7 +832,7 @@ public class CmsServiceImpl implements CmsService {
             node.setProperty(propertyName, session.getValueFactory().createValue(value.toString()));
           }
         }
-        session.save();
+        node.save();
       } else if(value instanceof String[]) {
         String[] values = (String[]) value;
         String referenceWorksapce = null;
@@ -845,16 +845,18 @@ public class CmsServiceImpl implements CmsService {
             referenceWorksapce = v.split(":/")[0];
             referenceNodeName = v.split(":/")[1];
             Session session2 = jcrService.getCurrentRepository().getSystemSession(referenceWorksapce);
-            if(session2.getRootNode().hasNode(referenceNodeName)) {
-              Node referenceNode = session2.getRootNode().getNode(referenceNodeName);
+            Node rootNode = session2.getRootNode();
+            if(rootNode.hasNode(referenceNodeName)) {
+              Node referenceNode = rootNode.getNode(referenceNodeName);
               valueObj = session2.getValueFactory().createValue(referenceNode);
             }else {
               valueObj = session2.getValueFactory().createValue(v);
             }
             session2.logout();
           }else {
-            if(session.getRootNode().hasNode(v)) {
-              Node referenceNode = session.getRootNode().getNode(v);
+            Node rootNode = session.getRootNode();
+            if(rootNode.hasNode(v)) {
+              Node referenceNode = rootNode.getNode(v);
               valueObj = session.getValueFactory().createValue(referenceNode);
             }else {
               valueObj = session.getValueFactory().createValue(v);
@@ -1102,8 +1104,9 @@ public class CmsServiceImpl implements CmsService {
           referenceWorksapce = ((String) value).split(":/")[0];
           referenceNodeName = ((String) value).split(":/")[1];
           Session session2 = jcrService.getCurrentRepository().getSystemSession(referenceWorksapce);
-          if(session2.getRootNode().hasNode(referenceNodeName)) {
-            Node referenceNode = session2.getRootNode().getNode(referenceNodeName);
+          Node rootNode = session2.getRootNode();
+          if(rootNode.hasNode(referenceNodeName)) {
+            Node referenceNode = rootNode.getNode(referenceNodeName);
             Value value2add = session2.getValueFactory().createValue(referenceNode);
             if(!property.getValue().getString().equals(value2add)) {
               node.setProperty(propertyName, value2add);
@@ -1136,7 +1139,7 @@ public class CmsServiceImpl implements CmsService {
             }
           }
         }
-        session.save();
+        node.save();
       } else if(value instanceof String[]) {
         String[] values = (String[]) value;
         String referenceWorksapce = null;
@@ -1149,18 +1152,20 @@ public class CmsServiceImpl implements CmsService {
             referenceWorksapce = v.split(":/")[0];
             referenceNodeName = v.split(":/")[1];
             Session session2 = jcrService.getCurrentRepository().getSystemSession(referenceWorksapce);
-            if(session2.getRootNode().hasNode(referenceNodeName)) {
-              Node referenceNode = session2.getRootNode().getNode(referenceNodeName);
+            Node rootNode = session2.getRootNode();
+            if(rootNode.hasNode(referenceNodeName)) {
+              Node referenceNode = rootNode.getNode(referenceNodeName);
               valueObj = session2.getValueFactory().createValue(referenceNode);
             }else {
               valueObj = session2.getValueFactory().createValue(v);
             }
             session2.logout();
-          }else {
-            if(session.getRootNode().hasNode(v)) {
-              Node referenceNode = session.getRootNode().getNode(v);
+          } else {
+            Node rootNode = session.getRootNode();
+            if(rootNode.hasNode(v)) {
+              Node referenceNode = rootNode.getNode(v);
               valueObj = session.getValueFactory().createValue(referenceNode);
-            }else {
+            } else {
               valueObj = session.getValueFactory().createValue(v);
             }
           }
@@ -1169,7 +1174,7 @@ public class CmsServiceImpl implements CmsService {
         if (!property.getValues().equals(list.toArray(new Value[list.size()]))) {
           node.setProperty(propertyName, list.toArray(new Value[list.size()]));
         }
-        session.save();
+        node.save();
       }
       break ;
     default:
@@ -1315,7 +1320,6 @@ public class CmsServiceImpl implements CmsService {
       }
       rootNode = rootNode.getNode(splittedName[i]) ;
     }
-    session.save() ;
   }
 
   /**
@@ -1388,8 +1392,8 @@ public class CmsServiceImpl implements CmsService {
   /**
    * Compare if content of Value array equal to String array
    *
-   * @param values Value array
-   * @param strings String array
+   * @param arrValues Value array
+   * @param arrStrings String array
    * @return true: equal, false: not equal
    * @throws ValueFormatException
    * @throws IllegalStateException

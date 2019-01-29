@@ -255,7 +255,7 @@ public class NodeLinkAware extends ItemLinkAware implements ExtendedNode {
    */
   public Node getNode(String relPath) throws PathNotFoundException, RepositoryException {
     return new NodeLinkAware(originalWorkspaceName, getVirtualPath(relPath), (Node) LinkUtils
-        .getNodeFinder().getItem(getOriginalSession(), getVirtualPath(relPath)));
+        .getNodeFinder().getItem(getNodeSession(), getVirtualPath(relPath)));
   }
 
   /**

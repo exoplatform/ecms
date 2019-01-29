@@ -158,9 +158,9 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
     SessionProvider sessionProvider = uiExplorer.getSystemProvider();
     Session session = null;
     session = sessionProvider.getSession(node.getSession().getWorkspace().getName(), repository);
-    if (session.getRootNode().hasNode("exo:audit") &&
-        session.getRootNode().getNode("exo:audit").hasNode(node.getUUID())) {
-      session.getRootNode().getNode("exo:audit").getNode(node.getUUID()).remove();
+    Node rootNode = session.getRootNode();
+    if (rootNode.hasNode("exo:audit") && rootNode.getNode("exo:audit").hasNode(node.getUUID())) {
+      rootNode.getNode("exo:audit").getNode(node.getUUID()).remove();
       session.save();
     }
   }
@@ -402,7 +402,7 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
         }
       }
       node.remove();
-      parentNode.getSession().save();
+      parentNode.save();
     } catch (VersionException ve) {
       uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.remove-verion-exception", null,
                                               ApplicationMessage.WARNING));
@@ -477,7 +477,6 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
       processRemove(nodePath, wsName, event, false);
     }
     uiExplorer.updateAjax(event);
-    uiExplorer.getSession().save();
   }
 
   public void doDeleteWithoutTrash(String nodePath, Event<?> event) throws Exception {
@@ -534,7 +533,6 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
       uiWorkingArea.setWCMNotice(deleteNotice);
     }
     uiExplorer.updateAjax(event);
-    uiExplorer.getSession().save();
   }
   /**
    * Get undo link to restore nodes that deleted

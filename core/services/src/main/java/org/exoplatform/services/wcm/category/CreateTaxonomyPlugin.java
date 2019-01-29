@@ -326,7 +326,7 @@ public class CreateTaxonomyPlugin extends CreatePortalPlugin {
     Iterator<ObjectParameter> it = params.getObjectParamIterator();
     Node taxonomyStorageNodeSystem = Utils.makePath(taxonomyStorageNode, treeName, "exo:taxonomy",
             null);
-    session.save();
+    taxonomyStorageNode.save();
     while (it.hasNext()) {
       ObjectParameter objectParam = it.next();
       if (objectParam.getName().equals("permission.configuration")) {
@@ -358,7 +358,7 @@ public class CreateTaxonomyPlugin extends CreatePortalPlugin {
             taxonomyNode.setProperty("exo:title", taxonomy.getName());
           }
 
-          taxonomyNode.getSession().save();
+          taxonomyNode.save();
         }
       } else if (objectParam.getName().equals("predefined.actions")) {
         ActionConfig config = (ActionConfig) objectParam.getObject();
@@ -376,7 +376,6 @@ public class CreateTaxonomyPlugin extends CreatePortalPlugin {
     } catch (TaxonomyAlreadyExistsException e) {
       if (LOG.isErrorEnabled()) LOG.error("Cannot add taxonomy tree", e);
     }
-    session.save();
     session.logout();
   }
 
@@ -469,7 +468,7 @@ public class CreateTaxonomyPlugin extends CreatePortalPlugin {
         }
       }
     }
-    actionNode.getSession().save();
+    actionNode.save();
   }
 
   /**

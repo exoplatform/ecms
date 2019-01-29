@@ -158,7 +158,7 @@ public class ExportContentJob implements Job {
             if (node_.canAddMixin(MIX_TARGET_WORKSPACE))
               node_.addMixin(MIX_TARGET_WORKSPACE);
             node_.setProperty(MIX_TARGET_WORKSPACE, workspace);
-            session.save();
+            node_.save();
             HashMap<String, String> context_ = new HashMap<String, String>();
             context_.put("containerName", containerName);
             publicationPlugin.changeState(node_, toState, context_);

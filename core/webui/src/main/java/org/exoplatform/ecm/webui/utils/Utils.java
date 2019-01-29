@@ -1095,18 +1095,22 @@ public class Utils {
    * mix:versionaboe while enrolling.
    * @throws Exception the exception
    */
-  public static boolean isMakeVersionable(Node node, String[] nodetypes) throws Exception {
-    boolean isMakeVersionable = true;
+  public static boolean isMakeVersionable(Node node, String[] nodeTypes) throws Exception {
+    String ws = node.getSession().getWorkspace().getName();
+    SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
+    ManageableRepository manageableRepository = WCMCoreUtils.getRepository();
+    Session session = sessionProvider.getSession(ws, manageableRepository);
+    node = (Node) session.getItem(node.getPath());
     int deep = node.getDepth();
     for (int i = 0; i < deep; i++) {
       Node parent = node.getParent();
-      for (String nodetype : nodetypes) {
-        if (nodetype != null && nodetype.length() > 0 && parent.isNodeType(nodetype))
+      for (String nodeType : nodeTypes) {
+        if (nodeType != null && nodeType.length() > 0 && parent.isNodeType(nodeType))
           return false;
       }
       node = parent;
     }
-    return isMakeVersionable;
+    return true;
   }
 
   /**

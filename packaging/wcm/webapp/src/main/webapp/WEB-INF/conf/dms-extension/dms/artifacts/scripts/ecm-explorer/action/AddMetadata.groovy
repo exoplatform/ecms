@@ -47,37 +47,34 @@ public class AddMetadataScript implements CmsScript {
     repositoryService_ = repositoryService ;
     seProviderService_ = sessionProviderService;
   }
-  
+
   public void execute(Object context) {
-    Map variables = (Map) context;   
-    String metadataName = (String)context.get("exo:mixinMetadata") ;
-    String srcWorkspace = (String)context.get("srcWorkspace") ;
-    String nodePath = (String)context.get("nodePath") ;
-    String srcPath = (String)context.get("srcPath") ;
-    Session session = null ;
+    String metadataName = (String) context.get("exo:mixinMetadata");
+    String srcWorkspace = (String) context.get("srcWorkspace");
+    String nodePath = (String) context.get("nodePath");
+    String srcPath = (String) context.get("srcPath");
     try {
-    	ManageableRepository manageableRepository = repositoryService_.getCurrentRepository();
-    	SessionProvider sessionProvider = seProviderService_.getSessionProvider(null);
-    	if (sessionProvider == null) {
-    		sessionProvider = seProviderService_.getSystemSessionProvider(null);
-    	}
-      session = sessionProvider.getSession(srcWorkspace, manageableRepository);
+      ManageableRepository manageableRepository = repositoryService_.getCurrentRepository();
+      SessionProvider sessionProvider = seProviderService_.getSessionProvider(null);
+      if (sessionProvider == null) {
+        sessionProvider = seProviderService_.getSystemSessionProvider(null);
+      }
+      Session session = sessionProvider.getSession(srcWorkspace, manageableRepository);
       Item item = session.getItem(nodePath);
       if (!(item instanceof Node)) {
         item = session.getItem(srcPath);
       }
       if (item instanceof Node) {
         Node currentNode = (Node) item;
-        if(currentNode.canAddMixin(metadataName)) {
-          currentNode.addMixin(metadataName) ;
-          currentNode.save() ;
-          session.save() ;
+        if (currentNode.canAddMixin(metadataName)) {
+          currentNode.addMixin(metadataName);
+          currentNode.save();
         }
       }
-    } catch(Exception e) {
+    } catch (Exception e) {
       if (LOG.isErrorEnabled()) {
-      	LOG.error("Unexpected error occurs while executing add meta data script: ", e);
-      }	
+        LOG.error("Unexpected error occurs while executing add meta data script: ", e);
+      }
     }
   }
 

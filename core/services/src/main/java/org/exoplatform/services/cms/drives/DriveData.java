@@ -32,6 +32,7 @@ public class DriveData implements Comparable<DriveData>, Serializable {
    */
   private static final long serialVersionUID = -1483463576328793278L;
   private String name ;
+  private String label ;
   private String workspace ;
   private String permissions ;
   private String homePath ;
@@ -124,7 +125,19 @@ public class DriveData implements Comparable<DriveData>, Serializable {
    * @param ico icon path
    */
   public void setIcon(String ico) { icon = ico ; }
+  /**
+   * @return the label
+   */
+  public String getLabel() {
+    return label;
+  }
 
+  /**
+   * @param label the label to set
+   */
+  public void setLabel(String label) {
+    this.label= label;
+  }
   /**
    *
    * @return the folder type of drive

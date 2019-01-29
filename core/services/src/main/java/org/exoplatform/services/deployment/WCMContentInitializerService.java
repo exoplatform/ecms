@@ -80,7 +80,7 @@ public class WCMContentInitializerService implements Startable{
       sessionProvider = SessionProvider.createSystemProvider();
       ManageableRepository repository = repositoryService.getCurrentRepository();
       Session session = sessionProvider.getSession(repository.getConfiguration().getDefaultWorkspaceName(), repository);
-      Node serviceFolder = session.getRootNode().getNode("exo:services");
+      Node serviceFolder = (Node) session.getItem("/exo:services");
       Node contentInitializerService = null;
       if (serviceFolder.hasNode("WCMContentInitializerService")) {
         contentInitializerService = serviceFolder.getNode("WCMContentInitializerService");
@@ -151,8 +151,8 @@ public class WCMContentInitializerService implements Startable{
     try {
       sessionProvider = SessionProvider.createSystemProvider();
       ManageableRepository repository = WCMCoreUtils.getRepository();
-      Node serviceFolder = sessionProvider.getSession(repository.getConfiguration().getDefaultWorkspaceName(), repository)
-                          .getRootNode().getNode("exo:services");
+      Node serviceFolder = (Node) sessionProvider.getSession(repository.getConfiguration().getDefaultWorkspaceName(), repository)
+                          .getItem("/exo:services");
       Node contentInitializerService = serviceFolder.hasNode("WCMContentInitializerService") ? 
                                        serviceFolder.getNode("WCMContentInitializerService") :
                                        serviceFolder.addNode("WCMContentInitializerService", "nt:unstructured");

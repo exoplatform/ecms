@@ -30,7 +30,7 @@ public class DMSRepositoryConfiguration extends BaseComponentPlugin {
 
   private String systemWorkspaceName_;
 
-  public DMSRepositoryConfiguration() throws Exception {
+  public DMSRepositoryConfiguration() {
   }
 
   public DMSRepositoryConfiguration(InitParams params) throws Exception {
