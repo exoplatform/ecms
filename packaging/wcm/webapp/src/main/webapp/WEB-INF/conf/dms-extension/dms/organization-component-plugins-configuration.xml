@@ -254,59 +254,8 @@
 	      </object-param>
 	    </init-params>
 	  </component-plugin>
-	  <component-plugin>
-	    <name>queries.new.user.event.listener</name>
-	    <set-method>addListenerPlugin</set-method>
-	    <type>org.exoplatform.services.cms.queries.impl.NewUserListener</type>
-	    <description>description</description>
-	    <init-params>
-	      <value-param>
-	        <name>relativePath</name>
-	        <value>Private/Searches</value>
-	      </value-param>
-	      <object-param>
-	        <name>configuration</name>
-	        <description>description</description>
-	        <object type="org.exoplatform.services.cms.queries.impl.NewUserConfig">
-	          <field name="template"><string>template</string></field>
-	          <field name="users">
-	            <collection type="java.util.ArrayList">
-	              <value>
-	                <object type="org.exoplatform.services.cms.queries.impl.NewUserConfig$User">
-	                  <field name="userName"><string>template</string></field>
-	                  <field name="queries">
-	                    <collection type="java.util.ArrayList">
-	                      <value>
-	                        <object type="org.exoplatform.services.cms.queries.impl.NewUserConfig$Query">
-	                          <field name="queryName"><string>All Documents</string></field>
-	                          <field name="language"><string>xpath</string></field>
-	                          <field name="query"><string>//element(*, nt:file)[not(@jcr:mixinTypes = 'exo:restoreLocation')]</string></field>
-	                        </object>
-	                      </value>
-	                    </collection>
-	                  </field>
-	                </object>
-	              </value>
-	            </collection>
-	          </field>
-	        </object>
-	      </object-param>
-	    </init-params>
-	  </component-plugin>
-	  
-	  <component-plugin>
-      <name>AdjustDrivePermissionNewUserListener</name>
-      <set-method>addListenerPlugin</set-method>
-      <type>org.exoplatform.services.cms.permission.AdjustDrivePermissionNewUserListener</type>
-      <description>Adjust permission of user folder</description>
-    </component-plugin>
-    
-    <component-plugin>
-      <name>AddMixinToNewUserListener</name>
-      <set-method>addListenerPlugin</set-method>
-      <type>org.exoplatform.services.cms.listeners.AddMixinToNewUserListener</type>
-      <description>Add mixin exo:userFolder into user folder</description>
-    </component-plugin>
+
+
     
     <component-plugin>
       <name>ChangeStatusUserListener</name>
