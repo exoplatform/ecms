@@ -123,7 +123,7 @@ public class FileindexingConnector extends ElasticIndexingServiceConnector {
       ExtendedSession session = (ExtendedSession) WCMCoreUtils.getSystemSessionProvider().getSession("collaboration", repositoryService.getCurrentRepository());
       Node node = session.getNodeByIdentifier(id);
 
-      if(node == null || !node.isNodeType(NodetypeConstant.NT_FILE) || trashService.isInTrash(node)) {
+      if(node == null || !node.isNodeType(NodetypeConstant.NT_FILE) || trashService.isInTrash(node) || isInContentFolder(node)) {
         return null;
       }
 
@@ -170,6 +170,20 @@ public class FileindexingConnector extends ElasticIndexingServiceConnector {
 
     return null;
   }
+
+  protected boolean isInContentFolder(Node node) {
+    try {
+      return
+              (  (node.isNodeType("exo:htmlFile") && org.exoplatform.services.cms.impl.Utils.isDocument(node.getParent())) ||
+                 (node.isNodeType("exo:cssFile") && org.exoplatform.services.cms.impl.Utils.isDocument(node.getParent().getParent())) ||
+                 (node.isNodeType("exo:jsFile") && org.exoplatform.services.cms.impl.Utils.isDocument(node.getParent().getParent())) ||
+                 (node.isNodeType("nt:file") && (node.getPath().contains("/medias/images")||node.getPath().contains("/medias/videos")||node.getPath().contains("/medias/audio")) && org.exoplatform.services.cms.impl.Utils.isDocument(node.getParent().getParent().getParent()))
+              );
+    } catch (Exception e) {
+      return false;
+    }
+  }
+
 
   @Override
   public Document update(String id) {
