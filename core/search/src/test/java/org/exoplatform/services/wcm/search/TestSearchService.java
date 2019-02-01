@@ -16,15 +16,14 @@
  */
 package org.exoplatform.services.wcm.search;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 
 import org.apache.commons.lang.StringUtils;
+import org.exoplatform.commons.search.domain.Document;
+import org.exoplatform.commons.search.index.IndexingOperationProcessor;
 import org.exoplatform.component.test.ConfigurationUnit;
 import org.exoplatform.component.test.ConfiguredBy;
 import org.exoplatform.component.test.ContainerScope;
@@ -33,6 +32,8 @@ import org.exoplatform.portal.mop.page.PageContext;
 import org.exoplatform.portal.mop.page.PageKey;
 import org.exoplatform.portal.mop.page.PageService;
 import org.exoplatform.portal.mop.page.PageState;
+import org.exoplatform.services.cms.CmsService;
+import org.exoplatform.services.cms.JcrInputProperty;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.ecm.publication.IncorrectStateUpdateLifecycleException;
 import org.exoplatform.services.security.ConversationState;
@@ -40,6 +41,8 @@ import org.exoplatform.services.security.Identity;
 import org.exoplatform.services.wcm.publication.PublicationDefaultStates;
 import org.exoplatform.services.wcm.search.base.AbstractPageList;
 import org.exoplatform.services.wcm.search.base.BaseSearchTest;
+import org.exoplatform.services.wcm.search.connector.FileindexingConnector;
+import org.exoplatform.services.wcm.search.mock.MockIndexingOperationProcessor;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
@@ -56,10 +59,87 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 })
 public class TestSearchService extends BaseSearchTest {
 
+  private CmsService cmsService_;
+  private MockIndexingOperationProcessor indexingOperationProcessor;
+  private static final String CONTENT = "exo:webContent";
+
   public void setUp() throws Exception {
     super.setUp();
     ConversationState c = new ConversationState(new Identity(session.getUserID()));
     ConversationState.setCurrent(c);
+    cmsService_ = WCMCoreUtils.getService(CmsService.class);
+    indexingOperationProcessor = (MockIndexingOperationProcessor) WCMCoreUtils.getService(IndexingOperationProcessor.class);
+    applySystemSession();
+  }
+
+  private Map<String, JcrInputProperty> createWebContentMapInput() {
+    Map<String, JcrInputProperty> map = new HashMap<String, JcrInputProperty>();
+    String titlePath = CmsService.NODE + "/" + "exo:title";
+
+    String htmlPath = CmsService.NODE + "/" + "default.html";
+    String contentPath = CmsService.NODE + "/" + "default.html/jcr:content";
+    String encodingPath = CmsService.NODE + "/" + "default.html/jcr:content/jcr:encoding";
+    String dataPath = CmsService.NODE + "/" + "default.html/jcr:content/jcr:data";
+    String mimeTypePath = CmsService.NODE + "/" + "default.html/jcr:content/jcr:mimeType";
+    String mixinPath = CmsService.NODE + "/" + "default.html/jcr:mixinTypes";
+
+
+    JcrInputProperty inputProperty = new JcrInputProperty();
+    inputProperty.setValue("document_1");
+    inputProperty.setJcrPath(CmsService.NODE);
+    map.put(CmsService.NODE, inputProperty);
+
+    inputProperty.setJcrPath(titlePath);
+    inputProperty.setValue("webcontenttitle");
+    map.put(titlePath, inputProperty);
+
+    inputProperty = new JcrInputProperty();
+    inputProperty.setJcrPath(htmlPath);
+    inputProperty.setValue("default.html");
+    inputProperty.setNodetype("nt:file");
+    inputProperty.setMixintype("exo:htmlFile");
+    inputProperty.setType(JcrInputProperty.NODE);
+    map.put(htmlPath, inputProperty);
+
+
+    inputProperty = new JcrInputProperty();
+    inputProperty.setJcrPath(contentPath);
+    inputProperty.setNodetype("nt:resource");
+    inputProperty.setType(JcrInputProperty.NODE);
+    map.put(contentPath, inputProperty);
+
+    inputProperty = new JcrInputProperty();
+    inputProperty.setJcrPath(encodingPath);
+    inputProperty.setValue("UTF-8");
+    inputProperty.setType(JcrInputProperty.PROPERTY);
+    map.put(encodingPath, inputProperty);
+
+    inputProperty = new JcrInputProperty();
+    inputProperty.setJcrPath(dataPath);
+    inputProperty.setValue("exo");
+    inputProperty.setType(JcrInputProperty.PROPERTY);
+    map.put(dataPath, inputProperty);
+
+
+    inputProperty = new JcrInputProperty();
+    inputProperty.setJcrPath(mimeTypePath);
+    inputProperty.setValue("text/HTML");
+    inputProperty.setType(JcrInputProperty.NODE);
+    map.put(mimeTypePath, inputProperty);
+
+    return map;
+  }
+
+  public void testSearchFileInContent() throws Exception {
+    Node rootNode = session.getRootNode();
+    Node storeNode = rootNode.getNode("sites content/live/classic/web contents");
+    Map<String, JcrInputProperty> map = createWebContentMapInput();
+    String path = cmsService_.storeNode(CONTENT, storeNode, map, true);
+    assertTrue(session.itemExists(path));
+    Node webcontent = rootNode.getNode("sites content/live/classic/web contents/webcontenttitle/default.html");
+    String id = webcontent.getUUID();
+    Document document = indexingOperationProcessor.getConnectors().get(FileindexingConnector.TYPE).create(id);
+    assertNull(document);
   }
   
   protected void addChildNodes(Node parentNode)throws Exception{

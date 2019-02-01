@@ -145,6 +145,31 @@
     <type>org.exoplatform.services.cms.link.impl.LinkManagerImpl</type>
   </component>
 
+
+  <component>
+    <key>org.exoplatform.services.cms.CmsService</key>
+    <type>org.exoplatform.services.cms.impl.CmsServiceImpl</type>
+  </component>
+
+
+  <component>
+    <type>org.exoplatform.services.cms.jcrext.activity.ActivityCommonService</type>
+    <init-params>
+      <value-param>
+        <name>acceptedNodeTypes</name>
+        <value>{exo:accessibleMedia}{exo:article}{exo:contact_us}{exo:event}{exo:htmlFile}{rma:filePlan}{exo:webContent}{kfx:document}{exo:pictureOnHeadWebcontent}{exo:podcast}{exo:sample}{exo:link}</value>
+      </value-param>
+      <value-param>
+        <name>acceptedProperties</name>
+        <value>{dc:title}{dc:description}{dc:creator}{dc:source}{exo:summary}{exo:title}{exo:language}{exo:text}</value>
+      </value-param>
+      <value-param>
+        <name>acceptedFileProperties</name>
+        <value>{dc:title}{dc:description}{dc:creator}{dc:source}{exo:summary}{exo:title}{exo:language}{jcr:data}</value>
+      </value-param>
+    </init-params>
+  </component>
+
   <component>
     <key>org.exoplatform.services.wcm.core.WCMConfigurationService</key>
     <type>org.exoplatform.services.wcm.core.WCMConfigurationService</type>
@@ -461,6 +486,10 @@
   <component>
     <key>org.exoplatform.services.wcm.javascript.XJavascriptService</key>
     <type>org.exoplatform.services.wcm.javascript.XJavascriptService</type>
+  </component>
+  <component>
+    <key>org.exoplatform.commons.search.index.IndexingOperationProcessor</key>
+    <type>org.exoplatform.services.wcm.search.mock.MockIndexingOperationProcessor</type>
   </component>
   
   <external-component-plugins>
@@ -919,7 +948,26 @@
         </object-param>
       </init-params>
     </component-plugin>
-	</external-component-plugins>   
+	</external-component-plugins>
+
+  <external-component-plugins>
+    <target-component>org.exoplatform.commons.search.index.IndexingOperationProcessor</target-component>
+    <component-plugin>
+      <name>FileIndexingConnector</name>
+      <set-method>addConnector</set-method>
+      <type>org.exoplatform.services.wcm.search.connector.FileindexingConnector</type>
+      <description>File ElasticSearch Indexing Connector</description>
+      <init-params>
+        <properties-param>
+          <name>constructor.params</name>
+          <property name="index_alias" value="file_alias"/>
+          <property name="index_previous" value="file"/>
+          <property name="index_current" value="file"/>
+          <property name="type" value="file"/>
+        </properties-param>
+      </init-params>
+    </component-plugin>
+  </external-component-plugins>
 	
   
 </configuration>
