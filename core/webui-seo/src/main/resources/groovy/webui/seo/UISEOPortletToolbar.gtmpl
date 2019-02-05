@@ -12,11 +12,12 @@
 <div class="UISEOToolbarPorlet">
 <%	
 	def fullStatus = uicomponent.getFullStatus();	
-	def seo_icon = fullStatus + ".png";
 	def seo_title = (String)_ctx.appRes(uicomponent.getId() + ".title.seo");
 	def seo_label = (String)_ctx.appRes(uicomponent.getId() + ".label.seo");
-	def style = "Enable";
-	if(fullStatus.equals("Disabled")) style = "Disable";
+	def style = fullStatus;
+	if(fullStatus.equals("Disabled")) {
+	  style = "Disable";
+	}
 	def rcontext = _ctx.getRequestContext();
 	def jsManager = rcontext.getJavascriptManager();
 	jsManager.require("SHARED/uiForm");
@@ -24,11 +25,11 @@
 <% uiform.begin() %>
 	<div class="SEOToolbar">	
 	  <%if(fullStatus.equals("Disabled")) {%>
-		  <div class="<%=style%>" rel="tooltip" data-placement="bottom" title="<%=seo_title%>"><span><%=seo_label%> </span><img alt="<%=seo_title%>" style="margin-top: -5px;" src="/seo/skin/webui/seo/DefaultSkin/icons/${seo_icon}" /> </div>
+		  <div class="<%=style%>" rel="tooltip" data-placement="bottom" title="<%=seo_title%>"><span><%=seo_label%> </span></div>
 	  <%} else {
 	  	def onclickURL = "openSEOForm(event, '" + uicomponent.event("AddSEO","str").replace("'","~") + "');";
 	  	%>	
-	    <div class="<%=style%>" rel="tooltip" data-placement="bottom" title="<%=seo_title%>" onclick="<%=onclickURL%>"><span><%=seo_label%> </span><img alt="<%=seo_title%>" style="margin-top: -5px;" src="/seo/skin/webui/seo/DefaultSkin/icons/${seo_icon}" /></div>
+	    <div class="<%=style%>" rel="tooltip" data-placement="bottom" title="<%=seo_title%>" onclick="<%=onclickURL%>"><span><%=seo_label%> </span></div>
 	  <%}%>  
 	</div>
 <% uiform.end() %>
