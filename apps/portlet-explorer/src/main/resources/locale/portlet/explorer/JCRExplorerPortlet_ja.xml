@@ -97,7 +97,7 @@
       <currentDrive>現在のドライブ</currentDrive>
       <selectView>ビューの選択</selectView>
       <showSideBar>サイドバーの表示</showSideBar>
-      <more>もっと</more>
+      <more>詳細</more>
       <backTo>戻る</backTo>
     </label>
   </UIViewBar>
@@ -3216,7 +3216,7 @@
       <sortBy>ソート順</sortBy>
       <filesAreSelected>files are selected.</filesAreSelected>
       <ClearSelection>選択をクリア</ClearSelection>
-      <more>もっと</more>
+      <more>詳細</more>
     </label>
   </FileView>
   <UIPropertyForm>

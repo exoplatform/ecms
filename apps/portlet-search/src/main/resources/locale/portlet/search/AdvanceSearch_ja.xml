@@ -47,7 +47,7 @@
       <pageMode>ページ モード</pageMode>
       <option>
         <none>無し</none>
-        <more>もっと</more>
+        <more>詳細</more>
         <pagination>改ページ</pagination>
       </option>
     </label>
@@ -72,7 +72,7 @@
     <label>
       <next>次へ</next>
       <previous>戻る</previous>
-      <more>もっと</more>
+      <more>詳細</more>
     </label>
   </UIPaginatorDefault>
   <UISearchPageLayoutDefault>

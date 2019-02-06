@@ -48,7 +48,7 @@
       <UICLVConfigShowTitleFormCheckboxInput>タイトルの表示</UICLVConfigShowTitleFormCheckboxInput>
       <UICLVConfigShowDateCreatedFormCheckboxInput>日時の表示</UICLVConfigShowDateCreatedFormCheckboxInput>
       <UICLVConfigShowLinkFormCheckboxInput>リンク表示</UICLVConfigShowLinkFormCheckboxInput>
-      <UICLVConfigShowReadmoreFormCheckboxInput>もっと読むの表示</UICLVConfigShowReadmoreFormCheckboxInput>
+      <UICLVConfigShowReadmoreFormCheckboxInput>詳細なリンクを表示</UICLVConfigShowReadmoreFormCheckboxInput>
       <UICLVConfigAllowDynamicUrlStringInput>ダイナミックURLの許可</UICLVConfigAllowDynamicUrlStringInput>
       <UICLVConfigShowRssLinkFormCheckboxInput>RSS リンクの表示</UICLVConfigShowRssLinkFormCheckboxInput>
       <UICLVConfigShowAutomaticDetectionCheckboxInput>自動検知</UICLVConfigShowAutomaticDetectionCheckboxInput>
@@ -139,7 +139,7 @@
       <delete-content-successfully>コンテンツは正常に削除されました。</delete-content-successfully>
     </msg>
     <label>
-      <readmore>もっと読む</readmore>
+      <readmore>続きを参照</readmore>
       <rssFeed>RSS フィード</rssFeed>
     </label>
     <action>
