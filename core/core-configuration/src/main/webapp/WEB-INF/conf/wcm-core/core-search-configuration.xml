@@ -144,7 +144,8 @@
                     <name>constructor.params</name>
                     <property name="index_alias" value="file_alias"/>
                     <property name="index_previous" value="file"/>
-                    <property name="index_current" value="file"/>
+                    <property name="index_current" value="file_v2"/>
+                    <property name="reindexOnUpgrade" value="true"/>
                     <property name="type" value="file"/>
                 </properties-param>
             </init-params>
