@@ -1453,7 +1453,7 @@
     <title>
       <SelectUser>ユーザの選択</SelectUser>
       <SelectMember>メンバーシップの選択</SelectMember>
-      <AddAny>みんな</AddAny>
+      <AddAny>全員</AddAny>
     </title>
   </permission>
   <!--
