@@ -22,7 +22,6 @@ import java.util.Set;
 
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
-import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 import javax.jcr.nodetype.NodeType;
@@ -343,14 +342,8 @@ public class DocumentProviderUtils {
     public NodeLinkAware createData(Node node, Row row, SearchResult searchResult) {
       try {
         return (NodeLinkAware)parent.getNode(StringUtils.substringAfterLast(node.getPath(), "/"));
-      } catch (PathNotFoundException e) {
-        if (LOG.isWarnEnabled()) {
-          LOG.warn("Can not create NodeLinkAware ", e.getMessage());
-        }
       } catch (RepositoryException e) {
-        if (LOG.isWarnEnabled()) {
-          LOG.warn("Can not create NodeLinkAware ", e.getMessage());
-        }
+        LOG.error("Can not create NodeLinkAware", e);
       }
       return null;
     }

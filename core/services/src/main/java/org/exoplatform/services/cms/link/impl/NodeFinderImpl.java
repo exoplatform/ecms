@@ -178,8 +178,9 @@ public class NodeFinderImpl implements NodeFinder {
     String[] splitPath = absPath.substring(1).split("/");
     int low = fromIdx;
     int high = splitPath.length - 1;
-    while (low <= high) {
-      int mid = (low + high) >>> 1;
+    int mid = high;
+    while (low <= mid) {
+      mid--;
       String partPath = makePath(splitPath, mid);
 
       if (session.itemExists(partPath)) {
@@ -200,10 +201,6 @@ public class NodeFinderImpl implements NodeFinder {
           // The target cannot be found
           throw new PathNotFoundException("Can't reach the target of the link: " + link.getPath());
         }
-        low = mid + 1;
-      } else {
-        // The item doesn't exist
-        high = mid - 1;
       }
     }
     throw new PathNotFoundException("Can't find path: " + absPath);
