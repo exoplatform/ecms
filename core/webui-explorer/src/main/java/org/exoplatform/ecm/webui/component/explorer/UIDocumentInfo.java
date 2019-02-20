@@ -897,7 +897,7 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
                uiExplorer.getAllItemFilterMap(), 
                uiExplorer.getAllItemByTypeFilterMap(),
                (NodeLinkAware) ItemLinkAware.newInstance(uiExplorer.getWorkspaceName(), path, 
-                                                uiExplorer.getNodeByPath(path, uiExplorer.getSystemSession())));
+                                                uiExplorer.getNodeByPath(path, uiExplorer.getSession())));
     }
     
     int nodesPerPage = pref.getNodesPerPage();
