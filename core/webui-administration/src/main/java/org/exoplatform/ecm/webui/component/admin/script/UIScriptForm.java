@@ -222,7 +222,7 @@ public class UIScriptForm extends UIForm implements UIPopupComponent {
 	    else label = label.trim();
       if(uiForm.isAddNew_ || !isEnableVersioning) {
         try {
-          scriptService.addScript(namePrefix + "/" + name, label, content, WCMCoreUtils.getUserSessionProvider());
+          scriptService.addScript(namePrefix + "/" + name, label, content, WCMCoreUtils.getSystemSessionProvider());
         } catch(AccessDeniedException ace) {
           uiApp.addMessage(new ApplicationMessage("UIECMAdminControlPanel.msg.access-denied", null,
                                                   ApplicationMessage.WARNING)) ;
@@ -234,7 +234,7 @@ public class UIScriptForm extends UIForm implements UIPopupComponent {
           Node node = currentList.getScriptNode(currentList.getTemplateFilter(), name.toString()) ;
           if(!node.isNodeType(Utils.MIX_VERSIONABLE)) node.addMixin(Utils.MIX_VERSIONABLE) ;
           else node.checkout() ;
-          scriptService.addScript(namePrefix + "/" + name, label, content, WCMCoreUtils.getUserSessionProvider());
+          scriptService.addScript(namePrefix + "/" + name, label, content, WCMCoreUtils.getSystemSessionProvider());
           node.save() ;
           node.checkin() ;
         } catch (PathNotFoundException pathNotFoundException) {

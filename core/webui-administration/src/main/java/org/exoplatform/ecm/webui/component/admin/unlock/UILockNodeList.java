@@ -243,7 +243,7 @@ public class UILockNodeList extends UIPagingGridDecorator {
         if (isAuthenticated) {
           session = WCMCoreUtils.getSystemSessionProvider().getSession(ws.getName(), manageRepository);
         }else {
-          session = WCMCoreUtils.getUserSessionProvider().getSession(ws.getName(), manageRepository);
+          session = WCMCoreUtils.getSystemSessionProvider().getSession(ws.getName(), manageRepository);
         }
         try {
           lockedNode = (Node) session.getItem(nodePath);

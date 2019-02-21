@@ -80,7 +80,7 @@ public class UIViewPermissionList extends UIPagingGrid {
     List<PermissionBean> permissions = new ArrayList<PermissionBean>();
     if(uiPerContainer.isView()) {
       ManageViewService viewService = WCMCoreUtils.getService(ManageViewService.class);
-      Node viewNode = viewService.getViewByName(viewName, WCMCoreUtils.getUserSessionProvider());
+      Node viewNode = viewService.getViewByName(viewName, WCMCoreUtils.getSystemSessionProvider());
       String strPermission = viewNode.getProperty("exo:accessPermissions").getString();
       permissions = getBeanList(strPermission);
     } else {

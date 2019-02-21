@@ -141,10 +141,8 @@ public class UIDriveManager extends UIAbstractManager {
     uiOneNodePathSelector.setRootNodeLocation(repository, workspace, "/");
     if(WCMCoreUtils.isAnonim()) {
       uiOneNodePathSelector.init(WCMCoreUtils.createAnonimProvider()) ;
-    } else if(workspace.equals(getSystemWorkspaceName())){
-      uiOneNodePathSelector.init(WCMCoreUtils.getSystemSessionProvider()) ;
     } else {
-      uiOneNodePathSelector.init(WCMCoreUtils.getUserSessionProvider()) ;
+      uiOneNodePathSelector.init(WCMCoreUtils.getSystemSessionProvider()) ;
     }
     uiPopup.setUIComponent(uiOneNodePathSelector);
     UIDriveForm uiDriveForm = findFirstComponentOfType(UIDriveForm.class) ;
@@ -168,10 +166,8 @@ public class UIDriveManager extends UIAbstractManager {
     uiOneNodePathSelector.setRootNodeLocation(repository, workspace, "/");
     if(WCMCoreUtils.isAnonim()) {
       uiOneNodePathSelector.init(WCMCoreUtils.createAnonimProvider()) ;
-    } else if(workspace.equals(getSystemWorkspaceName())){
-      uiOneNodePathSelector.init(WCMCoreUtils.getSystemSessionProvider()) ;
     } else {
-      uiOneNodePathSelector.init(WCMCoreUtils.getUserSessionProvider()) ;
+      uiOneNodePathSelector.init(WCMCoreUtils.getSystemSessionProvider()) ;
     }
     uiOneNodePathSelector.setSourceComponent(uiDriveForm, new String[] {UIDriveInputSet.FIELD_WORKSPACEICON}) ;
     uiPopup.setUIComponent(uiOneNodePathSelector);

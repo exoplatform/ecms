@@ -199,7 +199,7 @@ public class UITemplateForm extends UIFormTabPane implements UISelectable {
     NodeTypeManager nodeTypeManager =
         getApplicationComponent(RepositoryService.class).getCurrentRepository().getNodeTypeManager() ;
     Node templatesHome = getApplicationComponent(TemplateService.class).
-        getTemplatesHome(WCMCoreUtils.getUserSessionProvider());
+        getTemplatesHome(WCMCoreUtils.getSystemSessionProvider());
 
     if(templatesHome != null) {
       NodeIterator templateIter = templatesHome.getNodes() ;

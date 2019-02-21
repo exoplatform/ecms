@@ -126,7 +126,7 @@ public class UITemplateForm extends UIForm {
 
   public List<SelectItemOption<String>> getOptionList() throws Exception {
     List<SelectItemOption<String>> typeList = new ArrayList<SelectItemOption<String>>();
-    SessionProvider provider = WCMCoreUtils.getUserSessionProvider();
+    SessionProvider provider = WCMCoreUtils.getSystemSessionProvider();
     if (getId().equalsIgnoreCase("ecmTempForm")) {
       Node ecmTemplateHome = getApplicationComponent(ManageViewService.class).getTemplateHome(
                                                                                               BasePath.ECM_EXPLORER_TEMPLATES, provider);
@@ -201,7 +201,7 @@ public class UITemplateForm extends UIForm {
     if (templatePath != null) {
       templatePath_ = templatePath;
       Node templateNode = getApplicationComponent(ManageViewService.class).
-          getTemplate(templatePath, WCMCoreUtils.getUserSessionProvider());
+          getTemplate(templatePath, WCMCoreUtils.getSystemSessionProvider());
       template_ = NodeLocation.getNodeLocationByNode(templateNode);
       getUIStringInput(FIELD_NAME).setValue(templateNode.getName());
       getUIStringInput(FIELD_NAME).setDisabled(true);
@@ -252,7 +252,7 @@ public class UITemplateForm extends UIForm {
       String path = null;
       if (uiForm.getId().equalsIgnoreCase(UIECMTemplateList.ST_ecmTempForm)) {
         List<Node> ecmTemps = manageViewService.getAllTemplates(BasePath.ECM_EXPLORER_TEMPLATES,
-                                                                WCMCoreUtils.getUserSessionProvider());
+                                                                WCMCoreUtils.getSystemSessionProvider());
         for (Node temp : ecmTemps) {
           if (temp.getName().equals(templateName) && uiForm.isAddNew_) {
             Object[] args = { templateName };
@@ -268,18 +268,18 @@ public class UITemplateForm extends UIForm {
           if (uiForm.templatePath_ != null) {
             String oldHomeTemplate = uiForm.templatePath_.substring(0, uiForm.templatePath_.lastIndexOf("/"));
             if (!oldHomeTemplate.equals(homeTemplate)) {
-              Node oldNode = manageViewService.getTemplate(uiForm.templatePath_, WCMCoreUtils.getUserSessionProvider());
+              Node oldNode = manageViewService.getTemplate(uiForm.templatePath_, WCMCoreUtils.getSystemSessionProvider());
               oldNode.remove();
-              manageViewService.getTemplate(oldHomeTemplate, WCMCoreUtils.getUserSessionProvider()).save();
+              manageViewService.getTemplate(oldHomeTemplate, WCMCoreUtils.getSystemSessionProvider()).save();
             }
           }
 
           path = manageViewService.addTemplate(templateName,
                                                content,
                                                homeTemplate,
-                                               WCMCoreUtils.getUserSessionProvider());
+                                               WCMCoreUtils.getSystemSessionProvider());
           uiForm.template_ = NodeLocation.getNodeLocationByNode(manageViewService.getTemplate(path, 
-                                                                                              WCMCoreUtils.getUserSessionProvider()));
+                                                                                              WCMCoreUtils.getSystemSessionProvider()));
         } catch (AccessDeniedException ex) {
           uiApp.addMessage(new ApplicationMessage("UITemplateForm.msg.add-permission-denied",
                                                   null,
@@ -301,7 +301,7 @@ public class UITemplateForm extends UIForm {
           path = manageViewService.updateTemplate(templateName,
                                                   content,
                                                   homeTemplate,
-                                                  WCMCoreUtils.getUserSessionProvider());
+                                                  WCMCoreUtils.getSystemSessionProvider());
           templateNode.save();
           if (isEnableVersioning) {
             templateNode.checkin();

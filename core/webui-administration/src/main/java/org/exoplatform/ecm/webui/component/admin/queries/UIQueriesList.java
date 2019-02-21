@@ -86,7 +86,7 @@ public class UIQueriesList extends UIPagingGridDecorator {
   }
 
   public boolean canEditNode(Node node) {
-    SessionProvider sProvider = WCMCoreUtils.getUserSessionProvider();
+    SessionProvider sProvider = WCMCoreUtils.getSystemSessionProvider();
     try {
       ManageableRepository manageableRepository = ((ManageableRepository)node.getSession().getRepository());
       Session session = sProvider.getSession(node.getSession().getWorkspace().getName(), manageableRepository);
@@ -97,7 +97,7 @@ public class UIQueriesList extends UIPagingGridDecorator {
     return true;
   }
   public boolean canRemoveNode(Node node) {
-    SessionProvider sProvider = WCMCoreUtils.getUserSessionProvider();
+    SessionProvider sProvider = WCMCoreUtils.getSystemSessionProvider();
     try {
       ManageableRepository manageableRepository = ((ManageableRepository)node.getSession().getRepository());
       Session session = sProvider.getSession(node.getSession().getWorkspace().getName(), manageableRepository);

@@ -189,7 +189,7 @@ public class UITemplateList extends UIPagingGrid {
   public void refresh(int currentPage) throws Exception {
     TemplateService templateService = getApplicationComponent(TemplateService.class);
     List<String> documentNodeTypes = templateService.getAllDocumentNodeTypes();
-    Node templatesHome = templateService.getTemplatesHome(WCMCoreUtils.getUserSessionProvider());
+    Node templatesHome = templateService.getTemplatesHome(WCMCoreUtils.getSystemSessionProvider());
     List<TemplateData> templateData = new ArrayList<TemplateData>();
     if (templatesHome != null) {
       NodeTypeManager ntManager = templatesHome.getSession().getWorkspace().getNodeTypeManager();      

@@ -122,7 +122,7 @@ public class UITaxonomyManagerTrees extends UIAbstractManager {
     } else if (workspace.equals(getSystemWorkspaceName())) {
       uiOneNodePathSelector.init(WCMCoreUtils.getSystemSessionProvider());
     } else {
-      uiOneNodePathSelector.init(WCMCoreUtils.getUserSessionProvider());
+      uiOneNodePathSelector.init(WCMCoreUtils.getSystemSessionProvider());
     }
     uiPopup.setUIComponent(uiOneNodePathSelector);
     UITaxonomyTreeContainer uiTaxonomyTreeContainer = findFirstComponentOfType(UITaxonomyTreeContainer.class);

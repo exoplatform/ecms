@@ -109,7 +109,7 @@ public class UITaxonomyTreeCreateChildForm extends UIForm {
         taxonomyService.addTaxonomyNode(taxoTreeData
             .getTaxoTreeWorkspace(), parentPath, Text.escapeIllegalJcrChars(name), Util.getPortalRequestContext().getRemoteUser());
         
-        SessionProvider p = WCMCoreUtils.getUserSessionProvider();
+        SessionProvider p = WCMCoreUtils.getSystemSessionProvider();
         Session session = p.getSession(taxoTreeData.getTaxoTreeWorkspace(), WCMCoreUtils.getRepository());
         Node newNode = (Node)session.getItem(parentPath + "/" + name); 
         

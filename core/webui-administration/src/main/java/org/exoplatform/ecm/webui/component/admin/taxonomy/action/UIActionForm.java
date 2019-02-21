@@ -542,7 +542,7 @@ public class UIActionForm extends UIDialogForm implements UISelectable {
                                     .getName();
       String selectorParams = (String) fieldPropertiesMap.get("selectorParams");
       if (uiComp instanceof UIOneNodePathSelector) {
-        SessionProvider provider = WCMCoreUtils.getUserSessionProvider();
+        SessionProvider provider = WCMCoreUtils.getSystemSessionProvider();
         String wsFieldName = (String) fieldPropertiesMap.get("workspaceField");
         String wsName = "";
         if (wsFieldName != null && wsFieldName.length() > 0) {

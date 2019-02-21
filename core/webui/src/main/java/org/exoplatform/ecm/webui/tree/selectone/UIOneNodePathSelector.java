@@ -22,6 +22,7 @@ import java.util.List;
 
 import javax.jcr.Item;
 import javax.jcr.Node;
+import javax.jcr.Session;
 
 import org.exoplatform.ecm.webui.tree.UIBaseNodeTreeSelector;
 import org.exoplatform.ecm.webui.tree.UINodeTreeBuilder;
@@ -33,6 +34,8 @@ import org.exoplatform.services.ecm.publication.PublicationService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.security.IdentityConstants;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.ComponentConfigs;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -244,7 +247,15 @@ public class UIOneNodePathSelector extends UIBaseNodeTreeSelector {
       pathTitle = currentNode.getProperty("exo:title").getString();
     } 
     NodeFinder nodeFinder = getApplicationComponent(NodeFinder.class);
-    Node rootNode = (Node) nodeFinder.getItem(workspaceName, rootTreePath);
+    Session session;
+    if(currentNode.getSession().getUserID().equals(IdentityConstants.SYSTEM)) {
+      // use system session to fetch node if current session is a system session
+      session = WCMCoreUtils.getSystemSessionProvider().getSession(workspaceName, WCMCoreUtils.getRepository());
+    } else {
+      session = WCMCoreUtils.getUserSessionProvider().getSession(workspaceName, WCMCoreUtils.getRepository());
+    }
+    Node rootNode = (Node) nodeFinder.getItem(session, rootTreePath);
+
 
     if (currentNode.equals(rootNode)) {
       pathName = "";
@@ -268,7 +279,7 @@ public class UIOneNodePathSelector extends UIBaseNodeTreeSelector {
         path = path.substring(0, path.length() - 1);
       if (path.length() == 0)
         path = "/";
-      Node currentBreadcumbsNode = getNodeByVirtualPath(path);
+      Node currentBreadcumbsNode = getNodeByVirtualPath(path, session);
       if (currentNode.equals(rootNode)
           || ((!currentBreadcumbsNode.equals(rootNode) && currentBreadcumbsNode.getParent()
                                                                                .equals(currentNode)))) {
@@ -283,9 +294,9 @@ public class UIOneNodePathSelector extends UIBaseNodeTreeSelector {
     uiBreadcumbs.setPath(listLocalPath);
   }
 
-  private Node getNodeByVirtualPath(String pathLinkNode) throws Exception{
+  private Node getNodeByVirtualPath(String pathLinkNode, Session session) throws Exception{
     NodeFinder nodeFinder_ = getApplicationComponent(NodeFinder.class);
-    Item item = nodeFinder_.getItem(workspaceName, pathLinkNode);
+    Item item = nodeFinder_.getItem(session, pathLinkNode);
     return (Node)item;
   }
 

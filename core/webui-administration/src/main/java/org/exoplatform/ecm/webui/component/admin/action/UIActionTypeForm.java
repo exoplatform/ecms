@@ -104,7 +104,7 @@ public class UIActionTypeForm extends UIForm {
   private List<SelectItemOption<String>> getScriptOptions() throws Exception {
     List<SelectItemOption<String>> options = new ArrayList<SelectItemOption<String>>() ;
     ScriptServiceImpl scriptService = WCMCoreUtils.getService(ScriptServiceImpl.class);
-    List<Node> scriptOptions = scriptService.getECMActionScripts(WCMCoreUtils.getUserSessionProvider());
+    List<Node> scriptOptions = scriptService.getECMActionScripts(WCMCoreUtils.getSystemSessionProvider());
     String baseScriptPath = scriptService.getBaseScriptPath();
     for(Node script : scriptOptions) {
       SelectItemOption<String> itemOption =

@@ -74,7 +74,7 @@ public class UIECMTemplateList extends UIPagingGrid {
     List<Node> nodes = getApplicationComponent(ManageViewService.class)
                                                .getAllTemplates(
                                                                 BasePath.ECM_EXPLORER_TEMPLATES, 
-                                                                WCMCoreUtils.getUserSessionProvider());
+                                                                WCMCoreUtils.getSystemSessionProvider());
     List<TemplateBean> tempBeans = new ArrayList<TemplateBean>();
     for (Node node : nodes) {
       tempBeans.add(new TemplateBean(node.getName(), node.getPath()));
@@ -102,7 +102,7 @@ public class UIECMTemplateList extends UIPagingGrid {
   static  public class AddActionListener extends EventListener<UIECMTemplateList> {
     public void execute(Event<UIECMTemplateList> event) throws Exception {
       UIECMTemplateList uiECMTempList = event.getSource() ;
-      SessionProvider provider = WCMCoreUtils.getUserSessionProvider();
+      SessionProvider provider = WCMCoreUtils.getSystemSessionProvider();
       Node ecmTemplateHome = uiECMTempList.getApplicationComponent(ManageViewService.class)
                                           .getTemplateHome(BasePath.ECM_EXPLORER_TEMPLATES,
                                                            provider);
@@ -136,7 +136,7 @@ public class UIECMTemplateList extends UIPagingGrid {
         return;
       }
       try {
-        vservice.removeTemplate(templatePath, WCMCoreUtils.getUserSessionProvider());
+        vservice.removeTemplate(templatePath, WCMCoreUtils.getSystemSessionProvider());
         Utils.addEditedConfiguredData(templateName, ManageViewPlugin.class.getSimpleName(), ManageViewPlugin.EDITED_CONFIGURED_VIEWS_TEMPLATES, true);
       } catch (AccessDeniedException ex) {
         UIApplication app = uiECMTemp.getAncestorOfType(UIApplication.class);

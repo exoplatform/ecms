@@ -117,7 +117,7 @@ public class UICLVTemplateForm extends UIForm {
     setActions(new String[] {"Save", "Cancel"});
     ApplicationTemplateManagerService templateManager = WCMCoreUtils.getService(ApplicationTemplateManagerService.class);
     Node templateNode = templateManager.getTemplateByName(ApplicationTemplateManagerService.CLV_TEMPLATE_STORAGE_FOLDER, 
-            category, name, WCMCoreUtils.getUserSessionProvider());
+            category, name, WCMCoreUtils.getSystemSessionProvider());
     Node content = templateNode.getNode(Utils.JCR_CONTENT);
     try {
       getUIStringInput(FIELD_TITLE).setValue(content.getProperty(NodetypeConstant.DC_TITLE).getValues()[0].getString());
@@ -159,7 +159,7 @@ public class UICLVTemplateForm extends UIForm {
         templateService.createTemplate(getCategoryByName(category), title, 
                 template, new ByteArrayInputStream(content.getBytes()), new String[] { "*" });
         appTemplateManager.removeTemplate(ApplicationTemplateManagerService.CLV_TEMPLATE_STORAGE_FOLDER, 
-                selectedCategory, template, WCMCoreUtils.getUserSessionProvider());
+                selectedCategory, template, WCMCoreUtils.getSystemSessionProvider());
       }
       
     }
@@ -173,7 +173,7 @@ public class UICLVTemplateForm extends UIForm {
   private Node getCategoryByName(String category) throws Exception {
     ApplicationTemplateManagerService templateManager = WCMCoreUtils.getService(ApplicationTemplateManagerService.class);
     Node templateHome = templateManager.getApplicationTemplateHome(
-            ApplicationTemplateManagerService.CLV_TEMPLATE_STORAGE_FOLDER, WCMCoreUtils.getUserSessionProvider());
+            ApplicationTemplateManagerService.CLV_TEMPLATE_STORAGE_FOLDER, WCMCoreUtils.getSystemSessionProvider());
     return templateHome.getNode(category);
   }
   

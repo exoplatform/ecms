@@ -104,7 +104,7 @@ public class UIViewFormTabPane extends UITabPane {
     if(StringUtils.isNotEmpty(viewName) && isUpdate() ) {
       try{
         ManageViewService viewService = WCMCoreUtils.getService(ManageViewService.class);
-        Node viewNode = viewService.getViewByName(viewName, WCMCoreUtils.getUserSessionProvider());
+        Node viewNode = viewService.getViewByName(viewName, WCMCoreUtils.getSystemSessionProvider());
         if (viewNode.isNodeType(NodetypeConstant.MIX_VERSIONABLE))
           actions_ = new String[]{SAVE_BUTTON, CANCEL_BUTTON, RESTORE_BUTTON};
       }catch (Exception ex){

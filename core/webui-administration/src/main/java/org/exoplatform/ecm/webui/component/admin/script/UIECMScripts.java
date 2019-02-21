@@ -82,7 +82,7 @@ public class UIECMScripts extends UIContainer {
     if(name.equals("action")) {
       scripts = getApplicationComponent(ScriptService.class).getECMActionScripts(WCMCoreUtils.getSystemSessionProvider());
     }else if(name.equals("widget")){
-      scripts = getApplicationComponent(ScriptService.class).getECMWidgetScripts(WCMCoreUtils.getUserSessionProvider());
+      scripts = getApplicationComponent(ScriptService.class).getECMWidgetScripts(WCMCoreUtils.getSystemSessionProvider());
     }else if(name.equals("interceptor")) {
       scripts = 
         getApplicationComponent(ScriptService.class).getECMInterceptorScripts(WCMCoreUtils.getSystemSessionProvider());

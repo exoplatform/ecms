@@ -115,7 +115,7 @@ public class UIScriptList extends UIComponentDecorator {
     if(name.equals(ACTION_SCRIPT_TYPE)) {
       scripts = getApplicationComponent(ScriptService.class).getECMActionScripts(WCMCoreUtils.getSystemSessionProvider());
     }else if(name.equals(WIDGET_SCRIPT_TYPE)){
-      scripts = getApplicationComponent(ScriptService.class).getECMWidgetScripts(WCMCoreUtils.getUserSessionProvider());
+      scripts = getApplicationComponent(ScriptService.class).getECMWidgetScripts(WCMCoreUtils.getSystemSessionProvider());
     }else if(name.equals(INTERCEPTOR_SCRIPT_TYPE)) {
       scripts = 
           getApplicationComponent(ScriptService.class).getECMInterceptorScripts(WCMCoreUtils.getSystemSessionProvider());
@@ -139,7 +139,7 @@ public class UIScriptList extends UIComponentDecorator {
 
   public Node getScriptNode(String templateFilter, String nodeName) throws Exception {
     ScriptService scriptService =  getApplicationComponent(ScriptService.class);
-    Node category = scriptService.getECMScriptHome(WCMCoreUtils.getUserSessionProvider()).getNode(templateFilter);
+    Node category = scriptService.getECMScriptHome(WCMCoreUtils.getSystemSessionProvider()).getNode(templateFilter);
     return category.getNode(nodeName);
   }
 
@@ -186,7 +186,7 @@ public class UIScriptList extends UIComponentDecorator {
       String scriptName = event.getRequestContext().getRequestParameter(OBJECTID);
       String namePrefix = uiScriptList.getScriptCategory();
       try {
-        scriptService.removeScript(namePrefix + "/" + scriptName, WCMCoreUtils.getUserSessionProvider());
+        scriptService.removeScript(namePrefix + "/" + scriptName, WCMCoreUtils.getSystemSessionProvider());
         Utils.addEditedConfiguredData(namePrefix + "/" + scriptName, "ScriptServiceImpl", EDITED_CONFIGURED_SCRIPTS, true);
       } catch(AccessDeniedException ace) {
         throw new MessageException(new ApplicationMessage("UIECMAdminControlPanel.msg.access-denied",

@@ -93,7 +93,7 @@ public class UITabList extends UIPagingGrid {
     UIViewForm uiViewForm = uiTabPane.getChild(UIViewForm.class);
     if(isView_) {
       ManageViewService viewService = WCMCoreUtils.getService(ManageViewService.class);
-      Node viewNode = viewService.getViewByName(viewName, WCMCoreUtils.getUserSessionProvider());
+      Node viewNode = viewService.getViewByName(viewName, WCMCoreUtils.getSystemSessionProvider());
       NodeIterator nodeIter = viewNode.getNodes();
       while(nodeIter.hasNext()) {
         Node tabNode = nodeIter.nextNode();

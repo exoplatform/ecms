@@ -90,17 +90,17 @@ public class UICLVTemplateList extends UIPagingGrid {
       templateData = convetListNodeToListData(templateService.getTemplatesByCategory(
               ApplicationTemplateManagerService.CLV_TEMPLATE_STORAGE_FOLDER, 
               ApplicationTemplateManagerService.CLV_LIST_TEMPLATE_CATEGORY, 
-              WCMCoreUtils.getUserSessionProvider()));
+              WCMCoreUtils.getSystemSessionProvider()));
     } else if(filter.equals(UICLVTemplatesManager.CATEGORY_TEMPLATE_TYPE)) {
       templateData = convetListNodeToListData(templateService.getTemplatesByCategory(
               ApplicationTemplateManagerService.CLV_TEMPLATE_STORAGE_FOLDER, 
               ApplicationTemplateManagerService.CLV_NAVIGATION_TEMPLATE_CATEGORY, 
-              WCMCoreUtils.getUserSessionProvider()));
+              WCMCoreUtils.getSystemSessionProvider()));
     } else if(filter.equals(UICLVTemplatesManager.PAGINATOR_TEMPLATE_TYPE)){
       templateData = convetListNodeToListData(templateService.getTemplatesByCategory(
               ApplicationTemplateManagerService.CLV_TEMPLATE_STORAGE_FOLDER, 
               ApplicationTemplateManagerService.CLV_PAGINATOR_TEMPLATE_CATEGORY, 
-              WCMCoreUtils.getUserSessionProvider()));
+              WCMCoreUtils.getSystemSessionProvider()));
     }          
     Collections.sort(templateData, new CLVTemplateComparator());
     ListAccess<CLVTemplateData> dataList = new ListAccessImpl<CLVTemplateData>(CLVTemplateData.class,
@@ -184,7 +184,7 @@ public class UICLVTemplateList extends UIPagingGrid {
                 ApplicationTemplateManagerService.CLV_TEMPLATE_STORAGE_FOLDER, 
                 clvTemplateList.getCategoryFromFilter(), 
                 template, 
-                WCMCoreUtils.getUserSessionProvider());
+                WCMCoreUtils.getSystemSessionProvider());
         StringBuilder tBuilder = new StringBuilder();
         tBuilder.append(clvTemplateList.getCategoryFromFilter()).append("/").append(template);
         org.exoplatform.services.cms.impl.Utils.addEditedConfiguredData(tBuilder.toString(),
