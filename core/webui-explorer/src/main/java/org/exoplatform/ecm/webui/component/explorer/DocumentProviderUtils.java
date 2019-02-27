@@ -258,7 +258,7 @@ public class DocumentProviderUtils {
     if (allItemsFilterSet.contains(NodetypeConstant.FAVORITE)) {
       NodeHierarchyCreator nodeHierarchyCreator = WCMCoreUtils.getService(NodeHierarchyCreator.class);
       Node userNode =
-          nodeHierarchyCreator.getUserNode(WCMCoreUtils.getUserSessionProvider(), 
+          nodeHierarchyCreator.getUserNode(WCMCoreUtils.getSystemSessionProvider(),
                                            ConversationState.getCurrent().getIdentity().getUserId());
       String favoritePath = nodeHierarchyCreator.getJcrPath(FAVORITE_ALIAS);
       int count = 0;
