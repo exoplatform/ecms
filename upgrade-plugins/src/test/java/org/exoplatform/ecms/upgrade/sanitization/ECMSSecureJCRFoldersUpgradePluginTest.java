@@ -2,6 +2,8 @@ package org.exoplatform.ecms.upgrade.sanitization;
 
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.services.cms.BasePath;
+import org.exoplatform.services.cms.drives.DriveData;
+import org.exoplatform.services.cms.drives.ManageDriveService;
 import org.exoplatform.services.cms.impl.DMSConfiguration;
 import org.exoplatform.services.cms.impl.DMSRepositoryConfiguration;
 import org.exoplatform.services.jcr.RepositoryService;
@@ -32,6 +34,10 @@ public class ECMSSecureJCRFoldersUpgradePluginTest {
     config.setSystemWorkspace("system");
     DMSConfiguration dmsConfiguration = mock(DMSConfiguration.class);
     when(dmsConfiguration.getConfig()).thenReturn(config);
+
+    ManageDriveService manageDriveService = mock(ManageDriveService.class);
+    DriveData driveData = mock(DriveData.class);
+    when(manageDriveService.getDriveByName("Collaboration")).thenReturn(driveData);
 
     NodeHierarchyCreator nodeHierarchyCreator = mock(NodeHierarchyCreator.class);
     RepositoryEntry entry = mock(RepositoryEntry.class);
@@ -85,7 +91,8 @@ public class ECMSSecureJCRFoldersUpgradePluginTest {
     }
 
     // When
-    ECMSSecureJCRFoldersUpgradePlugin plugin = new ECMSSecureJCRFoldersUpgradePlugin(orgService, repositoryService, dmsConfiguration, nodeHierarchyCreator, new InitParams());
+    ECMSSecureJCRFoldersUpgradePlugin plugin = new ECMSSecureJCRFoldersUpgradePlugin(orgService, repositoryService,
+        dmsConfiguration, manageDriveService, nodeHierarchyCreator, new InitParams());
     plugin.processUpgrade("5.1.0", "5.2.0");
 
     // Then
@@ -97,5 +104,7 @@ public class ECMSSecureJCRFoldersUpgradePluginTest {
     verify(groupNode, times(4)).removePermission(IdentityConstants.ANY);
 
     verify(digitalNode, times(4)).removePermission("*:/platform/users");
+
+    verify(driveData, times(1)).removePermission("*:/platform/web-contributors");
   }
 }

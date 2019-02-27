@@ -104,6 +104,20 @@ public class DriveData implements Comparable<DriveData>, Serializable {
    */
   public void setPermissions(String permissions) { this.permissions = permissions ; }
 
+  public void removePermission(String permission) {
+    if (permissions == null) return;
+
+    String[] perms = permissions.split(",");
+    StringBuilder newsPermissions = new StringBuilder();
+    for (String perm : perms) {
+      if (perm.equals(permission)) continue;
+
+      if(newsPermissions.length() > 0) newsPermissions.append(",");
+      newsPermissions.append(perm);
+    }
+
+    permissions = newsPermissions.toString();
+  }
   /**
    *
    * @return the home path of drive

@@ -21,6 +21,8 @@ package org.exoplatform.ecms.upgrade.sanitization;
 import org.exoplatform.commons.upgrade.UpgradeProductPlugin;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.services.cms.BasePath;
+import org.exoplatform.services.cms.drives.DriveData;
+import org.exoplatform.services.cms.drives.ManageDriveService;
 import org.exoplatform.services.cms.impl.DMSConfiguration;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ExtendedNode;
@@ -43,6 +45,7 @@ public class ECMSSecureJCRFoldersUpgradePlugin extends UpgradeProductPlugin {
 
   private OrganizationService orgService;
   private DMSConfiguration dmsConfiguration;
+  private ManageDriveService manageDriveService;
   private RepositoryService repoService;
   private NodeHierarchyCreator nodeHierarchyCreator;
 
@@ -50,8 +53,9 @@ public class ECMSSecureJCRFoldersUpgradePlugin extends UpgradeProductPlugin {
   private SessionProvider sessionProvider;
 
   public ECMSSecureJCRFoldersUpgradePlugin(OrganizationService orgService, RepositoryService repoService, DMSConfiguration dmsConfiguration,
-                                           NodeHierarchyCreator nodeHierarchyCreator, InitParams initParams) {
+                                           ManageDriveService manageDriveService, NodeHierarchyCreator nodeHierarchyCreator, InitParams initParams) {
     super(initParams);
+    this.manageDriveService = manageDriveService;
     this.orgService = orgService;
     this.repoService = repoService;
     this.dmsConfiguration = dmsConfiguration;
@@ -70,6 +74,8 @@ public class ECMSSecureJCRFoldersUpgradePlugin extends UpgradeProductPlugin {
     migrateGroups(sessionProvider);
 
     migrateDigitalAssets(sessionProvider);
+
+    migrateDrives(sessionProvider);
 
     sessionProvider.close();
   }
@@ -155,6 +161,20 @@ public class ECMSSecureJCRFoldersUpgradePlugin extends UpgradeProductPlugin {
         LOG.error("An unexpected error occurs when migrate /Digital Assets", e);
       }
     }
+  }
+
+  private void migrateDrives(SessionProvider sessionProvider) {
+    DriveData drive = null;
+    try {
+      drive = manageDriveService.getDriveByName("Collaboration");
+      drive.removePermission("*:/platform/web-contributors");
+      manageDriveService.addDrive(drive.getName(), drive.getWorkspace(), drive.getPermissions(), drive.getHomePath(),
+          drive.getViews(), drive.getIcon(), drive.getViewPreferences(), drive.getViewNonDocument(), drive.getViewSideBar(),
+          drive.getShowHiddenNode(), drive.getAllowCreateFolders(), drive.getAllowNodeTypesOnTree());
+    } catch (Exception e) {
+      LOG.error("Could not get Collaboration drive", e);
+    }
+
   }
 
   private void removePermission(Node rootedNode, String relativePath, String permission) throws RepositoryException {
