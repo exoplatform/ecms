@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UICLVContainer>
+    <label>
+      <Preferences>تفضيلات</Preferences>
+      <AddContent>إضافة محتوى</AddContent>
+      <ManageContent>إدارة المحتوى</ManageContent>
+    </label>
+    <msg>
+      <non-contents>لا يوجد أي مقال هنا</non-contents>
+      <item-not-found>لا يمكن العثور على هذا العنصر</item-not-found>
+      <no-permission>ليس لديك صلاحيّة للوصول إلى هذه العقدة</no-permission>
+      <category-back>الانتقال إلى السابق</category-back>
+    </msg>
+  </UICLVContainer>
+  <UIViewerManagementPopupWindow>
+    <title>
+      <UICLVConfig>إنشاء قائمة التفضيلات</UICLVConfig>
+    </title>
+  </UIViewerManagementPopupWindow>
+  <UICLVConfig>
+    <label>
+      <Title>نمط</Title>
+      <ContentSelectionBlock>اختيار المحتوى</ContentSelectionBlock>
+      <UICLVConfigDisplayModeFormRadioBoxInput>نمط</UICLVConfigDisplayModeFormRadioBoxInput>
+      <UICLVConfigItemPathFormInputSet>مسار المجلد</UICLVConfigItemPathFormInputSet>
+    <UICLVConfigItemPathFormStringInput>مسار المجلد</UICLVConfigItemPathFormStringInput>
+      <UICLVConfigOrderByFormSelectBox>تصنيف بحسب</UICLVConfigOrderByFormSelectBox>
+      <option>
+        <exo:title>عنوان</exo:title>
+        <exo:dateCreated>تاريخ الإنشاء</exo:dateCreated>
+        <exo:lastModifiedDate>تاريخ التغيير</exo:lastModifiedDate>
+        <publication:liveDate>تاريخ النشر</publication:liveDate>
+        <exo:startEvent>تاريخ الحدث</exo:startEvent>
+        <exo:index>الفهرس</exo:index>
+        <DESC>تنازلي</DESC>
+        <ASC>تصاعدي</ASC>
+      </option>
+      <DisplaySettingBlock>ترقيم الصفحات</DisplaySettingBlock>
+      <UICLVConfigHeaderFormStringInput>نموذج</UICLVConfigHeaderFormStringInput>
+      <UICLVConfigDisplayTemplateFormSelectBox>عرض نموذج</UICLVConfigDisplayTemplateFormSelectBox>
+      <UICLVConfigPaginatorTemplateFormSelectBox>ترحيل النموذجي</UICLVConfigPaginatorTemplateFormSelectBox>
+      <UICLVConfigItemsPerPageFormStringInput>عناصر بكل صفحة</UICLVConfigItemsPerPageFormStringInput>
+      <UICLVConfigShowIllustrationFormCheckboxInput>عرض الصورة</UICLVConfigShowIllustrationFormCheckboxInput>
+      <UICLVConfigShowSummaryFormCheckboxInput>عرض الموجز</UICLVConfigShowSummaryFormCheckboxInput>
+      <UICLVConfigShowHeaderFormCheckboxInput>عرض العنوان الرأسي</UICLVConfigShowHeaderFormCheckboxInput>
+      <UICLVConfigShowRefreshFormCheckboxInput>عرض زر التحديث</UICLVConfigShowRefreshFormCheckboxInput>
+      <UICLVConfigShowTitleFormCheckboxInput>تظهر عنوان</UICLVConfigShowTitleFormCheckboxInput>
+      <UICLVConfigShowDateCreatedFormCheckboxInput>عرض التاريخ</UICLVConfigShowDateCreatedFormCheckboxInput>
+      <UICLVConfigShowLinkFormCheckboxInput>عرض الرّابط</UICLVConfigShowLinkFormCheckboxInput>
+      <UICLVConfigShowReadmoreFormCheckboxInput>عرض المزيد من الروابط</UICLVConfigShowReadmoreFormCheckboxInput>
+      <UICLVConfigAllowDynamicUrlStringInput>السماح لعنوان الموارد الموحّد(URL) الديناميكي</UICLVConfigAllowDynamicUrlStringInput>
+      <UICLVConfigShowRssLinkFormCheckboxInput>عرض رابط الـRSS</UICLVConfigShowRssLinkFormCheckboxInput>
+      <UICLVConfigShowAutomaticDetectionCheckboxInput>الكشف التلقائي</UICLVConfigShowAutomaticDetectionCheckboxInput>
+      <AdvancedBlock>متطور/ة</AdvancedBlock>
+      <UICLVConfigDynamicNavigationLabel>التصفّح الديناميكي</UICLVConfigDynamicNavigationLabel>
+      <UICLVConfigContextualFolderRadioBoxInput>مجلدات بحسب السّــياق</UICLVConfigContextualFolderRadioBoxInput>
+      <UICLVConfigShowCLVByStringInput>بـواسطة</UICLVConfigShowCLVByStringInput>
+      <UICLVConfigshowSCVWithStringInput>مع</UICLVConfigshowSCVWithStringInput>
+      <UICLVConfigTargetPageFormInputSet>عرض بالصفحة</UICLVConfigTargetPageFormInputSet>
+      <content-not-found>لم يتم العثور على  أي محتوى.</content-not-found>
+      <ContentPath>مسار المحتوى</ContentPath>
+      <Up>فوق</Up>
+      <Down>إلى الأسفل</Down>
+      <UICLVConfigCacheManagementLabel>قابليّة الرؤية للمحتوى</UICLVConfigCacheManagementLabel>
+      <UICLVContentByQueryLabel>المحتوى بواسطة استعلام</UICLVContentByQueryLabel>
+      <UICLVConfigWorkspaceFormSelectBox>مساحة عمل</UICLVConfigWorkspaceFormSelectBox>
+      <UICLVConfigContentByQueryTextArea>بواسطة استعلام</UICLVConfigContentByQueryTextArea>
+      <UICLVConfigCacheEnableRadioBoxInput>مشاركة المحتوى بين المستخدمين</UICLVConfigCacheEnableRadioBoxInput>
+    </label>
+    <help>
+      <ModeSelectionHelp>هنالك طريقتان تُمكّنك من إظهار المحتوى. "بواسطة مجلد" ستتخذ كافة المحتويات المتوفرة في المجلد/الفئة المحددة الخاصة بك. "بواسطة المحتوى" تُتيح لك  تحديد المحتوى الذي تريد إظهاره بشكل يدوي .</ModeSelectionHelp>
+      <FolderPathHelp>قم بتحديد المحتويات التي ترغب في إظهارها. سيتم ديناميكيّـا استبدال هذا الاختيار الافتراضي إذا قمت بتفعيل خدمة التصقّح الديناميكي ( نمط متطوّر، انظرأدناه).</FolderPathHelp>
+      <HeaderOptionHelp>إظهار عنوان رأسي على رأس قائمة المحتويات. إذا قمت بتنشيط خيار "الكشف التلقائي"، فإنه سيحاول العثور على العنوان الرأسي استناداً إلى الخيار الحالي.</HeaderOptionHelp>
+      <GeneralOptionHelp>حدد العناصر الرسومية التي ترغب في رؤيتها  ضمن القائمة الخاصة بك. لاحظ أنه، استناداً إلى النموذج الخاص بك، قد لا تتوفر بعض العناصر.</GeneralOptionHelp>
+      <ContextualHelp>بصدد القيام بتنشيط خيار "التصفّح الديناميكي". يمكن للبقيّة تغيير المحتوى بشكل ديناميكي استناداً إلى المعيار الخاص بعنوان الموارد المحدد (URL)</ContextualHelp>
+      <ParameterHelp>سيتم استخدام هذا المعيار للحصول على المحتويات إذا تم تفعيل التصفــّــح الديناميكي.</ParameterHelp>
+      <ShowDetailInPageHelp>بالنقر على المحتوى ىسيتمّ إعادة توجيهك إلى صفحة التفاصيل. يجب أن يكون لديك المدخل "محتوى بواسطة عنوان الموار الموحّد URL" و التأكد من تفعيل خيار التصفّح الديناميكي على مُستوى الصفحة الهدف  قصد عرض المحتوى.</ShowDetailInPageHelp>
+      <DetailParameterHelp>سوف يحتوي هذا المعيار على المسار المؤدّي إلى الرّابط الخاصّ بتفاصيل الصفحة. يجب أن يتطابق هذا المعيار مع ذلك التي تمّ استخدامه ضمن تبويبة "المحتوى عن طريق عنوان الموارد الموحّد"  الخاص بالصفحة المعنيّة.</DetailParameterHelp>
+      <ContentByQueryHelp>يمكنك تعيين استعلام SQL للحصول على المحتوى بشكل حيوي. مسموح بالمعلمات التالية: ${user} ${lang} أو أي معلمة محاطة ${PARAM}.</ContentByQueryHelp>
+      <ContentsVisibilityHelp>"مقيّدة بتسجيل الدّخول" سيتم تصفية المحتوى استنادا إلى المصادقة. إذا لم تقم بتسجيل الدخول، سترى المحتوى العام فقط. إذا قمت بتسجيل الدخول،سترى كل المحتوى المرئي من قبل مستخدمي الإنترنت. "مقيدة بأدوار المستخدمين" سيتم تصفية المحتوى اعتمادا على صلاحيّاتك. في معظم الحالات، ينبغي عدم استخدام هذا الخيار، لأنه يقلل من الأداء العام.</ContentsVisibilityHelp>
+    </help>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <delete>حذف</delete>
+    </action>
+    <msg>
+      <not-valid-path>مسار المجلد غير صحيح.</not-valid-path>
+      <saving-success>يتم حفظ تفضيلات للمدخل.</saving-success>
+    </msg>
+    <tab>
+      <label>
+        <clvContentTab>اختيار المحتوى</clvContentTab>
+        <clvDisplayTab>إعدادات العرض</clvDisplayTab>
+        <clvAdvancedTab>متطور/ة</clvAdvancedTab>
+      </label>
+    </tab>
+  </UICLVConfig>
+  <UICLVConfigDisplayModeFormRadioBoxInput>
+    <label>
+      <AutoViewerMode>عن طريق مجلدات</AutoViewerMode>
+      <ManualViewerMode>عن طريق المحتوى</ManualViewerMode>
+    </label>
+  </UICLVConfigDisplayModeFormRadioBoxInput>
+  <UICLVConfigItemPathFormInputSet>
+    <title>
+      <SelectFolderPath>حدد مسار المجلد</SelectFolderPath>
+      <AddPath>اضافة مسار</AddPath>
+    </title>
+  </UICLVConfigItemPathFormInputSet>
+  <FolderPathSelectorPopupWindow>
+    <title>
+      <UIContentSelectorFolder>مستعرض المجلدات</UIContentSelectorFolder>
+    </title>
+  </FolderPathSelectorPopupWindow>
+  <UICLVConfigOrderTypeFormSelectBox>
+    <label>
+      <option>
+        <OrderDesc>تنازلي</OrderDesc>
+        <OrderAsc>تصاعدي</OrderAsc>
+      </option>
+    </label>
+  </UICLVConfigOrderTypeFormSelectBox>
+  <UICLVConfigTargetPageFormInputSet>
+    <title>
+      <SelectBasePath>حدد مسار القاعدة</SelectBasePath>
+      <SelectTargetPage>حدد مسار القاعدة</SelectTargetPage>
+    </title>
+  </UICLVConfigTargetPageFormInputSet>
+  <UICLVBasePathPopupWindow>
+    <title>
+      <UIPageSelector>منتق الصفحات</UIPageSelector>
+    </title>
+  </UICLVBasePathPopupWindow>
+  <UICLVPresentation>
+    <msg>
+      <confirm-delete>هل أنت متأكد من أنك تريد حذف هذا المحتوى؟</confirm-delete>
+      <delete-content-successfully>تم حذف المحتوى بنجاح.</delete-content-successfully>
+    </msg>
+    <label>
+      <readmore>قراءة المزيد</readmore>
+      <rssFeed>تدفــّـق آر إس إس RSS</rssFeed>
+    </label>
+    <action>
+      <refresh>تحديث</refresh>
+      <edit>تغيير في مستكشف المحتوى</edit>
+      <delete>حذف</delete>
+      <publish>نشر</publish>
+    </action>
+    <label>
+      <draft>مسوّدة</draft>
+    </label>
+  </UICLVPresentation>
+  <CorrectContentSelectorPopupWindow>
+    <title>
+      <UIContentSelectorMulti>لوحة متعددة خاصّة بمُنتق المحتوى</UIContentSelectorMulti>
+    </title>
+  </CorrectContentSelectorPopupWindow>
+  <UIContentDialogFormPopupWindow>
+    <title>
+      <UIContentDialogForm>شكل محتوى الويب</UIContentDialogForm>
+    </title>
+  </UIContentDialogFormPopupWindow>
+  <UICLVConfigContextualFolderRadioBoxInput>
+    <label>
+      <contextualEnable>مُتاح</contextualEnable>
+      <contextualDisable>غير مُتاح</contextualDisable>
+    </label>
+  </UICLVConfigContextualFolderRadioBoxInput>
+  <PublicationStates>
+    <archived>تمّت أرشفتها</archived>
+    <obsolete>عفا عليها الزمن</obsolete>
+    <unpublished>غير منشورة</unpublished>
+    <enrolled>مسجل</enrolled>
+    <draft>مسودة</draft>
+    <pending>في انتظار المصادقة</pending>
+    <approved>مصادق عليه/هـا</approved>
+    <inreview>قيد المراجعة</inreview>
+    <staged>جاهز للنشر</staged>
+    <published>تم نشره</published>
+  </PublicationStates>
+  <UICLVConfigCacheEnableRadioBoxInput>
+    <label>
+      <ENABLE>مقيّدة بتسجيل الدّخول</ENABLE>
+      <DISABLE>مقيدة بأدوار المستخدم</DISABLE>
+    </label>
+  </UICLVConfigCacheEnableRadioBoxInput>
+</bundle>

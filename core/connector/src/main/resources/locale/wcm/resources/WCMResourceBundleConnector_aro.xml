@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <ContentSelector>
+    <msg>
+      <no-file-selected>لم يتمّ اختيار أيّ محتوى. الرّجاء اختيار واحد على الأقل.</no-file-selected>
+    </msg>
+  </ContentSelector>
+  <RenameConnector>
+    <label>
+      <rename>إعادة تسمية</rename>
+      <cancel>الغاء</cancel>
+    </label>
+    <msg>
+      <renaming>بصدد إعادة التّسمية...</renaming>
+    </msg>
+  </RenameConnector>
+  <OpenInOfficeConnector>
+    <label>
+      <exo>
+        <remote-edit>
+          <word>فتح الملفّ بواسطة مايكروسوفت وورد</word>
+          <excel>فتح الملفّ بواسطة مايكروسوفت إكسل</excel>
+          <powerpoint>فتح الملفّ بواسطة مايكروسوفت باوربوينت</powerpoint>
+          <desktop>فتح الملفّ على سطح المكتب</desktop>
+          <desktop-app>فتح في {0}</desktop-app>
+        </remote-edit>
+      </exo>
+    </label>
+  </OpenInOfficeConnector>
+  <DocumentAutoVersion>
+    <msg>
+      <WrongMimeType>نوع التوصيلة الخاص بالملف الذي تم تحميله غير معروف. لن يتم إنشاء ايّ نسخة جديدة من {0}.</WrongMimeType>
+    </msg>
+  </DocumentAutoVersion>
+</bundle>

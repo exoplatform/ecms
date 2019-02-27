@@ -1,0 +1,456 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Copyright (C) 2009 eXo Platform SAS.
+    
+    This is free software; you can redistribute it and/or modify it
+    under the terms of the GNU Lesser General Public License as
+    published by the Free Software Foundation; either version 2.1 of
+    the License, or (at your option) any later version.
+    
+    This software is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+    Lesser General Public License for more details.
+    
+    You should have received a copy of the GNU Lesser General Public
+    License along with this software; if not, write to the Free
+    Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+    02110-1301 USA, or see the FSF site: http://www.fsf.org.
+
+-->
+<bundle>
+  <UIExoStart>
+    <tooltip>
+      <homepage>الصفحة الرئيسية</homepage>
+    </tooltip>
+  </UIExoStart>
+
+  <UIFormInputSetWithAction>
+    <msg>
+      <confirm-delete>هل أنت متأكد من أنك تريد حذف هذا العنصر؟</confirm-delete>
+    </msg>
+  </UIFormInputSetWithAction>
+
+  <Drives>
+    <label>
+      <ManagedSites>إدارة الموقع</ManagedSites>
+      <SharedSite>المواقع المشتركة</SharedSite>
+      <PersonalDocuments>المستندات الشخصية</PersonalDocuments>
+      <UserDocuments>المستندات {0}</UserDocuments>
+      <Collaboration>Collaboration</Collaboration>
+      <Trash>Trash</Trash>
+    </label>
+  </Drives>
+
+  <Views>
+    <label>
+      <wcm-view>الواب</wcm-view>
+      <admin-view>إدارة</admin-view>
+      <icon-view>أيقونات</icon-view>
+      <thumbails-view>صور مصغرة</thumbails-view>
+      <list-view>قائمة</list-view>
+      <authoring-view>التأليف</authoring-view>
+      <wcm-category-view>الفئات</wcm-category-view>
+      <file-view>عرض ادارة الملفات</file-view>
+    </label>
+  </Views>
+
+  <UIActionBar>
+    <obtion>
+      <Publication>النشر</Publication>
+      <System>النظام</System>
+    </obtion>
+  </UIActionBar>
+
+  <UIPageSelectorPanel>
+    <header>
+      <path>مسار</path>
+      <action>#{word.action}</action>
+    </header>
+    <msg>
+      <child-not-found>لا توجد أي صفحة.</child-not-found>
+    </msg>
+    <title>
+      <select>اختيار</select>
+    </title>
+  </UIPageSelectorPanel>
+
+  <UIContentDialogFormPopupWindow>
+    <title>
+      <UIContentDialogPreference>خيارات محتوى الواب</UIContentDialogPreference>
+    </title>
+  </UIContentDialogFormPopupWindow>
+
+  <UITabPane>
+    <title>
+      <UIContentBrowsePanelOne>متصفح المحتوى</UIContentBrowsePanelOne>
+      <UIContentBrowsePanelMulti>متصفح المحتوى</UIContentBrowsePanelMulti>
+      <UIContentBrowsePanelFolder>متصفح المجلدات</UIContentBrowsePanelFolder>
+      <UIContentSearchForm>نموذج البحث في المحتوى</UIContentSearchForm>
+      <UIContentSearchResult>نتائج البحث</UIContentSearchResult>
+      <UIContentViewer>معاينة المحتوى</UIContentViewer>
+      <WebContentMetadataPopup>مُنتق الخاصيات</WebContentMetadataPopup>
+      <WebContentNodeTypePopup>مُنتق أنواع العقد</WebContentNodeTypePopup>
+      <UIPermissionManager>مدير الصلاحيّات</UIPermissionManager>
+    </title>
+  </UITabPane>
+
+  <UIContentBrowsePanelOne>
+    <selectBoxValues>
+      <FilterBy>تصنيف  بحسب</FilterBy>
+      <WebContent>محتوى الواب</WebContent>
+      <DMSDocument>الوثيقة</DMSDocument>
+      <Media>وسائل الاعلام</Media>
+    </selectBoxValues>
+    <msg>
+      <node-checkout>يتم انهاء المعالجة لهذه العقدة. الرجاء التحقق من العقدة قبل القيام بهذا الاجراء.</node-checkout>
+    </msg>
+  </UIContentBrowsePanelOne>
+
+  <UIContentBrowsePanelMulti>
+    <selectBoxValues>
+      <FilterBy>تصنيف  بحسب</FilterBy>
+      <WebContent>محتوى الواب</WebContent>
+      <DMSDocument>وثائق</DMSDocument>
+      <Media>وسائل الاعلام</Media>
+    </selectBoxValues>
+  </UIContentBrowsePanelMulti>
+
+  <UIContentBrowsePanelOne>
+    <label>
+      <LeftColumn>اختيار مجلد لعرض فروعه باعتبارها محتوى.</LeftColumn>
+      <RightColumn>يمكن اختيار المحتوى أدناه.</RightColumn>
+    </label>
+  </UIContentBrowsePanelOne>
+
+  <UIContentBrowsePanelMulti>
+    <label>
+      <LeftColumn>اختيار مجلد لعرض فروعه باعتبارها محتوى.</LeftColumn>
+      <RightColumn>يمكن اختيار المحتوى أدناه.</RightColumn>
+    </label>
+  </UIContentBrowsePanelMulti>
+
+  <UIContentBrowsePanelFolder>
+    <label>
+      <LeftColumn>اختيار مجلد لعرض فروعه باعتبارها محتوى.</LeftColumn>
+      <RightColumn>يمكن اختيار المجلّد أدناه.</RightColumn>
+    </label>
+  </UIContentBrowsePanelFolder>
+
+  <UISelectedContentGrid>
+    <label>
+      <name>#{word.name}</name>
+      <add>اضف</add>
+      <delete>حذف</delete>
+    </label>
+    <msg>
+      <no-content-found>لم يتم العثور على أيّ مُـحتوى.</no-content-found>
+      <non-content>لم تقم بتحديد أي محتوى.</non-content>
+    </msg>
+  </UISelectedContentGrid>
+
+  <UICLVContentSelectedGrid>
+    <action>
+      <SaveCategories>#{word.save}</SaveCategories>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UICLVContentSelectedGrid>
+
+  <UIContentBrowsePathSelector>
+    <header>
+      <name>#{word.name}</name>
+      <publicationstate>حالة النشر</publicationstate>
+      <action>اجراء</action>
+    </header>
+    <msg>
+      <child-not-found>لم يتمّ العثور على أيّ محتوى</child-not-found>
+    </msg>
+  </UIContentBrowsePathSelector>
+
+  <UIContentBrowsePathSelectorFolder>
+    <header>
+      <name>#{word.name}</name>
+      <publicationstate>حالة النشر</publicationstate>
+      <action>اجراء</action>
+    </header>
+    <msg>
+      <child-not-found>لم يتم العثور على المجلد</child-not-found>
+    </msg>
+  </UIContentBrowsePathSelectorFolder>
+
+  <UIContentSearchForm>
+    <title>
+      <Location>اسم الموقع</Location>
+      <SearchByName>البحث حسب الاسم</SearchByName>
+      <Fulltext>عبارة أو جُملة في نفس السّياق</Fulltext>
+      <Property>الخاصية</Property>
+      <Contain>تحتوي على</Contain>
+      <FromDate>من تاريخ</FromDate>
+      <ToDate>الى تاريخ</ToDate>
+      <DocumentType>نوع الوثيقة</DocumentType>
+    </title>
+    <tooltip>
+      <AddMetadataType>اضافة خاصيّة</AddMetadataType>
+      <AddNodeType>اضافة نوع عقدة</AddNodeType>
+    </tooltip>    
+    <label>
+      <option>
+        <CREATED>تمّ انشاؤه / ها</CREATED>
+        <MODIFIED>تم تغييره / ها</MODIFIED>
+      </option>
+    </label>
+    <action>
+      <SearchWebContent>البحث</SearchWebContent>
+    </action>
+    <msg>
+      <time-to-late>وقت البحث طويل جداً.</time-to-late>
+      <empty-field>يرجى التـّــأكد من صحّة كلمة البحث الرئيسية.</empty-field>
+      <empty-name>الرجاء إدخال اسم للبحث</empty-name>
+      <empty-content>الرجاء إدخال كلمة أو عبارة للبحث عنها</empty-content>
+      <empty-property>الرجاء تحديد خاصية</empty-property>
+      <empty-property-keyword>الرجاء إدخال كلمة رئيسية بشأن الخاصّية</empty-property-keyword>
+      <empty-doctype>الرّجاء تحديد نوع الملفّ</empty-doctype>
+      <empty-startDate>يرجى تحديد قيمة تاريخ "من"</empty-startDate>
+      <invalid-format>صيغة التاريخ/التوقيت التي تمّ ادخالها في المجال '{0}' غير صحيحة.</invalid-format>
+      <invalid-date>"قيمة "إلى تاريخ" يجب أن تأتي بعد قيمة "من تاريخ""</invalid-date>
+      <invalid-startDate>تاريخ "من" لا يجب أن يتجاوزتاريخ اليوم</invalid-startDate>
+      <invalid-nodeType>نوع العقدة "{0}" غير صحيح. يُرجى اعادة التثبّت.</invalid-nodeType>
+      <invalid-keyword>الكلمة المفتاح غير صحيحة. لم يتم التعرّف على بعض الأحرف.</invalid-keyword>
+    </msg>
+  </UIContentSearchForm>
+
+  <WebContentMetadataPopup>
+    <title>
+      <UIContentPropertySelector>مُنتق الخاصيات</UIContentPropertySelector>
+    </title>
+  </WebContentMetadataPopup>
+
+  <UIContentPropertySelector>
+    <action>
+      <Add>اضافة</Add>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <label>
+      <metadataType>نوع قالب المعلومات القياسية</metadataType>
+      <property_select>خاصيّة</property_select>
+    </label>
+  </UIContentPropertySelector>
+
+  <WebContentNodeTypePopup>
+    <title>
+      <UIContentNodeTypeSelector>مُنتق نوع العقدة</UIContentNodeTypeSelector>
+    </title>
+  </WebContentNodeTypePopup>
+
+  <UIContentNodeTypeSelector>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIContentNodeTypeSelector>
+
+  <UIContentSearchResult>
+    <header>
+      <title>عنوان</title>
+      <score>المجموع</score>
+      <publicationstate>حالة النشر</publicationstate>
+      <action>اجراء</action>
+    </header>
+    <title>
+      <Select>اختيار</Select>
+      <View>رأي</View>
+    </title>
+    <msg>
+    <template-not-support>لا يمكن معاينة هذا المحتوى. القالب غير معتمد</template-not-support>
+    </msg>
+  </UIContentSearchResult>
+
+  <UIContentDialogForm>
+    <action>
+      <SaveDraft>حفظ المُسوّدة</SaveDraft>
+      <FastPublish>نشر سريع</FastPublish>
+      <Preferences>تفضيلات</Preferences>
+      <Close>#{word.close}</Close>
+    </action>
+    <msg>
+      <access-denied>ليس لديك الصلاحيّات الكافية لإضافة الفئات لهذه الوثيقة.</access-denied>
+      <exception>حدث خطأ أثناء إضافة فئات إلى هذه الوثيقة.</exception>
+      <non-categories>الفئات خاطئة. الرجاء اختيار الفئات المناسبة.</non-categories>
+    </msg>
+  </UIContentDialogForm>
+
+  <UIPermissionManager>
+    <label>
+      <UIPermissionInputSetWithAction>صلاحيّة</UIPermissionInputSetWithAction>
+      <UIAccessibleCheckboxInput>حق الدّخول</UIAccessibleCheckboxInput>
+      <UIEditableCheckboxInput>تغيير الاذن</UIEditableCheckboxInput>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Clear>مسح</Clear>
+      <title>
+        <Edit>تغيير</Edit>
+        <Delete>حذف</Delete>
+      </title>
+    </action>
+  </UIPermissionManager>
+
+  <UIPermissionManagerGrid>
+    <header>
+      <owner>صلاحيّة</owner>
+      <accessible>يمكن الوصول إليه/ها</accessible>
+      <editable>قابلة للتغيير</editable>
+      <action>اجراء</action>
+    </header>
+    <msg>
+      <confirm-delete-permission>هل ترغب حقّا في حذف هذه الصلاحيّة؟</confirm-delete-permission>
+      <no-permission-remove>ليس لديك الصلاحيّات الكافية.</no-permission-remove>
+      <access-denied>تم رفض الوصول.</access-denied>
+      <node-locked>يتم تأمين مسار العنصر {0} أو أحد العناصر الأصل.</node-locked>
+      <userOrGroup-required>يجب اختيار مستخدم أو مجموعة.</userOrGroup-required>
+      <checkbox-require>يجب عليك تعيين الحقوق.</checkbox-require>
+      <node-checkedin>يجب عليك انهاء المراجعة أوّلا.</node-checkedin>
+    </msg>
+  </UIPermissionManagerGrid>
+
+  <UIPermissionInputSetWithAction>
+    <title>
+      <SelectUser>اختيارمستخدم</SelectUser>
+      <SelectMember>اختيار عضو</SelectMember>
+      <AddAny>أضف أي صلاحيّة</AddAny>
+    </title>
+  </UIPermissionInputSetWithAction>
+
+  <UIUserSelectorPopupWindow>
+    <title>
+      <UIUserContainer>منتق المستخدمين</UIUserContainer>
+    </title>
+  </UIUserSelectorPopupWindow>
+
+  <UIGroupSelectorPopupWindow>
+    <title>
+      <UIGroupMemberSelector>مُنتق المجموعات</UIGroupMemberSelector>
+    </title>
+  </UIGroupSelectorPopupWindow>
+
+  <UIGroupMemberSelector>
+    <label>
+      <selectGroup>اختيار مجموعة</selectGroup>
+      <selectMembership>اختيار العضوية</selectMembership>
+    </label>
+  </UIGroupMemberSelector>
+
+  <UIContentDialogPreference>
+    <action>
+      <Back>رجوع</Back>
+    </action>
+  </UIContentDialogPreference>
+
+  <ZeroValidator>
+    <msg>
+      <Invalid-number>لم يتم قبول القيمة صفر في المجال '{0}'.</Invalid-number>
+    </msg>
+  </ZeroValidator>
+
+  <UIDropDownPageTemp>
+    <item>
+      <WCMPageConfigs>صفحة الاعدادات الخاصّة بالـWCM</WCMPageConfigs>
+      <ColumnPageConfigs>الاعدادات الخاصّة بعمود الصّفحة</ColumnPageConfigs>
+      <RowPageConfigs>الاعدادات الخاصّة بأسطر الصّفحة</RowPageConfigs>
+      <TabsPageConfigs>الاعدادات الخاصّة بعلامات التّبويب</TabsPageConfigs>
+      <MixPageConfigs>مختلط</MixPageConfigs>
+    </item>
+  </UIDropDownPageTemp>
+
+  <UIWizardPageSelectLayoutForm>
+    <label>
+      <SingleContentViewer>العارض الموحّد للمحتوى</SingleContentViewer>
+      <ContentListViewer>عارض قائمة المحتويات</ContentListViewer>
+      <Search>البحث</Search>
+      <Sitemap>خريطة الموقع</Sitemap>
+      <TwoColumnsLayout>تخطيط ذو عمودين</TwoColumnsLayout>
+      <ThreeColumnsLayout>تخطيط ذو ثلاثة أعمدة</ThreeColumnsLayout>
+      <TwoRowsLayout>تخطيط ذو سطرين</TwoRowsLayout>
+      <ThreeRowsLayout>تخطيط ذو ثلاثة أسطر</ThreeRowsLayout>
+      <TwoTabsLayout>تخطيط ذو تبويبتين</TwoTabsLayout>
+      <ThreeTabsLayout>تصميم ثلاثة-تبويبات</ThreeTabsLayout>
+      <TwoColumnsOneRowLayout>تخطيط عمودين و صف واحد</TwoColumnsOneRowLayout>
+      <OneRowTwoColumnsLayout>تخطيط ذو صف واحد و عمودين</OneRowTwoColumnsLayout>
+      <ThreeRowsTwoColumnsLayout>تخطيط ذو ثلاثة صفوف و عمودين</ThreeRowsTwoColumnsLayout>
+    </label>
+  </UIWizardPageSelectLayoutForm>
+
+  <Signin>
+    <welcome>أهلا وسهلا بكم</welcome>
+    <login>دخول</login>
+    <logout>خروج</logout>
+    <language>تغيير اللغة</language>
+    <register>تسجيل</register>
+  </Signin>
+  <UIDriveForm>
+<label>
+<wcm-category-view>عرض الفئات</wcm-category-view>
+<wcm-view>عرض محتوى الـ WCM</wcm-view>
+</label>
+  </UIDriveForm>
+  
+  <ContentSelector>
+    <title>
+      <PersonalDrives>الأقراص الشخصية</PersonalDrives>
+      <GeneralDrives>الأقراص العامّة</GeneralDrives>
+      <GroupDrives>أقراص المجموعة</GroupDrives>
+      <Private>شخصي</Private>
+      <Public>عام</Public>
+      <BackupCenter>مركز النُّسخ الاحتياطية</BackupCenter>
+      <CategorizedDocumentsCenter>مركز تصنيف الوثائق</CategorizedDocumentsCenter>
+      <CollaborationCenter>مركز التعاون</CollaborationCenter>
+      <DigitalAssetsManagementCenter>مركز إدارة الأصول الرقمية</DigitalAssetsManagementCenter>
+      <DMSAdministration>ادارة المحتوى</DMSAdministration>
+      <DocumentsManagementCenter>مركز إدارة المحتوى</DocumentsManagementCenter>
+      <LiveDocumentsCenter>مركز الوثاق الحيّة</LiveDocumentsCenter>
+      <PendingDocumentsCenter>مركز الوثائق في حالة انتظار</PendingDocumentsCenter>
+      <RecordsManagementCenter>مركز إدارة السّجلات</RecordsManagementCenter>
+      <SharedUsersSpace>فضاء مشترك للمستخدمين</SharedUsersSpace>
+      <Systemfiles>ملفات النظام</Systemfiles>
+      <ValidationRequestsDocumentsCenter>مركز طلبات المصادقة على الوثائق</ValidationRequestsDocumentsCenter>
+      <ManagedSites>ادارة المواقع</ManagedSites>
+      <SharedSite>المواقع المشتركة</SharedSite>
+    </title>
+  </ContentSelector>
+  
+  <UICategoryNavigationTargetPathPopupWindow>
+    <title>
+      <UIPageSelector>مُنتق الصفحات</UIPageSelector>
+    </title>
+  </UICategoryNavigationTargetPathPopupWindow>
+  
+  <UIDocumentInfo>
+    <msg>
+      <access-denied-exception>تم رفض الوصول. رُبّما ليس لديك صلاحيّات القراءة، أو أنّ العقدة قد تمّ إزالتها أو تغييرها.</access-denied-exception>
+    </msg>
+  </UIDocumentInfo>
+  <UIPortalApplication>
+    <title>
+      <abort>إلغاء</abort>
+    </title>
+  </UIPortalApplication>    
+  
+  <CategoryNavigationTemplate>
+  <label>
+  <home>الصفحة الرئيسية</home>
+  </label>
+  </CategoryNavigationTemplate>
+  
+  <Breadcrumb>
+  <label>
+  <home>الصفحة الرئيسية</home>
+  </label>  
+  </Breadcrumb>
+
+  <UIViewMetadataForm>
+    <msg>
+      <Invalid-number>الرجاء إدخال رقم صحيح.</Invalid-number>
+    </msg>
+  </UIViewMetadataForm>
+</bundle>

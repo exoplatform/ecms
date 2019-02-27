@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+ 
+  <View>
+    <label>
+      <languages>
+        <en>انقليزية</en>
+        <fr>فرنسية</fr>
+        <ru>روسية</ru>
+        <vi>فيتنامية</vi>
+        <nl>الهولندية</nl>
+        <de>الألمانية</de>
+        <uk>اوكرانية</uk>
+        <ar>العربية</ar>
+      </languages>
+    </label>
+  </View>
+ 
+  <!--
+  ################resoucebundle FOR EXO:COMMENT VIEW TEMPLATE#############
+  -->
+  <Comment>
+    <view>
+      <label>
+        <postedBy>تم ارسال آخر تعليق من طرف</postedBy>
+        <at>الى</at>
+        <comments>التعليقات</comments>
+        <show-comments>عرض التعليقات</show-comments>
+        <hide-comments>اخفاء التعليقات</hide-comments>
+        <comment-by>تم التعليق عليها من طرف</comment-by>
+        <email>عنوان البريد الإلكتروني</email>
+        <site>الموقع</site>
+        <lastComment>آخر تعليق تمّ ارساله بواسطة {user} على السّاعة {time}</lastComment>
+        <Less_Than_A_Minute>less than a minute ago</Less_Than_A_Minute>
+        <About_A_Minute>about a minute ago</About_A_Minute>
+        <About_x_Minutes>about {0} minutes ago</About_x_Minutes>
+        <About_An_Hour>about an hour ago</About_An_Hour>
+        <About_x_Hours>about {0} hours ago</About_x_Hours>
+        <About_A_Day>about a day ago</About_A_Day>
+        <About_x_Days>about {0} days ago</About_x_Days>
+        <About_A_Month>about a month ago</About_A_Month>
+        <About_x_Months>about {0} months ago</About_x_Months>
+      </label>
+    </view>
+  </Comment>
+ 
+  <!--
+  ################resoucebundle FOR NT:FILE VIEW TEMPLATE##############
+  -->
+  <File>
+    <view>
+      <label>
+        <not-viewable>العرض المُسبق لهذا الملفّ غير متوفّر.</not-viewable>
+        <pdf-max-size>العرض المُسبق لهذا الملفّ غير متوفّر لكلّ محتوى حجمه يفوق  {0} ميجابت.</pdf-max-size>
+        <pdf-max-page>العرض المُسبق غير متوفّر لكلّ محتوى عدد صفحاته يفوق الـ {0} صفحة.</pdf-max-page>
+        <using-webDAV>أو فتحه بواسطة مايكروسوفت أوفيس</using-webDAV>
+        <open-on-desktop>Open on Desktop</open-on-desktop>
+        <open-in-documents>فتح في خدمة المستندات</open-in-documents>
+        <open-in-documents-tooltip>افتح هذا الملف في تطبيق المستندات</open-in-documents-tooltip>
+        <file-size-too-big>محتوى هذا الملف كبير جدا. لتتمكن من عرضه يُرجى تنزيله</file-size-too-big>
+        <webDAV>مشهد WebDAV</webDAV>
+        <download>تنزيل هذا الملف</download>
+        <htmlview>عرض بصيغة الـ HTML</htmlview>
+        <plaintextview>عرض بصيغة نص عادي</plaintextview>
+      </label>
+    </view>
+  </File>
+ 
+  <!--
+  ################resoucebundle FOR MAIL:DOCUMENT VIEW TEMPLATE##############
+  -->
+  <Mail>
+    <view>
+      <label>
+        <from>من:</from>
+        <to>إلى:</to>
+        <cc>إضافة نسخة إلى:</cc>
+        <date>التاريخ:</date>
+        <subject>الموضوع:</subject>
+        <attachment>إرفاق ملف:</attachment>
+      </label>
+    </view>
+  </Mail>
+  <!--
+  ################resoucebundle FOR EXO:VOTE VIEW TEMPLATE##############
+  -->
+  <Vote>
+    <view>
+      <label>
+        <avg-rating>تقييم</avg-rating>
+        <subscription>الأصوات</subscription>
+      </label>
+    </view>
+  </Vote>
+  <!--
+  ################resoucebundle FOR LISTVIEW VIEW TEMPLATE##############
+  -->
+  <ListView>
+    <view>
+      <label>
+        <name>الاسم</name>
+        <versionable>قابل (ـة) للإصدار</versionable>
+        <exo_owner>المالك</exo_owner>
+        <exo_dateCreated>تاريخ الانشاء</exo_dateCreated>
+        <exo_dateModified>تاريخ التعديل</exo_dateModified>
+        <auditing>تدقيق</auditing>
+      </label>
+    </view>
+  </ListView>
+
+  <!--
+  ###################### resoucebundle for exo:addMetadataAction view template ####
+  -->
+  <AddMetadata>
+    <view>
+      <label>
+        <action-name>اسم الاجراء</action-name>
+        <lifecycle>دورة الحياة</lifecycle>
+        <metadata>قالب المعلومات القياسية</metadata>
+        <description>الوصف</description>
+      </label>
+    </view>
+  </AddMetadata>
+
+  <!--
+  ###################### resoucebundle for exo:autoVersioning view template ####
+  -->
+  <AutoVersioning>
+    <view>
+      <label>
+        <action-name>اسم الاجراء</action-name>
+        <lifecycle>دورة الحياة</lifecycle>
+        <description>الوصف</description>
+      </label>
+    </view>
+  </AutoVersioning>
+  <!--
+  ###################### resoucebundle for exo:enableVersiong view template ####
+  -->
+  <EnableVersioning>
+    <view>
+      <label>
+        <action-name>الاسم</action-name>
+        <lifecycle>دورة الحياة</lifecycle>
+        <description>الوصف</description>
+      </label>
+    </view>
+  </EnableVersioning>
+  <!--
+  ###################### resoucebundle for dc:elementSet view template ####
+  -->
+  <ElementSet>
+    <view>
+      <label>
+        <not-avaliable>غير متوفرة</not-avaliable>
+        <core-elements>العناصر الأساسية</core-elements>
+        <title>العنوان</title>
+        <creator>الصانع</creator>
+        <subject>الموضوع</subject>
+        <source>المصدر</source>
+        <contributor>المُساهم</contributor>
+        <resource-type>نوع المورد</resource-type>
+        <date>التاريخ</date>
+        <publisher>الناشر</publisher>
+        <description>الوصف</description>
+        <rights>الحقوق</rights>
+        <relation>العلاقة</relation>
+        <format>الشكل</format>
+        <coverage>التغطية</coverage>
+        <identifier>المعرف</identifier>
+        <languages>اللغات</languages>
+      </label>
+      <action>
+        <add-edit>الاضافة/التغيير</add-edit>
+        <cancel>#{word.cancel}</cancel>
+      </action>
+      <tooltip>
+        <cancel>#{word.cancel}</cancel>
+        <add-edit>اضافة/تغييرالخاصيات</add-edit>
+      </tooltip>
+    </view>
+  </ElementSet>
+
+  <ScriptAction>
+    <view>
+      <label> 
+        <isDeep>عميق</isDeep>
+        <nodetypes>نوع العقدة</nodetypes>
+        <affectedNodeTypeNames>أنواع العقد المعنية بالأمر</affectedNodeTypeNames>
+        <nodeTypeName>أسماء نوع العقد</nodeTypeName>
+      </label> 
+    </view>
+  </ScriptAction>
+  
+  <AddMetadata>
+    <view>
+      <label>
+        <isDeep>عميق</isDeep>
+        <nodetypes>نوع العقدة</nodetypes>
+        <affectedNodeTypeNames>أنواع العقد المعنية بالأمر</affectedNodeTypeNames>
+        <nodeTypeName>Node type names</nodeTypeName>
+      </label> 
+    </view>
+  </AddMetadata>
+
+  <EnableVersioning>
+    <view>
+      <label>
+        <isDeep>عميق</isDeep>
+        <nodetypes>نوع العقدة</nodetypes> 
+        <affectedNodeTypeNames>أنواع العقد المعنية بالأمر</affectedNodeTypeNames>
+        <nodeTypeName>أسماء أنواع العقدة</nodeTypeName>
+      </label> 
+    </view>
+  </EnableVersioning>
+  
+  <AutoVersioning>
+    <view>
+      <label>
+        <isDeep>عميق</isDeep>
+        <nodetypes>أنواع العقد</nodetypes>
+        <affectedNodeTypeNames>أنواع العقد المعنية بالأمر</affectedNodeTypeNames>
+        <nodeTypeName>Node type names</nodeTypeName>
+      </label> 
+    </view>
+  </AutoVersioning>
+  
+   <AccessibleMedia>
+    <view>
+      <label>
+      <Play-audio-description-of-this-video>وصف المقطع الصوتي</Play-audio-description-of-this-video>
+      <Read-more>اقرأ المزيد</Read-more>
+      <Read-less>قراءة الأقل</Read-less>
+      <Switch-back-to-original-video>الفيديو الأصلي</Switch-back-to-original-video>
+      </label>
+      <tooltip>
+      <A-second-media-file-is-available-as-audio-description>هنالك ملف سمعي آخر متاح في شكل الوصف السمعي</A-second-media-file-is-available-as-audio-description>
+      </tooltip>
+    </view>
+  </AccessibleMedia>
+ 
+</bundle>

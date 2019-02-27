@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UIFCCForm>
+    <msg>
+      <name-not-allowed>هذا الاسم غير متاح.</name-not-allowed>
+      <in-versioning>يجب إنهاء معالجة هذه العقدة قبل إضافة أخرى.</in-versioning>
+      <cannot-save>حدث خطأ أثناء عمليّة حفظ العقدة.</cannot-save>
+      <saved-successfully>{0}</saved-successfully>
+      <not-support>لا يمكن تحميل النموذج '{0}'.</not-support>
+      <not-add-folder>يمكن إضافة ملفات فقط إلى هذا المجلد.</not-add-folder>
+      <access-denied>ممنوع الوصول ! ليس لديك صلاحيّات الاضافة على مستوى '{0}'.</access-denied>
+      <path-not-found>تم حذف المسار '{0}' أو ربما يكون غير صحيح</path-not-found>
+      <node-locked>العقدة '{0}' مُؤمّنة. الرجاء فكّ القفل قبل  إنشاء وثائق.</node-locked>
+      <node-isExist>هذه العقدة موجود مسبقا  في '{0}'</node-isExist>
+      <get-dialog-path>لا يمكن العثور على المسار المطلوب</get-dialog-path>
+      <new-jcr-template>طرأ خطأ أثناء عمليّة انشاء القالب الجديد</new-jcr-template>
+    </msg>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIFCCForm>
+
+  <UIFCCConfig>
+    <label>
+      <UIFCCSaveLocationField>مكان الحفظ</UIFCCSaveLocationField>
+      <UIFCCWorkspaceFormSelectBox>اختيار مساحة عمل</UIFCCWorkspaceFormSelectBox>
+      <UIFCCTemplateField>خيارات النموذج</UIFCCTemplateField>
+      <UIFCCLocationFormInputAction>مكان الحفظ</UIFCCLocationFormInputAction>
+      <UIFCCTemplateFormSelectBox>اختيار النموذج</UIFCCTemplateFormSelectBox>
+      <UIFCCSaveFormStringInput>تخصيص زر الحفظ</UIFCCSaveFormStringInput>
+      <UIFCCMessageFormTextareaInput>رسالة شكر</UIFCCMessageFormTextareaInput>
+      <UIFCCRedirectFormCheckboxInput>إعادة توجيه:</UIFCCRedirectFormCheckboxInput>
+      <UIFCCRedirectPathFormStringInput>إعادة توجيه المسار:</UIFCCRedirectPathFormStringInput>
+      <UIFCCActionField>الإجراءات</UIFCCActionField>
+    </label>
+    <msg>
+      <save-successfully>حفظ تفضيلات المدخل بنجاح.</save-successfully>
+      <item-not-found>هذا المسار غير صحيح.</item-not-found>
+      <fileType-empty>يجب عليك اختيار نوع الملف قبل الحفظ</fileType-empty>
+      <ws-empty>الرجاء تحديد مساحة عمل واحدة.</ws-empty>
+      <action-empty>يجب تحديد مجلد مع إجراء</action-empty>
+      <message-empty>الرسالة لا يمكن أن تكون فارغة عندما لم تقم بتحديد الخيار لإعادة توجيه ، أو المسار فارغ</message-empty>
+      <get-template>طرأ خطأ أثناء محاولة الوصول الى القالب</get-template>
+      <set-template-option>طرأ خطأ أثناء محاولة اعادة ضبط خيارات القالب</set-template-option>
+      <do-select>طرأ خطأ اثناء اختيار المكان.</do-select>
+      </msg>
+    <action>
+      <Save>#{word.save}</Save>
+    </action>
+  </UIFCCConfig>
+
+  <UIFCCLocationFormInputAction>
+    <title>
+      <SelectPath>اختيار المسار</SelectPath>
+    </title>
+  </UIFCCLocationFormInputAction>
+
+  <UIFCCActionList>
+    <header>
+      <name>الاسم</name>
+      <description>الوصف</description>
+      <instanceOf>مثيل من</instanceOf>
+      <action>اجراء</action>
+    </header>
+    <action>
+      <Add>أضف</Add>
+    </action>
+    <msg>
+      <empty>بدون إجراءات</empty>
+      <remove-popup-first>يجب إغلاق نافذة قبل حذف هذه العقدة.</remove-popup-first>
+      <confirm-delete-action>هل تريد حذف هذا الاجراء؟</confirm-delete-action>
+      <template-empty>القالب أو النموذج '{0}' غير موجود أو رُبّما كان فارغا.</template-empty>
+      <template-null>النموذج مُلغى أو فارغ، أوربّما لم يكن لديك صلاحيّة للوصول إلى هذا الأخير.</template-null>
+      <access-denied>رفض الوصول! ليس لديك صلاحيّة للقيام بذلك الاجراء.</access-denied>
+    </msg>
+  </UIFCCActionList>
+
+  <UIFCCSelectorPopupWindow>
+    <title>
+      <UIOneNodePathSelector>حدد الموقع</UIOneNodePathSelector>
+    </title>
+  </UIFCCSelectorPopupWindow>
+
+  <UIWorkspaceList>
+    <label>
+      <workspaceName>مساحة العمل</workspaceName>
+      <rootNodePath>المسار الجذر:</rootNodePath>
+      <rootNodeInfo>العقدة الجذر</rootNodeInfo>
+    </label>
+  </UIWorkspaceList>
+
+  <rootNodeInfo>
+    <title>
+      <AddRootNode>إضافة العقدة الرئيسية (Root Node)</AddRootNode>
+    </title>
+  </rootNodeInfo>
+
+  <UITreeList>
+    <info>
+      <child-not-found>هذه العقدة لا تملك فروع بعد.</child-not-found>
+    </info>
+    <header>
+      <name>اسم</name>
+      <action>اجراء</action>
+    </header>
+  </UITreeList>
+
+  <UIFCCActionPopupWindow>
+    <title>
+      <UIFCCActionContainer>إضافة اجراء</UIFCCActionContainer>
+    </title>
+  </UIFCCActionPopupWindow>
+
+  <UIFCCActionForm>
+    <title>إضافة / تغيير الاجراء</title>
+    <action>
+      <Save>#{word.save}</Save>
+      <Close>#{word.close}</Close>
+    </action>
+    <msg>
+      <repository-exception>لا يمكن تأكيد الحفظ. لا يجب أن يحتوي الاسم الذي تمّ ادخاله على مؤشّر أو دليل نحو آخر عنصر لديه.</repository-exception>
+      <numberformat-exception>لا يمكن حفظ هذا الاجراء. يجب ألا يكون أن يحتوي الاسم على '[' أو ']'.</numberformat-exception>
+      <existed-action>اسم الاجراء '{0}' ' موجود مُسبقــا. يُرجى اختيار اسما آخرا.</existed-action>
+      <unable-add-action>غير قادر على إضافة هذا الإجراء</unable-add-action>
+      <unable-add>لا يمكن إضافة هذا الاجراء! هذه العقدة هي الجذر أو ربّما ليس لديك الصلاحيّات الكافية.</unable-add>
+      <not-support>الحوار '{0}' غير مدعوم</not-support>
+      <no-permission-add>رفض الوصول ! ليس لديك الحق في إضافة اجراءات هنا.</no-permission-add>
+      <access-denied>رفض الوصول ! ليس لديك صلاحيّات للوصول إلى هذا النموذج.</access-denied>
+    </msg>
+    <validator>
+      <validator>مُدقّق</validator>
+      <destPath>ذات مسار</destPath>
+    </validator>
+  </UIFCCActionForm>
+
+  <UIFCCActionTypeForm>
+    <label>
+      <actionType>انشاء اجراء لهذا النّوع</actionType>
+    </label>
+    <msg>
+      <not-support>غير قادر على تحميل النموذج الخاص بـ '{0}'</not-support>
+      <do-not-permission>ليس لديك صلاحيّة لتحميل النموذج  الخاصّ بـ'{0}'</do-not-permission>
+    </msg>
+  </UIFCCActionTypeForm>
+
+  <PopupComponent>
+    <title>
+      <UIOneNodePathSelector>حدد الموقع</UIOneNodePathSelector>
+      <UIPermissionSelector>صلاحيّة المستكشف</UIPermissionSelector>
+      <UICategoriesSelector>Add Categories</UICategoriesSelector>
+    </title>
+  </PopupComponent>
+
+  <DateTimeValidator>
+    <msg>
+      <Invalid-input>صيغة الحقل '{0}' ذات القيمة '{1}'غير صحيحة.</Invalid-input>
+    </msg>
+  </DateTimeValidator>
+
+  <UITabPane>
+    <title>
+      <UICategoriesSelectPanel>اختيار فئات</UICategoriesSelectPanel>
+      <UISelectedCategoriesGrid>الفئات المُشار إليها</UISelectedCategoriesGrid>
+    </title>
+  </UITabPane>
+
+  <UICategoriesSelector>
+    <action>
+      <close>#{word.close}</close>
+    </action>
+  </UICategoriesSelector>
+
+  <PopupComponent>
+    <title>
+      <UIOneTaxonomySelector>إضافة فئات</UIOneTaxonomySelector>
+    </title>
+  </PopupComponent>
+
+  <UITreeTaxonomyList>
+    <label>
+      <taxonomyTree>شجرة الفئات</taxonomyTree>
+    </label>
+  </UITreeTaxonomyList>
+
+  <UIFCCTaxonomyPopupWindow>
+    <title>
+      <UIOneTaxonomySelector>منتق الفئات</UIOneTaxonomySelector>
+    </title>
+  </UIFCCTaxonomyPopupWindow>
+</bundle>

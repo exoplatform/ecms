@@ -1,0 +1,2597 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.UIECMAdminControlPanel #
+  ################################################################################
+  -->
+  <UIECMAdminControlPanel>
+    <tab>
+      <label>
+        <Templates>النماذج</Templates>
+        <Explorer>المستكشف</Explorer>
+        <Repository>مُستودع البيانات</Repository>
+        <Advanced>متطور/ة</Advanced>
+      </label>
+    </tab>
+    <label>
+      <UITaxonomyManagerTrees>فئات</UITaxonomyManagerTrees>
+      <UIMetadataManager>دليل المعلومات القياسيّة</UIMetadataManager>
+      <UINamespaceManager>أسماء الفضاءات</UINamespaceManager>
+      <UINodeTypeManager>أنواع العقد</UINodeTypeManager>
+      <UITemplatesManager>وثائق</UITemplatesManager>
+      <UICLVTemplatesManager>قائمة</UICLVTemplatesManager>
+      <UIViewManager>المشاهد</UIViewManager>
+      <UIDriveManager>الأقراص</UIDriveManager>
+      <UIQueriesManager>استبيانات</UIQueriesManager>
+      <UIActionManager>الإجراءات</UIActionManager>
+      <UIScriptManager>سكريبتات</UIScriptManager>
+      <UIUnLockManager>أقفال</UIUnLockManager>
+      <UIFolksonomyManager>تصنيفات</UIFolksonomyManager>
+    </label>
+    <msg>
+      <access-denied>غير مسموح بالدخول. لم تتحصل على الصلاحية الكافية للقيام بهذه الاجراء.</access-denied>
+    </msg>
+  </UIECMAdminControlPanel>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.UITaxonomy #
+  ################################################################################
+  -->
+  <UITaxonomyWorkingArea>
+    <msg>
+      <referential-integrity>لا يمكن قراءة الملف من المصدر أو رُبّما يكون المقصد فئة فرعية.</referential-integrity>
+      <no-taxonomy-selected>يجب عليك نسخ أو قص فئة واحدة على الأقل.</no-taxonomy-selected>
+      <node-is-cutting>لا يمكنك اللصق هنا. ربما تمّ قطع فئة العقدة '{0}'</node-is-cutting>
+      <can-not-paste>لا توجد بيانات في الحافظة تستطيع لصقها.</can-not-paste>
+      <reference-exception>لا يمكن حذف هذه الفئة. حاليّا هي مُشار إليها بواسطة محتوى.</reference-exception>
+      <path-error>ربما، هناك مشكل عند حذف هذا التصنيف.</path-error>
+    </msg>
+  </UITaxonomyWorkingArea>
+  <UITaxonomyManager>
+    <msg>
+      <confirm-delete>هل ترغب حقّـا في حذف هذه الفئة؟</confirm-delete>
+    </msg>
+    <title>
+      <add>اضف</add>
+      <paste>ألصق</paste>
+      <cut>قص</cut>
+      <copy>نسخ</copy>
+      <remove>حذف</remove>
+    </title>
+  </UITaxonomyManager>
+
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyTreeContainer#
+  ################################################################################
+  -->
+  <UITaxonomyTreeContainer>
+    <tab>
+      <info>
+        <UITaxonomyTreeMainForm>حدّد اسم الفئة، مساحة العمل و مسار الصفحة الرئيسيّة.</UITaxonomyTreeMainForm>
+        <UIPermissionTreeManager>تعيين صلاحيّة لاختيار شجرة الفئات</UIPermissionTreeManager>
+        <UIActionTaxonomyManager>اضافة اجراء الى شجرة الفئات قصد اتمام عمليّة الانشاء أو التغيير</UIActionTaxonomyManager>
+        <UITaxonomyTreeCreateChild>تعديل تصنيف الشجرة من خلال إضافة ، نسخ ، واختيار  الصلاحيّات.</UITaxonomyTreeCreateChild>
+      </info>
+    </tab>
+    <msg>
+      <not-exist-tree>شجرة الفئات لا وجود لها حتى الآن.</not-exist-tree>
+    </msg>
+  </UITaxonomyTreeContainer>
+
+  <!--
+##########################################################################################
+#     org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyTreeMainForm          #
+##########################################################################################
+-->
+  <UITaxonomyTreeMainForm>
+    <action>
+      <Reset>Reset</Reset>
+    </action>
+    <msg>
+      <name-not-allowed>اسم محظور</name-not-allowed>
+      <name-emty>مسار الصفحة الرئيسيّة ضروري</name-emty>
+      <homePath-emty>البيت الطريق فارغة</homePath-emty>
+      <targetPath-emty>المسار الهدف ضروري</targetPath-emty>
+      <taxonomytree-existed>اسم شجرة الفئات موجود مُسبقا</taxonomytree-existed>
+    </msg>
+  </UITaxonomyTreeMainForm>
+
+  <TaxonomyTreeMainForm>
+    <label>
+      <TaxoTreeName>الاسم</TaxoTreeName>
+      <TaxoTreeWorkspace>مساحة عمل</TaxoTreeWorkspace>
+      <TaxoTreeHomePath>مسار الصفحة الرئيسية</TaxoTreeHomePath>
+    </label>
+  </TaxonomyTreeMainForm>
+
+  <TaxonomyTreeHomePath>
+    <title>
+      <AddPath>اضافة مسار</AddPath>
+    </title>
+  </TaxonomyTreeHomePath>
+
+  <!--
+##########################################################################################
+#     org.exoplatform.ecm.webui.component.admin.taxonomy.tree.info.UIPermissionTreeInfo  #
+##########################################################################################
+-->
+  <UIPermissionTreeInfo>
+    <action>
+      <title>
+        <Delete>حذف</Delete>
+        <Edit>قراءة</Edit>
+      </title>
+    </action>
+    <header>
+      <usersOrGroups>مستخدم أو مجموعة</usersOrGroups>
+      <read>قراءة</read>
+      <addNode>إضافة العقدة</addNode>
+      <setProperty>تعيين الخاصية</setProperty>
+      <remove>قراءة</remove>
+      <action>العمل</action>
+    </header>
+  </UIPermissionTreeInfo>
+
+  <!--
+  ##########################################################################################
+  #     org.exoplatform.ecm.webui.component.admin.taxonomy.tree.info.UIPermissionTreeForm  #
+  ##########################################################################################
+  -->
+  <UIPermissionTreeForm>
+    <msg>
+      <have-not-any-permission>يُرجى تحديد على الأقلّ صلاحية لهذه العقدة</have-not-any-permission>
+    </msg>
+  </UIPermissionTreeForm>
+
+  <!--
+  ################################################################################
+  #     org.exoplatform.ecm.webui.component.admin.taxonomy.UIActionForm          #
+  ################################################################################
+  -->
+
+  <UIActionForm>
+    <title>إضافة اجراء إلى فئة الشّجرة</title>
+    <action>
+      <Save>#{word.save}</Save>
+    </action>
+    <msg>
+      <name-not-allowed>اسم محظور</name-not-allowed>
+      <path-invalid>مسار غير صالح</path-invalid>
+      <taxonomy-existed>شجرة الفئات موجودة مُسبقا</taxonomy-existed>
+      <taxonomy-node-existed>فئة العقدة موجودة مُسبقا</taxonomy-node-existed>
+      <no-permission-add>ليس لديك الحق في إضافة إجراء.</no-permission-add>
+      <not-created-tree>لم يتمّ بعد انشاء شجرة الفئات</not-created-tree>
+    </msg>
+  </UIActionForm>
+
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.UITemplatesManager #
+  ################################################################################
+  -->
+  <UITemplatesList>
+    <header>
+      <name>إسم القالب</name>
+      <action>الأعمال</action>
+    </header>
+  </UITemplatesList>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.UINamespaceForm  #
+  ################################################################################
+  -->
+  <NameSpacePopup>
+    <title>
+      <UINamespaceForm>شكل إسم الفضاء</UINamespaceForm>
+    </title>
+  </NameSpacePopup>
+  <UINamespaceForm>
+    <title>تسجيل إسم الفضاء جديد</title>
+    <label>
+      <namespace>بادئة إسم الفضاء</namespace>
+      <uri>عنوان الـ URI</uri>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <register-unsuccessfull>إسم فضاء او 'URI' موجود مُسبقا !</register-unsuccessfull>
+      <prefix-null>يُرجى ادخال بادئة لاسم الفضاء</prefix-null>
+      <uri-null>يُرجى تحديد الـURI الخاص باسم الفضاء</uri-null>
+    </msg>
+  </UINamespaceForm>
+  <!--
+  ################################################################################
+  #      org.exoplatform.ecm.webui.component.admin.namespace.UINamespaceList #
+  ################################################################################
+  -->
+  <UINamespaceList>
+    <header>
+      <prefix>بادئة</prefix>
+      <uri>اسم الفضاء الخاص بالـ URI</uri>
+      <action>اجراء</action>
+    </header>
+    <action>
+      <AddNamespace>تسجيل</AddNamespace>
+    </action>
+  </UINamespaceList>
+  <NamespacePopup>
+    <title>
+      <UINamespaceForm>حفظ إسم فضاء جديد</UINamespaceForm>
+    </title>
+  </NamespacePopup>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.UIMetadataList #
+  ################################################################################
+  -->
+  <UIMetadataList>
+    <label>
+      <false>خطأ</false>
+      <true>صحيح</true>
+      <True>صحيح</True>
+      <False>خطأ</False>
+    </label>
+    <title>
+      <view>المشهد</view>
+      <edit>اجراء</edit>
+      <delete>حذف</delete>
+    </title>
+    <header>
+      <icon>أيقونة</icon>
+      <name>دليل المعلومات</name>
+      <type>نوع</type>
+      <internalUse>استعمال داخلي</internalUse>
+      <action>Action</action>
+    </header>
+    <msg>
+      <confirm-delete>هل تؤكّد عمليّة الحذف؟</confirm-delete>
+      <delete-successful>تم حذف القالب '{0}' بنجاح</delete-successful>
+      <path-not-found-exception>تمّ حذف أو تغيير بيانات التعريف. يُرجى النقر فوق زر التّحديث.</path-not-found-exception>
+    </msg>
+    <action>
+      <Add>إضافة قالب المعلومات القياسية</Add>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIMetadataList>
+  <MetadataPopupAddNew>
+    <title>
+      <UIMetadataForm>إضافة نموذج لدليل المعلومات</UIMetadataForm>
+    </title>
+  </MetadataPopupAddNew>
+  <MetadataPopupEdit>
+    <title>
+      <UIMetadataForm>تغيير نموذج لدليل المعلومات</UIMetadataForm>
+    </title>
+  </MetadataPopupEdit>
+  <MetataPermissionPopup>
+    <title>
+      <MetadataPermission>تعيين الصلاحيّات</MetadataPermission>
+      <QueriesPermissionBrowse>اضافة صلاحيّات</QueriesPermissionBrowse>
+    </title>
+  </MetataPermissionPopup>
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.metadata.UIMetadataForm #
+  ################################################################################
+  -->
+  <UIMetadataForm>
+    <title>تخطيط دليل المعلومات</title>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Save>طبق</Save>
+    </action>
+    <header>
+      <icon>أيقونة</icon>
+      <label>اسم العقدة</label>
+      <input>اجراء</input>
+    </header>
+    <label>
+      <dialogTemplate>قالب واجهة المستخدم</dialogTemplate>
+      <viewTemplate>نموذج العرض</viewTemplate>
+      <metadataName>إسم دليل المعلومات</metadataName>
+      <viewPermission>الصلاحيّة</viewPermission>
+      <permission>UIMetadataForm</permission>
+      <metadataLabel>الرمز:</metadataLabel>
+    </label>
+    <tab>
+      <label>
+        <metadataTypeTab>نوع دليل المعلومات</metadataTypeTab>
+        <dialogTab>قالب المشهد</dialogTab>
+        <viewTab>قالب واجهة المستخدم</viewTab>
+      </label>
+    </tab>
+  </UIMetadataForm>
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.metadata.UIMetadataView #
+  ################################################################################
+  -->
+  <UIMetadataView>
+    <header>
+      <name>اسم العنصر</name>
+      <type>النوع</type>
+      <description>الوصف</description>
+      <isMixin>نوعه 'Mixin'</isMixin>
+      <orderable>ترتيب الفروع</orderable>
+    </header>
+    <info>
+      <description>الوصف</description>
+    </info>
+    <tab>
+      <element>العناصر</element>
+      <metadataView>قالب المعلومات القياسية</metadataView>
+    </tab>
+    <action>
+      <Cancel>#{word.close}</Cancel>
+      <Back>#{word.back}</Back>
+    </action>
+  </UIMetadataView>
+  <ViewMetadataPopup>
+    <title>
+      <UIMetadataView>معلومات حول قالب المعلومات القياسية</UIMetadataView>
+    </title>
+  </ViewMetadataPopup>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.UIDriveManager #
+  ################################################################################
+  -->
+  <UIDriveList>
+    <header>
+      <icon>أيقونة</icon>
+      <name>الاسم</name>
+      <workspace>فضاء العمل</workspace>
+      <homePath>مسار الصّفحة الرئيسيّة</homePath>
+      <permissions>اجراء</permissions>
+      <views>المشهد</views>
+      <action>العمل</action>
+    </header>
+    <tooltip>
+      <Delete>حذف</Delete>
+      <EditInfo>تغيير</EditInfo>
+    </tooltip>
+    <msg>
+      <confirm-delete>اضافة صلاحيّة</confirm-delete>
+    </msg>
+    <action>
+      <AddDrive>إضافة قرص</AddDrive>
+    </action>
+    <label>
+      <permission>{0} في {1}</permission>
+    </label>
+  </UIDriveList>
+  <UIDriveForm>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Save>#{word.save}</Save>
+      <Back>#{word.back}</Back>
+      <Refresh>#{word.refresh}</Refresh>
+    </action>
+    <msg>
+      <drive-exists>يُرجى اختيار طريقة عرض</drive-exists>
+      <workspace-path-invalid>مسار فضاء العمل غير صحيح</workspace-path-invalid>
+      <drive-views-invalid>يجب أن تختار مشهد تطبيقي</drive-views-invalid>
+      <icon-not-found>أيقونة غير موجودة.</icon-not-found>
+      <permission-null>يجب أن تختار صلاحيّة لهذا القرص.</permission-null>
+      <allowCreateFolders>يجب تحديد نوع المجلد.</allowCreateFolders>
+      <name-null>يُرجى ادخال اسم القرص.</name-null>
+      <fileName-invalid>هناك بعض الأحرف الغير متاحة في هذا الإسم.</fileName-invalid>
+    </msg>
+    <tab>
+      <label>
+        <DriveInputSet>القرص</DriveInputSet>
+        <ViewsInputSet>تطبيق طرق العرض</ViewsInputSet>
+        <PermissionInputSet>تعيين الصلاحيّات</PermissionInputSet>
+      </label>
+    </tab>
+    <label>
+      <name>الاسم</name>
+      <workspace>فضاء العمل</workspace>
+      <homePath>مسار الصّفحة الرئيسية:</homePath>
+      <icon>أيقونة فضاء العمل</icon>
+      <viewPreferences>مشاهدة الوثائق ذات صلة</viewPreferences>
+      <viewNonDocument>مشاهدة اللاوثائق</viewNonDocument>
+      <viewSideBar>إضهار الشريط الجانبي</viewSideBar>
+      <permissions>الصلاحيّات</permissions>
+      <showHiddenNode>مشاهدة العُقد المخفية</showHiddenNode>
+      <allowCreateFolders>السّماح بإنشاء مجلد:</allowCreateFolders>
+      <Admin>المدير:</Admin>
+      <Categories>الفئات:</Categories>
+      <Icons>الأيقونات:</Icons>
+      <List>قائمة:</List>
+      <Web>واب:</Web>
+    </label>
+  </UIDriveForm>
+  <AddDriveManagerPopup>
+    <title>
+      <UIDriveForm>إضافة قرص</UIDriveForm>
+    </title>
+  </AddDriveManagerPopup>
+  <EditDriveManagerPopup>
+    <title>
+      <UIDriveForm>تغيير القرص</UIDriveForm>
+    </title>
+  </EditDriveManagerPopup>
+  <UITreeList>
+    <info>
+      <child-not-found>العقدة الفرعيّة غير موجودة</child-not-found>
+    </info>
+    <header>
+      <name>الاسم</name>
+      <action>اجراء</action>
+    </header>
+  </UITreeList>
+
+  <UIRepositoryList>
+    <titlebar>
+      <label>إدارة مهام الـ'ECM'</label>
+    </titlebar>
+  </UIRepositoryList>
+
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeManager #
+  ################################################################################
+  -->
+  <UINodeTypeManager>
+    <header>
+      <icon>أيقونة</icon>
+      <label>إسم العقدة</label>
+      <input>عمل</input>
+    </header>
+    <action>
+      <Save>#{word.save}</Save>
+    </action>
+  </UINodeTypeManager>
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeList #
+  ################################################################################
+  -->
+  <UINodeTypeList>
+    <label>
+      <true>صحيح</true>
+      <false>خطأ</false>
+    </label>
+    <header>
+      <icon>أيقونة</icon>
+      <nodeType>نوع العقدة</nodeType>
+      <mixinType>نوع 'Mixin'</mixinType>
+      <orderable>أبناء العقد مرتبة</orderable>
+      <action>عمل</action>
+    </header>
+    <action>
+      <Export>تصدير</Export>
+      <Import>استيراد</Import>
+      <Add>أضف</Add>
+    </action>
+    <tooltip>
+      <View>المشهد</View>
+      <Edit>تغيير</Edit>
+      <Delete>حذف</Delete>
+    </tooltip>
+    <msg>
+      <confirm-delete>هل تريد حقا أن تحذف؟</confirm-delete>
+    </msg>
+  </UINodeTypeList>
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeOptionList #
+  ################################################################################
+  -->
+  <UINodeTypeOptionList>
+    <action>
+      <Save>#{word.save}</Save>
+      <Add>أضف</Add>
+    </action>
+    <header>
+      <icon>أيقونة</icon>
+      <label>إسم العقدة</label>
+      <input>عمل</input>
+    </header>
+  </UINodeTypeOptionList>
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeForm #
+  ################################################################################
+  -->
+  <UINodeTypeForm>
+    <tab>
+      <label>
+        <nodeTypeDefinition>نوع العقدة</nodeTypeDefinition>
+        <propertyDefinition>الخاصية</propertyDefinition>
+        <childNodeDefinition>الفروع</childNodeDefinition>
+        <superTypeTab>الانواع السوبر</superTypeTab>
+        <DefaultTypeTab>النوع الرئيسي الافتراضي</DefaultTypeTab>
+        <RequiredTypeTab>النوع الرئيسي الضروري</RequiredTypeTab>
+        <Contraints>القيود</Contraints>
+      </label>
+    </tab>
+    <label>
+      <propertiesDefinitions>تعريف الخاصيات</propertiesDefinitions>
+      <childDefinitions>تعريف العقد الفروع</childDefinitions>
+      <namespace>اسم الفضاء</namespace>
+      <propertyNamespace>اسم الفضاء</propertyNamespace>
+      <nodeTypeName>اسم نوع العقدة</nodeTypeName>
+      <mixinType>نوعه 'Mixin'</mixinType>
+      <hasOrderableChildNodes>الفروع مرتبة</hasOrderableChildNodes>
+      <primaryItemName>اسم العنصر الرئيسي</primaryItemName>
+      <superTypes>الانواع السوبر</superTypes>
+      <propertyname>الاسم</propertyname>
+      <requiredType>النوع الضروري</requiredType>
+      <multiple>متعدد</multiple>
+      <mandatory>إجباري</mandatory>
+      <autoCreated>تمّ انشاؤه بصفة أتوماتيكيّة</autoCreated>
+      <parentversion>توريث الاصدار</parentversion>
+      <protected>للقراءة فقط</protected>
+      <constraints>قيم</constraints>
+      <UIFormTableInputSet>UIFormTableInputSet</UIFormTableInputSet>
+      <sameNameSiblings>اسم وحيد للفرع</sameNameSiblings>
+      <childNamespace>اسم الفضاء</childNamespace>
+      <childMandatory>إجباري</childMandatory>
+      <childAutocreated>انشاء الي</childAutocreated>
+      <childParentversion>توريث الاصدار</childParentversion>
+      <childProtected>للقراءة فقط</childProtected>
+      <childNodename>الاسم</childNodename>
+      <requiredPrimaryType>النوع الرئيسي الضروري</requiredPrimaryType>
+      <defaultPrimaryType>النوع الرئيسي الافتراضي</defaultPrimaryType>
+      <valueconstraints>القيود</valueconstraints>
+    </label>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Save>#{word.save}</Save>
+      <SaveDraft>حفظ المسودة</SaveDraft>
+      <AddProperty>اضافة خاصية</AddProperty>
+      <AddChild>اضافة فرع</AddChild>
+      <AddConstraints>إضافة قيود</AddConstraints>
+      <Back>#{word.back}</Back>
+      <AddType>اضافة نوع</AddType>
+      <AddValue>اضافة</AddValue>
+      <CancelConstraints>#{word.cancel}</CancelConstraints>
+      <CancelTab>#{word.cancel}</CancelTab>
+      <UpdateChild>#{word.update}</UpdateChild>
+      <CancelChild>#{word.cancel}</CancelChild>
+      <UpdateProperty>#{word.update}</UpdateProperty>
+      <CancelProperty>#{word.cancel}</CancelProperty>
+      <Close>#{word.close}</Close>
+    </action>
+    <msg>
+      <register-successfully>نوع العقدة '{0}' تم تسجيله بنجاح</register-successfully>
+      <supertype-is-madatory>النوع السوبر إجباري لتسجيل نوع عقدة جديد. يجب اختيار نوع سوبر واحد على الاقل</supertype-is-madatory>
+      <register-failed>تسجيل نوع العقدة لم يتم بنجاح. اما انه موجود من قبل او ان الانواع السوبر غير صحيحة</register-failed>
+      <nodeType-name>اسم نوع العقدة ضروري</nodeType-name>
+      <fileName-invalid>هناك بعض احرف في الاسم غير صحيحة</fileName-invalid>
+      <node-type-exists>نوع العقدة '{0}' موجود من قبل</node-type-exists>
+      <node-type-name>اسم نوع العقدة غير صحيح</node-type-name>
+      <values-error>اختر نوع عقدة واحد بالنسبة لالنوع الرئيسي الافتراضي</values-error>
+      <confirm-delete-child>هل ترغب حقا في حذف العقدة الفرع ؟</confirm-delete-child>
+      <confirm-delete-property>هل ترغب حقا في حذف هذه الخاصية؟</confirm-delete-property>
+    </msg>
+  </UINodeTypeForm>
+  <UIPropertyDefinitionForm>
+    <tab>
+      <label>
+        <constraints>القيود</constraints>
+        <UIFormMultiValueInputSet>القيود</UIFormMultiValueInputSet>
+      </label>
+    </tab>
+    <msg>
+      <property-name>اسم الخاصية غير صحيح</property-name>
+      <not-supported-value-constraints>هذا النوع الضروري لا يستجيب للقيود</not-supported-value-constraints>
+    </msg>
+  </UIPropertyDefinitionForm>
+  <UIChildNodeDefinitionForm>
+    <msg>
+      <child-name>اسم  العقدة الإبن ضروري</child-name>
+      <child-invalid>الاسم يحتوي على حرف غير صالح</child-invalid>
+      <default-node-type-not-found>نوع العقدة الإفتراضي غير موجود</default-node-type-not-found>
+      <requiredPrimaryType>النوع الرئيسي ضروري</requiredPrimaryType>
+      <defaultPrimaryType>النوع الرئيسي الإفتراضي ضروري</defaultPrimaryType>
+    </msg>
+  </UIChildNodeDefinitionForm>
+  <defaultPrimaryTypePopup>
+    <title>
+      <FormdefaultPrimaryTypePopup>اختيار النوع الرئيسي الإفتراضي</FormdefaultPrimaryTypePopup>
+    </title>
+  </defaultPrimaryTypePopup>
+  <requiredPrimaryTypePopup>
+    <title>
+      <FormrequiredPrimaryTypePopup>اختيار النوع الرئيسي الإفتراضي</FormrequiredPrimaryTypePopup>
+    </title>
+  </requiredPrimaryTypePopup>
+  <superTypesPopup>
+    <title>
+      <FormsuperTypesPopup>اختيار النوع السوبر</FormsuperTypesPopup>
+    </title>
+  </superTypesPopup>
+  <NodeTypePopup>
+    <title>
+      <UINodeTypeForm>إضافة/تغيير معلومات لنوع العقدة</UINodeTypeForm>
+    </title>
+  </NodeTypePopup>
+  <ViewNodeTypePopup>
+    <title>
+      <UINodeTypeForm>عرض معلومات حول نوع العقدة</UINodeTypeForm>
+    </title>
+  </ViewNodeTypePopup>
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeExport   #
+  ################################################################################
+  -->
+  <UINodeTypeExport>
+    <header>
+      <icon>أيقونة</icon>
+      <label>إسم العقدة</label>
+      <input>اجراء</input>
+    </header>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Export>تصدير</Export>
+      <UncheckAll>الغاء اختيار الكل</UncheckAll>
+      <CheckAll>إختر الكل</CheckAll>
+    </action>
+    <title>تصدير انواع العقد</title>
+    <msg>
+      <item-null>يجب إختيار عقدة واحدة على الأقل للتصدير</item-null>
+    </msg>
+  </UINodeTypeExport>
+  <NodeTypeExportPopup>
+    <title>
+      <UINodeTypeExport>تصدير انواع العقد</UINodeTypeExport>
+    </title>
+  </NodeTypeExportPopup>
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeOptionList   #
+  ################################################################################
+  -->
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeUpload   #
+  ################################################################################
+  -->
+  <UINodeTypeUpload>
+    <label>
+      <upload>اسم الملف</upload>
+    </label>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Upload>تحميل</Upload>
+    </action>
+    <title>'XML' إستيراد  نوع عقدة من ملف ذات نوع</title>
+    <msg>
+      <filename-error>استعراض الملف نوع عقدة للاستيراد</filename-error>
+      <data-file-error>معتمدة فقط أكس ملف أو ملف مضغوط لاستيراد.</data-file-error>
+      <data-invalid>صيغة هذه البيانات غيرصحيحة. يُرجى التثبّت من نوع الملفّ ثمّ اعادة المحاولة</data-invalid>
+      <nodetype-exist>'{0}' : بيانات غير صالحة : نوع نقطة التقاطع موجودة</nodetype-exist>
+      <namespace-invalid>'{0}' : بيانات غير صالحة : مساحة الاسم غير معروف :</namespace-invalid>
+    </msg>
+  </UINodeTypeUpload>
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeImport   #
+  ################################################################################
+  -->
+  <UINodeTypeImport>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Import>إستيراد</Import>
+      <Upload>اضافة نوع الاجراء</Upload>
+    </action>
+    <header>
+      <icon>أيقونة</icon>
+      <label>إسم العقدة</label>
+      <input>عمل</input>
+    </header>
+    <title>إختيار نوع عقدة للإستيراد</title>
+    <msg>
+      <no-nodetype-registered>لم تتم عملية الحفظ لأي نوع من العقد!</no-nodetype-registered>
+      <nodetype-registered>تمّ تسجيل النّوع بنجاح</nodetype-registered>
+    </msg>
+  </UINodeTypeImport>
+  <NodeTypeImportPopup>
+    <title>
+      <UINodeTypeImportPopup>إستيراد  نوع عقدة من ملف من نوع 'XML'</UINodeTypeImportPopup>
+    </title>
+  </NodeTypeImportPopup>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.UIDriveForm #
+  ################################################################################
+  -->
+  <DriveInputSet>
+    <label>
+      <both>كل منهما</both>
+      <folderOnly>المجلد</folderOnly>
+      <unstructuredFolder>مجلد غير منظم</unstructuredFolder>
+    </label>
+    <title>
+      <AddPermission>إضافة صلاحية</AddPermission>
+      <RemovePermission>Remove Permission</RemovePermission>
+      <AddIcon>إضافة ايقونة</AddIcon>
+      <AddPath>إضافة مسار</AddPath>
+    </title>
+  </DriveInputSet>
+  <!--
+  ###################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.action.UIActionTypeList#
+  ###################################################################################
+  -->
+  <UIActionTypeList>
+    <header>
+      <name>الإسم</name>
+      <label>الاسم</label>
+      <action>الإجراءات</action>
+    </header>
+    <title>
+      <Edit>تغيير</Edit>
+      <Delete>حذف</Delete>
+    </title>
+    <action>
+      <AddAction>أضف</AddAction>
+    </action>
+    <msg>
+      <confirm-delete>هل ترغب حقّا بحذف هذا النوع من الاجراء؟</confirm-delete>
+      <cannot-delete>لا يمكن حذف هذا النوع من الاجراء لأنه في حالة استخدام من قبل نظام التشغيل.</cannot-delete>
+    </msg>
+  </UIActionTypeList>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.action.UIActionTypeForm #
+  ######################################################################################
+  -->
+  <ActionPopup>
+    <title>
+      <UIActionTypeForm>اضافة نوع الاجراء</UIActionTypeForm>
+    </title>
+  </ActionPopup>
+  <UIActionTypeForm>
+    <title>إضافة/تغيير نوع العمل</title>
+    <label>
+      <actionType>نوع الاجراء متوارث</actionType>
+      <name>الإسم (يبدأ ب 'exo:')</name>
+      <isMove>العمل مع التحرك</isMove>
+      <variables>المتغيرات:</variables>
+      <exo_businessProcessAction>طريقة العمل:</exo_businessProcessAction>
+      <exo_scriptAction>السكريبتات 'Groovy'</exo_scriptAction>
+      <exo_ruleAction>القواعد</exo_ruleAction>
+      <script>السكريبت:</script>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <action-type-added>تم اضافة نوع الاجراء '{0}' بنجاح</action-type-added>
+      <action-type-create-error>طرأ خطأ أثناء القيام بصنع نوع الاجراء.</action-type-create-error>
+      <action-name-invalid>{0}' غير صحيح، يجب أن يبدأ الاسم بـ':exo</action-name-invalid>
+      <action-exist>هذا الاجراء موجود مُسبقـا.</action-exist>
+      <fileName-invalid>هناك بعض الأحرف الغير مُتاحة في هذا الاسم.</fileName-invalid>
+    </msg>
+  </UIActionTypeForm>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.view.UIViewManager     #
+  ######################################################################################
+  -->
+  <UITabPane>
+    <title>
+      <UIViewContainer>المشاهد</UIViewContainer>
+      <ECMTemplate>قوالب الـ 'ECM'</ECMTemplate>
+      <UIScriptForm>سكريبتات</UIScriptForm>
+      <UIDialogTab>واجهة المستخدم</UIDialogTab>
+      <UIViewTab>عرض</UIViewTab>
+      <UITemplateEditForm>القالب</UITemplateEditForm>
+      <UITemplateForm>القالب</UITemplateForm>
+      <UITemplateContainer>وثائق</UITemplateContainer>
+      <UIActionsTemplateContainer>الإجراءات</UIActionsTemplateContainer>
+      <UIOthersTemplateContainer>الآخرين</UIOthersTemplateContainer>
+      <UIActionScriptContainer>اجراء</UIActionScriptContainer>
+      <UIWidgetScriptContainer>تطبيقات مصغّرة</UIWidgetScriptContainer>
+      <UIInterceptorScriptContainer>الحواجز</UIInterceptorScriptContainer>
+
+      <nodeTypeDefinition>نوع العقدة</nodeTypeDefinition>
+      <propertyDefinition>الخاصية</propertyDefinition>
+      <childNodeDefinition>الفروع</childNodeDefinition>
+      <SuperTypeTab>أنواع السوبر</SuperTypeTab>
+      <DefaultTypeTab>النوع الرئيسي الافتراضي</DefaultTypeTab>
+      <RequiredTypeTab>النوع الرئيسي ضروري</RequiredTypeTab>
+      <Contraints>القيود</Contraints>
+    </title>
+  </UITabPane>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.view.UIViewList    #
+  ######################################################################################
+  -->
+  <UIViewList>
+    <title>
+      <View>عرض</View>
+      <EditInfo>تغيير</EditInfo>
+      <Delete>حذف</Delete>
+    </title>
+    <header>
+      <name>الاسم</name>
+      <permissions>الصلاحيّات</permissions>
+      <tabList>شريط الأدوات</tabList>
+      <baseVersion>الإصدار الرئيسي</baseVersion>
+      <action>الاجراء</action>
+    </header>
+    <action>
+      <AddView>إضافة مشهد</AddView>
+    </action>
+    <msg>
+      <access-denied>.غير مسموح بالدخول!  ليس لديك الصلاحيّات الكافية لاستخدام هذه المُهمّة.</access-denied>
+      <template-in-use>لا يمكن حذف '{0}'. هو الآن بحالة إستخدام.</template-in-use>
+      <confirm-delete>هل ترغب حقــا بتأكيد عملية الحذف؟</confirm-delete>
+    </msg>
+  </UIViewList>
+  <ViewPopup>
+    <title>
+      <UIViewFormTabPane>المشهد</UIViewFormTabPane>
+    </title>
+  </ViewPopup>
+  <AddPopup>
+    <title>
+      <UIViewFormTabPane>إضافة مشهد</UIViewFormTabPane>
+      <AddPopup>اضافة قالب</AddPopup>
+    </title>
+  </AddPopup>
+  <EditPopup>
+    <title>
+      <UIViewFormTabPane>تغيير المشهد</UIViewFormTabPane>
+    </title>
+  </EditPopup>
+
+  <UITabList>
+    <title>
+      <Edit>تغيير</Edit>
+      <Delete>حذف</Delete>
+    </title>
+    <header>
+      <tabName>التبويب</tabName>
+      <localizeButtons>الوصف</localizeButtons>
+      <action>الإجراءات</action>
+    </header>
+    <action>
+      <AddTab>اضافة</AddTab>
+    </action>
+    <msg>
+      <confirm-delete>هل أنت متأكد من حذف هذه التّبويبة؟</confirm-delete>
+    </msg>
+    <grid>
+      <msg>
+        <empty>لا وجود لأيّ تبويبة ضمن هذا المشهد</empty>
+      </msg>
+    </grid>
+  </UITabList>
+
+  <UIViewPermissionList>
+    <title>حدد صاحب الصلاحيّات على هذا المشهد:</title>
+    <label>
+      <permission>{0} في {1}</permission>
+    </label>
+    <msg>
+      <confirm-delete>هل ترغب حقّا في حذف هذه الصلاحيّة؟</confirm-delete>
+      <permission-cannot-empty>عرض الصلاحيّة أمر اجباري بحيث لا يمكن أن يكون فارغاً.</permission-cannot-empty>
+    </msg>
+  </UIViewPermissionList>
+
+  <UIViewPermissionList>
+    <title>
+      <Delete>حذف</Delete>
+    </title>
+    <header>
+      <friendlyPermission>الصلاحيات</friendlyPermission>
+      <action>اجراء</action>
+    </header>
+    <action>
+      <title>
+        <Delete>حذف</Delete>
+      </title>
+    </action>
+    <grid>
+      <msg>
+        <empty>لا توجد صلاحيّات لهذا المشهد</empty>
+      </msg>
+    </grid>
+  </UIViewPermissionList>
+
+  <UIViewPermissionForm>
+    <action>
+      <Add>اضافة</Add>
+    </action>
+    <label>
+      <userOrGroup>مستخدم أو مجموعة</userOrGroup>
+    </label>
+    <msg>
+      <permission-exist>الصلاحيّة '{0}' موجودة مُسبقـا في القائمة.</permission-exist>
+    </msg>
+  </UIViewPermissionForm>
+
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.view.UIViewFormTabPane   #
+  ######################################################################################
+  -->
+  <UIViewForm>
+    <title>
+      <AddPermission>إضافة صلاحيّة</AddPermission>
+      <RemovePermission>حذف الصلاحية</RemovePermission>
+    </title>
+    <msg>
+      <view-name-invalid>يرجى ادخال الاسم</view-name-invalid>
+      <fileName-invalid>هناك بعض الأحرف الغير مُتاحة في هذا الاسم.</fileName-invalid>
+      <permission-not-empty>يجب أن تختار الصلاحية</permission-not-empty>
+      <mustbe-add-tab>يُرجى اضافة تبويبة</mustbe-add-tab>
+      <mustbe-add-permission>الرجاء اختيار صلاحيّة لهذا المشهد</mustbe-add-permission>
+      <view-exist>إسم المشهد موجود.</view-exist>
+    </msg>
+    <label>
+      <viewName>الاسم</viewName>
+      <template>قالب</template>
+      <version>استعادة الإصدار</version>
+      <enableVersion>تفعييل الإصدار</enableVersion>
+      <hideExplorerPanel>إخفاء لوحة المستكشف الموجود في الشريط الجانبي</hideExplorerPanel>
+    </label>
+  </UIViewForm>
+  <UITabForm>
+    <msg>
+      <button-select-error>يجب ان تختار واحدة على الأقل</button-select-error>
+      <tab-name-error>يجب أن تضع إسم التبويبة</tab-name-error>
+      <fileName-invalid>هناك بعض الأحرف الغير متاحة في هذا الاسم.</fileName-invalid>
+    </msg>
+    <label>
+      <version>استعادة الإصدار</version>
+      <viewName>الاسم</viewName>
+      <tabName>اسم علامة التبويب</tabName>
+      <permission>صلاحيّة</permission>
+      <tabs>تبويبات</tabs>
+      <template>النماذج</template>
+      <enableVersion>تفعييل الإصدار</enableVersion>
+      <addFolder>إضافة مجلد</addFolder>
+      <addDocument>إضافة وثيقة</addDocument>
+      <editDocument>تغيير الوثيقة</editDocument>
+      <upload>تحميل</upload>
+      <paste>ألصق</paste>
+      <search>البحث</search>
+      <viewReferences>عرض الوصلات</viewReferences>
+      <viewNodeType>مشاهدة أنواع العقد</viewNodeType>
+      <viewPermissions>عرض الصلاحيّات</viewPermissions>
+      <viewProperties>عرض الخاصيّات</viewProperties>
+      <manageVersions>ادارة الإصدارات</manageVersions>
+      <manageAuditing>ادارة التدقيقات</manageAuditing>
+      <managePublications>إدارة النشر</managePublications>
+      <manageCategories>ادارة الفئات</manageCategories>
+      <manageRelations>إدارة العلاقات</manageRelations>
+      <manageActions>إدارة الاجراءات</manageActions>
+      <exportNode>تصدير العقدة</exportNode>
+      <importNode>استيراد العقدة</importNode>
+      <viewRelations>عرض العلاقات</viewRelations>
+      <showJCRStructure>عرض هيكلة الـJCR</showJCRStructure>
+      <watchDocument>تتبّع الوثيقة</watchDocument>
+      <taggingDocument>إضافة علامات لهذه الوثيقة</taggingDocument>
+      <viewMetadatas>عرض دليل المعلومات</viewMetadatas>
+      <overloadThumbnail>تغيير الصورة المصغرة</overloadThumbnail>
+      <manageHidden>إخفاء/عرض المحتوى</manageHidden>
+      <comment>تعليق</comment>
+      <vote>تصويت</vote>
+      <addCategory>إضافة فئة</addCategory>
+      <addLocalizationLink>اضافة ترجمة</addLocalizationLink>
+      <publicationRequestApproval>طلب المصادقة</publicationRequestApproval>
+      <publicationApproveContent>المصادقة على المحتوى</publicationApproveContent>
+      <publicationPublish>نشر</publicationPublish>
+      <contentNavigation>تصفّح المحتوى</contentNavigation>
+      <addSymLink>إضافة وصلة رمزيّة</addSymLink>
+      <checkIn>مراجعة</checkIn>
+      <checkOut>إنهاء المراجعة</checkOut>
+      <shareDocuments>مشاركة</shareDocuments>
+      <openDocument>تغيير عن بعد</openDocument>
+      <editProperty>تغيير خصائص الملف</editProperty>
+      <uploadNewVersion>تحميل نسخة جديدة</uploadNewVersion>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UITabForm>
+  <UIPermissionForm>
+    <label>
+      <permission>UIPermissionForm</permission>
+    </label>
+  </UIPermissionForm>
+  <UIViewFormTabPane>
+    <tab>
+      <label>
+        <UITabContainer>اجراء</UITabContainer>
+        <UIViewForm>رأي</UIViewForm>
+        <UIViewPermissionContainer>صلاحيّة</UIViewPermissionContainer>
+      </label>
+    </tab>
+    <action>
+      <Save>#{word.save}</Save>
+      <Reset>إعادة ضبط</Reset>
+      <Cancel>#{word.cancel}</Cancel>
+      <Close>#{word.close}</Close>
+      <Restore>إستعادة</Restore>
+    </action>
+  </UIViewFormTabPane>
+  <PopupViewPermission>
+    <title>
+      <UIPermissionSelector>منتق الصلاحية</UIPermissionSelector>
+    </title>
+  </PopupViewPermission>
+
+  <TabForm_Popup>
+    <title>
+      <UITabForm>إضافة/تغيير علامة التبويب</UITabForm>
+    </title>
+  </TabForm_Popup>
+
+  <tab_permission>
+    <title>
+      <SelectUser>اختيارمستخدم</SelectUser>
+      <SelectMember>اختيار عضو</SelectMember>
+      <AddAny>أيّما</AddAny>
+    </title>
+  </tab_permission>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.view.UIECMTemplateList   #
+  ######################################################################################
+  -->
+  <UIECMTemplateList>
+    <title>
+      <View>طريقة العرض</View>
+      <EditInfo>تغيير</EditInfo>
+      <Delete>حذف</Delete>
+    </title>
+    <header>
+      <name>الإسم</name>
+      <path>القيمة</path>
+      <baseVersion>الإصدار الرئيسي</baseVersion>
+      <action>اجراء</action>
+    </header>
+    <action>
+      <Add>أضف</Add>
+    </action>
+    <msg>
+      <template-in-use>.لا يمكن الحذف {0} : القالب في حالة إستعمال</template-in-use>
+      <confirm-delete>هل تريد حقا أن تحذف؟</confirm-delete>
+      <access-denied>.غير مسموح بالدخول. ليس لديك الصلاحيّة لاستعمال هذه الخدمة.</access-denied>
+      <delete-permission-denied>ليس لديك الصلاحيّات الكافية لحذف '{0}' النموذج.</delete-permission-denied>
+    </msg>
+  </UIECMTemplateList>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.view.UITemplateForm #
+  ################################################################################
+  -->
+  <UITemplateForm>
+    <title>
+      <AddPermission>إضافة صلاحية</AddPermission>
+    </title>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <Reset>إعادة ضبط</Reset>
+      <Restore>إستعادة</Restore>
+      <Refresh>#{word.refresh}</Refresh>
+    </action>
+    <msg>
+      <version-restored>إستعادة الإصدار {0} بنجاح.</version-restored>
+      <role-require>يجب إختيار الصلاحية</role-require>
+      <template-name-exist>إسم القالب '{0}'  موجود مُسبقــا.</template-name-exist>
+      <add-permission-denied>ليس لديك الصلاحيّات الكافية لاضافة قالب جديد.</add-permission-denied>
+      <edit-permission-denied>ليس لديك الصلاحيّات الكافية لتغيير '{0}' النموذج.</edit-permission-denied>
+    </msg>
+    <tab>
+      <label>
+        <template>القالب</template>
+        <defaultDialog>واجهة المستخدم</defaultDialog>
+        <defaultView>عرض</defaultView>
+      </label>
+    </tab>
+    <label>
+      <name>الاسم</name>
+      <label>الرمز:</label>
+      <isDocumentTemplate>هو قالب وثيقة:</isDocumentTemplate>
+      <dialog>محتوى واجهة المستخدم</dialog>
+      <view>عرض المحتوى</view>
+      <permission>الصلاحية:</permission>
+      <selectPemistion>الصلاحية</selectPemistion>
+    </label>
+  </UITemplateForm>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.view.ecmTempForm #
+  ################################################################################
+  -->
+  <ecmTempForm>
+    <label>
+      <version>إختيار الإصدار:</version>
+      <content>المحتوى:</content>
+      <name>الاسم:</name>
+      <homeTemplate>نوع القالب:</homeTemplate>
+      <enableVersion>تفعييل الإصدار:</enableVersion>
+    </label>
+  </ecmTempForm>
+  <ecmTempFormPopup>
+    <title>
+      <ecmTempForm>إضافة/تغيير قالب المشهد</ecmTempForm>
+    </title>
+  </ecmTempFormPopup>
+  <ecmTempFormAdd>
+    <title>
+      <ecmTempForm>إضافة مستكشف القوالب</ecmTempForm>
+      <ecmTempFormAdd>إضافة مستكشف القوالب</ecmTempFormAdd>
+    </title>
+  </ecmTempFormAdd>
+  <ecmTempFormEdit>
+    <title>
+      <ecmTempForm>تغيير مستكشف القوالب</ecmTempForm>
+    </title>
+  </ecmTempFormEdit>
+
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.script.UIScriptManager #
+  ######################################################################################
+  -->
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.script.UIECMFilterForm #
+  ######################################################################################
+  -->
+  <UIECMFilterForm>
+    <label>
+      <selectScript>إختيار فئة</selectScript>
+    </label>
+  </UIECMFilterForm>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.script.UIScriptList #
+  ######################################################################################
+  -->
+  <UIScriptList>
+    <action>
+      <Edit>#{word.edit}</Edit>
+      <Delete>#{word.delete}</Delete>
+      <AddNew>اضافة سكريبت</AddNew>
+    </action>
+    <msg>
+      <confirm-delete>هل تريد حقا أن تحذف هذا السكريبت؟</confirm-delete>
+    </msg>
+    <header>
+      <scriptName>الاسم</scriptName>
+      <path>السكريبت</path>
+      <baseVersion>الإصدار الرئيسي</baseVersion>
+      <action>الاجراءات</action>
+    </header>
+    <tooltip>
+      <Edit>تغيير</Edit>
+      <Delete>حذف</Delete>
+    </tooltip>
+  </UIScriptList>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.script.UIScriptForm #
+  ######################################################################################
+  -->
+  <uiECMScriptsPopup>
+    <title>
+      <ecmScriptForm>سكريبت الـ'ECM'</ecmScriptForm>
+    </title>
+  </uiECMScriptsPopup>
+
+  <UIScriptForm>
+    <action>
+      <Save>#{word.save}</Save>
+      <Restore>#{word.restore}</Restore>
+      <Cancel>#{word.cancel}</Cancel>
+      <Refresh>#{word.refresh}</Refresh>
+      <Change>تغيير</Change>
+    </action>
+    <msg>
+      <version-restored>إستعادة الإصدار {0} بنجاح</version-restored>
+      <name-null>يُرجى ادخال اسم السكريبت.</name-null>
+      <name-exist>اسم السكريبت '{0}' موجود مُسبقًـا</name-exist>
+      <fileName-invalid>اسم السكريبت يحتوي على أحرف غير متاحة.</fileName-invalid>
+    </msg>
+  </UIScriptForm>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.script.CBScriptForm #
+  ######################################################################################
+  -->
+  <ScriptContainerPopup>
+    <title>
+      <UIScriptForm>إضاف/تغيير سكريبت</UIScriptForm>
+    </title>
+  </ScriptContainerPopup>
+  <UIScriptForm>
+    <label>
+      <selectVersion>الإصدارات</selectVersion>
+      <scriptContent>المحتوى</scriptContent>
+      <scriptLabel>الاسم</scriptLabel>
+      <scriptName>السكريبت</scriptName>
+      <enableVersion>تفعيل عمليّة الإصدار</enableVersion>
+    </label>
+  </UIScriptForm>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.script.ecmScriptForm #
+  ######################################################################################
+  -->
+
+  <ecmScriptForm>
+    <label>
+      <selectVersion>الاصدارات</selectVersion>
+      <scriptContent>محتوى السكريبت</scriptContent>
+      <scriptLabel>الاسم</scriptLabel>
+      <scriptName>اسم السكريبت</scriptName>
+      <enableVersion>تفعيل عمليّة الإصدار</enableVersion>
+    </label>
+  </ecmScriptForm>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyForm #
+  ######################################################################################
+  -->
+  <UITaxonomyForm>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <title>إضافة فئة</title>
+    <label>
+      <taxonomyName>اسم الفئة</taxonomyName>
+      <parentPath>الأصل</parentPath>
+    </label>
+    <msg>
+      <exist>الفئة '{0}' موجودة مُسبقا!</exist>
+      <name-null>يُرجى تحديد اسم الفئة.</name-null>
+      <name-invalid>.هناك بعض الأحرف غير متاحة في هذا الاسم.</name-invalid>
+      <name-too-long>إسم الفئة يجب أن يحتوي على أقلّ من 30 حرفا.</name-too-long>
+    </msg>
+  </UITaxonomyForm>
+
+  <EditTaxonomyTreePopup>
+    <title>
+      <UITaxonomyTreeContainer>تغيير شجرة الفئات</UITaxonomyTreeContainer>
+    </title>
+  </EditTaxonomyTreePopup>
+
+  <AddTaxonomyTreePopup>
+    <title>
+      <UITaxonomyTreeContainer>إضافة شجرة الفئات</UITaxonomyTreeContainer>
+    </title>
+  </AddTaxonomyTreePopup>
+
+  <TaxonomyPopupCreateChild>
+    <title>
+      <UITaxonomyTreeCreateChildForm>تغيير شجرة الفئات</UITaxonomyTreeCreateChildForm>
+    </title>
+  </TaxonomyPopupCreateChild>
+
+  <UITaxonomyTreeCreateChildForm>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <label>
+      <parentPath>الأصل:</parentPath>
+      <taxonomyName>اسم الفئة:</taxonomyName>
+    </label>
+    <msg>
+      <name-null>اسم الفئة فارغ.</name-null>
+      <name-invalid>اسم الفئة غير صحيح.</name-invalid>
+      <name-too-long>لا يجب أن يحتوي اسم الفئة على أكثر من {0} أحرف.</name-too-long>
+      <exist>اسم الفئة موجود مُسبقـا.</exist>
+    </msg>
+  </UITaxonomyTreeCreateChildForm>
+
+  <PopupComponent>
+    <title>
+      <UIOneNodePathSelector>اختيار المسار</UIOneNodePathSelector>
+    </title>
+  </PopupComponent>
+
+  <TaxoPopupUserSelector>
+    <title>
+      <TaxoTreeSelectUserOrGroup>اختيار المستخدم</TaxoTreeSelectUserOrGroup>
+      <UIPermissionTreeSelectUser>اختيار المستخدم</UIPermissionTreeSelectUser>
+    </title>
+  </TaxoPopupUserSelector>
+
+  <TaxoTreeSelectUserOrGroupPopup>
+    <title>
+      <TaxoTreeSelectUserOrGroup>اختيار العضوية</TaxoTreeSelectUserOrGroup>
+    </title>
+  </TaxoTreeSelectUserOrGroupPopup>
+
+  <TaxoTreeAnyPermission>
+    <label>
+      <any>كل الصلاحيّات</any>
+      <anyPermission>TaxoTreeAnyPermission</anyPermission>
+    </label>
+  </TaxoTreeAnyPermission>
+
+  <TaxoTreeSelectUserOrGroup>
+    <label>
+      <selectGroup>إختيار مجموعة</selectGroup>
+      <selectMembership>إختيار العضوية</selectMembership>
+    </label>
+  </TaxoTreeSelectUserOrGroup>
+
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyTreeList #
+  ######################################################################################
+  -->
+  <UITaxonomyTreeList>
+    <header>
+      <name>شجرة الفئات</name>
+      <workspace>فضاء عمل</workspace>
+      <homePath>المسار</homePath>
+      <action>اجراء</action>
+    </header>
+    <action>
+      <AddTaxonomyTree>إضافة شجرة الفئات</AddTaxonomyTree>
+    </action>
+    <tooltip>
+      <EditTaxonomyTree>تغيير شجرة الفئات</EditTaxonomyTree>
+      <Delete>حذف شجرة الفئات</Delete>
+    </tooltip>
+    <title>تصفّح شجرة الفئات</title>
+    <msg>
+      <no-list>لم يتم انشاء أيّ شجرة للفئات</no-list>
+      <confirm-delete>هل ترغب فعلا بحذف شجرة الفئات؟</confirm-delete>
+      <is-in-trash>تمّ تحويل شجرة لفئات هذه الى سلّة المهملات.</is-in-trash>
+    </msg>
+  </UITaxonomyTreeList>
+
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyTreeForm  #
+  ######################################################################################
+  -->
+  <UITaxonomyTreeForm>
+    <label>
+      <name>اسم</name>
+      <workspace>فضاء العمل</workspace>
+      <homePath>المسار</homePath>
+      <permissions>الصلاحيّات</permissions>
+    </label>
+    <msg>
+      <homapath-emty>المسار</homapath-emty>
+    </msg>
+  </UITaxonomyTreeForm>
+
+  <UIPermissionTreeForm>
+    <label>
+      <UIPopupWindow>اختيار</UIPopupWindow>
+      <permission>UIPermissionTreeForm</permission>
+      <userOrGroup>مستخدم أو مجموعة</userOrGroup>
+      <read>حقّ القراءة</read>
+      <add_node>ضبط حقّ الملكية</add_node>
+      <set_property>مجموعة حق الملكية</set_property>
+      <remove>إزالة الامتياز</remove>
+    </label>
+    <title>إضافة صلاحية إلى هذه العقدة</title>
+    <action>
+      <Close>#{word.close}</Close>
+      <Save>Save</Save>
+      <Reset>Reset</Reset>
+    </action>
+    <msg>
+      <checkbox-require>يُرجى اختيار صلاحيّة واحدة  على أقصى تقدير.</checkbox-require>
+      <userOrGroup-required>يُرجى اختيار مستخدم أو مجموعة قبل حفظ الصلاحيّات</userOrGroup-required>
+      <not-change-permission>ليس لديك الحق في اضافة صلاحيّة.</not-change-permission>
+      <access-denied>غير مسموح بالدخول. لا يمكن حذف هذه الصلاحيّة.</access-denied>
+    </msg>
+  </UIPermissionTreeForm>
+
+  <PopupTaxonomyJCRBrowser>
+    <title>
+      <UIOneNodePathSelector>اختيار مسار الصفحة الرئيسيّة</UIOneNodePathSelector>
+    </title>
+  </PopupTaxonomyJCRBrowser>
+
+  <PopupTaxonomyTreePermission>
+    <title>
+      <UIPermissionSelector>منتق الصلاحية</UIPermissionSelector>
+    </title>
+  </PopupTaxonomyTreePermission>
+
+  <PopupDrivePermission>
+    <title>
+      <AddDrivePermissionSelector>Add Permissions</AddDrivePermissionSelector>
+      <UIPermissionSelector>اختيار صلاحيّة</UIPermissionSelector>
+    </title>
+  </PopupDrivePermission>
+
+  <UIPopupWindow>
+    <title>
+      <UIPermissionManager>إدارة الصلاحيات</UIPermissionManager>
+    </title>
+  </UIPopupWindow>
+
+  <PopupUserSelector>
+    <title>
+      <UIUserContainer>إدارة الصلاحيات</UIUserContainer>
+    </title>
+  </PopupUserSelector>
+
+  <UIPermissionInfo>
+    <action>
+      <title>
+        <Edit>تغيير</Edit>
+        <Delete>حذف الصلاحية</Delete>
+      </title>
+    </action>
+    <header>
+      <usersOrGroups>مستخدم او مجموعة</usersOrGroups>
+      <read>القراءة</read>
+      <addNode>تغيير العقدة</addNode>
+      <remove>حذف</remove>
+      <action>اجراء</action>
+    </header>
+    <msg>
+      <confirm-delete-permission>هل تريد أن تحذف هذه الصلاحية؟</confirm-delete-permission>
+      <no-permission-tochange>ليس لديك الحق لحذف هذه الصلاحية.</no-permission-tochange>
+      <no-permission-remove>لا يمكنك إزالة المالك أو مستخدم النظام.</no-permission-remove>
+      <access-denied>.غير مسموح بالدخول. لا يُمكن حذف هذه الصلاحية.</access-denied>
+    </msg>
+  </UIPermissionInfo>
+  <permission>
+    <title>
+      <SelectUser>اختيار مستخدم</SelectUser>
+      <SelectMember>اختيار عضوية</SelectMember>
+      <AddAny>الجميع</AddAny>
+    </title>
+  </permission>
+  <!--
+  #############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIPermissionForm #
+  #############################################################################
+  -->
+  <SelectUserOrGroup>
+    <title>
+      <UIGroupSelector>اختيار المستخدم</UIGroupSelector>
+      <UIPermissionSelector>اختيار العضوية</UIPermissionSelector>
+      <UIGroupMemberSelector>اختيار العضوية</UIGroupMemberSelector>
+    </title>
+  </SelectUserOrGroup>
+  <UIGroupSelector>
+    <label>
+      <selectGroup>اختيار مجموعة</selectGroup>
+      <selectUser>اختيار مستخدم</selectUser>
+    </label>
+    <msg>
+      <not-change-owner>'{0}' هو صاحب العقدة و له كل الصلاحيات</not-change-owner>
+    </msg>
+  </UIGroupSelector>
+  <UIPermissionForm>
+    <label>
+      <UIPopupWindow>اختيار</UIPopupWindow>
+      <permission>UIPermissionForm</permission>
+      <userOrGroup>مستخدم او مجموعة</userOrGroup>
+      <read>قراءة</read>
+      <add_node>تغيير</add_node>
+      <remove>حذف</remove>
+    </label>
+    <title>اضافة صلاحية لهذه العقدة</title>
+    <action>
+      <Close>#{word.close}</Close>
+      <Save>#{word.save}</Save>
+      <Reset>إعادة ضبط</Reset>
+    </action>
+    <msg>
+      <checkbox-require>يجب عليك إختيار صلاحية واحدة على الأقل</checkbox-require>
+      <userOrGroup-required>يجب عليك اختيار المستخدم أو المجموعة  قبل حفظ هذه الصلاحية</userOrGroup-required>
+      <not-change-permission>ليس لديك الحق في اضافة صلاحية</not-change-permission>
+      <access-denied>.غير مسموح بالدخول!  لا يمكن حذف هذه الصلاحيّة</access-denied>
+    </msg>
+  </UIPermissionForm>
+
+  <TaxonomyPopup>
+    <title>
+      <UITaxonomyForm>اضافة فئة</UITaxonomyForm>
+    </title>
+  </TaxonomyPopup>
+
+  <UITaxonomyManager>
+    <title>
+      <permission>إدارة الصلاحيات</permission>
+    </title>
+  </UITaxonomyManager>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.UITemplateList #
+  ######################################################################################
+  -->
+  <UITemplateList>
+    <header>
+      <name>النوع</name>
+      <action>اجراء</action>
+      <label>قالب</label>
+      <icon>أيقونة</icon>
+    </header>
+    <action>
+      <AddNew>اضافة قالب</AddNew>
+    </action>
+    <msg>
+      <confirm-delete>هل تريد حقا أن تحذف؟</confirm-delete>
+      <access-denied>غير مسموح بالدخول. لم تتحصل على الصلاحية لاستخدام هذه المهمّة.</access-denied>
+      <editing-template>غير مسموح بالدخول. لا يمكنك حذف و تغيير النموذج في نفس الوقت.</editing-template>
+      <template-not-exist>النموذج الذي تحاول حذفه لم يعُد موجودًا.</template-not-exist>
+    </msg>
+  </UITemplateList>
+
+  <UIActionsTemplateList>
+    <header>
+      <name>النوع</name>
+      <action>اجراء</action>
+      <label>قالب</label>
+      <icon>أيقونة</icon>
+    </header>
+    <action>
+      <AddNew>اضافة قالب</AddNew>
+    </action>
+    <msg>
+      <confirm-delete>هل تريد حقا أن تحذف؟</confirm-delete>
+      <access-denied>غير مسموح بالدّخول. ليس لديك الصلاحيّة الكافية لاستخدام هذه الوظيفة.</access-denied>
+      <editing-template>غير مسموح بالدّخول. لا يمكن القيام بحذف و تغيير النموذج في نفس الوقت.</editing-template>
+      <template-not-exist>النموذج الذي أنت بصدد محاولة حذفه لم يعُد موجودا.</template-not-exist>
+    </msg>
+  </UIActionsTemplateList>
+
+  <UIOthersTemplateList>
+    <header>
+      <name>النوع</name>
+      <label>قالب</label>
+      <icon>أيقونة</icon>
+      <action>اجراء</action>
+    </header>
+    <action>
+      <AddNew>اضافة قالب</AddNew>
+    </action>
+    <msg>
+      <confirm-delete>هل تريد حقا أن تحذف؟</confirm-delete>
+      <access-denied>غير مسموح بالدخول. ليس لديك الصلاحيات الكافية لاستخدام هذه الوظيفة.</access-denied>
+      <editing-template>غير مسموح بالدّخول. لا يمكن القيام بحذف و تغيير النموذج في نفس الوقت.</editing-template>
+      <template-not-exist>النموذج الذي أنت بصدد محاولة حذفه لم يعُد موجودا.</template-not-exist>
+    </msg>
+  </UIOthersTemplateList>
+
+  <!--
+ ######################################################################################
+ #             org.exoplatform.ecm.webui.component.admin.templates.clv package #
+ ######################################################################################
+ -->
+
+  <UITabPane>
+    <title>
+      <ContentTemplateContainer>المحتوى</ContentTemplateContainer>
+      <CateTemplateContainer>التصفح</CateTemplateContainer>
+      <PageTemplateContainer>ترقيم الصّفحات</PageTemplateContainer>
+    </title>
+  </UITabPane>
+
+  <UICLVTemplateList>
+    <title>
+      <Edit>تغيير</Edit>
+      <Delete>حذف</Delete>
+    </title>
+    <header>
+      <title>الاسم</title>
+      <action>اجراء</action>
+      <template>قالب</template>
+    </header>
+    <action>
+      <AddTemplate>إضافة قالب</AddTemplate>
+      <Edit>تغيير</Edit>
+      <Delete>حذف</Delete>
+    </action>
+    <msg>
+      <confirm-delete>هل ترغب حقّــا بحذف هذا القالب؟</confirm-delete>
+      <access-denied>.غير مسموح بالدخول! ليس لديك صلاحية اتسعمال في الوظيفة</access-denied>
+      <editing-template>تمّ رفض الوصول. لا يمكنك حذف و تغيير هذا القالب في آن واحد.</editing-template>
+      <template-not-exist>القالب الذي تحاول حذفه غير موجود.</template-not-exist>
+    </msg>
+  </UICLVTemplateList>
+
+  <CateTemplateList>
+    <header>
+      <title>الاسم</title>
+      <action>اجراء</action>
+      <template>قالب</template>
+    </header>
+    <title>
+      <Edit>تغيير</Edit>
+      <Delete>حذف</Delete>
+    </title>
+    <action>
+      <AddTemplate>إضافة قالب</AddTemplate>
+      <Edit>تغيير</Edit>
+      <Delete>حذف</Delete>
+    </action>
+  </CateTemplateList>
+
+  <PageTemplateList>
+    <header>
+      <title>الاسم</title>
+      <action>اجراء</action>
+      <template>قالب</template>
+    </header>
+    <action>
+      <AddTemplate>إضافة قالب</AddTemplate>
+      <Edit>تغيير</Edit>
+      <Delete>حذف</Delete>
+    </action>
+  </PageTemplateList>
+
+  <EditCLVTemplatePopup_ContentTemplateContainer>
+    <title>
+      <UICLVTemplateForm_ContentTemplateContainer>تغيير قائمة النماذج</UICLVTemplateForm_ContentTemplateContainer>
+    </title>
+  </EditCLVTemplatePopup_ContentTemplateContainer>
+
+  <EditCLVTemplatePopup_CateTemplateContainer>
+    <title>
+      <UICLVTemplateForm_CateTemplateContainer>تغيير قائمة النماذج</UICLVTemplateForm_CateTemplateContainer>
+    </title>
+  </EditCLVTemplatePopup_CateTemplateContainer>
+
+  <EditCLVTemplatePopup_PageTemplateContainer>
+    <title>
+      <UICLVTemplateForm_PageTemplateContainer>تغيير قائمة النماذج</UICLVTemplateForm_PageTemplateContainer>
+    </title>
+  </EditCLVTemplatePopup_PageTemplateContainer>
+
+  <CLVTemplatePopup_ContentTemplateContainer>
+    <title>
+      <UICLVTemplateForm_ContentTemplateContainer>إضافة نموذج للقائمة</UICLVTemplateForm_ContentTemplateContainer>
+    </title>
+  </CLVTemplatePopup_ContentTemplateContainer>
+
+  <CLVTemplatePopup_CateTemplateContainer>
+    <title>
+      <UICLVTemplateForm_CateTemplateContainer>إضافة نموذج للقائمة</UICLVTemplateForm_CateTemplateContainer>
+    </title>
+  </CLVTemplatePopup_CateTemplateContainer>
+
+  <CLVTemplatePopup_PageTemplateContainer>
+    <title>
+      <UICLVTemplateForm_PageTemplateContainer>إضافة نموذج للقائمة</UICLVTemplateForm_PageTemplateContainer>
+    </title>
+  </CLVTemplatePopup_PageTemplateContainer>
+
+  <UICLVTemplateForm_ContentTemplateContainer>
+    <action>
+      <Save>#{word.save}</Save>
+      <Reset>إعادة التعيين</Reset>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <label>
+      <title>اسم</title>
+      <template>اسم النموذج</template>
+      <content>المحتوى</content>
+      <type>نوع النموذج</type>
+    </label>
+  </UICLVTemplateForm_ContentTemplateContainer>
+
+  <UICLVTemplateForm_PageTemplateContainer>
+    <action>
+      <Save>#{word.save}</Save>
+      <Reset>إعادة التعيين</Reset>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <label>
+      <title>الاسم</title>
+      <template>اسم النموذج</template>
+      <content>المحتوى</content>
+      <type>نوع النموذج</type>
+    </label>
+  </UICLVTemplateForm_PageTemplateContainer>
+
+  <UICLVTemplateForm_CateTemplateContainer>
+    <action>
+      <Save>#{word.save}</Save>
+      <Reset>إعادة التعيين</Reset>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <label>
+      <title>الاسم</title>
+      <template>اسم النموذج</template>
+      <content>المحتوى</content>
+      <type>نوع النموذج</type>
+    </label>
+  </UICLVTemplateForm_CateTemplateContainer>
+  <UICLVTemplateForm>
+    <label>
+      <paginators>ترقيم الصّفحات</paginators>
+      <list>المحتوى</list>
+      <navigation>التصفح</navigation>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Reset>إعادة تعيين</Reset>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <template-existing>اسم القالب هذا موجود مُسبقــا. الرجاء اختيار اسما آخرا.</template-existing>
+    </msg>
+  </UICLVTemplateForm>
+
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.UITemplateForm #
+  ######################################################################################
+  -->
+  <AddNewTemplatePermission>
+    <title>
+      <UIPermissionSelector>منتق الصلاحية</UIPermissionSelector>
+    </title>
+  </AddNewTemplatePermission>
+  <TemplatePermission>
+    <title>
+      <UIPermissionSelector>اختيار صلاحية</UIPermissionSelector>
+    </title>
+  </TemplatePermission>
+  <TemplateContainerPopup>
+    <title>
+      <UITemplateForm>شكل النموذج</UITemplateForm>
+    </title>
+  </TemplateContainerPopup>
+  <ViewForm>
+    <label>
+      <UITemplateContent>عرض نموذج</UITemplateContent>
+      <UIPopupWindow>صلاحية المشاهدة</UIPopupWindow>
+      <selectVersion>الاصدارات</selectVersion>
+      <content>المحتوى:</content>
+      <name>الاسم:</name>
+      <isDocumentTemplate>هو نموذج لوثيقة</isDocumentTemplate>
+      <viewPermission>الصلاحية:</viewPermission>
+      <enableVersion>تمّ تفعيل عمليّة الاصدار</enableVersion>
+    </label>
+    <title>اضافة/تغيير العرض</title>
+  </ViewForm>
+  <DialogForm>
+    <label>
+      <UITemplateContent>DialogForm</UITemplateContent>
+      <UIPopupWindow>صلاحية تغيير واجهة المستخدم</UIPopupWindow>
+      <selectVersion>الاصدارات</selectVersion>
+      <content>المحتوى:</content>
+      <name>الاسم:</name>
+      <isDocumentTemplate>هو نموذج لوثيقة</isDocumentTemplate>
+      <viewPermission>الصلاحية:</viewPermission>
+      <enableVersion>تفعيل عمليّة الإصدار</enableVersion>
+    </label>
+    <title>اضافة / تغيير واجهة المُــستخدم</title>
+  </DialogForm>
+  <DialogFormTemplatePermission>
+    <title>
+      <UIPermissionSelector>منتق الصلاحية</UIPermissionSelector>
+    </title>
+  </DialogFormTemplatePermission>
+  <ViewFormTemplatePermission>
+    <title>
+      <UIPermissionSelector>منتق الصلاحية</UIPermissionSelector>
+    </title>
+  </ViewFormTemplatePermission>
+  <TemplateContainerPopup>
+    <title>
+      <UIViewTemplate_UITemplateContainer><![CDATA[View & Edit Template]]></UIViewTemplate_UITemplateContainer>
+      <UIViewTemplate_UIActionsTemplateContainer>
+        <![CDATA[View & Edit Template]]></UIViewTemplate_UIActionsTemplateContainer>
+      <UIViewTemplate_UIOthersTemplateContainer>
+        <![CDATA[View & Edit Template]]></UIViewTemplate_UIOthersTemplateContainer>
+    </title>
+  </TemplateContainerPopup>
+  <UITemplatesManager>
+    <title>
+      <Edit>تغيير</Edit>
+      <Delete>حذف</Delete>
+    </title>
+  </UITemplatesManager>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.UIViewTemplate #
+  ######################################################################################
+  -->
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.UITemplateEditForm #
+  ######################################################################################
+  -->
+  <UITemplateEditForm>
+    <label>
+      <name>الاسم:</name>
+      <label>الرمز:</label>
+      <isDocumentTemplate>هو نموذج لوثيقة:</isDocumentTemplate>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <Refresh>#{word.refresh}</Refresh>
+    </action>
+  </UITemplateEditForm>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.UIDialogTab #
+  ######################################################################################
+  -->
+  <UIDialogTab>
+    <header>
+      <name>الاسم</name>
+      <roles>الأدوار</roles>
+      <baseVersion>الاصدار</baseVersion>
+      <action>الاجراءات</action>
+    </header>
+    <msg>
+      <undeletable>لا يمكن حذف '{0}' لانه الافتراضي.</undeletable>
+      <confirm-delete>هل تؤكّد عمليّة الحذف؟</confirm-delete>
+    </msg>
+    <action>
+      <title>
+        <Edit>تغيير</Edit>
+        <Delete>حذف</Delete>
+      </title>
+    </action>
+  </UIDialogTab>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.UIViewTab #
+  ######################################################################################
+  -->
+  <UIViewTab>
+    <header>
+      <name>الاسم</name>
+      <roles>الأدوار</roles>
+      <baseVersion>الإصدار</baseVersion>
+      <action>الاجراءات</action>
+    </header>
+    <msg>
+      <undeletable>لا يمكن حذف '{0}' لانه الإفتراضي.</undeletable>
+      <confirm-delete>هل تريد حقا أن تحذف؟</confirm-delete>
+    </msg>
+    <action>
+      <title>
+        <Edit>تغيير</Edit>
+        <Delete>حذف</Delete>
+      </title>
+    </action>
+  </UIViewTab>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.UITemplateContent #
+  ######################################################################################
+  -->
+  <UITemplateContent>
+    <action>
+      <Save>#{word.save}</Save>
+      <Restore>#{word.restore}</Restore>
+      <Cancel>#{word.cancel}</Cancel>
+      <Refresh>#{word.refresh}</Refresh>
+    </action>
+    <msg>
+      <name-invalid>هناك بعض الأحرف الغير متاحة في مجال الاسم.</name-invalid>
+      <roles-invalid>المجال الخاص بالصلاحية لا يمكن أن يكون فارغا.</roles-invalid>
+      <version-restored>تمّ إستعادة الإصدار {0} بنجاح.</version-restored>
+      <name-exist>الاسم '{0}' موجود مُسبقـا.</name-exist>
+    </msg>
+    <title>
+      <AddPermission>اضافة صلاحية</AddPermission>
+      <RemovePermission>حذف الصلاحية</RemovePermission>
+    </title>
+  </UITemplateContent>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.DialogForm #
+  ######################################################################################
+  -->
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.ViewForm #
+  ######################################################################################
+  -->
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.UIJCRBrowser #
+  ######################################################################################
+  -->
+  <JCRBrowser>
+    <title>
+      <UIOneNodePathSelector>اختيار مسار الجذر</UIOneNodePathSelector>
+    </title>
+  </JCRBrowser>
+  <JCRBrowserAssets>
+    <title>
+      <UIOneNodePathSelector>اختيار أيقونة</UIOneNodePathSelector>
+    </title>
+  </JCRBrowserAssets>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.queries #
+  ######################################################################################
+  -->
+  <UIQueriesList>
+    <header>
+      <name>الاسم</name>
+      <type>النوع</type>
+      <statement>استبيانات</statement>
+      <permission>الصلاحيات</permission>
+      <action>الاجراءات</action>
+    </header>
+    <action>
+      <AddQuery>إضافة استبيان</AddQuery>
+    </action>
+    <tooltip>
+      <Edit>تغيير هذا الاستبيان</Edit>
+      <Delete>حذف هذا الاستبيان</Delete>
+    </tooltip>
+    <msg>
+      <confirm-delete>هل تريد حقا أن تحذف هذا الاستبيان؟</confirm-delete>
+      <query-not-existed>هذا الاستبيان لم يعُد موجوداً .</query-not-existed>
+      <can-not-remove>حدث خطأ أثناء حذف هذا الاستبيان. الرجاء الاتصال بالمسؤول للحصول على مزيد من المعلومات.</can-not-remove>
+    </msg>
+  </UIQueriesList>
+  <UIQueriesForm>
+    <label>
+      <name>اسم الاستبيان</name>
+      <type>نوع الاستبيان</type>
+      <statement>استبيانات</statement>
+      <cache>إمكانية إخفاء النتائج</cache>
+      <permissions>الصلاحيّات</permissions>
+      <PermissionButton>واجهة نموذج استعلامات</PermissionButton>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <permission-require>يُرجى إختيار الصلاحيات</permission-require>
+      <name-invalid>هناك بعض الأحرف الغير متاحة في المجال الخاص بالاسم.</name-invalid>
+      <name-existing>إسم الاستبيان موجود مُسبقًا. يُرجى اختيار اسمــًا  آخرا.</name-existing>
+      <invalid-query>صيغة الاستبيان غير صحيحة. يُرجى التثبّت منها.</invalid-query>
+      <access-denied>غير مسموح بالدخول. ليس لديك الصلاحية الكافية للقيام بهذه العمليّة.</access-denied>
+    </msg>
+  </UIQueriesForm>
+  <AddQueryForm>
+    <title>
+      <UIQueriesForm>اضافة استبيان</UIQueriesForm>
+    </title>
+  </AddQueryForm>
+  <EditQueryForm>
+    <title>
+      <UIQueriesForm>تغيير الاستبيان</UIQueriesForm>
+    </title>
+  </EditQueryForm>
+  <PermissionPopup>
+    <title>
+      <UIGroupMemberSelector>منتق الصلاحية</UIGroupMemberSelector>
+    </title>
+  </PermissionPopup>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.folksonomy #
+  ######################################################################################
+  -->
+  <UITagManager>
+    <title>
+      <EditStyle>تغيير النّمط</EditStyle>
+      <RemoveStyle>حذف النّمط</RemoveStyle>
+    </title>
+  </UITagManager>
+  <UITagStyleList>
+    <header>
+      <name>اسم النّمط</name>
+      <documentRange>ترتيب الوثيقة</documentRange>
+      <tagHTML>نمط العلامة</tagHTML>
+      <action>اجراء</action>
+    </header>
+    <title>
+      <Edit>تغيير</Edit>
+      <Delete>حذف</Delete>
+      <Remove>حذف</Remove>
+    </title>
+    <action>
+      <AddStyle>اضافة نمط</AddStyle>
+    </action>
+  </UITagStyleList>
+  <UITagStyleForm>
+    <label>
+      <styleName>اختيار الاسم:</styleName>
+      <documentRange>عدد التكرارات:</documentRange>
+      <styleHTML>نمط الـ 'HTML':</styleHTML>
+    </label>
+    <action>
+      <UpdateStyle>تحديث</UpdateStyle>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <range-validator>عدد الوصلات غير صحيح. الشكل الصحيح هو: أ..بحيث تكون "أ" و "ب" أعدادا صحيحة موجبة.يمكنك إستعمال '*' للإشارة عوضاً عن "ب" للإشارة بأن القيمة غير محدودة.</range-validator>
+      <error-update>أثناء عملية التحديث. هذه المعلومات غير صحيحة.</error-update>
+      <item-not-existing>لا يمكنك حفظ التغييرات الخاصة بهذه العلامة و التي لم تعد موجودة في قاعدة البينات.</item-not-existing>
+    </msg>
+  </UITagStyleForm>
+  <FolksonomyPopup>
+    <title>
+      <UITagStyleForm>تغيير تهيئة نمط العلامة</UITagStyleForm>
+    </title>
+  </FolksonomyPopup>
+  <!--
+  ###################################################################################
+  # ECMPhoneFormatValidator                                       #
+  ###################################################################################
+  -->
+  <ECMPhoneFormatValidator>
+    <msg>
+      <Invalid>يحتوي الحقل '{0}' على رقم هاتف غير صحيح. الرجاء إدخال قيمة أخرى.</Invalid>
+    </msg>
+  </ECMPhoneFormatValidator>
+  <!--
+  ###################################################################################
+  # org.exoplatform.ecm.jcr.ECMNameValidator  #
+  ###################################################################################
+  -->
+  <ECMNameValidator>
+    <msg>
+      <Invalid-char>هناك بعض الأحرف الغير متاحة في المجال '{0}'.يرجى ادخال قيمة أخرى.</Invalid-char>
+      <empty-input>المجال '{0}' فارغ.</empty-input>
+    </msg>
+  </ECMNameValidator>
+  <EmptyFieldValidator>
+    <msg>
+      <empty-input>رجاء أدخل قيمة في المجال '{0}' .</empty-input>
+    </msg>
+  </EmptyFieldValidator>
+  <!--
+  ###################################################################################
+  # org.exoplatform.ecm.jcr.PermissionValidator  #
+  ###################################################################################
+  -->
+  <PermissionValidator>
+    <msg>
+      <permission-path-invalid>الصلاحية'{0}' غير صحيحة.</permission-path-invalid>
+    </msg>
+  </PermissionValidator>
+  <!--
+  ###################################################################################
+  # Repository  #
+  ###################################################################################
+  -->
+  <UIWorkspaceList>
+    <label>
+      <workspaceName>فضاء العمل:</workspaceName>
+      <rootNodeInfo>UIWorkspaceList</rootNodeInfo>
+      <rootNodePath>مسار الجذر:</rootNodePath>
+    </label>
+  </UIWorkspaceList>
+  <!--
+  ###################################################################################
+  # Others  #
+  ###################################################################################
+  -->
+  <UIFormInputSetWithAction>
+    <msg>
+      <confirm-delete>هل تريد حقا أن تحذف؟</confirm-delete>
+    </msg>
+  </UIFormInputSetWithAction>
+  <template>
+    <title>
+      <AddPermission>إضافة صلاحية</AddPermission>
+    </title>
+  </template>
+  <metadataTypeTab>
+    <title>
+      <AddPermission>إضافة صلاحية</AddPermission>
+    </title>
+  </metadataTypeTab>
+  <PermissionButton>
+    <title>
+      <AddPermission>إضافة صلاحية</AddPermission>
+    </title>
+  </PermissionButton>
+  <nodeTypeDefinition>
+    <title>
+      <AddSuperType>إضافة النوع السوبر</AddSuperType>
+    </title>
+  </nodeTypeDefinition>
+  <childNodeDefinition>
+    <title>
+      <AddRequiredType>إضافة النوع الضروري</AddRequiredType>
+      <AddDefaultType>إضافة النوع الافتراضي</AddDefaultType>
+    </title>
+  </childNodeDefinition>
+  <propertyDefinition>
+    <title>
+      <AddConstraints>إضافة قيود</AddConstraints>
+    </title>
+  </propertyDefinition>
+  <authInputSet>
+    <title>
+      <Select>إختيار</Select>
+    </title>
+  </authInputSet>
+  <!--
+  #grid with action
+  -->
+  <UIViewContainer>
+    <title>
+      <View>عرض</View>
+      <EditInfo>تغيير</EditInfo>
+      <Delete>حذف</Delete>
+    </title>
+    <label>
+      <permission>{0} في {1}</permission>
+    </label>
+  </UIViewContainer>
+  <ECMTemplate>
+    <title>
+      <EditInfo>تغيير</EditInfo>
+      <Delete>حذف</Delete>
+    </title>
+  </ECMTemplate>
+  <step1>
+    <title>
+      <AddPermission>إضافة صلاحية</AddPermission>
+    </title>
+  </step1>
+  <step2>
+    <title>
+      <SelectContainer>إختيار الحاوية</SelectContainer>
+      <SelectStore>إختيار المخزن</SelectStore>
+    </title>
+  </step2>
+  <step3>
+    <title>
+      <SelectQueryHandler>اختيار المتصرف في الاستبيانات</SelectQueryHandler>
+    </title>
+  </step3>
+  <UIDrivePermissionSelector>
+    <label>
+      <selectGroup>اختيار مجموعة</selectGroup>
+      <selectUser>اختيارمستخدم</selectUser>
+      <selectMembership>اختيار العضوية</selectMembership>
+    </label>
+  </UIDrivePermissionSelector>
+
+  <UIPermissionSelector>
+    <label>
+      <selectGroup>إختيار مجموعة</selectGroup>
+      <selectUser>إختيار مستخدم</selectUser>
+      <selectMembership>إختيار العضوية</selectMembership>
+    </label>
+  </UIPermissionSelector>
+
+  <UIAnyPermission>
+    <label>
+      <anyPermission>جميع الصلاحيات</anyPermission>
+    </label>
+  </UIAnyPermission>
+
+  <UIMDriveAnyPermission>
+    <label>
+      <anyPermission>جميع التصاريح</anyPermission>
+    </label>
+  </UIMDriveAnyPermission>
+
+  <UIQueriesAnyPermission>
+    <label>
+      <anyPermission>جميع التصاريح</anyPermission>
+    </label>
+  </UIQueriesAnyPermission>
+
+  <MetadataPermission>
+    <label>
+      <selectGroup>اختر مجموعة</selectGroup>
+    </label>
+  </MetadataPermission>
+  <MetadataPermission>
+    <label>
+      <selectMembership>اختر عضوية</selectMembership>
+    </label>
+  </MetadataPermission>
+  <anyPermission>
+    <title>
+      <AddAnyPermission>ضع اي صلاحية</AddAnyPermission>
+    </title>
+  </anyPermission>
+  <!--
+  #########Since ECM 2.3##################
+  -->
+  <QueriesPermissionBrowse>
+    <label>
+      <selectGroup>إختيار مجموعة</selectGroup>
+      <selectUser>إختيار مستخدم</selectUser>
+      <selectMembership>إختيار العضوية</selectMembership>
+    </label>
+  </QueriesPermissionBrowse>
+  <!--
+  #########Since ECM 2.4##################
+  -->
+  <UIViewFormTabPane>
+    <label>
+      <addSymLink>إضافة صلة رمزية</addSymLink>
+    </label>
+  </UIViewFormTabPane>
+  <!--
+  #########Since ECM 2.5##################
+  -->
+
+  <UIDriveForm>
+    <msg>
+      <permission-path-invalid>الصلاحية'{0}' غير صحيحة.</permission-path-invalid>
+    </msg>
+  </UIDriveForm>
+
+  <UITaxonomyTreeMainForm>
+    <msg>
+      <homepath-emty>مسار الصفحة الرئيسية أمر ضروري.</homepath-emty>
+      <targetpath-emty>المسار الهدف ضروري</targetpath-emty>
+    </msg>
+  </UITaxonomyTreeMainForm>
+  <UITaxonomyWorkingArea>
+    <msg>
+      <exist>شجرة هذه العقدة موجودة مسبقا.</exist>
+    </msg>
+  </UITaxonomyWorkingArea>
+
+  <PermissionTreeSelectUser>
+    <label>
+      <option>
+        <userName>#{word.userName}</userName>
+        <lastName>#{word.lastName}</lastName>
+        <firstName>#{word.firstName}</firstName>
+        <email>#{word.email}</email>
+      </option>
+      <group>مجموعة</group>
+      <searchUser>المستخدم</searchUser>
+      <userName>#{word.userName}</userName>
+      <lastName>#{word.lastName}</lastName>
+      <firstName>#{word.firstName}</firstName>
+      <email>#{word.email}</email>
+      <action>#{word.action}</action>
+      <Add>#{word.Add}</Add>
+      <Close>#{word.Close}</Close>
+    </label>
+  </PermissionTreeSelectUser>
+
+  <!--
+  #########Since ECM 2.6 ##################
+  -->
+  <DriveInputSet>
+    <label>
+      <nt_folder>وثائق</nt_folder>
+      <nt_unstructured>محتوى</nt_unstructured>
+      <exo_cssFolder>مجلد CSS</exo_cssFolder>
+      <exo_jsFolder>مجلد جافاسكريبت</exo_jsFolder>
+      <exo_linkFolder>رابط</exo_linkFolder>
+      <exo_webFolder>مجلد محتوى الواب</exo_webFolder>
+    </label>
+  </DriveInputSet>
+  <UIPermissionTreeInfo>
+    <msg>
+      <confirm-delete-permission>هل حقا تريد حذف هذه الصلاحيّة ؟</confirm-delete-permission>
+      <no-permission-remove>لا يمكنك إزالة المالك أو المستخدم "النظام"</no-permission-remove>
+    </msg>
+  </UIPermissionTreeInfo>
+  <UITaxonomyTreeMainForm>
+    <msg>
+      <no-right-target-path>يرجى اختيار مسارا آخر للصفحة الرئيسية.</no-right-target-path>
+    </msg>
+  </UITaxonomyTreeMainForm>
+
+  <UIECMAdminControlPanel>
+    <tab>
+      <label>
+        <ManageUnLock>تحرير إدارة</ManageUnLock>
+      </label>
+    </tab>
+  </UIECMAdminControlPanel>
+  <UIUnLockForm>
+    <label>
+      <name>مسار العقدة</name>
+      <permissions>الصلاحيّات</permissions>
+      <PermissionButton>فتح الواجهة</PermissionButton>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <permission-require>يجب تحديد صلاحيّات</permission-require>
+    </msg>
+  </UIUnLockForm>
+  <UILockHolderList>
+    <header>
+      <name>مجموعات أو مُستخدمين</name>
+      <action>اجراء</action>
+    </header>
+    <tooltip>
+      <DeleteLock>حذف مجموعة</DeleteLock>
+    </tooltip>
+    <msg>
+      <can-not-delete-lock-holder>لا يمكن حذف المجموعة {0}.</can-not-delete-lock-holder>
+    </msg>
+  </UILockHolderList>
+  <UILockNodeList>
+    <header>
+      <name>مسار العقدة</name>
+      <hoderLock>صاحب القفل</hoderLock>
+      <action>اجراء</action>
+    </header>
+    <tooltip>
+      <UnLock>UnLock</UnLock>
+    </tooltip>
+    <msg>
+      <access-denied-exception>ليس لديك صلاحية للوصول إلى هذه العقدة عن طريق المسار {0} أو ربّما تمّ حذف هذه العقدة.</access-denied-exception>
+    </msg>
+  </UILockNodeList>
+  <EditUnLockForm>
+    <title>
+      <UIUnLockForm>إدارة عملية التأمين</UIUnLockForm>
+    </title>
+  </EditUnLockForm>
+  <UITabPane>
+    <action>
+      <Close>#{word.close}</Close>
+    </action>
+    <title>
+      <UILockHolderContainer>إدارة عملية التأمين</UILockHolderContainer>
+      <UILockNodeList>عقدة مؤمّنة</UILockNodeList>
+    </title>
+  </UITabPane>
+
+  <UIViewFormTabPane>
+    <action>
+      <AddTabForm>إضافة علامة تبويب</AddTabForm>
+      <AddTab>#{word.save}</AddTab>
+      <BackViewForm>السابق</BackViewForm>
+    </action>
+  </UIViewFormTabPane>
+
+  <UITemplateForm>
+    <tab>
+      <label>
+        <defaultSkin>CSS</defaultSkin>
+      </label>
+    </tab>
+  </UITemplateForm>
+
+  <UITabPane>
+    <title>
+      <UISkinTab>CSS</UISkinTab>
+    </title>
+  </UITabPane>
+
+  <UISkinTab>
+    <header>
+      <name>اسم</name>
+      <roles>الأدوار</roles>
+      <baseVersion>الإصدار</baseVersion>
+      <action>الإجراءات</action>
+    </header>
+    <msg>
+      <undeletable>لا يمكن حذف '{0}' لأنّه افتراضي.</undeletable>
+      <confirm-delete>هل تؤكّد فعلا عمليّة الحذف؟</confirm-delete>
+    </msg>
+    <action>
+      <title>
+        <Edit>تغيير</Edit>
+        <Delete>حذف</Delete>
+      </title>
+    </action>
+  </UISkinTab>
+
+  <SkinForm>
+    <label>
+      <UITemplateContent>نموذج المظهر الخارجي</UITemplateContent>
+      <UIPopupWindow>صلاحيّات المظهر</UIPopupWindow>
+      <selectVersion>إصدارات</selectVersion>
+      <content>المحتوى:</content>
+      <name>الاسم:</name>
+      <isDocumentTemplate>هو نموذج للوثيقة</isDocumentTemplate>
+      <viewPermission>صلاحيّة:</viewPermission>
+      <enableVersion>تفعيل عمليّة الإصدار</enableVersion>
+    </label>
+    <title>إضافة / تغيير المظهر</title>
+  </SkinForm>
+
+  <UITagManager>
+    <action>
+      <title>
+        <RemoveStyle>إزالة</RemoveStyle>
+        <AddStyle>اضافة نمط</AddStyle>
+      </title>
+    </action>
+    <msg>
+      <confirm-delete>هل أنت متأكد من أنك تريد حذف هذا النّمط الخاص بالعلامة؟</confirm-delete>
+    </msg>
+  </UITagManager>
+
+  <UITaxonomyTreeContainer>
+    <action>
+      <Cancel>#{word.close}</Cancel>
+    </action>
+  </UITaxonomyTreeContainer>
+  <UITaxonomyTreeMainForm>
+    <action>
+      <NextViewPermission>التالي</NextViewPermission>
+    </action>
+  </UITaxonomyTreeMainForm>
+
+  <UIPermissionTreeForm>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <NextAddAction>التالي</NextAddAction>
+      <Previous>السابق</Previous>
+    </action>
+  </UIPermissionTreeForm>
+
+  <UIActionForm>
+    <action>
+      <PreviousViewPermission>السابق</PreviousViewPermission>
+      <NextViewTree>التالي</NextViewTree>
+    </action>
+    <msg>
+      <xss-vulnerability-character>يحتوي المجال '{0}' على أحرف XSS</xss-vulnerability-character>
+      <xss-vulnerability-character-wo-label>القيمة التي تمّ ادخالها في هذا المجال قد تحتوي على أحرف XSS</xss-vulnerability-character-wo-label>
+    </msg>
+  </UIActionForm>
+
+  <UITaxonomyTreeWorkingArea>
+    <action>
+      <Previous>السابق</Previous>
+    </action>
+  </UITaxonomyTreeWorkingArea>
+
+  <UITabPane>
+    <title>
+      <UITagManager>إدارة العلامات</UITagManager>
+      <UITagPermissionManager>صلاحيات ادارة العلامات</UITagPermissionManager>
+    </title>
+  </UITabPane>
+
+  <UITagPermissionInfo>
+    <header>
+      <usersOrGroups>مستخدم أو مجموعة</usersOrGroups>
+      <action>اجراء</action>
+    </header>
+    <action>
+      <title>
+        <Delete>حذف</Delete>
+      </title>
+    </action>
+    <msg>
+      <confirm-delete-permission>هل ترغب حقّا في حذف هذه الصلاحيّة؟</confirm-delete-permission>
+    </msg>
+  </UITagPermissionInfo>
+  <UITagPermissionForm>
+    <title>أضف صلاحيّة</title>
+    <action>
+      <Save>#{word.save}</Save>
+      <Add>إضافة</Add>
+    </action>
+    <label>
+      <userOrGroup>العضوية:</userOrGroup>
+    </label>
+    <msg>
+      <userOrGroup-alreadyExists>هذه العضوية موجودة مُسبقا. الرجاء اختيار واحدة أخرى.</userOrGroup-alreadyExists>
+    </msg>
+  </UITagPermissionForm>
+
+  <UIGroupMemberSelector>
+    <label>
+      <selectGroup>اختيار مجموعة</selectGroup>
+      <selectMembership>اختيار العضوية</selectMembership>
+    </label>
+  </UIGroupMemberSelector>
+
+  <UIFolksonomyManager>
+    <msg>
+      <confirm-delete>هل ترغب فعلا بحذف هذا النّمط ؟</confirm-delete>
+    </msg>
+    <action>
+      <title>
+        <AddStyle>اضافة نمط</AddStyle>
+      </title>
+    </action>
+  </UIFolksonomyManager>
+  <UIActionForm>
+    <title>
+      <ShowComponent>فتح نافذة</ShowComponent>
+      <removeReference>إزالة</removeReference>
+    </title>
+  </UIActionForm>
+  <NodeTypeNameValidator>
+    <msg>
+      <Invalid-char>هناك بعض الأحرف الغير مُتاحة. يُرجى كتابة قيمة أخرى.</Invalid-char>
+      <empty-input>قيمة المجال خالية أو فارغة.</empty-input>
+    </msg>
+  </NodeTypeNameValidator>
+  <UIActionForm>
+    <msg>
+      <constraint-violation-exception>لا يمكن إضافة العقدة '{0}' إلى '{1}' في مساحة العمل '{2}'. توجد مشكلة مع الصلاحيّات أو مع بعض القيود المفروضة.</constraint-violation-exception>
+    </msg>
+  </UIActionForm>
+
+  <UIWorkspaceWizard>
+    <msg>
+      <name-not-allowed>اسم محظور</name-not-allowed>
+    </msg>
+  </UIWorkspaceWizard>
+  <UIRepositoryForm>
+    <msg>
+      <not-complete-repository>The repository is being created. You need to wait a few minutes before creating another one.</not-complete-repository>
+    </msg>
+  </UIRepositoryForm>
+
+  <UIViewFormTabPane>
+    <label>
+      <addCategory>إضافة فئة</addCategory>
+      <addLocalizationLink>اضافة ترجمة</addLocalizationLink>
+    </label>
+  </UIViewFormTabPane>
+
+  <UIDriveForm>
+    <label>
+      <allowNodeTypesOnTree>نوع العُقد المسموح بها في الشجرة الموجودة على اليسار.</allowNodeTypesOnTree>
+    </label>
+  </UIDriveForm>
+  <DriveInputSet>
+    <title>
+      <ChooseNodeType>اختيار أنواع العقدة</ChooseNodeType>
+      <RemoveNodeType>إزالة</RemoveNodeType>
+    </title>
+  </DriveInputSet>
+  <PopupNodeTypeSelector>
+    <title>
+      <UINodeTypeSelector>اختيار أنواع العقدة</UINodeTypeSelector>
+      <PopupNodeTypeSelector>حدد أنواع العقدة</PopupNodeTypeSelector>
+    </title>
+  </PopupNodeTypeSelector>
+  <UINodeTypeSelector>
+    <label>
+      <selectedAllNodeTypes>اختيار جميع أنواع العقدة</selectedAllNodeTypes>
+    </label>
+  </UINodeTypeSelector>
+  <UIScriptForm>
+    <msg>
+      <PathNotFoundException>السكريبت موجود بالفعل في المجلد '{0}'.</PathNotFoundException>
+    </msg>
+  </UIScriptForm>
+  <UINodeTypeList>
+    <msg>
+      <no-list>لا يوجد أي نوع عقدة يطابق بحثك.</no-list>
+    </msg>
+  </UINodeTypeList>
+  <UIActionForm>
+    <msg>
+      <canotChangeActionId>لا يمكنك تغيير معرّف الاجراء ( Action ID).</canotChangeActionId>
+    </msg>
+  </UIActionForm>
+  <PopupComponent>
+    <title>
+      <UINodeTypeSelector>مُنتق نوع العقدة</UINodeTypeSelector>
+    </title>
+  </PopupComponent>
+  <UIPageIterator>
+    <label>
+      <maxPageSize>الحجم الأقصى للصفحة</maxPageSize>
+    </label>
+  </UIPageIterator>
+  <UILockNodeList>
+    <msg>
+      <can-not-unlock-node>ليس لديك الصلاحية لتحرير قفل هذه العقدة.  اتصل بخطط النظام للحصول على الصلاحية الصحيحة</can-not-unlock-node>
+    </msg>
+  </UILockNodeList>
+</bundle>

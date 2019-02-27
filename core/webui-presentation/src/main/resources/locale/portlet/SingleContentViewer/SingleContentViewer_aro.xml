@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UIPresentationContainer>
+    <title>
+      <QuickEdit>تغيير في مستكشف المحتوى</QuickEdit>
+      <print>طباعة هذه الصفحة</print>
+      <FastPublish>نشر</FastPublish>
+    </title>
+    <label>
+      <draft>مسودة</draft>
+      <print>طباعة</print>
+    </label>
+    <msg>
+      <no-content>لم يتم العثور على أي محتوى.</no-content>
+      <internal-server-error>حدث خطأ أثناء طلب البيانات من الخادم.</internal-server-error>
+      <empty-title-error>الرجاء تحديد عنوان جديد.</empty-title-error>
+    </msg>
+  </UIPresentationContainer>
+  <CorrectContentSelectorPopupWindow>
+    <title>
+      <UIContentSelectorOne>اختيار المحتوى</UIContentSelectorOne>
+    </title>
+  </CorrectContentSelectorPopupWindow>
+  <UISingleContentViewerPortlet>
+    <msg>
+      <AccessControlException>ليس لديك صلاحيّات الكافية للوصول إلى النمط الخاص بالتغيير</AccessControlException>
+    </msg>
+  </UISingleContentViewerPortlet>
+  <UISCVContextualRadioBox>
+    <label>
+      <Enable>مُتاح</Enable>
+      <Disable>غير مُتاح</Disable>
+    </label>
+  </UISCVContextualRadioBox>
+  <UIPreferencesPopupWindows>
+    <title>
+      <UISCVPreferences>التفاصيل الخاصة بخيارات المحتوى</UISCVPreferences>
+    </title>
+  </UIPreferencesPopupWindows>
+  <UISCVPreferences>
+    <action>
+      <Save>#{word.save}</Save>
+      <Abort>الغاء</Abort>
+      <Cancel>#{word.cancel}</Cancel>
+      <Print>طباعة</Print>
+      <Close>#{word.close}</Close>
+    </action>
+    <title>التفاصيل الخاصة بخيارات المحتوى</title>
+    <label>
+      <Back>العودة إلى الصفحة السابقة</Back>
+      <Edit>تغيير</Edit>
+      <Preferences>تفضيلات</Preferences>
+      <Title>التفاصيل الخاصة بخيارات المحتوى</Title>
+      <UISCVShowTitleConfigurationCheckBox>إظهار العنوان</UISCVShowTitleConfigurationCheckBox>
+      <UISCVShowDateConfigurationCheckBox>اظهار تاريخ</UISCVShowDateConfigurationCheckBox>
+      <UISCVShowOptionBarConfigurationCheckBox>عرض شريط الخيارات</UISCVShowOptionBarConfigurationCheckBox>
+      <DisplaySettingBlock>عرض الاعدادات</DisplaySettingBlock>
+      <ContentPathBlock>اختيار المحتوى</ContentPathBlock>
+      <UISCVConfigItemPathFormInputSet>مسار المحتوى</UISCVConfigItemPathFormInputSet>
+    <UISCVContentPathConfigurationInputBox>مسار المحتوى</UISCVContentPathConfigurationInputBox>
+      <Advance>متطور/ة</Advance>
+      <ContextCaption>التصفّح الديناميكي</ContextCaption>
+      <UISCVContextualRadioBox>سياق المحتوى</UISCVContextualRadioBox>
+      <UISCVParameterInputBox>بواسطة</UISCVParameterInputBox>
+      <PrintSettingBlock>إعدادات الطباعة</PrintSettingBlock>
+      <UISCVPrintPageParameter>مع</UISCVPrintPageParameter>
+      <UISCVConfigPrintPageFormInputSet>عرض في شكل صفحة</UISCVConfigPrintPageFormInputSet>
+      <LockStatus>تأمين</LockStatus>
+      <CacheManagement>قابليّة الرؤية للمحتوى</CacheManagement>
+      <UISCVCacheRadioBox>مشاركة المحتوى</UISCVCacheRadioBox>
+    </label>
+    <help>
+      <ContentPathBlock>قم بتحديد المحتويات التي ترغب في إظهارها. سيتم ديناميكيّـا استبدال هذا الاختيار الافتراضي إذا قمت بتفعيل خدمة التصقّح الديناميكي ( نمط متطوّر، انظر أدناه).</ContentPathBlock>
+      <DisplaySettingBlock>يمكنك اختيار إظهار أو إخفاء شريط الخيار المستخدم لإظهار رابط الطباعة.لك الخيار أيضا لعرض العنوان و التاريخ.</DisplaySettingBlock>
+      <ContextualHelp>يقوم بتفعيل التصفّح الديناميكي. يمكن تغيير المحتوى بطريقة ديناميكيّة بواسطة خيار آخر لعنوان الموارد الموحد الأصلي</ContextualHelp>
+      <ParameterHelp>سيتم استخدام هذا المعيار للحصول على المحتويات إذا تم تفعيل التصفــّــح الديناميكي.</ParameterHelp>
+    </help>
+    <msg>
+      <not-valid-path>مسار العنصر غير صحيح</not-valid-path>
+    </msg>
+    <tab>
+      <label>
+        <UISCVConfigContentFormInputSet>اختيار المحتوى</UISCVConfigContentFormInputSet>
+        <UISCVConfigDisplayFormInputSet>عرض الاعدادات</UISCVConfigDisplayFormInputSet>
+        <UISCVConfigPrintFormInputSet>إعدادات الطباعة</UISCVConfigPrintFormInputSet>
+        <UISCVConfigAdvancedFormInputSet>متطور/ة</UISCVConfigAdvancedFormInputSet>
+      </label>
+    </tab>
+  </UISCVPreferences>
+  <UISCVConfigItemPathFormInputSet>
+    <title>
+      <SelectFolderPath>حدد مسار المجلد</SelectFolderPath>
+      <AddPath>اضافة مسار</AddPath>
+    </title>
+  </UISCVConfigItemPathFormInputSet>
+  <UISCVConfigPrintPageFormInputSet>
+    <title>
+      <SelectTargetPage>عرض في شكل صفحة</SelectTargetPage>
+    </title>
+  </UISCVConfigPrintPageFormInputSet>
+  <UISCVConfigPrintPageSelectorPopupWindow>
+    <title>
+      <UIPageSelector>مُنتق الصفحات</UIPageSelector>
+    </title>
+  </UISCVConfigPrintPageSelectorPopupWindow>
+  <PublicationStates>
+    <archived>محفوظة</archived>
+    <obsolete>عفا عليها الزمن</obsolete>
+    <unpublished>غير منشورة</unpublished>
+    <enrolled>مُسَجّل</enrolled>
+    <draft>مسودة</draft>
+    <pending>معلّقة</pending>
+    <approved>موافق عليه</approved>
+    <inreview>قيد المراجعة</inreview>
+    <staged>جاهز للنشر</staged>
+    <published>تم نشره</published>
+  </PublicationStates>
+  <UISCVCacheRadioBox>
+    <label>
+      <Enable>مُقيّد بتسجيل الدّخول</Enable>
+      <Disable>مُقيّد بأدوار المستخدم</Disable>
+    </label>
+  </UISCVCacheRadioBox>
+</bundle>

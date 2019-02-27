@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <EditingPortlet>
+    <label>
+      <Editing>نمط:</Editing>
+    </label>
+    <msg>
+      <not-permission>لاتملك الصلاحية الكافية للقيام بهذا الاجراء</not-permission>
+    </msg>
+  </EditingPortlet>
+
+  <UIEditingForm>
+    <label>
+      <option>
+        <Draft>تعديل</Draft>
+        <Published>تم نشره</Published>
+      </option>
+    </label>
+  </UIEditingForm>
+</bundle>

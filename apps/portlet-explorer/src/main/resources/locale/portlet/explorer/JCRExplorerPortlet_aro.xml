@@ -1,0 +1,3248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <!--
+  #############################################################################
+  #             org.exoplatform.ecm.webui.component.UICommentForm             #
+  #############################################################################
+  -->
+  <UICommentForm>
+    <label>
+      <name>الاسم</name>
+      <email>البريد الإلكتروني</email>
+      <website>الموقع</website>
+      <comment>تعليق</comment>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <not-support>لا يمكنك التعليق على هذا النوع من الوثائق.</not-support>
+      <not-checkedout>يجب عليك مراجعة المستند قبل التعليق عليها</not-checkedout>
+      <content-null>لا يمكن أن يكون التعليق خالي من محتوى أو فارغا.</content-null>
+    </msg>
+  </UICommentForm>
+  <!--
+  #############################################################
+  # org.exoplatform.ecm.webui.component.UIVoteForm.gtmpl    #
+  #############################################################
+  -->
+  <UIVoteForm>
+    <title>
+      <normal>رديء</normal>
+      <good>جيد/اضغط للتصويت</good>
+      <verygood>متوسّط</verygood>
+      <excellent>حسن</excellent>
+      <best>ممتاز</best>
+      <no-value>لا يحتوي على قيمة</no-value>
+    </title>
+    <label>
+      <my-rating>تقديري:</my-rating>
+    </label>
+    <button>
+      <label>
+        <confirm>موافق</confirm>
+      </label>
+    </button>
+    <msg>
+      <not-support>لا يمكن التصويت على هذا النوع من الوثائق</not-support>
+      <not-checkedout>يجب عليك مراجعة المستند للتصويت</not-checkedout>
+      <vote-restriction>لا يمكنك التصويت أكثر من مرّة واحدة.</vote-restriction>
+    </msg>
+  </UIVoteForm>
+ 
+  <!--
+  #############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer    #
+  #############################################################################
+  -->
+  <UIJCRExplorer>
+    <msg>
+      <refresh-session-success>تم تحديث الدورة بنجاح</refresh-session-success>
+      <no-node-history>أنت الآن في المجلد الرئيسي.</no-node-history>
+      <save-session-success>تم حفظ  جميع التغييرات.</save-session-success>
+      <target-path-not-found>لا يمكنك الوصول إلى هذا المسار، أما لأنه غير موجود بعد الآن، أو رُبّما ليس لديك الصلاحيات الكافية للوصول إليه.</target-path-not-found>
+    </msg>
+  </UIJCRExplorer>
+  <!--
+  #############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UISideBar        #
+  #############################################################################
+  -->
+  <UISideBar>
+    <label>
+      <Relation>علاقة</Relation>
+      <Explorer>مستكشف الملفات</Explorer>
+      <Close>غلق المحتوى الجانبي</Close>
+      <TagExplorer>سحابة العلامات</TagExplorer>
+      <Clipboard>الحافظة</Clipboard>
+      <SavedSearches>عمليات البحث المحفوظة </SavedSearches>
+    </label>
+    <title>
+      <Control>لوحة التحكم الجانبيّة</Control>
+      <Close>غلق اللوحة الجانبية</Close>
+    </title>
+  </UISideBar>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIExplorerActionBar #
+  ################################################################################
+  -->
+  <UIViewBar>
+    <label>
+      <driveWorkspace>قرص فظاء العمل:</driveWorkspace>
+      <backToJCR>عودة إلى أقراص الـ JCR الرئيسية</backToJCR>
+      <setUpBrowser>إعداد خيارات التصفح الخاصة بك</setUpBrowser>
+      <refesh>تحديث</refesh>
+      <currentDrive>القرص الحالي</currentDrive>
+      <selectView>اختيار المشهد</selectView>
+      <showSideBar>عرض المحتوى الجانبي</showSideBar>
+      <more>المزيد</more>
+      <backTo>رجوع</backTo>
+    </label>
+  </UIViewBar>
+
+  <!--
+  #############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIDrivesArea  #
+  #############################################################################
+  -->
+  <UIDrivesBrowser>
+    <title>
+      <PersonalDrives>الأقراص الشخصية</PersonalDrives>
+      <GroupDrives>أقراص المجموعات</GroupDrives>
+      <GeneralDrives>الأقراص الرئيسية</GeneralDrives>
+    </title>
+    <msg>
+      <no-view-found>ليس هناك مشهد متاح لك بالرجوع الى صلاحيّاتك على القرص '{0}'.</no-view-found>
+      <access-denied>غير مسموح بالدخول! ربما ، ليست لديك الصلاحيّات الكافية على مساحة العمل الخاصّة بالقرص '{0}'.</access-denied>
+      <workspace-not-exist>تم تخزين القرص '{0}' في مساحة عمل أخرى غير معروفة. يرجى إعادة تهيئته.</workspace-not-exist>
+    </msg>
+  </UIDrivesBrowser>
+
+  <!--
+  #############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UITreeExplorer    #
+  #############################################################################
+  -->
+  <UITreeExplorer>
+    <title>المستكشف</title>
+    <label>
+      <Root>الجذر</Root>
+      <webDavView>فتح الملف بواسطة مايكروسوفت أوفيس</webDavView>
+    </label>
+    <msg>
+      <path-not-found>ربما تم حذف هذه العقدة أو تغييرها. الرجاء الضغط على زر التحديث.</path-not-found>
+    </msg>
+  </UITreeExplorer>
+  <!--
+  ##################################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIViewRelationList    #
+  ##################################################################################
+  -->
+  <UIViewRelationList>
+    <label>
+      <languages-list>الترجمات</languages-list>
+      <relation-list>العلاقات</relation-list>
+      <references-list>المراجع</references-list>
+      <no-related-document>ليست هناك وثائق ذات صلة</no-related-document>
+      <related-document>الوثائق ذات صلة</related-document>
+    </label>
+  </UIViewRelationList>
+  <!--
+  #########################################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.control.UIPreferencesForm  #
+  #########################################################################################
+  -->
+  <UIPreferencesForm>
+    <title>إعداد خيارات التصفح الخاصة بك</title>
+    <label>
+      <enableStructure>تصفح في وضع الهيكل:</enableStructure>
+      <showSideBar>إضهار الشريط الجانبي:</showSideBar>
+      <showHiddenNode>إظهار العناصر المخفية:</showHiddenNode>
+      <showNonDocument>إظهار العناصر غير المستند:</showNonDocument>
+      <showRefDocuments>إظهار الوثائق الموصولة:</showRefDocuments>
+      <enableDragAndDrop>اتاحة تقنية السحب و الإسقاط:</enableDragAndDrop>
+      <sortBy>الترتيب بحسب:</sortBy>
+      <order>ترتيب بحسب:</order>
+      <nodesPerPage>عنصر بكل صفحة:</nodesPerPage>
+    </label>
+    <action>
+      <Back>#{word.close}</Back>
+      <Save>#{word.save}</Save>
+    </action>
+  </UIPreferencesForm>
+  <!--
+  #########################################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.control.UIPreferencesForm  #
+  #########################################################################################
+  -->
+  <UIAllItemsPreferenceForm>
+    <title>تعيين خيارات عمليّة الفلترة</title>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Save>#{word.save}</Save>
+    </action>
+  </UIAllItemsPreferenceForm>
+  <!--
+  #########################################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIRenameForm  #
+  #########################################################################################
+  -->
+  <UIRenameForm>
+    <title>إعادة تسمية</title>
+    <label>
+      <nameField>الاسم</nameField>
+      <titleField>العنوان</titleField>
+    </label>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Save>#{word.save}</Save>
+      <Back>#{word.back}</Back>
+    </action>
+    <msg>
+      <rename-successfull>تم إعادة تسمية العقدة '{0}' الى '{1}' بنجاح.</rename-successfull>
+      <rename-denied>غير مسموح بإعادة تسمية هذا العنصر.</rename-denied>
+      <fileName-invalid>هناك بعض الحروف الغير متاحة في هذا الإسم.</fileName-invalid>
+      <newName-same-oldName>الاسم الجديد مطابق للاسم القديم. يُرجى التثبّت مرّة أخرى.</newName-same-oldName>
+      <version-exception>هذا المستند (أو سلف منه) لم يتم مراجعته بعد.</version-exception>
+      <lock-exception>هذا المستند مؤمن. الرجاء إلغاء تأمينه قبل إعادة تسميته.</lock-exception>
+      <constraintViolation-exception>طرأ خطأ أثناء اعادة التسمية '{0}'. يُرجى التثبّت مرّة أخرى.</constraintViolation-exception>
+      <unknown-prefix>لم يتمّ تسجيل البادئة "{0}' الى حتى الآن.</unknown-prefix>
+      <rename-error>حدث خطأ أثناء إعادة التسمية. يرجى التحقق مرة أخرى.</rename-error>
+    </msg>
+  </UIRenameForm>
+  <UIPopupWindow>
+    <title>
+      <UIRenameForm>إعادة تسمية</UIRenameForm>
+      <UIActionContainer>تغيير</UIActionContainer>
+      <UIFolderForm>إضافة مجلد</UIFolderForm>
+      <UIUploadManager>تحميل ملف</UIUploadManager>
+      <UIReferencesList>قائمة المراجع</UIReferencesList>
+      <UIExportNode>تصدير</UIExportNode>
+      <UINodeTypeInfo>معلومات حول نوع العقدة</UINodeTypeInfo>
+      <UIVersionInfo>معلومات حول الإصدار</UIVersionInfo>
+      <UIActivateVersion>تفعيل الإصدار</UIActivateVersion>
+      <UIAuditingInfo>تدقيق</UIAuditingInfo>
+      <UIActivateAuditing>تفعيل التدقيق</UIActivateAuditing>
+      <UIPermissionManager>ادارة الصلاحيّات</UIPermissionManager>
+      <UIPropertiesManager>ادارة الخاصيّات</UIPropertiesManager>
+      <UIECMSearch>بحث متقدم</UIECMSearch>
+      <UISavedQuery>قائمة الإستبيانات المحفوظة</UISavedQuery>
+      <UIWatchDocumentForm>تتبّع محتوى الوثيقة</UIWatchDocumentForm>
+      <UIActionManager>إدارة الاجراءات</UIActionManager>
+      <UIDocumentForm>تغيير محتوى الوثيقة</UIDocumentForm>
+      <UIDocumentFormController>إضافة وثيقة جديدة</UIDocumentFormController>
+      <EditFormController>تغيير محتوى الوثيقة</EditFormController>
+      <UIRelationManager>إضافة صلة</UIRelationManager>
+      <UICategoryManager>إضافة فئة</UICategoryManager>
+      <UIImportNode>استيراد</UIImportNode>
+      <UIViewMetadataManager>عرض قالب المعلومات القياسية</UIViewMetadataManager>
+      <UIVoteForm>تصويت للوثيقة</UIVoteForm>
+      <UICommentForm>أضف تعليق</UICommentForm>
+      <UIPreferencesForm>تفضيلات تصفح المستند</UIPreferencesForm>
+      <UIPublicationManager>إدارة النشر</UIPublicationManager>
+      <UIConfirmMessage>تأكيد الحذف؟</UIConfirmMessage>
+      <UIDeleteFileConfirmMessage>حذف الملف؟</UIDeleteFileConfirmMessage>
+      <UIDeleteFolderConfirmMessage>حذف المجلد؟</UIDeleteFolderConfirmMessage>
+      <UIDeleteItemsConfirmMessage>حذف العناصر؟</UIDeleteItemsConfirmMessage>
+      <UIRestoreConfirmMessage>تأكيد عمليّة الاستعادة</UIRestoreConfirmMessage>
+      <UIActivePublication>تسجيل دورة حياة النشر</UIActivePublication>
+      <UITaggingForm>إضافة علامات لهذه الوثيقة</UITaggingForm>
+      <UIThumbnailForm>إضافة صورة مصغرة</UIThumbnailForm>
+      <UIAllItemsPreferenceForm>تفضيلات تصفح المستند</UIAllItemsPreferenceForm>
+      <UISelectRestorePath>اختر المسار الخاص بالاستعادة</UISelectRestorePath>
+      <UISEOForm>إدارة الـSEO</UISEOForm>
+      <UISEOToolbarForm>إدارة الـSEO</UISEOToolbarForm>
+      <UIReadOnlyFileConfirmMessage>فتح الوثيقة</UIReadOnlyFileConfirmMessage>
+      <UIDocumentAutoVersionForm>نسخ الوثيقة</UIDocumentAutoVersionForm>
+    </title>
+    <header>
+      <workspace>مساحة عمل</workspace>
+      <path>مسار</path>
+    </header>
+  </UIPopupWindow>
+  <!--
+  #########################################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIResourceForm #
+  #########################################################################################
+  -->
+  <UIResourceForm>
+    <title>تغيير محتوى الملف</title>
+    <label>
+      <name>الاسم</name>
+      <textToModify>النص اللذي سيتم تغييره</textToModify>
+      <fileToUpload>تحميل محتوى جديد لهذه الوثيقة (يجب أن تكون نفس نوع التوصيلة)</fileToUpload>
+    </label>
+  </UIResourceForm>
+  <!--
+  ###################################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIActionBar      #
+  ###################################################################################
+  -->
+  <UIActionBar>
+    <tooltip>
+      <AddFolder>إضافة مجلد</AddFolder>
+      <AddDocument>إضافة وثيقة</AddDocument>
+      <EditDocument>تغيير</EditDocument>
+      <Upload>تحميل</Upload>
+      <Paste>ألصق</Paste>
+      <Search>بحث</Search>
+      <WatchDocument>تتبّع/الغاء التتبّع</WatchDocument>
+      <TaggingDocument>علامة</TaggingDocument>
+      <Vote>تصويت</Vote>
+      <Comment>تعليق</Comment>
+      <ManageVersions>الإصدارات</ManageVersions>
+      <ManageAuditing>التدقيق</ManageAuditing>
+      <ManagePublications>النشر</ManagePublications>
+      <ManageCategories>الفئات</ManageCategories>
+      <ManageRelations>العلاقات</ManageRelations>
+      <ManageActions>الاجراءات</ManageActions>
+      <ExportNode>تصدير</ExportNode>
+      <ImportNode>استيراد</ImportNode>
+      <OverloadThumbnail>تغيير الصورة المصغرة</OverloadThumbnail>
+      <ManageHidden>إخفاء/عرض المحتوى</ManageHidden>
+      <ViewReferences>المراجع</ViewReferences>
+      <ViewNodeType>الأنواع</ViewNodeType>
+      <ViewPermissions>الصلاحيّات</ViewPermissions>
+      <ViewProperties>الخاصيّات</ViewProperties>
+      <ViewMetadatas>قالب المعلومات القياسية</ViewMetadatas>
+      <ViewRelations>إخفاء/عرض العلاقات</ViewRelations>
+      <ShowJCRStructure>إخفاء/عرض شكل المحتوى</ShowJCRStructure>
+      <EditProperty>تغيير خصائص الملف</EditProperty>
+      <UploadNewVersion>تحميل نسخة جديدة</UploadNewVersion>
+    </tooltip>
+    <msg>
+      <cannot-action-in-rootnode>لا يمكنك تنفيذ هذا الإجراء في الجذر.</cannot-action-in-rootnode>
+      <node-checkedin>يجب عليك انهاء المراجعة أوّلا.</node-checkedin>
+      <cannot-enable-version-rootnode>لا يمكن تنشيط عملية الإصدار في الجذر.</cannot-enable-version-rootnode>
+      <cannot-enable-publication-rootnode>لا يمكن تنشيط المنشور في الجذر.</cannot-enable-publication-rootnode>
+      <manage-publication>
+        <not-supported-nodetype>يمكن نشر المستندات فقط.</not-supported-nodetype>
+        <no-publication-lifecycle>دورة حياة النشر غير مهيئة.</no-publication-lifecycle>
+      </manage-publication>
+      <unsubcriber-lifecycle>تمّ بالفعل إلغاء الاشتراك من هذا المستند.</unsubcriber-lifecycle>
+      <not-supported-nodetype>هذه العملية معتمدة فقط للمستندات.</not-supported-nodetype>
+      <unsubcriber-lifecycle-finish>تمّ بالفعل إلغاء الاشتراك من هذا المستند بنجاح.</unsubcriber-lifecycle-finish>
+      <access-false>المستند ليس من نوع وثيقة أو ربّما يكون في حالة معالجة.</access-false>
+      <unsupported-action>هذا الاجراء غير مدعوم.</unsupported-action>
+      <not-relationable>لا يحتوي هذا المستند على أية علاقات.</not-relationable>
+      <node-pasted>تم لصق العقدة '{0}' في المسار '{1}'. لفد تمّ حفظ هذه العملية مُسبقـًا.</node-pasted>
+      <no-node-selected>لايوجد شيء للقيام بنسخة.</no-node-selected>
+      <unable-edit>تعديل مستندات نوع '{1}' مثل '{0}' غير معتمد.</unable-edit>
+      <not-support>لا يمكن تعديل العنصر المحدد.</not-support>
+      <template-null>هذا المستند ليس له واجهة للمستخدم</template-null>
+      <keyword-null>لا توجد كلمات مفاتيح مختارة للبحث</keyword-null>
+      <not-found>لم يتمّ العثور على أي نتيجة.</not-found>
+      <keyword-not-allow>أحد الكلمات المفاتيح المختارة غير صحيح.</keyword-not-allow>
+      <is-not-referenable>لا يمكن أن تكون '{0}' مرجعياً.</is-not-referenable>
+      <access-denied>غير مسموح بالدخول. ليس لديك الصلاحية الكافية لتغيير هذا العنصر.</access-denied>
+      <access-add-denied>غير مسموح بالدخول. ليس لديك الصلاحية الكافية للإضافة عناصر هنا.</access-add-denied>
+      <item-existed>هذه العقدة موجودة مُسبقًـا. لا يمكن استعمال نفس الاسم مرّتين.</item-existed>
+      <removed-hidden-mixin>تم حذف الميكسين المخفي ('hidden mixin') بنجاح.</removed-hidden-mixin>
+      <added-hidden-mixin>تم إضافة الميكسين المخفي('hidden mixin') بنجاح.</added-hidden-mixin>
+      <not-supported>هذه المهمة لا يمكن استعمالها إلا للوثائق فقط.</not-supported>
+      <empty-file-type>لا يمكنك إضافة مستند هنا.</empty-file-type>
+      <unsupported-watch>لا يمكن متابعة إلا المستندات فقط.</unsupported-watch>
+      <watch-checkedin>يجب مراجعة المستند قبل المتابعة.</watch-checkedin>
+      <unsupported-tagging>لا يمكن إضافة علامات إلا للمستندات.</unsupported-tagging>
+      <tagnode-checkedin>يجب مراجعة المستند قبل إضافة العلامات.</tagnode-checkedin>
+    </msg>
+    <title>
+      <select-tab>اختيار تبويبة</select-tab>
+      <SimpleSearch>بحث سريع</SimpleSearch>
+      <AdvanceSearch>بحث متقدم</AdvanceSearch>
+      <SavedQueries>الاستبيانات المحفوظة</SavedQueries>
+      <ShowAllOwnedByUser>اظهار كافة العناصر الخاصة بي</ShowAllOwnedByUser>
+      <ShowAllFavourite>اظهار كافة العناصر المفضّلة</ShowAllFavourite>
+      <ShowAllHidden>اظهار كافة العناصر المخفيّة</ShowAllHidden>
+      <ShowAllFromTrash>اظهار كافة العناصر من سلّة المهملات</ShowAllFromTrash>
+    </title>
+  </UIActionBar>
+  <UIPopupMenu>
+    <msg>
+      <has-not-permission>غير مسموح بالدخول. ليس لديك الصلاحية الكافية للإضافة في هذا العنصر.</has-not-permission>
+      <has-not-edit-permission>غير مسموح بالدخول. ليس لديك الصلاحية هنا. اتصل بمدير النظام للحصول على الصلاحية الصحيحة.</has-not-edit-permission>
+      <cannot-login-node>لا يمكنك الدخول و إلصاق العنصر هنا.</cannot-login-node>
+      <cannot-paste-nodetype>لا يمكنك لصق هذا النوع من العنصر هنا.</cannot-paste-nodetype>
+      <has-not-permission-unlok>ليس لديك الصلاحية لفكّ تأمين هذا المستند.</has-not-permission-unlok>
+      <bound-exception>ليس لديك الصلاحية بإعادة تسمية هذا العنصر. يُرجى الاتّصال بمدير النّظام.</bound-exception>
+      <bound-move-exception>لا يمكنك نقل عنصر إلى نفسه أو في مجلد فرعي.</bound-move-exception>
+      <does-not-support-auditing>لا يمكن تفعيل التدقيق هنا.</does-not-support-auditing>
+      <can-not-rename-node>ليس لديك الصلاحية لإعادة تسمية  هذا العنصر. الرجاء الاتصال بمدير النظام للحصول على الصلاحية الضرورية.</can-not-rename-node>
+      <can-not-cut-node>ليس لديك الصلاحية الكافية لقص هذا العنصر. يُرجى الاتّصال بمدير النظام.</can-not-cut-node>
+      <can-not-remove-node>ليس لديك الصلاحية الكافية لحذف هذا العنصر.  يُرجى الاتّصال بمدير النظام.</can-not-remove-node>
+      <can-not-lock-node>ليس لديك الصلاحيّة الكافية لقفل {0}. يُرجى الاتّصال بمدير النظام.</can-not-lock-node>
+      <can-not-unlock-node>ليس لديك الصلاحية الكافية لفتح هذا العنصر. يُرجى الاتّصال بمدير النظام.</can-not-unlock-node>
+      <no-node>يُرجى اختيار على الأقلّ عنصر واحد قبل عمليّة اللصق.</no-node>
+      <can-not-paste-node>ليس لديك الصلاحية الكافية للانتقال إلى هذا العنصر. يُرجى الاتّصال بمدير النظام.</can-not-paste-node>
+      <can-not-move-node>ليس لديك الصلاحيّة الكافية لنقل هذا العنصر. يُرجى الاتّصال بمدير النظام.</can-not-move-node>
+      <does-not-support-versioning>ليس لديك الصلاحيّة الكافية للنقل.  يُرجى الاتّصال بمدير النظام.</does-not-support-versioning>
+      <path-not-found>تمّ حذف أو تغيير هذا العنصر. يُرجى الضّغط على زرّ التّحديث.</path-not-found>
+      <paste-lock-exception>لا يمكن لصق '{0}' هنا. تأكد من أنه لم يتم تأمين ولا هذا المجلد. تحقق أيضا من أن أي وثيقة الصلة مؤمنة.</paste-lock-exception>
+      <can-not-checkin-node>لا يمكنك مراجعة هذا العنصر . يُرجى التحقّق من امتلاكك للصلاحية الضرورية.</can-not-checkin-node>
+      <can-not-checkout-node>لا يمكنك إنهاء المراجعة .يُرجى التحقّق من امتلاكك للصلاحية المناسبة.</can-not-checkout-node>
+      <move-constraint-exception>طرأ خطأ أثناء هذا العنصر.</move-constraint-exception>
+      <not-lock-owner>لا يمكنك الغاء تأمين هذه العقدة لأنك لست مالك القفل.</not-lock-owner>
+      <is-checked-in>الرجاء مراجعة هذا المستند قبل إعادة تسمية.</is-checked-in>
+      <is-checked-in-lock>الرجاء مراجعة هذا المستند قبل القفل.</is-checked-in-lock>
+      <cant-lock>لا يمكنك تأمين هذا المستند.</cant-lock>
+      <node-locked>هذا العنصر ذو المسار '{0}' أو أحد العقد الفوقيّة له قد تمّ تأمينه.</node-locked>
+      <can-not-delete>يُرجى غلق هذا المستند قبل حذفه.</can-not-delete>
+      <can-not-delete-version>لا يمكنك حذف هذا المستند لأنه يحمل صفة الإصدار.</can-not-delete-version>
+      <not-support>لا يمكنك حذف العنصر المحدد. الرجاء تحديد آخر.</not-support>
+      <current-node-not-allow-paste>لا يمكنك لصق العنصر المنسوخ.</current-node-not-allow-paste>
+      <copied-node-in-versioning>لا يمكن لصق العقدة المنسوخة لأنها تحمل صفة الإصدار.</copied-node-in-versioning>
+      <parent-node-locked>ليس لديك الصلاحيّات الكافية لفتح  '{0}'.</parent-node-locked>
+      <this-node-locked-by-parent>يمكنك لا يمكن فتح هذا العنصر. مؤمن من المجلد الأصل.</this-node-locked-by-parent>
+      <paste-node-same-name>لا يمكن لصق هذا العنصر هنا. عنصر بنفس الاسم موجود بالفعل في مجلد الوجهة.</paste-node-same-name>
+      <has-not-add-permission>ليس لك الصلاحية المناسبة للإضافة هنا.</has-not-add-permission>
+      <node-cutting>تم قص العنصر. لا يمكن لصقه هنا.</node-cutting>
+      <access-denied>غير مسموح بالدخول، قد لا يكون لديك الصلاحية.</access-denied>
+      <remove-verion-exception>لا يمكنك حذف هذا المستند لأنها هي (أو أحد فروعها) في حالة مراجعة.</remove-verion-exception>
+      <remove-referentialIntegrityException>لا يمكن حذف هذا العنصر لأنه موصول بعنصر أخر.</remove-referentialIntegrityException>
+      <constraintviolation-exception>لم يتمّ العثور على العنصر 'jcr:uuid'. رُبّما تم تغيير أو حذف المستند. يرجى الضغط على زرّ التّحديث.</constraintviolation-exception>
+      <path-not-found-exception>تمّ حذف أو تغيير هذا المستند. يرجى الضغط على زرّ التّحديث.</path-not-found-exception>
+      <not-exist-categories>هذه الفئة لا وجود لها.</not-exist-categories>
+      <lock-node-read-only>هذا الملف مؤمن بواسطة المستخدم {0}. أترغب بفتحه بصيغة  القراءة فقط؟</lock-node-read-only>
+    </msg>
+  </UIPopupMenu>
+  <!--
+  #############################################################################
+  #     org.exoplatform.ecm.webui.component.explorer.actions.UIFolderForm     #
+  #############################################################################
+  -->
+  <UIFolderForm>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Save>انشاء مجلّد</Save>
+    </action>
+    <label>
+      <titleTextBox>اسم المجلد:</titleTextBox>
+      <customTypeCheckBox>استخدم نوع مخصّص من المجلد</customTypeCheckBox>
+    </label>
+    <title>إضافة/تغيير المجلد</title>
+    <msg>
+      <addFolder-successful>تمت إضافة المجلد '{0}' بنجاح.</addFolder-successful>
+      <name-invalid>رجــاءً أدخل اسم المجلد.</name-invalid>
+      <title-invalid>رجــاءً أدخل عنوان المجلد.</title-invalid>
+      <name-not-allowed>هذا الاسم غير متاح.</name-not-allowed>
+      <fileName-error>صيغة اسم الملف غير صحيحة.</fileName-error>
+      <constraint-violation>لا يمكن إضافة مستند من نوع '{0}' هنا.</constraint-violation>
+      <repository-exception>طرأ خطأ غير متوقّع. للمزيد من المعلومات، يُرجى الاتصال بمدير النّظام .</repository-exception>
+      <repository-exception-permission>ليس لديك الصلاحيّة الكافية لإضافة مجلد جديد هنا.</repository-exception-permission>
+      <numberformat-exception>لا يمكن حفظ هذا المجلد. يجب أن يكون الاسم عدديّـا.</numberformat-exception>
+      <!--DMS 2.4.x; ECM-3553-->
+      <not-allow-sameNameSibling>لا يمكنك الحفظ في المجلد. عنصر بنفس الاسم موجود مسبقاً.</not-allow-sameNameSibling>
+      <ntFolder-not-avaiable>يجب عليك تحديد نوع مخصص من المجلد</ntFolder-not-avaiable>
+    </msg>
+    <help>
+      <customTypeCheckBoxHelp>تثبّت إذا كنت ترغب في تخزين محتويات الويب أو أنواع الملفّات المخصصة في هذا المجلد</customTypeCheckBoxHelp>
+    </help>
+  </UIFolderForm>
+  <!--
+  ###################################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIDocumentWorkspace    #
+  ###################################################################################
+  -->
+  <UIWorkingArea>
+    <title>
+      <Icon>أيقونة</Icon>
+    </title>
+    <msg>
+      <!-- Delte one node is not in trash and have no relation -->
+      <confirm-delete>هل ترغب حقـّا بحذف العنصر '{0}'؟</confirm-delete>
+      <confirm-delete-file>هل ترغب حقـّا بحذف الملف '{0}'؟</confirm-delete-file>
+      <confirm-delete-folder>هل ترغب حقـّا بحذف المجلد '{0}' وكافة مجلّداته الفرعيّة؟</confirm-delete-folder>
+      
+      <!-- Delte one node is in trash and have no relation -->
+      <confirm-delete-permanently>هل ترغب حقـّا بحذف العنصر '{0}' بصفة نهائيّة؟</confirm-delete-permanently>
+      <confirm-delete-file-permanently>هل ترغب حقّا بحذف الملف '{0}' بصفة نهائيّة ؟</confirm-delete-file-permanently>
+      <confirm-delete-folder-permanently>هل ترغب حقّا بحذف المجلّد '{0}' و جميع مجلّداته الفرعيّة بصفة نهائيّة ؟</confirm-delete-folder-permanently>
+      
+      <!-- Delte one node is not in trash and have relations -->
+      <confirm-delete-has-relations>هل أنت متأكد من أنك تريد حذف العنصر '{0}' و جميع مراجعه؟</confirm-delete-has-relations>
+      <confirm-delete-file-has-relations>هل أنت متأكد من أنك تريد حذف الملف '{0}' و جميع مراجعه؟</confirm-delete-file-has-relations>
+      <confirm-delete-folder-has-relations>هل أنت متأكد من أنك تريد حذف المجلد '{0}' و جميع مراجعه؟</confirm-delete-folder-has-relations>
+      
+      <!-- Delte multiple nodes, not in Trash, have no relations -->
+      <confirm-delete-multi-nodes-generic>هل أنت متأكد من أنك تريد حذف  كل الـ {0} عناصر التي تمّ اختيارها ؟</confirm-delete-multi-nodes-generic>  
+      <confirm-delete-multi-nodes-file>هل أنت متأكد من أنك تريد حذف  كل الـ {0} ملفّات التي تمّ اختيارها ؟</confirm-delete-multi-nodes-file>
+      <confirm-delete-multi-nodes-folder>هل أنت متأكد من أنك تريد حذف كلّ الـ {0} مجلدات التي تمّ اختيارها وكافة المجلدات الفرعيّة ؟</confirm-delete-multi-nodes-folder>
+      <confirm-delete-multi-nodes-generic-and-file>هل أنت متأكد من أنك تريد حذف  كل الـ {0} عناصر و الملفّات التي تمّ اختيارها ؟</confirm-delete-multi-nodes-generic-and-file>
+      <confirm-delete-multi-nodes-generic-and-folder>هل أنت متأكد من أنك تريد حذف كلّ الـ {0} عناصر ، المجلدات إلى جانب المجلدات الفرعيّة التي تمّ اختيارها ؟</confirm-delete-multi-nodes-generic-and-folder>
+      <confirm-delete-multi-nodes-file-and-folder>هل أنت متأكد من أنك تريد حذف كلّ الـ {0} ملفّات و المجلّدات إلى جانب المجلّدات الفرعيّة التي تمّ اختيارها ؟</confirm-delete-multi-nodes-file-and-folder>
+      <confirm-delete-multi-nodes-generic-and-file-and-folder>هل أنت متأكد من أنك تريد حذف كلّ الـ {0} عناصر ،الملفات و المجلدات إلى جانب المجلدات الفرعيّة التي تمّ اختيارها ؟</confirm-delete-multi-nodes-generic-and-file-and-folder>
+      
+      <!-- Delte multiple nodes, in Trash -->
+      <confirm-delete-multi-nodes-generic-permanently>هل ترغب حقّا بحذف جميع الـ {0} عناصر المختارة بصفة نهائيّة ؟</confirm-delete-multi-nodes-generic-permanently>  
+      <confirm-delete-multi-nodes-file-permanently>هل ترغب حقّا بحذف جميع الـ {0} ملفّات المختارة بصفة نهائيّة ؟</confirm-delete-multi-nodes-file-permanently>
+      <confirm-delete-multi-nodes-folder-permanently>هل ترغب حقّا بحذف جميع الـ {0} مجلّدات المختارة و جميع المجلدات الفرعيّة بصفة نهائيّة ؟</confirm-delete-multi-nodes-folder-permanently>
+      <confirm-delete-multi-nodes-generic-and-file-permanently>هل ترغب حقّا بحذف جميع الـ {0} عناصر المختارة و الملفّات بصفة نهائيّة ؟</confirm-delete-multi-nodes-generic-and-file-permanently>
+      <confirm-delete-multi-nodes-generic-and-folder-permanently>هل ترغب حقّا بحذف جميع الـ {0} عناصر المختارة، المجلّدات و جميع المجلّدات الفرعيّة بصفة نهائيّة ؟</confirm-delete-multi-nodes-generic-and-folder-permanently>
+      <confirm-delete-multi-nodes-file-and-folder-permanently>هل ترغب حقّا بحذف جميع الـ {0} ملفّات المختارة، المجلّدات و جميع المجلّدات الفرعيّة بصفة نهائيّة ؟</confirm-delete-multi-nodes-file-and-folder-permanently>
+      <confirm-delete-multi-nodes-generic-and-file-and-folder-permanently>هل ترغب حقّا بحذف جميع الـ {0} عناصر المختارة، الملفّات، المجلّدات و جميع المجلّدات الفرعيّة بصفة نهائيّة ؟</confirm-delete-multi-nodes-generic-and-file-and-folder-permanently>
+      
+      <!-- Delte multiple nodes, have relations -->
+      <confirm-delete-multi-nodes-generic-have-relations>هل أنت متأكد من أنك تريد حذف الـ {0} عناصر التي تمّ اختيارها و جميع مراجعها؟</confirm-delete-multi-nodes-generic-have-relations>  
+      <confirm-delete-multi-nodes-file-have-relations>هل أنت متأكد من أنك تريد حذف الـ {0} ملفات التي تمّ اختيارها و جميع مراجعها؟</confirm-delete-multi-nodes-file-have-relations>
+      <confirm-delete-multi-nodes-folder-have-relations>هل أنت متأكد من أنك تريد حذف الـ {0} ملفات و المجلّدات التي تمّ اختيارها بجميع مراجعها؟</confirm-delete-multi-nodes-folder-have-relations>
+      <confirm-delete-multi-nodes-generic-and-file-have-relations>هل أنت متأكد من أنك تريد حذف الـ {0} عناصر و الملفّات التي تمّ اختيارها بجميع مراجعها؟</confirm-delete-multi-nodes-generic-and-file-have-relations>
+      <confirm-delete-multi-nodes-generic-and-folder-have-relations>هل أنت متأكد من أنك تريد حذف الـ {0} عناصر ، و المراجع الى جانب المُجلّدات التي تمّ اختيارها بجميع فروعها ؟</confirm-delete-multi-nodes-generic-and-folder-have-relations>
+      <confirm-delete-multi-nodes-file-and-folder-have-relations>هل أنت متأكد من أنك تريد حذف الـ {0} ملفّات ، و المراجع الى جانب المُجلّدات التي تمّ اختيارها بجميع فروعها ؟</confirm-delete-multi-nodes-file-and-folder-have-relations>
+      <confirm-delete-multi-nodes-generic-and-file-and-folder-have-relations>هل أنت متأكد من أنك تريد حذف الـ {0} عناصر ، الملفّات، مراجعها الى جانب المُجلّدات التي تمّ اختيارها بجميع فروعها ؟</confirm-delete-multi-nodes-generic-and-file-and-folder-have-relations>
+      
+      <feedback-delete>'{0}' تمّ حذفه بنجاح.</feedback-delete>
+      <feedback-delete-multi>{0} عنصر/عناصر تمّ حذفها بنجاح.</feedback-delete-multi>      
+      <feedback-delete-permanently>'{0}' تمّ حذفهم بصفة نهائيّة.</feedback-delete-permanently>
+      <feedback-delete-permanently-multi>'{0}' عنصر / عناصر تمّ حذفهم بصفة نهائيّة.</feedback-delete-permanently-multi>
+      <undo-delete>التراجع عن</undo-delete>
+      <feedback-restore>'{0}' تمّ استعادته بنجاح.</feedback-restore>
+      <feedback-restore-multi>{0} عنصر تمّ استعادته بنجاح.</feedback-restore-multi>
+      
+      <confirm-restore>عنصر '{0}' موجود بالفعل في الموقع السابق. هل أنت متأكد من أنك تريد استعادته؟</confirm-restore>
+      <confirm-move>هل ترغب حقــا بالقيام بعمليّة النقل؟</confirm-move>
+      <node-cut>قد تم قطع '{0}'.</node-cut>
+      <execute-successfully>تمّ تنفيذ الاجراء '{0}'.</execute-successfully>
+      <save-node-success>لقد تم حفظ '{0}'.</save-node-success>
+      <move-problem>لا يمكنك نقل '{0}' إلى '{1}' بسبب مشكلة في الصلاحية المنسوبة إليك أو أنها مقيّدة بشروط.</move-problem>
+    </msg>
+  </UIWorkingArea>
+  <UIDocumentWorkspace>
+    <label>
+      <no-children>هذا العنصر ليس لديه فروع.</no-children>
+      <no-children-but-has-hidden>هذا المجلد لا يحتوي أي بند من البنود، لكنّه يحتوي على ملفّات مخفيّة.</no-children-but-has-hidden>
+    </label>
+    <msg>
+      <unable-save-node>قد تم إنشاء '{0}'. الرجاء حفظ الدورة للتحقق من صحة هذا الإجراء.</unable-save-node>
+      <save-node-success>لقد تم حفظ '{0}'.</save-node-success>
+      <node-copied>قد تم نسخ '{0}'.</node-copied>
+      <node-cut>قد تم قطع '{0}'.</node-cut>
+      <remove-root>لا يمكنك إزالة المجلد الجذر.</remove-root>
+      <node-remove-success>لقد تمت إزالة '{0}'.</node-remove-success>
+    </msg>
+    <tooltip>
+      <Rename>إعادة التسمية</Rename>
+      <Cut>قصّ</Cut>
+      <Copy>نسخ</Copy>
+      <Save>#{word.save}</Save>
+      <RemoveNode>حذف</RemoveNode>
+      <Checkin>مراجعة</Checkin>
+      <Checkout>إنهاء المراجعة</Checkout>
+      <Lock>تأمين</Lock>
+      <Unlock>الغاء التّأمين</Unlock>
+      <EditDocument>تغيير</EditDocument>
+      <Paste>لصق</Paste>
+      <LockedBy>تمّ تأمينه بواسطة</LockedBy>
+    </tooltip>
+  </UIDocumentWorkspace>
+  <UIDocumentInfo>
+    <msg>
+      <access-denied>غير مسموح بالدخول. ليس لديك الصلاحية للوصول الى '{0}'.</access-denied>
+      <null-exception>عنصر غير موجود. تم حذفه أو تغييره أو ليس لك الصلاحية الكافية للوصول له.</null-exception>
+      <confirm-deleteattachment>هل ترغب فعلا بحذف هذا الملفّ المُرفق؟</confirm-deleteattachment>
+      <confirm-deleteattcomment>هل ترغب حقّـا بحذف هذا التّعليق؟</confirm-deleteattcomment>
+      <access-denied-exception>تم رفض الوصول. قد لا يكون لديك امتيازات القراءة، أو مستند قد تم إزالة أو تغيير.</access-denied-exception>
+      <path-not-found>ربما تمّ حذف هذه العقدة  أو تغييرها! الرجاء الضغط على زر التحديث.</path-not-found>
+    </msg>
+    <tooltip>
+      <remove-attachment>حذف هذا الملفّ المُرفق</remove-attachment>
+      <remove-comment>حذف هذا التعليق</remove-comment>
+    </tooltip>
+  </UIDocumentInfo>
+  <ListView>
+    <view>
+      <label>
+        <name>الاسم</name>
+        <versionable>قابل للإصدار</versionable>
+        <exo_owner>مالك</exo_owner>
+        <auditing>تدقيق</auditing>
+        <exo_dateCreated>تاريخ الإضافة</exo_dateCreated>
+        <exo_dateModified>تاريخ التغيير</exo_dateModified>
+      </label>
+    </view>
+  </ListView>
+  <!--
+  #############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.ECMContextMenu   #
+  #############################################################################
+  -->
+  <ECMContextMenu>
+    <event>
+      <Lock>تأمين</Lock>
+      <Unlock>الغاء التّأمين</Unlock>
+      <EditDocument>تغيير</EditDocument>
+      <Copy>نسخ</Copy>
+      <Rename>اعادة التّسمية</Rename>
+      <Delete>حذف</Delete>
+      <Save>#{word.save}</Save>
+      <Cut>قص</Cut>
+      <Paste>لصق</Paste>
+      <CheckOut>انهاء المراجعة</CheckOut>
+      <CheckIn>مراجعة</CheckIn>
+      <WebDAV>عرض WebDAV</WebDAV>
+      <autoversion>اصدار تلقائي</autoversion>
+      <Custom>تخصيص</Custom>
+      <AddFolder>مجلد جديد</AddFolder>
+      <AddDocument>محتوى جديد</AddDocument>
+      <Upload>تحميل ملفّات</Upload>
+      <MoveNode>تحويل</MoveNode>
+      <UnLock>الغاء التأمين</UnLock>
+      <ViewProperties>عرض الخصائص</ViewProperties>
+      <GetURL>نسخ URL في الحافظة</GetURL>
+      <AddThumbnail>إضافة/حذف صورة مصغرة</AddThumbnail>
+      <AddToFavourite>اضافة إلى القائمة المفضّلة</AddToFavourite>
+      <RemoveFromFavourite>حذف من القائمة المفضّلة</RemoveFromFavourite>
+      <MoveToTrash>تحويله الى سلة المهملات</MoveToTrash>
+      <RestoreFromTrash>الاستعادة من سلّة المهملات</RestoreFromTrash>
+      <EmptyTrash>إفراغ سلّة المهملات</EmptyTrash>
+      <WebDavView>Open in MS Office</WebDavView>
+      <Download>تنزيل هذا الملف</Download>
+      <OpenDocument>تغيير عن بعد</OpenDocument>
+      <EditProperty>Edit Document Properties</EditProperty>
+      <UploadNewVersion>Upload a new version</UploadNewVersion>
+      <CreateNewVersion>تسجيل ضمن نسخة جديدة</CreateNewVersion>
+    </event>
+  </ECMContextMenu>
+ 
+  <!--
+  #############################################################################
+  #     org.exoplatform.ecm.webui.component.explorer.UIReferencesList         #
+  #############################################################################
+  -->
+  <UIReferencesList>
+    <msg>
+      <no-references>الموصولات غير موجودة</no-references>
+    </msg>
+    <header>
+      <workspace>فضاء العمل</workspace>
+      <path>المسار</path>
+    </header>
+    <action>
+      <Close>#{word.close}</Close>
+    </action>
+  </UIReferencesList>
+  <!--
+  #############################################################################
+  #         org.exoplatform.ecm.webui.component.explorer.UIPropertiesManager  #
+  #############################################################################
+  -->
+  <UITabPane>
+    <title>
+      <UIPublishingPanel>لوحة النشر</UIPublishingPanel>
+      <UIPublicationPanel>تنقيح</UIPublicationPanel>
+      <UIPublicationSchedule>مُبرمج</UIPublicationSchedule>
+      <UIPublicationPagesContainer>صفحات</UIPublicationPagesContainer>
+      <UIPublicationHistory>تاريخ</UIPublicationHistory>
+      <UIVersionViewer>عارض الإصدار</UIVersionViewer>
+
+      <UIPropertyTab>الخاصيّات</UIPropertyTab>
+      <UIMetadataTab>قالب المعلومات القياسية</UIMetadataTab>
+      <UIPropertyForm>اضافة خاصيّة جديدة</UIPropertyForm>
+      <UIUploadContent>معلومات حول الملف الذي تمّ تحميله</UIUploadContent>
+      <UIJCRAdvancedSearch>اضافة استبيان</UIJCRAdvancedSearch>
+      <UISavedQuery>الاستبيانات المحفوظة</UISavedQuery>
+      <AdvancedSearchResult>نتائج البحث</AdvancedSearchResult>
+      <UISimpleSearch>بحث</UISimpleSearch>
+      <UISearchContainer>بحث متقدم</UISearchContainer>
+      <UICategoryManagerSearch>اضافة فئة إلى البحث</UICategoryManagerSearch>
+      <UIConstraintsForm>شكل القيود</UIConstraintsForm>
+      <UIViewSearchResult>عرض المحتوى</UIViewSearchResult>
+      <UIContentNameSearch>البحث بحسب الاسم</UIContentNameSearch>
+      <UINodeInfo>معلومات حول الإصدار</UINodeInfo>
+      <UINodeProperty>خاصيّة العقدة</UINodeProperty>
+      <UIActionListContainer>الاجراءات المُتاحة</UIActionListContainer>
+      <UIActionContainer>إضافة اجراء</UIActionContainer>
+      <UIActionViewContainer>معلومات حول الاجراء</UIActionViewContainer>
+      <UIMultiLanguageForm>عرض اللغة</UIMultiLanguageForm>
+      <UIAddLanguageContainer>اضافة لغة</UIAddLanguageContainer>
+      <UINonPublishedForm>الحالة</UINonPublishedForm>
+      <UIPublishedForm>الحالة</UIPublishedForm>
+      <UIPublicationLogList>السّجل</UIPublicationLogList>
+      <UIDocumentWithTree>عرض الملف</UIDocumentWithTree>
+      <UIDocumentInfo>عرض الوثيقة</UIDocumentInfo>
+      <UICategoriesSelectPanel>اختيار فئات</UICategoriesSelectPanel>
+      <UISelectedCategoriesGrid>الفئات الموصولة</UISelectedCategoriesGrid>
+      <UIWorkflowPublicationActionForm>اجراء على طريقة سير عمليّة النشر</UIWorkflowPublicationActionForm>
+      <UIWorkflowPublicationViewForm>عرض طريقة سير عمليّة النشر</UIWorkflowPublicationViewForm>
+      <metadatasitemetadata>دليل المعلومات للموقع</metadatasitemetadata>
+      <dcelementset>دوبلين كور (Dublin Core)</dcelementset>
+    </title>
+  </UITabPane>
+  <UIPropertyTab>
+    <title>
+      <edit>تغيير هذه الخاصيّة</edit>
+      <delete>حذف هذه الخاصيّة</delete>
+    </title>
+    <confirm>
+      <remove-property>هل ترغب حقّــا بحذف هذه الخاصيّة؟</remove-property>
+    </confirm>
+    <header>
+      <name>الاسم</name>
+      <multiValue>متعدد المحتوى</multiValue>
+      <value>قيمة</value>
+      <action>اجراء</action>
+    </header>
+    <label>
+      <binary>بيانات ثنائية</binary>
+      <notavailable>غير متوفرة</notavailable>
+      <cannotget>لا يمكن الحصول على المحتويات</cannotget>
+    </label>
+    <action>
+      <Close>#{word.close}</Close>
+    </action>
+  </UIPropertyTab>
+  <!--
+  #############################################################################
+  #         org.exoplatform.ecm.webui.component.explorer.UIPropertyTab     #
+  #############################################################################
+  -->
+  <!--
+  #############################################################################
+  #           org.exoplatform.ecm.webui.component.explorer.UIPropertyForm     #
+  #############################################################################
+  -->
+  <UIPropertyForm>
+    <title>اضافة أو تغيير خاصيّة</title>
+    <label>
+      <name>الاسم:</name>
+      <type>النوع:</type>
+      <value>القيمة:</value>
+      <upload>تحميل:</upload>
+      <namespace>اسم الفضاء:</namespace>
+      <multiple>متعدد:</multiple>
+      <property_select>اضافة خاصيّة جديدة:</property_select>
+      <value0>القيمة 0</value0>
+      <value1>القيمة 1</value1>
+      <value2>القيمة  2</value2>
+      <value3>القيمة 3</value3>
+      <value4>القيمة 4</value4>
+      <value5>القيمة 5</value5>
+      <value6>القيمة 6</value6>
+      <value7>القيمة 7</value7>
+      <value8>القيمة 8</value8>
+      <value9>القيمة 9</value9>
+      <value10>القيمة 10</value10>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <Reset>اعادة ضبط</Reset>
+    </action>
+    <msg>
+      <name-invalid>يُرجى ادخال اسم الخاصيّة.</name-invalid>
+      <unable-create>لا يمكن اضافة خاصيّات.</unable-create>
+      <value-invalid>يُرجى ادخال قيمة.</value-invalid>
+      <node-checkedin>يجب مراجعة العنصر قبل إضافة الصفة.</node-checkedin>
+      <can-not-add>لا يمكنك إضافة خصائص لهذا العنصر. وهذا مسموح فقط للنوع nt:unstructured.</can-not-add>
+      <propertyName-invalid>يجب أن يحتوي اسم الخاصيّة اسم الفضاء (مثال: namespace:name)</propertyName-invalid>
+      <propertyName-exist>الخاصيّة '{0}' موجودة مُسبقـا.</propertyName-exist>
+      <propertyValu-null>ربما بعض المحتويات فارغة.</propertyValu-null>
+      <valueFormatEx>لا يمكنك  القيام باسناد خاصيّة متعدّدة القيم الى خاصيّة ذات قيمة مُفردة.</valueFormatEx>
+      <number-format-exception>المحتوى له شكل خاطئ</number-format-exception>
+      <property-not-exist>الخاصيّة {0} غير موجودة.</property-not-exist>
+    </msg>
+  </UIPropertyForm>
+
+  <!--
+  #############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIPermissionInfo #
+  #############################################################################
+  -->
+  <UIPermissionInfo>
+    <action>
+      <title>
+        <Edit>تغيير</Edit>
+        <Delete>حذف الصلاحية</Delete>
+      </title>
+    </action>
+    <header>
+      <usersOrGroups>مستخدم أو مجموعة</usersOrGroups>
+      <read>قراءة</read>
+      <addNode>تغيير</addNode>
+      <remove>حذف</remove>
+      <action>اجراء</action>
+    </header>
+    <msg>
+      <confirm-delete-permission>هل ترغب حقّــا بحذف هذه الصلاحيّة؟</confirm-delete-permission>
+      <no-permission-tochange>ليس لك الحقوق الكافية لحذف الصلاحية.</no-permission-tochange>
+      <no-permission-remove>لا يمكنك حذف الصاحب</no-permission-remove>
+      <access-denied>غير مسموح بالدخول! ليس لك الحقوق المطلوبة لحذف هذا الصلاحية.</access-denied>
+    </msg>
+  </UIPermissionInfo>
+  <permission>
+    <title>
+      <SelectUser>اختيارمستخدم</SelectUser>
+      <SelectMember>اختيار العضوية</SelectMember>
+      <AddAny>اختيار الجميع</AddAny>
+    </title>
+  </permission>
+  <!--
+  #############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIPermissionForm #
+  #############################################################################
+  -->
+  <SelectUserOrGroup>
+    <title>
+      <UIGroupSelector>اختيار مستخدم</UIGroupSelector>
+      <UIPermissionSelector>اختيار عضو</UIPermissionSelector>
+      <UIGroupMemberSelector>اختيار العضوية</UIGroupMemberSelector>
+    </title>
+  </SelectUserOrGroup>
+  <UIGroupSelector>
+    <label>
+      <selectGroup>تصفح واختيار مجموعة</selectGroup>
+      <selectUser>اختيار مستخدم</selectUser>
+    </label>
+    <msg>
+      <not-change-owner>'{0}' هو صاحب هذا العنصر، و لديه السيطرة الكاملة على الصلاحية</not-change-owner>
+    </msg>
+  </UIGroupSelector>
+  <UIPermissionForm>
+    <label>
+      <UIPopupWindow>اختيار</UIPopupWindow>
+      <permission>UIPermissionForm</permission>
+      <userOrGroup>مستخدم أو مجموعة</userOrGroup>
+      <read>أحقيّة القراءة</read>
+      <add_node>أحقيّة التغيير</add_node>
+      <remove>أحقيّة الحذف</remove>
+    </label>
+    <title>إضافة صلاحية</title>
+    <action>
+      <Close>#{word.close}</Close>
+      <Save>#{word.save}</Save>
+      <Reset>اعادة تعيين</Reset>
+    </action>
+    <msg>
+      <checkbox-require>يجب أن تختار صلاحية واحدة على الأقل</checkbox-require>
+      <userOrGroup-required>يجب أن تختار مستخدم أو مجموعة قبل حفظ هذه الصلاحيّة.</userOrGroup-required>
+      <not-change-permission>ليس لديك الحق في اضافة صلاحيّة.</not-change-permission>
+      <access-denied>غير مسموح. لا يمكنك حذف هذه الصلاحيّة.</access-denied>
+    </msg>
+  </UIPermissionForm>
+
+  <!--
+  ###############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UINodeTypeInfo     #
+  ###############################################################################
+  -->
+  <UINodeTypeInfo>
+    <label>
+      <node-type>نوع العقدة</node-type>
+      <name>الاسم</name>
+      <item>اسم العنصر الرئيسي</item>
+      <super-types>الأنواع الموروثة</super-types>
+      <mixin>أنواع العقدة من نوع Mixin</mixin>
+      <orderable-children>ترتيب العقد الفرعيّة</orderable-children>
+      <property-def>تعريف خاصيّة العقدة</property-def>
+      <prop-name>الاسم</prop-name>
+      <prop-type>النوع</prop-type>
+      <prop-multiple>متعدد</prop-multiple>
+      <prop-mandatory>ظروري</prop-mandatory>
+      <prop-protected>محمي</prop-protected>
+      <prop-auto-create>إضافة تلقائيا</prop-auto-create>
+      <prop-default-values><![CDATA[<span title="Default Values">DV</span>]]></prop-default-values>
+      <prop-constraints><![CDATA[<span title="Constraints Values">CV</span>]]></prop-constraints>
+      <node-def>تعريف العقد المتفرعة</node-def>
+      <node-def-name>الاسم</node-def-name>
+      <node-def-opv>محتوى اختياري</node-def-opv>
+      <node-def-ac>انشاء تلقائي</node-def-ac>
+      <node-def-man>يدويا</node-def-man>
+      <node-def-pr>PR</node-def-pr>
+      <node-def-dnt>DNT</node-def-dnt>
+    </label>
+    <action>
+      <Close>#{word.close}</Close>
+    </action>
+  </UINodeTypeInfo>
+  <!--
+  ###############################################################################
+  #                    org.exoplatform.ecm.webui.component.explorer.search      #
+  ###############################################################################
+  -->
+  <UICategoryManagerSearch>
+    <tab>
+      <label>
+        <UIOneNodePathSelector>اختيار فئة</UIOneNodePathSelector>
+      </label>
+    </tab>
+    <action>
+      <Close>#{word.close}</Close>
+    </action>
+  </UICategoryManagerSearch>
+  <UIContentNameSearch>
+    <label>
+      <keyword>اسم المحتوى:</keyword>
+      <location>البحث في هذا المستوى:</location>
+    </label>
+    <action>
+      <Search>بحث</Search>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <keyword-not-allowed>لا يمكن استخدام هذه الكلمة المفتاح.</keyword-not-allowed>
+    </msg>
+  </UIContentNameSearch>
+  <UISimpleSearch>
+    <action>
+      <MoreConstraints>عرض/إخفاء مشهد الشروط</MoreConstraints>
+      <Search>بحث</Search>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <label>
+      <moreConstraints>UISimpleSearch</moreConstraints>
+      <firstOperator>المُشغّل:</firstOperator>
+      <input>كلمة أو جملة في المحتوى:</input>
+      <constraints>أكثر قيود:</constraints>
+      <nodePath>المكان الحالي:</nodePath>
+    </label>
+    <msg>
+      <keyword-null>الرجاء كتابة الكلمة المفتاح.</keyword-null>
+      <not-found>لم يتم العثور على أي نتيجة.</not-found>
+      <keyword-not-allow>لا يمكن استخدام هذه الكلمة المفتاح.</keyword-not-allow>
+      <value-null>الرجاء كتابة الكلمة المفتاح أو القيود.</value-null>
+      <value-save-null>الرجاء كتابة الكلمة المفتاح أو القيود قبل حفظ هذا الاستبيان.</value-save-null>
+      <inputSearch-invalid>هناك حروف لا يمكنك استخدامها في نص البحث.</inputSearch-invalid>
+      <query-invalid>الاستبيان غير صحيح. الرجاء إعادة التثبّت من القيود.</query-invalid>
+    </msg>
+  </UISimpleSearch>
+  <ViewSearch>
+    <title>
+      <UIViewSearchResult>عرض النماذج</UIViewSearchResult>
+    </title>
+  </ViewSearch>
+  <UISearchResult>
+    <msg>
+      <not-support>لا يوجد نموذج عرض لهذا المستند.</not-support>
+      <empty>لم يتم العثور على أي نتيجة.</empty>
+      <access-denied>لا يمكنك مشاهدة هذه العقدة لأن هذا القالب غير متاح أو ربّما ليس لك الصلاحية الكافية للدخول.</access-denied>
+      <query-invalid>صيغة الاستبيان غير صحيحة.</query-invalid>
+    </msg>
+    <header>
+      <name>#{word.name}</name>
+      <path>المسار</path>
+      <action>الاجراء</action>
+      <shortcutPath>المسار</shortcutPath>
+      <type>النوع</type>
+      <dateCreated>تاريخ الصنع</dateCreated>
+      <score>المجموع</score>
+    </header>
+    <title>
+      <typeASC>الترتيب حسب نوع الوثيقة بشكل تصاعدي</typeASC>
+      <typeDESC>الترتيب حسب نوع الوثيقة بشكل تنازلي</typeDESC>
+      <scoreASC>الترتيب حسب المجموع بشكل تصاعدي</scoreASC>
+      <scoreDESC>الترتيب حسب المجموع بشكل تنازلي</scoreDESC>
+      <nameASC>الترتيب حسب الاسم بشكل تصاعدي</nameASC>
+      <nameDESC>الترتيب حسب الاسم بشكل تنازلي</nameDESC>
+      <datecreatedASC>الترتيب حسب تاريخ الصنع  بشكل تصاعدي</datecreatedASC>
+      <datecreatedDESC>الترتيب حسب تاريخ الصنع بشكل تنازلي</datecreatedDESC>
+    </title>
+    <tooltip>
+      <View>عرض هذا العنصر</View>
+      <OpenFolder>الذهاب إلى المجلد</OpenFolder>
+    </tooltip>
+  </UISearchResult>
+  <UIShowAllOwnedByUserResult>
+    <msg>
+      <not-support>لا يوجد نموذج عرض لهذا المستند</not-support>
+      <empty>لم يتم العثور على أي نتيجة.</empty>
+      <access-denied>لا يمكنك عرض هذا المستند، إمّا لأن هذا القالب غير معتمد، أو لأنه تمّ رفض الوصول اليه.</access-denied>
+      <query-invalid>صيغة الاستبيان غير صحيحة</query-invalid>
+    </msg>
+    <header>
+      <name>#{word.name}</name>
+      <path>المسار</path>
+      <action>اجراء</action>
+      <shortcutPath>المسار</shortcutPath>
+      <type>النّوع</type>
+      <dateCreated>تاريخ الانشاء</dateCreated>
+      <score>المجموع</score>
+    </header>
+    <title>
+      <typeASC>فرز بحسب نوع الوثيقة ترتيبا تصاعديّا</typeASC>
+      <typeDESC>فرز بحسب نوع الوثيقة ترتيبا تنازليّا</typeDESC>
+      <scoreASC>فرز بحسب المجموع ترتيبا تصاعديّا</scoreASC>
+      <scoreDESC>فرز بحسب المجموع ترتيبا تنازليّا</scoreDESC>
+      <nameASC>فرز بحسب الاسم  ترتيبا تصاعديّا</nameASC>
+      <nameDESC>فرز بحسب الاسم  ترتيبا تنازليّا</nameDESC>
+      <datecreatedASC>الترتيب حسب تاريخ الصنع  ترتيبا تصاعديّا</datecreatedASC>
+      <datecreatedDESC>الترتيب حسب تاريخ الصنع  ترتيبا تنازليّا</datecreatedDESC>
+    </title>
+    <tooltip>
+      <View>عرض هذا العنصر</View>
+      <OpenFolder>انتقل إلى المجلد</OpenFolder>
+    </tooltip>
+  </UIShowAllOwnedByUserResult>
+  <UIShowAllFavouriteResult>
+    <msg>
+      <not-support>لا يوجد نموذج عرض لهذا العنصر</not-support>
+      <empty>لم يتم العثور على نتائج</empty>
+      <access-denied>لا يمكنك عرض هذا العنصر، أما لأنه لم يتم اعتماد هذا القالب أو لأنه تم رفض الوصول.</access-denied>
+      <query-invalid>صيغة الاستبيان غير صحيحة</query-invalid>
+    </msg>
+    <header>
+      <name>#{word.name}</name>
+      <path>مسار</path>
+      <action>اجراء</action>
+      <shortcutPath>مسار</shortcutPath>
+      <type>النوع</type>
+      <dateCreated>تاريخ الانشاء</dateCreated>
+      <score>المجموع</score>
+    </header>
+    <title>
+      <typeASC>الترتيب حسب نوع الوثيقة بشكل تصاعدي</typeASC>
+      <typeDESC>الترتيب حسب نوع الوثيقة بشكل تنازلي</typeDESC>
+      <scoreASC>الترتيب حسب المجموع بشكل تصاعدي</scoreASC>
+      <scoreDESC>الترتيب حسب المجموع بشكل تنازلي</scoreDESC>
+      <nameASC>الترتيب حسب الاسم بشكل تصاعدي</nameASC>
+      <nameDESC>الترتيب حسب الاسم بشكل تنازلي</nameDESC>
+      <datecreatedASC>الترتيب حسب تاريخ الصنع  بشكل تصاعدي</datecreatedASC>
+      <datecreatedDESC>الترتيب حسب تاريخ الصنع بشكل تنازلي</datecreatedDESC>
+    </title>
+    <tooltip>
+      <View>عرض هذا العنصر</View>
+      <OpenFolder>انتقل إلى المجلد</OpenFolder>
+    </tooltip>
+  </UIShowAllFavouriteResult>
+  <UIShowAllHiddenResult>
+    <msg>
+      <not-support>لا يوجد نموذج عرض لهذا العنصر.</not-support>
+      <empty>لم يتمّ العثور على أي نتيجة.</empty>
+      <access-denied>لا يمكنك عرض هذا العنصر، إمّا لأن هذا القالب غير معتمد، أو لأنه تمّ رفض الوصول اليه.</access-denied>
+      <query-invalid>صيغة الاستبيان غير صحيحة.</query-invalid>
+    </msg>
+    <header>
+      <name>#{word.name}</name>
+      <path>مسار</path>
+      <action>اجراء</action>
+      <shortcutPath>مسار</shortcutPath>
+      <type>النوع</type>
+      <dateCreated>تاريخ الإضافة</dateCreated>
+      <score>المجموع</score>
+      <AddRemoveFavourite>إضافة/إزالة إلى قائمة المفضلات</AddRemoveFavourite>
+    </header>
+    <title>
+      <typeASC>الترتيب حسب نوع الوثيقة بشكل تصاعدي</typeASC>
+      <typeDESC>الترتيب حسب نوع الوثيقة بشكل تنازلي</typeDESC>
+      <scoreASC>الترتيب حسب المجموع بشكل تصاعدي</scoreASC>
+      <scoreDESC>الترتيب حسب المجموع بشكل تنازلي</scoreDESC>
+      <nameASC>الترتيب حسب الاسم بشكل تصاعدي</nameASC>
+      <nameDESC>الترتيب حسب الاسم بشكل تنازلي</nameDESC>
+      <datecreatedASC>الترتيب حسب تاريخ الصنع  بشكل تصاعدي</datecreatedASC>
+      <datecreatedDESC>الترتيب حسب تاريخ الصنع بشكل تنازلي</datecreatedDESC>
+    </title>
+    <tooltip>
+      <View>عرض هذا العنصر</View>
+      <OpenFolder>انتقل إلى المجلد</OpenFolder>
+      <RemoveHiddenAttribute>إزالة السّمة المخفية</RemoveHiddenAttribute>
+    </tooltip>
+  </UIShowAllHiddenResult>
+  <UIShowAllTrashResult>
+    <msg>
+      <not-support>لا يوجد نموذج عرض لهذا العنصر.</not-support>
+      <empty>لم يتم العثور على نتائج</empty>
+      <access-denied>لا يمكنك عرض هذا العنصر، إمّا لأن هذا القالب غير معتمد، أو لأنه تمّ رفض الوصول اليه.</access-denied>
+      <query-invalid>صيغة الاستبيان غير صحيحة.</query-invalid>
+    </msg>
+    <header>
+      <name>#{word.name}</name>
+      <path>مسار</path>
+      <action>اجراء</action>
+      <shortcutPath>مسار</shortcutPath>
+      <type>نوع</type>
+      <dateCreated>تاريخ الإضافة</dateCreated>
+      <score>المجموع</score>
+    </header>
+    <title>
+      <typeASC>الترتيب حسب نوع الوثيقة بشكل تصاعدي</typeASC>
+      <typeDESC>الترتيب حسب نوع الوثيقة بشكل تنازلي</typeDESC>
+      <scoreASC>الترتيب حسب المجموع بشكل تصاعدي</scoreASC>
+      <scoreDESC>الترتيب حسب المجموع بشكل تنازلي</scoreDESC>
+      <nameASC>الترتيب حسب الاسم بشكل تصاعدي</nameASC>
+      <nameDESC>الترتيب حسب الاسم بشكل تنازلي</nameDESC>
+      <datecreatedASC>الترتيب حسب تاريخ الصنع  بشكل تصاعدي</datecreatedASC>
+      <datecreatedDESC>الترتيب حسب تاريخ الصنع بشكل تنازلي</datecreatedDESC>
+    </title>
+    <tooltip>
+      <View>عرض هذا العنصر</View>
+      <OpenFolder>انتقل إلى المجلد</OpenFolder>
+      <DeletePermanently>حذف بشكل نهائي</DeletePermanently>
+      <RestoreFromTrash>الاستعادة من سلّة المهملات</RestoreFromTrash>
+    </tooltip>
+  </UIShowAllTrashResult>
+  <UIConstraintsForm>
+    <label>
+      <constraints>واجهة القيود</constraints>
+      <metadataProperty>الخصائص</metadataProperty>
+      <operator>المُشغّل</operator>
+      <contains>يحتوي على القيمة</contains>
+      <notcontains>لا يحتوي على القيمة</notcontains>
+    </label>
+    <action>
+      <Add>اضافة</Add>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <properties-required>اسم الخاصيّة ضروري</properties-required>
+      <value-required>قيمة المحتوى ظرورية.</value-required>
+      <date-invalid>تاريخ الابتداء يجب أن يأتي قبل تاريخ الانتهاء.</date-invalid>
+      <fromDate-required>تاريخ البدأ ضروري</fromDate-required>
+      <must-choose-one>يجب عليك اختيار نوع واحد على الأقل.</must-choose-one>
+      <properties-null>اختر الخاصيّات أولا ، ثم الفلتر.</properties-null>
+      <exactly-require>يجب عليك أن تضع محتوى قبل حفظ هذا الشرط</exactly-require>
+      <fromDate-invalid>صيغة القيمة 'تاريخ البدأ' أو 'منذ' غير صحيحة. يُرجى اعادة الاختيار أو أدخل قيمة صحيحة.</fromDate-invalid>
+      <toDate-invalid>صيغة 'تاريخ الإنهاء' غير صحيحة. يُرجى اعادة الاختيار أو ادخال قيمة صحيحة.</toDate-invalid>
+    </msg>
+    <button>
+      <label-Add>إضافة</label-Add>
+      <label-Cancel>#{word.cancel}</label-Cancel>
+    </button>
+  </UIConstraintsForm>
+  <ConstraintsForm>
+    <action>
+      <Add>إضافة</Add>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </ConstraintsForm>
+  <UIConstraintForm>
+    <tooltip>
+      <AddMetadataType>اضافة خاصيّة</AddMetadataType>
+      <AddNodeType>اضافة نوع عقدة</AddNodeType>
+      <AddCategory>اضافة فئة</AddCategory>
+      <FindExactly>العثور بالتحديد على</FindExactly>
+    </tooltip>
+    <label>
+      <colon>:</colon>
+      <operator>المُشغّل</operator>
+      <exactlyPro-properties>خاصيّة</exactlyPro-properties>
+      <exactlyPro-ContainExactly>تحتوي بالضبط على</exactlyPro-ContainExactly>
+      <containPro-properties>خاصيّة</containPro-properties>
+      <containPro-Contain>تحتوي على</containPro-Contain>
+      <notContainPro-properties>خاصيّة</notContainPro-properties>
+      <notContainPro-notContain>لا تحتوي على</notContainPro-notContain>
+      <ConstraintOption-From>من</ConstraintOption-From>
+      <ConstraintOption-To>إلى</ConstraintOption-To>
+      <DocumentType-label>نوع الوثيقة</DocumentType-label>
+      <Category-label>الفئة</Category-label>
+      <created>تمّ انشاؤه / ها</created>
+      <modified>تم تغييره / ها</modified>
+      <and>و</and>
+      <or>أو</or>
+    </label>
+  </UIConstraintForm>
+  <NodeTypePopup>
+    <title>
+      <UINodeTypeSelectForm>اختر نوع الوثيقة</UINodeTypeSelectForm>
+    </title>
+  </NodeTypePopup>
+  <CategoryPopup>
+    <title>
+      <UICategoryManagerSearch>اضافة فئة للبحث</UICategoryManagerSearch>
+      <UIOneNodePathSelector>اختيار فئة</UIOneNodePathSelector>
+    </title>
+  </CategoryPopup>
+  <SaveQueryPopup>
+    <title>
+      <UISaveQueryForm>استبيان من</UISaveQueryForm>
+    </title>
+  </SaveQueryPopup>
+  <UINodeTypeSelectForm>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Save>#{word.save}</Save>
+    </action>
+  </UINodeTypeSelectForm>
+  <UICompareExactlyForm>
+    <label>
+      <filter>فلتر :</filter>
+      <result>النتائج :</result>
+    </label>
+    <title>
+      <result>فلتر</result>
+    </title>
+    <button>
+      <label-Select>اختيار</label-Select>
+      <label-Cancel>#{word.cancel}</label-Cancel>
+    </button>
+    <msg>
+      <not-result-found>لم يتم العثور على أي نتيجة.</not-result-found>
+    </msg>
+  </UICompareExactlyForm>
+  <UIJCRAdvancedSearch>
+    <label>
+      <name>الاسم:</name>
+      <selectBox>اختر نمط الاستبيان:</selectBox>
+      <query>الاستبيان:</query>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <Search>بحث</Search>
+    </action>
+    <msg>
+      <!--DMS 2.4.x ECM-3566-->
+      <name-invalid>صيغة الاسم غير صحيحة.</name-invalid>
+      <query-added>تمّ اضافة الاستبيان بنجاح.</query-added>
+      <save_unSuccessful>لا يمكن حفظ الاستبيان. صيغة الاستبيان غير صحيحة أو رُبّما نفس اسم الاسبيان وُجد مُسبقـا.</save_unSuccessful>
+      <invalid-queryStatement>صيغة الاستبيان غير صحيحة.</invalid-queryStatement>
+      <value-save-null>يرجى ادخال استبيان.</value-save-null>
+      <query-name-null>اسم الاستبيان فارغ.</query-name-null>
+    </msg>
+  </UIJCRAdvancedSearch>
+  <EditQueryForm>
+    <label>
+      <name>الاسم</name>
+      <selectBox>اختر نمط الاستبيان</selectBox>
+      <query>الاستبيان</query>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </EditQueryForm>
+  <EditSavedQueryForm>
+    <title>
+      <EditQueryForm>تغيير شكل الاستبيان</EditQueryForm>
+    </title>
+  </EditSavedQueryForm>
+  <UIMetadataSelectForm>
+    <label>
+      <metadataType>نوع قالب المعلومات القياسية</metadataType>
+    </label>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Add>اضافة</Add>
+    </action>
+  </UIMetadataSelectForm>
+  <property1MetadataPopup>
+    <title>
+      <UISelectPropertyForm>اختر خاصيّة</UISelectPropertyForm>
+    </title>
+  </property1MetadataPopup>
+  <property2MetadataPopup>
+    <title>
+      <UISelectPropertyForm>اختر خاصيّة</UISelectPropertyForm>
+    </title>
+  </property2MetadataPopup>
+  <property3MetadataPopup>
+    <title>
+      <UISelectPropertyForm>اختر خاصيّة</UISelectPropertyForm>
+    </title>
+  </property3MetadataPopup>
+  <UISelectPropertyForm>
+    <label>
+      <metadataType>نوع قالب المعلومات القياسية</metadataType>
+    </label>
+    <pLabel>الخاصيّات:</pLabel>
+    <action>
+      <Add>إضافة</Add>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UISelectPropertyForm>
+  <ExactlyFormPopup>
+    <title>
+      <UICompareExactlyForm>مشهد الفلتر</UICompareExactlyForm>
+    </title>
+  </ExactlyFormPopup>
+  <UIECMSearch>
+    <header>
+      <name>الاسم</name>
+      <language>اللغة</language>
+      <query>الاستبيان</query>
+      <action>الاجراءات</action>
+      <path>المسار</path>
+    </header>
+  </UIECMSearch>
+  <UIResult>
+    <msg>
+      <not-found>بيانات غير موجودة.</not-found>
+    </msg>
+    <header>
+      <action>اجراء</action>
+    </header>
+  </UIResult>
+  <UISaveQueryForm>
+    <msg>
+      <query-name-null>يُرجى ادخال اسم الاستبيان للحفظ.</query-name-null>
+      <access-denied>غير مسموح بالدخول. ليس لديك الصلاحيّة الكافية لحفظ هذا الاستبيان.</access-denied>
+      <save-failed>لا يمكن حفظ الاستبيان. صيغة الاستبيان غير صحيحة أو رُبّما نفس اسم الاسبيان وُجد مُسبقـا.</save-failed>
+    </msg>
+    <label>
+      <queryName>اسم الاستبيان</queryName>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UISaveQueryForm>
+  <UISavedQuery>
+    <header>
+      <name>الاسم</name>
+      <type>النوع</type>
+      <statement>بيان</statement>
+      <permission>الصلاحيّات</permission>
+      <action>الاجراءات</action>
+    </header>
+    <tooltip>
+      <Execute>تنفيذ</Execute>
+      <Edit>تغيير</Edit>
+      <Delete>حذف</Delete>
+    </tooltip>
+    <label>
+      <no-children>لا يوجد أي استبيان محفوظ.</no-children>
+    </label>
+    <msg>
+      <confirm-delete-query>هل ترغب حقـّا بحذف هذا الاستبيان؟</confirm-delete-query>
+      <not-result-found>لم يتم العثور على أي نتيجة.</not-result-found>
+    </msg>
+  </UISavedQuery>
+  <UIQueryResultPageIterator>
+    <label>
+      <results>النتائج</results>
+      <of-about>حوالي</of-about>
+      <of>من</of>
+    </label>
+  </UIQueryResultPageIterator>
+  <!--
+  ###############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.admin.UIExportNode #
+  ###############################################################################
+  -->
+  <UIExportNode>
+    <label>
+      <format>شكل</format>
+      <nodePath>المسار الذي سيتم تصديره</nodePath>
+      <zip>ضغط</zip>
+      <systemView>مشهد النظام</systemView>
+      <documentView>مشهد الوثائق</documentView>
+    </label>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Export>التصدير</Export>
+    </action>
+    <title>التصدير</title>
+  </UIExportNode>
+  <!--
+  ###############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIPopupAction     #
+  ###############################################################################
+  -->
+  <PopupUserSelector>
+    <title>
+      <UIUserContainer>منتق الصلاحية</UIUserContainer>
+    </title>
+  </PopupUserSelector>
+  <UIPopupTaxonomy>
+    <title>
+      <UICategoriesSelector>إضافة فئات</UICategoriesSelector>
+      <UIOneNodePathSelector>إضافة فئات</UIOneNodePathSelector>
+    </title>
+  </UIPopupTaxonomy>
+  <!--
+  ###############################################################################
+  #   org.exoplatform.ecm.webui.component.explorer.versions.UIVersionInfo       #
+  ###############################################################################
+  -->
+  <UIVersionInfo>
+    <title>تاريخ الإصدارات</title>
+    <summary>
+      <empty>انقر هنا لإضافة مُلخّص</empty>
+    </summary>
+    <tooltip>
+      <original>النسخة الأصلية</original>
+      <version>Version</version>
+      <baseVersion>الإصدار الحالي.</baseVersion>
+      <addLabel>إضافة رمز</addLabel>
+      <removeLable>حذف رمز</removeLable>
+      <restoreVersion>استعادة الإصدار</restoreVersion>
+      <viewVersion>عرض معلومات الإصدار</viewVersion>
+      <deleteVersion>حذف الإصدار</deleteVersion>
+      <compareVersion>المقارنة مع الإصدار الرئيسي</compareVersion>
+    </tooltip>
+    <msg>
+      <have-no-view-template>نموذج العرض غير متاح.</have-no-view-template>
+      <cannot-remove-version>لا يمكن حذف الإصدار الرئيسي.</cannot-remove-version>
+      <error-removing-version>حدث خطأ أثناء حذف هذا الاصدار.</error-removing-version>
+      <error-removing-referenced-version>هذا الإصدار مُشار إليه، و لا يمكن إزالته.</error-removing-referenced-version>
+      <confirm-restore>هل ترغب حقــا بحذف هذا الإصدار؟</confirm-restore>
+      <confirm-delete>هل ترغب حقــا بحذف هذا الإصدار؟</confirm-delete>
+      <not-checked-out>يجب عليك المراجعة قبل استعادة هذا المستند.</not-checked-out>
+      <invalid-item-state>لا يمكن استعادة هذا الإصدار. ربما تم حذف أو تحويل عناصر عن طريق دورة أخرى.</invalid-item-state>
+    </msg>
+    <action>
+      <close>#{word.close}</close>
+      <close-view>إغلاق المشهد</close-view>
+      <compare-versions>مقارنة الإصدارات المختارة</compare-versions>
+    </action>
+    <labels>
+      <version>Version</version>
+      <date>Date</date>
+      <author>تمّ تغييره من طرف</author>
+      <summary>Summary</summary>
+      <action>Action</action>
+    </labels>
+  </UIVersionInfo>
+  <!--
+  ################################################################################
+  #  org.exoplatform.ecm.webui.component.explorer.auditing.UIAuditingInfo
+  ################################################################################
+  -->
+  <UIAuditingInfo>
+    <msg>
+      <noVersion>ما من إصدار</noVersion>
+    </msg>
+    <eventName>
+      <e_1>تمت الأضافة</e_1>
+      <e_2>إزالة المستند</e_2>
+      <e_4>تم إضافة الخاصيّة</e_4>
+      <e_16>تم تغيير الخاصيّة</e_16>
+      <e_8>تم حذف الخاصيّة</e_8>
+      <e_32>#{word.save}</e_32>
+      <e_64>تحويل</e_64>
+      <e_128>نسخ</e_128>
+      <e_256>إضافة الميكسين</e_256>
+      <e_512>حذف الميكسين</e_512>
+      <e_1024>استنساخ</e_1024>
+      <e_2048>تحديث</e_2048>
+      <e_4096>استيراد</e_4096>
+      <e_8192>مراجعة</e_8192>
+      <e_16384>إنهاء المراجعة</e_16384>
+      <e_32768>استعادة</e_32768>
+      <e_65536>دمج</e_65536>
+      <e_131072>إلغاء الدمج</e_131072>
+      <e_262144>انتهاء عمليّة الدّمج</e_262144>
+      <e_524288>إضافة رمز للإصدار</e_524288>
+      <e_1048576>حذف رمز الإصدار</e_1048576>
+      <e_2097152>حذف الإصدار</e_2097152>
+      <e_4194304>تأمين</e_4194304>
+      <e_8388608>الغاء التأمين</e_8388608>
+      <e_16777216>قراءة</e_16777216>
+    </eventName>
+    <label>
+      <operation>عمليّة</operation>
+      <userName>اسم المستخدم</userName>
+      <date>تاريخ</date>
+      <version>اصدار</version>
+    </label>
+  </UIAuditingInfo>
+
+  <!--
+  ###############################################################################
+  #   org.exoplatform.ecm.webui.component.explorer.versions.UIActivateVersion   #
+  ###############################################################################
+  -->
+  <UIActivateVersion>
+    <label>
+      <note>لم يتم تنشيط الإصدارات لهذا المستند.</note>
+      <question>هل تريد تفعيله؟</question>
+      <button-active>تفعيل</button-active>
+      <button-cancel>#{word.cancel}</button-cancel>
+    </label>
+    <msg>
+      <access-denied>ليس لديك الصلاحيّة لتفعيل عملية الإصدار في هذا المستند</access-denied>
+    </msg>
+  </UIActivateVersion>
+  <!--
+  ###############################################################################
+  #   org.exoplatform.ecm.webui.component.explorer.versions.UIActivePublication #
+  ###############################################################################
+  -->
+  <UIActivePublication>
+    <header>
+      <LifecycleName>الاسم</LifecycleName>
+      <LifecycleDesc>الوصف</LifecycleDesc>
+      <action>إجراء</action>
+    </header>
+    <action>
+      <Cancel>#{word.close}</Cancel>
+    </action>
+    <grid>
+      <msg>
+        <empty>لم يتم العثور على البرنامج المساعد للنشر.</empty>
+      </msg>
+    </grid>
+    <msg>
+      <node-type-invalid>لا يسمح بالتسجيل إلا للمستندات.</node-type-invalid>
+      <already-enroled>سبق أن تمّ تسجيل هذه الوثيقة.</already-enroled>
+    </msg>
+  </UIActivePublication>
+  <!--
+  ###############################################################################
+  #   org.exoplatform.ecm.webui.component.explorer.versions.UIActivateAuditing  #
+  ###############################################################################
+  -->
+  <UIActivateAuditing>
+    <label>
+      <note>لم يتم تفعيل التدقيق لهذا المستند.</note>
+      <question>هل ترغب فعلا باجراء التفعيل؟</question>
+    </label>
+    <action>
+      <activate>تفعيل</activate>
+      <cancel>#{word.cancel}</cancel>
+    </action>
+  </UIActivateAuditing>
+  <!--
+  ###############################################################################
+  #   org.exoplatform.ecm.webui.component.explorer.versions.UIDiff   #
+  ###############################################################################
+  -->
+  <UIDiff>
+    <label>
+      <backTo>العودة إلى تاريخ الإصدار</backTo>
+      <diffTitle>مقارنة بين إصدارين</diffTitle>
+      <noContent>لم يتم العثور على أي محتوى</noContent>
+      <compareVerion>إصدار</compareVerion>
+      <can-not-compare>لم تتم المقارنة بين الإصدارين</can-not-compare>
+      <compare-unavailable>مقارنة الإصدار غير متوفرة لهذا الملف</compare-unavailable>
+      <DateChange>في {0}</DateChange>
+      <PreviousAndNextCompare>Changes from {0} to {1}</PreviousAndNextCompare>
+      <ComparedWith>Compared With</ComparedWith>
+      <restoredFrom>استعادة من النسخة {0}</restoredFrom>
+    </label>
+  </UIDiff>
+  <!--
+  ###############################################################################
+  #       org.exoplatform.ecm.webui.component.explorer.admin.UIImportNode      #
+  ###############################################################################
+  -->
+  <UIImportNode>
+    <label>
+      <format>الشكل</format>
+      <systemView>مشهد النظام</systemView>
+      <documentView>مشهد الوثائق</documentView>
+      <upload>تحميل ملف</upload>
+    </label>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Import>استيراد</Import>
+    </action>
+    <title>استيراد</title>
+    <msg>
+      <import-successful>تمّت عمليّة الاستيراد بنجاح.</import-successful>
+      <filename-invalid>اختر ملف من نوع 'xml' قصد استيراده.</filename-invalid>
+      <filetype-error>لا يمكن الاستيراد. ربّما طرأ خطأ أثناء تحميل الملفّ.</filetype-error>
+      <xml-invalid>يوجد حرف صيغته غير صالحة وهو متواجد في المكان الآتي [صف ، عمود]:{0} في الملف {1}</xml-invalid>
+      <mimetype-invalid>يمكن استيراد ملفات من نوع 'xml' أو 'zip' فحسب.</mimetype-invalid>
+      <access-denied>غير مسموح. لا يمكنك الاستيراد هناك.</access-denied>
+      <constraint-violation-exception>لا يمكنك استيراد البيانات. نوع '{0}' غير متاح في هذا المكان.</constraint-violation-exception>
+      <item-exists-exception>ورد عنصر ذو مرجع يحتوي على نفس الـمعرّف (UUID) مع عنصر موجود مُسبقا في فضاء التخزين.</item-exists-exception>
+    </msg>
+  </UIImportNode>
+  <!--
+  ###############################################################################
+  #         org.exoplatform.ecm.webui.component.explorer.versions.UILabelForm   #
+  ###############################################################################
+  -->
+  <UILabelForm>
+    <label>
+      <label>رمز</label>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <title>إضافة رمز</title>
+    <msg>
+      <label-invalid>هناك بعض الحروف غير متاحة في الرمز</label-invalid>
+      <label-exist>'{0}' موجود مُسبقا.</label-exist>
+    </msg>
+  </UILabelForm>
+  <!--
+  ###############################################################################
+  #   org.exoplatform.ecm.webui.component.explorer.versions.UIRemoveLabelForm   #
+  ###############################################################################
+  -->
+  <UIRemoveLabelForm>
+    <title>حذف الرمز</title>
+    <label>
+      <label>اختر رمز</label>
+    </label>
+    <action>
+      <Remove>حذف</Remove>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIRemoveLabelForm>
+  <!--
+  ###############################################################################
+  #    org.exoplatform.ecm.webui.component.explorer.versions.UIViewVersion      #
+  ###############################################################################
+  -->
+  <UIVersionTree>
+    <title>الفروع</title>
+  </UIVersionTree>
+  <UIViewVersion>
+    <label>
+      <nodeType>نوع العقدة</nodeType>
+      <nodeName>الاسم</nodeName>
+      <VersionNumber>رقم الاصدار</VersionNumber>
+      <VersionLabels>رموز الإصدار</VersionLabels>
+      <VersionDate>تاريخ الإصدار</VersionDate>
+      <PropertyName>اسم الصفة</PropertyName>
+      <PropertyValue>محتويات الصفة</PropertyValue>
+    </label>
+    <msg>
+      <not-supported>لا المهمة لا يمكن تفعيل الإصدار معها</not-supported>
+    </msg>
+  </UIViewVersion>
+  <UIVersionList>
+    <title>اسم الفرع</title>
+  </UIVersionList>
+  <!--
+  ################################################################################
+  #       org.exoplatform.ecm.webui.component.explorer.admin.UICategoryManager #
+  ################################################################################
+  -->
+  <UICategoryManager>
+    <action>
+      <Close>#{word.close}</Close>
+    </action>
+    <tab>
+      <label>
+        <UICategoriesAddedList>الفئات الذات صلة</UICategoriesAddedList>
+        <UIOneNodePathSelector>اختر فئة</UIOneNodePathSelector>
+      </label>
+    </tab>
+  </UICategoryManager>
+  <UICategoriesAddedList>
+    <header>
+      <path>فئة</path>
+      <action>الإجراءات</action>
+    </header>
+    <msg>
+      <access-denied>غير مسموح بالوصول. ليس لديك الصلاحيّات الكافية للوصول.</access-denied>
+      <confirm-delete>هل تريد فعلا حذف هذا المرجع ؟</confirm-delete>
+    </msg>
+    <action>
+      <title>
+        <Delete>حذف</Delete>
+      </title>
+    </action>
+    <label>
+      <category>فئة</category>
+      <actions>اجراء</actions>
+      <delete>حذف</delete>
+    </label>
+  </UICategoriesAddedList>
+  <UITreeList>
+    <header>
+      <name>الاسم</name>
+      <action>اجراء</action>
+    </header>
+    <info>
+      <child-not-found>هذا المستند ليس له فروع.</child-not-found>
+    </info>
+  </UITreeList>
+  <!--
+  ################################################################################
+  #       org.exoplatform.ecm.webui.component.explorer.admin.UIRelationManager #
+  ################################################################################
+  -->
+  <UIRelationManager>
+    <action>
+      <Close>#{word.close}</Close>
+    </action>
+    <tab>
+      <label>
+        <UIOneNodePathSelector>اختر العلاقة</UIOneNodePathSelector>
+      </label>
+    </tab>
+    <tab>
+      <label>
+        <UIRelationsAddedList>قائمة العلاقات</UIRelationsAddedList>
+      </label>
+    </tab>
+  </UIRelationManager>
+  <UIRelationsAddedList>
+    <header>
+      <path>العلاقات</path>
+      <action>الاجراءات</action>
+    </header>
+    <action>
+      <title>
+        <Delete>حذف</Delete>
+      </title>
+    </action>
+    <msg>
+      <confirm-delete>هل تريد فعلا حذف هذه الصلة ؟</confirm-delete>
+      <can-not-add-itself>لا يمكنك وصل العنصر بنفسه.</can-not-add-itself>
+    </msg>
+  </UIRelationsAddedList>
+  <!--
+  ###################################################################
+  #       org.exoplatform.ecm.webui.component.explorer.UIClipboard  #
+  ###################################################################
+  -->
+  <UIClipboard>
+    <header>
+      <path>المسار</path>
+      <command>طلب</command>
+      <action>اجراء</action>
+    </header>
+    <label>
+      <nocommand>لا توجد عناصر في الحافظة.</nocommand>
+    </label>
+    <action>
+      <clearall>فسخ الكل</clearall>
+    </action>
+    <msg>
+      <unable-pasted>لا يمكن لصق هذا العنصر.</unable-pasted>
+      <node-pasted>{0} تم لصقه في الموقع {1}. تم حفظ هذه العملية مُسبقًـا.</node-pasted>
+    </msg>
+  </UIClipboard>
+  <!--
+  ###################################################################
+  #       org.exoplatform.ecm.webui.component.explorer.UIPopupMenu  #
+  ###################################################################
+  -->
+  <!--
+  ###################################################################################
+  #org.exoplatform.ecm.webui.component.explorer.popup.actions.UISelectDocumentForm  #
+  ###################################################################################
+  -->
+  <UISelectDocumentForm>
+    <label>
+      <selectTemplate>اختر النموذج من هذه القائمة</selectTemplate>
+      <ThumbnailView>عرض  في شكل صور مُصغّرة</ThumbnailView>
+      <ListView>عرض في شكل قائمة</ListView>
+      <Cancel>#{word.cancel}</Cancel>
+    </label>
+  </UISelectDocumentForm>
+  <!--
+  #######################################################################
+  #org.exoplatform.ecm.webui.component.explorerpopup.actions.UIDocumentForm  #
+  #######################################################################
+  -->
+  <UIDocumentForm>
+    <title>إضافة وثيقة</title>
+    <action>
+      <Save>#{word.save}</Save>
+      <SaveAndClose>حفظ و غلق</SaveAndClose>
+      <ChangeType>تغيير نوع المحتوى</ChangeType>
+      <Fullscreen>شاشة كاملة</Fullscreen>
+      <Cancel>#{word.cancel}</Cancel>
+      <Close>#{word.close}</Close>
+    </action>
+<tooltip>
+<FullScreen>تكبير/تصغير</FullScreen>
+</tooltip>
+    <msg>
+      <cannot-save>طرأ خطأ أثناء عمليّة حفظ الملف.</cannot-save>
+      <in-versioning>الرجاء التحقق من المجلد الحالي قبل إضافة عنصر جديد.</in-versioning>
+      <not-support>لا يمكن قراءة النموذج '{0}'.</not-support>
+      <value-invalid>مطلوب ادخال قيمة في المجال'{0}'.</value-invalid>
+      <repository-exception>طرأ خطأ أثناء عمليّة حفظ هذا الملفّ.</repository-exception>
+      <!--DMS 2.4.x; ECM-3543-->
+      <repository-exception-permission>ليس لديك الصلاحيّة الكافية لإضافة مستند جديد إلى هذا المجلد.</repository-exception-permission>
+      <not-allowed-same-name-sibling>لا يمكن حفظ هذه الوثيقة. ادخال نفس الاسم مرّتين أمر غير مُتاح.</not-allowed-same-name-sibling>
+      <numberformat-exception>لا يمكن حفظ هذه الوثيقة. يجب ادخال اسما ذو صيغة عدديّة.</numberformat-exception>
+      <item-not-found>هذا المستند غير موجود. ربما تمّ حذف هذا المستند أو أحد فروعه. يُرجى الضغط على زر التحديث.</item-not-found>
+    </msg>
+  </UIDocumentForm>
+  <!--
+  #################################################################################
+  #org.exoplatform.ecm.webui.component.explorer.actions.UIViewDocumentController  #
+  #################################################################################
+  -->
+  <UIViewDocumentController>
+    <tab>
+      <label>
+        <UIViewDocumentInfo>معلومات</UIViewDocumentInfo>
+      </label>
+    </tab>
+    <action>
+      <Close>#{word.close}</Close>
+    </action>
+  </UIViewDocumentController>
+  <!--
+  #############################################################################
+  #       org.exoplatform.ecm.webui.component.explorer.search.UI  #
+  #############################################################################
+  -->
+  <!--
+  #############################################################################
+  #    org.exoplatform.ecm.webui.component.explorer.search.UIQuerySaveForm    #
+  #############################################################################
+  -->
+  <UIQuerySaveForm>
+    <title>حفظ مشهد الاستبيان</title>
+    <label>
+      <query>استبيان</query>
+      <name>اسم الاستبيان</name>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIQuerySaveForm>
+  <!--
+  #############################################################################
+  #       org.exoplatform.ecm.webui.component.explorer.admin.UIActionManager  #
+  #############################################################################
+  -->
+  <editActionPopup>
+    <title>
+      <UIActionForm>تغيير الاجراء</UIActionForm>
+      <EditFormAction>تغيير الاجراء</EditFormAction>
+    </title>
+  </editActionPopup>
+  <UIActionViewContainer>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIActionViewContainer>
+  <UIActionList>
+    <header>
+      <name>#{word.name}</name>
+      <description>وصف</description>
+  <lifecycle>دورة حياة</lifecycle>
+  <triggeredaction>اطلاق الاجراء</triggeredaction>
+      <instanceOf>نموذج من نوع الاجراء</instanceOf>
+      <action>إجراء</action>
+    </header>
+    <msg>
+      <remove-popup-first>يجب عليك إغلاق مشهد التغيير قبل حذف هذا العنصر.</remove-popup-first>
+      <confirm-delete-action>هل تريد حقا حذف هذا الاجراء؟</confirm-delete-action>
+      <template-empty>النموذج '{0}' بدون محتوى أو فارغ.</template-empty>
+      <template-null>النموذج فارغ أو ربّما لا تملك الصلاحيّة الكافية للوصول الى هذا الأخير .</template-null>
+      <access-denied>غير مسموح بالدخول. ليس لك الصلاحيّة الكفاية للقيام بهذا الاجراء.</access-denied>
+    </msg>
+    <action>
+      <Close>#{word.close}</Close>
+      <View>عرض</View>
+      <Edit>تغيير</Edit>
+      <Delete>حذف</Delete>
+    </action>
+  </UIActionList>
+  <UIActionForm>
+    <action>
+      <Save>#{word.save}</Save>
+      <Back>#{word.back}</Back>
+    </action>
+    <label>
+      <name>مشهد الاجراء</name>
+    </label>
+    <msg>
+      <repository-exception>لا يمكن حفظ هذا الاجراء. الاسم الذي تمّ ادخاله يحتوي على بعض الأحرف الخاصّة.</repository-exception>
+      <numberformat-exception>لا يمكن حفظ هذا الاجراء. يجب أن يكون الاسم بصيغة عدد.</numberformat-exception>
+      <existed-action>تمّ استعمال الاسم '{0}' مُسبقـا. يُرجى اختيار اسما آخرا.</existed-action>
+      <unable-add-action>استحالة اضافة هذا الاجراء.</unable-add-action>
+      <unable-add>لا يمكن إضافة هذا الإجراء. هذا العنصر هو أما جذر المجلد أو رُبّما ليس لديك الصلاحيّات الكافية.</unable-add>
+      <not-support>المشهد '{0}' غير مُتاح.</not-support>
+      <no-permission-add>غير مسموح بالدخول. ليس لك الصلاحيّة الكافية لاضافة اجراء هنا.</no-permission-add>
+      <access-denied>غير مسموح بالدخول. ليس لك الصلاحيّة الكفاية للوصول الى هذا النموذج.</access-denied>
+      <lifecycle-invalid>لا يُمكنك اضافة هذا الاجراء. هذه المرحلة الخاصّة بالاجراء غير صحيحة.</lifecycle-invalid>
+    </msg>
+    <title>إضافة/تغيير اجراء</title>
+    <validator>
+      <validator>المكلّف بالمصادقة</validator>
+      <destPath>المجلّد الهدف</destPath>
+    </validator>
+  </UIActionForm>
+  <UIActionTypeForm>
+    <label>
+      <actionType>إضافة  اجراء من نوع</actionType>
+    </label>
+  </UIActionTypeForm>
+  <PopupComponent>
+    <title>
+      <UIOneNodePathSelector>اختيار المكان</UIOneNodePathSelector>
+      <UIPermissionSelector>مستكشف الصلاحيّات</UIPermissionSelector>
+      <UICategoriesSelector>إضافة فئات</UICategoriesSelector>
+    </title>
+  </PopupComponent>
+  <EditFormAction>
+    <validator>
+      <validator>المكلّف بالمصادقة</validator>
+      <destPath>المجلّد الهدف</destPath>
+    </validator>
+    <title>نموذج الاجراء</title>
+  </EditFormAction>
+  <!--
+  #############################################################################
+  #       org.exoplatform.ecm.webui.component.explorer.control.UIAddressBar   #
+  #############################################################################
+  -->
+  <UIAddressBar>
+    <msg>
+      <path-not-found>المسار غير موجود.</path-not-found>
+      <access-denied>غير مسموح بالدخول. ليس لك الصلاحيّة الكافية للقراءة.</access-denied>
+      <keyword-not-support>الكلمة المفتاح غير صحيحة. لم يتم التعرّف على بعض الأحرف.</keyword-not-support>
+    </msg>
+    <label>
+      <exeButton>الذهاب الى</exeButton>
+      <address>عنوان :</address>
+    </label>
+    <title>
+      <exeButton>الذهاب الى</exeButton>
+      <backButton>السابق</backButton>
+      <showHistory>إظهار السجل</showHistory>
+      <changeNode>تغيير العقدة</changeNode>
+    </title>
+  </UIAddressBar>
+  <!--
+  ###################################################################################
+  # org.exoplatform.ecm.webui.component.explorer.popup.actions.UIWatchDocumentForm  #
+  ###################################################################################
+  -->
+  <UIWatchDocumentForm>
+    <action>
+      <Watch>تتبّع</Watch>
+      <Cancel>#{word.cancel}</Cancel>
+      <Continue>واصل</Continue>
+      <Unwatch>الاكتفاء من المراقبة</Unwatch>
+    </action>
+    <label>
+      <notificationType>نوع الإشعار:</notificationType>
+    </label>
+    <msg>
+      <not-support>نحن لا ندعم هذا النوع من الاشعار. يُرجى اختيار نوعا آخرا.</not-support>
+      <watching-successfully>أنت الآن بصدد تتبّع هذه الوثيقة.</watching-successfully>
+      <unwatching-successfully>لقد غادرت قائمة المُتتبّعين بنجاح.</unwatching-successfully>
+      <node-iswatching>هذه الوثيقة في حالة تتبّع.</node-iswatching>
+    </msg>
+  </UIWatchDocumentForm>
+  <!--
+  ###################################################################################
+  #   org.exoplatform.ecm.webui.component.explorer.popup.actions.UITaggingForm      #
+  ###################################################################################
+  -->
+  <UITaggingForm>
+    <label>
+      <names>العلامات:</names>
+      <linked>العلامات الموصولة</linked>
+      <tagSet>واجهة نموذج الدالة</tagSet>
+    </label>
+    <action>
+      <AddTag>اضافة</AddTag>
+      <Cancel>#{word.close}</Cancel>
+    </action>
+    <msg>
+      <name-exist>العلامة '{0}' موجودة مُسبقا.</name-exist>
+      <tagName-invalid>اسم العلامة يحتوي على بعض الحروف الغير متاحة.</tagName-invalid>
+      <tagName-empty-or-invalid>العلامة لا تحتوي على اسم أو ربّما تحتوي على بعض الأحرف غير مناسبة.</tagName-empty-or-invalid>
+      <tag-name-empty>اسم العلامة فارغ.</tag-name-empty>
+      <tag-name-duplicate>أسماء العلامة في حالة تكرار.</tag-name-duplicate>
+      <tagName-too-long>احدى العلامات تحتوي على اسم طويل جدا. أسماء العلامات يجب أن تكون أقل من 30 حرفا.</tagName-too-long>
+      <path-not-found>تم حذف أو تغيير هذه العلامة. الرجاء الضغط على زر التحديث.</path-not-found>
+    </msg>
+    <introduction>
+      <tagName>يُمكنك الفصل بين العديد من العلامات باستعمال الفاصلة "،"</tagName>
+    </introduction>
+  </UITaggingForm>
+
+  <!--
+  ###################################################################################
+  # org.exoplatform.ecm.webui.component.explorer.popup.info.UIMetadataContainer     #
+  ###################################################################################
+  -->
+  <UIViewMetadataContainer>
+    <msg>
+      <path-not-found>هذا المستند لا يتحمّل هذا المشهد.</path-not-found>
+    </msg>
+  </UIViewMetadataContainer>
+  <!--
+  ###################################################################################
+  # org.exoplatform.ecm.webui.component.explorer.popup.info.UIViewMetadataForm      #
+  ###################################################################################
+  -->
+  <UIViewMetadataForm>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIViewMetadataForm>
+  <metadataForm>
+    <title>
+      <UIViewMetadataForm>اضافة/تغيير الخاصيّات</UIViewMetadataForm>
+    </title>
+  </metadataForm>
+  <UIViewMetadataTemplate>
+    <msg>
+      <access-denied>غير مسموح بالدخول. ليس لك الصلاحيّات الكافية أما أنت لست المالك أو ليس لديك إذن لتعديل الصلاحيات.</access-denied>
+    </msg>
+  </UIViewMetadataTemplate>
+  <!--
+  ###################################################################################
+  # Validator messages                                                              #
+  ###################################################################################
+  -->
+   <ECMPhoneFormatValidator>
+     <msg>
+       <Invalid>يحتوي الحقل '{0}' على رقم هاتف غير صحيح. الرجاء إدخال قيمة أخرى.</Invalid>
+     </msg>
+  </ECMPhoneFormatValidator>
+  <ECMNameValidator>
+    <msg>
+      <Invalid-char>هناك بعض الحروف الغير متاحة في المجال '{0}'. يُرجى ادخال محتوى آخر.</Invalid-char>
+      <empty-input>مطلوب ادخال محتوى في المجال '{0}'.</empty-input>
+    </msg>
+  </ECMNameValidator>
+  <DateTimeValidator>
+    <msg>
+      <Invalid-input>القيمة '{1}' التي تمّ ادخالها في المجال '{0}' غير صحيحة.</Invalid-input>
+    </msg>
+  </DateTimeValidator>
+  <CronExpressionValidator>
+    <invalid-input>عبارة كرون غير صحيحة. يُرجى التثبّت من الصيغة.</invalid-input>
+  </CronExpressionValidator>
+  <EmptyFieldValidator>
+    <msg>
+      <empty-input>يُرجى ادخال قيمة في المجال '{0}'.</empty-input>
+    </msg>
+  </EmptyFieldValidator>
+  <CategoryValidator>
+    <msg>
+      <non-categories>الفئات خاطئة. الرجاء اختيار فئات صحيحة.</non-categories>
+    </msg>
+  </CategoryValidator>
+  <!--
+  ###################################################################################
+  # JCR Exceptions manager                                                              #
+  ###################################################################################
+  -->
+  <ReferentialIntegrityException>
+    <msg>فشل أثناء القيام بهذا الاجراء. هذه العقدة موصولة بواحدة أخرى ضمن فضاء العمل.</msg>
+  </ReferentialIntegrityException>
+  <ItemExistsException>
+    <msg>هذا العنصر موجود مُسبقا.</msg>
+  </ItemExistsException>
+  <AccessControlException>
+    <msg>غير مسموح بالوصول. ليس لديك الصلاحيّات الكافية للقيام بهذا الاجراء.</msg>
+  </AccessControlException>
+  <AccessDeniedException>
+    <msg>غير مسموح بالدخول.</msg>
+  </AccessDeniedException>
+  <ItemNotFoundException>
+    <msg>عنصر غير موجود. ربّما تمّ حذف أو تغيير هذا العنصر.</msg>
+  </ItemNotFoundException>
+  <PathNotFoundException>
+    <msg>مسار غير موجود. رُبّما تم حذفه أو تغييره.</msg>
+  </PathNotFoundException>
+  <ConstraintViolationException>
+    <msg>لا يمكنك القيام بهذا الاجراء بسبب بعض القيود.</msg>
+  </ConstraintViolationException>
+  <!--
+  ###################################################################################
+  # Publication Manage                                                              #
+  ###################################################################################
+  -->
+  <UIPublicationForm>
+    <label>
+      <published>تم نشره</published>
+      <non-published>غير منشورة</non-published>
+      <public>عمومي</public>
+      <private>شخصي</private>
+      <state>الحالة</state>
+      <visibility>الرؤية</visibility>
+      <nodeName>الإسم:</nodeName>
+      <lifecycleName>اسم دورة الحياة</lifecycleName>
+      <stateName>اسم الحالة</stateName>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <UnsubcriberLifeCycle>الغاء التسجيل</UnsubcriberLifeCycle>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIPublicationForm>
+  <!--
+  ###################################################################################
+  # JCR Browser                                                             #
+  ###################################################################################
+  -->
+  <UIWorkspaceList>
+    <label>
+      <workspaceName>مساحة العمل</workspaceName>
+      <rootNodeInfo>المسار الجذر:</rootNodeInfo>
+      <rootPath>المسار الجذر:</rootPath>
+    </label>
+  </UIWorkspaceList>
+  <pathSelector>
+    <title>
+      <UIOneNodePathSelector>محدد</UIOneNodePathSelector>
+    </title>
+  </pathSelector>
+  <!--
+  ###################################################################################
+  # Others                                                                          #
+  ###################################################################################
+  -->
+  <EmailAddressValidator>
+    <msg>
+      <Invalid-input>البريد الالكتروني غير صحيح.</Invalid-input>
+    </msg>
+  </EmailAddressValidator>
+  <UIFormInputSetWithAction>
+    <msg>
+      <confirm-delete>هل ترغب حقا بالحذف؟</confirm-delete>
+    </msg>
+  </UIFormInputSetWithAction>
+  <RepeatCountValidator>
+    <msg>
+      <invalid-value>صيغة القيمة الخاصّة بـ 'تكرار العد' غير صحيحة. يُرجى ادخال أعداد صحيحة أكبر من 0 أو 1- للأرقام اللانهائيّة.</invalid-value>
+    </msg>
+  </RepeatCountValidator>
+  <RepeatIntervalValidator>
+    <msg>
+      <invalid-value>صيغة 'الفترة الزمنية' غير صحيحة. يُرجى ادخال عدد صحيح.</invalid-value>
+    </msg>
+  </RepeatIntervalValidator>
+  <UIPermissionSelector>
+    <label>
+      <selectGroup>اختيار مجموعة</selectGroup>
+      <selectUser>اختيار مستخدم</selectUser>
+      <selectMembership>اختر عضوية</selectMembership>
+    </label>
+  </UIPermissionSelector>
+  <!--
+  ###################################################################################
+  # org.exoplatform.ecm.jcr.ECMStandardPropertyNameValidator                        #
+  ###################################################################################
+  -->
+  <ECMStandardPropertyNameValidator>
+    <msg>
+      <empty-input>محتوى المجال '{0}' فارغ.</empty-input>
+      <Invalid-char>هناك بعض الحروف غير متاحة في المجال'{0}'. يُرجى ادخال محتوى آخر.</Invalid-char>
+    </msg>
+  </ECMStandardPropertyNameValidator>
+  <!--
+  ###################################################################################
+  # org.exoplatform.ecm.jcr.SearchValidator                                     #
+  ###################################################################################
+  -->
+  <SearchValidator>
+    <msg>
+      <empty-input>محتوى هذا المجال فارغ.</empty-input>
+      <Invalid-char>هناك بعض الحروف غير متاحة في هذا المجال. يُرجى ادخال محتوى آخر.</Invalid-char>
+      <Invalid-char2>يجب أن تكون الأعداد متبوعة بـ '~'.</Invalid-char2>
+      <Invalid-char1>العدد الذي يتبع '~' يجب أن يكون بين 0 و 1.</Invalid-char1>
+      <Invalid-char3>يجب أن تكون الأعداد متبوعة بـ '^'.</Invalid-char3>
+      <Invalid-char4>يجب أن لا تكون هناك فراغات قرب '~'.</Invalid-char4>
+      <Invalid-char5>يجب أن لا تكون هناك فراغات قرب '^'.</Invalid-char5>
+    </msg>
+  </SearchValidator>
+  <!--
+  ###################################################################################
+  # PublicationService                                                              #
+  ###################################################################################
+  -->
+  <UIPublicationLogList>
+    <header>
+      <date>التاريخ</date>
+      <newState>حالة جديدة</newState>
+      <user>المستخدم</user>
+      <description>الوصف</description>
+      <version>الإصدار</version>
+      <visibility>الرؤية</visibility>
+    </header>
+    <action>
+      <Close>#{word.close}</Close>
+    </action>
+  </UIPublicationLogList>
+  <!--
+  ###################################################################################
+  # UIVersionTreeList                                                             #
+  ###################################################################################
+  -->
+  <UIVersionTreeList>
+    <header>
+      <version>الإصدار</version>
+      <state>الحالة</state>
+    </header>
+  </UIVersionTreeList>
+  <!--
+  ###################################################################################
+  # UIThumbnailForm                                                             #
+  ###################################################################################
+  -->
+  <UIThumbnailForm>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <RemoveThumbnail>إزالة الصورة المصغرة</RemoveThumbnail>
+    </action>
+    <label>
+      <mediumSize>الصورة المصغرة</mediumSize>
+      <SelectFile>اختيار الصورة المصغرة</SelectFile>
+    </label>
+    <msg>
+      <mimetype-incorrect>نوع الملف غير صحيح. اختر إحدى أنواع الصور المصغرة التالية(JPG, PNG, GIF)</mimetype-incorrect>
+      <access-denied>غير مسموح بالدخول. ليس لك الصلاحيّات الكافية لاضافة صورة مصغرة.</access-denied>
+      <confirm-delete>هل أنت متأكد من حذف الصورة المصغرة؟</confirm-delete>
+      <is-checked-in>هذا العنصر في حالة مراجعة. يُرجى انهاء المراجعة قبل الشروع في أي اجراء آخر.</is-checked-in>
+      <fileName-error>الرجاء اختيار ملف لتحميله.</fileName-error>
+    </msg>
+    <title>
+      <remove-thumbnail>حذف الصورة المصغرة.</remove-thumbnail>
+    </title>
+  </UIThumbnailForm>
+  <!--
+  ###################################################################################
+  # UIAnyPermission                                                                 #
+  ###################################################################################
+  -->
+  <UIAnyPermission>
+    <label>
+      <anyPermission>صلاحيّة للجميع</anyPermission>
+    </label>
+  </UIAnyPermission>
+
+  <anyPermission>
+    <title>
+      <AddAnyPermission>ضع اي صلاحية</AddAnyPermission>
+    </title>
+  </anyPermission>
+  <!--
+  ###################################################################################
+  # UICategoriesAddedList                                                           #
+  ###################################################################################
+  -->
+  <UICategoriesSelector>
+    <action>
+      <close>#{word.close}</close>
+    </action>
+  </UICategoriesSelector>
+  <!--
+  ###################################################################################
+  # Since ECM version 2.2                                                             #
+  ###################################################################################
+  -->
+  <UIGroupMemberSelector>
+    <label>
+      <selectGroup>اختيار مجموعة</selectGroup>
+      <selectUser>اختيار مستخدم</selectUser>
+      <selectMembership>اختيار عضوية</selectMembership>
+    </label>
+  </UIGroupMemberSelector>
+  <!--
+  ###Since ECM version 2.2##############
+  -->
+ 
+  <!--
+  ### Since ECM version 2.3 Alpha##############
+  Access directly a JCR FE drive
+  -->
+  <UIJCRExplorerPortlet>
+    <nopermission>لا يوجد محرك أقراص أو ليس لديك صلاحيّة للوصول إلى محرك الأقراص الحالي.</nopermission>
+  </UIJCRExplorerPortlet>
+
+  <UIJcrExplorerEditForm>
+    <title>تغيير مُستكشف الملفات</title>
+    <action>
+      <Edit>تغيير</Edit>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <label>
+      <uploadFileSizeLimitMB>تقليص الحجم الأدنى للملفات المُحمّلة (MB)</uploadFileSizeLimitMB>
+      <isDirectlyDrive>القرص المباشر</isDirectlyDrive>
+      <driveName>اسم القرص</driveName>
+      <usecase>اختيار النّوع</usecase>
+      <SelectNodePath>اختيار المسار</SelectNodePath>
+      <showTopBar>إظهار الشريط العلوي</showTopBar>
+      <showActionBar>إظهار شريط الاجراءات</showActionBar>
+      <showSideBar>إظهار الشريط الأيمن</showSideBar>
+      <showFilterBar>إظهار شريط التصفية</showFilterBar>
+      <nodePath>اختيار المسار</nodePath>
+    </label>
+  </UIJcrExplorerEditForm>
+
+  <UIDriveSelector>
+    <label>
+      <driveName>اسم القرص</driveName>
+      <action>اجراء</action>
+      <adddrives>إضافة أقراص</adddrives>
+    </label>
+  </UIDriveSelector>
+  <UIJcrExplorerEditForm>
+    <label>
+      <DriveNameInput>تحرير نموذج JCR</DriveNameInput>
+    </label>
+    <msg>
+      <personal-usecase>سيتمّ استعمال القرص الشخصي الخاص بالمستخدم الحالي عند اختيارك للنموذج التطبيقي الشخصي.</personal-usecase>
+      <drive-edit-permission>لا يمكن تغيير اسم القرص .يُرجى النّقر على زر التغيير.</drive-edit-permission>
+      <path-edit-permission>لا يمكن تغيير المسار. يُرجى النقر على زرّ التغيير.</path-edit-permission>
+    </msg>
+  </UIJcrExplorerEditForm>
+
+  <PopUpSelectDrive>
+    <title>
+      <UIDriveSelector>اختيار  قرص</UIDriveSelector>
+    </title>
+  </PopUpSelectDrive>
+
+  <PopupSelectPath>
+    <title>
+      <UIOneNodePathSelector>اختيار المسار</UIOneNodePathSelector>
+    </title>
+  </PopupSelectPath>
+
+  <DriveNameInput>
+    <title>
+      <SelectDrive>اختيار  قرص</SelectDrive>
+    </title>
+  </DriveNameInput>
+
+  <!--
+  ### Since ECM version 2.4.x ##############
+  -->
+  <UIActionBar>
+    <tooltip>
+      <AddSymLink>إضافة وصلة رمزية</AddSymLink>
+      <AddLocalizationLink>اضافة ترجمة</AddLocalizationLink>
+    </tooltip>
+  </UIActionBar>
+
+  <UIPopupWindow>
+    <title>
+      <UISymLinkManager>مدير الوصلة الرمزيّة</UISymLinkManager>
+      <UIAddTranslationManager>اضافة ترجمة</UIAddTranslationManager>
+    </title>
+  </UIPopupWindow>
+
+  <UISymLinkForm>
+    <label>
+      <symLinkName>اسم الوصلة الرمزيّة</symLinkName>
+      <pathNode>المسار</pathNode>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <addFolder-successful>تمّ اضافة الوصلة الرمزيّة '{0}' بنجاح.</addFolder-successful>
+      <name-invalid>الرجاء إدخال اسم الوصلة الرمزيّة</name-invalid>
+      <name-not-allowed>هذا الاسم غير مُتاح.</name-not-allowed>
+      <fileName-error>صيغة اسم الملف غير صحيحة.</fileName-error>
+      <constraint-violation>لا يمكنك إضافة عنصر من نوع '{0}' هنا.</constraint-violation>
+      <repository-exception>رفض الوصول. ليس لديك صلاحيّة لإضافة الوصلة الرمزيّة من هنا.</repository-exception>
+      <numberformat-exception>لا يمكن حفظ هذا المجلد. يجب أن يكون الاسم على شكل أعداد.</numberformat-exception>
+      <path-node-invalid>الرجاء إدخال المسار.</path-node-invalid>
+      <path-node-not-allowed>هذا الاسم غير مُتاح.</path-node-not-allowed>
+      <non-node>الرجاء تحديد الهدف؛ قد لا يكون لديك حقوق لقراءة هذا العنصر.</non-node>
+      <cannot-save>لا يمكن اضافة وصلة رمزيّة للهذا النوع من المستندات.</cannot-save>
+      <item-exists-exception>نفس اسم العنصر موجود مسبقا.</item-exists-exception>
+      <translation-node-same-language-default>هذه الترجمة لها نفس اللّغة مع اللغة الافتراضيّة للمستند الحالي.</translation-node-same-language-default>
+      <UnsupportedRepositoryOperationException>هذا ليس الهدف المشار إليه.</UnsupportedRepositoryOperationException>
+    </msg>
+  </UISymLinkForm>
+  
+  <UIAddTranslationForm>
+    <label>
+      <symLinkName>اسم الوصلة الرمزيّة</symLinkName>
+      <pathNode>مسار الوثيفة:</pathNode>
+      <note>اختيار وثيقة أخرى سيكون بمثابة الترجمة.</note>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <SelectDocument>اختيار وثيقة</SelectDocument>
+    </action>
+    <msg>
+      <addFolder-successful>تمّ اضافة الوصلة الرمزية '{0}' بنجاح.</addFolder-successful>
+      <name-invalid>الرجاء إدخال اسم الوصلة الرمزيّة</name-invalid>
+      <name-not-allowed>هذا الاسم غير متاح.</name-not-allowed>
+      <fileName-error>صيغة اسم الملف غير صحيحة.</fileName-error>
+      <constraint-violation>لا يمكنك إضافة نوع '{0}' للعنصر الحالي.</constraint-violation>
+      <repository-exception>تم رفض الوصول. ليس لديك صلاحيّة لإضافة الوصلة الرمزيّة لهذا العنصر.</repository-exception>
+      <numberformat-exception>لا يمكن حفظ هذا المجلد. يجب أن يكون الاسم عدديّـا.</numberformat-exception>
+      <path-node-invalid>الرجاء إدخال المسار.</path-node-invalid>
+      <path-node-not-allowed>هذا الاسم غير متاح.</path-node-not-allowed>
+      <non-node>الرجاء اختيار العقدة الهدف الصحيحة،  أو ربّما لم يكن لديك ما يكفي من حقوق لقراءة هذه العقدة.</non-node>
+      <cannot-save>طرأ خطأ أثناء انشاء الوصلة الرمزيّة.</cannot-save>
+      <item-exists-exception>عنصر بهذا الاسم موجود مسبقاً.</item-exists-exception>
+      <translation-node-same-language-default>الوثيقة المترجمة بنفس اللغة كلغة افتراضية للمستند الحالي.</translation-node-same-language-default>
+      <UnsupportedRepositoryOperationException>هذا ليس الهدف المشار إليه.</UnsupportedRepositoryOperationException>
+    </msg>
+  </UIAddTranslationForm>
+
+  <UIPopupSymLink>
+    <title>
+      <UIOneNodePathSelector>حدد العنصر المستهدف</UIOneNodePathSelector>
+    </title>
+  </UIPopupSymLink>
+  <UIPopupSymLink>
+    <title>
+      <UIContentSelectorOne>اختيار وثيقة</UIContentSelectorOne>
+    </title>
+  </UIPopupSymLink>
+
+  <ECMContextMenu>
+    <event>
+      <AddSymLink>اضافة وصلة رمزيّة</AddSymLink>
+      <AddLocalizationLink>اضافة ترجمة</AddLocalizationLink>
+    </event>
+  </ECMContextMenu>
+
+  <UIWorkingArea>
+    <msg>
+      <create-link-problem>لا يمكنك إنشاء  رابط بين'{0}' و '{1}'.</create-link-problem>
+      <dest-node-is-link>العقدة الهدف '{0} 'هي بالفعل وصلة رمزيّة، بحيث لا يمكنك إنشاء وصلة رمزيّة أخرى بداخله.</dest-node-is-link>
+      <selected-is-link>العنصر المحدد '{0}' بالفعل رابط. لا يمكنك إنشاء رابط إلى رابط آخر.</selected-is-link>
+      <confirm-create-link>هل تريد حقاً انشاء رابط  نحو هذا الموقع؟</confirm-create-link>
+    </msg>
+  </UIWorkingArea>
+
+  <ECMContextMenu>
+    <event>
+      <CreateLink>إنشاء رابط</CreateLink>
+    </event>
+  </ECMContextMenu>
+
+  <UIWorkspaceList>
+    <msg>
+      <AccessDeniedException>رفض الوصول. ليس لديك صلاحيّة القراءة على مساحة العمل الحاليّة.</AccessDeniedException>
+    </msg>
+    <label>
+      <taxonomyTree>شجرة الفئات</taxonomyTree>
+    </label>
+  </UIWorkspaceList>
+
+  <UIPopupTaxonomy>
+    <title>
+      <UIOneTaxonomySelector>اضافة فئات</UIOneTaxonomySelector>
+    </title>
+  </UIPopupTaxonomy>
+
+  <UITreeTaxonomyList>
+    <label>
+      <taxonomyTree>شجرة الفئات</taxonomyTree>
+      <rootNodePath>جذر الشجرة:</rootNodePath>
+      <rootNodeInfo>UITreeTaxonomyList</rootNodeInfo>
+    </label>
+  </UITreeTaxonomyList>
+
+  <UIActionBar>
+    <tooltip>
+      <ManageSimpleCategories>إدارة الفئات البسيطة</ManageSimpleCategories>
+    </tooltip>
+  </UIActionBar>
+
+  <UISimpleCategoryManager>
+    <tab>
+      <label>
+        <UICategoriesAddedList>الفئات الموصولة</UICategoriesAddedList>
+        <UIOneNodePathSelector>اختيار فئة</UIOneNodePathSelector>
+      </label>
+    </tab>
+  </UISimpleCategoryManager>
+
+  <UICategoryManager>
+    <tab>
+      <label>
+        <UIOneTaxonomySelector>اختيار فئة</UIOneTaxonomySelector>
+      </label>
+    </tab>
+  </UICategoryManager>
+
+  <UISimpleCategoryManager>
+    <action>
+      <Close>#{word.close}</Close>
+    </action>
+  </UISimpleCategoryManager>
+  <UIPopupWindow>
+    <title>
+      <UISimpleCategoryManager>اضافة فئة</UISimpleCategoryManager>
+    </title>
+  </UIPopupWindow>
+  <UICategoriesAddedList>
+    <msg>
+      <ItemExistsException>اسم الفئة موجود مُسبقا.</ItemExistsException>
+    </msg>
+  </UICategoriesAddedList>
+
+  <UIConfirmMessage>
+    <label>
+      <Close>#{word.cancel}</Close>
+      <OK>حذف</OK>
+      <ReplaceData>تعويض البيانات</ReplaceData>
+      <Back>مرة أخرى لإعادة تسمية</Back>
+      <Keepfile>ابقاء جميع الملفات</Keepfile>
+<ReadOnly>فتح للقراءة فقط</ReadOnly>
+<Cancel>الغاء</Cancel>
+      <KeepBoth>الابقاء عليهما</KeepBoth>
+      <CreateNewVersion>Save as new version</CreateNewVersion>
+    </label>
+  </UIConfirmMessage>
+
+  <UIRestoreConfirmMessage>
+    <label>
+      <Close>#{word.close}</Close>
+      <OK>موافق</OK>
+      <ReplaceData>تعويض البيانات</ReplaceData>
+      <Back>مرة أخرى لإعادة تسمية</Back>
+      <Keepfile>ابقاء جميع الملفات</Keepfile>
+    </label>
+  </UIRestoreConfirmMessage>
+
+
+  <PopupComponent>
+    <title>
+      <UIOneTaxonomySelector>إضافة فئات</UIOneTaxonomySelector>
+    </title>
+  </PopupComponent>
+
+  <UIWorkingArea>
+    <msg>
+      <can-not-move-to-itself>لا يمكن نقل الملف: وجهة المجلد تتطابق مع مصدره.</can-not-move-to-itself>
+      <is-editing>لا يمكن نفل ملفّ وهو بحالة تغيير.</is-editing>
+    </msg>
+  </UIWorkingArea>
+
+  <UIImportNode>
+    <label>
+      <behavior>سلوك الـ UUID</behavior>
+      <versionHistory>تاريخ الإصدار</versionHistory>
+    </label>
+    <msg>
+      <history-invalid-type>نوع الملف الخاص بتاريخ الإصدار غير مناسب. يجب أن يكون هذا الأخير من نوع "zip.".</history-invalid-type>
+      <history-invalid-content>محتوى بيانات تاريخ الإصدار غير مناسب. يجب اختيار الملف الصحيح القابل للاستيراد.</history-invalid-content>
+    </msg>
+  </UIImportNode>
+
+  <Import>
+    <Behavior>
+      <type0>انشاء عقدة جديدة</type0>
+      <type1>حذف العقدة الموجودة.</type1>
+      <type2>تعويض العقدة الموجودة.</type2>
+      <type3>طرح استثناء</type3>
+    </Behavior>
+  </Import>
+
+  <UIExportNode>
+    <action>
+      <ExportHistory>تصدير تاريخ الاصدارات</ExportHistory>
+    </action>
+  </UIExportNode>
+
+  <UIPopupMenu>
+    <msg>
+      <node-locked-other-person>هذا العنصر أو المجلد الأصل الخاص به مؤمن من قبل مستخدم آخر، لا يمكنك حذفه.</node-locked-other-person>
+    </msg>
+  </UIPopupMenu>
+
+  <Import>
+    <label>
+      <docview>رؤية الوثيقة</docview>
+      <sysview>رؤية النظام</sysview>
+    </label>
+  </Import>
+
+  <UIDocumentForm>
+    <msg>
+      <do-not-permission>لا تملك الصلاحية الكافية لرؤية النموذج '{0}'.</do-not-permission>
+    </msg>
+  </UIDocumentForm>
+
+  <!--
+  ###################################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIActionBar                #
+  #                           Localize tab                                                                                    #
+  ###################################################################################
+  -->
+  <UIActionBar>
+    <obtion>
+      <Admin>إدارة</Admin>
+      <Info>معلومات</Info>
+      <Actions>اجراءات</Actions>
+      <Collaboration>تعاون</Collaboration>
+      <Search>بحث</Search>
+    </obtion>
+  </UIActionBar>
+
+  <UIPopupMenu>
+    <msg>
+      <can-not-unlock-node-is-checked-in>لايمكن فكّ تأمين '{0}' (أو احدى أسْلافها) لأنها بصدد المراجعة.</can-not-unlock-node-is-checked-in>
+    </msg>
+  </UIPopupMenu>
+
+  <!--
+   #############  From DMS 2.5 #############
+  -->
+  <UIActionBar>
+    <msg>
+      <cannot-enable-version>لا يمكن تنشيط عملية الإصدار في هذا المستند.</cannot-enable-version>
+    </msg>
+  </UIActionBar>
+  <UIPopupMenu>
+    <msg>
+        <cannot-readsource>لا يمكنك قراءة البيانات من المصدر.</cannot-readsource>
+    </msg>
+  </UIPopupMenu>
+  <UIUploadForm>
+    <msg>
+      <upload-not-null>يُرجى تحميل الملف قبل اضافة فئة.</upload-not-null>
+    </msg>
+  </UIUploadForm>
+  <UIActionBar>
+    <msg>
+      <allow-setProperty>يجب تعيين خاصيّة لهذه المجموعة.</allow-setProperty>
+    </msg>
+  </UIActionBar>
+
+  <UIActionForm>
+    <msg>
+      <name-not-allowed>اسم الاجراء هذا غير مُتاح.</name-not-allowed>
+    </msg>
+  </UIActionForm>
+
+  <UISaveQueryForm>
+    <msg>
+      <name-not-allowed>اسم الاستعلام هذا غير مُتاح.</name-not-allowed>
+    </msg>
+  </UISaveQueryForm>
+  <UISimpleSearch>
+    <msg>
+      <name-not-allowed>توجد كلمة أو جملة في هذا المحتوى غير مسموح بها.</name-not-allowed>
+    </msg>
+  </UISimpleSearch>
+
+ 
+    <!--
+   #############  From DMS 2.6 #############
+   -->
+  <ECMContextMenu>
+      <event>
+        <Permlink>عرض الوثيقة</Permlink>
+      </event>
+  </ECMContextMenu>
+  
+
+  <!--
+    ############  From DMS 2.6 ##############
+   -->
+  <UIFolderForm>
+    <label>
+      <nt_folder>وثائق</nt_folder>
+      <nt_unstructured>محتويات</nt_unstructured>
+      <exo_cssFolder>مجلد CSS</exo_cssFolder>
+      <exo_jsFolder>مجلد جافا سكريبت</exo_jsFolder>
+      <exo_linkFolder>رابط المجلد</exo_linkFolder>
+      <exo_webFolder>مجلد محتوى ويب</exo_webFolder>
+   </label>
+  </UIFolderForm>
+
+  <Comments>
+    <tooltip>
+      <remove-comment>إزالة هذا التعليق</remove-comment>
+      <edit-comment>تغيير هذا التعليق</edit-comment>
+    </tooltip>
+  </Comments>
+  <UIDocumentInfo>
+    <msg>
+      <confirm-deletecomment>هل حقا تريد حذف هذا التعليق؟</confirm-deletecomment>
+    </msg>
+  </UIDocumentInfo>
+
+ <UIExportNode>
+  <msg>
+    <OutOfMemoryError>يجب عليك اختيار "طريقة النظام للعرض" لتتمكّن من تصدير كمّية كبيرة من البيانات.</OutOfMemoryError>
+  </msg>
+ </UIExportNode>
+ <Taxonomy>
+    <msg>
+      <AccessDeniedException>ليس لديك الصلاحيّة الكافية للوصول إلى شجرة الفئات.</AccessDeniedException>
+    </msg>
+  </Taxonomy>
+
+  <UIJcrExplorerEditForm>
+    <msg>
+      <notNullDriveName>لا يوجد اسم لهذا القرص أم أنّه فارغ. يُرجى ادخال اسم.</notNullDriveName>
+      <notNullPath>المسار هو خالية أو فارغة. ملء المسار ، من فضلك!</notNullPath>
+    </msg>
+  </UIJcrExplorerEditForm>
+
+  <UIViewSearchResult>
+    <tooltip>
+      <remove-attachment>هل تريد إزالة هذا الملف المرفق؟</remove-attachment>
+    </tooltip>
+  </UIViewSearchResult>
+
+  <SameNamePopup>
+    <title>
+      <UIUploadBehaviorWithSameName>تحميل الملف</UIUploadBehaviorWithSameName>
+    </title>
+  </SameNamePopup>
+
+  <UIAllItems>
+    <label>
+      <OwnedByMe>تمّ انشاؤها بواسطتي</OwnedByMe>
+      <Favourites>المفضلة</Favourites>
+      <Hidden>مخفي</Hidden>
+      <Trash>سلّة المهملات</Trash>
+      <Configuration>إعدادات</Configuration>
+    </label>
+    <title>
+      <allItems>جميع العناصر</allItems>
+    </title>
+  </UIAllItems>
+
+  <UIPreferencesForm>
+      <label>
+          <Alphabetic>أبجدي</Alphabetic>
+          <Type>نوع</Type>
+          <CreatedDate>تاريخ الانشاء</CreatedDate>
+          <ModifiedDate>تاريخ التغيير</ModifiedDate>
+          <Ascending>تصاعدي</Ascending>
+          <Descending>تنازلي</Descending>
+      </label>
+  </UIPreferencesForm>
+
+  <UISavedSearches>
+    <title>
+      <savedSearches>عمليات البحث المحفوظة </savedSearches>
+    </title>
+  </UISavedSearches>
+  <DocumentType>
+    <label>
+       <Images>صور</Images>
+       <Video>فيديو</Video>
+       <Music>موسيقى</Music>
+       <Documents>وثائق</Documents>
+       <Content>المحتوى</Content>
+    </label>
+  </DocumentType>
+
+  <UIDocumentFilterForm>
+    <label>
+      <Images>صورة</Images>
+      <Video>فيديو</Video>
+      <Music>موسيقى</Music>
+      <Documents>وثائق</Documents>
+      <Content>المحتوى</Content>
+    </label>
+    <title>تعيين اعدادات الفرز</title>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIDocumentFilterForm>
+
+  <UIAllItemsByType>
+    <label>
+    <ByType>فرز بحسب النوع</ByType>
+      <DocumentFilterConfiguration>تعيين اعدادات الفرز</DocumentFilterConfiguration>
+    </label>
+    <title>
+      <ShowVideo>عرض جميع ملفات الفيديو</ShowVideo>
+      <ShowMusic>عرض جميع ملفات الموسيقى</ShowMusic>
+      <ShowImages>عرض جميع ملفات الصور</ShowImages>
+      <ShowDocuments>عرض جميع الملفات</ShowDocuments>
+      <ShowContent>إظهار كافّة أنواع الوثائق</ShowContent>
+    </title>
+  </UIAllItemsByType>
+
+  <Views>
+    <label>
+      <slide-show>عرض الشرائح</slide-show>
+    </label>
+  </Views>
+  <ECMContextMenu>
+    <event>
+      <PlayMedia>تشغيل الميديا</PlayMedia>
+    </event>
+  </ECMContextMenu>
+  <UIPopupWindow>
+    <title>
+      <UIDocumentFilterForm>تصفية نوع الوثائق</UIDocumentFilterForm>
+    </title>
+  </UIPopupWindow>
+
+  <UIAllItemsPreferenceForm>
+    <label>
+      <showOwnedByUser>تمّ انشاؤها بواسطتي</showOwnedByUser>
+      <showFavourites>المفضلة</showFavourites>
+      <showHiddens>مخفي</showHiddens>
+      <showTrash>سلّة المهملات</showTrash>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIAllItemsPreferenceForm>
+
+  <EmptyTrashManageComponent>
+    <msg>
+      <confirm-delete>هل ترغب فعلا بإفراغ كافة العناصر من سلّة المهملات؟</confirm-delete>
+    </msg>
+  </EmptyTrashManageComponent>
+  <UICategoryForm>
+    <label>
+      <name>اسم الفئة</name>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UICategoryForm>
+  <UIPopupWindow>
+    <title>
+      <UICategoryForm>اضافة فئة</UICategoryForm>
+    </title>
+  </UIPopupWindow>
+  <UIActionBar>
+    <tooltip>
+      <AddCategory>اضافة فئة</AddCategory>
+    </tooltip>
+   </UIActionBar>
+
+   <UITaggingForm>
+    <label>
+      <Public>عمومي</Public>
+      <Private>شخصي</Private>
+      <tagScopes>نطاقات العلامات</tagScopes>
+    </label>
+   </UITaggingForm>
+
+  <UITagExplorer>
+    <title>
+      <PublicTags>العلامات</PublicTags>
+      <EditPublicTags>تغيير العلامات</EditPublicTags>
+      <PrivateTags>العلامات</PrivateTags>
+    </title>
+  </UITagExplorer>
+
+  <UIEditingTagsForm>
+    <header>
+      <name>الاسم</name>
+      <relatedDocuments>الوثائق ذات صلة</relatedDocuments>
+      <action>اجراء</action>
+    </header>
+    <action>
+      <title>
+        <EditTag>تغيير العلامة</EditTag>
+        <RemoveTag>حذف العلامة</RemoveTag>
+        <AddTag>اضافة علامة</AddTag>
+      </title>
+    </action>
+    <msg>
+      <confirm-remove>هل ترغب فعلا بحذف هذه العلامة؟</confirm-remove>
+    </msg>
+  </UIEditingTagsForm>
+
+
+  <UIPopupWindow>
+    <title>
+      <UIEditingTagsForm>تغيير العلامة</UIEditingTagsForm>
+    </title>
+  </UIPopupWindow>
+
+  <UITagForm>
+    <action>
+      <UpdateTag>#{word.save}</UpdateTag>
+      <Cancel>#{word.close}</Cancel>
+    </action>
+    <label>
+      <tagName>اسم العلامة:</tagName>
+      <relatedDocuments>الوثائق ذات صلة</relatedDocuments>
+    </label>
+  </UITagForm>
+
+  <TagPopup>
+    <title>
+      <UITagForm>علامة</UITagForm>
+    </title>
+  </TagPopup>
+
+    <UIPopupMenu>
+    <msg>
+      <node-locked-editing>لا يمكنك تعديل {0}. هو مؤمن بواسطة مستخدم آخر.</node-locked-editing>
+    </msg>
+  </UIPopupMenu>
+  <UITagStyleForm>
+    <msg>
+      <error-update>طرأ خطأ أثناء عمليّة تحديث نمط العلامة.</error-update>
+    </msg>
+  </UITagStyleForm>
+
+  <UIPopupMenu>
+    <msg>
+      <editTagAccessDenied>غير مسموح بالدخول.</editTagAccessDenied>
+    </msg>
+  </UIPopupMenu>
+
+  <UIPopupWindow>
+    <title>
+      <UITaggingFormContainer>ادارة العلامات</UITaggingFormContainer>
+    </title>
+  </UIPopupWindow>
+
+    <PopupComponent>
+    <title>
+      <UINodeTypeSelector>اختيار نوع العقدة</UINodeTypeSelector>
+    </title>
+  </PopupComponent>
+
+    <UIActionForm>
+    <title>
+      <ShowComponent>عرض المُكوّن</ShowComponent>
+      <removeReference>ازالة</removeReference>
+    </title>
+  </UIActionForm>
+
+  <EditFormAction>
+    <title>
+      <ShowComponent>عرض المُكوّن</ShowComponent>
+      <removeReference>ازالة</removeReference>
+    </title>
+  </EditFormAction>
+
+  <NodeTypeNameValidator>
+    <msg>
+      <Invalid-char>هناك بعض أحرف غير صالحة. يُرجى كتابة قيمة أخرى.</Invalid-char>
+      <empty-input>نوع الاستبيان:</empty-input>
+    </msg>
+  </NodeTypeNameValidator>
+
+  <UIPreferencesForm>
+      <label>
+            <queryType>لغة الاستبيان:</queryType>
+            <SQL>SQL</SQL>
+            <XPATH>XPATH</XPATH>
+      </label>
+  </UIPreferencesForm>
+
+  <UIDocumentInfo>
+    <msg>
+      <repository-error>حدث خطأ. تم فقدان المعلومات حول المخزون.</repository-error>
+    </msg>
+  </UIDocumentInfo>
+
+  <UITreeExplorer>
+    <msg>
+      <repository-error>حدث خطأ. تم فقدان المعلومات حول المخزون.</repository-error>
+    </msg>
+  </UITreeExplorer>
+  <UIDocumentForm>
+    <msg>
+      <constraintviolation-exception>لا يمكن حفظ الملفّ. البيانات التي تمّ ادخالها غير صحيحة أو فارغة.</constraintviolation-exception>
+    </msg>
+  </UIDocumentForm>
+  <UIActionForm>
+    <msg>
+      <constraintviolation-exception>لا يمكن حفظ الملفّ. البيانات التي تمّ ادخالها غير صحيحة أو فارغة.</constraintviolation-exception>
+    </msg>
+  </UIActionForm>
+
+  <UISelectRestorePath>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <label>
+      <formInput>فقد المسار السابق. الرجاء اختيار مسار جديد.</formInput>
+    </label>
+  </UISelectRestorePath>
+  <PathNode>
+    <title>
+      <Add>اضافة</Add>
+    </title>
+  </PathNode>
+  <UIPopupPathFoRestore>
+    <title>
+      <UIOneNodePathSelector>حدد الأصل</UIOneNodePathSelector>
+    </title>
+  </UIPopupPathFoRestore>
+  <rootNodeInfo>
+    <title>
+      <AddRootNode>إضافة الجذر</AddRootNode>
+    </title>
+  </rootNodeInfo>
+
+  <UIActionForm>
+    <msg>
+      <homePath-emty>مسار الصفحة الرئيسية فارغ.</homePath-emty>
+      <targetPath-emty>المسار المستهدف فارغ.</targetPath-emty>
+    </msg>
+    </UIActionForm>
+    <UIActionBar>
+      <msg>
+        <not-exist-categories>لا توجد أي فئة</not-exist-categories>
+      </msg>
+    </UIActionBar>
+
+  <UIPublicationContainer>
+   <action>
+    <Close>#{word.close}</Close>
+   </action>
+  </UIPublicationContainer>
+
+  <UIPublicationPanel>
+    <button>
+      <Close>#{word.close}</Close>
+    </button>
+    <revisions>
+      <version>الاصدارات</version>
+      <date>تاريخ</date>
+      <author>المؤلف</author>
+      <status>الحالة</status>
+      <action>عمل</action>
+      <label>اصدار</label>
+      <none>لا توجد اصدارات</none>
+      <seeall>مشاهدة جميع الإصدارات</seeall>
+      <currentVersion>النّسخة الحالية</currentVersion>
+      <confirm>سوف تفقد المسوّدة الخاصّة بك. هل ترغب حقّا باستبدال المسوّدة الحاليّة؟</confirm>
+    </revisions>
+    <status>
+      <version>مراجعة</version>
+      <title>الحالة</title>
+      <archived>بالأرشيف</archived>
+      <obsolete>عفا عليها الزمن</obsolete>
+      <unpublished>غير منشور</unpublished>
+      <enrolled>مُسجّل</enrolled>
+      <draft>مسودة</draft>
+      <pending>بحالة انتظار</pending>
+      <approved>موافق عليه</approved>
+      <inreview>بحالة مُراجعة</inreview>
+      <staged>جاهز للنّشر</staged>
+      <published>تم نشره</published>
+      <live>منشور</live>
+    </status>
+    <scheduled>
+      <title>مُـبرمَـج</title>
+      <from>من</from>
+      <to>إلى</to>
+    </scheduled>
+    <title>
+      <preview>معاينة</preview>
+      <restore>استعادة</restore>
+    </title>
+    <msg>
+      <have-no-view-template>نموذج العرض غير معتمد.</have-no-view-template>
+      <restore-complete>استعادة كُليّة.</restore-complete>
+    </msg>
+  </UIPublicationPanel>
+  <UIPublicationHistory>
+    <header>
+      <date>تاريخ</date>
+      <versionName>اسم الاصدار</versionName>
+      <currentState>الوضع الحالي</currentState>
+      <user>المؤلّف</user>
+      <description>الوصف</description>
+    </header>
+    <create-version>تمّ إنشاء إصدار جديد</create-version>
+  </UIPublicationHistory>
+  
+  <UIPublicationSchedule>
+    <label>
+      <introduction>يُمكنك برمجة عمليّة نشر ملفّك. حدد التواريخ التي تود أن يُنشَر خلالها الملفّ.</introduction>
+      <no-schedule-info>لا توجد أي برمجة لنشر الملفّ الخاص بك</no-schedule-info>
+      <UIPublicationPanelStartDateInput>تاريخ بداية النشر</UIPublicationPanelStartDateInput>
+      <UIPublicationPanelEndDateInput>تاريخ نهاية النّشر</UIPublicationPanelEndDateInput>
+    </label>
+    <msg>
+      <save-finished>تمّ حفظ برمجة عمليّة النّشر الخاصة بك بنجاح.</save-finished>
+    </msg>
+    <action>
+      <Save>#{word.save}</Save>
+      <Reset>إعادة تعيين</Reset>
+    </action>
+  </UIPublicationSchedule>
+
+  <UIPublicationPanel>
+    <label>
+      <header>تاريخ النشر</header>
+      <start>بداية النشر</start>
+      <end>نهاية النشر</end>
+    </label>
+    <msg>
+      <invalid-format>صيغة التاريخ والتوقيت غير صحيحة. يُرجى اعادة التثبّت.</invalid-format>
+      <fromDate-after-toDate>تاريخ الابتداء يجب أن يأتي قبل تاريخ الانتهاء.</fromDate-after-toDate>
+    </msg>
+  </UIPublicationPanel>
+  <UIPopupWindow>
+    <title>
+      <UIPublicationContainer>إدارة النشر</UIPublicationContainer>
+      <UIPublishingPanel>إدارة النشر</UIPublishingPanel>
+    </title>
+  </UIPopupWindow>
+  <WCMContentView>
+    <header>
+      <status>الحالة</status>
+      <author>المؤلف</author>
+      <date>تاريخ الانشاء</date>
+      <title>عنوان الوثيقة</title>
+      <lastUser>آخر مُستخدم</lastUser>
+    </header>
+  </WCMContentView>
+  <UITagForm>
+    <msg>
+      <NameAlreadyExist>اسم العلامة موجود مُسبقـا.</NameAlreadyExist>
+    </msg>
+  </UITagForm>
+
+  <!--
+  ############  From WCM 2.1.0 ##############
+  -->
+  <UICategoryManagerSearch>
+    <tab>
+      <label>
+        <UIOneTaxonomySelector>اختيار فئة</UIOneTaxonomySelector>
+      </label>
+    </tab>
+  </UICategoryManagerSearch>
+
+  <UIPreferencesForm>
+   <action>
+     <HideAdvance>طريقة إخفاء متطورة</HideAdvance>
+     <ShowAdvance>طريقة عرض متطورة</ShowAdvance>
+    </action>
+    <label>
+    <Advance>إعدادات متقدمة</Advance>
+    </label>
+  </UIPreferencesForm>
+
+  <UIJCRExplorerPortlet>
+<msg>
+  <file-access-denied>لا يمكن الوصول إلى هذا الملف.</file-access-denied>
+  <anonymous-access-denied>مستخدم مجهول ليس لديه صلاحيّة لاستخدام هذه الوظيفة.</anonymous-access-denied>
+</msg>
+  </UIJCRExplorerPortlet>
+  <UIDrivesArea>
+    <DrivesArea>
+      <ShowDrives>إظهار الأقراص</ShowDrives>
+    </DrivesArea>
+    <msg>
+      <no-view-found>ليس هناك مشهد متاح لك و ذلك بالرّجوع الى خصائص صلاحيّاتك على القرص '{0}'.</no-view-found>
+      <access-denied>غير مسموح بالدخول! ربما ، ليست لديك الصلاحيّات الكافية على مساحة العمل الخاصّة بالقرص '{0}'.</access-denied>
+      <not-found>الملف الذي تحاول الوصول إليه لم يعد متوفراً.</not-found>
+      <empty-drives>استحالة الدخول. ليست هناك أقراص في هذا المستودع ، أو ربّما ليست لديك الصلاحيّات الكافية للدخول إلى محتوى أي قرص في مستودع البيانات الحالي.</empty-drives>
+      <workspace-not-exist>تم تخزين القرص '{0}' في مساحة عمل أخرى غير معروفة. يرجى إعادة تهيئته.</workspace-not-exist>
+    </msg>
+  </UIDrivesArea>
+  <UIJcrExplorerEditForm>
+    <msg>
+      <fields-saved>تم حفظ جميع البيانات.</fields-saved>
+      <fields-cancelled>إلغاء كافة البيانات.</fields-cancelled>
+    </msg>
+  </UIJcrExplorerEditForm>
+  <UIDocumentForm>
+  <msg>
+  <confirm-close>ستفقد التغييرات التي أجريتها إذا قمت بإغلاق هذا النموذج.</confirm-close>
+  <confirm-changeType>ستفقد التغييرات التي أجريتها إذا قمت بتغيير نوع المحتوى.</confirm-changeType>
+  <confirm-navigate>ستفقد التغييرات التي أجريتها إذا انتقلت من هذه الصفحة.</confirm-navigate>
+  </msg>
+  </UIDocumentForm>
+  <UploadFileMimeTypesValidator>
+    <msg>
+      <wrong-mimetype>نوع الـ Mime لـ {0} غير مسموح به في المجال {1}. يُرجى تحميل ملفّـا آخر</wrong-mimetype>
+    </msg>
+  </UploadFileMimeTypesValidator>
+  <lifecyclePhase>
+    <label>
+    <no>لا</no>
+  <yes>نعم</yes>
+  <true>صحيح</true>
+  <false>خطأ</false>
+  <Electronic>إلكتروني</Electronic>
+  <Paper>ورقة</Paper>
+  <NONE>لا شيء</NONE>
+  <CLASSIFIED>مُصنّف</CLASSIFIED>
+  <UNCLASSIFIED>غير مُصنّف</UNCLASSIFIED>
+  <NOCONTRACT>بدون عقد</NOCONTRACT>
+  <one-minute>دقيقة واحدة</one-minute>
+  <hourly>كل ساعة</hourly>
+  <daily>يوميا</daily>
+  <quarterly>فصليا (كُل ثلاثَة أشْهُر)</quarterly>
+  <yearly>سنويا</yearly>
+  <ten-years>عشر سنوات</ten-years>
+  <read>إجراء المستخدم</read>
+  <schedule>جدولة</schedule>
+  <node_added>إضافة محتوى</node_added>
+  <node_removed>إزالة المحتوى</node_removed>
+  <property_added>إضافة خاصيّة</property_added>
+  <property_removed>إزالة الخاصيّة</property_removed>
+  <property_changed>تعديل الملكية</property_changed>
+</label>
+  </lifecyclePhase>
+  <UIPopupMenu>
+  <msg>
+<can-not-remove-locked-node>{0} مؤمّنة. لا يمكن نقله الى سلّة المهملات.</can-not-remove-locked-node>
+<can-not-remove-checked-in-node>{0} أو أصله بحالة مراجعة. لا يمكن نقله الى سلّة المهملات.</can-not-remove-checked-in-node>
+<access-denied-to-delete>غير مسموح بالدخول. لا يمكن نقل {0}  الى سلّة المهملات.</access-denied-to-delete>
+  </msg>
+  </UIPopupMenu>
+  <UIPropertyForm>
+  <msg>
+  <unknown-error>حدث خطأ أثناء تغيير هذه الخاصيّة.</unknown-error>
+    </msg>
+  </UIPropertyForm>
+  <UIWatchDocumentForm>
+    <msg>
+      <node-is-locked>هذا العنصر مُؤمّن. لا يمكن تتبّعه.</node-is-locked>
+      <unknown-error>طرأ خطأ. لا يمكن تتبّع هذا المستند.</unknown-error>
+    </msg>
+  </UIWatchDocumentForm>   
+  <UIActionForm>
+    <msg>
+      <xss-vulnerability-character>يحتوي المجال '{0}' على اختراق XSS</xss-vulnerability-character>
+    </msg>
+  </UIActionForm>
+  <UIMultiUpload>
+  <label>
+    <AbortAll>وضع حدّ لجميع العمليات</AbortAll>
+    <AbortAllFiles>وضع حدّ لجميع الملفّات</AbortAllFiles>
+    <MaxFileSize>الحجم الأقصى للملفّ هو</MaxFileSize>
+    <InvalidCharacters>سيتمّ تغيير الأحرف الغير مرغوب فيها  بـ '-'</InvalidCharacters>
+    <DropFileMessage>إسقاط الملفات الخاصة بك في المجلد الحالي</DropFileMessage>
+    <Close>#{word.close}</Close>
+    <in>في</in>
+    <MaxFileSizeAlert>حجم الملف يتجاوز الحدّ الأقصى بحوالي</MaxFileSizeAlert>
+    <Waiting>في الانتظار</Waiting>
+    <Error>خطأ</Error>
+    <or>أو</or>
+    <AlreadyInUse>تمّ استخدامه مُسبقـًا</AlreadyInUse>
+    <Keep>الاحتفاظ بكليهما</Keep>
+    <Replace>تعويض</Replace>
+    <Canceled>تم إلغاؤها</Canceled>
+      <UploadNewVersion>تحميل نسخة جديدة</UploadNewVersion>
+    <Cancel>#{word.cancel}</Cancel>
+    <AbortAllConfirmation>هل تريد أن تلغي تحميل جميع الملفات؟</AbortAllConfirmation>
+  </label>
+  </UIMultiUpload>
+  <UIDocumentNodeList>
+  <label>
+  <CreatedOn>تمّ انشاؤه في</CreatedOn>
+  <Updated>تمّ تحديثه في</Updated>
+  <by>بواسطة</by>
+  <you>أنت</you>
+  </label>
+  </UIDocumentNodeList>
+  <FileView>
+    <label>
+      <name>الاسم</name>
+      <date>تاريخ</date>
+      <size>الحجم</size>
+      <sortBy>الترتيب بحسب:</sortBy>
+      <filesAreSelected>تمّ تحديد الملفّات.</filesAreSelected>
+      <ClearSelection>الغاء الاختيار</ClearSelection>
+      <more>المزيد</more>
+    </label>
+  </FileView>
+  <UIPropertyForm>
+  <msg>
+  <property-name-incorrect>اسم الخاصيّة غير صحيح، الرّجاء إدخال اسمًـا آخرًا !</property-name-incorrect>
+    </msg>
+  </UIPropertyForm>
+  <UIDocumentAutoVersionForm>
+    <msg>وثيقة {0} موجودة مُسبقا. تريد القيام بماذا؟</msg>
+    <UIChkRememberNonVersioned>
+      <label>تذكر خياري لسائر الوثائق التي لم يقع إصداراها</label>
+    </UIChkRememberNonVersioned>
+    <UIChkRememberVersioned>
+      <label>تذكر خياري لسائر الوثائق التي وقع إصداراها</label>
+    </UIChkRememberVersioned>
+  </UIDocumentAutoVersionForm>
+  <DocumentAuto>
+    <message>تم إنشاء نسخة جديدة من  الوثيقة {0} بنجاح.</message>
+    <messageMultiFile>تم إنشاء نسخة جديدة من الوثيقة.</messageMultiFile>
+  </DocumentAuto>
+  <!--
+  ###################################################################################
+  # JCR Exceptions manager                                                              #
+  ###################################################################################
+  -->
+  <VersionException>
+  <msg>لا يمكن تعديل ملفّات هي قيد المراجعة.</msg>  
+  </VersionException>
+</bundle>

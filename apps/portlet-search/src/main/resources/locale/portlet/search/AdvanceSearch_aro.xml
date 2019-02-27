@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UIDefaultSearchForm>
+    <label>
+      <keyword>الكلمات المفاتيح</keyword>
+      <portal>بوّابة</portal>
+      <Page>صفحة</Page>
+      <Document>وثيقة</Document>
+    </label>
+    <action>
+      <Search>بحث</Search>
+    </action>
+  </UIDefaultSearchForm>
+
+  <UIDefaultSearchResult>
+    <label>
+      <Page>صفحة</Page>
+      <Document>وثيقة</Document>
+      <DocumentAndPage>وثيقة و صفحة</DocumentAndPage>
+      <documentandpage>وثيقة و صفحة</documentandpage>
+      <results>النتائج {0} لصالح {1} على {2}</results>
+      <oneResult>النتيجة واحد فقط لصالح {0}</oneResult>
+      <ofAboutCaption>من حوالي</ofAboutCaption>
+      <timeUnitCaption>ثوان</timeUnitCaption>
+      <similar>الصفحات التي تحتوي على نفس المضمون</similar>
+      <editor>المؤلّف</editor>
+      <date>تاريخ</date>
+      <relevancy>الأهمية</relevancy>
+      <title>عنوان</title>
+      <sortBy>الترتيب حسب:</sortBy>
+    </label>
+    <action>
+      <edit>تغيير</edit>
+    </action>
+    <msg>
+      <search-not-match-type>عمليّة البحث الخاصّة بك {0} لا تتطابق مع أي نتيجة من {1}.</search-not-match-type>
+    </msg>
+  </UIDefaultSearchResult>
+  <UISearchPageLayoutManager>
+    <label>
+      <itemsPerPageSelector>العناصر لكل صفحة</itemsPerPageSelector>
+      <searchFormSelector>نموذج لقالب البحث</searchFormSelector>
+      <searchResultSelector>نموذج لنتائج البحث</searchResultSelector>
+      <searchPaginatorSelector>نموذج لمتصفح البحث</searchPaginatorSelector>
+      <searchPageLayoutSelector>نموذج لتنظيم صفحة البحث</searchPageLayoutSelector>
+      <searchResultBasePathInputSetAction>المسار الأساسي</searchResultBasePathInputSetAction>
+      <pageMode>نمط الصفحة</pageMode>
+      <option>
+        <none>لا شيء</none>
+        <more>المزيد</more>
+        <pagination>ترقيم الصفحات</pagination>
+      </option>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UISearchPageLayoutManager>
+  <searchResultBasePathInputSetAction>
+    <title>
+      <SelectBasePath>حدد مسار القاعدة</SelectBasePath>
+    </title>
+  </searchResultBasePathInputSetAction>  
+  <UISearchForm>  
+   <message>
+     <keyword-not-support>كلمة المفتاح غير صحيحة. لم يتم التعرّف على بعض الأحرف.</keyword-not-support>
+     <not-checked>الرجاء تحديد نوعية البحث.</not-checked>
+     <keyword-not-empty>الرجاء إدخال كلمة المفتاح</keyword-not-empty>
+   </message>
+  </UISearchForm>
+  <UIPaginatorDefault>
+    <label>
+      <next>التالي</next>
+      <previous>السابق</previous>
+      <more>المزيد</more>
+    </label>
+  </UIPaginatorDefault>
+  <UISearchPageLayoutDefault>
+    <label>
+      <quickEditTitle>تغيير سريع</quickEditTitle>
+    </label>
+  </UISearchPageLayoutDefault>
+  <searchOption>
+    <label>
+      <pageCheckBox>في صفحات</pageCheckBox>
+      <documentCheckBox>في المحتوى</documentCheckBox>
+    </label>
+  </searchOption>
+  <ViewMode>
+    <label>
+      <option>
+        <all>البحث في جميع المواقع</all>
+      </option>  
+    </label>  
+  </ViewMode>
+</bundle>

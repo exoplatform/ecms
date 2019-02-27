@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Copyright (C) 2009 eXo Platform SAS.
+    
+    This is free software; you can redistribute it and/or modify it
+    under the terms of the GNU Lesser General Public License as
+    published by the Free Software Foundation; either version 2.1 of
+    the License, or (at your option) any later version.
+    
+    This software is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+    Lesser General Public License for more details.
+    
+    You should have received a copy of the GNU Lesser General Public
+    License along with this software; if not, write to the Free
+    Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+    02110-1301 USA, or see the FSF site: http://www.fsf.org.
+
+-->
+<bundle>
+  <WebContent>
+    <dialog>
+      <label>
+        <MainContent>المحتوى الأصلي</MainContent>
+        <cssFile>css الافتراضي</cssFile>
+        <jsFile>js  الافتراضي</jsFile>
+        <Advanced>متطور/ة</Advanced>
+        <Summary>مُلخّص</Summary>
+        <name>#{word.name}</name>
+        <title>عنوان</title>
+        <ContentCSS>بيانات الـCSS</ContentCSS>
+        <hintCSS>يمكنك تحديد الأنماط الرئيسية لمحتوى الويب الخاص بك. وسوف يتجاوز هذا النمط الأنماط الخاصّة بهذا الموقع، وعلى الصعيد المشترك.</hintCSS>
+        <ContentJS>بيانات الــ JS</ContentJS>
+        <hintJS>يمكنك تحديد بعض رموز الجافا سكريبت التي يمكن تنفيذها قبل تشغيل محتوى الويب الخاصّ بك.</hintJS>
+        <WebContentHtml>المحتوى الأصلي</WebContentHtml>
+        <Illustration>رسم بياني</Illustration>
+        <hintIllustration>في هذه اللوحة، يمكنك تحديد الصورة التي سيتم عرضها عندما يتم عرض محتوى ويب ضمن جملة القائمات. يمكنك أيضا تحديد بعض النصوص الموجزة بحيث تستطيع أن ترفقها مع هذه الصورة.</hintIllustration>
+        <confirm-delete>هل أنت متأكد من حذف هذا الرسم البياني؟</confirm-delete>
+        <illustrationImage>صورة الرسم البياني</illustrationImage>
+        <imageMimeType>نوع الصورة</imageMimeType>
+        <image>تحميل صُورة</image>
+        <imageWidth>عرض الصورة</imageWidth>
+        <imageHeight>ارتفاع الصورة</imageHeight>
+        <Synchronize>تزامن مع CSS و HTML</Synchronize>
+      </label>
+    </dialog>
+  </WebContent>
+
+  <CSSFile>
+    <dialog>
+      <label>
+        <name>#{word.name}</name>
+        <active>ناشط</active>
+        <priority>الأولوية</priority>
+        <content>بيانات الـCSS</content>
+      </label>
+    </dialog>
+  </CSSFile>
+
+  <JSFile>
+    <dialog>
+      <label>
+        <name>#{word.name}</name>
+        <active>ناشط</active>
+        <priority>الأولوية</priority>
+        <content>بيانات الــ JS</content>
+      </label>
+    </dialog>
+  </JSFile>
+
+  <WebLink>
+    <dialog>
+      <label>
+        <name>#{word.name}</name>
+        <url>عنوان الموارد الموحد(URL)</url>
+        <description>الوصف</description>
+      </label>
+    </dialog>
+  </WebLink>
+
+  <SiteMetadata>
+    <dialog>
+      <label>
+        <title>عنوان الموقع</title>
+        <description>وصف الموقع</description>
+        <keywords>كلمات البحث للموقع</keywords>
+        <robots>سلوكيات محركات البحث</robots>
+      </label>
+    </dialog>
+  </SiteMetadata>
+</bundle>

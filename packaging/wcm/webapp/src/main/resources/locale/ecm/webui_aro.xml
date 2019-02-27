@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <!--
+  #####################################################################
+  # org.exoplatform.ecm.webui.tree.selectmany.UICategoriesSelectPanel #
+  #####################################################################
+  -->
+  <UITreeList>
+    <header>
+      <name>الاسم</name>
+      <action>إضافة</action>
+    </header>
+    <info>
+      <child-not-found>الفرع غير موجود!</child-not-found>
+    </info>
+    <action>
+      <title>
+        <select>اختيار</select>
+      </title>
+    </action>
+  </UITreeList>
+  <!--
+  ######################################################################
+  # org.exoplatform.ecm.webui.tree.selectmany.UISelectedCategoriesGrid #
+  ######################################################################
+  -->
+  <UISelectedCategoriesGrid>
+    <header>
+      <categoryName>اسم الفئة</categoryName>
+      <categoryPath>مسار الفئة</categoryPath>
+      <action>#{word.action}</action>
+    </header>
+    <action>
+      <SaveCategories>#{word.save}</SaveCategories>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <cannot-save>لم يتمّ حفظ الفئات.</cannot-save>
+      <have-saved>تمّ حفظ الفئات بنجاح</have-saved>
+      <non-categories>فئات خاطئة. الرجاء اختيار الفئات المناسبة.</non-categories>
+      <confirm-delete>هل تريد حذف هذه الفئة؟</confirm-delete>
+    </msg>
+  </UISelectedCategoriesGrid>
+  <!--
+  ######################################################################
+  # org.exoplatform.ecm.webui.selector.UIPermissionSelector           #
+  ######################################################################
+  -->
+  <SelectUserOrGroup>
+    <title>
+      <UIPermissionUser>اختيار المستخدم</UIPermissionUser>
+      <UIPermissionMembership>اختيارالعضوية</UIPermissionMembership>
+      <TaxoSelectUserOrGroup>اختيار عُضويّة</TaxoSelectUserOrGroup>
+    </title>
+  </SelectUserOrGroup>
+  <UIPermissionUser>
+    <label>
+      <selectUser>اختيار المستخدم</selectUser>
+      <selectGroup>تصفح واختر مجموعة</selectGroup>
+    </label>
+  </UIPermissionUser>
+  <UIPermissionMembership>
+    <label>
+      <selectUser>اختيار العضوية</selectUser>
+      <selectGroup>تصفح واختر مجموعة</selectGroup>
+    </label>
+  </UIPermissionMembership>
+  <TaxoSelectUserOrGroup>
+    <label>
+      <selectGroup>اختيار مجموعة</selectGroup>
+      <selectMembership>اختيار عُضويّة</selectMembership>
+    </label>
+  </TaxoSelectUserOrGroup>
+  <!--
+  ######################################################################
+  # org.exoplatform.wcm.webui.clv.UICLVConfig        #
+  ######################################################################
+  -->
+  <UICLVConfigTargetPageSelectorPopupWindow>
+    <title>
+      <UIPageSelector>مُنتق الصفحات</UIPageSelector>
+    </title>
+  </UICLVConfigTargetPageSelectorPopupWindow>
+  <!--
+  ###################################################################################
+  # Repository                                        #
+  ###################################################################################
+  -->
+  <rootNodeInfo>
+    <title>
+      <AddRootNode>إضافة الجذر</AddRootNode>
+    </title>
+  </rootNodeInfo>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.UIMetadataList         #
+  ################################################################################
+  -->
+  <UIMetadataAnyPermission>
+    <label>
+      <anyPermission>جميع التصاريح</anyPermission>
+    </label>
+  </UIMetadataAnyPermission>
+</bundle>
