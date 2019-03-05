@@ -79,14 +79,16 @@ public class DocumentServiceImpl implements DocumentService {
   private RepositoryService repoService;
   private NodeHierarchyCreator nodeHierarchyCreator;
   private LinkManager linkManager;
+  private PortalContainerInfo portalContainerInfo;
 
-  public DocumentServiceImpl(ManageDriveService manageDriveService, Portal portal, SessionProviderService sessionProviderService, RepositoryService repoService, NodeHierarchyCreator nodeHierarchyCreator, LinkManager linkManager) {
+  public DocumentServiceImpl(ManageDriveService manageDriveService, Portal portal, SessionProviderService sessionProviderService, RepositoryService repoService, NodeHierarchyCreator nodeHierarchyCreator, LinkManager linkManager, PortalContainerInfo portalContainerInfo) {
     this.manageDriveService = manageDriveService;
     this.sessionProviderService = sessionProviderService;
     this.repoService = repoService;
     this.nodeHierarchyCreator = nodeHierarchyCreator;
     this.portal = portal;
     this.linkManager = linkManager;
+    this.portalContainerInfo = portalContainerInfo;
   }
 
   @Override
@@ -173,9 +175,12 @@ public class DocumentServiceImpl implements DocumentService {
   @Override
   public String getShortLinkInDocumentsApp(String workspaceName, String nodeId) throws Exception {
     StringBuilder url = new StringBuilder();
+    String containerName = portalContainerInfo.getContainerName();
     url.append("/")
+            .append(containerName)
+            .append("/private/")
             .append(CommonsUtils.getRestContextName())
-            .append("/private/documents/view/")
+            .append("/documents/view/")
             .append(workspaceName)
             .append("/")
             .append(nodeId);
@@ -214,7 +219,7 @@ public class DocumentServiceImpl implements DocumentService {
       return null;
     }
 
-    String containerName = WCMCoreUtils.getService(PortalContainerInfo.class).getContainerName();
+    String containerName = portalContainerInfo.getContainerName();
     StringBuffer url = new StringBuffer();
     url.append("/").append(containerName);
     if (drive == null) {
