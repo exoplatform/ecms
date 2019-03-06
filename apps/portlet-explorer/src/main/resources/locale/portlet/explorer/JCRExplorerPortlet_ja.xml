@@ -1421,7 +1421,7 @@
     </eventName>
     <label>
       <operation>オペレーション</operation>
-      <userName>ユーザ名</userName>
+      <userName>ユーザー名</userName>
       <date>日付</date>
       <version>バージョン</version>
     </label>
