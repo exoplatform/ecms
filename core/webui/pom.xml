@@ -4,7 +4,7 @@
   <parent>
     <artifactId>ecms-core</artifactId>
     <groupId>org.exoplatform.ecms</groupId>
-    <version>5.1.2</version>
+    <version>5.1.x-acc210-SNAPSHOT</version>
   </parent>
   <artifactId>ecms-core-webui</artifactId>
   <name>eXo PLF:: DMS webui component</name>
