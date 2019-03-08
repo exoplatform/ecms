@@ -7,13 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import javax.jcr.AccessDeniedException;
-import javax.jcr.ItemNotFoundException;
-import javax.jcr.Node;
-import javax.jcr.NodeIterator;
-import javax.jcr.RepositoryException;
-import javax.jcr.PathNotFoundException;
-import javax.jcr.Session;
+import javax.jcr.*;
 import javax.jcr.query.Query;
 import javax.jcr.query.QueryManager;
 
@@ -273,8 +267,10 @@ public class WCMComposerImpl implements WCMComposer, Startable {
     ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
     Session session = sessionProvider.getSession(workspace, manageableRepository);
     Node currentFolder = null;
-    if (session.getRootNode().hasNode(path.substring(1))) {
-      currentFolder = session.getRootNode().getNode(path.substring(1));
+
+    Item item = session.getItem(path);
+    if (item != null) {
+      currentFolder = (Node) item;
     }
 
     Result result;
@@ -422,10 +418,11 @@ public class WCMComposerImpl implements WCMComposer, Startable {
         Node currentFolder = null;
         if ("/".equals(path)) {
           currentFolder = session.getRootNode();
-        } else if (session.getRootNode().hasNode(path.substring(1))) {
-          currentFolder = session.getRootNode().getNode(path.substring(1));
         } else {
-          return null;
+          Item item = session.getItem(path);
+          if (item != null) {
+            currentFolder = (Node) item;
+          }
         }
 
         if (currentFolder != null && currentFolder.isNodeType("exo:taxonomy")) {
