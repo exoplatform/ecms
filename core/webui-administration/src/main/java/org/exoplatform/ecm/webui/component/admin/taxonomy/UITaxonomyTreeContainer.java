@@ -251,14 +251,15 @@ public class UITaxonomyTreeContainer extends UIContainer implements UISelectable
             }
             node.removePermission(identity);
           }
-          node.setPermission(nodeOwner,PermissionType.ALL);
+          if(nodeOwner != null) {
+            node.setPermission(nodeOwner, PermissionType.ALL);
+          }
           if(PermissionUtil.canChangePermission(node)) {
             for(PermissionBean permBean : permBeans) {
               List<String> permsList = new ArrayList<String>();
               if (permBean.isRead()) permsList.add(PermissionType.READ);
               if (permBean.isAddNode()) permsList.add(PermissionType.ADD_NODE);
               if (permBean.isRemove()) permsList.add(PermissionType.REMOVE);
-  //            if (permBean.isSetProperty()) permsList.add(PermissionType.SET_PROPERTY);
               if (permsList.size() > 0) {
                 node.setPermission(permBean.getUsersOrGroups(), permsList.toArray(new String[permsList.size()]));
               }
