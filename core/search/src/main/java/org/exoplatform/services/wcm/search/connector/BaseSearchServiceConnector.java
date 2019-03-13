@@ -107,7 +107,7 @@ public abstract class BaseSearchServiceConnector extends SearchServiceConnector 
     //query search result
     try {
         criteria.setSiteName(getSitesStr(sites));
-        ret = convertResult(searchNodes(criteria), limit, offset, context);
+        ret = convertResult(searchNodes(criteria, context), limit, offset, context);
     } catch (Exception e) {
       if (LOG.isErrorEnabled()) {
         LOG.error(e.getMessage(), e);
@@ -146,7 +146,7 @@ public abstract class BaseSearchServiceConnector extends SearchServiceConnector 
    * @param criteria the query criteria
    * @return page list containing the result
    */
-  protected abstract AbstractPageList<ResultNode> searchNodes(QueryCriteria criteria) throws Exception;
+  protected abstract AbstractPageList<ResultNode> searchNodes(QueryCriteria criteria, SearchContext context) throws Exception;
   
   /**
    * filters the node base on search type: document or file

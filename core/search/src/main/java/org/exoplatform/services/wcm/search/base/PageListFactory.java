@@ -45,6 +45,7 @@ public class PageListFactory {
   private static final Log LOG = ExoLogger.getLogger(PageListFactory.class.getName());
   
   public static <E> AbstractPageList<E> createPageList(String queryStatement,
+                                                       Locale locale,
                                                        String workspace,
                                                        String language,
                                                        boolean isSystemSession,
@@ -75,7 +76,7 @@ public class PageListFactory {
 
     if(criteria != null && !criteria.isSearchWebpage()) {
       // search in ES
-      results.addAll(searchInES(workspace, isSystemSession, filter, dataCreator, criteria));
+      results.addAll(searchInES(workspace, locale, isSystemSession, filter, dataCreator, criteria));
     }
 
     // remove duplications
@@ -89,6 +90,7 @@ public class PageListFactory {
   }
   
   public static <E> AbstractPageList<E> createPageList(String queryStatement,
+                                                       Locale locale,
                                                        String workspace,
                                                        String language,
                                                        boolean isSystemSession,
@@ -98,12 +100,13 @@ public class PageListFactory {
                                                        int bufferSize) throws LoginException,
                                                                       NoSuchWorkspaceException,
                                                                       RepositoryException {
-    return createPageList(queryStatement, workspace, language,
+    return createPageList(queryStatement, locale, workspace, language,
                            isSystemSession, filter, dataCreator,
                            pageSize, bufferSize, null);
   }
   
   public static <E> AbstractPageList<E> createPageList(String queryStatement,
+                                                       Locale locale,
                                                        String workspace,
                                                        String language,
                                                        boolean isSystemSession,
@@ -111,7 +114,7 @@ public class PageListFactory {
                                                        SearchDataCreator<E> dataCreator) throws LoginException,
                                                                                         NoSuchWorkspaceException,
                                                                                         RepositoryException {
-    return createPageList(queryStatement, workspace, language,
+    return createPageList(queryStatement, locale, workspace, language,
                           isSystemSession, filter, dataCreator,
                           AbstractPageList.DEFAULT_PAGE_SIZE, AbstractPageList.DEAFAULT_BUFFER_SIZE);
   }
@@ -245,6 +248,7 @@ public class PageListFactory {
    * @throws RepositoryException
    */
   protected static <E> List<E> searchInES(String workspace,
+                                   Locale locale,
                                    boolean isSystemSession,
                                    NodeSearchFilter filter,
                                    SearchDataCreator<E> dataCreator,
@@ -257,6 +261,7 @@ public class PageListFactory {
     int offset = criteria != null ? (int) criteria.getOffset() : 0;
     Collection<SearchResult> results = fileSearchInternalServiceConnector.appSearch(workspace,
             criteria != null ? criteria.getSearchPath() : "",
+            locale,
             criteria != null ? criteria.getKeyword() : "",
             0,
             offset + AbstractPageList.RESULT_SIZE_SEPARATOR + 1,
