@@ -656,8 +656,8 @@
       <UIActionViewContainer>アクション情報</UIActionViewContainer>
       <UIMultiLanguageForm>言語観覧</UIMultiLanguageForm>
       <UIAddLanguageContainer>言語追加</UIAddLanguageContainer>
-      <UINonPublishedForm>状態</UINonPublishedForm>
-      <UIPublishedForm>状態</UIPublishedForm>
+      <UINonPublishedForm>ステータス</UINonPublishedForm>
+      <UIPublishedForm>ステータス</UIPublishedForm>
       <UIPublicationLogList>履歴</UIPublicationLogList>
       <UIDocumentWithTree>ファイル観覧</UIDocumentWithTree>
       <UIDocumentInfo>ドキュメント観覧</UIDocumentInfo>
@@ -1280,7 +1280,7 @@
     <header>
       <name>名前</name>
       <type>タイプ</type>
-      <statement>状態</statement>
+      <statement>ステートメント</statement>
       <permission>権限</permission>
       <action>アクション</action>
     </header>
@@ -2033,11 +2033,11 @@
       <non-published>未公開</non-published>
       <public>パブリック</public>
       <private>プライベート</private>
-      <state>状態</state>
+      <state>ステータス</state>
       <visibility>可視性</visibility>
       <nodeName>ノード名:</nodeName>
       <lifecycleName>ライフサイクル名</lifecycleName>
-      <stateName>状態名</stateName>
+      <stateName>ステータス名</stateName>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -2129,7 +2129,7 @@
   <UIPublicationLogList>
     <header>
       <date>日付</date>
-      <newState>新しい状態</newState>
+      <newState>新規ステータス</newState>
       <user>ユーザ</user>
       <description>説明</description>
       <version>バージョン</version>
@@ -2147,7 +2147,7 @@
   <UIVersionTreeList>
     <header>
       <version>バージョン</version>
-      <state>状態</state>
+      <state>ステータス</state>
     </header>
   </UIVersionTreeList>
   <!--
@@ -2975,7 +2975,7 @@
       <version>リビジョンs</version>
       <date>日付</date>
       <author>作者</author>
-      <status>状態</status>
+      <status>ステータス</status>
       <action>アクション</action>
       <label>リビジョン</label>
       <none>リビジョンなし</none>
@@ -2985,7 +2985,7 @@
     </revisions>
     <status>
       <version>リビジョン</version>
-      <title>状態</title>
+      <title>ステータス</title>
       <archived>アーカイブ</archived>
       <obsolete>廃止済</obsolete>
       <unpublished>古い</unpublished>
@@ -3016,7 +3016,7 @@
     <header>
       <date>日付</date>
       <versionName>リビジョン名</versionName>
-      <currentState>現在の状態</currentState>
+      <currentState>現在のステータス</currentState>
       <user>作者</user>
       <description>説明</description>
     </header>
