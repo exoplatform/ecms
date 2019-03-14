@@ -34,7 +34,7 @@ public class TestUtils {
 
 
         String result = Utils.generateMountURL(userMount, "collaboration" , "/Users", "/Groups");
-        assertEquals("/Users/r___/ro___/roo___/root", result);
+        assertEquals("/Users/r___/ro___/roo___/root/Public", result);
 
         result = Utils.generateMountURL(userMount, "myWS", "/Users", "/Groups");
         assertEquals("/" , result);

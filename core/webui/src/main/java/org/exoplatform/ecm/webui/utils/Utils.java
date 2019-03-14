@@ -337,7 +337,7 @@ public class Utils {
 
   final static public String   COLLABORATION_WS           = "collaboration";
 
-  final static public int      USER_DEPTH                 = 4;
+  final static public int      USER_DEPTH                 = 5;
 
   final static public String   EMPTY                      = "";
 
