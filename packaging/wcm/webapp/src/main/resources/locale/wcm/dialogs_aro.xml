@@ -23,7 +23,7 @@
   <WebContent>
     <dialog>
       <label>
-        <MainContent>المحتوى الأصلي</MainContent>
+        <MainContent>المحتوى الاساسي</MainContent>
         <cssFile>css الافتراضي</cssFile>
         <jsFile>js  الافتراضي</jsFile>
         <Advanced>متطور/ة</Advanced>
@@ -52,7 +52,7 @@
     <dialog>
       <label>
         <name>#{word.name}</name>
-        <active>ناشط</active>
+        <active>نشط</active>
         <priority>الأولوية</priority>
         <content>بيانات الـCSS</content>
       </label>
@@ -63,7 +63,7 @@
     <dialog>
       <label>
         <name>#{word.name}</name>
-        <active>ناشط</active>
+        <active>نشط</active>
         <priority>الأولوية</priority>
         <content>بيانات الــ JS</content>
       </label>

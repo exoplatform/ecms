@@ -50,7 +50,7 @@
   <File>
     <view>
       <label>
-        <not-viewable>The preview of this document is not available.</not-viewable>
+        <not-viewable>Bu belgenin ön izlemesi mevcut değil.</not-viewable>
         <pdf-max-size>{0} MB'den büyük içerikler için ön izleme bulunmamaktadır.</pdf-max-size>
         <pdf-max-page>{0} sayfadan daha fazla olan içerikler için ön izleme bulunmamaktadır.</pdf-max-page>
         <using-webDAV>veya MS Office ile Açın</using-webDAV>

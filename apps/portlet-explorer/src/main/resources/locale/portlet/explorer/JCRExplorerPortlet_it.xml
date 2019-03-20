@@ -1350,7 +1350,7 @@
       <empty>Fai clic qui per aggiungere una sintesi</empty>
     </summary>
     <tooltip>
-      <original>Original Version</original>
+      <original>Versione originale</original>
       <version>Versione</version>
       <baseVersion>versione corrente</baseVersion>
       <addLabel>Aggiungi Etichetta</addLabel>

@@ -35,7 +35,7 @@
  
   <UICommentForm>
     <label>
-      <placeholder>コメントに誰かをメンションするには。@ を使用します</placeholder>
+      <placeholder>コメントに誰かをメンションするには@ を使用します。</placeholder>
     </label>
   </UICommentForm>
  

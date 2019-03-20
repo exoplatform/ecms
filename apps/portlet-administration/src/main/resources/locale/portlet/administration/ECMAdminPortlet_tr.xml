@@ -951,7 +951,7 @@
       <viewName>Adı</viewName>
       <tabName>Sekme Adı</tabName>
       <permission>İzin</permission>
-      <tabs>Tabs</tabs>
+      <tabs>Sekmeler</tabs>
       <template>Şablonlar</template>
       <enableVersion>Sürüm Kontrolü Etkinleştir</enableVersion>
       <addFolder>Klasör Ekle</addFolder>
@@ -1386,7 +1386,7 @@
     <title>Bu ağa bir izin ekle</title>
     <action>
       <Close>#{word.close}</Close>
-      <Save>Save</Save>
+      <Save>Kaydet</Save>
       <Reset>Sıfırla</Reset>
     </action>
     <msg>

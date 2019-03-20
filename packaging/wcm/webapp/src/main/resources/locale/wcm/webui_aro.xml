@@ -259,7 +259,7 @@
     </header>
     <title>
       <Select>اختيار</Select>
-      <View>رأي</View>
+      <View>عرض</View>
     </title>
     <msg>
     <template-not-support>لا يمكن معاينة هذا المحتوى. القالب غير معتمد</template-not-support>

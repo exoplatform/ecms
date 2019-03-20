@@ -17,7 +17,7 @@
     <label>
       <UITaxonomyManagerTrees>فئات</UITaxonomyManagerTrees>
       <UIMetadataManager>دليل المعلومات القياسيّة</UIMetadataManager>
-      <UINamespaceManager>أسماء الفضاءات</UINamespaceManager>
+      <UINamespaceManager>أسماء المساحات</UINamespaceManager>
       <UINodeTypeManager>أنواع العقد</UINodeTypeManager>
       <UITemplatesManager>وثائق</UITemplatesManager>
       <UICLVTemplatesManager>قائمة</UICLVTemplatesManager>
@@ -87,7 +87,7 @@
 -->
   <UITaxonomyTreeMainForm>
     <action>
-      <Reset>Reset</Reset>
+      <Reset>إعادة تعيين</Reset>
     </action>
     <msg>
       <name-not-allowed>اسم محظور</name-not-allowed>
@@ -127,10 +127,10 @@
     <header>
       <usersOrGroups>مستخدم أو مجموعة</usersOrGroups>
       <read>قراءة</read>
-      <addNode>إضافة العقدة</addNode>
+      <addNode>إضافة جزئية</addNode>
       <setProperty>تعيين الخاصية</setProperty>
-      <remove>قراءة</remove>
-      <action>العمل</action>
+      <remove>حذف</remove>
+      <action>إجراء</action>
     </header>
   </UIPermissionTreeInfo>
 
@@ -141,7 +141,7 @@
   -->
   <UIPermissionTreeForm>
     <msg>
-      <have-not-any-permission>يُرجى تحديد على الأقلّ صلاحية لهذه العقدة</have-not-any-permission>
+      <have-not-any-permission>يُرجى تحديد على الأقلّ صلاحية واحدة لهذه الجزئية.</have-not-any-permission>
     </msg>
   </UIPermissionTreeForm>
 
@@ -152,15 +152,15 @@
   -->
 
   <UIActionForm>
-    <title>إضافة اجراء إلى فئة الشّجرة</title>
+    <title>إضافة اجراء إلى شجرة الفئات</title>
     <action>
       <Save>#{word.save}</Save>
     </action>
     <msg>
-      <name-not-allowed>اسم محظور</name-not-allowed>
+      <name-not-allowed>الاسم فارغ أو الأحرف الخاصة محظورة.</name-not-allowed>
       <path-invalid>مسار غير صالح</path-invalid>
       <taxonomy-existed>شجرة الفئات موجودة مُسبقا</taxonomy-existed>
-      <taxonomy-node-existed>فئة العقدة موجودة مُسبقا</taxonomy-node-existed>
+      <taxonomy-node-existed>جزئية الفئة موجودة مُسبقا.</taxonomy-node-existed>
       <no-permission-add>ليس لديك الحق في إضافة إجراء.</no-permission-add>
       <not-created-tree>لم يتمّ بعد انشاء شجرة الفئات</not-created-tree>
     </msg>
@@ -174,7 +174,7 @@
   <UITemplatesList>
     <header>
       <name>إسم القالب</name>
-      <action>الأعمال</action>
+      <action>المهام</action>
     </header>
   </UITemplatesList>
   <!--
@@ -184,13 +184,13 @@
   -->
   <NameSpacePopup>
     <title>
-      <UINamespaceForm>شكل إسم الفضاء</UINamespaceForm>
+      <UINamespaceForm>شكل إسم المساحة</UINamespaceForm>
     </title>
   </NameSpacePopup>
   <UINamespaceForm>
-    <title>تسجيل إسم الفضاء جديد</title>
+    <title>تسجيل إسم المساحة جديد</title>
     <label>
-      <namespace>بادئة إسم الفضاء</namespace>
+      <namespace>بادئة إسم المساحة</namespace>
       <uri>عنوان الـ URI</uri>
     </label>
     <action>
@@ -198,9 +198,9 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <register-unsuccessfull>إسم فضاء او 'URI' موجود مُسبقا !</register-unsuccessfull>
-      <prefix-null>يُرجى ادخال بادئة لاسم الفضاء</prefix-null>
-      <uri-null>يُرجى تحديد الـURI الخاص باسم الفضاء</uri-null>
+      <register-unsuccessfull>إسم مساحة او 'URI' موجود مُسبقا !</register-unsuccessfull>
+      <prefix-null>يُرجى ادخال بادئة لاسم المساحة</prefix-null>
+      <uri-null>يُرجى تحديد الـURI الخاص باسم المساحة.</uri-null>
     </msg>
   </UINamespaceForm>
   <!--
@@ -211,7 +211,7 @@
   <UINamespaceList>
     <header>
       <prefix>بادئة</prefix>
-      <uri>اسم الفضاء الخاص بالـ URI</uri>
+      <uri>اسم المساحة الخاص بالـ URI</uri>
       <action>اجراء</action>
     </header>
     <action>
@@ -220,7 +220,7 @@
   </UINamespaceList>
   <NamespacePopup>
     <title>
-      <UINamespaceForm>حفظ إسم فضاء جديد</UINamespaceForm>
+      <UINamespaceForm>حفظ إسم مساحة جديد</UINamespaceForm>
     </title>
   </NamespacePopup>
   <!--
@@ -236,16 +236,16 @@
       <False>خطأ</False>
     </label>
     <title>
-      <view>المشهد</view>
-      <edit>اجراء</edit>
+      <view>عرض</view>
+      <edit>تعديل</edit>
       <delete>حذف</delete>
     </title>
     <header>
       <icon>أيقونة</icon>
-      <name>دليل المعلومات</name>
+      <name>بيانات التعريف</name>
       <type>نوع</type>
       <internalUse>استعمال داخلي</internalUse>
-      <action>Action</action>
+      <action>المـُهمات</action>
     </header>
     <msg>
       <confirm-delete>هل تؤكّد عمليّة الحذف؟</confirm-delete>
@@ -264,7 +264,7 @@
   </MetadataPopupAddNew>
   <MetadataPopupEdit>
     <title>
-      <UIMetadataForm>تغيير نموذج لدليل المعلومات</UIMetadataForm>
+      <UIMetadataForm>تحرير القالب لبيانات التعريف</UIMetadataForm>
     </title>
   </MetadataPopupEdit>
   <MetataPermissionPopup>
@@ -279,10 +279,10 @@
   ################################################################################
   -->
   <UIMetadataForm>
-    <title>تخطيط دليل المعلومات</title>
+    <title>تعيين بيانات التعريف</title>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Save>طبق</Save>
+      <Save>تطبيق</Save>
     </action>
     <header>
       <icon>أيقونة</icon>
@@ -291,8 +291,8 @@
     </header>
     <label>
       <dialogTemplate>قالب واجهة المستخدم</dialogTemplate>
-      <viewTemplate>نموذج العرض</viewTemplate>
-      <metadataName>إسم دليل المعلومات</metadataName>
+      <viewTemplate>عرض القالب:</viewTemplate>
+      <metadataName>اسم بيانات التعريف:</metadataName>
       <viewPermission>الصلاحيّة</viewPermission>
       <permission>UIMetadataForm</permission>
       <metadataLabel>الرمز:</metadataLabel>
@@ -392,7 +392,7 @@
       <name>الاسم</name>
       <workspace>فضاء العمل</workspace>
       <homePath>مسار الصّفحة الرئيسية:</homePath>
-      <icon>أيقونة فضاء العمل</icon>
+      <icon>أيقونة مساحة العمل:</icon>
       <viewPreferences>مشاهدة الوثائق ذات صلة</viewPreferences>
       <viewNonDocument>مشاهدة اللاوثائق</viewNonDocument>
       <viewSideBar>إضهار الشريط الجانبي</viewSideBar>
@@ -403,12 +403,12 @@
       <Categories>الفئات:</Categories>
       <Icons>الأيقونات:</Icons>
       <List>قائمة:</List>
-      <Web>واب:</Web>
+      <Web>ويب:</Web>
     </label>
   </UIDriveForm>
   <AddDriveManagerPopup>
     <title>
-      <UIDriveForm>إضافة قرص</UIDriveForm>
+      <UIDriveForm>إضافة وحدة تخزين</UIDriveForm>
     </title>
   </AddDriveManagerPopup>
   <EditDriveManagerPopup>
@@ -514,7 +514,7 @@
     <label>
       <propertiesDefinitions>تعريف الخاصيات</propertiesDefinitions>
       <childDefinitions>تعريف العقد الفروع</childDefinitions>
-      <namespace>اسم الفضاء</namespace>
+      <namespace>اسم المساحة</namespace>
       <propertyNamespace>اسم الفضاء</propertyNamespace>
       <nodeTypeName>اسم نوع العقدة</nodeTypeName>
       <mixinType>نوعه 'Mixin'</mixinType>
@@ -531,7 +531,7 @@
       <constraints>قيم</constraints>
       <UIFormTableInputSet>UIFormTableInputSet</UIFormTableInputSet>
       <sameNameSiblings>اسم وحيد للفرع</sameNameSiblings>
-      <childNamespace>اسم الفضاء</childNamespace>
+      <childNamespace>اسم المساحة</childNamespace>
       <childMandatory>إجباري</childMandatory>
       <childAutocreated>انشاء الي</childAutocreated>
       <childParentversion>توريث الاصدار</childParentversion>
@@ -669,7 +669,7 @@
       <data-file-error>معتمدة فقط أكس ملف أو ملف مضغوط لاستيراد.</data-file-error>
       <data-invalid>صيغة هذه البيانات غيرصحيحة. يُرجى التثبّت من نوع الملفّ ثمّ اعادة المحاولة</data-invalid>
       <nodetype-exist>'{0}' : بيانات غير صالحة : نوع نقطة التقاطع موجودة</nodetype-exist>
-      <namespace-invalid>'{0}' : بيانات غير صالحة : مساحة الاسم غير معروف :</namespace-invalid>
+      <namespace-invalid>'{0}': بيانات غير صالحة: مساحة الاسم غير معروف.</namespace-invalid>
     </msg>
   </UINodeTypeUpload>
   <!--
@@ -1337,7 +1337,7 @@
   <UITaxonomyTreeList>
     <header>
       <name>شجرة الفئات</name>
-      <workspace>فضاء عمل</workspace>
+      <workspace>مساحة عمل</workspace>
       <homePath>المسار</homePath>
       <action>اجراء</action>
     </header>
@@ -1364,7 +1364,7 @@
   <UITaxonomyTreeForm>
     <label>
       <name>اسم</name>
-      <workspace>فضاء العمل</workspace>
+      <workspace>مساحة العمل</workspace>
       <homePath>المسار</homePath>
       <permissions>الصلاحيّات</permissions>
     </label>
@@ -2070,7 +2070,7 @@
   -->
   <UIWorkspaceList>
     <label>
-      <workspaceName>فضاء العمل:</workspaceName>
+      <workspaceName>مساحة العمل:</workspaceName>
       <rootNodeInfo>UIWorkspaceList</rootNodeInfo>
       <rootNodePath>مسار الجذر:</rootNodePath>
     </label>
@@ -2591,7 +2591,7 @@
   </UIPageIterator>
   <UILockNodeList>
     <msg>
-      <can-not-unlock-node>ليس لديك الصلاحية لتحرير قفل هذه العقدة.  اتصل بخطط النظام للحصول على الصلاحية الصحيحة</can-not-unlock-node>
+      <can-not-unlock-node>ليس لديك الإذن بفتح هذه العقدة. الرجاء الاتصال بالمسؤول للحصول على حق الصحيح.</can-not-unlock-node>
     </msg>
   </UILockNodeList>
 </bundle>
