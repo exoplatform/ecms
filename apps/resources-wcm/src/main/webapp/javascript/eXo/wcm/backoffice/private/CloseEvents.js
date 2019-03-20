@@ -123,7 +123,11 @@
 	  if (action.toLowerCase() == "saveandclose" || action.toLowerCase() == "close") {
 	    localStorage.removeItem(rememberedLocation);
 	    localStorage.removeItem(rememberedDriveName);
-	  }
+        if(CKEDITOR.stylesSet.registered.default)
+        {
+            delete CKEDITOR.stylesSet.registered.default;
+        }
+    }
 	} ;
 	
 	/**
