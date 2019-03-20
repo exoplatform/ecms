@@ -201,8 +201,8 @@ public void writeNodes(level, i, data, uiWorkingArea, linkManager, restContextNa
     <div class="columnText" data-placement="bottom" rel="tooltip" title="$lockedLabel">
 			<a class="nodeLabel" onclick="$actionLink" onmouseout="eXo.ecm.UIFileView.cancelEvent(event);" draggable="false">
 					<span class="nodeName" draggable="false"><%=fileName%></span>
+					<span class="nodeLabel fileExtension" draggable="false"><%=fileExtension%></span>
 			</a>
-			<span class="nodeLabel fileExtension" draggable="false"><%=fileExtension%></span>
 
       <p class="fileInfoBottom" draggable="false">
         <% if (!"".equals(versionNum)) {%>
