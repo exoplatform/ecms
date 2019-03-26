@@ -353,7 +353,7 @@ public class WCMComposerImpl implements WCMComposer, Startable {
       while (nodeIterator.hasNext()) {
         node = nodeIterator.nextNode();
         viewNode = getViewableContent(node, filters);
-        if (viewNode != null) {
+        if (viewNode != null && !nodes.contains(viewNode)) {
           nodes.add(viewNode);
         }
       }
