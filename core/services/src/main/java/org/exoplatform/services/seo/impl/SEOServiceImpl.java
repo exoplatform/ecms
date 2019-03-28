@@ -27,6 +27,7 @@ import java.util.Locale;
 
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
+import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -68,6 +69,7 @@ public class SEOServiceImpl implements SEOService {
   public static final String EMPTY_CACHE_ENTRY = "EMPTY";
   public static String METADATA_BASE_PATH = "SEO";
   final static public String LANGUAGES    = "seo-languages";
+  final static public String NAVIGATION    = "navigation";
   public static String METADATA_PAGE_PATH = "pages";
   public static String METADATA_CONTENT_PATH = "contents";
   public static String SITEMAP_NAME = "sitemaps";
@@ -177,10 +179,7 @@ public class SEOServiceImpl implements SEOService {
         node.addMixin("mix:referenceable");
       }
     } else {
-      session = sessionProvider.getSession("portal-system", WCMCoreUtils
-                                           .getRepository());
-      String uuid = Util.getUIPortal().getSelectedUserNode().getId();
-      node = session.getNodeByUUID(uuid);
+      node = getNavNode();
       if (!node.isNodeType("exo:seoMetadata")) {
         node.addMixin("exo:seoMetadata");
       }
@@ -266,11 +265,7 @@ public class SEOServiceImpl implements SEOService {
         return null;
       }
       if(metaModel != null) return metaModel.getFullStatus();
-      SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
-      Session session = sessionProvider.getSession("portal-system",
-                                                   WCMCoreUtils.getRepository());
-      String uuid = Util.getUIPortal().getSelectedUserNode().getId();
-      node = session.getNodeByUUID(uuid);
+      node = getNavNode();
     }
     if(node.hasNode(LANGUAGES+"/"+language)) {
       Node seoNode = node.getNode(LANGUAGES+"/"+language);
@@ -378,11 +373,7 @@ public class SEOServiceImpl implements SEOService {
       return null;
     }
     if (metaModel == null) {
-      SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
-      Session session = sessionProvider.getSession("portal-system",
-                                                   WCMCoreUtils.getRepository());
-      String uuid = Util.getUIPortal().getSelectedUserNode().getId();
-      Node pageNode = session.getNodeByUUID(uuid);
+      Node pageNode = getNavNode();
 
       if (pageNode != null && pageNode.hasNode(LANGUAGES+"/"+language)) {
         Node seoNode = pageNode.getNode(LANGUAGES+"/"+language);
@@ -427,11 +418,8 @@ public class SEOServiceImpl implements SEOService {
       contentNode = getContentNode(seoPath);
       if (contentNode != null && contentNode.hasNode(LANGUAGES)) languagesNode = contentNode.getNode(LANGUAGES);  	
     } else {
-      SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
-      Session session = sessionProvider.getSession("portal-system",
-                                                   WCMCoreUtils.getRepository());
-      String uuid = Util.getUIPortal().getSelectedUserNode().getId();
-      Node pageNode = session.getNodeByUUID(uuid);
+      Node pageNode = getNavNode();
+
       if (pageNode != null && pageNode.hasNode(LANGUAGES)) languagesNode = pageNode.getNode(LANGUAGES);
     }
     if(languagesNode != null) {
@@ -470,10 +458,7 @@ public class SEOServiceImpl implements SEOService {
     if (onContent) {
       node = session.getNodeByUUID(metaModel.getUri());
     } else {
-      session = sessionProvider.getSession("portal-system", WCMCoreUtils
-                                           .getRepository());
-      String uuid = Util.getUIPortal().getSelectedUserNode().getId();
-      node = session.getNodeByUUID(uuid);
+      Node pageNode = getNavNode();
     }    
     Node seoNode = null;
     if(node.hasNode(LANGUAGES+"/"+language)) 
@@ -834,6 +819,36 @@ public class SEOServiceImpl implements SEOService {
         path = path.substring(0, path.length() - 1);
     }
     return path;
+  }
+
+  private Node getNavNode() throws Exception {
+    SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
+    LivePortalManagerService livePortalManagerService = WCMCoreUtils
+            .getService(LivePortalManagerService.class);
+    Node livePortalNode = livePortalManagerService.getLivePortal(sessionProvider,
+            Util.getUIPortal().getName());
+
+    if (livePortalNode != null) {
+      String id = Util.getUIPortal().getSelectedUserNode().getId();
+
+      Node navNode = null;
+      if (!livePortalNode.hasNode(NAVIGATION)) {
+        navNode = livePortalNode.addNode(NAVIGATION);
+      } else {
+        navNode = livePortalNode.getNode(NAVIGATION);
+      }
+      //
+
+      Node node = null;
+      if (!navNode.hasNode(id)) {
+        node = navNode.addNode(id);
+      } else {
+        node = navNode.getNode(id);
+      }
+      return node;
+    } else {
+      throw new IllegalStateException("live portal node not found " + Util.getUIPortal().getName());
+    }
   }
 
   public Node getContentNode(String seoPath) throws Exception {
