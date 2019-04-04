@@ -143,7 +143,7 @@
         <div class="lineLeft" onmousedown="eXo.ecm.UIListView.resizeColumn(this, event);"
         onkeydown="eXo.ecm.UIListView.resizeColumn(this, event);"><span></span></div>
 <!-- Status -->
-        <div class="columnStatus column" style="width: 60px;" onclick="<%=uicomponent.event("Sort", typeActionLink + "publication:currentState")%>">
+        <div class="columnStatus column" onclick="<%=uicomponent.event("Sort", typeActionLink + "publication:currentState")%>">
           <%
             if (selectedSortType.equals("publication:currentState")) {
               %>
@@ -341,7 +341,7 @@
               </div>
               <div class="lineLeftItem"><span></span></div>
 <!-- Status-->
-              <div class="columnStatus column" style="width: 60px;">
+              <div class="columnStatus column">
                   <div class="nodeLabel" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIPublicationPanel.status." + status) %>"><%=_ctx.appRes("UIPublicationPanel.status." + status) %></div>
               </div>
             </div>
