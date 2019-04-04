@@ -457,6 +457,9 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
    */
   public List<Node> getAllPrivateTags(String userName) throws Exception {
     Node userFolksonomyNode = getUserFolksonomyFolder(userName);
+    if (userFolksonomyNode == null) {
+      return Collections.emptyList();
+    }
     return queryTagNodes(userFolksonomyNode);
   }
 
@@ -781,6 +784,9 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
     SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
     Node userNode = nodeHierarchyCreator.getUserNode(sessionProvider, userName);
     String folksonomyPath = nodeHierarchyCreator.getJcrPath(USER_FOLKSONOMY_ALIAS);
+    if (folksonomyPath == null || !userNode.hasNode(folksonomyPath)) {
+      return null;
+    }
     return userNode.getNode(folksonomyPath);
   }
 
