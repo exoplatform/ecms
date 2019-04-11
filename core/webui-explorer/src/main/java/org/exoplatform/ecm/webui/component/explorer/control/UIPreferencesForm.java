@@ -31,6 +31,7 @@ import org.exoplatform.ecm.webui.component.explorer.sidebar.UIAllItems;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.web.application.RequestContext;
+import org.exoplatform.web.security.csrf.CSRFTokenUtil;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -182,7 +183,10 @@ public class UIPreferencesForm extends UIForm implements UIPopupComponent {
     writer.append(" method=\"post\">");
     writer.append("<div><input type=\"hidden\" name=\"")
           .append(ACTION)
-          .append("\" value=\"\"/></div>");
+          .append("\" value=\"\"/>");
+    writer.append("<input type=\"hidden\" name=\"").append(CSRFTokenUtil.CSRF_TOKEN).append("\" value=\"");
+    writer.append(CSRFTokenUtil.getToken());
+    writer.append("\"/></div>");
   }
 
   public void activate() {
