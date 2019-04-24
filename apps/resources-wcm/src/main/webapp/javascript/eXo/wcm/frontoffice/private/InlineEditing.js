@@ -19,10 +19,8 @@
 	
 	InlineEditor.loadLanguage =function (msg) {
 	  if (InlineEditor.languageLoaded) return;
-	  with(InlineEditor) {
-	    if (msg[0]) InternalServerErrorMsg =decodeURI(msg[0]);
-	    if (msg[1]) EmptyTitleErrorMsg = decodeURI(msg[1]);
-	  }  
+	  if (msg[0]) InlineEditor.InternalServerErrorMsg =decodeURI(msg[0]);
+	  if (msg[1]) InlineEditor.EmptyTitleErrorMsg = decodeURI(msg[1]);
 	}
 
 	InlineEditor.removeHoverClass = function() {

@@ -224,7 +224,6 @@
       //console.log("ActiveX is not support \n"+err);
       return false;
     }
-    return false;
   }
 
   eXo.ecm.OpenDocumentInOffice = new OpenDocumentInOffice();

@@ -43,11 +43,9 @@ UploadForm.prototype.showUploadForm = function() {
 	iContent = iContent.replace(/&lt;/g, "<");
 	iContent = iContent.replace(/&gt;/g, ">");
 	iContent = iContent.replace(/&quot;/g, "\"");
-	with (iFrame.contentWindow) {
-			document.open();
-			document.write(iContent);
-			document.close();
-	}
+	iFrame.contentWindow.document.open();
+	iFrame.contentWindow.document.write(iContent);
+	iFrame.contentWindow.document.close();
 	eXo.ecm.UploadForm.showMask(popupContainer, true);
 	var uploadForm = gj(popupContainer).find("div.UploadForm:first")[0];
 	var maskLayer = gj(popupContainer).find("div.MaskLayer:first")[0];

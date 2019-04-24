@@ -1191,12 +1191,10 @@
 	MultiUpload.prototype.uploadFileForIE = function(doc) {
 		var xmp = doc.getElementsByTagName("xmp")[0];
 		var ifr = doc.getElementById("iFrameUpload");
-		with (ifr.contentWindow) {
-			document.open();
-			document.write(xmp.innerHTML);
-			document.close();
-			document.getElementById("IEUploadInputFile").click();  
-		}
+		ifr.contentWindow.document.open();
+		ifr.contentWindow.document.write(xmp.innerHTML);
+		ifr.contentWindow.document.close();
+		ifr.contentWindow.document.getElementById("IEUploadInputFile").click();
 	};
 
 

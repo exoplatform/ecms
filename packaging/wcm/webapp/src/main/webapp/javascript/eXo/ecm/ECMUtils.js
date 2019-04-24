@@ -1476,10 +1476,8 @@
 	MyToolbar.prototype.create = function(instance, mode) {
 		var tBarMode = this.buttonstest[mode] ;
 		var tBar = document.createElement('DIV') ;
-		with(tBar) {
-			id = instance + '_Toolbar' ;
-			className = 'MyEditorToolbar' ;
-		}
+		tBar.id = instance + '_Toolbar' ;
+		tBar.className = 'MyEditorToolbar' ;
 		
 		var str = '' ;
 		for(var i = 0; i < tBarMode.length; i++) {
@@ -1543,24 +1541,18 @@
 	
 	ExoEditor.prototype.createInstance = function(instId, settings) {
 		var txtAreaObj = document.getElementById(instId) ;
-		with(txtAreaObj) {
-			style.height = settings["height"] || this.myConfig.height ;
-		}
+		txtAreaObj.style.height = settings["height"] || this.myConfig.height ;
 	
 		var editorObj = document.createElement("DIV") ;
-		with(editorObj) {
-			className = "MyEditor" ;
-			style.width = settings["width"] || this.myConfig.width ;
-		}
+		editorObj.className = "MyEditor" ;
+		editorObj.style.width = settings["width"] || this.myConfig.width ;
 		editorObj.appendChild(myToolbar.create(instId, settings["mode"] || this.myConfig.mode)) ;
 		var ifrm = document.createElement("IFRAME") ;
-		with(ifrm) {
-			src = 'javascript:void(0)' ;
-			width = "100%" ;
-			style.height = settings["height"] || this.myConfig.height ;
-			frameBorder = 0 ;
-			scrolling = "auto" ;
-		}
+		ifrm.src = 'javascript:void(0)' ;
+		ifrm.width = "100%" ;
+		ifrm.style.height = settings["height"] || this.myConfig.height ;
+		ifrm.frameBorder = 0 ;
+		ifrm.scrolling = "auto" ;
 		ifrm.onmouseover = this.onMouseOverEvt ;
 		editorObj.appendChild(ifrm) ;
 		

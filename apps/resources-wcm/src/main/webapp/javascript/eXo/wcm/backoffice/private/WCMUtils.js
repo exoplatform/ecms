@@ -309,13 +309,10 @@
 	  var txtArea = document.getElementById(txtAreaId) ;
 	  var ifrm = document.createElement("IFRAME") ;
 
-
-	  with(ifrm) {
-	    className = 'ECMIframe' ;
-	    src = 'javascript:void(0)' ;
-	    frameBorder = 0 ;
-	    scrolling = "auto" ;
-	  }
+	  ifrm.className = 'ECMIframe' ;
+	  ifrm.src = 'javascript:void(0)' ;
+	  ifrm.frameBorder = 0 ;
+	  ifrm.scrolling = "auto" ;
 	  var strValue = "<div class='content-display'>" + txtArea.value + "</div>" ;
 	  txtArea.parentNode.replaceChild(ifrm, txtArea) ;
 	  try {
