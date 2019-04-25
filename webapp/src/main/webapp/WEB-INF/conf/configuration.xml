@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+
+  Copyright (C) 2016 eXo Platform SAS.
+  
+  This is free software; you can redistribute it and/or modify it
+  under the terms of the GNU Lesser General Public License as
+  published by the Free Software Foundation; either version 2.1 of
+  the License, or (at your option) any later version.
+  
+  This software is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+  Lesser General Public License for more details.
+  
+  You should have received a copy of the GNU Lesser General Public
+  License along with this software; if not, write to the Free
+  Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+  02110-1301 USA, or see the FSF site: http://www.fsf.org.
+
+-->
+
+<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd http://www.exoplatform.org/xml/ns/kernel_1_2.xsd"
+  xmlns="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd">
+
+  <!-- Google Drive namespace for use within JCR -->
+  <external-component-plugins>
+    <target-component>org.exoplatform.services.jcr.RepositoryService</target-component>
+    <component-plugin>
+      <name>add.namespaces</name>
+      <set-method>addPlugin</set-method>
+      <type>org.exoplatform.services.jcr.impl.AddNamespacesPlugin</type>
+      <init-params>
+        <properties-param>
+          <name>namespaces</name>
+          <property name="onedrive" value="http://www.exoplatform.com/jcr/onedrive/1.0/" />
+        </properties-param>
+      </init-params>
+    </component-plugin>
+  </external-component-plugins>
+
+  <!-- Google Drive connector plugin -->
+  <external-component-plugins>
+    <target-component>org.exoplatform.clouddrive.CloudDriveService</target-component>
+    <component-plugin>
+      <name>add.clouddriveprovider</name>
+      <set-method>addPlugin</set-method>
+      <type>org.exoplatform.clouddrive.onedrive.OneDriveConnector</type>
+      <init-params>
+        <properties-param>
+          <name>drive-configuration</name>
+          <property name="provider-id" value="onedrive" />
+          <property name="provider-name" value="One Drive" />
+          <property name="provider-client-id" value="${clouddrive.onedrive.client.id}" />
+          <property name="provider-client-secret" value="${clouddrive.onedrive.client.secret}" />
+          <property name="connector-host" value="${clouddrive.service.host}" />
+          <property name="connector-schema" value="${clouddrive.service.schema:http}" />
+          <property name="disable" value="${clouddrive.onedrive.disable:false}" />
+        </properties-param>
+      </init-params>
+    </component-plugin>
+  </external-component-plugins>
+
+  <!--
+  Dedicated ECMS menu action for Google Drive.
+  Note that Google Drive will be added automatically to Connect Cloud Documents dialog
+  -->
+  <external-component-plugins>
+    <target-component>org.exoplatform.webui.ext.UIExtensionManager</target-component>
+    <component-plugin>
+      <name>Add CloudDrive Actions</name>
+      <set-method>registerUIExtensionPlugin</set-method>
+      <type>org.exoplatform.webui.ext.UIExtensionPlugin</type>
+      <init-params>
+        <object-param>
+          <name>ConnectOneDrive</name>
+          <object type="org.exoplatform.webui.ext.UIExtension">
+            <field name="type">
+              <string>org.exoplatform.ecm.dms.UIActionBar</string>
+            </field>
+            <field name="name">
+              <string>ConnectOneDrive</string>
+            </field>
+            <field name="component">
+              <string>org.exoplatform.clouddrive.onedrive.ecms.ConnectOneDriveActionComponent</string>
+            </field>
+            <field name="extendedFilters">
+              <collection type="java.util.ArrayList">
+                <value>
+                  <object type="org.exoplatform.clouddrive.ecms.filters.PersonalDocumentsFilter"></object>
+                </value>
+              </collection>
+            </field>
+          </object>
+        </object-param>
+      </init-params>
+    </component-plugin>
+  </external-component-plugins>
+
+  <!--
+  ResourceBundleService with texts for Google Drive UI support.
+  -->
+  <external-component-plugins>
+    <target-component>org.exoplatform.services.resources.ResourceBundleService</target-component>
+    <component-plugin>
+      <name>ResourceBundle Plugin</name>
+      <set-method>addResourceBundle</set-method>
+      <type>org.exoplatform.services.resources.impl.BaseResourceBundlePlugin</type>
+      <init-params>
+        <values-param>
+          <name>init.resources</name>
+          <description>Store the following resources into the db for the first launch</description>
+          <value>locale.clouddrive.CloudDrive-onedrive</value>
+        </values-param>
+        <values-param>
+          <name>portal.resource.names</name>
+          <description>The properties files of the portal , those file will be merged into one ResoruceBundle properties</description>
+          <value>locale.clouddrive.CloudDrive-onedrive</value>
+        </values-param>
+      </init-params>
+    </component-plugin>
+  </external-component-plugins>
+</configuration>

@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>org.exoplatform.addons.clouddrive</groupId>
+        <artifactId>exo-clouddrive-onedrive</artifactId>
+        <version>1.7.x-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>exo-clouddrive-onedrive-services</artifactId>
+
+
+    <dependencies>
+        <!-- Cloud Drive add-on -->
+        <dependency>
+            <groupId>org.exoplatform.addons.clouddrive</groupId>
+            <artifactId>exo-clouddrive-services-core</artifactId>
+            <scope>provided</scope>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>org.exoplatform.addons.clouddrive</groupId>
+            <artifactId>exo-clouddrive-services-ecms</artifactId>
+            <scope>provided</scope>
+            <type>jar</type>
+        </dependency>
+
+        <!-- eXo -->
+        <dependency>
+            <groupId>org.exoplatform.kernel</groupId>
+            <artifactId>exo.kernel.container</artifactId>
+            <scope>provided</scope>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>org.exoplatform.kernel</groupId>
+            <artifactId>exo.kernel.component.common</artifactId>
+            <scope>provided</scope>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>org.exoplatform.core</groupId>
+            <artifactId>exo.core.component.organization.api</artifactId>
+            <scope>provided</scope>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>org.exoplatform.jcr</groupId>
+            <artifactId>exo.jcr.component.core</artifactId>
+            <scope>provided</scope>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>org.exoplatform.jcr</groupId>
+            <artifactId>exo.jcr.component.ext</artifactId>
+            <scope>provided</scope>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>org.exoplatform.jcr</groupId>
+            <artifactId>exo.jcr.framework.web</artifactId>
+            <scope>provided</scope>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>org.exoplatform.ws</groupId>
+            <artifactId>exo.ws.commons</artifactId>
+            <scope>provided</scope>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>org.exoplatform.ecms</groupId>
+            <artifactId>ecms-core-webui-explorer</artifactId>
+            <scope>provided</scope>
+            <type>jar</type>
+        </dependency>
+        <!-- we need this as *provided* to get Apache HTTP core and client dependencies from the Platform -->
+        <dependency>
+            <groupId>org.exoplatform.platform</groupId>
+            <artifactId>platform-component-common</artifactId>
+            <scope>provided</scope>
+            <type>jar</type>
+        </dependency>
+
+
+        <!-- Others third party -->
+        <dependency>
+            <groupId>javax.jcr</groupId>
+            <artifactId>jcr</artifactId>
+            <scope>provided</scope>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>javax.ws.rs</groupId>
+            <artifactId>jsr311-api</artifactId>
+            <scope>provided</scope>
+            <type>jar</type>
+        </dependency>
+
+        <!-- for tests -->
+        <dependency>
+            <groupId>org.hsqldb</groupId>
+            <artifactId>hsqldb</artifactId>
+            <scope>test</scope>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <scope>test</scope>
+            <type>jar</type>
+        </dependency>
+        <!-- dependency>
+        <groupId>org.exoplatform.platform</groupId>
+        <artifactId>exo.platform.component.organization</artifactId>
+        <scope>test</scope>
+        <type>jar</type>
+        </dependency -->
+        <dependency>
+            <groupId>org.exoplatform</groupId>
+            <artifactId>exo-jcr-services</artifactId>
+            <scope>test</scope>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <scope>test</scope>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>org.spockframework</groupId>
+            <artifactId>spock-core</artifactId>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.codehaus.groovy</groupId>
+                    <artifactId>groovy-all</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.codehaus.groovy</groupId>
+            <artifactId>groovy-all</artifactId>
+            <version>${test.groovy.version}</version><!-- version explicitly here to let eXo's version live outside -->
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.ow2.asm</groupId>
+            <artifactId>asm</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>cglib</groupId>
+            <artifactId>cglib-nodep</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.objenesis</groupId>
+            <artifactId>objenesis</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-core</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+
+</project>
