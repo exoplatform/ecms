@@ -40,7 +40,7 @@
     </component-plugin>
   </external-component-plugins>
 
-  <!-- Google Drive connector plugin -->
+  <!-- One Drive connector plugin -->
   <external-component-plugins>
     <target-component>org.exoplatform.clouddrive.CloudDriveService</target-component>
     <component-plugin>
@@ -63,8 +63,8 @@
   </external-component-plugins>
 
   <!--
-  Dedicated ECMS menu action for Google Drive.
-  Note that Google Drive will be added automatically to Connect Cloud Documents dialog
+  Dedicated ECMS menu action for One Drive.
+  Note that One Drive will be added automatically to Connect Cloud Documents dialog
   -->
   <external-component-plugins>
     <target-component>org.exoplatform.webui.ext.UIExtensionManager</target-component>
@@ -99,7 +99,7 @@
   </external-component-plugins>
 
   <!--
-  ResourceBundleService with texts for Google Drive UI support.
+  ResourceBundleService with texts for One Drive UI support.
   -->
   <external-component-plugins>
     <target-component>org.exoplatform.services.resources.ResourceBundleService</target-component>

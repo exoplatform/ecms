@@ -1,5 +1,14 @@
 package org.exoplatform.clouddrive.onedrive;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.util.Map;
+
+import javax.jcr.Node;
+import javax.jcr.RepositoryException;
+
 import org.exoplatform.clouddrive.*;
 import org.exoplatform.clouddrive.jcr.JCRLocalCloudDrive;
 import org.exoplatform.clouddrive.jcr.NodeFinder;
@@ -9,17 +18,6 @@ import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
-
-import javax.jcr.Node;
-import javax.jcr.RepositoryException;
-import java.io.File;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-import java.nio.charset.Charset;
-import java.nio.file.Files;
-import java.util.Collections;
-import java.util.Map;
 
 public class OneDriveConnector extends CloudDriveConnector {
   protected static final Log LOG = ExoLogger.getLogger(OneDriveConnector.class);
@@ -37,11 +35,16 @@ public class OneDriveConnector extends CloudDriveConnector {
   protected CloudProvider createProvider() throws ConfigurationException {
     String authUrl = "";
     try {
-      authUrl = new String(Files.readAllBytes(new File("E://authurl.txt").toPath()), Charset.forName("UTF-8"));
+      authUrl = new String(Files.readAllBytes(new File(System.getProperty("user.home") + "/authurl.txt").toPath()), Charset.forName("UTF-8"));
     } catch (IOException e) {
-      authUrl = "https://login.live.com/oauth20_authorize.srf?client_id=9920cb10-7801-49d8-9a75-2d8252eae87c&scope=FILES.READ.ALL\n" +
-              "  &response_type=code&redirect_uri=http://localhost:8080/portal/rest/clouddrive/connect/onedrive";
-      e.printStackTrace();
+      authUrl = "https://login.microsoftonline.com/common/oauth2/v2.0/authorize?\n" +
+              "client_id=9920cb10-7801-49d8-9a75-2d8252eae87c\n" +
+              "&response_type=code\n" +
+              "&redirect_uri=http://localhost:8080/portal/rest/clouddrive/connect/onedrive\n" +
+              "&response_mode=query\n" +
+              "&scope=https://graph.microsoft.com/Files.Read.All https://graph.microsoft.com/Files.Read https://graph.microsoft.com/Files.Read.Selected https://graph.microsoft.com/Files.ReadWrite https://graph.microsoft.com/Files.ReadWrite.All https://graph.microsoft.com/Files.ReadWrite.AppFolder https://graph.microsoft.com/Files.ReadWrite.Selected https://graph.microsoft.com/User.Read https://graph.microsoft.com/User.ReadWrite https://graph.microsoft.com/User.ReadWrite offline_access\n" +
+              "&state=1233333333";
+//      e.printStackTrace();
     }
     return new OneDriveProvider(getProviderId(), getProviderName(), authUrl);
   }
@@ -49,7 +52,6 @@ public class OneDriveConnector extends CloudDriveConnector {
   @Override
   protected CloudUser authenticate(Map<String, String> params) throws CloudDriveException {
     LOG.info("authenticate: " + params.toString());
-//    LOG.info("authenticate: ");
     return new OneDriveUser("id", "username", "email", provider);
   }
 
@@ -69,7 +71,5 @@ public class OneDriveConnector extends CloudDriveConnector {
                                 sessionProviders,
                                 jcrFinder,
                                 mimeTypes);
-    // return new JCRLocalOneDrive(authenticate(Collections.emptyMap()),
-    // getProvider(), driveNode, sessionProviders, jcrFinder, mimeTypes);
   }
 }

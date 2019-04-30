@@ -19,7 +19,7 @@
         <dependency>
             <groupId>org.exoplatform.addons.clouddrive</groupId>
             <artifactId>exo-clouddrive-onedrive-services</artifactId>
-            <version>1.7.x-SNAPSHOT</version>
+            <!--<version>1.7.x-SNAPSHOT</version>-->
             <scope>provided</scope>
             <type>jar</type>
         </dependency>
