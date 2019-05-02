@@ -43,7 +43,7 @@ import org.exoplatform.webui.form.UIForm;
 public class UIPublicationContainer extends UIForm implements UIPopupComponent {
 
   /** The selected tab id. */
-  private static String selectedTabId = "";
+  private String selectedTabId = "";
 
   /**
    * Instantiates a new uI publication container.
@@ -63,9 +63,6 @@ public class UIPublicationContainer extends UIForm implements UIPopupComponent {
   public void initContainer(Node node) throws Exception {
     UIPublicationPanel publicationPanel = addChild(UIPublicationPanel.class, null, null);
     publicationPanel.init(node);
-    //UIPublicationPagesContainer publicationPagesContainer = addChild(UIPublicationPagesContainer.class, null, null);
-    //publicationPagesContainer.init(node);
-    //publicationPagesContainer.setRendered(false);
     UIPublicationHistory publicationHistory = addChild(UIPublicationHistory.class, null, null);
     publicationHistory.init(node);
     publicationHistory.updateGrid();

@@ -14,7 +14,7 @@
   def jsManager = rcontext.getJavascriptManager();
   jsManager.require("SHARED/wcm-utils", "wcmutil").addScripts("wcmutil.WCMUtils.setHeightRightContainer();");
 
-  def locales = uicomponent.getSEOLanguages();
+  def locales = uicomponent.getSEOLocales();
   def count = 0;
   def path = uicomponent.getContentPath();
   def fullStatus = "Empty"; 

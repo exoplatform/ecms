@@ -108,10 +108,10 @@ public class UISEOForm extends UIForm{
   private boolean onContent = false;
   private boolean isInherited = false;
   private ArrayList<String> paramsArray = null;
-  public static List<Locale> seoLocales = null;
-  public static List<String> seoLanguages = new ArrayList<String>();
-  private String selectedLanguage = null;
-  private String defaultLanguage = null;
+  public List<Locale> seoLocales;
+  public List<String> seoLanguages;
+  private String selectedLanguage;
+  private String defaultLanguage;
   private boolean isAddNew = true;
 
   private static final Log LOG  = ExoLogger.getLogger(UISEOForm.class.getName());
@@ -151,12 +151,20 @@ public class UISEOForm extends UIForm{
     return this.paramsArray;
   }
 
-  public void setSEOLanguages(ArrayList<Locale> seoLocales) {
+  public void setSEOLocales(List<Locale> seoLocales) {
     this.seoLocales = seoLocales;
   }
 
-  public List<Locale> getSEOLanguages() {
+  public List<Locale> getSEOLocales() {
     return this.seoLocales;
+  }
+
+  public List<String> getSeoLanguages() {
+    return seoLanguages;
+  }
+
+  public void setSeoLanguages(List<String> seoLanguages) {
+    this.seoLanguages = seoLanguages;
   }
 
   public void setParamsArray(ArrayList<String> params) {
@@ -179,17 +187,10 @@ public class UISEOForm extends UIForm{
     return this.isAddNew;
   }
 
-  /*public String getPageParent() {
-    if(pageParent != null && pageParent.length() > 0)
-      return pageParent.trim();
-    return pageParent;
-  }
-  public void setPageParent(String pageParent) { this.pageParent = pageParent; }*/
-
   public UISEOForm() throws Exception {
     PortalRequestContext portalRequestContext = Util.getPortalRequestContext();
     ExoContainer container = ExoContainerContext.getCurrentContainer() ;
-    SEOService seoService = (SEOService)container.getComponentInstanceOfType(SEOService.class);
+    SEOService seoService = container.getComponentInstanceOfType(SEOService.class);
 
     UIFormTextAreaInput uiTitle = new UIFormTextAreaInput(TITLE, TITLE, null);
     uiTitle.setValue(title);
@@ -202,7 +203,7 @@ public class UISEOForm extends UIForm{
     uiKeywords.setValue(keywords);
     addUIFormInput(uiKeywords);
     seoLocales = seoService.getSEOLanguages(portalRequestContext.getPortalOwner(), contentPath, onContent);
-    seoLanguages = new ArrayList<String>();
+    seoLanguages = new ArrayList<>();
     if(seoLocales != null && seoLocales.size() > 0) {
       for (Locale locale : seoLocales) {
         StringBuffer sb = new StringBuffer();
@@ -226,14 +227,14 @@ public class UISEOForm extends UIForm{
     addUIFormInput(uiSelectForm) ;
 
     if(!onContent) {
-      List<SelectItemOption<String>> robotIndexItemOptions = new ArrayList<SelectItemOption<String>>();
+      List<SelectItemOption<String>> robotIndexItemOptions = new ArrayList<>();
       List<String> robotsindexOptions = seoService.getRobotsIndexOptions();
       List<String> robotsfollowOptions = seoService.getRobotsFollowOptions();
       List<String> frequencyOptions = seoService.getFrequencyOptions();
 
       if(robotsindexOptions != null && robotsindexOptions.size() > 0) {
         for(int i = 0; i < robotsindexOptions.size(); i++) {
-          robotIndexItemOptions.add(new SelectItemOption<String>((robotsindexOptions.get(i).toString())));
+          robotIndexItemOptions.add(new SelectItemOption<>((robotsindexOptions.get(i).toString())));
         }
       }
       UIFormSelectBox robots_index = new UIFormSelectBox(ROBOTS_INDEX, null, robotIndexItemOptions);
@@ -244,10 +245,10 @@ public class UISEOForm extends UIForm{
       addUIFormInput(robots_index);
 
 
-      List<SelectItemOption<String>> robotFollowItemOptions = new ArrayList<SelectItemOption<String>>();
+      List<SelectItemOption<String>> robotFollowItemOptions = new ArrayList<>();
       if(robotsfollowOptions != null && robotsfollowOptions.size() > 0) {
         for(int i = 0; i < robotsfollowOptions.size(); i++) {
-          robotFollowItemOptions.add(new SelectItemOption<String>((robotsfollowOptions.get(i).toString())));
+          robotFollowItemOptions.add(new SelectItemOption<>((robotsfollowOptions.get(i).toString())));
         }
       }
       UIFormSelectBox robots_follow = new UIFormSelectBox(ROBOTS_FOLLOW, null, robotFollowItemOptions);
@@ -264,10 +265,10 @@ public class UISEOForm extends UIForm{
       if(!StringUtils.isEmpty(priority)) uiPrority.setValue(priority);
       addUIFormInput(uiPrority.addValidator(FloatNumberValidator.class));
 
-      List<SelectItemOption<String>> frequencyItemOptions = new ArrayList<SelectItemOption<String>>();
+      List<SelectItemOption<String>> frequencyItemOptions = new ArrayList<>();
       if (frequencyOptions != null && frequencyOptions.size() > 0) {
         for (int i = 0; i < frequencyOptions.size(); i++) {
-          frequencyItemOptions.add(new SelectItemOption<String>(frequencyOptions.get(i).toString(),
+          frequencyItemOptions.add(new SelectItemOption<>(frequencyOptions.get(i).toString(),
               (frequencyOptions.get(i).toString())));
         }
       }
@@ -327,7 +328,7 @@ public class UISEOForm extends UIForm{
     uiSelectForm.setSelectedValues(new String[] {"language"});
     if(uiSelectForm != null) {
       seoLocales = seoService.getSEOLanguages(portalRequestContext.getPortalOwner(), contentPath, onContent);
-      seoLanguages = new ArrayList<String>();
+      seoLanguages = new ArrayList<>();
       if(seoLocales != null && seoLocales.size() > 0) {
         for (Locale locale : seoLocales) {
           StringBuffer sb = new StringBuffer();
@@ -346,14 +347,14 @@ public class UISEOForm extends UIForm{
     }
 
     if(!onContent) {
-      List<SelectItemOption<String>> robotIndexItemOptions = new ArrayList<SelectItemOption<String>>();
+      List<SelectItemOption<String>> robotIndexItemOptions = new ArrayList<>();
       List<String> robotsindexOptions = seoService.getRobotsIndexOptions();
       List<String> robotsfollowOptions = seoService.getRobotsFollowOptions();
       List<String> frequencyOptions = seoService.getFrequencyOptions();
 
       if(robotsindexOptions != null && robotsindexOptions.size() > 0) {
         for(int i = 0; i < robotsindexOptions.size(); i++) {
-          robotIndexItemOptions.add(new SelectItemOption<String>((robotsindexOptions.get(i).toString())));
+          robotIndexItemOptions.add(new SelectItemOption<>((robotsindexOptions.get(i).toString())));
         }
       }
       UIFormSelectBox robots_index = this.getUIFormSelectBox(ROBOTS_INDEX);
@@ -364,10 +365,10 @@ public class UISEOForm extends UIForm{
           robots_index.setValue(ROBOTS_INDEX);
       }
 
-      List<SelectItemOption<String>> robotFollowItemOptions = new ArrayList<SelectItemOption<String>>();
+      List<SelectItemOption<String>> robotFollowItemOptions = new ArrayList<>();
       if(robotsfollowOptions != null && robotsfollowOptions.size() > 0) {
         for(int i = 0; i < robotsfollowOptions.size(); i++) {
-          robotFollowItemOptions.add(new SelectItemOption<String>((robotsfollowOptions.get(i).toString())));
+          robotFollowItemOptions.add(new SelectItemOption<>((robotsfollowOptions.get(i).toString())));
         }
       }
       UIFormSelectBox robots_follow = this.getUIFormSelectBox(ROBOTS_FOLLOW);
@@ -389,10 +390,10 @@ public class UISEOForm extends UIForm{
       }
 
 
-      List<SelectItemOption<String>> frequencyItemOptions = new ArrayList<SelectItemOption<String>>();
+      List<SelectItemOption<String>> frequencyItemOptions = new ArrayList<>();
       if (frequencyOptions != null && frequencyOptions.size() > 0) {
         for (int i = 0; i < frequencyOptions.size(); i++) {
-          frequencyItemOptions.add(new SelectItemOption<String>(frequencyOptions.get(i).toString(),
+          frequencyItemOptions.add(new SelectItemOption<>(frequencyOptions.get(i).toString(),
               (frequencyOptions.get(i).toString())));
         }
       }
@@ -568,9 +569,8 @@ public class UISEOForm extends UIForm{
       String lang = event.getRequestContext().getRequestParameter(OBJECTID) ;
       uiForm.setSelectedLanguage(lang);
       SEOService seoService = uiForm.getApplicationComponent(SEOService.class);
-      PageMetadataModel metaModel = new PageMetadataModel();
       String pageReference = Util.getUIPortal().getSelectedUserNode().getPageRef().format();
-      metaModel = seoService.getMetadata(uiForm.paramsArray, pageReference, lang);
+      PageMetadataModel metaModel = seoService.getMetadata(uiForm.paramsArray, pageReference, lang);
       if(metaModel == null || (metaModel != null && metaModel.getFullStatus().equals("Empty"))) {
         metaModel = seoService.getMetadata(uiForm.paramsArray, pageReference, uiForm.defaultLanguage);
       }
@@ -600,15 +600,16 @@ public class UISEOForm extends UIForm{
       }
       String portalName = portalRequestContext.getPortalOwner();
       seoService.removePageMetadata(metaModel, portalName, uiForm.onContent, lang);
-      seoLocales = seoService.getSEOLanguages(portalRequestContext.getPortalOwner(), contentPath, uiForm.onContent);
-      seoLanguages = new ArrayList<String>();
-      for (Locale locale : seoLocales) {
+      uiForm.setSEOLocales(seoService.getSEOLanguages(portalRequestContext.getPortalOwner(), contentPath, uiForm.onContent));
+      List<String> seoLanguages = new ArrayList<>();
+      for (Locale locale : uiForm.getSEOLocales()) {
         StringBuffer sb = new StringBuffer();
         sb.append(locale.getLanguage());
         String country = locale.getCountry();
         if(StringUtils.isNotEmpty(country)) sb.append("_").append(country);
         seoLanguages.add(sb.toString());
       }
+      uiForm.setSeoLanguages(seoLanguages);
       String laguageFocus = uiForm.defaultLanguage;
       if(seoLanguages.size()> 0 && !seoLanguages.contains(uiForm.defaultLanguage))
         laguageFocus = seoLanguages.get(0);
@@ -634,7 +635,7 @@ public class UISEOForm extends UIForm{
     Locale.setDefault(Util.getUIPortal().getAncestorOfType(UIPortalApplication.class).getLocale());
 
     LocaleConfigService localService = WCMCoreUtils.getService(LocaleConfigService.class) ;
-    List<SelectItemOption<String>> languages = new ArrayList<SelectItemOption<String>>() ;
+    List<SelectItemOption<String>> languages = new ArrayList<>() ;
     Iterator<LocaleConfig> iter = localService.getLocalConfigs().iterator() ;
     ResourceBundle resourceBundle = rc.getApplicationResourceBundle();
     while (iter.hasNext()) {
@@ -647,9 +648,9 @@ public class UISEOForm extends UIForm{
       String lang = sb.toString();
       if(seoLanguages == null || !seoLanguages.contains(lang)) {
         try {
-          languages.add(new SelectItemOption<String>(CapitalFirstLetters(locale.getDisplayName(inLocale)), lang)) ;
+          languages.add(new SelectItemOption<>(CapitalFirstLetters(locale.getDisplayName(inLocale)), lang)) ;
         } catch(MissingResourceException mre) {
-          languages.add(new SelectItemOption<String>(lang, lang)) ;
+          languages.add(new SelectItemOption<>(lang, lang)) ;
         }
       }
     }
@@ -657,7 +658,7 @@ public class UISEOForm extends UIForm{
     // Set back to the default locale
     Locale.setDefault(defaultLocale);
     Collections.sort(languages, new ItemOptionComparator());
-    languages.add(0,new SelectItemOption<String>(getLabel(resourceBundle, "select-language"), "language")) ;
+    languages.add(0,new SelectItemOption<>(getLabel(resourceBundle, "select-language"), "language")) ;
     return languages ;
   }
 

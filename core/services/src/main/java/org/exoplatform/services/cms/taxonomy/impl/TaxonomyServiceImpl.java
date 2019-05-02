@@ -100,14 +100,14 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
       + "order by exo:dateCreated DESC";
 
 
-  List<TaxonomyPlugin>           plugins_        = new ArrayList<TaxonomyPlugin>();
+  List<TaxonomyPlugin>           plugins_        = new ArrayList<>();
 
   private DMSConfiguration       dmsConfiguration_;
 
   private Map<String, String[]>  taxonomyTreeDefaultUserPermissions_;
 
   private static final Log       LOG             = ExoLogger.getLogger(TaxonomyServiceImpl.class.getName());
-  private static String categoryNameLength_ = null;
+  private String categoryNameLength;
 
   /**
    * Constructor method
@@ -127,10 +127,11 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
     linkManager_ = linkManager;
     dmsConfiguration_ = dmsConfiguration;
     ValueParam valueParam = initParams.getValueParam("categoryNameLength");
-    if(valueParam!=null)
-      categoryNameLength_ = valueParam.getValue();
-    else
-      categoryNameLength_ = "150";
+    if(valueParam!=null) {
+      categoryNameLength = valueParam.getValue();
+    } else {
+      categoryNameLength = "150";
+    }
     ObjectParameter objectParam = initParams.getObjectParam("defaultPermission.configuration");
     if (objectParam != null)
       taxonomyTreeDefaultUserPermissions_
@@ -139,7 +140,7 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
   }
 
   public String getCategoryNameLength() {
-    return categoryNameLength_;
+    return categoryNameLength;
   }
 
   public void init() throws Exception {
@@ -166,7 +167,7 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
    */
   public List<Node> getAllTaxonomyTrees(boolean system)
       throws RepositoryException {
-    List<Node> listNode = new ArrayList<Node>();
+    List<Node> listNode = new ArrayList<>();
     try {
       Node taxonomyDef = getRootTaxonomyDef();
       NodeIterator nodeIter = taxonomyDef.getNodes();
@@ -365,7 +366,7 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
    * {@inheritDoc}
    */
   public List<Node> getCategories(Node node, String taxonomyName, boolean system) throws RepositoryException {
-    List<Node> listCate = new ArrayList<Node>();
+    List<Node> listCate = new ArrayList<>();
     Session session = null;
     try {
       if (node.isNodeType("mix:referenceable")) {
@@ -381,7 +382,7 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
           Query query = queryManager.createQuery(sql, Query.SQL);
           QueryResult result = query.execute();
           NodeIterator iterate = result.getNodes();
-          Set<String> addedNode = new HashSet<String>();
+          Set<String> addedNode = new HashSet<>();
           while (iterate.hasNext()) {
             Node parentCate = iterate.nextNode().getParent();
             // We need filtering duplicated result to fix the problem of ECMS-3282.
@@ -410,7 +411,7 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
    * {@inheritDoc}
    */
   public List<Node> getAllCategories(Node node, boolean system) throws RepositoryException {
-    List<Node> listCategories = new ArrayList<Node>();
+    List<Node> listCategories = new ArrayList<>();
     List<Node> allTrees = getAllTaxonomyTrees(system);
     for (Node tree : allTrees) {
       List<Node> categories = getCategories(node, tree.getName(), system);
@@ -627,7 +628,7 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
   }
 
   public Map<String, String[]> getPermissions(List<TaxonomyTreeDefaultUserPermission.Permission> permissions) {
-    Map<String, String[]> permissionsMap = new HashMap<String, String[]>();
+    Map<String, String[]> permissionsMap = new HashMap<>();
     for (TaxonomyTreeDefaultUserPermission.Permission permission : permissions) {
       StringBuilder strPer = new StringBuilder();
       if ("true".equals(permission.getRead()))

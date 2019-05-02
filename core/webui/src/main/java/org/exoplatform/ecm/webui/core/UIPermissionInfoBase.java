@@ -73,14 +73,6 @@ public abstract class UIPermissionInfoBase extends UIContainer {
   }
   
   public abstract Node getCurrentNode() throws Exception;
-  
-  public static String[] getPERMISSION_ACTION() {
-    return PERMISSION_ACTION;
-  }
-  
-  public static void setPERMISSION_ACTION(String[] permission_action) {
-    PERMISSION_ACTION = permission_action;
-  }
 
   public int getSizeOfListPermission() {
     return sizeOfListPermission;
@@ -90,7 +82,7 @@ public abstract class UIPermissionInfoBase extends UIContainer {
   }
 
   public void updateGrid(int currentPage) throws Exception {
-    List<PermissionBean> permBeans = new ArrayList<PermissionBean>();
+    List<PermissionBean> permBeans = new ArrayList<>();
     ExtendedNode node = (ExtendedNode) this.getCurrentNode();
     Map<String, List<String>> permsMap = this.getPermissionsMap(node);
   
@@ -138,9 +130,9 @@ public abstract class UIPermissionInfoBase extends UIContainer {
     // Sort by user/group
     Collections.sort(permBeans, new PermissionBeanComparator());
     
-    ListAccess<PermissionBean> permList = new ListAccessImpl<PermissionBean>(PermissionBean.class,
+    ListAccess<PermissionBean> permList = new ListAccessImpl<>(PermissionBean.class,
                                                                              permBeans);
-    LazyPageList<PermissionBean> dataPageList = new LazyPageList<PermissionBean>(permList, 10);
+    LazyPageList<PermissionBean> dataPageList = new LazyPageList<>(permList, 10);
     uiGrid.getUIPageIterator().setPageList(dataPageList);
     if (currentPage > uiGrid.getUIPageIterator().getAvailablePage())
       uiGrid.getUIPageIterator().setCurrentPage(uiGrid.getUIPageIterator().getAvailablePage());
@@ -160,7 +152,7 @@ public abstract class UIPermissionInfoBase extends UIContainer {
    * @throws RepositoryException
    */
   private Map<String, List<String>> getPermissionsMap(ExtendedNode node) throws RepositoryException {
-    Map<String, List<String>> permsMap = new HashMap<String, List<String>>();
+    Map<String, List<String>> permsMap = new HashMap<>();
     Iterator<AccessControlEntry> permissionEntriesIter = node.getACL().getPermissionEntries().iterator();
     while(permissionEntriesIter.hasNext()) {
       AccessControlEntry accessControlEntry = permissionEntriesIter.next();
@@ -170,7 +162,7 @@ public abstract class UIPermissionInfoBase extends UIContainer {
       if(!permsMap.containsKey(currentIdentity)) {
         permsMap.put(currentIdentity, null) ;
       }
-      if(currentPermissionsList == null) currentPermissionsList = new ArrayList<String>() ;
+      if(currentPermissionsList == null) currentPermissionsList = new ArrayList<>() ;
       if(!currentPermissionsList.contains(currentPermission)) {
         currentPermissionsList.add(currentPermission) ;
       }
@@ -181,10 +173,10 @@ public abstract class UIPermissionInfoBase extends UIContainer {
   }
   
   public List<PermissionBean> getPermBeans() {
-    return new ArrayList<PermissionBean>();
+    return new ArrayList<>();
   }
-  
-  static public class EditActionListener extends EventListener<UIPermissionInfoBase> {
+
+  public static class EditActionListener extends EventListener<UIPermissionInfoBase> {
     public void execute(Event<UIPermissionInfoBase> event) throws Exception {
       UIPermissionInfoBase uiPermissionInfo = event.getSource();
       UIApplication uiApp = uiPermissionInfo.getAncestorOfType(UIApplication.class);
@@ -271,9 +263,7 @@ public abstract class UIPermissionInfoBase extends UIContainer {
         node.getSession().save();
         uiPermissionInfo.updateGrid(uiPermissionInfo.getChild(UIGrid.class).getUIPageIterator().getCurrentPage());
         event.getRequestContext().addUIComponentToUpdateByAjax(uiPermissionInfo);
-      } catch (AccessDeniedException ade) {
-        uiApp.addMessage(new ApplicationMessage("UIPermissionForm.msg.access-denied", null, ApplicationMessage.WARNING));
-      } catch (AccessControlException accessControlException) {
+      } catch (AccessDeniedException | AccessControlException e) {
         uiApp.addMessage(new ApplicationMessage("UIPermissionForm.msg.access-denied", null, ApplicationMessage.WARNING));
       }
     }

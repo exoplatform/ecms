@@ -58,23 +58,21 @@ public class ExportContentJob implements Job {
 
   private static final String START_TIME_PROPERTY  = "publication:startPublishedDate";
 
-  private static String       fromState            = null;
+  private String fromState                         = null;
 
-  private static String       toState              = null;
+  private String toState                           = null;
 
-  private static String       localTempDir         = null;
+  private String localTempDir                      = null;
 
-  private static String       targetServerUrl      = null;
+  private String targetServerUrl                   = null;
 
-  private static String       targetKey            = null;
+  private String targetKey                         = null;
 
-  private static String       predefinedPath       = null;
+  private String predefinedPath                    = null;
 
-  private static String       workspace            = null;
+  private String workspace                         = null;
 
-  private static String       repository           = null;
-
-  private static String       contentPath          = null;
+  private String contentPath                       = null;
 
   public void execute(JobExecutionContext context) throws JobExecutionException {
     Session session = null;
@@ -94,7 +92,6 @@ public class ExportContentJob implements Job {
         targetKey = jdatamap.getString("targetKey");
         predefinedPath = jdatamap.getString("predefinedPath");
         String[] pathTab = predefinedPath.split(":");
-        repository = pathTab[0];
         workspace = pathTab[1];
         contentPath = pathTab[2];
 
@@ -109,8 +106,8 @@ public class ExportContentJob implements Job {
       SessionProvider sessionProvider = SessionProvider.createSystemProvider();
 
       String containerName = WCMCoreUtils.getContainerNameFromJobContext(context);
-      RepositoryService repositoryService_ = WCMCoreUtils.getService(RepositoryService.class, containerName);
-      ManageableRepository manageableRepository = repositoryService_.getCurrentRepository();
+      RepositoryService repositoryService = WCMCoreUtils.getService(RepositoryService.class, containerName);
+      ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
       PublicationService publicationService = WCMCoreUtils.getService(PublicationService.class, containerName);
       PublicationPlugin publicationPlugin = publicationService.getPublicationPlugins()
                                                               .get(AuthoringPublicationConstant.LIFECYCLE_NAME);
@@ -143,39 +140,39 @@ public class ExportContentJob implements Job {
         Date now = null;
         xmlsw.writeStartElement("xs", "published-contents", URL);
         for (NodeIterator iter = queryResult.getNodes(); iter.hasNext();) {
-          Node node_ = iter.nextNode();
+          Node node = iter.nextNode();
           nodeDate = null;
-          if (node_.hasProperty(START_TIME_PROPERTY)) {
+          if (node.hasProperty(START_TIME_PROPERTY)) {
             now = Calendar.getInstance().getTime();
-            nodeDate = node_.getProperty(START_TIME_PROPERTY).getDate().getTime();
+            nodeDate = node.getProperty(START_TIME_PROPERTY).getDate().getTime();
           }
 
           if (nodeDate == null || now.compareTo(nodeDate) >= 0) {
-            if (node_.canAddMixin(MIX_TARGET_PATH))
-              node_.addMixin(MIX_TARGET_PATH);
-            node_.setProperty(MIX_TARGET_PATH, node_.getPath());
+            if (node.canAddMixin(MIX_TARGET_PATH))
+              node.addMixin(MIX_TARGET_PATH);
+            node.setProperty(MIX_TARGET_PATH, node.getPath());
 
-            if (node_.canAddMixin(MIX_TARGET_WORKSPACE))
-              node_.addMixin(MIX_TARGET_WORKSPACE);
-            node_.setProperty(MIX_TARGET_WORKSPACE, workspace);
-            node_.save();
-            HashMap<String, String> context_ = new HashMap<String, String>();
+            if (node.canAddMixin(MIX_TARGET_WORKSPACE))
+              node.addMixin(MIX_TARGET_WORKSPACE);
+            node.setProperty(MIX_TARGET_WORKSPACE, workspace);
+            node.save();
+            HashMap<String, String> context_ = new HashMap<>();
             context_.put("containerName", containerName);
-            publicationPlugin.changeState(node_, toState, context_);
+            publicationPlugin.changeState(node, toState, context_);
             if (LOG.isInfoEnabled()) {
-              LOG.info("change the status of the node " + node_.getPath() + " to " + toState);
+              LOG.info("change the status of the node " + node.getPath() + " to " + toState);
             }
             bos = new ByteArrayOutputStream();
 
-            NodeLocation nodeLocation = NodeLocation.getNodeLocationByNode(node_);
-            StringBuffer contenTargetPath = new StringBuffer();
+            NodeLocation nodeLocation = NodeLocation.getNodeLocationByNode(node);
+            StringBuilder contenTargetPath = new StringBuilder();
             contenTargetPath.append(nodeLocation.getRepository());
             contenTargetPath.append(":");
             contenTargetPath.append(nodeLocation.getWorkspace());
             contenTargetPath.append(":");
             contenTargetPath.append(nodeLocation.getPath());
 
-            session.exportSystemView(node_.getPath(), bos, false, false);
+            session.exportSystemView(node.getPath(), bos, false, false);
             if (!isExported)
               isExported = true;
             xmlsw.writeStartElement("xs", "published-content", URL);
@@ -185,12 +182,12 @@ public class ExportContentJob implements Job {
             xmlsw.writeEndElement();
             xmlsw.writeStartElement("xs", "links", URL);
 
-            categorySymLinks = taxonomyService.getAllCategories(node_, true);
+            categorySymLinks = taxonomyService.getAllCategories(node, true);
 
             for (Node nodeSymlink : categorySymLinks) {
 
               NodeLocation symlinkLocation = NodeLocation.getNodeLocationByNode(nodeSymlink);
-              StringBuffer symlinkTargetPath = new StringBuffer();
+              StringBuilder symlinkTargetPath = new StringBuilder();
               symlinkTargetPath.append(symlinkLocation.getRepository());
               symlinkTargetPath.append(":");
               symlinkTargetPath.append(symlinkLocation.getWorkspace());
@@ -202,7 +199,7 @@ public class ExportContentJob implements Job {
               xmlsw.writeCharacters("exo:taxonomyLink");
               xmlsw.writeEndElement();
               xmlsw.writeStartElement("xs", "title", URL);
-              xmlsw.writeCharacters(node_.getName());
+              xmlsw.writeCharacters(node.getName());
               xmlsw.writeEndElement();
               xmlsw.writeStartElement("xs", "targetPath", URL);
               xmlsw.writeCharacters(symlinkTargetPath.toString());
@@ -222,12 +219,12 @@ public class ExportContentJob implements Job {
       if (queryResult.getNodes().getSize() > 0) {
         xmlsw.writeStartElement("xs", "unpublished-contents", URL);
         for (NodeIterator iter = queryResult.getNodes(); iter.hasNext();) {
-          Node node_ = iter.nextNode();
+          Node node = iter.nextNode();
 
-          if (node_.isNodeType("nt:frozenNode"))
+          if (node.isNodeType("nt:frozenNode"))
             continue;
-          NodeLocation nodeLocation = NodeLocation.getNodeLocationByNode(node_);
-          StringBuffer contenTargetPath = new StringBuffer();
+          NodeLocation nodeLocation = NodeLocation.getNodeLocationByNode(node);
+          StringBuilder contenTargetPath = new StringBuilder();
           contenTargetPath.append(nodeLocation.getRepository());
           contenTargetPath.append(":");
           contenTargetPath.append(nodeLocation.getWorkspace());
@@ -274,14 +271,14 @@ public class ExportContentJob implements Job {
           Date date_ = new Date();
           Timestamp time_ = new Timestamp(date_.getTime());
           String[] tab = targetKey.split("$TIMESTAMP");
-          StringBuffer resultKey = new StringBuffer();
+          StringBuilder resultKey = new StringBuilder();
           for (int k = 0; k < tab.length; k++) {
             resultKey.append(tab[k]);
             if (k != (tab.length - 1))
               resultKey.append(time_.toString());
           }
           String hashCode = SHAMessageDigester.getHash(resultKey.toString());
-          StringBuffer param = new StringBuffer();
+          StringBuilder param = new StringBuilder();
           param.append("timestamp=" + time_.toString() + "&&hashcode=" + hashCode
               + "&&contentsfile=");
           while ((numRead = reader.read(buf)) != -1) {

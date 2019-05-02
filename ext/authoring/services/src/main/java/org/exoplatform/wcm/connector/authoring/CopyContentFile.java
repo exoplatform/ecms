@@ -32,9 +32,9 @@ public class CopyContentFile implements ResourceContainer {
 
   private static final String KO_RESPONSE                   = "KO";
 
-  private static String       stagingStorage;
+  private String stagingStorage;
 
-  private static String       targetKey;
+  private String targetKey;
 
   /** The Constant LAST_MODIFIED_PROPERTY. */
   private static final String LAST_MODIFIED_PROPERTY        = "Last-Modified";

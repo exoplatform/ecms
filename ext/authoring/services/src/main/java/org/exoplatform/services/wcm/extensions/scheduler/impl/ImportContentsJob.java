@@ -46,25 +46,20 @@ public class ImportContentsJob implements Job {
 
   private static final String JCR_File_SEPARATOR   = "/";
 
-  private static String       stagingStorage;
-
-  private static String       temporaryStorge;
-
   public void execute(JobExecutionContext context) throws JobExecutionException {
     Session session = null;
     try {
       if (LOG.isInfoEnabled()) {
         LOG.info("Start Execute ImportXMLJob");
       }
-      if (stagingStorage == null) {
 
-        JobDataMap jdatamap = context.getJobDetail().getJobDataMap();
-        stagingStorage = jdatamap.getString("stagingStorage");
-        temporaryStorge = jdatamap.getString("temporaryStorge");
-        if (LOG.isDebugEnabled()) {
-          LOG.debug("Init parameters first time :");
-        }
+      JobDataMap jdatamap = context.getJobDetail().getJobDataMap();
+      String stagingStorage = jdatamap.getString("stagingStorage");
+      String temporaryStorge = jdatamap.getString("temporaryStorge");
+      if (LOG.isDebugEnabled()) {
+        LOG.debug("Init parameters first time :");
       }
+
       SessionProvider sessionProvider = SessionProvider.createSystemProvider();
       String containerName = WCMCoreUtils.getContainerNameFromJobContext(context);
       RepositoryService repositoryService_ = WCMCoreUtils.getService(RepositoryService.class, containerName);

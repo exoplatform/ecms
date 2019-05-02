@@ -110,8 +110,8 @@ public class UISearchResult extends UIContainer {
   private QueryData queryData_;
   private long searchTime_ = 0;
   private UIPageIterator uiPageIterator_;
-  private static String iconType = "";
-  private static String iconScore = "";
+  private String iconType = "";
+  private String iconScore = "";
   static private int PAGE_SIZE = 10;
   private List<String> categoryPathList = new ArrayList<String>();
   private String constraintsCondition;
@@ -141,6 +141,22 @@ public class UISearchResult extends UIContainer {
 
   public long getSearchTime() { return searchTime_; }
   public void setSearchTime(long time) { this.searchTime_ = time; }
+
+  public String getIconType() {
+    return iconType;
+  }
+
+  public String getIconScore() {
+    return iconScore;
+  }
+
+  public void setIconScore(String iconScore) {
+    this.iconScore = iconScore;
+  }
+
+  public void setIconType(String iconType) {
+    this.iconType = iconType;
+  }
 
   public List getCurrentList() throws Exception {
     return uiPageIterator_.getCurrentPageData();
@@ -349,13 +365,13 @@ public class UISearchResult extends UIContainer {
       if (objectId.equals("type")) {
         uiSearchResult.pageList.setSortByField(Utils.JCR_PRIMARYTYPE);
         comparator.setSortType(SearchComparator.SORT_TYPE);
-        iconType = Preference.BLUE_DOWN_ARROW;
-        iconScore = "";
+        uiSearchResult.setIconType(Preference.BLUE_DOWN_ARROW);
+        uiSearchResult.setIconScore("");
       } else if (objectId.equals("score")) {
         uiSearchResult.pageList.setSortByField(Utils.JCR_SCORE);
         comparator.setSortType(SearchComparator.SORT_SCORE);
-        iconScore = Preference.BLUE_DOWN_ARROW;
-        iconType = "";
+        uiSearchResult.setIconScore(Preference.BLUE_DOWN_ARROW);
+        uiSearchResult.setIconType("");
       }
       comparator.setOrderType(SearchComparator.ASC);
       uiSearchResult.pageList.setComparator(comparator);
@@ -373,24 +389,18 @@ public class UISearchResult extends UIContainer {
       if (objectId.equals("type")) {
         uiSearchResult.pageList.setSortByField(Utils.JCR_PRIMARYTYPE);
         comparator.setSortType(SearchComparator.SORT_TYPE);
-        iconType = Preference.BLUE_UP_ARROW;
-        iconScore = "";
+        uiSearchResult.setIconType(Preference.BLUE_UP_ARROW);
+        uiSearchResult.setIconScore("");
       } else if (objectId.equals("score")) {
         uiSearchResult.pageList.setSortByField(Utils.JCR_SCORE);
         comparator.setSortType(SearchComparator.SORT_SCORE);
-        iconScore = Preference.BLUE_UP_ARROW;
-        iconType = "";
+        uiSearchResult.setIconScore(Preference.BLUE_UP_ARROW);
+        uiSearchResult.setIconType("");
       }
       comparator.setOrderType(SearchComparator.DESC);
       uiSearchResult.pageList.setComparator(comparator);
       uiSearchResult.pageList.setOrder("DESC");
       uiSearchResult.pageList.sortData();
-//      Collections.sort(uiSearchResult.currentListRows_, new SearchComparator());
-//      SearchResultPageList pageList = new SearchResultPageList(uiSearchResult.queryResult_,
-//          uiSearchResult.currentListRows_, PAGE_SIZE, uiSearchResult.isEndOfIterator_);
-//      uiSearchResult.currentAvailablePage_ = uiSearchResult.currentListNodes_.size()/PAGE_SIZE;
-//      uiSearchResult.uiPageIterator_.setSearchResultPageList(pageList);
-//      uiSearchResult.uiPageIterator_.setPageList(pageList);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiSearchResult.getParent());
     }
   }

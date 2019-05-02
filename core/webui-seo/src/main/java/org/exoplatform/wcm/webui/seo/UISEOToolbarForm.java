@@ -17,7 +17,6 @@
 package org.exoplatform.wcm.webui.seo;
 
 
-import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.portal.application.PortalRequestContext;
 import org.exoplatform.portal.mop.SiteKey;
@@ -57,16 +56,23 @@ template = "classpath:groovy/webui/seo/UISEOPortletToolbar.gtmpl", events = {
 })
 public class UISEOToolbarForm extends UIForm {
 
+  private static final Log LOG = ExoLogger.getLogger(UISEOToolbarForm.class.getName());
+
   /** The Constant SEO_POPUP_WINDOW. */
   public static final String SEO_POPUP_WINDOW = "UISEOPopupWindow";
   private static ArrayList<String> paramsArray = null;
-  //private static String pageParent = null;
   private static String pageReference = null;
-  private static PageMetadataModel metaModel = null;
+  private PageMetadataModel metaModel = null;
   private String fullStatus = "Empty";
   private String lang = null;
-  
-  private static final Log LOG = ExoLogger.getLogger(UISEOToolbarForm.class.getName());
+
+  public PageMetadataModel getMetaModel() {
+    return metaModel;
+  }
+
+  public void setMetaModel(PageMetadataModel metaModel) {
+    this.metaModel = metaModel;
+  }
 
   public UISEOToolbarForm() throws Exception
   {
@@ -77,7 +83,6 @@ public class UISEOToolbarForm extends UIForm {
       UISEOToolbarForm uiSEOToolbar = event.getSource();
       PortalRequestContext portalRequestContext = Util.getPortalRequestContext();
       UISEOForm uiSEOForm = uiSEOToolbar.createUIComponent(UISEOForm.class, null, null);
-      String params = event.getRequestContext().getRequestParameter(OBJECTID);      
       SEOService seoService = WCMCoreUtils.getService(SEOService.class);
       if(paramsArray != null) {
         for(int i = 0;i < paramsArray.size();i++) {
@@ -89,18 +94,17 @@ public class UISEOToolbarForm extends UIForm {
             break;
           }
         }
-        metaModel = seoService.getContentMetadata(paramsArray, uiSEOToolbar.lang);
+        uiSEOToolbar.setMetaModel(seoService.getContentMetadata(paramsArray, uiSEOToolbar.lang));
       } else {
         uiSEOForm.setContentPath(pageReference);
         uiSEOForm.setOnContent(false);
-        metaModel = seoService.getPageMetadata(pageReference, uiSEOToolbar.lang);
+        uiSEOToolbar.setMetaModel(seoService.getPageMetadata(pageReference, uiSEOToolbar.lang));
       }     
 
       uiSEOForm.setParamsArray(paramsArray);   
-      if(metaModel == null) {
+      if(uiSEOToolbar.getMetaModel() == null) {
         //If have node seo data for default language, displaying seo data for the first language in the list
-        List<Locale> seoLocales = new ArrayList<Locale>();
-        seoLocales = seoService.getSEOLanguages(portalRequestContext.getPortalOwner(), uiSEOForm.getContentPath(), 
+        List<Locale> seoLocales = seoService.getSEOLanguages(portalRequestContext.getPortalOwner(), uiSEOForm.getContentPath(),
                                                 uiSEOForm.getOnContent());
         if(seoLocales.size()> 0) {
           Locale locale = seoLocales.get(0);
@@ -109,22 +113,13 @@ public class UISEOToolbarForm extends UIForm {
           String country = locale.getCountry(); 
           if(StringUtils.isNotEmpty(country)) sb.append("_").append(country);
           String lang = sb.toString();
-          metaModel = seoService.getMetadata(uiSEOForm.getParamsArray(), pageReference, lang);
+          uiSEOToolbar.setMetaModel(seoService.getMetadata(uiSEOForm.getParamsArray(), pageReference, lang));
           uiSEOForm.setSelectedLanguage(lang);
         }
       } 
-      uiSEOForm.initSEOForm(metaModel);
-      int top = -1;
-      int left = -1;
-      if(params != null && params.length() > 0) {
-        String[] arrCoordinate = params.split(",");
-        if(arrCoordinate != null && arrCoordinate.length == 2) {
-          top = Integer.parseInt(arrCoordinate[0]);
-          left = Integer.parseInt(arrCoordinate[1]);
-        }
-      }
-      Utils.createPopupWindow(uiSEOToolbar, uiSEOForm, SEO_POPUP_WINDOW, true, 640);
+      uiSEOForm.initSEOForm(uiSEOToolbar.getMetaModel());
 
+      Utils.createPopupWindow(uiSEOToolbar, uiSEOForm, SEO_POPUP_WINDOW, true, 640);
     }
   }
 
@@ -140,13 +135,13 @@ public class UISEOToolbarForm extends UIForm {
     fullStatus = "Empty";
     if (!pcontext.useAjax()) {      
       paramsArray = null;
-      String contentParam = null;
+      String contentParam;
       Enumeration params = pcontext.getRequest().getParameterNames();
       if(params.hasMoreElements()) {
-        paramsArray = new ArrayList<String>();
+        paramsArray = new ArrayList<>();
         while(params.hasMoreElements()) {
           contentParam = params.nextElement().toString();
-          String contentValue = "";
+          String contentValue;
           try {
             contentValue = Text.unescape(pcontext.getRequestParameter(contentParam));
           } catch(Exception ex) {
@@ -167,8 +162,7 @@ public class UISEOToolbarForm extends UIForm {
       SiteKey portalKey = SiteKey.portal(portalName);
       if(siteKey != null && siteKey.equals(portalKey)) {
         metaModel = seoService.getPageMetadata(pageReference, lang);
-        //pageParent = Util.getUIPortal().getSelectedUserNode().getParent().getPageRef();
-        if(paramsArray != null) {        
+        if(paramsArray != null) {
           PageMetadataModel tmpModel = null;
           try{
             tmpModel = seoService.getContentMetadata(paramsArray,lang);

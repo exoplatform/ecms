@@ -52,8 +52,6 @@ public class UITemplateEditForm extends UIForm {
   final static public String FIELD_LABEL = "label" ;
   final static public String FIELD_ISTEMPLATE = "isDocumentTemplate" ;
 
-  private static String nodeType_ ;
-
   public UITemplateEditForm() {
     addChild(new UIFormStringInput(FIELD_NAME, null)) ;
     addChild(new UIFormStringInput(FIELD_LABEL, null)) ;
@@ -77,14 +75,14 @@ public class UITemplateEditForm extends UIForm {
     getUIStringInput(FIELD_LABEL).setValue(label) ;
     getUICheckBoxInput(FIELD_ISTEMPLATE).setDisabled(true);
     getUIStringInput(FIELD_NAME).setDisabled(true);
-    nodeType_ = nodeType ;
   }
 
   static public class SaveActionListener extends EventListener<UITemplateEditForm> {
     public void execute(Event<UITemplateEditForm> event) throws Exception {
       UITemplateEditForm uiForm = event.getSource() ;
       TemplateService tempService = uiForm.getApplicationComponent(TemplateService.class) ;
-      Node node = tempService.getTemplatesHome(WCMCoreUtils.getSystemSessionProvider()).getNode(nodeType_) ;
+      String nodeType = ((UIFormStringInput)(event.getSource().getChildById("name"))).getValue();
+      Node node = tempService.getTemplatesHome(WCMCoreUtils.getSystemSessionProvider()).getNode(nodeType) ;
       node.setProperty(TemplateService.TEMPLATE_LABEL,uiForm.getUIStringInput(FIELD_LABEL).getValue()) ;
       node.save() ;
       uiForm.reset() ;
@@ -95,6 +93,7 @@ public class UITemplateEditForm extends UIForm {
       UIPopupWindow uiPopupWindow = uiManager.getChildById(UITemplatesManager.POPUP_TEMPLATE_ID) ;
       uiPopupWindow.setShow(false) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiManager) ;
+
     }
   }
 

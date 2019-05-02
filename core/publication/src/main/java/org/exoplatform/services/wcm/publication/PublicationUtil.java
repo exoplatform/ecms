@@ -62,7 +62,7 @@ public class PublicationUtil {
    * @throws Exception
    */
   public static List<UserNode> findUserNodeByPageId(UserNode rootNode, String pageId) throws Exception {
-    List<UserNode> allUserNodes = new ArrayList<UserNode>();
+    List<UserNode> allUserNodes = new ArrayList<>();
     findUserNodeByPageId(rootNode, pageId, allUserNodes);
     return allUserNodes;
   }
@@ -97,7 +97,7 @@ public class PublicationUtil {
    * @return the list of app instances
    */
   public static List<String> findAppInstancesByName(Page page, String applicationName) {
-    List<String> results = new ArrayList<String>();
+    List<String> results = new ArrayList<>();
     findAppInstancesByContainerAndName(page, applicationName, results);
     return results;
   }
@@ -125,34 +125,6 @@ public class PublicationUtil {
     }
   }
 
-  /** The application. */
-  private static Application<?> application = null;
-
-  /**
-   * Find app instances by id.
-   *
-   * @param container the container
-   * @param applicationId the application id
-   *
-   * @return the application
-   */
-  public static Application<?> findAppInstancesById(Container container, String applicationId) {
-    ArrayList<ModelObject> chidren = container.getChildren();
-    if(chidren == null) return null;
-    for(ModelObject object: chidren) {
-      if(object instanceof Application) {
-        Application<?> app = Application.class.cast(object);
-        if(app.getId().equals(applicationId)) {
-          application = app;
-        }
-      } else if(object instanceof Container) {
-        Container child = Container.class.cast(object);
-        findAppInstancesById(child, applicationId);
-      }
-    }
-    return application;
-  }
-
   /**
    * Removed app instances in container by names.
    *
@@ -161,7 +133,7 @@ public class PublicationUtil {
    */
   private static void removedAppInstancesInContainerByNames(Container container,
                                                             List<String> removingApplicationIds) {
-    ArrayList<ModelObject> childrenTmp = new ArrayList<ModelObject>();
+    ArrayList<ModelObject> childrenTmp = new ArrayList<>();
     ArrayList<ModelObject> chidren = container.getChildren();
     if (chidren == null)
       return;
@@ -190,8 +162,8 @@ public class PublicationUtil {
    * @throws Exception the exception
    */
   public static List<String> getValuesAsString(Node node, String propName) throws Exception {
-    if(!node.hasProperty(propName)) return new ArrayList<String>();
-    List<String> results = new ArrayList<String>();
+    if(!node.hasProperty(propName)) return new ArrayList<>();
+    List<String> results = new ArrayList<>();
     try{
       for(Value value: node.getProperty(propName).getValues()) {
         results.add(value.getString());
@@ -211,7 +183,7 @@ public class PublicationUtil {
    * @return the value[]
    */
   public static Value[] toValues(ValueFactory factory, List<String> values) {
-    List<Value> list = new ArrayList<Value>();
+    List<Value> list = new ArrayList<>();
     for(String value: values) {
       list.add(factory.createValue(value));
     }
@@ -327,7 +299,7 @@ public class PublicationUtil {
       return null;
     }
 
-    ArrayList<NodeContext<?>> nodeContextList = new ArrayList<NodeContext<?>>();
+    ArrayList<NodeContext<?>> nodeContextList = new ArrayList<>();
     Iterator<?> iter = rootNodeContext.getNodes().iterator();
     while (iter.hasNext()){
       NodeContext<?> context = (NodeContext<?>) iter.next();

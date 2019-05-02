@@ -16,27 +16,19 @@
  */
 package org.exoplatform.services.wcm.search;
 
-import java.io.Serializable;
 import java.util.*;
 import java.util.concurrent.CopyOnWriteArraySet;
-import java.util.stream.Collectors;
 
 import javax.jcr.*;
 import javax.jcr.nodetype.NodeType;
-import javax.jcr.nodetype.NodeTypeIterator;
 import javax.jcr.nodetype.NodeTypeManager;
 import javax.jcr.query.*;
-import javax.portlet.PortletRequest;
 
-import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.commons.api.search.data.SearchResult;
-import org.exoplatform.commons.utils.CommonsUtils;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.container.xml.ValueParam;
-import org.exoplatform.portal.application.PortalRequestContext;
 import org.exoplatform.portal.config.UserACL;
-import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cache.CacheService;
 import org.exoplatform.services.cache.ExoCache;
 import org.exoplatform.services.cms.documents.TrashService;
@@ -45,10 +37,8 @@ import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
-import org.exoplatform.services.jcr.impl.core.query.QueryImpl;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
-import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
@@ -60,7 +50,6 @@ import org.exoplatform.services.wcm.search.QueryCriteria.DatetimeRange;
 import org.exoplatform.services.wcm.search.QueryCriteria.QueryProperty;
 import org.exoplatform.services.wcm.search.base.*;
 import org.exoplatform.services.wcm.search.connector.BaseSearchServiceConnector;
-import org.exoplatform.services.wcm.search.connector.FileSearchServiceConnector;
 import org.exoplatform.services.wcm.utils.SQLQueryBuilder;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.services.wcm.utils.AbstractQueryBuilder.COMPARISON_TYPE;
@@ -68,8 +57,6 @@ import org.exoplatform.services.wcm.utils.AbstractQueryBuilder.LOGICAL;
 import org.exoplatform.services.wcm.utils.AbstractQueryBuilder.ORDERBY;
 import org.exoplatform.services.wcm.utils.AbstractQueryBuilder.PATH_TYPE;
 import org.exoplatform.services.wcm.utils.AbstractQueryBuilder.QueryTermHelper;
-import org.exoplatform.webui.application.WebuiRequestContext;
-import org.exoplatform.webui.application.portlet.PortletRequestContext;
 /**
  * The SiteSearchService component is used in the Search portlet that allows users
  * to find all information matching with your given keyword.
@@ -100,16 +87,16 @@ public class SiteSearchServiceImpl implements SiteSearchService {
   private RepositoryService repositoryService;
 
   /** The exclude node types. */
-  private CopyOnWriteArraySet<String> excludeNodeTypes = new CopyOnWriteArraySet<String>();
+  private CopyOnWriteArraySet<String> excludeNodeTypes = new CopyOnWriteArraySet<>();
 
   /** The include node types. */
-  private CopyOnWriteArraySet<String> includeNodeTypes = new CopyOnWriteArraySet<String>();
+  private CopyOnWriteArraySet<String> includeNodeTypes = new CopyOnWriteArraySet<>();
 
   /** The exclude mime types. */
-  private CopyOnWriteArraySet<String> excludeMimeTypes = new CopyOnWriteArraySet<String>();
+  private CopyOnWriteArraySet<String> excludeMimeTypes = new CopyOnWriteArraySet<>();
 
   /** The include mime types. */
-  private CopyOnWriteArraySet<String> includeMimeTypes = new CopyOnWriteArraySet<String>();
+  private CopyOnWriteArraySet<String> includeMimeTypes = new CopyOnWriteArraySet<>();
 
   private boolean isEnabledFuzzySearch = true;
   
@@ -237,7 +224,7 @@ public class SiteSearchServiceImpl implements SiteSearchService {
     long startTime = System.currentTimeMillis();
     Query query = createSearchPageQuery(queryCriteria, queryManager);
     if (query == null) {
-      return new ArrayNodePageList<ResultNode>(pageSize);
+      return new ArrayNodePageList<>(pageSize);
     }
     String suggestion = getSpellSuggestion(queryCriteria.getKeyword(), currentRepository);
     if (LOG.isDebugEnabled()) {
@@ -267,7 +254,7 @@ public class SiteSearchServiceImpl implements SiteSearchService {
     if (ret == null) {
       ret = new HashMap<Integer, Integer>();
       foundNodeCache.put(key, ret);
-    };
+    }
     return ret;
   }
 
@@ -276,9 +263,9 @@ public class SiteSearchServiceImpl implements SiteSearchService {
     String key = new StringBuilder('(').append(userId).append(';').append(queryStatement).append(')').toString();
     Map<Integer, Integer> ret = dropNodeCache.get(key);
     if (ret == null) {
-      ret = new HashMap<Integer, Integer>();
+      ret = new HashMap<>();
       dropNodeCache.put(key, ret);
-    };
+    }
     return ret;
   }
 
@@ -296,7 +283,7 @@ public class SiteSearchServiceImpl implements SiteSearchService {
     if (mopPages.size() == 0) {
       return null;
     }
-    List<QueryProperty> queryProps = new ArrayList<QueryCriteria.QueryProperty>();
+    List<QueryProperty> queryProps = new ArrayList<>();
     for (String page : mopPages) {
       QueryProperty prop = queryCriteria.new QueryProperty();
       prop.setName("mop:page");
@@ -788,7 +775,7 @@ public class SiteSearchServiceImpl implements SiteSearchService {
         if (isSearchContent) return displayNode;
         NodeLocation nodeLocation = NodeLocation.getNodeLocationByNode(displayNode);
         WCMComposer wcmComposer = WCMCoreUtils.getService(WCMComposer.class);
-        HashMap<String, String> filters = new HashMap<String, String>();
+        HashMap<String, String> filters = new HashMap<>();
         filters.put(WCMComposer.FILTER_MODE, queryCriteria.isLiveMode() ? WCMComposer.MODE_LIVE
                                                                        : WCMComposer.MODE_EDIT);
         return wcmComposer.getContent(nodeLocation.getWorkspace(),
@@ -869,25 +856,11 @@ public class SiteSearchServiceImpl implements SiteSearchService {
   
   public static class PageDataCreator implements SearchDataCreator<ResultNode> {
 
-    private static HashSet<String> userNavigationUriList;
-    
-    public PageDataCreator() {
-      userNavigationUriList = new HashSet<String>();
-    }
+    private static HashSet<String> userNavigationUriList = new HashSet<>();
     
     @Override
     public ResultNode createData(Node node, Row row, SearchResult searchResult) {
       try {
-//        PortalRequestContext portalRequestContext = Util.getPortalRequestContext();        
-//        PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
-//        PortletRequest portletRequest = portletRequestContext.getRequest();
-        
-//        StringBuffer baseURI = new StringBuffer();
-//        baseURI.append(portletRequest.getScheme()).append("://").append(portletRequest.getServerName());
-//        if (portletRequest.getServerPort() != 80) {
-//          baseURI.append(":").append(String.format("%s", portletRequest.getServerPort()));
-//        }
-//        baseURI.append(portalRequestContext.getPortalContextPath());
         if (node.isNodeType("mop:pagelink")) {
           node = node.getParent();
         }

@@ -101,17 +101,18 @@ import java.util.regex.Matcher;
 
 public class PasteManageComponent extends UIAbstractManagerComponent {
 
-  private static final List<UIExtensionFilter> FILTERS
-      = Arrays.asList(new UIExtensionFilter[]{new IsNotInTrashFilter(),
+  private static final Log    LOG           = ExoLogger.getLogger(PasteManageComponent.class.getName());
+
+  private static final List<UIExtensionFilter> FILTERS = Arrays.asList(new IsNotInTrashFilter(),
                                               new IsPasteableFilter(),
                                               new IsNotNtFileFilter(),
-                                              new IsNotTrashHomeNodeFilter()});
+                                              new IsNotTrashHomeNodeFilter());
 
   private static final String RELATION_PROP = "exo:relation";
 
-  private static final Log    LOG           = ExoLogger.getLogger(PasteManageComponent.class.getName());
   private static boolean isRefresh = true;
-  private static Map<String, Boolean> versionedRemember, nonVersionedRemember;
+  private static Map<String, Boolean> versionedRemember = new HashMap<>();
+  private static Map<String, Boolean> nonVersionedRemember = new HashMap<>();
 
   public static boolean isIsRefresh() {
     return isRefresh;
@@ -224,8 +225,8 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
 
     if(isRefresh) {
       // Rebuild screen after pasting new content
-      versionedRemember = null;
-      nonVersionedRemember = null;
+      versionedRemember.clear();
+      nonVersionedRemember.clear();
       uiExplorer.updateAjax(event);
     }
 
@@ -401,8 +402,8 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
       UIPopupWindow popupAction = uiExplorer.findFirstComponentOfType(UIPopupWindow.class) ;
       popupAction.setShow(false) ;
       uiExplorer.updateAjax(event);
-      versionedRemember=null;
-      nonVersionedRemember=null;
+      versionedRemember.clear();
+      nonVersionedRemember.clear();
     }
   }
 
@@ -506,8 +507,6 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
 
   private static void processPaste(ClipboardCommand currentClipboard, String destPath, UIJCRExplorer uiExplorer,
       Event<?> event, boolean isMultiSelect, boolean isLastPaste) throws Exception {
-//    UIJCRExplorer uiExplorer = ((UIComponent) event.getSource())
-//        .getAncestorOfType(UIJCRExplorer.class);
     UIApplication uiApp = uiExplorer.getAncestorOfType(UIApplication.class);
     String srcPath = currentClipboard.getSrcPath();
     String type = currentClipboard.getType();
@@ -647,7 +646,6 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
         if (LOG.isDebugEnabled())
           LOG.debug("Copy to another workspace");
         workspace.copy(srcWorkspaceName, srcPath, destPath);
-        // workspace.clone(srcWorkspaceName, srcPath, destPath, true);
       } catch (Exception e) {
         if (LOG.isErrorEnabled()) {
           LOG.error("an unexpected error occurs while pasting the node", e);
@@ -719,7 +717,6 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
           autoVersionService.autoVersion(_destNode, srcNode);
           if(!srcNode.getPath().equals(_destNode.getPath())) {
             srcNode.remove();
-//            srcNode.getSession().save();
           }
         }else {
           workspace.move(srcPath, destPath);
@@ -792,11 +789,17 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
   }
 
   public static void setVersionedRemember(Map<String, Boolean> versionedRemember) {
-    PasteManageComponent.versionedRemember = versionedRemember;
+    PasteManageComponent.versionedRemember.clear();
+    if(versionedRemember != null && !versionedRemember.isEmpty()) {
+      PasteManageComponent.versionedRemember.putAll(versionedRemember);
+    }
   }
 
   public static void setNonVersionedRemember(Map<String, Boolean> nonVersionedRemember) {
-    PasteManageComponent.nonVersionedRemember = nonVersionedRemember;
+    PasteManageComponent.nonVersionedRemember.clear();
+    if(nonVersionedRemember != null && !nonVersionedRemember.isEmpty()) {
+      PasteManageComponent.nonVersionedRemember.putAll(nonVersionedRemember);
+    }
   }
 
   public static Map<String, Boolean> getVersionedRemember() {
