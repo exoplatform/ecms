@@ -11,6 +11,7 @@ import com.microsoft.graph.models.extensions.DriveItem;
 
 import org.exoplatform.clouddrive.*;
 import org.exoplatform.clouddrive.jcr.JCRLocalCloudDrive;
+import org.exoplatform.clouddrive.jcr.JCRLocalCloudFile;
 import org.exoplatform.clouddrive.jcr.NodeFinder;
 import org.exoplatform.clouddrive.oauth2.UserToken;
 import org.exoplatform.clouddrive.oauth2.UserTokenRefreshListener;
@@ -23,17 +24,17 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
   /**
    *
    */
-  private static final Log LOG = ExoLogger.getLogger(JCRLocalOneDrive.class);
-  protected final OneDriveAPI api = new OneDriveAPIImpl();
+  private static final Log    LOG = ExoLogger.getLogger(JCRLocalOneDrive.class);
 
+  protected final OneDriveAPI api = new OneDriveAPI();
 
   protected JCRLocalOneDrive(CloudUser user,
                              Node driveNode,
                              SessionProviderService sessionProviders,
                              NodeFinder finder,
                              ExtendedMimeTypeResolver mimeTypes)
-          throws CloudDriveException,
-          RepositoryException {
+      throws CloudDriveException,
+      RepositoryException {
     super(user, driveNode, sessionProviders, finder, mimeTypes);
   }
 
@@ -92,75 +93,115 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
     LOG.info("------");
   }
 
+  private void initFolderByDriveItem(Node fileNode, DriveItem item) throws RepositoryException {
+    initFolder(fileNode, item.id, item.name, "type", item.webUrl, "", "", Calendar.getInstance(), Calendar.getInstance());
+
+  }
+
+  private void initFileByDriveItem(Node fileNode, DriveItem item) throws RepositoryException {
+    initFile(fileNode,
+             item.id,
+             item.name,
+             "",
+             item.webUrl,
+             "",
+             "",
+             "",
+             "",
+             item.createdDateTime,
+             item.lastModifiedDateTime,
+             item.size);
+  }
+
+  private JCRLocalCloudFile createCloudFolderByDriveItem(Node fileNode, DriveItem item) throws RepositoryException {
+    return new JCRLocalCloudFile(fileNode.getPath(),
+                                 item.id,
+                                 item.name,
+                                 item.webUrl,
+                                 "type",
+                                 "lastUser",
+                                 "author",
+                                 Calendar.getInstance(),
+                                 Calendar.getInstance(),
+                                 fileNode,
+                                 true);
+  }
+
+  private JCRLocalCloudFile createCloudFileByDriveItem(Node fileNode, DriveItem item) throws RepositoryException {
+    return new JCRLocalCloudFile(fileNode.getPath(),
+                                 item.id,
+                                 item.name,
+                                 item.webUrl,
+                                 item.oDataType,
+                                 "lastUser",
+                                 "author",
+                                 Calendar.getInstance(),
+                                 Calendar.getInstance(),
+                                 fileNode,
+                                 true);
+  }
+
   class OneDriveConnectCommand extends ConnectCommand {
     /**
      * Connect command constructor.
      *
-     * @throws RepositoryException   the repository exception
+     * @throws RepositoryException the repository exception
      * @throws DriveRemovedException the drive removed exception
      */
     OneDriveConnectCommand() throws RepositoryException, DriveRemovedException {
     }
 
-    private void openAndInitFolder(DriveItem item, Node localFile) throws RepositoryException, CloudDriveException {
+    private JCRLocalCloudFile openAndInitFolder(DriveItem item, Node localFile) throws RepositoryException, CloudDriveException {
       Node fileNode = openFolder(item.id, item.name, localFile);
-      initFolder(fileNode,
-              item.id,
-              item.name,
-              item.oDataType,
-              item.webUrl,
-              item.name,
-              "lastUser",
-              Calendar.getInstance(),
-              Calendar.getInstance());
+      initFolderByDriveItem(fileNode, item);
       fetchFiles(item.id, fileNode);
+      return createCloudFolderByDriveItem(fileNode, item);
     }
-    private void openAndInitFile(DriveItem item, Node localFile) throws CloudDriveException, RepositoryException {
+
+    private JCRLocalCloudFile openAndInitFile(DriveItem item, Node localFile) throws CloudDriveException, RepositoryException {
       Node fileNode = openFile(item.id, item.name, localFile);
-      initFile(fileNode,
-              item.id,
-              item.name,
-              "",
-              item.webUrl,
-              "",
-              "",
-              "",
-              "",
-              item.createdDateTime,
-              item.lastModifiedDateTime,
-              item.size);
+      initFileByDriveItem(fileNode, item);
+      return createCloudFileByDriveItem(fileNode, item);
+
     }
 
     /**
-     * @param fileId    fileId at site
+     * @param fileId fileId at site
      * @param localFile jcr node
      * @throws CloudDriveException
      * @throws RepositoryException
      */
     private void fetchFiles(String fileId, Node localFile) throws CloudDriveException, RepositoryException {
       // For Test Delete Root Node;
-      //removeNode(rootNode());
-      Node node = rootNode();
-      removeLinks(node);
-      node.remove();
-
+      // removeNode(rootNode());
+      // Node node = rootNode();
+      // removeLinks(node);
+      // node.remove();
       List<DriveItem> items = api.getChildren(fileId);
       for (DriveItem item : items) {
+        // if(!isConnected(fileId, item.id)){
+        JCRLocalCloudFile jcrLocalCloudFile = null;
         if (item.folder != null) {
-          openAndInitFolder(item, localFile);
+          jcrLocalCloudFile = openAndInitFolder(item, localFile);
         } else if (item.file != null) {
-          openAndInitFile(item, localFile);
+          jcrLocalCloudFile = openAndInitFile(item, localFile);
         }
+        // if (jcrLocalCloudFile != null) {
+        // addConnected(fileId,jcrLocalCloudFile);
+        // }
+        // }
+
       }
     }
 
     @Override
     protected void fetchFiles() throws CloudDriveException, RepositoryException {
       fetchFiles(null, driveNode);
+      // driveNode.setProperty("ecd:connected", false);
     }
 
-
   }
+
   protected class OneDriveSyncCommand extends SyncCommand {
 
     @Override
@@ -176,7 +217,6 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
 
   class OneDriveFileAPI extends AbstractFileAPI {
 
-
     @Override
     public boolean removeFile(String id) throws CloudDriveException, RepositoryException {
       api.removeFile(id);
@@ -185,8 +225,8 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
 
     @Override
     public boolean removeFolder(String id) throws CloudDriveException, RepositoryException {
-      api.removeFile(id);
-      return false;
+      api.removeFolder(id);
+      return true;
     }
 
     @Override
@@ -217,17 +257,50 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
     }
 
     @Override
-    public CloudFile createFile(Node fileNode, Calendar created, Calendar modified, String mimeType, InputStream content) throws CloudDriveException, RepositoryException {
+    public CloudFile createFile(Node fileNode,
+                                Calendar created,
+                                Calendar modified,
+                                String mimeType,
+                                InputStream content) throws CloudDriveException, RepositoryException {
+      LOG.info("Create File Path : " + fileNode.getPath() + "\n" + "Create File Name: "
+          + fileNode.getProperty("ecd:title").getString());
+
+      DriveItem createdDriveItem = api.insert(fileNode.getPath(),
+                                              fileNode.getProperty("ecd:title").getString(),
+                                              created,
+                                              modified,
+                                              mimeType,
+                                              content);
+      if (createdDriveItem != null) {
+        initFileByDriveItem(fileNode, createdDriveItem);
+        return createCloudFileByDriveItem(fileNode, createdDriveItem);
+      }
       return null;
     }
 
     @Override
     public CloudFile createFolder(Node folderNode, Calendar created) throws CloudDriveException, RepositoryException {
-      return null;
+      String parentId = getParentId(folderNode);
+      DriveItem createdFolder = api.createFolder(parentId, getTitle(folderNode), created);
+      initFolderByDriveItem(folderNode, createdFolder);
+      return createCloudFolderByDriveItem(folderNode, createdFolder);
     }
 
     @Override
-    public CloudFile updateFolder(Node folderNode, Calendar modified) throws CloudDriveException, RepositoryException {
+    public CloudFile copyFile(Node srcFileNode, Node destFileNode) throws CloudDriveException, RepositoryException {
+      DriveItem file = api.copyFile(getParentId(destFileNode), getTitle(destFileNode), getId(srcFileNode));
+      initFileByDriveItem(destFileNode, file);
+      return createCloudFolderByDriveItem(destFileNode, file);
+    }
+
+    @Override
+    public CloudFile copyFolder(Node srcFolderNode, Node destFolderNode) throws CloudDriveException, RepositoryException {
+
+      DriveItem folder = api.copyFolder(getParentId(destFolderNode), getTitle(destFolderNode), getId(srcFolderNode));
+      if (folder != null) {
+        initFolderByDriveItem(destFolderNode, folder);
+        return createCloudFolderByDriveItem(destFolderNode, folder);
+      }
       return null;
     }
 
@@ -237,17 +310,16 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
     }
 
     @Override
-    public CloudFile updateFileContent(Node fileNode, Calendar modified, String mimeType, InputStream content) throws CloudDriveException, RepositoryException {
+    public CloudFile updateFolder(Node folderNode, Calendar modified) throws CloudDriveException, RepositoryException {
+      // this.createFolder()
       return null;
     }
 
     @Override
-    public CloudFile copyFile(Node srcFileNode, Node destFileNode) throws CloudDriveException, RepositoryException {
-      return null;
-    }
-
-    @Override
-    public CloudFile copyFolder(Node srcFolderNode, Node destFolderNode) throws CloudDriveException, RepositoryException {
+    public CloudFile updateFileContent(Node fileNode,
+                                       Calendar modified,
+                                       String mimeType,
+                                       InputStream content) throws CloudDriveException, RepositoryException {
       return null;
     }
 

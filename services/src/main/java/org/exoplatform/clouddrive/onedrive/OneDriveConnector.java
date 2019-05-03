@@ -52,7 +52,7 @@ public class OneDriveConnector extends CloudDriveConnector {
   @Override
   protected CloudUser authenticate(Map<String, String> params) throws CloudDriveException {
     LOG.info("authenticate: " + params.toString());
-    return new OneDriveUser("id", "username", "email", provider);
+    return new OneDriveUser("id-user1", "username", "some1@email.com", provider);
   }
 
   @Override
@@ -66,7 +66,7 @@ public class OneDriveConnector extends CloudDriveConnector {
     LOG.info("loadDrive");
     JCRLocalCloudDrive.checkNotTrashed(driveNode);
     JCRLocalCloudDrive.migrateName(driveNode);
-    return new JCRLocalOneDrive(new OneDriveUser("a", "a", "a", createProvider()),
+    return new JCRLocalOneDrive(new OneDriveUser("id-user1", "username", "some1@email.com", createProvider()),
                                 driveNode,
                                 sessionProviders,
                                 jcrFinder,

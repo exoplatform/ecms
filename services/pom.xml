@@ -10,6 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>exo-clouddrive-onedrive-services</artifactId>
+    <name>eXo Cloud Drive :: Connectors :: One Drive :: Services</name>
 
 
     <dependencies>
