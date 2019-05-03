@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003-2011 eXo Platform SAS.
+ * Copyright (C) 2003-2019 eXo Platform SAS.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Affero General Public License
@@ -60,11 +60,22 @@ public class UISEOToolbarForm extends UIForm {
 
   /** The Constant SEO_POPUP_WINDOW. */
   public static final String SEO_POPUP_WINDOW = "UISEOPopupWindow";
-  private static ArrayList<String> paramsArray = null;
-  private static String pageReference = null;
+  private ArrayList<String> paramsArray = null;
+  private String pageReference = null;
   private PageMetadataModel metaModel = null;
   private String fullStatus = "Empty";
   private String lang = null;
+
+  public UISEOToolbarForm() {
+  }
+
+  public ArrayList<String> getParamsArray() {
+    return paramsArray;
+  }
+
+  public String getPageReference() {
+    return pageReference;
+  }
 
   public PageMetadataModel getMetaModel() {
     return metaModel;
@@ -74,34 +85,31 @@ public class UISEOToolbarForm extends UIForm {
     this.metaModel = metaModel;
   }
 
-  public UISEOToolbarForm() throws Exception
-  {
-  }
-
   public static class AddSEOActionListener extends EventListener<UISEOToolbarForm> {
     public void execute(Event<UISEOToolbarForm> event) throws Exception {
       UISEOToolbarForm uiSEOToolbar = event.getSource();
       PortalRequestContext portalRequestContext = Util.getPortalRequestContext();
       UISEOForm uiSEOForm = uiSEOToolbar.createUIComponent(UISEOForm.class, null, null);
       SEOService seoService = WCMCoreUtils.getService(SEOService.class);
+      ArrayList<String> paramsArray = uiSEOToolbar.getParamsArray();
       if(paramsArray != null) {
-        for(int i = 0;i < paramsArray.size();i++) {
-          Node contentNode = seoService.getContentNode(paramsArray.get(i).toString());
+        for(int i = 0; i < paramsArray.size(); i++) {
+          Node contentNode = seoService.getContentNode(paramsArray.get(i));
           if(contentNode != null) {
             uiSEOForm.setOnContent(true);
-            uiSEOForm.setContentPath(paramsArray.get(i).toString());
+            uiSEOForm.setContentPath(paramsArray.get(i));
             uiSEOForm.setContentURI(contentNode.getUUID());
             break;
           }
         }
         uiSEOToolbar.setMetaModel(seoService.getContentMetadata(paramsArray, uiSEOToolbar.lang));
       } else {
-        uiSEOForm.setContentPath(pageReference);
+        uiSEOForm.setContentPath(uiSEOToolbar.getPageReference());
         uiSEOForm.setOnContent(false);
-        uiSEOToolbar.setMetaModel(seoService.getPageMetadata(pageReference, uiSEOToolbar.lang));
+        uiSEOToolbar.setMetaModel(seoService.getPageMetadata(uiSEOToolbar.getPageReference(), uiSEOToolbar.lang));
       }     
 
-      uiSEOForm.setParamsArray(paramsArray);   
+      uiSEOForm.setParamsArray(paramsArray);
       if(uiSEOToolbar.getMetaModel() == null) {
         //If have node seo data for default language, displaying seo data for the first language in the list
         List<Locale> seoLocales = seoService.getSEOLanguages(portalRequestContext.getPortalOwner(), uiSEOForm.getContentPath(),
@@ -113,7 +121,7 @@ public class UISEOToolbarForm extends UIForm {
           String country = locale.getCountry(); 
           if(StringUtils.isNotEmpty(country)) sb.append("_").append(country);
           String lang = sb.toString();
-          uiSEOToolbar.setMetaModel(seoService.getMetadata(uiSEOForm.getParamsArray(), pageReference, lang));
+          uiSEOToolbar.setMetaModel(seoService.getMetadata(uiSEOForm.getParamsArray(), uiSEOToolbar.getPageReference(), lang));
           uiSEOForm.setSelectedLanguage(lang);
         }
       } 
@@ -148,7 +156,7 @@ public class UISEOToolbarForm extends UIForm {
             contentValue = pcontext.getRequestParameter(contentParam);
           }
           contentValue = ContentReader.getXSSCompatibilityContent(contentValue);
-          if(paramsArray !=null) {
+          if(paramsArray != null) {
             paramsArray.add(Text.escapeIllegalJcrChars(contentValue));
           }
         }
