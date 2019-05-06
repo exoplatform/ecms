@@ -123,14 +123,13 @@ body {
 
 
 .outerCenter {
-    margin: 0 90px 0 260px;
     padding: 34px 0 0;
     position: relative;
 }
 
 .outerCenter .actionIcon {
 	width: 16px;
-  margin: 1px 2px 0;    
+  margin: 1px 2px 0;
 }
 
 .innerCenter {
@@ -252,11 +251,11 @@ body {
 
 #toolbarContainer, .findbar, .secondaryToolbar {
   position: relative;
-  background: #f0f0f0; 
+  background: #f0f0f0;
   border: none;
   border-bottom: 1px solid #d1d1d1;
   z-index: 0;
-  
+
 }
 
 #toolbarViewer {
@@ -588,7 +587,7 @@ body {
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
-  
+
   cursor: default;
   -webkit-transition-property: background-color, border-color, box-shadow;
   -webkit-transition-duration: 150ms;
@@ -675,7 +674,7 @@ body {
 
 .dropdownToolbarButton > select {
   -webkit-appearance: none;
-  -moz-appearance: none; 
+  -moz-appearance: none;
   min-width: 140px;
   font-size: 12px;
   color: hsl(0,0%,95%);
@@ -683,7 +682,7 @@ body {
   padding: 0;
   height: 19px;
   border: none;
-  background: rgba(0,0,0,0); 
+  background: rgba(0,0,0,0);
   box-shadow: none;
 }
 
@@ -732,7 +731,7 @@ body {
 
 .toolbarButton::before,
 .secondaryToolbarButton::before {
- 
+
   position: absolute;
   display: inline-block;
   top: 4px;
@@ -887,7 +886,7 @@ body {
 }
 
 .horizontalToolbarSeparator {
-  display: block; 
+  display: block;
   margin: 0 0 4px 0;
   height: 1px;
   width: 100%;
@@ -1335,7 +1334,7 @@ canvas {
     position: static !important;
     padding: 0;
     margin: 0;
-  }  
+  }
 
   .page {
     float: left;
@@ -1348,7 +1347,7 @@ canvas {
     display: block;
   }
 
- 
+
   body[data-mozPrintCallback] #outerContainer {
     display: none;
   }
@@ -1403,7 +1402,7 @@ canvas {
   #outerContainer.sidebarOpen > #mainContainer {
     left: 0px;
   }
-  
+
   #outerContainer .hiddenLargeView,
   #outerContainer .hiddenMediumView {
     display: inherit;
@@ -1442,15 +1441,15 @@ canvas {
   #outerContainer.sidebarMoving .outerCenter,
   #outerContainer.sidebarOpen .outerCenter,
   .outerCenter {
-    left: 156px;
+    margin-left: 198px;
   }
-  
+
   .toolbarButtonSpacer {
     width: 0;
   }
 }
 
-@media all and (max-width: 510px) {
+@media all and (max-width: 600px) {
   #scaleSelectContainer, #pageNumberLabel {
     display: none;
   }
