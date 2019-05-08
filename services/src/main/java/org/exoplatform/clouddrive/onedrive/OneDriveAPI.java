@@ -3,10 +3,10 @@ package org.exoplatform.clouddrive.onedrive;
 import java.io.*;
 import java.io.File;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.*;
 import java.util.Calendar;
 import java.util.List;
 
@@ -17,9 +17,11 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.microsoft.graph.models.extensions.*;
 import com.microsoft.graph.options.HeaderOption;
+import com.microsoft.graph.options.QueryOption;
 import com.microsoft.graph.requests.extensions.GraphServiceClient;
 import com.microsoft.graph.requests.extensions.IDriveItemCollectionPage;
 import com.microsoft.graph.requests.extensions.IDriveItemCollectionRequestBuilder;
+import com.microsoft.graph.requests.extensions.IDriveItemDeltaCollectionPage;
 
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
@@ -62,11 +64,16 @@ public class OneDriveAPI {
 
   public void removeFile(String fileId) {
     graphClient.me().drive().items(fileId).buildRequest().delete();
+
   }
 
+
+  public DriveItem getRoot() {
+    return graphClient.me().drive().root().buildRequest().get();
+  }
   public DriveItem createFolder(String parentId, String name, Calendar created) {
     if (parentId == null || parentId.isEmpty()) {
-      parentId = graphClient.me().drive().root().buildRequest().get().id;
+      parentId = getRoot().id;
     }
     DriveItem folder = new DriveItem();
     folder.name = name;
@@ -165,7 +172,7 @@ public class OneDriveAPI {
   }
 
   private DriveItem retrieveDriveItemIfCreated(FileSendResponse fileSendResponse) {
-    if (fileSendResponse.responseCode == 201 && "Created".equals(fileSendResponse.responseMessage.trim())) {
+    if (fileSendResponse.responseCode == 201) {
       JsonObject jsonDriveItem = new JsonParser().parse(fileSendResponse.data).getAsJsonObject();
       DriveItem createdFile = graphClient.me().drive().items(jsonDriveItem.get("id").getAsString()).buildRequest().get();
       return createdFile;
@@ -174,13 +181,18 @@ public class OneDriveAPI {
   }
 
   private String retrieveUploadUrl(String path, DriveItemUploadableProperties driveItemUploadableProperties) {
-    return graphClient.me()
-                      .drive()
-                      .root()
-                      .itemWithPath(path)
-                      .createUploadSession(driveItemUploadableProperties)
-                      .buildRequest()
-                      .post().uploadUrl;
+      try {
+          return graphClient.me()
+                  .drive()
+                  .root()
+                  .itemWithPath(URLEncoder.encode(path, "UTF-8"))
+                  .createUploadSession(driveItemUploadableProperties)
+                  .buildRequest()
+                  .post().uploadUrl;
+      } catch (UnsupportedEncodingException e) {
+          LOG.info("unsupported encoding", e);
+          return null;
+      }
   }
 
   private DriveItemUploadableProperties prepareDriveItemUploadableProperties(String fileName,
@@ -194,14 +206,19 @@ public class OneDriveAPI {
     return driveItemUploadableProperties;
   }
 
-  public DriveItem insert(String path,
-                          String fileName,
-                          Calendar created,
-                          Calendar modified,
-                          String mimetype,
-                          InputStream inputStream) {
+
+  /**
+   * @param isInsert indicates whether the file needs to be changed or added
+   */
+  public DriveItem insertUpdate(String path,
+                      String fileName,
+                      Calendar created,
+                      Calendar modified,
+                      String mimetype,
+                      InputStream inputStream,
+                      boolean isInsert){
     DriveItemUploadableProperties driveItemUploadableProperties =
-                                                                prepareDriveItemUploadableProperties(fileName, created, modified);
+            prepareDriveItemUploadableProperties(fileName, created, modified);
     String uploadUrl = retrieveUploadUrl(path, driveItemUploadableProperties);
     byte[] file;
     try {
@@ -218,7 +235,6 @@ public class OneDriveAPI {
         to = file.length;
       }
       byte[] fileSlice = Arrays.copyOfRange(file, from, to);
-      System.out.println("send from : " + from + " " + fileSlice.length + " bytes  to " + (from + fileSlice.length));
       FileSendResponse fileSendResponse = null;
       try {
         fileSendResponse = sendFile(uploadUrl, from, fileSlice.length, file.length, fileSlice);
@@ -226,14 +242,73 @@ public class OneDriveAPI {
         LOG.info("Cannot upload part of file. ", e);
         return null;
       }
-      DriveItem driveItem = retrieveDriveItemIfCreated(fileSendResponse);
+      DriveItem driveItem = processEndOfFileUploadIfReached(fileSendResponse, isInsert);
       if (driveItem != null) {
         return driveItem;
       }
-
     }
     return null;
   }
 
+  private DriveItem processEndOfFileUploadIfReached(FileSendResponse fileSendResponse, boolean isInsert) {
+    DriveItem driveItem = null;
+    if (isInsert) {
+      driveItem = retrieveDriveItemIfCreated(fileSendResponse);
+    } else {
+      driveItem = retrieveDriveItemIfUpdated(fileSendResponse);
+    }
+    return driveItem;
+  }
+  private DriveItem retrieveDriveItemIfUpdated(FileSendResponse fileSendResponse) {
+    if (fileSendResponse.responseCode == 200) {
+      JsonObject jsonDriveItem = new JsonParser().parse(fileSendResponse.data).getAsJsonObject();
+      DriveItem updatedFile = graphClient.me().drive().items(jsonDriveItem.get("id").getAsString()).buildRequest().get();
+      return updatedFile;
+    }
+    return null;
+  }
+
+  public DriveItem insert(String path,
+                          String fileName,
+                          Calendar created,
+                          Calendar modified,
+                          String mimetype,
+                          InputStream inputStream) {
+    return insertUpdate(path,fileName,created,modified,mimetype,inputStream,true);
+  }
+
+  public DriveItem updateFileContent(String path,
+                                     String fileName,
+                                     Calendar created,
+                                     Calendar modified,
+                                     String mimetype,
+                                     InputStream inputStream) {
+
+    return insertUpdate(path,fileName,created,modified,mimetype,inputStream,false);
+  }
+
+  /**
+   *
+   * @param driveItem
+   * @return driveItem instance that contains only updated fields.
+   */
+  public DriveItem updateFile(DriveItem driveItem) {
+    return graphClient.me().drive().items(driveItem.id).buildRequest().patch(driveItem);
+  }
+
+  public DriveItem getItem(String itemId) {
+    return graphClient.me().drive().items(itemId).buildRequest().get();
+  }
+
+  public IDriveItemDeltaCollectionPage delta(String deltaToken) {
+    IDriveItemDeltaCollectionPage iDriveItemDeltaCollectionPage = null;
+    if (deltaToken == null || deltaToken.isEmpty()) {
+      iDriveItemDeltaCollectionPage = graphClient.me().drive().root().delta().buildRequest().get();
+    }else{
+      final QueryOption deltaTokenQuery = new QueryOption("token", deltaToken);
+      iDriveItemDeltaCollectionPage = graphClient.me().drive().root().delta().buildRequest(Collections.singletonList(deltaTokenQuery)).get();
+    }
+    return iDriveItemDeltaCollectionPage;
+  }
 
 }
