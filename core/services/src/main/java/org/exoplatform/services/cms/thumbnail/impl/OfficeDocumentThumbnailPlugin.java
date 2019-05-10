@@ -17,12 +17,19 @@
 package org.exoplatform.services.cms.thumbnail.impl;
 
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.util.List;
 
+import javax.imageio.ImageIO;
 import javax.jcr.Node;
 
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang.CharSet;
+import org.apache.tika.io.IOUtils;
 import org.exoplatform.container.component.ComponentPlugin;
 import org.exoplatform.container.xml.InitParams;
+import org.exoplatform.services.cms.jodconverter.JodConverterService;
+import org.exoplatform.services.cms.mimetype.DMSMimeTypeResolver;
 import org.exoplatform.services.cms.thumbnail.ThumbnailPlugin;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.log.ExoLogger;
@@ -46,10 +53,13 @@ public class OfficeDocumentThumbnailPlugin implements ComponentPlugin, Thumbnail
   private ThumbnailType config;
   private String description;
   private String name;
+  private JodConverterService jodConverter_;
+
   private static final Log LOG = ExoLogger.getExoLogger(OfficeDocumentThumbnailPlugin.class.getName());
 
-  public OfficeDocumentThumbnailPlugin(InitParams initParams) throws Exception {
+  public OfficeDocumentThumbnailPlugin(JodConverterService jodConverter, InitParams initParams) throws Exception {
     config = initParams.getObjectParamValues(ThumbnailType.class).get(0);
+    this.jodConverter_ = jodConverter;
   }
 
   public String getDescription() {
@@ -69,18 +79,18 @@ public class OfficeDocumentThumbnailPlugin implements ComponentPlugin, Thumbnail
   }
 
   public BufferedImage getBufferedImage(Node contentNode, String nodePath) throws Exception {
-    RepositoryService repositoryService = WCMCoreUtils.getService(RepositoryService.class);
-    String repository = repositoryService.getCurrentRepository().getConfiguration().getName();
-    Document pdfDocument = new Document();
     if(contentNode.isNodeType(NodetypeConstant.NT_RESOURCE)) contentNode = contentNode.getParent();
-    PDFViewerService pdfViewerService = WCMCoreUtils.getService(PDFViewerService.class);
-    pdfDocument = pdfViewerService.initDocument(contentNode,repository);
-    if (pdfDocument != null) {
-      BufferedImage image = (BufferedImage) pdfDocument.getPageImage(0, GraphicsRenderingHints.SCREEN,
-                                                                   Page.BOUNDARY_CROPBOX, 0.0f, 1.0f);
-      pdfDocument.dispose();
-      return image;
-    } else return null;
+    String mimeType = contentNode.getProperty("jcr:content").getString();
+    String extension = DMSMimeTypeResolver.getInstance().getExtension(mimeType);
+    File in = File.createTempFile(name + "_tmp", "." + extension);
+    FileUtils.writeByteArrayToFile(in, contentNode.getProperty("jcr:data").getString().getBytes());
+    File out = File.createTempFile(name + "_tmp", ".jpg");
+    boolean success = jodConverter_.convert(in, out,"jpg");
+    if (success) {
+      return ImageIO.read(out);
+    } else {
+      return null;
+    }
   }
 
 
