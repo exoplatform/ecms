@@ -4,6 +4,8 @@ import org.exoplatform.clouddrive.CloudProvider;
 import org.exoplatform.clouddrive.CloudUser;
 
 public class OneDriveUser extends CloudUser {
+  private final OneDriveAPI oneDriveAPI;
+
   /**
    * Instantiates a new cloud user.
    *
@@ -12,7 +14,12 @@ public class OneDriveUser extends CloudUser {
    * @param email {@link String}
    * @param provider the provider
    */
-  public OneDriveUser(String id, String username, String email, CloudProvider provider) {
+  public OneDriveUser(String id, String username, String email, CloudProvider provider, OneDriveAPI oneDriveAPI) {
     super(id, username, email, provider);
+    this.oneDriveAPI = oneDriveAPI;
+  }
+
+  public OneDriveAPI api() {
+    return oneDriveAPI;
   }
 }

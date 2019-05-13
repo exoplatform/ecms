@@ -63,7 +63,7 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
   @Override
   protected Long readChangeId() throws CloudDriveException, RepositoryException {
     LOG.info("readChangeId()");
-    return 0L;
+    return System.currentTimeMillis();
   }
 
   @Override
@@ -72,9 +72,9 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
   }
 
   @Override
-  public CloudUser getUser() {
+  public OneDriveUser getUser() {
     LOG.info("getUser()");
-    return this.user;
+    return (OneDriveUser) this.user;
   }
 
   @Override
@@ -82,6 +82,12 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
     LOG.info("refreshAccess()");
   }
 
+
+  @Override
+  protected void initDrive(Node driveNode) throws CloudDriveException, RepositoryException {
+    super.initDrive(driveNode);
+    driveNode.setProperty("ecd:id", getUser().api().getRoot().id);
+  }
   @Override
   protected void updateAccess(CloudUser user) throws CloudDriveException, RepositoryException {
     LOG.info("------");
@@ -106,7 +112,7 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
     initFile(fileNode,
              item.id,
              item.name,
-             "",
+             item.oDataType,
              item.webUrl,
              "",
              "",
@@ -176,11 +182,6 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
      * @throws RepositoryException
      */
     private void fetchFiles(String fileId, Node localFile) throws CloudDriveException, RepositoryException {
-      // For Test Delete Root Node;
-      // removeNode(rootNode());
-      // Node node = rootNode();
-      // removeLinks(node);
-      // node.remove();
       List<DriveItem> items = api.getChildren(fileId);
       for (DriveItem item : items) {
         // if(!isConnected(fileId, item.id)){
@@ -190,19 +191,13 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
         } else if (item.file != null) {
           jcrLocalCloudFile = openAndInitFile(item, localFile);
         }
-        // if (jcrLocalCloudFile != null) {
-        // addConnected(fileId,jcrLocalCloudFile);
-        // }
-        // }
-
       }
     }
 
-      @Override
-      protected void fetchFiles() throws CloudDriveException, RepositoryException {
-          rootNode(true).setProperty("ecd:id", api.getRoot().id);
-          fetchFiles(null, driveNode);
-      }
+    @Override
+    protected void fetchFiles() throws CloudDriveException, RepositoryException {
+      fetchFiles(null, driveNode);
+    }
 
   }
 
@@ -231,7 +226,6 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
 
     void saveDeltaToken(String deltaToken) throws RepositoryException {
         driveNode.setProperty("onedrive:changeToken",deltaToken);
-
     }
 
     String getDeltaToken() throws RepositoryException {
@@ -251,39 +245,81 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
           LOG.info("preSaveChunk()");
     }
 
-      @Override
-      protected void syncFiles() throws CloudDriveException, RepositoryException, InterruptedException {
-        LOG.info("syncFiles()");
-          List<DriveItem> changes = getLastChangesAndUpdateDeltaToken();
-          Map<String, DriveItem> changesMap = changes.stream()
-                  .collect(Collectors.toMap(driveItem -> driveItem.id, driveItem -> driveItem));
-          Set<String> tracked = new HashSet<>();
-          for (DriveItem driveItem : changes) {
-              if (driveItem.file != null) {
-                  if (driveItem.deleted == null) {
-                      Node fileNode = findNode(driveItem.id);
-                      if (fileNode == null) { // add
-                          updateParentHierarchy(fileNode, tracked);
-                          fileNode = openFile(driveItem.id, driveItem.name, findNode(driveItem.parentReference.id));
-                          initFileByDriveItem(fileNode, driveItem);
-                      } else { // update
-                            fileNode.setProperty("exo:title", driveItem.name);
-                          // renamed, moved
+    private void renameNode(DriveItem driveItem, Node fileNode) throws RepositoryException {
+      fileNode.setProperty("exo:title", driveItem.name);
+    }
 
-                      }
-                  }else{
-                    // delete
-                  }
+
+    private void addFileNode(DriveItem driveItem, Node parentNode) throws RepositoryException, CloudDriveException {
+//      updateParentHierarchy(fileNode, tracked);
+      LOG.info("Add File(): id:  " + driveItem.id + " name: " + driveItem.name + "parentId: " + driveItem.parentReference.id);
+      Node fileNode = openFile(driveItem.id, driveItem.name, parentNode);
+      initFileByDriveItem(fileNode, driveItem);
+    }
+    private void updateNode(DriveItem driveItem, Node fileNode) throws RepositoryException, CloudDriveException {
+      renameNode(driveItem,fileNode);
+      Node parentNode = this.nodes.get(driveItem.parentReference.id).get(0);
+      if (parentNode != null) {
+        String localParentNodeId = parentNode.getProperty("ecd:id").getString();
+        if (!driveItem.parentReference.id.equals(localParentNodeId)) {
+          moveFile(driveItem.id,driveItem.name,parentNode,fileNode);
+        }
+      }
+      // renamed, moved
+    }
+
+    @Override
+    protected void syncFiles() throws CloudDriveException, RepositoryException, InterruptedException {
+
+      LOG.info("syncFiles()");
+      List<DriveItem> changes = getLastChangesAndUpdateDeltaToken();
+      Map<String, DriveItem> changesMap = changes.stream()
+              .collect(Collectors.toMap(driveItem -> driveItem.id, driveItem -> driveItem));
+      Set<String> tracked = new HashSet<>();
+      if (changes.size() > 0) {
+        readLocalNodes();
+
+        for (DriveItem driveItem : changes) {
+          if (driveItem.file != null) {
+            if (driveItem.deleted == null) {
+              List<Node> nodes = null;
+              if (this.nodes.containsKey(driveItem.id)) {
+                nodes = this.nodes.get(driveItem.id);
+                LOG.info("Nodes size: " + nodes.size() + " for item with id " + driveItem.id);
               }
+              Node fileNode = null;
+              if (nodes == null || nodes.size() == 0) { // add
+                LOG.info("Add File(): id:  " + driveItem.id + " name: " + driveItem.name + "parentId: " + driveItem.parentReference.id);
+                Node parentNode = this.nodes.get(driveItem.parentReference.id).get(0);
+                addFileNode(driveItem, parentNode);
+              } else { // update
+                updateNode(driveItem, fileNode);
+              }
+            } else {
+              deleteItem(driveItem.id);
+            }
+          } else { // folder
+
           }
-
-
+        }
       }
 
-      private void updateParentHierarchy(Node fileNode, Set<String> tracked) {
-        // update Value
-        // set item tracked
+
+    }
+
+    private void deleteItem(String itemId) throws CloudDriveException, RepositoryException {
+      List<Node> existing = nodes.remove(itemId);
+      if (existing != null) {
+        for (Node en : existing) {
+          removeLocalNode(en);
+        }
       }
+    }
+    private void updateParentHierarchy(Node fileNode, Set<String> tracked) {
+
+      // update Value
+      // set item tracked
+    }
   }
 
   class OneDriveFileAPI extends AbstractFileAPI {

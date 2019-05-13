@@ -44,7 +44,6 @@ public class OneDriveConnector extends CloudDriveConnector {
               "&response_mode=query\n" +
               "&scope=https://graph.microsoft.com/Files.Read.All https://graph.microsoft.com/Files.Read https://graph.microsoft.com/Files.Read.Selected https://graph.microsoft.com/Files.ReadWrite https://graph.microsoft.com/Files.ReadWrite.All https://graph.microsoft.com/Files.ReadWrite.AppFolder https://graph.microsoft.com/Files.ReadWrite.Selected https://graph.microsoft.com/User.Read https://graph.microsoft.com/User.ReadWrite https://graph.microsoft.com/User.ReadWrite offline_access\n" +
               "&state=1233333333";
-//      e.printStackTrace();
     }
     return new OneDriveProvider(getProviderId(), getProviderName(), authUrl);
   }
@@ -52,7 +51,7 @@ public class OneDriveConnector extends CloudDriveConnector {
   @Override
   protected CloudUser authenticate(Map<String, String> params) throws CloudDriveException {
     LOG.info("authenticate: " + params.toString());
-    return new OneDriveUser("id-user1", "username", "some1@email.com", provider);
+    return new OneDriveUser("id-user1", "username", "some1@email.com", provider, new OneDriveAPI());
   }
 
   @Override
@@ -66,7 +65,7 @@ public class OneDriveConnector extends CloudDriveConnector {
     LOG.info("loadDrive");
     JCRLocalCloudDrive.checkNotTrashed(driveNode);
     JCRLocalCloudDrive.migrateName(driveNode);
-    return new JCRLocalOneDrive(new OneDriveUser("id-user1", "username", "some1@email.com", createProvider()),
+    return new JCRLocalOneDrive(new OneDriveUser("id-user1", "username", "some1@email.com", createProvider(), new OneDriveAPI()),
                                 driveNode,
                                 sessionProviders,
                                 jcrFinder,
