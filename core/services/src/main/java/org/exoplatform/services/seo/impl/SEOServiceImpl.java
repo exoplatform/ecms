@@ -24,10 +24,8 @@ import java.util.Comparator;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Locale;
-
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
-import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -36,6 +34,7 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
+import org.apache.commons.lang.StringUtils;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.container.xml.ObjectParameter;
 import org.exoplatform.ecm.utils.MessageDigester;
@@ -43,19 +42,21 @@ import org.exoplatform.management.annotations.Managed;
 import org.exoplatform.management.annotations.ManagedDescription;
 import org.exoplatform.management.annotations.ManagedName;
 import org.exoplatform.portal.application.PortalRequestContext;
+import org.exoplatform.portal.mop.SiteKey;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cache.CacheService;
 import org.exoplatform.services.cache.ExoCache;
 import org.exoplatform.services.jcr.config.WorkspaceEntry;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.seo.PageMetadataModel;
 import org.exoplatform.services.seo.SEOConfig;
 import org.exoplatform.services.seo.SEOService;
 import org.exoplatform.services.wcm.portal.LivePortalManagerService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
-
-import org.apache.commons.lang.StringUtils;
+import org.gatein.common.logging.Logger;
+import org.gatein.common.logging.LoggerFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
@@ -64,6 +65,7 @@ import org.w3c.dom.Element;
  * 17, 2011
  */
 public class SEOServiceImpl implements SEOService {
+
   private ExoCache<String, Object> cache;
 
   public static final String EMPTY_CACHE_ENTRY = "EMPTY";
@@ -86,6 +88,10 @@ public class SEOServiceImpl implements SEOService {
 
   private boolean isCached = true;
 
+  private ListenerService listenerService;
+
+  private static final Logger log = LoggerFactory.getLogger(SEOServiceImpl.class);
+
   /**
    * Constructor method
    *
@@ -93,7 +99,7 @@ public class SEOServiceImpl implements SEOService {
    *          The initial parameters
    * @throws Exception
    */
-  public SEOServiceImpl(InitParams initParams) throws Exception {
+  public SEOServiceImpl(InitParams initParams, ListenerService listenerService) throws Exception {
     ObjectParameter param = initParams.getObjectParam("seo.config");
     if (param != null) {
       seoConfig = (SEOConfig) param.getObject();
@@ -103,6 +109,7 @@ public class SEOServiceImpl implements SEOService {
     }
     cache = WCMCoreUtils.getService(CacheService.class).getCacheInstance(
             CACHE_NAME);
+    this.listenerService = listenerService;
   }
 
   /**
@@ -173,6 +180,7 @@ public class SEOServiceImpl implements SEOService {
     updateRobots(dummyNode, portalName);    
     // Store sitemap data
     Node node = null;
+    String nodePath = null;
     if (onContent) {
       node = session.getNodeByUUID(uri);
       if (!node.isNodeType("mix:referenceable")) {
@@ -180,6 +188,7 @@ public class SEOServiceImpl implements SEOService {
       }
     } else {
       node = getNavNode();
+      nodePath = Util.getUIPortal().getSelectedUserNode().getURI();
       if (!node.isNodeType("exo:seoMetadata")) {
         node.addMixin("exo:seoMetadata");
       }
@@ -241,6 +250,10 @@ public class SEOServiceImpl implements SEOService {
         cache.put(hash, metaModel);
     }
     session.save();
+    if (StringUtils.isNotBlank(nodePath)) {
+      metaModel.setUri(nodePath);
+      notify(SAVE_SEO, metaModel);
+    }
   }
 
   private String getPageOrContentCacheKey(String uri, String language) throws Exception {
@@ -455,10 +468,12 @@ public class SEOServiceImpl implements SEOService {
                                                  .getDefaultWorkspaceName(), currentRepo);
     String hash = "";
     Node node = null;
+    String nodePath = null;
     if (onContent) {
       node = session.getNodeByUUID(metaModel.getUri());
     } else {
       Node pageNode = getNavNode();
+      nodePath = Util.getUIPortal().getSelectedUserNode().getURI();
     }    
     Node seoNode = null;
     if(node.hasNode(LANGUAGES+"/"+language)) 
@@ -473,6 +488,10 @@ public class SEOServiceImpl implements SEOService {
       cache.remove(hash);
     }
     session.save();
+    if (StringUtils.isNotBlank(nodePath)) {
+      metaModel.setUri(nodePath);
+      notify(SEO_REMOVE, metaModel);
+    }
   }
 
   /**
@@ -909,5 +928,13 @@ public class SEOServiceImpl implements SEOService {
   public void setCached(
                         @ManagedDescription("Enable/Disable the cache ?") @ManagedName("isCached") boolean isCached) {
     this.isCached = isCached;
+  }
+
+  private void notify(String name, PageMetadataModel metadataModel) {
+    try {
+      listenerService.broadcast(name, this, metadataModel);
+    } catch (Exception e) {
+      log.error("Error when delivering notification " + name + " for SEO " + metadataModel, e);
+    }
   }
 }

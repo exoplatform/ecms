@@ -14,7 +14,11 @@ import javax.jcr.Node;
  * @LevelAPI Experimental
  */
 public interface SEOService {
- 
+
+  String SAVE_SEO = "org.exoplatform.ecms.seo.save";
+
+  String SEO_REMOVE = "org.exoplatform.ecms.seo.remove";
+
   /**
    * Stores metadata of a given page/content.
    * 
