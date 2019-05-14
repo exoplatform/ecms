@@ -43,6 +43,7 @@ import org.exoplatform.management.annotations.ManagedDescription;
 import org.exoplatform.management.annotations.ManagedName;
 import org.exoplatform.portal.application.PortalRequestContext;
 import org.exoplatform.portal.mop.SiteKey;
+import org.exoplatform.portal.mop.user.UserNavigation;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cache.CacheService;
 import org.exoplatform.services.cache.ExoCache;
@@ -469,11 +470,14 @@ public class SEOServiceImpl implements SEOService {
     String hash = "";
     Node node = null;
     String nodePath = null;
+    SiteKey siteKey = null;
     if (onContent) {
       node = session.getNodeByUUID(metaModel.getUri());
     } else {
       Node pageNode = getNavNode();
       nodePath = Util.getUIPortal().getSelectedUserNode().getURI();
+      UserNavigation userNavigation = Util.getUIPortal().getSelectedUserNode().getNavigation();
+      siteKey = userNavigation.getKey();
     }    
     Node seoNode = null;
     if(node.hasNode(LANGUAGES+"/"+language)) 
@@ -490,6 +494,7 @@ public class SEOServiceImpl implements SEOService {
     session.save();
     if (StringUtils.isNotBlank(nodePath)) {
       metaModel.setUri(nodePath);
+      metaModel.setSiteKey(siteKey);
       notify(SEO_REMOVE, metaModel);
     }
   }
