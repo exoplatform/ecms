@@ -49,9 +49,14 @@ public class PageElasticUnifiedSearchServiceConnector extends ElasticSearchServi
   @Override
   protected String getSourceFields() {
     List<String> fields = new ArrayList<>();
-    fields.add("pageMetadata");
-    fields.add("metaKeywords");
-    fields.add("metaDescription");
+    fields.add("seo.title");
+    fields.add("seo.keywords");
+    fields.add("seo.description");
+    fields.add("seo.rbcontent");
+    fields.add("pageTitles");
+    fields.add("descriptions");
+    fields.add("name");
+
 
     List<String> sourceFields = new ArrayList<>();
     for (String sourceField : fields) {
