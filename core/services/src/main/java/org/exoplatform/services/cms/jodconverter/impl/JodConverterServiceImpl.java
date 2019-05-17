@@ -1,6 +1,10 @@
 package org.exoplatform.services.cms.jodconverter.impl;
 
 import org.artofsolving.jodconverter.OfficeDocumentConverter;
+import org.artofsolving.jodconverter.document.DocumentFamily;
+import org.artofsolving.jodconverter.document.DocumentFormat;
+import org.artofsolving.jodconverter.document.DocumentFormatRegistry;
+import org.artofsolving.jodconverter.document.SimpleDocumentFormatRegistry;
 import org.artofsolving.jodconverter.office.DefaultOfficeManagerConfiguration;
 import org.artofsolving.jodconverter.office.OfficeException;
 import org.artofsolving.jodconverter.office.OfficeManager;
@@ -11,6 +15,7 @@ import org.exoplatform.services.log.Log;
 import org.picocontainer.Startable;
 
 import java.io.File;
+import java.util.Collections;
 
 /**
  * {@inheritDoc}
@@ -111,6 +116,15 @@ public class JodConverterServiceImpl implements JodConverterService, Startable {
       try {
         officeManager = configuration.buildOfficeManager();
         documentConverter = new OfficeDocumentConverter(officeManager);
+        DocumentFormatRegistry documentFormatRegistry = documentConverter.getFormatRegistry();
+        if (documentFormatRegistry instanceof SimpleDocumentFormatRegistry) {
+          DocumentFormat jpg = new DocumentFormat("JPEG Image", "jpg", "image/jpeg");
+          jpg.setInputFamily(DocumentFamily.DRAWING);
+          jpg.setStoreProperties(DocumentFamily.TEXT, Collections.singletonMap("FilterName", "writer_jpg_Export"));
+          ((SimpleDocumentFormatRegistry) documentFormatRegistry).addFormat(jpg);
+        } else {
+          LOG.warn("Can't add a specific document format for thumbnail generation from a Word Document.");
+        }
       } catch (IllegalStateException ise) {
         if (LOG.isErrorEnabled()) {
           LOG.equals(ise.getMessage());
@@ -158,23 +172,23 @@ public class JodConverterServiceImpl implements JodConverterService, Startable {
  */
   public boolean convert(File input, File output, String outputFormat) throws OfficeException {
     if(!enable) {
-      if (LOG.isWarnEnabled()) {
-        LOG.warn("JodConverter is disabled so you cannot view this document! " +
-        		"To enable it, please change wcm.jodconverter.enable=true in configuration.properties file");
-        return false;
-      }
+      LOG.debug("JodConverter is disabled so you cannot view this document! " +
+              "To enable it, please change wcm.jodconverter.enable=true in configuration.properties file");
+      return false;
     }
     if (officeManager != null && officeManager.isRunning()) {
       if (documentConverter != null) {
+        DocumentFormat documentFormat = documentConverter.getFormatRegistry().getFormatByExtension(outputFormat);
+        if (documentFormat == null) {
+          LOG.warn("Can't convert file {} because no corresponding document conversion for extension '{}'", input.getPath(), outputFormat);
+          return false;
+        }
     	try {
-          documentConverter.convert(input,
-                                  output,
-                                  documentConverter.getFormatRegistry()
-                                                   .getFormatByExtension(outputFormat));
+          documentConverter.convert(input, output, documentFormat);
           return true;
     	} catch (Exception e){
-    	  if (LOG.isTraceEnabled()) LOG.trace("Failed to convert file: " + input.getPath(), e);
-    	  return false;
+          LOG.warn("Failed to convert file {} to '{}'", input.getPath(), outputFormat, e);
+          return false;
     	}
       }
       return false;
