@@ -1,15 +1,18 @@
 package org.exoplatform.clouddrive.onedrive;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.*;
 import java.util.stream.Collectors;
 
 import javax.jcr.Node;
+import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
 
 import com.microsoft.graph.models.extensions.DriveItem;
 import com.microsoft.graph.models.extensions.FileSystemInfo;
 import com.microsoft.graph.models.extensions.ItemReference;
+import com.microsoft.graph.models.extensions.SharingLink;
 import com.microsoft.graph.requests.extensions.IDriveItemDeltaCollectionPage;
 import com.microsoft.graph.requests.extensions.IDriveItemDeltaCollectionRequestBuilder;
 
@@ -30,17 +33,53 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
    */
   private static final Log    LOG = ExoLogger.getLogger(JCRLocalOneDrive.class);
 
-  protected final OneDriveAPI api = new OneDriveAPI();
+//  protected final OneDriveAPI api = getUser().api();
 
   protected JCRLocalOneDrive(CloudUser user,
                              Node driveNode,
                              SessionProviderService sessionProviders,
                              NodeFinder finder,
                              ExtendedMimeTypeResolver mimeTypes)
-      throws CloudDriveException,
-      RepositoryException {
+      throws CloudDriveException, RepositoryException {
     super(user, driveNode, sessionProviders, finder, mimeTypes);
+    if (LOG.isDebugEnabled()) {
+      LOG.debug("JCRLocalOneDrive():  ");
+    }
   }
+
+  protected JCRLocalOneDrive(OneDriveConnector.API apiBuilder,
+                             OneDriveProvider provider,
+                             Node driveNode,
+                             SessionProviderService sessionProviders,
+                             NodeFinder finder,
+                             ExtendedMimeTypeResolver mimeTypes)
+          throws RepositoryException, CloudDriveException, IOException {
+      super(loadUser(apiBuilder, provider, driveNode), driveNode, sessionProviders, finder, mimeTypes);
+//    getUser().api().getToken().addListener(this);
+  }
+
+
+  protected static OneDriveUser loadUser(OneDriveConnector.API apiBuilder, OneDriveProvider provider, Node driveNode) throws RepositoryException,
+          CloudDriveException, IOException {
+    if (LOG.isDebugEnabled()) {
+      LOG.debug("LoadUser(): ");
+    }
+    String username = driveNode.getProperty("ecd:cloudUserName").getString();
+    String email = driveNode.getProperty("ecd:userEmail").getString();
+    String userId = driveNode.getProperty("ecd:cloudUserId").getString();
+    String accessToken = driveNode.getProperty("onedrive:oauth2AccessToken").getString();
+    String refreshToken;
+    try {
+      refreshToken = driveNode.getProperty("onedrive:oauth2RefreshToken").getString();
+    } catch (PathNotFoundException e) {
+      refreshToken = null;
+    }
+    long expirationTime = driveNode.getProperty("onedrive:oauth2TokenExpirationTime").getLong();
+    OneDriveAPI driveAPI = apiBuilder.load(refreshToken, accessToken, expirationTime).build();
+
+    return new OneDriveUser(userId, username, email, provider, driveAPI);
+  }
+
 
   @Override
   protected ConnectCommand getConnectCommand() throws DriveRemovedException, RepositoryException {
@@ -80,6 +119,7 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
   @Override
   protected void refreshAccess() throws CloudDriveException {
     LOG.info("refreshAccess()");
+    getUser().api().refreshToken();
   }
 
 
@@ -87,6 +127,7 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
   protected void initDrive(Node driveNode) throws CloudDriveException, RepositoryException {
     super.initDrive(driveNode);
     driveNode.setProperty("ecd:id", getUser().api().getRoot().id);
+
   }
   @Override
   protected void updateAccess(CloudUser user) throws CloudDriveException, RepositoryException {
@@ -95,12 +136,65 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
 
   @Override
   public void onUserTokenRefresh(UserToken token) throws CloudDriveException {
-    LOG.info("------");
+    if (LOG.isDebugEnabled()) {
+      LOG.debug("onUserTokenRefresh(): ");
+    }
+    try {
+      jcrListener.disable();
+      Node driveNode = rootNode();
+      try {
+        driveNode.setProperty("onedrive:oauth2AccessToken", token.getAccessToken());
+        driveNode.setProperty("onedrive:oauth2RefreshToken", token.getRefreshToken());
+        driveNode.setProperty("onedrive:oauth2TokenExpirationTime", token.getExpirationTime());
+
+        driveNode.save();
+      } catch (RepositoryException e) {
+        rollback(driveNode);
+        throw new CloudDriveException("Error updating access key: " + e.getMessage(), e);
+      }
+    } catch (DriveRemovedException e) {
+      throw new CloudDriveException("Error openning drive node: " + e.getMessage(), e);
+    } catch (RepositoryException e) {
+      throw new CloudDriveException("Error reading drive node: " + e.getMessage(), e);
+    } finally {
+      jcrListener.enable();
+    }
   }
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
   public void onUserTokenRemove() throws CloudDriveException {
-    LOG.info("------");
+    if (LOG.isDebugEnabled()) {
+      LOG.debug("onUserTokenRemove(): ");
+    }
+    try {
+      jcrListener.disable();
+      Node driveNode = rootNode();
+      try {
+        if (driveNode.hasProperty("onedrive:oauth2AccessToken")) {
+          driveNode.getProperty("onedrive:oauth2AccessToken").remove();
+        }
+        if (driveNode.hasProperty("onedrive:oauth2RefreshToken")) {
+          driveNode.getProperty("onedrive:oauth2RefreshToken").remove();
+        }
+        if (driveNode.hasProperty("onedrive:oauth2TokenExpirationTime")) {
+          driveNode.getProperty("onedrive:oauth2TokenExpirationTime").remove();
+        }
+
+        driveNode.save();
+      } catch (RepositoryException e) {
+        rollback(driveNode);
+        throw new CloudDriveException("Error removing access key: " + e.getMessage(), e);
+      }
+    } catch (DriveRemovedException e) {
+      throw new CloudDriveException("Error openning drive node: " + e.getMessage(), e);
+    } catch (RepositoryException e) {
+      throw new CloudDriveException("Error reading drive node: " + e.getMessage(), e);
+    } finally {
+      jcrListener.enable();
+    }
   }
 
   private void initFolderByDriveItem(Node fileNode, DriveItem item) throws RepositoryException {
@@ -108,20 +202,21 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
 
   }
 
-  private void initFileByDriveItem(Node fileNode, DriveItem item) throws RepositoryException {
-    initFile(fileNode,
-            item.id,
-            item.name,
-            item.file.mimeType,
-            item.webUrl,
-            "",
-            "",
-            "",
-            "",
-            item.createdDateTime,
-            item.lastModifiedDateTime,
-            item.size);
-  }
+    private void initFileByDriveItem(Node fileNode, DriveItem item) throws RepositoryException {
+      final SharingLink link = getUser().api().createLink(item.id);
+      initFile(fileNode,
+                item.id,
+                item.name,
+                item.file.mimeType,
+                item.webUrl,
+                link.webUrl,
+                "",
+                "",
+                "",
+                item.createdDateTime,
+                item.lastModifiedDateTime,
+                item.size);
+    }
 
   private JCRLocalCloudFile createCloudFolderByDriveItem(Node fileNode, DriveItem item) throws RepositoryException {
     return new JCRLocalCloudFile(fileNode.getPath(),
@@ -138,27 +233,32 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
   }
 
   private JCRLocalCloudFile createCloudFileByDriveItem(Node fileNode, DriveItem item) throws RepositoryException {
+    final SharingLink link = getUser().api().createLink(item.id);
     return new JCRLocalCloudFile(fileNode.getPath(),
-                                 item.id,
-                                 item.name,
-                                 item.webUrl,
-                                 item.file.mimeType,
-                                 "lastUser",
-                                 "author",
-                                 Calendar.getInstance(),
-                                 Calendar.getInstance(),
-                                 fileNode,
-                                 true);
+            item.id,
+            item.name,
+            item.webUrl,
+            item.file.mimeType,
+            "lastUser",
+            "author",
+            Calendar.getInstance(),
+            Calendar.getInstance(),
+            fileNode,
+            true);
   }
 
   class OneDriveConnectCommand extends ConnectCommand {
+
+    private final OneDriveAPI api;
+
     /**
      * Connect command constructor.
      *
-     * @throws RepositoryException the repository exception
+     * @throws RepositoryException   the repository exception
      * @throws DriveRemovedException the drive removed exception
      */
     OneDriveConnectCommand() throws RepositoryException, DriveRemovedException {
+      this.api = getUser().api();
     }
 
     private JCRLocalCloudFile openAndInitFolder(DriveItem item, Node localFile) throws RepositoryException, CloudDriveException {
@@ -176,7 +276,7 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
     }
 
     /**
-     * @param fileId fileId at site
+     * @param fileId    fileId at site
      * @param localFile jcr node
      * @throws CloudDriveException
      * @throws RepositoryException
@@ -202,6 +302,12 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
   }
 
   protected class OneDriveSyncCommand extends SyncCommand {
+
+    private final OneDriveAPI api;
+
+    OneDriveSyncCommand() {
+      this.api = getUser().api();
+    }
 
     public List<DriveItem> getLastChangesAndUpdateDeltaToken() throws RepositoryException {
       String deltaToken = getDeltaToken();
@@ -271,7 +377,6 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
           moveFile(driveItem.id, driveItem.name, fileNode, destParentNode);
         }
       }
-      // renamed, moved
     }
 
     @Override
@@ -307,8 +412,6 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
           } else { // folder
 
             if (driveItem.deleted == null) {
-
-            }else{
               List<Node> nodes = null;
               if (this.nodes.containsKey(driveItem.id)) {
                 nodes = this.nodes.get(driveItem.id);
@@ -323,6 +426,8 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
                 Node fileNode = nodes.get(0);
                 updateNode(driveItem,fileNode);
               }
+            }else{
+              deleteItem(driveItem.id);
             }
 
           }
@@ -354,6 +459,12 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
   }
 
   class OneDriveFileAPI extends AbstractFileAPI {
+
+    private OneDriveAPI api;
+
+    OneDriveFileAPI(){
+      this.api = getUser().api();
+    }
 
     @Override
     public boolean removeFile(String id) throws CloudDriveException, RepositoryException {
@@ -424,11 +535,11 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
       String path = extractAppropriateOneDrivePath(fileNode);
       LOG.info("One Drive Path: " + path);
       DriveItem createdDriveItem = api.insert(path,
-                                              getTitle(fileNode),
-                                              created,
-                                              modified,
-                                              mimeType,
-                                              content);
+              getTitle(fileNode),
+              created,
+              modified,
+              mimeType,
+              content);
       if (createdDriveItem != null) {
         initFileByDriveItem(fileNode, createdDriveItem);
         return createCloudFileByDriveItem(fileNode, createdDriveItem);
@@ -487,11 +598,11 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
                                        InputStream content) throws CloudDriveException, RepositoryException {
       LOG.info("updateFileContent(): ");
       DriveItem updatedDriveItem = api.updateFileContent(extractAppropriateOneDrivePath(fileNode),
-                                                         getTitle(fileNode),
-                                                         null,
-                                                         modified,
-                                                         mimeType,
-                                                         content);
+              getTitle(fileNode),
+              null,
+              modified,
+              mimeType,
+              content);
       if (updatedDriveItem != null) {
         initFileByDriveItem(fileNode, updatedDriveItem);
         return createCloudFileByDriveItem(fileNode, updatedDriveItem);

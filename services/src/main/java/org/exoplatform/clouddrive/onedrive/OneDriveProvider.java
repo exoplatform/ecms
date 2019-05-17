@@ -28,7 +28,7 @@ public class OneDriveProvider extends CloudProvider {
 
   @Override
   public boolean retryOnProviderError() {
-    LOG.info("getAuthURL()");
+    LOG.info("retryOnProviderError()");
     return false;
   }
 }

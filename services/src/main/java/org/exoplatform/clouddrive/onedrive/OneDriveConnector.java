@@ -9,6 +9,8 @@ import java.util.Map;
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 
+import com.microsoft.graph.models.extensions.User;
+
 import org.exoplatform.clouddrive.*;
 import org.exoplatform.clouddrive.jcr.JCRLocalCloudDrive;
 import org.exoplatform.clouddrive.jcr.NodeFinder;
@@ -31,6 +33,53 @@ public class OneDriveConnector extends CloudDriveConnector {
     super(jcrService, sessionProviders, finder, mimeTypes, params);
   }
 
+
+  class API {
+
+    /** The access token. */
+    String code, refreshToken, accessToken;
+
+    /** The expiration time. */
+    long   expirationTime;
+
+    /**
+     * Authenticate to the API with OAuth2 code returned on callback url.
+     *
+     * @param code String
+     * @return this API
+     */
+    API auth(String code) {
+      this.code = code;
+      return this;
+    }
+
+    /**
+     * Authenticate to the API with locally stored tokens.
+     *
+     * @param refreshToken the refresh token
+     * @param accessToken the access token
+     * @param expirationTime the expiration time
+     * @return this API
+     */
+    API load(String refreshToken, String accessToken, long expirationTime) {
+      this.refreshToken = refreshToken;
+      this.accessToken = accessToken;
+      this.expirationTime = expirationTime;
+      return this;
+    }
+
+    OneDriveAPI build() throws CloudDriveException, IOException {
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("OneDriveAPI build():  ");
+        }
+      if (code != null && code.length() > 0) {
+        return new OneDriveAPI(getClientId(), getClientSecret(), code);
+      } else {
+        return new OneDriveAPI(getClientId(), getClientSecret(), accessToken, refreshToken, expirationTime);
+      }
+    }
+  }
+
   @Override
   protected CloudProvider createProvider() throws ConfigurationException {
     String authUrl = "";
@@ -48,16 +97,48 @@ public class OneDriveConnector extends CloudDriveConnector {
     return new OneDriveProvider(getProviderId(), getProviderName(), authUrl);
   }
 
-  @Override
-  protected CloudUser authenticate(Map<String, String> params) throws CloudDriveException {
-    LOG.info("authenticate: " + params.toString());
-    return new OneDriveUser("id-user1", "username", "some1@email.com", provider, new OneDriveAPI());
-  }
+    @Override
+    protected CloudUser authenticate(Map<String, String> params) throws CloudDriveException {
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("authentificate():  ");
+        }
+        String code = params.get(OAUTH2_CODE);
+        if (code != null && code.length() > 0) {
+            OneDriveAPI driveAPI = null;
+            try {
+                driveAPI = new API().auth(code).build();
+            } catch (IOException e) {
+                throw new CloudDriveException("Unnable to build OneDriveAPI");
+            }
+            User driveAPIUser = driveAPI.getUser();
+            if (driveAPIUser != null) {
+                if (LOG.isDebugEnabled()) {
+                    LOG.debug("driveAPIUSER!=null:  ");
+                }
+                OneDriveUser user = new OneDriveUser(driveAPIUser.id, driveAPIUser.userPrincipalName, driveAPIUser.userPrincipalName, provider, driveAPI);
+                return user;
+            } else {
+                return null;
+            }
+        } else {
+            throw new CloudDriveException("Access code should not be null or empty");
+        }
+
+//    LOG.info("authenticate: " + params.toString());
+//    return new OneDriveUser("id-user1", "username", "some1@email.com", provider, new OneDriveAPI());
+    }
 
   @Override
   protected JCRLocalOneDrive createDrive(CloudUser user, Node driveNode) throws CloudDriveException, RepositoryException {
     LOG.info("createDrive");
+      if (LOG.isDebugEnabled()) {
+          LOG.debug("createDrive() User: id = "  + user.getId() + " email = " + user.getEmail() + " username = " + user.getUsername());
+      }
     return new JCRLocalOneDrive(user, driveNode, sessionProviders, jcrFinder, mimeTypes);
+  }
+  @Override
+  protected OneDriveProvider getProvider() {
+    return (OneDriveProvider) super.getProvider();
   }
 
   @Override
@@ -65,10 +146,17 @@ public class OneDriveConnector extends CloudDriveConnector {
     LOG.info("loadDrive");
     JCRLocalCloudDrive.checkNotTrashed(driveNode);
     JCRLocalCloudDrive.migrateName(driveNode);
-    return new JCRLocalOneDrive(new OneDriveUser("id-user1", "username", "some1@email.com", createProvider(), new OneDriveAPI()),
-                                driveNode,
-                                sessionProviders,
-                                jcrFinder,
-                                mimeTypes);
+      try {
+          return new JCRLocalOneDrive(new API(), getProvider(), driveNode, sessionProviders, jcrFinder, mimeTypes);
+      } catch (IOException e) {
+          e.printStackTrace();
+      }
+
+//    return new JCRLocalOneDrive(new OneDriveUser("id-user1", "username", "some1@email.com", createProvider(), new OneDriveAPI()),
+//                                driveNode,
+//                                sessionProviders,
+//                                jcrFinder,
+//                                mimeTypes);
+      return null;
   }
 }
