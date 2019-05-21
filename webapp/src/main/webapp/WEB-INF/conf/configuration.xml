@@ -24,7 +24,7 @@
   xsi:schemaLocation="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd http://www.exoplatform.org/xml/ns/kernel_1_2.xsd"
   xmlns="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd">
 
-  <!-- Google Drive namespace for use within JCR -->
+  <!-- One Drive namespace for use within JCR -->
   <external-component-plugins>
     <target-component>org.exoplatform.services.jcr.RepositoryService</target-component>
     <component-plugin>

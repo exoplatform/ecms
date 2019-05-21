@@ -33,6 +33,7 @@ import com.microsoft.graph.requests.extensions.IDriveItemDeltaCollectionPage;
 
 import org.exoplatform.clouddrive.CloudDriveException;
 import org.exoplatform.clouddrive.oauth2.UserToken;
+import org.exoplatform.clouddrive.utils.ChunkIterator;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 
@@ -96,11 +97,11 @@ public class OneDriveAPI {
         return graphClient.me().drive().items(itemId).createLink("embed", null).buildRequest().post().link;
     }
   private final static String SCOPES =
-                                     "https://graph.microsoft.com/Files.Read.All https://graph.microsoft.com/Files.Read https://graph.microsoft.com/Files.Read.Selected https://graph.microsoft.com/Files.ReadWrite https://graph.microsoft.com/Files.ReadWrite.All https://graph.microsoft.com/Files.ReadWrite.AppFolder https://graph.microsoft.com/Files.ReadWrite.Selected https://graph.microsoft.com/User.Read https://graph.microsoft.com/User.ReadWrite https://graph.microsoft.com/User.ReadWrite offline_access";
+                                     "https://graph.microsoft.com/Files.Read.All https://graph.microsoft.com/Files.Read https://graph.microsoft.com/Files.Read.Selected https://graph.microsoft.com/Files.ReadWrite https://graph.microsoft.com/Files.ReadWrite.All https://graph.microsoft.com/Files.ReadWrite.AppFolder https://graph.microsoft.com/Files.ReadWrite.Selected https://graph.microsoft.com/User.Read https://graph.microsoft.com/User.ReadWrite https://graph.microsoft.com/User.ReadWrite offline_access https://graph.microsoft.com/User.ReadWrite.All";
 
   private void initGraphClient() {
     this.graphClient = GraphServiceClient.builder().authenticationProvider(iHttpRequest -> {
-      iHttpRequest.getHeaders().add(new HeaderOption("Authorization", "Bearer " + getToken()));
+      iHttpRequest.getHeaders().add(new HeaderOption("Authorization", "Bearer " + getAccessToken()));
     }).buildClient();
   }
 
@@ -156,7 +157,8 @@ public class OneDriveAPI {
   // }
   // }
 
-  private String getToken() {
+
+  private String getAccessToken() {
     return accessToken;
 //    return storedToken.getAccessToken();
     // //
@@ -169,6 +171,15 @@ public class OneDriveAPI {
     // e.printStackTrace();
     // }
     // return null;
+  }
+
+  public void updateToken(OneDriveStoredToken newToken) {
+    try {
+      this.accessToken = newToken.getAccessToken();
+      this.storedToken.merge(newToken);
+    } catch (CloudDriveException e) {
+      e.printStackTrace();
+    }
   }
 
   class OneDriveStoredToken extends UserToken {
@@ -236,6 +247,10 @@ public class OneDriveAPI {
 
   public List<DriveItem> getChildren(String folderId) {
     return getFiles(folderId);
+  }
+
+  public OneDriveStoredToken getStoredToken() {
+    return storedToken;
   }
 
   public void refreshToken() {
@@ -355,10 +370,15 @@ public class OneDriveAPI {
     return driveItemUploadableProperties;
   }
 
+  public DriveItem untrash(String fileId) {
+    DirectoryObject directoryObject = graphClient.directory().deletedItems(fileId).restore().buildRequest().post();
+    return getItem(fileId);
+  }
+
   /**
    * @param isInsert indicates whether the file needs to be changed or added
    */
-  public DriveItem insertUpdate(String path,
+  private DriveItem insertUpdate(String path,
                                 String fileName,
                                 Calendar created,
                                 Calendar modified,
@@ -462,6 +482,39 @@ public class OneDriveAPI {
                                                  .get();
     }
     return iDriveItemDeltaCollectionPage;
+  }
+
+
+
+  public ChildIterator getChildIterator(String folderId){
+    return new ChildIterator(folderId);
+  }
+
+  class ChildIterator extends ChunkIterator<DriveItem> {
+
+    /** The request. */
+    final List<DriveItem> items;
+
+    ChildIterator(String folderId)  {
+
+      this.items = getChildren(folderId);
+      // fetch first page
+      iter = nextChunk();
+
+    }
+
+    @Override
+    protected Iterator<DriveItem> nextChunk() {
+      available(items.size());
+      return items.iterator();
+    }
+
+    @Override
+    protected boolean hasNextChunk()
+    {
+      return false;
+//      return request.getPageToken() != null && request.getPageToken().length() > 0;
+    }
   }
 
 }

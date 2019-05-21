@@ -31,6 +31,9 @@ public class OneDriveConnector extends CloudDriveConnector {
                            InitParams params)
       throws ConfigurationException {
     super(jcrService, sessionProviders, finder, mimeTypes, params);
+      if (LOG.isDebugEnabled()) {
+          LOG.debug("OneDriveConnector():  ");
+      }
   }
 
 
@@ -82,6 +85,9 @@ public class OneDriveConnector extends CloudDriveConnector {
 
   @Override
   protected CloudProvider createProvider() throws ConfigurationException {
+      if (LOG.isDebugEnabled()) {
+          LOG.debug("createProvider():  ");
+      }
     String authUrl = "";
     try {
       authUrl = new String(Files.readAllBytes(new File(System.getProperty("user.home") + "/authurl.txt").toPath()), Charset.forName("UTF-8"));
@@ -91,8 +97,10 @@ public class OneDriveConnector extends CloudDriveConnector {
               "&response_type=code\n" +
               "&redirect_uri=http://localhost:8080/portal/rest/clouddrive/connect/onedrive\n" +
               "&response_mode=query\n" +
-              "&scope=https://graph.microsoft.com/Files.Read.All https://graph.microsoft.com/Files.Read https://graph.microsoft.com/Files.Read.Selected https://graph.microsoft.com/Files.ReadWrite https://graph.microsoft.com/Files.ReadWrite.All https://graph.microsoft.com/Files.ReadWrite.AppFolder https://graph.microsoft.com/Files.ReadWrite.Selected https://graph.microsoft.com/User.Read https://graph.microsoft.com/User.ReadWrite https://graph.microsoft.com/User.ReadWrite offline_access\n" +
+              "&scope=https://graph.microsoft.com/Files.Read.All https://graph.microsoft.com/Files.Read https://graph.microsoft.com/Files.Read.Selected https://graph.microsoft.com/Files.ReadWrite https://graph.microsoft.com/Files.ReadWrite.All https://graph.microsoft.com/Files.ReadWrite.AppFolder https://graph.microsoft.com/Files.ReadWrite.Selected https://graph.microsoft.com/User.Read https://graph.microsoft.com/User.ReadWrite https://graph.microsoft.com/User.ReadWrite offline_access https://graph.microsoft.com/User.ReadWrite.All\n" +
               "&state=1233333333";
+
+      // Directory.AccessAsUser.All
     }
     return new OneDriveProvider(getProviderId(), getProviderName(), authUrl);
   }
@@ -134,6 +142,7 @@ public class OneDriveConnector extends CloudDriveConnector {
       if (LOG.isDebugEnabled()) {
           LOG.debug("createDrive() User: id = "  + user.getId() + " email = " + user.getEmail() + " username = " + user.getUsername());
       }
+//      driveNode.getSession().
     return new JCRLocalOneDrive(user, driveNode, sessionProviders, jcrFinder, mimeTypes);
   }
   @Override
