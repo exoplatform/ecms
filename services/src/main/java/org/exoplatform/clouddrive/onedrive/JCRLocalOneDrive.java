@@ -372,7 +372,9 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
       LOG.info("preSaveChunk()");
     }
 
+    @Deprecated
     private void renameNode(DriveItem driveItem, Node fileNode) throws RepositoryException {
+      // TODO this will not actualy rename the node, only its property with exo:title
       fileNode.setProperty("exo:title", driveItem.name);
     }
 
@@ -384,18 +386,14 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
     }
 
     private void updateNode(DriveItem driveItem, Node fileNode) throws RepositoryException, CloudDriveException {
-
-      renameNode(driveItem, fileNode);
+      // TODO rename means move I guess, use moveFile()
+      renameNode(driveItem, fileNode); 
       LOG.info("updateNode(): try get parentNode.");
-      Node parentNode = fileNode.getParent();
-      if (parentNode != null) {
-        LOG.info("parent node!=null");
-        String localParentNodeId = parentNode.getProperty("ecd:id").getString();
-        if (!driveItem.parentReference.id.equals(localParentNodeId)) {
-          Node destParentNode = this.nodes.get(driveItem.parentReference.id).get(0);
-          LOG.info("MOVE FILE(): ");
-          moveFile(driveItem.id, driveItem.name, fileNode, destParentNode);
-        }
+      String localParentNodeId = fileAPI.getParentId(fileNode);
+      if (!driveItem.parentReference.id.equals(localParentNodeId)) {
+        Node destParentNode = this.nodes.get(driveItem.parentReference.id).get(0);
+        LOG.info("MOVE FILE(): ");
+        moveFile(driveItem.id, driveItem.name, fileNode, destParentNode);
       }
     }
 
