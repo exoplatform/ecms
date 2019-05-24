@@ -1,0 +1,58 @@
+.uiIconEcmsConnectOnedrive {
+    height: 14px !important;
+    width: 14px !important;
+}
+
+.uiIconEcmsConnectOnedrive:before {
+    content: url("icons/onedrive-gray-14x14.png");
+}
+
+.uiIconEcmsConnectDialog-onedrive:before {
+    content: url("icons/onedrive-gray-24x24.png");
+}
+
+.uiIcon16x16CloudFile-onedrive {
+    top: 3px;
+}
+
+.uiIcon16x16CloudFile-onedrive:before {
+    content: url("icons/onedrive-gray-14x14.png");
+}
+
+.uiIcon16x16CloudDrive-onedrive:before {
+    left: -15px;
+    top: 0px;
+    width: 16px;
+    height: 16px;
+    position: absolute !important;
+    -webkit-transform: scale(0.5);
+    -moz-transform: scale(0.5);
+    -o-transform: scale(0.5);
+    -ms-transform: scale(0.5);
+    transform: scale(0.5);
+    content: url("icons/onedrive-gray-16x16.png");
+}
+
+.uiIcon24x24CloudDrive-onedrive:before {
+    left: 3px;
+    top: -21px;
+    width: 20px;
+    height: 20px;
+    position: relative !important;
+    display: inline-block;
+    -webkit-transform: scale(0.8);
+    -moz-transform: scale(0.8);
+    -o-transform: scale(0.8);
+    -ms-transform: scale(0.8);
+    transform: scale(0.8);
+    content: url("icons/onedrive-gray-16x16.png");
+}
+
+.uiIcon64x64CloudDrive-onedrive:before {
+    left: -50px;
+    top: -4px;
+    width: 40px;
+    height: 40px;
+    position: absolute !important;
+    content: url("icons/onedrive-gray-32x32.png");
+}

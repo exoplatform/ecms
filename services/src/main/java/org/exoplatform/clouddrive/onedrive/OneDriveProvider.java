@@ -22,13 +22,14 @@ public class OneDriveProvider extends CloudProvider {
 
   @Override
   public String getAuthURL() throws CloudDriveException {
-//    LOG.info("getAuthURL: " + this.authUrl);
     return this.authUrl;
   }
 
   @Override
   public boolean retryOnProviderError() {
-    LOG.info("retryOnProviderError()");
+    if (LOG.isDebugEnabled()) {
+      LOG.debug("retryOnProviderError()");
+    }
     return false;
   }
 }
