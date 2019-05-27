@@ -89,7 +89,8 @@ public class OneDriveConnector extends CloudDriveConnector {
     StringBuilder authUrl = new StringBuilder("https://login.microsoftonline.com/common/oauth2/v2.0/authorize?");
     authUrl.append("response_type=code")
            .append("&redirect_uri=")
-           .append("http://")
+           .append(getConnectorSchema())
+           .append("://")
            .append(getConnectorHost())
            .append("/portal/rest/clouddrive/connect/onedrive")
            .append("&response_mode=query")
