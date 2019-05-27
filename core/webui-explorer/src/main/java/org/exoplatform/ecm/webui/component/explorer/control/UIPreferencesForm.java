@@ -21,8 +21,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletResponse;
+import javax.portlet.PortletRequest;
+import javax.servlet.http.*;
 
 import org.exoplatform.ecm.jcr.model.Preference;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
@@ -185,7 +185,7 @@ public class UIPreferencesForm extends UIForm implements UIPopupComponent {
           .append(ACTION)
           .append("\" value=\"\"/>");
     writer.append("<input type=\"hidden\" name=\"").append(CSRFTokenUtil.CSRF_TOKEN).append("\" value=\"");
-    writer.append(CSRFTokenUtil.getToken());
+    writer.append(CSRFTokenUtil.getToken(org.exoplatform.webui.Util.getRequest()));
     writer.append("\"/></div>");
   }
 
@@ -300,4 +300,5 @@ public class UIPreferencesForm extends UIForm implements UIPopupComponent {
       event.getRequestContext().addUIComponentToUpdateByAjax(uiPreferencesForm.getParent());
     }
   }
+
 }
