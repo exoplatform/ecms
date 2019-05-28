@@ -4,7 +4,7 @@
   <parent>
     <artifactId>ecms-testsuite</artifactId>
     <groupId>org.exoplatform.ecms</groupId>
-    <version>5.2.x-acc222-SNAPSHOT</version>
+    <version>5.2.1-acc222-01</version>
   </parent>
   <artifactId>ecms-testsuite-test</artifactId>
   <name>eXo PLF:: ECMS Testing</name>
