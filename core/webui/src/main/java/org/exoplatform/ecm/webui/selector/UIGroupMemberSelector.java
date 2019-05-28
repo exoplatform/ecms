@@ -4,15 +4,17 @@
  **************************************************************************/
 package org.exoplatform.ecm.webui.selector;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
+import org.exoplatform.portal.config.UserACL;
 import org.exoplatform.services.organization.Group;
 import org.exoplatform.services.organization.MembershipType;
 import org.exoplatform.services.organization.OrganizationService;
+import org.exoplatform.services.security.ConversationState;
+import org.exoplatform.services.security.Identity;
 import org.exoplatform.services.security.IdentityConstants;
+import org.exoplatform.services.security.MembershipEntry;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.ComponentConfigs;
@@ -56,10 +58,14 @@ import org.exoplatform.webui.form.UIForm;
   }
 )
 
-public class UIGroupMemberSelector extends UIContainer implements ComponentSelector{
+public class UIGroupMemberSelector extends UIContainer implements ComponentSelector {
 
   /** The Constant defaultValue. */
   final static public String defaultValue    = "/admin";
+
+  private OrganizationService organizationService;
+
+  private UserACL userACL;
 
   /** The ui component. */
   private UIComponent        uiComponent;
@@ -84,20 +90,22 @@ public class UIGroupMemberSelector extends UIContainer implements ComponentSelec
   private List<String> listMemberhip;
 
   public UIGroupMemberSelector() throws Exception {
+    organizationService = getApplicationComponent(OrganizationService.class);
+    userACL = getApplicationComponent(UserACL.class);
+
     addChild(UIAnyPermission.class, null, "UIQueriesAnyPermission");
     UIBreadcumbs uiBreadcumbs = addChild(UIBreadcumbs.class, "BreadcumbMembershipSelector", "BreadcumbMembershipSelector") ;
     UITree tree = addChild(UITree.class, "UITreeMembershipSelector", "TreeMembershipSelector");
     OrganizationService service = WCMCoreUtils.getService(OrganizationService.class);
-    Collection<?> sibblingsGroup = service.getGroupHandler().findGroups(null);
 
     Collection<?> collection = service.getMembershipTypeHandler().findMembershipTypes();
-    listMemberhip  = new ArrayList<String>(5);
+    listMemberhip  = new ArrayList<>(5);
     for(Object obj : collection){
       listMemberhip.add(((MembershipType)obj).getName());
     }
     if (!listMemberhip.contains("*")) listMemberhip.add("*");
     Collections.sort(listMemberhip);
-    tree.setSibbling((List)sibblingsGroup);
+    tree.setSibbling(getChildrenGroups(null));
     tree.setIcon("GroupAdminIcon");
     tree.setSelectedIcon("PortalIcon");
     tree.setBeanIdField("id");
@@ -115,11 +123,9 @@ public class UIGroupMemberSelector extends UIContainer implements ComponentSelec
     uiBreadcumb.setPath(getPath(null, groupId)) ;
 
     UITree tree = getChild(UITree.class);
-    Collection<?> sibblingGroup;
 
     if(groupId == null) {
-      sibblingGroup = service.getGroupHandler().findGroups(null);
-      tree.setSibbling((List)sibblingGroup);
+      tree.setSibbling(getChildrenGroups(null));
       tree.setChildren(null);
       tree.setSelected(null);
       selectGroup_ = null;
@@ -132,17 +138,26 @@ public class UIGroupMemberSelector extends UIContainer implements ComponentSelec
     Group parentGroup = null ;
     if(parentGroupId != null) parentGroup = service.getGroupHandler().findGroupById(parentGroupId);
 
-    Collection childrenGroup = service.getGroupHandler().findGroups(selectGroup_);
-    sibblingGroup = service.getGroupHandler().findGroups(parentGroup);
-
-    tree.setSibbling((List)sibblingGroup);
-    tree.setChildren((List)childrenGroup);
+    tree.setSibbling(getChildrenGroups(parentGroup));
+    tree.setChildren(getChildrenGroups(selectGroup_));
     tree.setSelected(selectGroup_);
     tree.setParentSelected(parentGroup);
   }
 
+  protected List<Group> getChildrenGroups(Group parentGroup) throws Exception {
+    ConversationState conversationState = ConversationState.getCurrent();
+    if(conversationState != null && conversationState.getIdentity() != null) {
+      return organizationService.getGroupHandler().findGroups(parentGroup)
+              .stream()
+              .filter(group -> userACL.hasPermission(conversationState.getIdentity(), group, "document_permissions"))
+              .collect(Collectors.toList());
+    } else {
+      return Collections.EMPTY_LIST;
+    }
+  }
+
   private List<LocalPath> getPath(List<LocalPath> list, String id) throws Exception {
-    if(list == null) list = new ArrayList<LocalPath>(5);
+    if(list == null) list = new ArrayList<>(5);
     if(id == null) return list;
     OrganizationService service = WCMCoreUtils.getService(OrganizationService.class);
     Group group = service.getGroupHandler().findGroupById(id);
@@ -155,7 +170,7 @@ public class UIGroupMemberSelector extends UIContainer implements ComponentSelec
   @SuppressWarnings("unchecked")
   public List<String> getListGroup() throws Exception {
     OrganizationService service = WCMCoreUtils.getService(OrganizationService.class);
-    List<String> listGroup = new ArrayList<String>();
+    List<String> listGroup = new ArrayList<>();
     if(getCurrentGroup() == null) return null;
     Collection<Group> groups = service.getGroupHandler().findGroups(getCurrentGroup());
     if(groups.size() > 0) {
