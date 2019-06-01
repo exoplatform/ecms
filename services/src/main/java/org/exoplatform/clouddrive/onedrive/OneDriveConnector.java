@@ -120,12 +120,15 @@ public class OneDriveConnector extends CloudDriveConnector {
         if (LOG.isDebugEnabled()) {
           LOG.debug("driveAPIUSER!=null:  ");
         }
-        OneDriveUser user = new OneDriveUser(driveAPIUser.id,
-                                             driveAPIUser.userPrincipalName,
-                                             driveAPIUser.userPrincipalName,
-                                             provider,
-                                             driveAPI);
-        return user;
+
+          String userId = driveAPIUser.id;
+          String username = driveAPIUser.userPrincipalName;
+          String email = driveAPIUser.userPrincipalName;
+          LOG.info("userId: " + userId + " username " + username);
+        OneDriveUser user = new OneDriveUser(userId, username, email, provider, driveAPI);
+//        OneDriveUser user = new OneDriveUser("id-user1", "username", "some1@email.com", provider, driveAPI);
+
+          return user;
       } else {
         return null;
       }

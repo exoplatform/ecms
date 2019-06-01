@@ -26,10 +26,7 @@ import com.google.gson.JsonParser;
 import com.microsoft.graph.models.extensions.*;
 import com.microsoft.graph.options.HeaderOption;
 import com.microsoft.graph.options.QueryOption;
-import com.microsoft.graph.requests.extensions.GraphServiceClient;
-import com.microsoft.graph.requests.extensions.IDriveItemCollectionPage;
-import com.microsoft.graph.requests.extensions.IDriveItemCollectionRequestBuilder;
-import com.microsoft.graph.requests.extensions.IDriveItemDeltaCollectionPage;
+import com.microsoft.graph.requests.extensions.*;
 
 import org.exoplatform.clouddrive.CloudDriveException;
 import org.exoplatform.clouddrive.oauth2.UserToken;
@@ -137,30 +134,30 @@ public class OneDriveAPI {
   private static String scopes() {
     StringJoiner scopes = new StringJoiner(" ");
     scopes.add(Scopes.FilesReadWriteAll)
-            .add(Scopes.FilesRead)
-            .add(Scopes.FilesReadWrite)
-            .add(Scopes.FilesReadAll)
-            .add(Scopes.FilesReadSelected)
-            .add(Scopes.UserReadWriteAll)
-            .add(Scopes.UserRead)
-            .add(Scopes.UserReadWrite)
-            .add(Scopes.offlineAccess)
-            .add(Scopes.FilesReadWriteAppFolder)
-            .add(Scopes.FilesReadWriteSelected);
+          .add(Scopes.FilesRead)
+          .add(Scopes.FilesReadWrite)
+          .add(Scopes.FilesReadAll)
+          .add(Scopes.FilesReadSelected)
+          .add(Scopes.UserReadWriteAll)
+          .add(Scopes.UserRead)
+          .add(Scopes.UserReadWrite)
+          .add(Scopes.offlineAccess)
+          .add(Scopes.FilesReadWriteAppFolder)
+          .add(Scopes.FilesReadWriteSelected);
     return scopes.toString();
-//    StringBuilder scopes = new StringBuilder();
-//    scopes.append(Scopes.FilesReadWriteAll + " ")
-//          .append(Scopes.FilesRead)
-//          .append(Scopes.FilesReadWrite)
-//          .append(Scopes.FilesReadAll)
-//          .append(Scopes.FilesReadSelected)
-//          .append(Scopes.UserReadWriteAll + " ")
-//          .append(Scopes.UserRead + " ")
-//          .append(Scopes.UserReadWrite + " ")
-//          .append(Scopes.offlineAccess + " ")
-//          .append(Scopes.FilesReadWriteAppFolder + " ")
-//          .append(Scopes.FilesReadWriteSelected);
-//    return scopes.toString();
+    // StringBuilder scopes = new StringBuilder();
+    // scopes.append(Scopes.FilesReadWriteAll + " ")
+    // .append(Scopes.FilesRead)
+    // .append(Scopes.FilesReadWrite)
+    // .append(Scopes.FilesReadAll)
+    // .append(Scopes.FilesReadSelected)
+    // .append(Scopes.UserReadWriteAll + " ")
+    // .append(Scopes.UserRead + " ")
+    // .append(Scopes.UserReadWrite + " ")
+    // .append(Scopes.offlineAccess + " ")
+    // .append(Scopes.FilesReadWriteAppFolder + " ")
+    // .append(Scopes.FilesReadWriteSelected);
+    // return scopes.toString();
   }
 
   private void initGraphClient() {
@@ -299,9 +296,9 @@ public class OneDriveAPI {
 
     IDriveItemCollectionPage iDriveItemCollectionPage = null;
     if (folderId == null) {
-      iDriveItemCollectionPage = graphClient.me().drive().root().children().buildRequest().top(3).get();
+      iDriveItemCollectionPage = graphClient.me().drive().root().children().buildRequest().get();
     } else {
-      iDriveItemCollectionPage = graphClient.me().drive().items(folderId).children().buildRequest().top(3).get();
+      iDriveItemCollectionPage = graphClient.me().drive().items(folderId).children().buildRequest().get();
     }
     return iDriveItemCollectionPage;
   }
@@ -413,6 +410,10 @@ public class OneDriveAPI {
   public DriveItem untrash(String fileId) {
     DirectoryObject directoryObject = graphClient.directory().deletedItems(fileId).restore().buildRequest().post();
     return getItem(fileId);
+  }
+
+  public ChangesIterator changes(String deltaToken) {
+    return new ChangesIterator(deltaToken);
   }
 
   /**
@@ -557,6 +558,60 @@ public class OneDriveAPI {
       return driveItemCollectionPage != null;
     }
 
+  }
+
+  private String extractDeltaToken(String deltaLink) {
+    return deltaLink.substring(deltaLink.indexOf("=") + 1);
+  }
+
+  class ChangesIterator extends ChunkIterator<DriveItem> {
+
+    private String deltaToken;
+
+    ChangesIterator(String deltaToken) {
+      this.deltaToken = deltaToken;
+      iter = nextChunk();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected Iterator<DriveItem> nextChunk() {
+      LOG.info("ChangesIterator nextChunk()");
+      IDriveItemDeltaCollectionPage deltaCollectionPage = delta(deltaToken);
+      final List<DriveItem> changes = new ArrayList<>();
+      IDriveItemDeltaCollectionRequestBuilder nextPage;
+      while (true) {
+        changes.addAll(deltaCollectionPage.getCurrentPage());
+        nextPage = deltaCollectionPage.getNextPage();
+        if (nextPage == null) {
+          deltaToken = extractDeltaToken(deltaCollectionPage.deltaLink());
+          break;
+        }
+        deltaCollectionPage = nextPage.buildRequest().get();
+      }
+      LOG.info("ChangesIterator nextChunk()   available " + changes.size());
+      available(changes.size());
+      return changes.iterator();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean hasNextChunk() {
+      return false;
+    }
+
+    /**
+     * Gets the largest change id.
+     *
+     * @return the largest change id
+     */
+    String getDeltaToken() {
+      return deltaToken;
+    }
   }
 
   class OneDriveStoredToken extends UserToken {

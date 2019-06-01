@@ -3,7 +3,6 @@ package org.exoplatform.clouddrive.onedrive;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.*;
-import java.util.stream.Collectors;
 
 import javax.jcr.Node;
 import javax.jcr.PathNotFoundException;
@@ -32,8 +31,6 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
    *
    */
   private static final Log LOG = ExoLogger.getLogger(JCRLocalOneDrive.class);
-
-
 
   protected JCRLocalOneDrive(CloudUser user,
                              Node driveNode,
@@ -82,6 +79,7 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
     OneDriveAPI driveAPI = apiBuilder.load(refreshToken, accessToken, expirationTime).build();
 
     return new OneDriveUser(userId, username, email, provider, driveAPI);
+//    return new OneDriveUser("id-user1", "username", "some1@email.com", provider, driveAPI);
   }
 
   @Override
@@ -128,7 +126,7 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
   protected void initDrive(Node driveNode) throws CloudDriveException, RepositoryException {
     super.initDrive(driveNode);
     driveNode.setProperty("ecd:id", getUser().api().getRoot().id);
-
+    driveNode.save();
   }
 
   @Override
@@ -218,8 +216,8 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
   private void initFileByDriveItem(Node fileNode, DriveItem item) throws RepositoryException {
     final SharingLink link = getUser().api().createLink(item.id);
     initFile(fileNode,
-             item.id,
-             item.name,
+            item.id,
+            item.name,
              item.file.mimeType,
              item.webUrl,
              link.webUrl,
@@ -243,10 +241,10 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
                                  item.lastModifiedDateTime,
                                  fileNode,
                                  true);
+
   }
 
   private JCRLocalCloudFile createCloudFile(Node fileNode, DriveItem item) throws RepositoryException {
-    final SharingLink link = getUser().api().createLink(item.id);
     return new JCRLocalCloudFile(fileNode.getPath(),
                                  item.id,
                                  item.name,
@@ -258,6 +256,7 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
                                  item.lastModifiedDateTime,
                                  fileNode,
                                  true);
+
   }
 
   class OneDriveConnectCommand extends ConnectCommand {
@@ -289,17 +288,20 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
     }
 
     /**
-     * @param fileId    fileId at site
+     * @param fileId fileId at site
      * @param localFile jcr node
      * @throws CloudDriveException
      * @throws RepositoryException
      */
+
     private void fetchFiles(String fileId, Node localFile) throws CloudDriveException, RepositoryException {
       if (LOG.isDebugEnabled()) {
         LOG.debug("fetchFiles():  ");
       }
       OneDriveAPI.ChildIterator childIterator = api.getChildIterator(fileId);
-      iterators.add(childIterator);
+      synchronized(iterators){
+        iterators.add(childIterator);
+      }
       while (childIterator.hasNext()) {
         DriveItem item = childIterator.next();
         if (!isConnected(fileId, item.id)) {
@@ -309,21 +311,24 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
           } else if (item.file != null) {
             jcrLocalCloudFile = openInitFile(item, localFile);
           }
-          addConnected(fileId,jcrLocalCloudFile);
+          addConnected(fileId, jcrLocalCloudFile);
         }
       }
     }
 
     @Override
     protected void fetchFiles() throws CloudDriveException, RepositoryException {
-      fetchFiles(null, driveNode);
+      String rootId = getUser().api().getRoot().id;
+      fetchFiles(rootId, driveNode);
     }
 
   }
 
   protected class OneDriveSyncCommand extends SyncCommand {
 
-    private final OneDriveAPI api;
+    private final OneDriveAPI           api;
+
+    private OneDriveAPI.ChangesIterator changes;
 
     OneDriveSyncCommand() {
       this.api = getUser().api();
@@ -372,28 +377,103 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
       }
     }
 
-
-
     private void addFileNode(DriveItem driveItem, Node parentNode) throws RepositoryException, CloudDriveException {
       if (LOG.isDebugEnabled()) {
         LOG.debug("Add File(): id:  " + driveItem.id + " name: " + driveItem.name + "parentId: " + driveItem.parentReference.id);
       }
       Node fileNode = openFile(driveItem.id, driveItem.name, parentNode);
       initFileByDriveItem(fileNode, driveItem);
+      this.nodes.put(driveItem.id, Collections.singletonList(fileNode));
     }
 
     private void updateNode(DriveItem driveItem, Node fileNode) throws RepositoryException, CloudDriveException {
-     // renameNode(driveItem, fileNode);
-      if (LOG.isDebugEnabled()) {
-        LOG.debug("updateNode(): try get parentNode.");
+      // renameNode(driveItem, fileNode);
+      if (api.getRoot().id.equals(driveItem.id)) return;
+
+      LOG.info("UpdateNode(): itemId " + driveItem.id + " parentId " + driveItem.parentReference.id);
+      List<Node> destParentNodes = this.nodes.get(driveItem.parentReference.id);
+      LOG.info("(1) destParenNodes" + destParentNodes);
+      if (destParentNodes == null || destParentNodes.isEmpty()) {
+        syncNext();
+        destParentNodes = this.nodes.get(driveItem.parentReference.id);
+        LOG.info("(2) destParenNodes size: " + destParentNodes.size());
+
       }
-      String localParentNodeId = fileAPI.getParentId(fileNode);
-      if (!driveItem.parentReference.id.equals(localParentNodeId)) {
-        Node destParentNode = this.nodes.get(driveItem.parentReference.id).get(0);
-        if (LOG.isDebugEnabled()) {
-          LOG.debug("MOVE FILE(): ");
+      Node destParentNode = destParentNodes.get(0);
+      moveFile(driveItem.id, driveItem.name, fileNode, destParentNode);
+
+
+
+
+
+
+
+      // if (LOG.isDebugEnabled()) {
+      // LOG.debug("updateNode(): try get parentNode.");
+      // }
+      // String localParentNodeId = fileAPI.getParentId(fileNode);
+      // if (!driveItem.parentReference.id.equals(localParentNodeId)) {
+      // if (LOG.isDebugEnabled()) {
+      // LOG.debug("MOVE FILE(): ");
+      // }
+      // moveFile(driveItem.id, driveItem.name, fileNode, destParentNode);
+      // }
+    }
+
+    public void syncNext() throws CloudDriveException, RepositoryException {
+      while(changes.hasNext()) {
+        DriveItem driveItem = changes.next();
+        if (driveItem.file != null) {
+          if (driveItem.deleted == null) {
+            List<Node> nodes = null;
+            if (this.nodes.containsKey(driveItem.id)) {
+              nodes = this.nodes.get(driveItem.id);
+              if (LOG.isDebugEnabled()) {
+                LOG.debug("Nodes size: " + nodes.size() + " for item with id " + driveItem.id);
+              }
+            }
+
+            if (nodes == null || nodes.size() == 0) { // add
+              if (LOG.isDebugEnabled()) {
+                LOG.debug("Add File(): id:  " + driveItem.id + " name: " + driveItem.name + "parentId: "
+                        + driveItem.parentReference.id);
+              }
+              Node parentNode = this.nodes.get(driveItem.parentReference.id).get(0);
+              addFileNode(driveItem, parentNode);
+            } else { // update
+              Node fileNode = nodes.get(0);
+              updateNode(driveItem, fileNode);
+            }
+          } else {
+            deleteItem(driveItem.id);
+          }
+        } else { // folder
+
+          if (driveItem.deleted == null) {
+            List<Node> nodes = null;
+            if (this.nodes.containsKey(driveItem.id)) {
+              nodes = this.nodes.get(driveItem.id);
+              if (LOG.isDebugEnabled()) {
+                LOG.debug("(folder)Nodes size: " + nodes.size() + " for item with id " + driveItem.id);
+              }
+            }
+
+            if (nodes == null || nodes.size() == 0) { // add
+              if (LOG.isDebugEnabled()) {
+                LOG.debug("Add Folder(): id:  " + driveItem.id + " name: " + driveItem.name + "parentId: "
+                        + driveItem.parentReference.id);
+              }
+              Node parentNode = this.nodes.get(driveItem.parentReference.id).get(0);
+              addFolderNode(driveItem, parentNode);
+            } else {
+              Node fileNode = nodes.get(0);
+              updateNode(driveItem, fileNode);
+            }
+          } else {
+            deleteItem(driveItem.id);
+          }
+
         }
-        moveFile(driveItem.id, driveItem.name, fileNode, destParentNode);
       }
     }
 
@@ -403,75 +483,87 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
         LOG.debug("syncFiles()");
       }
 
-      List<DriveItem> changes = getLastChangesAndUpdateDeltaToken();
-      Map<String, DriveItem> changesMap = changes.stream()
-                                                 .collect(Collectors.toMap(driveItem -> driveItem.id, driveItem -> driveItem));
-      Set<String> tracked = new HashSet<>();
-      if (changes.size() > 0) {
-        readLocalNodes();
-        for (DriveItem driveItem : changes) {
-          if (driveItem.file != null) {
-            if (driveItem.deleted == null) {
-              List<Node> nodes = null;
-              if (this.nodes.containsKey(driveItem.id)) {
-                nodes = this.nodes.get(driveItem.id);
-                if (LOG.isDebugEnabled()) {
-                  LOG.debug("Nodes size: " + nodes.size() + " for item with id " + driveItem.id);
-                }
-              }
-
-              if (nodes == null || nodes.size() == 0) { // add
-                if (LOG.isDebugEnabled()) {
-                  LOG.debug("Add File(): id:  " + driveItem.id + " name: " + driveItem.name + "parentId: "
-                          + driveItem.parentReference.id);
-                }
-                Node parentNode = this.nodes.get(driveItem.parentReference.id).get(0);
-                addFileNode(driveItem, parentNode);
-              } else { // update
-                Node fileNode = nodes.get(0);
-                updateNode(driveItem, fileNode);
-              }
-            } else {
-              deleteItem(driveItem.id);
-            }
-          } else { // folder
-
-            if (driveItem.deleted == null) {
-              List<Node> nodes = null;
-              if (this.nodes.containsKey(driveItem.id)) {
-                nodes = this.nodes.get(driveItem.id);
-                if (LOG.isDebugEnabled()) {
-                  LOG.debug("(folder)Nodes size: " + nodes.size() + " for item with id " + driveItem.id);
-                }
-              }
-
-              if (nodes == null || nodes.size() == 0) { // add
-                if (LOG.isDebugEnabled()) {
-                  LOG.debug("Add Folder(): id:  " + driveItem.id + " name: " + driveItem.name + "parentId: "
-                          + driveItem.parentReference.id);
-                }
-                Node parentNode = this.nodes.get(driveItem.parentReference.id).get(0);
-                addFolderNode(driveItem, parentNode);
-              } else {
-                Node fileNode = nodes.get(0);
-                updateNode(driveItem, fileNode);
-              }
-            } else {
-              deleteItem(driveItem.id);
-            }
-
-          }
-        }
+      String deltaToken = getDeltaToken();
+      if (deltaToken == null) {
+        deltaToken = "latest";
       }
+      changes = api.changes(deltaToken);
+      iterators.add(changes);
+
+      if (changes.hasNext()) {
+        readLocalNodes();
+        syncNext();
+      }
+      saveDeltaToken(changes.getDeltaToken());
+
+//      List<DriveItem> changes = getLastChangesAndUpdateDeltaToken();
+//      if (changes.size() > 0) {
+//        readLocalNodes();
+//        for (DriveItem driveItem : changes) {
+//          if (driveItem.file != null) {
+//            if (driveItem.deleted == null) {
+//              List<Node> nodes = null;
+//              if (this.nodes.containsKey(driveItem.id)) {
+//                nodes = this.nodes.get(driveItem.id);
+//                if (LOG.isDebugEnabled()) {
+//                  LOG.debug("Nodes size: " + nodes.size() + " for item with id " + driveItem.id);
+//                }
+//              }
+//
+//              if (nodes == null || nodes.size() == 0) { // add
+//                if (LOG.isDebugEnabled()) {
+//                  LOG.debug("Add File(): id:  " + driveItem.id + " name: " + driveItem.name + "parentId: "
+//                      + driveItem.parentReference.id);
+//                }
+//                Node parentNode = this.nodes.get(driveItem.parentReference.id).get(0);
+//                addFileNode(driveItem, parentNode);
+//              } else { // update
+//                Node fileNode = nodes.get(0);
+//                updateNode(driveItem, fileNode);
+//              }
+//            } else {
+//              deleteItem(driveItem.id);
+//            }
+//          } else { // folder
+//
+//            if (driveItem.deleted == null) {
+//              List<Node> nodes = null;
+//              if (this.nodes.containsKey(driveItem.id)) {
+//                nodes = this.nodes.get(driveItem.id);
+//                if (LOG.isDebugEnabled()) {
+//                  LOG.debug("(folder)Nodes size: " + nodes.size() + " for item with id " + driveItem.id);
+//                }
+//              }
+//
+//              if (nodes == null || nodes.size() == 0) { // add
+//                if (LOG.isDebugEnabled()) {
+//                  LOG.debug("Add Folder(): id:  " + driveItem.id + " name: " + driveItem.name + "parentId: "
+//                      + driveItem.parentReference.id);
+//                }
+//                Node parentNode = this.nodes.get(driveItem.parentReference.id).get(0);
+//                addFolderNode(driveItem, parentNode);
+//              } else {
+//                Node fileNode = nodes.get(0);
+//                updateNode(driveItem, fileNode);
+//              }
+//            } else {
+//              deleteItem(driveItem.id);
+//            }
+//
+//          }
+//        }
+//      }
 
     }
 
     private void addFolderNode(DriveItem driveItem, Node parentNode) throws CloudDriveException, RepositoryException {
       if (LOG.isDebugEnabled()) {
-        LOG.debug("Add Folder(): id:  " + driveItem.id + " name: " + driveItem.name + "parentId: " + driveItem.parentReference.id);
+        LOG.debug("Add Folder(): id:  " + driveItem.id + " name: " + driveItem.name + "parentId: "
+            + driveItem.parentReference.id);
       }
       Node fileNode = openFolder(driveItem.id, driveItem.name, parentNode);
       initFolderByDriveItem(fileNode, driveItem);
+      this.nodes.put(driveItem.id, Collections.singletonList(fileNode));
     }
 
     private void deleteItem(String itemId) throws CloudDriveException, RepositoryException {
