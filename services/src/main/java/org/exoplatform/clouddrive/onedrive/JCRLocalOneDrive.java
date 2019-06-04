@@ -383,41 +383,41 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
       }
       Node fileNode = openFile(driveItem.id, driveItem.name, parentNode);
       initFileByDriveItem(fileNode, driveItem);
-      this.nodes.put(driveItem.id, Collections.singletonList(fileNode));
+      this.nodes.put(driveItem.id, new ArrayList<Node>(){{add(fileNode);}});
     }
 
     private void updateNode(DriveItem driveItem, Node fileNode) throws RepositoryException, CloudDriveException {
-      // renameNode(driveItem, fileNode);
       if (api.getRoot().id.equals(driveItem.id)) return;
-
-      LOG.info("UpdateNode(): itemId " + driveItem.id + " parentId " + driveItem.parentReference.id);
       List<Node> destParentNodes = this.nodes.get(driveItem.parentReference.id);
-      LOG.info("(1) destParenNodes" + destParentNodes);
       if (destParentNodes == null || destParentNodes.isEmpty()) {
         syncNext();
         destParentNodes = this.nodes.get(driveItem.parentReference.id);
-        LOG.info("(2) destParenNodes size: " + destParentNodes.size());
 
       }
       Node destParentNode = destParentNodes.get(0);
-      moveFile(driveItem.id, driveItem.name, fileNode, destParentNode);
+      if (!fileAPI.getTitle(fileNode).equals(driveItem.name)) {
+        if (LOG.isDebugEnabled()) {
+          LOG.debug("must be renamed, name= " + driveItem.name);
+        }
+        Node node = moveFile(driveItem.id, driveItem.name, fileNode, destParentNode);
+        JCRLocalCloudFile jcrLocalCloudFile = null;
+        if (node != null) {
+          if (driveItem.folder != null) { //folder
+             initFolderByDriveItem(node,driveItem);
+             jcrLocalCloudFile = createCloudFolder(node,driveItem);
+          }else{ //file
+            initFileByDriveItem(node,driveItem);
+            jcrLocalCloudFile = createCloudFile(node,driveItem);
+          }
+          addChanged(jcrLocalCloudFile);
+        }
+      } else if (!fileAPI.getParentId(fileNode).equals(driveItem.parentReference.id)) {
+         if (LOG.isDebugEnabled()) {
+           LOG.debug("must be moved, name= " + driveItem.name);
+         }
+        Node node = moveFile(driveItem.id, driveItem.name, fileNode, destParentNode);
+      }
 
-
-
-
-
-
-
-      // if (LOG.isDebugEnabled()) {
-      // LOG.debug("updateNode(): try get parentNode.");
-      // }
-      // String localParentNodeId = fileAPI.getParentId(fileNode);
-      // if (!driveItem.parentReference.id.equals(localParentNodeId)) {
-      // if (LOG.isDebugEnabled()) {
-      // LOG.debug("MOVE FILE(): ");
-      // }
-      // moveFile(driveItem.id, driveItem.name, fileNode, destParentNode);
-      // }
     }
 
     public void syncNext() throws CloudDriveException, RepositoryException {
@@ -563,7 +563,7 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
       }
       Node fileNode = openFolder(driveItem.id, driveItem.name, parentNode);
       initFolderByDriveItem(fileNode, driveItem);
-      this.nodes.put(driveItem.id, Collections.singletonList(fileNode));
+      this.nodes.put(driveItem.id, new ArrayList<Node>(){{add(fileNode);}});
     }
 
     private void deleteItem(String itemId) throws CloudDriveException, RepositoryException {
