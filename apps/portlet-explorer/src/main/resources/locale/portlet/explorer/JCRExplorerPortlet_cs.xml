@@ -1352,7 +1352,7 @@
     <tooltip>
       <original>Originální verze</original>
       <version>Verze</version>
-      <baseVersion>Základní verze</baseVersion>
+      <baseVersion>current draft</baseVersion>
       <addLabel>Přidat popisek</addLabel>
       <removeLable>Odebrat popisek</removeLable>
       <restoreVersion>Obnovit verzi</restoreVersion>

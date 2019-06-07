@@ -1352,7 +1352,7 @@
     <tooltip>
       <original>Original Version</original>
       <version>Bersyon</version>
-      <baseVersion>ang kasalukuyang bersyon</baseVersion>
+      <baseVersion>current draft</baseVersion>
       <addLabel>Magdagdag ng Label</addLabel>
       <removeLable>Alisin ang Label</removeLable>
       <restoreVersion>Ibalik ang bersyon</restoreVersion>

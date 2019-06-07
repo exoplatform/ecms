@@ -1352,7 +1352,7 @@
     <tooltip>
       <original>Versión original</original>
       <version>Versión</version>
-      <baseVersion>versión actual</baseVersion>
+      <baseVersion>current draft</baseVersion>
       <addLabel>Añadir etiqueta</addLabel>
       <removeLable>Eliminar la Etiqueta</removeLable>
       <restoreVersion>Restablecer la Versión</restoreVersion>

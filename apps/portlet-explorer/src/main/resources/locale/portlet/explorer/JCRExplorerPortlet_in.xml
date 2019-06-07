@@ -1353,7 +1353,7 @@
     <tooltip>
       <original>Original Version</original>
       <version>Versi</version>
-      <baseVersion>versi saat ini</baseVersion>
+      <baseVersion>current draft</baseVersion>
       <addLabel>Tambahkan Label</addLabel>
       <removeLable>Hapus Label</removeLable>
       <restoreVersion>Kembalikan Versi</restoreVersion>

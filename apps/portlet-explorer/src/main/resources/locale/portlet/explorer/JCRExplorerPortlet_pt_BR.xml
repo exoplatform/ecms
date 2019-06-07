@@ -1352,7 +1352,7 @@
     <tooltip>
       <original>Versão original</original>
       <version>Versão</version>
-      <baseVersion>versão atual</baseVersion>
+      <baseVersion>current draft</baseVersion>
       <addLabel>Adicionar rótulo</addLabel>
       <removeLable>Remover rótulo</removeLable>
       <restoreVersion>Restaurar versão</restoreVersion>

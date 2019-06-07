@@ -1352,7 +1352,7 @@
     <tooltip>
       <original>Original Version</original>
       <version>Version</version>
-      <baseVersion>current version</baseVersion>
+      <baseVersion>current draft</baseVersion>
       <addLabel>Lägg till etikett</addLabel>
       <removeLable>Ta bort etikett</removeLable>
       <restoreVersion>Återställ Version</restoreVersion>

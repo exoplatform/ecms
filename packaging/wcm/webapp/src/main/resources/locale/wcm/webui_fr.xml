@@ -288,7 +288,7 @@
     </label>
     <action>
       <Save>#{word.save}</Save>
-      <Clear>Nettoyer</Clear>
+      <Clear>Effacer</Clear>
       <title>
         <Edit>Modifier</Edit>
         <Delete>Supprimer</Delete>

@@ -1352,7 +1352,7 @@
     <tooltip>
       <original>Original Version</original>
       <version>Phiên bản</version>
-      <baseVersion>Phiên bản Cơ sở</baseVersion>
+      <baseVersion>current draft</baseVersion>
       <addLabel>Thêm Nhãn</addLabel>
       <removeLable>Gỡ bỏ Nhãn</removeLable>
       <restoreVersion>Khôi phục Phiên bản</restoreVersion>

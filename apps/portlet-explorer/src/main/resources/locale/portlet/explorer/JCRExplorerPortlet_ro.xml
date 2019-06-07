@@ -1352,7 +1352,7 @@
     <tooltip>
       <original>Original Version</original>
       <version>Versiune</version>
-      <baseVersion>Versiunea de bază</baseVersion>
+      <baseVersion>current draft</baseVersion>
       <addLabel>Adaugă eticheta</addLabel>
       <removeLable>Eliminaţi eticheta</removeLable>
       <restoreVersion>Restabilire versiune</restoreVersion>

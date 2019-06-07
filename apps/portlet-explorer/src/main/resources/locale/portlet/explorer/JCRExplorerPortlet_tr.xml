@@ -1352,7 +1352,7 @@
     <tooltip>
       <original>Orijinal Versiyon</original>
       <version>Sürüm</version>
-      <baseVersion>geçerli sürüm</baseVersion>
+      <baseVersion>current draft</baseVersion>
       <addLabel>Etiket Ekle</addLabel>
       <removeLable>Etiketi Kaldır</removeLable>
       <restoreVersion>Sürümü geri yükle</restoreVersion>

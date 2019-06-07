@@ -1352,7 +1352,7 @@
     <tooltip>
       <original>Оригінальна версія</original>
       <version>Версія</version>
-      <baseVersion>Базова версія</baseVersion>
+      <baseVersion>current draft</baseVersion>
       <addLabel>Додати мітку</addLabel>
       <removeLable>Видалити мітку</removeLable>
       <restoreVersion>Відновити версію</restoreVersion>
