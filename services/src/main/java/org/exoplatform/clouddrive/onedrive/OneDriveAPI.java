@@ -168,13 +168,13 @@ public class OneDriveAPI {
           .add(Scopes.FilesRead)
           .add(Scopes.FilesReadWrite)
           .add(Scopes.FilesReadAll)
-          .add(Scopes.FilesReadSelected)
-          .add(Scopes.UserReadWriteAll)
+//          .add(Scopes.FilesReadSelected)
+//          .add(Scopes.UserReadWriteAll)
           .add(Scopes.UserRead)
-          .add(Scopes.UserReadWrite)
-          .add(Scopes.offlineAccess)
-          .add(Scopes.FilesReadWriteAppFolder)
-          .add(Scopes.FilesReadWriteSelected);
+//          .add(Scopes.UserReadWrite)
+          .add(Scopes.offlineAccess);
+//          .add(Scopes.FilesReadWriteAppFolder)
+//          .add(Scopes.FilesReadWriteSelected);
     return scopes.toString();
   }
 
