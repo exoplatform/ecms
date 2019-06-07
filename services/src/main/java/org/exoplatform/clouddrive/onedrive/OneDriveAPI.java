@@ -16,7 +16,9 @@ import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 
@@ -58,7 +60,48 @@ class Scopes {
   static final String UserReadWriteAll        = "https://graph.microsoft.com/User.ReadWrite.All";
 }
 
+
+
 public class OneDriveAPI {
+  private String rootId;
+
+  private class OneDriveToken{
+    // in millis
+    private final static int lifetime = 3600 * 1000;
+    private String refreshToken;
+    private String accessToken;
+    private long lastModifiedTime;
+    public OneDriveToken(String accessToken, String refreshToken){
+      this.updateToken(accessToken,refreshToken);
+    }
+
+    public synchronized String getAccessToken() {
+      long currentTime = System.currentTimeMillis();
+      if (currentTime >= lastModifiedTime + /*lifetime*/ + 40_000) {
+        try {
+          if (LOG.isDebugEnabled()) {
+            LOG.debug("refreshToken = " + this.refreshToken);
+          }
+          OneDriveTokenResponse oneDriveTokenResponse = retrieveAccessTokenByRefreshToken(this.refreshToken);
+          this.accessToken = oneDriveTokenResponse.getToken();
+          this.lastModifiedTime = System.currentTimeMillis();
+          String refreshToken = oneDriveTokenResponse.getRefreshToken();
+          storedToken.store(refreshToken);
+          this.refreshToken = refreshToken;
+        } catch (IOException | CloudDriveException e) {
+          throw new RuntimeException("Error during token update");
+        }
+      }
+      return accessToken;
+    }
+
+    public final synchronized void updateToken(String accessToken, String refreshToken) {
+      this.accessToken = accessToken;
+      this.refreshToken = refreshToken;
+      this.lastModifiedTime = System.currentTimeMillis();
+    }
+  }
+
   protected static final Log        LOG = ExoLogger.getLogger(OneDriveAPI.class);
 
   private final OneDriveStoredToken storedToken;
@@ -67,14 +110,13 @@ public class OneDriveAPI {
 
   private final String              clientSecret;
 
-  private volatile String           accessToken;
-
+  private final OneDriveToken oneDriveToken;
+  private final HttpClient httpclient = HttpClients.createDefault();
   private OneDriveTokenResponse retrieveAccessToken(String clientId,
                                                     String clientSecret,
                                                     String code,
                                                     String refreshToken,
                                                     String grantType) throws IOException {
-    HttpClient httpclient = HttpClients.createDefault();
     HttpPost httppost = new HttpPost("https://login.microsoftonline.com/common/oauth2/v2.0/token");
     List<NameValuePair> params = new ArrayList<>(5);
     if (grantType.equals("refresh_token")) {
@@ -119,18 +161,7 @@ public class OneDriveAPI {
   }
 
   public final static String SCOPES = scopes();
-  // "https://graph.microsoft.com/Files.Read.All
-  // https://graph.microsoft.com/Files.Read
-  // https://graph.microsoft.com/Files.Read.Selected
-  // https://graph.microsoft.com/Files.ReadWrite
-  // https://graph.microsoft.com/Files.ReadWrite.All
-  // https://graph.microsoft.com/Files.ReadWrite.AppFolder
-  // https://graph.microsoft.com/Files.ReadWrite.Selected
-  // https://graph.microsoft.com/User.Read
-  // https://graph.microsoft.com/User.ReadWrite
-  // https://graph.microsoft.com/User.ReadWrite offline_access
 
-  // https://graph.microsoft.com/User.ReadWrite.All";
   private static String scopes() {
     StringJoiner scopes = new StringJoiner(" ");
     scopes.add(Scopes.FilesReadWriteAll)
@@ -145,31 +176,18 @@ public class OneDriveAPI {
           .add(Scopes.FilesReadWriteAppFolder)
           .add(Scopes.FilesReadWriteSelected);
     return scopes.toString();
-    // StringBuilder scopes = new StringBuilder();
-    // scopes.append(Scopes.FilesReadWriteAll + " ")
-    // .append(Scopes.FilesRead)
-    // .append(Scopes.FilesReadWrite)
-    // .append(Scopes.FilesReadAll)
-    // .append(Scopes.FilesReadSelected)
-    // .append(Scopes.UserReadWriteAll + " ")
-    // .append(Scopes.UserRead + " ")
-    // .append(Scopes.UserReadWrite + " ")
-    // .append(Scopes.offlineAccess + " ")
-    // .append(Scopes.FilesReadWriteAppFolder + " ")
-    // .append(Scopes.FilesReadWriteSelected);
-    // return scopes.toString();
   }
 
   private void initGraphClient() {
     this.graphClient = GraphServiceClient.builder().authenticationProvider(iHttpRequest -> {
-      iHttpRequest.getHeaders().add(new HeaderOption("Authorization", "Bearer " + getAccessToken()));
+      String accessToken = getAccessToken();
+      iHttpRequest.getHeaders().add(new HeaderOption("Authorization", "Bearer " + accessToken));
     }).buildClient();
   }
 
   OneDriveAPI(String clientId, String clientSecret, String authCode) throws IOException, CloudDriveException {
     this.clientId = clientId;
     this.clientSecret = clientSecret;
-    // update token Storage
     OneDriveTokenResponse oneDriveTokenResponse = null;
     oneDriveTokenResponse = retrieveAccessTokenByCode(authCode);
 
@@ -178,7 +196,8 @@ public class OneDriveAPI {
       this.storedToken.store(oneDriveTokenResponse.getToken(),
                              oneDriveTokenResponse.getRefreshToken(),
                              oneDriveTokenResponse.getExpires());
-      this.accessToken = oneDriveTokenResponse.getToken();
+
+      this.oneDriveToken = new OneDriveToken(oneDriveTokenResponse.getToken(),oneDriveTokenResponse.getRefreshToken());
 
       initGraphClient();
     } else {
@@ -189,17 +208,17 @@ public class OneDriveAPI {
   OneDriveAPI(String clientId, String clientSecret, String accessToken, String refreshToken, long expirationTime)
       throws CloudDriveException,
       IOException {
+    if (LOG.isDebugEnabled()) {
+      LOG.debug("one drive api by refresh token");
+    }
     this.storedToken = new OneDriveStoredToken();
     this.clientId = clientId;
     this.clientSecret = clientSecret;
     OneDriveTokenResponse oneDriveTokenResponse = null;
     oneDriveTokenResponse = retrieveAccessTokenByRefreshToken(refreshToken);
     if (oneDriveTokenResponse != null) {
-      this.storedToken.store(oneDriveTokenResponse.getToken(),
-                             oneDriveTokenResponse.getRefreshToken(),
-                             oneDriveTokenResponse.getExpires());
-      this.accessToken = oneDriveTokenResponse.getToken();
-
+      this.storedToken.store(oneDriveTokenResponse.getRefreshToken());
+      this.oneDriveToken = new OneDriveToken(oneDriveTokenResponse.getToken(),oneDriveTokenResponse.getRefreshToken());
       initGraphClient();
     } else {
       throw new CloudDriveException("Unable to retrieve access token");
@@ -207,17 +226,15 @@ public class OneDriveAPI {
   }
 
   private String getAccessToken() {
-
-    return accessToken;
-
+    return oneDriveToken.getAccessToken();
   }
 
   public void updateToken(OneDriveStoredToken newToken) {
     try {
-      this.accessToken = newToken.getAccessToken();
+      this.oneDriveToken.updateToken(newToken.getAccessToken(),newToken.getRefreshToken());
       this.storedToken.merge(newToken);
     } catch (CloudDriveException e) {
-      e.printStackTrace();
+      LOG.error("unnable to merge token", e);
     }
   }
 
@@ -231,7 +248,9 @@ public class OneDriveAPI {
 
   public void removeFile(String fileId) {
 
-    graphClient.me().drive().items(fileId).buildRequest().delete();
+
+      graphClient.me().drive().items(fileId).buildRequest().delete();
+
 
   }
 
@@ -239,13 +258,19 @@ public class OneDriveAPI {
     return graphClient.me().buildRequest().get();
   }
 
-  public DriveItem getRoot() {
+  public synchronized String getRootId(){
+    if (this.rootId == null) {
+      this.rootId = getRoot().id;
+    }
+    return rootId;
+  }
+  private DriveItem getRoot() {
     return graphClient.me().drive().root().buildRequest().get();
   }
 
   public DriveItem createFolder(String parentId, String name, Calendar created) {
     if (parentId == null || parentId.isEmpty()) {
-      parentId = getRoot().id;
+      parentId = getRootId();
     }
     DriveItem folder = new DriveItem();
     folder.name = name;
@@ -258,39 +283,86 @@ public class OneDriveAPI {
   }
 
   public DriveItem copyFile(String parentId, String fileName, String fileId) {
-    ItemReference parentReference = new ItemReference();
-    parentReference.id = parentId;
-    return graphClient.me().drive().items(fileId).copy(fileName, parentReference).buildRequest().post();
+    try {
+      String copiedFileId = copy(parentId, fileName, fileId);
+      if (LOG.isDebugEnabled()) {
+        LOG.debug("copiedFileId = " + copiedFileId);
+      }
+      return getItem(copiedFileId);
+    } catch (IOException e) {
+     LOG.error("error while copying file",e);
+    }
+    return null;
   }
 
   public DriveItem copyFolder(String parentId, String name, String folderId) {
     return copyFile(parentId, name, folderId);
   }
 
-  public List<DriveItem> getChildren() {
-    return this.getChildren(null);
-  }
 
-  public List<DriveItem> getChildren(String folderId) {
-    return getFiles(folderId);
+
+  public DriveItem getItemByPath(String path)  {
+    try {
+      return  graphClient.me().drive().root().itemWithPath(URLEncoder.encode(path, "UTF-8")).buildRequest().get();
+    } catch (UnsupportedEncodingException e) {
+
+     LOG.error("unable to get file",e);
+     return null;
+    }
   }
 
   public OneDriveStoredToken getStoredToken() {
     return storedToken;
   }
 
-  public void refreshToken() {
-    String refreshToken = storedToken.getRefreshToken();
-    try {
-      if (refreshToken != null) {
-        OneDriveTokenResponse oneDriveTokenResponse = retrieveAccessTokenByRefreshToken(refreshToken);
-        this.accessToken = oneDriveTokenResponse.getToken();
+  private String retrieveCopiedFileId(String location) throws IOException {
+    HttpGet httpget = new HttpGet(location);
+    HttpResponse response = httpclient.execute(httpget);
+    HttpEntity entity = response.getEntity();
+    if (entity != null) {
+      try (InputStream inputStream = entity.getContent()) {
+        String responseBody = IOUtils.toString(inputStream, Charset.forName("UTF-8"));
+        JsonObject jsonObject = new JsonParser().parse(responseBody).getAsJsonObject();
+        if (jsonObject.has("resourceId")) {
+          return jsonObject.get("resourceId").getAsString();
+        }else{
+          try {
+            Thread.sleep(1000);
+          } catch (InterruptedException e) {
+            e.printStackTrace();
+          }
+          if (LOG.isDebugEnabled()) {
+            LOG.debug("has not resourceId, responseBody = " + responseBody);
+          }
+          return retrieveCopiedFileId(location);
+        }
       }
-    } catch (IOException e) {
-      LOG.info("unable to refresh token", e);
     }
-
+    return null;
   }
+
+
+  public String copy(String parentId, String fileName, String fileId) throws IOException {
+    String request = "{\n" +
+            "  \"parentReference\": {\n" +
+            "    \"id\": \""+parentId+"\"\n" +
+            "  },\n" +
+            "  \"name\": \""+fileName+"\"\n" +
+            "}";
+
+    HttpPost httppost = new HttpPost("https://graph.microsoft.com/v1.0/me/drive/items/"+fileId+"/copy");
+    StringEntity stringEntity = new StringEntity(request, "UTF-8");
+    httppost.setEntity(stringEntity);
+    httppost.addHeader("Authorization","Bearer " + getAccessToken());
+    httppost.addHeader("Content-type", "application/json");
+    HttpResponse response = httpclient.execute(httppost);
+    HttpEntity entity = response.getEntity();
+    String location = response.getHeaders("Location")[0].getValue();
+
+    return retrieveCopiedFileId(location);
+  }
+
+
 
   public IDriveItemCollectionPage getDriveItemCollectionPage(String folderId) {
 
@@ -391,7 +463,7 @@ public class OneDriveAPI {
                         .buildRequest()
                         .post().uploadUrl;
     } catch (UnsupportedEncodingException e) {
-      LOG.info("unsupported encoding", e);
+      LOG.error("unsupported encoding", e);
       return null;
     }
   }
@@ -407,10 +479,6 @@ public class OneDriveAPI {
     return driveItemUploadableProperties;
   }
 
-  public DriveItem untrash(String fileId) {
-    DirectoryObject directoryObject = graphClient.directory().deletedItems(fileId).restore().buildRequest().post();
-    return getItem(fileId);
-  }
 
   public ChangesIterator changes(String deltaToken) {
     return new ChangesIterator(deltaToken);
@@ -433,7 +501,7 @@ public class OneDriveAPI {
     try {
       file = readAllBytes(inputStream);
     } catch (IOException e) {
-      LOG.info("Unable to read all bytes from received inputstream", e);
+      LOG.error("Unable to read all bytes from received inputstream", e);
       return null;
     }
     int bufferSize = 327680 * 40; // must be a multiple of 327680
@@ -448,7 +516,7 @@ public class OneDriveAPI {
       try {
         fileSendResponse = sendFile(uploadUrl, from, fileSlice.length, file.length, fileSlice);
       } catch (IOException e) {
-        LOG.info("Cannot upload part of file. ", e);
+        LOG.error("Cannot upload part of file. ", e);
         return null;
       }
       DriveItem driveItem = processEndOfFileUploadIfReached(fileSendResponse, isInsert);
@@ -497,10 +565,7 @@ public class OneDriveAPI {
     return insertUpdate(path, fileName, created, modified, mimetype, inputStream, false);
   }
 
-  /**
-   * @param driveItem
-   * @return driveItem instance that contains only updated fields.
-   */
+
   public DriveItem updateFile(DriveItem driveItem) {
     return graphClient.me().drive().items(driveItem.id).buildRequest().patch(driveItem);
   }
@@ -566,56 +631,54 @@ public class OneDriveAPI {
 
   class ChangesIterator extends ChunkIterator<DriveItem> {
 
+    private  IDriveItemDeltaCollectionPage deltaCollectionPage;
     private String deltaToken;
 
     ChangesIterator(String deltaToken) {
       this.deltaToken = deltaToken;
+      this.deltaCollectionPage = delta(deltaToken);
       iter = nextChunk();
     }
 
-    /**
-     * {@inheritDoc}
-     */
+
     @Override
     protected Iterator<DriveItem> nextChunk() {
-      LOG.info("ChangesIterator nextChunk()");
-      IDriveItemDeltaCollectionPage deltaCollectionPage = delta(deltaToken);
+      if (LOG.isDebugEnabled()) {
+        LOG.debug("ChangesIterator nextChunk()");
+      }
       final List<DriveItem> changes = new ArrayList<>();
       IDriveItemDeltaCollectionRequestBuilder nextPage;
-      while (true) {
-        changes.addAll(deltaCollectionPage.getCurrentPage());
-        nextPage = deltaCollectionPage.getNextPage();
-        if (nextPage == null) {
-          deltaToken = extractDeltaToken(deltaCollectionPage.deltaLink());
-          break;
-        }
+      changes.addAll(deltaCollectionPage.getCurrentPage());
+      nextPage = deltaCollectionPage.getNextPage();
+      if (nextPage == null) {
+        deltaToken = extractDeltaToken(deltaCollectionPage.deltaLink());
+        deltaCollectionPage = null;
+      } else {
         deltaCollectionPage = nextPage.buildRequest().get();
       }
-      LOG.info("ChangesIterator nextChunk()   available " + changes.size());
+
+      if (LOG.isDebugEnabled()) {
+        LOG.debug("ChangesIterator nextChunk()   available " + changes.size());
+      }
       available(changes.size());
       return changes.iterator();
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
-    protected boolean hasNextChunk() {
-      return false;
+    protected boolean hasNextChunk()
+    {
+      return deltaCollectionPage!=null;
     }
 
-    /**
-     * Gets the largest change id.
-     *
-     * @return the largest change id
-     */
     String getDeltaToken() {
       return deltaToken;
     }
   }
 
   class OneDriveStoredToken extends UserToken {
-
+    public void store(String refreshToken) throws CloudDriveException {
+      this.store("",refreshToken,0);
+    }
   }
 
 }

@@ -124,10 +124,10 @@ public class OneDriveConnector extends CloudDriveConnector {
           String userId = driveAPIUser.id;
           String username = driveAPIUser.userPrincipalName;
           String email = driveAPIUser.userPrincipalName;
-          LOG.info("userId: " + userId + " username " + username);
+        if (LOG.isDebugEnabled()) {
+          LOG.debug("userId: " + userId + " username " + username);
+        }
         OneDriveUser user = new OneDriveUser(userId, username, email, provider, driveAPI);
-//        OneDriveUser user = new OneDriveUser("id-user1", "username", "some1@email.com", provider, driveAPI);
-
           return user;
       } else {
         return null;
@@ -161,7 +161,8 @@ public class OneDriveConnector extends CloudDriveConnector {
     try {
       return new JCRLocalOneDrive(new API(), getProvider(), driveNode, sessionProviders, jcrFinder, mimeTypes);
     } catch (IOException e) {
-      e.printStackTrace();
+      LOG.error("unable to create LocalOneDrive", e);
+
     }
     return null;
   }
