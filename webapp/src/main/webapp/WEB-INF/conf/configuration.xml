@@ -51,7 +51,7 @@
         <properties-param>
           <name>drive-configuration</name>
           <property name="provider-id" value="onedrive" />
-          <property name="provider-name" value="One Drive" />
+          <property name="provider-name" value="OneDrive" />
           <property name="provider-client-id" value="${clouddrive.onedrive.client.id}" />
           <property name="provider-client-secret" value="${clouddrive.onedrive.client.secret}" />
           <property name="connector-host" value="${clouddrive.service.host}" />
