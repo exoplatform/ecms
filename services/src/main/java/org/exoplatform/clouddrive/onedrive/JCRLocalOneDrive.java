@@ -217,7 +217,7 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
             item.file.mimeType,
             item.webUrl,
             link.webUrl,
-            "",
+            "", // TODO may be something better can be here?
             item.createdBy.user.displayName,
             item.lastModifiedBy.user.displayName,
             item.createdDateTime,
@@ -284,11 +284,11 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
         LOG.debug("fetchFiles():  ");
       }
       OneDriveAPI.ChildIterator childIterator = api.getChildIterator(fileId);
-        iterators.add(childIterator);
+        iterators.add(childIterator); // TODO format
       while (childIterator.hasNext()) {
         DriveItem item = childIterator.next();
         if (!isConnected(fileId, item.id)) {
-          JCRLocalCloudFile jcrLocalCloudFile = null;
+          JCRLocalCloudFile jcrLocalCloudFile = null; // TODO not need assign null here
           if (item.folder != null) {
             jcrLocalCloudFile = openInitFolder(item, localFile);
           } else if (item.file != null) {
@@ -341,6 +341,7 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
       }
       Node fileNode = openFile(driveItem.id, driveItem.name, parentNode);
       initFileByDriveItem(fileNode, driveItem);
+      // TODO make better list creation, w/o "The serializable class  does not declare a static final serialVersionUID"
       this.nodes.put(driveItem.id, new ArrayList<Node>(){{add(fileNode);}});
     }
 
@@ -450,6 +451,7 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
 
       if (changes.hasNext()) {
         readLocalNodes();
+        // TODO: do we have a failed sycn restoration procedure, may be we would?
         syncNext();
       }
       saveDeltaToken(changes.getDeltaToken());
@@ -604,7 +606,7 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
       OneDriveAPI.ChildIterator childIterator = api.getChildIterator(fileId);
       while (childIterator.hasNext()) {
         DriveItem item = childIterator.next();
-          JCRLocalCloudFile jcrLocalCloudFile = null;
+          JCRLocalCloudFile jcrLocalCloudFile = null; // TODO we don't need a variable?
           if (item.folder != null) {
             jcrLocalCloudFile = openInitFolder(item, localFile);
           } else if (item.file != null) {
@@ -636,7 +638,7 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
           if (folder != null) {
               initSubtree(destFolderNode, folder);
               return createCloudFolder(destFolderNode, folder);
-          }
+          } // TODO an error here?
           return null;
       }
 
@@ -702,7 +704,7 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
       if (updatedDriveItem != null) {
         initFileByDriveItem(fileNode, updatedDriveItem);
         return createCloudFile(fileNode, updatedDriveItem);
-      }
+      } // TODO an error here?
       return null;
     }
 

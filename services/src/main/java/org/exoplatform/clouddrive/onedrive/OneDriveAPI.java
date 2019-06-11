@@ -67,7 +67,7 @@ public class OneDriveAPI {
 
   private class OneDriveToken{
     // in millis
-    private final static int lifetime = 3600 * 1000;
+    private final static int lifetime = 3600 * 1000; // TODO constant in UPPER CASE
     private String refreshToken;
     private String accessToken;
     private long lastModifiedTime;
@@ -77,7 +77,7 @@ public class OneDriveAPI {
 
     public synchronized String getAccessToken() {
       long currentTime = System.currentTimeMillis();
-      if (currentTime >= lastModifiedTime + /*lifetime*/ + 40_000) {
+      if (currentTime >= lastModifiedTime + /*lifetime*/ + 40_000) { // TODO use constant
         try {
           if (LOG.isDebugEnabled()) {
             LOG.debug("refreshToken = " + this.refreshToken);
@@ -89,6 +89,7 @@ public class OneDriveAPI {
           storedToken.store(refreshToken);
           this.refreshToken = refreshToken;
         } catch (IOException | CloudDriveException e) {
+          // TODO use RefreshAccessException and pass a cause ex to it
           throw new RuntimeException("Error during token update");
         }
       }
@@ -133,6 +134,7 @@ public class OneDriveAPI {
     try {
       httppost.setEntity(new UrlEncodedFormEntity(params, "UTF-8"));
     } catch (UnsupportedEncodingException e) {
+      // TODO can we work normally after this ex? Or we should throw the ex higher? 
       LOG.warn("Unsupported encoding", e);
     }
 
@@ -144,14 +146,16 @@ public class OneDriveAPI {
         String responseBody = IOUtils.toString(inputStream, Charset.forName("UTF-8"));
         return gson.fromJson(responseBody, OneDriveTokenResponse.class);
       }
-    }
+    } // TODO else: may be we should inform that expected REST didn't return what we need? In log or may by an exception? 
     return null;
   }
 
+  // TODO propose a new name: aquireAccessToken 
   private OneDriveTokenResponse retrieveAccessTokenByCode(String code) throws IOException {
     return retrieveAccessToken(clientId, clientSecret, code, null, "authorization_code");
   }
 
+  // TODO propose a new name: renewAccessToken
   private OneDriveTokenResponse retrieveAccessTokenByRefreshToken(String refreshToken) throws IOException {
     return retrieveAccessToken(clientId, clientSecret, null, refreshToken, "refresh_token");
   }
@@ -188,9 +192,12 @@ public class OneDriveAPI {
   OneDriveAPI(String clientId, String clientSecret, String authCode) throws IOException, CloudDriveException {
     this.clientId = clientId;
     this.clientSecret = clientSecret;
-    OneDriveTokenResponse oneDriveTokenResponse = null;
+    
+    // TODO can do in single line these two?
+    OneDriveTokenResponse oneDriveTokenResponse = null; 
     oneDriveTokenResponse = retrieveAccessTokenByCode(authCode);
 
+    // TODO don't assign the instance variable until you sure you have a response 
     this.storedToken = new OneDriveStoredToken();
     if (oneDriveTokenResponse != null) {
       this.storedToken.store(oneDriveTokenResponse.getToken(),
@@ -211,6 +218,7 @@ public class OneDriveAPI {
     if (LOG.isDebugEnabled()) {
       LOG.debug("one drive api by refresh token");
     }
+    // TODO don't assign the instance variables until you sure you have a response
     this.storedToken = new OneDriveStoredToken();
     this.clientId = clientId;
     this.clientSecret = clientSecret;
@@ -234,6 +242,7 @@ public class OneDriveAPI {
       this.oneDriveToken.updateToken(newToken.getAccessToken(),newToken.getRefreshToken());
       this.storedToken.merge(newToken);
     } catch (CloudDriveException e) {
+      // TODO can we work normally after this ex? Need throw an ex may be?
       LOG.error("unnable to merge token", e);
     }
   }
@@ -248,7 +257,7 @@ public class OneDriveAPI {
 
   public void removeFile(String fileId) {
 
-
+    // TODO formatting
       graphClient.me().drive().items(fileId).buildRequest().delete();
 
 
@@ -290,6 +299,7 @@ public class OneDriveAPI {
       }
       return getItem(copiedFileId);
     } catch (IOException e) {
+      // TODO can we work normally after this ex? Later syncs will fail obviously - need throw an ex from here?
      LOG.error("error while copying file",e);
     }
     return null;
@@ -305,7 +315,7 @@ public class OneDriveAPI {
     try {
       return  graphClient.me().drive().root().itemWithPath(URLEncoder.encode(path, "UTF-8")).buildRequest().get();
     } catch (UnsupportedEncodingException e) {
-
+      // TODO throw ex here
      LOG.error("unable to get file",e);
      return null;
     }
@@ -315,6 +325,7 @@ public class OneDriveAPI {
     return storedToken;
   }
 
+  // TODO new name: getResourceId()
   private String retrieveCopiedFileId(String location) throws IOException {
     HttpGet httpget = new HttpGet(location);
     HttpResponse response = httpclient.execute(httpget);
@@ -337,7 +348,7 @@ public class OneDriveAPI {
           return retrieveCopiedFileId(location);
         }
       }
-    }
+    } // TODO else, is it an error state? throw ex here?
     return null;
   }
 
@@ -356,7 +367,7 @@ public class OneDriveAPI {
     httppost.addHeader("Authorization","Bearer " + getAccessToken());
     httppost.addHeader("Content-type", "application/json");
     HttpResponse response = httpclient.execute(httppost);
-    HttpEntity entity = response.getEntity();
+    HttpEntity entity = response.getEntity(); // TODO need it?
     String location = response.getHeaders("Location")[0].getValue();
 
     return retrieveCopiedFileId(location);
@@ -402,6 +413,8 @@ public class OneDriveAPI {
     con.setDoOutput(true);
     OutputStream outputStream = con.getOutputStream();
     outputStream.write(data);
+    
+    // TODO try-finally to flush/close the streams?
     outputStream.flush();
     outputStream.close();
 
@@ -416,7 +429,7 @@ public class OneDriveAPI {
     while ((inputLine = in.readLine()) != null) {
       response.append(inputLine);
     }
-    in.close();
+    in.close(); // TODO try-with-resource?
 
     fileSendResponse.data = response.toString();
     return fileSendResponse;
@@ -444,6 +457,7 @@ public class OneDriveAPI {
 
   }
 
+  // TODO new name: getCreatedDriveItem()
   private DriveItem retrieveDriveItemIfCreated(FileSendResponse fileSendResponse) {
     if (fileSendResponse.responseCode == 201) {
       JsonObject jsonDriveItem = new JsonParser().parse(fileSendResponse.data).getAsJsonObject();
@@ -453,6 +467,7 @@ public class OneDriveAPI {
     return null;
   }
 
+  //TODO new name: getUploadUrl()
   private String retrieveUploadUrl(String path, DriveItemUploadableProperties driveItemUploadableProperties) {
     try {
       return graphClient.me()
@@ -463,6 +478,7 @@ public class OneDriveAPI {
                         .buildRequest()
                         .post().uploadUrl;
     } catch (UnsupportedEncodingException e) {
+      // TODO throw it
       LOG.error("unsupported encoding", e);
       return null;
     }
@@ -501,6 +517,7 @@ public class OneDriveAPI {
     try {
       file = readAllBytes(inputStream);
     } catch (IOException e) {
+      // TODO may be throw an ex?
       LOG.error("Unable to read all bytes from received inputstream", e);
       return null;
     }
@@ -511,18 +528,20 @@ public class OneDriveAPI {
       if (to > file.length) {
         to = file.length;
       }
+      // TODO looks like not efficient work with memory, why we need arrays at all, can InputStream work for us?
       byte[] fileSlice = Arrays.copyOfRange(file, from, to);
       FileSendResponse fileSendResponse = null;
       try {
         fileSendResponse = sendFile(uploadUrl, from, fileSlice.length, file.length, fileSlice);
       } catch (IOException e) {
         LOG.error("Cannot upload part of file. ", e);
+        // TODO throw it?
         return null;
       }
       DriveItem driveItem = processEndOfFileUploadIfReached(fileSendResponse, isInsert);
       if (driveItem != null) {
         return driveItem;
-      }
+      } // TODO is it an error case?
     }
     return null;
   }
@@ -537,12 +556,13 @@ public class OneDriveAPI {
     return driveItem;
   }
 
+  //TODO new name: getUpdatedDriveItem()
   private DriveItem retrieveDriveItemIfUpdated(FileSendResponse fileSendResponse) {
     if (fileSendResponse.responseCode == 200) {
       JsonObject jsonDriveItem = new JsonParser().parse(fileSendResponse.data).getAsJsonObject();
       DriveItem updatedFile = graphClient.me().drive().items(jsonDriveItem.get("id").getAsString()).buildRequest().get();
       return updatedFile;
-    }
+    } // TODO error here?
     return null;
   }
 
@@ -666,7 +686,7 @@ public class OneDriveAPI {
 
     @Override
     protected boolean hasNextChunk()
-    {
+    { // TODO format
       return deltaCollectionPage!=null;
     }
 
