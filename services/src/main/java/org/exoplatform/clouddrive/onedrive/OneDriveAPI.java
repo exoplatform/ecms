@@ -31,6 +31,7 @@ import com.microsoft.graph.options.QueryOption;
 import com.microsoft.graph.requests.extensions.*;
 
 import org.exoplatform.clouddrive.CloudDriveException;
+import org.exoplatform.clouddrive.RefreshAccessException;
 import org.exoplatform.clouddrive.oauth2.UserToken;
 import org.exoplatform.clouddrive.utils.ChunkIterator;
 import org.exoplatform.services.log.ExoLogger;
@@ -67,7 +68,7 @@ public class OneDriveAPI {
 
   private class OneDriveToken{
     // in millis
-    private final static int lifetime = 3600 * 1000; // TODO constant in UPPER CASE
+    private final static int LIFETIME = 3600 * 1000;
     private String refreshToken;
     private String accessToken;
     private long lastModifiedTime;
@@ -75,9 +76,9 @@ public class OneDriveAPI {
       this.updateToken(accessToken,refreshToken);
     }
 
-    public synchronized String getAccessToken() {
+    public synchronized String getAccessToken() throws RefreshAccessException {
       long currentTime = System.currentTimeMillis();
-      if (currentTime >= lastModifiedTime + /*lifetime*/ + 40_000) { // TODO use constant
+      if (currentTime >= lastModifiedTime + /*LIFETIME*/ + 2000_000) { // TODO use constant
         try {
           if (LOG.isDebugEnabled()) {
             LOG.debug("refreshToken = " + this.refreshToken);
@@ -89,8 +90,7 @@ public class OneDriveAPI {
           storedToken.store(refreshToken);
           this.refreshToken = refreshToken;
         } catch (IOException | CloudDriveException e) {
-          // TODO use RefreshAccessException and pass a cause ex to it
-          throw new RuntimeException("Error during token update");
+          throw new RefreshAccessException("Error during token update",e);
         }
       }
       return accessToken;
@@ -184,7 +184,12 @@ public class OneDriveAPI {
 
   private void initGraphClient() {
     this.graphClient = GraphServiceClient.builder().authenticationProvider(iHttpRequest -> {
-      String accessToken = getAccessToken();
+      String accessToken = null;
+      try {
+        accessToken = getAccessToken();
+      } catch (RefreshAccessException e) {
+        // TODO
+      }
       iHttpRequest.getHeaders().add(new HeaderOption("Authorization", "Bearer " + accessToken));
     }).buildClient();
   }
@@ -233,7 +238,7 @@ public class OneDriveAPI {
     }
   }
 
-  private String getAccessToken() {
+  private String getAccessToken() throws RefreshAccessException {
     return oneDriveToken.getAccessToken();
   }
 
@@ -291,7 +296,7 @@ public class OneDriveAPI {
     return graphClient.me().drive().items(parentId).children().buildRequest().post(folder);
   }
 
-  public DriveItem copyFile(String parentId, String fileName, String fileId) {
+  public DriveItem copyFile(String parentId, String fileName, String fileId) throws RefreshAccessException {
     try {
       String copiedFileId = copy(parentId, fileName, fileId);
       if (LOG.isDebugEnabled()) {
@@ -305,7 +310,7 @@ public class OneDriveAPI {
     return null;
   }
 
-  public DriveItem copyFolder(String parentId, String name, String folderId) {
+  public DriveItem copyFolder(String parentId, String name, String folderId) throws RefreshAccessException {
     return copyFile(parentId, name, folderId);
   }
 
@@ -353,7 +358,7 @@ public class OneDriveAPI {
   }
 
 
-  public String copy(String parentId, String fileName, String fileId) throws IOException {
+  public String copy(String parentId, String fileName, String fileId) throws IOException, RefreshAccessException {
     String request = "{\n" +
             "  \"parentReference\": {\n" +
             "    \"id\": \""+parentId+"\"\n" +
@@ -367,7 +372,6 @@ public class OneDriveAPI {
     httppost.addHeader("Authorization","Bearer " + getAccessToken());
     httppost.addHeader("Content-type", "application/json");
     HttpResponse response = httpclient.execute(httppost);
-    HttpEntity entity = response.getEntity(); // TODO need it?
     String location = response.getHeaders("Location")[0].getValue();
 
     return retrieveCopiedFileId(location);
@@ -572,6 +576,7 @@ public class OneDriveAPI {
                           Calendar modified,
                           String mimetype,
                           InputStream inputStream) {
+    // TODO remove mimetype
     return insertUpdate(path, fileName, created, modified, mimetype, inputStream, true);
   }
 
@@ -596,7 +601,7 @@ public class OneDriveAPI {
 
   public IDriveItemDeltaCollectionPage delta(String deltaToken) {
     IDriveItemDeltaCollectionPage iDriveItemDeltaCollectionPage = null;
-    if (deltaToken == null || deltaToken.isEmpty()) {
+    if (deltaToken == null || deltaToken.isEmpty() || deltaToken.toUpperCase().trim().equals("ALL")) {
       iDriveItemDeltaCollectionPage = graphClient.me().drive().root().delta().buildRequest().get();
     } else {
       final QueryOption deltaTokenQuery = new QueryOption("token", deltaToken);
