@@ -121,6 +121,9 @@ public class JodConverterServiceImpl implements JodConverterService, Startable {
           DocumentFormat jpg = new DocumentFormat("JPEG Image", "jpg", "image/jpeg");
           jpg.setInputFamily(DocumentFamily.DRAWING);
           jpg.setStoreProperties(DocumentFamily.TEXT, Collections.singletonMap("FilterName", "writer_jpg_Export"));
+          jpg.setStoreProperties(DocumentFamily.SPREADSHEET, Collections.singletonMap("FilterName", "writer_jpg_Export"));
+          jpg.setStoreProperties(DocumentFamily.PRESENTATION, Collections.singletonMap("FilterName", "impress_jpg_Export"));
+          jpg.setStoreProperties(DocumentFamily.DRAWING, Collections.singletonMap("FilterName", "draw_jpg_Export"));
           ((SimpleDocumentFormatRegistry) documentFormatRegistry).addFormat(jpg);
         } else {
           LOG.warn("Can't add a specific document format for thumbnail generation from a Word Document.");
