@@ -10,6 +10,8 @@ import java.util.List;
 
 import javax.net.ssl.HttpsURLConnection;
 
+import com.google.gson.JsonElement;
+import com.microsoft.graph.serializer.AdditionalDataManager;
 import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -282,6 +284,16 @@ public class OneDriveAPI {
     return graphClient.me().drive().root().buildRequest().get();
   }
 
+  private DriveItem createFolderRequestWrapper(String parentId, DriveItem folder){
+    JsonObject obj = new JsonParser().parse("{\n" +
+            "  \"name\": \""+folder.name+"\",\n" +
+            "  \"folder\": { },\n" +
+            "  \"@microsoft.graph.conflictBehavior\": \"rename\"\n" +
+            "}").getAsJsonObject();
+    String id = graphClient.customRequest("/me/drive/items/"+parentId+"/children").buildRequest().post(obj).get("id").getAsString();
+    return getItem(id);
+  }
+
   public DriveItem createFolder(String parentId, String name, Calendar created) {
     if (parentId == null || parentId.isEmpty()) {
       parentId = getRootId();
@@ -293,7 +305,9 @@ public class OneDriveAPI {
     folder.fileSystemInfo.createdDateTime = created;
     folder.parentReference.id = parentId;
     folder.folder = new Folder();
-    return graphClient.me().drive().items(parentId).children().buildRequest().post(folder);
+
+//    return graphClient.me().drive().items(parentId).children().buildRequest().post(folder);
+    return createFolderRequestWrapper(parentId,folder);
   }
 
   public DriveItem copyFile(String parentId, String fileName, String fileId) throws RefreshAccessException {
@@ -359,17 +373,35 @@ public class OneDriveAPI {
 
 
   public String copy(String parentId, String fileName, String fileId) throws IOException, RefreshAccessException {
-    String request = "{\n" +
-            "  \"parentReference\": {\n" +
-            "    \"id\": \""+parentId+"\"\n" +
-            "  },\n" +
-            "  \"name\": \""+fileName+"\"\n" +
-            "}";
 
-    HttpPost httppost = new HttpPost("https://graph.microsoft.com/v1.0/me/drive/items/"+fileId+"/copy");
+//    {
+//      "parentReference" : {
+//        "id" : "parenId"
+//    },
+//      "name" : "fileName",
+//      "microsoft.graph.conflictBehavior", "rename"
+//    }
+
+    String request =
+            "{\n" +
+                    "  \"parentReference\": {\n" +
+                    "    \"id\": \"" + parentId + "\"\n" +
+                    "  },\n" +
+                    "  \"name\": \"" + fileName + "\"\n" +
+                    "}";
+//            "{\n" +
+//            "      \"parentReference\" : {\n" +
+//            "        \"id\" : \""+parentId+"\"\n" +
+//            "    },\n" +
+//            "      \"name\" : \""+fileName+"\",\n" +
+//            "      \"microsoft.graph.conflictBehavior\", \"rename\"\n" +
+//            "    }";
+
+
+    HttpPost httppost = new HttpPost("https://graph.microsoft.com/v1.0/me/drive/items/" + fileId + "/copy");
     StringEntity stringEntity = new StringEntity(request, "UTF-8");
     httppost.setEntity(stringEntity);
-    httppost.addHeader("Authorization","Bearer " + getAccessToken());
+    httppost.addHeader("Authorization", "Bearer " + getAccessToken());
     httppost.addHeader("Content-type", "application/json");
     HttpResponse response = httpclient.execute(httppost);
     String location = response.getHeaders("Location")[0].getValue();
@@ -471,9 +503,49 @@ public class OneDriveAPI {
     return null;
   }
 
+
+  private String uploadUrlConflictRenameWrapper(String path, DriveItemUploadableProperties driveItemUploadableProperties) throws UnsupportedEncodingException {
+
+    /*
+      "item": {
+    "@odata.type": "microsoft.graph.driveItemUploadableProperties",
+    "@microsoft.graph.conflictBehavior": "rename",
+    "name": "largefile.dat"
+  }
+     */
+
+
+
+
+    JsonObject uploadFileRequestBody = new JsonParser().parse("  \"item\": {\n" +
+            "    \"@odata.type\": \"microsoft.graph.driveItemUploadableProperties\",\n" +
+            "    \"@microsoft.graph.conflictBehavior\": \"rename\",\n" +
+            "    \"name\": \""+driveItemUploadableProperties.name+"\"\n" +
+            "  }").getAsJsonObject();
+
+
+
+
+//    JsonObject uploadFileRequestBody = new JsonParser().parse("{\n" +
+//            "      \"@microsoft.graph.conflictBehavior\":\"rename\",\n" +
+//            "            \"description\":\"" + driveItemUploadableProperties.description + "\",\n" +
+//            "            \"fileSystemInfo\":{\n" +
+//            "      \"@odata.type\":\"microsoft.graph.fileSystemInfo\"\n" +
+////            "      \"lastModifiedDateTime\" : \""+driveItemUploadableProperties.fileSystemInfo.lastModifiedDateTime+"\",\n" +
+////            "      \"createdDateTime\" : \""+driveItemUploadableProperties.fileSystemInfo.createdDateTime+"\"\n" +
+//            "    },\n" +
+//            "      \"name\":\"" + driveItemUploadableProperties.name + "\"\n" +
+//            "    }").getAsJsonObject();
+
+
+    return graphClient.customRequest("/me/drive/root:/" + URLEncoder.encode(path, "UTF-8") + ":/createUploadSession").buildRequest().post(uploadFileRequestBody).get("uploadUrl").getAsString();
+  }
+
   //TODO new name: getUploadUrl()
   private String retrieveUploadUrl(String path, DriveItemUploadableProperties driveItemUploadableProperties) {
     try {
+
+//      return uploadUrlConflictRenameWrapper(path,driveItemUploadableProperties);
       return graphClient.me()
                         .drive()
                         .root()
@@ -577,6 +649,9 @@ public class OneDriveAPI {
                           String mimetype,
                           InputStream inputStream) {
     // TODO remove mimetype
+    if (LOG.isDebugEnabled()) {
+      LOG.debug("insert file");
+    }
     return insertUpdate(path, fileName, created, modified, mimetype, inputStream, true);
   }
 
@@ -591,8 +666,22 @@ public class OneDriveAPI {
   }
 
 
+  public DriveItem updateFileWrapper(DriveItem item) {
+    // TODO rewrite with JsonObject
+    JsonObject updateFileRequestBody = new JsonParser().parse("  {\n" +
+            "            \"parentReference\": {\n" +
+            "            \"id\": \""+item.parentReference.id+"\"\n" +
+            "        },\n" +
+            "            \"name\": \""+item.name+"\",\n" +
+            "            \"@microsoft.graph.conflictBehavior\" : \"rename\"\n" +
+            "        }").getAsJsonObject();
+    String updatedFileId = graphClient.customRequest("/me/drive/items/" + item.id).buildRequest().patch(updateFileRequestBody).get("id").getAsString();
+    return getItem(updatedFileId);
+  }
+  
   public DriveItem updateFile(DriveItem driveItem) {
-    return graphClient.me().drive().items(driveItem.id).buildRequest().patch(driveItem);
+    return updateFileWrapper(driveItem);
+//    return graphClient.me().drive().items(driveItem.id).buildRequest().patch(driveItem);
   }
 
   public DriveItem getItem(String itemId) {

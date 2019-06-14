@@ -149,7 +149,7 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
                 driveNode.setProperty("onedrive:oauth2RefreshToken", token.getRefreshToken());
                 driveNode.setProperty("onedrive:oauth2TokenExpirationTime", token.getExpirationTime());
 
-                driveNode.save();
+//                driveNode.save();
             } catch (RepositoryException e) {
                 rollback(driveNode);
                 throw new CloudDriveException("Error updating access key: " + e.getMessage(), e);
@@ -527,7 +527,6 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
             iterators.add(changes);
             if (changes.hasNext()) {
                 readLocalNodes();
-                // TODO: do we have a failed sycn restoration procedure, may be we would?
                 try {
                     syncNext();
                 } catch (Throwable ex) {
@@ -819,10 +818,14 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
             return null;
         }
 
+
+
+
+
+
         private DriveItem updateItem(Node itemNode, Calendar modified) throws RepositoryException {
             DriveItem driveItemModifiedFields = prepareModifiedDriveItem(itemNode, modified);
-            api.updateFile(driveItemModifiedFields);
-            return api.getItem(driveItemModifiedFields.id);
+            return api.updateFile(driveItemModifiedFields);
         }
 
         private DriveItem prepareModifiedDriveItem(Node fileNode, Calendar modified) throws RepositoryException {
