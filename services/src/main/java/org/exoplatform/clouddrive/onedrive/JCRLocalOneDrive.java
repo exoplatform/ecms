@@ -592,14 +592,14 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
             if (LOG.isDebugEnabled()) {
                 LOG.debug("removeFile(): ");
             }
-//            try {
-//                api.removeFile(id);
-//            } catch (Throwable ex) {
-//                if (LOG.isDebugEnabled()) {
-//                    LOG.debug("error during file delete", ex);
-//                }
-//
-//            }
+            try {
+                api.removeFile(id);
+            } catch (Throwable ex) {
+                if (LOG.isDebugEnabled()) {
+                    LOG.debug("error during file delete", ex);
+                }
+
+            }
             return true;
         }
 
@@ -608,13 +608,13 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
             if (LOG.isDebugEnabled()) {
                 LOG.debug("removeFolder(): ");
             }
-//            try {
-//                api.removeFolder(id);
-//            } catch (Throwable ex) {
-//                if (LOG.isDebugEnabled()) {
-//                    LOG.debug("error during folder delete", ex);
-//                }
-//            }
+            try {
+                api.removeFolder(id);
+            } catch (Throwable ex) {
+                if (LOG.isDebugEnabled()) {
+                    LOG.debug("error during folder delete", ex);
+                }
+            }
             return true;
         }
 

@@ -87,9 +87,9 @@ public class OneDriveAPI {
           this.accessToken = oneDriveTokenResponse.getToken();
           this.lastModifiedTime = System.currentTimeMillis();
           String refreshToken = oneDriveTokenResponse.getRefreshToken();
-          storedToken.store(refreshToken);
+//          storedToken.store(refreshToken);
           this.refreshToken = refreshToken;
-        } catch (IOException | CloudDriveException e) {
+        } catch (IOException e) {
           throw new RefreshAccessException("Error during token update",e);
         }
       }
@@ -134,7 +134,7 @@ public class OneDriveAPI {
     try {
       httppost.setEntity(new UrlEncodedFormEntity(params, "UTF-8"));
     } catch (UnsupportedEncodingException e) {
-      // TODO can we work normally after this ex? Or we should throw the ex higher? 
+      // TODO can we work normally after this ex? Or we should throw the ex higher?
       LOG.warn("Unsupported encoding", e);
     }
 
@@ -146,11 +146,11 @@ public class OneDriveAPI {
         String responseBody = IOUtils.toString(inputStream, Charset.forName("UTF-8"));
         return gson.fromJson(responseBody, OneDriveTokenResponse.class);
       }
-    } // TODO else: may be we should inform that expected REST didn't return what we need? In log or may by an exception? 
+    } // TODO else: may be we should inform that expected REST didn't return what we need? In log or may by an exception?
     return null;
   }
 
-  // TODO propose a new name: aquireAccessToken 
+  // TODO propose a new name: aquireAccessToken
   private OneDriveTokenResponse retrieveAccessTokenByCode(String code) throws IOException {
     return retrieveAccessToken(clientId, clientSecret, code, null, "authorization_code");
   }
@@ -197,12 +197,12 @@ public class OneDriveAPI {
   OneDriveAPI(String clientId, String clientSecret, String authCode) throws IOException, CloudDriveException {
     this.clientId = clientId;
     this.clientSecret = clientSecret;
-    
+
     // TODO can do in single line these two?
-    OneDriveTokenResponse oneDriveTokenResponse = null; 
+    OneDriveTokenResponse oneDriveTokenResponse = null;
     oneDriveTokenResponse = retrieveAccessTokenByCode(authCode);
 
-    // TODO don't assign the instance variable until you sure you have a response 
+    // TODO don't assign the instance variable until you sure you have a response
     this.storedToken = new OneDriveStoredToken();
     if (oneDriveTokenResponse != null) {
       this.storedToken.store(oneDriveTokenResponse.getToken(),
@@ -417,7 +417,7 @@ public class OneDriveAPI {
     con.setDoOutput(true);
     OutputStream outputStream = con.getOutputStream();
     outputStream.write(data);
-    
+
     // TODO try-finally to flush/close the streams?
     outputStream.flush();
     outputStream.close();
