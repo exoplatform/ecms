@@ -6,7 +6,7 @@ package org.exoplatform.services.wcm.publication;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
+import java.util.stream.Collectors;
 import javax.jcr.*;
 import javax.jcr.query.Query;
 import javax.jcr.query.QueryManager;
@@ -54,8 +54,9 @@ import org.picocontainer.Startable;
 @RESTEndpoint(path = "wcmcomposerservice")
 public class WCMComposerImpl implements WCMComposer, Startable {
 
-    final static public String EXO_RESTORELOCATION = "exo:restoreLocation";
-
+  final static public String EXO_RESTORELOCATION = "exo:restoreLocation";
+  final static public String EXO_LANGUAGE = "exo:language";
+  final static public String LANGUAGES    = "languages";
   /** The repository service. */
   private RepositoryService repositoryService;
 
@@ -90,7 +91,46 @@ public class WCMComposerImpl implements WCMComposer, Startable {
   private List<String> usedPrimaryTypes;
   /** shared group membership */
   private String sharedGroup;
+  
+  public List<Node> getRealTranslationNodes(Node node) throws Exception {
+    LinkManager linkManager = WCMCoreUtils.getService(LinkManager.class);
+    List<Node> translationNodes = new ArrayList<Node>();
+    if(node.hasNode(LANGUAGES)){
+      Node languageNode = node.getNode(LANGUAGES) ;
+      NodeIterator iter  = languageNode.getNodes() ;
+      while(iter.hasNext()) {
+        Node currNode = iter.nextNode();
+        if (currNode.isNodeType("exo:symlink")) {
+          translationNodes.add(linkManager.getTarget(currNode));
+        }
+      }
+    }
+    return translationNodes;
+  }
 
+  /**
+   * Search the translations nodes and remove the duplications.
+   **/
+  public List<Node> searchAndRemoveDuplicatedNodes(List<Node> nodes) {
+    List<Node> nodesClone = new ArrayList<>(nodes);
+    return nodes.stream().filter(nodeItem -> {
+      try {
+        List<Node> translationNodes = getRealTranslationNodes(nodeItem);
+        if (translationNodes.size() > 0) {
+          if (nodesClone.stream().anyMatch(translationNodes::contains)) {
+            nodesClone.remove(nodeItem);
+            return false;
+          } else {
+            return true;
+          }
+        }
+      } catch (Exception e) {
+        LOG.warn("Error getting real translation nodes of {}", nodeItem, e);
+      }
+      return false;
+    }).collect(Collectors.toList());
+  }
+  
   /**
    * Instantiates a new WCM composer impl.
    *
@@ -218,14 +258,13 @@ public class WCMComposerImpl implements WCMComposer, Startable {
       while (nodeIterator != null && nodeIterator.hasNext()) {
         node = nodeIterator.nextNode();
         viewNode = getViewableContent(node, filters);
-        if (viewNode != null) {
+        if (viewNode != null && !nodes.contains(viewNode)) {
           nodes.add(viewNode);
         }
       }
+      nodes = searchAndRemoveDuplicatedNodes(nodes);
     } catch (Exception e) {
-      if (LOG.isWarnEnabled()) {
-        LOG.warn(e.getMessage());
-      }
+      LOG.warn("Error getting contents of folder {}:{}", workspace, path, e);
     }
 
     return nodes;
@@ -324,9 +363,7 @@ public class WCMComposerImpl implements WCMComposer, Startable {
       nodes.add(taxonomyNodes.get((int)i));
     }
 
-    Result result = new Result(nodes, offset, totalSize, nodeLocation, filters);
-    return result;
-
+    return new Result(nodes, offset, totalSize, nodeLocation, filters);
   }
 
   /**
@@ -342,26 +379,25 @@ public class WCMComposerImpl implements WCMComposer, Startable {
   private Result getPaginatedNodesContent(NodeLocation nodeLocation, String workspace,
                                           HashMap<String, String> filters,
                                           SessionProvider sessionProvider) throws Exception{
-    List<Node> nodes = new ArrayList<Node>();
+    List<Node> nodes = new ArrayList<>();
     long totalSize;
     long offset = (filters.get(FILTER_OFFSET)!=null)?new Long(filters.get(FILTER_OFFSET)):0;
     String path = nodeLocation.getPath();
     totalSize = getViewabaleContentsSize(path, workspace, filters, sessionProvider);
     NodeIterator nodeIterator = getViewableContents(workspace, path, filters, sessionProvider, true);
-    Node node = null, viewNode = null;
+    Node node = null;
+    Node viewNode = null;
     if (nodeIterator != null) {
       while (nodeIterator.hasNext()) {
         node = nodeIterator.nextNode();
         viewNode = getViewableContent(node, filters);
-        if (viewNode != null) {
+        if (viewNode != null && !nodes.contains(viewNode)) {
           nodes.add(viewNode);
         }
       }
+      nodes = searchAndRemoveDuplicatedNodes(nodes);
     }
-
-    Result result = new Result(nodes, offset, totalSize, nodeLocation, filters);
-    return result;
-
+    return new Result(nodes, offset, totalSize, nodeLocation, filters);
   }
 
   /**
@@ -392,7 +428,7 @@ public class WCMComposerImpl implements WCMComposer, Startable {
    * org.exoplatform.services.wcm.publication.WCMComposer#getContents(java.lang
    * .String, java.lang.String, java.lang.String, java.util.HashMap)
    */
-  private NodeIterator getViewableContents(String workspace,
+  public NodeIterator getViewableContents(String workspace,
                                            String path,
                                            HashMap<String, String> filters,
                                            SessionProvider sessionProvider, boolean paginated) throws Exception {
@@ -504,7 +540,7 @@ public class WCMComposerImpl implements WCMComposer, Startable {
 
         viewNode = getPublishedContent(lnode, filters);
         if (viewNode!=null) {
-          return viewNode;
+          return lnode;
         }
         return null;
       }
@@ -514,7 +550,7 @@ public class WCMComposerImpl implements WCMComposer, Startable {
       viewNode = getPublishedContent(node, filters);
     }
 
-    return viewNode;
+    return node;
   }
 
 
