@@ -17,9 +17,6 @@
 package org.exoplatform.wcm.connector.collaboration;
 
 import java.awt.image.BufferedImage;
-import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.InputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -247,39 +244,7 @@ public class ThumbnailRESTService implements ResourceContainer {
 
     return Response.ok().header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
   }
-  
-  /**
-   * Return an image at an original size from local machine.
-   *
-   * @param nodePath The node path.
-   * @return Response data stream.
-   * @throws Exception
-   *
-   * @anchor ThumbnailRESTService.getOriginImage
-   */
-  @Path("/originImage/{nodePath:.*}/")
-  @GET
-  public Response getLocalImage(@PathParam("nodePath") String nodePath,
-                                @HeaderParam("If-Modified-Since") String ifModifiedSince) throws Exception {
-    DateFormat dateFormat = new SimpleDateFormat(IF_MODIFIED_SINCE_DATE_FORMAT);
-    if (!thumbnailService_.isEnableThumbnail())
-      return Response.ok().header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
 
-    
-    try {
-      File file = new File(nodePath);
-      FileInputStream inputStream = new FileInputStream(file);
-      BufferedInputStream buf = new BufferedInputStream(inputStream);
-      
-      return Response.ok(buf, "image").header(LAST_MODIFIED_PROPERTY,
-                                                          dateFormat.format(new Date())).build();
-    } catch (Exception e) {
-      if (LOG.isErrorEnabled()) {
-        LOG.error(e);
-      }
-    }
-    return Response.ok().header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
-  }
 
   private Response getThumbnailByType(String workspaceName, String nodePath,
       String propertyName, String ifModifiedSince) throws Exception {
