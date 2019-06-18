@@ -6,7 +6,7 @@ import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 
 public class OneDriveProvider extends CloudProvider {
-  protected static final Log LOG = ExoLogger.getLogger(OneDriveConnector.class);
+  protected static final Log LOG = ExoLogger.getLogger(OneDriveProvider.class);
   private final String authUrl;
 
   /**
