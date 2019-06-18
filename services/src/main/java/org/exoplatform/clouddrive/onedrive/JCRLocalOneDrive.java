@@ -33,6 +33,7 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
 
     private static final Log LOG = ExoLogger.getLogger(JCRLocalOneDrive.class);
 
+
     protected JCRLocalOneDrive(CloudUser user,
                                Node driveNode,
                                SessionProviderService sessionProviders,
@@ -358,6 +359,8 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
             this.nodes.put(driveItem.id, new ArrayList<Node>() {{
                 add(fileNode);
             }});
+            JCRLocalCloudFile jcrLocalCloudFile = createCloudFile(fileNode, driveItem);
+            addChanged(jcrLocalCloudFile);
         }
 
         private void fetchChilds(String fileId, Node localFile) throws CloudDriveException, RepositoryException {
@@ -579,6 +582,8 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
             this.nodes.put(driveItem.id, new ArrayList<Node>() {{
                 add(fileNode);
             }});
+            JCRLocalCloudFile jcrLocalCloudFile = createCloudFile(fileNode, driveItem);
+            addChanged(jcrLocalCloudFile);
             return fileNode;
         }
 
@@ -820,8 +825,6 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
 //
 //            }
 //        }
-
-
         @Override
         public CloudFile updateFile(Node fileNode, Calendar modified) throws RepositoryException {
             if (LOG.isDebugEnabled()) {

@@ -11,6 +11,8 @@ import java.util.stream.Collectors;
 
 import javax.net.ssl.HttpsURLConnection;
 
+import com.microsoft.graph.logger.ILogger;
+import com.microsoft.graph.logger.LoggerLevel;
 import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -64,6 +66,34 @@ class Scopes {
 }
 
 
+class ExoGraphClientLogger implements ILogger {
+
+    private final Log log;
+
+    public ExoGraphClientLogger(Log log ){
+        this.log = log;
+    }
+    @Override
+    public void setLoggingLevel(LoggerLevel loggerLevel) {
+
+    }
+    @Override
+    public LoggerLevel getLoggingLevel() {
+        return LoggerLevel.DEBUG;
+    }
+
+    @Override
+    public void logDebug(String s) {
+        if (log.isDebugEnabled()) {
+            log.debug(s);
+        }
+    }
+
+    @Override
+    public void logError(String s, Throwable throwable) {
+        log.error(s,throwable);
+    }
+}
 public class OneDriveAPI {
     private String rootId;
 
@@ -105,8 +135,8 @@ public class OneDriveAPI {
         }
     }
 
-    protected static final Log LOG = ExoLogger.getLogger(OneDriveAPI.class);
-
+    private static final Log LOG = ExoLogger.getLogger(OneDriveAPI.class);
+    private static final Log  GRAPH_CLIENT_LOG = ExoLogger.getLogger(OneDriveAPI.class.getSimpleName() + "_GraphClient");
     private final OneDriveStoredToken storedToken;
 
     private final String clientId;
@@ -189,7 +219,7 @@ public class OneDriveAPI {
                 LOG.error("during initialization of graphClient an error occurred",e);
             }
             iHttpRequest.getHeaders().add(new HeaderOption("Authorization", "Bearer " + accessToken));
-        }).buildClient();
+        }).logger(new ExoGraphClientLogger(GRAPH_CLIENT_LOG)).buildClient();
     }
 
     OneDriveAPI(String clientId, String clientSecret, String authCode) throws IOException, CloudDriveException {
