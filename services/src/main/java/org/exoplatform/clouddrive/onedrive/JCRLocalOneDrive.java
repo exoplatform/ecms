@@ -3,6 +3,7 @@ package org.exoplatform.clouddrive.onedrive;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 import javax.jcr.Node;
@@ -10,6 +11,7 @@ import javax.jcr.NodeIterator;
 import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
 
+import com.microsoft.graph.http.GraphServiceException;
 import com.microsoft.graph.models.extensions.DriveItem;
 import com.microsoft.graph.models.extensions.FileSystemInfo;
 import com.microsoft.graph.models.extensions.ItemReference;
@@ -208,9 +210,27 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
 
   }
 
+  private String createLink(DriveItem item) {
+
+    try {
+      String link = getUser().api().createLink(item.id).webUrl;
+      if (item.file.mimeType.startsWith("image")) {
+        String base64Url = Base64.getEncoder().encodeToString(link.getBytes(StandardCharsets.UTF_8));
+        String preparedBase64Url = "u!" + StringUtils.stripEnd(base64Url, "=").replace("/", "_").replace("+", "-");
+        link = "https://api.onedrive.com/v1.0/shares/" + preparedBase64Url + "/root/content";
+      }
+      return link;
+    } catch (GraphServiceException ex) {
+      LOG.error("error while link creation", ex);
+      return null;
+    }
+    // oneDriveAPI.getItem("2D4964AA6D920333!2176").file.mimeType
+  }
+
   private void initFileByDriveItem(Node fileNode, DriveItem item) throws RepositoryException {
-    final SharingLink link = getUser().api().createLink(item.id);
-    initFile(fileNode, item.id, item.name, item.file.mimeType, item.webUrl, link.webUrl, null, // TODO
+//    final SharingLink link = getUser().api().createLink(item.id);
+    String previewLink = createLink(item);
+    initFile(fileNode, item.id, item.name, item.file.mimeType, item.webUrl, previewLink, null, // TODO
                                                                                                // may
                                                                                                // be
                                                                                                // something
@@ -855,11 +875,11 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
     }
 
     @Override
-    public CloudFile restore(String id, String path) throws CloudDriveException, RepositoryException {
+    public CloudFile restore(String id, String path) throws SyncNotSupportedException {
       if (LOG.isDebugEnabled()) {
         LOG.debug("restore(): ");
       }
-      return null;
+      throw new SyncNotSupportedException("Restore not supported");
     }
 
     private DriveItem updateItem(Node itemNode, Calendar modified) throws RepositoryException {
