@@ -527,6 +527,7 @@ UIFileView.prototype.showItemContextMenu = function (event, element) {
 	var checkExoActionNode = false;
 	var checkInStatus = false;
 	var isAbleToRestore = true;
+	var isUserPrivateFolder = false;
 
 	for (var i in Self.itemsSelected) {
 	  if (Array.prototype[i]) continue;
@@ -539,6 +540,9 @@ UIFileView.prototype.showItemContextMenu = function (event, element) {
 	  else if (Self.itemsSelected[i].getAttribute('isLinkWithTarget') == "true") {
 		checkLinkAndTargetInTrash = true; 
 		continue;
+	  }
+	  if (Self.itemsSelected[i].getAttribute('isSpecificFolder') == "true") {
+		  isUserPrivateFolder = true;
 	  }
 	  //check if one of the node can be restored
 	  else if (Self.itemsSelected[i].getAttribute('isAbleToRestore') == "false") {
@@ -681,6 +685,10 @@ UIFileView.prototype.showItemContextMenu = function (event, element) {
 		
 		if (Self.itemsSelected.length > 1) {
 		  pasteAction.parentNode.style.display = "none";
+		}
+		if (isUserPrivateFolder) {
+			cutAction.parentNode.style.display = "none";
+			deleteAction.parentNode.style.display = "none";
 		}
 	}
     

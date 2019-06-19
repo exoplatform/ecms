@@ -28,11 +28,7 @@ import javax.jcr.nodetype.ConstraintViolationException;
 
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
-import org.exoplatform.ecm.webui.component.explorer.control.filter.CanCutNodeFilter;
-import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotEditingDocumentFilter;
-import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotInTrashFilter;
-import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotLockedFilter;
-import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotTrashHomeNodeFilter;
+import org.exoplatform.ecm.webui.component.explorer.control.filter.*;
 import org.exoplatform.ecm.webui.component.explorer.control.listener.UIWorkingAreaActionListener;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.ecm.webui.utils.Utils;
@@ -70,7 +66,8 @@ public class CutManageComponent extends UIAbstractManagerComponent {
   private final static Log       LOG  = ExoLogger.getLogger(CutManageComponent.class.getName());
 
   private static final List<UIExtensionFilter> FILTERS
-      = Arrays.asList(new UIExtensionFilter[] { new IsNotInTrashFilter(),
+      = Arrays.asList(new UIExtensionFilter[] { new IsNotSpecificFolderNodeFilter(),
+                                                new IsNotInTrashFilter(),
                                                 new CanCutNodeFilter(),
                                                 new IsNotLockedFilter(),
                                                 new IsNotTrashHomeNodeFilter(),
