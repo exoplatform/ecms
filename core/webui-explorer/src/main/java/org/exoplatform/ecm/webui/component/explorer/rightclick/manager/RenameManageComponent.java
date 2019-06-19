@@ -20,13 +20,7 @@ package org.exoplatform.ecm.webui.component.explorer.rightclick.manager;
 import java.util.Arrays;
 import java.util.List;
 
-import org.exoplatform.ecm.webui.component.explorer.control.filter.CanSetPropertyFilter;
-import org.exoplatform.ecm.webui.component.explorer.control.filter.IsCheckedOutFilter;
-import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotEditingDocumentFilter;
-import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotInTrashFilter;
-import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotLockedFilter;
-import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotParentLockedWhenRenameFilter;
-import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotTrashHomeNodeFilter;
+import org.exoplatform.ecm.webui.component.explorer.control.filter.*;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.ext.filter.UIExtensionFilter;
 import org.exoplatform.webui.ext.filter.UIExtensionFilters;
@@ -43,7 +37,8 @@ import org.exoplatform.webui.ext.manager.UIAbstractManagerComponent;
 public class RenameManageComponent extends UIAbstractManagerComponent {
 
  private static final List<UIExtensionFilter> FILTERS
-         = Arrays.asList(new UIExtensionFilter[]{new IsNotInTrashFilter(),
+         = Arrays.asList(new UIExtensionFilter[]{new IsNotSpecificFolderNodeFilter(),
+                                                 new IsNotInTrashFilter(),
                                                  new IsNotParentLockedWhenRenameFilter(),
                                                  new CanSetPropertyFilter(),
                                                  new IsNotLockedFilter(),
