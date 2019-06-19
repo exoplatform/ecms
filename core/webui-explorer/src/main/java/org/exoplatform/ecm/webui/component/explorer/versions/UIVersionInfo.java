@@ -78,7 +78,7 @@ import org.exoplatform.webui.event.EventListener;
     events = {
         @EventConfig(listeners = UIVersionInfo.SelectActionListener.class),
         @EventConfig(listeners = UIVersionInfo.RestoreVersionActionListener.class, confirm = "UIVersionInfo.msg.confirm-restore"),
-        @EventConfig(listeners = UIVersionInfo.CompareVersionActionListener.class),
+        @EventConfig(listeners = UIVersionInfo.CompareVersionActionListener.class, csrfCheck = false),
         @EventConfig(listeners = UIVersionInfo.DeleteVersionActionListener.class, confirm = "UIVersionInfo.msg.confirm-delete"),
         @EventConfig(listeners = UIVersionInfo.CloseActionListener.class),
         @EventConfig(listeners = UIVersionInfo.AddSummaryActionListener.class)
