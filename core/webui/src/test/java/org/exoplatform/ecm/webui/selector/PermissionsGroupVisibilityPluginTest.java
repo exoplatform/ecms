@@ -116,4 +116,36 @@ public class PermissionsGroupVisibilityPluginTest {
     assertTrue(hasPermissionOnOrganizationRh);
   }
 
+  @Test
+  public void shouldHasPermissionWhenUserIsOnlyMemberOfSpaces() {
+    // Given
+    UserACL userACL = mock(UserACL.class);
+    when(userACL.getSuperUser()).thenReturn("root");
+    when(userACL.getAdminGroups()).thenReturn("/platform/administrators");
+    GroupVisibilityPlugin plugin = new PermissionsGroupVisibilityPlugin(userACL);
+
+    Identity userIdentity = new Identity("john",
+            Arrays.asList(new MembershipEntry("/spaces/marketing", "member"),
+                    new MembershipEntry("/spaces/sales", "redactor")));
+    Group groupSpaces = new GroupImpl();
+    groupSpaces.setId("/spaces");
+    Group groupSpacesMarketing = new GroupImpl();
+    groupSpacesMarketing.setId("/spaces/marketing");
+    Group groupSpacesSales = new GroupImpl();
+    groupSpacesSales.setId("/spaces/sales");
+    Group groupSpacesEngineering = new GroupImpl();
+    groupSpacesEngineering.setId("/spaces/engineering");
+
+    // When
+    boolean hasPermissionOnSpaces = plugin.hasPermission(userIdentity, groupSpaces);
+    boolean hasPermissionOnSpacesMarketing = plugin.hasPermission(userIdentity, groupSpacesMarketing);
+    boolean hasPermissionOnSpacesSales = plugin.hasPermission(userIdentity, groupSpacesSales);
+    boolean hasPermissionOnSpacesEngineering = plugin.hasPermission(userIdentity, groupSpacesEngineering);
+
+    // Then
+    assertTrue(hasPermissionOnSpaces);
+    assertTrue(hasPermissionOnSpacesMarketing);
+    assertTrue(hasPermissionOnSpacesSales);
+    assertFalse(hasPermissionOnSpacesEngineering);
+  }
 }

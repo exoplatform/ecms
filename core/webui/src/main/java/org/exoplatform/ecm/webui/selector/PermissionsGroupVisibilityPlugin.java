@@ -31,7 +31,9 @@ public class PermissionsGroupVisibilityPlugin extends GroupVisibilityPlugin {
                           .anyMatch(userMembership -> userMembership.getGroup().equals(userACL.getAdminGroups())
                               || ((userMembership.getGroup().equals(group.getId())
                                   || userMembership.getGroup().startsWith(group.getId() + "/"))
-                                  && (group.getId().startsWith("/spaces/") || userMembership.getMembershipType().equals("*")
+                                  && (group.getId().equals("/spaces")
+                                      || group.getId().startsWith("/spaces/")
+                                      || userMembership.getMembershipType().equals("*")
                                       || userMembership.getMembershipType().equals("manager"))));
   }
 }
