@@ -1850,6 +1850,7 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
     builder.append(" isAbleToRestore='" + Utils.isAbleToRestore(node) + "' ");
     builder.append(" isExoAction='" + (Utils.EXO_ACTIONS.equals(node.getName()) && Utils.isInTrash(node)) + "' ");
     builder.append(" isCheckedIn='" + !node.isCheckedOut() + "' ");
+    builder.append(" isSpecificFolder='" + org.exoplatform.services.cms.impl.Utils.isPersonalDefaultFolder(node) + "' ");
 
     return builder.toString();
   }

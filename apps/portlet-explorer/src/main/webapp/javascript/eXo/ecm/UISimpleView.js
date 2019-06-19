@@ -748,6 +748,7 @@
       var checkLinkAndTargetInTrash = false;
       var checkExoActionNode = false;
       var checkInStatus = false;
+      var isUserPrivateFolder = false;
 
       for (var i in Self.itemsSelected) {
         if (Array.prototype[i]) continue;
@@ -767,6 +768,7 @@
         if (Self.itemsSelected[i].getAttribute('trashHome') == "true") checkEmptyTrash = true;
         if (Self.itemsSelected[i].getAttribute('mediaType') == "true") checkMediaType = true;
         if (Self.itemsSelected[i].getAttribute('isCheckedIn') == "true") checkInStatus = true;
+        if (Self.itemsSelected[i].getAttribute('isSpecificFolder') == "true") isUserPrivateFolder = true;
       }
 
       var lockAction = gj(contextMenu).find("i.uiIconEcmsLock:first")[0];
@@ -863,6 +865,10 @@
 
   		if (Self.itemsSelected.length > 1) {
   		  pasteAction.parentNode.parentNode.style.display = "none";
+  		}
+  		if (isUserPrivateFolder) {
+  		  cutAction.parentNode.style.display = "none";
+  		  deleteAction.parentNode.style.display = "none";
   		}
   	  }
 

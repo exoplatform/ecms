@@ -22,6 +22,7 @@ import org.apache.commons.lang.StringUtils;
 import org.exoplatform.container.component.ComponentPlugin;
 import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.documents.TrashService;
+import org.exoplatform.services.cms.drives.impl.ManageDriveServiceImpl;
 import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.templates.TemplateService;
@@ -88,6 +89,9 @@ public class Utils {
   public static final String PRIVATE = "Private";
 
   public static final String PUBLIC = "Public";
+
+  public static final String[] SPECIFIC_FOLDERS = { "exo:folksonomyFolder", NodetypeConstant.EXO_DOCUMENTFOLDER, NodetypeConstant.EXO_FAVOURITE_FOLDER,
+      NodetypeConstant.EXO_PICTUREFOLDER, NodetypeConstant.EXO_MUSICFOLDER, NodetypeConstant.EXO_VIDEOFOLDER, NodetypeConstant.EXO_SEARCHFOLDER };
 
 
   public static final long KB = 1024L;
@@ -969,4 +973,29 @@ public class Utils {
         || node.isNodeType(NodetypeConstant.NT_UNSTRUCTURED);
  }
 
+ /**
+  *  check if a node is a personal default folder. Personal default folders are:
+  *  Documents, Favorites, Pictures, Public, Music, videos, Folksonomy and Searches.
+  * @param node node to check
+  * @return personal default folder or not
+ */
+ public static boolean isPersonalDefaultFolder(Node node) throws Exception {
+   if (node.hasProperty(NodetypeConstant.JCR_PRIMARY_TYPE)) {
+     String nodeType = node.getProperty(NodetypeConstant.JCR_PRIMARY_TYPE).getString();
+     if (nodeType.equals(NodetypeConstant.NT_UNSTRUCTURED) || nodeType.equals(NodetypeConstant.NT_FOLDER)) {
+       for (String specificFolder : SPECIFIC_FOLDERS) {
+         if (node.isNodeType(specificFolder)) {
+           return true;
+         }
+       }
+     }
+   }
+   String path = node.getPath();
+   String owner = ((ExtendedNode) node).getACL().getOwner();
+   if (StringUtils.isNotBlank(path) && StringUtils.isNotBlank(owner)) {
+     return path.endsWith(ManageDriveServiceImpl.PERSONAL_DRIVE_PRIVATE_FOLDER_NAME + "/" + ManageDriveServiceImpl.PERSONAL_DRIVE_PUBLIC_FOLDER_NAME)
+         && "__system".equals(owner);
+   }
+   return false;
+ }
 }

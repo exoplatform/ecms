@@ -43,11 +43,7 @@ import org.apache.commons.lang.Validate;
 import org.exoplatform.ecm.webui.component.explorer.UIConfirmMessage;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
-import org.exoplatform.ecm.webui.component.explorer.control.filter.CanDeleteNodeFilter;
-import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotEditingDocumentFilter;
-import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotLockedFilter;
-import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotMandatoryChildNode;
-import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotTrashHomeNodeFilter;
+import org.exoplatform.ecm.webui.component.explorer.control.filter.*;
 import org.exoplatform.ecm.webui.component.explorer.control.listener.UIWorkingAreaActionListener;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.ecm.utils.lock.LockUtil;
@@ -120,7 +116,8 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
 
   private static final List<UIExtensionFilter> FILTERS
 
-      = Arrays.asList(new UIExtensionFilter[]{new IsNotLockedFilter(),
+      = Arrays.asList(new UIExtensionFilter[]{new IsNotSpecificFolderNodeFilter(),
+                                              new IsNotLockedFilter(),
                                               new CanDeleteNodeFilter(),
                                               new IsNotTrashHomeNodeFilter(),
                                               new IsNotEditingDocumentFilter(),

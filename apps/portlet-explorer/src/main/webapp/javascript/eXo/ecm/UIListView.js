@@ -648,6 +648,7 @@
       var checkLinkAndTargetInTrash = false;
       var checkExoActionNode = false;
       var checkInStatus = false;
+      var isUserPrivateFolder = false;
   	  
       for (var i in Self.itemsSelected) {
         if (Array.prototype[i]) continue;
@@ -655,7 +656,10 @@
   	  	if (	Self.itemsSelected[i].getAttribute('isExoAction') == "true") {
   		  checkExoActionNode = true;
   		  break;
-  	  	}  
+  	  	}
+  	  	if (Self.itemsSelected[i].getAttribute('isSpecificFolder') == "true") {
+  	  	  isUserPrivateFolder = true;
+  	  	}
   	  	//check symlink and target are in trash to show Delete button only on action bar.
   	  	else if (Self.itemsSelected[i].getAttribute('isLinkWithTarget') == "true") {
   	  	  checkLinkAndTargetInTrash = true; 
@@ -741,7 +745,11 @@
 
 		      if (Self.itemsSelected.length > 1) {
 		        pasteAction.parentNode.parentNode.style.display = "none";
-		      }	    
+		      }
+		      if (isUserPrivateFolder) {
+		        cutAction.parentNode.style.display = "none";
+		        deleteAction.parentNode.style.display = "none";
+		      }
 	  }
       
       //check position popup
