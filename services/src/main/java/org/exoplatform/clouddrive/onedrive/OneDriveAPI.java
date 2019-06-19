@@ -181,7 +181,10 @@ public class OneDriveAPI {
     if (entity != null) {
       try (InputStream inputStream = entity.getContent()) {
         String responseBody = IOUtils.toString(inputStream, Charset.forName("UTF-8"));
-        return gson.fromJson(responseBody, OneDriveTokenResponse.class);
+        OneDriveTokenResponse oneDriveTokenResponse = gson.fromJson(responseBody, OneDriveTokenResponse.class);
+        if(oneDriveTokenResponse.getToken()!=null && !oneDriveTokenResponse.getToken().isEmpty()){
+          return oneDriveTokenResponse;
+        }
       }
     } else {
       LOG.error("failed to get access token");
