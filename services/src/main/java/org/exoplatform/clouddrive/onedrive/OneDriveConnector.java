@@ -27,8 +27,7 @@ public class OneDriveConnector extends CloudDriveConnector {
                            SessionProviderService sessionProviders,
                            NodeFinder finder,
                            ExtendedMimeTypeResolver mimeTypes,
-                           InitParams params)
-      throws ConfigurationException {
+                           InitParams params) throws ConfigurationException {
     super(jcrService, sessionProviders, finder, mimeTypes, params);
     if (LOG.isDebugEnabled()) {
       LOG.debug("OneDriveConnector():  ");
@@ -121,14 +120,14 @@ public class OneDriveConnector extends CloudDriveConnector {
           LOG.debug("driveAPIUSER!=null:  ");
         }
 
-          String userId = driveAPIUser.id;
-          String username = driveAPIUser.userPrincipalName;
-          String email = driveAPIUser.userPrincipalName;
+        String userId = driveAPIUser.id;
+        String username = driveAPIUser.userPrincipalName;
+        String email = driveAPIUser.userPrincipalName;
         if (LOG.isDebugEnabled()) {
           LOG.debug("userId: " + userId + " username " + username);
         }
         OneDriveUser user = new OneDriveUser(userId, username, email, provider, driveAPI);
-          return user;
+        return user;
       } else {
         return null;
       }
