@@ -39,6 +39,7 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
                              NodeFinder finder,
                              ExtendedMimeTypeResolver mimeTypes) throws CloudDriveException, RepositoryException {
     super(user, driveNode, sessionProviders, finder, mimeTypes);
+
     if (LOG.isDebugEnabled()) {
       LOG.debug("JCRLocalOneDrive():  ");
     }
@@ -75,6 +76,10 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
       refreshToken = null;
     }
     long expirationTime = driveNode.getProperty("onedrive:oauth2TokenExpirationTime").getLong();
+
+    if (LOG.isDebugEnabled()) {
+      LOG.debug("LoadUser(): refreshToken =  " + refreshToken);
+    }
     OneDriveAPI driveAPI = apiBuilder.load(refreshToken, accessToken, expirationTime).build();
 
     return new OneDriveUser(userId, username, email, provider, driveAPI);
@@ -144,6 +149,9 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
         driveNode.setProperty("onedrive:oauth2AccessToken", token.getAccessToken());
         driveNode.setProperty("onedrive:oauth2RefreshToken", token.getRefreshToken());
         driveNode.setProperty("onedrive:oauth2TokenExpirationTime", token.getExpirationTime());
+        if (LOG.isDebugEnabled()) {
+          LOG.debug("save node : ");
+        }
         driveNode.save();
       } catch (RepositoryException e) {
         rollback(driveNode);

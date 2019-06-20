@@ -97,6 +97,7 @@ class ExoGraphClientLogger implements ILogger {
 }
 
 public class OneDriveAPI {
+  private final String redirectUrl;
   private String rootId;
 
   private class OneDriveToken {
@@ -122,7 +123,7 @@ public class OneDriveAPI {
           if (LOG.isDebugEnabled()) {
             LOG.debug("refreshToken = " + this.refreshToken);
           }
-          OneDriveTokenResponse oneDriveTokenResponse = renewAccessToken(this.refreshToken);
+          OneDriveTokenResponse oneDriveTokenResponse = renewAccessToken(this.refreshToken, redirectUrl);
           this.accessToken = oneDriveTokenResponse.getToken();
           this.lastModifiedTime = System.currentTimeMillis();
           String refreshToken = oneDriveTokenResponse.getRefreshToken();
@@ -136,6 +137,9 @@ public class OneDriveAPI {
     }
 
     public final synchronized void updateToken(String accessToken, String refreshToken) {
+      if (LOG.isDebugEnabled()) {
+        LOG.debug("OneDriveToken.updateToken() : accessToken = " + accessToken + " refreshToken = " + refreshToken);
+      }
       this.accessToken = accessToken;
       this.refreshToken = refreshToken;
       this.lastModifiedTime = System.currentTimeMillis();
@@ -160,12 +164,13 @@ public class OneDriveAPI {
                                                     String clientSecret,
                                                     String code,
                                                     String refreshToken,
-                                                    String grantType) throws IOException {
+                                                    String grantType, String redirectUrl) throws IOException {
     HttpPost httppost = new HttpPost("https://login.microsoftonline.com/common/oauth2/v2.0/token");
     List<NameValuePair> params = new ArrayList<>(5);
     if (grantType.equals("refresh_token")) {
       params.add(new BasicNameValuePair("refresh_token", refreshToken));
     } else if (grantType.equals("authorization_code")) {
+      params.add(new BasicNameValuePair("redirect_uri", redirectUrl));
       params.add(new BasicNameValuePair("code", code));
     } else {
       return null;
@@ -174,6 +179,8 @@ public class OneDriveAPI {
     params.add(new BasicNameValuePair("client_secret", clientSecret));
     params.add(new BasicNameValuePair("client_id", clientId));
     params.add(new BasicNameValuePair("scope", SCOPES));
+
+
     httppost.setEntity(new UrlEncodedFormEntity(params, "UTF-8"));
 
     HttpResponse response = httpclient.execute(httppost);
@@ -195,12 +202,12 @@ public class OneDriveAPI {
     return null;
   }
 
-  private OneDriveTokenResponse aquireAccessToken(String code) throws IOException {
-    return retrieveAccessToken(clientId, clientSecret, code, null, "authorization_code");
+  private OneDriveTokenResponse aquireAccessToken(String code, String redirectUrl) throws IOException {
+    return retrieveAccessToken(clientId, clientSecret, code, null, "authorization_code", redirectUrl);
   }
 
-  private OneDriveTokenResponse renewAccessToken(String refreshToken) throws IOException {
-    return retrieveAccessToken(clientId, clientSecret, null, refreshToken, "refresh_token");
+  private OneDriveTokenResponse renewAccessToken(String refreshToken, String redirectUrl) throws IOException {
+    return retrieveAccessToken(clientId, clientSecret, null, refreshToken, "refresh_token", redirectUrl);
   }
 
   public SharingLink createLink(String itemId) {
@@ -234,11 +241,11 @@ public class OneDriveAPI {
     }).logger(new ExoGraphClientLogger(GRAPH_CLIENT_LOG)).buildClient();
   }
 
-  OneDriveAPI(String clientId, String clientSecret, String authCode) throws IOException, CloudDriveException {
+  OneDriveAPI(String clientId, String clientSecret, String authCode, String redirectUrl) throws IOException, CloudDriveException {
     this.clientId = clientId;
     this.clientSecret = clientSecret;
-
-    OneDriveTokenResponse oneDriveTokenResponse = aquireAccessToken(authCode);
+    this.redirectUrl = redirectUrl;
+    OneDriveTokenResponse oneDriveTokenResponse = aquireAccessToken(authCode, redirectUrl);
     if (oneDriveTokenResponse != null) {
       this.storedToken = new OneDriveStoredToken();
       this.storedToken.store(oneDriveTokenResponse.getToken(),
@@ -252,15 +259,16 @@ public class OneDriveAPI {
     }
   }
 
-  OneDriveAPI(String clientId, String clientSecret, String accessToken, String refreshToken, long expirationTime) throws CloudDriveException,
+  OneDriveAPI(String clientId, String clientSecret, String accessToken, String refreshToken, long expirationTime, String redirectUrl) throws CloudDriveException,
       IOException {
     if (LOG.isDebugEnabled()) {
       LOG.debug("one drive api by refresh token");
     }
     this.clientId = clientId;
     this.clientSecret = clientSecret;
+    this.redirectUrl = redirectUrl;
     OneDriveTokenResponse oneDriveTokenResponse = null;
-    oneDriveTokenResponse = renewAccessToken(refreshToken);
+    oneDriveTokenResponse = renewAccessToken(refreshToken, redirectUrl);
     if (oneDriveTokenResponse != null) {
       this.storedToken = new OneDriveStoredToken();
       this.storedToken.store(oneDriveTokenResponse.getRefreshToken());

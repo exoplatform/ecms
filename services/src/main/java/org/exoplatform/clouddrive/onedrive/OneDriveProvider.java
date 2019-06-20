@@ -8,6 +8,7 @@ import org.exoplatform.services.log.Log;
 public class OneDriveProvider extends CloudProvider {
   protected static final Log LOG = ExoLogger.getLogger(OneDriveProvider.class);
   private final String authUrl;
+  private final String redirectUrl;
 
   /**
    * Instantiates a new cloud provider.
@@ -15,14 +16,19 @@ public class OneDriveProvider extends CloudProvider {
    * @param id the id
    * @param name the name
    */
-  protected OneDriveProvider(String id, String name, String authUrl) {
+  protected OneDriveProvider(String id, String name, String authUrl, String redirectUrl) {
     super(id, name);
     this.authUrl = authUrl;
+    this.redirectUrl = redirectUrl;
   }
 
   @Override
   public String getAuthURL() throws CloudDriveException {
     return this.authUrl;
+  }
+
+  public String getRedirectUrl() {
+    return redirectUrl;
   }
 
   @Override

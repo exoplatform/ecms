@@ -73,9 +73,9 @@ public class OneDriveConnector extends CloudDriveConnector {
         LOG.debug("OneDriveAPI build():  ");
       }
       if (code != null && code.length() > 0) {
-        return new OneDriveAPI(getClientId(), getClientSecret(), code);
+        return new OneDriveAPI(getClientId(), getClientSecret(), code, getConnectorSchema() + "://" + getConnectorHost() + "/portal/rest/clouddrive/connect/onedrive" );
       } else {
-        return new OneDriveAPI(getClientId(), getClientSecret(), accessToken, refreshToken, expirationTime);
+        return new OneDriveAPI(getClientId(), getClientSecret(), accessToken, refreshToken, expirationTime, getConnectorSchema() + "://" + getConnectorHost() + "/portal/rest/clouddrive/connect/onedrive");
       }
     }
   }
@@ -98,7 +98,7 @@ public class OneDriveConnector extends CloudDriveConnector {
            .append("&scope=")
            .append(SCOPES);
 
-    return new OneDriveProvider(getProviderId(), getProviderName(), authUrl.toString());
+    return new OneDriveProvider(getProviderId(), getProviderName(), authUrl.toString(), getConnectorSchema() + "://" + getConnectorHost() + "/portal/rest/clouddrive/connect/onedrive");
   }
 
   @Override
