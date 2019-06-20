@@ -144,8 +144,7 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
         driveNode.setProperty("onedrive:oauth2AccessToken", token.getAccessToken());
         driveNode.setProperty("onedrive:oauth2RefreshToken", token.getRefreshToken());
         driveNode.setProperty("onedrive:oauth2TokenExpirationTime", token.getExpirationTime());
-
-        // driveNode.save();
+        driveNode.save();
       } catch (RepositoryException e) {
         rollback(driveNode);
         throw new CloudDriveException("Error updating access key: " + e.getMessage(), e);
