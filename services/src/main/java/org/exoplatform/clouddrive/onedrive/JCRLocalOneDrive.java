@@ -205,30 +205,39 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
   }
 
   private void initFolderByDriveItem(Node fileNode, DriveItem item) throws RepositoryException {
+    String lastModifiedUserName = "";
+    String createdUserName = "";
+    if (item.lastModifiedBy!=null && item.lastModifiedBy.user != null) {
+      lastModifiedUserName = item.lastModifiedBy.user.displayName;
+    }
+    if (item.createdBy!=null && item.createdBy.user != null) {
+      createdUserName = item.createdBy.user.displayName;
+    }
+
     initFolder(fileNode,
-               item.id,
-               item.name,
-               "folder",
-               item.webUrl,
-               item.createdBy.user.displayName,
-               item.lastModifiedBy.user.displayName,
-               item.createdDateTime,
-               item.lastModifiedDateTime);
+            item.id,
+            item.name,
+            "folder",
+            item.webUrl,
+            createdUserName,
+            lastModifiedUserName,
+            item.createdDateTime,
+            item.lastModifiedDateTime);
 
   }
 
   private String createLink(DriveItem item) {
-
+  // TODO there is a possibility to delete/update public links
     try {
       String link = getUser().api().createLink(item.id).webUrl;
-      if (item.file.mimeType.startsWith("image")) {
+      if (item.file!=null && item.file.mimeType.startsWith("image")) {
         String base64Url = Base64.getEncoder().encodeToString(link.getBytes(StandardCharsets.UTF_8));
         String preparedBase64Url = "u!" + StringUtils.stripEnd(base64Url, "=").replace("/", "_").replace("+", "-");
         link = "https://api.onedrive.com/v1.0/shares/" + preparedBase64Url + "/root/content";
       }
       return link;
     } catch (GraphServiceException ex) {
-      LOG.error("error while link creation", ex);
+      LOG.info("error while embed link creation");
       return null;
     }
     // oneDriveAPI.getItem("2D4964AA6D920333!2176").file.mimeType
@@ -237,48 +246,79 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
   private void initFileByDriveItem(Node fileNode, DriveItem item) throws RepositoryException {
 //    final SharingLink link = getUser().api().createLink(item.id);
     String previewLink = createLink(item);
+    String lastModifiedUserName = "";
+    String createdUserName = "";
+    if (item.lastModifiedBy!=null && item.lastModifiedBy.user != null) {
+      lastModifiedUserName = item.lastModifiedBy.user.displayName;
+    }
+    if (item.createdBy!=null && item.createdBy.user != null) {
+      createdUserName = item.createdBy.user.displayName;
+    }
+
+
+
+
     initFile(fileNode, item.id, item.name, item.file.mimeType, item.webUrl, previewLink, null, // TODO
                                                                                                // may
-                                                                                               // be
+            // be
                                                                                                // something
                                                                                                // better
                                                                                                // can
                                                                                                // be
                                                                                                // here?
-             item.createdBy.user.displayName,
-             item.lastModifiedBy.user.displayName,
+             createdUserName,
+             lastModifiedUserName,
              item.createdDateTime,
              item.lastModifiedDateTime,
              item.size);
   }
 
   private JCRLocalCloudFile createCloudFolder(Node fileNode, DriveItem item) throws RepositoryException {
+    String lastModifiedUserName = "";
+    String createdUserName = "";
+    if (item.lastModifiedBy!=null && item.lastModifiedBy.user != null) {
+      lastModifiedUserName = item.lastModifiedBy.user.displayName;
+    }
+    if (item.createdBy!=null && item.createdBy.user != null) {
+      createdUserName = item.createdBy.user.displayName;
+    }
+
+
     return new JCRLocalCloudFile(fileNode.getPath(),
-                                 item.id,
-                                 item.name,
-                                 item.webUrl,
-                                 "folder",
-                                 item.lastModifiedBy.user.displayName,
-                                 item.createdBy.user.displayName,
-                                 item.createdDateTime,
-                                 item.lastModifiedDateTime,
-                                 fileNode,
-                                 true);
+            item.id,
+            item.name,
+            item.webUrl,
+            "folder",
+            lastModifiedUserName,
+            createdUserName,
+            item.createdDateTime,
+            item.lastModifiedDateTime,
+            fileNode,
+            true);
 
   }
 
   private JCRLocalCloudFile createCloudFile(Node fileNode, DriveItem item) throws RepositoryException {
+    String lastModifiedUserName = "";
+    String createdUserName = "";
+    if (item.lastModifiedBy!=null && item.lastModifiedBy.user != null) {
+      lastModifiedUserName = item.lastModifiedBy.user.displayName;
+    }
+    if (item.createdBy!=null && item.createdBy.user != null) {
+      createdUserName = item.createdBy.user.displayName;
+    }
+
     return new JCRLocalCloudFile(fileNode.getPath(),
-                                 item.id,
-                                 item.name,
-                                 item.webUrl,
-                                 item.file.mimeType,
-                                 item.lastModifiedBy.user.displayName,
-                                 item.createdBy.user.displayName,
-                                 item.createdDateTime,
-                                 item.lastModifiedDateTime,
-                                 fileNode,
-                                 true);
+            item.id,
+            item.name,
+            item.webUrl,
+            item.file.mimeType,
+            lastModifiedUserName,
+            createdUserName,
+            item.createdDateTime,
+            item.lastModifiedDateTime,
+            fileNode,
+            true);
 
   }
 
@@ -404,9 +444,9 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
     }
 
     private void updateNode(DriveItem driveItem, Node fileNode) throws RepositoryException, CloudDriveException {
+      List<Node> destParentNodes = this.nodes.get(driveItem.parentReference.id);
       if (api.getRootId().equals(driveItem.id))
         return;
-      List<Node> destParentNodes = this.nodes.get(driveItem.parentReference.id);
       if (destParentNodes == null || destParentNodes.isEmpty()) {
         syncNext();
         destParentNodes = this.nodes.get(driveItem.parentReference.id);
@@ -708,17 +748,16 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
       if (LOG.isDebugEnabled()) {
         LOG.debug("Create File Path : " + fileNode.getPath() + "\n" + "Create File Name: " + getTitle(fileNode));
       }
-
-      String path = extractAppropriateOneDrivePath(fileNode);
-      if (LOG.isDebugEnabled()) {
-        LOG.debug("One Drive Path: " + path);
-      }
+//      String path = extractAppropriateOneDrivePath(fileNode);
       try {
         DriveItem createdDriveItem = api.insert(getParentId(fileNode), getTitle(fileNode), created, modified, content);
         initFileByDriveItem(fileNode, createdDriveItem);
         return createCloudFile(fileNode, createdDriveItem);
       } catch (Exception e) {
-        throw new CloudDriveException("failed to update file content");
+//        if (LOG.isDebugEnabled()) {
+//          LOG.debug("file uploading debug:  ", e);
+//        }
+        throw new CloudDriveException("failed to update file content",e);
       }
     }
 
@@ -876,7 +915,7 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
           return createCloudFile(fileNode, updatedDriveItem);
         }
       } catch (Exception e) {
-        throw new CloudDriveException("failed to update file content");
+        throw new CloudDriveException("failed to update file content", e);
       }
       return null;
     }

@@ -112,7 +112,7 @@ public class OneDriveConnector extends CloudDriveConnector {
       try {
         driveAPI = new API().auth(code).build();
       } catch (IOException e) {
-        throw new CloudDriveException("Unnable to build OneDriveAPI");
+        throw new CloudDriveException("Unnable to build OneDriveAPI",e);
       }
       User driveAPIUser = driveAPI.getUser();
       if (driveAPIUser != null) {

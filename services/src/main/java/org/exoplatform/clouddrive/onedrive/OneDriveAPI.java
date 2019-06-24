@@ -574,6 +574,7 @@ public class OneDriveAPI {
     con.setRequestMethod("PUT");
     con.setRequestProperty("Content-Length", String.valueOf(contentLength));
     con.setRequestProperty("Content-Range", "bytes " + startPosition + "-" + (startPosition + contentLength - 1) + "/" + size);
+    con.setRequestProperty("Accept", "application/json");
     con.setDoOutput(true);
     try (OutputStream outputStream = con.getOutputStream()) {
       outputStream.write(data);
@@ -583,6 +584,7 @@ public class OneDriveAPI {
     fileSendResponse.responseMessage = con.getResponseMessage();
     fileSendResponse.responseCode = con.getResponseCode();
 
+
     try (BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()))) {
       String inputLine;
       StringBuilder response = new StringBuilder();
@@ -591,20 +593,27 @@ public class OneDriveAPI {
       }
       fileSendResponse.data = response.toString();
     }
+
+    if (LOG.isDebugEnabled()) {
+      LOG.debug("response messagge: " +fileSendResponse.responseMessage);
+      LOG.debug("response code = " + fileSendResponse.responseCode);
+      LOG.debug("response data" + fileSendResponse.data);
+    }
+
     return fileSendResponse;
   }
 
-  private byte[] readAllBytes(InputStream inputStream) throws IOException {
-    ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-    int nRead;
-    byte[] data = new byte[16384];
-
-    while ((nRead = inputStream.read(data, 0, data.length)) != -1) {
-      buffer.write(data, 0, nRead);
-    }
-
-    return buffer.toByteArray();
-  }
+//  private byte[] readAllBytes(InputStream inputStream) throws IOException {
+//    ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+//    int nRead;
+//    byte[] data = new byte[16384];
+//
+//    while ((nRead = inputStream.read(data, 0, data.length)) != -1) {
+//      buffer.write(data, 0, nRead);
+//    }
+//
+//    return buffer.toByteArray();
+//  }
 
   private class FileSendResponse {
 
@@ -726,6 +735,7 @@ public class OneDriveAPI {
 
   public DriveItem insertUpdate(String uploadUrl, InputStream inputStream) throws Exception {
     int fileLength = inputStream.available();
+    FileSendResponse fileSendResponse = null;
     int bufferSize = 327680 * 100; // must be a multiple of 327680
     for (int i = 0; i < fileLength / bufferSize + 1; i++) {
       int from = bufferSize * i;
@@ -736,13 +746,14 @@ public class OneDriveAPI {
       int fileSliceSize = to - from;
       byte[] fileSlice = new byte[fileSliceSize];
       inputStream.read(fileSlice, 0, fileSliceSize);
-      FileSendResponse fileSendResponse = sendFile(uploadUrl, from, fileSlice.length, fileLength, fileSlice);
+      fileSendResponse = sendFile(uploadUrl, from, fileSlice.length, fileLength, fileSlice);
       DriveItem driveItem = getDriveItemIfCreated(fileSendResponse);
       if (driveItem != null) {
         return driveItem;
       }
     }
-    throw new CloudDriveException("failed to upload file");
+    throw new CloudDriveException("failed to upload file: " + "ResponseCode: " + fileSendResponse.responseCode + " " +
+            "message: " + fileSendResponse.responseMessage + "date: " + fileSendResponse.data);
 
   }
 
