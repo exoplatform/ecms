@@ -1,45 +1,20 @@
 package org.exoplatform.services.wcm.publication;
 
-import org.exoplatform.services.ecm.publication.PublicationPlugin;
-import org.exoplatform.services.ecm.publication.PublicationService;
-import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.wcm.core.NodeLocation;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 import javax.jcr.Node;
-import javax.jcr.NodeIterator;
 
-import org.exoplatform.services.wcm.core.NodetypeConstant;
-import org.exoplatform.services.wcm.utils.WCMCoreUtils;
-import org.mockito.Mockito;
-
-import static org.exoplatform.services.wcm.publication.PublicationDefaultStates.PUBLISHED;
 import static org.exoplatform.services.wcm.publication.WCMComposer.*;
 
 public class TestWCMComposer extends BasePublicationTestCase {
 
-  WCMComposerImpl           wcmComposer = null;
+  WCMComposer               wcmComposer             = null;
   
-  String                    workspace;
-
-  String                    folderPath;
-
-  NodeLocation              nodeLocation;
-
-  HashMap<String, String>   filters;
-
-  private PublicationPlugin plugin_;
-
-  Node                      nodeone_en;
-
-  Node                      nodeone_fr;
-
   public void setUp() throws Exception {
     super.setUp();
-    wcmComposer = WCMCoreUtils.getService(WCMComposerImpl.class);
+    wcmComposer = container.getComponentInstanceOfType(WCMComposer.class);
     applySystemSession();
   }
 
@@ -128,75 +103,6 @@ public class TestWCMComposer extends BasePublicationTestCase {
 		// Then
 		assertEquals(2, result.getNumTotal());
 	}
-
-  /*
-   * this test verifies that getContents method should remove duplicated files if
-   * translation exists
-   */
-  public void testGetContents() throws Exception {
-    WCMComposer wcmComposerImplSpy = populateMultiLangContent(false);
-    List<Node> nodes = wcmComposerImplSpy.getContents(workspace, folderPath, filters, sessionProvider);
-    assertTrue(nodes.contains(nodeone_fr));
-    assertFalse(nodes.contains(nodeone_en));
-  }
-
-  /*
-   * this test verifies that getPaginationContents method should remove duplicated
-   * files if translation exists
-   */
-  public void testGetPaginatedContents() throws Exception {
-    WCMComposer wcmComposerImplSpy = populateMultiLangContent(true);
-    Result result = wcmComposerImplSpy.getPaginatedContents(nodeLocation, filters, sessionProvider);
-    assertTrue(result.getNodes().contains(nodeone_fr));
-    assertFalse(result.getNodes().contains(nodeone_en));
-  }
-  
-  public WCMComposer populateMultiLangContent(Boolean paginated) throws Exception {
-    PublicationService publicationService = WCMCoreUtils.getService(PublicationService.class);
-    plugin_ = new DumpPublicationPlugin();
-    plugin_.setName("Simple");
-    plugin_.setDescription("Simple");
-    publicationService.addPublicationPlugin(plugin_);
-    HashMap<String, String> context = new HashMap<String, String>();
-    context.put("visibility", "true");
-
-    filters = new HashMap<>();
-    folderPath = "repository:collaboration:/sites content/live";
-    nodeLocation = NodeLocation.getNodeLocationByExpression(folderPath);
-    workspace = nodeLocation.getWorkspace();
-    Node rootNode = session.getRootNode();
-
-    nodeone_en = rootNode.addNode("nodeone_en", NodetypeConstant.EXO_WEBCONTENT);
-    nodeone_en.setProperty(NodetypeConstant.EXO_LANGUAGE, "en");
-    nodeone_en.setProperty(NodetypeConstant.EXO_TITLE, "node one en");
-    publicationService.enrollNodeInLifecycle(nodeone_en, plugin_.getLifecycleName());
-    publicationService.changeState(nodeone_en, PUBLISHED, context);
-
-    nodeone_fr = rootNode.addNode("nodeone_fr", NodetypeConstant.EXO_WEBCONTENT);
-    nodeone_fr.setProperty(NodetypeConstant.EXO_LANGUAGE, "fr");
-    nodeone_fr.setProperty(NodetypeConstant.EXO_TITLE, "node one fr");
-    publicationService.enrollNodeInLifecycle(nodeone_fr, plugin_.getLifecycleName());
-    publicationService.changeState(nodeone_fr, PUBLISHED, context);
-    NodeIterator iter = rootNode.getNodes();
-    WCMComposerImpl wcmComposerImplSpy = Mockito.spy(wcmComposer);
-    if (paginated) {
-      folderPath = nodeLocation.getPath();
-      workspace = nodeLocation.getWorkspace();
-    }
-    List<Node> l1 = new ArrayList<Node>();
-    l1.add(nodeone_fr);
-
-    List<Node> l2 = new ArrayList<Node>();
-    l2.add(nodeone_en);
-
-    Mockito.doReturn(iter)
-           .when(wcmComposerImplSpy)
-           .getViewableContents(workspace, folderPath, filters, sessionProvider, paginated);
-    Mockito.doReturn(l1).when(wcmComposerImplSpy).getRealTranslationNodes(nodeone_en);
-    Mockito.doReturn(l2).when(wcmComposerImplSpy).getRealTranslationNodes(nodeone_fr);
-
-    return wcmComposerImplSpy;
-  }
 
   public void tearDown() throws Exception {
     super.tearDown();
