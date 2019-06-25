@@ -642,16 +642,16 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
       if (LOG.isDebugEnabled()) {
         LOG.debug("Add Folder(): id:  " + driveItem.id + " name: " + driveItem.name + "parentId: " + driveItem.parentReference.id);
       }
-      Node fileNode = openFolder(driveItem.id, driveItem.name, parentNode);
-      initFolderByDriveItem(fileNode, driveItem);
+      Node folderNode = openFolder(driveItem.id, driveItem.name, parentNode);
+      initFolderByDriveItem(folderNode, driveItem);
       this.nodes.put(driveItem.id, new ArrayList<Node>() {
         {
-          add(fileNode);
+          add(folderNode);
         }
       });
-      JCRLocalCloudFile jcrLocalCloudFile = createCloudFile(fileNode, driveItem);
+      JCRLocalCloudFile jcrLocalCloudFile = createCloudFolder(folderNode, driveItem);
       addChanged(jcrLocalCloudFile);
-      return fileNode;
+      return folderNode;
     }
 
     private void deleteItem(String itemId) throws CloudDriveException, RepositoryException {

@@ -432,7 +432,7 @@ public class OneDriveAPI {
     String responseBody;
     do {
       responseBody = getCopyResponseBody(location);
-      status = parser.parse(responseBody).getAsJsonObject().get("status").getAsString();
+      status = parser.parse(responseBody.trim()).getAsJsonObject().get("status").getAsString();
       try {
         Thread.sleep(1000);
       } catch (InterruptedException e) {

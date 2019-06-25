@@ -27,9 +27,9 @@
     <!-- Javascript for Cloud Drive support of One Drive -->
     <module>
         <name>cloudDrive_onedrive</name>
-        <!--<script>-->
-            <!--<path>/js/clouddrive-onedrive.js</path>-->
-        <!--</script>-->
+        <script>
+            <path>/js/clouddrive-onedrive.js</path>
+        </script>
         <depends>
             <module>jquery</module>
         </depends>
