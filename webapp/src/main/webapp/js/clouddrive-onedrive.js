@@ -13,9 +13,9 @@
                 $(function () {
                     var file = cloudDrive.getContextFile();
                     if (file) {
-                        if (file.type.trim().startsWith('image')) {
+                        var $viewer = $('#CloudFileViewer');
+                        if (file.type.trim().startsWith('image') && file.previewLink.endsWith('/root/content')) { // image in personal account
                             console.log('OneDrive initContext, provider= ' + provider);
-                            var $viewer = $('#CloudFileViewer');
                             if ($viewer) {
                                 $viewer.prepend( "<p class='onedriveFileViewer'>" +
 
@@ -25,11 +25,13 @@
 
                                         );
                                 console.log('$viewer=' + $viewer.html());
-                                $viewer.find('iframe').remove();
                             } else {
                                 console.log('not viewer!!!!!');
                             }
 
+                        }
+                        if (file.previewLink.indexOf("embed") == -1) { //
+                            $viewer.find('iframe').remove();
                         }
                     }
                 });

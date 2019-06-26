@@ -2,7 +2,6 @@ package org.exoplatform.clouddrive.onedrive;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 
@@ -11,15 +10,14 @@ import javax.jcr.NodeIterator;
 import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.microsoft.graph.http.GraphServiceException;
 import com.microsoft.graph.models.extensions.DriveItem;
 import com.microsoft.graph.models.extensions.FileSystemInfo;
 import com.microsoft.graph.models.extensions.ItemReference;
 import com.microsoft.graph.models.extensions.SharingLink;
-import com.microsoft.graph.requests.extensions.IDriveItemDeltaCollectionPage;
-import com.microsoft.graph.requests.extensions.IDriveItemDeltaCollectionRequestBuilder;
 
-import org.apache.commons.lang3.StringUtils;
 import org.exoplatform.clouddrive.*;
 import org.exoplatform.clouddrive.jcr.JCRLocalCloudDrive;
 import org.exoplatform.clouddrive.jcr.JCRLocalCloudFile;
@@ -207,65 +205,73 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
   private void initFolderByDriveItem(Node fileNode, DriveItem item) throws RepositoryException {
     String lastModifiedUserName = "";
     String createdUserName = "";
-    if (item.lastModifiedBy!=null && item.lastModifiedBy.user != null) {
+    if (item.lastModifiedBy != null && item.lastModifiedBy.user != null) {
       lastModifiedUserName = item.lastModifiedBy.user.displayName;
     }
-    if (item.createdBy!=null && item.createdBy.user != null) {
+    if (item.createdBy != null && item.createdBy.user != null) {
       createdUserName = item.createdBy.user.displayName;
     }
 
     initFolder(fileNode,
-            item.id,
-            item.name,
-            "folder",
-            item.webUrl,
-            createdUserName,
-            lastModifiedUserName,
-            item.createdDateTime,
-            item.lastModifiedDateTime);
+               item.id,
+               item.name,
+               "folder",
+               item.webUrl,
+               createdUserName,
+               lastModifiedUserName,
+               item.createdDateTime,
+               item.lastModifiedDateTime);
 
   }
 
-  private String createLink(DriveItem item) {
-  // TODO there is a possibility to delete/update public links
+
+  private void changeWebUrlForImage(SharingLink link) {
+    String base64Url = Base64.getEncoder().encodeToString(link.webUrl.getBytes(StandardCharsets.UTF_8));
+    String preparedBase64Url = "u!" + StringUtils.stripEnd(base64Url, "=").replace("/", "_").replace("+", "-");
+    link.webUrl = "https://api.onedrive.com/v1.0/shares/" + preparedBase64Url + "/root/content";
+  }
+  private SharingLink createLink(DriveItem item) {
+    // TODO there is a possibility to delete/update public links
     try {
-      String link = getUser().api().createLink(item.id).webUrl;
-      if (item.file!=null && item.file.mimeType.startsWith("image")) {
-        String base64Url = Base64.getEncoder().encodeToString(link.getBytes(StandardCharsets.UTF_8));
-        String preparedBase64Url = "u!" + StringUtils.stripEnd(base64Url, "=").replace("/", "_").replace("+", "-");
-        link = "https://api.onedrive.com/v1.0/shares/" + preparedBase64Url + "/root/content";
+      SharingLink link = getUser().api().createLink(item.id,"embed");
+      if (item.file != null && item.file.mimeType.startsWith("image")) {
+          changeWebUrlForImage(link);
       }
       return link;
     } catch (GraphServiceException ex) {
-      LOG.info("error while embed link creation");
-      return null;
+      // for business account
+      return getUser().api().createLink(item.id,"view");
     }
-    // oneDriveAPI.getItem("2D4964AA6D920333!2176").file.mimeType
   }
 
   private void initFileByDriveItem(Node fileNode, DriveItem item) throws RepositoryException {
-//    final SharingLink link = getUser().api().createLink(item.id);
-    String previewLink = createLink(item);
+    // final SharingLink link = getUser().api().createLink(item.id);
+    String link= "";
+    String previewLink= "";
     String lastModifiedUserName = "";
     String createdUserName = "";
-    if (item.lastModifiedBy!=null && item.lastModifiedBy.user != null) {
+    if (item.lastModifiedBy != null && item.lastModifiedBy.user != null) {
       lastModifiedUserName = item.lastModifiedBy.user.displayName;
     }
-    if (item.createdBy!=null && item.createdBy.user != null) {
+    if (item.createdBy != null && item.createdBy.user != null) {
       createdUserName = item.createdBy.user.displayName;
     }
+    SharingLink sharingLink = createLink(item);
+    if (sharingLink.type.equalsIgnoreCase("embed")) { // personal account
+      link = item.webUrl;
+      previewLink = sharingLink.webUrl;
+    } else if (sharingLink.type.equalsIgnoreCase("view")) { // business account
+      link = sharingLink.webUrl;
+    }
 
-
-
-
-    initFile(fileNode, item.id, item.name, item.file.mimeType, item.webUrl, previewLink, null, // TODO
+    initFile(fileNode, item.id, item.name, item.file.mimeType, link, previewLink, null, // TODO
                                                                                                // may
-            // be
-                                                                                               // something
-                                                                                               // better
-                                                                                               // can
-                                                                                               // be
-                                                                                               // here?
+             // be
+             // something
+             // better
+             // can
+             // be
+             // here?
              createdUserName,
              lastModifiedUserName,
              item.createdDateTime,
@@ -276,49 +282,48 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
   private JCRLocalCloudFile createCloudFolder(Node fileNode, DriveItem item) throws RepositoryException {
     String lastModifiedUserName = "";
     String createdUserName = "";
-    if (item.lastModifiedBy!=null && item.lastModifiedBy.user != null) {
+    if (item.lastModifiedBy != null && item.lastModifiedBy.user != null) {
       lastModifiedUserName = item.lastModifiedBy.user.displayName;
     }
-    if (item.createdBy!=null && item.createdBy.user != null) {
+    if (item.createdBy != null && item.createdBy.user != null) {
       createdUserName = item.createdBy.user.displayName;
     }
 
-
     return new JCRLocalCloudFile(fileNode.getPath(),
-            item.id,
-            item.name,
-            item.webUrl,
-            "folder",
-            lastModifiedUserName,
-            createdUserName,
-            item.createdDateTime,
-            item.lastModifiedDateTime,
-            fileNode,
-            true);
+                                 item.id,
+                                 item.name,
+                                 item.webUrl,
+                                 "folder",
+                                 lastModifiedUserName,
+                                 createdUserName,
+                                 item.createdDateTime,
+                                 item.lastModifiedDateTime,
+                                 fileNode,
+                                 true);
 
   }
 
   private JCRLocalCloudFile createCloudFile(Node fileNode, DriveItem item) throws RepositoryException {
     String lastModifiedUserName = "";
     String createdUserName = "";
-    if (item.lastModifiedBy!=null && item.lastModifiedBy.user != null) {
+    if (item.lastModifiedBy != null && item.lastModifiedBy.user != null) {
       lastModifiedUserName = item.lastModifiedBy.user.displayName;
     }
-    if (item.createdBy!=null && item.createdBy.user != null) {
+    if (item.createdBy != null && item.createdBy.user != null) {
       createdUserName = item.createdBy.user.displayName;
     }
 
     return new JCRLocalCloudFile(fileNode.getPath(),
-            item.id,
-            item.name,
-            item.webUrl,
-            item.file.mimeType,
-            lastModifiedUserName,
-            createdUserName,
-            item.createdDateTime,
-            item.lastModifiedDateTime,
-            fileNode,
-            true);
+                                 item.id,
+                                 item.name,
+                                 item.webUrl,
+                                 item.file.mimeType,
+                                 lastModifiedUserName,
+                                 createdUserName,
+                                 item.createdDateTime,
+                                 item.lastModifiedDateTime,
+                                 fileNode,
+                                 true);
 
   }
 
@@ -372,10 +377,8 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
 
     @Override
     protected void fetchFiles() throws CloudDriveException, RepositoryException {
-      // OneDriveSyncCommand syncCommand =
-      // ((OneDriveSyncCommand)JCRLocalOneDrive.this.getSyncCommand());
-      // syncCommand.saveDeltaToken("ALL");
-      // syncCommand.syncFiles();
+      // TODO it is also possible to get data from the 'changes api', this is
+      // likely to speed up the process of getting items from the onedrive
       String rootId = getUser().api().getRootId();
       fetchFiles(rootId, driveNode);
     }
@@ -748,16 +751,16 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
       if (LOG.isDebugEnabled()) {
         LOG.debug("Create File Path : " + fileNode.getPath() + "\n" + "Create File Name: " + getTitle(fileNode));
       }
-//      String path = extractAppropriateOneDrivePath(fileNode);
+      // String path = extractAppropriateOneDrivePath(fileNode);
       try {
         DriveItem createdDriveItem = api.insert(getParentId(fileNode), getTitle(fileNode), created, modified, content);
         initFileByDriveItem(fileNode, createdDriveItem);
         return createCloudFile(fileNode, createdDriveItem);
       } catch (Exception e) {
-//        if (LOG.isDebugEnabled()) {
-//          LOG.debug("file uploading debug:  ", e);
-//        }
-        throw new CloudDriveException("failed to update file content",e);
+        // if (LOG.isDebugEnabled()) {
+        // LOG.debug("file uploading debug:  ", e);
+        // }
+        throw new CloudDriveException("failed to update file content", e);
       }
     }
 

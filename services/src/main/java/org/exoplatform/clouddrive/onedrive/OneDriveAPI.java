@@ -11,8 +11,6 @@ import java.util.stream.Collectors;
 
 import javax.net.ssl.HttpsURLConnection;
 
-import com.microsoft.graph.logger.ILogger;
-import com.microsoft.graph.logger.LoggerLevel;
 import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -29,6 +27,8 @@ import org.apache.http.message.BasicNameValuePair;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.microsoft.graph.logger.ILogger;
+import com.microsoft.graph.logger.LoggerLevel;
 import com.microsoft.graph.models.extensions.*;
 import com.microsoft.graph.options.HeaderOption;
 import com.microsoft.graph.options.QueryOption;
@@ -210,8 +210,13 @@ public class OneDriveAPI {
     return retrieveAccessToken(clientId, clientSecret, null, refreshToken, "refresh_token", redirectUrl);
   }
 
-  public SharingLink createLink(String itemId) {
-    return graphClient.me().drive().items(itemId).createLink("embed", null).buildRequest().post().link;
+  public SharingLink createLink(String itemId, String type) {
+    if(type.equalsIgnoreCase("embed")){
+      return graphClient.me().drive().items(itemId).createLink("embed", null).buildRequest().post().link;
+    } else if (type.equalsIgnoreCase("view")) {
+      return graphClient.me().drive().items(itemId).createLink("view", "anonymous").buildRequest().post().link;
+    }
+    throw new IllegalArgumentException("type must be either view or embed");
   }
 
   public final static String SCOPES = scopes();
