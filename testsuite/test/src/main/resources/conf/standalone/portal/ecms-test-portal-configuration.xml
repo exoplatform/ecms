@@ -260,7 +260,6 @@
           <!-- GateIn node types -->
           <value>org.exoplatform.portal.pom.spi.portlet.PortletState</value>
           <value>org.exoplatform.portal.pom.spi.portlet.PreferenceState</value>
-          <value>org.exoplatform.portal.pom.spi.gadget.GadgetState</value>
           <value>org.exoplatform.portal.pom.spi.wsrp.WSRPState</value>
           <value>org.exoplatform.portal.mop.ProtectedResource</value>
           <value>org.exoplatform.portal.mop.ProtectedContainer</value>
