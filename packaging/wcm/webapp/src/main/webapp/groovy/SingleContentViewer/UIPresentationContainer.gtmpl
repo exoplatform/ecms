@@ -49,7 +49,8 @@
         jsManager.require("SHARED/quick-edit", "quickEdit").
         addScripts("quickEdit.InlineEditor.loadLanguage(" + multiLangMsg + ");");
       }			
-			def edittingStyle = isShowInfoBar? "top:20px":"";			
+			def edittingStyle = isShowInfoBar? "top:20px":"";	
+			%>
 			
 			<div class="UIPresentationContainer" id="$uicomponent.id">
 			
