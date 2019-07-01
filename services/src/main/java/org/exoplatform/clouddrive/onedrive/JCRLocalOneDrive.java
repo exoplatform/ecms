@@ -12,6 +12,7 @@ import javax.jcr.RepositoryException;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.microsoft.graph.http.GraphError;
 import com.microsoft.graph.http.GraphServiceException;
 import com.microsoft.graph.models.extensions.DriveItem;
 import com.microsoft.graph.models.extensions.FileSystemInfo;
@@ -96,7 +97,7 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
   }
 
   @Override
-  protected CloudFileAPI createFileAPI() {
+  protected OneDriveFileAPI createFileAPI() {
     return new OneDriveFileAPI();
   }
 
@@ -230,17 +231,40 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
     String preparedBase64Url = "u!" + StringUtils.stripEnd(base64Url, "=").replace("/", "_").replace("+", "-");
     link.webUrl = "https://api.onedrive.com/v1.0/shares/" + preparedBase64Url + "/root/content";
   }
-  private SharingLink createLink(DriveItem item) {
-    // TODO there is a possibility to delete/update public links
-    try {
-      SharingLink link = getUser().api().createLink(item.id,"embed");
-      if (item.file != null && item.file.mimeType.startsWith("image")) {
-          changeWebUrlForImage(link);
-      }
-      return link;
-    } catch (GraphServiceException ex) {
-      // for business account
+
+
+  private SharingLink createViewLink(DriveItem item) {
+    return getUser().api().createLink(item.id,"view");
+  }
+
+  private SharingLink createEmbedLink(DriveItem item) {
+    SharingLink link = getUser().api().createLink(item.id,"embed");
+    if (item.file != null && item.file.mimeType.startsWith("image")) {
+      changeWebUrlForImage(link);
+    }
+    return link;
+  }
+  private String accountType; //business or personal
+  private static final String PERSONAL = "personal";
+  private static final String BUSINESS = "business";
+  private synchronized SharingLink createLink(DriveItem item) {
+    // TODO there is a possibility to delete/update public links,
+    // and also use temporary links
+    if (BUSINESS.equals(accountType)) {
       return getUser().api().createLink(item.id,"view");
+    } else if (PERSONAL.equals(accountType)) {
+      return createEmbedLink(item);
+    }
+    try {
+      this.accountType = PERSONAL;
+      return createEmbedLink(item);
+    } catch (GraphServiceException ex) {
+      GraphError graphError = ex.getServiceError();
+      if (graphError!=null && StringUtils.containsIgnoreCase(graphError.message, "Link type must be either")) {
+        this.accountType = BUSINESS;
+        return createViewLink(item);
+      }
+      throw ex;
     }
   }
 
@@ -599,8 +623,8 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
       return true;
     }
 
-    @Override
-    protected void syncFiles() throws CloudDriveException, RepositoryException {
+
+    private void sync(int numOfAttemptsInCaseOfFailure) throws RepositoryException, CloudDriveException {
       if (LOG.isDebugEnabled()) {
         LOG.debug("syncFiles()");
       }
@@ -615,6 +639,7 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
         readLocalNodes();
         try {
           syncNext();
+          saveDeltaToken(changes.getDeltaToken());
         } catch (Throwable ex) {
           if (LOG.isDebugEnabled()) {
             LOG.debug("try update all drive after ex ", ex);
@@ -635,10 +660,56 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
           }
 
           saveDeltaToken("ALL");
-          syncFiles();
+          if (numOfAttemptsInCaseOfFailure > 0) {
+            sync(--numOfAttemptsInCaseOfFailure);
+          }
         }
       }
-      saveDeltaToken(changes.getDeltaToken());
+
+    }
+
+    @Override
+    protected void syncFiles() throws CloudDriveException, RepositoryException {
+      int numOfAttempts = 3;
+      sync(numOfAttempts);
+//      if (LOG.isDebugEnabled()) {
+//        LOG.debug("syncFiles()");
+//      }
+//
+//      String deltaToken = getDeltaToken();
+//      if (deltaToken == null) {
+//        deltaToken = "latest";
+//      }
+//      changes = api.changes(deltaToken);
+//      iterators.add(changes);
+//      if (changes.hasNext()) {
+//        readLocalNodes();
+//        try {
+//          syncNext();
+//        } catch (Throwable ex) {
+//          if (LOG.isDebugEnabled()) {
+//            LOG.debug("try update all drive after ex ", ex);
+//          }
+//          // remove all nodes
+//          nodes.remove(api.getRootId());
+//          for (Iterator<List<Node>> niter = nodes.values().iterator(); niter.hasNext() && !Thread.currentThread().isInterrupted();) {
+//            List<Node> nls = niter.next();
+//            niter.remove();
+//            for (Node n : nls) {
+//              String npath = n.getPath();
+//              if (notInRange(npath, getRemoved())) {
+//                // remove file links outside the drive, then the node itself
+//                removeNode(n);
+//                addRemoved(npath);
+//              }
+//            }
+//          }
+//
+//          saveDeltaToken("ALL");
+//          syncFiles();
+//        }
+//      }
+//      saveDeltaToken(changes.getDeltaToken());
     }
 
     private Node addFolderNode(DriveItem driveItem, Node parentNode) throws CloudDriveException, RepositoryException {

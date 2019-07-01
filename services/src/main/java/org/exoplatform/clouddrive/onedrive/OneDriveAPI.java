@@ -892,8 +892,6 @@ public class OneDriveAPI {
 
   public DriveItem updateFile(DriveItem driveItem) {
     return updateFileWrapper(driveItem);
-    // return
-    // graphClient.me().drive().items(driveItem.id).buildRequest().patch(driveItem);
   }
 
   public DriveItem getItem(String itemId) {
@@ -1000,7 +998,7 @@ public class OneDriveAPI {
     }
   }
 
-  class OneDriveStoredToken extends UserToken {
+  static class OneDriveStoredToken extends UserToken {
     public void store(String refreshToken) throws CloudDriveException {
       this.store("", refreshToken, 0);
     }
