@@ -630,6 +630,9 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
       }
 
       String deltaToken = getDeltaToken();
+      if (LOG.isDebugEnabled()) {
+        LOG.debug("deltatoken = " + deltaToken);
+      }
       if (deltaToken == null) {
         deltaToken = "latest";
       }
@@ -664,6 +667,11 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
             sync(--numOfAttemptsInCaseOfFailure);
           }
         }
+      }else{
+        if (LOG.isDebugEnabled()) {
+          LOG.debug("save delta token if no changes");
+        }
+        saveDeltaToken(changes.getDeltaToken());
       }
 
     }
