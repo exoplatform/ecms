@@ -71,4 +71,4 @@
 
 
 
-})($, cloudDrive, cloudDriveUtils, socketIO);
+})($, cloudDrive, cloudDriveUtils, cloudDriveSocketIO);
