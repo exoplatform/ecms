@@ -1326,10 +1326,13 @@ public class Utils {
       }
       //Space folder mount
       else if (nodePath.startsWith(groupPath + SPACE_GROUP)) {
-        if (ancestors.length > 3)
+        if (ancestors.length > 4)
+          mountPath.append(nodePath.substring(0, nodePath.indexOf(ancestors[4])-1));
+        else if (ancestors.length == 4)
+        {
           mountPath.append(nodePath.substring(0, nodePath.indexOf(ancestors[3])-1));
-        else
-          mountPath.append(groupPath + SPACE_GROUP);
+        }
+        else mountPath.append(groupPath + SPACE_GROUP);
       }
       //Group folder mount
       else if (nodePath.startsWith(groupPath)) {
