@@ -100,6 +100,23 @@ public class OneDriveAPI {
   private final String redirectUrl;
   private String rootId;
 
+  private  class OneDriveSubscription{
+    private long expirationDateTime;
+    private String notificationUrl;
+
+    public synchronized String getNotificationUrl() {
+      if (LOG.isDebugEnabled()) {
+        LOG.debug("subscription left: " + (expirationDateTime - Calendar.getInstance().getTimeInMillis()));
+      }
+      if (Calendar.getInstance().getTimeInMillis() >= expirationDateTime) {
+        final Subscription subscription = getSubscription();
+        this.notificationUrl = subscription.notificationUrl;
+        this.expirationDateTime = subscription.expirationDateTime.getTimeInMillis();
+      }
+      return notificationUrl;
+    }
+
+  }
   private class OneDriveToken {
     // in millis
     private final static int LIFETIME = 3600 * 1000;
@@ -159,6 +176,8 @@ public class OneDriveAPI {
   private final OneDriveToken       oneDriveToken;
 
   private final HttpClient          httpclient       = HttpClients.createDefault();
+
+  private final OneDriveSubscription oneDriveSubscription = new OneDriveSubscription();
 
   private OneDriveTokenResponse retrieveAccessToken(String clientId,
                                                     String clientSecret,
@@ -343,8 +362,7 @@ public class OneDriveAPI {
     folder.parentReference.id = parentId;
     folder.folder = new Folder();
 
-    // return
-    // graphClient.me().drive().items(parentId).children().buildRequest().post(folder);
+
     return createFolderRequestWrapper(parentId, folder);
   }
 
@@ -411,6 +429,14 @@ public class OneDriveAPI {
   // } // TODO else, is it an error state? throw ex here?
   // return null;
   // }
+
+
+  public String getNotificationUrl() {
+    return oneDriveSubscription.getNotificationUrl();
+  }
+  public Subscription getSubscription() {
+    return graphClient.me().drive().root().subscriptions("socketIO").buildRequest().get();
+  }
 
   public DriveItem copy(String parentId, String fileName, String fileId, boolean isFile) throws IOException, CloudDriveException {
     if (LOG.isDebugEnabled()) {

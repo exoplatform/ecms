@@ -1,74 +1,150 @@
+(function ($, cloudDrive, utils, socketIO) {
+
+  function OneDriveClient() {
+
+    var oneDrives = new Map();
+
+    function OneDriveSubscription(userId, notificationUrl) {
+      var self = this;
+      this.changed = false;
+      this.userId = userId;
+      var socket = socketIO.io(notificationUrl);
+      socket.on('notification', function (data) {
+        // console.log('notification ' + data);
+        self.changed = true;
+      });
+    }
+
+    var processAfterNotification = function (oneDriveSubscription, process, drive) {
 
 
-(function($, cloudDrive, utils, io) {
+      var nowTime = new Date().getTime();
 
-    function OneDriveClient() {
-        console.log('OneDriveClient init');
-        var socket =  io("https://3-westeurope1.pushp.svc.ms/notifications?token=w1-4ef891c6-0a6a-429b-95f5-686c3e29427c");
+      // if (drive.state.expirationDateTime) {
+      //   console.log('time left for : ' + ' ' + + (drive.state.expirationDateTime - nowTime));
+      // }else{
+      //   console.log("drive.state.expirationDateTime = null");
+      // }
+      if (nowTime >= drive.state.expirationDateTime) {
+        console.log('time to renew change');
+        renewState(process,drive);
+        return;
+      }
+      if (oneDriveSubscription.changed) {
+        oneDriveSubscription.changed = false;
+        process.resolve();
+      } else {
+        setTimeout(function () {
+          processAfterNotification(oneDriveSubscription, process, drive);
+        }, 1000);
+      }
+    };
 
 
-        socket.on("connect", ()=>console.log("EEEE.......Connected!"));
-        socket.on("notification", (data)=>console.log("EEE.....Notification!", data));
+    // var findInMap = function (map, userId) {
+    //   var mapIter = map.values();
+    //   var element;
+    //   while (element = mapIter.next().value) {
+    //     if (userId && element.userId) {
+    //       console.log('userId ' + userId + ' elementUserId ' + element.userId);
+    //
+    //       if (userId.includes(element.userId)) {
+    //         console.log(element);
+    //         return element;
+    //       } else {
+    //         console.log('not includes: = ' + element.userId);
+    //       }
+    //     }
+    //   }
+    //   return null;
+    // };
+
+    var renewState = function(process, drive) {
+      var newState = cloudDrive.getState(drive);
+      newState.done(function(res) {
+        drive.state = res;
+        if(oneDrives.has(drive.state.creatorId)){
+          oneDrives.delete(drive.state.creatorId);
+        }
+        process.resolve();
+      });
+      newState.fail(function(response, status, err) {
+        process.reject("Error getting new changes link. " + err + " (" + status + ")");
+      });
+      return newState;
+    };
+
+    this.onChange = function (drive) {
+      var process = $.Deferred();
+      if (drive) {
+        if (drive.state) {
+          var nowTime = new Date().getTime();
+
+          if (nowTime >= drive.state.expirationDateTime) {
+            renewState(process,drive);
+          }else{
+            // if (drive.state.creatorId) {
+            //   console.log('creatorId = ' + drive.state.creatorId);
+            // }else{
+            //   console.log('creatorId = undefined' );
+            // }
+
+            if (!oneDrives.has(drive.state.creatorId)) {
+              oneDrives.set(drive.state.creatorId, new OneDriveSubscription(drive.state.creatorId, drive.state.url));
+            }
+
+            var oneDriveSubscription = oneDrives.get(drive.state.creatorId);
+            processAfterNotification(oneDriveSubscription, process, drive, 0);
+          }
+
+        } else {
+          process.reject("Cannot check for changes. No state object for Cloud Drive on " + drive.path);
+        }
+      } else {
+        process.reject("Null drive in onChange()");
+      }
+      return process.promise();
+    };
 
 
-        this.initContext = function (provider) {
-            if ('onedrive' == provider.id.trim().toLowerCase()) {
-                $(function () {
-                    var file = cloudDrive.getContextFile();
-                    if (file) {
-                        var $viewer = $('#CloudFileViewer');
-                        if (file.type.trim().startsWith('image') && file.previewLink.endsWith('/root/content')) { // image in personal account
-                            console.log('OneDrive initContext, provider= ' + provider);
-                            if ($viewer) {
-                                $viewer.prepend( "<p class='onedriveFileViewer'>" +
+    this.initContext = function (provider) {
+        $(function () {
+          var file = cloudDrive.getContextFile();
+          if (file) {
+            var $viewer = $('#CloudFileViewer');
+            if (file.type.trim().startsWith('image') && file.previewLink.endsWith('/root/content')) { // image in personal account
+              console.log('OneDrive initContext, provider= ' + provider);
+              if ($viewer) {
+                $viewer.prepend("<p class='onedriveFileViewer'>" +
 
-                                    "<img class='onedriveImgFileViewer' src='"+file.previewLink+"'/>" +
+                  "<img class='onedriveImgFileViewer' src='" + file.previewLink + "'/>" +
 
-                                    "</p>"
-
-                                        );
-                                console.log('$viewer=' + $viewer.html());
-                            } else {
-                                console.log('not viewer!!!!!');
-                            }
-
-                        }
-                        if (file.previewLink.indexOf("embed") == -1) { //
-                            $viewer.find('iframe').remove();
-                        }
-                    }
-                });
+                  "</p>"
+                );
+                console.log('$viewer=' + $viewer.html());
+              } else {
+                console.log('not viewer!!!!!');
+              }
 
             }
-        };
+            if (file.previewLink && file.previewLink.indexOf("embed") == -1) { //
+              $viewer.find('iframe').remove();
+            }
+          }
+        });
 
 
-        var getChange = function (drive) {
-            // must be blocking
-        };
+    };
 
-        //
-        // this.onChange = function(drive) {
-        //     var process = $.Deferred();
-        //
-        //     if (drive) {
-        //         // utils.log(">>> enabling changes monitor for Cloud Drive " + drive.path);
-        //         if (drive.state) {
-        //             // Drive supports state - thus we can send connector specific data via it from Java API
-        //             // State it is a POJO in JavaAPI. Here it is a JSON object.
-        //             pollChanges(process, drive);
-        //         } else {
-        //             process.reject("Cannot check for changes. No state object for Cloud Drive on " + drive.path);
-        //         }
-        //     } else {
-        //         process.reject("Null drive in onChange()");
-        //     }
-        //     return process.promise();
-        // };
 
-    }
-    return new OneDriveClient();
+    var getChange = function (drive) {
+      // must be blocking
+    };
 
+
+  }
+
+  return new OneDriveClient();
 
 
 })($, cloudDrive, cloudDriveUtils, cloudDriveSocketIO);

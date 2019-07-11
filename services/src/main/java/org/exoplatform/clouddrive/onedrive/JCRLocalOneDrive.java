@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
+import java.util.Calendar;
+import java.util.List;
 
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
@@ -14,10 +16,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.microsoft.graph.http.GraphError;
 import com.microsoft.graph.http.GraphServiceException;
-import com.microsoft.graph.models.extensions.DriveItem;
-import com.microsoft.graph.models.extensions.FileSystemInfo;
-import com.microsoft.graph.models.extensions.ItemReference;
-import com.microsoft.graph.models.extensions.SharingLink;
+import com.microsoft.graph.models.extensions.*;
 
 import org.exoplatform.clouddrive.*;
 import org.exoplatform.clouddrive.jcr.JCRLocalCloudDrive;
@@ -32,6 +31,47 @@ import org.exoplatform.services.log.Log;
 
 public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRefreshListener {
 
+    public class OneDriveState implements FilesState {
+//        @JsonIgnore
+        final Subscription subscription;
+      private final String rootId;
+
+      public OneDriveState(Subscription subscription, String rootId) {
+            this.subscription = subscription;
+            this.rootId = rootId;
+        }
+        @Override
+        public Collection<String> getUpdating() {
+            return state.getUpdating();
+        }
+
+        @Override
+        public boolean isUpdating(String fileIdOrPath) {
+            return state.isUpdating(fileIdOrPath);
+        }
+
+        @Override
+        public boolean isNew(String fileIdOrPath) {
+            return state.isNew(fileIdOrPath);
+
+        }
+
+        public String getUrl() {
+            return subscription.notificationUrl;
+        }
+
+        public long getExpirationDateTime() {
+            return this.subscription.expirationDateTime.getTimeInMillis();
+        }
+
+        public Subscription getSubscription() {
+        return null;
+        }
+
+      public String getCreatorId() {
+            return rootId;
+        }
+    }
   private static final Log LOG = ExoLogger.getLogger(JCRLocalOneDrive.class);
 
   protected JCRLocalOneDrive(CloudUser user,
@@ -82,7 +122,6 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
       LOG.debug("LoadUser(): refreshToken =  " + refreshToken);
     }
     OneDriveAPI driveAPI = apiBuilder.load(refreshToken, accessToken, expirationTime).build();
-
     return new OneDriveUser(userId, username, email, provider, driveAPI);
   }
 
@@ -96,7 +135,12 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
     return new OneDriveSyncCommand();
   }
 
-  @Override
+    @Override
+    public OneDriveState getState() throws DriveRemovedException, RefreshAccessException, CloudProviderException, RepositoryException {
+        return new OneDriveState(getUser().api().getSubscription(), getUser().api().getRootId());
+    }
+
+    @Override
   protected OneDriveFileAPI createFileAPI() {
     return new OneDriveFileAPI();
   }
@@ -127,6 +171,7 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
   protected void initDrive(Node driveNode) throws CloudDriveException, RepositoryException {
     super.initDrive(driveNode);
     driveNode.setProperty("ecd:id", getUser().api().getRootId());
+//    driveNode.setProperty("ecd:", getUser().api().getRootId());
     // driveNode.save();
   }
 
@@ -699,7 +744,7 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
 //            LOG.debug("try update all drive after ex ", ex);
 //          }
 //          // remove all nodes
-//          nodes.remove(api.getRootId());
+//          nodes.remove(api.getRoot());
 //          for (Iterator<List<Node>> niter = nodes.values().iterator(); niter.hasNext() && !Thread.currentThread().isInterrupted();) {
 //            List<Node> nls = niter.next();
 //            niter.remove();
@@ -855,17 +900,17 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
     }
 
     @Override
-    public CloudFile copyFile(Node srcFileNode, Node destFileNode) throws RepositoryException, CloudDriveException {
+    public CloudFile copyFile(Node srcFileNode, Node destFileNode) throws CloudDriveException {
       if (LOG.isDebugEnabled()) {
         LOG.debug("copyFile(): ");
       }
-
       try {
         DriveItem file = api.copyFile(getParentId(destFileNode), getTitle(destFileNode), getId(srcFileNode));
         initFileByDriveItem(destFileNode, file);
         return createCloudFolder(destFileNode, file);
-      } catch (IOException e) {
-        throw new CloudDriveException("Error during copy file", e);
+      } catch (Throwable e) {
+          LOG.error(e);
+        throw new SkipSyncException("Error during copy file");
       }
     }
 
@@ -907,7 +952,6 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
 
       try {
         DriveItem folder = api.copyFolder(getParentId(destFolderNode), getTitle(destFolderNode), getId(srcFolderNode));
-        if (folder != null) {
           // initSubtree(destFolderNode, folder);
           if (LOG.isDebugEnabled()) {
             LOG.debug("folderName = " + folder.name);
@@ -931,10 +975,9 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
 
           return createCloudFolder(destFolderNode, folder);
 
-        }
-        throw new CloudDriveException("unable to copy folder");
-      } catch (IOException e) {
-        throw new CloudDriveException("unable to copy folder", e);
+      } catch (Throwable e) {
+          LOG.error(e);
+          throw new SkipSyncException("unable to copy folder");
       }
     }
 
@@ -964,23 +1007,33 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
     // }
     // }
     @Override
-    public CloudFile updateFile(Node fileNode, Calendar modified) throws RepositoryException {
+    public CloudFile updateFile(Node fileNode, Calendar modified) throws RepositoryException, SkipSyncException {
       if (LOG.isDebugEnabled()) {
         LOG.debug("updateFile(): ");
       }
-      DriveItem modifiedItem = updateItem(fileNode, modified);
-      initFileByDriveItem(fileNode, modifiedItem);
-      return createCloudFile(fileNode, modifiedItem);
+        try {
+            DriveItem modifiedItem = updateItem(fileNode, modified);
+            initFileByDriveItem(fileNode, modifiedItem);
+            return createCloudFile(fileNode, modifiedItem);
+        } catch (Throwable e) {
+            LOG.error("error during updateFile", e);
+            throw new SkipSyncException("error during updateFile");
+        }
     }
 
     @Override
-    public CloudFile updateFolder(Node folderNode, Calendar modified) throws RepositoryException {
+    public CloudFile updateFolder(Node folderNode, Calendar modified) throws RepositoryException, SkipSyncException {
       if (LOG.isDebugEnabled()) {
         LOG.debug("updateFolder(): ");
       }
-      DriveItem modifiedItem = updateItem(folderNode, modified);
-      initFolderByDriveItem(folderNode, modifiedItem);
-      return createCloudFolder(folderNode, modifiedItem);
+        try {
+            DriveItem modifiedItem = updateItem(folderNode, modified);
+            initFolderByDriveItem(folderNode, modifiedItem);
+            return createCloudFolder(folderNode, modifiedItem);
+        } catch (Throwable e) {
+            LOG.error("failed to update folder", e);
+            throw new SkipSyncException("failed to update folder");
+        }
     }
 
     @Override
@@ -989,17 +1042,15 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
       if (LOG.isDebugEnabled()) {
         LOG.debug("updateFileContent(): ");
       }
-      DriveItem updatedDriveItem = null;
       try {
-        updatedDriveItem = api.updateFileContent(getId(fileNode), null, modified, content);
-        if (updatedDriveItem != null) {
+          DriveItem updatedDriveItem = api.updateFileContent(getId(fileNode), null, modified, content);
           initFileByDriveItem(fileNode, updatedDriveItem);
           return createCloudFile(fileNode, updatedDriveItem);
-        }
-      } catch (Exception e) {
-        throw new CloudDriveException("failed to update file content", e);
+      } catch (Throwable e) {
+          LOG.error("failed to update file content", e);
+          throw new SkipSyncException("failed to update file content");
       }
-      return null;
+//      return null;
     }
 
     @Override

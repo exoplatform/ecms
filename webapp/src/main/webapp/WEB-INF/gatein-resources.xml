@@ -17,7 +17,6 @@
   License along with this software; if not, write to the Free
   Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
   02110-1301 USA, or see the FSF site: http://www.fsf.org.
-
 -->
 <gatein-resources xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://www.gatein.org/xml/ns/gatein_resources_1_3 http://www.gatein.org/xml/ns/gatein_resources_1_3"
@@ -28,7 +27,14 @@
     <name>cloudDriveSocketIO</name>
     <load-group>cloudDriveOnedriveGRP</load-group>
     <script>
-      <path>/js/socket.io.js</path>
+        <adapter>
+            (function() {
+            <include>/js/socket.io.js</include>
+            return {
+            io: io
+            };
+            })();
+        </adapter>
     </script>
   </module>
 
