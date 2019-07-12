@@ -848,7 +848,8 @@ public class TestSearchService extends BaseSearchTest {
     queryCriteria.setFulltextSearchProperty(null);
     String author = "root";
     queryCriteria.setAuthors(new String[]{author});
-    assertEquals(2, siteSearchService.searchSiteContents(sessionProvider, queryCriteria, Locale.ENGLISH, 10, true).getAvailable());
+    //webcontent0, webcontent1, webcontent0[1], webcontent1[1]
+    assertEquals(4, siteSearchService.searchSiteContents(sessionProvider, queryCriteria, Locale.ENGLISH, 10, true).getAvailable());
   }
 
   public void testSearchByMimeTypes()throws Exception{
