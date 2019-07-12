@@ -119,7 +119,7 @@ public class OneDriveAPI {
   }
   private class OneDriveToken {
     // in millis
-    private final static int LIFETIME = 3600 * 1000;
+    private final static int LIFETIME = 2000 * 1000;
 
     private String           refreshToken;
 
@@ -133,7 +133,7 @@ public class OneDriveAPI {
 
     public synchronized String getAccessToken() throws RefreshAccessException {
       long currentTime = System.currentTimeMillis();
-      if (currentTime >= lastModifiedTime + /* LIFETIME */+2000_000) { // TODO
+      if (currentTime >= lastModifiedTime + LIFETIME) { // TODO
                                                                        // use
                                                                        // constant
         try {
@@ -243,13 +243,8 @@ public class OneDriveAPI {
   private static String scopes() {
     StringJoiner scopes = new StringJoiner(" ");
     scopes.add(Scopes.FilesReadWriteAll).add(Scopes.FilesRead).add(Scopes.FilesReadWrite).add(Scopes.FilesReadAll)
-    // .add(Scopes.FilesReadSelected)
-    // .add(Scopes.UserReadWriteAll)
           .add(Scopes.UserRead)
-          // .add(Scopes.UserReadWrite)
           .add(Scopes.offlineAccess);
-    // .add(Scopes.FilesReadWriteAppFolder)
-    // .add(Scopes.FilesReadWriteSelected);
     return scopes.toString();
   }
 
@@ -368,67 +363,16 @@ public class OneDriveAPI {
 
   public DriveItem copyFile(String parentId, String fileName, String fileId) throws IOException, CloudDriveException {
     return copy(parentId, fileName, fileId, true);
-    // try {
-    // String copiedFileId = copy(parentId, fileName, fileId);
-    // if (LOG.isDebugEnabled()) {
-    // LOG.debug("copiedFileId = " + copiedFileId);
-    // }
-    // return getItem(copiedFileId);
-    // } catch (IOException e) {
-    // // TODO can we work normally after this ex? Later syncs will fail
-    // obviously - need throw an ex from here?
-    // LOG.error("error while copying file",e);
-    // }
-    // return null;
   }
 
   public DriveItem copyFolder(String parentId, String name, String folderId) throws CloudDriveException, IOException {
     return copy(parentId, name, folderId, false);
   }
 
-  // public DriveItem getItemByPath(String path) {
-  // try {
-  // return graphClient.me().drive().root().itemWithPath(URLEncoder.encode(path,
-  // "UTF-8")).buildRequest().get();
-  // } catch (UnsupportedEncodingException e) {
-  // // TODO throw ex here
-  // LOG.error("unable to get file", e);
-  // return null;
-  // }
-  // }
-
   public OneDriveStoredToken getStoredToken() {
     return storedToken;
   }
 
-  // TODO new name: getResourceId()
-  // private String retrieveCopiedFileId(String location) throws IOException {
-  // HttpGet httpget = new HttpGet(location);
-  // HttpResponse response = httpclient.execute(httpget);
-  // HttpEntity entity = response.getEntity();
-  // if (entity != null) {
-  // try (InputStream inputStream = entity.getContent()) {
-  // String responseBody = IOUtils.toString(inputStream,
-  // Charset.forName("UTF-8"));
-  // JsonObject jsonObject = new
-  // JsonParser().parse(responseBody).getAsJsonObject();
-  // if (jsonObject.has("resourceId")) {
-  // return jsonObject.get("resourceId").getAsString();
-  // } else {
-  // try {
-  // Thread.sleep(1000);
-  // } catch (InterruptedException e) {
-  // e.printStackTrace();
-  // }
-  // if (LOG.isDebugEnabled()) {
-  // LOG.debug("has not resourceId, responseBody = " + responseBody);
-  // }
-  // return retrieveCopiedFileId(location);
-  // }
-  // }
-  // } // TODO else, is it an error state? throw ex here?
-  // return null;
-  // }
 
 
   public String getNotificationUrl() {
@@ -516,30 +460,7 @@ public class OneDriveAPI {
     }
   }
 
-  // public String copy(String parentId, String fileName, String fileId) throws
-  // IOException, RefreshAccessException {
-  // String request =
-  // "{\n" +
-  // "      \"parentReference\" : {\n" +
-  // "        \"id\" : \"" + parentId + "\"\n" +
-  // "    },\n" +
-  // "      \"name\" : \"" + fileName + "\",\n" +
-  // "      \"@microsoft.graph.conflictBehavior\" : \"rename\"\n" +
-  // "    }";
-  //
-  //
-  // HttpPost httppost = new
-  // HttpPost("https://graph.microsoft.com/v1.0/me/drive/items/" + fileId +
-  // "/copy");
-  // StringEntity stringEntity = new StringEntity(request, "UTF-8");
-  // httppost.setEntity(stringEntity);
-  // httppost.addHeader("Authorization", "Bearer " + getAccessToken());
-  // httppost.addHeader("Content-type", "application/json");
-  // HttpResponse response = httpclient.execute(httppost);
-  // String location = response.getHeaders("Location")[0].getValue();
-  //
-  // return retrieveCopiedFileId(location);
-  // }
+
 
   public IDriveItemCollectionPage getDriveItemCollectionPage(String folderId) {
 
@@ -634,17 +555,6 @@ public class OneDriveAPI {
     return fileSendResponse;
   }
 
-//  private byte[] readAllBytes(InputStream inputStream) throws IOException {
-//    ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-//    int nRead;
-//    byte[] data = new byte[16384];
-//
-//    while ((nRead = inputStream.read(data, 0, data.length)) != -1) {
-//      buffer.write(data, 0, nRead);
-//    }
-//
-//    return buffer.toByteArray();
-//  }
 
   private class FileSendResponse {
 
@@ -667,31 +577,11 @@ public class OneDriveAPI {
 
   private String uploadUrlConflictRenameWrapper(String path, DriveItemUploadableProperties driveItemUploadableProperties) throws UnsupportedEncodingException {
 
-    /*
-     * "item": { "@odata.type": "microsoft.graph.driveItemUploadableProperties",
-     * "@microsoft.graph.conflictBehavior": "rename", "name": "largefile.dat" }
-     */
-
     JsonObject uploadFileRequestBody = new JsonParser().parse("{\"item\": {\n"
         + "    \"@odata.type\": \"microsoft.graph.driveItemUploadableProperties\",\n"
         + "    \"@microsoft.graph.conflictBehavior\": \"rename\",\n" + "    \"name\": \"" + driveItemUploadableProperties.name
         + "\"\n" + "  }}".trim()).getAsJsonObject();
 
-    // JsonObject uploadFileRequestBody = new JsonParser().parse("{\n" +
-    // "      \"@microsoft.graph.conflictBehavior\":\"rename\",\n" +
-    // "            \"description\":\"" +
-    // driveItemUploadableProperties.description + "\",\n" +
-    // "            \"fileSystemInfo\":{\n" +
-    // "      \"@odata.type\":\"microsoft.graph.fileSystemInfo\"\n" +
-    // //
-    // "      \"lastModifiedDateTime\" : \""+driveItemUploadableProperties.fileSystemInfo.lastModifiedDateTime+"\",\n"
-    // +
-    // //
-    // "      \"createdDateTime\" : \""+driveItemUploadableProperties.fileSystemInfo.createdDateTime+"\"\n"
-    // +
-    // "    },\n" +
-    // "      \"name\":\"" + driveItemUploadableProperties.name + "\"\n" +
-    // "    }").getAsJsonObject();
 
     return graphClient.customRequest("/me/drive/root:/" + URLEncoder.encode(path, "UTF-8") + ":/createUploadSession")
                       .buildRequest()
@@ -703,29 +593,8 @@ public class OneDriveAPI {
   private String getUploadUrl(String path, DriveItemUploadableProperties driveItemUploadableProperties) throws UnsupportedEncodingException {
 
     return uploadUrlConflictRenameWrapper(path, driveItemUploadableProperties);
-    // return graphClient.me()
-    // .drive()
-    // .root()
-    // .itemWithPath(URLEncoder.encode(path, "UTF-8"))
-    // .createUploadSession(driveItemUploadableProperties)
-    // .buildRequest()
-    // .post().uploadUrl;
-
   }
 
-  // private DriveItemUploadableProperties
-  // prepareDriveItemUploadableProperties(String fileName,
-  // Calendar created,
-  // Calendar modified) {
-  // DriveItemUploadableProperties driveItemUploadableProperties = new
-  // DriveItemUploadableProperties();
-  // driveItemUploadableProperties.name = fileName;
-  // driveItemUploadableProperties.fileSystemInfo = new FileSystemInfo();
-  // driveItemUploadableProperties.fileSystemInfo.createdDateTime = created;
-  // driveItemUploadableProperties.fileSystemInfo.lastModifiedDateTime =
-  // modified;
-  // return driveItemUploadableProperties;
-  // }
 
   public ChangesIterator changes(String deltaToken) {
     return new ChangesIterator(deltaToken);
@@ -788,105 +657,7 @@ public class OneDriveAPI {
 
   }
 
-  // public DriveItem insertUpdate(String uploadUrl, InputStream inputStream)
-  // throws Exception {
-  // // NotFoundException
-  // // String uploadUrl = updateUploadUrl(parentId);
-  // int size = inputStream.available();
-  // byte[] file;
-  // file = readAllBytes(inputStream);
-  // //LOG.error("Unable to read all bytes from received inputstream", e);
-  // int bufferSize = 327680 * 40; // must be a multiple of 327680
-  // // TODO write comment, rewrite with inputstrem
-  //
-  // for (int i = 0; i < file.length / bufferSize + 1; i++) {
-  // int from = bufferSize * i;
-  // int to = bufferSize * (i + 1);
-  // if (to > file.length) {
-  // to = file.length;
-  // }
-  // // TODO looks like not efficient work with memory, why we need arrays at
-  // all, can InputStream work for us?
-  // byte[] fileSlice = Arrays.copyOfRange(file, from, to);
-  // FileSendResponse fileSendResponse = sendFile(uploadUrl, from,
-  // fileSlice.length, file.length, fileSlice);
-  //
-  // DriveItem driveItem = getDriveItemIfCreated(fileSendResponse);
-  // if (driveItem != null) {
-  // return driveItem;
-  // } // TODO is it an error case?
-  // }
-  // return null;
-  // }
 
-  /**
-   * @param isInsert indicates whether the file needs to be changed or added
-   */
-  // private DriveItem insertUpdate(String path,
-  // String fileName,
-  // Calendar created,
-  // Calendar modified,
-  // String mimetype,
-  // InputStream inputStream,
-  // boolean isInsert) throws UnsupportedEncodingException {
-  // DriveItemUploadableProperties driveItemUploadableProperties =
-  // prepareDriveItemUploadableProperties(fileName, created, modified);
-  // String uploadUrl = getUploadUrl(path, driveItemUploadableProperties);
-  // byte[] file;
-  // try {
-  // file = readAllBytes(inputStream);
-  // } catch (IOException e) {
-  // // TODO may be throw an ex?
-  // return null;
-  // }
-  // //LOG.error("Unable to read all bytes from received inputstream", e);
-  // int bufferSize = 327680 * 40; // must be a multiple of 327680
-  // // TODO write comment, rewrite with inputstrem
-  //
-  // for (int i = 0; i < file.length / bufferSize + 1; i++) {
-  // int from = bufferSize * i;
-  // int to = bufferSize * (i + 1);
-  // if (to > file.length) {
-  // to = file.length;
-  // }
-  // // TODO looks like not efficient work with memory, why we need arrays at
-  // all, can InputStream work for us?
-  // byte[] fileSlice = Arrays.copyOfRange(file, from, to);
-  // FileSendResponse fileSendResponse = null;
-  // try {
-  // fileSendResponse = sendFile(uploadUrl, from, fileSlice.length, file.length,
-  // fileSlice);
-  // } catch (IOException e) {
-  // LOG.error("Cannot upload part of file. ", e);
-  // // TODO throw it?
-  // return null;
-  // }
-  // DriveItem driveItem = processEndOfFileUploadIfReached(fileSendResponse,
-  // isInsert);
-  // if (driveItem != null) {
-  // return driveItem;
-  // } // TODO is it an error case?
-  // }
-  // return null;
-  // }
-
-  // private DriveItem processEndOfFileUploadIfReached(FileSendResponse
-  // fileSendResponse) {
-  // return getDriveItemIfCreated(fileSendResponse);
-  //
-  // return driveItem;
-  // }
-  // private DriveItem retrieveDriveItemIfUpdated(FileSendResponse
-  // fileSendResponse) {
-  // if (fileSendResponse.responseCode == 200) {
-  // JsonObject jsonDriveItem = new
-  // JsonParser().parse(fileSendResponse.data).getAsJsonObject();
-  // DriveItem updatedFile =
-  // graphClient.me().drive().items(jsonDriveItem.get("id").getAsString()).buildRequest().get();
-  // return updatedFile;
-  // } // TODO error here?
-  // return null;
-  // }
 
   public DriveItem insert(String parentId, String fileName, Calendar created, Calendar modified, InputStream inputStream) throws Exception {
     // TODO do something with create, modified

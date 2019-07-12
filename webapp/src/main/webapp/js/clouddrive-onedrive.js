@@ -8,16 +8,17 @@
       var self = this;
       this.changed = false;
       this.userId = userId;
+
       var socket = socketIO.io(notificationUrl);
       socket.on('notification', function (data) {
-        // console.log('notification ' + data);
+        console.log('notification ' + data);
         self.changed = true;
       });
     }
 
     var processAfterNotification = function (oneDriveSubscription, process, drive) {
 
-
+      console.log("wait notification");
       var nowTime = new Date().getTime();
 
       // if (drive.state.expirationDateTime) {
@@ -26,8 +27,8 @@
       //   console.log("drive.state.expirationDateTime = null");
       // }
       if (nowTime >= drive.state.expirationDateTime) {
-        console.log('time to renew change');
-        renewState(process,drive);
+        console.log('time to renew state');
+        renewState(process, drive);
         return;
       }
       if (oneDriveSubscription.changed) {
@@ -59,30 +60,31 @@
     //   return null;
     // };
 
-    var renewState = function(process, drive) {
+    var renewState = function (process, drive) {
       var newState = cloudDrive.getState(drive);
-      newState.done(function(res) {
+      newState.done(function (res) {
         drive.state = res;
-        if(oneDrives.has(drive.state.creatorId)){
+        if (oneDrives.has(drive.state.creatorId)) {
           oneDrives.delete(drive.state.creatorId);
         }
         process.resolve();
       });
-      newState.fail(function(response, status, err) {
+      newState.fail(function (response, status, err) {
         process.reject("Error getting new changes link. " + err + " (" + status + ")");
       });
       return newState;
     };
 
     this.onChange = function (drive) {
+      console.log('onchange');
       var process = $.Deferred();
       if (drive) {
         if (drive.state) {
           var nowTime = new Date().getTime();
 
           if (nowTime >= drive.state.expirationDateTime) {
-            renewState(process,drive);
-          }else{
+            renewState(process, drive);
+          } else {
             // if (drive.state.creatorId) {
             //   console.log('creatorId = ' + drive.state.creatorId);
             // }else{
@@ -94,7 +96,7 @@
             }
 
             var oneDriveSubscription = oneDrives.get(drive.state.creatorId);
-            processAfterNotification(oneDriveSubscription, process, drive, 0);
+            processAfterNotification(oneDriveSubscription, process, drive);
           }
 
         } else {
@@ -108,30 +110,32 @@
 
 
     this.initContext = function (provider) {
-        $(function () {
-          var file = cloudDrive.getContextFile();
-          if (file) {
-            var $viewer = $('#CloudFileViewer');
-            if (file.type.trim().startsWith('image') && file.previewLink.endsWith('/root/content')) { // image in personal account
-              console.log('OneDrive initContext, provider= ' + provider);
-              if ($viewer) {
+      $(function () {
+        var file = cloudDrive.getContextFile();
+        if (file) {
+          var $viewer = $('#CloudFileViewer');
+          if (file.type.trim().startsWith('image') && file.previewLink.endsWith('/root/content')) { // image in personal account
+            console.log('OneDrive initContext, provider= ' + provider);
+            if ($viewer) {
+              if ($viewer.has('onedriveImgFileViewer').length == 0) {
                 $viewer.prepend("<p class='onedriveFileViewer'>" +
 
                   "<img class='onedriveImgFileViewer' src='" + file.previewLink + "'/>" +
 
                   "</p>"
                 );
-                console.log('$viewer=' + $viewer.html());
-              } else {
-                console.log('not viewer!!!!!');
               }
+              console.log('$viewer=' + $viewer.html());
+            } else {
+              console.log('not viewer!!!!!');
+            }
 
-            }
-            if (file.previewLink && file.previewLink.indexOf("embed") == -1) { //
-              $viewer.find('iframe').remove();
-            }
           }
-        });
+          if (file.previewLink && file.previewLink.indexOf("embed") == -1) { //
+            $viewer.find('iframe').remove();
+          }
+        }
+      });
 
 
     };
