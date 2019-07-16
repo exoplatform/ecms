@@ -502,7 +502,7 @@ public class OneDriveAPI {
     return driveItems;
   }
 
-  private List<DriveItem> getFiles(String folderId) {
+  public List<DriveItem> getFiles(String folderId) {
 
     IDriveItemCollectionPage iDriveItemCollectionPage = null;
     if (folderId == null) {
@@ -510,12 +510,16 @@ public class OneDriveAPI {
     } else {
       iDriveItemCollectionPage = graphClient.me().drive().items(folderId).children().buildRequest().get();
     }
+
     List<DriveItem> driveItems = new ArrayList<>(iDriveItemCollectionPage.getCurrentPage());
+
     IDriveItemCollectionRequestBuilder nextPage = iDriveItemCollectionPage.getNextPage();
     while (nextPage != null) {
       IDriveItemCollectionPage nextPageCollection = nextPage.buildRequest().get();
       driveItems.addAll(nextPageCollection.getCurrentPage());
       nextPage = nextPageCollection.getNextPage();
+      if (nextPage == null) {
+      }
     }
     return driveItems;
   }
@@ -687,6 +691,49 @@ public class OneDriveAPI {
     return getItem(updatedFileId);
   }
 
+  class DeltaDriveFiles{
+    private String deltaToken;
+    private List<DriveItem> items;
+
+    DeltaDriveFiles(String deltaToken, List<DriveItem> items) {
+      this.deltaToken = deltaToken;
+      this.items = items;
+    }
+
+    public String getDeltaToken() {
+      return deltaToken;
+    }
+
+    public void setDeltaToken(String deltaToken) {
+      this.deltaToken = deltaToken;
+    }
+
+    public List<DriveItem> getItems() {
+      return items;
+    }
+
+    public void setItems(List<DriveItem> items) {
+      this.items = items;
+    }
+  }
+
+  public DeltaDriveFiles getAllFiles() {
+    String deltaToken = null;
+    List<DriveItem> changes = new ArrayList<>();
+    IDriveItemDeltaCollectionPage deltaCollectionPage = delta(null);
+    IDriveItemDeltaCollectionRequestBuilder nextPage;
+    while (true) {
+      changes.addAll(deltaCollectionPage.getCurrentPage());
+      nextPage = deltaCollectionPage.getNextPage();
+      if (nextPage == null) {
+        deltaToken = extractDeltaToken(deltaCollectionPage.deltaLink());
+        break;
+      }
+      deltaCollectionPage = nextPage.buildRequest().get();
+    }
+    return new DeltaDriveFiles(deltaToken, changes);
+  }
+
   public DriveItem updateFile(DriveItem driveItem) {
     return updateFileWrapper(driveItem);
   }
@@ -710,6 +757,57 @@ public class OneDriveAPI {
     }
     return iDriveItemDeltaCollectionPage;
   }
+
+
+  static class HashSetCompatibleDriveItem{
+    DriveItem item;
+
+    public HashSetCompatibleDriveItem(DriveItem item) {
+      this.item = item;
+    }
+
+    public DriveItem getItem() {
+      return item;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+      if (this == o) return true;
+      if (o == null || getClass() != o.getClass()) return false;
+
+      HashSetCompatibleDriveItem that = (HashSetCompatibleDriveItem) o;
+
+      return item.id.equals(that.item.id);
+    }
+
+    @Override
+    public int hashCode() {
+      return item.id.hashCode();
+    }
+  }
+
+    class SimpleChildIterator extends ChunkIterator<HashSetCompatibleDriveItem> {
+
+        private final Collection<HashSetCompatibleDriveItem> items;
+
+        public SimpleChildIterator(Collection<HashSetCompatibleDriveItem> items) throws CloudDriveException {
+          this.items = items;
+          this.iter = nextChunk();
+      }
+        @Override
+        protected Iterator<HashSetCompatibleDriveItem> nextChunk() {
+            available(items.size());
+            return items.iterator();
+        }
+
+        @Override
+        protected boolean hasNextChunk() {
+            return false;
+        }
+    }
+    public SimpleChildIterator getSimpleChildIterator(Collection<HashSetCompatibleDriveItem> items) throws CloudDriveException {
+        return new SimpleChildIterator(items);
+    }
 
   public ChildIterator getChildIterator(String folderId) {
     return new ChildIterator(folderId);

@@ -24,6 +24,7 @@ import org.exoplatform.clouddrive.jcr.JCRLocalCloudFile;
 import org.exoplatform.clouddrive.jcr.NodeFinder;
 import org.exoplatform.clouddrive.oauth2.UserToken;
 import org.exoplatform.clouddrive.oauth2.UserTokenRefreshListener;
+import org.exoplatform.clouddrive.onedrive.OneDriveAPI.HashSetCompatibleDriveItem;
 import org.exoplatform.clouddrive.utils.ExtendedMimeTypeResolver;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.log.ExoLogger;
@@ -401,10 +402,10 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
       this.api = getUser().api();
     }
 
-    private JCRLocalCloudFile openInitFolder(DriveItem item, Node localFile) throws RepositoryException, CloudDriveException {
+    private JCRLocalCloudFile openInitFolder(Map<String,Set<HashSetCompatibleDriveItem>> itemChildren,DriveItem item, Node localFile) throws RepositoryException, CloudDriveException {
       Node fileNode = openFolder(item.id, item.name, localFile);
       initFolderByDriveItem(fileNode, item);
-      fetchFiles(item.id, fileNode);
+      fetchFiles(itemChildren, item.id, fileNode);
       return createCloudFolder(fileNode, item);
     }
 
@@ -421,19 +422,21 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
       return createCloudFile(fileNode, item);
     }
 
-    private void fetchFiles(String fileId, Node localFile) throws CloudDriveException, RepositoryException {
+    private void fetchFiles(Map<String,Set<HashSetCompatibleDriveItem>> itemChildren, String fileId, Node localFile) throws CloudDriveException, RepositoryException {
       if (LOG.isDebugEnabled()) {
         LOG.debug("fetchFiles():  ");
       }
-      OneDriveAPI.ChildIterator childIterator = api.getChildIterator(fileId);
+      final Set<HashSetCompatibleDriveItem> children = itemChildren.get(fileId);
+      if(children==null) return;
+      OneDriveAPI.SimpleChildIterator childIterator = api.getSimpleChildIterator(children);
       iterators.add(childIterator);
       while (childIterator.hasNext()) {
-        DriveItem item = childIterator.next();
+        DriveItem item = childIterator.next().getItem();
         if (!isConnected(fileId, item.id)) {
           JCRLocalCloudFile jcrLocalCloudFile;
           if (item.folder != null) {
-            jcrLocalCloudFile = openInitFolder(item, localFile);
-          } else /* if (item.file != null) */{
+            jcrLocalCloudFile = openInitFolder(itemChildren,item, localFile);
+          } else{
             jcrLocalCloudFile = openInitFile(item, localFile);
           }
           addConnected(fileId, jcrLocalCloudFile);
@@ -441,12 +444,34 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
       }
     }
 
+
+
+
     @Override
     protected void fetchFiles() throws CloudDriveException, RepositoryException {
-      // TODO it is also possible to get data from the 'changes api', this is
-      // likely to speed up the process of getting items from the onedrive
-      String rootId = getUser().api().getRootId();
-      fetchFiles(rootId, driveNode);
+        if (LOG.isDebugEnabled()) {
+            LOG.info("fetch files");
+        }
+        String rootId = api.getRootId();
+      final OneDriveAPI.DeltaDriveFiles allFiles = api.getAllFiles();
+      final List<DriveItem> items = allFiles.getItems();
+
+      Map<String, Set<HashSetCompatibleDriveItem>> itemChildren = new HashMap<>(); // parentId -> children
+
+        items.forEach((item) -> {
+          String parentId = item.parentReference.id;
+          Set<HashSetCompatibleDriveItem> children = itemChildren.computeIfAbsent(parentId, k -> new HashSet<>());
+          final HashSetCompatibleDriveItem hashSetCompatibleDriveItem = new HashSetCompatibleDriveItem(item);
+          children.remove(hashSetCompatibleDriveItem);
+          children.add(hashSetCompatibleDriveItem);
+        });
+
+        fetchFiles(itemChildren, rootId,driveNode);
+
+
+        driveNode.setProperty("onedrive:changeToken", allFiles.getDeltaToken());
+//      String rootId = getUser().api().getRootId();
+//      fetchFiles(rootId, driveNode);
     }
 
   }
@@ -681,8 +706,8 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
       changes = api.changes(deltaToken);
       iterators.add(changes);
       if (changes.hasNext()) {
-        readLocalNodes();
         try {
+			readLocalNodes();
           syncNext();
           saveDeltaToken(changes.getDeltaToken());
         } catch (Throwable ex) {
