@@ -115,7 +115,7 @@ public abstract class UIWorkingAreaActionListener <T extends UIComponent> extend
     if (nodePath == null || nodePath.length() == 0 || nodePath.contains(";")) return null;
     // Use the method getNodeByPath because it is link aware
     try {
-      Node currentNode = getNodeByPath(nodePath, uiExplorer, !inTrash(nodePath));
+      Node currentNode = getNodeByPath(nodePath, uiExplorer, !inTrash(nodePath) && !("Delete".equals(event.getName()) || "Cut".equals(event.getName())));
       WebuiRequestContext requestContext = event.getRequestContext();
       UIApplication uiApp = requestContext.getUIApplication();
       context.put(UIWorkingArea.class.getName(), uiWorkingArea);
