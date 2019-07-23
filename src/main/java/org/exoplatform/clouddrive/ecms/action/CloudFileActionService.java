@@ -108,9 +108,6 @@ public class CloudFileActionService implements Startable {
   /** The Constant EXO_PRIVILEGEABLE. */
   protected static final String   EXO_PRIVILEGEABLE        = "exo:privilegeable";
 
-  /** The Constant MIX_VERSIONABLE. */
-  protected static final String   MIX_VERSIONABLE          = "mix:versionable";
-
   /** The Constant EXO_TRASHFOLDER. */
   protected static final String   EXO_TRASHFOLDER          = "exo:trashFolder";
 
