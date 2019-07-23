@@ -2,7 +2,7 @@
 
   function OneDriveClient() {
 
-    var oneDrives = new Map();
+    var oneDrives = new Map(); // TODO this will not work in IE, use {} 
 
     function OneDriveSubscription(userId, notificationUrl) {
       var self = this;
@@ -119,36 +119,28 @@
             if ($viewer) {
               if ($viewer.has('onedriveImgFileViewer').length == 0) {
                 $viewer.prepend("<p class='onedriveFileViewer'>" +
-
                   "<img class='onedriveImgFileViewer' src='" + file.previewLink + "'/>" +
-
                   "</p>"
                 );
               }
-              console.log('$viewer=' + $viewer.html());
+              console.log('$viewer=' + $viewer.html()); // TODO this will print a bunch of markup in the console, need it?
             } else {
               console.log('not viewer!!!!!');
             }
-
           }
           if (file.previewLink && file.previewLink.indexOf("embed") == -1) { //
             $viewer.find('iframe').remove();
           }
         }
       });
-
-
     };
 
 
     var getChange = function (drive) {
       // must be blocking
     };
-
-
   }
 
   return new OneDriveClient();
-
 
 })($, cloudDrive, cloudDriveUtils, cloudDriveSocketIO);
