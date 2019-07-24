@@ -331,7 +331,7 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
       link = sharingLink.webUrl;
     }
 
-    initFile(fileNode, item.id, item.name, item.file.mimeType, link, previewLink, "", // TODO
+    initFile(fileNode, item.id, item.name, item.file.mimeType, link, previewLink, null, // TODO
                                                                                                // may
              // be
              // something

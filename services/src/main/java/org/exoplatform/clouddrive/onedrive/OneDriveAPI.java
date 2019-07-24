@@ -551,7 +551,7 @@ public class OneDriveAPI {
     }
 
     if (LOG.isDebugEnabled()) {
-      LOG.debug("response messagge: " +fileSendResponse.responseMessage);
+      LOG.debug("response message: " +fileSendResponse.responseMessage);
       LOG.debug("response code = " + fileSendResponse.responseCode);
       LOG.debug("response data" + fileSendResponse.data);
     }
@@ -607,7 +607,7 @@ public class OneDriveAPI {
   public String insertUploadUrl(String parentId, String name) throws IOException, RefreshAccessException {
 
     String request = "{\n" + "  \"item\": {\n" + "    \"@microsoft.graph.conflictBehavior\": \"rename\"\n" + "  }\n" + "}";
-    HttpPost httppost = new HttpPost("https://graph.microsoft.com/v1.0/me/drive/items/" + parentId + ":/" + name
+    HttpPost httppost = new HttpPost("https://graph.microsoft.com/v1.0/me/drive/items/" + parentId + ":/" + name.replaceAll("\\s","%20") /*URLEncoder.encode(name, StandardCharsets.UTF_8.toString()).replaceAll("\\+", "%20")*/
         + ":/createUploadSession");
     StringEntity stringEntity = new StringEntity(request, "UTF-8");
     httppost.setEntity(stringEntity);
@@ -742,8 +742,16 @@ public class OneDriveAPI {
     return graphClient.me().drive().items(itemId).buildRequest().get();
   }
 
+  private boolean isDeltaTokenExpired(String deltaToken){
+    // TODO check it
+    return false;
+  }
+
   public IDriveItemDeltaCollectionPage delta(String deltaToken) {
     IDriveItemDeltaCollectionPage iDriveItemDeltaCollectionPage = null;
+    if (isDeltaTokenExpired(deltaToken)) {
+      deltaToken = null;
+    }
     if (deltaToken == null || deltaToken.isEmpty() || deltaToken.toUpperCase().trim().equals("ALL")) {
       iDriveItemDeltaCollectionPage = graphClient.me().drive().root().delta().buildRequest().get();
     } else {
@@ -755,6 +763,7 @@ public class OneDriveAPI {
                                                  .buildRequest(Collections.singletonList(deltaTokenQuery))
                                                  .get();
     }
+
     return iDriveItemDeltaCollectionPage;
   }
 
