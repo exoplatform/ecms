@@ -1,6 +1,8 @@
 package org.exoplatform.clouddrive.onedrive;
 
 import java.io.*;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.Charset;
@@ -603,11 +605,20 @@ public class OneDriveAPI {
   public ChangesIterator changes(String deltaToken) {
     return new ChangesIterator(deltaToken);
   }
-
-  public String insertUploadUrl(String parentId, String name) throws IOException, RefreshAccessException {
+  private  String encode(String value) throws URISyntaxException {
+    URI uri = new URI(
+            null,
+            null,
+            null,
+            value,
+            null);
+    String request = uri.toASCIIString();
+    return request.startsWith("?") ? request.substring(1) : request;
+  }
+  public String insertUploadUrl(String parentId, String name) throws IOException, RefreshAccessException, URISyntaxException {
 
     String request = "{\n" + "  \"item\": {\n" + "    \"@microsoft.graph.conflictBehavior\": \"rename\"\n" + "  }\n" + "}";
-    HttpPost httppost = new HttpPost("https://graph.microsoft.com/v1.0/me/drive/items/" + parentId + ":/" + name.replaceAll("\\s","%20") /*URLEncoder.encode(name, StandardCharsets.UTF_8.toString()).replaceAll("\\+", "%20")*/
+    HttpPost httppost = new HttpPost("https://graph.microsoft.com/v1.0/me/drive/items/" + parentId + ":/" + encode(name) /*URLEncoder.encode(name, StandardCharsets.UTF_8.toString()).replaceAll("\\+", "%20")*/
         + ":/createUploadSession");
     StringEntity stringEntity = new StringEntity(request, "UTF-8");
     httppost.setEntity(stringEntity);
@@ -678,7 +689,7 @@ public class OneDriveAPI {
     return insertUpdate(updateUploadUrl, inputStream);
   }
 
-  public DriveItem updateFileWrapper(DriveItem item) {
+  public DriveItem updateFileWrapper(DriveItem item) throws URISyntaxException {
     // TODO rewrite with JsonObject
     JsonObject updateFileRequestBody = new JsonParser().parse("  {\n" + "            \"parentReference\": {\n"
         + "            \"id\": \"" + item.parentReference.id + "\"\n" + "        },\n" + "            \"name\": \"" + item.name
@@ -734,7 +745,7 @@ public class OneDriveAPI {
     return new DeltaDriveFiles(deltaToken, changes);
   }
 
-  public DriveItem updateFile(DriveItem driveItem) {
+  public DriveItem updateFile(DriveItem driveItem) throws URISyntaxException {
     return updateFileWrapper(driveItem);
   }
 

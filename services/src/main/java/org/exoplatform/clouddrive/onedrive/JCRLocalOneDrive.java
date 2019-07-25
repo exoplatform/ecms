@@ -2,6 +2,7 @@ package org.exoplatform.clouddrive.onedrive;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.Calendar;
@@ -875,7 +876,9 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
         LOG.debug("createFolder(): ");
       }
       String parentId = getParentId(folderNode);
-      DriveItem createdFolder = api.createFolder(parentId, getTitle(folderNode), created);
+      DriveItem createdFolder = null;
+        createdFolder = api.createFolder(parentId, getTitle(folderNode), created);
+
       initFolderByDriveItem(folderNode, createdFolder);
 //      createdFolder.id =  "sds";
       return createCloudFolder(folderNode, createdFolder);
@@ -1044,7 +1047,7 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
       throw new SyncNotSupportedException("Restore not supported");
     }
 
-    private DriveItem updateItem(Node itemNode, Calendar modified) throws RepositoryException {
+    private DriveItem updateItem(Node itemNode, Calendar modified) throws RepositoryException, URISyntaxException {
       DriveItem driveItemModifiedFields = prepareModifiedDriveItem(itemNode, modified);
       return api.updateFile(driveItemModifiedFields);
     }
