@@ -1380,9 +1380,8 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
                 throw e;
               } else {
                 rollback(driveNode);
-                // driveNode = rootNode(); // re-init for a case of
-                // InvalidItemStateException? use
-                // multi-catch?
+                // TODO Do we need to re-init for a case of InvalidItemStateException?
+                // driveNode = rootNode(); 
                 reset();
                 LOG.warn("Error running " + getName() + " command of " + title() + ". " + e.getMessage()
                     + ". Rolled back and will run next attempt in " + CloudDriveConnector.PROVIDER_REQUEST_ATTEMPT_TIMEOUT
@@ -2307,8 +2306,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
                 Node node = change.node;
                 if (node != null && !node.isNew()) {
                   if (node.isNodeType(MIX_VERSIONABLE)) {
-                    // XXX Dec 1, 2015 - we don't support versioned nodes for
-                    // the moment
+                    // XXX Dec 1, 2015 - we don't support versioned nodes for the moment
                     node.removeMixin(MIX_VERSIONABLE);
                   }
                 }
@@ -4754,8 +4752,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
           if (ch.length() > 0) {
             for (FileChange fch : changes) {
               if (ch.startsWith(fch.changeId)) {
-                // history changes prefixed with timestamp of commit for
-                // rotation
+                // history changes prefixed with timestamp of commit for rotation
                 history.append(timestamp.toString());
                 history.append(':');
                 history.append(ch); // reuse already formatted change record
