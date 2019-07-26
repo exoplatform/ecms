@@ -6,6 +6,7 @@ import static org.junit.Assert.*;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -248,7 +249,7 @@ public class OneDriveAPITest {
         return item;
     }
     @Test
-    public void shouldReturnRenamedFile() {
+    public void shouldReturnRenamedFile() throws URISyntaxException {
         List<DriveItem> items = addThreeFiles();
         DriveItem driveItem = items.get(0);
         DriveItem expectedItem = renamedItem(driveItem,"renF.test");
@@ -256,7 +257,7 @@ public class OneDriveAPITest {
         assertEquals(expectedItem.name,actualItem.name);
     }
     @Test
-    public void renameFile() {
+    public void renameFile() throws URISyntaxException {
         List<DriveItem> items = addThreeFiles();
         DriveItem item = renamedItem(items.get(0),"renFile.test");
 
@@ -273,7 +274,7 @@ public class OneDriveAPITest {
 
     }
     @Test
-    public void moveFileShouldReturnAppropriateItem() throws CloudDriveException {
+    public void moveFileShouldReturnAppropriateItem() throws CloudDriveException, URISyntaxException {
         DriveItem destFolder = addThreeFolders().get(0);
         DriveItem srcItem = addThreeFiles().get(0);
         srcItem.parentReference.id = destFolder.id;
@@ -286,7 +287,7 @@ public class OneDriveAPITest {
 
 
     @Test
-    public void moveFile() throws CloudDriveException {
+    public void moveFile() throws CloudDriveException, URISyntaxException {
         DriveItem destFolder = addThreeFolders().get(0);
         DriveItem srcItem = addThreeFiles().get(0);
         srcItem.parentReference.id = destFolder.id;

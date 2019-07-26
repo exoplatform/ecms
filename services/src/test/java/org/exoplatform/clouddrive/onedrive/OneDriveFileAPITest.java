@@ -8,6 +8,7 @@ import static org.mockito.Mockito.*;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URISyntaxException;
 import java.util.Calendar;
 
 import javax.jcr.Node;
@@ -210,8 +211,8 @@ public class OneDriveFileAPITest {
 
     }
     @Test
-    public void updateFile() throws RepositoryException, SkipSyncException {
-
+    public void updateFile() throws RepositoryException, SkipSyncException, URISyntaxException {
+        // TODO URISyntaxException is it a fail here?
         Calendar calendar = Calendar.getInstance();
         String parentId = "dparentId";
         String nodeId = "dparentId";
