@@ -2279,6 +2279,15 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
             applying = false;
             try {
               // TODO remove MIX_VERSIONABLE here and only for FileChange.UPDATE
+                if (FileChange.UPDATE.equals(change.changeType)) {
+                    Node node = change.node;
+                    if (node != null && !node.isNew()) {
+                        if (node.isNodeType(MIX_VERSIONABLE)) {
+                            // XXX Dec 1, 2015 - we don't support versioned nodes for the moment
+                            node.removeMixin(MIX_VERSIONABLE);
+                        }
+                    }
+                }
               change.apply();
               applied.add(change);
               if (FileChange.REMOVE.equals(change.changeType)) {
@@ -2287,13 +2296,6 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
                 CloudFile cfile = change.file;
                 if (cfile != null) {
                   addChanged(cfile);
-                }
-                Node node = change.node;
-                if (node != null && !node.isNew()) {
-                  if (node.isNodeType(MIX_VERSIONABLE)) {
-                    // XXX Dec 1, 2015 - we don't support versioned nodes for the moment
-                    node.removeMixin(MIX_VERSIONABLE);
-                  }
                 }
               }
             } catch (SyncNotSupportedException e) {
