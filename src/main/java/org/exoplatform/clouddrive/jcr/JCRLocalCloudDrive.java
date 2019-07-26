@@ -2123,14 +2123,11 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
         // compress the changes list:
         // * skip not supported items/ignored
         // * reduce number of creation/updates of the same path (make single
-        // file update for its properties
-        // update)
+        // file update for its properties update)
         // * perform prerequisites check and throw exception if required
         // FYI this compression is file centric and doesn't assume that some
-        // property update
-        // might change constraints for later file update/copy/removal, if such
-        // case will be actual
-        // then need change this logic to accept such properties update.
+        // property update might change constraints for later file update/copy/removal, if such
+        // case will be actual then need change this logic to accept such properties update.
 
         // collection of accepted, natural order important!
         Map<String, FileChange> accepted = new LinkedHashMap<String, FileChange>();
@@ -2140,18 +2137,15 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
           FileChange change = chiter.next();
 
           // ensure our change isn't applied by other command (e.g. drive sync
-          // caused files sync of saved
-          // changes) as syncLock.readLock will be unlocked while waiting the
-          // next attempt, this can be
-          // possible.
+          // caused files sync of saved changes) as syncLock.readLock will be unlocked while waiting the
+          // next attempt, this can be possible.
           if (getAttempts() > 0 && !hasChange(change)) {
             continue; // skip already applied change
           }
 
           try {
             if (change.accept()) {
-              // updating with actual file path/id, but only if it is not
-              // already tracked
+              // updating with actual file path/id, but only if it is not already tracked
               updating(change);
               String path = change.filePath; // actual file path here!
 
@@ -2166,8 +2160,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
                 } else if (FileChange.REMOVE.equals(change.changeType)) {
                   if (FileChange.CREATE.equals(prevChange)) {
                     // ignore previous creation of just removed file, skip this
-                    // removal: cloud should not be
-                    // affected
+                    // removal: cloud should not be affected
                     skipped.add(accepted.remove(path));
                     skipped.add(change);
                     continue;
@@ -2177,17 +2170,13 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
                   }
                 } else if (FileChange.CREATE.equals(change.changeType) && FileChange.REMOVE.equals(prevChange)) {
                   // FYI actual for complex uses of JCR, when the same location
-                  // was removed and added in
-                  // single save here we need keep both, but Map cannot accept
-                  // same keys (paths),
-                  // we need to copy the accepted map and store the removal with
-                  // a new (different) key
-                  // then creation will be added in the end of the order below
+                  // was removed and added in single save here we need keep both, but Map cannot accept
+                  // same keys (paths), we need to copy the accepted map and store the removal with
+                  // a new (different) key then creation will be added in the end of the order below
                   Map<String, FileChange> newOrder = new LinkedHashMap<String, FileChange>();
                   for (Map.Entry<String, FileChange> ae : accepted.entrySet()) {
                     if (ae.getValue() == previous) {
-                      // our removal with new key, it will not be affected by
-                      // path search anymore
+                      // our removal with new key, it will not be affected by path search anymore
                       newOrder.put(previous.fileId + path, previous);
                     } else {
                       newOrder.put(ae.getKey(), ae.getValue());
@@ -2246,15 +2235,13 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
               skipped.add(change);
               LOG.warn("Ignoring already removed item removal: " + change.fileId + " " + change.path, e);
             } else if (change.changeType.equals(FileChange.CREATE)) {
-              // it was existing and need add to the cloud, but already removed
-              // locally - ignore it
+              // it was existing and need add to the cloud, but already removed locally - ignore it
               skipped.add(change);
               LOG.warn("Ignoring already removed item creation: " + change.path, e);
             } else if (change.changeType.equals(FileChange.UPDATE)) {
               Node existing = findNode(change.fileId);
               if (existing != null) {
-                // file name change when fixNameConflict() was used and moved
-                // the node
+                // file name change when fixNameConflict() was used and moved the node
                 LOG.warn("Item already updated (file renamed) " + change.path + " belongs to " + existing.getPath()
                     + ". Change faced with this: " + e.getMessage());
               } else {
@@ -2263,9 +2250,8 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
               }
               skipped.add(change);
             } else if (e.getMessage().indexOf("/exo:thumbnails") > 0 && change.path.indexOf("/exo:thumbnails") > 0) {
-              // XXX workaround: hardcode ignorance of exo:thumbnails here also,
-              // it's possible that thumbnails' child nodes will disappear, thus
-              // we ignore them
+              // XXX workaround: hardcode ignorance of exo:thumbnails here also, it's possible that 
+              // thumbnails' child nodes will disappear, thus we ignore them
               skipped.add(change);
             } else {
               throw e;
@@ -2273,8 +2259,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
           }
         }
 
-        Set<String> ignoredPaths = new HashSet<String>(); // for not supported
-                                                          // by sync
+        Set<String> ignoredPaths = new HashSet<String>(); // for not supported by sync
 
         next: for (Iterator<FileChange> chiter = accepted.values().iterator(); chiter.hasNext()
             && !Thread.currentThread().isInterrupted();) {
@@ -2283,8 +2268,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
           for (String ipath : ignoredPaths) {
             if (changePath.startsWith(ipath)) {
               skipped.add(change);
-              continue next; // skip parts of ignored (not supported by sync)
-                             // nodes
+              continue next; // skip parts of ignored (not supported by sync) nodes
             }
           }
 
@@ -2294,6 +2278,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
           do {
             applying = false;
             try {
+              // TODO remove MIX_VERSIONABLE here and only for FileChange.UPDATE
               change.apply();
               applied.add(change);
               if (FileChange.REMOVE.equals(change.changeType)) {
