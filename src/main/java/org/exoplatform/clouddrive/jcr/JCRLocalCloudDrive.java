@@ -1381,7 +1381,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
               } else {
                 rollback(driveNode);
                 // TODO Do we need to re-init for a case of InvalidItemStateException?
-                // driveNode = rootNode(); 
+                // driveNode = rootNode();
                 reset();
                 LOG.warn("Error running " + getName() + " command of " + title() + ". " + e.getMessage()
                     + ". Rolled back and will run next attempt in " + CloudDriveConnector.PROVIDER_REQUEST_ATTEMPT_TIMEOUT
@@ -1437,7 +1437,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
      * Start command execution asynchronously using {@link #exec()} method
      * inside {@link CommandCallable}. Any exception if happened will be thrown
      * by resulting {@link Future}.
-     * 
+     *
      * @return {@link Future} associated with this command.
      * @throws CloudDriveException if no ConversationState set in caller thread.
      */
@@ -2022,7 +2022,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
      * Mark the change's file as updating in the drive. Note {@link FileChange}
      * should be accepted before calling this method for actual file path,
      * otherwise it will be <code>null</code>.
-     * 
+     *
      * @param ch {@link FileChange}
      */
     void updating(FileChange ch) {
@@ -2250,7 +2250,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
               }
               skipped.add(change);
             } else if (e.getMessage().indexOf("/exo:thumbnails") > 0 && change.path.indexOf("/exo:thumbnails") > 0) {
-              // XXX workaround: hardcode ignorance of exo:thumbnails here also, it's possible that 
+              // XXX workaround: hardcode ignorance of exo:thumbnails here also, it's possible that
               // thumbnails' child nodes will disappear, thus we ignore them
               skipped.add(change);
             } else {
@@ -2279,15 +2279,15 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
             applying = false;
             try {
               // TODO remove MIX_VERSIONABLE here and only for FileChange.UPDATE
-                if (FileChange.UPDATE.equals(change.changeType)) {
-                    Node node = change.node;
-                    if (node != null && !node.isNew()) {
-                        if (node.isNodeType(MIX_VERSIONABLE)) {
-                            // XXX Dec 1, 2015 - we don't support versioned nodes for the moment
-                            node.removeMixin(MIX_VERSIONABLE);
-                        }
-                    }
+              if (FileChange.UPDATE.equals(change.changeType)) {
+                Node node = change.node;
+                if (node != null && !node.isNew()) {
+                  if (node.isNodeType(MIX_VERSIONABLE)) {
+                    // XXX Dec 1, 2015 - we don't support versioned nodes for the moment
+                    node.removeMixin(MIX_VERSIONABLE);
+                  }
                 }
+              }
               change.apply();
               applied.add(change);
               if (FileChange.REMOVE.equals(change.changeType)) {
@@ -2819,7 +2819,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
 
     /**
      * Number of the change was applied (should not be more than 1).
-     * 
+     *
      * @return how many times the change applied
      */
     public long getApplied() {
@@ -3048,7 +3048,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
 
     /**
      * Wait for the change completion.
-     * 
+     *
      * @throws InterruptedException if this change thread was interrupted
      */
     private void await() throws InterruptedException {
@@ -3064,7 +3064,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
      * Wait for this file and its sub-tree changes in other threads, wait
      * exclusively to let the existing to finish and then set the lock do not
      * let a new to apply before or during this change.
-     * 
+     *
      * @throws InterruptedException if other tasks working with this file were
      *           interrupted
      */
@@ -5262,7 +5262,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
 
   /**
    * Does rollback of drive Node changes and fire onError event to listeners.
-   * 
+   *
    * @param rootNode {@link Node}
    * @param error {@link Throwable}
    * @param commandName {@link String}
@@ -5897,7 +5897,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
 
   /**
    * Internal access to Cloud Drive title without throwing an Exception.
-   * 
+   *
    * @return {@link String}
    */
   protected String title() {
@@ -5974,7 +5974,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
    * This method doesn't throw any exception: operation will be performed in
    * system session and saved immediately. In case of a problem it will be
    * logged to system log.
-   * 
+   *
    * @param node {@link Node}
    * @return boolean, <code>true</code> if node was removed, <code>false</code>
    *         otherwise
@@ -6001,7 +6001,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
    * Return given node if it describes connected cloud file. If it is not yet
    * cloud file or was just cleaned (removed) the method will return
    * <code>null</code>.
-   * 
+   *
    * @param node {@link Node} local node
    * @return {@link Node} local node or <code>null</code> if file cleaned
    *         (removed)
@@ -6083,7 +6083,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
    * will try read value of <code>ecd:previewUrl</code> property and if not such
    * property exists <code>null</code> will be returned. Actual connector
    * implementation may override this logic.
-   * 
+   *
    * @param type {@link String} file mime type or <code>null</code>
    * @param fileNode {@link String} cloud file node
    * @return String with a link should be used for file preview.
@@ -6430,7 +6430,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
 
   /**
    * Block other JCR extension actions.
-   * 
+   *
    * @param drive {@link CloudDrive}
    */
   static void startAction(CloudDrive drive) {
@@ -6439,7 +6439,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
 
   /**
    * Check if can run a JCR extension action.
-   * 
+   *
    * @param drive {@link CloudDrive}
    * @return {@code true} if action can be accepted for this thread
    */
@@ -6524,7 +6524,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
 
   /**
    * Current user name obtained from current {@link ConversationState}.
-   * 
+   *
    * @return String with user name or <code>null</code> if no current
    *         conversation state set
    */
