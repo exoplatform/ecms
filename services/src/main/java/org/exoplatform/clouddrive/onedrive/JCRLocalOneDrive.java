@@ -8,10 +8,7 @@ import java.util.*;
 import java.util.Calendar;
 import java.util.List;
 
-import javax.jcr.Node;
-import javax.jcr.NodeIterator;
-import javax.jcr.PathNotFoundException;
-import javax.jcr.RepositoryException;
+import javax.jcr.*;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -27,6 +24,7 @@ import org.exoplatform.clouddrive.oauth2.UserToken;
 import org.exoplatform.clouddrive.oauth2.UserTokenRefreshListener;
 import org.exoplatform.clouddrive.onedrive.OneDriveAPI.HashSetCompatibleDriveItem;
 import org.exoplatform.clouddrive.utils.ExtendedMimeTypeResolver;
+import org.exoplatform.container.PortalContainer;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
@@ -341,18 +339,18 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
     }
 
     initFile(fileNode, item.id, item.name, item.file.mimeType, link, previewLink, null, // TODO
-                                                                                        // may
-             // be
-             // something
-             // better
-             // can
-             // be
-             // here?
-             createdUserName,
-             lastModifiedUserName,
-             item.createdDateTime,
-             item.lastModifiedDateTime,
-             item.size);
+            // may
+            // be
+            // something
+            // better
+            // can
+            // be
+            // here?
+            createdUserName,
+            lastModifiedUserName,
+            item.createdDateTime,
+            item.lastModifiedDateTime,
+            item.size);
   }
 
   private JCRLocalCloudFile createCloudFolder(Node fileNode, DriveItem item) throws RepositoryException {
@@ -866,19 +864,26 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
       return path;
     }
 
+
+
     @Override
-    public CloudFile createFile(Node fileNode, Calendar created, Calendar modified, String mimeType, InputStream content) throws RepositoryException,
-                                                                                                                         CloudDriveException {
-      if (LOG.isDebugEnabled()) {
-        LOG.debug("Create File Path : " + fileNode.getPath() + "\n" + "Create File Name: " + getTitle(fileNode));
-      }
-      try {
-        DriveItem createdDriveItem = api.insert(getParentId(fileNode), getTitle(fileNode), created, modified, content);
-        initFileByDriveItem(fileNode, createdDriveItem);
-        return createCloudFile(fileNode, createdDriveItem);
-      } catch (Exception e) {
-        throw new CloudDriveException("failed to update file content", e);
-      }
+    public CloudFile createFile(Node fileNode, Calendar created, Calendar modified, String mimeType, InputStream content) throws RepositoryException, CloudDriveException {
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("Create File Path : " + fileNode.getPath() + "\n" + "Create File Name: " + getTitle(fileNode));
+        }
+        DriveItem createdDriveItem = null;
+        try {
+            createdDriveItem = api.insert(getParentId(fileNode), getTitle(fileNode), created, modified, content, "rename");
+        } catch (Throwable ex) {
+            throw  new CloudProviderException("error occured while upload file");
+        }
+        try {
+            initFileByDriveItem(fileNode, createdDriveItem);
+            return createCloudFile(fileNode, createdDriveItem);
+        }catch (Throwable ex){
+            fileNode.remove();
+            throw new SkipSyncException("An error occurred storing data locally while loading a file");
+        }
     }
 
     @Override

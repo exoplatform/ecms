@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 import javax.net.ssl.HttpsURLConnection;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -37,6 +38,7 @@ import com.microsoft.graph.options.QueryOption;
 import com.microsoft.graph.requests.extensions.*;
 
 import org.exoplatform.clouddrive.CloudDriveException;
+import org.exoplatform.clouddrive.CloudProviderException;
 import org.exoplatform.clouddrive.RefreshAccessException;
 import org.exoplatform.clouddrive.oauth2.UserToken;
 import org.exoplatform.clouddrive.utils.ChunkIterator;
@@ -609,51 +611,55 @@ public class OneDriveAPI {
     return new ChangesIterator(deltaToken);
   }
 
-  private String encode(String value) throws URISyntaxException {
+  private String encodeUrlPath(String value) throws URISyntaxException {
     URI uri = new URI(null, null, null, value, null);
     String request = uri.toASCIIString();
     return request.startsWith("?") ? request.substring(1) : request;
   }
 
-  public String insertUploadUrl(String parentId, String name) throws IOException, RefreshAccessException, URISyntaxException {
+  public DriveItem getItemByPath(String path)  {
+    try {
+      return  graphClient.me().drive().root().itemWithPath(encodeUrlPath(path)).buildRequest().get();
+    } catch (URISyntaxException e) {
+      // TODO throw ex here
+      LOG.error("unable to get file",e);
+      return null;
+    }
+  }
 
-    String request = "{\n" + "  \"item\": {\n" + "    \"@microsoft.graph.conflictBehavior\": \"rename\"\n" + "  }\n" + "}";
-    HttpPost httppost = new HttpPost("https://graph.microsoft.com/v1.0/me/drive/items/" + parentId + ":/" + encode(name) /*
-                                                                                                                          * URLEncoder
-                                                                                                                          * .
-                                                                                                                          * encode
-                                                                                                                          * (
-                                                                                                                          * name
-                                                                                                                          * ,
-                                                                                                                          * StandardCharsets
-                                                                                                                          * .
-                                                                                                                          * UTF_8
-                                                                                                                          * .
-                                                                                                                          * toString
-                                                                                                                          * (
-                                                                                                                          * )
-                                                                                                                          * )
-                                                                                                                          * .
-                                                                                                                          * replaceAll
-                                                                                                                          * (
-                                                                                                                          * "\\+"
-                                                                                                                          * ,
-                                                                                                                          * "%20"
-                                                                                                                          * )
-                                                                                                                          */
+  public String getInsertUploadUrl(String parentId, String name, String conflictBehavior) throws IOException, RefreshAccessException, URISyntaxException, CloudProviderException {
+
+    if (!conflictBehavior.equals("fail") && !conflictBehavior.equals("rename")) {
+      // Error
+    }
+    String request = "{\n" + "  \"item\": {\n" + "    \"@microsoft.graph.conflictBehavior\": \""+conflictBehavior+"\"\n" + "  }\n" + "}";
+    HttpPost httppost = new HttpPost("https://graph.microsoft.com/v1.0/me/drive/items/" + parentId + ":/" + encodeUrlPath(name)
         + ":/createUploadSession");
     StringEntity stringEntity = new StringEntity(request, "UTF-8");
     httppost.setEntity(stringEntity);
     httppost.addHeader("Authorization", "Bearer " + getAccessToken());
     httppost.addHeader("Content-type", "application/json");
     try (CloseableHttpResponse response = (CloseableHttpResponse) httpclient.execute(httppost)) {
-      String responseBody = IOUtils.toString(response.getEntity().getContent(), "UTF-8");
-      String uploadUrl = new JsonParser().parse(responseBody).getAsJsonObject().get("uploadUrl").getAsString();
       if (LOG.isDebugEnabled()) {
-        LOG.debug(uploadUrl);
+        LOG.debug(response);
       }
-      return uploadUrl;
+      String responseBody = IOUtils.toString(response.getEntity().getContent(), "UTF-8");
+      JsonObject responseAsJson = new JsonParser().parse(responseBody).getAsJsonObject();
+      if (responseAsJson.has("uploadUrl")) {
+        String uploadUrl = responseAsJson.get("uploadUrl").getAsString();
+        return uploadUrl;
+      } else if (responseAsJson.has("error")) {
+        JsonObject errorResponse = responseAsJson.get("error").getAsJsonObject();
+        if (errorResponse.has("code") && StringUtils.equalsIgnoreCase(errorResponse.get("code").getAsString(), "nameAlreadyExists")) {
+
+          if (LOG.isDebugEnabled()) {
+            LOG.debug("Name Already Exists");
+          }
+          throw new CloudProviderException("NameAlreadyExists");
+        }
+      }
     }
+    throw new CloudProviderException("unable to retrieve url to upload file");
   }
 
   public String updateUploadUrl(String itemId) throws IOException, RefreshAccessException {
@@ -694,12 +700,12 @@ public class OneDriveAPI {
 
   }
 
-  public DriveItem insert(String parentId, String fileName, Calendar created, Calendar modified, InputStream inputStream) throws Exception {
+  public DriveItem insert(String parentId, String fileName, Calendar created, Calendar modified, InputStream inputStream, String conflictBehavior) throws Exception {
     // TODO do something with create, modified
     if (LOG.isDebugEnabled()) {
       LOG.debug("insert file");
     }
-    String updateUploadUrl = insertUploadUrl(parentId, fileName);
+    String updateUploadUrl = getInsertUploadUrl(parentId, fileName, conflictBehavior);
     return insertUpdate(updateUploadUrl, inputStream);
   }
 
