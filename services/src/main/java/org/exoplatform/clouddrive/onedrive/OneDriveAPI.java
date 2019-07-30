@@ -18,6 +18,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
+import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -140,9 +141,7 @@ public class OneDriveAPI {
 
     public synchronized String getAccessToken() throws RefreshAccessException {
       long currentTime = System.currentTimeMillis();
-      if (currentTime >= lastModifiedTime + LIFETIME) { // TODO
-                                                        // use
-                                                        // constant
+      if (currentTime >= lastModifiedTime + LIFETIME) {
         try {
           if (LOG.isDebugEnabled()) {
             LOG.debug("refreshToken = " + this.refreshToken);
@@ -173,7 +172,7 @@ public class OneDriveAPI {
   private static final Log           LOG                  = ExoLogger.getLogger(OneDriveAPI.class);
 
   private static final Log           GRAPH_CLIENT_LOG     = ExoLogger.getLogger(OneDriveAPI.class.getSimpleName()
-                                                              + "_GraphClient");
+          + "_GraphClient");
 
   private final OneDriveStoredToken  storedToken;
 
@@ -237,13 +236,13 @@ public class OneDriveAPI {
     return retrieveAccessToken(clientId, clientSecret, null, refreshToken, "refresh_token", redirectUrl);
   }
 
-  public SharingLink createLink(String itemId, String type) {
+  public SharingLink createLink(String itemId, String type) throws OneDriveException {
     if (type.equalsIgnoreCase("embed")) {
       return graphClient.me().drive().items(itemId).createLink("embed", null).buildRequest().post().link;
     } else if (type.equalsIgnoreCase("view")) {
       return graphClient.me().drive().items(itemId).createLink("view", "anonymous").buildRequest().post().link;
     }
-    throw new IllegalArgumentException("type must be either view or embed");
+    throw new OneDriveException("type must be either view or embed");
   }
 
   public final static String SCOPES = scopes();
@@ -251,11 +250,11 @@ public class OneDriveAPI {
   private static String scopes() {
     StringJoiner scopes = new StringJoiner(" ");
     scopes.add(Scopes.FilesReadWriteAll)
-          .add(Scopes.FilesRead)
-          .add(Scopes.FilesReadWrite)
-          .add(Scopes.FilesReadAll)
-          .add(Scopes.UserRead)
-          .add(Scopes.offlineAccess);
+            .add(Scopes.FilesRead)
+            .add(Scopes.FilesReadWrite)
+            .add(Scopes.FilesReadAll)
+            .add(Scopes.UserRead)
+            .add(Scopes.offlineAccess);
     return scopes.toString();
   }
 
@@ -279,13 +278,13 @@ public class OneDriveAPI {
     if (oneDriveTokenResponse != null) {
       this.storedToken = new OneDriveStoredToken();
       this.storedToken.store(oneDriveTokenResponse.getToken(),
-                             oneDriveTokenResponse.getRefreshToken(),
-                             oneDriveTokenResponse.getExpires());
+              oneDriveTokenResponse.getRefreshToken(),
+              oneDriveTokenResponse.getExpires());
 
       this.oneDriveToken = new OneDriveToken(oneDriveTokenResponse.getToken(), oneDriveTokenResponse.getRefreshToken());
       initGraphClient();
     } else {
-      throw new CloudDriveException("Unable to retrieve access token, when onedriveApi initializes ");
+      throw new OneDriveException("Unable to retrieve access token, when onedriveApi initializes: clientId " + clientId);
     }
   }
 
@@ -309,7 +308,7 @@ public class OneDriveAPI {
       this.oneDriveToken = new OneDriveToken(oneDriveTokenResponse.getToken(), oneDriveTokenResponse.getRefreshToken());
       initGraphClient();
     } else {
-      throw new CloudDriveException("Unable to retrieve access token, when onedriveApi initializes");
+      throw new OneDriveException("Unable to retrieve access token, when onedriveApi initializes: clientId " + clientId);
     }
   }
 
@@ -351,12 +350,12 @@ public class OneDriveAPI {
 
   private DriveItem createFolderRequestWrapper(String parentId, DriveItem folder) {
     JsonObject obj = new JsonParser().parse("{\n" + "  \"name\": \"" + folder.name + "\",\n" + "  \"folder\": { },\n"
-        + "  \"@microsoft.graph.conflictBehavior\": \"rename\"\n" + "}").getAsJsonObject();
+            + "  \"@microsoft.graph.conflictBehavior\": \"rename\"\n" + "}").getAsJsonObject();
     String id = graphClient.customRequest("/me/drive/items/" + parentId + "/children")
-                           .buildRequest()
-                           .post(obj)
-                           .get("id")
-                           .getAsString();
+            .buildRequest()
+            .post(obj)
+            .get("id")
+            .getAsString();
     return getItem(id);
   }
 
@@ -395,14 +394,14 @@ public class OneDriveAPI {
     return graphClient.me().drive().root().subscriptions("socketIO").buildRequest().get();
   }
 
-  public DriveItem copy(String parentId, String fileName, String fileId, boolean isFile) throws IOException, CloudDriveException {
+  public DriveItem copy(String parentId, String fileName, String fileId, boolean isFile) throws RefreshAccessException, OneDriveException {
     if (LOG.isDebugEnabled()) {
       LOG.debug("try copy");
     }
     String request = "{\n" + "      \"parentReference\" : {\n" + "        \"id\" : \"" + parentId + "\"\n" + "    },\n"
-        + "      \"name\" : \"" + fileName + "\"\n" +
-        // "      \"@microsoft.graph.conflictBehavior\" : \"rename\"\n" +
-        "    }";
+            + "      \"name\" : \"" + fileName + "\"\n" +
+            // "      \"@microsoft.graph.conflictBehavior\" : \"rename\"\n" +
+            "    }";
     HttpPost httppost = new HttpPost("https://graph.microsoft.com/v1.0/me/drive/items/" + fileId + "/copy");
     StringEntity stringEntity = new StringEntity(request, "UTF-8");
     httppost.setEntity(stringEntity);
@@ -411,6 +410,8 @@ public class OneDriveAPI {
     String location;
     try (CloseableHttpResponse response = (CloseableHttpResponse) httpclient.execute(httppost)) {
       location = response.getHeaders("Location")[0].getValue();
+    } catch (IOException e) {
+      throw new OneDriveException(e);
     }
     if (LOG.isDebugEnabled()) {
       LOG.debug("Location:= " + location);
@@ -419,27 +420,31 @@ public class OneDriveAPI {
     String status;
     String responseBody;
     do {
-      responseBody = getCopyResponseBody(location);
+      try {
+        responseBody = getCopyResponseBody(location);
+      } catch (IOException e) {
+        throw new OneDriveException("Unable to retrieve copy response body ", e);
+      }
       status = parser.parse(responseBody.trim()).getAsJsonObject().get("status").getAsString();
       try {
         Thread.sleep(1000);
       } catch (InterruptedException e) {
-        LOG.warn("thread interrupted while sleeping", e);
+        LOG.warn("Thread interrupted while sleeping", e);
       }
       if (LOG.isDebugEnabled()) {
-        LOG.debug("copy status = " + status);
+        LOG.debug("opy status = " + status);
       }
     } while (!status.equalsIgnoreCase("failed") && !status.equalsIgnoreCase("completed"));
 
     if (status.equalsIgnoreCase("failed")) {
       Set<String> fileNames = getFiles(parentId, isFile ? fileName.substring(0, fileName.lastIndexOf('.')) : fileName).stream()
-                                                                                                                      .filter((item) -> isFile == (item.file != null))
-                                                                                                                      .map((item) -> item.name)
-                                                                                                                      .collect(Collectors.toSet());
+              .filter((item) -> isFile == (item.file != null))
+              .map((item) -> item.name)
+              .collect(Collectors.toSet());
       if (!fileNames.contains(fileName)) { // This means that the error is not
-                                           // related to the fact that a file
-                                           // with the same name exists.
-        throw new CloudDriveException("error occurred during the copy process");
+        // related to the fact that a file
+        // with the same name exists.
+        throw new OneDriveException("error occurred during the copy process: parentId " + parentId + ", fileName " + fileName + ", fileId " + fileId);
       }
       String newItemName = generateItemName(fileName, 1, isFile);
       for (int i = 2; i <= fileNames.size() && fileNames.contains(newItemName); i++) {
@@ -490,18 +495,18 @@ public class OneDriveAPI {
     final QueryOption deltaTokenQuery = new QueryOption("filter", "startswith(name,'" + startsWith + "')");
     if (folderId == null) {
       iDriveItemCollectionPage = graphClient.me()
-                                            .drive()
-                                            .root()
-                                            .children()
-                                            .buildRequest(Collections.singletonList(deltaTokenQuery))
-                                            .get();
+              .drive()
+              .root()
+              .children()
+              .buildRequest(Collections.singletonList(deltaTokenQuery))
+              .get();
     } else {
       iDriveItemCollectionPage = graphClient.me()
-                                            .drive()
-                                            .items(folderId)
-                                            .children()
-                                            .buildRequest(Collections.singletonList(deltaTokenQuery))
-                                            .get();
+              .drive()
+              .items(folderId)
+              .children()
+              .buildRequest(Collections.singletonList(deltaTokenQuery))
+              .get();
     }
     List<DriveItem> driveItems = new ArrayList<>(iDriveItemCollectionPage.getCurrentPage());
     IDriveItemCollectionRequestBuilder nextPage = iDriveItemCollectionPage.getNextPage();
@@ -591,15 +596,15 @@ public class OneDriveAPI {
   private String uploadUrlConflictRenameWrapper(String path, DriveItemUploadableProperties driveItemUploadableProperties) throws UnsupportedEncodingException {
 
     JsonObject uploadFileRequestBody = new JsonParser().parse("{\"item\": {\n"
-        + "    \"@odata.type\": \"microsoft.graph.driveItemUploadableProperties\",\n"
-        + "    \"@microsoft.graph.conflictBehavior\": \"rename\",\n" + "    \"name\": \"" + driveItemUploadableProperties.name
-        + "\"\n" + "  }}".trim()).getAsJsonObject();
+            + "    \"@odata.type\": \"microsoft.graph.driveItemUploadableProperties\",\n"
+            + "    \"@microsoft.graph.conflictBehavior\": \"rename\",\n" + "    \"name\": \"" + driveItemUploadableProperties.name
+            + "\"\n" + "  }}".trim()).getAsJsonObject();
 
     return graphClient.customRequest("/me/drive/root:/" + URLEncoder.encode(path, "UTF-8") + ":/createUploadSession")
-                      .buildRequest()
-                      .post(uploadFileRequestBody)
-                      .get("uploadUrl")
-                      .getAsString();
+            .buildRequest()
+            .post(uploadFileRequestBody)
+            .get("uploadUrl")
+            .getAsString();
   }
 
   private String getUploadUrl(String path, DriveItemUploadableProperties driveItemUploadableProperties) throws UnsupportedEncodingException {
@@ -617,24 +622,29 @@ public class OneDriveAPI {
     return request.startsWith("?") ? request.substring(1) : request;
   }
 
-  public DriveItem getItemByPath(String path)  {
-    try {
-      return  graphClient.me().drive().root().itemWithPath(encodeUrlPath(path)).buildRequest().get();
-    } catch (URISyntaxException e) {
-      // TODO throw ex here
-      LOG.error("unable to get file",e);
-      return null;
-    }
-  }
+//  public DriveItem getItemByPath(String path)  {
+//    try {
+//      return  graphClient.me().drive().root().itemWithPath(encodeUrlPath(path)).buildRequest().get();
+//    } catch (URISyntaxException e) {
+//      // TODO throw ex here
+//      LOG.error("unable to get file",e);
+//      return null;
+//    }
+//  }
 
-  public String getInsertUploadUrl(String parentId, String name, String conflictBehavior) throws IOException, RefreshAccessException, URISyntaxException, CloudProviderException {
+  public String getInsertUploadUrl(String parentId, String name, String conflictBehavior) throws RefreshAccessException, OneDriveException {
 
     if (!conflictBehavior.equals("fail") && !conflictBehavior.equals("rename")) {
       // Error
     }
     String request = "{\n" + "  \"item\": {\n" + "    \"@microsoft.graph.conflictBehavior\": \""+conflictBehavior+"\"\n" + "  }\n" + "}";
-    HttpPost httppost = new HttpPost("https://graph.microsoft.com/v1.0/me/drive/items/" + parentId + ":/" + encodeUrlPath(name)
-        + ":/createUploadSession");
+    HttpPost httppost = null;
+    try {
+      httppost = new HttpPost("https://graph.microsoft.com/v1.0/me/drive/items/" + parentId + ":/" + encodeUrlPath(name)
+              + ":/createUploadSession");
+    } catch (URISyntaxException e) {
+      throw new OneDriveException(e);
+    }
     StringEntity stringEntity = new StringEntity(request, "UTF-8");
     httppost.setEntity(stringEntity);
     httppost.addHeader("Authorization", "Bearer " + getAccessToken());
@@ -651,18 +661,19 @@ public class OneDriveAPI {
       } else if (responseAsJson.has("error")) {
         JsonObject errorResponse = responseAsJson.get("error").getAsJsonObject();
         if (errorResponse.has("code") && StringUtils.equalsIgnoreCase(errorResponse.get("code").getAsString(), "nameAlreadyExists")) {
-
           if (LOG.isDebugEnabled()) {
             LOG.debug("Name Already Exists");
           }
-          throw new CloudProviderException("NameAlreadyExists");
+          throw new OneDriveException("File with the same name remotely already exists: parentId " + parentId + ", name " + name);
         }
       }
+    } catch (IOException e) {
+      throw new OneDriveException(e);
     }
-    throw new CloudProviderException("unable to retrieve url to upload file");
+    throw new OneDriveException("Unable to retrieve url to upload file: parentId " + parentId + ", name " + name);
   }
 
-  public String updateUploadUrl(String itemId) throws IOException, RefreshAccessException {
+  String updateUploadUrl(String itemId) throws IOException, RefreshAccessException {
     HttpPost httppost = new HttpPost("https://graph.microsoft.com/v1.0/me/drive/items/" + itemId + "/createUploadSession");
     httppost.addHeader("Authorization", "Bearer " + getAccessToken());
     httppost.addHeader("Content-type", "application/json");
@@ -676,7 +687,7 @@ public class OneDriveAPI {
     }
   }
 
-  public DriveItem insertUpdate(String uploadUrl, InputStream inputStream) throws Exception {
+  DriveItem insertUpdate(String uploadUrl, InputStream inputStream) throws OneDriveException, IOException {
     int fileLength = inputStream.available();
     FileSendResponse fileSendResponse = null;
     int bufferSize = 327680 * 100; // must be a multiple of 327680
@@ -695,36 +706,45 @@ public class OneDriveAPI {
         return driveItem;
       }
     }
-    throw new CloudDriveException("failed to upload file: " + "ResponseCode: " + fileSendResponse.responseCode + " "
-        + "message: " + fileSendResponse.responseMessage + "date: " + fileSendResponse.data);
+    throw new OneDriveException("failed to upload file: " + "ResponseCode: " + fileSendResponse.responseCode + " "
+            + "message: " + fileSendResponse.responseMessage + "date: " + fileSendResponse.data);
 
   }
 
-  public DriveItem insert(String parentId, String fileName, Calendar created, Calendar modified, InputStream inputStream, String conflictBehavior) throws Exception {
+  public DriveItem insert(String parentId, String fileName, Calendar created, Calendar modified, InputStream inputStream, String conflictBehavior) throws OneDriveException {
     // TODO do something with create, modified
     if (LOG.isDebugEnabled()) {
       LOG.debug("insert file");
     }
-    String updateUploadUrl = getInsertUploadUrl(parentId, fileName, conflictBehavior);
-    return insertUpdate(updateUploadUrl, inputStream);
+    String updateUploadUrl = null;
+    try {
+      updateUploadUrl = getInsertUploadUrl(parentId, fileName, conflictBehavior);
+      return insertUpdate(updateUploadUrl, inputStream);
+    } catch (Exception e) {
+      throw new OneDriveException(e);
+    }
   }
 
-  public DriveItem updateFileContent(String itemId, Calendar created, Calendar modified, InputStream inputStream) throws Exception {
+  public DriveItem updateFileContent(String itemId, Calendar created, Calendar modified, InputStream inputStream) throws OneDriveException {
 
-    String updateUploadUrl = updateUploadUrl(itemId);
-    return insertUpdate(updateUploadUrl, inputStream);
+    try {
+      String updateUploadUrl = updateUploadUrl(itemId);
+      return insertUpdate(updateUploadUrl, inputStream);
+    } catch (Exception ex) {
+      throw new OneDriveException(ex);
+    }
   }
 
-  public DriveItem updateFileWrapper(DriveItem item) throws URISyntaxException {
+  public DriveItem updateFileWrapper(DriveItem item){
     // TODO rewrite with JsonObject
     JsonObject updateFileRequestBody = new JsonParser().parse("  {\n" + "            \"parentReference\": {\n"
-        + "            \"id\": \"" + item.parentReference.id + "\"\n" + "        },\n" + "            \"name\": \"" + item.name
-        + "\",\n" + "            \"@microsoft.graph.conflictBehavior\" : \"rename\"\n" + "        }").getAsJsonObject();
+            + "            \"id\": \"" + item.parentReference.id + "\"\n" + "        },\n" + "            \"name\": \"" + item.name
+            + "\",\n" + "            \"@microsoft.graph.conflictBehavior\" : \"rename\"\n" + "        }").getAsJsonObject();
     String updatedFileId = graphClient.customRequest("/me/drive/items/" + item.id)
-                                      .buildRequest()
-                                      .patch(updateFileRequestBody)
-                                      .get("id")
-                                      .getAsString();
+            .buildRequest()
+            .patch(updateFileRequestBody)
+            .get("id")
+            .getAsString();
     return getItem(updatedFileId);
   }
 
@@ -772,7 +792,7 @@ public class OneDriveAPI {
     return new DeltaDriveFiles(deltaToken, changes);
   }
 
-  public DriveItem updateFile(DriveItem driveItem) throws URISyntaxException {
+  public DriveItem updateFile(DriveItem driveItem) {
     return updateFileWrapper(driveItem);
   }
 
@@ -795,11 +815,11 @@ public class OneDriveAPI {
     } else {
       final QueryOption deltaTokenQuery = new QueryOption("token", deltaToken);
       iDriveItemDeltaCollectionPage = graphClient.me()
-                                                 .drive()
-                                                 .root()
-                                                 .delta()
-                                                 .buildRequest(Collections.singletonList(deltaTokenQuery))
-                                                 .get();
+              .drive()
+              .root()
+              .delta()
+              .buildRequest(Collections.singletonList(deltaTokenQuery))
+              .get();
     }
 
     return iDriveItemDeltaCollectionPage;
