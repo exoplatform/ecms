@@ -16,6 +16,8 @@
  */
 package org.exoplatform.services.wcm.search.base;
 
+import org.apache.commons.lang3.StringUtils;
+
 import org.exoplatform.commons.api.search.data.SearchResult;
 import org.exoplatform.commons.utils.CommonsUtils;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
@@ -31,8 +33,6 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import javax.jcr.*;
 import javax.jcr.query.*;
 import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Created by The eXo Platform SAS
@@ -272,16 +272,20 @@ public class PageListFactory {
       String nodePath = searchResult.getNodePath();
       Node node = null;
       try {
-        node = session.getRootNode().getNode(nodePath.substring(1, nodePath.length()));
+        if(StringUtils.isNotBlank(nodePath) && session.itemExists(nodePath)) {
+          Node node = (Node) session.getItem(nodePath);
+          if (filter != null) {
+            node = filter.filterNodeToDisplay(node);
+          }
+          if (node != null) {
+            filteredResults.add(dataCreator.createData(node, null, searchResult));
+          }
+        }
+
       } catch (RepositoryException e) {
         LOG.error("Cannot get node " + nodePath, e);
       }
-      if(node != null) {
-        if (filter != null) {
-          node = filter.filterNodeToDisplay(node);
-        }
-        filteredResults.add(dataCreator.createData(node, null, searchResult));
-      }
+
     });
 
     return filteredResults;
