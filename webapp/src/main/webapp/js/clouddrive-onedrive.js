@@ -117,7 +117,7 @@
           if (file.type.trim().startsWith('image') && file.previewLink && file.previewLink.endsWith('/root/content')) { // image in personal account
             console.log('OneDrive initContext, provider= ' + provider);
             if ($viewer) {
-              if ($viewer.has('onedriveImgFileViewer').length == 0) {
+              if ($viewer.has('.onedriveImgFileViewer').length == 0) {
                 $viewer.prepend("<p class='onedriveFileViewer'>" +
                   "<img class='onedriveImgFileViewer' src='" + file.previewLink + "'/>" +
                   "</p>"
