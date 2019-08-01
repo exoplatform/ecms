@@ -1352,7 +1352,7 @@
     <tooltip>
       <original>النسخة الأصلية</original>
       <version>Version</version>
-      <baseVersion>current draft</baseVersion>
+      <baseVersion>الإصدار الحالي.</baseVersion>
       <addLabel>إضافة رمز</addLabel>
       <removeLable>حذف رمز</removeLable>
       <restoreVersion>استعادة الإصدار</restoreVersion>

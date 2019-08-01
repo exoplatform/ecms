@@ -172,10 +172,10 @@
       </label>
       <action>
         <add-edit>الاضافة/التغيير</add-edit>
-        <cancel>#{word.cancel}</cancel>
+        <cancel>إلغاء</cancel>
       </action>
       <tooltip>
-        <cancel>#{word.cancel}</cancel>
+        <cancel>إلغاء</cancel>
         <add-edit>اضافة/تغييرالخاصيات</add-edit>
       </tooltip>
     </view>

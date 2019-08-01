@@ -154,7 +154,7 @@
   <UIActionForm>
     <title>إضافة اجراء إلى فئة الشّجرة</title>
     <action>
-      <Save>#{word.save}</Save>
+      <Save>حفظ</Save>
     </action>
     <msg>
       <name-not-allowed>اسم محظور</name-not-allowed>
@@ -194,8 +194,8 @@
       <uri>عنوان الـ URI</uri>
     </label>
     <action>
-      <Save>#{word.save}</Save>
-      <Cancel>#{word.cancel}</Cancel>
+      <Save>حفظ</Save>
+      <Cancel>إلغاء</Cancel>
     </action>
     <msg>
       <register-unsuccessfull>إسم فضاء او 'URI' موجود مُسبقا !</register-unsuccessfull>
@@ -254,7 +254,7 @@
     </msg>
     <action>
       <Add>إضافة قالب المعلومات القياسية</Add>
-      <Cancel>#{word.cancel}</Cancel>
+      <Cancel>إلغاء</Cancel>
     </action>
   </UIMetadataList>
   <MetadataPopupAddNew>
@@ -281,7 +281,7 @@
   <UIMetadataForm>
     <title>تخطيط دليل المعلومات</title>
     <action>
-      <Cancel>#{word.cancel}</Cancel>
+      <Cancel>إلغاء</Cancel>
       <Save>طبق</Save>
     </action>
     <header>
@@ -326,7 +326,7 @@
       <metadataView>قالب المعلومات القياسية</metadataView>
     </tab>
     <action>
-      <Cancel>#{word.close}</Cancel>
+      <Cancel>أغلق</Cancel>
       <Back>#{word.back}</Back>
     </action>
   </UIMetadataView>
@@ -366,8 +366,8 @@
   </UIDriveList>
   <UIDriveForm>
     <action>
-      <Cancel>#{word.cancel}</Cancel>
-      <Save>#{word.save}</Save>
+      <Cancel>إلغاء</Cancel>
+      <Save>حفظ</Save>
       <Back>#{word.back}</Back>
       <Refresh>#{word.refresh}</Refresh>
     </action>
@@ -444,7 +444,7 @@
       <input>عمل</input>
     </header>
     <action>
-      <Save>#{word.save}</Save>
+      <Save>حفظ</Save>
     </action>
   </UINodeTypeManager>
   <!--
@@ -485,7 +485,7 @@
   -->
   <UINodeTypeOptionList>
     <action>
-      <Save>#{word.save}</Save>
+      <Save>حفظ</Save>
       <Add>أضف</Add>
     </action>
     <header>
@@ -542,8 +542,8 @@
       <valueconstraints>القيود</valueconstraints>
     </label>
     <action>
-      <Cancel>#{word.cancel}</Cancel>
-      <Save>#{word.save}</Save>
+      <Cancel>إلغاء</Cancel>
+      <Save>حفظ</Save>
       <SaveDraft>حفظ المسودة</SaveDraft>
       <AddProperty>اضافة خاصية</AddProperty>
       <AddChild>اضافة فرع</AddChild>
@@ -551,13 +551,13 @@
       <Back>#{word.back}</Back>
       <AddType>اضافة نوع</AddType>
       <AddValue>اضافة</AddValue>
-      <CancelConstraints>#{word.cancel}</CancelConstraints>
-      <CancelTab>#{word.cancel}</CancelTab>
+      <CancelConstraints>إلغاء</CancelConstraints>
+      <CancelTab>إلغاء</CancelTab>
       <UpdateChild>#{word.update}</UpdateChild>
-      <CancelChild>#{word.cancel}</CancelChild>
+      <CancelChild>إلغاء</CancelChild>
       <UpdateProperty>#{word.update}</UpdateProperty>
-      <CancelProperty>#{word.cancel}</CancelProperty>
-      <Close>#{word.close}</Close>
+      <CancelProperty>إلغاء</CancelProperty>
+      <Close>أغلق</Close>
     </action>
     <msg>
       <register-successfully>نوع العقدة '{0}' تم تسجيله بنجاح</register-successfully>
@@ -630,7 +630,7 @@
       <input>اجراء</input>
     </header>
     <action>
-      <Cancel>#{word.cancel}</Cancel>
+      <Cancel>إلغاء</Cancel>
       <Export>تصدير</Export>
       <UncheckAll>الغاء اختيار الكل</UncheckAll>
       <CheckAll>إختر الكل</CheckAll>
@@ -660,7 +660,7 @@
       <upload>اسم الملف</upload>
     </label>
     <action>
-      <Cancel>#{word.cancel}</Cancel>
+      <Cancel>إلغاء</Cancel>
       <Upload>تحميل</Upload>
     </action>
     <title>'XML' إستيراد  نوع عقدة من ملف ذات نوع</title>
@@ -679,7 +679,7 @@
   -->
   <UINodeTypeImport>
     <action>
-      <Cancel>#{word.cancel}</Cancel>
+      <Cancel>إلغاء</Cancel>
       <Import>إستيراد</Import>
       <Upload>اضافة نوع الاجراء</Upload>
     </action>
@@ -763,8 +763,8 @@
       <script>السكريبت:</script>
     </label>
     <action>
-      <Save>#{word.save}</Save>
-      <Cancel>#{word.cancel}</Cancel>
+      <Save>حفظ</Save>
+      <Cancel>إلغاء</Cancel>
     </action>
     <msg>
       <action-type-added>تم اضافة نوع الاجراء '{0}' بنجاح</action-type-added>
@@ -996,8 +996,8 @@
       <uploadNewVersion>تحميل نسخة جديدة</uploadNewVersion>
     </label>
     <action>
-      <Save>#{word.save}</Save>
-      <Cancel>#{word.cancel}</Cancel>
+      <Save>حفظ</Save>
+      <Cancel>إلغاء</Cancel>
     </action>
   </UITabForm>
   <UIPermissionForm>
@@ -1014,10 +1014,10 @@
       </label>
     </tab>
     <action>
-      <Save>#{word.save}</Save>
+      <Save>حفظ</Save>
       <Reset>إعادة ضبط</Reset>
-      <Cancel>#{word.cancel}</Cancel>
-      <Close>#{word.close}</Close>
+      <Cancel>إلغاء</Cancel>
+      <Close>أغلق</Close>
       <Restore>إستعادة</Restore>
     </action>
   </UIViewFormTabPane>
@@ -1077,8 +1077,8 @@
       <AddPermission>إضافة صلاحية</AddPermission>
     </title>
     <action>
-      <Save>#{word.save}</Save>
-      <Cancel>#{word.cancel}</Cancel>
+      <Save>حفظ</Save>
+      <Cancel>إلغاء</Cancel>
       <Reset>إعادة ضبط</Reset>
       <Restore>إستعادة</Restore>
       <Refresh>#{word.refresh}</Refresh>
@@ -1191,9 +1191,9 @@
 
   <UIScriptForm>
     <action>
-      <Save>#{word.save}</Save>
+      <Save>حفظ</Save>
       <Restore>#{word.restore}</Restore>
-      <Cancel>#{word.cancel}</Cancel>
+      <Cancel>إلغاء</Cancel>
       <Refresh>#{word.refresh}</Refresh>
       <Change>تغيير</Change>
     </action>
@@ -1245,8 +1245,8 @@
   -->
   <UITaxonomyForm>
     <action>
-      <Save>#{word.save}</Save>
-      <Cancel>#{word.cancel}</Cancel>
+      <Save>حفظ</Save>
+      <Cancel>إلغاء</Cancel>
     </action>
     <title>إضافة فئة</title>
     <label>
@@ -1281,8 +1281,8 @@
 
   <UITaxonomyTreeCreateChildForm>
     <action>
-      <Save>#{word.save}</Save>
-      <Cancel>#{word.cancel}</Cancel>
+      <Save>حفظ</Save>
+      <Cancel>إلغاء</Cancel>
     </action>
     <label>
       <parentPath>الأصل:</parentPath>
@@ -1385,7 +1385,7 @@
     </label>
     <title>إضافة صلاحية إلى هذه العقدة</title>
     <action>
-      <Close>#{word.close}</Close>
+      <Close>أغلق</Close>
       <Save>حفظ</Save>
       <Reset>إعادة تعيين</Reset>
     </action>
@@ -1488,8 +1488,8 @@
     </label>
     <title>اضافة صلاحية لهذه العقدة</title>
     <action>
-      <Close>#{word.close}</Close>
-      <Save>#{word.save}</Save>
+      <Close>أغلق</Close>
+      <Save>حفظ</Save>
       <Reset>إعادة ضبط</Reset>
     </action>
     <msg>
@@ -1675,9 +1675,9 @@
 
   <UICLVTemplateForm_ContentTemplateContainer>
     <action>
-      <Save>#{word.save}</Save>
+      <Save>حفظ</Save>
       <Reset>إعادة التعيين</Reset>
-      <Cancel>#{word.cancel}</Cancel>
+      <Cancel>إلغاء</Cancel>
     </action>
     <label>
       <title>اسم</title>
@@ -1689,9 +1689,9 @@
 
   <UICLVTemplateForm_PageTemplateContainer>
     <action>
-      <Save>#{word.save}</Save>
+      <Save>حفظ</Save>
       <Reset>إعادة التعيين</Reset>
-      <Cancel>#{word.cancel}</Cancel>
+      <Cancel>إلغاء</Cancel>
     </action>
     <label>
       <title>الاسم</title>
@@ -1703,9 +1703,9 @@
 
   <UICLVTemplateForm_CateTemplateContainer>
     <action>
-      <Save>#{word.save}</Save>
+      <Save>حفظ</Save>
       <Reset>إعادة التعيين</Reset>
-      <Cancel>#{word.cancel}</Cancel>
+      <Cancel>إلغاء</Cancel>
     </action>
     <label>
       <title>الاسم</title>
@@ -1721,9 +1721,9 @@
       <navigation>التصفح</navigation>
     </label>
     <action>
-      <Save>#{word.save}</Save>
+      <Save>حفظ</Save>
       <Reset>إعادة تعيين</Reset>
-      <Cancel>#{word.cancel}</Cancel>
+      <Cancel>إلغاء</Cancel>
     </action>
     <msg>
       <template-existing>اسم القالب هذا موجود مُسبقــا. الرجاء اختيار اسما آخرا.</template-existing>
@@ -1818,8 +1818,8 @@
       <isDocumentTemplate>هو نموذج لوثيقة:</isDocumentTemplate>
     </label>
     <action>
-      <Save>#{word.save}</Save>
-      <Cancel>#{word.cancel}</Cancel>
+      <Save>حفظ</Save>
+      <Cancel>إلغاء</Cancel>
       <Refresh>#{word.refresh}</Refresh>
     </action>
   </UITemplateEditForm>
@@ -1876,9 +1876,9 @@
   -->
   <UITemplateContent>
     <action>
-      <Save>#{word.save}</Save>
+      <Save>حفظ</Save>
       <Restore>#{word.restore}</Restore>
-      <Cancel>#{word.cancel}</Cancel>
+      <Cancel>إلغاء</Cancel>
       <Refresh>#{word.refresh}</Refresh>
     </action>
     <msg>
@@ -1953,8 +1953,8 @@
       <PermissionButton>واجهة نموذج استعلامات</PermissionButton>
     </label>
     <action>
-      <Save>#{word.save}</Save>
-      <Cancel>#{word.cancel}</Cancel>
+      <Save>حفظ</Save>
+      <Cancel>إلغاء</Cancel>
     </action>
     <msg>
       <permission-require>يُرجى إختيار الصلاحيات</permission-require>
@@ -2014,7 +2014,7 @@
     </label>
     <action>
       <UpdateStyle>تحديث</UpdateStyle>
-      <Cancel>#{word.cancel}</Cancel>
+      <Cancel>إلغاء</Cancel>
     </action>
     <msg>
       <range-validator>عدد الوصلات غير صحيح. الشكل الصحيح هو: أ..بحيث تكون "أ" و "ب" أعدادا صحيحة موجبة.يمكنك إستعمال '*' للإشارة عوضاً عن "ب" للإشارة بأن القيمة غير محدودة.</range-validator>
@@ -2248,17 +2248,17 @@
   <PermissionTreeSelectUser>
     <label>
       <option>
-        <userName>#{word.userName}</userName>
-        <lastName>#{word.lastName}</lastName>
-        <firstName>#{word.firstName}</firstName>
-        <email>#{word.email}</email>
+        <userName>الإسم</userName>
+        <lastName>اللقب</lastName>
+        <firstName>الإسم</firstName>
+        <email>البريد الإلكتروني</email>
       </option>
       <group>مجموعة</group>
       <searchUser>المستخدم</searchUser>
-      <userName>#{word.userName}</userName>
-      <lastName>#{word.lastName}</lastName>
-      <firstName>#{word.firstName}</firstName>
-      <email>#{word.email}</email>
+      <userName>الإسم</userName>
+      <lastName>اللقب</lastName>
+      <firstName>الإسم</firstName>
+      <email>البريد الإلكتروني</email>
       <action>#{word.action}</action>
       <Add>#{word.Add}</Add>
       <Close>#{word.Close}</Close>
@@ -2304,8 +2304,8 @@
       <PermissionButton>فتح الواجهة</PermissionButton>
     </label>
     <action>
-      <Save>#{word.save}</Save>
-      <Cancel>#{word.cancel}</Cancel>
+      <Save>حفظ</Save>
+      <Cancel>إلغاء</Cancel>
     </action>
     <msg>
       <permission-require>يجب تحديد صلاحيّات</permission-require>
@@ -2343,7 +2343,7 @@
   </EditUnLockForm>
   <UITabPane>
     <action>
-      <Close>#{word.close}</Close>
+      <Close>أغلق</Close>
     </action>
     <title>
       <UILockHolderContainer>إدارة عملية التأمين</UILockHolderContainer>
@@ -2354,7 +2354,7 @@
   <UIViewFormTabPane>
     <action>
       <AddTabForm>إضافة علامة تبويب</AddTabForm>
-      <AddTab>#{word.save}</AddTab>
+      <AddTab>حفظ</AddTab>
       <BackViewForm>السابق</BackViewForm>
     </action>
   </UIViewFormTabPane>
@@ -2420,7 +2420,7 @@
 
   <UITaxonomyTreeContainer>
     <action>
-      <Cancel>#{word.close}</Cancel>
+      <Cancel>أغلق</Cancel>
     </action>
   </UITaxonomyTreeContainer>
   <UITaxonomyTreeMainForm>
@@ -2478,7 +2478,7 @@
   <UITagPermissionForm>
     <title>أضف صلاحيّة</title>
     <action>
-      <Save>#{word.save}</Save>
+      <Save>حفظ</Save>
       <Add>إضافة</Add>
     </action>
     <label>

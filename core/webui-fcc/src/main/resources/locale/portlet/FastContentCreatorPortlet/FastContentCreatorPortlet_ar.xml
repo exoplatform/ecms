@@ -16,8 +16,8 @@
       <new-jcr-template>طرأ خطأ أثناء عمليّة انشاء القالب الجديد</new-jcr-template>
     </msg>
     <action>
-      <Save>#{word.save}</Save>
-      <Cancel>#{word.cancel}</Cancel>
+      <Save>حفظ</Save>
+      <Cancel>إلغاء</Cancel>
     </action>
   </UIFCCForm>
 
@@ -46,7 +46,7 @@
       <do-select>طرأ خطأ اثناء اختيار المكان.</do-select>
       </msg>
     <action>
-      <Save>#{word.save}</Save>
+      <Save>حفظ</Save>
     </action>
   </UIFCCConfig>
 
@@ -115,8 +115,8 @@
   <UIFCCActionForm>
     <title>إضافة / تغيير الاجراء</title>
     <action>
-      <Save>#{word.save}</Save>
-      <Close>#{word.close}</Close>
+      <Save>حفظ</Save>
+      <Close>أغلق</Close>
     </action>
     <msg>
       <repository-exception>لا يمكن تأكيد الحفظ. لا يجب أن يحتوي الاسم الذي تمّ ادخاله على مؤشّر أو دليل نحو آخر عنصر لديه.</repository-exception>
@@ -167,7 +167,7 @@
 
   <UICategoriesSelector>
     <action>
-      <close>#{word.close}</close>
+      <close>أغلق</close>
     </action>
   </UICategoriesSelector>
 

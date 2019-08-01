@@ -92,7 +92,7 @@
       <UIContentViewer>コンテンツのプレビュー</UIContentViewer>
       <WebContentMetadataPopup>プロパティセレクタ</WebContentMetadataPopup>
       <WebContentNodeTypePopup>ノードタイプセレクタ</WebContentNodeTypePopup>
-      <UIPermissionManager>パーミッションマネージャ</UIPermissionManager>
+      <UIPermissionManager>パーミッション管理者</UIPermissionManager>
     </title>
   </UITabPane>
 
@@ -204,8 +204,8 @@
       <SearchWebContent>検索</SearchWebContent>
     </action>
     <msg>
-      <time-to-late>検索に時間が掛かります。</time-to-late>
-      <empty-field>正しい検索キーワードを入力してください</empty-field>
+      <time-to-late>検索時間が長過ぎます。</time-to-late>
+      <empty-field>正しい検索キーワードを入力してください。</empty-field>
       <empty-name>検索する名前を入力してください。</empty-name>
       <empty-content>検索する単語もしくは文章を入力してください。</empty-content>
       <empty-property>プロパティを選択してください。</empty-property>
@@ -216,7 +216,7 @@
       <invalid-date>"終了日は開始日より大きい必要があります"</invalid-date>
       <invalid-startDate>「開始日」は、本日より後でなければなりません</invalid-startDate>
       <invalid-nodeType>ノードタイプ "{0}" が不正です。確認してください</invalid-nodeType>
-      <invalid-keyword>検索キーワードが有効ではありません。文字列が認識されていません。</invalid-keyword>
+      <invalid-keyword>検索キーワードが無効です。文字列が認識されていません。</invalid-keyword>
     </msg>
   </UIContentSearchForm>
 
@@ -308,7 +308,7 @@
       <no-permission-remove>権限がありません。</no-permission-remove>
       <access-denied>アクセスが拒否されました</access-denied>
       <node-locked>パス {0} のアイテム、もしくは上位のレベルがロックされています。</node-locked>
-      <userOrGroup-required>ユーザもしくはグループを選択してください。</userOrGroup-required>
+      <userOrGroup-required>ユーザーもしくはグループを選択してください。</userOrGroup-required>
       <checkbox-require>訂正してください</checkbox-require>
       <node-checkedin>先にチェックアウトする必要があります。</node-checkedin>
     </msg>
@@ -316,7 +316,7 @@
 
   <UIPermissionInputSetWithAction>
     <title>
-      <SelectUser>ユーザの選択</SelectUser>
+      <SelectUser>ユーザーを選択</SelectUser>
       <SelectMember>メンバの選択</SelectMember>
       <AddAny>パーミッションの追加</AddAny>
     </title>
@@ -324,7 +324,7 @@
 
   <UIUserSelectorPopupWindow>
     <title>
-      <UIUserContainer>ユーザセレクタ</UIUserContainer>
+      <UIUserContainer>ユーザーセレクター</UIUserContainer>
     </title>
   </UIUserSelectorPopupWindow>
 
@@ -409,11 +409,11 @@
       <DMSAdministration>DMS アドミニストレーション</DMSAdministration>
       <DocumentsManagementCenter>ドキュメント管理センタ</DocumentsManagementCenter>
       <LiveDocumentsCenter>Liveドキュメントセンタ</LiveDocumentsCenter>
-      <PendingDocumentsCenter>ペンディングドキュメントセンタ</PendingDocumentsCenter>
+      <PendingDocumentsCenter>ドキュメントセンターを保留</PendingDocumentsCenter>
       <RecordsManagementCenter>レコード管理センタ</RecordsManagementCenter>
       <SharedUsersSpace>共有ユーザスペース</SharedUsersSpace>
       <Systemfiles>システムファイル</Systemfiles>
-      <ValidationRequestsDocumentsCenter>バリデーションリクエストドキュメントセンタ</ValidationRequestsDocumentsCenter>
+      <ValidationRequestsDocumentsCenter>承認要求ドキュメントセンター</ValidationRequestsDocumentsCenter>
       <ManagedSites>サイト管理</ManagedSites>
       <SharedSite>共有サイト</SharedSite>
     </title>

@@ -12,7 +12,7 @@
         <mimeType>Mime タイプ</mimeType>
         <repeat-count>繰り返し回数</repeat-count>
         <time-interval>インターバル</time-interval>
-        <query-items>アイテム検索</query-items>
+        <query-items>アイテムを検索</query-items>
         <schedule-type>スケジュールタイプ</schedule-type>
         <remove>アイテムを削除</remove>
         <add>アイテムを追加</add>
@@ -176,7 +176,7 @@
     <dialog>
       <label>
         <primary-type>基本タイプ</primary-type>
-        <mixin-types>Mixin タイプ</mixin-types>
+        <mixin-types>ミックスイン・タイプ</mixin-types>
       </label>
     </dialog>
   </Actionable>
@@ -190,7 +190,7 @@
         <destination-workpsace>移動先ワークスペース</destination-workpsace>
         <destination-path>移動先パス</destination-path>
         <primary-type>基本タイプ</primary-type>
-        <mixin-types>Mixin タイプ</mixin-types>
+        <mixin-types>ミックスイン・タイプ</mixin-types>
       </label>
     </dialog>
   </Move>
@@ -329,7 +329,7 @@
 <quarterly>毎4半期</quarterly>
 <yearly>毎年</yearly>
 <ten-years>10年</ten-years>
-<read>ユーザアクション</read>
+<read>ユーザーアクション</read>
   <schedule>スケジューラ</schedule>
   <node_added>コンテンツの追加</node_added>
   <node_removed>コンテンツの削除</node_removed>

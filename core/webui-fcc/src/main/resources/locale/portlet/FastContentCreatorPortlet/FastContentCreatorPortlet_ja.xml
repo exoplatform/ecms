@@ -78,7 +78,7 @@
 
   <UIFCCSelectorPopupWindow>
     <title>
-      <UIOneNodePathSelector>場所の選択</UIOneNodePathSelector>
+      <UIOneNodePathSelector>場所を選択</UIOneNodePathSelector>
     </title>
   </UIFCCSelectorPopupWindow>
 
@@ -146,7 +146,7 @@
 
   <PopupComponent>
     <title>
-      <UIOneNodePathSelector>場所の選択</UIOneNodePathSelector>
+      <UIOneNodePathSelector>場所を選択</UIOneNodePathSelector>
       <UIPermissionSelector>パーミッションブラウザ</UIPermissionSelector>
       <UICategoriesSelector>カテゴリの追加</UICategoriesSelector>
     </title>

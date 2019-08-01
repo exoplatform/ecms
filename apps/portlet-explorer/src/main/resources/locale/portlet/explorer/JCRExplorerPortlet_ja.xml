@@ -76,7 +76,7 @@
       <Close>サイドバーを閉じる</Close>
       <TagExplorer>Tag cloud</TagExplorer>
       <Clipboard>クリップボード</Clipboard>
-      <SavedSearches>保存済みの検索</SavedSearches>
+      <SavedSearches>検索結果の保存</SavedSearches>
     </label>
     <title>
       <Control>コントロールサイドバー</Control>
@@ -159,7 +159,7 @@
     <label>
       <enableStructure>DMS Structureの許可</enableStructure>
       <showSideBar>スライドバーの表示</showSideBar>
-      <showHiddenNode>隠しノードの表示</showHiddenNode>
+      <showHiddenNode>非公開アイテムを表示:</showHiddenNode>
       <showNonDocument>"non document"ノードの表示</showNonDocument>
       <showRefDocuments>参照ドキュメントの表示</showRefDocuments>
       <enableDragAndDrop>ドラッグ &amp; ドロップの許可</enableDragAndDrop>
@@ -227,7 +227,7 @@
       <UIActivateAuditing>監査のアクティベート</UIActivateAuditing>
       <UIPermissionManager>権限管理</UIPermissionManager>
       <UIPropertiesManager>プロパティ管理</UIPropertiesManager>
-      <UIECMSearch>アドバンス検索</UIECMSearch>
+      <UIECMSearch>詳細検索</UIECMSearch>
       <UISavedQuery>保存されたクエリリスト</UISavedQuery>
       <UIWatchDocumentForm>ドキュメント観覧</UIWatchDocumentForm>
       <UIActionManager>アクションの管理</UIActionManager>
@@ -332,15 +332,15 @@
       <unable-edit>ノードタイプ '{1}'のこのノード '{0}'は編集アクションをサポートしていません。</unable-edit>
       <not-support>選択されたノードは編集できません。</not-support>
       <template-null>このノードは有効なダイアログをもっていません。</template-null>
-      <keyword-null>検索のためのキーワードはありません。</keyword-null>
-      <not-found>検索結果なし！</not-found>
+      <keyword-null>検索対象となるキーワードがありません</keyword-null>
+      <not-found>結果が見つかりませんでした</not-found>
       <keyword-not-allow>このキーワードは許されていません。</keyword-not-allow>
       <is-not-referenable>ノード '{0}'は参照可能ではありません。</is-not-referenable>
       <access-denied>アクセス出来ません. このノードの編集権限がありません。</access-denied>
       <access-add-denied>アクセス出来ません. このノードの'追加'権限がありません。</access-add-denied>
       <item-existed>このノードは既に存在しています。ノード内で同じ名前を持つことはできません。</item-existed>
-      <removed-hidden-mixin>隠し mixinの削除に成功しました！</removed-hidden-mixin>
-      <added-hidden-mixin>隠し mixinの追加に成功しました！</added-hidden-mixin>
+      <removed-hidden-mixin>正常に非公開のミックスインを削除しました。</removed-hidden-mixin>
+      <added-hidden-mixin>正常に非公開のミックスインを追加しました。</added-hidden-mixin>
       <not-supported>この機能はドキュメントタイプのみサポートされました。</not-supported>
       <empty-file-type>このノードにドキュメントを追加することはできません。</empty-file-type>
       <unsupported-watch>ドキュメントノードのみウオッチすることが出来ます。</unsupported-watch>
@@ -350,12 +350,12 @@
     </msg>
     <title>
       <select-tab>選択タブ</select-tab>
-      <SimpleSearch>クイック検索</SimpleSearch>
-      <AdvanceSearch>先進的な検索</AdvanceSearch>
+      <SimpleSearch>簡易検索</SimpleSearch>
+      <AdvanceSearch>詳細検索</AdvanceSearch>
       <SavedQueries>保存されたクエリ</SavedQueries>
       <ShowAllOwnedByUser>全てのマイアイテムを表示</ShowAllOwnedByUser>
       <ShowAllFavourite>全てのお気に入りアイテムを表示</ShowAllFavourite>
-      <ShowAllHidden>全ての隠しアイテムを表示</ShowAllHidden>
+      <ShowAllHidden>全ての非公開アイテムを表示</ShowAllHidden>
       <ShowAllFromTrash>ゴミ箱の全てのアイテムを表示</ShowAllFromTrash>
     </title>
   </UIActionBar>
@@ -372,7 +372,7 @@
       <can-not-rename-node>このノードで名前変更するための権限がありません。正しい権限を得る為に管理者にコンタクトしてください。</can-not-rename-node>
       <can-not-cut-node>このノードを切り取る権限がありません。正しい権限を得る為に管理者にコンタクトしてください。</can-not-cut-node>
       <can-not-remove-node>このノードを削除する権限がありません。正しい権限を得る為に管理者にコンタクトしてください。</can-not-remove-node>
-      <can-not-lock-node>You do not have permission to lock node {0}. Please contact the administrator to get the correct right.</can-not-lock-node>
+      <can-not-lock-node>あなたはノード{0} をロックする権限がありません。管理者に連絡してください。</can-not-lock-node>
       <can-not-unlock-node>このノードをロック解除する権限がありません。正しい権限を得る為に管理者にコンタクトしてください。</can-not-unlock-node>
       <no-node>貼り付けるために選択されたノードがありません。</no-node>
       <can-not-paste-node>このノードを貼り付ける権限がありません。正しい権限を得る為に管理者にコンタクトしてください。</can-not-paste-node>
@@ -642,10 +642,10 @@
       <UIUploadContent>アップロードされたファイルの情報</UIUploadContent>
       <UIJCRAdvancedSearch>新しいクエリ</UIJCRAdvancedSearch>
       <UISavedQuery>保存されたクエリ</UISavedQuery>
-      <AdvancedSearchResult>結果の検索</AdvancedSearchResult>
-      <UISimpleSearch>シンプル検索</UISimpleSearch>
-      <UISearchContainer>先進的な検索</UISearchContainer>
-      <UICategoryManagerSearch>検索へカテゴリ追加</UICategoryManagerSearch>
+      <AdvancedSearchResult>検索結果</AdvancedSearchResult>
+      <UISimpleSearch>簡易検索</UISimpleSearch>
+      <UISearchContainer>詳細検索</UISearchContainer>
+      <UICategoryManagerSearch>検索時にカテゴリ追加</UICategoryManagerSearch>
       <UIConstraintsForm>コンテンツフォーム</UIConstraintsForm>
       <UIViewSearchResult>コンテンツの観覧</UIViewSearchResult>
       <UIContentNameSearch>名前で検索</UIContentNameSearch>
@@ -757,7 +757,7 @@
       </title>
     </action>
     <header>
-      <usersOrGroups>ユーザorグループ</usersOrGroups>
+      <usersOrGroups>ユーザーまたはグループ</usersOrGroups>
       <read>読み込み</read>
       <addNode>変更</addNode>
       <remove>削除</remove>
@@ -772,7 +772,7 @@
   </UIPermissionInfo>
   <permission>
     <title>
-      <SelectUser>ユーザの選択</SelectUser>
+      <SelectUser>ユーザーを選択</SelectUser>
       <SelectMember>メンバシップの選択</SelectMember>
       <AddAny>すべてを選択</AddAny>
     </title>
@@ -784,7 +784,7 @@
   -->
   <SelectUserOrGroup>
     <title>
-      <UIGroupSelector>ユーザの選択</UIGroupSelector>
+      <UIGroupSelector>ユーザーを選択</UIGroupSelector>
       <UIPermissionSelector>メンバの選択</UIPermissionSelector>
       <UIGroupMemberSelector>メンバシップの選択</UIGroupMemberSelector>
     </title>
@@ -792,7 +792,7 @@
   <UIGroupSelector>
     <label>
       <selectGroup>グループの観覧と選択</selectGroup>
-      <selectUser>ユーザの選択</selectUser>
+      <selectUser>ユーザーを選択</selectUser>
     </label>
     <msg>
       <not-change-owner>'{0}' はノードのオーナーであり、すべてのコントロール権限を持っています。</not-change-owner>
@@ -802,7 +802,7 @@
     <label>
       <UIPopupWindow>選択</UIPopupWindow>
       <permission>UIPermissionForm</permission>
-      <userOrGroup>ユーザorグループ</userOrGroup>
+      <userOrGroup>ユーザーまたはグループ</userOrGroup>
       <read>読み込み権限</read>
       <add_node>右を変更</add_node>
       <remove>権限の削除</remove>
@@ -815,7 +815,7 @@
     </action>
     <msg>
       <checkbox-require>少なくとも一つの権限を選択する必要があります。</checkbox-require>
-      <userOrGroup-required>この権限を保存する前にユーザもしくはグループを選択する必要があります。</userOrGroup-required>
+      <userOrGroup-required>この権限を保存する前にユーザーもしくはグループを選択する必要があります。</userOrGroup-required>
       <not-change-permission>権限の追加のために正しくありません。</not-change-permission>
       <access-denied>アクセスできません！権限の削除はできません。</access-denied>
     </msg>
@@ -832,7 +832,7 @@
       <name>名前</name>
       <item>プライマリアイテム名</item>
       <super-types>親タイプ</super-types>
-      <mixin>Mixinノードタイプ</mixin>
+      <mixin>ミックスイン・ノードタイプ</mixin>
       <orderable-children>オーダ可能な子</orderable-children>
       <property-def>ノードプロパティの定義</property-def>
       <prop-name>名前</prop-name>
@@ -873,7 +873,7 @@
   <UIContentNameSearch>
     <label>
       <keyword>コンテンツ名</keyword>
-      <location>このロケーションの検索:</location>
+      <location>この場所を検索:</location>
     </label>
     <action>
       <Search>検索</Search>
@@ -895,15 +895,15 @@
       <firstOperator>オペレーター</firstOperator>
       <input>コンテンツ内の単語もしくはフェーズ</input>
       <constraints>更なる制約</constraints>
-      <nodePath>現在のロケーション</nodePath>
+      <nodePath>現在の場所:</nodePath>
     </label>
     <msg>
       <keyword-null>キーワードを入力してください。</keyword-null>
-      <not-found>結果がありません！</not-found>
+      <not-found>結果が見つかりません。</not-found>
       <keyword-not-allow>このキーワードは許されていません。</keyword-not-allow>
       <value-null>キーワードもしくは制約を入力してください。</value-null>
       <value-save-null>このクエリを保存する前にキーワードもしくは制約を入力してください。</value-save-null>
-      <inputSearch-invalid>検索の入力は無効な文字です。</inputSearch-invalid>
+      <inputSearch-invalid>無効な文字が入力されています。</inputSearch-invalid>
       <query-invalid>クエリは無効です。制約をチェックしてください。</query-invalid>
     </msg>
   </UISimpleSearch>
@@ -915,7 +915,7 @@
   <UISearchResult>
     <msg>
       <not-support>このノードのためのビューテンプレートはありません。</not-support>
-      <empty>結果はありません</empty>
+      <empty>結果が見つかりません。</empty>
       <access-denied>このノードを表示できません。なぜならこのテンプレートはサポートされていないかアクセスできません!</access-denied>
       <query-invalid>クエリは無効です。</query-invalid>
     </msg>
@@ -946,7 +946,7 @@
   <UIShowAllOwnedByUserResult>
     <msg>
       <not-support>このノードのための観覧テンプレートはありません。</not-support>
-      <empty>結果はありません</empty>
+      <empty>結果が見つかりません。</empty>
       <access-denied>このノードを表示できません。なぜならこのテンプレートはサポートされていないかアクセスできません!</access-denied>
       <query-invalid>クエリは無効です。</query-invalid>
     </msg>
@@ -1008,7 +1008,7 @@
   <UIShowAllHiddenResult>
     <msg>
       <not-support>このノードのための観覧テンプレートはありません。</not-support>
-      <empty>結果はありません</empty>
+      <empty>結果が見つかりません。</empty>
       <access-denied>このノードを表示できません。なぜならこのテンプレートはサポートされていないかアクセスできません!</access-denied>
       <query-invalid>クエリは無効です。</query-invalid>
     </msg>
@@ -1035,7 +1035,7 @@
     <tooltip>
       <View>このノードの観覧</View>
       <OpenFolder>フォルダへ移動</OpenFolder>
-      <RemoveHiddenAttribute>隠し要素の削除</RemoveHiddenAttribute>
+      <RemoveHiddenAttribute>非公開の属性を削除</RemoveHiddenAttribute>
     </tooltip>
   </UIShowAllHiddenResult>
   <UIShowAllTrashResult>
@@ -1138,7 +1138,7 @@
   </NodeTypePopup>
   <CategoryPopup>
     <title>
-      <UICategoryManagerSearch>検索のカテゴリ追加</UICategoryManagerSearch>
+      <UICategoryManagerSearch>検索時にカテゴリ追加</UICategoryManagerSearch>
       <UIOneNodePathSelector>カテゴリ選択</UIOneNodePathSelector>
     </title>
   </CategoryPopup>
@@ -1166,7 +1166,7 @@
       <label-Cancel>#{word.cancel}</label-Cancel>
     </button>
     <msg>
-      <not-result-found>見つかりませんでした!</not-result-found>
+      <not-result-found>結果が見つかりません。</not-result-found>
     </msg>
   </UICompareExactlyForm>
   <UIJCRAdvancedSearch>
@@ -1294,7 +1294,7 @@
     </label>
     <msg>
       <confirm-delete-query>本当にこのクエリを削除しますか？</confirm-delete-query>
-      <not-result-found>結果がみつかりません。</not-result-found>
+      <not-result-found>結果が見つかりません。</not-result-found>
     </msg>
   </UISavedQuery>
   <UIQueryResultPageIterator>
@@ -1401,8 +1401,8 @@
       <e_32>#{word.save}</e_32>
       <e_64>削除</e_64>
       <e_128>コピー</e_128>
-      <e_256>mixinの追加</e_256>
-      <e_512>mixinの削除</e_512>
+      <e_256>ミックスインの追加</e_256>
+      <e_512>ミックスインの削除</e_512>
       <e_1024>クローン</e_1024>
       <e_2048>アップロード</e_2048>
       <e_4096>インポート</e_4096>
@@ -1846,7 +1846,7 @@
   </UIActionTypeForm>
   <PopupComponent>
     <title>
-      <UIOneNodePathSelector>ロケーションの選択</UIOneNodePathSelector>
+      <UIOneNodePathSelector>場所の選択</UIOneNodePathSelector>
       <UIPermissionSelector>権限ブラウザ</UIPermissionSelector>
       <UICategoriesSelector>カテゴリの追加</UICategoriesSelector>
     </title>
@@ -1867,7 +1867,7 @@
     <msg>
       <path-not-found>パスは見つかりません</path-not-found>
       <access-denied>アクセス出来ません! ノードを読む為の権限がありません。</access-denied>
-      <keyword-not-support>検索キーワードが有効できはありません。認識されない文字列が存在しています。</keyword-not-support>
+      <keyword-not-support>検索キーワードが無効です。認識されない文字列が存在しています。</keyword-not-support>
     </msg>
     <label>
       <exeButton>移動</exeButton>
@@ -2090,7 +2090,7 @@
   <UIPermissionSelector>
     <label>
       <selectGroup>グループの選択</selectGroup>
-      <selectUser>ユーザの選択</selectUser>
+      <selectUser>ユーザーを選択</selectUser>
       <selectMembership>メンバシップの選択</selectMembership>
     </label>
   </UIPermissionSelector>
@@ -2130,7 +2130,7 @@
     <header>
       <date>日付</date>
       <newState>新規ステータス</newState>
-      <user>ユーザ</user>
+      <user>ユーザー</user>
       <description>説明</description>
       <version>バージョン</version>
       <visibility>可視性</visibility>
@@ -2210,7 +2210,7 @@
   <UIGroupMemberSelector>
     <label>
       <selectGroup>グループの選択</selectGroup>
-      <selectUser>ユーザの選択</selectUser>
+      <selectUser>ユーザーを選択</selectUser>
       <selectMembership>メンバシップの選択</selectMembership>
     </label>
   </UIGroupMemberSelector>
@@ -2259,7 +2259,7 @@
       <DriveNameInput>UIJcrExplorerEditForm</DriveNameInput>
     </label>
     <msg>
-      <personal-usecase>パーソナルユースケースを選択するとき、現在のユーザのプライベートドライブが利用されます。</personal-usecase>
+      <personal-usecase>パーソナルユースケースを選択するとき、現在のユーザーのプライベートドライブが利用されます。</personal-usecase>
       <drive-edit-permission>ドライブ名を編集できません。編集ボタンをクリックしてください。</drive-edit-permission>
       <path-edit-permission>パスを編集できません。編集ボタンをクリックしてください。</path-edit-permission>
     </msg>
@@ -2295,7 +2295,7 @@
 
   <UIPopupWindow>
     <title>
-      <UISymLinkManager>Add Link</UISymLinkManager>
+      <UISymLinkManager>シムリンク管理者</UISymLinkManager>
       <UIAddTranslationManager>Translationの追加</UIAddTranslationManager>
     </title>
   </UIPopupWindow>
@@ -2517,7 +2517,7 @@
 
   <UIPopupMenu>
     <msg>
-      <node-locked-other-person>このノードもしくは親ノードは他のユーザにロックされています。削除できません!</node-locked-other-person>
+      <node-locked-other-person>このノードもしくは親ノードは他のユーザーにロックされています。削除できません!</node-locked-other-person>
     </msg>
   </UIPopupMenu>
 
@@ -2668,7 +2668,7 @@
     <label>
       <OwnedByMe>オーナー</OwnedByMe>
       <Favourites>お気に入り</Favourites>
-      <Hidden>隠しファイル</Hidden>
+      <Hidden>非公開</Hidden>
       <Trash>ゴミ箱</Trash>
       <Configuration>設定のセットアップ</Configuration>
     </label>
@@ -2690,7 +2690,7 @@
 
   <UISavedSearches>
     <title>
-      <savedSearches>保存された検索</savedSearches>
+      <savedSearches>検索結果の保存</savedSearches>
     </title>
   </UISavedSearches>
   <DocumentType>
@@ -2752,7 +2752,7 @@
     <label>
       <showOwnedByUser>オーナー</showOwnedByUser>
       <showFavourites>お気に入り</showFavourites>
-      <showHiddens>隠しファイル</showHiddens>
+      <showHiddens>非公開</showHiddens>
       <showTrash>ゴミ箱</showTrash>
     </label>
     <action>
@@ -2846,7 +2846,7 @@
 
     <UIPopupMenu>
     <msg>
-      <node-locked-editing>このノード {0} は他のユーザが編集中のためロックされています。</node-locked-editing>
+      <node-locked-editing>このノード {0} は他のユーザーが編集中のためロックされています。</node-locked-editing>
     </msg>
   </UIPopupMenu>
   <UITagStyleForm>
@@ -2863,7 +2863,7 @@
 
   <UIPopupWindow>
     <title>
-      <UITaggingFormContainer>タグマネージャー</UITaggingFormContainer>
+      <UITaggingFormContainer>タグ管理者</UITaggingFormContainer>
     </title>
   </UIPopupWindow>
 
@@ -2910,7 +2910,7 @@
 
   <UITreeExplorer>
     <msg>
-      <repository-error>エラー。レポジトリに関する情報は失いました！</repository-error>
+      <repository-error>エラーが発生しました。レポジトリに関する情報が失われました！</repository-error>
     </msg>
   </UITreeExplorer>
   <UIDocumentForm>
@@ -2991,7 +2991,7 @@
       <unpublished>古い</unpublished>
       <enrolled>登録済</enrolled>
       <draft>草案</draft>
-      <pending>未決</pending>
+      <pending>保留中</pending>
       <approved>承認</approved>
       <inreview>レビュー中</inreview>
       <staged>ステージ済</staged>
@@ -3146,7 +3146,7 @@
   <quarterly>毎4半期</quarterly>
   <yearly>毎年</yearly>
   <ten-years>10年</ten-years>
-  <read>ユーザアクション</read>
+  <read>ユーザーアクション</read>
   <schedule>スケジューラ</schedule>
   <node_added>コンテンツの追加</node_added>
   <node_removed>コンテンツの削除</node_removed>

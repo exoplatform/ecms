@@ -125,7 +125,7 @@
       </title>
     </action>
     <header>
-      <usersOrGroups>ユーザorグループ</usersOrGroups>
+      <usersOrGroups>ユーザーまたはグループ</usersOrGroups>
       <read>読み込み</read>
       <addNode>ノードの追加</addNode>
       <setProperty>プロパティのセット</setProperty>
@@ -315,7 +315,7 @@
       <name>要素名</name>
       <type>タイプ</type>
       <description>説明</description>
-      <isMixin>mixinタイプ</isMixin>
+      <isMixin>ミックスイン・タイプ</isMixin>
       <orderable>オーダ可能な子</orderable>
     </header>
     <info>
@@ -397,7 +397,7 @@
       <viewNonDocument>"non document" ノードの表示</viewNonDocument>
       <viewSideBar>サイドバーの表示</viewSideBar>
       <permissions>権限</permissions>
-      <showHiddenNode>隠しノードの表示</showHiddenNode>
+      <showHiddenNode>非公開ノードを表示:</showHiddenNode>
       <allowCreateFolders>フォルダー作成を許可</allowCreateFolders>
       <Admin>管理者：</Admin>
       <Categories>カテゴリー:</Categories>
@@ -460,7 +460,7 @@
     <header>
       <icon>アイコン</icon>
       <nodeType>ノードタイプ</nodeType>
-      <mixinType>Mixinタイプ</mixinType>
+      <mixinType>ミックスイン・タイプ</mixinType>
       <orderable>オーダー可能な子ノード</orderable>
       <action>アクション</action>
     </header>
@@ -517,7 +517,7 @@
       <namespace>ネームスペース</namespace>
       <propertyNamespace>ネームスペース</propertyNamespace>
       <nodeTypeName>ノードタイプ名</nodeTypeName>
-      <mixinType>Mixinタイプ</mixinType>
+      <mixinType>ミックスイン・タイプ</mixinType>
       <hasOrderableChildNodes>オーダー可能な子ノード</hasOrderableChildNodes>
       <primaryItemName>プライマリアイテム名</primaryItemName>
       <superTypes>Superタイプ</superTypes>
@@ -907,7 +907,7 @@
       <Add>追加</Add>
     </action>
     <label>
-      <userOrGroup>ユーザorグループ</userOrGroup>
+      <userOrGroup>ユーザーまたはグループ</userOrGroup>
     </label>
     <msg>
       <permission-exist>アクセス権限 '{0}' は、既に存在しています。</permission-exist>
@@ -1035,7 +1035,7 @@
 
   <tab_permission>
     <title>
-      <SelectUser>ユーザの選択</SelectUser>
+      <SelectUser>ユーザーを選択</SelectUser>
       <SelectMember>メンバの選択</SelectMember>
       <AddAny>任意の</AddAny>
     </title>
@@ -1087,7 +1087,7 @@
       <version-restored>バージョン {0} はリストアされました。</version-restored>
       <role-require>権限を選択する必要があります</role-require>
       <template-name-exist>テンプレート名 '{0}' は存在します。</template-name-exist>
-      <add-permission-denied>You do not have permission to add new template.</add-permission-denied>
+      <add-permission-denied>あなたは新規テンプレートを追加する権限がありません。</add-permission-denied>
       <edit-permission-denied>'{0}' テンプレートを変更する権限がありません。</edit-permission-denied>
     </msg>
     <tab>
@@ -1304,8 +1304,8 @@
 
   <TaxoPopupUserSelector>
     <title>
-      <TaxoTreeSelectUserOrGroup>ユーザの選択</TaxoTreeSelectUserOrGroup>
-      <UIPermissionTreeSelectUser>ユーザの選択</UIPermissionTreeSelectUser>
+      <TaxoTreeSelectUserOrGroup>ユーザーを選択</TaxoTreeSelectUserOrGroup>
+      <UIPermissionTreeSelectUser>ユーザーを選択</UIPermissionTreeSelectUser>
     </title>
   </TaxoPopupUserSelector>
 
@@ -1377,7 +1377,7 @@
     <label>
       <UIPopupWindow>選択</UIPopupWindow>
       <permission>UI権限ツリーフォーム</permission>
-      <userOrGroup>ユーザorグループ</userOrGroup>
+      <userOrGroup>ユーザーまたはグループ</userOrGroup>
       <read>読み込み権限</read>
       <add_node>ノード権限の追加</add_node>
       <set_property>プロパティ権限のセット</set_property>
@@ -1391,7 +1391,7 @@
     </action>
     <msg>
       <checkbox-require>少なくとも一つの権限を選択する必要があります。</checkbox-require>
-      <userOrGroup-required>権限を保存する前にユーザかグループを選択する必要があります。</userOrGroup-required>
+      <userOrGroup-required>権限を保存する前にユーザーかグループを選択する必要があります。</userOrGroup-required>
       <not-change-permission>権限を追加するための権利がありません。</not-change-permission>
       <access-denied>アクセスできません！権限がありません</access-denied>
     </msg>
@@ -1436,7 +1436,7 @@
       </title>
     </action>
     <header>
-      <usersOrGroups>ユーザorグループ</usersOrGroups>
+      <usersOrGroups>ユーザーまたはグループ</usersOrGroups>
       <read>読み込み</read>
       <addNode>Modify</addNode>
       <remove>削除</remove>
@@ -1451,9 +1451,9 @@
   </UIPermissionInfo>
   <permission>
     <title>
-      <SelectUser>ユーザの選択</SelectUser>
+      <SelectUser>ユーザーを選択</SelectUser>
       <SelectMember>メンバーシップの選択</SelectMember>
-      <AddAny>全員</AddAny>
+      <AddAny>全てのユーザー</AddAny>
     </title>
   </permission>
   <!--
@@ -1463,7 +1463,7 @@
   -->
   <SelectUserOrGroup>
     <title>
-      <UIGroupSelector>ユーザの選択</UIGroupSelector>
+      <UIGroupSelector>ユーザーを選択</UIGroupSelector>
       <UIPermissionSelector>メンバの選択</UIPermissionSelector>
       <UIGroupMemberSelector>メンバーシップの選択</UIGroupMemberSelector>
     </title>
@@ -1471,7 +1471,7 @@
   <UIGroupSelector>
     <label>
       <selectGroup>グループのブラウズと選択</selectGroup>
-      <selectUser>ユーザの選択</selectUser>
+      <selectUser>ユーザーを選択</selectUser>
     </label>
     <msg>
       <not-change-owner>'{0}' はこのノードのオーナーで全てのコントロール権限を持ちます。</not-change-owner>
@@ -1481,7 +1481,7 @@
     <label>
       <UIPopupWindow>選択</UIPopupWindow>
       <permission>UIPermissionForm</permission>
-      <userOrGroup>ユーザorグループ</userOrGroup>
+      <userOrGroup>ユーザーまたはグループ</userOrGroup>
       <read>読み込み権限</read>
       <add_node>変更</add_node>
       <remove>削除権限</remove>
@@ -1494,7 +1494,7 @@
     </action>
     <msg>
       <checkbox-require>少なくとも一つの権限を選択する必要があります。</checkbox-require>
-      <userOrGroup-required>権限の保存をする前にユーザもしくはグループを選択する必要があります。</userOrGroup-required>
+      <userOrGroup-required>権限の保存をする前にユーザーもしくはグループを選択する必要があります。</userOrGroup-required>
       <not-change-permission>権限を追加するための権利がありません。</not-change-permission>
       <access-denied>アクセスできません！権限がありません</access-denied>
     </msg>
@@ -1546,7 +1546,7 @@
     </action>
     <msg>
       <confirm-delete>本当に削除したいですか?</confirm-delete>
-      <access-denied>Access denied! You haven't got permission to use this function.</access-denied>
+      <access-denied>アクセスできません。この機能を使う権限がありません。</access-denied>
       <editing-template>Access denied! You can't delete and edit template simultaneously.</editing-template>
       <template-not-exist>The template that you attempt to delete doesn't exist.</template-not-exist>
     </msg>
@@ -1564,7 +1564,7 @@
     </action>
     <msg>
       <confirm-delete>本当に削除したいですか?</confirm-delete>
-      <access-denied>Access denied! You haven't got permission to use this function.</access-denied>
+      <access-denied>アクセスできません。この機能を使う権限がありません。</access-denied>
       <editing-template>Access denied! You can't delete and edit template simultaneously.</editing-template>
       <template-not-exist>The template that you attempt to delete doesn't exist.</template-not-exist>
     </msg>
@@ -2159,7 +2159,7 @@
   <UIDrivePermissionSelector>
     <label>
       <selectGroup>グループの選択</selectGroup>
-      <selectUser>ユーザの選択</selectUser>
+      <selectUser>ユーザーを選択</selectUser>
       <selectMembership>メンバシップの選択</selectMembership>
     </label>
   </UIDrivePermissionSelector>
@@ -2167,7 +2167,7 @@
   <UIPermissionSelector>
     <label>
       <selectGroup>グループの選択</selectGroup>
-      <selectUser>ユーザの選択</selectUser>
+      <selectUser>ユーザーを選択</selectUser>
       <selectMembership>メンバーシップの選択</selectMembership>
     </label>
   </UIPermissionSelector>
@@ -2211,7 +2211,7 @@
   <QueriesPermissionBrowse>
     <label>
       <selectGroup>グループの選択</selectGroup>
-      <selectUser>ユーザの選択</selectUser>
+      <selectUser>ユーザーを選択</selectUser>
       <selectMembership>メンバーシップの選択</selectMembership>
     </label>
   </QueriesPermissionBrowse>
@@ -2313,7 +2313,7 @@
   </UIUnLockForm>
   <UILockHolderList>
     <header>
-      <name>グループorユーザ</name>
+      <name>グループまたはユーザ</name>
       <action>アクション</action>
     </header>
     <tooltip>
@@ -2326,7 +2326,7 @@
   <UILockNodeList>
     <header>
       <name>ノードパス</name>
-      <hoderLock>ユーザロック</hoderLock>
+      <hoderLock>所有者をロック</hoderLock>
       <action>アクション</action>
     </header>
     <tooltip>
@@ -2456,14 +2456,14 @@
 
   <UITabPane>
     <title>
-      <UITagManager>タグマネージャ</UITagManager>
-      <UITagPermissionManager>タグ権限マネージャ</UITagPermissionManager>
+      <UITagManager>タグ管理者</UITagManager>
+      <UITagPermissionManager>タグ権限管理者</UITagPermissionManager>
     </title>
   </UITabPane>
 
   <UITagPermissionInfo>
     <header>
-      <usersOrGroups>ユーザorグループ</usersOrGroups>
+      <usersOrGroups>ユーザーまたはグループ</usersOrGroups>
       <action>アクション</action>
     </header>
     <action>

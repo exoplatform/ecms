@@ -31,8 +31,8 @@
       <action>#{word.action}</action>
     </header>
     <action>
-      <SaveCategories>#{word.save}</SaveCategories>
-      <Cancel>#{word.cancel}</Cancel>
+      <SaveCategories>حفظ</SaveCategories>
+      <Cancel>إلغاء</Cancel>
     </action>
     <msg>
       <cannot-save>لم يتمّ حفظ الفئات.</cannot-save>

@@ -39,10 +39,10 @@
   <UISearchPageLayoutManager>
     <label>
       <itemsPerPageSelector>ページ毎アイテム数</itemsPerPageSelector>
-      <searchFormSelector>検索フォームテンプレート</searchFormSelector>
-      <searchResultSelector>検索結果テンプレート</searchResultSelector>
-      <searchPaginatorSelector>検索改ページテンプレート</searchPaginatorSelector>
-      <searchPageLayoutSelector>検索ページレイアウトテンプレート</searchPageLayoutSelector>
+      <searchFormSelector>フォームテンプレートを検索</searchFormSelector>
+      <searchResultSelector>検索結果テンプレートを検索</searchResultSelector>
+      <searchPaginatorSelector>改ページテンプレートを検索</searchPaginatorSelector>
+      <searchPageLayoutSelector>ページレイアウトテンプレートを検索</searchPageLayoutSelector>
       <searchResultBasePathInputSetAction>ベースパス</searchResultBasePathInputSetAction>
       <pageMode>ページ モード</pageMode>
       <option>
@@ -63,7 +63,7 @@
   </searchResultBasePathInputSetAction>  
   <UISearchForm>  
    <message>
-     <keyword-not-support>検索キーワードが有効できはありません。文字列が認識されていません。</keyword-not-support>
+     <keyword-not-support>検索キーワードが無効です。文字列が認識されていません。</keyword-not-support>
      <not-checked>検索タイプを選択してください。</not-checked>
      <keyword-not-empty>検索キーワードを入力してください。</keyword-not-empty>
    </message>

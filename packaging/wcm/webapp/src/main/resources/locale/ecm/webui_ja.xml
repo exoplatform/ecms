@@ -48,14 +48,14 @@
   -->
   <SelectUserOrGroup>
     <title>
-      <UIPermissionUser>ユーザの選択</UIPermissionUser>
+      <UIPermissionUser>ユーザーを選択</UIPermissionUser>
       <UIPermissionMembership>メンバシップの選択</UIPermissionMembership>
       <TaxoSelectUserOrGroup>メンバシップの選択</TaxoSelectUserOrGroup>
     </title>
   </SelectUserOrGroup>
   <UIPermissionUser>
     <label>
-      <selectUser>ユーザの選択</selectUser>
+      <selectUser>ユーザーを選択</selectUser>
       <selectGroup>グループの閲覧と選択</selectGroup>
     </label>
   </UIPermissionUser>
