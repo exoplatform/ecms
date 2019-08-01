@@ -123,7 +123,7 @@
                   "</p>"
                 );
               }
-              console.log('$viewer=' + $viewer.html()); // TODO this will print a bunch of markup in the console, need it?
+              // console.log('$viewer=' + $viewer.html()); // TODO this will print a bunch of markup in the console, need it?
             } else {
               console.log('not viewer!!!!!');
             }
