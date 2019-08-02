@@ -124,7 +124,7 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
   }
 
   private static final Log LOG = ExoLogger.getLogger(JCRLocalOneDrive.class);
-
+  private final OneDriveAPI api;
   protected JCRLocalOneDrive(CloudUser user,
                              Node driveNode,
                              SessionProviderService sessionProviders,
@@ -137,7 +137,8 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
     if (LOG.isDebugEnabled()) {
       LOG.debug("JCRLocalOneDrive():  ");
     }
-    getUser().api().getStoredToken().addListener(this);
+    this.api = getUser().api();
+    api.getStoredToken().addListener(this);
   }
 
   protected JCRLocalOneDrive(OneDriveConnector.API apiBuilder,
@@ -153,7 +154,8 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
     if (LOG.isDebugEnabled()) {
       LOG.debug("JCRLocalOneDrive():  ");
     }
-    getUser().api().getStoredToken().addListener(this);
+    this.api = getUser().api();
+    api.getStoredToken().addListener(this);
   }
 
   protected static OneDriveUser loadUser(OneDriveConnector.API apiBuilder,
@@ -196,7 +198,8 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
                                   RefreshAccessException,
                                   CloudProviderException,
                                   RepositoryException {
-    return new OneDriveState(getUser().api().getSubscription(), getUser().api().getRootId());
+
+    return new OneDriveState(api.getSubscription(), api.getRootId());
   }
 
   @Override
@@ -229,7 +232,7 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
   @Override
   protected void initDrive(Node driveNode) throws CloudDriveException, RepositoryException {
     super.initDrive(driveNode);
-    driveNode.setProperty("ecd:id", getUser().api().getRootId());
+    driveNode.setProperty("ecd:id", api.getRootId());
   }
 
   @Override
@@ -237,7 +240,7 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
     if (LOG.isDebugEnabled()) {
       LOG.debug("updateAccess");
     }
-    getUser().api().updateToken(((OneDriveUser) newUser).api().getStoredToken());
+   api.updateToken(api.getStoredToken());
   }
 
   @Override
@@ -334,11 +337,11 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
   }
 
   private SharingLink createViewLink(DriveItem item) throws OneDriveException {
-    return getUser().api().createLink(item.id, "view");
+    return api.createLink(item.id, "view");
   }
 
   private SharingLink createEmbedLink(DriveItem item) throws OneDriveException {
-    SharingLink link = getUser().api().createLink(item.id, "embed");
+    SharingLink link = api.createLink(item.id, "embed");
     if (item.file != null && item.file.mimeType.startsWith("image")) {
       changeWebUrlForImage(link);
     }
@@ -355,7 +358,7 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
     // TODO there is a possibility to delete/update public links,
     // and also use temporary links
     if (BUSINESS.equals(accountType)) {
-      return getUser().api().createLink(item.id, "view");
+      return api.createLink(item.id, "view");
     } else if (PERSONAL.equals(accountType)) {
       return createEmbedLink(item);
     }
