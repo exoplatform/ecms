@@ -2,8 +2,8 @@
 
   function OneDriveClient() {
 
-    var oneDrives = new Map(); // TODO this will not work in IE, use {} 
-
+    // var oneDrives = new Map(); // TODO this will not work in IE, use {}
+    var oneDrives = {};
     function OneDriveSubscription(userId, notificationUrl) {
       var self = this;
       this.changed = false;
@@ -64,9 +64,10 @@
       var newState = cloudDrive.getState(drive);
       newState.done(function (res) {
         drive.state = res;
-        if (oneDrives.has(drive.state.creatorId)) {
-          oneDrives.delete(drive.state.creatorId);
-        }
+        // if (oneDrives.has(drive.state.creatorId)) {
+        //   oneDrives.delete(drive.state.creatorId);
+        // }
+        oneDrives[drive.state.creatorId] = undefined;
         process.resolve();
       });
       newState.fail(function (response, status, err) {
@@ -91,11 +92,16 @@
             //   console.log('creatorId = undefined' );
             // }
 
-            if (!oneDrives.has(drive.state.creatorId)) {
-              oneDrives.set(drive.state.creatorId, new OneDriveSubscription(drive.state.creatorId, drive.state.url));
-            }
+            // if (!oneDrives.has(drive.state.creatorId)) {
+            //   oneDrives.set(drive.state.creatorId, new OneDriveSubscription(drive.state.creatorId, drive.state.url));
+            // }
 
-            var oneDriveSubscription = oneDrives.get(drive.state.creatorId);
+                if(oneDrives[drive.state.creatorId]===undefined){
+                    oneDrives[drive.state.creatorId] = new OneDriveSubscription(drive.state.creatorId, drive.state.url);
+                }
+
+
+            var oneDriveSubscription = oneDrives[drive.state.creatorId];
             processAfterNotification(oneDriveSubscription, process, drive);
           }
 
