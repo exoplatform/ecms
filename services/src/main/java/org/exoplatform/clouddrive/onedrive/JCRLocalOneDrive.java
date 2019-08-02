@@ -376,24 +376,26 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
    * Creates additional fields, because different types of account can be used
    */
   private DriveItemAdditionalInfo prepareAdditionalDriveItemFields(DriveItem item) throws OneDriveException {
-    String link = "";
-    String previewLink = "";
-    String lastModifiedUserName = "";
-    String createdUserName = "";
-    if (item.lastModifiedBy != null && item.lastModifiedBy.user != null) {
-      lastModifiedUserName = item.lastModifiedBy.user.displayName;
-    }
-    if (item.createdBy != null && item.createdBy.user != null) {
-      createdUserName = item.createdBy.user.displayName;
-    }
-    SharingLink sharingLink = createLink(item);
-    if (sharingLink.type.equalsIgnoreCase("embed")) { // personal account
-      link = item.webUrl;
-      previewLink = sharingLink.webUrl;
-    } else if (sharingLink.type.equalsIgnoreCase("view")) { // business account
-      link = sharingLink.webUrl;
-    }
-    return new DriveItemAdditionalInfo(link, previewLink, lastModifiedUserName, createdUserName);
+      String link = "";
+      String previewLink = "";
+      String lastModifiedUserName = "";
+      String createdUserName = "";
+      if (item.lastModifiedBy != null && item.lastModifiedBy.user != null) {
+          lastModifiedUserName = item.lastModifiedBy.user.displayName;
+      }
+      if (item.createdBy != null && item.createdBy.user != null) {
+          createdUserName = item.createdBy.user.displayName;
+      }
+      SharingLink sharingLink = createLink(item);
+      if (sharingLink.type.equalsIgnoreCase("embed")) { // personal account
+//      link = item.webUrl;
+//      previewLink = sharingLink.webUrl;
+          link = "personal=" + sharingLink.webUrl;
+          previewLink = item.webUrl;;
+      } else if (sharingLink.type.equalsIgnoreCase("view")) { // business account
+          link = "business=" + sharingLink.webUrl;
+      }
+      return new DriveItemAdditionalInfo(link, previewLink, lastModifiedUserName, createdUserName);
   }
 
   JCRLocalCloudFile initCreateFile(Node fileNode, DriveItem item) throws OneDriveException, RepositoryException {

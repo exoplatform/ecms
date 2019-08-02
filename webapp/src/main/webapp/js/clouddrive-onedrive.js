@@ -4,6 +4,7 @@
 
     // var oneDrives = new Map(); // TODO this will not work in IE, use {}
     var oneDrives = {};
+
     function OneDriveSubscription(userId, notificationUrl) {
       var self = this;
       this.changed = false;
@@ -96,9 +97,9 @@
             //   oneDrives.set(drive.state.creatorId, new OneDriveSubscription(drive.state.creatorId, drive.state.url));
             // }
 
-                if(oneDrives[drive.state.creatorId]===undefined){
-                    oneDrives[drive.state.creatorId] = new OneDriveSubscription(drive.state.creatorId, drive.state.url);
-                }
+            if (oneDrives[drive.state.creatorId] === undefined) {
+              oneDrives[drive.state.creatorId] = new OneDriveSubscription(drive.state.creatorId, drive.state.url);
+            }
 
 
             var oneDriveSubscription = oneDrives[drive.state.creatorId];
@@ -119,24 +120,61 @@
       $(function () {
         var file = cloudDrive.getContextFile();
         if (file) {
-          var $viewer = $('#CloudFileViewer');
-          if (file.type.trim().startsWith('image') && file.previewLink && file.previewLink.endsWith('/root/content')) { // image in personal account
-            console.log('OneDrive initContext, provider= ' + provider);
-            if ($viewer) {
-              if ($viewer.has('.onedriveImgFileViewer').length == 0) {
-                $viewer.prepend("<p class='onedriveFileViewer'>" +
-                  "<img class='onedriveImgFileViewer' src='" + file.previewLink + "'/>" +
-                  "</p>"
-                );
+          /*
+            var l = file.previewLink;
+            file.previewLink = file.link;
+            file.link = file.previewLink;
+           */
+          if (file.link.startsWith("personal=")) {
+            var temp = file.previewLink;
+            file.previewLink = file.link.substring(9);
+            file.link = temp;
+            var $viewer = $('#CloudFileViewer');
+            if (file.type.trim().startsWith('image') && file.previewLink && file.previewLink.endsWith('/root/content')) { // image in personal account
+              console.log('OneDrive initContext, provider= ' + provider);
+              if ($viewer) {
+                if ($viewer.has('.onedriveImgFileViewer').length == 0) {
+                  $viewer.prepend("<p class='onedriveFileViewer'>" +
+                    "<img class='onedriveImgFileViewer' src='" + file.previewLink + "'/>" +
+                    "</p>"
+                  );
+                }
+                // console.log('$viewer=' + $viewer.html()); // TODO this will print a bunch of markup in the console, need it?
+              } else {
+                console.log('not viewer!!!!!');
               }
-              // console.log('$viewer=' + $viewer.html()); // TODO this will print a bunch of markup in the console, need it?
-            } else {
-              console.log('not viewer!!!!!');
+              $viewer.find('iframe').remove();
             }
-          }
-          if (file.previewLink && file.previewLink.indexOf("embed") == -1) { //
+          } else if (file.link.startsWith("business=")) {
+            var $viewer = $('#CloudFileViewer');
+            file.link = file.link.substring(9);
             $viewer.find('iframe').remove();
+          }else{ //
+              var $viewer = $('#CloudFileViewer');
+              if (file.type.trim().startsWith('image') && file.previewLink && file.previewLink.endsWith('/root/content')) { // image in personal account
+                console.log('OneDrive initContext, provider= ' + provider);
+                if ($viewer) {
+                  if ($viewer.has('.onedriveImgFileViewer').length == 0) {
+                    $viewer.prepend("<p class='onedriveFileViewer'>" +
+                      "<img class='onedriveImgFileViewer' src='" + file.previewLink + "'/>" +
+                      "</p>"
+                    );
+                  }
+                  // console.log('$viewer=' + $viewer.html()); // TODO this will print a bunch of markup in the console, need it?
+                } else {
+                  console.log('not viewer!!!!!');
+                }
+              }
+              if (file.previewLink && file.previewLink.indexOf("embed") == -1) { //
+                $viewer.find('iframe').remove();
+              }
+
           }
+
+          // // todo previewLink for personal, link for bussiness
+          // if (file.previewLink && file.previewLink.indexOf("embed") == -1) { //
+          //   $viewer.find('iframe').remove();
+          // }
         }
       });
     };
