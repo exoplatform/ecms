@@ -1352,7 +1352,7 @@
     <tooltip>
       <original>Version Originale</original>
       <version>Version</version>
-      <baseVersion>current draft</baseVersion>
+      <baseVersion>brouillon en cours</baseVersion>
       <addLabel>Ajouter un Libellé</addLabel>
       <removeLable>Supprimer le Libellé</removeLable>
       <restoreVersion>Restaurer cette Version</restoreVersion>
