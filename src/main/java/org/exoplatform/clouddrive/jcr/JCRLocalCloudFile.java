@@ -18,7 +18,9 @@
  */
 package org.exoplatform.clouddrive.jcr;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 import javax.jcr.Node;
 
@@ -84,6 +86,17 @@ public class JCRLocalCloudFile implements CloudFile {
   /** The changed. */
   private final transient boolean  changed;
 
+
+  private final String modifiedDateFormatted;
+
+  public String formatDate(Calendar modifiedDate){
+    if (modifiedDate != null) {
+      SimpleDateFormat format = new SimpleDateFormat("dd.MM.yy");
+      return format.format(modifiedDate.getTime());
+    }
+    return "";
+  }
+
   /**
    * Local cloud file or folder (full internal constructor).
    *
@@ -139,6 +152,7 @@ public class JCRLocalCloudFile implements CloudFile {
     this.size = size;
     this.node = node;
     this.changed = changed;
+    this.modifiedDateFormatted = formatDate(modifiedDate);
   }
 
   /**
@@ -441,5 +455,9 @@ public class JCRLocalCloudFile implements CloudFile {
    */
   public boolean isChanged() {
     return changed;
+  }
+
+  public String getModifiedDateFormatted() {
+    return modifiedDateFormatted;
   }
 }
