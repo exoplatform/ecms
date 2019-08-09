@@ -20,7 +20,6 @@ package org.exoplatform.clouddrive.jcr;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 
 import javax.jcr.Node;
 
@@ -87,7 +86,7 @@ public class JCRLocalCloudFile implements CloudFile {
   private final transient boolean  changed;
 
 
-  private final String modifiedDateFormatted;
+  private final String modified;
 
   public String formatDate(Calendar modifiedDate){
     if (modifiedDate != null) {
@@ -152,7 +151,7 @@ public class JCRLocalCloudFile implements CloudFile {
     this.size = size;
     this.node = node;
     this.changed = changed;
-    this.modifiedDateFormatted = formatDate(modifiedDate);
+    this.modified = formatDate(modifiedDate);
   }
 
   /**
@@ -457,7 +456,7 @@ public class JCRLocalCloudFile implements CloudFile {
     return changed;
   }
 
-  public String getModifiedDateFormatted() {
-    return modifiedDateFormatted;
+  public String getModified() {
+    return modified;
   }
 }
