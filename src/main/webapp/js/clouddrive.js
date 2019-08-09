@@ -1,17 +1,17 @@
 /**
- * 
+ *
   Copyright (C) 2003-2018 eXo Platform SAS.
-  
+
   This is free software; you can redistribute it and/or modify it
   under the terms of the GNU Lesser General Public License as
   published by the Free Software Foundation; either version 2.1 of
   the License, or (at your option) any later version.
-  
+
   This software is distributed in the hope that it will be useful,
   but WITHOUT ANY WARRANTY; without even the implied warranty of
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
   Lesser General Public License for more details.
-  
+
   You should have received a copy of the GNU Lesser General Public
   License along with this software; if not, write to the Free
   Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
@@ -33,7 +33,7 @@
 	 */
 	function CloudDrive() {
 		var self = this;
-		
+
 		var prefixUrl = utils.pageBaseUrl(location);
 
 		// Node workspace and path currently open in ECMS explorer view
@@ -232,7 +232,7 @@
 			});
 			return initRequest(request);
 		};
-		
+
 		var getDocument = function(workspace, path) {
 			var request = $.ajax({
 				async : false,
@@ -245,7 +245,7 @@
 				}
 			});
 			return initRequest(request);
-		}; 
+		};
 
 		var getState = function(workspace, path) {
 			var request = $.ajax({
@@ -288,7 +288,7 @@
 			});
 			return initRequest(request);
 		};
-		
+
 		var servicePost = function(url, data, contentType) {
 			var request = $.ajax({
 				async : true,
@@ -315,7 +315,7 @@
 
 			return initRequest(request);
 		};
-		
+
 		var getResourceBundle = function() {
 			var request = $.ajax({
 				async : false,
@@ -810,7 +810,7 @@
 							var changed = 0;
 							var updated = 0;
 							// updated in context node
-	
+
 							// init files by the client if applicable
 							var provider = providers[contextDrive.provider.id];
 							if (provider) {
@@ -822,7 +822,7 @@
 									}
 								});
 							}
-	
+
 							// calculate the whole drive changes and updated in current folder
 							for (fpath in drive.files) {
 								if (drive.files.hasOwnProperty(fpath)) {
@@ -832,7 +832,7 @@
 									}
 								}
 							}
-	
+
 							// count removed as changed
 							changed += drive.removed.length;
 							for (var i = 0; i < drive.removed.length; i++) {
@@ -840,7 +840,7 @@
 									updated++;
 								}
 							}
-	
+
 							// copy already cached but not synced files to the new drive
 							nextCached:
 							for (fpath in sync.contextDrive.files) {
@@ -862,16 +862,16 @@
 									}
 								}
 							}
-	
+
 							utils.log("DONE: Synchronized " + changed + " changes from Cloud Drive associated with " + nodeWorkspace + ":" + nodePath + ". " + updated + " updated in current folder.");
-	
+
 							if (sync.contextDrive == contextDrive) {
 								// using new drive in the context (only if context wasn't changed)
 								contextDrive = drive;
 							}
-	
+
 							checkAutoSynchronize();
-	
+
 							process.resolve(updated, drive);
 						} catch(err) {
 							utils.log("ERROR: synchronization error: " + (err.message ? err.message : err), err);
@@ -942,7 +942,7 @@
 				}
 			}
 		};
-		
+
 		var initClientContext = function() {
 			// invoke custom initialization of all registered providers
 			for (var pid in providers) {
@@ -990,11 +990,11 @@
 						// XXX warm-up the portal with its ajax request :)
 						serviceGet(authURL + "&ajaxRequest=true");
 					}
-					
+
 					// reset previous drive context
 					contextDrive = null;
 					excluded = {};
-					
+
 					var process = connectDrive(providerId, authURL);
 					cloudDriveUI.connectProcess(process);
 					return process;
@@ -1065,7 +1065,7 @@
 					currentNode = null;
 				}
 				cloudDrive.initContext(nodeWorkspace, nodePath);
-				
+
 				$(function() {
 					try {
 						if (nodeWorkspace && nodePath) {
@@ -1149,8 +1149,8 @@
 			}
 			return null;
 		};
-		
-		this.getFile = getFile;
+
+		/*this.getFile = getFile; */
 		this.getDocument = getDocument;
 
 		this.getCurrentNode = function() {
@@ -1198,7 +1198,7 @@
 		 * Helper for AJAX GET requests.
 		 * */
 		this.ajaxGet = serviceGet;
-		
+
 		/**
 		 * Helper for AJAX POST requests.
 		 * */
@@ -1237,10 +1237,10 @@
 			}
 			return stateProcess;
 		};
-		
+
 		/**
-		 * Return internationalization resource by a key from lazy-loaded bundle. 
-		 * If key not found or null, or if bundle cannot be loaded, then the key will be returned as a value. 
+		 * Return internationalization resource by a key from lazy-loaded bundle.
+		 * If key not found or null, or if bundle cannot be loaded, then the key will be returned as a value.
 		 */
 		this.getResource = function(key) {
 			if (!resource) {
@@ -1265,7 +1265,7 @@
 	 */
 	function CloudDriveUI() {
 		var self = this;
-		
+
 		var NOTICE_WIDTH = "380px";
 
 		// Menu items managed via uiRightClickPopupMenu menu interception
@@ -1537,6 +1537,9 @@
 			}
 		};
 
+		var updateDate = function(text, newDate) {
+      return text.replace(/\d{1,2}\.\d{1,2}\.\d{2,4}/g, newDate);
+		};
 		/**
 		 * Init file list according the actions set for each file item.
 		 */
@@ -1567,16 +1570,50 @@
 				$listView.each(function() {
 					var objectId = decodeString($(this).attr("objectid"));
 					// find all info lines with 1K size and replace the size with real value
-					$(this).find("p.fileInfoBottom:contains('- 1 KB')").each(function() {
-						var file = cloudDrive.getFile(objectId);
-						if (file) {
-							var orig = $(this).text();
-							var str = sizeString(file.size);
-							$(this).text(orig.replace("- 1 KB", str.length > 0 ? "- " + str : str));
-						}
-					});
+					// $(this).find("p.fileInfoBottom:contains('- 1 KB')").each(function() {
+					// 	var file = cloudDrive.getFile(objectId);
+					// 	if (file) {
+          //     var orig = $(this).text();
+          //     var str = sizeString(file.size);
+          //     var withUpdatedSize = orig.replace("- 1 KB", str.length > 0 ? "- " + str : str);
+          //     var modifiedDate = file.modifiedDateFormatted;
+          //     var withUpdatedDate = updateDate(withUpdatedSize,  modifiedDate);
+          //     $(this).text(withUpdatedDate);
+          //   }
+					// });
+          $(this).find("p.fileInfoBottom").each(function() {
+            var file = cloudDrive.getFile(objectId);
+            if (file) {
+              var orig = $(this).text();
+              if(orig.includes("- 1 KB")){
+                var str = sizeString(file.size);
+                var withUpdatedSize = orig.replace("- 1 KB", str.length > 0 ? "- " + str : str);
+                orig = withUpdatedSize;
+              }
+              var modifiedDate = file.modifiedDateFormatted;
+              var withUpdatedDate = updateDate(orig,  modifiedDate);
+              $(this).text(withUpdatedDate);
+            }
+          });
+
+
+					// added interceptor
+
+
+
 				});
 			}
+
+			// date
+      // if ($listView.length > 0) {
+      //   $listView.each(function() {
+      //     $(this).find("p.fileInfoBottom").each(function() {
+      //     		var orig = $(this).text();
+      //         var str = updateDate(orig, '01.04.17');
+      //         $(this).text(str);
+      //     });
+      //   });
+      // }
 
 			// Icon view
 			var $iconView = $("div.actionIconBox");
@@ -1719,7 +1756,7 @@
 						var $i = openOnIcon[index];
 						var providerClass = "uiIcon16x16CloudFile-" + drive.provider.id;
 						if (!$i.hasClass(providerClass)) {
-							$i.addClass(providerClass);				
+							$i.addClass(providerClass);
 						}
 						$a.prepend($i);
 						$a.attr("href", file.link);
@@ -1765,7 +1802,7 @@
 				}
 			}
 		};
-		
+
 		var initDocument = function() {
 			var drive = cloudDrive.getContextDrive();
 			if (drive) {
@@ -1930,7 +1967,7 @@
 						if (item) {
 							$link.click(function() {
 								initFileViewerWait(item.workspace, item.path);
-							});	
+							});
 						}
 					}
 					$link.off("mouseenter"); // disabale hover stuff on cloud files
@@ -1951,13 +1988,13 @@
 				utils.log("Error initializing activity stream " + e, e);
 			}
 		};
-		
+
 		var findMappedText = function(key, text) {
 			var regex = new RegExp(key + "[ ]*:[ ]*'([^']*)'", "g");
 			var res = regex.exec(text);
 			return res && res.length > 0 ? res[1] : null;
 		};
-		
+
 		var findItemInfo = function(jsCode) {
 			if (jsCode.indexOf("javascript") == 0) {
 				var path = findMappedText("path", jsCode);
@@ -1966,16 +2003,16 @@
 				var downloadUrl = findMappedText("downloadUrl", jsCode);
 				if (workspace && path && openUrl && downloadUrl) {
 					return {
-						workspace : workspace, 
+						workspace : workspace,
 						path : path,
 						openUrl : openUrl,
 						downloadUrl : downloadUrl
 					};
-				}	
+				}
 			}
 			return null;
 		};
-		
+
 		var initFileViewerWait = function(workspace, path) {
 			var attempts = 120; // wait 30sec
 			function tryInit() {
@@ -1992,11 +2029,11 @@
 					utils.log("Initialize cloud file viewer: " + path);
 					cloudDrive.initContext(workspace, path);
 					initFileViewer();
-				}	
+				}
 			}
 			tryInit();
 		};
-		
+
 		var initSearch = function() {
 			function initRes($res) {
 				if (!$res.data("cd-init")) {
@@ -2049,9 +2086,9 @@
 					}
 				}
 			}
-			
+
 			var MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver;
-			
+
 			// init Quick Search
 			var $searchToolbar = $("#ToolBarSearch");
 			var $quickSearchResult = $searchToolbar.find(".uiQuickSearchResult");
@@ -2081,7 +2118,7 @@
 				initSearchPage();
 				// run DOM listener to know when results will be populated to fix the urls
 				var observer = new MutationObserver(function(mutations) {
-					initSearchPage();	
+					initSearchPage();
 				});
 				observer.observe($result.get(0), {
 					subtree : false,
@@ -2466,7 +2503,7 @@
 		this.init = function() {
 			// Global things first
 			self.initGlobal();
-			
+
 			// Add Connect Drive action
 			// init CloudDriveConnectDialog popup
 			$("i[class*='uiIconEcmsConnect']").each(function() {
@@ -2515,7 +2552,7 @@
 
 			// init file view for text
 			initTextViewer();
-			
+
 			// init activity stream
 			initActivity();
 
