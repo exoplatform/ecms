@@ -125,22 +125,24 @@ public class BaseSearchTest extends BaseECMSTestCase {
 
   public void tearDown() throws Exception {
     NodeIterator iterator = null;
-    if (session.itemExists("/sites content/live/classic/web contents")) {
-      Node classicPortal = (Node)session.getItem("/sites content/live/classic/web contents");
-      iterator = classicPortal.getNodes();
-      while (iterator.hasNext()) {
-        iterator.nextNode().remove();
+    if (session.isLive()) {
+      if (session.itemExists("/sites content/live/classic/web contents")) {
+        Node classicPortal = (Node) session.getItem("/sites content/live/classic/web contents");
+        iterator = classicPortal.getNodes();
+        while (iterator.hasNext()) {
+          iterator.nextNode().remove();
+        }
       }
-    }
-    if (session.itemExists("/sites content/live/shared/documents")) {
-      Node sharedPortal = (Node)session.getItem("/sites content/live/shared/documents");
-      iterator = sharedPortal.getNodes();
-      while (iterator.hasNext()) {
-        iterator.nextNode().remove();
+      if (session.itemExists("/sites content/live/shared/documents")) {
+        Node sharedPortal = (Node) session.getItem("/sites content/live/shared/documents");
+        iterator = sharedPortal.getNodes();
+        while (iterator.hasNext()) {
+          iterator.nextNode().remove();
+        }
       }
+      session.save();
+      super.tearDown();
     }
-    session.save();
-    super.tearDown();
   }
   
   public void testNone() throws Exception{
