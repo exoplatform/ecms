@@ -11,8 +11,8 @@
       this.userId = userId;
 
       var socket = socketIO.io(notificationUrl);
-      socket.on('notification', function (data) {
-        console.log('notification ' + data);
+      socket.on("notification", function (data) {
+        console.log("notification " + data);
         self.changed = true;
       });
     }
@@ -28,7 +28,7 @@
       //   console.log("drive.state.expirationDateTime = null");
       // }
       if (nowTime >= drive.state.expirationDateTime) {
-        console.log('time to renew state');
+        console.log("time to renew state");
         renewState(process, drive);
         return;
       }
@@ -129,11 +129,11 @@
             var temp = file.previewLink;
             file.previewLink = file.link.substring(9);
             file.link = temp;
-            var $viewer = $('#CloudFileViewer');
-            if (file.type.trim().startsWith('image') && file.previewLink && file.previewLink.endsWith('/root/content')) { // image in personal account
-              console.log('OneDrive initContext, provider= ' + provider);
+            var $viewer = $("#CloudFileViewer");
+            if (file.type.trim().startsWith("image") && file.previewLink && file.previewLink.endsWith("/root/content")) { // image in personal account
+              console.log("OneDrive initContext, provider= " + provider);
               if ($viewer) {
-                if ($viewer.has('.onedriveImgFileViewer').length == 0) {
+                if ($viewer.has(".onedriveImgFileViewer").length == 0) {
                   $viewer.prepend("<p class='onedriveFileViewer'>" +
                     "<img class='onedriveImgFileViewer' src='" + file.previewLink + "'/>" +
                     "</p>"
@@ -141,20 +141,20 @@
                 }
                 // console.log('$viewer=' + $viewer.html()); // TODO this will print a bunch of markup in the console, need it?
               } else {
-                console.log('not viewer!!!!!');
+                console.log("not viewer!!!!!");
               }
-              $viewer.find('iframe').remove();
+              $viewer.find("iframe").remove();
             }
           } else if (file.link.startsWith("business=")) {
-            var $viewer = $('#CloudFileViewer');
+            var $viewer = $("#CloudFileViewer");
             file.link = file.link.substring(9);
-            $viewer.find('iframe').remove();
+            $viewer.find("iframe").remove();
           }else{ //
-              var $viewer = $('#CloudFileViewer');
-              if (file.type.trim().startsWith('image') && file.previewLink && file.previewLink.endsWith('/root/content')) { // image in personal account
-                console.log('OneDrive initContext, provider= ' + provider);
+              var $viewer = $("#CloudFileViewer");
+              if (file.type.trim().startsWith("image") && file.previewLink && file.previewLink.endsWith("/root/content")) { // image in personal account
+                console.log("OneDrive initContext, provider= " + provider);
                 if ($viewer) {
-                  if ($viewer.has('.onedriveImgFileViewer').length == 0) {
+                  if ($viewer.has(".onedriveImgFileViewer").length == 0) {
                     $viewer.prepend("<p class='onedriveFileViewer'>" +
                       "<img class='onedriveImgFileViewer' src='" + file.previewLink + "'/>" +
                       "</p>"
@@ -162,11 +162,11 @@
                   }
                   // console.log('$viewer=' + $viewer.html()); // TODO this will print a bunch of markup in the console, need it?
                 } else {
-                  console.log('not viewer!!!!!');
+                  console.log("not viewer!!!!!");
                 }
               }
               if (file.previewLink && file.previewLink.indexOf("embed") == -1) { //
-                $viewer.find('iframe').remove();
+                $viewer.find("iframe").remove();
               }
 
           }
