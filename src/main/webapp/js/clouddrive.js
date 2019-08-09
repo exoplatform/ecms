@@ -1590,7 +1590,7 @@
                 var withUpdatedSize = orig.replace("- 1 KB", str.length > 0 ? "- " + str : str);
                 orig = withUpdatedSize;
               }
-              var modifiedDate = file.modifiedDateFormatted;
+              var modifiedDate = file.modified;
               var withUpdatedDate = updateDate(orig,  modifiedDate);
               $(this).text(withUpdatedDate);
             }
