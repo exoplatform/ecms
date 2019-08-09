@@ -17,6 +17,7 @@
 package org.exoplatform.services.wcm.search.connector;
 
 import org.apache.commons.lang.LocaleUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.codehaus.groovy.util.ListHashMap;
 import org.exoplatform.commons.api.search.data.SearchContext;
 import org.exoplatform.commons.api.search.data.SearchResult;
@@ -99,6 +100,9 @@ public class FileSearchServiceConnector extends ElasticSearchServiceConnector {
     }
 
     String lang = searchContext.getParamValue(SearchContext.RouterParams.LANG.create());
+    if (StringUtils.isBlank(lang)) {
+      lang = Locale.getDefault().getLanguage();
+    }
     String detail = driveName + getFormattedFileSize(fileSize) + " - " + getFormattedDate(searchResult.getDate(), lang);
 
     SearchResult ecmsSearchResult = new EcmsSearchResult(getUrl(nodePath),
@@ -231,6 +235,10 @@ public class FileSearchServiceConnector extends ElasticSearchServiceConnector {
       }
 
       DriveData drive = documentService.getDriveOfNode(nodePath);
+      if (drive == null) {
+        LOG.warn("Can't find associated drive of node with path '{}'. No breadcrumb will be returned", nodePath);
+        return uris;
+      }
 
       String nodePathFromDrive = nodePath;
 
