@@ -116,7 +116,6 @@ public class DriveService implements ResourceContainer {
   @GET
   @RolesAllowed("users")
   public Response getDrive(@Context UriInfo uriInfo, @QueryParam("workspace") String workspace, @QueryParam("path") String path) {
-
     if (workspace != null) {
       if (path != null) {
         return readDrive(workspace, path, false);
@@ -143,7 +142,6 @@ public class DriveService implements ResourceContainer {
   public Response synchronize(@Context UriInfo uriInfo,
                               @FormParam("workspace") String workspace,
                               @FormParam("path") String path) {
-
     if (workspace != null) {
       if (path != null) {
         return readDrive(workspace, path, true);
@@ -155,8 +153,7 @@ public class DriveService implements ResourceContainer {
     }
   }
 
-  // *********************************** internals
-  // *************************************
+  // *********************************** internals *************************************
 
   /**
    * Read cloud drive and optionally synchronized it before. Drive will contain
@@ -195,8 +192,7 @@ public class DriveService implements ResourceContainer {
               LOG.warn("Access to cloud drive expired, forbidden or revoked. " + err.getMessage()
                   + (cause != null ? ". " + cause.getMessage() : ""));
               // client should treat this status in special way and obtain new
-              // credentials using given
-              // provider
+              // credentials using given provider
               return Response.status(Status.FORBIDDEN).entity(local.getUser().getProvider()).build();
             } else if (err instanceof NotConnectedException) {
               LOG.warn("Cannot synchronize not connected drive. " + err.getMessage(), err);
@@ -293,12 +289,16 @@ public class DriveService implements ResourceContainer {
     }
   }
 
-  /*
-
-    Implementation taken from UIDocumentNodeList.getDatePropertyValue 13/08/2019
+  /**
+   * Format modified date.
+   *
+   * @param modifiedDate the modified date
+   * @param locale the locale
+   * @return the string
    */
   protected String formatModifiedDate(Calendar modifiedDate, Locale locale){
-    if (modifiedDate != null && locale!=null) {
+    // Implementation taken from UIDocumentNodeList.getDatePropertyValue 13/08/2019
+    if (modifiedDate != null && locale != null) {
       DateFormat dateFormat = SimpleDateFormat.getDateInstance(SimpleDateFormat.SHORT, locale);
       return dateFormat.format(modifiedDate.getTime());
     }
