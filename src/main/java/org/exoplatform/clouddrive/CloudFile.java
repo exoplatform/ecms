@@ -19,6 +19,7 @@
 package org.exoplatform.clouddrive;
 
 import java.util.Calendar;
+import java.util.Locale;
 
 /**
  * General abstraction of a cloud file.
@@ -137,5 +138,10 @@ public interface CloudFile {
    * @return <code>true</code> if it is a folder, <code>false</code> otherwise
    */
   boolean isFolder();
+
+
+  String getModified();
+
+  void setModified(String modified);
 
 }

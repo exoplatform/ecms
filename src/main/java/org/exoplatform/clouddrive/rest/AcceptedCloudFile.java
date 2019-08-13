@@ -156,6 +156,16 @@ public class AcceptedCloudFile implements CloudFile {
     return false;
   }
 
+  @Override
+  public String getModified() {
+    return null;
+  }
+
+  @Override
+  public void setModified(String modified) {
+    throw new UnsupportedOperationException();
+  }
+
   /**
    * {@inheritDoc}
    */

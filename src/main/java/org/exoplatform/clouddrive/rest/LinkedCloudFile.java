@@ -18,11 +18,16 @@
  */
 package org.exoplatform.clouddrive.rest;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Locale;
 
 import javax.jcr.Node;
 
 import org.exoplatform.clouddrive.CloudFile;
+import org.exoplatform.portal.webui.util.Util;
+import org.exoplatform.portal.webui.workspace.UIPortalApplication;
 
 /**
  * Wraps fields from another {@link CloudFile} and replace its path with a path
@@ -82,6 +87,7 @@ public class LinkedCloudFile implements CloudFile {
 
   /** The is symlink. */
   private final boolean            isSymlink;
+  private String modified;
 
   /**
    * Instantiates a new linked cloud file.
@@ -106,6 +112,17 @@ public class LinkedCloudFile implements CloudFile {
     this.path = path;
     this.size = file.getSize();
     this.isSymlink = true;
+//    this.modified = formatDate(modifiedDate);
+
+  }
+
+  public String formatDate(Calendar modifiedDate){
+    if (modifiedDate != null) {
+      Locale locale = Util.getUIPortal().getAncestorOfType(UIPortalApplication.class).getLocale();
+      DateFormat dateFormat = SimpleDateFormat.getDateInstance(SimpleDateFormat.SHORT, locale);
+      return dateFormat.format(modifiedDate.getTime());
+    }
+    return "";
   }
 
   /**
@@ -206,6 +223,16 @@ public class LinkedCloudFile implements CloudFile {
    */
   public boolean isFolder() {
     return folder;
+  }
+
+  @Override
+  public String getModified() {
+    return modified;
+  }
+
+  @Override
+  public void setModified(String modified) {
+    this.modified = modified;
   }
 
   /**

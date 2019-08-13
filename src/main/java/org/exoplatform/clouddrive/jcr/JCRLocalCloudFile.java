@@ -84,6 +84,8 @@ public class JCRLocalCloudFile implements CloudFile {
   /** The changed. */
   private final transient boolean  changed;
 
+  private String                   modified;
+
   /**
    * Local cloud file or folder (full internal constructor).
    *
@@ -139,6 +141,7 @@ public class JCRLocalCloudFile implements CloudFile {
     this.size = size;
     this.node = node;
     this.changed = changed;
+    //    this.modified = formatDate(modifiedDate);
   }
 
   /**
@@ -250,9 +253,8 @@ public class JCRLocalCloudFile implements CloudFile {
   }
 
   /**
-   * Local cloud folder (without edit, preview, thumbnail links, type mode and
-   * size).
-   * 
+   * Local cloud folder (without edit, preview, thumbnail links, type mode and size).
+   *
    * @param path {@link String}
    * @param id {@link String}
    * @param title {@link String}
@@ -419,14 +421,12 @@ public class JCRLocalCloudFile implements CloudFile {
   }
 
   /**
-   * JCR Node that represent this Cloud File in the storage. Returned
-   * {@link Node} instance can be treated as valid only in a short time span -
-   * just after the operation on the file internally in
-   * {@link JCRLocalCloudDrive}. Otherwise need check does the node's session
-   * valid (not expired for example).<br>
-   * Take in account that the node can be obtained via a system session and so
-   * all changes over it will be done on behalf of system user.
-   * 
+   * JCR Node that represent this Cloud File in the storage. Returned {@link Node} instance can be treated as valid only in a
+   * short time span - just after the operation on the file internally in {@link JCRLocalCloudDrive}. Otherwise need check does
+   * the node's session valid (not expired for example).<br>
+   * Take in account that the node can be obtained via a system session and so all changes over it will be done on behalf of
+   * system user.
+   *
    * @return the node that represent this Cloud File in the storage.
    */
   public Node getNode() {
@@ -434,12 +434,21 @@ public class JCRLocalCloudFile implements CloudFile {
   }
 
   /**
-   * Indicate does this Cloud File was changed (<code>true</code>) or read
-   * (<code>false</code>) from the storage. Used internally only!
-   * 
+   * Indicate does this Cloud File was changed (<code>true</code>) or read (<code>false</code>) from the storage. Used internally
+   * only!
+   *
    * @return the changed flag
    */
   public boolean isChanged() {
     return changed;
+  }
+
+  public String getModified() {
+    return modified;
+  }
+
+  @Override
+  public void setModified(String modified) {
+    this.modified = modified;
   }
 }
