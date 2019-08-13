@@ -18,10 +18,9 @@
  */
 package org.exoplatform.clouddrive.rest;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.*;
 import java.util.concurrent.ExecutionException;
 
 import javax.annotation.security.RolesAllowed;
@@ -32,6 +31,7 @@ import javax.jcr.NodeIterator;
 import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -57,6 +57,8 @@ import org.exoplatform.clouddrive.NotCloudFileException;
 import org.exoplatform.clouddrive.NotConnectedException;
 import org.exoplatform.clouddrive.NotYetCloudFileException;
 import org.exoplatform.clouddrive.RefreshAccessException;
+import org.exoplatform.portal.webui.util.Util;
+import org.exoplatform.portal.webui.workspace.UIPortalApplication;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
@@ -291,6 +293,18 @@ public class DriveService implements ResourceContainer {
     }
   }
 
+  /*
+
+    Implementation taken from UIDocumentNodeList.getDatePropertyValue 13/08/2019
+   */
+  protected String formatModifiedDate(Calendar modifiedDate, Locale locale){
+    if (modifiedDate != null && locale!=null) {
+      DateFormat dateFormat = SimpleDateFormat.getDateInstance(SimpleDateFormat.SHORT, locale);
+      return dateFormat.format(modifiedDate.getTime());
+    }
+    return "";
+  }
+
   /**
    * Return file information. Returned file may be not yet created in cloud
    * (accepted for creation), then this service response will be with status
@@ -304,10 +318,11 @@ public class DriveService implements ResourceContainer {
   @GET
   @Path("/file/")
   @RolesAllowed("users")
-  public Response getFile(@Context UriInfo uriInfo, @QueryParam("workspace") String workspace, @QueryParam("path") String path) {
+  public Response getFile(@Context HttpServletRequest request, @Context UriInfo uriInfo, @QueryParam("workspace") String workspace, @QueryParam("path") String path) {
     if (workspace != null) {
       if (path != null) {
         try {
+          Locale locale = request.getLocale();
           CloudDrive local = cloudDrives.findDrive(workspace, path);
           if (local != null) {
             try {
@@ -315,6 +330,7 @@ public class DriveService implements ResourceContainer {
               if (!file.getPath().equals(path)) {
                 file = new LinkedCloudFile(file, path); // it's symlink
               }
+              file.setModified(formatModifiedDate(file.getModifiedDate(),locale));
               return Response.ok().entity(file).build();
             } catch (NotYetCloudFileException e) {
               return Response.status(Status.ACCEPTED).entity(new AcceptedCloudFile(path)).build();
