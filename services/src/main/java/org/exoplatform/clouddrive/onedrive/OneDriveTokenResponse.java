@@ -2,6 +2,7 @@ package org.exoplatform.clouddrive.onedrive;
 
 import com.google.gson.annotations.SerializedName;
 
+// TODO javadocs
 class OneDriveTokenResponse {
   @SerializedName("access_token")
   private String token;

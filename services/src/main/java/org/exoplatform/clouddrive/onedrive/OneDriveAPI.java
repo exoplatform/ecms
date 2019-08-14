@@ -1,14 +1,24 @@
 package org.exoplatform.clouddrive.onedrive;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.Charset;
-import java.util.*;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
+import java.util.StringJoiner;
 import java.util.stream.Collectors;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -18,7 +28,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
-import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -33,18 +42,32 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.microsoft.graph.logger.ILogger;
 import com.microsoft.graph.logger.LoggerLevel;
-import com.microsoft.graph.models.extensions.*;
+import com.microsoft.graph.models.extensions.DriveItem;
+import com.microsoft.graph.models.extensions.DriveItemUploadableProperties;
+import com.microsoft.graph.models.extensions.FileSystemInfo;
+import com.microsoft.graph.models.extensions.Folder;
+import com.microsoft.graph.models.extensions.IGraphServiceClient;
+import com.microsoft.graph.models.extensions.ItemReference;
+import com.microsoft.graph.models.extensions.SharingLink;
+import com.microsoft.graph.models.extensions.Subscription;
+import com.microsoft.graph.models.extensions.User;
 import com.microsoft.graph.options.HeaderOption;
 import com.microsoft.graph.options.QueryOption;
-import com.microsoft.graph.requests.extensions.*;
+import com.microsoft.graph.requests.extensions.GraphServiceClient;
+import com.microsoft.graph.requests.extensions.IDriveItemCollectionPage;
+import com.microsoft.graph.requests.extensions.IDriveItemCollectionRequestBuilder;
+import com.microsoft.graph.requests.extensions.IDriveItemDeltaCollectionPage;
+import com.microsoft.graph.requests.extensions.IDriveItemDeltaCollectionRequestBuilder;
 
 import org.exoplatform.clouddrive.CloudDriveException;
-import org.exoplatform.clouddrive.CloudProviderException;
 import org.exoplatform.clouddrive.RefreshAccessException;
 import org.exoplatform.clouddrive.oauth2.UserToken;
 import org.exoplatform.clouddrive.utils.ChunkIterator;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+
+// TODO move all helpful classes to internal of OneDriveAPI
+// TODO javadocs
 
 class Scopes {
   static final String FilesReadAll            = "https://graph.microsoft.com/Files.Read.All";
@@ -122,7 +145,6 @@ public class OneDriveAPI {
       }
       return notificationUrl;
     }
-
   }
 
   private class OneDriveToken {
@@ -200,7 +222,7 @@ public class OneDriveAPI {
       params.add(new BasicNameValuePair("redirect_uri", redirectUrl));
       params.add(new BasicNameValuePair("code", code));
     } else {
-      return null;
+      return null; // TODO exception here
     }
     params.add(new BasicNameValuePair("grant_type", grantType));
     params.add(new BasicNameValuePair("client_secret", clientSecret));
@@ -225,7 +247,7 @@ public class OneDriveAPI {
     } else {
       LOG.error("failed to get access token");
     }
-    return null;
+    return null; // TODO exception here
   }
 
   private OneDriveTokenResponse aquireAccessToken(String code, String redirectUrl) throws IOException {
@@ -242,7 +264,7 @@ public class OneDriveAPI {
     } else if (type.equalsIgnoreCase("view")) {
       return graphClient.me().drive().items(itemId).createLink("view", "anonymous").buildRequest().post().link;
     }
-    throw new OneDriveException("type must be either view or embed");
+    throw new OneDriveException("Link type must be either view or embed");
   }
 
   public final static String SCOPES = scopes();
@@ -295,7 +317,7 @@ public class OneDriveAPI {
               long expirationTime,
               String redirectUrl) throws CloudDriveException, IOException {
     if (LOG.isDebugEnabled()) {
-      LOG.debug("one drive api by refresh token");
+      LOG.debug(">> Creating OneDrive API by refresh token for client {}", clientId);
     }
     this.clientId = clientId;
     this.clientSecret = clientSecret;
@@ -396,7 +418,7 @@ public class OneDriveAPI {
 
   public DriveItem copy(String parentId, String fileName, String fileId, boolean isFile) throws RefreshAccessException, OneDriveException {
     if (LOG.isDebugEnabled()) {
-      LOG.debug("try copy");
+      LOG.debug(">> copy {}->{}/{}", fileName, parentId, fileName);
     }
     String request = "{\n" + "      \"parentReference\" : {\n" + "        \"id\" : \"" + parentId + "\"\n" + "    },\n"
             + "      \"name\" : \"" + fileName + "\"\n" +
@@ -423,16 +445,16 @@ public class OneDriveAPI {
       try {
         responseBody = getCopyResponseBody(location);
       } catch (IOException e) {
-        throw new OneDriveException("Unable to retrieve copy response body ", e);
+        throw new OneDriveException("Unable to retrieve copy response body for " + fileName, e);
       }
       status = parser.parse(responseBody.trim()).getAsJsonObject().get("status").getAsString();
       try {
         Thread.sleep(1000);
       } catch (InterruptedException e) {
-        LOG.warn("Thread interrupted while sleeping", e);
+        LOG.warn("Thread interrupted while sleeping on copy of " + fileName, e);
       }
       if (LOG.isDebugEnabled()) {
-        LOG.debug("opy status = " + status);
+        LOG.debug(">> Copy status: {} for {}", status, fileName);
       }
     } while (!status.equalsIgnoreCase("failed") && !status.equalsIgnoreCase("completed"));
 
@@ -444,7 +466,7 @@ public class OneDriveAPI {
       if (!fileNames.contains(fileName)) { // This means that the error is not
         // related to the fact that a file
         // with the same name exists.
-        throw new OneDriveException("error occurred during the copy process: parentId " + parentId + ", fileName " + fileName + ", fileId " + fileId);
+        throw new OneDriveException("Error copying file " + fileName + "[" + fileId + "] to parent " + parentId);
       }
       String newItemName = generateItemName(fileName, 1, isFile);
       for (int i = 2; i <= fileNames.size() && fileNames.contains(newItemName); i++) {
@@ -458,16 +480,16 @@ public class OneDriveAPI {
   }
 
   private String generateItemName(String name, int number, boolean isFile) {
-    if (name == null)
-      return null;
-
-    int lastDotPosition = name.lastIndexOf(".");
-    if (!isFile || lastDotPosition == -1) {
-      return name + " " + number;
+    if (name != null) {
+      int lastDotPosition = name.lastIndexOf(".");
+      if (!isFile || lastDotPosition == -1) {
+        return name + " " + number;
+      }
+      String baseName = name.substring(0, lastDotPosition);
+      String ext = name.substring(lastDotPosition);
+      return baseName + " " + number + ext;
     }
-    String baseName = name.substring(0, lastDotPosition);
-    String ext = name.substring(lastDotPosition);
-    return baseName + " " + number + ext;
+    return null; // TODO error here
   }
 
   private String getCopyResponseBody(String location) throws IOException {
@@ -479,37 +501,35 @@ public class OneDriveAPI {
   }
 
   public IDriveItemCollectionPage getDriveItemCollectionPage(String folderId) {
-
-    IDriveItemCollectionPage iDriveItemCollectionPage = null;
+    IDriveItemCollectionPage collectionPage;
     if (folderId == null) {
-      iDriveItemCollectionPage = graphClient.me().drive().root().children().buildRequest().get();
+      collectionPage = graphClient.me().drive().root().children().buildRequest().get();
     } else {
-      iDriveItemCollectionPage = graphClient.me().drive().items(folderId).children().buildRequest().get();
+      collectionPage = graphClient.me().drive().items(folderId).children().buildRequest().get();
     }
-    return iDriveItemCollectionPage;
+    return collectionPage;
   }
 
   private List<DriveItem> getFiles(String folderId, String startsWith) {
-
-    IDriveItemCollectionPage iDriveItemCollectionPage;
+    IDriveItemCollectionPage collectionPage;
     final QueryOption deltaTokenQuery = new QueryOption("filter", "startswith(name,'" + startsWith + "')");
     if (folderId == null) {
-      iDriveItemCollectionPage = graphClient.me()
+      collectionPage = graphClient.me()
               .drive()
               .root()
               .children()
               .buildRequest(Collections.singletonList(deltaTokenQuery))
               .get();
     } else {
-      iDriveItemCollectionPage = graphClient.me()
+      collectionPage = graphClient.me()
               .drive()
               .items(folderId)
               .children()
               .buildRequest(Collections.singletonList(deltaTokenQuery))
               .get();
     }
-    List<DriveItem> driveItems = new ArrayList<>(iDriveItemCollectionPage.getCurrentPage());
-    IDriveItemCollectionRequestBuilder nextPage = iDriveItemCollectionPage.getNextPage();
+    List<DriveItem> driveItems = new ArrayList<>(collectionPage.getCurrentPage());
+    IDriveItemCollectionRequestBuilder nextPage = collectionPage.getNextPage();
     while (nextPage != null) {
       IDriveItemCollectionPage nextPageCollection = nextPage.buildRequest().get();
       driveItems.addAll(nextPageCollection.getCurrentPage());
@@ -519,17 +539,16 @@ public class OneDriveAPI {
   }
 
   public List<DriveItem> getFiles(String folderId) {
-
-    IDriveItemCollectionPage iDriveItemCollectionPage = null;
+    IDriveItemCollectionPage collectionPage;
     if (folderId == null) {
-      iDriveItemCollectionPage = graphClient.me().drive().root().children().buildRequest().get();
+      collectionPage = graphClient.me().drive().root().children().buildRequest().get();
     } else {
-      iDriveItemCollectionPage = graphClient.me().drive().items(folderId).children().buildRequest().get();
+      collectionPage = graphClient.me().drive().items(folderId).children().buildRequest().get();
     }
 
-    List<DriveItem> driveItems = new ArrayList<>(iDriveItemCollectionPage.getCurrentPage());
+    List<DriveItem> driveItems = new ArrayList<>(collectionPage.getCurrentPage());
 
-    IDriveItemCollectionRequestBuilder nextPage = iDriveItemCollectionPage.getNextPage();
+    IDriveItemCollectionRequestBuilder nextPage = collectionPage.getNextPage();
     while (nextPage != null) {
       IDriveItemCollectionPage nextPageCollection = nextPage.buildRequest().get();
       driveItems.addAll(nextPageCollection.getCurrentPage());
@@ -566,9 +585,10 @@ public class OneDriveAPI {
     }
 
     if (LOG.isDebugEnabled()) {
-      LOG.debug("response message: " + fileSendResponse.responseMessage);
-      LOG.debug("response code = " + fileSendResponse.responseCode);
-      LOG.debug("response data" + fileSendResponse.data);
+      LOG.debug(">> sendFile response \nmessage: {} \ncode: {} \ndata: {}",
+                fileSendResponse.responseMessage,
+                fileSendResponse.responseCode,
+                fileSendResponse.data);
     }
 
     return fileSendResponse;
@@ -607,8 +627,8 @@ public class OneDriveAPI {
             .getAsString();
   }
 
+  @Deprecated
   private String getUploadUrl(String path, DriveItemUploadableProperties driveItemUploadableProperties) throws UnsupportedEncodingException {
-
     return uploadUrlConflictRenameWrapper(path, driveItemUploadableProperties);
   }
 
@@ -622,6 +642,7 @@ public class OneDriveAPI {
     return request.startsWith("?") ? request.substring(1) : request;
   }
 
+  // TODO cleanup
 //  public DriveItem getItemByPath(String path)  {
 //    try {
 //      return  graphClient.me().drive().root().itemWithPath(encodeUrlPath(path)).buildRequest().get();
@@ -706,9 +727,18 @@ public class OneDriveAPI {
         return driveItem;
       }
     }
-    throw new OneDriveException("failed to upload file: " + "ResponseCode: " + fileSendResponse.responseCode + " "
+    if (LOG.isDebugEnabled()) {
+      LOG.debug(">> insertUpdate response \nmessage: {} \ncode: {} \ndata: {}",
+                fileSendResponse.responseMessage,
+                fileSendResponse.responseCode,
+                fileSendResponse.data);
+    }
+    // TODO exception message should be clear for admins who will read the log, 
+    // it should be helpful to fix the problems or assist an user in solving that, 
+    // but such data as response code or data better to log directly here and throw 
+    // with a message that tells about the file
+    throw new OneDriveException("Failed to upload file: ResponseCode: " + fileSendResponse.responseCode + " "
             + "message: " + fileSendResponse.responseMessage + "date: " + fileSendResponse.data);
-
   }
 
   public DriveItem insert(String parentId, String fileName, Calendar created, Calendar modified, InputStream inputStream, String conflictBehavior) throws OneDriveException {
@@ -721,6 +751,7 @@ public class OneDriveAPI {
       updateUploadUrl = getInsertUploadUrl(parentId, fileName, conflictBehavior);
       return insertUpdate(updateUploadUrl, inputStream);
     } catch (Exception e) {
+      // TODO what exactly errors come to here? Clarify and throws with contextual message (file name etc)
       throw new OneDriveException(e);
     }
   }
@@ -731,6 +762,7 @@ public class OneDriveAPI {
       String updateUploadUrl = updateUploadUrl(itemId);
       return insertUpdate(updateUploadUrl, inputStream);
     } catch (Exception ex) {
+      // TODO what exactly errors come to here? Clarify and throws with contextual message (file name etc)
       throw new OneDriveException(ex);
     }
   }
@@ -806,15 +838,15 @@ public class OneDriveAPI {
   }
 
   public IDriveItemDeltaCollectionPage delta(String deltaToken) {
-    IDriveItemDeltaCollectionPage iDriveItemDeltaCollectionPage = null;
+    IDriveItemDeltaCollectionPage collectionPage;
     if (isDeltaTokenExpired(deltaToken)) {
       deltaToken = null;
     }
     if (deltaToken == null || deltaToken.isEmpty() || deltaToken.toUpperCase().trim().equals("ALL")) {
-      iDriveItemDeltaCollectionPage = graphClient.me().drive().root().delta().buildRequest().get();
+      collectionPage = graphClient.me().drive().root().delta().buildRequest().get();
     } else {
       final QueryOption deltaTokenQuery = new QueryOption("token", deltaToken);
-      iDriveItemDeltaCollectionPage = graphClient.me()
+      collectionPage = graphClient.me()
               .drive()
               .root()
               .delta()
@@ -822,7 +854,7 @@ public class OneDriveAPI {
               .get();
     }
 
-    return iDriveItemDeltaCollectionPage;
+    return collectionPage;
   }
 
   static class HashSetCompatibleDriveItem {
@@ -885,33 +917,30 @@ public class OneDriveAPI {
 
   class ChildIterator extends ChunkIterator<DriveItem> {
 
-    IDriveItemCollectionPage driveItemCollectionPage;
+    IDriveItemCollectionPage collectionPage;
 
     ChildIterator(String folderId) {
-
-      this.driveItemCollectionPage = getDriveItemCollectionPage(folderId);
+      this.collectionPage = getDriveItemCollectionPage(folderId);
       iter = nextChunk();
-
     }
 
     @Override
     protected Iterator<DriveItem> nextChunk() {
-      List<DriveItem> driveItems = new ArrayList<>(driveItemCollectionPage.getCurrentPage());
+      List<DriveItem> driveItems = new ArrayList<>(collectionPage.getCurrentPage());
       available(driveItems.size());
-      IDriveItemCollectionRequestBuilder nextPage = driveItemCollectionPage.getNextPage();
+      IDriveItemCollectionRequestBuilder nextPage = collectionPage.getNextPage();
       if (nextPage != null) {
-        driveItemCollectionPage = nextPage.buildRequest().get();
+        collectionPage = nextPage.buildRequest().get();
       } else {
-        driveItemCollectionPage = null;
+        collectionPage = null;
       }
       return driveItems.iterator();
     }
 
     @Override
     protected boolean hasNextChunk() {
-      return driveItemCollectionPage != null;
+      return collectionPage != null;
     }
-
   }
 
   private String extractDeltaToken(String deltaLink) {
@@ -927,13 +956,13 @@ public class OneDriveAPI {
     ChangesIterator(String deltaToken) {
       this.deltaToken = deltaToken;
       this.deltaCollectionPage = delta(deltaToken);
-      iter = nextChunk();
+      this.iter = nextChunk();
     }
 
     @Override
     protected Iterator<DriveItem> nextChunk() {
       if (LOG.isDebugEnabled()) {
-        LOG.debug("ChangesIterator nextChunk()");
+        LOG.debug(">> ChangesIterator nextChunk");
       }
       final List<DriveItem> changes = new ArrayList<>();
       IDriveItemDeltaCollectionRequestBuilder nextPage;
@@ -947,7 +976,7 @@ public class OneDriveAPI {
       }
 
       if (LOG.isDebugEnabled()) {
-        LOG.debug("ChangesIterator nextChunk()   available " + changes.size());
+        LOG.debug("ChangesIterator nextChunk available {}", changes.size());
       }
       available(changes.size());
       return changes.iterator();
