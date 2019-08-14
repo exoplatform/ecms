@@ -18,47 +18,22 @@
  */
 package org.exoplatform.clouddrive.rest;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.ExecutionException;
 
 import javax.annotation.security.RolesAllowed;
-import javax.jcr.AccessDeniedException;
-import javax.jcr.LoginException;
-import javax.jcr.Node;
-import javax.jcr.NodeIterator;
-import javax.jcr.PathNotFoundException;
-import javax.jcr.RepositoryException;
-import javax.jcr.Session;
+import javax.jcr.*;
 import javax.servlet.http.HttpServletRequest;
-import javax.ws.rs.FormParam;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
+import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.core.Response.ResponseBuilder;
 import javax.ws.rs.core.Response.Status;
-import javax.ws.rs.core.UriInfo;
 
-import org.exoplatform.clouddrive.CloudDrive;
+import org.exoplatform.clouddrive.*;
 import org.exoplatform.clouddrive.CloudDrive.Command;
-import org.exoplatform.clouddrive.CloudDriveException;
-import org.exoplatform.clouddrive.CloudDriveMessage;
-import org.exoplatform.clouddrive.CloudDriveService;
-import org.exoplatform.clouddrive.CloudFile;
-import org.exoplatform.clouddrive.CloudProvider;
-import org.exoplatform.clouddrive.DriveRemovedException;
-import org.exoplatform.clouddrive.NotCloudFileException;
-import org.exoplatform.clouddrive.NotConnectedException;
-import org.exoplatform.clouddrive.NotYetCloudFileException;
-import org.exoplatform.clouddrive.RefreshAccessException;
-import org.exoplatform.portal.webui.util.Util;
-import org.exoplatform.portal.webui.workspace.UIPortalApplication;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
@@ -293,18 +268,6 @@ public class DriveService implements ResourceContainer {
     }
   }
 
-  /*
-
-    Implementation taken from UIDocumentNodeList.getDatePropertyValue 13/08/2019
-   */
-  protected String formatModifiedDate(Calendar modifiedDate, Locale locale){
-    if (modifiedDate != null && locale!=null) {
-      DateFormat dateFormat = SimpleDateFormat.getDateInstance(SimpleDateFormat.SHORT, locale);
-      return dateFormat.format(modifiedDate.getTime());
-    }
-    return "";
-  }
-
   /**
    * Return file information. Returned file may be not yet created in cloud
    * (accepted for creation), then this service response will be with status
@@ -330,7 +293,9 @@ public class DriveService implements ResourceContainer {
               if (!file.getPath().equals(path)) {
                 file = new LinkedCloudFile(file, path); // it's symlink
               }
-              file.setModified(formatModifiedDate(file.getModifiedDate(),locale));
+              if (UserCloudFile.class.isAssignableFrom(file.getClass())) {
+                UserCloudFile.class.cast(file).initModified(file.getModifiedDate(),locale);
+              }
               return Response.ok().entity(file).build();
             } catch (NotYetCloudFileException e) {
               return Response.status(Status.ACCEPTED).entity(new AcceptedCloudFile(path)).build();

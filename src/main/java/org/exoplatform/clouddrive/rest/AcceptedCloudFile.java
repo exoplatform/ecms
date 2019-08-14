@@ -161,10 +161,7 @@ public class AcceptedCloudFile implements CloudFile {
     return null;
   }
 
-  @Override
-  public void setModified(String modified) {
-    throw new UnsupportedOperationException();
-  }
+
 
   /**
    * {@inheritDoc}
