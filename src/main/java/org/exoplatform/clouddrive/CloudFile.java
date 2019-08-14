@@ -19,7 +19,6 @@
 package org.exoplatform.clouddrive;
 
 import java.util.Calendar;
-import java.util.Locale;
 
 /**
  * General abstraction of a cloud file.
@@ -141,7 +140,5 @@ public interface CloudFile {
 
 
   String getModified();
-
-  void setModified(String modified);
 
 }

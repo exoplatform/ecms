@@ -26,8 +26,7 @@ import java.util.Locale;
 import javax.jcr.Node;
 
 import org.exoplatform.clouddrive.CloudFile;
-import org.exoplatform.portal.webui.util.Util;
-import org.exoplatform.portal.webui.workspace.UIPortalApplication;
+import org.exoplatform.clouddrive.UserCloudFile;
 
 /**
  * Wraps fields from another {@link CloudFile} and replace its path with a path
@@ -39,7 +38,7 @@ import org.exoplatform.portal.webui.workspace.UIPortalApplication;
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
  * @version $Id: LinkedCloudFile.java 00000 Jan 24, 2013 pnedonosko $
  */
-public class LinkedCloudFile implements CloudFile {
+public class LinkedCloudFile implements CloudFile, UserCloudFile {
 
   /** The id. */
   private final String             id;
@@ -112,19 +111,8 @@ public class LinkedCloudFile implements CloudFile {
     this.path = path;
     this.size = file.getSize();
     this.isSymlink = true;
-//    this.modified = formatDate(modifiedDate);
-
   }
-
-  public String formatDate(Calendar modifiedDate){
-    if (modifiedDate != null) {
-      Locale locale = Util.getUIPortal().getAncestorOfType(UIPortalApplication.class).getLocale();
-      DateFormat dateFormat = SimpleDateFormat.getDateInstance(SimpleDateFormat.SHORT, locale);
-      return dateFormat.format(modifiedDate.getTime());
-    }
-    return "";
-  }
-
+  
   /**
    * Checks if is symlink.
    *
@@ -230,10 +218,6 @@ public class LinkedCloudFile implements CloudFile {
     return modified;
   }
 
-  @Override
-  public void setModified(String modified) {
-    this.modified = modified;
-  }
 
   /**
    * {@inheritDoc}
@@ -250,4 +234,15 @@ public class LinkedCloudFile implements CloudFile {
     return size;
   }
 
+  /*
+   * Implementation taken from UIDocumentNodeList.getDatePropertyValue 13/08/2019
+   */
+  @Override
+  public void initModified(Calendar modifiedDate, Locale locale) {
+    if (modifiedDate != null && locale != null) {
+      DateFormat dateFormat = SimpleDateFormat.getDateInstance(SimpleDateFormat.SHORT, locale);
+      this.modified = dateFormat.format(modifiedDate.getTime());
+    }
+    this.modified = "";
+  }
 }
