@@ -18,15 +18,12 @@
  */
 package org.exoplatform.clouddrive.rest;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Locale;
 
 import javax.jcr.Node;
 
 import org.exoplatform.clouddrive.CloudFile;
-import org.exoplatform.clouddrive.UserCloudFile;
+import org.exoplatform.clouddrive.LocalCloudFile;
 
 /**
  * Wraps fields from another {@link CloudFile} and replace its path with a path
@@ -38,7 +35,7 @@ import org.exoplatform.clouddrive.UserCloudFile;
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
  * @version $Id: LinkedCloudFile.java 00000 Jan 24, 2013 pnedonosko $
  */
-public class LinkedCloudFile implements CloudFile, UserCloudFile {
+public class LinkedCloudFile extends LocalCloudFile {
 
   /** The id. */
   private final String             id;
@@ -86,7 +83,6 @@ public class LinkedCloudFile implements CloudFile, UserCloudFile {
 
   /** The is symlink. */
   private final boolean            isSymlink;
-  private String modified;
 
   /**
    * Instantiates a new linked cloud file.
@@ -213,10 +209,6 @@ public class LinkedCloudFile implements CloudFile, UserCloudFile {
     return folder;
   }
 
-  @Override
-  public String getModified() {
-    return modified;
-  }
 
 
   /**
@@ -232,17 +224,5 @@ public class LinkedCloudFile implements CloudFile, UserCloudFile {
   @Override
   public long getSize() {
     return size;
-  }
-
-  /*
-   * Implementation taken from UIDocumentNodeList.getDatePropertyValue 13/08/2019
-   */
-  @Override
-  public void initModified(Calendar modifiedDate, Locale locale) {
-    if (modifiedDate != null && locale != null) {
-      DateFormat dateFormat = SimpleDateFormat.getDateInstance(SimpleDateFormat.SHORT, locale);
-      this.modified = dateFormat.format(modifiedDate.getTime());
-    }
-    this.modified = "";
   }
 }

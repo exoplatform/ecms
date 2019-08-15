@@ -18,20 +18,16 @@
  */
 package org.exoplatform.clouddrive.jcr;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Locale;
 
 import javax.jcr.Node;
 
-import org.exoplatform.clouddrive.CloudFile;
-import org.exoplatform.clouddrive.UserCloudFile;
+import org.exoplatform.clouddrive.LocalCloudFile;
 
 /**
  * A POJO providing information about a cloud file stored in JCR.
  */
-public class JCRLocalCloudFile implements CloudFile, UserCloudFile {
+public class JCRLocalCloudFile extends LocalCloudFile {
 
   /**
    * Folder size by default is -1.
@@ -88,8 +84,6 @@ public class JCRLocalCloudFile implements CloudFile, UserCloudFile {
   /** The changed. */
   private final transient boolean  changed;
 
-
-  private String modified;
 
   /**
    * Local cloud file or folder (full internal constructor).
@@ -450,19 +444,4 @@ public class JCRLocalCloudFile implements CloudFile, UserCloudFile {
     return changed;
   }
 
-  public String getModified() {
-    return modified;
-  }
-
-  /*
-   * Implementation taken from UIDocumentNodeList.getDatePropertyValue 13/08/2019
-   */
-  @Override
-  public void initModified(Calendar modifiedDate, Locale locale) {
-    if (modifiedDate != null && locale != null) {
-      DateFormat dateFormat = SimpleDateFormat.getDateInstance(SimpleDateFormat.SHORT, locale);
-      this.modified = dateFormat.format(modifiedDate.getTime());
-    }
-    this.modified = "";
-  }
 }
