@@ -55,11 +55,11 @@ import org.exoplatform.clouddrive.CloudDriveService;
 import org.exoplatform.clouddrive.CloudFile;
 import org.exoplatform.clouddrive.CloudProvider;
 import org.exoplatform.clouddrive.DriveRemovedException;
+import org.exoplatform.clouddrive.LocalCloudFile;
 import org.exoplatform.clouddrive.NotCloudFileException;
 import org.exoplatform.clouddrive.NotConnectedException;
 import org.exoplatform.clouddrive.NotYetCloudFileException;
 import org.exoplatform.clouddrive.RefreshAccessException;
-import org.exoplatform.clouddrive.UserCloudFile;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
@@ -68,8 +68,7 @@ import org.exoplatform.services.log.Log;
 import org.exoplatform.services.rest.resource.ResourceContainer;
 
 /**
- * REST service providing information about providers. Created by The eXo
- * Platform SAS.
+ * REST service providing information about providers. Created by The eXo Platform SAS.
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
  * @version $Id: DriveService.java 00000 Oct 22, 2012 pnedonosko $
@@ -129,8 +128,7 @@ public class DriveService implements ResourceContainer {
   }
 
   /**
-   * Synchronized cloud drive or its file/folder and return result for client
-   * refresh.
+   * Synchronized cloud drive or its file/folder and return result for client refresh.
    *
    * @param uriInfo {@link UriInfo}
    * @param workspace {@link String} Drive Node workspace
@@ -159,13 +157,11 @@ public class DriveService implements ResourceContainer {
   // *************************************
 
   /**
-   * Read cloud drive and optionally synchronized it before. Drive will contain
-   * a file from it will asked,
+   * Read cloud drive and optionally synchronized it before. Drive will contain a file from it will asked,
    * 
    * @param workspace {@link String} Drive workspace
    * @param path {@link String} path of a Node in the Drive
-   * @param synchronize {@link Boolean} flag to synch before the read (true to
-   *          force sync)
+   * @param synchronize {@link Boolean} flag to synch before the read (true to force sync)
    * @return {@link Response} REST response
    */
   protected Response readDrive(String workspace, String path, boolean synchronize) {
@@ -294,9 +290,8 @@ public class DriveService implements ResourceContainer {
   }
 
   /**
-   * Return file information. Returned file may be not yet created in cloud
-   * (accepted for creation), then this service response will be with status
-   * ACCEPTED, otherwise it's OK response.
+   * Return file information. Returned file may be not yet created in cloud (accepted for creation), then this service response
+   * will be with status ACCEPTED, otherwise it's OK response.
    *
    * @param uriInfo the uri info
    * @param workspace {@link String} Drive Node workspace
@@ -306,7 +301,10 @@ public class DriveService implements ResourceContainer {
   @GET
   @Path("/file/")
   @RolesAllowed("users")
-  public Response getFile(@Context HttpServletRequest request, @Context UriInfo uriInfo, @QueryParam("workspace") String workspace, @QueryParam("path") String path) {
+  public Response getFile(@Context HttpServletRequest request,
+                          @Context UriInfo uriInfo,
+                          @QueryParam("workspace") String workspace,
+                          @QueryParam("path") String path) {
     if (workspace != null) {
       if (path != null) {
         try {
@@ -318,8 +316,8 @@ public class DriveService implements ResourceContainer {
               if (!file.getPath().equals(path)) {
                 file = new LinkedCloudFile(file, path); // it's symlink
               }
-              if (UserCloudFile.class.isAssignableFrom(file.getClass())) {
-                UserCloudFile.class.cast(file).initModified(file.getModifiedDate(),locale);
+              if (file instanceof LocalCloudFile) {
+                ((LocalCloudFile) file).initModified(file.getModifiedDate(), locale);
               }
               return Response.ok().entity(file).build();
             } catch (NotYetCloudFileException e) {
@@ -360,11 +358,9 @@ public class DriveService implements ResourceContainer {
   }
 
   /**
-   * Return list of files in given folder. Returned files may be not yet created
-   * in cloud (accepted for creation), then this service response will be with
-   * status ACCEPTED, otherwise it's OK response. This service will not return
-   * files for nodes that do not belong to the cloud drive associated with this
-   * path.
+   * Return list of files in given folder. Returned files may be not yet created in cloud (accepted for creation), then this
+   * service response will be with status ACCEPTED, otherwise it's OK response. This service will not return files for nodes that
+   * do not belong to the cloud drive associated with this path.
    *
    * @param uriInfo the uri info
    * @param workspace {@link String} Drive Node workspace
