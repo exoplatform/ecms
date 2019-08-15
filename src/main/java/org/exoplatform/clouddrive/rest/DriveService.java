@@ -175,7 +175,7 @@ public class DriveService implements ResourceContainer {
           try {
             Command sync = local.synchronize();
             sync.await(); // wait for sync process
-            files = sync.getFiles();
+            files = sync.getFiles(); // TODO need init Modified date for the all?
             removed = sync.getRemoved();
             messages = sync.getMessages();
           } catch (InterruptedException e) {
@@ -404,6 +404,7 @@ public class DriveService implements ResourceContainer {
                   if (!file.getPath().equals(filePath)) {
                     file = new LinkedCloudFile(file, filePath); // it's symlink
                   }
+                  // TODO need init Modified date for the all?
                   files.add(file);
                 } // not a cloud file - skip it
               } catch (NotYetCloudFileException e) {
