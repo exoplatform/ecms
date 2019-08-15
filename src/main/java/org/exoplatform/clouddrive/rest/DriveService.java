@@ -536,8 +536,8 @@ public class DriveService implements ResourceContainer {
   }
 
   private void initModified(CloudFile file, Locale locale) {
-    if (file instanceof LocalCloudFile) {
-      ((LocalCloudFile) file).initModified(file.getModifiedDate(), locale);
+    if (file.isConnected()) {
+      LocalCloudFile.class.cast(file).initModified(file.getModifiedDate(), locale);
     }
   }
 }
