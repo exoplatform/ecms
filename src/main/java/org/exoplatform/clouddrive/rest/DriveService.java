@@ -18,7 +18,11 @@
  */
 package org.exoplatform.clouddrive.rest;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+import java.util.Locale;
 import java.util.concurrent.ExecutionException;
 
 import javax.annotation.security.RolesAllowed;
@@ -43,10 +47,19 @@ import javax.ws.rs.core.Response.ResponseBuilder;
 import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.UriInfo;
 
-import org.exoplatform.clouddrive.*;
+import org.exoplatform.clouddrive.CloudDrive;
 import org.exoplatform.clouddrive.CloudDrive.Command;
-import org.exoplatform.portal.webui.util.Util;
-import org.exoplatform.portal.webui.workspace.UIPortalApplication;
+import org.exoplatform.clouddrive.CloudDriveException;
+import org.exoplatform.clouddrive.CloudDriveMessage;
+import org.exoplatform.clouddrive.CloudDriveService;
+import org.exoplatform.clouddrive.CloudFile;
+import org.exoplatform.clouddrive.CloudProvider;
+import org.exoplatform.clouddrive.DriveRemovedException;
+import org.exoplatform.clouddrive.NotCloudFileException;
+import org.exoplatform.clouddrive.NotConnectedException;
+import org.exoplatform.clouddrive.NotYetCloudFileException;
+import org.exoplatform.clouddrive.RefreshAccessException;
+import org.exoplatform.clouddrive.UserCloudFile;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
