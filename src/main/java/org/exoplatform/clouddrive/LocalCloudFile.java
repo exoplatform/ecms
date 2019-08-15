@@ -15,7 +15,7 @@ public abstract class LocalCloudFile implements CloudFile {
     if (modifiedDate != null && locale != null) {
       DateFormat dateFormat = SimpleDateFormat.getDateInstance(SimpleDateFormat.SHORT, locale);
       this.modified = dateFormat.format(modifiedDate.getTime());
-    }else{
+    } else {
       this.modified = "";
     }
   }

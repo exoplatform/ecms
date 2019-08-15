@@ -18,13 +18,28 @@
  */
 package org.exoplatform.clouddrive.rest;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+import java.util.Locale;
 import java.util.concurrent.ExecutionException;
 
 import javax.annotation.security.RolesAllowed;
-import javax.jcr.*;
+import javax.jcr.AccessDeniedException;
+import javax.jcr.LoginException;
+import javax.jcr.Node;
+import javax.jcr.NodeIterator;
+import javax.jcr.PathNotFoundException;
+import javax.jcr.RepositoryException;
+import javax.jcr.Session;
 import javax.servlet.http.HttpServletRequest;
-import javax.ws.rs.*;
+import javax.ws.rs.FormParam;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -32,7 +47,18 @@ import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.core.Response.ResponseBuilder;
 import javax.ws.rs.core.Response.Status;
 
-import org.exoplatform.clouddrive.*;
+import org.exoplatform.clouddrive.CloudDrive;
+import org.exoplatform.clouddrive.CloudDriveException;
+import org.exoplatform.clouddrive.CloudDriveMessage;
+import org.exoplatform.clouddrive.CloudDriveService;
+import org.exoplatform.clouddrive.CloudFile;
+import org.exoplatform.clouddrive.CloudProvider;
+import org.exoplatform.clouddrive.DriveRemovedException;
+import org.exoplatform.clouddrive.LocalCloudFile;
+import org.exoplatform.clouddrive.NotCloudFileException;
+import org.exoplatform.clouddrive.NotConnectedException;
+import org.exoplatform.clouddrive.NotYetCloudFileException;
+import org.exoplatform.clouddrive.RefreshAccessException;
 import org.exoplatform.clouddrive.CloudDrive.Command;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
@@ -152,7 +178,7 @@ public class DriveService implements ResourceContainer {
             Command sync = local.synchronize();
             sync.await(); // wait for sync process
             files = sync.getFiles();
-            initModified(files,locale);
+            initModified(files, locale);
             removed = sync.getRemoved();
             messages = sync.getMessages();
           } catch (InterruptedException e) {
@@ -293,7 +319,7 @@ public class DriveService implements ResourceContainer {
               if (!file.getPath().equals(path)) {
                 file = new LinkedCloudFile(file, path); // it's symlink
               }
-              initModified(Collections.singletonList(file),locale);
+              initModified(file, locale);
               return Response.ok().entity(file).build();
             } catch (NotYetCloudFileException e) {
               return Response.status(Status.ACCEPTED).entity(new AcceptedCloudFile(path)).build();
@@ -380,7 +406,7 @@ public class DriveService implements ResourceContainer {
                   if (!file.getPath().equals(filePath)) {
                     file = new LinkedCloudFile(file, filePath); // it's symlink
                   }
-                  // TODO need init Modified date for the all?
+                  initModified(file, locale);
                   files.add(file);
                 } // not a cloud file - skip it
               } catch (NotYetCloudFileException e) {
@@ -388,7 +414,6 @@ public class DriveService implements ResourceContainer {
                 files.add(new AcceptedCloudFile(filePath));
               }
             }
-            initModified(files,locale);
 
             ResponseBuilder resp;
             if (hasAccepted) {
@@ -481,6 +506,14 @@ public class DriveService implements ResourceContainer {
   }
 
   private void initModified(Collection<CloudFile> files, Locale locale) {
-    files.stream().filter((file) -> file instanceof LocalCloudFile).forEach((file) -> ((LocalCloudFile) file).initModified(file.getModifiedDate(),locale));
+    for (CloudFile file : files) {
+      initModified(file, locale);
+    }
+  }
+
+  private void initModified(CloudFile file, Locale locale) {
+    if (file instanceof LocalCloudFile) {
+      ((LocalCloudFile) file).initModified(file.getModifiedDate(), locale);
+    }
   }
 }
