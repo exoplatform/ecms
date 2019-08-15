@@ -340,7 +340,7 @@ public class DriveService implements ResourceContainer {
               if (!file.getPath().equals(path)) {
                 file = new LinkedCloudFile(file, path); // it's symlink
               }
-              initModified(Collections.singletonList(file), locale);
+              initModified(file, locale);
               return Response.ok().entity(file).build();
             } catch (NotYetCloudFileException e) {
               return Response.status(Status.ACCEPTED).entity(new AcceptedCloudFile(path)).build();
@@ -430,7 +430,7 @@ public class DriveService implements ResourceContainer {
                   if (!file.getPath().equals(filePath)) {
                     file = new LinkedCloudFile(file, filePath); // it's symlink
                   }
-                  // TODO need init Modified date for the all?
+                  initModified(file, locale);
                   files.add(file);
                 } // not a cloud file - skip it
               } catch (NotYetCloudFileException e) {
@@ -438,7 +438,6 @@ public class DriveService implements ResourceContainer {
                 files.add(new AcceptedCloudFile(filePath));
               }
             }
-            initModified(files, locale);
 
             ResponseBuilder resp;
             if (hasAccepted) {
@@ -531,8 +530,14 @@ public class DriveService implements ResourceContainer {
   }
 
   private void initModified(Collection<CloudFile> files, Locale locale) {
-    files.stream()
-         .filter((file) -> file instanceof LocalCloudFile)
-         .forEach((file) -> ((LocalCloudFile) file).initModified(file.getModifiedDate(), locale));
+    for (CloudFile file : files) {
+      initModified(file, locale);
+    }
+  }
+
+  private void initModified(CloudFile file, Locale locale) {
+    if (file instanceof LocalCloudFile) {
+      ((LocalCloudFile) file).initModified(file.getModifiedDate(), locale);
+    }
   }
 }
