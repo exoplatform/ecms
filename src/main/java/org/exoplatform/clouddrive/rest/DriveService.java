@@ -58,11 +58,11 @@ import org.exoplatform.clouddrive.CloudDriveService;
 import org.exoplatform.clouddrive.CloudFile;
 import org.exoplatform.clouddrive.CloudProvider;
 import org.exoplatform.clouddrive.DriveRemovedException;
+import org.exoplatform.clouddrive.LocalCloudFile;
 import org.exoplatform.clouddrive.NotCloudFileException;
 import org.exoplatform.clouddrive.NotConnectedException;
 import org.exoplatform.clouddrive.NotYetCloudFileException;
 import org.exoplatform.clouddrive.RefreshAccessException;
-import org.exoplatform.clouddrive.UserCloudFile;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
@@ -335,8 +335,8 @@ public class DriveService implements ResourceContainer {
               if (!file.getPath().equals(path)) {
                 file = new LinkedCloudFile(file, path); // it's symlink
               }
-              if (UserCloudFile.class.isAssignableFrom(file.getClass())) {
-                UserCloudFile.class.cast(file).initModified(file.getModifiedDate(),locale);
+              if (file instanceof LocalCloudFile) {
+                ((LocalCloudFile) file).initModified(file.getModifiedDate(), locale);
               }
               return Response.ok().entity(file).build();
             } catch (NotYetCloudFileException e) {
