@@ -18,48 +18,22 @@
  */
 package org.exoplatform.clouddrive.rest;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 import java.util.concurrent.ExecutionException;
 
 import javax.annotation.security.RolesAllowed;
-import javax.jcr.AccessDeniedException;
-import javax.jcr.LoginException;
-import javax.jcr.Node;
-import javax.jcr.NodeIterator;
-import javax.jcr.PathNotFoundException;
-import javax.jcr.RepositoryException;
-import javax.jcr.Session;
+import javax.jcr.*;
 import javax.servlet.http.HttpServletRequest;
-import javax.ws.rs.FormParam;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
+import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.core.Response.ResponseBuilder;
 import javax.ws.rs.core.Response.Status;
-import javax.ws.rs.core.UriInfo;
 
-import org.exoplatform.clouddrive.CloudDrive;
+import org.exoplatform.clouddrive.*;
 import org.exoplatform.clouddrive.CloudDrive.Command;
-import org.exoplatform.clouddrive.CloudDriveException;
-import org.exoplatform.clouddrive.CloudDriveMessage;
-import org.exoplatform.clouddrive.CloudDriveService;
-import org.exoplatform.clouddrive.CloudFile;
-import org.exoplatform.clouddrive.CloudProvider;
-import org.exoplatform.clouddrive.DriveRemovedException;
-import org.exoplatform.clouddrive.LocalCloudFile;
-import org.exoplatform.clouddrive.NotCloudFileException;
-import org.exoplatform.clouddrive.NotConnectedException;
-import org.exoplatform.clouddrive.NotYetCloudFileException;
-import org.exoplatform.clouddrive.RefreshAccessException;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
@@ -115,10 +89,11 @@ public class DriveService implements ResourceContainer {
    */
   @GET
   @RolesAllowed("users")
-  public Response getDrive(@Context UriInfo uriInfo, @QueryParam("workspace") String workspace, @QueryParam("path") String path) {
+  public Response getDrive(@Context HttpServletRequest request, @Context UriInfo uriInfo, @QueryParam("workspace") String workspace, @QueryParam("path") String path) {
     if (workspace != null) {
       if (path != null) {
-        return readDrive(workspace, path, false);
+        Locale locale = request.getLocale();
+        return readDrive(workspace, path, locale, false);
       } else {
         return Response.status(Status.BAD_REQUEST).entity(ErrorEntiry.message("Null path")).build();
       }
@@ -138,13 +113,14 @@ public class DriveService implements ResourceContainer {
   @POST
   @Path("/synchronize/")
   @RolesAllowed("users")
-  public Response synchronize(@Context UriInfo uriInfo,
+  public Response synchronize(@Context HttpServletRequest request,@Context UriInfo uriInfo,
                               @FormParam("workspace") String workspace,
                               @FormParam("path") String path) {
 
     if (workspace != null) {
       if (path != null) {
-        return readDrive(workspace, path, true);
+        Locale locale = request.getLocale();
+        return readDrive(workspace, path, locale, true);
       } else {
         return Response.status(Status.BAD_REQUEST).entity("Null path.").build();
       }
@@ -164,7 +140,7 @@ public class DriveService implements ResourceContainer {
    * @param synchronize {@link Boolean} flag to synch before the read (true to force sync)
    * @return {@link Response} REST response
    */
-  protected Response readDrive(String workspace, String path, boolean synchronize) {
+  protected Response readDrive(String workspace, String path, Locale locale, boolean synchronize) {
     try {
       CloudDrive local = cloudDrives.findDrive(workspace, path);
       if (local != null) {
@@ -175,7 +151,8 @@ public class DriveService implements ResourceContainer {
           try {
             Command sync = local.synchronize();
             sync.await(); // wait for sync process
-            files = sync.getFiles(); // TODO need init Modified date for the all?
+            files = sync.getFiles();
+            initModified(files,locale);
             removed = sync.getRemoved();
             messages = sync.getMessages();
           } catch (InterruptedException e) {
@@ -316,9 +293,7 @@ public class DriveService implements ResourceContainer {
               if (!file.getPath().equals(path)) {
                 file = new LinkedCloudFile(file, path); // it's symlink
               }
-              if (file instanceof LocalCloudFile) {
-                ((LocalCloudFile) file).initModified(file.getModifiedDate(), locale);
-              }
+              initModified(Collections.singletonList(file),locale);
               return Response.ok().entity(file).build();
             } catch (NotYetCloudFileException e) {
               return Response.status(Status.ACCEPTED).entity(new AcceptedCloudFile(path)).build();
@@ -370,10 +345,11 @@ public class DriveService implements ResourceContainer {
   @GET
   @Path("/files/")
   @RolesAllowed("users")
-  public Response getFiles(@Context UriInfo uriInfo, @QueryParam("workspace") String workspace, @QueryParam("path") String path) {
+  public Response getFiles(@Context HttpServletRequest request, @Context UriInfo uriInfo, @QueryParam("workspace") String workspace, @QueryParam("path") String path) {
     if (workspace != null) {
       if (path != null) {
         try {
+          Locale locale = request.getLocale();
           CloudDrive local = cloudDrives.findDrive(workspace, path);
           if (local != null) {
             String parentPath;
@@ -412,6 +388,7 @@ public class DriveService implements ResourceContainer {
                 files.add(new AcceptedCloudFile(filePath));
               }
             }
+            initModified(files,locale);
 
             ResponseBuilder resp;
             if (hasAccepted) {
@@ -503,4 +480,7 @@ public class DriveService implements ResourceContainer {
     }
   }
 
+  private void initModified(Collection<CloudFile> files, Locale locale) {
+    files.stream().filter((file) -> file instanceof LocalCloudFile).forEach((file) -> ((LocalCloudFile) file).initModified(file.getModifiedDate(),locale));
+  }
 }
