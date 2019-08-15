@@ -115,7 +115,10 @@ public class DriveService implements ResourceContainer {
    */
   @GET
   @RolesAllowed("users")
-  public Response getDrive(@Context HttpServletRequest request, @Context UriInfo uriInfo, @QueryParam("workspace") String workspace, @QueryParam("path") String path) {
+  public Response getDrive(@Context HttpServletRequest request,
+                           @Context UriInfo uriInfo,
+                           @QueryParam("workspace") String workspace,
+                           @QueryParam("path") String path) {
     if (workspace != null) {
       if (path != null) {
         Locale locale = request.getLocale();
@@ -139,7 +142,8 @@ public class DriveService implements ResourceContainer {
   @POST
   @Path("/synchronize/")
   @RolesAllowed("users")
-  public Response synchronize(@Context HttpServletRequest request,@Context UriInfo uriInfo,
+  public Response synchronize(@Context HttpServletRequest request,
+                              @Context UriInfo uriInfo,
                               @FormParam("workspace") String workspace,
                               @FormParam("path") String path) {
 
@@ -155,8 +159,7 @@ public class DriveService implements ResourceContainer {
     }
   }
 
-  // *********************************** internals
-  // *************************************
+  // *********************************** internals *************************************
 
   /**
    * Read cloud drive and optionally synchronized it before. Drive will contain a file from it will asked,
@@ -371,7 +374,10 @@ public class DriveService implements ResourceContainer {
   @GET
   @Path("/files/")
   @RolesAllowed("users")
-  public Response getFiles(@Context HttpServletRequest request, @Context UriInfo uriInfo, @QueryParam("workspace") String workspace, @QueryParam("path") String path) {
+  public Response getFiles(@Context HttpServletRequest request,
+                           @Context UriInfo uriInfo,
+                           @QueryParam("workspace") String workspace,
+                           @QueryParam("path") String path) {
     if (workspace != null) {
       if (path != null) {
         try {
@@ -512,8 +518,8 @@ public class DriveService implements ResourceContainer {
   }
 
   private void initModified(CloudFile file, Locale locale) {
-    if (file instanceof LocalCloudFile) {
-      ((LocalCloudFile) file).initModified(file.getModifiedDate(), locale);
+    if (file.isConnected()) {
+      LocalCloudFile.class.cast(file).initModified(file.getModifiedDate(), locale);
     }
   }
 }
