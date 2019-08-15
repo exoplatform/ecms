@@ -1570,17 +1570,6 @@
 				$listView.each(function() {
 					var objectId = decodeString($(this).attr("objectid"));
 					// find all info lines with 1K size and replace the size with real value
-					// $(this).find("p.fileInfoBottom:contains('- 1 KB')").each(function() {
-					// 	var file = cloudDrive.getFile(objectId);
-					// 	if (file) {
-          //     var orig = $(this).text();
-          //     var str = sizeString(file.size);
-          //     var withUpdatedSize = orig.replace("- 1 KB", str.length > 0 ? "- " + str : str);
-          //     var modifiedDate = file.modifiedDateFormatted;
-          //     var withUpdatedDate = updateDate(withUpdatedSize,  modifiedDate);
-          //     $(this).text(withUpdatedDate);
-          //   }
-					// });
           $(this).find("p.fileInfoBottom").each(function() {
             var file = cloudDrive.getFile(objectId);
             if (file) {
@@ -1590,30 +1579,15 @@
                 var withUpdatedSize = orig.replace("- 1 KB", str.length > 0 ? "- " + str : str);
                 orig = withUpdatedSize;
               }
-              var modifiedDate = file.modified;
-              var withUpdatedDate = updateDate(orig,  modifiedDate);
-              $(this).text(withUpdatedDate);
+              if (file.connected) {
+                var modifiedDate = file.modified;
+                var withUpdatedDate = updateDate(orig,  modifiedDate);
+                $(this).text(withUpdatedDate);                
+              }
             }
           });
-
-
-					// added interceptor
-
-
-
 				});
 			}
-
-			// date
-      // if ($listView.length > 0) {
-      //   $listView.each(function() {
-      //     $(this).find("p.fileInfoBottom").each(function() {
-      //     		var orig = $(this).text();
-      //         var str = updateDate(orig, '01.04.17');
-      //         $(this).text(str);
-      //     });
-      //   });
-      // }
 
 			// Icon view
 			var $iconView = $("div.actionIconBox");
