@@ -1579,9 +1579,12 @@
                 var withUpdatedSize = orig.replace("- 1 KB", str.length > 0 ? "- " + str : str);
                 orig = withUpdatedSize;
               }
-              if (file.connected) {
-                var modifiedDate = file.modified;
-                var withUpdatedDate = updateDate(orig,  modifiedDate);
+              // TODO better use if(file.connected) for this check.
+              if (file.modifiedRemote && file.modifiedLocal) {
+                var modifiedRemoteDate = file.modifiedRemote;
+                var modifiedLocalDate = file.modifiedLocal;
+                // var withUpdatedDate = updateDate(orig,  modifiedDate);
+                var withUpdatedDate = orig.replace(modifiedLocalDate,modifiedRemoteDate);
                 $(this).text(withUpdatedDate);                
               }
             }
