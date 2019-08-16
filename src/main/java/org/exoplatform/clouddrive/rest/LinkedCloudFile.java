@@ -83,6 +83,7 @@ public class LinkedCloudFile extends LocalCloudFile {
 
   /** The is symlink. */
   private final boolean            isSymlink;
+  private  Node node;
 
   /**
    * Instantiates a new linked cloud file.
@@ -107,6 +108,10 @@ public class LinkedCloudFile extends LocalCloudFile {
     this.path = path;
     this.size = file.getSize();
     this.isSymlink = true;
+    if (file.isConnected()) {
+      this.node = LocalCloudFile.class.cast(file).getNode();
+    }
+
   }
   
   /**
@@ -224,5 +229,10 @@ public class LinkedCloudFile extends LocalCloudFile {
   @Override
   public long getSize() {
     return size;
+  }
+
+  @Override
+  public Node getNode() {
+    return node;
   }
 }

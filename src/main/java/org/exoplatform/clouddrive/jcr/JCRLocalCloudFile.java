@@ -430,6 +430,7 @@ public class JCRLocalCloudFile extends LocalCloudFile {
    *
    * @return the node that represent this Cloud File in the storage.
    */
+  @Override
   public Node getNode() {
     return node;
   }
