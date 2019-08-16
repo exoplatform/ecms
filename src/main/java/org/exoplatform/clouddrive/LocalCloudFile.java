@@ -18,29 +18,50 @@
  */
 package org.exoplatform.clouddrive;
 
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
+import javax.jcr.Node;
+import javax.jcr.RepositoryException;
+
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
+
 /**
  * Abstract class for all locally connected {@link CloudFile} instances.
  */
 public abstract class LocalCloudFile implements CloudFile {
+  protected static final Log LOG = ExoLogger.getLogger(LocalCloudFile.class);
 
-  /** The modified. */
-  private String modified;
+  private String             modifiedLocal;
+
+  private String             modifiedRemote;
+  
+  public void initModified(Calendar modifiedRemoteDate, Locale locale) {
+    Node node = getNode();
+    if (node != null) {
+      try {
+        Calendar modifiedLocalDate = node.getProperty("exo:lastModifiedDate").getDate();
+        this.modifiedLocal = formatLocalizedDate(modifiedLocalDate, locale);
+        this.modifiedRemote = formatLocalizedDate(modifiedRemoteDate, locale);
+      } catch (RepositoryException e) {
+          LOG.warn("Cannot initialize cloud file modified fields:" + e.getMessage());
+      }
+    }
+  }
 
   /*
    * Implementation taken from UIDocumentNodeList.getDatePropertyValue 13/08/2019
    */
-  public void initModified(Calendar modifiedDate, Locale locale) {
-    if (modifiedDate != null && locale != null) {
+  private String formatLocalizedDate(Calendar date, Locale locale) {
+    if (date != null && locale != null) {
       DateFormat dateFormat = SimpleDateFormat.getDateInstance(SimpleDateFormat.SHORT, locale);
-      this.modified = dateFormat.format(modifiedDate.getTime());
-    } else {
-      this.modified = null;
+      return dateFormat.format(date.getTime());
     }
+    return null;
   }
 
   /**
@@ -49,8 +70,12 @@ public abstract class LocalCloudFile implements CloudFile {
    *
    * @return the modified date formatted in user locale or <code>null</code> if current user was not initialized for the file.
    */
-  public String getModified() {
-    return modified;
+  public String getModifiedRemote() {
+    return modifiedRemote;
+  }
+
+  public String getModifiedLocal() {
+    return modifiedLocal;
   }
 
   /**
@@ -60,4 +85,6 @@ public abstract class LocalCloudFile implements CloudFile {
   public final boolean isConnected() {
     return true;
   }
+
+  public abstract Node getNode();
 }
