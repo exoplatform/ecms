@@ -1418,6 +1418,11 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
         commandEnv.fail(this, e);
         LOG.error("Runtime error. Drive " + getName() + " canceled. " + e.getMessage());
         throw e;
+      } catch (Throwable e) {
+        handleError(driveNode, e, getName());
+        commandEnv.fail(this, e);
+        LOG.error("Unexpected error. Drive " + getName() + " canceled. " + e.getMessage(), e);
+        throw e;
       } finally {
         always();
         doneAction();
@@ -2278,7 +2283,6 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
           do {
             applying = false;
             try {
-              // TODO remove MIX_VERSIONABLE here and only for FileChange.UPDATE
               if (FileChange.UPDATE.equals(change.changeType)) {
                 Node node = change.node;
                 if (node != null && !node.isNew()) {

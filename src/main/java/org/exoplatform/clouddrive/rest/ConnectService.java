@@ -380,6 +380,9 @@ public class ConnectService implements ResourceContainer {
     @Override
     public void onError(CloudDriveEvent event, Throwable error, String operationName) {
       lock.lock();
+      
+      // remove from active here (added in 1.8.0, Aug 19, 2019)
+      active.values().remove(this);
       // unregister listener
       drive.removeListener(this);
 
