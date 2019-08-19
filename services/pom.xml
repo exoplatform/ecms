@@ -394,12 +394,30 @@
                   <include>com.google.apis:google-api-services-oauth2</include>
                   <include>com.google.http-client:google-http-client-jackson2</include>
                   <include>com.google.http-client:google-http-client</include>
+                  <!-- Added in 1.8.0 -->
+                  <include>com.google.j2objc:j2objc-annotations</include>
+                  <include>io.opencensus:opencensus-api</include>
+                  <include>io.opencensus:opencensus-contrib-http-util</include>
+                  <include>io.grpc:grpc-context</include>
+                  <!-- include>com.fasterxml.jackson.core:jackson-core</include -->
                 </includes>
               </artifactSet>
               <relocations>
                 <relocation>
+                  <pattern>com.google.j2objc</pattern>
+                  <shadedPattern>org.exoplatform.clouddrive.shaded.google.j2objc</shadedPattern>
+                </relocation>
+                <relocation>
                   <pattern>com.google.api</pattern>
-                  <shadedPattern>org.exoplatform.shaded.google.api</shadedPattern>
+                  <shadedPattern>org.exoplatform.clouddrive.shaded.google.api</shadedPattern>
+                </relocation>
+                <relocation>
+                  <pattern>io.opencensus</pattern>
+                  <shadedPattern>org.exoplatform.clouddrive.shaded.io.opencensus</shadedPattern>
+                </relocation>
+                <relocation>
+                  <pattern>io.grpc</pattern>
+                  <shadedPattern>org.exoplatform.clouddrive.shaded.io.grpc</shadedPattern>
                 </relocation>
               </relocations>
             </configuration>
