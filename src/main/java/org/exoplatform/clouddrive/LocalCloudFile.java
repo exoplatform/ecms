@@ -40,15 +40,15 @@ public abstract class LocalCloudFile implements CloudFile {
 
   private String             modifiedRemote;
   
-  public void initModified(Calendar modifiedRemoteDate, Locale locale) {
-    Node node = getNode();
+  public void initModified(Locale locale) {
+    Node node = this.getNode();
     if (node != null) {
       try {
         Calendar modifiedLocalDate = node.getProperty("exo:lastModifiedDate").getDate();
         this.modifiedLocal = formatLocalizedDate(modifiedLocalDate, locale);
-        this.modifiedRemote = formatLocalizedDate(modifiedRemoteDate, locale);
+        this.modifiedRemote = formatLocalizedDate(this.getModifiedDate(), locale);
       } catch (RepositoryException e) {
-          LOG.warn("Cannot initialize cloud file modified fields:" + e.getMessage());
+        LOG.warn("Cannot initialize cloud file modified fields:" + e.getMessage());
       }
     }
   }
