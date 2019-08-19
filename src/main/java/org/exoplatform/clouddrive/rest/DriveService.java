@@ -520,7 +520,7 @@ public class DriveService implements ResourceContainer {
   private void initModified(CloudFile file, Locale locale) {
     if (file.isConnected()) {
       try {
-        LocalCloudFile.class.cast(file).initModified(file.getModifiedDate(), locale);
+        LocalCloudFile.class.cast(file).initModified(locale);
       } catch (ClassCastException e) {
         // safely ignore it, but let to know it was
         LOG.warn("Cannot initialize cloud file modified field for {} due to error: {}", file.getPath(), e.getMessage());
