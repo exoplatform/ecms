@@ -273,7 +273,7 @@ public class PageListFactory {
       Node node = null;
       try {
         if(StringUtils.isNotBlank(nodePath) && session.itemExists(nodePath)) {
-          Node node = (Node) session.getItem(nodePath);
+          node = (Node) session.getItem(nodePath);
           if (filter != null) {
             node = filter.filterNodeToDisplay(node);
           }
