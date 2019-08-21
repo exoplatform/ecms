@@ -728,7 +728,7 @@
 									var process = $.Deferred();
 									// We chain actual sync to the sync initiator from client.
 									// The initiator should return jQuery Promise: it will be resolved if changes appear and rejected on error.
-									// We use jQuery.when() to deal if not Promise returned (it's bad case - sync will run each 5sec forever).
+									// We use jQuery.when() to deal if not Promise returned (it's bad case - sync will run each 10sec forever).
 									var initiator = client.onChange(drive);
 									$.when(initiator).done(function(nextTimeout) {
 										// nextTimeout - is optional
