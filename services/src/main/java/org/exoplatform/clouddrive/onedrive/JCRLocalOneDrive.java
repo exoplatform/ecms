@@ -314,7 +314,7 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
     }
   }
 
-  private void initFolderByDriveItem(Node fileNode, DriveItem item) throws RepositoryException {
+   void initFolderByDriveItem(Node fileNode, DriveItem item) throws RepositoryException {
     String lastModifiedUserName = "";
     String createdUserName = "";
     if (item.lastModifiedBy != null && item.lastModifiedBy.user != null) {
@@ -409,35 +409,90 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
   }
 
   JCRLocalCloudFile initCreateFile(Node fileNode, DriveItem item) throws OneDriveException, RepositoryException {
-    DriveItemInfo driveItemAdditionalInfo = prepareAdditionalDriveItemFields(item);
-    initFileByDriveItem(fileNode, item, driveItemAdditionalInfo);
-    return createCloudFile(fileNode, item, driveItemAdditionalInfo);
+    String link = "";
+    String previewLink = "";
+    String lastModifiedUserName = "";
+    String createdUserName = "";
+    if (item.lastModifiedBy != null && item.lastModifiedBy.user != null) {
+      lastModifiedUserName = item.lastModifiedBy.user.displayName;
+    }
+    if (item.createdBy != null && item.createdBy.user != null) {
+      createdUserName = item.createdBy.user.displayName;
+    }
+    SharingLink sharingLink = createLink(item);
+    if (sharingLink.type.equalsIgnoreCase("embed")) { // personal account
+      link = "personal=" + sharingLink.webUrl;
+      previewLink = item.webUrl;
+    } else if (sharingLink.type.equalsIgnoreCase("view")) { // business account
+      link = "business=" + sharingLink.webUrl;
+    }
+
+    initFile(fileNode,
+            item.id,
+            item.name,
+            item.file.mimeType,
+            link,
+            previewLink,
+            null, // TODO thumbnail link: may be something better can be here?
+            createdUserName,
+            lastModifiedUserName,
+            item.createdDateTime,
+            item.lastModifiedDateTime,
+            item.size);
+
+    //...........................................
+    return new JCRLocalCloudFile(fileNode.getPath(),
+            item.id,
+            item.name,
+            link,
+            previewLink,
+            null, // TODO thumbnail link
+            item.file.mimeType,
+            null, // TODO type mode
+            lastModifiedUserName,
+            createdUserName,
+            item.createdDateTime,
+            item.lastModifiedDateTime,
+            item.size,
+            fileNode,
+            true);
+
   }
 
-  void initFileByDriveItem(Node fileNode,
-                           DriveItem item,
-                           DriveItemInfo driveItemAdditionalInfo) throws RepositoryException, OneDriveException {
-    // TODO cleanup
-    /*
-     * if (item.lastModifiedBy != null && item.lastModifiedBy.user != null) { lastModifiedUserName =
-     * item.lastModifiedBy.user.displayName; } if (item.createdBy != null && item.createdBy.user != null) { createdUserName =
-     * item.createdBy.user.displayName; } SharingLink sharingLink = createLink(item); if
-     * (sharingLink.type.equalsIgnoreCase("embed")) { // personal account link = item.webUrl; previewLink = sharingLink.webUrl; }
-     * else if (sharingLink.type.equalsIgnoreCase("view")) { // business account link = sharingLink.webUrl; }
-     */
-    initFile(fileNode,
-             item.id,
-             item.name,
-             item.file.mimeType,
-             driveItemAdditionalInfo.getLink(),
-             driveItemAdditionalInfo.getPreviewLink(),
-             null, // TODO thumbnail link: may be something better can be here?
-             driveItemAdditionalInfo.getCreatedUserName(),
-             driveItemAdditionalInfo.getLastModifiedUserName(),
-             item.createdDateTime,
-             item.lastModifiedDateTime,
-             item.size);
-  }
+//  void initFileByDriveItem(Node fileNode,
+//                           DriveItem item) throws RepositoryException, OneDriveException {
+//    String link = "";
+//    String previewLink = "";
+//    String lastModifiedUserName = "";
+//    String createdUserName = "";
+//    if (item.lastModifiedBy != null && item.lastModifiedBy.user != null) {
+//      lastModifiedUserName = item.lastModifiedBy.user.displayName;
+//    }
+//    if (item.createdBy != null && item.createdBy.user != null) {
+//      createdUserName = item.createdBy.user.displayName;
+//    }
+//    SharingLink sharingLink = createLink(item);
+//    if (sharingLink.type.equalsIgnoreCase("embed")) { // personal account
+//      link = "personal=" + sharingLink.webUrl;
+//      previewLink = item.webUrl;
+//    } else if (sharingLink.type.equalsIgnoreCase("view")) { // business account
+//      link = "business=" + sharingLink.webUrl;
+//    }
+//
+//
+//    initFile(fileNode,
+//             item.id,
+//             item.name,
+//             item.file.mimeType,
+//             link,
+//             previewLink,
+//             null, // TODO thumbnail link: may be something better can be here?
+//             createdUserName,
+//             lastModifiedUserName,
+//             item.createdDateTime,
+//             item.lastModifiedDateTime,
+//             item.size);
+//  }
 
   private JCRLocalCloudFile createCloudFolder(Node fileNode, DriveItem item) throws RepositoryException {
     String lastModifiedUserName = "";
@@ -653,44 +708,6 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
             fetchChilds(item.id, folderNode);
           }
         }
-      } else if (!fileAPI.getTitle(fileNode).equals(driveItem.name)) {
-        // TODO Nothing for this case?
-        // if (LOG.isDebugEnabled()) {
-        // LOG.debug("must be renamed, name= " + driveItem.name);
-        // }
-        // try {
-        // Node node = moveFile(driveItem.id, driveItem.name, fileNode,
-        // destParentNode);
-        // JCRLocalCloudFile jcrLocalCloudFile;
-        // if (node != null) {
-        // if (driveItem.folder != null) { // folder
-        // initFolderByDriveItem(node, driveItem);
-        // jcrLocalCloudFile = createCloudFolder(node, driveItem);
-        // } else { // file
-        // initFileByDriveItem(fileNode, driveItem);
-        // jcrLocalCloudFile = createCloudFile(node, driveItem);
-        // }
-        // addChanged(jcrLocalCloudFile);
-        // }
-        // } catch (Throwable ex) {
-        // if (LOG.isDebugEnabled()) {
-        // LOG.debug("try rename node after exception");
-        // }
-        // deleteItem(driveItem.id);
-        // DriveItem item = api.getItem(driveItem.id);
-        // if (item.file != null) { // file
-        // if (LOG.isDebugEnabled()) {
-        // LOG.debug("try move file");
-        // }
-        // addFileNode(driveItem, destParentNode);
-        // } else {// folder
-        // if (LOG.isDebugEnabled()) {
-        // LOG.debug("try move folder");
-        // }
-        // Node folderNode = addFolderNode(driveItem, destParentNode);
-        // fetchChilds(item.id, folderNode);
-        // }
-        // }
       }
     }
 
@@ -1030,33 +1047,6 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
       }
     }
 
-    // TODO cleanup
-    // private void initSubtree(Node folderNode, DriveItem driveItem) throws
-    // RepositoryException {
-    // initFolderByDriveItem(folderNode, driveItem);
-    //
-    // for (NodeIterator niter = folderNode.getNodes(); niter.hasNext(); ) {
-    // Node node = niter.nextNode();
-    // String onedrivePath = extractAppropriateOneDrivePath(node);
-    // if (LOG.isDebugEnabled()) {
-    // LOG.debug("initsubtree() onedrivepath = " + onedrivePath);
-    // }
-    // driveItem = api.getItemByPath(onedrivePath);
-    // if (isFolder(node)) { //folder
-    // if (LOG.isDebugEnabled()) {
-    // LOG.debug("copyFolder(): initFolderByDriveITem");
-    // }
-    // initSubtree(node, driveItem);
-    // } else { //file
-    // if (LOG.isDebugEnabled()) {
-    // LOG.debug("copyFolder(): initFolderByDriveITem");
-    // }
-    // initFileByDriveItem(node, driveItem);
-    // }
-    //
-    // }
-    // }
-    
     @Override
     public CloudFile updateFile(Node fileNode, Calendar modified) throws RepositoryException, SkipSyncException {
       try {
