@@ -1,27 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<!--
+
+  Copyright (C) 2019 eXo Platform SAS.
+  
+  This is free software; you can redistribute it and/or modify it
+  under the terms of the GNU Lesser General Public License as
+  published by the Free Software Foundation; either version 2.1 of
+  the License, or (at your option) any later version.
+  
+  This software is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+  Lesser General Public License for more details.
+  
+  You should have received a copy of the GNU Lesser General Public
+  License along with this software; if not, write to the Free
+  Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+  02110-1301 USA, or see the FSF site: http://www.fsf.org.
+
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.exoplatform.addons.clouddrive</groupId>
     <artifactId>exo-clouddrive-onedrive</artifactId>
     <version>1.8.x-SNAPSHOT</version>
   </parent>
-  <modelVersion>4.0.0</modelVersion>
 
   <artifactId>exo-clouddrive-onedrive-services</artifactId>
-  <name>eXo Cloud Drive :: Connectors :: One Drive :: Services</name>
-
+  <name>eXo Cloud Drive :: Connectors :: OneDrive :: Services</name>
+  <packaging>jar</packaging>
+  <description>eXo Cloud Drive Microsoft OneDrive connector extension configuration and services</description>
 
   <dependencies>
-    <!-- https://mvnrepository.com/artifact/org.mockito/mockito-all -->
-    <!--  <dependency>
-          <groupId>org.mockito</groupId>
-          <artifactId>mockito-all</artifactId>
-          <version>1.9.5</version>
-          <scope>test</scope>
-      </dependency>-->
-
+    <dependency>
+      <groupId>com.microsoft.graph</groupId>
+      <artifactId>microsoft-graph</artifactId>
+      <scope>compile</scope>
+      <type>jar</type>
+    </dependency>
 
     <!-- Cloud Drive add-on -->
     <dependency>
@@ -94,7 +112,6 @@
       <type>jar</type>
     </dependency>
 
-
     <!-- Others third party -->
     <dependency>
       <groupId>javax.jcr</groupId>
@@ -107,14 +124,6 @@
       <artifactId>jsr311-api</artifactId>
       <scope>provided</scope>
       <type>jar</type>
-    </dependency>
-    <dependency>
-      <groupId>com.microsoft.graph</groupId>
-      <artifactId>microsoft-graph</artifactId>
-      <!--<version>1.3.0</version>-->
-      <scope>provided</scope>
-      <type>jar</type>
-      <!--<scope>import</scope>-->
     </dependency>
 
     <!-- for tests -->
@@ -192,76 +201,62 @@
       <artifactId>hamcrest-core</artifactId>
       <scope>test</scope>
     </dependency>
-    <!-- https://mvnrepository.com/artifact/org.powermock/powermock-api-mockito -->
     <dependency>
       <groupId>org.powermock</groupId>
       <artifactId>powermock-api-mockito</artifactId>
-      <version>1.7.4</version>
       <scope>test</scope>
     </dependency>
-
     <dependency>
       <groupId>org.powermock</groupId>
       <artifactId>powermock-module-junit4</artifactId>
-      <version>1.7.3</version>
       <scope>test</scope>
     </dependency>
-
-
-    <dependency>
-      <groupId>com.google.code.gson</groupId>
-      <artifactId>gson</artifactId>
-      <version>2.8.5</version>
-    </dependency>
-
     <!--  <dependency>
          <groupId>org.powermock</groupId>
          <artifactId>powermock-api-mockito2</artifactId>
          <version>1.7.3</version>
          <scope>test</scope>
      </dependency> -->
+    <!-- https://mvnrepository.com/artifact/org.mockito/mockito-all -->
+    <!--  <dependency>
+          <groupId>org.mockito</groupId>
+          <artifactId>mockito-all</artifactId>
+          <version>1.9.5</version>
+          <scope>test</scope>
+      </dependency>-->
   </dependencies>
   <build>
     <plugins>
-    <plugin>
-      <groupId>org.apache.maven.plugins</groupId>
-      <artifactId>maven-shade-plugin</artifactId>
-      <executions>
-        <execution>
-          <phase>package</phase>
-          <goals>
-            <goal>shade</goal>
-          </goals>
-          <configuration>
-            <artifactSet>
-              <includes>
-                <include>com.google.code.gson:gson</include>
-                <!--
-                  <dependency>
-          <groupId>com.google.code.gson</groupId>
-          <artifactId>gson</artifactId>
-          <version>${com.google.code.gson.version}</version>
-        </dependency>
-        2.8.5
-                -->
-                <!--<include>com.google.oauth-client:google-oauth-client</include>-->
-                <!--<include>com.google.apis:google-api-services-drive</include>-->
-                <!--<include>com.google.apis:google-api-services-oauth2</include>-->
-                <!--<include>com.google.http-client:google-http-client-jackson2</include>-->
-                <!--<include>com.google.http-client:google-http-client</include>-->
-              </includes>
-            </artifactSet>
-            <relocations>
-              <relocation>
-                <pattern>com.google.gson</pattern>
-                <shadedPattern>org.exoplatform.shaded.google.gson</shadedPattern>
-              </relocation>
-            </relocations>
-          </configuration>
-        </execution>
-      </executions>
-    </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-shade-plugin</artifactId>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+            <configuration>
+              <artifactSet>
+                <includes>
+                  <include>com.google.code.gson:gson</include>
+                  <include>com.microsoft.graph:microsoft-graph</include>
+                </includes>
+              </artifactSet>
+              <relocations>
+                <relocation>
+                  <pattern>com.google.gson</pattern>
+                  <shadedPattern>org.exoplatform.clouddrive.onedrive.shaded.google.gson</shadedPattern>
+                </relocation>
+                <relocation>
+                  <pattern>com.microsoft.graph</pattern>
+                  <shadedPattern>org.exoplatform.clouddrive.onedrive.shaded.microsoft.graph</shadedPattern>
+                </relocation>
+              </relocations>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
     </plugins>
   </build>
-
 </project>

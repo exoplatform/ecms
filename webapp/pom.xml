@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <parent>
     <groupId>org.exoplatform.addons.clouddrive</groupId>
     <artifactId>exo-clouddrive-onedrive</artifactId>
@@ -10,16 +9,14 @@
   <modelVersion>4.0.0</modelVersion>
 
   <artifactId>exo-clouddrive-onedrive-webapp</artifactId>
-
   <packaging>war</packaging>
-  <name>eXo Cloud Drive :: Connectors :: One Drive :: Webapp</name>
-  <description>eXo Cloud Drive One Drive connector exetension web application</description>
+  <name>eXo Cloud Drive :: Connectors :: OneDrive :: Webapp</name>
+  <description>eXo Cloud Drive Microsoft OneDrive connector exetension web application</description>
 
   <dependencies>
     <dependency>
       <groupId>org.exoplatform.addons.clouddrive</groupId>
       <artifactId>exo-clouddrive-onedrive-services</artifactId>
-      <!--<version>1.7.x-SNAPSHOT</version>-->
       <scope>provided</scope>
       <type>jar</type>
     </dependency>
@@ -59,6 +56,5 @@
       </resource>
     </resources>
   </build>
-
 
 </project>
