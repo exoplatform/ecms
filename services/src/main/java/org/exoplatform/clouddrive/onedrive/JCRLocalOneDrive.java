@@ -22,6 +22,7 @@ import javax.jcr.RepositoryException;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.microsoft.graph.core.ClientException;
 import com.microsoft.graph.http.GraphError;
 import com.microsoft.graph.http.GraphServiceException;
 import com.microsoft.graph.models.extensions.DriveItem;
@@ -36,6 +37,7 @@ import org.exoplatform.clouddrive.CloudProviderException;
 import org.exoplatform.clouddrive.CloudUser;
 import org.exoplatform.clouddrive.DriveRemovedException;
 import org.exoplatform.clouddrive.RefreshAccessException;
+import org.exoplatform.clouddrive.SkipChangeException;
 import org.exoplatform.clouddrive.SkipSyncException;
 import org.exoplatform.clouddrive.SyncNotSupportedException;
 import org.exoplatform.clouddrive.jcr.JCRLocalCloudDrive;
@@ -43,7 +45,6 @@ import org.exoplatform.clouddrive.jcr.JCRLocalCloudFile;
 import org.exoplatform.clouddrive.jcr.NodeFinder;
 import org.exoplatform.clouddrive.oauth2.UserToken;
 import org.exoplatform.clouddrive.oauth2.UserTokenRefreshListener;
-import org.exoplatform.clouddrive.onedrive.OneDriveAPI.HashSetCompatibleDriveItem;
 import org.exoplatform.clouddrive.utils.ExtendedMimeTypeResolver;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.log.ExoLogger;
@@ -337,7 +338,7 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
 
   private void initWebUrlForImage(SharingLink link) {
     String base64Url = Base64.getEncoder().encodeToString(link.webUrl.getBytes(StandardCharsets.UTF_8));
-    // TODO can we use something from JVM?
+    // implementation of url preparation is described in the api documentation. Just like here.
     String preparedBase64Url = "u!" + StringUtils.stripEnd(base64Url, "=").replace("/", "_").replace("+", "-");
     link.webUrl = "https://api.onedrive.com/v1.0/shares/" + preparedBase64Url + "/root/content";
   }
@@ -397,9 +398,6 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
     }
     SharingLink sharingLink = createLink(item);
     if (sharingLink.type.equalsIgnoreCase("embed")) { // personal account
-      // TODO cleanup
-      // link = item.webUrl;
-      // previewLink = sharingLink.webUrl;
       link = "personal=" + sharingLink.webUrl;
       previewLink = item.webUrl;
     } else if (sharingLink.type.equalsIgnoreCase("view")) { // business account
@@ -433,20 +431,20 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
             item.file.mimeType,
             link,
             previewLink,
-            null, // TODO thumbnail link: may be something better can be here?
+            null,
             createdUserName,
             lastModifiedUserName,
             item.createdDateTime,
             item.lastModifiedDateTime,
             item.size);
 
-    //...........................................
+
     return new JCRLocalCloudFile(fileNode.getPath(),
             item.id,
             item.name,
             link,
             previewLink,
-            null, // TODO thumbnail link
+            null, // to get thumbnailLink, you need at least one additional request.
             item.file.mimeType,
             null, // TODO type mode
             lastModifiedUserName,
@@ -458,42 +456,6 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
             true);
 
   }
-
-//  void initFileByDriveItem(Node fileNode,
-//                           DriveItem item) throws RepositoryException, OneDriveException {
-//    String link = "";
-//    String previewLink = "";
-//    String lastModifiedUserName = "";
-//    String createdUserName = "";
-//    if (item.lastModifiedBy != null && item.lastModifiedBy.user != null) {
-//      lastModifiedUserName = item.lastModifiedBy.user.displayName;
-//    }
-//    if (item.createdBy != null && item.createdBy.user != null) {
-//      createdUserName = item.createdBy.user.displayName;
-//    }
-//    SharingLink sharingLink = createLink(item);
-//    if (sharingLink.type.equalsIgnoreCase("embed")) { // personal account
-//      link = "personal=" + sharingLink.webUrl;
-//      previewLink = item.webUrl;
-//    } else if (sharingLink.type.equalsIgnoreCase("view")) { // business account
-//      link = "business=" + sharingLink.webUrl;
-//    }
-//
-//
-//    initFile(fileNode,
-//             item.id,
-//             item.name,
-//             item.file.mimeType,
-//             link,
-//             previewLink,
-//             null, // TODO thumbnail link: may be something better can be here?
-//             createdUserName,
-//             lastModifiedUserName,
-//             item.createdDateTime,
-//             item.lastModifiedDateTime,
-//             item.size);
-//  }
-
   private JCRLocalCloudFile createCloudFolder(Node fileNode, DriveItem item) throws RepositoryException {
     String lastModifiedUserName = "";
     String createdUserName = "";
@@ -513,26 +475,6 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
                                  createdUserName,
                                  item.createdDateTime,
                                  item.lastModifiedDateTime,
-                                 fileNode,
-                                 true);
-  }
-
-  private JCRLocalCloudFile createCloudFile(Node fileNode,
-                                            DriveItem item,
-                                            DriveItemInfo driveItemAdditionalInfo) throws RepositoryException {
-    return new JCRLocalCloudFile(fileNode.getPath(),
-                                 item.id,
-                                 item.name,
-                                 driveItemAdditionalInfo.getLink(),
-                                 driveItemAdditionalInfo.getPreviewLink(),
-                                 null, // TODO thumbnail link 
-                                 item.file.mimeType,
-                                 null, // TODO type mode
-                                 driveItemAdditionalInfo.getLastModifiedUserName(),
-                                 driveItemAdditionalInfo.getCreatedUserName(),
-                                 item.createdDateTime,
-                                 item.lastModifiedDateTime,
-                                 item.size,
                                  fileNode,
                                  true);
   }
@@ -584,7 +526,7 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
     @Override
     protected void fetchFiles() throws CloudDriveException, RepositoryException {
       String rootId = api.getRootId();
-      final OneDriveAPI.DeltaDriveFiles allFiles = api.getAllFiles();
+      final DeltaDriveFiles allFiles = api.getAllFiles();
       final List<DriveItem> items = allFiles.getItems();
 
       // parentId -> children
@@ -681,18 +623,12 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
               initFolderByDriveItem(node, driveItem);
               localCloudFile = createCloudFolder(node, driveItem);
             } else { // file
-              // initFileByDriveItem(fileNode, driveItem);
-              // jcrLocalCloudFile = createCloudFile(node, driveItem);
               localCloudFile = initCreateFile(node, driveItem);
             }
             addChanged(localCloudFile);
           }
-        } catch (Throwable ex) {
-          // TODO catch Throwable? Too rough, we have to know better what may come here
-          // TODO Should we warn/error to the log?
-          if (LOG.isDebugEnabled()) {
-            LOG.debug(">> Try move node after exception {}", ex.getMessage());
-          }
+        } catch (RepositoryException | OneDriveException ex) {
+          LOG.warn("An error occurred when a node was updating (move or rename), while synchronizing remote changes to local.");
           deleteItem(driveItem.id);
           DriveItem item = api.getItem(driveItem.id);
           if (item.file != null) { // file
@@ -783,10 +719,6 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
       if (LOG.isDebugEnabled()) {
         LOG.debug(">> Sync files with deltatoken {}", deltaToken);
       }
-      // TODO need this?
-      // if (deltaToken == null) {
-      // deltaToken = "latest";
-      // }
       changes = api.changes(deltaToken);
       iterators.add(changes);
       if (changes.hasNext()) {
@@ -794,9 +726,8 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
           readLocalNodes();
           syncNext();
           saveDeltaToken(changes.getDeltaToken());
-        } catch (Throwable ex) {
-          // TODO catch Throwable? Too rough, we have to know better what may come here
-          // TODO Should we warn/error to the log?
+        } catch (RepositoryException | ClientException ex) {
+          LOG.warn("Error occurred while synchronizing with the onedrive");
           if (LOG.isDebugEnabled()) {
             LOG.debug(">> Try update all drive after exception {}", ex.getMessage());
           }
@@ -876,10 +807,9 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
     public boolean removeFile(String id) {
       try {
         api.removeFile(id);
-      } catch (Throwable ex) {
-        // TODO what kind of ex here? Catch exact classes
+      } catch (ClientException ex) {
         LOG.warn("Error removing remote file {}", id, ex);
-        // TODO return false? or catch it higher?
+        return false;
       }
       return true;
     }
@@ -888,10 +818,9 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
     public boolean removeFolder(String id) {
       try {
         api.removeFolder(id);
-      } catch (Throwable ex) {
-        // TODO what kind of ex here? Catch exact classes
+      } catch (ClientException ex) {
         LOG.warn("Error removing remote folder {}", id, ex);
-        // TODO return false? or catch it higher?
+        return false;
       }
       return true;
     }
@@ -921,21 +850,6 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
       throw new SyncNotSupportedException("Trash not supported");
     }
 
-    @Deprecated // TODO cleanup
-    private String extractAppropriateOneDrivePath(Node fileNode) throws RepositoryException {
-      StringBuilder oneDrivePath = new StringBuilder();
-      while (fileNode != null && fileNode.hasProperty("exo:title")) {
-        oneDrivePath.insert(0, "/" + getTitle(fileNode));
-        fileNode = fileNode.getParent();
-      }
-
-      String path = oneDrivePath.substring(oneDrivePath.indexOf("/", oneDrivePath.indexOf("/") + 1) + 1);
-      if (LOG.isDebugEnabled()) {
-        LOG.debug("OneDrivePath: " + path);
-      }
-      return path;
-    }
-
     @Override
     public CloudFile createFile(Node fileNode,
                                 Calendar created,
@@ -948,16 +862,15 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
       DriveItem createdDriveItem = null;
       try {
         createdDriveItem = api.insert(getParentId(fileNode), getTitle(fileNode), created, modified, content, "rename");
-      } catch (Throwable ex) {
-        // TODO what kind of ex here? Catch exact classes
-        throw new OneDriveException("Error occured while upload file", ex);
+      } catch (OneDriveException ex) {
+        throw new OneDriveException("Error occured while upload file " + ex.getMessage(), ex);
       }
       try {
         return initCreateFile(fileNode, createdDriveItem);
-      } catch (Throwable e) {
-        // TODO what kind of ex here? Catch exact classes
-        // TODO what we solve by this? Further changes remotely will go to connected drive and fail
-        LOG.error("Error creating file {}", fileNode, e);
+      } catch (OneDriveException | RepositoryException e) {
+        //if an error occurred  saving the file locally, while the remote call was successful - delete the local file,
+        // throw SkipSyncException so that there is no attempt to call this method again. Since the file was uploaded to the onedrive, it will appear in the next  synchronization in delta changes.
+        LOG.warn("Error creating file {}", fileNode, e);
         fileNode.remove();
         throw new SkipSyncException("Error occurred storing data locally while loading a file");
       }
@@ -974,17 +887,19 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
     }
 
     @Override
-    public CloudFile copyFile(Node srcFileNode, Node destFileNode) throws CloudDriveException {
+    public CloudFile copyFile(Node srcFileNode, Node destFileNode) throws SkipSyncException, SkipChangeException {
+
+      DriveItem file = null;
       try {
-        DriveItem file = api.copyFile(getParentId(destFileNode), getTitle(destFileNode), getId(srcFileNode));
-        // initFileByDriveItem(destFileNode, file);
-        // return createCloudFolder(destFileNode, file);
+        file = api.copyFile(getParentId(destFileNode), getTitle(destFileNode), getId(srcFileNode));
+      } catch (IOException | CloudDriveException | RepositoryException e) {
+        throw new SkipChangeException(e.getMessage(),e);
+      }
+      try {
         return initCreateFile(destFileNode, file);
-      } catch (Throwable e) {
-        // TODO what kind of ex here? Catch exact classes
-        // TODO what we solve by this? Further changes remotely will go to connected drive and fail 
+      } catch (RepositoryException | CloudDriveException e) {
         LOG.error("Error copying file {} to {}", srcFileNode, destFileNode, e);
-        throw new SkipSyncException("Error during copy file");
+        throw new SkipSyncException("Error during copy file. " + e.getMessage());
       }
     }
 
@@ -1015,14 +930,14 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
     }
 
     @Override
-    public CloudFile copyFolder(Node srcFolderNode, Node destFolderNode) throws RepositoryException, CloudDriveException {
+    public CloudFile copyFolder(Node srcFolderNode, Node destFolderNode) throws SkipSyncException {
       try {
         DriveItem folder = api.copyFolder(getParentId(destFolderNode), getTitle(destFolderNode), getId(srcFolderNode));
         if (LOG.isDebugEnabled()) {
           LOG.debug(">> Copy to folder {}. Trying to delete local subtree...", folder.name);
         }
 
-        // TODO Is it a good idea to delete everything on the destination here, shouldn't it be already empty? 
+        // TODO Is it a good idea to delete everything on the destination here, shouldn't it be already empty?
         NodeIterator nodeIterator = destFolderNode.getNodes();
         while (nodeIterator.hasNext()) {
           Node n = nodeIterator.nextNode();
@@ -1039,9 +954,8 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
         }
 
         return createCloudFolder(destFolderNode, folder);
-      } catch (Throwable e) {
-        // TODO what kind of ex here? Catch exact classes
-        // TODO what we solve by this? Further changes remotely will go to connected drive and fail 
+      } catch (RepositoryException | IOException | CloudDriveException e) {
+        // TODO what we solve by this? Further changes remotely will go to connected drive and fail
         LOG.error("Error copying folder {} to {}", srcFolderNode, destFolderNode, e);
         throw new SkipSyncException("unable to copy folder");
       }
@@ -1056,7 +970,7 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
         return initCreateFile(fileNode, modifiedItem);
       } catch (Throwable e) {
         LOG.error("Error updating file {}", fileNode, e);
-        
+
         throw new SkipSyncException("error during updateFile");
       }
     }

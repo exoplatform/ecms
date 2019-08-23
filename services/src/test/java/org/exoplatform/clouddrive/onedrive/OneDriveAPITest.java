@@ -290,7 +290,6 @@ public class OneDriveAPITest {
 
   // .........................................................copy........................................................
 
-  // TODO changes
   @Test
   public void copyShouldCreateFileAtDestination() throws OneDriveException, RefreshAccessException {
 
