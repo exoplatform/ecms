@@ -9,9 +9,12 @@ import static org.junit.Assert.assertTrue;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 import java.util.Properties;
 import java.util.stream.Collectors;
 
@@ -29,15 +32,17 @@ import com.microsoft.graph.models.extensions.ItemReference;
 import com.microsoft.graph.models.extensions.User;
 import com.microsoft.graph.options.HeaderOption;
 import com.microsoft.graph.requests.extensions.GraphServiceClient;
+import com.microsoft.graph.requests.extensions.IDriveItemDeltaCollectionPage;
 
 import org.exoplatform.clouddrive.CloudDriveException;
 import org.exoplatform.clouddrive.RefreshAccessException;
-
 
 public class OneDriveAPITest {
   static IGraphServiceClient     graphClient;
 
   static OneDriveAPI             oneDriveAPI;
+
+  static String                  rootId;
 
   @Rule
   public final ExpectedException exception = ExpectedException.none();
@@ -53,7 +58,7 @@ public class OneDriveAPITest {
     properties.load(ClassLoader.getSystemClassLoader().getResourceAsStream("onedrive.properties"));
 
     oneDriveAPI = new OneDriveAPI(properties.getProperty("clientId"),
-                                 properties.getProperty("clientSecret"),
+                                  properties.getProperty("clientSecret"),
                                   "",
                                   getRefreshToken(),
                                   10,
@@ -65,6 +70,7 @@ public class OneDriveAPITest {
       String accessToken = retrieveAccessToken();
       iHttpRequest.getHeaders().add(new HeaderOption("Authorization", "Bearer " + accessToken));
     }).buildClient();
+    rootId = graphClient.me().drive().root().buildRequest().get().id;
   }
 
   @Before
@@ -126,40 +132,39 @@ public class OneDriveAPITest {
     assertEquals(expectedItem.id, actualItem.id);
 
   }
-    // ...........................................................createFolder............................................
-    @Test
-    public void createFolderShouldReturnAprrortiateItem() {
-        String rootId = graphClient.me().drive().root().buildRequest().get().id;
-        String fileName = "f1.test";
-        Calendar created = Calendar.getInstance();
-        DriveItem item = oneDriveAPI.createFolder(rootId, fileName, created);
 
-        assertEquals(rootId, item.parentReference.id);
-        assertEquals(fileName, item.name);
-        assertNotNull(item.folder);
-    }
+  // ...........................................................createFolder............................................
+  @Test
+  public void createFolderShouldReturnAprrortiateItem() {
+    String rootId = graphClient.me().drive().root().buildRequest().get().id;
+    String fileName = "f1.test";
+    Calendar created = Calendar.getInstance();
+    DriveItem item = oneDriveAPI.createFolder(rootId, fileName, created);
 
-    @Test
-    public void createFolder() {
-        String rootId = graphClient.me().drive().root().buildRequest().get().id;
-        DriveItem expectedItem = oneDriveAPI.createFolder(rootId, "createdFile.test", Calendar.getInstance());
-        List<DriveItem> items = graphClient.me().drive().root().children().buildRequest().get().getCurrentPage();
-        DriveItem actualItem = items.get(0);
+    assertEquals(rootId, item.parentReference.id);
+    assertEquals(fileName, item.name);
+    assertNotNull(item.folder);
+  }
 
+  @Test
+  public void createFolder() {
+    String rootId = graphClient.me().drive().root().buildRequest().get().id;
+    DriveItem expectedItem = oneDriveAPI.createFolder(rootId, "createdFile.test", Calendar.getInstance());
+    List<DriveItem> items = graphClient.me().drive().root().children().buildRequest().get().getCurrentPage();
+    DriveItem actualItem = items.get(0);
 
-
-        assertEquals(1, items.size());
-        assertNotNull(actualItem.folder);
-        assertEquals(expectedItem.id, actualItem.id);
-        assertEquals(expectedItem.size, actualItem.size);
-        assertEquals(expectedItem.name, actualItem.name);
-        assertEquals(expectedItem.parentReference.id, actualItem.parentReference.id);
-        assertEquals(expectedItem.id, actualItem.id);
-        assertEquals(expectedItem.fileSystemInfo.createdDateTime.getTimeInMillis(),
-                actualItem.fileSystemInfo.createdDateTime.getTimeInMillis());
-        assertEquals(expectedItem.fileSystemInfo.lastModifiedDateTime.getTimeInMillis(),
-                actualItem.fileSystemInfo.lastModifiedDateTime.getTimeInMillis());
-    }
+    assertEquals(1, items.size());
+    assertNotNull(actualItem.folder);
+    assertEquals(expectedItem.id, actualItem.id);
+    assertEquals(expectedItem.size, actualItem.size);
+    assertEquals(expectedItem.name, actualItem.name);
+    assertEquals(expectedItem.parentReference.id, actualItem.parentReference.id);
+    assertEquals(expectedItem.id, actualItem.id);
+    assertEquals(expectedItem.fileSystemInfo.createdDateTime.getTimeInMillis(),
+                 actualItem.fileSystemInfo.createdDateTime.getTimeInMillis());
+    assertEquals(expectedItem.fileSystemInfo.lastModifiedDateTime.getTimeInMillis(),
+                 actualItem.fileSystemInfo.lastModifiedDateTime.getTimeInMillis());
+  }
 
   // .....................................................removeFile......................................................
 
@@ -184,10 +189,11 @@ public class OneDriveAPITest {
 
     exception.expect(GraphServiceException.class);
     graphClient.me().drive().items(removedDriveItemId).buildRequest().get();
-//
+    //
 
   }
-    // .........................................................children..................................................
+
+  // .........................................................children..................................................
   @Test
   public void children() throws CloudDriveException {
     List<String> expectedItems = addThreeFiles().stream().map((item) -> item.id).collect(Collectors.toList());
@@ -200,9 +206,9 @@ public class OneDriveAPITest {
     assertTrue(expectedItems.size() == actualItems.size() && expectedItems.containsAll(actualItems)
         && actualItems.containsAll(expectedItems));
   }
-    // .........................................................createLink................................................
+  // .........................................................createLink................................................
 
-    // for embed and view
+  // for embed and view
   @Test
   public void createLink() throws OneDriveException {
     List<String> items = addThreeFiles().stream().map((item) -> item.id).collect(Collectors.toList());
@@ -213,7 +219,7 @@ public class OneDriveAPITest {
     assertEquals(expectedLink, actualLink);
   }
 
-    // .........................................................getItem...................................................
+  // .........................................................getItem...................................................
 
   @Test
   public void getItemShouldReturnAppropriateItem() {
@@ -240,7 +246,7 @@ public class OneDriveAPITest {
                  actualItem.fileSystemInfo.lastModifiedDateTime.getTimeInMillis());
   }
 
-    // .........................................................updateFile................................................
+  // .........................................................updateFile................................................
 
   @Test
   public void renameFile() {
@@ -256,8 +262,8 @@ public class OneDriveAPITest {
     assertEquals(expectedItem.parentReference.id, actualItem.parentReference.id);
     assertEquals(expectedItem.id, actualItem.id);
 
-
   }
+
   @Test
   public void moveFileShouldReturnAppropriateItem() throws CloudDriveException, URISyntaxException {
     DriveItem destFolder = addThreeFolders().get(0);
@@ -285,25 +291,28 @@ public class OneDriveAPITest {
   // .........................................................copy........................................................
 
   // TODO changes
-  // copyShouldCreateFileAtDestination
   @Test
   public void copyShouldCreateFileAtDestination() throws OneDriveException, RefreshAccessException {
 
-      DriveItem testFolder = addThreeFolders().get(0);
-      String parentId = testFolder.id;
-      DriveItem testFile = addThreeFiles().get(0);
-      String fileId = testFile.id;
-      String fileName = testFile.name;
+    DriveItem testFolder = addThreeFolders().get(0);
+    String parentId = testFolder.id;
+    DriveItem testFile = addThreeFiles().get(0);
+    String fileId = testFile.id;
+    String fileName = testFile.name;
 
-
-      oneDriveAPI.copy(parentId,fileName,fileId,true);
-      List<DriveItem> testFolderChildren = graphClient.me().drive().items(testFolder.id).children().buildRequest().get().getCurrentPage();
-      assertEquals(1,testFolderChildren.size());
-      DriveItem copiedFile = testFolderChildren.get(0);
-      assertEquals(copiedFile.name, testFile.name);
-      assertEquals(copiedFile.size, testFile.size);
+    oneDriveAPI.copy(parentId, fileName, fileId, true);
+    List<DriveItem> testFolderChildren = graphClient.me()
+                                                    .drive()
+                                                    .items(testFolder.id)
+                                                    .children()
+                                                    .buildRequest()
+                                                    .get()
+                                                    .getCurrentPage();
+    assertEquals(1, testFolderChildren.size());
+    DriveItem copiedFile = testFolderChildren.get(0);
+    assertEquals(copiedFile.name, testFile.name);
+    assertEquals(copiedFile.size, testFile.size);
   }
-
 
   @Test
   public void copyShouldNotRemoveItem() throws OneDriveException, RefreshAccessException {
@@ -313,8 +322,16 @@ public class OneDriveAPITest {
     String testFileId = testFile.id;
     String testFileName = testFile.name;
 
-    oneDriveAPI.copy(parentId,testFileName,testFileId,true);
-    boolean isFilePresent = graphClient.me().drive().root().children().buildRequest().get().getCurrentPage().stream().anyMatch(item -> item.id.equals(testFileId));
+    oneDriveAPI.copy(parentId, testFileName, testFileId, true);
+    boolean isFilePresent = graphClient.me()
+                                       .drive()
+                                       .root()
+                                       .children()
+                                       .buildRequest()
+                                       .get()
+                                       .getCurrentPage()
+                                       .stream()
+                                       .anyMatch(item -> item.id.equals(testFileId));
     assertTrue(isFilePresent);
   }
 
@@ -324,28 +341,43 @@ public class OneDriveAPITest {
   public void getAllFiles() {
     String rootId = graphClient.me().drive().root().buildRequest().get().id;
     List<DriveItem> files = addThreeFiles();
-    List<DriveItem> actualItems = oneDriveAPI.getAllFiles().getItems().stream().filter((item) -> !rootId.equals(item.id)).collect(Collectors.toList());
+    List<DriveItem> actualItems = oneDriveAPI.getAllFiles()
+                                             .getItems()
+                                             .stream()
+                                             .filter((item) -> !rootId.equals(item.id))
+                                             .collect(Collectors.toList());
 
-
-    assertEquals(files.size(),actualItems.size());
-
-    //need compare two arrays
+    assertListDriveItemEquals(files, actualItems);
 
   }
 
   // .........................................................changes.....................................................
-
   @Test
-  public void changes() {
-//    final QueryOption deltaTokenQuery = new QueryOption("token", deltaToken);
-//    collectionPage = graphClient.me()
-//            .drive()
-//            .root()
-//            .delta()
-//            .buildRequest(Collections.singletonList(deltaTokenQuery))
-//            .get();
-    oneDriveAPI.changes("");
+  public void fileUploadShouldBeInChanges() throws CloudDriveException {
+    String fileName = "testFile.txt";
+    byte[] fileContent = "some text".getBytes(Charset.forName("UTF-8"));
+    // get delta token
+    IDriveItemDeltaCollectionPage collectionPage = graphClient.me().drive().root().delta().buildRequest().get();
+    String deltaLink = collectionPage.getNextPage().buildRequest().get().deltaLink();
+    String deltaToken = deltaLink.substring(deltaLink.indexOf("=") + 1);
+
+    addFile(rootId, fileName, fileContent);
+    // get new items
+    OneDriveAPI.ChangesIterator changes = oneDriveAPI.changes(deltaToken);
+    List<DriveItem> newItems = new ArrayList<>();
+    while (changes.hasNext()) {
+      DriveItem item = changes.next();
+      if (!item.id.equals(rootId)) {
+        newItems.add(item);
+      }
+    }
+
+    assertEquals(1, newItems.size());
+    DriveItem newItem = newItems.get(0);
+    assertEquals(fileName, newItem.name);
+    assertEquals((long) fileContent.length, (long) newItem.size);
   }
+
   private List<DriveItem> addThreeFolders() {
     String rootId = graphClient.me().drive().root().buildRequest().get().id;
     String folderName1 = "fol1";
@@ -394,20 +426,41 @@ public class OneDriveAPITest {
     return items;
   }
 
-    private DriveItem renamedItem(DriveItem driveItem, String name) {
-        DriveItem item = new DriveItem();
-        item.id = driveItem.id;
-        item.name = name;
-        item.parentReference = new ItemReference();
-        item.parentReference.id = graphClient.me().drive().root().buildRequest().get().id;
-        return item;
-    }
+  private DriveItem renamedItem(DriveItem driveItem, String name) {
+    DriveItem item = new DriveItem();
+    item.id = driveItem.id;
+    item.name = name;
+    item.parentReference = new ItemReference();
+    item.parentReference.id = graphClient.me().drive().root().buildRequest().get().id;
+    return item;
+  }
 
-    public void shouldReturnRenamedFile() throws URISyntaxException {
-        List<DriveItem> items = addThreeFiles();
-        DriveItem driveItem = items.get(0);
-        DriveItem expectedItem = renamedItem(driveItem, "renF.test");
-        DriveItem actualItem = oneDriveAPI.updateFile(expectedItem);
-        assertEquals(expectedItem.name, actualItem.name);
+  public void shouldReturnRenamedFile() throws URISyntaxException {
+    List<DriveItem> items = addThreeFiles();
+    DriveItem driveItem = items.get(0);
+    DriveItem expectedItem = renamedItem(driveItem, "renF.test");
+    DriveItem actualItem = oneDriveAPI.updateFile(expectedItem);
+    assertEquals(expectedItem.name, actualItem.name);
+
+  }
+
+  void assertListDriveItemEquals(List<DriveItem> expected, List<DriveItem> actual) {
+    assertEquals(expected.size(), actual.size());
+
+    Comparator<DriveItem> comparator = Comparator.comparing(file -> file.id);
+    expected.sort(comparator);
+    actual.sort(comparator);
+    boolean isEquals = true;
+    for (int i = 0; i < expected.size(); i++) {
+      DriveItem expectedItem = expected.get(i);
+      DriveItem actualItem = actual.get(i);
+      if (!(expectedItem.name.equals(actualItem.name) && expectedItem.id.equals(actualItem.id)
+          && Objects.equals(expectedItem.size, actualItem.size))) {
+        isEquals = false;
+        break;
+      }
     }
+    assertTrue(isEquals);
+
+  }
 }
