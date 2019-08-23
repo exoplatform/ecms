@@ -120,9 +120,9 @@ public class FileindexingConnector extends ElasticIndexingServiceConnector {
     if(StringUtils.isEmpty(id)) {
       return null;
     }
-
+    ExtendedSession session = null;
     try {
-      ExtendedSession session = (ExtendedSession) WCMCoreUtils.getSystemSessionProvider().getSession("collaboration", repositoryService.getCurrentRepository());
+      session = (ExtendedSession) WCMCoreUtils.getSystemSessionProvider().getSession("collaboration", repositoryService.getCurrentRepository());
       Node node = session.getNodeByIdentifier(id);
 
       if(node == null || !node.isNodeType(NodetypeConstant.NT_FILE) || trashService.isInTrash(node) || isInContentFolder(node)) {
@@ -168,6 +168,11 @@ public class FileindexingConnector extends ElasticIndexingServiceConnector {
       return new Document(TYPE, id, null, new Date(), computePermissions(node), fields);
     } catch (RepositoryException | IOException e) {
       LOGGER.error("Error while indexing file " + id, e);
+    }
+    finally {
+      if (session != null) {
+        session.logout();
+      }
     }
 
     return null;
