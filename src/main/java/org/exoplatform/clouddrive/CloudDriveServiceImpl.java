@@ -520,12 +520,9 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
             NodeIterator r = q.execute().getNodes();
             while (r.hasNext()) {
               Node drive = r.nextNode();
-              // We're reading nodes directly here. Much pretty it would be to
-              // do this in connectors,
-              // but then it will cause more reads of the same items, thus will
-              // affects the
-              // performance a bit. So, to avoid reading of the same we do it
-              // here once.
+              // We're reading nodes directly here. Much pretty it would be to do this in connectors,
+              // but then it will cause more reads of the same items, thus will affects the
+              // performance a bit. So, to avoid reading of the same we do it here once.
               if (drive.getProperty("ecd:connected").getBoolean()) {
                 String providerId = drive.getProperty("ecd:provider").getString();
                 try {
