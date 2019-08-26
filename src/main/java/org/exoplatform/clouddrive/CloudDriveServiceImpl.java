@@ -484,13 +484,12 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
    */
   protected void registerDrive(CloudUser user, CloudDrive drive, String repoName) {
     // register in caches
-    Map<CloudUser, CloudDrive> drives = repositoryDrives.get(repoName);
-    if (drives == null) {
-      drives = new ConcurrentHashMap<CloudUser, CloudDrive>();
+    repositoryDrives.computeIfAbsent(repoName, rn -> { 
+      Map<CloudUser, CloudDrive> drives = new ConcurrentHashMap<CloudUser, CloudDrive>();
       repositoryDrives.put(repoName, drives);
       userDrives.put(user, drives);
-    }
-    drives.put(user, drive);
+      return drives;
+    }).put(user, drive);
 
     // add listeners
     for (CloudDriveListener listner : drivesListeners) {
