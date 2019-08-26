@@ -367,7 +367,7 @@ public abstract class CloudDriveConnector extends BaseComponentPlugin {
         } catch (InvalidItemStateException iise) {
           // already removed
         } catch (Throwable re) {
-          LOG.error("Error removing Cloud Drive node already marked as removed. " + e.getMessage(), e);
+          LOG.error("Error removing Cloud Drive node already marked as removed. " + e.getMessage(), re);
         }
       } catch (DriveRemovedException e) {
         // skip removed drive
