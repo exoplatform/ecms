@@ -18,12 +18,12 @@
  */
 package org.exoplatform.clouddrive;
 
-
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
+import javax.jcr.InvalidItemStateException;
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 
@@ -39,16 +39,36 @@ public abstract class LocalCloudFile implements CloudFile {
   private String             modifiedLocal;
 
   private String             modifiedRemote;
-  
-  public void initModified(Locale locale) {
+
+  /**
+   * Inits the modified dates of the file using given locale.
+   *
+   * @param locale the locale to format the dates
+   * @param drive the local drive, it may be used in need get a fresh file node from JCR
+   */
+  public void initModified(Locale locale, CloudDrive drive) {
     Node node = this.getNode();
     if (node != null) {
       try {
-        Calendar modifiedLocalDate = node.getProperty("exo:lastModifiedDate").getDate();
-        this.modifiedLocal = formatLocalizedDate(modifiedLocalDate, locale);
-        this.modifiedRemote = formatLocalizedDate(this.getModifiedDate(), locale);
+        try {
+          // File node can be set in another thread or JCR session expired, check this
+          node.getIndex();
+        } catch (InvalidItemStateException e) {
+          // Need get a fresh file node
+          node = null;
+          try {
+            node = LocalCloudFile.class.cast(drive.getFile(getPath())).getNode();
+          } catch (NotCloudFileException | NotCloudDriveException | DriveRemovedException | ClassCastException ncfe) {
+            // Not a drive of this file or drive disconnected or removed
+          }
+        }
+        if (node != null) {
+          Calendar modifiedLocalDate = node.getProperty("exo:lastModifiedDate").getDate();
+          this.modifiedLocal = formatLocalizedDate(modifiedLocalDate, locale);
+          this.modifiedRemote = formatLocalizedDate(this.getModifiedDate(), locale);
+        }
       } catch (RepositoryException e) {
-        LOG.warn("Cannot initialize cloud file modified fields:" + e.getMessage());
+        LOG.warn("Cannot initialize cloud file modified fields for {}", node, e);
       }
     }
   }
