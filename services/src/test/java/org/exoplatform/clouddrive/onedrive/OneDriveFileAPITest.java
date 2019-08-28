@@ -56,7 +56,7 @@ public class OneDriveFileAPITest {
         OneDriveProvider oneDriveProvider = new OneDriveProvider("id", "onedrive", "auth", "s");
         oneDriveAPI = mock(OneDriveAPI.class, RETURNS_DEEP_STUBS);
 
-        when(oneDriveAPI.getStoredToken()).thenReturn(mock(OneDriveAPI.OneDriveStoredToken.class));
+        when(oneDriveAPI.getStoredToken()).thenReturn(mock(OneDriveStoredToken.class));
         CloudUser cloudUser = new OneDriveUser("s","s","s",oneDriveProvider,oneDriveAPI);
 
         Session session = mock(Session.class, RETURNS_DEEP_STUBS);
