@@ -24,12 +24,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 
-import javax.jcr.AccessDeniedException;
-import javax.jcr.Node;
-import javax.jcr.NodeIterator;
-import javax.jcr.PathNotFoundException;
-import javax.jcr.Session;
-import javax.jcr.Workspace;
+import javax.jcr.*;
 import javax.jcr.lock.LockException;
 import javax.jcr.nodetype.ConstraintViolationException;
 import javax.portlet.PortletPreferences;
@@ -262,7 +257,10 @@ public class MoveNodeManageComponent extends UIAbstractManagerComponent {
 
       // Update thumbnail node for destination node
       thumbnailService.copyThumbnailNode(srcThumbnailNode, desNode);
-
+    } catch (ItemExistsException iee) {
+      uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.paste-node-same-name", null,
+              ApplicationMessage.WARNING));
+      return;
     } catch (Exception e) {
       Object[] args = { srcPath, messagePath };
       uiApp.addMessage(new ApplicationMessage("UIWorkingArea.msg.move-problem", args,

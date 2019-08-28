@@ -283,7 +283,7 @@ UIFileView.prototype.mouseUpItem = function(evt) {
 			var wsTarget = element.getAttribute('workspacename');
 			var idTarget = element.getAttribute('objectId');
 			//Dunghm: check symlink
-			var regex = new RegExp("^"+idTarget);
+			var regex = new RegExp("^"+idTarget+"$");
 			if(regex.test(Self.srcPath)){
 			  delete Self.srcPath;
 			  return ;
