@@ -557,10 +557,26 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
         .getApplicationComponent(ActionServiceContainer.class);
     try {
       if (ClipboardCommand.COPY.equals(type)) {
-
+        int i = 1;
+        String originalPath = destPath;
+        String name = srcNode.getName();
+        String originalName = name;
+        String title = null;
+        while (destNode.hasNode(name)) {
+          destPath = originalPath;
+          destPath += i;
+          name = originalName + i;
+          title = originalName + "(" + i + ")";
+          i++;
+        }
         pasteByCopy(destSession, srcWorkspace, srcPath, destPath);
         destNode = (Node) destSession.getItem(destPath);
         actionContainer.initiateObservation(destNode);
+        // Set title
+        if (title != null) {
+          destNode.setProperty(Utils.EXO_TITLE, title);
+        }
+        destNode.save();
       } else {
         pasteByCut(currentClipboard, uiExplorer, destSession, srcWorkspace, srcPath, destPath,
             actionContainer, isMultiSelect, isLastPaste, false);
