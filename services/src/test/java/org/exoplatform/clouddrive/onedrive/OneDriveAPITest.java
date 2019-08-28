@@ -37,6 +37,37 @@ import com.microsoft.graph.requests.extensions.IDriveItemDeltaCollectionPage;
 import org.exoplatform.clouddrive.CloudDriveException;
 import org.exoplatform.clouddrive.RefreshAccessException;
 
+
+/**
+ *  To run the test, you need clientId, clientSecret, refreshToken,
+ *  clientId, clientSecret you can get on the developer page in microsoft graph.
+ *
+ * - To get a refresh token, you need to type the following url in the browser:
+ *
+ * https://login.microsoftonline.com/common/oauth2/v2.0/authorize?
+ * client_id=your clientId
+ * &response_type=code
+ * &redirect_uri=your redirect uri
+ * &response_mode=query
+ * &scope=https://graph.microsoft.com/Files.Read.All https://graph.microsoft.com/Files.Read https://graph.microsoft.com/Files.Read.Selected https://graph.microsoft.com/Files.ReadWrite https://graph.microsoft.com/Files.ReadWrite.All https://graph.microsoft.com/Files.ReadWrite.AppFolder https://graph.microsoft.com/Files.ReadWrite.Selected https://graph.microsoft.com/User.Read https://graph.microsoft.com/User.ReadWrite https://graph.microsoft.com/User.ReadWrite offline_access https://graph.microsoft.com/User.ReadWrite.All Directory.AccessAsUser.All
+ *
+ * - After authorization where you must enter your test account credentials, you need save 'code' from address bar;
+ * - Using any http client, make the following request:
+ *
+ * POST https://login.microsoftonline.com/common/oauth2/v2.0/token
+ * Content-Type: application/x-www-form-urlencoded
+ *
+ *
+ * client_id=your clientId
+ * &scope=https://graph.microsoft.com/Files.Read.All https://graph.microsoft.com/Files.Read https://graph.microsoft.com/Files.Read.Selected https://graph.microsoft.com/Files.ReadWrite https://graph.microsoft.com/Files.ReadWrite.All https://graph.microsoft.com/Files.ReadWrite.AppFolder https://graph.microsoft.com/Files.ReadWrite.Selected https://graph.microsoft.com/User.Read https://graph.microsoft.com/User.ReadWrite https://graph.microsoft.com/User.ReadWrite offline_access https://graph.microsoft.com/User.ReadWrite.All Directory.AccessAsUser.All
+ * &code=your code
+ * &grant_type=authorization_code
+ * &redirect_uri=your redirect uri
+ * &client_secret=your client secret
+ *
+ * Response contains refresh token.
+ *
+ */
 public class OneDriveAPITest {
   static IGraphServiceClient     graphClient;
 
