@@ -20,6 +20,7 @@ import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 import javax.jcr.Node;
 import javax.jcr.nodetype.NodeDefinition;
@@ -27,6 +28,7 @@ import javax.jcr.nodetype.NodeType;
 import javax.jcr.nodetype.NodeTypeIterator;
 import javax.jcr.nodetype.NodeTypeManager;
 
+import org.apache.commons.lang.LocaleUtils;
 import org.exoplatform.commons.api.search.data.SearchContext;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.services.cms.drives.DriveData;
@@ -82,9 +84,11 @@ public abstract class BaseContentSearchServiceConnector extends BaseSearchServic
    * {@inheritDoc}
    */
   @Override
-  protected AbstractPageList<ResultNode> searchNodes(QueryCriteria criteria) throws Exception {
+  protected AbstractPageList<ResultNode> searchNodes(QueryCriteria criteria, SearchContext context) throws Exception {
+    String localeParam = context.getParamValue(SearchContext.RouterParams.LANG.create());
+    Locale locale = localeParam != null ? LocaleUtils.toLocale(localeParam) : null;
     return siteSearch_.searchSiteContents(WCMCoreUtils.getUserSessionProvider(),
-                                           criteria, (int)criteria.getLimit(), true);
+                                           criteria, locale, (int)criteria.getLimit(), true);
   }
 
   @Override

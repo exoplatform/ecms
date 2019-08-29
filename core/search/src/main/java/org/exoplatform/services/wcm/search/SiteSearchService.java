@@ -16,6 +16,7 @@
  */
 package org.exoplatform.services.wcm.search;
 
+import java.util.Locale;
 import java.util.Map;
 
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
@@ -89,6 +90,7 @@ public interface SiteSearchService {
    */
   public AbstractPageList<ResultNode> searchSiteContents(SessionProvider sessionProvider,
                                                     QueryCriteria queryCriteria,
+                                                    Locale locale,
                                                     int pageSize,
                                                     boolean isSearchContent) throws Exception;
 
@@ -103,6 +105,7 @@ public interface SiteSearchService {
    */
   public AbstractPageList<ResultNode> searchPageContents(SessionProvider sessionProvider,
                                                       QueryCriteria queryCriteria,
+                                                      Locale locale,
                                                       int pageSize,
                                                       boolean isSearchContent) throws Exception;
   

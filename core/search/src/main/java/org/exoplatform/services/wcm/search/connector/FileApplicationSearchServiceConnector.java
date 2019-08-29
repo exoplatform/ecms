@@ -17,6 +17,7 @@
 package org.exoplatform.services.wcm.search.connector;
 
 import org.apache.commons.lang.StringUtils;
+import org.exoplatform.commons.api.search.data.SearchContext;
 import org.exoplatform.commons.api.search.data.SearchResult;
 import org.exoplatform.commons.search.es.ElasticSearchFilter;
 import org.exoplatform.commons.search.es.ElasticSearchFilterType;
@@ -26,10 +27,10 @@ import org.exoplatform.services.cms.documents.DocumentService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.web.controller.metadata.ControllerDescriptor;
+import org.exoplatform.web.controller.router.Router;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 /**
  * Search connector for files for the Sites Explorer application
@@ -46,13 +47,22 @@ public class FileApplicationSearchServiceConnector extends FileSearchServiceConn
     super(initParams, client, repositoryService, documentService);
   }
 
-  public Collection<SearchResult> appSearch(String workspace, String path, String query, int offset, int limit, String sort, String order) {
+  public Collection<SearchResult> appSearch(String workspace, String path, Locale locale, String query, int offset, int limit, String sort, String order) {
     filteredWorkspace = workspace;
     filteredPath = path;
     if(StringUtils.isNotEmpty(filteredPath) && !filteredPath.endsWith("/")) {
       filteredPath += "/";
     }
-    return super.search(null, query, null, offset, limit, sort, order);
+
+    try {
+      SearchContext context = new SearchContext(new Router(new ControllerDescriptor()), "");
+      locale = locale != null ? locale : Locale.ENGLISH;
+      context.lang(locale.toString());
+      return super.search(context, query, null, offset, limit, sort, order);
+    } catch (Exception ex) {
+      LOG.error("Can not create SearchContext", ex);
+      return Collections.emptyList();
+    }
   }
 
   @Override

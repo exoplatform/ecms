@@ -358,7 +358,7 @@ public class TestSearchService extends BaseSearchTest {
   
   private AbstractPageList<ResultNode> getSearchResult(boolean isSearchContent, int searchItemPerPage) throws Exception{
     return siteSearchService.searchSiteContents(WCMCoreUtils.getSystemSessionProvider(),
-                                                queryCriteria, searchItemPerPage, isSearchContent);
+                                                queryCriteria, Locale.ENGLISH, searchItemPerPage, isSearchContent);
   }
 
   protected String[] getWebContentSearchedDocTypes() {
@@ -817,7 +817,7 @@ public class TestSearchService extends BaseSearchTest {
     queryCriteria.setSearchWebpage(false);
     queryCriteria.setFulltextSearch(true);
     queryCriteria.setFulltextSearchProperty(new String[] {"dc:description"});
-    assertEquals(0, siteSearchService.searchSiteContents(sessionProvider, queryCriteria, 10, true).getAvailable());
+    assertEquals(0, siteSearchService.searchSiteContents(sessionProvider, queryCriteria, Locale.ENGLISH, 10, true).getAvailable());
   }
 
   public void testSearchByDocumentType()throws Exception{
@@ -832,7 +832,7 @@ public class TestSearchService extends BaseSearchTest {
     String documentType = "exo:webContent";
     queryCriteria.setFulltextSearchProperty(null);
     queryCriteria.setContentTypes(documentType.split(","));
-    assertEquals(2, siteSearchService.searchSiteContents(sessionProvider, queryCriteria, 10, true).getAvailable());
+    assertEquals(2, siteSearchService.searchSiteContents(sessionProvider, queryCriteria, Locale.ENGLISH, 10, true).getAvailable());
   }
 
   public void testSearchByDocumentAuthor()throws Exception{
@@ -848,7 +848,7 @@ public class TestSearchService extends BaseSearchTest {
     String author = "root";
     queryCriteria.setAuthors(new String[]{author});
     //webcontent0, webcontent1, webcontent0[1], webcontent1[1]
-    assertEquals(4, siteSearchService.searchSiteContents(sessionProvider, queryCriteria, 10, true).getAvailable());
+    assertEquals(4, siteSearchService.searchSiteContents(sessionProvider, queryCriteria, Locale.ENGLISH, 10, true).getAvailable());
   }
 
   public void testSearchByMimeTypes()throws Exception{
@@ -862,7 +862,7 @@ public class TestSearchService extends BaseSearchTest {
     queryCriteria.setFulltextSearch(true);
     queryCriteria.setFulltextSearchProperty(null);
     queryCriteria.setMimeTypes(new String[]{"exo:webContent", "exo:siteBreadcrumb"});
-    AbstractPageList<ResultNode> pageList = siteSearchService.searchSiteContents(sessionProvider, queryCriteria, 10, true);
+    AbstractPageList<ResultNode> pageList = siteSearchService.searchSiteContents(sessionProvider, queryCriteria, Locale.ENGLISH, 10, true);
     assertEquals(2, pageList.getAvailable());
   }
 
@@ -880,7 +880,7 @@ public class TestSearchService extends BaseSearchTest {
     Node node = (Node)session.getItem("/sites content/live/classic/web contents/webcontent0");
     String uuid = node.getUUID();
     queryCriteria.setTagUUIDs(new String[]{uuid});
-    assertEquals(2, siteSearchService.searchSiteContents(sessionProvider, queryCriteria, 10, true).getAvailable());
+    assertEquals(2, siteSearchService.searchSiteContents(sessionProvider, queryCriteria, Locale.ENGLISH, 10, true).getAvailable());
   }
 
 
