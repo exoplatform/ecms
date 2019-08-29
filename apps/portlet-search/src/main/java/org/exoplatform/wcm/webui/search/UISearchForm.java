@@ -288,11 +288,13 @@ public class UISearchForm extends UIForm {
         if (pageChecked) {
           pageList = siteSearchService.searchPageContents(WCMCoreUtils.getSystemSessionProvider(),
                                                           queryCriteria,
+                                                          portletRequestContext.getLocale(),
                                                           itemsPerPage,
                                                           false);
         } else {
           pageList = siteSearchService.searchSiteContents(WCMCoreUtils.getUserSessionProvider(),
                                                          queryCriteria,
+                                                         portletRequestContext.getLocale(),
                                                          itemsPerPage,
                                                          false);          
         }        

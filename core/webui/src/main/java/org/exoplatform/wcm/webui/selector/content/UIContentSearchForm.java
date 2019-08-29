@@ -186,8 +186,10 @@ public class UIContentSearchForm extends UIForm {
       QueryCriteria qCriteria, int pageSize) throws Exception {
     qCriteria.setFulltextSearch(false);
     qCriteria.setKeyword(keyword);
+
+    WebuiRequestContext requestContext = WebuiRequestContext.getCurrentInstance();
     SiteSearchService siteSearch = getApplicationComponent(SiteSearchService.class);
-    return siteSearch.searchSiteContents(WCMCoreUtils.getUserSessionProvider(), qCriteria, pageSize, true);
+    return siteSearch.searchSiteContents(WCMCoreUtils.getUserSessionProvider(), qCriteria, requestContext.getLocale(), pageSize, true);
   }
 
   private AbstractPageList<ResultNode> searchContentByFulltext(String keyword,
@@ -195,8 +197,10 @@ public class UIContentSearchForm extends UIForm {
     qCriteria.setFulltextSearch(true);
     qCriteria.setFulltextSearchProperty(new String[] {QueryCriteria.ALL_PROPERTY_SCOPE});
     qCriteria.setKeyword(keyword);
+
+    WebuiRequestContext requestContext = WebuiRequestContext.getCurrentInstance();
     SiteSearchService siteSearch = getApplicationComponent(SiteSearchService.class);
-    return siteSearch.searchSiteContents(WCMCoreUtils.getUserSessionProvider(), qCriteria, pageSize, true);
+    return siteSearch.searchSiteContents(WCMCoreUtils.getUserSessionProvider(), qCriteria, requestContext.getLocale(), pageSize, true);
   }
 
   private AbstractPageList<ResultNode> searchContentByProperty(String property,
@@ -204,8 +208,10 @@ public class UIContentSearchForm extends UIForm {
     qCriteria.setFulltextSearch(true);
     qCriteria.setFulltextSearchProperty(new String[] {property});
     qCriteria.setKeyword(keyword);
+
+    WebuiRequestContext requestContext = WebuiRequestContext.getCurrentInstance();
     SiteSearchService siteSearchService = getApplicationComponent(SiteSearchService.class);
-    return siteSearchService.searchSiteContents(WCMCoreUtils.getUserSessionProvider(), qCriteria, pageSize, true);
+    return siteSearchService.searchSiteContents(WCMCoreUtils.getUserSessionProvider(), qCriteria, requestContext.getLocale(), pageSize, true);
   }
 
   private AbstractPageList<ResultNode> searchContentByDate(DATE_RANGE_SELECTED dateRangeSelected,
@@ -219,8 +225,10 @@ public class UIContentSearchForm extends UIForm {
     }
     qCriteria.setFulltextSearch(true);
     qCriteria.setFulltextSearchProperty(null);
+
+    WebuiRequestContext requestContext = WebuiRequestContext.getCurrentInstance();
     SiteSearchService siteSearch = getApplicationComponent(SiteSearchService.class);
-    return siteSearch.searchSiteContents(WCMCoreUtils.getUserSessionProvider(), qCriteria, pageSize, true);
+    return siteSearch.searchSiteContents(WCMCoreUtils.getUserSessionProvider(), qCriteria, requestContext.getLocale(), pageSize, true);
   }
 
   private AbstractPageList<ResultNode> searchContentByType(String documentType,
@@ -228,8 +236,10 @@ public class UIContentSearchForm extends UIForm {
     qCriteria.setFulltextSearch(true);
     qCriteria.setFulltextSearchProperty(null);
     qCriteria.setContentTypes(documentType.split(","));
+
+    WebuiRequestContext requestContext = WebuiRequestContext.getCurrentInstance();
     SiteSearchService siteSearch = getApplicationComponent(SiteSearchService.class);
-    return siteSearch.searchSiteContents(WCMCoreUtils.getUserSessionProvider(), qCriteria, pageSize, true);
+    return siteSearch.searchSiteContents(WCMCoreUtils.getUserSessionProvider(), qCriteria, requestContext.getLocale(), pageSize, true);
   }
 
   static public class SearchWebContentActionListener extends EventListener<UIContentSearchForm> {

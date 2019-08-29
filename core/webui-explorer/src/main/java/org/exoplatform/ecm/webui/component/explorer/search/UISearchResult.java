@@ -71,6 +71,7 @@ import org.exoplatform.services.wcm.search.base.SearchDataCreator;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.wcm.webui.paginator.UILazyPageIterator;
 import org.exoplatform.web.application.ApplicationMessage;
+import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
@@ -189,7 +190,9 @@ public class UISearchResult extends UIContainer {
     queryCriteria.setSearchPath(uiExplorer.getCurrentPath());
     queryCriteria.setSearchWebpage(false);
 
+    WebuiRequestContext requestContext = WebuiRequestContext.getCurrentInstance();
     pageList = PageListFactory.createPageList(queryData_.getQueryStatement(),
+                                              requestContext.getLocale(),
                                               queryData_.getWorkSpace(),
                                               queryData_.getLanguage_(),
                                               queryData_.isSystemSession(),

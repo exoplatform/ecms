@@ -212,11 +212,13 @@ public class UISearchResult extends UIContainer {
         if (isWebPage) {
           pageList = siteSearchService.searchPageContents(WCMCoreUtils.getSystemSessionProvider(),
                                                           queryCriteria,
+                                                          porletRequestContext.getLocale(),
                                                           itemsPerPage,
                                                           false);
         } else {
           pageList = siteSearchService.searchSiteContents(WCMCoreUtils.getUserSessionProvider(),
                                                          queryCriteria,
+                                                         porletRequestContext.getLocale(),
                                                          itemsPerPage,
                                                          false);          
         }
