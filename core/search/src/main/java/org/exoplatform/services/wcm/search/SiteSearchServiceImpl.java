@@ -189,6 +189,7 @@ public class SiteSearchServiceImpl implements SiteSearchService {
   @Override
   public AbstractPageList<ResultNode> searchSiteContents(SessionProvider sessionProvider,
                                                     QueryCriteria queryCriteria,
+                                                    Locale locale,
                                                     int pageSize,
                                                     boolean isSearchContent) throws Exception {
     ManageableRepository currentRepository = repositoryService.getCurrentRepository();
@@ -206,6 +207,7 @@ public class SiteSearchServiceImpl implements SiteSearchService {
       LOG.debug("execute query: " + query.getStatement().toLowerCase());
     }
     pageList = PageListFactory.createPageList(query.getStatement(),
+                                              locale,
                                               session.getWorkspace().getName(),
                                               query.getLanguage(),
                                               IdentityConstants.SYSTEM.equals(session.getUserID()),
@@ -226,6 +228,7 @@ public class SiteSearchServiceImpl implements SiteSearchService {
   @Override
   public AbstractPageList<ResultNode> searchPageContents(SessionProvider sessionProvider,
                                                       QueryCriteria queryCriteria,
+                                                      Locale locale,
                                                       int pageSize,
                                                       boolean isSearchContent) throws Exception {
     ManageableRepository currentRepository = repositoryService.getCurrentRepository();
@@ -234,13 +237,14 @@ public class SiteSearchServiceImpl implements SiteSearchService {
     long startTime = System.currentTimeMillis();
     Query query = createSearchPageQuery(queryCriteria, queryManager);
     if (query == null) {
-      return new ArrayNodePageList<ResultNode>(pageSize);
+      return new ArrayNodePageList<>(pageSize);
     }
     String suggestion = getSpellSuggestion(queryCriteria.getKeyword(), currentRepository);
     if (LOG.isDebugEnabled()) {
       LOG.debug("execute query: " + query.getStatement().toLowerCase());
     }
     AbstractPageList<ResultNode> pageList = PageListFactory.createPageList(query.getStatement(),
+                                                                           locale,
                                                                            session.getWorkspace()
                                                                                   .getName(),
                                                                            query.getLanguage(),
