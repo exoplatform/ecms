@@ -157,7 +157,7 @@ public class WCMPublicationServiceImpl
    * @param lifecycle
    * @throws Exception
    */
-  private void setInitialState(Node node, Lifecycle lifecycle, String remoteUser) throws Exception {
+  public void setInitialState(Node node, Lifecycle lifecycle, String remoteUser) throws Exception {
     List<State> states = lifecycle.getStates();
     if (states == null || states.size() <= 0) {
       if (LOG.isWarnEnabled()) {
