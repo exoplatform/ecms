@@ -248,6 +248,11 @@ public class UIFolderForm extends UIForm implements UIPopupComponent {
           }
         }
       }
+      if (currentNode.hasNode(name)) {
+        uiApp.addMessage(
+                new ApplicationMessage("UIFolderForm.msg.not-allow-sameNameSibling", null, ApplicationMessage.WARNING));
+        return;
+      }
 
       try {
         // Add node
