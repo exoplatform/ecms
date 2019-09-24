@@ -49,17 +49,6 @@
       </propertyDefinitions>
     </nodeType>
 
-    <nodeType name="mop:gadget" isMixin="false" hasOrderableChildNodes="false" primaryItemName="">
-      <supertypes>
-        <supertype>mop:customizationstate</supertype>
-      </supertypes>
-      <propertyDefinitions>
-        <propertyDefinition name="mop:prefs" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
-          <valueConstraints/>
-        </propertyDefinition>
-      </propertyDefinitions>
-    </nodeType>
-
     <nodeType name="mop:wsrpstate" isMixin="false" hasOrderableChildNodes="false" primaryItemName="">
        <supertypes>
           <supertype>mop:customizationstate</supertype>

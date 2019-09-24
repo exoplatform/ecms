@@ -22,11 +22,6 @@
   <listener>
     <listener-class>org.exoplatform.container.web.PortalContainerConfigOwner</listener-class>
   </listener>
-  <!--
-	<listener>
-    <listener-class>org.exoplatform.application.gadget.GadgetRegister</listener-class>
-  </listener>
-  -->
       
   <servlet>
     <servlet-name>GateInServlet</servlet-name>

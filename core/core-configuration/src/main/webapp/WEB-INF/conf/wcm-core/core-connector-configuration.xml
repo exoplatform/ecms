@@ -111,18 +111,6 @@
       </value-param>
     </init-params>
   </component>
-  <component>
-    <type>org.exoplatform.wcm.connector.fckeditor.GadgetConnector</type>
-    <init-params>
-      <properties-param>
-        <name>server.config</name>
-        <description>server.address</description>
-        <property name="scheme" value="${wcm.connector.gadgets.scheme:http}" />
-        <property name="hostName" value="${wcm.connector.gadgets.hostName:localhost}" />
-        <property name="port" value="${wcm.connector.gadgets.port:8080}" />
-      </properties-param>
-    </init-params>
-  </component>
 
   <external-component-plugins>
     <target-component>org.exoplatform.services.ecm.fckconfig.FCKConfigService</target-component>
