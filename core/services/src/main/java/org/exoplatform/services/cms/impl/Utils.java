@@ -980,16 +980,48 @@ public class Utils {
   * @return personal default folder or not
  */
  public static boolean isPersonalDefaultFolder(Node node) throws Exception {
-   if (node.hasProperty(NodetypeConstant.JCR_PRIMARY_TYPE)) {
-     String nodeType = node.getProperty(NodetypeConstant.JCR_PRIMARY_TYPE).getString();
-     if (nodeType.equals(NodetypeConstant.NT_UNSTRUCTURED) || nodeType.equals(NodetypeConstant.NT_FOLDER)) {
-       for (String specificFolder : SPECIFIC_FOLDERS) {
-         if (node.isNodeType(specificFolder)) {
-           return true;
-         }
-       }
-     }
-   }
+    if (node.hasProperty(NodetypeConstant.JCR_PRIMARY_TYPE)) {
+      String nodeType = node.getProperty(NodetypeConstant.JCR_PRIMARY_TYPE).getString();
+      if (nodeType.equals(NodetypeConstant.NT_UNSTRUCTURED) || nodeType.equals(NodetypeConstant.NT_FOLDER)) {
+        for (String specificFolder : SPECIFIC_FOLDERS) {
+          if (node.isNodeType(specificFolder)) {
+            NodeHierarchyCreator nodeHierarchyCreator = WCMCoreUtils.getService(NodeHierarchyCreator.class);
+            String relativePathAlias = null;
+            switch (specificFolder) {
+            case "exo:folksonomyFolder":
+              relativePathAlias = "userPrivateFolksonomy";
+              break;
+            case NodetypeConstant.EXO_DOCUMENTFOLDER:
+              relativePathAlias = "userPrivateDocuments";
+              break;
+            case NodetypeConstant.EXO_FAVOURITE_FOLDER:
+              relativePathAlias = "userPrivateFavorites";
+              break;
+            case NodetypeConstant.EXO_PICTUREFOLDER:
+              relativePathAlias = "userPrivatePicture";
+              break;
+            case NodetypeConstant.EXO_MUSICFOLDER:
+              relativePathAlias = "userPrivateAudio";
+              break;
+            case NodetypeConstant.EXO_VIDEOFOLDER:
+              relativePathAlias = "userPrivateVideo";
+              break;
+            case NodetypeConstant.EXO_SEARCHFOLDER:
+              relativePathAlias = "userPrivateSearches";
+              break;
+            default:
+              break;
+            }
+            if (relativePathAlias != null) {
+              String relativePath = nodeHierarchyCreator.getJcrPath(relativePathAlias);
+              if (relativePath != null && node.getPath().endsWith(relativePath)) {
+                return true;
+              }
+            }
+          }
+        }
+      }
+    }
    String path = node.getPath();
    String owner = ((ExtendedNode) node).getACL().getOwner();
    if (StringUtils.isNotBlank(path) && StringUtils.isNotBlank(owner)) {
