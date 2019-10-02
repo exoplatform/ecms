@@ -126,12 +126,15 @@ public class UIDocumentNodeList extends UIContainer {
     }
     //add new UIDocumentNodeList children
     for (Node node : getNodeChildrenList()) {
+      if (node == null) {
+        continue;
+      }
       if (node instanceof NodeLinkAware) {
         node = ((NodeLinkAware)node).getRealNode();
       }
       try {
         Node targetNode = linkManager_.isLink(node) ? linkManager_.getTarget(node) : node;
-        if (targetNode.isNodeType(NodetypeConstant.NT_FOLDER) || targetNode.isNodeType(NodetypeConstant.NT_UNSTRUCTURED)) {
+        if (targetNode != null && targetNode.isNodeType(NodetypeConstant.NT_FOLDER) || targetNode.isNodeType(NodetypeConstant.NT_UNSTRUCTURED)) {
           addUIDocList(getID(node));
         }
       } catch(ItemNotFoundException ine) {
