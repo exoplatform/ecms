@@ -4,6 +4,7 @@ import org.exoplatform.component.test.ConfigurationUnit;
 import org.exoplatform.component.test.ConfiguredBy;
 import org.exoplatform.component.test.ContainerScope;
 import org.exoplatform.ecms.test.BaseECMSTestCase;
+import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 
 import javax.jcr.Node;
 import java.util.HashMap;
@@ -31,22 +32,6 @@ public class IsNotSpecificFolderNodeFilterTest extends BaseECMSTestCase {
     testFolder = session.getRootNode().addNode("testNotSpecificFolderNodeFilter", "nt:unstructured");
   }
 
-  public void testShouldReturnFalseWhenSpecificFolder() throws Exception {
-    // Given
-    Node folder = testFolder.addNode("testFolder", "nt:folder");
-    folder.addMixin("exo:favoriteFolder");
-    session.getRootNode().save();
-    Map<String, Object> context = new HashMap<>();
-    context.put(Node.class.getName(), folder);
-    IsNotSpecificFolderNodeFilter filter = new IsNotSpecificFolderNodeFilter();
-
-    // When
-    boolean accept = filter.accept(context);
-
-    // Then
-    assertFalse(accept);
-  }
-
   public void testShouldReturnFalseWhenPersonalPublicFolder() throws Exception {
     // Given
     Node folderPublic = testFolder.addNode("Private", "nt:folder").addNode("Public", "nt:folder");
@@ -60,6 +45,30 @@ public class IsNotSpecificFolderNodeFilterTest extends BaseECMSTestCase {
 
     // Then
     assertFalse(accept);
+  }
+
+  public void testShouldReturnTrueWhenNotPersonalFolder() throws Exception {
+    Node folderPublic = testFolder.addNode("Private", "nt:folder").addNode("Public", "nt:folder");
+    Node folderVideo = folderPublic.addNode("Videos", "nt:folder");
+    folderVideo.addMixin("exo:videoFolder");
+    session.save();
+
+    Map<String, Object> context = new HashMap<>();
+    context.put(Node.class.getName(), folderVideo);
+
+    assertTrue(new IsNotSpecificFolderNodeFilter().accept(context));
+  }
+
+  public void testShouldReturnFalseWhenPersonalFolder() throws Exception {
+    Node folderPrivate = testFolder.addNode("Private", "nt:folder");
+    Node folderVideo = folderPrivate.addNode("Videos", "nt:folder");
+    folderVideo.addMixin("exo:videoFolder");
+    session.save();
+
+    Map<String, Object> context = new HashMap<>();
+    context.put(Node.class.getName(), folderVideo);
+
+    assertFalse(new IsNotSpecificFolderNodeFilter().accept(context));
   }
 
   public void testShouldReturnTrueWhenNotSpecificFolder() throws Exception {
