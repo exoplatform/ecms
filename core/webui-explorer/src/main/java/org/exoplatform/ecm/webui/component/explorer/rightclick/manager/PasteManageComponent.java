@@ -43,6 +43,8 @@ import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
 import org.exoplatform.services.cms.link.LinkUtils;
 import org.exoplatform.services.cms.relations.RelationsService;
 import org.exoplatform.services.cms.thumbnail.ThumbnailService;
+import org.exoplatform.services.jcr.access.PermissionType;
+import org.exoplatform.services.jcr.impl.core.NodeImpl;
 import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
@@ -63,20 +65,9 @@ import org.exoplatform.webui.ext.filter.UIExtensionFilters;
 import org.exoplatform.webui.ext.manager.UIAbstractManager;
 import org.exoplatform.webui.ext.manager.UIAbstractManagerComponent;
 
-import javax.jcr.AccessDeniedException;
-import javax.jcr.ItemExistsException;
-import javax.jcr.ItemNotFoundException;
-import javax.jcr.LoginException;
-import javax.jcr.Node;
-import javax.jcr.PathNotFoundException;
-import javax.jcr.Property;
-import javax.jcr.PropertyIterator;
-import javax.jcr.Session;
-import javax.jcr.Value;
-import javax.jcr.Workspace;
+import javax.jcr.*;
 import javax.jcr.lock.LockException;
-import javax.jcr.nodetype.ConstraintViolationException;
-import javax.jcr.nodetype.NodeType;
+import javax.jcr.nodetype.*;
 import javax.jcr.version.VersionException;
 
 import java.util.ArrayList;
@@ -588,24 +579,28 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
         thumbnailService.copyThumbnailNode(srcThumbnailNode, destNode);
       }
     } catch (ConstraintViolationException ce) {
+      LOG.debug("Error pasting document from {} to {}", srcPath, destPath, ce);
       uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.current-node-not-allow-paste", null,
           ApplicationMessage.WARNING));
 
       uiExplorer.updateAjax(event);
       return;
     } catch (VersionException ve) {
+      LOG.debug("Error pasting document from {} to {}", srcPath, destPath, ve);
       uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.copied-node-in-versioning", null,
           ApplicationMessage.WARNING));
 
       uiExplorer.updateAjax(event);
       return;
     } catch (ItemExistsException iee) {
+      LOG.debug("Error pasting document from {} to {}", srcPath, destPath, iee);
       uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.paste-node-same-name", null,
           ApplicationMessage.WARNING));
 
       uiExplorer.updateAjax(event);
       return;
     } catch (LoginException e) {
+      LOG.debug("Error pasting document from {} to {}", srcPath, destPath, e);
       if (ClipboardCommand.CUT.equals(type)) {
         uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.cannot-login-node", null,
             ApplicationMessage.WARNING));
@@ -619,12 +614,14 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
       uiExplorer.updateAjax(event);
       return;
     } catch (AccessDeniedException ace) {
+      LOG.debug("Error pasting document from {} to {}", srcPath, destPath, ace);
       uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.access-denied", null,
           ApplicationMessage.WARNING));
 
       uiExplorer.updateAjax(event);
       return;
     } catch (LockException locke) {
+      LOG.debug("Error pasting document from {} to {}", srcPath, destPath, locke);
       Object[] arg = { srcPath };
       uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.paste-lock-exception", arg,
           ApplicationMessage.WARNING));
@@ -634,6 +631,25 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
 
       uiExplorer.updateAjax(event);
       return;
+    }
+  }
+
+  private static void changeCopiedNodeOwner(Node destNode) throws RepositoryException {
+    Node destNodeSystem = WCMCoreUtils.getNodeBySystemSession(destNode);
+    String userID = destNode.getSession().getUserID();
+
+    if (destNodeSystem.isNodeType(NodetypeConstant.EXO_OWNEABLE)) {
+      destNodeSystem.removeMixin(NodetypeConstant.EXO_OWNEABLE);
+      destNodeSystem.save();
+      destNode.refresh(true);
+    }
+    if (destNodeSystem.isNodeType(NodetypeConstant.EXO_PRIVILEGEABLE)) {
+      ((NodeImpl) destNodeSystem).setPermission(userID, PermissionType.ALL);
+      destNodeSystem.save();
+      destNode.refresh(true);
+    }
+    if (destNode.canAddMixin(NodetypeConstant.EXO_OWNEABLE)) {
+      destNode.addMixin(NodetypeConstant.EXO_OWNEABLE);
     }
   }
 
@@ -656,7 +672,9 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
     Workspace workspace = session.getWorkspace();
     if (workspace.getName().equals(srcWorkspaceName)) {
       workspace.copy(srcPath, destPath);
+
       Node destNode = (Node) session.getItem(destPath);
+      changeCopiedNodeOwner(destNode);
       removeReferences(destNode);
     } else {
       try {
