@@ -40,4 +40,52 @@
 			</init-params>
 		</component-plugin>
 	</external-component-plugins>
+  <external-component-plugins>
+    <target-component>org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator</target-component>
+    <component-plugin>
+      <name>addUserPaths</name>
+      <set-method>addPlugin</set-method>
+      <type>org.exoplatform.services.jcr.ext.hierarchy.impl.UserAddPathPlugin</type>
+      <init-params>
+        <object-param>
+          <name>user.paths</name>
+          <description>User paths to create when initializing user home node</description>
+          <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig">
+            <field name="workspaces">
+              <collection type="java.util.ArrayList">
+                <value>
+                  <string>collaboration</string>
+                </value>
+              </collection>
+            </field>
+            <field name="jcrPaths">
+              <collection type="java.util.ArrayList">
+                <value>
+                  <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$JcrPath">
+                    <field name="path">
+                      <string>Private/Videos</string>
+                    </field>
+                    <field name="permissions">
+                      <collection type="java.util.ArrayList"/>
+                    </field>
+                    <field name="mixinTypes">
+                      <collection type="java.util.ArrayList">
+                        <value>
+                          <string>exo:videoFolder</string>
+                        </value>
+                      </collection>
+                    </field>
+                    <field name="alias">
+                      <string>userPrivateVideo</string>
+                    </field>
+                  </object>
+                </value>
+              </collection>
+            </field>
+          </object>
+        </object-param>
+      </init-params>
+    </component-plugin>
+  </external-component-plugins>
+
 </configuration>
