@@ -341,7 +341,9 @@ public class DocumentProviderUtils {
     @Override
     public NodeLinkAware createData(Node node, Row row, SearchResult searchResult) {
       try {
-        return (NodeLinkAware)parent.getNode(StringUtils.substringAfterLast(node.getPath(), "/"));
+        if (parent.hasNode(node.getName())) {
+          return (NodeLinkAware) parent.getNode(StringUtils.substringAfterLast(node.getPath(), "/"));
+        }
       } catch (RepositoryException e) {
         LOG.error("Can not create NodeLinkAware", e);
       }
