@@ -56,6 +56,7 @@ public class DocumentSearchServiceConnector extends BaseContentSearchServiceConn
   
   public DocumentSearchServiceConnector(InitParams initParams) throws Exception {
     super(initParams);
+    this.setEnabledForAnonymous(true);
   }
 
   /**
