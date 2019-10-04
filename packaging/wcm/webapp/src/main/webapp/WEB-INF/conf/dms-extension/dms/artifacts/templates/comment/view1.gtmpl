@@ -89,7 +89,7 @@ import org.exoplatform.web.application.Parameter ;
 								%>
 										(<%=_ctx.appRes("Comment.view.label.site")%>: <a onclick="javascript:window.open('$site');" style="cursor:pointer">$site</a>)  <%=_ctx.appRes("Comment.view.label.at")%>
 								<%}%>
-								 <span class="dateTime"><%= uicomponent.getPostedTimeString(_ctx, comment.getProperty("exo:commentDate").getDate().getTime()); %></span>
+								 <span class="dateTime"><%= uicomponent.getRelativeTimeLabel(_ctx, comment.getProperty("exo:commentDate").getDate().getTime()); %></span>
 								<div class="pull-right">
 									<%
 									String path = comment.getPath();
