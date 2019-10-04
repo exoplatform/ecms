@@ -30,6 +30,7 @@ import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.search.base.EcmsSearchResult;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
@@ -58,10 +59,13 @@ public class FileSearchServiceConnector extends ElasticSearchServiceConnector {
 
   private DocumentService documentService;
 
+  StringBuffer downloadUrl;
+
   public FileSearchServiceConnector(InitParams initParams, ElasticSearchingClient client, RepositoryService repositoryService, DocumentService documentService) {
     super(initParams, client);
     this.repositoryService = repositoryService;
     this.documentService = documentService;
+    this.setEnabledForAnonymous(true);
   }
 
   @Override
@@ -117,6 +121,11 @@ public class FileSearchServiceConnector extends ElasticSearchServiceConnector {
             nodePath,
             getBreadcrumb(nodePath));
 
+    String userId = ConversationState.getCurrent().getIdentity().getUserId();
+    boolean isAnonymous = userId == null || userId.isEmpty() || userId.equals("__anonim");
+    if (isAnonymous) {
+      ecmsSearchResult.setPreviewUrl(downloadUrl.toString());
+    }
     return ecmsSearchResult;
   }
 
@@ -169,7 +178,7 @@ public class FileSearchServiceConnector extends ElasticSearchServiceConnector {
       LOG.error("Cannot get repository name", e);
     }
 
-    StringBuffer downloadUrl = new StringBuffer();
+    downloadUrl = new StringBuffer();
     downloadUrl.append('/').append(restContextName).append("/jcr/").
             append(repositoryName).append('/').
             append(workspace).append(nodePath);
