@@ -31,7 +31,7 @@
         <email>E-mail</email>
         <site>Site-ul</site>
         <lastComment>Ultimul comentariu a fost postat de {user} la {time}</lastComment>
-        <Less_Than_A_Minute>mai puţin de un minut în urmă</Less_Than_A_Minute>
+        <Less_Than_A_Minute>cu mai puţin de un minut în urmă</Less_Than_A_Minute>
         <About_A_Minute>aproximativ cu un minut în urmă</About_A_Minute>
         <About_x_Minutes>aproximativ {0} minute în urmă</About_x_Minutes>
         <About_An_Hour>aproximativ cu o oră în urmă</About_An_Hour>

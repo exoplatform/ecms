@@ -32,14 +32,14 @@
         <site>الموقع</site>
         <lastComment>آخر تعليق تمّ ارساله بواسطة {user} على السّاعة {time}</lastComment>
         <Less_Than_A_Minute>less than a minute ago</Less_Than_A_Minute>
-        <About_A_Minute>about a minute ago</About_A_Minute>
-        <About_x_Minutes>about {0} minutes ago</About_x_Minutes>
-        <About_An_Hour>about an hour ago</About_An_Hour>
-        <About_x_Hours>about {0} hours ago</About_x_Hours>
-        <About_A_Day>about a day ago</About_A_Day>
-        <About_x_Days>about {0} days ago</About_x_Days>
-        <About_A_Month>about a month ago</About_A_Month>
-        <About_x_Months>about {0} months ago</About_x_Months>
+        <About_A_Minute>منذ نحو دقيقة</About_A_Minute>
+        <About_x_Minutes>منذ حوالي {0} دقائق</About_x_Minutes>
+        <About_An_Hour>منذ حوالي ساعة</About_An_Hour>
+        <About_x_Hours>منذ حوالي {0} ساعات</About_x_Hours>
+        <About_A_Day>منذ حوالي يوم</About_A_Day>
+        <About_x_Days>منذ حوالي {0} أيـّام</About_x_Days>
+        <About_A_Month>منذ حوالي شهر</About_A_Month>
+        <About_x_Months>منذ حوالي {0} أشهر</About_x_Months>
       </label>
     </view>
   </Comment>
