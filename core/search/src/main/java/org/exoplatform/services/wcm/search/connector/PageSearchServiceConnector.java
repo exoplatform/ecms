@@ -81,7 +81,7 @@ public class PageSearchServiceConnector extends BaseSearchServiceConnector {
     } else {
       String[] siteNames = criteria.getSiteName().split(",");
       String localeParam = context.getParamValue(SearchContext.RouterParams.LANG.create());
-      Locale locale = localeParam != null ? LocaleUtils.toLocale(localeParam) : null;
+      Locale locale = StringUtils.isNotBlank(localeParam) ? LocaleUtils.toLocale(localeParam) : Locale.ENGLISH;
       if (siteNames.length == 1) {//just search for 1 site
         return siteSearch_.searchPageContents(WCMCoreUtils.getUserSessionProvider(),
                                               criteria, locale,(int)criteria.getLimit(), false);
