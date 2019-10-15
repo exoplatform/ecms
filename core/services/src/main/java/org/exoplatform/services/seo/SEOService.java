@@ -51,7 +51,7 @@ public interface SEOService {
    */
   public PageMetadataModel getPageMetadata(String pageReference, String language) throws Exception;
 
-  public Map<String, PageMetadataModel> getPageMetadata(String id) throws Exception;
+  public Map<String, PageMetadataModel> getPageMetadatas(String id, String siteName) throws Exception;
 
   /**
    * Gets metadata of a content page.

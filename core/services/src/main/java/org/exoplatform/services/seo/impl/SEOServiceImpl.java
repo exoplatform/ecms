@@ -29,6 +29,7 @@ import java.util.Locale;
 import java.util.Map;
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
+import javax.jcr.PathNotFoundException;
 import javax.jcr.Session;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -374,12 +375,16 @@ public class SEOServiceImpl implements SEOService {
     return metaModel;
   }
 
-  public Map<String, PageMetadataModel> getPageMetadata(String id) throws Exception {
+  public Map<String, PageMetadataModel> getPageMetadatas(String id, String siteName) throws Exception {
     SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
     LivePortalManagerService livePortalManagerService = WCMCoreUtils
             .getService(LivePortalManagerService.class);
-    Node livePortalNode = livePortalManagerService.getLivePortal(sessionProvider,
-            Util.getUIPortal().getName());
+    Node livePortalNode;
+    try {
+       livePortalNode = livePortalManagerService.getLivePortal(sessionProvider, siteName);
+    } catch (PathNotFoundException ex) {
+      livePortalNode = null;
+    }
     //
     if (livePortalNode != null) {
       Node navNode = null;
