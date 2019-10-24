@@ -402,41 +402,50 @@ public class SEOServiceImpl implements SEOService {
         node = navNode.getNode(id);
       }
 
+      Node languageNode = null;
+      if(node.hasNode(LANGUAGES)) {
+        languageNode = node.getNode(LANGUAGES);
+      } else {
+        languageNode = node.addNode(LANGUAGES);
+      }
+
+      if(languageNode.canAddMixin("exo:hiddenable")) {
+        languageNode.addMixin("exo:hiddenable");
+      }
+
       Map<String, PageMetadataModel> metadataModels = new HashMap<>();
-      Iterator<Node> children = node.getNodes();
+      Iterator<Node> children = languageNode.getNodes();
       while (children.hasNext()) {
         Node child = children.next();
-        if (child.getName().startsWith(LANGUAGES)) {
-          String language = child.getName().replace(LANGUAGES, "");
-          Node seoNode = node.getNode(LANGUAGES+"/"+language);
-          if(seoNode.isNodeType("exo:pageMetadata")) {
-            PageMetadataModel metaModel = new PageMetadataModel();
-            if (seoNode.hasProperty("exo:metaTitle"))
-              metaModel.setTitle((seoNode.getProperty("exo:metaTitle")).getString());
-            if (seoNode.hasProperty("exo:metaKeywords"))
-              metaModel.setKeywords((seoNode.getProperty("exo:metaKeywords"))
-                      .getString());
-            if (seoNode.hasProperty("exo:metaDescription"))
-              metaModel
-                      .setDescription((seoNode.getProperty("exo:metaDescription"))
-                              .getString());
-            if (seoNode.hasProperty("exo:metaRobots"))
-              metaModel.setRobotsContent((seoNode.getProperty("exo:metaRobots"))
-                      .getString());
-            if (seoNode.hasProperty("exo:metaSitemap"))
-              metaModel.setSiteMap(Boolean.parseBoolean((seoNode
-                      .getProperty("exo:metaSitemap")).getString()));
-            if (seoNode.hasProperty("exo:metaPriority"))
-              metaModel.setPriority(Long.parseLong((seoNode
-                      .getProperty("exo:metaPriority")).getString()));
-            if (seoNode.hasProperty("exo:metaFrequency"))
-              metaModel.setFrequency((seoNode.getProperty("exo:metaFrequency"))
-                      .getString());
-            if (seoNode.hasProperty("exo:metaFully"))
-              metaModel.setFullStatus((seoNode.getProperty("exo:metaFully"))
-                      .getString());
-            metadataModels.put(language, metaModel);
-          }
+        String language = child.getName();
+        Node seoNode = languageNode.getNode(language);
+        if(seoNode.isNodeType("exo:pageMetadata")) {
+          PageMetadataModel metaModel = new PageMetadataModel();
+          if (seoNode.hasProperty("exo:metaTitle"))
+            metaModel.setTitle((seoNode.getProperty("exo:metaTitle")).getString());
+          if (seoNode.hasProperty("exo:metaKeywords"))
+            metaModel.setKeywords((seoNode.getProperty("exo:metaKeywords"))
+                    .getString());
+          if (seoNode.hasProperty("exo:metaDescription"))
+            metaModel
+                    .setDescription((seoNode.getProperty("exo:metaDescription"))
+                            .getString());
+          if (seoNode.hasProperty("exo:metaRobots"))
+            metaModel.setRobotsContent((seoNode.getProperty("exo:metaRobots"))
+                    .getString());
+          if (seoNode.hasProperty("exo:metaSitemap"))
+            metaModel.setSiteMap(Boolean.parseBoolean((seoNode
+                    .getProperty("exo:metaSitemap")).getString()));
+          if (seoNode.hasProperty("exo:metaPriority"))
+            metaModel.setPriority(Long.parseLong((seoNode
+                    .getProperty("exo:metaPriority")).getString()));
+          if (seoNode.hasProperty("exo:metaFrequency"))
+            metaModel.setFrequency((seoNode.getProperty("exo:metaFrequency"))
+                    .getString());
+          if (seoNode.hasProperty("exo:metaFully"))
+            metaModel.setFullStatus((seoNode.getProperty("exo:metaFully"))
+                    .getString());
+          metadataModels.put(language, metaModel);
         }
       }
       return metadataModels;
