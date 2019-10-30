@@ -32,6 +32,7 @@ import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.search.base.EcmsSearchResult;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -49,13 +50,14 @@ public class PageElasticUnifiedSearchServiceConnector extends ElasticSearchServi
   @Override
   protected String getSourceFields() {
     List<String> fields = new ArrayList<>();
-    fields.add("seo.title");
-    fields.add("seo.keywords");
-    fields.add("seo.description");
-    fields.add("seo.rbcontent");
-    fields.add("pageTitles");
-    fields.add("descriptions");
     fields.add("name");
+    fields.add("pageTitle");
+    fields.add("descriptions");
+    fields.add("seo");
+    fields.add("url");
+    fields.add("siteName");
+    fields.add("siteType");
+    fields.add("pageRef");
 
 
     List<String> sourceFields = new ArrayList<>();
@@ -75,6 +77,7 @@ public class PageElasticUnifiedSearchServiceConnector extends ElasticSearchServi
 
     LOG.debug("Search Query response from ES : {} ", jsonResponse);
 
+    String lang = context.getParamValue(SearchContext.RouterParams.LANG.create());
     Collection<SearchResult> results = new ArrayList<>();
     JSONParser parser = new JSONParser();
 
@@ -101,13 +104,29 @@ public class PageElasticUnifiedSearchServiceConnector extends ElasticSearchServi
       if (lastUpdatedDate == null) lastUpdatedDate = new Date().getTime();
       Double score = (Double) ((JSONObject) jsonHit).get("_score");
 
+      //
+      String detail = "";
+      if (hitSource.containsKey("descriptions")) {
+        String descriptions = (String)hitSource.get("descriptions");
+        if (StringUtils.isNotEmpty(descriptions)) {
+          try {
+            Map desc = (Map) parser.parse(descriptions);
+            if (desc.containsKey(lang)) {
+              detail = (String)desc.get(lang);
+            }
+          } catch (ParseException ex) {
+            LOG.error(ex);
+          }
+        }
+      }
+
       EcmsSearchResult result =
               //  new SearchResult(url, title, excerpt, detail, imageUrl, date, relevancy);
               new EcmsSearchResult(url,
                       url,
                       title,
                       "",
-                      "",
+                      detail,
                       "/eXoSkin/skin/images/system/unified-search/page.png",
                       lastUpdatedDate,
                       score.longValue(),
@@ -121,4 +140,23 @@ public class PageElasticUnifiedSearchServiceConnector extends ElasticSearchServi
 
   }
 
+  protected String getUrlFromJsonResult(JSONObject hitSource, SearchContext context) {
+    String uri = (String)hitSource.get("url");
+    String handler = WCMCoreUtils.getPortalName();
+    String siteType = (String)hitSource.get("siteType");
+    String siteName = (String)hitSource.get("siteName");
+
+    String url = "#";
+    try {
+      url = "/" + handler + context.handler(handler)
+              .lang("")
+              .siteType(siteType)
+              .siteName(siteName)
+              .path(uri)
+              .renderLink();
+    } catch (Exception ex) {
+      LOG.error(ex);
+    }
+    return url;
+  }
 }

@@ -95,14 +95,15 @@ public interface SiteSearchService {
                                                     boolean isSearchContent) throws Exception;
 
   /**
+   * This method is no longer supported. Please use the Elasticsearch implementation instead.
    * Searches for pages.
-   * 
    * @param sessionProvider The session provider.
    * @param queryCriteria The query criteria.
    * @param pageSize The page size.
    * @return The list of pages.
    * @throws Exception The exception
    */
+  @Deprecated
   public AbstractPageList<ResultNode> searchPageContents(SessionProvider sessionProvider,
                                                       QueryCriteria queryCriteria,
                                                       Locale locale,
