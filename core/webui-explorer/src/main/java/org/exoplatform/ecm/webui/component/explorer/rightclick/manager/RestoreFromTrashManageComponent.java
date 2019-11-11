@@ -72,7 +72,7 @@ import java.util.regex.Matcher;
 
 @ComponentConfig(
                  events = {
-                     @EventConfig(listeners = RestoreFromTrashManageComponent.RestoreFromTrashActionListener.class)
+                     @EventConfig(listeners = RestoreFromTrashManageComponent.RestoreFromTrashActionListener.class , csrfCheck = false)
                  }
     )
 public class RestoreFromTrashManageComponent extends UIAbstractManagerComponent {
