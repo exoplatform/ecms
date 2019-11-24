@@ -229,7 +229,12 @@ class GoogleDriveAPI implements DataStoreFactory {
        */
       @Override
       public DataStore<StoredCredential> set(String userId, StoredCredential value) throws IOException {
-        store(value);
+        if (value != null) {
+          store(value);
+        } else {
+          LOG.warn("Cannot save null credentials for user: {}. Erase locally saved as outdated.", userId);
+          clear();
+        }
         return this;
       }
 
@@ -238,7 +243,12 @@ class GoogleDriveAPI implements DataStoreFactory {
        */
       @Override
       public DataStore<StoredCredential> clear() throws IOException {
-        // TODO clear the token keys
+        // clear the token keys
+        try {
+          load(null, null, 0);
+        } catch (CloudDriveException e) {
+          LOG.error("Failed to delete credentials");
+        }
         return this;
       }
 
@@ -247,7 +257,8 @@ class GoogleDriveAPI implements DataStoreFactory {
        */
       @Override
       public DataStore<StoredCredential> delete(String userId) throws IOException {
-        // TODO clear the token keys
+        // clear the token keys
+        clear();
         return this;
       }
     }
