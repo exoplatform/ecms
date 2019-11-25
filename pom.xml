@@ -25,7 +25,7 @@
   <parent>
     <groupId>org.exoplatform.addons.clouddrive</groupId>
     <artifactId>exo-clouddrive</artifactId>
-    <version>1.8.x-SNAPSHOT</version>
+    <version>1.9.x-SNAPSHOT</version>
   </parent>
   
   <artifactId>exo-clouddrive-webapp</artifactId>
