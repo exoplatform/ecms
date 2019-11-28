@@ -1418,7 +1418,7 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
    * {@inheritDoc}
    */
   @Override
-  protected void refreshAccess() throws GoogleDriveException {
+  protected void refreshAccess() throws GoogleDriveException, RefreshAccessException {
     getUser().api().refreshAccess();
   }
 
