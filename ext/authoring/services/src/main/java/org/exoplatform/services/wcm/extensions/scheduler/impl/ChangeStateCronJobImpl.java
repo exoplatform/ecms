@@ -15,6 +15,7 @@ import javax.jcr.query.Query;
 import javax.jcr.query.QueryManager;
 import javax.jcr.query.QueryResult;
 
+import org.exoplatform.services.cms.documents.TrashService;
 import org.exoplatform.services.ecm.publication.PublicationPlugin;
 import org.exoplatform.services.ecm.publication.PublicationService;
 import org.exoplatform.services.jcr.RepositoryService;
@@ -132,7 +133,7 @@ public class ChangeStateCronJobImpl implements Job {
     } catch (RepositoryException ex) {
       if (LOG.isErrorEnabled()) LOG.error("Repository not found. Ignoring :  " + ex.getMessage(), ex);
     } catch (Exception ex) {
-      if (LOG.isErrorEnabled()) LOG.error("error when changing the state of the content : " + ex.getMessage(), ex);
+      if (LOG.isErrorEnabled()) LOG.error("error when changing nodes states : " + ex.getMessage(), ex);
     } finally {
       if (sessionProvider != null)
         sessionProvider.close();
@@ -144,6 +145,7 @@ public class ChangeStateCronJobImpl implements Job {
     long ret = 0;
     RepositoryService repositoryService_ = WCMCoreUtils.getService(RepositoryService.class);
     PublicationService publicationService = WCMCoreUtils.getService(PublicationService.class);
+    TrashService trashService = WCMCoreUtils.getService(TrashService.class);
     PublicationPlugin publicationPlugin = publicationService.getPublicationPlugins()
     .get(AuthoringPublicationConstant.LIFECYCLE_NAME);
     HashMap<String, String> context_ = new HashMap<String, String>();
@@ -164,43 +166,49 @@ public class ChangeStateCronJobImpl implements Job {
     
     for (NodeIterator iter = queryResult.getNodes(); iter.hasNext();) {
       Node node_ = iter.nextNode();
-      
       String path = node_.getPath();
-      if (!path.startsWith("/jcr:system")) {
-        if (NORMAL_NODE == nodeType) {
-          Date nodeDate = node_.getProperty(property).getDate().getTime();
-          if (LOG.isInfoEnabled()) LOG.info("'" + toState + "' " + node_.getPath() + " (" + property + "="
-              + format.format(nodeDate) + ")");
-  
-          if (PublicationDefaultStates.UNPUBLISHED.equals(toState)) {
-            if (node_.hasProperty(AuthoringPublicationConstant.LIVE_REVISION_PROP)) {
-              String liveRevisionProperty = node_.getProperty(AuthoringPublicationConstant.LIVE_REVISION_PROP)
-              .getString();
-              if (!"".equals(liveRevisionProperty)) {
-                Node liveRevision = session.getNodeByUUID(liveRevisionProperty);
-                if (liveRevision != null) {
-                  context_.put(AuthoringPublicationConstant.CURRENT_REVISION_NAME,
-                      liveRevision.getName());
+      try {
+        if (!path.startsWith("/jcr:system") && !trashService.isInTrash(node_)) {
+          if (NORMAL_NODE == nodeType) {
+            Date nodeDate = node_.getProperty(property).getDate().getTime();
+            if (LOG.isInfoEnabled()) LOG.info("'" + toState + "' " + node_.getPath() + " (" + property + "="
+                    + format.format(nodeDate) + ")");
+
+            if (PublicationDefaultStates.UNPUBLISHED.equals(toState)) {
+              if (node_.hasProperty(AuthoringPublicationConstant.LIVE_REVISION_PROP)) {
+                String liveRevisionProperty = node_.getProperty(AuthoringPublicationConstant.LIVE_REVISION_PROP)
+                        .getString();
+                if (!"".equals(liveRevisionProperty)) {
+                  Node liveRevision = session.getNodeByUUID(liveRevisionProperty);
+                  if (liveRevision != null) {
+                    context_.put(AuthoringPublicationConstant.CURRENT_REVISION_NAME,
+                            liveRevision.getName());
+                  }
                 }
               }
+
             }
-  
+            publicationPlugin.changeState(node_, toState, context_);
+            ret++;
+          } else {
+            LOG.info("'{}' {}", toState, node_.getPath());
+            publicationPlugin.changeState(node_, toState, context_);
           }
-          publicationPlugin.changeState(node_, toState, context_);
-          ret ++;
-        } else {
-          if (LOG.isInfoEnabled()) LOG.info("'" + toState + "' " + node_.getPath());
-          publicationPlugin.changeState(node_, toState, context_);
-        }
-        if(START_TIME_PROPERTY.equals(property) && node_.hasProperty(START_TIME_PROPERTY)){
-          node_.getProperty(START_TIME_PROPERTY).remove();
-          node_.save();
-        }
-        if(END_TIME_PROPERTY.equals(property) && node_.hasProperty(END_TIME_PROPERTY)){
-          node_.getProperty(END_TIME_PROPERTY).remove();
-          node_.save();
+          if (START_TIME_PROPERTY.equals(property) && node_.hasProperty(START_TIME_PROPERTY)) {
+            node_.getProperty(START_TIME_PROPERTY).remove();
+            node_.save();
+          }
+          if (END_TIME_PROPERTY.equals(property) && node_.hasProperty(END_TIME_PROPERTY)) {
+            node_.getProperty(END_TIME_PROPERTY).remove();
+            node_.save();
+          }
         }
       }
+      catch ( Exception e ) {
+        if (LOG.isErrorEnabled()) LOG.error("error when changing the state of the content : "+ node_.getPath() , e);
+      }
+
+
     }
     
     return ret;
