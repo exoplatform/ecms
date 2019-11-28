@@ -39,7 +39,7 @@ public abstract class UserToken {
   private String                        refreshToken;
 
   /** The expiration time. */
-  private long                          expirationTime;
+  private Long                          expirationTime;
 
   /** The listeners. */
   private Set<UserTokenRefreshListener> listeners = new LinkedHashSet<UserTokenRefreshListener>();
@@ -78,7 +78,7 @@ public abstract class UserToken {
    * @param expirationTime the expiration time
    * @throws CloudDriveException the cloud drive exception
    */
-  public void load(String accessToken, String refreshToken, long expirationTime) throws CloudDriveException {
+  public void load(String accessToken, String refreshToken, Long expirationTime) throws CloudDriveException {
     this.accessToken = accessToken;
     this.refreshToken = refreshToken;
     this.expirationTime = expirationTime;
@@ -92,7 +92,7 @@ public abstract class UserToken {
    * @param expirationTime the expiration time
    * @throws CloudDriveException the cloud drive exception
    */
-  public void store(String accessToken, String refreshToken, long expirationTime) throws CloudDriveException {
+  public void store(String accessToken, String refreshToken, Long expirationTime) throws CloudDriveException {
     load(accessToken, refreshToken, expirationTime);
     fireListenersRefresh();
   }
@@ -103,7 +103,7 @@ public abstract class UserToken {
    * @throws CloudDriveException the cloud drive exception
    */
   public void clear() throws CloudDriveException {
-    load(null, null, 0);
+    load(null, null, null);
     fireListenersRemove();
   }
 
@@ -115,15 +115,14 @@ public abstract class UserToken {
    * @throws CloudDriveException the cloud drive exception
    */
   public void merge(UserToken newToken) throws CloudDriveException {
-    newToken.removeListeners(); // May 4 2014, remove listeners on newToken (was
-                                // on this instance)
+    newToken.removeListeners(); // May 4 2014, remove listeners on newToken (was on this instance)
     store(newToken.getAccessToken(), newToken.getRefreshToken(), newToken.getExpirationTime());
   }
 
   /**
    * Gets the access token.
    *
-   * @return the accessToken
+   * @return the access token, can be <code>null</code>
    */
   public String getAccessToken() {
     return accessToken;
@@ -132,7 +131,7 @@ public abstract class UserToken {
   /**
    * Gets the refresh token.
    *
-   * @return the refreshToken
+   * @return the refresh token, can be <code>null</code>
    */
   public String getRefreshToken() {
     return refreshToken;
@@ -141,9 +140,9 @@ public abstract class UserToken {
   /**
    * Gets the expiration time.
    *
-   * @return the expirationTime
+   * @return the expiration time, can be <code>null</code>
    */
-  public long getExpirationTime() {
+  public Long getExpirationTime() {
     return expirationTime;
   }
 

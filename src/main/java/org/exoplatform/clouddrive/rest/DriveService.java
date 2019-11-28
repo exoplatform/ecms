@@ -195,9 +195,9 @@ public class DriveService implements ResourceContainer {
           } catch (ExecutionException e) {
             Throwable err = e.getCause();
             if (err instanceof RefreshAccessException) {
-              Throwable cause = err.getCause();
-              LOG.warn("Access to cloud drive expired, forbidden or revoked. " + err.getMessage()
-                  + (cause != null ? ". " + cause.getMessage() : ""));
+              LOG.warn("Synchronization failed, need refresh access to cloud drive for {}. {}",
+                       local.getUser().getId(),
+                       err.getMessage() + (err.getCause() != null ? ". " + err.getCause().getMessage() : ""));
               // client should treat this status in special way and obtain new
               // credentials using given provider
               return Response.status(Status.FORBIDDEN).entity(local.getUser().getProvider()).build();
@@ -233,6 +233,13 @@ public class DriveService implements ResourceContainer {
             return Response.status(Status.INTERNAL_SERVER_ERROR)
                            .entity(ErrorEntiry.message("Unexpected server error. Synchronization canceled. Try again later."))
                            .build();
+          } catch (RefreshAccessException e) {
+            LOG.warn("Synchronization cannot start, need refresh access to cloud drive for {}. {}",
+                     local.getUser().getId(),
+                     e.getMessage() + (e.getCause() != null ? ". " + e.getCause().getMessage() : ""));
+            // client should treat this status in special way and obtain new
+            // credentials using given provider
+            return Response.status(Status.FORBIDDEN).entity(local.getUser().getProvider()).build();
           } catch (CloudDriveException e) {
             LOG.error("Error synchronizing drive " + workspace + ":" + path, e);
             return Response.status(Status.INTERNAL_SERVER_ERROR)
