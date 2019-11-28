@@ -205,6 +205,16 @@
       <artifactId>commons-testing</artifactId>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>org.powermock</groupId>
+      <artifactId>powermock-module-junit4</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.powermock</groupId>
+      <artifactId>powermock-api-mockito</artifactId>
+      <scope>test</scope>
+    </dependency>
     <!-- This artifact is used only for wikbook compilation -->
     <dependency>
       <groupId>org.exoplatform.doc</groupId>
