@@ -82,7 +82,7 @@ public class PageListFactory {
     // remove duplications
     results = new ArrayList<>(new LinkedHashSet<>(results));
 
-    if(criteria != null && criteria.getOffset() > 0) {
+    if(criteria != null && criteria.getOffset() > 0 && results.size() > 0) {
       results = results.subList((int) criteria.getOffset(), results.size());
     }
 
