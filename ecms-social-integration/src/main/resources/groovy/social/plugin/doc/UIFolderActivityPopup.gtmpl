@@ -1,0 +1,40 @@
+<%
+/*
+<!--
+
+  Copyright (C) 2003-2019 eXo Platform SAS.
+ 
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU Affero General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU Affero General Public License for more details.
+ 
+  You should have received a copy of the GNU Affero General Public License
+  along with this program. If not, see <http://www.gnu.org/licenses/>.
+
+-->
+*/
+%>
+
+<%
+  String cancel = uicomponent.event("Cancel");
+  String select = uicomponent.event("SelectFolder");
+%>
+<div class="UIDocActivityPopup" id="$uicomponent.id">
+    <% uicomponent.renderChildren(); %>
+    <div class="clearfix uiActionBorder">
+	    <div class="uiAction pull-right">
+	      <button class="btn selectFolderBTN" type="button" onclick="$select" disabled="disabled">
+          <%=_ctx.appRes("UIDocActivityPopup.label.select");%>
+	      </button>
+	      <button class="btn" type="button" onclick="$cancel">
+          <%=_ctx.appRes("UIDocActivityPopup.label.cancel");%>
+        </button>
+	    </div>
+    </div>
+</div>

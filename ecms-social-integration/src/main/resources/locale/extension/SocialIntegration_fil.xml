@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UIConfirmMessage>
+    <label>
+      <ReadOnly>Buksan Basahin lamang</ReadOnly>
+    </label>
+  </UIConfirmMessage>
+
+  <UISocialPopupWindow>
+    <title>
+      <UIReadOnlyFileConfirmMessage>Buksan Dokumento</UIReadOnlyFileConfirmMessage>
+    </title>
+  </UISocialPopupWindow>
+  <SocialIntegration>
+    <titles>
+      <fileSize>Laki ng File</fileSize>
+    </titles>
+    <messages>
+      <createdBy>ay nilikha ng</createdBy>
+      <editedBy>ay na edit by</editedBy>
+      <system>ang sistema</system>
+      <readmore>...Magbasa ng marami.</readmore>
+      <editTitle>Titulo ay na update sa: {0}</editTitle>
+      <editName>Ang pangalan ay na update sa: {0}</editName>
+      <editDescription>Ang paglalarawan ay na update na: {0}</editDescription>
+      <singleCreator>Ang likha ay {0}</singleCreator>
+      <multiCreator>Mga tagapaglikha ay {0}</multiCreator>
+      <addSource>Pinagmulan: {0} ay dinagdag</addSource>
+      <addMultiSource>Pinagmulan: {0} ay nadagdag</addMultiSource>
+      <removeSource>Pinagmulan: {0} ay inalis</removeSource>
+      <removeMultiSource>Pinagmulan: {0} ay naging inalis</removeMultiSource>
+      <editSummary>Ang buod ay na update sa: {0}</editSummary>
+      <editLanguage>Ang linggwahe ay na update na sa: {0}</editLanguage>
+      <editContent>Ang ang content ay na update na.</editContent>
+      <editFile>Ang helera ay updated na.</editFile>
+      <emptyTitle>Ang titulo ay naalis.</emptyTitle>
+      <emptySummary>Ang buod ay naalis na.</emptySummary>
+      <emptyContent>Ang nilalaman ay naalis na.</emptyContent>
+      <updateMetadata>Ang metal na datos {0} ay na update sa: {1}</updateMetadata>
+      <removeMetadata>Ang metal na datos {0} ay naalis na.</removeMetadata>
+      <removeTitle>Ang titulo ay naalis na.</removeTitle>
+      <removeName>Ang pangalan ay na tanggal na.</removeName>
+      <removeSummary>Ang buod ay na tanggal na.</removeSummary>
+      <removeDescription>Ang paglalarawan ay na tanggal na.</removeDescription>
+      <removeCreator>Lumikha: {0} ay na tanggal na.</removeCreator>
+      <removeMultiCreator>Ang mga lumikha: {0} ay na alisna.</removeMultiCreator>
+      <removeLanguage>Ang lingwahe ay naalis na.</removeLanguage>
+      <removeContent>Ang laman ay naalis na.</removeContent>
+      <attachmentAdded>Ang mga hanay(s) ay na kabit na.</attachmentAdded>
+      <attachmentRemoved>Ang mga hanay(s) ay naalis na.</attachmentRemoved>
+      <categoryAdded>Kategorya: {0} ay na dagdag na.</categoryAdded>
+      <categoryRemoved>Kategorya: {0} ay na tanggal na.</categoryRemoved>
+      <tagAdded>Tag: {0} ay nadagdag na.</tagAdded>
+      <tagsAdded>Mga Tag: {0} ay naidagdag na.</tagsAdded>
+      <tagRemoved>Tag: {0} ay natanggal na.</tagRemoved>
+      <tagsRemoved>Mga Tags: {0} ay natanggal na.</tagsRemoved>
+      <stateChange>
+        <pending>Papapahayag ng stado ngayon ay nabibitin.</pending>
+        <approved>Dokumento ay aprobado na.</approved>
+        <staged>Ang paghahayag sa publiko.</staged>
+        <published>Ang dokumento ay ipupubliko na.</published>
+      </stateChange>
+      <contentMoved>Ang paglalathala ay na ilipat sa: {0}</contentMoved>
+      <fileMoved>Ang helera ay nailipat sa: {0}</fileMoved>
+      <revisionChanged>Ang paglalathala ay na ibalik sa version nito: {0}</revisionChanged>
+      <version>Bersyon: {0}</version>
+      <updatedOn>Binago na</updatedOn>
+      <updatedBy>ni</updatedBy>
+      <loadMoreFiles>+{0} Parami</loadMoreFiles>
+    </messages>
+    <publicationStates>
+      <archived>Na archived</archived>
+      <obsolete>Lipas na</obsolete>
+      <unpublished>Hindi naisapubliko</unpublished>
+      <draft>Banghay</draft>
+      <pending>Nakabitin</pending>
+      <approved>Inaprubahan</approved>
+      <inreview>Ang pagsusuri</inreview>
+      <staged>Larangan</staged>
+      <published>Nailathala na</published>
+      <live>Nailathala na</live>
+    </publicationStates>
+    <view>Tignan</view>
+    <edit>I-edit</edit>
+    <download>I-download</download>
+    <downloadAll>Kopyahin lahat</downloadAll>
+    <preview>Ang Prebyu</preview>
+  </SocialIntegration>
+  <UIPopupWindow>
+    <title>
+      <DocViewer>Ang Prebyu</DocViewer>
+      <UIReadOnlyFileConfirmMessage>Buksan Dokumento</UIReadOnlyFileConfirmMessage>
+    </title>
+  </UIPopupWindow>
+  <ElementSet>
+    <dialog>
+      <label>
+        <resourceType>Uri ng Resource</resourceType>
+      </label>
+    </dialog>
+  </ElementSet>
+  <UIPreviewCommentArea>
+    <label>
+      <commentTextAreaPreview>Magdagdag ng iyong komento...</commentTextAreaPreview>
+      <no-comment-yet>Uri ng Resource</no-comment-yet>
+    </label>
+  </UIPreviewCommentArea>
+
+  <OpenDocumentInOffice>
+    <label>
+      <exo.remote-edit.word>Open In Word</exo.remote-edit.word>
+      <exo.remote-edit.excel>Open In Excel</exo.remote-edit.excel>
+      <exo.remote-edit.powerpoint>Open In Powerpoint</exo.remote-edit.powerpoint>
+      <exo.remote-edit.desktop>Open On Desktop</exo.remote-edit.desktop>
+      <exo.remote-edit.desktop-app>Open In</exo.remote-edit.desktop-app>
+    </label>
+  </OpenDocumentInOffice>
+
+  <UIPopupMenu>
+    <msg>
+      <lock-node-read-only>Ang payl na ito ay ikinandado ng gumagamit na si {0}. Buksan at basahin lamang?</lock-node-read-only>
+    </msg>
+  </UIPopupMenu>
+  <ECMContextMenu>
+    <event>
+      <ShareDocuments>Ibahagi</ShareDocuments>
+    </event>
+  </ECMContextMenu>
+  <UIPopupWindow>
+    <title>
+      <UIShareDocuments>Ibahagi ang Dokumento</UIShareDocuments>
+      <Share>Ibahagi</Share>
+    </title>
+  </UIPopupWindow>
+  <UIShareDocuments>
+    <label>
+      <ShareButton>Ibahagi</ShareButton>
+      <CancelButton>Kanselahin</CancelButton>
+      <TextAreaInit>Magpadala ng mensahe kapag nagbabahagi...</TextAreaInit>
+      <ShareWith>Ibahagi kay</ShareWith>
+      <Access>Ang Access</Access>
+      <SpaceMember>Members</SpaceMember>
+      <SelectASpace>Pumili ng isang Space</SelectASpace>
+      <SharedADocument>nagbahagi ng isang dokumento</SharedADocument>
+      <WhoHasAccess>Sino ang may access</WhoHasAccess>
+      <success>Ang dokumentong ito ay nabahagi nang matagumpay</success>
+      <NoPermission>Hindi ka pinapayagan na ibahagi ang dokumentong ito</NoPermission>
+      <NoPermissionDelete>Hindi mo mabubura ang pahintulot na ito</NoPermissionDelete>
+      <InvalidDeletion>Hindi mo mabubura ang iyong sariling pahintulot</InvalidDeletion>
+      <InvalidEntry>Ang pahintulot na ito ay hindi ma-edit</InvalidEntry>
+      <InvalidOwner>Hindi mo maaaring baguhin ang mga pahintulot ng may-ari</InvalidOwner>
+      <Invalid>Paumanhin, hindi namin matukoy ang '{0}' bilang isang balidong user o pangalan ng space</Invalid>
+      <option>
+        <read>Maaaring tingnan</read>
+        <modify>Maaaring mag-edit</modify>
+      </option>
+      <notification>
+        <read>basahin</read>
+        <modify>i-edit</modify>
+      </notification>
+      <invite>
+        <placeholder>Maglagay ng mga user o mga pangalan ng space...</placeholder>
+      </invite>
+      <owner>Ang May-ari</owner>
+    </label>
+  </UIShareDocuments>
+
+  <UIActionBar>
+    <tooltip>
+      <ShareDocuments>I-Share</ShareDocuments>
+    </tooltip>
+  </UIActionBar>
+</bundle>

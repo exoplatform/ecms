@@ -148,11 +148,6 @@
     </dependency>
     <!-- "unused declared" by analyze but still need for test -->
     <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-simple</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
       <groupId>org.exoplatform.ecms</groupId>
       <artifactId>ecms-testsuite-test</artifactId>
       <scope>test</scope>

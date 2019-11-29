@@ -1,0 +1,1368 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Copyright (C) 2003-2011 eXo Platform SAS.
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program. If not, see <http://www.gnu.org/licenses/>.
+
+-->
+<configuration
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd http://www.exoplatform.org/xml/ns/kernel_1_2.xsd"
+        xmlns="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd">
+  <component>
+    <type>org.exoplatform.services.scheduler.impl.QuartzSheduler</type>
+  </component>
+
+  <component>
+    <type>org.exoplatform.web.WebAppController</type>
+    <init-params>
+      <value-param>
+        <name>controller.config</name>
+        <value>target/test-classes/conf/standalone/controller.xml</value>
+      </value-param>
+    </init-params>
+  </component>
+
+  <component>
+    <key>org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator</key>
+    <type>org.exoplatform.services.jcr.ext.hierarchy.impl.NodeHierarchyCreatorImpl</type>
+  </component>
+
+  <component>
+    <key>org.exoplatform.services.scheduler.JobSchedulerService</key>
+    <type>org.exoplatform.commons.testing.mock.MockJobSchedulerService</type>
+  </component>
+  <component>
+    <key>org.exoplatform.portal.config.UserACL</key>
+    <type>org.exoplatform.portal.config.UserACL</type>
+    <init-params>
+      <value-param>
+        <name>super.user</name>
+        <description>administrator</description>
+        <value>${exo.super.user:root}</value>
+      </value-param>
+
+      <value-param>
+        <name>portal.administrator.groups</name>
+        <description>administrator</description>
+        <value>/platform/administrators</value>
+      </value-param>
+
+      <value-param>
+        <name>portal.administrator.mstype</name>
+        <description>administrator</description>
+        <value>manager</value>
+      </value-param>
+
+      <value-param>
+        <name>portal.creator.groups</name>
+        <description>groups with membership type have permission to manage portal</description>
+        <value>*:/platform/administrators,*:/organization/management/executive-board</value>
+      </value-param>
+
+      <value-param>
+        <name>navigation.creator.membership.type</name>
+        <description>specific membership type have full permission with group navigation</description>
+        <value>manager</value>
+      </value-param>
+      <value-param>
+        <name>guests.group</name>
+        <description>guests group</description>
+        <value>/platform/guests</value>
+      </value-param>
+      <values-param>
+        <name>mandatory.groups</name>
+        <description>Groups that can not be deleted.</description>
+        <value>/platform/administrators</value>
+        <value>/platform/users</value>
+        <value>/platform/guests</value>
+      </values-param>
+      <values-param>
+        <name>mandatory.mstypes</name>
+        <description>Membership type that can not be deleted.</description>
+        <value>member</value>
+        <value>*</value>
+      </values-param>
+    </init-params>
+  </component>
+  <component>
+    <key>org.exoplatform.services.cache.CacheService</key>
+    <jmx-name>cache:type=CacheService</jmx-name>
+    <type>org.exoplatform.services.cache.impl.CacheServiceImpl</type>
+    <init-params>
+      <object-param>
+        <name>cache.config.default</name>
+        <object type="org.exoplatform.services.cache.ExoCacheConfig">
+          <field name="name"><string>default</string></field>
+          <field name="maxSize"><int>30000</int></field>
+          <field name="liveTime"><long>60000</long></field>
+          <field name="distributed"><boolean>false</boolean></field>
+          <field name="implementation"><string>org.exoplatform.services.cache.concurrent.ConcurrentFIFOExoCache</string></field>
+        </object>
+      </object-param>
+    </init-params>
+  </component>
+
+  <component>
+    <key>org.exoplatform.portal.config.UserACL</key>
+    <type>org.exoplatform.portal.config.UserACL</type>
+    <init-params>
+      <value-param>
+        <name>super.user</name>
+        <description>administrator</description>
+        <value>root</value>
+      </value-param>
+
+      <value-param>
+        <name>portal.administrator.groups</name>
+        <description>administrator</description>
+        <value>/platform/administrators</value>
+      </value-param>
+
+      <value-param>
+        <name>portal.administrator.mstype</name>
+        <description>administrator</description>
+        <value>manager</value>
+      </value-param>
+
+      <value-param>
+        <name>portal.creator.groups</name>
+        <description>groups with membership type have permission to manage portal</description>
+        <value>*:/platform/administrators,*:/organization/management/executive-board</value>
+      </value-param>
+
+      <value-param>
+        <name>navigation.creator.membership.type</name>
+        <description>specific membership type have full permission with group navigation</description>
+        <value>manager</value>
+      </value-param>
+
+      <value-param>
+        <name>guests.group</name>
+        <description>guests group</description>
+        <value>/platform/guests</value>
+      </value-param>
+
+      <values-param>
+        <name>mandatory.groups</name>
+        <description>Groups that can not be deleted.</description>
+        <value>/platform/administrators</value>
+        <value>/platform/users</value>
+        <value>/platform/guests</value>
+        <value>/customers</value>
+        <value>/partners</value>
+        <value>/organization/management/executive-board</value>
+        <value>/organization/management/human-resources</value>
+        <value>/organization/communication/marketing</value>
+        <value>/organization/communication/press-and-media</value>
+        <value>/organization/operations/sales</value>
+        <value>/organization/operations/finances</value>
+        <value>/developers</value>
+        <value>/spaces</value>
+      </values-param>
+
+      <values-param>
+        <name>mandatory.mstypes</name>
+        <description>Membership type that can not be deleted.</description>
+        <value>member</value>
+      </values-param>
+    </init-params>
+  </component>
+
+  <component>
+    <key>org.exoplatform.social.core.application.RelationshipPublisher</key>
+    <type>org.exoplatform.social.core.application.RelationshipPublisher</type>
+  </component>
+
+  <component>
+    <key>org.exoplatform.social.core.storage.cache.SocialStorageCacheService</key>
+    <type>org.exoplatform.social.core.storage.cache.SocialStorageCacheService</type>
+  </component>
+
+  <component>
+    <key>org.exoplatform.commons.chromattic.ChromatticManager</key>
+    <type>org.exoplatform.commons.chromattic.ChromatticManager</type>
+  </component>
+
+  <component>
+    <key>org.exoplatform.social.common.lifecycle.LifeCycleCompletionService</key>
+    <type>org.exoplatform.social.common.lifecycle.LifeCycleCompletionService</type>
+    <init-params>
+      <value-param>
+        <name>async-execution</name>
+        <value>false</value>
+      </value-param>
+    </init-params>
+  </component>
+
+  <component>
+    <key>org.exoplatform.commons.api.persistence.DataInitializer</key>
+    <type>org.exoplatform.commons.persistence.impl.LiquibaseDataInitializer</type>
+    <init-params>
+      <value-param>
+        <name>liquibase.datasource</name>
+        <value>java:/comp/env/exo-jpa_portal</value>
+      </value-param>
+      <value-param>
+        <name>liquibase.contexts</name>
+        <value>production</value>
+      </value-param>
+    </init-params>
+  </component>
+
+  <component>
+    <type>org.exoplatform.commons.persistence.impl.EntityManagerService</type>
+  </component>
+
+  <component>
+    <key>org.exoplatform.commons.file.services.FileService</key>
+    <type>org.exoplatform.ecms.mock.MockFileService</type>
+  </component>
+
+  <component>
+    <key>org.exoplatform.social.core.jpa.storage.dao.StreamItemDAO</key>
+    <type>org.exoplatform.social.core.jpa.storage.dao.jpa.StreamItemDAOImpl</type>
+  </component>
+
+  <component>
+    <key>org.exoplatform.social.core.jpa.storage.dao.ConnectionDAO</key>
+    <type>org.exoplatform.social.core.jpa.storage.dao.jpa.ConnectionDAOImpl</type>
+  </component>
+
+  <component>
+    <key>org.exoplatform.social.core.jpa.storage.dao.ActivityDAO</key>
+    <type>org.exoplatform.social.core.jpa.storage.dao.jpa.ActivityDAOImpl</type>
+  </component>
+
+  <component>
+    <key>org.exoplatform.social.core.jpa.storage.dao.IdentityDAO</key>
+    <type>org.exoplatform.social.core.jpa.storage.dao.jpa.IdentityDAOImpl</type>
+  </component>
+
+  <component>
+    <key>org.exoplatform.social.core.jpa.storage.dao.SpaceDAO</key>
+    <type>org.exoplatform.social.core.jpa.storage.dao.jpa.SpaceDAOImpl</type>
+  </component>
+
+  <component>
+    <key>org.exoplatform.social.core.jpa.storage.dao.SpaceMemberDAO</key>
+    <type>org.exoplatform.social.core.jpa.storage.dao.jpa.SpaceMemberDAOImpl</type>
+  </component>
+
+  <!--
+    Activity storage components.
+  -->
+  <component>
+    <key>org.exoplatform.social.core.storage.api.ActivityStorage</key>
+    <type>org.exoplatform.social.core.storage.cache.CachedActivityStorage</type>
+  </component>
+
+  <component>
+    <type>org.exoplatform.social.core.jpa.storage.RDBMSActivityStorageImpl</type>
+  </component>
+
+  <!--
+    Identity storage components.
+  -->
+  <component>
+    <type>org.exoplatform.social.core.jpa.storage.RDBMSIdentityStorageImpl</type>
+  </component>
+
+  <component>
+    <key>org.exoplatform.social.core.storage.api.IdentityStorage</key>
+    <type>org.exoplatform.social.core.storage.cache.CachedIdentityStorage</type>
+  </component>
+
+  <!--
+    Relationship storage components.
+  -->
+  <component>
+    <type>org.exoplatform.social.core.jpa.storage.RDBMSRelationshipStorageImpl</type>
+  </component>
+
+  <component>
+    <key>org.exoplatform.social.core.storage.api.RelationshipStorage</key>
+    <type>org.exoplatform.social.core.storage.cache.CachedRelationshipStorage</type>
+  </component>
+
+  <!--
+    Space storage components.
+  -->
+  <component>
+    <type>org.exoplatform.social.core.jpa.storage.RDBMSSpaceStorageImpl</type>
+  </component>
+
+  <component>
+    <key>org.exoplatform.social.core.storage.api.SpaceStorage</key>
+    <type>org.exoplatform.social.core.storage.cache.CachedSpaceStorage</type>
+  </component>
+
+  <component>
+    <key>org.exoplatform.social.core.service.LinkProvider</key>
+    <type>org.exoplatform.social.core.service.LinkProvider</type>
+    <init-params>
+      <value-param>
+        <name>predefinedOwner</name>
+        <description>this for generate profile link</description>
+        <value>classic</value>
+      </value-param>
+    </init-params>
+  </component>
+
+  <component>
+    <key>org.exoplatform.social.core.processor.OSHtmlSanitizerProcessor</key>
+    <type>org.exoplatform.social.core.processor.OSHtmlSanitizerProcessor</type>
+  </component>
+
+  <component>
+    <key>org.exoplatform.social.common.xmlprocessor.XMLProcessor</key>
+    <type>org.exoplatform.social.common.xmlprocessor.XMLProcessorImpl</type>
+  </component>
+
+  <component>
+    <key>org.exoplatform.social.core.manager.ActivityManager</key>
+    <type>org.exoplatform.social.core.manager.ActivityManagerImpl</type>
+    <component-plugins>
+      <component-plugin>
+        <name>OSHtmlSanitizer</name>
+        <set-method>addProcessorPlugin</set-method>
+        <type>org.exoplatform.social.core.processor.OSHtmlSanitizerProcessor</type>
+        <init-params>
+          <value-param>
+            <name>priority</name>
+            <description>priority of this processor (lower are executed first)</description>
+            <value>3</value>
+          </value-param>
+        </init-params>
+      </component-plugin>
+    </component-plugins>
+  </component>
+
+  <component>
+    <key>org.exoplatform.social.core.identity.model.PropertiesDefinition</key>
+    <type>org.exoplatform.social.core.identity.model.PropertiesDefinition</type>
+  </component>
+
+  <component>
+    <key>org.exoplatform.social.core.manager.RelationshipManager</key>
+    <type>org.exoplatform.social.core.manager.RelationshipManagerImpl</type>
+  </component>
+
+  <component>
+    <key>org.exoplatform.social.core.identity.IdentityProvider</key>
+    <type>org.exoplatform.social.core.identity.provider.OrganizationIdentityProvider</type>
+  </component>
+
+  <component>
+    <type>org.exoplatform.social.core.identity.provider.SpaceIdentityProvider</type>
+  </component>
+
+  <component>
+    <type>org.exoplatform.social.core.identity.provider.OrganizationIdentityProvider</type>
+  </component>
+  
+  <component>
+    <key>org.exoplatform.social.core.manager.IdentityManager</key>
+    <type>org.exoplatform.social.core.manager.IdentityManagerImpl</type>
+    <component-plugins>
+      <component-plugin>
+        <name>SpaceIdentityProvider plugin</name>
+        <set-method>registerIdentityProviders</set-method>
+        <type>org.exoplatform.social.core.identity.IdentityProviderPlugin</type>
+        <init-params>
+          <values-param>
+          <name>providers</name>
+            <description>Identity Providers</description>
+            <value>org.exoplatform.social.core.identity.provider.SpaceIdentityProvider</value>
+            <value>org.exoplatform.social.core.identity.provider.OrganizationIdentityProvider</value>
+          </values-param>
+        </init-params>
+      </component-plugin>
+    </component-plugins>
+  </component>
+
+  <component>
+    <key>org.exoplatform.social.core.service.ProfileConfig</key>
+    <type>org.exoplatform.social.core.service.ProfileConfig</type>
+    <init-params>
+      <values-param>
+        <name>nodetype.emails</name>
+        <value>exo:profileKeyValue</value>
+      </values-param>
+      <values-param>
+        <name>nodetype.phones</name>
+        <value>exo:profileKeyValue</value>
+      </values-param>
+      <values-param>
+        <name>nodetype.ims</name>
+        <value>exo:profileKeyValue</value>
+      </values-param>
+      <values-param>
+        <name>nodetype.urls</name>
+        <value>exo:profileKeyValue</value>
+      </values-param>
+      <values-param>
+        <name>nodetype.address</name>
+        <value>exo:profileAddress</value>
+      </values-param>
+      <values-param>
+        <name>nodetype.experiences</name>
+        <value>exo:profileExperience</value>
+      </values-param>
+      <values-param>
+        <name>nodetype.education</name>
+        <value>exo:profileEducation</value>
+      </values-param>
+      <values-param>
+        <name>forceMultiValue</name>
+        <value>xxxxxxxxxxxx</value>
+      </values-param>
+    </init-params>
+  </component>
+
+  <component>
+    <key>org.exoplatform.social.core.profile.ProfileMapper</key>
+    <type>org.exoplatform.social.core.profile.ProfileMapper</type>
+  </component>
+
+  <!-- Space Configuration -->
+
+  <component>
+    <key>org.exoplatform.social.core.space.spi.SpaceService</key>
+    <type>org.exoplatform.social.core.space.impl.SpaceServiceImpl</type>
+  </component>
+
+  <component>
+    <key>org.exoplatform.social.core.space.spi.SpaceTemplateService</key>
+    <type>org.exoplatform.social.core.space.impl.SpaceTemplateServiceImpl</type>
+    <init-params>
+      <value-param>
+        <name>defaultSpaceTemplate</name>
+        <value>classic</value>
+      </value-param>
+    </init-params>
+  </component>
+
+  <component>
+    <key>org.exoplatform.social.core.space.SpacesAdministrationService</key>
+    <type>org.exoplatform.ecms.mock.MockSpacesAdministrationService</type>
+  </component>
+
+  <component>
+    <key>org.exoplatform.social.core.processor.MentionsProcessor</key>
+    <type>org.exoplatform.social.core.processor.MentionsProcessor</type>
+  </component>
+
+  <component>
+    <key>org.exoplatform.social.core.processor.TemplateParamsProcessor</key>
+    <type>org.exoplatform.social.core.processor.TemplateParamsProcessor</type>
+  </component>
+
+  <component>
+    <key>org.exoplatform.social.core.application.ProfileUpdatesPublisher</key>
+    <type>org.exoplatform.social.core.application.ProfileUpdatesPublisher</type>
+  </component>
+
+  <component>
+    <key>org.exoplatform.social.core.application.RelationshipPublisher</key>
+    <type>org.exoplatform.social.core.application.RelationshipPublisher</type>
+  </component>
+
+  <component>
+    <key>org.exoplatform.social.core.application.SpaceActivityPublisher</key>
+    <type>org.exoplatform.social.core.application.SpaceActivityPublisher</type>
+  </component>
+
+  <component>
+    <key>org.exoplatform.commons.api.notification.channel.ChannelManager</key>
+    <type>org.exoplatform.commons.notification.channel.ChannelManagerImpl</type>
+  </component>
+
+  <component>
+    <key>org.exoplatform.commons.api.event.EventManager</key>
+    <type>org.exoplatform.commons.event.impl.EventManagerImpl</type>
+  </component>
+
+  <component>
+    <type>org.exoplatform.settings.jpa.dao.SettingContextDAO</type>
+  </component>
+  <component>
+    <type>org.exoplatform.settings.jpa.dao.SettingScopeDAO</type>
+  </component>
+  <component>
+    <type>org.exoplatform.settings.jpa.dao.SettingsDAO</type>
+  </component>
+
+  <component>
+    <key>org.exoplatform.commons.api.settings.SettingService</key>
+    <type>org.exoplatform.settings.jpa.JPASettingServiceImpl</type>
+  </component>
+
+  <component>
+    <key>org.exoplatform.commons.api.notification.service.setting.UserSettingService</key>
+    <type>org.exoplatform.settings.jpa.JPAUserSettingServiceImpl</type>
+  </component>
+
+  <component>
+    <type>org.exoplatform.commons.notification.impl.jpa.web.dao.WebNotifDAO</type>
+  </component>
+  <component>
+    <type>org.exoplatform.commons.notification.impl.jpa.web.dao.WebParamsDAO</type>
+  </component>
+  <component>
+    <type>org.exoplatform.commons.notification.impl.jpa.web.dao.WebUsersDAO</type>
+  </component>
+
+  <component>
+    <key>org.exoplatform.commons.api.notification.service.storage.WebNotificationStorage</key>
+    <type>org.exoplatform.commons.notification.impl.jpa.web.JPAWebNotificationStorage</type>
+  </component>
+
+  <component>
+    <key>org.exoplatform.commons.api.notification.service.WebNotificationService</key>
+    <type>org.exoplatform.commons.notification.impl.service.WebNotificationServiceImpl</type>
+  </component>
+
+  <external-component-plugins>
+    <target-component>org.exoplatform.social.core.jpa.storage.RDBMSActivityStorageImpl</target-component>
+    <component-plugin>
+      <name>ECMSActivityFileStoragePlugin</name>
+      <set-method>addFileStoragePlugin</set-method>
+      <type>org.exoplatform.wcm.ext.component.activity.ECMSActivityFileStoragePlugin</type>
+      <description>JCR based activity attachment storage</description>
+      <init-params>
+        <value-param>
+          <name>priority</name>
+          <description>the top priority for JCR file attachement storage</description>
+          <value>1</value>
+        </value-param>
+        <value-param>
+          <name>datasource</name>
+          <description>An id of datasource name to identify this storage</description>
+          <value>jcr</value>
+        </value-param>
+      </init-params>
+    </component-plugin>
+  </external-component-plugins>
+
+  <!-- Bind datasource -->
+  <external-component-plugins>
+    <target-component>org.exoplatform.services.naming.InitialContextInitializer</target-component>
+    <component-plugin>
+      <name>bind.datasource</name>
+      <set-method>addPlugin</set-method>
+      <type>org.exoplatform.services.naming.BindReferencePlugin</type>
+      <init-params>
+        <value-param>
+          <name>bind-name</name>
+          <value>java:/comp/env/exo-jpa_portal</value>
+        </value-param>
+        <value-param>
+          <name>class-name</name>
+          <value>javax.sql.DataSource</value>
+        </value-param>
+        <value-param>
+          <name>factory</name>
+          <value>org.apache.commons.dbcp.BasicDataSourceFactory</value>
+        </value-param>
+        <properties-param>
+          <name>ref-addresses</name>
+          <description>ref-addresses</description>
+          <property name="driverClassName" value="org.hsqldb.jdbcDriver" />
+          <property name="url" value="jdbc:hsqldb:mem:db1" />
+          <property name="username" value="sa" />
+          <property name="password" value="" />
+        </properties-param>
+      </init-params>
+    </component-plugin>
+  </external-component-plugins>
+
+  <external-component-plugins>
+    <target-component>org.exoplatform.commons.api.persistence.DataInitializer</target-component>
+    <component-plugin>
+      <name>ChangeLogsPlugin</name>
+      <set-method>addChangeLogsPlugin</set-method>
+      <type>org.exoplatform.commons.persistence.impl.ChangeLogsPlugin</type>
+      <init-params>
+        <values-param>
+          <name>changelogs</name>
+          <description>Change logs of Social Service tests</description>
+          <value>db/changelog/exo-search.db.changelog-1.0.0.xml</value>
+          <value>db/changelog/social-rdbms.db.changelog-1.0.0.xml</value>
+        </values-param>
+      </init-params>
+    </component-plugin>
+  </external-component-plugins>
+
+  <external-component-plugins>
+    <target-component>org.exoplatform.social.core.manager.ActivityManager</target-component>
+    <component-plugin>
+      <name>MentionsProcessor</name>
+      <set-method>addProcessorPlugin</set-method>
+      <type>org.exoplatform.social.core.processor.MentionsProcessor</type>
+      <init-params>
+        <value-param>
+          <name>priority</name>
+          <description>priority of this processor (lower are executed first)</description>
+          <value>2</value>
+        </value-param>
+      </init-params>
+    </component-plugin>
+    <component-plugin>
+      <name>TemplateParamsProcessor</name>
+      <set-method>addProcessorPlugin</set-method>
+      <type>org.exoplatform.social.core.processor.TemplateParamsProcessor</type>
+      <init-params>
+        <value-param>
+          <name>priority</name>
+          <value>1</value>
+        </value-param>
+      </init-params>
+    </component-plugin>
+  </external-component-plugins>
+
+  <external-component-plugins>
+    <target-component>org.exoplatform.social.core.manager.IdentityManager</target-component>
+    <component-plugin>
+      <name>ProfileUpdatesPublisher</name>
+      <set-method>addProfileListener</set-method>
+      <type>org.exoplatform.social.core.application.ProfileUpdatesPublisher</type>
+    </component-plugin>
+  </external-component-plugins>
+
+  <external-component-plugins>
+    <target-component>org.exoplatform.social.common.xmlprocessor.XMLProcessor</target-component>
+    <component-plugin>
+      <name>XMLBalancerFilterPlugin</name>
+      <set-method>addFilterPlugin</set-method>
+      <type>org.exoplatform.social.common.xmlprocessor.filters.XMLBalancerFilterPlugin</type>
+    </component-plugin>
+    <component-plugin>
+      <name>URLConverterFilterPlugin</name>
+      <set-method>addFilterPlugin</set-method>
+      <type>org.exoplatform.social.common.xmlprocessor.filters.URLConverterFilterPlugin</type>
+      <init-params>
+        <value-param>
+          <name>urlMaxLength</name>
+          <description>the max length of URL</description>
+          <value>-1</value>
+        </value-param>
+      </init-params>
+    </component-plugin>
+    <component-plugin>
+      <name>DOMContentEscapeFilterPlugin</name>
+      <set-method>addFilterPlugin</set-method>
+      <type>org.exoplatform.social.common.xmlprocessor.filters.SanitizeFilterPlugin</type>
+    </component-plugin>
+    <component-plugin>
+      <name>OpenLinkInNewTabFilterPlugin</name>
+      <set-method>addFilterPlugin</set-method>
+      <type>org.exoplatform.social.common.xmlprocessor.filters.OpenLinkNewTabFilterPlugin</type>
+    </component-plugin>
+  </external-component-plugins>
+
+  <!-- org service initializer, copied from ECM portal.war -->
+  <external-component-plugins>
+    <target-component>org.exoplatform.services.organization.OrganizationService</target-component>
+    <component-plugin>
+      <name>init.service.listener</name>
+      <set-method>addListenerPlugin</set-method>
+      <type>org.exoplatform.services.organization.OrganizationDatabaseInitializer</type>
+      <description>this listener populate organization data for the first launch</description>
+      <init-params>
+        <value-param>
+          <name>checkDatabaseAlgorithm</name>
+          <description>check database</description>
+          <value>entry</value>
+        </value-param>
+        <value-param>
+          <name>printInformation</name>
+          <description>Print information init database</description>
+          <value>true</value>
+        </value-param>
+        <object-param>
+          <name>configuration</name>
+          <description>description</description>
+          <object type="org.exoplatform.services.organization.OrganizationConfig">
+            <field  name="membershipType">
+              <collection type="java.util.ArrayList">
+                <value>
+                  <object type="org.exoplatform.services.organization.OrganizationConfig$MembershipType">
+                    <field  name="type"><string>manager</string></field>
+                    <field  name="description"><string>manager membership type</string></field>
+                  </object>
+                </value>
+                <value>
+                  <object type="org.exoplatform.services.organization.OrganizationConfig$MembershipType">
+                    <field  name="type"><string>member</string></field>
+                    <field  name="description"><string>member membership type</string></field>
+                  </object>
+                </value>
+                <value>
+                  <object type="org.exoplatform.services.organization.OrganizationConfig$MembershipType">
+                    <field  name="type"><string>validator</string></field>
+                    <field  name="description"><string>validator membership type</string></field>
+                  </object>
+                </value>
+              </collection>
+            </field>
+
+            <field  name="group">
+              <collection type="java.util.ArrayList">
+                <value>
+                  <object type="org.exoplatform.services.organization.OrganizationConfig$Group">
+                    <field  name="name"><string>platform</string></field>
+                    <field  name="parentId"><string></string></field>
+                    <field  name="description"><string>the /platform group</string></field>
+                    <field  name="label"><string>Platform</string></field>
+                  </object>
+                </value>
+                <value>
+                  <object type="org.exoplatform.services.organization.OrganizationConfig$Group">
+                    <field  name="name"><string>administrators</string></field>
+                    <field  name="parentId"><string>/platform</string></field>
+                    <field  name="description"><string>the /platform/administrators group</string></field>
+                    <field  name="label"><string>Administrators</string></field>
+                  </object>
+                </value>
+                <value>
+                  <object type="org.exoplatform.services.organization.OrganizationConfig$Group">
+                    <field  name="name"><string>users</string></field>
+                    <field  name="parentId"><string>/platform</string></field>
+                    <field  name="description"><string>the /platform/users group</string></field>
+                    <field  name="label"><string>Users</string></field>
+                  </object>
+                </value>
+                <value>
+                  <object type="org.exoplatform.services.organization.OrganizationConfig$Group">
+                    <field  name="name"><string>spaces</string></field>
+                    <field  name="parentId"><string></string></field>
+                    <field  name="description"><string>the /spaces group</string></field>
+                    <field  name="label"><string>Spaces</string></field>
+                  </object>
+                </value>
+              </collection>
+            </field>
+
+            <field  name="user">
+              <collection type="java.util.ArrayList">
+                <value>
+                  <object type="org.exoplatform.services.organization.OrganizationConfig$User">
+                    <field  name="userName"><string>root</string></field>
+                    <field  name="password"><string>gtn</string></field>
+                    <field  name="firstName"><string>Root</string></field>
+                    <field  name="lastName"><string>Root</string></field>
+                    <field  name="email"><string>root@localhost</string></field>
+                    <field  name="groups">
+                      <string>manager:/platform/administrators,member:/platform/users</string>
+                    </field>
+                  </object>
+                </value>
+                <value>
+                  <object type="org.exoplatform.services.organization.OrganizationConfig$User">
+                    <field  name="userName"><string>john</string></field>
+                    <field  name="password"><string>gtn</string></field>
+                    <field  name="firstName"><string>John</string></field>
+                    <field  name="lastName"><string>Anthony</string></field>
+                    <field  name="email"><string>john@localhost</string></field>
+                    <field  name="groups">
+                      <string>member:/platform/administrators,member:/platform/users</string>
+                    </field>
+                  </object>
+                </value>
+                <value>
+                  <object type="org.exoplatform.services.organization.OrganizationConfig$User">
+                    <field  name="userName"><string>mary</string></field>
+                    <field  name="password"><string>gtn</string></field>
+                    <field  name="firstName"><string>Mary</string></field>
+                    <field  name="lastName"><string>Kelly</string></field>
+                    <field  name="email"><string>mary@localhost</string></field>
+                    <field  name="groups">
+                      <string>member:/platform/users</string>
+                    </field>
+                  </object>
+                </value>
+                <value>
+                  <object type="org.exoplatform.services.organization.OrganizationConfig$User">
+                    <field  name="userName"><string>demo</string></field>
+                    <field  name="password"><string>gtn</string></field>
+                    <field  name="firstName"><string>Demo</string></field>
+                    <field  name="lastName"><string>gtn</string></field>
+                    <field  name="email"><string>demo@localhost</string></field>
+                    <field  name="groups">
+                      <string>member:/platform/users</string>
+                    </field>
+                  </object>
+                </value>
+                <value>
+                  <object type="org.exoplatform.services.organization.OrganizationConfig$User">
+                    <field  name="userName"><string>ghost</string></field>
+                    <field  name="password"><string>gtn</string></field>
+                    <field  name="firstName"><string>Ghost</string></field>
+                    <field  name="lastName"><string>gtn</string></field>
+                    <field  name="email"><string>ghost@localhost</string></field>
+                    <field  name="groups">
+                      <string>member:/platform/users</string>
+                    </field>
+                  </object>
+                </value>
+                <value>
+                  <object type="org.exoplatform.services.organization.OrganizationConfig$User">
+                    <field  name="userName"><string>paul</string></field>
+                    <field  name="password"><string>gtn</string></field>
+                    <field  name="firstName"><string>Paul</string></field>
+                    <field  name="lastName"><string>gtn</string></field>
+                    <field  name="email"><string>paul@localhost</string></field>
+                    <field  name="groups">
+                      <string>member:/platform/users</string>
+                    </field>
+                  </object>
+                </value>
+                <value>
+                  <object type="org.exoplatform.services.organization.OrganizationConfig$User">
+                    <field  name="userName"><string>raul</string></field>
+                    <field  name="password"><string>gtn</string></field>
+                    <field  name="firstName"><string>Raul</string></field>
+                    <field  name="lastName"><string>gtn</string></field>
+                    <field  name="email"><string>raul@localhost</string></field>
+                    <field  name="groups">
+                      <string>member:/platform/users</string>
+                    </field>
+                  </object>
+                </value>
+                <value>
+                  <object type="org.exoplatform.services.organization.OrganizationConfig$User">
+                    <field  name="userName"><string>jame</string></field>
+                    <field  name="password"><string>gtn</string></field>
+                    <field  name="firstName"><string>Jame</string></field>
+                    <field  name="lastName"><string>gtn</string></field>
+                    <field  name="email"><string>jame@localhost</string></field>
+                    <field  name="groups">
+                      <string>member:/platform/users</string>
+                    </field>
+                  </object>
+                </value>
+              </collection>
+            </field>
+          </object>
+        </object-param>
+      </init-params>
+    </component-plugin>
+  </external-component-plugins>
+
+  <external-component-plugins>
+    <target-component>org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator</target-component>
+    <component-plugin>
+      <name>addPaths</name>
+      <set-method>addPlugin</set-method>
+      <type>org.exoplatform.services.jcr.ext.hierarchy.impl.AddPathPlugin</type>
+      <init-params>
+        <object-param>
+          <name>cms.configuration</name>
+          <description>configuration for the cms path</description>
+          <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig">
+            <field name="workspaces">
+              <collection type="java.util.ArrayList">
+                <value><string>portal-test</string></value>
+              </collection>
+            </field>
+            <field  name="jcrPaths">
+              <collection type="java.util.ArrayList">
+                <value>
+                  <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$JcrPath">
+                    <field  name="alias"><string>eXoApplications</string></field>
+                    <field  name="path"><string>/exo:applications</string></field>
+                    <field name="mixinTypes">
+                      <collection type="java.util.ArrayList">
+                        <value><string>exo:hiddenable</string></value>
+                      </collection>
+                    </field>
+                    <field name="permissions">
+                      <collection type="java.util.ArrayList">
+                        <value>
+                          <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$Permission">
+                            <field name="identity"><string>*:/platform/administrators</string></field>
+                            <field name="read"><string>true</string></field>
+                            <field name="addNode"><string>true</string></field>
+                            <field name="setProperty"><string>true</string></field>
+                            <field name="remove"><string>true</string></field>
+                          </object>
+                        </value>
+                      </collection>
+                    </field>
+                  </object>
+                </value>
+                <value>
+                  <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$JcrPath">
+                    <field  name="alias"><string>eXoServices</string></field>
+                    <field  name="path"><string>/exo:services</string></field>
+                    <field name="mixinTypes">
+                      <collection type="java.util.ArrayList">
+                        <value><string>exo:hiddenable</string></value>
+                      </collection>
+                    </field>
+                    <field name="permissions">
+                      <collection type="java.util.ArrayList">
+                        <value>
+                          <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$Permission">
+                            <field name="identity"><string>*:/platform/administrators</string></field>
+                            <field name="read"><string>true</string></field>
+                            <field name="addNode"><string>true</string></field>
+                            <field name="setProperty"><string>true</string></field>
+                            <field name="remove"><string>true</string></field>
+                          </object>
+                        </value>
+                      </collection>
+                    </field>
+                  </object>
+                </value>
+                <value>
+                  <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$JcrPath">
+                    <field  name="alias"><string>usersPath</string></field>
+                    <field  name="path"><string>/Users</string></field>
+                    <field name="permissions">
+                      <collection type="java.util.ArrayList">
+                        <value>
+                          <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$Permission">
+                            <field name="identity"><string>*:/platform/administrators</string></field>
+                            <field name="read"><string>true</string></field>
+                            <field name="addNode"><string>false</string></field>
+                            <field name="setProperty"><string>false</string></field>
+                            <field name="remove"><string>false</string></field>
+                          </object>
+                        </value>
+                        <value>
+                          <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$Permission">
+                            <field name="identity"><string>${exo.super.user:root}</string></field>
+                            <field name="read"><string>true</string></field>
+                            <field name="addNode"><string>true</string></field>
+                            <field name="setProperty"><string>true</string></field>
+                            <field name="remove"><string>true</string></field>
+                          </object>
+                        </value>
+                        <value>
+                          <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$Permission">
+                            <field name="identity"><string>*:/platform/users</string></field>
+                            <field name="read"><string>true</string></field>
+                            <field name="addNode"><string>false</string></field>
+                            <field name="setProperty"><string>false</string></field>
+                            <field name="remove"><string>false</string></field>
+                          </object>
+                        </value>
+                      </collection>
+                    </field>
+                  </object>
+                </value>
+                <value>
+                  <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$JcrPath">
+                    <field  name="alias"><string>groupsPath</string></field>
+                    <field  name="path"><string>/Groups</string></field>
+                    <field name="permissions">
+                      <collection type="java.util.ArrayList">
+                        <value>
+                          <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$Permission">
+                            <field name="identity"><string>*:/platform/administrators</string></field>
+                            <field name="read"><string>true</string></field>
+                            <field name="addNode"><string>false</string></field>
+                            <field name="setProperty"><string>false</string></field>
+                            <field name="remove"><string>false</string></field>
+                          </object>
+                        </value>
+                        <value>
+                          <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$Permission">
+                            <field name="identity"><string>*:/platform/users</string></field>
+                            <field name="read"><string>true</string></field>
+                            <field name="addNode"><string>false</string></field>
+                            <field name="setProperty"><string>false</string></field>
+                            <field name="remove"><string>false</string></field>
+                          </object>
+                        </value>
+                      </collection>
+                    </field>
+                  </object>
+                </value>
+              </collection>
+            </field>
+          </object>
+        </object-param>
+      </init-params>
+    </component-plugin>
+    <component-plugin>
+      <name>addPaths</name>
+      <set-method>addPlugin</set-method>
+      <type>org.exoplatform.services.jcr.ext.hierarchy.impl.AddPathPlugin</type>
+      <init-params>
+        <object-param>
+          <name>cms.configuration</name>
+          <description>configuration for the digital-assets path</description>
+          <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig">
+            <field name="workspaces">
+              <collection type="java.util.ArrayList">
+                <value><string>portal-test</string></value>
+              </collection>
+            </field>
+            <field  name="jcrPaths">
+              <collection type="java.util.ArrayList">
+                <value>
+                  <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$JcrPath">
+                    <field  name="alias"><string>digitalAssetsPath</string></field>
+                    <field  name="path"><string>/Digital Assets</string></field>
+                    <field name="permissions">
+                      <collection type="java.util.ArrayList">
+                        <value>
+                          <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$Permission">
+                            <field name="identity"><string>*:/platform/administrators</string></field>
+                            <field name="read"><string>true</string></field>
+                            <field name="addNode"><string>true</string></field>
+                            <field name="setProperty"><string>true</string></field>
+                            <field name="remove"><string>true</string></field>
+                          </object>
+                        </value>
+                        <value>
+                          <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$Permission">
+                            <field name="identity"><string>*:/platform/users</string></field>
+                            <field name="read"><string>true</string></field>
+                            <field name="addNode"><string>true</string></field>
+                            <field name="setProperty"><string>true</string></field>
+                            <field name="remove"><string>false</string></field>
+                          </object>
+                        </value>
+                      </collection>
+                    </field>
+                  </object>
+                </value>
+                <value>
+                  <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$JcrPath">
+                    <field  name="alias"><string>digitalPicturePath</string></field>
+                    <field  name="path"><string>/Digital Assets/Pictures</string></field>
+                    <field name="mixinTypes">
+                      <collection type="java.util.ArrayList">
+                        <value><string>exo:pictureFolder</string></value>
+                      </collection>
+                    </field>
+                    <field name="permissions">
+                      <collection type="java.util.ArrayList">
+                        <value>
+                          <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$Permission">
+                            <field name="identity"><string>*:/platform/administrators</string></field>
+                            <field name="read"><string>true</string></field>
+                            <field name="addNode"><string>true</string></field>
+                            <field name="setProperty"><string>true</string></field>
+                            <field name="remove"><string>true</string></field>
+                          </object>
+                        </value>
+                        <value>
+                          <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$Permission">
+                            <field name="identity"><string>*:/platform/users</string></field>
+                            <field name="read"><string>true</string></field>
+                            <field name="addNode"><string>true</string></field>
+                            <field name="setProperty"><string>true</string></field>
+                            <field name="remove"><string>false</string></field>
+                          </object>
+                        </value>
+                      </collection>
+                    </field>
+                  </object>
+                </value>
+                <value>
+                  <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$JcrPath">
+                    <field  name="alias"><string>digitalVideoPath</string></field>
+                    <field  name="path"><string>/Digital Assets/Videos</string></field>
+                    <field name="mixinTypes">
+                      <collection type="java.util.ArrayList">
+                        <value><string>exo:videoFolder</string></value>
+                      </collection>
+                    </field>
+                    <field name="permissions">
+                      <collection type="java.util.ArrayList">
+                        <value>
+                          <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$Permission">
+                            <field name="identity"><string>*:/platform/administrators</string></field>
+                            <field name="read"><string>true</string></field>
+                            <field name="addNode"><string>true</string></field>
+                            <field name="setProperty"><string>true</string></field>
+                            <field name="remove"><string>true</string></field>
+                          </object>
+                        </value>
+                        <value>
+                          <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$Permission">
+                            <field name="identity"><string>*:/platform/users</string></field>
+                            <field name="read"><string>true</string></field>
+                            <field name="addNode"><string>true</string></field>
+                            <field name="setProperty"><string>true</string></field>
+                            <field name="remove"><string>false</string></field>
+                          </object>
+                        </value>
+                      </collection>
+                    </field>
+                  </object>
+                </value>
+                <value>
+                  <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$JcrPath">
+                    <field  name="alias"><string>digitalAudioPath</string></field>
+                    <field  name="path"><string>/Digital Assets/Music</string></field>
+                    <field name="mixinTypes">
+                      <collection type="java.util.ArrayList">
+                        <value><string>exo:musicFolder</string></value>
+                      </collection>
+                    </field>
+                    <field name="permissions">
+                      <collection type="java.util.ArrayList">
+                        <value>
+                          <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$Permission">
+                            <field name="identity"><string>*:/platform/administrators</string></field>
+                            <field name="read"><string>true</string></field>
+                            <field name="addNode"><string>true</string></field>
+                            <field name="setProperty"><string>true</string></field>
+                            <field name="remove"><string>true</string></field>
+                          </object>
+                        </value>
+                        <value>
+                          <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$Permission">
+                            <field name="identity"><string>*:/platform/users</string></field>
+                            <field name="read"><string>true</string></field>
+                            <field name="addNode"><string>true</string></field>
+                            <field name="setProperty"><string>true</string></field>
+                            <field name="remove"><string>false</string></field>
+                          </object>
+                        </value>
+                      </collection>
+                    </field>
+                  </object>
+                </value>
+              </collection>
+            </field>
+          </object>
+        </object-param>
+      </init-params>
+    </component-plugin>
+
+    <component-plugin>
+      <name>addPaths</name>
+      <set-method>addPlugin</set-method>
+      <type>org.exoplatform.services.jcr.ext.hierarchy.impl.AddPathPlugin</type>
+      <init-params>
+        <object-param>
+          <name>cms.configuration</name>
+          <description>configuration for public tag node</description>
+          <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig">
+            <field name="workspaces">
+              <collection type="java.util.ArrayList">
+                <value><string>portal-test</string></value>
+              </collection>
+            </field>
+            <field  name="jcrPaths">
+              <collection type="java.util.ArrayList">
+                <value>
+                  <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$JcrPath">
+                    <field  name="alias"><string>newDocumentsTrashPath</string></field>
+                    <field  name="path"><string>/Trash</string></field>
+                    <field name="mixinTypes">
+                      <collection type="java.util.ArrayList">
+                        <value><string>exo:hiddenable</string></value>
+                        <value><string>exo:trashFolder</string></value>
+                      </collection>
+                    </field>
+                    <field name="permissions">
+                      <collection type="java.util.ArrayList">
+                        <value>
+                          <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$Permission">
+                            <field name="identity"><string>*:/platform/administrators</string></field>
+                            <field name="read"><string>true</string></field>
+                            <field name="addNode"><string>true</string></field>
+                            <field name="setProperty"><string>true</string></field>
+                            <field name="remove"><string>true</string></field>
+                          </object>
+                        </value>
+                      </collection>
+                    </field>
+                  </object>
+                </value>
+                <value>
+                  <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$JcrPath">
+                    <field  name="alias"><string>exoApplicationDataNode</string></field>
+                    <field  name="path"><string>/Application Data</string></field>
+                    <field name="mixinTypes">
+                      <collection type="java.util.ArrayList">
+                        <value><string>exo:hiddenable</string></value>
+                      </collection>
+                    </field>
+                    <field name="permissions">
+                      <collection type="java.util.ArrayList">
+                        <value>
+                          <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$Permission">
+                            <field name="identity"><string>*:/platform/administrators</string></field>
+                            <field name="read"><string>true</string></field>
+                            <field name="addNode"><string>true</string></field>
+                            <field name="setProperty"><string>true</string></field>
+                            <field name="remove"><string>true</string></field>
+                          </object>
+                        </value>
+                        <value>
+                          <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$Permission">
+                            <field name="identity"><string>*:/platform/users</string></field>
+                            <field name="read"><string>true</string></field>
+                            <field name="addNode"><string>true</string></field>
+                            <field name="setProperty"><string>true</string></field>
+                            <field name="remove"><string>true</string></field>
+                          </object>
+                        </value>
+                      </collection>
+                    </field>
+                  </object>
+                </value>
+
+                <value>
+                  <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$JcrPath">
+                    <field  name="alias"><string>exoPublicTagNode</string></field>
+                    <field  name="path"><string>/tags</string></field>
+                    <field name="permissions">
+                      <collection type="java.util.ArrayList">
+                        <value>
+                          <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$Permission">
+                            <field name="identity"><string>*:/platform/administrators</string></field>
+                            <field name="read"><string>true</string></field>
+                            <field name="addNode"><string>true</string></field>
+                            <field name="setProperty"><string>true</string></field>
+                            <field name="remove"><string>true</string></field>
+                          </object>
+                        </value>
+                        <value>
+                          <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$Permission">
+                            <field name="identity"><string>*:/platform/users</string></field>
+                            <field name="read"><string>true</string></field>
+                            <field name="addNode"><string>true</string></field>
+                            <field name="setProperty"><string>true</string></field>
+                            <field name="remove"><string>true</string></field>
+                          </object>
+                        </value>
+                      </collection>
+                    </field>
+                  </object>
+                </value>
+
+              </collection>
+            </field>
+          </object>
+        </object-param>
+      </init-params>
+    </component-plugin>
+
+
+  </external-component-plugins>
+
+  <external-component-plugins>
+    <target-component>org.exoplatform.social.core.space.spi.SpaceService</target-component>
+    <component-plugin>
+      <name>SpaceActivityPublisher</name>
+      <set-method>addSpaceListener</set-method>
+      <type>org.exoplatform.social.core.application.SpaceActivityPublisher</type>
+    </component-plugin>
+
+    <component-plugin>
+      <name>portlets.prefs.required</name>
+      <set-method>setPortletsPrefsRequired</set-method>
+      <type>org.exoplatform.social.core.application.PortletPreferenceRequiredPlugin</type>
+      <init-params>
+        <values-param>
+          <name>portletsPrefsRequired</name>
+          <value>SpaceActivityStreamPortlet</value>
+          <value>SpaceSettingPortlet</value>
+          <value>MembersPortlet</value>
+        </values-param>
+      </init-params>
+    </component-plugin>
+  </external-component-plugins>
+
+  <external-component-plugins>
+    <target-component>org.exoplatform.social.core.space.spi.SpaceTemplateService</target-component>
+    <component-plugin>
+      <name>DefaultSpaceApplicationHandler</name>
+      <set-method>registerSpaceApplicationHandler</set-method>
+      <type>org.exoplatform.social.core.space.impl.DefaultSpaceApplicationHandler</type>
+      <init-params>
+        <value-param>
+          <name>templateName</name>
+          <value>classic</value>
+        </value-param>
+      </init-params>
+    </component-plugin>
+    <!-- Default applications to be installed when creating a new space -->
+    <component-plugin>
+      <name>Space Template Configuration</name>
+      <set-method>registerSpaceTemplatePlugin</set-method>
+      <type>org.exoplatform.social.core.space.SpaceTemplateConfigPlugin</type>
+      <init-params>
+        <object-param>
+          <name>template</name>
+          <description>Space Template</description>
+          <object type="org.exoplatform.social.core.space.SpaceTemplate">
+            <field name="name"><string>classic</string></field>
+            <field name="visibility"><string>private</string></field>
+            <field name="registration"><string>open</string></field>
+            <field name="bannerPath"><string>war:/conf/social-extension/social/space-template/classic/banner.png</string></field>
+            <field name="homePageApplication">
+              <object type="org.exoplatform.social.core.space.SpaceApplication">
+                <field name="portletApp"><string>social-portlet</string></field>
+                <field name="portletName"><string>SpaceActivityStreamPortlet</string></field>
+                <field name="appTitle"><string>Home</string></field>
+              </object>
+            </field>
+            <field name="applications">
+              <collection type="java.util.ArrayList">
+                <value>
+                  <object type="org.exoplatform.social.core.space.SpaceApplication">
+                    <field name="portletApp"><string>dashboard</string></field>
+                    <field name="portletName"><string>DashboardPortlet</string></field>
+                    <field name="appTitle"><string>Dashboard</string></field>
+                    <field name="removable"><boolean>true</boolean></field>
+                    <field name="order"><int>1</int></field>
+                    <field name="uri"><string>dashboard</string></field>
+                    <!--<field name="icon"><string>SpaceDashboardIcon</string></field>-->
+                  </object>
+                </value>
+                <value>
+                  <object type="org.exoplatform.social.core.space.SpaceApplication">
+                    <field name="portletApp"><string>social-portlet</string></field>
+                    <field name="portletName"><string>SpaceSettingPortlet</string></field>
+                    <field name="appTitle"><string>Space Settings</string></field>
+                    <field name="removable"><boolean>false</boolean></field>
+                    <field name="order"><int>2</int></field>
+                    <field name="uri"><string>settings</string></field>
+                    <!--<field name="icon"><string>SpaceSettingsIcon</string></field>-->
+                  </object>
+                </value>
+                <value>
+                  <object type="org.exoplatform.social.core.space.SpaceApplication">
+                    <field name="portletApp"><string>social-portlet</string></field>
+                    <field name="portletName"><string>MembersPortlet</string></field>
+                    <field name="appTitle"><string>Members</string></field>
+                    <field name="removable"><boolean>true</boolean></field>
+                    <field name="order"><int>3</int></field>
+                    <field name="uri"><string>members</string></field>
+                    <!--<field name="icon"><string>SpaceMembersIcon</string></field>-->
+                  </object>
+                </value>
+              </collection>
+            </field>
+          </object>
+        </object-param>
+      </init-params>
+    </component-plugin>
+  </external-component-plugins>
+
+  <import>jar:/conf/standalone/jcr-configuration.xml</import>
+
+</configuration>

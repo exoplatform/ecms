@@ -1,0 +1,606 @@
+<%
+/*
+<!--
+
+    Copyright (C) 2003-2010 eXo Platform SAS.
+
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU Affero General Public License
+    as published by the Free Software Foundation; either version 3
+    of the License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, see<http://www.gnu.org/licenses/>.
+
+-->
+*/
+%>
+<%
+  import org.apache.commons.lang.ArrayUtils;
+  import org.exoplatform.portal.webui.util.Util;
+  import org.exoplatform.webui.form.UIFormTextAreaInput;
+  import org.exoplatform.social.webui.composer.PopupContainer;
+  import org.exoplatform.social.plugin.doc.UIDocViewer;
+  import org.exoplatform.social.core.service.LinkProvider;
+  import org.exoplatform.social.core.space.model.Space;
+  import org.exoplatform.social.webui.Utils;
+  import org.apache.commons.lang.StringUtils;
+  import org.apache.commons.lang.StringEscapeUtils;
+  
+  import org.exoplatform.wcm.ext.component.activity.ContentPresentation;
+  import org.exoplatform.services.jcr.util.Text;
+  import org.exoplatform.services.jcr.core.ManageableRepository;
+  import org.exoplatform.container.ExoContainer;
+  import org.exoplatform.container.ExoContainerContext;
+  import org.exoplatform.container.xml.PortalContainerInfo;
+  import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
+
+  import static org.exoplatform.social.webui.activity.BaseUIActivity.TEMPLATE_PARAM_COMMENT;
+
+  def pcontext = Util.getPortalRequestContext();
+  def jsManager = pcontext.getJavascriptManager();
+ 
+  def labelActivityHasBeenDeleted = _ctx.appRes("UIActivity.label.Activity_Has_Been_Deleted");
+  def activity = uicomponent.getActivity();
+  def activityDeletable = uicomponent.isActivityDeletable();
+  def activityCommentAndLikable = uicomponent.isActivityCommentAndLikable();
+  def streamOwner = activity.getStreamOwner();
+  def currentNode = uicomponent.getDocNode();
+  String viewActivityTip = _ctx.appRes("UIActivity.msg.ViewActivity");
+  def deleteActivityTip = _ctx.appRes("UIActivity.msg.DeleteActivity");
+%>
+
+<% if (activity && currentNode != null) { //process if not null 
+
+  def labelComment = _ctx.appRes("UIActivity.label.Comment");
+  def labelCancel = _ctx.appRes("UIActivity.label.Cancel");
+  def labelLike = _ctx.appRes("UIActivity.label.Like");
+  def labelUnlike = _ctx.appRes("UIActivity.label.Unlike");
+  def labelViewAllReplies = _ctx.appRes("UIActivity.label.ViewAllReplies");
+  def labelSource = _ctx.appRes("UIActivity.label.Source");
+  def inputWriteAComment = _ctx.appRes("UIActivity.input.Add_your_comment").replace("'", "\\'");
+  def labelShowAllComments = _ctx.appRes("UIActivity.label.Show_All_Comments");
+  def labelHideAllComments = _ctx.appRes("UIActivity.label.Hide_All_Comments");
+  def labelShowPreviousComments = _ctx.appRes("UIActivity.label.Show_Previous_Comments");
+  
+  def labelOnePersonLikeThis=_ctx.appRes("UIActivity.label.One_Person_Like_This");
+  def labelTwoPersonLikeThis=_ctx.appRes("UIActivity.label.Two_Person_Like_This");
+  def labelOneAndOthersLikeThis=_ctx.appRes("UIActivity.label.One_And_Others_Like_This");
+  def labelYouLikeThis=_ctx.appRes("UIActivity.label.You_Like_This");
+  def labelYouAndOnePersonLikeThis=_ctx.appRes("UIActivity.label.You_And_One_Person_Like_This");
+  def labelYouAndOthersLikeThis=_ctx.appRes("UIActivity.label.You_And_Others_Like_This");
+  
+  def captionConfirmation=StringEscapeUtils.escapeHtml(_ctx.appRes("UIActivity.label.Confirmation"));
+  def labelConfirmbutton=StringEscapeUtils.escapeHtml(_ctx.appRes("UIActivity.label.Confirm_Delete_Activity-Button"));
+  def labelClosebutton=StringEscapeUtils.escapeHtml(_ctx.appRes("UIActivity.label.Cancel_Delete_Activity-Button"));
+  def labelToDeleteThisComment=StringEscapeUtils.escapeHtml(_ctx.appRes("UIActivity.msg.Are_You_Sure_To_Delete_This_Comment"));
+  def labelToDeleteThisActivity=StringEscapeUtils.escapeHtml(_ctx.appRes("UIActivity.msg.Are_You_Sure_To_Delete_This_Activity"));
+
+  def likeActivityAction = uicomponent.event("LikeActivity", "true");
+  def unlikeActivityAction = uicomponent.event("LikeActivity", "false");
+
+  def docPreviewUri = uicomponent.event("ViewDocument", "0");
+  def docOpenUri = uicomponent.getDocOpenUri();
+
+  def commentList = uicomponent.getComments();
+  def allComments = uicomponent.getAllComments();
+  def totalComments = uicomponent.getAllCommentSize();
+  if (allComments) {
+    labelShowAllComments = labelShowAllComments.replace("{0}", totalComments + "");
+    labelHideAllComments = labelHideAllComments.replace("{0}", totalComments + "");
+
+  }
+  
+  def parentCommentsSize = uicomponent.getParentCommentsSize(commentList);
+  def commentsHidden = totalComments-parentCommentsSize;
+  def displayedIdentityLikes = uicomponent.getDisplayedIdentityLikes();
+  def identityLikesNum = 0;
+  def totalLikesNum = uicomponent.getIdentityLikes().length;
+  def labelLikes = null;
+  def loadLikesAction = uicomponent.event("LoadLikes");
+  if (displayedIdentityLikes != null) {
+    identityLikesNum = displayedIdentityLikes.length;
+  }
+  
+  def commentListStatus = uicomponent.getCommentListStatus();
+  def commentFormDisplayed = uicomponent.isCommentFormDisplayed();
+  def likesDisplayed = uicomponent.isAllLoaded();
+  def placeholder = _ctx.appRes("UIActivity.comment.placeholder").replace("'", "\\'");
+
+  def LikePopupTitleLabel = _ctx.appRes("UIActivity.title.PopupCommentLikers");
+  def IgnoreLabel = _ctx.appRes("UserProfilePopup.label.Ignore");
+  def ConnectLabel = _ctx.appRes("UserProfilePopup.label.Connect");
+  def ConfirmLabel = _ctx.appRes("UserProfilePopup.label.Confirm");
+  def CancelRequestLabel = _ctx.appRes("UserProfilePopup.label.CancelRequest");
+  def RemoveConnectionLabel = _ctx.appRes("UserProfilePopup.label.RemoveConnection");
+  def labels = """ {
+    LikePopupTitle: '$LikePopupTitleLabel',
+    Connect: '$ConnectLabel',
+    Confirm: '$ConfirmLabel',
+    CancelRequest: '$CancelRequestLabel',
+    RemoveConnection: '$RemoveConnectionLabel',
+    Ignore: '$IgnoreLabel'
+  }"""
+
+  //params for init UIActivity javascript object
+  def params = """ {
+    activityId: '${activity.id}',
+    placeholderComment: '${placeholder}',
+    inputWriteAComment: '$inputWriteAComment',
+    commentMinCharactersAllowed: '${uicomponent.getCommentMinCharactersAllowed()}',
+    commentMaxCharactersAllowed: '${uicomponent.getCommentMaxCharactersAllowed()}',
+    commentFormDisplayed: '$commentFormDisplayed',
+    allCommentSize: '${allComments.size()}',
+    commentFormFocused: '${uicomponent.isCommentFormFocused()}',
+    labels: $labels
+  } """
+
+  jsManager.require("SHARED/uiForm")
+           .require("SHARED/jquery", "jq")
+           .require("SHARED/bts_tooltip").addScripts("jq('*[rel=\"tooltip\"]').tooltip();")
+           .require("SHARED/social-ui-activity", "activity").addScripts("activity.onLoad($params);");
+
+  //make sures commentFormFocused is set to false to prevent any refresh to focus, only focus after post a comment
+  uicomponent.setCommentFormFocused(false);
+  def ownerName, ownerUri = "#", ownerAvatar, activityPostedTime;
+  def listPeopleLikeBlockClass = "", listPeopleBGClass = "";
+
+  if (!likesDisplayed) {
+    listPeopleLikeBlockClass = "displayNone";
+  }
+
+  if (uicomponent.isLiked()) {
+    if (totalLikesNum > 2) {
+      labelLikes = labelYouAndOthersLikeThis.replace("{0}", totalLikesNum - 1 + "");
+    } else if (totalLikesNum == 2) {
+      def likeId = (displayedIdentityLikes[0] == Utils.getViewerIdentity().getId()) ? displayedIdentityLikes[1] : displayedIdentityLikes[0];
+      def id = Utils.getIdentityManager().getIdentity(likeId);
+      labelLikes = labelYouAndOnePersonLikeThis.replace("{0}", StringEscapeUtils.escapeHtml(id.profile.fullName));
+    } else {
+      labelLikes = labelYouLikeThis;
+    }
+  } else {
+    if (totalLikesNum > 2) {
+      def id = Utils.getIdentityManager().getIdentity(displayedIdentityLikes[0]);
+      labelLikes = labelOneAndOthersLikeThis.replace("{0}", StringEscapeUtils.escapeHtml(id.profile.fullName)).replace("{1}", totalLikesNum - 1 + "");
+    } else if (totalLikesNum == 1) {
+      def id = Utils.getIdentityManager().getIdentity(displayedIdentityLikes[0]);
+      labelLikes = labelOnePersonLikeThis.replace("{0}", StringEscapeUtils.escapeHtml(id.profile.fullName));
+    } else if (totalLikesNum == 2) {
+      def id1 = Utils.getIdentityManager().getIdentity(displayedIdentityLikes[0]);
+      def id2 = Utils.getIdentityManager().getIdentity(displayedIdentityLikes[1]);
+      labelLikes = labelTwoPersonLikeThis.replace("{0}", StringEscapeUtils.escapeHtml(id1.profile.fullName)).replace("{1}", StringEscapeUtils.escapeHtml(id2.profile.fullName));
+    }
+  }
+
+  if (!labelLikes) {
+   //hides diplayPeopleBG
+   listPeopleBGClass = "displayNone";
+  }
+
+  activityContentTitle = activity.title;
+  activityPostedTime = uicomponent.getRelativeTimeLabel(_ctx, activity.postedTime);
+
+  def ownerIdentity = uicomponent.ownerIdentity;
+  if (uicomponent.isUserActivity()) {
+    ownerUri = LinkProvider.getUserProfileUri(ownerIdentity.getRemoteId());
+    ownerAvatar = ownerIdentity.profile.avatarUrl;
+    ownerName = StringEscapeUtils.escapeHtml(ownerIdentity.profile.fullName);
+    if (!ownerAvatar) ownerAvatar= LinkProvider.PROFILE_DEFAULT_AVATAR_URL;
+  } else {
+    Space space = Utils.getSpaceService().getSpaceByName(ownerIdentity.remoteId);
+    ownerUri = space.url;
+    ownerAvatar = space.avatarUrl;
+    ownerName = space.displayName;
+    if (!ownerAvatar) ownerAvatar = LinkProvider.SPACE_DEFAULT_AVATAR_URL;
+  }
+
+  def dMessage = uicomponent.message;
+  def dName = uicomponent.docName;
+  def fileSize = "";
+  def version = 0;
+  def title = null;
+  def summary = uicomponent.getSummary();
+
+  def mimeType = "";
+  def binarySrc;
+  def uicontentpresentation = uicomponent.addChild(ContentPresentation.class, null, null);
+  String repository;
+  def preferenceWS;
+  def fileComponent;
+  if (currentNode) {
+    fileSize = uicomponent.getSize();
+    version = uicomponent.getVersion();
+    title = uicomponent.getTitle();
+    binarySrc = uicomponent.getWebdavURL();
+    mimeType = uicomponent.getMimeType();
+    summary =  uicomponent.getSummary();
+    uicontentpresentation.setNode(currentNode);
+    repository = ((ManageableRepository)currentNode.getSession().getRepository()).getConfiguration().getName();
+    preferenceWS  = currentNode.getSession().getWorkspace().getName();
+    fileComponent = uicontentpresentation.getUIComponent(mimeType);
+  }
+
+  def downloadFileLabel = _ctx.appRes("UIComposerDocumentExtension.label.Download");
+  def viewFileLabel = _ctx.appRes("UIComposerDocumentExtension.label.View_File");
+  def versionLabel = _ctx.appRes("UIComposerDocumentExtension.label.Version");
+
+  ExoContainer container = ExoContainerContext.getCurrentContainer();
+  PortalContainerInfo containerInfo = (PortalContainerInfo) container.getComponentInstanceOfType(PortalContainerInfo.class);
+  String portalName = containerInfo.getContainerName();
+
+  String restContextName = org.exoplatform.ecm.webui.utils.Utils.getRestContextName(portalName);
+
+    def spaceSourceURI, spaceName, spaceImageSource, spaceID;
+    if (uicomponent.isUserActivity() && uicomponent.isSpaceStreamOwner() && !uicomponent.isUISpaceActivitiesDisplay()) {
+
+        Space spaceSource = Utils.getSpaceService().getSpaceByPrettyName(streamOwner);
+        spaceID = spaceSource.getId();
+        if (spaceSource != null) {
+            spaceSourceURI = LinkProvider.getSpaceUri(spaceSource.url);
+            spaceName = spaceSource.displayName;
+            spaceImageSource = spaceSource.getAvatarUrl();
+            if (spaceImageSource == null) {
+                spaceImageSource = LinkProvider.SPACE_DEFAULT_AVATAR_URL;
+            }
+        } else {
+            spaceSourceURI = LinkProvider.getActivityUriForSpace(streamOwner, streamOwner);
+            spaceName = StringEscapeUtils.escapeHtml(Utils.getSpaceIdentity(streamOwner, false).profile.fullName);
+            spaceImageSource = LinkProvider.SPACE_DEFAULT_AVATAR_URL;
+        }
+    }
+%>
+<div class="activityStream fileActivity uiContentActivity uiDocActivity" id="activityContainer${activity.id}">
+  <% uiform.begin() %>
+	<div class="activityTimeLine pull-left">
+		<div class="activityAvatar avatarCircle">
+			<a title="$ownerName" href="$ownerUri">
+			  <img alt="$ownerName" src="$ownerAvatar"/>
+			</a>
+		</div>
+	</div><!--end activityTimeLine-->
+    <div class="boxContainer" id="boxContainer">
+		<div id="ContextBox${activity.id}"class="uiBox contentBox">
+			<div id="ActivityContextBox${activity.id}">
+				<div class="heading">
+					<span class="arrowLeft"></span>
+					<div class="actLink  hidden-phone hidden-tablet">
+					  <a id="Permalink${activity.id}" class="uiIconLink uiIconLightGray" rel="tooltip" data-placement="bottom" title="$viewActivityTip" href="<%=uicomponent.getActivityPermalink(activity.id)%>"></a>
+					  <% if (activityDeletable) {%>
+						  <a href="javascript:void(0)" data-confirm="$labelToDeleteThisActivity"
+						        data-close="$labelClosebutton" data-caption="$captionConfirmation"
+						        data-ok="$labelConfirmbutton"
+						        data-delete="<%=uicomponent.event("DeleteActivity", uicomponent.getId(), "");%>"
+						        class="uiIconClose uiIconLightGray controllDelete"
+						        rel="tooltip" data-placement="bottom" title="$deleteActivityTip"
+						        id="DeleteActivityButton${activity.id}"></a>
+						<%}%>
+					</div>
+					<div class="author">
+       					<div class="hidden-desktop circleSpaceAvatar">
+           				    <a href="$ownerUri">
+                                 <img alt="$ownerName" src="$ownerAvatar"/>
+                               </a>
+                         </div>
+					    <% if (uicomponent.isUserActivity() && uicomponent.isSpaceStreamOwner() && !uicomponent.isUISpaceActivitiesDisplay()) {%>
+                        <div class="ownerName">
+ 						    <a title="$ownerName" href="$ownerUri">$ownerName</a>
+ 					    </div>
+						<a class="space-avatar spaceName" href="$spaceSourceURI" space-data="$spaceID"><span class="uiIconArrowRightMini uiIconLightGray"></span>
+                            <img  class="avatarMini" alt="$spaceName" src="$spaceImageSource"/>&nbsp;$spaceName
+                        </a>
+						<%} else{ %>
+	                        <div class="owner">
+     						    <a title="$ownerName" href="$ownerUri">$ownerName</a>
+     					    </div>
+						<%}%>
+					</div>
+					<div class="dataInfor">
+						<span class="dateTime"><i class="uiIconClock uiIconLightGray"></i>&nbsp;$activityPostedTime</span>
+						<div class=" actionLink hidden-desktop visible-tablet visible-phone">
+    					  <a id="Permalink${activity.id}" class="uiIconLink uiIconLightGray" rel="tooltip" data-placement="bottom" title="$viewActivityTip" href="<%=uicomponent.getActivityPermalink(activity.id)%>"></a>
+    					  <% if (activityDeletable) {%>
+    						  <a href="javascript:void(0)" data-confirm="$labelToDeleteThisActivity"
+    						        data-close="$labelClosebutton" data-caption="$captionConfirmation"
+    						        data-ok="$labelConfirmbutton"
+    						        data-delete="<%=uicomponent.event("DeleteActivity", uicomponent.getId(), "");%>"
+    						        class="uiIconClose uiIconLightGray controllDelete"
+    						        rel="tooltip" data-placement="bottom" title="$deleteActivityTip"
+    						        id="DeleteActivityButton${activity.id}"></a>
+    						<%}%>
+    					</div>
+					</div>
+				</div><!--end heading-->
+				<div class="description">$dMessage</div><!--end description-->
+				<div class="uiBox roundedBottom introBox fileShare">
+			    <%
+             if(mimeType.startsWith("image")) {
+          %>
+          <div class="clearfix isPreviewable">
+            <a class="pull-left" href="javascript:void(0)" onclick="$docPreviewUri" rel="tooltip" data-placement="bottom" title="$dName">
+              <img src="<%=uicomponent.docThumbnail%>" />
+            </a>
+          <%
+            } else if (org.exoplatform.services.cms.impl.Utils.isSupportThumbnailView(mimeType)) {
+          %>
+          <div class="clearfix isPreviewable">
+            <div id="MediaContent${activity.id}" class="pull-left mediaContent docTypeContent">
+	             <%
+	               def encodedPath = URLEncoder.encode(currentNode.getPath(), "utf-8");
+	               encodedPath = encodedPath.replaceAll ("%2F", "/");
+	               String docThumbnail = "/" + portalName + "/" + restContextName + "/thumbnailImage/big/" + repository + "/" + preferenceWS + encodedPath;
+	             %>
+	             <a href="javascript:void(0)" onclick="$docPreviewUri" rel="tooltip" data-placement="bottom" title="$title"><img src="$docThumbnail" class="pdfImageBorder"/></a>
+	          </div>
+	        <%
+	          } else if(fileComponent != null) {
+	        %>
+	        <div class="clearfix isPreviewable">
+            <div id="MediaContent${activity.id}" class="pull-left PlayerContianer">
+              <% uicontentpresentation.renderUIComponent(fileComponent);%>
+            </div>
+          <%
+            } else {
+              String classIcon = uicomponent.getCssClassIconFile(((title == null) ? dName : title), mimeType);
+          %>
+            <div class="clearfix isPreviewable">
+              <div id="MediaContent${activity.id}" class="fileTypeContent">
+                <a href="javascript:void(0)" onclick="$docPreviewUri" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIActivityComposer.label.UIDocActivityComposer")%>">
+                	<i class="$classIcon"></i>
+               	</a>
+              </div>
+          <%
+            }
+          %>
+              <div class="text">
+                <a class="linkTitle" href="$docPreviewUri">
+                    <% if (title == null) { %>
+                    $dName
+                    <% } else { %>
+                    $title
+                    <% } %>
+                </a>
+                <p class="linkDescription">$summary</p>
+                <span class="versionFile">
+                    <% if (version != 0) { %>
+                    $versionLabel $version -
+                    <% } %>
+                    $fileSize
+                </span>
+              </div>
+          </div><!--end clearfix -->
+
+			    </div><!--end introBox,linkShare-->
+				  <div class="actionBar clearfix docActivityIcon">
+						<% def toggleDisplayCommentAction = uicomponent.event('ToggleDisplayCommentForm', null, false);
+						 def commentLink = "";
+						%>
+						<% if (activityCommentAndLikable) { %>
+						<ul class="pull-right statusAction">
+						<li>
+                            <a class="$commentLink"  id="CommentLink${activity.id}" data-activity="${activity.id}" href="javascript:void(0);">
+							 <i class="uiIconComment uiIconLightGray"></i>&nbsp;$totalComments
+							</a>
+						</li>
+						<% if (uicomponent.isLiked()) { %>
+						<li>
+							<a onclick="$unlikeActivityAction" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIActivity.msg.UnlikeActivity"); %>" id="UnLikeLink${activity.id}" href="javascript:void(0);">
+							   <i class="uiIconThumbUp uiIconBlue"></i>&nbsp;$totalLikesNum
+							</a>
+						</li>
+						<% } else { %>
+						<li>
+							<a onclick="$likeActivityAction" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIActivity.msg.LikeActivity"); %>" id="LikeLink${activity.id}" href="javascript:void(0);">
+							   <i class="uiIconThumbUp uiIconLightGray "></i>&nbsp;$totalLikesNum
+							</a>
+						</li>
+						<% }%>
+						</ul>
+						<% }%>
+					 <ul class="pull-left statusAction">
+						<li><a href="<%= uicomponent.event("DownloadDocument")%>"><i class="uiIconDownload uiIconLightGray"></i>&nbsp;$downloadFileLabel</a></li>
+					 </ul>
+				</div><!--end actionBar-->
+				<% if (identityLikesNum > 0 || uicomponent.isLiked()) {%>
+        <div class="listLikedBox $listPeopleBGClass">
+              <div class="listPeopleContent">
+              <% if (!labelLikes) labelLikes = ""; %>
+                        <p>$labelLikes</p>
+
+                <% if (identityLikesNum > 0) {%>
+                <div class="listLiked">
+                <%
+                displayedIdentityLikes.each({
+                  def id = Utils.getIdentityManager().getIdentity(it);
+                  personLikeFullName = StringEscapeUtils.escapeHtml(id.profile.fullName);
+                  personLikeProfileUri = LinkProvider.getUserProfileUri(id.getRemoteId());
+                  personLikeAvatarImageSource = id.profile.avatarUrl;
+                  if (!personLikeAvatarImageSource) personLikeAvatarImageSource = LinkProvider.PROFILE_DEFAULT_AVATAR_URL;
+                  %>
+                    <a class="avatarXSmall" title="$personLikeFullName" href="$personLikeProfileUri">
+                      <img src="$personLikeAvatarImageSource" alt="$personLikeFullName" />
+                    </a>
+                 <% })%>
+                    <button onclick="$loadLikesAction" class="btn">...</button>
+                </div>
+                <% }%>
+             </div>
+        </div><!--end list like people-->
+				<%}%>
+				<div id="CommentBlockBound${activity.id}" class="commentBox">
+				  <% if (uicomponent.commentListToggleable()) {
+				  def showAllCommentsAction = uicomponent.event("SetCommentListStatus", "all");
+				  def hideAllCommentsAction = uicomponent.event("SetCommentListStatus", "none");
+				  def loadPreviousCommentsAction = uicomponent.event("SetCommentListStatus", "all");
+				  %>
+				  <div class="commentListInfo clearfix">
+            <div class="pull-right numberComment">$commentsHidden/$totalComments</div>
+            <% if (commentListStatus.getStatus().equals("latest") || commentListStatus.getStatus().equals("none")) { %>
+              <a onclick="$showAllCommentsAction" href="javascript:void(0);">$labelShowAllComments</a>
+            <% } else if (commentListStatus.getStatus().equals("all")) { %>
+                  <% if (commentsHidden > 0) { %>
+                    <a onclick="$loadPreviousCommentsAction" href="javascript:void(0);">$labelShowPreviousComments</a>
+                  <% } else { %>
+                    <a onclick="$hideAllCommentsAction" href="javascript:void(0);">$labelHideAllComments</a>
+                  <% } %>
+          <% } %>
+          </div>
+				 <% } %>
+				<div class="commentList">
+				  <%
+				  def commenterFullName, commenterProfileUri, commentMessage, commentPostedTime, commenterAvatarImgSrc, commentAbsolutePostedTime;
+				  def first = true, commentContentClass;
+				  def commentCounter = 0;
+                  def subCommentSize = 0;
+                  def subCommentIndex = 0;
+                  def subCommentClass = "";
+                  def hideSubComments = true;
+                  def updatedCommentId = uicomponent.getAndSetUpdatedCommentId(null);
+                  def showSubComments = false;
+                  def updatedComment;
+                  if (updatedCommentId) {
+                    updatedComment = Utils.getActivityManager().getActivity(updatedCommentId);
+                  }
+                commentList.each({
+                  commentCounter++;
+                  if (first & !uicomponent.commentListToggleable()) {
+                      commentContentClass = "commentContent";
+                      first = false;
+                  } else {
+                      commentContentClass = "";
+                  }
+                  def id = Utils.getIdentityManager().getIdentity(it.userId);
+                  commenterFullName = StringEscapeUtils.escapeHtml(id.profile.fullName);
+                  commenterProfileUri = LinkProvider.getUserProfileUri(id.getRemoteId());
+                    def commentParentClass = it.parentCommentId == null ? "CommentBlock" : (subCommentClass + " subCommentBlock");
+                    if(it.parentCommentId == null) {
+                      subCommentSize = uicomponent.getSubCommentsSize(commentList, it.id);
+                      subCommentIndex = 0;
+                      if (updatedCommentId) {
+                        if(updatedComment.parentCommentId == it.id || updatedComment.id == it.id){
+                          showSubComments = true;
+                        } else{
+                          showSubComments = false;
+                        }
+                      }
+                      hideSubComments = subCommentSize > 2 && (updatedCommentId == null || !showSubComments);
+                      if(hideSubComments){
+                        subCommentClass = "hidden";
+                      } else{
+                        subCommentClass = "";
+                      }
+                    } else {
+                         subCommentIndex++;
+                         if(hideSubComments && subCommentIndex == subCommentSize) {
+                             %>
+                            <div class="commentItem clearfix subCommentBlock subCommentShowAll" id="SubCommentShowAll_$it.parentCommentId">
+                              <a href="javascript:void(0)" class="subCommentShowAllLink" data-parent-comment="$it.parentCommentId">
+                                <%=labelViewAllReplies.replace("{0}", String.valueOf(subCommentSize))%>
+                              </a>
+                            </div> 
+                             <%
+                         }
+                    }
+					commentMessage = it.title;
+					commentPostedTime = uicomponent.getRelativeTimeLabel(_ctx, it.postedTime);
+		            commentEditedTime = uicomponent.getRelativeTimeLabel(_ctx, it.updated.getTime());
+		            commentAbsolutePostedTime = uicomponent.getAbsolutePostedTime(it.postedTime);
+					commenterAvatarImgSrc = id.profile.avatarUrl;
+					if (!commenterAvatarImgSrc) commenterAvatarImgSrc = LinkProvider.PROFILE_DEFAULT_AVATAR_URL;
+                    def commentId = it.parentCommentId == null ? it.id : it.parentCommentId;
+				  %>
+                  <div id="commentContainer${it.id}" data-comment-id="$commentId" data-parent-comment="$it.parentCommentId" class="$commentParentClass">
+				  <% if (commentCounter == commentList.size()) {%>
+					<div id="CommentBlock${activity.id}${commentCounter}" class="commentItem commentItemLast">
+				  <% } else { %>
+                    <div id="CommentBlock${it.id}" class="commentItem">
+				  <% } %>
+						<div class="commmentLeft">
+						  <a class="avatarXSmall" href="$commenterProfileUri" rel="tooltip" data-placement="bottom" title="$commenterFullName" >
+							<img alt="$commenterFullName" src="$commenterAvatarImgSrc" />
+						  </a>
+						</div><!--end commentLeft-->
+						<div class="commentRight">
+							<div class="author">
+								<a href="$commenterProfileUri">$commenterFullName</a>
+								<span class="dateTime">
+									 $commentPostedTime
+								 </span>
+							</div>
+							<div class="contentComment">
+								$commentMessage
+							</div>
+                            <%
+                                _ctx.put(TEMPLATE_PARAM_COMMENT, it);
+                                _ctx.put("authorName", id.remoteId);
+                                _ctx.put("authorFullName", commenterFullName);
+							    _ctx.put("activityID", activity.id);
+							    _ctx.put("commentPostedTime", commentPostedTime);
+							    _ctx.put("commentEditedTime", commentEditedTime);
+							    _ctx.put("commentAbsolutePostedTime", commentAbsolutePostedTime);
+                                def templateCommentActions = "war:/groovy/social/webui/activity/UIActivityCommentActions.gtmpl";
+                                _ctx.include(templateCommentActions, uicomponent.getTemplateResourceResolver(_ctx.getRequestContext(), templateCommentActions));
+                            %>
+						</div><!--end commentRight-->
+                        <div class="clearfix"></div>
+						<div class="actLink">
+						<a id="Permalink${it.id}" rel="tooltip" data-placement="bottom" title="$viewActivityTip" class="uiIconLink uiIconLightGray" href="<%=uicomponent.getCommentPermalink(activity.id, it.id)%>"></a>
+					<%
+					  if (uicomponent.isCommentDeletable(it.userId)) {
+					    String idDeleteComment = "DeleteCommentButton${it.id}";
+					%>
+					      <a href="javascript:void(0)" id="$idDeleteComment"
+					            data-confirm="$labelToDeleteThisComment" data-caption="$captionConfirmation"
+					            data-close="$labelClosebutton" data-ok="$labelConfirmbutton"
+					            data-delete="<%= uicomponent.event("DeleteComment", uicomponent.id, it.id); %>"
+					            class="uiIconTrash uiIconLightGray controllDelete"
+					            rel="tooltip" data-placement="bottom" title="$deleteActivityTip"></a>
+					<% } %>
+					    </div>
+					</div><!--end commentItem-->
+				</div>
+				  <% }) %>
+					</div> <!--end commentlist-->
+					 <div class="inputContainer" id="InputContainer${activity.id}">
+					<%
+					  def currentCommenterIdentity = uicomponent.getCommenterIdentity();
+					  def currentCommenterUri = LinkProvider.getUserProfileUri(currentCommenterIdentity.getRemoteId());
+					  def currentCommenterAvatar = currentCommenterIdentity.profile.avatarUrl;
+					  def currentCommenterName = StringEscapeUtils.escapeHtml(currentCommenterIdentity.profile.fullName);
+					  if (!currentCommenterAvatar) currentCommenterAvatar= LinkProvider.PROFILE_DEFAULT_AVATAR_URL;
+					%>
+					<% if (commentList.size() == 0) { %>
+					  <div class="commentItem noCommentFormBox" id="CommentFormBlock${activity.id}">
+					<% } else { %>
+					  <div class="commentItem commentFormBox" id="CommentFormBlock${activity.id}">
+					<% } %>
+						<div class="commmentLeft">
+							<a class="avatarXSmall" rel="tooltip" data-placement="bottom" title="$currentCommenterName" href="$currentCommenterUri">
+								<img src="$currentCommenterAvatar" alt="$currentCommenterName"/>
+							</a>
+						</div><!--end commentLeft-->
+						<div class="commentRight">
+							<div class="commentInputBox ">
+								<div class="commentInput"><% uicomponent.renderChild(UIFormTextAreaInput.class); %></div>
+                                <button class="btn pull-left btn-primary" data-comment-button="${activity.id}" data-click="<%= uicomponent.event("PostComment", "COMMENTID") %>" rel="tooltip" data-placement="bottom" title="$labelComment" id="CommentButton${activity.id}" disabled>$labelComment</button>
+                                <button class="btn visible-phone" id="CancelButton${activity.id}">$labelCancel</button>
+							</div>
+						</div><!--end commentRight-->
+                        <div class="clearfix"></div>
+					 </div><!--end commentItem-->					
+					</div><!--end commentlist-->	  
+				</div><!--end commentBox-->
+			</div><!--end #ActivityContextBox${activity.id}-->
+		</div> <!--end ContextBox${activity.id}-->	
+  </div> <!-- #boxContainer-->	  
+  <% uiform.end() %>
+</div>
+<% } else { %> <!-- activity deleted -->
+<div class="activityStream deleted">$labelActivityHasBeenDeleted</div>
+<% }%>
+

@@ -1,0 +1,41 @@
+<%def node = uicomponent.getViewNode("metadata:siteMetadata") ;%>
+<table class="uiGrid table table-hover table-striped">
+	<tr>
+	    <td ><%=_ctx.appRes("SiteMetadata.view.label.siteTitle")%></td>
+	    <td>
+	      <%if(node.hasProperty("siteTitle")) {%>
+			    <%=node.getProperty("siteTitle").getString()%>
+			  <%}%>
+	    </td>
+	</tr>
+	<tr>
+	    <td ><%=_ctx.appRes("SiteMetadata.view.label.description")%></td>
+	    <td>
+			  <%if(node.hasProperty("description")) {%>
+			    <%=node.getProperty("description").getString()%>
+			  <%}%>
+		</td>
+	</tr>	
+	<tr>
+		<td ><%=_ctx.appRes("SiteMetadata.view.label.keywords")%></td>
+		<td>
+	      <%if(node.hasProperty("keywords")) {%>
+			    <%=node.getProperty("keywords").getString()%>
+			  <%}%>
+	    </td>
+   </tr>
+   <tr>
+	    <td ><%=_ctx.appRes("SiteMetadata.view.label.robots")%></td>
+	    <td>
+	      <%if(node.hasProperty("robots")) {%>
+			    <%=node.getProperty("robots").getString()%>
+			  <%}%>
+	    </td>
+	</tr>	 				 	
+</table>
+<%/* start render action*/%>
+<div class="uiAction"> 
+    <button type="button" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("SiteMetadata.view.tooltip.add-edit")%>" onclick="<%=uicomponent.event("EditProperty", "metadata:siteMetadata")%>" class="btn"><%=_ctx.appRes("SiteMetadata.view.action.add-edit")%></button>
+    <button type="button" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("SiteMetadata.view.tooltip.cancel")%>" onclick="<%=uicomponent.event("Cancel")%>" class="btn"><%=_ctx.appRes("SiteMetadata.view.action.cancel")%></button>
+</div>
+<%/* end render action*/%>

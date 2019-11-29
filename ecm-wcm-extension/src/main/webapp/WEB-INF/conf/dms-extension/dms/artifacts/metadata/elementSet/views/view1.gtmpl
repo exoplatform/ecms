@@ -1,0 +1,110 @@
+<%
+  import org.exoplatform.wcm.webui.reader.ContentReader;
+	
+	public void renderDCValues(String name) {
+	  def node = uicomponent.getViewNode("dc:elementSet") ;
+		def values = uicomponent.getMultiValues(node, name) ;
+		if(values.size() == 0) { %>
+	    <div class="metaContent">
+	      <span>*</span><%=_ctx.appRes("ElementSet.view.label.not-avaliable")%>
+	    </div> 		
+	<%} else {
+			for(value in values) { %>
+	      <div class="metaContent">
+	        <span>*</span><%= ContentReader.getXSSCompatibilityContent(value) %>
+	      </div> 			
+	<%	}
+		}
+	}
+%>
+<div class="resizable">
+	<h5 class="header"><%=_ctx.appRes("ElementSet.view.label.core-elements")%></h5>
+	<div class="row-fluid">
+		<ul class="span6">
+			<li class="contentBlock">
+				<div class="title"><%=_ctx.appRes("ElementSet.view.label.title")%></div>
+				<% renderDCValues("dc:title") %>
+			</li>
+			
+			<li class="contentBlock">
+				<div class="title"><%=_ctx.appRes("ElementSet.view.label.date")%></div>
+				<% renderDCValues("dc:date") %>
+			</li>
+			
+			<li class="contentBlock">
+				<div class="title"><%=_ctx.appRes("ElementSet.view.label.description")%></div>
+				<% renderDCValues("dc:description") %>
+			</li>
+			
+			<li class="contentBlock">
+				<div class="title"><%=_ctx.appRes("ElementSet.view.label.creator")%></div>
+				<% renderDCValues("dc:creator") %>
+			</li>
+			
+			<li class="contentBlock">
+				<div class="title"><%=_ctx.appRes("ElementSet.view.label.contributor")%></div>
+				<% renderDCValues("dc:contributor") %> 
+			</li>
+			
+			<li class="contentBlock">
+				<div class="title"><%=_ctx.appRes("ElementSet.view.label.resource-type")%></div>
+				<% renderDCValues("dc:resourceType") %> 
+			</li>
+			
+			<li class="contentBlock">
+				<div class="title"><%=_ctx.appRes("ElementSet.view.label.relation")%></div>
+				<% renderDCValues("dc:relation") %>
+			</li>
+			
+			<li class="contentBlock">
+				<div class="title"><%=_ctx.appRes("ElementSet.view.label.source")%></div>
+				<% renderDCValues("dc:source") %>
+			</li>
+		</ul>
+		
+		<ul class="span6">
+			<li class="contentBlock">
+				<div class="title"><%=_ctx.appRes("ElementSet.view.label.subject")%></div>
+				<% renderDCValues("dc:subject") %>
+			</li>
+			
+			<li class="contentBlock">
+				<div class="title"><%=_ctx.appRes("ElementSet.view.label.languages")%></div>
+				<% renderDCValues("dc:language") %>
+			</li>
+			
+			<li class="contentBlock">
+				<div class="title"><%=_ctx.appRes("ElementSet.view.label.publisher")%></div>
+				<% renderDCValues("dc:publisher") %>
+			</li>
+			
+			<li class="contentBlock">
+				<div class="title"><%=_ctx.appRes("ElementSet.view.label.identifier")%></div>
+				<% renderDCValues("dc:identifier") %>
+			</li>
+			
+			<li class="contentBlock">
+				<div class="title"><%=_ctx.appRes("ElementSet.view.label.format")%></div>
+				<% renderDCValues("dc:format") %>
+			</li>
+			
+			<li class="contentBlock">
+				<div class="title"><%=_ctx.appRes("ElementSet.view.label.rights")%></div>
+				<% renderDCValues("dc:rights") %>
+			</li>
+			
+			<li class="contentBlock">
+				<div class="title"><%=_ctx.appRes("ElementSet.view.label.coverage")%></div>
+				<% renderDCValues("dc:coverage") %>
+			</li>	
+		</ul> 
+		
+	</div>
+</div>
+<%/* start render action*/%>
+<div class="uiAction uiActionBorder"> 
+ <button type="button" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("ElementSet.view.tooltip.add-edit")%>" onclick="<%=uicomponent.event("EditProperty", "dc:elementSet")%>" class="btn"><%=_ctx.appRes("ElementSet.view.action.add-edit")%></button>
+ <button type="button" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("ElementSet.view.tooltip.cancel")%>" onclick="<%=uicomponent.event("Cancel")%>" class="btn"><%=_ctx.appRes("ElementSet.view.action.cancel")%></button>
+</div>
+<%/* end render action*/%>
+ 

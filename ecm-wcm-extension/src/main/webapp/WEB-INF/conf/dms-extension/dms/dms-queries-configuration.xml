@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<configuration
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd http://www.exoplatform.org/xml/ns/kernel_1_2.xsd"
+   xmlns="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd">
+
+   		
+	<component>
+	   <key>org.exoplatform.services.cms.queries.QueryService</key>  
+	   <type>org.exoplatform.services.cms.queries.impl.QueryServiceImpl</type>
+	   <init-params>
+		    <value-param>
+		      <name>workspace</name>
+		      <value>system</value>
+		    </value-param>   
+		    <value-param>
+		      <name>relativePath</name>
+		      <value>Private/Searches</value>
+		    </value-param>
+		    <value-param>
+		      <name>group</name>
+		      <value>*:/platform/administrators</value>
+		    </value-param>            
+	  	</init-params>	         
+	</component>	
+	
+</configuration>

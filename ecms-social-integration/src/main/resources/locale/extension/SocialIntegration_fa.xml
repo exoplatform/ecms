@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UIConfirmMessage>
+    <label>
+      <ReadOnly>در حالت read only باز شود</ReadOnly>
+    </label>
+  </UIConfirmMessage>
+
+  <UISocialPopupWindow>
+    <title>
+      <UIReadOnlyFileConfirmMessage>باز کردن سند</UIReadOnlyFileConfirmMessage>
+    </title>
+  </UISocialPopupWindow>
+  <SocialIntegration>
+    <titles>
+      <fileSize>حجم فایل</fileSize>
+    </titles>
+    <messages>
+      <createdBy>ایجاد شده توسط</createdBy>
+      <editedBy>was edited by</editedBy>
+      <system>سیستم</system>
+      <readmore>...Read More.</readmore>
+      <editTitle>عنوان به روز شد به: {0}</editTitle>
+      <editName>نام به روز شده به: {0}</editName>
+      <editDescription>توضیحات به روز شده به: {0}</editDescription>
+      <singleCreator>ایجاد کننده: {0}</singleCreator>
+      <multiCreator>ایجاد کنندگان: {0}</multiCreator>
+      <addSource>فایل منبع: {0} اضافه شد</addSource>
+      <addMultiSource>فایل های منبع: {0} اضافه شدند</addMultiSource>
+      <removeSource>فایل منبع: {0} حذف شد</removeSource>
+      <removeMultiSource>فایل های منبع: {0} حذف شدند</removeMultiSource>
+      <editSummary>خلاصه به روز شد به: {0}</editSummary>
+      <editLanguage>زبان بروز شد به: {0}</editLanguage>
+      <editContent>محتوا به روز شد.</editContent>
+      <editFile>فایل به روز شد.</editFile>
+      <emptyTitle>عنوان حذف شده است.</emptyTitle>
+      <emptySummary>خلاصه حذف شده است.</emptySummary>
+      <emptyContent>محتوا حذف شده است.</emptyContent>
+      <updateMetadata>فراداده {0} به روز شد به: {1}</updateMetadata>
+      <removeMetadata>فراداده '{0}' حذف شده است.</removeMetadata>
+      <removeTitle>عنوان حذف شده است.</removeTitle>
+      <removeName>نام حذف شده است.</removeName>
+      <removeSummary>خلاصه برداشته شده است.</removeSummary>
+      <removeDescription>شرح حذف شده است.</removeDescription>
+      <removeCreator>ایجادکننده: {0} حذف شده است.</removeCreator>
+      <removeMultiCreator>ایجادکنندگان: {0} حذف شده اند.</removeMultiCreator>
+      <removeLanguage>زبان حذف شده است.</removeLanguage>
+      <removeContent>Content has been removed.</removeContent>
+      <attachmentAdded>فایل (ها) پیوست شده (اند).</attachmentAdded>
+      <attachmentRemoved>فایل (ها) حذف شده (اند).</attachmentRemoved>
+      <categoryAdded>دسته: {0} اضافه شده است.</categoryAdded>
+      <categoryRemoved>دسته: {0} حذف شده است.</categoryRemoved>
+      <tagAdded>برچسب: {0} اضافه شده است.</tagAdded>
+      <tagsAdded>برچسب های: {0} اضافه شده اند.</tagsAdded>
+      <tagRemoved>برچسب: {0} برداشته شده است.</tagRemoved>
+      <tagsRemoved>برچسب های: {0} حذف شده اند.</tagsRemoved>
+      <stateChange>
+        <pending>وضعیت انتشار در حال حاضر در انتظار است.</pending>
+        <approved>سند تایید شده است.</approved>
+        <staged>انتشار در وضعیت آماده قرار گرفت.</staged>
+        <published>سند منتشر شده است.</published>
+      </stateChange>
+      <contentMoved>انتشار منتقل شده به: {0}</contentMoved>
+      <fileMoved>فایل انتقال داده شده به: {0}</fileMoved>
+      <revisionChanged>انتشار به نسخه: {0} بازسازی شده است</revisionChanged>
+      <version>نسخه: {0}</version>
+      <updatedOn>Updated on</updatedOn>
+      <updatedBy>توسط</updatedBy>
+      <loadMoreFiles>+{0} more</loadMoreFiles>
+    </messages>
+    <publicationStates>
+      <archived>آرشیو شده</archived>
+      <obsolete>منسوخ</obsolete>
+      <unpublished>منتشر نشده</unpublished>
+      <draft>پیش‌نویس</draft>
+      <pending>در انتظار</pending>
+      <approved>تایید شده</approved>
+      <inreview>در حال بررسی</inreview>
+      <staged>صحنه</staged>
+      <published>منتشرشده</published>
+      <live>منتشرشده</live>
+    </publicationStates>
+    <view>مشاهده</view>
+    <edit>ويرايش</edit>
+    <download>دانلود</download>
+    <downloadAll>Download All</downloadAll>
+    <preview>پیش نمایش</preview>
+  </SocialIntegration>
+  <UIPopupWindow>
+    <title>
+      <DocViewer>پیش نمایش</DocViewer>
+      <UIReadOnlyFileConfirmMessage>باز کردن سند</UIReadOnlyFileConfirmMessage>
+    </title>
+  </UIPopupWindow>
+  <ElementSet>
+    <dialog>
+      <label>
+        <resourceType>نوع منبع</resourceType>
+      </label>
+    </dialog>
+  </ElementSet>
+  <UIPreviewCommentArea>
+    <label>
+      <commentTextAreaPreview>نظر خود را اضافه کنید...</commentTextAreaPreview>
+      <no-comment-yet>هنوز نظری ارسال نشده است</no-comment-yet>
+    </label>
+  </UIPreviewCommentArea>
+
+  <OpenDocumentInOffice>
+    <label>
+      <exo.remote-edit.word>Open In Word</exo.remote-edit.word>
+      <exo.remote-edit.excel>Open In Excel</exo.remote-edit.excel>
+      <exo.remote-edit.powerpoint>Open In Powerpoint</exo.remote-edit.powerpoint>
+      <exo.remote-edit.desktop>Open On Desktop</exo.remote-edit.desktop>
+      <exo.remote-edit.desktop-app>Open In</exo.remote-edit.desktop-app>
+    </label>
+  </OpenDocumentInOffice>
+
+  <UIPopupMenu>
+    <msg>
+      <lock-node-read-only>این فایل توسط کاربری به نام {0} قفل شده است. در حالت read only باز شود؟</lock-node-read-only>
+    </msg>
+  </UIPopupMenu>
+  <ECMContextMenu>
+    <event>
+      <ShareDocuments>اشتراک</ShareDocuments>
+    </event>
+  </ECMContextMenu>
+  <UIPopupWindow>
+    <title>
+      <UIShareDocuments>اشتراک</UIShareDocuments>
+      <Share>اشتراک</Share>
+    </title>
+  </UIPopupWindow>
+  <UIShareDocuments>
+    <label>
+      <ShareButton>اشتراک</ShareButton>
+      <CancelButton>انصراف</CancelButton>
+      <TextAreaInit>رسال یک پیام پس از به اشتراک گذاری...</TextAreaInit>
+      <ShareWith>ه اشتراک گذاری با</ShareWith>
+      <Access>دسترسی و ویرایش</Access>
+      <SpaceMember>Members</SpaceMember>
+      <SelectASpace>را انتخاب کنید یک فضای</SelectASpace>
+      <SharedADocument>ه اشتراک گذاشته یک سند</SharedADocument>
+      <WhoHasAccess>که دسترسی</WhoHasAccess>
+      <success>سند به اشتراک گذاشته شده با موفقیت</success>
+      <NoPermission>شما مجاز به به اشتراک گذاری این سند</NoPermission>
+      <NoPermissionDelete>شما نمی توانید حذف این اجازه</NoPermissionDelete>
+      <InvalidDeletion>شما نمی توانید حذف خود اجازه</InvalidDeletion>
+      <InvalidEntry>ین اجازه را نمی توان ویرایش کرد</InvalidEntry>
+      <InvalidOwner>شما نمی توانید تغییر صاحب مجوز</InvalidOwner>
+      <Invalid>Sorry, we couldn't recognise '{0}' as a valid user or space name</Invalid>
+      <option>
+        <read>Can view</read>
+        <modify>Can edit</modify>
+      </option>
+      <notification>
+        <read>read</read>
+        <modify>edit</modify>
+      </notification>
+      <invite>
+        <placeholder>ورود کاربران و یا فضاهای نام...</placeholder>
+      </invite>
+      <owner>صاحب</owner>
+    </label>
+  </UIShareDocuments>
+
+  <UIActionBar>
+    <tooltip>
+      <ShareDocuments>اشتراک</ShareDocuments>
+    </tooltip>
+  </UIActionBar>
+</bundle>

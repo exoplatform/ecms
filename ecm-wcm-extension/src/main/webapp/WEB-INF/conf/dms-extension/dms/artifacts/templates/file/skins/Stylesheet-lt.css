@@ -1,0 +1,91 @@
+/**
+  LTR skin for nt:file template
+*/
+.FileContent {  
+	color: #0e396c;
+}
+
+.FileContent .TopNavContent {  
+    background: #F8F8F8;
+    border: 1px solid #E1E1E1;
+}
+
+.FileContent .TopTitle {  
+    color: #4F4F4F;
+    font-weight: bold;
+    height: 28px;
+    line-height: 26px;
+    padding-left: 10px;
+	width:75%;
+	overflow:hidden;
+	float:left;
+}
+
+.FileContent .ActionButton{
+  padding: 4px 0 !important;
+}
+
+.FileContent .ActionButton a{
+    background: url("/eXoWCMResources/skin/images/file/DownloadFile.png") no-repeat scroll 4px center transparent;
+    border-left: 1px solid #E1E1E1;
+    color: #058EE6;
+    line-height: 20px;
+    padding: 3px 10px 3px 29px;
+}
+
+.FileContent .ActionTextButton a{
+    border-left: 1px solid #E1E1E1;
+    color: #058EE6;
+    line-height: 20px;
+    padding: 3px 10px 3px 2px;
+}
+
+.FileContent .ECMIframe {
+	border: 1px solid #cbcbcb; 
+	height: 100%;
+	overflow: auto;
+	width: 93%;
+	margin: 5px;
+	background: white;
+}
+
+.FileContent .ECMIframe body {
+	font-size: 13px;
+}
+
+.FileContent .Content {  
+	white-space: normal;
+	padding: 20px 0;
+}
+
+.FileContent .Content .TextContent {  
+	overflow: auto;
+	height: 100%;
+	margin: auto;
+	width: 89%;
+	padding: 10px;
+	border: 1px solid #b7b7b7;
+}
+
+.FileContent .Content .TextContent pre {  
+	white-space: normal;
+}
+
+.FileContent .ContentDetail {  
+	text-align: center;
+	overflow: visible;
+	padding: 15px 0px;
+}
+	
+.FileContent .UIVoteForm {
+	padding: 0px;
+}
+
+.FileContent .UIRatingInfoContainer {
+	margin:0px 0px 0px auto;
+}
+
+.FileContent p a {
+	color: #058EE6;
+	text-decoration: underline;
+}

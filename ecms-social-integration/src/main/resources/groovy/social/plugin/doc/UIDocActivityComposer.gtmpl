@@ -1,0 +1,140 @@
+<%
+/*
+<!--
+    Copyright (C) 2003-2017 eXo Platform SAS.
+
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU Affero General Public License
+    as published by the Free Software Foundation; either version 3
+    of the License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, see<http://www.gnu.org/licenses/>.
+-->
+*/
+
+  import org.exoplatform.webui.form.UIFormStringInput;
+  import org.apache.commons.lang.StringEscapeUtils;
+  import org.exoplatform.ecm.utils.text.Text;
+
+
+  if (uicomponent.isDisplayed()) {
+	  def rcontext = _ctx.getRequestContext();
+%>
+<div id="$uicomponent.id" class="MultiUploadContainer">
+	<%uicomponent.renderChild(org.exoplatform.social.plugin.doc.selector.UIComposerMultiUploadSelector.class)%>
+    <div class="sizeExceeded alert alert-error" style="display: none">
+	    <i class="uiIconError"></i>
+		<%=_ctx.appRes("UIDocActivityPopup.label.maxSizeReached").replace("{0}", "<b></b>").replace("{1}", String.valueOf(uicomponent.getLimitFileSize()));%>
+	</div>
+    <div class="countExceeded alert alert-error" style="display: <%= uicomponent.testAndSetMaxCountReached(false) ? "block" : "none" %>;">
+	    <i class="uiIconError"></i>
+		<%=_ctx.appRes("UIDocActivityPopup.label.maxCountReached").replace("{0}", String.valueOf(uicomponent.getMaxUploadCount()));%>
+	</div>
+    <div class="fileAlreadyExists alert alert-error" style="display: <%= uicomponent.hasDuplicatedFilesInSelection() ? "block" : "none" %>;">
+        <i class="uiIconError"></i>
+        <%=_ctx.appRes("UIDocActivityPopup.label.fileAlreadyExists").replace("{0}", "<b>"+uicomponent.getAndClearDuplicatedFiles()+"</b>")%>
+    </div>
+    <div class="limitMessage">
+    	<div class="sizeLimit pull-left">
+	    	<%=_ctx.appRes("UIDocActivityPopup.label.limitSizePerFile").replace("{0}", String.valueOf(uicomponent.getLimitFileSize()));%>
+  		</div>
+      <% 
+      String destinationFolderTitle = uicomponent.getDestinationTitle();
+      if (org.apache.commons.lang.StringUtils.isBlank(destinationFolderTitle)) { %>
+      <div class="selectFolder pull-right">
+        <a class="browseFile" href="<%= uicomponent.event("SelectDestinationFolder")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIDocActivityPopup.label.selectDestinationFolder")%>">
+          <i class="uiIconFolder uiIconLightGray" ></i>
+          <span><%=_ctx.appRes("UIDocActivityPopup.label.selectDestinationFolder")%></span>
+        </a>
+      </div>
+      <% } else { %>
+        <div class="selectFolder pull-right">
+          <a href="#" rel="tooltip" data-placement="top" title="<%= uicomponent.getDestinationBreadCrumb() %>">
+            <%= destinationFolderTitle %>
+          </a>
+          <a href="<%= uicomponent.event("RemoveDestinationFolder")%>" rel="tooltip" data-placement="top" title="<%=_ctx.appRes("UIDocActivityPopup.label.removeDestinationFolder")%>">
+            <i class="uiIconClose" ></i>
+          </a>
+        </div>
+      <% } %>
+	    <div class="countLimit pull-right">
+		    <%=_ctx.appRes("UIDocActivityPopup.label.limitCountFiles").replace("{0}", String.valueOf(uicomponent.getMaxUploadCount()));%>
+		</div>
+    </div>
+	<div class="uploadContainers" id="uploadContainers">
+		<script type="text/template">
+			<div class="uploadContainer" style="display:none">  
+				<div class="fileType uiBgd64x64FileDefault pull-left">
+				</div>
+				<div class="fileNameLabel pull-left" data-toggle="tooltip" rel="tooltip" data-placement="top">
+				</div>
+				<div class="fileSize pull-left"></div>
+				<div class="progress progress-striped pull-left">
+				  <div class="bar" style="width:0%">0%</div>
+				</div>
+				<div class="abortFile pull-right">
+					<a href="#" class="actionIcon" rel="tooltip" data-placement="top" title="<%=_ctx.appRes("UIFormUploadInput.label.Cancel")%>">
+						<i class="uiIconAbort uiIconLightGray"></i>
+					</a>
+				</div>
+				<div class="removeFile pull-right" style="display:none">
+					<a href="#" class="actionIcon" rel="tooltip" data-placement="top" title="<%=_ctx.appRes("UIFormUploadInput.label.remove")%>">
+						<i class="uiIconDelete uiIconLightGray" ></i>
+					</a>
+				</div>
+        <div class="selectFolder pull-right">
+          <a href="#" class="actionIcon" rel="tooltip" data-placement="top" title="<%=_ctx.appRes("UIDocActivityPopup.label.selectDestinationFolder")%>">
+            <i class="uiIconFolder uiIconLightGray" ></i>
+          </a>
+        </div>
+			</div>
+		</script>
+  <% def fileItems = uicomponent.getSelectedFileItems();
+     for (def i = fileItems.size() -1; i >= 0; i--) {
+        def fileItem = fileItems.get(i);
+     	def removeLink = uicomponent.event("RemoveDocument", fileItem.getId());
+     	def containerIdAttr = fileItem.getId().contains("/") ? "" : "id='uploadContainer" + fileItem.getId() + "'";
+     %>
+		 <div class="uploadContainer selectedFile" $containerIdAttr>  
+			<div class="fileType $fileItem.nodeIcon pull-left">
+			</div>
+			<div class="fileNameLabel pull-left" data-toggle="tooltip" rel="tooltip" data-placement="top" data-name="$fileItem.title" title="$fileItem.title">
+				$fileItem.title
+			</div>
+			<div class="fileSize pull-left">$fileItem.size</div>
+			<div class="removeFile pull-right">
+				<a href="$removeLink" class="actionIcon" rel="tooltip" data-placement="top" title="<%=_ctx.appRes("UIFormUploadInput.label.remove")%>">
+					<i class="uiIconDelete uiIconLightGray" ></i>
+				</a>
+			</div>
+      <%
+        String title = fileItem.getDestinationTitle();
+        if (fileItem.isUploadedFile()) {
+          if (org.apache.commons.lang.StringUtils.isBlank(title)) { %>
+            <div class="selectFolder pull-right">
+              <a href="<%= uicomponent.event("SelectDestinationFolder", fileItem.getId())%>" class="actionIcon" rel="tooltip" data-placement="top" title="<%=_ctx.appRes("UIDocActivityPopup.label.selectDestinationFolder")%>">
+                <i class="uiIconFolder uiIconLightGray" ></i>
+              </a>
+            </div>
+          <% } else { %>
+            <div class="selectFolder pull-right">
+              <a href="#" rel="tooltip" data-placement="top" title="<%= fileItem.getDestinationBreadCrumb() %>">
+                <%= fileItem.getDestinationTitle() %>
+              </a>
+              <a href="<%= uicomponent.event("RemoveDestinationFolder", fileItem.getId())%>" rel="tooltip" data-placement="top" title="<%=_ctx.appRes("UIDocActivityPopup.label.removeDestinationFolder")%>">
+                <i class="uiIconClose" ></i>
+              </a>
+            </div>
+          <% }
+        } %>
+		 </div>
+  <% } %>
+	 </div>
+</div>
+<% } %>

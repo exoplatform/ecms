@@ -16,33 +16,23 @@
  */
 package org.exoplatform.services.cms.watch.impl;
 
-import groovy.text.GStringTemplateEngine;
-import groovy.text.TemplateEngine;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.Callable;
 
-import javax.jcr.Node;
-import javax.jcr.RepositoryException;
-import javax.jcr.Value;
+import javax.jcr.*;
 import javax.jcr.observation.EventIterator;
 import javax.jcr.observation.EventListener;
 import javax.portlet.PortletRequest;
 
 import org.exoplatform.commons.api.notification.plugin.NotificationPluginUtils;
 import org.exoplatform.commons.api.notification.service.NotificationCompletionService;
-import org.exoplatform.commons.notification.impl.NotificationSessionManager;
-import org.exoplatform.commons.utils.CommonsUtils;
-import org.exoplatform.commons.utils.PropertyManager;
+import org.exoplatform.commons.utils.*;
+import org.exoplatform.container.ExoContainerContext;
+import org.exoplatform.container.PortalContainer;
+import org.exoplatform.container.component.RequestLifeCycle;
 import org.exoplatform.portal.application.PortalRequestContext;
 import org.exoplatform.portal.mop.SiteType;
-import org.exoplatform.portal.mop.user.UserNavigation;
-import org.exoplatform.portal.mop.user.UserNode;
-import org.exoplatform.portal.mop.user.UserPortal;
+import org.exoplatform.portal.mop.user.*;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.drives.ManageDriveService;
@@ -54,18 +44,16 @@ import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.mail.MailService;
 import org.exoplatform.services.mail.Message;
-import org.exoplatform.services.organization.OrganizationService;
-import org.exoplatform.services.organization.Query;
-import org.exoplatform.services.organization.User;
-import org.exoplatform.services.security.ConversationState;
-import org.exoplatform.services.security.Identity;
-import org.exoplatform.services.security.IdentityRegistry;
-import org.exoplatform.services.security.MembershipEntry;
+import org.exoplatform.services.organization.*;
+import org.exoplatform.services.security.*;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.url.navigation.NodeURL;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
+
+import groovy.text.GStringTemplateEngine;
+import groovy.text.TemplateEngine;
 
 /**
  * Created by The eXo Platform SAS
@@ -86,7 +74,6 @@ public class EmailNotifyListener implements EventListener {
 
   private static final String PATH_PARAM          = "path";
   private static final String USER_ID             = "${userId}";
-  public  static final String EXO_EMAIL_SMTP_FROM = PropertyManager.getProperty("gatein.email.smtp.from");
 
   private static final Log    LOG                 = ExoLogger.getLogger(EmailNotifyListener.class.getName());
 
@@ -126,14 +113,16 @@ public class EmailNotifyListener implements EventListener {
             task = new Callable<Boolean>() {
               @Override
               public Boolean call() throws Exception {
-                boolean created = NotificationSessionManager.createSystemProvider();
+                PortalContainer container = PortalContainer.getInstance();
+                ExoContainerContext.setCurrentContainer(container);
+                RequestLifeCycle.begin(container);
                 try {
                   mailService.sendMessage(message);
                 } catch (Exception e) {
                   LOG.error("Failed to send a message", e);
                   return false;
                 } finally {
-                  NotificationSessionManager.closeSessionProvider(created);
+                  RequestLifeCycle.end();
                 }
                 return true;
               }
@@ -157,7 +146,7 @@ public class EmailNotifyListener implements EventListener {
   private Message createMessage(String receiver, MessageConfig messageConfig) throws Exception {
     String companyName = NotificationPluginUtils.getBrandingPortalName();
     Message message = new Message();
-    message.setFrom(companyName + "<" + EXO_EMAIL_SMTP_FROM + ">");
+    message.setFrom(companyName + "<" + MailUtils.getSenderEmail() + ">");
     message.setTo(receiver);
     message.setSubject(messageConfig.getSubject());
     TemplateEngine engine = new GStringTemplateEngine();

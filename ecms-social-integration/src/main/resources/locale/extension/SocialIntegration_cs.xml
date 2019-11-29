@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UIConfirmMessage>
+    <label>
+      <ReadOnly>Otevřít pouze pro čtení</ReadOnly>
+    </label>
+  </UIConfirmMessage>
+
+  <UISocialPopupWindow>
+    <title>
+      <UIReadOnlyFileConfirmMessage>Otevřít dokument</UIReadOnlyFileConfirmMessage>
+    </title>
+  </UISocialPopupWindow>
+  <SocialIntegration>
+    <titles>
+      <fileSize>Velikost souboru</fileSize>
+    </titles>
+    <messages>
+      <createdBy>byla vytvořena</createdBy>
+      <editedBy>byla upravena</editedBy>
+      <system>systém</system>
+      <readmore>...číst více.</readmore>
+      <editTitle>Nadpis byl aktualizován na: {0}</editTitle>
+      <editName>Název byl aktualizován na: {0}</editName>
+      <editDescription>Popis byl aktualizován na: {0}</editDescription>
+      <singleCreator>Tvůrce je {0}</singleCreator>
+      <multiCreator>Tvůrci jsou {0}</multiCreator>
+      <addSource>Zdrojový soubor: {0} byl přidán</addSource>
+      <addMultiSource>Zdrojové soubory: {0} byly přidány</addMultiSource>
+      <removeSource>Zdrojový soubor: {0} byl odstraněn</removeSource>
+      <removeMultiSource>Zdrojové soubory: {0} byly odstraněny</removeMultiSource>
+      <editSummary>Shrnutí bylo aktualizováno na: {0}</editSummary>
+      <editLanguage>Jazyk byl aktualizován na: {0}</editLanguage>
+      <editContent>Obsah byl aktualizován.</editContent>
+      <editFile>Soubor byl aktualizován.</editFile>
+      <emptyTitle>Nadpis byl odstraněn.</emptyTitle>
+      <emptySummary>Souhrn byl odstraněn.</emptySummary>
+      <emptyContent>Obsah byl odstraněn.</emptyContent>
+      <updateMetadata>Metadata {0} byla aktualizována na: {1}</updateMetadata>
+      <removeMetadata>Metadata {0} byla odstraněna.</removeMetadata>
+      <removeTitle>Nadpis byl odstraněn.</removeTitle>
+      <removeName>Název byl odstraněn.</removeName>
+      <removeSummary>Souhrn byl odstraněn.</removeSummary>
+      <removeDescription>Popis byl odstraněn.</removeDescription>
+      <removeCreator>Tvůrce: {0} byl odstraněn.</removeCreator>
+      <removeMultiCreator>Tvůrci: {0} byli odstraněni.</removeMultiCreator>
+      <removeLanguage>Jazyk byl odstraněn.</removeLanguage>
+      <removeContent>Obsah byl odstraněn.</removeContent>
+      <attachmentAdded>Soubor(y) byl připojen.</attachmentAdded>
+      <attachmentRemoved>Soubor(y) byl odstraněn.</attachmentRemoved>
+      <categoryAdded>Kategorie: {0} byla přidána.</categoryAdded>
+      <categoryRemoved>Kategorie: {0} byla odstraněna.</categoryRemoved>
+      <tagAdded>Tag: {0} byl přidán.</tagAdded>
+      <tagsAdded>Tagy: {0} byly přidány.</tagsAdded>
+      <tagRemoved>Tag: {0} byl odstraněn.</tagRemoved>
+      <tagsRemoved>Tagy: {0} byly odstraněny.</tagsRemoved>
+      <stateChange>
+        <pending>Stav zveřejnění je nyní "čeká na vyřízení".</pending>
+        <approved>Dokument byl schválen.</approved>
+        <staged>Vydání bylo umístěno.</staged>
+        <published>Dokument byl zveřejněn.</published>
+      </stateChange>
+      <contentMoved>Vydání bylo přesunuto do: {0}</contentMoved>
+      <fileMoved>Soubor byl přesunut do: {0}</fileMoved>
+      <revisionChanged>Vydání bylo obnoveno na verzi: {0}</revisionChanged>
+      <version>Verze: {0}</version>
+      <updatedOn>Aktualizováno</updatedOn>
+      <updatedBy>od</updatedBy>
+      <loadMoreFiles>+{0} víc</loadMoreFiles>
+    </messages>
+    <publicationStates>
+      <archived>Archivováno</archived>
+      <obsolete>Zastaralý</obsolete>
+      <unpublished>Nezveřejněno</unpublished>
+      <draft>Koncept</draft>
+      <pending>Čekající</pending>
+      <approved>Schváleno</approved>
+      <inreview>V revizi</inreview>
+      <staged>Umístěno</staged>
+      <published>Zveřejněno</published>
+      <live>Zveřejněno</live>
+    </publicationStates>
+    <view>Zobrazit</view>
+    <edit>Upravit</edit>
+    <download>Stáhnout</download>
+    <downloadAll>Stáhnout vše</downloadAll>
+    <preview>Náhled</preview>
+  </SocialIntegration>
+  <UIPopupWindow>
+    <title>
+      <DocViewer>Náhled</DocViewer>
+      <UIReadOnlyFileConfirmMessage>Otevřít dokument</UIReadOnlyFileConfirmMessage>
+    </title>
+  </UIPopupWindow>
+  <ElementSet>
+    <dialog>
+      <label>
+        <resourceType>Typ zdroje</resourceType>
+      </label>
+    </dialog>
+  </ElementSet>
+  <UIPreviewCommentArea>
+    <label>
+      <commentTextAreaPreview>Přidejte svůj komentář...</commentTextAreaPreview>
+      <no-comment-yet>Dosud žádné komentáře</no-comment-yet>
+    </label>
+  </UIPreviewCommentArea>
+
+  <OpenDocumentInOffice>
+    <label>
+      <exo.remote-edit.word>Open In Word</exo.remote-edit.word>
+      <exo.remote-edit.excel>Open In Excel</exo.remote-edit.excel>
+      <exo.remote-edit.powerpoint>Open In Powerpoint</exo.remote-edit.powerpoint>
+      <exo.remote-edit.desktop>Open On Desktop</exo.remote-edit.desktop>
+      <exo.remote-edit.desktop-app>Open In</exo.remote-edit.desktop-app>
+    </label>
+  </OpenDocumentInOffice>
+
+  <UIPopupMenu>
+    <msg>
+      <lock-node-read-only>Tento soubor je uzamčen uživatelem {0}. Otevřít pouze pro čtení?</lock-node-read-only>
+    </msg>
+  </UIPopupMenu>
+  <ECMContextMenu>
+    <event>
+      <ShareDocuments>Sdílet</ShareDocuments>
+    </event>
+  </ECMContextMenu>
+  <UIPopupWindow>
+    <title>
+      <UIShareDocuments>Sdílet</UIShareDocuments>
+      <Share>Sdílet</Share>
+    </title>
+  </UIPopupWindow>
+  <UIShareDocuments>
+    <label>
+      <ShareButton>Sdílet</ShareButton>
+      <CancelButton>Zrušit</CancelButton>
+      <TextAreaInit>Odeslat zprávu po dokončení sdílení...</TextAreaInit>
+      <ShareWith>Sdílet s</ShareWith>
+      <Access>Přístupové právo</Access>
+      <SpaceMember>Members</SpaceMember>
+      <SelectASpace>Zvolte místnost</SelectASpace>
+      <SharedADocument>sdílel dokument</SharedADocument>
+      <WhoHasAccess>Kdo má přístup</WhoHasAccess>
+      <success>Dokument byl úspěšně sdílen</success>
+      <NoPermission>Nemáte oprávnění sdílet tento dokument</NoPermission>
+      <NoPermissionDelete>Nemůžete odstranit toto oprávnění</NoPermissionDelete>
+      <InvalidDeletion>Nemůžete smazat vlastní oprávnění</InvalidDeletion>
+      <InvalidEntry>Toto oprávnění nelze upravit</InvalidEntry>
+      <InvalidOwner>Nemůžete změnit oprávnění vlastníka</InvalidOwner>
+      <Invalid>Je nám to líto, ale '{0}' nebylo možné rozpoznat jako platné jméno uživatele nebo místnosti</Invalid>
+      <option>
+        <read>Může zobrazit</read>
+        <modify>Může upravit</modify>
+      </option>
+      <notification>
+        <read>přečíst</read>
+        <modify>upravit</modify>
+      </notification>
+      <invite>
+        <placeholder>Zadejte názvy uživatelů nebo místností...</placeholder>
+      </invite>
+      <owner>Vlastník</owner>
+    </label>
+  </UIShareDocuments>
+
+  <UIActionBar>
+    <tooltip>
+      <ShareDocuments>Sdílet</ShareDocuments>
+    </tooltip>
+  </UIActionBar>
+</bundle>

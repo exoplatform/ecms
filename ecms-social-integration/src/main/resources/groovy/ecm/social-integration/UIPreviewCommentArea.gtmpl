@@ -1,0 +1,165 @@
+<%
+/**
+* Created by The eXo Platform SARL
+* Author : Pham Duy Dong
+*                    phamdong@gmail.com
+* Nov 26, 2014
+* version: $Id$
+*/
+import org.exoplatform.services.cms.impl.Utils;
+import org.exoplatform.social.core.service.LinkProvider;
+import org.apache.commons.lang.StringEscapeUtils;
+
+import static org.exoplatform.social.webui.activity.BaseUIActivity.TEMPLATE_PARAM_COMMENT;
+
+def refreshCommentsAction = URLEncoder.encode(uicomponent.event(uicomponent.REFRESH_COMMENTS), "utf-8");
+def likeActivityAction = uicomponent.event("LikeActivity", "true");
+def unlikeActivityAction = uicomponent.event("LikeActivity", "false");
+
+def rcontext = _ctx.getRequestContext();
+rcontext.getJavascriptManager()
+    .require("SHARED/document-preview", "docPre")
+    .require("SHARED/jquery", "gj")
+    .addScripts("eXo.ecm.DocumentPreview.bindCommentEvent();")
+    .addScripts("eXo.ecm.DocumentPreview.setRefreshCommentsAction('" + refreshCommentsAction + "') ;")
+    .addScripts("gj('.commentList', '#UIDocumentPreview').scrollTop(20000);")
+    .addScripts("gj(window).resize();gj('#commentTextAreaPreview').focus();")
+    .addScripts("gj('*[rel=\"tooltip\"]').tooltip();");
+
+def labelToDeleteThisComment=_ctx.appRes("UIActivity.msg.Are_You_Sure_To_Delete_This_Comment");
+
+def commentList = uicomponent.getAllComments();
+int commentSize = commentList.size();
+
+def activity = uicomponent.getActivity();
+def authorIdentity = org.exoplatform.social.webui.Utils.getIdentityManager().getIdentity(activity.userId);
+def authorFullName = StringEscapeUtils.escapeHtml(authorIdentity.profile.fullName);
+def authorProfileUri = LinkProvider.getUserProfileUri(authorIdentity.getRemoteId());
+def authorAvatarImgSrc = authorIdentity.profile.avatarUrl;
+if (!authorAvatarImgSrc) authorAvatarImgSrc = LinkProvider.PROFILE_DEFAULT_AVATAR_URL;
+def activityStatus = uicomponent.getActivityStatus();
+def activityPostedTime = uicomponent.getRelativeTimeLabel(_ctx, activity.postedTime);
+def displayedIdentityLikes = uicomponent.getDisplayedIdentityLikes();
+def identityLikesNum = 0;
+if (displayedIdentityLikes != null) identityLikesNum = displayedIdentityLikes.length;
+def isLiked = uicomponent.isLiked();
+
+
+%>
+<div class="uiBox commentArea pull-right" id="$uicomponent.id">
+    <div class="title">
+        <%
+        def contentNode = uicomponent.getOriginalNode();
+        if (contentNode != null) {
+          def title = Utils.getTitle(contentNode);
+        %>
+          <i class="<%=Utils.getNodeTypeIcon(contentNode, "uiIcon16x16")%> uiIconLightGray"></i>&nbsp;&nbsp;$title
+        <%}%>
+    </div>
+    <div class="uiContentBox">
+        <div class="highlightBox">
+            <div class="profile clearfix">
+                <a title="$authorFullName" href="$authorProfileUri" class="avatarMedium pull-left"><img alt="$authorFullName" src="$authorAvatarImgSrc"></a>
+                <div class="rightBlock">
+                    <a href="$authorProfileUri">$authorFullName</a>
+                    <p class="dateTime">$activityPostedTime</p>
+                </div>
+            </div>
+            <% if (activityStatus != null) { %>
+              <p class="descript" title="<%=StringEscapeUtils.escapeHtml(activityStatus)%>">$activityStatus</p>
+            <% } %>
+        </div>
+        <div class="actionBar clearfix ">
+            <ul class="pull-right">
+                <li>
+                    <a href="#" id = "previewCommentLink">
+                        <i class="uiIconComment uiIconLightGray"></i>&nbsp;$commentSize
+                    </a>
+                </li>
+              <% if (uicomponent.isLiked()) { %>
+                <li>
+                    <a href="javascript:void(0);" onclick="$unlikeActivityAction" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIActivity.msg.UnlikeActivity")%>">
+                        <i class="uiIconThumbUp uiIconBlue"></i>&nbsp;$identityLikesNum
+                    </a>
+                </li>
+              <% } else  { %>
+                <li>
+                    <a href="javascript:void(0);" onclick="$likeActivityAction" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIActivity.msg.LikeActivity")%>">
+                        <i class="uiIconThumbUp uiIconLightGray"></i>&nbsp;$identityLikesNum
+                    </a>
+                </li>
+              <% } %>
+            </ul>
+        </div>
+      <%
+      if (commentSize > 0) {
+      %>
+
+        <ul class="commentList">
+        <%
+            commentList.each({
+              def commentIdentity = org.exoplatform.social.webui.Utils.getIdentityManager().getIdentity(it.userId);
+              def commenterFullName = StringEscapeUtils.escapeHtml(commentIdentity.profile.fullName);
+              def commenterProfileUri = LinkProvider.getUserProfileUri(commentIdentity.getRemoteId());
+
+              def commentMessage = it.title;
+
+              def activityParams = it.getTemplateParams();
+              def systemComment = uicomponent.getSystemCommentBundle(activityParams);
+              if (systemComment != null && systemComment.length > 0) {
+                 commentMessage = uicomponent.getCommentMessage(activityParams);
+              }
+              def commentPostedTime = uicomponent.getRelativeTimeLabel(_ctx, it.postedTime);
+              def commentAbsolutePostedTime = uicomponent.getAbsolutePostedTime(it.postedTime);
+              def commenterAvatarImgSrc = commentIdentity.profile.avatarUrl;
+              if (!commenterAvatarImgSrc) commenterAvatarImgSrc = LinkProvider.PROFILE_DEFAULT_AVATAR_URL;
+              def idPreviewCommentContainer = "previewCommentContainer${it.id}";
+
+            %>
+                <li class="clearfix" id = "$idPreviewCommentContainer">
+                    <a class="avatarXSmall pull-left" href="$commenterProfileUri" title="$commenterFullName"><img src="$commenterAvatarImgSrc" alt="" /></a>
+                    <div class="rightBlock">
+                        <div class="tit">
+                            <a href="$commenterProfileUri" >$commenterFullName</a>
+                            <span class="pull-right dateTime">$commentPostedTime</span>
+                        </div>
+                        <p class="cont">$commentMessage</p>
+                        <div class="clearfix"></div>
+                        <%
+                            _ctx.put(TEMPLATE_PARAM_COMMENT, it);
+                            _ctx.put("activityID", activity.id);
+                            _ctx.put("commentPostedTime", commentPostedTime);
+                            _ctx.put("commentEditedTime", commentEditedTime);
+                            _ctx.put("commentAbsolutePostedTime", commentAbsolutePostedTime);
+                            def templateCommentActions = "war:/groovy/social/webui/activity/UIActivityCommentActions.gtmpl";
+                            _ctx.include(templateCommentActions, uicomponent.getTemplateResourceResolver(_ctx.getRequestContext(), templateCommentActions));
+                         %>
+                    </div>
+                </li>
+            <%})%>
+        </ul>
+      <%
+      } else {
+      %>
+        <div class="noComment">
+            <div class="info"><%=_ctx.appRes("UIPreviewCommentArea.label.no-comment-yet")%></div>
+        </div>
+      <%
+      }
+
+        def activityId = uicomponent.getActivityId();
+        def currentCommenterIdentity = org.exoplatform.social.webui.Utils.getViewerIdentity();
+        def currentCommenterUri = LinkProvider.getUserProfileUri(currentCommenterIdentity.getRemoteId());
+        def currentCommenterAvatar = currentCommenterIdentity.profile.avatarUrl;
+        def currentCommenterFullName = StringEscapeUtils.escapeHtml(currentCommenterIdentity.profile.fullName);
+        if (!currentCommenterAvatar) currentCommenterAvatar= LinkProvider.PROFILE_DEFAULT_AVATAR_URL;
+      %>
+        <div class="commentInputBox">
+            <a class="avatarXSmall pull-left" href="$currentCommenterUri" title="$currentCommenterFullName"><img src="$currentCommenterAvatar" alt="$currentCommenterFullName" /></a>
+            <div class="commentBox">
+                <textarea placeholder="<%=_ctx.appRes("UIPreviewCommentArea.label.commentTextAreaPreview")%>" cols="30" rows="10" id="commentTextAreaPreview" activityId="$activityId" class="textarea"></textarea>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- commentArea -->

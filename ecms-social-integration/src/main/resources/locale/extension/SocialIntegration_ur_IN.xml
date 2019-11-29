@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UIConfirmMessage>
+    <label>
+      <ReadOnly>Open Read-only</ReadOnly>
+    </label>
+  </UIConfirmMessage>
+
+  <UISocialPopupWindow>
+    <title>
+      <UIReadOnlyFileConfirmMessage>Open Document</UIReadOnlyFileConfirmMessage>
+    </title>
+  </UISocialPopupWindow>
+  <SocialIntegration>
+    <titles>
+      <fileSize>File Size</fileSize>
+    </titles>
+    <messages>
+      <createdBy>was created by</createdBy>
+      <editedBy>was edited by</editedBy>
+      <system>the system</system>
+      <readmore>...Read More.</readmore>
+      <editTitle>Title has been updated to: {0}</editTitle>
+      <editName>Name has been updated to: {0}</editName>
+      <editDescription>Description has been updated to: {0}</editDescription>
+      <singleCreator>Creator is {0}</singleCreator>
+      <multiCreator>Creators are {0}</multiCreator>
+      <addSource>File source: {0} has been added</addSource>
+      <addMultiSource>File sources: {0} have been added</addMultiSource>
+      <removeSource>File source: {0} has been removed</removeSource>
+      <removeMultiSource>File sources: {0} have been removed</removeMultiSource>
+      <editSummary>Summary has been updated to: {0}</editSummary>
+      <editLanguage>Language has been updated to: {0}</editLanguage>
+      <editContent>Content has been updated.</editContent>
+      <editFile>File has been updated.</editFile>
+      <emptyTitle>The title has been removed.</emptyTitle>
+      <emptySummary>The summary has been removed.</emptySummary>
+      <emptyContent>The content has been removed.</emptyContent>
+      <updateMetadata>Metadata {0} has been updated to: {1}</updateMetadata>
+      <removeMetadata>Metadata {0} has been removed.</removeMetadata>
+      <removeTitle>Title has been removed.</removeTitle>
+      <removeName>Name has been removed.</removeName>
+      <removeSummary>Summary has been removed.</removeSummary>
+      <removeDescription>تفصیل ہٹا دیا گیا ہے ۔.</removeDescription>
+      <removeCreator>Creator: {0} has been removed.</removeCreator>
+      <removeMultiCreator>Creators: {0} have been removed.</removeMultiCreator>
+      <removeLanguage>Language has been removed.</removeLanguage>
+      <removeContent>Content has been removed.</removeContent>
+      <attachmentAdded>File(s) has been attached.</attachmentAdded>
+      <attachmentRemoved>File(s) has been removed.</attachmentRemoved>
+      <categoryAdded>Category: {0} has been added.</categoryAdded>
+      <categoryRemoved>Category: {0} has been removed.</categoryRemoved>
+      <tagAdded>Tag: {0} has been added.</tagAdded>
+      <tagsAdded>Tags: {0} have been added.</tagsAdded>
+      <tagRemoved>Tag: {0} has been removed.</tagRemoved>
+      <tagsRemoved>Tags: {0} have been removed.</tagsRemoved>
+      <stateChange>
+        <pending>Publication status is now pending.</pending>
+        <approved>Document has been approved.</approved>
+        <staged>Publication has been staged.</staged>
+        <published>Document has been published.</published>
+      </stateChange>
+      <contentMoved>Publication has been moved to: {0}</contentMoved>
+      <fileMoved>File has been moved to: {0}</fileMoved>
+      <revisionChanged>Publication has been restored to version: {0}</revisionChanged>
+      <version>Version: {0}</version>
+      <updatedOn>Updated on</updatedOn>
+      <updatedBy>نے</updatedBy>
+      <loadMoreFiles>+{0} more</loadMoreFiles>
+    </messages>
+    <publicationStates>
+      <archived>Archived</archived>
+      <obsolete>Obsolete</obsolete>
+      <unpublished>Unpublished</unpublished>
+      <draft>Draft</draft>
+      <pending>Pending</pending>
+      <approved>منظور ہوگیا</approved>
+      <inreview>In Review</inreview>
+      <staged>Staged</staged>
+      <published>Published</published>
+      <live>Published</live>
+    </publicationStates>
+    <view>ملاحظہ کریں</view>
+    <edit>ترمیم</edit>
+    <download>ڈاؤن لوڈ</download>
+    <downloadAll>Download All</downloadAll>
+    <preview>پیش نظارہ</preview>
+  </SocialIntegration>
+  <UIPopupWindow>
+    <title>
+      <DocViewer>پیش نظارہ</DocViewer>
+      <UIReadOnlyFileConfirmMessage>Open Document</UIReadOnlyFileConfirmMessage>
+    </title>
+  </UIPopupWindow>
+  <ElementSet>
+    <dialog>
+      <label>
+        <resourceType>Resource Type</resourceType>
+      </label>
+    </dialog>
+  </ElementSet>
+  <UIPreviewCommentArea>
+    <label>
+      <commentTextAreaPreview>اپنا تبصرہ شامل کریں...</commentTextAreaPreview>
+      <no-comment-yet>No comment yet</no-comment-yet>
+    </label>
+  </UIPreviewCommentArea>
+
+  <OpenDocumentInOffice>
+    <label>
+      <exo.remote-edit.word>Open In Word</exo.remote-edit.word>
+      <exo.remote-edit.excel>Open In Excel</exo.remote-edit.excel>
+      <exo.remote-edit.powerpoint>Open In Powerpoint</exo.remote-edit.powerpoint>
+      <exo.remote-edit.desktop>Open On Desktop</exo.remote-edit.desktop>
+      <exo.remote-edit.desktop-app>Open In</exo.remote-edit.desktop-app>
+    </label>
+  </OpenDocumentInOffice>
+
+  <UIPopupMenu>
+    <msg>
+      <lock-node-read-only>This file is locked by user {0}. Open read only?</lock-node-read-only>
+    </msg>
+  </UIPopupMenu>
+  <ECMContextMenu>
+    <event>
+      <ShareDocuments>Share</ShareDocuments>
+    </event>
+  </ECMContextMenu>
+  <UIPopupWindow>
+    <title>
+      <UIShareDocuments>Share Document</UIShareDocuments>
+      <Share>Share</Share>
+    </title>
+  </UIPopupWindow>
+  <UIShareDocuments>
+    <label>
+      <ShareButton>Share</ShareButton>
+      <CancelButton>منسوخ</CancelButton>
+      <TextAreaInit>Send a message upon sharing...</TextAreaInit>
+      <ShareWith>Share with</ShareWith>
+      <Access>اجازت</Access>
+      <SpaceMember>ارکان</SpaceMember>
+      <SelectASpace>Select a Space</SelectASpace>
+      <SharedADocument>shared a document</SharedADocument>
+      <WhoHasAccess>Who has access</WhoHasAccess>
+      <success>The document was shared successfully</success>
+      <NoPermission>You are not allowed to share this document</NoPermission>
+      <NoPermissionDelete>You can't delete this permission</NoPermissionDelete>
+      <InvalidDeletion>You can't delete your own permission</InvalidDeletion>
+      <InvalidEntry>This permission can't be edited</InvalidEntry>
+      <InvalidOwner>You can't change owner's permissions</InvalidOwner>
+      <Invalid>Sorry, we couldn't recognise '{0}' as a valid user or space name</Invalid>
+      <option>
+        <read>Can view</read>
+        <modify>Can edit</modify>
+      </option>
+      <notification>
+        <read>read</read>
+        <modify>edit</modify>
+      </notification>
+      <invite>
+        <placeholder>Enter users or spaces names...</placeholder>
+      </invite>
+      <owner>Owner</owner>
+    </label>
+  </UIShareDocuments>
+
+  <UIActionBar>
+    <tooltip>
+      <ShareDocuments>Share</ShareDocuments>
+    </tooltip>
+  </UIActionBar>
+</bundle>

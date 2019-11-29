@@ -16,10 +16,12 @@
   <modules>
     <module>core</module>
     <module>apps</module>
-    <module>packaging</module>
     <module>ext</module>
+    <module>ecm-wcm-extension</module>
     <module>upgrade-plugins</module>
     <module>testsuite</module>
+    <module>ecms-social-integration</module>
+    <module>ecms-packaging</module>
   </modules>
   <scm>
     <connection>scm:git:git://github.com/exoplatform/ecms.git</connection>
@@ -51,6 +53,7 @@
     <org.exoplatform.gatein.portal.version>6.0.x-SNAPSHOT</org.exoplatform.gatein.portal.version>
     <!-- Platform Project Dependencies -->
     <org.exoplatform.commons.version>6.0.x-SNAPSHOT</org.exoplatform.commons.version>
+    <org.exoplatform.social.version>6.0.x-SNAPSHOT</org.exoplatform.social.version>
     <org.exoplatform.platform-ui.version>6.0.x-SNAPSHOT</org.exoplatform.platform-ui.version>
     <!-- Platform Project 3rd party Dependencies -->
     <org.exoplatform.doc.doc-style.version>6.0.x-SNAPSHOT</org.exoplatform.doc.doc-style.version>
@@ -268,13 +271,13 @@
       </dependency>
       <dependency>
         <groupId>org.exoplatform.ecms</groupId>
-        <artifactId>ecms-packaging-wcm-webapp</artifactId>
+        <artifactId>ecm-wcm-extension</artifactId>
         <version>${project.version}</version>
         <type>war</type>
       </dependency>
       <dependency>
         <groupId>org.exoplatform.ecms</groupId>
-        <artifactId>ecms-packaging-wcm-webapp</artifactId>
+        <artifactId>ecm-wcm-extension</artifactId>
         <version>${project.version}</version>
         <type>pom</type>
       </dependency>
@@ -286,6 +289,11 @@
       <dependency>
         <groupId>org.exoplatform.ecms</groupId>
         <artifactId>ecms-upgrade-plugins</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.exoplatform.ecms</groupId>
+        <artifactId>ecms-social-integration</artifactId>
         <version>${project.version}</version>
       </dependency>
       <!-- Import versions from commons project -->
@@ -301,6 +309,14 @@
         <groupId>org.exoplatform.platform-ui</groupId>
         <artifactId>platform-ui</artifactId>
         <version>${org.exoplatform.platform-ui.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <!-- Import versions from social project -->
+      <dependency>
+        <groupId>org.exoplatform.social</groupId>
+        <artifactId>social</artifactId>
+        <version>${org.exoplatform.social.version}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>

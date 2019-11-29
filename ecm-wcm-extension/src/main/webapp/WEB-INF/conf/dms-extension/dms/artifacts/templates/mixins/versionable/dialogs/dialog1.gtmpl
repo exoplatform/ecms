@@ -1,0 +1,76 @@
+<%
+   String[] hiddenField1 = ["jcrPath=/node/mix:versionable", "mix:versionable", "visible=false"] ; 
+   uicomponent.addHiddenField("hiddenInput1", hiddenField1) ;
+%>
+<div class="UIFormWithTitle">  
+	<% uiform.begin() %>
+  <div class="HorizontalLayout" style="border:0px;">
+  	<table class="UIFormGrid">    
+  		<tr>
+	      <td class="FieldLabel"><%=_ctx.appRes("Versionable.dialog.label.version-history")%></td>
+	      <td class="FieldComponent">
+		      <%
+		        String[] fieldVersionHistory = ["jcrPath=/node/mix:versionable/jcr:versionHistory"] ;
+		        uicomponent.addTextField("versionHistory", fieldVersionHistory) ;
+		      %>
+		    </td>
+		  </tr>
+		  <tr>
+	      <td class="FieldLabel"><%=_ctx.appRes("Versionable.dialog.label.base-version")%></td>
+	      <td class="FieldComponent">
+		      <%
+		        String[] fieldBaseVersion = ["jcrPath=/node/mix:versionable/jcr:baseVersion"] ;
+		        uicomponent.addTextField("baseVersion", fieldBaseVersion) ;
+		      %>
+		    </td>
+		  </tr>
+		  <tr>
+	      <td class="FieldLabel"><%=_ctx.appRes("Versionable.dialog.label.is-checked-out")%></td>
+	      <td class="FieldComponent">
+		      <%
+		        String[] fieldIsCheckedOut = ["jcrPath=/node/mix:versionable/jcr:isCheckedOut"] ;
+		        uicomponent.addTextField("isCheckedOut", fieldIsCheckedOut) ;
+		      %>
+		    </td>
+		  </tr>
+		  <tr>
+	      <td class="FieldLabel"><%=_ctx.appRes("Versionable.dialog.label.predecessors")%></td>
+	      <td class="FieldComponent">
+		      <%
+		        String[] fieldPredecessors = ["jcrPath=/node/mix:versionable/jcr:predecessors"] ;
+		        uicomponent.addTextField("predecessors", fieldPredecessors) ;
+		      %>
+		    </td>
+		  </tr>
+		  <tr>
+	      <td class="FieldLabel"><%=_ctx.appRes("Versionable.dialog.label.merge-failed")%></td>
+	      <td class="FieldComponent">
+		      <%
+		        String[] fieldMergeFailed = ["jcrPath=/node/mix:versionable/jcr:mergeFailed"] ;
+		        uicomponent.addTextField("mergeFailed", fieldMergeFailed) ;
+		      %>
+		    </td>
+		  </tr>
+		  <tr>
+	      <td class="FieldLabel"><%=_ctx.appRes("Versionable.dialog.label.uuid")%></td>
+	      <td class="FieldComponent">
+		      <%
+		        String[] fieldUuid = ["jcrPath=/node/mix:versionable/jcr:uuid"] ;
+		        uicomponent.addTextField("uuid", fieldUuid) ;
+		      %>
+		    </td>
+		  </tr>
+		</table>
+		<%/* start render action*/%>
+		<div class="UIAction"> 
+	      <% for(action in uicomponent.getActions()) { 
+	      		 String actionLabel = _ctx.appRes(uicomponent.getName() + ".action." + action) 
+						 String link = uicomponent.event(action) ;
+	      %>
+		    <a href="javascript:void(0);" onclick="$link" class="ActionButton LightBlueStyle" rel="tooltip" data-placement="bottom" title="$actionLabel">$actionLabel</a>
+	      <%}%>          
+	  </div>
+	  <%/* end render action*/%>
+  </div>
+  <%uiform.end()%>
+</div>

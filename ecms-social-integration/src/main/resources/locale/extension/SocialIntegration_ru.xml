@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UIConfirmMessage>
+    <label>
+      <ReadOnly>Открыть только для чтения</ReadOnly>
+    </label>
+  </UIConfirmMessage>
+
+  <UISocialPopupWindow>
+    <title>
+      <UIReadOnlyFileConfirmMessage>Открыть документ</UIReadOnlyFileConfirmMessage>
+    </title>
+  </UISocialPopupWindow>
+  <SocialIntegration>
+    <titles>
+      <fileSize>Размер файла</fileSize>
+    </titles>
+    <messages>
+      <createdBy>был создан</createdBy>
+      <editedBy>был изменен</editedBy>
+      <system>система</system>
+      <readmore>...Прочитать больше.</readmore>
+      <editTitle>Обновлен заголовок: {0}</editTitle>
+      <editName>Обновлено название: {0}</editName>
+      <editDescription>Обновлено описание: {0}</editDescription>
+      <singleCreator>Создатель — {0}</singleCreator>
+      <multiCreator>Создатели - {0}</multiCreator>
+      <addSource>Был добавлен источник файла: {0}</addSource>
+      <addMultiSource>Были добавлены источники файлов: {0}</addMultiSource>
+      <removeSource>Был удален источник файла: {0}</removeSource>
+      <removeMultiSource>Были удалены источники файла: {0}</removeMultiSource>
+      <editSummary>Обновлено краткое описание: {0}</editSummary>
+      <editLanguage>Обновлен язык: {0}</editLanguage>
+      <editContent>Обновлено содержимое.</editContent>
+      <editFile>Обновлен файл.</editFile>
+      <emptyTitle>Удален заголовок.</emptyTitle>
+      <emptySummary>Удалено краткое описание.</emptySummary>
+      <emptyContent>Удалено содержимое.</emptyContent>
+      <updateMetadata>Метаданные {0} были обновлены: {1}</updateMetadata>
+      <removeMetadata>Метаданные {0} удалены.</removeMetadata>
+      <removeTitle>Заголовок был удален.</removeTitle>
+      <removeName>Название было удалено.</removeName>
+      <removeSummary>Краткое описание было удалено.</removeSummary>
+      <removeDescription>Описание было удалено.</removeDescription>
+      <removeCreator>Создатель: {0} был удален.</removeCreator>
+      <removeMultiCreator>Создатели: {0} были удалены.</removeMultiCreator>
+      <removeLanguage>Язык был удален.</removeLanguage>
+      <removeContent>Содержимое было удалено.</removeContent>
+      <attachmentAdded>Файл(ы) были прикреплены.</attachmentAdded>
+      <attachmentRemoved>Файл(ы) были удалены.</attachmentRemoved>
+      <categoryAdded>Была добавлена категория: {0}.</categoryAdded>
+      <categoryRemoved>Категория: {0} была удалена.</categoryRemoved>
+      <tagAdded>Был добавлен тег: {0}.</tagAdded>
+      <tagsAdded>Были добавлены теги: {0}.</tagsAdded>
+      <tagRemoved>Был удален тег: {0}.</tagRemoved>
+      <tagsRemoved>Были удалены теги: {0}.</tagsRemoved>
+      <stateChange>
+        <pending>Состояние публикации ожидает подтверждения.</pending>
+        <approved>Документ был утвержден.</approved>
+        <staged>Публикация была размещена.</staged>
+        <published>Документ был опубликован.</published>
+      </stateChange>
+      <contentMoved>Публикация была перемещена в: {0}</contentMoved>
+      <fileMoved>Файл был перемещен в: {0}</fileMoved>
+      <revisionChanged>Публикация была восстановлена до версии: {0}</revisionChanged>
+      <version>Версия: {0}</version>
+      <updatedOn>Оновлено</updatedOn>
+      <updatedBy>От</updatedBy>
+      <loadMoreFiles>+{0} еще</loadMoreFiles>
+    </messages>
+    <publicationStates>
+      <archived>В архиве</archived>
+      <obsolete>Устаревшие</obsolete>
+      <unpublished>Неопубликованные</unpublished>
+      <draft>Черновик</draft>
+      <pending>На рассмотрении</pending>
+      <approved>Утверждены</approved>
+      <inreview>На рассмотрении</inreview>
+      <staged>Размещены</staged>
+      <published>Опубликованы</published>
+      <live>Опубликовано</live>
+    </publicationStates>
+    <view>Показать</view>
+    <edit>Редактировать</edit>
+    <download>Загрузить</download>
+    <downloadAll>Скачать все</downloadAll>
+    <preview>Предварительный просмотр</preview>
+  </SocialIntegration>
+  <UIPopupWindow>
+    <title>
+      <DocViewer>Предварительный просмотр</DocViewer>
+      <UIReadOnlyFileConfirmMessage>Открыть документ</UIReadOnlyFileConfirmMessage>
+    </title>
+  </UIPopupWindow>
+  <ElementSet>
+    <dialog>
+      <label>
+        <resourceType>Тип ресурса</resourceType>
+      </label>
+    </dialog>
+  </ElementSet>
+  <UIPreviewCommentArea>
+    <label>
+      <commentTextAreaPreview>Добавьте свой комментарий...</commentTextAreaPreview>
+      <no-comment-yet>Пока нет комментариев</no-comment-yet>
+    </label>
+  </UIPreviewCommentArea>
+
+  <OpenDocumentInOffice>
+    <label>
+      <exo.remote-edit.word>Open In Word</exo.remote-edit.word>
+      <exo.remote-edit.excel>Open In Excel</exo.remote-edit.excel>
+      <exo.remote-edit.powerpoint>Open In Powerpoint</exo.remote-edit.powerpoint>
+      <exo.remote-edit.desktop>Open On Desktop</exo.remote-edit.desktop>
+      <exo.remote-edit.desktop-app>Open In</exo.remote-edit.desktop-app>
+    </label>
+  </OpenDocumentInOffice>
+
+  <UIPopupMenu>
+    <msg>
+      <lock-node-read-only>Этот файл заблокирован пользователем {0}. Открыть только для чтения?</lock-node-read-only>
+    </msg>
+  </UIPopupMenu>
+  <ECMContextMenu>
+    <event>
+      <ShareDocuments>Поделиться</ShareDocuments>
+    </event>
+  </ECMContextMenu>
+  <UIPopupWindow>
+    <title>
+      <UIShareDocuments>Поделиться</UIShareDocuments>
+      <Share>Поделиться</Share>
+    </title>
+  </UIPopupWindow>
+  <UIShareDocuments>
+    <label>
+      <ShareButton>Поделиться</ShareButton>
+      <CancelButton>Отмена</CancelButton>
+      <TextAreaInit>Отправить сообщение на общее пользование...</TextAreaInit>
+      <ShareWith>Поделиться с</ShareWith>
+      <Access>Права доступа</Access>
+      <SpaceMember>Members</SpaceMember>
+      <SelectASpace>Выбрать область</SelectASpace>
+      <SharedADocument>поделился документом</SharedADocument>
+      <WhoHasAccess>Кто имеет доступ</WhoHasAccess>
+      <success>Этот документ был успешно поделён</success>
+      <NoPermission>Вам не разрешено делиться этим документом</NoPermission>
+      <NoPermissionDelete>Вы не можете удалить это разрешение</NoPermissionDelete>
+      <InvalidDeletion>Вы не можете удалить своё разрешение</InvalidDeletion>
+      <InvalidEntry>Ваше разрешение не может быть изменено</InvalidEntry>
+      <InvalidOwner>Нельзя изменить разрешения владельца</InvalidOwner>
+      <Invalid>К сожалению мы не смогли признать «{0}» как допустимого пользователя или имя области</Invalid>
+      <option>
+        <read>Можно просмотреть</read>
+        <modify>Можно редактировать</modify>
+      </option>
+      <notification>
+        <read>читать</read>
+        <modify>редактировать</modify>
+      </notification>
+      <invite>
+        <placeholder>Введите имена пользователей или областей...</placeholder>
+      </invite>
+      <owner>Владелец</owner>
+    </label>
+  </UIShareDocuments>
+
+  <UIActionBar>
+    <tooltip>
+      <ShareDocuments>Поделиться</ShareDocuments>
+    </tooltip>
+  </UIActionBar>
+</bundle>
