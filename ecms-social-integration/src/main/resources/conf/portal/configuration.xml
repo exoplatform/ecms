@@ -3,7 +3,7 @@
 			   xsi:schemaLocation="http://www.exoplaform.org/xml/ns/kernel_1_1.xsd http://www.exoplaform.org/xml/ns/kernel_1_1.xsd"
 			   xmlns="http://www.exoplaform.org/xml/ns/kernel_1_1.xsd">
 
-  <component profiles="default,all,social">
+  <component>
     <type>org.exoplatform.wcm.ext.component.identity.provider.DocumentIdentityProvider</type>
   </component>
   <component>
@@ -18,9 +18,75 @@
     <type>org.exoplatform.social.ckeditor.HTMLUploadImageProcessor</type>
   </component>
 
-  <component profiles="all">
+  <component>
     <type>org.exoplatform.social.ckeditor.rest.ComposerImageControllerRest</type>
   </component>
+
+  <external-component-plugins>
+    <target-component>org.exoplatform.commons.api.search.SearchService</target-component>
+
+    <!-- Ecms -->
+    <component-plugin>
+      <name>PageSearchConnector</name>
+      <set-method>addConnector</set-method>
+      <type>org.exoplatform.services.wcm.search.connector.PageSearchServiceConnector</type>
+      <description>eXo portal pages</description>
+      <init-params>
+        <properties-param>
+           <name>constructor.params</name>
+           <property name="searchType" value="page"/>
+           <property name="displayName" value="Pages"/>
+           <property name="enable" value="${exo.unified-search.connector.page.enable:true}"/>
+        </properties-param>
+      </init-params>
+    </component-plugin>
+
+    <component-plugin>
+      <name>FileSearchConnector</name>
+      <set-method>addConnector</set-method>
+      <type>org.exoplatform.services.wcm.search.connector.FileSearchServiceConnector</type>
+      <description>eXo WCM documents</description>
+      <init-params>
+        <properties-param>
+          <name>constructor.params</name>
+          <property name="searchType" value="file"/>
+          <property name="displayName" value="Files"/>
+          <property name="index" value="file_alias"/>
+          <property name="type" value="file"/>
+          <property name="enable" value="${exo.unified-search.connector.file.enable:true}"/>
+          <property name="titleField" value="title"/>
+          <property name="searchFields" value="name,title,attachment.content,dc:title,dc:creator,dc:subject,dc:description,dc:publisher,dc:contributor,dc:resourceType,dc:format,dc:identifier,dc:source,dc:language,dc:relation,dc:coverage,dc:rights"/>
+        </properties-param>
+      </init-params>
+    </component-plugin>
+
+    <component-plugin>
+      <name>DocumentSearchConnector</name>
+      <set-method>addConnector</set-method>
+      <type>org.exoplatform.services.wcm.search.connector.DocumentSearchServiceConnector</type>
+      <description>eXo DMS documents</description>
+      <init-params>
+        <properties-param>
+           <name>constructor.params</name>
+           <property name="searchType" value="document"/>
+           <property name="displayName" value="Documents"/>
+           <property name="enable" value="${exo.unified-search.connector.document.enable:true}"/>
+        </properties-param>
+      </init-params>
+    </component-plugin>
+  </external-component-plugins>
+
+
+
+  <external-component-plugins>
+    <target-component>org.exoplatform.services.listener.ListenerService</target-component>
+    <component-plugin>
+      <name>CmsService.event.postEdit</name>
+      <set-method>addListener</set-method>
+      <type>org.exoplatform.ecms.indexing.listener.UnifiedSearchContentListener</type>
+      <description>Content listener for Unified Search</description>
+    </component-plugin>
+  </external-component-plugins>
 
   <external-component-plugins>
     <target-component>org.exoplatform.services.jcr.RepositoryService</target-component>
