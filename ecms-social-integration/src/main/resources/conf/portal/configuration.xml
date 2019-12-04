@@ -22,6 +22,10 @@
     <type>org.exoplatform.social.ckeditor.rest.ComposerImageControllerRest</type>
   </component>
 
+  <component>
+    <type>org.exoplatform.social.space.customization.SpaceCustomizationService</type>
+  </component>
+
   <external-component-plugins>
     <target-component>org.exoplatform.commons.api.search.SearchService</target-component>
 
