@@ -1,0 +1,69 @@
+<%
+  import java.util.Map;
+  import java.util.Iterator;
+  import java.util.ArrayList;
+  import java.util.Enumeration;
+  import org.json.JSONArray;
+  import org.apache.commons.lang.StringUtils;
+  import org.exoplatform.services.seo.SEOService;
+  import org.exoplatform.services.seo.PageMetadataModel;
+  import org.exoplatform.portal.mop.user.UserNode;
+  import org.exoplatform.portal.webui.util.Util;
+  import org.exoplatform.wcm.webui.reader.ContentReader;
+
+  def pcontext = _ctx.getRequestContext();
+  UserNode currentNode = Util.getUIPortal().getSelectedUserNode();
+  String pageReference = currentNode.getPageRef()!=null?currentNode.getPageRef().format():"";
+  def contentParam = "";
+  def contentPath = "";
+  ArrayList paramArray = null;
+  if (!pcontext.useAjax()) {
+    Enumeration params = pcontext.getRequest().getParameterNames();   
+    Map paramsMap = pcontext.getRequest().getParameterMap();
+    if(params.hasMoreElements()) {
+      paramArray = new ArrayList();
+      while(params.hasMoreElements()) {
+          contentParam = params.nextElement().toString();
+          paramArray.add(pcontext.getRequestParameter(contentParam)); 
+      }
+    } 
+  }    
+  boolean hasMetadata = false;
+  def keywords = "";
+  def description = "";
+  def robots = "";
+  PageMetadataModel metaModel = null;
+  try {
+    SEOService seoService = uicomponent.getApplicationComponent(SEOService.class);
+    if (seoService != null) {    
+      metaModel = seoService.getMetadata(paramArray, pageReference, lang);
+      if (metaModel != null) {
+        hasMetadata = true;
+        if (StringUtils.isNotBlank(metaModel.getTitle())) {
+          title = metaModel.getTitle(); 
+        }
+        keywords = ContentReader.getXSSCompatibilityContent(metaModel.getKeywords());
+        description = ContentReader.getXSSCompatibilityContent(metaModel.getDescription());
+        robots = metaModel.getRobotsContent();    
+      }     
+    }
+  } catch(Exception ex) {}
+  // Left Navigation State
+  def collapseClass = "collapse-left-bar";
+  def expandClass = "expand-left-bar";
+  if(hasMetadata) {
+    if(keywords != null && keywords.length() >0) {
+    %>
+      <meta name="keywords" content="<%=keywords%>" />
+    <% }
+    if(description != null && description.length() >0) {
+    %>
+      <meta name="description" content="<%=description%>" />
+    <% }
+    if(robots != null && robots.length() >0) {
+    %>
+      <meta name="robots" content="<%=robots%>" />
+    <% }
+  }
+  %>
+    <script type="text/javascript" src="<%=docBase%>/javascript/<%=portalName%>.js"></script>

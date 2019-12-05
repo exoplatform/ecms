@@ -93,6 +93,11 @@
   </component>
 
   <component>
+    <key>org.exoplatform.portal.resource.SkinVisitor</key>
+    <type>org.exoplatform.services.wcm.skin.WCMSkinVisitor</type>
+  </component>
+
+  <component>
     <key>org.exoplatform.services.wcm.javascript.XJavascriptService</key>
     <type>org.exoplatform.services.wcm.javascript.XJavascriptService</type>
   </component>
