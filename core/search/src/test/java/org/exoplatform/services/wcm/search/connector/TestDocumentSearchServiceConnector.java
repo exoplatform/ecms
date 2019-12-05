@@ -181,7 +181,14 @@ public class TestDocumentSearchServiceConnector extends BaseSearchTest {
           = documentSearch_.search(new SearchContext(new Router(new ControllerDescriptor()), "classic"), "anthony Felix~",
                                    sites, 
                                    1, 20, "title", "asc");
-    assertEquals(1, ret.size());//2
+    assertEquals(1, ret.size());//1
+    // Check when offset is greater than results size
+    ret
+            = documentSearch_.search(new SearchContext(new Router(new ControllerDescriptor()), "classic"), "anthony Felix~",
+            sites,
+            5, 20, "title", "asc");
+    assertNotNull(ret);// Should not fail
+    assertEquals(0, ret.size());//return 0
   }
   
   public void testSearchMultipleWithLimit() throws Exception {
