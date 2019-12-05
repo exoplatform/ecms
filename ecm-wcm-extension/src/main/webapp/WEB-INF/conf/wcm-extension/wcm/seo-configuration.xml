@@ -101,6 +101,18 @@
         </values-param>
       </init-params>
     </component-plugin>
+    <component-plugin>
+      <name>UIPortalApplication-End-Body</name>
+      <set-method>addTemplateExtension</set-method>
+      <type>org.exoplatform.portal.application.extension.TemplateExtensionPlugin</type>
+      <init-params>
+        <values-param>
+          <name>templates</name>
+          <description>The list of templates to include in HTML Page Header with UIPortalApplication.gtmpl</description>
+          <value>war:/groovy/portal/webui/workspace/UIECMSPortalApplicationEndBody.gtmpl</value>
+        </values-param>
+      </init-params>
+    </component-plugin>
   </external-component-plugins>
 
 </configuration>   

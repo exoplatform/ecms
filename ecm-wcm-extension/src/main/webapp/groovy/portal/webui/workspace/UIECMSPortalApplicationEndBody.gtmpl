@@ -1,0 +1,36 @@
+<%
+  import org.exoplatform.container.PortalContainer;
+  import org.exoplatform.web.application.JavascriptManager;
+  import org.exoplatform.portal.webui.util.Util;
+  import org.exoplatform.services.wcm.navigation.NavigationUtils;
+  import javax.servlet.http.HttpSession;
+  import org.exoplatform.services.wcm.publication.WCMComposer;
+  import org.exoplatform.wcm.webui.Utils;
+  import org.apache.commons.lang.StringUtils;
+
+  NavigationUtils.removeNavigationAsJson(portalName, userName);
+
+  def rcontext = _ctx.getRequestContext();
+%>
+<script type="text/javascript">
+  eXo.env.portal.wcmContentTitle = '<%= rcontext.getRequest().getAttribute("WCM.Content.Title") %>';
+</script>
+<% %>
+
+<%
+def jsManager = rcontext.getJavascriptManager();
+if (rcontext.getRemoteUser() != null && WCMComposer.MODE_EDIT.equals(Utils.getCurrentMode())) { %>
+  <script type="text/javascript">
+    require(['/commons-extension/ckeditor/ckeditor.js'], function() {
+      CKEDITOR.config.toolbar = "InlineEdit";
+      CKEDITOR.disableAutoInline = true;
+      var allElements = document.getElementsByClassName("WCMInlineEditable");
+      for(var i=0; i < allElements.length; i++) {
+        CKEDITOR.inline(allElements[i]);
+      }
+    });
+  </script>
+<%
+  jsManager.require("SHARED/quick-edit", "quickEdit").addScripts("if(CKEDITOR) {for(var instanceName in CKEDITOR.instances) { var editor = CKEDITOR.instances[instanceName]; editor.on( 'focus', function( e ) {quickEdit.InlineEditor.removeHoverClass();} ); editor.on('change', function(e) {quickEdit.InlineEditor.modifyInlineContent();}); editor.on('blur', (function(tmp) { return function() {quickEdit.InlineEditor.saveInlineContent(tmp);}})(editor)); }}");  
+}
+%>
