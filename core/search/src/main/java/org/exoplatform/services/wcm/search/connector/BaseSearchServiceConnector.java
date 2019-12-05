@@ -112,6 +112,7 @@ public abstract class BaseSearchServiceConnector extends SearchServiceConnector 
       if (LOG.isErrorEnabled()) {
         LOG.error(e.getMessage(), e);
       }
+      return null;
     }
     return ret;
   }

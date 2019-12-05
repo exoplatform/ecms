@@ -912,9 +912,9 @@ public class TestSearchService extends BaseSearchTest {
     int limit = pageSize;
     boolean isItemDuplicated = false;
 
+    queryCriteria = new QueryCriteria();
     queryCriteria.setSiteName("acme");
     queryCriteria.setKeyword(duplicationSearchKeyword);
-    queryCriteria = new QueryCriteria();
     queryCriteria.setSearchDocument(true);
     queryCriteria.setSearchWebContent(true);
     queryCriteria.setLiveMode(true);
