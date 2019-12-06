@@ -1,0 +1,9 @@
+<nodeTypes xmlns:exo="http://www.exoplatform.com/jcr/exo/1.0">
+  <nodeType name="exo:activityInfo" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
+    <propertyDefinitions>
+      <propertyDefinition name="exo:activityId" requiredType="String" autoCreated="true" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
+        <valueConstraints />
+      </propertyDefinition>
+    </propertyDefinitions>
+  </nodeType>
+</nodeTypes>
