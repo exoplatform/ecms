@@ -5,6 +5,92 @@
    xmlns="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd">
 
   <component>
+    <key>org.exoplatform.services.jcr.webdav.WebDavServiceImpl</key>
+    <type>org.exoplatform.services.cms.webdav.WebDavServiceImpl</type>
+    <init-params>
+
+      <!-- default node type which is used for the creation of collections -->
+      <value-param>
+        <name>def-folder-node-type</name>
+        <value>${webdav.def-folder-node-type:nt:folder}</value>
+      </value-param>
+
+      <!-- define the allowed folder paths regex-->
+      <value-param>
+        <name>folder-listing-paths-allowed-regex</name>
+        <value>${exo.webdav.folder.listing.paths.allowed.regex:}</value>
+      </value-param>
+
+      <!-- default node type which is used for the creation of files -->
+      <value-param>
+        <name>def-file-node-type</name>
+        <value>${webdav.def-file-node-type:nt:file}</value>
+      </value-param>
+
+      <!-- if MimeTypeResolver can't find the required mime type, 
+            which conforms with the file extension, and the mimeType header is absent
+            in the HTTP request header, this parameter is used 
+            as the default mime type-->
+
+      <value-param>
+        <name>def-file-mimetype</name>
+        <value>${webdav.def-file-mimetype:application/octet-stream}</value>
+      </value-param>
+
+      <!-- This parameter indicates one of the three cases when you update the content of the resource by PUT command.
+        In case of "create-version", PUT command creates the new version of the resource if this resource  exists.
+        In case of "replace" - if the resource  exists, PUT command updates the content of the resource and  its last modification date.
+        In case of "add", the PUT command tries to create the new resource with the same name (if the parent node allows same-name siblings).
+        In case of "update", if the resource  exists, PUT command updates the content of the resource and  its last modification date.
+      -->
+
+      <value-param>
+        <name>update-policy</name>
+        <value>${webdav.update-policy:create-version}</value>
+        <!--value>create-version</value-->
+        <!--value>replace</value -->
+        <!-- value>add</value -->
+      </value-param>
+
+      <!--
+        This parameter determines how service responds to a method that attempts to modify file content.
+        In case of "checkout-checkin" value, when a modification request is applied to a checked-in version-controlled resource, the request is  automatically preceded by a checkout and followed by a checkin operation.
+        In case of "checkout" value, when a modification request is applied to a checked-in version-controlled resource, the request is automatically preceded by a checkout operation.
+      -->
+      <value-param>
+        <name>auto-version</name>
+        <!--value>checkout-checkin</value-->
+        <value>${webdav.auto-version:checkin-checkout}</value>
+      </value-param>
+
+      <!--
+        This parameter will define the path to the folder nodes icon.
+      -->
+      <value-param>
+        <name>folder-icon-path</name>
+        <value>${webdav.folder-icon-path:/eXoWCMResources/skin/images/file/nt-folder.png}</value>
+      </value-param>
+
+      <!--
+        This parameter is responsible for managing Cache-Control header value which will be returned to the client.
+        You can use patterns like "text/*", "image/*" or wildcard to define the type of content.
+       -->
+      <value-param>
+        <name>cache-control</name>
+        <value>${webdav.cache-control:text/*:max-age=3600;image/*:max-age=1800;application/*:max-age=1800;*/*:no-cache}</value>
+      </value-param>
+
+      <values-param>
+          <name>untrusted-user-agents</name>
+          <value>gvfs/*</value>
+          <value>Microsoft Office .*</value>
+          <value>(Word|Excel|PowerPoint).*</value>
+      </values-param>
+
+    </init-params>
+  </component>
+
+  <component>
     <type>org.exoplatform.services.cms.jcrext.activity.ActivityCommonService</type>
     <init-params>
       <value-param>

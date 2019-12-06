@@ -45,6 +45,7 @@
           <value>locale.wcm.views</value>
           <value>locale.wcm.webui</value>
           <value>locale.wcm.resources.WCMResourceBundleConnector</value>
+          <value>locale.navigation.group.platform.web-contributors</value>
         </values-param>
         <values-param>
           <name>portal.resource.names</name>
@@ -52,6 +53,7 @@
           <value>locale.wcm.views</value>
           <value>locale.wcm.webui</value>
           <value>locale.wcm.resources.WCMResourceBundleConnector</value>
+          <value>locale.navigation.group.platform.web-contributors</value>
         </values-param>
       </init-params>
     </component-plugin>

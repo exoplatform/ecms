@@ -92,7 +92,7 @@
     <component-plugin>
       <name>UIPortalApplication-head</name>
       <set-method>addTemplateExtension</set-method>
-      <type>org.exoplatform.portal.application.extension.TemplateExtensionPlugin</type>
+      <type>org.exoplatform.groovyscript.text.TemplateExtensionPlugin</type>
       <init-params>
         <values-param>
           <name>templates</name>
@@ -104,7 +104,7 @@
     <component-plugin>
       <name>UIPortalApplication-End-Body</name>
       <set-method>addTemplateExtension</set-method>
-      <type>org.exoplatform.portal.application.extension.TemplateExtensionPlugin</type>
+      <type>org.exoplatform.groovyscript.text.TemplateExtensionPlugin</type>
       <init-params>
         <values-param>
           <name>templates</name>

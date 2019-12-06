@@ -21,14 +21,12 @@ import java.io.PrintWriter;
 import javax.jcr.Node;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.lang3.StringUtils;
-
 import org.exoplatform.ecm.utils.MessageDigester;
 import org.exoplatform.services.cache.CacheService;
 import org.exoplatform.services.cache.ExoCache;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
-import org.exoplatform.services.security.ConversationState;
-import org.exoplatform.services.security.IdentityConstants;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.portal.LivePortalManagerService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.ControllerContext;
@@ -42,7 +40,8 @@ import org.exoplatform.web.controller.QualifiedName;
  * Feb 20, 2012  
  */
 public class SiteJavascriptHandler extends WebRequestHandler {
-  
+  private static final Log         LOG          = ExoLogger.getLogger(SiteJavascriptHandler.class.getName());
+
   private ExoCache<String, Object> jsCache_;
 
   private String                   siteName_;
@@ -70,10 +69,17 @@ public class SiteJavascriptHandler extends WebRequestHandler {
       SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
       livePortalManagerService_ = WCMCoreUtils.getService(LivePortalManagerService.class);
       Node portalNode = null;
-      if ("shared".equals(siteName_)) {
-        portalNode = livePortalManagerService_.getLiveSharedPortal(sessionProvider);
-      } else {
-        portalNode = livePortalManagerService_.getLivePortal(sessionProvider, siteName_);  
+      try {
+        if ("shared".equals(siteName_)) {
+          portalNode = livePortalManagerService_.getLiveSharedPortal(sessionProvider);
+        } else {
+          portalNode = livePortalManagerService_.getLivePortal(sessionProvider, siteName_);  
+        }
+      } catch (Exception e) {
+        LOG.warn("Can't find JCR portal node for site '{}'", siteName_);
+      }
+      if (portalNode == null) {
+        return false;
       }
       jsData = WCMCoreUtils.getSiteGlobalActiveJs(portalNode, sessionProvider);
       jsCache_.put(key, jsData);

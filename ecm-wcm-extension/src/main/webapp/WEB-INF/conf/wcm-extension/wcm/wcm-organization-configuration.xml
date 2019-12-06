@@ -80,7 +80,7 @@
 						</values-param>	                
 	   </init-params>   
   </component>
-		
+
   <external-component-plugins>
     <target-component>org.exoplatform.services.organization.OrganizationService</target-component>
     <component-plugin>
@@ -107,10 +107,98 @@
               <collection type="java.util.ArrayList">
                 <value>
                   <object type="org.exoplatform.services.organization.OrganizationConfig$MembershipType">
-                    <field name="type"><string>*</string></field>
-                    <field name="description"><string>Any membership type</string></field>
+                    <field name="type">
+                      <string>validator</string>
+                    </field>
+                    <field name="description">
+                      <string>validator membership type</string>
+                    </field>
                   </object>
-                </value>								
+                </value>
+                <value>
+                  <object type="org.exoplatform.services.organization.OrganizationConfig$MembershipType">
+                    <field name="type">
+                      <string>editor</string>
+                    </field>
+                    <field name="description">
+                      <string>editor membership type</string>
+                    </field>
+                  </object>
+                </value>
+                <value>
+                  <object type="org.exoplatform.services.organization.OrganizationConfig$MembershipType">
+                    <field name="type">
+                      <string>redactor</string>
+                    </field>
+                    <field name="description">
+                      <string>redactor membership type</string>
+                    </field>
+                  </object>
+                </value>
+                <value>
+                  <object type="org.exoplatform.services.organization.OrganizationConfig$MembershipType">
+                    <field name="type">
+                      <string>webdesigner</string>
+                    </field>
+                    <field name="description">
+                      <string>webdesigner membership type</string>
+                    </field>
+                  </object>
+                </value>
+                <value>
+                  <object type="org.exoplatform.services.organization.OrganizationConfig$MembershipType">
+                    <field name="type">
+                      <string>author</string>
+                    </field>
+                    <field name="description">
+                      <string>author membership type</string>
+                    </field>
+                  </object>
+                </value>
+                <value>
+                  <object type="org.exoplatform.services.organization.OrganizationConfig$MembershipType">
+                    <field name="type">
+                      <string>publisher</string>
+                    </field>
+                    <field name="description">
+                      <string>publisher membership type</string>
+                    </field>
+                  </object>
+                </value>
+              </collection>
+            </field>
+            <field name="group">
+              <collection type="java.util.ArrayList">
+                <value>
+                  <object type="org.exoplatform.services.organization.OrganizationConfig$Group">
+                    <field name="name">
+                      <string>web-contributors</string>
+                    </field>
+                    <field name="parentId">
+                      <string>/platform</string>
+                    </field>
+                    <field name="description">
+                      <string>the /platform/web-contributors group</string>
+                    </field>
+                    <field name="label">
+                      <string>Content Management</string>
+                    </field>
+                  </object>
+                </value>
+              </collection>
+            </field>
+            <field name="user">
+              <collection type="java.util.ArrayList">
+                <value>
+                  <object type="org.exoplatform.services.organization.OrganizationConfig$User">
+                    <field name="userName">
+                      <string>${exo.super.user}</string>
+                    </field>
+                    <field name="groups">
+                      <string>*:/platform/web-contributors</string>
+                    </field>
+                  </object>
+                </value>
               </collection>
             </field>
           </object>

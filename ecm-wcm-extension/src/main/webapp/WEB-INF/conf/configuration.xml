@@ -45,9 +45,13 @@
   <import>war:/conf/dms-extension/dms/dms-common-configuration.xml</import>
   <import>war:/conf/dms-extension/dms/dms-document-type-configuration.xml</import>  
   <import>war:/conf/dms-extension/dms/dms-session-providers-configuration.xml</import>
+  <import>war:/conf/dms-extension/dms/dms-drives-configuration.xml</import>
+  <import>war:/conf/dms-extension/dms/dms-views-configuration.xml</import>
   
-  <import>war:/conf/wcm-extension/kernel/schedule-configuration.xml</import>
   <import>war:/conf/wcm-extension/portal/resource-bundle-configuration.xml</import>
+  <import>war:/conf/wcm-extension/portal/ecms-portal-configuration.xml</import>
+  <import>war:/conf/wcm-extension/portal/application-registry-configuration.xml</import>
+  <import>war:/conf/wcm-extension/wcm/deployment/template-empty-deployment-configuration.xml</import>
   <import>war:/conf/wcm-extension/dms/nodetype-templates-configuration.xml</import>
   <import>war:/conf/wcm-extension/dms/application-templates-configuration.xml</import>
   <import>war:/conf/wcm-extension/dms/ext-configuration.xml</import>
@@ -62,5 +66,6 @@
   <import>war:/conf/wcm-extension/wcm/seo-configuration.xml</import>  
   <import>war:/conf/wcm-extension/wcm/javascript-configuration.xml</import>
   <import profiles="friendly">war:/conf/content-extended/friendly/configuration.xml</import>
+  <import>war:/conf/social/activity-listeners-configuration.xml</import>
   
 </configuration>

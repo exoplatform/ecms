@@ -2,15 +2,14 @@
   import org.exoplatform.container.PortalContainer;
   import org.exoplatform.web.application.JavascriptManager;
   import org.exoplatform.portal.webui.util.Util;
-  import org.exoplatform.services.wcm.navigation.NavigationUtils;
+  import org.exoplatform.portal.webui.util.NavigationUtils;
   import javax.servlet.http.HttpSession;
   import org.exoplatform.services.wcm.publication.WCMComposer;
   import org.exoplatform.wcm.webui.Utils;
   import org.apache.commons.lang.StringUtils;
 
-  NavigationUtils.removeNavigationAsJson(portalName, userName);
-
   def rcontext = _ctx.getRequestContext();
+  NavigationUtils.removeNavigationAsJson(rcontext.getPortalOwner(), rcontext.getRemoteUser());
 %>
 <script type="text/javascript">
   eXo.env.portal.wcmContentTitle = '<%= rcontext.getRequest().getAttribute("WCM.Content.Title") %>';

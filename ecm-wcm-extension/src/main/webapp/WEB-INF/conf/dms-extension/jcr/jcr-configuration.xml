@@ -2,7 +2,30 @@
 <configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd http://www.exoplatform.org/xml/ns/kernel_1_2.xsd"
   xmlns="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd">
-  
+
+  <component>
+    <key>org.exoplatform.services.jdbc.DataSourceProvider</key>
+    <type>org.exoplatform.services.jdbc.impl.DataSourceProviderImpl</type>
+    <init-params>
+       <value-param profiles="jboss">
+          <name>always-managed</name>
+          <value>${gatein.jcr.datasource.managed:false}</value>
+       </value-param>
+    </init-params>
+  </component>
+
+  <component>
+    <key>org.exoplatform.services.jcr.config.RepositoryServiceConfiguration</key>
+    <type>org.exoplatform.services.jcr.impl.config.RepositoryServiceConfigurationImpl</type>
+    <init-params>
+      <value-param>
+        <name>conf-path</name>
+        <description>JCR configuration file</description>
+        <value>war:/conf/jcr/repository-configuration.xml</value>
+      </value-param>
+    </init-params>
+  </component>
+
   <component>
     <key>org.exoplatform.services.jcr.ext.audit.AuditService</key>  
     <type>org.exoplatform.services.jcr.ext.audit.AuditServiceImpl</type>
@@ -32,4 +55,29 @@
     </component-plugin>		
   </external-component-plugins>
   
+  <external-component-plugins>
+      <!-- The full qualified name of the RepositoryServiceConfiguration -->
+      <target-component>org.exoplatform.services.jcr.config.RepositoryServiceConfiguration</target-component>
+      <component-plugin>
+          <!-- The name of the plugin -->
+          <name>Sample RepositoryServiceConfiguration Plugin</name>
+          <!-- The name of the method to call on the RepositoryServiceConfiguration in order to add the RepositoryServiceConfigurations -->
+          <set-method>addConfig</set-method>
+          <!-- The full qualified name of the RepositoryServiceConfigurationPlugin -->
+          <type>org.exoplatform.services.jcr.impl.config.RepositoryServiceConfigurationPlugin</type>
+          <init-params>
+              <value-param>
+                  <name>conf-path</name>
+                  <description>JCR configuration file</description>
+                  <value>war:/conf/dms-extension/jcr/repository-configuration.xml</value>
+              </value-param>
+              <value-param profiles="recovery-index-rsync">
+                  <name>conf-path</name>
+                  <description>JCR configuration file</description>
+                  <value>war:/conf/dms-extension/jcr/repository-rsync-configuration.xml</value>
+              </value-param>
+          </init-params>
+      </component-plugin>
+  </external-component-plugins>
+
 </configuration>

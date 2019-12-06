@@ -38,7 +38,7 @@ import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.security.ConversationRegistry;
 import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.wcm.core.WCMService;
-import org.exoplatform.services.wcm.navigation.NavigationUtils;
+import org.exoplatform.portal.webui.util.NavigationUtils;
 import org.exoplatform.services.wcm.publication.WCMComposer;
 import org.exoplatform.wcm.webui.Utils;
 import org.exoplatform.web.application.RequireJS;
