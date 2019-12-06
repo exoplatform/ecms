@@ -67,5 +67,6 @@
   <import>war:/conf/wcm-extension/wcm/javascript-configuration.xml</import>
   <import profiles="friendly">war:/conf/content-extended/friendly/configuration.xml</import>
   <import>war:/conf/social/activity-listeners-configuration.xml</import>
+  <import>war:/conf/social/integration-configuration.xml</import>
   
 </configuration>

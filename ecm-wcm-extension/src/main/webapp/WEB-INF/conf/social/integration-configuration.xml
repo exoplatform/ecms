@@ -13,22 +13,17 @@
   <component>
     <type>org.exoplatform.wcm.ext.component.document.service.ContentViewerRESTService</type>
   </component>
-
   <component>
     <type>org.exoplatform.social.ckeditor.HTMLUploadImageProcessor</type>
   </component>
-
   <component>
     <type>org.exoplatform.social.ckeditor.rest.ComposerImageControllerRest</type>
   </component>
-
   <component>
     <type>org.exoplatform.social.space.customization.SpaceCustomizationService</type>
   </component>
-
   <external-component-plugins>
     <target-component>org.exoplatform.commons.api.search.SearchService</target-component>
-
     <!-- Ecms -->
     <component-plugin>
       <name>PageSearchConnector</name>
@@ -79,8 +74,6 @@
       </init-params>
     </component-plugin>
   </external-component-plugins>
-
-
 
   <external-component-plugins>
     <target-component>org.exoplatform.services.listener.ListenerService</target-component>
@@ -191,7 +184,7 @@
       <init-params>
         <value-param>
           <name>templatePath</name>
-          <value><![CDATA[classpath:/groovy/social/plugin/doc/notification/DocumentActivity.gtmpl]]></value>
+          <value><![CDATA[war:/groovy/social/plugin/doc/notification/DocumentActivity.gtmpl]]></value>
         </value-param>
         <object-param>
           <name>template.DocActivityChildPlugin</name>
@@ -206,15 +199,6 @@
           </object>
         </object-param>
       </init-params>
-    </component-plugin>
-  </external-component-plugins>
-
-  <external-component-plugins>
-    <target-component>org.exoplatform.commons.api.event.EventManager</target-component>
-    <component-plugin>
-      <name>SOC_ACTIVITY_MIGRATION</name>
-      <set-method>addEventListener</set-method>
-      <type>org.exoplatform.social.addons.rdbms.listener.DocActivityUpdaterListener</type>
     </component-plugin>
   </external-component-plugins>
 
@@ -248,6 +232,7 @@
       </init-params>
     </component-plugin>
   </external-component-plugins>
+
   <external-component-plugins>
     <target-component>org.exoplatform.services.cms.documents.DocumentService</target-component>
   </external-component-plugins>
@@ -350,7 +335,7 @@
       <init-params>
         <value-param>
           <name>templatePath</name>
-          <value><![CDATA[classpath:/groovy/ecm/social-integration/plugin/notification/ContentActivity.gtmpl]]></value>
+          <value><![CDATA[war:/groovy/ecm/social-integration/plugin/notification/ContentActivity.gtmpl]]></value>
         </value-param>
         <object-param>
           <name>template.ContentActivityChildPlugin</name>
@@ -378,7 +363,7 @@
       <init-params>
         <value-param>
           <name>templatePath</name>
-          <value><![CDATA[classpath:/groovy/ecm/social-integration/plugin/notification/FileActivity.gtmpl]]></value>
+          <value><![CDATA[war:/groovy/ecm/social-integration/plugin/notification/FileActivity.gtmpl]]></value>
         </value-param>
         <object-param>
           <name>template.FileActivityChildPlugin</name>
@@ -405,7 +390,7 @@
       <init-params>
         <value-param>
           <name>templatePath</name>
-          <value>classpath:/groovy/ecm/social-integration/plugin/notification/FileActivity.gtmpl</value>
+          <value>war:/groovy/ecm/social-integration/plugin/notification/FileActivity.gtmpl</value>
         </value-param>
         <object-param>
           <name>template.ShareFileActivityChildPlugin</name>
@@ -522,7 +507,7 @@
                   <string>locale.extension.notification.ECMSNotification</string>
                 </field>
                 <field name="templatePath">
-                  <string>classpath:/groovy/ecm/social-integration/plugin/notification/ContentActivity.gtmpl</string>
+                  <string>war:/groovy/ecm/social-integration/plugin/notification/ContentActivity.gtmpl</string>
                 </field>
               </object>
             </field>
@@ -553,7 +538,7 @@
                   <string>locale.extension.notification.ECMSNotification</string>
                 </field>
                 <field name="templatePath">
-                  <string>classpath:/groovy/ecm/social-integration/plugin/notification/FileActivity.gtmpl</string>
+                  <string>war:/groovy/ecm/social-integration/plugin/notification/FileActivity.gtmpl</string>
                 </field>
               </object>
             </field>
@@ -719,15 +704,6 @@
           </object>
         </object-param>
       </init-params>
-    </component-plugin>
-  </external-component-plugins>
-
-  <external-component-plugins>
-    <target-component>org.exoplatform.commons.api.event.EventManager</target-component>
-    <component-plugin>
-      <name>SOC_ACTIVITY_MIGRATION</name>
-      <set-method>addEventListener</set-method>
-      <type>org.exoplatform.wcm.addons.rdbms.listener.WCMActivityUpdaterListener</type>
     </component-plugin>
   </external-component-plugins>
 
