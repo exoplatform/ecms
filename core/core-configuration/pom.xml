@@ -98,6 +98,6 @@
     </dependency>
   </dependencies>
   <build>
-    <finalName>wcm-core</finalName>
+    <finalName>ecm-wcm-core</finalName>
   </build>
 </project>

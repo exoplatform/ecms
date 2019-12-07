@@ -21,4 +21,7 @@
       <scope>runtime</scope>
     </dependency>
   </dependencies>
+  <build>
+    <finalName>seo</finalName>
+  </build>
 </project>
