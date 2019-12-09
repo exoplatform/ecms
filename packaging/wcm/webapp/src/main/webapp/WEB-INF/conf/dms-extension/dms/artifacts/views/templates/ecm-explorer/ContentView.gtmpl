@@ -305,7 +305,7 @@
           %>
             <div <%= uicomponent.getNodeAttributeInView(data) %> class="rowView $oddEvenClassRow clearfix" 
                   
-                 ondblclick="$actionLink"
+                 onclick="$actionLink"
                  >$strActs
               <div class="columnIcon" style="width: 20px;">
                 <div rel="tooltip" data-placement="bottom" title="$name" class="<%=Utils.getNodeTypeIcon(data, "uiIcon16x16")%>">
