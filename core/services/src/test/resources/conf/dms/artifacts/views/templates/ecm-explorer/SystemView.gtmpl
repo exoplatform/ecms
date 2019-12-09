@@ -145,7 +145,7 @@
 	          //nodePath = nodePath + "&workspaceName=" + preferenceWS;
 	          String actionLink = uicomponent.event("ChangeNode",Utils.formatNodeName(data.path), new Parameter("workspaceName", preferenceWS));
 	      %>
-	      <div class="RowView Normal clearfix" ondblclick="$actionLink">
+	      <div class="RowView Normal clearfix" onclick="$actionLink">
 	        <div class="LeftColumn" style="float: left; width: 30px; height: 19px; padding: 2px 0px; 	border-right: none;">
 					  <div rel="tooltip" data-placement="bottom" title="$name" class="Icon16x16 default16x16Icon <%=Utils.getNodeTypeIcon(data, "16x16Icon")%>">					    
 						<%if(uicomponent.isSymLink(data)) {%>
