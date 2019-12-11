@@ -84,7 +84,7 @@ public class PageListFactory {
 
     if(criteria != null && criteria.getOffset() > 0) {
       if(criteria.getOffset() >= results.size()) {
-        return new ArrayNodePageList<>(0);
+        return new ArrayNodePageList<>(pageSize);
       }
       results = results.subList((int) criteria.getOffset(), results.size());
     }
