@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.exoplatform.org/xml/ns/kernel_1_3.xsd http://www.exoplatform.org/xml/ns/kernel_1_3.xsd"
+  xmlns="http://www.exoplatform.org/xml/ns/kernel_1_3.xsd">
+
+  <external-component-plugins>
+    <target-component>org.exoplatform.container.definition.PortalContainerConfig</target-component>
+    <component-plugin>
+      <name>Change PortalContainer Definitions</name>
+      <set-method>registerChangePlugin</set-method>
+      <type>org.exoplatform.container.definition.PortalContainerDefinitionChangePlugin</type>
+      <priority>30</priority>
+      <init-params>
+        <value-param>
+          <name>apply.default</name>
+          <value>true</value>
+        </value-param>
+        <object-param>
+          <name>change</name>
+          <object type="org.exoplatform.container.definition.PortalContainerDefinitionChange$AddDependencies">
+            <field name="dependencies">
+              <collection type="java.util.ArrayList">
+                 <value>
+                    <string>eXoWCMResources</string>
+                 </value>
+                 <value>
+                    <string>ecmexplorer</string>
+                 </value>
+                 <value>
+                    <string>ecmadmin</string>
+                 </value>
+                 <value>
+                    <string>ecm-wcm-core</string>
+                 </value>
+                 <value>
+                    <string>ecm-wcm-extension</string>
+                 </value>
+                 <value>
+                    <string>presentation</string>
+                 </value>
+                 <value>
+                    <string>searches</string>
+                 </value>
+                 <value>
+                    <string>authoring-apps</string>
+                 </value>
+                 <value>
+                    <string>seo</string>
+                 </value>
+              </collection>
+            </field>
+          </object>
+        </object-param>     
+      </init-params>
+    </component-plugin>
+  </external-component-plugins>
+
+</configuration>
