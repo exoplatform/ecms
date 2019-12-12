@@ -65,7 +65,7 @@ import org.exoplatform.webui.event.EventListener;
 
 @ComponentConfig(
    lifecycle = UIFormLifecycle.class,
-   template = "classpath:groovy/social/plugin/doc/UIDocActivity.gtmpl",
+   template = "war:/groovy/social/plugin/doc/UIDocActivity.gtmpl",
    events = {
      @EventConfig(listeners = UIDocActivity.DownloadDocumentActionListener.class),
      @EventConfig(listeners = UIDocActivity.ViewDocumentActionListener.class),

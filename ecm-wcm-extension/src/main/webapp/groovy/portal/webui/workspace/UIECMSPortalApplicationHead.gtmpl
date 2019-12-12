@@ -66,4 +66,12 @@
     <% }
   }
   %>
+    <script type="text/javascript">
+      if (!window.eXo) {
+        window.eXo = {};
+      }
+      if (!window.eXo.ecm) {
+        window.eXo.ecm = {};
+      }
+    </script>
     <script type="text/javascript" src="<%=pcontext.getRequestContextPath()%>/javascript/<%=pcontext.getPortalOwner()%>.js"></script>

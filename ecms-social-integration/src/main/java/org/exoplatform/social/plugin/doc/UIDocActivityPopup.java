@@ -42,7 +42,7 @@ import org.exoplatform.webui.event.EventListener;
  * 8, 2011
  */
 @ComponentConfig(
-                 lifecycle = Lifecycle.class, template = "classpath:groovy/social/plugin/doc/UIDocActivityPopup.gtmpl",
+                 lifecycle = Lifecycle.class, template = "war:/groovy/social/plugin/doc/UIDocActivityPopup.gtmpl",
                  events = {
                      @EventConfig(listeners = UIDocActivityPopup.SelectedFileActionListener.class),
                      @EventConfig(listeners = UIDocActivityPopup.CancelActionListener.class)

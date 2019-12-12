@@ -34,7 +34,7 @@ import org.exoplatform.webui.core.lifecycle.Lifecycle;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
 
-@ComponentConfig(lifecycle = Lifecycle.class, template = "classpath:groovy/social/plugin/doc/UIFolderActivityPopup.gtmpl", events = {
+@ComponentConfig(lifecycle = Lifecycle.class, template = "war:/groovy/social/plugin/doc/UIFolderActivityPopup.gtmpl", events = {
     @EventConfig(listeners = UIFolderActivityPopup.SelectFolderActionListener.class),
     @EventConfig(listeners = UIFolderActivityPopup.CancelActionListener.class)
 })

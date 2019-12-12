@@ -43,7 +43,7 @@ import org.exoplatform.webui.core.UIContainer;
  * Aug 11, 2016
  */
 @ComponentConfig(
-    template =  "classpath:groovy/ecm/social-integration/share-document/UIWhoHasAccess.gtmpl"
+    template =  "war:/groovy/ecm/social-integration/share-document/UIWhoHasAccess.gtmpl"
 )
 public class UIWhoHasAccess extends UIContainer {
 

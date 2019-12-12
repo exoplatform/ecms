@@ -63,7 +63,7 @@ import org.exoplatform.webui.form.UIFormStringInput;
  * @author Zun
  * @since Apr 19, 2010
  */
-@ComponentConfig(template = "classpath:groovy/social/plugin/doc/UIDocActivityComposer.gtmpl", events = {
+@ComponentConfig(template = "war:/groovy/social/plugin/doc/UIDocActivityComposer.gtmpl", events = {
     @EventConfig(listeners = UIActivityComposer.CloseActionListener.class),
     @EventConfig(listeners = UIActivityComposer.SubmitContentActionListener.class),
     @EventConfig(listeners = UIActivityComposer.ActivateActionListener.class),

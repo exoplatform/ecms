@@ -25,8 +25,8 @@ import org.exoplatform.webui.utils.TimeConvertUtils;
  * Created by exo on 9/9/16.
  */
 @TemplateConfigs(templates = {
-    @TemplateConfig(pluginId = ShareFileToUserPlugin.ID, template = "classpath:/groovy/ecm/social-integration/plugin/intranet-notification/ShareDocumentToUser.gtmpl"),
-    @TemplateConfig(pluginId = ShareFileToSpacePlugin.ID, template = "classpath:/groovy/ecm/social-integration/plugin/intranet-notification/ShareDocumentToSpace.gtmpl")
+    @TemplateConfig(pluginId = ShareFileToUserPlugin.ID, template = "war:/groovy/ecm/social-integration/plugin/intranet-notification/ShareDocumentToUser.gtmpl"),
+    @TemplateConfig(pluginId = ShareFileToSpacePlugin.ID, template = "war:/groovy/ecm/social-integration/plugin/intranet-notification/ShareDocumentToSpace.gtmpl")
 })
 
 public class WebTemplateProvider extends TemplateProvider {

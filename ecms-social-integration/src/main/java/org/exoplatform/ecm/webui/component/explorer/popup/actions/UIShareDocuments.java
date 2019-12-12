@@ -75,7 +75,7 @@ import org.exoplatform.webui.form.*;
  */
 @ComponentConfig(
     lifecycle = UIFormLifecycle.class,
-    template =  "classpath:groovy/ecm/social-integration/share-document/UIShareDocuments.gtmpl",
+    template =  "war:/groovy/ecm/social-integration/share-document/UIShareDocuments.gtmpl",
     events = {
         @EventConfig(listeners = UIShareDocuments.ConfirmActionListener.class),
         @EventConfig(listeners = UIShareDocuments.CancelActionListener.class),

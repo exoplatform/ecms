@@ -25,7 +25,7 @@ import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
  * Created by The eXo Platform SAS Author : eXoPlatform exo@exoplatform.com Mar
  * 15, 2011
  */
-@ComponentConfig(lifecycle = UIFormLifecycle.class, template = "classpath:groovy/ecm/social-integration/UISharedContent.gtmpl", events = {
+@ComponentConfig(lifecycle = UIFormLifecycle.class, template = "war:/groovy/ecm/social-integration/UISharedContent.gtmpl", events = {
     @EventConfig(listeners = ContentUIActivity.ViewDocumentActionListener.class),
     @EventConfig(listeners = BaseUIActivity.LoadLikesActionListener.class),
     @EventConfig(listeners = BaseUIActivity.ToggleDisplayCommentFormActionListener.class),

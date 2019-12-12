@@ -110,7 +110,7 @@ public class UIComposerMultiUploadSelector extends UIAbstractSelectFileComposer 
     uiUploadInput = new UIUploadInput(UI_MULTI_UPLOAD_INPUT, UI_MULTI_UPLOAD_INPUT, maxFileCount, maxFileSize) {
       @Override
       public String getTemplate() {
-        return "classpath:/groovy/social/plugin/doc/selector/UIMultiUploadSelectorInput.gtmpl";
+        return "war:/groovy/social/plugin/doc/selector/UIMultiUploadSelectorInput.gtmpl";
       }
     };
     uiUploadInput.setComponentConfig(UIUploadInput.class, UI_MULTI_UPLOAD_INPUT);

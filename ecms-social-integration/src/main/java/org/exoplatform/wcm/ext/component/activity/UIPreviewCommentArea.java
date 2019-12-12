@@ -22,7 +22,7 @@ import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
 
 @ComponentConfig(
-        template = "classpath:groovy/ecm/social-integration/UIPreviewCommentArea.gtmpl",
+        template = "war:/groovy/ecm/social-integration/UIPreviewCommentArea.gtmpl",
         events = {
                 @EventConfig(listeners = UIPreviewCommentArea.RefreshCommentsActionListener.class),
                 @EventConfig(listeners = UIPreviewCommentArea.RemoveCommentActionListener.class),

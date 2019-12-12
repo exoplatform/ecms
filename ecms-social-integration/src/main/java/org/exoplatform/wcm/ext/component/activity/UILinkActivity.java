@@ -32,7 +32,7 @@ import org.exoplatform.webui.event.EventListener;
 
 @ComponentConfig(
         lifecycle = UIFormLifecycle.class,
-        template = "classpath:groovy/ecm/social-integration/plugin/link/UILinkActivity.gtmpl",
+        template = "war:/groovy/ecm/social-integration/plugin/link/UILinkActivity.gtmpl",
         events = {
                 @EventConfig(listeners = UILinkActivity.ViewDocumentActionListener.class),
                 @EventConfig(listeners = BaseUIActivity.LoadLikesActionListener.class),

@@ -64,7 +64,7 @@ import org.exoplatform.webui.cssfile.CssClassUtils;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
 
-@ComponentConfig(template = "classpath:groovy/social/plugin/doc/selector/UIDocumentSelector.gtmpl", events = {
+@ComponentConfig(template = "war:/groovy/social/plugin/doc/selector/UIDocumentSelector.gtmpl", events = {
     @EventConfig(listeners = UIDocumentSelector.SelectActionListener.class)
 })
 public class UIDocumentSelector extends UIAbstractSelectFileComposer {

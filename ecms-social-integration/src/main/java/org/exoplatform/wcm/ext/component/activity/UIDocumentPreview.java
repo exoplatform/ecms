@@ -20,7 +20,7 @@ import org.exoplatform.webui.ext.UIExtension;
 import org.exoplatform.webui.ext.UIExtensionManager;
 
 @ComponentConfig(
-        template = "classpath:groovy/ecm/social-integration/UIDocumentPreview.gtmpl",
+        template = "war:/groovy/ecm/social-integration/UIDocumentPreview.gtmpl",
         events = {
                 @EventConfig(listeners = UIDocumentPreview.CloseActionListener.class)
         }
