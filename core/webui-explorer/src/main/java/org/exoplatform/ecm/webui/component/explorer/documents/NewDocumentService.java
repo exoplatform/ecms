@@ -48,9 +48,6 @@ public class NewDocumentService implements Startable {
   /** The Constant LOG. */
   protected static final Log                       LOG             = ExoLogger.getLogger(NewDocumentService.class);
 
-  /** The Constant DEFAULT_NAME. */
-  private static final String                      DEFAULT_NAME    = "untitled";
-
   /**  The Constant MIX_VERSIONABLE. */
   public static final String                       MIX_VERSIONABLE = "mix:versionable";
 
@@ -121,8 +118,7 @@ public class NewDocumentService implements Startable {
    *
    * @param currentNode the current node
    * @param title the title
-   * @param label the label
-   * @param provider the provider
+   * @param template the template
    * @return the created node
    * @throws Exception the exception
    */
@@ -167,6 +163,9 @@ public class NewDocumentService implements Startable {
     /** The document templates. */
     protected List<DocumentTemplate> templates;
 
+    /** The provider. */
+    protected String                 provider;
+
     /**
      * Gets the document templates.
      *
@@ -184,6 +183,25 @@ public class NewDocumentService implements Startable {
     public void setTemplates(List<DocumentTemplate> templates) {
       this.templates = templates;
     }
+
+    /**
+     * Gets the provider.
+     *
+     * @return the provider
+     */
+    public String getProvider() {
+      return provider;
+    }
+
+    /**
+     * Sets the provider.
+     *
+     * @param provider the new provider
+     */
+    public void setProvider(String provider) {
+      this.provider = provider;
+    }
+
   }
 
   /**
@@ -230,6 +248,11 @@ public class NewDocumentService implements Startable {
     return templatePlugins;
   }
 
+  /**
+   * Checks for document template plugins.
+   *
+   * @return true, if successful
+   */
   public boolean hasDocumentTemplatePlugins() {
     return templatePlugins.size() > 0;
   }

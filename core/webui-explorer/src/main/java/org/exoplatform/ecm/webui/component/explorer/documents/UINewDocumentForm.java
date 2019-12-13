@@ -55,7 +55,7 @@ import org.exoplatform.webui.form.UIFormStringInput;
 /**
  * The Class UINewDocumentForm.
  */
-@ComponentConfig(lifecycle = UIFormLifecycle.class, template = "classpath:groovy/templates/UINewDocument.gtmpl", events = {
+@ComponentConfig(lifecycle = UIFormLifecycle.class, template = "app:groovy/ecm/webui/UINewDocument.gtmpl", events = {
     @EventConfig(listeners = UINewDocumentForm.SaveActionListener.class),
     @EventConfig(listeners = UINewDocumentForm.CancelActionListener.class, phase = Phase.DECODE) })
 public class UINewDocumentForm extends UIForm implements UIPopupComponent {
@@ -160,7 +160,7 @@ public class UINewDocumentForm extends UIForm implements UIPopupComponent {
       NewDocumentTemplatePlugin templatePlugin = documentService.getDocumentTemplatePlugin(provider);
       NewDocumentEditorPlugin editorPlugin = documentService.getDocumentEditorPlugin(provider);
       if (editorPlugin != null) {
-        editorPlugin.onDocumentCreate();
+        editorPlugin.beforeDocumentCreate();
       }
 
       Node document = null;

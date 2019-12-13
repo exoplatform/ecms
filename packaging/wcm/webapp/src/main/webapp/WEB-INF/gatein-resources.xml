@@ -62,5 +62,17 @@
       </depends>
 	 </module>
    
+     <portal-skin>
+    <skin-name>Default</skin-name>
+    <skin-module>new-document</skin-module>
+    <css-path>/skin/newdocument/newdocument.css</css-path>
+  </portal-skin>
+
+  <portal-skin>
+    <skin-name>Enterprise</skin-name>
+    <skin-module>new-document</skin-module>
+    <css-path>/skin/newdocument/newdocument.css</css-path>
+  </portal-skin>
+   
 </gatein-resources>
 

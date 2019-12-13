@@ -1,0 +1,37 @@
+<% 
+import org.apache.commons.lang.StringUtils;
+
+def rcontext = _ctx.getRequestContext() ;
+def jsManager = rcontext.getJavascriptManager();
+
+jsManager.require("SHARED/jquery", "gj").addScripts("gj('#" + uiform.FIELD_TITLE_TEXT_BOX + "').focus(); gj('#" + uiform.id + "').unbind('keypress').keypress(function(e) { if(e.which == 13) {gj('button.newDocumentButton').click(); e.preventDefault();}});");
+
+String fieldName; %>
+<div class="UIForm uiNewDocument">
+  <%uiform.begin()%>
+      <div class="form-horizontal resizable">
+	      <div class="control-group">
+	      		<label class="control-label" for="<%=uiform.FIELD_TITLE_TEXT_BOX%>"><%=uiform.getLabel(uiform.FIELD_TITLE_TEXT_BOX) %></label>
+	      		<div class="controls">
+	      			<% uiform.renderChild(uiform.FIELD_TITLE_TEXT_BOX) %>
+	      		</div>
+	      </div>
+	      
+	      <div class="control-group">
+	      		<label class="control-label" for="<%=uiform.FIELD_TYPE_SELECT_BOX%>"><%=uiform.getLabel(uiform.FIELD_TYPE_SELECT_BOX) %></label>
+	      		<div class="controls">
+	      			<% uiform.renderChild(uiform.FIELD_TYPE_SELECT_BOX)  %>
+	      		</div>
+	      </div>
+	  </div>
+      <div class="uiAction uiActionBorder">
+        <% for(action in uiform.getActions()) {
+             String actionLabel = _ctx.appRes(uiform.getName() + ".action." + action);
+             String link = uiform.event(action);
+             String saveClass = "Save".equals(action) ? "newDocumentButton": StringUtils.EMPTY;
+        %>
+          <button type="button" href="javascript:void(0);" onclick="$link" class="btn $saveClass">$actionLabel</button>
+        <%}%>
+     </div>
+  <%uiform.end()%>
+</div>
