@@ -20,7 +20,7 @@
       </label>
     </dialog>
   </Ecm>
-  
+
   <UIDocumentForm>
     <label>
       <title>#{word.title}</title>
@@ -29,10 +29,10 @@
       <content>#{word.content}</content>
       <contentPlain>#{word.content}</contentPlain>
       <name>Nom</name>
-    <categories>Catégories</categories>
+      <categories>Catégories</categories>
     </label>
   </UIDocumentForm>
- 
+
   <UICommentForm>
     <label>
       <placeholder>Utilisez @ pour mentionner quelqu'un dans votre commentaire</placeholder>
@@ -303,9 +303,9 @@
     </dialog>
   </ScriptAction>
   <UIDialogForm>
-   <form>
-   <DialogFormException>Can not save this document. Maybe there is a problem with pre save interceptor.</DialogFormException>
-   </form>
+    <form>
+      <DialogFormException>Can not save this document. Maybe there is a problem with pre save interceptor.</DialogFormException>
+    </form>
   </UIDialogForm>
 
   <!--
@@ -313,23 +313,23 @@
 
   ###################### resoucebundle exo:taxonomyAction dialogs template ####
   -->
-<no>Non</no>
-<yes>Oui</yes>
-<true>Vrai</true>
-<false>Faux</false>
-<Electronic>Électronique</Electronic>
-<Paper>Papier</Paper>
-<NONE>Aucun</NONE>
-<CLASSIFIED>Classé</CLASSIFIED>
-<UNCLASSIFIED>Non classé</UNCLASSIFIED>
-<NOCONTRACT>Aucun contrat</NOCONTRACT>
-<one-minute>Une fois par Minute</one-minute>
-<hourly>Une fois par heure</hourly>
-<daily>Quotidien</daily>
-<quarterly>Trimestriel</quarterly>
-<yearly>Annuel</yearly>
-<ten-years>Tous les 10 ans</ten-years>
-<read>Action Utilisateur</read>
+  <no>Non</no>
+  <yes>Oui</yes>
+  <true>Vrai</true>
+  <false>Faux</false>
+  <Electronic>Électronique</Electronic>
+  <Paper>Papier</Paper>
+  <NONE>Aucun</NONE>
+  <CLASSIFIED>Classé</CLASSIFIED>
+  <UNCLASSIFIED>Non classé</UNCLASSIFIED>
+  <NOCONTRACT>Aucun contrat</NOCONTRACT>
+  <one-minute>Une fois par Minute</one-minute>
+  <hourly>Une fois par heure</hourly>
+  <daily>Quotidien</daily>
+  <quarterly>Trimestriel</quarterly>
+  <yearly>Annuel</yearly>
+  <ten-years>Tous les 10 ans</ten-years>
+  <read>Action Utilisateur</read>
   <schedule>Planificateur</schedule>
   <node_added>Ajout de Contenu</node_added>
   <node_removed>Suppression de Contenu</node_removed>
@@ -366,7 +366,7 @@
       </label>
     </dialog>
   </EnableVersioning>
-  
+
   <AutoVersioning>
     <dialog>
       <label>
@@ -378,18 +378,44 @@
   </AutoVersioning>
 
   <AccessibleMedia>
-  <dialog>
-  <label>
-  <captions>Sous-titres</captions>
-<audioDescription>Description audio</audioDescription>
-<alternativeText>Texte alternatif</alternativeText>
-</label>
-</dialog>
-<help>
-<CaptionsHelp>Les sous-titres communiquent le contenu des dialogues mais aussi toutes informations audio importantes.</CaptionsHelp>
-<AudioDescriptionHelp>Narration ajoutée à une piste sonore pour décrire les détails visuels importants.</AudioDescriptionHelp>
-<AlternativeTextHelp>Fournir une alternative accessible pour présenter l'information</AlternativeTextHelp>
-</help>
-</AccessibleMedia>
-  
+    <dialog>
+      <label>
+        <captions>Sous-titres</captions>
+        <audioDescription>Description audio</audioDescription>
+        <alternativeText>Texte alternatif</alternativeText>
+      </label>
+    </dialog>
+    <help>
+      <CaptionsHelp>Les sous-titres communiquent le contenu des dialogues mais aussi toutes informations audio importantes.
+      </CaptionsHelp>
+      <AudioDescriptionHelp>Narration ajoutée à une piste sonore pour décrire les détails visuels importants.
+      </AudioDescriptionHelp>
+      <AlternativeTextHelp>Fournir une alternative accessible pour présenter l'information</AlternativeTextHelp>
+    </help>
+  </AccessibleMedia>
+
+ <!-- New Document i18n -->
+  <UIActionBar>
+    <tooltip>
+      <NewDocument>Nouveau document</NewDocument>
+    </tooltip>
+  </UIActionBar>
+  <!-- For new document popup window -->
+  <UIPopupWindow>
+    <title>
+      <UINewDocumentForm>Nouveau document</UINewDocumentForm>
+    </title>
+  </UIPopupWindow>
+   <!-- For new document form -->
+  <UINewDocumentForm>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Save>Créer un document</Save>
+    </action>
+    <label>
+      <titleTextBox>Nom du document:</titleTextBox>
+      <typeSelectBox>Type de document:</typeSelectBox>
+    </label>
+  </UINewDocumentForm>
+
 </bundle>

@@ -20,7 +20,7 @@
       </label>
     </dialog>
   </Ecm>
-  
+
   <UIDocumentForm>
     <label>
       <title>#{word.title}</title>
@@ -29,10 +29,10 @@
       <content>#{word.content}</content>
       <contentPlain>#{word.content}</contentPlain>
       <name>Name</name>
-    <categories>Categories</categories>
+      <categories>Categories</categories>
     </label>
   </UIDocumentForm>
- 
+
   <UICommentForm>
     <label>
       <placeholder>Use @ to mention someone in your comment</placeholder>
@@ -303,9 +303,9 @@
     </dialog>
   </ScriptAction>
   <UIDialogForm>
-   <form>
-   <DialogFormException>Cannot save this document. There may be a problem with the pre-save interceptor.</DialogFormException>
-   </form>
+    <form>
+      <DialogFormException>Cannot save this document. There may be a problem with the pre-save interceptor.</DialogFormException>
+    </form>
   </UIDialogForm>
 
   <!--
@@ -313,23 +313,23 @@
 
   ###################### resoucebundle exo:taxonomyAction dialogs template ####
   -->
-<no>No</no>
-<yes>Yes</yes>
-<true>True</true>
-<false>False</false>
-<Electronic>Electronic</Electronic>
-<Paper>Paper</Paper>
-<NONE>None</NONE>
-<CLASSIFIED>Classified</CLASSIFIED>
-<UNCLASSIFIED>Unclassified</UNCLASSIFIED>
-<NOCONTRACT>No Contract</NOCONTRACT>
-<one-minute>One Minute</one-minute>
-<hourly>Hourly</hourly>
-<daily>Daily</daily>
-<quarterly>Quarterly</quarterly>
-<yearly>Yearly</yearly>
-<ten-years>Ten Years</ten-years>
-<read>User Action</read>
+  <no>No</no>
+  <yes>Yes</yes>
+  <true>True</true>
+  <false>False</false>
+  <Electronic>Electronic</Electronic>
+  <Paper>Paper</Paper>
+  <NONE>None</NONE>
+  <CLASSIFIED>Classified</CLASSIFIED>
+  <UNCLASSIFIED>Unclassified</UNCLASSIFIED>
+  <NOCONTRACT>No Contract</NOCONTRACT>
+  <one-minute>One Minute</one-minute>
+  <hourly>Hourly</hourly>
+  <daily>Daily</daily>
+  <quarterly>Quarterly</quarterly>
+  <yearly>Yearly</yearly>
+  <ten-years>Ten Years</ten-years>
+  <read>User Action</read>
   <schedule>Scheduler</schedule>
   <node_added>Content Addition</node_added>
   <node_removed>Content Removal</node_removed>
@@ -366,7 +366,7 @@
       </label>
     </dialog>
   </EnableVersioning>
-  
+
   <AutoVersioning>
     <dialog>
       <label>
@@ -378,18 +378,55 @@
   </AutoVersioning>
 
   <AccessibleMedia>
-  <dialog>
-  <label>
-  <captions>Captions</captions>
-<audioDescription>Audio description</audioDescription>
-<alternativeText>Alternative text</alternativeText>
-</label>
-</dialog>
-<help>
-<CaptionsHelp>Captions should provide text of dialog and important sounds</CaptionsHelp>
-<AudioDescriptionHelp>An audio description is a narrated track of the video</AudioDescriptionHelp>
-<AlternativeTextHelp>Provide an accessible, alternative way of presenting the information</AlternativeTextHelp>
-</help>
-</AccessibleMedia>
-  
+    <dialog>
+      <label>
+        <captions>Captions</captions>
+        <audioDescription>Audio description</audioDescription>
+        <alternativeText>Alternative text</alternativeText>
+      </label>
+    </dialog>
+    <help>
+      <CaptionsHelp>Captions should provide text of dialog and important sounds</CaptionsHelp>
+      <AudioDescriptionHelp>An audio description is a narrated track of the video</AudioDescriptionHelp>
+      <AlternativeTextHelp>Provide an accessible, alternative way of presenting the information</AlternativeTextHelp>
+    </help>
+  </AccessibleMedia>
+
+
+ <!-- New Document i18n -->
+  <UIActionBar>
+    <tooltip>
+      <NewDocument>New Document</NewDocument>
+    </tooltip>
+  </UIActionBar>
+  <!-- For new document popup window -->
+  <UIPopupWindow>
+    <title>
+      <UINewDocumentForm>New Document</UINewDocumentForm>
+    </title>
+  </UIPopupWindow>
+   <!-- For new document form -->
+  <UINewDocumentForm>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Save>Create Document</Save>
+    </action>
+    <label>
+      <titleTextBox>Document Name:</titleTextBox>
+      <typeSelectBox>Document Type:</typeSelectBox>
+    </label>
+    <msg>
+      <name-invalid>Please enter the document name.</name-invalid>
+      <constraint-violation>You can't add a document of type '{0}' here.</constraint-violation>
+      <repository-exception>An unexpected error occurred. Please contact your administrator for more details.
+      </repository-exception>
+      <repository-exception-permission>You don't have the permission to add a new document here.</repository-exception-permission>
+      <numberformat-exception>You cannot save this document. The name provided must be in numerical format.
+      </numberformat-exception>
+      <!--DMS 2.4.x; ECM-3553-->
+      <not-allow-sameNameSibling>You can't save the document. An item with the same name already exists.
+      </not-allow-sameNameSibling>
+    </msg>
+  </UINewDocumentForm>
+
 </bundle>
