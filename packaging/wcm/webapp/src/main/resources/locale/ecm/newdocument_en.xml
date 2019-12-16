@@ -21,11 +21,6 @@
     <label>
       <titleTextBox>Document Name:</titleTextBox>
       <typeSelectBox>Document Type:</typeSelectBox>
-      <option>
-        <MicrosoftOfficeDocument>Microsoft Word Document (*.docx)</MicrosoftOfficeDocument>
-        <MicrosoftOfficeSpreadsheet>Microsoft Excel Workbook (*.xlsx)</MicrosoftOfficeSpreadsheet>
-        <MicrosoftOfficePresentation>Microsoft PowerPoint Presentation (*.pptx)</MicrosoftOfficePresentation>
-      </option>
     </label>
     <msg>
       <name-invalid>Please enter the document name.</name-invalid>
