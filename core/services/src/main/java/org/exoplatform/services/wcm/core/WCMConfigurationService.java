@@ -46,6 +46,8 @@ public class WCMConfigurationService {
 
   public static final String PRINT_VIEWER_PAGE              = "printViewerPage";
 
+  public static final String PARAMETERIZED_URI_PARAM         = "parameterizedURIParam";
+
   public static final String EDITOR_PAGE_URI                = "editorPageURI";
   
   public static final String EDIT_PAGE_URI                  = "editPageURI";
