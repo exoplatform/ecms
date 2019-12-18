@@ -18,7 +18,6 @@
     <module>apps</module>
     <module>ext</module>
     <module>ecm-wcm-extension</module>
-    <module>upgrade-plugins</module>
     <module>testsuite</module>
     <module>ecms-social-integration</module>
     <module>ecms-packaging</module>
@@ -273,11 +272,6 @@
       <dependency>
         <groupId>org.exoplatform.ecms</groupId>
         <artifactId>ecms-testsuite-test</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.exoplatform.ecms</groupId>
-        <artifactId>ecms-upgrade-plugins</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
