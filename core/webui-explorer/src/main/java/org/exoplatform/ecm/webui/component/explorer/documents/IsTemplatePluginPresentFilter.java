@@ -8,7 +8,7 @@ import org.exoplatform.webui.ext.filter.UIExtensionFilterType;
 
 
 /**
- * The Class IsTemplatePluginPresentFilter.
+ * The Class IsTemplatePluginPresentFilter checks if any NewDocumentTemplatePlugin is registered.
  */
 public class IsTemplatePluginPresentFilter extends UIExtensionAbstractFilter {
 

@@ -53,7 +53,7 @@ import org.exoplatform.webui.form.UIFormSelectBox;
 import org.exoplatform.webui.form.UIFormStringInput;
 
 /**
- * The Class UINewDocumentForm.
+ * The UINewDocumentForm is displayed when 'New Document' button was clicked in ECMS Action Bar
  */
 @ComponentConfig(lifecycle = UIFormLifecycle.class, template = "app:groovy/ecm/webui/UINewDocument.gtmpl", events = {
     @EventConfig(listeners = UINewDocumentForm.SaveActionListener.class),

@@ -1,9 +1,8 @@
 package org.exoplatform.ecm.webui.component.explorer.documents;
 
-import javax.jcr.Node;
-
 /**
- * The Interface NewDocumentEditorPlugin.
+ * The Interface NewDocumentEditorPlugin provides API for handling such events from New Document feature: 
+ * the document is going to be created, the document has been created. Also allows to get the provider.
  */
 public interface NewDocumentEditorPlugin {
 

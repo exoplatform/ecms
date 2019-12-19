@@ -1,7 +1,7 @@
 package org.exoplatform.ecm.webui.component.explorer.documents;
 
 /**
- * The Class DocumentTemplate.
+ * The Class DocumentTemplate represents a document template with it's properties.
  */
 public class DocumentTemplate {
 
