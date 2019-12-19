@@ -231,25 +231,19 @@ public class DocumentServiceImpl implements DocumentService {
 
     String encodedDriveName = URLEncoder.encode(drive.getName(), "UTF-8");
     String encodedNodePath = URLEncoder.encode(nodePath, "UTF-8");
-    if(drive.getName().equals(ManageDriveServiceImpl.GROUPS_DRIVE_NAME)) {
+    if(drive.getName().startsWith(".spaces")) {
       // handle group drive case
       String groupId = drive.getParameters().get(ManageDriveServiceImpl.DRIVE_PARAMATER_GROUP_ID);
       if(groupId != null) {
         String groupPageName;
-        String[] splitedGroupId = groupId.split("/");
-        if (splitedGroupId != null && splitedGroupId.length == 3 && splitedGroupId[1].equals("spaces")) {
           // the doc is in a space -> we use the documents application of the space
-
           // we need to retrieve the root navigation URI of the space since it can differ from
           // the group id if the space has been renamed
-          String rootNavigation = getSpaceRootNavigationNodeURI(groupId);
+          String rootNavigation = getSpaceRootNavigationNodeURI(groupId.replace(".","/"));
 
           groupPageName = rootNavigation + "/" + DOCUMENTS_APP_NAVIGATION_NODE_NAME;
-        } else {
-          // otherwise we use the portal documents application
-          groupPageName = DOCUMENTS_APP_NAVIGATION_NODE_NAME;
-        }
-        url.append("/g/").append(groupId.replaceAll("/", ":")).append("/").append(groupPageName)
+
+        url.append("/g/").append(groupId.replaceAll("\\.", ":")).append("/").append(groupPageName)
                 .append("?path=").append(encodedDriveName).append(encodedNodePath)
                 .append("&").append(ManageDriveServiceImpl.DRIVE_PARAMATER_GROUP_ID).append("=").append(groupId);
       } else {
