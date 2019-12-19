@@ -72,7 +72,7 @@ public class NewDocumentServiceImpl implements NewDocumentService, Startable {
    */
   @Override
   public void start() {
-    LOG.info("NEW Document Service started");
+    // Nothing
   }
 
   /**
