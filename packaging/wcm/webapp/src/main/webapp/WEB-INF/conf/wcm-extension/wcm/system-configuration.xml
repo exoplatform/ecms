@@ -34,6 +34,7 @@
         <description>some params for runtime</description>
 
         <property name="parameterizedPageURI" value="${wcm.config.parameterizedPageURI:/detail}" />
+        <property name="parameterizedURIParam" value="${wcm.config.parameterizedURIParam:content-id}"/>
         <property name="printPageURI" value="${wcm.config.printPageURI:/printviewer}" />
         <property name="printViewerPage" value="${wcm.config.printViewerPage:printviewer}" />
         <property name="editorPageURI" value="${wcm.config.editorPageURI:editor}" />

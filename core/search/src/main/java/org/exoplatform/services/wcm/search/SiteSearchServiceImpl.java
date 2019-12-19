@@ -778,10 +778,15 @@ public class SiteSearchServiceImpl implements SiteSearchService {
         HashMap<String, String> filters = new HashMap<>();
         filters.put(WCMComposer.FILTER_MODE, queryCriteria.isLiveMode() ? WCMComposer.MODE_LIVE
                                                                        : WCMComposer.MODE_EDIT);
-        return wcmComposer.getContent(nodeLocation.getWorkspace(),
+        Node content = wcmComposer.getContent(nodeLocation.getWorkspace(),
                                                                   nodeLocation.getPath(),
                                                                   filters,
                                                                   WCMCoreUtils.getSystemSessionProvider());
+        if (content.isNodeType("nt:frozenNode")) {
+          String uuid = content.getProperty("jcr:frozenUuid").getString();
+          content = node.getSession().getNodeByUUID(uuid);
+        }
+        return content;
       } catch (Exception e) {
         return null;
       }

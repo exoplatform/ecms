@@ -31,6 +31,7 @@ import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.security.ConversationState;
+import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.search.base.EcmsSearchResult;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
@@ -103,9 +104,12 @@ public class FileSearchServiceConnector extends ElasticSearchServiceConnector {
       LOG.warn("Cannot get drive of node " + nodePath, e);
     }
 
-    String lang = searchContext.getParamValue(SearchContext.RouterParams.LANG.create());
-    if (StringUtils.isBlank(lang)) {
-      lang = Locale.getDefault().getLanguage();
+    String lang = Locale.getDefault().getLanguage();
+    if (searchContext != null) {
+      String language = searchContext.getParamValue(SearchContext.RouterParams.LANG.create());
+      if (StringUtils.isNotBlank(language)) {
+        lang = language;
+      }
     }
     String detail = driveName + getFormattedFileSize(fileSize) + " - " + getFormattedDate(searchResult.getDate(), lang);
 
@@ -122,9 +126,10 @@ public class FileSearchServiceConnector extends ElasticSearchServiceConnector {
             getBreadcrumb(nodePath));
 
     String userId = ConversationState.getCurrent().getIdentity().getUserId();
-    boolean isAnonymous = userId == null || userId.isEmpty() || userId.equals("__anonim");
+    boolean isAnonymous = userId == null || userId.isEmpty() || userId.equals(IdentityConstants.ANONIM);
     if (isAnonymous) {
       ecmsSearchResult.setPreviewUrl(downloadUrl.toString());
+      ecmsSearchResult.setUrl(downloadUrl.toString());
     }
     return ecmsSearchResult;
   }

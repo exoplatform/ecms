@@ -1,7 +1,13 @@
 package org.exoplatform.services.wcm.publication;
 
+import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.security.ConversationState;
+import org.exoplatform.services.security.Identity;
+import org.exoplatform.services.security.MembershipEntry;
 import org.exoplatform.services.wcm.core.NodeLocation;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 
 import javax.jcr.Node;
@@ -71,13 +77,17 @@ public class TestWCMComposer extends BasePublicationTestCase {
 
 	public void testShouldReturnPublicContentsWhenPublicModeAndNonAdminUser() throws Exception {
 		// When
-		applyUserSession("marry", "gtn", "collaboration");
 		HashMap<String, String> filters = new HashMap<>();
 		filters.put(FILTER_MODE, MODE_LIVE);
-		filters.put(FILTER_VISIBILITY, VISIBILITY_PUBLIC);
+		Collection<MembershipEntry> membershipEntries = new ArrayList<MembershipEntry>();
+		MembershipEntry membershipEntry = new MembershipEntry("/platform/administrators", "*");
+		membershipEntries.add(membershipEntry);
+		Identity identity = new Identity("marry", membershipEntries);
+		ConversationState state = new ConversationState(identity);
+		ConversationState.setCurrent(state);
+		applyUserSession("marry", "gtn", "collaboration");
 		String folderPath = "repository:collaboration:/sites content/live/web contents/site artifacts";
 		NodeLocation  nodeLocation = NodeLocation.getNodeLocationByExpression(folderPath);
-
 		// When
 		Result result = wcmComposer.getPaginatedContents(nodeLocation, filters, sessionProvider);
 
