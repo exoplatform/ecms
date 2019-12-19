@@ -1,117 +1,39 @@
-/*
- * Copyright (C) 2003-2019 eXo Platform SAS.
- *
- * This is free software; you can redistribute it and/or modify it
- * under the terms of the GNU Lesser General Public License as
- * published by the Free Software Foundation; either version 2.1 of
- * the License, or (at your option) any later version.
- *
- * This software is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
- * Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public
- * License along with this software; if not, write to the Free
- * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
- * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
- */
 package org.exoplatform.ecm.webui.component.explorer.documents;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
-import java.util.GregorianCalendar;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.jcr.Node;
 
-import org.picocontainer.Startable;
-
 import org.exoplatform.container.component.ComponentPlugin;
-import org.exoplatform.ecm.webui.utils.Utils;
-import org.exoplatform.resolver.ApplicationResourceResolver;
-import org.exoplatform.resolver.ResourceResolver;
-import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
-import org.exoplatform.services.listener.ListenerService;
-import org.exoplatform.services.log.ExoLogger;
-import org.exoplatform.services.log.Log;
-import org.exoplatform.services.wcm.utils.WCMCoreUtils;
-import org.exoplatform.webui.application.WebuiRequestContext;
 
 /**
- * The Class NewDocumentService.
+ * Provides APIs to manage document template and editor plugins.
+ * With these API types, you can:
+
+ * <ul>
+ * <li>Register DocumentTemplatePlugin or DocumentEditorPlugin.</li>
+ * <li>Get registered DocumentTemplatePlugin or DocumentEditorPlugin.</li>
+ * <li>Check if any document template plugin is registered</li>
+ * <li>Get document templates</li>
+ * <li>Create a new document</li>
+ * </ul>
+ * 
  */
-public class NewDocumentService implements Startable {
-
-  /** The Constant LOG. */
-  protected static final Log                       LOG             = ExoLogger.getLogger(NewDocumentService.class);
-
-  /**  The Constant MIX_VERSIONABLE. */
-  public static final String                       MIX_VERSIONABLE = "mix:versionable";
-
-  /** The template plugins. */
-  protected Map<String, NewDocumentTemplatePlugin> templatePlugins = new HashMap<>();
-
-  /** The editor plugins. */
-  protected Map<String, NewDocumentEditorPlugin>   editorPlugins   = new HashMap<>();
+public interface NewDocumentService {
 
   /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void start() {
-
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void stop() {
-    // Nothing
-  }
-
-  /**
-   * Adds the template plugin.
+   * Adds the document template plugin.
    *
    * @param plugin the plugin
    */
-  public void addDocumentTemplatePlugin(ComponentPlugin plugin) {
-    Class<NewDocumentTemplatePlugin> pclass = NewDocumentTemplatePlugin.class;
-    if (pclass.isAssignableFrom(plugin.getClass())) {
-      NewDocumentTemplatePlugin newPlugin = pclass.cast(plugin);
-
-      LOG.info("Adding NewDocumentTemplatePlugin [{}]", newPlugin.toString());
-      templatePlugins.put(newPlugin.getProvider(), newPlugin);
-      if (LOG.isDebugEnabled()) {
-        LOG.debug("Registered NewDocumentTemplatePlugin instance of {}", plugin.getClass().getName());
-      }
-    } else {
-      LOG.error("The NewDocumentTemplatePlugin plugin is not an instance of " + pclass.getName());
-    }
-  }
+  void addDocumentTemplatePlugin(ComponentPlugin plugin);
 
   /**
-   * Adds the type plugin.
+   * Adds the document editor plugin.
    *
    * @param plugin the plugin
    */
-  public void addDocumentEditorPlugin(ComponentPlugin plugin) {
-    Class<NewDocumentEditorPlugin> pclass = NewDocumentEditorPlugin.class;
-    if (pclass.isAssignableFrom(plugin.getClass())) {
-      NewDocumentEditorPlugin newPlugin = pclass.cast(plugin);
-
-      LOG.info("Adding NewDocumentEditorPlugin [{}]", newPlugin.toString());
-      editorPlugins.put(newPlugin.getProvider(), newPlugin);
-      if (LOG.isDebugEnabled()) {
-        LOG.debug("Registered NewDocumentEditorPlugin instance of {}", plugin.getClass().getName());
-      }
-    } else {
-      LOG.error("The NewDocumentEditorPlugin plugin is not an instance of " + pclass.getName());
-    }
-  }
+  void addDocumentEditorPlugin(ComponentPlugin plugin);
 
   /**
    * Creates the document.
@@ -119,90 +41,10 @@ public class NewDocumentService implements Startable {
    * @param currentNode the current node
    * @param title the title
    * @param template the template
-   * @return the created node
+   * @return the node
    * @throws Exception the exception
    */
-  public Node createDocument(Node currentNode, String title, DocumentTemplate template) throws Exception {
-    InputStream data = new ByteArrayInputStream(new byte[0]);
-    if (template.getPath() != null && !template.getPath().trim().isEmpty()) {
-      WebuiRequestContext context = WebuiRequestContext.getCurrentInstance();
-      ApplicationResourceResolver appResolver = context.getApplication().getResourceResolver();
-      ResourceResolver resolver = appResolver.getResourceResolver(template.getPath());
-      data = resolver.getInputStream(template.getPath());
-    }
-    // Add node
-    Node addedNode = currentNode.addNode(title, Utils.NT_FILE);
-
-    // Set title
-    if (!addedNode.hasProperty(Utils.EXO_TITLE)) {
-      addedNode.addMixin(Utils.EXO_RSS_ENABLE);
-    }
-    // Enable versioning
-    if (addedNode.canAddMixin(MIX_VERSIONABLE)) {
-      addedNode.addMixin(MIX_VERSIONABLE);
-    }
-
-    addedNode.setProperty(Utils.EXO_TITLE, title);
-    Node content = addedNode.addNode("jcr:content", "nt:resource");
-
-    content.setProperty("jcr:data", data);
-    content.setProperty("jcr:mimeType", template.getMimeType());
-    content.setProperty("jcr:lastModified", new GregorianCalendar());
-    ListenerService listenerService = WCMCoreUtils.getService(ListenerService.class);
-    listenerService.broadcast(ActivityCommonService.FILE_CREATED_ACTIVITY, null, addedNode);
-    currentNode.save();
-    data.close();
-    return addedNode;
-  }
-
-  /**
-   * NewDocumentTypesConfig.
-   */
-  public static class DocumentTemplatesConfig {
-
-    /** The document templates. */
-    protected List<DocumentTemplate> templates;
-
-    /** The provider. */
-    protected String                 provider;
-
-    /**
-     * Gets the document templates.
-     *
-     * @return the document types
-     */
-    public List<DocumentTemplate> getTemplates() {
-      return templates;
-    }
-
-    /**
-     * Sets the document templates.
-     *
-     * @param templates the new templates
-     */
-    public void setTemplates(List<DocumentTemplate> templates) {
-      this.templates = templates;
-    }
-
-    /**
-     * Gets the provider.
-     *
-     * @return the provider
-     */
-    public String getProvider() {
-      return provider;
-    }
-
-    /**
-     * Sets the provider.
-     *
-     * @param provider the new provider
-     */
-    public void setProvider(String provider) {
-      this.provider = provider;
-    }
-
-  }
+  Node createDocument(Node currentNode, String title, DocumentTemplate template) throws Exception;
 
   /**
    * Gets the document template.
@@ -211,13 +53,7 @@ public class NewDocumentService implements Startable {
    * @param label the label
    * @return the document template
    */
-  public DocumentTemplate getDocumentTemplate(String provider, String label) {
-    NewDocumentTemplatePlugin plugin = templatePlugins.get(provider);
-    if (plugin != null) {
-      return plugin.getTemplates().stream().filter(template -> template.getLabel().equals(label)).findFirst().get();
-    }
-    return null;
-  }
+  DocumentTemplate getDocumentTemplate(String provider, String label);
 
   /**
    * Gets the document template plugin.
@@ -225,9 +61,7 @@ public class NewDocumentService implements Startable {
    * @param provider the provider
    * @return the document template plugin
    */
-  public NewDocumentTemplatePlugin getDocumentTemplatePlugin(String provider) {
-    return templatePlugins.get(provider);
-  }
+  NewDocumentTemplatePlugin getDocumentTemplatePlugin(String provider);
 
   /**
    * Gets the document editor plugin.
@@ -235,25 +69,20 @@ public class NewDocumentService implements Startable {
    * @param provider the provider
    * @return the document editor plugin
    */
-  public NewDocumentEditorPlugin getDocumentEditorPlugin(String provider) {
-    return editorPlugins.get(provider);
-  }
+  NewDocumentEditorPlugin getDocumentEditorPlugin(String provider);
 
   /**
    * Gets the registered template plugins.
    *
    * @return the registered template plugins
    */
-  public Map<String, NewDocumentTemplatePlugin> getRegisteredTemplatePlugins() {
-    return templatePlugins;
-  }
+  Map<String, NewDocumentTemplatePlugin> getRegisteredTemplatePlugins();
 
   /**
    * Checks for document template plugins.
    *
    * @return true, if successful
    */
-  public boolean hasDocumentTemplatePlugins() {
-    return templatePlugins.size() > 0;
-  }
+  boolean hasDocumentTemplatePlugins();
+
 }

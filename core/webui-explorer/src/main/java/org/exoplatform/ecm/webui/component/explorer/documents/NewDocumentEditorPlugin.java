@@ -16,15 +16,20 @@ public interface NewDocumentEditorPlugin {
 
   /**
    * This handler is invoked before creation a new document via NewDocumentTemplatePlugin
+   * 
+   * @param template the document template
+   * @param parentPath the parent path
+   * @param title the title
    */
-  void beforeDocumentCreate();
+  void beforeDocumentCreate(DocumentTemplate template, String parentPath, String title);
 
   /**
    * This handler is invoked after creation a new document via NewDocumentTemplatePlugin
    *
-   * @param node the node
+   * @param workspace the workspace
+   * @param path the path
    * @throws Exception the exception
    */
-  void onDocumentCreated(Node node) throws Exception;
+  void onDocumentCreated(String workspace, String path) throws Exception;
 
 }

@@ -3,7 +3,8 @@
   xmlns="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd">
 
   <component>
-    <type>org.exoplatform.ecm.webui.component.explorer.documents.NewDocumentService</type>
+    <key>org.exoplatform.ecm.webui.component.explorer.documents.NewDocumentService</key>
+    <type>org.exoplatform.ecm.webui.component.explorer.documents.NewDocumentServiceImpl</type>
   </component>
   
     <!-- ECMS menu action for New Document. -->

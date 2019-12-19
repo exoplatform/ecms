@@ -40,8 +40,8 @@ public class IsTemplatePluginPresentFilter extends UIExtensionAbstractFilter {
    */
   @Override
   public boolean accept(Map<String, Object> context) throws Exception {
-    NewDocumentService documentService = ExoContainerContext.getCurrentContainer()
-                                                            .getComponentInstanceOfType(NewDocumentService.class);
+    NewDocumentServiceImpl documentService = ExoContainerContext.getCurrentContainer()
+                                                            .getComponentInstanceOfType(NewDocumentServiceImpl.class);
 
     if (documentService != null) {
       return documentService.hasDocumentTemplatePlugins();
