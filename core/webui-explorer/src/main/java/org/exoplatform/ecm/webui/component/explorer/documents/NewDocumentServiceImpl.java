@@ -157,55 +157,7 @@ public class NewDocumentServiceImpl implements NewDocumentService, Startable {
     data.close();
     return addedNode;
   }
-
-  /**
-   * NewDocumentTypesConfig contains all registered templates for specified provider.
-   */
-  public static class DocumentTemplatesConfig {
-
-    /** The document templates. */
-    protected List<DocumentTemplate> templates;
-
-    /** The provider. */
-    protected String                 provider;
-
-    /**
-     * Gets the document templates.
-     *
-     * @return the document types
-     */
-    public List<DocumentTemplate> getTemplates() {
-      return templates;
-    }
-
-    /**
-     * Sets the document templates.
-     *
-     * @param templates the new templates
-     */
-    public void setTemplates(List<DocumentTemplate> templates) {
-      this.templates = templates;
-    }
-
-    /**
-     * Gets the provider.
-     *
-     * @return the provider
-     */
-    public String getProvider() {
-      return provider;
-    }
-
-    /**
-     * {
-     * @param provider
-     */
-    public void setProvider(String provider) {
-      this.provider = provider;
-    }
-
-  }
-
+  
   /**
    * {@inheritDoc}
    */

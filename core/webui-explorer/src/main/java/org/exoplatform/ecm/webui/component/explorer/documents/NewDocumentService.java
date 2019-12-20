@@ -1,5 +1,6 @@
 package org.exoplatform.ecm.webui.component.explorer.documents;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.jcr.Node;
@@ -84,5 +85,53 @@ public interface NewDocumentService {
    * @return true, if successful
    */
   boolean hasDocumentTemplatePlugins();
+
+  /**
+   * NewDocumentTypesConfig contains all registered templates for specified provider.
+   */
+  public static class DocumentTemplatesConfig {
+
+    /** The document templates. */
+    protected List<DocumentTemplate> templates;
+
+    /** The provider. */
+    protected String                 provider;
+
+    /**
+     * Gets the document templates.
+     *
+     * @return the document types
+     */
+    public List<DocumentTemplate> getTemplates() {
+      return templates;
+    }
+
+    /**
+     * Sets the document templates.
+     *
+     * @param templates the new templates
+     */
+    public void setTemplates(List<DocumentTemplate> templates) {
+      this.templates = templates;
+    }
+
+    /**
+     * Gets the provider.
+     *
+     * @return the provider
+     */
+    public String getProvider() {
+      return provider;
+    }
+
+    /**
+     * {
+     * @param provider
+     */
+    public void setProvider(String provider) {
+      this.provider = provider;
+    }
+
+  }
 
 }
