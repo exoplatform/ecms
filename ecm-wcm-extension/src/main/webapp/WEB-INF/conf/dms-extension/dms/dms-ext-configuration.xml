@@ -1708,6 +1708,21 @@
                     </object>
                 </object-param>
 
+                <object-param>
+                    <name>UISEOToolbarForm</name>
+                    <object type="org.exoplatform.webui.ext.UIExtension">
+                        <field name="type">
+                            <string>org.exoplatform.toolbar.portlet.UIAdminToolbarContainer</string>
+                        </field>
+                        <field name="name">
+                            <string>SEO</string>
+                        </field>
+                        <field name="component">
+                            <string>org.exoplatform.wcm.webui.seo.UISEOToolbarForm</string>
+                        </field>
+                    </object>
+                </object-param>
+
             </init-params>
         </component-plugin>
     </external-component-plugins>
