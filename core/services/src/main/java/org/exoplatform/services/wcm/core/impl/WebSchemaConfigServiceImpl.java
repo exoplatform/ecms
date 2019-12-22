@@ -143,7 +143,6 @@ public class WebSchemaConfigServiceImpl implements WebSchemaConfigService, Start
     try {
       sessionProvider = SessionProvider.createSystemProvider();
       for (NodeLocation locationEntry: wcmConfigService.getAllLivePortalsLocation()) {
-        String repoName = locationEntry.getRepository();
         try {
           ManageableRepository repository = WCMCoreUtils.getRepository();
           Session session = sessionProvider.getSession(locationEntry.getWorkspace(), repository);
@@ -154,9 +153,7 @@ public class WebSchemaConfigServiceImpl implements WebSchemaConfigService, Start
             session.save();
           }
         } catch (Exception e) {
-          if (LOG.isErrorEnabled()) {
-            LOG.error("Error when try to create share portal folder for repository: "+ repoName, e);
-          }
+          LOG.error("Error when try to create share portal folder", e);
         }
       }
     } finally {
@@ -168,9 +165,7 @@ public class WebSchemaConfigServiceImpl implements WebSchemaConfigService, Start
    * @see org.picocontainer.Startable#start()
    */
   public void start() {
-    if (LOG.isInfoEnabled()) {
-      LOG.info("Start WebSchemaConfigServiceImpl...");
-    }
+    LOG.info("Start WebSchemaConfigServiceImpl...");
     createLiveSharePortalFolders();
   }
 

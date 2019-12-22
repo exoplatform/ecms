@@ -62,6 +62,7 @@ import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
+import org.exoplatform.services.wcm.portal.LivePortalManagerService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.picocontainer.Startable;
 
@@ -119,6 +120,7 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
    * @throws Exception
    */
   public TaxonomyServiceImpl(InitParams initParams, SessionProviderService providerService,
+                             LivePortalManagerService livePortalManagerService,
                              NodeHierarchyCreator nodeHierarchyCreator, RepositoryService repoService,
                              LinkManager linkManager, DMSConfiguration dmsConfiguration) throws Exception {
     providerService_ = providerService;

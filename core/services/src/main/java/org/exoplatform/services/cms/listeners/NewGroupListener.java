@@ -19,15 +19,14 @@
 
 package org.exoplatform.services.cms.listeners;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import javax.jcr.Node;
 import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 
+import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.access.PermissionType;
@@ -39,8 +38,7 @@ import org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig.JcrPath;
 import org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig.Permission;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
-import org.exoplatform.services.organization.Group;
-import org.exoplatform.services.organization.GroupEventListener;
+import org.exoplatform.services.organization.*;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 
 /**
@@ -107,31 +105,48 @@ public class NewGroupListener extends GroupEventListener
       ManageableRepository manageableRepository = jcrService_.getCurrentRepository();
       String systemWorkspace = manageableRepository.getConfiguration().getDefaultWorkspaceName();
       Session session = manageableRepository.getSystemSession(systemWorkspace);
-      Node groupsHome = (Node)session.getItem(groupsPath_);
-      List jcrPaths = config_.getJcrPaths();
-      String groupId = group.getId();
-      String groupLabel = group.getLabel();
-      
-      Node groupNode = null;
-      try
-      {
-         groupNode = groupsHome.getNode(groupId.substring(1, groupId.length()));
+      try {
+        Node groupsHome = (Node)session.getItem(groupsPath_);
+        List jcrPaths = config_.getJcrPaths();
+        String groupId = group.getId();
+        String groupLabel = group.getLabel();
+        
+        Node groupNode = null;
+        try
+        {
+           groupNode = groupsHome.getNode(groupId.substring(1, groupId.length()));
+        }
+        catch (PathNotFoundException e)
+        {
+           OrganizationService orgService = ExoContainerContext.getService(OrganizationService.class);
+           String parentId = group.getParentId();
+           if (parentId == null) {
+             String[] groupIdParts = group.getId().split("/");
+             if (groupIdParts.length > 2) {
+               parentId = group.getId().substring(0, group.getId().lastIndexOf('/'));
+             }
+           }
+           if (parentId != null) {
+             Group parentGroup = orgService.getGroupHandler().findGroupById(parentId);
+             if (parentGroup != null && !groupsHome.hasNode(parentGroup.getId().substring(1, parentGroup.getId().length()))) {
+               buildGroupStructure(parentGroup);
+             }
+           }
+           groupNode = groupsHome.addNode(groupId.substring(1, groupId.length()));
+        }
+        if (groupNode.canAddMixin(NodetypeConstant.EXO_DRIVE)) {
+          groupNode.addMixin(NodetypeConstant.EXO_DRIVE);
+        }
+        groupNode.setProperty(NodetypeConstant.EXO_LABEL, groupLabel);
+        for (JcrPath jcrPath : (List<JcrPath>)jcrPaths)
+        {
+           createNode(groupNode, jcrPath.getPath(), jcrPath.getNodeType(), jcrPath.getMixinTypes(), getPermissions(
+              jcrPath.getPermissions(), groupId));
+        }
+        session.save();
+      } finally {
+        session.logout();
       }
-      catch (PathNotFoundException e)
-      {
-         groupNode = groupsHome.addNode(groupId.substring(1, groupId.length()));
-      }
-      if (groupNode.canAddMixin(NodetypeConstant.EXO_DRIVE)) {
-        groupNode.addMixin(NodetypeConstant.EXO_DRIVE);
-      }
-      groupNode.setProperty(NodetypeConstant.EXO_LABEL, groupLabel);
-      for (JcrPath jcrPath : (List<JcrPath>)jcrPaths)
-      {
-         createNode(groupNode, jcrPath.getPath(), jcrPath.getNodeType(), jcrPath.getMixinTypes(), getPermissions(
-            jcrPath.getPermissions(), groupId));
-      }
-      session.save();
-      session.logout();
    }
 
    @SuppressWarnings("unchecked")
