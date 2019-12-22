@@ -80,7 +80,7 @@
               <string>group</string>
             </field>
             <field name="location">
-              <string>war:/conf/wcm-extension/portal</string>
+              <string>war:/conf/portal</string>
             </field>
           </object>
         </object-param>
