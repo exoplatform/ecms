@@ -6,7 +6,7 @@ import javax.jcr.Node;
 
 /**
  * The Interface NewDocumentTemplatePlugin provides API for getting templates of specific provider.
- * Also allows to create documents based on DocumentTemplate
+ * Also allows to create documents based on DocumentTemplate.
  */
 public interface NewDocumentTemplatePlugin {
 

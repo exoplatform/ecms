@@ -43,7 +43,7 @@ import org.exoplatform.webui.ext.manager.UIAbstractManager;
 import org.exoplatform.webui.ext.manager.UIAbstractManagerComponent;
 
 /**
- * The Class NewDocumentManageComponent creates and displays UINewDocumentForm
+ * The Class NewDocumentManageComponent creates and displays UINewDocumentForm.
  */
 @ComponentConfig(events = { @EventConfig(listeners = NewDocumentManageComponent.NewDocumentActionListener.class) })
 public class NewDocumentManageComponent extends UIAbstractManagerComponent {

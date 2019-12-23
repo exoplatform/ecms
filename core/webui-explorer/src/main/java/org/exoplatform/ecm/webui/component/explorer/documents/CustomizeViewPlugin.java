@@ -48,7 +48,7 @@ import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
  * Customize existing view of ECMS Document Explorer.
  * It allows to add buttons in existing tabs of Document Explorer views.
  * 
- * Created by The eXo Platform SAS
+ * Created by The eXo Platform SAS.
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
  * @version $Id: CustomizeViewPlugin.java 00000 Mar 2, 2016 pnedonosko $
