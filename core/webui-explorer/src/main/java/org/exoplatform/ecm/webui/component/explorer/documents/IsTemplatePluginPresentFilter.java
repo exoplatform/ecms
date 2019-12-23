@@ -35,9 +35,6 @@ public class IsTemplatePluginPresentFilter extends UIExtensionAbstractFilter {
    * @return true, if successful
    * @throws Exception the exception
    */
-  /* (non-Javadoc)
-   * @see org.exoplatform.webui.ext.filter.UIExtensionFilter#accept(java.util.Map)
-   */
   @Override
   public boolean accept(Map<String, Object> context) throws Exception {
     NewDocumentServiceImpl documentService = ExoContainerContext.getCurrentContainer()
@@ -54,9 +51,6 @@ public class IsTemplatePluginPresentFilter extends UIExtensionAbstractFilter {
    *
    * @param context the context
    * @throws Exception the exception
-   */
-  /* (non-Javadoc)
-   * @see org.exoplatform.webui.ext.filter.UIExtensionFilter#onDeny(java.util.Map)
    */
   @Override
   public void onDeny(Map<String, Object> context) throws Exception {
