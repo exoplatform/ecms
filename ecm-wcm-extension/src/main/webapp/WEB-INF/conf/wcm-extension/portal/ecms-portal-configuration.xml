@@ -41,8 +41,36 @@
   </external-component-plugins>
 
 	<external-component-plugins>
-		<!-- The full qualified name of the UserPortalConfigService -->
 		<target-component>org.exoplatform.portal.config.UserPortalConfigService</target-component>
+    <!-- ADDED to initialize Portal layout of Site using default Site layout
+          defined in war:/conf/portal/group/template/group/group.xml -->
+    <component-plugin>
+      <name>new.portal.config.user.listener</name>
+      <set-method>initListener</set-method>
+      <type>org.exoplatform.portal.config.NewPortalConfigListener</type>
+      <description>this listener delete some predefined portal and templates configuration</description>
+      <init-params>
+        <object-param>
+          <name>group.configuration</name>
+          <description>description</description>
+          <object type="org.exoplatform.portal.config.NewPortalConfig">
+            <field name="predefinedOwner">
+              <collection type="java.util.HashSet">
+                <value>
+                  <string>/platform/web-contributors</string>
+                </value>
+              </collection>
+            </field>
+            <field name="ownerType">
+              <string>group</string>
+            </field>
+            <field name="location">
+              <string>war:/conf/portal</string>
+            </field>
+          </object>
+        </object-param>
+      </init-params>
+    </component-plugin>
     <component-plugin>
       <name>new.portal.config.user.listener</name>
       <set-method>initListener</set-method>
@@ -80,7 +108,7 @@
               <string>group</string>
             </field>
             <field name="location">
-              <string>war:/conf/portal</string>
+              <string>war:/conf/wcm-extension/portal</string>
             </field>
           </object>
         </object-param>
