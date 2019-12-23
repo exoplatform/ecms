@@ -19,6 +19,7 @@ package org.exoplatform.wcm.connector;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.net.URLDecoder;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -284,7 +285,8 @@ public class FileUploadHandler {
     DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
     DocumentBuilder builder = factory.newDocumentBuilder();
     Document fileExistence = builder.newDocument();
-    fileName = Utils.cleanNameWithAccents(fileName);
+    //We use decode to save the real name in the JCR then we use cleanNameWithAccents() to remove accent from the fileName
+    fileName = Utils.cleanNameWithAccents(URLDecoder.decode(fileName, "UTF-8"));
     Element rootElement = fileExistence.createElement(
                               parent.hasNode(fileName) ? "Existed" : "NotExisted");
     if(parent.hasNode(fileName)){
@@ -448,9 +450,9 @@ public class FileUploadHandler {
       Node file = null;
       Node jcrContent=null;
       boolean fileCreated = false;
-      String exoTitle = fileName;
+      String exoTitle = URLDecoder.decode(fileName, "UTF-8");
       
-      fileName = Utils.cleanNameWithAccents(fileName);
+      fileName = Utils.cleanNameWithAccents(exoTitle);
       DMSMimeTypeResolver mimeTypeResolver = DMSMimeTypeResolver.getInstance();
       String mimetype = mimeTypeResolver.getMimeType(resource.getFileName());
       String nodeName = fileName;
