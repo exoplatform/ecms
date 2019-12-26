@@ -142,6 +142,7 @@ public class HTMLUploadImageProcessor {
         String fileDiskLocation = uploadedResource.getStoreLocation();
         try(InputStream inputStream = new FileInputStream(fileDiskLocation)) {
           resourceNode.setProperty("jcr:data", inputStream);
+          resourceNode.getSession().save();
           parentNode.getSession().save();
         }
 

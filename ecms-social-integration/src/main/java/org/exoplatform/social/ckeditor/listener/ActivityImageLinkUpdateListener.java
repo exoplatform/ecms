@@ -40,11 +40,14 @@ import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.social.ckeditor.HTMLUploadImageProcessor;
 import org.exoplatform.social.core.activity.ActivityLifeCycleEvent;
 import org.exoplatform.social.core.activity.ActivityListenerPlugin;
 import org.exoplatform.social.core.activity.model.ExoSocialActivity;
+import org.exoplatform.social.core.identity.model.Identity;
+import org.exoplatform.social.core.identity.provider.OrganizationIdentityProvider;
 import org.exoplatform.social.core.identity.provider.SpaceIdentityProvider;
 import org.exoplatform.social.core.manager.ActivityManager;
 import org.exoplatform.social.core.manager.IdentityManager;
@@ -183,17 +186,19 @@ public class ActivityImageLinkUpdateListener extends ActivityListenerPlugin {
     if (templateParams != null) {
       for (String param : templateParams.keySet()) {
         String paramValue = templateParams.get(param);
-        String processedParamValue = imageProcessor.processImages(paramValue, folderNode, getImagesFolderPath(activity));
-        if (!paramValue.equals(processedParamValue)) {
-          templateParams.put(param, processedParamValue);
-          activity.setTemplateParams(templateParams);
-          storeActivity = true;
+        if (StringUtils.isNotBlank(paramValue)) {
+          String processedParamValue = imageProcessor.processImages(paramValue, folderNode, getImagesFolderPath(activity));
+          if (!paramValue.equals(processedParamValue)) {
+            templateParams.put(param, processedParamValue);
+            activity.setTemplateParams(templateParams);
+            storeActivity = true;
+          }
         }
       }
     }
 
     if (storeActivity) {
-      activityManager.updateActivity(activity);
+      activityManager.updateActivity(activity, false);
     }
   }
 
@@ -279,7 +284,7 @@ public class ActivityImageLinkUpdateListener extends ActivityListenerPlugin {
   }
 
   private Session getSession(String workspaceName) throws Exception {
-    SessionProvider sessionProvider = WCMCoreUtils.getUserSessionProvider();
+    SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
     if (sessionProvider == null) {
       return null;
     }
