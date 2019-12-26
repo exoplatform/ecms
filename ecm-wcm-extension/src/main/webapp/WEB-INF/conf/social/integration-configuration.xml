@@ -28,14 +28,18 @@
     <component-plugin>
       <name>PageSearchConnector</name>
       <set-method>addConnector</set-method>
-      <type>org.exoplatform.services.wcm.search.connector.PageSearchServiceConnector</type>
+      <type>org.exoplatform.services.wcm.search.connector.PageElasticUnifiedSearchServiceConnector</type>
       <description>eXo portal pages</description>
       <init-params>
         <properties-param>
-           <name>constructor.params</name>
-           <property name="searchType" value="page"/>
-           <property name="displayName" value="Pages"/>
-           <property name="enable" value="${exo.unified-search.connector.page.enable:true}"/>
+          <name>constructor.params</name>
+          <property name="searchType" value="page"/>
+          <property name="displayName" value="Pages"/>
+          <property name="index" value="navigation_alias"/>
+          <property name="type" value="navigation"/>
+          <property name="enable" value="${exo.unified-search.connector.page.enable:true}"/>
+          <property name="titleField" value="pageTitle"/>
+          <property name="searchFields" value="name,pageTitle,descriptions,seo"/>
         </properties-param>
       </init-params>
     </component-plugin>
