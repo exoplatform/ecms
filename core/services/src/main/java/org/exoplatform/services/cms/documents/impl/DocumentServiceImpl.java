@@ -40,6 +40,7 @@ import org.exoplatform.services.jcr.impl.core.NodeImpl;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.security.ConversationState;
+import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.gatein.api.Portal;
@@ -196,13 +197,13 @@ public class DocumentServiceImpl implements DocumentService {
    */
   @Override
   public String getLinkInDocumentsApp(String nodePath) throws Exception {
-    if(nodePath == null) {
+    String userId = ConversationState.getCurrent().getIdentity().getUserId();
+    boolean isAnonymous = userId == null || userId.isEmpty() || userId.equals(IdentityConstants.ANONIM);
+    if(nodePath == null || isAnonymous) {
       return null;
     }
-
     // find the best matching drive to display the document
     DriveData drive = this.getDriveOfNode(nodePath);
-
     return getLinkInDocumentsApp(nodePath, drive);
   }
 
