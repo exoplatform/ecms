@@ -44,14 +44,12 @@ import org.exoplatform.social.core.manager.ActivityManager;
 import org.exoplatform.social.core.manager.IdentityManager;
 import org.exoplatform.upload.UploadService;
 
-@ConfiguredBy({ @ConfigurationUnit(scope = ContainerScope.ROOT, path = "conf/test-root-configuration.xml"),
-    @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/portal/configuration.xml"),
-    @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/portal/test-configuration.xml"),
-    @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/jcr/jcr-configuration.xml"),
-    @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/standalone/jcr-configuration.xml"),
-    @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/standalone/test-configuration.xml"),
-    @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/standalone/test-portal-configuration.xml"),
-    @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/test-portal-configuration.xml") })
+@ConfiguredBy({
+  @ConfigurationUnit(scope = ContainerScope.ROOT, path = "conf/configuration.xml"),
+  @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/portal/configuration.xml"),
+  @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/standalone/ecms-test-configuration.xml"),
+  @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/standalone/test-configuration.xml"),
+})
 public class ActivityImageLinkUpdateListenerTest extends BaseCommonsTestCase {
   private static final String ATTACHED_FILE_NAME = "fileName.xml";
 
@@ -122,12 +120,12 @@ public class ActivityImageLinkUpdateListenerTest extends BaseCommonsTestCase {
     ExoSocialActivity activity = createActivityWithEmbeddedImage(rootIdentity, body, uploadId, null);
 
     assertEquals("<img src=\""
-        + "/portal/rest/jcr/repository/portal-test/Users/r___/ro___/roo___/root/Public/Activity Stream Documents/Pictures/"
+        + "/portal/rest/jcr/repository/collaboration/Users/r___/ro___/roo___/root/Public/Activity Stream Documents/Pictures/"
         + YearMonth.now().getYear() + "/" + monthFormat.format(YearMonth.now().getMonthValue()) + "/" + ATTACHED_FILE_NAME + "\" />",
                  activity.getBody());
     activity = activityManager.getActivity(activity.getId());
     assertEquals("<img src=\""
-        + "/portal/rest/jcr/repository/portal-test/Users/r___/ro___/roo___/root/Public/Activity Stream Documents/Pictures/"
+        + "/portal/rest/jcr/repository/collaboration/Users/r___/ro___/roo___/root/Public/Activity Stream Documents/Pictures/"
         + YearMonth.now().getYear() + "/" + monthFormat.format(YearMonth.now().getMonthValue()) + "/" + ATTACHED_FILE_NAME + "\" />",
                  activity.getBody());
     assertEquals(0, uploadService.getUploadResources().size());
@@ -140,12 +138,12 @@ public class ActivityImageLinkUpdateListenerTest extends BaseCommonsTestCase {
     ExoSocialActivity activity = createActivityWithEmbeddedImage(rootIdentity, body, uploadId, null);
 
     assertEquals("<img src=\""
-        + "/portal/rest/jcr/repository/portal-test/Users/r___/ro___/roo___/root/Public/Activity Stream Documents/Pictures/"
+        + "/portal/rest/jcr/repository/collaboration/Users/r___/ro___/roo___/root/Public/Activity Stream Documents/Pictures/"
         + YearMonth.now().getYear() + "/" + monthFormat.format(YearMonth.now().getMonthValue()) + "/" + ATTACHED_FILE_NAME + "\" />",
                  activity.getBody());
     activity = activityManager.getActivity(activity.getId());
     assertEquals("<img src=\""
-        + "/portal/rest/jcr/repository/portal-test/Users/r___/ro___/roo___/root/Public/Activity Stream Documents/Pictures/"
+        + "/portal/rest/jcr/repository/collaboration/Users/r___/ro___/roo___/root/Public/Activity Stream Documents/Pictures/"
         + YearMonth.now().getYear() + "/" + monthFormat.format(YearMonth.now().getMonthValue()) + "/fileName" + ".xml\" />",
                  activity.getBody());
     assertEquals(0, uploadService.getUploadResources().size());
@@ -161,21 +159,21 @@ public class ActivityImageLinkUpdateListenerTest extends BaseCommonsTestCase {
     ExoSocialActivity activity2 = createActivityWithEmbeddedImage(rootIdentity, body2, uploadId2, null);
 
     assertEquals("<img src=\""
-        + "/portal/rest/jcr/repository/portal-test/Users/r___/ro___/roo___/root/Public/Activity Stream Documents/Pictures/"
+        + "/portal/rest/jcr/repository/collaboration/Users/r___/ro___/roo___/root/Public/Activity Stream Documents/Pictures/"
         + YearMonth.now().getYear() + "/" + monthFormat.format(YearMonth.now().getMonthValue()) + "/" + ATTACHED_FILE_NAME + "\" />",
                  activity1.getBody());
     activity1 = activityManager.getActivity(activity1.getId());
     assertEquals("<img src=\""
-        + "/portal/rest/jcr/repository/portal-test/Users/r___/ro___/roo___/root/Public/Activity Stream Documents/Pictures/"
+        + "/portal/rest/jcr/repository/collaboration/Users/r___/ro___/roo___/root/Public/Activity Stream Documents/Pictures/"
         + YearMonth.now().getYear() + "/" + monthFormat.format(YearMonth.now().getMonthValue()) + "/" + ATTACHED_FILE_NAME + "\" />",
                  activity1.getBody());
     assertEquals("<img src=\""
-        + "/portal/rest/jcr/repository/portal-test/Users/r___/ro___/roo___/root/Public/Activity Stream Documents/Pictures/"
+        + "/portal/rest/jcr/repository/collaboration/Users/r___/ro___/roo___/root/Public/Activity Stream Documents/Pictures/"
         + YearMonth.now().getYear() + "/" + monthFormat.format(YearMonth.now().getMonthValue()) + "/fileName"
         + "%281%29.xml\" />", activity2.getBody());
     activity2 = activityManager.getActivity(activity2.getId());
     assertEquals("<img src=\""
-        + "/portal/rest/jcr/repository/portal-test/Users/r___/ro___/roo___/root/Public/Activity Stream Documents/Pictures/"
+        + "/portal/rest/jcr/repository/collaboration/Users/r___/ro___/roo___/root/Public/Activity Stream Documents/Pictures/"
         + YearMonth.now().getYear() + "/" + monthFormat.format(YearMonth.now().getMonthValue()) + "/fileName"
         + "%281%29.xml\" />", activity2.getBody());
     assertEquals(0, uploadService.getUploadResources().size());
@@ -190,12 +188,12 @@ public class ActivityImageLinkUpdateListenerTest extends BaseCommonsTestCase {
     ExoSocialActivity activity = createActivityWithEmbeddedImage(rootIdentity, body, uploadId, templateParams);
 
     assertEquals("<img src=\""
-        + "/portal/rest/jcr/repository/portal-test/Users/r___/ro___/roo___/root/Public/Activity Stream Documents/Pictures/"
+        + "/portal/rest/jcr/repository/collaboration/Users/r___/ro___/roo___/root/Public/Activity Stream Documents/Pictures/"
         + YearMonth.now().getYear() + "/" + monthFormat.format(YearMonth.now().getMonthValue()) + "/" + ATTACHED_FILE_NAME + "\" />",
                  activity.getTemplateParams().get("comment"));
     activity = activityManager.getActivity(activity.getId());
     assertEquals("<img src=\""
-        + "/portal/rest/jcr/repository/portal-test/Users/r___/ro___/roo___/root/Public/Activity Stream Documents/Pictures/"
+        + "/portal/rest/jcr/repository/collaboration/Users/r___/ro___/roo___/root/Public/Activity Stream Documents/Pictures/"
         + YearMonth.now().getYear() + "/" + monthFormat.format(YearMonth.now().getMonthValue()) + "/" + ATTACHED_FILE_NAME + "\" />",
                  activity.getTemplateParams().get("comment"));
     assertEquals(0, uploadService.getUploadResources().size());

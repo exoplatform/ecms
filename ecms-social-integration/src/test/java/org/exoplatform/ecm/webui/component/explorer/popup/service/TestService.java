@@ -53,17 +53,18 @@ import org.exoplatform.wcm.ext.component.document.service.IShareDocumentService;
  * Aug 7, 2014
  */
 @ConfiguredBy({
-        @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/exo.portal.component.portal-configuration.xml"),
-        @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/exo.portal.component.test.jcr-configuration.xml"),
-        @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/exo.portal.component.identity-configuration.xml"),
-        @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/standalone/configuration.xml"),
+  @ConfigurationUnit(scope = ContainerScope.ROOT, path = "conf/configuration.xml"),
+  @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/portal/configuration.xml"),
+  @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/standalone/ecms-test-configuration.xml"),
+  @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/standalone/configuration.xml"),
+  @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/standalone/test-configuration.xml"),
 })
 @Ignore
 public class TestService extends AbstractKernelTest {
   //private Log log = ExoLogger.getExoLogger(TestService.class);
 
   protected final String REPO_NAME = "repository";
-  protected final String DEFAULT_WS = "portal-test";
+  protected final String DEFAULT_WS = "collaboration";
 
   protected static PortalContainer        container;
   private RepositoryService      repositoryService;

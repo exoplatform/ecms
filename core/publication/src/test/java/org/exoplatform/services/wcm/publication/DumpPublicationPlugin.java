@@ -49,8 +49,6 @@ import org.exoplatform.portal.mop.navigation.Scope;
 import org.exoplatform.portal.mop.user.UserNavigation;
 import org.exoplatform.portal.mop.user.UserNode;
 import org.exoplatform.portal.mop.user.UserPortal;
-import org.exoplatform.portal.pom.config.POMSession;
-import org.exoplatform.portal.pom.config.POMSessionManager;
 import org.exoplatform.services.ecm.publication.IncorrectStateUpdateLifecycleException;
 import org.exoplatform.services.ecm.publication.PublicationService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
@@ -238,9 +236,6 @@ public class DumpPublicationPlugin extends WebpagePublicationPlugin{
    * @throws Exception the exception
    */
   private List<String> getRunningPortals(String userId) throws Exception {
-    POMSessionManager manager = WCMCoreUtils.getService(POMSessionManager.class);
-    POMSession session = null;
-    if (manager.getSession() == null) session = manager.openSession();
     List<String> listPortalName = new ArrayList<String>();
     DataStorage service = WCMCoreUtils.getService(DataStorage.class);
     Query<PortalConfig> query = new Query<PortalConfig>(null, null, null, null, PortalConfig.class) ;
@@ -248,12 +243,10 @@ public class DumpPublicationPlugin extends WebpagePublicationPlugin{
     List<PortalConfig> portalConfigs = WCMCoreUtils.getAllElementsOfListAccess(pageList);
     UserACL userACL = WCMCoreUtils.getService(UserACL.class);
     for(PortalConfig portalConfig : portalConfigs) {
-      System.out.println("-------------------------------------------------------------portalConfig:" + portalConfig);
       if(userACL.hasPermission(portalConfig)) {
         listPortalName.add(portalConfig.getName());
       }
     }
-    if (session != null) session.close();
     return listPortalName;
   }
 

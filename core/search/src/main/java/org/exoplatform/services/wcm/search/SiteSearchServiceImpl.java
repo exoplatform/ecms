@@ -250,42 +250,6 @@ public class SiteSearchServiceImpl implements SiteSearchService {
     dropNodeCache.remove(key);
   }
 
-  private Query createSearchPageQuery(QueryCriteria queryCriteria, QueryManager queryManager) throws Exception {
-    SQLQueryBuilder queryBuilder = new SQLQueryBuilder();
-    List<String> mopPages = this.searchPageByTitle(queryCriteria.getSiteName(),
-                                                   queryCriteria.getKeyword());
-    if (mopPages.size() == 0) {
-      return null;
-    }
-    List<QueryProperty> queryProps = new ArrayList<>();
-    for (String page : mopPages) {
-      QueryProperty prop = queryCriteria.new QueryProperty();
-      prop.setName("mop:page");
-      prop.setValue(page);
-      prop.setComparisonType(COMPARISON_TYPE.EQUAL);
-      queryProps.add(prop);
-    }
-    QueryProperty prop = queryCriteria.new QueryProperty();
-    prop.setName("exo:name");
-    prop.setValue("mop:" + queryCriteria.getKeyword().toLowerCase());
-    queryProps.add(prop);
-    queryCriteria.setQueryMetadatas(queryProps.toArray(new QueryProperty[queryProps.size()]));
-    mapQueryTypes(queryCriteria, queryBuilder);
-    if (queryCriteria.isFulltextSearch()) {
-      mapQueryPath(queryCriteria, queryBuilder);
-      mapFulltextQueryTearm(queryCriteria, queryBuilder, LOGICAL.OR);
-    } else {
-      searchByNodeName(queryCriteria, queryBuilder);
-    }
-    mapCategoriesCondition(queryCriteria,queryBuilder);
-    mapDatetimeRangeSelected(queryCriteria,queryBuilder);
-    mapMetadataProperties(queryCriteria,queryBuilder, LOGICAL.OR);
-    orderBy(queryCriteria, queryBuilder);
-    String queryStatement = queryBuilder.createQueryStatement();
-    Query query = queryManager.createQuery(queryStatement, Query.SQL);
-    return query;
-  }
-
   /**
    * @return return the JCR path of the mop:page nodes that have gtn:name
    *         (page's title) containing the given specified <code>keyword</code>

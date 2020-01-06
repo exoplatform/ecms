@@ -20,15 +20,15 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
-import org.chromattic.ext.format.BaseEncodingObjectFormatter;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import org.exoplatform.commons.search.domain.Document;
 import org.exoplatform.commons.search.index.impl.ElasticIndexingServiceConnector;
+import org.exoplatform.commons.utils.Safe;
 import org.exoplatform.container.xml.InitParams;
-import org.exoplatform.portal.jdbc.service.Util;
-import org.exoplatform.portal.mop.Described;
+import org.exoplatform.ecm.utils.text.Text;
+import org.exoplatform.portal.mop.State;
 import org.exoplatform.portal.mop.SiteType;
 import org.exoplatform.portal.mop.description.DescriptionService;
 import org.exoplatform.portal.mop.navigation.*;
@@ -41,8 +41,6 @@ import org.exoplatform.services.seo.SEOService;
 public class NavigationIndexingServiceConnector extends ElasticIndexingServiceConnector {
 
   private static final Log LOG = ExoLogger.getLogger(NavigationIndexingServiceConnector.class);
-
-  private static final BaseEncodingObjectFormatter formatter = new BaseEncodingObjectFormatter();
 
   public final static String TYPE = "navigation";
 
@@ -70,12 +68,12 @@ public class NavigationIndexingServiceConnector extends ElasticIndexingServiceCo
 
     long ts = System.currentTimeMillis();
 
-    NodeData node = navigationStore.loadNode(Util.parseLong(nodeId));
+    NodeData node = navigationStore.loadNode(Safe.parseLong(nodeId));
     if (node == null) {
       LOG.debug("Node with id {} does not exist or has been removed", nodeId);
       return null;
     }
-    NavigationData nav = this.navigationStore.loadNavigationData(Util.parseLong(node.getId()));
+    NavigationData nav = this.navigationStore.loadNavigationData(Safe.parseLong(node.getId()));
     String uri = getUri(node);
 
     Map<String, String> fields = new HashMap<>();
@@ -102,12 +100,12 @@ public class NavigationIndexingServiceConnector extends ElasticIndexingServiceCo
       permissions.addAll(page.getState().getAccessPermissions());
     }
     //description
-    Map<Locale, Described.State> descriptions = descriptionService.getDescriptions(node.getId());
+    Map<Locale, State> descriptions = descriptionService.getDescriptions(node.getId());
     if (descriptions != null && descriptions.size() > 0) {
       JSONObject json = new JSONObject();
       try {
         for (Locale locale : descriptions.keySet()) {
-          Described.State state = descriptions.get(locale);
+          State state = descriptions.get(locale);
           if (state != null && state.getName() != null && locale.toLanguageTag() != null) {
             json.put(locale.toLanguageTag(), state.getName());
           }
@@ -133,7 +131,7 @@ public class NavigationIndexingServiceConnector extends ElasticIndexingServiceCo
     List<NodeData> nodes = new ArrayList<>();
     nodes.add(node);
     while (node.getParentId() != null) {
-      node = navigationStore.loadNode(Util.parseLong(node.getParentId()));
+      node = navigationStore.loadNode(Safe.parseLong(node.getParentId()));
       nodes.add(0, node);
     }
     // Remove the default node
@@ -146,8 +144,8 @@ public class NavigationIndexingServiceConnector extends ElasticIndexingServiceCo
 
   private String getSEO(NodeData node) {
     try {
-      NavigationData nav = this.navigationStore.loadNavigationData(Util.parseLong(node.getId()));
-      String siteName = formatter.encodeNodeName(null, nav.getSiteKey().getName());
+      NavigationData nav = this.navigationStore.loadNavigationData(Safe.parseLong(node.getId()));
+      String siteName = Text.escapeIllegalJcrChars(nav.getSiteKey().getName());
       final Map<String, PageMetadataModel> metaModels = seoService.getPageMetadatas(node.getId(), siteName);
       if (metaModels != null && metaModels.size() > 0) {
         JSONObject seo = new JSONObject();
@@ -193,7 +191,7 @@ public class NavigationIndexingServiceConnector extends ElasticIndexingServiceCo
   private Collection<? extends String> getNodes(String rootId) {
     List<String> ids = new ArrayList<>();
     ids.add(rootId);
-    NodeData node = navigationStore.loadNode(Util.parseLong(rootId));
+    NodeData node = navigationStore.loadNode(Safe.parseLong(rootId));
 
     Iterator<String> nodes = node.iterator(false);
     while (nodes != null && nodes.hasNext()) {

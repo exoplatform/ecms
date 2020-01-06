@@ -254,15 +254,5 @@
 	      </object-param>
 	    </init-params>
 	  </component-plugin>
-
-
-    
-    <component-plugin>
-      <name>ChangeStatusUserListener</name>
-      <set-method>addListenerPlugin</set-method>
-      <type>org.exoplatform.services.cms.listeners.ChangeStatusUserListener</type>
-      <description>Change permission of user node according to user status</description>
-    </component-plugin>
-           
 	 </external-component-plugins>
 </configuration>

@@ -78,7 +78,6 @@ public class DummyECMSTestCase extends BaseECMSResourceTestCase {
 //    System.out.println("TransactionManagerLookup : " + (getService(TransactionManagerLookup.class)));
 //    System.out.println("TransactionService : " + (getService(TransactionService.class)));
 //    System.out.println("POMSessionManager : " + (getService(POMSessionManager.class)));
-//    System.out.println("ChromatticManager : " + (getService(ChromatticManager.class)));
 //    System.out.println("PicketLinkIDMService : " + (getService(PicketLinkIDMService.class)));
 //    System.out.println("PicketLinkIDMCacheService : " + (getService(PicketLinkIDMCacheService.class)));
 //    System.out.println("ResourceCompressor : " + (getService(ResourceCompressor.class)));

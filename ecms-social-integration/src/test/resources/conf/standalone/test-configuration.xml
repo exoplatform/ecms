@@ -26,6 +26,11 @@
   </component>
 
   <component>
+    <key>org.exoplatform.services.jcr.ext.app.SessionProviderService</key>
+    <type>org.exoplatform.services.jcr.ext.app.ThreadLocalSessionProviderService</type>
+  </component>
+
+  <component>
     <type>org.exoplatform.web.WebAppController</type>
     <init-params>
       <value-param>
@@ -189,22 +194,6 @@
   <component>
     <key>org.exoplatform.social.core.storage.cache.SocialStorageCacheService</key>
     <type>org.exoplatform.social.core.storage.cache.SocialStorageCacheService</type>
-  </component>
-
-  <component>
-    <key>org.exoplatform.commons.chromattic.ChromatticManager</key>
-    <type>org.exoplatform.commons.chromattic.ChromatticManager</type>
-  </component>
-
-  <component>
-    <key>org.exoplatform.social.common.lifecycle.LifeCycleCompletionService</key>
-    <type>org.exoplatform.social.common.lifecycle.LifeCycleCompletionService</type>
-    <init-params>
-      <value-param>
-        <name>async-execution</name>
-        <value>false</value>
-      </value-param>
-    </init-params>
   </component>
 
   <component>
@@ -558,21 +547,6 @@
     <target-component>org.exoplatform.commons.api.search.SearchService</target-component>
     <!-- Ecms -->
     <component-plugin>
-      <name>PageSearchConnector</name>
-      <set-method>addConnector</set-method>
-      <type>org.exoplatform.services.wcm.search.connector.PageSearchServiceConnector</type>
-      <description>eXo portal pages</description>
-      <init-params>
-        <properties-param>
-           <name>constructor.params</name>
-           <property name="searchType" value="page"/>
-           <property name="displayName" value="Pages"/>
-           <property name="enable" value="${exo.unified-search.connector.page.enable:true}"/>
-        </properties-param>
-      </init-params>
-    </component-plugin>
-
-    <component-plugin>
       <name>FileSearchConnector</name>
       <set-method>addConnector</set-method>
       <type>org.exoplatform.services.wcm.search.connector.FileSearchServiceConnector</type>
@@ -604,16 +578,6 @@
            <property name="enable" value="${exo.unified-search.connector.document.enable:true}"/>
         </properties-param>
       </init-params>
-    </component-plugin>
-  </external-component-plugins>
-
-  <external-component-plugins>
-    <target-component>org.exoplatform.services.listener.ListenerService</target-component>
-    <component-plugin>
-      <name>CmsService.event.postEdit</name>
-      <set-method>addListener</set-method>
-      <type>org.exoplatform.ecms.indexing.listener.UnifiedSearchContentListener</type>
-      <description>Content listener for Unified Search</description>
     </component-plugin>
   </external-component-plugins>
 
@@ -1630,7 +1594,7 @@
           <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig">
             <field name="workspaces">
               <collection type="java.util.ArrayList">
-                <value><string>portal-test</string></value>
+                <value><string>collaboration</string></value>
               </collection>
             </field>
             <field  name="jcrPaths">
@@ -1765,7 +1729,7 @@
           <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig">
             <field name="workspaces">
               <collection type="java.util.ArrayList">
-                <value><string>portal-test</string></value>
+                <value><string>collaboration</string></value>
               </collection>
             </field>
             <field  name="jcrPaths">
@@ -1915,7 +1879,7 @@
           <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig">
             <field name="workspaces">
               <collection type="java.util.ArrayList">
-                <value><string>portal-test</string></value>
+                <value><string>collaboration</string></value>
               </collection>
             </field>
             <field  name="jcrPaths">
@@ -2117,7 +2081,5 @@
       </init-params>
     </component-plugin>
   </external-component-plugins>
-
-  <import>jar:/conf/standalone/jcr-configuration.xml</import>
 
 </configuration>

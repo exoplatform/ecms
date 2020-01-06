@@ -16,31 +16,16 @@
  */
 package org.exoplatform.services.wcm.search.base;
 
-import java.util.Date;
-import java.util.HashMap;
-
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
 
-import org.exoplatform.component.test.ConfigurationUnit;
-import org.exoplatform.component.test.ConfiguredBy;
-import org.exoplatform.component.test.ContainerScope;
+import org.exoplatform.component.test.*;
 import org.exoplatform.ecms.test.BaseECMSTestCase;
 import org.exoplatform.portal.config.UserPortalConfigService;
-import org.exoplatform.portal.mop.SiteKey;
-import org.exoplatform.portal.mop.page.PageContext;
-import org.exoplatform.portal.mop.page.PageKey;
-import org.exoplatform.portal.mop.page.PageService;
-import org.exoplatform.portal.mop.page.PageState;
-import org.exoplatform.portal.pom.config.POMSession;
-import org.exoplatform.portal.pom.config.POMSessionManager;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
-import org.exoplatform.services.wcm.publication.PublicationDefaultStates;
 import org.exoplatform.services.wcm.publication.WCMPublicationService;
 import org.exoplatform.services.wcm.publication.WebpagePublicationPlugin;
-import org.exoplatform.services.wcm.search.DumpPublicationPlugin;
-import org.exoplatform.services.wcm.search.QueryCriteria;
-import org.exoplatform.services.wcm.search.SiteSearchService;
+import org.exoplatform.services.wcm.search.*;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
@@ -50,8 +35,8 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
  * Jul 14, 2009
  */
 @ConfiguredBy({
-  @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/exo.portal.component.portal-configuration.xml"),
-  @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/exo.portal.component.identity-configuration.xml"),
+  @ConfigurationUnit(scope = ContainerScope.ROOT, path = "conf/configuration.xml"),
+  @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/portal/configuration.xml"),
   @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/standalone/ecms-test-configuration.xml"),
   @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/wcm/test-search-configuration.xml")
 })
@@ -65,8 +50,6 @@ public class BaseSearchTest extends BaseECMSTestCase {
   protected final String searchKeyword = "This is";
   protected final String duplicationSearchKeyword = "duplication searchKey";
   protected SessionProvider sessionProvider;
-  protected POMSessionManager pomManager;
-  protected POMSession  pomSession;
   protected int seachItemsPerPage = 100;
   protected static int numberOfRunTests = 0;
 
@@ -74,7 +57,6 @@ public class BaseSearchTest extends BaseECMSTestCase {
     super.setUp();
     siteSearchService = WCMCoreUtils.getService(SiteSearchService.class);
     userPortalConfigService = WCMCoreUtils.getService(UserPortalConfigService.class);
-    pomManager = WCMCoreUtils.getService(POMSessionManager.class);
     sessionProvider = WCMCoreUtils.getSystemSessionProvider();
     wcmPublicationService = WCMCoreUtils.getService(WCMPublicationService.class);
 

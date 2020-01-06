@@ -79,18 +79,6 @@
         </init-params>
     </component>
 
-    <component>
-        <key>org.exoplatform.services.wcm.search.connector.PageSearchServiceConnector</key>
-        <type>org.exoplatform.services.wcm.search.connector.PageSearchServiceConnector</type>
-        <init-params>
-            <properties-param>
-                <name>constructor.params</name>
-                <property name="searchType" value="Page"/>
-                <property name="displayName" value="Page"/>
-            </properties-param>
-        </init-params>
-    </component>
-
     <external-component-plugins>
         <target-component>org.exoplatform.commons.search.index.IndexingOperationProcessor</target-component>
         <component-plugin>

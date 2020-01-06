@@ -27,7 +27,6 @@ import org.exoplatform.portal.config.model.Page;
 import org.exoplatform.portal.config.model.PortalConfig;
 import org.exoplatform.portal.mop.EventType;
 import org.exoplatform.portal.mop.navigation.NavigationService;
-import org.exoplatform.portal.pom.config.POMSessionManager;
 import org.exoplatform.portal.pom.spi.portlet.Portlet;
 import org.exoplatform.services.listener.Event;
 import org.exoplatform.services.listener.Listener;
@@ -71,9 +70,6 @@ public class TestWCMPublicationService extends BasePublicationTestCase {
   private NavigationService navService;
 
   /** . */
-  private POMSessionManager mgr;
-
-  /** . */
   private LinkedList<Event> events;
 
   /** . */
@@ -110,7 +106,6 @@ public class TestWCMPublicationService extends BasePublicationTestCase {
 
     PortalContainer container = PortalContainer.getInstance();
     storage_ = (DataStorage)container.getComponentInstanceOfType(DataStorage.class);
-    mgr = (POMSessionManager)container.getComponentInstanceOfType(POMSessionManager.class);
     navService = (NavigationService)container.getComponentInstanceOfType(NavigationService.class);
     events = new LinkedList<Event>();
     listenerService = (ListenerService)container.getComponentInstanceOfType(ListenerService.class);

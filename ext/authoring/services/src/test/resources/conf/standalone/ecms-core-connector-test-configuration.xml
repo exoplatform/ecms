@@ -36,20 +36,6 @@
   </component>
 
   <component>
-    <key>org.exoplatform.services.wcm.core.WCMConfigurationService</key>
-    <type>org.exoplatform.services.wcm.core.WCMConfigurationService</type>
-  </component>
-
-  <component>
-    <type>org.exoplatform.services.cms.impl.DMSConfiguration</type>
-  </component>
-
-  <component>
-    <key>org.exoplatform.services.cms.documents.DocumentService</key>
-    <type>org.exoplatform.services.cms.documents.impl.DocumentServiceImpl</type>
-  </component>
-
-  <component>
     <key>org.exoplatform.services.cms.drives.ManageDriveService</key>
     <type>org.exoplatform.services.cms.drives.impl.ManageDriveServiceImpl</type>
   </component>
@@ -175,10 +161,6 @@
       <set-method>addPlugin</set-method>
       <type>org.exoplatform.services.jcr.impl.AddNodeTypePlugin</type>
       <init-params>
-        <values-param>
-          <name>autoCreatedInNewRepository</name>
-          <value>classpath:/conf/wcm/gatein-nodetypes.xml</value>
-        </values-param>
         <values-param>
           <name>autoCreatedInNewRepository</name>
           <value>classpath:/conf/wcm/nodetypes-config.xml</value>

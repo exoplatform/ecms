@@ -25,6 +25,14 @@ xmlns="http://www.exoplaform.org/xml/ns/kernel_1_2.xsd">
     <type>org.exoplatform.services.idgenerator.impl.IDGeneratorServiceImpl</type>
   </component>
   <component>
+    <key>org.exoplatform.services.jcr.ext.distribution.DataDistributionManager</key>
+    <type>org.exoplatform.services.jcr.ext.distribution.impl.DataDistributionManagerImpl</type>
+  </component>
+  <component>
+    <key>org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator</key>
+    <type>org.exoplatform.services.jcr.ext.hierarchy.impl.NodeHierarchyCreatorImpl</type>
+  </component>
+  <component>
     <type>org.exoplatform.services.security.IdentityRegistry</type>
   </component>
   <component>
@@ -228,9 +236,6 @@ xmlns="http://www.exoplaform.org/xml/ns/kernel_1_2.xsd">
           <description>Node types configuration file</description>
           <value>jar:/conf/ext-nodetypes-config.xml</value>
           <value>jar:/conf/organization-nodetypes.xml</value>
-          <value>jar:/conf/gatein-nodetypes.xml</value>
-          <value>jar:/conf/mop-nodetypes.xml</value>
-          <value>jar:/conf/content-nodetypes.xml</value>
           <value>classpath:/conf/standalone/jcr/ecms-test-nodetypes-config.xml</value>
           <value>classpath:/conf/standalone/jcr/ecms-test-publication-nodetypes-config.xml</value>
         </values-param>
