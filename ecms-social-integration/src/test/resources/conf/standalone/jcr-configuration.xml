@@ -60,7 +60,6 @@
   
   <external-component-plugins>
 		<target-component>org.exoplatform.services.jcr.RepositoryService</target-component>
-
     <component-plugin>
       <name>add.namespaces</name>
       <set-method>addPlugin</set-method>
@@ -68,23 +67,11 @@
       <init-params>
         <properties-param>
           <name>namespaces</name>
-          <property name="mix" value="http://exoplatform.org/mix/1.0/"/>
+          <property name="mix" value="http://exoplatform.org/mix/1.0/" />
+          <property name="publication" value="http://exoplatform.org/publication/1.0/" />
         </properties-param>
       </init-params>
     </component-plugin>
-
-      <component-plugin>
-          <name>add.namespaces</name>
-          <set-method>addPlugin</set-method>
-          <type>org.exoplatform.services.jcr.impl.AddNamespacesPlugin</type>
-          <init-params>
-              <properties-param>
-                  <name>namespaces</name>
-                  <property name="publication" value="http://exoplatform.org/publication/1.0/"/>
-              </properties-param>
-          </init-params>
-      </component-plugin>
-
 		<component-plugin>
 			<name>add.nodeType</name>
 			<set-method>addPlugin</set-method>
@@ -98,35 +85,5 @@
 			</init-params>
 		</component-plugin>
 	</external-component-plugins>
-	<external-component-plugins>
-		<target-component>org.exoplatform.services.naming.InitialContextInitializer</target-component>
-		<component-plugin>
-			<name>bind.datasource</name>
-			<set-method>addPlugin</set-method>
-			<type>org.exoplatform.services.naming.BindReferencePlugin</type>
-			<init-params>
-				<value-param>
-					<name>bind-name</name>
-					<value>jdbcexo</value>
-				</value-param>
-				<value-param>
-					<name>class-name</name>
-					<value>javax.sql.DataSource</value>
-				</value-param>
-				<value-param>
-					<name>factory</name>
-					<value>org.apache.commons.dbcp.BasicDataSourceFactory</value>
-				</value-param>
-				<properties-param>
-					<name>ref-addresses</name>
-					<description>ref-addresses</description>
-					<property name="driverClassName" value="org.hsqldb.jdbcDriver"/>
-					<property name='url' value='jdbc:hsqldb:mem:db/jdbcexo'/>
-					<property name="username" value="sa"/>
-					<property name="password" value=""/>
-				</properties-param>
-			</init-params>
-		</component-plugin>
-	</external-component-plugins> 
 
 </configuration>
