@@ -4,7 +4,7 @@ import static org.exoplatform.social.plugin.doc.UIDocActivityBuilder.ACTIVITY_TY
 
 import javax.jcr.*;
 
-import org.exoplatform.commons.utils.CommonsUtils;
+import org.exoplatform.services.jcr.ext.ActivityTypeUtils;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.listener.Event;
 import org.exoplatform.services.listener.Listener;
@@ -12,7 +12,6 @@ import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.social.core.activity.model.ExoSocialActivity;
 import org.exoplatform.social.plugin.doc.UIDocActivity;
-import org.exoplatform.social.utils.ActivityTypeUtils;
 
 public class DocActivityUpdaterListener extends Listener<ExoSocialActivity, String> {
   private static final Log LOG = ExoLogger.getLogger(DocActivityUpdaterListener.class);

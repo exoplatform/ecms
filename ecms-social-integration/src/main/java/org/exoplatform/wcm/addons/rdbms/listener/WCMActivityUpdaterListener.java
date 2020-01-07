@@ -2,7 +2,7 @@ package org.exoplatform.wcm.addons.rdbms.listener;
 
 import javax.jcr.*;
 
-import org.exoplatform.commons.utils.CommonsUtils;
+import org.exoplatform.services.jcr.ext.ActivityTypeUtils;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.listener.Event;
 import org.exoplatform.services.listener.Listener;
@@ -10,7 +10,6 @@ import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.social.core.activity.model.ExoSocialActivity;
 import org.exoplatform.social.plugin.doc.UIDocActivity;
-import org.exoplatform.social.utils.ActivityTypeUtils;
 import org.exoplatform.wcm.ext.component.activity.UILinkActivity;
 import org.exoplatform.wcm.ext.component.activity.listener.Utils;
 

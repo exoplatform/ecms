@@ -21,11 +21,11 @@ import javax.jcr.Node;
  */
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
+import org.exoplatform.services.jcr.ext.ActivityTypeUtils;
 import org.exoplatform.services.listener.Event;
 import org.exoplatform.services.listener.Listener;
 import org.exoplatform.social.core.activity.model.ExoSocialActivity;
 import org.exoplatform.social.core.manager.ActivityManager;
-import org.exoplatform.social.utils.ActivityTypeUtils;
 import org.exoplatform.wcm.ext.component.activity.ContentUIActivity;
 /**
  * Created by The eXo Platform SAS

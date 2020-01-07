@@ -21,12 +21,12 @@ import java.util.List;
 import javax.jcr.Node;
 
 import org.exoplatform.services.cms.link.LinkManager;
+import org.exoplatform.services.jcr.ext.ActivityTypeUtils;
 import org.exoplatform.services.listener.Event;
 import org.exoplatform.services.listener.Listener;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.social.core.activity.model.ExoSocialActivity;
-import org.exoplatform.social.utils.ActivityTypeUtils;
 
 /**
  * Created by The eXo Platform SAS
