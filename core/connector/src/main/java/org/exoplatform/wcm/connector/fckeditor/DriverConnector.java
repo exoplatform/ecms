@@ -377,7 +377,6 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
                                                    Text.escapeIllegalJcrChars(driverName),
                                                    Text.escapeIllegalJcrChars(currentFolder));
 
-      if(StringUtils.isNotEmpty(fileName)) fileName = URLDecoder.decode(fileName, "UTF-8");
       return fileUploadHandler.checkExistence(currentFolderNode, fileName);
     } catch (Exception e) {
       if (LOG.isErrorEnabled()) {
@@ -443,7 +442,6 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
       @QueryParam("srcAction") String srcAction) throws Exception {
     try {
       // Check upload status
-      if(StringUtils.isNotEmpty(fileName)) fileName = URLDecoder.decode(fileName, "UTF-8");
       Response msgResponse = fileUploadHandler.checkStatus(uploadId, language);
       if (msgResponse != null) return msgResponse;
 
