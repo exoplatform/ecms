@@ -4,10 +4,6 @@
    xsi:schemaLocation="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd http://www.exoplatform.org/xml/ns/kernel_1_2.xsd"
    xmlns="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd">
 
-  <component>
-    <type>org.exoplatform.services.jcr.impl.ext.action.SessionActionCatalog</type>
-  </component>
-
   <external-component-plugins>
     <target-component>org.exoplatform.services.jcr.RepositoryService</target-component>
     <component-plugin>
@@ -130,39 +126,39 @@
                 <value>
                   <object type="org.exoplatform.services.jcr.impl.ext.action.ActionConfiguration">
                     <field name="workspace">
-                      <string>knowledge,collaboration</string>
+                      <string>collaboration</string>
                     </field>
                     <field name="eventTypes">
                       <string>addNode</string>
                     </field>
                     <field name="actionClassName">
-                      <string>org.exoplatform.services.jcr.ext.owner.AddOwneableAction</string>
+                      <string>org.exoplatform.services.jcr.ext.action.AddOwneableAction</string>
                     </field>
                   </object>
                 </value>
                 <value>
                   <object type="org.exoplatform.services.jcr.impl.ext.action.ActionConfiguration">
                     <field name="workspace">
-                      <string>knowledge,collaboration</string>
+                      <string>collaboration</string>
                     </field>
                     <field name="eventTypes">
                       <string>addNode</string>
                     </field>
                     <field name="actionClassName">
-                      <string>org.exoplatform.services.cms.jcrext.AddDateTimeAction</string>
+                      <string>org.exoplatform.services.jcr.ext.action.AddDateTimeAction</string>
                     </field>
                   </object>
                 </value>
                 <value>
                   <object type="org.exoplatform.services.jcr.impl.ext.action.ActionConfiguration">
                     <field name="workspace">
-                      <string>knowledge,collaboration</string>
+                      <string>collaboration</string>
                     </field>
                     <field name="eventTypes">
                       <string>addProperty,changeProperty,removeProperty,addNode</string>
                     </field>
                     <field name="actionClassName">
-                      <string>org.exoplatform.services.cms.jcrext.ModifyNodeAction</string>
+                      <string>org.exoplatform.services.jcr.ext.action.ModifyNodeAction</string>
                     </field>
                   </object>
                 </value>
@@ -192,7 +188,7 @@
                       <string>addNode</string>
                     </field>
                     <field name="workspace">
-                      <string>knowledge,collaboration</string>
+                      <string>collaboration</string>
                     </field>
                     <field name="actionClassName">
                       <string>org.exoplatform.services.cms.jcrext.AddNodeNameAction</string>
