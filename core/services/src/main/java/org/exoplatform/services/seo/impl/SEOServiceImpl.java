@@ -76,7 +76,6 @@ public class SEOServiceImpl implements SEOService {
   public static final String EMPTY_CACHE_ENTRY = "EMPTY";
   public static String METADATA_BASE_PATH = "SEO";
   final static public String LANGUAGES    = "seo-languages";
-  final static public String NAVIGATION    = "navigation";
   public static String METADATA_PAGE_PATH = "pages";
   public static String METADATA_CONTENT_PATH = "contents";
   public static String SITEMAP_NAME = "sitemaps";
@@ -936,6 +935,9 @@ public class SEOServiceImpl implements SEOService {
       Node navNode = null;
       if (!livePortalNode.hasNode(NAVIGATION)) {
         navNode = livePortalNode.addNode(NAVIGATION);
+        if (navNode.canAddMixin("exo:hiddenable")) {
+          navNode.addMixin("exo:hiddenable");
+        }
       } else {
         navNode = livePortalNode.getNode(NAVIGATION);
       }

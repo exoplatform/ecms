@@ -20,6 +20,8 @@ public interface SEOService {
 
   String SEO_REMOVE = "org.exoplatform.ecms.seo.remove";
 
+  String NAVIGATION = "navigation";
+
   /**
    * Stores metadata of a given page/content.
    * 
