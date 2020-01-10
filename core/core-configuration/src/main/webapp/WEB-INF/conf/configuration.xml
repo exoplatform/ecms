@@ -3,6 +3,9 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd http://www.exoplatform.org/xml/ns/kernel_1_2.xsd"
 	xmlns="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd">
+  <!-- JCR Repository Service and 'system' workspace -->
+  <import>jar:/conf/portal/jcr-ext-configuration.xml</import> 
+
 	<import>war:/conf/wcm-core/jcr/jcr-configuration.xml</import>
 	<import>war:/conf/wcm-core/core-services-configuration.xml</import>
 	<import>war:/conf/wcm-core/wcm-configuration.xml</import>

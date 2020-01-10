@@ -41,7 +41,6 @@
       <outputDirectory>/lib</outputDirectory>
       <includes>
         <include>org.exoplatform.ecms:*:jar</include>
-        <include>org.exoplatform:exo-jcr-services:jar</include>
         <include> org.icepdf.os:icepdf-core:jar</include>
         <include>org.imgscalr:imgscalr-lib:jar</include>
         <include>com.totsp.feedpod:itunes-com-podcast:jar</include>

@@ -15,18 +15,6 @@
   </component>
 
   <component>
-    <key>org.exoplatform.services.jcr.config.RepositoryServiceConfiguration</key>
-    <type>org.exoplatform.services.jcr.impl.config.RepositoryServiceConfigurationImpl</type>
-    <init-params>
-      <value-param>
-        <name>conf-path</name>
-        <description>JCR configuration file</description>
-        <value>war:/conf/jcr/repository-configuration.xml</value>
-      </value-param>
-    </init-params>
-  </component>
-
-  <component>
     <key>org.exoplatform.services.jcr.ext.audit.AuditService</key>  
     <type>org.exoplatform.services.jcr.ext.audit.AuditServiceImpl</type>
       <init-params>
@@ -36,48 +24,308 @@
           <value>${ecms.audit.adminIdentity:*:/platform/administrators}</value>
         </value-param>
     </init-params>
-  </component>	
+  </component>
 
   <external-component-plugins>
     <!-- The full qualified name of the RepositoryServiceConfiguration -->
     <target-component>org.exoplatform.services.jcr.RepositoryService</target-component>
-		    <component-plugin>
+    <component-plugin>
       <name>add.nodeType</name>
       <set-method>addPlugin</set-method>
       <type>org.exoplatform.services.jcr.impl.AddNodeTypePlugin</type>
       <init-params>
         <values-param>
-           <name>autoCreatedInNewRepository</name>
-           <description>Node types configuration file</description>
-           <value>jar:/conf/jcr-audit-nodetypes.xml</value>
+          <name>autoCreatedInNewRepository</name>
+          <description>Node types configuration file</description>
+          <value>jar:/conf/jcr-audit-nodetypes.xml</value>
         </values-param>
       </init-params>
-    </component-plugin>		
-  </external-component-plugins>
-  
-  <external-component-plugins>
-      <!-- The full qualified name of the RepositoryServiceConfiguration -->
-      <target-component>org.exoplatform.services.jcr.config.RepositoryServiceConfiguration</target-component>
-      <component-plugin>
-          <!-- The name of the plugin -->
-          <name>Sample RepositoryServiceConfiguration Plugin</name>
-          <!-- The name of the method to call on the RepositoryServiceConfiguration in order to add the RepositoryServiceConfigurations -->
-          <set-method>addConfig</set-method>
-          <!-- The full qualified name of the RepositoryServiceConfigurationPlugin -->
-          <type>org.exoplatform.services.jcr.impl.config.RepositoryServiceConfigurationPlugin</type>
-          <init-params>
-              <value-param>
-                  <name>conf-path</name>
-                  <description>JCR configuration file</description>
-                  <value>war:/conf/dms-extension/jcr/repository-configuration.xml</value>
-              </value-param>
-              <value-param profiles="recovery-index-rsync">
-                  <name>conf-path</name>
-                  <description>JCR configuration file</description>
-                  <value>war:/conf/dms-extension/jcr/repository-rsync-configuration.xml</value>
-              </value-param>
-          </init-params>
-      </component-plugin>
+    </component-plugin>
   </external-component-plugins>
 
+  <external-component-plugins>
+    <target-component>org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator</target-component>
+    <component-plugin>
+      <name>addUserPaths</name>
+      <set-method>addPlugin</set-method>
+      <type>org.exoplatform.services.jcr.ext.hierarchy.impl.UserAddPathPlugin</type>
+      <init-params>
+        <object-param>
+          <name>user.paths</name>
+          <description>User paths to create when initializing user home node</description>
+          <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig">
+            <field name="workspaces">
+              <collection type="java.util.ArrayList">
+                <value>
+                  <string>collaboration</string>
+                </value>
+              </collection>
+            </field>
+            <field name="jcrPaths">
+              <collection type="java.util.ArrayList">
+                <value>
+                  <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$JcrPath">
+                    <field name="path">
+                      <string>ApplicationData</string>
+                    </field>
+                    <field name="permissions">
+                      <collection type="java.util.ArrayList">
+                        <value>
+                          <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$Permission">
+                            <field name="read">
+                              <string>true</string>
+                            </field>
+                            <field name="addNode">
+                              <string>true</string>
+                            </field>
+                            <field name="identity">
+                              <string>*:/platform/administrators</string>
+                            </field>
+                            <field name="setProperty">
+                              <string>true</string>
+                            </field>
+                            <field name="remove">
+                              <string>true</string>
+                            </field>
+                          </object>
+                        </value>
+                      </collection>
+                    </field>
+                    <field name="mixinTypes">
+                      <collection type="java.util.ArrayList">
+                        <value>
+                          <string>exo:hiddenable</string>
+                        </value>
+                      </collection>
+                    </field>
+                    <field name="alias">
+                      <string>userApplicationData</string>
+                    </field>
+                    <field name="nodeType">
+                      <string>nt:unstructured</string>
+                    </field>
+                  </object>
+                </value>
+                <value>
+                  <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$JcrPath">
+                    <field name="path">
+                      <string>Private</string>
+                    </field>
+                    <field name="permissions">
+                      <collection type="java.util.ArrayList"/>
+                    </field>
+                    <field name="mixinTypes">
+                      <collection type="java.util.ArrayList"/>
+                    </field>
+                    <field name="alias">
+                      <string>userPrivate</string>
+                    </field>
+                    <field name="nodeType">
+                      <string>nt:unstructured</string>
+                    </field>
+                  </object>
+                </value>
+                <value>
+                  <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$JcrPath">
+                    <field name="path">
+                      <string>Private/Documents</string>
+                    </field>
+                    <field name="permissions">
+                      <collection type="java.util.ArrayList"/>
+                    </field>
+                    <field name="mixinTypes">
+                      <collection type="java.util.ArrayList">
+                        <value>
+                          <string>exo:documentFolder</string>
+                        </value>
+                      </collection>
+                    </field>
+                    <field name="alias">
+                      <string>userPrivateDocuments</string>
+                    </field>
+                  </object>
+                </value>
+                <value>
+                  <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$JcrPath">
+                    <field name="path">
+                      <string>Private/Videos</string>
+                    </field>
+                    <field name="permissions">
+                      <collection type="java.util.ArrayList"/>
+                    </field>
+                    <field name="mixinTypes">
+                      <collection type="java.util.ArrayList">
+                        <value>
+                          <string>exo:videoFolder</string>
+                        </value>
+                      </collection>
+                    </field>
+                    <field name="alias">
+                      <string>userPrivateVideo</string>
+                    </field>
+                  </object>
+                </value>
+                <value>
+                  <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$JcrPath">
+                    <field name="path">
+                      <string>Private/Music</string>
+                    </field>
+                    <field name="permissions">
+                      <collection type="java.util.ArrayList"/>
+                    </field>
+                    <field name="mixinTypes">
+                      <collection type="java.util.ArrayList">
+                        <value>
+                          <string>exo:musicFolder</string>
+                        </value>
+                      </collection>
+                    </field>
+                    <field name="alias">
+                      <string>userPrivateAudio</string>
+                    </field>
+                  </object>
+                </value>
+                <value>
+                  <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$JcrPath">
+                    <field name="path">
+                      <string>Private/Pictures</string>
+                    </field>
+                    <field name="permissions">
+                      <collection type="java.util.ArrayList"/>
+                    </field>
+                    <field name="mixinTypes">
+                      <collection type="java.util.ArrayList">
+                        <value>
+                          <string>exo:pictureFolder</string>
+                        </value>
+                      </collection>
+                    </field>
+                    <field name="alias">
+                      <string>userPrivatePicture</string>
+                    </field>
+                  </object>
+                </value>
+                <value>
+                  <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$JcrPath">
+                    <field name="path">
+                      <string>Private/Searches</string>
+                    </field>
+                    <field name="permissions">
+                      <collection type="java.util.ArrayList"/>
+                    </field>
+                    <field name="mixinTypes">
+                      <collection type="java.util.ArrayList">
+                        <value>
+                          <string>exo:searchFolder</string>
+                        </value>
+                        <value>
+                          <string>exo:hiddenable</string>
+                        </value>
+                      </collection>
+                    </field>
+                    <field name="alias">
+                      <string>userPrivateSearches</string>
+                    </field>
+                  </object>
+                </value>
+                <value>
+                  <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$JcrPath">
+                    <field name="path">
+                      <string>Private/Favorites</string>
+                    </field>
+                    <field name="permissions">
+                      <collection type="java.util.ArrayList"/>
+                    </field>
+                    <field name="mixinTypes">
+                      <collection type="java.util.ArrayList">
+                        <value>
+                          <string>exo:favoriteFolder</string>
+                        </value>
+                      </collection>
+                    </field>
+                    <field name="alias">
+                      <string>userPrivateFavorites</string>
+                    </field>
+                  </object>
+                </value>
+                <value>
+                  <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$JcrPath">
+                    <field name="path">
+                      <string>Private/Folksonomy</string>
+                    </field>
+                    <field name="permissions">
+                      <collection type="java.util.ArrayList"/>
+                    </field>
+                    <field name="mixinTypes">
+                      <collection type="java.util.ArrayList">
+                        <value>
+                          <string>exo:folksonomyFolder</string>
+                        </value>
+                        <value>
+                          <string>exo:hiddenable</string>
+                        </value>
+                      </collection>
+                    </field>
+                    <field name="alias">
+                      <string>userPrivateFolksonomy</string>
+                    </field>
+                  </object>
+                </value>
+                <value>
+                  <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$JcrPath">
+                    <field name="path">
+                      <string>Public</string>
+                    </field>
+                    <field name="permissions">
+                      <collection type="java.util.ArrayList">
+                        <value>
+                          <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$Permission">
+                            <field name="read">
+                              <string>true</string>
+                            </field>
+                            <field name="addNode">
+                              <string>false</string>
+                            </field>
+                            <field name="identity">
+                              <string>any</string>
+                            </field>
+                            <field name="setProperty">
+                              <string>false</string>
+                            </field>
+                            <field name="remove">
+                              <string>false</string>
+                            </field>
+                          </object>
+                        </value>
+                      </collection>
+                    </field>
+                    <field name="mixinTypes">
+                      <collection type="java.util.ArrayList"/>
+                    </field>
+                    <field name="alias">
+                      <string>userPublic</string>
+                    </field>
+                    <field name="nodeType">
+                      <string>nt:unstructured</string>
+                    </field>
+                  </object>
+                </value>
+              </collection>
+            </field>
+            <field name="jcrLinks">
+              <collection type="java.util.ArrayList">
+                <value>
+                  <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$JcrLink">                 
+                    <field name="sourcePath"><string>Public</string></field>
+                    <field name="targetPath"><string>Private/Public</string></field>
+                  </object>
+                </value>
+             </collection>
+            </field>
+          </object>
+        </object-param>
+      </init-params>
+    </component-plugin>
+  </external-component-plugins>
+  
 </configuration>
