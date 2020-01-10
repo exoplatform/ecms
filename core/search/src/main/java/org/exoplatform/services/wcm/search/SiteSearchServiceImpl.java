@@ -218,33 +218,7 @@ public class SiteSearchServiceImpl implements SiteSearchService {
                                                       Locale locale,
                                                       int pageSize,
                                                       boolean isSearchContent) throws Exception {
-    ManageableRepository currentRepository = repositoryService.getCurrentRepository();
-    Session session = sessionProvider.getSession("portal-system", currentRepository);
-    QueryManager queryManager = session.getWorkspace().getQueryManager();
-    long startTime = System.currentTimeMillis();
-    Query query = createSearchPageQuery(queryCriteria, queryManager);
-    if (query == null) {
-      return new ArrayNodePageList<>(pageSize);
-    }
-    String suggestion = getSpellSuggestion(queryCriteria.getKeyword(), currentRepository);
-    if (LOG.isDebugEnabled()) {
-      LOG.debug("execute query: " + query.getStatement().toLowerCase());
-    }
-    AbstractPageList<ResultNode> pageList = PageListFactory.createPageList(query.getStatement(),
-                                                                           locale,
-                                                                           session.getWorkspace()
-                                                                                  .getName(),
-                                                                           query.getLanguage(),
-                                                                           true,
-                                                                           new PageNodeFilter(),
-                                                                           new PageDataCreator(),
-                                                                           pageSize,
-                                                                           0);
-
-    long queryTime = System.currentTimeMillis() - startTime;
-    pageList.setQueryTime(queryTime);
-    pageList.setSpellSuggestion(suggestion);
-    return pageList;
+    throw new UnsupportedOperationException();
   }
 
   @Override
@@ -275,7 +249,7 @@ public class SiteSearchServiceImpl implements SiteSearchService {
     foundNodeCache.remove(key);
     dropNodeCache.remove(key);
   }
-  
+
   private Query createSearchPageQuery(QueryCriteria queryCriteria, QueryManager queryManager) throws Exception {
     SQLQueryBuilder queryBuilder = new SQLQueryBuilder();
     List<String> mopPages = this.searchPageByTitle(queryCriteria.getSiteName(),
@@ -294,7 +268,7 @@ public class SiteSearchServiceImpl implements SiteSearchService {
     QueryProperty prop = queryCriteria.new QueryProperty();
     prop.setName("exo:name");
     prop.setValue("mop:" + queryCriteria.getKeyword().toLowerCase());
-    queryProps.add(prop);    
+    queryProps.add(prop);
     queryCriteria.setQueryMetadatas(queryProps.toArray(new QueryProperty[queryProps.size()]));
     mapQueryTypes(queryCriteria, queryBuilder);
     if (queryCriteria.isFulltextSearch()) {

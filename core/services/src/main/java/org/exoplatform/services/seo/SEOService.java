@@ -3,6 +3,7 @@ package org.exoplatform.services.seo;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import javax.jcr.Node;
 
@@ -14,7 +15,11 @@ import javax.jcr.Node;
  * @LevelAPI Experimental
  */
 public interface SEOService {
- 
+
+  String SAVE_SEO = "org.exoplatform.ecms.seo.save";
+
+  String SEO_REMOVE = "org.exoplatform.ecms.seo.remove";
+
   /**
    * Stores metadata of a given page/content.
    * 
@@ -45,6 +50,8 @@ public interface SEOService {
    * @throws Exception The exception
    */
   public PageMetadataModel getPageMetadata(String pageReference, String language) throws Exception;
+
+  public Map<String, PageMetadataModel> getPageMetadatas(String id, String siteName) throws Exception;
 
   /**
    * Gets metadata of a content page.
