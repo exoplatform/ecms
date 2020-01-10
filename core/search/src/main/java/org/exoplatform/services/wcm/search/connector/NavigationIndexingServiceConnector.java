@@ -145,6 +145,9 @@ public class NavigationIndexingServiceConnector extends ElasticIndexingServiceCo
   private String getSEO(NodeData node) {
     try {
       NavigationData nav = this.navigationStore.loadNavigationData(Safe.parseLong(node.getId()));
+      if (!SiteType.PORTAL.equals(nav.getSiteKey().getType())) {
+        return null;
+      }
       String siteName = Text.escapeIllegalJcrChars(nav.getSiteKey().getName());
       final Map<String, PageMetadataModel> metaModels = seoService.getPageMetadatas(node.getId(), siteName);
       if (metaModels != null && metaModels.size() > 0) {
