@@ -61,10 +61,10 @@ import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 public class CustomizeViewPlugin extends ManageViewPlugin {
 
   /** The Constant PROVIDER_SCOPE_NAME. */
-  protected static final String        PROVIDER_SCOPE_NAME   = "customize.view.provider".intern();
+  protected static final String        PROVIDER_SCOPE_NAME   = "documents".intern();
 
   /** The Constant VIEW_CUSTOMIZED_PARAM. */
-  protected static final String        VIEW_CUSTOMIZED_PARAM = "view.customized.param".intern();
+  protected static final String        VIEW_CUSTOMIZED_PARAM = "documents.views.customized".intern();
 
   /** The params. */
   protected final InitParams           params;
@@ -150,11 +150,10 @@ public class CustomizeViewPlugin extends ManageViewPlugin {
     SettingValue<?> isViewCustomized = settingService.get(Context.GLOBAL,
                                                           Scope.GLOBAL.id(PROVIDER_SCOPE_NAME),
                                                           VIEW_CUSTOMIZED_PARAM);
-    if (isViewCustomized != null && !((Boolean) isViewCustomized.getValue())) {
+    if (isViewCustomized == null || !((Boolean) isViewCustomized.getValue())) {
       importCustomizedViews();
-    } else {
       settingService.set(Context.GLOBAL, Scope.GLOBAL.id(PROVIDER_SCOPE_NAME), VIEW_CUSTOMIZED_PARAM, SettingValue.create(true));
-    }
+    } 
   }
 
   /// ****** internals ******
