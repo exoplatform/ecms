@@ -53,7 +53,7 @@ public class NewDocumentManageComponent extends UIAbstractManagerComponent {
 
   /** The Constant FILTERS. */
   private static final List<UIExtensionFilter> FILTERS = Arrays.asList(new UIExtensionFilter[] {
-                                                                                                 new IsTemplatePluginPresentFilter(),
+                                                                                                 new IsNewDocumentTemplatePresentFilter(),
                                                                                                  new IsNotNtFileFilter(),
                                                                                                  new CanAddNodeFilter(),
                                                                                                  new IsNotLockedFilter(),

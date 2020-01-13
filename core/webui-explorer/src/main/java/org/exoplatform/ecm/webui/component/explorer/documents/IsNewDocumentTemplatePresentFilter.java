@@ -8,14 +8,14 @@ import org.exoplatform.webui.ext.filter.UIExtensionFilterType;
 
 
 /**
- * The Class IsTemplatePluginPresentFilter checks if any NewDocumentTemplatePlugin is registered.
+ * The Class IsNewDocumentTemplatePresentFilter checks if any NewDocumentTemplatePlugin is registered.
  */
-public class IsTemplatePluginPresentFilter extends UIExtensionAbstractFilter {
+public class IsNewDocumentTemplatePresentFilter extends UIExtensionAbstractFilter {
 
   /**
    * Instantiates a new checks if is template plugin present filter.
    */
-  public IsTemplatePluginPresentFilter() {
+  public IsNewDocumentTemplatePresentFilter() {
     this(null);
   }
 
@@ -24,7 +24,7 @@ public class IsTemplatePluginPresentFilter extends UIExtensionAbstractFilter {
    *
    * @param messageKey the message key
    */
-  public IsTemplatePluginPresentFilter(String messageKey) {
+  public IsNewDocumentTemplatePresentFilter(String messageKey) {
     super(messageKey, UIExtensionFilterType.MANDATORY);
   }
 
@@ -37,8 +37,8 @@ public class IsTemplatePluginPresentFilter extends UIExtensionAbstractFilter {
    */
   @Override
   public boolean accept(Map<String, Object> context) throws Exception {
-    NewDocumentServiceImpl documentService = ExoContainerContext.getCurrentContainer()
-                                                            .getComponentInstanceOfType(NewDocumentServiceImpl.class);
+    NewDocumentService documentService = ExoContainerContext.getCurrentContainer()
+                                                            .getComponentInstanceOfType(NewDocumentService.class);
 
     if (documentService != null) {
       return documentService.hasDocumentTemplatePlugins();
