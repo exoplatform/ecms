@@ -30,6 +30,10 @@ import javax.jcr.Property;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 
+import org.exoplatform.commons.api.settings.SettingService;
+import org.exoplatform.commons.api.settings.SettingValue;
+import org.exoplatform.commons.api.settings.data.Context;
+import org.exoplatform.commons.api.settings.data.Scope;
 import org.exoplatform.container.configuration.ConfigurationManager;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.container.xml.ObjectParameter;
@@ -56,6 +60,12 @@ import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
  */
 public class CustomizeViewPlugin extends ManageViewPlugin {
 
+  /** The Constant PROVIDER_SCOPE_NAME. */
+  protected static final String        PROVIDER_SCOPE_NAME   = "customize.view.provider".intern();
+
+  /** The Constant VIEW_CUSTOMIZED_PARAM. */
+  protected static final String        VIEW_CUSTOMIZED_PARAM = "view.customized.param".intern();
+
   /** The params. */
   protected final InitParams           params;
 
@@ -71,14 +81,17 @@ public class CustomizeViewPlugin extends ManageViewPlugin {
   /** The dms configuration. */
   protected final DMSConfiguration     dmsConfiguration;
 
+  /** The setting service. */
+  protected final SettingService       settingService;
+
   /** The template service. */
   protected final TemplateService      templateService;
 
   /** The configured template. */
-  protected final Set<String>          configuredTemplate = new HashSet<String>();
+  protected final Set<String>          configuredTemplate    = new HashSet<String>();
 
   /** The configured views. */
-  protected final Set<String>          configuredViews    = new HashSet<String>();
+  protected final Set<String>          configuredViews       = new HashSet<String>();
 
   /**
    * Instantiates a new customize view plugin.
@@ -89,6 +102,7 @@ public class CustomizeViewPlugin extends ManageViewPlugin {
    * @param nodeHierarchyCreator the node hierarchy creator
    * @param dmsConfiguration the dms configuration
    * @param templateService the template service
+   * @param settingService the setting service
    * @throws Exception the exception
    */
   public CustomizeViewPlugin(RepositoryService repositoryService,
@@ -96,7 +110,8 @@ public class CustomizeViewPlugin extends ManageViewPlugin {
                              ConfigurationManager cservice,
                              NodeHierarchyCreator nodeHierarchyCreator,
                              DMSConfiguration dmsConfiguration,
-                             TemplateService templateService)
+                             TemplateService templateService,
+                             SettingService settingService)
       throws Exception {
     super(repositoryService, params, cservice, nodeHierarchyCreator, dmsConfiguration);
 
@@ -106,6 +121,7 @@ public class CustomizeViewPlugin extends ManageViewPlugin {
     this.cservice = cservice;
     this.dmsConfiguration = dmsConfiguration;
     this.templateService = templateService;
+    this.settingService = settingService;
   }
 
   /**
@@ -127,11 +143,18 @@ public class CustomizeViewPlugin extends ManageViewPlugin {
   }
 
   /**
-   * {@inheritDoc}
+   * {@inheritDoc}  
    */
   @Override
   public void init() throws Exception {
-    importCustomizedViews();
+    SettingValue<?> isViewCustomized = settingService.get(Context.GLOBAL,
+                                                          Scope.GLOBAL.id(PROVIDER_SCOPE_NAME),
+                                                          VIEW_CUSTOMIZED_PARAM);
+    if (isViewCustomized != null && !((Boolean) isViewCustomized.getValue())) {
+      importCustomizedViews();
+    } else {
+      settingService.set(Context.GLOBAL, Scope.GLOBAL.id(PROVIDER_SCOPE_NAME), VIEW_CUSTOMIZED_PARAM, SettingValue.create(true));
+    }
   }
 
   /// ****** internals ******
