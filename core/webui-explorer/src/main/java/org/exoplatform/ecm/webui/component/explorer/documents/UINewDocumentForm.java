@@ -35,6 +35,10 @@ import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
+import org.exoplatform.services.cms.documents.DocumentService;
+import org.exoplatform.services.cms.documents.DocumentTemplate;
+import org.exoplatform.services.cms.documents.NewDocumentEditorPlugin;
+import org.exoplatform.services.cms.documents.NewDocumentTemplatePlugin;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.web.application.ApplicationMessage;
@@ -73,14 +77,14 @@ public class UINewDocumentForm extends UIForm implements UIPopupComponent {
   protected static final Log       LOG                   = ExoLogger.getLogger(UINewDocumentForm.class.getName());
 
   /** The document service. */
-  protected NewDocumentServiceImpl documentService;
+  protected DocumentService documentService;
 
   /**
    * Constructor.
    *
    */
   public UINewDocumentForm() {
-    this.documentService = this.getApplicationComponent(NewDocumentServiceImpl.class);
+    this.documentService = this.getApplicationComponent(DocumentService.class);
     // Title textbox
     UIFormStringInput titleTextBox = new UIFormStringInput(FIELD_TITLE_TEXT_BOX, FIELD_TITLE_TEXT_BOX, null);
     this.addUIFormInput(titleTextBox);
@@ -151,8 +155,8 @@ public class UINewDocumentForm extends UIForm implements UIPopupComponent {
                                                                                                 .get();
       String provider = selectedOption.getProvider();
       String label = selectedOption.getLabel();
-      NewDocumentServiceImpl documentService = ExoContainerContext.getCurrentContainer()
-                                                                  .getComponentInstanceOfType(NewDocumentServiceImpl.class);
+      DocumentService documentService = ExoContainerContext.getCurrentContainer()
+                                                                  .getComponentInstanceOfType(DocumentService.class);
 
       DocumentTemplate template = documentService.getDocumentTemplate(provider, label);
 

@@ -1,4 +1,4 @@
-package org.exoplatform.ecm.webui.component.explorer.documents;
+package org.exoplatform.services.cms.documents;
 
 /**
  * The Interface NewDocumentEditorPlugin provides API for handling such events from New Document feature: 

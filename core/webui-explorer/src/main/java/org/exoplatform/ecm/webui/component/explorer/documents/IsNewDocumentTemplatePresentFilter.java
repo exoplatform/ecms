@@ -3,6 +3,7 @@ package org.exoplatform.ecm.webui.component.explorer.documents;
 import java.util.Map;
 
 import org.exoplatform.container.ExoContainerContext;
+import org.exoplatform.services.cms.documents.DocumentService;
 import org.exoplatform.webui.ext.filter.UIExtensionAbstractFilter;
 import org.exoplatform.webui.ext.filter.UIExtensionFilterType;
 
@@ -37,8 +38,8 @@ public class IsNewDocumentTemplatePresentFilter extends UIExtensionAbstractFilte
    */
   @Override
   public boolean accept(Map<String, Object> context) throws Exception {
-    NewDocumentService documentService = ExoContainerContext.getCurrentContainer()
-                                                            .getComponentInstanceOfType(NewDocumentService.class);
+    DocumentService documentService = ExoContainerContext.getCurrentContainer()
+                                                            .getComponentInstanceOfType(DocumentService.class);
 
     if (documentService != null) {
       return documentService.hasDocumentTemplatePlugins();

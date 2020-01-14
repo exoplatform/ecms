@@ -150,7 +150,7 @@ public class CustomizeViewPlugin extends ManageViewPlugin {
     SettingValue<?> isViewCustomized = settingService.get(Context.GLOBAL,
                                                           Scope.GLOBAL.id(PROVIDER_SCOPE_NAME),
                                                           VIEW_CUSTOMIZED_PARAM);
-    if (isViewCustomized == null || !((Boolean) isViewCustomized.getValue())) {
+    if (isViewCustomized == null || !(Boolean.valueOf(isViewCustomized.getValue().toString()))) {
       importCustomizedViews();
       settingService.set(Context.GLOBAL, Scope.GLOBAL.id(PROVIDER_SCOPE_NAME), VIEW_CUSTOMIZED_PARAM, SettingValue.create(true));
     } 

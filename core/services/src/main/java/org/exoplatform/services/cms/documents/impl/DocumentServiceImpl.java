@@ -16,20 +16,49 @@
  */
 package org.exoplatform.services.cms.documents.impl;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.ResourceBundle;
+
+import javax.jcr.Node;
+import javax.jcr.NodeIterator;
+import javax.jcr.RepositoryException;
+import javax.jcr.Session;
+
+import org.gatein.api.Portal;
+import org.gatein.api.navigation.Navigation;
+import org.gatein.api.navigation.Nodes;
+import org.gatein.api.site.SiteId;
+
 import org.exoplatform.commons.utils.CommonsUtils;
+import org.exoplatform.container.component.ComponentPlugin;
 import org.exoplatform.container.xml.PortalContainerInfo;
 import org.exoplatform.portal.config.UserPortalConfig;
 import org.exoplatform.portal.config.UserPortalConfigService;
 import org.exoplatform.portal.mop.SiteKey;
 import org.exoplatform.portal.mop.user.UserNavigation;
 import org.exoplatform.portal.mop.user.UserPortalContext;
+import org.exoplatform.resolver.ApplicationResourceResolver;
+import org.exoplatform.resolver.ResourceResolver;
 import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.documents.DocumentService;
+import org.exoplatform.services.cms.documents.DocumentTemplate;
+import org.exoplatform.services.cms.documents.NewDocumentEditorPlugin;
+import org.exoplatform.services.cms.documents.NewDocumentTemplatePlugin;
 import org.exoplatform.services.cms.documents.model.Document;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.drives.ManageDriveService;
 import org.exoplatform.services.cms.drives.impl.ManageDriveServiceImpl;
 import org.exoplatform.services.cms.impl.Utils;
+import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
@@ -37,22 +66,13 @@ import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.jcr.impl.core.NodeImpl;
+import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
-import org.gatein.api.Portal;
-import org.gatein.api.navigation.Navigation;
-import org.gatein.api.navigation.Nodes;
-import org.gatein.api.site.SiteId;
-
-import javax.jcr.Node;
-import javax.jcr.NodeIterator;
-import javax.jcr.RepositoryException;
-import javax.jcr.Session;
-import java.net.URLEncoder;
-import java.util.*;
+import org.exoplatform.webui.application.WebuiRequestContext;
 
 /**
  * Created by The eXo Platform SAS Author : eXoPlatform exo@exoplatform.com Mar
@@ -60,18 +80,26 @@ import java.util.*;
  */
 public class DocumentServiceImpl implements DocumentService {
 
+  private static final String NT_RESOURCE = "nt:resource";
   public static final String MIX_REFERENCEABLE = "mix:referenceable";
   public static final String EXO_LAST_MODIFIER_PROP = "exo:lastModifier";
   public static final String EXO_DATE_CREATED_PROP = "exo:dateCreated";
+  public static final String EXO_TITLE_PROP = "exo:title";
+  public static final String EXO_RSS_ENABLE_PROP = "exo:rss-enable";
+  public static final String NT_FILE = "nt:file";
   public static final String JCR_LAST_MODIFIED_PROP = "jcr:lastModified";
   public static final String JCR_CONTENT = "jcr:content";
+  public static final String JCR_MIME_TYPE = "jcr:mimeType";
+  public static final String JCR_DATA = "jcr:data";
   public static final String EXO_OWNER_PROP = "exo:owner";
-  public static final String EXO_TITLE_PROP = "exo:title";
   public static final String CURRENT_STATE_PROP = "publication:currentState";
   public static final String DOCUMENTS_APP_NAVIGATION_NODE_NAME = "documents";
   public static final String DOCUMENT_NOT_FOUND = "?path=doc-not-found";
   private static final String DOCUMENTS_NODE = "Documents";
   private static final String SHARED_NODE = "Shared";
+  private static final String MIX_VERSIONABLE = "mix:versionable";
+  private final Map<String, NewDocumentTemplatePlugin> templatePlugins   = new HashMap<>();
+  private final Map<String, NewDocumentEditorPlugin>   editorPlugins     = new HashMap<>();
   private static final Log LOG                 = ExoLogger.getLogger(DocumentServiceImpl.class);
   private ManageDriveService manageDriveService;
   private Portal portal;
@@ -408,6 +436,125 @@ public class DocumentServiceImpl implements DocumentService {
       LOG.error(e.getMessage(), e);
       return "";
     }
+  }
+  
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void addDocumentTemplatePlugin(ComponentPlugin plugin) {
+    Class<NewDocumentTemplatePlugin> pclass = NewDocumentTemplatePlugin.class;
+    if (pclass.isAssignableFrom(plugin.getClass())) {
+      NewDocumentTemplatePlugin newPlugin = pclass.cast(plugin);
+
+      LOG.info("Adding NewDocumentTemplatePlugin [{}]", newPlugin.toString());
+      templatePlugins.put(newPlugin.getProvider(), newPlugin);
+      if (LOG.isDebugEnabled()) {
+        LOG.debug("Registered NewDocumentTemplatePlugin instance of {}", plugin.getClass().getName());
+      }
+    } else {
+      LOG.error("The NewDocumentTemplatePlugin plugin is not an instance of " + pclass.getName());
+    }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void addDocumentEditorPlugin(ComponentPlugin plugin) {
+    Class<NewDocumentEditorPlugin> pclass = NewDocumentEditorPlugin.class;
+    if (pclass.isAssignableFrom(plugin.getClass())) {
+      NewDocumentEditorPlugin newPlugin = pclass.cast(plugin);
+
+      LOG.info("Adding NewDocumentEditorPlugin [{}]", newPlugin.toString());
+      editorPlugins.put(newPlugin.getProvider(), newPlugin);
+      if (LOG.isDebugEnabled()) {
+        LOG.debug("Registered NewDocumentEditorPlugin instance of {}", plugin.getClass().getName());
+      }
+    } else {
+      LOG.error("The NewDocumentEditorPlugin plugin is not an instance of " + pclass.getName());
+    }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public Node createDocumentFromTemplate(Node currentNode, String title, DocumentTemplate template) throws Exception {
+    InputStream data = new ByteArrayInputStream(new byte[0]);
+    if (template.getPath() != null && !template.getPath().trim().isEmpty()) {
+      WebuiRequestContext context = WebuiRequestContext.getCurrentInstance();
+      ApplicationResourceResolver appResolver = context.getApplication().getResourceResolver();
+      ResourceResolver resolver = appResolver.getResourceResolver(template.getPath());
+      data = resolver.getInputStream(template.getPath());
+    }
+    // Add node
+    Node addedNode = currentNode.addNode(title, NT_FILE);
+
+    // Set title
+    if (!addedNode.hasProperty(EXO_TITLE_PROP)) {
+      addedNode.addMixin(EXO_RSS_ENABLE_PROP);
+    }
+    // Enable versioning
+    if (addedNode.canAddMixin(MIX_VERSIONABLE)) {
+      addedNode.addMixin(MIX_VERSIONABLE);
+    }
+
+    addedNode.setProperty(EXO_TITLE_PROP, title);
+    Node content = addedNode.addNode(JCR_CONTENT, NT_RESOURCE);
+
+    content.setProperty(JCR_DATA, data);
+    content.setProperty(JCR_MIME_TYPE, template.getMimeType());
+    content.setProperty(JCR_LAST_MODIFIED_PROP, new GregorianCalendar());
+    ListenerService listenerService = WCMCoreUtils.getService(ListenerService.class);
+    listenerService.broadcast(ActivityCommonService.FILE_CREATED_ACTIVITY, null, addedNode);
+    currentNode.save();
+    data.close();
+    return addedNode;
+  }
+  
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public DocumentTemplate getDocumentTemplate(String provider, String label) {
+    NewDocumentTemplatePlugin plugin = templatePlugins.get(provider);
+    if (plugin != null) {
+      return plugin.getTemplates().stream().filter(template -> template.getLabel().equals(label)).findFirst().get();
+    }
+    return null;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public NewDocumentTemplatePlugin getDocumentTemplatePlugin(String provider) {
+    return templatePlugins.get(provider);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public NewDocumentEditorPlugin getDocumentEditorPlugin(String provider) {
+    return editorPlugins.get(provider);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public Map<String, NewDocumentTemplatePlugin> getRegisteredTemplatePlugins() {
+    return templatePlugins;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public boolean hasDocumentTemplatePlugins() {
+    return templatePlugins.size() > 0;
   }
 
 }

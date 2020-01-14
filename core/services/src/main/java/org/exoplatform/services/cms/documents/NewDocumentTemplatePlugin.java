@@ -1,4 +1,4 @@
-package org.exoplatform.ecm.webui.component.explorer.documents;
+package org.exoplatform.services.cms.documents;
 
 import java.util.List;
 
