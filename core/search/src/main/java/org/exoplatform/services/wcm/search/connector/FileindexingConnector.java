@@ -145,6 +145,11 @@ public class FileindexingConnector extends ElasticIndexingServiceConnector {
       if(node.hasProperty("jcr:created")) {
         fields.put("createdDate", String.valueOf(node.getProperty("jcr:created").getDate().getTimeInMillis()));
       }
+      if (node.hasProperty("exo:lastModifiedDate")) {
+        fields.put("lastUpdatedDate", String.valueOf(node.getProperty("exo:lastModifiedDate").getDate().getTimeInMillis()));
+      } else {
+        fields.put("lastUpdatedDate", fields.get("createdDate"));
+      }
 
       Node contentNode = node.getNode(NodetypeConstant.JCR_CONTENT);
       if(contentNode != null) {
