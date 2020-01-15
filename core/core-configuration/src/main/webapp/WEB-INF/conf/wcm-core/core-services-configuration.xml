@@ -300,7 +300,6 @@
                     <name>messageConfig</name>
                     <description>Message Configuration</description>
                     <object type="org.exoplatform.services.cms.watch.impl.MessageConfig">
-                        <field name="sender"><string>${gatein.ecms.watchdocument.sender:support@exoplatform.com}</string></field>
                         <field name="subject"><string>${gatein.ecms.watchdocument.subject:Your watching document is changed}</string></field>
                         <field name="mimeType"><string>${gatein.ecms.watchdocument.mimetype:text/html}</string></field>
                         <field name="content">
