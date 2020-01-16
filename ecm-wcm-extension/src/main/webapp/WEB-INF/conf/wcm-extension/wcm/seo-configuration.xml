@@ -88,6 +88,15 @@
   </external-component-plugins>
 
   <external-component-plugins>
+    <target-component>org.exoplatform.web.application.ApplicationLifecycleExtension</target-component>
+    <component-plugin>
+      <name>SEOPageMetadataApplicationLifecycle</name>
+      <set-method>addPortalApplicationLifecycle</set-method>
+      <type>org.exoplatform.wcm.webui.SEOPageMetadataApplicationLifecycle</type>
+    </component-plugin>
+  </external-component-plugins>
+
+  <external-component-plugins>
     <target-component>org.exoplatform.groovyscript.text.TemplateService</target-component>
     <component-plugin>
       <name>UIPortalApplication-head</name>
