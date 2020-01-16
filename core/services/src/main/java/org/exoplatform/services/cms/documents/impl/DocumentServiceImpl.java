@@ -21,12 +21,13 @@ import java.io.InputStream;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.GregorianCalendar;
-import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.Set;
 
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
@@ -80,36 +81,70 @@ import org.exoplatform.webui.application.WebuiRequestContext;
  */
 public class DocumentServiceImpl implements DocumentService {
 
-  private static final String NT_RESOURCE = "nt:resource";
-  public static final String MIX_REFERENCEABLE = "mix:referenceable";
-  public static final String EXO_LAST_MODIFIER_PROP = "exo:lastModifier";
-  public static final String EXO_DATE_CREATED_PROP = "exo:dateCreated";
-  public static final String EXO_TITLE_PROP = "exo:title";
-  public static final String EXO_RSS_ENABLE_PROP = "exo:rss-enable";
-  public static final String NT_FILE = "nt:file";
-  public static final String JCR_LAST_MODIFIED_PROP = "jcr:lastModified";
-  public static final String JCR_CONTENT = "jcr:content";
-  public static final String JCR_MIME_TYPE = "jcr:mimeType";
-  public static final String JCR_DATA = "jcr:data";
-  public static final String EXO_OWNER_PROP = "exo:owner";
-  public static final String CURRENT_STATE_PROP = "publication:currentState";
-  public static final String DOCUMENTS_APP_NAVIGATION_NODE_NAME = "documents";
-  public static final String DOCUMENT_NOT_FOUND = "?path=doc-not-found";
-  private static final String DOCUMENTS_NODE = "Documents";
-  private static final String SHARED_NODE = "Shared";
-  private static final String MIX_VERSIONABLE = "mix:versionable";
-  private final Map<String, NewDocumentTemplatePlugin> templatePlugins   = new HashMap<>();
-  private final Map<String, NewDocumentEditorPlugin>   editorPlugins     = new HashMap<>();
-  private static final Log LOG                 = ExoLogger.getLogger(DocumentServiceImpl.class);
-  private ManageDriveService manageDriveService;
-  private Portal portal;
-  private SessionProviderService sessionProviderService;
-  private RepositoryService repoService;
-  private NodeHierarchyCreator nodeHierarchyCreator;
-  private LinkManager linkManager;
-  private PortalContainerInfo portalContainerInfo;
+  private static final String                  NT_RESOURCE                        = "nt:resource";
 
-  public DocumentServiceImpl(ManageDriveService manageDriveService, Portal portal, SessionProviderService sessionProviderService, RepositoryService repoService, NodeHierarchyCreator nodeHierarchyCreator, LinkManager linkManager, PortalContainerInfo portalContainerInfo) {
+  public static final String                   MIX_REFERENCEABLE                  = "mix:referenceable";
+
+  public static final String                   EXO_LAST_MODIFIER_PROP             = "exo:lastModifier";
+
+  public static final String                   EXO_DATE_CREATED_PROP              = "exo:dateCreated";
+
+  public static final String                   EXO_TITLE_PROP                     = "exo:title";
+
+  public static final String                   EXO_RSS_ENABLE_PROP                = "exo:rss-enable";
+
+  public static final String                   NT_FILE                            = "nt:file";
+
+  public static final String                   JCR_LAST_MODIFIED_PROP             = "jcr:lastModified";
+
+  public static final String                   JCR_CONTENT                        = "jcr:content";
+
+  public static final String                   JCR_MIME_TYPE                      = "jcr:mimeType";
+
+  public static final String                   JCR_DATA                           = "jcr:data";
+
+  public static final String                   EXO_OWNER_PROP                     = "exo:owner";
+
+  public static final String                   CURRENT_STATE_PROP                 = "publication:currentState";
+
+  public static final String                   DOCUMENTS_APP_NAVIGATION_NODE_NAME = "documents";
+
+  public static final String                   DOCUMENT_NOT_FOUND                 = "?path=doc-not-found";
+
+  private static final String                  DOCUMENTS_NODE                     = "Documents";
+
+  private static final String                  SHARED_NODE                        = "Shared";
+
+  private static final String                  MIX_VERSIONABLE                    = "mix:versionable";
+
+  private final Set<NewDocumentTemplatePlugin> templatePlugins                    = new HashSet<>();
+
+  private final Set<NewDocumentEditorPlugin>   editorPlugins                      = new HashSet<>();
+
+  private static final Log                     LOG                                =
+                                                   ExoLogger.getLogger(DocumentServiceImpl.class);
+
+  private ManageDriveService                   manageDriveService;
+
+  private Portal                               portal;
+
+  private SessionProviderService               sessionProviderService;
+
+  private RepositoryService                    repoService;
+
+  private NodeHierarchyCreator                 nodeHierarchyCreator;
+
+  private LinkManager                          linkManager;
+
+  private PortalContainerInfo                  portalContainerInfo;
+
+  public DocumentServiceImpl(ManageDriveService manageDriveService,
+                             Portal portal,
+                             SessionProviderService sessionProviderService,
+                             RepositoryService repoService,
+                             NodeHierarchyCreator nodeHierarchyCreator,
+                             LinkManager linkManager,
+                             PortalContainerInfo portalContainerInfo) {
     this.manageDriveService = manageDriveService;
     this.sessionProviderService = sessionProviderService;
     this.repoService = repoService;
@@ -137,17 +172,23 @@ public class DocumentServiceImpl implements DocumentService {
     Calendar lastModified = (node.hasNode(JCR_CONTENT) ? node.getNode(JCR_CONTENT)
                                                              .getProperty(JCR_LAST_MODIFIED_PROP)
                                                              .getValue()
-                                                             .getDate() : null);
-    Calendar dateCreated = (node.hasProperty(EXO_DATE_CREATED_PROP) ? node.getProperty(EXO_DATE_CREATED_PROP)
-                                                                          .getValue()
-                                                                          .getDate()
-                                                                   : null);
-    String lastEditor = (node.hasProperty(EXO_LAST_MODIFIER_PROP) ? node.getProperty(EXO_LAST_MODIFIER_PROP)
-                                                                        .getValue()
-                                                                        .getString()
-                                                                 : "");
-    Document doc = new Document(id, node.getName(), title, node.getPath(), 
-                                ws, state, author, lastEditor, lastModified, dateCreated);
+                                                             .getDate()
+                                                       : null);
+    Calendar dateCreated = (node.hasProperty(EXO_DATE_CREATED_PROP) ? node.getProperty(EXO_DATE_CREATED_PROP).getValue().getDate()
+                                                                    : null);
+    String lastEditor =
+                      (node.hasProperty(EXO_LAST_MODIFIER_PROP) ? node.getProperty(EXO_LAST_MODIFIER_PROP).getValue().getString()
+                                                                : "");
+    Document doc = new Document(id,
+                                node.getName(),
+                                title,
+                                node.getPath(),
+                                ws,
+                                state,
+                                author,
+                                lastEditor,
+                                lastModified,
+                                dateCreated);
     return doc;
   }
 
@@ -161,7 +202,7 @@ public class DocumentServiceImpl implements DocumentService {
       SessionProvider sessionProvider = sessionProviderService.getSystemSessionProvider(null);
       ManageableRepository repository = repoService.getCurrentRepository();
       Session session = sessionProvider.getSession(repository.getConfiguration().getDefaultWorkspaceName(), repository);
-      //add symlink to user folder destination
+      // add symlink to user folder destination
       nodeHierarchyCreator.getJcrPath(BasePath.CMS_USERS_PATH);
       rootNode = (Node) session.getItem(nodeHierarchyCreator.getJcrPath(BasePath.CMS_USERS_PATH) + getPrivatePath(username));
       String sharedLink = getSharedLink(currentNode, rootNode);
@@ -182,7 +223,7 @@ public class DocumentServiceImpl implements DocumentService {
       SessionProvider sessionProvider = sessionProviderService.getSystemSessionProvider(null);
       ManageableRepository repository = repoService.getCurrentRepository();
       Session session = sessionProvider.getSession(repository.getConfiguration().getDefaultWorkspaceName(), repository);
-      //add symlink to space destination
+      // add symlink to space destination
       nodeHierarchyCreator.getJcrPath(BasePath.CMS_GROUPS_PATH);
       rootNode = (Node) session.getItem(nodeHierarchyCreator.getJcrPath(BasePath.CMS_GROUPS_PATH) + spaceId);
       String sharedLink = getSharedLink(currentNode, rootNode);
@@ -205,13 +246,13 @@ public class DocumentServiceImpl implements DocumentService {
     StringBuilder url = new StringBuilder();
     String containerName = portalContainerInfo.getContainerName();
     url.append("/")
-            .append(containerName)
-            .append("/private/")
-            .append(CommonsUtils.getRestContextName())
-            .append("/documents/view/")
-            .append(workspaceName)
-            .append("/")
-            .append(nodeId);
+       .append(containerName)
+       .append("/private/")
+       .append(CommonsUtils.getRestContextName())
+       .append("/documents/view/")
+       .append(workspaceName)
+       .append("/")
+       .append(nodeId);
     return url.toString();
   }
 
@@ -224,7 +265,7 @@ public class DocumentServiceImpl implements DocumentService {
    */
   @Override
   public String getLinkInDocumentsApp(String nodePath) throws Exception {
-    if(nodePath == null) {
+    if (nodePath == null) {
       return null;
     }
 
@@ -243,7 +284,7 @@ public class DocumentServiceImpl implements DocumentService {
    */
   @Override
   public String getLinkInDocumentsApp(String nodePath, DriveData drive) throws Exception {
-    if(nodePath == null) {
+    if (nodePath == null) {
       return null;
     }
 
@@ -252,17 +293,16 @@ public class DocumentServiceImpl implements DocumentService {
     url.append("/").append(containerName);
     if (drive == null) {
       SiteKey siteKey = getDefaultSiteKey();
-      url.append("/").append(siteKey.getName()).append("/").append(DOCUMENTS_APP_NAVIGATION_NODE_NAME)
-          .append(DOCUMENT_NOT_FOUND);
+      url.append("/").append(siteKey.getName()).append("/").append(DOCUMENTS_APP_NAVIGATION_NODE_NAME).append(DOCUMENT_NOT_FOUND);
       return url.toString();
     }
 
     String encodedDriveName = URLEncoder.encode(drive.getName(), "UTF-8");
     String encodedNodePath = URLEncoder.encode(nodePath, "UTF-8");
-    if(drive.getName().equals(ManageDriveServiceImpl.GROUPS_DRIVE_NAME)) {
+    if (drive.getName().equals(ManageDriveServiceImpl.GROUPS_DRIVE_NAME)) {
       // handle group drive case
       String groupId = drive.getParameters().get(ManageDriveServiceImpl.DRIVE_PARAMATER_GROUP_ID);
-      if(groupId != null) {
+      if (groupId != null) {
         String groupPageName;
         String[] splitedGroupId = groupId.split("/");
         if (splitedGroupId != null && splitedGroupId.length == 3 && splitedGroupId[1].equals("spaces")) {
@@ -277,28 +317,42 @@ public class DocumentServiceImpl implements DocumentService {
           // otherwise we use the portal documents application
           groupPageName = DOCUMENTS_APP_NAVIGATION_NODE_NAME;
         }
-        url.append("/g/").append(groupId.replaceAll("/", ":")).append("/").append(groupPageName)
-                .append("?path=").append(encodedDriveName).append(encodedNodePath)
-                .append("&").append(ManageDriveServiceImpl.DRIVE_PARAMATER_GROUP_ID).append("=").append(groupId);
+        url.append("/g/")
+           .append(groupId.replaceAll("/", ":"))
+           .append("/")
+           .append(groupPageName)
+           .append("?path=")
+           .append(encodedDriveName)
+           .append(encodedNodePath)
+           .append("&")
+           .append(ManageDriveServiceImpl.DRIVE_PARAMATER_GROUP_ID)
+           .append("=")
+           .append(groupId);
       } else {
         throw new Exception("Cannot get group id from node path " + nodePath);
       }
-    } else if(drive.getName().equals(ManageDriveServiceImpl.USER_DRIVE_NAME)
-            || drive.getName().equals(ManageDriveServiceImpl.PERSONAL_DRIVE_NAME)) {
+    } else if (drive.getName().equals(ManageDriveServiceImpl.USER_DRIVE_NAME)
+        || drive.getName().equals(ManageDriveServiceImpl.PERSONAL_DRIVE_NAME)) {
       // handle personal drive case
       SiteKey siteKey = getDefaultSiteKey();
-      url.append("/").append(siteKey.getName()).append("/").append(DOCUMENTS_APP_NAVIGATION_NODE_NAME)
-              .append("?path=" + encodedDriveName + encodedNodePath);
+      url.append("/")
+         .append(siteKey.getName())
+         .append("/")
+         .append(DOCUMENTS_APP_NAVIGATION_NODE_NAME)
+         .append("?path=" + encodedDriveName + encodedNodePath);
       String[] splitedNodePath = nodePath.split("/");
-      if(splitedNodePath != null && splitedNodePath.length >= 6) {
+      if (splitedNodePath != null && splitedNodePath.length >= 6) {
         String userId = splitedNodePath[5];
         url.append("&").append(ManageDriveServiceImpl.DRIVE_PARAMATER_USER_ID).append("=").append(userId);
       }
     } else {
       // default case
       SiteKey siteKey = getDefaultSiteKey();
-      url.append("/").append(siteKey.getName()).append("/").append(DOCUMENTS_APP_NAVIGATION_NODE_NAME)
-              .append("?path=" + encodedDriveName + encodedNodePath);
+      url.append("/")
+         .append(siteKey.getName())
+         .append("/")
+         .append(DOCUMENTS_APP_NAVIGATION_NODE_NAME)
+         .append("?path=" + encodedDriveName + encodedNodePath);
     }
 
     return url.toString();
@@ -314,9 +368,9 @@ public class DocumentServiceImpl implements DocumentService {
     String navigationName = null;
 
     Navigation spaceNavigation = portal.getNavigation(new SiteId(org.gatein.api.site.SiteType.SPACE, spaceGroupId));
-    if(spaceNavigation != null) {
+    if (spaceNavigation != null) {
       org.gatein.api.navigation.Node navigationRootNode = spaceNavigation.getRootNode(Nodes.visitChildren());
-      if(navigationRootNode != null && navigationRootNode.iterator().hasNext()) {
+      if (navigationRootNode != null && navigationRootNode.iterator().hasNext()) {
         // we assume there is only one root navigation node, that's how spaces work
         org.gatein.api.navigation.Node node = navigationRootNode.iterator().next();
         navigationName = node.getName();
@@ -347,15 +401,17 @@ public class DocumentServiceImpl implements DocumentService {
       }
       if (nodeDrive != null) {
         nodeDrive = nodeDrive.clone();
-        nodeDrive.getParameters().put(ManageDriveServiceImpl.DRIVE_PARAMATER_USER_ID,
-                                      splitedPath[2] + "/" + splitedPath[3] + "/" + splitedPath[4] + "/" + splitedPath[5]);
+        nodeDrive.getParameters()
+                 .put(ManageDriveServiceImpl.DRIVE_PARAMATER_USER_ID,
+                      splitedPath[2] + "/" + splitedPath[3] + "/" + splitedPath[4] + "/" + splitedPath[5]);
       }
     }
     if (splitedPath != null && splitedPath.length >= 2 && splitedPath[1].equals(ManageDriveServiceImpl.GROUPS_DRIVE_ROOT_NODE)) {
       int groupDocumentsRootNodeName = nodePath.indexOf("/Documents");
-      if(groupDocumentsRootNodeName >= 0) {
+      if (groupDocumentsRootNodeName >= 0) {
         // extract group id for doc path
-        String groupId = nodePath.substring(ManageDriveServiceImpl.GROUPS_DRIVE_ROOT_NODE.length() + 1, groupDocumentsRootNodeName);
+        String groupId =
+                       nodePath.substring(ManageDriveServiceImpl.GROUPS_DRIVE_ROOT_NODE.length() + 1, groupDocumentsRootNodeName);
         nodeDrive = manageDriveService.getDriveByName(groupId.replaceAll("/", "."));
       }
     }
@@ -371,20 +427,21 @@ public class DocumentServiceImpl implements DocumentService {
     return nodeDrive;
   }
 
-
   protected UserPortalConfig getDefaultUserPortalConfig() throws Exception {
     UserPortalConfigService userPortalConfigSer = WCMCoreUtils.getService(UserPortalConfigService.class);
     UserPortalContext NULL_CONTEXT = new UserPortalContext() {
       public ResourceBundle getBundle(UserNavigation navigation) {
         return null;
       }
+
       public Locale getUserLocale() {
         return Locale.ENGLISH;
       }
     };
-    String remoteId = ConversationState.getCurrent().getIdentity().getUserId() ;
-    UserPortalConfig userPortalCfg = userPortalConfigSer.
-            getUserPortalConfig(userPortalConfigSer.getDefaultPortal(), remoteId, NULL_CONTEXT);
+    String remoteId = ConversationState.getCurrent().getIdentity().getUserId();
+    UserPortalConfig userPortalCfg = userPortalConfigSer.getUserPortalConfig(userPortalConfigSer.getDefaultPortal(),
+                                                                             remoteId,
+                                                                             NULL_CONTEXT);
     return userPortalCfg;
   }
 
@@ -398,7 +455,8 @@ public class DocumentServiceImpl implements DocumentService {
   }
 
   private String getPrivatePath(String user) {
-    return "/" + user.substring(0, 1) + "___/" + user.substring(0, 2) + "___/" + user.substring(0, 3) + "___/" + user + "/Private";
+    return "/" + user.substring(0, 1) + "___/" + user.substring(0, 2) + "___/" + user.substring(0, 3) + "___/" + user
+        + "/Private";
   }
 
   private String getSharedLink(Node currentNode, Node rootNode) {
@@ -417,7 +475,7 @@ public class DocumentServiceImpl implements DocumentService {
       List<String> path = new ArrayList<>();
       Node targetNode = null;
       boolean existingSymlink = false;
-      for (NodeIterator it = shared.getNodes(); it.hasNext(); ) {
+      for (NodeIterator it = shared.getNodes(); it.hasNext();) {
         Node node = it.nextNode();
         path.add(((NodeImpl) node).getInternalPath().getAsString());
         if (path.contains(((NodeImpl) shared).getInternalPath().getAsString() + "[]" + currentNode.getName() + ":1")) {
@@ -431,13 +489,14 @@ public class DocumentServiceImpl implements DocumentService {
       } else {
         link = linkManager.createLink(shared, currentNode);
       }
-      return CommonsUtils.getCurrentDomain() + getShortLinkInDocumentsApp(link.getSession().getWorkspace().getName(), ((NodeImpl) link).getInternalIdentifier());
+      return CommonsUtils.getCurrentDomain()
+          + getShortLinkInDocumentsApp(link.getSession().getWorkspace().getName(), ((NodeImpl) link).getInternalIdentifier());
     } catch (Exception e) {
       LOG.error(e.getMessage(), e);
       return "";
     }
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -448,7 +507,7 @@ public class DocumentServiceImpl implements DocumentService {
       NewDocumentTemplatePlugin newPlugin = pclass.cast(plugin);
 
       LOG.info("Adding NewDocumentTemplatePlugin [{}]", newPlugin.toString());
-      templatePlugins.put(newPlugin.getProvider(), newPlugin);
+      templatePlugins.add(newPlugin);
       if (LOG.isDebugEnabled()) {
         LOG.debug("Registered NewDocumentTemplatePlugin instance of {}", plugin.getClass().getName());
       }
@@ -467,7 +526,7 @@ public class DocumentServiceImpl implements DocumentService {
       NewDocumentEditorPlugin newPlugin = pclass.cast(plugin);
 
       LOG.info("Adding NewDocumentEditorPlugin [{}]", newPlugin.toString());
-      editorPlugins.put(newPlugin.getProvider(), newPlugin);
+      editorPlugins.add(newPlugin);
       if (LOG.isDebugEnabled()) {
         LOG.debug("Registered NewDocumentEditorPlugin instance of {}", plugin.getClass().getName());
       }
@@ -512,41 +571,21 @@ public class DocumentServiceImpl implements DocumentService {
     data.close();
     return addedNode;
   }
-  
+
   /**
    * {@inheritDoc}
    */
   @Override
-  public DocumentTemplate getDocumentTemplate(String provider, String label) {
-    NewDocumentTemplatePlugin plugin = templatePlugins.get(provider);
-    if (plugin != null) {
-      return plugin.getTemplates().stream().filter(template -> template.getLabel().equals(label)).findFirst().get();
-    }
-    return null;
+  public Set<NewDocumentTemplatePlugin> getRegisteredTemplatePlugins() {
+    return Collections.unmodifiableSet(templatePlugins);
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public NewDocumentTemplatePlugin getDocumentTemplatePlugin(String provider) {
-    return templatePlugins.get(provider);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public NewDocumentEditorPlugin getDocumentEditorPlugin(String provider) {
-    return editorPlugins.get(provider);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public Map<String, NewDocumentTemplatePlugin> getRegisteredTemplatePlugins() {
-    return templatePlugins;
+  public Set<NewDocumentEditorPlugin> getRegisteredEditorPlugins() {
+    return Collections.unmodifiableSet(editorPlugins);
   }
 
   /**

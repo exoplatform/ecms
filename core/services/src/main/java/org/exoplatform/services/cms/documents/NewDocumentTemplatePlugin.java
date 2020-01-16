@@ -11,18 +11,26 @@ import javax.jcr.Node;
 public interface NewDocumentTemplatePlugin {
 
   /**
-   * Gets the provider.
-   *
-   * @return the provider
-   */
-  String getProvider();
-
-  /**
    * Gets the templates.
    *
    * @return the templates
    */
   List<DocumentTemplate> getTemplates();
+  
+  /**
+   * Gets the template 
+   * 
+   * @param name the name
+   * @return the template
+   */
+  DocumentTemplate getTemplate(String name);
+  
+  /**
+   * Gets editor plugin
+   * 
+   * @return the editorPlugin
+   */
+  NewDocumentEditorPlugin getEditor();
 
   /**
    * Creates the document from specified template.

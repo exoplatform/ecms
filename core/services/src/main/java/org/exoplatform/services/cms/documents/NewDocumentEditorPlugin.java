@@ -7,11 +7,11 @@ package org.exoplatform.services.cms.documents;
 public interface NewDocumentEditorPlugin {
 
   /**
-   * Gets the provider.
+   * Gets the provider name.
    *
-   * @return the provider
+   * @return the provider name
    */
-  String getProvider();
+  String getProviderName();
 
   /**
    * This handler is invoked before creation a new document via NewDocumentTemplatePlugin

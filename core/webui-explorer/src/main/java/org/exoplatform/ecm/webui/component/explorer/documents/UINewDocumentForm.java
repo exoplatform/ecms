@@ -20,7 +20,7 @@ package org.exoplatform.ecm.webui.component.explorer.documents;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
+import java.util.Set;
 
 import javax.jcr.AccessDeniedException;
 import javax.jcr.ItemExistsException;
@@ -31,7 +31,6 @@ import javax.jcr.nodetype.NodeDefinition;
 
 import org.apache.commons.lang.StringUtils;
 
-import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
@@ -89,13 +88,13 @@ public class UINewDocumentForm extends UIForm implements UIPopupComponent {
     UIFormStringInput titleTextBox = new UIFormStringInput(FIELD_TITLE_TEXT_BOX, FIELD_TITLE_TEXT_BOX, null);
     this.addUIFormInput(titleTextBox);
 
-    Map<String, NewDocumentTemplatePlugin> templatePlugins = documentService.getRegisteredTemplatePlugins();
+    Set<NewDocumentTemplatePlugin> templatePlugins = documentService.getRegisteredTemplatePlugins();
 
     List<SelectItemOption<String>> options = new ArrayList<SelectItemOption<String>>();
 
-    templatePlugins.forEach((provider, plugin) -> {
+    templatePlugins.forEach(plugin -> {
       plugin.getTemplates().forEach(template -> {
-        DocumentSelectItemOption<String> option = new DocumentSelectItemOption<>(template.getLabel(), provider);
+        DocumentSelectItemOption<String> option = new DocumentSelectItemOption<>(template.getName(), plugin);
         options.add(option);
       });
     });
@@ -153,17 +152,12 @@ public class UINewDocumentForm extends UIForm implements UIPopupComponent {
                                                                                                 .filter(option -> option.isSelected())
                                                                                                 .findFirst()
                                                                                                 .get();
-      String provider = selectedOption.getProvider();
-      String label = selectedOption.getLabel();
-      DocumentService documentService = ExoContainerContext.getCurrentContainer()
-                                                                  .getComponentInstanceOfType(DocumentService.class);
+      NewDocumentTemplatePlugin templatePlugin = selectedOption.getTemplatePlugin();
+      String name = selectedOption.getLabel();
+      DocumentTemplate template = templatePlugin.getTemplate(name);
 
-      DocumentTemplate template = documentService.getDocumentTemplate(provider, label);
-
-      NewDocumentTemplatePlugin templatePlugin = documentService.getDocumentTemplatePlugin(provider);
-      NewDocumentEditorPlugin editorPlugin = documentService.getDocumentEditorPlugin(provider);
+      NewDocumentEditorPlugin editorPlugin = templatePlugin.getEditor();
       title = getFileName(title, template);
-
       if (editorPlugin != null) {
         editorPlugin.beforeDocumentCreate(template, currentNode.getPath(), title);
       }

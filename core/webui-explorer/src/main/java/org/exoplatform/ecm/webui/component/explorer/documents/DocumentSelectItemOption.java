@@ -1,6 +1,7 @@
 
 package org.exoplatform.ecm.webui.component.explorer.documents;
 
+import org.exoplatform.services.cms.documents.NewDocumentTemplatePlugin;
 import org.exoplatform.webui.core.model.SelectItemOption;
 
 /**
@@ -11,16 +12,16 @@ import org.exoplatform.webui.core.model.SelectItemOption;
 public class DocumentSelectItemOption<T> extends SelectItemOption<T> {
 
   /** The provider. */
-  protected final String provider;
-
+  protected final NewDocumentTemplatePlugin templatePlugin;
+ 
   /**
    * Instantiates a new document select item option.
    *
    * @param provider the provider
    */
-  public DocumentSelectItemOption(String provider) {
+  public DocumentSelectItemOption(NewDocumentTemplatePlugin templatePlugin) {
     super();
-    this.provider = provider;
+    this.templatePlugin = templatePlugin;
   }
 
   /**
@@ -31,9 +32,9 @@ public class DocumentSelectItemOption<T> extends SelectItemOption<T> {
    * @param icon the icon
    * @param provider the provider
    */
-  public DocumentSelectItemOption(String label, T value, String icon, String provider) {
+  public DocumentSelectItemOption(String label, T value, String icon, NewDocumentTemplatePlugin templatePlugin) {
     super(label, value, icon);
-    this.provider = provider;
+    this.templatePlugin = templatePlugin;
   }
 
   /**
@@ -45,9 +46,9 @@ public class DocumentSelectItemOption<T> extends SelectItemOption<T> {
    * @param icon the icon
    * @param provider the provider
    */
-  public DocumentSelectItemOption(String label, T value, String desc, String icon, String provider) {
+  public DocumentSelectItemOption(String label, T value, String desc, String icon, NewDocumentTemplatePlugin templatePlugin) {
     super(label, value, desc, icon);
-    this.provider = provider;
+    this.templatePlugin = templatePlugin;
   }
 
   /**
@@ -60,9 +61,9 @@ public class DocumentSelectItemOption<T> extends SelectItemOption<T> {
    * @param selected the selected
    * @param provider the provider
    */
-  public DocumentSelectItemOption(String label, T value, String desc, String icon, boolean selected, String provider) {
+  public DocumentSelectItemOption(String label, T value, String desc, String icon, boolean selected, NewDocumentTemplatePlugin templatePlugin) {
     super(label, value, desc, icon, selected);
-    this.provider = provider;
+    this.templatePlugin = templatePlugin;
   }
 
   /**
@@ -72,9 +73,9 @@ public class DocumentSelectItemOption<T> extends SelectItemOption<T> {
    * @param value the value
    * @param provider the provider
    */
-  public DocumentSelectItemOption(String label, T value, String provider) {
+  public DocumentSelectItemOption(String label, T value, NewDocumentTemplatePlugin templatePlugin) {
     super(label, value);
-    this.provider = provider;
+    this.templatePlugin = templatePlugin;
   }
 
   /**
@@ -83,9 +84,9 @@ public class DocumentSelectItemOption<T> extends SelectItemOption<T> {
    * @param value the value
    * @param provider the provider
    */
-  public DocumentSelectItemOption(T value, String provider) {
+  public DocumentSelectItemOption(T value, NewDocumentTemplatePlugin templatePlugin) {
     super(value);
-    this.provider = provider;
+    this.templatePlugin = templatePlugin;
   }
 
   /**
@@ -93,8 +94,8 @@ public class DocumentSelectItemOption<T> extends SelectItemOption<T> {
    *
    * @return the provider
    */
-  public String getProvider() {
-    return provider;
+  public NewDocumentTemplatePlugin getTemplatePlugin() {
+    return templatePlugin;
   }
 
 }

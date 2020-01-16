@@ -17,7 +17,7 @@
 package org.exoplatform.services.cms.documents;
 
 import java.util.List;
-import java.util.Map;
+import java.util.Set;
 
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
@@ -129,36 +129,18 @@ public interface DocumentService {
   public Node createDocumentFromTemplate(Node currentNode, String title, DocumentTemplate template) throws Exception;
 
   /**
-   * Gets the document template.
-   *
-   * @param provider the provider
-   * @param label the label
-   * @return the document template
-   */
-  public DocumentTemplate getDocumentTemplate(String provider, String label);
-
-  /**
-   * Gets the document template plugin.
-   *
-   * @param provider the provider
-   * @return the document template plugin
-   */
-  public NewDocumentTemplatePlugin getDocumentTemplatePlugin(String provider);
-
-  /**
-   * Gets the document editor plugin.
-   *
-   * @param provider the provider
-   * @return the document editor plugin
-   */
-  public NewDocumentEditorPlugin getDocumentEditorPlugin(String provider);
-
-  /**
    * Gets the registered template plugins.
    *
    * @return the registered template plugins
    */
-  public Map<String, NewDocumentTemplatePlugin> getRegisteredTemplatePlugins();
+  public Set<NewDocumentTemplatePlugin> getRegisteredTemplatePlugins();
+  
+  /**
+   * Gets the registered editor plugins.
+   *
+   * @return the registered editors plugins
+   */
+  public Set<NewDocumentEditorPlugin> getRegisteredEditorPlugins();
 
   /**
    * Checks for document template plugins.
@@ -175,8 +157,8 @@ public interface DocumentService {
     /** The document templates. */
     protected List<DocumentTemplate> templates;
 
-    /** The provider. */
-    protected String                 provider;
+    /** The providerName. */
+    protected String                 providerName;
 
     /**
      * Gets the document templates.
@@ -201,17 +183,17 @@ public interface DocumentService {
      *
      * @return the provider
      */
-    public String getProvider() {
-      return provider;
+    public String getProviderName() {
+      return providerName;
     }
 
     /**
      * {
      * @param provider
      */
-    public void setProvider(String provider) {
-      this.provider = provider;
+    public void setProviderName(String providerName) {
+      this.providerName = providerName;
     }
-
+    
   }
 }

@@ -11,8 +11,8 @@ public class DocumentTemplate {
   /** The path. */
   protected String path;
 
-  /** The label. */
-  protected String label;
+  /** The name. */
+  protected String name;
 
   /** The mime type. */
   protected String mimeType;
@@ -39,21 +39,21 @@ public class DocumentTemplate {
   }
 
   /**
-   * Gets the label.
+   * Gets the name.
    *
-   * @return the label
+   * @return the name
    */
-  public String getLabel() {
-    return label;
+  public String getName() {
+    return name;
   }
 
   /**
-   * Sets the label.
+   * Sets the name.
    *
-   * @param label the new label
+   * @param name the new name
    */
-  public void setLabel(String label) {
-    this.label = label;
+  public void setName(String name) {
+    this.name = name;
   }
 
   /**
@@ -112,7 +112,7 @@ public class DocumentTemplate {
 
   @Override
   public String toString() {
-    return "DocumentTemplate [extension=" + extension + ", path=" + path + ", label=" + label + ", mimeType=" + mimeType
+    return "DocumentTemplate [extension=" + extension + ", path=" + path + ", name=" + name + ", mimeType=" + mimeType
         + ", icon=" + icon + "]";
   }
 
