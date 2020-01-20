@@ -9,7 +9,7 @@
   </parent>
   <groupId>org.exoplatform.ecms</groupId>
   <artifactId>ecms</artifactId>
-  <version>5.3.x-SNAPSHOT</version>
+  <version>5.3.1-RC01</version>
   <packaging>pom</packaging>
   <name>eXo PLF:: ECM Suite</name>
   <description>eXo Entreprise Content Management Suite</description>
@@ -24,7 +24,7 @@
   <scm>
     <connection>scm:git:git://github.com/exoplatform/ecms.git</connection>
     <developerConnection>scm:git:git@github.com:exoplatform/ecms.git</developerConnection>
-    <tag>HEAD</tag>
+    <tag>5.3.1-RC01</tag>
     <url>https://fisheye.exoplatform.com/browse/ecms</url>
   </scm>
   <properties>
