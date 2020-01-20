@@ -18,6 +18,8 @@ package org.exoplatform.services.seo;
 
 import java.io.Serializable;
 
+import org.exoplatform.portal.mop.SiteKey;
+
 /**
  * Created by The eXo Platform SAS
  * Author : eXoPlatform
@@ -51,6 +53,8 @@ public class PageMetadataModel implements Serializable {
   private String fullStatus = null;
   
   private String pageReference = null;
+
+  private SiteKey siteKey;
  
   public String getUri() { 
     if(uri != null && uri.length() > 0)
@@ -120,4 +124,12 @@ public class PageMetadataModel implements Serializable {
     return pageReference; 
   }
   public void setPageReference(String pageReference) { this.pageReference = pageReference; }
+
+  public SiteKey getSiteKey() {
+    return siteKey;
+  }
+
+  public void setSiteKey(SiteKey siteKey) {
+    this.siteKey = siteKey;
+  }
 }

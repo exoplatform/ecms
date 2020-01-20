@@ -88,7 +88,7 @@ public abstract class BaseContentSearchServiceConnector extends BaseSearchServic
     String localeParam = context.getParamValue(SearchContext.RouterParams.LANG.create());
     Locale locale = localeParam != null ? LocaleUtils.toLocale(localeParam) : null;
     return siteSearch_.searchSiteContents(WCMCoreUtils.getUserSessionProvider(),
-                                           criteria, locale, (int)criteria.getLimit(), true);
+                                           criteria, locale, (int)criteria.getLimit(), false);
   }
 
   @Override

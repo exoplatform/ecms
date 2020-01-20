@@ -205,6 +205,7 @@ public class UISearchResult extends UIContainer {
     queryCriteria.setKeyword(keyword);
     queryCriteria.setSearchPath(uiExplorer.getCurrentPath());
     queryCriteria.setSearchWebpage(false);
+    queryCriteria.setSearchWebContent(true);
 
     WebuiRequestContext requestContext = WebuiRequestContext.getCurrentInstance();
     pageList = PageListFactory.createPageList(queryData_.getQueryStatement(),

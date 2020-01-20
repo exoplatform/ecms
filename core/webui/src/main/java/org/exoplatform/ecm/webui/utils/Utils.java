@@ -18,6 +18,7 @@ package org.exoplatform.ecm.webui.utils;
 
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.security.AccessControlException;
 import java.text.DecimalFormat;
@@ -1006,7 +1007,7 @@ public class Utils {
     if (StringUtils.isBlank(title)) {
       title = node.getName();
     }
-    return ContentReader.getXSSCompatibilityContent(title);
+    return URLDecoder.decode(title,"UTF-8");
   }
 
   /**

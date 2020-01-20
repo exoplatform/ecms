@@ -33,9 +33,11 @@ import javax.jcr.observation.EventIterator;
 import javax.jcr.observation.EventListener;
 import javax.portlet.PortletRequest;
 
+import org.exoplatform.commons.api.notification.plugin.NotificationPluginUtils;
 import org.exoplatform.commons.api.notification.service.NotificationCompletionService;
 import org.exoplatform.commons.notification.impl.NotificationSessionManager;
 import org.exoplatform.commons.utils.CommonsUtils;
+import org.exoplatform.commons.utils.PropertyManager;
 import org.exoplatform.portal.application.PortalRequestContext;
 import org.exoplatform.portal.mop.SiteType;
 import org.exoplatform.portal.mop.user.UserNavigation;
@@ -84,6 +86,7 @@ public class EmailNotifyListener implements EventListener {
 
   private static final String PATH_PARAM          = "path";
   private static final String USER_ID             = "${userId}";
+  public  static final String EXO_EMAIL_SMTP_FROM = PropertyManager.getProperty("gatein.email.smtp.from");
 
   private static final Log    LOG                 = ExoLogger.getLogger(EmailNotifyListener.class.getName());
 
@@ -152,8 +155,9 @@ public class EmailNotifyListener implements EventListener {
    * @throws Exception
    */
   private Message createMessage(String receiver, MessageConfig messageConfig) throws Exception {
+    String companyName = NotificationPluginUtils.getBrandingPortalName();
     Message message = new Message();
-    message.setFrom(messageConfig.getSender());
+    message.setFrom(companyName + "<" + EXO_EMAIL_SMTP_FROM + ">");
     message.setTo(receiver);
     message.setSubject(messageConfig.getSubject());
     TemplateEngine engine = new GStringTemplateEngine();

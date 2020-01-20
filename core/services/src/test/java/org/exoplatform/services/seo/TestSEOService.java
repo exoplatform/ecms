@@ -81,7 +81,8 @@ public class TestSEOService extends BaseWCMTestCase{
     Mockito.when(ctx.getUIApplication()).thenReturn(uiPortalApp);
     Mockito.when(uiPortalApp.getCurrentSite()).thenReturn(uiPortal);
     
-    UserNode userNode = Mockito.mock(UserNode.class);    
+    UserNode userNode = Mockito.mock(UserNode.class);
+    Mockito.when(uiPortal.getName()).thenReturn(portalName);
     Mockito.when(uiPortal.getSelectedUserNode()).thenReturn(userNode);
     session = sessionProvider.getSession("portal-system", repository);
     Node rootNode = session.getRootNode(); 
