@@ -21,8 +21,7 @@
     for (Node node:nodes) {
       def path = node.getPath();
       def name = node.getName();            
-      if (node.hasProperty("exo:title")) name = node.getProperty("exo:title").getString();
-      name = ContentReader.getEscapeHtmlContent(name);
+      if (node.hasProperty("exo:title")) name = URLDecoder.decode(node.getProperty("exo:title").getString(),"UTF-8");
     %>
       <div class="element clearfix">
       <i class="uiIconEcmsDottedArrow pull-left"></i>

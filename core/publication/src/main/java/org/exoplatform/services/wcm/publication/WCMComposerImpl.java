@@ -36,6 +36,9 @@ import org.exoplatform.services.jcr.impl.core.query.QueryImpl;
 import org.exoplatform.services.jcr.sessions.ACLSessionProviderService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.security.ConversationState;
+import org.exoplatform.services.security.Identity;
+import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.core.WCMService;
@@ -732,13 +735,12 @@ public class WCMComposerImpl implements WCMComposer, Startable {
    * @return user name
    */
   private String getRemoteUser() {
-    String remoteUser = null;
-    try {
-      remoteUser = Util.getPortalRequestContext().getRemoteUser();
-    } catch (Exception e) {
-      remoteUser = null;
+    ConversationState conversationState = ConversationState.getCurrent();
+    Identity identity = conversationState.getIdentity();
+    if (identity != null && !IdentityConstants.ANONIM.equals(identity.getUserId())) {
+      return identity.getUserId();
     }
-    return remoteUser;
+    return null;
   }
 
   private void updateSymlink(String workspace, String path, SessionProvider sessionProvider) {

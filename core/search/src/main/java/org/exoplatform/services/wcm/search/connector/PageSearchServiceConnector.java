@@ -37,8 +37,10 @@ import org.exoplatform.services.wcm.search.base.ArrayNodePageList;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
+ * Replaced by Elasticsearch implementation.
  * The search should be capable to search for site pages.
  */
+@Deprecated
 public class PageSearchServiceConnector extends BaseSearchServiceConnector {
 
   public PageSearchServiceConnector(InitParams initParams) throws Exception {

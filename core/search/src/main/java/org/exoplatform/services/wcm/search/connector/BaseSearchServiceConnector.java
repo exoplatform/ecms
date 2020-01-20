@@ -28,12 +28,8 @@ import org.exoplatform.commons.api.search.SearchServiceConnector;
 import org.exoplatform.commons.api.search.data.SearchContext;
 import org.exoplatform.commons.api.search.data.SearchResult;
 import org.exoplatform.container.ExoContainerContext;
+import org.exoplatform.container.PortalContainer;
 import org.exoplatform.container.xml.InitParams;
-import org.exoplatform.portal.config.UserPortalConfig;
-import org.exoplatform.portal.config.UserPortalConfigService;
-import org.exoplatform.portal.mop.SiteKey;
-import org.exoplatform.portal.mop.user.UserNavigation;
-import org.exoplatform.portal.mop.user.UserPortalContext;
 import org.exoplatform.services.cms.documents.DocumentService;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.drives.ManageDriveService;
@@ -41,15 +37,16 @@ import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
-import org.exoplatform.services.security.ConversationState;
-import org.exoplatform.services.security.IdentityConstants;
+import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
+import org.exoplatform.services.wcm.core.WCMConfigurationService;
 import org.exoplatform.services.wcm.search.QueryCriteria;
 import org.exoplatform.services.wcm.search.ResultNode;
 import org.exoplatform.services.wcm.search.SiteSearchService;
 import org.exoplatform.services.wcm.search.base.AbstractPageList;
 import org.exoplatform.services.wcm.search.base.EcmsSearchResult;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+
 
 /**
  * This abstract class is extended by the SearchService connectors which provide search result for a specific content type
@@ -63,6 +60,7 @@ public abstract class BaseSearchServiceConnector extends SearchServiceConnector 
   protected SiteSearchService siteSearch_;
   protected DocumentService documentService;
   protected ManageDriveService driveService_;
+  private WCMConfigurationService wcmConfigurationService;
 
   private static final Log LOG = ExoLogger.getLogger(BaseSearchServiceConnector.class.getName());
   
@@ -76,6 +74,7 @@ public abstract class BaseSearchServiceConnector extends SearchServiceConnector 
     siteSearch_ = WCMCoreUtils.getService(SiteSearchService.class);
     documentService = WCMCoreUtils.getService(DocumentService.class);
     driveService_ = WCMCoreUtils.getService(ManageDriveService.class);
+    wcmConfigurationService = WCMCoreUtils.getService(WCMConfigurationService.class);
   }
 
   /**
@@ -177,6 +176,9 @@ public abstract class BaseSearchServiceConnector extends SearchServiceConnector 
                 //generate SearchResult object
                 Calendar date = getDate(retNode);
                 String url = getPath(retNode, context);
+                if (url == null &&  retNode != null) {
+                  url = getURL(retNode, context);
+                }
                 if (url == null) continue;
 
                 EcmsSearchResult result = 
@@ -349,4 +351,15 @@ public abstract class BaseSearchServiceConnector extends SearchServiceConnector 
    */
   protected abstract String getDetails(ResultNode node, SearchContext context) throws Exception;
 
+  public String getURL(Node node, SearchContext context) throws Exception {
+    NodeLocation nodeLocation = NodeLocation.getNodeLocationByNode(node);
+    String repository = nodeLocation.getRepository();
+    String workspace = nodeLocation.getWorkspace();
+    String basePath = wcmConfigurationService.getRuntimeContextParam(WCMConfigurationService.PARAMETERIZED_PAGE_URI);
+    String detailParameterName = wcmConfigurationService.getRuntimeContextParam(WCMConfigurationService.PARAMETERIZED_URI_PARAM);
+    String portalName = PortalContainer.getInstance().getPortalContext().getContextPath();
+    String siteName = context.getSiteName();
+    StringBuilder builder = new StringBuilder();
+    return builder.append(portalName).append("/").append(siteName).append(basePath).append("?").append(detailParameterName).append("=").append("/").append(repository).append("/").append(workspace).append(nodeLocation.getPath()).toString();
+  }
 }
