@@ -140,7 +140,10 @@ public class LivePortalManagerServiceImpl implements LivePortalManagerService, S
                                   final String repository,
                                   final String portalName) throws Exception {
     Node portalsStorage = getLivePortalsStorage(sessionProvider);
-    return portalsStorage.getNode(portalName);
+    if (portalsStorage != null) {
+      return portalsStorage.getNode(portalName);
+    }
+    return null;
   }
 
   /*

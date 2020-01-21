@@ -57,7 +57,8 @@ public class SEOPageMetadataApplicationLifecycle extends BaseComponentPlugin
         } else {
           currentNode = userPortal.resolvePath(navigation, builder.build(), nodePath);
         }
-        if (currentNode != null && currentNode.getPageRef() != null) {
+        if (currentNode != null && currentNode.getPageRef() != null
+            && SiteType.PORTAL.equals(currentNode.getPageRef().getSite().getType())) {
           String pageReference = currentNode.getPageRef().format();
           PageMetadataModel metaModel = seoService.getMetadata(paramArray, pageReference, pcontext.getLocale().getLanguage());
           if (metaModel != null) {
