@@ -287,7 +287,6 @@
   </NumberFormatValidator>
   <!--
   #####Since version 2.4#######
-
   ###################### resoucebundle exo:taxonomyAction dialogs template ####
   -->
   <ScriptAction>
@@ -310,7 +309,6 @@
 
   <!--
   #####Since version 2.6#######
-
   ###################### resoucebundle exo:taxonomyAction dialogs template ####
   -->
 <no>Non</no>
@@ -391,5 +389,29 @@
 <AlternativeTextHelp>Fournir une alternative accessible pour présenter l'information</AlternativeTextHelp>
 </help>
 </AccessibleMedia>
+
+ <!-- New Document i18n -->
+  <UIActionBar>
+    <tooltip>
+      <NewDocument>Nouveau document</NewDocument>
+    </tooltip>
+  </UIActionBar>
+  <!-- For new document popup window -->
+  <UIPopupWindow>
+    <title>
+      <UINewDocumentForm>Nouveau document</UINewDocumentForm>
+    </title>
+  </UIPopupWindow>
+   <!-- For new document form -->
+  <UINewDocumentForm>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Save>Créer un document</Save>
+    </action>
+    <label>
+      <titleTextBox>Nom du document:</titleTextBox>
+      <typeSelectBox>Type de document:</typeSelectBox>
+    </label>
+  </UINewDocumentForm>
   
 </bundle>

@@ -16,12 +16,15 @@
  */
 package org.exoplatform.services.cms.documents;
 
-import org.exoplatform.services.cms.documents.model.Document;
-import org.exoplatform.services.cms.drives.DriveData;
+import java.util.List;
+import java.util.Set;
 
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
-import java.util.List;
+
+import org.exoplatform.container.component.ComponentPlugin;
+import org.exoplatform.services.cms.documents.model.Document;
+import org.exoplatform.services.cms.drives.DriveData;
 
 /**
  * Created by The eXo Platform SAS Author : eXoPlatform exo@exoplatform.com Mar
@@ -99,4 +102,98 @@ public interface DocumentService {
    * @throws Exception
    */
   public DriveData getDriveOfNode(String nodePath, String userId, List<String> memberships) throws Exception;
+  
+  /**
+   * Adds the document template plugin.
+   *
+   * @param plugin the plugin
+   */
+  public void addDocumentTemplatePlugin(ComponentPlugin plugin);
+
+  /**
+   * Adds the document editor plugin.
+   *
+   * @param plugin the plugin
+   */
+  public void addDocumentEditorPlugin(ComponentPlugin plugin);
+
+  /**
+   * Creates the document from template.
+   *
+   * @param currentNode the current node
+   * @param title the title
+   * @param template the template
+   * @return the node
+   * @throws Exception the exception
+   */
+  public Node createDocumentFromTemplate(Node currentNode, String title, DocumentTemplate template) throws Exception;
+
+  /**
+   * Gets the registered template plugins.
+   *
+   * @return the registered template plugins
+   */
+  public Set<NewDocumentTemplatePlugin> getRegisteredTemplatePlugins();
+  
+  /**
+   * Gets the registered editor plugins.
+   *
+   * @return the registered editors plugins
+   */
+  public Set<NewDocumentEditorPlugin> getRegisteredEditorPlugins();
+
+  /**
+   * Checks for document template plugins.
+   *
+   * @return true, if successful
+   */
+  public boolean hasDocumentTemplatePlugins();
+
+  /**
+   * NewDocumentTypesConfig contains all registered templates for specified provider.
+   */
+  public static class DocumentTemplatesConfig {
+
+    /** The document templates. */
+    protected List<DocumentTemplate> templates;
+
+    /** The providerName. */
+    protected String                 providerName;
+
+    /**
+     * Gets the document templates.
+     *
+     * @return the document types
+     */
+    public List<DocumentTemplate> getTemplates() {
+      return templates;
+    }
+
+    /**
+     * Sets the document templates.
+     *
+     * @param templates the new templates
+     */
+    public void setTemplates(List<DocumentTemplate> templates) {
+      this.templates = templates;
+    }
+
+    /**
+     * Gets the provider.
+     *
+     * @return the provider
+     */
+    public String getProviderName() {
+      return providerName;
+    }
+
+    /**
+     * {
+     * @param providerName
+     */
+    public void setProviderName(String providerName) {
+      this.providerName = providerName;
+    }
+    
+  }
 }
