@@ -16,6 +16,7 @@
  */
 package org.exoplatform.wcm.ext.component.activity;
 
+import java.net.URLDecoder;
 import java.text.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -225,14 +226,15 @@ public class FileUIActivity extends BaseUIActivity{
     // To get real file name instead
     try {
       contentName = (activityFileAttachment == null
-          || activityFileAttachment.getContentNode() == null) ? null : activityFileAttachment.getContentNode().getName();
-    } catch (RepositoryException e) {
+          || activityFileAttachment.getContentNode() == null) ? null : URLDecoder.decode(activityFileAttachment.getContentNode().getProperty("exo:title").getString(), "UTF-8");
+      if (StringUtils.isBlank(contentName)) {
+        contentName = URLDecoder.decode(activityFileAttachment.getContentName(), "UTF-8");
+      }
+      return URLDecoder.decode(contentName, "UTF-8");
+    } catch (Exception e) {
       LOG.debug("Can't retrieve file name of attachment with path " + activityFileAttachment.getDocPath(), e);
+      return contentName;
     }
-    if(StringUtils.isBlank(contentName)) {
-      contentName = activityFileAttachment.getContentName();
-    }
-    return contentName;
   }
 
   public void setContentName(String contentName, int i) {
