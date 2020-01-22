@@ -393,25 +393,34 @@
  <!-- New Document i18n -->
   <UIActionBar>
     <tooltip>
-      <NewDocument>Nouveau document</NewDocument>
+      <NewDocument>New Document</NewDocument>
     </tooltip>
   </UIActionBar>
   <!-- For new document popup window -->
   <UIPopupWindow>
     <title>
-      <UINewDocumentForm>Nouveau document</UINewDocumentForm>
+      <UINewDocumentForm>New Document</UINewDocumentForm>
     </title>
   </UIPopupWindow>
    <!-- For new document form -->
   <UINewDocumentForm>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Save>Créer un document</Save>
+      <Save>Create Document</Save>
     </action>
     <label>
-      <titleTextBox>Nom du document:</titleTextBox>
-      <typeSelectBox>Type de document:</typeSelectBox>
+      <titleTextBox>Document Name:</titleTextBox>
+      <typeSelectBox>Document Type:</typeSelectBox>
     </label>
+    <msg>
+      <name-invalid>Please enter the document name.</name-invalid>
+      <constraint-violation>Vous ne pouvez pas ajouter de document du type '{0}' ici.</constraint-violation>
+      <repository-exception>An unexpected error occurred. Please contact your administrator for more details.</repository-exception>
+      <repository-exception-permission>You don't have the permission to add a new document here.</repository-exception-permission>
+      <numberformat-exception>You cannot save this document. The name provided must be in numerical format.</numberformat-exception>
+      <!--DMS 2.4.x; ECM-3553-->
+      <not-allow-sameNameSibling>You can't save the document. An item with the same name already exists.</not-allow-sameNameSibling>
+    </msg>
   </UINewDocumentForm>
   
 </bundle>

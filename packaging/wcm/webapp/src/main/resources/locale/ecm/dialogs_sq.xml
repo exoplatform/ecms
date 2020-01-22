@@ -287,7 +287,6 @@
   </NumberFormatValidator>
   <!--
   #####Since version 2.4#######
-
   ###################### resoucebundle exo:taxonomyAction dialogs template ####
   -->
   <ScriptAction>
@@ -310,7 +309,6 @@
 
   <!--
   #####Since version 2.6#######
-
   ###################### resoucebundle exo:taxonomyAction dialogs template ####
   -->
 <no>crwdns6793576:0crwdne6793576:0</no>
@@ -391,5 +389,38 @@
 <AlternativeTextHelp>crwdns6793616:0crwdne6793616:0</AlternativeTextHelp>
 </help>
 </AccessibleMedia>
+
+ <!-- New Document i18n -->
+  <UIActionBar>
+    <tooltip>
+      <NewDocument>crwdns6912207:0crwdne6912207:0</NewDocument>
+    </tooltip>
+  </UIActionBar>
+  <!-- For new document popup window -->
+  <UIPopupWindow>
+    <title>
+      <UINewDocumentForm>crwdns6912209:0crwdne6912209:0</UINewDocumentForm>
+    </title>
+  </UIPopupWindow>
+   <!-- For new document form -->
+  <UINewDocumentForm>
+    <action>
+      <Cancel>crwdns6912211:0#{word.cancel}crwdne6912211:0</Cancel>
+      <Save>crwdns6912213:0crwdne6912213:0</Save>
+    </action>
+    <label>
+      <titleTextBox>crwdns6912215:0crwdne6912215:0</titleTextBox>
+      <typeSelectBox>crwdns6912217:0crwdne6912217:0</typeSelectBox>
+    </label>
+    <msg>
+      <name-invalid>crwdns6912219:0crwdne6912219:0</name-invalid>
+      <constraint-violation>crwdns6912221:0{0}crwdne6912221:0</constraint-violation>
+      <repository-exception>crwdns6912223:0crwdne6912223:0</repository-exception>
+      <repository-exception-permission>crwdns6912225:0crwdne6912225:0</repository-exception-permission>
+      <numberformat-exception>crwdns6912227:0crwdne6912227:0</numberformat-exception>
+      <!--DMS 2.4.x; ECM-3553-->
+      <not-allow-sameNameSibling>crwdns6912229:0crwdne6912229:0</not-allow-sameNameSibling>
+    </msg>
+  </UINewDocumentForm>
   
 </bundle>
