@@ -17,7 +17,7 @@
  * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
-package org.exoplatform.ecm.webui.component.explorer.documents;
+package org.exoplatform.services.cms.views;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -41,7 +41,6 @@ import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.impl.DMSConfiguration;
 import org.exoplatform.services.cms.impl.DMSRepositoryConfiguration;
 import org.exoplatform.services.cms.templates.TemplateService;
-import org.exoplatform.services.cms.views.ViewConfig;
 import org.exoplatform.services.cms.views.ViewConfig.Tab;
 import org.exoplatform.services.cms.views.impl.ManageViewPlugin;
 import org.exoplatform.services.jcr.RepositoryService;
@@ -61,10 +60,10 @@ import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 public class CustomizeViewPlugin extends ManageViewPlugin {
 
   /** The Constant PROVIDER_SCOPE_NAME. */
-  protected static final String        PROVIDER_SCOPE_NAME   = "documents".intern();
+  protected static final String        PROVIDER_SCOPE_NAME     = "documents".intern();
 
   /** The Constant VIEW_CUSTOMIZED_PARAM. */
-  protected static final String        VIEW_CUSTOMIZED_PARAM = "documents.views.customized".intern();
+  protected static final String        BUTTON_IMPORTED_PATTERN = "documents.%s.%s.imported".intern();
 
   /** The params. */
   protected final InitParams           params;
@@ -88,10 +87,10 @@ public class CustomizeViewPlugin extends ManageViewPlugin {
   protected final TemplateService      templateService;
 
   /** The configured template. */
-  protected final Set<String>          configuredTemplate    = new HashSet<String>();
+  protected final Set<String>          configuredTemplate      = new HashSet<String>();
 
   /** The configured views. */
-  protected final Set<String>          configuredViews       = new HashSet<String>();
+  protected final Set<String>          configuredViews         = new HashSet<String>();
 
   /**
    * Instantiates a new customize view plugin.
@@ -147,13 +146,7 @@ public class CustomizeViewPlugin extends ManageViewPlugin {
    */
   @Override
   public void init() throws Exception {
-    SettingValue<?> isViewCustomized = settingService.get(Context.GLOBAL,
-                                                          Scope.GLOBAL.id(PROVIDER_SCOPE_NAME),
-                                                          VIEW_CUSTOMIZED_PARAM);
-    if (isViewCustomized == null || !(Boolean.valueOf(isViewCustomized.getValue().toString()))) {
-      importCustomizedViews();
-      settingService.set(Context.GLOBAL, Scope.GLOBAL.id(PROVIDER_SCOPE_NAME), VIEW_CUSTOMIZED_PARAM, SettingValue.create(true));
-    } 
+    importCustomizedViews();
   }
 
   /// ****** internals ******
@@ -193,7 +186,7 @@ public class CustomizeViewPlugin extends ManageViewPlugin {
           for (Tab tab : viewObject.getTabList()) {
             customizeTab(viewNode, tab.getTabName(), tab.getButtons());
           }
-        }
+        } 
       }
     }
     session.save();
@@ -235,18 +228,46 @@ public class CustomizeViewPlugin extends ManageViewPlugin {
       Set<String> addButtons = new LinkedHashSet<String>();
       for (String action : buttons.split(";")) {
         action = action.trim();
-        if (action.length() > 0) {
+        if (action.length() > 0 && !isImported(tabName, action)) {
           addButtons.add(action);
         }
       }
 
       if (tab.hasProperty("exo:buttons")) {
         Property exoButtons = tab.getProperty("exo:buttons");
-        String newButtons = mergeButtons(exoButtons.getString(), addButtons);
-        exoButtons.setValue(newButtons);
+        if (addButtons.size() > 0) {
+          String newButtons = mergeButtons(exoButtons.getString(), addButtons);
+          exoButtons.setValue(newButtons);
+          addButtons.forEach(btn -> markAsImported(tabName, btn));
+        }
       }
       view.save();
     }
+  }
+
+  /**
+   * Marks as imported.
+   *
+   * @param action the action
+   */
+  private void markAsImported(String tab, String action) {
+    settingService.set(Context.GLOBAL,
+                       Scope.GLOBAL.id(PROVIDER_SCOPE_NAME),
+                       String.format(BUTTON_IMPORTED_PATTERN, tab, action),
+                       SettingValue.create(true));
+  }
+
+  /**
+   * Checks if is imported.
+   *
+   * @param action the action
+   * @return true, if is imported
+   */
+  private boolean isImported(String tab, String action) {
+    SettingValue<?> isViewCustomized = settingService.get(Context.GLOBAL,
+                                                          Scope.GLOBAL.id(PROVIDER_SCOPE_NAME),
+                                                          String.format(BUTTON_IMPORTED_PATTERN, tab, action));
+    return isViewCustomized != null && Boolean.valueOf(isViewCustomized.getValue().toString());
   }
 
   /**

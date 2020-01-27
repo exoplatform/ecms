@@ -129,6 +129,11 @@
     </component>
 
     <component>
+        <key>org.exoplatform.services.cms.views.CustomizeViewService</key>
+        <type>org.exoplatform.services.cms.views.CustomizeViewService</type>
+    </component>
+    
+    <component>
         <key>org.exoplatform.services.cms.link.LinkManager</key>
         <type>org.exoplatform.services.cms.link.impl.LinkManagerImpl</type>
     </component>

@@ -1,7 +1,8 @@
 <configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd http://www.exoplatform.org/xml/ns/kernel_1_2.xsd"
   xmlns="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd">
-  
+
+
     <!-- ECMS menu action for New Document. -->
   <external-component-plugins>
     <target-component>org.exoplatform.webui.ext.UIExtensionManager</target-component>
@@ -33,11 +34,11 @@
   
   <!-- Add New Document action to ECMS views -->
   <external-component-plugins>
-    <target-component>org.exoplatform.services.cms.views.ManageViewService</target-component>
+    <target-component>org.exoplatform.services.cms.views.CustomizeViewService</target-component>
     <component-plugin>
       <name>customize.view.plugin</name>
-      <set-method>setManageViewPlugin</set-method>
-      <type>org.exoplatform.ecm.webui.component.explorer.documents.CustomizeViewPlugin</type>
+      <set-method>addCustomizeViewPlugin</set-method>
+      <type>org.exoplatform.services.cms.views.CustomizeViewPlugin</type>
       <description>this plugin customize user view</description>
       <init-params>
         <object-param>
