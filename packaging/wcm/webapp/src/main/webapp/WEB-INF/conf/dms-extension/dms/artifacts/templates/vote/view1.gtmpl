@@ -1,7 +1,7 @@
 <%
   import  org.exoplatform.social.plugin.doc.UIDocViewer;
 
-  def voteNode = uicomponent.getNode() ;
+  def voteNode = uicomponent.getOriginalNode();
   if(uicomponent.getOriginalNode().getPrimaryNodeType().getName().equals("nt:file")) {
     if(voteNode.getNodes().getSize() > 0) {
       def nodeIter = voteNode.getNodes() ;
