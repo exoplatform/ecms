@@ -51,6 +51,11 @@
   </component>
   
   <component>
+    <key>org.gatein.api.Portal</key>
+    <type>org.exoplatform.services.cms.documents.mock.PortalMock</type>
+  </component>
+  
+  <component>
     <type>org.exoplatform.services.deployment.ContentInitializerService</type>
   </component>
   
