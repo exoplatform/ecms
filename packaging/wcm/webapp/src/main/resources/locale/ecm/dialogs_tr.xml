@@ -287,7 +287,6 @@
   </NumberFormatValidator>
   <!--
   #####Since version 2.4#######
-
   ###################### resoucebundle exo:taxonomyAction dialogs template ####
   -->
   <ScriptAction>
@@ -310,7 +309,6 @@
 
   <!--
   #####Since version 2.6#######
-
   ###################### resoucebundle exo:taxonomyAction dialogs template ####
   -->
 <no>Hayır</no>
@@ -391,5 +389,38 @@
 <AlternativeTextHelp>Erişilebilir bilgi sağlamak için alternatif bir araç veriniz</AlternativeTextHelp>
 </help>
 </AccessibleMedia>
+
+ <!-- New Document i18n -->
+  <UIActionBar>
+    <tooltip>
+      <NewDocument>New Document</NewDocument>
+    </tooltip>
+  </UIActionBar>
+  <!-- For new document popup window -->
+  <UIPopupWindow>
+    <title>
+      <UINewDocumentForm>New Document</UINewDocumentForm>
+    </title>
+  </UIPopupWindow>
+   <!-- For new document form -->
+  <UINewDocumentForm>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Save>Create Document</Save>
+    </action>
+    <label>
+      <titleTextBox>Document Name:</titleTextBox>
+      <typeSelectBox>Document Type:</typeSelectBox>
+    </label>
+    <msg>
+      <name-invalid>Please enter the document name.</name-invalid>
+      <constraint-violation>Geçerli düğüm '{0}' düğüm türünü eklemenize izin vermez.</constraint-violation>
+      <repository-exception>An unexpected error occurred. Please contact your administrator for more details.</repository-exception>
+      <repository-exception-permission>You don't have the permission to add a new document here.</repository-exception-permission>
+      <numberformat-exception>You cannot save this document. The name provided must be in numerical format.</numberformat-exception>
+      <!--DMS 2.4.x; ECM-3553-->
+      <not-allow-sameNameSibling>You can't save the document. An item with the same name already exists.</not-allow-sameNameSibling>
+    </msg>
+  </UINewDocumentForm>
   
 </bundle>
