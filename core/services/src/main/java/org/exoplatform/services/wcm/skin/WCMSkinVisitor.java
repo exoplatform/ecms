@@ -16,82 +16,76 @@
  */
 package org.exoplatform.services.wcm.skin;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
 
-import org.exoplatform.portal.resource.SkinConfig;
-import org.exoplatform.portal.resource.SkinKey;
-import org.exoplatform.portal.resource.SkinVisitor;
+import org.exoplatform.portal.resource.*;
+import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
- * Created by The eXo Platform SAS
- * Author : eXoPlatform
- *          exo@exoplatform.com
- * Jun 16, 2014
+ * Created by The eXo Platform SAS Author : eXoPlatform exo@exoplatform.com Jun
+ * 16, 2014
  */
-public class WCMSkinVisitor implements SkinVisitor{
+public class WCMSkinVisitor implements SkinVisitor {
 
-    private List<SkinConfig> wcmSiteSkins = new ArrayList<SkinConfig>();
-    private List<SkinConfig> wcmSharedSkins = new ArrayList<SkinConfig>();
-    
-    private String skinName;
-    private String moduleName;
-
-    public WCMSkinVisitor(String siteName,String skinName){
-      this.skinName = skinName;
-      this.moduleName = XSkinService.createModuleName(siteName);
+  private void visit(Collection<SkinConfig> skins, Entry<SkinKey, SkinConfig> entry) {
+    String currentContext = WCMCoreUtils.getRepository().getConfiguration().getName();
+    String cssPath = entry.getValue().getCSSPath();
+    Map<String, String> params = XSkinService.getSkinParams(cssPath);
+    if (cssPath.matches(XSkinService.SKIN_PATH_REGEXP)
+        && !params.get(XSkinService.CONTEXT_PARAM).equals(currentContext)) {
+      return;
     }
+    skins.add(entry.getValue());
+  }
 
-    @Override
-    public void visitPortalSkin(Entry<SkinKey, SkinConfig> entry) {
+  @Override
+  public Collection<SkinConfig> getSkins(Set<Entry<SkinKey, SkinConfig>> portalSkins,
+                                         Set<Entry<SkinKey, SkinConfig>> skinConfigs) {
+    String currentSkin = getCurrentSkin();
+    String currentModuleName = getCurrentModuleName();
+
+    List<SkinConfig> wcmSharedSkins = new ArrayList<>();
+    for (Entry<SkinKey, SkinConfig> entry : portalSkins) {
       String name = entry.getKey().getName();
-      if (name.equals(this.skinName))
+      if (name.equals(currentSkin)) {
         visit(wcmSharedSkins, entry);
+      }
     }
 
-    @Override
-    public void visitSkin(Entry<SkinKey, SkinConfig> entry) {
+    List<SkinConfig> wcmSiteSkins = new ArrayList<>();
+    for (Entry<SkinKey, SkinConfig> entry : skinConfigs) {
       String module = entry.getKey().getModule();
       String name = entry.getKey().getName();
-      if (name.equals(this.skinName) && module.equals(moduleName))
-          visit(wcmSiteSkins,entry);
-    }
-
-    @Override
-    public Collection<SkinConfig> getSkins() {
-      List<SkinConfig> skins = new LinkedList<SkinConfig>();
-      Comparator<SkinConfig> skinComparator = new Comparator<SkinConfig>(){
-        @Override
-        public int compare(SkinConfig o1, SkinConfig o2) {
-          return o1.getCSSPriority() - o2.getCSSPriority();
-        }}; 
-            
-      Collections.sort(wcmSharedSkins, skinComparator);
-      skins.addAll(wcmSharedSkins);
-      
-      Collections.sort(wcmSiteSkins, skinComparator);
-      skins.addAll(wcmSiteSkins);
-      
-      return skins;
-    }
-
-    private void visit(Collection<SkinConfig> skins, Entry<SkinKey, SkinConfig> entry){
-      String currentContext = WCMCoreUtils.getRepository().getConfiguration().getName();
-      String cssPath = entry.getValue().getCSSPath();
-      Map<String,String> params = XSkinService.getSkinParams(cssPath);
-      if (cssPath.matches(XSkinService.SKIN_PATH_REGEXP)){
-        if (!params.get(XSkinService.CONTEXT_PARAM).equals(currentContext))
-          return;
+      if (name.equals(currentSkin) && module.equals(currentModuleName)) {
+        visit(wcmSiteSkins, entry);
       }
-      skins.add(entry.getValue());
     }
+
+    List<SkinConfig> skins = new LinkedList<>();
+    Comparator<SkinConfig> skinComparator = new Comparator<SkinConfig>() {
+      @Override
+      public int compare(SkinConfig o1, SkinConfig o2) {
+        return o1.getCSSPriority() - o2.getCSSPriority();
+      }
+    };
+
+    Collections.sort(wcmSharedSkins, skinComparator);
+    skins.addAll(wcmSharedSkins);
+
+    Collections.sort(wcmSiteSkins, skinComparator);
+    skins.addAll(wcmSiteSkins);
+    return skins;
+  }
+
+  private String getCurrentModuleName() {
+    String currentSiteName = Util.getUIPortal().getName();
+    return XSkinService.createModuleName(currentSiteName);
+  }
+
+  private String getCurrentSkin() {
+    return Util.getUIPortalApplication().getSkin();
+  }
+
 }
-
-

@@ -29,6 +29,8 @@ import javax.jcr.nodetype.NodeTypeIterator;
 import javax.jcr.nodetype.NodeTypeManager;
 
 import org.apache.commons.lang.LocaleUtils;
+import org.apache.commons.lang3.StringUtils;
+
 import org.exoplatform.commons.api.search.data.SearchContext;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.services.cms.drives.DriveData;
@@ -86,7 +88,7 @@ public abstract class BaseContentSearchServiceConnector extends BaseSearchServic
   @Override
   protected AbstractPageList<ResultNode> searchNodes(QueryCriteria criteria, SearchContext context) throws Exception {
     String localeParam = context.getParamValue(SearchContext.RouterParams.LANG.create());
-    Locale locale = localeParam != null ? LocaleUtils.toLocale(localeParam) : null;
+    Locale locale = StringUtils.isBlank(localeParam) ? null : LocaleUtils.toLocale(localeParam);
     return siteSearch_.searchSiteContents(WCMCoreUtils.getUserSessionProvider(),
                                            criteria, locale, (int)criteria.getLimit(), false);
   }

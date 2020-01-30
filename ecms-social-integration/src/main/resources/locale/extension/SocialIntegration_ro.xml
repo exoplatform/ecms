@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UIConfirmMessage>
+    <label>
+      <ReadOnly>Deschide ca Read-only</ReadOnly>
+    </label>
+  </UIConfirmMessage>
+
+  <UISocialPopupWindow>
+    <title>
+      <UIReadOnlyFileConfirmMessage>Deschide document</UIReadOnlyFileConfirmMessage>
+    </title>
+  </UISocialPopupWindow>
+  <SocialIntegration>
+    <titles>
+      <fileSize>Dimensiune fişier</fileSize>
+    </titles>
+    <messages>
+      <createdBy>a fost creat de</createdBy>
+      <editedBy>a fost editat de</editedBy>
+      <system>sistem</system>
+      <readmore>...Citeste mai mult.</readmore>
+      <editTitle>Titlul a fost actualizat la: {0}</editTitle>
+      <editName>Numele a fost actualizat la: {0}</editName>
+      <editDescription>Descrierea a fost actualizată la: {0}</editDescription>
+      <singleCreator>A fost creat de {0}</singleCreator>
+      <multiCreator>A fost creat de {0}</multiCreator>
+      <addSource>Fișier sursă: {0} a fost adăugat</addSource>
+      <addMultiSource>Fișiere sursă: {0} au fost adăugate</addMultiSource>
+      <removeSource>Fișier sursă: {0} a fost eliminat</removeSource>
+      <removeMultiSource>Fișiere sursă: {0} au fost eliminate</removeMultiSource>
+      <editSummary>Rezumatul a fost actualizat la: {0}</editSummary>
+      <editLanguage>Limba a fost actualizată la: {0}</editLanguage>
+      <editContent>Conţinutul a fost actualizat.</editContent>
+      <editFile>Fişierul a fost actualizat.</editFile>
+      <emptyTitle>Titlul a fost eliminat.</emptyTitle>
+      <emptySummary>Rezumatul a fost eliminat.</emptySummary>
+      <emptyContent>Conţinutul a fost eliminat.</emptyContent>
+      <updateMetadata>Metadatele {0} au fost actualizate la: {1}</updateMetadata>
+      <removeMetadata>Metadatele {0} au fost eliminate.</removeMetadata>
+      <removeTitle>Titlul a fost eliminat.</removeTitle>
+      <removeName>Numele a fost eliminat.</removeName>
+      <removeSummary>Rezumatul a fost eliminat.</removeSummary>
+      <removeDescription>Descrierea a fost eliminată.</removeDescription>
+      <removeCreator>Creator: {0} a fost eliminat.</removeCreator>
+      <removeMultiCreator>Creatorii: {0} au fost eliminați.</removeMultiCreator>
+      <removeLanguage>Limba a fost eliminată.</removeLanguage>
+      <removeContent>Conţinutul a fost eliminat.</removeContent>
+      <attachmentAdded>Fișier(e) atașat(e).</attachmentAdded>
+      <attachmentRemoved>Fișier(e) șters(e).</attachmentRemoved>
+      <categoryAdded>Categorie: {0} a fost adăugat.</categoryAdded>
+      <categoryRemoved>Categorie: {0} a fost eliminat.</categoryRemoved>
+      <tagAdded>Etichetă: {0} a fost adăugată.</tagAdded>
+      <tagsAdded>Etichete: {0} au fost adăugate.</tagsAdded>
+      <tagRemoved>Etichetă: {0} a fost eliminată.</tagRemoved>
+      <tagsRemoved>Etichete: {0} au fost eliminate.</tagsRemoved>
+      <stateChange>
+        <pending>Starea de publicare este acum în curs.</pending>
+        <approved>Documentul a fost aprobat.</approved>
+        <staged>Publicarea a fost pregătită.</staged>
+        <published>Documentul a fost publicat.</published>
+      </stateChange>
+      <contentMoved>Publicarea a fost mutată la: {0}</contentMoved>
+      <fileMoved>Fișierul a fost mutat la: {0}</fileMoved>
+      <revisionChanged>Publicarea a fost restaurată la versiunea: {0}</revisionChanged>
+      <version>Versiunea {0}</version>
+      <updatedOn>Actualizat la</updatedOn>
+      <updatedBy>de</updatedBy>
+      <loadMoreFiles>Încă +{0}</loadMoreFiles>
+    </messages>
+    <publicationStates>
+      <archived>Arhivată</archived>
+      <obsolete>Învechite</obsolete>
+      <unpublished>Nepublicate</unpublished>
+      <draft>Ciornă</draft>
+      <pending>În aşteptare</pending>
+      <approved>Aprobat</approved>
+      <inreview>În revizuire</inreview>
+      <staged>În practică</staged>
+      <published>Publicat</published>
+      <live>Publicat</live>
+    </publicationStates>
+    <view>Afișare</view>
+    <edit>Modifică</edit>
+    <download>Descarcă</download>
+    <downloadAll>Descarcă tot</downloadAll>
+    <preview>Previzualizare</preview>
+  </SocialIntegration>
+  <UIPopupWindow>
+    <title>
+      <DocViewer>Previzualizare</DocViewer>
+      <UIReadOnlyFileConfirmMessage>Deschide document</UIReadOnlyFileConfirmMessage>
+    </title>
+  </UIPopupWindow>
+  <ElementSet>
+    <dialog>
+      <label>
+        <resourceType>Tipul resursei</resourceType>
+      </label>
+    </dialog>
+  </ElementSet>
+  <UIPreviewCommentArea>
+    <label>
+      <commentTextAreaPreview>Adaugă comentariul tău...</commentTextAreaPreview>
+      <no-comment-yet>Niciun comentariu</no-comment-yet>
+    </label>
+  </UIPreviewCommentArea>
+
+  <OpenDocumentInOffice>
+    <label>
+      <exo.remote-edit.word>Open In Word</exo.remote-edit.word>
+      <exo.remote-edit.excel>Open In Excel</exo.remote-edit.excel>
+      <exo.remote-edit.powerpoint>Open In Powerpoint</exo.remote-edit.powerpoint>
+      <exo.remote-edit.desktop>Open On Desktop</exo.remote-edit.desktop>
+      <exo.remote-edit.desktop-app>Open In</exo.remote-edit.desktop-app>
+    </label>
+  </OpenDocumentInOffice>
+
+  <UIPopupMenu>
+    <msg>
+      <lock-node-read-only>Fișierul este protejat de către {0}. Deschidere în mod read only?</lock-node-read-only>
+    </msg>
+  </UIPopupMenu>
+  <ECMContextMenu>
+    <event>
+      <ShareDocuments>Distribuie</ShareDocuments>
+    </event>
+  </ECMContextMenu>
+  <UIPopupWindow>
+    <title>
+      <UIShareDocuments>Distribuie</UIShareDocuments>
+      <Share>Distribuie</Share>
+    </title>
+  </UIPopupWindow>
+  <UIShareDocuments>
+    <label>
+      <ShareButton>Distribuie</ShareButton>
+      <CancelButton>Renunță</CancelButton>
+      <TextAreaInit>Trimite un mesaj înainte să distribui...</TextAreaInit>
+      <ShareWith>Distribuie cu</ShareWith>
+      <Access>Editare acces</Access>
+      <SpaceMember>Members</SpaceMember>
+      <SelectASpace>Selectează un spațiu</SelectASpace>
+      <SharedADocument>a distribuit un document</SharedADocument>
+      <WhoHasAccess>Cine are acces</WhoHasAccess>
+      <success>Documentul a fost distribuit cu success</success>
+      <NoPermission>Nu ai permisiunea să distribui acest document</NoPermission>
+      <NoPermissionDelete>Nu poți șterge această permisiune</NoPermissionDelete>
+      <InvalidDeletion>Nu-ți poți șterge permisiunile</InvalidDeletion>
+      <InvalidEntry>Permisiunea nu poate fi editată</InvalidEntry>
+      <InvalidOwner>Nu poți schimba permisiunile proprietarului</InvalidOwner>
+      <Invalid>Ne pare rău, nu am putut să-l recunoaștem pe '{0}' ca un utilizator sau nume de spațiu</Invalid>
+      <option>
+        <read>Poți vedea</read>
+        <modify>Poți edita</modify>
+      </option>
+      <notification>
+        <read>citește</read>
+        <modify>editează</modify>
+      </notification>
+      <invite>
+        <placeholder>Introdu utilizatori sau nume de spații...</placeholder>
+      </invite>
+      <owner>Proprietar</owner>
+    </label>
+  </UIShareDocuments>
+
+  <UIActionBar>
+    <tooltip>
+      <ShareDocuments>Distribuie</ShareDocuments>
+    </tooltip>
+  </UIActionBar>
+</bundle>

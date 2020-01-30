@@ -1,0 +1,74 @@
+<%
+  def node = uicomponent.getNode();
+  StringBuilder sB;
+%>
+<table class="uiGrid table table-hover table-striped">      	 			
+  <tr>
+    <td ><%=_ctx.appRes("ScriptAction.view.label.action-name")%></td>
+    <td>
+  		<%if(node.hasProperty("exo:name")){%>
+  			<%=node.getProperty("exo:name").getString()%>
+  		<%}%>	
+ 		</td>
+  </tr>
+  <tr>
+    <td ><%=_ctx.appRes("ScriptAction.view.label.isDeep")%></td>
+    <td>
+    <%if(node.hasProperty("exo:isDeep")){%>
+      <%=node.getProperty("exo:isDeep").getString()%>
+    <%}%> 
+    </td>
+  </tr>
+  <tr>
+    <td ><%=_ctx.appRes("ScriptAction.view.label.nodeTypeName")%></td>
+    <td>
+    <%if(node.hasProperty("exo:nodeTypeName")){
+      sB = new StringBuilder();
+      def values = node.getProperty("exo:nodeTypeName").getValues();          
+      for(value in values) {
+        sB.append(value.getString()).append(",");
+      } 
+      if (sB.length() > 0) {
+        %>
+        <%= sB.deleteCharAt(sB.length()-1)%>        
+      <%
+        }
+      }%>
+    </td> 
+  </tr>
+  <tr>
+    <td ><%=_ctx.appRes("ScriptAction.view.label.lifecycle")%></td>
+    <td>
+      <%if(node.hasProperty("exo:lifecyclePhase")){
+        sB = new StringBuilder();
+        def values = node.getProperty("exo:lifecyclePhase").getValues();          
+        for(value in values) {
+          sB.append(value.getString()).append(",");
+        } 
+        if (sB.length() > 0) {
+          %>
+          <%= sB.deleteCharAt(sB.length()-1)%>        
+        <%
+          }
+        }%>
+    </td>         
+  </tr>
+  <tr>
+    <td ><%=_ctx.appRes("ScriptAction.view.label.affectedNodeTypeNames")%></td>
+    <td>
+    <%if(node.hasProperty("exo:affectedNodeTypeNames")){
+      sB = new StringBuilder();
+      def values = node.getProperty("exo:affectedNodeTypeNames").getValues();          
+      for(value in values) {
+        sB.append(value.getString()).append(",");
+      } 
+      if (sB.length() > 0) {
+        %>
+        <%= sB.deleteCharAt(sB.length()-1)%>        
+      <%
+        }
+      }%>
+    </td> 
+  </tr>
+  
+</table>

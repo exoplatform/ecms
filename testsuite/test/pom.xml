@@ -71,12 +71,6 @@
     </dependency>
     <!-- need for test -->
     <dependency>
-      <groupId>org.chromattic</groupId>
-      <artifactId>chromattic.core</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <!-- need for test -->
-    <dependency>
       <groupId>org.exoplatform</groupId>
       <artifactId>exo-jcr-services</artifactId>
       <scope>test</scope>
@@ -98,11 +92,6 @@
       <type>test-jar</type>
       <scope>test</scope>
     </dependency>
-    <dependency>
-      <groupId>org.exoplatform.gatein.portal</groupId>
-      <artifactId>exo.portal.component.test.jcr</artifactId>
-      <scope>test</scope>
-    </dependency>
     <!-- need for test -->
     <dependency>
       <groupId>org.hsqldb</groupId>
@@ -118,6 +107,11 @@
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>jcl-over-slf4j</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>log4j</groupId>
+      <artifactId>log4j</artifactId>
       <scope>test</scope>
     </dependency>
     <dependency>

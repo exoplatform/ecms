@@ -1,0 +1,58 @@
+<%
+   String[] hiddenField1 = ["jcrPath=/node/exo:move", "exo:move", "visible=false"] ; 
+   uicomponent.addHiddenField("hiddenInput1", hiddenField1) ;
+%>
+<div class="UIFormWithTitle">  
+	<% uiform.begin() %>
+  <div class="HorizontalLayout" style="border:0px;">
+  	<table class="UIFormGrid">    
+  		<tr>
+	      <td class="FieldLabel"><%=_ctx.appRes("Move.dialog.label.destination-workpsace")%></td>
+	      <td class="FieldComponent">
+		      <%
+		        String[] fieldDestWorkspace= ["jcrPath=/node/exo:move/exo:destWorkspace"] ;
+		        uicomponent.addTextField("destWorkspace", fieldDestWorkspace) ;
+		      %>
+		    </td>
+		  </tr>
+			  <tr>
+	      <td class="FieldLabel"><%=_ctx.appRes("Move.dialog.label.destination-path")%></td>
+	      <td class="FieldComponent">
+		      <%
+		        String[] fieldDestPath = ["jcrPath=/node/exo:move/exo:destPath"] ;
+		        uicomponent.addTextField("destPath", fieldDestPath) ;
+		      %>
+		    </td>
+		  </tr>
+		  <tr>
+	      <td class="FieldLabel"><%=_ctx.appRes("Move.dialog.label.primary-type")%></td>
+	      <td class="FieldComponent">
+		      <%
+		        String[] fieldPrimaryType = ["jcrPath=/node/exo:move/jcr:primaryType"] ;
+		        uicomponent.addTextField("primaryType", fieldPrimaryType) ;
+		      %>
+		    </td>
+		  </tr>
+		  <tr>
+	      <td class="FieldLabel"><%=_ctx.appRes("Move.dialog.label.mixin-types")%></td>
+	      <td class="FieldComponent">
+		      <%
+		        String[] fieldMixinTypes = ["jcrPath=/node/exo:move/jcr:mixinTypes"] ;
+		        uicomponent.addTextField("mixinTypes", fieldMixinTypes) ;
+		      %>
+		    </td>
+		  </tr>
+		</table>
+		<%/* start render action*/%>
+		<div class="UIAction"> 
+	      <% for(action in uicomponent.getActions()) { 
+	      		 String actionLabel = _ctx.appRes(uicomponent.getName() + ".action." + action) 
+						 String link = uicomponent.event(action) ;
+	      %>
+		    <a href="javascript:void(0);" onclick="$link" class="ActionButton LightBlueStyle" rel="tooltip" data-placement="bottom" title="$actionLabel">$actionLabel</a>
+	      <%}%>          
+	  </div>
+	  <%/* end render action*/%>
+  </div>
+  <%uiform.end()%>
+</div>

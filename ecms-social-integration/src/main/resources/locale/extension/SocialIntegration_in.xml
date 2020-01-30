@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UIConfirmMessage>
+    <label>
+      <ReadOnly>Buka baca saja</ReadOnly>
+    </label>
+  </UIConfirmMessage>
+
+  <UISocialPopupWindow>
+    <title>
+      <UIReadOnlyFileConfirmMessage>Buka Dokumen</UIReadOnlyFileConfirmMessage>
+    </title>
+  </UISocialPopupWindow>
+  <SocialIntegration>
+    <titles>
+      <fileSize>Ukuran File</fileSize>
+    </titles>
+    <messages>
+      <createdBy>diciptakan oleh</createdBy>
+      <editedBy>diedit oleh</editedBy>
+      <system>sistem</system>
+      <readmore>...Baca lebih banyak.</readmore>
+      <editTitle>Judul ini telah diperbarui untuk: {0}</editTitle>
+      <editName>Nama ini telah diperbarui untuk: {0}</editName>
+      <editDescription>Keterangan ini telah diperbarui untuk: {0}</editDescription>
+      <singleCreator>Pencipta adalah {0}</singleCreator>
+      <multiCreator>Penulis adalah {0}</multiCreator>
+      <addSource>Sumber file: {0} telah ditambahkan</addSource>
+      <addMultiSource>Sumber file: {0} telah ditambahkan</addMultiSource>
+      <removeSource>Sumber file: {0} telah dihapus</removeSource>
+      <removeMultiSource>Sumber berkas: {0} telah dihapus</removeMultiSource>
+      <editSummary>Ringkasan telah diperbarui untuk: {0}</editSummary>
+      <editLanguage>Bahasa sudah diperbarui untuk: {0}</editLanguage>
+      <editContent>Konten sudah diperbarui.</editContent>
+      <editFile>File sudah diperbarui.</editFile>
+      <emptyTitle>Judul sudah dihapus.</emptyTitle>
+      <emptySummary>Rangkuman sudah dihapus.</emptySummary>
+      <emptyContent>Konten sudah dihapus.</emptyContent>
+      <updateMetadata>Metadata {0} sudah diperbarui untuk: {1}</updateMetadata>
+      <removeMetadata>Metadata {0} sudah dihapus.</removeMetadata>
+      <removeTitle>Judul telah dihapus.</removeTitle>
+      <removeName>Nama sudah dihapus.</removeName>
+      <removeSummary>Rangkuman sudah dihapus.</removeSummary>
+      <removeDescription>Deskripsi sudah dihapus.</removeDescription>
+      <removeCreator>Pencipta: {0} sudah dihapus.</removeCreator>
+      <removeMultiCreator>Pembuat konten: {0} sudah dihapus.</removeMultiCreator>
+      <removeLanguage>Bahasa sudah dihapus.</removeLanguage>
+      <removeContent>Konten sudah dihapus.</removeContent>
+      <attachmentAdded>File(s) sudah dilampirkan.</attachmentAdded>
+      <attachmentRemoved>File(s) sudah dihapus.</attachmentRemoved>
+      <categoryAdded>Kategori: {0} sudah ditambahkan.</categoryAdded>
+      <categoryRemoved>Kategori: {0} telah dihapus.</categoryRemoved>
+      <tagAdded>Tag: {0} telah ditambahkan.</tagAdded>
+      <tagsAdded>Tag: {0} telah ditambahkan.</tagsAdded>
+      <tagRemoved>Tag: {0} telah dihapus.</tagRemoved>
+      <tagsRemoved>Tag: {0} telah dihapus.</tagsRemoved>
+      <stateChange>
+        <pending>Status publikasi sekarang tertunda.</pending>
+        <approved>Dokumen ini telah disetujui.</approved>
+        <staged>Publikasi telah dipentaskan.</staged>
+        <published>Dokumen telah dipublikasi.</published>
+      </stateChange>
+      <contentMoved>Publikasi telah dipindahkan ke: {0}</contentMoved>
+      <fileMoved>File telah dipindahkan ke: {0}</fileMoved>
+      <revisionChanged>Publikasi telah dikembalikan ke versi: {0}</revisionChanged>
+      <version>Versi: {0}</version>
+      <updatedOn>Diperbarui pada</updatedOn>
+      <updatedBy>dengan</updatedBy>
+      <loadMoreFiles>+{0} lebih</loadMoreFiles>
+    </messages>
+    <publicationStates>
+      <archived>Telah diarsipkan</archived>
+      <obsolete>Usang</obsolete>
+      <unpublished>Tidak dipublikasikan</unpublished>
+      <draft>Konsep</draft>
+      <pending>Tertunda</pending>
+      <approved>Disetujui</approved>
+      <inreview>Dalam review</inreview>
+      <staged>Di panggung kan</staged>
+      <published>Terpublikasikan</published>
+      <live>Diterbitkan</live>
+    </publicationStates>
+    <view>Tampilan</view>
+    <edit>Ubah</edit>
+    <download>Unduh</download>
+    <downloadAll>Unduh Semua</downloadAll>
+    <preview>Pratinjau</preview>
+  </SocialIntegration>
+  <UIPopupWindow>
+    <title>
+      <DocViewer>Pratinjau</DocViewer>
+      <UIReadOnlyFileConfirmMessage>Buka Dokumen</UIReadOnlyFileConfirmMessage>
+    </title>
+  </UIPopupWindow>
+  <ElementSet>
+    <dialog>
+      <label>
+        <resourceType>Jenis sumber</resourceType>
+      </label>
+    </dialog>
+  </ElementSet>
+  <UIPreviewCommentArea>
+    <label>
+      <commentTextAreaPreview>Tambahkan komentar anda...</commentTextAreaPreview>
+      <no-comment-yet>Belum ada komentar</no-comment-yet>
+    </label>
+  </UIPreviewCommentArea>
+
+  <OpenDocumentInOffice>
+    <label>
+      <exo.remote-edit.word>Open In Word</exo.remote-edit.word>
+      <exo.remote-edit.excel>Open In Excel</exo.remote-edit.excel>
+      <exo.remote-edit.powerpoint>Open In Powerpoint</exo.remote-edit.powerpoint>
+      <exo.remote-edit.desktop>Open On Desktop</exo.remote-edit.desktop>
+      <exo.remote-edit.desktop-app>Open In</exo.remote-edit.desktop-app>
+    </label>
+  </OpenDocumentInOffice>
+
+  <UIPopupMenu>
+    <msg>
+      <lock-node-read-only>Berkas ini dikunci oleh pengguna {0}. Buka hanya baca?</lock-node-read-only>
+    </msg>
+  </UIPopupMenu>
+  <ECMContextMenu>
+    <event>
+      <ShareDocuments>Bagikan</ShareDocuments>
+    </event>
+  </ECMContextMenu>
+  <UIPopupWindow>
+    <title>
+      <UIShareDocuments>Bagikan Dokumen</UIShareDocuments>
+      <Share>Bagikan</Share>
+    </title>
+  </UIPopupWindow>
+  <UIShareDocuments>
+    <label>
+      <ShareButton>Bagikan</ShareButton>
+      <CancelButton>Batalkan</CancelButton>
+      <TextAreaInit>Kirim pesan setelah berbagi...</TextAreaInit>
+      <ShareWith>Berbagi dengan</ShareWith>
+      <Access>Mengakses</Access>
+      <SpaceMember>Members</SpaceMember>
+      <SelectASpace>Pilih sebuah ruang</SelectASpace>
+      <SharedADocument>bagikan dokumen</SharedADocument>
+      <WhoHasAccess>Siapa yang punya akses</WhoHasAccess>
+      <success>Dokumennya berhasil dibagikan</success>
+      <NoPermission>Anda tidak diizinkan untuk membagikan dokumen ini</NoPermission>
+      <NoPermissionDelete>Anda tidak dapat menghapus izin ini</NoPermissionDelete>
+      <InvalidDeletion>Anda tidak dapat menghapus izin Anda sendiri</InvalidDeletion>
+      <InvalidEntry>Izin ini tidak dapat diedit</InvalidEntry>
+      <InvalidOwner>Anda tidak dapat mengubah izin pemilik</InvalidOwner>
+      <Invalid>Maaf, kita tidak bisa mengenali '{0}' sebagai pengguna atau nama ruang yang valid</Invalid>
+      <option>
+        <read>Dapat melihat</read>
+        <modify>Bisa edit</modify>
+      </option>
+      <notification>
+        <read>baca</read>
+        <modify>ubah</modify>
+      </notification>
+      <invite>
+        <placeholder>Masukkan nama pengguna atau spasi...</placeholder>
+      </invite>
+      <owner>Pemilik</owner>
+    </label>
+  </UIShareDocuments>
+
+  <UIActionBar>
+    <tooltip>
+      <ShareDocuments>Bagikan</ShareDocuments>
+    </tooltip>
+  </UIActionBar>
+</bundle>

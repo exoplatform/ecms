@@ -29,17 +29,23 @@ import javax.jcr.Session;
 import javax.jcr.query.Query;
 import javax.jcr.query.QueryResult;
 
+import org.exoplatform.container.PortalContainer;
+import org.exoplatform.container.component.RequestLifeCycle;
+import org.exoplatform.portal.config.DataStorage;
+import org.exoplatform.portal.config.UserPortalConfigService;
 import org.exoplatform.portal.config.model.PortalConfig;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.core.WCMConfigurationService;
 import org.exoplatform.services.wcm.core.WebSchemaConfigService;
 import org.exoplatform.services.wcm.portal.LivePortalManagerService;
+
 import org.picocontainer.Startable;
 
 /*
@@ -63,6 +69,12 @@ public class LivePortalManagerServiceImpl implements LivePortalManagerService, S
   private RepositoryService                 repositoryService;
 
   private WCMConfigurationService           wcmConfigService;
+  
+  private WebSchemaConfigService            webSchemaConfigService;
+  
+  private UserPortalConfigService           portalConfigService;
+
+  private ListenerService                   listenerService;
 
   /**
    * Instantiates a new live portal manager service impl.
@@ -72,11 +84,16 @@ public class LivePortalManagerServiceImpl implements LivePortalManagerService, S
    * @param repositoryService the repository service
    */
   public LivePortalManagerServiceImpl(
+      ListenerService listenerService,
       WebSchemaConfigService webSchemaConfigService,
       WCMConfigurationService wcmConfigurationService,
+      UserPortalConfigService portalConfigService,
       RepositoryService repositoryService) {
     this.wcmConfigService = wcmConfigurationService;
+    this.webSchemaConfigService = webSchemaConfigService;
+    this.portalConfigService = portalConfigService;
     this.repositoryService = repositoryService;
+    this.listenerService = listenerService;
   }
 
   /*
@@ -123,7 +140,10 @@ public class LivePortalManagerServiceImpl implements LivePortalManagerService, S
                                   final String repository,
                                   final String portalName) throws Exception {
     Node portalsStorage = getLivePortalsStorage(sessionProvider);
-    return portalsStorage.getNode(portalName);
+    if (portalsStorage != null) {
+      return portalsStorage.getNode(portalName);
+    }
+    return null;
   }
 
   /*
@@ -258,6 +278,7 @@ public class LivePortalManagerServiceImpl implements LivePortalManagerService, S
     SessionProvider sessionProvider = null;
     Session session = null;
     try {
+      checkAllPortalSitesCreated();
       sessionProvider = SessionProvider.createSystemProvider();
       ManageableRepository repository = repositoryService.getCurrentRepository();
       NodeLocation nodeLocation = wcmConfigService.getLivePortalsLocation();
@@ -270,11 +291,11 @@ public class LivePortalManagerServiceImpl implements LivePortalManagerService, S
         livePortalPaths.putIfAbsent(portalNode.getName(),portalNode.getPath());
       }
     } catch (Exception e) {
-      if (LOG.isErrorEnabled()) {
-        LOG.error("Error when starting LivePortalManagerService: ", e);
-      }
+      LOG.error("Error when starting LivePortalManagerService: ", e);
     } finally {
-      sessionProvider.close();
+      if (sessionProvider != null) {
+        sessionProvider.close();
+      }
     }
   }
 
@@ -283,5 +304,32 @@ public class LivePortalManagerServiceImpl implements LivePortalManagerService, S
 
   public String getPortalPathByName(String portalName) throws Exception {
     return livePortalPaths.get(portalName);
+  }
+
+  private void checkAllPortalSitesCreated() throws Exception {
+    RequestLifeCycle.begin(PortalContainer.getInstance());
+    try {
+      DataStorage dataStorage = portalConfigService.getDataStorage();
+      List<String> allPortalNames = dataStorage.getAllPortalNames();
+      if (allPortalNames != null) {
+        for (String portalName : allPortalNames) {
+          try {
+            Node livePortal = getLivePortal(SessionProvider.createSystemProvider(), portalName);
+            if (livePortal !=null) {
+              continue;
+            }
+          } catch (Exception e) {
+            // Expected when portal node doesn't exist
+          }
+          PortalConfig portalConfig = dataStorage.getPortalConfig(portalName);
+          if (portalConfig == null) {
+            continue;
+          }
+          listenerService.broadcast("org.exoplatform.portal.config.DataStorage.portalConfigCreated", dataStorage, portalConfig);;
+        }
+      }
+    } finally {
+      RequestLifeCycle.end();
+    }
   }
 }

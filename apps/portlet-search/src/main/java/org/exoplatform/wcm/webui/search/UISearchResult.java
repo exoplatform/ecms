@@ -327,24 +327,7 @@ public class UISearchResult extends UIContainer {
    * @throws Exception the exception
    */
   public String getTitle(Node node) throws Exception {
-    if (UIWCMSearchPortlet.SEARCH_CONTENT_MODE.equals(this.getResultType())) {
-      return org.exoplatform.ecm.webui.utils.Utils.getTitle(node);
-    } else {
-      Session session = node.getSession();
-      Node mopLink = (Node) session.getItem(node.getPath() + "/mop:link");
-      if (mopLink != null && mopLink.hasProperty("mop:page")) {
-        String mopPageLink = mopLink.getProperty("mop:page").getValue().getString();
-        Node mopPage = (Node) session.getItem(mopPageLink);
-        if (mopPage != null && mopPage.hasProperty("gtn:name")) {
-          return mopPage.getProperty("gtn:name").getValue().getString();
-        } else {
-          return node.getName().replaceFirst("mop:", "");
-        }
-      } else {
-        return node.getName().replaceFirst("mop:", "");
-      }
-      
-    }
+    return org.exoplatform.ecm.webui.utils.Utils.getTitle(node);
   }
 
   /**
@@ -624,8 +607,7 @@ public class UISearchResult extends UIContainer {
             .concat(" - ")
             .concat(getModifiedDate(realNode));
     } else {
-      return StringUtils.substringBefore(StringUtils.substringAfter(realNode.getPath(),
-              SiteSearchService.PATH_PORTAL_SITES.concat("/mop:")),"/")
+      return resultNode.getName()
               .concat(" - ")
               .concat(resultNode.getUserNavigationURI());
     }

@@ -1,0 +1,90 @@
+<%
+def rcontext = _ctx.getRequestContext();
+def jsManager = rcontext.getJavascriptManager();
+def requireJs = jsManager.getRequireJS();
+requireJs.require("SHARED/share-content", "shareContent");
+requireJs.addScripts("eXo.ecm.ShareContent.init();");
+String addAction = uicomponent.event("Add") + "; return false;";
+String restUrl = uicomponent.getRestURL();
+//String value = uicomponent.getValue();
+String placeholder = _ctx.appRes("UIShareDocuments.label.invite.placeholder");
+placeholder = placeholder?.replace("'", "\\'").replace("&#39;", "\\&#39;");
+
+String SHARECONTENT_BUNDLE_LOCATION = _ctx.appRes("locale.extension.SocialIntegration");
+String SHARE_OPTION_CANVEW          = _ctx.appRes("UIShareDocuments.label.option.read");
+String SHARE_OPTION_CANMODIFY       = _ctx.appRes("UIShareDocuments.label.option.modify");
+String SHARE_PERMISSION_VIEW        = "read";
+String SHARE_PERMISSION_MODIFY      = "modify";
+
+%>
+<%uiform.begin();%>
+
+<div id="UIShareDocument" class="UIForm uiShareDocuments resizable">
+  <div class="pd-15-0">
+    <div class="attachedFile">
+      <i class="<%=uiform.getIconURL()%>"></i> <b class="fileName"><%=uiform.getDocumentName()%></b>
+    </div>
+    <a id="share-with"><strong><%=_ctx.appRes("UIShareDocuments.label.ShareWith")%></strong></a>
+    <div class="addInvite">
+	  <div class="uiUserInvitation">
+        <div class="mention-input pull-left">
+            <% uiform.renderField("userSuggester"); %>
+        </div>
+        <div class="sharePermission pull-left">
+          <% if(uicomponent.getPermission().equals(SHARE_PERMISSION_VIEW)) { %>
+            <div class="btn-toolbar" id="selectPermission" style="margin: 0;">
+                <div class="btn-group">
+                    <button class="btn dropdown-toggle" data-toggle="dropdown">
+                      <a>
+                        <i class="uiIconWatch uiIconBlue"></i>
+                      </a>
+                      <i class="uiIconMiniArrowDown uiIconBlue"></i>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li>
+                          <a onclick="<%=uicomponent.event("ChangePermission")%>"><i class="uiIconEdit uiIconBlue"></i> $SHARE_OPTION_CANMODIFY</a>
+                        </li>
+                    </ul>
+                </div><!-- /btn-group -->
+            </div>
+          <% } else { %>
+            <div class="btn-toolbar" id="selectPermission" style="margin: 0;">
+                <div class="btn-group">
+                  <button class="btn dropdown-toggle" data-toggle="dropdown">
+                    <a>
+                      <i class="uiIconEdit uiIconBlue"></i>
+                    </a>
+                    <i class="uiIconMiniArrowDown uiIconBlue"></i>
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li>
+                      <a onclick="<%=uicomponent.event("ChangePermission")%>">
+                        <i class="uiIconWatch uiIconBlue"></i>
+                        $SHARE_OPTION_CANVEW
+                      </a>
+                    </li>
+                  </ul>
+                </div><!-- /btn-group -->
+            </div>
+          <% } %>
+          </div>
+        </div>
+        <%
+        requireJs.require("SHARED/userInvitation", "invite");
+        requireJs.addScripts("invite.build('userSuggester', '$restUrl', '$placeholder');");
+        %>
+	</div>
+  </div>
+  <% uicomponent.renderChild("UIWhoHasAccess");%>
+  <div id="TextArea" class="addComment">
+    	<textarea class="textarea" name="textAreaInput" id="textAreaInput" rows="10" cols="30" title="<%=_ctx.appRes("UIShareDocuments.label.TextAreaInit")%>" placeholder="<%=_ctx.appRes("UIShareDocuments.label.TextAreaInit")%>" onchange="<%=uicomponent.event("TextChange")%>"><%=uicomponent.getComment()%></textarea>
+  </div>
+</div>
+
+<div class="uiActionBorder">
+  <button type="button" class="btn btn-primary" onclick="eXo.ecm.ShareContent.doShare();" disabled><%=_ctx.appRes("UIShareDocuments.label.ShareButton")%></button>
+  <button type="button" class="hidden" id="shareActionBtn" onclick="<%=uicomponent.event("Confirm")%>" disabled></button>
+  <button type="button" class="btn" onclick="<%=uicomponent.event("Cancel")%>"><%=_ctx.appRes("UIShareDocuments.label.CancelButton")%></button>
+</div>
+
+<%uiform.end();%>

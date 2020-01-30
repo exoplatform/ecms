@@ -1,0 +1,204 @@
+/**
+  LTR skin for nt:file template
+*/
+.MediaContent {  
+	color: #0e396c;
+}
+
+.MediaContent .TopNavContent {  
+    background: #F8F8F8;
+    border: 1px solid #E1E1E1;
+}
+
+.MediaContent .TopTitle {  
+    color: #4F4F4F;
+    font-weight: bold;
+    height: 28px;
+    line-height: 26px;
+    padding-left: 10px;
+	width:75%;
+	overflow:hidden;
+	float:left;
+}
+
+.MediaContent .ActionButton{
+  padding: 4px 0 !important;
+}
+
+.MediaContent .ActionButton a{
+    background: url("/eXoWCMResources/skin/images/media/DownloadFile.png") no-repeat scroll 4px center transparent;
+    border-left: 1px solid #E1E1E1;
+    color: #058EE6;
+    line-height: 20px;
+    padding: 3px 10px 3px 29px;
+}
+
+.MediaContent .ActionSwitchButton a{
+    background: url("/eXoWCMResources/skin/images/media/Switch.png") no-repeat scroll 4px center transparent;
+    color: #058EE6;
+    line-height: 20px;
+    padding: 3px 10px 3px 29px;
+}
+
+.MediaContent .ActionTextButton a{
+    background: url("/eXoWCMResources/skin/images/media/back.png") no-repeat scroll 4px center transparent;	
+    color: #058EE6;
+    line-height: 20px;
+    padding: 3px 10px 3px 29px;
+}
+
+.MediaContent .ECMIframe {
+	border: 1px solid #cbcbcb; 
+	height: 100%;
+	overflow: auto;
+	width: 93%;
+	margin: 5px;
+	background: white;
+}
+
+.MediaContent .ECMIframe body {
+	font-size: 13px;
+}
+
+.MediaContent .Content {  
+	white-space: normal;
+	padding: 20px 0;
+}
+
+.MediaContent .Content .TextContent {  
+	overflow: auto;
+	height: 100%;
+	margin: auto;
+	width: 89%;
+	padding: 10px;
+	border: 1px solid #b7b7b7;
+}
+
+.MediaContent .Content .TextContent pre {  
+	white-space: normal;
+}
+
+.MediaContent .ContentDetail {  
+	text-align: center;
+	overflow: visible;
+	padding: 15px 0px;
+}
+	
+.MediaContent .UIVoteForm {
+	padding: 0px;
+}
+
+.MediaContent .UIRatingInfoContainer {
+	margin:0px 0px 0px auto;
+}
+
+.MediaContent p a {
+	color: #058EE6;
+	text-decoration: underline;
+}
+
+.MediaContent .MediaFrame {
+	background: white;
+	padding: 0px 10px;
+}
+	
+.MediaContent .MediaFrame .TopLeftMediaFrame {
+	background: url('/eXoWCMResources/skin/images/media/ImageMedia.gif') no-repeat left -16px;
+	padding-left: 9px;
+}
+
+.MediaContent .MediaFrame .TopRightArtictleFrame {
+	background: url('/eXoWCMResources/skin/images/media/ImageMedia.gif') no-repeat right -16px;
+	padding-right: 2px;
+}
+
+.MediaContent .MediaFrame .TopCenterMediaFrame {
+	background: url('/eXoWCMResources/skin/images/media/ImageMedia.gif') repeat-x right -32px;
+	height: 16px; 
+}
+
+.MediaContent .MediaFrame .MediaFrameContainer {
+	border: solid 1px #e0e0e0;
+	border-top: none;
+}
+
+.MediaContent .TopCenterMediaFrame .MediaField {
+	padding: 0px 0px 0px 5px;
+	width: 120px;
+	background: #fff;
+	height: 16px;
+	float: left;
+}
+
+.MediaContent .MidlleLeftMediaFrame  {
+	background: white;
+}
+
+.MediaContent .ContentIcon {
+	background: url('/eXoWCMResources/skin/images/article/ImageArticle.gif') no-repeat left -96px;
+}
+
+.MediaContent .LinksIcon {
+	background: url('/eXoWCMResources/skin/images/article/ImageArticle.gif') no-repeat left -80px;
+}
+
+.MediaContent .FieldContent {
+	padding: 1px 5px 5px 0px;
+	width: 90%;
+}
+
+.MediaContent .FieldContent .FieldContainerContent {
+	font: normal 11px Verdana;
+	background: white;
+	margin: 5px 2px 3px 5px;
+}
+
+.MediaContent .FieldContent .LabelContent{
+	padding: 5px 0px 0px 5px;
+	overflow: auto;
+	text-align: left;
+}
+
+.MediaContent .LabelContent p a {
+	color: #058EE6;
+	text-decoration: underline;
+}
+
+.MediaContent .tdShowHelp {
+	width: 30px;
+}
+
+.MediaContent .IconInContextHelp {
+  cursor: pointer;
+  float: left;
+  height: 16px;
+  width: 16px;
+  margin-left: 10px;
+}
+
+.MediaContent .ShowHelpIcon {
+  background: url("/eXoWCMResources/skin/background/ContextHelp/ShowHelpIcon.gif") no-repeat scroll right center transparent;
+}
+.MediaContent .InContextHelpContent {
+  display: none;
+  left: -250px;
+  position: absolute;
+  top: -13px;
+  width: 250px;
+  z-index: 100;
+}
+
+.Media .InContextHelpPopup {
+  background: url("/eXoWCMResources/skin/background/ContextHelp/TopRightLeft15x14.png") no-repeat scroll right 17px transparent;
+}
+
+.Media .LeftInContextHelpPopup {
+  background: none repeat scroll 0 0 #FFFFFF;
+  border: 1px solid #BCBCBC;
+  border-radius: 10px 10px 10px 10px;
+  box-shadow: 2px 2px 2px #CBCBCB;
+  margin-right: 14px;
+  padding: 10px 10px 15px;
+  position: relative;
+  z-index: -1;
+}

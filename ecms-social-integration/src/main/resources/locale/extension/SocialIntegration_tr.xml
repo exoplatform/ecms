@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UIConfirmMessage>
+    <label>
+      <ReadOnly>Salt Okunur Aç</ReadOnly>
+    </label>
+  </UIConfirmMessage>
+
+  <UISocialPopupWindow>
+    <title>
+      <UIReadOnlyFileConfirmMessage>Belgeyi Aç</UIReadOnlyFileConfirmMessage>
+    </title>
+  </UISocialPopupWindow>
+  <SocialIntegration>
+    <titles>
+      <fileSize>Dosya Boyutu</fileSize>
+    </titles>
+    <messages>
+      <createdBy>oluşturan</createdBy>
+      <editedBy>düzenleyen</editedBy>
+      <system>Sistem</system>
+      <readmore>...Devamını oku.</readmore>
+      <editTitle>Başlık güncellendi: {0}</editTitle>
+      <editName>Adı güncellendi: {0}</editName>
+      <editDescription>Açıklama güncellendi: {0}</editDescription>
+      <singleCreator>{0} Yaratıcısıdır</singleCreator>
+      <multiCreator>{0} Yaratıcılarıdır</multiCreator>
+      <addSource>Dosya kaynağı: {0} eklendi</addSource>
+      <addMultiSource>Dosya kaynağı: {0} eklendi</addMultiSource>
+      <removeSource>Dosya kaynağı: {0} kaldırıldı</removeSource>
+      <removeMultiSource>Dosya kaynağı: {0} kaldırıldı</removeMultiSource>
+      <editSummary>Özet güncellendi: {0}</editSummary>
+      <editLanguage>Dil güncellendi: {0}</editLanguage>
+      <editContent>İçeriği güncelleştirildi.</editContent>
+      <editFile>Dosyası güncelleştirildi.</editFile>
+      <emptyTitle>Başlığı kaldırıldı.</emptyTitle>
+      <emptySummary>Özet kaldırıldı.</emptySummary>
+      <emptyContent>İçerik kaldırıldı.</emptyContent>
+      <updateMetadata>Meta veriler {0} için güncellendi: {1}</updateMetadata>
+      <removeMetadata>Meta veriler {0} kaldırıldı.</removeMetadata>
+      <removeTitle>Başlık kaldırıldı.</removeTitle>
+      <removeName>Adı kaldırıldı.</removeName>
+      <removeSummary>Özet kaldırıldı.</removeSummary>
+      <removeDescription>Açıklama kaldırıldı.</removeDescription>
+      <removeCreator>Hazırlayan: {0} kaldırıldı.</removeCreator>
+      <removeMultiCreator>Hazırlayan: {0} kaldırılmıştır.</removeMultiCreator>
+      <removeLanguage>Dil kaldırıldı.</removeLanguage>
+      <removeContent>İçerik kaldırıldı.</removeContent>
+      <attachmentAdded>Dosya(lar) eklendi.</attachmentAdded>
+      <attachmentRemoved>Dosya(lar) kaldırıldı.</attachmentRemoved>
+      <categoryAdded>Kategori: {0} eklendi.</categoryAdded>
+      <categoryRemoved>Kategori: {0} kaldırıldı.</categoryRemoved>
+      <tagAdded>Etiket: {0} eklendi.</tagAdded>
+      <tagsAdded>Etiketler: {0} eklendi.</tagsAdded>
+      <tagRemoved>Etiket: {0} kaldırıldı.</tagRemoved>
+      <tagsRemoved>Etiketler: {0} kaldırılmıştır.</tagsRemoved>
+      <stateChange>
+        <pending>Yayın durumu şimdi bekliyor.</pending>
+        <approved>Belge onaylandı.</approved>
+        <staged>Yayın düzenledi.</staged>
+        <published>Belge yayınladı.</published>
+      </stateChange>
+      <contentMoved>Yayın taşındı: {0}</contentMoved>
+      <fileMoved>Dosya taşındı: {0}</fileMoved>
+      <revisionChanged>Yayın sürümüne geri yüklendi: {0}</revisionChanged>
+      <version>Sürüm: {0}</version>
+      <updatedOn>Şu tarihte güncellendi:</updatedOn>
+      <updatedBy>tarafından</updatedBy>
+      <loadMoreFiles>+{0} fazla</loadMoreFiles>
+    </messages>
+    <publicationStates>
+      <archived>Arşivlenmiş</archived>
+      <obsolete>Eskimiş</obsolete>
+      <unpublished>Yayınlanmamış</unpublished>
+      <draft>Taslak</draft>
+      <pending>Bekleyen</pending>
+      <approved>Onaylı</approved>
+      <inreview>İnceleniyor</inreview>
+      <staged>Düzenlendi</staged>
+      <published>Yayınlandı</published>
+      <live>Yayınlandı</live>
+    </publicationStates>
+    <view>Görünüm</view>
+    <edit>Düzenle</edit>
+    <download>İndir</download>
+    <downloadAll>Tümünü İndir</downloadAll>
+    <preview>Önizleme</preview>
+  </SocialIntegration>
+  <UIPopupWindow>
+    <title>
+      <DocViewer>Önizleme</DocViewer>
+      <UIReadOnlyFileConfirmMessage>Belgeyi Aç</UIReadOnlyFileConfirmMessage>
+    </title>
+  </UIPopupWindow>
+  <ElementSet>
+    <dialog>
+      <label>
+        <resourceType>Kaynak Türü</resourceType>
+      </label>
+    </dialog>
+  </ElementSet>
+  <UIPreviewCommentArea>
+    <label>
+      <commentTextAreaPreview>Yorum ekle...</commentTextAreaPreview>
+      <no-comment-yet>Henüz yorum yok</no-comment-yet>
+    </label>
+  </UIPreviewCommentArea>
+
+  <OpenDocumentInOffice>
+    <label>
+      <exo.remote-edit.word>Open In Word</exo.remote-edit.word>
+      <exo.remote-edit.excel>Open In Excel</exo.remote-edit.excel>
+      <exo.remote-edit.powerpoint>Open In Powerpoint</exo.remote-edit.powerpoint>
+      <exo.remote-edit.desktop>Open On Desktop</exo.remote-edit.desktop>
+      <exo.remote-edit.desktop-app>Open In</exo.remote-edit.desktop-app>
+    </label>
+  </OpenDocumentInOffice>
+
+  <UIPopupMenu>
+    <msg>
+      <lock-node-read-only>Bu dosya {0} kullanıcısı tarafından kilitlenmiştir. Salt okunur olarak açılsın mı?</lock-node-read-only>
+    </msg>
+  </UIPopupMenu>
+  <ECMContextMenu>
+    <event>
+      <ShareDocuments>Paylaş</ShareDocuments>
+    </event>
+  </ECMContextMenu>
+  <UIPopupWindow>
+    <title>
+      <UIShareDocuments>Paylaş</UIShareDocuments>
+      <Share>Paylaş</Share>
+    </title>
+  </UIPopupWindow>
+  <UIShareDocuments>
+    <label>
+      <ShareButton>Paylaş</ShareButton>
+      <CancelButton>İptal</CancelButton>
+      <TextAreaInit>Paylaşıldığında bir mesaj gönder...</TextAreaInit>
+      <ShareWith>Şununla paylaş:</ShareWith>
+      <Access>Giriş</Access>
+      <SpaceMember>Members</SpaceMember>
+      <SelectASpace>Bir Alan Seç</SelectASpace>
+      <SharedADocument>bir belge paylaş</SharedADocument>
+      <WhoHasAccess>Erişimi olanlar</WhoHasAccess>
+      <success>Belge başarıyla paylaşıldı</success>
+      <NoPermission>Bu belgeyi paylaşmaya izniniz yok</NoPermission>
+      <NoPermissionDelete>Bu izni silemezsiniz</NoPermissionDelete>
+      <InvalidDeletion>Kendi izninizi silemezsiniz</InvalidDeletion>
+      <InvalidEntry>Bu izin düzenlenemez</InvalidEntry>
+      <InvalidOwner>Sahip izinlerini değiştiremezsiniz</InvalidOwner>
+      <Invalid>Üzgünüz, '{0}' geçerli bir kullanıcı veya uzay adı olarak tanınamadı</Invalid>
+      <option>
+        <read>Görüntüleyebilir</read>
+        <modify>Düzenleyebilir</modify>
+      </option>
+      <notification>
+        <read>oku</read>
+        <modify>düzenle</modify>
+      </notification>
+      <invite>
+        <placeholder>Kullanıcı veya alan adlarını girin...</placeholder>
+      </invite>
+      <owner>Sahibi</owner>
+    </label>
+  </UIShareDocuments>
+
+  <UIActionBar>
+    <tooltip>
+      <ShareDocuments>Paylaş</ShareDocuments>
+    </tooltip>
+  </UIActionBar>
+</bundle>

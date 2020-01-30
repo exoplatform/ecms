@@ -1,0 +1,209 @@
+
+<%
+String perm = PERMISSION.equals("read") ? _ctx.appRes("Notification.label.view") : _ctx.appRes("Notification.label.modify");
+%>
+
+<table border="0" cellpadding="0" cellspacing="0" width="600" bgcolor="#ffffff" align="center" style="background-color: #ffffff; font-size: 13px;color:#333333;line-height: 18px;font-family: HelveticaNeue, Helvetica, Arial, sans-serif;">
+<tr>
+<td align="center"  valign="middle" >
+<table  cellpadding="0" cellspacing="0" width="100%" bgcolor="#ffffff" align="center" style="border:1px solid #d8d8d8;">
+<tr>
+<td  height="45" valign="middle" style="margin:0;height:45px;font-weight:bold;vertical-align:middle;;background-color: #efefef;font-family: 'HelveticaNeue Bold', Helvetica, Arial, sans-serif;color:#2f5e92;font-size:18px;text-align:center">
+<%=_ctx.appRes("Notification.title.ShareFileToSpacePlugin", SPACE)%>
+</td>
+</tr>
+</table>
+</td>
+</tr><!--end header area-->
+    <tr>
+        <td bgcolor="#ffffff" style="background-color: #ffffff;">
+            <table cellpadding="0" cellspacing="0" width="100%"  bgcolor="#ffffff" style="background-color: #ffffff; border-left:1px solid #d8d8d8;border-right:1px solid #d8d8d8;">
+                <tr>
+                    <td bgcolor="#ffffff" style="background-color: #ffffff;">
+                        <table border="0" cellpadding="0" cellspacing="0" width="92%" bgcolor="#ffffff" align="center" style="background-color: #ffffff; font-size: 13px;color:#333333;line-height: 18px;">
+                            <tr>
+                                <td align="left" bgcolor="#ffffff" style="background-color: #ffffff;padding: 10px 0;">
+                                    <p style="margin: 10px 0; color: #333333; font-family: HelveticaNeue,Helvetica,Arial,sans-serif; font-size: 13px; line-height: 18px;"><%=_ctx.appRes("Notification.label.SayHello")%> <%=_ctx.escapeHTML(FIRSTNAME)%>,</p>
+<p style="margin: 10px 0; color: #333333; font-family: HelveticaNeue,Helvetica,Arial,sans-serif; font-size: 13px; line-height: 18px;">
+<%
+String profileUrl = "<strong><a target=\"_blank\" style=\"color: #2f5e92; font-family: 'HelveticaNeue Bold', Helvetica, Arial, sans-serif; text-decoration: none; font-size: 13px; line-height: 18px;\" href=\""+ PROFILE_URL + "\">" + _ctx.escapeHTML(USER) + "</a></strong>";
+String spaceUrl = "<strong><a target=\"_blank\" style=\"color: #2f5e92; font-family: 'HelveticaNeue Bold', Helvetica, Arial, sans-serif; text-decoration: none; font-size: 13px; line-height: 18px;\" href=\""+ SPACE_URL + "\">" + _ctx.escapeHTML(SPACE) + "</a></strong>";
+String permission = "<strong><a>" + perm + "</a></strong>";
+%>
+<%=_ctx.appRes("Notification.message.ShareFileToSpacePlugin", profileUrl, permission, spaceUrl)%>:
+
+</p>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#ffffff" align="center" style="background-color: #ffffff; font-size: 13px;color:#333333;line-height: 18px; margin-bottom: 15px;">
+    <tbody>
+        <tr>
+            <td align="left" bgcolor="#ffffff" style="background-color: #f9f9f9; padding: 15px 20px;">
+                <table border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#ffffff" align="center" style="background-color: #ffffff; font-size: 13px; color: #333333; line-height: 18px;">
+                    <tbody>
+                        <tr>
+                            <td align="left" bgcolor="#f9f9f9" style="background-color: #f9f9f9; padding: 15px 0;">
+                                <table border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#ffffff" align="center"
+                                    style="background-color: #ffffff; font-size: 13px; color: #333333; line-height: 18px;">
+                                    <tbody>
+                                        <tr>
+                                            <td align="left" bgcolor="#f9f9f9" style="background-color: #f9f9f9; line-height: 16px; font-family: HelveticaNeue, Helvetica, Arial, sans-serif; color: #333333; padding: 5px 0;">
+                                                <hr style="border-width: 1px 0 0; border-style: solid none none; border-color: #d8d8d8 transparent transparent; margin: 6px 0; padding: 0;">
+                                            </td>
+</tr>
+                                        <tr>
+                                            <td align="left" bgcolor="#f9f9f9" style="background-color: #f9f9f9; padding: 0 20px 1px; line-height: 16px; font-family: HelveticaNeue, Helvetica, Arial, sans-serif; color: #333333;">
+                                                <table border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#ffffff" align="center" style="width: 100%; background-color: #ffffff; font-size: 13px; color: #333333; line-height: 18px;">
+                                                    <tr>
+                                                        <% if (TYPE.startsWith("video") && (THUMBNAIL_URL == null)) { %>
+                                                            <td align="center" valign="top" bgcolor="#f9f9f9" style="vertical-align: top; background-color: #f9f9f9;">
+                                                        <% } else { %>
+                                                            <td align="center" valign="top" bgcolor="#f9f9f9" style="vertical-align: top; background-color: #f9f9f9; padding: 0 15px 0 0;">
+                                                                <% } %>
+                                                                <a href="$DOCUMENT_URL" style="margin: 0; padding: 0; display: block; margin-top: 5px; min-height: 64px;">
+                                                                    <img style="max-width: 300px;" src="$THUMBNAIL_URL" alt="image" />
+</a>
+                                                                 <% if (TYPE.startsWith("video")) { %>
+                                                                    <a href="$DOCUMENT_URL" style="font-size: 13px; line-height: 20px; font-family: HelveticaNeue, Helvetica, Arial, sans-serif; text-decoration: none; color: #2F5E92; white-space: nowrap;" >
+                                                                        <span style="
+                                                                            display: inline-block;
+                                                                            vertical-align: 0px;
+                                                                            border-top: 5px solid transparent;
+                                                                            border-bottom: 5px solid transparent;
+                                                                            border-left: 5px solid #5073a7; margin-right: 2px;">
+                                                                        </span>
+<%=_ctx.appRes("FileActivityChildPlugin.label.WatchTheVideo")%>
+</a>
+                                                                  <% } %>
+                                                            </td>
+<td align="left" bgcolor="#f9f9f9" width="90%" align="top" style="width: 90%; background-color: #f9f9f9; padding: 0 0; vertical-align: top;">
+<a href="$DOCUMENT_URL" style="display: inline-block; color: #2f5e92; font-family: 'HelveticaNeue Bold', Helvetica, Arial, sans-serif; font-size: 13px; line-height: 18px; font-weight: bold; text-decoration: none; margin: 0 0 5px;">$DOCUMENT</a>
+                                                            <% if (MESSAGE != null) { %>
+                                                            <p>
+                                                            $MESSAGE
+                                                            </p>
+<% } %>
+</td>
+                                                    </tr>
+</table>
+                                            </td>
+</tr>
+                                    </tbody>
+</table>
+                            </td>
+</tr>
+                    </tbody>
+</table>
+                                                </td>
+</tr>
+                                        </tbody>
+</table>
+
+    <p style="margin: 0 0 20px;">
+    <a target="_blank" style="
+        display: inline-block;
+        text-decoration: none;
+        font-size: 11px;
+        font-family: 'HelveticaNeue Bold', Helvetica, Arial, sans-serif;
+        color: #ffffff;
+        background-color: #567ab6;
+        background-image: -moz-linear-gradient(top, #638acd, #426393);
+        background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#638acd), to(#426393));
+        background-image: -webkit-linear-gradient(top, #638acd, #426393);
+        background-image: -o-linear-gradient(top, #638acd, #426393);
+        background-image: linear-gradient(to bottom, #638acd, #426393);
+        background-repeat: repeat-x;
+        border-radius: 4px;
+        -moz-border-radius: 4px;
+        padding: 5px 8px;
+        height: 11px;
+        line-height: 11px;
+        max-height: 11px;
+        text-align: center;
+        border: 1px solid #224886;
+        font-weight: bold;
+        -webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,.2), 0 1px 2px rgba(0,0,0,.05);
+        -moz-box-shadow: inset 0 1px 0 rgba(255,255,255,.2), 0 1px 2px rgba(0,0,0,.05);
+        box-shadow: inset 0 1px 0 rgba(255,255,255,.2), 0 1px 2px rgba(0,0,0,.05);
+        vertical-align: middle;
+    " href="$DOCUMENT_URL"><%=_ctx.appRes("Notification.label.Open")%></a>
+    <a target="_blank" style="
+        display: inline-block;
+        text-decoration: none;
+        font-size: 11px;
+        font-family: HelveticaNeue, Helvetica, Arial, sans-serif,serif;
+        color: #333333;
+        background-color: #f1f1f1;
+        background-image: -moz-linear-gradient(top, #ffffff, #f1f1f1);
+        background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#f1f1f1));
+        background-image: -webkit-linear-gradient(top, #ffffff, #f1f1f1);
+        background-image: -o-linear-gradient(top, #ffffff, #f1f1f1);
+        background-image: linear-gradient(to bottom, #ffffff, #f1f1f1);
+        background-repeat: repeat-x;
+        border-radius: 4px;
+        -moz-border-radius: 4px;
+        padding: 5px 8px;
+        height: 11px;
+        line-height: 12px;
+        max-height: 11px;
+        text-align: center;
+        border: 1px solid #c7c7c7;
+        -webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,.2), 0 1px 2px rgba(0,0,0,.05);
+        -moz-box-shadow: inset 0 1px 0 rgba(255,255,255,.2), 0 1px 2px rgba(0,0,0,.05);
+        box-shadow: inset 0 1px 0 rgba(255,255,255,.2), 0 1px 2px rgba(0,0,0,.05);
+        vertical-align: middle;
+        margin-left: 3px;
+    " href="$REPLY_ACTION_URL" title="Reply"><%=_ctx.appRes("Notification.label.Reply")%></a>
+    <a target="_blank" style="
+        display: inline-block;
+        text-decoration: none;
+        font-size: 11px;
+        font-family: HelveticaNeue, Helvetica, Arial, sans-serif,serif;
+        color: #333333;
+        background-color: #f1f1f1;
+        background-image: -moz-linear-gradient(top, #ffffff, #f1f1f1);
+        background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#f1f1f1));
+        background-image: -webkit-linear-gradient(top, #ffffff, #f1f1f1);
+        background-image: -o-linear-gradient(top, #ffffff, #f1f1f1);
+        background-image: linear-gradient(to bottom, #ffffff, #f1f1f1);
+        background-repeat: repeat-x;
+        border-radius: 4px;
+        -moz-border-radius: 4px;
+        padding: 4px 8px;
+        line-height: 100%;
+        text-align: center;
+        border: 1px solid #c7c7c7;
+        -webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,.2), 0 1px 2px rgba(0,0,0,.05);
+        -moz-box-shadow: inset 0 1px 0 rgba(255,255,255,.2), 0 1px 2px rgba(0,0,0,.05);
+        box-shadow: inset 0 1px 0 rgba(255,255,255,.2), 0 1px 2px rgba(0,0,0,.05);
+        vertical-align: middle;
+        margin-left: 3px;
+    " href="$VIEW_FULL_DISCUSSION_ACTION_URL" target="_blank" title="View Full Discussion"><%=_ctx.appRes("Notification.label.ViewFullDiscussion")%></a>
+</p>
+
+
+<p style="margin: 10px 0; color: #999999">
+    <%=_ctx.appRes("Notification.label.footer", FOOTER_LINK)%>
+</p>
+</td>
+                            </tr>
+</table>
+                    </td>
+</tr>
+            </table>
+
+</td>
+    </tr><!--end content area-->
+<tr>
+<td bgcolor="#456693" align="center"  style="border:1px solid #456693;">
+<table border="0" cellpadding="0" cellspacing="0" width="92%"  style="font-size: 13px;line-height: 18px;font-family:HelveticaNeue,verdana,arial,tahoma">
+<tr>
+<td align="left" valign="top" style="font-family: HelveticaNeue, Helvetica, Arial, sans-serif,serif;color:#ffffff;font-size:13px;" >
+<h3 style="text-align: center; margin: 0; padding: 10px 0;">
+<a target="_blank" style="color: #ffffff; font-size: 13px;font-family:'HelveticaNeue Bold',arial,tahoma,serif; font-weight: bold; text-decoration: none;" href="http://www.exoplatform.com/company/en/home" title="eXo Platform"><%=_ctx.appRes("Notification.label.CompanyName")%></a>
+                        </h3>
+</td>
+                </tr>
+</table>
+        </td>
+</tr><!--end footer area-->
+</table>

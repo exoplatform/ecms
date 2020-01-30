@@ -1,0 +1,24 @@
+<% 
+import org.exoplatform.wcm.webui.search.UISearchPageLayout;
+import org.exoplatform.wcm.webui.search.UISearchForm;
+import org.exoplatform.wcm.webui.search.UISearchResult;
+import org.exoplatform.wcm.webui.Utils;
+%>
+<div id="$uicomponent.id">
+	<%
+		def rcontext = _ctx.getRequestContext() ;
+		String portletId = Utils.getRealPortletId(rcontext);
+		def quickEditingBlockId = portletId + "-QuickEditingBlock";
+		def jsManager = rcontext.getJavascriptManager();
+//		jsManager.importJavascript('eXo.wcm.frontoffice.private.QuickEdit', '/eXoWCMResources/javascript/') ;
+		jsManager.require("SHARED/quick-edit", "edit").
+		addScripts('edit.QuickEdit.insertQuickeditingBlock("' + portletId + '","' + quickEditingBlockId + '");');
+		if(Utils.isShowQuickEdit()) {		
+	%>
+		<div id="<%=quickEditingBlockId%>" class="quickEdit">
+			<a href="<%=uicomponent.event("QuickEdit")%>" rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes("UISearchPageLayoutDefault.title");%>"  class="quickEdit"><i class="uiIconEdit uiIconLightGray"></i></a>
+		</div>
+	<% } %>		
+	<% uicomponent.renderChild(UISearchResult.class) %>		
+	<% uicomponent.renderChild(UISearchForm.class) %>	
+</div>

@@ -1,0 +1,32 @@
+<%
+import org.exoplatform.webui.core.UIComponent;
+import org.exoplatform.ecm.webui.component.explorer.popup.actions.UIShareDocuments;
+import org.apache.commons.lang.StringEscapeUtils;
+
+
+String owner = uicomponent.getAncestorOfType(UIShareDocuments.class).getOwner();
+
+%>
+<div id="who">
+<a id="add"><strong><%=_ctx.appRes("UIShareDocuments.label.WhoHasAccess")%></strong></a>
+<div class="accessSpaceMember clearfix" id="owner" >
+        <div class="avatarXSmall pull-left">
+            <img src="<%=uicomponent.getAvatar(owner)%>" alt="<%=StringEscapeUtils.escapeHtml(uicomponent.getUserFullName(owner))%>"/>
+        </div>
+        <div id="entry">
+            <a href="<%=uicomponent.getProfileUrl(owner)%>" ><%=StringEscapeUtils.escapeHtml(uicomponent.getUserFullName(owner))%></a>
+        </div>
+        <div class="accessMember pull-right input-medium clearfix">
+            <label><strong><%=_ctx.appRes("UIShareDocuments.label.owner")%></strong></label>
+        </div>
+    </div>
+    <ul>
+        <% for (child in uicomponent.getChildren()) { %>
+            <li>
+                <div class="accessSpaceMember clearfix" id="whoHasAccess" >
+                    <% uicomponent.renderChild(child); %>
+                </div>
+            </li>
+        <% } %>
+    </ul>
+</div>

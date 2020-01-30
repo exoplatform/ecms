@@ -1,0 +1,84 @@
+<table border="0" cellpadding="0" cellspacing="0" width="100%"
+	bgcolor="#ffffff" align="center"
+	style="background-color: #ffffff; font-size: 13px; color: #333333; line-height: 18px;">
+	<tbody>
+		<tr>
+			<td align="left" bgcolor="#f9f9f9"
+				style="background-color: #f9f9f9; padding: 15px 0;">
+				<table border="0" cellpadding="0" cellspacing="0" width="100%"
+					bgcolor="#ffffff" align="center"
+					style="background-color: #ffffff; font-size: 13px; color: #333333; line-height: 18px;">
+					<tbody>
+						<tr>
+							<td align="left" bgcolor="#f9f9f9"
+								style="background-color: #f9f9f9; padding: 0 20px 4px; line-height: 16px; font-family: HelveticaNeue, Helvetica, Arial, sans-serif; color: #333333;">
+								$ACTIVITY_TITLE
+							</td>
+						</tr>
+						<tr>
+							<td align="left" bgcolor="#f9f9f9"
+								style="background-color: #f9f9f9; line-height: 16px; font-family: HelveticaNeue, Helvetica, Arial, sans-serif; color: #333333; padding: 5px 0;">
+								<hr
+									style="border-width: 1px 0 0; border-style: solid none none; border-color: #d8d8d8 transparent transparent; margin: 6px 0; padding: 0;">
+							</td>
+						</tr>
+<% for (def i = 0; i< COUNT; i++) { %>
+						<tr>
+							<td align="left" bgcolor="#f9f9f9"
+								style="background-color: #f9f9f9; padding: 0 20px 1px; line-height: 16px; font-family: HelveticaNeue, Helvetica, Arial, sans-serif; color: #333333;">
+								<table border="0" cellpadding="0" cellspacing="0" width="100%"
+									bgcolor="#ffffff" align="center"
+									style="width: 100%; background-color: #ffffff; font-size: 13px; color: #333333; line-height: 18px;">
+									<tr>
+									  <% if (IS_VIDEO[i] && (THUMBNAIL_URL == null)) { %> 
+                    <td align="center" valign="top" bgcolor="#f9f9f9"
+                        style="vertical-align: top; background-color: #f9f9f9;">
+                    <% } else { %>
+										<td align="center" valign="top" bgcolor="#f9f9f9"
+	                      style="vertical-align: top; background-color: #f9f9f9; padding: 0 15px 0 0;">
+										<% } %>
+											<a href="<%=ACTIVITY_URL[i]%>" style="margin: 0; padding: 0; display: block; margin-top: 5px; min-height: 64px;">
+												<% if (THUMBNAIL_URL != null  && THUMBNAIL_URL.length > 0 && THUMBNAIL_URL[i] != null) { %> 
+												     <img style="max-width: 300px;" src="<%=THUMBNAIL_URL[i]%>" alt="image" />
+												<% } else if (DEFAULT_THUMBNAIL_URL != null && DEFAULT_THUMBNAIL_URL.length > 0 && DEFAULT_THUMBNAIL_URL[i] != null) { %>
+													 <img style="max-width: 300px;" src="<%=DEFAULT_THUMBNAIL_URL[i]%>" alt="image" />
+												<% } %>
+										     </a>
+											  <% if (IS_VIDEO[i]) { %>
+												<a href="<%=ACTIVITY_URL[i]%>" style="font-size: 13px; line-height: 20px; font-family: HelveticaNeue, Helvetica, Arial, sans-serif; text-decoration: none; color: #2F5E92; white-space: nowrap;" >
+													<span style="
+														display: inline-block;
+														vertical-align: 0px;
+														border-top: 5px solid transparent;
+														border-bottom: 5px solid transparent;
+														border-left: 5px solid #5073a7; margin-right: 2px;
+													"></span>
+													<%=_ctx.appRes("FileActivityChildPlugin.label.WatchTheVideo")%>
+												</a>
+												<% } %>
+										</td>
+										<td align="left" bgcolor="#f9f9f9" width="90%" align="top"
+											style="width: 90%; background-color: #f9f9f9; padding: 0 0; vertical-align: top;">
+											<a href="<%=ACTIVITY_URL[i]%>" style="display: inline-block; color: #2f5e92; font-family: 'HelveticaNeue Bold', Helvetica, Arial, sans-serif; font-size: 13px; line-height: 18px; font-weight: bold; text-decoration: none; margin: 0 0 5px;"><%=DOCUMENT_TITLE[i]%></a>
+											<% if (SUMMARY != null && SUMMARY.length > 0 && SUMMARY[i] != null) { %>
+												<p>
+												<%=SUMMARY[i]%>
+												</p>
+												<% } %>
+											<% if (SIZE[i].length() != 0) { %>
+											<p style="margin: 0 0 15px; color: #999999; font-size: 13px; line-height: 18px;">
+												<%=_ctx.appRes("FileActivityChildPlugin.label.FileSize")%>:
+												<%=SIZE[i]%>
+											</p> <% } %>
+										</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+<% } %>
+					</tbody>
+				</table>
+			</td>
+		</tr>
+	</tbody>
+</table>

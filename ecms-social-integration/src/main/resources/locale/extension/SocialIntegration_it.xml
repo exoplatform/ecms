@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UIConfirmMessage>
+    <label>
+      <ReadOnly>Apri in sola lettura</ReadOnly>
+    </label>
+  </UIConfirmMessage>
+
+  <UISocialPopupWindow>
+    <title>
+      <UIReadOnlyFileConfirmMessage>Apri documento</UIReadOnlyFileConfirmMessage>
+    </title>
+  </UISocialPopupWindow>
+  <SocialIntegration>
+    <titles>
+      <fileSize>Dimensione File</fileSize>
+    </titles>
+    <messages>
+      <createdBy>è stato creato da</createdBy>
+      <editedBy>è stato modificato da</editedBy>
+      <system>il sistema</system>
+      <readmore>...Per saperne di più.</readmore>
+      <editTitle>Titolo aggiornato a: {0}</editTitle>
+      <editName>Nome aggiornato a: {0}</editName>
+      <editDescription>La descrizione è stata aggiornata a: {0}</editDescription>
+      <singleCreator>Creatore è {0}</singleCreator>
+      <multiCreator>Creatori sono: {0}</multiCreator>
+      <addSource>File di origine: {0} è stato aggiunto</addSource>
+      <addMultiSource>File di origine: {0} sono stati aggiunti</addMultiSource>
+      <removeSource>File di origine: {0} è stato rimosso</removeSource>
+      <removeMultiSource>File di origine: {0} sono stati rimossi</removeMultiSource>
+      <editSummary>Il sommario è stato aggiornato a: {0}</editSummary>
+      <editLanguage>Lingua aggiornata a: {0}</editLanguage>
+      <editContent>Contenuto è stato aggiornato.</editContent>
+      <editFile>File aggiornato.</editFile>
+      <emptyTitle>Il titolo è stato rimosso.</emptyTitle>
+      <emptySummary>Il sommario è stato rimosso.</emptySummary>
+      <emptyContent>Il contenuto è stato rimosso.</emptyContent>
+      <updateMetadata>Metadati {0} è stato aggiornato a: {1}</updateMetadata>
+      <removeMetadata>Metadati {0} è stato rimosso.</removeMetadata>
+      <removeTitle>Titolo rimosso.</removeTitle>
+      <removeName>Nome rimosso.</removeName>
+      <removeSummary>Sommario rimosso.</removeSummary>
+      <removeDescription>La descrizione è stata rimossa.</removeDescription>
+      <removeCreator>Creatore: {0} è stato rimosso.</removeCreator>
+      <removeMultiCreator>Creatori: {0} sono stati rimossi.</removeMultiCreator>
+      <removeLanguage>Lingua rimossa.</removeLanguage>
+      <removeContent>Contenuto rimosso.</removeContent>
+      <attachmentAdded>File sono stati allegati.</attachmentAdded>
+      <attachmentRemoved>File sono stati rimossi.</attachmentRemoved>
+      <categoryAdded>Categoria: {0} è stata aggiunta.</categoryAdded>
+      <categoryRemoved>Categoria: {0} è stata rimossa.</categoryRemoved>
+      <tagAdded>Tag: {0} è stato aggiunto.</tagAdded>
+      <tagsAdded>Tag: {0} sono stati aggiunti.</tagsAdded>
+      <tagRemoved>Tag: {0} è stato rimosso.</tagRemoved>
+      <tagsRemoved>Tag: {0} sono stati rimossi.</tagsRemoved>
+      <stateChange>
+        <pending>Lo stato di pubblicazione ora è in sospeso.</pending>
+        <approved>Il documento è stato approvato.</approved>
+        <staged>La Pubblicazione  è pronta.</staged>
+        <published>Il documento è stato pubblicato.</published>
+      </stateChange>
+      <contentMoved>La pubblicazione è stata spostata a: {0}</contentMoved>
+      <fileMoved>File spostato a: {0}</fileMoved>
+      <revisionChanged>Pubblicazione restaurata alla versione: {0}</revisionChanged>
+      <version>Versione: {0}</version>
+      <updatedOn>Aggiornato il</updatedOn>
+      <updatedBy>da</updatedBy>
+      <loadMoreFiles>+{0} più</loadMoreFiles>
+    </messages>
+    <publicationStates>
+      <archived>Archiviato</archived>
+      <obsolete>Obsoleto</obsolete>
+      <unpublished>Non Pubblicato</unpublished>
+      <draft>Bozza</draft>
+      <pending>In sospeso</pending>
+      <approved>Approvato</approved>
+      <inreview>In Revisione</inreview>
+      <staged>In cantiere</staged>
+      <published>Pubblicato</published>
+      <live>Pubblicato</live>
+    </publicationStates>
+    <view>Visualizza</view>
+    <edit>Modifica</edit>
+    <download>Scarica questo File</download>
+    <downloadAll>Scarica tutto</downloadAll>
+    <preview>Anteprima</preview>
+  </SocialIntegration>
+  <UIPopupWindow>
+    <title>
+      <DocViewer>Anteprima</DocViewer>
+      <UIReadOnlyFileConfirmMessage>Apri documento</UIReadOnlyFileConfirmMessage>
+    </title>
+  </UIPopupWindow>
+  <ElementSet>
+    <dialog>
+      <label>
+        <resourceType>Tipo Risorsa</resourceType>
+      </label>
+    </dialog>
+  </ElementSet>
+  <UIPreviewCommentArea>
+    <label>
+      <commentTextAreaPreview>Aggiungi il tuo commento...</commentTextAreaPreview>
+      <no-comment-yet>Nessun commento</no-comment-yet>
+    </label>
+  </UIPreviewCommentArea>
+
+  <OpenDocumentInOffice>
+    <label>
+      <exo.remote-edit.word>Open In Word</exo.remote-edit.word>
+      <exo.remote-edit.excel>Open In Excel</exo.remote-edit.excel>
+      <exo.remote-edit.powerpoint>Open In Powerpoint</exo.remote-edit.powerpoint>
+      <exo.remote-edit.desktop>Open On Desktop</exo.remote-edit.desktop>
+      <exo.remote-edit.desktop-app>Open In</exo.remote-edit.desktop-app>
+    </label>
+  </OpenDocumentInOffice>
+
+  <UIPopupMenu>
+    <msg>
+      <lock-node-read-only>Questo file è bloccato dall'utente {0}. Apri in sola lettura?</lock-node-read-only>
+    </msg>
+  </UIPopupMenu>
+  <ECMContextMenu>
+    <event>
+      <ShareDocuments>Condividi</ShareDocuments>
+    </event>
+  </ECMContextMenu>
+  <UIPopupWindow>
+    <title>
+      <UIShareDocuments>Condividi</UIShareDocuments>
+      <Share>Condividi</Share>
+    </title>
+  </UIPopupWindow>
+  <UIShareDocuments>
+    <label>
+      <ShareButton>Condividi</ShareButton>
+      <CancelButton>Annulla</CancelButton>
+      <TextAreaInit>Invia un messaggio sulla condivisione...</TextAreaInit>
+      <ShareWith>Condividi con</ShareWith>
+      <Access>Accedi</Access>
+      <SpaceMember>Members</SpaceMember>
+      <SelectASpace>Seleziona uno spazio</SelectASpace>
+      <SharedADocument>condiviso un documento</SharedADocument>
+      <WhoHasAccess>Chi ha accesso</WhoHasAccess>
+      <success>Il documento è stato condiviso con successo</success>
+      <NoPermission>Non ti è consentito condividere questo documento</NoPermission>
+      <NoPermissionDelete>Non puoi cancellare questa autorizzazione</NoPermissionDelete>
+      <InvalidDeletion>Non puoi cancellare la tua autorizzazione</InvalidDeletion>
+      <InvalidEntry>Questa autorizzazione non può essere modificata</InvalidEntry>
+      <InvalidOwner>Non è possibile modificare le autorizzazioni del proprietario</InvalidOwner>
+      <Invalid>Siamo spiacenti, non siamo riusciti a riconoscere '{0}' come un utente o il nome di uno spazio valido</Invalid>
+      <option>
+        <read>Può vedere</read>
+        <modify>Può modificare</modify>
+      </option>
+      <notification>
+        <read>leggi</read>
+        <modify>modifica</modify>
+      </notification>
+      <invite>
+        <placeholder>Inserisci nomi utenti o di spazi...</placeholder>
+      </invite>
+      <owner>Proprietario</owner>
+    </label>
+  </UIShareDocuments>
+
+  <UIActionBar>
+    <tooltip>
+      <ShareDocuments>Condividi</ShareDocuments>
+    </tooltip>
+  </UIActionBar>
+</bundle>

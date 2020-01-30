@@ -388,11 +388,7 @@
       <init-params>
         <values-param>
           <name>autoCreatedInNewRepository</name>
-           <value>classpath:/conf/wcm/gatein-nodetypes.xml</value>
-        </values-param>
-        <values-param>
-          <name>autoCreatedInNewRepository</name>
-           <value>classpath:/conf/wcm/nodetypes-config.xml</value>
+          <value>classpath:/conf/wcm/nodetypes-config.xml</value>
         </values-param>
       </init-params>
     </component-plugin>

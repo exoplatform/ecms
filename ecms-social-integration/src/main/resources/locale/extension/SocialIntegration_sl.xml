@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UIConfirmMessage>
+    <label>
+      <ReadOnly>Odpri samo za branje</ReadOnly>
+    </label>
+  </UIConfirmMessage>
+
+  <UISocialPopupWindow>
+    <title>
+      <UIReadOnlyFileConfirmMessage>Odpri dokument</UIReadOnlyFileConfirmMessage>
+    </title>
+  </UISocialPopupWindow>
+  <SocialIntegration>
+    <titles>
+      <fileSize>Velikost datoteke</fileSize>
+    </titles>
+    <messages>
+      <createdBy>je ustvaril(a)</createdBy>
+      <editedBy>ga je uredil(a)</editedBy>
+      <system>sistem</system>
+      <readmore>... Preberite več.</readmore>
+      <editTitle>Naslov je bil posodobljen na: {0}</editTitle>
+      <editName>Ime je bilo posodobljeno na: {0}</editName>
+      <editDescription>Opis je bil posodobljen na: {0}</editDescription>
+      <singleCreator>Ustvaril(a) {0}</singleCreator>
+      <multiCreator>Ustvarjalci so {0}</multiCreator>
+      <addSource>Vir datoteke: {0} je bil dodan</addSource>
+      <addMultiSource>Viri datotek: {0} so bili dodani</addMultiSource>
+      <removeSource>Vir datoteke: {0} je bil odstranjen</removeSource>
+      <removeMultiSource>Viri datotek: {0} je bilo odstranjenih</removeMultiSource>
+      <editSummary>Povzetek je bil posodobljen na: {0}</editSummary>
+      <editLanguage>Jezik je bil posodobljen na: {0}</editLanguage>
+      <editContent>Vsebina je bila posodobljena.</editContent>
+      <editFile>Datoteka je bila posodobljena.</editFile>
+      <emptyTitle>Naslov je bil odstranjen.</emptyTitle>
+      <emptySummary>Povzetek je bil odstranjen.</emptySummary>
+      <emptyContent>Vsebina je bila odstranjena.</emptyContent>
+      <updateMetadata>Metapodatki {0} so bili posodobljeni v: {1}</updateMetadata>
+      <removeMetadata>Metapodatki {0} so bili odstranjeni.</removeMetadata>
+      <removeTitle>Naslov je bil odstranjen.</removeTitle>
+      <removeName>Ime je bilo odstranjeno.</removeName>
+      <removeSummary>Povzetek je bil odstranjen.</removeSummary>
+      <removeDescription>Opis je bil odstranjen.</removeDescription>
+      <removeCreator>Avtor: {0} je bil odstranjen.</removeCreator>
+      <removeMultiCreator>Ustvarjalci: {0} so bili odstranjeni.</removeMultiCreator>
+      <removeLanguage>Jezik je bil odstranjen.</removeLanguage>
+      <removeContent>Vsebina je bila odstranjena.</removeContent>
+      <attachmentAdded>Datoteke so bile priložene.</attachmentAdded>
+      <attachmentRemoved>Datoteke so bile odstranjene.</attachmentRemoved>
+      <categoryAdded>Kategorija: {0} je bila dodana.</categoryAdded>
+      <categoryRemoved>Kategorija: {0} je bila odstranjena.</categoryRemoved>
+      <tagAdded>Oznaka: {0} je bila dodana.</tagAdded>
+      <tagsAdded>Oznake: {0} so bile dodane.</tagsAdded>
+      <tagRemoved>Oznaka: {0} je bila odstranjena.</tagRemoved>
+      <tagsRemoved>Opravila: {0} je bilo odstranjenih.</tagsRemoved>
+      <stateChange>
+        <pending>Stanje objave je sedaj čakajoče.</pending>
+        <approved>Dokument je bil odobren.</approved>
+        <staged>Publikacija ni bila nameščena.</staged>
+        <published>Dokument je bil objavljen.</published>
+      </stateChange>
+      <contentMoved>Objava je bila premaknjena na: {0}</contentMoved>
+      <fileMoved>Datoteka je bila premaknjena na: {0}</fileMoved>
+      <revisionChanged>Objava je bila obnovljena na različico: {0}</revisionChanged>
+      <version>Različica: {0}</version>
+      <updatedOn>Posodobljeno</updatedOn>
+      <updatedBy>od</updatedBy>
+      <loadMoreFiles>+{0} več</loadMoreFiles>
+    </messages>
+    <publicationStates>
+      <archived>Arhivirano</archived>
+      <obsolete>Zastarelo</obsolete>
+      <unpublished>Neobjavljeno</unpublished>
+      <draft>Osnutek</draft>
+      <pending>Čakajoči</pending>
+      <approved>Odobreno</approved>
+      <inreview>V pregledu</inreview>
+      <staged>Postavljeno</staged>
+      <published>Objavljeno</published>
+      <live>Objavljeno</live>
+    </publicationStates>
+    <view>Prikaz</view>
+    <edit>Uredi</edit>
+    <download>Prenesi</download>
+    <downloadAll>Prenesi vse</downloadAll>
+    <preview>Predogled</preview>
+  </SocialIntegration>
+  <UIPopupWindow>
+    <title>
+      <DocViewer>Predogled</DocViewer>
+      <UIReadOnlyFileConfirmMessage>Odpri dokument</UIReadOnlyFileConfirmMessage>
+    </title>
+  </UIPopupWindow>
+  <ElementSet>
+    <dialog>
+      <label>
+        <resourceType>Vrsta vira</resourceType>
+      </label>
+    </dialog>
+  </ElementSet>
+  <UIPreviewCommentArea>
+    <label>
+      <commentTextAreaPreview>Dodaj svoj komentar...</commentTextAreaPreview>
+      <no-comment-yet>Še ni komentarja</no-comment-yet>
+    </label>
+  </UIPreviewCommentArea>
+
+  <OpenDocumentInOffice>
+    <label>
+      <exo.remote-edit.word>Open In Word</exo.remote-edit.word>
+      <exo.remote-edit.excel>Open In Excel</exo.remote-edit.excel>
+      <exo.remote-edit.powerpoint>Open In Powerpoint</exo.remote-edit.powerpoint>
+      <exo.remote-edit.desktop>Open On Desktop</exo.remote-edit.desktop>
+      <exo.remote-edit.desktop-app>Open In</exo.remote-edit.desktop-app>
+    </label>
+  </OpenDocumentInOffice>
+
+  <UIPopupMenu>
+    <msg>
+      <lock-node-read-only>To datoteko je zaklenil uporabnik {0}. Odpri samo za branje?</lock-node-read-only>
+    </msg>
+  </UIPopupMenu>
+  <ECMContextMenu>
+    <event>
+      <ShareDocuments>Daj v skupno rabo</ShareDocuments>
+    </event>
+  </ECMContextMenu>
+  <UIPopupWindow>
+    <title>
+      <UIShareDocuments>Daj v skupno rabo</UIShareDocuments>
+      <Share>Daj v skupno rabo</Share>
+    </title>
+  </UIPopupWindow>
+  <UIShareDocuments>
+    <label>
+      <ShareButton>Daj v skupno rabo</ShareButton>
+      <CancelButton>Prekliči</CancelButton>
+      <TextAreaInit>Pošlji sporočilo o skupni rabi...</TextAreaInit>
+      <ShareWith>Daj v skupno rabo z</ShareWith>
+      <Access>Dostop</Access>
+      <SpaceMember>Člani</SpaceMember>
+      <SelectASpace>Izberi prostor</SelectASpace>
+      <SharedADocument>je dal(a) dokument v skupno rabo</SharedADocument>
+      <WhoHasAccess>Kdo ima dostop</WhoHasAccess>
+      <success>Dokument je uspešno dan v skupno rabo</success>
+      <NoPermission>Nimate dovoljenja, da bi dali ta dokument v skupno rabo</NoPermission>
+      <NoPermissionDelete>Tega dovoljenja ne morete izbrisati</NoPermissionDelete>
+      <InvalidDeletion>Ne morete izbrisati lastnega dovoljenja</InvalidDeletion>
+      <InvalidEntry>Tega dovoljenja ni mogoče urejati</InvalidEntry>
+      <InvalidOwner>Ne morete spremeniti lastnikovih dovoljenj</InvalidOwner>
+      <Invalid>Žal '{0}' nismo prepoznali kot veljaven prostor ali uporabnika</Invalid>
+      <option>
+        <read>Lahko si ogledate</read>
+        <modify>Lahko urejate</modify>
+      </option>
+      <notification>
+        <read>branje</read>
+        <modify>urejanje</modify>
+      </notification>
+      <invite>
+        <placeholder>Vnesite imena uporabnikov ali prostorov...</placeholder>
+      </invite>
+      <owner>Lastnik</owner>
+    </label>
+  </UIShareDocuments>
+
+  <UIActionBar>
+    <tooltip>
+      <ShareDocuments>Daj v skupno rabo</ShareDocuments>
+    </tooltip>
+  </UIActionBar>
+</bundle>

@@ -1,0 +1,54 @@
+<%
+  import java.util.Map;
+  import java.util.Iterator;
+  import java.util.ArrayList;
+  import java.util.Enumeration;
+  import org.json.JSONArray;
+  import org.apache.commons.lang.StringUtils;
+  import org.exoplatform.services.seo.SEOService;
+  import org.exoplatform.services.seo.PageMetadataModel;
+  import org.exoplatform.portal.mop.user.UserNode;
+  import org.exoplatform.portal.webui.util.Util;
+  import org.exoplatform.wcm.webui.reader.ContentReader;
+
+  def pcontext = _ctx.getRequestContext();
+  def metaModel = pcontext.getAttribute("PAGE_METADATA");
+  boolean hasMetadata = metaModel != null;
+  def keywords = "";
+  def description = "";
+  def robots = "";
+  try {
+    if (hasMetadata) {
+      robots = metaModel.getRobotsContent();
+      keywords = ContentReader.getXSSCompatibilityContent(metaModel.getKeywords());
+      description = ContentReader.getXSSCompatibilityContent(metaModel.getDescription());
+    }
+  } catch(Exception ex) {
+  }
+  // Left Navigation State
+  def collapseClass = "collapse-left-bar";
+  def expandClass = "expand-left-bar";
+  if(hasMetadata) {
+    if(keywords != null && keywords.length() >0) {
+    %>
+      <meta name="keywords" content="<%=keywords%>" />
+    <% }
+    if(description != null && description.length() >0) {
+    %>
+      <meta name="description" content="<%=description%>" />
+    <% }
+    if(robots != null && robots.length() >0) {
+    %>
+      <meta name="robots" content="<%=robots%>" />
+    <% }
+  }
+  %>
+    <script type="text/javascript">
+      if (!window.eXo) {
+        window.eXo = {};
+      }
+      if (!window.eXo.ecm) {
+        window.eXo.ecm = {};
+      }
+    </script>
+    <script type="text/javascript" src="<%=pcontext.getRequestContextPath()%>/javascript/<%=pcontext.getPortalOwner()%>.js"></script>

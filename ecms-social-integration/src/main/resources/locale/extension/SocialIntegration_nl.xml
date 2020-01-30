@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UIConfirmMessage>
+    <label>
+      <ReadOnly>Open alleen-lezen</ReadOnly>
+    </label>
+  </UIConfirmMessage>
+
+  <UISocialPopupWindow>
+    <title>
+      <UIReadOnlyFileConfirmMessage>Open Document</UIReadOnlyFileConfirmMessage>
+    </title>
+  </UISocialPopupWindow>
+  <SocialIntegration>
+    <titles>
+      <fileSize>bestandsgrootte</fileSize>
+    </titles>
+    <messages>
+      <createdBy>werd gemaakt door</createdBy>
+      <editedBy>werd uitgegeven door</editedBy>
+      <system>het systeem</system>
+      <readmore>... Lees meer.</readmore>
+      <editTitle>Titel is vernieuwd naar: {0}</editTitle>
+      <editName>Naam is vernieuwd naar: {0}</editName>
+      <editDescription>Beschrijving is vernieuwd naar: {0}</editDescription>
+      <singleCreator>De maker is {0}</singleCreator>
+      <multiCreator>Makers zijn {0}</multiCreator>
+      <addSource>Bronbestand: {0} istoegevoegd</addSource>
+      <addMultiSource>Bronnen bestand: {0} zijn toegevoegd</addMultiSource>
+      <removeSource>Bronbestand: {0} is verwijderd</removeSource>
+      <removeMultiSource>Bronnen bestand: {0} zijn verwijderd</removeMultiSource>
+      <editSummary>Samenvatting is vernieuwd naar: {0}</editSummary>
+      <editLanguage>Taal is vernieuwd naar: {0}</editLanguage>
+      <editContent>Inhoud is bijgewerkt.</editContent>
+      <editFile>Bestand is bijgewerkt.</editFile>
+      <emptyTitle>De titel is verwijderd.</emptyTitle>
+      <emptySummary>De samenvatting is verwijderd.</emptySummary>
+      <emptyContent>De inhoud is verwijderd.</emptyContent>
+      <updateMetadata>Metagegevens {0} is vernieuwd naar: {1}</updateMetadata>
+      <removeMetadata>Metagegevens {0} is verwijderd.</removeMetadata>
+      <removeTitle>Titel is verwijderd.</removeTitle>
+      <removeName>Naam is verwijderd.</removeName>
+      <removeSummary>Samenvatting is verwijderd.</removeSummary>
+      <removeDescription>Beschrijving is verwijderd.</removeDescription>
+      <removeCreator>Maker: {0} is verwijderd.</removeCreator>
+      <removeMultiCreator>Makers: {0} zijn verwijderd.</removeMultiCreator>
+      <removeLanguage>Taal is verwijderd.</removeLanguage>
+      <removeContent>Inhoud is verwijderd.</removeContent>
+      <attachmentAdded>Bestanden zijn gekoppeld.</attachmentAdded>
+      <attachmentRemoved>Bestand(en) is verwijderd.</attachmentRemoved>
+      <categoryAdded>Categorie: {0} is toegevoegd.</categoryAdded>
+      <categoryRemoved>Categorie: {0} is verwijderd.</categoryRemoved>
+      <tagAdded>Tag: {0} is toegevoegd.</tagAdded>
+      <tagsAdded>Tags: {0} zijn toegevoegd.</tagsAdded>
+      <tagRemoved>Tag: {0} is verwijderd.</tagRemoved>
+      <tagsRemoved>Tags: {0} zijn verwijderd.</tagsRemoved>
+      <stateChange>
+        <pending>De status van de publicatie is nu in behandeling.</pending>
+        <approved>Document is goedgekeurd.</approved>
+        <staged>Publicatie heeft zijn opgevoerd.</staged>
+        <published>Document is gepubliceerd.</published>
+      </stateChange>
+      <contentMoved>Publicatie is verhuisd naar: {0}</contentMoved>
+      <fileMoved>Bestand is verplaatst naar: {0}</fileMoved>
+      <revisionChanged>Publicatie is gerestaureerd tot versie: {0}</revisionChanged>
+      <version>Versie: {0}</version>
+      <updatedOn>Bijgewerkt tot</updatedOn>
+      <updatedBy>door</updatedBy>
+      <loadMoreFiles>+{0} meer</loadMoreFiles>
+    </messages>
+    <publicationStates>
+      <archived>Gearchiveerd</archived>
+      <obsolete>Verouderde</obsolete>
+      <unpublished>UnPublished</unpublished>
+      <draft>Ontwerp</draft>
+      <pending>In behandeling</pending>
+      <approved>Goedgekeurd</approved>
+      <inreview>In Review</inreview>
+      <staged>Geënsceneerd</staged>
+      <published>Gepubliceerd</published>
+      <live>Gepubliceerd</live>
+    </publicationStates>
+    <view>Tonen</view>
+    <edit>Bewerken</edit>
+    <download>Downloaden</download>
+    <downloadAll>Alles downloaden</downloadAll>
+    <preview>Voorbeeld</preview>
+  </SocialIntegration>
+  <UIPopupWindow>
+    <title>
+      <DocViewer>Voorbeeld</DocViewer>
+      <UIReadOnlyFileConfirmMessage>Open Document</UIReadOnlyFileConfirmMessage>
+    </title>
+  </UIPopupWindow>
+  <ElementSet>
+    <dialog>
+      <label>
+        <resourceType>Resourcetype</resourceType>
+      </label>
+    </dialog>
+  </ElementSet>
+  <UIPreviewCommentArea>
+    <label>
+      <commentTextAreaPreview>Voeg uw reactie...</commentTextAreaPreview>
+      <no-comment-yet>Geen commentaar nog</no-comment-yet>
+    </label>
+  </UIPreviewCommentArea>
+
+  <OpenDocumentInOffice>
+    <label>
+      <exo.remote-edit.word>Open In Word</exo.remote-edit.word>
+      <exo.remote-edit.excel>Open In Excel</exo.remote-edit.excel>
+      <exo.remote-edit.powerpoint>Open In Powerpoint</exo.remote-edit.powerpoint>
+      <exo.remote-edit.desktop>Open On Desktop</exo.remote-edit.desktop>
+      <exo.remote-edit.desktop-app>Open In</exo.remote-edit.desktop-app>
+    </label>
+  </OpenDocumentInOffice>
+
+  <UIPopupMenu>
+    <msg>
+      <lock-node-read-only>Dit bestand is vergrendeld door gebruiker {0}. Alleen open lezen?</lock-node-read-only>
+    </msg>
+  </UIPopupMenu>
+  <ECMContextMenu>
+    <event>
+      <ShareDocuments>Delen</ShareDocuments>
+    </event>
+  </ECMContextMenu>
+  <UIPopupWindow>
+    <title>
+      <UIShareDocuments>Delen</UIShareDocuments>
+      <Share>Delen</Share>
+    </title>
+  </UIPopupWindow>
+  <UIShareDocuments>
+    <label>
+      <ShareButton>Delen</ShareButton>
+      <CancelButton>Annuleren</CancelButton>
+      <TextAreaInit>Stuur een bericht over het delen ...</TextAreaInit>
+      <ShareWith>Delen met...</ShareWith>
+      <Access>Toegang</Access>
+      <SpaceMember>Members</SpaceMember>
+      <SelectASpace>Selecteer een ruimte</SelectASpace>
+      <SharedADocument>deelde een document</SharedADocument>
+      <WhoHasAccess>Wie heeft toegang?</WhoHasAccess>
+      <success>Het document werd met succes gedeeld</success>
+      <NoPermission>U bent niet gemachtigd om dit document te delen</NoPermission>
+      <NoPermissionDelete>U kunt deze toestemming niet verwijderen</NoPermissionDelete>
+      <InvalidDeletion>U kunt uw eigen toestemming niet verwijderen</InvalidDeletion>
+      <InvalidEntry>Deze toestemming kan niet worden bewerkt</InvalidEntry>
+      <InvalidOwner>U kunt geen eigenaarsrechten veranderen</InvalidOwner>
+      <Invalid>Sorry, we konden '{0}' niet als een geldige gebruiker of ruimtenaam herkennen</Invalid>
+      <option>
+        <read>Kan zien</read>
+        <modify>Kan bewerken</modify>
+      </option>
+      <notification>
+        <read>lezen</read>
+        <modify>bewerken</modify>
+      </notification>
+      <invite>
+        <placeholder>Voer gebruikers- of ruimtenamen in ...</placeholder>
+      </invite>
+      <owner>Eigenaar</owner>
+    </label>
+  </UIShareDocuments>
+
+  <UIActionBar>
+    <tooltip>
+      <ShareDocuments>Delen</ShareDocuments>
+    </tooltip>
+  </UIActionBar>
+</bundle>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <administration>
+    <siteExplorer>资源管理器中的内容</siteExplorer>
+    <wcmAdmin>内容管理</wcmAdmin>
+  </administration>
+</bundle>

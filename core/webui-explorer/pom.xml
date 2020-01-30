@@ -199,11 +199,6 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>org.exoplatform.gatein.portal</groupId>
-      <artifactId>exo.portal.component.test.jcr</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
       <groupId>org.hsqldb</groupId>
       <artifactId>hsqldb</artifactId>
       <scope>test</scope>

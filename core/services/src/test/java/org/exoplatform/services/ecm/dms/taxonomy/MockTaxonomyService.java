@@ -55,7 +55,7 @@ public class MockTaxonomyService extends TaxonomyServiceImpl {
   public MockTaxonomyService(InitParams initParams, SessionProviderService providerService,
       NodeHierarchyCreator nodeHierarchyCreator, RepositoryService repoService,
       LinkManager linkManager, DMSConfiguration dmsConfiguration) throws Exception {
-    super(initParams, providerService, nodeHierarchyCreator, repoService, linkManager, dmsConfiguration);
+    super(initParams, providerService, null, nodeHierarchyCreator, repoService, linkManager, dmsConfiguration);
     repositoryService_ = repoService;
     providerService_ = providerService;
   }

@@ -27,47 +27,6 @@
   <component>
     <key>org.exoplatform.services.jcr.RepositoryService</key>
     <type>org.exoplatform.services.jcr.impl.RepositoryServiceImpl</type>
-    <component-plugins>
-      <component-plugin>
-        <name>add.namespaces</name>
-        <set-method>addPlugin</set-method>
-        <type>org.exoplatform.services.jcr.impl.AddNamespacesPlugin</type>
-        <init-params>
-          <properties-param>
-            <name>namespaces</name>
-            <property name="dc" value="http://purl.org/dc/elements/1.1/"/>
-            <property name="gtn" value="http://www.gatein.org/jcr/gatein/1.0/"/>
-            <property name="mop" value="http://www.gatein.org/jcr/mop/1.0/"/>
-            <property name="app" value="http://www.gatein.org/jcr/application-registry/1.0/"/>
-            <property name="tkn" value="http://www.gatein.org/jcr/token/1.0/"/>
-            <property name="wsrp" value="http://www.gatein.org/jcr/wsrp/1.0/"/>
-            <property name="pc" value="http://www.gatein.org/jcr/pc/1.0/"/>
-          </properties-param>
-        </init-params>
-      </component-plugin>
-      <component-plugin>
-        <name>add.nodeType</name>
-        <set-method>addPlugin</set-method>
-        <type>org.exoplatform.services.jcr.impl.AddNodeTypePlugin</type>
-        <init-params>
-          <values-param>
-            <name>autoCreatedInNewRepository</name>
-            <description>Node types configuration file</description>
-            <value>jar:/conf/mop-nodetypes.xml</value>
-            <value>jar:/conf/ext-nodetypes-config.xml</value>
-            <value>jar:/conf/content-nodetypes.xml</value>
-            <value>jar:/conf/gatein-nodetypes.xml</value>
-            
-            <!-- <value>jar:/conf/organization-nodetypes.xml</value>
-            <value>jar:/conf/application-nodetypes.xml</value>
-            <value>jar:/conf/autologin-nodetypes.xml</value>
-            <value>war:/conf/wsrp/consumers-configuration-nodetypes.xml</value>
-            <value>war:/conf/wsrp/producer-configuration-nodetypes.xml</value>
-            <value>war:/conf/wsrp/producer-registrations-nodetypes.xml</value>-->
-          </values-param>
-        </init-params>
-      </component-plugin>
-    </component-plugins>
   </component>
 
   <component>

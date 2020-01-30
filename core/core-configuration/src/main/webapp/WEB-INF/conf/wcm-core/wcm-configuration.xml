@@ -17,13 +17,6 @@
   <component>
     <key>org.exoplatform.services.wcm.portal.artifacts.CreatePortalArtifactsService</key>
     <type>org.exoplatform.services.wcm.portal.artifacts.CreatePortalArtifactsServiceImpl</type>
-    <init-params>
-      <values-param>
-        <name>ignored.portals</name>
-        <description>initial portals. the service will not deploy data to the initial portal</description>
-        <value>classic</value>
-      </values-param>
-    </init-params>
   </component>
 
   <component>
@@ -90,6 +83,11 @@
   <component>
     <key>org.exoplatform.services.wcm.skin.XSkinService</key>
     <type>org.exoplatform.services.wcm.skin.XSkinService</type>
+  </component>
+
+  <component>
+    <key>org.exoplatform.portal.resource.SkinVisitor</key>
+    <type>org.exoplatform.services.wcm.skin.WCMSkinVisitor</type>
   </component>
 
   <component>

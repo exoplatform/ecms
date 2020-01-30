@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Copyright (C) 2019 eXo Platform SAS.
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program. If not, see <http://www.gnu.org/licenses/>.
+
+-->
+<configuration
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd http://www.exoplatform.org/xml/ns/kernel_1_2.xsd"
+        xmlns="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd">
+  <external-component-plugins>
+    <target-component>org.exoplatform.services.listener.ListenerService</target-component>
+
+    <component-plugin>
+      <name>org.exoplatform.portal.mop.page.page_destroyed</name>
+      <set-method>addListener</set-method>
+      <type>org.exoplatform.services.wcm.search.listener.PageESListenerImpl</type>
+    </component-plugin>
+    <component-plugin>
+      <name>org.exoplatform.portal.mop.page.page_updated</name>
+      <set-method>addListener</set-method>
+      <type>org.exoplatform.services.wcm.search.listener.PageESListenerImpl</type>
+    </component-plugin>
+
+    <component-plugin>
+      <name>org.exoplatform.portal.mop.navigation.navigation_created</name>
+      <set-method>addListener</set-method>
+      <type>org.exoplatform.services.wcm.search.listener.NavigationESListenerImpl</type>
+    </component-plugin>
+    <component-plugin>
+      <name>org.exoplatform.portal.mop.navigation.navigation_destroy</name>
+      <set-method>addListener</set-method>
+      <type>org.exoplatform.services.wcm.search.listener.NavigationESListenerImpl</type>
+    </component-plugin>
+
+    <component-plugin>
+      <name>org.exoplatform.portal.mop.navigation.node_add</name>
+      <set-method>addListener</set-method>
+      <type>org.exoplatform.services.wcm.search.listener.NavigationNodeESListenerImpl</type>
+    </component-plugin>
+    <component-plugin>
+      <name>org.exoplatform.portal.mop.navigation.node_create</name>
+      <set-method>addListener</set-method>
+      <type>org.exoplatform.services.wcm.search.listener.NavigationNodeESListenerImpl</type>
+    </component-plugin>
+    <component-plugin>
+      <name>org.exoplatform.portal.mop.navigation.node_remove</name>
+      <set-method>addListener</set-method>
+      <type>org.exoplatform.services.wcm.search.listener.NavigationNodeESListenerImpl</type>
+    </component-plugin>
+    <component-plugin>
+      <name>org.exoplatform.portal.mop.navigation.node_destroy</name>
+      <set-method>addListener</set-method>
+      <type>org.exoplatform.services.wcm.search.listener.NavigationNodeESListenerImpl</type>
+    </component-plugin>
+    <component-plugin>
+      <name>org.exoplatform.portal.mop.navigation.node_rename</name>
+      <set-method>addListener</set-method>
+      <type>org.exoplatform.services.wcm.search.listener.NavigationNodeESListenerImpl</type>
+    </component-plugin>
+    <component-plugin>
+      <name>org.exoplatform.portal.mop.navigation.node_update</name>
+      <set-method>addListener</set-method>
+      <type>org.exoplatform.services.wcm.search.listener.NavigationNodeESListenerImpl</type>
+    </component-plugin>
+    <component-plugin>
+      <name>org.exoplatform.portal.mop.navigation.node_move</name>
+      <set-method>addListener</set-method>
+      <type>org.exoplatform.services.wcm.search.listener.NavigationNodeESListenerImpl</type>
+    </component-plugin>
+
+    <component-plugin>
+      <name>org.exoplatform.ecms.seo.save</name>
+      <set-method>addListener</set-method>
+      <type>org.exoplatform.services.wcm.search.listener.SeoESListenerImpl</type>
+    </component-plugin>
+    <component-plugin>
+      <name>org.exoplatform.ecms.seo.remove</name>
+      <set-method>addListener</set-method>
+      <type>org.exoplatform.services.wcm.search.listener.SeoESListenerImpl</type>
+    </component-plugin>
+  </external-component-plugins>
+
+  <external-component-plugins>
+    <target-component>org.exoplatform.commons.search.index.IndexingOperationProcessor</target-component>
+    <component-plugin profiles="all">
+      <name>NavigationIndexingServiceConnector</name>
+      <set-method>addConnector</set-method>
+      <type>org.exoplatform.services.wcm.search.connector.NavigationIndexingServiceConnector</type>
+      <description>Navigation ElasticSearch Indexing Connector</description>
+      <init-params>
+        <properties-param>
+          <name>constructor.params</name>
+          <property name="index_alias" value="navigation_alias"/>
+          <property name="index_current" value="navigation_v1"/>
+          <property name="type" value="navigation"/>
+        </properties-param>
+      </init-params>
+    </component-plugin>
+  </external-component-plugins>
+
+  <external-component-plugins>
+    <target-component>org.exoplatform.commons.api.search.SearchService</target-component>
+    <component-plugin>
+      <name>PageSearchConnector</name>
+      <set-method>addConnector</set-method>
+      <type>org.exoplatform.services.wcm.search.connector.PageElasticUnifiedSearchServiceConnector</type>
+      <description>eXo portal pages</description>
+      <init-params>
+        <properties-param>
+          <name>constructor.params</name>
+          <property name="searchType" value="page" />
+          <property name="displayName" value="Pages" />
+          <property name="index" value="navigation_alias" />
+          <property name="type" value="navigation" />
+          <property name="enable" value="${exo.unified-search.connector.page.enable:true}" />
+          <property name="titleField" value="pageTitle" />
+          <property name="searchFields" value="name,pageTitle,descriptions,seo" />
+        </properties-param>
+      </init-params>
+    </component-plugin>
+  </external-component-plugins>
+
+</configuration>

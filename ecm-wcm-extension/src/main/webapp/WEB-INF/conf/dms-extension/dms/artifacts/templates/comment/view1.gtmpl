@@ -1,0 +1,126 @@
+<%
+
+import org.apache.commons.lang.StringEscapeUtils
+import org.exoplatform.web.application.Parameter ;
+  import org.exoplatform.services.jcr.RepositoryService;
+  import org.exoplatform.portal.webui.util.Util;
+  import java.util.Locale;
+  import org.exoplatform.portal.webui.workspace.UIPortalApplication;
+  
+  
+  RepositoryService rService = uicomponent.getApplicationComponent(RepositoryService.class);
+  String repository = rService.getCurrentRepository().getConfiguration().getName();
+  def commentsList = uicomponent.getSortedComments() ;
+  def commentsNumber = commentsList.size();
+  def uicomment = uicomponent.getCommentComponent();
+  if(commentsNumber > 0) {
+    Locale locale = Util.getUIPortal().getAncestorOfType(UIPortalApplication.class).getLocale() ;
+    java.text.SimpleDateFormat commentDateFormat = new java.text.SimpleDateFormat("h:mm a. EEE, MMM d, yyyy", locale) ;
+    def lastComment = commentsList.get(0) ;
+    def rcontext = _ctx.getRequestContext() ;
+    def jsManager = rcontext.getJavascriptManager();
+    jsManager.require("SHARED/wcm-utils", "wcmutil")
+        .addScripts("wcmutil.WCMUtils.onLoadComments();");
+    def lastCommentLabel = _ctx.appRes("Comment.view.label.lastComment");
+    def userLink = org.exoplatform.wcm.webui.Utils.getProfileLink(lastComment.getProperty("exo:commentor").getString());
+    def userName = StringEscapeUtils.escapeHtml(lastComment.getProperty("exo:commentorFullName").getString());
+    def user = "<a href=" + userLink + ">" + userName + "</a>";
+    def timeComment = "";
+    if (lastComment.hasProperty("exo:commentDate")) {
+      timeComment = commentDateFormat.format(lastComment.getProperty("exo:commentDate").getDate().getTime());
+    }
+    lastCommentLabel = lastCommentLabel.replace("{user}",user);
+    lastCommentLabel = lastCommentLabel.replace("{time}",timeComment);
+	  String statusTitle = StringEscapeUtils.escapeJavaScript(_ctx.appRes("UserProfilePopup.label.Loading"));
+	  String connectLabel = StringEscapeUtils.escapeJavaScript(_ctx.appRes("UserProfilePopup.label.Connect"));
+	  String confirmLabel = StringEscapeUtils.escapeJavaScript(_ctx.appRes("UserProfilePopup.label.Confirm"));
+	  String cancelRequestLabel = StringEscapeUtils.escapeJavaScript(_ctx.appRes("UserProfilePopup.label.CancelRequest"));
+	  String removeConnectionLabel = StringEscapeUtils.escapeJavaScript(_ctx.appRes("UserProfilePopup.label.RemoveConnection"));
+	  String ignoreLabel = StringEscapeUtils.escapeJavaScript(_ctx.appRes("UserProfilePopup.label.Ignore"));
+
+	  String labels = """ {
+      StatusTitle: '${statusTitle}',
+      Connect: '${connectLabel}',
+      Confirm: '${confirmLabel}',
+      CancelRequest: '${cancelRequestLabel}',
+      RemoveConnection: '${removeConnectionLabel}',
+      Ignore: '${ignoreLabel}'
+    } """;
+
+	  jsManager.require("SHARED/uiCommentForm", "commentForm").addScripts("eXo.ecm.CommentForm.initUserProfilePopup($labels);");
+%>
+  <style>
+		<% _ctx.include(uicomponent.getTemplateSkin("exo:comments", "Stylesheet")); %>
+	</style>
+  <div class="comments showHideContainer">
+		<div class="commentBar uiBox clearfix">
+			<div class="commentsInfo">
+				<div class="showComments pull-left">
+					<div onclick="eXo.ecm.WCMUtils.showHideComponent(this)"><a class="showComments"><%=_ctx.appRes("Comment.view.label.show-comments").replaceFirst("\\{0\\}", String.valueOf(commentsNumber))%></a><span style="display: none"><a class="showComments"><%=_ctx.appRes("Comment.view.label.hide-comments").replaceFirst("\\{0\\}", String.valueOf(commentsNumber))%></a></span></div>
+				</div>
+				<div class="pull-right numberComment" style="display: none;">0/$commentsNumber</div>
+			</div>
+			<div class="showHideComponent" style="display: none;">
+				  <div class="commentList">
+					  <%
+					  def uiremovecomment = uicomponent.getRemoveComment();
+					  for(comment in commentsList) {
+						String commentor=null;
+						if(comment.hasProperty("exo:commentor")){
+							commentor=comment.getProperty("exo:commentor").getString();
+						}
+					    def avatarURL = "/eXoSkin/skin/images/themes/default/social/skin/ShareImages/UserAvtDefault.png";
+						if (comment.hasProperty("exo:commentorAvatar")) {
+						  avatarURL = comment.getProperty("exo:commentorAvatar").getString();
+						}
+					  %>
+					  <div class="commentContainer clearfix">
+						<div class="commentBox">
+							<div class="avatarBox pull-left">
+								<a commentor="$commentor" class="avatarXSmall" data-placement="bottom" rel="tooltip" href="<%=org.exoplatform.wcm.webui.Utils.getProfileLink(commentor)%>" data-original-title="<%=StringEscapeUtils.escapeHtml(comment.getProperty("exo:commentorFullName").getString())%>">
+								<img src="$avatarURL">
+								</a>
+							</div>
+							<div class="commentInfo">
+								<strong><a href="<%=org.exoplatform.wcm.webui.Utils.getProfileLink(commentor)%>"><%=StringEscapeUtils.escapeHtml(comment.getProperty("exo:commentorFullName").getString())%></a></strong>
+								<%
+									if(comment.hasProperty("exo:commentorSite")) {
+										String site = comment.getProperty("exo:commentorSite").getString() ;
+								%>
+										(<%=_ctx.appRes("Comment.view.label.site")%>: <a onclick="javascript:window.open('$site');" style="cursor:pointer">$site</a>)  <%=_ctx.appRes("Comment.view.label.at")%>
+								<%}%>
+								 <span class="dateTime"><%= uicomponent.getRelativeTimeLabel(_ctx, comment.getProperty("exo:commentDate").getDate().getTime()); %></span>
+								<div class="pull-right">
+									<%
+									String path = comment.getPath();
+									String parentPath = comment.getSession().getWorkspace().getName().concat(":").concat(uicomponent.getNode().getPath());
+									if (commentor!=null && commentor.equals(rcontext.getRemoteUser())) {
+									%>
+									<% if (uicomment != null) {
+									 Parameter[] paramsComment = [new Parameter("nodePath", org.exoplatform.ecm.webui.utils.Utils.formatNodeName(path))];
+									%>
+										<a class="actionIcon" href="javascript:void(0);" onclick="<%=uicomment.event("Comment", org.exoplatform.ecm.webui.utils.Utils.formatNodeName(parentPath), paramsComment)%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("Comments.tooltip.edit-comment")%>">
+											<i class="uiIconEdit uiIconLightGray"></i>
+											</a>
+									<%
+									 Parameter[] params = [new Parameter("workspaceName", comment.getSession().getWorkspace().getName()), new Parameter("repository", repository)];
+									%>
+											<a class="actionIcon" href="javascript:void(0);" onclick="<%=uiremovecomment.event("RemoveComment", org.exoplatform.ecm.webui.utils.Utils.formatNodeName(path), params)%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("Comments.tooltip.remove-comment")%>">
+												<i class="uiIconTrash uiIconLightGray"></i>
+											</a>
+									<%}}%>
+								</div>
+							</div> <!-- end commentInfo -->
+							<div class="commentContent">
+								<%if(comment.hasProperty("exo:commentContent")){%>
+									<%=comment.getProperty("exo:commentContent").getString()%>
+								<%}%>
+							</div>
+						</div> <!-- end commentBox -->
+					  </div> <!-- end commentContainer -->
+					 <%}%> <!-- end for loop -->
+				  </div> <!-- end commentList -->
+			</div> <!-- end showHideComponent -->
+		</div> <!-- end commentBar -->
+  </div> <!-- end comments -->
+<%}%>

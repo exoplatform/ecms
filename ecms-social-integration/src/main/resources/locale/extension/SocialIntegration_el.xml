@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UIConfirmMessage>
+    <label>
+      <ReadOnly>Άνοιγμα μόνο για ανάγνωση</ReadOnly>
+    </label>
+  </UIConfirmMessage>
+
+  <UISocialPopupWindow>
+    <title>
+      <UIReadOnlyFileConfirmMessage>Άνοιγμα εγγράφου</UIReadOnlyFileConfirmMessage>
+    </title>
+  </UISocialPopupWindow>
+  <SocialIntegration>
+    <titles>
+      <fileSize>Μέγεθος αρχείου</fileSize>
+    </titles>
+    <messages>
+      <createdBy>δημιουργήθηκε από</createdBy>
+      <editedBy>was edited by</editedBy>
+      <system>το σύστημα</system>
+      <readmore>...Read More.</readmore>
+      <editTitle>Ο Τίτλος μεταβλήθηκε σε: {0}</editTitle>
+      <editName>Το όνομα άλλαξε σε: {0}</editName>
+      <editDescription>Η περιγραφή τροποποιήθηκε σε: {0}</editDescription>
+      <singleCreator>Δημιουργός είναι {0}</singleCreator>
+      <multiCreator>Οι Δημιουργοί είναι {0}</multiCreator>
+      <addSource>Η πηγή αρχείων: {0} προστέθηκε</addSource>
+      <addMultiSource>Οι πηγές αρχείων: {0} προστέθηκαν</addMultiSource>
+      <removeSource>Η πηγή αρχείων: {0} αφαιρέθηκε</removeSource>
+      <removeMultiSource>Οι πηγές αρχείων: {0} αφαιρέθηκαν</removeMultiSource>
+      <editSummary>Η περίληψη του περιεχομένου άλλαξε σε: {0}</editSummary>
+      <editLanguage>Η Γλώσσα άλλαξε σε: {0}</editLanguage>
+      <editContent>Το περιεχόμενο έχει ενημερωθεί.</editContent>
+      <editFile>Το αρχείο ενημερώθηκε.</editFile>
+      <emptyTitle>Ο τίτλος έχει αφαιρεθεί.</emptyTitle>
+      <emptySummary>Η περίληψη έχει αφαιρεθεί.</emptySummary>
+      <emptyContent>Το περιεχόμενο έχει αφαιρεθεί.</emptyContent>
+      <updateMetadata>Τα μεταδεδομένα {0} ενημερώθηκαν σε: {1}</updateMetadata>
+      <removeMetadata>Τα μεταδεδομένα {0} αφαιρέθηκαν.</removeMetadata>
+      <removeTitle>Ο τίτλος αφαιρέθηκε.</removeTitle>
+      <removeName>Το όνομα αφαιρέθηκε.</removeName>
+      <removeSummary>Η περίληψη αφαιρέθηκε.</removeSummary>
+      <removeDescription>Η περιγραφή έχει αφαιρεθεί.</removeDescription>
+      <removeCreator>Δημιουργός: {0} έχει αφαιρεθεί.</removeCreator>
+      <removeMultiCreator>Δημιουργοί: {0} έχουν αφαιρεθεί.</removeMultiCreator>
+      <removeLanguage>Γλώσσα αφαιρέθηκε.</removeLanguage>
+      <removeContent>Content has been removed.</removeContent>
+      <attachmentAdded>Αρχεία έχουν επισυναφθεί.</attachmentAdded>
+      <attachmentRemoved>Αρχεία έχουν αφαιρεθεί.</attachmentRemoved>
+      <categoryAdded>Κατηγορία: {0} έχει προστεθεί.</categoryAdded>
+      <categoryRemoved>Κατηγορία: {0} έχει αφαιρεθεί.</categoryRemoved>
+      <tagAdded>Ετικέτα: {0} έχει προστεθεί.</tagAdded>
+      <tagsAdded>Ετικέτες: {0} έχουν προστεθεί.</tagsAdded>
+      <tagRemoved>Ετικέτα: {0} έχει αφαιρεθεί.</tagRemoved>
+      <tagsRemoved>Ετικέτες: {0} έχουν αφαιρεθεί.</tagsRemoved>
+      <stateChange>
+        <pending>Η κατάσταση δημοσίευσης είναι σε αναμονή για έγκριση.</pending>
+        <approved>Το έγγραφο έχει εγκριθεί.</approved>
+        <staged>Η δημοσίευση είναι έτοιμη.</staged>
+        <published>Το έγγραφο έχει δημοσιευθεί.</published>
+      </stateChange>
+      <contentMoved>Η δημοσίευση έχει μεταφερθεί στο: {0}</contentMoved>
+      <fileMoved>Το αρχείο έχει μεταφερθεί στο: {0}</fileMoved>
+      <revisionChanged>Η δημοσίευση επαναφέρθηκε στην έκδοση: {0}</revisionChanged>
+      <version>Έκδοση {0}</version>
+      <updatedOn>Updated on</updatedOn>
+      <updatedBy>από</updatedBy>
+      <loadMoreFiles>+{0} more</loadMoreFiles>
+    </messages>
+    <publicationStates>
+      <archived>Αρχειοθετημένο</archived>
+      <obsolete>Ξεπερασμένο</obsolete>
+      <unpublished>Αδημοσίευτο</unpublished>
+      <draft>Προσχέδιο</draft>
+      <pending>Σε εκκρεμότητα</pending>
+      <approved>Εγκεκριμένο</approved>
+      <inreview>Σε αναθεώρηση</inreview>
+      <staged>Έτοιμο για δημοσίευση</staged>
+      <published>Δημοσιευμένο</published>
+      <live>Δημοσιευμένο</live>
+    </publicationStates>
+    <view>Προβολή</view>
+    <edit>Επεξεργασία</edit>
+    <download>Μεταφόρτωση</download>
+    <downloadAll>Download All</downloadAll>
+    <preview>Προεπισκόπηση</preview>
+  </SocialIntegration>
+  <UIPopupWindow>
+    <title>
+      <DocViewer>Προεπισκόπηση</DocViewer>
+      <UIReadOnlyFileConfirmMessage>Άνοιγμα εγγράφου</UIReadOnlyFileConfirmMessage>
+    </title>
+  </UIPopupWindow>
+  <ElementSet>
+    <dialog>
+      <label>
+        <resourceType>Τύπος πόρου</resourceType>
+      </label>
+    </dialog>
+  </ElementSet>
+  <UIPreviewCommentArea>
+    <label>
+      <commentTextAreaPreview>Προσθέστε το σχόλιό σας...</commentTextAreaPreview>
+      <no-comment-yet>Κανένα σχόλιο ακόμα</no-comment-yet>
+    </label>
+  </UIPreviewCommentArea>
+
+  <OpenDocumentInOffice>
+    <label>
+      <exo.remote-edit.word>Open In Word</exo.remote-edit.word>
+      <exo.remote-edit.excel>Open In Excel</exo.remote-edit.excel>
+      <exo.remote-edit.powerpoint>Open In Powerpoint</exo.remote-edit.powerpoint>
+      <exo.remote-edit.desktop>Open On Desktop</exo.remote-edit.desktop>
+      <exo.remote-edit.desktop-app>Open In</exo.remote-edit.desktop-app>
+    </label>
+  </OpenDocumentInOffice>
+
+  <UIPopupMenu>
+    <msg>
+      <lock-node-read-only>Αυτό το αρχείο είναι κλειδωμένο από το χρήστη {0}. Άνοιγμα μόνο για ανάγνωση;</lock-node-read-only>
+    </msg>
+  </UIPopupMenu>
+  <ECMContextMenu>
+    <event>
+      <ShareDocuments>Μοιραστείτε</ShareDocuments>
+    </event>
+  </ECMContextMenu>
+  <UIPopupWindow>
+    <title>
+      <UIShareDocuments>Μοιραστείτε</UIShareDocuments>
+      <Share>Μοιραστείτε</Share>
+    </title>
+  </UIPopupWindow>
+  <UIShareDocuments>
+    <label>
+      <ShareButton>Κοινοποίηση</ShareButton>
+      <CancelButton>Ακύρωση</CancelButton>
+      <TextAreaInit>Send a message upon sharing...</TextAreaInit>
+      <ShareWith>Share with</ShareWith>
+      <Access>Πρόσβαση &amp; Επεξεργασία</Access>
+      <SpaceMember>Members</SpaceMember>
+      <SelectASpace>Select a Space</SelectASpace>
+      <SharedADocument>shared a document</SharedADocument>
+      <WhoHasAccess>Who has access</WhoHasAccess>
+      <success>The document was shared successfully</success>
+      <NoPermission>You are not allowed to share this document</NoPermission>
+      <NoPermissionDelete>You can't delete this permission</NoPermissionDelete>
+      <InvalidDeletion>You can't delete your own permission</InvalidDeletion>
+      <InvalidEntry>This permission can't be edited</InvalidEntry>
+      <InvalidOwner>You can't change owner's permissions</InvalidOwner>
+      <Invalid>Sorry, we couldn't recognise '{0}' as a valid user or space name</Invalid>
+      <option>
+        <read>Can view</read>
+        <modify>Can edit</modify>
+      </option>
+      <notification>
+        <read>read</read>
+        <modify>edit</modify>
+      </notification>
+      <invite>
+        <placeholder>Enter users or spaces names...</placeholder>
+      </invite>
+      <owner>Ιδιοκτήτης</owner>
+    </label>
+  </UIShareDocuments>
+
+  <UIActionBar>
+    <tooltip>
+      <ShareDocuments>Μοιραστείτε</ShareDocuments>
+    </tooltip>
+  </UIActionBar>
+</bundle>

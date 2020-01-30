@@ -1,0 +1,29 @@
+/**
+  RTL skin for nt:resource template
+*/
+.FileContent {  
+	padding: 10px;
+	font-family: Verdana;
+	color: #0e396c; font-size: 11px;
+}
+
+.FileContent .NavigationContainer{  
+	padding-bottom: 5px;
+}
+
+.FileContent .TopTitle{  
+	padding-left: 10px;
+	height: 21px; line-height: 21px;
+	font-family: Verdana;
+	color: #058ee6; font-weight: bold; 
+	background: url('/eXoWCMResources/skin/images/file/TitleBG1x21.gif') repeat-x;
+	border: 1px solid #cbcbcb;
+	overflow: hidden;
+}
+
+.FileContent .Content {  
+	padding: 10px;
+	border: 1px solid #cbcbcb; 
+	border-top: none;
+	overflow: auto;
+}

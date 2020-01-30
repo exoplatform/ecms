@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<configuration
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd http://www.exoplatform.org/xml/ns/kernel_1_2.xsd"
+   xmlns="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd">
+
+     
+  <component>
+    <key>org.exoplatform.services.ecm.publication.PublicationService</key>
+    <type>org.exoplatform.services.ecm.publication.impl.PublicationServiceImpl</type>    
+  </component>
+
+  <component>
+    <key>org.exoplatform.services.ecm.publication.PublicationPresentationService</key>
+    <type>org.exoplatform.services.ecm.publication.impl.PublicationPresentationServiceImpl</type>
+  </component>
+ 
+</configuration>

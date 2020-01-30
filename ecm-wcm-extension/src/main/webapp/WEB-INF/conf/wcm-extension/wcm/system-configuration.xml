@@ -1,0 +1,465 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+
+    Copyright (C) 2009 eXo Platform SAS.
+    
+    This is free software; you can redistribute it and/or modify it
+    under the terms of the GNU Lesser General Public License as
+    published by the Free Software Foundation; either version 2.1 of
+    the License, or (at your option) any later version.
+    
+    This software is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+    Lesser General Public License for more details.
+    
+    You should have received a copy of the GNU Lesser General Public
+    License along with this software; if not, write to the Free
+    Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+    02110-1301 USA, or see the FSF site: http://www.fsf.org.
+
+-->
+
+<configuration
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd http://www.exoplatform.org/xml/ns/kernel_1_2.xsd"
+   xmlns="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd">
+
+  <component>
+    <key>org.exoplatform.services.wcm.core.WCMConfigurationService</key>
+    <type>org.exoplatform.services.wcm.core.WCMConfigurationService</type>
+    <init-params>
+      <properties-param>
+        <name>RuntimeContextParams</name>
+        <description>some params for runtime</description>
+
+        <property name="parameterizedPageURI" value="${wcm.config.parameterizedPageURI:/detail}" />
+        <property name="parameterizedURIParam" value="${wcm.config.parameterizedURIParam:content-id}"/>
+        <property name="printPageURI" value="${wcm.config.printPageURI:/printviewer}" />
+        <property name="printViewerPage" value="${wcm.config.printViewerPage:printviewer}" />
+        <property name="editorPageURI" value="${wcm.config.editorPageURI:editor}" />
+        <property name="siteExplorerURI" value="${wcm.config.siteExplorerURI:siteExplorer}" />
+
+        <property name="CLVPortlet" value="/presentation/ContentListViewerPortlet" />
+        <property name="SCVPortlet" value="/presentation/SingleContentViewer" />
+
+        <property name="formViewTemplatePath" value="${wcm.config.formViewTemplatePath:}" />
+        <property name="paginatorTemplatePath" value="${wcm.config.paginatorTemplatePath:/exo:ecm/views/templates/content-list-viewer/paginators/DefaultPaginator.gtmpl}" />
+      </properties-param>
+      <properties-param>
+        <name>share.portal.config</name>
+        <description>share portal name for each repository</description>
+        <property name="portalName" value="shared" />
+      </properties-param>
+      <object-param>
+        <name>live.portals.location.config</name>
+        <description>configuration for the cms path</description>
+        <object type="org.exoplatform.services.wcm.core.NodeLocation">
+          <field name="workspace">
+            <string>collaboration</string>
+          </field>
+          <field name="path">
+            <string>/sites</string>
+          </field>
+        </object>
+      </object-param>
+      <object-param>
+        <name>site.drive.config</name>
+        <description>drive config for each site drive</description>
+        <object type="org.exoplatform.services.cms.drives.DriveData">
+          <field name="name">
+            <string>{siteName}</string>
+          </field>
+          <field name="workspace">
+            <string>{workspace}</string>
+          </field>
+          <field name="permissions">
+            <string>{accessPermission}</string>
+          </field>
+          <field name="homePath">
+            <string>{sitePath}/categories/{siteName}</string>
+          </field>
+          <field name="icon">
+            <string></string>
+          </field>
+          <field name="views">
+            <string>Categories</string>
+          </field>
+          <field name="viewPreferences">
+            <boolean>false</boolean>
+          </field>
+          <field name="viewNonDocument">
+            <boolean>true</boolean>
+          </field>
+          <field name="viewSideBar">
+            <boolean>true</boolean>
+          </field>
+          <field name="showHiddenNode">
+            <boolean>false</boolean>
+          </field>
+          <field name="allowCreateFolders">
+            <string>nt:folder,nt:unstructured</string>
+          </field>
+          <field name="allowNodeTypesOnTree">
+            <string>*</string>
+          </field>
+        </object>
+      </object-param>
+    </init-params>
+  </component>
+
+  <component>
+    <key>org.exoplatform.services.wcm.link.LiveLinkManagerService</key>
+    <type>org.exoplatform.services.wcm.link.LiveLinkManagerServiceImpl</type>
+    <init-params>
+      <properties-param>
+        <name>server.config</name>
+        <description>server.address</description>
+        <property name="scheme" value="${wcm.linkmanager.scheme:http}" />
+        <property name="hostName" value="${wcm.linkmanager.hostname:localhost}" />
+        <property name="port" value="${wcm.linkmanager.port:8080}" />
+      </properties-param>
+    </init-params>
+  </component>
+
+  <component>
+    <key>org.exoplatform.wcm.webui.WebUIPropertiesConfigService</key>
+    <type>org.exoplatform.wcm.webui.WebUIPropertiesConfigService</type>
+    <init-params>
+      <properties-param>
+        <name>SCV.popup.size.in.edit.portlet.mode</name>
+        <description>size of popup in edit mode of portlet</description>
+        <property name="width" value="850" />
+        <property name="height" value="525" />
+      </properties-param>
+      <properties-param>
+        <name>SCV.popup.size.in.quickdedit</name>
+        <description>size of popup in edit mode of portlet</description>
+        <property name="width" value="950" />
+        <property name="height" value="750" />
+      </properties-param>
+    </init-params>
+  </component>
+
+  <component>
+    <key>org.exoplatform.services.mail.MailService</key>
+    <type>org.exoplatform.services.mail.impl.MailServiceImpl</type>
+    <init-params>
+      <properties-param>
+        <name>config</name>
+        <property name="mail.smtp.auth.username" value="${gatein.email.smtp.username}" />
+        <property name="mail.smtp.auth.password" value="${gatein.email.smtp.password}" />
+        <property name="mail.smtp.host" value="${gatein.email.smtp.host}" />
+        <property name="mail.smtp.port" value="${gatein.email.smtp.port}" />
+        <property name="mail.smtp.starttls.enable" value="${gatein.email.smtp.starttls.enable}" />
+        <property name="mail.smtp.auth" value="${gatein.email.smtp.auth}" />
+        <property name="mail.smtp.connectiontimeout" value="${gatein.email.smtp.connectiontimeout}" />
+        <property name="mail.smtp.timeout" value="${gatein.email.smtp.timeout}" />
+        <property name="mail.smtp.writetimeout" value="${gatein.email.smtp.writetimeout}" />
+        <property name="mail.smtp.debug" value="${gatein.email.smtp.debug}" />
+        <property name="mail.smtp.socketFactory.port" value="${gatein.email.smtp.socketFactory.port}" />
+        <property name="mail.smtp.socketFactory.class" value="${gatein.email.smtp.socketFactory.class}" />
+        <property name="mail.smtp.socketFactory.fallback" value="false" />
+      </properties-param>
+    </init-params>
+  </component>
+
+  <component>
+    <type>org.exoplatform.services.jcr.impl.ext.action.SessionActionCatalog</type>
+  </component>
+
+  <external-component-plugins>
+    <target-component>org.exoplatform.portal.config.UserACL</target-component>
+    <component-plugin>
+      <name>addPortalACLPlugin</name>
+      <set-method>addPortalACLPlugin</set-method>
+      <type>org.exoplatform.portal.config.PortalACLPlugin</type>
+      <description>setting some permission for portal</description>
+      <init-params>
+        <values-param>
+          <name>access.control.workspace.roles</name>
+          <value>editor:/platform/web-contributors</value>
+        </values-param>
+        <values-param>
+          <name>portal.creation.roles</name>
+          <value>*:/platform/administrators</value>
+        </values-param>
+      </init-params>
+    </component-plugin>
+  </external-component-plugins>
+
+  <external-component-plugins>
+    <target-component>org.exoplatform.services.jcr.impl.ext.action.SessionActionCatalog</target-component>
+    <component-plugin>
+      <name>addActions</name>
+      <set-method>addPlugin</set-method>
+      <type>org.exoplatform.services.jcr.impl.ext.action.AddActionsPlugin</type>
+      <description>add exo:ownable mixin for node</description>
+      <init-params>
+        <object-param>
+          <name>actions</name>
+          <object type="org.exoplatform.services.jcr.impl.ext.action.AddActionsPlugin$ActionsConfig">
+            <field name="actions">
+              <collection type="java.util.ArrayList">
+                <value>
+                  <object type="org.exoplatform.services.jcr.impl.ext.action.ActionConfiguration">
+                    <field name="workspace">
+                      <string>collaboration</string>
+                    </field>
+                    <field name="path">
+                      <string>/sites</string>
+                    </field>
+                    <field name="isDeep">
+                      <boolean>true</boolean>
+                    </field>
+                    <field name="nodeTypes">
+                      <string>nt:unstructured,nt:folder,nt:file,exo:portalFolder</string>
+                    </field>
+                    <field name="eventTypes">
+                      <string>addNode</string>
+                    </field>
+                    <field name="actionClassName">
+                      <string>org.exoplatform.services.wcm.core.impl.WebSchemaCreationAction</string>
+                    </field>
+                  </object>
+                </value>
+                <value>
+                  <object type="org.exoplatform.services.jcr.impl.ext.action.ActionConfiguration">
+                    <field name="workspace">
+                      <string>collaboration</string>
+                    </field>
+                    <field name="path">
+                      <string>/sites</string>
+                    </field>
+                    <field name="isDeep">
+                      <boolean>true</boolean>
+                    </field>
+                    <field name="nodeTypes">
+                      <string>nt:file,nt:resource</string>
+                    </field>
+                    <field name="eventTypes">
+                      <string>addProperty,changeProperty,removeProperty</string>
+                    </field>
+                    <field name="actionClassName">
+                      <string>org.exoplatform.services.wcm.core.impl.WebSchemaModificationAction</string>
+                    </field>
+                  </object>
+                </value>
+                <value>
+                  <object type="org.exoplatform.services.jcr.impl.ext.action.ActionConfiguration">
+                    <field name="workspace">
+                      <string>collaboration</string>
+                    </field>
+                    <field name="path">
+                      <string>/sites</string>
+                    </field>
+                    <field name="isDeep">
+                      <boolean>true</boolean>
+                    </field>
+                    <field name="nodeTypes">
+                      <string>nt:file,nt:resource</string>
+                    </field>
+                    <field name="eventTypes">
+                      <string>removeNode</string>
+                    </field>
+                    <field name="actionClassName">
+                      <string>org.exoplatform.services.wcm.core.impl.WebSchemaRemoverAction</string>
+                    </field>
+                  </object>
+                </value>
+              </collection>
+            </field>
+          </object>
+        </object-param>
+      </init-params>
+    </component-plugin>
+  </external-component-plugins>
+
+  <external-component-plugins>
+    <target-component>org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator</target-component>
+    <component-plugin>
+      <name>addPaths</name>
+      <set-method>addPlugin</set-method>
+      <type>org.exoplatform.services.jcr.ext.hierarchy.impl.AddPathPlugin</type>
+      <init-params>
+        <object-param>
+          <name>sites.content.storage.configuration</name>
+          <description>config for storage to store running sites content</description>
+          <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig">
+            <field name="workspaces">
+              <collection type="java.util.ArrayList">
+                <value>
+                  <string>collaboration</string>
+                </value>
+              </collection>
+            </field>
+            <field name="jcrPaths">
+              <collection type="java.util.ArrayList">
+                <value>
+                  <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$JcrPath">
+                    <field name="alias">
+                      <string>siteContent</string>
+                    </field>
+                    <field name="path">
+                      <string>/sites</string>
+                    </field>
+                    <field name="permissions">
+                      <collection type="java.util.ArrayList">
+                        <value>
+                          <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$Permission">
+                            <field name="identity">
+                              <string>*:/platform/administrators</string>
+                            </field>
+                            <field name="read">
+                              <string>true</string>
+                            </field>
+                            <field name="addNode">
+                              <string>true</string>
+                            </field>
+                            <field name="setProperty">
+                              <string>true</string>
+                            </field>
+                            <field name="remove">
+                              <string>true</string>
+                            </field>
+                          </object>
+                        </value>
+                        <value>
+                          <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$Permission">
+                            <field name="identity">
+                              <string>*:/platform/web-contributors</string>
+                            </field>
+                            <field name="read">
+                              <string>true</string>
+                            </field>
+                            <field name="addNode">
+                              <string>true</string>
+                            </field>
+                            <field name="setProperty">
+                              <string>true</string>
+                            </field>
+                            <field name="remove">
+                              <string>true</string>
+                            </field>
+                          </object>
+                        </value>
+                        <value>
+                          <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$Permission">
+                            <field name="identity">
+                              <string>any</string>
+                            </field>
+                            <field name="read">
+                              <string>true</string>
+                            </field>
+                            <field name="addNode">
+                              <string>false</string>
+                            </field>
+                            <field name="setProperty">
+                              <string>false</string>
+                            </field>
+                            <field name="remove">
+                              <string>false</string>
+                            </field>
+                          </object>
+                        </value>
+                      </collection>
+                    </field>
+                  </object>
+                </value>
+                <value>
+                  <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$JcrPath">
+                    <field name="alias">
+                      <string>liveSiteContent</string>
+                    </field>
+                    <field name="path">
+                      <string>/sites</string>
+                    </field>
+                    <field name="permissions">
+                      <collection type="java.util.ArrayList">
+                        <value>
+                          <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$Permission">
+                            <field name="identity">
+                              <string>*:/platform/administrators</string>
+                            </field>
+                            <field name="read">
+                              <string>true</string>
+                            </field>
+                            <field name="addNode">
+                              <string>true</string>
+                            </field>
+                            <field name="setProperty">
+                              <string>true</string>
+                            </field>
+                            <field name="remove">
+                              <string>true</string>
+                            </field>
+                          </object>
+                        </value>
+                        <value>
+                          <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$Permission">
+                            <field name="identity">
+                              <string>*:/platform/web-contributors</string>
+                            </field>
+                            <field name="read">
+                              <string>true</string>
+                            </field>
+                            <field name="addNode">
+                              <string>true</string>
+                            </field>
+                            <field name="setProperty">
+                              <string>true</string>
+                            </field>
+                            <field name="remove">
+                              <string>true</string>
+                            </field>
+                          </object>
+                        </value>
+                        <value>
+                          <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$Permission">
+                            <field name="identity">
+                              <string>any</string>
+                            </field>
+                            <field name="read">
+                              <string>true</string>
+                            </field>
+                            <field name="addNode">
+                              <string>false</string>
+                            </field>
+                            <field name="setProperty">
+                              <string>false</string>
+                            </field>
+                            <field name="remove">
+                              <string>false</string>
+                            </field>
+                          </object>
+                        </value>
+                      </collection>
+                    </field>
+                  </object>
+                </value>
+              </collection>
+            </field>
+          </object>
+        </object-param>
+      </init-params>
+    </component-plugin>
+  </external-component-plugins>
+
+  <external-component-plugins>
+    <target-component>org.exoplatform.services.jcr.RepositoryService</target-component>
+    <component-plugin>
+      <name>add.nodeType</name>
+      <set-method>addPlugin</set-method>
+      <type>org.exoplatform.services.jcr.impl.AddNodeTypePlugin</type>
+      <priority>100</priority>
+      <init-params>
+        <values-param>
+          <name>autoCreatedInNewRepository</name>
+          <description>Node types configuration file</description>
+          <value>war:/conf/wcm-extension/wcm/nodetypes-configuration.xml</value>
+        </values-param>
+      </init-params>
+    </component-plugin>
+  </external-component-plugins>
+
+</configuration>

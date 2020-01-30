@@ -23,4 +23,10 @@
   <import>classpath:/conf/standalone/core/ecms-test-organization-configuration.xml</import>
   <import>classpath:/conf/standalone/core/rest/ecms-test-rest-configuration.xml</import>
   <import>classpath:/conf/standalone/portal/ecms-test-portal-configuration.xml</import>
+
+  <import>jar:/conf/exo.portal.component.identity-configuration.xml</import>
+  <import>jar:/conf/exo.portal.component.portal-configuration.xml</import>
+  <import>jar:/conf/exo.portal.component.application-registry-configuration.xml</import>
+  <import>jar:/conf/exo.commons.component.core-configuration.xml</import>
+  <import>jar:/conf/standalone/ecms-core-service-test-configuration.xml</import>
 </configuration>
