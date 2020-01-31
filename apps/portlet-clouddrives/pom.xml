@@ -25,7 +25,7 @@
   <parent>
     <artifactId>ecms-apps</artifactId>
     <groupId>org.exoplatform.ecms</groupId>
-    <version>6.0.x-SNAPSHOT</version>
+    <version>6.0.x-news-SNAPSHOT</version>
   </parent>
   <artifactId>ecms-apps-portlet-clouddrives</artifactId>
   <packaging>war</packaging>
