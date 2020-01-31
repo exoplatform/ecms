@@ -4,7 +4,7 @@
   <parent>
     <artifactId>ecms-core</artifactId>
     <groupId>org.exoplatform.ecms</groupId>
-    <version>6.0.x-SNAPSHOT</version>
+    <version>6.0.x-news2-SNAPSHOT</version>
   </parent>
   <artifactId>ecms-core-publication-plugins</artifactId>
   <packaging>jar</packaging>
