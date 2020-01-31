@@ -162,11 +162,6 @@
   </component>
 
   <component>
-    <key>org.exoplatform.commons.scope.ScopeManager</key>
-    <type>org.exoplatform.commons.scope.ScopeManager</type>
-  </component>
-
-  <component>
   	<key>org.exoplatform.services.cache.CacheService</key>
     <jmx-name>cache:type=CacheService</jmx-name>
   	<type>org.exoplatform.services.cache.impl.CacheServiceImpl</type>
@@ -184,53 +179,6 @@
     </init-params>
   </component>
   
-
-  <component>
-     <key>org.exoplatform.services.security.Authenticator</key>
-     <type>org.exoplatform.services.organization.auth.OrganizationAuthenticatorImpl</type>
-  </component>
-
-  <component>
-     <key>org.exoplatform.services.listener.ListenerService</key>
-     <type>org.exoplatform.services.listener.ListenerService</type>
-  </component>
-
-  <component>
-    <key>org.exoplatform.commons.chromattic.ChromatticManager</key>
-    <type>org.exoplatform.commons.chromattic.ChromatticManager</type>
-  </component>
-
-  <component>
-    <key>org.exoplatform.portal.pom.config.POMSessionManager</key>
-    <type>org.exoplatform.portal.pom.config.POMSessionManager</type>
-  </component>
-
-    <component>
-        <key>org.jboss.cache.transaction.TransactionManagerLookup</key>
-        <type>org.exoplatform.services.transaction.infinispan.JBossStandaloneJTAManagerLookup</type>
-    </component>
-
-    <component>
-        <key>org.exoplatform.services.transaction.TransactionService</key>
-        <type>org.exoplatform.services.transaction.infinispan.JBossTransactionsService</type>
-        <init-params>
-            <value-param>
-                <name>timeout</name>
-                <value>300</value>
-            </value-param>
-        </init-params>
-    </component>
-
-  <component>
-    <key>org.exoplatform.portal.pom.data.ModelDataStorage</key>
-    <type>org.exoplatform.portal.pom.config.POMDataStorage</type>
-  </component>
-
-  <component>
-    <key>org.exoplatform.portal.config.DataStorage</key>
-    <type>org.exoplatform.portal.config.DataStorageImpl</type>
-  </component>
-
   <component>
      <key>org.exoplatform.services.jcr.ext.distribution.DataDistributionManager</key>
      <type>org.exoplatform.services.jcr.ext.distribution.impl.DataDistributionManagerImpl</type>
@@ -241,35 +189,6 @@
      <type>org.exoplatform.services.jcr.ext.hierarchy.impl.NodeHierarchyCreatorImpl</type>
   </component>
 
-  <component>
-    <key>org.exoplatform.portal.config.UserACL</key>
-    <type>org.exoplatform.portal.config.UserACL</type>
-    <init-params>
-      <value-param>
-        <name>super.user</name>
-        <value>root</value>
-      </value-param>
-      <value-param>
-        <name>guests.group</name>
-        <value>/platform/guests</value>
-      </value-param>
-      <value-param>
-        <name>navigation.creator.membership.type</name>
-        <value>manager</value>
-      </value-param>
-    </init-params>
-  </component>
-
-  <component>
-    <key>org.exoplatform.portal.mop.navigation.NavigationService</key>
-    <type>org.exoplatform.portal.mop.navigation.NavigationServiceWrapper</type>
-  </component>
-
-  <component>
-    <key>org.exoplatform.portal.mop.description.DescriptionService</key>
-    <type>org.exoplatform.portal.mop.description.DescriptionServiceImpl</type>
-  </component>
-  
   <component>
     <key>org.exoplatform.services.wcm.core.WCMConfigurationService</key>
     <type>org.exoplatform.services.wcm.core.WCMConfigurationService</type>
@@ -347,76 +266,7 @@
       </object-param>
     </init-params>
   </component>
-  
-  <component>
-    <key>org.exoplatform.portal.config.UserPortalConfigService</key>
-    <type>org.exoplatform.portal.config.UserPortalConfigService</type>
-    <component-plugins>
-      <component-plugin>
-        <name>new.portal.config.user.listener</name>
-        <set-method>initListener</set-method>
-        <type>org.exoplatform.portal.config.NewPortalConfigListener</type>
-        <description>this listener init the portal configuration</description>
-        <init-params>
-          <value-param>
-            <name>default.portal</name>
-            <description>The default portal for checking db is empty or not</description>
-            <value>classic</value>
-          </value-param>
-          <value-param>
-            <name>initializing.failure.ignore</name>
-            <description>In the run method, use try catch or not (value is true/false)</description>
-            <value>true</value>
-          </value-param>
-          <object-param>
-            <name>portal.configuration</name>
-            <description>description</description>
-            <object type="org.exoplatform.portal.config.NewPortalConfig">
-              <field name="predefinedOwner">
-                <collection type="java.util.HashSet">
-                  <value>
-                    <string>classic</string>
-                  </value>
-                </collection>
-              </field>
-              <field name="ownerType">
-                <string>portal</string>
-              </field>
-              <field name="templateLocation">
-                <string>classpath:/conf/portal</string>
-              </field>
-            </object>
-          </object-param>
-          
-        <object-param>
-          <name>group.configuration</name>
-          <object type="org.exoplatform.portal.config.NewPortalConfig">
-            <field name="predefinedOwner">
-              <collection type="java.util.HashSet">
-                <value>
-                  <string>platform/administrators</string>
-                </value>
-                <value>
-                  <string>platform/users</string>
-                </value>
-                <value>
-                  <string>platform/guests</string>
-                </value>
-              </collection>
-            </field>
-            <field name="ownerType">
-              <string>group</string>
-            </field>
-            <field name="templateLocation">
-              <string>classpath:/org/exoplatform/portal/config/conf</string>
-            </field>
-          </object>
-        </object-param>
-          
-        </init-params>
-      </component-plugin>
-    </component-plugins>
-  </component>
+
   <component>
     <type>org.exoplatform.services.deployment.WCMContentInitializerService</type>
   </component>
@@ -530,27 +380,12 @@
   <external-component-plugins>
  		<target-component>org.exoplatform.services.jcr.RepositoryService</target-component>
  		<component-plugin>
- 		  <name>add.namespaces</name>
- 		  <set-method>addPlugin</set-method>
- 		  <type>org.exoplatform.services.jcr.impl.AddNamespacesPlugin</type>
- 		  <init-params>
- 		    <properties-param>
- 		      <name>namespaces</name>
-          <property name="gtn" value="http://www.gatein.org/jcr/gatein/1.0/"/>
-          <property name="mop" value="http://www.gatein.org/jcr/mop/1.0/"/>
- 		      </properties-param>
- 		  </init-params>
- 		</component-plugin>
- 		<component-plugin>
  		  <name>add.nodeType</name>
  		  <set-method>addPlugin</set-method>
  		  <type>org.exoplatform.services.jcr.impl.AddNodeTypePlugin</type>
  		  <init-params>
  		    <values-param>
  		      <name>autoCreatedInNewRepository</name>
-           <value>jar:/conf/wcm/gatein-nodetypes.xml</value>
-           <!--value>jar:/conf/wcm/test-publication-nodetypes.xml</value-->
-           <value>jar:/conf/wcm/content-nodetypes.xml</value>
            <value>jar:/conf/wcm/test-mop-nodetypes.xml</value>
  		    </values-param>
  		  </init-params>

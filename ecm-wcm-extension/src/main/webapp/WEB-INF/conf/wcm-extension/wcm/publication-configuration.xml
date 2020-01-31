@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+
+    Copyright (C) 2009 eXo Platform SAS.
+    
+    This is free software; you can redistribute it and/or modify it
+    under the terms of the GNU Lesser General Public License as
+    published by the Free Software Foundation; either version 2.1 of
+    the License, or (at your option) any later version.
+    
+    This software is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+    Lesser General Public License for more details.
+    
+    You should have received a copy of the GNU Lesser General Public
+    License along with this software; if not, write to the Free
+    Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+    02110-1301 USA, or see the FSF site: http://www.fsf.org.
+
+-->
+
+<configuration
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd http://www.exoplatform.org/xml/ns/kernel_1_2.xsd"
+   xmlns="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd">
+
+
+  <component>
+    <key>org.exoplatform.services.wcm.publication.WCMPublicationService</key>
+    <type>org.exoplatform.services.wcm.publication.WCMPublicationServiceImpl</type>
+  </component>
+
+  <component>
+    <key>org.exoplatform.services.wcm.publication.WCMComposer</key>
+    <type>org.exoplatform.services.wcm.publication.WCMComposerImpl</type>
+    <init-params>
+      <value-param>
+      	<name>sharedGroup</name>
+      	<value>${wcm.composer.sharedGroup:*:/platform/users}</value>
+      </value-param>
+    </init-params>
+  </component>
+
+  <!--
+	WE USE CMS CONTENT EVENT LISTENER TO ENROLL CONTENTS (DMS like nt:file OR WCM like exo:webContent) 
+	THIS EVENT ISN'T BROADCASTED FOR UPLOADED DOCUMENTS
+	-->
+  <external-component-plugins>
+    <target-component>org.exoplatform.services.listener.ListenerService</target-component>
+    <component-plugin>
+      <name>CmsService.event.postCreate</name>
+      <set-method>addListener</set-method>
+      <type>org.exoplatform.services.wcm.publication.listener.post.PostCreateContentEventListener</type>
+      <description>this listener will force the created document enroll to publication lifecycle</description>
+    </component-plugin>
+    <component-plugin>
+      <name>CmsService.event.postEdit</name>
+      <set-method>addListener</set-method>
+      <type>org.exoplatform.services.wcm.publication.listener.post.PostEditContentEventListener</type>
+      <description>this listener will change state of document to draft after editing</description>
+    </component-plugin>    
+  </external-component-plugins>
+  
+  <external-component-plugins>
+    <target-component>org.exoplatform.services.listener.ListenerService</target-component>
+    <component-plugin>
+      <name>WebDavService.event.postUpload</name>
+      <set-method>addListener</set-method>
+      <type>org.exoplatform.services.wcm.publication.listener.post.PostWebDavUploadEventListener</type>
+      <description>this listener will change state of document to draft after uploading a file from webdav</description>
+    </component-plugin>
+  </external-component-plugins>  
+</configuration>

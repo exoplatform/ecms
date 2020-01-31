@@ -1,0 +1,49 @@
+<%
+/*
+<!--
+
+  Copyright (C) 2003-2017 eXo Platform SAS.
+ 
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU Affero General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU Affero General Public License for more details.
+ 
+  You should have received a copy of the GNU Affero General Public License
+  along with this program. If not, see <http://www.gnu.org/licenses/>.
+
+-->
+*/
+%>
+
+<%
+  def rcontext = _ctx.getRequestContext();
+  def jsManager = rcontext.getJavascriptManager();
+  //jsManager.loadScriptResource("base"); //portal's problem, workaround for uicomponent.event()
+
+  String cancel = uicomponent.event(uicomponent.CANCEL);
+  String select = uicomponent.event(uicomponent.SELECTEDFILE);
+%>
+<div class="UIDocActivityPopup" id="$uicomponent.id">
+    <% uicomponent.renderChildren(); %>
+    <div class="clearfix uiActionBorder">
+	    <div class="limitMessage pull-left">
+		    <span class="countLimit">
+			    <%=_ctx.appRes("UIDocActivityPopup.label.limitCountFiles").replace("{0}", String.valueOf(uicomponent.getMaxFilesCount()));%>
+			</span>
+	    </div>
+	    <div class="uiAction pull-right">
+	      <button class="btn selectFileBTN" type="button" onclick="$select" disabled="disabled">
+                <%=_ctx.appRes("UIDocActivityPopup.label.insert");%>
+	      </button>
+	      <button class="btn" type="button" onclick="$cancel">
+                <%=_ctx.appRes("UIDocActivityPopup.label.cancel");%>
+          </button>
+	    </div>
+    </div>
+</div>

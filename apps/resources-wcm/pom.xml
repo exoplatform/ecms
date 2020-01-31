@@ -11,13 +11,6 @@
   <name>eXo PLF:: WCM Resources</name>
 
   <dependencies>
-    <!-- We want to be sure to use the right version in the dependency plugin but it's not required in the package -->
-    <dependency>
-      <groupId>org.exoplatform.platform-ui</groupId>
-      <artifactId>platform-ui-skin</artifactId>
-      <type>war</type>
-      <scope>provided</scope>
-    </dependency>
     <dependency>
       <groupId>org.exoplatform.gatein.portal</groupId>
       <artifactId>exo.portal.component.web.resources</artifactId>
@@ -27,79 +20,6 @@
   <build>
     <finalName>eXoWCMResources</finalName>
     <plugins>
-      <!-- Copy project less files 
-      <plugin>
-        <artifactId>maven-resources-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>copy-resources</id>
-            <phase>generate-resources</phase>
-            <goals>
-              <goal>copy-resources</goal>
-            </goals>
-            <configuration>
-              <outputDirectory>${project.build.directory}/${project.build.finalName}</outputDirectory>
-              <resources>
-                <resource>
-                  <directory>${basedir}/src/main/webapp</directory>
-                  <includes>
-                    <include>skin/less/**</include>
-                  </includes>
-                </resource>
-              </resources>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-       Copy common less files 
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-dependency-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>unpack</id>
-            <phase>generate-resources</phase>
-            <goals>
-              <goal>unpack</goal>
-            </goals>
-            <configuration>
-              <artifactItems>
-                <artifactItem>
-                  <groupId>org.exoplatform.platform-ui</groupId>
-                  <artifactId>platform-ui-skin</artifactId>
-                  <type>war</type>
-                  <overWrite>false</overWrite>
-                  <outputDirectory>${project.build.directory}/${project.build.finalName}</outputDirectory>
-                  <includes>skin/less/mixins.less,skin/less/variables.less</includes>
-                </artifactItem>
-              </artifactItems>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-       Plugin to create css from less File to be able to build the skin 
-      <plugin>
-        <groupId>org.lesscss</groupId>
-        <artifactId>lesscss-maven-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>administration</id>
-            <phase>process-resources</phase>
-            <goals>
-              <goal>compile</goal>
-            </goals>
-            <configuration>
-              <sourceDirectory>${project.build.directory}/${project.build.finalName}/skin/less</sourceDirectory>
-              <outputDirectory>${project.build.directory}/${project.build.finalName}/skin/css</outputDirectory>
-              <includes>
-                <include>ecms-resources-wcmskin.less</include>
-                <include>ecms-resources-dmsskin.less</include>
-              </includes>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
--->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-war-plugin</artifactId>
@@ -107,7 +27,6 @@
           <warSourceExcludes>**/ckeditor/core/, **/ckeditor/dev/</warSourceExcludes>
         </configuration>
       </plugin>
-      
     </plugins>
   </build>
 </project>

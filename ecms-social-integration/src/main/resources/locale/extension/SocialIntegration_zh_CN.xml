@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UIConfirmMessage>
+    <label>
+      <ReadOnly>打开只读</ReadOnly>
+    </label>
+  </UIConfirmMessage>
+
+  <UISocialPopupWindow>
+    <title>
+      <UIReadOnlyFileConfirmMessage>打开文档 ︰</UIReadOnlyFileConfirmMessage>
+    </title>
+  </UISocialPopupWindow>
+  <SocialIntegration>
+    <titles>
+      <fileSize>文件大小</fileSize>
+    </titles>
+    <messages>
+      <createdBy>是由创建的</createdBy>
+      <editedBy>是由编辑</editedBy>
+      <system>系统</system>
+      <readmore>...阅读更多。</readmore>
+      <editTitle>标题已更新到： {0}</editTitle>
+      <editName>名称已被更新到: {0}</editName>
+      <editDescription>说明已被更新到: {0}</editDescription>
+      <singleCreator>创建者是 {0}</singleCreator>
+      <multiCreator>创作者是 {0}</multiCreator>
+      <addSource>文件源： {0} 已添加</addSource>
+      <addMultiSource>文件源： {0} 已添加</addMultiSource>
+      <removeSource>文件源： {0} 已被删除</removeSource>
+      <removeMultiSource>文件源： {0} 已被删除</removeMultiSource>
+      <editSummary>摘要已更新到： {0}</editSummary>
+      <editLanguage>语言已更新到： {0}</editLanguage>
+      <editContent>已更新的内容。</editContent>
+      <editFile>文件已被更新。</editFile>
+      <emptyTitle>标题已被移除。</emptyTitle>
+      <emptySummary>摘要已被移除。</emptySummary>
+      <emptyContent>内容已被删除。</emptyContent>
+      <updateMetadata>已到更新元数据 {0}: {1}</updateMetadata>
+      <removeMetadata>元数据 {0} 已被移除。</removeMetadata>
+      <removeTitle>标题已被移除。</removeTitle>
+      <removeName>名称已被移除。</removeName>
+      <removeSummary>摘要已被移除。</removeSummary>
+      <removeDescription>说明已被移除。</removeDescription>
+      <removeCreator>创建者: {0} 已被移除。</removeCreator>
+      <removeMultiCreator>创作者: {0} 已被删除。</removeMultiCreator>
+      <removeLanguage>已删除的语言。</removeLanguage>
+      <removeContent>已删除的内容。</removeContent>
+      <attachmentAdded>已附加的文件。</attachmentAdded>
+      <attachmentRemoved>文件已被删除。</attachmentRemoved>
+      <categoryAdded>类别： {0} 已被添加。</categoryAdded>
+      <categoryRemoved>类别： {0} 已被移除。</categoryRemoved>
+      <tagAdded>标签: {0} 已被添加。</tagAdded>
+      <tagsAdded>标签: {0} 已被添加。</tagsAdded>
+      <tagRemoved>标签: {0} 已被移除。</tagRemoved>
+      <tagsRemoved>标签: {0} 已被删除。</tagsRemoved>
+      <stateChange>
+        <pending>发布状态现在是挂起的。</pending>
+        <approved>文档已被批准。</approved>
+        <staged>上演了出版物。</staged>
+        <published>已发布文档。</published>
+      </stateChange>
+      <contentMoved>出版物已被移动到: {0}</contentMoved>
+      <fileMoved>文件已被移动到: {0}</fileMoved>
+      <revisionChanged>出版物已还原到版本: {0}</revisionChanged>
+      <version>版本 {0}</version>
+      <updatedOn>Updated on</updatedOn>
+      <updatedBy>由</updatedBy>
+      <loadMoreFiles>+{0} more</loadMoreFiles>
+    </messages>
+    <publicationStates>
+      <archived>存档</archived>
+      <obsolete>已过时的</obsolete>
+      <unpublished>未发布</unpublished>
+      <draft>草稿</draft>
+      <pending>等待中</pending>
+      <approved>核准</approved>
+      <inreview>在审查中</inreview>
+      <staged>进行中</staged>
+      <published>已发布</published>
+      <live>已发布</live>
+    </publicationStates>
+    <view>查看</view>
+    <edit>编辑</edit>
+    <download>下载</download>
+    <downloadAll>Download All</downloadAll>
+    <preview>预览</preview>
+  </SocialIntegration>
+  <UIPopupWindow>
+    <title>
+      <DocViewer>预览</DocViewer>
+      <UIReadOnlyFileConfirmMessage>打开文档 ︰</UIReadOnlyFileConfirmMessage>
+    </title>
+  </UIPopupWindow>
+  <ElementSet>
+    <dialog>
+      <label>
+        <resourceType>资源类型</resourceType>
+      </label>
+    </dialog>
+  </ElementSet>
+  <UIPreviewCommentArea>
+    <label>
+      <commentTextAreaPreview>添加您的评论......</commentTextAreaPreview>
+      <no-comment-yet>还没有评论</no-comment-yet>
+    </label>
+  </UIPreviewCommentArea>
+
+  <OpenDocumentInOffice>
+    <label>
+      <exo.remote-edit.word>Open In Word</exo.remote-edit.word>
+      <exo.remote-edit.excel>Open In Excel</exo.remote-edit.excel>
+      <exo.remote-edit.powerpoint>Open In Powerpoint</exo.remote-edit.powerpoint>
+      <exo.remote-edit.desktop>Open On Desktop</exo.remote-edit.desktop>
+      <exo.remote-edit.desktop-app>Open In</exo.remote-edit.desktop-app>
+    </label>
+  </OpenDocumentInOffice>
+
+  <UIPopupMenu>
+    <msg>
+      <lock-node-read-only>此文件已被用户 {0} 锁定。打开只读模式吗？</lock-node-read-only>
+    </msg>
+  </UIPopupMenu>
+  <ECMContextMenu>
+    <event>
+      <ShareDocuments>分享</ShareDocuments>
+    </event>
+  </ECMContextMenu>
+  <UIPopupWindow>
+    <title>
+      <UIShareDocuments>分享</UIShareDocuments>
+      <Share>分享</Share>
+    </title>
+  </UIPopupWindow>
+  <UIShareDocuments>
+    <label>
+      <ShareButton>共享</ShareButton>
+      <CancelButton>取消</CancelButton>
+      <TextAreaInit>Send a message upon sharing...</TextAreaInit>
+      <ShareWith>Share with</ShareWith>
+      <Access>访问权限设置</Access>
+      <SpaceMember>Members</SpaceMember>
+      <SelectASpace>选择一个空间</SelectASpace>
+      <SharedADocument>共享一文档</SharedADocument>
+      <WhoHasAccess>Who has access</WhoHasAccess>
+      <success>The document was shared successfully</success>
+      <NoPermission>You are not allowed to share this document</NoPermission>
+      <NoPermissionDelete>You can't delete this permission</NoPermissionDelete>
+      <InvalidDeletion>You can't delete your own permission</InvalidDeletion>
+      <InvalidEntry>This permission can't be edited</InvalidEntry>
+      <InvalidOwner>You can't change owner's permissions</InvalidOwner>
+      <Invalid>Sorry, we couldn't recognise '{0}' as a valid user or space name</Invalid>
+      <option>
+        <read>Can view</read>
+        <modify>Can edit</modify>
+      </option>
+      <notification>
+        <read>read</read>
+        <modify>edit</modify>
+      </notification>
+      <invite>
+        <placeholder>Enter users or spaces names...</placeholder>
+      </invite>
+      <owner>所有者</owner>
+    </label>
+  </UIShareDocuments>
+
+  <UIActionBar>
+    <tooltip>
+      <ShareDocuments>分享</ShareDocuments>
+    </tooltip>
+  </UIActionBar>
+</bundle>

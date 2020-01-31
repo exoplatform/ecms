@@ -1,0 +1,180 @@
+<%
+  import java.util.List;
+  import java.util.ArrayList;
+  import javax.jcr.Node;
+  import javax.jcr.NodeIterator;
+  import org.exoplatform.webui.core.UIPopupWindow;
+  import org.exoplatform.web.application.Parameter;
+  import org.exoplatform.ecm.webui.utils.Utils; 
+  import org.exoplatform.services.wcm.core.NodeLocation;
+  import org.exoplatform.services.jcr.RepositoryService;
+  import org.exoplatform.services.wcm.core.NodetypeConstant;
+  import org.exoplatform.wcm.webui.reader.ContentReader;  
+  
+  
+  public Node getFileLangNode(Node currentNode) throws Exception {
+    if(currentNode.isNodeType("nt:unstructured")) {
+      if(currentNode.getNodes().getSize() > 0) {
+        NodeIterator nodeIter = currentNode.getNodes() ;
+        while(nodeIter.hasNext()) {
+          Node ntFile = nodeIter.nextNode() ;
+          if(ntFile.getPrimaryNodeType().getName().equals("nt:file")) {
+            return ntFile ;
+          }
+        }
+        return currentNode ;
+      }
+    }
+    return currentNode ;
+  }
+  
+  def rcontext = _ctx.getRequestContext() ; 
+  rcontext.getJavascriptManager().loadScriptResource("ecm-utils");
+  rcontext.getJavascriptManager().require("SHARED/ecm-browser", "browser").
+  addScripts("browser.DMSBrowser.managerResize();");
+  RepositoryService rService = uicomponent.getApplicationComponent(RepositoryService.class);
+  String repository = rService.getCurrentRepository().getConfiguration().getName();  
+  
+  
+  UIPopupWindow uiPopupWindow = uicomponent.getAncestorOfType(UIPopupWindow.class);
+  def resizeBlock = "class=\"UIResizableBlock\"";
+  if(uiPopupWindow != null) resizeBlock = ""; 
+  
+  def currentNode = getFileLangNode(uicomponent.getNode()) ;
+  currentNode = org.exoplatform.wcm.webui.Utils.getRealNode(currentNode);
+  def currentNodePath = org.exoplatform.wcm.webui.Utils.getRealNodePath(currentNode);
+  def contentNode = currentNode.getNode("jcr:content") ;
+  def title = ContentReader.getXSSCompatibilityContent(org.exoplatform.services.cms.impl.Utils.getTitle(currentNode));
+  def mimeType = contentNode.getProperty("jcr:mimeType").getString() ;
+  List<String> unsupportMimeTypeText = new ArrayList<String>();
+  unsupportMimeTypeText.add("text/rtf");
+  String portalName = uicomponent.getPortalName() ;
+  String restContextName = org.exoplatform.ecm.webui.utils.Utils.getRestContextName(portalName);
+  String componentId = uicomponent.getId();
+  String wid = rcontext.getWindowId();
+  
+  public String formatNodeName(String text) {
+    return text.replaceAll("'", "\\\\'") ;
+  }
+  
+%>
+<div $resizeBlock id="<%=componentId + "-" + wid%>">
+  <style type="text/css">
+    <% _ctx.include(uicomponent.getTemplateSkin("exo:accessibleMedia", "Stylesheet")); %>
+  </style>
+  <div class="mediaContent">
+    <div class="navigationContainer uiBox"> 
+      <h5 class="title clearfix">
+        <%
+          StringBuilder sb = new StringBuilder();
+          String ndPath = currentNode.getPath();
+          if (ndPath.startsWith("/")) ndPath.substring(1);
+          sb.append("/").append(restContextName).append("/contents/download/");
+          sb.append(currentNode.getSession().getWorkspace().getName()).append("/").append(currentNode.getPath());
+          def downloadLink = sb.toString();
+          def fileComponent = uicomponent.getUIComponent(mimeType);
+          if (fileComponent != null) {
+        %>
+            <a class="pull-right" href="$downloadLink"><i class="uiIconDownload"></i><%=_ctx.appRes("File.view.label.download")%></a>
+        <%}%>
+        <div class="topTitle" title="<%=title %>"><%=title %></div>     
+      </h5>
+      <div class="content uiContentBox">
+        <%
+          if(fileComponent != null) {
+          uicomponent.renderUIComponent(fileComponent);
+          } else {
+        %>
+        <div class="uiUnEditable clearfix">
+          <div class="iconContainer">
+            <i class="<%=Utils.getNodeTypeIcon(currentNode, "uiIcon64x64")%>"></i>
+          </div>
+          <div class="detailContainer">
+            <h4><%=_ctx.appRes("File.view.label.not-viewable")%></h4>
+            <a class="btn btn-primary" href="$downloadLink"><%=_ctx.appRes("File.view.label.download")%></a>
+            <span><%=_ctx.appRes("File.view.label.using-webDAV")%></span>
+          </div>
+        </div>
+        <%}%>               
+          <!-- Switch between original media and audio description -->
+          <% if (uicomponent.playAudioDescription()) {%>
+              <div class="ActionSwitchButton" style="text-align:left;margin-top:1px;display:block;margin-left:100px" 
+                   onclick="<%=uicomponent.event("SwitchToAudioDescription")%>" class="ActionTextButton LightBlueStyle" rel="tooltip" data-placement="bottom"
+                   title="<%=_ctx.appRes("AccessibleMedia.view.tooltip.A-second-media-file-is-available-as-audio-description")%>" >
+                <a href="javascript:void(0);"><%=_ctx.appRes("AccessibleMedia.view.label.Play-audio-description-of-this-video")%></a>
+              </div>
+          <% } %>
+          <!-- Open and close Alternative text-->
+          <% if (uicomponent.isDisplayAlternativeText()) { 
+              def alterText = ""; %>
+             <div id="<%="AccessibleMediaText" + wid%>">
+               <div class="MediaFrame">
+                 <div class="TopLeftMediaFrame">
+                   <div class="TopRightArtictleFrame">
+                     <div class="TopCenterMediaFrame">
+                       <!--div class="MediaField">
+                         <div class="FieldIcon ContentIcon"><span></span></div>
+                         <div style="clear: left;"><span></span></div>
+                       </div-->
+                       <span></span>
+                     </div>
+                   </div>
+                 </div>
+                 <div class="MiddleLeftMediaFrame">
+                   <div class="MidlleRightMediaFrame">
+                     <div class="MediaFrameContainer">
+                       <div class="FieldContent">
+                         <div class="FieldContainerContent">
+                           <div class="LabelContent" style="display:block">
+                             <%
+                               if(currentNode.hasProperty(NodetypeConstant.EXO_ALTERNATIVE_TEXT)) {
+                                 alterText = currentNode.getProperty(NodetypeConstant.EXO_ALTERNATIVE_TEXT).getString();
+                                 def tmpAlterText = alterText.replaceAll("<(.|\n)*?>","");
+                                 if (tmpAlterText.length() < 100) {
+                                   print tmpAlterText;
+                                 } else {
+                                   print(tmpAlterText.substring(0, 100)); %>
+                                   <p onclick="eXo.ecm.ECMUtils.displayFullAlternativeText(this)">
+                                       <a href="javascript:void(0);">
+                                         <%=_ctx.appRes("AccessibleMedia.view.label.Read-more")%>
+                                       </a>
+                                   </p>
+                              <% }
+                               } else {
+                                 print "<span></span>"
+                               }
+                           %>
+                           </div>
+                           <% if (alterText.length() >= 100) { %>
+                             <div class="LabelContent" style="display:none">
+                               <% print(alterText); %>
+                               <p onclick="eXo.ecm.ECMUtils.collapseAlternativeText(this)" style="float:right">
+                                 <a href="javascript:void(0);">
+                                   <%=_ctx.appRes("AccessibleMedia.view.label.Read-less")%>
+                                 </a>
+                               </p>
+                             </div>
+                           <%} %>
+                         </div>  
+                       </div>
+                     </div>
+                   </div>
+                 </div>
+               </div>
+               
+             </div>
+             <!-- of AccessibleMediaTextClose -->
+           <% } %>
+           <!-- Switch between original media and audio description -->
+           <% if (uicomponent.switchBackAudioDescription()) {%>
+               <div id="<%="MediaAudioDescriptionBack" + wid%>" style="text-align:left;margin-top:1px;display:block;margin-left:95px" 
+                    onclick="<%=uicomponent.event("SwitchToOriginal")%>" class="ActionTextButton LightBlueStyle">
+                 <a href="javascript:void(0);"><%=_ctx.appRes("AccessibleMedia.view.label.Switch-back-to-original-video") + " <<"%></a>
+               </div>
+           <% } %>          
+      </div>
+    </div>
+    <div><% _ctx.include(uicomponent.getViewTemplate("mix:votable", "view1")); %></div>
+    <div><% _ctx.include(uicomponent.getViewTemplate("exo:comments", "view1")); %></div>
+  </div>
+</div>

@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UIConfirmMessage>
+    <label>
+      <ReadOnly>Open Read-only</ReadOnly>
+    </label>
+  </UIConfirmMessage>
+
+  <UISocialPopupWindow>
+    <title>
+      <UIReadOnlyFileConfirmMessage>Open Document</UIReadOnlyFileConfirmMessage>
+    </title>
+  </UISocialPopupWindow>
+  <SocialIntegration>
+    <titles>
+      <fileSize>Filstørrelse</fileSize>
+    </titles>
+    <messages>
+      <createdBy>ble opprettet av</createdBy>
+      <editedBy>was edited by</editedBy>
+      <system>systemet</system>
+      <readmore>...Read More.</readmore>
+      <editTitle>Tittelen har blitt oppdatert til: {0}</editTitle>
+      <editName>Navnet har blitt oppdatert til: {0}</editName>
+      <editDescription>Beskrivelsen har blitt oppdatert til: {0}</editDescription>
+      <singleCreator>Skaperen er {0}</singleCreator>
+      <multiCreator>Skaperne er {0}</multiCreator>
+      <addSource>Filkilde: {0} har blitt lagt til</addSource>
+      <addMultiSource>Filkilde: {0} har blitt lagt til</addMultiSource>
+      <removeSource>Filkilde: {0} har blitt fjernet</removeSource>
+      <removeMultiSource>Filkilde: {0} har blitt fjernet</removeMultiSource>
+      <editSummary>Sammendraget er oppdatert til: {0}</editSummary>
+      <editLanguage>Språk har blitt endret til: {0}</editLanguage>
+      <editContent>Innholdet har blitt oppdatert.</editContent>
+      <editFile>Filen har blitt oppdatert.</editFile>
+      <emptyTitle>Tittelen har blitt fjernet.</emptyTitle>
+      <emptySummary>Sammendraget har blitt fjernet.</emptySummary>
+      <emptyContent>Innholdet har blitt fjernet.</emptyContent>
+      <updateMetadata>Metadata {0} har blitt oppdatert til: {1}</updateMetadata>
+      <removeMetadata>Metadata {0} har blitt fjernet.</removeMetadata>
+      <removeTitle>Tittelen har blitt fjernet.</removeTitle>
+      <removeName>Navnet har blitt fjernet.</removeName>
+      <removeSummary>Sammendrag har blitt fjernet.</removeSummary>
+      <removeDescription>Beskrivelsen har blitt fjernet.</removeDescription>
+      <removeCreator>Skaper: {0} har blitt fjernet.</removeCreator>
+      <removeMultiCreator>Skapere: {0} har blitt fjernet.</removeMultiCreator>
+      <removeLanguage>Språket har blitt fjernet.</removeLanguage>
+      <removeContent>Content has been removed.</removeContent>
+      <attachmentAdded>Fil(er) har blitt lagt ved.</attachmentAdded>
+      <attachmentRemoved>Fil(er) har blitt fjernet.</attachmentRemoved>
+      <categoryAdded>Kategori: {0} er lagt til.</categoryAdded>
+      <categoryRemoved>Kategori: {0} har blitt fjernet.</categoryRemoved>
+      <tagAdded>Tagg: {0} har blitt lagt til.</tagAdded>
+      <tagsAdded>Taggene: {0} har blitt lagt til.</tagsAdded>
+      <tagRemoved>Tagg: {0} har blitt fjernet.</tagRemoved>
+      <tagsRemoved>Taggene: {0} har blitt fjernet.</tagsRemoved>
+      <stateChange>
+        <pending>Publikasjonsstatusen er venter.</pending>
+        <approved>Dokumentet har blitt godkjent.</approved>
+        <staged>Publikasjonen har blitt lagt klar.</staged>
+        <published>Dokumentet har blitt publisert.</published>
+      </stateChange>
+      <contentMoved>Publikasjonen har blitt flyttet til: {0}</contentMoved>
+      <fileMoved>Filen har blitt flyttet til: {0}</fileMoved>
+      <revisionChanged>Publikasjonen har blitt tilbakestilt til versjon: {0}</revisionChanged>
+      <version>Versjon {0}</version>
+      <updatedOn>Updated on</updatedOn>
+      <updatedBy>ved</updatedBy>
+      <loadMoreFiles>+{0} more</loadMoreFiles>
+    </messages>
+    <publicationStates>
+      <archived>Arkivert</archived>
+      <obsolete>Foreldet</obsolete>
+      <unpublished>Upubliserte</unpublished>
+      <draft>Utkast</draft>
+      <pending>Venter</pending>
+      <approved>Godkjent</approved>
+      <inreview>Til granskning</inreview>
+      <staged>Lagt klar</staged>
+      <published>Publisert</published>
+      <live>Publisert</live>
+    </publicationStates>
+    <view>Vis</view>
+    <edit>Rediger</edit>
+    <download>Last ned</download>
+    <downloadAll>Download All</downloadAll>
+    <preview>Forhåndsvisning</preview>
+  </SocialIntegration>
+  <UIPopupWindow>
+    <title>
+      <DocViewer>Forhåndsvisning</DocViewer>
+      <UIReadOnlyFileConfirmMessage>Open Document</UIReadOnlyFileConfirmMessage>
+    </title>
+  </UIPopupWindow>
+  <ElementSet>
+    <dialog>
+      <label>
+        <resourceType>Ressurstype</resourceType>
+      </label>
+    </dialog>
+  </ElementSet>
+  <UIPreviewCommentArea>
+    <label>
+      <commentTextAreaPreview>Add your comment...</commentTextAreaPreview>
+      <no-comment-yet>No comment yet</no-comment-yet>
+    </label>
+  </UIPreviewCommentArea>
+
+  <OpenDocumentInOffice>
+    <label>
+      <exo.remote-edit.word>Open In Word</exo.remote-edit.word>
+      <exo.remote-edit.excel>Open In Excel</exo.remote-edit.excel>
+      <exo.remote-edit.powerpoint>Open In Powerpoint</exo.remote-edit.powerpoint>
+      <exo.remote-edit.desktop>Open On Desktop</exo.remote-edit.desktop>
+      <exo.remote-edit.desktop-app>Open In</exo.remote-edit.desktop-app>
+    </label>
+  </OpenDocumentInOffice>
+
+  <UIPopupMenu>
+    <msg>
+      <lock-node-read-only>This file is locked by user {0}. Open read only?</lock-node-read-only>
+    </msg>
+  </UIPopupMenu>
+  <ECMContextMenu>
+    <event>
+      <ShareDocuments>Share</ShareDocuments>
+    </event>
+  </ECMContextMenu>
+  <UIPopupWindow>
+    <title>
+      <UIShareDocuments>Share Document</UIShareDocuments>
+      <Share>Share</Share>
+    </title>
+  </UIPopupWindow>
+  <UIShareDocuments>
+    <label>
+      <ShareButton>Del</ShareButton>
+      <CancelButton>Cancel</CancelButton>
+      <TextAreaInit>Send a message upon sharing...</TextAreaInit>
+      <ShareWith>Share with</ShareWith>
+      <Access>Access</Access>
+      <SpaceMember>Members</SpaceMember>
+      <SelectASpace>Select a Space</SelectASpace>
+      <SharedADocument>shared a document</SharedADocument>
+      <WhoHasAccess>Who has access</WhoHasAccess>
+      <success>The document was shared successfully</success>
+      <NoPermission>You are not allowed to share this document</NoPermission>
+      <NoPermissionDelete>You can't delete this permission</NoPermissionDelete>
+      <InvalidDeletion>You can't delete your own permission</InvalidDeletion>
+      <InvalidEntry>This permission can't be edited</InvalidEntry>
+      <InvalidOwner>You can't change owner's permissions</InvalidOwner>
+      <Invalid>Sorry, we couldn't recognise '{0}' as a valid user or space name</Invalid>
+      <option>
+        <read>Can view</read>
+        <modify>Can edit</modify>
+      </option>
+      <notification>
+        <read>read</read>
+        <modify>edit</modify>
+      </notification>
+      <invite>
+        <placeholder>Enter users or spaces names...</placeholder>
+      </invite>
+      <owner>Eier</owner>
+    </label>
+  </UIShareDocuments>
+
+  <UIActionBar>
+    <tooltip>
+      <ShareDocuments>Share</ShareDocuments>
+    </tooltip>
+  </UIActionBar>
+</bundle>

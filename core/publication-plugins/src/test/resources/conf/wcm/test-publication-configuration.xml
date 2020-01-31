@@ -30,7 +30,7 @@
       <value-param>
         <name>acceptedFileProperties</name>
         <value>{dc:title}{dc:description}{dc:creator}{dc:source}{exo:summary}{exo:title}{exo:language}{jcr:data}</value>
-      </value-param>      
+      </value-param>
     </init-params>
   </component>
   <component>
@@ -158,15 +158,10 @@
   </component>
 
   <component>
-    <key>org.exoplatform.commons.scope.ScopeManager</key>
-    <type>org.exoplatform.commons.scope.ScopeManager</type>
-  </component>
-
-  <component>
-  	<key>org.exoplatform.services.cache.CacheService</key>
+    <key>org.exoplatform.services.cache.CacheService</key>
     <jmx-name>cache:type=CacheService</jmx-name>
-  	<type>org.exoplatform.services.cache.impl.CacheServiceImpl</type>
-  	<init-params>
+    <type>org.exoplatform.services.cache.impl.CacheServiceImpl</type>
+    <init-params>
       <object-param>
         <name>cache.config.default</name>
         <object type="org.exoplatform.services.cache.ExoCacheConfig">
@@ -180,37 +175,6 @@
     </init-params>
   </component>
   
-
-  <component>
-     <key>org.exoplatform.services.security.Authenticator</key>
-     <type>org.exoplatform.services.organization.auth.OrganizationAuthenticatorImpl</type>
-  </component>
-
-  <component>
-     <key>org.exoplatform.services.listener.ListenerService</key>
-     <type>org.exoplatform.services.listener.ListenerService</type>
-  </component>
-
-  <component>
-    <key>org.exoplatform.commons.chromattic.ChromatticManager</key>
-    <type>org.exoplatform.commons.chromattic.ChromatticManager</type>
-  </component>
-
-  <component>
-    <key>org.exoplatform.portal.pom.config.POMSessionManager</key>
-    <type>org.exoplatform.portal.pom.config.POMSessionManager</type>
-  </component>
-
-  <component>
-    <key>org.exoplatform.portal.pom.data.ModelDataStorage</key>
-    <type>org.exoplatform.portal.pom.config.POMDataStorage</type>
-  </component>
-
-  <component>
-    <key>org.exoplatform.portal.config.DataStorage</key>
-    <type>org.exoplatform.portal.config.DataStorageImpl</type>
-  </component>
-
   <component>
      <key>org.exoplatform.services.jcr.ext.distribution.DataDistributionManager</key>
      <type>org.exoplatform.services.jcr.ext.distribution.impl.DataDistributionManagerImpl</type>
@@ -221,35 +185,6 @@
      <type>org.exoplatform.services.jcr.ext.hierarchy.impl.NodeHierarchyCreatorImpl</type>
   </component>
 
-  <component>
-    <key>org.exoplatform.portal.config.UserACL</key>
-    <type>org.exoplatform.portal.config.UserACL</type>
-    <init-params>
-      <value-param>
-        <name>super.user</name>
-        <value>root</value>
-      </value-param>
-      <value-param>
-        <name>guests.group</name>
-        <value>/platform/guests</value>
-      </value-param>
-      <value-param>
-        <name>navigation.creator.membership.type</name>
-        <value>manager</value>
-      </value-param>
-    </init-params>
-  </component>
-
-  <component>
-    <key>org.exoplatform.portal.mop.navigation.NavigationService</key>
-    <type>org.exoplatform.portal.mop.navigation.NavigationServiceWrapper</type>
-  </component>
-
-  <component>
-    <key>org.exoplatform.portal.mop.description.DescriptionService</key>
-    <type>org.exoplatform.portal.mop.description.DescriptionServiceImpl</type>
-  </component>
-  
   <component>
     <key>org.exoplatform.services.wcm.core.WCMConfigurationService</key>
     <type>org.exoplatform.services.wcm.core.WCMConfigurationService</type>
@@ -330,35 +265,32 @@
       </object-param>
     </init-params>
   </component>
-  
+
   <external-component-plugins>
- 		<target-component>org.exoplatform.services.jcr.RepositoryService</target-component>
- 		<component-plugin>
- 		  <name>add.namespaces</name>
- 		  <set-method>addPlugin</set-method>
- 		  <type>org.exoplatform.services.jcr.impl.AddNamespacesPlugin</type>
- 		  <init-params>
- 		    <properties-param>
- 		      <name>namespaces</name>
+    <target-component>org.exoplatform.services.jcr.RepositoryService</target-component>
+    <component-plugin>
+      <name>add.namespaces</name>
+      <set-method>addPlugin</set-method>
+      <type>org.exoplatform.services.jcr.impl.AddNamespacesPlugin</type>
+      <init-params>
+        <properties-param>
+          <name>namespaces</name>
           <property name="gtn" value="http://www.gatein.org/jcr/gatein/1.0/"/>
           <property name="mop" value="http://www.gatein.org/jcr/mop/1.0/"/>
- 		      </properties-param>
- 		  </init-params>
- 		</component-plugin>
- 		<component-plugin>
- 		  <name>add.nodeType</name>
- 		  <set-method>addPlugin</set-method>
- 		  <type>org.exoplatform.services.jcr.impl.AddNodeTypePlugin</type>
- 		  <init-params>
- 		    <values-param>
- 		      <name>autoCreatedInNewRepository</name>
-           <value>jar:/conf/wcm/gatein-nodetypes.xml</value>
-           <!--value>jar:/conf/wcm/test-publication-nodetypes.xml</value-->
-           <value>jar:/conf/wcm/content-nodetypes.xml</value>
+          </properties-param>
+      </init-params>
+    </component-plugin>
+    <component-plugin>
+      <name>add.nodeType</name>
+      <set-method>addPlugin</set-method>
+      <type>org.exoplatform.services.jcr.impl.AddNodeTypePlugin</type>
+      <init-params>
+        <values-param>
+          <name>autoCreatedInNewRepository</name>
            <value>jar:/conf/wcm/test-mop-nodetypes.xml</value>
- 		    </values-param>
- 		  </init-params>
- 		</component-plugin>
+        </values-param>
+      </init-params>
+    </component-plugin>
   </external-component-plugins>
 
   <external-component-plugins>
@@ -420,10 +352,10 @@
       </init-params>
     </component-plugin>
   </external-component-plugins>
-  
-	<external-component-plugins>
+
+  <external-component-plugins>
     <!-- The full qualified name of the ResourceBundleService -->
-		<target-component>org.exoplatform.services.resources.ResourceBundleService</target-component>
+    <target-component>org.exoplatform.services.resources.ResourceBundleService</target-component>
     <component-plugin>
       <!-- The name of the plugin -->
       <name>ResourceBundle Plugin</name>
@@ -433,17 +365,17 @@
       <type>org.exoplatform.services.resources.impl.BaseResourceBundlePlugin</type>
       <init-params>
         <values-param>
-					<name>init.resources</name>
-					<description>Store the following resources into the db for the first launch </description>
+          <name>init.resources</name>
+          <description>Store the following resources into the db for the first launch </description>
           <value>locale.services.publication.lifecycle.stageversion.StageAndVersionPublication</value>					
-					<value>locale.services.publication.lifecycle.simple.SimplePublication</value>
-				</values-param>
+          <value>locale.services.publication.lifecycle.simple.SimplePublication</value>
+        </values-param>
         <values-param>
-					<name>portal.resource.names</name>
-					<description>Store the following resources into the db for the first launch </description>
+          <name>portal.resource.names</name>
+          <description>Store the following resources into the db for the first launch </description>
           <value>locale.services.publication.lifecycle.stageversion.StageAndVersionPublication</value>					
-					<value>locale.services.publication.lifecycle.simple.SimplePublication</value>
-				</values-param>
+          <value>locale.services.publication.lifecycle.simple.SimplePublication</value>
+        </values-param>
       </init-params>
     </component-plugin>
   </external-component-plugins>

@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UIConfirmMessage>
+    <label>
+      <ReadOnly>Open Read-only</ReadOnly>
+    </label>
+  </UIConfirmMessage>
+
+  <UISocialPopupWindow>
+    <title>
+      <UIReadOnlyFileConfirmMessage>Open Document</UIReadOnlyFileConfirmMessage>
+    </title>
+  </UISocialPopupWindow>
+  <SocialIntegration>
+    <titles>
+      <fileSize>Kích thước Tệp</fileSize>
+    </titles>
+    <messages>
+      <createdBy>được tạo bởi</createdBy>
+      <editedBy>được sửa bởi</editedBy>
+      <system>hệ thống</system>
+      <readmore>...Xem Thêm.</readmore>
+      <editTitle>Tiêu đề đã được cập nhật thành : {0}</editTitle>
+      <editName>Tên đã được cập nhật thành: {0}</editName>
+      <editDescription>Mô tả đã được cập nhật thành: {0}</editDescription>
+      <singleCreator>Tác giả là {0}</singleCreator>
+      <multiCreator>Các Tác giả là: {0}</multiCreator>
+      <addSource>Tệp nguồn: {0} đã được thêm vào</addSource>
+      <addMultiSource>Một số tệp nguồn: {0} đã được thêm vào</addMultiSource>
+      <removeSource>Tệp nguồn: {0} đã bị loại bỏ</removeSource>
+      <removeMultiSource>Một số tệp nguồn: {0} đã bị loại bỏ</removeMultiSource>
+      <editSummary>Nội dung tóm tắt đã được cập nhật thành: {0}</editSummary>
+      <editLanguage>Ngôn ngữ đã được cập nhật thành: {0}</editLanguage>
+      <editContent>Nội dung đã được cập nhật.</editContent>
+      <editFile>Tệp đã được cập nhật.</editFile>
+      <emptyTitle>Tiêu đề vừa bị loại bỏ.</emptyTitle>
+      <emptySummary>Tóm tắt vừa bị loại bỏ.</emptySummary>
+      <emptyContent>Nội dung vừa bị loại bỏ.</emptyContent>
+      <updateMetadata>Siêu dữ liệu {0} đã được cập nhật thành: {1}</updateMetadata>
+      <removeMetadata>Siêu dữ liệu {0} vừa bị loại bỏ.</removeMetadata>
+      <removeTitle>Tiêu đề vừa bị loại bỏ.</removeTitle>
+      <removeName>Tên vừa bị loại bỏ.</removeName>
+      <removeSummary>Tóm tắt vừa bị loại bỏ.</removeSummary>
+      <removeDescription>Miêu tả vừa bị loại bỏ.</removeDescription>
+      <removeCreator>Tác giả: {0} vừa bị loại bỏ.</removeCreator>
+      <removeMultiCreator>Các tác giả: {0} đã bị loại bỏ.</removeMultiCreator>
+      <removeLanguage>Ngôn ngữ đã bị xóa.</removeLanguage>
+      <removeContent>Nội dung đã bị xóa.</removeContent>
+      <attachmentAdded>Một số tệp đã được đính kèm.</attachmentAdded>
+      <attachmentRemoved>Tệp vừa bị loại bỏ.</attachmentRemoved>
+      <categoryAdded>Danh mục: {0} đã được thêm vào.</categoryAdded>
+      <categoryRemoved>Danh mục: {0} đã được thêm vào.</categoryRemoved>
+      <tagAdded>Nhãn {0} vừa được thêm vào.</tagAdded>
+      <tagsAdded>Một số Nhãn: {0} vừa được thêm vào.</tagsAdded>
+      <tagRemoved>Nhãn: {0} vừa bị loại bỏ.</tagRemoved>
+      <tagsRemoved>Một số Nhãn: {0} vừa bị loại bỏ.</tagsRemoved>
+      <stateChange>
+        <pending>Tài liệu đang chờ được duyệt.</pending>
+        <approved>Tài liệu đã được chấp thuận.</approved>
+        <staged>Tài liệu đang được xem xét.</staged>
+        <published>Tài liệu đã được xuất bản.</published>
+      </stateChange>
+      <contentMoved>Tài liệu vừa được di chuyển đến: {0}</contentMoved>
+      <fileMoved>Tệp đã được chuyển tới: {0}</fileMoved>
+      <revisionChanged>Tài liệu vừa được khôi phục lại phiên bản: {0}</revisionChanged>
+      <version>Phiên bản: {0}</version>
+      <updatedOn>Updated on</updatedOn>
+      <updatedBy>bởi</updatedBy>
+      <loadMoreFiles>+{0} more</loadMoreFiles>
+    </messages>
+    <publicationStates>
+      <archived>Được sao lưu</archived>
+      <obsolete>Đã quá hạn</obsolete>
+      <unpublished>Chưa xuất bản</unpublished>
+      <draft>Bản nháp</draft>
+      <pending>Chờ duyệt</pending>
+      <approved>Đã duyệt</approved>
+      <inreview>Đang đánh giá</inreview>
+      <staged>Đang xem xét</staged>
+      <published>Xuất bản</published>
+      <live>Xuất bản</live>
+    </publicationStates>
+    <view>Xem</view>
+    <edit>Chỉnh sửa</edit>
+    <download>Tải về</download>
+    <downloadAll>Download All</downloadAll>
+    <preview>Xem lại</preview>
+  </SocialIntegration>
+  <UIPopupWindow>
+    <title>
+      <DocViewer>Xem lại</DocViewer>
+      <UIReadOnlyFileConfirmMessage>Open Document</UIReadOnlyFileConfirmMessage>
+    </title>
+  </UIPopupWindow>
+  <ElementSet>
+    <dialog>
+      <label>
+        <resourceType>Loại Tài nguyên</resourceType>
+      </label>
+    </dialog>
+  </ElementSet>
+  <UIPreviewCommentArea>
+    <label>
+      <commentTextAreaPreview>Đăng bình luận...</commentTextAreaPreview>
+      <no-comment-yet>No comment yet</no-comment-yet>
+    </label>
+  </UIPreviewCommentArea>
+
+  <OpenDocumentInOffice>
+    <label>
+      <exo.remote-edit.word>Open In Word</exo.remote-edit.word>
+      <exo.remote-edit.excel>Open In Excel</exo.remote-edit.excel>
+      <exo.remote-edit.powerpoint>Open In Powerpoint</exo.remote-edit.powerpoint>
+      <exo.remote-edit.desktop>Open On Desktop</exo.remote-edit.desktop>
+      <exo.remote-edit.desktop-app>Open In</exo.remote-edit.desktop-app>
+    </label>
+  </OpenDocumentInOffice>
+
+  <UIPopupMenu>
+    <msg>
+      <lock-node-read-only>This file is locked by user {0}. Open read only?</lock-node-read-only>
+    </msg>
+  </UIPopupMenu>
+  <ECMContextMenu>
+    <event>
+      <ShareDocuments>Chia sẻ</ShareDocuments>
+    </event>
+  </ECMContextMenu>
+  <UIPopupWindow>
+    <title>
+      <UIShareDocuments>Chia sẻ</UIShareDocuments>
+      <Share>Chia sẻ</Share>
+    </title>
+  </UIPopupWindow>
+  <UIShareDocuments>
+    <label>
+      <ShareButton>Chia sẻ</ShareButton>
+      <CancelButton>Hủy bỏ</CancelButton>
+      <TextAreaInit>Send a message upon sharing...</TextAreaInit>
+      <ShareWith>Share with</ShareWith>
+      <Access>Truy cập</Access>
+      <SpaceMember>Members</SpaceMember>
+      <SelectASpace>Chọn một không gian</SelectASpace>
+      <SharedADocument>chia sẻ một tài liệu</SharedADocument>
+      <WhoHasAccess>Who has access</WhoHasAccess>
+      <success>The document was shared successfully</success>
+      <NoPermission>You are not allowed to share this document</NoPermission>
+      <NoPermissionDelete>You can't delete this permission</NoPermissionDelete>
+      <InvalidDeletion>You can't delete your own permission</InvalidDeletion>
+      <InvalidEntry>This permission can't be edited</InvalidEntry>
+      <InvalidOwner>You can't change owner's permissions</InvalidOwner>
+      <Invalid>Sorry, we couldn't recognise '{0}' as a valid user or space name</Invalid>
+      <option>
+        <read>Can view</read>
+        <modify>Can edit</modify>
+      </option>
+      <notification>
+        <read>read</read>
+        <modify>edit</modify>
+      </notification>
+      <invite>
+        <placeholder>Enter users or spaces names...</placeholder>
+      </invite>
+      <owner>Chủ sở hữu</owner>
+    </label>
+  </UIShareDocuments>
+
+  <UIActionBar>
+    <tooltip>
+      <ShareDocuments>Chia sẻ</ShareDocuments>
+    </tooltip>
+  </UIActionBar>
+</bundle>

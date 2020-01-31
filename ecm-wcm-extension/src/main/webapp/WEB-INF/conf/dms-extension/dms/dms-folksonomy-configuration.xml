@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<configuration
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd http://www.exoplatform.org/xml/ns/kernel_1_2.xsd"
+   xmlns="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd">
+
+  
+	<component>
+	  <key>org.exoplatform.services.cms.folksonomy.NewFolksonomyService</key>  
+	  <type>org.exoplatform.services.cms.folksonomy.impl.NewFolksonomyServiceImpl</type>
+     <init-params>
+       <value-param>
+         <name>workspace</name>
+         <value>collaboration</value>
+       </value-param>
+       <value-param>
+         <name>path</name>
+         <value>/SiteTags</value>
+       </value-param>
+     </init-params>          
+	  
+	</component>
+	
+	<external-component-plugins>
+    <target-component>org.exoplatform.services.cms.folksonomy.NewFolksonomyService</target-component>  	  
+    	<component-plugin>
+			  <name>predefinedTagStylePlugin</name>
+		    <set-method>addTagStylePlugin</set-method>
+		    <type>org.exoplatform.services.cms.folksonomy.impl.TagStylePlugin</type>
+		    <init-params>
+		    	<object-param>
+		    		<name>htmStyleForTag.configuration</name>
+	          <description>configuration predefined html style for tag to inject in jcr</description>
+	          <object type="org.exoplatform.services.cms.folksonomy.impl.TagStyleConfig">
+	          	<field  name="autoCreatedInNewRepository"><boolean>true</boolean></field>
+	          	<field  name="tagStyleList">
+	          		<collection type="java.util.ArrayList">	          		  
+	          			<value>
+	          				<object type="org.exoplatform.services.cms.folksonomy.impl.TagStyleConfig$HtmlTagStyle">
+	          					<field  name="name"><string>normal</string></field>		          				          				
+		          			  <field  name="tagRate"><string>0..2</string></field>
+		          			  <field  name="htmlStyle">
+		          			  	<string>font-size: 12px; font-weight: bold; color: #6b6b6b; font-family: verdana; text-decoration:none;</string>
+		          			  </field>
+		          			  <field  name="description"><string>Normal style for tag</string></field>		          				          						          				
+		          			</object>
+		          		</value>		          		
+		          		<value>
+	          				<object type="org.exoplatform.services.cms.folksonomy.impl.TagStyleConfig$HtmlTagStyle">
+		          			  <field  name="name"><string>interesting</string></field>		          				          				
+		          			  <field  name="tagRate"><string>2..5</string></field>
+		          			  <field  name="htmlStyle">
+		          			  	<string>font-size: 13px; font-weight: bold; color: #5a66ce; font-family: verdana; text-decoration:none;</string>
+		          			  </field>
+		          			  <field  name="description"><string>Interesting style for tag</string></field>		          				          						          				
+		          			</object>
+		          		</value>		          		
+		          		<value>
+	          				<object type="org.exoplatform.services.cms.folksonomy.impl.TagStyleConfig$HtmlTagStyle">
+		          			  <field  name="name"><string>attractive</string></field>		          				          				
+		          			  <field  name="tagRate"><string>5..7</string></field>
+		          			  <field  name="htmlStyle">
+		          			  	<string>font-size: 15px; font-weight: bold; color: blue; font-family: Arial; text-decoration:none;</string>
+		          			  </field>
+		          			  <field  name="description"><string>attractive style for tag</string></field>		          				          						          				
+		          			</object>
+		          		</value>		          				          		
+		          		<value>
+	          				<object type="org.exoplatform.services.cms.folksonomy.impl.TagStyleConfig$HtmlTagStyle">
+		          			  <field  name="name"><string>hot</string></field>		          				          				
+		          			  <field  name="tagRate"><string>7..10</string></field>
+		          			  <field  name="htmlStyle">
+		          			  	<string>font-size: 18px; font-weight: bold; color: #ff9000; font-family: Arial; text-decoration:none;</string>
+		          			  </field>
+		          			  <field  name="description"><string>hot style for tag</string></field>		          				          						          				
+		          			</object>
+		          		</value>		          				          		
+		          		<value>
+	          				<object type="org.exoplatform.services.cms.folksonomy.impl.TagStyleConfig$HtmlTagStyle">
+		          			  <field  name="name"><string>hottest</string></field>		          				          				
+		          			  <field  name="tagRate"><string>10..*</string></field>
+		          			  <field  name="htmlStyle">
+		          			  	<string>font-size: 20px; font-weight: bold; color: red; font-family:Arial; text-decoration:none;</string>
+		          			  </field>
+		          			  <field  name="description"><string>hottest style for tag</string></field>		          				          						          				
+		          			</object>
+		          		</value>
+		          				          				          		
+	          		</collection>
+	          	</field>          	          
+	          </object>
+		    	</object-param>
+		    </init-params>	  
+		  </component-plugin> 
+	</external-component-plugins>
+
+  <external-component-plugins>
+    <target-component>org.exoplatform.services.cms.folksonomy.NewFolksonomyService</target-component>     
+      <component-plugin>
+        <name>predefinedTagPermissionPlugin</name>
+        <set-method>addTagPermissionPlugin</set-method>
+        <type>org.exoplatform.services.cms.folksonomy.impl.TagPermissionPlugin</type>
+        <init-params>
+          <object-param>
+            <name>TagPermission.configuration</name>
+            <description>configuration predefined permission for tag to inject in jcr</description>
+            <object type="org.exoplatform.services.cms.folksonomy.impl.TagPermissionConfig">
+              <field  name="tagPermissionList">
+                <collection type="java.util.ArrayList">                 
+			            <value><string>*:/platform/administrators</string></value>
+                </collection>
+              </field>
+            </object>
+          </object-param>  
+        </init-params>                  
+      </component-plugin>
+  </external-component-plugins>
+	
+</configuration>

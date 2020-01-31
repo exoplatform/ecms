@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+
+    Copyright (C) 2009 eXo Platform SAS.
+    
+    This is free software; you can redistribute it and/or modify it
+    under the terms of the GNU Lesser General Public License as
+    published by the Free Software Foundation; either version 2.1 of
+    the License, or (at your option) any later version.
+    
+    This software is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+    Lesser General Public License for more details.
+    
+    You should have received a copy of the GNU Lesser General Public
+    License along with this software; if not, write to the Free
+    Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+    02110-1301 USA, or see the FSF site: http://www.fsf.org.
+
+-->
+
+<configuration
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd http://www.exoplatform.org/xml/ns/kernel_1_2.xsd"
+   xmlns="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd">
+   
+  <!-- This is the system configuration for ecm. Be careful if you want to change this configuration -->
+
+  <component>
+    <key>org.exoplatform.portal.config.UserACL</key>
+    <type>org.exoplatform.portal.config.UserACL</type>   
+    <init-params>	     
+      <value-param>
+        <name>super.user</name>
+        <description>administrator</description>
+        <value>${exo.super.user:root}</value>	    
+      </value-param>
+      
+      <value-param>
+        <name>portal.administrator.groups</name>
+        <description>administrator</description>
+        <value>/platform/administrators</value>
+      </value-param>
+      
+      <value-param>
+        <name>portal.administrator.mstype</name>
+        <description>administrator</description>
+        <value>manager</value>
+      </value-param>
+      
+      <value-param>
+        <name>portal.creator.groups</name>
+        <description>groups with membership type have permission to manage portal</description>
+        <value>*:/platform/administrators,*:/organization/management/executive-board</value>	    
+      </value-param>
+      
+      <value-param>
+        <name>navigation.creator.membership.type</name>
+        <description>specific membership type have full permission with group navigation</description>
+        <value>manager</value>	    
+      </value-param>
+      <value-param>
+        <name>guests.group</name>
+        <description>guests group</description>
+        <value>/platform/guests</value>	    
+      </value-param>     
+		    <values-param>
+			     <name>mandatory.groups</name>
+			     <description>Groups that can not be deleted.</description>
+			     <value>/platform/administrators</value>
+			     <value>/platform/users</value>
+			     <value>/platform/guests</value>
+		    </values-param> 
+		    <values-param>
+			     <name>mandatory.mstypes</name>
+			     <description>Membership type that can not be deleted.</description>
+			     <value>member</value>			
+		      <value>*</value>
+						</values-param>	                
+	   </init-params>   
+  </component>
+
+  <external-component-plugins>
+    <target-component>org.exoplatform.services.organization.OrganizationService</target-component>
+    <component-plugin>
+      <name>init.service.listener</name>
+      <set-method>addListenerPlugin</set-method>
+      <type>org.exoplatform.services.organization.OrganizationDatabaseInitializer</type>
+      <description>this listener populate organization data for the first launch</description>
+      <init-params>      
+        <value-param>
+          <name>checkDatabaseAlgorithm</name>
+          <description>check database</description>
+          <value>entry</value>
+        </value-param>      
+        <value-param>
+          <name>printInformation</name>
+          <description>Print information init database</description>
+          <value>false</value>
+        </value-param> 
+        <object-param>
+          <name>configuration</name>
+          <description>description</description>
+          <object type="org.exoplatform.services.organization.OrganizationConfig">
+            <field name="membershipType">
+              <collection type="java.util.ArrayList">
+                <value>
+                  <object type="org.exoplatform.services.organization.OrganizationConfig$MembershipType">
+                    <field name="type">
+                      <string>validator</string>
+                    </field>
+                    <field name="description">
+                      <string>validator membership type</string>
+                    </field>
+                  </object>
+                </value>
+                <value>
+                  <object type="org.exoplatform.services.organization.OrganizationConfig$MembershipType">
+                    <field name="type">
+                      <string>editor</string>
+                    </field>
+                    <field name="description">
+                      <string>editor membership type</string>
+                    </field>
+                  </object>
+                </value>
+                <value>
+                  <object type="org.exoplatform.services.organization.OrganizationConfig$MembershipType">
+                    <field name="type">
+                      <string>redactor</string>
+                    </field>
+                    <field name="description">
+                      <string>redactor membership type</string>
+                    </field>
+                  </object>
+                </value>
+                <value>
+                  <object type="org.exoplatform.services.organization.OrganizationConfig$MembershipType">
+                    <field name="type">
+                      <string>webdesigner</string>
+                    </field>
+                    <field name="description">
+                      <string>webdesigner membership type</string>
+                    </field>
+                  </object>
+                </value>
+                <value>
+                  <object type="org.exoplatform.services.organization.OrganizationConfig$MembershipType">
+                    <field name="type">
+                      <string>author</string>
+                    </field>
+                    <field name="description">
+                      <string>author membership type</string>
+                    </field>
+                  </object>
+                </value>
+                <value>
+                  <object type="org.exoplatform.services.organization.OrganizationConfig$MembershipType">
+                    <field name="type">
+                      <string>publisher</string>
+                    </field>
+                    <field name="description">
+                      <string>publisher membership type</string>
+                    </field>
+                  </object>
+                </value>
+              </collection>
+            </field>
+            <field name="group">
+              <collection type="java.util.ArrayList">
+                <value>
+                  <object type="org.exoplatform.services.organization.OrganizationConfig$Group">
+                    <field name="name">
+                      <string>web-contributors</string>
+                    </field>
+                    <field name="parentId">
+                      <string>/platform</string>
+                    </field>
+                    <field name="description">
+                      <string>the /platform/web-contributors group</string>
+                    </field>
+                    <field name="label">
+                      <string>Content Management</string>
+                    </field>
+                  </object>
+                </value>
+              </collection>
+            </field>
+            <field name="user">
+              <collection type="java.util.ArrayList">
+                <value>
+                  <object type="org.exoplatform.services.organization.OrganizationConfig$User">
+                    <field name="userName">
+                      <string>${exo.super.user}</string>
+                    </field>
+                    <field name="groups">
+                      <string>*:/platform/web-contributors</string>
+                    </field>
+                  </object>
+                </value>
+              </collection>
+            </field>
+          </object>
+        </object-param>
+      </init-params>
+    </component-plugin>
+  </external-component-plugins>
+
+  <external-component-plugins>
+    <target-component>org.exoplatform.portal.config.UserACL</target-component>
+    <component-plugin>
+      <name>document_permissions</name>
+      <set-method>addGroupVisibilityPlugin</set-method>
+      <type>org.exoplatform.ecm.webui.selector.PermissionsGroupVisibilityPlugin</type>
+    </component-plugin>
+  </external-component-plugins>
+</configuration>

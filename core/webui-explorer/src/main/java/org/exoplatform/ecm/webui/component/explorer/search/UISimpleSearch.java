@@ -16,23 +16,19 @@
  */
 package org.exoplatform.ecm.webui.component.explorer.search;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
-import java.util.MissingResourceException;
-import java.util.ResourceBundle;
+import java.util.*;
 
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
-import javax.jcr.query.Query;
-import javax.jcr.query.QueryManager;
-import javax.jcr.query.QueryResult;
+import javax.jcr.query.*;
 
 import org.apache.commons.lang.StringUtils;
-import org.exoplatform.commons.utils.XPathUtils;
+
 import org.exoplatform.ecm.jcr.model.Preference;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.form.UIFormInputSetWithAction;
+import org.exoplatform.services.cms.impl.Utils;
+import org.exoplatform.services.jcr.impl.util.XPathUtils;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.security.IdentityConstants;
@@ -40,19 +36,13 @@ import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.web.application.RequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
-import org.exoplatform.webui.core.UIApplication;
-import org.exoplatform.webui.core.UIPopupContainer;
-import org.exoplatform.webui.core.UIPopupWindow;
+import org.exoplatform.webui.core.*;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.core.model.SelectItemOption;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.Event.Phase;
 import org.exoplatform.webui.event.EventListener;
-import org.exoplatform.webui.form.UIForm;
-import org.exoplatform.webui.form.UIFormInputInfo;
-import org.exoplatform.webui.form.UIFormSelectBox;
-import org.exoplatform.webui.form.UIFormStringInput;
-import org.exoplatform.services.cms.impl.Utils;
+import org.exoplatform.webui.form.*;
 /**
  * Created by The eXo Platform SARL
  * Author : Dang Van Minh

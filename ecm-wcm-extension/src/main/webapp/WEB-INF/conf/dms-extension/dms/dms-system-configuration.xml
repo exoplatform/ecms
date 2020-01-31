@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<configuration
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd http://www.exoplatform.org/xml/ns/kernel_1_2.xsd"
+   xmlns="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd">
+
+   	
+	<!-- This is the system configuration for ecm. Be careful if you want to change this configuration -->
+	
+	<external-component-plugins>
+	  <target-component>org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator</target-component>	  
+	  <component-plugin>
+	    <name>addPaths</name>
+	    <set-method>addPlugin</set-method>
+	    <type>org.exoplatform.services.jcr.ext.hierarchy.impl.AddPathPlugin</type>            
+	    <init-params>
+	      <object-param>
+	        <name>cms.configuration</name>
+	        <description>configuration for the cms path</description>
+	        <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig">
+	        	<field name="workspaces">
+	          	<collection type="java.util.ArrayList">
+	          		<value><string>dms-system</string></value>              		
+	          	</collection>              	
+	          </field>
+	          <field  name="jcrPaths">
+	          	<collection type="java.util.ArrayList">
+	          		<value>              	
+		              	<object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$JcrPath">              	 	
+		              		<field  name="alias"><string>exoECMSystemPath</string></field>
+		                  <field  name="path"><string>/exo:ecm</string></field>
+		                  <field name="permissions">
+				                <collection type="java.util.ArrayList">               
+				                  <value>                            
+				                    <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$Permission">             
+				                      <field name="identity"><string>*:/platform/administrators</string></field>
+				                      <field name="read"><string>true</string></field>                
+				                      <field name="addNode"><string>true</string></field>                
+				                      <field name="setProperty"><string>true</string></field>                
+				                      <field name="remove"><string>true</string></field>                
+				                    </object>  
+				                  </value>
+				                </collection>
+				              </field>   			               
+		              	</object>
+	              	</value>
+                	<value>              	
+		              	<object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$JcrPath">              	 	
+		              		<field  name="alias"><string>exoTaxoTreesDefinitionPath</string></field>
+	                    <field  name="path"><string>/exo:ecm/exo:taxonomyTrees/definition</string></field>
+		                  <field name="permissions">
+				                <collection type="java.util.ArrayList">               
+				                  <value>                            
+				                    <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$Permission">             
+				                      <field name="identity"><string>*:/platform/administrators</string></field>
+				                      <field name="read"><string>true</string></field>                
+				                      <field name="addNode"><string>true</string></field>                
+				                      <field name="setProperty"><string>true</string></field>                
+				                      <field name="remove"><string>true</string></field>                
+				                    </object>  
+				                  </value>
+				                </collection>
+				              </field>   			               
+		              	</object>
+	              	</value>
+	              	<value>              	
+		              	<object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$JcrPath">              	 	
+		              		<field  name="alias"><string>exoTaxoTreesStoragePath</string></field>
+	                  	<field  name="path"><string>/exo:ecm/exo:taxonomyTrees/storage</string></field>                  
+		                  <field name="permissions">
+				                <collection type="java.util.ArrayList">               
+				                  <value>                            
+				                    <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$Permission">             
+				                      <field name="identity"><string>*:/platform/administrators</string></field>
+				                      <field name="read"><string>true</string></field>                
+				                      <field name="addNode"><string>true</string></field>                
+				                      <field name="setProperty"><string>true</string></field>                
+				                      <field name="remove"><string>true</string></field>                
+				                    </object>  
+				                  </value>
+				                </collection>
+				              </field>   			               
+		              	</object>
+	              	</value>          		              		              		              	
+	              	
+       									<value>              	
+		              	<object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$JcrPath">              	 	
+		              	<field  name="alias"><string>exoFolksonomiesPath</string></field>
+	                  <field  name="path"><string>/exo:ecm/exo:folksonomies</string></field>
+		                  <field name="permissions">
+				                <collection type="java.util.ArrayList">               
+				                  <value>                            
+				                    <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$Permission">             
+				                      <field name="identity"><string>*:/platform/administrators</string></field>
+				                      <field name="read"><string>true</string></field>                
+				                      <field name="addNode"><string>true</string></field>                
+				                      <field name="setProperty"><string>true</string></field>                
+				                      <field name="remove"><string>true</string></field>                
+				                    </object>  
+				                  </value>				                  
+				                </collection>
+				              </field>   			               
+		              	</object>
+	              	</value>	              	
+                <value>               
+                  <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$JcrPath">                 
+                    <field  name="alias"><string>exoTagStylePath</string></field>
+                    <field  name="path"><string>/exo:ecm/exo:folksonomies/exo:tagStyles</string></field>
+                    <field name="permissions">
+                      <collection type="java.util.ArrayList">               
+                        <value>                            
+                          <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$Permission">             
+                            <field name="identity"><string>*:/platform/administrators</string></field>
+                            <field name="read"><string>true</string></field>                
+                            <field name="addNode"><string>true</string></field>                
+                            <field name="setProperty"><string>true</string></field>                
+                            <field name="remove"><string>true</string></field>                
+                          </object>  
+                        </value>
+                      </collection>
+                    </field>                       
+                  </object>
+                </value>	              	
+	              	<value>              	
+		              	<object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$JcrPath">              	 	
+		              		<field  name="alias"><string>exoDrivesPath</string></field>
+	                  <field  name="path"><string>/exo:ecm/exo:drives</string></field>                  
+		                  <field name="permissions">
+				                <collection type="java.util.ArrayList">               
+				                  <value>                            
+				                    <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$Permission">             
+				                      <field name="identity"><string>*:/platform/administrators</string></field>
+				                      <field name="read"><string>true</string></field>                
+				                      <field name="addNode"><string>true</string></field>                
+				                      <field name="setProperty"><string>true</string></field>                
+				                      <field name="remove"><string>true</string></field>                
+				                    </object>  
+				                  </value>				                  
+				                </collection>
+				              </field>   			               
+		              	</object>
+	              	</value>	              		              		              		              	
+	              	<value>              	
+		              	<object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$JcrPath">              	 	
+		              		<field  name="alias"><string>templatesPath</string></field>
+	                  <field  name="path"><string>/exo:ecm/templates</string></field>   
+		                  <field name="permissions">
+				                <collection type="java.util.ArrayList">               
+				                  <value>                            
+				                    <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$Permission">             
+				                      <field name="identity"><string>*:/platform/administrators</string></field>
+				                      <field name="read"><string>true</string></field>                
+				                      <field name="addNode"><string>true</string></field>                
+				                      <field name="setProperty"><string>true</string></field>                
+				                      <field name="remove"><string>true</string></field>                
+				                    </object>  
+				                  </value>
+				                </collection>
+				              </field>   			               
+		              	</object>
+	              	</value>	              		              		              		              	
+	              	<value>              	
+		              	<object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$JcrPath">              	 	
+		              		<field  name="alias"><string>cmsScriptsPath</string></field>
+	                  <field  name="path"><string>/exo:ecm/scripts</string></field>    
+		                  <field name="permissions">
+				                <collection type="java.util.ArrayList">               
+				                  <value>                            
+				                    <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$Permission">             
+				                      <field name="identity"><string>*:/platform/administrators</string></field>
+				                      <field name="read"><string>true</string></field>                
+				                      <field name="addNode"><string>true</string></field>                
+				                      <field name="setProperty"><string>true</string></field>                
+				                      <field name="remove"><string>true</string></field>                
+				                    </object>  
+				                  </value>
+				                </collection>
+				              </field>   			               
+		              	</object>
+	              	</value>	              		              		              		              	
+	              	          		              		              		              	
+	              	<value>              	
+		              	<object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$JcrPath">              	 	
+		              		<field  name="alias"><string>ecmExplorerScripts</string></field>
+	                  <field  name="path"><string>/exo:ecm/scripts/ecm-explorer</string></field>    
+		                  <field name="permissions">
+				                <collection type="java.util.ArrayList">               
+				                  <value>                            
+				                    <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$Permission">             
+				                      <field name="identity"><string>*:/platform/administrators</string></field>
+				                      <field name="read"><string>true</string></field>                
+				                      <field name="addNode"><string>true</string></field>                
+				                      <field name="setProperty"><string>true</string></field>                
+				                      <field name="remove"><string>true</string></field>                
+				                    </object>  
+				                  </value>
+				                </collection>
+				              </field>   			               
+		              	</object>
+	              	</value>	              		              		              		              	
+	              	<value>              	
+		              	<object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$JcrPath">              	 	
+		              		<field  name="alias"><string>ecmActionScripts</string></field>
+	                  <field  name="path"><string>/exo:ecm/scripts/ecm-explorer/action</string></field>    
+		                  <field name="permissions">
+				                <collection type="java.util.ArrayList">               
+				                  <value>                            
+				                    <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$Permission">             
+				                      <field name="identity"><string>*:/platform/administrators</string></field>
+				                      <field name="read"><string>true</string></field>                
+				                      <field name="addNode"><string>true</string></field>                
+				                      <field name="setProperty"><string>true</string></field>                
+				                      <field name="remove"><string>true</string></field>                
+				                    </object>  
+				                  </value>
+				                </collection>
+				              </field>   			               
+		              	</object>
+	              	</value>	              		              		              		              	
+	              	<value>              	
+		              	<object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$JcrPath">              	 	
+		              		<field  name="alias"><string>ecmInterceptorScripts</string></field>
+	                  <field  name="path"><string>/exo:ecm/scripts/ecm-explorer/interceptor</string></field>    
+		                  <field name="permissions">
+				                <collection type="java.util.ArrayList">               
+				                  <value>                            
+				                    <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$Permission">             
+				                      <field name="identity"><string>*:/platform/administrators</string></field>
+				                      <field name="read"><string>true</string></field>                
+				                      <field name="addNode"><string>true</string></field>                
+				                      <field name="setProperty"><string>true</string></field>                
+				                      <field name="remove"><string>true</string></field>                
+				                    </object>  
+				                  </value>
+				                </collection>
+				              </field>   			               
+		              	</object>
+	              	</value>	      
+	              	<value>              	
+		              	<object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$JcrPath">              	 	
+		              		<field  name="alias"><string>ecmWidgetScripts</string></field>
+	                  <field  name="path"><string>/exo:ecm/scripts/ecm-explorer/widget</string></field>    
+		                  <field name="permissions">
+				                <collection type="java.util.ArrayList">               
+				                  <value>                            
+				                    <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$Permission">             
+				                      <field name="identity"><string>*:/platform/administrators</string></field>
+				                      <field name="read"><string>true</string></field>                
+				                      <field name="addNode"><string>true</string></field>                
+				                      <field name="setProperty"><string>true</string></field>                
+				                      <field name="remove"><string>true</string></field>                
+				                    </object>  
+				                  </value>	
+				                </collection>
+				              </field>   			               
+		              	</object>
+	              	</value>
+	              	<value>              	
+		              	<object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$JcrPath">              	 	
+		              		<field  name="alias"><string>metadataPath</string></field>
+	                  <field  name="path"><string>/exo:ecm/metadata</string></field>
+		                  <field name="permissions">
+				                <collection type="java.util.ArrayList">               
+				                  <value>                            
+				                    <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$Permission">             
+				                      <field name="identity"><string>*:/platform/administrators</string></field>
+				                      <field name="read"><string>true</string></field>                
+				                      <field name="addNode"><string>true</string></field>                
+				                      <field name="setProperty"><string>true</string></field>                
+				                      <field name="remove"><string>true</string></field>                
+				                    </object>  
+				                  </value>
+				                </collection>
+				              </field>   			               
+		              	</object>
+	              	</value>
+	              	<value>              	
+		              	<object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$JcrPath">              	 	
+		              		<field  name="alias"><string>queriesPath</string></field>
+	                  <field  name="path"><string>/exo:ecm/queries</string></field>    
+		                  <field name="permissions">
+				                <collection type="java.util.ArrayList">               
+				                  <value>                            
+				                    <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$Permission">             
+				                      <field name="identity"><string>*:/platform/administrators</string></field>
+				                      <field name="read"><string>true</string></field>                
+				                      <field name="addNode"><string>true</string></field>                
+				                      <field name="setProperty"><string>true</string></field>                
+				                      <field name="remove"><string>true</string></field>                
+				                    </object>  
+				                  </value>
+				                </collection>
+				              </field>   			               
+		              	</object>
+	              	</value>
+	              	<value>              	
+		              	<object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$JcrPath">              	 	
+		              		<field  name="alias"><string>viewsPath</string></field>
+	                  <field  name="path"><string>/exo:ecm/views</string></field>   
+		                  <field name="permissions">
+				                <collection type="java.util.ArrayList">               
+				                  <value>                            
+				                    <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$Permission">             
+				                      <field name="identity"><string>*:/platform/administrators</string></field>
+				                      <field name="read"><string>true</string></field>                
+				                      <field name="addNode"><string>true</string></field>                
+				                      <field name="setProperty"><string>true</string></field>                
+				                      <field name="remove"><string>true</string></field>                
+				                    </object>  
+				                  </value>	
+				                </collection>
+				              </field>   			               
+		              	</object>
+	              	</value>
+	              	<value>              	
+		              	<object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$JcrPath">              	 	
+		              		<field  name="alias"><string>viewTemplatesPath</string></field>
+	                  <field  name="path"><string>/exo:ecm/views/templates</string></field>   
+		                  <field name="permissions">
+				                <collection type="java.util.ArrayList">               
+				                  <value>                            
+				                    <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$Permission">             
+				                      <field name="identity"><string>*:/platform/administrators</string></field>
+				                      <field name="read"><string>true</string></field>                
+				                      <field name="addNode"><string>true</string></field>                
+				                      <field name="setProperty"><string>true</string></field>                
+				                      <field name="remove"><string>true</string></field>                
+				                    </object>  
+				                  </value>
+				                </collection>
+				              </field>   			               
+		              	</object>
+	              	</value>
+	              	<value>              	
+		              	<object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$JcrPath">              	 	
+		              		<field  name="alias"><string>userViewsPath</string></field>
+	                  <field  name="path"><string>/exo:ecm/views/userviews</string></field>   
+		                  <field name="permissions">
+				                <collection type="java.util.ArrayList">               
+				                  <value>                            
+				                    <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$Permission">             
+				                      <field name="identity"><string>*:/platform/administrators</string></field>
+				                      <field name="read"><string>true</string></field>                
+				                      <field name="addNode"><string>true</string></field>                
+				                      <field name="setProperty"><string>true</string></field>                
+				                      <field name="remove"><string>true</string></field>                
+				                    </object>  
+				                  </value>
+				                </collection>
+				              </field>   			               
+		              	</object>
+	              	</value>
+	              	<value>              	
+		              	<object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$JcrPath">              	 	
+		              		<field  name="alias"><string>ecmExplorerTemplates</string></field>
+	                  <field  name="path"><string>/exo:ecm/views/templates/ecm-explorer</string></field>   
+		                  <field name="permissions">
+				                <collection type="java.util.ArrayList">               
+				                  <value>                            
+				                    <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$Permission">             
+				                      <field name="identity"><string>*:/platform/administrators</string></field>
+				                      <field name="read"><string>true</string></field>                
+				                      <field name="addNode"><string>true</string></field>                
+				                      <field name="setProperty"><string>true</string></field>                
+				                      <field name="remove"><string>true</string></field>                
+				                    </object>  
+				                  </value>
+				                </collection>
+				              </field>   			               
+		              	</object>
+	              	</value>	              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              	
+	          	</collection>              	              	
+	          </field>
+	        </object>
+	      </object-param>
+	    </init-params>            
+	  </component-plugin>
+	</external-component-plugins>	   
+</configuration>

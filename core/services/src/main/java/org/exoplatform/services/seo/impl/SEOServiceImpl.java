@@ -48,6 +48,7 @@ import org.exoplatform.management.annotations.ManagedName;
 import org.exoplatform.portal.application.PortalRequestContext;
 import org.exoplatform.portal.mop.SiteKey;
 import org.exoplatform.portal.mop.user.UserNavigation;
+import org.exoplatform.portal.webui.portal.UIPortal;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cache.CacheService;
 import org.exoplatform.services.cache.ExoCache;
@@ -76,7 +77,6 @@ public class SEOServiceImpl implements SEOService {
   public static final String EMPTY_CACHE_ENTRY = "EMPTY";
   public static String METADATA_BASE_PATH = "SEO";
   final static public String LANGUAGES    = "seo-languages";
-  final static public String NAVIGATION    = "navigation";
   public static String METADATA_PAGE_PATH = "pages";
   public static String METADATA_CONTENT_PATH = "contents";
   public static String SITEMAP_NAME = "sitemaps";
@@ -927,15 +927,21 @@ public class SEOServiceImpl implements SEOService {
     SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
     LivePortalManagerService livePortalManagerService = WCMCoreUtils
             .getService(LivePortalManagerService.class);
-    Node livePortalNode = livePortalManagerService.getLivePortal(sessionProvider,
-            Util.getUIPortal().getName());
+    UIPortal uiPortal = Util.getUIPortal();
+    if (uiPortal == null) {
+      return null;
+    }
 
+    Node livePortalNode = livePortalManagerService.getLivePortal(sessionProvider, uiPortal.getName());
     if (livePortalNode != null) {
-      String id = Util.getUIPortal().getSelectedUserNode().getId();
+      String id = uiPortal.getSelectedUserNode().getId();
 
       Node navNode = null;
       if (!livePortalNode.hasNode(NAVIGATION)) {
         navNode = livePortalNode.addNode(NAVIGATION);
+        if (navNode.canAddMixin("exo:hiddenable")) {
+          navNode.addMixin("exo:hiddenable");
+        }
       } else {
         navNode = livePortalNode.getNode(NAVIGATION);
       }
@@ -949,7 +955,7 @@ public class SEOServiceImpl implements SEOService {
       }
       return node;
     } else {
-      throw new IllegalStateException("live portal node not found " + Util.getUIPortal().getName());
+      throw new IllegalStateException("live portal node not found " + uiPortal.getName());
     }
   }
 

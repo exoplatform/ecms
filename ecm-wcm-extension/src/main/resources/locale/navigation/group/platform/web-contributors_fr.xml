@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <administration>
+    <siteExplorer>Explorateur de Contenu</siteExplorer>
+    <wcmAdmin>Administration de Contenu</wcmAdmin>
+  </administration>
+</bundle>

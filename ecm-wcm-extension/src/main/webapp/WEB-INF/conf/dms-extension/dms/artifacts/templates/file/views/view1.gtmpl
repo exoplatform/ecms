@@ -1,0 +1,184 @@
+<%
+  import java.util.List;
+  import java.util.ArrayList;
+  import javax.jcr.Node;
+  import javax.jcr.NodeIterator;
+  import org.exoplatform.webui.core.UIPopupWindow;
+  import org.exoplatform.web.application.Parameter;
+  import org.exoplatform.ecm.webui.utils.Utils; 
+  import org.exoplatform.services.wcm.core.NodeLocation;
+  import org.exoplatform.services.jcr.RepositoryService;
+  import org.exoplatform.wcm.webui.reader.ContentReader;
+  import org.exoplatform.ecm.webui.viewer.PDFViewer;
+  import org.exoplatform.services.pdfviewer.PDFViewerService;
+  import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+  import org.exoplatform.wcm.connector.collaboration.OpenInOfficeConnector;
+
+  
+  public Node getFileLangNode(Node currentNode) throws Exception {
+    if(currentNode.isNodeType("nt:unstructured")) {
+      if(currentNode.getNodes().getSize() > 0) {
+        NodeIterator nodeIter = currentNode.getNodes() ;
+        while(nodeIter.hasNext()) {
+          Node ntFile = nodeIter.nextNode() ;
+          if(ntFile.getPrimaryNodeType().getName().equals("nt:file")) {
+            return ntFile ;
+          }
+        }
+        return currentNode ;
+      }
+    }
+    return currentNode ;
+  }
+  
+  def rcontext = _ctx.getRequestContext();
+  rcontext.getJavascriptManager().loadScriptResource("ecm-utils");
+  rcontext.getJavascriptManager().require("SHARED/ecm-browser", "browser").
+  addScripts("browser.DMSBrowser.managerResize();");
+  RepositoryService rService = uicomponent.getApplicationComponent(RepositoryService.class);
+  PDFViewerService pdfViewerService = uicomponent.getApplicationComponent(PDFViewerService.class);
+  String repository = rService.getCurrentRepository().getConfiguration().getName();
+  
+  
+  UIPopupWindow uiPopupWindow = uicomponent.getAncestorOfType(UIPopupWindow.class);
+  def resizeBlock = "class=\"UIResizableBlock\"";
+  if(uiPopupWindow != null) resizeBlock = "class=\"UIUnResizableBlock\"";
+  
+  def originNode = uicomponent.getNode();
+  def currentNode = getFileLangNode(originNode) ;
+  currentNode = org.exoplatform.wcm.webui.Utils.getRealNode(currentNode);
+  def currentNodePath = org.exoplatform.wcm.webui.Utils.getRealNodePath(currentNode);
+  def contentNode = currentNode.getNode("jcr:content") ;
+  def title = org.exoplatform.ecm.webui.utils.Utils.getTitle(currentNode);
+  def mimeType = contentNode.getProperty("jcr:mimeType").getString() ;
+  List<String> unsupportMimeTypeText = new ArrayList<String>();
+  unsupportMimeTypeText.add("text/rtf");
+  String portalName = uicomponent.getPortalName() ;
+  String restContextName = org.exoplatform.ecm.webui.utils.Utils.getRestContextName(portalName);
+  
+  public String formatNodeName(String text) {
+    return text.replaceAll("'", "\\\\'") ;
+  }
+  
+  def openInOfficeConnector = WCMCoreUtils.getService(OpenInOfficeConnector.class);
+  def _documentInfos = openInOfficeConnector.getDocumentInfos(currentNode.getName());
+  def remoteEditClass=_documentInfos[1];
+  def remoteEditTitle=_ctx.appRes(_documentInfos[0]);
+
+  StringBuilder sb = new StringBuilder();
+  String ndPath = currentNode.getPath();
+  if (ndPath.startsWith("/")) {
+    ndPath = ndPath.substring(1);
+  }
+  
+  def encodedPath = Utils.encodePath(ndPath,"UTF-8");
+  
+  sb.append("/").append(restContextName).append("/contents/download/");
+  sb.append(currentNode.getSession().getWorkspace().getName()).append("/").append(encodedPath);
+  if (originNode.isNodeType("nt:frozenNode")) {
+    sb.append("?version=" + originNode.getParent().getName());
+  }
+  def downloadLink = sb.toString();
+  def fileComponent = uicomponent.getUIComponent(mimeType);
+  def noPreviewStyle = "";
+  def fileSize = 0;
+  def canViewPDF = true;
+  if (fileComponent instanceof PDFViewer) {
+    fileSize = contentNode.getProperty("jcr:data").getStream().available();
+    def maximumOfPage = ((PDFViewer)fileComponent).getMaximumOfPage();
+    if (maximumOfPage <= 0 || maximumOfPage > pdfViewerService.getMaxPages() || fileSize > pdfViewerService.getMaxFileSize()) {
+      canViewPDF = false;
+    }
+  }
+  if(fileComponent == null || canViewPDF == false) {
+    noPreviewStyle = "noPreview";
+    org.exoplatform.ecm.webui.utils.Utils.logUnavaiblePreview(encodedPath);
+  }
+  if(!(fileComponent instanceof PDFViewer) || canViewPDF == false) {
+%>
+
+<div $resizeBlock>
+  <style>
+    <% _ctx.include(uicomponent.getTemplateSkin("nt:file", "Stylesheet")); %>
+  </style>
+  <div class="fileContent ">
+    <div class="navigationContainer $noPreviewStyle">
+      <div class="title clearfix">
+        <%          
+          if (!(fileComponent == null || canViewPDF == false)) {
+          %>
+          <a href="javascript:eXo.ecm.ECMUtils.closeASPopup();" class="exit-document-preview"><i class="uiIconClose uiIconLightGray"></i></a>
+          <a class="pull-right btn dowload-link" href="$downloadLink"><i class="uiIconDownload uiIconLightGray"></i> <%=_ctx.appRes("File.view.label.download")%></a>
+        <%}%>
+        <div class="vote-document"><% _ctx.include(uicomponent.getViewTemplate("mix:votable", "view1")); %></div>
+      </div>
+      <div class="document-preview-default">
+		  <div class="content uiContentBox">
+			  <%
+				if(fileComponent != null) {
+				uicomponent.renderUIComponent(fileComponent);
+				} else {
+			  %>
+				<div class="uiUnEditable clearfix">
+				  <div class="iconContainer">
+					<i class="<%=Utils.getNodeTypeIcon(currentNode, "uiIcon64x64")%>"></i>
+					<span class="nameDoc">$title</span>
+				  </div>
+				  <div class="detailContainer">
+					<h4><%=_ctx.appRes("File.view.label.not-viewable")%></h4>
+					  <a class="btn btn-primary" href="$downloadLink"><i class="uiIconDownload uiIconWhite"></i><%=_ctx.appRes("File.view.label.download")%>
+					  </a>&nbsp;&nbsp;
+					  <a class="btn" href="#" onclick="<%=uicomponent.getActionOpenDocInDesktop()%>">
+						  <i class="uiIcon16x16FileDefault uiIcon16x16nt_file $remoteEditClass uiIconEcmsOpenDocument"></i>
+						  $remoteEditTitle
+					  </a>
+				  </div>
+				</div>
+			  <%}%>
+		  </div>
+		</div>
+    </div>
+    <div><% _ctx.include(uicomponent.getViewTemplate("exo:comments", "view1")); %></div>
+  </div>
+</div>
+
+
+<%} else {%>
+
+<div $resizeBlock>
+<style>
+  <% _ctx.include(uicomponent.getTemplateSkin("nt:file", "Stylesheet")); %>
+</style>
+<div class="fileContent document-preview-content-file">
+    <div class="title clearfix">
+      <a href="javascript:eXo.ecm.ECMUtils.closeASPopup();" class="exit-document-preview"><i class="uiIconClose uiIconLightGray"></i></a>
+        <div class="pull-right"><a class="btn" href="$downloadLink"><i class="uiIconDownload"></i> <%=_ctx.appRes("File.view.label.download")%></a> </div>
+        <div class="vote-document"><% _ctx.include(uicomponent.getViewTemplate("mix:votable", "view1")); %></div>
+    </div>
+    <div class="content uiContentBox">
+        <%
+          if(fileComponent != null) {
+          uicomponent.renderUIComponent(fileComponent);
+          } else {
+        %>
+          <div class="uiUnEditable clearfix">
+            <div class="iconContainer">
+              <i class="<%=Utils.getNodeTypeIcon(currentNode, "uiIcon64x64")%>"></i>
+        <span class="nameDoc">$title</span>
+            </div>
+            <div class="detailContainer">
+              <h4><%=_ctx.appRes("File.view.label.not-viewable")%></h4>
+                <a class="btn btn-primary" href="$downloadLink"><i class="uiIconDownload uiIconWhite"></i><%=_ctx.appRes("File.view.label.download")%></a>&nbsp;&nbsp;
+                <a class="btn" href="#" onclick="<%=uicomponent.getActionOpenDocInDesktop()%>">
+                    <i class="uiIcon16x16FileDefault uiIcon16x16nt_file $remoteEditClass uiIconEcmsOpenDocument"></i>
+                    $remoteEditTitle
+                </a>
+            </div>
+          </div>
+        <%}%>
+    </div>
+  <div><% _ctx.include(uicomponent.getViewTemplate("exo:comments", "view1")); %></div>
+</div>
+</div>
+
+<%}%>

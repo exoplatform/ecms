@@ -1,0 +1,149 @@
+<%
+/**
+ * Created by The eXo Platform SARL
+ * Author : Dung Khuong
+ *	dung.khuong@exoplatform.com
+ *
+ * Removed <td class="FieldLabel"> from <table class="UIFormGrid"> 
+ *
+ * @version: $Id$
+ * Feb 25, 2010	
+ */
+%>
+<%
+	import org.exoplatform.webui.form.UIFormRadioBoxInput;
+%>
+<div class="$uicomponent.id UIFormInputSetWithAction"  >
+			<%
+				def formName = uicomponent.getFormName();
+				def actions = uicomponent.getInputSetActions();
+				def actionValues = uicomponent.getActionValues();
+				def isShowAction = uicomponent.isShowActionInfo()
+				String confirm = _ctx.appRes("UIFormInputSetWithAction.msg.confirm-delete");
+				for(inputEntry in uicomponent.getChildren()) {
+					if(inputEntry.isRendered()) {
+			%>
+					
+									<% 
+										if(inputEntry instanceof UIFormRadioBoxInput) {
+											println "<div class=\"MultiRadioInput\">";
+												uicomponent.renderUIComponent(inputEntry); 
+											println "</div>";
+										} else {
+											uicomponent.renderUIComponent(inputEntry); 
+										}
+										String infor = uicomponent.getInfoField(inputEntry.getName());
+										def listInfor = uicomponent.getListInfoField(inputEntry.getName());
+										def actionInfo = uicomponent.getActionInfo(inputEntry.getName());
+										boolean isView = uicomponent.isView();
+										if(listInfor != null && listInfor.size() > 0 && actionInfo != null) { %>
+											<div class="InforArea">
+										<%for(j in 0..listInfor.size()-1) {
+												if(uicomponent.isDeleteOnly()) { %>
+													<div class="InforField">
+														<span class="ActionField"><%=listInfor[j]%></span>	
+														<a onclick="if(confirm('<%=confirm%>')) eXo.webui.UIForm.submitEvent('<%=formName%>', '<%=actionInfo[1]%>', '&objectId=<%=arrInfor[i]%>');" rel="tooltip" data-placement="bottom" title="<%=actionInfo[1]%>"  class="actionIcon" ><i class="uiIconDelete uiIconLightGray"></i></a>
+													</div>	
+										<%
+												}
+											}
+										%>
+											</div>
+									<%}
+										if(infor != null && actionInfo != null) {
+											def arrInfor = infor.split(",");
+											if(arrInfor.length > 0) {
+											println "<div class=\"pull-left\" >";
+												for(i in 0..arrInfor.length -1) {
+													if(arrInfor[i].length() > 0) { 
+														if(!isView) { 
+															if(uicomponent.isDeleteOnly()) { %>
+																<div class="ActionField">
+																	<%=arrInfor[i]%>
+																</div>									
+																<a onclick="if(confirm('<%=confirm%>')) eXo.webui.UIForm.submitEvent('<%=formName%>', '<%=actionInfo[0]%>', '&objectId=<%=arrInfor[i]%>');" rel="tooltip" data-placement="bottom" title="<%=actionInfo[0]%>"  class="actionIcon"><i class="uiIconDelete uiIconLightGray"></i></a>
+														<%} else { %>
+																<div class="ActionField" style="float:left;">
+																	[ <a href="javascript:eXo.webui.UIForm.submitEvent('<%=formName%>', '<%=actionInfo[0]%>', '&objectId=<%=arrInfor[i]%>');">
+																			<%=arrInfor[i]%>
+																	</a> ]
+																</div>
+																	<a onclick="if(confirm('<%=confirm%>')) eXo.webui.UIForm.submitEvent('<%=formName%>', '<%=actionInfo[1]%>', '&objectId=<%=arrInfor[i]%>');" rel="tooltip" data-placement="bottom" title="<%=actionInfo[1]%>" class="actionIcon"><i class="uiIconDelete uiIconLightGray"></i></a>
+																
+														<%
+															}
+														} else {
+														%>
+														<div class="ActionFieldContainer">
+															<div class="ActionField">
+																[ <a href="javascript:eXo.webui.UIForm.submitEvent('<%=formName%>', '<%=actionInfo[0]%>', '&objectId=<%=arrInfor[i]%>');">
+																	<%=arrInfor[i]%>
+																</a> ]
+															</div>	
+														 </div>
+													<%
+														}								
+													}
+												}
+											 println "</div>";
+											
+											}
+										} else if(infor != null && uicomponent.isShowOnly()) {
+											def arrInfor = infor.split(",");
+											if(arrInfor.length > 0) {
+												println "<div class=\"pull-left\" >";
+													for(i in 0..arrInfor.length -1) { 
+														if(arrInfor[i].length() > 0) { %>
+															<div class="ActionField">[ <%=arrInfor[i]%> ]</div>	
+															
+														<%
+														}								
+													}
+											 	println "</div>";
+											 	
+											}
+										} 
+										if(infor == null && listInfor == null) {
+											def actionField = uicomponent.getActionInfo(inputEntry.getName());
+											if(actionField != null && actionField.length > 0) {
+												for(i in 0..actionField.length -1) {
+										%>			
+														<a class="actionIcon" onclick="eXo.webui.UIForm.submitForm('<%=formName%>', '<%=actionField[i]%>', true)" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes(uicomponent.getId() + ".title." + actionField[i])%>"><i class="uiIcon<%=actionField[i]%> uiIconLightGray"></i></a>
+										<%
+												}
+											}
+										} else if(isShowAction) {											 
+											for(String action : uicomponent.getFieldActions(inputEntry.getName())) {
+										%>			
+												<a class="actionIcon" onclick="eXo.webui.UIForm.submitForm('<%=formName%>', '<%=action%>', true)" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes(uicomponent.getId() + ".title." + action)%>"><i class="uiIcon<%=action%> uiIconLightGray"></i></a>
+										<%
+											}
+										}
+										if(uicomponent.getMsgKey(inputEntry.getName()) != null) { %>
+											<span class="Introduction"><%=_ctx.appRes(uicomponent.getMsgKey(inputEntry.getName()))%></span>											
+										<%}%>
+									
+			<%
+					}
+				}
+			%>
+			<%if(actions != null && actions.length > 0) { %>
+			<div class="uiAction uiActionBorder">
+					<%for(i in 0..actions.length -1) { 
+							if(actionValues != null && actionValues.length > 0) { 
+								if(actionValues[i] != null) { %>
+								<button type="button" onclick="javascript:eXo.webui.UIForm.submitEvent('<%=formName%>','<%=actions[i]%>','&objectId=<%=actionValues[i]%>');" class="btn"><%=_ctx.appRes(formName + ".action." + actions[i])%></button>								
+							<%} else { %>
+							  <button type="button" onclick="javascript:eXo.webui.UIForm.submitForm('<%=formName%>','<%=actions[i]%>', true);" class="btn"><%=_ctx.appRes(formName + ".action." + actions[i])%></button>							
+					 	 <%
+								}
+							} else { 
+							%>
+							<button type="button" onclick="javascript:eXo.webui.UIForm.submitForm('<%=formName%>','<%=actions[i]%>', true);" class="btn"><%=_ctx.appRes(formName + ".action." + actions[i])%></button>
+						<%}%>
+					<%} %>						 
+				</div>
+			<%} %>
+		
+	
+</div>		

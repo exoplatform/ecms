@@ -28,8 +28,8 @@ import org.exoplatform.ecms.test.BaseECMSResourceTestCase;
  * Aug 6, 2012
  */
 @ConfiguredBy({
-  @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/exo.portal.component.portal-configuration.xml"),
-  @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/exo.portal.component.identity-configuration.xml"),
+  @ConfigurationUnit(scope = ContainerScope.ROOT, path = "conf/configuration.xml"),
+  @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/portal/configuration.xml"),
   @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/standalone/ecms-test-configuration.xml"),
   @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/standalone/ecms-core-connector-test-configuration.xml")
   })

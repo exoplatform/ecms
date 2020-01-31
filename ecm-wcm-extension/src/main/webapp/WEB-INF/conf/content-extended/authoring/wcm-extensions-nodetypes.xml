@@ -1,0 +1,50 @@
+<nodeTypes xmlns:nt="http://www.jcp.org/jcr/nt/1.0" xmlns:mix="http://www.jcp.org/jcr/mix/1.0"
+  xmlns:jcr="http://www.jcp.org/jcr/1.0">
+<nodeType name="publication:authoringPublication" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
+  <supertypes>
+    <supertype>publication:stateAndVersionBasedPublication</supertype>
+  </supertypes>
+  <propertyDefinitions>
+    <propertyDefinition name="publication:startPublishedDate" requiredType="Date" autoCreated="false" mandatory="false" onParentVersion="IGNORE" protected="false" multiple="false">
+      <valueConstraints/>
+    </propertyDefinition>
+    <propertyDefinition name="publication:endPublishedDate" requiredType="Date" autoCreated="false" mandatory="false" onParentVersion="IGNORE" protected="false" multiple="false">
+      <valueConstraints/>
+    </propertyDefinition>
+  </propertyDefinitions>
+</nodeType>
+<nodeType name="publication:authoring" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
+  <propertyDefinitions>
+    <propertyDefinition name="publication:lastUser" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="IGNORE" protected="false" multiple="false">
+      <valueConstraints/>
+    </propertyDefinition>
+    <propertyDefinition name="publication:lifecycle" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="IGNORE" protected="false" multiple="false">
+      <valueConstraints/>
+    </propertyDefinition>
+  </propertyDefinitions>
+</nodeType>
+
+<nodeType name="mix:targetPath" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
+  	<supertypes>
+      <supertype>nt:base</supertype>      
+    </supertypes>
+    <propertyDefinitions>
+    	<propertyDefinition name="mix:targetPath" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY"
+        protected="false" multiple="false">
+        <valueConstraints/>
+      </propertyDefinition>
+    </propertyDefinitions>
+</nodeType>
+
+<nodeType name="mix:targetWorkspace" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
+  	<supertypes>
+      <supertype>nt:base</supertype>      
+    </supertypes>
+    <propertyDefinitions>
+    	<propertyDefinition name="mix:targetWorkspace" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY"
+        protected="false" multiple="false">
+        <valueConstraints/>
+      </propertyDefinition>
+    </propertyDefinitions>
+</nodeType>   
+</nodeTypes>

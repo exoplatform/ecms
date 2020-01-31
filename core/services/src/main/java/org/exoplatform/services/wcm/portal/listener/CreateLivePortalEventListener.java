@@ -50,11 +50,14 @@ public class CreateLivePortalEventListener extends Listener<DataStorageImpl, Por
   public static String AUTO_CREATE_DRIVE = "autoCreatedDrive";
   public static String TARGET_DRIVES = "targetDrives";
 
-  public CreateLivePortalEventListener() {
-  }
+  private ManageDriveService      manageDriveService;
+
+  private WCMConfigurationService wcmConfigService;
 
   @SuppressWarnings("unchecked")
-  public CreateLivePortalEventListener(InitParams params) throws Exception {
+  public CreateLivePortalEventListener(ManageDriveService manageDriveService, WCMConfigurationService configurationService, InitParams params) throws Exception {
+    this.manageDriveService = manageDriveService;
+    this.wcmConfigService = configurationService;
     if(params != null) {
       ValueParam autoCreated = params.getValueParam(AUTO_CREATE_DRIVE);
       if(autoCreated != null)
@@ -97,11 +100,9 @@ public class CreateLivePortalEventListener extends Listener<DataStorageImpl, Por
       }
       // create drive for the site content storage
       if(autoCreatedDrive || (!autoCreatedDrive && targetDrives != null && targetDrives.contains(portalConfig.getName()))) {
-        ManageDriveService manageDriveService = WCMCoreUtils.getService(ManageDriveService.class);
-        WCMConfigurationService configurationService = WCMCoreUtils.getService(WCMConfigurationService.class);
         try {
           Node portal = livePortalManagerService.getLivePortal(sessionProvider, portalConfig.getName());
-          createPortalDrive(portal,portalConfig,configurationService,manageDriveService);
+          createPortalDrive(portal, portalConfig);
         } catch (Exception e) {
           if (LOG.isErrorEnabled()) {
             LOG.error("Error when create drive for portal: " + portalConfig.getName(), e);
@@ -124,9 +125,7 @@ public class CreateLivePortalEventListener extends Listener<DataStorageImpl, Por
   }
 
   private void createPortalDrive(Node portal,
-                                 PortalConfig portalConfig,
-                                 WCMConfigurationService wcmConfigService,
-                                 ManageDriveService driveService) throws Exception {
+                                 PortalConfig portalConfig) throws Exception {
     Session session = portal.getSession();
     String workspace = session.getWorkspace().getName();
     DriveData mainDriveData = wcmConfigService.getSiteDriveConfig();
@@ -146,7 +145,7 @@ public class CreateLivePortalEventListener extends Listener<DataStorageImpl, Por
     String allowCreateFolder = mainDriveData.getAllowCreateFolders();
     String allowNodeTypesOnTree = mainDriveData.getAllowNodeTypesOnTree();
     String driveName = String.format("%s-category", portal.getName());
-    driveService.addDrive(driveName,
+    manageDriveService.addDrive(driveName,
                           workspace,
                           permission,
                           homePath,

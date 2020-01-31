@@ -27,7 +27,7 @@ import org.exoplatform.portal.mop.user.UserNavigation;
 import org.exoplatform.portal.mop.user.UserNode;
 import org.exoplatform.portal.mop.user.UserPortal;
 import org.exoplatform.portal.webui.util.Util;
-import org.exoplatform.services.wcm.navigation.NavigationUtils;
+import org.exoplatform.portal.webui.util.NavigationUtils;
 import org.exoplatform.services.wcm.publication.PublicationUtil;
 import org.exoplatform.services.wcm.publication.lifecycle.stageversion.ui.UIPortalNavigationExplorer;
 import org.exoplatform.services.wcm.publication.lifecycle.stageversion.ui.UIPublicationHistory;

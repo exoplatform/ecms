@@ -78,4 +78,7 @@
       <scope>runtime</scope>
     </dependency>
   </dependencies>
+  <build>
+    <finalName>authoring-apps</finalName>
+  </build>
 </project>

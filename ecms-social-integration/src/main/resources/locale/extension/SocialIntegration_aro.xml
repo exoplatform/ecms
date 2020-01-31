@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UIConfirmMessage>
+    <label>
+      <ReadOnly>فتح للقراءة فقط</ReadOnly>
+    </label>
+  </UIConfirmMessage>
+
+  <UISocialPopupWindow>
+    <title>
+      <UIReadOnlyFileConfirmMessage>فتح الوثيقة</UIReadOnlyFileConfirmMessage>
+    </title>
+  </UISocialPopupWindow>
+  <SocialIntegration>
+    <titles>
+      <fileSize>حجم الملف</fileSize>
+    </titles>
+    <messages>
+      <createdBy>تم إنشاؤه/ هـا بواسطة</createdBy>
+      <editedBy>تم تغييره بواسطة</editedBy>
+      <system>النظام</system>
+      <readmore>...اقرأ المزيد.</readmore>
+      <editTitle>تمّ تحديث العنوان إلى: {0}</editTitle>
+      <editName>تمّ تحديث الاسم إلى: {0}</editName>
+      <editDescription>تمّ تحديث الوصف إلى: {0}</editDescription>
+      <singleCreator>الذي قام بعملية الانشاء هو {0}</singleCreator>
+      <multiCreator>الذين قاموا بعمليّة الانشاء هم {0}</multiCreator>
+      <addSource>مصدر الملف : {0} تمّ إضافته</addSource>
+      <addMultiSource>مصادر الملف : {0} تمّ إضافتهم</addMultiSource>
+      <removeSource>مصدر الملف : {0} تمّ حذفه</removeSource>
+      <removeMultiSource>مصادر الملف : {0} تمّ حذفهم</removeMultiSource>
+      <editSummary>تمّ تحديث الخلاصة إلى: {0}</editSummary>
+      <editLanguage>تمّ تحديث اللغة إلى: {0}</editLanguage>
+      <editContent>تمّ تحديث المحتوى.</editContent>
+      <editFile>تم تحديث الملف.</editFile>
+      <emptyTitle>تمّ حذف العنوان.</emptyTitle>
+      <emptySummary>تمّ حذف الموجز</emptySummary>
+      <emptyContent>تمّ حذف المحتوى.</emptyContent>
+      <updateMetadata>تم تحديث بيانات التعريف  من {0} الى : {1}</updateMetadata>
+      <removeMetadata>لقد تمّ حذف بيانات التعريف: {0}.</removeMetadata>
+      <removeTitle>تمّ حذف العنوان.</removeTitle>
+      <removeName>تمّ حذف الاسم.</removeName>
+      <removeSummary>تمّ حذف الملخّص.</removeSummary>
+      <removeDescription>لقد تمّ حذف الوصف.</removeDescription>
+      <removeCreator>تمّ حذف المؤلف: {0}.</removeCreator>
+      <removeMultiCreator>تمّ حذف المؤلفين: {0}.</removeMultiCreator>
+      <removeLanguage>تمّ حذف اللّغة.</removeLanguage>
+      <removeContent>تمّ حذف المحتوى.</removeContent>
+      <attachmentAdded>تمّ إرفاق الملفات.</attachmentAdded>
+      <attachmentRemoved>تمّ إزالة الملف (ـات).</attachmentRemoved>
+      <categoryAdded>وقع إضافة فئة: {0}.</categoryAdded>
+      <categoryRemoved>وقع إزالة فئة: {0}.</categoryRemoved>
+      <tagAdded>وقع إضافة العلامة: {0}.</tagAdded>
+      <tagsAdded>وقع إضافة العلامات: {0}.</tagsAdded>
+      <tagRemoved>وقع إزالة العلامة: {0}.</tagRemoved>
+      <tagsRemoved>وقع إزالة العلامات: {0}.</tagsRemoved>
+      <stateChange>
+        <pending>وضع المنشور الحالي: قيد النظر.</pending>
+        <approved>تمّت المصادقة على الوثيقة.</approved>
+        <staged>وضع المنشور الحالي: جاهز للنشر.</staged>
+        <published>تمّ نشر الوثيقة.</published>
+      </stateChange>
+      <contentMoved>وقد تم نقل المنشور إلى: {0}</contentMoved>
+      <fileMoved>وقد تم نقل الملف إلى: {0}</fileMoved>
+      <revisionChanged>تم استعادة المنشور إلى الاصدار: {0}</revisionChanged>
+      <version>الإصدار: {0}</version>
+      <updatedOn>تم التحديث بتاريخ</updatedOn>
+      <updatedBy>by</updatedBy>
+      <loadMoreFiles>+{0} أكثر</loadMoreFiles>
+    </messages>
+    <publicationStates>
+      <archived>بالأرشيف</archived>
+      <obsolete>عفا عليها الزمن</obsolete>
+      <unpublished>غير منشورة</unpublished>
+      <draft>مسودة</draft>
+      <pending>في الانتظار</pending>
+      <approved>موافق عليه</approved>
+      <inreview>بحالة مُراجعة</inreview>
+      <staged>جاهز للنّشر</staged>
+      <published>تم نشره</published>
+      <live>تم نشره</live>
+    </publicationStates>
+    <view>رأي</view>
+    <edit>تغيير</edit>
+    <download>تنزيل هذا الملف</download>
+    <downloadAll>تنزيل الكلّ</downloadAll>
+    <preview>Preview</preview>
+  </SocialIntegration>
+  <UIPopupWindow>
+    <title>
+      <DocViewer>معاينة</DocViewer>
+      <UIReadOnlyFileConfirmMessage>فتح المستند</UIReadOnlyFileConfirmMessage>
+    </title>
+  </UIPopupWindow>
+  <ElementSet>
+    <dialog>
+      <label>
+        <resourceType>نوع المورد</resourceType>
+      </label>
+    </dialog>
+  </ElementSet>
+  <UIPreviewCommentArea>
+    <label>
+      <commentTextAreaPreview>أضف تعليقك...</commentTextAreaPreview>
+      <no-comment-yet>لا تعليق حتى الآن</no-comment-yet>
+    </label>
+  </UIPreviewCommentArea>
+
+  <OpenDocumentInOffice>
+    <label>
+      <exo.remote-edit.word>Open In Word</exo.remote-edit.word>
+      <exo.remote-edit.excel>Open In Excel</exo.remote-edit.excel>
+      <exo.remote-edit.powerpoint>Open In Powerpoint</exo.remote-edit.powerpoint>
+      <exo.remote-edit.desktop>Open On Desktop</exo.remote-edit.desktop>
+      <exo.remote-edit.desktop-app>Open In</exo.remote-edit.desktop-app>
+    </label>
+  </OpenDocumentInOffice>
+
+  <UIPopupMenu>
+    <msg>
+      <lock-node-read-only>هذا الملف مؤمن بواسطة المستخدم {0}. أترغب بفتحه بصيغة  القراءة فقط؟</lock-node-read-only>
+    </msg>
+  </UIPopupMenu>
+  <ECMContextMenu>
+    <event>
+      <ShareDocuments>شارك</ShareDocuments>
+    </event>
+  </ECMContextMenu>
+  <UIPopupWindow>
+    <title>
+      <UIShareDocuments>مشاركة المستند</UIShareDocuments>
+      <Share>شارك</Share>
+    </title>
+  </UIPopupWindow>
+  <UIShareDocuments>
+    <label>
+      <ShareButton>Share</ShareButton>
+      <CancelButton>الغاء</CancelButton>
+      <TextAreaInit>إرسال رسالة مع مشاركة...</TextAreaInit>
+      <ShareWith>مشاركة مع</ShareWith>
+      <Access>الوصول</Access>
+      <SpaceMember>أعضاء الفضاء</SpaceMember>
+      <SelectASpace>اختيار فضاء</SelectASpace>
+      <SharedADocument>مشاركة وثيقة</SharedADocument>
+      <WhoHasAccess>من لديه حق الوصول</WhoHasAccess>
+      <success>لقد تم مشاركة الوثيقة بنجاح</success>
+      <NoPermission>غير مسموح لك بمشاركة هذا الملف.</NoPermission>
+      <NoPermissionDelete>لا يمكنُك حذف هذه الصّلاحيّة</NoPermissionDelete>
+      <InvalidDeletion>لا يمكنك حذف الصلاحيّات الخاصّة بك</InvalidDeletion>
+      <InvalidEntry>لا يمكن تغيير هذه الصلاحيّة</InvalidEntry>
+      <InvalidOwner>لا يمكنك تغيير صلاحيات المالك</InvalidOwner>
+      <Invalid>آسف، لا يمكن التعرّف على '{0}' كاسم المستخدم أو فضاء صالح</Invalid>
+      <option>
+        <read>يمكنه رؤية</read>
+        <modify>يمكنه التغيير</modify>
+      </option>
+      <notification>
+        <read>قراءة</read>
+        <modify>تغيير</modify>
+      </notification>
+      <invite>
+        <placeholder>أدخل أسماء المستخدمين أو فضاءات...</placeholder>
+      </invite>
+      <owner>Owner</owner>
+    </label>
+  </UIShareDocuments>
+
+  <UIActionBar>
+    <tooltip>
+      <ShareDocuments>شارك</ShareDocuments>
+    </tooltip>
+  </UIActionBar>
+</bundle>

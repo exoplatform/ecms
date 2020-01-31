@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<configuration
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd http://www.exoplatform.org/xml/ns/kernel_1_2.xsd"
+   xmlns="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd">
+
+
+  <component>
+	  <key>org.exoplatform.services.cms.thumbnail.ThumbnailService</key>  
+	  <type>org.exoplatform.services.cms.thumbnail.impl.ThumbnailServiceImpl</type>      
+	  <init-params>
+      <value-param>
+      	<name>smallSize</name>
+	      <value>32x32</value>
+      </value-param>
+      <value-param>
+      	<name>mediumSize</name>
+	      <value>116x116</value>
+      </value-param> 
+      <value-param>
+      	<name>bigSize</name>
+	      <value>300x300</value>
+      </value-param>
+      <value-param>
+      	<name>enable</name>
+	      <value>true</value>
+      </value-param>
+      <value-param>
+        <name>mimetypes</name>
+        <value>image/jpeg;image/png;image/gif;image/bmp</value>
+      </value-param>      
+    </init-params>
+	</component>
+
+<external-component-plugins>
+    <target-component>org.exoplatform.services.cms.thumbnail.ThumbnailService</target-component>
+	  <component-plugin>
+	    <name>ImageThumbnailPlugin</name>   
+	    <set-method>addPlugin</set-method>
+	    <type>org.exoplatform.services.cms.thumbnail.impl.ImageThumbnailPlugin</type>
+	    <init-params>
+	      <object-param>
+	        <name>thumbnailType</name>
+	        <description>Thumbnail types</description>
+	        <object type="org.exoplatform.services.cms.thumbnail.impl.ThumbnailType">
+						<field name="mimeTypes">
+							<collection type="java.util.ArrayList">
+								<value><string>image/jpeg</string></value>
+								<value><string>image/png</string></value>
+								<value><string>image/gif</string></value>
+								<value><string>image/bmp</string></value>
+								<value><string>image/tiff</string></value>
+							</collection>
+						</field>
+	        </object>
+	      </object-param>
+	    </init-params>
+	  </component-plugin>
+    <component-plugin>
+	    <name>PDFThumbnailPlugin</name>   
+	    <set-method>addPlugin</set-method>
+	    <type>org.exoplatform.services.cms.thumbnail.impl.PDFThumbnailPlugin</type>
+	    <init-params>
+	      <object-param>
+	        <name>thumbnailType</name>
+	        <description>Thumbnail types</description>
+	        <object type="org.exoplatform.services.cms.thumbnail.impl.ThumbnailType">
+						<field name="mimeTypes">
+							<collection type="java.util.ArrayList">
+								<value><string>application/pdf</string></value>
+							</collection>
+						</field>
+	        </object>
+	      </object-param>
+	    </init-params>
+	  </component-plugin>
+	  
+	  <component-plugin>
+	    <name>PDFThumbnailPlugin</name>   
+	    <set-method>addPlugin</set-method>
+	    <type>org.exoplatform.services.cms.thumbnail.impl.OfficeDocumentThumbnailPlugin</type>
+	    <init-params>
+	      <object-param>
+	        <name>thumbnailType</name>
+	        <description>Thumbnail types</description>
+	        <object type="org.exoplatform.services.cms.thumbnail.impl.ThumbnailType">
+						<field name="mimeTypes">
+							<collection type="java.util.ArrayList">
+                                <value><string>application/msword</string></value>
+                                <value><string>application/ppt</string></value>
+                                <value><string>application/vnd.ms-powerpoint</string></value>
+                                <value><string>application/rtf</string></value>
+                                <value><string>application/vnd.oasis.opendocument.graphics</string></value>
+                                <value><string>application/vnd.oasis.opendocument.presentation</string></value>
+                                <value><string>application/vnd.oasis.opendocument.spreadsheet</string></value>
+                                <value><string>application/vnd.oasis.opendocument.spreadsheet-template</string></value>
+                                <value><string>application/vnd.oasis.opendocument.text</string></value>
+                                <value><string>application/vnd.openxmlformats-officedocument.presentationml.presentation</string></value>
+                                <value><string>application/vnd.openxmlformats-officedocument.spreadsheetml.sheet</string></value>
+                                <value><string>application/vnd.openxmlformats-officedocument.wordprocessingml.document</string></value>
+                                <value><string>application/vnd.sun.xml.impress</string></value>
+                                <value><string>application/vnd.sun.xml.writer</string></value>
+                                <value><string>application/wordperfect</string></value>
+                                <value><string>application/xls</string></value>
+                                <value><string>application/vnd.ms-excel</string></value>
+                                <value><string>application/xlt</string></value>
+                                <value><string>application/vnd.ms-powerpoint</string></value>
+                                <value><string>application/vnd.ms-excel</string></value>
+                                <value><string>text/csv</string></value>
+                                <value><string>application/vnd.oasis.opendocument.formula</string></value>
+							</collection>
+						</field>
+	        </object>
+	      </object-param>
+	    </init-params>
+	  </component-plugin>
+	  
+  </external-component-plugins>  	  
+
+</configuration>

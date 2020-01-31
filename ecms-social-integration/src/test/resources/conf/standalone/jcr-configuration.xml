@@ -1,0 +1,89 @@
+<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.exoplaform.org/xml/ns/kernel_1_2.xsd http://www.exoplaform.org/xml/ns/kernel_1_2.xsd"
+	xmlns="http://www.exoplaform.org/xml/ns/kernel_1_2.xsd">
+
+  <component>
+     <key>org.exoplatform.services.idgenerator.IDGeneratorService</key>
+     <type>org.exoplatform.services.idgenerator.impl.IDGeneratorServiceImpl</type>
+  </component>
+
+  <component>
+     <type>org.exoplatform.services.security.IdentityRegistry</type>
+  </component>
+
+  <component>
+     <key>org.exoplatform.services.document.DocumentReaderService</key>
+     <type>org.exoplatform.services.document.impl.DocumentReaderServiceImpl</type>
+  </component>
+
+  <component>
+    <key>org.exoplatform.services.jdbc.DataSourceProvider</key>
+    <type>org.exoplatform.services.jdbc.impl.DataSourceProviderImpl</type>
+  </component>
+  
+  <component>
+    <type>org.exoplatform.services.jcr.impl.RepositoryCreationSynchronizer</type>
+    <init-params>
+       <value-param>
+          <name>disabled</name>
+          <value>false</value>
+       </value-param>
+    </init-params>
+  </component>
+  
+  <component>
+    <key>org.exoplatform.services.jcr.config.RepositoryServiceConfiguration</key>
+    <type>org.exoplatform.services.jcr.impl.config.RepositoryServiceConfigurationImpl</type>
+    <init-params>
+      <value-param>
+        <name>conf-path</name>
+        <description>JCR configuration file</description>
+        <value>jar:/conf/standalone/repository-configuration.xml</value>
+      </value-param>
+      <properties-param>
+				<name>working-conf</name>
+				<description>working-conf</description>
+				<property name="source-name" value="jdbcexo"/>
+				<property name="dialect" value="hsqldb"/>
+				<property name="persister-class-name" value="org.exoplatform.services.jcr.impl.config.JDBCConfigurationPersister"/>
+			</properties-param>
+    </init-params>
+  </component>
+  <component>
+    <key>org.exoplatform.services.cms.link.LinkManager</key>
+    <type>org.exoplatform.services.cms.link.impl.LinkManagerImpl</type>
+  </component>
+  <component>
+    <key>org.exoplatform.services.jcr.RepositoryService</key>
+    <type>org.exoplatform.services.jcr.impl.RepositoryServiceImpl</type>
+  </component>
+  
+  <external-component-plugins>
+		<target-component>org.exoplatform.services.jcr.RepositoryService</target-component>
+    <component-plugin>
+      <name>add.namespaces</name>
+      <set-method>addPlugin</set-method>
+      <type>org.exoplatform.services.jcr.impl.AddNamespacesPlugin</type>
+      <init-params>
+        <properties-param>
+          <name>namespaces</name>
+          <property name="mix" value="http://exoplatform.org/mix/1.0/" />
+          <property name="publication" value="http://exoplatform.org/publication/1.0/" />
+        </properties-param>
+      </init-params>
+    </component-plugin>
+		<component-plugin>
+			<name>add.nodeType</name>
+			<set-method>addPlugin</set-method>
+			<type>org.exoplatform.services.jcr.impl.AddNodeTypePlugin</type>
+			<init-params>
+				<values-param>
+					<name>autoCreatedInNewRepository</name>
+					<description>Node types configuration file</description>
+          <value>jar:/conf/standalone/integ-social-nodetypes-config.xml</value>
+				</values-param>
+			</init-params>
+		</component-plugin>
+	</external-component-plugins>
+
+</configuration>

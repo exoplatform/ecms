@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Copyright (C) 2003-2011 eXo Platform SAS.
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+    You should have received a copy of the GNU Affero General Public License
+    along with this program. If not, see <http://www.gnu.org/licenses/>.
+-->
+<configuration
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd http://www.exoplatform.org/xml/ns/kernel_1_2.xsd"
+        xmlns="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd">
+
+    <component>
+        <key>org.exoplatform.commons.search.index.IndexingService</key>
+        <type>org.exoplatform.commons.search.index.impl.QueueIndexingService</type>
+    </component>
+    <component>
+        <key>org.exoplatform.commons.search.dao.IndexingOperationDAO</key>
+        <type>org.exoplatform.commons.search.dao.impl.IndexingOperationDAOImpl</type>
+    </component>
+    <component>
+        <type>org.exoplatform.commons.search.es.client.ElasticIndexingAuditTrail</type>
+    </component>
+    <component>
+        <type>org.exoplatform.commons.search.es.client.ElasticIndexingClient</type>
+    </component>
+    <component>
+        <type>org.exoplatform.commons.search.es.client.ElasticSearchingClient</type>
+    </component>
+    <component>
+        <type>org.exoplatform.commons.search.es.client.ElasticContentRequestBuilder</type>
+    </component>
+    <component>
+        <type>org.exoplatform.commons.search.es.client.ElasticIndexingAuditTrail</type>
+    </component>
+
+    <component>
+        <type>org.exoplatform.social.core.jpa.search.ProfileSearchConnector</type>
+        <init-params>
+            <properties-param>
+                <name>constructor.params</name>
+                <property name="searchType" value="profile"/>
+                <property name="index" value="profile"/>
+            </properties-param>
+        </init-params>
+    </component>
+
+    <component>
+        <type>org.exoplatform.social.core.jpa.search.PeopleElasticUnifiedSearchServiceConnector</type>
+        <init-params>
+            <properties-param>
+                <name>constructor.params</name>
+                <property name="searchType" value="people"/>
+                <property name="displayName" value="People"/>
+                <property name="index" value="profile"/>
+                <property name="type" value="profile"/>
+                <property name="enable" value="${exo.unified-search.connector.people.enable:true}"/>
+                <property name="titleField" value="name"/>
+                <property name="searchFields" value="name,firstName,lastName,position,skills"/>
+            </properties-param>
+        </init-params>
+    </component>
+
+    <component>
+        <type>org.exoplatform.social.core.jpa.search.SpaceElasticUnifiedSearchServiceConnector</type>
+        <init-params>
+            <properties-param>
+                <name>constructor.params</name>
+                <property name="displayName" value="Space"/>
+                <property name="index" value="space"/>
+                <property name="type" value="space"/>
+                <property name="enable" value="${exo.unified-search.connector.space.enable:true}"/>
+                <property name="titleField" value="displayName"/>
+                <property name="searchFields" value="prettyName,displayName,description"/>
+            </properties-param>
+        </init-params>
+    </component>
+
+    <external-component-plugins>
+        <target-component>org.exoplatform.commons.search.index.IndexingOperationProcessor</target-component>
+        <component-plugin>
+            <name>ProfileIndexingServiceConnector</name>
+            <set-method>addConnector</set-method>
+            <type>org.exoplatform.social.core.jpa.search.ProfileIndexingServiceConnector</type>
+            <init-params>
+                <properties-param>
+                    <name>constructor.params</name>
+                    <property name="index" value="profile"/>
+                    <property name="type" value="profile"/>
+                </properties-param>
+            </init-params>
+        </component-plugin>
+    </external-component-plugins>
+
+    <external-component-plugins>
+        <target-component>org.exoplatform.commons.search.index.IndexingOperationProcessor</target-component>
+        <component-plugin>
+            <name>SpaceIndexingServiceConnector</name>
+            <set-method>addConnector</set-method>
+            <type>org.exoplatform.social.core.jpa.search.SpaceIndexingServiceConnector</type>
+            <init-params>
+                <properties-param>
+                    <name>constructor.params</name>
+                    <property name="index" value="space"/>
+                    <property name="type" value="space"/>
+                </properties-param>
+            </init-params>
+        </component-plugin>
+    </external-component-plugins>
+</configuration>

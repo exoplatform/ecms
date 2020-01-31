@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UIConfirmMessage>
+    <label>
+      <ReadOnly>Obrir sols lectura</ReadOnly>
+    </label>
+  </UIConfirmMessage>
+
+  <UISocialPopupWindow>
+    <title>
+      <UIReadOnlyFileConfirmMessage>Obre el Document</UIReadOnlyFileConfirmMessage>
+    </title>
+  </UISocialPopupWindow>
+  <SocialIntegration>
+    <titles>
+      <fileSize>Tamany del Fitxer</fileSize>
+    </titles>
+    <messages>
+      <createdBy>va ser creat per</createdBy>
+      <editedBy>va ser editat per</editedBy>
+      <system>el sistema</system>
+      <readmore>...Llegeix més.</readmore>
+      <editTitle>El títol ha estat actualitzat a: {0}</editTitle>
+      <editName>El nom ha estat actualitzat a: {0}</editName>
+      <editDescription>La descripció ha estat actualitzada a: {0}</editDescription>
+      <singleCreator>L'autor es {0}</singleCreator>
+      <multiCreator>Els autors son {0}</multiCreator>
+      <addSource>La font del fitxer: {0} ha estat afegida</addSource>
+      <addMultiSource>Les fonts del fitxer: {0} han estat afegides</addMultiSource>
+      <removeSource>Font del fitxer: {0} s'ha eliminat</removeSource>
+      <removeMultiSource>Fonts de fitxers: {0} s'han eliminat</removeMultiSource>
+      <editSummary>El resum ha estat actualitzat a: {0}</editSummary>
+      <editLanguage>L'idioma s'ha actualitzat a: {0}</editLanguage>
+      <editContent>S'ha actualitzat el contingut.</editContent>
+      <editFile>S'ha actualitzat el fitxer.</editFile>
+      <emptyTitle>El títol ha estat eliminat.</emptyTitle>
+      <emptySummary>El resum ha estat eliminat.</emptySummary>
+      <emptyContent>El contingut ha estat eliminat.</emptyContent>
+      <updateMetadata>Les metadades {0} s'han actualitzades a: {1}</updateMetadata>
+      <removeMetadata>Metadades {0} s'han eliminat.</removeMetadata>
+      <removeTitle>El títol ha estat eliminat.</removeTitle>
+      <removeName>El nom ha estat eliminat.</removeName>
+      <removeSummary>El resum ha estat eliminat.</removeSummary>
+      <removeDescription>La descripció ha estat eliminada.</removeDescription>
+      <removeCreator>Autor: {0} s'ha eliminat.</removeCreator>
+      <removeMultiCreator>Autors: {0} s'han eliminat.</removeMultiCreator>
+      <removeLanguage>El idioma ha estat eliminat.</removeLanguage>
+      <removeContent>El contingut ha estat eliminat.</removeContent>
+      <attachmentAdded>Els fitxers adjunts s'han adjuntat.</attachmentAdded>
+      <attachmentRemoved>Els fitxer(s) han estat eliminats.</attachmentRemoved>
+      <categoryAdded>Categoria: {0} s'ha afegit.</categoryAdded>
+      <categoryRemoved>Categoria: {0} ha estat eliminada.</categoryRemoved>
+      <tagAdded>Etiqueta: {0} s'ha afegit.</tagAdded>
+      <tagsAdded>Etiquetes: {0} s'han afegit.</tagsAdded>
+      <tagRemoved>Etiqueta: {0} ha estat eliminada.</tagRemoved>
+      <tagsRemoved>Etiquetes: {0} han estat eliminades.</tagsRemoved>
+      <stateChange>
+        <pending>Està pendent l'estatus de publicació.</pending>
+        <approved>El document ha estat aprovat.</approved>
+        <staged>La publicació està llesta.</staged>
+        <published>El document ha estat publicat.</published>
+      </stateChange>
+      <contentMoved>La publicació s'ha traslladat a: {0}</contentMoved>
+      <fileMoved>El fitxer ha estat mogut a: {0}</fileMoved>
+      <revisionChanged>La publicació s'ha restaurat a la versió: {0}</revisionChanged>
+      <version>Versió {0}</version>
+      <updatedOn>Actualitzat el</updatedOn>
+      <updatedBy>per</updatedBy>
+      <loadMoreFiles>+{0} més</loadMoreFiles>
+    </messages>
+    <publicationStates>
+      <archived>Arxivat</archived>
+      <obsolete>Obsolet</obsolete>
+      <unpublished>No publicat</unpublished>
+      <draft>Esborrany</draft>
+      <pending>Pendent</pending>
+      <approved>Aprovat</approved>
+      <inreview>En  revisió</inreview>
+      <staged>Llest per publicar</staged>
+      <published>Publicat</published>
+      <live>Publicat</live>
+    </publicationStates>
+    <view>Veure</view>
+    <edit>Edita</edit>
+    <download>Descarrega</download>
+    <downloadAll>Descarrega-ho tot</downloadAll>
+    <preview>Vista prèvia</preview>
+  </SocialIntegration>
+  <UIPopupWindow>
+    <title>
+      <DocViewer>Vista prèvia</DocViewer>
+      <UIReadOnlyFileConfirmMessage>Obre el Document</UIReadOnlyFileConfirmMessage>
+    </title>
+  </UIPopupWindow>
+  <ElementSet>
+    <dialog>
+      <label>
+        <resourceType>Tipus de Recurs</resourceType>
+      </label>
+    </dialog>
+  </ElementSet>
+  <UIPreviewCommentArea>
+    <label>
+      <commentTextAreaPreview>Afegeix el teu comentari...</commentTextAreaPreview>
+      <no-comment-yet>Encara no hi han comentaris</no-comment-yet>
+    </label>
+  </UIPreviewCommentArea>
+
+  <OpenDocumentInOffice>
+    <label>
+      <exo.remote-edit.word>Open In Word</exo.remote-edit.word>
+      <exo.remote-edit.excel>Open In Excel</exo.remote-edit.excel>
+      <exo.remote-edit.powerpoint>Open In Powerpoint</exo.remote-edit.powerpoint>
+      <exo.remote-edit.desktop>Open On Desktop</exo.remote-edit.desktop>
+      <exo.remote-edit.desktop-app>Open In</exo.remote-edit.desktop-app>
+    </label>
+  </OpenDocumentInOffice>
+
+  <UIPopupMenu>
+    <msg>
+      <lock-node-read-only>Aquest fitxer està bloquejat per l'usuari {0}. Obrir llegida només?</lock-node-read-only>
+    </msg>
+  </UIPopupMenu>
+  <ECMContextMenu>
+    <event>
+      <ShareDocuments>Compartir</ShareDocuments>
+    </event>
+  </ECMContextMenu>
+  <UIPopupWindow>
+    <title>
+      <UIShareDocuments>Comparteix un Document</UIShareDocuments>
+      <Share>Compartir</Share>
+    </title>
+  </UIPopupWindow>
+  <UIShareDocuments>
+    <label>
+      <ShareButton>Compartir</ShareButton>
+      <CancelButton>Cancel·la</CancelButton>
+      <TextAreaInit>Envia un missatge en compartir...</TextAreaInit>
+      <ShareWith>Comparteix amb</ShareWith>
+      <Access>Accés</Access>
+      <SpaceMember>Members</SpaceMember>
+      <SelectASpace>Selecciona un espai</SelectASpace>
+      <SharedADocument>compartit un document</SharedADocument>
+      <WhoHasAccess>Qui té accés</WhoHasAccess>
+      <success>El document s'ha compartit amb èxit</success>
+      <NoPermission>No tens permís per compartir aquest document</NoPermission>
+      <NoPermissionDelete>No pot suprimir aquest permís</NoPermissionDelete>
+      <InvalidDeletion>No pot suprimir el seu propi permís</InvalidDeletion>
+      <InvalidEntry>Aquest permís no pot ser editat</InvalidEntry>
+      <InvalidOwner>No pot canviar els permisos del propietari</InvalidOwner>
+      <Invalid>Ho sentim, no podem reconèixer '{0}' com a nom d'usuari o espai vàlid</Invalid>
+      <option>
+        <read>Pot veure</read>
+        <modify>Pot editar</modify>
+      </option>
+      <notification>
+        <read>llegir</read>
+        <modify>editar</modify>
+      </notification>
+      <invite>
+        <placeholder>Introdueix usuaris o noms d'espais...</placeholder>
+      </invite>
+      <owner>Propietari</owner>
+    </label>
+  </UIShareDocuments>
+
+  <UIActionBar>
+    <tooltip>
+      <ShareDocuments>Compartir</ShareDocuments>
+    </tooltip>
+  </UIActionBar>
+</bundle>

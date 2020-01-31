@@ -31,7 +31,7 @@ import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.resources.LocaleConfig;
 import org.exoplatform.services.resources.LocaleConfigService;
 import org.exoplatform.services.wcm.core.WCMService;
-import org.exoplatform.services.wcm.navigation.NavigationUtils;
+import org.exoplatform.portal.webui.util.NavigationUtils;
 import org.exoplatform.services.wcm.publication.lifecycle.stageversion.ui.UIPublicationTree.TreeNode;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.webui.config.annotation.ComponentConfig;

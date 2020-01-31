@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+
+    Copyright (C) 2013 eXo Platform SAS.
+
+    This is free software; you can redistribute it and/or modify it
+    under the terms of the GNU Lesser General Public License as
+    published by the Free Software Foundation; either version 2.1 of
+    the License, or (at your option) any later version.
+
+    This software is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+    Lesser General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public
+    License along with this software; if not, write to the Free
+    Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+    02110-1301 USA, or see the FSF site: http://www.fsf.org.
+
+-->
+<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd http://www.exoplatform.org/xml/ns/kernel_1_2.xsd"
+               xmlns="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd">
+
+  <external-component-plugins>
+      <!-- The full qualified name of the RepositoryServiceConfiguration -->
+    <target-component>org.exoplatform.services.jcr.config.RepositoryServiceConfiguration</target-component>
+    <component-plugin>
+          <!-- The name of the plugin -->
+      <name>Sample RepositoryServiceConfiguration Plugin</name>
+          <!-- The name of the method to call on the RepositoryServiceConfiguration in order to add the RepositoryServiceConfigurations -->
+      <set-method>addConfig</set-method>
+          <!-- The full qualified name of the RepositoryServiceConfigurationPlugin -->
+      <type>org.exoplatform.services.jcr.impl.config.RepositoryServiceConfigurationPlugin</type>
+      <init-params>
+        <value-param>
+          <name>conf-path</name>
+          <description>JCR configuration file</description>
+          <value>war:/conf/wcm-core/jcr/dms-system-repository-configuration.xml</value>
+        </value-param>
+        <value-param profiles="recovery-index-rsync">
+          <name>conf-path</name>
+          <description>JCR configuration file</description>
+          <value>war:/conf/wcm-core/jcr/dms-system-repository-rsync-configuration.xml</value>
+        </value-param>
+      </init-params>
+    </component-plugin>
+  </external-component-plugins>
+
+  <external-component-plugins>
+    <target-component>org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator</target-component>
+    <component-plugin>
+      <name>addPaths</name>
+      <set-method>addPlugin</set-method>
+      <type>org.exoplatform.services.jcr.ext.hierarchy.impl.AddPathPlugin</type>
+      <init-params>
+        <object-param>
+          <name>cms.configuration</name>
+          <description>configuration for the cms path</description>
+          <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig">
+            <field name="workspaces">
+              <collection type="java.util.ArrayList">
+                <value><string>collaboration</string></value> 
+              </collection>
+            </field>
+            <field  name="jcrPaths">
+              <collection type="java.util.ArrayList">
+                <value>
+                  <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$JcrPath">
+                    <field  name="alias"><string>eXoApplications</string></field>
+                    <field  name="path"><string>/exo:applications</string></field>
+                    <field name="permissions">
+                      <collection type="java.util.ArrayList">
+                        <value>
+                          <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$Permission">
+                            <field name="identity"><string>*:/platform/administrators</string></field>
+                            <field name="read"><string>true</string></field>
+                            <field name="addNode"><string>true</string></field>
+                            <field name="setProperty"><string>true</string></field>
+                            <field name="remove"><string>true</string></field>
+                          </object>
+                        </value>
+                      </collection>
+                    </field>
+                    <field name="mixinTypes">
+                        <collection type="java.util.ArrayList">
+                            <value><string>exo:hiddenable</string></value>
+                        </collection>
+                    </field>
+                  </object>
+                </value>
+                <value>
+                  <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$JcrPath">
+                    <field name="alias"><string>eXoServices</string></field>
+                    <field name="path"><string>/exo:services</string></field>
+                    <field name="permissions">
+                      <collection type="java.util.ArrayList">
+                        <value>
+                          <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$Permission">
+                            <field name="identity"><string>*:/platform/administrators</string></field>
+                            <field name="read"><string>true</string></field>
+                            <field name="addNode"><string>true</string></field>
+                            <field name="setProperty"><string>true</string></field>
+                            <field name="remove"><string>true</string></field>
+                          </object>
+                        </value>
+                      </collection>
+                    </field>
+                    <field name="mixinTypes">
+                      <collection type="java.util.ArrayList">
+                        <value><string>exo:hiddenable</string></value>
+                      </collection>
+                    </field>    
+                  </object>
+                </value>
+                <value>
+                  <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$JcrPath">
+                    <field  name="alias"><string>usersPath</string></field>
+                    <field  name="path"><string>/Users</string></field>
+                    <field name="permissions">
+                      <collection type="java.util.ArrayList">
+                        <value>
+                          <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$Permission">
+                            <field name="identity"><string>*:/platform/administrators</string></field>
+                            <field name="read"><string>true</string></field>
+                            <field name="addNode"><string>true</string></field>
+                            <field name="setProperty"><string>true</string></field>
+                            <field name="remove"><string>true</string></field>
+                          </object>
+                        </value>
+                      </collection>
+                    </field>
+                  </object>
+                </value>
+                <value>
+                  <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$JcrPath">
+                    <field  name="alias"><string>groupsPath</string></field>
+                    <field  name="path"><string>/Groups</string></field>
+                    <field name="permissions">
+                      <collection type="java.util.ArrayList">
+                        <value>
+                          <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$Permission">
+                            <field name="identity"><string>*:/platform/administrators</string></field>
+                            <field name="read"><string>true</string></field>
+                            <field name="addNode"><string>true</string></field>
+                            <field name="setProperty"><string>true</string></field>
+                            <field name="remove"><string>true</string></field>
+                          </object>
+                        </value>
+                      </collection>
+                    </field>
+                  </object>
+                </value>
+             </collection>
+           </field>
+         </object>
+       </object-param>
+     </init-params>
+     </component-plugin>
+  </external-component-plugins>
+
+</configuration>

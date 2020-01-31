@@ -145,8 +145,6 @@ public class TestSearchService extends BaseSearchTest {
   
   protected void addChildNodes(Node parentNode)throws Exception{
     PageService pageService = getService(PageService.class);
-    pomSession = pomManager.getSession();
-    if (pomManager.getSession() == null) pomSession = pomManager.openSession();
     PageContext page = pageService.loadPage(new PageKey(new SiteKey("portal", "classic"), "testpage"));
     if(page == null){
       PageState pageState = new PageState("testpage", "test page", true,
@@ -172,7 +170,6 @@ public class TestSearchService extends BaseSearchTest {
     publicationPlugin.changeState(webContentNode, PublicationDefaultStates.DRAFT, context);
 
     session.save();
-    pomSession.close();
   }
 
   protected void populateAdditionalSearchData(Node siteNode, String parentNode, int nodesCount) {

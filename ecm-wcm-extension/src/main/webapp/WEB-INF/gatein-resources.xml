@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!--
+
+    Copyright (C) 2009 eXo Platform SAS.
+    
+    This is free software; you can redistribute it and/or modify it
+    under the terms of the GNU Lesser General Public License as
+    published by the Free Software Foundation; either version 2.1 of
+    the License, or (at your option) any later version.
+    
+    This software is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+    Lesser General Public License for more details.
+    
+    You should have received a copy of the GNU Lesser General Public
+    License along with this software; if not, write to the Free
+    Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+    02110-1301 USA, or see the FSF site: http://www.fsf.org.
+
+-->
+<gatein-resources xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xsi:schemaLocation="http://www.exoplatform.org/xml/ns/gatein_resources_1_4 http://www.exoplatform.org/xml/ns/gatein_resources_1_4" 
+    xmlns="http://www.exoplatform.org/xml/ns/gatein_resources_1_4">
+
+	<!--javascript>
+    <param>
+      <js-module>FCKEditor</js-module>
+      <js-path>/fckeditor/fckeditor.js</js-path>
+      <js-priority>50</js-priority>
+    </param>
+  </javascript-->
+
+  <module>
+    <name>documentPreview</name>
+    <supported-locale>de</supported-locale>
+    <supported-locale>en</supported-locale>
+    <supported-locale>fr</supported-locale>
+    <supported-locale>ru</supported-locale>
+    <supported-locale>vi</supported-locale>
+    <supported-locale>es-ES</supported-locale>
+    <supported-locale>sv-SE</supported-locale>
+    <supported-locale>ja</supported-locale>
+    <supported-locale>ar</supported-locale>
+    <supported-locale>ar-OM</supported-locale>
+    <supported-locale>pt-BR</supported-locale>
+    <supported-locale>pt-PT</supported-locale>
+    <supported-locale>it</supported-locale>
+    <supported-locale>tr</supported-locale>
+    <supported-locale>zh-CN</supported-locale>
+    <supported-locale>fi</supported-locale>
+    <supported-locale>lt</supported-locale>
+    <supported-locale>no</supported-locale>
+    <supported-locale>zh-TW</supported-locale>
+    <supported-locale>cs</supported-locale>
+    <supported-locale>uk</supported-locale>
+    <supported-locale>fa</supported-locale>
+    <supported-locale>el</supported-locale>
+    <supported-locale>ro</supported-locale>
+    <supported-locale>pl</supported-locale>
+    <supported-locale>ca</supported-locale>
+    <supported-locale>he</supported-locale>
+    <supported-locale>hu</supported-locale>
+    <supported-locale>nl</supported-locale>
+    <supported-locale>sl</supported-locale>
+    <supported-locale>sq</supported-locale>
+    <supported-locale>in</supported-locale>
+    <supported-locale>fil</supported-locale>
+    <script>
+      <path>/javascript/eXo/ecm/document-preview.js</path>
+      <resource-bundle>locale.social.Webui</resource-bundle>
+    </script>
+    <depends>
+      <module>jquery</module>
+    </depends>
+    <depends>
+      <module>commons-editor</module>
+      <as>editor</as>
+    </depends>
+    <depends>
+      <module>social-ui-activity</module>
+      <as>UIActivity</as>
+    </depends>
+    <depends>
+      <module>socialUtil</module>
+    </depends>
+    <depends>
+      <module>mentionsPlugin</module>
+    </depends>
+    <depends>
+      <module>mentionsLib</module>
+      <as>mentions</as>
+    </depends>
+    <depends>
+      <module>suggester</module>
+    </depends>
+    <depends>
+      <module>es6promise</module>
+    </depends>
+    <depends>
+      <module>xss-utils</module>
+    </depends>
+    <depends>
+      <module>openDocumentInOffice</module>
+    </depends>
+  </module>
+  <module>
+    <name>composerMultiUpload</name>
+    <as>composerMultiUpload</as>
+    <script>
+      <path>/javascript/eXo/ecm/ComposerMultiUpload.js</path>
+    </script>
+    <depends>
+      <module>ecm-bootstrap</module>
+    </depends>
+    <depends>
+      <module>jquery</module>
+      <as>gj</as>
+    </depends>
+    <depends>
+      <module>uiPopupWindow</module>
+    </depends>
+    <depends>
+      <module>base</module>
+    </depends>
+    <depends>
+      <module>wcm-utils</module>
+    </depends>
+    <depends>
+      <module>social-ui-activity-composer</module>
+    </depends>
+  </module>
+   <module>
+      <name>ecm-utils</name>
+      <as>ecm_utils</as>
+      <script>
+         <path>/javascript/eXo/ecm/ECMUtils.js</path>
+      </script>
+      <depends>
+        <module>ecm-bootstrap</module>
+      </depends>
+      <depends>
+      	<module>jquery</module>
+      	<as>gj</as>
+      </depends>      
+      <depends>
+        <module>webui-ext</module>
+      </depends>      
+   </module>
+  
+   <module>
+      <name>ecm-browser</name>
+      <as>ecm_browser</as>
+      <script>
+         <path>/javascript/eXo/ecm/ECMBrowser.js</path>
+      </script>
+      <depends>
+      	<module>ecm-bootstrap</module>
+      </depends>
+	 </module>
+   
+     <portal-skin>
+    <skin-name>Default</skin-name>
+    <skin-module>new-document</skin-module>
+    <css-path>/skin/newdocument/newdocument.css</css-path>
+  </portal-skin>
+
+  <portal-skin>
+    <skin-name>Enterprise</skin-name>
+    <skin-module>new-document</skin-module>
+    <css-path>/skin/newdocument/newdocument.css</css-path>
+  </portal-skin>
+   
+</gatein-resources>
+

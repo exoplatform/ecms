@@ -26,6 +26,7 @@ import javax.jcr.query.*;
 
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.commons.api.search.data.SearchResult;
+import org.exoplatform.container.PortalContainer;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.container.xml.ValueParam;
 import org.exoplatform.portal.config.UserACL;
@@ -40,6 +41,7 @@ import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.security.IdentityConstants;
+import org.exoplatform.services.seo.SEOService;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.core.WCMConfigurationService;
@@ -182,9 +184,6 @@ public class SiteSearchServiceImpl implements SiteSearchService {
     ManageableRepository currentRepository = repositoryService.getCurrentRepository();
     NodeLocation location = configurationService.getLivePortalsLocation();
     Session session = sessionProvider.getSession(location.getWorkspace(),currentRepository);
-    if (queryCriteria.isSearchWebpage()) {
-      session = sessionProvider.getSession("portal-system", WCMCoreUtils.getRepository());
-    }
     QueryManager queryManager = session.getWorkspace().getQueryManager();
     long startTime = System.currentTimeMillis();
     Query query = createQuery(queryCriteria, queryManager);
@@ -250,68 +249,6 @@ public class SiteSearchServiceImpl implements SiteSearchService {
     dropNodeCache.remove(key);
   }
 
-  private Query createSearchPageQuery(QueryCriteria queryCriteria, QueryManager queryManager) throws Exception {
-    SQLQueryBuilder queryBuilder = new SQLQueryBuilder();
-    List<String> mopPages = this.searchPageByTitle(queryCriteria.getSiteName(),
-                                                   queryCriteria.getKeyword());
-    if (mopPages.size() == 0) {
-      return null;
-    }
-    List<QueryProperty> queryProps = new ArrayList<>();
-    for (String page : mopPages) {
-      QueryProperty prop = queryCriteria.new QueryProperty();
-      prop.setName("mop:page");
-      prop.setValue(page);
-      prop.setComparisonType(COMPARISON_TYPE.EQUAL);
-      queryProps.add(prop);
-    }
-    QueryProperty prop = queryCriteria.new QueryProperty();
-    prop.setName("exo:name");
-    prop.setValue("mop:" + queryCriteria.getKeyword().toLowerCase());
-    queryProps.add(prop);
-    queryCriteria.setQueryMetadatas(queryProps.toArray(new QueryProperty[queryProps.size()]));
-    mapQueryTypes(queryCriteria, queryBuilder);
-    if (queryCriteria.isFulltextSearch()) {
-      mapQueryPath(queryCriteria, queryBuilder);
-      mapFulltextQueryTearm(queryCriteria, queryBuilder, LOGICAL.OR);
-    } else {
-      searchByNodeName(queryCriteria, queryBuilder);
-    }
-    mapCategoriesCondition(queryCriteria,queryBuilder);
-    mapDatetimeRangeSelected(queryCriteria,queryBuilder);
-    mapMetadataProperties(queryCriteria,queryBuilder, LOGICAL.OR);
-    orderBy(queryCriteria, queryBuilder);
-    String queryStatement = queryBuilder.createQueryStatement();
-    Query query = queryManager.createQuery(queryStatement, Query.SQL);
-    return query;
-  }
-
-  /**
-   * @return return the JCR path of the mop:page nodes that have gtn:name
-   *         (page's title) containing the given specified <code>keyword</code>
-   * @throws Exception
-   */
-  private List<String> searchPageByTitle(String siteName, String keyword) throws Exception {
-    SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
-    ManageableRepository currentRepository = repositoryService.getCurrentRepository();
-    Session session = sessionProvider.getSession("portal-system", currentRepository);
-    QueryManager queryManager = session.getWorkspace().getQueryManager();
-    QueryCriteria queryCriteria = new QueryCriteria();
-    queryCriteria.setSiteName(siteName);
-    queryCriteria.setKeyword(keyword);
-    queryCriteria.setSearchWebpage(true);
-    Query query = createSearchPageByTitleQuery(queryCriteria, queryManager);
-    if (LOG.isDebugEnabled()) {
-      LOG.debug("execute query: " + query.getStatement().toLowerCase());
-    }
-    List<String> pageList = PageListFactory.createPageList(query.getStatement(),
-                                                           session.getWorkspace().getName(),
-                                                           query.getLanguage(),
-                                                           true,
-                                                           new PageTitleDataCreator());
-    return pageList;
-  }
-  
   /**
    * 
    * @param queryCriteria
@@ -324,9 +261,6 @@ public class SiteSearchServiceImpl implements SiteSearchService {
 
     // select *
     queryBuilder.selectTypes(null);
-
-    // from mop:page node type
-    queryBuilder.fromNodeTypes(new String[] { "mop:page" });
 
     mapQueryPath(queryCriteria, queryBuilder);
 
@@ -431,9 +365,9 @@ public class SiteSearchServiceImpl implements SiteSearchService {
     //search page path
     if (queryCriteria.isSearchWebpage()) {
       if ("all".equals(siteName) || siteName == null || siteName.trim().length() == 0) {
-        return PATH_PORTAL_SITES;
+        return configurationService.getLivePortalsLocation().getPath();
       }
-      return PATH_PORTAL_SITES.concat("/mop:").concat(siteName);
+      return livePortalManagerService.getPortalPathByName(siteName) + "/" + SEOService.NAVIGATION;
     }
     //search document path
     if (queryCriteria.getSearchPath() != null) {
@@ -803,11 +737,10 @@ public class SiteSearchServiceImpl implements SiteSearchService {
     @Override
     public Node filterNodeToDisplay(Node node) {
       try {
-        if (!node.isNodeType("mop:navigation") && !node.isNodeType("mop:pagelink")
-            && !node.isNodeType("gtn:language")) {
-          return null;
-        } else {
+        if (node.getParent().getName().equals(SEOService.NAVIGATION)) {
           return node;
+        } else {
+          return null;
         }
       } catch (RepositoryException e) {
         return null;
@@ -832,85 +765,4 @@ public class SiteSearchServiceImpl implements SiteSearchService {
     }
     
   }
-  
-  public static class PageDataCreator implements SearchDataCreator<ResultNode> {
-
-    private static HashSet<String> userNavigationUriList = new HashSet<>();
-    
-    @Override
-    public ResultNode createData(Node node, Row row, SearchResult searchResult) {
-      try {
-        if (node.isNodeType("mop:pagelink")) {
-          node = node.getParent();
-        }
-        
-        if (node.isNodeType("gtn:language")) {
-          node = node.getParent().getParent();
-        }
-        String userNaviUri = "/" + WCMCoreUtils.getPortalName() + "/" + PageDataCreator.getUserNavigationURI(node).toString();
-        if (userNavigationUriList.contains(userNaviUri)) {
-          return null;
-        }
-        userNavigationUriList.add(userNaviUri);
-        return new ResultNode(node, row, userNaviUri);
-      } catch (Exception e) {
-        return null;
-      }
-    }
-    
-    /**
-     * Get user navigation URI from equivalent mop node in portal-system workspace
-     * @param node the mop node in portal-system workspace
-     * @return 
-     * @throws RepositoryException
-     */
-    public static StringBuilder getUserNavigationURI(Node node) throws RepositoryException {
-      if (!node.isNodeType("mop:portalsites")) {
-        StringBuilder builder = getUserNavigationURI(node.getParent());
-        String name = node.getName();
-        if ("mop:children".equals(name) || "mop:default".equals(name)
-            || "mop:rootnavigation".equals(name)) {
-          return builder.append("");
-        } else {
-          if (builder.length() > 0) {
-            builder.append("/");
-          }
-          return builder.append(node.getName().replaceFirst("mop:", ""));
-        }
-      } else {
-        return new StringBuilder();
-      }
-
-    } 
-    
-  }  
-  
-  /**
-   * 
-   * @author ha_dangviet
-   *
-   */
-  public static class PageTitleDataCreator implements SearchDataCreator<String> {
-
-    @Override
-    public String createData(Node node, Row row, SearchResult searchResult) {
-      try {
-        UserACL userACL = WCMCoreUtils.getService(UserACL.class);
-        if (node.hasProperty("gtn:access-permissions")) {
-          for (Value v : node.getProperty("gtn:access-permissions").getValues()) {
-            if (userACL.hasPermission(v.getString())) {
-              return node.getPath();
-            }
-          }
-          return null;
-        } else {
-          return node.getPath();
-        }
-      } catch (RepositoryException e) {
-        return null;
-      }
-    }
-    
-  }
-  
 }

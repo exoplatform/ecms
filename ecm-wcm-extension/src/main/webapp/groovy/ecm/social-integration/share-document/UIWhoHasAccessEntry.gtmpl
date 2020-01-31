@@ -1,0 +1,72 @@
+<%
+import org.exoplatform.ecm.webui.component.explorer.popup.actions.UIShareDocuments;
+import org.exoplatform.ecm.webui.component.explorer.popup.actions.UIWhoHasAccess;
+import org.apache.commons.lang.StringEscapeUtils;
+
+String SHARECONTENT_BUNDLE_LOCATION = _ctx.appRes("locale.extension.SocialIntegration");
+String SHARE_OPTION_CANVEW          = _ctx.appRes("UIShareDocuments.label.option.read");
+String SHARE_OPTION_CANMODIFY       = _ctx.appRes("UIShareDocuments.label.option.modify");
+String SHARE_PERMISSION_VIEW        = "read";
+String SHARE_PERMISSION_MODIFY      = "modify";
+
+String idView = "view-" + uicomponent.getId().replace("*:","").replace("/","");
+String idModify = "modify-" + uicomponent.getId().replace("*:","").replace("/","");
+String idCanView = "canView-" + uicomponent.getId().replace("*:","").replace("/","");
+String idCanModify = "canModify-" + uicomponent.getId().replace("*:","").replace("/","");
+
+String name = uicomponent.getName();
+
+UIWhoHasAccess uiWhoHasAccess = uicomponent.getParent();
+
+String displayed = null;
+
+%>
+<div id=$idCanView>
+    <ul class="dropdown-menu">
+        <li><a onclick="<%=uicomponent.event("ChangeEntry")%>"><i class="uiIconWatch uiIconBlue"></i> $SHARE_OPTION_CANVEW</a></li>
+    </ul>
+</div>
+<div id=$idCanModify>
+    <ul class="dropdown-menu">
+        <li><a onclick="<%=uicomponent.event("ChangeEntry")%>"><i class="uiIconEdit uiIconBlue"></i> $SHARE_OPTION_CANMODIFY</a></li>
+    </ul>
+</div>
+<div id="AccessEntry">
+    <% String avatar = uiWhoHasAccess.getAvatar(name); %>
+    <div class="avatarXSmall pull-left">
+        <img src="$avatar" alt="$displayed"/>
+    </div>
+    <div id="entry" >
+        <% String entryDisplayName = StringEscapeUtils.escapeHtml(uiWhoHasAccess.getDisplayName(name)); %>
+        <% String entryURL = uiWhoHasAccess.getEntryURL(name); %>
+        <% if (entryURL?.trim()) { %>
+            <a href="<%=entryURL%>" >$entryDisplayName</a>
+        <% } else { %>
+            $entryDisplayName
+        <% } %>
+    </div>
+    <div class="deleteEntry pull-right"><a class="actionIcon" onclick="<%=uicomponent.event("RemoveEntry")%>"><i class="uiIconDelete uiIconLightGray"></i></a></div>
+    <% if (uicomponent.getPermission().equals(SHARE_PERMISSION_MODIFY)) { %>
+        <div class="btn-toolbar pull-right" id="selectPermission" style="margin: 0;">
+            <div class="dropdown">
+              <div data-toggle="dropdown" id=$idModify class="uiActionWithLabel">
+                <a>
+                  <i class="uiIconEdit uiIconBlue"></i>
+                </a>
+                <i class="uiIconMiniArrowDown uiIconBlue"></i>
+              </div>
+            </div><!-- dropdown -->
+        </div>
+    <% } else { %>
+        <div class="btn-toolbar pull-right" id="selectPermission" style="margin: 0;">
+            <div class="dropdown">
+              <div data-toggle="dropdown" id=$idView class="uiActionWithLabel">
+                <a>
+                  <i class="uiIconWatch uiIconBlue"></i>
+                </a>
+                <i class="uiIconMiniArrowDown uiIconBlue"></i>
+              </div>
+            </div><!-- dropdown -->
+        </div>
+    <% } %>
+</div>

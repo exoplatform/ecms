@@ -72,4 +72,7 @@
       <artifactId>exo.portal.webui.portlet</artifactId>
     </dependency>
   </dependencies>
+  <build>
+    <finalName>fastcontentcreator</finalName>
+  </build>
 </project>
