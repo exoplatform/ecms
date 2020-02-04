@@ -17,11 +17,14 @@
 package org.exoplatform.services.cms.documents.impl;
 
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashSet;
 import java.util.List;
@@ -34,6 +37,11 @@ import javax.jcr.NodeIterator;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 
+import org.apache.poi.POIXMLDocument;
+import org.apache.poi.POIXMLProperties;
+import org.apache.poi.xslf.usermodel.XMLSlideShow;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.gatein.api.Portal;
 import org.gatein.api.navigation.Navigation;
 import org.gatein.api.navigation.Nodes;
@@ -70,6 +78,7 @@ import org.exoplatform.services.jcr.impl.core.NodeImpl;
 import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.organization.OrganizationService;
 import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
@@ -100,6 +109,10 @@ public class DocumentServiceImpl implements DocumentService {
   public static final String DOCUMENT_NOT_FOUND = "?path=doc-not-found";
   private static final String DOCUMENTS_NODE = "Documents";
   private static final String SHARED_NODE = "Shared";
+  private static final String PPTX_EXTENSION = ".pptx";
+  private static final String XLSX_EXTENSION = ".xlsx";
+  private static final String DOCX_EXTENSION = ".docx";
+  private static final String METADATA_DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss'Z'";
   private static final Log LOG                 = ExoLogger.getLogger(DocumentServiceImpl.class);
   private final Set<NewDocumentTemplatePlugin> templatePlugins = new HashSet<>();
   private final Set<NewDocumentEditorPlugin> editorPlugins = new HashSet<>();
@@ -110,8 +123,9 @@ public class DocumentServiceImpl implements DocumentService {
   private NodeHierarchyCreator nodeHierarchyCreator;
   private LinkManager linkManager;
   private PortalContainerInfo portalContainerInfo;
+  private OrganizationService organization;
 
-  public DocumentServiceImpl(ManageDriveService manageDriveService, Portal portal, SessionProviderService sessionProviderService, RepositoryService repoService, NodeHierarchyCreator nodeHierarchyCreator, LinkManager linkManager, PortalContainerInfo portalContainerInfo) {
+  public DocumentServiceImpl(ManageDriveService manageDriveService, Portal portal, SessionProviderService sessionProviderService, RepositoryService repoService, NodeHierarchyCreator nodeHierarchyCreator, LinkManager linkManager, PortalContainerInfo portalContainerInfo, OrganizationService organization) {
     this.manageDriveService = manageDriveService;
     this.sessionProviderService = sessionProviderService;
     this.repoService = repoService;
@@ -119,6 +133,7 @@ public class DocumentServiceImpl implements DocumentService {
     this.portal = portal;
     this.linkManager = linkManager;
     this.portalContainerInfo = portalContainerInfo;
+    this.organization = organization;
   }
 
   @Override
@@ -483,6 +498,11 @@ public class DocumentServiceImpl implements DocumentService {
       ApplicationResourceResolver appResolver = context.getApplication().getResourceResolver();
       ResourceResolver resolver = appResolver.getResourceResolver(template.getPath());
       data = resolver.getInputStream(template.getPath());
+      try {
+        data = addMetadata(data, template);
+      } catch (Exception e) {
+        LOG.error("Couldn't add metadata to the document from template, ", e);
+      }
     }
     // Add node
     Node addedNode = currentNode.addNode(title, NT_FILE);
@@ -532,5 +552,62 @@ public class DocumentServiceImpl implements DocumentService {
   public boolean hasDocumentTemplatePlugins() {
     return templatePlugins.size() > 0;
   }
+  
+  /**
+   * Adds metadata to the office document (creator, content type, created).
+   * 
+   * @param source the source of file
+   * @param template the template
+   * @return stream with metadata
+   * @throws Exception the exception
+   */
+  protected ByteArrayInputStream addMetadata(InputStream source, DocumentTemplate template) throws Exception {
+    POIXMLDocument document = getDocument(source, template.getExtension());
+    POIXMLProperties props = document.getProperties();
+    POIXMLProperties.CoreProperties coreProps = props.getCoreProperties();
+    coreProps.setCreator(getCurrentUserDisplayName());
+    coreProps.setContentType(template.getMimeType());
+    String currentDate = new SimpleDateFormat(METADATA_DATE_FORMAT).format(new Date());
+    coreProps.setCreated(currentDate);
+    ByteArrayOutputStream os = new ByteArrayOutputStream();
+    document.write(os);
+    document.close();
+    return new ByteArrayInputStream(os.toByteArray());
+  }
 
+  /**
+   * Gets POIXMLDocument from inputStream and extension. Supports .docx, .xlsx and .pptx extensions.s
+   * 
+   * @param source the source
+   * @param extension the extension
+   * @return POIXMLDocument
+   * @throws Exception the exception
+   */
+  protected POIXMLDocument getDocument(InputStream source, String extension) throws Exception {
+    if(extension == null) {
+      throw new Exception("Cannot provide POIXMLDocument - extension is null");
+    }
+    switch (extension) {
+    case DOCX_EXTENSION: return new XWPFDocument(source);
+    case XLSX_EXTENSION: return new XSSFWorkbook(source);
+    case PPTX_EXTENSION: return new XMLSlideShow(source);
+    default:
+      throw new Exception("The document format " + extension + " is not supported");
+    }
+  }
+  
+  /**
+   * Gets display name of current user. In case of any errors return current userId
+   * 
+   * @return the display name
+   */
+  protected String getCurrentUserDisplayName() {
+    String userId = ConversationState.getCurrent().getIdentity().getUserId();
+    try {
+      return organization.getUserHandler().findUserByName(userId).getDisplayName();
+    } catch (Exception e) {
+      LOG.error("Error searching user " + userId, e);
+      return userId;
+    }
+  }
 }
