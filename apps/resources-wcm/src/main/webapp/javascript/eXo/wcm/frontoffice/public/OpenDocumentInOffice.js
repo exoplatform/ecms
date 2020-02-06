@@ -99,6 +99,7 @@
           gj(openDocument).removeClass("hidden");
           gj(openDocument).closest("li").css("display", "");
           if (data.isLocked) return;//can not edit, just show popup(do not change href)
+          defaultEnviromentFilter(openDocument);//only show with support enviroment.
         }else{
           if(!data.isMsoffice){
             openDocument.addClass("hidden");
@@ -177,7 +178,8 @@
    * return true if support
    */
   function defaultEnviromentFilter(element){
-    var ua = window.navigator.userAgent;
+    var inBrowser = typeof window !== 'undefined';
+    var ua = inBrowser && window.navigator.userAgent.toLowerCase();
 
     var OSName="Unknown OS";
     if (navigator.appVersion.indexOf("Win")!=-1) OSName="Windows";
@@ -186,7 +188,8 @@
     if (navigator.appVersion.indexOf("Linux")!=-1) OSName="Linux";
 
     //check IE 11, Window, Office 2010
-    if (OSName === "Windows") {
+    //check OS type
+    if (OSName === "Windows" || OSName === "Linux" || OSName === "MacOS") {
       //check IE11, Office
       var isAtLeastIE11 = !!(ua.match(/Trident/) && !ua.match(/MSIE/));
       if(checkMSOfficeVersion() && isAtLeastIE11){
@@ -194,12 +197,19 @@
         return true;
       }
 
+      var isIOS = (ua && /iphone|ipad|ipod|ios/.test(ua));
+      var isAndroid = (ua && ua.indexOf('android') > 0) ;
       // Hide if not enought enviroments support
       if(gj(element).parent().hasClass("detailContainer"))
         gj(element).hide();
-      else
+      // Hide element if type is android or IOS
+      else if (isIOS  || isAndroid ){
         gj(element).parent().hide();
-      return false;
+      }
+      // Show element if not abdroid or IOS or not enought enviroments support
+      else
+        gj(element).parent().show();
+        return false;
     }else{
       //other browser, hide this functional
       gj(element).closest("li").hide();
