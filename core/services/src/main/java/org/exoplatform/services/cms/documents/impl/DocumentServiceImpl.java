@@ -52,7 +52,7 @@ import org.exoplatform.resolver.ResourceResolver;
 import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.documents.DocumentService;
 import org.exoplatform.services.cms.documents.DocumentTemplate;
-import org.exoplatform.services.cms.documents.NewDocumentEditorPlugin;
+import org.exoplatform.services.cms.documents.DocumentEditorPlugin;
 import org.exoplatform.services.cms.documents.NewDocumentTemplatePlugin;
 import org.exoplatform.services.cms.documents.model.Document;
 import org.exoplatform.services.cms.drives.DriveData;
@@ -102,7 +102,7 @@ public class DocumentServiceImpl implements DocumentService {
   private static final String SHARED_NODE = "Shared";
   private static final Log LOG                 = ExoLogger.getLogger(DocumentServiceImpl.class);
   private final Set<NewDocumentTemplatePlugin> templatePlugins = new HashSet<>();
-  private final Set<NewDocumentEditorPlugin> editorPlugins = new HashSet<>();
+  private final Set<DocumentEditorPlugin> editorPlugins = new HashSet<>();
   private ManageDriveService manageDriveService;
   private Portal portal;
   private SessionProviderService sessionProviderService;
@@ -458,9 +458,9 @@ public class DocumentServiceImpl implements DocumentService {
    */
   @Override
   public void addDocumentEditorPlugin(ComponentPlugin plugin) {
-    Class<NewDocumentEditorPlugin> pclass = NewDocumentEditorPlugin.class;
+    Class<DocumentEditorPlugin> pclass = DocumentEditorPlugin.class;
     if (pclass.isAssignableFrom(plugin.getClass())) {
-      NewDocumentEditorPlugin newPlugin = pclass.cast(plugin);
+      DocumentEditorPlugin newPlugin = pclass.cast(plugin);
 
       LOG.info("Adding NewDocumentEditorPlugin [{}]", newPlugin.toString());
       editorPlugins.add(newPlugin);
@@ -521,7 +521,7 @@ public class DocumentServiceImpl implements DocumentService {
    * {@inheritDoc}
    */
   @Override
-  public Set<NewDocumentEditorPlugin> getRegisteredEditorPlugins() {
+  public Set<DocumentEditorPlugin> getRegisteredEditorPlugins() {
     return Collections.unmodifiableSet(editorPlugins);
   }
 

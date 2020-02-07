@@ -140,7 +140,7 @@ public interface DocumentService {
    *
    * @return the registered editors plugins
    */
-  public Set<NewDocumentEditorPlugin> getRegisteredEditorPlugins();
+  public Set<DocumentEditorPlugin> getRegisteredEditorPlugins();
 
   /**
    * Checks for document template plugins.

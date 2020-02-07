@@ -30,7 +30,7 @@ public interface NewDocumentTemplatePlugin {
    * 
    * @return the editorPlugin
    */
-  NewDocumentEditorPlugin getEditor();
+  DocumentEditorPlugin getEditor();
 
   /**
    * Creates the document from specified template.
