@@ -314,6 +314,9 @@
           '</div>' +
           '<div class="downloadBtn">' +
             '<a href="' + this.settings.doc.downloadUrl + '"><i class="uiIconDownload uiIconWhite"></i>&nbsp;${UIActivity.comment.download}</a>' +
+          '</div>' +
+          '<div class="onlyOfficeEditBtn">' +
+            '<a href="/portal/intranet/oeditor?docId=' + this.settings.doc.id + '" target="_blank"><i class="uiIconEdit uiIconWhite"></i>&nbsp;${UIActivity.label.edit-online}</a>' +
           '</div>';
         docPreviewContainer.find(".previewBtn").html(html);
       } else {
@@ -423,6 +426,9 @@
                     '</div>' +
                     '<div class="downloadBtn">' +
                       '<a href="' + this.settings.doc.downloadUrl + '"><i class="uiIconDownload uiIconWhite"></i>&nbsp;${UIActivity.comment.download}</a>' +
+                    '</div>' +
+                    '<div class="onlyOfficeEditBtn">' +
+                      '<a href="/portal/intranet/oeditor?docId=' + this.settings.doc.id + '" target="_blank"><i class="uiIconEdit uiIconWhite"></i>&nbsp;Edit Online</a>' +
                     '</div>' +
                   '</div>' +
                 '</div>' +

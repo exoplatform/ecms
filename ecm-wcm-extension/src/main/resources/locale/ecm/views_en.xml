@@ -60,6 +60,7 @@
         <file-size-too-big>The content of this file is too big. You should download and open in the client.</file-size-too-big>
         <webDAV>WebDAV View</webDAV>
         <download>Download</download>
+        <edit-online>Edit Online</edit-online>
         <htmlview>View as HTML</htmlview>
         <plaintextview>View as Plain text</plaintextview>
       </label>
