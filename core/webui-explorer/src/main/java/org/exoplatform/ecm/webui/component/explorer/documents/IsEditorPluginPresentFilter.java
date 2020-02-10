@@ -11,12 +11,12 @@ import org.exoplatform.webui.ext.filter.UIExtensionFilterType;
 /**
  * The Class IsNewDocumentTemplatePresentFilter checks if any NewDocumentTemplatePlugin is registered.
  */
-public class IsNewDocumentTemplatePresentFilter extends UIExtensionAbstractFilter {
+public class IsEditorPluginPresentFilter extends UIExtensionAbstractFilter {
 
   /**
    * Instantiates a new checks if is template plugin present filter.
    */
-  public IsNewDocumentTemplatePresentFilter() {
+  public IsEditorPluginPresentFilter() {
     this(null);
   }
 
@@ -25,7 +25,7 @@ public class IsNewDocumentTemplatePresentFilter extends UIExtensionAbstractFilte
    *
    * @param messageKey the message key
    */
-  public IsNewDocumentTemplatePresentFilter(String messageKey) {
+  public IsEditorPluginPresentFilter(String messageKey) {
     super(messageKey, UIExtensionFilterType.MANDATORY);
   }
 
@@ -42,7 +42,7 @@ public class IsNewDocumentTemplatePresentFilter extends UIExtensionAbstractFilte
                                                             .getComponentInstanceOfType(DocumentService.class);
 
     if (documentService != null) {
-      return documentService.hasDocumentEditorPlugins();
+      return documentService.hasDocumentTemplatePlugins();
     }
     return false;
   }

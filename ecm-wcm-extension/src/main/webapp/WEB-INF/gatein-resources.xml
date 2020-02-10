@@ -158,6 +158,16 @@
       	<module>ecm-bootstrap</module>
       </depends>
 	 </module>
+  
+   <module>
+    <name>editor-buttons</name>
+    <script>
+      <path>/javascript/eXo/ecm/editor-buttons.js</path>
+    </script>
+    <depends>
+      <module>jquery</module>
+    </depends>
+  </module>
    
      <portal-skin>
     <skin-name>Default</skin-name>

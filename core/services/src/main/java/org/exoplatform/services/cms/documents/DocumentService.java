@@ -143,6 +143,13 @@ public interface DocumentService {
   public Set<DocumentEditorPlugin> getRegisteredEditorPlugins();
 
   /**
+   * Checks for document editor plugins.
+   *
+   * @return true, if successful
+   */
+  public boolean hasDocumentEditorPlugins();
+  
+  /**
    * Checks for document template plugins.
    *
    * @return true, if successful

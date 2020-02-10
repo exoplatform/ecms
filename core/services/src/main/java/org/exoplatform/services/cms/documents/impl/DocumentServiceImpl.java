@@ -462,13 +462,13 @@ public class DocumentServiceImpl implements DocumentService {
     if (pclass.isAssignableFrom(plugin.getClass())) {
       DocumentEditorPlugin newPlugin = pclass.cast(plugin);
 
-      LOG.info("Adding NewDocumentEditorPlugin [{}]", newPlugin.toString());
+      LOG.info("Adding DocumentEditorPlugin [{}]", newPlugin.toString());
       editorPlugins.add(newPlugin);
       if (LOG.isDebugEnabled()) {
-        LOG.debug("Registered NewDocumentEditorPlugin instance of {}", plugin.getClass().getName());
+        LOG.debug("Registered DocumentEditorPlugin instance of {}", plugin.getClass().getName());
       }
     } else {
-      LOG.error("The NewDocumentEditorPlugin plugin is not an instance of " + pclass.getName());
+      LOG.error("The DocumentEditorPlugin plugin is not an instance of " + pclass.getName());
     }
   }
 
@@ -531,6 +531,14 @@ public class DocumentServiceImpl implements DocumentService {
   @Override
   public boolean hasDocumentTemplatePlugins() {
     return templatePlugins.size() > 0;
+  }
+  
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public boolean hasDocumentEditorPlugins() {
+    return editorPlugins.size() > 0;
   }
 
 }

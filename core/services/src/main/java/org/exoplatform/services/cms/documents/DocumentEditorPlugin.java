@@ -51,9 +51,10 @@ public interface DocumentEditorPlugin {
    * the activity is being rendered.
    * 
    * @param fileId
+   * @param activityId
    * @throws Exception the exception
    */
-  void initActivity(String fileId) throws Exception;
+  void initActivity(String fileId, String activityId) throws Exception;
 
   /**
    * This handles is invoked when the DocumentUIActivity is rendered in the Activity Stream.
@@ -61,8 +62,10 @@ public interface DocumentEditorPlugin {
    * the preview is being rendered.
    * 
    * @param fileId
+   * @param activityId
+   * @param index
    * @throws Exception the exception
    */
-  void initPreview(String fileId) throws Exception;
+  void initPreview(String fileId, String activityId, int index) throws Exception;
 
 }
