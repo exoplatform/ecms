@@ -170,13 +170,13 @@
     </component-plugin>
   </external-component-plugins>
   
-   <!-- DocumentMetadataPlugin for DocumentService-->
+   <!-- ApachePOIMetadataPluginImpl for DocumentService-->
   <external-component-plugins>
     <target-component>org.exoplatform.services.cms.documents.DocumentService</target-component>
     <component-plugin>
       <name>apache.poi.metadata.plugin</name>
       <set-method>setDocumentMetadataPlugin</set-method>
-      <type>org.exoplatform.services.cms.documents.impl.DocumentMetadataPluginImpl</type>
+      <type>org.exoplatform.services.cms.documents.impl.ApachePOIMetadataPluginImpl</type>
       <description>The document metadata plugin which uses Apache POI</description>
     </component-plugin>
   </external-component-plugins>

@@ -26,7 +26,7 @@ import org.exoplatform.services.security.ConversationState;
  * that uses Apache POI for adding the metadata.
  * 
  */
-public class DocumentMetadataPluginImpl extends BaseComponentPlugin implements DocumentMetadataPlugin {
+public class ApachePOIMetadataPluginImpl extends BaseComponentPlugin implements DocumentMetadataPlugin {
 
   /** The Constant PPTX_EXTENSION. */
   private static final String PPTX_EXTENSION       = ".pptx";
@@ -51,7 +51,7 @@ public class DocumentMetadataPluginImpl extends BaseComponentPlugin implements D
    *
    * @param organization the organization
    */
-  public DocumentMetadataPluginImpl(OrganizationService organization) {
+  public ApachePOIMetadataPluginImpl(OrganizationService organization) {
     this.organization = organization;
     metadataFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
   }
