@@ -160,7 +160,7 @@
 	 </module>
   
    <module>
-    <name>editor-buttons</name>
+    <name>editorbuttons</name>
     <script>
       <path>/javascript/eXo/ecm/editor-buttons.js</path>
     </script>

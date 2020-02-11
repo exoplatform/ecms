@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.jcr.Node;
 
+import com.google.gson.Gson;
+
 import org.exoplatform.ecm.webui.component.explorer.documents.IsEditorPluginPresentFilter;
 import org.exoplatform.services.cms.documents.DocumentEditorPlugin;
 import org.exoplatform.services.cms.documents.DocumentService;
@@ -73,7 +75,6 @@ public class DocumentUIActivity extends FileUIActivity {
   public void end() throws Exception {
     WebuiRequestContext requestContext = WebuiRequestContext.getCurrentInstance();
     JavascriptManager js = requestContext.getJavascriptManager();
-    JsonGenerator jsonGenerator = new JsonGeneratorImpl();
     String activityId = getActivity().getId();
     if (getFilesCount() == 1) {
       Node node = getContentNode(0);
@@ -90,9 +91,9 @@ public class DocumentUIActivity extends FileUIActivity {
                     e.getMessage());
         }
       });
-      String jsonButtons = jsonGenerator.createJsonObject(buttons).toString();
-      js.require("SHARED/editor-buttons", "editorbuttons")
-        .addScripts("editorbuttons.initActivityButtons('" + jsonButtons + "');");
+      String jsonButtons = new Gson().toJson(buttons);
+      js.require("SHARED/editorbuttons", "editorbuttons")
+        .addScripts("editorbuttons.initActivityButtons('" + jsonButtons + "', '" + activityId + "');");
 
     }
 
@@ -112,10 +113,11 @@ public class DocumentUIActivity extends FileUIActivity {
                     e.getMessage());
         }
       }
-      String jsonButtons = jsonGenerator.createJsonObject(buttons).toString();
-      js.require("SHARED/editor-buttons", "editorbuttons")
-        .addScripts("editorbuttons.initPreviewButtons('" + jsonButtons + "');");
+      String jsonButtons = new Gson().toJson(buttons);
+      js.require("SHARED/editorbuttons", "editorbuttons")
+        .addScripts("editorbuttons.initPreviewButtons('" + jsonButtons + "', '" + activityId + "', '" + index + "');");
     }
+    
     super.end();
   }
 
