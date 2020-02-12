@@ -78,7 +78,7 @@ public class DocumentUIActivity extends FileUIActivity {
     String activityId = getActivity().getId();
     if (getFilesCount() == 1) {
       Node node = getContentNode(0);
-      Map<DocumentEditorPlugin, EditorButton> pluginButtons = getEditorsButtons(node);
+      Map<DocumentEditorPlugin, EditorButton> pluginButtons = getEditorButtons(node);
       String jsonButtons = new Gson().toJson(pluginButtons.values());
       js.require("SHARED/editorbuttons", "editorbuttons")
         .addScripts("editorbuttons.initActivityButtons('" + jsonButtons + "', '" + activityId + "');");
@@ -96,7 +96,7 @@ public class DocumentUIActivity extends FileUIActivity {
     // Init preview links for each of file
     for (int index = 0; index < getFilesCount(); index++) {
       Node node = getContentNode(index);
-      Map<DocumentEditorPlugin, EditorButton> pluginButtons = getEditorsButtons(node);
+      Map<DocumentEditorPlugin, EditorButton> pluginButtons = getEditorButtons(node);
 
       String jsonButtons = new Gson().toJson(pluginButtons.values());
       js.require("SHARED/editorbuttons", "editorbuttons")
@@ -117,24 +117,6 @@ public class DocumentUIActivity extends FileUIActivity {
   }
 
   /**
-   * Gets the editor buttons.
-   *
-   * @param node the node
-   * @return the editor buttons
-   */
-  protected List<EditorButton> getEditorButtons(Node node) {
-    List<EditorButton> buttons = new ArrayList<>();
-    documentService.getRegisteredEditorPlugins().forEach(plugin -> {
-      try {
-        buttons.add(plugin.getEditorButton(node.getUUID(), node.getSession().getWorkspace().getName(), STREAM_CONTEXT));
-      } catch (Exception e) {
-        LOG.error("Cannot get editor button from customize plugin {}, {}", plugin.getProviderName(), e.getMessage());
-      }
-    });
-    return buttons;
-  }
-
-  /**
    * Gets the filters.
    *
    * @return the filters
@@ -150,7 +132,7 @@ public class DocumentUIActivity extends FileUIActivity {
    * @param node the node
    * @return the editors buttons
    */
-  protected Map<DocumentEditorPlugin, EditorButton> getEditorsButtons(Node node) {
+  protected Map<DocumentEditorPlugin, EditorButton> getEditorButtons(Node node) {
     Map<DocumentEditorPlugin, EditorButton> pluginButtons = new HashMap<>();
     documentService.getRegisteredEditorPlugins().forEach(plugin -> {
       try {
