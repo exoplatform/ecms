@@ -1,23 +1,34 @@
+/*
+ * Copyright (C) 2003-2020 eXo Platform SAS.
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License
+ * as published by the Free Software Foundation; either version 3
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, see<http://www.gnu.org/licenses/>.
+ */
 package org.exoplatform.wcm.ext.component.activity;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.jcr.Node;
-
-import com.google.gson.Gson;
 
 import org.exoplatform.ecm.webui.component.explorer.documents.IsEditorPluginPresentFilter;
 import org.exoplatform.services.cms.documents.DocumentEditorPlugin;
 import org.exoplatform.services.cms.documents.DocumentService;
-import org.exoplatform.services.cms.documents.model.EditorButton;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.social.webui.activity.BaseUIActivity;
 import org.exoplatform.web.application.JavascriptManager;
+import org.exoplatform.web.application.RequireJS;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.ComponentConfigs;
@@ -76,42 +87,35 @@ public class DocumentUIActivity extends FileUIActivity {
     WebuiRequestContext requestContext = WebuiRequestContext.getCurrentInstance();
     JavascriptManager js = requestContext.getJavascriptManager();
     String activityId = getActivity().getId();
+    RequireJS require = js.require("SHARED/editorbuttons", "editorbuttons");
     if (getFilesCount() == 1) {
       Node node = getContentNode(0);
-      Map<DocumentEditorPlugin, EditorButton> pluginButtons = getEditorButtons(node);
-      String jsonButtons = new Gson().toJson(pluginButtons.values());
-      js.require("SHARED/editorbuttons", "editorbuttons")
-        .addScripts("editorbuttons.initActivityButtons('" + jsonButtons + "', '" + activityId + "');");
+      require.addScripts("editorbuttons.resetButtons();");
       // call plugins init handlers
-      pluginButtons.forEach((plugin, btn) -> {
+      documentService.getRegisteredEditorPlugins().forEach(plugin -> {
         try {
-          plugin.initActivity(btn.getFileId(), activityId);
+          plugin.initActivity(node.getUUID(), node.getSession().getWorkspace().getName(), activityId, STREAM_CONTEXT);
         } catch (Exception e) {
           LOG.error("Cannot init activity from plugin {}, {}", plugin.getProviderName(), e.getMessage());
         }
       });
+      require.addScripts("editorbuttons.initActivityButtons('" + activityId + "');");
 
     }
 
     // Init preview links for each of file
     for (int index = 0; index < getFilesCount(); index++) {
       Node node = getContentNode(index);
-      Map<DocumentEditorPlugin, EditorButton> pluginButtons = getEditorButtons(node);
-
-      String jsonButtons = new Gson().toJson(pluginButtons.values());
-      js.require("SHARED/editorbuttons", "editorbuttons")
-        .addScripts("editorbuttons.initPreviewButtons('" + jsonButtons + "', '" + activityId + "', '" + index + "');");
-
+      require.addScripts("editorbuttons.resetButtons();");
       // call plugins init handlers
-      for (Map.Entry<DocumentEditorPlugin, EditorButton> entry : pluginButtons.entrySet()) {
-        DocumentEditorPlugin plugin = entry.getKey();
-        EditorButton editorButton = entry.getValue();
+      for (DocumentEditorPlugin plugin : documentService.getRegisteredEditorPlugins()) {
         try {
-          plugin.initPreview(editorButton.getFileId(), activityId, index);
+          plugin.initPreview(node.getUUID(), node.getSession().getWorkspace().getName(), activityId, STREAM_CONTEXT, index);
         } catch (Exception e) {
-          LOG.error("Cannot init activity from plugin {}, {}", plugin.getProviderName(), e.getMessage());
+          LOG.error("Cannot init preview from plugin {}, {}", plugin.getProviderName(), e.getMessage());
         }
       }
+      require.addScripts("editorbuttons.initPreviewButtons('" + activityId + "', '" + index + "');");
     }
     super.end();
   }
@@ -124,27 +128,6 @@ public class DocumentUIActivity extends FileUIActivity {
   @UIExtensionFilters
   public List<UIExtensionFilter> getFilters() {
     return FILTERS;
-  }
-
-  /**
-   * Gets the editors buttons.
-   *
-   * @param node the node
-   * @return the editors buttons
-   */
-  protected Map<DocumentEditorPlugin, EditorButton> getEditorButtons(Node node) {
-    Map<DocumentEditorPlugin, EditorButton> pluginButtons = new HashMap<>();
-    documentService.getRegisteredEditorPlugins().forEach(plugin -> {
-      try {
-        pluginButtons.putIfAbsent(plugin,
-                                  plugin.getEditorButton(node.getUUID(),
-                                                         node.getSession().getWorkspace().getName(),
-                                                         STREAM_CONTEXT));
-      } catch (Exception e) {
-        LOG.error("Cannot get editor button from customize plugin {}, {}", plugin.getProviderName(), e.getMessage());
-      }
-    });
-    return pluginButtons;
   }
 
 }

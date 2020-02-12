@@ -1,6 +1,20 @@
+/*
+ * Copyright (C) 2003-2020 eXo Platform SAS.
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License
+ * as published by the Free Software Foundation; either version 3
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, see<http://www.gnu.org/licenses/>.
+ */
 package org.exoplatform.services.cms.documents;
-
-import org.exoplatform.services.cms.documents.model.EditorButton;
 
 /**
  * The Interface DocumentEditorPlugin provides API for handling such events from New Document feature: 
@@ -35,37 +49,30 @@ public interface DocumentEditorPlugin {
   void onDocumentCreated(String workspace, String path) throws Exception;
 
   /**
-   * Gets editor button for the document
-   * 
-   * @param uuid the uuid
-   * @param workspace workspace
-   * @param context the context
-   * @throws Exception the exception
-   * @return the editor button
-   */
-  EditorButton getEditorButton(String uuid, String workspace, String context) throws Exception;
-
-  /**
    * This handles is invoked when the DocumentUIActivity is rendered in the Activity Stream.
    * It allows to run custom code (JS initialization, setting sockets, etc) while 
    * the activity is being rendered.
    * 
-   * @param fileId
+   * @param uuid the uuid
+   * @param workspace workspace
    * @param activityId
+   * @param context the context
    * @throws Exception the exception
    */
-  void initActivity(String fileId, String activityId) throws Exception;
+  void initActivity(String uuid, String workspace, String activityId, String context) throws Exception;
 
   /**
    * This handles is invoked when the DocumentUIActivity is rendered in the Activity Stream.
    * It allows to run custom code (JS initialization, setting sockets, etc) while 
    * the preview is being rendered.
    * 
-   * @param fileId
-   * @param activityId
-   * @param index
+   * @param uuid the uuid
+   * @param workspace workspace
+   * @param activityId the activity id
+   * @param context the context
+   * @param index the index
    * @throws Exception the exception
    */
-  void initPreview(String fileId, String activityId, int index) throws Exception;
+  void initPreview(String uuid, String workspace, String activityId, String context, int index) throws Exception;
 
 }
