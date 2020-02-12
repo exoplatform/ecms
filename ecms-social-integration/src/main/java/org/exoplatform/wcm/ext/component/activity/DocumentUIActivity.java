@@ -2,7 +2,9 @@ package org.exoplatform.wcm.ext.component.activity;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.jcr.Node;
 
@@ -23,26 +25,24 @@ import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.ext.filter.UIExtensionFilter;
 import org.exoplatform.webui.ext.filter.UIExtensionFilters;
-import org.exoplatform.ws.frameworks.json.JsonGenerator;
-import org.exoplatform.ws.frameworks.json.impl.JsonGeneratorImpl;
 
 /**
  * The Class CustomizedFileUIActivity.
  */
 @ComponentConfigs({
-  @ComponentConfig(lifecycle = UIFormLifecycle.class, template = "war:/groovy/ecm/social-integration/plugin/space/FileUIActivity.gtmpl", events = {
-      @EventConfig(listeners = FileUIActivity.ViewDocumentActionListener.class),
-      @EventConfig(listeners = BaseUIActivity.LoadLikesActionListener.class),
-      @EventConfig(listeners = BaseUIActivity.ToggleDisplayCommentFormActionListener.class),
-      @EventConfig(listeners = BaseUIActivity.LikeActivityActionListener.class),
-      @EventConfig(listeners = BaseUIActivity.SetCommentListStatusActionListener.class),
-      @EventConfig(listeners = BaseUIActivity.PostCommentActionListener.class),
-      @EventConfig(listeners = BaseUIActivity.DeleteActivityActionListener.class),
-      @EventConfig(listeners = FileUIActivity.OpenFileActionListener.class),
-      @EventConfig(listeners = BaseUIActivity.DeleteCommentActionListener.class),
-      @EventConfig(listeners = BaseUIActivity.LikeCommentActionListener.class),
-      @EventConfig(listeners = BaseUIActivity.EditActivityActionListener.class),
-      @EventConfig(listeners = BaseUIActivity.EditCommentActionListener.class) }), })
+    @ComponentConfig(lifecycle = UIFormLifecycle.class, template = "war:/groovy/ecm/social-integration/plugin/space/FileUIActivity.gtmpl", events = {
+        @EventConfig(listeners = FileUIActivity.ViewDocumentActionListener.class),
+        @EventConfig(listeners = BaseUIActivity.LoadLikesActionListener.class),
+        @EventConfig(listeners = BaseUIActivity.ToggleDisplayCommentFormActionListener.class),
+        @EventConfig(listeners = BaseUIActivity.LikeActivityActionListener.class),
+        @EventConfig(listeners = BaseUIActivity.SetCommentListStatusActionListener.class),
+        @EventConfig(listeners = BaseUIActivity.PostCommentActionListener.class),
+        @EventConfig(listeners = BaseUIActivity.DeleteActivityActionListener.class),
+        @EventConfig(listeners = FileUIActivity.OpenFileActionListener.class),
+        @EventConfig(listeners = BaseUIActivity.DeleteCommentActionListener.class),
+        @EventConfig(listeners = BaseUIActivity.LikeCommentActionListener.class),
+        @EventConfig(listeners = BaseUIActivity.EditActivityActionListener.class),
+        @EventConfig(listeners = BaseUIActivity.EditCommentActionListener.class) }), })
 public class DocumentUIActivity extends FileUIActivity {
 
   /** The Constant LOG. */
@@ -78,46 +78,41 @@ public class DocumentUIActivity extends FileUIActivity {
     String activityId = getActivity().getId();
     if (getFilesCount() == 1) {
       Node node = getContentNode(0);
-      List<EditorButton> buttons = new ArrayList<>();
-      documentService.getRegisteredEditorPlugins().forEach(plugin -> {
-        try {
-          EditorButton button =
-                              plugin.getEditorButton(node.getUUID(), node.getSession().getWorkspace().getName(), STREAM_CONTEXT);
-          buttons.add(button);
-          plugin.initActivity(button.getFileId(), activityId);
-        } catch (Exception e) {
-          LOG.error("Cannot get editor button or init activity from customize plugin {}, {}",
-                    plugin.getProviderName(),
-                    e.getMessage());
-        }
-      });
-      String jsonButtons = new Gson().toJson(buttons);
+      Map<DocumentEditorPlugin, EditorButton> pluginButtons = getEditorsButtons(node);
+      String jsonButtons = new Gson().toJson(pluginButtons.values());
       js.require("SHARED/editorbuttons", "editorbuttons")
         .addScripts("editorbuttons.initActivityButtons('" + jsonButtons + "', '" + activityId + "');");
+      // call plugins init handlers
+      pluginButtons.forEach((plugin, btn) -> {
+        try {
+          plugin.initActivity(btn.getFileId(), activityId);
+        } catch (Exception e) {
+          LOG.error("Cannot init activity from plugin {}, {}", plugin.getProviderName(), e.getMessage());
+        }
+      });
 
     }
 
     // Init preview links for each of file
     for (int index = 0; index < getFilesCount(); index++) {
       Node node = getContentNode(index);
-      List<EditorButton> buttons = new ArrayList<>();
-      for (DocumentEditorPlugin plugin : documentService.getRegisteredEditorPlugins()) {
-        try {
-          EditorButton button =
-                              plugin.getEditorButton(node.getUUID(), node.getSession().getWorkspace().getName(), STREAM_CONTEXT);
-          buttons.add(button);
-          plugin.initPreview(button.getFileId(), activityId, index);
-        } catch (Exception e) {
-          LOG.error("Cannot get editor button or init preview from customize plugin {}, {}",
-                    plugin.getProviderName(),
-                    e.getMessage());
-        }
-      }
-      String jsonButtons = new Gson().toJson(buttons);
+      Map<DocumentEditorPlugin, EditorButton> pluginButtons = getEditorsButtons(node);
+
+      String jsonButtons = new Gson().toJson(pluginButtons.values());
       js.require("SHARED/editorbuttons", "editorbuttons")
         .addScripts("editorbuttons.initPreviewButtons('" + jsonButtons + "', '" + activityId + "', '" + index + "');");
+
+      // call plugins init handlers
+      for (Map.Entry<DocumentEditorPlugin, EditorButton> entry : pluginButtons.entrySet()) {
+        DocumentEditorPlugin plugin = entry.getKey();
+        EditorButton editorButton = entry.getValue();
+        try {
+          plugin.initPreview(editorButton.getFileId(), activityId, index);
+        } catch (Exception e) {
+          LOG.error("Cannot init activity from plugin {}, {}", plugin.getProviderName(), e.getMessage());
+        }
+      }
     }
-    
     super.end();
   }
 
@@ -147,6 +142,27 @@ public class DocumentUIActivity extends FileUIActivity {
   @UIExtensionFilters
   public List<UIExtensionFilter> getFilters() {
     return FILTERS;
+  }
+
+  /**
+   * Gets the editors buttons.
+   *
+   * @param node the node
+   * @return the editors buttons
+   */
+  protected Map<DocumentEditorPlugin, EditorButton> getEditorsButtons(Node node) {
+    Map<DocumentEditorPlugin, EditorButton> pluginButtons = new HashMap<>();
+    documentService.getRegisteredEditorPlugins().forEach(plugin -> {
+      try {
+        pluginButtons.putIfAbsent(plugin,
+                                  plugin.getEditorButton(node.getUUID(),
+                                                         node.getSession().getWorkspace().getName(),
+                                                         STREAM_CONTEXT));
+      } catch (Exception e) {
+        LOG.error("Cannot get editor button from customize plugin {}, {}", plugin.getProviderName(), e.getMessage());
+      }
+    });
+    return pluginButtons;
   }
 
 }
