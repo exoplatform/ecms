@@ -36,8 +36,9 @@ public interface DocumentEditorPlugin {
    * @param template the document template
    * @param parentPath the parent path
    * @param title the title
+   * @throws Exception the exception
    */
-  void beforeDocumentCreate(DocumentTemplate template, String parentPath, String title);
+  void beforeDocumentCreate(DocumentTemplate template, String parentPath, String title) throws Exception ;
 
   /**
    * This handler is invoked after creation a new document via NewDocumentTemplatePlugin

@@ -1,3 +1,34 @@
 #uiActionsBarContainer .uiIconEcmsNewDocument:before {
   content: "\e637";
 }
+
+.editorButtonContainer {
+  display: inline;
+  
+  border: 1px solid #fff;
+
+}
+
+.editorButtonContainer .dropdown-container {
+  position: relative;
+  display: inline;
+}
+
+.editorButtonContainer .dropdown-container .dropdown-menu {
+  position: absolute;
+  top: 100%;
+  margin-left: -140px !important; 
+  margin-top: 5px !important;
+}
+
+.editorButtonContainer .dropdown-container .dropdown-menu li {
+  display: block !important;
+}
+
+.editorButtonContainer .dropdown-container .dropdown-menu li a {
+ padding: 7px 12px;
+}
+
+.editorButtonContainer .dropdown-toggle {
+  padding: 2px;
+}
