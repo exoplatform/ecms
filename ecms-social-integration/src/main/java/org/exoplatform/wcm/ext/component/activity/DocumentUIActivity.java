@@ -99,7 +99,7 @@ public class DocumentUIActivity extends FileUIActivity {
           LOG.error("Cannot init activity from plugin {}, {}", plugin.getProviderName(), e.getMessage());
         }
       });
-      require.addScripts("editorbuttons.initActivityButtons('" + activityId + "');");
+      require.addScripts("editorbuttons.initActivityButtons('" + activityId + "', '" + node.getUUID() + "');");
 
     }
 

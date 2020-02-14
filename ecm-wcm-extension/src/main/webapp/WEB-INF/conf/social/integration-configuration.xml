@@ -13,6 +13,9 @@
   <component>
     <type>org.exoplatform.wcm.ext.component.document.service.ContentViewerRESTService</type>
   </component>
+   <component>
+    <type>org.exoplatform.wcm.ext.component.document.service.DocumentEditorsRESTService</type>
+  </component>
   <component>
     <type>org.exoplatform.social.ckeditor.HTMLUploadImageProcessor</type>
   </component>

@@ -4,12 +4,50 @@
 (function($) {
   "use strict";
 
-  // Functions to create editor buttons
-  var buttonsFns = [];
   /**
    * Editor core class.
    */
   function EditorButtons() {
+
+    // Functions to create editor buttons
+    var buttonsFns = [];
+    
+    var pageBaseUrl = function(theLocation) {
+      if (!theLocation) {
+        theLocation = window.location;
+      }
+
+      var theHostName = theLocation.hostname;
+      var theQueryString = theLocation.search;
+
+      if (theLocation.port) {
+        theHostName += ":" + theLocation.port;
+      }
+
+      return theLocation.protocol + "//" + theHostName;
+    };
+    
+    var prefixUrl = pageBaseUrl(location);
+    
+    var savePreferedProvider = function(fileId, provider){
+      $.ajax({
+        async : true,
+        type : "POST",
+        contentType: "application/json",
+        url : prefixUrl + "/portal/rest/documents/editors/preffered/" + fileId,
+        data : {
+          userId : eXo.env.portal.userName,
+          provider : provider
+        },
+        success: function(result) {
+          console.log("Provider " + provider + " saved. " + result);
+        },
+        error : function(xhr,status,error) {
+          console.log("Provider " + provider + " not saved. " + status + " " + error);
+        }
+      });
+    }
+    
     /*
     var addEditorButtons = function(buttons, $target) {
       
@@ -22,25 +60,26 @@
       $container.append($editorButton);
     };*/
 
-    this.initActivityButtons = function(activityId) {
+    this.initActivityButtons = function(activityId, fileId) {
+      if(buttonsFns.length == 0) {
+        return;
+      }
       console.log("Activity buttons: " + JSON.stringify(buttonsFns));
       var $target = $("#activityContainer" + activityId).find("div[id^='ActivityContextBox'] > .actionBar .statusAction.pull-left");
       var $container = $target.find(".editorButtonContainer");
       if ($container.length == 0) {
-        $container = $("<div class='editorButtonContainer'></div>");
+        $container = $("<div class='editorButtonContainer hidden-tabletL'></div>");
         $target.append($container);
       }
       
+      var $btn = buttonsFns[0].createButtonFn();
+      $container.append($btn);
+      let provider = buttonsFns[0].provider;
+      $btn.click(function() {
+        console.log("prefered provider: " + provider);
+      });
       
-      if(buttonsFns.length == 1) {
-        var $btn = buttonsFns[0].createButtonFn();
-        console.log("BTN: " + JSON.stringify($btn));
-        $container.append($btn);
-      } else {
-        var $btn = buttonsFns[0].createButtonFn();
-        console.log("BTN: " + JSON.stringify($btn));
-        $container.append($btn);
-        
+      if(buttonsFns.length > 1) {
         var $dropdownContainer = $("<div class='dropdown-container'></div>");
         var $toggle = $("<button class='btn dropdown-toggle' data-toggle='dropdown'>" +
         "<i class='uiIconArrowDown uiIconLightGray'></i></span></button>");
@@ -49,7 +88,11 @@
         
         for(var i = 1; i < buttonsFns.length; i++) {
           var $btn = buttonsFns[i].createButtonFn();
-          console.log("BTN to dropdown: " + JSON.stringify($btn));
+          let provider = buttonsFns[i].provider;
+          $btn.click(function() {
+            console.log("prefered provider: " + provider);
+            savePreferedProvider(fileId, provider);
+          });
           $dropdown.append($btn);
         }
         $dropdownContainer.append($toggle);

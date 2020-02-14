@@ -16,8 +16,8 @@
 
 .editorButtonContainer .dropdown-container .dropdown-menu {
   position: absolute;
-  top: 100%;
-  margin-left: -140px !important; 
+  top: 100%; /* Bottom of button */
+  margin-left: -140px !important; /* More to the left */
   margin-top: 5px !important;
 }
 
@@ -27,6 +27,18 @@
 
 .editorButtonContainer .dropdown-container .dropdown-menu li a {
  padding: 7px 12px;
+}
+
+.editorButtonContainer .dropdown-container .dropdown-menu li a i {
+ margin-right: 5px;
+}
+
+.editorButtonContainer .dropdown-container .dropdown-menu li a:hover {
+ color: white !important;
+}
+
+.editorButtonContainer .dropdown-container .dropdown-toggle {
+  background-color: #f3f3f3;
 }
 
 .editorButtonContainer .dropdown-toggle {
