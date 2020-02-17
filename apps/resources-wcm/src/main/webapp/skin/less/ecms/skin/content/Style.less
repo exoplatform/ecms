@@ -1,0 +1,68 @@
+.uiHomePagePortlet{
+	padding: 20px;
+	.uiWorkingWorkspace{
+		padding: 20px;
+		height: auto;
+		.actionBar{
+			.filterTitle {
+				padding: 4px 8px 4px 4px;
+			}
+			.selectbox {
+				margin: 0;
+			}
+			.actionIcon{
+				margin-left: 8px;
+				color: @textColor;
+				text-decoration: none;
+				.uiIconUpload {
+				    margin-right: 5px;
+				}
+			}
+			.uiGrayLightBox{
+				border-radius: 2px;
+				padding: 4px 9px;
+			}
+			.btn-group{
+				margin-top: 1px;
+				.btn{
+					padding: 4px 7px;
+					margin-left: -1px;
+				}
+				
+			}
+			.btn-group .btn:nth-last-child(2):hover{
+				border-radius: 0 3px 3px 0;
+			}
+		}
+		.breadcumbsPortlet{
+			height: auto;
+			margin-top: 20px;
+			margin-bottom: 20px;
+			.breadcrumb{
+				border: 1px solid @borderColor;
+				border-radius: 2px;
+				padding: 8px 15px;
+			}
+		}
+		.listContainer{
+			.leftWorkspace{
+				background: @baseBackground;
+			}
+			.rightWorkspace {
+				.listView {
+					a.Item {
+						cursor: pointer;
+					}
+				}
+			}
+			.uiPageIterator {
+				li > a {
+					cursor: pointer;
+				}
+				.Page > i {
+					margin-top: 4px;
+				}
+			}
+		}
+	}
+}

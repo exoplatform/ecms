@@ -1,0 +1,171 @@
+.uiSEOForm {
+	min-width: 600px;
+	background: @primaryBackgroundLight;
+	margin: -10px;
+
+	.formContainer .leftContainer {
+		float: left;
+		width: 165px;
+		padding: 20px 0px 0px 10px;
+
+		.itemTab {
+			border: 1px solid @primaryBackgroundLight;
+			margin: 0px 0px 5px 0;
+			cursor: pointer;
+			line-height: 27px;
+			.border-left-radius(3px);
+
+			&:hover {
+				background: @primaryBackgroundHover;
+				border: 1px solid @primaryBackgroundHover;
+			}
+
+			a {
+				color: @textColor;
+			}
+		}
+
+		.seoLanguage {
+			margin-bottom: 15px;
+		}
+
+		.selected {
+			background: @baseBackground;
+			margin: 0px 0px 5px 0;
+			border: 1px solid @borderColor;
+			border-right: 1px solid @baseBackground;
+			box-shadow: -2px 2px 2px rgba(0,0,0,0.15);
+
+			&:hover {
+				background: @baseBackground;
+				border: 1px solid @borderColor;
+				border-right: 1px solid @baseBackground;
+			}
+
+			a {
+				font-weight: bold;
+			}
+		}
+
+		.uiIconDelete {
+			margin: 5px 5px 0px 0px;
+		}
+
+		.addNewSEO {
+			margin-left: 15px;
+		}
+
+		.selectSEOLanguage {
+			display: none;
+			margin-left: 5px;
+		}
+
+		.uiSelectbox {
+			width: 145px;
+
+			.selectbox {
+				width: 148px;
+			}
+		}
+	}
+
+	.formContainer .rightContainer {
+		padding: 10px;
+		margin-left: 175px;
+		background: @baseBackground;
+
+		.textarea {
+			height: 60px;
+			vertical-align: top;
+		}
+	}
+
+	.form-horizontal {
+		padding-top: 12px;
+		position: relative;
+
+		.control-label {
+			width: 90px;
+		}
+
+		.controls {
+			margin-left: 100px;
+
+			.uiSelectbox {
+				width: 100px;
+
+				.selectbox {
+					width: 103px;
+				}
+			}
+		}
+	}
+
+	.uiActionSEO {
+		margin-left:-10px!important;
+	}
+
+	[class^="uiIconSeo"] {
+		//background: url("@{images-path}/Icons/uiIconsColor.png");
+		margin: 0px 0px 0px 5px;
+        font-size: 12px;
+        &:before {
+            color: @errorColor;
+        }
+	}
+
+	.uiIconSeoEmpty {
+        &:before {
+            content: "\e76e";// uiIconStatus
+            color: @errorColor;
+        }
+	}
+
+	.uiIconSeoPartial {
+        &:before {
+            content: "\e76e";// uiIconStatus
+            color: @colorIconOrange;
+        }
+	}
+
+	.uiIconSeoFull {
+        &:before {
+            content: "\e76e";// uiIconStatus
+            color: @successColor;
+        }
+	}
+}
+/************** For edit UISEOForm ***********************/
+.uiSEOForm {
+
+	.formContainer .ResizeSideBar {
+		float: right;
+		width: 14px;
+	}
+
+	.formContainer .ResizeSideBar .ResizeButton {
+		//background: url("/ecmexplorer/skin/webui/component/explorer/UIJCRExplorer/DefaultSkin/background/ShowLeftContent.gif") no-repeat scroll center center transparent;
+		cursor: pointer;
+		margin: auto;
+		width: 14px;
+		display: block;
+		margin: auto;
+		position: static;
+	}
+
+	.formContainer .ResizeSideBar .ShowRightContent {
+//background: url("/ecmexplorer/skin/webui/component/explorer/UIJCRExplorer/DefaultSkin/background/ResizeButton.gif") no-repeat scroll center center transparent;
+		cursor: pointer;
+		height: 14px;
+		margin: auto;
+		width: 14px;
+		display: block;
+		margin: auto;
+		position: static;
+	}
+	@media screen and (-webkit-min-device-pixel-ratio:0) {
+		.seoSitemap {
+			margin-left: 16px;
+		}
+	}
+}

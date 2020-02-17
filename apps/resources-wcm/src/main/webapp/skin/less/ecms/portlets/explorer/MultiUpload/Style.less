@@ -1,0 +1,188 @@
+/* ======== Multi Upload  ==========*/
+.uiMultiUpload {
+	margin: 10px 0;
+	position: fixed;
+	font-size: 12px;
+	bottom: 0;
+	right: 27px;
+  z-index: 999;
+
+	a {
+		color: @linkColor;
+		text-decoration: none;
+	}
+
+	.multiUploadDragFileBackground {
+		position: absolute;
+		background: rgba(235, 235, 235, 0.8);
+		border: 4px dashed @borderColor;
+		right: 0px;
+		top: 0px;
+		width: 644px;
+		height: 99%;
+		z-index:1;
+		display: none;
+		margin: -4px 0px 0px 0px;
+
+		.multiUploadDragFile {
+			text-align: center;
+			font-size: 18px;
+			color: @textColor;
+			z-index:2;
+			position: absolute;
+			width: 100%;
+			top: 30%;
+		}
+	}
+
+	.uiBox {
+		margin: 0px;
+	}
+    @media (min-width: 1265px) {
+        .uiBox {
+            width: 680px;
+            float: right;
+        }
+    }
+
+	.uploadIconContainer {
+		float: left;
+		width: 30px;
+
+		img {
+			width: 20px;
+			.border-radius(2px);
+		}
+	}
+
+	.multiUploadAbortAll  {
+		margin-left: 8px;
+		.action {
+			cursor:pointer;
+			color: @textColor;
+			&:hover {
+				color: @linkColorHover;
+			}
+		}
+	}
+
+	.loadContent {
+		padding: 10px !important;
+
+		&:hover {
+			background: @primaryBackgroundLight;
+		}
+
+		.fileName {
+			cursor: pointer;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+
+			a {
+				color: @textColor;
+			}
+		}
+
+		.fileSize {
+			width: 100px;
+			text-align: right;
+			font-weight: bold;
+			font-style: normal;
+		}
+		.warningContainer {
+			margin-right: 10px;
+		}
+
+		.action {
+			margin-left: 5px;
+		}
+
+		.loaddingPercent {
+			width: 270px;
+			height: 15px;
+			text-align: center;
+			background: @baseBackground;
+			border: 1px solid @borderColor;
+			position: relative;
+		}
+
+		.loadding {
+			background: @primaryBackground;
+			height: 15px;
+			display: block;
+		}
+		.cancelStatus {
+			font-weight: normal;
+			font-style: normal;
+		}
+		.percent {
+			position: absolute;
+			z-index: 10;
+			top: -3px;
+			left: 40%;
+		}
+
+		.progress {
+			width: 270px;
+			position: relative;
+			margin: 0;
+			.border-radius(3px);
+			.textPercent {
+			    left: 5px;
+			    position: absolute;
+			    top: 0;
+                color: @baseBackground;
+			    text-shadow: none;
+			}
+		}
+		.actionIcon {
+		    margin-left: 10px;
+    		margin-top: -2px;
+		}
+		.uiIconRemove {
+			cursor: pointer;
+		}
+	}
+
+	.multiUploadListSeperator {
+		border-top: 1px solid @borderColor;
+		display: block;
+	}
+
+	.multiUploadFileList {
+		overflow-y: auto;
+		max-height: 163px;
+
+		.loadContent .Action {
+			color: @primaryColor;
+			height: 20px;
+			text-align: center;
+			cursor: pointer;
+		}
+	}
+
+	.multiUploadFilesShortInfo {
+		[class^="uiIcon"] {
+			margin: 2px 0px 0px 8px;
+		}
+	}
+
+  	//Changing to a font-icon
+	.uiIconWarning {
+	  	color: @warningColor;
+	}
+
+	.uiIconMultiUploadClose:before {
+        content: "\e76d";
+        color: @errorColor;
+	}
+
+	.uiIconNoneClose:before {
+        content: "\e76d";
+	}
+}
+
+.noShow {
+	display:none;
+}
