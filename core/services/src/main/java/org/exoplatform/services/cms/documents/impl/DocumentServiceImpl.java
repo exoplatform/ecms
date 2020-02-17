@@ -95,6 +95,9 @@ public class DocumentServiceImpl implements DocumentService {
   public static final String JCR_MIME_TYPE = "jcr:mimeType";
   public static final String EXO_OWNER_PROP = "exo:owner";
   public static final String EXO_TITLE_PROP = "exo:title";
+  private static final String EXO_DOCUMENT = "exo:document";
+  private static final String EXO_USER_PREFFERENCES = "exo:userPrefferences";
+  private static final String EXO_PREFFERED_EDITOR = "exo:prefferedEditor";
   public static final String CURRENT_STATE_PROP = "publication:currentState";
   public static final String DOCUMENTS_APP_NAVIGATION_NODE_NAME = "documents";
   public static final String DOCUMENT_NOT_FOUND = "?path=doc-not-found";
@@ -540,5 +543,54 @@ public class DocumentServiceImpl implements DocumentService {
   public boolean hasDocumentEditorPlugins() {
     return editorPlugins.size() > 0;
   }
+  
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setPrefferedEditor(String userId, String provider, String uuid, String workspace) throws Exception {
+    Node node = nodeByUUID(uuid, workspace);
+    if (node.canAddMixin(EXO_DOCUMENT)) {
+      node.addMixin(EXO_DOCUMENT);
+    }
+    Node userPrefferences;
+    if (!node.hasNode(userId)) {
+      userPrefferences = node.addNode(userId, EXO_USER_PREFFERENCES);
+    } else {
+      userPrefferences = node.getNode(userId);
+    }
+    userPrefferences.setProperty(EXO_PREFFERED_EDITOR, provider);
+    node.save();
+  }
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getPrefferedEditor(String userId, String uuid, String workspace) throws Exception {
+    Node node = nodeByUUID(uuid, workspace);
+    if (node.hasNode(userId)) {
+      Node userPrefferences = node.getNode(userId);
+      if (userPrefferences.hasProperty(EXO_PREFFERED_EDITOR)) {
+        return userPrefferences.getProperty(EXO_PREFFERED_EDITOR).getString();
+      }
+    }
+    return null;
+  }
+
+  /**
+   * Gets the user session.
+   *
+   * @param workspace the workspace
+   * @return the user session
+   * @throws RepositoryException the repository exception
+   */
+  protected Node nodeByUUID(String uuid, String workspace) throws RepositoryException {
+    if (workspace == null) {
+      workspace = repoService.getCurrentRepository().getConfiguration().getDefaultWorkspaceName();
+    }
+    SessionProvider sp = sessionProviderService.getSessionProvider(null);
+    Session session = sp.getSession(workspace, repoService.getCurrentRepository());
+    return session.getNodeByUUID(uuid);
+  }
 }

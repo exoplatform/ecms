@@ -26,6 +26,7 @@ import org.exoplatform.services.cms.documents.DocumentEditorPlugin;
 import org.exoplatform.services.cms.documents.DocumentService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.social.webui.activity.BaseUIActivity;
 import org.exoplatform.web.application.JavascriptManager;
 import org.exoplatform.web.application.RequireJS;
@@ -99,7 +100,9 @@ public class DocumentUIActivity extends FileUIActivity {
           LOG.error("Cannot init activity from plugin {}, {}", plugin.getProviderName(), e.getMessage());
         }
       });
-      require.addScripts("editorbuttons.initActivityButtons('" + activityId + "', '" + node.getUUID() + "');");
+      String prefferedEditor = getPrefferedEditor(node);
+      require.addScripts("editorbuttons.initActivityButtons('" + activityId + "', '" + node.getUUID() + "', '"
+          + node.getSession().getWorkspace().getName() + "'," + prefferedEditor + ");");
 
     }
 
@@ -115,7 +118,8 @@ public class DocumentUIActivity extends FileUIActivity {
           LOG.error("Cannot init preview from plugin {}, {}", plugin.getProviderName(), e.getMessage());
         }
       }
-      require.addScripts("editorbuttons.initPreviewButtons('" + activityId + "', '" + index + "');");
+      String prefferedEditor = getPrefferedEditor(node);
+      require.addScripts("editorbuttons.initPreviewButtons('" + activityId + "', '" + index + "', " + prefferedEditor + ");");
     }
     super.end();
   }
@@ -130,4 +134,23 @@ public class DocumentUIActivity extends FileUIActivity {
     return FILTERS;
   }
 
+  
+  /**
+   * Gets the preffered editor.
+   *
+   * @param node the node
+   * @return the preffered editor
+   * @throws Exception the exception
+   */
+  protected String getPrefferedEditor(Node node) throws Exception {
+    String userId = ConversationState.getCurrent().getIdentity().getUserId();
+    String prefferedEditor =
+                           documentService.getPrefferedEditor(userId, node.getUUID(), node.getSession().getWorkspace().getName());
+    if (prefferedEditor != null) {
+      prefferedEditor = "'" + prefferedEditor + "'";
+    } else {
+      prefferedEditor = "null".intern();
+    }
+    return prefferedEditor;
+  }
 }

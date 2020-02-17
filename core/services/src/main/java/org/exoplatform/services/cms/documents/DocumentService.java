@@ -155,6 +155,28 @@ public interface DocumentService {
    * @return true, if successful
    */
   public boolean hasDocumentTemplatePlugins();
+  
+  /**
+   * Gets preffered editor provider for specified file and user.
+   *
+   * @param userId the userId
+   * @param uuid the uuid
+   * @param workspace the workspace
+   * @return the preffered editor (provider)
+   * @throws Exception the exception
+   */
+  public String getPrefferedEditor(String userId, String uuid, String workspace) throws Exception;
+  
+  /**
+   * Sets preffered editor provider for specified file and user.
+   *
+   * @param userId the userId
+   * @param provider the editor provider
+   * @param uuid the uuid
+   * @param workspace the workspace
+   * @throws Exception the exception
+   */
+  public void setPrefferedEditor(String userId, String provider, String uuid, String workspace) throws Exception;
 
   /**
    * NewDocumentTypesConfig contains all registered templates for specified provider.
