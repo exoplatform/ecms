@@ -119,7 +119,7 @@ public class DocumentUIActivity extends FileUIActivity {
         }
       }
       String prefferedEditor = getPrefferedEditor(node);
-      require.addScripts("editorbuttons.initPreviewButtons('" + activityId + "', '" + index + "', " + prefferedEditor + ");");
+      require.addScripts("editorbuttons.initPreviewButtons('" + activityId + "', '" + index + "', '" + node.getUUID() + "', " + prefferedEditor + ");");
     }
     super.end();
   }

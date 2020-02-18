@@ -4,6 +4,39 @@
 (function($) {
   "use strict";
 
+  /** For debug logging. */
+  var log = function(msg, err) {
+    var logPrefix = "[editorbuttons] ";
+    if (typeof console != "undefined" && typeof console.log != "undefined") {
+      var isoTime = " -- " + new Date().toISOString();
+      var msgLine = msg;
+      if (err) {
+        msgLine += ". Error: ";
+        if (err.name || err.message) {
+          if (err.name) {
+            msgLine += "[" + err.name + "] ";
+          }
+          if (err.message) {
+            msgLine += err.message;
+          }
+        } else {
+          msgLine += (typeof err === "string" ? err : JSON.stringify(err)
+              + (err.toString && typeof err.toString === "function" ? "; " + err.toString() : ""));
+        }
+
+        console.log(logPrefix + msgLine + isoTime);
+        if (typeof err.stack != "undefined") {
+          console.log(err.stack);
+        }
+      } else {
+        if (err !== null && typeof err !== "undefined") {
+          msgLine += ". Error: '" + err + "'";
+        }
+        console.log(logPrefix + msgLine + isoTime);
+      }
+    }
+  };
+  
   /**
    * Editor core class.
    */
@@ -42,10 +75,10 @@
           workspace : currentWorkspace
         }),
         success: function(result) {
-          console.log("Provider " + provider + " saved. " + result);
+          log("Provider " + provider + " saved. " + result);
         },
         error : function(xhr,status,error) {
-          console.log("Provider " + provider + " not saved. " + status + " " + error);
+          log("Provider " + provider + " not saved. " + status + " " + error);
         }
       });
     };
@@ -64,13 +97,29 @@
     };*/
 
     this.initActivityButtons = function(activityId, fileId, workspace, prefferedProvider) {
-      console.log("PREFFERED PROVIDER FOR " + fileId + " is " + prefferedProvider);
-      if(buttonsFns.length == 0) {
+      var buttons = buttonsFns.slice();
+      if(buttons.length == 0) {
         return;
       }
       currentWorkspace = workspace;
-      console.log("Activity buttons: " + JSON.stringify(buttonsFns));
+      log("Init Activity buttons: " + JSON.stringify(buttons));
+      // Sort buttons in user prefference order
+      if(prefferedProvider != null) {
+        buttons.forEach(function(item,i){
+          if(item.provider === prefferedProvider){
+            buttons.splice(i, 1);
+            buttons.unshift(item);
+          }
+        });
+      }
       var $target = $("#activityContainer" + activityId).find("div[id^='ActivityContextBox'] > .actionBar .statusAction.pull-left");
+      addEditorButtons($target, fileId, buttons);
+    };
+    
+    var addEditorButtons = function($target, fileId, buttons) {
+      if(!buttons) {
+        return;
+      }
       // Add buttons container
       var $container = $target.find(".editorButtonContainer");
       if ($container.length == 0) {
@@ -78,38 +127,29 @@
         $target.append($container);
       }
       
-      // Sort buttons in user prefference order
-      if(prefferedProvider != null) {
-        buttonsFns.forEach(function(item,i){
-          if(item.provider === prefferedProvider){
-            buttonsFns.splice(i, 1);
-            buttonsFns.unshift(item);
-          }
-        });
-      }
-      
       // Create editor button
-      var $btn = buttonsFns[0].createButtonFn();
+      var $btn = buttons[0].createButtonFn();
       $container.append($btn);
-      let provider = buttonsFns[0].provider;
+      let provider = buttons[0].provider;
       $btn.click(function() {
-        console.log("prefered provider: " + provider);
+        log("prefered provider: " + provider);
+        savePreferedProvider(fileId, provider);
       });
       
       // Create pulldown with editor buttons
-      if(buttonsFns.length > 1) {
+      if(buttons.length > 1) {
         var $dropdownContainer = $("<div class='dropdown-container'></div>");
         var $toggle = $("<button class='btn dropdown-toggle' data-toggle='dropdown'>" +
         "<i class='uiIconArrowDown uiIconLightGray'></i></span></button>");
         
         var $dropdown = $("<ul class='dropdown-menu'></ul>");
         
-        for(var i = 1; i < buttonsFns.length; i++) {
-          var $btn = buttonsFns[i].createButtonFn();
-          let provider = buttonsFns[i].provider;
+        for(var i = 1; i < buttons.length; i++) {
+          var $btn = buttons[i].createButtonFn();
+          let provider = buttons[i].provider;
           // Save user choice
           $btn.click(function() {
-            console.log("prefered provider: " + provider);
+            log("prefered provider: " + provider);
             savePreferedProvider(fileId, provider);
           });
           $dropdown.append($btn);
@@ -120,14 +160,77 @@
       }
     };
     
-    this.initPreviewButtons = function(activityId, index, prefferedProvider) {
-      console.log("Preview buttons: " + JSON.stringify(buttonsFns));
+    /**
+     * Adds the 'Edit Online' button to a preview (from the activity stream) when it's loaded.
+     */
+    var tryAddEditorButtonToPreview = function(attempts, delay, fileId, buttons) {
+      var $elem = $("#uiDocumentPreview .previewBtn");
+      if ($elem.length == 0 || !$elem.is(":visible")) {
+        if (attempts > 0) {
+          setTimeout(function() {
+            tryAddEditorButtonToPreview(attempts - 1, delay, fileId);
+          }, delay);
+        } else {
+          log("Cannot find element " + $elem);
+        }
+      } else {
+        addEditorButtons($elem, fileId, buttons);
+        $(".previewBtn .editorButtonContainer").addClass("dropup");
+      }
+    };
+    
+    /**
+     * Adds the 'Edit Online' button to No-preview screen (from the activity stream) when it's loaded.
+     */
+    var tryAddEditorButtonNoPreview = function(attempts, delay, fileId, buttons) {
+      var $elem = $("#documentPreviewContainer .navigationContainer.noPreview");
+      if ($elem.length == 0 || !$elem.is(":visible")) {
+        if (attempts > 0) {
+          setTimeout(function() {
+            tryAddEditorButtonNoPreview(attempts - 1, delay, fileId);
+          }, delay);
+        } else {
+          log("Cannot find .noPreview element");
+        }
+      } else if ($elem.find("div.editorButtonContainer").length == 0) {
+        var $detailContainer = $elem.find(".detailContainer");
+        var $downloadBtn = $detailContainer.find(".uiIconDownload").closest("a.btn");
+        var $target = $("<div style='display: inline;'></div>");
+        if ($downloadBtn.length != 0) {
+          $downloadBtn.after($target);
+        } else {
+          $detailContainer.append($target);
+        }
+        addEditorButtons($target, fileId, buttons);
+      }
+    };
+    
+    this.initPreviewButtons = function(activityId, index, fileId, prefferedProvider) {
+      var buttons = buttonsFns.slice();
+      log("Preview buttons: " + JSON.stringify(buttons));
+      var clickSelector = "#Preview" + activityId + "-" + index;
+      if(prefferedProvider != null) {
+        buttons.forEach(function(item,i){
+          if(item.provider === prefferedProvider){
+            buttons.splice(i, 1);
+            buttons.unshift(item);
+          }
+        });
+      }
+      $(clickSelector).click(function() {
+        // We set timeout here to avoid the case when the element is rendered but is going to be updated soon
+        setTimeout(function() {
+          tryAddEditorButtonToPreview(100, 100, fileId, buttons);
+          // We need wait for about 2min when doc cannot generate its preview
+          tryAddEditorButtonNoPreview(600, 250, fileId, buttons);
+        }, 100);
+      });
     };
     
     
     
     this.addCreateButtonFn = function(provider, createButtonFn) {
-      console.log("Add create button fn: " + provider + " " + createButtonFn);
+      log("Add create button fn: " + provider);
       var buttonFn = { "provider" : provider, "createButtonFn" : createButtonFn };
       var index = buttonsFns.findIndex(elem => elem.provider === provider);
       if (index === -1) {
@@ -138,7 +241,7 @@
     };
     
     this.resetButtons = function() {
-      console.log("reset buttons");
+      log("Reset buttons");
       buttonsFns = [];
     }
     
