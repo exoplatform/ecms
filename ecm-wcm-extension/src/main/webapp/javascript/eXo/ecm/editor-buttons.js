@@ -37,86 +37,61 @@
     }
   };
   
+  var pageBaseUrl = function(theLocation) {
+    if (!theLocation) {
+      theLocation = window.location;
+    }
+
+    var theHostName = theLocation.hostname;
+    var theQueryString = theLocation.search;
+
+    if (theLocation.port) {
+      theHostName += ":" + theLocation.port;
+    }
+
+    return theLocation.protocol + "//" + theHostName;
+  };
+  
+  
+  
   /**
    * Editor core class.
    */
   function EditorButtons() {
 
     // Functions to create editor buttons
-    var buttonsFns = [];
-    
-    var pageBaseUrl = function(theLocation) {
-      if (!theLocation) {
-        theLocation = window.location;
-      }
-
-      var theHostName = theLocation.hostname;
-      var theQueryString = theLocation.search;
-
-      if (theLocation.port) {
-        theHostName += ":" + theLocation.port;
-      }
-
-      return theLocation.protocol + "//" + theHostName;
-    };
-    
+    var buttonsFns = []; 
     var prefixUrl = pageBaseUrl(location);
     var currentWorkspace;
     
+    /**
+     * Saves prefered provider.
+     * 
+     */
     var savePreferedProvider = function(fileId, provider){
       $.ajax({
         async : true,
         type : "POST",
         contentType: "application/json",
-        url : prefixUrl + "/portal/rest/documents/editors/preffered/" + fileId,
+        url : prefixUrl + "/portal/rest/documents/editors/prefered/" + fileId,
         data : JSON.stringify({
           userId : eXo.env.portal.userName,
           provider : provider,
           workspace : currentWorkspace
         }),
         success: function(result) {
-          log("Provider " + provider + " saved. " + result);
+          log("Prefered provider " + provider + " saved. " + result);
         },
         error : function(xhr,status,error) {
-          log("Provider " + provider + " not saved. " + status + " " + error);
+          log("Cannot save prefered provider " + provider + ": " + status + " " + error);
         }
       });
     };
-
     
-    /*
-    var addEditorButtons = function(buttons, $target) {
-      
-      var $container = $target.find(".editorButtonContainer");
-      if ($container.length == 0) {
-        $container = $("<div class='editorButtonContainer'></div>");
-        $target.append($container);
-      }
-      var $editorButton = $("<a title=\"\" data-placement=\bottom\" data-toggle=\"tooltip\" data-original-title=\"Click to start editing\" class=\"btn\"><i class=\"uiIconEdit uiIconLightGray\"></i><span class=\"editorLabel\">" + buttons[0].label + "</span></a>");
-      $container.append($editorButton);
-    };*/
-
-    this.initActivityButtons = function(activityId, fileId, workspace, prefferedProvider) {
-      var buttons = buttonsFns.slice();
-      if(buttons.length == 0) {
-        return;
-      }
-      currentWorkspace = workspace;
-      log("Init Activity buttons: " + JSON.stringify(buttons));
-      // Sort buttons in user prefference order
-      if(prefferedProvider != null) {
-        buttons.forEach(function(item,i){
-          if(item.provider === prefferedProvider){
-            buttons.splice(i, 1);
-            buttons.unshift(item);
-          }
-        });
-      }
-      var $target = $("#activityContainer" + activityId).find("div[id^='ActivityContextBox'] > .actionBar .statusAction.pull-left");
-      addEditorButtons($target, fileId, buttons);
-    };
-    
-    var addEditorButtons = function($target, fileId, buttons) {
+    /**
+     * Adds editor buttons container (button and pulldown)
+     */
+    var addEditorButtonsContainer = function($target, fileId, buttons) {
       if(!buttons) {
         return;
       }
@@ -149,7 +124,6 @@
           let provider = buttons[i].provider;
           // Save user choice
           $btn.click(function() {
-            log("prefered provider: " + provider);
             savePreferedProvider(fileId, provider);
           });
           $dropdown.append($btn);
@@ -168,13 +142,13 @@
       if ($elem.length == 0 || !$elem.is(":visible")) {
         if (attempts > 0) {
           setTimeout(function() {
-            tryAddEditorButtonToPreview(attempts - 1, delay, fileId);
+            tryAddEditorButtonToPreview(attempts - 1, delay, fileId, buttons);
           }, delay);
         } else {
           log("Cannot find element " + $elem);
         }
       } else {
-        addEditorButtons($elem, fileId, buttons);
+        addEditorButtonsContainer($elem, fileId, buttons);
         $(".previewBtn .editorButtonContainer").addClass("dropup");
       }
     };
@@ -187,7 +161,7 @@
       if ($elem.length == 0 || !$elem.is(":visible")) {
         if (attempts > 0) {
           setTimeout(function() {
-            tryAddEditorButtonNoPreview(attempts - 1, delay, fileId);
+            tryAddEditorButtonNoPreview(attempts - 1, delay, fileId, buttons);
           }, delay);
         } else {
           log("Cannot find .noPreview element");
@@ -201,17 +175,46 @@
         } else {
           $detailContainer.append($target);
         }
-        addEditorButtons($target, fileId, buttons);
+        addEditorButtonsContainer($target, fileId, buttons);
       }
     };
     
-    this.initPreviewButtons = function(activityId, index, fileId, prefferedProvider) {
+    
+    /**
+     * Inits editor buttons on DocumentUIActivity.
+     * 
+     */
+    this.initActivityButtons = function(activityId, fileId, workspace, preferedProvider) {
       var buttons = buttonsFns.slice();
-      log("Preview buttons: " + JSON.stringify(buttons));
-      var clickSelector = "#Preview" + activityId + "-" + index;
-      if(prefferedProvider != null) {
+      if(buttons.length == 0) {
+        return;
+      }
+      currentWorkspace = workspace;
+      log("Init Activity buttons: " + JSON.stringify(buttons));
+      // Sort buttons in user prefference order
+      if(preferedProvider != null) {
         buttons.forEach(function(item,i){
-          if(item.provider === prefferedProvider){
+          if(item.provider === preferedProvider){
+            buttons.splice(i, 1);
+            buttons.unshift(item);
+          }
+        });
+      }
+      var $target = $("#activityContainer" + activityId).find("div[id^='ActivityContextBox'] > .actionBar .statusAction.pull-left");
+      addEditorButtonsContainer($target, fileId, buttons);
+    };
+    
+    /**
+     * Inits buttons on document preview.
+     * 
+     */
+    this.initPreviewButtons = function(activityId, index, fileId, preferedProvider) {
+      var buttons = buttonsFns.slice();
+      log("Init preview buttons: " + JSON.stringify(buttons));
+      var clickSelector = "#Preview" + activityId + "-" + index;
+      if(preferedProvider != null) {
+        buttons.forEach(function(item,i){
+          if(item.provider === preferedProvider){
             buttons.splice(i, 1);
             buttons.unshift(item);
           }
@@ -228,9 +231,11 @@
     };
     
     
-    
+    /**
+     * API for providers to add their editor buttons.
+     * 
+     */
     this.addCreateButtonFn = function(provider, createButtonFn) {
-      log("Add create button fn: " + provider);
       var buttonFn = { "provider" : provider, "createButtonFn" : createButtonFn };
       var index = buttonsFns.findIndex(elem => elem.provider === provider);
       if (index === -1) {
@@ -240,8 +245,11 @@
       }
     };
     
+    /**
+     * Clears buttonsFns
+     * 
+     */
     this.resetButtons = function() {
-      log("Reset buttons");
       buttonsFns = [];
     }
     

@@ -35,7 +35,7 @@ import org.exoplatform.services.rest.resource.ResourceContainer;
 
 /**
  * The Class DocumentEditorsRESTService is REST endpoint for working with editable documents.
- * Its used to set preffered editor for specific user/document.
+ * Its used to set prefered editor for specific user/document.
  *
  */
 @Path("/documents/editors")
@@ -57,16 +57,16 @@ public class DocumentEditorsRESTService implements ResourceContainer {
   }
 
   /**
-   * Sets the preffered editor for specific user/document.
+   * Sets the prefered editor for specific user/document.
    *
    * @param fileId the file id
    * @param data the data
    * @return the response
    */
   @POST
-  @Path("/preffered/{fileId}")
+  @Path("/prefered/{fileId}")
   @Consumes(MediaType.APPLICATION_JSON)
-  public Response prefferedEditor(@PathParam("fileId") String fileId, String data) {
+  public Response preferedEditor(@PathParam("fileId") String fileId, String data) {
     JSONParser parser = new JSONParser();
     Object obj = null;
     try {
@@ -81,9 +81,9 @@ public class DocumentEditorsRESTService implements ResourceContainer {
     String workspace = (String) jsonObj.get("workspace");
    
     try {
-      documentService.setPrefferedEditor(userId, provider, fileId, workspace);
+      documentService.setPreferedEditor(userId, provider, fileId, workspace);
     } catch (Exception e) {
-      LOG.error("Cannot set preffered editor for user {} and node {}: {}", userId, fileId, e.getMessage());
+      LOG.error("Cannot set prefered editor for user {} and node {}: {}", userId, fileId, e.getMessage());
       return Response.status(Status.INTERNAL_SERVER_ERROR).build();
     }
     return Response.ok().build();

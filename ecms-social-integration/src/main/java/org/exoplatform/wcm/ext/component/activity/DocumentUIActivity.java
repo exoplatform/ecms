@@ -145,7 +145,7 @@ public class DocumentUIActivity extends FileUIActivity {
   protected String getPrefferedEditor(Node node) throws Exception {
     String userId = ConversationState.getCurrent().getIdentity().getUserId();
     String prefferedEditor =
-                           documentService.getPrefferedEditor(userId, node.getUUID(), node.getSession().getWorkspace().getName());
+                           documentService.getPreferedEditor(userId, node.getUUID(), node.getSession().getWorkspace().getName());
     if (prefferedEditor != null) {
       prefferedEditor = "'" + prefferedEditor + "'";
     } else {
