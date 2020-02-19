@@ -230,7 +230,6 @@
       });
     };
     
-    
     /**
      * API for providers to add their editor buttons.
      * 
