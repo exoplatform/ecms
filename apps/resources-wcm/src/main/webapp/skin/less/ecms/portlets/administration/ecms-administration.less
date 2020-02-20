@@ -1,0 +1,303 @@
+@import "../../../variables.less"; 
+@import "../../../mixins.less";
+
+/*=========== Vetical tabs =============*/
+
+.uiECMAdminPortlet{
+	.uiResizableBlock{
+        @media (min-width: 980px){
+            .ShowSideBar{
+                margin-left: 256px;
+            }
+        }
+	}
+	.ecmAdminPanel{
+		height: 100%;
+		overflow: auto;
+		float: none;
+        margin: 15px;
+        @media (min-width: 980px){
+            width: 233px;
+            float: left;
+            padding: 24px 13px 0px 10px;
+            margin: 0;
+        }
+	}
+        .NotShowSideBar, .ShowSideBar {
+            > div {
+                overflow: auto;
+                width: 100%;
+                height: 100%;
+            }
+        }
+	.uiECMAdminWorkingArea{
+		margin: 24px 10px 10px;
+		.pagination{
+			margin: 0px 0px 9px 0px;
+		}
+		.uiPopup{
+			.control-group{
+				.controls{
+					.textarea{
+						height: 150px;
+						vertical-align: top;
+					}
+				}
+				.controls-full{
+					white-space: nowrap;
+					.control-label {
+						white-space: normal;
+					}
+					.textarea{
+						height: 150px;
+						vertical-align: top;
+						width: 100%;
+					}
+				}
+			}
+		}
+		.tabActions{
+			 width:240px; 
+			 float:left;
+			 margin: 0px;
+		}
+		.uiOneNodePathSelector{
+			.uiTreeList{
+				margin-left: 250px;
+			}
+			.breadcrumb{
+				background-color: @formActionsBackground;
+				border: 1px solid @borderColor;
+				border-radius: 0 0 0 0;
+				margin: 6px 0 20px;
+				padding: 8px 15px;
+			}
+			.control-label{
+				width: 84px;
+			}
+			.form-horizontal .controls{
+				margin-left: 100px;
+			}
+		}
+		.anyPermission .form-horizontal{
+			padding: 0px;
+		}
+	}
+	.uiNodeTypeList{
+		.pagination {
+			margin: 15px 0;
+		}
+		.allDocument{
+			margin: 15px 0;
+		}
+	}
+	
+	.uiNodeTypeUpload{
+		.form-horizontal .controls{
+				margin-left: 148px;
+			}
+	}
+	.UITagManager{
+		.uiIconRemove{
+			 background-position: -20px 0;
+		}
+	}
+	#UINodeTypeForm{
+		.RequiredTypeTab, .DefaultTypeTab{
+			.form-horizontal{
+				.controls{
+					margin-left: 0px;
+				}
+			}
+		}
+	}
+	.uiNamespaceForm{
+		.form-horizontal {
+			.control-group{
+				.controls-full{
+					margin-left: 180px;
+				}
+			}
+		}
+	}
+	
+}
+
+
+a:hover .uiIconEcmsFolksonomyManager{
+    color: @colorIconPrimary;
+}
+
+a:hover .uiIconEcmsTaxonomyManagerTrees{
+    color: @colorIconPrimary;
+}
+
+a:hover .uiIconEcmsActionManager{
+    color: @colorIconPrimary;
+}
+
+.uiIconEcmsUnLockManager{
+    color: @colorIconDefault;
+	background-position: -60px 0px;
+}
+
+a:hover .uiIconEcmsUnLockManager{
+    color: @colorIconPrimary;
+}
+
+.uiSearchBox {
+  margin: 0 0 14px 0;
+  padding: 8px;
+  border-radius: @baseBorderRadius;
+  border: 1px solid @borderColor;
+}
+
+.MultiValueContainer{
+	.multiFieldAction{
+		margin-left: 4px;
+	}
+}
+
+
+.UITaxonomyTreeCreateChild {
+	.breadcrumb{
+		border: 1px solid @primaryBackgroundHover;
+		background: @primaryBackgroundLight;
+		border-radius: 0px;
+		margin: 0 0 16px 0;
+		padding: 4px;
+	}
+	.uiTreeList{
+		margin-left: 244px;
+	}
+    .uiGrid {
+        table-layout: fixed;
+        tr th:first-child {
+            width: 40%;
+        }
+    }
+}
+
+.uiTaxonomyTreeWizard{
+	.wizardLabel{
+		padding: 0px 8px 14px;
+	}
+	.UIActionTaxonomyManager{
+		.form-horizontal{
+			padding-top: 0px;
+		}
+	}
+}
+
+.uiViewPermissionForm {
+	.tab_permission{
+		input{ margin: 0px;}
+	}
+}
+
+/*=========== Note type============*/
+
+.superTypeTab{
+	.controls{
+		margin: 0px;
+	}
+}
+
+/*=========== Note type============*/
+
+.uiNodeTypeImportPopup{
+	.form-horizontal{
+		.control-label{
+			display: none;
+		}
+	}
+}
+.uiNodeTypeExport{
+	.uiCheckbox{
+		width: 12px;
+		margin: auto;
+		display: block;
+	}
+	.form-horizontal {
+		.control-group {
+			.controls{
+				margin: 10px 20px 0;
+				.uiCheckbox{
+					margin: auto;
+				}
+			}
+		}
+	}
+}
+
+.UINodeTypeSelector{
+	.control-label{
+		width: auto;
+	}
+	.controls{
+		margin: 0px;
+	}
+}
+
+/*=========== uiPermissionForm ============*/
+
+.permission {
+		
+	.form-inline .checkbox {
+		margin-right: 15px;
+	}
+	
+	.controls {
+		margin-bottom: 10px;
+		
+		input {
+			margin: 0px; 
+		}
+		
+		.btn {
+			margin-left: 10px;
+		}
+	}
+}
+
+.UIActionTaxonomyManager{
+ .uiAddActionForm{
+ 	border-top: 1px solid @borderColor;
+ 	max-height: 350px ;
+ 	margin-top: 10px!important;
+ }
+ .form-horizontal {
+ 	margin-bottom: 15px!important;
+ }
+ .titleBar {
+ 	margin-top: 0;
+ }
+}
+
+
+.UITaxonomyTreeCreateChild {
+	.explorerTree {
+		margin-bottom: 15px;
+	}
+	.uiActionBorder {
+		clear:both;
+	}
+}
+
+@media(max-width: 768px) {
+    .uiECMAdminPortlet .uiResizableBlock .ShowSideBar ,
+    .uiECMAdminPortlet .ecmAdminPanel{
+        float: none;
+        margin:10px 0;
+        width: 100%;
+        padding: 0 10px;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+    .uiECMAdminPortlet .uiECMAdminWorkingArea {
+       margin:0
+    }
+   .ShowSideBar > div {
+        width: 100%!important;
+    }
+}
