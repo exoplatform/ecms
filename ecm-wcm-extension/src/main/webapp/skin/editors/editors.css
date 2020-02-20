@@ -37,7 +37,12 @@
 }
 
 .editorButtonContainer .dropdown-container .dropdown-toggle {
-  background-color: #f3f3f3;
+  background: none;
+  border: none;
+}
+
+.editorButtonContainer:hover .dropdown-toggle { 
+  background-color: #e7e7e7; 
 }
 
 .previewBtn .editorButtonContainer .dropdown-container .dropdown-toggle {
