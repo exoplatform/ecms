@@ -34,6 +34,66 @@
   <description>eXo Cloud Drive Google Drive connector extension configuration and services</description>
   
   <dependencies>
+    <!-- Google API -->
+    <dependency>
+      <groupId>com.google.api-client</groupId>
+      <artifactId>google-api-client</artifactId>
+      <scope>compile</scope>
+      <type>jar</type>
+      <exclusions>
+        <!-- exclude Apache HTTP as Google uses lower (4.0.1), than the Platform 4.0 (4.1.2)-->
+        <exclusion>
+          <groupId>org.apache.httpcomponents</groupId>
+          <artifactId>httpclient</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.apache.httpcomponents</groupId>
+          <artifactId>httpcore</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>com.google.code.findbugs</groupId>
+          <artifactId>jsr305</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>com.google.guava</groupId>
+          <artifactId>guava-jdk5</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>com.google.http-client</groupId>
+      <artifactId>google-http-client-jackson2</artifactId>
+      <scope>compile</scope>
+      <type>jar</type>
+      <exclusions>
+        <!-- exclude Apache HTTP as Google uses lower (4.0.1), than the Platform 4.0 (4.1.2)-->
+        <exclusion>
+          <groupId>org.apache.httpcomponents</groupId>
+          <artifactId>httpclient</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.apache.httpcomponents</groupId>
+          <artifactId>httpcore</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>com.google.code.findbugs</groupId>
+          <artifactId>jsr305</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>com.google.apis</groupId>
+      <artifactId>google-api-services-drive</artifactId>
+      <scope>compile</scope>
+      <type>jar</type>
+    </dependency>
+    <dependency>
+      <groupId>com.google.apis</groupId>
+      <artifactId>google-api-services-oauth2</artifactId>
+      <scope>compile</scope>
+      <type>jar</type>
+    </dependency>
+  
     <!-- Cloud Drive add-on -->
     <dependency>
       <groupId>org.exoplatform.addons.clouddrive</groupId>
@@ -102,66 +162,6 @@
       <groupId>org.exoplatform.platform</groupId>
       <artifactId>platform-component-common</artifactId>
       <scope>provided</scope>
-      <type>jar</type>
-    </dependency>
-
-    <!-- Google API -->
-    <dependency>
-      <groupId>com.google.api-client</groupId>
-      <artifactId>google-api-client</artifactId>
-      <scope>compile</scope>
-      <type>jar</type>
-      <exclusions>
-        <!-- exclude Apache HTTP as Google uses lower (4.0.1), than the Platform 4.0 (4.1.2)-->
-        <exclusion>
-          <groupId>org.apache.httpcomponents</groupId>
-          <artifactId>httpclient</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>org.apache.httpcomponents</groupId>
-          <artifactId>httpcore</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>com.google.code.findbugs</groupId>
-          <artifactId>jsr305</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>com.google.guava</groupId>
-          <artifactId>guava-jdk5</artifactId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-    <dependency>
-      <groupId>com.google.http-client</groupId>
-      <artifactId>google-http-client-jackson2</artifactId>
-      <scope>compile</scope>
-      <type>jar</type>
-      <exclusions>
-        <!-- exclude Apache HTTP as Google uses lower (4.0.1), than the Platform 4.0 (4.1.2)-->
-        <exclusion>
-          <groupId>org.apache.httpcomponents</groupId>
-          <artifactId>httpclient</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>org.apache.httpcomponents</groupId>
-          <artifactId>httpcore</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>com.google.code.findbugs</groupId>
-          <artifactId>jsr305</artifactId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-    <dependency>
-      <groupId>com.google.apis</groupId>
-      <artifactId>google-api-services-drive</artifactId>
-      <scope>compile</scope>
-      <type>jar</type>
-    </dependency>
-    <dependency>
-      <groupId>com.google.apis</groupId>
-      <artifactId>google-api-services-oauth2</artifactId>
-      <scope>compile</scope>
       <type>jar</type>
     </dependency>
 
@@ -405,19 +405,19 @@
               <relocations>
                 <relocation>
                   <pattern>com.google.j2objc</pattern>
-                  <shadedPattern>org.exoplatform.clouddrive.shaded.google.j2objc</shadedPattern>
+                  <shadedPattern>org.exoplatform.clouddrive.gdrive.shaded.google.j2objc</shadedPattern>
                 </relocation>
                 <relocation>
                   <pattern>com.google.api</pattern>
-                  <shadedPattern>org.exoplatform.clouddrive.shaded.google.api</shadedPattern>
+                  <shadedPattern>org.exoplatform.clouddrive.gdrive.shaded.google.api</shadedPattern>
                 </relocation>
                 <relocation>
                   <pattern>io.opencensus</pattern>
-                  <shadedPattern>org.exoplatform.clouddrive.shaded.io.opencensus</shadedPattern>
+                  <shadedPattern>org.exoplatform.clouddrive.gdrive.shaded.io.opencensus</shadedPattern>
                 </relocation>
                 <relocation>
                   <pattern>io.grpc</pattern>
-                  <shadedPattern>org.exoplatform.clouddrive.shaded.io.grpc</shadedPattern>
+                  <shadedPattern>org.exoplatform.clouddrive.gdrive.shaded.io.grpc</shadedPattern>
                 </relocation>
               </relocations>
             </configuration>
