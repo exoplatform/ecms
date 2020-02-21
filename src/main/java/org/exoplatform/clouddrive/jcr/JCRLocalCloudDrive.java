@@ -5874,6 +5874,12 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
     }
     if (lastUser != null) {
       node.setProperty("ecd:lastUser", lastUser);
+    } else if (author != null) {
+      // XXX it's a case when last modifier not available (like shared R/O file in GDrive)
+      node.setProperty("ecd:lastUser", author);
+    } else {
+      // we need write something, it's mandatory property
+      node.setProperty("ecd:lastUser", DUMMY_DATA);
     }
     if (created != null) {
       node.setProperty("ecd:created", created);
