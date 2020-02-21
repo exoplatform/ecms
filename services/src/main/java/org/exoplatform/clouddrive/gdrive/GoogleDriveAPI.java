@@ -60,7 +60,6 @@ import com.google.api.client.util.store.DataStoreFactory;
 import com.google.api.services.drive.Drive;
 import com.google.api.services.drive.Drive.Changes;
 import com.google.api.services.drive.Drive.Children;
-import com.google.api.services.drive.Drive.Realtime.Get;
 import com.google.api.services.drive.DriveRequest;
 import com.google.api.services.drive.DriveScopes;
 import com.google.api.services.drive.model.About;
@@ -640,9 +639,9 @@ class GoogleDriveAPI implements DataStoreFactory {
      * Requests generation of a set of file IDs which can be provided in insert
      * requests as JSON. This request holds the parameters needed by the the
      * drive server. After setting any optional parameters, call the
-     * {@link Get#execute()} method to invoke the remote operation.
+     * {@link #execute()} method to invoke the remote operation.
      * <p>
-     * {@link Get#initialize(com.google.api.client.googleapis.services.AbstractGoogleClientRequest)}
+     * {@link #initialize(com.google.api.client.googleapis.services.AbstractGoogleClientRequest)}
      * must be called to initialize this instance immediately after invoking the
      * constructor.
      * </p>
