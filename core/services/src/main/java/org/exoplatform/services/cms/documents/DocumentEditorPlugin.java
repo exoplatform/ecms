@@ -76,4 +76,10 @@ public interface DocumentEditorPlugin {
    */
   void initPreview(String uuid, String workspace, String activityId, String context, int index) throws Exception;
 
+  /**
+   * Gets document update activity handler for managing comments.
+   * 
+   * @return the handler
+   */
+  DocumentUpdateActivityHandler getDocumentUpdateHandler();
 }
