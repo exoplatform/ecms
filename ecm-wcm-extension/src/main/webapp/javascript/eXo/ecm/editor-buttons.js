@@ -69,16 +69,15 @@
      * 
      */
     var savePreferedProvider = function(fileId, provider){
-      $.ajax({
+      $.post({
         async : true,
         type : "POST",
-        contentType: "application/json",
         url : prefixUrl + "/portal/rest/documents/editors/prefered/" + fileId,
-        data : JSON.stringify({
+        data : {
           userId : eXo.env.portal.userName,
           provider : provider,
           workspace : currentWorkspace
-        }),
+        },
         success: function(result) {
           log("Prefered provider " + provider + " saved. " + result);
         },

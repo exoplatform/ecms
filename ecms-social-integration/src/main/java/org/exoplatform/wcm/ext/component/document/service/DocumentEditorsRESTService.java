@@ -16,17 +16,13 @@
  */
 package org.exoplatform.wcm.ext.component.document.service;
 
-import javax.ws.rs.Consumes;
+import javax.annotation.security.RolesAllowed;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
-
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
 import org.exoplatform.services.cms.documents.DocumentService;
 import org.exoplatform.services.log.ExoLogger;
@@ -43,10 +39,10 @@ public class DocumentEditorsRESTService implements ResourceContainer {
 
   /** The Constant LOG. */
   protected static final Log LOG = ExoLogger.getLogger(DocumentEditorsRESTService.class);
-  
+
   /** The document service. */
-  protected DocumentService documentService;
-  
+  protected DocumentService  documentService;
+
   /**
    * Instantiates a new document editors REST service.
    *
@@ -65,21 +61,11 @@ public class DocumentEditorsRESTService implements ResourceContainer {
    */
   @POST
   @Path("/prefered/{fileId}")
-  @Consumes(MediaType.APPLICATION_JSON)
-  public Response preferedEditor(@PathParam("fileId") String fileId, String data) {
-    JSONParser parser = new JSONParser();
-    Object obj = null;
-    try {
-      obj = parser.parse(data);
-    } catch (ParseException e) {
-      LOG.error("Cannot parse request data: {}", e.getMessage());
-      return Response.status(Status.BAD_REQUEST).build();
-    }
-    JSONObject jsonObj = (JSONObject) obj;
-    String provider = (String) jsonObj.get("provider");
-    String userId = (String) jsonObj.get("userId");
-    String workspace = (String) jsonObj.get("workspace");
-   
+  @RolesAllowed("users")
+  public Response preferedEditor(@PathParam("fileId") String fileId,
+                                 @FormParam("userId") String userId,
+                                 @FormParam("provider") String provider,
+                                 @FormParam("workspace") String workspace) {
     try {
       documentService.setPreferedEditor(userId, provider, fileId, workspace);
     } catch (Exception e) {
