@@ -18,10 +18,7 @@
  */
 package org.exoplatform.clouddrive.rest;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -295,22 +292,6 @@ public class DriveService implements ResourceContainer {
                      .entity(ErrorEntiry.message("Error reading drive: runtime error"))
                      .build();
     }
-  }
-
-  /**
-   * Format modified date.
-   *
-   * @param modifiedDate the modified date
-   * @param locale the locale
-   * @return the string
-   */
-  protected String formatModifiedDate(Calendar modifiedDate, Locale locale) {
-    // Implementation taken from UIDocumentNodeList.getDatePropertyValue 13/08/2019
-    if (modifiedDate != null && locale != null) {
-      DateFormat dateFormat = SimpleDateFormat.getDateInstance(SimpleDateFormat.SHORT, locale);
-      return dateFormat.format(modifiedDate.getTime());
-    }
-    return "";
   }
 
   /**

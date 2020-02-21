@@ -433,7 +433,8 @@ public class JCRLocalCloudFile extends LocalCloudFile {
 
   /**
    * Indicate does this Cloud File was changed (<code>true</code>) or read (<code>false</code>) from the storage. Used internally
-   * only!
+   * only! Indicate does this Cloud File was changed (<code>true</code>) or read (<code>false</code>) from the storage. Used
+   * internally only!
    *
    * @return the changed flag
    */
