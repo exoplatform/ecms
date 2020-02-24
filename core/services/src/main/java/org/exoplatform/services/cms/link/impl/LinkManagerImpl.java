@@ -34,6 +34,7 @@ import javax.jcr.query.Query;
 import javax.jcr.query.QueryManager;
 import javax.jcr.query.QueryResult;
 
+import org.exoplatform.commons.utils.CommonsUtils;
 import org.exoplatform.services.cms.CmsService;
 import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.cms.link.LinkManager;
@@ -243,6 +244,29 @@ public class LinkManagerImpl implements LinkManager {
    */
   public String getTargetPrimaryNodeType(Node link) throws RepositoryException {
     return link.getProperty(PRIMARY_TYPE).getString();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public boolean isFileOrParentALink(Session session, String path) {
+    LinkManager linkManager = CommonsUtils.getService(LinkManager.class);
+    StringBuilder itemPath = new StringBuilder();
+    boolean isLink;
+    try {
+      for (String pathParts : path.split("/")) {
+        if (!pathParts.isEmpty()) {
+          itemPath.append("/").append(pathParts);
+          isLink = linkManager.isLink(session.getItem(itemPath.toString()));
+          if (isLink) {
+            return true;
+          }
+        }
+      }
+    } catch (Exception e) {
+      return false;
+    }
+    return false;
   }
 
   /**
