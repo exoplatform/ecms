@@ -23,7 +23,9 @@ import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 
 import org.exoplatform.container.component.ComponentPlugin;
+import org.exoplatform.services.cms.documents.exception.EditorProviderNotFoundException;
 import org.exoplatform.services.cms.documents.model.Document;
+import org.exoplatform.services.cms.documents.model.EditorProvider;
 import org.exoplatform.services.cms.drives.DriveData;
 
 /**
@@ -178,6 +180,30 @@ public interface DocumentService {
    */
   public void setPreferedEditor(String userId, String provider, String uuid, String workspace) throws Exception;
 
+  /**
+   * Gets the editor providers.
+   *
+   * @return the editor providers
+   */
+  public List<EditorProvider> getEditorProviders();
+  
+  /**
+   * Gets the editor provider.
+   *
+   * @param provider the provider
+   * @return the editor provider
+   */
+  public EditorProvider getEditorProvider(String provider) throws EditorProviderNotFoundException;
+  
+
+  /**
+   * Update editor provider.
+   *
+   * @param editorProvider the editor provider
+   */
+  public void updateEditorProvider(EditorProvider editorProvider) throws EditorProviderNotFoundException;
+  
+  
   /**
    * NewDocumentTypesConfig contains all registered templates for specified provider.
    */

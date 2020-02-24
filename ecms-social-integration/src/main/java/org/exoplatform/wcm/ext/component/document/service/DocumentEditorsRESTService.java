@@ -16,15 +16,23 @@
  */
 package org.exoplatform.wcm.ext.component.document.service;
 
+import java.util.List;
+
 import javax.annotation.security.RolesAllowed;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
 import org.exoplatform.services.cms.documents.DocumentService;
+import org.exoplatform.services.cms.documents.exception.EditorProviderNotFoundException;
+import org.exoplatform.services.cms.documents.model.EditorProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.rest.resource.ResourceContainer;
@@ -50,6 +58,67 @@ public class DocumentEditorsRESTService implements ResourceContainer {
    */
   public DocumentEditorsRESTService(DocumentService documentService) {
     this.documentService = documentService;
+  }
+
+  /**
+   * Sets the prefered editor for specific user/document.
+   *
+   * @param fileId the file id
+   * @param data the data
+   * @return the response
+   */
+  @GET
+  //@RolesAllowed("users")
+  @Produces(MediaType.APPLICATION_JSON)
+  public Response getEditors() {
+    List<EditorProvider> providers = documentService.getEditorProviders();
+    return Response.status(Status.OK).entity(providers).build();
+  }
+
+  /**
+   * Sets the prefered editor for specific user/document.
+   *
+   * @param fileId the file id
+   * @param data the data
+   * @return the response
+   */
+  @GET
+  @Path("/{provider}")
+ //@RolesAllowed("users")
+  @Produces(MediaType.APPLICATION_JSON)
+  public Response getEditor(@PathParam("provider") String provider) {
+    try {
+      EditorProvider editorProvider = documentService.getEditorProvider(provider);
+      return Response.status(Status.OK).entity(editorProvider).build();
+    } catch (EditorProviderNotFoundException e) {
+      return Response.status(Status.NOT_FOUND).build();
+    }
+  }
+
+  /**
+   * Sets the prefered editor for specific user/document.
+   *
+   * @param fileId the file id
+   * @param data the data
+   * @return the response
+   */
+  @POST
+  @Path("/{provider}")
+  //@RolesAllowed("users")
+  @Consumes(MediaType.APPLICATION_JSON)
+  @Produces(MediaType.APPLICATION_JSON)
+  public Response updateEditor(@PathParam("provider") String provider, EditorProvider editorProvider) {
+    if (editorProvider != null) {
+      editorProvider.setProvider(provider);
+      try {
+        documentService.updateEditorProvider(editorProvider);
+        return Response.status(Status.OK).build();
+      } catch (EditorProviderNotFoundException e) {
+        return Response.status(Status.NOT_FOUND).build();
+      }
+    } else {
+      return Response.status(Status.BAD_REQUEST).build();
+    }
   }
 
   /**
