@@ -17,11 +17,14 @@
 package org.exoplatform.services.cms.documents.impl;
 
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashSet;
 import java.util.List;
@@ -34,6 +37,11 @@ import javax.jcr.NodeIterator;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 
+import org.apache.poi.POIXMLDocument;
+import org.apache.poi.POIXMLProperties;
+import org.apache.poi.xslf.usermodel.XMLSlideShow;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.gatein.api.Portal;
 import org.gatein.api.navigation.Navigation;
 import org.gatein.api.navigation.Nodes;
@@ -50,6 +58,7 @@ import org.exoplatform.portal.mop.user.UserPortalContext;
 import org.exoplatform.resolver.ApplicationResourceResolver;
 import org.exoplatform.resolver.ResourceResolver;
 import org.exoplatform.services.cms.BasePath;
+import org.exoplatform.services.cms.documents.DocumentMetadataPlugin;
 import org.exoplatform.services.cms.documents.DocumentService;
 import org.exoplatform.services.cms.documents.DocumentTemplate;
 import org.exoplatform.services.cms.documents.NewDocumentEditorPlugin;
@@ -70,6 +79,7 @@ import org.exoplatform.services.jcr.impl.core.NodeImpl;
 import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.organization.OrganizationService;
 import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
@@ -110,6 +120,7 @@ public class DocumentServiceImpl implements DocumentService {
   private NodeHierarchyCreator nodeHierarchyCreator;
   private LinkManager linkManager;
   private PortalContainerInfo portalContainerInfo;
+  private DocumentMetadataPlugin metadataPlugin;
 
   public DocumentServiceImpl(ManageDriveService manageDriveService, Portal portal, SessionProviderService sessionProviderService, RepositoryService repoService, NodeHierarchyCreator nodeHierarchyCreator, LinkManager linkManager, PortalContainerInfo portalContainerInfo) {
     this.manageDriveService = manageDriveService;
@@ -483,6 +494,15 @@ public class DocumentServiceImpl implements DocumentService {
       ApplicationResourceResolver appResolver = context.getApplication().getResourceResolver();
       ResourceResolver resolver = appResolver.getResourceResolver(template.getPath());
       data = resolver.getInputStream(template.getPath());
+      if(metadataPlugin != null) {
+        try {
+          data = metadataPlugin.addMetadata(data, template);
+        } catch (Exception e) {
+          LOG.error("Couldn't add metadata to the document from template, ", e);
+        }
+      } else {
+        LOG.warn("Couldn't add metadata to the document - DocumentMetadataPlugin is not set.");
+      }
     }
     // Add node
     Node addedNode = currentNode.addNode(title, NT_FILE);
@@ -531,6 +551,25 @@ public class DocumentServiceImpl implements DocumentService {
   @Override
   public boolean hasDocumentTemplatePlugins() {
     return templatePlugins.size() > 0;
+  }
+  
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setDocumentMetadataPlugin(ComponentPlugin plugin) {
+    Class<DocumentMetadataPlugin> pclass = DocumentMetadataPlugin.class;
+    if (pclass.isAssignableFrom(plugin.getClass())) {
+      DocumentMetadataPlugin newPlugin = pclass.cast(plugin);
+
+      LOG.info("Setting DocumentMetadataPlugin [{}]", newPlugin.toString());
+      this.metadataPlugin = newPlugin;
+      if (LOG.isDebugEnabled()) {
+        LOG.debug("Registered DocumentMetadataPlugin instance of {}", plugin.getClass().getName());
+      }
+    } else {
+      LOG.error("The DocumentMetadataPlugin plugin is not an instance of " + pclass.getName());
+    }
   }
 
 }

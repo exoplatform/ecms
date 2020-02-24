@@ -148,6 +148,13 @@ public interface DocumentService {
    * @return true, if successful
    */
   public boolean hasDocumentTemplatePlugins();
+  
+  /**
+   * Sets document metadata plugin.
+   * 
+   * @param plugin the DocumentMetadataPlugin
+   */
+  public void setDocumentMetadataPlugin(ComponentPlugin plugin);
 
   /**
    * NewDocumentTypesConfig contains all registered templates for specified provider.
