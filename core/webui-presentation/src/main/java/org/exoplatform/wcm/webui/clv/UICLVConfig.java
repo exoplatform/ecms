@@ -96,6 +96,9 @@ public class UICLVConfig extends UIFormTabPane  implements UISelectable {
   
   private static final Log         LOG             = ExoLogger.getLogger(UICLVConfig.class.getName());
 
+  /** The Constant DISPLAY_TRANSLATION_FORM_RADIO_BOX_INPUT. */
+  public static final String DISPLAY_TRANSLATION_FORM_RADIO_BOX_INPUT       = "UICLVConfigCheckTranslationFormCheckboxInput";
+
   /** The Constant DISPLAY_MODE_FORM_RADIO_BOX_INPUT. */
   public static final String DISPLAY_MODE_FORM_RADIO_BOX_INPUT       = "UICLVConfigDisplayModeFormRadioBoxInput";
 
@@ -345,6 +348,7 @@ public class UICLVConfig extends UIFormTabPane  implements UISelectable {
         .getPreferences();
     appType = portletPreferences.getValue(UICLVPortlet.PREFERENCE_APPLICATION_TYPE, null);
     String displayMode = portletPreferences.getValue(UICLVPortlet.PREFERENCE_DISPLAY_MODE, null);
+    boolean addTranslation = Boolean.parseBoolean(portletPreferences.getValue(UICLVPortlet.PREFERENCE_ADD_TRANSLATION, null));
     String itemPath = portletPreferences.getValue(UICLVPortlet.PREFERENCE_ITEM_PATH, null);
     savedPath = itemPath;
     itemPath = getTitles(savedPath);
@@ -391,6 +395,11 @@ public class UICLVConfig extends UIFormTabPane  implements UISelectable {
                                                                            DISPLAY_MODE_FORM_RADIO_BOX_INPUT,
                                                                            displayModeOptions);
     displayModeRadioBoxInput.setValue(displayMode);
+
+    /** ACTIVATE TRANSLATION */
+    UICheckBoxInput addTranslationCheckbox = new UICheckBoxInput(DISPLAY_TRANSLATION_FORM_RADIO_BOX_INPUT ,
+                                                                 DISPLAY_TRANSLATION_FORM_RADIO_BOX_INPUT, null);
+    addTranslationCheckbox.setChecked(addTranslation);
 
     /** ITEM PATH */
     UIFormStringInput itemPathInput =
@@ -593,6 +602,7 @@ public class UICLVConfig extends UIFormTabPane  implements UISelectable {
     uiCLVContentTab.addUIFormInput(orderBySelectBox);
     uiCLVContentTab.addUIFormInput(orderTypeSelectBox);
     uiCLVContentTab.addUIFormInput(orderTypeRadioBoxInput);
+    uiCLVContentTab.addUIFormInput(addTranslationCheckbox);
     setSelectedTab(CONTENT_TAB);
     addUIComponentInput(uiCLVContentTab) ;
 
@@ -823,6 +833,8 @@ public class UICLVConfig extends UIFormTabPane  implements UISelectable {
       }
       String orderBy = clvConfig.getUIFormSelectBox(ORDER_BY_FORM_SELECT_BOX).getValue();
       String orderType = clvConfig.getUIFormSelectBox(ORDER_TYPE_FORM_SELECT_BOX).getValue();
+      String addTranslation = clvConfig.getUICheckBoxInput(UICLVConfig.DISPLAY_TRANSLATION_FORM_RADIO_BOX_INPUT)
+              .isChecked() ? "true" : "false";
 
       String header = clvConfig.getUIStringInput(UICLVConfig.HEADER_FORM_STRING_INPUT).getValue();
       if (header == null) header = "";
@@ -875,6 +887,7 @@ public class UICLVConfig extends UIFormTabPane  implements UISelectable {
 
       portletPreferences.setValue(UICLVPortlet.PREFERENCE_ORDER_BY, orderBy);
       portletPreferences.setValue(UICLVPortlet.PREFERENCE_ORDER_TYPE, orderType);
+      portletPreferences.setValue(UICLVPortlet.PREFERENCE_ADD_TRANSLATION, addTranslation);
 
       portletPreferences.setValue(UICLVPortlet.PREFERENCE_HEADER, header);
       portletPreferences.setValue(UICLVPortlet.PREFERENCE_AUTOMATIC_DETECTION, showAutomaticDetection);

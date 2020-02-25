@@ -402,8 +402,10 @@ public class WCMComposerImpl implements WCMComposer, Startable {
     ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
     Session session = sessionProvider.getSession(workspace, manageableRepository);
     QueryManager manager = session.getWorkspace().getQueryManager();
+    String defaultLanguage = filters.get(FILTER_LANGUAGE);
     String mode = filters.get(FILTER_MODE);
     String orderBy = filters.get(FILTER_ORDER_BY);
+    Boolean translation = Boolean.parseBoolean(filters.get(FILTER_TRANSLATION));
     String orderFilter = getOrderSQLFilter(filters);
     String recursive = filters.get(FILTER_RECURSIVE);
     String primaryType = filters.get(FILTER_PRIMARY_TYPE);
@@ -441,6 +443,9 @@ public class WCMComposerImpl implements WCMComposer, Startable {
         statement.append(" AND NOT jcr:path LIKE '" + path + "/%/%')");
       } else {
         statement.append(")");
+      }
+      if (translation) {
+        statement.append(" AND ( exo:language = '" + defaultLanguage + "')");
       }
       // If clv view mode is live, only get nodes which has published version
       if (MODE_LIVE.equals(mode) && !"exo:taxonomyLink".equals(primaryType))
@@ -495,7 +500,8 @@ public class WCMComposerImpl implements WCMComposer, Startable {
     }
 
     String languageFilter = filters.get(FILTER_LANGUAGE);
-    if (languageFilter!=null) {
+    Boolean translation = Boolean.parseBoolean(filters.get(FILTER_TRANSLATION));
+    if (languageFilter!=null && translation) {
       addUsedLanguage(languageFilter);
       Node lnode = null;
       try {
