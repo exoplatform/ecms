@@ -67,6 +67,14 @@
 													  <div class="controls">
 														<% uiform.renderField(uicomponent.DISPLAY_MODE_FORM_RADIO_BOX_INPUT) %>
 													  </div>
+													  <label class="control-label"><%=uicomponent.getLabel(uicomponent.DISPLAY_TRANSLATION_FORM_RADIO_BOX_INPUT) %>: </label>
+													  <div style="display:inline-block;" class="parentPosition pull-right" onmouseover="(function(elm) {eXo.ecm.WCMUtils.showPopover(elm);})(this)"
+                                                            onmouseout="(function(elm) {eXo.ecm.WCMUtils.hidePopover(elm);})(this)" data-toggle="popover" data-placement="left" data-content="<%= StringEscapeUtils.escapeHtml(_ctx.appRes("UICLVConfig.help.TranslationHelp") )%>">
+														  <i class="uiIconQuestion uiIconLightGray"></i>
+													  </div>
+													  <div class="controls">
+													    <% uiform.renderField(uicomponent.DISPLAY_TRANSLATION_FORM_RADIO_BOX_INPUT) %>
+													  </div>
 													</div>
 													<div class="control-group">                  
 													  <label class="control-label" for="<%=uicomponent.ITEM_PATH_FORM_INPUT_SET%>">											  
