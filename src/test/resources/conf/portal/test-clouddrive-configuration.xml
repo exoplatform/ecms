@@ -80,12 +80,6 @@
     </init-params>
   </component>
   
-  <!-- Required for tests since Platform 4.4, for Commons's org.exoplatform.settings.impl.SettingServiceImpl -->
-  <component>
-    <key>org.exoplatform.commons.chromattic.ChromatticManager</key>
-    <type>org.exoplatform.commons.chromattic.ChromatticManager</type>
-  </component>
-  
   <component>
     <type>org.exoplatform.commons.persistence.impl.EntityManagerService</type>
   </component>

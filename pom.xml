@@ -76,10 +76,10 @@
       <scope>provided</scope>
       <type>jar</type>
     </dependency>
-    <!-- we need this as *provided* to get Apache HTTP core and client dependencies from the Platform -->
+    <!-- ECMS's JodConverter here -->
     <dependency>
-      <groupId>org.exoplatform.platform</groupId>
-      <artifactId>platform-component-common</artifactId>
+      <groupId>org.exoplatform.ecms</groupId>
+      <artifactId>ecms-core-services</artifactId>
       <scope>provided</scope>
       <type>jar</type>
     </dependency>

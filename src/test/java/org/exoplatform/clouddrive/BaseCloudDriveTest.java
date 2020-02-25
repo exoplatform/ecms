@@ -31,6 +31,7 @@ import javax.jcr.Session;
 
 import org.exoplatform.clouddrive.exodrive.service.FileStore;
 import org.exoplatform.commons.testing.BaseCommonsTestCase;
+import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
@@ -50,8 +51,16 @@ import org.exoplatform.services.security.UsernameCredential;
 public abstract class BaseCloudDriveTest extends BaseCommonsTestCase {
 
   protected static final Log       LOG = ExoLogger.getLogger(BaseCloudDriveTest.class);
+  
+  protected final String         WORKSPACE_NAME = "portal-test";
 
   protected SessionProviderService sessionProviders;
+  
+  protected RepositoryService    repositoryService;
+
+  protected Session              session;
+
+  protected Node                 root;
   
   protected String workspaceName; 
 
@@ -62,6 +71,10 @@ public abstract class BaseCloudDriveTest extends BaseCommonsTestCase {
    */
   public void setUp() throws Exception {
     super.setUp();
+    
+    repositoryService = getService(RepositoryService.class);
+    session = repositoryService.getCurrentRepository().getSystemSession(WORKSPACE_NAME);
+    root = session.getRootNode();
 
     // String containerConf =
     // TestCloudDriveService.class.getResource("/conf/portal/test-clouddrive-configuration.xml").toString();
