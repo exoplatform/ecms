@@ -15,29 +15,28 @@
  * along with this program; if not, see<http://www.gnu.org/licenses/>.
  */
 package org.exoplatform.services.cms.documents.model;
-import java.util.ArrayList;
 import java.util.List;
 
 
 /**
  * The Class EditorProvider.
  */
-public class EditorProvider {
+public class EditorProvider extends ResourceSupport {
   
   /** The provider. */
-  private String provider;
+  protected String provider;
   
   /** The active. */
-  private Boolean active;
+  protected Boolean active;
   
   /** The permissions. */
-  private List<String> permissions = new ArrayList<>();
+  protected List<String> permissions;
  
   /**
    * Instantiates a new editor provider.
    */
   public EditorProvider() {
-   
+
   }
   
   /**
