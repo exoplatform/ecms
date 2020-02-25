@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 
-    Copyright (C) 2015 eXo Platform SAS.
+    Copyright (C) 2020 eXo Platform SAS.
     
     This is free software; you can redistribute it and/or modify it
     under the terms of the GNU Lesser General Public License as
@@ -67,7 +67,7 @@
       <scope>provided</scope>
       <type>jar</type>
     </dependency>
-    
+
     <!-- Social for sharing in spaces -->
     <dependency>
       <groupId>org.exoplatform.social</groupId>
@@ -75,11 +75,11 @@
       <scope>provided</scope>
       <type>jar</type>
     </dependency>
-    
-    <!-- Platform Integrations -->
+
+    <!-- Platform apps integrations -->
     <dependency>
-      <groupId>org.exoplatform.integration</groupId>
-      <artifactId>integ-ecms-social</artifactId>
+      <groupId>org.exoplatform.ecms</groupId>
+      <artifactId>ecms-social-integration</artifactId>
       <scope>provided</scope>
       <type>jar</type>
     </dependency>
