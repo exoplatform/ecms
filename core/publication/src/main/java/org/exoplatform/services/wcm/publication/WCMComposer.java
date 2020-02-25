@@ -42,6 +42,9 @@ public interface WCMComposer {
   /** Filter parameter to order results. For example: exo:title, dc:title. */
   public final static String FILTER_ORDER_BY = "filter-order-by";
 
+  /** Filter parameter to choice translation results. */
+  public final static String FILTER_TRANSLATION = "filter-translation";
+
   /** Filter parameter to order results in ascending or descending order. Its values are: ASC and DESC. */
   public final static String FILTER_ORDER_TYPE = "filter-order-type";
 
