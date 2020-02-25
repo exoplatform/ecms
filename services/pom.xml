@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 
-  Copyright (C) 2015 eXo Platform SAS.
+  Copyright (C) 2020 eXo Platform SAS.
   
   This is free software; you can redistribute it and/or modify it
   under the terms of the GNU Lesser General Public License as
@@ -49,6 +49,43 @@
         <exclusion>
           <groupId>org.apache.httpcomponents</groupId>
           <artifactId>httpcore</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>com.google.code.findbugs</groupId>
+          <artifactId>jsr305</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>com.google.guava</groupId>
+          <artifactId>guava-jdk5</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>com.google.oauth-client</groupId>
+      <artifactId>google-oauth-client</artifactId>
+      <scope>compile</scope>
+      <type>jar</type>
+      <exclusions>
+        <exclusion>
+          <groupId>com.google.code.findbugs</groupId>
+          <artifactId>jsr305</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>com.google.guava</groupId>
+          <artifactId>guava-jdk5</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+    <groupId>com.google.http-client</groupId>
+      <artifactId>google-http-client</artifactId>
+      <scope>compile</scope>
+      <type>jar</type>
+      <exclusions>
+        <!-- exclude Apache HTTP as Google uses lower (4.0.1), than the Platform 4.0 (4.1.2)-->
+        <exclusion>
+          <groupId>org.apache.httpcomponents</groupId>
+          <artifactId>httpclient</artifactId>
         </exclusion>
         <exclusion>
           <groupId>com.google.code.findbugs</groupId>
@@ -154,13 +191,6 @@
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
       <artifactId>ecms-core-webui-explorer</artifactId>
-      <scope>provided</scope>
-      <type>jar</type>
-    </dependency>
-    <!-- we need this as *provided* to get Apache HTTP core and client dependencies from the Platform -->
-    <dependency>
-      <groupId>org.exoplatform.platform</groupId>
-      <artifactId>platform-component-common</artifactId>
       <scope>provided</scope>
       <type>jar</type>
     </dependency>
