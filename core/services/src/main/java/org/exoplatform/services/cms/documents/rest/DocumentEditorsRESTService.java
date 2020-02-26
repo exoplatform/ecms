@@ -77,7 +77,7 @@ public class DocumentEditorsRESTService implements ResourceContainer {
    * @return the response
    */
   @GET
-  // @RolesAllowed("users")
+  // @RolesAllowed("administrators")
   @Produces(MediaType.APPLICATION_JSON)
   public Response getEditors(@Context UriInfo uriInfo) {
     List<EditorProvider> providers = documentService.getEditorProviders();
@@ -94,7 +94,7 @@ public class DocumentEditorsRESTService implements ResourceContainer {
    */
   @GET
   @Path("/{provider}")
-  // @RolesAllowed("users")
+  // @RolesAllowed("administrators")
   @Produces(MediaType.APPLICATION_JSON)
   public Response getEditor(@Context UriInfo uriInfo, @PathParam("provider") String provider) {
     try {
@@ -115,7 +115,7 @@ public class DocumentEditorsRESTService implements ResourceContainer {
    */
   @POST
   @Path("/{provider}")
-  // @RolesAllowed("users")
+  // @RolesAllowed("administrators") 
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
   public Response updateEditor(@PathParam("provider") String provider, EditorProvider editorProvider) {

@@ -21,9 +21,12 @@ import java.util.List;
 
 import javax.jcr.Node;
 
+import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.ecm.webui.component.explorer.documents.IsEditorPluginPresentFilter;
+import org.exoplatform.portal.config.UserACL;
 import org.exoplatform.services.cms.documents.DocumentEditorPlugin;
 import org.exoplatform.services.cms.documents.DocumentService;
+import org.exoplatform.services.cms.documents.model.EditorProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.security.ConversationState;
@@ -95,7 +98,10 @@ public class DocumentUIActivity extends FileUIActivity {
       // call plugins init handlers
       documentService.getRegisteredEditorPlugins().forEach(plugin -> {
         try {
-          plugin.initActivity(node.getUUID(), node.getSession().getWorkspace().getName(), activityId, STREAM_CONTEXT);
+          EditorProvider editorProvider = documentService.getEditorProvider(plugin.getProviderName());
+          if (hasPermissions(editorProvider)) {
+            plugin.initActivity(node.getUUID(), node.getSession().getWorkspace().getName(), activityId, STREAM_CONTEXT);
+          }
         } catch (Exception e) {
           LOG.error("Cannot init activity from plugin {}, {}", plugin.getProviderName(), e.getMessage());
         }
@@ -113,13 +119,17 @@ public class DocumentUIActivity extends FileUIActivity {
       // call plugins init handlers
       for (DocumentEditorPlugin plugin : documentService.getRegisteredEditorPlugins()) {
         try {
-          plugin.initPreview(node.getUUID(), node.getSession().getWorkspace().getName(), activityId, STREAM_CONTEXT, index);
+          EditorProvider editorProvider = documentService.getEditorProvider(plugin.getProviderName());
+          if (hasPermissions(editorProvider)) {
+            plugin.initPreview(node.getUUID(), node.getSession().getWorkspace().getName(), activityId, STREAM_CONTEXT, index);
+          }
         } catch (Exception e) {
           LOG.error("Cannot init preview from plugin {}, {}", plugin.getProviderName(), e.getMessage());
         }
       }
       String prefferedEditor = getPrefferedEditor(node);
-      require.addScripts("editorbuttons.initPreviewButtons('" + activityId + "', '" + index + "', '" + node.getUUID() + "', " + prefferedEditor + ");");
+      require.addScripts("editorbuttons.initPreviewButtons('" + activityId + "', '" + index + "', '" + node.getUUID() + "', "
+          + prefferedEditor + ");");
     }
     super.end();
   }
@@ -134,7 +144,6 @@ public class DocumentUIActivity extends FileUIActivity {
     return FILTERS;
   }
 
-  
   /**
    * Gets the preffered editor.
    *
@@ -152,5 +161,10 @@ public class DocumentUIActivity extends FileUIActivity {
       prefferedEditor = "null".intern();
     }
     return prefferedEditor;
+  }
+
+  protected boolean hasPermissions(EditorProvider editorProvider) {
+    UserACL userACL = (UserACL) ExoContainerContext.getCurrentContainer().getComponentInstanceOfType(UserACL.class);
+    return editorProvider.getActive() && userACL.hasPermission(editorProvider.getPermissions().toArray(new String[0]));
   }
 }
