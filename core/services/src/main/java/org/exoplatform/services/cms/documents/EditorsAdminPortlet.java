@@ -17,8 +17,7 @@ public class EditorsAdminPortlet extends GenericPortlet {
 
   @Override
   public void doView(RenderRequest request, RenderResponse response) throws IOException, PortletException {
-    PortletRequestDispatcher prDispatcher = getPortletContext().getRequestDispatcher("/WEB-INF/pages/editorsadmin.jsp");
+    PortletRequestDispatcher prDispatcher = getPortletContext().getRequestDispatcher("/WEB-INF/conf/wcm-extension/pages/editorsadmin.jsp");
     prDispatcher.include(request, response);
-    // TODO: call JS code
   }
 }

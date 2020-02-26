@@ -168,6 +168,19 @@
       <module>jquery</module>
     </depends>
   </module>
+  
+  <module>
+    <name>editorsadmin</name>
+    <script>
+      <path>/javascript/eXo/ecm/editors-admin.js</path>
+    </script>
+    <depends>
+      <module>vue</module>
+    </depends>
+    <depends>
+      <module>eXoVueI18n</module>
+    </depends>
+  </module>
    
      <portal-skin>
     <skin-name>Default</skin-name>
