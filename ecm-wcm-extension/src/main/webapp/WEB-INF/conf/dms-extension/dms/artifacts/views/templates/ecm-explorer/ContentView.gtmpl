@@ -15,6 +15,7 @@
   import org.exoplatform.ecm.webui.component.explorer.DocumentProviderUtils;
   import org.exoplatform.ecm.jcr.model.Preference;
   import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
+  import org.exoplatform.ecm.webui.component.explorer.UIDocumentInfo;
   import org.exoplatform.services.jcr.RepositoryService;
   import javax.jcr.Value;
   import javax.jcr.PathNotFoundException;
@@ -28,7 +29,7 @@
   import org.exoplatform.services.wcm.publication.WCMPublicationService;
   // Content view
   
-  def linkManager = WCMCoreUtils.getService(LinkManager.class);  
+  def linkManager = WCMCoreUtils.getService(LinkManager.class);
   def uiWorkingArea = uicomponent.getAncestorOfType(UIWorkingArea.class);
   def uiExplorer = uicomponent.getAncestorOfType(UIJCRExplorer.class);
   def pref = uiExplorer.getPreference();
@@ -283,9 +284,10 @@
             }            
           }
           String encodedPath = URLEncoder.encode(Utils.formatNodeName(data.getPath()), "UTF-8");
+          def urlToCopy = uicomponent.getLinkInDocuments(nodePath);
           encodedPath = encodedPath.replaceAll("%2F", "/"); //we won't encode the slash characters in the path
           if (!data.isNodeType(Utils.EXO_RESTORELOCATION) && !Utils.isTrashHomeNode(data)) {
-          	String clipboardLink = serverUrl + "/" + restContextName + "/private/jcr/" + repository + "/" + preferenceWS + encodedPath;
+          	String clipboardLink = serverUrl + urlToCopy ;
           	strActs +=  "<li class='menuItem'>";
           	strActs +=  "<a exo:attr='CopyUrlToClipboard' style='display: block;' id='clip_button1$i' path='$clipboardLink'>" ;
           	strActs +=  " <i class='uiIconEcmsCopyUrlToClipboard uiIconEcmsLightGray'>" ;

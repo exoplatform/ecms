@@ -7,12 +7,13 @@
   import org.exoplatform.webui.core.UIRightClickPopupMenu;
   import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
   import org.exoplatform.ecm.webui.component.explorer.sidebar.TreeNode ;
-	import javax.jcr.PathNotFoundException;
+  import javax.jcr.PathNotFoundException;
   import java.util.List;
-	import java.util.ArrayList;
+  import java.util.ArrayList;
   import org.exoplatform.ecm.utils.text.Text;
-  import org.exoplatform.services.jcr.RepositoryService;  
-  
+  import org.exoplatform.services.jcr.RepositoryService;
+  import org.exoplatform.ecm.webui.component.explorer.UIDocumentInfo;
+
 %>
 <%
 
@@ -33,12 +34,12 @@
     String portalName = uicomponent.getPortalName();
     String restContextName = Utils.getRestContextName(portalName);
     RepositoryService rService = uicomponent.getApplicationComponent(RepositoryService.class) ;
-    String repository = rService.getCurrentRepository().getConfiguration().getName() ;  
+    String repository = rService.getCurrentRepository().getConfiguration().getName() ;
     String drive = uicomponent.getDriveName();
-    int counter = 1 ;     
+    int counter = 1 ;
 	  List childrenNodes=uicomponent.getRenderedChildren(rootTree);
-    boolean isPaginated=uicomponent.isPaginated(rootTree);    
-    
+    boolean isPaginated=uicomponent.isPaginated(rootTree);
+
 		def realChildrenTrees = new ArrayList<TreeNode>();
 		for(tempNode in childrenNodes) {
 			try {
@@ -52,15 +53,15 @@
 				continue;
 			}
 		}
-		int childrenSize = realChildrenTrees.size();        
+		int childrenSize = realChildrenTrees.size();
     if(!uicomponent.isSystemWorkspace()) {
       def rcontext = _ctx.getRequestContext();
       int depth = rootTree.getNode().getDepth() + 1;
       def jsManager = rcontext.getJavascriptManager();
     }
 
-    for(treeNode in realChildrenTrees) {	    
-			Node node = treeNode.getNode();			
+    for(treeNode in realChildrenTrees) {
+			Node node = treeNode.getNode();
     	node.refresh(true);
     	try {
     	  def primaryName = node.getPrimaryNodeType().getName();
@@ -68,14 +69,14 @@
     	  continue;
     	}
 	    String path = node.getPath() ;
-	    String treeNodeName = uicomponent.getWorkingArea().getTitle(node);	    
+	    String treeNodeName = uicomponent.getWorkingArea().getTitle(node);
 	    def isPreferenceNode = uicomponent.isPreferenceNode(node) ;
 	    def preferenceWS = node.getSession().getWorkspace().getName() ;
 	    String mode = "ExpandTree";
 	    String iconType = "expand";
 	    String actionLink  ;
 	    String expandLink ;
-	    if(treeNode.isExpanded()) { 
+	    if(treeNode.isExpanded()) {
 	      mode = "Collapse" ;
 	      iconType = "collapse";
 	    }
@@ -101,10 +102,10 @@
           strActs +=  "</a>";
           strActs +=  "</li>";
         }
-        
+
   		  List customActs = uicomponent.getCustomActions(node) ;
   	    Parameter[] params ;
-  	    if(customActs.size() > 0) {				    
+  	    if(customActs.size() > 0) {
   			  for(act in customActs) {
   			    String actName = act.getProperty("exo:name").getValue().getString() ;
   			    params = [new Parameter("workspaceName", preferenceWS), new Parameter("actionName", Utils.formatNodeName(act.getName()))] ;
@@ -115,12 +116,13 @@
             else strActs += actName;
             strActs += "</a>" ;
             strActs += "</li>";
-  			  }				    
+  			  }
   	    }
 
   	        String encodedPath = URLEncoder.encode(Utils.formatNodeName(node.getPath()), "UTF-8");
-               encodedPath = encodedPath.replaceAll("%2F", "/"); //we won't encode the slash characters in the path
-  	        String clipboardLink = serverPath + "/" + restContextName + "/private/jcr/" + repository + "/" + preferenceWS + encodedPath;
+			def urlToCopy = uicomponent.getLinkInDocuments(node.getPath());
+			encodedPath = encodedPath.replaceAll("%2F", "/"); //we won't encode the slash characters in the path
+  	        String clipboardLink = serverPath + urlToCopy;
   		int depthChild = node.getDepth();
         if (!node.isNodeType(Utils.EXO_RESTORELOCATION) && !Utils.isTrashHomeNode(node)) {
           strActs +=  "<li class='menuItem'>";
