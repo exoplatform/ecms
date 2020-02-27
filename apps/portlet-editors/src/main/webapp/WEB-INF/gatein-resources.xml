@@ -15,29 +15,23 @@
   <module>
     <name>editorsadmin</name>
     <script>
-      <path>/javascript/editors-admin.js</path>
+      <path>/javascript/editorsAdmin.bundle.js</path>
     </script>
     <depends>
       <module>vue</module>
     </depends>
     <depends>
-      <module>eXoVueI18n</module>
+      <module>vuetify</module>
     </depends>
     <depends>
-      <module>vuetify</module>
+      <module>eXoVueI18n</module>
     </depends>
   </module>
 
   <portal-skin>
-    <skin-name>Default</skin-name>
-    <skin-module>editors</skin-module>
-    <css-path>/skin/editors/editors.css</css-path>
-  </portal-skin>
-
-  <portal-skin>
     <skin-name>Enterprise</skin-name>
     <skin-module>editors</skin-module>
-    <css-path>/skin/editors/editors.css</css-path>
+    <css-path>/css/editors.css</css-path>
   </portal-skin>
   
 </gatein-resources>

@@ -11,7 +11,7 @@
     <supports>
       <mime-type>text/html</mime-type>
     </supports>
-    <resource-bundle>locale.editors.editors</resource-bundle>
+    <resource-bundle>locale.portlet.EditorsAdmin</resource-bundle>
     <portlet-info>
       <title>Editors Admin portlet for eXo Platform</title>
       <short-title>Editors Admin</short-title>

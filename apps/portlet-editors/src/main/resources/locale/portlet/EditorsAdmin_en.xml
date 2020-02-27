@@ -20,14 +20,14 @@
 
 -->
 <bundle>
-   <!-- Messages -->
-  <DocumentEditors>
-    <error>
-      <EditorProviderNotRegistered>The editor provider is not registered.</EditorProviderNotRegistered>
-      <EditorProviderNotSpecified>The editor provider is not found in request body.</EditorProviderNotSpecified>
-    </error>
-    <AdminPage>
-      <page>Document editors</page>
-    </AdminPage>
-  </DocumentEditors>
+  <!-- Messages -->
+  <editors>
+    <admin>
+      <error>
+        <ProviderNotRegistered>The editor provider is not registered.</ProviderNotRegistered>
+        <ProviderNotSpecified>The editor provider is not found.</ProviderNotSpecified>
+      </error>
+      <title>Document editors</title>
+    </admin>
+  </editors>
 </bundle>
