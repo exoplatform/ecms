@@ -32,13 +32,13 @@
   <name>eXo Cloud Drive :: Connectors :: One Drive :: Services</name>
 
   <dependencies>
-    <!-- https://mvnrepository.com/artifact/org.mockito/mockito-all -->
-    <!--  <dependency>
-          <groupId>org.mockito</groupId>
-          <artifactId>mockito-all</artifactId>
-          <version>1.9.5</version>
-          <scope>test</scope>
-      </dependency>-->
+    <!-- Microsoft Graph SDK for Java -->
+    <dependency>
+      <groupId>com.microsoft.graph</groupId>
+      <artifactId>microsoft-graph</artifactId>
+      <scope>compile</scope>
+      <type>jar</type>
+    </dependency>
 
     <!-- Cloud Drive add-on -->
     <dependency>
@@ -117,13 +117,7 @@
       <scope>provided</scope>
       <type>jar</type>
     </dependency>
-    <dependency>
-      <groupId>com.microsoft.graph</groupId>
-      <artifactId>microsoft-graph</artifactId>
-      <scope>provided</scope>
-      <type>jar</type>
-    </dependency>
-
+    
     <!-- for tests -->
     <dependency>
       <groupId>org.hsqldb</groupId>

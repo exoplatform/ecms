@@ -526,14 +526,18 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
       iterators.add(childIterator);
       while (childIterator.hasNext()) {
         DriveItem item = childIterator.next().getItem();
-        if (!isConnected(fileId, item.id)) {
-          JCRLocalCloudFile jcrLocalCloudFile;
-          if (item.folder != null) {
-            jcrLocalCloudFile = openInitFolder(itemChildren, item, localFile);
-          } else {
-            jcrLocalCloudFile = openInitFile(item, localFile);
+        if (item.deleted == null) {
+          if (!isConnected(fileId, item.id)) {
+            JCRLocalCloudFile jcrLocalCloudFile;
+            if (item.folder != null) {
+              jcrLocalCloudFile = openInitFolder(itemChildren, item, localFile);
+            } else {
+              jcrLocalCloudFile = openInitFile(item, localFile);
+            }
+            addConnected(fileId, jcrLocalCloudFile);
           }
-          addConnected(fileId, jcrLocalCloudFile);
+        } else if (LOG.isDebugEnabled()) {
+          LOG.debug("Skipping deleted folder: " + item);
         }
       }
     }
@@ -621,11 +625,15 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
       OneDriveAPI.ChildIterator childIterator = api.getChildIterator(fileId);
       while (childIterator.hasNext()) {
         DriveItem item = childIterator.next();
-        if (item.folder != null) {
-          Node folderNode = addFolderNode(item, localFile);
-          fetchChilds(item.id, folderNode);
-        } else if (item.file != null) {
-          addFileNode(item, localFile);
+        if (item.deleted == null) { 
+          if (item.folder != null) {
+            Node folderNode = addFolderNode(item, localFile);
+            fetchChilds(item.id, folderNode);
+          } else if (item.file != null) {
+            addFileNode(item, localFile);
+          }
+        } else if (LOG.isDebugEnabled()) {
+          LOG.debug("Skipping deleted folder: " + item);
         }
       }
     }
@@ -724,6 +732,7 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
     public void syncNext() throws CloudDriveException, RepositoryException {
       while (changes.hasNext()) {
         DriveItem driveItem = changes.next();
+        // TODO care about social folders marked as already deleted but existing, like Vault
         if (driveItem.file != null) {
           if (driveItem.deleted == null) {
             List<Node> nodes = null;
