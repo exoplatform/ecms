@@ -39,7 +39,7 @@ export function init(settings) {
       },
       render: h => h(adminApp),
       i18n,
-      vuetify,
+      vuetify
     }).$mount("#editors-admin");
   });
 }
