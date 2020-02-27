@@ -26,6 +26,9 @@ pom.xml.versionsBackup
 *.ipr
 .idea/
 
+# Npm
+node_modules/
+
 #bin folder
 bin/
 

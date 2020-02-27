@@ -1,0 +1,308 @@
+<portlet-app version="2.0" xmlns="http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd">
+
+	<portlet>
+		<portlet-name>digitalWorkplaceSlider</portlet-name>
+		<portlet-class>org.exoplatform.commons.api.portlet.GenericDispatchedViewPortlet</portlet-class>
+		<init-param>
+      <name>portlet-view-dispatched-file-path</name>
+      <value>/slider.html</value>
+    </init-param>
+    <init-param>
+      <description>List of profiles that can be used to enable this portlet</description>
+      <name>exo.profiles</name>
+      <value>ecms</value>
+    </init-param>
+		<supports>
+			<mime-type>text/html</mime-type>
+		</supports>
+		<portlet-info>
+			<title>Digital Workplace Slider</title>
+		</portlet-info>
+	</portlet>
+
+	<portlet>
+		<portlet-name>digitalWorkplaceNews</portlet-name>
+		<portlet-class>org.exoplatform.commons.api.portlet.GenericDispatchedViewPortlet</portlet-class>
+		<init-param>
+			<name>portlet-view-dispatched-file-path</name>
+			<value>/news.html</value>
+		</init-param>
+    <init-param>
+      <description>List of profiles that can be used to enable this portlet</description>
+      <name>exo.profiles</name>
+      <value>news</value>
+    </init-param>
+		<supports>
+			<mime-type>text/html</mime-type>
+		</supports>
+		<portlet-info>
+			<title>Digital Workplace News</title>
+		</portlet-info>
+	</portlet>
+
+	<portlet>
+		<portlet-name>digitalWorkplaceProfileStats</portlet-name>
+		<portlet-class>org.exoplatform.commons.api.portlet.GenericDispatchedViewPortlet</portlet-class>
+		<init-param>
+			<name>portlet-view-dispatched-file-path</name>
+			<value>/profileStats.html</value>
+		</init-param>
+    <init-param>
+      <description>List of profiles that can be used to enable this portlet</description>
+      <name>exo.profiles</name>
+      <value>gamification,social</value>
+    </init-param>
+		<supports>
+			<mime-type>text/html</mime-type>
+		</supports>
+		<portlet-info>
+			<title>Digital Workplace Profile Stats</title>
+		</portlet-info>
+	</portlet>
+
+	<portlet>
+		<portlet-name>digitalWorkplaceRecentDocuments</portlet-name>
+		<portlet-class>org.exoplatform.commons.api.portlet.GenericDispatchedViewPortlet</portlet-class>
+		<init-param>
+			<name>portlet-view-dispatched-file-path</name>
+			<value>/recentDocuments.html</value>
+		</init-param>
+    <init-param>
+      <description>List of profiles that can be used to enable this portlet</description>
+      <name>exo.profiles</name>
+      <value>ecms</value>
+    </init-param>
+		<supports>
+			<mime-type>text/html</mime-type>
+		</supports>
+		<portlet-info>
+			<title>Digital Workplace Recents Documents</title>
+		</portlet-info>
+	</portlet>	
+	
+	<portlet>
+		<portlet-name>digitalWorkplaceSharedDocuments</portlet-name>
+		<portlet-class>org.exoplatform.commons.api.portlet.GenericDispatchedViewPortlet</portlet-class>
+		<init-param>
+			<name>portlet-view-dispatched-file-path</name>
+			<value>/sharedDocuments.html</value>
+		</init-param>
+    <init-param>
+      <description>List of profiles that can be used to enable this portlet</description>
+      <name>exo.profiles</name>
+      <value>ecms</value>
+    </init-param>
+		<supports>
+			<mime-type>text/html</mime-type>
+		</supports>
+		<portlet-info>
+			<title>Digital Workplace Shared Documents</title>
+		</portlet-info>
+	</portlet>	
+	
+	<portlet>
+		<portlet-name>digitalWorkplaceFavoriteDocuments</portlet-name>
+		<portlet-class>org.exoplatform.commons.api.portlet.GenericDispatchedViewPortlet</portlet-class>
+		<init-param>
+			<name>portlet-view-dispatched-file-path</name>
+			<value>/favoriteDocuments.html</value>
+		</init-param>
+		<supports>
+			<mime-type>text/html</mime-type>
+		</supports>
+		<portlet-info>
+			<title>Digital Workplace Favorite Documents</title>
+		</portlet-info>
+	</portlet>
+
+	<portlet>
+		<portlet-name>digitalWorkplaceEvents</portlet-name>
+		<portlet-class>org.exoplatform.commons.api.portlet.GenericDispatchedViewPortlet</portlet-class>
+		<init-param>
+			<name>portlet-view-dispatched-file-path</name>
+			<value>/events.jsp</value>
+		</init-param>
+    <init-param>
+      <description>List of profiles that can be used to enable this portlet</description>
+      <name>exo.profiles</name>
+      <value>calendar</value>
+    </init-param>
+		<supports>
+			<mime-type>text/html</mime-type>
+		</supports>
+		<portlet-info>
+			<title>Digital Workplace Events</title>
+		</portlet-info>
+	</portlet>
+
+	<portlet>
+		<portlet-name>digitalWorkplaceTasks</portlet-name>
+		<portlet-class>org.exoplatform.commons.api.portlet.GenericDispatchedViewPortlet</portlet-class>
+		<init-param>
+			<name>portlet-view-dispatched-file-path</name>
+			<value>/tasks.html</value>
+		</init-param>
+    <init-param>
+      <description>List of profiles that can be used to enable this portlet</description>
+      <name>exo.profiles</name>
+      <value>task</value>
+    </init-param>
+		<supports>
+			<mime-type>text/html</mime-type>
+		</supports>
+		<portlet-info>
+			<title>Digital Workplace Tasks</title>
+		</portlet-info>
+	</portlet>
+
+	<portlet>
+		<portlet-name>digitalWorkplacePerkstore</portlet-name>
+		<portlet-class>org.exoplatform.commons.api.portlet.GenericDispatchedViewPortlet</portlet-class>
+		<init-param>
+			<name>portlet-view-dispatched-file-path</name>
+			<value>/perkstore.html</value>
+		</init-param>
+    <init-param>
+      <description>List of profiles that can be used to enable this portlet</description>
+      <name>exo.profiles</name>
+      <value>perk-store</value>
+    </init-param>
+		<supports>
+			<mime-type>text/html</mime-type>
+		</supports>
+		<portlet-info>
+			<title>Digital Workplace Perkstore</title>
+		</portlet-info>
+	</portlet>
+
+	<portlet>
+		<portlet-name>digitalWorkplaceWallet</portlet-name>
+		<portlet-class>org.exoplatform.commons.api.portlet.GenericDispatchedViewPortlet</portlet-class>
+		<init-param>
+			<name>portlet-view-dispatched-file-path</name>
+			<value>/wallet.html</value>
+		</init-param>
+    <init-param>
+      <description>List of profiles that can be used to enable this portlet</description>
+      <name>exo.profiles</name>
+      <value>wallet</value>
+    </init-param>
+		<supports>
+			<mime-type>text/html</mime-type>
+		</supports>
+		<portlet-info>
+			<title>Digital Workplace Wallet</title>
+		</portlet-info>
+	</portlet>
+
+	<!-- ************************* Sidebar portlets ********************************* -->
+
+	<portlet>
+		<portlet-name>digitalWorkplaceLeftNavigation</portlet-name>
+		<portlet-class>org.exoplatform.commons.api.portlet.GenericDispatchedViewPortlet</portlet-class>
+		<init-param>
+			<name>portlet-view-dispatched-file-path</name>
+			<value>/leftNavigation.html</value>
+		</init-param>
+		<supports>
+			<mime-type>text/html</mime-type>
+		</supports>
+		<portlet-info>
+			<title>Digital Workplace Company Navigation</title>
+		</portlet-info>
+	</portlet>
+
+	<portlet>
+		<portlet-name>digitalWorkplaceSpacesNavigation</portlet-name>
+		<portlet-class>org.exoplatform.commons.api.portlet.GenericDispatchedViewPortlet</portlet-class>
+		<init-param>
+			<name>portlet-view-dispatched-file-path</name>
+			<value>/spacesNavigation.html</value>
+		</init-param>
+		<supports>
+			<mime-type>text/html</mime-type>
+		</supports>
+		<portlet-info>
+			<title>Digital Workplace Spaces Navigation</title>
+		</portlet-info>
+	</portlet>
+
+	<portlet>
+		<portlet-name>digitalWorkplaceAdministration</portlet-name>
+		<portlet-class>org.exoplatform.commons.api.portlet.GenericDispatchedViewPortlet</portlet-class>
+		<init-param>
+			<name>portlet-view-dispatched-file-path</name>
+			<value>/administration.html</value>
+		</init-param>
+		<supports>
+			<mime-type>text/html</mime-type>
+		</supports>
+		<portlet-info>
+			<title>Digital Workplace Administration Navigation</title>
+		</portlet-info>
+	</portlet>
+
+	<portlet>
+		<portlet-name>digitalWorkplaceMySettings</portlet-name>
+		<portlet-class>org.exoplatform.commons.api.portlet.GenericDispatchedViewPortlet</portlet-class>
+		<init-param>
+			<name>portlet-view-dispatched-file-path</name>
+			<value>/mySettings.html</value>
+		</init-param>
+		<supports>
+			<mime-type>text/html</mime-type>
+		</supports>
+		<portlet-info>
+			<title>Digital Workplace Settings Navigation</title>
+		</portlet-info>
+	</portlet>
+
+	<!-- ************************* TopBar Portlets ********************************* -->
+
+	<portlet>
+		<portlet-name>digitalWorkplaceNotification</portlet-name>
+		<portlet-class>org.exoplatform.commons.api.portlet.GenericDispatchedViewPortlet</portlet-class>
+		<init-param>
+			<name>portlet-view-dispatched-file-path</name>
+			<value>/notification.html</value>
+		</init-param>
+		<supports>
+			<mime-type>text/html</mime-type>
+		</supports>
+		<portlet-info>
+			<title>Digital Workplace notifications</title>
+		</portlet-info>
+	</portlet>
+
+	<portlet>
+		<portlet-name>digitalWorkplaceTopBottomNavigation</portlet-name>
+		<portlet-class>org.exoplatform.commons.api.portlet.GenericDispatchedViewPortlet</portlet-class>
+		<init-param>
+			<name>portlet-view-dispatched-file-path</name>
+			<value>/topBottomNavigation.html</value>
+		</init-param>
+		<supports>
+			<mime-type>text/html</mime-type>
+		</supports>
+		<portlet-info>
+			<title>Digital Workplace TopBottomNavigation</title>
+		</portlet-info>
+	</portlet>
+
+	<portlet>
+		<portlet-name>digitalWorkplaceLogo</portlet-name>
+		<portlet-class>org.exoplatform.commons.api.portlet.GenericDispatchedViewPortlet</portlet-class>
+		<init-param>
+			<name>portlet-view-dispatched-file-path</name>
+			<value>/logo.html</value>
+		</init-param>
+		<supports>
+			<mime-type>text/html</mime-type>
+		</supports>
+		<portlet-info>
+			<title>Digital Workplace Logo</title>
+		</portlet-info>
+	</portlet>
+
+</portlet-app>
