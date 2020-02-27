@@ -12,7 +12,7 @@ public class EditorsAdminPortlet extends GenericPortlet {
 
   @Override
   public void doView(RenderRequest request, RenderResponse response) throws IOException, PortletException {
-    PortletRequestDispatcher prDispatcher = getPortletContext().getRequestDispatcher("/WEB-INF/editors-admin.jsp");
+    PortletRequestDispatcher prDispatcher = getPortletContext().getRequestDispatcher("/WEB-INF/pages/editors-admin.jsp");
     prDispatcher.include(request, response);
   }
 }
