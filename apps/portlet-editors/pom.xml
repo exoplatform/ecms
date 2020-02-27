@@ -30,6 +30,18 @@
   <packaging>war</packaging>
   <name>eXo PLF:: Online Editors Admin Portlet</name>
   <description>eXo DMS Portlet Java Content: Online Editors Admin</description>
+    <dependencies>
+    <dependency>
+      <groupId>javax.portlet</groupId>
+      <artifactId>portlet-api</artifactId>
+    </dependency>
+    
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>javax.servlet-api</artifactId>
+      <scope>provided</scope>
+    </dependency>
+  </dependencies>
   <build>
     <finalName>editors</finalName>
     <plugins>

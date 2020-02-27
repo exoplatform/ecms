@@ -1,4 +1,4 @@
-package org.exoplatform.services.cms.documents;
+package org.exoplatform.editors.portlet;
 
 import java.io.IOException;
 
@@ -8,16 +8,11 @@ import javax.portlet.PortletRequestDispatcher;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
-import org.exoplatform.services.log.ExoLogger;
-import org.exoplatform.services.log.Log;
-
 public class EditorsAdminPortlet extends GenericPortlet {
-
-  private static final Log LOG = ExoLogger.getLogger(EditorsAdminPortlet.class);
 
   @Override
   public void doView(RenderRequest request, RenderResponse response) throws IOException, PortletException {
-    PortletRequestDispatcher prDispatcher = getPortletContext().getRequestDispatcher("/WEB-INF/conf/wcm-extension/pages/editorsadmin.jsp");
+    PortletRequestDispatcher prDispatcher = getPortletContext().getRequestDispatcher("/WEB-INF/pages/editorsadmin.jsp");
     prDispatcher.include(request, response);
   }
 }
