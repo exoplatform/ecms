@@ -25,7 +25,7 @@
     <admin>
       <error>
         <ProviderNotRegistered>The editor provider is not registered.</ProviderNotRegistered>
-        <ProviderNotSpecified>The editor provider is not found.</ProviderNotSpecified>
+        <EmptyRequest>The request should contain at least 1 form param (active/permissions).</EmptyRequest>
       </error>
       <title>Document editors</title>
     </admin>
