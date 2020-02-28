@@ -20,7 +20,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import javax.annotation.security.RolesAllowed;
-import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -52,8 +51,8 @@ public class DocumentEditorsRESTService implements ResourceContainer {
   /** The Constant PROVIDER_NOT_REGISTERED. */
   private static final String PROVIDER_NOT_REGISTERED = "DocumentEditors.error.EditorProviderNotRegistered";
 
-  /** The Constant PROVIDER_NOT_SPECIFIED. */
-  private static final String PROVIDER_NOT_SPECIFIED  = "DocumentEditors.error.EditorProviderNotSpecified";
+  /** The Constant EMPTY_REQUEST. */
+  private static final String EMPTY_REQUEST           = "DocumentEditors.error.EmptyRequest";
 
   /** The Constant LOG. */
   protected static final Log  LOG                     = ExoLogger.getLogger(DocumentEditorsRESTService.class);
@@ -77,7 +76,7 @@ public class DocumentEditorsRESTService implements ResourceContainer {
    * @return the response
    */
   @GET
-  // @RolesAllowed("administrators")
+  @RolesAllowed("administrators")
   @Produces(MediaType.APPLICATION_JSON)
   public Response getEditors(@Context UriInfo uriInfo) {
     List<EditorProvider> providers = documentService.getEditorProviders();
@@ -94,7 +93,7 @@ public class DocumentEditorsRESTService implements ResourceContainer {
    */
   @GET
   @Path("/{provider}")
-  // @RolesAllowed("administrators")
+  @RolesAllowed("administrators")
   @Produces(MediaType.APPLICATION_JSON)
   public Response getEditor(@Context UriInfo uriInfo, @PathParam("provider") String provider) {
     try {
@@ -115,20 +114,20 @@ public class DocumentEditorsRESTService implements ResourceContainer {
    */
   @POST
   @Path("/{provider}")
-  // @RolesAllowed("administrators") 
-  @Consumes(MediaType.APPLICATION_JSON)
+  @RolesAllowed("administrators")
   @Produces(MediaType.APPLICATION_JSON)
-  public Response updateEditor(@PathParam("provider") String provider, EditorProvider editorProvider) {
-    if (editorProvider != null) {
-      editorProvider.setProvider(provider);
-      try {
-        documentService.updateEditorProvider(editorProvider);
-        return Response.status(Status.OK).build();
-      } catch (EditorProviderNotFoundException e) {
-        return Response.status(Status.NOT_FOUND).entity("{ \"message\":\"" + PROVIDER_NOT_REGISTERED + "\"}").build();
-      }
-    } else {
-      return Response.status(Status.BAD_REQUEST).entity("{ \"message\":\"" + PROVIDER_NOT_SPECIFIED + "\"}").build();
+  public Response updateEditor(@PathParam("provider") String provider,
+                               @FormParam("active") Boolean active,
+                               @FormParam("permissions") List<String> permissions) {
+    if (active == null && permissions == null) {
+      return Response.status(Status.BAD_REQUEST).entity("{ \"message\":\"" + EMPTY_REQUEST + "\"}").build();
+    }
+    EditorProvider editorProvider = new EditorProvider(provider, active, permissions);
+    try {
+      documentService.updateEditorProvider(editorProvider);
+      return Response.status(Status.OK).build();
+    } catch (EditorProviderNotFoundException e) {
+      return Response.status(Status.NOT_FOUND).entity("{ \"message\":\"" + PROVIDER_NOT_REGISTERED + "\"}").build();
     }
   }
 

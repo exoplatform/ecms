@@ -6,30 +6,6 @@
   <priority>1</priority>
   <page-nodes>
     <node>
-      <uri>content</uri>
-      <name>content</name>
-      <label>#{UISetupPlatformToolBarPortlet.label.content}</label>
-      <page-reference>group::platform/web-contributors::SiteExplorer</page-reference>
-      <node>
-        <uri>siteExplorer</uri>
-        <name>siteExplorer</name>
-        <label>#{UISetupPlatformToolBarPortlet.label.siteExplorer}</label>
-        <page-reference>group::platform/web-contributors::SiteExplorer</page-reference>
-      </node>
-      <node>
-        <uri>wcmAdmin</uri>
-        <name>wcmAdmin</name>
-        <label>#{UISetupPlatformToolBarPortlet.label.wcmAdmin}</label>
-        <page-reference>group::platform/web-contributors::WcmAdmin</page-reference>
-      </node>
-      <node>
-        <uri>search</uri>
-        <name>search</name>
-        <label>#{UISetupPlatformToolBarPortlet.label.search}</label>
-        <page-reference>group::platform/administrators::search</page-reference>
-      </node>
-    </node>
-    <node>
       <uri>editorsAdmin</uri>
       <name>editorsAdmin</name>
       <label>#{DocumentEditors.AdminPage.page}</label>
