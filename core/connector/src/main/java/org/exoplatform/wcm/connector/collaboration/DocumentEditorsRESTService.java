@@ -71,7 +71,7 @@ public class DocumentEditorsRESTService implements ResourceContainer {
   }
 
   /**
-   * Sets the prefered editor for specific user/document.
+   * Return all available editor providers.
    *
    * @param uriInfo the uri info
    * @return the response
@@ -86,7 +86,7 @@ public class DocumentEditorsRESTService implements ResourceContainer {
   }
 
   /**
-   * Sets the prefered editor for specific user/document.
+   * Gets the preferred editor for specific user/document.
    *
    * @param uriInfo the uri info
    * @param provider the provider
@@ -107,7 +107,7 @@ public class DocumentEditorsRESTService implements ResourceContainer {
   }
 
   /**
-   * Sets the prefered editor for specific user/document.
+   * Saves the editor provider.
    *
    * @param provider the provider
    * @param editorProvider the editor provider
