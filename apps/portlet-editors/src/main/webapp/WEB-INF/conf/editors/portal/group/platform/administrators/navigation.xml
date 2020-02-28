@@ -7,7 +7,7 @@
     <node>
       <uri>editors</uri>
       <name>editors</name>
-      <label>#{UISetupPlatformToolBarPortlet.label.editors}</label>
+      <label>Editors Administration</label>
       <visibility>HIDDEN</visibility>
       <page-reference>group::/platform/administrators::editors</page-reference>
     </node>
