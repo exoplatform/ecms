@@ -20,7 +20,6 @@
 
 -->
 <bundle>
-  <!-- Messages -->
   <editors>
     <admin>
       <error>

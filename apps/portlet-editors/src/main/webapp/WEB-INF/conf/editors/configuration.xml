@@ -8,7 +8,7 @@
     <type>org.exoplatform.wcm.connector.collaboration.DocumentEditorsRESTService</type>
   </component>
   
-  <external-component-plugins>
+  <!-- external-component-plugins>
     <target-component>org.exoplatform.services.resources.ResourceBundleService</target-component>
     <component-plugin>
       <name>ResourceBundle Plugin</name>
@@ -29,7 +29,7 @@
         </values-param>
       </init-params>
     </component-plugin>
-  </external-component-plugins>
+  </external-component-plugins -->
   
 </configuration>
   

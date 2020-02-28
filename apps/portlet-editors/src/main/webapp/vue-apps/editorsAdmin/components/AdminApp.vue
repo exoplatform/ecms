@@ -13,7 +13,6 @@
           xs12
           px-3>
           <v-layout
-            row
             mx-0
             align-center>
             <v-flex

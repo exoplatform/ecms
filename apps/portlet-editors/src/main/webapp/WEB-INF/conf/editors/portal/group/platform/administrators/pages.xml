@@ -19,16 +19,16 @@
         xsi:schemaLocation="http://www.gatein.org/xml/ns/gatein_objects_1_3 http://www.gatein.org/xml/ns/gatein_objects_1_3"
         xmlns="http://www.gatein.org/xml/ns/gatein_objects_1_3">
   <page>
-    <name>editorsAdmin</name>
+    <name>editors</name>
     <title>Editors Administration</title>
     <access-permissions>manager:/platform/administrators</access-permissions>
     <edit-permission>manager:/platform/administrators</edit-permission>
     <portlet-application>
       <portlet>
-        <application-ref>editorsAdmin</application-ref>
+        <application-ref>editors</application-ref>
         <portlet-ref>EditorsAdminPortlet</portlet-ref>
       </portlet>
-      <title>Editors Administration</title>
+      <title>Document Editors Administration</title>
       <access-permissions>*:/platform/administrators</access-permissions>
       <show-info-bar>false</show-info-bar>
     </portlet-application>

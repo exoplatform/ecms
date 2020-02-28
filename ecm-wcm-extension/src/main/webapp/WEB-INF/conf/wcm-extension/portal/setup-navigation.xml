@@ -26,6 +26,12 @@
         <label>#{UISetupPlatformToolBarPortlet.label.search}</label>
         <page-reference>group::platform/administrators::search</page-reference>
       </node>
+      <node>
+        <uri>editors</uri>
+        <name>editors</name>
+        <label>#{UISetupPlatformToolBarPortlet.label.editors}</label>
+        <page-reference>group::/platform/administrators::editors</page-reference>
+      </node>
     </node>
   </page-nodes>
 </node-navigation>

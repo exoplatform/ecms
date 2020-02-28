@@ -5,11 +5,11 @@
   <priority>1</priority>
   <page-nodes>
     <node>
-      <uri>editorsAdmin</uri>
-      <name>editorsAdmin</name>
-      <label>#{editors.admin.title}</label>
+      <uri>editors</uri>
+      <name>editors</name>
+      <label>#{UISetupPlatformToolBarPortlet.label.editors}</label>
       <visibility>HIDDEN</visibility>
-      <page-reference>group::/platform/administrators::editorsAdmin</page-reference>
+      <page-reference>group::/platform/administrators::editors</page-reference>
     </node>
   </page-nodes>
 </node-navigation>

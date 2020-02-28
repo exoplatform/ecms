@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <!--
 
-    Copyright (C) 2009 eXo Platform SAS.
+    Copyright (C) 2020 eXo Platform SAS.
     
     This is free software; you can redistribute it and/or modify it
     under the terms of the GNU Lesser General Public License as
@@ -26,10 +26,10 @@
    xmlns="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd">
 
   <!-- This configuration adds Admin portlet to Administration drop-down menu -->
-  <external-component-plugins>
+  <!-- external-component-plugins>
     <target-component>org.exoplatform.platform.common.service.MenuConfiguratorService</target-component>
     <component-plugin>
-      <name>Web Conferencing MenuConfigurationService Plugin</name>
+      <name>Editors Admin MenuConfigurationService Plugin</name>
       <set-method>addNavigation</set-method>
       <type>org.exoplatform.platform.common.service.plugin.MenuConfiguratorAddNodePlugin</type>
       <init-params>
@@ -39,7 +39,7 @@
         </value-param>
       </init-params>
     </component-plugin>
-  </external-component-plugins>
+  </external-component-plugins -->
 
 	<external-component-plugins>
     <target-component>org.exoplatform.portal.config.UserPortalConfigService</target-component>
