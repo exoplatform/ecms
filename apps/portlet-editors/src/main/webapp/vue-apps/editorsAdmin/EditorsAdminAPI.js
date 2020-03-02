@@ -1,68 +1,29 @@
-// TODO use Editors Admin API here?
-
-export function getMyAllTasks() {
-  return fetch('/rest/tasks', {
-    method: 'GET',
-  }).then((resp) => {
-    if(resp && resp.ok) {
-      return resp.json();
+export function getInfo(link) {
+  return fetch(link, { method: 'GET' }).then(res => {
+    if (res && res.ok) {
+      return res.json();
     } else {
-      throw new Error ('Error when getting my all tasks');
+      throw new Error('Error when getting info');
     }
-  })
+  });
 }
 
-export function getMyIncomingTasks() {
-  return fetch('/rest/tasks?status=incoming&returnSize=true', {
-    method: 'GET',
-  }).then((resp) => {
-    if(resp && resp.ok) {
-      return resp.json();
-    } 
-    else {
-      throw new Error ('Error when getting my incoming tasks');
-    }
-  })
-}
-
-export function getMyOverdueTasks() {
-  return fetch('/rest/tasks?status=overdue&returnSize=true', {
-    method: 'GET',
-  }).then((resp) => {
-    if(resp && resp.ok) {
-      return resp.json();
-    } 
-    else {
-      throw new Error ('Error when getting my overdue tasks');
-    }
-  })
-}
-export function getUserInformations(userName) {
-  return fetch(`/rest/v1/social/users/${userName}`, {
-    method: 'GET',
-  }).then((resp) => {
-    if(resp && resp.ok) {
-      return resp.json();
-    }
-    else {
-      throw new Error ('Error when getting user informations');
-    }
-  })
-}
-
-export function updateTask(taskId, task) {
-  return fetch(`/rest/tasks/${taskId}`, {
+export function postInfo(link, postData) {
+  let requestBody;
+  for (const prop in postData) {
+    requestBody = encodeURIComponent(prop) + '=' + encodeURIComponent(postData[prop]);
+  }
+  return fetch(link, {
+    method: 'POST',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/x-www-form-urlencoded'
     },
-    method: 'PUT',
-    body: JSON.stringify(task)
-  }).then((resp) => {
-    if(resp && resp.ok) {
-      return resp.json();
+    body: requestBody
+  }).then(res => {
+    if (res && res.ok) {
+      return res;
+    } else {
+      throw new Error('Error when posted info');
     }
-    else {
-      throw new Error ('Error when updating task');
-    }
-  })
+  });
 }
