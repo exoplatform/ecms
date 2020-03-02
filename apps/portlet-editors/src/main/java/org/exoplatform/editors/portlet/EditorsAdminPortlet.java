@@ -49,8 +49,15 @@ public class EditorsAdminPortlet extends GenericPortlet {
                                          request.getServerName(),
                                          request.getServerPort(),
                                          "/documents/editors");
+      String suggestionsUrl = buildRestUrl(request.getScheme(),
+                                         request.getServerName(),
+                                         request.getServerPort(),
+                                         "/identities/suggestions");
       String settingsJson = new StringBuilder().append("{\"services\": {\"providers\": \"")
                                                .append(providersUrl)
+                                               .append("\",")
+                                               .append("\"suggestions\": \"")
+                                               .append(suggestionsUrl)
                                                .append("\"}}")
                                                .toString();
 
