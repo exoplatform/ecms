@@ -72,9 +72,6 @@
             <goals>
               <goal>npm</goal>
             </goals>
-            <configuration>
-              <arguments>config set python "/usr/bin/python2.7"</arguments>
-            </configuration>
           </execution>
           <execution>
             <id>npm install</id>
@@ -91,7 +88,7 @@
               <goal>npm</goal>
             </goals>
             <configuration>
-              <arguments>run build</arguments>
+              <arguments>run watch</arguments>
             </configuration>
           </execution>
         </executions>
@@ -100,7 +97,7 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-war-plugin</artifactId>
         <configuration>
-          <packagingExcludes>**/*.less,**/*.vue,css/lib/*,vue-app/**,js/mock/**/*,**-dev.*</packagingExcludes>
+          <packagingExcludes>**/*.less,**/*.vue,css/lib/*,vue-apps/**,js/mock/**/*,**-dev.*</packagingExcludes>
         </configuration>
       </plugin>
     </plugins>
