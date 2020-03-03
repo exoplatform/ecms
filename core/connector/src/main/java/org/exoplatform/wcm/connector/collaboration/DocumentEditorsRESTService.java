@@ -36,7 +36,6 @@ import org.exoplatform.services.cms.documents.DocumentService;
 import org.exoplatform.services.cms.documents.exception.EditorProviderNotFoundException;
 import org.exoplatform.services.cms.documents.model.EditorProvider;
 import org.exoplatform.services.cms.documents.model.Link;
-import org.exoplatform.services.cms.documents.model.ResourceSupport;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.rest.resource.ResourceContainer;
