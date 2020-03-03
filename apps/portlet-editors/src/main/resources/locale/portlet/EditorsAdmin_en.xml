@@ -27,6 +27,14 @@
         <EmptyRequest>The request should contain at least 1 form param (active/permissions).</EmptyRequest>
       </error>
       <title>Document editors</title>
+      <table>
+        <Provider>Provider</Provider>
+        <Active>Active</Active>
+        <Permissions>Permissions</Permissions>
+      </table>
+      <modal>
+        <title>Edit permissions</title>
+      </modal>
     </admin>
   </editors>
 </bundle>
