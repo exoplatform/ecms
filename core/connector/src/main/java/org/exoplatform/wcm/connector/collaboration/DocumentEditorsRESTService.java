@@ -32,6 +32,8 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.UriInfo;
 
+import com.google.gson.Gson;
+
 import org.exoplatform.services.cms.documents.DocumentService;
 import org.exoplatform.services.cms.documents.exception.EditorProviderNotFoundException;
 import org.exoplatform.services.cms.documents.model.EditorProvider;
@@ -67,6 +69,7 @@ public class DocumentEditorsRESTService implements ResourceContainer {
    */
   public DocumentEditorsRESTService(DocumentService documentService) {
     this.documentService = documentService;
+
   }
 
   /**
@@ -81,7 +84,8 @@ public class DocumentEditorsRESTService implements ResourceContainer {
   public Response getEditors(@Context UriInfo uriInfo) {
     List<EditorProvider> providers = documentService.getEditorProviders();
     providers.forEach(provider -> initLinks(provider, uriInfo));
-    return Response.status(Status.OK).entity(providers).build();
+    String json = new Gson().toJson(providers);
+    return Response.status(Status.OK).entity("{\"editors\":" + json + "}").build();
   }
 
   /**
@@ -109,7 +113,8 @@ public class DocumentEditorsRESTService implements ResourceContainer {
    * Saves the editor provider.
    *
    * @param provider the provider
-   * @param editorProvider the editor provider
+   * @param active the active
+   * @param permissions the permissions
    * @return the response
    */
   @POST
