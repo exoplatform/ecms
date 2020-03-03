@@ -389,7 +389,7 @@
 			}
 			&.selectedBox {
 				&:hover .thumbnailImage, .thumbnailImage {
-					background: darken(@primaryBackgroundLight, 10%)!important;
+					background: @primaryBackgroundLighter !important;
 				}
 
 				.actionIconLabel {
@@ -815,7 +815,7 @@
 		background: #e0e8f5;
 		.border-radius(3px);
 		color: @primaryColor;
-		border: 1px solid @primaryLightColor;
+		border: 1px solid @primaryColorLighter;
 		padding: 1px 0px 1px 5px;
 		margin: 5px 0px 0px 0px;
 		display: inline-block;
@@ -1769,7 +1769,7 @@
 .UITaggingForm {
 	.dropdown-menu .active > a, .dropdown-menu .active > a:hover{
 		color: @baseBackground;
-		background: @primaryLightColor;
+		background: @primaryColorLighter;
 	}
 }
 
@@ -1780,7 +1780,7 @@
 }
 
 .dropdown-menu li > .menuItemSelected {
-		#gradient > .vertical(@dropdownLinkBackgroundHover, darken(@dropdownLinkBackgroundHover, 15%));
+		#gradient > .vertical(@dropdownLinkBackgroundHover, @dropdownLinkBackgroundHoverGradientDarker);
 		color: @dropdownLinkColorHover;
 		.uiIconEcmsCopyUrlToClipboard {
 			color: @colorIconSecondary;
@@ -1804,7 +1804,7 @@
 
 	.dropdown-menu {
 		#hiddenMoreButton li > .menuItemSelected{
-			#gradient > .vertical(@dropdownLinkBackgroundHover, darken(@dropdownLinkBackgroundHover, 15%));
+			#gradient > .vertical(@dropdownLinkBackgroundHover, @dropdownLinkBackgroundHoverGradientDarker);
 			color: @baseBackground;
 			.uiIconEcmsCopyUrlToClipboard {
 				color: @colorIconSecondary;
