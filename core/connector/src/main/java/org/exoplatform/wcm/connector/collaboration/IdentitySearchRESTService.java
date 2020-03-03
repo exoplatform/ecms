@@ -16,8 +16,6 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.UriInfo;
 
-import com.google.gson.Gson;
-
 import org.exoplatform.commons.utils.ListAccess;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
@@ -32,27 +30,28 @@ import org.exoplatform.social.core.profile.ProfileFilter;
 import org.exoplatform.social.core.service.LinkProvider;
 import org.exoplatform.social.core.space.model.Space;
 import org.exoplatform.social.core.space.spi.SpaceService;
+import org.exoplatform.ws.frameworks.json.impl.JsonGeneratorImpl;
 
 /**
- * The Class SuggestionRESTService.
+ * The Class IdentitySearchRESTService.
  */
-@Path("/identities/suggestions")
-public class SuggestionRESTService implements ResourceContainer {
+@Path("/identity/search")
+public class IdentitySearchRESTService implements ResourceContainer {
 
   /** The Constant LOG. */
-  protected static final Log    LOG            = ExoLogger.getLogger(DocumentEditorsRESTService.class);
+  protected static final Log    LOG             = ExoLogger.getLogger(IdentitySearchRESTService.class);
 
-  /** The suggested size. */
-  protected static final int    SUGGESTED_SIZE = 20;
+  /** The max result size. */
+  protected static final int    MAX_RESULT_SIZE = 20;
 
   /** The Constant USER_TYPE. */
-  protected static final String USER_TYPE      = "user";
+  protected static final String USER_TYPE       = "user";
 
   /** The Constant SPACE_TYPE. */
-  protected static final String SPACE_TYPE     = "space";
+  protected static final String SPACE_TYPE      = "space";
 
   /** The Constant GROUP_TYPE. */
-  protected static final String GROUP_TYPE     = "group";
+  protected static final String GROUP_TYPE      = "group";
 
   /** The identity manager. */
   protected IdentityManager     identityManager;
@@ -70,7 +69,7 @@ public class SuggestionRESTService implements ResourceContainer {
    * @param organization the organization
    * @param spaceService the space service
    */
-  public SuggestionRESTService(IdentityManager identityManager, OrganizationService organization, SpaceService spaceService) {
+  public IdentitySearchRESTService(IdentityManager identityManager, OrganizationService organization, SpaceService spaceService) {
     this.identityManager = identityManager;
     this.organization = organization;
     this.spaceService = spaceService;
@@ -89,10 +88,10 @@ public class SuggestionRESTService implements ResourceContainer {
   @Produces(MediaType.APPLICATION_JSON)
   public Response getSuggestions(@Context UriInfo uriInfo, @PathParam("suggestedName") String name) {
     try {
-      String json = new Gson().toJson(getSuggestions(name));
-      return Response.status(Status.OK).entity("{\"suggestions\":" + json + "}").build();
+      String json = new JsonGeneratorImpl().createJsonArray(getSuggestions(name)).toString();
+      return Response.status(Status.OK).entity("{\"identities\":" + json + "}").build();
     } catch (Exception e) {
-      LOG.error("Cannot get suggestions with suggested name: {}, error: {}", name, e.getMessage());
+      LOG.error("Cannot get identities with suggested name: {}, error: {}", name, e.getMessage());
       return Response.status(Status.INTERNAL_SERVER_ERROR).build();
     }
   }
@@ -104,15 +103,15 @@ public class SuggestionRESTService implements ResourceContainer {
    * @return the suggestions
    * @throws Exception the exception
    */
-  protected List<Suggestion> getSuggestions(String name) throws Exception {
-    List<Suggestion> suggestions = getUsersSuggestions(name, SUGGESTED_SIZE);
-    int remain = SUGGESTED_SIZE - suggestions.size();
+  protected List<SearchResult> getSuggestions(String name) throws Exception {
+    List<SearchResult> suggestions = findUsers(name, MAX_RESULT_SIZE);
+    int remain = MAX_RESULT_SIZE - suggestions.size();
     if (remain > 0) {
-      suggestions.addAll(getGroupsSugesstions(name, remain));
+      suggestions.addAll(findGroups(name, remain));
     }
 
-    Collections.sort(suggestions, new Comparator<Suggestion>() {
-      public int compare(Suggestion s1, Suggestion s2) {
+    Collections.sort(suggestions, new Comparator<SearchResult>() {
+      public int compare(SearchResult s1, SearchResult s2) {
         return s1.getDisplayName().compareTo(s2.getDisplayName());
       }
     });
@@ -128,8 +127,8 @@ public class SuggestionRESTService implements ResourceContainer {
    * @return the users suggestions
    * @throws Exception the exception
    */
-  protected List<Suggestion> getUsersSuggestions(String name, int count) throws Exception {
-    List<Suggestion> suggestions = new ArrayList<>();
+  protected List<SearchResult> findUsers(String name, int count) throws Exception {
+    List<SearchResult> results = new ArrayList<>();
     ProfileFilter identityFilter = new ProfileFilter();
     identityFilter.setName(name);
     ListAccess<Identity> identitiesList = identityManager.getIdentitiesByProfileFilter(OrganizationIdentityProvider.NAME,
@@ -143,10 +142,10 @@ public class SuggestionRESTService implements ResourceContainer {
         String fullName = profile.getFullName();
         String userName = (String) profile.getProperty(Profile.USERNAME);
         String avatarUrl = profile.getAvatarUrl() != null ? profile.getAvatarUrl() : LinkProvider.PROFILE_DEFAULT_AVATAR_URL;
-        suggestions.add(new Suggestion(userName, fullName, USER_TYPE, avatarUrl));
+        results.add(new SearchResult(userName, fullName, USER_TYPE, avatarUrl));
       }
     }
-    return suggestions;
+    return results;
   }
 
   /**
@@ -157,8 +156,8 @@ public class SuggestionRESTService implements ResourceContainer {
    * @return the groups sugesstions
    * @throws Exception the exception
    */
-  protected List<Suggestion> getGroupsSugesstions(String name, int count) throws Exception {
-    List<Suggestion> suggestions = new ArrayList<>();
+  protected List<SearchResult> findGroups(String name, int count) throws Exception {
+    List<SearchResult> results = new ArrayList<>();
     ListAccess<Group> groupsAccess = organization.getGroupHandler().findGroupsByKeyword(name);
     int size = groupsAccess.getSize() >= count ? count : groupsAccess.getSize();
     if (size > 0) {
@@ -167,19 +166,19 @@ public class SuggestionRESTService implements ResourceContainer {
         Space space = spaceService.getSpaceByGroupId(group.getId());
         if (space != null) {
           String avatarUrl = space.getAvatarUrl() != null ? space.getAvatarUrl() : LinkProvider.SPACE_DEFAULT_AVATAR_URL;
-          suggestions.add(new Suggestion(space.getGroupId(), space.getDisplayName(), SPACE_TYPE, avatarUrl));
+          results.add(new SearchResult(space.getGroupId(), space.getDisplayName(), SPACE_TYPE, avatarUrl));
         } else {
-          suggestions.add(new Suggestion(group.getId(), group.getLabel(), GROUP_TYPE, LinkProvider.SPACE_DEFAULT_AVATAR_URL));
+          results.add(new SearchResult(group.getId(), group.getLabel(), GROUP_TYPE, LinkProvider.SPACE_DEFAULT_AVATAR_URL));
         }
       }
     }
-    return suggestions;
+    return results;
   }
 
   /**
    * The Class Suggestion.
    */
-  public static class Suggestion {
+  public static class SearchResult {
 
     /** The name. */
     private String name;
@@ -194,14 +193,14 @@ public class SuggestionRESTService implements ResourceContainer {
     private String avatarUrl;
 
     /**
-     * Instantiates a new suggestion.
+     * Instantiates a new SearchResult.
      *
      * @param name the name
      * @param displayName the display name
      * @param type the type
      * @param avatarUrl the avatar url
      */
-    public Suggestion(String name, String displayName, String type, String avatarUrl) {
+    public SearchResult(String name, String displayName, String type, String avatarUrl) {
       this.name = name;
       this.displayName = displayName;
       this.type = type;

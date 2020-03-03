@@ -648,8 +648,8 @@ public class DocumentServiceImpl implements DocumentService {
                                                           Scope.GLOBAL.id(DOCUMENTS_SCOPE_NAME),
                                                           String.format(EDITOR_PERMISSIONS_PATTERN, provider));
 
-    Boolean active = activeParam != null && Boolean.valueOf(activeParam.getValue().toString());
-    String permissionsStr = permissionsParam != null ? permissionsParam.getValue().toString() : "".intern();
+    Boolean active = activeParam != null ? Boolean.valueOf(activeParam.getValue().toString()) : true;
+    String permissionsStr = permissionsParam != null ? permissionsParam.getValue().toString() : "*".intern();
     List<String> permissions = Arrays.asList(permissionsStr.split("\\s*,\\s*"));
     return new EditorProvider(provider, active, permissions);
   }
