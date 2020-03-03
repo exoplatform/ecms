@@ -32,8 +32,6 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.UriInfo;
 
-import com.google.gson.Gson;
-
 import org.exoplatform.services.cms.documents.DocumentService;
 import org.exoplatform.services.cms.documents.exception.EditorProviderNotFoundException;
 import org.exoplatform.services.cms.documents.model.EditorProvider;
@@ -41,6 +39,7 @@ import org.exoplatform.services.cms.documents.model.Link;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.rest.resource.ResourceContainer;
+import org.exoplatform.ws.frameworks.json.impl.JsonGeneratorImpl;
 
 /**
  * The Class DocumentEditorsRESTService is REST endpoint for working with editable documents.
@@ -84,8 +83,14 @@ public class DocumentEditorsRESTService implements ResourceContainer {
   public Response getEditors(@Context UriInfo uriInfo) {
     List<EditorProvider> providers = documentService.getEditorProviders();
     providers.forEach(provider -> initLinks(provider, uriInfo));
-    String json = new Gson().toJson(providers);
-    return Response.status(Status.OK).entity("{\"editors\":" + json + "}").build();
+    try {
+      String json = new JsonGeneratorImpl().createJsonArray(providers).toString();
+      return Response.status(Status.OK).entity("{\"editors\":" + json + "}").build();
+    } catch (Exception e) {
+      LOG.error("Cannot get editors, error: {}", e.getMessage());
+      return Response.status(Status.INTERNAL_SERVER_ERROR).build();
+    }
+
   }
 
   /**
