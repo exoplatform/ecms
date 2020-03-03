@@ -19,6 +19,7 @@ package org.exoplatform.services.cms.documents.impl;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.net.URLEncoder;
+import java.security.acl.Permission;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -29,6 +30,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
@@ -627,10 +629,16 @@ public class DocumentServiceImpl implements DocumentService {
                          SettingValue.create(editorProvider.getActive()));
     }
     if(editorProvider.getPermissions() != null) {
+      List<String> permissions = editorProvider.getPermissions().stream().map(permission -> {
+        if(permission.startsWith("/")) {
+          permission = "*:" + permission;
+        }
+        return permission;
+      }).collect(Collectors.toList());
       settingService.set(Context.GLOBAL,
                          Scope.GLOBAL.id(DOCUMENTS_SCOPE_NAME),
                          String.format(EDITOR_PERMISSIONS_PATTERN, editorProvider.getProvider()),
-                         SettingValue.create(String.join(",", editorProvider.getPermissions())));
+                         SettingValue.create(String.join(",", permissions)));
     }
   }
   
@@ -650,7 +658,12 @@ public class DocumentServiceImpl implements DocumentService {
 
     Boolean active = activeParam != null ? Boolean.valueOf(activeParam.getValue().toString()) : true;
     String permissionsStr = permissionsParam != null ? permissionsParam.getValue().toString() : "*".intern();
-    List<String> permissions = Arrays.asList(permissionsStr.split("\\s*,\\s*"));
+    List<String> permissions = Arrays.asList(permissionsStr.split("\\s*,\\s*")).stream().map(perm -> {
+      if(perm.contains("/")) {
+        perm = perm.substring(perm.indexOf("/"));
+      }
+      return perm;
+    }).collect(Collectors.toList());
     return new EditorProvider(provider, active, permissions);
   }
   
@@ -670,4 +683,5 @@ public class DocumentServiceImpl implements DocumentService {
     Session session = sp.getSession(workspace, repoService.getCurrentRepository());
     return session.getNodeByUUID(uuid);
   }
+
 }

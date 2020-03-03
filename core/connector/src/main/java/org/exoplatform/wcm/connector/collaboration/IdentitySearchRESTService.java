@@ -1,3 +1,19 @@
+/*
+ * Copyright (C) 2003-2020 eXo Platform SAS.
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License
+ * as published by the Free Software Foundation; either version 3
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, see<http://www.gnu.org/licenses/>.
+ */
 package org.exoplatform.wcm.connector.collaboration;
 
 import java.util.ArrayList;
@@ -63,7 +79,7 @@ public class IdentitySearchRESTService implements ResourceContainer {
   protected SpaceService        spaceService;
 
   /**
-   * Instantiates a new SuggestionRESTService.
+   * Instantiates a new IdentitySearchRESTService.
    *
    * @param identityManager the identity manager
    * @param organization the organization
@@ -75,56 +91,59 @@ public class IdentitySearchRESTService implements ResourceContainer {
     this.spaceService = spaceService;
   }
 
+
   /**
-   * Gets the suggestions.
+   * Search identities.
    *
    * @param uriInfo the uri info
    * @param name the name
-   * @return the suggestions
+   * @return the response
    */
   @GET
   @RolesAllowed("administrators")
-  @Path("/{suggestedName}")
+  @Path("/{name}")
   @Produces(MediaType.APPLICATION_JSON)
-  public Response getSuggestions(@Context UriInfo uriInfo, @PathParam("suggestedName") String name) {
+  public Response searchIdentities(@Context UriInfo uriInfo, @PathParam("name") String name) {
     try {
-      String json = new JsonGeneratorImpl().createJsonArray(getSuggestions(name)).toString();
+      String json = new JsonGeneratorImpl().createJsonArray(findGroupsAndUsers(name)).toString();
       return Response.status(Status.OK).entity("{\"identities\":" + json + "}").build();
     } catch (Exception e) {
-      LOG.error("Cannot get identities with suggested name: {}, error: {}", name, e.getMessage());
+      LOG.error("Cannot get identities with name: {}, error: {}", name, e.getMessage());
       return Response.status(Status.INTERNAL_SERVER_ERROR).build();
     }
   }
 
+
   /**
-   * Gets the suggestions.
+   * Find groups and users.
    *
    * @param name the name
-   * @return the suggestions
+   * @return the list
    * @throws Exception the exception
    */
-  protected List<SearchResult> getSuggestions(String name) throws Exception {
-    List<SearchResult> suggestions = findUsers(name, MAX_RESULT_SIZE);
-    int remain = MAX_RESULT_SIZE - suggestions.size();
+  protected List<SearchResult> findGroupsAndUsers(String name) throws Exception {
+    List<SearchResult> searchResults = findUsers(name, MAX_RESULT_SIZE);
+    int remain = MAX_RESULT_SIZE - searchResults.size();
     if (remain > 0) {
-      suggestions.addAll(findGroups(name, remain));
+      searchResults.addAll(findGroups(name, remain));
     }
 
-    Collections.sort(suggestions, new Comparator<SearchResult>() {
+    Collections.sort(searchResults, new Comparator<SearchResult>() {
       public int compare(SearchResult s1, SearchResult s2) {
         return s1.getDisplayName().compareTo(s2.getDisplayName());
       }
     });
 
-    return suggestions;
+    return searchResults;
   }
 
+
   /**
-   * Gets the users suggestions.
+   * Find users.
    *
    * @param name the name
    * @param count the count
-   * @return the users suggestions
+   * @return the list
    * @throws Exception the exception
    */
   protected List<SearchResult> findUsers(String name, int count) throws Exception {
@@ -148,12 +167,13 @@ public class IdentitySearchRESTService implements ResourceContainer {
     return results;
   }
 
+
   /**
-   * Gets the groups sugesstions.
+   * Find groups.
    *
    * @param name the name
    * @param count the count
-   * @return the groups sugesstions
+   * @return the list
    * @throws Exception the exception
    */
   protected List<SearchResult> findGroups(String name, int count) throws Exception {
@@ -176,7 +196,7 @@ public class IdentitySearchRESTService implements ResourceContainer {
   }
 
   /**
-   * The Class Suggestion.
+   * The Class SearchResult.
    */
   public static class SearchResult {
 

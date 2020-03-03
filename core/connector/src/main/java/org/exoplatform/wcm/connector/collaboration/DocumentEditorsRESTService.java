@@ -36,6 +36,7 @@ import org.exoplatform.services.cms.documents.DocumentService;
 import org.exoplatform.services.cms.documents.exception.EditorProviderNotFoundException;
 import org.exoplatform.services.cms.documents.model.EditorProvider;
 import org.exoplatform.services.cms.documents.model.Link;
+import org.exoplatform.services.cms.documents.model.ResourceSupport;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.rest.resource.ResourceContainer;
@@ -90,7 +91,6 @@ public class DocumentEditorsRESTService implements ResourceContainer {
       LOG.error("Cannot get editors, error: {}", e.getMessage());
       return Response.status(Status.INTERNAL_SERVER_ERROR).build();
     }
-
   }
 
   /**
@@ -162,7 +162,6 @@ public class DocumentEditorsRESTService implements ResourceContainer {
     } catch (Exception e) {
       LOG.error("Cannot set prefered editor for user {} and node {}: {}", userId, fileId, e.getMessage());
       return Response.status(Status.INTERNAL_SERVER_ERROR).build();
-
     }
     return Response.ok().build();
   }
