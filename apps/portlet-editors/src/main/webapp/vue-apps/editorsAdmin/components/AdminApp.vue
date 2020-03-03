@@ -25,7 +25,7 @@
               <th class="text-left">Actions</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody v-if="providers.length > 0">
             <tr v-for="item in providers" :key="item.provider">
               <td>{{ item.provider }}</td>
               <td>
@@ -85,7 +85,7 @@ export default {
     },
     methods: {
         getProviders() {
-          getInfo(this.entryPoint).then(data => this.providers = data);
+          getInfo(this.entryPoint).then(data => this.providers = data.editors);
         },
         changeStatus(provider) {
             const updateRest = provider.links.filter(({ rel, href }) => rel === "update")[0].href;
