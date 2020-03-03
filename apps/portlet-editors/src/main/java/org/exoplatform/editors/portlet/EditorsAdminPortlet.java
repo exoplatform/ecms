@@ -52,11 +52,11 @@ public class EditorsAdminPortlet extends GenericPortlet {
       String suggestionsUrl = buildRestUrl(request.getScheme(),
                                          request.getServerName(),
                                          request.getServerPort(),
-                                         "/identities/suggestions");
+                                         "/identitity/search");
       String settingsJson = new StringBuilder().append("{\"services\": {\"providers\": \"")
                                                .append(providersUrl)
                                                .append("\",")
-                                               .append("\"suggestions\": \"")
+                                               .append("\"identities\": \"")
                                                .append(suggestionsUrl)
                                                .append("\"}}")
                                                .toString();
