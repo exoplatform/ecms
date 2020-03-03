@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -14,9 +15,6 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.UriInfo;
-
-import com.fasterxml.jackson.core.JsonGenerator;
-import com.google.gson.Gson;
 
 import org.exoplatform.commons.utils.ListAccess;
 import org.exoplatform.services.log.ExoLogger;
@@ -85,7 +83,7 @@ public class IdentitySearchRESTService implements ResourceContainer {
    * @return the suggestions
    */
   @GET
-  // @RolesAllowed("administrators")
+  @RolesAllowed("administrators")
   @Path("/{suggestedName}")
   @Produces(MediaType.APPLICATION_JSON)
   public Response getSuggestions(@Context UriInfo uriInfo, @PathParam("suggestedName") String name) {
