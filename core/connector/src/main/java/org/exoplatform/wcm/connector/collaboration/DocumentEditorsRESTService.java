@@ -90,7 +90,6 @@ public class DocumentEditorsRESTService implements ResourceContainer {
       LOG.error("Cannot get editors, error: {}", e.getMessage());
       return Response.status(Status.INTERNAL_SERVER_ERROR).build();
     }
-
   }
 
   /**
@@ -162,7 +161,6 @@ public class DocumentEditorsRESTService implements ResourceContainer {
     } catch (Exception e) {
       LOG.error("Cannot set prefered editor for user {} and node {}: {}", userId, fileId, e.getMessage());
       return Response.status(Status.INTERNAL_SERVER_ERROR).build();
-
     }
     return Response.ok().build();
   }

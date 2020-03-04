@@ -18,6 +18,7 @@ package org.exoplatform.wcm.ext.component.activity;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.jcr.Node;
 
@@ -163,8 +164,21 @@ public class DocumentUIActivity extends FileUIActivity {
     return prefferedEditor;
   }
 
+  /**
+   * Checks for permissions.
+   *
+   * @param editorProvider the editor provider
+   * @return true, if successful
+   */
   protected boolean hasPermissions(EditorProvider editorProvider) {
     UserACL userACL = (UserACL) ExoContainerContext.getCurrentContainer().getComponentInstanceOfType(UserACL.class);
-    return editorProvider.getActive() && userACL.hasPermission(editorProvider.getPermissions().toArray(new String[0]));
+    List<String> permissions = editorProvider.getPermissions().stream().map(permission -> {
+      if(permission.startsWith("/")) {
+        permission = "*:" + permission;
+      }
+      return permission;
+    }).collect(Collectors.toList());
+    String currentUser = ConversationState.getCurrent().getIdentity().getUserId();
+    return editorProvider.getActive() && (permissions.contains(currentUser) || userACL.hasPermission(permissions.toArray(new String[0])));
   }
 }
