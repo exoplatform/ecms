@@ -23,9 +23,9 @@ import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 
 import org.exoplatform.container.component.ComponentPlugin;
-import org.exoplatform.services.cms.documents.exception.EditorProviderNotFoundException;
+import org.exoplatform.services.cms.documents.exception.DocumentEditorProviderNotFoundException;
+import org.exoplatform.services.cms.documents.impl.DocumentEditorProvider;
 import org.exoplatform.services.cms.documents.model.Document;
-import org.exoplatform.services.cms.documents.model.EditorProvider;
 import org.exoplatform.services.cms.drives.DriveData;
 
 /**
@@ -185,7 +185,7 @@ public interface DocumentService {
    *
    * @return the editor providers
    */
-  public List<EditorProvider> getEditorProviders();
+  public List<DocumentEditorProvider> getDocumentEditorProviders();
   
   /**
    * Gets the editor provider.
@@ -193,15 +193,7 @@ public interface DocumentService {
    * @param provider the provider
    * @return the editor provider
    */
-  public EditorProvider getEditorProvider(String provider) throws EditorProviderNotFoundException;
-  
-
-  /**
-   * Update editor provider.
-   *
-   * @param editorProvider the editor provider
-   */
-  public void updateEditorProvider(EditorProvider editorProvider) throws EditorProviderNotFoundException;
+  public DocumentEditorProvider getEditorProvider(String provider) throws DocumentEditorProviderNotFoundException;
   
   
   /**

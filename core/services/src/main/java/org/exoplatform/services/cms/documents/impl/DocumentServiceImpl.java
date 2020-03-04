@@ -19,9 +19,7 @@ package org.exoplatform.services.cms.documents.impl;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.net.URLEncoder;
-import java.security.acl.Permission;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.GregorianCalendar;
@@ -30,7 +28,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
@@ -42,10 +39,6 @@ import org.gatein.api.navigation.Navigation;
 import org.gatein.api.navigation.Nodes;
 import org.gatein.api.site.SiteId;
 
-import org.exoplatform.commons.api.settings.SettingService;
-import org.exoplatform.commons.api.settings.SettingValue;
-import org.exoplatform.commons.api.settings.data.Context;
-import org.exoplatform.commons.api.settings.data.Scope;
 import org.exoplatform.commons.utils.CommonsUtils;
 import org.exoplatform.container.component.ComponentPlugin;
 import org.exoplatform.container.xml.PortalContainerInfo;
@@ -61,9 +54,8 @@ import org.exoplatform.services.cms.documents.DocumentEditorPlugin;
 import org.exoplatform.services.cms.documents.DocumentService;
 import org.exoplatform.services.cms.documents.DocumentTemplate;
 import org.exoplatform.services.cms.documents.NewDocumentTemplatePlugin;
-import org.exoplatform.services.cms.documents.exception.EditorProviderNotFoundException;
+import org.exoplatform.services.cms.documents.exception.DocumentEditorProviderNotFoundException;
 import org.exoplatform.services.cms.documents.model.Document;
-import org.exoplatform.services.cms.documents.model.EditorProvider;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.drives.ManageDriveService;
 import org.exoplatform.services.cms.drives.impl.ManageDriveServiceImpl;
@@ -112,12 +104,10 @@ public class DocumentServiceImpl implements DocumentService {
   public static final String DOCUMENT_NOT_FOUND = "?path=doc-not-found";
   private static final String DOCUMENTS_NODE = "Documents";
   private static final String SHARED_NODE = "Shared";
-  private static final String DOCUMENTS_SCOPE_NAME = "documents".intern();
-  private static final String EDITOR_ACTIVE_PATTERN = "documents.editors.%s.active".intern();
-  private static final String EDITOR_PERMISSIONS_PATTERN = "documents.editors.%s.permissions".intern();
   private static final Log LOG                 = ExoLogger.getLogger(DocumentServiceImpl.class);
   private final Set<NewDocumentTemplatePlugin> templatePlugins = new HashSet<>();
   private final Set<DocumentEditorPlugin> editorPlugins = new HashSet<>();
+  private final List<DocumentEditorProvider> editorProviders = new ArrayList<>();
   private ManageDriveService manageDriveService;
   private Portal portal;
   private SessionProviderService sessionProviderService;
@@ -125,9 +115,8 @@ public class DocumentServiceImpl implements DocumentService {
   private NodeHierarchyCreator nodeHierarchyCreator;
   private LinkManager linkManager;
   private PortalContainerInfo portalContainerInfo;
-  private SettingService settingService;
 
-  public DocumentServiceImpl(ManageDriveService manageDriveService, Portal portal, SessionProviderService sessionProviderService, RepositoryService repoService, NodeHierarchyCreator nodeHierarchyCreator, LinkManager linkManager, PortalContainerInfo portalContainerInfo, SettingService settingService) {
+  public DocumentServiceImpl(ManageDriveService manageDriveService, Portal portal, SessionProviderService sessionProviderService, RepositoryService repoService, NodeHierarchyCreator nodeHierarchyCreator, LinkManager linkManager, PortalContainerInfo portalContainerInfo) {
     this.manageDriveService = manageDriveService;
     this.sessionProviderService = sessionProviderService;
     this.repoService = repoService;
@@ -135,7 +124,6 @@ public class DocumentServiceImpl implements DocumentService {
     this.portal = portal;
     this.linkManager = linkManager;
     this.portalContainerInfo = portalContainerInfo;
-    this.settingService = settingService;
   }
 
   @Override
@@ -481,6 +469,7 @@ public class DocumentServiceImpl implements DocumentService {
 
       LOG.info("Adding DocumentEditorPlugin [{}]", newPlugin.toString());
       editorPlugins.add(newPlugin);
+      editorProviders.add(new DocumentEditorProvider(newPlugin.getProviderName(), newPlugin.getConfig()));
       if (LOG.isDebugEnabled()) {
         LOG.debug("Registered DocumentEditorPlugin instance of {}", plugin.getClass().getName());
       }
@@ -595,79 +584,20 @@ public class DocumentServiceImpl implements DocumentService {
   /**
    * {@inheritDoc}
    */
-  public List<EditorProvider> getEditorProviders() {
-    List<EditorProvider> providers = new ArrayList<>();
-    getRegisteredEditorPlugins().forEach(plugin -> {
-      providers.add(createEditorProvider(plugin.getProviderName()));
-    });
-    return providers;
+  public List<DocumentEditorProvider> getDocumentEditorProviders() {
+    return editorProviders;
   }
   
   /**
    * {@inheritDoc}
    */
-  public EditorProvider getEditorProvider(String provider) throws EditorProviderNotFoundException {
-    getRegisteredEditorPlugins().stream()
-                                .filter(pl -> pl.getProviderName().equals(provider))
+  public DocumentEditorProvider getEditorProvider(String provider) throws DocumentEditorProviderNotFoundException {
+    return getDocumentEditorProviders().stream()
+                                .filter(editorProvider -> editorProvider.getProvider().equals(provider))
                                 .findFirst()
-                                .orElseThrow(EditorProviderNotFoundException::new);
-    return createEditorProvider(provider);
+                                .orElseThrow(DocumentEditorProviderNotFoundException::new);
   }
-  
-  /**
-   * {@inheritDoc}
-   */
-  public void updateEditorProvider(EditorProvider editorProvider) throws EditorProviderNotFoundException{
-    getRegisteredEditorPlugins().stream()
-                                .filter(pl -> pl.getProviderName().equals(editorProvider.getProvider()))
-                                .findFirst()
-                                .orElseThrow(EditorProviderNotFoundException::new);
-    if(editorProvider.getActive() != null) {
-      settingService.set(Context.GLOBAL,
-                         Scope.GLOBAL.id(DOCUMENTS_SCOPE_NAME),
-                         String.format(EDITOR_ACTIVE_PATTERN, editorProvider.getProvider()),
-                         SettingValue.create(editorProvider.getActive()));
-    }
-    if(editorProvider.getPermissions() != null) {
-      List<String> permissions = editorProvider.getPermissions().stream().map(permission -> {
-        if(permission.startsWith("/")) {
-          permission = "*:" + permission;
-        }
-        return permission;
-      }).collect(Collectors.toList());
-      settingService.set(Context.GLOBAL,
-                         Scope.GLOBAL.id(DOCUMENTS_SCOPE_NAME),
-                         String.format(EDITOR_PERMISSIONS_PATTERN, editorProvider.getProvider()),
-                         SettingValue.create(String.join(",", permissions)));
-    }
-  }
-  
-  /**
-   * Creates editor provider based on data from setting service.
-   * 
-   * @param provider the provider
-   * @return the editor provider
-   */
-  protected EditorProvider createEditorProvider(String provider) {
-    SettingValue<?> activeParam = settingService.get(Context.GLOBAL,
-                                                     Scope.GLOBAL.id(DOCUMENTS_SCOPE_NAME),
-                                                     String.format(EDITOR_ACTIVE_PATTERN, provider));
-    SettingValue<?> permissionsParam = settingService.get(Context.GLOBAL,
-                                                          Scope.GLOBAL.id(DOCUMENTS_SCOPE_NAME),
-                                                          String.format(EDITOR_PERMISSIONS_PATTERN, provider));
 
-    Boolean active = activeParam != null ? Boolean.valueOf(activeParam.getValue().toString()) : true;
-    String permissionsStr = permissionsParam != null ? permissionsParam.getValue().toString() : "*".intern();
-    List<String> permissions = Arrays.asList(permissionsStr.split("\\s*,\\s*")).stream().map(perm -> {
-      if(perm.contains("/")) {
-        perm = perm.substring(perm.indexOf("/"));
-      }
-      return perm;
-    }).collect(Collectors.toList());
-    return new EditorProvider(provider, active, permissions);
-  }
-  
-  
   /**
    * Gets the user session.
    *
@@ -683,5 +613,5 @@ public class DocumentServiceImpl implements DocumentService {
     Session session = sp.getSession(workspace, repoService.getCurrentRepository());
     return session.getNodeByUUID(uuid);
   }
-
+  
 }

@@ -16,6 +16,8 @@
  */
 package org.exoplatform.services.cms.documents;
 
+import java.util.List;
+
 /**
  * The Interface DocumentEditorPlugin provides API for handling such events from New Document feature: 
  * the document is going to be created, the document has been created. 
@@ -31,8 +33,8 @@ public interface DocumentEditorPlugin {
   String getProviderName();
 
   /**
-   * This handler is invoked before creation a new document via NewDocumentTemplatePlugin
-   * 
+   * This handler is invoked before creation a new document via NewDocumentTemplatePlugin.
+   *
    * @param template the document template
    * @param parentPath the parent path
    * @param title the title
@@ -41,7 +43,7 @@ public interface DocumentEditorPlugin {
   void beforeDocumentCreate(DocumentTemplate template, String parentPath, String title) throws Exception ;
 
   /**
-   * This handler is invoked after creation a new document via NewDocumentTemplatePlugin
+   * This handler is invoked after creation a new document via NewDocumentTemplatePlugin.
    *
    * @param workspace the workspace
    * @param path the path
@@ -53,10 +55,10 @@ public interface DocumentEditorPlugin {
    * This handles is invoked when the DocumentUIActivity is rendered in the Activity Stream.
    * It allows to run custom code (JS initialization, setting sockets, etc) while 
    * the activity is being rendered.
-   * 
+   *
    * @param uuid the uuid
    * @param workspace workspace
-   * @param activityId
+   * @param activityId the activity id
    * @param context the context
    * @throws Exception the exception
    */
@@ -76,4 +78,60 @@ public interface DocumentEditorPlugin {
    */
   void initPreview(String uuid, String workspace, String activityId, String context, int index) throws Exception;
 
+ 
+  /**
+   * Gets the config.
+   *
+   * @return the config
+   */
+  ProviderConfig getConfig();
+  
+  /**
+   * The Class ProviderConfig is used to set default permissions and status for the editor provider.
+   */
+  public static class ProviderConfig {
+    
+    /** The permissions. */
+    protected List<String> permissions;
+    
+    /** The active. */
+    protected Boolean active;
+    
+    /**
+     * Gets the permissions.
+     *
+     * @return the permissions
+     */
+    public List<String> getPermissions() {
+      return permissions;
+    }
+    
+    /**
+     * Sets the permissions.
+     *
+     * @param permissions the new permissions
+     */
+    public void setPermissions(List<String> permissions) {
+      this.permissions = permissions;
+    }
+    
+    /**
+     * Gets the active.
+     *
+     * @return the active
+     */
+    public Boolean getActive() {
+      return active;
+    }
+    
+    /**
+     * Sets the active.
+     *
+     * @param active the new active
+     */
+    public void setActive(Boolean active) {
+      this.active = active;
+    }
+
+  }
 }

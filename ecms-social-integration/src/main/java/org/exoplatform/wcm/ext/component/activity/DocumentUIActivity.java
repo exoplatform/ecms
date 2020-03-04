@@ -18,7 +18,6 @@ package org.exoplatform.wcm.ext.component.activity;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.jcr.Node;
 
@@ -27,7 +26,8 @@ import org.exoplatform.ecm.webui.component.explorer.documents.IsEditorPluginPres
 import org.exoplatform.portal.config.UserACL;
 import org.exoplatform.services.cms.documents.DocumentEditorPlugin;
 import org.exoplatform.services.cms.documents.DocumentService;
-import org.exoplatform.services.cms.documents.model.EditorProvider;
+import org.exoplatform.services.cms.documents.exception.DocumentEditorProviderNotFoundException;
+import org.exoplatform.services.cms.documents.impl.DocumentEditorProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.security.ConversationState;
@@ -42,6 +42,7 @@ import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.ext.filter.UIExtensionFilter;
 import org.exoplatform.webui.ext.filter.UIExtensionFilters;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class CustomizedFileUIActivity.
  */
@@ -99,8 +100,7 @@ public class DocumentUIActivity extends FileUIActivity {
       // call plugins init handlers
       documentService.getRegisteredEditorPlugins().forEach(plugin -> {
         try {
-          EditorProvider editorProvider = documentService.getEditorProvider(plugin.getProviderName());
-          if (hasPermissions(editorProvider)) {
+          if (isProviderAvailable(plugin.getProviderName())) {
             plugin.initActivity(node.getUUID(), node.getSession().getWorkspace().getName(), activityId, STREAM_CONTEXT);
           }
         } catch (Exception e) {
@@ -120,8 +120,7 @@ public class DocumentUIActivity extends FileUIActivity {
       // call plugins init handlers
       for (DocumentEditorPlugin plugin : documentService.getRegisteredEditorPlugins()) {
         try {
-          EditorProvider editorProvider = documentService.getEditorProvider(plugin.getProviderName());
-          if (hasPermissions(editorProvider)) {
+          if (isProviderAvailable(plugin.getProviderName())) {
             plugin.initPreview(node.getUUID(), node.getSession().getWorkspace().getName(), activityId, STREAM_CONTEXT, index);
           }
         } catch (Exception e) {
@@ -164,21 +163,20 @@ public class DocumentUIActivity extends FileUIActivity {
     return prefferedEditor;
   }
 
+
+
   /**
-   * Checks for permissions.
+   * Checks if is provider available.
    *
-   * @param editorProvider the editor provider
-   * @return true, if successful
+   * @param providerName the provider name
+   * @return true, if is provider available
+   * @throws DocumentEditorProviderNotFoundException the editor provider not found exception
    */
-  protected boolean hasPermissions(EditorProvider editorProvider) {
+  protected boolean isProviderAvailable(String providerName) throws DocumentEditorProviderNotFoundException{
     UserACL userACL = (UserACL) ExoContainerContext.getCurrentContainer().getComponentInstanceOfType(UserACL.class);
-    List<String> permissions = editorProvider.getPermissions().stream().map(permission -> {
-      if(permission.startsWith("/")) {
-        permission = "*:" + permission;
-      }
-      return permission;
-    }).collect(Collectors.toList());
+    DocumentEditorProvider editorProvider = documentService.getEditorProvider(providerName);
     String currentUser = ConversationState.getCurrent().getIdentity().getUserId();
-    return editorProvider.getActive() && (permissions.contains(currentUser) || userACL.hasPermission(permissions.toArray(new String[0])));
+    List<String> permissions = editorProvider.getPermissions();
+    return editorProvider.getActive() && (permissions.contains("*") || permissions.contains(currentUser) || userACL.hasPermission(permissions.toArray(new String[0])));
   }
 }

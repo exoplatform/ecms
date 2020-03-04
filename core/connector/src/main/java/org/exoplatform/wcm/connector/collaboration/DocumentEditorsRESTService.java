@@ -18,6 +18,7 @@ package org.exoplatform.wcm.connector.collaboration;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.FormParam;
@@ -33,8 +34,9 @@ import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.UriInfo;
 
 import org.exoplatform.services.cms.documents.DocumentService;
-import org.exoplatform.services.cms.documents.exception.EditorProviderNotFoundException;
-import org.exoplatform.services.cms.documents.model.EditorProvider;
+import org.exoplatform.services.cms.documents.exception.DocumentEditorProviderNotFoundException;
+import org.exoplatform.services.cms.documents.impl.DocumentEditorProvider;
+import org.exoplatform.services.cms.documents.impl.DocumentEditorProvider.DocumentEditorProviderDTO;
 import org.exoplatform.services.cms.documents.model.Link;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
@@ -81,7 +83,10 @@ public class DocumentEditorsRESTService implements ResourceContainer {
   @RolesAllowed("administrators")
   @Produces(MediaType.APPLICATION_JSON)
   public Response getEditors(@Context UriInfo uriInfo) {
-    List<EditorProvider> providers = documentService.getEditorProviders();
+    List<DocumentEditorProviderDTO> providers = documentService.getDocumentEditorProviders()
+                                                               .stream()
+                                                               .map(DocumentEditorProvider::covertToDTO)
+                                                               .collect(Collectors.toList());
     providers.forEach(provider -> initLinks(provider, uriInfo));
     try {
       String json = new JsonGeneratorImpl().createJsonArray(providers).toString();
@@ -105,10 +110,10 @@ public class DocumentEditorsRESTService implements ResourceContainer {
   @Produces(MediaType.APPLICATION_JSON)
   public Response getEditor(@Context UriInfo uriInfo, @PathParam("provider") String provider) {
     try {
-      EditorProvider editorProvider = documentService.getEditorProvider(provider);
+      DocumentEditorProviderDTO editorProvider = documentService.getEditorProvider(provider).covertToDTO();
       initLinks(editorProvider, uriInfo);
       return Response.status(Status.OK).entity(editorProvider).build();
-    } catch (EditorProviderNotFoundException e) {
+    } catch (DocumentEditorProviderNotFoundException e) {
       return Response.status(Status.NOT_FOUND).entity("{ \"message\":\"" + PROVIDER_NOT_REGISTERED + "\"}").build();
     }
   }
@@ -131,11 +136,16 @@ public class DocumentEditorsRESTService implements ResourceContainer {
     if (active == null && permissions == null) {
       return Response.status(Status.BAD_REQUEST).entity("{ \"message\":\"" + EMPTY_REQUEST + "\"}").build();
     }
-    EditorProvider editorProvider = new EditorProvider(provider, active, permissions);
     try {
-      documentService.updateEditorProvider(editorProvider);
+      DocumentEditorProvider editorProvider = documentService.getEditorProvider(provider);
+      if (active != null) {
+        editorProvider.setActive(active);
+      }
+      if (permissions != null) {
+        editorProvider.setPermissions(permissions);
+      }
       return Response.status(Status.OK).build();
-    } catch (EditorProviderNotFoundException e) {
+    } catch (DocumentEditorProviderNotFoundException e) {
       return Response.status(Status.NOT_FOUND).entity("{ \"message\":\"" + PROVIDER_NOT_REGISTERED + "\"}").build();
     }
   }
@@ -171,7 +181,7 @@ public class DocumentEditorsRESTService implements ResourceContainer {
    * @param provider the provider
    * @param uriInfo the uri info
    */
-  protected void initLinks(EditorProvider provider, UriInfo uriInfo) {
+  protected void initLinks(DocumentEditorProviderDTO provider, UriInfo uriInfo) {
     String path = uriInfo.getAbsolutePath().toString();
     if (!uriInfo.getPathParameters().containsKey("provider")) {
       StringBuilder pathBuilder = new StringBuilder(path);
