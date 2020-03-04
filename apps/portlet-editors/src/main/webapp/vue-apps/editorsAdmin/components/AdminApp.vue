@@ -51,7 +51,7 @@
         >
           <v-card>
             <v-card-title
-              class="headline grey lighten-2"
+              class="headline grey lighten-2 justify-space-between"
               primary-title
             >
               {{ this.$t('editors.admin.modal.title') }}
@@ -59,7 +59,26 @@
                 <v-icon>close</v-icon>
               </v-btn>
             </v-card-title>
-            <v-card-text></v-card-text>
+            <v-card-text>
+              <div class="v-skeleton-loader__bone blockProvidersInner">
+                <div class="permissionsSkeleton">
+                  <div class="v-skeleton-loader  v-skeleton-loader--is-loading theme--light providersSkeleton skeletonText">
+                  </div>
+                  <div class="permissionsRow">
+                    <div class="v-skeleton-loader  v-skeleton-loader--is-loading theme--light providersSkeleton searchLabel">
+                    </div>
+                    <div class="v-skeleton-loader  v-skeleton-loader--is-loading theme--light providersSkeleton skeletonText searchField">
+                    </div>
+                  </div>
+                  <div class="permissionsRow permissionsRow--btns">
+                    <div class="v-skeleton-loader  v-skeleton-loader--is-loading theme--light providersSkeleton skeletonButton">
+                    </div>
+                    <div class="v-skeleton-loader  v-skeleton-loader--is-loading theme--light providersSkeleton skeletonButton">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </v-card-text>
           </v-card>
         </v-dialog>
       </div>
@@ -120,5 +139,42 @@ export default {
     position: absolute;
     width: 100%;
     margin-left: 10px;
+  }
+
+  .permissionsSkeleton {
+    display: flex;
+    flex-direction: column;
+    padding: 15px 15px 0;
+    width: 100%;
+  }
+
+  .permissionsRow {
+    display: flex;
+    align-items: center;
+  }
+
+  .permissionsRow--btns {
+    justify-content: center;
+    margin-top: 10px;
+  }
+
+  .permissionsRow > .searchLabel {
+    width: 10%;
+    height: 12px;
+    border-radius: 15px;
+    margin-top: 16px;
+    margin-bottom: 16px;
+    margin-right: 10px;
+  }
+
+  .searchField {
+    height: 20px;
+  }
+
+  .skeletonButton {
+    width: 20%;
+    height: 40px;
+    border-radius: 15px;
+    margin-right: 10px;
   }
 </style>

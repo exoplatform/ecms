@@ -155,7 +155,7 @@
   flex-direction: row;
   background-color: white;
   height: 33%;
-  margin-bottom: 10px;
+  margin: 0 32px 10px;
 }
 
 .providersItem {
@@ -199,7 +199,7 @@
 }
 
 .editorsSkeletonTitle {
-  margin: 3% 0;
+  margin: 3% 32px;
   width: 25%;
   height: 20px;
   border-radius: 10px;
