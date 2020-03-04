@@ -10,18 +10,20 @@
       </v-row>
       <v-row>
         <v-col xs12>
-          <v-simple-table>
+          <v-simple-table class="providersTable">
             <template v-slot:default>
               <thead>
                 <tr>
                   <th class="text-left">{{ $t('editors.admin.table.Provider') }}</th>
-                  <th class="text-left" style="width: 25%">{{ $t('editors.admin.table.Active') }}</th>
-                  <th class="text-left" style="width: 25%">{{ $t('editors.admin.table.Permissions') }}</th>
+                  <th class="text-left">{{ $t('editors.admin.table.Description') }}</th>
+                  <th class="text-left" style="width: 5%">{{ $t('editors.admin.table.Active') }}</th>
+                  <th class="text-left" style="width: 5%">{{ $t('editors.admin.table.Permissions') }}</th>
                 </tr>
               </thead>
               <tbody v-if="providers.length > 0">
                 <tr v-for="item in providers" :key="item.provider">
-                  <td>{{ item.provider }}</td>
+                  <td>{{ $t(`editors.admin.${item.provider}.name`) }}</td>
+                  <td>{{ $t(`editors.admin.${item.provider}.description`) }}</td>
                   <td>
                     <v-switch
                       :input-value="item.active"
@@ -29,7 +31,7 @@
                       @change="changeStatus(item)"
                     ></v-switch>
                   </td>
-                  <td>
+                  <td class="text-center">
                     <v-btn text icon color="indigo" @click.stop="showDialog = true">
                       <i class="material-icons">
                         settings
