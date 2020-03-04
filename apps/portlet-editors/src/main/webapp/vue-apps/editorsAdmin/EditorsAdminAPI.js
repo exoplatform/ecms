@@ -3,9 +3,9 @@ export function getInfo(link) {
     if (res && res.ok) {
       return res.json();
     } else {
-      throw new Error('Error when getting info');
+      log('Unable to get data');
     }
-  });
+  })
 }
 
 export function postInfo(link, postData) {
@@ -23,7 +23,39 @@ export function postInfo(link, postData) {
     if (res && res.ok) {
       return res;
     } else {
-      throw new Error('Error when posted info');
+      log('Unable to post data');
     }
   });
+}
+
+function log(msg, err) {
+  const logPrefix = "[editorsAdmin] ";
+  if (typeof console !== "undefined" && typeof console.log !== "undefined") {
+    const isoTime = " -- " + new Date().toISOString();
+    let msgLine = msg;
+    if (err) {
+      msgLine += ". Error: ";
+      if (err.name || err.message) {
+        if (err.name) {
+          msgLine += "[" + err.name + "] ";
+        }
+        if (err.message) {
+          msgLine += err.message;
+        }
+      } else {
+        msgLine += (typeof err === "string" ? err : JSON.stringify(err)
+            + (err.toString && typeof err.toString === "function" ? "; " + err.toString() : ""));
+      }
+
+      console.log(logPrefix + msgLine + isoTime);
+      if (typeof err.stack !== "undefined") {
+        console.log(err.stack);
+      }
+    } else {
+      if (err !== null && typeof err !== "undefined") {
+        msgLine += ". Error: '" + err + "'";
+      }
+      console.log(logPrefix + msgLine + isoTime);
+    }
+  }
 }
