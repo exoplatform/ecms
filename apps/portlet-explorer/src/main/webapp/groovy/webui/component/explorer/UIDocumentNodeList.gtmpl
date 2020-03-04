@@ -108,7 +108,7 @@ public void writeNodes(level, i, data, uiWorkingArea, linkManager, restContextNa
   def versionNum  = uicomponent.getVersionNumber(data);
   def author = uicomponent.getAuthorName(data);
   def fileSize = uicomponent.getFileSize(data);
-  def urlToCopy = uiDocumentInfo.getLinkInDocuments(nodePath);
+  def urlToCopy = WCMCoreUtils.getLinkInDocumentsApplication(nodePath);
   
   String actionLink = uiDocumentInfo.event("ChangeNode",Utils.formatNodeName(data.path), new Parameter("workspaceName", preferenceWS)) ;
 

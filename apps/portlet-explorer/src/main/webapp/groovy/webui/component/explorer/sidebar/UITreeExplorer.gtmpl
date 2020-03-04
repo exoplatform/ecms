@@ -12,8 +12,7 @@
   import java.util.ArrayList;
   import org.exoplatform.ecm.utils.text.Text;
   import org.exoplatform.services.jcr.RepositoryService;
-  import org.exoplatform.ecm.webui.component.explorer.UIDocumentInfo;
-
+  import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 %>
 <%
 
@@ -119,10 +118,10 @@
   			  }
   	    }
 
-  	        String encodedPath = URLEncoder.encode(Utils.formatNodeName(node.getPath()), "UTF-8");
-			def urlToCopy = uicomponent.getLinkInDocuments(node.getPath());
-			encodedPath = encodedPath.replaceAll("%2F", "/"); //we won't encode the slash characters in the path
-  	        String clipboardLink = serverPath + urlToCopy;
+  	    String encodedPath = URLEncoder.encode(Utils.formatNodeName(node.getPath()), "UTF-8");
+		def urlToCopy = WCMCoreUtils.getLinkInDocumentsApplication(node.getPath());
+		encodedPath = encodedPath.replaceAll("%2F", "/"); //we won't encode the slash characters in the path
+  	    String clipboardLink = serverPath + urlToCopy;
   		int depthChild = node.getDepth();
         if (!node.isNodeType(Utils.EXO_RESTORELOCATION) && !Utils.isTrashHomeNode(node)) {
           strActs +=  "<li class='menuItem'>";
