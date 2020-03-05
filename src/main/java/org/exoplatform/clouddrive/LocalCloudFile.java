@@ -18,7 +18,6 @@
  */
 package org.exoplatform.clouddrive;
 
-import java.beans.Transient;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -31,7 +30,7 @@ import org.exoplatform.services.log.Log;
  * Abstract class for all locally connected {@link CloudFile} instances.
  */
 public abstract class LocalCloudFile implements CloudFile {
-  
+
   protected static final Log LOG = ExoLogger.getLogger(LocalCloudFile.class);
 
   private String             modifiedLocal;
@@ -43,33 +42,11 @@ public abstract class LocalCloudFile implements CloudFile {
    *
    * @param locale the locale to format the dates
    */
-  public void initModified(Locale locale/*, CloudDrive drive*/) {
-    //Node node = this.getNode();
-    //if (node != null) {
-      //try {
-//        try {
-//          // File node can be set in another thread or JCR session expired, check this
-//          node.getIndex();
-//        } catch (InvalidItemStateException e) {
-//          // Need get a fresh file node
-//          node = null;
-//          try {
-//            node = LocalCloudFile.class.cast(drive.getFile(getPath())).getNode();
-//          } catch (NotCloudFileException | NotCloudDriveException | DriveRemovedException | ClassCastException ncfe) {
-//            // Not a drive of this file or drive disconnected or removed
-//          }
-//        }
-//        if (node != null) {
-          //Calendar modifiedLocalDate = node.getProperty("exo:lastModifiedDate").getDate();
-          this.modifiedLocal = formatLocalizedDate(getLocalModifiedDate(), locale);
-          this.modifiedRemote = formatLocalizedDate(this.getModifiedDate(), locale);
-        //}
-//      } catch (RepositoryException e) {
-//        LOG.warn("Cannot initialize cloud file modified fields for {}", this.getPath(), e);
-//      }
-    //}
+  public void initModified(Locale locale) {
+    this.modifiedLocal = formatLocalizedDate(getLocalModifiedDate(), locale);
+    this.modifiedRemote = formatLocalizedDate(this.getModifiedDate(), locale);
   }
-  
+
   /**
    * Gets the local modified date from the storage (not the same as actual modified date in remote provider).
    *
