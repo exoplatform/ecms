@@ -21,6 +21,7 @@ package org.exoplatform.clouddrive.jcr;
 import java.util.Calendar;
 
 import javax.jcr.Node;
+import javax.jcr.RepositoryException;
 
 import org.exoplatform.clouddrive.LocalCloudFile;
 
@@ -77,6 +78,9 @@ public class JCRLocalCloudFile extends LocalCloudFile {
 
   /** The modified date. */
   private final transient Calendar modifiedDate;
+  
+  /** The local modified date. */
+  private final transient Calendar localModifiedDate;
 
   /** The node. */
   private final transient Node     node;
@@ -139,6 +143,15 @@ public class JCRLocalCloudFile extends LocalCloudFile {
     this.size = size;
     this.node = node;
     this.changed = changed;
+    
+    Calendar localModifiedDate;
+    try {
+      localModifiedDate = node.getProperty("exo:lastModifiedDate").getDate();
+    } catch (RepositoryException | NullPointerException e) {
+      LOG.warn("Cannot read local modified date of cloud file {}", path, e);
+      localModifiedDate = this.modifiedDate;
+    }
+    this.localModifiedDate = localModifiedDate;
   }
 
   /**
@@ -426,7 +439,6 @@ public class JCRLocalCloudFile extends LocalCloudFile {
    *
    * @return the node that represent this Cloud File in the storage.
    */
-  @Override
   public Node getNode() {
     return node;
   }
@@ -441,4 +453,11 @@ public class JCRLocalCloudFile extends LocalCloudFile {
     return changed;
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public Calendar getLocalModifiedDate() {
+    return localModifiedDate;
+  }
 }
