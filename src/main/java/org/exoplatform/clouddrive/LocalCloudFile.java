@@ -31,7 +31,11 @@ import org.exoplatform.services.log.Log;
  * Abstract class for all locally connected {@link CloudFile} instances.
  */
 public abstract class LocalCloudFile implements CloudFile {
+<<<<<<< HEAD
   
+=======
+
+>>>>>>> master
   protected static final Log LOG = ExoLogger.getLogger(LocalCloudFile.class);
 
   private String             modifiedLocal;
@@ -43,6 +47,7 @@ public abstract class LocalCloudFile implements CloudFile {
    *
    * @param locale the locale to format the dates
    */
+<<<<<<< HEAD
   public void initModified(Locale locale/*, CloudDrive drive*/) {
     //Node node = this.getNode();
     //if (node != null) {
@@ -68,8 +73,20 @@ public abstract class LocalCloudFile implements CloudFile {
 //        LOG.warn("Cannot initialize cloud file modified fields for {}", this.getPath(), e);
 //      }
     //}
+=======
+  public void initModified(Locale locale) {
+    this.modifiedLocal = formatLocalizedDate(getLocalModifiedDate(), locale);
+    this.modifiedRemote = formatLocalizedDate(this.getModifiedDate(), locale);
+>>>>>>> master
   }
   
+  /**
+   * Gets the local modified date from the storage (not the same as actual modified date in remote provider).
+   *
+   * @return the local modified date
+   */
+  public abstract Calendar getLocalModifiedDate();
+
   /**
    * Gets the local modified date from the storage (not the same as actual modified date in remote provider).
    *
