@@ -26,10 +26,9 @@ import org.exoplatform.clouddrive.CloudFile;
 import org.exoplatform.clouddrive.LocalCloudFile;
 
 /**
- * Wraps fields from another {@link CloudFile} and replace its path with a path
- * of that file {@link Node} symlink node.<br>
- * NOTE: we cannot wrap instance of another another {@link CloudFile} as it
- * leads to StackOverflowError in WS JsonGeneratorImpl.<br>
+ * Wraps fields from another {@link CloudFile} and replace its path with a path of that file {@link Node} symlink node.<br>
+ * NOTE: we cannot wrap instance of another another {@link CloudFile} as it leads to StackOverflowError in WS
+ * JsonGeneratorImpl.<br>
  * Created by The eXo Platform SAS.<br>
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
@@ -74,6 +73,9 @@ public class LinkedCloudFile extends LocalCloudFile {
 
   /** The modified date. */
   private final transient Calendar modifiedDate;
+  
+  /** The local modified date. */
+  private final transient Calendar localModifiedDate;
 
   /** The folder. */
   private final boolean            folder;
@@ -83,7 +85,6 @@ public class LinkedCloudFile extends LocalCloudFile {
 
   /** The is symlink. */
   private final boolean            isSymlink;
-  private  Node node;
 
   /**
    * Instantiates a new linked cloud file.
@@ -107,13 +108,17 @@ public class LinkedCloudFile extends LocalCloudFile {
     this.modifiedDate = file.getModifiedDate();
     this.path = path;
     this.size = file.getSize();
-    this.isSymlink = true;
-    if (file.isConnected()) {
-      this.node = LocalCloudFile.class.cast(file).getNode();
+    this.isSymlink = true;    
+    Calendar localModifiedDate;
+    try {
+      localModifiedDate = LocalCloudFile.class.cast(file).getLocalModifiedDate();
+    } catch (ClassCastException e) {
+      // Not a drive of this file or drive disconnected or removed
+      localModifiedDate = this.modifiedDate; 
     }
-
+    this.localModifiedDate = localModifiedDate; 
   }
-  
+
   /**
    * Checks if is symlink.
    *
@@ -214,8 +219,6 @@ public class LinkedCloudFile extends LocalCloudFile {
     return folder;
   }
 
-
-
   /**
    * {@inheritDoc}
    */
@@ -231,8 +234,11 @@ public class LinkedCloudFile extends LocalCloudFile {
     return size;
   }
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
-  public Node getNode() {
-    return node;
+  public Calendar getLocalModifiedDate() {
+    return localModifiedDate;
   }
 }

@@ -180,7 +180,7 @@ public class DriveService implements ResourceContainer {
             Command sync = local.synchronize();
             sync.await(); // wait for sync process
             files = sync.getFiles();
-            initModified(files, locale, local);
+            initModified(files, locale);
             removed = sync.getRemoved();
             messages = sync.getMessages();
           } catch (InterruptedException e) {
@@ -249,7 +249,7 @@ public class DriveService implements ResourceContainer {
                 // it's symlink, add it also
                 files.add(new LinkedCloudFile(file, path));
               }
-              initModified(file, locale, local);
+              initModified(file, locale);
             }
           } catch (NotYetCloudFileException e) {
             if (LOG.isDebugEnabled()) {
@@ -321,7 +321,7 @@ public class DriveService implements ResourceContainer {
               if (!file.getPath().equals(path)) {
                 file = new LinkedCloudFile(file, path); // it's symlink
               }
-              initModified(file, locale, local);
+              initModified(file, locale);
               return Response.ok().entity(file).build();
             } catch (NotYetCloudFileException e) {
               return Response.status(Status.ACCEPTED).entity(new AcceptedCloudFile(path)).build();
@@ -411,7 +411,7 @@ public class DriveService implements ResourceContainer {
                   if (!file.getPath().equals(filePath)) {
                     file = new LinkedCloudFile(file, filePath); // it's symlink
                   }
-                  initModified(file, locale, local);
+                  initModified(file, locale);
                   files.add(file);
                 } // not a cloud file - skip it
               } catch (NotYetCloudFileException e) {
@@ -510,16 +510,16 @@ public class DriveService implements ResourceContainer {
     }
   }
 
-  private void initModified(Collection<CloudFile> files, Locale locale, CloudDrive drive) {
+  private void initModified(Collection<CloudFile> files, Locale locale) {
     for (CloudFile file : files) {
-      initModified(file, locale, drive);
+      initModified(file, locale);
     }
   }
 
-  private void initModified(CloudFile file, Locale locale, CloudDrive drive) {
+  private void initModified(CloudFile file, Locale locale) {
     if (file.isConnected()) {
       try {
-        LocalCloudFile.class.cast(file).initModified(locale, drive);
+        LocalCloudFile.class.cast(file).initModified(locale);
       } catch (ClassCastException e) {
         // safely ignore it, but let to know it was
         LOG.warn("Cannot initialize cloud file modified field for {} due to error: {}", file.getPath(), e.getMessage());

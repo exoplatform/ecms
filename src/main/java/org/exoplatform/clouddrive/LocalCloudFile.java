@@ -18,14 +18,11 @@
  */
 package org.exoplatform.clouddrive;
 
+import java.beans.Transient;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
-
-import javax.jcr.InvalidItemStateException;
-import javax.jcr.Node;
-import javax.jcr.RepositoryException;
 
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
@@ -34,6 +31,7 @@ import org.exoplatform.services.log.Log;
  * Abstract class for all locally connected {@link CloudFile} instances.
  */
 public abstract class LocalCloudFile implements CloudFile {
+  
   protected static final Log LOG = ExoLogger.getLogger(LocalCloudFile.class);
 
   private String             modifiedLocal;
@@ -44,34 +42,40 @@ public abstract class LocalCloudFile implements CloudFile {
    * Inits the modified dates of the file using given locale.
    *
    * @param locale the locale to format the dates
-   * @param drive the local drive, it may be used in need get a fresh file node from JCR
    */
-  public void initModified(Locale locale, CloudDrive drive) {
-    Node node = this.getNode();
-    if (node != null) {
-      try {
-        try {
-          // File node can be set in another thread or JCR session expired, check this
-          node.getIndex();
-        } catch (InvalidItemStateException e) {
-          // Need get a fresh file node
-          node = null;
-          try {
-            node = LocalCloudFile.class.cast(drive.getFile(getPath())).getNode();
-          } catch (NotCloudFileException | NotCloudDriveException | DriveRemovedException | ClassCastException ncfe) {
-            // Not a drive of this file or drive disconnected or removed
-          }
-        }
-        if (node != null) {
-          Calendar modifiedLocalDate = node.getProperty("exo:lastModifiedDate").getDate();
-          this.modifiedLocal = formatLocalizedDate(modifiedLocalDate, locale);
+  public void initModified(Locale locale/*, CloudDrive drive*/) {
+    //Node node = this.getNode();
+    //if (node != null) {
+      //try {
+//        try {
+//          // File node can be set in another thread or JCR session expired, check this
+//          node.getIndex();
+//        } catch (InvalidItemStateException e) {
+//          // Need get a fresh file node
+//          node = null;
+//          try {
+//            node = LocalCloudFile.class.cast(drive.getFile(getPath())).getNode();
+//          } catch (NotCloudFileException | NotCloudDriveException | DriveRemovedException | ClassCastException ncfe) {
+//            // Not a drive of this file or drive disconnected or removed
+//          }
+//        }
+//        if (node != null) {
+          //Calendar modifiedLocalDate = node.getProperty("exo:lastModifiedDate").getDate();
+          this.modifiedLocal = formatLocalizedDate(getLocalModifiedDate(), locale);
           this.modifiedRemote = formatLocalizedDate(this.getModifiedDate(), locale);
-        }
-      } catch (RepositoryException e) {
-        LOG.warn("Cannot initialize cloud file modified fields for {}", node, e);
-      }
-    }
+        //}
+//      } catch (RepositoryException e) {
+//        LOG.warn("Cannot initialize cloud file modified fields for {}", this.getPath(), e);
+//      }
+    //}
   }
+  
+  /**
+   * Gets the local modified date from the storage (not the same as actual modified date in remote provider).
+   *
+   * @return the local modified date
+   */
+  public abstract Calendar getLocalModifiedDate();
 
   /*
    * Implementation taken from UIDocumentNodeList.getDatePropertyValue 13/08/2019
@@ -94,6 +98,11 @@ public abstract class LocalCloudFile implements CloudFile {
     return modifiedRemote;
   }
 
+  /**
+   * Gets the modified locally date formatted in user locale (applied for current user who requests the file).
+   *
+   * @return the modified local date
+   */
   public String getModifiedLocal() {
     return modifiedLocal;
   }
@@ -105,6 +114,4 @@ public abstract class LocalCloudFile implements CloudFile {
   public final boolean isConnected() {
     return true;
   }
-
-  public abstract Node getNode();
 }
