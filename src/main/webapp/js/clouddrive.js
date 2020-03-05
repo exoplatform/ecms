@@ -1150,7 +1150,6 @@
 			return null;
 		};
 		
-		this.getFile = getFile;
 		this.getDocument = getDocument;
 
 		this.getCurrentNode = function() {
