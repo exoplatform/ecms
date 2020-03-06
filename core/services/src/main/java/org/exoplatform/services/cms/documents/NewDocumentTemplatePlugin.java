@@ -46,7 +46,7 @@ public interface NewDocumentTemplatePlugin {
    * 
    * @return the editorPlugin
    */
-  DocumentEditorPlugin getEditor();
+  DocumentEditorOps getEditorOps();
 
   /**
    * Creates the document from specified template.

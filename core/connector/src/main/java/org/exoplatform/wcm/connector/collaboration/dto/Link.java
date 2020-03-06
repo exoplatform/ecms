@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, see<http://www.gnu.org/licenses/>.
  */
-package org.exoplatform.services.cms.documents.model;
+package org.exoplatform.wcm.connector.collaboration.dto;
 
 /**
  * The Class Link.

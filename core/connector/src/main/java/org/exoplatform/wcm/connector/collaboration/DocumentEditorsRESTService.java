@@ -33,14 +33,14 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.UriInfo;
 
+import org.exoplatform.services.cms.documents.DocumentEditorProvider;
 import org.exoplatform.services.cms.documents.DocumentService;
 import org.exoplatform.services.cms.documents.exception.DocumentEditorProviderNotFoundException;
-import org.exoplatform.services.cms.documents.impl.DocumentEditorProvider;
-import org.exoplatform.services.cms.documents.impl.DocumentEditorProvider.DocumentEditorProviderDTO;
-import org.exoplatform.services.cms.documents.model.Link;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.rest.resource.ResourceContainer;
+import org.exoplatform.wcm.connector.collaboration.dto.DocumentEditorProviderDTO;
+import org.exoplatform.wcm.connector.collaboration.dto.Link;
 import org.exoplatform.ws.frameworks.json.impl.JsonGeneratorImpl;
 
 /**
@@ -70,7 +70,6 @@ public class DocumentEditorsRESTService implements ResourceContainer {
    */
   public DocumentEditorsRESTService(DocumentService documentService) {
     this.documentService = documentService;
-
   }
 
   /**
@@ -85,7 +84,7 @@ public class DocumentEditorsRESTService implements ResourceContainer {
   public Response getEditors(@Context UriInfo uriInfo) {
     List<DocumentEditorProviderDTO> providers = documentService.getDocumentEditorProviders()
                                                                .stream()
-                                                               .map(DocumentEditorProvider::covertToDTO)
+                                                               .map(DocumentEditorProviderDTO::new)
                                                                .collect(Collectors.toList());
     providers.forEach(provider -> initLinks(provider, uriInfo));
     try {
@@ -110,8 +109,9 @@ public class DocumentEditorsRESTService implements ResourceContainer {
   @Produces(MediaType.APPLICATION_JSON)
   public Response getEditor(@Context UriInfo uriInfo, @PathParam("provider") String provider) {
     try {
-      DocumentEditorProviderDTO editorProvider = documentService.getEditorProvider(provider).covertToDTO();
-      initLinks(editorProvider, uriInfo);
+      DocumentEditorProvider editorProvider = documentService.getEditorProvider(provider);
+      DocumentEditorProviderDTO providerDTO = new DocumentEditorProviderDTO(editorProvider);
+      initLinks(providerDTO, uriInfo);
       return Response.status(Status.OK).entity(editorProvider).build();
     } catch (DocumentEditorProviderNotFoundException e) {
       return Response.status(Status.NOT_FOUND).entity("{ \"message\":\"" + PROVIDER_NOT_REGISTERED + "\"}").build();
@@ -139,10 +139,10 @@ public class DocumentEditorsRESTService implements ResourceContainer {
     try {
       DocumentEditorProvider editorProvider = documentService.getEditorProvider(provider);
       if (active != null) {
-        editorProvider.setActive(active);
+        editorProvider.updateActive(active);
       }
       if (permissions != null) {
-        editorProvider.setPermissions(permissions);
+        editorProvider.updatePermissions(permissions);
       }
       return Response.status(Status.OK).build();
     } catch (DocumentEditorProviderNotFoundException e) {

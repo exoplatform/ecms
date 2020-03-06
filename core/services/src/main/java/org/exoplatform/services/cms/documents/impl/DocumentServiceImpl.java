@@ -50,7 +50,8 @@ import org.exoplatform.portal.mop.user.UserPortalContext;
 import org.exoplatform.resolver.ApplicationResourceResolver;
 import org.exoplatform.resolver.ResourceResolver;
 import org.exoplatform.services.cms.BasePath;
-import org.exoplatform.services.cms.documents.DocumentEditorPlugin;
+import org.exoplatform.services.cms.documents.DocumentEditorOps;
+import org.exoplatform.services.cms.documents.DocumentEditorProvider;
 import org.exoplatform.services.cms.documents.DocumentService;
 import org.exoplatform.services.cms.documents.DocumentTemplate;
 import org.exoplatform.services.cms.documents.NewDocumentTemplatePlugin;
@@ -106,8 +107,7 @@ public class DocumentServiceImpl implements DocumentService {
   private static final String SHARED_NODE = "Shared";
   private static final Log LOG                 = ExoLogger.getLogger(DocumentServiceImpl.class);
   private final Set<NewDocumentTemplatePlugin> templatePlugins = new HashSet<>();
-  private final Set<DocumentEditorPlugin> editorPlugins = new HashSet<>();
-  private final List<DocumentEditorProvider> editorProviders = new ArrayList<>();
+  private final Set<DocumentEditorProviderImpl> editorProviders = new HashSet<>();
   private ManageDriveService manageDriveService;
   private Portal portal;
   private SessionProviderService sessionProviderService;
@@ -463,18 +463,17 @@ public class DocumentServiceImpl implements DocumentService {
    */
   @Override
   public void addDocumentEditorPlugin(ComponentPlugin plugin) {
-    Class<DocumentEditorPlugin> pclass = DocumentEditorPlugin.class;
+    Class<DocumentEditorOps> pclass = DocumentEditorOps.class;
     if (pclass.isAssignableFrom(plugin.getClass())) {
-      DocumentEditorPlugin newPlugin = pclass.cast(plugin);
+      DocumentEditorOps editorOps = pclass.cast(plugin);
 
-      LOG.info("Adding DocumentEditorPlugin [{}]", newPlugin.toString());
-      editorPlugins.add(newPlugin);
-      editorProviders.add(new DocumentEditorProvider(newPlugin.getProviderName(), newPlugin.getConfig()));
+      LOG.info("Adding DocumentEditorOps [{}]", editorOps.toString());
+      editorProviders.add(new DocumentEditorProviderImpl(editorOps));
       if (LOG.isDebugEnabled()) {
-        LOG.debug("Registered DocumentEditorPlugin instance of {}", plugin.getClass().getName());
+        LOG.debug("Registered DocumentEditorOps instance of {}", plugin.getClass().getName());
       }
     } else {
-      LOG.error("The DocumentEditorPlugin plugin is not an instance of " + pclass.getName());
+      LOG.error("The DocumentEditorOps plugin is not an instance of " + pclass.getName());
     }
   }
 
@@ -527,14 +526,6 @@ public class DocumentServiceImpl implements DocumentService {
    * {@inheritDoc}
    */
   @Override
-  public Set<DocumentEditorPlugin> getRegisteredEditorPlugins() {
-    return Collections.unmodifiableSet(editorPlugins);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
   public boolean hasDocumentTemplatePlugins() {
     return templatePlugins.size() > 0;
   }
@@ -543,8 +534,8 @@ public class DocumentServiceImpl implements DocumentService {
    * {@inheritDoc}
    */
   @Override
-  public boolean hasDocumentEditorPlugins() {
-    return editorPlugins.size() > 0;
+  public boolean hasDocumentEditorProviders() {
+    return editorProviders.size() > 0;
   }
   
   /**
@@ -584,8 +575,8 @@ public class DocumentServiceImpl implements DocumentService {
   /**
    * {@inheritDoc}
    */
-  public List<DocumentEditorProvider> getDocumentEditorProviders() {
-    return editorProviders;
+  public Set<DocumentEditorProvider> getDocumentEditorProviders() {
+    return Collections.unmodifiableSet(editorProviders);
   }
   
   /**
@@ -593,7 +584,7 @@ public class DocumentServiceImpl implements DocumentService {
    */
   public DocumentEditorProvider getEditorProvider(String provider) throws DocumentEditorProviderNotFoundException {
     return getDocumentEditorProviders().stream()
-                                .filter(editorProvider -> editorProvider.getProvider().equals(provider))
+                                .filter(editorProvider -> editorProvider.getProviderName().equals(provider))
                                 .findFirst()
                                 .orElseThrow(DocumentEditorProviderNotFoundException::new);
   }

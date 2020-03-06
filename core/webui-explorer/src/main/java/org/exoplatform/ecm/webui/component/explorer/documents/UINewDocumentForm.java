@@ -34,9 +34,9 @@ import org.apache.commons.lang.StringUtils;
 import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
+import org.exoplatform.services.cms.documents.DocumentEditorOps;
 import org.exoplatform.services.cms.documents.DocumentService;
 import org.exoplatform.services.cms.documents.DocumentTemplate;
-import org.exoplatform.services.cms.documents.DocumentEditorPlugin;
 import org.exoplatform.services.cms.documents.NewDocumentTemplatePlugin;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
@@ -156,7 +156,7 @@ public class UINewDocumentForm extends UIForm implements UIPopupComponent {
       String name = selectedOption.getLabel();
       DocumentTemplate template = templatePlugin.getTemplate(name);
 
-      DocumentEditorPlugin editorPlugin = templatePlugin.getEditor();
+      DocumentEditorOps editorPlugin = templatePlugin.getEditorOps();
       title = getFileName(title, template);
       if (editorPlugin != null) {
         editorPlugin.beforeDocumentCreate(template, currentNode.getPath(), title);

@@ -21,16 +21,12 @@ import java.util.List;
 
 import javax.jcr.Node;
 
-import org.exoplatform.container.ExoContainerContext;
-import org.exoplatform.ecm.webui.component.explorer.documents.IsEditorPluginPresentFilter;
-import org.exoplatform.portal.config.UserACL;
-import org.exoplatform.services.cms.documents.DocumentEditorPlugin;
+import org.exoplatform.services.cms.documents.DocumentEditorProvider;
 import org.exoplatform.services.cms.documents.DocumentService;
-import org.exoplatform.services.cms.documents.exception.DocumentEditorProviderNotFoundException;
-import org.exoplatform.services.cms.documents.impl.DocumentEditorProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.security.ConversationState;
+import org.exoplatform.services.security.Identity;
 import org.exoplatform.social.webui.activity.BaseUIActivity;
 import org.exoplatform.web.application.JavascriptManager;
 import org.exoplatform.web.application.RequireJS;
@@ -73,7 +69,7 @@ public class DocumentUIActivity extends FileUIActivity {
 
   /** The Constant FILTERS. */
   protected static final List<UIExtensionFilter> FILTERS        = Arrays.asList(new UIExtensionFilter[] {
-      new IsEditorPluginPresentFilter(), });
+      new IsEditorProviderPresentFilter(), });
 
   /**
    * Instantiates a new customized file UI activity.
@@ -93,18 +89,19 @@ public class DocumentUIActivity extends FileUIActivity {
     WebuiRequestContext requestContext = WebuiRequestContext.getCurrentInstance();
     JavascriptManager js = requestContext.getJavascriptManager();
     String activityId = getActivity().getId();
+    Identity identity = ConversationState.getCurrent().getIdentity();
     RequireJS require = js.require("SHARED/editorbuttons", "editorbuttons");
     if (getFilesCount() == 1) {
       Node node = getContentNode(0);
       require.addScripts("editorbuttons.resetButtons();");
       // call plugins init handlers
-      documentService.getRegisteredEditorPlugins().forEach(plugin -> {
+      documentService.getDocumentEditorProviders().forEach(provider -> {
         try {
-          if (isProviderAvailable(plugin.getProviderName())) {
-            plugin.initActivity(node.getUUID(), node.getSession().getWorkspace().getName(), activityId, STREAM_CONTEXT);
+          if (provider.isAvailableForUser(identity)) {
+            provider.initActivity(node.getUUID(), node.getSession().getWorkspace().getName(), activityId, STREAM_CONTEXT);
           }
         } catch (Exception e) {
-          LOG.error("Cannot init activity from plugin {}, {}", plugin.getProviderName(), e.getMessage());
+          LOG.error("Cannot init activity from plugin {}, {}", provider.getProviderName(), e.getMessage());
         }
       });
       String prefferedEditor = getPrefferedEditor(node);
@@ -118,13 +115,13 @@ public class DocumentUIActivity extends FileUIActivity {
       Node node = getContentNode(index);
       require.addScripts("editorbuttons.resetButtons();");
       // call plugins init handlers
-      for (DocumentEditorPlugin plugin : documentService.getRegisteredEditorPlugins()) {
+      for (DocumentEditorProvider provider : documentService.getDocumentEditorProviders()) {
         try {
-          if (isProviderAvailable(plugin.getProviderName())) {
-            plugin.initPreview(node.getUUID(), node.getSession().getWorkspace().getName(), activityId, STREAM_CONTEXT, index);
+          if (provider.isAvailableForUser(identity)) {
+            provider.initPreview(node.getUUID(), node.getSession().getWorkspace().getName(), activityId, STREAM_CONTEXT, index);
           }
         } catch (Exception e) {
-          LOG.error("Cannot init preview from plugin {}, {}", plugin.getProviderName(), e.getMessage());
+          LOG.error("Cannot init preview from plugin {}, {}", provider.getProviderName(), e.getMessage());
         }
       }
       String prefferedEditor = getPrefferedEditor(node);
@@ -163,20 +160,4 @@ public class DocumentUIActivity extends FileUIActivity {
     return prefferedEditor;
   }
 
-
-
-  /**
-   * Checks if is provider available.
-   *
-   * @param providerName the provider name
-   * @return true, if is provider available
-   * @throws DocumentEditorProviderNotFoundException the editor provider not found exception
-   */
-  protected boolean isProviderAvailable(String providerName) throws DocumentEditorProviderNotFoundException{
-    UserACL userACL = (UserACL) ExoContainerContext.getCurrentContainer().getComponentInstanceOfType(UserACL.class);
-    DocumentEditorProvider editorProvider = documentService.getEditorProvider(providerName);
-    String currentUser = ConversationState.getCurrent().getIdentity().getUserId();
-    List<String> permissions = editorProvider.getPermissions();
-    return editorProvider.getActive() && (permissions.contains("*") || permissions.contains(currentUser) || userACL.hasPermission(permissions.toArray(new String[0])));
-  }
 }

@@ -24,7 +24,6 @@ import javax.jcr.RepositoryException;
 
 import org.exoplatform.container.component.ComponentPlugin;
 import org.exoplatform.services.cms.documents.exception.DocumentEditorProviderNotFoundException;
-import org.exoplatform.services.cms.documents.impl.DocumentEditorProvider;
 import org.exoplatform.services.cms.documents.model.Document;
 import org.exoplatform.services.cms.drives.DriveData;
 
@@ -138,18 +137,11 @@ public interface DocumentService {
   public Set<NewDocumentTemplatePlugin> getRegisteredTemplatePlugins();
   
   /**
-   * Gets the registered editor plugins.
-   *
-   * @return the registered editors plugins
-   */
-  public Set<DocumentEditorPlugin> getRegisteredEditorPlugins();
-
-  /**
    * Checks for document editor plugins.
    *
    * @return true, if successful
    */
-  public boolean hasDocumentEditorPlugins();
+  public boolean hasDocumentEditorProviders();
   
   /**
    * Checks for document template plugins.
@@ -185,7 +177,7 @@ public interface DocumentService {
    *
    * @return the editor providers
    */
-  public List<DocumentEditorProvider> getDocumentEditorProviders();
+  public Set<DocumentEditorProvider> getDocumentEditorProviders();
   
   /**
    * Gets the editor provider.
