@@ -27,6 +27,23 @@
         <EmptyRequest>The request should contain at least 1 form param (active/permissions).</EmptyRequest>
       </error>
       <title>Document editors</title>
+      <table>
+        <Provider>Provider</Provider>
+        <Description>Description</Description>
+        <Active>Active</Active>
+        <Permissions>Permissions</Permissions>
+      </table>
+      <modal>
+        <title>Edit permissions</title>
+      </modal>
+      <onlyoffice>
+        <name>ONLYOFFICE</name>
+        <description>ONLYOFFICE Online Document Editor</description>
+      </onlyoffice>
+      <officeonline>
+        <name>Microsoft Office Online</name>
+        <description>Microsoft Office Online editors for Word, Excel, Powerpoint</description>
+      </officeonline>
     </admin>
   </editors>
 </bundle>
