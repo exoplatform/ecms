@@ -24,10 +24,10 @@
   <priority>3</priority>
   <page-nodes>
     <node>
-      <name>documents</name>
-      <label>#{portal.global.documents}</label>
+      <name>drives</name>
+      <label>#{portal.global.drives}</label>
       <visibility>SYSTEM</visibility>
-      <page-reference>portal::global::documents</page-reference>
+      <page-reference>portal::global::drives</page-reference>
     </node>
 
     <node>

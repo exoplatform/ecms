@@ -22,119 +22,24 @@
         xsi:schemaLocation="http://www.gatein.org/xml/ns/gatein_objects_1_6 http://www.gatein.org/xml/ns/gatein_objects_1_6"
         xmlns="http://www.gatein.org/xml/ns/gatein_objects_1_6">
   <page>
-    <name>documents</name>
-    <title>documents</title>
+    <name>drives</name>
+    <title>Drives</title>
     <access-permissions>*:/platform/users</access-permissions>
     <edit-permission>*:/platform/administrators</edit-permission>
-    <container id="DocumentContainer" template="system:/groovy/portal/webui/container/UIContainer.gtmpl">
+    <container id="top-agenda-container" template="system:/groovy/portal/webui/container/UIAddOnContainer.gtmpl">
+      <name>top-drives-container</name>
       <access-permissions>*:/platform/users</access-permissions>
-      <container id="DocumentTopContainer" template="system:/groovy/portal/webui/container/UIContainer.gtmpl">
-        <access-permissions>*:/platform/users</access-permissions>
-        <portlet-application>
-          <portlet>
-            <application-ref>ecmexplorer</application-ref>
-            <portlet-ref>FileExplorerPortlet</portlet-ref>
-            <preferences>
-              <preference>
-                <name>workspace</name>
-                <value></value>
-                <read-only>false</read-only>
-              </preference>
-              <preference>
-                <name>path</name>
-                <value></value>
-                <read-only>false</read-only>
-              </preference>
-              <preference>
-                <name>drive</name>
-                <value></value>
-                <read-only>false</read-only>
-              </preference>
-              <preference>
-                <name>views</name>
-                <value></value>
-                <read-only>false</read-only>
-              </preference>
-              <preference>
-                <name>allowCreateFolders</name>
-                <value>true</value>
-                <read-only>false</read-only>
-              </preference>
-              <preference>
-                <name>categoryMandatoryWhenFileUpload</name>
-                <value>false</value>
-                <read-only>false</read-only>
-              </preference>
-              <preference>
-                <name>uploadFileSizeLimitMB</name>
-                <value>150</value>
-                <read-only>false</read-only>
-              </preference>
-              <preference>
-                <name>usecase</name>
-                <value>selection</value>
-                <read-only>false</read-only>
-              </preference>
-              <preference>
-                <name>driveName</name>
-                <value>Personal Documents</value>
-                <read-only>false</read-only>
-              </preference>
-              <preference>
-                <name>trashHomeNodePath</name>
-                <value>/Trash</value>
-                <read-only>false</read-only>
-              </preference>
-              <preference>
-                <name>trashRepository</name>
-                <value>repository</value>
-                <read-only>false</read-only>
-              </preference>
-              <preference>
-                <name>trashWorkspace</name>
-                <value>collaboration</value>
-                <read-only>false</read-only>
-              </preference>
-              <preference>
-                <name>editInNewWindow</name>
-                <value>false</value>
-                <read-only>false</read-only>
-              </preference>
-
-              <preference>
-                <name>showTopBar</name>
-                <value>true</value>
-                <read-only>false</read-only>
-              </preference>
-              <preference>
-                <name>showActionBar</name>
-                <value>true</value>
-                <read-only>false</read-only>
-              </preference>
-              <preference>
-                <name>showSideBar</name>
-                <value>true</value>
-                <read-only>false</read-only>
-              </preference>
-              <preference>
-                <name>showFilterBar</name>
-                <value>true</value>
-                <read-only>false</read-only>
-              </preference>
-            </preferences>
-          </portlet>
-          <title>documents</title>
-          <access-permissions>*:/platform/users</access-permissions>
-          <show-info-bar>false</show-info-bar>
-          <show-application-state>false</show-application-state>
-          <show-application-mode>false</show-application-mode>
-        </portlet-application>
-      </container>
-      <container id="bottom-document-container" template="system:/groovy/portal/webui/container/UIAddOnContainer.gtmpl">
-        <name>bottom-document-container</name>
-        <access-permissions>*:/platform/users</access-permissions>
-        <factory-id>addonContainer</factory-id>
-      </container>
+      <factory-id>addonContainer</factory-id>
+    </container>
+    <container id="agenda-container" template="system:/groovy/portal/webui/container/UIAddOnContainer.gtmpl">
+      <name>drives-container</name>
+      <access-permissions>*:/platform/users</access-permissions>
+      <factory-id>addonContainer</factory-id>
+    </container>
+    <container id="bottom-agenda-container" template="system:/groovy/portal/webui/container/UIAddOnContainer.gtmpl">
+      <name>bottom-drives-container</name>
+      <access-permissions>*:/platform/users</access-permissions>
+      <factory-id>addonContainer</factory-id>
     </container>
   </page>
 
