@@ -41,7 +41,7 @@ public class ApachePOIMetadataPluginImpl extends BaseComponentPlugin implements 
   private final SimpleDateFormat metadataFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
 
   /** The Constant LOG. */
-  private static final Log    LOG                  = ExoLogger.getLogger(DocumentServiceImpl.class);
+  private static final Log    LOG                  = ExoLogger.getLogger(ApachePOIMetadataPluginImpl.class);
   
   /** The organization. */
   protected final OrganizationService organization;
