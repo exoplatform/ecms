@@ -9,13 +9,15 @@ import java.io.InputStream;
 public interface DocumentMetadataPlugin {
 
   /**
-   * Adds the metadata to the document.
-   *
-   * @param source the source
-   * @param template the template
-   * @return the byte array input stream
+   * Adds metadata to the newly created office document (creator, content type, created).
+   * 
+   * @param source the source of template file
+   * @param extension the extension of the file
+   * @param mimeType the mimeType of the file
+   * @param creator the name of creator 
+   * @return the result stream of the file with correct metadata
    * @throws Exception the exception
    */
-  InputStream addMetadata(InputStream source, DocumentTemplate template) throws Exception;
+  InputStream addMetadata(InputStream source, String extension, String mimeType, String creator) throws Exception;
 
 }

@@ -17,14 +17,11 @@
 package org.exoplatform.services.cms.documents.impl;
 
 import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.net.URLEncoder;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
-import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashSet;
 import java.util.List;
@@ -37,11 +34,6 @@ import javax.jcr.NodeIterator;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 
-import org.apache.poi.POIXMLDocument;
-import org.apache.poi.POIXMLProperties;
-import org.apache.poi.xslf.usermodel.XMLSlideShow;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.gatein.api.Portal;
 import org.gatein.api.navigation.Navigation;
 import org.gatein.api.navigation.Nodes;
@@ -121,8 +113,9 @@ public class DocumentServiceImpl implements DocumentService {
   private LinkManager linkManager;
   private PortalContainerInfo portalContainerInfo;
   private DocumentMetadataPlugin metadataPlugin;
+  private OrganizationService organization;
 
-  public DocumentServiceImpl(ManageDriveService manageDriveService, Portal portal, SessionProviderService sessionProviderService, RepositoryService repoService, NodeHierarchyCreator nodeHierarchyCreator, LinkManager linkManager, PortalContainerInfo portalContainerInfo) {
+  public DocumentServiceImpl(ManageDriveService manageDriveService, Portal portal, SessionProviderService sessionProviderService, RepositoryService repoService, NodeHierarchyCreator nodeHierarchyCreator, LinkManager linkManager, PortalContainerInfo portalContainerInfo, OrganizationService organization) {
     this.manageDriveService = manageDriveService;
     this.sessionProviderService = sessionProviderService;
     this.repoService = repoService;
@@ -130,6 +123,7 @@ public class DocumentServiceImpl implements DocumentService {
     this.portal = portal;
     this.linkManager = linkManager;
     this.portalContainerInfo = portalContainerInfo;
+    this.organization = organization;
   }
 
   @Override
@@ -496,7 +490,7 @@ public class DocumentServiceImpl implements DocumentService {
       data = resolver.getInputStream(template.getPath());
       if(metadataPlugin != null) {
         try {
-          data = metadataPlugin.addMetadata(data, template);
+          data = metadataPlugin.addMetadata(data, template.getExtension(), template.getMimeType(), getCurrentUserDisplayName());
         } catch (Exception e) {
           LOG.error("Couldn't add metadata to the document from template, ", e);
         }
@@ -569,6 +563,22 @@ public class DocumentServiceImpl implements DocumentService {
       }
     } else {
       LOG.error("The DocumentMetadataPlugin plugin is not an instance of " + pclass.getName());
+    }
+  }
+  
+
+  /**
+   * Gets display name of current user. In case of any errors return current userId
+   * 
+   * @return the display name
+   */
+  protected String getCurrentUserDisplayName() {
+    String userId = ConversationState.getCurrent().getIdentity().getUserId();
+    try {
+      return organization.getUserHandler().findUserByName(userId).getDisplayName();
+    } catch (Exception e) {
+      LOG.error("Error searching user " + userId, e);
+      return userId;
     }
   }
 

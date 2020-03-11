@@ -18,11 +18,8 @@ import org.apache.poi.xwpf.usermodel.XWPFDocument;
 
 import org.exoplatform.container.component.BaseComponentPlugin;
 import org.exoplatform.services.cms.documents.DocumentMetadataPlugin;
-import org.exoplatform.services.cms.documents.DocumentTemplate;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
-import org.exoplatform.services.organization.OrganizationService;
-import org.exoplatform.services.security.ConversationState;
 
 /**
  * The Class DocumentMetadataPluginImpl is an implementation of DocumentMetadataPlugin
@@ -32,48 +29,37 @@ import org.exoplatform.services.security.ConversationState;
 public class ApachePOIMetadataPluginImpl extends BaseComponentPlugin implements DocumentMetadataPlugin {
 
   /** The Constant PPTX_EXTENSION. */
-  private static final String PPTX_EXTENSION       = ".pptx";
+  private static final String    PPTX_EXTENSION = ".pptx";
 
   /** The Constant XLSX_EXTENSION. */
-  private static final String XLSX_EXTENSION       = ".xlsx";
+  private static final String    XLSX_EXTENSION = ".xlsx";
 
   /** The Constant DOCX_EXTENSION. */
-  private static final String DOCX_EXTENSION       = ".docx";
+  private static final String    DOCX_EXTENSION = ".docx";
 
   /** The metadataFormat. */
   private final SimpleDateFormat metadataFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
 
   /** The Constant LOG. */
-  private static final Log    LOG                  = ExoLogger.getLogger(ApachePOIMetadataPluginImpl.class);
-  
-  /** The organization. */
-  protected final OrganizationService organization;
-  
+  private static final Log       LOG            = ExoLogger.getLogger(ApachePOIMetadataPluginImpl.class);
+
   /**
    * Instantiates a new document metadata plugin impl.
-   *
-   * @param organization the organization
    */
-  public ApachePOIMetadataPluginImpl(OrganizationService organization) {
-    this.organization = organization;
+  public ApachePOIMetadataPluginImpl() {
     metadataFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
   }
 
   /**
-   * Adds metadata to the office document (creator, content type, created).
-   * 
-   * @param source the source of file
-   * @param template the template
-   * @return stream with metadata
-   * @throws Exception the exception
+   * {@inheritDoc}
    */
   @Override
-  public InputStream addMetadata(InputStream source, DocumentTemplate template) throws Exception {
-    POIXMLDocument document = getDocument(source, template.getExtension());
+  public InputStream addMetadata(InputStream source, String extension, String mimeType, String creator) throws Exception {
+    POIXMLDocument document = getDocument(source, extension);
     POIXMLProperties props = document.getProperties();
     POIXMLProperties.CoreProperties coreProps = props.getCoreProperties();
-    coreProps.setCreator(getCurrentUserDisplayName());
-    coreProps.setContentType(template.getMimeType());
+    coreProps.setCreator(creator);
+    coreProps.setContentType(mimeType);
     coreProps.setCreated(metadataFormat.format(new Date()));
     File tempFile = File.createTempFile("editor-document", ".tmp");
     FileOutputStream fos = new FileOutputStream(tempFile);
@@ -108,47 +94,32 @@ public class ApachePOIMetadataPluginImpl extends BaseComponentPlugin implements 
   }
 
   /**
-   * Gets display name of current user. In case of any errors return current userId
-   * 
-   * @return the display name
-   */
-  protected String getCurrentUserDisplayName() {
-    String userId = ConversationState.getCurrent().getIdentity().getUserId();
-    try {
-      return organization.getUserHandler().findUserByName(userId).getDisplayName();
-    } catch (Exception e) {
-      LOG.error("Error searching user " + userId, e);
-      return userId;
-    }
-  }
-  
-  /**
    * The Class DeleteOnCloseFileInputStream.
    */
   public static class DeleteOnCloseFileInputStream extends FileInputStream {
-    
+
     /** The file. */
     private File file;
-    
+
     /**
      * Instantiates a new delete on close file input stream.
      *
      * @param fileName the file name
      * @throws FileNotFoundException the file not found exception
      */
-    public DeleteOnCloseFileInputStream(String fileName) throws FileNotFoundException{
-       this(new File(fileName));
+    public DeleteOnCloseFileInputStream(String fileName) throws FileNotFoundException {
+      this(new File(fileName));
     }
-    
+
     /**
      * Instantiates a new delete on close file input stream.
      *
      * @param file the file
      * @throws FileNotFoundException the file not found exception
      */
-    public DeleteOnCloseFileInputStream(File file) throws FileNotFoundException{
-       super(file);
-       this.file = file;
+    public DeleteOnCloseFileInputStream(File file) throws FileNotFoundException {
+      super(file);
+      this.file = file;
     }
 
     /**
@@ -157,15 +128,15 @@ public class ApachePOIMetadataPluginImpl extends BaseComponentPlugin implements 
      * @throws IOException Signals that an I/O exception has occurred.
      */
     public void close() throws IOException {
-        try {
-           super.close();
-        } finally {
-           if(file != null) {
-              file.delete();
-              file = null;
-          }
+      try {
+        super.close();
+      } finally {
+        if (file != null) {
+          file.delete();
+          file = null;
         }
+      }
     }
- }
+  }
 
 }
