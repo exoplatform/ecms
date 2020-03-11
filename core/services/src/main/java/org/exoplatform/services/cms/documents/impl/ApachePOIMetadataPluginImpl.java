@@ -1,7 +1,10 @@
 package org.exoplatform.services.cms.documents.impl;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -21,6 +24,7 @@ import org.exoplatform.services.log.Log;
 import org.exoplatform.services.organization.OrganizationService;
 import org.exoplatform.services.security.ConversationState;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class DocumentMetadataPluginImpl is an implementation of DocumentMetadataPlugin
  * that uses Apache POI for adding the metadata.
@@ -65,17 +69,19 @@ public class ApachePOIMetadataPluginImpl extends BaseComponentPlugin implements 
    * @throws Exception the exception
    */
   @Override
-  public ByteArrayInputStream addMetadata(InputStream source, DocumentTemplate template) throws Exception {
+  public InputStream addMetadata(InputStream source, DocumentTemplate template) throws Exception {
     POIXMLDocument document = getDocument(source, template.getExtension());
     POIXMLProperties props = document.getProperties();
     POIXMLProperties.CoreProperties coreProps = props.getCoreProperties();
     coreProps.setCreator(getCurrentUserDisplayName());
     coreProps.setContentType(template.getMimeType());
     coreProps.setCreated(metadataFormat.format(new Date()));
-    ByteArrayOutputStream os = new ByteArrayOutputStream();
-    document.write(os);
+    File tempFile = File.createTempFile("editor-document", ".tmp");
+    FileOutputStream fos = new FileOutputStream(tempFile);
+    document.write(fos);
     document.close();
-    return new ByteArrayInputStream(os.toByteArray());
+    fos.close();
+    return new DeleteOnCloseFileInputStream(tempFile);
   }
 
   /**
@@ -116,5 +122,51 @@ public class ApachePOIMetadataPluginImpl extends BaseComponentPlugin implements 
       return userId;
     }
   }
+  
+  /**
+   * The Class DeleteOnCloseFileInputStream.
+   */
+  public static class DeleteOnCloseFileInputStream extends FileInputStream {
+    
+    /** The file. */
+    private File file;
+    
+    /**
+     * Instantiates a new delete on close file input stream.
+     *
+     * @param fileName the file name
+     * @throws FileNotFoundException the file not found exception
+     */
+    public DeleteOnCloseFileInputStream(String fileName) throws FileNotFoundException{
+       this(new File(fileName));
+    }
+    
+    /**
+     * Instantiates a new delete on close file input stream.
+     *
+     * @param file the file
+     * @throws FileNotFoundException the file not found exception
+     */
+    public DeleteOnCloseFileInputStream(File file) throws FileNotFoundException{
+       super(file);
+       this.file = file;
+    }
+
+    /**
+     * Close.
+     *
+     * @throws IOException Signals that an I/O exception has occurred.
+     */
+    public void close() throws IOException {
+        try {
+           super.close();
+        } finally {
+           if(file != null) {
+              file.delete();
+              file = null;
+          }
+        }
+    }
+ }
 
 }

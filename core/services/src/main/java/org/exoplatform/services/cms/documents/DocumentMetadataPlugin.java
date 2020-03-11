@@ -1,6 +1,5 @@
 package org.exoplatform.services.cms.documents;
 
-import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 
 
@@ -17,6 +16,6 @@ public interface DocumentMetadataPlugin {
    * @return the byte array input stream
    * @throws Exception the exception
    */
-  ByteArrayInputStream addMetadata(InputStream source, DocumentTemplate template) throws Exception;
+  InputStream addMetadata(InputStream source, DocumentTemplate template) throws Exception;
 
 }
