@@ -43,10 +43,8 @@ import org.exoplatform.resolver.ResourceResolver;
 import org.exoplatform.services.cms.clipboard.ClipboardService;
 import org.exoplatform.services.cms.comments.CommentsService;
 import org.exoplatform.services.cms.documents.AutoVersionService;
-import org.exoplatform.services.cms.documents.DocumentService;
 import org.exoplatform.services.cms.documents.DocumentTypeService;
 import org.exoplatform.services.cms.documents.FavoriteService;
-import org.exoplatform.services.cms.documents.impl.DocumentServiceImpl;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.drives.ManageDriveService;
 import org.exoplatform.services.cms.i18n.MultiLanguageService;
@@ -1048,11 +1046,6 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
       }
     }
     return driveData;
-  }
-
-  public String getLinkInDocuments(String nodePath) throws Exception {
-    DocumentService documentService = WCMCoreUtils.getService(DocumentServiceImpl.class);
-    return documentService.getLinkInDocumentsApp(nodePath);
   }
 
   public List<Node> filterNodeList(List<Node> sourceNodeList) throws Exception {
