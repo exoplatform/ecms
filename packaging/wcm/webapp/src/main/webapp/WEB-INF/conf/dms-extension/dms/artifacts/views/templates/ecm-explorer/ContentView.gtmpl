@@ -15,7 +15,6 @@
   import org.exoplatform.ecm.webui.component.explorer.DocumentProviderUtils;
   import org.exoplatform.ecm.jcr.model.Preference;
   import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
-  import org.exoplatform.ecm.webui.component.explorer.UIDocumentInfo;
   import org.exoplatform.services.jcr.RepositoryService;
   import javax.jcr.Value;
   import javax.jcr.PathNotFoundException;
@@ -284,7 +283,7 @@
             }            
           }
           String encodedPath = URLEncoder.encode(Utils.formatNodeName(data.getPath()), "UTF-8");
-          def urlToCopy = uicomponent.getLinkInDocuments(nodePath);
+          def urlToCopy = WCMCoreUtils.getLinkInDocumentsApplication(nodePath);
           encodedPath = encodedPath.replaceAll("%2F", "/"); //we won't encode the slash characters in the path
           if (!data.isNodeType(Utils.EXO_RESTORELOCATION) && !Utils.isTrashHomeNode(data)) {
           	String clipboardLink = serverUrl + urlToCopy ;

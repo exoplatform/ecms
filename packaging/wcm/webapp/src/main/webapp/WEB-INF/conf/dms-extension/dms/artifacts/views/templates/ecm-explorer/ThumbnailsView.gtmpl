@@ -14,7 +14,6 @@
   import org.exoplatform.services.wcm.utils.WCMCoreUtils;
   import org.exoplatform.services.cms.thumbnail.impl.ThumbnailUtils;
   import org.exoplatform.services.cms.thumbnail.ThumbnailService;
-  import org.exoplatform.ecm.webui.component.explorer.UIDocumentInfo;
   
   def linkManager = WCMCoreUtils.getService(LinkManager.class);
   def uiWorkingArea = uicomponent.getAncestorOfType(UIWorkingArea.class);
@@ -162,7 +161,7 @@
                 encodedPath = encodedPath.replaceAll("%2F", "/"); //we won't encode the slash characters in the path
               if (!data.isNodeType(Utils.EXO_RESTORELOCATION) && !Utils.isTrashHomeNode(data)) {
 
-              	def urlToCopy = uicomponent.getLinkInDocuments(data.getPath());
+              	def urlToCopy = WCMCoreUtils.getLinkInDocumentsApplication(data.getPath());
               	String clipboardLink = serverUrl + urlToCopy;
               	strActs +=  "<li class='menuItem'>";
               	strActs +=  "<a exo:attr='CopyUrlToClipboard' style='display: block;' id='clip_button1$i' path='$clipboardLink'>" ;
