@@ -178,8 +178,11 @@ public class HTMLUploadImageProcessor {
   }
 
   private String getJcrURI(Node imageNode) throws RepositoryException {
-    return "/" + portalContainer.getName() + "/" + portalContainer.getRestContextName() + "/jcr/" + getRepositoryName() + "/"
-            + imageNode.getSession().getWorkspace().getName() + imageNode.getPath();
+    if(!imageNode.isNodeType(NodetypeConstant.MIX_REFERENCEABLE)) {
+      imageNode.addMixin(NodetypeConstant.MIX_REFERENCEABLE);
+    }
+    return "/" + portalContainer.getName() + "/" + portalContainer.getRestContextName() + "/images/" + getRepositoryName() + "/"
+            + imageNode.getSession().getWorkspace().getName() + "/" + imageNode.getUUID();
   }
 
   private static String getURLToReplace(String body, String uploadId, int uploadIdIndex) {
