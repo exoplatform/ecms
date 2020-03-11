@@ -24,7 +24,6 @@ import org.exoplatform.services.log.Log;
 import org.exoplatform.services.organization.OrganizationService;
 import org.exoplatform.services.security.ConversationState;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class DocumentMetadataPluginImpl is an implementation of DocumentMetadataPlugin
  * that uses Apache POI for adding the metadata.
