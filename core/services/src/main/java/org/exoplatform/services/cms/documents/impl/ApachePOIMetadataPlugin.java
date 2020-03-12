@@ -20,15 +20,16 @@ import org.apache.poi.xwpf.usermodel.XWPFDocument;
 
 import org.exoplatform.container.component.BaseComponentPlugin;
 import org.exoplatform.services.cms.documents.DocumentMetadataPlugin;
+import org.exoplatform.services.cms.documents.exception.DocumentExtensionNotSupportedException;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 
 /**
- * The Class DocumentMetadataPluginImpl is an implementation of DocumentMetadataPlugin
+ * The Class DocumentMetadataPlugin is an implementation of DocumentMetadataPlugin
  * that uses Apache POI for adding the metadata.
  * 
  */
-public class ApachePOIMetadataPluginImpl extends BaseComponentPlugin implements DocumentMetadataPlugin {
+public class ApachePOIMetadataPlugin extends BaseComponentPlugin implements DocumentMetadataPlugin {
 
   /** The Constant PPTX_EXTENSION. */
   private static final String    PPTX_EXTENSION = ".pptx";
@@ -43,12 +44,12 @@ public class ApachePOIMetadataPluginImpl extends BaseComponentPlugin implements 
   private final SimpleDateFormat metadataFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
 
   /** The Constant LOG. */
-  private static final Log       LOG            = ExoLogger.getLogger(ApachePOIMetadataPluginImpl.class);
+  private static final Log       LOG            = ExoLogger.getLogger(ApachePOIMetadataPlugin.class);
 
   /**
    * Instantiates a new document metadata plugin impl.
    */
-  public ApachePOIMetadataPluginImpl() {
+  public ApachePOIMetadataPlugin() {
     metadataFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
   }
 
@@ -56,7 +57,10 @@ public class ApachePOIMetadataPluginImpl extends BaseComponentPlugin implements 
    * {@inheritDoc}
    */
   @Override
-  public InputStream updateMetadata(InputStream source, String extension, Date created, String creator) throws Exception {
+  public InputStream updateMetadata(String extension,
+                                    InputStream source,
+                                    Date created,
+                                    String creator) throws IOException, DocumentExtensionNotSupportedException {
     POIXMLDocument document = getDocument(source, extension);
     POIXMLProperties props = document.getProperties();
     POIXMLProperties.CoreProperties coreProps = props.getCoreProperties();
@@ -83,9 +87,10 @@ public class ApachePOIMetadataPluginImpl extends BaseComponentPlugin implements 
    * @return POIXMLDocument
    * @throws Exception the exception
    */
-  protected POIXMLDocument getDocument(InputStream source, String extension) throws Exception {
+  protected POIXMLDocument getDocument(InputStream source, String extension) throws DocumentExtensionNotSupportedException,
+                                                                             IOException {
     if (extension == null) {
-      throw new Exception("Cannot provide POIXMLDocument - extension is null");
+      throw new DocumentExtensionNotSupportedException("Cannot provide POIXMLDocument - extension is null");
     }
     switch (extension) {
     case DOCX_EXTENSION:
@@ -95,7 +100,7 @@ public class ApachePOIMetadataPluginImpl extends BaseComponentPlugin implements 
     case PPTX_EXTENSION:
       return new XMLSlideShow(source);
     default:
-      throw new Exception("The document format " + extension + " is not supported");
+      throw new DocumentExtensionNotSupportedException("The document format " + extension + " is not supported");
     }
   }
 

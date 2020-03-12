@@ -1,9 +1,11 @@
 package org.exoplatform.services.cms.documents;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.Date;
 import java.util.List;
 
+import org.exoplatform.services.cms.documents.exception.DocumentExtensionNotSupportedException;
 
 /**
  * The Interface DocumentMetadataPlugin is used to add metadata to the documents.
@@ -11,18 +13,21 @@ import java.util.List;
 public interface DocumentMetadataPlugin {
 
   /**
-   * Updates metadata of the document (creator, content type, created).
+   * Updates metadata of the document (creator, created date).
    * 
-   * @param source the source of template file
    * @param extension the extension of the file
+   * @param source the source of template file
    * @param created the created date of the file
    * @param creator the name of creator 
    * @return the result stream of the file with correct metadata
-   * @throws Exception the exception
+   * @throws IOException the IOException
+   * @throws DocumentExtensionNotSupportedException the DocumentExtensionNotSupportedException
    */
-  InputStream updateMetadata(InputStream source, String extension, Date created, String creator) throws Exception;
-  
-  
+  InputStream updateMetadata(String extension,
+                             InputStream source,
+                             Date created,
+                             String creator) throws IOException, DocumentExtensionNotSupportedException;
+
   /**
    * Gets the supported extensions.
    *

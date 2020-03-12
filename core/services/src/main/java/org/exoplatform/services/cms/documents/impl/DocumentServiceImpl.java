@@ -17,6 +17,7 @@
 package org.exoplatform.services.cms.documents.impl;
 
 import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.URLEncoder;
 import java.util.ArrayList;
@@ -59,6 +60,7 @@ import org.exoplatform.services.cms.documents.DocumentService;
 import org.exoplatform.services.cms.documents.DocumentTemplate;
 import org.exoplatform.services.cms.documents.NewDocumentEditorPlugin;
 import org.exoplatform.services.cms.documents.NewDocumentTemplatePlugin;
+import org.exoplatform.services.cms.documents.exception.DocumentExtensionNotSupportedException;
 import org.exoplatform.services.cms.documents.model.Document;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.drives.ManageDriveService;
@@ -495,10 +497,12 @@ public class DocumentServiceImpl implements DocumentService {
       DocumentMetadataPlugin metadataPlugin = metadataPlugins.get(template.getExtension());
       if(metadataPlugin != null) {
         try {
-          data = metadataPlugin.updateMetadata(data, template.getExtension(), new Date(), getCurrentUserDisplayName());
-        } catch (Exception e) {
-          LOG.error("Couldn't add metadata to the document from template, ", e);
-        }
+          data = metadataPlugin.updateMetadata(template.getExtension(), data, new Date(), getCurrentUserDisplayName());
+        } catch (DocumentExtensionNotSupportedException e) {
+          LOG.error("Document extension is not supported by metadata plugin. {}", e.getMessage());
+        } catch (IOException e) {
+          LOG.error("Couldn't add metadata to the document from template. {}", e.getMessage());
+        } 
       } else {
         LOG.warn("Couldn't add metadata to the document - DocumentMetadataPlugin is not set.");
       }
@@ -556,19 +560,9 @@ public class DocumentServiceImpl implements DocumentService {
    * {@inheritDoc}
    */
   @Override
-  public void addDocumentMetadataPlugin(ComponentPlugin plugin) {
-    Class<DocumentMetadataPlugin> pclass = DocumentMetadataPlugin.class;
-    if (pclass.isAssignableFrom(plugin.getClass())) {
-      DocumentMetadataPlugin newPlugin = pclass.cast(plugin);
-
-      LOG.info("Adding DocumentMetadataPlugin [{}]", newPlugin.toString());
-      newPlugin.getSupportedExtensions().forEach(ext -> metadataPlugins.put(ext, newPlugin));
-      if (LOG.isDebugEnabled()) {
-        LOG.debug("Registered DocumentMetadataPlugin instance of {}", plugin.getClass().getName());
-      }
-    } else {
-      LOG.error("The DocumentMetadataPlugin plugin is not an instance of " + pclass.getName());
-    }
+  public void addDocumentMetadataPlugin(DocumentMetadataPlugin plugin) {
+    LOG.info("Adding DocumentMetadataPlugin [{}]", plugin.toString());
+    plugin.getSupportedExtensions().forEach(ext -> metadataPlugins.put(ext, plugin));
   }
   
 
