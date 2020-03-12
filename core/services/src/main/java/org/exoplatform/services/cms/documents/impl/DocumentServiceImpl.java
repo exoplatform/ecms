@@ -560,9 +560,18 @@ public class DocumentServiceImpl implements DocumentService {
    * {@inheritDoc}
    */
   @Override
-  public void addDocumentMetadataPlugin(DocumentMetadataPlugin plugin) {
-    LOG.info("Adding DocumentMetadataPlugin [{}]", plugin.toString());
-    plugin.getSupportedExtensions().forEach(ext -> metadataPlugins.put(ext, plugin));
+  public void addDocumentMetadataPlugin(ComponentPlugin plugin) {
+    Class<DocumentMetadataPlugin> pclass = DocumentMetadataPlugin.class;
+    if (pclass.isAssignableFrom(plugin.getClass())) {
+      DocumentMetadataPlugin newPlugin = pclass.cast(plugin);
+      LOG.info("Adding DocumentMetadataPlugin [{}]", plugin.toString());
+      newPlugin.getSupportedExtensions().forEach(ext -> metadataPlugins.put(ext, newPlugin));
+      if (LOG.isDebugEnabled()) {
+        LOG.debug("Registered DocumentMetadataPlugin instance of {}", plugin.getClass().getName());
+      }
+    } else {
+      LOG.error("The DocumentMetadataPlugin plugin is not an instance of " + pclass.getName());
+    }
   }
   
 

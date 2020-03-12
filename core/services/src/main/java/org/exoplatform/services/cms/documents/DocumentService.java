@@ -152,9 +152,9 @@ public interface DocumentService {
   /**
    * Registers document metadata plugin.
    * 
-   * @param plugin the DocumentMetadataPlugin
+   * @param plugin the ComponentPlugin
    */
-  public void addDocumentMetadataPlugin(DocumentMetadataPlugin plugin);
+  public void addDocumentMetadataPlugin(ComponentPlugin plugin);
 
   /**
    * NewDocumentTypesConfig contains all registered templates for specified provider.
