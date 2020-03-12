@@ -7,7 +7,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 import java.util.TimeZone;
 
 import org.apache.poi.POIXMLDocument;
@@ -54,19 +56,23 @@ public class ApachePOIMetadataPluginImpl extends BaseComponentPlugin implements 
    * {@inheritDoc}
    */
   @Override
-  public InputStream addMetadata(InputStream source, String extension, String mimeType, String creator) throws Exception {
+  public InputStream updateMetadata(InputStream source, String extension, Date created, String creator) throws Exception {
     POIXMLDocument document = getDocument(source, extension);
     POIXMLProperties props = document.getProperties();
     POIXMLProperties.CoreProperties coreProps = props.getCoreProperties();
     coreProps.setCreator(creator);
-    coreProps.setContentType(mimeType);
-    coreProps.setCreated(metadataFormat.format(new Date()));
+    coreProps.setCreated(metadataFormat.format(created));
     File tempFile = File.createTempFile("editor-document", ".tmp");
     FileOutputStream fos = new FileOutputStream(tempFile);
     document.write(fos);
     document.close();
     fos.close();
     return new DeleteOnCloseFileInputStream(tempFile);
+  }
+
+  @Override
+  public List<String> getSupportedExtensions() {
+    return Arrays.asList(DOCX_EXTENSION, XLSX_EXTENSION, PPTX_EXTENSION);
   }
 
   /**

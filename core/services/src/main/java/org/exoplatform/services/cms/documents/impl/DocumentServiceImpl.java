@@ -22,10 +22,13 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
+import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.Set;
 
@@ -47,6 +50,7 @@ import org.exoplatform.portal.config.UserPortalConfigService;
 import org.exoplatform.portal.mop.SiteKey;
 import org.exoplatform.portal.mop.user.UserNavigation;
 import org.exoplatform.portal.mop.user.UserPortalContext;
+import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.resolver.ApplicationResourceResolver;
 import org.exoplatform.resolver.ResourceResolver;
 import org.exoplatform.services.cms.BasePath;
@@ -112,7 +116,7 @@ public class DocumentServiceImpl implements DocumentService {
   private NodeHierarchyCreator nodeHierarchyCreator;
   private LinkManager linkManager;
   private PortalContainerInfo portalContainerInfo;
-  private DocumentMetadataPlugin metadataPlugin;
+  private Map<String, DocumentMetadataPlugin> metadataPlugins = new HashMap<>();
   private OrganizationService organization;
 
   public DocumentServiceImpl(ManageDriveService manageDriveService, Portal portal, SessionProviderService sessionProviderService, RepositoryService repoService, NodeHierarchyCreator nodeHierarchyCreator, LinkManager linkManager, PortalContainerInfo portalContainerInfo, OrganizationService organization) {
@@ -488,9 +492,10 @@ public class DocumentServiceImpl implements DocumentService {
       ApplicationResourceResolver appResolver = context.getApplication().getResourceResolver();
       ResourceResolver resolver = appResolver.getResourceResolver(template.getPath());
       data = resolver.getInputStream(template.getPath());
+      DocumentMetadataPlugin metadataPlugin = metadataPlugins.get(template.getExtension());
       if(metadataPlugin != null) {
         try {
-          data = metadataPlugin.addMetadata(data, template.getExtension(), template.getMimeType(), getCurrentUserDisplayName());
+          data = metadataPlugin.updateMetadata(data, template.getExtension(), new Date(), getCurrentUserDisplayName());
         } catch (Exception e) {
           LOG.error("Couldn't add metadata to the document from template, ", e);
         }
@@ -551,13 +556,13 @@ public class DocumentServiceImpl implements DocumentService {
    * {@inheritDoc}
    */
   @Override
-  public void setDocumentMetadataPlugin(ComponentPlugin plugin) {
+  public void addDocumentMetadataPlugin(ComponentPlugin plugin) {
     Class<DocumentMetadataPlugin> pclass = DocumentMetadataPlugin.class;
     if (pclass.isAssignableFrom(plugin.getClass())) {
       DocumentMetadataPlugin newPlugin = pclass.cast(plugin);
 
-      LOG.info("Setting DocumentMetadataPlugin [{}]", newPlugin.toString());
-      this.metadataPlugin = newPlugin;
+      LOG.info("Adding DocumentMetadataPlugin [{}]", newPlugin.toString());
+      newPlugin.getSupportedExtensions().forEach(ext -> metadataPlugins.put(ext, newPlugin));
       if (LOG.isDebugEnabled()) {
         LOG.debug("Registered DocumentMetadataPlugin instance of {}", plugin.getClass().getName());
       }
