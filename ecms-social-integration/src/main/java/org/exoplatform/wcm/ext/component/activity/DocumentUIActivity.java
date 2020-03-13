@@ -179,6 +179,6 @@ public class DocumentUIActivity extends FileUIActivity {
       return permission;
     }).collect(Collectors.toList());
     String currentUser = ConversationState.getCurrent().getIdentity().getUserId();
-    return editorProvider.getActive() && (permissions.contains(currentUser) || userACL.hasPermission(permissions.toArray(new String[0])));
+    return editorProvider.getActive() && (permissions.contains(currentUser) || permissions.contains("*") || userACL.hasPermission(permissions.toArray(new String[0])));
   }
 }

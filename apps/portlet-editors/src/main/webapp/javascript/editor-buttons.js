@@ -209,6 +209,9 @@
      */
     this.initPreviewButtons = function(activityId, index, fileId, preferedProvider) {
       var buttons = buttonsFns.slice();
+      if(buttons.length == 0) {
+        return;
+      }
       log("Init preview buttons: " + JSON.stringify(buttons));
       var clickSelector = "#Preview" + activityId + "-" + index;
       if(preferedProvider != null) {
