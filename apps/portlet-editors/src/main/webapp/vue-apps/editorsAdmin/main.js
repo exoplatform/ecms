@@ -24,7 +24,7 @@ export function init(settings) {
       data: {
         message : "Hello Vue!"
       },
-      render: h => h(adminApp, { props: { entryPoint: settings.services.providers }}),
+      render: h => h(adminApp, { props: { services: settings.services }}),
       i18n,
       vuetify
     }).$mount("#editors-admin");

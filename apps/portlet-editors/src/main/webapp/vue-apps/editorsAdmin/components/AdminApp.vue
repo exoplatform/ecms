@@ -38,7 +38,7 @@
                       </i>
                     </v-btn>
                   </td>
-                  <edit-dialog :show="showDialog" :provider="item"></edit-dialog>
+                  <edit-dialog :show="showDialog" :provider="item" :search-url="services.identities"></edit-dialog>
                 </tr>
               </tbody>
             </template>
@@ -54,8 +54,8 @@ import { getInfo, postInfo } from "../EditorsAdminAPI";
 
 export default {
     props: {
-        entryPoint: {
-            type: String,
+        services: {
+            type: Object,
             required: true
         }
     },
@@ -71,7 +71,7 @@ export default {
     },
     methods: {
         getProviders() {
-          getInfo(this.entryPoint).then(data => this.providers = data.editors);
+          getInfo(this.services.providers).then(data => this.providers = data.editors);
         },
         changeStatus(provider) {
             const updateRest = provider.links.filter(({ rel, href }) => rel === "update")[0].href;

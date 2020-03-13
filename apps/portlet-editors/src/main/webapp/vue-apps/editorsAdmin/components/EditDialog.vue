@@ -19,6 +19,11 @@
             {{ $t(`editors.admin.${provider.provider}.name`) }}
             <div>Permissions: <ul><li v-for="permission in provider.permissions" :key="permission">{{ permission }}</li></ul></div>
           </div>
+          <v-text-field
+            hide-details
+            prepend-icon="search"
+            single-line
+          ></v-text-field>
           <!-- <div class="v-skeleton-loader__bone blockProvidersInner">
             <div class="permissionsSkeleton">
               <div class="v-skeleton-loader  v-skeleton-loader--is-loading theme--light providersSkeleton skeletonText">
@@ -44,6 +49,8 @@
 </template>
 
 <script>
+import { getInfo } from "../EditorsAdminAPI";
+
 export default {
   props: {
     provider: {
@@ -57,11 +64,21 @@ export default {
       default: function () {
         return true
       }
+    },
+    searchUrl: {
+      type: String,
+      required: true
     }
   },
   created() {
     console.log('dialogcreated');
-    console.log(this.provider);
+    console.log(this.searchUrl);
+    this.getProviders();
+  },
+  methods: {
+     getProviders() {
+          getInfo(this.searchUrl).then(data => console.log(data));
+        },
   }
 }
 </script>
