@@ -27,14 +27,15 @@ import org.exoplatform.commons.api.settings.data.Context;
 import org.exoplatform.commons.api.settings.data.Scope;
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.portal.config.UserACL;
-import org.exoplatform.services.cms.documents.DocumentEditorOps;
+import org.exoplatform.services.cms.documents.DocumentEditor;
 import org.exoplatform.services.cms.documents.DocumentEditorProvider;
-import org.exoplatform.services.cms.documents.DocumentTemplate;
+import org.exoplatform.services.cms.documents.NewDocumentTemplate;
 import org.exoplatform.services.security.Identity;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
+
 /**
- * The Class EditorProvider.
+ * The Class DocumentEditorProviderImpl.
  */
 public class DocumentEditorProviderImpl implements DocumentEditorProvider {
 
@@ -54,7 +55,7 @@ public class DocumentEditorProviderImpl implements DocumentEditorProvider {
   protected List<String>      permissions;
 
   /** The editor ops. */
-  protected DocumentEditorOps editorOps;
+  protected DocumentEditor editor;
 
   /** The setting service. */
   protected SettingService    settingService;
@@ -64,8 +65,8 @@ public class DocumentEditorProviderImpl implements DocumentEditorProvider {
    *
    * @param editorOps the editor ops
    */
-  protected DocumentEditorProviderImpl(DocumentEditorOps editorOps) {
-    this.editorOps = editorOps;
+  protected DocumentEditorProviderImpl(DocumentEditor editorOps) {
+    this.editor = editorOps;
     this.settingService = WCMCoreUtils.getService(SettingService.class);
     Boolean storedActive = getStoredActive();
     List<String> storedPermissions = getStoredPermissions();
@@ -137,8 +138,8 @@ public class DocumentEditorProviderImpl implements DocumentEditorProvider {
    * @throws Exception the exception
    */
   @Override
-  public void beforeDocumentCreate(DocumentTemplate template, String parentPath, String title) throws Exception {
-    editorOps.beforeDocumentCreate(template, parentPath, title);
+  public void beforeDocumentCreate(NewDocumentTemplate template, String parentPath, String title) throws Exception {
+    editor.beforeDocumentCreate(template, parentPath, title);
   }
 
   /**
@@ -150,7 +151,7 @@ public class DocumentEditorProviderImpl implements DocumentEditorProvider {
    */
   @Override
   public void onDocumentCreated(String workspace, String path) throws Exception {
-    editorOps.onDocumentCreated(workspace, path);
+    editor.onDocumentCreated(workspace, path);
   }
 
   /**
@@ -164,7 +165,7 @@ public class DocumentEditorProviderImpl implements DocumentEditorProvider {
    */
   @Override
   public void initActivity(String uuid, String workspace, String activityId, String context) throws Exception {
-    editorOps.initActivity(uuid, workspace, activityId, context);
+    editor.initActivity(uuid, workspace, activityId, context);
   }
 
   /**
@@ -179,7 +180,7 @@ public class DocumentEditorProviderImpl implements DocumentEditorProvider {
    */
   @Override
   public void initPreview(String uuid, String workspace, String activityId, String context, int index) throws Exception {
-    editorOps.initPreview(uuid, workspace, activityId, context, index);
+    editor.initPreview(uuid, workspace, activityId, context, index);
   }
 
   /**
@@ -189,7 +190,7 @@ public class DocumentEditorProviderImpl implements DocumentEditorProvider {
    */
   @Override
   public String getProviderName() {
-    return editorOps.getProviderName();
+    return editor.getProviderName();
   }
 
   /**
@@ -200,7 +201,7 @@ public class DocumentEditorProviderImpl implements DocumentEditorProvider {
   protected Boolean getStoredActive() {
     SettingValue<?> activeParam = settingService.get(Context.GLOBAL,
                                                      Scope.GLOBAL.id(DOCUMENTS_SCOPE_NAME),
-                                                     String.format(EDITOR_ACTIVE_PATTERN, editorOps.getProviderName()));
+                                                     String.format(EDITOR_ACTIVE_PATTERN, editor.getProviderName()));
     return activeParam != null ? Boolean.valueOf(activeParam.getValue().toString()) : null;
   }
 
@@ -212,7 +213,7 @@ public class DocumentEditorProviderImpl implements DocumentEditorProvider {
   protected List<String> getStoredPermissions() {
     SettingValue<?> permissionsParam = settingService.get(Context.GLOBAL,
                                                           Scope.GLOBAL.id(DOCUMENTS_SCOPE_NAME),
-                                                          String.format(EDITOR_PERMISSIONS_PATTERN, editorOps.getProviderName()));
+                                                          String.format(EDITOR_PERMISSIONS_PATTERN, editor.getProviderName()));
     String permissionsStr = permissionsParam != null ? permissionsParam.getValue().toString() : null;
     return permissionsStr != null ? Arrays.asList(permissionsStr.split("\\s*,\\s*")) : null;
   }
@@ -223,7 +224,7 @@ public class DocumentEditorProviderImpl implements DocumentEditorProvider {
   protected void storeActive() {
     settingService.set(Context.GLOBAL,
                        Scope.GLOBAL.id(DOCUMENTS_SCOPE_NAME),
-                       String.format(EDITOR_ACTIVE_PATTERN, editorOps.getProviderName()),
+                       String.format(EDITOR_ACTIVE_PATTERN, editor.getProviderName()),
                        SettingValue.create(active));
   }
 
@@ -233,12 +234,18 @@ public class DocumentEditorProviderImpl implements DocumentEditorProvider {
   protected void storePermissions() {
     settingService.set(Context.GLOBAL,
                        Scope.GLOBAL.id(DOCUMENTS_SCOPE_NAME),
-                       String.format(EDITOR_PERMISSIONS_PATTERN, editorOps.getProviderName()),
+                       String.format(EDITOR_PERMISSIONS_PATTERN, editor.getProviderName()),
                        SettingValue.create(String.join(",", permissions)));
   }
 
  
 
+  /**
+   * Checks if is available for user.
+   *
+   * @param identity the identity
+   * @return true, if is available for user
+   */
   @Override
   public boolean isAvailableForUser(Identity identity) {
     if (isActive()) {
@@ -251,4 +258,15 @@ public class DocumentEditorProviderImpl implements DocumentEditorProvider {
     }
     return false;
   }
+  
+  /**
+   * Gets the editor class.
+   *
+   * @return the editor class
+   */
+  @Override
+  public Class<? extends DocumentEditor> getEditorClass() {
+    return editor.getClass();
+  }
+  
 }

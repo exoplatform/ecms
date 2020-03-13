@@ -167,7 +167,7 @@ public class DocumentEditorsRESTService implements ResourceContainer {
                                  @FormParam("provider") String provider,
                                  @FormParam("workspace") String workspace) {
     try {
-      documentService.setPreferedEditor(userId, provider, fileId, workspace);
+      documentService.savePreferedEditor(userId, provider, fileId, workspace);
     } catch (Exception e) {
       LOG.error("Cannot set prefered editor for user {} and node {}: {}", userId, fileId, e.getMessage());
       return Response.status(Status.INTERNAL_SERVER_ERROR).build();

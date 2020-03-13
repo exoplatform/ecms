@@ -42,7 +42,7 @@ public class IsNewDocumentTemplatePresentFilter extends UIExtensionAbstractFilte
                                                             .getComponentInstanceOfType(DocumentService.class);
 
     if (documentService != null) {
-      return documentService.hasDocumentTemplatePlugins();
+      return documentService.hasDocumentTemplateProviders();
     }
     return false;
   }

@@ -17,7 +17,6 @@
 package org.exoplatform.services.cms.documents;
 
 import java.util.List;
-import java.util.Set;
 
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
@@ -127,28 +126,28 @@ public interface DocumentService {
    * @return the node
    * @throws Exception the exception
    */
-  public Node createDocumentFromTemplate(Node currentNode, String title, DocumentTemplate template) throws Exception;
+  public Node createDocumentFromTemplate(Node currentNode, String title, NewDocumentTemplate template) throws Exception;
 
   /**
-   * Gets the registered template plugins.
+   * Gets the registered template providers.
    *
-   * @return the registered template plugins
+   * @return the registered template providers
    */
-  public Set<NewDocumentTemplatePlugin> getRegisteredTemplatePlugins();
+  public List<NewDocumentTemplateProvider> getNewDocumentTemplateProviders();
   
   /**
-   * Checks for document editor plugins.
+   * Checks for document editor providers.
    *
    * @return true, if successful
    */
   public boolean hasDocumentEditorProviders();
   
   /**
-   * Checks for document template plugins.
+   * Checks for document template providers.
    *
    * @return true, if successful
    */
-  public boolean hasDocumentTemplatePlugins();
+  public boolean hasDocumentTemplateProviders();
   
   /**
    * Gets prefered editor provider for specified file and user.
@@ -170,14 +169,14 @@ public interface DocumentService {
    * @param workspace the workspace
    * @throws Exception the exception
    */
-  public void setPreferedEditor(String userId, String provider, String uuid, String workspace) throws Exception;
+  public void savePreferedEditor(String userId, String provider, String uuid, String workspace) throws Exception;
 
   /**
    * Gets the editor providers.
    *
    * @return the editor providers
    */
-  public Set<DocumentEditorProvider> getDocumentEditorProviders();
+  public List<DocumentEditorProvider> getDocumentEditorProviders();
   
   /**
    * Gets the editor provider.
@@ -189,12 +188,12 @@ public interface DocumentService {
   
   
   /**
-   * NewDocumentTypesConfig contains all registered templates for specified provider.
+   * NewDocumentTypesConfig contains all registered template configs for specified provider.
    */
   public static class DocumentTemplatesConfig {
 
     /** The document templates. */
-    protected List<DocumentTemplate> templates;
+    protected List<NewDocumentTemplateConfig> templateConfigs;
 
     /** The providerName. */
     protected String                 providerName;
@@ -204,8 +203,8 @@ public interface DocumentService {
      *
      * @return the document types
      */
-    public List<DocumentTemplate> getTemplates() {
-      return templates;
+    public List<NewDocumentTemplateConfig> getTemplates() {
+      return templateConfigs;
     }
 
     /**
@@ -213,8 +212,8 @@ public interface DocumentService {
      *
      * @param templates the new templates
      */
-    public void setTemplates(List<DocumentTemplate> templates) {
-      this.templates = templates;
+    public void setTemplates(List<NewDocumentTemplateConfig> templates) {
+      this.templateConfigs = templates;
     }
 
     /**

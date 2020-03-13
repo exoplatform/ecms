@@ -31,7 +31,7 @@ public interface NewDocumentTemplatePlugin {
    *
    * @return the templates
    */
-  List<DocumentTemplate> getTemplates();
+  List<NewDocumentTemplate> getTemplates();
   
   /**
    * Gets the template 
@@ -39,14 +39,14 @@ public interface NewDocumentTemplatePlugin {
    * @param name the name
    * @return the template
    */
-  DocumentTemplate getTemplate(String name);
+  NewDocumentTemplate getTemplate(String name);
   
   /**
-   * Gets editor plugin
+   * Gets editor plugin class
    * 
-   * @return the editorPlugin
+   * @return the editor plugin class
    */
-  DocumentEditorOps getEditorOps();
+  Class<? extends DocumentEditor> getEditorClass();
 
   /**
    * Creates the document from specified template.
@@ -57,6 +57,6 @@ public interface NewDocumentTemplatePlugin {
    * @return the node
    * @throws Exception the exception
    */
-  Node createDocument(Node parent, String title, DocumentTemplate template) throws Exception;
+  Node createDocument(Node parent, String title, NewDocumentTemplate template) throws Exception;
 
 }

@@ -23,11 +23,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.GregorianCalendar;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
-import java.util.Set;
 
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
@@ -50,11 +48,12 @@ import org.exoplatform.portal.mop.user.UserPortalContext;
 import org.exoplatform.resolver.ApplicationResourceResolver;
 import org.exoplatform.resolver.ResourceResolver;
 import org.exoplatform.services.cms.BasePath;
-import org.exoplatform.services.cms.documents.DocumentEditorOps;
+import org.exoplatform.services.cms.documents.DocumentEditor;
 import org.exoplatform.services.cms.documents.DocumentEditorProvider;
 import org.exoplatform.services.cms.documents.DocumentService;
-import org.exoplatform.services.cms.documents.DocumentTemplate;
+import org.exoplatform.services.cms.documents.NewDocumentTemplate;
 import org.exoplatform.services.cms.documents.NewDocumentTemplatePlugin;
+import org.exoplatform.services.cms.documents.NewDocumentTemplateProvider;
 import org.exoplatform.services.cms.documents.exception.DocumentEditorProviderNotFoundException;
 import org.exoplatform.services.cms.documents.model.Document;
 import org.exoplatform.services.cms.drives.DriveData;
@@ -106,8 +105,10 @@ public class DocumentServiceImpl implements DocumentService {
   private static final String DOCUMENTS_NODE = "Documents";
   private static final String SHARED_NODE = "Shared";
   private static final Log LOG                 = ExoLogger.getLogger(DocumentServiceImpl.class);
-  private final Set<NewDocumentTemplatePlugin> templatePlugins = new HashSet<>();
-  private final Set<DocumentEditorProviderImpl> editorProviders = new HashSet<>();
+  private final List<NewDocumentTemplateProvider> templateProviders = new ArrayList<>();
+  private final List<DocumentEditorProvider> editorProviders = new ArrayList<>();
+  private List<NewDocumentTemplateProvider> unmodifiebleTemplateProviders;
+  private List<DocumentEditorProvider> unmodifiebleEditorProviders;
   private ManageDriveService manageDriveService;
   private Portal portal;
   private SessionProviderService sessionProviderService;
@@ -447,9 +448,10 @@ public class DocumentServiceImpl implements DocumentService {
     Class<NewDocumentTemplatePlugin> pclass = NewDocumentTemplatePlugin.class;
     if (pclass.isAssignableFrom(plugin.getClass())) {
       NewDocumentTemplatePlugin newPlugin = pclass.cast(plugin);
-
-      LOG.info("Adding NewDocumentTemplatePlugin [{}]", newPlugin.toString());
-      templatePlugins.add(newPlugin);
+      if (LOG.isDebugEnabled()) {
+        LOG.debug("Adding NewDocumentTemplatePlugin [{}]", newPlugin.toString());
+      }
+      templateProviders.add(new NewDocumentTemplateProviderImpl(newPlugin));
       if (LOG.isDebugEnabled()) {
         LOG.debug("Registered NewDocumentTemplatePlugin instance of {}", plugin.getClass().getName());
       }
@@ -463,17 +465,18 @@ public class DocumentServiceImpl implements DocumentService {
    */
   @Override
   public void addDocumentEditorPlugin(ComponentPlugin plugin) {
-    Class<DocumentEditorOps> pclass = DocumentEditorOps.class;
+    Class<DocumentEditor> pclass = DocumentEditor.class;
     if (pclass.isAssignableFrom(plugin.getClass())) {
-      DocumentEditorOps editorOps = pclass.cast(plugin);
-
-      LOG.info("Adding DocumentEditorOps [{}]", editorOps.toString());
-      editorProviders.add(new DocumentEditorProviderImpl(editorOps));
+      DocumentEditor editor = pclass.cast(plugin);
       if (LOG.isDebugEnabled()) {
-        LOG.debug("Registered DocumentEditorOps instance of {}", plugin.getClass().getName());
+        LOG.debug("Adding DocumentEditor [{}]", editor.toString());
+      }
+      editorProviders.add(new DocumentEditorProviderImpl(editor));
+      if (LOG.isDebugEnabled()) {
+        LOG.debug("Registered DocumentEditor instance of {}", plugin.getClass().getName());
       }
     } else {
-      LOG.error("The DocumentEditorOps plugin is not an instance of " + pclass.getName());
+      LOG.error("The DocumentEditor plugin is not an instance of " + pclass.getName());
     }
   }
 
@@ -481,7 +484,7 @@ public class DocumentServiceImpl implements DocumentService {
    * {@inheritDoc}
    */
   @Override
-  public Node createDocumentFromTemplate(Node currentNode, String title, DocumentTemplate template) throws Exception {
+  public Node createDocumentFromTemplate(Node currentNode, String title, NewDocumentTemplate template) throws Exception {
     InputStream data = new ByteArrayInputStream(new byte[0]);
     if (template.getPath() != null && !template.getPath().trim().isEmpty()) {
       WebuiRequestContext context = WebuiRequestContext.getCurrentInstance();
@@ -518,16 +521,19 @@ public class DocumentServiceImpl implements DocumentService {
    * {@inheritDoc}
    */
   @Override
-  public Set<NewDocumentTemplatePlugin> getRegisteredTemplatePlugins() {
-    return Collections.unmodifiableSet(templatePlugins);
+  public List<NewDocumentTemplateProvider> getNewDocumentTemplateProviders() {
+    if(unmodifiebleTemplateProviders == null) {
+      unmodifiebleTemplateProviders = Collections.unmodifiableList(templateProviders);
+    }
+    return unmodifiebleTemplateProviders;
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public boolean hasDocumentTemplatePlugins() {
-    return templatePlugins.size() > 0;
+  public boolean hasDocumentTemplateProviders() {
+    return templateProviders.size() > 0;
   }
   
   /**
@@ -542,7 +548,7 @@ public class DocumentServiceImpl implements DocumentService {
    * {@inheritDoc}
    */
   @Override
-  public void setPreferedEditor(String userId, String provider, String uuid, String workspace) throws Exception {
+  public void savePreferedEditor(String userId, String provider, String uuid, String workspace) throws Exception {
     Node node = nodeByUUID(uuid, workspace);
     if (node.canAddMixin(EXO_DOCUMENT)) {
       node.addMixin(EXO_DOCUMENT);
@@ -575,8 +581,11 @@ public class DocumentServiceImpl implements DocumentService {
   /**
    * {@inheritDoc}
    */
-  public Set<DocumentEditorProvider> getDocumentEditorProviders() {
-    return Collections.unmodifiableSet(editorProviders);
+  public List<DocumentEditorProvider> getDocumentEditorProviders() {
+    if(unmodifiebleEditorProviders == null) {
+      unmodifiebleEditorProviders = Collections.unmodifiableList(editorProviders);
+    }
+    return unmodifiebleEditorProviders;
   }
   
   /**

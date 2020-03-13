@@ -16,45 +16,16 @@
  */
 package org.exoplatform.services.cms.documents;
 
-import java.util.List;
-
-import org.exoplatform.services.security.Identity;
-
-
 /**
- * The Interface DocumentEditorProvider.
+ * The Interface NewDocumentTemplateProvider.
  */
-public interface DocumentEditorProvider extends DocumentEditor {
+public interface NewDocumentTemplateProvider extends NewDocumentTemplatePlugin {
   
   /**
-   * Update permissions.
+   * Gets the editor provider.
    *
-   * @param permissions the permissions
+   * @return the editor
    */
-  void updatePermissions(List<String> permissions);
-  
-  /**
-   * Update active.
-   *
-   * @param active the active
-   */
-  void updateActive(boolean active);
-  
-  
-  /**
-   * Checks if is available for user.
-   *
-   * @param userId the user id
-   * @return true, if is available for user
-   */
-  boolean isAvailableForUser(Identity identity);
-  
-  
-  /**
-   * Gets the editor class.
-   *
-   * @return the editor class
-   */
-  Class<? extends DocumentEditor> getEditorClass();
+  DocumentEditorProvider getEditor();
 
 }
