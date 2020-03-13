@@ -193,7 +193,7 @@ public interface DocumentService {
   public static class DocumentTemplatesConfig {
 
     /** The document templates. */
-    protected List<NewDocumentTemplateConfig> templateConfigs;
+    protected List<NewDocumentTemplateConfig> templates;
 
     /** The providerName. */
     protected String                 providerName;
@@ -204,7 +204,7 @@ public interface DocumentService {
      * @return the document types
      */
     public List<NewDocumentTemplateConfig> getTemplates() {
-      return templateConfigs;
+      return templates;
     }
 
     /**
@@ -213,7 +213,7 @@ public interface DocumentService {
      * @param templates the new templates
      */
     public void setTemplates(List<NewDocumentTemplateConfig> templates) {
-      this.templateConfigs = templates;
+      this.templates = templates;
     }
 
     /**
