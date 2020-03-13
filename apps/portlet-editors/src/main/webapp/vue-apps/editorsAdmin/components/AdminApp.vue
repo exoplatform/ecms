@@ -29,7 +29,7 @@
                       :input-value="item.active"
                       class="v-input--switch--inset"
                       @change="changeStatus(item)"
-                    ></v-switch>
+                    />
                   </td>
                   <td class="text-center">
                     <v-btn text icon color="indigo" @click.stop="showDialog = true">
@@ -38,50 +38,13 @@
                       </i>
                     </v-btn>
                   </td>
+                  <edit-dialog :show="showDialog" :provider="item"></edit-dialog>
                 </tr>
               </tbody>
             </template>
           </v-simple-table>
         </v-col>
       </v-row>
-      <div class="text-center">
-        <v-dialog
-          v-model="showDialog"
-          width="600"
-        >
-          <v-card>
-            <v-card-title
-              class="headline grey lighten-2 justify-space-between"
-              primary-title
-            >
-              {{ this.$t('editors.admin.modal.title') }}
-              <v-btn icon @click="showDialog = false">
-                <v-icon>close</v-icon>
-              </v-btn>
-            </v-card-title>
-            <v-card-text>
-              <div class="v-skeleton-loader__bone blockProvidersInner">
-                <div class="permissionsSkeleton">
-                  <div class="v-skeleton-loader  v-skeleton-loader--is-loading theme--light providersSkeleton skeletonText">
-                  </div>
-                  <div class="permissionsRow">
-                    <div class="v-skeleton-loader  v-skeleton-loader--is-loading theme--light providersSkeleton searchLabel">
-                    </div>
-                    <div class="v-skeleton-loader  v-skeleton-loader--is-loading theme--light providersSkeleton skeletonText searchField">
-                    </div>
-                  </div>
-                  <div class="permissionsRow permissionsRow--btns">
-                    <div class="v-skeleton-loader  v-skeleton-loader--is-loading theme--light providersSkeleton skeletonButton">
-                    </div>
-                    <div class="v-skeleton-loader  v-skeleton-loader--is-loading theme--light providersSkeleton skeletonButton">
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </v-card-text>
-          </v-card>
-        </v-dialog>
-      </div>
     </v-container>
   </v-app>
 </template>

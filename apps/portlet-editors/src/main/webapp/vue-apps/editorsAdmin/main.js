@@ -1,8 +1,10 @@
 import adminApp from "./components/AdminApp.vue";
+import EditDialog from "./components/EditDialog.vue";
 
 import "../../css/main.less";
 
 Vue.use(Vuetify);
+Vue.component("edit-dialog", EditDialog);
 
 const vuetify = new Vuetify({
   dark: true,
