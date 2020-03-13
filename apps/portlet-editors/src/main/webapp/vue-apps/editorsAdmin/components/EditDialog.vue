@@ -89,7 +89,7 @@ export default {
   },
   methods: {
      getProviders() {
-          getInfo("http://localhost:8080/portal/rest/identitity/search").then(data => console.log(data));
+          getInfo(this.searchUrl + "/name").then(data => console.log(data));
         },
   }
 }
