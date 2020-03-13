@@ -15,15 +15,27 @@
           </v-btn>
         </v-card-title>
         <v-card-text>
-          <div>
-            {{ $t(`editors.admin.${provider.provider}.name`) }}
-            <div>Permissions: <ul><li v-for="permission in provider.permissions" :key="permission">{{ permission }}</li></ul></div>
-          </div>
-          <v-text-field
-            hide-details
-            prepend-icon="search"
-            single-line
-          ></v-text-field>
+          <v-container>
+            <v-row class="providerName">
+              {{ $t(`editors.admin.${provider.provider}.name`) }}
+            </v-row>
+            <v-row>
+              <v-col cols="6" md="4">Permissions:</v-col>
+              <v-col cols="12" md="8"><ul><li v-for="permission in provider.permissions" :key="permission">{{ permission }}</li></ul></v-col>
+            </v-row>
+            <v-row>
+              <v-col>
+                <label>Add permission</label>
+                <v-text-field
+                  hide-details
+                  single-line
+                  solo
+                  placeholder="Enter users or spaces names..."
+                ></v-text-field>
+              </v-col>
+            </v-row>
+          </v-container>
+        
           <!-- <div class="v-skeleton-loader__bone blockProvidersInner">
             <div class="permissionsSkeleton">
               <div class="v-skeleton-loader  v-skeleton-loader--is-loading theme--light providersSkeleton skeletonText">
@@ -77,8 +89,16 @@ export default {
   },
   methods: {
      getProviders() {
-          getInfo(this.searchUrl).then(data => console.log(data));
+          getInfo("http://localhost:8080/portal/rest/identitity/search").then(data => console.log(data));
         },
   }
 }
 </script>
+
+<style scoped>
+.providerName {
+  color: #333;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+</style>
