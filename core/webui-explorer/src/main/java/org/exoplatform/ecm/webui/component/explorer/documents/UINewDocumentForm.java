@@ -39,6 +39,8 @@ import org.exoplatform.services.cms.documents.NewDocumentTemplate;
 import org.exoplatform.services.cms.documents.NewDocumentTemplateProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.security.ConversationState;
+import org.exoplatform.services.security.Identity;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -157,7 +159,8 @@ public class UINewDocumentForm extends UIForm implements UIPopupComponent {
 
       DocumentEditorProvider editorProvider = templateProvider.getEditor();
       title = getFileName(title, template);
-      if (editorProvider != null) {
+      Identity identity = ConversationState.getCurrent().getIdentity();
+      if (editorProvider != null && editorProvider.isAvailableForUser(identity)) {
         editorProvider.beforeDocumentCreate(template, currentNode.getPath(), title);
       }
 
@@ -199,7 +202,7 @@ public class UINewDocumentForm extends UIForm implements UIPopupComponent {
         JCRExceptionManager.process(uiApp, e);
       }
 
-      if (document != null && editorProvider != null) {
+      if (document != null && editorProvider != null && editorProvider.isAvailableForUser(identity)) {
         editorProvider.onDocumentCreated(document.getSession().getWorkspace().getName(), document.getPath());
       }
       uiExplorer.updateAjax(event);
