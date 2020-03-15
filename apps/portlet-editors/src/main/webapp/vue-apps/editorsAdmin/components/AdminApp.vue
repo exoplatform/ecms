@@ -28,22 +28,33 @@
                     <v-switch
                       :input-value="item.active"
                       class="v-input--switch--inset"
-                      @change="changeStatus(item)"
-                    />
+                      @change="changeStatus(item)"/>
                   </td>
                   <td class="text-center">
-                    <v-btn text icon color="indigo" @click.stop="showDialog = true">
+                    <v-btn 
+                      text
+                      icon
+                      color="indigo" 
+                      @click.stop="changeSettings(item)">
                       <i class="material-icons">
                         settings
                       </i>
                     </v-btn>
                   </td>
-                  <edit-dialog :show="showDialog" :provider="item" :search-url="services.identities"></edit-dialog>
                 </tr>
               </tbody>
             </template>
           </v-simple-table>
         </v-col>
+        <v-dialog
+          v-model="showDialog" 
+          width="600" 
+          @click:outside="showDialog = false">
+          <edit-dialog
+            :provider="selectedProvider" 
+            :search-url="services.identities"
+            @onDialogClose="showDialog = false" />
+        </v-dialog>
       </v-row>
     </v-container>
   </v-app>
@@ -63,7 +74,8 @@ export default {
         return {
             providers: [],
             switcher: false,
-            showDialog: false
+            showDialog: false,
+            selectedProvider: null
         };
     },
     created() {
@@ -82,6 +94,10 @@ export default {
                   }
                 })
             });
+      },
+      changeSettings(item) {
+        this.selectedProvider = item;
+        this.showDialog = true;
       }
     }
 };
