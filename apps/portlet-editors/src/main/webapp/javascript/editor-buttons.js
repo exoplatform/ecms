@@ -246,6 +246,14 @@
       }
     };
     
+    this.editorOpened = function(provider, fileId) {
+      log("Editor opened. Provider: " + provider + ", fileId: " + fileId);
+    }
+
+    this.editorClosed = function(provider, fileId) {
+      log("Editor closed. Provider: " + provider + ", fileId: " + fileId);
+    }
+    
     /**
      * Clears buttonsFns
      * 
