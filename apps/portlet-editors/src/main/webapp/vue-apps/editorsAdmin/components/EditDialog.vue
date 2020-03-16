@@ -34,7 +34,8 @@
               dense
               dark
               item-text="displayName"
-              item-value="name">
+              item-value="name"
+              append-icon="">
               <template slot="selection" slot-scope="data">
                 <v-chip
                   :input-value="data"
@@ -59,24 +60,50 @@
           </v-col>
         </v-row>
         <v-row>
-          <v-col cols="6" md="4"><label class="searchLabel" style="margin-bottom: 10px">Who has permission</label></v-col>
-          <v-col cols="12" md="8"><ul><li v-for="permission in existingPermissions" :key="permission">{{ permission }}
-            <v-icon v-if="permission.length > 0" @click="removePermission(permission)">delete</v-icon>
-          </li></ul></v-col>
+          <v-col>
+            <label class="searchLabel" style="margin-bottom: 10px">Who has permission</label>
+            <v-col cols="12" md="8"><ul><li v-for="permission in existingPermissions" :key="permission">{{ permission }}
+              <v-icon 
+                v-if="permission.length > 0" 
+                style="color: #568dc9" 
+                @click="removePermission(permission)">
+                delete
+              </v-icon>
+            </li></ul></v-col>
+            <!-- <ul v-if="items.length > 0" class="permissionsList">
+              <li v-for="permission in items" :key="permission.name" class="permissionsItem permissionsItem--large">
+                <v-tooltip bottom>
+                  <template v-slot:activator="{ on }">
+                    <div v-on="on">
+                      <img :src="permission.avatarUrl" class="permissionsItemAvatar permissionsItemAvatar--large">
+                      <span class="permissionsItemName">{{ permission.displayName }}</span>
+                    </div>
+                  </template>
+                  <span>{{ permission.name }}</span>
+                </v-tooltip>
+                <v-icon
+                  style="color: #568dc9" 
+                  @click="removePermission(permission.name)">
+                  delete
+                </v-icon>
+              </li>
+            </ul> -->
+          </v-col>
         </v-row>
       </v-container>
     </v-card-text>
-    <v-card-actions class="dialogFooter">
+    <v-card-actions class="dialogFooter footer">
       <v-btn 
-        small
         color="primary" 
         style="margin-right: 10px"
+        class="btn btn-primary dialogFooterBtn"
+        text
         @click="saveChanges">
         Save
       </v-btn>
-      <v-btn 
-        small 
-        color="primary" 
+      <v-btn
+        class="btn dialogFooterBtn"
+        text
         @click="closeDialog">
         Cancel
       </v-btn>
@@ -164,15 +191,31 @@ export default {
   margin-bottom: 10px;
 }
 
+.permissionsList {
+  max-height: 300px;
+  padding-left: 0px;
+  overflow-y: auto;
+}
+
 .permissionsItem {
   display: flex;
   align-items: center;
   height: 30px;
 }
 
+.permissionsItem--large {
+  height: 40px;
+  margin: 5px 0;
+  justify-content: space-between;
+}
+
 .permissionsItemAvatar {
   max-height: 26px;
   margin-right: 5px;
+}
+
+.permissionsItemAvatar--large {
+  max-height: 40px;
 }
 
 .permissionsItemName {
@@ -211,5 +254,23 @@ export default {
   align-items: center;
   justify-content: center;
   padding-bottom: 20px;
+}
+
+.btn.v-size--default.dialogFooterBtn {
+  font-family: Helvetica,arial,sans-serif;
+  font-size: 15px;
+  padding: 9px 20px;
+  color: #4d5466;
+  border: 1px solid #e1e8ee;
+  box-shadow: none;
+  box-sizing: border-box;
+  border-radius: 3px;
+  height: 40px;
+  letter-spacing: normal;
+  min-width: 80px;
+}
+
+.btn.btn-primary.v-size--default.dialogFooterBtn {
+  color: #fff !important;
 }
 </style>
