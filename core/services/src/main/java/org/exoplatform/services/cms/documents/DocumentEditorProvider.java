@@ -18,6 +18,7 @@ package org.exoplatform.services.cms.documents;
 
 import java.util.List;
 
+import org.exoplatform.services.cms.documents.exception.PermissionValidationException;
 import org.exoplatform.services.security.Identity;
 
 
@@ -26,12 +27,14 @@ import org.exoplatform.services.security.Identity;
  */
 public interface DocumentEditorProvider extends DocumentEditor {
   
+
   /**
    * Update permissions.
    *
    * @param permissions the permissions
+   * @throws PermissionValidationException the permission validation exception
    */
-  void updatePermissions(List<String> permissions);
+  void updatePermissions(List<String> permissions) throws PermissionValidationException;
   
   /**
    * Update active.
@@ -44,7 +47,7 @@ public interface DocumentEditorProvider extends DocumentEditor {
   /**
    * Checks if is available for user.
    *
-   * @param userId the user id
+   * @param identity the identity
    * @return true, if is available for user
    */
   boolean isAvailableForUser(Identity identity);

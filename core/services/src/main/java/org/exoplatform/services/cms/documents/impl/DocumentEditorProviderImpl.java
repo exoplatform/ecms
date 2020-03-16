@@ -16,10 +16,10 @@
  */
 package org.exoplatform.services.cms.documents.impl;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.exoplatform.commons.api.settings.SettingService;
 import org.exoplatform.commons.api.settings.SettingValue;
@@ -30,9 +30,12 @@ import org.exoplatform.portal.config.UserACL;
 import org.exoplatform.services.cms.documents.DocumentEditor;
 import org.exoplatform.services.cms.documents.DocumentEditorProvider;
 import org.exoplatform.services.cms.documents.NewDocumentTemplate;
+import org.exoplatform.services.cms.documents.exception.PermissionValidationException;
+import org.exoplatform.services.organization.Group;
+import org.exoplatform.services.organization.OrganizationService;
 import org.exoplatform.services.security.Identity;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
-
+import org.exoplatform.social.core.manager.IdentityManager;
 
 /**
  * The Class DocumentEditorProviderImpl.
@@ -40,25 +43,31 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 public class DocumentEditorProviderImpl implements DocumentEditorProvider {
 
   /** The Constant DOCUMENTS_SCOPE_NAME. */
-  private static final String DOCUMENTS_SCOPE_NAME       = "documents".intern();
+  private static final String   DOCUMENTS_SCOPE_NAME       = "documents".intern();
 
   /** The Constant EDITOR_ACTIVE_PATTERN. */
-  private static final String EDITOR_ACTIVE_PATTERN      = "documents.editors.%s.active".intern();
+  private static final String   EDITOR_ACTIVE_PATTERN      = "documents.editors.%s.active".intern();
 
   /** The Constant EDITOR_PERMISSIONS_PATTERN. */
-  private static final String EDITOR_PERMISSIONS_PATTERN = "documents.editors.%s.permissions".intern();
+  private static final String   EDITOR_PERMISSIONS_PATTERN = "documents.editors.%s.permissions".intern();
 
   /** The active. */
-  protected boolean           active;
+  protected boolean             active;
 
   /** The permissions. */
-  protected List<String>      permissions;
+  protected List<String>        permissions;
 
   /** The editor ops. */
-  protected DocumentEditor editor;
+  protected DocumentEditor      editor;
 
   /** The setting service. */
-  protected SettingService    settingService;
+  protected SettingService      settingService;
+
+  /** The identity manager. */
+  protected IdentityManager     identityManager;
+
+  /** The organization service. */
+  protected OrganizationService organization;
 
   /**
    * Instantiates a new document editor provider impl.
@@ -67,7 +76,10 @@ public class DocumentEditorProviderImpl implements DocumentEditorProvider {
    */
   protected DocumentEditorProviderImpl(DocumentEditor editorOps) {
     this.editor = editorOps;
+    // TODO: refactor, use container injection
     this.settingService = WCMCoreUtils.getService(SettingService.class);
+    this.identityManager = WCMCoreUtils.getService(IdentityManager.class);
+    this.organization = WCMCoreUtils.getService(OrganizationService.class);
     Boolean storedActive = getStoredActive();
     List<String> storedPermissions = getStoredPermissions();
     if (storedActive != null && storedPermissions != null) {
@@ -118,15 +130,17 @@ public class DocumentEditorProviderImpl implements DocumentEditorProvider {
    * @param permissions the permissions
    */
   @Override
-  public void updatePermissions(List<String> permissions) {
-    this.permissions = permissions.stream().map(permission -> {
+  public void updatePermissions(List<String> permissions) throws PermissionValidationException {
+    List<String> updatedPermissions = new ArrayList<>();
+    for (String permission : permissions) {
       if (permission.startsWith("/")) {
         permission = "*:" + permission;
       }
-      return permission;
-    }).collect(Collectors.toList());
+      validatePermission(permission);
+      updatedPermissions.add(permission);
+    }
+    this.permissions = updatedPermissions;
     storePermissions();
-
   }
 
   /**
@@ -238,7 +252,33 @@ public class DocumentEditorProviderImpl implements DocumentEditorProvider {
                        SettingValue.create(String.join(",", permissions)));
   }
 
- 
+  protected void validatePermission(String permission) throws PermissionValidationException {
+    if (permission == null) {
+      throw new PermissionValidationException("The permission cannot be null");
+    }
+    String[] temp = permission.split(":");
+    if (temp.length < 2) {
+      // user permissions
+      String userId = temp[0];
+      if (!userId.equals("*") && identityManager.getIdentity(userId, false) == null) {
+        throw new PermissionValidationException("User " + userId + " doesn't exist.");
+      }
+    } else {
+      // group permisisons
+      String groupId = temp[1];
+      Group group = null;
+      try {
+        group = organization.getGroupHandler().findGroupById(groupId);
+      } catch (Exception e) {
+        throw new PermissionValidationException("Cannot validate permission for group: " + group + ". " + e.getMessage());
+      }
+      if (group == null) {
+        throw new PermissionValidationException("Group " + groupId + " doesn't exist.");
+      }
+    }
+  }
+  
+  
 
   /**
    * Checks if is available for user.
@@ -258,7 +298,7 @@ public class DocumentEditorProviderImpl implements DocumentEditorProvider {
     }
     return false;
   }
-  
+
   /**
    * Gets the editor class.
    *
@@ -268,5 +308,5 @@ public class DocumentEditorProviderImpl implements DocumentEditorProvider {
   public Class<? extends DocumentEditor> getEditorClass() {
     return editor.getClass();
   }
-  
+
 }
