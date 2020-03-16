@@ -35,6 +35,7 @@ import org.exoplatform.services.organization.Group;
 import org.exoplatform.services.organization.OrganizationService;
 import org.exoplatform.services.security.Identity;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+import org.exoplatform.social.core.identity.provider.OrganizationIdentityProvider;
 import org.exoplatform.social.core.manager.IdentityManager;
 
 /**
@@ -260,7 +261,7 @@ public class DocumentEditorProviderImpl implements DocumentEditorProvider {
     if (temp.length < 2) {
       // user permissions
       String userId = temp[0];
-      if (!userId.equals("*") && identityManager.getIdentity(userId, false) == null) {
+      if (!userId.equals("*") && identityManager.getOrCreateIdentity(OrganizationIdentityProvider.NAME, userId) == null) {
         throw new PermissionValidationException("User " + userId + " doesn't exist.");
       }
     } else {
@@ -277,8 +278,6 @@ public class DocumentEditorProviderImpl implements DocumentEditorProvider {
       }
     }
   }
-  
-  
 
   /**
    * Checks if is available for user.

@@ -44,6 +44,7 @@ import org.exoplatform.services.organization.OrganizationService;
 import org.exoplatform.services.rest.resource.ResourceContainer;
 import org.exoplatform.social.core.identity.model.Identity;
 import org.exoplatform.social.core.identity.model.Profile;
+import org.exoplatform.social.core.identity.provider.OrganizationIdentityProvider;
 import org.exoplatform.social.core.manager.IdentityManager;
 import org.exoplatform.social.core.service.LinkProvider;
 import org.exoplatform.social.core.space.model.Space;
@@ -82,13 +83,20 @@ public class DocumentEditorsRESTService implements ResourceContainer {
   /** The identity manager. */
   protected IdentityManager     identityManager;
 
+
   /**
    * Instantiates a new document editors REST service.
    *
    * @param documentService the document service
+   * @param spaceService the space service
+   * @param organizationService the organization service
+   * @param identityManager the identity manager
    */
-  public DocumentEditorsRESTService(DocumentService documentService) {
+  public DocumentEditorsRESTService(DocumentService documentService, SpaceService spaceService, OrganizationService organizationService, IdentityManager identityManager) {
     this.documentService = documentService;
+    this.identityManager = identityManager;
+    this.organization = organizationService;
+    this.spaceService = spaceService;
   }
 
   /**
@@ -98,7 +106,7 @@ public class DocumentEditorsRESTService implements ResourceContainer {
    * @return the response
    */
   @GET
-  //@RolesAllowed("administrators")
+  @RolesAllowed("administrators")
   @Produces(MediaType.APPLICATION_JSON)
   public Response getEditors(@Context UriInfo uriInfo) {
     List<DocumentEditorProviderDTO> providers = documentService.getDocumentEditorProviders()
@@ -124,7 +132,7 @@ public class DocumentEditorsRESTService implements ResourceContainer {
    */
   @GET
   @Path("/{provider}")
-  //@RolesAllowed("administrators")
+  @RolesAllowed("administrators")
   @Produces(MediaType.APPLICATION_JSON)
   public Response getEditor(@Context UriInfo uriInfo, @PathParam("provider") String provider) {
     try {
@@ -147,7 +155,7 @@ public class DocumentEditorsRESTService implements ResourceContainer {
    */
   @POST
   @Path("/{provider}")
-  //@RolesAllowed("administrators")
+  @RolesAllowed("administrators")
   @Produces(MediaType.APPLICATION_JSON)
   public Response updateEditor(@PathParam("provider") String provider,
                                @FormParam("active") Boolean active,
@@ -216,13 +224,20 @@ public class DocumentEditorsRESTService implements ResourceContainer {
     provider.setLinks(Arrays.asList(self, update));
   }
 
+  
+  /**
+   * Convert to DTO.
+   *
+   * @param provider the provider
+   * @return the document editor provider DTO
+   */
   protected DocumentEditorProviderDTO convertToDTO(DocumentEditorProvider provider) {
     List<Permission> permissions = provider.getPermissions().stream().map(expression -> {
       String[] temp = expression.split(":");
       if (temp.length < 2) {
         // user permission
         String userId = temp[0];
-        Identity identity = identityManager.getIdentity(userId, true);
+        Identity identity = identityManager.getOrCreateIdentity(OrganizationIdentityProvider.NAME, userId);
         if (identity != null) {
           Profile profile = identity.getProfile();
           String avatarUrl = profile.getAvatarUrl() != null ? profile.getAvatarUrl() : LinkProvider.PROFILE_DEFAULT_AVATAR_URL;
