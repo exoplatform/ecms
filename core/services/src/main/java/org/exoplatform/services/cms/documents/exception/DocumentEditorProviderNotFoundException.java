@@ -18,9 +18,9 @@ package org.exoplatform.services.cms.documents.exception;
 
 
 /**
- * The Class EditorProviderNotFoundException.
+ * The Class DocumentEditorProviderNotFoundException.
  */
-public class EditorProviderNotFoundException extends Exception {
+public class DocumentEditorProviderNotFoundException extends Exception {
   /** The Constant serialVersionUID. */
   private static final long serialVersionUID = -8981933520830552416L;
 
@@ -28,7 +28,7 @@ public class EditorProviderNotFoundException extends Exception {
    * Instantiates a new editor provider not found exception.
    *
    */
-  public EditorProviderNotFoundException() {
+  public DocumentEditorProviderNotFoundException() {
     super();
   }
   
@@ -37,7 +37,7 @@ public class EditorProviderNotFoundException extends Exception {
    *
    * @param message the message
    */
-  public EditorProviderNotFoundException(String message) {
+  public DocumentEditorProviderNotFoundException(String message) {
     super(message);
   }
 
@@ -46,7 +46,7 @@ public class EditorProviderNotFoundException extends Exception {
    *
    * @param cause the cause
    */
-  public EditorProviderNotFoundException(Throwable cause) {
+  public DocumentEditorProviderNotFoundException(Throwable cause) {
     super(cause);
   }
 
@@ -56,7 +56,7 @@ public class EditorProviderNotFoundException extends Exception {
    * @param message the message
    * @param cause the cause
    */
-  public EditorProviderNotFoundException(String message, Throwable cause) {
+  public DocumentEditorProviderNotFoundException(String message, Throwable cause) {
     super(message, cause);
   }
 
