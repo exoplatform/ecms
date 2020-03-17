@@ -48,7 +48,7 @@
         </v-col>
         <v-dialog
           v-model="showDialog" 
-          width="600" 
+          width="500" 
           @click:outside="showDialog = false">
           <edit-dialog
             :provider="selectedProvider" 
