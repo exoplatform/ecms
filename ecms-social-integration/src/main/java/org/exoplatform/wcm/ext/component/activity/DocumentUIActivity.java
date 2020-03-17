@@ -23,10 +23,13 @@ import java.util.stream.Collectors;
 import javax.jcr.Node;
 
 import org.exoplatform.container.ExoContainerContext;
+import org.exoplatform.container.PortalContainer;
 import org.exoplatform.ecm.webui.component.explorer.documents.IsEditorPluginPresentFilter;
 import org.exoplatform.portal.config.UserACL;
 import org.exoplatform.services.cms.documents.DocumentEditorPlugin;
 import org.exoplatform.services.cms.documents.DocumentService;
+import org.exoplatform.services.cms.documents.cometd.CometdConfig;
+import org.exoplatform.services.cms.documents.cometd.CometdDocumentsService;
 import org.exoplatform.services.cms.documents.model.EditorProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
@@ -41,6 +44,7 @@ import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.ext.filter.UIExtensionFilter;
 import org.exoplatform.webui.ext.filter.UIExtensionFilters;
+import org.exoplatform.ws.frameworks.json.impl.JsonException;
 
 /**
  * The Class CustomizedFileUIActivity.
@@ -67,6 +71,9 @@ public class DocumentUIActivity extends FileUIActivity {
   /** The customize service. */
   protected final DocumentService                documentService;
 
+  /** The cometd service. */
+  protected final CometdDocumentsService         cometdService;
+
   /** The Constant STREAM_CONTEXT. */
   protected static final String                  STREAM_CONTEXT = "stream";
 
@@ -81,7 +88,8 @@ public class DocumentUIActivity extends FileUIActivity {
    */
   public DocumentUIActivity() throws Exception {
     super();
-    this.documentService = this.getApplicationComponent(DocumentService.class);
+    this.documentService = getApplicationComponent(DocumentService.class);
+    this.cometdService = getApplicationComponent(CometdDocumentsService.class);
   }
 
   /**
@@ -93,23 +101,32 @@ public class DocumentUIActivity extends FileUIActivity {
     JavascriptManager js = requestContext.getJavascriptManager();
     String activityId = getActivity().getId();
     RequireJS require = js.require("SHARED/editorbuttons", "editorbuttons");
+    CometdConfig cometdConf = new CometdConfig(cometdService.getCometdServerPath(),
+                                               cometdService.getUserToken(requestContext.getRemoteUser()),
+                                               PortalContainer.getCurrentPortalContainerName());
+    Node contentNode = getContentNode(0);
+    String workspace = contentNode.getSession().getWorkspace().getName();
+    try {
+      require.addScripts("editorbuttons.init('" + requestContext.getRemoteUser() + "', '" + workspace + "', " + cometdConf.toJSON() + ");");
+    } catch (JsonException e) {
+      LOG.warn("Cannot generate JSON for cometd configuration. {}", e.getMessage());
+    }
+
     if (getFilesCount() == 1) {
-      Node node = getContentNode(0);
       require.addScripts("editorbuttons.resetButtons();");
       // call plugins init handlers
       documentService.getRegisteredEditorPlugins().forEach(plugin -> {
         try {
           EditorProvider editorProvider = documentService.getEditorProvider(plugin.getProviderName());
           if (hasPermissions(editorProvider)) {
-            plugin.initActivity(node.getUUID(), node.getSession().getWorkspace().getName(), activityId, STREAM_CONTEXT);
+            plugin.initActivity(contentNode.getUUID(), contentNode.getSession().getWorkspace().getName(), activityId, STREAM_CONTEXT);
           }
         } catch (Exception e) {
           LOG.error("Cannot init activity from plugin {}, {}", plugin.getProviderName(), e.getMessage());
         }
       });
-      String prefferedEditor = getPrefferedEditor(node);
-      require.addScripts("editorbuttons.initActivityButtons('" + activityId + "', '" + node.getUUID() + "', '"
-          + node.getSession().getWorkspace().getName() + "'," + prefferedEditor + ");");
+      String prefferedEditor = getPrefferedEditor(contentNode);
+      require.addScripts("editorbuttons.initActivityButtons('" + activityId + "', '" + contentNode.getUUID() + "', " + prefferedEditor + ");");
 
     }
 
@@ -173,12 +190,13 @@ public class DocumentUIActivity extends FileUIActivity {
   protected boolean hasPermissions(EditorProvider editorProvider) {
     UserACL userACL = (UserACL) ExoContainerContext.getCurrentContainer().getComponentInstanceOfType(UserACL.class);
     List<String> permissions = editorProvider.getPermissions().stream().map(permission -> {
-      if(permission.startsWith("/")) {
+      if (permission.startsWith("/")) {
         permission = "*:" + permission;
       }
       return permission;
     }).collect(Collectors.toList());
     String currentUser = ConversationState.getCurrent().getIdentity().getUserId();
-    return editorProvider.getActive() && (permissions.contains(currentUser) || permissions.contains("*") || userACL.hasPermission(permissions.toArray(new String[0])));
+    return editorProvider.getActive() && (permissions.contains(currentUser) || permissions.contains("*")
+        || userACL.hasPermission(permissions.toArray(new String[0])));
   }
 }

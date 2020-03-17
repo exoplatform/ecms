@@ -165,9 +165,9 @@ public interface DocumentService {
    * @param uuid the uuid
    * @param workspace the workspace
    * @return the preffered editor (provider)
-   * @throws Exception the exception
+   * @throws RepositoryException the RepositoryException
    */
-  public String getPreferedEditor(String userId, String uuid, String workspace) throws Exception;
+  public String getPreferedEditor(String userId, String uuid, String workspace) throws RepositoryException;
   
   /**
    * Sets preffered editor provider for specified file and user.
@@ -176,9 +176,9 @@ public interface DocumentService {
    * @param provider the editor provider
    * @param uuid the uuid
    * @param workspace the workspace
-   * @throws Exception the exception
+   * @throws RepositoryException the RepositoryException
    */
-  public void setPreferedEditor(String userId, String provider, String uuid, String workspace) throws Exception;
+  public void setPreferedEditor(String userId, String provider, String uuid, String workspace) throws RepositoryException;
 
   /**
    * Gets the editor providers.
@@ -203,6 +203,15 @@ public interface DocumentService {
    */
   public void updateEditorProvider(EditorProvider editorProvider) throws EditorProviderNotFoundException;
   
+  /**
+   * Updates information about current open editor for the document.
+   * It is assumed that the document is being edited at the moment.
+   * 
+   * @param uuid the uuid
+   * @param workspace the workspace
+   * @param provider the current provider or null if the document has been closed.
+   */
+  public void setCurrentDocumentEditor(String uuid, String workspace, String provider) throws RepositoryException;
   
   /**
    * NewDocumentTypesConfig contains all registered templates for specified provider.

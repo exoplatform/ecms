@@ -104,6 +104,7 @@ public class DocumentServiceImpl implements DocumentService {
   public static final String JCR_MIME_TYPE = "jcr:mimeType";
   public static final String EXO_OWNER_PROP = "exo:owner";
   public static final String EXO_TITLE_PROP = "exo:title";
+  private static final String EXO_CURRENT_EDITOR_PROP = "exo:currentEditor";
   private static final String EXO_DOCUMENT = "exo:document";
   private static final String EXO_USER_PREFFERENCES = "exo:userPrefferences";
   private static final String EXO_PREFFERED_EDITOR = "exo:prefferedEditor";
@@ -562,7 +563,7 @@ public class DocumentServiceImpl implements DocumentService {
    * {@inheritDoc}
    */
   @Override
-  public void setPreferedEditor(String userId, String provider, String uuid, String workspace) throws Exception {
+  public void setPreferedEditor(String userId, String provider, String uuid, String workspace) throws RepositoryException {
     Node node = nodeByUUID(uuid, workspace);
     if (node.canAddMixin(EXO_DOCUMENT)) {
       node.addMixin(EXO_DOCUMENT);
@@ -581,7 +582,7 @@ public class DocumentServiceImpl implements DocumentService {
    * {@inheritDoc}
    */
   @Override
-  public String getPreferedEditor(String userId, String uuid, String workspace) throws Exception {
+  public String getPreferedEditor(String userId, String uuid, String workspace) throws RepositoryException {
     Node node = nodeByUUID(uuid, workspace);
     if (node.hasNode(userId)) {
       Node userPrefferences = node.getNode(userId);
@@ -595,6 +596,7 @@ public class DocumentServiceImpl implements DocumentService {
   /**
    * {@inheritDoc}
    */
+  @Override
   public List<EditorProvider> getEditorProviders() {
     List<EditorProvider> providers = new ArrayList<>();
     getRegisteredEditorPlugins().forEach(plugin -> {
@@ -606,6 +608,7 @@ public class DocumentServiceImpl implements DocumentService {
   /**
    * {@inheritDoc}
    */
+  @Override
   public EditorProvider getEditorProvider(String provider) throws EditorProviderNotFoundException {
     getRegisteredEditorPlugins().stream()
                                 .filter(pl -> pl.getProviderName().equals(provider))
@@ -617,6 +620,7 @@ public class DocumentServiceImpl implements DocumentService {
   /**
    * {@inheritDoc}
    */
+  @Override
   public void updateEditorProvider(EditorProvider editorProvider) throws EditorProviderNotFoundException{
     getRegisteredEditorPlugins().stream()
                                 .filter(pl -> pl.getProviderName().equals(editorProvider.getProvider()))
@@ -639,6 +643,26 @@ public class DocumentServiceImpl implements DocumentService {
                          Scope.GLOBAL.id(DOCUMENTS_SCOPE_NAME),
                          String.format(EDITOR_PERMISSIONS_PATTERN, editorProvider.getProvider()),
                          SettingValue.create(String.join(",", permissions)));
+    }
+  }
+  
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setCurrentDocumentEditor(String uuid, String workspace, String provider) throws RepositoryException {
+    Node node = nodeByUUID(uuid, workspace);
+    if (node.canAddMixin(EXO_DOCUMENT)) {
+      node.addMixin(EXO_DOCUMENT);
+    }
+    node.setProperty(EXO_CURRENT_EDITOR_PROP, provider);
+    node.save();  
+    if(LOG.isDebugEnabled()) {
+      if(provider != null) {
+        LOG.debug("Document {} [{}] has been opened in {} editor", uuid, workspace, provider);
+      } else {
+        LOG.debug("Document {} [{}] has been closed in all editors", uuid, workspace);
+      }
     }
   }
   
@@ -683,5 +707,6 @@ public class DocumentServiceImpl implements DocumentService {
     Session session = sp.getSession(workspace, repoService.getCurrentRepository());
     return session.getNodeByUUID(uuid);
   }
+
 
 }

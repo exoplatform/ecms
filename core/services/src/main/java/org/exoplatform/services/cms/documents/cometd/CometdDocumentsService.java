@@ -279,7 +279,7 @@ public class CometdDocumentsService implements Startable {
    * The CometService is responsible for sending messages to Cometd channels
    * when a document is saved.
    */
-  @Service("onlyoffice")
+  @Service("documents")
   public class CometdService {
 
     /** The bayeux. */

@@ -20,6 +20,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import javax.annotation.security.RolesAllowed;
+import javax.jcr.RepositoryException;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -39,6 +40,7 @@ import org.exoplatform.services.cms.documents.model.Link;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.rest.resource.ResourceContainer;
+import org.exoplatform.ws.frameworks.json.impl.JsonException;
 import org.exoplatform.ws.frameworks.json.impl.JsonGeneratorImpl;
 
 /**
@@ -86,8 +88,8 @@ public class DocumentEditorsRESTService implements ResourceContainer {
     try {
       String json = new JsonGeneratorImpl().createJsonArray(providers).toString();
       return Response.status(Status.OK).entity("{\"editors\":" + json + "}").build();
-    } catch (Exception e) {
-      LOG.error("Cannot get editors, error: {}", e.getMessage());
+    } catch (JsonException e) {
+      LOG.error("Cannot generate editor providers JSON, error: {}", e.getMessage());
       return Response.status(Status.INTERNAL_SERVER_ERROR).build();
     }
   }
@@ -158,8 +160,8 @@ public class DocumentEditorsRESTService implements ResourceContainer {
                                  @FormParam("workspace") String workspace) {
     try {
       documentService.setPreferedEditor(userId, provider, fileId, workspace);
-    } catch (Exception e) {
-      LOG.error("Cannot set prefered editor for user {} and node {}: {}", userId, fileId, e.getMessage());
+    } catch (RepositoryException e) {
+      LOG.error("Cannot set prefered editor for user {} and fileId {}: {}", userId, fileId, e.getMessage());
       return Response.status(Status.INTERNAL_SERVER_ERROR).build();
     }
     return Response.ok().build();

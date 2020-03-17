@@ -1,7 +1,7 @@
 /**
  * Editor buttons module.
  */
-(function($) {
+(function($, cCometD) {
   "use strict";
 
   /** For debug logging. */
@@ -63,6 +63,14 @@
     var buttonsFns = []; 
     var prefixUrl = pageBaseUrl(location);
     var currentWorkspace;
+    var currentUserId;
+    var subscribedDocuments = {};
+    
+    // CometD transport bus
+    var cometd, cometdContext;
+    
+    const DOCUMENT_OPENED = "DOCUMENT_OPENED";
+    const DOCUMENT_CLOSED = "DOCUMENT_CLOSED";
     
     /**
      * Saves prefered provider.
@@ -178,17 +186,97 @@
       }
     };
     
+    var subscribeDocument = function(docId) {
+      // Use only one channel for one document
+      if (subscribedDocuments.docId) {
+        return;
+      }
+      var subscription = cometd.subscribe("/eXo/Application/documents/" + docId, function(message) {
+        // Channel message handler
+        var result = tryParseJson(message);
+        log("EVENT: " + message);
+      }, cometdContext, function(subscribeReply) {
+        // Subscription status callback
+        if (subscribeReply.successful) {
+          // The server successfully subscribed this client to the channel.
+          log("Document updates subscribed successfully: " + JSON.stringify(subscribeReply));
+          subscribedDocuments.docId = subscription;
+        } else {
+          var err = subscribeReply.error ? subscribeReply.error : (subscribeReply.failure ? subscribeReply.failure.reason
+              : "Undefined");
+          log("Document updates subscription failed for " + docId, err);
+        }
+      });
+    };
+
+    var unsubscribeDocument = function(docId) {
+      var subscription = subscribedDocuments.docId;
+      if (subscription) {
+        cometd.unsubscribe(subscription, {}, function(unsubscribeReply) {
+          if (unsubscribeReply.successful) {
+            // The server successfully unsubscribed this client to the channel.
+            log("Document updates unsubscribed successfully for: " + docId);
+            delete subscribedDocuments.docId;
+          } else {
+            var err = unsubscribeReply.error ? unsubscribeReply.error
+                : (unsubscribeReply.failure ? unsubscribeReply.failure.reason : "Undefined");
+            log("Document updates unsubscription failed for " + docId, err);
+          }
+        });
+      }
+    };
+    
+    var publishDocument = function(docId, data) {
+      var deferred = $.Deferred();
+      cometd.publish("/eXo/Application/documents/" + docId, data, cometdContext, function(publishReply) {
+        // Publication status callback
+        if (publishReply.successful) {
+          deferred.resolve();
+          // The server successfully subscribed this client to the channel.
+          log("Document update published successfully: " + JSON.stringify(publishReply));
+        } else {
+          deferred.reject();
+          var err = publishReply.error ? publishReply.error : (publishReply.failure ? publishReply.failure.reason : "Undefined");
+          log("Document updates publication failed for " + docId, err);
+        }
+      });
+      return deferred;
+    };
+    
+    this.init = function(userId, workspace, cometdConf) {
+      currentWorkspace = workspace;
+      if (userId == currentUserId) {
+        log("Already initialized user: " + userId);
+      } else if (userId) {
+        currentUserId = userId;
+        log("Initialize user: " + userId);
+        if (cometdConf) {
+          cCometD.configure({
+            "url" : prefixUrl + cometdConf.path,
+            "exoId" : userId,
+            "exoToken" : cometdConf.token,
+            "maxNetworkDelay" : 30000,
+            "connectTimeout" : 60000
+          });
+          cometdContext = {
+            "exoContainerName" : cometdConf.containerName
+          };
+          cometd = cCometD;
+        }
+      } else {
+        log("Cannot initialize user: " + userId);
+      }
+    }
     
     /**
      * Inits editor buttons on DocumentUIActivity.
      * 
      */
-    this.initActivityButtons = function(activityId, fileId, workspace, preferedProvider) {
+    this.initActivityButtons = function(activityId, fileId, preferedProvider) {
       var buttons = buttonsFns.slice();
       if(buttons.length == 0) {
         return;
       }
-      currentWorkspace = workspace;
       log("Init Activity buttons: " + JSON.stringify(buttons));
       // Sort buttons in user prefference order
       if(preferedProvider != null) {
@@ -201,6 +289,7 @@
       }
       var $target = $("#activityContainer" + activityId).find("div[id^='ActivityContextBox'] > .actionBar .statusAction.pull-left");
       addEditorButtonsContainer($target, fileId, buttons);
+      subscribeDocument(fileId);
     };
     
     /**
@@ -229,6 +318,7 @@
           // We need wait for about 2min when doc cannot generate its preview
           tryAddEditorButtonNoPreview(600, 250, fileId, buttons);
         }, 100);
+        subscribeDocument(fileId);
       });
     };
     
@@ -248,10 +338,18 @@
     
     this.editorOpened = function(provider, fileId) {
       log("Editor opened. Provider: " + provider + ", fileId: " + fileId);
+      publishDocument(fileId, {
+        "type" : DOCUMENT_OPENED,
+        "provider" : provider
+      });
     }
 
     this.editorClosed = function(provider, fileId) {
       log("Editor closed. Provider: " + provider + ", fileId: " + fileId);
+      publishDocument(fileId, {
+        "type" : DOCUMENT_CLOSED,
+        "provider" : provider
+      });
     }
     
     /**
@@ -265,4 +363,4 @@
   }
   return new EditorButtons();
 
-})($);
+})($, cCometD);
