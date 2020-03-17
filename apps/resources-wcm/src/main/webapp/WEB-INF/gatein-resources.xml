@@ -24,8 +24,76 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://www.exoplatform.org/xml/ns/gatein_resources_1_4 http://www.exoplatform.org/xml/ns/gatein_resources_1_4"
   xmlns="http://www.exoplatform.org/xml/ns/gatein_resources_1_4">
-  
-  
+
+  <portal-skin>
+    <skin-name>Enterprise</skin-name>
+    <skin-module>WCMSkin</skin-module>
+    <css-path>/skin/css/ecms/skin/ecms-resources-wcmskin.css</css-path>
+    <css-priority>10</css-priority>
+  </portal-skin>
+
+  <!-- ECMAdminPortlet skin -->
+  <portlet-skin>
+    <application-name>ecmadmin</application-name>
+    <portlet-name>ECMAdminPortlet</portlet-name>
+    <skin-name>Enterprise</skin-name>
+    <css-path>/skin/css/ecms/portlets/administration/ecms-administration.css</css-path>
+  </portlet-skin>
+
+  <!-- FileExplorerPortlet skin -->
+  <portlet-skin>
+    <application-name>ecmexplorer</application-name>
+    <portlet-name>FileExplorerPortlet</portlet-name>
+    <skin-name>Enterprise</skin-name>
+    <css-path>/skin/css/ecms/portlets/explorer/ecms-explorer.css</css-path>
+  </portlet-skin>
+
+  <!-- SingleContentViewer skins -->
+  <portlet-skin>
+    <application-name>searches</application-name>
+    <portlet-name>WCMAdvanceSearchPortlet</portlet-name>
+    <skin-name>Enterprise</skin-name>
+    <css-path>/skin/css/ecms/portlets/search/ecms-search.css</css-path>
+  </portlet-skin>
+
+  <!-- FastContentCreatorPortlet skins -->
+  <portlet-skin>
+    <application-name>fastcontentcreator</application-name>
+    <portlet-name>FastContentCreatorPortlet</portlet-name>
+    <skin-name>Enterprise</skin-name>
+    <css-path>/skin/css/ecms/portlets/fastcontentcreator/fast-content-creator.css</css-path>
+  </portlet-skin>
+
+  <!-- FastContentCreatorBasicPortlet skins -->
+  <portlet-skin>
+    <application-name>fastcontentcreator</application-name>
+    <portlet-name>FastContentCreatorBasicPortlet</portlet-name>
+    <skin-name>Enterprise</skin-name>
+    <css-path>/skin/css/ecms/portlets/fastcontentcreator/fast-content-creator.css</css-path>
+  </portlet-skin>
+
+  <!-- FastContentCreatorPortletStandard skins -->
+  <portlet-skin>
+    <application-name>presentation</application-name>
+    <portlet-name>SingleContentViewer</portlet-name>
+    <skin-name>Enterprise</skin-name>
+    <css-path>/skin/css/ecms/portlets/presentation/ecms-presentation-singlecontentviewer.css</css-path>
+  </portlet-skin>
+
+  <!-- ContentListViewerPortlet skins -->
+  <portlet-skin>
+    <application-name>presentation</application-name>
+    <portlet-name>ContentListViewerPortlet</portlet-name>
+    <skin-name>Enterprise</skin-name>
+    <css-path>/skin/css/ecms/portlets/presentation/ecms-presentation-contentlistviewerportlet.css</css-path>
+  </portlet-skin>
+
+  <portlet-skin>
+    <application-name>presentation</application-name>
+    <portlet-name>ContentListViewerByQueryPortlet</portlet-name>
+    <skin-name>Enterprise</skin-name>
+    <css-path>/skin/css/ecms/portlets/presentation/ecms-presentation-contentlistviewerportlet.css</css-path>
+  </portlet-skin>
 
   <!-- Bootstrap Javascripts -->
   <!-- Twitter Bootstrap bootstrap-typeahead plugin -->

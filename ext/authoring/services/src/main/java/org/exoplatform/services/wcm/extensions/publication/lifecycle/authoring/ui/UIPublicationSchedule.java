@@ -93,14 +93,21 @@ public class UIPublicationSchedule extends UIForm {
       UIPublicationSchedule publicationSchedule = event.getSource();
       UIApplication uiApp = publicationSchedule.getAncestorOfType(UIApplication.class);
       UIPublicationPanel publicationPanel =
-          publicationSchedule.getAncestorOfType(UIPublicationContainer.class).getChild(UIPublicationPanel.class);
+              publicationSchedule.getAncestorOfType(UIPublicationContainer.class).getChild(UIPublicationPanel.class);
       UIFormDateTimeInput startPublication = publicationSchedule.getChildById(START_PUBLICATION);
       UIFormDateTimeInput endPublication = publicationSchedule.getChildById(END_PUBLICATION);
       String startValue = startPublication.getValue();
       String endValue = endPublication.getValue();
+      if (startValue.isEmpty() || endValue.isEmpty()) {
+        uiApp.addMessage(new ApplicationMessage("UIPublicationPanel.msg.invalid-format",
+                null,
+                ApplicationMessage.WARNING));
+        event.getRequestContext().addUIComponentToUpdateByAjax(publicationSchedule);
+        return;
+      }
       Calendar startDate = startPublication.getCalendar();
       Calendar endDate = endPublication.getCalendar();
-      SimpleDateFormat format = new SimpleDateFormat(startPublication.getDatePattern_()+"Z");
+      SimpleDateFormat format = new SimpleDateFormat(startPublication.getDatePattern_() + "Z");
       startDate.setTime(format.parse(startValue));
       endDate.setTime(format.parse(endValue));
       Node node = publicationPanel.getCurrentNode();

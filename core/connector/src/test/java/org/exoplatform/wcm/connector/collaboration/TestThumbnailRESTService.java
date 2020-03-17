@@ -17,7 +17,10 @@
 package org.exoplatform.wcm.connector.collaboration;
 
 import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
+import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
 
 import org.apache.commons.lang.StringUtils;
@@ -25,6 +28,7 @@ import org.apache.commons.lang.StringUtils;
 import org.exoplatform.BaseConnectorTestCase;
 import org.exoplatform.services.jcr.util.Text;
 import org.exoplatform.services.rest.impl.ContainerResponse;
+import org.exoplatform.services.rest.impl.MultivaluedMapImpl;
 import org.exoplatform.services.rest.wadl.research.HTTPMethods;
 import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.security.Identity;
@@ -86,10 +90,18 @@ public class TestThumbnailRESTService extends BaseConnectorTestCase{
   }
   
   public void testGetSmallImage() throws Exception{
-    String restPath = "/thumbnailImage/small/repository/collaboration/offices.jpg";
+    applyUserSession("john", "gtn", "collaboration");
+    String restPath = "/thumbnailImage/small/repository/collaboration/metro.pdf";
     ConversationState.setCurrent(new ConversationState(new Identity("john")));
+    MultivaluedMap<String, String> headers = new MultivaluedMapImpl();
+    
+    Calendar cal = Calendar.getInstance();
+    cal.add(Calendar.YEAR, -10);
+    SimpleDateFormat dateFormat = new SimpleDateFormat(ThumbnailRESTService.IF_MODIFIED_SINCE_DATE_FORMAT);
+    headers.putSingle("If-Modified-Since", dateFormat.format(cal.getTime()));
+    
     /* Prepare the favourite nodes */
-    ContainerResponse response = service(HTTPMethods.GET.toString(), restPath, StringUtils.EMPTY, null, null);
+    ContainerResponse response = service(HTTPMethods.GET.toString(), restPath, StringUtils.EMPTY, headers, null);
     assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
   }
   

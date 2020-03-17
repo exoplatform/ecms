@@ -1,6 +1,5 @@
 package org.exoplatform.services.wcm.publication;
 
-import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.security.Identity;
 import org.exoplatform.services.security.MembershipEntry;
@@ -65,6 +64,13 @@ public class TestWCMComposer extends BasePublicationTestCase {
 	public void testShouldReturnPublicContentsWhenAdminUser() throws Exception {
 		// Given
 		HashMap<String, String> filters = new HashMap<>();
+		Collection<MembershipEntry> membershipEntries = new ArrayList<MembershipEntry>();
+		MembershipEntry membershipEntry = new MembershipEntry("/platform/administrators", "*");
+		membershipEntries.add(membershipEntry);
+		Identity identity = new Identity("marry", membershipEntries);
+		ConversationState state = new ConversationState(identity);
+		ConversationState.setCurrent(state);
+		applyUserSession("marry", "gtn", "collaboration");
 		String folderPath = "repository:collaboration:/sites content/live/web contents/site artifacts";
 		NodeLocation  nodeLocation = NodeLocation.getNodeLocationByExpression(folderPath);
 
@@ -76,16 +82,16 @@ public class TestWCMComposer extends BasePublicationTestCase {
 	}
 
 	public void testShouldReturnPublicContentsWhenPublicModeAndNonAdminUser() throws Exception {
-		// When
+		// Given
 		HashMap<String, String> filters = new HashMap<>();
 		filters.put(FILTER_MODE, MODE_LIVE);
 		Collection<MembershipEntry> membershipEntries = new ArrayList<MembershipEntry>();
-		MembershipEntry membershipEntry = new MembershipEntry("/platform/administrators", "*");
+		MembershipEntry membershipEntry = new MembershipEntry("/platform/web-contributors", "*");
 		membershipEntries.add(membershipEntry);
-		Identity identity = new Identity("marry", membershipEntries);
+		Identity identity = new Identity("John", membershipEntries);
 		ConversationState state = new ConversationState(identity);
 		ConversationState.setCurrent(state);
-		applyUserSession("marry", "gtn", "collaboration");
+		applyUserSession("John", "gtn", "collaboration");
 		String folderPath = "repository:collaboration:/sites content/live/web contents/site artifacts";
 		NodeLocation  nodeLocation = NodeLocation.getNodeLocationByExpression(folderPath);
 		// When
@@ -102,6 +108,13 @@ public class TestWCMComposer extends BasePublicationTestCase {
 	public void testPaginatedContentsWithFilter() throws Exception{
 		// Given
 		HashMap<String, String> filters = new HashMap<>();
+		Collection<MembershipEntry> membershipEntries = new ArrayList<MembershipEntry>();
+		MembershipEntry membershipEntry = new MembershipEntry("/platform/administrators", "*");
+		membershipEntries.add(membershipEntry);
+		Identity identity = new Identity("John", membershipEntries);
+		ConversationState state = new ConversationState(identity);
+		ConversationState.setCurrent(state);
+		applyUserSession("Root", "gtn", "collaboration");
 		String folderPath = "repository:collaboration:/sites content/live";
 		NodeLocation  nodeLocation = NodeLocation.getNodeLocationByExpression(folderPath);
 		//test if FILTER_TOTAL value is already set
@@ -114,6 +127,61 @@ public class TestWCMComposer extends BasePublicationTestCase {
 		assertEquals(2, result.getNumTotal());
 	}
 
+	/**
+	 * test getPaginatedContents result size when translation is checked is set
+	 * @throws Exception
+	 */
+	public void testPaginatedContentsWithTranslationMode() throws Exception{
+		// Given
+		HashMap<String, String> filters = new HashMap<>();
+		filters.put(FILTER_LANGUAGE,"fr");
+		filters.put(FILTER_TRANSLATION,"true");
+		Collection<MembershipEntry> membershipEntries = new ArrayList<MembershipEntry>();
+		MembershipEntry membershipEntry = new MembershipEntry("/platform/administrators", "*");
+		membershipEntries.add(membershipEntry);
+		Identity identity = new Identity("John", membershipEntries);
+		ConversationState state = new ConversationState(identity);
+		ConversationState.setCurrent(state);
+		applyUserSession("Root", "gtn", "collaboration");
+		String folderPath = "repository:collaboration:/sites content/live";
+		NodeLocation  nodeLocation = NodeLocation.getNodeLocationByExpression(folderPath);
+		//test if FILTER_TOTAL value is already set
+		filters.put(WCMComposer.FILTER_TOTAL,"2");
+
+		// When
+		Result result = wcmComposer.getPaginatedContents(nodeLocation, filters, sessionProvider);
+
+		// Then
+		assertEquals(2, result.getNumTotal());
+	}
+
+	/**
+	 * test getPaginatedContents result size when translation is disabled is set
+	 * @throws Exception
+	 */
+	public void testPaginatedContentsWithoutTranslationMode() throws Exception{
+		// Given
+		HashMap<String, String> filters = new HashMap<>();
+		filters.put(FILTER_LANGUAGE,"fr");
+		filters.put(FILTER_TRANSLATION,"false");
+		Collection<MembershipEntry> membershipEntries = new ArrayList<MembershipEntry>();
+		MembershipEntry membershipEntry = new MembershipEntry("/platform/administrators", "*");
+		membershipEntries.add(membershipEntry);
+		Identity identity = new Identity("John", membershipEntries);
+		ConversationState state = new ConversationState(identity);
+		ConversationState.setCurrent(state);
+		applyUserSession("Root", "gtn", "collaboration");
+		String folderPath = "repository:collaboration:/sites content/live";
+		NodeLocation  nodeLocation = NodeLocation.getNodeLocationByExpression(folderPath);
+		//test if FILTER_TOTAL value is already set
+		filters.put(WCMComposer.FILTER_TOTAL,"4");
+
+		// When
+		Result result = wcmComposer.getPaginatedContents(nodeLocation, filters, sessionProvider);
+
+		// Then
+		assertEquals(4, result.getNumTotal());
+	}
   public void tearDown() throws Exception {
     super.tearDown();
   }

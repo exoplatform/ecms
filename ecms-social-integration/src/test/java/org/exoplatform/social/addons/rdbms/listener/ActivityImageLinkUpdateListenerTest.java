@@ -43,6 +43,7 @@ import org.exoplatform.social.core.identity.provider.OrganizationIdentityProvide
 import org.exoplatform.social.core.manager.ActivityManager;
 import org.exoplatform.social.core.manager.IdentityManager;
 import org.exoplatform.upload.UploadService;
+import org.junit.Assert;
 
 @ConfiguredBy({
   @ConfigurationUnit(scope = ContainerScope.ROOT, path = "conf/configuration.xml"),
@@ -114,88 +115,72 @@ public class ActivityImageLinkUpdateListenerTest extends BaseCommonsTestCase {
   }
 
   public void testShouldUpdateImagesLinksWhenImageEmbeddedInBody() {
+    // Given
     String uploadId = String.valueOf((long) (Math.random() * 100000L));
     String body = "<img src=\"http://localhost:8080/test?uploadId=" + uploadId + "\" />";
 
+    // When
     ExoSocialActivity activity = createActivityWithEmbeddedImage(rootIdentity, body, uploadId, null);
 
-    assertEquals("<img src=\""
-        + "/portal/rest/jcr/repository/collaboration/Users/r___/ro___/roo___/root/Public/Activity Stream Documents/Pictures/"
-        + YearMonth.now().getYear() + "/" + monthFormat.format(YearMonth.now().getMonthValue()) + "/" + ATTACHED_FILE_NAME + "\" />",
-                 activity.getBody());
+    // Then
+    assertTrue(activity.getBody().matches("<img src=\"/portal/rest/images/repository/collaboration/[a-z0-9]+\" />"));
     activity = activityManager.getActivity(activity.getId());
-    assertEquals("<img src=\""
-        + "/portal/rest/jcr/repository/collaboration/Users/r___/ro___/roo___/root/Public/Activity Stream Documents/Pictures/"
-        + YearMonth.now().getYear() + "/" + monthFormat.format(YearMonth.now().getMonthValue()) + "/" + ATTACHED_FILE_NAME + "\" />",
-                 activity.getBody());
+    assertTrue(activity.getBody().matches("<img src=\"/portal/rest/images/repository/collaboration/[a-z0-9]+\" />"));
     assertEquals(0, uploadService.getUploadResources().size());
   }
 
   public void testShouldUpdateImagesLinksWhenImageEmbeddedWithoutDomainInBody() {
+    // Given
     String uploadId = String.valueOf((long) (Math.random() * 100000L));
     String body = "<img src=\"/test?uploadId=" + uploadId + "\" />";
 
+    // Then
     ExoSocialActivity activity = createActivityWithEmbeddedImage(rootIdentity, body, uploadId, null);
 
-    assertEquals("<img src=\""
-        + "/portal/rest/jcr/repository/collaboration/Users/r___/ro___/roo___/root/Public/Activity Stream Documents/Pictures/"
-        + YearMonth.now().getYear() + "/" + monthFormat.format(YearMonth.now().getMonthValue()) + "/" + ATTACHED_FILE_NAME + "\" />",
-                 activity.getBody());
+    // When
+    assertTrue(activity.getBody().matches("<img src=\"/portal/rest/images/repository/collaboration/[a-z0-9]+\" />"));
     activity = activityManager.getActivity(activity.getId());
-    assertEquals("<img src=\""
-        + "/portal/rest/jcr/repository/collaboration/Users/r___/ro___/roo___/root/Public/Activity Stream Documents/Pictures/"
-        + YearMonth.now().getYear() + "/" + monthFormat.format(YearMonth.now().getMonthValue()) + "/fileName" + ".xml\" />",
-                 activity.getBody());
+    assertTrue(activity.getBody().matches("<img src=\"/portal/rest/images/repository/collaboration/[a-z0-9]+\" />"));
     assertEquals(0, uploadService.getUploadResources().size());
   }
 
   public void testShouldUpdateImagesLinksWhenImageEmbeddedWithoutDomainInBodyAndFilesWithSameName() {
+    // Given
     String uploadId1 = String.valueOf((long) (Math.random() * 100000L));
     String body1 = "<img src=\"http://localhost:8080/test?uploadId=" + uploadId1 + "\" />";
-    ExoSocialActivity activity1 = createActivityWithEmbeddedImage(rootIdentity, body1, uploadId1, null);
-
     String uploadId2 = String.valueOf((long) (Math.random() * 100000L));
     String body2 = "<img src=\"http://localhost:8080/test?uploadId=" + uploadId2 + "\" />";
+
+    // When
+    ExoSocialActivity activity1 = createActivityWithEmbeddedImage(rootIdentity, body1, uploadId1, null);
     ExoSocialActivity activity2 = createActivityWithEmbeddedImage(rootIdentity, body2, uploadId2, null);
 
-    assertEquals("<img src=\""
-        + "/portal/rest/jcr/repository/collaboration/Users/r___/ro___/roo___/root/Public/Activity Stream Documents/Pictures/"
-        + YearMonth.now().getYear() + "/" + monthFormat.format(YearMonth.now().getMonthValue()) + "/" + ATTACHED_FILE_NAME + "\" />",
-                 activity1.getBody());
+    // Then
+    assertTrue(activity1.getBody().matches("<img src=\"/portal/rest/images/repository/collaboration/[a-z0-9]+\" />"));
     activity1 = activityManager.getActivity(activity1.getId());
-    assertEquals("<img src=\""
-        + "/portal/rest/jcr/repository/collaboration/Users/r___/ro___/roo___/root/Public/Activity Stream Documents/Pictures/"
-        + YearMonth.now().getYear() + "/" + monthFormat.format(YearMonth.now().getMonthValue()) + "/" + ATTACHED_FILE_NAME + "\" />",
-                 activity1.getBody());
-    assertEquals("<img src=\""
-        + "/portal/rest/jcr/repository/collaboration/Users/r___/ro___/roo___/root/Public/Activity Stream Documents/Pictures/"
-        + YearMonth.now().getYear() + "/" + monthFormat.format(YearMonth.now().getMonthValue()) + "/fileName"
-        + "%281%29.xml\" />", activity2.getBody());
+    assertTrue(activity1.getBody().matches("<img src=\"/portal/rest/images/repository/collaboration/[a-z0-9]+\" />"));
+    assertTrue(activity2.getBody().matches("<img src=\"/portal/rest/images/repository/collaboration/[a-z0-9]+\" />"));
     activity2 = activityManager.getActivity(activity2.getId());
-    assertEquals("<img src=\""
-        + "/portal/rest/jcr/repository/collaboration/Users/r___/ro___/roo___/root/Public/Activity Stream Documents/Pictures/"
-        + YearMonth.now().getYear() + "/" + monthFormat.format(YearMonth.now().getMonthValue()) + "/fileName"
-        + "%281%29.xml\" />", activity2.getBody());
+    assertTrue(activity2.getBody().matches("<img src=\"/portal/rest/images/repository/collaboration/[a-z0-9]+\" />"));
     assertEquals(0, uploadService.getUploadResources().size());
   }
 
   public void testShouldUpdateImagesLinksWhenImageEmbeddedInTemplateParam() {
+    // Given
     String uploadId = String.valueOf((long) (Math.random() * 100000L));
     String body = "body";
     Map<String, String> templateParams = new HashMap<>();
     templateParams.put("comment", "<img src=\"http://localhost:8080/test?uploadId=" + uploadId + "\" />");
 
+    // When
     ExoSocialActivity activity = createActivityWithEmbeddedImage(rootIdentity, body, uploadId, templateParams);
 
-    assertEquals("<img src=\""
-        + "/portal/rest/jcr/repository/collaboration/Users/r___/ro___/roo___/root/Public/Activity Stream Documents/Pictures/"
-        + YearMonth.now().getYear() + "/" + monthFormat.format(YearMonth.now().getMonthValue()) + "/" + ATTACHED_FILE_NAME + "\" />",
-                 activity.getTemplateParams().get("comment"));
+    // Then
+    assertTrue(activity.getTemplateParams().get("comment")
+            .matches("<img src=\"/portal/rest/images/repository/collaboration/[a-z0-9]+\" />"));
     activity = activityManager.getActivity(activity.getId());
-    assertEquals("<img src=\""
-        + "/portal/rest/jcr/repository/collaboration/Users/r___/ro___/roo___/root/Public/Activity Stream Documents/Pictures/"
-        + YearMonth.now().getYear() + "/" + monthFormat.format(YearMonth.now().getMonthValue()) + "/" + ATTACHED_FILE_NAME + "\" />",
-                 activity.getTemplateParams().get("comment"));
+    assertTrue(activity.getTemplateParams().get("comment")
+            .matches("<img src=\"/portal/rest/images/repository/collaboration/[a-z0-9]+\" />"));
     assertEquals(0, uploadService.getUploadResources().size());
   }
 
