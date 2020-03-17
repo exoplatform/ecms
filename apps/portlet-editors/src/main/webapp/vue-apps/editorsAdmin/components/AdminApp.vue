@@ -36,7 +36,7 @@
                       icon
                       color="indigo" 
                       @click.stop="changeSettings(item)">
-                      <i class="uiIconSettings"></i>
+                      <i class="uiIconSetting"></i>
                     </v-btn>
                   </td>
                 </tr>

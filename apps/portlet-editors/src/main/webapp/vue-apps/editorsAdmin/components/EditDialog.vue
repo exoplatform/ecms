@@ -47,11 +47,11 @@
               </template>
               <template 
                 slot="item" 
-                slot-scope="{ item }" 
+                slot-scope="{ item, parent }" 
                 class="permissionsItem">
                 <v-list-tile-avatar><img :src="item.avatarUrl" class="permissionsItemAvatar"></v-list-tile-avatar>
                 <v-list-tile-content class="permissionsItemName">
-                  {{ item.displayName }}
+                  <v-list-tile-title v-html="parent.genFilteredText(item.displayName)" />
                 </v-list-tile-content>
               </template>
             </v-autocomplete>
@@ -61,15 +61,9 @@
           <v-col>
             <label class="searchLabel" style="margin-bottom: 10px">{{ this.$t('editors.admin.modal.WithPermissions') }}</label>
             <v-col cols="12" md="8"><ul><li v-for="permission in existingPermissions" :key="permission">{{ permission }}
-              <!-- <v-icon 
-                v-if="permission.length > 0" 
-                style="color: #568dc9" 
-                @click="removePermission(permission)">
-                delete
-              </v-icon> -->
               <i 
                 v-if="permission.length > 0"
-                class="uiIconTrash permissionsItemDelete"
+                class="uiIconDelete permissionsItemDelete"
                 @click="removePermission(permission)"></i>
             </li></ul></v-col>
             <!-- <ul v-if="items.length > 0" class="permissionsList">
@@ -84,7 +78,7 @@
                   <span>{{ permission.name }}</span>
                 </v-tooltip>
                 <i 
-                  class="uiIconTrash permissionsItemDelete"
+                  class="uiIconDelete permissionsItemDelete"
                   @click="removePermission(permission.name)">
                 </i>
               </li>
@@ -151,7 +145,7 @@ export default {
   },
   methods: {
       querySelections (v) {
-        this.loading = true
+        this.loading = true;
         getInfo(`${this.searchUrl}/${v}`).then(data => {
           this.items = data.identities.filter(identity => ({
             displayName: (identity.displayName || '').toLowerCase().indexOf((v || '').toLowerCase()) > -1,
@@ -166,7 +160,6 @@ export default {
       saveChanges() {
         const updateRest = this.provider.links.filter(({ rel, href }) => rel === "update")[0].href;
         postInfo(updateRest, { permissions: this.editedItems }).then(data => { 
-          console.log(data);
           this.provider.permissions = this.editedItems;
           this.closeDialog();
         });
