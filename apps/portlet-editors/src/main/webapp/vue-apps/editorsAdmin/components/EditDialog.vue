@@ -59,6 +59,14 @@
         </v-row>
         <v-row>
           <v-col>
+            <v-checkbox 
+              v-model="accessibleToAll"
+              ripple="false" 
+              color="#578dc9"
+              dense
+              @change="toggleEverybody">
+              <template slot="label"><label style="color: #333">Everybody</label></template>  
+            </v-checkbox>
             <label class="searchLabel" style="margin-bottom: 10px">{{ this.$t('editors.admin.modal.WithPermissions') }}</label>
             <v-col cols="12" md="8"><ul><li v-for="permission in existingPermissions" :key="permission">{{ permission }}
               <i 
@@ -132,7 +140,12 @@ export default {
   },
   computed: {
     editedItems: function() {
-      return this.select ? this.existingPermissions.concat(this.select) : this.existingPermissions;
+      return this.select 
+        ? this.existingPermissions.concat(this.select.filter(item => this.existingPermissions.indexOf(item) < 0))
+        : this.existingPermissions;
+    },
+    accessibleToAll: function() {
+      return this.existingPermissions.indexOf("*") !== -1;
     }
   },
   watch: {
@@ -172,6 +185,13 @@ export default {
       },
       removePermission(name) {
         this.existingPermissions = this.existingPermissions.filter(perm => perm !== name);
+      },
+      toggleEverybody(newValue) {
+        if (newValue) {
+          this.existingPermissions = ["*"];
+        } else if (this.existingPermissions.indexOf("*") !== -1) {
+          this.existingPermissions.splice(this.existingPermissions.indexOf("*"), 1);
+        }
       }
   }
 }
@@ -185,6 +205,7 @@ export default {
   &Header {
     padding: 12px 10px 12px 15px;
     height: 20px;
+    margin-bottom: 0 !important;
 
     &Title {
       line-height: 18px;
