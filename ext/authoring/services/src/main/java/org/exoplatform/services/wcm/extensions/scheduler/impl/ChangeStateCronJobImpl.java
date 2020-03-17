@@ -190,7 +190,7 @@ public class ChangeStateCronJobImpl implements Job {
             }
             publicationPlugin.changeState(node_, toState, context_);
             ret++;
-          } else {
+          } else if (!PublicationDefaultStates.STAGED.equals(fromState)){
             LOG.info("'{}' {}", toState, node_.getPath());
             publicationPlugin.changeState(node_, toState, context_);
           }
