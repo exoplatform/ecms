@@ -68,6 +68,7 @@ public class FileindexingConnector extends ElasticIndexingServiceConnector {
             .append("    \"author\" : {\"type\" : \"keyword\"},\n")
             .append("    \"permissions\" : {\"type\" : \"keyword\"},\n")
             .append("    \"createdDate\" : {\"type\" : \"date\", \"format\": \"epoch_millis\"},\n")
+            .append("    \"activityId\" : {\"type\" : \"text\"},\n")
             .append("    \"lastUpdatedDate\" : {\"type\" : \"date\", \"format\": \"epoch_millis\"},\n")
             .append("    \"fileType\" : {\"type\" : \"keyword\"},\n")
             .append("    \"fileSize\" : {\"type\" : \"long\"},\n")
@@ -149,6 +150,9 @@ public class FileindexingConnector extends ElasticIndexingServiceConnector {
         fields.put("lastUpdatedDate", String.valueOf(node.getProperty("exo:lastModifiedDate").getDate().getTimeInMillis()));
       } else {
         fields.put("lastUpdatedDate", fields.get("createdDate"));
+      }
+      if (node.hasProperty("exo:activityId")){
+        fields.put("activityId", node.getProperty("exo:activityId").getString());
       }
 
       Node contentNode = node.getNode(NodetypeConstant.JCR_CONTENT);

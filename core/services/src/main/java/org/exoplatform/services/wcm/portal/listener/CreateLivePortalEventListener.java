@@ -16,10 +16,14 @@
  */
 package org.exoplatform.services.wcm.portal.listener;
 
+import org.apache.commons.codec.binary.StringUtils;
+
+import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.container.xml.ValueParam;
 import org.exoplatform.container.xml.ValuesParam;
 import org.exoplatform.portal.config.DataStorageImpl;
+import org.exoplatform.portal.config.UserPortalConfigService;
 import org.exoplatform.portal.config.model.PortalConfig;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.drives.ManageDriveService;
@@ -50,6 +54,8 @@ public class CreateLivePortalEventListener extends Listener<DataStorageImpl, Por
   public static String AUTO_CREATE_DRIVE = "autoCreatedDrive";
   public static String TARGET_DRIVES = "targetDrives";
 
+  private UserPortalConfigService portalConfigService;
+
   private ManageDriveService      manageDriveService;
 
   private WCMConfigurationService wcmConfigService;
@@ -67,6 +73,7 @@ public class CreateLivePortalEventListener extends Listener<DataStorageImpl, Por
         targetDrives = targets.getValues();
     }
   }
+
   /*
    * (non-Javadoc)
    *
@@ -74,7 +81,10 @@ public class CreateLivePortalEventListener extends Listener<DataStorageImpl, Por
    */
   public final void onEvent(final Event<DataStorageImpl, PortalConfig> event) throws Exception {
     PortalConfig portalConfig = event.getData();
-    if (!PortalConfig.PORTAL_TYPE.equals(portalConfig.getType())) return;
+    if (!PortalConfig.PORTAL_TYPE.equals(portalConfig.getType())
+        || StringUtils.equals(getPortalConfigService().getGlobalPortal(), portalConfig.getName())) {
+      return;
+    }
     LivePortalManagerService livePortalManagerService = WCMCoreUtils.getService(LivePortalManagerService.class);
     SessionProvider sessionProvider = SessionProvider.createSystemProvider();
     try {
@@ -160,5 +170,12 @@ public class CreateLivePortalEventListener extends Listener<DataStorageImpl, Por
     if (LOG.isInfoEnabled()) {
       LOG.info("Create new drive for portal: " + portalConfig.getName());
     }
+  }
+
+  public UserPortalConfigService getPortalConfigService() {
+    if (portalConfigService == null) {
+      portalConfigService = ExoContainerContext.getService(UserPortalConfigService.class);
+    }
+    return portalConfigService;
   }
 }

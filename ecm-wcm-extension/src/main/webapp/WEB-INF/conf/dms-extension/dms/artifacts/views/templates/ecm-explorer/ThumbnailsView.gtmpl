@@ -14,6 +14,7 @@
   import org.exoplatform.services.wcm.utils.WCMCoreUtils;
   import org.exoplatform.services.cms.thumbnail.impl.ThumbnailUtils;
   import org.exoplatform.services.cms.thumbnail.ThumbnailService;
+
   
   def linkManager = WCMCoreUtils.getService(LinkManager.class);
   def uiWorkingArea = uicomponent.getAncestorOfType(UIWorkingArea.class);
@@ -127,7 +128,7 @@
 		          def isPreferenceNode = uicomponent.isPreferenceNode(data) ;
 		          def preferenceWS = data.getSession().getWorkspace().getName() ;
 		          String name = data.getPath().substring(data.getPath().lastIndexOf("/") + 1) ;
-              String title = uiWorkingArea.getTitle(data);              
+    		      String title = uiWorkingArea.getTitle(data);
 		          String nodePath = data.getPath();
 		          String actionLink = uicomponent.event("ChangeNode", Utils.formatNodeName(data.path), new Parameter("workspaceName", preferenceWS));
 		          String strActs = "<li class=\"RightClickCustomItem\" style=\"display: none;\">";
@@ -160,8 +161,8 @@
                 String encodedPath = URLEncoder.encode(Utils.formatNodeName(data.getPath()), "UTF-8");
                 encodedPath = encodedPath.replaceAll("%2F", "/"); //we won't encode the slash characters in the path
               if (!data.isNodeType(Utils.EXO_RESTORELOCATION) && !Utils.isTrashHomeNode(data)) {
-
-              	String clipboardLink = serverUrl + "/" + restContextName + "/private/jcr/" + repository + "/" + preferenceWS + encodedPath;
+                def urlToCopy = WCMCoreUtils.getLinkInDocumentsApplication(data.getPath());
+              	String clipboardLink = serverUrl + urlToCopy;
               	strActs +=  "<li class='menuItem'>";
               	strActs +=  "<a exo:attr='CopyUrlToClipboard' style='display: block;' id='clip_button1$i' path='$clipboardLink'>" ;
               	strActs +=  " <i class='uiIconEcmsCopyUrlToClipboard uiIconEcmsLightGray'>";

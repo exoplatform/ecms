@@ -1,6 +1,7 @@
 package org.exoplatform.social.ckeditor;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
@@ -95,6 +96,6 @@ public class HTMLUploadImageProcessorTest {
     String processedContent = imageProcessor.processImages(content, node, null);
 
     // Then
-    assertEquals("<p>content with image: <img src=\"/portal/rest/jcr/repository/collaboration/path/to/image.png\" /></p>", processedContent);
+    assertTrue(processedContent.matches("<p>content with image: <img src=\"/portal/rest/images/repository/collaboration/[a-z0-9]+\" /></p>"));
   }
 }

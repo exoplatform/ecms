@@ -107,6 +107,7 @@ public class UICLVFolderMode extends UICLVContainer {
     HashMap<String, String> filters = new HashMap<String, String>();
     filters.put(WCMComposer.FILTER_MODE, Utils.getCurrentMode());
     String orderBy = preferences.getValue(UICLVPortlet.PREFERENCE_ORDER_BY, null);
+    String translation = Utils.getPortletPreference(UICLVPortlet.PREFERENCE_ADD_TRANSLATION);
     String orderType = preferences.getValue(UICLVPortlet.PREFERENCE_ORDER_TYPE, null);
     String itemsPerPage = preferences.getValue(UICLVPortlet.PREFERENCE_ITEMS_PER_PAGE, null);
     String sharedCache = preferences.getValue(UICLVPortlet.PREFERENCE_SHARED_CACHE, "true");
@@ -115,6 +116,7 @@ public class UICLVFolderMode extends UICLVContainer {
     String query = preferences.getValue(UICLVPortlet.PREFERENCE_CONTENTS_BY_QUERY, null);
     if (orderType == null) orderType = "DESC";
     if (orderBy == null) orderBy = "exo:title";
+    filters.put(WCMComposer.FILTER_TRANSLATION, translation);
     filters.put(WCMComposer.FILTER_ORDER_BY, orderBy);
     filters.put(WCMComposer.FILTER_ORDER_TYPE, orderType);
     StringBuffer filterLang = new StringBuffer(Util.getPortalRequestContext().getLocale().getLanguage());
