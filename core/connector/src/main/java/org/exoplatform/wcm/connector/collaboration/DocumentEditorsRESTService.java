@@ -139,7 +139,7 @@ public class DocumentEditorsRESTService implements ResourceContainer {
       DocumentEditorProvider editorProvider = documentService.getEditorProvider(provider);
       DocumentEditorProviderDTO providerDTO = convertToDTO(editorProvider);
       initLinks(providerDTO, uriInfo);
-      return Response.status(Status.OK).entity(editorProvider).build();
+      return Response.status(Status.OK).entity(providerDTO).build();
     } catch (DocumentEditorProviderNotFoundException e) {
       return Response.status(Status.NOT_FOUND).entity("{ \"message\":\"" + PROVIDER_NOT_REGISTERED + "\"}").build();
     }
