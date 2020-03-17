@@ -35,6 +35,8 @@
       </table>
       <modal>
         <title>Edit permissions</title>
+        <SearchLabel>Enter user or group name</SearchLabel>
+        <WithPermissions>Who has permission</WithPermissions>
       </modal>
       <onlyoffice>
         <name>ONLYOFFICE</name>
@@ -44,6 +46,10 @@
         <name>Microsoft Office Online</name>
         <description>Microsoft Office Online editors for Word, Excel, Powerpoint</description>
       </officeonline>
+      <buttons>
+        <Save>Save</Save>
+        <Cancel>Cancel</Cancel>
+      </buttons>
     </admin>
   </editors>
 </bundle>

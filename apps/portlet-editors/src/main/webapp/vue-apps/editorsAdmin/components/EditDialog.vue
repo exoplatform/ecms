@@ -1,5 +1,5 @@
 <template>
-  <v-card>
+  <v-card class="provider">
     <v-card-title class="headline grey lighten-2 justify-space-between" primary-title>
       {{ this.$t('editors.admin.modal.title') }}
       <v-btn icon @click="closeDialog">
@@ -11,9 +11,9 @@
         <v-row class="providerName">
           {{ $t(`editors.admin.${provider.provider}.name`) }}
         </v-row>
-        <v-row>
+        <v-row class="search">
           <v-col>
-            <label class="searchLabel" style="margin-bottom: 10px">Enter user or group name</label>
+            <label class="searchLabel">{{ this.$t('editors.admin.modal.SearchLabel') }}</label>
             <v-autocomplete
               v-model="select"
               :loading="loading"
@@ -61,7 +61,7 @@
         </v-row>
         <v-row>
           <v-col>
-            <label class="searchLabel" style="margin-bottom: 10px">Who has permission</label>
+            <label class="searchLabel" style="margin-bottom: 10px">{{ this.$t('editors.admin.modal.WithPermissions') }}</label>
             <v-col cols="12" md="8"><ul><li v-for="permission in existingPermissions" :key="permission">{{ permission }}
               <v-icon 
                 v-if="permission.length > 0" 
@@ -99,13 +99,13 @@
         class="btn btn-primary dialogFooterBtn"
         text
         @click="saveChanges">
-        Save
+        {{ this.$t('editors.admin.buttons.Save') }}
       </v-btn>
       <v-btn
         class="btn dialogFooterBtn"
         text
         @click="closeDialog">
-        Cancel
+        {{ this.$t('editors.admin.buttons.Cancel') }}
       </v-btn>
     </v-card-actions>
   </v-card>
