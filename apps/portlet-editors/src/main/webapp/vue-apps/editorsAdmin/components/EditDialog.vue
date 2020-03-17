@@ -1,12 +1,10 @@
 <template>
-  <v-card class="provider">
-    <v-card-title class="headline grey lighten-2 justify-space-between" primary-title>
-      {{ this.$t('editors.admin.modal.title') }}
-      <v-btn icon @click="closeDialog">
-        <v-icon>close</v-icon>
-      </v-btn>
+  <v-card class="provider uiPopup">
+    <v-card-title class="headline popupHeader justify-space-between providerHeader">
+      <span class="PopupTitle popupTitle providerHeaderTitle">{{ this.$t('editors.admin.modal.title') }}</span>
+      <i class="uiIconClose providerHeaderClose" @click="closeDialog"></i>
     </v-card-title>
-    <v-card-text style="min-height: 350px">
+    <v-card-text class="popupContent providerContent">
       <v-container>
         <v-row class="providerName">
           {{ $t(`editors.admin.${provider.provider}.name`) }}
@@ -63,12 +61,16 @@
           <v-col>
             <label class="searchLabel" style="margin-bottom: 10px">{{ this.$t('editors.admin.modal.WithPermissions') }}</label>
             <v-col cols="12" md="8"><ul><li v-for="permission in existingPermissions" :key="permission">{{ permission }}
-              <v-icon 
+              <!-- <v-icon 
                 v-if="permission.length > 0" 
                 style="color: #568dc9" 
                 @click="removePermission(permission)">
                 delete
-              </v-icon>
+              </v-icon> -->
+              <i 
+                v-if="permission.length > 0"
+                class="uiIconTrash permissionsItemDelete"
+                @click="removePermission(permission)"></i>
             </li></ul></v-col>
             <!-- <ul v-if="items.length > 0" class="permissionsList">
               <li v-for="permission in items" :key="permission.name" class="permissionsItem permissionsItem--large">
@@ -81,11 +83,10 @@
                   </template>
                   <span>{{ permission.name }}</span>
                 </v-tooltip>
-                <v-icon
-                  style="color: #568dc9" 
+                <i 
+                  class="uiIconTrash permissionsItemDelete"
                   @click="removePermission(permission.name)">
-                  delete
-                </v-icon>
+                </i>
               </li>
             </ul> -->
           </v-col>
@@ -93,8 +94,7 @@
       </v-container>
     </v-card-text>
     <v-card-actions class="dialogFooter footer">
-      <v-btn 
-        color="primary" 
+      <v-btn
         style="margin-right: 10px"
         class="btn btn-primary dialogFooterBtn"
         text
@@ -184,93 +184,133 @@ export default {
 }
 </script>
 
-<style scoped>
-.providerName {
-  color: #333;
-  font-weight: bold;
-  margin-bottom: 10px;
-}
+<style scoped lang="less">
+.provider {
+  max-width: 100%;
+  border: 0;
 
-.permissionsList {
-  max-height: 300px;
-  padding-left: 0px;
-  overflow-y: auto;
-}
+  &Header {
+    padding: 12px 10px 12px 15px;
+    height: 20px;
 
-.permissionsItem {
-  display: flex;
-  align-items: center;
-  height: 30px;
-}
+    &Title {
+      line-height: 18px;
+    }
 
-.permissionsItem--large {
-  height: 40px;
-  margin: 5px 0;
-  justify-content: space-between;
-}
+    &Close { 
+      top: 13px; 
+    }
+  }
 
-.permissionsItemAvatar {
-  max-height: 26px;
-  margin-right: 5px;
-}
+  &Content {
+    padding: 15px !important;
+    min-height: 350px;
+  }
 
-.permissionsItemAvatar--large {
-  max-height: 40px;
-}
+  &Name {
+    color: #333333;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
 
-.permissionsItemName {
-  color: #303030;
-  font-family: inherit;
-  font-size: 13px;
-  line-height: 18px;
-}
+  .search {
+    &Label {
+      color: #333333;
+      margin-bottom: 10px;
+    }
 
-.searchLabel {
-  color: #333;
-}
+    &Permissions {
+      border: Solid 2px #e1e8ee;
+      border-radius: 5px;
+      box-shadow: none;
+      padding-top: 0 !important;
 
-.searchPermissions {
-  border: Solid 2px #e1e8ee;
-  border-radius: 5px;
-  box-shadow: none;
-  padding-top: 0 !important;
-}
+      &:focus {
+        border-color:#a6bad6;
+        box-shadow:inset 0 1px 1px rgba(0,0,0,.075),0 0 5px #c9d5e6;
+      }
+    }
 
-.searchPermissions:focus {
-  border-color:#a6bad6;
-  box-shadow:inset 0 1px 1px rgba(0,0,0,.075),0 0 5px #c9d5e6;
-}
+    &Chip.v-chip {
+      background: #ccddef;
+      color: #568dc9;
+      border: 1px solid #568dc9;
+      border-radius: 15px;
+      margin: 4px 10px 4px 4px;
+      font-size: 13px;
+    }
+  }
+  
+  .permissionsList {
+    max-height: 300px;
+    padding-left: 0px;
+    overflow-y: auto;
+  }
+  
+  .permissionsItem {
+    display: flex;
+    align-items: center;
+    height: 30px;
 
-.searchChip.v-chip {
-  background: #ccddef;
-  color: #568dc9;
-  border: 1px solid #568dc9;
-  border-radius: 15px;
-  margin: 4px 10px 4px 4px;
-  font-size: 13px;
-}
+    &--large {
+      height: 40px;
+      margin: 5px 0;
+      justify-content: space-between;
+    }
 
-.dialogFooter {
-  align-items: center;
-  justify-content: center;
-  padding-bottom: 20px;
-}
+    &Avatar {
+      max-height: 26px;
+      margin-right: 5px;
 
-.btn.v-size--default.dialogFooterBtn {
-  font-family: Helvetica,arial,sans-serif;
-  font-size: 15px;
-  padding: 9px 20px;
-  color: #4d5466;
-  border: 1px solid #e1e8ee;
-  box-shadow: none;
-  box-sizing: border-box;
-  border-radius: 3px;
-  height: 40px;
-  letter-spacing: normal;
-  min-width: 80px;
-}
+      &--large {
+        max-height: 40px;
+      }
+    }
 
-.btn.btn-primary.v-size--default.dialogFooterBtn {
-  color: #fff !important;
+    &Name {
+      color: #303030;
+      font-family: inherit;
+      font-size: 13px;
+      line-height: 18px;
+    }
+
+    &Delete {
+      cursor: pointer;
+    }
+  }
+  
+  .dialogFooter {
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 20px;
+
+    &Btn.v-size--default {
+      font-family: Helvetica,arial,sans-serif;
+      font-size: 15px;
+      padding: 9px 20px;
+      color: #4d5466;
+      border: 1px solid #e1e8ee;
+      box-shadow: none;
+      box-sizing: border-box;
+      border-radius: 3px;
+      height: 40px;
+      letter-spacing: normal;
+      min-width: 80px;
+
+      &:hover {
+        background-color: #e1e8ee;
+      }
+
+      &.btn-primary {
+        color: #fff;
+
+        &:hover {
+          background-color: #476a9c;
+          background-position: 0 -45px;
+          transition: background-position .1s linear;
+        }
+      }
+    }
+  }
 }
 </style>

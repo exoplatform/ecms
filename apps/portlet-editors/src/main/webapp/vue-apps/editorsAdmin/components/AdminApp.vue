@@ -36,9 +36,7 @@
                       icon
                       color="indigo" 
                       @click.stop="changeSettings(item)">
-                      <i class="material-icons">
-                        settings
-                      </i>
+                      <i class="uiIconSettings"></i>
                     </v-btn>
                   </td>
                 </tr>
@@ -48,7 +46,8 @@
         </v-col>
         <v-dialog
           v-model="showDialog" 
-          width="500" 
+          width="500"
+          style="overflow-x: hidden"
           @click:outside="showDialog = false">
           <edit-dialog
             :provider="selectedProvider" 
@@ -103,15 +102,14 @@ export default {
 };
 </script>
 
-<style scoped>
-  .editorsTitle {
-    color: #4d5466;
-    font-size: 24px;
-    position: relative;
-    overflow: hidden;
-  }
+<style scoped lang="less">
+.editorsTitle {
+  color: #4d5466;
+  font-size: 24px;
+  position: relative;
+  overflow: hidden;
 
-  .editorsTitle:after {
+  &:after {
     border-bottom: 1px solid #dadada;
     height: 11px;
     content: "";
@@ -119,41 +117,5 @@ export default {
     width: 100%;
     margin-left: 10px;
   }
-
-  .permissionsSkeleton {
-    display: flex;
-    flex-direction: column;
-    padding: 15px 15px 0;
-    width: 100%;
-  }
-
-  .permissionsRow {
-    display: flex;
-    align-items: center;
-  }
-
-  .permissionsRow--btns {
-    justify-content: center;
-    margin-top: 10px;
-  }
-
-  .permissionsRow > .searchLabel {
-    width: 10%;
-    height: 12px;
-    border-radius: 15px;
-    margin-top: 16px;
-    margin-bottom: 16px;
-    margin-right: 10px;
-  }
-
-  .searchField {
-    height: 20px;
-  }
-
-  .skeletonButton {
-    width: 20%;
-    height: 40px;
-    border-radius: 15px;
-    margin-right: 10px;
-  }
+}
 </style>
