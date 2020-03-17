@@ -18,8 +18,9 @@ public class TestDocumentService extends BaseWCMTestCase {
     String mime = "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
     String title = "Test.docx";
     Node parent = session.getRootNode();
-    DocumentTemplate template = new DocumentTemplate();
-    template.setMimeType(mime);
+    NewDocumentTemplateConfig config = new NewDocumentTemplateConfig();
+    config.setMimeType(mime);
+    NewDocumentTemplate template = new NewDocumentTemplate(config);
     Node document = documentService.createDocumentFromTemplate(parent, title, template);
     assertNotNull("Document wasn't created", document);
     assertEquals("Title is not correct", title, document.getProperty("exo:title").getString());

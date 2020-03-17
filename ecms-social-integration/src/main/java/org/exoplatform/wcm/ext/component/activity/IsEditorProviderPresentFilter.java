@@ -1,4 +1,4 @@
-package org.exoplatform.ecm.webui.component.explorer.documents;
+package org.exoplatform.wcm.ext.component.activity;
 
 import java.util.Map;
 
@@ -7,16 +7,15 @@ import org.exoplatform.services.cms.documents.DocumentService;
 import org.exoplatform.webui.ext.filter.UIExtensionAbstractFilter;
 import org.exoplatform.webui.ext.filter.UIExtensionFilterType;
 
-
 /**
- * The Class IsNewDocumentTemplatePresentFilter checks if any NewDocumentTemplatePlugin is registered.
+ * The Class IsEditorProviderPresentFilter checks if any DocumentEditorProvider is registered.
  */
-public class IsEditorPluginPresentFilter extends UIExtensionAbstractFilter {
+public class IsEditorProviderPresentFilter extends UIExtensionAbstractFilter {
 
   /**
    * Instantiates a new checks if is template plugin present filter.
    */
-  public IsEditorPluginPresentFilter() {
+  public IsEditorProviderPresentFilter() {
     this(null);
   }
 
@@ -25,7 +24,7 @@ public class IsEditorPluginPresentFilter extends UIExtensionAbstractFilter {
    *
    * @param messageKey the message key
    */
-  public IsEditorPluginPresentFilter(String messageKey) {
+  public IsEditorProviderPresentFilter(String messageKey) {
     super(messageKey, UIExtensionFilterType.MANDATORY);
   }
 
@@ -42,7 +41,7 @@ public class IsEditorPluginPresentFilter extends UIExtensionAbstractFilter {
                                                             .getComponentInstanceOfType(DocumentService.class);
 
     if (documentService != null) {
-      return documentService.hasDocumentTemplatePlugins();
+      return documentService.hasDocumentEditorProviders();
     }
     return false;
   }
