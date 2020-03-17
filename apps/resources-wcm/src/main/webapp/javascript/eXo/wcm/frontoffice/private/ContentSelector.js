@@ -1042,8 +1042,8 @@
 
          var document = window.opener.document;
          var parentClassName = ".cke_editor_"+eXo.ecm.ECS.currentEditor.name+"_dialog";
-         var parent = null;
-         
+         var parent = gj(document).find(parentClassName);
+
          gj(document).find(parentClassName).each(function(index) {
 		 if(gj(this).css('display')=='block') {
 			 parent = this;

@@ -65,6 +65,7 @@ import org.exoplatform.container.xml.ValueParam;
 import org.exoplatform.portal.config.UserACL;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.CmsService;
+import org.exoplatform.services.cms.documents.DocumentService;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.metadata.MetadataService;
 import org.exoplatform.services.cms.templates.TemplateService;
@@ -766,5 +767,16 @@ public class WCMCoreUtils {
       settingService.set(Context.GLOBAL, Scope.GLOBAL, BAR_NAVIGATION_STYLE_KEY, SettingValue.create(barNavigationStyle));
     }
     return barNavigationStyle;
+  }
+  /**
+   * Get the link to display a document in the Documents app.
+   * It will try to get the best matching context (personal doc, space doc, ...).
+   * @param nodePath The path of the node
+   * @return The link to open the document
+   * @throws Exception
+   */
+  public static String getLinkInDocumentsApplication(String nodePath) throws Exception {
+    DocumentService documentService = WCMCoreUtils.getService(DocumentService.class);
+    return documentService.getLinkInDocumentsApp(nodePath);
   }
 }

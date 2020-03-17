@@ -1,0 +1,2163 @@
+@import "../../../variables.less"; 
+@import "../../../mixins.less";
+@import "UISideBar/Style.less";
+@import "UIAddressBar/Style.less";
+@import "MultiUpload/Style.less";
+@import "UIFileView/Style.less";
+@import "Xeditable/bootstrap3-editable.less";
+
+.UIJCRExplorerPortlet {
+	padding: 25px 10px;
+	background: none !important;
+
+	.uiActionBarAlone {
+		height: 38px;
+		.tab-content {
+			.border-top-radius(3px);
+			border: 1px solid @borderColor;
+			background-color: @primaryBackgroundHover;
+			min-height: 36px;
+
+			.nav-pills {
+				.border-top-radius(3px);
+			}
+            .nav {
+                display: flex;
+                > li {
+                    flex-shrink: 0;
+                }
+            }
+		}
+	}
+    .UIDocumentWorkspace .FileContent .Content .FlashViewer {
+		text-align: center;
+	}
+}
+
+.uiActionBar {
+	.tab-content {
+		position: relative;
+		z-index: 3;
+		.border-radius(0px);
+	}
+
+	.listHiddenActionsContainer {
+
+		.actionIcon {
+			margin: 0px;
+			border: none;
+
+			&:hover {
+				.border-radius(0px);
+				box-shadow: none;
+
+				> [class^="uiIcon"] {
+					color: @colorIconSecondary
+				}
+
+				> [class^="uiIconEcms"] {
+					color: @colorIconSecondary
+				}
+			}
+		}
+	}
+
+	.uiViewBarContainer {
+		position: absolute;
+		right: 0;
+		top: 4px;
+		padding: 0 10px;
+    	background-color: @primaryBackground;
+
+		.noneDrivesButton {
+			padding: 3px 6px;
+			color: @baseColorDark;
+		}
+
+		.actionIcon {
+			margin-left: 2px;
+		}
+
+		.showDrivesButton {
+			padding: 3px 6px;
+			color: @baseColorDark;
+			box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.15) inset;
+			background-color: @primaryBackgroundHover;
+			border: 1px solid @borderColor;
+			border-radius: 3px 3px 3px 3px;
+
+			> [class^="uiIcon"] {
+				color: @colorIconPrimary;
+			}
+
+			> [class^="uiIconEcms"] {
+				color: @colorIconPrimary;
+			}
+		}
+		.tooltip{
+			max-width: 150px;
+		}
+	}
+}
+
+.uiTabGrayInPage .tab-content .nav-pills {
+	> li.dropdown  {
+		margin-right: 200px;
+	}
+}
+
+/******** uiItemList ********/
+
+.uiItemList {
+	li {
+		padding: 2px 0px 2px 15px;
+		font-size: 12px;
+
+		> a {
+			color: @linkColor;
+
+			&:hover {
+				color: @linkColorHover;
+			}
+		}
+
+		.selectedNode {
+			color: @linkColorHover;
+		}
+
+		> [class^="uiIcon"] {
+			float: left;
+			margin: 2px 0px 0px -21px;
+		}
+	}
+}
+
+
+/********Resize Content********/
+.uiWorkingArea {
+	width: 100%;
+    display: flex;
+	.leftContainer {
+		float: left;
+		width: 240px;
+		overflow: hidden;
+        min-width: 240px;
+      &.collapsed {
+        display: none;
+      }
+	}
+
+	.rightContainer {
+		flex: 1 1 auto;
+        width: 0;
+	}
+    
+    .resizeBar, .leftContainer {
+        flex: 0 0 auto;
+    }
+
+  	/*// changing icons for Sites Management
+  	.leftContainer, .rightContainer {
+	  [class^="uiIcon"][class*="FileDefault"]:before {
+		content: "\e722";
+	  }
+	  [class^="uiIcon"][class*="textcss"]:before {
+		content: "\e730";
+	  }
+	  [class^="uiIcon"][class*="applicationoctet-stream"]:before {
+		content: "\e731";
+	  }
+	  [class^="uiIcon"][class*="applicationx-javascript"]:before {
+		content: "\e738";
+	  }
+	  [class^="uiIcon"][class*="textplain"]:before {
+		content: "\e731";
+	  }
+	  [class^="uiIcon"][class*="texthtml"]:before {
+		content: "\e732";
+	  }
+	}*/
+
+	.UIDocumentWorkspace {
+                margin-left: 0px;
+                overflow: auto;
+		background: @baseBackground;
+		border: 1px solid @borderColor;
+		border-top: none;
+		.border-bottom-radius(4px);
+		padding: 4px;
+		.UITabContent ul li {
+		    list-style: disc outside none;
+		}
+		.UITabContent ol li {
+		    list-style-type: decimal;
+		}
+		.UITabContent ul {
+		    padding: 0;
+			margin: 0 0 10px 25px;
+		}
+
+		.UITabContent ol {
+		    padding: 0;
+			margin: 0 0 10px 25px;
+		}
+
+		blockquote {
+			background: none;
+		 	border-left: 5px solid #999;
+		    	margin: 0 0 20px;
+		    	padding: 0 0 0 15px;
+		    	width: auto;
+		}
+		blockquote:after {
+			display: none;
+		}
+                #UIDocumentInfo {
+          	        min-height: 50vh;
+        	}
+	}
+
+	.uiDocumentWorkspaceBox {
+		border: 1px solid @borderColor;
+		.border-radius(4px);
+		overflow: hidden;
+
+		.uiDialogAction {
+			background-color: @primaryBackground;
+			border-bottom: 1px solid @borderColor;
+			border-radius: 4px 4px 0 0;
+			line-height: 20px;
+			padding: 8px 20px;
+			word-wrap: break-word;
+			margin: -20px -20px 20px -20px;
+		}
+	}
+}
+
+/*=============================== UIListView ===================================*/
+
+.uiListView {
+	padding: 15px;
+	border-top: 0px;
+	position: relative;
+}
+
+.uiListGrid {
+	-moz-user-select: none;
+	overflow-y: hidden;
+	overflow-x: auto;
+
+	.titleTable {
+		font-weight: bold;
+		height: 34px;
+		background: @primaryBackground;
+		border-bottom: 1px solid @borderColor;
+	}
+
+	.lineLeft {
+		border-left: 1px solid @borderColor;
+		width: 2px;
+		height: 34px;
+		float: left;
+		cursor: col-resize;
+	}
+	.columnName{
+		.uiIconArrowDown{
+			margin-top: 7px;
+		} 
+	}
+	.odd {
+		background: @primaryBackgroundLight;
+	}
+
+	.even {
+		background: @baseBackground;
+	}
+
+	.OverHeader {
+		background: @primaryBackground;
+		font-weight: bold;
+		line-height: 19px; height: 19px;
+	}
+
+	.nodeLabel {
+		cursor: pointer;
+		-moz-outline: none;
+		-moz-user-select: none;
+	}
+
+	.columnIcon,
+	.columnName,
+	.columnAuditing,
+	.columnVersion,
+	.columnowner,
+	.columndateModified,
+	.columndateCreated,
+	.column {
+		float: left;
+		height: 20px;
+		overflow: hidden;
+		white-space: nowrap;
+		padding: 7px 7px 7px 12px;
+		color: @textColor;
+	}
+
+	.columnIcon {
+		padding: 7px;
+		text-align: center;
+	}
+
+	.FileDrag {
+		background: @primaryBackground;
+	}
+
+	.ResizeHandle {
+		cursor: col-resize;
+		width: 1px;
+		height: 190px; /* default height */
+		border-right: 1px dashed @baseColor;
+		position: absolute;
+		top: 0;
+		left: 0;
+	}
+
+	.rowView {
+		line-height: 20px;
+         background: @baseBackground !important;
+        &:hover {
+          background: @primaryBackgroundHover !important;
+        }
+        &.active,&.selected{
+          background: @primaryBackground !important;
+        }
+
+		.columnIcon,.columnName,.columnAuditing,.columnVersion,
+		.columndateModified,.columnDatetime,.columndateCreated,
+		.columnOwner,.columnModified,.columnCreated {
+			padding: 7px 7px 7px 12px;
+		}
+
+		.columnIcon {
+			padding: 7px;
+			text-align: center;
+		}
+
+		.lineLeftItem {
+			width: 2px;
+			height: 34px;
+			float: left;
+			border-left: 1px solid @borderColor;
+		}
+
+		.ResizeColumn .NodeLabel {
+			width: 95%;
+			overflow: hidden;
+		}
+	}
+}
+
+
+/*############################## -- Begin UIThumbnailsView -- ##############################*/
+
+.uiThumbnailsView {
+	overflow-y: auto;
+	overflow-x: hidden;
+
+	.actionIconsContainer {
+
+		.actionIconBox {
+			.size(200px, 148px);
+			float: left;
+			margin: 10px;
+			padding: 0px !important;
+			overflow: hidden;
+			cursor: pointer;
+			.thumbnailImage {
+				.border-radius(@baseBorderRadius);
+			}
+			.nodeLabel {
+				background: none!important;
+				.border-radius(@baseBorderRadius);
+			}
+
+			&:hover {
+
+				background: none!important;
+				.thumbnailImage {
+					background:  @primaryBackgroundLight!important;
+				}
+			}
+			&.selectedBox {
+				&:hover .thumbnailImage, .thumbnailImage {
+					background: @primaryBackgroundLighter !important;
+				}
+
+				.actionIconLabel {
+					background: @primaryColor;
+
+					> a {
+						color: @baseBackground;
+					}
+				}
+			}
+		}
+
+
+		.bgThumbnailImage {
+			padding: 5px;
+			background: none;
+            visibility: hidden;
+
+            display: inline-block;
+		}
+        .hidden-loading  .bgThumbnailImage {
+          visibility: visible;
+        }
+		.loadingProgressIcon {
+			.size(64px,64px);
+             position: relative;
+             margin: auto;
+            &.hidden-loading {
+              &:after {display: none;background: none}
+            }
+			&:after{
+              background: url("@{images-path}/Loading/loading32x32Light.png") no-repeat center center;
+              .size(32px,32px);
+              position: absolute;
+              left: 50%;
+              top: 50%;
+              margin: -16px 0 0 -16px;
+              content: "";
+              .loading-action;
+            }
+			img {
+				display: none;
+				max-width: 116px;
+				max-height: 116px;
+				margin: auto;
+				border: 1px solid @borderColor;
+			}
+		}
+
+		.nodeLabel {
+			.size(148px,148px);
+			.border-radius(3px);
+			margin-bottom: 5px;
+		}
+
+		.actionIcon {
+			width: 50px;
+			height: 50px;
+			margin: 9px auto 0px auto;
+		}
+
+		.thumbnailImage {
+			width: 128px;
+			height: 128px;
+			border: none;
+			text-align: center;
+			display: table-cell;
+			vertical-align: middle;
+			padding: 10px;
+		}
+
+		.actionIconLabel {
+			line-height: 15px;
+			max-height: 28px;
+			overflow: hidden;
+			margin: auto;
+			text-align: center;
+			padding: 5px;
+			.border-radius(3px);
+
+			> a {
+				color: @textColor;
+			}
+		}
+	}
+
+
+}
+
+/*############################## -- End UIThumbnailsView -- ##############################*/
+
+/*=============================== UIDrivesArea ===================================*/
+
+.uiDrivesArea {
+	background: @baseBackground;
+	border: 1px solid @borderColor;
+	border-top: none;
+	.border-bottom-radius(4px);
+	padding: 4px;
+
+	.uiDriversAreaContainer {
+		padding: 15px;
+		color: @textColor;
+		overflow: hidden;
+
+		.info {
+			margin-bottom: 12px;
+		}
+
+		.uiIconBlueInformation {
+			&:before  {
+                content: "\e767";
+                color: @infoColor;
+            }
+		}
+	}
+
+	.rowDrives{
+		border-bottom: dotted 1px @borderColor;
+		padding-bottom: 15px;
+		margin-bottom: 15px;
+	}
+
+	.rowNormal{
+		padding-bottom: 15px;
+	}
+
+	.titleDriver {
+		font-size: 13px;
+		color: @textColor;
+	}
+
+	.drive {
+		margin: 5px;
+		float: left;
+		width: 150px;
+		line-height: 19px;
+		height: 50px;
+	}
+
+	.driveLabel {
+		color: @textColor;
+		padding-left: 33px;
+		word-wrap: break-word;
+		display: block;
+
+		&:hover {
+			color: @linkColorHover;
+		}
+	}
+
+	.rowDrivesGroups .drive {
+		height: 70px;
+	}
+
+	.driveIcon {
+		float: left;
+	}
+
+	[class^="uiIconEcms24x24"] {
+		margin: 0px 0px 0px -33px;
+		float: left;
+	}
+}
+
+
+/***** ResizeBar *****/
+.uiWorkingArea .resizeBar {
+	float: left;
+	width: 20px;
+
+	.resizeBarContent {
+		width: 22px;
+        height: 100%;
+		cursor:col-resize;
+		position: relative;
+
+		&:hover {
+			border-right: solid 1px @borderColor;
+
+			.resizeButton {
+				display: block;
+			}
+		}
+	}
+
+	.resizeButton {
+		#gradient .vertical(@baseBackground, @primaryBackground);
+		.border-radius(@borderRadiusSmall 0px 0px @borderRadiusSmall);
+		.size(24px,16px);
+		float:right;
+		margin : auto;
+		cursor : pointer;
+		border: 1px solid @borderColor;
+		border-right: none;
+		display: none;
+		position: absolute;
+		top: 7px;
+		right: 0px;
+	  	padding-top: 3px;
+
+			[class^="uiIcon"] {
+				width: 11px;
+				margin-top: 2px;
+			  	margin-left: 3px;
+			}
+	}
+
+}
+
+.uiWorkingArea .resizeBarDisplay {
+	.resizeBarContent {
+		border-right: solid 1px @borderColor;
+		cursor:col-resize;
+	}
+	.resizeButton {
+		display: block;
+	}
+}
+
+.uiWorkingArea .resizeNoneBorder {
+	width: 0px;
+
+	.resizeBarContent {
+		width: 0px;
+	}
+
+	.resizeBarContent:hover {
+		border: none;
+		cursor: default;
+	}
+	.resizeButton {
+		border: 1px solid @borderColor;
+		.border-radius(0px @borderRadiusSmall @borderRadiusSmall 0px);
+		display: block;
+		right: 8px;
+		border-left: none;
+	}
+}
+
+.UIBrowseContentPortlet .TagmapHolder .Icon {
+	float: left;
+	width: 19px; height: 16px;
+	margin: 2px 5px 0px 5px;
+	//background: url('DefaultSkin/background/TagMapIcon19x16.gif') no-repeat; 
+}
+
+/******** UIDocumentFormController **************/
+.uiDocumentFormController {
+	min-width: 500px;
+	padding: 15px;
+
+	.form-horizontal {
+
+		.control-label {
+			margin-bottom: 0px;
+			width: 120px;
+		}
+		.controls {
+			margin-left: 135px;
+
+			.textInfo {
+				line-height: 18px;
+				color: gray;
+			}
+
+			.nameInfo {
+				line-height: 18px;
+				color: @textColor;
+				font-weight: bold;
+			}
+
+			a [class^="uiIcon"] {
+				 color: @colorIconDefault;
+			}
+
+			a:hover [class^="uiIcon"] {
+				 color: @colorIconPrimary;
+			}
+
+			textarea {
+				font-size: 13px;
+				height: 175px;
+				width: 90%;
+				vertical-align: top;
+			}
+
+			> div > span {
+				width: 100% !important;
+				margin-right: 5px;
+			}
+            > div.clearfix {
+              float: left;
+              margin-right: 5px;
+              width: 90%;
+            }
+
+			.uiUploadInput {
+				width: 90%;
+				float: left;
+				margin-right: 5px;
+			}
+		}
+	}
+
+	.helpBlock {
+		display: inline-block;
+		background: @primaryBackground;
+		border: 1px solid @borderColor;
+		color: @baseColorDark;
+		padding: 15px 15px 15px 40px;
+		.border-radius(5px);
+		width: 155px;
+		margin-left: 10px;
+
+		.uiIconHelp {
+            &:before {
+                content: "\e767";
+                color: @infoColor;
+            }
+			margin: 3px 0px 0px -25px;
+			float: left;
+		}
+		.form-horizontal .textarea {
+			vertical-align: top;
+		}
+	}
+	.helpBlockTitle {
+		display: block;
+		width: auto;
+	}
+}
+
+
+/******** View1 **************/
+
+.fileContent,
+.mediaContent {
+	padding: 15px;
+    .title {
+		padding: 0 0 10px;
+		a.pull-right {
+			color: @textColor;
+			line-height: 18px;
+			margin: 0px;
+			cursor: pointer;
+			&:hover {
+				color: @textColor;
+				#gradient > .vertical(@baseBackground, @primaryBackground);
+				line-height: 18px;
+				border: 1px solid @borderColor;
+				.border-radius(@borderRadiusSmall);
+			}
+			&:active,
+			&:focus,
+			&.active {
+				-webkit-box-shadow: 0px 0px 10px 0 rgba(0, 0, 0, 0.15) inset;
+				box-shadow: 0px 0px 10px 0 rgba(0, 0, 0, 0.15) inset;
+				border: 1px solid #c7c7c7;
+				-webkit-border-radius: 3px;
+				-moz-border-radius: 3px;
+				border-radius: 3px;
+				background-color: #f0f0f0;
+			}
+		}
+	}
+    .content {
+      text-align: center;
+    }
+	.textContent {
+		overflow: auto;
+
+		pre {
+			min-height: 150px;
+		}
+
+		.ECMIframe {
+			width: 100%;
+            background-color: white; // alway keep white
+		}
+	}
+}
+
+.webContentContainer {
+	.webContentInformation {
+		padding: 10px;
+	}
+}
+.UIDocumentWorkspace {
+    .row {
+        margin: 0;
+    }
+}
+/******** uiDialogAction **************/
+
+.uiDialogAction {
+	.uiDialogTitle {
+		font-size: 13px;
+	}
+
+	.dialogAction {
+		margin: -4px 0px;
+
+		.btn {
+			margin-left: 10px;
+		}
+
+		.actionIcon {
+			margin: 0px 0px 0px 10px !important;
+			cursor: pointer;
+		}
+	}
+}
+
+/******** UITaggingForm **************/
+
+.UIJCRExplorerPortlet .UITaggingForm {
+	padding: 0px;
+}
+
+.tagSet {
+	.actionField {
+		background: #e0e8f5;
+		.border-radius(3px);
+		color: @primaryColor;
+		border: 1px solid @primaryColorLighter;
+		padding: 1px 0px 1px 5px;
+		margin: 5px 0px 0px 0px;
+		display: inline-block;
+	}
+	.uiMention {
+		margin: 3px 5px 2px 0;
+		.uiIconClose{
+			top: -1px;
+		}
+	}
+}
+
+
+/******** uiPreferencesForm **************/
+
+
+.uiPreferencesForm {
+	width: auto !important;
+
+	.UIPreferencesForm {
+		width: auto !important;
+	}
+
+	.control-group {
+		margin-bottom: 15px;
+		padding-left: 10px;
+	}
+
+	.sortByContent {
+		margin-top: 5px;
+		.uiSelectbox {
+			width: 146px;
+			margin-left: 15px;
+			vertical-align: middle;
+
+			.selectbox {
+				width: 146px;
+			}
+		}
+	}
+
+	.checkBoxContent {
+		width: 180px;
+
+		.uiCheckbox {
+			margin: 2px 0px 0px 10px;
+		}
+		.control-label {
+		    float: left;
+		    max-width: 150px;
+		}
+	}
+	.advanceContent{
+		.span6{
+			white-space: nowrap;
+		}
+	}
+
+	.control-label {
+		display: inline-block;
+	    margin: 0;
+	}
+
+	.nodesContent {
+		margin-left: 10px;
+
+		.uiSelectbox {
+			width: 60px;
+			margin-left: 10px;
+			vertical-align: middle;
+
+			.selectbox {
+				width: 60px;
+			}
+		}
+	}
+
+	.advancePreferences {
+		font-weight: bold;
+		color: @textColor;
+	}
+
+	.advanceContent {
+		.row-fluid {
+			margin: 0px 0px 10px 10px;
+
+			.span6 .control-label {
+				width: 200px;
+			}
+
+			.span12 .uiSelectbox {
+				width: 80px;
+				margin-left: 10px;
+				vertical-align: middle;
+
+				.selectbox {
+					width: 80px;
+				}
+			}
+		}
+	}
+}
+
+/******** wcm-notice **************/
+
+.wcmAlertSuccess {
+	left: 50%;
+	position: absolute;
+}
+
+/******** UIViewInfoManager **************/
+
+.UIViewInfoManager {
+	.name {
+		font-weight: bold;
+	}
+}
+
+/******** UIVersionInfo **************/
+.uiVersionInfo  {
+	.uiBox.noRounded {
+		border: none;
+		box-shadow: none;
+		padding: @paddingXLarge 0px 15px;
+		.editable.editable-empty {
+			color: gray;
+		}
+		.editable:hover {
+			border-bottom: dashed 1px #08c;
+		}
+		.editable {
+			color: black;
+			border-bottom: none;
+		}
+		.editable-inline {
+			width: 85%;
+			.editable-input {
+				width:85%;
+				> input {
+					width: 100%;
+				}
+			}
+            .editable-input, .editable-buttons {
+                vertical-align: middle;
+            }
+			.editable-clear-x {
+				margin-right: -56px;
+				opacity: 6;
+				cursor: pointer;
+			}
+			.btn {
+				background: none;
+				border: none;
+				.box-shadow(none);
+				padding: 5px;
+				[class^="icon-"] {
+					.font-icon();
+					font-size: @sizeIcon12x12 + 2;
+				}
+				&.editable-submit .icon-ok:before {
+					content: "\e78a"; //save icon
+				}
+				&.editable-cancel {
+					display: none;
+				}
+			}
+		}
+	}
+	.pagination {
+		padding: @paddingXLarge;
+	}
+	.uiGrid {
+		margin: 10px 0px;
+		label {
+			display: inline;
+			margin: 0px;
+		}
+	}
+
+	.UIFormWithTitle {
+		width: 100%;
+	}
+}
+
+/******** uiThumbnailForm **************/
+
+.uiThumbnailForm {
+	.uploadButton {
+		text-align: center;
+	}
+}
+
+/******** uiPropertyTab **************/
+
+.uiPropertyTab {
+	table th {
+		white-space: nowrap;
+	}
+
+	.text {
+		word-break: break-all;
+	}
+}
+
+/******** Export and Import a node **************/
+.uiImportNode .form-horizontal {
+	.uiSelectbox {
+		width: 150px;
+		.selectbox {
+			width: 153px;
+		}
+	}
+}
+
+/******** UIVersionInfo **************/
+.uiVersionInfo {
+	.fileContent, .mediaContent {
+    padding: 0px 0px 15px 0px;
+	}
+}
+
+/******** UIViewMetadataManager **************/
+.UIViewMetadataManager {
+	.header {
+		margin: 10px;
+	}
+
+	ul li.contentBlock {
+		border-bottom: 1px dotted @baseColorDark;
+		padding: 5px 0px;
+		margin: 0px 10px;
+
+		&:last-child {
+			border: none;
+		}
+
+		.title {
+			font-weight: bold;
+		}
+	}
+}
+
+/******** UIOneTaxonomySelector **************/
+.uiOneTaxonomySelector {
+	.breadcrumb {
+		background: @primaryBackgroundLight;
+		padding: 5px 15px;
+		.border-radius(0px);
+		margin-bottom: 20px;
+    border: 1px solid @borderColor;
+	}
+}
+
+/******** UIAddFolder **************/
+.uiAddFolder {
+	.controls-full input {
+		width: 100%;
+	}
+
+	.actionLabel {
+		padding-top: 10px;
+
+		> .checkbox {
+			padding: 0px;
+			height: 33px;
+		}
+
+		.uiSelectbox {
+			width: 140px;
+			float: right;
+
+			.selectbox {
+				width: 143px;
+			}
+		}
+		.controls{
+			margin: 0px;
+			width: 28px;
+		}
+		.control-label{
+			width: 200px;
+			text-align: left;
+			padding: 0px;
+		}
+	}
+}
+
+/******** uiClipboard **************/
+.uiClipboard {
+	margin: -10px;
+	padding-bottom: 20px;
+
+	.table {
+		border: none;
+		border-bottom: 1px solid @tableBorder;
+
+		td:first-child,th:first-child {
+			border-left: none;
+		}
+	}
+
+	.text {
+		word-break: break-all;
+	}
+}
+
+/******** UIPermissionManager **************/
+
+.uiPermissionForm {
+	.permission {
+		.form-inline .checkbox {
+			margin-right: 15px;
+		}
+
+		.controls {
+			margin-bottom: 10px;
+
+			input {
+				margin: 0px;
+			}
+
+			.actionIcon {
+				margin-left: 5px;
+			}
+
+			.btn {
+				margin-left: 10px;
+			}
+		}
+	}
+}
+
+/******** uiViewMetadataForm **************/
+.uiViewMetadataForm {
+	#UIViewMetadataForm {
+		border: none !important;
+	}
+}
+
+/***** New Content *****/
+
+.selectTemplateTitle {
+	background-color: @primaryBackground;
+	border: 1px solid @borderColor;
+	border-radius: 4px 4px 0 0;
+	line-height: 20px;
+	margin: 0;
+	padding: 5px 20px;
+	word-wrap: break-word;
+
+	.templateTitle {
+		margin: 4px 130px 0px 0px;
+	}
+
+	.btn-group {
+		.btn {
+			padding: 5px 8px 4px 8px;
+		}
+
+		.active [class^="uiIconEcms"] {
+			 color: @colorIconPrimary;
+		}
+	}
+
+	.btn-group:nth-child(2n+2) .btn{
+		border-bottom-right-radius: 3px;
+		border-top-right-radius: 3px;
+	}
+
+	.btn-group > .btn:first-child:hover{
+		border-radius: 3px 0 0 3px;
+		margin-right: -1px;
+	}
+
+	.uiIconClose {
+		margin: 7px 0px 0px 10px;
+		cursor: pointer;
+	}
+}
+
+.selectTemplateArea{
+	overflow-x:hidden;
+	overflow-y:auto;
+	margin: -19px -19px 0px -19px;
+
+	.templateBox {
+		height: auto;
+		width: 120px;
+		float: left;
+		overflow: hidden;
+		border-right: 1px solid @borderColor;
+		border-bottom: 1px solid @borderColor;
+		cursor: pointer;
+
+		.templateIconContainer {
+			width: 64px;
+			height: 70px;
+			margin: 0px auto;
+			padding-top: 20px;
+		}
+
+		.templateLabel {
+			height: 40px;
+			width: 100px;
+			line-height: 14px;
+			text-align: center;
+			padding: 0px 10px;
+			display: table-cell;
+			vertical-align: middle;
+
+			> a {
+				color: @textColor;
+			}
+		}
+
+		&:hover {
+			background-color: @primaryBackgroundHover;
+		}
+	}
+
+	.itemDocumentListView {
+		border-bottom: 1px solid @borderColor;
+		padding: 5px 20px;
+		cursor: pointer;
+
+		> a {
+			margin-left: 15px;
+			color: @textColor;
+			vertical-align: middle;
+		}
+
+		&:hover {
+			background-color: @primaryBackgroundHover;
+		}
+	}
+}
+
+/******** uiRenameForm **************/
+.uiRenameForm .popupContent {
+	background: none;
+
+	input {
+		margin-bottom: 0px;
+	}
+
+	button {
+		margin-left: 5px;
+	}
+}
+
+/******** uiVersionInfo **************/
+.UIRemoveLabelForm,.UILabelForm {
+	.form-horizontal {
+		padding: 0px;
+
+		.control-group {
+			margin: 0px;
+
+			.control-label {
+				width: auto;
+				margin-right: 10px;
+			}
+
+			.controls {
+				margin: 0px;
+			}
+		}
+
+		.uiSelectbox {
+			vertical-align: top;
+		}
+
+		.btn {
+			margin-left: 5px;
+		}
+	}
+}
+
+.uiDiff {
+	margin: 0 10px;
+	.alert.alert-warning {
+		width: 35%;
+		margin-left: 30%;
+		text-align: center;
+	}
+	.contentEmpty {
+		text-align: center;
+    color: @baseColorLight;
+	}
+
+	.headTitle {
+		margin: 10px 0;
+		> button {
+			position: absolute;
+		}
+		> h5 {
+			text-align: center;
+			line-height: 30px;
+			vertical-align: middle;
+		}
+	}
+
+	.uiContentBox {
+		.uiBox {
+			width: 230px;
+			.boxVersionDetail {
+				padding: @paddingSmall;
+				> span {
+					display: block;
+					line-height: 30px;
+					overflow: hidden;
+					text-overflow: ellipsis;
+					white-space: nowrap;
+				}
+			}
+		}
+		.comparedwith {
+			font-size: @fontSizeLarge;
+			padding: 50px 0px;
+		}
+	}
+
+	.diff > .diffmodifiedline {
+		> span {
+			&.diffaddword {
+				background-color: @successColorLight;
+			}
+			&.diffremoveword {
+				background-color: @errorColorLight;
+			}
+		}
+		> pre {
+			border: none;
+			border-radius: 0;
+			margin: 0;
+			padding: 0;
+			white-space: normal;
+			&.diffaddword {
+				background-color: @successColorLight;
+			}
+
+			&.diffremoveword {
+				background-color: @errorColorLight;
+			}
+		}
+	}
+}
+
+/******** uiUnEditable **************/
+.uiUnEditable {
+	margin: 0px auto;
+
+	.iconContainer {
+      text-align: center;
+
+      .nameDoc {
+        display: block;
+        color: @textLightColor;
+        margin: 15px 0;
+      }
+    }
+    .detailContainer {
+      text-align: center;
+      padding-bottom: 30px;
+      h4 {
+        color: @textLightColor;
+        margin-top: 0px;
+        margin-bottom: 20px;
+        text-shadow: none;
+      }
+      button, .btn {
+        margin: 0 7px 0 0;
+        [class^="uiIcon"] {
+          margin-right: 7px;
+        }
+      }
+    }
+}
+
+/******** uiExportNode **************/
+.uiExportNode {
+	.uiInputInfo {
+		line-height: 30px;
+	}
+}
+
+/******** uiSearchResult **************/
+.uiSearchResult {
+	padding: 10px;
+	min-height: 100px;
+	max-height: 400px;
+	margin: -10px;
+	overflow: auto;
+	padding: 10px;
+
+	.title {
+		font-weight: normal;
+		color: @baseColorDark;
+		margin: 0px 0px 5px 0px;
+	}
+
+	.text {
+		color: @baseColorLight;
+		margin: 0px;
+	}
+
+	.uiGrid th a {
+		color: @baseColorDark;
+	}
+
+	.uiGrid td {
+		vertical-align: top;
+	}
+}
+
+.uiSavedQuery{
+	min-height: 120px;
+	max-height: 400px;
+}
+
+.UIJCRAdvancedSearch{
+	min-height: 250px;
+	max-height: 400px;
+}
+
+.uiSimpleSearch{
+  .resizable {
+    min-height: 245px;
+    max-height: 400px;
+  }
+ }
+
+.UIContentNameSearch{
+	min-height: 160px;
+	max-height: 400px;
+}
+/******** uiAddTranslationForm **************/
+.uiAddTranslationForm {
+	.titleLabel {
+		margin: 0 0 15px 45px;
+	}
+	.control-label {
+		width: 140px;
+	}
+
+	.controls {
+		margin-left: 160px;
+		.input-append input {
+			width: 200px;
+		}
+	}
+}
+
+/******** uiTreeNodePageIterator **************/
+
+.uiTreeNodePageIterator {
+	margin: 0px;
+
+	ul > li > a, ul > li.disabled > a, ul > li.disabled > a:hover {
+		.size(20px,20px);
+		line-height: 20px !important;
+		font-size: 11px;
+	}
+}
+
+/******** UISimpleSearch **************/
+
+.uiSimpleSearch {
+	.form-horizontal {
+		.control-label {
+			width: 170px;
+		}
+		.controls {
+			margin-left: 190px;
+		}
+	}
+	.constrainLink {
+		color: @baseColorDark;
+		font-weight: bold;
+		cursor: pointer;
+
+		&:hover {
+			color: @linkColor;
+		}
+
+		[class^="uiIcon"] {
+			margin-top: 2px;
+		}
+	}
+	.constraintsForm {
+		padding: 20px 0px 10px 0px;
+
+		.constraintOption:first-child {
+			margin-left: 31px;
+		}
+
+		.constraintOption {
+			margin-bottom: 15px;
+			input {
+				width: 120px;
+			}
+
+			.uiCalendarComponent .calendarTimeInput input {
+				width: 28px;
+			}
+
+			.uiSelectbox {
+				width: 120px;
+				.selectbox {
+					width: 123px;
+				}
+			}
+
+			.label-inline {
+				width: 100px;
+				text-align: right;
+				padding-right: 10px;
+			}
+
+			.uiCheckbox input {
+				width: auto;
+			}
+
+			.help-inline {
+        line-height: 26px;
+        color: @baseColorDark;
+      }
+		}
+	}
+}
+
+.UISaveQueryForm {
+	.control-label {
+		width: 120px;
+	}
+
+	.controls {
+		margin-left: 140px;
+
+		input, select {
+			width: 200px;
+		}
+	}
+}
+
+.permissionInfo {
+	.uiGrid .uiCheckbox {
+		width: 16px;
+	}
+}
+
+.anyPermission .form-horizontal .control-group .controls-nowrap {
+	margin: 0px;
+}
+
+/******** uiAddActionForm **************/
+.uiAddActionForm {
+	margin: 0px -15px;
+	padding: 0 15px;
+	border-top: 1px solid @borderColor;
+
+	.controls {
+		input, select, textarea {
+			vertical-align: top;
+		}
+	}
+
+	.multiValueContainer {
+		display: inline-block;
+	}
+}
+#UIActionManager{
+	.uiAddActionForm{
+		.actionIcon{
+			vertical-align: top;
+		}
+	}
+}
+
+/******** UINodeTypeSelector **************/
+.uiNodeTypeList {
+	.uiSearchBox {
+		border: 1px solid @borderColor;
+		.border-radius(4px);
+		margin: 0 0 14px;
+		padding: 8px;
+	}
+
+	.allDocument {
+		text-align: right;
+		margin-bottom: 15px;
+	}
+}
+
+/******** Comments **************/
+
+.comments {
+	padding: 20px 0px;
+	color: @baseColorDark;
+
+	.avatarBox .avatarMedium {
+		display: block;
+	}
+
+	.uiBox {
+		padding: 10px;
+
+		.arrowLeft {
+			background: url("@{images-path}/ecms/portlets/explorer/arrows.png") no-repeat scroll -21px 0;
+			display: block;
+			height: 16px;
+			left: -8px;
+			position: absolute;
+			top: 17px;
+			width: 8px;
+		}
+	}
+
+	.commentBar {
+		.showComment {
+			margin-top: 10px;
+		}
+
+		.viewLabel {
+			margin-right: 140px;
+			font-weight: bold;
+		}
+
+		.LabelPostedComment {
+			margin-right: 140px;
+		}
+		.commentList {
+			margin-top: 35px;
+			.commentContainer {
+				margin-top: 10px;
+			}
+		}
+		.commentsInfo {
+			.showComments {
+				cursor: pointer;
+			}
+		}
+	}
+
+	.commentBox {
+		margin-top: 10px;
+		position: relative;
+
+		.commentInfo {
+			margin-bottom: 5px;
+			.dateTime {
+				margin-left: 10px;
+				opacity: 0.5;
+			}
+		}
+		.commentContent {
+			margin-left: 45px;
+		}
+		.avatarBox {
+			padding-right: 10px;
+		}
+	}
+}
+
+/******** UINodeTypeSelectForm **************/
+.UINodeTypeSelectForm {
+  .control-label {
+    width: 200px;
+  }
+  .controls {
+    margin-left: 220px;
+  }
+}
+
+/******** UIRightClickPopupMenu **************/
+.uiRightClickPopupMenu {
+	display: none;
+	position: absolute;
+
+	.uiRightPopupMenuContainer {
+		display: block;
+		position: static;
+		cursor: pointer;
+
+		> li > a:hover > [class^="uiIconEcms"] {
+			color: @colorIconSecondary;
+		}
+	}
+
+	.uiRightPopupMenuContainer > li > a  {
+		.uiIconEcmsEditDocument,
+		.uiIconEcmsDelete,
+		.uiIconEcmsMoveNode,
+		.uiIconEcmsRestoreFromTrash,
+		.uiIconEcmsViewInfo {
+			 color: @colorIconDefault;
+		}
+	}
+
+	.uiRightPopupMenuContainer > li > a:hover  {
+		.uiIconEcmsEditDocument,
+		.uiIconEcmsDelete,
+		.uiIconEcmsMoveNode,
+		.uiIconEcmsRestoreFromTrash,
+		.uiIconEcmsUpload,
+		.uiIconEcmsViewInfo {
+			color: @colorIconSecondary;
+		}
+	}
+}
+
+.RightClickCustomItem {
+	.menuItem a:hover [class^="uiIcon"] {
+		color: @colorIconSecondary;
+	}
+	.menuItem a:hover [class^="uiIconEcms"] {
+		color: @colorIconSecondary;
+	}
+}
+
+/******** iFrameUpload **************/
+.iFrameUpload {
+	border: none;
+}
+
+/*==========Icon Small=============*/
+.iconLinkSmall,.iconLockedsmall {
+    color: @warningColor;
+    font-style: normal;
+    font-size: @sizeIcon12x12;
+    position: absolute;
+    left: 6px;
+    top: -2px;
+}
+
+.iconLinkSmall {
+    bottom: -2px;
+    left: auto;
+    right: -2px;
+    top: auto;
+}
+.iconLinkSmall{
+	&:before {content: "\e793";}
+}
+
+.iconLockedsmall{
+    &:before {content: "\e794";}
+}
+
+
+.UITaggingForm {
+	.dropdown-menu .active > a, .dropdown-menu .active > a:hover{
+		color: @baseBackground;
+		background: @primaryColorLighter;
+	}
+}
+
+
+/*========== UIDocumentWorkspace =============*/
+.dropdown-menu li > a:hover {
+	color: @dropdownLinkColorHover;
+}
+
+.dropdown-menu li > .menuItemSelected {
+		#gradient > .vertical(@dropdownLinkBackgroundHover, @dropdownLinkBackgroundHoverGradientDarker);
+		color: @dropdownLinkColorHover;
+		.uiIconEcmsCopyUrlToClipboard {
+			color: @colorIconSecondary;
+		}
+	}
+
+
+.UIJCRExplorerPortlet {
+	.uiFileViewActionBar {
+		.uiRightPopupMenuContainer li > .menuItemSelected{
+		    #gradient > .vertical(@baseBackground, @primaryBackgroundHover);
+		    border: 1px solid @borderColor;
+		    border-radius: 3px 3px 3px 3px;
+		    color: @textColor;
+		    padding: 4px 6px;
+		    .uiIconEcmsCopyUrlToClipboard {
+				 color: @colorIconPrimary;
+			}
+		}
+	}
+
+	.dropdown-menu {
+		#hiddenMoreButton li > .menuItemSelected{
+			#gradient > .vertical(@dropdownLinkBackgroundHover, @dropdownLinkBackgroundHoverGradientDarker);
+			color: @baseBackground;
+			.uiIconEcmsCopyUrlToClipboard {
+				color: @colorIconSecondary;
+			}
+		}
+	}
+	.UIJCRExplorer{
+		 .UIDocumentWorkspace {
+			.UIDocumentInfo {
+				min-height: auto;
+			}
+		}
+        div#UIDocumentContainer {
+          .dropdown-menu{
+            margin: 2px 0 0;
+            padding: 5px 0;
+          }
+          .nav {
+            margin: 0 10px 0 0;
+            padding: 0;
+          }
+          .nav-tabs ,.pagination ul,.breadcrumb{
+            margin: 0;
+            padding: 0;
+          }
+          ul,ol,dl {
+            padding: 0 0 0 40px;
+            margin: 15px 0;
+            ul,ol,dl {margin: 0;}
+            li {
+              list-style-type: disc;
+            }
+          }
+
+          ol li{
+            list-style-type: decimal;
+            ul li { list-style-type: disc;}
+          }
+      }
+	}
+}
+/*========== changeTypeLink =============*/
+.changeTypeLink {
+	font-weight: normal;
+    cursor: pointer;
+	&:hover {
+		text-decoration: none;
+	}
+}
+
+.UIJCRExplorer .UIDocumentWorkspace .UITabContent {
+  .dropdown-menu{
+    margin: 2px 0 0;
+    padding: 5px 0;
+  }
+  .nav {
+    margin: 0 10px 0 0;
+    padding: 0;
+  }
+  .nav-tabs ,.pagination ul,.breadcrumb{
+    margin: 0;
+    padding: 0;
+  }
+  ul,ol,dl {
+    padding: 0 0 0 40px;
+    margin: 15px 0;
+    ul,ol,dl {margin: 0;}
+    li {
+      list-style-type: disc;
+    }
+  }
+
+  ol li{
+    list-style-type: decimal;
+    ul li { list-style-type: disc;}
+  }
+}
+
+
+/******************/
+.UIWCMDashboardPortlet {
+  padding: 0px 10px 25px 10px;
+  	.UIDashboardDraft{
+		.uiIconEcmsDottedArrow  {
+			margin:8px 8px 0 0;
+		} 
+  	}
+	.uiAuthoringDashboard {
+		padding: 20px 0px;
+		.element a {
+			color: @textColor;
+			text-decoration:none;
+			display: block;
+			overflow: hidden;
+			.uiIconEcmsDottedArrow  {
+				margin-top:2px;
+			}
+		 	&:hover {
+		  		color: @linkColor;
+		  	}
+		}
+		
+		.alignLeft {
+            margin: 10px;
+		}
+		@media (min-width: 980px) {
+            .alignLeft {
+                float: left;
+                width: 30%;
+                margin: 0 0 15px 20px;
+                min-width: 225px;
+            }
+        }
+		.elements {
+			text-align: left;
+			padding: 10px;
+			overflow: hidden;
+			font-size:12px;
+		}
+		.total {
+			background-color: @primaryBackground;
+			border-radius: 10px;
+			box-shadow: 0 1px 3px rgba(0, 0, 0, 0.37) inset;
+			color: @linkColor;
+			font-weight: bold;
+			line-height: 18px;
+			margin: 3px 0px 0px 5px;
+			min-width: 30px;
+			text-align: center;
+			display: inline-block;
+		}
+		
+		.noContent {
+			color: @baseColorLight;
+		}
+		
+		.uiPageIterator {
+			margin: 10px -10px 0px -10px;
+			padding: 10px 10px 0px 10px;
+			border-top: 1px solid @borderColor;
+		}
+		
+		.refresh {
+			margin-left: 20px;
+			 text-transform: capitalize;
+		}
+	}
+}
+.UIJCRExplorer #UIDocumentWorkspace {
+  background: @baseBackground!important;
+}
+/* Landscape phone to portrait tablet */
+@media (min-width: 481px) and (max-width: 1024px){
+    .UIWCMDashboardPortlet .uiAuthoringDashboard .elements,
+    .uiItemList li{
+        font-size: inherit;
+    }
+}
+@media (max-width: 1024px) {
+	.uiVersionInfo {
+		.uiBox.noRounded {
+			.editable-inline {
+				.editable-clear-x {
+					margin-top: -9px;
+				}
+			}
+		}
+	}
+}
+@media(max-width: 768px){
+    .uiWorkingArea {
+        flex-direction: column;
+        .resizeBar {display: none} 
+    }
+    .uiWorkingArea .leftContainer ,.uiWorkingArea .rightContainer{
+        float: none;
+        margin: 10px 0;
+        width: 100%!important;
+        height: auto!important;
+    }
+	.uiDiff {
+		.headTitle > button {
+			position: absolute;
+		}
+		.headTitle > h5 {
+			text-align: center;
+			line-height: 30px;
+			vertical-align: middle;
+		}
+		.changes {
+			font-size: @fontSizeSmall;
+		}
+	}
+}
+
+@media(max-width: 480px){
+   body  .tblAddressBar {
+        table,tr,td {
+            display: block;
+            margin: 5px 0 !important;
+            width: 100%!important;
+            min-height: 22px;
+
+        }
+       .right .advance,.uiAddressBar .right{
+            width: 100%!important;
+
+        }
+    }
+    .uiAddressBar .uiAddressBarAction .inputContainer {
+        margin:0;
+    }
+
+    .pull-right > #ListHideContainer.dropdown-menu {
+        right: auto;
+    }
+    .uiTabGrayInPage .tab-content .nav-pills > li.dropdown {
+        margin-right: 172px!important;float: none;
+        a {
+            display: inline-block;
+        }
+    }
+    .UIJCRExplorerPortlet {
+        padding: 15px;
+    }
+    .uiPreferencesForm {
+		.sortByContent {
+			padding: 0;
+			.uiSelectbox {
+				width: 100%;
+				margin-left: 0;
+				.selectbox {
+					width: 100%;  
+					margin-top: 10px;
+				}
+			}
+		}
+		.checkBoxContent{
+			text-align: right;
+			float: none;
+			width: 175px;
+
+		}
+		.nodesContent {
+				margin: 0;
+			}
+	}
+}
+
+.uiThumbnailsView {
+
+}
+
+.UIDocumentInfo {
+    .IconLocked,.Link {
+        .font-icon();
+    }
+    .IconLocked {
+        &:before {
+            content: "\e794";
+        }
+    }
+    .uiListGrid {
+        .uiBox {
+            display: table;
+            width: 100%;
+			box-sizing: border-box;
+            > div {
+               display: flex;
+               > div {
+                  flex-shrink: 0;
+               }
+            }
+        }
+        [class^="uiIcon24x24"] {
+            position: relative;
+        }
+
+        .LinkSmall,.IconLocked  {
+            font-size: @sizeIconDefault - 2;
+            color: @warningColor;
+            bottom: -4px;
+            right: 0px;
+            position: absolute;
+        }
+        .LinkSmall:before {
+            content: "\e793";
+        }
+        .IconLocked {
+            top: 0px;
+            bottom: auto;
+        }
+    }
+    .LinkSmall:before, .IconLocked:before ,
+    .iconLinkSmall:before, .iconLockedsmall:before,
+    .thumbnailImage .Link:before{
+        text-shadow:0 0px 1px rgba(0, 0, 0, 1);
+        color: #edad00;
+    }
+    .thumbnailImage {
+        .IconLocked,.Link {
+            &:before {
+                font-size: 22px;
+            }
+        }
+    }
+    .uiThumbnailsView {
+        [class^="uiIcon64x64"] {
+            margin: auto;
+            position: relative;
+            .Link {
+                right: 34px;
+                &:before {font-size: @sizeIcon24x24;}
+            }
+
+        }
+
+        .Link,.IconLocked {
+            position: absolute!important;
+            right: 25px;
+            bottom: 0!important;
+            top: auto!important;
+        }
+
+        .IconLocked {
+            &:before {
+                content: "\e794";
+                font-size: @sizeIcon24x24;
+            }
+            top: 10px;
+            bottom: auto;
+        }
+    }
+    .thumbnailImage {
+        .loadingProgressIcon {
+            .IconLocked,.Link {
+                right: -4px;
+            }
+        }
+        .IconLocked,.Link {
+            position: absolute ;
+            right: 26px ;
+            top: 12px ;
+        }
+        .Link {
+            top: auto;
+            bottom: 0;
+        }
+    }
+}
+
+.iconLinkSmall, .iconLockedsmall {
+    &:before {
+        text-shadow:0 0px 1px rgba(0, 0, 0, 1);
+    }
+}

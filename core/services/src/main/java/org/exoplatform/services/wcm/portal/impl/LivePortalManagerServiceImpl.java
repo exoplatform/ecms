@@ -46,6 +46,7 @@ import org.exoplatform.services.wcm.core.WCMConfigurationService;
 import org.exoplatform.services.wcm.core.WebSchemaConfigService;
 import org.exoplatform.services.wcm.portal.LivePortalManagerService;
 
+import org.apache.commons.lang3.StringUtils;
 import org.picocontainer.Startable;
 
 /*
@@ -139,6 +140,11 @@ public class LivePortalManagerServiceImpl implements LivePortalManagerService, S
   public final Node getLivePortal(final SessionProvider sessionProvider,
                                   final String repository,
                                   final String portalName) throws Exception {
+    // Avoid throwing Exception, because global site doesn't have a specific
+    // storage and it's normal
+    if (StringUtils.equals(portalConfigService.getGlobalPortal(), portalName)) {
+      return null;
+    }
     Node portalsStorage = getLivePortalsStorage(sessionProvider);
     if (portalsStorage != null) {
       return portalsStorage.getNode(portalName);
@@ -313,6 +319,11 @@ public class LivePortalManagerServiceImpl implements LivePortalManagerService, S
       List<String> allPortalNames = dataStorage.getAllPortalNames();
       if (allPortalNames != null) {
         for (String portalName : allPortalNames) {
+          // Global site shouldn't have a folder
+          if (StringUtils.equals(portalName, portalConfigService.getGlobalPortal())) {
+            continue;
+          }
+
           try {
             Node livePortal = getLivePortal(SessionProvider.createSystemProvider(), portalName);
             if (livePortal !=null) {

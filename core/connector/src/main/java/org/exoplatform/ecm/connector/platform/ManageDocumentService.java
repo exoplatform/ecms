@@ -560,6 +560,7 @@ public class ManageDocumentService implements ResourceContainer {
     file.setAttribute("name", Utils.getTitle(displayNode));
     file.setAttribute("title", Utils.getTitle(displayNode));
     file.setAttribute("workspaceName", workspaceName);
+    file.setAttribute("id", sourceNode.getUUID());
     SimpleDateFormat formatter = (SimpleDateFormat) SimpleDateFormat.getDateTimeInstance(SimpleDateFormat.SHORT,
                                                                                          SimpleDateFormat.SHORT);
     file.setAttribute("dateCreated", formatter.format(sourceNode.getProperty("exo:dateCreated")

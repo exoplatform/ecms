@@ -39,6 +39,7 @@ import org.exoplatform.services.cms.thumbnail.ThumbnailService;
 import org.exoplatform.services.cms.thumbnail.impl.ThumbnailUtils;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
+import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.impl.core.NodeImpl;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
@@ -64,10 +65,10 @@ public class ThumbnailRESTService implements ResourceContainer {
   private static final Log LOG  = ExoLogger.getLogger(ThumbnailRESTService.class.getName());
   
   /** The Constant LAST_MODIFIED_PROPERTY. */
-  private static final String LAST_MODIFIED_PROPERTY = "Last-Modified";
+  public static final String LAST_MODIFIED_PROPERTY = "Last-Modified";
 
   /** The Constant IF_MODIFIED_SINCE_DATE_FORMAT. */
-  private static final String IF_MODIFIED_SINCE_DATE_FORMAT = "EEE, dd MMM yyyy HH:mm:ss z";
+  public static final String IF_MODIFIED_SINCE_DATE_FORMAT = "EEE, dd MMM yyyy HH:mm:ss z";
 
   private final RepositoryService repositoryService_;
   private final ThumbnailService thumbnailService_;
@@ -285,7 +286,7 @@ public class ThumbnailRESTService implements ResourceContainer {
             if(ifModifiedSince != null && thumbnailNode.hasProperty(ThumbnailService.THUMBNAIL_LAST_MODIFIED)) {
               // get last-modified-since from header
               Date ifModifiedSinceDate = dateFormat.parse(ifModifiedSince);
-
+              
               // get last modified date of node
               Date lastModifiedDate = thumbnailNode.getProperty(ThumbnailService.THUMBNAIL_LAST_MODIFIED)
                                                    .getDate()
@@ -374,8 +375,7 @@ public class ThumbnailRESTService implements ResourceContainer {
   }
 
   private Node getShowingNode(String workspaceName, String nodePath) throws Exception {
-    ManageableRepository repository = repositoryService_.getCurrentRepository();
-    Session session = WCMCoreUtils.getUserSessionProvider().getSession(workspaceName, repository);
+    Session session = WCMCoreUtils.getUserSessionProvider().getSession(workspaceName, SessionProviderService.getRepository());
     Node showingNode = null;
     if(nodePath.equals("/")) {
       showingNode = session.getRootNode();
