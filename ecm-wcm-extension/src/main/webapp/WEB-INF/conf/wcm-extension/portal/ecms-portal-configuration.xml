@@ -25,21 +25,6 @@
    xsi:schemaLocation="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd http://www.exoplatform.org/xml/ns/kernel_1_2.xsd"
    xmlns="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd">
 
-  <external-component-plugins>
-    <target-component>org.exoplatform.platform.common.service.MenuConfiguratorService</target-component>
-    <component-plugin>
-      <name>ECMS - Setup Menu Management Plugin</name>
-      <set-method>addNavigation</set-method>
-      <type>org.exoplatform.platform.common.service.plugin.MenuConfiguratorAddNodePlugin</type>
-      <init-params>
-        <value-param>
-          <name>extended.setup.navigation.file</name>
-          <value>war:/conf/wcm-extension/portal/setup-navigation.xml</value>
-        </value-param>
-      </init-params>
-    </component-plugin>
-  </external-component-plugins>
-
 	<external-component-plugins>
 		<target-component>org.exoplatform.portal.config.UserPortalConfigService</target-component>
     <!-- ADDED to initialize Portal layout of Site using default Site layout
@@ -90,6 +75,31 @@
                   <string>empty</string>
                 </value>
               </collection>
+            </field>
+          </object>
+        </object-param>
+        <object-param>
+          <name>portal.configuration</name>
+          <description>description</description>
+          <object type="org.exoplatform.portal.config.NewPortalConfig">
+            <field name="predefinedOwner">
+              <collection type="java.util.HashSet">
+                <value>
+                  <string>global</string>
+                </value>
+              </collection>
+            </field>
+            <field name="ownerType">
+              <string>portal</string>
+            </field>
+            <field name="location">
+              <string>war:/conf/wcm-extension/portal</string>
+            </field>
+            <field name="override">
+              <boolean>${exo.ecms.portalConfig.metadata.override:true}</boolean>
+            </field>
+            <field name="importMode">
+              <string>${exo.ecms.portalConfig.metadata.importmode:insert}</string>
             </field>
           </object>
         </object-param>

@@ -53,7 +53,7 @@ import java.util.stream.Collectors;
  * Search connector for files
  */
 public class FileSearchServiceConnector extends ElasticSearchServiceConnector {
-  
+
   private static final Log LOG = ExoLogger.getLogger(FileSearchServiceConnector.class.getName());
 
   private RepositoryService repositoryService;
@@ -79,7 +79,8 @@ public class FileSearchServiceConnector extends ElasticSearchServiceConnector {
             "createdDate",
             "lastUpdatedDate",
             "fileType",
-            "fileSize");
+            "fileSize",
+            "activityId");
 
     return fields.stream().map(field -> "\"" + field + "\"").collect(Collectors.joining(","));
   }
@@ -174,6 +175,7 @@ public class FileSearchServiceConnector extends ElasticSearchServiceConnector {
     String workspace = (String) hitSource.get("workspace");
     String nodePath = (String) hitSource.get("path");
     String fileType = (String) hitSource.get("fileType");
+    String activityId = (String) hitSource.get("activityId");
 
     String restContextName =  WCMCoreUtils.getRestContextName();
     String repositoryName = null;
@@ -206,6 +208,9 @@ public class FileSearchServiceConnector extends ElasticSearchServiceConnector {
             .append("'}");
     if(author != null) {
       url.append(",author:{username:'").append(author).append("'}");
+    }
+    if(activityId != null) {
+      url.append(",activity:{id:'").append(activityId).append("'}");
     }
     //add void(0) to make firefox execute js
     url.append("})});void(0);");

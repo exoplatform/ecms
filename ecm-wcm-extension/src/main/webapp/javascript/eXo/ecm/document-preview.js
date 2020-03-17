@@ -70,6 +70,14 @@
         if(this.settings.activity.id != null && this.settings.activity.likes == null) {
           promises.push(this.fetchLikes());
         }
+        // if we don't know if an activity is liked or not, let's fetch it
+        if(this.settings.activity.id != null && this.settings.activity.liked == null) {
+          promises.push(this.fetchLiked());
+        }
+        // if we don't have the activity information, let's fetch it
+        if(this.settings.activity.id != null && (this.settings.activity.postTime == null || this.settings.activity.status == null)) {
+          promises.push(this.fetchActivity());
+        }
 
         var self = this;
 
@@ -203,6 +211,35 @@
         likeLink.tooltip('show');
       }
     },
+    fetchLiked: function() {
+      var self = this;
+      return $.ajax({
+        type:'GET',
+        url: '/portal/rest/v1/social/activities/' + this.settings.activity.id + '/likes/' + eXo.env.portal.userName
+      }).done(function (data) {
+        if (data.likes != null) {
+          self.settings.activity.liked = true;
+        }
+        self.clearErrorMessage();
+      }).fail(function () {
+        self.settings.activity.liked = false;
+      });
+    },
+
+    fetchActivity: function() {
+      var self = this;
+      return $.ajax({
+        type:'GET',
+        url: '/portal/rest/v1/social/activities/' + this.settings.activity.id
+      }).done(function (data) {
+        if (data != null) {
+          self.settings.activity.postTime = self.convertDate(data.createDate);
+          self.settings.activity.status = data.title;
+        }
+        self.clearErrorMessage();
+      }).fail(function () {
+      });
+    },
 
     toggleLikeComment: function(commentId) {
       var self = this;
@@ -316,6 +353,7 @@
             '<a href="' + this.settings.doc.downloadUrl + '"><i class="uiIconDownload uiIconWhite"></i>&nbsp;${UIActivity.comment.download}</a>' +
           '</div>';
         docPreviewContainer.find(".previewBtn").html(html);
+
       } else {
         var authorFullName = XSSUtils.sanitizeString(this.settings.author.fullname != null ? this.settings.author.fullname : '');
         let html = '<div class="uiDocumentPreview' + (this.settings.showComments ? '' : ' collapsed') + '" id="uiDocumentPreview">' +
@@ -427,7 +465,6 @@
                   '</div>' +
                 '</div>' +
               '</div>';
-
         docPreviewContainer.html(html);
       }
 
@@ -438,6 +475,25 @@
             '</div>'
         );
       }
+
+      var onlyOfficeButton =
+              '<div class="onlyOfficeEditBtn">' +
+                 '<a href="/portal/' + eXo.env.portal.portalName + '/oeditor?docId=' + this.settings.doc.id + '" target="_blank"><i class="uiIconEdit uiIconWhite"></i>'+ eXo.ecm.WCMUtils.getBundle("File.view.label.editOnline",eXo.env.portal.language) +'</a>' +
+              '</div>';
+
+      $.ajax({
+            url: "/portal/rest/onlyoffice/editor/api/version",
+              }).done(function(data, textStatus, xhr) {
+                 //If status code = 200 append onlyOffice button
+                 if( xhr.status === 200){
+                  $(".previewBtn").append(onlyOfficeButton);
+                  }
+              }).fail(function(textStatus, xhr) {
+                 if( xhr.status === 404){
+                  //OnlyOffice addons is not installed
+                 } else {
+                 console.log("Error to call rest service with status code :" +  xhr.status);}
+      });
       
       $('#documentPreviewContainer #previewLikeLink').tooltip();
       
@@ -722,34 +778,34 @@
       var time = (new Date().getTime() - postedTime) / 1000;
       var value;
       if (time < 60) {
-        return "${UIActivity.label.Less_Than_A_Minute}";
+        return eXo.ecm.WCMUtils.getBundle("TimeConvert.label.Less_Than_A_Minute",eXo.env.portal.language);
       } else {
         if (time < 120) {
-          return "${UIActivity.label.About_A_Minute}";
+          return eXo.ecm.WCMUtils.getBundle("TimeConvert.label.About_A_Minute",eXo.env.portal.language);
         } else {
           if (time < 3600) {
             value = Math.round(time / 60);
-            return "${UIActivity.label.About_?_Minutes}".replace("{0}", value);
+            return eXo.ecm.WCMUtils.getBundle("TimeConvert.type.MINUTES",eXo.env.portal.language).replace("{0}", value);
           } else {
             if (time < 7200) {
-              return "${UIActivity.label.About_An_Hour}";
+              return eXo.ecm.WCMUtils.getBundle("TimeConvert.label.About_An_Hour",eXo.env.portal.language);
             } else {
               if (time < 86400) {
                 value = Math.round(time / 3600);
-                return "${UIActivity.label.About_?_Hours}".replace("{0}", value);
+                return eXo.ecm.WCMUtils.getBundle("TimeConvert.type.HOURS",eXo.env.portal.language).replace("{0}", value);
               } else {
                 if (time < 172800) {
-                  return "${UIActivity.label.About_A_Day}";
+                  return eXo.ecm.WCMUtils.getBundle("TimeConvert.label.About_A_Day",eXo.env.portal.language);
                 } else {
                   if (time < 2592000) {
                     value = Math.round(time / 86400);
-                    return "${UIActivity.label.About_?_Days}".replace("{0}", value);
+                    return  eXo.ecm.WCMUtils.getBundle("TimeConvert.type.DAYS",eXo.env.portal.language).replace("{0}", value);
                   } else {
                     if (time < 5184000) {
-                      return "${UIActivity.label.About_A_Month}";
+                      return eXo.ecm.WCMUtils.getBundle("TimeConvert.label.About_A_Month",eXo.env.portal.language);
                     } else {
                       value = Math.round(time / 2592000);
-                      return "${UIActivity.label.About_?_Months}".replace("{0}", value);
+                      return eXo.ecm.WCMUtils.getBundle("TimeConvert.type.MONTHS",eXo.env.portal.language).replace("{0}", value);
                     }
                   }
                 }

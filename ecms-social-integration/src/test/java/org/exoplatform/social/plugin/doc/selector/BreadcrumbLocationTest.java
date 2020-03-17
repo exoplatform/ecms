@@ -18,6 +18,7 @@ public class BreadcrumbLocationTest extends BaseCommonsTestCase {
     // This is used to make a workaround for embedded file path
     // see
     // org.exoplatform.services.cms.mimetype.DMSMimeTypeResolver.DMSMimeTypeResolver()
+    setForceContainerReload(true);
     System.setProperty("mock.portal.dir", System.getProperty("gatein.test.output.path") + "/test-classes");
     super.beforeRunBare();
     ExoContainerContext.setCurrentContainer(getContainer());

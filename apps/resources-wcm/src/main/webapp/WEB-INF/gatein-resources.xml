@@ -29,7 +29,7 @@
     <skin-name>Enterprise</skin-name>
     <skin-module>WCMSkin</skin-module>
     <css-path>/skin/css/ecms/skin/ecms-resources-wcmskin.css</css-path>
-    <css-priority>1</css-priority>
+    <css-priority>10</css-priority>
   </portal-skin>
 
   <!-- ECMAdminPortlet skin -->
