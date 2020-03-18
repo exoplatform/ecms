@@ -1,5 +1,6 @@
 <template>
   <v-card class="provider uiPopup">
+    <div v-show="error" class="alert alert-error">{{ $t(error) }}</div>
     <v-card-title class="headline popupHeader justify-space-between providerHeader">
       <span class="PopupTitle popupTitle providerHeaderTitle">{{ this.$t('editors.admin.modal.title') }}</span>
       <i class="uiIconClose providerHeaderClose" @click="closeDialog"></i>
@@ -128,7 +129,7 @@
 </template>
 
 <script>
-import { getInfo, postInfo } from "../EditorsAdminAPI";
+import { getInfo, postInfo, parsedErrorMsg } from "../EditorsAdminAPI";
 
 export default {
   props: {
@@ -149,7 +150,8 @@ export default {
         items: [],
         search: null,
         select: null,
-        existingPermissions: this.provider.permissions
+        existingPermissions: this.provider.permissions,
+        error: null
       }
   },
   computed: {
@@ -187,11 +189,13 @@ export default {
       saveChanges() {
         const updateRest = this.provider.links.filter(({ rel, href }) => rel === "update")[0].href;
         postInfo(updateRest, { permissions: this.editedItems }).then(data => { 
+          this.error = null;
           this.provider.permissions = this.editedItems;
           this.closeDialog();
-        });
+        }).catch(err => { this.error = parsedErrorMsg(err) });
       },
       closeDialog() {
+        this.error = null;
         this.editedItems = [];
         this.select = null;
         this.existingPermissions = this.provider.permissions;
@@ -347,5 +351,14 @@ export default {
       }
     }
   }
+}
+
+.alert {
+  position: fixed;
+  top: 40px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  z-index: 1000;
+  width: 80%;
 }
 </style>

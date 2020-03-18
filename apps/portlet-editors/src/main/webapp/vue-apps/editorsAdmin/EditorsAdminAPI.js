@@ -4,6 +4,9 @@ export function getInfo(link) {
       return res.json();
     } else {
       log('Unable to get data');
+      return res.text().then(text => {
+        throw new Error(text)
+      });
     }
   })
 }
@@ -24,8 +27,20 @@ export function postInfo(link, postData) {
       return res;
     } else {
       log('Unable to post data');
+      return res.text().then(text => {
+        throw new Error(text)
+      });
     }
   });
+}
+
+export function parsedErrorMsg(error) {
+  try {
+    JSON.parse(error.message)
+  } catch(e) {
+    return error.message;
+  }
+  return JSON.parse(error.message).message;
 }
 
 function log(msg, err) {

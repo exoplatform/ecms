@@ -1,6 +1,7 @@
 <template>
   <v-app id="editors-admin" class="VuetifyApp">
     <v-container style="width: 95%" class="v-application--is-ltr">
+      <div v-show="error" class="alert alert-error">{{ $t(error) }}</div>
       <v-row class="white">
         <v-col xs12 px-3>
           <h4 class="editorsTitle">
@@ -27,7 +28,7 @@
                   <td>
                     <v-switch
                       :input-value="item.active"
-                      class="v-input--switch--inset"
+                      color="#568dc9"
                       @change="changeStatus(item)"/>
                   </td>
                   <td class="text-center">
@@ -60,7 +61,7 @@
 </template>
 
 <script>
-import { getInfo, postInfo } from "../EditorsAdminAPI";
+import { getInfo, postInfo, parsedErrorMsg } from "../EditorsAdminAPI";
 
 export default {
     props: {
@@ -74,7 +75,8 @@ export default {
             providers: [],
             switcher: false,
             showDialog: false,
-            selectedProvider: null
+            selectedProvider: null,
+            error: null
         };
     },
     created() {
@@ -82,17 +84,21 @@ export default {
     },
     methods: {
         getProviders() {
-          getInfo(this.services.providers).then(data => this.providers = data.editors);
+          getInfo(this.services.providers).then(data => {
+            this.error = null;
+            this.providers = data.editors;
+          }).catch(err => { this.error = parsedErrorMsg(err); });
         },
         changeStatus(provider) {
             const updateRest = provider.links.filter(({ rel, href }) => rel === "update")[0].href;
             postInfo(updateRest, { active: !provider.active }).then(data => { 
+                this.error = null;
                 this.providers.map(p => {
                   if (p.provider === provider.provider) {
                     p.active = !provider.active;
                   }
                 })
-            });
+            }).catch(err => this.error = parsedErrorMsg(err));
       },
       changeSettings(item) {
         this.selectedProvider = item;
@@ -117,5 +123,13 @@ export default {
     width: 100%;
     margin-left: 10px;
   }
+}
+
+.alert {
+  position: fixed;
+  top: 70px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  z-index: 1000;
 }
 </style>
