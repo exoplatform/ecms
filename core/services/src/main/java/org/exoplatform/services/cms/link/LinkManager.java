@@ -18,10 +18,7 @@ package org.exoplatform.services.cms.link;
 
 import java.util.List;
 
-import javax.jcr.Item;
-import javax.jcr.ItemNotFoundException;
-import javax.jcr.Node;
-import javax.jcr.RepositoryException;
+import javax.jcr.*;
 
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 
@@ -147,6 +144,16 @@ public interface LinkManager {
    * @throws RepositoryException if an unexpected error occurs
    */
   public boolean isLink(Item item) throws RepositoryException;
+
+  /**
+   * @param session
+   * @param path
+   * @return "True" if the given path is link for document or file. Otherwise, it
+   *         returns "false".
+   */
+  default boolean isFileOrParentALink(Session session, String path) {
+    throw new UnsupportedOperationException();
+  }
 
   /**
    * Gets the primary nodetype of a target node by a given link.

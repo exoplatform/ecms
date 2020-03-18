@@ -23,14 +23,6 @@
   xsi:schemaLocation="http://www.exoplatform.org/xml/ns/gatein_resources_1_4 http://www.exoplatform.org/xml/ns/gatein_resources_1_4"
   xmlns="http://www.exoplatform.org/xml/ns/gatein_resources_1_4">
 
-	<!--javascript>
-    <param>
-      <js-module>FCKEditor</js-module>
-      <js-path>/fckeditor/fckeditor.js</js-path>
-      <js-priority>50</js-priority>
-    </param>
-  </javascript-->
-
   <module>
     <name>documentPreview</name>
     <supported-locale>de</supported-locale>
@@ -83,6 +75,9 @@
     </depends>
     <depends>
       <module>socialUtil</module>
+    </depends>
+    <depends>
+      <module>wcm-utils</module>
     </depends>
     <depends>
       <module>mentionsPlugin</module>

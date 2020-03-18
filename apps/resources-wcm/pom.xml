@@ -12,19 +12,85 @@
 
   <dependencies>
     <dependency>
-      <groupId>org.exoplatform.gatein.portal</groupId>
-      <artifactId>exo.portal.component.web.resources</artifactId>
-      <scope>runtime</scope>
+      <groupId>org.exoplatform.platform-ui</groupId>
+      <artifactId>platform-ui-skin</artifactId>
+      <classifier>sources</classifier>
+      <scope>provided</scope>
     </dependency>
   </dependencies>
   <build>
     <finalName>eXoWCMResources</finalName>
     <plugins>
       <plugin>
+        <artifactId>maven-resources-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>less-copy-resources</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>copy-resources</goal>
+            </goals>
+            <configuration>
+              <outputDirectory>${project.build.directory}/src/main/webapp/skin/less</outputDirectory>
+              <resources>
+                <resource>
+                  <directory>src/main/webapp/skin/less</directory>
+                </resource>
+              </resources>
+              <overwrite>true</overwrite>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <executions>       
+          <execution>
+            <id>platform-ui-src</id>
+            <phase>initialize</phase>
+            <goals>
+              <goal>unpack-dependencies</goal>
+            </goals>
+            <configuration>
+              <includeArtifactIds>platform-ui-skin</includeArtifactIds>
+              <outputDirectory>${project.build.directory}/src/main/webapp</outputDirectory>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.lesscss</groupId>
+        <artifactId>lesscss-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>core</id>
+            <configuration>
+              <sourceDirectory>${project.build.directory}/src/main/webapp/skin/less</sourceDirectory>
+              <outputDirectory>${project.build.directory}/${project.build.finalName}/skin/css</outputDirectory>
+              <compress>false</compress>
+              <includes>
+                <include>ecms/skin/ecms-resources-wcmskin.less</include>
+                <include>ecms/portlets/administration/ecms-administration.less</include>
+                <include>ecms/portlets/explorer/ecms-explorer.less</include>
+                <include>ecms/portlets/search/ecms-search.less</include>
+                <include>ecms/portlets/fastcontentcreator/fast-content-creator.less</include>
+                <include>ecms/portlets/presentation/ecms-presentation-categorynavigationportlet.less</include>
+                <include>ecms/portlets/presentation/ecms-presentation-contentlistviewerportlet.less</include>
+                <include>ecms/portlets/presentation/ecms-presentation-singlecontentviewer.less</include>
+              </includes>
+            </configuration>
+            <goals>
+              <goal>compile</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-war-plugin</artifactId>
         <configuration>
           <warSourceExcludes>**/ckeditor/core/, **/ckeditor/dev/</warSourceExcludes>
+          <packagingExcludes>**/less/**,WEB-INF/lib/**</packagingExcludes>
         </configuration>
       </plugin>
     </plugins>

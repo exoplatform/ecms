@@ -192,6 +192,22 @@ public class TestLinkManager extends BaseWCMTestCase {
     assertEquals(symlinkNodeA1_4.getPrimaryNodeType().getName(), "exo:taxonomyLink");
   }
 
+  public void testisFileOrParentALink() throws Exception {
+    System.out.println("================== Test is File Or Parent a Link  ==================");
+    String path="";
+    assertFalse(linkManager.isFileOrParentALink(session,path));
+    path="test/test.link/test";
+    assertFalse(linkManager.isFileOrParentALink(session,path));
+    path="testA/testB/test.Docx";
+    assertFalse(linkManager.isFileOrParentALink(session,path));
+    path="/testing/Documents/aaaa/zzz/";
+    assertFalse(linkManager.isFileOrParentALink(session,path));
+    Node nodeA1 = rootNode.getNode("TestTreeNode/A1");
+    Node nodeB1_1 = rootNode.getNode("TestTreeNode/B1/B1_1");
+    Node symlinkNodeA1 = linkManager.createLink(nodeA1, nodeB1_1);
+    assertTrue(linkManager.isFileOrParentALink(session,symlinkNodeA1.getPath()));
+  }
+
   /**
    * Indicates whether the given item is a link
    * Input: Create a new link

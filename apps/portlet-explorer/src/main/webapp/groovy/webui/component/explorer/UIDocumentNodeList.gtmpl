@@ -108,6 +108,7 @@ public void writeNodes(level, i, data, uiWorkingArea, linkManager, restContextNa
   def versionNum  = uicomponent.getVersionNumber(data);
   def author = uicomponent.getAuthorName(data);
   def fileSize = uicomponent.getFileSize(data);
+  def urlToCopy = WCMCoreUtils.getLinkInDocumentsApplication(nodePath);
   
   String actionLink = uiDocumentInfo.event("ChangeNode",Utils.formatNodeName(data.path), new Parameter("workspaceName", preferenceWS)) ;
 
@@ -143,7 +144,7 @@ public void writeNodes(level, i, data, uiWorkingArea, linkManager, restContextNa
   encodedPath = encodedPath.replaceAll("%2F", "/"); //we won't encode the slash characters in the path
   if (!data.isNodeType(Utils.EXO_RESTORELOCATION) && !Utils.isTrashHomeNode(data)) {
     String serverUrl= uiDocumentInfo.getWebDAVServerPrefix();
-    String clipboardLink =serverUrl + "/" + restContextName + "/private/jcr/" + repository + "/" + preferenceWS + encodedPath;
+    String clipboardLink = serverUrl + urlToCopy ;
     strActs +=  "<li class='menuItem' onclick='eXo.ecm.UIFileView.clearCheckboxes();'>";
     strActs +=  "<a exo:attr='CopyUrlToClipboard' style='display: block;' id='clip_button$componentId$i' path='$clipboardLink'>" ;
     strActs +=  " <i class='uiIconEcmsCopyUrlToClipboard'>" ;

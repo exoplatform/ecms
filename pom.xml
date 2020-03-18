@@ -42,6 +42,7 @@
     <!-- **************************************** -->
     <org.exoplatform.social.version>6.0.x-SNAPSHOT</org.exoplatform.social.version>
     <org.exoplatform.jcr.version>6.0.x-SNAPSHOT</org.exoplatform.jcr.version>
+    <org.exoplatform.platform-ui.version>6.0.x-SNAPSHOT</org.exoplatform.platform-ui.version>
   </properties>
   <dependencyManagement>
     <!-- ### NEVER CHANGE THIS ORDER OF DEPMGT ### -->
@@ -63,6 +64,13 @@
         <groupId>org.exoplatform.jcr</groupId>
         <artifactId>jcr-parent</artifactId>
         <version>${org.exoplatform.jcr.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.exoplatform.platform-ui</groupId>
+        <artifactId>platform-ui</artifactId>
+        <version>${org.exoplatform.platform-ui.version}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>

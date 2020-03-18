@@ -57,6 +57,9 @@ public class UICLVPortlet extends UIPortletApplication {
   /** The Constant PREFERENCE_DISPLAY_MODE. */
   public static final String PREFERENCE_DISPLAY_MODE              = "mode";
 
+  /** The Constant PREFERENCE_ADD_TRANSLATION. */
+  public final static String PREFERENCE_ADD_TRANSLATION           = "addTranslation";
+
   /** The Constant PREFERENCE_ITEM_PATH. */
   public final static String PREFERENCE_ITEM_PATH                 = "folderPath";
 

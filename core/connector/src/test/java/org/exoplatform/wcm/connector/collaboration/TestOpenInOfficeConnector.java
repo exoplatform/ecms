@@ -56,12 +56,13 @@ public class TestOpenInOfficeConnector extends BaseConnectorTestCase{
   }
 
   public void testUpdateDocumentTitle() throws Exception{
-    String restPath = "/office/updateDocumentTitle?objId=collaboration:/sites/test.doc&lang=en";
+    String parentPath = "sites1";
+    String restPath = "/office/updateDocumentTitle?objId=collaboration:/" + parentPath + "/test.doc&lang=en";
     applyUserSession("john", "gtn", "collaboration");
     manageableRepository = repositoryService.getCurrentRepository();
     Session session = WCMCoreUtils.getSystemSessionProvider().getSession(COLLABORATION_WS, manageableRepository);
     Node rootNode = session.getRootNode();
-    Node sites = rootNode.addNode("sites");
+    Node sites = rootNode.addNode(parentPath);
     sites.addNode("test.doc");
     rootNode.save();
     ContainerResponse response = service(HTTPMethods.GET.toString(), restPath, StringUtils.EMPTY, null, null);
@@ -69,12 +70,13 @@ public class TestOpenInOfficeConnector extends BaseConnectorTestCase{
   }
 
   public void testUpdateDocumentTitleWithIncorrectObjId() throws Exception{
-    String restPath = "/office/updateDocumentTitle?objId=/sites/test.doc&lang=en";
+    String parentPath = "sites2";
+    String restPath = "/office/updateDocumentTitle?objId=/" + parentPath + "/test.doc&lang=en";
     applyUserSession("john", "gtn", "collaboration");
     manageableRepository = repositoryService.getCurrentRepository();
     Session session = WCMCoreUtils.getSystemSessionProvider().getSession(COLLABORATION_WS, manageableRepository);
     Node rootNode = session.getRootNode();
-    Node sites = rootNode.addNode("sites");
+    Node sites = rootNode.addNode(parentPath);
     sites.addNode("test.doc");
     rootNode.save();
     ContainerResponse response = service(HTTPMethods.GET.toString(), restPath, StringUtils.EMPTY, null, null);
@@ -82,12 +84,13 @@ public class TestOpenInOfficeConnector extends BaseConnectorTestCase{
   }
 
   public void testUpdateDocumentTitleWithDocumentNamedWithColon() throws Exception{
-    String restPath = "/office/updateDocumentTitle?objId=collaboration:/sites/exo:colon.doc&lang=en";
+    String parentPath = "sites3";
+    String restPath = "/office/updateDocumentTitle?objId=collaboration:/" + parentPath + "/exo:colon.doc&lang=en";
     applyUserSession("john", "gtn", "collaboration");
     manageableRepository = repositoryService.getCurrentRepository();
     Session session = WCMCoreUtils.getSystemSessionProvider().getSession(COLLABORATION_WS, manageableRepository);
     Node rootNode = session.getRootNode();
-    Node sites = rootNode.addNode("sites");
+    Node sites = rootNode.addNode(parentPath);
     sites.addNode("exo:colon.doc");
     rootNode.save();
     ContainerResponse response = service(HTTPMethods.GET.toString(), restPath, StringUtils.EMPTY, null, null);
