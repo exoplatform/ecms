@@ -33,7 +33,8 @@
               dark
               item-text="displayName"
               item-value="name"
-              append-icon="">
+              append-icon=""
+              @input="selectionChange">
               <template slot="selection" slot-scope="data">
                 <v-chip
                   :input-value="data"
@@ -65,15 +66,28 @@
               color="#578dc9"
               dense
               @change="toggleEverybody">
-              <template slot="label"><label style="color: #333">Everybody</label></template>  
+              <template slot="label"><label style="color: #333">{{ this.$t('editors.admin.modal.Everybody') }}</label></template>  
             </v-checkbox>
-            <label class="searchLabel" style="margin-bottom: 10px">{{ this.$t('editors.admin.modal.WithPermissions') }}</label>
-            <v-col cols="12" md="8"><ul><li v-for="permission in existingPermissions" :key="permission">{{ permission }}
-              <i 
-                v-if="permission.length > 0"
-                class="uiIconDelete permissionsItemDelete"
-                @click="removePermission(permission)"></i>
-            </li></ul></v-col>
+            <div v-if="!accessibleToAll">
+              <label class="searchLabel" style="margin-bottom: 10px">{{ this.$t('editors.admin.modal.WithPermissions') }}</label>
+              <v-col 
+                v-if="editedItems.length > 0" 
+                cols="12" 
+                md="8">
+                <ul class="permissionsList">
+                  <li v-for="permission in editedItems" :key="permission">{{ permission }}
+                    <i 
+                      v-if="permission.length > 0"
+                      class="uiIconDelete permissionsItemDelete"
+                      @click="removePermission(permission)"></i>
+                  </li>
+                </ul>
+              </v-col>
+              <v-col 
+                v-else 
+                cols="12" 
+                md="8"><label>{{ this.$t('editors.admin.modal.None') }}</label></v-col>
+            </div>
             <!-- <ul v-if="items.length > 0" class="permissionsList">
               <li v-for="permission in items" :key="permission.name" class="permissionsItem permissionsItem--large">
                 <v-tooltip bottom>
@@ -141,7 +155,7 @@ export default {
   computed: {
     editedItems: function() {
       return this.select 
-        ? this.existingPermissions.concat(this.select.filter(item => this.existingPermissions.indexOf(item) < 0))
+        ? this.existingPermissions.concat(this.select.filter(item => this.existingPermissions.indexOf(item) < 0 ))
         : this.existingPermissions;
     },
     accessibleToAll: function() {
@@ -185,11 +199,18 @@ export default {
       },
       removePermission(name) {
         this.existingPermissions = this.existingPermissions.filter(perm => perm !== name);
+        this.select = this.select.filter(perm => perm !== name);
       },
       toggleEverybody(newValue) {
         if (newValue) {
           this.existingPermissions = ["*"];
+          this.select = [];
         } else if (this.existingPermissions.indexOf("*") !== -1) {
+          this.existingPermissions.splice(this.existingPermissions.indexOf("*"), 1);
+        }
+      },
+      selectionChange(selection) {
+        if (selection.length > 0 && this.existingPermissions.indexOf("*") !== -1) {
           this.existingPermissions.splice(this.existingPermissions.indexOf("*"), 1);
         }
       }
@@ -218,7 +239,6 @@ export default {
 
   &Content {
     padding: 15px !important;
-    min-height: 350px;
   }
 
   &Name {
@@ -256,6 +276,7 @@ export default {
   }
   
   .permissionsList {
+    min-height: 100px;
     max-height: 300px;
     padding-left: 0px;
     overflow-y: auto;

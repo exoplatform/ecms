@@ -37,6 +37,8 @@
         <title>Edit permissions</title>
         <SearchLabel>Enter user or group name</SearchLabel>
         <WithPermissions>Who has permission</WithPermissions>
+        <None>None</None>
+        <Everybody>Everybody</Everybody>
       </modal>
       <onlyoffice>
         <name>ONLYOFFICE</name>
