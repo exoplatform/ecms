@@ -19,6 +19,7 @@
               :items="items"
               :search-input.sync="search"
               :menu-props="{ maxHeight: 200 }"
+              return-object
               color="#333"
               class="searchPermissions"
               cache-items
@@ -71,16 +72,26 @@
             </v-checkbox>
             <div v-if="!accessibleToAll">
               <label class="searchLabel" style="margin-bottom: 10px">{{ this.$t('editors.admin.modal.WithPermissions') }}</label>
-              <v-col 
-                v-if="editedItems.length > 0" 
-                cols="12" 
-                md="8">
-                <ul class="permissionsList">
-                  <li v-for="permission in editedItems" :key="permission">{{ permission }}
+              <v-col v-if="editedItems.length > 0">
+                <ul v-if="items.length > 0" class="permissionsList">
+                  <li 
+                    v-for="permission in editedItems" 
+                    :key="permission.name" 
+                    class="permissionsItem permissionsItem--large">
+                    <v-tooltip bottom>
+                      <template v-slot:activator="{ on }">
+                        <div v-on="on">
+                          <img :src="permission.avatarUrl" class="permissionsItemAvatar permissionsItemAvatar--large">
+                          <span class="permissionsItemName">{{ permission.displayName }}</span>
+                        </div>
+                      </template>
+                      <span>{{ permission.name }}</span>
+                    </v-tooltip>
                     <i 
-                      v-if="permission.length > 0"
+                      v-show="editedItems.length > 0 && permission.displayName"
                       class="uiIconDelete permissionsItemDelete"
-                      @click="removePermission(permission)"></i>
+                      @click="removePermission(permission.name)">
+                    </i>
                   </li>
                 </ul>
               </v-col>
@@ -89,23 +100,6 @@
                 cols="12" 
                 md="8"><label>{{ this.$t('editors.admin.modal.None') }}</label></v-col>
             </div>
-            <!-- <ul v-if="items.length > 0" class="permissionsList">
-              <li v-for="permission in items" :key="permission.name" class="permissionsItem permissionsItem--large">
-                <v-tooltip bottom>
-                  <template v-slot:activator="{ on }">
-                    <div v-on="on">
-                      <img :src="permission.avatarUrl" class="permissionsItemAvatar permissionsItemAvatar--large">
-                      <span class="permissionsItemName">{{ permission.displayName }}</span>
-                    </div>
-                  </template>
-                  <span>{{ permission.name }}</span>
-                </v-tooltip>
-                <i 
-                  class="uiIconDelete permissionsItemDelete"
-                  @click="removePermission(permission.name)">
-                </i>
-              </li>
-            </ul> -->
           </v-col>
         </v-row>
       </v-container>
@@ -161,7 +155,7 @@ export default {
         : this.existingPermissions;
     },
     accessibleToAll: function() {
-      return this.existingPermissions.indexOf("*") !== -1;
+      return this.existingPermissions.some(({ name }) => name === "*");
     }
   },
   watch: {
@@ -184,11 +178,12 @@ export default {
         });
       },
       handleCloseClick(value) {
-        this.select = this.select.filter(item => item !== value.name);
+        this.select = this.select.filter(({ name }) => name !== value.name);
       },
       saveChanges() {
         const updateRest = this.provider.links.filter(({ rel, href }) => rel === "update")[0].href;
-        postInfo(updateRest, { permissions: this.editedItems }).then(data => { 
+        const newPermissions = this.editedItems.map(({ name }) => name);
+        postInfo(updateRest, { permissions: newPermissions }).then(data => { 
           this.error = null;
           this.provider.permissions = this.editedItems;
           this.closeDialog();
@@ -201,21 +196,21 @@ export default {
         this.existingPermissions = this.provider.permissions;
         this.$emit('onDialogClose');
       },
-      removePermission(name) {
-        this.existingPermissions = this.existingPermissions.filter(perm => perm !== name);
-        this.select = this.select.filter(perm => perm !== name);
+      removePermission(itemName) {
+        this.existingPermissions = this.existingPermissions.filter(({ name }) => name !== itemName);
+        this.select = this.select.filter(({ name }) => name !== itemName);
       },
       toggleEverybody(newValue) {
         if (newValue) {
-          this.existingPermissions = ["*"];
+          this.existingPermissions = [{ name: "*", displayName: null, avatarUrl: null }];
           this.select = [];
-        } else if (this.existingPermissions.indexOf("*") !== -1) {
-          this.existingPermissions.splice(this.existingPermissions.indexOf("*"), 1);
+        } else if (this.existingPermissions.some(({ name }) => name === "*")) {
+          this.existingPermissions = this.existingPermissions.filter(({ name }) => name !== "*");
         }
       },
       selectionChange(selection) {
-        if (selection.length > 0 && this.existingPermissions.indexOf("*") !== -1) {
-          this.existingPermissions.splice(this.existingPermissions.indexOf("*"), 1);
+        if (selection.length > 0 && this.existingPermissions.some(({ name }) => name === "*")) {
+          this.existingPermissions = this.existingPermissions.filter(({ name }) => name !== "*");
         }
       }
   }
@@ -281,7 +276,7 @@ export default {
   
   .permissionsList {
     min-height: 100px;
-    max-height: 300px;
+    max-height: 200px;
     padding-left: 0px;
     overflow-y: auto;
   }

@@ -11,7 +11,7 @@
       </v-row>
       <v-row>
         <v-col xs12>
-          <v-simple-table class="providersTable">
+          <v-simple-table class="uiGrid table table-hover table-striped providersTable">
             <template v-slot:default>
               <thead>
                 <tr>
@@ -23,22 +23,25 @@
               </thead>
               <tbody v-if="providers.length > 0">
                 <tr v-for="item in providers" :key="item.provider">
-                  <td>{{ $t(`editors.admin.${item.provider}.name`) }}</td>
-                  <td>{{ $t(`editors.admin.${item.provider}.description`) }}</td>
-                  <td>
-                    <v-switch
-                      :input-value="item.active"
-                      color="#568dc9"
-                      @change="changeStatus(item)"/>
+                  <td><div>{{ $t(`editors.admin.${item.provider}.name`) }}</div></td>
+                  <td><div>{{ $t(`editors.admin.${item.provider}.description`) }}</div></td>
+                  <td class="center actionContainer">
+                    <div>
+                      <v-switch
+                        :input-value="item.active"
+                        color="#568dc9"
+                        @change="changeStatus(item)"/>
+                    </div>
                   </td>
-                  <td class="text-center">
-                    <v-btn 
-                      text
-                      icon
-                      color="indigo" 
+                  <td class="center actionContainer">
+                    <a 
+                      data-placement="bottom" 
+                      rel="tooltip" 
+                      class="actionIcon" 
+                      data-original-title="Edit" 
                       @click.stop="changeSettings(item)">
-                      <i class="uiIconSetting"></i>
-                    </v-btn>
+                      <i class="uiIconEdit uiIconLightGray"></i>
+                    </a>
                   </td>
                 </tr>
               </tbody>
@@ -122,6 +125,15 @@ export default {
     position: absolute;
     width: 100%;
     margin-left: 10px;
+  }
+}
+
+.providersTable {
+  border-left: 0;
+
+  th, td {
+    height: 20px;
+    padding: 5px 15px;
   }
 }
 
