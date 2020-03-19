@@ -50,6 +50,7 @@
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
       <artifactId>ecms-core-services</artifactId>
+      <scope>provided</scope>
     </dependency>
   </dependencies>
   <build>

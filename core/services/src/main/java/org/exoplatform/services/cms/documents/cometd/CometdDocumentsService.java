@@ -12,8 +12,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 
+import javax.annotation.PostConstruct;
 import javax.inject.Inject;
-import javax.jcr.RepositoryException;
 
 import org.cometd.annotation.Param;
 import org.cometd.annotation.ServerAnnotationProcessor;
@@ -34,9 +34,13 @@ import org.exoplatform.commons.utils.PropertyManager;
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.component.RequestLifeCycle;
+import org.exoplatform.services.cms.documents.DocumentService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 
+/**
+ * The Class CometdDocumentsService.
+ */
 public class CometdDocumentsService implements Startable {
 
   /**
@@ -64,6 +68,12 @@ public class CometdDocumentsService implements Startable {
       this.namePrefix = namePrefix;
     }
 
+    /**
+     * New thread.
+     *
+     * @param r the r
+     * @return the thread
+     */
     public Thread newThread(Runnable r) {
       Thread t = new Thread(group, r, namePrefix + threadNumber.getAndIncrement(), 0) {
 
@@ -200,15 +210,19 @@ public class CometdDocumentsService implements Startable {
 
   /** The call handlers. */
   protected final ExecutorService       eventsHandlers;
+  
+  /** The document service. */
+  protected final DocumentService documentService;  
 
   /**
    * Instantiates the CometdOnlyofficeService.
    *
    * @param exoBayeux the exoBayeux
-   * @param onlyofficeEditorService the onlyoffice editor service
+   * @param documentService the document service
    */
-  public CometdDocumentsService(EXoContinuationBayeux exoBayeux) {
+  public CometdDocumentsService(EXoContinuationBayeux exoBayeux, DocumentService documentService) {
     this.exoBayeux = exoBayeux;
+    this.documentService = documentService;
     this.service = new CometdService();
     this.eventsHandlers = createThreadExecutor(THREAD_PREFIX, MAX_FACTOR, QUEUE_FACTOR);
   }
@@ -295,12 +309,18 @@ public class CometdDocumentsService implements Startable {
     private ServerSession serverSession;
 
     /**
+     * Post construct.
+     */
+    @PostConstruct
+    public void postConstruct() {
+
+    }
+    
+    /**
      * Subscribe document events.
      *
      * @param message the message.
      * @param docId the docId.
-     * @throws OnlyofficeEditorException the onlyoffice editor exception
-     * @throws RepositoryException the repository exception
      */
     @Subscription(CHANNEL_NAME_PARAMS)
     public void subscribeDocuments(Message message, @Param("docId") String docId) {

@@ -243,28 +243,19 @@
       return deferred;
     };
     
-    this.init = function(userId, workspace, cometdConf) {
-      currentWorkspace = workspace;
-      if (userId == currentUserId) {
-        log("Already initialized user: " + userId);
-      } else if (userId) {
-        currentUserId = userId;
-        log("Initialize user: " + userId);
-        if (cometdConf) {
-          cCometD.configure({
-            "url" : prefixUrl + cometdConf.path,
-            "exoId" : userId,
-            "exoToken" : cometdConf.token,
-            "maxNetworkDelay" : 30000,
-            "connectTimeout" : 60000
-          });
-          cometdContext = {
-            "exoContainerName" : cometdConf.containerName
-          };
-          cometd = cCometD;
-        }
-      } else {
-        log("Cannot initialize user: " + userId);
+    this.init = function(userId, cometdConf) {
+      if (cometdConf) {
+        cCometD.configure({
+          "url" : prefixUrl + cometdConf.path,
+          "exoId" : userId,
+          "exoToken" : cometdConf.token,
+          "maxNetworkDelay" : 30000,
+          "connectTimeout" : 60000
+        });
+        cometdContext = {
+          "exoContainerName" : cometdConf.containerName
+        };
+        cometd = cCometD;
       }
     }
     
@@ -336,20 +327,13 @@
       }
     };
     
-    this.editorOpened = function(provider, fileId) {
+    this.onEditorOpen = function(fileId, workspace, provider) {
       log("Editor opened. Provider: " + provider + ", fileId: " + fileId);
-      publishDocument(fileId, {
-        "type" : DOCUMENT_OPENED,
-        "provider" : provider
-      });
+      log("CONTEXT" + cometdContext.exoContainerName)
     }
 
-    this.editorClosed = function(provider, fileId) {
+    this.onEditorClose = function(fileId, workspace, provider) {
       log("Editor closed. Provider: " + provider + ", fileId: " + fileId);
-      publishDocument(fileId, {
-        "type" : DOCUMENT_CLOSED,
-        "provider" : provider
-      });
     }
     
     /**

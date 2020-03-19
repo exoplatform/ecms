@@ -19,7 +19,6 @@ package org.exoplatform.services.cms.documents.impl;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.net.URLEncoder;
-import java.security.acl.Permission;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -47,6 +46,9 @@ import org.exoplatform.commons.api.settings.SettingValue;
 import org.exoplatform.commons.api.settings.data.Context;
 import org.exoplatform.commons.api.settings.data.Scope;
 import org.exoplatform.commons.utils.CommonsUtils;
+import org.exoplatform.container.ExoContainer;
+import org.exoplatform.container.ExoContainerContext;
+import org.exoplatform.container.PortalContainer;
 import org.exoplatform.container.component.ComponentPlugin;
 import org.exoplatform.container.xml.PortalContainerInfo;
 import org.exoplatform.portal.config.UserPortalConfig;
@@ -61,6 +63,8 @@ import org.exoplatform.services.cms.documents.DocumentEditorPlugin;
 import org.exoplatform.services.cms.documents.DocumentService;
 import org.exoplatform.services.cms.documents.DocumentTemplate;
 import org.exoplatform.services.cms.documents.NewDocumentTemplatePlugin;
+import org.exoplatform.services.cms.documents.cometd.CometdConfig;
+import org.exoplatform.services.cms.documents.cometd.CometdDocumentsService;
 import org.exoplatform.services.cms.documents.exception.EditorProviderNotFoundException;
 import org.exoplatform.services.cms.documents.model.Document;
 import org.exoplatform.services.cms.documents.model.EditorProvider;
@@ -83,7 +87,9 @@ import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+import org.exoplatform.web.application.JavascriptManager;
 import org.exoplatform.webui.application.WebuiRequestContext;
+import org.exoplatform.ws.frameworks.json.impl.JsonException;
 
 /**
  * Created by The eXo Platform SAS Author : eXoPlatform exo@exoplatform.com Mar
@@ -657,12 +663,20 @@ public class DocumentServiceImpl implements DocumentService {
     }
     node.setProperty(EXO_CURRENT_EDITOR_PROP, provider);
     node.save();  
-    if(LOG.isDebugEnabled()) {
-      if(provider != null) {
-        LOG.debug("Document {} [{}] has been opened in {} editor", uuid, workspace, provider);
-      } else {
-        LOG.debug("Document {} [{}] has been closed in all editors", uuid, workspace);
-      }
+  }
+
+
+  @Override
+  public void initDocumentEditorsModule() {
+    CometdDocumentsService cometdService = ExoContainerContext.getCurrentContainer().getComponentInstanceOfType(CometdDocumentsService.class);
+    String userId = ConversationState.getCurrent().getIdentity().getUserId();
+    CometdConfig cometdConf = new CometdConfig(cometdService.getCometdServerPath(), cometdService.getUserToken(userId), PortalContainer.getCurrentPortalContainerName());
+    WebuiRequestContext context = WebuiRequestContext.getCurrentInstance();
+    JavascriptManager js = context.getJavascriptManager();
+    try {
+      js.require("SHARED/editorbuttons", "editorbuttons").addScripts("editorbuttons.init('" + userId + "', " + cometdConf.toJSON() + ");");
+    } catch (JsonException e) {
+      LOG.error("Cannot convert to JSON cometd configuratuion for editors module. {}", e.getMessage());
     }
   }
   
@@ -707,6 +721,5 @@ public class DocumentServiceImpl implements DocumentService {
     Session session = sp.getSession(workspace, repoService.getCurrentRepository());
     return session.getNodeByUUID(uuid);
   }
-
 
 }

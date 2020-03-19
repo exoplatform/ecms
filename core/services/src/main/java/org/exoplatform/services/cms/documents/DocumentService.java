@@ -214,6 +214,12 @@ public interface DocumentService {
   public void setCurrentDocumentEditor(String uuid, String workspace, String provider) throws RepositoryException;
   
   /**
+   * Inits document editors JS module to the current page.
+   * 
+   */
+  public void initDocumentEditorsModule();
+  
+  /**
    * NewDocumentTypesConfig contains all registered templates for specified provider.
    */
   public static class DocumentTemplatesConfig {
