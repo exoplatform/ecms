@@ -18,7 +18,7 @@
               :loading="loading"
               :items="items"
               :search-input.sync="search"
-              :menu-props="{ maxHeight: 200 }"
+              :menu-props="{ maxHeight: 140 }"
               return-object
               color="#333"
               class="searchPermissions"
@@ -61,7 +61,7 @@
           </v-col>
         </v-row>
         <v-row>
-          <v-col>
+          <v-col class="permissionsContainer">
             <v-checkbox 
               v-model="accessibleToAll"
               ripple="false" 
@@ -73,7 +73,7 @@
             <div v-if="!accessibleToAll">
               <label class="searchLabel" style="margin-bottom: 10px">{{ this.$t('editors.admin.modal.WithPermissions') }}</label>
               <v-col v-if="editedItems.length > 0">
-                <ul v-if="items.length > 0" class="permissionsList">
+                <ul class="permissionsList">
                   <li 
                     v-for="permission in editedItems" 
                     :key="permission.name" 
@@ -98,7 +98,9 @@
               <v-col 
                 v-else 
                 cols="12" 
-                md="8"><label>{{ this.$t('editors.admin.modal.None') }}</label></v-col>
+                md="8">
+                <label>{{ this.$t('editors.admin.modal.None') }}</label>
+              </v-col>
             </div>
           </v-col>
         </v-row>
@@ -238,6 +240,7 @@ export default {
 
   &Content {
     padding: 15px !important;
+    max-height: 550px;
   }
 
   &Name {
@@ -273,10 +276,13 @@ export default {
       font-size: 13px;
     }
   }
+
+  .permissionsContainer {
+    min-height: 100px;
+  }
   
   .permissionsList {
     min-height: 100px;
-    max-height: 200px;
     padding-left: 0px;
     overflow-y: auto;
   }

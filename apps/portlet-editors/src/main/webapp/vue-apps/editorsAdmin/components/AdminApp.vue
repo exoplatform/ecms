@@ -11,10 +11,10 @@
       </v-row>
       <v-row>
         <v-col xs12>
-          <v-simple-table class="uiGrid table table-hover table-striped providersTable">
+          <v-simple-table :dense="true" class="uiGrid table table-hover table-striped providersTable">
             <template v-slot:default>
               <thead>
-                <tr>
+                <tr class="providersTableRow">
                   <th class="text-left">{{ $t('editors.admin.table.Provider') }}</th>
                   <th class="text-left">{{ $t('editors.admin.table.Description') }}</th>
                   <th class="text-left" style="width: 5%">{{ $t('editors.admin.table.Active') }}</th>
@@ -22,7 +22,10 @@
                 </tr>
               </thead>
               <tbody v-if="providers.length > 0">
-                <tr v-for="item in providers" :key="item.provider">
+                <tr 
+                  v-for="item in providers" 
+                  :key="item.provider" 
+                  class="providersTableRow">
                   <td><div>{{ $t(`editors.admin.${item.provider}.name`) }}</div></td>
                   <td><div>{{ $t(`editors.admin.${item.provider}.description`) }}</div></td>
                   <td class="center actionContainer">
@@ -131,9 +134,19 @@ export default {
 .providersTable {
   border-left: 0;
 
-  th, td {
-    height: 20px;
-    padding: 5px 15px;
+  &Row {
+    th, td {
+      height: 20px;
+      padding: 5px 15px;
+    }
+
+    &:nth-child(odd):hover>td {
+      background: #f6f7fa !important;
+    }
+
+    &:nth-child(even):hover>td {
+      background: #fff !important;
+    }
   }
 }
 
