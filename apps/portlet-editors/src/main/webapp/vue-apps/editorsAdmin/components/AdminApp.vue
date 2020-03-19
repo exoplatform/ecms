@@ -92,12 +92,14 @@ export default {
     },
     methods: {
         getProviders() {
+          // services object contains urls for requests
           getInfo(this.services.providers).then(data => {
             this.error = null;
             this.providers = data.editors;
           }).catch(err => { this.error = parsedErrorMsg(err); });
         },
         changeStatus(provider) {
+          // getting rest for updating provider status
             const updateRest = provider.links.filter(({ rel, href }) => rel === "update")[0].href;
             postInfo(updateRest, { active: !provider.active }).then(data => { 
                 this.error = null;
@@ -109,6 +111,7 @@ export default {
             }).catch(err => this.error = parsedErrorMsg(err));
       },
       changeSettings(item) {
+        // settings selectedProvider before passing it to dialog
         this.selectedProvider = item;
         this.showDialog = true;
       }

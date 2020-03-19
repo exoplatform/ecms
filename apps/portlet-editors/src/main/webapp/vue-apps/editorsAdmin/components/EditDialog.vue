@@ -151,11 +151,16 @@ export default {
       }
   },
   computed: {
+    // contains items with user changes, reseting on window close or cancel
     editedItems: function() {
-      return this.select 
-        ? this.existingPermissions.concat(this.select.filter(item => this.existingPermissions.indexOf(item) < 0 ))
-        : this.existingPermissions;
+      let updated = this.existingPermissions;
+      if (this.select) {
+        updated = this.existingPermissions.concat(this.select);
+        updated = updated.filter((item, i, self) => i === self.findIndex(({ name }) => name === item.name));
+      }
+      return updated;
     },
+    // define checkbox status: checked if everybody has access
     accessibleToAll: function() {
       return this.existingPermissions.some(({ name }) => name === "*");
     }
@@ -169,48 +174,53 @@ export default {
     }
   },
   methods: {
+      // updating items in dropdown depend on user input v
       querySelections (v) {
         this.loading = true;
         getInfo(`${this.searchUrl}/${v}`).then(data => {
-          this.items = data.identities.filter(identity => ({
-            displayName: (identity.displayName || '').toLowerCase().indexOf((v || '').toLowerCase()) > -1,
-            ...identity
-          }));
+          this.items = data.identities.filter(({ displayName }) => (displayName || '').toLowerCase().indexOf((v || '').toLowerCase()) > -1);
           this.loading = false;
         });
       },
+      // removes selected item from list and selection
       handleCloseClick(value) {
         this.select = this.select.filter(({ name }) => name !== value.name);
       },
       saveChanges() {
         const updateRest = this.provider.links.filter(({ rel, href }) => rel === "update")[0].href;
+        // form array with permission names before sending request
         const newPermissions = this.editedItems.map(({ name }) => name);
         postInfo(updateRest, { permissions: newPermissions }).then(data => { 
           this.error = null;
           this.provider.permissions = this.editedItems;
+          // saving new permissions before closing
           this.closeDialog();
         }).catch(err => { this.error = parsedErrorMsg(err) });
       },
       closeDialog() {
+        // reset and clearing user changes
         this.error = null;
         this.editedItems = [];
         this.select = null;
         this.existingPermissions = this.provider.permissions;
         this.$emit('onDialogClose');
       },
+      // removing permission from list and also from selection
       removePermission(itemName) {
         this.existingPermissions = this.existingPermissions.filter(({ name }) => name !== itemName);
-        this.select = this.select.filter(({ name }) => name !== itemName);
+        if (this.select) { this.select = this.select.filter(({ name }) => name !== itemName); }
       },
+      // enables/desables permission for everyone
       toggleEverybody(newValue) {
         if (newValue) {
           this.existingPermissions = [{ name: "*", displayName: null, avatarUrl: null }];
           this.select = [];
         } else if (this.existingPermissions.some(({ name }) => name === "*")) {
-          this.existingPermissions = this.existingPermissions.filter(({ name }) => name !== "*");
+          this.existingPermissions = [];
         }
       },
       selectionChange(selection) {
+        // if everyone permission enabled, it will be automatically disabled in case of some another permission selected
         if (selection.length > 0 && this.existingPermissions.some(({ name }) => name === "*")) {
           this.existingPermissions = this.existingPermissions.filter(({ name }) => name !== "*");
         }

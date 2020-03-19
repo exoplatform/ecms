@@ -14,7 +14,12 @@ export function getInfo(link) {
 export function postInfo(link, postData) {
   let requestBody;
   for (const prop in postData) {
-    requestBody = `${encodeURIComponent(prop)}=${encodeURIComponent(postData[prop])}`;
+    if (Array.isArray(postData[prop])) {
+      const formArray = postData[prop].map(item => `${encodeURIComponent(prop)}=${encodeURIComponent(item)}`);
+      requestBody = formArray.join("&");
+    } else {
+      requestBody = `${encodeURIComponent(prop)}=${encodeURIComponent(postData[prop])}`;
+    }
   }
   return fetch(link, {
     method: 'POST',
