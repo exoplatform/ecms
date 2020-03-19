@@ -3,9 +3,9 @@
 @font-face {
 	font-family: 'icomoon';
 	src: url('fonts/icomoon.eot?p3wb3b');
-	src: url('fonts/icomoon.eot?p3wb3b#iefix') format('embedded-opentype'), 
+	src: url('fonts/icomoon.eot?p3wb3b#iefix') format('embedded-opentype'),
 		url('fonts/icomoon.ttf?p3wb3b') format('truetype'),
-		url('fonts/icomoon.woff?p3wb3b') format('woff'), 
+		url('fonts/icomoon.woff?p3wb3b') format('woff'),
 		url('fonts/icomoon.svg?p3wb3b#icomoon') format('svg');
 	font-weight: normal;
 	font-style: normal;
@@ -234,4 +234,9 @@
 
 .picon.picon-process-stop {
 	background-image: url("icons/oxygen/16/actions/process-stop.png")
+}
+
+#CloudDriveConnectDialog .actionIcon {
+	text-align: left;
+	margin-right: 1px;
 }
