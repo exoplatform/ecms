@@ -119,9 +119,9 @@ public class DocumentServiceImpl implements DocumentService {
   private LinkManager linkManager;
   private PortalContainerInfo portalContainerInfo;
   private Map<String, DocumentMetadataPlugin> metadataPlugins = new HashMap<>();
-  private OrganizationService organization;
+  private OrganizationService organizationService;
 
-  public DocumentServiceImpl(ManageDriveService manageDriveService, Portal portal, SessionProviderService sessionProviderService, RepositoryService repoService, NodeHierarchyCreator nodeHierarchyCreator, LinkManager linkManager, PortalContainerInfo portalContainerInfo, OrganizationService organization) {
+  public DocumentServiceImpl(ManageDriveService manageDriveService, Portal portal, SessionProviderService sessionProviderService, RepositoryService repoService, NodeHierarchyCreator nodeHierarchyCreator, LinkManager linkManager, PortalContainerInfo portalContainerInfo, OrganizationService organizationService) {
     this.manageDriveService = manageDriveService;
     this.sessionProviderService = sessionProviderService;
     this.repoService = repoService;
@@ -129,7 +129,7 @@ public class DocumentServiceImpl implements DocumentService {
     this.portal = portal;
     this.linkManager = linkManager;
     this.portalContainerInfo = portalContainerInfo;
-    this.organization = organization;
+    this.organizationService = organizationService;
   }
 
   @Override
@@ -495,16 +495,16 @@ public class DocumentServiceImpl implements DocumentService {
       ResourceResolver resolver = appResolver.getResourceResolver(template.getPath());
       data = resolver.getInputStream(template.getPath());
       DocumentMetadataPlugin metadataPlugin = metadataPlugins.get(template.getExtension());
-      if(metadataPlugin != null) {
+      if(metadataPlugin != null && metadataPlugin.isExtensionSupported(template.getExtension())) {
         try {
           data = metadataPlugin.updateMetadata(template.getExtension(), data, new Date(), getCurrentUserDisplayName());
         } catch (DocumentExtensionNotSupportedException e) {
-          LOG.error("Document extension is not supported by metadata plugin. {}", e.getMessage());
+          LOG.error("Document extension is not supported by metadata plugin.", e);
         } catch (IOException e) {
-          LOG.error("Couldn't add metadata to the document from template. {}", e.getMessage());
+          LOG.error("Couldn't add metadata to the document from template.", e);
         } 
       } else {
-        LOG.warn("Couldn't add metadata to the document - DocumentMetadataPlugin is not set.");
+        LOG.warn("Couldn't find appropriate metadata plugin for the {} extension.", template.getExtension());
       }
     }
     // Add node
@@ -583,7 +583,7 @@ public class DocumentServiceImpl implements DocumentService {
   protected String getCurrentUserDisplayName() {
     String userId = ConversationState.getCurrent().getIdentity().getUserId();
     try {
-      return organization.getUserHandler().findUserByName(userId).getDisplayName();
+      return organizationService.getUserHandler().findUserByName(userId).getDisplayName();
     } catch (Exception e) {
       LOG.error("Error searching user " + userId, e);
       return userId;

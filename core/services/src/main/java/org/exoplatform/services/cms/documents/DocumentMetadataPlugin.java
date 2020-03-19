@@ -35,4 +35,12 @@ public interface DocumentMetadataPlugin {
    */
   List<String> getSupportedExtensions();
 
+  /**
+   * Checks if the provided extension supported by the metadata plugin.
+   * 
+   * @param extension the extension
+   * @return true if supported, false otherwise
+   */
+  boolean isExtensionSupported(String extension);
+
 }

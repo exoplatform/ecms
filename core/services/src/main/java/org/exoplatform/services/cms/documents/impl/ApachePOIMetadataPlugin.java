@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
@@ -32,19 +33,21 @@ import org.exoplatform.services.log.Log;
 public class ApachePOIMetadataPlugin extends BaseComponentPlugin implements DocumentMetadataPlugin {
 
   /** The Constant PPTX_EXTENSION. */
-  private static final String    PPTX_EXTENSION = ".pptx";
+  private static final String       PPTX_EXTENSION       = ".pptx";
 
   /** The Constant XLSX_EXTENSION. */
-  private static final String    XLSX_EXTENSION = ".xlsx";
+  private static final String       XLSX_EXTENSION       = ".xlsx";
 
   /** The Constant DOCX_EXTENSION. */
-  private static final String    DOCX_EXTENSION = ".docx";
+  private static final String       DOCX_EXTENSION       = ".docx";
+
+  private static final List<String> SUPPORTED_EXTENSIONS = Arrays.asList(DOCX_EXTENSION, XLSX_EXTENSION, PPTX_EXTENSION);
 
   /** The metadataFormat. */
-  private final SimpleDateFormat metadataFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+  private final SimpleDateFormat    metadataFormat       = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
 
   /** The Constant LOG. */
-  private static final Log       LOG            = ExoLogger.getLogger(ApachePOIMetadataPlugin.class);
+  private static final Log          LOG                  = ExoLogger.getLogger(ApachePOIMetadataPlugin.class);
 
   /**
    * Instantiates a new document metadata plugin impl.
@@ -61,29 +64,40 @@ public class ApachePOIMetadataPlugin extends BaseComponentPlugin implements Docu
                                     InputStream source,
                                     Date created,
                                     String creator) throws IOException, DocumentExtensionNotSupportedException {
-    POIXMLDocument document = getDocument(source, extension);
-    POIXMLProperties props = document.getProperties();
-    POIXMLProperties.CoreProperties coreProps = props.getCoreProperties();
-    coreProps.setCreator(creator);
-    coreProps.setCreated(metadataFormat.format(created));
     File tempFile = File.createTempFile("editor-document", ".tmp");
-    FileOutputStream fos = new FileOutputStream(tempFile);
-    document.write(fos);
-    document.close();
-    fos.close();
+    try (POIXMLDocument document = getDocument(source, extension); 
+         FileOutputStream fos = new FileOutputStream(tempFile))
+    {
+      POIXMLProperties props = document.getProperties();
+      POIXMLProperties.CoreProperties coreProps = props.getCoreProperties();
+      coreProps.setCreator(creator);
+      coreProps.setCreated(metadataFormat.format(created));
+      document.write(fos);
+    }
     return new DeleteOnCloseFileInputStream(tempFile);
   }
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
   public List<String> getSupportedExtensions() {
-    return Arrays.asList(DOCX_EXTENSION, XLSX_EXTENSION, PPTX_EXTENSION);
+    return SUPPORTED_EXTENSIONS;
+  }
+  
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public boolean isExtensionSupported(String extension) {
+    return SUPPORTED_EXTENSIONS.contains(extension);
   }
 
   /**
-   * Gets POIXMLDocument from inputStream and extension. Supports .docx, .xlsx and .pptx extensions.s
+   * Gets POIXMLDocument from inputStream and extension. Supports only {@value #SUPPORTED_EXTENSIONS}
    * 
    * @param source the source
-   * @param extension the extension
+   * @param extension the extension 
    * @return POIXMLDocument
    * @throws Exception the exception
    */
