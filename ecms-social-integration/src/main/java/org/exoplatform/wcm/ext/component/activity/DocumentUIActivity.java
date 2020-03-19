@@ -104,15 +104,13 @@ public class DocumentUIActivity extends FileUIActivity {
     CometdConfig cometdConf = new CometdConfig(cometdService.getCometdServerPath(),
                                                cometdService.getUserToken(requestContext.getRemoteUser()),
                                                PortalContainer.getCurrentPortalContainerName());
-    Node contentNode = getContentNode(0);
-    String workspace = contentNode.getSession().getWorkspace().getName();
     try {
-      require.addScripts("editorbuttons.init('" + requestContext.getRemoteUser() + "', '" + workspace + "', " + cometdConf.toJSON() + ");");
+      require.addScripts("editorbuttons.init('" + requestContext.getRemoteUser() + "' ," + cometdConf.toJSON() + ");");
     } catch (JsonException e) {
       LOG.warn("Cannot generate JSON for cometd configuration. {}", e.getMessage());
     }
-
     if (getFilesCount() == 1) {
+      Node contentNode = getContentNode(0);
       require.addScripts("editorbuttons.resetButtons();");
       // call plugins init handlers
       documentService.getRegisteredEditorPlugins().forEach(plugin -> {

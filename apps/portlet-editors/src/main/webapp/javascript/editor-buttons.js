@@ -73,6 +73,23 @@
     const DOCUMENT_CLOSED = "DOCUMENT_CLOSED";
     
     /**
+     * Parses comet message from JSON
+     */
+    var tryParseJson = function(message) {
+      var src = message.data ? message.data : (message.error ? message.error : message.failure);
+      if (src) {
+        try {
+          if (typeof src === "string" && (src.startsWith("{") || src.startsWith("["))) {
+            return JSON.parse(src);
+          }
+        } catch (e) {
+          log("Error parsing '" + src + "' as JSON: " + e, e);
+        }
+      }
+      return src;
+    };
+    
+    /**
      * Saves prefered provider.
      * 
      */
@@ -194,7 +211,7 @@
       var subscription = cometd.subscribe("/eXo/Application/documents/" + docId, function(message) {
         // Channel message handler
         var result = tryParseJson(message);
-        log("EVENT: " + message);
+        log("EVENT: " + result.type);
       }, cometdContext, function(subscribeReply) {
         // Subscription status callback
         if (subscribeReply.successful) {
@@ -329,12 +346,23 @@
     
     this.onEditorOpen = function(fileId, workspace, provider) {
       log("Editor opened. Provider: " + provider + ", fileId: " + fileId);
-      log("CONTEXT" + cometdContext.exoContainerName)
-    }
+      publishDocument(fileId, {
+        "type" : DOCUMENT_OPENED,
+        "provider" : provider,
+        "fileId" : fileId,
+        "workspace" : workspace
+      });
+    };
 
     this.onEditorClose = function(fileId, workspace, provider) {
       log("Editor closed. Provider: " + provider + ", fileId: " + fileId);
-    }
+      publishDocument(fileId, {
+        "type" : DOCUMENT_CLOSED,
+        "provider" : provider,
+        "fileId" : fileId,
+        "workspace" : workspace
+      });
+    };
     
     /**
      * Clears buttonsFns

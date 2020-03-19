@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
+import javax.jcr.RepositoryException;
 
 import org.cometd.annotation.Param;
 import org.cometd.annotation.ServerAnnotationProcessor;
@@ -33,6 +34,7 @@ import org.picocontainer.Startable;
 import org.exoplatform.commons.utils.PropertyManager;
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
+import org.exoplatform.container.PortalContainer;
 import org.exoplatform.container.component.RequestLifeCycle;
 import org.exoplatform.services.cms.documents.DocumentService;
 import org.exoplatform.services.log.ExoLogger;
@@ -215,7 +217,7 @@ public class CometdDocumentsService implements Startable {
   protected final DocumentService documentService;  
 
   /**
-   * Instantiates the CometdOnlyofficeService.
+   * Instantiates the CometdDocumentsService.
    *
    * @param exoBayeux the exoBayeux
    * @param documentService the document service
@@ -334,16 +336,36 @@ public class CometdDocumentsService implements Startable {
 
       Map<String, Object> data = message.getDataAsMap();
       String type = (String) data.get("type");
+      String workspace = (String) data.get("workspace");
+      String provider = (String) data.get("provider");
+      
+      eventsHandlers.submit(new ContainerCommand(PortalContainer.getCurrentPortalContainerName()) {
+        @Override
+        void onContainerError(String error) {
+          LOG.error("An error has occured in container: {}", containerName);
+        }
 
-      switch (type) {
-      case DOCUMENT_OPENED_EVENT: {
-        
-        break;
-      }
-      case DOCUMENT_CLOSED_EVENT:
-     
-        break;
-      }
+        @Override
+        void execute(ExoContainer exoContainer) {
+          switch (type) {
+          case DOCUMENT_OPENED_EVENT: {
+            try {
+              documentService.setCurrentDocumentEditor(docId, workspace, provider);
+            } catch (RepositoryException e) {
+              LOG.error("Cannot set current document editor provider", e);
+            }
+            break;
+          }
+          case DOCUMENT_CLOSED_EVENT:
+            try {
+              documentService.setCurrentDocumentEditor(docId, workspace, null);
+            } catch (RepositoryException e) {
+              LOG.error("Cannot remove current document editor provider", e);
+            }
+            break;
+          }
+        }
+      });
       if (LOG.isDebugEnabled()) {
         LOG.debug("Event published in " + message.getChannel() + ", docId: " + docId + ", data: " + message.getJSON());
       }
