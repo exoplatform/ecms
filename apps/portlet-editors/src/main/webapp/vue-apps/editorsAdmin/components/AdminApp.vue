@@ -32,7 +32,9 @@
                     <div>
                       <v-switch
                         :input-value="item.active"
+                        :ripple="false"
                         color="#568dc9"
+                        class="providersSwitcher"
                         @change="changeStatus(item)"/>
                     </div>
                   </td>
@@ -140,14 +142,20 @@ export default {
       padding: 5px 15px;
     }
 
-    &:nth-child(odd):hover>td {
+    &:nth-child(even):hover>td, &:nth-child(even)>td {
       background: #f6f7fa !important;
     }
 
-    &:nth-child(even):hover>td {
+    &:nth-child(odd):hover>td, &:nth-child(odd)>td {
       background: #fff !important;
     }
   }
+}
+
+.providersSwitcher {
+  padding: 0;
+  margin: 0;
+  height: 25px;
 }
 
 .alert {
