@@ -8,7 +8,7 @@
     <v-card-text class="popupContent providerContent">
       <v-container>
         <v-row class="providerName">
-          {{ $t(`editors.admin.${provider.provider}.name`) }}
+          {{ $t(`editors.admin.${provider.provider}.id`) }}
         </v-row>
         <v-row class="search">
           <v-col>
@@ -34,7 +34,7 @@
               dense
               dark
               item-text="displayName"
-              item-value="name"
+              item-value="id"
               append-icon=""
               @input="selectionChange">
               <template slot="selection" slot-scope="data">
@@ -76,7 +76,7 @@
                 <ul class="permissionsList">
                   <li 
                     v-for="permission in editedPermissions" 
-                    :key="permission.name" 
+                    :key="permission.id" 
                     class="permissionsItem permissionsItem--large">
                     <v-tooltip bottom>
                       <template v-slot:activator="{ on }">
@@ -85,12 +85,12 @@
                           <span class="permissionsItemName">{{ permission.displayName }}</span>
                         </div>
                       </template>
-                      <span>{{ permission.name }}</span>
+                      <span>{{ permission.id }}</span>
                     </v-tooltip>
                     <i 
                       v-show="editedPermissions.length > 0 && permission.displayName"
                       class="uiIconDelete permissionsItemDelete"
-                      @click="removePermission(permission.name)">
+                      @click="removePermission(permission.id)">
                     </i>
                   </li>
                 </ul>
@@ -125,7 +125,8 @@
 </template>
 
 <script>
-import { getInfo, postInfo, parsedErrorMsg } from "../EditorsAdminAPI";
+import { log } from "../error-log";
+import axios from "axios";
 
 export default {
   props: {
@@ -156,13 +157,13 @@ export default {
       let updated = this.existingPermissions;
       if (this.selectedItems) {
         updated = this.existingPermissions.concat(this.selectedItems);
-        updated = updated.filter((item, i, self) => i === self.findIndex(({ name }) => name === item.name));
+        updated = updated.filter((item, i, self) => i === self.findIndex(({ id }) => id === item.id));
       }
       return updated;
     },
     // define checkbox status: checked if everybody has access
     accessibleToAll: function() {
-      return this.existingPermissions.some(({ name }) => name === "*");
+      return this.existingPermissions.some(({ id }) => id === "*");
     }
   },
   watch: {
@@ -175,28 +176,40 @@ export default {
   },
   methods: {
       // updating items in dropdown depend on user input v
-      querySelections (v) {
+      async querySelections (v) {
         this.loading = true;
-        getInfo(`${this.searchUrl}/${v}`).then(data => {
-          this.searchResults = data.identities.filter(({ displayName }) => 
-            (displayName || '').toLowerCase().indexOf((v || '').toLowerCase()) > -1);
-          this.loading = false;
-        });
+        try {
+          const response = await axios.get(`${this.searchUrl}/${v}`);
+          if (response) {
+            this.searchResults = response.data.identities.filter(({ displayName }) => 
+              (displayName || '').toLowerCase().indexOf((v || '').toLowerCase()) > -1);
+            this.loading = false;
+          }
+        } catch(err) {
+          log("Failed to get search results");
+          this.error = err.response.data.message;
+        }
       },
       // removes selected item from list and selection
       removeSelection(value) {
-        this.selectedItems = this.selectedItems.filter(({ name }) => name !== value.name);
+        this.selectedItems = this.selectedItems.filter(({ id }) => id !== value.id);
       },
-      saveChanges() {
+      async saveChanges() {
         const updateRest = this.provider.links.filter(({ rel, href }) => rel === "update")[0].href;
         // form array with permission names before sending request
-        const newPermissions = this.editedPermissions.map(({ name }) => name);
-        postInfo(updateRest, { permissions: newPermissions }).then(data => { 
-          this.error = null;
-          this.provider.permissions = this.editedPermissions;
-          // saving new permissions before closing
-          this.closeDialog();
-        }).catch(err => { this.error = parsedErrorMsg(err) });
+        const newPermissions = this.editedPermissions.map(({ id }) => ({ id: id }));
+        try {
+          const response = await axios.post(updateRest, { permissions: newPermissions });
+          if (response) {
+            this.error = null;
+            this.provider.permissions = this.editedPermissions;
+            // saving new permissions before closing
+            this.closeDialog();
+          }
+        } catch(err) { 
+          log("Failed to update permissions");
+          this.error = err.response.data.message;
+        }
       },
       closeDialog() {
         // reset and clearing user changes
@@ -208,22 +221,22 @@ export default {
       },
       // removing permission from list and also from selection
       removePermission(itemName) {
-        this.existingPermissions = this.existingPermissions.filter(({ name }) => name !== itemName);
-        if (this.selectedItems) { this.selectedItems = this.selectedItems.filter(({ name }) => name !== itemName); }
+        this.existingPermissions = this.existingPermissions.filter(({ id }) => id !== itemName);
+        if (this.selectedItems) { this.selectedItems = this.selectedItems.filter(({ id }) => id !== itemName); }
       },
       // enables/desables permission for everyone
       toggleEverybody(newValue) {
         if (newValue) {
-          this.existingPermissions = [{ name: "*", displayName: null, avatarUrl: null }];
+          this.existingPermissions = [{ id: "*", displayName: null, avatarUrl: null }];
           this.selectedItems = [];
-        } else if (this.existingPermissions.some(({ name }) => name === "*")) {
+        } else if (this.existingPermissions.some(({ id }) => id === "*")) {
           this.existingPermissions = [];
         }
       },
       selectionChange(selection) {
         // if everyone permission enabled, it will be automatically disabled in case of some another permission selected
-        if (selection.length > 0 && this.existingPermissions.some(({ name }) => name === "*")) {
-          this.existingPermissions = this.existingPermissions.filter(({ name }) => name !== "*");
+        if (selection.length > 0 && this.existingPermissions.some(({ id }) => id === "*")) {
+          this.existingPermissions = this.existingPermissions.filter(({ id }) => id !== "*");
         }
       }
   }

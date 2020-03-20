@@ -69,7 +69,8 @@
 </template>
 
 <script>
-import { getInfo, postInfo, parsedErrorMsg } from "../EditorsAdminAPI";
+import { log } from "../error-log";
+import axios from "axios";
 
 export default {
     props: {
@@ -91,25 +92,37 @@ export default {
         this.getProviders();
     },
     methods: {
-        getProviders() {
+        async getProviders() {
           // services object contains urls for requests
-          getInfo(this.services.providers).then(data => {
-            this.error = null;
-            this.providers = data.editors;
-          }).catch(err => { this.error = parsedErrorMsg(err); });
+          try {
+            const response = await axios.get(this.services.providers);
+            if (response) { 
+              this.error = null;
+              this.providers = response.data.editors;
+            }
+          } catch(err) {
+            log("Unable to get providers");
+            this.error = err.response.data.message;
+          }
         },
-        changeStatus(provider) {
+        async changeStatus(provider) {
           // getting rest for updating provider status
             const updateRest = provider.links.filter(({ rel, href }) => rel === "update")[0].href;
-            postInfo(updateRest, { active: !provider.active }).then(data => { 
+            try {
+              const response = await axios.post(updateRest, { active: !provider.active });
+              if (response) {
                 this.error = null;
                 this.providers.map(p => {
                   if (p.provider === provider.provider) {
                     p.active = !provider.active;
                   }
-                })
-            }).catch(err => this.error = parsedErrorMsg(err));
-      },
+                });
+              }
+            } catch(err) {
+              log("Failed to change provider status");
+              this.error = err.response.data.message;
+            }
+        },
       changeSettings(item) {
         // settings selectedProvider before passing it to dialog
         this.selectedProvider = item;
