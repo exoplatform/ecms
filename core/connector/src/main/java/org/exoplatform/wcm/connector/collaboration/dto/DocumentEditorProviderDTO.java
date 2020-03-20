@@ -24,13 +24,21 @@ import java.util.List;
 public class DocumentEditorProviderDTO extends ResourceSupport {
 
   /** The provider. */
-  private final String           provider;
+  private String           provider;
 
   /** The active. */
-  private final boolean          active;
+  private Boolean          active;
 
   /** The permissions. */
-  private final List<Permission> permissions;
+  private List<Permission> permissions;
+
+  
+  /**
+   * Instantiates a new document editor provider DTO.
+   */
+  public DocumentEditorProviderDTO() {
+
+  }
 
   /**
    * Instantiates a new document editor provider DTO.
@@ -59,8 +67,35 @@ public class DocumentEditorProviderDTO extends ResourceSupport {
    *
    * @return the active
    */
-  public boolean getActive() {
+  public Boolean getActive() {
     return active;
+  }
+
+  /**
+   * Sets the provider.
+   *
+   * @param provider the new provider
+   */
+  public void setProvider(String provider) {
+    this.provider = provider;
+  }
+
+  /**
+   * Sets the active.
+   *
+   * @param active the new active
+   */
+  public void setActive(Boolean active) {
+    this.active = active;
+  }
+
+  /**
+   * Sets the permissions.
+   *
+   * @param permissions the new permissions
+   */
+  public void setPermissions(List<Permission> permissions) {
+    this.permissions = permissions;
   }
 
   /**
@@ -76,47 +111,54 @@ public class DocumentEditorProviderDTO extends ResourceSupport {
    * The Class Permission.
    */
   public static class Permission {
-    
+
     /** The name. */
-    protected final String name;
-    
+    protected String id;
+
     /** The display name. */
-    protected final String displayName;
-    
+    protected String displayName;
+
     /** The avatar url. */
-    protected final String avatarUrl;
-    
+    protected String avatarUrl;
+
+    /**
+     * Instantiates a new permission.
+     */
+    public Permission() {
+
+    }
+
     /**
      * Instantiates a new permission.
      *
-     * @param name the name
+     * @param id the id
      * @param displayName the display name
      * @param avatarUrl the avatar url
      */
-    public Permission(String name, String displayName, String avatarUrl) {
-      this.name = name;
+    public Permission(String id, String displayName, String avatarUrl) {
+      this.id = id;
       this.displayName = displayName;
       this.avatarUrl = avatarUrl;
     }
-    
+
     /**
      * Instantiates a new permission.
      *
-     * @param name the name
+     * @param id the id
      */
-    public Permission(String name) {
-      this.name = name;
+    public Permission(String id) {
+      this.id = id;
       displayName = null;
       avatarUrl = null;
     }
 
     /**
-     * Gets the name.
+     * Gets the id.
      *
-     * @return the name
+     * @return the id
      */
-    public String getName() {
-      return name;
+    public String getId() {
+      return id;
     }
 
     /**
@@ -136,6 +178,34 @@ public class DocumentEditorProviderDTO extends ResourceSupport {
     public String getAvatarUrl() {
       return avatarUrl;
     }
+
+    /**
+     * Sets the id.
+     *
+     * @param id the new id
+     */
+    public void setId(String id) {
+      this.id = id;
+    }
+
+    /**
+     * Sets the display name.
+     *
+     * @param displayName the new display name
+     */
+    public void setDisplayName(String displayName) {
+      this.displayName = displayName;
+    }
+
+    /**
+     * Sets the avatar url.
+     *
+     * @param avatarUrl the new avatar url
+     */
+    public void setAvatarUrl(String avatarUrl) {
+      this.avatarUrl = avatarUrl;
+    }
+
   }
 
 }
