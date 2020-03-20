@@ -125,8 +125,7 @@
 </template>
 
 <script>
-import { log } from "../error-log";
-import axios from "axios";
+import { postData, getData, parsedErrorMsg } from "../EditorsAdminAPI";
 
 export default {
   props: {
@@ -179,15 +178,12 @@ export default {
       async querySelections (v) {
         this.loading = true;
         try {
-          const response = await axios.get(`${this.searchUrl}/${v}`);
-          if (response) {
-            this.searchResults = response.data.identities.filter(({ displayName }) => 
-              (displayName || '').toLowerCase().indexOf((v || '').toLowerCase()) > -1);
-            this.loading = false;
-          }
+          const data = await getData(`${this.searchUrl}/${v}`);
+          this.searchResults = data.identities.filter(({ displayName }) => 
+            (displayName || '').toLowerCase().indexOf((v || '').toLowerCase()) > -1);
+          this.loading = false;
         } catch(err) {
-          log("Failed to get search results");
-          this.error = err.response.data.message;
+          this.error = parsedErrorMsg(err);
         }
       },
       // removes selected item from list and selection
@@ -199,16 +195,13 @@ export default {
         // form array with permission names before sending request
         const newPermissions = this.editedPermissions.map(({ id }) => ({ id: id }));
         try {
-          const response = await axios.post(updateRest, { permissions: newPermissions });
-          if (response) {
-            this.error = null;
-            this.provider.permissions = this.editedPermissions;
-            // saving new permissions before closing
-            this.closeDialog();
-          }
+          const data = await postData(updateRest, { permissions: newPermissions });
+          this.error = null;
+          this.provider.permissions = this.editedPermissions;
+          // saving new permissions before closing
+          this.closeDialog();
         } catch(err) { 
-          log("Failed to update permissions");
-          this.error = err.response.data.message;
+          this.error = parsedErrorMsg(err);
         }
       },
       closeDialog() {

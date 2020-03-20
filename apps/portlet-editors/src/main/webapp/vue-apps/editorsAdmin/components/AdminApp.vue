@@ -69,8 +69,7 @@
 </template>
 
 <script>
-import { log } from "../error-log";
-import axios from "axios";
+import { postData, getData, parsedErrorMsg } from "../EditorsAdminAPI";
 
 export default {
     props: {
@@ -95,32 +94,26 @@ export default {
         async getProviders() {
           // services object contains urls for requests
           try {
-            const response = await axios.get(this.services.providers);
-            if (response) { 
-              this.error = null;
-              this.providers = response.data.editors;
-            }
+            const data = await getData(this.services.providers);
+            this.error = null;
+            this.providers = data.editors;
           } catch(err) {
-            log("Unable to get providers");
-            this.error = err.response.data.message;
+            this.error = parsedErrorMsg(err);
           }
         },
         async changeStatus(provider) {
           // getting rest for updating provider status
             const updateRest = provider.links.filter(({ rel, href }) => rel === "update")[0].href;
             try {
-              const response = await axios.post(updateRest, { active: !provider.active });
-              if (response) {
-                this.error = null;
-                this.providers.map(p => {
-                  if (p.provider === provider.provider) {
-                    p.active = !provider.active;
-                  }
-                });
-              }
+              const data = await postData(updateRest, { active: !provider.active });
+              this.error = null;
+              this.providers.map(p => {
+                if (p.provider === provider.provider) {
+                  p.active = !provider.active;
+                }
+              });
             } catch(err) {
-              log("Failed to change provider status");
-              this.error = err.response.data.message;
+              this.error = parsedErrorMsg(err);
             }
         },
       changeSettings(item) {
