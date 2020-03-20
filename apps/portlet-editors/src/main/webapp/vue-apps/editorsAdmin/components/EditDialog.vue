@@ -14,9 +14,9 @@
           <v-col>
             <label class="searchLabel">{{ this.$t('editors.admin.modal.SearchLabel') }}</label>
             <v-autocomplete
-              v-model="select"
+              v-model="selectedItems"
               :loading="loading"
-              :items="items"
+              :items="searchResults"
               :search-input.sync="search"
               :menu-props="{ maxHeight: 140 }"
               return-object
@@ -44,7 +44,7 @@
                   light
                   small
                   class="chip--select-multi searchChip"
-                  @click:close="handleCloseClick(data.item)">
+                  @click:close="removeSelection(data.item)">
                   {{ data.item.displayName }}
                 </v-chip>
               </template>
@@ -72,10 +72,10 @@
             </v-checkbox>
             <div v-if="!accessibleToAll">
               <label class="searchLabel" style="margin-bottom: 10px">{{ this.$t('editors.admin.modal.WithPermissions') }}</label>
-              <v-col v-if="editedItems.length > 0">
+              <v-col v-if="editedPermissions.length > 0">
                 <ul class="permissionsList">
                   <li 
-                    v-for="permission in editedItems" 
+                    v-for="permission in editedPermissions" 
                     :key="permission.name" 
                     class="permissionsItem permissionsItem--large">
                     <v-tooltip bottom>
@@ -88,7 +88,7 @@
                       <span>{{ permission.name }}</span>
                     </v-tooltip>
                     <i 
-                      v-show="editedItems.length > 0 && permission.displayName"
+                      v-show="editedPermissions.length > 0 && permission.displayName"
                       class="uiIconDelete permissionsItemDelete"
                       @click="removePermission(permission.name)">
                     </i>
@@ -143,19 +143,19 @@ export default {
   data () {
       return {
         loading: false,
-        items: [],
+        searchResults: [],
         search: null,
-        select: null,
+        selectedItems: null,
         existingPermissions: this.provider.permissions,
         error: null
       }
   },
   computed: {
     // contains items with user changes, reseting on window close or cancel
-    editedItems: function() {
+    editedPermissions: function() {
       let updated = this.existingPermissions;
-      if (this.select) {
-        updated = this.existingPermissions.concat(this.select);
+      if (this.selectedItems) {
+        updated = this.existingPermissions.concat(this.selectedItems);
         updated = updated.filter((item, i, self) => i === self.findIndex(({ name }) => name === item.name));
       }
       return updated;
@@ -167,7 +167,7 @@ export default {
   },
   watch: {
     search (val) {
-      return val && val !== this.select && this.querySelections(val);
+      return val && val !== this.selectedItems && this.querySelections(val);
     },
     provider: function(newProvider) {
       this.existingPermissions = newProvider.permissions;
@@ -178,21 +178,22 @@ export default {
       querySelections (v) {
         this.loading = true;
         getInfo(`${this.searchUrl}/${v}`).then(data => {
-          this.items = data.identities.filter(({ displayName }) => (displayName || '').toLowerCase().indexOf((v || '').toLowerCase()) > -1);
+          this.searchResults = data.identities.filter(({ displayName }) => 
+            (displayName || '').toLowerCase().indexOf((v || '').toLowerCase()) > -1);
           this.loading = false;
         });
       },
       // removes selected item from list and selection
-      handleCloseClick(value) {
-        this.select = this.select.filter(({ name }) => name !== value.name);
+      removeSelection(value) {
+        this.selectedItems = this.selectedItems.filter(({ name }) => name !== value.name);
       },
       saveChanges() {
         const updateRest = this.provider.links.filter(({ rel, href }) => rel === "update")[0].href;
         // form array with permission names before sending request
-        const newPermissions = this.editedItems.map(({ name }) => name);
+        const newPermissions = this.editedPermissions.map(({ name }) => name);
         postInfo(updateRest, { permissions: newPermissions }).then(data => { 
           this.error = null;
-          this.provider.permissions = this.editedItems;
+          this.provider.permissions = this.editedPermissions;
           // saving new permissions before closing
           this.closeDialog();
         }).catch(err => { this.error = parsedErrorMsg(err) });
@@ -200,21 +201,21 @@ export default {
       closeDialog() {
         // reset and clearing user changes
         this.error = null;
-        this.editedItems = [];
-        this.select = null;
+        this.editedPermissions = [];
+        this.selectedItems = null;
         this.existingPermissions = this.provider.permissions;
         this.$emit('onDialogClose');
       },
       // removing permission from list and also from selection
       removePermission(itemName) {
         this.existingPermissions = this.existingPermissions.filter(({ name }) => name !== itemName);
-        if (this.select) { this.select = this.select.filter(({ name }) => name !== itemName); }
+        if (this.selectedItems) { this.selectedItems = this.selectedItems.filter(({ name }) => name !== itemName); }
       },
       // enables/desables permission for everyone
       toggleEverybody(newValue) {
         if (newValue) {
           this.existingPermissions = [{ name: "*", displayName: null, avatarUrl: null }];
-          this.select = [];
+          this.selectedItems = [];
         } else if (this.existingPermissions.some(({ name }) => name === "*")) {
           this.existingPermissions = [];
         }
