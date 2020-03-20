@@ -1,0 +1,59 @@
+/*
+ * Copyright (C) 2003-2020 eXo Platform SAS.
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License
+ * as published by the Free Software Foundation; either version 3
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, see<http://www.gnu.org/licenses/>.
+ */
+package org.exoplatform.wcm.connector.collaboration.dto;
+
+/**
+ * The Class Link.
+ */
+public class Link {
+
+  /** The rel. */
+  private final String rel;
+
+  /** The href. */
+  private final String href;
+  
+  /**
+   * Instantiates a new link.
+   *
+   * @param rel the rel
+   * @param href the href
+   */
+  public Link(String rel, String href) {
+    this.rel = rel;
+    this.href = href;
+  }
+
+  /**
+   * Gets the href.
+   *
+   * @return the href
+   */
+  public String getHref() {
+    return href;
+  }
+
+  /**
+   * Gets the rel.
+   *
+   * @return the rel
+   */
+  public String getRel() {
+    return rel;
+  }
+
+}

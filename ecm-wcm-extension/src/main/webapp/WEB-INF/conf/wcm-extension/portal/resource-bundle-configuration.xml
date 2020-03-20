@@ -46,6 +46,7 @@
           <value>locale.wcm.webui</value>
           <value>locale.wcm.resources.WCMResourceBundleConnector</value>
           <value>locale.navigation.group.platform.web-contributors</value>
+          <value>locale.navigation.group.platform.editors</value>
         </values-param>
         <values-param>
           <name>portal.resource.names</name>
@@ -54,6 +55,7 @@
           <value>locale.wcm.webui</value>
           <value>locale.wcm.resources.WCMResourceBundleConnector</value>
           <value>locale.navigation.group.platform.web-contributors</value>
+          <value>locale.navigation.group.platform.editors</value>
         </values-param>
       </init-params>
     </component-plugin>

@@ -21,12 +21,12 @@ import java.util.List;
 
 import javax.jcr.Node;
 
-import org.exoplatform.ecm.webui.component.explorer.documents.IsEditorPluginPresentFilter;
-import org.exoplatform.services.cms.documents.DocumentEditorPlugin;
+import org.exoplatform.services.cms.documents.DocumentEditorProvider;
 import org.exoplatform.services.cms.documents.DocumentService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.security.ConversationState;
+import org.exoplatform.services.security.Identity;
 import org.exoplatform.social.webui.activity.BaseUIActivity;
 import org.exoplatform.web.application.JavascriptManager;
 import org.exoplatform.web.application.RequireJS;
@@ -38,6 +38,7 @@ import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.ext.filter.UIExtensionFilter;
 import org.exoplatform.webui.ext.filter.UIExtensionFilters;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class CustomizedFileUIActivity.
  */
@@ -68,7 +69,7 @@ public class DocumentUIActivity extends FileUIActivity {
 
   /** The Constant FILTERS. */
   protected static final List<UIExtensionFilter> FILTERS        = Arrays.asList(new UIExtensionFilter[] {
-      new IsEditorPluginPresentFilter(), });
+      new IsEditorProviderPresentFilter(), });
 
   /**
    * Instantiates a new customized file UI activity.
@@ -88,16 +89,19 @@ public class DocumentUIActivity extends FileUIActivity {
     WebuiRequestContext requestContext = WebuiRequestContext.getCurrentInstance();
     JavascriptManager js = requestContext.getJavascriptManager();
     String activityId = getActivity().getId();
+    Identity identity = ConversationState.getCurrent().getIdentity();
     RequireJS require = js.require("SHARED/editorbuttons", "editorbuttons");
     if (getFilesCount() == 1) {
       Node node = getContentNode(0);
       require.addScripts("editorbuttons.resetButtons();");
       // call plugins init handlers
-      documentService.getRegisteredEditorPlugins().forEach(plugin -> {
+      documentService.getDocumentEditorProviders().forEach(provider -> {
         try {
-          plugin.initActivity(node.getUUID(), node.getSession().getWorkspace().getName(), activityId, STREAM_CONTEXT);
+          if (provider.isAvailableForUser(identity)) {
+            provider.initActivity(node.getUUID(), node.getSession().getWorkspace().getName(), activityId, STREAM_CONTEXT);
+          }
         } catch (Exception e) {
-          LOG.error("Cannot init activity from plugin {}, {}", plugin.getProviderName(), e.getMessage());
+          LOG.error("Cannot init activity from plugin {}, {}", provider.getProviderName(), e.getMessage());
         }
       });
       String prefferedEditor = getPrefferedEditor(node);
@@ -111,15 +115,18 @@ public class DocumentUIActivity extends FileUIActivity {
       Node node = getContentNode(index);
       require.addScripts("editorbuttons.resetButtons();");
       // call plugins init handlers
-      for (DocumentEditorPlugin plugin : documentService.getRegisteredEditorPlugins()) {
+      for (DocumentEditorProvider provider : documentService.getDocumentEditorProviders()) {
         try {
-          plugin.initPreview(node.getUUID(), node.getSession().getWorkspace().getName(), activityId, STREAM_CONTEXT, index);
+          if (provider.isAvailableForUser(identity)) {
+            provider.initPreview(node.getUUID(), node.getSession().getWorkspace().getName(), activityId, STREAM_CONTEXT, index);
+          }
         } catch (Exception e) {
-          LOG.error("Cannot init preview from plugin {}, {}", plugin.getProviderName(), e.getMessage());
+          LOG.error("Cannot init preview from plugin {}, {}", provider.getProviderName(), e.getMessage());
         }
       }
       String prefferedEditor = getPrefferedEditor(node);
-      require.addScripts("editorbuttons.initPreviewButtons('" + activityId + "', '" + index + "', '" + node.getUUID() + "', " + prefferedEditor + ");");
+      require.addScripts("editorbuttons.initPreviewButtons('" + activityId + "', '" + index + "', '" + node.getUUID() + "', "
+          + prefferedEditor + ");");
     }
     super.end();
   }
@@ -134,7 +141,6 @@ public class DocumentUIActivity extends FileUIActivity {
     return FILTERS;
   }
 
-  
   /**
    * Gets the preffered editor.
    *
@@ -153,4 +159,5 @@ public class DocumentUIActivity extends FileUIActivity {
     }
     return prefferedEditor;
   }
+
 }

@@ -19,9 +19,9 @@
     02110-1301 USA, or see the FSF site: http://www.fsf.org.
 
 -->
-<gatein-resources xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-    xsi:schemaLocation="http://www.exoplatform.org/xml/ns/gatein_resources_1_4 http://www.exoplatform.org/xml/ns/gatein_resources_1_4" 
-    xmlns="http://www.exoplatform.org/xml/ns/gatein_resources_1_4">
+<gatein-resources xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.exoplatform.org/xml/ns/gatein_resources_1_4 http://www.exoplatform.org/xml/ns/gatein_resources_1_4"
+  xmlns="http://www.exoplatform.org/xml/ns/gatein_resources_1_4">
 
   <module>
     <name>documentPreview</name>
@@ -125,56 +125,34 @@
       <module>social-ui-activity-composer</module>
     </depends>
   </module>
-   <module>
-      <name>ecm-utils</name>
-      <as>ecm_utils</as>
-      <script>
-         <path>/javascript/eXo/ecm/ECMUtils.js</path>
-      </script>
-      <depends>
-        <module>ecm-bootstrap</module>
-      </depends>
-      <depends>
-      	<module>jquery</module>
-      	<as>gj</as>
-      </depends>      
-      <depends>
-        <module>webui-ext</module>
-      </depends>      
-   </module>
-  
-   <module>
-      <name>ecm-browser</name>
-      <as>ecm_browser</as>
-      <script>
-         <path>/javascript/eXo/ecm/ECMBrowser.js</path>
-      </script>
-      <depends>
-      	<module>ecm-bootstrap</module>
-      </depends>
-	 </module>
-  
-   <module>
-    <name>editorbuttons</name>
+  <module>
+    <name>ecm-utils</name>
+    <as>ecm_utils</as>
     <script>
-      <path>/javascript/eXo/ecm/editor-buttons.js</path>
+      <path>/javascript/eXo/ecm/ECMUtils.js</path>
     </script>
     <depends>
+      <module>ecm-bootstrap</module>
+    </depends>
+    <depends>
       <module>jquery</module>
+      <as>gj</as>
+    </depends>
+    <depends>
+      <module>webui-ext</module>
     </depends>
   </module>
-   
-     <portal-skin>
-    <skin-name>Default</skin-name>
-    <skin-module>new-document</skin-module>
-    <css-path>/skin/editors/editors.css</css-path>
-  </portal-skin>
 
-  <portal-skin>
-    <skin-name>Enterprise</skin-name>
-    <skin-module>new-document</skin-module>
-    <css-path>/skin/editors/editors.css</css-path>
-  </portal-skin>
-   
+  <module>
+    <name>ecm-browser</name>
+    <as>ecm_browser</as>
+    <script>
+      <path>/javascript/eXo/ecm/ECMBrowser.js</path>
+    </script>
+    <depends>
+      <module>ecm-bootstrap</module>
+    </depends>
+  </module>
+
 </gatein-resources>
 

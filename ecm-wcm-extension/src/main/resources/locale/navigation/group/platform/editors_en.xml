@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UISetupPlatformToolBarPortlet>
+    <label>
+      <editors>Document Editors</editors>
+    </label>
+  </UISetupPlatformToolBarPortlet>
+</bundle>

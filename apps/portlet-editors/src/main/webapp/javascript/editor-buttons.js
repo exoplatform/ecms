@@ -209,6 +209,9 @@
      */
     this.initPreviewButtons = function(activityId, index, fileId, preferedProvider) {
       var buttons = buttonsFns.slice();
+      if(buttons.length == 0) {
+        return;
+      }
       log("Init preview buttons: " + JSON.stringify(buttons));
       var clickSelector = "#Preview" + activityId + "-" + index;
       if(preferedProvider != null) {
@@ -242,6 +245,14 @@
         buttonsFns[index] = buttonFn;
       }
     };
+    
+    this.editorOpened = function(provider, fileId) {
+      log("Editor opened. Provider: " + provider + ", fileId: " + fileId);
+    }
+    
+    this.editorClosed = function(provider, fileId) {
+      log("Editor closed. Provider: " + provider + ", fileId: " + fileId);
+    }
     
     /**
      * Clears buttonsFns
