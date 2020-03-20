@@ -46,6 +46,7 @@ import org.exoplatform.social.core.profile.ProfileFilter;
 import org.exoplatform.social.core.service.LinkProvider;
 import org.exoplatform.social.core.space.model.Space;
 import org.exoplatform.social.core.space.spi.SpaceService;
+import org.exoplatform.wcm.connector.collaboration.dto.IdentitySearchResult;
 import org.exoplatform.ws.frameworks.json.impl.JsonGeneratorImpl;
 
 /**
@@ -121,20 +122,20 @@ public class IdentitySearchRESTService implements ResourceContainer {
    * @return the list
    * @throws Exception the exception
    */
-  protected List<SearchResult> findGroupsAndUsers(String name) throws Exception {
-    List<SearchResult> searchResults = findUsers(name, MAX_RESULT_SIZE);
-    int remain = MAX_RESULT_SIZE - searchResults.size();
+  protected List<IdentitySearchResult> findGroupsAndUsers(String name) throws Exception {
+    List<IdentitySearchResult> IdentitySearchResults = findUsers(name, MAX_RESULT_SIZE);
+    int remain = MAX_RESULT_SIZE - IdentitySearchResults.size();
     if (remain > 0) {
-      searchResults.addAll(findGroups(name, remain));
+      IdentitySearchResults.addAll(findGroups(name, remain));
     }
 
-    Collections.sort(searchResults, new Comparator<SearchResult>() {
-      public int compare(SearchResult s1, SearchResult s2) {
+    Collections.sort(IdentitySearchResults, new Comparator<IdentitySearchResult>() {
+      public int compare(IdentitySearchResult s1, IdentitySearchResult s2) {
         return s1.getDisplayName().compareTo(s2.getDisplayName());
       }
     });
 
-    return searchResults;
+    return IdentitySearchResults;
   }
 
 
@@ -146,8 +147,8 @@ public class IdentitySearchRESTService implements ResourceContainer {
    * @return the list
    * @throws Exception the exception
    */
-  protected List<SearchResult> findUsers(String name, int count) throws Exception {
-    List<SearchResult> results = new ArrayList<>();
+  protected List<IdentitySearchResult> findUsers(String name, int count) throws Exception {
+    List<IdentitySearchResult> results = new ArrayList<>();
     ProfileFilter identityFilter = new ProfileFilter();
     identityFilter.setName(name);
     ListAccess<Identity> identitiesList = identityManager.getIdentitiesByProfileFilter(OrganizationIdentityProvider.NAME,
@@ -161,7 +162,7 @@ public class IdentitySearchRESTService implements ResourceContainer {
         String fullName = profile.getFullName();
         String userName = (String) profile.getProperty(Profile.USERNAME);
         String avatarUrl = profile.getAvatarUrl() != null ? profile.getAvatarUrl() : LinkProvider.PROFILE_DEFAULT_AVATAR_URL;
-        results.add(new SearchResult(userName, fullName, USER_TYPE, avatarUrl));
+        results.add(new IdentitySearchResult(userName, fullName, USER_TYPE, avatarUrl));
       }
     }
     return results;
@@ -176,8 +177,8 @@ public class IdentitySearchRESTService implements ResourceContainer {
    * @return the list
    * @throws Exception the exception
    */
-  protected List<SearchResult> findGroups(String name, int count) throws Exception {
-    List<SearchResult> results = new ArrayList<>();
+  protected List<IdentitySearchResult> findGroups(String name, int count) throws Exception {
+    List<IdentitySearchResult> results = new ArrayList<>();
     ListAccess<Group> groupsAccess = organization.getGroupHandler().findGroupsByKeyword(name);
     int size = groupsAccess.getSize() >= count ? count : groupsAccess.getSize();
     if (size > 0) {
@@ -186,118 +187,14 @@ public class IdentitySearchRESTService implements ResourceContainer {
         Space space = spaceService.getSpaceByGroupId(group.getId());
         if (space != null) {
           String avatarUrl = space.getAvatarUrl() != null ? space.getAvatarUrl() : LinkProvider.SPACE_DEFAULT_AVATAR_URL;
-          results.add(new SearchResult(space.getGroupId(), space.getDisplayName(), SPACE_TYPE, avatarUrl));
+          results.add(new IdentitySearchResult(space.getGroupId(), space.getDisplayName(), SPACE_TYPE, avatarUrl));
         } else {
-          results.add(new SearchResult(group.getId(), group.getLabel(), GROUP_TYPE, LinkProvider.SPACE_DEFAULT_AVATAR_URL));
+          results.add(new IdentitySearchResult(group.getId(), group.getLabel(), GROUP_TYPE, LinkProvider.SPACE_DEFAULT_AVATAR_URL));
         }
       }
     }
     return results;
   }
 
-  /**
-   * The Class SearchResult.
-   */
-  public static class SearchResult {
-
-    /** The name. */
-    private String name;
-
-    /** The displayName. */
-    private String displayName;
-
-    /** The type. */
-    private String type;
-
-    /** The avatar url. */
-    private String avatarUrl;
-
-    /**
-     * Instantiates a new SearchResult.
-     *
-     * @param name the name
-     * @param displayName the display name
-     * @param type the type
-     * @param avatarUrl the avatar url
-     */
-    public SearchResult(String name, String displayName, String type, String avatarUrl) {
-      this.name = name;
-      this.displayName = displayName;
-      this.type = type;
-      this.avatarUrl = avatarUrl;
-    }
-
-    /**
-     * Gets the name.
-     *
-     * @return the name
-     */
-    public String getName() {
-      return name;
-    }
-
-    /**
-     * Sets the name.
-     *
-     * @param name the new name
-     */
-    public void setName(String name) {
-      this.name = name;
-    }
-
-    /**
-     * Gets the displayName.
-     *
-     * @return the displayName
-     */
-    public String getDisplayName() {
-      return displayName;
-    }
-
-    /**
-     * Sets the displayName.
-     *
-     * @param displayName the new displayName
-     */
-    public void setDisplayName(String displayName) {
-      this.displayName = displayName;
-    }
-
-    /**
-     * Gets the type.
-     *
-     * @return the type
-     */
-    public String getType() {
-      return type;
-    }
-
-    /**
-     * Sets the type.
-     *
-     * @param type the new type
-     */
-    public void setType(String type) {
-      this.type = type;
-    }
-
-    /**
-     * Gets the avatar url.
-     *
-     * @return the avatar url
-     */
-    public String getAvatarUrl() {
-      return avatarUrl;
-    }
-
-    /**
-     * Sets the avatar url.
-     *
-     * @param avatarUrl the new avatar url
-     */
-    public void setAvatarUrl(String avatarUrl) {
-      this.avatarUrl = avatarUrl;
-    }
-  }
 
 }
