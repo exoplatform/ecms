@@ -27,24 +27,6 @@ public class EditorsAdminPortlet extends GenericPortlet {
       PortletRequestDispatcher prDispatcher = getPortletContext().getRequestDispatcher("/WEB-INF/pages/editors-admin.jsp");
       prDispatcher.include(request, response);
 
-      // TODO make similarly to Web Conf - WebRTC or better
-//      Settings settings = getProvider().settings()
-//          .callUri(buildUrl(request.getScheme(),
-//                            request.getServerName(),
-//                            request.getServerPort(),
-//                            "/webrtc/call"))
-//          .locale(request.getLocale())
-//          .build();
-//      String settingsJson = asJSON(settings);
-      // Expected settings object format (see in vue-app's main.js):
-      // "services" : {
-      // "providers": "https://..." <<< // an URL to providers REST service
-      // },
-      // // Other required data, e.g. current user
-      // "user": {
-      // "id": "john",
-      // "full_name": "John Smith"
-      // }
       String providersUrl = buildRestUrl(request.getScheme(),
                                          request.getServerName(),
                                          request.getServerPort(),
