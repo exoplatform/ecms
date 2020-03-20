@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
@@ -40,7 +41,10 @@ public class ApachePOIMetadataPlugin extends BaseComponentPlugin implements Docu
   /** The Constant DOCX_EXTENSION. */
   private static final String       DOCX_EXTENSION       = ".docx";
 
-  private static final List<String> SUPPORTED_EXTENSIONS = Arrays.asList(DOCX_EXTENSION, XLSX_EXTENSION, PPTX_EXTENSION);
+  /** The Constant SUPPORTED_EXTENSIONS. */
+  private static final List<String> SUPPORTED_EXTENSIONS = Collections.unmodifiableList(Arrays.asList(DOCX_EXTENSION,
+                                                                                                      XLSX_EXTENSION,
+                                                                                                      PPTX_EXTENSION));
 
   /** The metadataFormat. */
   private final SimpleDateFormat    metadataFormat       = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
@@ -64,7 +68,7 @@ public class ApachePOIMetadataPlugin extends BaseComponentPlugin implements Docu
                                     Date created,
                                     String creator) throws IOException, DocumentExtensionNotSupportedException {
     File tempFile = File.createTempFile("editor-document", ".tmp");
-    try (POIXMLDocument document = getDocument(source, extension); 
+    try (POIXMLDocument document = getDocument(source, extension);
          FileOutputStream fos = new FileOutputStream(tempFile))
     {
       POIXMLProperties props = document.getProperties();
@@ -83,7 +87,7 @@ public class ApachePOIMetadataPlugin extends BaseComponentPlugin implements Docu
   public List<String> getSupportedExtensions() {
     return SUPPORTED_EXTENSIONS;
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -94,11 +98,12 @@ public class ApachePOIMetadataPlugin extends BaseComponentPlugin implements Docu
 
   /**
    * Gets POIXMLDocument from inputStream and extension. Supports only {@value #SUPPORTED_EXTENSIONS}
-   * 
+   *
    * @param source the source
-   * @param extension the extension 
+   * @param extension the extension
    * @return POIXMLDocument
-   * @throws Exception the exception
+   * @throws DocumentExtensionNotSupportedException the document extension not supported exception
+   * @throws IOException Signals that an I/O exception has occurred
    */
   protected POIXMLDocument getDocument(InputStream source, String extension) throws DocumentExtensionNotSupportedException,
                                                                              IOException {
