@@ -110,7 +110,7 @@ public class ApachePOIMetadataPlugin extends BaseComponentPlugin implements Docu
     if (extension == null) {
       throw new DocumentExtensionNotSupportedException("Cannot provide POIXMLDocument - extension is null");
     }
-    switch (extension) {
+    switch (extension.toLowerCase()) {
     case DOCX_EXTENSION:
       return new XWPFDocument(source);
     case XLSX_EXTENSION:
