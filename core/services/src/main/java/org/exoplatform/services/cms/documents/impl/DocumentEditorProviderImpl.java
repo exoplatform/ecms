@@ -134,7 +134,7 @@ public class DocumentEditorProviderImpl implements DocumentEditorProvider {
   public void updatePermissions(List<String> permissions) throws PermissionValidationException {
     List<String> updatedPermissions = new ArrayList<>();
     for (String permission : permissions) {
-      if (permission.startsWith("/")) {
+      if (permission != null && permission.startsWith("/")) {
         permission = "*:" + permission;
       }
       validatePermission(permission);

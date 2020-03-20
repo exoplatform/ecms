@@ -21,6 +21,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.annotation.security.RolesAllowed;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -157,18 +158,19 @@ public class DocumentEditorsRESTService implements ResourceContainer {
   @Path("/{provider}")
   @RolesAllowed("administrators")
   @Produces(MediaType.APPLICATION_JSON)
+  @Consumes(MediaType.APPLICATION_JSON)
   public Response updateEditor(@PathParam("provider") String provider,
-                               @FormParam("active") Boolean active,
-                               @FormParam("permissions") List<String> permissions) {
-    if (active == null && permissions == null) {
+                               DocumentEditorProviderDTO editorProviderDTO) {
+    if (editorProviderDTO == null || editorProviderDTO.getActive() == null && editorProviderDTO.getPermissions() == null) {
       return Response.status(Status.BAD_REQUEST).entity("{ \"message\":\"" + EMPTY_REQUEST + "\"}").build();
     }
     try {
       DocumentEditorProvider editorProvider = documentService.getEditorProvider(provider);
-      if (active != null) {
-        editorProvider.updateActive(active);
+      if (editorProviderDTO.getActive() != null) {
+        editorProvider.updateActive(editorProviderDTO.getActive());
       }
-      if (permissions != null) {
+      if (editorProviderDTO.getPermissions() != null) {
+        List<String> permissions = editorProviderDTO.getPermissions().stream().map(permission -> permission.getId()).collect(Collectors.toList());
         editorProvider.updatePermissions(permissions);
       }
       return Response.status(Status.OK).build();
