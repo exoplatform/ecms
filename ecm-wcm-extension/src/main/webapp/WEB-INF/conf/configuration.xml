@@ -59,6 +59,7 @@
   <import>war:/conf/wcm-extension/wcm/publication-configuration.xml</import>
   <import>war:/conf/content-extended/authoring/configuration.xml</import>
   <import>war:/conf/wcm-extension/wcm/new-document-configuration.xml</import>
+  <import>war:/conf/wcm-extension/wcm/documents-configuration.xml</import>  
   <import>war:/conf/wcm-extension/wcm/taxonomies-configuration.xml</import>
   <import>war:/conf/wcm-extension/wcm/metadata-configuration.xml</import>
   <import>war:/conf/wcm-extension/wcm/wcm-organization-configuration.xml</import>

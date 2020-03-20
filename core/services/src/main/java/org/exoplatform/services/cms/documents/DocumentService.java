@@ -140,8 +140,15 @@ public interface DocumentService {
    *
    * @return the registered editors plugins
    */
-  public Set<NewDocumentEditorPlugin> getRegisteredEditorPlugins();
+  public Set<DocumentEditorPlugin> getRegisteredEditorPlugins();
 
+  /**
+   * Checks for document editor plugins.
+   *
+   * @return true, if successful
+   */
+  public boolean hasDocumentEditorPlugins();
+  
   /**
    * Checks for document template plugins.
    *
@@ -155,6 +162,28 @@ public interface DocumentService {
    * @param plugin the ComponentPlugin
    */
   public void addDocumentMetadataPlugin(ComponentPlugin plugin);
+  
+  /**
+   * Gets prefered editor provider for specified file and user.
+   *
+   * @param userId the userId
+   * @param uuid the uuid
+   * @param workspace the workspace
+   * @return the preffered editor (provider)
+   * @throws Exception the exception
+   */
+  public String getPreferedEditor(String userId, String uuid, String workspace) throws Exception;
+  
+  /**
+   * Sets preffered editor provider for specified file and user.
+   *
+   * @param userId the userId
+   * @param provider the editor provider
+   * @param uuid the uuid
+   * @param workspace the workspace
+   * @throws Exception the exception
+   */
+  public void setPreferedEditor(String userId, String provider, String uuid, String workspace) throws Exception;
 
   /**
    * NewDocumentTypesConfig contains all registered templates for specified provider.

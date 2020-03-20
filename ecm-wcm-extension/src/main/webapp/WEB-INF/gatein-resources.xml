@@ -153,17 +153,27 @@
       	<module>ecm-bootstrap</module>
       </depends>
 	 </module>
+  
+   <module>
+    <name>editorbuttons</name>
+    <script>
+      <path>/javascript/eXo/ecm/editor-buttons.js</path>
+    </script>
+    <depends>
+      <module>jquery</module>
+    </depends>
+  </module>
    
      <portal-skin>
     <skin-name>Default</skin-name>
     <skin-module>new-document</skin-module>
-    <css-path>/skin/newdocument/newdocument.css</css-path>
+    <css-path>/skin/editors/editors.css</css-path>
   </portal-skin>
 
   <portal-skin>
     <skin-name>Enterprise</skin-name>
     <skin-module>new-document</skin-module>
-    <css-path>/skin/newdocument/newdocument.css</css-path>
+    <css-path>/skin/editors/editors.css</css-path>
   </portal-skin>
    
 </gatein-resources>

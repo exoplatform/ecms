@@ -3,7 +3,7 @@
   xmlns="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd">
 
 
-    <!-- ECMS menu action for New Document. -->
+  <!-- ECMS menu action for New Document. -->
   <external-component-plugins>
     <target-component>org.exoplatform.webui.ext.UIExtensionManager</target-component>
     <component-plugin>

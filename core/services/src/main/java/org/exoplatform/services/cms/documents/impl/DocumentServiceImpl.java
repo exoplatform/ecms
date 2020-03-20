@@ -57,7 +57,7 @@ import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.documents.DocumentMetadataPlugin;
 import org.exoplatform.services.cms.documents.DocumentService;
 import org.exoplatform.services.cms.documents.DocumentTemplate;
-import org.exoplatform.services.cms.documents.NewDocumentEditorPlugin;
+import org.exoplatform.services.cms.documents.DocumentEditorPlugin;
 import org.exoplatform.services.cms.documents.NewDocumentTemplatePlugin;
 import org.exoplatform.services.cms.documents.exception.DocumentExtensionNotSupportedException;
 import org.exoplatform.services.cms.documents.model.Document;
@@ -102,6 +102,9 @@ public class DocumentServiceImpl implements DocumentService {
   public static final String JCR_MIME_TYPE = "jcr:mimeType";
   public static final String EXO_OWNER_PROP = "exo:owner";
   public static final String EXO_TITLE_PROP = "exo:title";
+  private static final String EXO_DOCUMENT = "exo:document";
+  private static final String EXO_USER_PREFFERENCES = "exo:userPrefferences";
+  private static final String EXO_PREFFERED_EDITOR = "exo:prefferedEditor";
   public static final String CURRENT_STATE_PROP = "publication:currentState";
   public static final String DOCUMENTS_APP_NAVIGATION_NODE_NAME = "documents";
   public static final String DOCUMENT_NOT_FOUND = "?path=doc-not-found";
@@ -109,7 +112,7 @@ public class DocumentServiceImpl implements DocumentService {
   private static final String SHARED_NODE = "Shared";
   private static final Log LOG                 = ExoLogger.getLogger(DocumentServiceImpl.class);
   private final Set<NewDocumentTemplatePlugin> templatePlugins = new HashSet<>();
-  private final Set<NewDocumentEditorPlugin> editorPlugins = new HashSet<>();
+  private final Set<DocumentEditorPlugin> editorPlugins = new HashSet<>();
   private ManageDriveService manageDriveService;
   private Portal portal;
   private SessionProviderService sessionProviderService;
@@ -468,17 +471,17 @@ public class DocumentServiceImpl implements DocumentService {
    */
   @Override
   public void addDocumentEditorPlugin(ComponentPlugin plugin) {
-    Class<NewDocumentEditorPlugin> pclass = NewDocumentEditorPlugin.class;
+    Class<DocumentEditorPlugin> pclass = DocumentEditorPlugin.class;
     if (pclass.isAssignableFrom(plugin.getClass())) {
-      NewDocumentEditorPlugin newPlugin = pclass.cast(plugin);
+      DocumentEditorPlugin newPlugin = pclass.cast(plugin);
 
-      LOG.info("Adding NewDocumentEditorPlugin [{}]", newPlugin.toString());
+      LOG.info("Adding DocumentEditorPlugin [{}]", newPlugin.toString());
       editorPlugins.add(newPlugin);
       if (LOG.isDebugEnabled()) {
-        LOG.debug("Registered NewDocumentEditorPlugin instance of {}", plugin.getClass().getName());
+        LOG.debug("Registered DocumentEditorPlugin instance of {}", plugin.getClass().getName());
       }
     } else {
-      LOG.error("The NewDocumentEditorPlugin plugin is not an instance of " + pclass.getName());
+      LOG.error("The DocumentEditorPlugin plugin is not an instance of " + pclass.getName());
     }
   }
 
@@ -543,7 +546,7 @@ public class DocumentServiceImpl implements DocumentService {
    * {@inheritDoc}
    */
   @Override
-  public Set<NewDocumentEditorPlugin> getRegisteredEditorPlugins() {
+  public Set<DocumentEditorPlugin> getRegisteredEditorPlugins() {
     return Collections.unmodifiableSet(editorPlugins);
   }
 
@@ -587,6 +590,60 @@ public class DocumentServiceImpl implements DocumentService {
       LOG.error("Error searching user " + userId, e);
       return userId;
     }
+  }
+
+  public boolean hasDocumentEditorPlugins() {
+    return editorPlugins.size() > 0;
+  }
+  
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setPreferedEditor(String userId, String provider, String uuid, String workspace) throws Exception {
+    Node node = nodeByUUID(uuid, workspace);
+    if (node.canAddMixin(EXO_DOCUMENT)) {
+      node.addMixin(EXO_DOCUMENT);
+    }
+    Node userPrefferences;
+    if (!node.hasNode(userId)) {
+      userPrefferences = node.addNode(userId, EXO_USER_PREFFERENCES);
+    } else {
+      userPrefferences = node.getNode(userId);
+    }
+    userPrefferences.setProperty(EXO_PREFFERED_EDITOR, provider);
+    node.save();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getPreferedEditor(String userId, String uuid, String workspace) throws Exception {
+    Node node = nodeByUUID(uuid, workspace);
+    if (node.hasNode(userId)) {
+      Node userPrefferences = node.getNode(userId);
+      if (userPrefferences.hasProperty(EXO_PREFFERED_EDITOR)) {
+        return userPrefferences.getProperty(EXO_PREFFERED_EDITOR).getString();
+      }
+    }
+    return null;
+  }
+
+  /**
+   * Gets the user session.
+   *
+   * @param workspace the workspace
+   * @return the user session
+   * @throws RepositoryException the repository exception
+   */
+  protected Node nodeByUUID(String uuid, String workspace) throws RepositoryException {
+    if (workspace == null) {
+      workspace = repoService.getCurrentRepository().getConfiguration().getDefaultWorkspaceName();
+    }
+    SessionProvider sp = sessionProviderService.getSessionProvider(null);
+    Session session = sp.getSession(workspace, repoService.getCurrentRepository());
+    return session.getNodeByUUID(uuid);
   }
 
 }
