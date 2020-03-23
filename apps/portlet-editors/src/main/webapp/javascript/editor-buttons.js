@@ -126,6 +126,9 @@
       
       // Create editor button
       var $btn = buttons[0].createButtonFn();
+      $btn.addClass("editorButton");
+      $btn.attr('data-provider', buttons[0].provider);
+      $btn.attr('data-fileId', fileId);
       $container.append($btn);
       let provider = buttons[0].provider;
       $btn.click(function() {
@@ -148,6 +151,9 @@
           $btn.click(function() {
             savePreferedProvider(fileId, provider);
           });
+          $btn.addClass("editorButton");
+          $btn.attr('data-provider', buttons[i].provider);
+          $btn.attr('data-fileId', fileId);
           $dropdown.append($btn);
         }
         $dropdownContainer.append($toggle);
@@ -210,6 +216,18 @@
         // Channel message handler
         var result = tryParseJson(message);
         log("EVENT: " + result.type);
+        
+        switch(result.type) {
+          case DOCUMENT_OPENED: {
+            var $buttons = $('.editorButton[data-provider="' + result.provider + '"][data-fileId="' + result.fileId + '"]');
+            $.each( $buttons, function( index, $elem ){
+              // TODO : disable buttons
+            });
+          } break;
+          case DOCUMENT_CLOSED: {
+         // TODO : enable buttons
+          } break;
+        }
       }, cometdContext, function(subscribeReply) {
         // Subscription status callback
         if (subscribeReply.successful) {
@@ -361,7 +379,7 @@
         "workspace" : workspace
       });
     };
-
+   
     /**
      * Clears buttonsFns
      * 

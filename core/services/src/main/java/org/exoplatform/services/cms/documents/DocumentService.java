@@ -194,6 +194,17 @@ public interface DocumentService {
   public DocumentEditorProvider getEditorProvider(String provider) throws DocumentEditorProviderNotFoundException;
   
   /**
+   * Updates information about current open editor for the document.
+   * It is assumed that the document is being edited at the moment.
+   * 
+   * @param uuid the uuid
+   * @param workspace the workspace
+   * @param provider the current provider or null if the document has been closed.
+   */
+  public void setCurrentDocumentEditor(String uuid, String workspace, String provider) throws RepositoryException;
+
+  
+  /**
    * Inits document editors JS module
    */
   public void initDocumentEditorsModule();

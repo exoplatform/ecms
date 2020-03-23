@@ -109,6 +109,7 @@ public class DocumentServiceImpl implements DocumentService {
   public static final String JCR_MIME_TYPE = "jcr:mimeType";
   public static final String EXO_OWNER_PROP = "exo:owner";
   public static final String EXO_TITLE_PROP = "exo:title";
+  private static final String EXO_CURRENT_EDITOR_PROP = "exo:currentEditor";
   private static final String EXO_DOCUMENT = "exo:document";
   private static final String EXO_USER_PREFFERENCES = "exo:userPrefferences";
   private static final String EXO_PREFFERED_EDITOR = "exo:prefferedEditor";
@@ -658,6 +659,23 @@ public class DocumentServiceImpl implements DocumentService {
                                 .orElseThrow(DocumentEditorProviderNotFoundException::new);
   }
   
+  
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setCurrentDocumentEditor(String uuid, String workspace, String provider) throws RepositoryException {
+    Node node = nodeByUUID(uuid, workspace);
+    if (node.canAddMixin(EXO_DOCUMENT)) {
+      node.addMixin(EXO_DOCUMENT);
+    }
+    node.setProperty(EXO_CURRENT_EDITOR_PROP, provider);
+    node.save();  
+  }
+
+  /**
+   * {@inheritDoc}
+   */
   @Override
   public void initDocumentEditorsModule() {
     CometdDocumentsService cometdService = ExoContainerContext.getCurrentContainer().getComponentInstanceOfType(CometdDocumentsService.class);
