@@ -18,22 +18,18 @@ package org.exoplatform.wcm.ext.component.activity;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.jcr.Node;
 
-import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.PortalContainer;
-import org.exoplatform.ecm.webui.component.explorer.documents.IsEditorPluginPresentFilter;
-import org.exoplatform.portal.config.UserACL;
-import org.exoplatform.services.cms.documents.DocumentEditorPlugin;
+import org.exoplatform.services.cms.documents.DocumentEditorProvider;
 import org.exoplatform.services.cms.documents.DocumentService;
 import org.exoplatform.services.cms.documents.cometd.CometdConfig;
 import org.exoplatform.services.cms.documents.cometd.CometdDocumentsService;
-import org.exoplatform.services.cms.documents.model.EditorProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.security.ConversationState;
+import org.exoplatform.services.security.Identity;
 import org.exoplatform.social.webui.activity.BaseUIActivity;
 import org.exoplatform.web.application.JavascriptManager;
 import org.exoplatform.web.application.RequireJS;
@@ -46,6 +42,7 @@ import org.exoplatform.webui.ext.filter.UIExtensionFilter;
 import org.exoplatform.webui.ext.filter.UIExtensionFilters;
 import org.exoplatform.ws.frameworks.json.impl.JsonException;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class CustomizedFileUIActivity.
  */
@@ -70,7 +67,7 @@ public class DocumentUIActivity extends FileUIActivity {
 
   /** The customize service. */
   protected final DocumentService                documentService;
-
+  
   /** The cometd service. */
   protected final CometdDocumentsService         cometdService;
 
@@ -79,7 +76,7 @@ public class DocumentUIActivity extends FileUIActivity {
 
   /** The Constant FILTERS. */
   protected static final List<UIExtensionFilter> FILTERS        = Arrays.asList(new UIExtensionFilter[] {
-      new IsEditorPluginPresentFilter(), });
+      new IsEditorProviderPresentFilter(), });
 
   /**
    * Instantiates a new customized file UI activity.
@@ -88,7 +85,7 @@ public class DocumentUIActivity extends FileUIActivity {
    */
   public DocumentUIActivity() throws Exception {
     super();
-    this.documentService = getApplicationComponent(DocumentService.class);
+    this.documentService = this.getApplicationComponent(DocumentService.class);
     this.cometdService = getApplicationComponent(CometdDocumentsService.class);
   }
 
@@ -100,6 +97,7 @@ public class DocumentUIActivity extends FileUIActivity {
     WebuiRequestContext requestContext = WebuiRequestContext.getCurrentInstance();
     JavascriptManager js = requestContext.getJavascriptManager();
     String activityId = getActivity().getId();
+    Identity identity = ConversationState.getCurrent().getIdentity();
     RequireJS require = js.require("SHARED/editorbuttons", "editorbuttons");
     CometdConfig cometdConf = new CometdConfig(cometdService.getCometdServerPath(),
                                                cometdService.getUserToken(requestContext.getRemoteUser()),
@@ -108,23 +106,23 @@ public class DocumentUIActivity extends FileUIActivity {
       require.addScripts("editorbuttons.init('" + requestContext.getRemoteUser() + "' ," + cometdConf.toJSON() + ");");
     } catch (JsonException e) {
       LOG.warn("Cannot generate JSON for cometd configuration. {}", e.getMessage());
-    }
+    } 
     if (getFilesCount() == 1) {
-      Node contentNode = getContentNode(0);
+      Node node = getContentNode(0);
       require.addScripts("editorbuttons.resetButtons();");
       // call plugins init handlers
-      documentService.getRegisteredEditorPlugins().forEach(plugin -> {
+      documentService.getDocumentEditorProviders().forEach(provider -> {
         try {
-          EditorProvider editorProvider = documentService.getEditorProvider(plugin.getProviderName());
-          if (hasPermissions(editorProvider)) {
-            plugin.initActivity(contentNode.getUUID(), contentNode.getSession().getWorkspace().getName(), activityId, STREAM_CONTEXT);
+          if (provider.isAvailableForUser(identity)) {
+            provider.initActivity(node.getUUID(), node.getSession().getWorkspace().getName(), activityId, STREAM_CONTEXT);
           }
         } catch (Exception e) {
-          LOG.error("Cannot init activity from plugin {}, {}", plugin.getProviderName(), e.getMessage());
+          LOG.error("Cannot init activity from plugin {}, {}", provider.getProviderName(), e.getMessage());
         }
       });
-      String prefferedEditor = getPrefferedEditor(contentNode);
-      require.addScripts("editorbuttons.initActivityButtons('" + activityId + "', '" + contentNode.getUUID() + "', " + prefferedEditor + ");");
+      String prefferedEditor = getPrefferedEditor(node);
+      require.addScripts("editorbuttons.initActivityButtons('" + activityId + "', '" + node.getUUID() + "', '"
+          + node.getSession().getWorkspace().getName() + "'," + prefferedEditor + ");");
 
     }
 
@@ -133,14 +131,13 @@ public class DocumentUIActivity extends FileUIActivity {
       Node node = getContentNode(index);
       require.addScripts("editorbuttons.resetButtons();");
       // call plugins init handlers
-      for (DocumentEditorPlugin plugin : documentService.getRegisteredEditorPlugins()) {
+      for (DocumentEditorProvider provider : documentService.getDocumentEditorProviders()) {
         try {
-          EditorProvider editorProvider = documentService.getEditorProvider(plugin.getProviderName());
-          if (hasPermissions(editorProvider)) {
-            plugin.initPreview(node.getUUID(), node.getSession().getWorkspace().getName(), activityId, STREAM_CONTEXT, index);
+          if (provider.isAvailableForUser(identity)) {
+            provider.initPreview(node.getUUID(), node.getSession().getWorkspace().getName(), activityId, STREAM_CONTEXT, index);
           }
         } catch (Exception e) {
-          LOG.error("Cannot init preview from plugin {}, {}", plugin.getProviderName(), e.getMessage());
+          LOG.error("Cannot init preview from plugin {}, {}", provider.getProviderName(), e.getMessage());
         }
       }
       String prefferedEditor = getPrefferedEditor(node);
@@ -179,22 +176,4 @@ public class DocumentUIActivity extends FileUIActivity {
     return prefferedEditor;
   }
 
-  /**
-   * Checks for permissions.
-   *
-   * @param editorProvider the editor provider
-   * @return true, if successful
-   */
-  protected boolean hasPermissions(EditorProvider editorProvider) {
-    UserACL userACL = (UserACL) ExoContainerContext.getCurrentContainer().getComponentInstanceOfType(UserACL.class);
-    List<String> permissions = editorProvider.getPermissions().stream().map(permission -> {
-      if (permission.startsWith("/")) {
-        permission = "*:" + permission;
-      }
-      return permission;
-    }).collect(Collectors.toList());
-    String currentUser = ConversationState.getCurrent().getIdentity().getUserId();
-    return editorProvider.getActive() && (permissions.contains(currentUser) || permissions.contains("*")
-        || userACL.hasPermission(permissions.toArray(new String[0])));
-  }
 }

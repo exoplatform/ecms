@@ -14,44 +14,44 @@
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, see<http://www.gnu.org/licenses/>.
  */
-package org.exoplatform.services.cms.documents.model;
+package org.exoplatform.wcm.connector.collaboration.dto;
+
 import java.util.List;
 
-
 /**
- * The Class EditorProvider.
+ * The Class DocumentEditorProviderDTO.
  */
-public class EditorProvider extends ResourceSupport {
-  
+public class DocumentEditorProviderDTO extends ResourceSupport {
+
   /** The provider. */
-  protected String provider;
-  
+  private String           provider;
+
   /** The active. */
-  protected Boolean active;
-  
+  private Boolean          active;
+
   /** The permissions. */
-  protected List<String> permissions;
- 
+  private List<Permission> permissions;
+
+  
   /**
-   * Instantiates a new editor provider.
+   * Instantiates a new document editor provider DTO.
    */
-  public EditorProvider() {
+  public DocumentEditorProviderDTO() {
 
   }
-  
+
   /**
-   * Instantiates a new editor provider.
+   * Instantiates a new document editor provider DTO.
    *
    * @param provider the provider
    * @param active the active
    * @param permissions the permissions
    */
-  public EditorProvider(String provider, Boolean active, List<String> permissions) {
+  public DocumentEditorProviderDTO(String provider, boolean active, List<Permission> permissions) {
     this.provider = provider;
     this.active = active;
     this.permissions = permissions;
   }
- 
 
   /**
    * Gets the provider.
@@ -60,15 +60,6 @@ public class EditorProvider extends ResourceSupport {
    */
   public String getProvider() {
     return provider;
-  }
-
-  /**
-   * Sets the provider.
-   *
-   * @param provider the new provider
-   */
-  public void setProvider(String provider) {
-    this.provider = provider;
   }
 
   /**
@@ -81,6 +72,15 @@ public class EditorProvider extends ResourceSupport {
   }
 
   /**
+   * Sets the provider.
+   *
+   * @param provider the new provider
+   */
+  public void setProvider(String provider) {
+    this.provider = provider;
+  }
+
+  /**
    * Sets the active.
    *
    * @param active the new active
@@ -90,22 +90,21 @@ public class EditorProvider extends ResourceSupport {
   }
 
   /**
-   * Gets the permissions.
-   *
-   * @return the permissions
-   */
-  public List<String> getPermissions() {
-    return permissions;
-  }
-
-  /**
    * Sets the permissions.
    *
    * @param permissions the new permissions
    */
-  public void setPermissions(List<String> permissions) {
+  public void setPermissions(List<Permission> permissions) {
     this.permissions = permissions;
   }
 
- 
+  /**
+   * Gets the permissions.
+   *
+   * @return the permissions
+   */
+  public List<Permission> getPermissions() {
+    return permissions;
+  }
+
 }

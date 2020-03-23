@@ -1,5 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<link href="../../skins/6.0.0-M20/editors/css/editors-lt.css" rel="stylesheet" type="text/css">
 
 <div id="editors-admin">
   <div class="v-skeleton-loader  v-skeleton-loader--is-loading theme--light editorsSkeletonTitle">

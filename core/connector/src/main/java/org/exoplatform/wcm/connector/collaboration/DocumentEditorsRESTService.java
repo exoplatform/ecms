@@ -18,9 +18,10 @@ package org.exoplatform.wcm.connector.collaboration;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.annotation.security.RolesAllowed;
-import javax.jcr.RepositoryException;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -33,14 +34,25 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.UriInfo;
 
+import org.exoplatform.services.cms.documents.DocumentEditorProvider;
 import org.exoplatform.services.cms.documents.DocumentService;
-import org.exoplatform.services.cms.documents.exception.EditorProviderNotFoundException;
-import org.exoplatform.services.cms.documents.model.EditorProvider;
-import org.exoplatform.services.cms.documents.model.Link;
+import org.exoplatform.services.cms.documents.exception.DocumentEditorProviderNotFoundException;
+import org.exoplatform.services.cms.documents.exception.PermissionValidationException;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.organization.Group;
+import org.exoplatform.services.organization.OrganizationService;
 import org.exoplatform.services.rest.resource.ResourceContainer;
-import org.exoplatform.ws.frameworks.json.impl.JsonException;
+import org.exoplatform.social.core.identity.model.Identity;
+import org.exoplatform.social.core.identity.model.Profile;
+import org.exoplatform.social.core.identity.provider.OrganizationIdentityProvider;
+import org.exoplatform.social.core.manager.IdentityManager;
+import org.exoplatform.social.core.service.LinkProvider;
+import org.exoplatform.social.core.space.model.Space;
+import org.exoplatform.social.core.space.spi.SpaceService;
+import org.exoplatform.wcm.connector.collaboration.dto.DocumentEditorProviderDTO;
+import org.exoplatform.wcm.connector.collaboration.dto.Link;
+import org.exoplatform.wcm.connector.collaboration.dto.Permission;
 import org.exoplatform.ws.frameworks.json.impl.JsonGeneratorImpl;
 
 /**
@@ -52,25 +64,40 @@ import org.exoplatform.ws.frameworks.json.impl.JsonGeneratorImpl;
 public class DocumentEditorsRESTService implements ResourceContainer {
 
   /** The Constant PROVIDER_NOT_REGISTERED. */
-  private static final String PROVIDER_NOT_REGISTERED = "DocumentEditors.error.EditorProviderNotRegistered";
+  private static final String   PROVIDER_NOT_REGISTERED = "DocumentEditors.error.EditorProviderNotRegistered";
 
   /** The Constant EMPTY_REQUEST. */
-  private static final String EMPTY_REQUEST           = "DocumentEditors.error.EmptyRequest";
+  private static final String   EMPTY_REQUEST           = "DocumentEditors.error.EmptyRequest";
 
   /** The Constant LOG. */
-  protected static final Log  LOG                     = ExoLogger.getLogger(DocumentEditorsRESTService.class);
+  protected static final Log    LOG                     = ExoLogger.getLogger(DocumentEditorsRESTService.class);
 
   /** The document service. */
-  protected DocumentService   documentService;
+  protected DocumentService     documentService;
+
+  /** The document service. */
+  protected OrganizationService organization;
+
+  /** The document service. */
+  protected SpaceService        spaceService;
+
+  /** The identity manager. */
+  protected IdentityManager     identityManager;
+
 
   /**
    * Instantiates a new document editors REST service.
    *
    * @param documentService the document service
+   * @param spaceService the space service
+   * @param organizationService the organization service
+   * @param identityManager the identity manager
    */
-  public DocumentEditorsRESTService(DocumentService documentService) {
+  public DocumentEditorsRESTService(DocumentService documentService, SpaceService spaceService, OrganizationService organizationService, IdentityManager identityManager) {
     this.documentService = documentService;
-
+    this.identityManager = identityManager;
+    this.organization = organizationService;
+    this.spaceService = spaceService;
   }
 
   /**
@@ -83,13 +110,16 @@ public class DocumentEditorsRESTService implements ResourceContainer {
   @RolesAllowed("administrators")
   @Produces(MediaType.APPLICATION_JSON)
   public Response getEditors(@Context UriInfo uriInfo) {
-    List<EditorProvider> providers = documentService.getEditorProviders();
+    List<DocumentEditorProviderDTO> providers = documentService.getDocumentEditorProviders()
+                                                               .stream()
+                                                               .map(this::convertToDTO)
+                                                               .collect(Collectors.toList());
     providers.forEach(provider -> initLinks(provider, uriInfo));
     try {
       String json = new JsonGeneratorImpl().createJsonArray(providers).toString();
       return Response.status(Status.OK).entity("{\"editors\":" + json + "}").build();
-    } catch (JsonException e) {
-      LOG.error("Cannot generate editor providers JSON, error: {}", e.getMessage());
+    } catch (Exception e) {
+      LOG.error("Cannot get editors, error: {}", e.getMessage());
       return Response.status(Status.INTERNAL_SERVER_ERROR).build();
     }
   }
@@ -107,10 +137,11 @@ public class DocumentEditorsRESTService implements ResourceContainer {
   @Produces(MediaType.APPLICATION_JSON)
   public Response getEditor(@Context UriInfo uriInfo, @PathParam("provider") String provider) {
     try {
-      EditorProvider editorProvider = documentService.getEditorProvider(provider);
-      initLinks(editorProvider, uriInfo);
-      return Response.status(Status.OK).entity(editorProvider).build();
-    } catch (EditorProviderNotFoundException e) {
+      DocumentEditorProvider editorProvider = documentService.getEditorProvider(provider);
+      DocumentEditorProviderDTO providerDTO = convertToDTO(editorProvider);
+      initLinks(providerDTO, uriInfo);
+      return Response.status(Status.OK).entity(providerDTO).build();
+    } catch (DocumentEditorProviderNotFoundException e) {
       return Response.status(Status.NOT_FOUND).entity("{ \"message\":\"" + PROVIDER_NOT_REGISTERED + "\"}").build();
     }
   }
@@ -127,18 +158,26 @@ public class DocumentEditorsRESTService implements ResourceContainer {
   @Path("/{provider}")
   @RolesAllowed("administrators")
   @Produces(MediaType.APPLICATION_JSON)
+  @Consumes(MediaType.APPLICATION_JSON)
   public Response updateEditor(@PathParam("provider") String provider,
-                               @FormParam("active") Boolean active,
-                               @FormParam("permissions") List<String> permissions) {
-    if (active == null && permissions == null) {
+                               DocumentEditorProviderDTO editorProviderDTO) {
+    if (editorProviderDTO == null || editorProviderDTO.getActive() == null && editorProviderDTO.getPermissions() == null) {
       return Response.status(Status.BAD_REQUEST).entity("{ \"message\":\"" + EMPTY_REQUEST + "\"}").build();
     }
-    EditorProvider editorProvider = new EditorProvider(provider, active, permissions);
     try {
-      documentService.updateEditorProvider(editorProvider);
+      DocumentEditorProvider editorProvider = documentService.getEditorProvider(provider);
+      if (editorProviderDTO.getActive() != null) {
+        editorProvider.updateActive(editorProviderDTO.getActive());
+      }
+      if (editorProviderDTO.getPermissions() != null) {
+        List<String> permissions = editorProviderDTO.getPermissions().stream().map(permission -> permission.getId()).collect(Collectors.toList());
+        editorProvider.updatePermissions(permissions);
+      }
       return Response.status(Status.OK).build();
-    } catch (EditorProviderNotFoundException e) {
+    } catch (DocumentEditorProviderNotFoundException e) {
       return Response.status(Status.NOT_FOUND).entity("{ \"message\":\"" + PROVIDER_NOT_REGISTERED + "\"}").build();
+    } catch (PermissionValidationException e) {
+      return Response.status(Status.BAD_REQUEST).entity("{ \"message\":\"" + e.getMessage() + "\"}").build();
     }
   }
 
@@ -159,9 +198,9 @@ public class DocumentEditorsRESTService implements ResourceContainer {
                                  @FormParam("provider") String provider,
                                  @FormParam("workspace") String workspace) {
     try {
-      documentService.setPreferedEditor(userId, provider, fileId, workspace);
-    } catch (RepositoryException e) {
-      LOG.error("Cannot set prefered editor for user {} and fileId {}: {}", userId, fileId, e.getMessage());
+      documentService.savePreferedEditor(userId, provider, fileId, workspace);
+    } catch (Exception e) {
+      LOG.error("Cannot set prefered editor for user {} and node {}: {}", userId, fileId, e.getMessage());
       return Response.status(Status.INTERNAL_SERVER_ERROR).build();
     }
     return Response.ok().build();
@@ -173,7 +212,7 @@ public class DocumentEditorsRESTService implements ResourceContainer {
    * @param provider the provider
    * @param uriInfo the uri info
    */
-  protected void initLinks(EditorProvider provider, UriInfo uriInfo) {
+  protected void initLinks(DocumentEditorProviderDTO provider, UriInfo uriInfo) {
     String path = uriInfo.getAbsolutePath().toString();
     if (!uriInfo.getPathParameters().containsKey("provider")) {
       StringBuilder pathBuilder = new StringBuilder(path);
@@ -185,6 +224,56 @@ public class DocumentEditorsRESTService implements ResourceContainer {
     Link self = new Link("self", path.toString());
     Link update = new Link("update", path.toString());
     provider.setLinks(Arrays.asList(self, update));
+  }
+
+  
+  /**
+   * Convert to DTO.
+   *
+   * @param provider the provider
+   * @return the document editor provider DTO
+   */
+  protected DocumentEditorProviderDTO convertToDTO(DocumentEditorProvider provider) {
+    List<Permission> permissions = provider.getPermissions().stream().map(expression -> {
+      String[] temp = expression.split(":");
+      if (temp.length < 2) {
+        // user permission
+        String userId = temp[0];
+        Identity identity = identityManager.getOrCreateIdentity(OrganizationIdentityProvider.NAME, userId);
+        if (identity != null) {
+          Profile profile = identity.getProfile();
+          String avatarUrl = profile.getAvatarUrl() != null ? profile.getAvatarUrl() : LinkProvider.PROFILE_DEFAULT_AVATAR_URL;
+          return new Permission(userId, profile.getFullName(), avatarUrl);
+        }
+        return new Permission(userId);
+      } else {
+        // space
+        String groupId = temp[1];
+        Space space = spaceService.getSpaceByGroupId(groupId);
+        if (space != null) {
+          String displayName = space.getDisplayName();
+          String avatarUrl = space != null && space.getAvatarUrl() != null ? space.getAvatarUrl()
+                                                                           : LinkProvider.SPACE_DEFAULT_AVATAR_URL;
+          return new Permission(groupId, displayName, avatarUrl);
+        } else {
+          // group
+          Group group = null;
+          try {
+            group = organization.getGroupHandler().findGroupById(groupId);
+          } catch (Exception e) {
+            LOG.error("Cannot get group by id {}. {}", groupId, e.getMessage());
+          }
+          if (group != null) {
+            String displayName = group.getLabel();
+            String avatarUrl = LinkProvider.SPACE_DEFAULT_AVATAR_URL;
+            return new Permission(groupId, displayName, avatarUrl);
+          }
+        }
+        return new Permission(groupId);
+      }
+    }).collect(Collectors.toList());
+    
+    return new DocumentEditorProviderDTO(provider.getProviderName(), provider.isActive(), permissions);
   }
 
 }

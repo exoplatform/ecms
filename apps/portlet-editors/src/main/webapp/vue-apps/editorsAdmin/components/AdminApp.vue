@@ -28,11 +28,14 @@
                     <v-switch
                       :input-value="item.active"
                       class="v-input--switch--inset"
-                      @change="changeStatus(item)"
-                    ></v-switch>
+                      @change="changeStatus(item)"/>
                   </td>
                   <td class="text-center">
-                    <v-btn text icon color="indigo" @click.stop="showDialog = true">
+                    <v-btn 
+                      text
+                      icon
+                      color="indigo" 
+                      @click.stop="changeSettings(item)">
                       <i class="material-icons">
                         settings
                       </i>
@@ -43,45 +46,16 @@
             </template>
           </v-simple-table>
         </v-col>
-      </v-row>
-      <div class="text-center">
         <v-dialog
-          v-model="showDialog"
-          width="600"
-        >
-          <v-card>
-            <v-card-title
-              class="headline grey lighten-2 justify-space-between"
-              primary-title
-            >
-              {{ this.$t('editors.admin.modal.title') }}
-              <v-btn icon @click="showDialog = false">
-                <v-icon>close</v-icon>
-              </v-btn>
-            </v-card-title>
-            <v-card-text>
-              <div class="v-skeleton-loader__bone blockProvidersInner">
-                <div class="permissionsSkeleton">
-                  <div class="v-skeleton-loader  v-skeleton-loader--is-loading theme--light providersSkeleton skeletonText">
-                  </div>
-                  <div class="permissionsRow">
-                    <div class="v-skeleton-loader  v-skeleton-loader--is-loading theme--light providersSkeleton searchLabel">
-                    </div>
-                    <div class="v-skeleton-loader  v-skeleton-loader--is-loading theme--light providersSkeleton skeletonText searchField">
-                    </div>
-                  </div>
-                  <div class="permissionsRow permissionsRow--btns">
-                    <div class="v-skeleton-loader  v-skeleton-loader--is-loading theme--light providersSkeleton skeletonButton">
-                    </div>
-                    <div class="v-skeleton-loader  v-skeleton-loader--is-loading theme--light providersSkeleton skeletonButton">
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </v-card-text>
-          </v-card>
+          v-model="showDialog" 
+          width="500" 
+          @click:outside="showDialog = false">
+          <edit-dialog
+            :provider="selectedProvider" 
+            :search-url="services.identities"
+            @onDialogClose="showDialog = false" />
         </v-dialog>
-      </div>
+      </v-row>
     </v-container>
   </v-app>
 </template>
@@ -91,8 +65,8 @@ import { getInfo, postInfo } from "../EditorsAdminAPI";
 
 export default {
     props: {
-        entryPoint: {
-            type: String,
+        services: {
+            type: Object,
             required: true
         }
     },
@@ -100,7 +74,8 @@ export default {
         return {
             providers: [],
             switcher: false,
-            showDialog: false
+            showDialog: false,
+            selectedProvider: null
         };
     },
     created() {
@@ -108,7 +83,7 @@ export default {
     },
     methods: {
         getProviders() {
-          getInfo(this.entryPoint).then(data => this.providers = data.editors);
+          getInfo(this.services.providers).then(data => this.providers = data.editors);
         },
         changeStatus(provider) {
             const updateRest = provider.links.filter(({ rel, href }) => rel === "update")[0].href;
@@ -119,6 +94,10 @@ export default {
                   }
                 })
             });
+      },
+      changeSettings(item) {
+        this.selectedProvider = item;
+        this.showDialog = true;
       }
     }
 };

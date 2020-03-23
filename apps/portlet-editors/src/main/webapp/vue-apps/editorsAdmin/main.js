@@ -1,8 +1,8 @@
 import adminApp from "./components/AdminApp.vue";
-
-import "../../css/main.less";
+import EditDialog from "./components/EditDialog.vue";
 
 Vue.use(Vuetify);
+Vue.component("edit-dialog", EditDialog);
 
 const vuetify = new Vuetify({
   dark: true,
@@ -22,7 +22,7 @@ export function init(settings) {
       data: {
         message : "Hello Vue!"
       },
-      render: h => h(adminApp, { props: { entryPoint: settings.services.providers }}),
+      render: h => h(adminApp, { props: { services: settings.services }}),
       i18n,
       vuetify
     }).$mount("#editors-admin");

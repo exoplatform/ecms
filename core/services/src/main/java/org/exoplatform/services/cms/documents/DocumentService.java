@@ -17,15 +17,13 @@
 package org.exoplatform.services.cms.documents;
 
 import java.util.List;
-import java.util.Set;
 
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 
 import org.exoplatform.container.component.ComponentPlugin;
-import org.exoplatform.services.cms.documents.exception.EditorProviderNotFoundException;
+import org.exoplatform.services.cms.documents.exception.DocumentEditorProviderNotFoundException;
 import org.exoplatform.services.cms.documents.model.Document;
-import org.exoplatform.services.cms.documents.model.EditorProvider;
 import org.exoplatform.services.cms.drives.DriveData;
 
 /**
@@ -128,35 +126,35 @@ public interface DocumentService {
    * @return the node
    * @throws Exception the exception
    */
-  public Node createDocumentFromTemplate(Node currentNode, String title, DocumentTemplate template) throws Exception;
+  public Node createDocumentFromTemplate(Node currentNode, String title, NewDocumentTemplate template) throws Exception;
 
   /**
-   * Gets the registered template plugins.
+   * Gets the registered template providers.
    *
-   * @return the registered template plugins
+   * @return the registered template providers
    */
-  public Set<NewDocumentTemplatePlugin> getRegisteredTemplatePlugins();
+  public List<NewDocumentTemplateProvider> getNewDocumentTemplateProviders();
   
   /**
-   * Gets the registered editor plugins.
-   *
-   * @return the registered editors plugins
-   */
-  public Set<DocumentEditorPlugin> getRegisteredEditorPlugins();
-
-  /**
-   * Checks for document editor plugins.
+   * Checks for document editor providers.
    *
    * @return true, if successful
    */
-  public boolean hasDocumentEditorPlugins();
+  public boolean hasDocumentEditorProviders();
   
   /**
-   * Checks for document template plugins.
+   * Checks for document template providers.
    *
    * @return true, if successful
    */
-  public boolean hasDocumentTemplatePlugins();
+  public boolean hasDocumentTemplateProviders();
+  
+  /**
+   * Registers document metadata plugin.
+   * 
+   * @param plugin the ComponentPlugin
+   */
+  public void addDocumentMetadataPlugin(ComponentPlugin plugin);
   
   /**
    * Gets prefered editor provider for specified file and user.
@@ -165,9 +163,9 @@ public interface DocumentService {
    * @param uuid the uuid
    * @param workspace the workspace
    * @return the preffered editor (provider)
-   * @throws RepositoryException the RepositoryException
+   * @throws Exception the exception
    */
-  public String getPreferedEditor(String userId, String uuid, String workspace) throws RepositoryException;
+  public String getPreferedEditor(String userId, String uuid, String workspace) throws Exception;
   
   /**
    * Sets preffered editor provider for specified file and user.
@@ -176,16 +174,16 @@ public interface DocumentService {
    * @param provider the editor provider
    * @param uuid the uuid
    * @param workspace the workspace
-   * @throws RepositoryException the RepositoryException
+   * @throws Exception the exception
    */
-  public void setPreferedEditor(String userId, String provider, String uuid, String workspace) throws RepositoryException;
+  public void savePreferedEditor(String userId, String provider, String uuid, String workspace) throws Exception;
 
   /**
    * Gets the editor providers.
    *
    * @return the editor providers
    */
-  public List<EditorProvider> getEditorProviders();
+  public List<DocumentEditorProvider> getDocumentEditorProviders();
   
   /**
    * Gets the editor provider.
@@ -193,39 +191,20 @@ public interface DocumentService {
    * @param provider the provider
    * @return the editor provider
    */
-  public EditorProvider getEditorProvider(String provider) throws EditorProviderNotFoundException;
-  
-
-  /**
-   * Update editor provider.
-   *
-   * @param editorProvider the editor provider
-   */
-  public void updateEditorProvider(EditorProvider editorProvider) throws EditorProviderNotFoundException;
+  public DocumentEditorProvider getEditorProvider(String provider) throws DocumentEditorProviderNotFoundException;
   
   /**
-   * Updates information about current open editor for the document.
-   * It is assumed that the document is being edited at the moment.
-   * 
-   * @param uuid the uuid
-   * @param workspace the workspace
-   * @param provider the current provider or null if the document has been closed.
-   */
-  public void setCurrentDocumentEditor(String uuid, String workspace, String provider) throws RepositoryException;
-  
-  /**
-   * Inits document editors JS module to the current page.
-   * 
+   * Inits document editors JS module
    */
   public void initDocumentEditorsModule();
   
   /**
-   * NewDocumentTypesConfig contains all registered templates for specified provider.
+   * NewDocumentTypesConfig contains all registered template configs for specified provider.
    */
   public static class DocumentTemplatesConfig {
 
     /** The document templates. */
-    protected List<DocumentTemplate> templates;
+    protected List<NewDocumentTemplateConfig> templates;
 
     /** The providerName. */
     protected String                 providerName;
@@ -235,7 +214,7 @@ public interface DocumentService {
      *
      * @return the document types
      */
-    public List<DocumentTemplate> getTemplates() {
+    public List<NewDocumentTemplateConfig> getTemplates() {
       return templates;
     }
 
@@ -244,7 +223,7 @@ public interface DocumentService {
      *
      * @param templates the new templates
      */
-    public void setTemplates(List<DocumentTemplate> templates) {
+    public void setTemplates(List<NewDocumentTemplateConfig> templates) {
       this.templates = templates;
     }
 

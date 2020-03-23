@@ -102,13 +102,11 @@
           userId : eXo.env.portal.userName,
           provider : provider,
           workspace : currentWorkspace
-        },
-        success: function(result) {
-          log("Prefered provider " + provider + " saved. " + result);
-        },
-        error : function(xhr,status,error) {
-          log("Cannot save prefered provider " + provider + ": " + status + " " + error);
         }
+      }).then(function(result) {
+        log("Prefered provider " + provider + " saved. " + result);
+      }).catch(function(xhr,status,error) {
+        log("Cannot save prefered provider " + provider + ": " + status + " " + error);
       });
     };
     
@@ -363,7 +361,7 @@
         "workspace" : workspace
       });
     };
-    
+
     /**
      * Clears buttonsFns
      * 
