@@ -1,6 +1,7 @@
 <template>
   <v-app id="editors-admin" class="VuetifyApp">
     <v-container style="width: 95%" class="v-application--is-ltr">
+      <div v-show="error" class="alert alert-error">{{ $t(error) }}</div>
       <v-row class="white">
         <v-col xs12 px-3>
           <h4 class="editorsTitle">
@@ -10,10 +11,10 @@
       </v-row>
       <v-row>
         <v-col xs12>
-          <v-simple-table class="providersTable">
+          <v-simple-table :dense="true" class="uiGrid table table-hover table-striped providersTable">
             <template v-slot:default>
               <thead>
-                <tr>
+                <tr class="providersTableRow">
                   <th class="text-left">{{ $t('editors.admin.table.Provider') }}</th>
                   <th class="text-left">{{ $t('editors.admin.table.Description') }}</th>
                   <th class="text-left" style="width: 5%">{{ $t('editors.admin.table.Active') }}</th>
@@ -21,25 +22,31 @@
                 </tr>
               </thead>
               <tbody v-if="providers.length > 0">
-                <tr v-for="item in providers" :key="item.provider">
-                  <td>{{ $t(`editors.admin.${item.provider}.name`) }}</td>
-                  <td>{{ $t(`editors.admin.${item.provider}.description`) }}</td>
-                  <td>
-                    <v-switch
-                      :input-value="item.active"
-                      class="v-input--switch--inset"
-                      @change="changeStatus(item)"/>
+                <tr 
+                  v-for="item in providers" 
+                  :key="item.provider" 
+                  class="providersTableRow">
+                  <td><div>{{ $t(`editors.admin.${item.provider}.name`) }}</div></td>
+                  <td><div>{{ $t(`editors.admin.${item.provider}.description`) }}</div></td>
+                  <td class="center actionContainer">
+                    <div>
+                      <v-switch
+                        :input-value="item.active"
+                        :ripple="false"
+                        color="#568dc9"
+                        class="providersSwitcher"
+                        @change="changeStatus(item)"/>
+                    </div>
                   </td>
-                  <td class="text-center">
-                    <v-btn 
-                      text
-                      icon
-                      color="indigo" 
+                  <td class="center actionContainer">
+                    <a 
+                      data-placement="bottom" 
+                      rel="tooltip" 
+                      class="actionIcon" 
+                      data-original-title="Edit" 
                       @click.stop="changeSettings(item)">
-                      <i class="material-icons">
-                        settings
-                      </i>
-                    </v-btn>
+                      <i class="uiIconEdit uiIconLightGray"></i>
+                    </a>
                   </td>
                 </tr>
               </tbody>
@@ -48,7 +55,8 @@
         </v-col>
         <v-dialog
           v-model="showDialog" 
-          width="500" 
+          width="500"
+          style="overflow-x: hidden"
           @click:outside="showDialog = false">
           <edit-dialog
             :provider="selectedProvider" 
@@ -61,7 +69,7 @@
 </template>
 
 <script>
-import { getInfo, postInfo } from "../EditorsAdminAPI";
+import { postData, getData, parsedErrorMsg } from "../EditorsAdminAPI";
 
 export default {
     props: {
@@ -75,27 +83,41 @@ export default {
             providers: [],
             switcher: false,
             showDialog: false,
-            selectedProvider: null
+            selectedProvider: null,
+            error: null
         };
     },
     created() {
         this.getProviders();
     },
     methods: {
-        getProviders() {
-          getInfo(this.services.providers).then(data => this.providers = data.editors);
+        async getProviders() {
+          // services object contains urls for requests
+          try {
+            const data = await getData(this.services.providers);
+            this.error = null;
+            this.providers = data.editors;
+          } catch(err) {
+            this.error = parsedErrorMsg(err);
+          }
         },
-        changeStatus(provider) {
+        async changeStatus(provider) {
+          // getting rest for updating provider status
             const updateRest = provider.links.filter(({ rel, href }) => rel === "update")[0].href;
-            postInfo(updateRest, { active: !provider.active }).then(data => { 
-                this.providers.map(p => {
-                  if (p.provider === provider.provider) {
-                    p.active = !provider.active;
-                  }
-                })
-            });
-      },
+            try {
+              const data = await postData(updateRest, { active: !provider.active });
+              this.error = null;
+              this.providers.map(p => {
+                if (p.provider === provider.provider) {
+                  p.active = !provider.active;
+                }
+              });
+            } catch(err) {
+              this.error = parsedErrorMsg(err);
+            }
+        },
       changeSettings(item) {
+        // settings selectedProvider before passing it to dialog
         this.selectedProvider = item;
         this.showDialog = true;
       }
@@ -103,15 +125,14 @@ export default {
 };
 </script>
 
-<style scoped>
-  .editorsTitle {
-    color: #4d5466;
-    font-size: 24px;
-    position: relative;
-    overflow: hidden;
-  }
+<style scoped lang="less">
+.editorsTitle {
+  color: #4d5466;
+  font-size: 24px;
+  position: relative;
+  overflow: hidden;
 
-  .editorsTitle:after {
+  &:after {
     border-bottom: 1px solid #dadada;
     height: 11px;
     content: "";
@@ -119,41 +140,38 @@ export default {
     width: 100%;
     margin-left: 10px;
   }
+}
 
-  .permissionsSkeleton {
-    display: flex;
-    flex-direction: column;
-    padding: 15px 15px 0;
-    width: 100%;
-  }
+.providersTable {
+  border-left: 0;
 
-  .permissionsRow {
-    display: flex;
-    align-items: center;
-  }
+  &Row {
+    th, td {
+      height: 20px;
+      padding: 5px 15px;
+    }
 
-  .permissionsRow--btns {
-    justify-content: center;
-    margin-top: 10px;
-  }
+    &:nth-child(even):hover>td, &:nth-child(even)>td {
+      background: #f6f7fa !important;
+    }
 
-  .permissionsRow > .searchLabel {
-    width: 10%;
-    height: 12px;
-    border-radius: 15px;
-    margin-top: 16px;
-    margin-bottom: 16px;
-    margin-right: 10px;
+    &:nth-child(odd):hover>td, &:nth-child(odd)>td {
+      background: #fff !important;
+    }
   }
+}
 
-  .searchField {
-    height: 20px;
-  }
+.providersSwitcher {
+  padding: 0;
+  margin: 0;
+  height: 25px;
+}
 
-  .skeletonButton {
-    width: 20%;
-    height: 40px;
-    border-radius: 15px;
-    margin-right: 10px;
-  }
+.alert {
+  position: fixed;
+  top: 70px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  z-index: 1000;
+}
 </style>

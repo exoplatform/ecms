@@ -1,34 +1,38 @@
-export function getInfo(link) {
-  return fetch(link, { method: 'GET' }).then(res => {
-    if (res && res.ok) {
-      return res.json();
-    } else {
-      log('Unable to get data');
-    }
-  })
-}
-
-export function postInfo(link, postData) {
-  let requestBody;
-  for (const prop in postData) {
-    requestBody = `${encodeURIComponent(prop)}=${encodeURIComponent(postData[prop])}`;
-  }
-  return fetch(link, {
-    method: 'POST',
+export async function getData(url) {
+  const response = await fetch(url, { 
     headers: {
-      'Content-Type': 'application/x-www-form-urlencoded'
+      'Content-Type': 'application/json' 
     },
-    body: requestBody
-  }).then(res => {
-    if (res && res.ok) {
-      return res;
-    } else {
-      log('Unable to post data');
-    }
+    method: 'GET'
   });
+  if (response && response.ok) {
+    return response.json();
+  } else {
+    log('Unable to get data');
+    const errorText = await response.text();
+    throw new Error(errorText);
+  }
 }
 
-function log(msg, err) {
+export async function postData(url, data) {
+  const response = await fetch(url, {
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    method: 'POST',
+    body: JSON.stringify(data)
+  });
+  if (response && response.ok) {
+    const responseText = await response.text();
+    return responseText ? JSON.parse(responseText) : {};
+  } else {
+    log('Unable to post data');
+    const errorText = await response.text();
+    throw new Error(errorText);
+  }
+}
+
+export function log(msg, err) {
   const logPrefix = "[editorsAdmin] ";
   if (typeof console !== "undefined" && typeof console.log !== "undefined") {
     const isoTime = `--${new Date().toISOString()}`;
@@ -59,4 +63,13 @@ function log(msg, err) {
       console.log(logPrefix + msgLine + isoTime);
     }
   }
+}
+
+export function parsedErrorMsg(error) {
+  try {
+    JSON.parse(error.message)
+  } catch(e) {
+    return error.message;
+  }
+  return JSON.parse(error.message).message;
 }
