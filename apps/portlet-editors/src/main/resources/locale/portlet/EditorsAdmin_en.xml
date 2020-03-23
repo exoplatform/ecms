@@ -41,11 +41,11 @@
         <Everybody>Everybody</Everybody>
       </modal>
       <onlyoffice>
-        <id>ONLYOFFICE</id>
+        <name>ONLYOFFICE</name>
         <description>ONLYOFFICE Online Document Editor</description>
       </onlyoffice>
       <officeonline>
-        <id>Microsoft Office Online</id>
+        <name>Microsoft Office Online</name>
         <description>Microsoft Office Online editors for Word, Excel, Powerpoint</description>
       </officeonline>
       <buttons>
