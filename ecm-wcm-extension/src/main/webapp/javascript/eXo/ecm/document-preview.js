@@ -477,7 +477,7 @@
       }
 
       var onlyOfficeButton =
-              '<div class="onlyOfficeEditBtn">' +
+              '<div class="onlyOfficeEditBtn hidden-tabletL">' +
                  '<a href="/portal/' + eXo.env.portal.portalName + '/oeditor?docId=' + this.settings.doc.id + '" target="_blank"><i class="uiIconEdit uiIconWhite"></i>'+ eXo.ecm.WCMUtils.getBundle("File.view.label.editOnline",eXo.env.portal.language) +'</a>' +
               '</div>';
 
