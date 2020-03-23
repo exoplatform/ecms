@@ -2,7 +2,9 @@ package org.exoplatform.clouddrive.onedrive;
 
 import org.exoplatform.clouddrive.CloudProviderException;
 
+// TODO generate serial ID, add javadocs
 public class OneDriveException extends CloudProviderException {
+  
     public OneDriveException(String message, Throwable cause) {
         super(message, cause);
     }

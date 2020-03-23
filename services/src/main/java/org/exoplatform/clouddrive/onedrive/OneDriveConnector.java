@@ -29,9 +29,6 @@ public class OneDriveConnector extends CloudDriveConnector {
                            ExtendedMimeTypeResolver mimeTypes,
                            InitParams params) throws ConfigurationException {
     super(jcrService, sessionProviders, finder, mimeTypes, params);
-    if (LOG.isDebugEnabled()) {
-      LOG.debug("OneDriveConnector():  ");
-    }
   }
 
   class API {
@@ -69,9 +66,6 @@ public class OneDriveConnector extends CloudDriveConnector {
     }
 
     OneDriveAPI build() throws CloudDriveException, IOException {
-      if (LOG.isDebugEnabled()) {
-        LOG.debug("OneDriveAPI build():  ");
-      }
       if (code != null && code.length() > 0) {
         return new OneDriveAPI(getClientId(), getClientSecret(), code, getConnectorSchema() + "://" + getConnectorHost() + "/portal/rest/clouddrive/connect/onedrive" );
       } else {
@@ -82,9 +76,6 @@ public class OneDriveConnector extends CloudDriveConnector {
 
   @Override
   protected CloudProvider createProvider() throws ConfigurationException {
-    if (LOG.isDebugEnabled()) {
-      LOG.debug("createProvider():  ");
-    }
     StringBuilder authUrl = new StringBuilder("https://login.microsoftonline.com/common/oauth2/v2.0/authorize?");
     authUrl.append("response_type=code")
            .append("&redirect_uri=")
@@ -103,12 +94,9 @@ public class OneDriveConnector extends CloudDriveConnector {
 
   @Override
   protected CloudUser authenticate(Map<String, String> params) throws CloudDriveException {
-    if (LOG.isDebugEnabled()) {
-      LOG.debug("authentificate():  ");
-    }
     String code = params.get(OAUTH2_CODE);
     if (code != null && code.length() > 0) {
-      OneDriveAPI driveAPI = null;
+      OneDriveAPI driveAPI;
       try {
         driveAPI = new API().auth(code).build();
       } catch (IOException e) {
@@ -116,20 +104,16 @@ public class OneDriveConnector extends CloudDriveConnector {
       }
       User driveAPIUser = driveAPI.getUser();
       if (driveAPIUser != null) {
-        if (LOG.isDebugEnabled()) {
-          LOG.debug("driveAPIUSER!=null:  ");
-        }
-
         String userId = driveAPIUser.id;
         String username = driveAPIUser.userPrincipalName;
         String email = driveAPIUser.userPrincipalName;
         if (LOG.isDebugEnabled()) {
-          LOG.debug("userId: " + userId + " username " + username);
+          LOG.debug(">> Authenticate user: {}[{}]", userId, username);
         }
         OneDriveUser user = new OneDriveUser(userId, username, email, provider, driveAPI);
         return user;
       } else {
-        return null;
+        throw new CloudDriveException("API user cannot be found to authenticate with " + code);
       }
     } else {
       throw new CloudDriveException("Access code should not be null or empty");
@@ -139,8 +123,7 @@ public class OneDriveConnector extends CloudDriveConnector {
   @Override
   protected JCRLocalOneDrive createDrive(CloudUser user, Node driveNode) throws CloudDriveException, RepositoryException {
     if (LOG.isDebugEnabled()) {
-      LOG.debug("createDrive");
-      LOG.debug("createDrive() User: id = " + user.getId() + " email = " + user.getEmail() + " username = " + user.getUsername());
+      LOG.debug(">> createDrive user: {}[{}, {}] ", user.getId(), user.getEmail(), user.getUsername());
     }
     return new JCRLocalOneDrive(user, driveNode, sessionProviders, jcrFinder, mimeTypes);
   }
@@ -152,17 +135,16 @@ public class OneDriveConnector extends CloudDriveConnector {
 
   @Override
   protected CloudDrive loadDrive(Node driveNode) throws CloudDriveException, RepositoryException {
-    if (LOG.isDebugEnabled()) {
-      LOG.debug("loadDrive");
-    }
     JCRLocalCloudDrive.checkNotTrashed(driveNode);
     JCRLocalCloudDrive.migrateName(driveNode);
     try {
       return new JCRLocalOneDrive(new API(), getProvider(), driveNode, sessionProviders, jcrFinder, mimeTypes);
     } catch (IOException e) {
-      LOG.error("unable to create LocalOneDrive", e);
-
+      if (LOG.isDebugEnabled()) {
+        // At debug level show more info (a node)
+        LOG.debug("Unable load locally connected drive at node {}", driveNode, e);
+      }
+      throw new CloudDriveException("Unable load locally connected drive");
     }
-    return null;
   }
 }

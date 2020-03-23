@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-
   Copyright (C) 2020 eXo Platform SAS.
   
   This is free software; you can redistribute it and/or modify it
@@ -21,15 +20,17 @@
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.exoplatform.addons.clouddrive</groupId>
     <artifactId>exo-clouddrive-onedrive</artifactId>
     <version>2.0.x-SNAPSHOT</version>
   </parent>
-  <modelVersion>4.0.0</modelVersion>
 
   <artifactId>exo-clouddrive-onedrive-services</artifactId>
-  <name>eXo Cloud Drive :: Connectors :: One Drive :: Services</name>
+  <name>eXo Cloud Drive :: Connectors :: OneDrive :: Services</name>
+  <packaging>jar</packaging>
+  <description>eXo Cloud Drive Microsoft OneDrive connector extension configuration and services</description>
 
   <dependencies>
     <!-- Microsoft Graph SDK for Java -->
@@ -117,7 +118,7 @@
       <scope>provided</scope>
       <type>jar</type>
     </dependency>
-    
+
     <!-- for tests -->
     <dependency>
       <groupId>org.hsqldb</groupId>
@@ -186,7 +187,6 @@
       <artifactId>hamcrest-core</artifactId>
       <scope>test</scope>
     </dependency>
-    <!-- https://mvnrepository.com/artifact/org.powermock/powermock-api-mockito -->
     <dependency>
       <groupId>org.powermock</groupId>
       <artifactId>powermock-api-mockito</artifactId>
@@ -199,4 +199,38 @@
     </dependency>
   </dependencies>
 
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-shade-plugin</artifactId>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+            <configuration>
+              <artifactSet>
+                <includes>
+                  <include>com.google.code.gson:gson</include>
+                  <include>com.microsoft.graph:microsoft-graph</include>
+                </includes>
+              </artifactSet>
+              <relocations>
+                <relocation>
+                  <pattern>com.google.gson</pattern>
+                  <shadedPattern>org.exoplatform.clouddrive.onedrive.shaded.google.gson</shadedPattern>
+                </relocation>
+                <relocation>
+                  <pattern>com.microsoft.graph</pattern>
+                  <shadedPattern>org.exoplatform.clouddrive.onedrive.shaded.microsoft.graph</shadedPattern>
+                </relocation>
+              </relocations>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
 </project>

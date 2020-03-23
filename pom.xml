@@ -11,8 +11,8 @@
 
   <artifactId>exo-clouddrive-onedrive</artifactId>
   <packaging>pom</packaging>
-  <name>eXo Cloud Drive :: Connectors :: One Drive</name>
-  <description>eXo Cloud Drive One Drive connector</description>
+  <name>eXo Cloud Drive :: Connectors :: OneDrive</name>
+  <description>eXo Cloud Drive Microsoft OneDrive connector</description>
 
   <modules>
     <module>services</module>

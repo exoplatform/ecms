@@ -19,25 +19,26 @@
   02110-1301 USA, or see the FSF site: http://www.fsf.org.
 -->
 <gatein-resources xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://www.gatein.org/xml/ns/gatein_resources_1_3 http://www.gatein.org/xml/ns/gatein_resources_1_3"
-  xmlns="http://www.gatein.org/xml/ns/gatein_resources_1_3">
+  xsi:schemaLocation="http://www.exoplatform.org/xml/ns/gatein_resources_1_4 http://www.exoplatform.org/xml/ns/gatein_resources_1_4"
+  xmlns="http://www.exoplatform.org/xml/ns/gatein_resources_1_4">
 
-    <!-- Javascript for Cloud Drive support of One Drive -->
+  <!-- Javascript for Cloud Drive support of One Drive -->
   <module>
     <name>cloudDriveSocketIO</name>
     <load-group>cloudDriveOnedriveGRP</load-group>
     <script>
-        <adapter>
-            (function() {
-            <include>/js/socket.io.js</include>
-            return {
-            io: io
-            };
-            })();
-        </adapter>
+      <minify>false</minify>
+      <adapter>
+        (function() {
+        <include>/js/socket.io.js</include>
+        return {
+          io: io
+        };
+        })();
+      </adapter>
     </script>
   </module>
-
+  
   <module>
     <name>cloudDrive_onedrive</name>
     <load-group>cloudDriveOnedriveGRP</load-group>
