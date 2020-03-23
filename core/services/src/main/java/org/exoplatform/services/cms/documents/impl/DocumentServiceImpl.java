@@ -17,14 +17,18 @@
 package org.exoplatform.services.cms.documents.impl;
 
 import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
+import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 import javax.jcr.Node;
@@ -50,11 +54,13 @@ import org.exoplatform.resolver.ResourceResolver;
 import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.documents.DocumentEditor;
 import org.exoplatform.services.cms.documents.DocumentEditorProvider;
+import org.exoplatform.services.cms.documents.DocumentMetadataPlugin;
 import org.exoplatform.services.cms.documents.DocumentService;
 import org.exoplatform.services.cms.documents.NewDocumentTemplate;
 import org.exoplatform.services.cms.documents.NewDocumentTemplatePlugin;
 import org.exoplatform.services.cms.documents.NewDocumentTemplateProvider;
 import org.exoplatform.services.cms.documents.exception.DocumentEditorProviderNotFoundException;
+import org.exoplatform.services.cms.documents.exception.DocumentExtensionNotSupportedException;
 import org.exoplatform.services.cms.documents.model.Document;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.drives.ManageDriveService;
@@ -71,6 +77,7 @@ import org.exoplatform.services.jcr.impl.core.NodeImpl;
 import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.organization.OrganizationService;
 import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
@@ -116,8 +123,10 @@ public class DocumentServiceImpl implements DocumentService {
   private NodeHierarchyCreator nodeHierarchyCreator;
   private LinkManager linkManager;
   private PortalContainerInfo portalContainerInfo;
+  private Map<String, DocumentMetadataPlugin> metadataPlugins = new HashMap<>();
+  private OrganizationService organizationService;
 
-  public DocumentServiceImpl(ManageDriveService manageDriveService, Portal portal, SessionProviderService sessionProviderService, RepositoryService repoService, NodeHierarchyCreator nodeHierarchyCreator, LinkManager linkManager, PortalContainerInfo portalContainerInfo) {
+  public DocumentServiceImpl(ManageDriveService manageDriveService, Portal portal, SessionProviderService sessionProviderService, RepositoryService repoService, NodeHierarchyCreator nodeHierarchyCreator, LinkManager linkManager, PortalContainerInfo portalContainerInfo, OrganizationService organizationService) {
     this.manageDriveService = manageDriveService;
     this.sessionProviderService = sessionProviderService;
     this.repoService = repoService;
@@ -125,6 +134,7 @@ public class DocumentServiceImpl implements DocumentService {
     this.portal = portal;
     this.linkManager = linkManager;
     this.portalContainerInfo = portalContainerInfo;
+    this.organizationService = organizationService;
   }
 
   @Override
@@ -491,6 +501,18 @@ public class DocumentServiceImpl implements DocumentService {
       ApplicationResourceResolver appResolver = context.getApplication().getResourceResolver();
       ResourceResolver resolver = appResolver.getResourceResolver(template.getPath());
       data = resolver.getInputStream(template.getPath());
+      DocumentMetadataPlugin metadataPlugin = metadataPlugins.get(template.getExtension());
+      if(metadataPlugin != null && metadataPlugin.isExtensionSupported(template.getExtension())) {
+        try {
+          data = metadataPlugin.updateMetadata(template.getExtension(), data, new Date(), getCurrentUserDisplayName());
+        } catch (DocumentExtensionNotSupportedException e) {
+          LOG.error("Document extension is not supported by metadata plugin.", e);
+        } catch (IOException e) {
+          LOG.error("Couldn't add metadata to the document from template.", e);
+        } 
+      } else {
+        LOG.warn("Couldn't find appropriate metadata plugin for the {} extension.", template.getExtension());
+      }
     }
     // Add node
     Node addedNode = currentNode.addNode(title, NT_FILE);
@@ -540,6 +562,36 @@ public class DocumentServiceImpl implements DocumentService {
    * {@inheritDoc}
    */
   @Override
+  public void addDocumentMetadataPlugin(ComponentPlugin plugin) {
+    Class<DocumentMetadataPlugin> pclass = DocumentMetadataPlugin.class;
+    if (pclass.isAssignableFrom(plugin.getClass())) {
+      DocumentMetadataPlugin newPlugin = pclass.cast(plugin);
+      LOG.info("Adding DocumentMetadataPlugin [{}]", plugin.toString());
+      newPlugin.getSupportedExtensions().forEach(ext -> metadataPlugins.put(ext, newPlugin));
+      if (LOG.isDebugEnabled()) {
+        LOG.debug("Registered DocumentMetadataPlugin instance of {}", plugin.getClass().getName());
+      }
+    } else {
+      LOG.error("The DocumentMetadataPlugin plugin is not an instance of " + pclass.getName());
+    }
+  }
+  
+
+  /**
+   * Gets display name of current user. In case of any errors return current userId
+   * 
+   * @return the display name
+   */
+  protected String getCurrentUserDisplayName() {
+    String userId = ConversationState.getCurrent().getIdentity().getUserId();
+    try {
+      return organizationService.getUserHandler().findUserByName(userId).getDisplayName();
+    } catch (Exception e) {
+      LOG.error("Error searching user " + userId, e);
+      return userId;
+    }
+  }
+
   public boolean hasDocumentEditorProviders() {
     return editorProviders.size() > 0;
   }
@@ -613,5 +665,4 @@ public class DocumentServiceImpl implements DocumentService {
     Session session = sp.getSession(workspace, repoService.getCurrentRepository());
     return session.getNodeByUUID(uuid);
   }
-  
 }

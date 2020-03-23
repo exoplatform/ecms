@@ -73,10 +73,10 @@ public class DocumentEditorProviderImpl implements DocumentEditorProvider {
   /**
    * Instantiates a new document editor provider impl.
    *
-   * @param editorOps the editor ops
+   * @param editor the editor
    */
-  protected DocumentEditorProviderImpl(DocumentEditor editorOps) {
-    this.editor = editorOps;
+  protected DocumentEditorProviderImpl(DocumentEditor editor) {
+    this.editor = editor;
     // TODO: refactor, use container injection
     this.settingService = WCMCoreUtils.getService(SettingService.class);
     this.identityManager = WCMCoreUtils.getService(IdentityManager.class);
@@ -87,8 +87,8 @@ public class DocumentEditorProviderImpl implements DocumentEditorProvider {
       this.active = storedActive;
       this.permissions = storedPermissions;
     } else {
-      this.active = editorOps.isActive();
-      this.permissions = editorOps.getPermissions();
+      this.active = editor.isActive();
+      this.permissions = editor.getPermissions();
       storeActive();
       storePermissions();
     }

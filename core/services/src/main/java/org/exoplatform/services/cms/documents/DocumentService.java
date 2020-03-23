@@ -150,6 +150,13 @@ public interface DocumentService {
   public boolean hasDocumentTemplateProviders();
   
   /**
+   * Registers document metadata plugin.
+   * 
+   * @param plugin the ComponentPlugin
+   */
+  public void addDocumentMetadataPlugin(ComponentPlugin plugin);
+  
+  /**
    * Gets prefered editor provider for specified file and user.
    *
    * @param userId the userId

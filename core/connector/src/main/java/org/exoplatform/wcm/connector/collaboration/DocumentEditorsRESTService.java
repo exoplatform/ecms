@@ -51,8 +51,8 @@ import org.exoplatform.social.core.service.LinkProvider;
 import org.exoplatform.social.core.space.model.Space;
 import org.exoplatform.social.core.space.spi.SpaceService;
 import org.exoplatform.wcm.connector.collaboration.dto.DocumentEditorProviderDTO;
-import org.exoplatform.wcm.connector.collaboration.dto.DocumentEditorProviderDTO.Permission;
 import org.exoplatform.wcm.connector.collaboration.dto.Link;
+import org.exoplatform.wcm.connector.collaboration.dto.Permission;
 import org.exoplatform.ws.frameworks.json.impl.JsonGeneratorImpl;
 
 /**
