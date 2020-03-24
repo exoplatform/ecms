@@ -110,3 +110,11 @@
 .previewBtn .editorButtonContainer .dropdown-menu a{
   color: #3a3a3a;
 }
+
+.editorButtonContainer .disabledProvider:active {
+  pointer-events: none;
+}
+
+.editorButtonContainer .disabledProvider a {
+  cursor: not-allowed;
+}

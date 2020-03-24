@@ -206,7 +206,7 @@
         addEditorButtonsContainer($target, fileId, buttons);
       }
     };
-    
+
     var subscribeDocument = function(docId) {
       // Use only one channel for one document
       if (subscribedDocuments.docId) {
@@ -219,13 +219,14 @@
         
         switch(result.type) {
           case DOCUMENT_OPENED: {
-            var $buttons = $('.editorButton[data-provider="' + result.provider + '"][data-fileId="' + result.fileId + '"]');
-            $.each( $buttons, function( index, $elem ){
-              // TODO : disable buttons
-            });
+          	var buttons = $('.editorButton[data-provider!="' + result.provider + '"][data-fileId="' + result.fileId + '"]').each(function(){
+              $(this).addClass("disabledProvider");
+    	    });
           } break;
           case DOCUMENT_CLOSED: {
-         // TODO : enable buttons
+            var buttons = $('.editorButton[data-provider!="' + result.provider + '"][data-fileId="' + result.fileId + '"]').each(function(){
+              $(this).removeClass("disabledProvider");
+    	    });
           } break;
         }
       }, cometdContext, function(subscribeReply) {
