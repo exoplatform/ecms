@@ -22,6 +22,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import javax.annotation.security.RolesAllowed;
+import javax.jcr.AccessDeniedException;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -46,8 +47,10 @@ import org.exoplatform.social.core.profile.ProfileFilter;
 import org.exoplatform.social.core.service.LinkProvider;
 import org.exoplatform.social.core.space.model.Space;
 import org.exoplatform.social.core.space.spi.SpaceService;
+import org.exoplatform.wcm.connector.collaboration.dto.ErrorMessage;
 import org.exoplatform.wcm.connector.collaboration.dto.IdentitySearchResult;
 import org.exoplatform.ws.frameworks.json.impl.JsonGeneratorImpl;
+
 
 /**
  * The Class IdentitySearchRESTService.
@@ -56,19 +59,22 @@ import org.exoplatform.ws.frameworks.json.impl.JsonGeneratorImpl;
 public class IdentitySearchRESTService implements ResourceContainer {
 
   /** The Constant LOG. */
-  protected static final Log    LOG             = ExoLogger.getLogger(IdentitySearchRESTService.class);
+  protected static final Log    LOG                    = ExoLogger.getLogger(IdentitySearchRESTService.class);
+
+  /** The Constant CANNOT_LOAD_IDENTITIES. */
+  protected static final String CANNOT_LOAD_IDENTITIES = "editors.admin.error.CannotLoadIdentities";
 
   /** The max result size. */
-  protected static final int    MAX_RESULT_SIZE = 20;
+  protected static final int    MAX_RESULT_SIZE        = 20;
 
   /** The Constant USER_TYPE. */
-  protected static final String USER_TYPE       = "user";
+  protected static final String USER_TYPE              = "user";
 
   /** The Constant SPACE_TYPE. */
-  protected static final String SPACE_TYPE      = "space";
+  protected static final String SPACE_TYPE             = "space";
 
   /** The Constant GROUP_TYPE. */
-  protected static final String GROUP_TYPE      = "group";
+  protected static final String GROUP_TYPE             = "group";
 
   /** The identity manager. */
   protected IdentityManager     identityManager;
@@ -92,7 +98,6 @@ public class IdentitySearchRESTService implements ResourceContainer {
     this.spaceService = spaceService;
   }
 
-
   /**
    * Search identities.
    *
@@ -108,12 +113,19 @@ public class IdentitySearchRESTService implements ResourceContainer {
     try {
       String json = new JsonGeneratorImpl().createJsonArray(findGroupsAndUsers(name)).toString();
       return Response.status(Status.OK).entity("{\"identities\":" + json + "}").build();
-    } catch (Exception e) {
+    } catch (AccessDeniedException e) {
+      LOG.error("Access denied to get identities with name: {}, error: {}", name, e.getMessage());
+      return Response.status(Status.INTERNAL_SERVER_ERROR)
+                     .entity(new ErrorMessage("Access denied error.", CANNOT_LOAD_IDENTITIES))
+                     .build();
+    }
+    catch (Exception e) {
       LOG.error("Cannot get identities with name: {}, error: {}", name, e.getMessage());
-      return Response.status(Status.INTERNAL_SERVER_ERROR).build();
+      return Response.status(Status.INTERNAL_SERVER_ERROR)
+                     .entity(new ErrorMessage(e.getMessage(), CANNOT_LOAD_IDENTITIES))
+                     .build();
     }
   }
-
 
   /**
    * Find groups and users.
@@ -123,21 +135,20 @@ public class IdentitySearchRESTService implements ResourceContainer {
    * @throws Exception the exception
    */
   protected List<IdentitySearchResult> findGroupsAndUsers(String name) throws Exception {
-    List<IdentitySearchResult> IdentitySearchResults = findUsers(name, MAX_RESULT_SIZE);
-    int remain = MAX_RESULT_SIZE - IdentitySearchResults.size();
+    List<IdentitySearchResult> identitySearchResults = findUsers(name, MAX_RESULT_SIZE);
+    int remain = MAX_RESULT_SIZE - identitySearchResults.size();
     if (remain > 0) {
-      IdentitySearchResults.addAll(findGroups(name, remain));
+      identitySearchResults.addAll(findGroups(name, remain));
     }
 
-    Collections.sort(IdentitySearchResults, new Comparator<IdentitySearchResult>() {
+    Collections.sort(identitySearchResults, new Comparator<IdentitySearchResult>() {
       public int compare(IdentitySearchResult s1, IdentitySearchResult s2) {
         return s1.getDisplayName().compareTo(s2.getDisplayName());
       }
     });
 
-    return IdentitySearchResults;
+    return identitySearchResults;
   }
-
 
   /**
    * Find users.
@@ -168,7 +179,6 @@ public class IdentitySearchRESTService implements ResourceContainer {
     return results;
   }
 
-
   /**
    * Find groups.
    *
@@ -189,12 +199,14 @@ public class IdentitySearchRESTService implements ResourceContainer {
           String avatarUrl = space.getAvatarUrl() != null ? space.getAvatarUrl() : LinkProvider.SPACE_DEFAULT_AVATAR_URL;
           results.add(new IdentitySearchResult(space.getGroupId(), space.getDisplayName(), SPACE_TYPE, avatarUrl));
         } else {
-          results.add(new IdentitySearchResult(group.getId(), group.getLabel(), GROUP_TYPE, LinkProvider.SPACE_DEFAULT_AVATAR_URL));
+          results.add(new IdentitySearchResult(group.getId(),
+                                               group.getLabel(),
+                                               GROUP_TYPE,
+                                               LinkProvider.SPACE_DEFAULT_AVATAR_URL));
         }
       }
     }
     return results;
   }
-
 
 }

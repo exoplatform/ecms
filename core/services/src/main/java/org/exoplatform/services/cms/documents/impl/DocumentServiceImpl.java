@@ -600,7 +600,7 @@ public class DocumentServiceImpl implements DocumentService {
    * {@inheritDoc}
    */
   @Override
-  public void savePreferedEditor(String userId, String provider, String uuid, String workspace) throws Exception {
+  public void savePreferedEditor(String userId, String provider, String uuid, String workspace) throws RepositoryException {
     Node node = nodeByUUID(uuid, workspace);
     if (node.canAddMixin(EXO_DOCUMENT)) {
       node.addMixin(EXO_DOCUMENT);
@@ -619,7 +619,7 @@ public class DocumentServiceImpl implements DocumentService {
    * {@inheritDoc}
    */
   @Override
-  public String getPreferedEditor(String userId, String uuid, String workspace) throws Exception {
+  public String getPreferedEditor(String userId, String uuid, String workspace) throws RepositoryException {
     Node node = nodeByUUID(uuid, workspace);
     if (node.hasNode(userId)) {
       Node userPrefferences = node.getNode(userId);
