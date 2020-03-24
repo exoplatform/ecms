@@ -25,6 +25,10 @@
       <error>
         <ProviderNotRegistered>The editor provider is not registered.</ProviderNotRegistered>
         <EmptyRequest>The request should contain at least 1 form param (active/permissions).</EmptyRequest>
+        <CannotGetProviders>Cannot get providers list.</CannotGetProviders>
+        <PermissionNotValid>The specified permission is not valid. Probably the user or group doesn't exist.</PermissionNotValid>
+        <CannotLoadIdentities>Cannot load identites by specified criteria</CannotLoadIdentities>
+        <CannotSavePrefferedEditor>Cannot save selected editor as preffered one.</CannotSavePrefferedEditor>
       </error>
       <title>Document editors</title>
       <table>
