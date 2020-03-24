@@ -31,6 +31,13 @@
     </node>
 
     <node>
+      <name>documents</name>
+      <label>#{portal.global.drives}</label>
+      <visibility>SYSTEM</visibility>
+      <page-reference>portal::global::drives</page-reference>
+    </node>
+
+    <node>
       <name>searchResult</name>
       <label>#{portal.global.searchResult}</label>
       <visibility>SYSTEM</visibility>
