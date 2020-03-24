@@ -1,1 +1,0 @@
-This code copied from App Center add-on, from its tasks app. Adapt it to the current add-on and clean not required.
