@@ -18,6 +18,7 @@
   "author": "eXo",
   "license": "LGPL",
   "devDependencies": {
+    "@vue/test-utils": "^1.0.0-beta.32",
     "babel-core": "^6.26.3",
     "babel-jest": "^22.4.4",
     "babel-loader": "^7.1.4",
@@ -44,7 +45,7 @@
     "vue": "^2.6.10",
     "vue-loader": "^14.2.3",
     "vue-template-compiler": "^2.6.10",
-    "vue-test-utils": "^1.0.0-beta.11",
+    "vuetify": "^2.2.18",
     "webpack": "^4.20.2",
     "webpack-cli": "^3.1.1",
     "webpack-dev-server": "^3.1.4",
@@ -61,6 +62,7 @@
   "jest": {
     "projects": [
       {
+        "testURL": "http://localhost",
         "displayName": "test",
         "testMatch": [
           "<rootDir>/src/test/specs/**/*.js"
@@ -97,6 +99,7 @@
         ]
       }
     ],
-    "coverageDirectory": "<rootDir>/target/jest/coverage"
+    "coverageDirectory": "<rootDir>/target/jest/coverage",
+    "testEnvironment": "node"
   }
 }

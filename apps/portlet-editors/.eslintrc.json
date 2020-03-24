@@ -2,11 +2,13 @@
     "env": {
         "browser": true,
         "es6": true,
-        "node": true
+        "node": true,
+        "jest": true
     },
     "extends": [
         "eslint:recommended",
-        "plugin:vue/recommended"
+        "plugin:vue/recommended",
+        "plugin:jest/recommended"
     ],
     "plugins": [
         "standard",
@@ -69,7 +71,7 @@
         "prefer-rest-params": ["error"],
         "prefer-spread": ["error"],
         "prefer-template": ["warn"],
-        "quotes": ["off"],
+        "quotes": ["error", "double"],
         "require-await": ["error"],
         "valid-jsdoc": ["error"],
         "yoda": ["error", "never", { "exceptRange": true }],

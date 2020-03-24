@@ -1,14 +1,14 @@
 export async function getData(url) {
-  const response = await fetch(url, { 
+  const response = await fetch(url, {
     headers: {
-      'Content-Type': 'application/json' 
+      "Content-Type": "application/json"
     },
-    method: 'GET'
+    method: "GET"
   });
   if (response && response.ok) {
     return response.json();
   } else {
-    log('Unable to get data');
+    log("Unable to get data");
     const errorText = await response.text();
     throw new Error(errorText);
   }
@@ -17,16 +17,16 @@ export async function getData(url) {
 export async function postData(url, data) {
   const response = await fetch(url, {
     headers: {
-      'Content-Type': 'application/json'
+      "Content-Type": "application/json"
     },
-    method: 'POST',
+    method: "POST",
     body: JSON.stringify(data)
   });
   if (response && response.ok) {
     const responseText = await response.text();
     return responseText ? JSON.parse(responseText) : {};
   } else {
-    log('Unable to post data');
+    log("Unable to post data");
     const errorText = await response.text();
     throw new Error(errorText);
   }
@@ -47,9 +47,10 @@ export function log(msg, err) {
           msgLine += err.message;
         }
       } else {
-        msgLine += (typeof err === "string" ? err : JSON.stringify(err) + (err.toString && typeof err.toString === "function" 
-          ? `; ${err.toString()}`
-          : ""));
+        msgLine +=
+          typeof err === "string"
+            ? err
+            : JSON.stringify(err) + (err.toString && typeof err.toString === "function" ? `; ${err.toString()}` : "");
       }
 
       console.log(logPrefix + msgLine + isoTime);
@@ -58,7 +59,7 @@ export function log(msg, err) {
       }
     } else {
       if (err !== null && typeof err !== "undefined") {
-        msgLine += `. Error: ${err}'`;
+        msgLine += `. Error: ${err}`;
       }
       console.log(logPrefix + msgLine + isoTime);
     }
@@ -67,8 +68,8 @@ export function log(msg, err) {
 
 export function parsedErrorMsg(error) {
   try {
-    JSON.parse(error.message)
-  } catch(e) {
+    JSON.parse(error.message);
+  } catch (e) {
     return error.message;
   }
   return JSON.parse(error.message).message;
