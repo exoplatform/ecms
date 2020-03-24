@@ -14,35 +14,46 @@
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, see<http://www.gnu.org/licenses/>.
  */
-package org.exoplatform.wcm.connector.collaboration.dto;
-
-import java.util.List;
+package org.exoplatform.wcm.connector.collaboration.editors;
 
 /**
- * The Class ResourceSupport.
+ * The Class HypermediaLink is used in HATEOAS REST services.
  */
-public class ResourceSupport {
-  
-  /** The links. */
-  protected List<Link> links;
+public class HypermediaLink {
 
+  /** The rel. */
+  private final String rel;
+
+  /** The href. */
+  private final String href;
+  
   /**
-   * Gets the links.
+   * Instantiates a new link.
    *
-   * @return the links
+   * @param rel the rel
+   * @param href the href
    */
-  public List<Link> getLinks() {
-    return links;
+  public HypermediaLink(String rel, String href) {
+    this.rel = rel;
+    this.href = href;
   }
 
   /**
-   * Sets the links.
+   * Gets the href.
    *
-   * @param links the new links
+   * @return the href
    */
-  public void setLinks(List<Link> links) {
-    this.links = links;
+  public String getHref() {
+    return href;
   }
-  
+
+  /**
+   * Gets the rel.
+   *
+   * @return the rel
+   */
+  public String getRel() {
+    return rel;
+  }
 
 }

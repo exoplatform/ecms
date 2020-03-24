@@ -47,10 +47,10 @@ import org.exoplatform.social.core.profile.ProfileFilter;
 import org.exoplatform.social.core.service.LinkProvider;
 import org.exoplatform.social.core.space.model.Space;
 import org.exoplatform.social.core.space.spi.SpaceService;
-import org.exoplatform.wcm.connector.collaboration.dto.ErrorMessage;
-import org.exoplatform.wcm.connector.collaboration.dto.IdentitySearchResult;
-import org.exoplatform.ws.frameworks.json.impl.JsonGeneratorImpl;
-
+import org.exoplatform.wcm.connector.collaboration.editors.ErrorMessage;
+import org.exoplatform.wcm.connector.collaboration.editors.HypermediaLink;
+import org.exoplatform.wcm.connector.collaboration.editors.HypermediaSupport;
+import org.exoplatform.wcm.connector.collaboration.editors.IdentityData;
 
 /**
  * The Class IdentitySearchRESTService.
@@ -62,10 +62,10 @@ public class IdentitySearchRESTService implements ResourceContainer {
   protected static final Log    LOG                    = ExoLogger.getLogger(IdentitySearchRESTService.class);
 
   /** The Constant CANNOT_LOAD_IDENTITIES. */
-  protected static final String CANNOT_LOAD_IDENTITIES = "editors.admin.error.CannotLoadIdentities";
+  protected static final String CANNOT_LOAD_IDENTITIES = "CannotLoadIdentities";
 
   /** The max result size. */
-  protected static final int    MAX_RESULT_SIZE        = 20;
+  protected static final int    MAX_RESULT_SIZE        = 30;
 
   /** The Constant USER_TYPE. */
   protected static final String USER_TYPE              = "user";
@@ -111,15 +111,15 @@ public class IdentitySearchRESTService implements ResourceContainer {
   @Produces(MediaType.APPLICATION_JSON)
   public Response searchIdentities(@Context UriInfo uriInfo, @PathParam("name") String name) {
     try {
-      String json = new JsonGeneratorImpl().createJsonArray(findGroupsAndUsers(name)).toString();
-      return Response.status(Status.OK).entity("{\"identities\":" + json + "}").build();
+      IdentitiesDataResponse responseEntity = new IdentitiesDataResponse(findGroupsAndUsers(name));
+      responseEntity.addLink(new HypermediaLink("self", uriInfo.getAbsolutePath().toString()));
+      return Response.status(Status.OK).entity(responseEntity).build();
     } catch (AccessDeniedException e) {
       LOG.error("Access denied to get identities with name: {}, error: {}", name, e.getMessage());
       return Response.status(Status.INTERNAL_SERVER_ERROR)
                      .entity(new ErrorMessage("Access denied error.", CANNOT_LOAD_IDENTITIES))
                      .build();
-    }
-    catch (Exception e) {
+    } catch (Exception e) {
       LOG.error("Cannot get identities with name: {}, error: {}", name, e.getMessage());
       return Response.status(Status.INTERNAL_SERVER_ERROR)
                      .entity(new ErrorMessage(e.getMessage(), CANNOT_LOAD_IDENTITIES))
@@ -134,20 +134,16 @@ public class IdentitySearchRESTService implements ResourceContainer {
    * @return the list
    * @throws Exception the exception
    */
-  protected List<IdentitySearchResult> findGroupsAndUsers(String name) throws Exception {
-    List<IdentitySearchResult> identitySearchResults = findUsers(name, MAX_RESULT_SIZE);
-    int remain = MAX_RESULT_SIZE - identitySearchResults.size();
-    if (remain > 0) {
-      identitySearchResults.addAll(findGroups(name, remain));
-    }
-
-    Collections.sort(identitySearchResults, new Comparator<IdentitySearchResult>() {
-      public int compare(IdentitySearchResult s1, IdentitySearchResult s2) {
+  protected List<IdentityData> findGroupsAndUsers(String name) throws Exception {
+    List<IdentityData> identitiesData = findUsers(name, MAX_RESULT_SIZE / 2);
+    int remain = MAX_RESULT_SIZE - identitiesData.size();
+    identitiesData.addAll(findGroups(name, remain));
+    Collections.sort(identitiesData, new Comparator<IdentityData>() {
+      public int compare(IdentityData s1, IdentityData s2) {
         return s1.getDisplayName().compareTo(s2.getDisplayName());
       }
     });
-
-    return identitySearchResults;
+    return identitiesData;
   }
 
   /**
@@ -158,8 +154,8 @@ public class IdentitySearchRESTService implements ResourceContainer {
    * @return the list
    * @throws Exception the exception
    */
-  protected List<IdentitySearchResult> findUsers(String name, int count) throws Exception {
-    List<IdentitySearchResult> results = new ArrayList<>();
+  protected List<IdentityData> findUsers(String name, int count) throws Exception {
+    List<IdentityData> results = new ArrayList<>();
     ProfileFilter identityFilter = new ProfileFilter();
     identityFilter.setName(name);
     ListAccess<Identity> identitiesList = identityManager.getIdentitiesByProfileFilter(OrganizationIdentityProvider.NAME,
@@ -173,7 +169,7 @@ public class IdentitySearchRESTService implements ResourceContainer {
         String fullName = profile.getFullName();
         String userName = (String) profile.getProperty(Profile.USERNAME);
         String avatarUrl = profile.getAvatarUrl() != null ? profile.getAvatarUrl() : LinkProvider.PROFILE_DEFAULT_AVATAR_URL;
-        results.add(new IdentitySearchResult(userName, fullName, USER_TYPE, avatarUrl));
+        results.add(new IdentityData(userName, fullName, USER_TYPE, avatarUrl));
       }
     }
     return results;
@@ -187,8 +183,8 @@ public class IdentitySearchRESTService implements ResourceContainer {
    * @return the list
    * @throws Exception the exception
    */
-  protected List<IdentitySearchResult> findGroups(String name, int count) throws Exception {
-    List<IdentitySearchResult> results = new ArrayList<>();
+  protected List<IdentityData> findGroups(String name, int count) throws Exception {
+    List<IdentityData> results = new ArrayList<>();
     ListAccess<Group> groupsAccess = organization.getGroupHandler().findGroupsByKeyword(name);
     int size = groupsAccess.getSize() >= count ? count : groupsAccess.getSize();
     if (size > 0) {
@@ -197,16 +193,41 @@ public class IdentitySearchRESTService implements ResourceContainer {
         Space space = spaceService.getSpaceByGroupId(group.getId());
         if (space != null) {
           String avatarUrl = space.getAvatarUrl() != null ? space.getAvatarUrl() : LinkProvider.SPACE_DEFAULT_AVATAR_URL;
-          results.add(new IdentitySearchResult(space.getGroupId(), space.getDisplayName(), SPACE_TYPE, avatarUrl));
+          results.add(new IdentityData(space.getGroupId(), space.getDisplayName(), SPACE_TYPE, avatarUrl));
         } else {
-          results.add(new IdentitySearchResult(group.getId(),
-                                               group.getLabel(),
-                                               GROUP_TYPE,
-                                               LinkProvider.SPACE_DEFAULT_AVATAR_URL));
+          results.add(new IdentityData(group.getId(), group.getLabel(), GROUP_TYPE, LinkProvider.SPACE_DEFAULT_AVATAR_URL));
         }
       }
     }
     return results;
+  }
+
+  /**
+   * The Class IdentitiesDataResponse.
+   */
+  public static class IdentitiesDataResponse extends HypermediaSupport {
+
+    /** The identities. */
+    private final List<IdentityData> identities;
+
+    /**
+     * Instantiates a new identities data response.
+     *
+     * @param identities the identities
+     */
+    public IdentitiesDataResponse(List<IdentityData> identities) {
+      this.identities = identities;
+    }
+
+    /**
+     * Gets the identities.
+     *
+     * @return the identities
+     */
+    public List<IdentityData> getIdentities() {
+      return identities;
+    }
+
   }
 
 }

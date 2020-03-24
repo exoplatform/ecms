@@ -14,46 +14,45 @@
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, see<http://www.gnu.org/licenses/>.
  */
-package org.exoplatform.wcm.connector.collaboration.dto;
+package org.exoplatform.wcm.connector.collaboration.editors;
 
 /**
- * The Class Link.
+ * The Class ErrorMessage is used in REST services as response entity in error cases.
  */
-public class Link {
+public class ErrorMessage {
 
-  /** The rel. */
-  private final String rel;
+  /** The errorMessage. */
+  private final String errorMessage;
 
-  /** The href. */
-  private final String href;
-  
+  /** The errorCode. */
+  private final String errorCode;
+
   /**
-   * Instantiates a new link.
+   * Instantiates a new error message.
    *
-   * @param rel the rel
-   * @param href the href
+   * @param message the message
+   * @param error the error
    */
-  public Link(String rel, String href) {
-    this.rel = rel;
-    this.href = href;
+  public ErrorMessage(String message, String error) {
+    this.errorMessage = message;
+    this.errorCode = error;
   }
 
   /**
-   * Gets the href.
+   * Gets the error message.
    *
-   * @return the href
+   * @return the error message
    */
-  public String getHref() {
-    return href;
+  public String getErrorMessage() {
+    return errorMessage;
   }
 
   /**
-   * Gets the rel.
+   * Gets the error code.
    *
-   * @return the rel
+   * @return the error code
    */
-  public String getRel() {
-    return rel;
+  public String getErrorCode() {
+    return errorCode;
   }
-
 }
