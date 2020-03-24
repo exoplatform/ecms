@@ -5,7 +5,7 @@
       <v-row class="white">
         <v-col xs12 px-3>
           <h4 class="editorsTitle">
-            {{ $t('editors.admin.title') }}
+            {{ $t("editors.admin.title") }}
           </h4>
         </v-col>
       </v-row>
@@ -15,10 +15,10 @@
             <template v-slot:default>
               <thead>
                 <tr class="providersTableRow">
-                  <th class="text-left">{{ $t('editors.admin.table.Provider') }}</th>
-                  <th class="text-left">{{ $t('editors.admin.table.Description') }}</th>
-                  <th class="text-left" style="width: 5%">{{ $t('editors.admin.table.Active') }}</th>
-                  <th class="text-left" style="width: 5%">{{ $t('editors.admin.table.Permissions') }}</th>
+                  <th class="text-left">{{ $t("editors.admin.table.Provider") }}</th>
+                  <th class="text-left">{{ $t("editors.admin.table.Description") }}</th>
+                  <th class="text-left" style="width: 5%">{{ $t("editors.admin.table.Active") }}</th>
+                  <th class="text-left" style="width: 5%">{{ $t("editors.admin.table.Permissions") }}</th>
                 </tr>
               </thead>
               <tbody v-if="providers.length > 0">
@@ -72,60 +72,61 @@
 import { postData, getData, parsedErrorMsg } from "../EditorsAdminAPI";
 
 export default {
-    props: {
-        services: {
-            type: Object,
-            required: true
-        }
-    },
-    data() {
-        return {
-            providers: [],
-            switcher: false,
-            showDialog: false,
-            selectedProvider: null,
-            error: null
-        };
-    },
-    created() {
-        this.getProviders();
-    },
-    methods: {
-        async getProviders() {
-          // services object contains urls for requests
-          try {
-            const data = await getData(this.services.providers);
-            this.error = null;
-            this.providers = data.editors;
-          } catch(err) {
-            this.error = parsedErrorMsg(err);
-          }
-        },
-        async changeStatus(provider) {
-          // getting rest for updating provider status
-            const updateRest = provider.links.filter(({ rel, href }) => rel === "update")[0].href;
-            try {
-              const data = await postData(updateRest, { active: !provider.active });
-              this.error = null;
-              this.providers.map(p => {
-                if (p.provider === provider.provider) {
-                  p.active = !provider.active;
-                }
-              });
-            } catch(err) {
-              this.error = parsedErrorMsg(err);
-            }
-        },
-      changeSettings(item) {
-        // settings selectedProvider before passing it to dialog
-        this.selectedProvider = item;
-        this.showDialog = true;
-      }
+  props: {
+    services: {
+      type: Object,
+      required: true
     }
+  },
+  data() {
+    return {
+      providers: [],
+      switcher: false,
+      showDialog: false,
+      selectedProvider: null,
+      error: null
+    };
+  },
+  created() {
+    this.getProviders();
+  },
+  methods: {
+    async getProviders() {
+      // services object contains urls for requests
+      try {
+        const data = await getData(this.services.providers);
+        this.error = null;
+        this.providers = data.editors;
+      } catch(err) {
+        this.error = parsedErrorMsg(err);
+      }
+    },
+    async changeStatus(provider) {
+      // getting rest for updating provider status
+      const updateRest = provider.links.filter(({ rel, href }) => rel === "update")[0].href;
+      try {
+        const data = await postData(updateRest, { active: !provider.active });
+        this.error = null;
+        this.providers.map(p => {
+          if (p.provider === provider.provider) {
+            p.active = !provider.active;
+          }
+        });
+      } catch(err) {
+        this.error = parsedErrorMsg(err);
+      }
+    },
+    changeSettings(item) {
+      // settings selectedProvider before passing it to dialog
+      this.selectedProvider = item;
+      this.showDialog = true;
+    }
+  }
 };
 </script>
 
 <style scoped lang="less">
+// TODO think about moving styles to separate file
 .editorsTitle {
   color: #4d5466;
   font-size: 24px;

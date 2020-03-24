@@ -2,7 +2,7 @@
   <v-card class="provider uiPopup">
     <div v-show="error" class="alert alert-error">{{ $t(error) }}</div>
     <v-card-title class="headline popupHeader justify-space-between providerHeader mb-0">
-      <span class="PopupTitle popupTitle providerHeaderTitle">{{ this.$t('editors.admin.modal.title') }}</span>
+      <span class="PopupTitle popupTitle providerHeaderTitle">{{ this.$t("editors.admin.modal.title") }}</span>
       <i class="uiIconClose providerHeaderClose" @click="closeDialog"></i>
     </v-card-title>
     <v-card-text class="popupContent providerContent pa-4">
@@ -12,7 +12,7 @@
         </v-row>
         <v-row class="search">
           <v-col>
-            <label class="searchLabel">{{ this.$t('editors.admin.modal.SearchLabel') }}</label>
+            <label class="searchLabel">{{ this.$t("editors.admin.modal.SearchLabel") }}</label>
             <v-autocomplete
               v-model="selectedItems"
               :loading="loading"
@@ -63,7 +63,7 @@
         <v-row>
           <v-col class="permissionsContainer">
             <div class="d-flex justify-space-between">
-              <label class="searchLabel ma-0">{{ this.$t('editors.admin.modal.WithPermissions') }}</label>
+              <label class="searchLabel ma-0">{{ this.$t("editors.admin.modal.WithPermissions") }}</label>
               <div class="d-flex align-center">
                 <v-checkbox 
                   v-model="accessibleToAll"
@@ -71,8 +71,8 @@
                   color="#578dc9"
                   dense 
                   class="ma-0"
-                  @change="toggleEverybody" />
-                <label style="color: #333">{{ this.$t('editors.admin.modal.Everybody') }}</label>
+                  data-test="everybodyCheckbox" />
+                <label style="color: #333">{{ this.$t("editors.admin.modal.Everybody") }}</label>
               </div>
             </div>
             <v-row v-if="!accessibleToAll">
@@ -103,7 +103,7 @@
                 v-else 
                 cols="12" 
                 md="8">
-                <label>{{ this.$t('editors.admin.modal.None') }}</label>
+                <label>{{ this.$t("editors.admin.modal.None") }}</label>
               </v-col>
             </v-row>
           </v-col>
@@ -114,14 +114,16 @@
       <v-btn
         class="btn btn-primary dialogFooterBtn me-2"
         text
-        @click="saveChanges">
-        {{ this.$t('editors.admin.buttons.Save') }}
+        data-test="saveButton"
+        @click.native="saveChanges">
+        {{ this.$t("editors.admin.buttons.Save") }}
       </v-btn>
       <v-btn
         class="btn dialogFooterBtn"
         text
-        @click="closeDialog">
-        {{ this.$t('editors.admin.buttons.Cancel') }}
+        data-test="cancelButton"
+        @click.native="closeDialog">
+        {{ this.$t("editors.admin.buttons.Cancel") }}
       </v-btn>
     </v-card-actions>
   </v-card>
@@ -144,14 +146,14 @@ export default {
     }
   },
   data () {
-      return {
-        loading: false,
-        searchResults: [],
-        search: null,
-        selectedItems: null,
-        existingPermissions: this.provider.permissions,
-        error: null
-      }
+    return {
+      loading: false,
+      searchResults: [],
+      search: null,
+      selectedItems: null,
+      existingPermissions: this.provider.permissions,
+      error: null
+    }
   },
   computed: {
     // contains items with user changes, reseting on window close or cancel
@@ -164,8 +166,13 @@ export default {
       return updated;
     },
     // define checkbox status: checked if everybody has access
-    accessibleToAll: function() {
-      return this.existingPermissions.some(({ id }) => id === "*");
+    accessibleToAll: {
+      get() {
+        return this.existingPermissions.some(({ id }) => id === "*");
+      },
+      set(value) {
+        this.existingPermissions = this.toggleEverybody(value);
+      }
     }
   },
   watch: {
@@ -177,65 +184,64 @@ export default {
     }
   },
   methods: {
-      // updating items in dropdown depend on user input v
-      async querySelections (v) {
-        this.loading = true;
-        try {
-          const data = await getData(`${this.searchUrl}/${v}`);
-          this.searchResults = data.identities.filter(({ displayName }) => 
-            (displayName || '').toLowerCase().indexOf((v || '').toLowerCase()) > -1);
-          this.loading = false;
-        } catch(err) {
-          this.error = parsedErrorMsg(err);
-        }
-      },
-      // removes selected item from list and selection
-      removeSelection(value) {
-        this.selectedItems = this.selectedItems.filter(({ id }) => id !== value.id);
-      },
-      async saveChanges() {
-        const updateRest = this.provider.links.filter(({ rel, href }) => rel === "update")[0].href;
-        // form array with permission names before sending request
-        const newPermissions = this.editedPermissions.map(({ id }) => ({ id: id }));
-        try {
-          const data = await postData(updateRest, { permissions: newPermissions });
-          this.error = null;
-          this.provider.permissions = this.editedPermissions;
-          // saving new permissions before closing
-          this.closeDialog();
-        } catch(err) { 
-          this.error = parsedErrorMsg(err);
-        }
-      },
-      closeDialog() {
-        // reset and clearing user changes
-        this.error = null;
-        this.editedPermissions = [];
-        this.selectedItems = null;
-        this.existingPermissions = this.provider.permissions;
-        this.$emit('onDialogClose');
-      },
-      // removing permission from list and also from selection
-      removePermission(itemName) {
-        this.existingPermissions = this.existingPermissions.filter(({ id }) => id !== itemName);
-        if (this.selectedItems) { this.selectedItems = this.selectedItems.filter(({ id }) => id !== itemName); }
-      },
-      // enables/desables permission for everyone
-      toggleEverybody(newValue) {
-        if (newValue) {
-          this.existingPermissions = [{ id: "*", displayName: null, avatarUrl: null }];
-          this.selectedItems = [];
-        } else if (this.existingPermissions.some(({ id }) => id === "*")) {
-          this.existingPermissions = [];
-        }
-      },
-      selectionChange(selection) {
-        this.search = '';
-        // if everyone permission enabled, it will be automatically disabled in case of some another permission selected
-        if (selection.length > 0 && this.existingPermissions.some(({ id }) => id === "*")) {
-          this.existingPermissions = this.existingPermissions.filter(({ id }) => id !== "*");
-        }
+    // updating items in dropdown depend on user input v
+    async querySelections (v) {
+      this.loading = true;
+      try {
+        const data = await getData(`${this.searchUrl}/${v}`);
+        this.searchResults = data.identities.filter(({ displayName }) => 
+          (displayName || "").toLowerCase().indexOf((v || "").toLowerCase()) > -1);
+        this.loading = false;
+      } catch(err) {
+        this.error = parsedErrorMsg(err);
       }
+    },
+    // removes selected item from list and selection
+    removeSelection(value) {
+      this.selectedItems = this.selectedItems.filter(({ id }) => id !== value.id);
+    },
+    async saveChanges() {
+      const updateRest = this.provider.links.filter(({ rel, href }) => rel === "update")[0].href;
+      // form array with permission names before sending request
+      const newPermissions = this.editedPermissions.map(({ id }) => ({ id: id }));
+      try {
+        const data = await postData(updateRest, { permissions: newPermissions });
+        this.error = null;
+        this.provider.permissions = this.editedPermissions;
+        // saving new permissions before closing
+        this.closeDialog();
+      } catch(err) { 
+        this.error = parsedErrorMsg(err);
+      }
+    },
+    closeDialog() {
+      // reset and clearing user changes
+      this.error = null;
+      this.selectedItems = null;
+      this.existingPermissions = this.provider.permissions;
+      this.$emit("onDialogClose");
+    },
+    // removing permission from list and also from selection
+    removePermission(itemName) {
+      this.existingPermissions = this.existingPermissions.filter(({ id }) => id !== itemName);
+      if (this.selectedItems) { this.selectedItems = this.selectedItems.filter(({ id }) => id !== itemName); }
+    },
+    // enables/desables permission for everyone
+    toggleEverybody(newValue) {
+      if (newValue) {
+        this.selectedItems = [];
+        return [{ id: "*", displayName: null, avatarUrl: null }];
+      } else if (this.existingPermissions.some(({ id }) => id === "*")) {
+        return [];
+      }
+    },
+    selectionChange(selection) {
+      this.search = "";
+      // if everyone permission enabled, it will be automatically disabled in case of some another permission selected
+      if (selection.length > 0 && this.existingPermissions.some(({ id }) => id === "*")) {
+        this.existingPermissions = this.existingPermissions.filter(({ id }) => id !== "*");
+      }
+    }
   }
 }
 </script>
