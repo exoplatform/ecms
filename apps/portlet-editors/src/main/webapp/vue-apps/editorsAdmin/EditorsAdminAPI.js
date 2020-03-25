@@ -1,20 +1,26 @@
 export async function getData(url) {
-  const response = await fetch(url, {
-    headers: {
-      "Content-Type": "application/json"
-    },
-    method: "GET"
-  });
-  if (response && response.ok) {
-    return response.json();
-  } else {
-    log("Unable to get data");
-    const errorText = await response.text();
-    throw new Error(errorText);
+  try {
+    const response = await fetch(url, {
+      headers: {
+        "Content-Type": "application/json"
+      },
+      method: "GET"
+    });
+    if (response.ok) {
+      return response.json();
+    } else {
+      log("Error reading data: " + (response.json().errorMessage ? response.json().errorMessage : response.json().errorCode));
+      throw new Error(response.json().errorCode);
+    }
+  } catch(e) {
+    // network failure or anything prevented the request from completing.
+    log("Unable to get data: " + e.message)
+    throw new Error("DataError"); // localized errorCode here
   }
 }
 
 export async function postData(url, data) {
+  
   const response = await fetch(url, {
     headers: {
       "Content-Type": "application/json"
