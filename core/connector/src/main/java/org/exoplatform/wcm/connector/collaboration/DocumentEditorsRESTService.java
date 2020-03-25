@@ -58,7 +58,6 @@ import org.exoplatform.wcm.connector.collaboration.editors.HypermediaLink;
 import org.exoplatform.ws.frameworks.json.impl.JsonException;
 import org.exoplatform.ws.frameworks.json.impl.JsonGeneratorImpl;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class DocumentEditorsRESTService is REST endpoint for working with editable documents.
  * Its used to set prefered editor for specific user/document.
