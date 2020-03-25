@@ -16,8 +16,8 @@
  */
 package org.exoplatform.wcm.connector.collaboration.editors;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * The Class HypermediaSupport is used in HATEOAS REST services.
@@ -25,14 +25,14 @@ import java.util.List;
 public class HypermediaSupport {
 
   /** The links. */
-  protected List<HypermediaLink> links;
+  protected Map<String, HypermediaLink> links = new HashMap<>();
 
   /**
    * Gets the links.
    *
    * @return the links
    */
-  public List<HypermediaLink> getLinks() {
+  public Map<String, HypermediaLink> getLinks() {
     return links;
   }
 
@@ -41,21 +41,18 @@ public class HypermediaSupport {
    *
    * @param links the new links
    */
-  public void setLinks(List<HypermediaLink> links) {
+  public void setLinks(Map<String, HypermediaLink> links) {
     this.links = links;
   }
 
-  
   /**
    * Adds the link.
    *
+   * @param key the key
    * @param link the link
    */
-  public void addLink(HypermediaLink link) {
-    if (links == null) {
-      links = new ArrayList<>();
-    }
-    links.add(link);
+  public void addLink(String key, HypermediaLink link) {
+    links.put(key, link);
   }
 
 }

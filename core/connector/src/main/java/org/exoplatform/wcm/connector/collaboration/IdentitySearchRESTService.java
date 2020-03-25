@@ -76,6 +76,9 @@ public class IdentitySearchRESTService implements ResourceContainer {
   /** The Constant GROUP_TYPE. */
   protected static final String GROUP_TYPE             = "group";
 
+  /** The Constant SELF. */
+  protected static final String SELF                   = "self";
+
   /** The identity manager. */
   protected IdentityManager     identityManager;
 
@@ -112,7 +115,7 @@ public class IdentitySearchRESTService implements ResourceContainer {
   public Response searchIdentities(@Context UriInfo uriInfo, @PathParam("name") String name) {
     try {
       IdentitiesDataResponse responseEntity = new IdentitiesDataResponse(findGroupsAndUsers(name));
-      responseEntity.addLink(new HypermediaLink("self", uriInfo.getAbsolutePath().toString()));
+      responseEntity.addLink(SELF, new HypermediaLink(uriInfo.getAbsolutePath().toString()));
       return Response.status(Status.OK).entity(responseEntity).build();
     } catch (AccessDeniedException e) {
       LOG.error("Access denied to get identities with name: {}, error: {}", name, e.getMessage());
