@@ -114,8 +114,8 @@ public class DocumentServiceImpl implements DocumentService {
   private static final Log LOG                 = ExoLogger.getLogger(DocumentServiceImpl.class);
   private final List<NewDocumentTemplateProvider> templateProviders = new ArrayList<>();
   private final List<DocumentEditorProvider> editorProviders = new ArrayList<>();
-  private List<NewDocumentTemplateProvider> unmodifiebleTemplateProviders;
-  private List<DocumentEditorProvider> unmodifiebleEditorProviders;
+  private List<NewDocumentTemplateProvider> unmodifiebleTemplateProviders = Collections.unmodifiableList(templateProviders);
+  private List<DocumentEditorProvider> unmodifiebleEditorProviders = Collections.unmodifiableList(editorProviders);
   private ManageDriveService manageDriveService;
   private Portal portal;
   private SessionProviderService sessionProviderService;
@@ -544,9 +544,6 @@ public class DocumentServiceImpl implements DocumentService {
    */
   @Override
   public List<NewDocumentTemplateProvider> getNewDocumentTemplateProviders() {
-    if(unmodifiebleTemplateProviders == null) {
-      unmodifiebleTemplateProviders = Collections.unmodifiableList(templateProviders);
-    }
     return unmodifiebleTemplateProviders;
   }
   
@@ -607,9 +604,6 @@ public class DocumentServiceImpl implements DocumentService {
    */
   @Override
   public List<DocumentEditorProvider> getDocumentEditorProviders() {
-    if(unmodifiebleEditorProviders == null) {
-      unmodifiebleEditorProviders = Collections.unmodifiableList(editorProviders);
-    }
     return unmodifiebleEditorProviders;
   }
   
