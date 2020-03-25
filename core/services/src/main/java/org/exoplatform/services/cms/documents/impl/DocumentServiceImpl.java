@@ -549,14 +549,6 @@ public class DocumentServiceImpl implements DocumentService {
     }
     return unmodifiebleTemplateProviders;
   }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public boolean hasDocumentTemplateProviders() {
-    return templateProviders.size() > 0;
-  }
   
   /**
    * {@inheritDoc}
@@ -575,27 +567,7 @@ public class DocumentServiceImpl implements DocumentService {
       LOG.error("The DocumentMetadataPlugin plugin is not an instance of " + pclass.getName());
     }
   }
-  
 
-  /**
-   * Gets display name of current user. In case of any errors return current userId
-   * 
-   * @return the display name
-   */
-  protected String getCurrentUserDisplayName() {
-    String userId = ConversationState.getCurrent().getIdentity().getUserId();
-    try {
-      return organizationService.getUserHandler().findUserByName(userId).getDisplayName();
-    } catch (Exception e) {
-      LOG.error("Error searching user " + userId, e);
-      return userId;
-    }
-  }
-
-  public boolean hasDocumentEditorProviders() {
-    return editorProviders.size() > 0;
-  }
-  
   /**
    * {@inheritDoc}
    */
@@ -633,6 +605,7 @@ public class DocumentServiceImpl implements DocumentService {
   /**
    * {@inheritDoc}
    */
+  @Override
   public List<DocumentEditorProvider> getDocumentEditorProviders() {
     if(unmodifiebleEditorProviders == null) {
       unmodifiebleEditorProviders = Collections.unmodifiableList(editorProviders);
@@ -643,6 +616,7 @@ public class DocumentServiceImpl implements DocumentService {
   /**
    * {@inheritDoc}
    */
+  @Override
   public DocumentEditorProvider getEditorProvider(String provider) throws DocumentEditorProviderNotFoundException {
     return getDocumentEditorProviders().stream()
                                 .filter(editorProvider -> editorProvider.getProviderName().equals(provider))
@@ -650,6 +624,21 @@ public class DocumentServiceImpl implements DocumentService {
                                 .orElseThrow(DocumentEditorProviderNotFoundException::new);
   }
 
+  /**
+   * Gets display name of current user. In case of any errors return current userId
+   * 
+   * @return the display name
+   */
+  protected String getCurrentUserDisplayName() {
+    String userId = ConversationState.getCurrent().getIdentity().getUserId();
+    try {
+      return organizationService.getUserHandler().findUserByName(userId).getDisplayName();
+    } catch (Exception e) {
+      LOG.error("Error searching user " + userId, e);
+      return userId;
+    }
+  }
+  
   /**
    * Gets the user session.
    *
