@@ -298,40 +298,40 @@
      * Inits editor buttons on DocumentUIActivity.
      * 
      */
-    this.initActivityButtons = function(activityId, fileId, preferedProvider) {
+    this.initActivityButtons = function(config) {
       var buttons = buttonsFns.slice();
       if(buttons.length == 0) {
         return;
       }
       log("Init Activity buttons: " + JSON.stringify(buttons));
       // Sort buttons in user prefference order
-      if(preferedProvider != null) {
+      if(config.preferedProvider != null) {
         buttons.forEach(function(item,i){
-          if(item.provider === preferedProvider){
+          if(item.provider === config.preferedProvider){
             buttons.splice(i, 1);
             buttons.unshift(item);
           }
         });
       }
-      var $target = $("#activityContainer" + activityId).find("div[id^='ActivityContextBox'] > .actionBar .statusAction.pull-left");
-      addEditorButtonsContainer($target, fileId, buttons);
-      subscribeDocument(fileId);
+      var $target = $("#activityContainer" + config.activityId).find("div[id^='ActivityContextBox'] > .actionBar .statusAction.pull-left");
+      addEditorButtonsContainer($target, config.fileId, buttons);
+      subscribeDocument(config.fileId);
     };
     
     /**
      * Inits buttons on document preview.
      * 
      */
-    this.initPreviewButtons = function(activityId, index, fileId, preferedProvider) {
+    this.initPreviewButtons = function(config) {
       var buttons = buttonsFns.slice();
       if(buttons.length == 0) {
         return;
       }
       log("Init preview buttons: " + JSON.stringify(buttons));
-      var clickSelector = "#Preview" + activityId + "-" + index;
-      if(preferedProvider != null) {
+      var clickSelector = "#Preview" + config.activityId + "-" + config.index;
+      if(config.preferedProvider != null) {
         buttons.forEach(function(item,i){
-          if(item.provider === preferedProvider){
+          if(item.provider === config.preferedProvider){
             buttons.splice(i, 1);
             buttons.unshift(item);
           }
@@ -340,11 +340,11 @@
       $(clickSelector).click(function() {
         // We set timeout here to avoid the case when the element is rendered but is going to be updated soon
         setTimeout(function() {
-          tryAddEditorButtonToPreview(100, 100, fileId, buttons);
+          tryAddEditorButtonToPreview(100, 100, config.fileId, buttons);
           // We need wait for about 2min when doc cannot generate its preview
-          tryAddEditorButtonNoPreview(600, 250, fileId, buttons);
+          tryAddEditorButtonNoPreview(600, 250, config.fileId, buttons);
         }, 100);
-        subscribeDocument(fileId);
+        subscribeDocument(config.fileId);
       });
     };
     

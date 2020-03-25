@@ -41,8 +41,8 @@ import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.ext.filter.UIExtensionFilter;
 import org.exoplatform.webui.ext.filter.UIExtensionFilters;
 import org.exoplatform.ws.frameworks.json.impl.JsonException;
+import org.exoplatform.ws.frameworks.json.impl.JsonGeneratorImpl;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class CustomizedFileUIActivity.
  */
@@ -67,7 +67,7 @@ public class DocumentUIActivity extends FileUIActivity {
 
   /** The customize service. */
   protected final DocumentService                documentService;
-  
+
   /** The cometd service. */
   protected final CometdDocumentsService         cometdService;
 
@@ -106,7 +106,7 @@ public class DocumentUIActivity extends FileUIActivity {
       require.addScripts("editorbuttons.init('" + requestContext.getRemoteUser() + "' ," + cometdConf.toJSON() + ");");
     } catch (JsonException e) {
       LOG.warn("Cannot generate JSON for cometd configuration. {}", e.getMessage());
-    } 
+    }
     if (getFilesCount() == 1) {
       Node node = getContentNode(0);
       require.addScripts("editorbuttons.resetButtons();");
@@ -120,9 +120,17 @@ public class DocumentUIActivity extends FileUIActivity {
           LOG.error("Cannot init activity from plugin {}, {}", provider.getProviderName(), e.getMessage());
         }
       });
-      String prefferedEditor = getPrefferedEditor(node);
-      require.addScripts("editorbuttons.initActivityButtons('" + activityId + "', '" + node.getUUID() + "', '"
-          + node.getSession().getWorkspace().getName() + "'," + prefferedEditor + ");");
+      String prefferedEditor = documentService.getPreferedEditor(identity.getUserId(),
+                                                                 node.getUUID(),
+                                                                 node.getSession().getWorkspace().getName());
+      InitConfig config = new InitConfig.InitConfigBuilder().activityId(activityId)
+                                                            .index("0")
+                                                            .fileId(node.getUUID())
+                                                            .workspace(node.getSession().getWorkspace().getName())
+                                                            .prefferedEditor(prefferedEditor)
+                                                            .currentEditor(null) // TODO: set current editor
+                                                            .build();
+      require.addScripts("editorbuttons.initActivityButtons(" + config.toJSON() + ");");
 
     }
 
@@ -140,9 +148,17 @@ public class DocumentUIActivity extends FileUIActivity {
           LOG.error("Cannot init preview from plugin {}, {}", provider.getProviderName(), e.getMessage());
         }
       }
-      String prefferedEditor = getPrefferedEditor(node);
-      require.addScripts("editorbuttons.initPreviewButtons('" + activityId + "', '" + index + "', '" + node.getUUID() + "', "
-          + prefferedEditor + ");");
+      String prefferedEditor = documentService.getPreferedEditor(identity.getUserId(),
+                                                                 node.getUUID(),
+                                                                 node.getSession().getWorkspace().getName());
+      InitConfig config = new InitConfig.InitConfigBuilder().activityId(activityId)
+                                                            .index(String.valueOf(index))
+                                                            .fileId(node.getUUID())
+                                                            .workspace(node.getSession().getWorkspace().getName())
+                                                            .prefferedEditor(prefferedEditor)
+                                                            .currentEditor(null) // TODO: set current editor
+                                                            .build();
+      require.addScripts("editorbuttons.initPreviewButtons(" + config.toJSON() + ");");
     }
     super.end();
   }
@@ -158,22 +174,196 @@ public class DocumentUIActivity extends FileUIActivity {
   }
 
   /**
-   * Gets the preffered editor.
-   *
-   * @param node the node
-   * @return the preffered editor
-   * @throws Exception the exception
+   * The Class InitConfig.
    */
-  protected String getPrefferedEditor(Node node) throws Exception {
-    String userId = ConversationState.getCurrent().getIdentity().getUserId();
-    String prefferedEditor =
-                           documentService.getPreferedEditor(userId, node.getUUID(), node.getSession().getWorkspace().getName());
-    if (prefferedEditor != null) {
-      prefferedEditor = "'" + prefferedEditor + "'";
-    } else {
-      prefferedEditor = "null".intern();
+  protected static class InitConfig {
+
+    /** The activity id. */
+    protected final String activityId;
+
+    /** The index. */
+    protected final String index;
+
+    /** The file id. */
+    protected final String fileId;
+
+    /** The workspace. */
+    protected final String workspace;
+
+    /** The preffered editor. */
+    protected final String prefferedEditor;
+
+    /** The current editor. */
+    protected final String currentEditor;
+
+    /**
+     * Instantiates a new inits the config.
+     *
+     * @param builder the builder
+     */
+    private InitConfig(InitConfigBuilder builder) {
+      this.activityId = builder.activityId;
+      this.index = builder.index;
+      this.fileId = builder.fileId;
+      this.workspace = builder.workspace;
+      this.prefferedEditor = builder.prefferedEditor;
+      this.currentEditor = builder.currentEditor;
     }
-    return prefferedEditor;
+
+    /**
+     * Gets the activity id.
+     *
+     * @return the activity id
+     */
+    public String getActivityId() {
+      return activityId;
+    }
+
+    /**
+     * Gets the index.
+     *
+     * @return the index
+     */
+    public String getIndex() {
+      return index;
+    }
+
+    /**
+     * Gets the file id.
+     *
+     * @return the file id
+     */
+    public String getFileId() {
+      return fileId;
+    }
+
+    /**
+     * Gets the workspace.
+     *
+     * @return the workspace
+     */
+    public String getWorkspace() {
+      return workspace;
+    }
+
+    /**
+     * Gets the current editor.
+     *
+     * @return the current editor
+     */
+    public String getCurrentEditor() {
+      return currentEditor;
+    }
+
+    /**
+     * To JSON.
+     *
+     * @return the string
+     * @throws JsonException the json exception
+     */
+    public String toJSON() throws JsonException {
+      JsonGeneratorImpl gen = new JsonGeneratorImpl();
+      return gen.createJsonObject(this).toString();
+    }
+
+    /**
+     * The Class InitConfigBuilder.
+     */
+    static class InitConfigBuilder {
+      /** The activity id. */
+      protected String activityId;
+
+      /** The index. */
+      protected String index;
+
+      /** The file id. */
+      protected String fileId;
+
+      /** The workspace. */
+      protected String workspace;
+
+      /** The preffered editor. */
+      protected String prefferedEditor;
+
+      /** The current editor. */
+      protected String currentEditor;
+
+      /**
+       * Activity id.
+       *
+       * @param activityId the activity id
+       * @return the inits the config builder
+       */
+      protected InitConfigBuilder activityId(String activityId) {
+        this.activityId = activityId;
+        return this;
+      }
+
+      /**
+       * Index.
+       *
+       * @param index the index
+       * @return the inits the config builder
+       */
+      protected InitConfigBuilder index(String index) {
+        this.index = index;
+        return this;
+      }
+
+      /**
+       * File id.
+       *
+       * @param fileId the file id
+       * @return the inits the config builder
+       */
+      protected InitConfigBuilder fileId(String fileId) {
+        this.fileId = fileId;
+        return this;
+      }
+
+      /**
+       * Workspace.
+       *
+       * @param workspace the workspace
+       * @return the inits the config builder
+       */
+      protected InitConfigBuilder workspace(String workspace) {
+        this.workspace = workspace;
+        return this;
+      }
+
+      /**
+       * Preffered editor.
+       *
+       * @param prefferedEditor the preffered editor
+       * @return the inits the config builder
+       */
+      protected InitConfigBuilder prefferedEditor(String prefferedEditor) {
+        this.prefferedEditor = prefferedEditor;
+        return this;
+      }
+
+      /**
+       * Current editor.
+       *
+       * @param currentEditor the current editor
+       * @return the inits the config builder
+       */
+      protected InitConfigBuilder currentEditor(String currentEditor) {
+        this.currentEditor = currentEditor;
+        return this;
+      }
+
+      /**
+       * Builds the InitConfig.
+       *
+       * @return the inits the config
+       */
+      protected InitConfig build() {
+        return new InitConfig(this);
+      }
+    }
+
   }
 
 }
