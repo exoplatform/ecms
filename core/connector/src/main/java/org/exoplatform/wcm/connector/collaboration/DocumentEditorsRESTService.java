@@ -16,7 +16,6 @@
  */
 package org.exoplatform.wcm.connector.collaboration;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -53,12 +52,13 @@ import org.exoplatform.social.core.service.LinkProvider;
 import org.exoplatform.social.core.space.model.Space;
 import org.exoplatform.social.core.space.spi.SpaceService;
 import org.exoplatform.wcm.connector.collaboration.editors.DocumentEditorData;
+import org.exoplatform.wcm.connector.collaboration.editors.EditorPermission;
 import org.exoplatform.wcm.connector.collaboration.editors.ErrorMessage;
 import org.exoplatform.wcm.connector.collaboration.editors.HypermediaLink;
-import org.exoplatform.wcm.connector.collaboration.editors.EditorPermission;
 import org.exoplatform.ws.frameworks.json.impl.JsonException;
 import org.exoplatform.ws.frameworks.json.impl.JsonGeneratorImpl;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class DocumentEditorsRESTService is REST endpoint for working with editable documents.
  * Its used to set prefered editor for specific user/document.
@@ -81,6 +81,9 @@ public class DocumentEditorsRESTService implements ResourceContainer {
 
   /** The Constant CANNOT_SAVE_PREFFERED_EDITOR. */
   private static final String   CANNOT_SAVE_PREFFERED_EDITOR = "CannotSavePrefferedEditor";
+
+  /** The Constant SELF. */
+  private static final String   SELF                         = "self";
 
   /** The Constant LOG. */
   protected static final Log    LOG                          = ExoLogger.getLogger(DocumentEditorsRESTService.class);
@@ -126,9 +129,9 @@ public class DocumentEditorsRESTService implements ResourceContainer {
   @Produces(MediaType.APPLICATION_JSON)
   public Response getEditors(@Context UriInfo uriInfo) {
     List<DocumentEditorData> providers = documentService.getDocumentEditorProviders()
-                                                               .stream()
-                                                               .map(this::convertToDTO)
-                                                               .collect(Collectors.toList());
+                                                        .stream()
+                                                        .map(this::convertToDTO)
+                                                        .collect(Collectors.toList());
     providers.forEach(provider -> initLinks(provider, uriInfo));
     try {
       String json = new JsonGeneratorImpl().createJsonArray(providers).toString();
@@ -186,9 +189,9 @@ public class DocumentEditorsRESTService implements ResourceContainer {
       }
       if (documentEditorData.getPermissions() != null) {
         List<String> permissions = documentEditorData.getPermissions()
-                                                    .stream()
-                                                    .map(permission -> permission.getId())
-                                                    .collect(Collectors.toList());
+                                                     .stream()
+                                                     .map(permission -> permission.getId())
+                                                     .collect(Collectors.toList());
         editorProvider.updatePermissions(permissions);
       }
       return Response.status(Status.OK).build();
@@ -246,9 +249,7 @@ public class DocumentEditorsRESTService implements ResourceContainer {
       }
       path = pathBuilder.append(provider.getProvider()).toString();
     }
-    HypermediaLink self = new HypermediaLink("self", path.toString());
-    HypermediaLink update = new HypermediaLink("update", path.toString());
-    provider.setLinks(Arrays.asList(self, update));
+    provider.addLink(SELF, new HypermediaLink(path.toString()));
   }
 
   /**

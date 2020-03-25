@@ -21,20 +21,15 @@ package org.exoplatform.wcm.connector.collaboration.editors;
  */
 public class HypermediaLink {
 
-  /** The rel. */
-  private final String rel;
-
   /** The href. */
   private final String href;
   
   /**
    * Instantiates a new link.
    *
-   * @param rel the rel
    * @param href the href
    */
-  public HypermediaLink(String rel, String href) {
-    this.rel = rel;
+  public HypermediaLink(String href) {
     this.href = href;
   }
 
@@ -45,15 +40,6 @@ public class HypermediaLink {
    */
   public String getHref() {
     return href;
-  }
-
-  /**
-   * Gets the rel.
-   *
-   * @return the rel
-   */
-  public String getRel() {
-    return rel;
   }
 
 }
