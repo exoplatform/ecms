@@ -114,8 +114,8 @@ public class DocumentServiceImpl implements DocumentService {
   private static final Log LOG                 = ExoLogger.getLogger(DocumentServiceImpl.class);
   private final List<NewDocumentTemplateProvider> templateProviders = new ArrayList<>();
   private final List<DocumentEditorProvider> editorProviders = new ArrayList<>();
-  private List<NewDocumentTemplateProvider> unmodifiebleTemplateProviders = Collections.unmodifiableList(templateProviders);
-  private List<DocumentEditorProvider> unmodifiebleEditorProviders = Collections.unmodifiableList(editorProviders);
+  private final List<NewDocumentTemplateProvider> unmodifiebleTemplateProviders = Collections.unmodifiableList(templateProviders);
+  private final List<DocumentEditorProvider> unmodifiebleEditorProviders = Collections.unmodifiableList(editorProviders);
   private ManageDriveService manageDriveService;
   private Portal portal;
   private SessionProviderService sessionProviderService;
