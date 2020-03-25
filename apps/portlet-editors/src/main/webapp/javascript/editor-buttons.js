@@ -71,6 +71,7 @@
     
     const DOCUMENT_OPENED = "DOCUMENT_OPENED";
     const DOCUMENT_CLOSED = "DOCUMENT_CLOSED";
+    const LAST_EDITOR_CLOSED = "LAST_EDITOR_CLOSED";
     
     /**
      * Parses comet message from JSON
@@ -207,26 +208,26 @@
       }
     };
 
-    var subscribeDocument = function(docId) {
+    var subscribeDocument = function(fileId) {
       // Use only one channel for one document
-      if (subscribedDocuments.docId) {
+      if (subscribedDocuments.fileId) {
         return;
       }
-      var subscription = cometd.subscribe("/eXo/Application/documents/" + docId, function(message) {
+      var subscription = cometd.subscribe("/eXo/Application/documents/" + fileId, function(message) {
         // Channel message handler
         var result = tryParseJson(message);
-        log("EVENT: " + result.type);
+        console.log("EVENT: " + result.type);
         
         switch(result.type) {
           case DOCUMENT_OPENED: {
-          	var buttons = $('.editorButton[data-provider!="' + result.provider + '"][data-fileId="' + result.fileId + '"]').each(function(){
+            var buttons = $('.editorButton[data-provider!="' + result.provider + '"][data-fileId="' + result.fileId + '"]').each(function(){
               $(this).addClass("disabledProvider");
-    	    });
+          });
           } break;
-          case DOCUMENT_CLOSED: {
+          case LAST_EDITOR_CLOSED: {
             var buttons = $('.editorButton[data-provider!="' + result.provider + '"][data-fileId="' + result.fileId + '"]').each(function(){
               $(this).removeClass("disabledProvider");
-    	    });
+          });
           } break;
         }
       }, cometdContext, function(subscribeReply) {
@@ -234,35 +235,35 @@
         if (subscribeReply.successful) {
           // The server successfully subscribed this client to the channel.
           log("Document updates subscribed successfully: " + JSON.stringify(subscribeReply));
-          subscribedDocuments.docId = subscription;
+          subscribedDocuments.fileId = subscription;
         } else {
           var err = subscribeReply.error ? subscribeReply.error : (subscribeReply.failure ? subscribeReply.failure.reason
               : "Undefined");
-          log("Document updates subscription failed for " + docId, err);
+          log("Document updates subscription failed for " + fileId, err);
         }
       });
     };
 
-    var unsubscribeDocument = function(docId) {
-      var subscription = subscribedDocuments.docId;
+    var unsubscribeDocument = function(fileId) {
+      var subscription = subscribedDocuments.fileId;
       if (subscription) {
         cometd.unsubscribe(subscription, {}, function(unsubscribeReply) {
           if (unsubscribeReply.successful) {
             // The server successfully unsubscribed this client to the channel.
-            log("Document updates unsubscribed successfully for: " + docId);
-            delete subscribedDocuments.docId;
+            log("Document updates unsubscribed successfully for: " + fileId);
+            delete subscribedDocuments.fileId;
           } else {
             var err = unsubscribeReply.error ? unsubscribeReply.error
                 : (unsubscribeReply.failure ? unsubscribeReply.failure.reason : "Undefined");
-            log("Document updates unsubscription failed for " + docId, err);
+            log("Document updates unsubscription failed for " + fileId, err);
           }
         });
       }
     };
     
-    var publishDocument = function(docId, data) {
+    var publishDocument = function(fileId, data) {
       var deferred = $.Deferred();
-      cometd.publish("/eXo/Application/documents/" + docId, data, cometdContext, function(publishReply) {
+      cometd.publish("/eXo/Application/documents/" + fileId, data, cometdContext, function(publishReply) {
         // Publication status callback
         if (publishReply.successful) {
           deferred.resolve();
@@ -271,7 +272,7 @@
         } else {
           deferred.reject();
           var err = publishReply.error ? publishReply.error : (publishReply.failure ? publishReply.failure.reason : "Undefined");
-          log("Document updates publication failed for " + docId, err);
+          log("Document updates publication failed for " + fileId, err);
         }
       });
       return deferred;

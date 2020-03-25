@@ -665,12 +665,13 @@ public class DocumentServiceImpl implements DocumentService {
    */
   @Override
   public void setCurrentDocumentEditor(String uuid, String workspace, String provider) throws RepositoryException {
-    Node node = nodeByUUID(uuid, workspace);
-    if (node.canAddMixin(EXO_DOCUMENT)) {
-      node.addMixin(EXO_DOCUMENT);
+    Session systemSession = repoService.getCurrentRepository().getSystemSession(workspace);
+    NodeImpl systemNode = (NodeImpl) systemSession.getNodeByUUID(uuid);
+    if (systemNode.canAddMixin(EXO_DOCUMENT)) {
+      systemNode.addMixin(EXO_DOCUMENT);
     }
-    node.setProperty(EXO_CURRENT_EDITOR_PROP, provider);
-    node.save();  
+    systemNode.setProperty(EXO_CURRENT_EDITOR_PROP, provider);
+    systemNode.save();
   }
 
   /**
