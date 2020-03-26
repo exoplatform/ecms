@@ -46,7 +46,7 @@
                     <edit-dialog
                       :provider-name="item.provider"
                       :provider-link="item.links.self.href"
-                      :search-url="services.identities" />
+                      :search-url="settings.services.identities" />
                   </td>
                 </tr>
               </tbody>
@@ -67,13 +67,9 @@ export default {
     EditDialog
   },
   props: {
-    services: {
+    settings: {
       type: Object,
       required: true
-    },
-    i18n: {
-      type: Object,
-      default: function() { return {}; }
     }
   },
   data() {
@@ -90,12 +86,12 @@ export default {
     async getProviders() {
       // services object contains urls for requests
       try {
-        const data = await getData(this.services.providers);
+        const data = await getData(this.settings.services.providers);
         this.error = null;
         this.providers = data.editors;
         // simulating promise
         setTimeout(() => {
-          this.i18n.mergeLocaleMessage("uk", { "editors.admin.table.Provider": "Provider Office" });
+          this.settings.i18n.mergeLocaleMessage(this.settings.language, { "editors.admin.table.Provider": "Provider Office" });
           this.ready = true;
         }, 2000);
       } catch (err) {
