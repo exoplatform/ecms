@@ -70,6 +70,10 @@ export default {
     services: {
       type: Object,
       required: true
+    },
+    i18n: {
+      type: Object,
+      default: function() { return {}; }
     }
   },
   data() {
@@ -89,6 +93,11 @@ export default {
         const data = await getData(this.services.providers);
         this.error = null;
         this.providers = data.editors;
+        // simulating promise
+        setTimeout(() => {
+          this.i18n.mergeLocaleMessage("uk", { "editors.admin.table.Provider": "Provider Office" });
+          this.ready = true;
+        }, 2000);
       } catch (err) {
         this.error = err.message;
       }
