@@ -37,8 +37,7 @@
                 :menu-props="{ maxHeight: 140 }"
                 return-object
                 color="#333"
-                class="searchPermissions pt-0"
-                cache-items
+                class="searchPermissions pt-0"             
                 flat
                 hide-no-data
                 hide-details
@@ -206,7 +205,7 @@ export default {
         const data = await getData(`${this.searchUrl}/${v}`);
         this.searchResults = data.identities.filter(
           ({ displayName }) => (displayName || "").toLowerCase().indexOf((v || "").toLowerCase()) > -1
-        );
+        ).filter(el => !this.existingPermissions.map(item => item.id).includes(el.id));
         this.searchLoading = false;
       } catch (err) {
         this.error = err.message;
@@ -217,11 +216,14 @@ export default {
       this.selectedItems = this.selectedItems.filter(({ id }) => id !== value.id);
     },
     async saveChanges() {
-      const editedPermissions = this.existingPermissions
-        .filter(el => !this.permissionChanges.map(item => item.id).includes(el.id))
-        .concat(this.selectedItems);
+      let editedPermissions = this.existingPermissions.filter(el => !this.permissionChanges.map(item => item.id).includes(el.id));
+      if (this.selectedItems) {
+        editedPermissions = editedPermissions.concat(this.selectedItems);
+      }
       // form array with permission names before sending request
-      const newPermissions = this.accessibleToAll ? [{ id: "*" }] : editedPermissions.map(({ id }) => ({ id: id }));
+      const newPermissions = this.accessibleToAll 
+        ? [{ id: "*" }] 
+        : editedPermissions.filter(({ id }) => id.length > 0).map(({ id }) => ({ id: id}));
       try {
         const data = await postData(this.providerLink, { permissions: newPermissions });
         this.error = null;
