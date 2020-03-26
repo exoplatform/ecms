@@ -136,20 +136,6 @@ public interface DocumentService {
   public List<NewDocumentTemplateProvider> getNewDocumentTemplateProviders();
   
   /**
-   * Checks for document editor providers.
-   *
-   * @return true, if successful
-   */
-  public boolean hasDocumentEditorProviders();
-  
-  /**
-   * Checks for document template providers.
-   *
-   * @return true, if successful
-   */
-  public boolean hasDocumentTemplateProviders();
-  
-  /**
    * Registers document metadata plugin.
    * 
    * @param plugin the ComponentPlugin

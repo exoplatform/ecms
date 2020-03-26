@@ -8,7 +8,7 @@ import org.exoplatform.webui.ext.filter.UIExtensionAbstractFilter;
 import org.exoplatform.webui.ext.filter.UIExtensionFilterType;
 
 /**
- * The Class IsEditorProviderPresentFilter checks if any DocumentEditorProvider is registered.
+ * The filter checks if at least one DocumentEditorProvider is registered.
  */
 public class IsEditorProviderPresentFilter extends UIExtensionAbstractFilter {
 
@@ -41,7 +41,7 @@ public class IsEditorProviderPresentFilter extends UIExtensionAbstractFilter {
                                                             .getComponentInstanceOfType(DocumentService.class);
 
     if (documentService != null) {
-      return documentService.hasDocumentEditorProviders();
+      return documentService.getDocumentEditorProviders().size() > 0;
     }
     return false;
   }
