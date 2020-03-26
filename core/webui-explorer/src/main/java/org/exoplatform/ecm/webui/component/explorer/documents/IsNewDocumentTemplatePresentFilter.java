@@ -9,7 +9,7 @@ import org.exoplatform.webui.ext.filter.UIExtensionFilterType;
 
 
 /**
- * The Class IsNewDocumentTemplatePresentFilter checks if any NewDocumentTemplatePlugin is registered.
+ * The filter checks if at least one NewDocumentTemplateProvider is registered.
  */
 public class IsNewDocumentTemplatePresentFilter extends UIExtensionAbstractFilter {
 
@@ -42,7 +42,7 @@ public class IsNewDocumentTemplatePresentFilter extends UIExtensionAbstractFilte
                                                             .getComponentInstanceOfType(DocumentService.class);
 
     if (documentService != null) {
-      return documentService.hasDocumentTemplateProviders();
+      return documentService.getNewDocumentTemplateProviders().size() > 0;
     }
     return false;
   }
