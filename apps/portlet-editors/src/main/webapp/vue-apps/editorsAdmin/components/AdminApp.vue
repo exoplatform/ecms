@@ -1,7 +1,9 @@
 <template>
   <v-app id="editors-admin" class="VuetifyApp">
     <v-container style="width: 95%" class="v-application--is-ltr">
-      <div v-show="error" class="alert alert-error">{{ $t(error) }}</div>
+      <div v-show="error" class="alert alert-error">
+        {{ i18n.te(`${errorResourceBase}.${error}`) ? $t(`${errorResourceBase}.${error}`) : error }}
+      </div>
       <v-row class="white">
         <v-col xs12 px-3>
           <h4 class="editorsTitle">

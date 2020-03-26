@@ -29,6 +29,8 @@
         <PermissionNotValid>The specified permission is not valid. Probably the user or group doesn't exist.</PermissionNotValid>
         <CannotLoadIdentities>Cannot load identites by specified criteria</CannotLoadIdentities>
         <CannotSavePrefferedEditor>Cannot save selected editor as preffered one.</CannotSavePrefferedEditor>
+        <UnableGetData>An error occurred during the data reading.</UnableGetData>
+        <UnablePostData>An error occurred during the data saving.</UnablePostData>
       </error>
       <title>Document editors</title>
       <table>
