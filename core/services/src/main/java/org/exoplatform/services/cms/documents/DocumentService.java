@@ -200,14 +200,23 @@ public interface DocumentService {
    * @param uuid the uuid
    * @param workspace the workspace
    * @param provider the current provider or null if the document has been closed.
+   * @throws RepositoryException the exception
    */
-  public void setCurrentDocumentEditor(String uuid, String workspace, String provider) throws RepositoryException;
+  public void setCurrentDocumentProvider(String uuid, String workspace, String provider) throws RepositoryException;
 
+  /**
+   * Gets current opened document editor.
+   * 
+   * @param uuid the uuid
+   * @param workspace the workspace
+   * @throws RepositoryException the exception
+   */
+  public String getCurrentDocumentProvider(String uuid, String workspace) throws RepositoryException;
   
   /**
    * Inits document editors JS module
    */
-  public void initDocumentEditorsModule();
+  public void initDocumentEditorsModule(String provider);
   
   /**
    * NewDocumentTypesConfig contains all registered template configs for specified provider.

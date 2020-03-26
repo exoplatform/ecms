@@ -35,6 +35,8 @@ public class CometdConfig {
 
   /** The container name. */
   private final String containerName;
+  
+  private final String provider;
 
   /**
    * Instantiates CometdConfig.
@@ -47,6 +49,21 @@ public class CometdConfig {
     this.token = token;
     this.path = path;
     this.containerName = containerName;
+    this.provider = null;
+  }
+  
+  /**
+   * Instantiates CometdConfig.
+   * @param path the path
+   * @param token the token
+   * @param containerName the containerName
+   */
+  public CometdConfig(String path, String token, String containerName, String provider) {
+    super();
+    this.token = token;
+    this.path = path;
+    this.containerName = containerName;
+    this.provider = provider;
   }
 
   /**
@@ -74,6 +91,16 @@ public class CometdConfig {
    */
   public String getContainerName() {
     return containerName;
+  }
+  
+  
+  /**
+   * Gets the provider.
+   *
+   * @return the provider
+   */
+  public String getProvider() {
+    return provider;
   }
 
   /**

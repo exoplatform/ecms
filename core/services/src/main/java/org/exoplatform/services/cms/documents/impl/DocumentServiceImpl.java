@@ -109,7 +109,7 @@ public class DocumentServiceImpl implements DocumentService {
   public static final String JCR_MIME_TYPE = "jcr:mimeType";
   public static final String EXO_OWNER_PROP = "exo:owner";
   public static final String EXO_TITLE_PROP = "exo:title";
-  private static final String EXO_CURRENT_EDITOR_PROP = "exo:currentEditor";
+  private static final String EXO_CURRENT_PROVIDER_PROP = "exo:currentProvider";
   private static final String EXO_DOCUMENT = "exo:document";
   private static final String EXO_USER_PREFFERENCES = "exo:userPrefferences";
   private static final String EXO_PREFFERED_EDITOR = "exo:prefferedEditor";
@@ -664,24 +664,34 @@ public class DocumentServiceImpl implements DocumentService {
    * {@inheritDoc}
    */
   @Override
-  public void setCurrentDocumentEditor(String uuid, String workspace, String provider) throws RepositoryException {
+  public void setCurrentDocumentProvider(String uuid, String workspace, String provider) throws RepositoryException {
     Session systemSession = repoService.getCurrentRepository().getSystemSession(workspace);
     NodeImpl systemNode = (NodeImpl) systemSession.getNodeByUUID(uuid);
     if (systemNode.canAddMixin(EXO_DOCUMENT)) {
       systemNode.addMixin(EXO_DOCUMENT);
     }
-    systemNode.setProperty(EXO_CURRENT_EDITOR_PROP, provider);
+    systemNode.setProperty(EXO_CURRENT_PROVIDER_PROP, provider);
     systemNode.save();
+  }
+  
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getCurrentDocumentProvider(String uuid, String workspace) throws RepositoryException {
+    Session systemSession = repoService.getCurrentRepository().getSystemSession(workspace);
+    NodeImpl systemNode = (NodeImpl) systemSession.getNodeByUUID(uuid);
+    return systemNode.hasProperty(EXO_CURRENT_PROVIDER_PROP) ? systemNode.getProperty(EXO_CURRENT_PROVIDER_PROP).getString() : null;
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public void initDocumentEditorsModule() {
+  public void initDocumentEditorsModule(String provider) {
     CometdDocumentsService cometdService = ExoContainerContext.getCurrentContainer().getComponentInstanceOfType(CometdDocumentsService.class);
     String userId = ConversationState.getCurrent().getIdentity().getUserId();
-    CometdConfig cometdConf = new CometdConfig(cometdService.getCometdServerPath(), cometdService.getUserToken(userId), PortalContainer.getCurrentPortalContainerName());
+    CometdConfig cometdConf = new CometdConfig(cometdService.getCometdServerPath(), cometdService.getUserToken(userId), PortalContainer.getCurrentPortalContainerName(), provider);
     WebuiRequestContext context = WebuiRequestContext.getCurrentInstance();
     JavascriptManager js = context.getJavascriptManager();
     try {

@@ -72,6 +72,8 @@
     const DOCUMENT_OPENED = "DOCUMENT_OPENED";
     const DOCUMENT_CLOSED = "DOCUMENT_CLOSED";
     const LAST_EDITOR_CLOSED = "LAST_EDITOR_CLOSED";
+    const DOCUMENT_PREVIEW_OPENED = "DOCUMENT_PREVIEW_OPENED";
+    const CURRENT_PROVIDER_INFO = "CURRENT_PROVIDER_INFO";
     
     /**
      * Parses comet message from JSON
@@ -166,12 +168,12 @@
     /**
      * Adds the 'Edit Online' button to a preview (from the activity stream) when it's loaded.
      */
-    var tryAddEditorButtonToPreview = function(attempts, delay, fileId, buttons) {
+    var tryAddEditorButtonToPreview = function(attempts, delay, fileId, workspace, buttons) {
       var $elem = $("#uiDocumentPreview .previewBtn");
       if ($elem.length == 0 || !$elem.is(":visible")) {
         if (attempts > 0) {
           setTimeout(function() {
-            tryAddEditorButtonToPreview(attempts - 1, delay, fileId, buttons);
+            tryAddEditorButtonToPreview(attempts - 1, delay, fileId, workspace, buttons);
           }, delay);
         } else {
           log("Cannot find element " + $elem);
@@ -179,18 +181,24 @@
       } else {
         addEditorButtonsContainer($elem, fileId, buttons);
         $(".previewBtn .editorButtonContainer").addClass("dropup");
+        // Send event to get info about current open provider
+        publishDocument(fileId, {
+          "type" : DOCUMENT_PREVIEW_OPENED,
+          "fileId" : fileId,
+          "workspace" : workspace
+        });
       }
     };
     
     /**
      * Adds the 'Edit Online' button to No-preview screen (from the activity stream) when it's loaded.
      */
-    var tryAddEditorButtonNoPreview = function(attempts, delay, fileId, buttons) {
+    var tryAddEditorButtonNoPreview = function(attempts, delay, fileId, workspace, buttons) {
       var $elem = $("#documentPreviewContainer .navigationContainer.noPreview");
       if ($elem.length == 0 || !$elem.is(":visible")) {
         if (attempts > 0) {
           setTimeout(function() {
-            tryAddEditorButtonNoPreview(attempts - 1, delay, fileId, buttons);
+            tryAddEditorButtonNoPreview(attempts - 1, delay, fileId, workspace, buttons);
           }, delay);
         } else {
           log("Cannot find .noPreview element");
@@ -205,6 +213,12 @@
           $detailContainer.append($target);
         }
         addEditorButtonsContainer($target, fileId, buttons);
+        // Send event to get info about current open provider
+        publishDocument(fileId, {
+          "type" : DOCUMENT_PREVIEW_OPENED,
+          "fileId" : fileId,
+          "workspace" : workspace
+        });
       }
     };
 
@@ -216,20 +230,26 @@
       var subscription = cometd.subscribe("/eXo/Application/documents/" + fileId, function(message) {
         // Channel message handler
         var result = tryParseJson(message);
-        console.log("EVENT: " + result.type);
-        
+        console.log("EVENT " + result.type);
         switch(result.type) {
           case DOCUMENT_OPENED: {
-            var buttons = $('.editorButton[data-provider!="' + result.provider + '"][data-fileId="' + result.fileId + '"]').each(function(){
+            $('.editorButton[data-provider!="' + result.provider + '"][data-fileId="' + result.fileId + '"]').each(function(){
               $(this).addClass("disabledProvider");
-          });
+            });
           } break;
           case LAST_EDITOR_CLOSED: {
-            var buttons = $('.editorButton[data-provider!="' + result.provider + '"][data-fileId="' + result.fileId + '"]').each(function(){
+            $('.editorButton[data-provider!="' + result.provider + '"][data-fileId="' + result.fileId + '"]').each(function(){
               $(this).removeClass("disabledProvider");
-          });
+            });
           } break;
-        }
+          case CURRENT_PROVIDER_INFO: {
+            if(result.provider) {
+              $('.editorButton[data-provider!="' + result.provider + '"][data-fileId="' + result.fileId + '"]').each(function(){
+                $(this).addClass("disabledProvider");
+              });
+            }
+           break;
+        }}
       }, cometdContext, function(subscribeReply) {
         // Subscription status callback
         if (subscribeReply.successful) {
@@ -288,7 +308,8 @@
           "connectTimeout" : 60000
         });
         cometdContext = {
-          "exoContainerName" : cometdConf.containerName
+          "exoContainerName" : cometdConf.containerName,
+          "provider" : cometdConf.provider
         };
         cometd = cCometD;
       }
@@ -315,6 +336,12 @@
       }
       var $target = $("#activityContainer" + config.activityId).find("div[id^='ActivityContextBox'] > .actionBar .statusAction.pull-left");
       addEditorButtonsContainer($target, config.fileId, buttons);
+      // Disable editor buttons if the document is currently editing in one of editors.
+      if(config.currentProvider != null) {
+        $('.editorButton[data-provider!="' + config.currentProvider + '"][data-fileId="' + config.fileId + '"]').each(function(){
+          $(this).addClass("disabledProvider");
+        });
+      }
       subscribeDocument(config.fileId);
     };
     
@@ -340,10 +367,15 @@
       $(clickSelector).click(function() {
         // We set timeout here to avoid the case when the element is rendered but is going to be updated soon
         setTimeout(function() {
-          tryAddEditorButtonToPreview(100, 100, config.fileId, buttons);
+          tryAddEditorButtonToPreview(100, 100, config.fileId, config.workspace, buttons);
           // We need wait for about 2min when doc cannot generate its preview
-          tryAddEditorButtonNoPreview(600, 250, config.fileId, buttons);
+          tryAddEditorButtonNoPreview(600, 250, config.fileId, config.workspace, buttons);
         }, 100);
+        if(config.currentProvider != null) {
+          $('.editorButton[data-provider!="' + config.currentProvider + '"][data-fileId="' + config.fileId + '"]').each(function(){
+            $(this).addClass("disabledProvider");
+          });
+        }
         subscribeDocument(config.fileId);
       });
     };
@@ -370,6 +402,8 @@
         "fileId" : fileId,
         "workspace" : workspace
       });
+      // subsribe to track opened editors on server-side 
+      var subscription = cometd.subscribe("/eXo/Application/documents/" + fileId, function(message) { }, cometdContext, function(subscribeReply) {});
     };
 
     this.onEditorClose = function(fileId, workspace, provider) {

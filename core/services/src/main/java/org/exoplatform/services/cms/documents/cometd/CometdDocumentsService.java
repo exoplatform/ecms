@@ -14,6 +14,7 @@ import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import javax.inject.Inject;
 import javax.jcr.RepositoryException;
 
@@ -24,8 +25,11 @@ import org.cometd.annotation.Session;
 import org.cometd.annotation.Subscription;
 import org.cometd.bayeux.Message;
 import org.cometd.bayeux.server.BayeuxServer;
+import org.cometd.bayeux.server.BayeuxServer.ChannelListener;
+import org.cometd.bayeux.server.ConfigurableServerChannel;
 import org.cometd.bayeux.server.LocalSession;
 import org.cometd.bayeux.server.ServerChannel;
+import org.cometd.bayeux.server.ServerChannel.SubscriptionListener;
 import org.cometd.bayeux.server.ServerMessage;
 import org.cometd.bayeux.server.ServerSession;
 import org.eclipse.jetty.util.component.LifeCycle;
@@ -142,8 +146,10 @@ public class CometdDocumentsService implements Startable {
      */
     public void addClosedEditor(String provider) {
       activeProviders.compute(provider, (key, count) -> {
-        if (count == null) {
+        if (count == null || count.get() == 0) {
           return new AtomicInteger(0);
+        } else if(count.get() == 0){
+          return count;
         } else {
           count.decrementAndGet();
           return count;
@@ -159,7 +165,7 @@ public class CometdDocumentsService implements Startable {
 
     /** The container name. */
     final String containerName;
-    
+
     /**
      * Instantiates a new container command.
      *
@@ -168,7 +174,7 @@ public class CometdDocumentsService implements Startable {
     ContainerCommand(String containerName) {
       this.containerName = containerName;
     }
-    
+
     /**
      * Execute actual work of the commend (in extending class).
      *
@@ -211,57 +217,146 @@ public class CometdDocumentsService implements Startable {
       }
 
     }
+  }
 
+  class ChannelSubscriptionListener implements SubscriptionListener {
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void subscribed(ServerSession remote, ServerChannel channel, ServerMessage message) {
+      // FYI message will be null for server-side subscription
+      String sessionId = remote.getId();
+      String channelId = channel.getId();
+      String exoClientId = asString(message.get("exoClientId"));
+      String exoContainerName = asString(message.get("exoContainerName"));
+      if (LOG.isDebugEnabled()) {
+        LOG.debug(">> Subscribed: session:" + sessionId + " (" + exoContainerName + "@" + exoClientId + "), channel:"
+            + channelId);
+      }
+
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void unsubscribed(ServerSession session, ServerChannel channel, ServerMessage message) {
+      // FYI message will be null for server-side unsubscription
+      String sessionId = session.getId();
+      String channelId = channel.getId();
+      String exoClientId = null;
+      String exoContainerName = null;
+      String provider = null;
+      if (message != null) {
+        exoClientId = asString(message.get("exoClientId"));
+        exoContainerName = asString(message.get("exoContainerName"));
+        provider = asString(message.get("provider"));
+      }
+      if (LOG.isDebugEnabled()) {
+        LOG.debug(">> Unsubscribed: provider: " + provider + " session:" + sessionId + " (" + exoContainerName + "@" + exoClientId + "), channel:"
+            + channelId);
+      }
+    }
+  }
+
+  /**
+   * The listener interface for receiving client channel events.
+   *
+   * @see ClientChannelEvent
+   */
+  class ClientChannelListener implements ChannelListener {
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void configureChannel(ConfigurableServerChannel channel) {
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void channelAdded(ServerChannel channel) {
+      // Add sub/unsub listener to WebConferencing channel
+      final String channelId = channel.getId();
+      if (LOG.isDebugEnabled()) {
+        LOG.debug("> Channel added: " + channelId);
+      }
+      if (channelId.startsWith(CHANNEL_NAME)) {
+        channel.addListener(subscriptionListener);
+        if (LOG.isDebugEnabled()) {
+          LOG.debug(">> Added subscription listener for channel: " + channelId);
+        }
+      }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void channelRemoved(String channelId) {
+      if (LOG.isDebugEnabled()) {
+        LOG.debug("< Channel removed: " + channelId);
+      }
+    }
   }
 
   /** The Constant LOG. */
-  private static final Log                                 LOG                      =
+  private static final Log                                 LOG                           =
                                                                ExoLogger.getLogger(CometdDocumentsService.class);
 
   /** The channel name. */
-  public static final String                               CHANNEL_NAME             = "/eXo/Application/documents/";
+  public static final String                               CHANNEL_NAME                  = "/eXo/Application/documents/";
 
   /** The channel name. */
-  public static final String                               CHANNEL_NAME_PARAMS      = CHANNEL_NAME + "{fileId}";
+  public static final String                               CHANNEL_NAME_PARAMS           = CHANNEL_NAME + "{fileId}";
 
   /** The document saved event. */
-  public static final String                               DOCUMENT_OPENED_EVENT    = "DOCUMENT_OPENED";
+  public static final String                               DOCUMENT_OPENED_EVENT         = "DOCUMENT_OPENED";
 
   /** The document deleted event. */
-  public static final String                               DOCUMENT_CLOSED_EVENT    = "DOCUMENT_CLOSED";
+  public static final String                               DOCUMENT_CLOSED_EVENT         = "DOCUMENT_CLOSED";
 
-  
   /** The Constant LAST_EDITOR_CLOSED_EVENT. */
-  public static final String                               LAST_EDITOR_CLOSED_EVENT = "LAST_EDITOR_CLOSED";
+  public static final String                               LAST_EDITOR_CLOSED_EVENT      = "LAST_EDITOR_CLOSED";
+
+  /** The Constant DOCUMENT_PREVIEW_OPENED_EVENT. */
+  public static final String                               DOCUMENT_PREVIEW_OPENED_EVENT = "DOCUMENT_PREVIEW_OPENED";
+
+  /** The Constant CURRENT_PROVIDER_INFO. */
+  public static final String                               CURRENT_PROVIDER_INFO_EVENT   = "CURRENT_PROVIDER_INFO";
 
   /**
    * Base minimum number of threads for document updates thread executors.
    */
-  public static final int                                  MIN_THREADS              = 2;
+  public static final int                                  MIN_THREADS                   = 2;
 
   /**
    * Minimal number of threads maximum possible for document updates thread
    * executors.
    */
-  public static final int                                  MIN_MAX_THREADS          = 4;
+  public static final int                                  MIN_MAX_THREADS               = 4;
 
   /** Thread idle time for thread executors (in seconds). */
-  public static final int                                  THREAD_IDLE_TIME         = 120;
+  public static final int                                  THREAD_IDLE_TIME              = 120;
 
   /**
    * Maximum threads per CPU for thread executors of document changes channel.
    */
-  public static final int                                  MAX_FACTOR               = 20;
+  public static final int                                  MAX_FACTOR                    = 20;
 
   /**
    * Queue size per CPU for thread executors of document updates channel.
    */
-  public static final int                                  QUEUE_FACTOR             = MAX_FACTOR * 2;
+  public static final int                                  QUEUE_FACTOR                  = MAX_FACTOR * 2;
 
   /**
    * Thread name used for the executor.
    */
-  public static final String                               THREAD_PREFIX            = "documents-comet-thread-";
+  public static final String                               THREAD_PREFIX                 = "documents-comet-thread-";
 
   /** The exo bayeux. */
   protected final EXoContinuationBayeux                    exoBayeux;
@@ -275,8 +370,14 @@ public class CometdDocumentsService implements Startable {
   /** The document service. */
   protected final DocumentService                          documentService;
 
+  /** The subscription listener. */
+  protected final ChannelSubscriptionListener              subscriptionListener          = new ChannelSubscriptionListener();
+
+  /** The channel listener. */
+  protected final ClientChannelListener                    channelListener               = new ClientChannelListener();
+
   /** The active providers. */
-  protected final ConcurrentHashMap<String, ProvidersInfo> activeProviders          =
+  protected final ConcurrentHashMap<String, ProvidersInfo> activeProviders               =
                                                                            new ConcurrentHashMap<String, ProvidersInfo>();
 
   /**
@@ -378,7 +479,15 @@ public class CometdDocumentsService implements Startable {
      */
     @PostConstruct
     public void postConstruct() {
-
+      bayeux.addListener(channelListener);
+    }
+    
+    /**
+     * Pre destroy.
+     */
+    @PreDestroy
+    public void preDestroy() {
+      bayeux.removeListener(channelListener);
     }
 
     /**
@@ -401,7 +510,7 @@ public class CometdDocumentsService implements Startable {
       String type = (String) data.get("type");
       String workspace = (String) data.get("workspace");
       String provider = (String) data.get("provider");
-      
+
       eventsHandlers.submit(new ContainerCommand(PortalContainer.getCurrentPortalContainerName()) {
         @Override
         void onContainerError(String error) {
@@ -415,7 +524,7 @@ public class CometdDocumentsService implements Startable {
             try {
               addActiveProvider(fileId, provider);
               if (getActiveProvidersCount(fileId, provider) == 1) {
-                documentService.setCurrentDocumentEditor(fileId, workspace, provider);
+                documentService.setCurrentDocumentProvider(fileId, workspace, provider);
               }
             } catch (RepositoryException e) {
               LOG.error("Cannot set current document editor provider", e);
@@ -427,10 +536,18 @@ public class CometdDocumentsService implements Startable {
               removeActiveProvider(fileId, provider);
               if (getActiveProvidersCount(fileId, provider) == 0) {
                 sendLastEditorClosedEvent(fileId, provider);
-                documentService.setCurrentDocumentEditor(fileId, workspace, null);
+                documentService.setCurrentDocumentProvider(fileId, workspace, null);
               }
             } catch (RepositoryException e) {
               LOG.error("Cannot remove current document editor provider", e);
+            }
+            break;
+          case DOCUMENT_PREVIEW_OPENED_EVENT:
+            try {
+              String currentProvider = documentService.getCurrentDocumentProvider(fileId, workspace);
+              sendCurrentProviderInfoEvent(fileId, currentProvider);
+            } catch (RepositoryException e) {
+              LOG.warn("Cannnot get current provider on file {}. {}", fileId, e.getMessage());
             }
             break;
           }
@@ -499,6 +616,30 @@ public class CometdDocumentsService implements Startable {
       }
     }
 
+    /**
+     * Send last editor closed event.
+     *
+     * @param fileId the file id
+     * @param provider the provider
+     */
+    protected void sendCurrentProviderInfoEvent(String fileId, String provider) {
+      ServerChannel channel = bayeux.getChannel(CHANNEL_NAME + fileId);
+      if (channel != null) {
+        StringBuilder data = new StringBuilder();
+        data.append('{');
+        data.append("\"type\": \"");
+        data.append(CURRENT_PROVIDER_INFO_EVENT);
+        data.append("\", ");
+        data.append("\"fileId\": \"");
+        data.append(fileId);
+        data.append("\", ");
+        data.append("\"provider\": \"");
+        data.append(provider);
+        data.append("\"}");
+        channel.publish(localSession, data.toString());
+      }
+    }
+
   }
 
   /**
@@ -536,6 +677,19 @@ public class CometdDocumentsService implements Startable {
    */
   public String getUserToken(String userId) {
     return exoBayeux.getUserToken(userId);
+  }
+
+  /**
+   * Return object if it's String instance or null if it is not.
+   *
+   * @param obj the obj
+   * @return the string or null
+   */
+  protected String asString(Object obj) {
+    if (obj != null && String.class.isAssignableFrom(obj.getClass())) {
+      return String.class.cast(obj);
+    }
+    return null;
   }
 
   /**

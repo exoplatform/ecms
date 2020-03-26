@@ -120,15 +120,16 @@ public class DocumentUIActivity extends FileUIActivity {
           LOG.error("Cannot init activity from plugin {}, {}", provider.getProviderName(), e.getMessage());
         }
       });
-      String prefferedEditor = documentService.getPreferedEditor(identity.getUserId(),
+      String prefferedProvider = documentService.getPreferedEditor(identity.getUserId(),
                                                                  node.getUUID(),
                                                                  node.getSession().getWorkspace().getName());
+      String currentProvider = documentService.getCurrentDocumentProvider(node.getUUID(), node.getSession().getWorkspace().getName());
       InitConfig config = new InitConfig.InitConfigBuilder().activityId(activityId)
                                                             .index("0")
                                                             .fileId(node.getUUID())
                                                             .workspace(node.getSession().getWorkspace().getName())
-                                                            .prefferedEditor(prefferedEditor)
-                                                            .currentEditor(null) // TODO: set current editor
+                                                            .prefferedProvider(prefferedProvider)
+                                                            .currentProvider(currentProvider)
                                                             .build();
       require.addScripts("editorbuttons.initActivityButtons(" + config.toJSON() + ");");
 
@@ -148,15 +149,16 @@ public class DocumentUIActivity extends FileUIActivity {
           LOG.error("Cannot init preview from plugin {}, {}", provider.getProviderName(), e.getMessage());
         }
       }
-      String prefferedEditor = documentService.getPreferedEditor(identity.getUserId(),
+      String prefferedProvider = documentService.getPreferedEditor(identity.getUserId(),
                                                                  node.getUUID(),
                                                                  node.getSession().getWorkspace().getName());
+      String currentProvider = documentService.getCurrentDocumentProvider(node.getUUID(), node.getSession().getWorkspace().getName());
       InitConfig config = new InitConfig.InitConfigBuilder().activityId(activityId)
                                                             .index(String.valueOf(index))
                                                             .fileId(node.getUUID())
                                                             .workspace(node.getSession().getWorkspace().getName())
-                                                            .prefferedEditor(prefferedEditor)
-                                                            .currentEditor(null) // TODO: set current editor
+                                                            .prefferedProvider(prefferedProvider)
+                                                            .currentProvider(currentProvider)
                                                             .build();
       require.addScripts("editorbuttons.initPreviewButtons(" + config.toJSON() + ");");
     }
@@ -190,11 +192,11 @@ public class DocumentUIActivity extends FileUIActivity {
     /** The workspace. */
     protected final String workspace;
 
-    /** The preffered editor. */
-    protected final String prefferedEditor;
+    /** The preffered provider. */
+    protected final String prefferedProvider;
 
-    /** The current editor. */
-    protected final String currentEditor;
+    /** The current provider. */
+    protected final String currentProvider;
 
     /**
      * Instantiates a new inits the config.
@@ -206,8 +208,8 @@ public class DocumentUIActivity extends FileUIActivity {
       this.index = builder.index;
       this.fileId = builder.fileId;
       this.workspace = builder.workspace;
-      this.prefferedEditor = builder.prefferedEditor;
-      this.currentEditor = builder.currentEditor;
+      this.prefferedProvider = builder.prefferedProvider;
+      this.currentProvider = builder.currentProvider;
     }
 
     /**
@@ -247,12 +249,12 @@ public class DocumentUIActivity extends FileUIActivity {
     }
 
     /**
-     * Gets the current editor.
+     * Gets the current provider.
      *
-     * @return the current editor
+     * @return the current provider
      */
-    public String getCurrentEditor() {
-      return currentEditor;
+    public String getCurrentProvider() {
+      return currentProvider;
     }
 
     /**
@@ -282,11 +284,11 @@ public class DocumentUIActivity extends FileUIActivity {
       /** The workspace. */
       protected String workspace;
 
-      /** The preffered editor. */
-      protected String prefferedEditor;
+      /** The preffered provider. */
+      protected String prefferedProvider;
 
       /** The current editor. */
-      protected String currentEditor;
+      protected String currentProvider;
 
       /**
        * Activity id.
@@ -335,22 +337,22 @@ public class DocumentUIActivity extends FileUIActivity {
       /**
        * Preffered editor.
        *
-       * @param prefferedEditor the preffered editor
+       * @param prefferedProvider the preffered provider
        * @return the inits the config builder
        */
-      protected InitConfigBuilder prefferedEditor(String prefferedEditor) {
-        this.prefferedEditor = prefferedEditor;
+      protected InitConfigBuilder prefferedProvider(String prefferedProvider) {
+        this.prefferedProvider = prefferedProvider;
         return this;
       }
 
       /**
        * Current editor.
        *
-       * @param currentEditor the current editor
+       * @param currentProvider the current provider
        * @return the inits the config builder
        */
-      protected InitConfigBuilder currentEditor(String currentEditor) {
-        this.currentEditor = currentEditor;
+      protected InitConfigBuilder currentProvider(String currentProvider) {
+        this.currentProvider = currentProvider;
         return this;
       }
 
