@@ -9,32 +9,37 @@ export async function getData(url) {
     if (response.ok) {
       return response.json();
     } else {
-      log("Error reading data: " + (response.json().errorMessage ? response.json().errorMessage : response.json().errorCode));
-      throw new Error(response.json().errorCode);
+      const errorResponse = response.json();
+      log(`Error reading data: ${errorResponse.errorMessage ? errorResponse.errorMessage : errorResponse.errorCode}`);
+      throw new Error(errorResponse.errorCode);
     }
-  } catch(e) {
+  } catch (e) {
     // network failure or anything prevented the request from completing.
-    log("Unable to get data: " + e.message)
+    log(`Unable to get data: ${e.message}`);
     throw new Error("DataError"); // localized errorCode here
   }
 }
 
 export async function postData(url, data) {
-  
-  const response = await fetch(url, {
-    headers: {
-      "Content-Type": "application/json"
-    },
-    method: "POST",
-    body: JSON.stringify(data)
-  });
-  if (response && response.ok) {
-    const responseText = await response.text();
-    return responseText ? JSON.parse(responseText) : {};
-  } else {
-    log("Unable to post data");
-    const errorText = await response.text();
-    throw new Error(errorText);
+  try {
+    const response = await fetch(url, {
+      headers: {
+        "Content-Type": "application/json"
+      },
+      method: "POST",
+      body: JSON.stringify(data)
+    });
+    if (response.ok) {
+      return response.text();
+    } else {
+      const errorResponse = response.json();
+      log(`Error reading data: ${errorResponse.errorMessage ? errorResponse.errorMessage : errorResponse.errorCode}`);
+      throw new Error(errorResponse.errorCode);
+    }
+  } catch (e) {
+    // network failure or anything prevented the request from completing.
+    log(`Unable to get data: ${e.message}`);
+    throw new Error("DataError"); // localized errorCode here
   }
 }
 
@@ -70,13 +75,4 @@ export function log(msg, err) {
       console.log(logPrefix + msgLine + isoTime);
     }
   }
-}
-
-export function parsedErrorMsg(error) {
-  try {
-    JSON.parse(error.message);
-  } catch (e) {
-    return error.message;
-  }
-  return JSON.parse(error.message).message;
 }

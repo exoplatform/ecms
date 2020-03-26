@@ -26,8 +26,12 @@
                   v-for="item in providers" 
                   :key="item.provider" 
                   class="providersTableRow">
-                  <td><div>{{ $t(`editors.admin.${item.provider}.name`) }}</div></td>
-                  <td><div>{{ $t(`editors.admin.${item.provider}.description`) }}</div></td>
+                  <td>
+                    <div>{{ $t(`editors.admin.${item.provider}.name`) }}</div>
+                  </td>
+                  <td>
+                    <div>{{ $t(`editors.admin.${item.provider}.description`) }}</div>
+                  </td>
                   <td class="center actionContainer">
                     <div>
                       <v-switch
@@ -35,43 +39,33 @@
                         :ripple="false"
                         color="#568dc9"
                         class="providersSwitcher"
-                        @change="changeStatus(item)"/>
+                        @change="changeActive(item)" />
                     </div>
                   </td>
                   <td class="center actionContainer">
-                    <a 
-                      data-placement="bottom" 
-                      rel="tooltip" 
-                      class="actionIcon" 
-                      data-original-title="Edit" 
-                      @click.stop="changeSettings(item)">
-                      <i class="uiIconEdit uiIconLightGray"></i>
-                    </a>
+                    <edit-dialog
+                      :provider-name="item.provider"
+                      :provider-link="item.links.self.href"
+                      :search-url="services.identities" />
                   </td>
                 </tr>
               </tbody>
             </template>
           </v-simple-table>
         </v-col>
-        <v-dialog
-          v-model="showDialog" 
-          width="500"
-          style="overflow-x: hidden"
-          @click:outside="showDialog = false">
-          <edit-dialog
-            :provider="selectedProvider" 
-            :search-url="services.identities"
-            @onDialogClose="showDialog = false" />
-        </v-dialog>
       </v-row>
     </v-container>
   </v-app>
 </template>
 
 <script>
-import { postData, getData, parsedErrorMsg } from "../EditorsAdminAPI";
+import { postData, getData } from "../EditorsAdminAPI";
+import EditDialog from "./EditDialog.vue";
 
 export default {
+  components: {
+    EditDialog
+  },
   props: {
     services: {
       type: Object,
@@ -82,8 +76,6 @@ export default {
     return {
       providers: [],
       switcher: false,
-      showDialog: false,
-      selectedProvider: null,
       error: null
     };
   },
@@ -97,29 +89,23 @@ export default {
         const data = await getData(this.services.providers);
         this.error = null;
         this.providers = data.editors;
-      } catch(err) {
-        this.error = parsedErrorMsg(err);
+      } catch (err) {
+        this.error = err.message;
       }
     },
-    async changeStatus(provider) {
+    async changeActive(provider) {
       // getting rest for updating provider status
-      const updateRest = provider.links.filter(({ rel, href }) => rel === "update")[0].href;
       try {
-        const data = await postData(updateRest, { active: !provider.active });
+        const data = await postData(provider.links.self.href, { active: !provider.active });
         this.error = null;
         this.providers.map(p => {
           if (p.provider === provider.provider) {
             p.active = !provider.active;
           }
         });
-      } catch(err) {
-        this.error = parsedErrorMsg(err);
+      } catch (err) {
+        this.error = err.message;
       }
-    },
-    changeSettings(item) {
-      // settings selectedProvider before passing it to dialog
-      this.selectedProvider = item;
-      this.showDialog = true;
     }
   }
 };
@@ -147,16 +133,19 @@ export default {
   border-left: 0;
 
   &Row {
-    th, td {
+    th,
+    td {
       height: 20px;
       padding: 5px 15px;
     }
 
-    &:nth-child(even):hover>td, &:nth-child(even)>td {
+    &:nth-child(even):hover > td,
+    &:nth-child(even) > td {
       background: #f6f7fa !important;
     }
 
-    &:nth-child(odd):hover>td, &:nth-child(odd)>td {
+    &:nth-child(odd):hover > td,
+    &:nth-child(odd) > td {
       background: #fff !important;
     }
   }
