@@ -27,10 +27,20 @@
                   :key="item.provider" 
                   class="providersTableRow">
                   <td>
-                    <div>{{ $t(`editors.admin.${item.provider}.name`) }}</div>
+                    <div>
+                      {{ i18n.te(`editors.admin.${item.provider}.name`) 
+                        ? $t(`editors.admin.${item.provider}.name`) 
+                        : item.provider 
+                      }}
+                    </div>
                   </td>
                   <td>
-                    <div>{{ $t(`editors.admin.${item.provider}.description`) }}</div>
+                    <div>
+                      {{ i18n.te(`editors.admin.${item.provider}.description`) 
+                        ? $t(`editors.admin.${item.provider}.description`) 
+                        : "" 
+                      }}
+                    </div>
                   </td>
                   <td class="center actionContainer">
                     <div>
@@ -46,7 +56,7 @@
                     <edit-dialog
                       :provider-name="item.provider"
                       :provider-link="item.links.self.href"
-                      :search-url="settings.services.identities" />
+                      :search-url="services.identities" />
                   </td>
                 </tr>
               </tbody>
@@ -67,8 +77,20 @@ export default {
     EditDialog
   },
   props: {
-    settings: {
+    services: {
       type: Object,
+      required: true
+    },
+    i18n: {
+      type: Object,
+      required: true
+    },
+    language: {
+      type: String,
+      required: true
+    },
+    resourceBundleName: {
+      type: String,
       required: true
     }
   },
@@ -86,17 +108,23 @@ export default {
     async getProviders() {
       // services object contains urls for requests
       try {
-        const data = await getData(this.settings.services.providers);
+        const data = await getData(this.services.providers);
         this.error = null;
         this.providers = data.editors;
-        // simulating promise
-        setTimeout(() => {
-          this.settings.i18n.mergeLocaleMessage(this.settings.language, { "editors.admin.table.Provider": "Provider Office" });
-          this.ready = true;
-        }, 2000);
+        const resourcesPromises = this.providers.map(({ provider }) => this.getProviderResources(provider));
+        Promise.all(resourcesPromises).then(res => {
+          res.map(localized => {
+            this.i18n.mergeLocaleMessage(this.language, localized.getLocaleMessage(this.language));
+          });
+        });
       } catch (err) {
         this.error = err.message;
       }
+    },
+    getProviderResources(providerId) {
+      const resourceUrl = 
+        `${eXo.env.portal.context}/${eXo.env.portal.rest}/i18n/bundle/${this.resourceBundleName}-${providerId}-${this.language}.json`;
+      return exoi18n.loadLanguageAsync(this.language, resourceUrl);
     },
     async changeActive(provider) {
       // getting rest for updating provider status

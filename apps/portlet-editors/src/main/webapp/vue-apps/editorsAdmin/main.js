@@ -17,7 +17,8 @@ export function init(settings) {
   exoi18n.loadLanguageAsync(lang, url).then(i18n => {
     // init Vue app when locale ressources are ready
     new Vue({
-      render: h => h(adminApp, { props: { settings: { ...settings, i18n: i18n, language: lang } } }),
+      render: h =>
+        h(adminApp, { props: { ...settings, i18n: i18n, language: lang, resourceBundleName: resourceBundleName } }),
       i18n,
       vuetify
     }).$mount("#editors-admin");
