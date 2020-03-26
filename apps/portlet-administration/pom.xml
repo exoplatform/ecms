@@ -4,7 +4,7 @@
   <parent>
     <artifactId>ecms-apps</artifactId>
     <groupId>org.exoplatform.ecms</groupId>
-    <version>5.3.x-SNAPSHOT</version>
+    <version>5.3.2</version>
   </parent>
   <artifactId>ecms-apps-portlet-administration</artifactId>
   <packaging>war</packaging>
