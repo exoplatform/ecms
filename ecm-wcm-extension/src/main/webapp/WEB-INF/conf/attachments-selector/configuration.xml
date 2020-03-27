@@ -35,7 +35,7 @@
     <type>org.exoplatform.services.resources.impl.BaseResourceBundlePlugin</type>
     <init-params>
       <values-param>
-        <name>classpath.resources</name>
+        <name>init.resources</name>
         <description>Store the following resources into the db for the first launch </description>
         <value>locale.attachmentsSelector.attachments</value>
       </values-param>
