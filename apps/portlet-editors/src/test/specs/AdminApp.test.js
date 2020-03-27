@@ -37,7 +37,10 @@ describe("AdminApp.test.js", () => {
         }
       },
       propsData: {
-        services: { providers: "providers" }
+        services: { providers: "providers", identities: "identity/search" },
+        i18n: { te: () => true },
+        language: "en",
+        resourceBundleName: "localizationBundle"
       },
       stubs: ["edit-dialog"]
     });

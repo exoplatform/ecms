@@ -9,8 +9,9 @@ const vuetify = new Vuetify({
 
 // getting language of user
 const lang = (eXo && eXo.env && eXo.env.portal && eXo.env.portal.language) || "en";
-const resourceBundleName = "locale.portlet.EditorsAdmin";
-const url = `${eXo.env.portal.context}/${eXo.env.portal.rest}/i18n/bundle/${resourceBundleName}-${lang}.json`;
+const localePortlet = "locale.portlet";
+const resourceBundleName = "EditorsAdmin";
+const url = `${eXo.env.portal.context}/${eXo.env.portal.rest}/i18n/bundle/${localePortlet}.${resourceBundleName}-${lang}.json`;
 
 export function init(settings) {
   // getting locale ressources
