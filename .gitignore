@@ -50,3 +50,6 @@ bin/
 transaction.log
 rebel-remote.xml
 rebel.xml
+
+# Npm
+node_modules/

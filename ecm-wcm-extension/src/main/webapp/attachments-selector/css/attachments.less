@@ -1,0 +1,590 @@
+
+@headingColor: #4d5466;
+@baseColorDark: #333333;
+@primaryColor: #2f5e92;
+@globalLoadingBorder: #333;
+@colorIconPrimary: @primaryColor;
+@header-popup-bg: #484848;
+@textLightColor: #999999;
+@btnDisableColor: #c6c6c6;
+
+.attachments {
+  .v-navigation-drawer {
+    z-index: 20;
+  }
+
+  .attachmentsHeader {
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+
+    .backButton {
+      width: 40px;
+
+      .uiIconBack {
+        color: grey;
+        background: none;
+        margin: 0;
+        padding: 15px;
+        position: absolute;
+        float: left;
+        font-size: 15px;
+        cursor: pointer;
+        &:before {
+        content: "\e760";
+      }
+      }
+    }
+
+    .attachmentsTitle {
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .attachmentsCloseIcon {
+      color: #dee4f2;
+      font-size: 32px;
+      line-height: 20px;
+      float: right;
+      cursor: pointer;
+    }
+  }
+
+  .uploadedFilesTitle {
+    color: @headingColor;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 15px;
+  }
+
+  .uploadedFilesItem, .attachment, .fileSelection {
+    display: flex;
+    font-size: 18px;
+    margin: 15px;
+
+    > div {
+      margin: 0 10px;
+    }
+
+    .fileType {
+      flex: 0 0 41px;
+      width: 41px;
+
+      i {
+        font-size: 41px;
+      }
+
+      .uiIconFileTypeDefault:before {
+        content: "\e71c";
+      }
+
+      .uiIconFileTypeapplicationvndopenxmlformats-officedocumentwordprocessingmldocument:before {
+        content: "\e712";
+        color: #578DC9;
+      }
+
+      .uiIconFileTypeapplicationvndopenxmlformats-officedocumentspreadsheetmlsheet:before {
+        content: "\e6f9";
+        color: #2EB58C;
+      }
+
+      .uiIconFileTypeapplicationvndopenxmlformats-officedocumentpresentationmlpresentation:before {
+        content: "\e703";
+        color: #D07B7B;
+      }
+
+      .uiIconFileTypeapplicationvndoasisopendocumenttext:before {
+        content: "\e710";
+        color: #578DC9;
+      }
+
+      .uiIconFileTypeapplicationvndoasisopendocumentspreadsheet:before {
+        content: "\e710";
+        color: #2EB58C;
+      }
+
+      .uiIconFileTypeapplicationvndoasisopendocumentpresentation:before {
+        content: "\e710";
+        color: #D07B7B;
+      }
+
+      .uiIconFileTypeapplicationpdf:before {
+        content: "\e70b";
+        color: #BC4343;
+      }
+
+      .uiIconFileTypeimagepng:before {
+        content: "\e6f0";
+        color: #FFB441;
+      }
+
+      .uiIconFileTypeimagejpeg:before {
+        content: "\e6e9";
+        color: #FFB441;
+      }
+
+      .uiIconFileTypevideomp4:before {
+        content: "\e715";
+        color: #FFB441;
+      }
+
+      .uiIconFileTypeapplicationzip:before {
+        content: "\e71a";
+        color: #FFB441;
+      }
+    }
+
+    .file {
+      display: flex;
+      overflow: hidden;
+      width: 100%;
+
+      .fileDetails {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        margin-left: 5%;
+
+        .fileDetails1 {
+          display: flex;
+          margin-top: 10px;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          white-space: nowrap;
+
+          .fileNameLabel {
+            width: 100%;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+          }
+
+          .fileSize {
+            width: auto;
+            white-space: nowrap;
+          }
+        }
+
+        .fileDetails2 {
+          .progress {
+            height: 10px;
+            margin: 0px;
+
+            .bar {
+              height: 10px;
+              line-height: 10px;
+              background-image: linear-gradient(to bottom, var(--allPagesPrimaryColorLighter, #9ebde0), var(--allPagesPrimaryColor, #578dc9));
+              background-repeat: repeat-x;
+            }
+          }
+
+          .upload-completed {
+            visibility: hidden;
+            opacity: 0;
+            transition: visibility 0s 3s, opacity 2s 1s linear;
+          }
+        }
+
+      }
+    }
+
+    .removeFile {
+      flex: 0 0 34px;
+      width: 34px;
+      margin-top: 5px;
+
+      .uiIcon {
+        color: #A8B3C5;
+        font-size: 24px;
+        width: 24px;
+
+        &:before {
+          content: "\e9d0";
+        }
+      }
+    }
+  }
+
+  .fileAlreadyExists {
+    margin-top: -50px;
+  }
+
+  .fileAlreadyExists, .sizeExceeded, .countExceeded {
+    position: absolute;
+    left: 50%;
+    z-index: 100;
+    transform: translateX(-50%);
+    white-space: nowrap;
+  }
+
+  .limitMessage {
+    height: 20px;
+    padding: 12px 23px;
+    color: #555;
+    display: flex;
+    justify-content: space-between;
+
+    .sizeLimit, .countLimit {
+      margin-right: 2px;
+      line-height: 16px;
+      font-weight: initial;
+      box-sizing: border-box;
+      transition: font-weight 2s ease-in-out;
+    }
+
+    .countLimit {
+      &.noFilesLeft {
+        color: red;
+      }
+
+    }
+
+    .sizeLimit:before {
+      font-family: "PLF-FONT-ICONS";
+      content: "\e771";
+      padding-right: 5px;
+    }
+
+    .countLimit:before {
+      font-family: "PLF-FONT-ICONS";
+      content: "\e767";
+      padding-right: 5px;
+    }
+  }
+
+  .selectFolder {
+    display: inline-block;
+    margin: auto;
+    padding-right: 5px;
+    line-height: 20px;
+
+    .uiIconClose {
+      top: 0;
+      left: 5px;
+    }
+  }
+
+  .multiploadFilesSelector {
+    width: 100%;
+    text-align: center;
+
+    .dragEntered {
+      background: #ccc;
+    }
+
+    .dropFileBox {
+      width: 94%;
+      height: 150px;
+      border-radius: 5px;
+      border: 3px dashed #e6e6e6;
+      line-height: 25px;
+      font-size: 18px;
+      margin: 5px auto 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      .mobileText {
+        display: none;
+      }
+    }
+
+    .fade-leave-active {
+      transition: opacity .6s;
+    }
+
+    .fade-leave-to {
+      opacity: 0;
+    }
+  }
+
+  .attachmentsFooter {
+    .btn {
+      float: right;
+    }
+  }
+
+  .uiPopup.documentSelector {
+    top: 12%;
+    left: 21%;
+  }
+
+  .content.serverFiles {
+    bottom: 0;
+    padding: 0;
+
+    .serverFiles {
+      height: 77%;
+
+      .contentHeader {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 3%;
+        border-bottom: 1px solid #efefef;
+
+        .currentDirectory {
+          display: flex;
+          align-items: center;
+          margin-right: 10px;
+          flex: 1;
+          min-width: 0;
+
+          .documents {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+
+            .uiIconFolder {
+              margin-right: 5px;
+              color: @headingColor;
+            }
+
+            p {
+              margin-bottom: 0;
+              color: @headingColor
+            }
+          }
+
+          .currentDrive {
+            cursor: pointer;
+            display: flex;
+            min-width: 0;
+            flex: 0 1 auto;
+            align-items: center;
+
+            .currentDriveTitle {
+              text-overflow: ellipsis;
+              overflow: hidden;
+              white-space: nowrap;
+
+              &.active {
+                font-weight: bold;
+              }
+            }
+          }
+
+          .uiIconArrowRight {
+            color: @headingColor;
+            margin: 0 2px;
+          }
+
+          .foldersHistory {
+            display: flex;
+            flex: 1;
+            min-width: 0;
+
+            .longFolderHistory {
+              display: flex;
+              align-items: center;
+
+              .dropdown-toggle {
+                border: none;
+                font-size: initial;
+              }
+            }
+
+            .folderHistory {
+              text-overflow: ellipsis;
+              overflow: hidden;
+              white-space: nowrap;
+              display: flex;
+              align-items: center;
+
+              .currentSpaceDirectory {
+                cursor: pointer;
+
+                &.active {
+                  font-weight: bold;
+                }
+              }
+
+              a {
+                text-overflow: ellipsis;
+                overflow: hidden;
+                white-space: nowrap;
+              }
+            }
+          }
+        }
+
+        .searchBox {
+          display: inline-flex;
+          align-items: center;
+
+          &.visible {
+            width: 100%;
+
+            .searchInput {
+              border-radius: 5px 0 0 5px;
+              border-right: 0;
+            }
+
+            .uiIconCloseServerAttachments {
+              font-size: 14px;
+              padding: 10px 15px 13px 15px;
+              margin-bottom: 12px;
+              border: 1px solid #b3b3b3;
+              border-left: 0;
+              border-radius: 0 5px 5px 0;
+              cursor: pointer;
+
+              &::before {
+                color: #578dc9;
+                content: "\f12a";
+                font-family: 'IONIC-FONT';
+                font-size: 12px;
+              }
+            }
+          }
+
+          .searchInput {
+            width: 100%;
+            border: 1px solid #b3b3b3;
+            margin: 0 0 10px;
+            display: none;
+          }
+
+          .uiIconSearch {
+            border: 1px solid #b3b3b3;
+            padding: 10px;
+            border-radius: 15%;
+            margin-bottom: 10px;
+            color: @headingColor;
+            cursor: pointer;
+          }
+        }
+      }
+
+      .contentBody::-webkit-scrollbar-thumb  {
+        background: #578dc9;
+        border-radius: 3px;
+      }
+
+      .contentBody::-webkit-scrollbar-thumb  {
+        background: #578dc9;
+        border-radius: 3px;
+      }
+
+      .contentBody::-webkit-scrollbar-track  {
+        background: #ced2d5;
+      }
+
+      .contentBody::-webkit-scrollbar-track  {
+        background: #ced2d5;
+      }
+
+      .contentBody::-webkit-scrollbar {
+        width: 5px;
+      }
+
+      .contentBody {
+        height: 86%;
+        overflow-y: auto;
+
+        .selectionBox {
+          display: flex;
+          flex-wrap: wrap;
+          padding: 0 3%;
+
+          .emptyFolder {
+            margin: 20% auto;
+            text-align: center;
+
+            .uiIconEmptyFolder::before {
+              content: "\ea7b";
+              font-size: 34pt;
+              font-weight: normal;
+              color: @baseColorDark;
+            }
+          }
+
+          .loader {
+            margin: auto;
+          }
+
+          .folderSelection {
+            width: 20%;
+            margin: 7px;
+            padding: 10px 2px 5px;
+            cursor: pointer;
+
+            a {
+              display: flex;
+              flex-direction: column;
+              justify-content: space-between;
+              font-size: 12px;
+              text-overflow: ellipsis;
+              overflow: hidden;
+              white-space: nowrap;
+
+              i {
+                font-size: 41px;
+              }
+
+              .selectionLabel {
+                text-overflow: ellipsis;
+                overflow: hidden;
+                white-space: nowrap;
+                color: #333;
+              }
+            }
+          }
+
+          .fileSelection {
+            width: 20%;
+            margin: 7px;
+            padding: 10px 2px 5px;
+            cursor: pointer;
+            height: fit-content;
+
+            .file {
+              flex-direction: column;
+              align-items: center;
+
+              .fileDetails {
+                margin: 0;
+
+                .fileSize {
+                  display: none;
+                }
+
+                .fileNameLabel {
+                  font-size: 12px;
+                }
+              }
+            }
+
+            &.selected {
+              border-radius: 5px;
+              background-color: #E1E8EE;
+            }
+          }
+        }
+      }
+
+      .attachActions {
+        bottom: 10px;
+        position: absolute;
+        right: 0;
+        left: 0;
+
+        .buttonActions {
+          display: flex;
+          flex-direction: row-reverse;
+          border-top: 1px solid #efefef;
+          padding: 10px 10px 0 0;
+
+          button {
+            margin: 0 5px;
+          }
+        }
+      }
+    }
+  }
+}
