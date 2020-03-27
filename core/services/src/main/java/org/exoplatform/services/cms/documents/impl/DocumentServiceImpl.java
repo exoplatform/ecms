@@ -688,10 +688,10 @@ public class DocumentServiceImpl implements DocumentService {
    * {@inheritDoc}
    */
   @Override
-  public void initDocumentEditorsModule(String provider) {
+  public void initDocumentEditorsModule(String provider, String workspace) {
     CometdDocumentsService cometdService = ExoContainerContext.getCurrentContainer().getComponentInstanceOfType(CometdDocumentsService.class);
     String userId = ConversationState.getCurrent().getIdentity().getUserId();
-    CometdConfig cometdConf = new CometdConfig(cometdService.getCometdServerPath(), cometdService.getUserToken(userId), PortalContainer.getCurrentPortalContainerName(), provider);
+    CometdConfig cometdConf = new CometdConfig(cometdService.getCometdServerPath(), cometdService.getUserToken(userId), PortalContainer.getCurrentPortalContainerName(), provider, workspace);
     WebuiRequestContext context = WebuiRequestContext.getCurrentInstance();
     JavascriptManager js = context.getJavascriptManager();
     try {

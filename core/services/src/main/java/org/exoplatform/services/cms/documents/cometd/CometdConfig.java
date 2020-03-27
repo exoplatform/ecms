@@ -37,6 +37,8 @@ public class CometdConfig {
   private final String containerName;
   
   private final String provider;
+  
+  private final String workspace;
 
   /**
    * Instantiates CometdConfig.
@@ -50,6 +52,7 @@ public class CometdConfig {
     this.path = path;
     this.containerName = containerName;
     this.provider = null;
+    this.workspace = null;
   }
   
   /**
@@ -57,13 +60,16 @@ public class CometdConfig {
    * @param path the path
    * @param token the token
    * @param containerName the containerName
+   * @param provider the provider
+   * @param workspace the workspace
    */
-  public CometdConfig(String path, String token, String containerName, String provider) {
+  public CometdConfig(String path, String token, String containerName, String provider, String workspace) {
     super();
     this.token = token;
     this.path = path;
     this.containerName = containerName;
     this.provider = provider;
+    this.workspace = workspace;
   }
 
   /**
@@ -103,6 +109,15 @@ public class CometdConfig {
     return provider;
   }
 
+  
+  /**
+   * Gets the workspace.
+   *
+   * @return the provider
+   */
+  public String getWorkspace() {
+    return workspace;
+  }
   /**
    * To JSON.
    *

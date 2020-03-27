@@ -230,7 +230,6 @@
       var subscription = cometd.subscribe("/eXo/Application/documents/" + fileId, function(message) {
         // Channel message handler
         var result = tryParseJson(message);
-        console.log("EVENT " + result.type);
         switch(result.type) {
           case DOCUMENT_OPENED: {
             $('.editorButton[data-provider!="' + result.provider + '"][data-fileId="' + result.fileId + '"]').each(function(){
@@ -243,7 +242,7 @@
             });
           } break;
           case CURRENT_PROVIDER_INFO: {
-            if(result.provider) {
+            if(result.provider && result.provider != "null") {
               $('.editorButton[data-provider!="' + result.provider + '"][data-fileId="' + result.fileId + '"]').each(function(){
                 $(this).addClass("disabledProvider");
               });
@@ -309,7 +308,8 @@
         });
         cometdContext = {
           "exoContainerName" : cometdConf.containerName,
-          "provider" : cometdConf.provider
+          "provider" : cometdConf.provider,
+          "workspace" : cometdConf.workspace
         };
         cometd = cCometD;
       }
@@ -402,18 +402,18 @@
         "fileId" : fileId,
         "workspace" : workspace
       });
-      // subsribe to track opened editors on server-side 
+      // subsribe to track opened editors on server-side
       var subscription = cometd.subscribe("/eXo/Application/documents/" + fileId, function(message) { }, cometdContext, function(subscribeReply) {});
     };
 
     this.onEditorClose = function(fileId, workspace, provider) {
       log("Editor closed. Provider: " + provider + ", fileId: " + fileId);
-      publishDocument(fileId, {
+      /*publishDocument(fileId, {
         "type" : DOCUMENT_CLOSED,
         "provider" : provider,
         "fileId" : fileId,
         "workspace" : workspace
-      });
+      });*/
     };
    
     /**
