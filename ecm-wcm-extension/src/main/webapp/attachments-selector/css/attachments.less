@@ -19,7 +19,7 @@
     justify-content: space-between;
 
     .backButton {
-      width: 40px;
+      width: 0px;
 
       .uiIconBack {
         color: grey;
@@ -39,6 +39,7 @@
     .attachmentsTitle {
       font-size: 18px;
       font-weight: bold;
+      width: 75%;
     }
 
     .attachmentsCloseIcon {
@@ -223,13 +224,13 @@
 
   .limitMessage {
     height: 20px;
-    padding: 12px 23px;
+    padding: 12px 0px;
     color: #555;
     display: flex;
     justify-content: space-between;
 
     .sizeLimit, .countLimit {
-      margin-right: 2px;
+      margin-right: -3px;
       line-height: 16px;
       font-weight: initial;
       box-sizing: border-box;
@@ -277,8 +278,8 @@
     }
 
     .dropFileBox {
-      width: 94%;
-      height: 150px;
+      width: 100%;
+      height: 207px;
       border-radius: 5px;
       border: 3px dashed #e6e6e6;
       line-height: 25px;
@@ -292,6 +293,79 @@
       .mobileText {
         display: none;
       }
+      .contentAttachments{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 100%;
+        .contentDargAndDrop{
+          display: flex;
+          flex-direction: row;
+          height: 70%;
+          .contentDrop{
+            display: flex;
+            flex-direction: column;
+            width: 50%;
+            padding: 19px 1px 1px;
+            .icon{
+              padding: 5px;
+            }
+          }
+        }
+        .contentUpload{
+          display: flex;
+          flex-direction: column;
+          width: 50%;
+          padding: 19px 1px 1px;
+          .colorIcon{
+            color: #578cc9;
+          }
+          .icon{
+            padding: 6px;
+          }
+        }
+        .contentOR{
+          text-transform: uppercase;
+          height: 41%;
+          display: flex;
+          flex-direction: row;
+          .leftLine{
+            width: 30%;
+            margin-left: 112%;
+          }
+          .colorText{
+            color: #e6e6e6;
+          }
+          .item{
+            width: 33%;
+          }
+          .itemOR{
+            width: 33%;
+            padding: 3%;
+          }
+          .rightLine{
+            width: 30%;
+            margin-left: -43%;
+          }
+        }
+        .colorText{
+          color: #a8b3c5;
+        }
+        .lastContent{
+          height: 33%;
+          display: flex;
+          flex-direction: row;
+          .icon{
+            width: 40%;
+          }
+          .text{
+            width:65%;
+            margin-left:-37px;
+            padding:6px;
+          }
+        }
+      }
+
     }
 
     .fade-leave-active {
@@ -583,6 +657,55 @@
           button {
             margin: 0 5px;
           }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 630px) {
+  #exoAttachmentsApp {
+    .dropFileBox {
+      height: 150px;
+
+      .contentOR {
+        display: none;
+      }
+
+      .contentDrop {
+        padding: 35px 1px 1px;
+      }
+
+      .text {
+        width: 100%;
+        margin-left: -39px;
+        padding: 0px;
+      }
+
+      .icon {
+        width: 62%;
+      }
+
+      .contentDrop {
+        display: none;
+      }
+
+      .contentUpload {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+
+        .icon {
+          width: 73%;
+        }
+
+        .text {
+          padding: 8px;
+        }
+
+        .uploadMobile {
+          width: 170%;
+          margin-left: -36%;
         }
       }
     }

@@ -5,6 +5,9 @@
         <a v-if="showDocumentSelector" class="backButton" @click="toggleServerFileSelector()">
           <i class="uiIconBack"> </i>
         </a>
+        <a v-if="!showDocumentSelector" class="backButton" @click="closeAttachments()">
+          <i class="uiIconBack"> </i>
+        </a>
         <span class="attachmentsTitle">{{ drawerTitle }}</span>
         <a class="attachmentsCloseIcon" @click="closeAttachments()">×</a>
       </div>
@@ -12,19 +15,38 @@
         <div v-show="!showDocumentSelector" class="attachmentsContent">
           <div class="multiploadFilesSelector">
             <div id="DropFileBox" ref="dropFileBox" class="dropFileBox">
-              <span class="dropMsg">{{ $t('attachments.drawer.drop') }}</span>
-              <span>
-                <a :title="$t('attachments.drawer.upload')" class="uploadButton" href="#" rel="tooltip" data-placement="bottom" @click="uploadFile">
-                  <span class="text">{{ $t('attachments.drawer.upload') }}</span>
-                  <span class="mobileText">{{ $t('attachments.drawer.upload') }}</span>
-                </a>
-              </span>
-              <span class="or">{{ $t('attachments.drawer.or') }}</span>
-              <span>
-                <a title="Select on server" class="uploadButton" href="#" rel="tooltip" data-placement="bottom" @click="toggleServerFileSelector()">
-                  <span class="text">{{ $t('attachments.drawer.existingUploads') }}</span>
-                </a>
-              </span>
+              <div class="contentAttachments">
+                <div class="contentDargAndDrop">
+                  <div class="contentDrop">
+                    <div class="icon"><i class="uiIconTemplate uiIcon32x32LightGray colorText"></i></div>
+                    <div><span class="dropMsg colorText">{{ $t('attachments.drawer.drop') }}</span></div>
+                  </div>
+                  <div class="contentUpload">
+                    <div class="icon"><i class="fas fa-download uiIcon32x32LightGray colorIcon"></i></div>
+                    <div class="uploadMobile">
+                      <a :title="$t('attachments.drawer.upload')" class="uploadButton" href="#" rel="tooltip" data-placement="bottom" @click="uploadFile">
+                        <span class="text colorText">{{ $t('attachments.drawer.upload') }}</span>
+                        <span class="mobileText">{{ $t('attachments.drawer.upload') }}</span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <div class="contentOR">
+                  <div class="item"><span class="colorText"><hr class="leftLine"></span></div>
+                  <div class="itemOR"><span class="or colorText"> {{ $t('attachments.drawer.or') }}  </span></div>
+                  <div class="item"><span class="colorText"><hr class="rightLine"></span></div>
+                </div>
+                <div class="lastContent">
+                  <div class="icon">
+                    <i class="uiIconFolderSearch uiIcon32x32LightGray"></i>
+                  </div>
+                  <div class="text">
+                    <a title="Select on server" class="uploadButton" href="#" rel="tooltip" data-placement="bottom" @click="toggleServerFileSelector()">
+                      <span class="text colorText">{{ $t('attachments.drawer.existingUploads') }}</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
             </div>
             <div class="fileHidden" style="display:none">
               <input ref="uploadInput" class="file" name="file" type="file" multiple="multiple" style="display:none" @change="handleFileUpload($refs.uploadInput.files)">
