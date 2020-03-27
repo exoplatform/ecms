@@ -58,7 +58,8 @@
                     <edit-dialog
                       :provider-name="item.provider"
                       :provider-link="item.links.self.href"
-                      :search-url="services.identities" />
+                      :search-url="services.identities"
+                      :i18n="i18n" />
                   </td>
                 </tr>
               </tbody>
@@ -125,7 +126,7 @@ export default {
     },
     getProviderResources(providerId) {
       const resourceUrl = 
-        `${eXo.env.portal.context}/${eXo.env.portal.rest}/i18n/bundle/${this.resourceBundleName}-${providerId}-${this.language}.json`;
+        `${eXo.env.portal.context}/${eXo.env.portal.rest}/i18n/bundle/locale.${providerId}.${this.resourceBundleName}-${this.language}.json`;
       return exoi18n.loadLanguageAsync(this.language, resourceUrl);
     },
     async changeActive(provider) {

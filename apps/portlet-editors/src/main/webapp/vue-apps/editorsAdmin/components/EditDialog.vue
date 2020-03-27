@@ -2,7 +2,7 @@
   <v-dialog 
     v-model="showDialog" 
     width="500" 
-    style="overflow-x: hidden" 
+    style="overflow-x: hidden"
     @click:outside="showDialog = false">
     <template v-slot:activator="{ on }">
       <a 
@@ -24,7 +24,7 @@
       <v-card-text class="popupContent providerContent pa-4">
         <v-container class="permissions px-0">
           <v-row class="providerName ms-0">
-            {{ $t(`editors.admin.${providerName}.name`) }}
+            {{ i18n.te(`editors.admin.${providerName}.name`) ? $t(`editors.admin.${providerName}.name`) : providerName }}
           </v-row>
           <v-row class="search">
             <v-col>
@@ -164,7 +164,11 @@ export default {
     searchUrl: {
       type: String,
       required: true
-    }
+    },
+    i18n: {
+      type: Object,
+      required: true
+    },
   },
   data() {
     return {
