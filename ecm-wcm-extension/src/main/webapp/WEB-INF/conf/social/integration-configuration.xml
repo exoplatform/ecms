@@ -646,6 +646,17 @@
         </value-param>
       </init-params>
     </component-plugin>
+    <component-plugin profiles="push-notifications">
+      <name>push.channel.social.template</name>
+      <set-method>registerTemplateProvider</set-method>
+      <type>org.exoplatform.wcm.notification.plugin.SharePushTemplateProvider</type>
+      <init-params>
+        <value-param>
+          <name>channel-id</name>
+          <value>PUSH_CHANNEL</value>
+        </value-param>
+      </init-params>
+    </component-plugin>
   </external-component-plugins>
 
   <external-component-plugins>
