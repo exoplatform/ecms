@@ -96,7 +96,7 @@
      * Saves prefered provider.
      * 
      */
-    var saveprefferedProvider = function(fileId, provider){
+    var savePrefferedProvider = function(fileId, provider){
       $.post({
         async : true,
         type : "POST",
@@ -136,7 +136,7 @@
       let provider = buttons[0].provider;
       $btn.click(function() {
         log("prefered provider: " + provider);
-        saveprefferedProvider(fileId, provider);
+        savePrefferedProvider(fileId, provider);
       });
       
       // Create pulldown with editor buttons
@@ -152,7 +152,7 @@
           let provider = buttons[i].provider;
           // Save user choice
           $btn.click(function() {
-            saveprefferedProvider(fileId, provider);
+            savePrefferedProvider(fileId, provider);
           });
           $btn.addClass("editorButton");
           $btn.attr('data-provider', buttons[i].provider);
