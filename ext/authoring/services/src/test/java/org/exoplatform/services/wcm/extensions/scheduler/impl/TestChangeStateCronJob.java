@@ -93,9 +93,19 @@ public class TestChangeStateCronJob {
           when(nodeToPublish.getPath()).thenReturn("/sites/sample/nodeToPublish");
           when (nodeToPublish.getProperty(Mockito.eq("publication:startPublishedDate"))).thenReturn(dateProperty);
 
+          Node nodeToPublishWithoutStartDate = mock(Node.class);
+          when(nodeToPublishWithoutStartDate.getPath()).thenReturn("/sites/sample/nodeToPublishWithoutStartDate");
+          when (nodeToPublishWithoutStartDate.getProperty(Mockito.eq("publication:startPublishedDate"))).thenReturn(null);
+          when (nodeToPublishWithoutStartDate.getProperty(Mockito.eq("publication:endPublishedDate"))).thenReturn(dateProperty);
+
+          Node nodeToPublishWithoutEndDate = mock(Node.class);
+          when(nodeToPublishWithoutEndDate.getPath()).thenReturn("/sites/sample/nodeToPublishWithoutEndDate");
+          when (nodeToPublishWithoutEndDate.getProperty(Mockito.eq("publication:startPublishedDate"))).thenReturn(dateProperty);
+          when (nodeToPublishWithoutEndDate.getProperty(Mockito.eq("publication:endPublishedDate"))).thenReturn(null);
+
           NodeIterator nodeIterator = Mockito.mock(NodeIterator.class);
-          Boolean [] hasNextReturns = new Boolean[] {true, true, true, false};
-          Node[] nextReturnedNodes = new Node[] {nodeInTrash, nodeUnderJCRSystem, nodeToPublish};
+          Boolean [] hasNextReturns = new Boolean[] {true, true, true, false, true, true, false};
+          Node[] nextReturnedNodes = new Node[] {nodeInTrash, nodeUnderJCRSystem, nodeToPublish, nodeToPublishWithoutStartDate, nodeToPublishWithoutEndDate};
           Mockito.when(nodeIterator.hasNext()).thenReturn(true,hasNextReturns);
           Mockito.when(nodeIterator.nextNode()).thenReturn(nodeInTrash,nextReturnedNodes);
 
