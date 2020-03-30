@@ -258,6 +258,15 @@ public class DocumentUIActivity extends FileUIActivity {
     }
 
     /**
+     * Gets the preffered provider.
+     *
+     * @return the preffered provider
+     */
+    public String getPrefferedProvider() {
+      return prefferedProvider;
+    }
+
+    /**
      * To JSON.
      *
      * @return the string

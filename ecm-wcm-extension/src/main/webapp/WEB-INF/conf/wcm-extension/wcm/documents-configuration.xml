@@ -18,6 +18,40 @@
     </component-plugin>
   </external-component-plugins>
 
+  <external-component-plugins>
+    <target-component>org.exoplatform.web.filter.ExtensibleFilter</target-component>
+    <component-plugin>
+      <name>Doument editors integration filter plugin</name>
+      <set-method>addFilterDefinitions</set-method>
+      <type>org.exoplatform.web.filter.FilterDefinitionPlugin</type>
+      <init-params>
+        <object-param>
+          <name>Doument editors integration filter plugin</name>
+          <object type="org.exoplatform.web.filter.FilterDefinition">
+            <field name="filter">
+              <object type="org.exoplatform.ecm.webui.component.explorer.documents.DocumentEditorsFilter" />
+            </field>
+            <field name="patterns">
+              <collection type="java.util.ArrayList" item-type="java.lang.String">
+                <value>
+                  <string>/intranet/documents.*</string>
+                </value>
+                <value>
+                  <string>/g/.*/documents.*</string>
+                </value>
+                <value>
+                  <string>/dw/drives.*</string>
+                </value>
+                <value>
+                  <string>/g/.*/drives.*</string>
+                </value>
+              </collection>
+            </field>
+          </object>
+        </object-param>
+      </init-params>
+    </component-plugin>
+  </external-component-plugins>
 
 
 </configuration>

@@ -65,7 +65,7 @@
     var currentWorkspace;
     var currentUserId;
     var subscribedDocuments = {};
-    
+
     // CometD transport bus
     var cometd, cometdContext;
     
@@ -96,7 +96,7 @@
      * Saves prefered provider.
      * 
      */
-    var savePreferedProvider = function(fileId, provider){
+    var saveprefferedProvider = function(fileId, provider){
       $.post({
         async : true,
         type : "POST",
@@ -136,7 +136,7 @@
       let provider = buttons[0].provider;
       $btn.click(function() {
         log("prefered provider: " + provider);
-        savePreferedProvider(fileId, provider);
+        saveprefferedProvider(fileId, provider);
       });
       
       // Create pulldown with editor buttons
@@ -152,7 +152,7 @@
           let provider = buttons[i].provider;
           // Save user choice
           $btn.click(function() {
-            savePreferedProvider(fileId, provider);
+            saveprefferedProvider(fileId, provider);
           });
           $btn.addClass("editorButton");
           $btn.attr('data-provider', buttons[i].provider);
@@ -222,7 +222,11 @@
       }
     };
 
-    var subscribeDocument = function(fileId) {
+    /**
+     * Subscribes the document and reacts to the events.
+     * Providers param is optional (used for Documents app)
+     */
+    var subscribeDocument = function(fileId, providers) {
       // Use only one channel for one document
       if (subscribedDocuments.fileId) {
         return;
@@ -235,11 +239,33 @@
             $('.editorButton[data-provider!="' + result.provider + '"][data-fileId="' + result.fileId + '"]').each(function(){
               $(this).addClass("disabledProvider");
             });
+            // Web UI buttons
+            if (providers) {
+              var allProviders = providers.slice();
+              var index = allProviders.indexOf(result.provider);
+              if (index !== -1) allProviders.splice(index, 1);
+              allProviders.forEach(provider => {
+                $( "i[class*='uiIconEcms" + provider + "Open' i]").each(function(){
+                  $(this).parents(':eq(1)').addClass("disabledProvider");
+                });
+              });
+            }
           } break;
           case LAST_EDITOR_CLOSED: {
             $('.editorButton[data-provider!="' + result.provider + '"][data-fileId="' + result.fileId + '"]').each(function(){
               $(this).removeClass("disabledProvider");
             });
+             // Web UI buttons
+            if (providers) {
+              var allProviders = providers.slice();
+              var index = allProviders.indexOf(result.provider);
+        if (index !== -1) allProviders.splice(index, 1);
+              allProviders.forEach(provider => {
+                $( "i[class*='uiIconEcms" + provider + "Open' i]").each(function(){
+                  $(this).parents(':eq(1)').removeClass("disabledProvider");
+                });
+              });
+            }
           } break;
           case CURRENT_PROVIDER_INFO: {
             if(result.provider && result.provider != "null") {
@@ -313,7 +339,23 @@
         };
         cometd = cCometD;
       }
-    }
+    };
+    
+    this.initExplorer = function(fileId, providers, currentProvider) {
+      subscribeDocument(fileId, providers);
+      // Web UI buttons
+      if (providers && currentProvider) {
+        var allProviders = providers.slice();
+        var index = allProviders.indexOf(currentProvider);
+        if (index !== -1) allProviders.splice(index, 1);
+        allProviders.forEach(provider => {
+          $( "i[class*='uiIconEcms" + provider + "Open' i]").each(function(){
+            $(this).parents(':eq(1)').addClass("disabledProvider");
+          });
+        });
+      }
+
+    };
     
     /**
      * Inits editor buttons on DocumentUIActivity.
@@ -326,9 +368,9 @@
       }
       log("Init Activity buttons: " + JSON.stringify(buttons));
       // Sort buttons in user prefference order
-      if(config.preferedProvider != null) {
+      if(config.prefferedProvider != null) {
         buttons.forEach(function(item,i){
-          if(item.provider === config.preferedProvider){
+          if(item.provider === config.prefferedProvider){
             buttons.splice(i, 1);
             buttons.unshift(item);
           }
@@ -356,9 +398,9 @@
       }
       log("Init preview buttons: " + JSON.stringify(buttons));
       var clickSelector = "#Preview" + config.activityId + "-" + config.index;
-      if(config.preferedProvider != null) {
+      if(config.prefferedProvider != null) {
         buttons.forEach(function(item,i){
-          if(item.provider === config.preferedProvider){
+          if(item.provider === config.prefferedProvider){
             buttons.splice(i, 1);
             buttons.unshift(item);
           }
