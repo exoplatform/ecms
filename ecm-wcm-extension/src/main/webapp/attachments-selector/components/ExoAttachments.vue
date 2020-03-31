@@ -192,9 +192,6 @@ export default {
       document.getElementsByClassName('attachments drawer')[0].className = 'attachments drawer';
       document.getElementById('exoAttachmentsApp').getElementsByClassName('drawer-backdrop')[0].style.display = 'none';
     },
-    setUploadingCount: function(uploadingCount) {
-      this.uploading = uploadingCount > 0;
-    },
     uploadFile: function() {
       this.$refs.uploadInput.click();
     },
@@ -299,6 +296,7 @@ export default {
               this.removeAttachedFile(file.uploadId);
             } else {
               file.uploadProgress = this.maxProgress;
+              this.$emit('uploadingFileFinished');
             }
           });
 
@@ -318,6 +316,7 @@ export default {
       } else {
         this.value = this.value.filter(attachedFile => attachedFile.id !== file.id);
       }
+      this.$emit('removingFileFinished');
       this.$emit('input', this.value);
     },
     toggleServerFileSelector(selectedFiles){
