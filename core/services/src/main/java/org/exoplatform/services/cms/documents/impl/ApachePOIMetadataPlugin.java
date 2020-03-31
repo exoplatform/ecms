@@ -97,7 +97,7 @@ public class ApachePOIMetadataPlugin extends BaseComponentPlugin implements Docu
   }
 
   /**
-   * Gets POIXMLDocument from inputStream and extension. Supports only {@value #SUPPORTED_EXTENSIONS}
+   * Gets POIXMLDocument from inputStream and extension. Supports only SUPPORTED_EXTENSIONS
    *
    * @param source the source
    * @param extension the extension
