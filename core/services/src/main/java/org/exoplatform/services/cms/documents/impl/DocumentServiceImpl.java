@@ -532,8 +532,9 @@ public class DocumentServiceImpl implements DocumentService {
     content.setProperty(JCR_DATA, data);
     content.setProperty(JCR_MIME_TYPE, template.getMimeType());
     content.setProperty(JCR_LAST_MODIFIED_PROP, new GregorianCalendar());
-    ListenerService listenerService = WCMCoreUtils.getService(ListenerService.class);
-    listenerService.broadcast(ActivityCommonService.FILE_CREATED_ACTIVITY, null, addedNode);
+    // XXX: This causes errors on plf 6.0.0-M25
+    //ListenerService listenerService = WCMCoreUtils.getService(ListenerService.class);
+    //listenerService.broadcast(ActivityCommonService.FILE_CREATED_ACTIVITY, null, addedNode);
     currentNode.save();
     data.close();
     return addedNode;
