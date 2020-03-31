@@ -46,16 +46,19 @@ import org.exoplatform.ws.frameworks.json.impl.JsonGeneratorImpl;
 public class DocumentEditorsLifecycle implements ApplicationLifecycle<WebuiRequestContext> {
 
   /** The Constant USERID_ATTRIBUTE. */
-  public static final String USERID_ATTRIBUTE             = "DocumentEditorsContext.userId";
+  public static final String    USERID_ATTRIBUTE             = "DocumentEditorsContext.userId";
 
   /** The Constant DOCUMENT_WORKSPACE_ATTRIBUTE. */
-  public static final String DOCUMENT_WORKSPACE_ATTRIBUTE = "DocumentEditorsContext.document.workspace";
+  public static final String    DOCUMENT_WORKSPACE_ATTRIBUTE = "DocumentEditorsContext.document.workspace";
 
   /** The Constant DOCUMENT_PATH_ATTRIBUTE. */
-  public static final String DOCUMENT_PATH_ATTRIBUTE      = "DocumentEditorsContext.document.path";
+  public static final String    DOCUMENT_PATH_ATTRIBUTE      = "DocumentEditorsContext.document.path";
 
   /** The Constant LOG. */
-  protected static final Log LOG                          = ExoLogger.getLogger(DocumentEditorsLifecycle.class);
+  protected static final Log    LOG                          = ExoLogger.getLogger(DocumentEditorsLifecycle.class);
+
+  /** The Constant MIX_REFERENCABLE. */
+  protected static final String MIX_REFERENCABLE             = "mix:referencable";
 
   /**
    * Instantiates a new DocumentEditorsLifecycle lifecycle.
@@ -109,7 +112,7 @@ public class DocumentEditorsLifecycle implements ApplicationLifecycle<WebuiReque
         Node node = explorer.getCurrentNode();
         String nodeWs = node.getSession().getWorkspace().getName();
         String nodePath = node.getPath();
-        if (isNotSameUserDocument(userName, nodeWs, nodePath, parentContext)) {
+        if (node.isNodeType(MIX_REFERENCABLE) && isNotSameUserDocument(userName, nodeWs, nodePath, parentContext)) {
           if (LOG.isDebugEnabled()) {
             LOG.debug("Init documents explorer for {}, node: {}:{}, context: {}", userName, nodeWs, nodePath, parentContext);
           }
@@ -119,17 +122,9 @@ public class DocumentEditorsLifecycle implements ApplicationLifecycle<WebuiReque
           // This will init explorer even for docs that cannot be edited
           // by the user (lack of permissions)
           initEditorsModule(context, node.getUUID(), node.getSession().getWorkspace().getName());
-        } else {
-          if (LOG.isDebugEnabled()) {
-            LOG.debug("Already initialized documents explorer for {}, node: {}:{}, context: {}",
-                      userName,
-                      nodeWs,
-                      nodePath,
-                      parentContext);
-          }
         }
-      } catch (Exception e) {
-        LOG.error("Couldn't read document of node", e);
+      } catch (RepositoryException e) {
+        LOG.error("Couldn't initialize document editors JS module", e);
       }
     } else if (LOG.isDebugEnabled()) {
       LOG.debug("Explorer or portal context not found, explorer: {}, context: {}", explorer, parentContext);
@@ -161,7 +156,8 @@ public class DocumentEditorsLifecycle implements ApplicationLifecycle<WebuiReque
    *
    * @param context the context
    * @param fileId the file id
-   * @throws RepositoryException 
+   * @param workspace the workspace
+   * @throws RepositoryException the repository exception
    */
   protected void initEditorsModule(WebuiRequestContext context, String fileId, String workspace) throws RepositoryException {
     RequireJS require = context.getJavascriptManager().require("SHARED/editorbuttons", "editorbuttons");

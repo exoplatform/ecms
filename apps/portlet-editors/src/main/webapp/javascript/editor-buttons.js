@@ -223,8 +223,7 @@
     };
 
     /**
-     * Subscribes the document and reacts to the events.
-     * Providers param is optional (used for Documents app)
+     * Subscribes the document and reacts to the events. Providers param is optional (used for Documents app)
      */
     var subscribeDocument = function(fileId, providers) {
       // Use only one channel for one document
@@ -438,26 +437,16 @@
     
     this.onEditorOpen = function(fileId, workspace, provider) {
       log("Editor opened. Provider: " + provider + ", fileId: " + fileId);
+       // subsribe to track opened editors on server-side
+      var subscription = cometd.subscribe("/eXo/Application/documents/" + fileId, function(message) { }, cometdContext, function(subscribeReply) {});
       publishDocument(fileId, {
         "type" : DOCUMENT_OPENED,
         "provider" : provider,
         "fileId" : fileId,
         "workspace" : workspace
       });
-      // subsribe to track opened editors on server-side
-      var subscription = cometd.subscribe("/eXo/Application/documents/" + fileId, function(message) { }, cometdContext, function(subscribeReply) {});
     };
 
-    this.onEditorClose = function(fileId, workspace, provider) {
-      log("Editor closed. Provider: " + provider + ", fileId: " + fileId);
-      /*publishDocument(fileId, {
-        "type" : DOCUMENT_CLOSED,
-        "provider" : provider,
-        "fileId" : fileId,
-        "workspace" : workspace
-      });*/
-    };
-   
     /**
      * Clears buttonsFns
      * 
