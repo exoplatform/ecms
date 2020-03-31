@@ -25,6 +25,12 @@
       <error>
         <ProviderNotRegistered>The editor provider is not registered.</ProviderNotRegistered>
         <EmptyRequest>The request should contain at least 1 form param (active/permissions).</EmptyRequest>
+        <CannotGetProviders>Cannot get providers list.</CannotGetProviders>
+        <PermissionNotValid>The specified permission is not valid. Probably the user or group doesn't exist.</PermissionNotValid>
+        <CannotLoadIdentities>Cannot load identites by specified criteria</CannotLoadIdentities>
+        <CannotSavePrefferedEditor>Cannot save selected editor as preffered one.</CannotSavePrefferedEditor>
+        <UnableGetData>An error occurred during the data reading.</UnableGetData>
+        <UnablePostData>An error occurred during the data saving.</UnablePostData>
       </error>
       <title>Document editors</title>
       <table>
@@ -37,15 +43,17 @@
         <title>Edit permissions</title>
         <SearchLabel>Enter user or group name</SearchLabel>
         <WithPermissions>Who has permission</WithPermissions>
+        <None>None</None>
+        <Everybody>Everybody</Everybody>
       </modal>
-      <onlyoffice>
+      <!-- onlyoffice>
         <name>ONLYOFFICE</name>
         <description>ONLYOFFICE Online Document Editor</description>
       </onlyoffice>
       <officeonline>
         <name>Microsoft Office Online</name>
         <description>Microsoft Office Online editors for Word, Excel, Powerpoint</description>
-      </officeonline>
+      </officeonline -->
       <buttons>
         <Save>Save</Save>
         <Cancel>Cancel</Cancel>

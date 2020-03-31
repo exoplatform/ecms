@@ -20,8 +20,16 @@
 
 -->
 <gatein-resources xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://www.exoplatform.org/xml/ns/gatein_resources_1_4 http://www.exoplatform.org/xml/ns/gatein_resources_1_4"
-  xmlns="http://www.exoplatform.org/xml/ns/gatein_resources_1_4">
+                  xsi:schemaLocation="http://www.exoplatform.org/xml/ns/gatein_resources_1_4 http://www.exoplatform.org/xml/ns/gatein_resources_1_4"
+                  xmlns="http://www.exoplatform.org/xml/ns/gatein_resources_1_4">
+
+
+  <javascript>
+    <param>
+      <js-module>attachmentsComposerPlugin</js-module>
+      <js-path>/attachments-selector/attachmentsComposerPlugin.js</js-path>
+    </param>
+  </javascript>
 
   <module>
     <name>documentPreview</name>
@@ -153,6 +161,37 @@
       <module>ecm-bootstrap</module>
     </depends>
   </module>
+
+  <module>
+    <name>ExoAttachmentsApp</name>
+    <script>
+      <minify>false</minify>
+      <path>/js/attachmentsSelector.bundle.js</path>
+    </script>
+    <depends>
+      <module>vue</module>
+    </depends>
+    <depends>
+      <module>eXoVueI18n</module>
+    </depends>
+    <depends>
+      <module>vuetify</module>
+    </depends>
+    <depends>
+      <module>jquery</module>
+      <as>$</as>
+    </depends>
+    <depends>
+      <module>extensionRegistry</module>
+    </depends>
+  </module>
+  
+  <portal-skin>
+    <skin-name>Enterprise</skin-name>
+    <skin-module>customModuleAttachments</skin-module>
+    <css-path>/css/attachments.css</css-path>
+    <css-priority>10</css-priority>
+  </portal-skin>
 
 </gatein-resources>
 

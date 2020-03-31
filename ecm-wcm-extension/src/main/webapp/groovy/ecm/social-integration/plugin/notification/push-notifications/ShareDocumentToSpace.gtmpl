@@ -1,0 +1,6 @@
+<%
+  String perm = PERMISSION.equals("read") ? _ctx.appRes("Notification.label.view") : _ctx.appRes("Notification.label.modify");
+%>
+<%=_ctx.appRes("Notification.intranet.message.ShareFileToSpacePlugin", USER, perm, SPACE)%>
+$DOCUMENT
+$MESSAGE

@@ -136,20 +136,6 @@ public interface DocumentService {
   public List<NewDocumentTemplateProvider> getNewDocumentTemplateProviders();
   
   /**
-   * Checks for document editor providers.
-   *
-   * @return true, if successful
-   */
-  public boolean hasDocumentEditorProviders();
-  
-  /**
-   * Checks for document template providers.
-   *
-   * @return true, if successful
-   */
-  public boolean hasDocumentTemplateProviders();
-  
-  /**
    * Registers document metadata plugin.
    * 
    * @param plugin the ComponentPlugin
@@ -163,9 +149,9 @@ public interface DocumentService {
    * @param uuid the uuid
    * @param workspace the workspace
    * @return the preffered editor (provider)
-   * @throws Exception the exception
+   * @throws RepositoryException the exception
    */
-  public String getPreferedEditor(String userId, String uuid, String workspace) throws Exception;
+  public String getPreferedEditor(String userId, String uuid, String workspace) throws RepositoryException;
   
   /**
    * Sets preffered editor provider for specified file and user.
@@ -174,9 +160,9 @@ public interface DocumentService {
    * @param provider the editor provider
    * @param uuid the uuid
    * @param workspace the workspace
-   * @throws Exception the exception
+   * @throws RepositoryException the exception
    */
-  public void savePreferedEditor(String userId, String provider, String uuid, String workspace) throws Exception;
+  public void savePreferedEditor(String userId, String provider, String uuid, String workspace) throws RepositoryException;
 
   /**
    * Gets the editor providers.

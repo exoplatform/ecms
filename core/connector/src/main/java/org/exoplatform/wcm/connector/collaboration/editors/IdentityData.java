@@ -14,35 +14,46 @@
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, see<http://www.gnu.org/licenses/>.
  */
-package org.exoplatform.wcm.connector.collaboration.dto;
-
-import java.util.List;
+package org.exoplatform.wcm.connector.collaboration.editors;
 
 /**
- * The Class ResourceSupport.
+ * The Class IdentityData.
  */
-public class ResourceSupport {
-  
-  /** The links. */
-  protected List<Link> links;
+public class IdentityData extends EditorPermission {
 
+  /** The type. */
+  private String type;
+
+  
   /**
-   * Gets the links.
+   * Instantiates a new identity search result.
    *
-   * @return the links
+   * @param id the id
+   * @param displayName the display name
+   * @param type the type
+   * @param avatarUrl the avatar url
    */
-  public List<Link> getLinks() {
-    return links;
+  public IdentityData(String id, String displayName, String type, String avatarUrl) {
+    super(id, displayName, avatarUrl);
+    this.type = type;
   }
 
   /**
-   * Sets the links.
+   * Gets the type.
    *
-   * @param links the new links
+   * @return the type
    */
-  public void setLinks(List<Link> links) {
-    this.links = links;
+  public String getType() {
+    return type;
   }
-  
+
+  /**
+   * Sets the type.
+   *
+   * @param type the new type
+   */
+  public void setType(String type) {
+    this.type = type;
+  }
 
 }

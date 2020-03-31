@@ -1,34 +1,51 @@
-export function getInfo(link) {
-  return fetch(link, { method: 'GET' }).then(res => {
-    if (res && res.ok) {
-      return res.json();
+export async function getData(url) {
+  try {
+    const response = await fetch(url, {
+      headers: {
+        "Content-Type": "application/json"
+      },
+      method: "GET"
+    });
+    if (response.ok) {
+      return response.json();
     } else {
-      log('Unable to get data');
+      return response.json().then(error => {
+        log(`Error writing data: ${error.errorMessage ? error.errorMessage : error.errorCode}`);
+        throw new Error(error.errorCode);
+      });
     }
-  })
-}
-
-export function postInfo(link, postData) {
-  let requestBody;
-  for (const prop in postData) {
-    requestBody = `${encodeURIComponent(prop)}=${encodeURIComponent(postData[prop])}`;
+  } catch (e) {
+    // network failure or anything prevented the request from completing.
+    log(`Unable to get data: ${e.message}`);
+    throw new Error("UnableGetData"); // localized errorCode here
   }
-  return fetch(link, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded'
-    },
-    body: requestBody
-  }).then(res => {
-    if (res && res.ok) {
-      return res;
-    } else {
-      log('Unable to post data');
-    }
-  });
 }
 
-function log(msg, err) {
+export async function postData(url, data) {
+  try {
+    const response = await fetch(url, {
+      headers: {
+        "Content-Type": "application/json"
+      },
+      method: "POST",
+      body: JSON.stringify(data)
+    });
+    if (response.ok) {
+      return response.text();
+    } else {
+      return response.json().then(error => {
+        log(`Error writing data: ${error.errorMessage ? error.errorMessage : error.errorCode}`);
+        throw new Error(error.errorCode);
+      });
+    }
+  } catch (e) {
+    // network failure or anything prevented the request from completing.
+    log(`Unable to post data: ${e.message}`);
+    throw new Error("UnablePostData"); // localized errorCode here
+  }
+}
+
+export function log(msg, err) {
   const logPrefix = "[editorsAdmin] ";
   if (typeof console !== "undefined" && typeof console.log !== "undefined") {
     const isoTime = `--${new Date().toISOString()}`;
@@ -43,9 +60,10 @@ function log(msg, err) {
           msgLine += err.message;
         }
       } else {
-        msgLine += (typeof err === "string" ? err : JSON.stringify(err) + (err.toString && typeof err.toString === "function" 
-          ? `; ${err.toString()}`
-          : ""));
+        msgLine +=
+          typeof err === "string"
+            ? err
+            : JSON.stringify(err) + (err.toString && typeof err.toString === "function" ? `; ${err.toString()}` : "");
       }
 
       console.log(logPrefix + msgLine + isoTime);
@@ -54,7 +72,7 @@ function log(msg, err) {
       }
     } else {
       if (err !== null && typeof err !== "undefined") {
-        msgLine += `. Error: ${err}'`;
+        msgLine += `. Error: ${err}`;
       }
       console.log(logPrefix + msgLine + isoTime);
     }

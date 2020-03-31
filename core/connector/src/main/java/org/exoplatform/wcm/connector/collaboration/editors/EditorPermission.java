@@ -1,9 +1,9 @@
-package org.exoplatform.wcm.connector.collaboration.dto;
+package org.exoplatform.wcm.connector.collaboration.editors;
 
 /**
- * The Class Permission.
+ * The Class EditorPermission.
  */
-public class Permission {
+public class EditorPermission {
 
   /** The name. */
   protected String id;
@@ -15,31 +15,31 @@ public class Permission {
   protected String avatarUrl;
 
   /**
-   * Instantiates a new permission.
+   * Instantiates a new EditorPermission.
    */
-  public Permission() {
+  public EditorPermission() {
 
   }
 
   /**
-   * Instantiates a new permission.
+   * Instantiates a new EditorPermission.
    *
    * @param id the id
    * @param displayName the display name
    * @param avatarUrl the avatar url
    */
-  public Permission(String id, String displayName, String avatarUrl) {
+  public EditorPermission(String id, String displayName, String avatarUrl) {
     this.id = id;
     this.displayName = displayName;
     this.avatarUrl = avatarUrl;
   }
 
   /**
-   * Instantiates a new permission.
+   * Instantiates a new EditorPermission.
    *
    * @param id the id
    */
-  public Permission(String id) {
+  public EditorPermission(String id) {
     this.id = id;
     displayName = null;
     avatarUrl = null;

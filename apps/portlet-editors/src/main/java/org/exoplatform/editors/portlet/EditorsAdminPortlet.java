@@ -20,6 +20,8 @@ public class EditorsAdminPortlet extends GenericPortlet {
 
   /** The Constant LOG. */
   private static final Log LOG = ExoLogger.getLogger(EditorsAdminPortlet.class);
+  
+  protected static final String ERROR_RESOURCE_BASE = "editors.admin.error";
 
   @Override
   public void doView(RenderRequest request, RenderResponse response) throws IOException, PortletException {
@@ -40,6 +42,9 @@ public class EditorsAdminPortlet extends GenericPortlet {
                                                .append("\",")
                                                .append("\"identities\": \"")
                                                .append(identitiesUrl)
+                                               .append("\",")
+                                               .append("\"errorResourceBase\": \"")
+                                               .append(ERROR_RESOURCE_BASE)
                                                .append("\"}}")
                                                .toString();
 

@@ -14,14 +14,14 @@
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, see<http://www.gnu.org/licenses/>.
  */
-package org.exoplatform.wcm.connector.collaboration.dto;
+package org.exoplatform.wcm.connector.collaboration.editors;
 
 import java.util.List;
 
 /**
- * The Class DocumentEditorProviderDTO.
+ * The Class DocumentEditorData.
  */
-public class DocumentEditorProviderDTO extends ResourceSupport {
+public class DocumentEditorData extends HypermediaSupport {
 
   /** The provider. */
   private String           provider;
@@ -30,13 +30,13 @@ public class DocumentEditorProviderDTO extends ResourceSupport {
   private Boolean          active;
 
   /** The permissions. */
-  private List<Permission> permissions;
+  private List<EditorPermission> permissions;
 
   
   /**
    * Instantiates a new document editor provider DTO.
    */
-  public DocumentEditorProviderDTO() {
+  public DocumentEditorData() {
 
   }
 
@@ -47,7 +47,7 @@ public class DocumentEditorProviderDTO extends ResourceSupport {
    * @param active the active
    * @param permissions the permissions
    */
-  public DocumentEditorProviderDTO(String provider, boolean active, List<Permission> permissions) {
+  public DocumentEditorData(String provider, boolean active, List<EditorPermission> permissions) {
     this.provider = provider;
     this.active = active;
     this.permissions = permissions;
@@ -94,7 +94,7 @@ public class DocumentEditorProviderDTO extends ResourceSupport {
    *
    * @param permissions the new permissions
    */
-  public void setPermissions(List<Permission> permissions) {
+  public void setPermissions(List<EditorPermission> permissions) {
     this.permissions = permissions;
   }
 
@@ -103,7 +103,7 @@ public class DocumentEditorProviderDTO extends ResourceSupport {
    *
    * @return the permissions
    */
-  public List<Permission> getPermissions() {
+  public List<EditorPermission> getPermissions() {
     return permissions;
   }
 
