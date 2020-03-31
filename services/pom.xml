@@ -215,6 +215,9 @@
                 <includes>
                   <include>com.google.code.gson:gson</include>
                   <include>com.microsoft.graph:microsoft-graph</include>
+                  <include>com.microsoft.graph:microsoft-graph-core</include>
+                  <include>com.squareup.okhttp3:okhttp</include>
+                  <include>com.squareup.okio:okio</include>
                 </includes>
               </artifactSet>
               <relocations>
@@ -225,6 +228,14 @@
                 <relocation>
                   <pattern>com.microsoft.graph</pattern>
                   <shadedPattern>org.exoplatform.clouddrive.onedrive.shaded.microsoft.graph</shadedPattern>
+                </relocation>
+                <relocation>
+                  <pattern>com.squareup.okhttp3</pattern>
+                  <shadedPattern>org.exoplatform.clouddrive.onedrive.shaded.squareup.okhttp3</shadedPattern>
+                </relocation>
+                <relocation>
+                  <pattern>com.squareup.okio</pattern>
+                  <shadedPattern>org.exoplatform.clouddrive.onedrive.shaded.squareup.okio</shadedPattern>
                 </relocation>
               </relocations>
             </configuration>
