@@ -74,13 +74,18 @@ public class ECMSActivityFileStoragePlugin extends ActivityFileStoragePlugin {
       Session session = sessionProvider.getSession(workspaceName, currentRepository);
 
       if (streamOwner.getProviderId().equals(SpaceIdentityProvider.NAME)) {
-        Space space = spaceService.getSpaceById(streamOwner.getId());
+        Space space = spaceService.getSpaceByPrettyName(streamOwner.getRemoteId());
         String groupPath = nodeHierarchyCreator.getJcrPath("groupsPath");
         String spaceParentPath = groupPath + space.getGroupId() + "/Documents";
         if (!session.itemExists(spaceParentPath)) {
           throw new IllegalStateException("Root node of space '" + spaceParentPath + "' doesn't exist");
         }
         parentNode = (Node) session.getItem(spaceParentPath);
+
+        if (!parentNode.hasNode(ACTIVITY_FOLDER_UPLOAD_NAME)) {
+          parentNode.addNode(ACTIVITY_FOLDER_UPLOAD_NAME);
+          session.save();
+        }
       } else {
         String remoteUser = ConversationState.getCurrent().getIdentity().getUserId();
         if (org.apache.commons.lang.StringUtils.isBlank(remoteUser)) {
@@ -98,6 +103,7 @@ public class ECMSActivityFileStoragePlugin extends ActivityFileStoragePlugin {
           session.save();
         }
       }
+
 
       Node parentUploadNode = parentNode.getNode(ACTIVITY_FOLDER_UPLOAD_NAME);
       Node node = parentUploadNode.addNode(uploadedResource.getFileName(), "nt:file");
@@ -118,10 +124,33 @@ public class ECMSActivityFileStoragePlugin extends ActivityFileStoragePlugin {
       concatenateParam(activity.getTemplateParams(), "REPOSITORY", "repository");
       concatenateParam(activity.getTemplateParams(), "WORKSPACE", "collaboration");
       concatenateParam(activity.getTemplateParams(), "DOCPATH", node.getPath());
+      concatenateParam(activity.getTemplateParams(), "mimeType", resourceNode.getProperty("jcr:mimeType").getString());
       concatenateParam(activity.getTemplateParams(), "id", node.isNodeType("mix:referenceable") ? node.getUUID() : "");
 
       uploadService.removeUploadResource(activityFile.getUploadId());
     }
   }
 
+  public void attachExistingFile(ExoSocialActivity activity, Identity streamOwner, ActivityFile attachment) throws Exception {
+    if (attachment == null || attachment.getId() == null) {
+      return;
+    }
+
+    SessionProvider sessionProvider = SessionProviderService.getSystemSessionProvider();
+    ManageableRepository currentRepository = repositoryService.getCurrentRepository();
+    String workspaceName = currentRepository.getConfiguration().getDefaultWorkspaceName();
+    Session session = sessionProvider.getSession(workspaceName, currentRepository);
+
+    Node attachmentNode = session.getNodeByUUID(attachment.getId());
+    Node resourceNode = attachmentNode.getNode("jcr:content");
+    if (activity.getTemplateParams() == null) {
+      activity.setTemplateParams(new HashMap<>());
+    }
+    concatenateParam(activity.getTemplateParams(), "REPOSITORY", "repository");
+    concatenateParam(activity.getTemplateParams(), "WORKSPACE", "collaboration");
+    concatenateParam(activity.getTemplateParams(), "DOCPATH", attachmentNode.getPath());
+    concatenateParam(activity.getTemplateParams(), "mimeType", resourceNode.getProperty("jcr:mimeType").getString());
+    concatenateParam(activity.getTemplateParams(), "id", attachmentNode.isNodeType("mix:referenceable") ? attachmentNode.getUUID() : "");
+  }
 }
+
