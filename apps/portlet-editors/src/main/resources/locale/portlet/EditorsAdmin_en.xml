@@ -46,14 +46,6 @@
         <None>None</None>
         <Everybody>Everybody</Everybody>
       </modal>
-      <!-- onlyoffice>
-        <name>ONLYOFFICE</name>
-        <description>ONLYOFFICE Online Document Editor</description>
-      </onlyoffice>
-      <officeonline>
-        <name>Microsoft Office Online</name>
-        <description>Microsoft Office Online editors for Word, Excel, Powerpoint</description>
-      </officeonline -->
       <buttons>
         <Save>Save</Save>
         <Cancel>Cancel</Cancel>
