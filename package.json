@@ -1,7 +1,7 @@
 {
-  "name": "attachmentsSelector",
+  "name": "cloud-drive",
   "version": "6.0.0",
-  "description": "eXo Attachments Selector",
+  "description": "eXo Cloud Drive Plugin",
   "repository": {
     "type": "git",
     "url": "https://github.com/exodev/ecms"
@@ -10,7 +10,7 @@
     "start": "webpack --config webpack.dev.js --mode development",
     "dev": "webpack-dev-server --config webpack.dev.js --mode development --hot",
     "watch": "webpack --config webpack.dev.js --progress --colors --watch -d",
-    "lint": "eslint --fix ./src/main/webapp/cloud-connector/components/*.vue",
+    "lint": "eslint --fix ./src/main/webapp/vue-app/components/*.vue",
     "test": "jest",
     "test-coverage": "jest --coverage",
     "build": "webpack --config webpack.prod.js --mode production"

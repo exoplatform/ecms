@@ -26,8 +26,8 @@
 
   <javascript>
     <param>
-      <js-module>cloudAttachmentPlugin</js-module>
-      <js-path>/js/cloud-connector/cloudAttachmentPlugin.js</js-path>
+      <js-module>сloudDrivePlugin</js-module>
+      <js-path>/vue-app/cloudDrivePlugin.js</js-path>
     </param>
   </javascript>
 
@@ -41,9 +41,6 @@
     <depends>
       <module>jquery</module>
       <as>jQuery</as>
-    </depends>
-    <depends>
-      <module>extensionRegistry</module>
     </depends>
   </module>
   <module>
@@ -98,6 +95,25 @@
     </depends>
     <depends>
       <module>uiFileView</module>
+    </depends>
+  </module>
+  <module>
+    <name>CloudDriveApp</name>
+    <script>
+      <minify>false</minify>
+      <path>/js/cloud-drive.bundle.js</path>
+    </script>
+    <depends>
+      <module>vue</module>
+    </depends>
+    <depends>
+      <module>eXoVueI18n</module>
+    </depends>
+    <depends>
+      <module>vuetify</module>
+    </depends>
+    <depends>
+      <module>extensionRegistry</module>
     </depends>
   </module>
 </gatein-resources>

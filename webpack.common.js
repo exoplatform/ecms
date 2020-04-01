@@ -1,32 +1,32 @@
-const path = require('path');
-const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin');
+const path = require("path");
+const ExtractTextWebpackPlugin = require("extract-text-webpack-plugin");
 
 let config = {
-  context: path.resolve(__dirname, '.'),
+  context: path.resolve(__dirname, "."),
   // set the entry point of the application
   // can use multiple entry
   entry: {
-    attachmentsSelector: './src/main/webapp/cloud-connector/main.js'
+    "cloud-drive": "./src/main/webapp/vue-app/main.js"
   },
   module: {
     rules: [
       {
         test: /\.css$/,
-        use: ['vue-style-loader', 'css-loader']
+        use: ["vue-style-loader", "css-loader"]
       },
       {
         test: /\.less$/,
         use: ExtractTextWebpackPlugin.extract({
-          fallback: 'vue-style-loader',
+          fallback: "vue-style-loader",
           use: [
             {
-              loader: 'css-loader',
+              loader: "css-loader",
               options: {
                 sourceMap: true
               }
             },
             {
-              loader: 'less-loader',
+              loader: "less-loader",
               options: {
                 sourceMap: true
               }
@@ -37,23 +37,17 @@ let config = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        use: [
-          'babel-loader',
-          'eslint-loader',
-        ]
+        use: ["babel-loader", "eslint-loader"]
       },
       {
         test: /\.vue$/,
-        use: [
-          'vue-loader',
-          'eslint-loader',
-        ]
+        use: ["vue-loader", "eslint-loader"]
       }
     ]
   },
   plugins: [
     // we use ExtractTextWebpackPlugin to extract the css code on a css file
-    new ExtractTextWebpackPlugin('css/attachments.css')
+    new ExtractTextWebpackPlugin("css/cloud-drive.css")
   ]
 };
 
