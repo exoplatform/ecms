@@ -258,7 +258,7 @@
             if (providers) {
               var allProviders = providers.slice();
               var index = allProviders.indexOf(result.provider);
-        if (index !== -1) allProviders.splice(index, 1);
+              if (index !== -1) allProviders.splice(index, 1);
               allProviders.forEach(provider => {
                 $( "i[class*='uiIconEcms" + provider + "Open' i]").each(function(){
                   $(this).parents(':eq(1)').removeClass("disabledProvider");
