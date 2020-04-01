@@ -24,6 +24,13 @@
     xsi:schemaLocation="http://www.gatein.org/xml/ns/gatein_resources_1_3 http://www.gatein.org/xml/ns/gatein_resources_1_3"
     xmlns="http://www.gatein.org/xml/ns/gatein_resources_1_3">
 
+  <javascript>
+    <param>
+      <js-module>cloudAttachmentPlugin</js-module>
+      <js-path>/js/cloud-connector/cloudAttachmentPlugin.js</js-path>
+    </param>
+  </javascript>
+
   <!-- Javascript for Cloud Drive UI support in WCM -->
   <module>
     <name>cloudDriveJqueryPnotify</name>
@@ -34,6 +41,9 @@
     <depends>
       <module>jquery</module>
       <as>jQuery</as>
+    </depends>
+    <depends>
+      <module>extensionRegistry</module>
     </depends>
   </module>
   <module>
