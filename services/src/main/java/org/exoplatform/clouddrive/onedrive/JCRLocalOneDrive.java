@@ -362,6 +362,7 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
   private static final String BUSINESS = "business";
 
   synchronized SharingLink createLink(DriveItem item) throws OneDriveException {
+    accountType = getUser().api().getDrive().driveType;
     // TODO there is a possibility to delete/update public links,
     // and also use temporary links
     if (BUSINESS.equals(accountType)) {

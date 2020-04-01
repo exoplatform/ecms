@@ -23,6 +23,7 @@ import java.util.stream.Collectors;
 
 import javax.net.ssl.HttpsURLConnection;
 
+import com.microsoft.graph.models.extensions.*;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpEntity;
@@ -40,15 +41,6 @@ import org.apache.http.message.BasicNameValuePair;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.microsoft.graph.models.extensions.DriveItem;
-import com.microsoft.graph.models.extensions.DriveItemUploadableProperties;
-import com.microsoft.graph.models.extensions.FileSystemInfo;
-import com.microsoft.graph.models.extensions.Folder;
-import com.microsoft.graph.models.extensions.IGraphServiceClient;
-import com.microsoft.graph.models.extensions.ItemReference;
-import com.microsoft.graph.models.extensions.SharingLink;
-import com.microsoft.graph.models.extensions.Subscription;
-import com.microsoft.graph.models.extensions.User;
 import com.microsoft.graph.options.HeaderOption;
 import com.microsoft.graph.options.QueryOption;
 import com.microsoft.graph.requests.extensions.GraphServiceClient;
@@ -872,6 +864,15 @@ public class OneDriveAPI {
 
   public DriveItem getItem(String itemId) {
     return graphClient.me().drive().items(itemId).buildRequest().get();
+  }
+
+  /**
+   * Gets the current user drive.
+   *
+   * @return {@link Drive} the drive
+   */
+  public Drive getDrive() {
+    return graphClient.me().drive().buildRequest().get();
   }
 
   private boolean isDeltaTokenExpired(String deltaToken) {
