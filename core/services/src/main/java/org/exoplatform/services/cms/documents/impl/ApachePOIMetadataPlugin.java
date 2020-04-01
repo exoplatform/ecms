@@ -56,6 +56,7 @@ public class ApachePOIMetadataPlugin extends BaseComponentPlugin implements Docu
    * Instantiates a new document metadata plugin impl.
    */
   public ApachePOIMetadataPlugin() {
+    // We should use UTC timezone instead of user's one to set correct dates using POI
     metadataFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
   }
 

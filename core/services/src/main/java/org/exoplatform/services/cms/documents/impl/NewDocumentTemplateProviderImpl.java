@@ -42,14 +42,16 @@ public class NewDocumentTemplateProviderImpl implements NewDocumentTemplateProvi
   /** The editor. */
   protected DocumentEditorProvider          editor;
 
+
   /**
    * Instantiates a new new document template provider impl.
    *
    * @param plugin the plugin
+   * @param documentService the document service
    */
-  public NewDocumentTemplateProviderImpl(NewDocumentTemplatePlugin plugin) {
+  public NewDocumentTemplateProviderImpl(NewDocumentTemplatePlugin plugin, DocumentService documentService) {
     this.plugin = plugin;
-    this.documentService = ExoContainerContext.getCurrentContainer().getComponentInstanceOfType(DocumentService.class);
+    this.documentService = documentService;
   }
 
   /**

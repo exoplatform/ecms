@@ -38,9 +38,8 @@ import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.ext.filter.UIExtensionFilter;
 import org.exoplatform.webui.ext.filter.UIExtensionFilters;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class CustomizedFileUIActivity.
+ * The Class DocumentUIActivity is customized FileUIActivity used for representing documents.
  */
 @ComponentConfigs({
     @ComponentConfig(lifecycle = UIFormLifecycle.class, template = "war:/groovy/ecm/social-integration/plugin/space/FileUIActivity.gtmpl", events = {

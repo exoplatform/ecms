@@ -41,6 +41,7 @@ import org.gatein.api.navigation.Navigation;
 import org.gatein.api.navigation.Nodes;
 import org.gatein.api.site.SiteId;
 
+import org.exoplatform.commons.api.settings.SettingService;
 import org.exoplatform.commons.utils.CommonsUtils;
 import org.exoplatform.container.component.ComponentPlugin;
 import org.exoplatform.container.xml.PortalContainerInfo;
@@ -82,6 +83,7 @@ import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+import org.exoplatform.social.core.manager.IdentityManager;
 import org.exoplatform.webui.application.WebuiRequestContext;
 
 /**
@@ -125,8 +127,10 @@ public class DocumentServiceImpl implements DocumentService {
   private PortalContainerInfo portalContainerInfo;
   private Map<String, DocumentMetadataPlugin> metadataPlugins = new HashMap<>();
   private OrganizationService organizationService;
+  private SettingService settingService;
+  private IdentityManager identityManager;
 
-  public DocumentServiceImpl(ManageDriveService manageDriveService, Portal portal, SessionProviderService sessionProviderService, RepositoryService repoService, NodeHierarchyCreator nodeHierarchyCreator, LinkManager linkManager, PortalContainerInfo portalContainerInfo, OrganizationService organizationService) {
+  public DocumentServiceImpl(ManageDriveService manageDriveService, Portal portal, SessionProviderService sessionProviderService, RepositoryService repoService, NodeHierarchyCreator nodeHierarchyCreator, LinkManager linkManager, PortalContainerInfo portalContainerInfo, OrganizationService organizationService, SettingService settingService, IdentityManager identityManager) {
     this.manageDriveService = manageDriveService;
     this.sessionProviderService = sessionProviderService;
     this.repoService = repoService;
@@ -135,6 +139,8 @@ public class DocumentServiceImpl implements DocumentService {
     this.linkManager = linkManager;
     this.portalContainerInfo = portalContainerInfo;
     this.organizationService = organizationService;
+    this.settingService = settingService;
+    this.identityManager = identityManager;
   }
 
   @Override
@@ -461,7 +467,7 @@ public class DocumentServiceImpl implements DocumentService {
       if (LOG.isDebugEnabled()) {
         LOG.debug("Adding NewDocumentTemplatePlugin [{}]", newPlugin.toString());
       }
-      templateProviders.add(new NewDocumentTemplateProviderImpl(newPlugin));
+      templateProviders.add(new NewDocumentTemplateProviderImpl(newPlugin, this));
       if (LOG.isDebugEnabled()) {
         LOG.debug("Registered NewDocumentTemplatePlugin instance of {}", plugin.getClass().getName());
       }
@@ -481,7 +487,7 @@ public class DocumentServiceImpl implements DocumentService {
       if (LOG.isDebugEnabled()) {
         LOG.debug("Adding DocumentEditor [{}]", editor.toString());
       }
-      editorProviders.add(new DocumentEditorProviderImpl(editor));
+      editorProviders.add(new DocumentEditorProviderImpl(editor, settingService, identityManager, organizationService));
       if (LOG.isDebugEnabled()) {
         LOG.debug("Registered DocumentEditor instance of {}", plugin.getClass().getName());
       }
@@ -532,9 +538,8 @@ public class DocumentServiceImpl implements DocumentService {
     content.setProperty(JCR_DATA, data);
     content.setProperty(JCR_MIME_TYPE, template.getMimeType());
     content.setProperty(JCR_LAST_MODIFIED_PROP, new GregorianCalendar());
-    // XXX: This causes errors on plf 6.0.0-M25
-    //ListenerService listenerService = WCMCoreUtils.getService(ListenerService.class);
-    //listenerService.broadcast(ActivityCommonService.FILE_CREATED_ACTIVITY, null, addedNode);
+    ListenerService listenerService = WCMCoreUtils.getService(ListenerService.class);
+    listenerService.broadcast(ActivityCommonService.FILE_CREATED_ACTIVITY, null, addedNode);
     currentNode.save();
     data.close();
     return addedNode;

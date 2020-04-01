@@ -68,19 +68,25 @@ public class DocumentEditorProviderImpl implements DocumentEditorProvider {
   protected IdentityManager     identityManager;
 
   /** The organization service. */
-  protected OrganizationService organization;
+  protected OrganizationService organizationService;
+
 
   /**
    * Instantiates a new document editor provider impl.
    *
    * @param editor the editor
+   * @param settingService the setting service
+   * @param identityManager the identity manager
+   * @param organizationService the organization service
    */
-  protected DocumentEditorProviderImpl(DocumentEditor editor) {
+  protected DocumentEditorProviderImpl(DocumentEditor editor,
+                                       SettingService settingService,
+                                       IdentityManager identityManager,
+                                       OrganizationService organizationService) {
     this.editor = editor;
-    // TODO: refactor, use container injection
-    this.settingService = WCMCoreUtils.getService(SettingService.class);
-    this.identityManager = WCMCoreUtils.getService(IdentityManager.class);
-    this.organization = WCMCoreUtils.getService(OrganizationService.class);
+    this.settingService = settingService;
+    this.identityManager = identityManager;
+    this.organizationService = organizationService;
     Boolean storedActive = getStoredActive();
     List<String> storedPermissions = getStoredPermissions();
     if (storedActive != null && storedPermissions != null) {
@@ -129,6 +135,7 @@ public class DocumentEditorProviderImpl implements DocumentEditorProvider {
    * Update permissions.
    *
    * @param permissions the permissions
+   * @throws PermissionValidationException the permission validation exception
    */
   @Override
   public void updatePermissions(List<String> permissions) throws PermissionValidationException {
@@ -253,6 +260,12 @@ public class DocumentEditorProviderImpl implements DocumentEditorProvider {
                        SettingValue.create(String.join(",", permissions)));
   }
 
+  /**
+   * Validate permission.
+   *
+   * @param permission the permission
+   * @throws PermissionValidationException the permission validation exception
+   */
   protected void validatePermission(String permission) throws PermissionValidationException {
     if (permission == null) {
       throw new PermissionValidationException("The permission cannot be null");
@@ -269,7 +282,7 @@ public class DocumentEditorProviderImpl implements DocumentEditorProvider {
       String groupId = temp[1];
       Group group = null;
       try {
-        group = organization.getGroupHandler().findGroupById(groupId);
+        group = organizationService.getGroupHandler().findGroupById(groupId);
       } catch (Exception e) {
         throw new PermissionValidationException("Cannot validate permission for group: " + group + ". " + e.getMessage());
       }

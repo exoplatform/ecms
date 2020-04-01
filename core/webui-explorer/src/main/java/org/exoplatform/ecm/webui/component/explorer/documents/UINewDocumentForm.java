@@ -103,11 +103,6 @@ public class UINewDocumentForm extends UIForm implements UIPopupComponent {
     UIFormSelectBox typeSelectBox = new UIFormSelectBox(FIELD_TYPE_SELECT_BOX, FIELD_TYPE_SELECT_BOX, options);
     typeSelectBox.setRendered(true);
     this.addUIFormInput(typeSelectBox);
-
-    // TODO: here we can iterate over all template providers
-    // and call their handlers (not yet introduced) to init JS/styles/icons
-
-    // Set action
     this.setActions(new String[] { "Save", "Cancel" });
   }
 
