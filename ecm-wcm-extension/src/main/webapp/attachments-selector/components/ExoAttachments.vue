@@ -114,6 +114,16 @@ export default {
       type: String,
       default: ''
     },
+    maxFilesCount: {
+      type: Number,
+      required: false,
+      default: 20
+    },
+    maxFileSize: {
+      type: Number,
+      required: false,
+      default: 25
+    },
     showAttachmentsDrawer: {
       type: Boolean,
       default: false
@@ -132,8 +142,6 @@ export default {
       filesCountLimitError: false,
       sameFileError: false,
       sameFileErrorMessage: `${this.$t('attachments.drawer.sameFile.error')}`,
-      maxFileSize: 25,
-      maxFilesCount: 20,
       BYTES_IN_MB: 1048576,
       MESSAGES_DISPLAY_TIME: 5000,
       drawerTitle: `${this.$t('attachments.drawer.header')}`
