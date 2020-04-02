@@ -11,6 +11,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
@@ -691,7 +692,18 @@ public class OneDriveAPI {
     return new ChangesIterator(deltaToken);
   }
 
+  private String decodeUrlPath(String value) {
+    try {
+      value = java.net.URLDecoder.decode(value, StandardCharsets.UTF_8.name());
+    } catch (UnsupportedEncodingException e) {
+      // not going to happen - value came from JDK's own StandardCharsets
+      LOG.warn("UnsupportedEncodingException when decoding the url path");
+    }
+    return value;
+  }
+
   private String encodeUrlPath(String value) throws URISyntaxException {
+    value = decodeUrlPath(value);
     URI uri = new URI(null, null, null, value, null);
     String request = uri.toASCIIString();
     return request.startsWith("?") ? request.substring(1) : request;
