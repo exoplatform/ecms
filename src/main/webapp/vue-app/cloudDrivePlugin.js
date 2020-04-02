@@ -7,8 +7,9 @@ const CloudDrivePlugin = {
   appClass: "cloud-drive",
   component: "connect-cloud",
   onExecute() {
-    console.log("on execute");
-    document.getElementsByClassName("connect-cloud drawer")[0].className += " open";
+    require(['SHARED/CloudDriveApp'], function(cloudDriveApp) {
+      cloudDriveApp.init();
+  });
   }
 };
 require(["SHARED/extensionRegistry"], function(extensionRegistry) {
