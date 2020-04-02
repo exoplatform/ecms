@@ -6,11 +6,34 @@ const ActivityComposerAttachmentsPlugin = {
   description: 'attachments.composer.app.description',
   iconClass: 'addFileComposerIcon',
   appClass: 'attachmentsSelector',
-  component: 'exo-attachments',
-  onExecute: function() {
-    document.getElementsByClassName('attachments drawer')[0].className += ' open';
+  component: {
+    name: 'exo-attachments',
+    props: {
+      showAttachmentsDrawer: false,
+      maxFilesCount: 22,
+      maxFileSize: 333
+    },
+    model: {
+      value: []
+    },
+    events: [
+      {
+        'event': 'uploadingFileFinished',
+        'listener': 'setUploadingCount',
+        'listenerParam': 'add'
+      },
+      {
+        'event': 'removingFileFinished',
+        'listener': 'setUploadingCount',
+        'listenerParam': 'remove'
+      }
+    ],
+    show: false
   },
+  onExecute: function () {
+    document.getElementsByClassName('attachments drawer')[0].className += ' open';
+  }
 };
-require(['SHARED/extensionRegistry'], function(extensionRegistry) {
+require(['SHARED/extensionRegistry'], function (extensionRegistry) {
   extensionRegistry.registerExtension('ActivityComposer', 'activity-composer-action', ActivityComposerAttachmentsPlugin);
 });
