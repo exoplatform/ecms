@@ -51,7 +51,7 @@ public class EditorsAdminPortlet extends GenericPortlet {
       JavascriptManager js = ((WebuiRequestContext) WebuiRequestContext.getCurrentInstance()).getJavascriptManager();
       js.require("SHARED/editorsadmin", "editorsadmin").addScripts("editorsadmin.init(" + settingsJson + ");");
     } catch (Exception e) {
-      LOG.error("Error processing WebRTC call portlet for user " + request.getRemoteUser(), e);
+      LOG.error("Error processing editors admin portlet for user " + request.getRemoteUser(), e);
     }
   }
 

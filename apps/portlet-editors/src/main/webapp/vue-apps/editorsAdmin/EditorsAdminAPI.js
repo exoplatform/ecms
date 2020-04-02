@@ -27,7 +27,7 @@ export async function postData(url, data) {
       headers: {
         "Content-Type": "application/json"
       },
-      method: "POST",
+      method: "PUT",
       body: JSON.stringify(data)
     });
     if (response.ok) {

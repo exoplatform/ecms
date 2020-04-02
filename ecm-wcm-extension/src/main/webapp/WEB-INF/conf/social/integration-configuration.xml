@@ -708,53 +708,5 @@
       </init-params>
     </component-plugin>
   </external-component-plugins>
-  
-  
-   <!-- ECMS menu action for editor actions. -->
-  <external-component-plugins>
-    <target-component>org.exoplatform.webui.ext.UIExtensionManager</target-component>
-    <component-plugin>
-      <name>Add Editors Actions</name>
-      <set-method>registerUIExtensionPlugin</set-method>
-      <type>org.exoplatform.webui.ext.UIExtensionPlugin</type>
-      <init-params>
-        <object-param>
-          <name>File Activity</name>
-          <object type="org.exoplatform.social.webui.activity.UIActivityExtension">
-            <field name="type">
-              <string>org.exoplatform.social.webui.activity.BaseUIActivity</string>
-            </field>
-            <field name="name">
-              <string>files:spaces</string>
-            </field>
-            <field name="component">
-              <string>org.exoplatform.wcm.ext.component.activity.DocumentUIActivity</string>
-            </field>
-            <field name="activityBuiderClass">
-              <string>org.exoplatform.wcm.ext.component.activity.FileUIActivityBuilder</string>
-            </field>
-          </object>
-        </object-param>
-        <object-param>
-          <name>Share File Activity</name>
-          <object type="org.exoplatform.social.webui.activity.UIActivityExtension">
-            <field name="type">
-              <string>org.exoplatform.social.webui.activity.BaseUIActivity</string>
-            </field>
-            <field name="name">
-              <string>sharefiles:spaces</string>
-            </field>
-            <field name="component">
-              <string>org.exoplatform.wcm.ext.component.activity.DocumentUIActivity</string>
-            </field>
-            <field name="activityBuiderClass">
-              <string>org.exoplatform.wcm.ext.component.activity.UISharedFileBuilder</string>
-            </field>
-          </object>
-        </object-param>
-      </init-params>
-    </component-plugin>
-  </external-component-plugins>
-  
 
 </configuration>
