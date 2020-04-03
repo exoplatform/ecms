@@ -1,0 +1,68 @@
+@primaryColor: #2f5e92;
+
+.cloudDrive {
+  &Header {
+    display: flex;
+    justify-content: space-between;
+
+    .backButton {
+      width: 0;
+
+      .uiIconBack {
+        color: grey;
+        background: none;
+        margin: 0;
+        padding: 15px;
+        position: absolute;
+        float: left;
+        font-size: 15px;
+        cursor: pointer;
+      }
+    }
+
+    .cloudDriveTitle {
+      font-size: 18px;
+      font-weight: bold;
+      width: 75%;
+    }
+
+    .cloudDriveCloseIcon {
+      color: #dee4f2;
+      font-size: 32px;
+      line-height: 20px;
+      float: right;
+      cursor: pointer;
+    }
+  }
+
+  &List {
+    width: 70%;
+    margin: 0 auto;
+
+    &Item {
+      border: 1px solid @primaryColor;
+      border-radius: 2px;
+      margin-bottom: 10px;
+      justify-content: center;
+      min-height: 35px;
+      height: 35px;
+
+      &:hover {
+        background-color: #b3d4fc;
+      }
+
+      &__icon {
+        margin: 5.5px 0;
+
+        i:before {
+          color: @primaryColor;
+        }
+      }
+
+      &__content {
+        max-width: fit-content;
+        color: @primaryColor;
+      }
+    }
+  }
+}

@@ -6,6 +6,7 @@ const CloudDrivePlugin = {
   iconClass: "uiIconGeneralDrive",
   appClass: "cloud-drive",
   component: "connect-cloud",
+  enabled: true,
   onExecute() {
     require(['SHARED/CloudDriveApp'], function(cloudDriveApp) {
       cloudDriveApp.init();
