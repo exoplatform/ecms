@@ -12,7 +12,7 @@
   <name>eXo PLF:: ECMS Connector</name>
   <description>eXo ECMS REST Services</description>
   <properties>
-    <exo.test.coverage.ratio>0.11</exo.test.coverage.ratio>
+    <exo.test.coverage.ratio>0.1</exo.test.coverage.ratio>
   </properties>
   <dependencies>
     <dependency>
