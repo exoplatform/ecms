@@ -26,6 +26,11 @@ const ActivityComposerAttachmentsPlugin = {
         'event': 'removingFileFinished',
         'listener': 'setUploadingCount',
         'listenerParam': 'remove'
+      },
+      {
+        'event': 'attachExistingServerAttachment',
+        'listener': 'setUploadingCount',
+        'listenerParam': 'addExisting'
       }
     ],
     show: false
