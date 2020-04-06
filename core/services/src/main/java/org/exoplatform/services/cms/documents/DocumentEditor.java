@@ -50,11 +50,10 @@ public interface DocumentEditor {
    *
    * @param uuid the uuid
    * @param workspace workspace
-   * @param activityId the activity id
    * @param context the context
    * @throws Exception the exception
    */
-  void initActivity(String uuid, String workspace, String activityId, String context) throws Exception;
+  void initActivity(String uuid, String workspace, String activityId) throws Exception;
 
   /**
    * This handles is invoked when the DocumentUIActivity is rendered in the Activity Stream.

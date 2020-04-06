@@ -1390,7 +1390,7 @@ public class FileUIActivity extends BaseUIActivity{
         getDocumentService().getDocumentEditorProviders().forEach(provider -> {
           try {
             if (provider.isAvailableForUser(identity)) {
-              provider.initActivity(node.getUUID(), node.getSession().getWorkspace().getName(), activityId, STREAM_CONTEXT);
+              provider.initActivity(node.getUUID(), node.getSession().getWorkspace().getName(), activityId);
             }
           } catch (Exception e) {
             LOG.error("Cannot init activity from plugin {}, {}", provider.getProviderName(), e.getMessage());
