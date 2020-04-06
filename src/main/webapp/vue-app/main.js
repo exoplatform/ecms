@@ -26,7 +26,6 @@ if (extensionRegistry) {
   }
 }
 
-
 let connectCloudApp;
 export function init() {
   // getting locale resources

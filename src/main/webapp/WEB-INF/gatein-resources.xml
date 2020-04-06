@@ -98,7 +98,7 @@
     </depends>
   </module>
   <module>
-    <name>CloudDriveApp</name>
+    <name>cloudDriveApp</name>
     <script>
       <minify>false</minify>
       <path>/js/cloud-drive.bundle.js</path>

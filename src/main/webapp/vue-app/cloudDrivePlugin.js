@@ -8,7 +8,7 @@ const CloudDrivePlugin = {
   component: "connect-cloud",
   enabled: true,
   onExecute() {
-    require(['SHARED/CloudDriveApp'], function(cloudDriveApp) {
+    require(['SHARED/cloudDriveApp'], function(cloudDriveApp) {
       cloudDriveApp.init();
     });
   }

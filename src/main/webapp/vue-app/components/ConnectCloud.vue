@@ -5,9 +5,6 @@
         <a class="backButton" @click="closeCloudDrawer()">
           <i class="uiIconBack"></i>
         </a>
-        <a class="backButton">
-          <i class="uiIconBack"> </i>
-        </a>
         <span class="cloudDriveTitle">{{ $t("UIPopupWindow.title.ConnectCloudDriveForm") }}</span>
         <a class="cloudDriveCloseIcon" @click="closeCloudDrawer()">×</a>
       </div>
