@@ -39,6 +39,9 @@ public class OneDriveConnector extends CloudDriveConnector {
     /** The expiration time. */
     long   expirationTime;
 
+    /** The server url. */
+    String serverUrl;
+
     /**
      * Authenticate to the API with OAuth2 code returned on callback url.
      *
@@ -65,9 +68,14 @@ public class OneDriveConnector extends CloudDriveConnector {
       return this;
     }
 
+    API serverUrl(String serverUrl){
+      this.serverUrl = serverUrl;
+      return this;
+    }
+
     OneDriveAPI build() throws CloudDriveException, IOException {
       if (code != null && code.length() > 0) {
-        return new OneDriveAPI(getClientId(), getClientSecret(), code, getConnectorSchema() + "://" + getConnectorHost() + "/portal/rest/clouddrive/connect/onedrive" );
+        return new OneDriveAPI(getClientId(), getClientSecret(), code, serverUrl + "/portal/rest/clouddrive/connect/onedrive" );
       } else {
         return new OneDriveAPI(getClientId(), getClientSecret(), accessToken, refreshToken, expirationTime, getConnectorSchema() + "://" + getConnectorHost() + "/portal/rest/clouddrive/connect/onedrive");
       }
@@ -96,10 +104,11 @@ public class OneDriveConnector extends CloudDriveConnector {
   @Override
   protected CloudUser authenticate(Map<String, String> params) throws CloudDriveException {
     String code = params.get(OAUTH2_CODE);
+    String serverUrl = params.get(OAUTH2_SERVER_URL);
     if (code != null && code.length() > 0) {
       OneDriveAPI driveAPI;
       try {
-        driveAPI = new API().auth(code).build();
+        driveAPI = new API().auth(code).serverUrl(serverUrl).build();
       } catch (IOException e) {
         throw new CloudDriveException("Unnable to build OneDriveAPI",e);
       }
