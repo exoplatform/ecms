@@ -89,7 +89,7 @@
      * Adds editor buttons container (button and pulldown)
      */
     var addEditorButtonsContainer = function($target, fileId, buttons) {
-      if(!buttons) {
+      if (!buttons) {
         return;
       }
       // Add buttons container
@@ -109,7 +109,7 @@
       });
       
       // Create pulldown with editor buttons
-      if(buttons.length > 1) {
+      if (buttons.length > 1) {
         var $dropdownContainer = $("<div class='dropdown-container'></div>");
         var $toggle = $("<button class='btn dropdown-toggle' data-toggle='dropdown'>" +
         "<i class='uiIconArrowDown uiIconLightGray'></i></span></button>");
@@ -132,7 +132,8 @@
     };
     
     /**
-     * Adds the 'Edit Online' button to a preview (from the activity stream) when it's loaded.
+     * Adds the 'Edit Online' button to a preview (from the activity stream)
+     * when it's loaded.
      */
     var tryAddEditorButtonToPreview = function(attempts, delay, fileId, buttons) {
       var $elem = $("#uiDocumentPreview .previewBtn");
@@ -151,7 +152,8 @@
     };
     
     /**
-     * Adds the 'Edit Online' button to No-preview screen (from the activity stream) when it's loaded.
+     * Adds the 'Edit Online' button to No-preview screen (from the activity
+     * stream) when it's loaded.
      */
     var tryAddEditorButtonNoPreview = function(attempts, delay, fileId, buttons) {
       var $elem = $("#documentPreviewContainer .navigationContainer.noPreview");
@@ -183,15 +185,15 @@
      */
     this.initActivityButtons = function(activityId, fileId, workspace, preferedProvider) {
       var buttons = buttonsFns.slice();
-      if(buttons.length == 0) {
+      if (buttons.length == 0) {
         return;
       }
       currentWorkspace = workspace;
       log("Init Activity buttons: " + JSON.stringify(buttons));
       // Sort buttons in user prefference order
-      if(preferedProvider != null) {
+      if (preferedProvider != null) {
         buttons.forEach(function(item,i){
-          if(item.provider === preferedProvider){
+          if (item.provider === preferedProvider){
             buttons.splice(i, 1);
             buttons.unshift(item);
           }
@@ -207,21 +209,22 @@
      */
     this.initPreviewButtons = function(activityId, index, fileId, preferedProvider) {
       var buttons = buttonsFns.slice();
-      if(buttons.length == 0) {
+      if (buttons.length == 0) {
         return;
       }
       log("Init preview buttons: " + JSON.stringify(buttons));
       var clickSelector = "#Preview" + activityId + "-" + index;
-      if(preferedProvider != null) {
+      if (preferedProvider != null) {
         buttons.forEach(function(item,i){
-          if(item.provider === preferedProvider){
+          if (item.provider === preferedProvider){
             buttons.splice(i, 1);
             buttons.unshift(item);
           }
         });
       }
       $(clickSelector).click(function() {
-        // We set timeout here to avoid the case when the element is rendered but is going to be updated soon
+        // We set timeout here to avoid the case when the element is rendered
+		// but is going to be updated soon
         setTimeout(function() {
           tryAddEditorButtonToPreview(100, 100, fileId, buttons);
           // We need wait for about 2min when doc cannot generate its preview
