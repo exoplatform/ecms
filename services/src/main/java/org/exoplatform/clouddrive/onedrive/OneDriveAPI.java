@@ -25,6 +25,7 @@ import java.util.stream.Collectors;
 import javax.net.ssl.HttpsURLConnection;
 
 import com.microsoft.graph.models.extensions.*;
+import com.microsoft.graph.requests.extensions.*;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpEntity;
@@ -44,11 +45,6 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.microsoft.graph.options.HeaderOption;
 import com.microsoft.graph.options.QueryOption;
-import com.microsoft.graph.requests.extensions.GraphServiceClient;
-import com.microsoft.graph.requests.extensions.IDriveItemCollectionPage;
-import com.microsoft.graph.requests.extensions.IDriveItemCollectionRequestBuilder;
-import com.microsoft.graph.requests.extensions.IDriveItemDeltaCollectionPage;
-import com.microsoft.graph.requests.extensions.IDriveItemDeltaCollectionRequestBuilder;
 
 import org.exoplatform.clouddrive.CloudDriveException;
 import org.exoplatform.clouddrive.RefreshAccessException;
@@ -77,9 +73,13 @@ class Scopes {
 
   static final String UserReadWrite           = "https://graph.microsoft.com/User.ReadWrite";
 
-  static final String offlineAccess           = "offline_access";
+  static final String OfflineAccess           = "offline_access";
+
+  static final String Profile                 = "profile";
 
   static final String UserReadWriteAll        = "https://graph.microsoft.com/User.ReadWrite.All";
+
+  static final String SitesReadWriteAll       = "https://graph.microsoft.com/Sites.ReadWrite.All";
 }
 
 
@@ -201,7 +201,8 @@ public class OneDriveAPI {
     params.add(new BasicNameValuePair("client_id", clientId));
     params.add(new BasicNameValuePair("scope", SCOPES));
 
-    httppost.setEntity(new UrlEncodedFormEntity(params, "UTF-8"));
+    UrlEncodedFormEntity urlEncodedFormEntity = new UrlEncodedFormEntity(params, "UTF-8");
+    httppost.setEntity(urlEncodedFormEntity);
 
     HttpResponse response = httpclient.execute(httppost);
     HttpEntity entity = response.getEntity();
@@ -272,12 +273,10 @@ public class OneDriveAPI {
 
   private static String scopes() {
     StringJoiner scopes = new StringJoiner(" ");
-    scopes.add(Scopes.FilesReadWriteAll)
-            .add(Scopes.FilesRead)
-            .add(Scopes.FilesReadWrite)
-            .add(Scopes.FilesReadAll)
-            .add(Scopes.UserRead)
-            .add(Scopes.offlineAccess);
+    scopes.add(Scopes.UserRead)
+          .add(Scopes.FilesReadWriteAll)
+          .add(Scopes.SitesReadWriteAll)
+          .add(Scopes.OfflineAccess);
     return scopes.toString();
   }
 
@@ -289,7 +288,7 @@ public class OneDriveAPI {
       } catch (RefreshAccessException | OneDriveException e) {
         LOG.error("during initialization of graphClient an error occurred", e);
       }
-      iHttpRequest.getHeaders().add(new HeaderOption("Authorization", "Bearer " + accessToken));
+      iHttpRequest.addHeader("Authorization", "Bearer " + accessToken);
     }).logger(new ExoGraphClientLogger(GRAPH_CLIENT_LOG)).buildClient();
   }
 
