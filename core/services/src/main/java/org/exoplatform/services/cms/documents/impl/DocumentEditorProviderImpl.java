@@ -182,12 +182,11 @@ public class DocumentEditorProviderImpl implements DocumentEditorProvider {
    * @param uuid the uuid
    * @param workspace the workspace
    * @param activityId the activity id
-   * @param context the context
    * @throws Exception the exception
    */
   @Override
-  public void initActivity(String uuid, String workspace, String activityId, String context) throws Exception {
-    editor.initActivity(uuid, workspace, activityId, context);
+  public void initActivity(String uuid, String workspace, String activityId) throws Exception {
+    editor.initActivity(uuid, workspace, activityId);
   }
 
   /**

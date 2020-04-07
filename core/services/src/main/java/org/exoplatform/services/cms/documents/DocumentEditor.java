@@ -50,7 +50,7 @@ public interface DocumentEditor {
    *
    * @param uuid the uuid
    * @param workspace workspace
-   * @param context the context
+   * @param activityId the activityId
    * @throws Exception the exception
    */
   void initActivity(String uuid, String workspace, String activityId) throws Exception;
