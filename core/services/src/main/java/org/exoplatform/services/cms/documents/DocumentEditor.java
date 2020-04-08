@@ -16,6 +16,7 @@
  */
 package org.exoplatform.services.cms.documents;
 
+import java.net.URI;
 import java.util.Arrays;
 import java.util.List;
 
@@ -56,18 +57,17 @@ public interface DocumentEditor {
   void initActivity(String uuid, String workspace, String activityId) throws Exception;
 
   /**
-   * This handles is invoked when the DocumentUIActivity is rendered in the Activity Stream.
-   * It allows to run custom code (JS initialization, setting sockets, etc) while 
-   * the preview is being rendered.
+   * This handler is invoked when the document preview is rendered.
+   * It allows to run custom server-side initialization while the preview is being rendered.
+   * Returns object with editor settings, that will be converted to JSON and passed to initPreview
+   * method in provider's JS module.
    * 
-   * @param uuid the uuid
+   * @param fileId the fileId
    * @param workspace workspace
-   * @param activityId the activity id
-   * @param context the context
-   * @param index the index
-   * @throws Exception the exception
+   * @param requestURI the requestURI
+   * @return the editor setting
    */
-  void initPreview(String uuid, String workspace, String activityId, String context, int index) throws Exception;
+  Object initPreview(String fileId, String workspace, URI requestURI);
 
   /**
    * Gets the provider name.
@@ -75,7 +75,7 @@ public interface DocumentEditor {
    * @return the provider name
    */
   String getProviderName();
-  
+
   /**
    * Gets the permissions.
    *

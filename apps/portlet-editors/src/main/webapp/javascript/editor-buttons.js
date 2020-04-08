@@ -86,6 +86,24 @@
     };
     
     /**
+     * Saves prefered provider.
+     * 
+     */
+    var initProviders = function(fileId, workspace){
+      return $.post({
+        async : true,
+        type : "POST",
+        url : prefixUrl + "/portal/rest/documents/editors/preview",
+        data : {
+          fileId : fileId,
+          workspace : workspace
+        }
+      }).catch(function(xhr,status,error) {
+        log("Cannot init providers for file" + fileId + ": " + status + " " + error);
+      });
+    };
+    
+    /**
      * Adds editor buttons container (button and pulldown)
      */
     var addEditorButtonsContainer = function($target, fileId, buttons) {
@@ -131,10 +149,12 @@
       }
     };
     
+    
     /**
      * Adds the 'Edit Online' button to a preview (from the activity stream)
      * when it's loaded.
      */
+    // TODO: should be removed
     var tryAddEditorButtonToPreview = function(attempts, delay, fileId, buttons) {
       var $elem = $("#uiDocumentPreview .previewBtn");
       if ($elem.length == 0 || !$elem.is(":visible")) {
@@ -155,6 +175,7 @@
      * Adds the 'Edit Online' button to No-preview screen (from the activity
      * stream) when it's loaded.
      */
+    // TODO: should be removed
     var tryAddEditorButtonNoPreview = function(attempts, delay, fileId, buttons) {
       var $elem = $("#documentPreviewContainer .navigationContainer.noPreview");
       if ($elem.length == 0 || !$elem.is(":visible")) {
@@ -207,29 +228,9 @@
      * Inits buttons on document preview.
      * 
      */
-    this.initPreviewButtons = function(activityId, index, fileId, preferedProvider) {
-      var buttons = buttonsFns.slice();
-      if (buttons.length == 0) {
-        return;
-      }
-      log("Init preview buttons: " + JSON.stringify(buttons));
-      var clickSelector = "#Preview" + activityId + "-" + index;
-      if (preferedProvider != null) {
-        buttons.forEach(function(item,i){
-          if (item.provider === preferedProvider){
-            buttons.splice(i, 1);
-            buttons.unshift(item);
-          }
-        });
-      }
-      $(clickSelector).click(function() {
-        // We set timeout here to avoid the case when the element is rendered
-		// but is going to be updated soon
-        setTimeout(function() {
-          tryAddEditorButtonToPreview(100, 100, fileId, buttons);
-          // We need wait for about 2min when doc cannot generate its preview
-          tryAddEditorButtonNoPreview(600, 250, fileId, buttons);
-        }, 100);
+    this.initPreviewButtons = function(fileId, workspace) {
+      initProviders(fileId, workspace).done(function(data) {
+        console.log("PROVIDERS INITED: " + data)
       });
     };
     

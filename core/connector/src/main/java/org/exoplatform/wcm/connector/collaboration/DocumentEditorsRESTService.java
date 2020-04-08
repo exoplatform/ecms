@@ -36,6 +36,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.UriInfo;
 
+import org.exoplatform.container.PortalContainer;
 import org.exoplatform.services.cms.documents.DocumentEditorProvider;
 import org.exoplatform.services.cms.documents.DocumentService;
 import org.exoplatform.services.cms.documents.exception.DocumentEditorProviderNotFoundException;
@@ -45,6 +46,7 @@ import org.exoplatform.services.log.Log;
 import org.exoplatform.services.organization.Group;
 import org.exoplatform.services.organization.OrganizationService;
 import org.exoplatform.services.rest.resource.ResourceContainer;
+import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.social.core.identity.model.Identity;
 import org.exoplatform.social.core.identity.model.Profile;
 import org.exoplatform.social.core.identity.provider.OrganizationIdentityProvider;
@@ -235,6 +237,39 @@ public class DocumentEditorsRESTService implements ResourceContainer {
   }
 
   /**
+   * Inits preview.
+   *
+   * @param fileId the file id
+   * @param workspace the workspace
+   * @return the response
+   */
+  @POST
+  @Path("/preview")
+  @RolesAllowed("users")
+  public Response initPreview(@Context UriInfo uriInfo,
+                              @FormParam("fileId") String fileId,
+                              @FormParam("workspace") String workspace) {
+    org.exoplatform.services.security.Identity identity = ConversationState.getCurrent().getIdentity();
+    List<ProviderInfo> providersInfo = documentService.getDocumentEditorProviders()
+                                                      .stream()
+                                                      .filter(provider -> provider.isAvailableForUser(identity))
+                                                      .map(provider -> {
+                                                        Object editorSettings = null;
+                                                        try {
+                                                          editorSettings = provider.initPreview(fileId,
+                                                                                                workspace,
+                                                                                                uriInfo.getRequestUri());
+                                                        } catch (Exception e) {
+                                                          LOG.error("Cannot init preview for provider "
+                                                              + provider.getProviderName(), e);
+                                                        }
+                                                        return new ProviderInfo(provider.getProviderName(), editorSettings);
+                                                      })
+                                                      .collect(Collectors.toList());
+    return Response.ok().entity(providersInfo).build();
+  }
+
+  /**
    * Inits the links.
    *
    * @param provider the provider
@@ -299,6 +334,71 @@ public class DocumentEditorsRESTService implements ResourceContainer {
     }).collect(Collectors.toList());
 
     return new DocumentEditorData(provider.getProviderName(), provider.isActive(), permissions);
+  }
+
+  /**
+   * Platform base url.
+   *
+   * @param schema the schema
+   * @param host the host
+   * @param port the port
+   * @return the string builder
+   */
+  protected StringBuilder baseUrl(String schema, String host, int port) {
+    StringBuilder platformUrl = new StringBuilder();
+    platformUrl.append(schema);
+    platformUrl.append("://");
+    platformUrl.append(host);
+    if (port >= 0 && port != 80 && port != 443) {
+      platformUrl.append(':');
+      platformUrl.append(port);
+    }
+    platformUrl.append('/');
+    platformUrl.append(PortalContainer.getCurrentPortalContainerName());
+
+    return platformUrl;
+  }
+
+  /**
+   * The Class ProviderInfo.
+   */
+  public static class ProviderInfo {
+
+    /** The provider. */
+    private final String provider;
+
+    /** The settings. */
+    private final Object settings;
+
+    /**
+     * Instantiates a new provider info.
+     *
+     * @param provider the provider
+     * @param settings the settings
+     */
+    public ProviderInfo(String provider, Object settings) {
+      this.provider = provider;
+      this.settings = settings;
+    }
+
+    /**
+     * Gets the provider.
+     *
+     * @return the provider
+     */
+    public String getProvider() {
+      return provider;
+    }
+
+    /**
+     * Gets the settings.
+     *
+     * @return the settings
+     */
+    public Object getSettings() {
+      return settings;
+    }
+
   }
 
 }

@@ -106,6 +106,9 @@
     <depends>
       <module>openDocumentInOffice</module>
     </depends>
+    <depends>
+      <module>editorbuttons</module>
+    </depends>
   </module>
   <module>
     <name>composerMultiUpload</name>
