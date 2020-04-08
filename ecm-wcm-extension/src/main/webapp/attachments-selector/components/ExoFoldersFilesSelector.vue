@@ -1,16 +1,37 @@
 <template>
   <div class="serverFiles">
     <div class="contentHeader">
+      <div class="currentDirectory">
+        <div class="documents" @click="fetchUserDrives()">
+          <i class="uiIconFolder"></i>
+          <p class="documents" data-toggle="tooltip" rel="tooltip" data-placement="bottom" data-original-title="Documents">
+            Drives
+          </p>
+        </div>
+      </div>
+      <div v-for="action in attachmentsComposerActions" :key="action.key" :class="`${action.appClass}Action`" class="searchBox">
+        <v-icon :class="action.iconClass" @click="executeAction(action)">cloud</v-icon>
+        <component :is="action.component"></component>
+      </div>
+    </div>
+    <div class="contentHeader">
       <div v-if="!showSearchInput" class="currentDirectory">
         <div class="documents" @click="fetchUserDrives()">
           <i class="uiIconFolder"></i>
-          <p class="documents" data-toggle="tooltip" rel="tooltip" data-placement="bottom"
-             data-original-title="Documents">{{ $t('attachments.drawer.documents') }}</p>
+          <p class="documents" data-toggle="tooltip" rel="tooltip" data-placement="bottom" data-original-title="Documents">
+            {{ $t('attachments.drawer.documents') }}
+          </p>
         </div>
         <div v-if="currentDrive.title" class="currentDrive" @click="openDrive(currentDrive)">
           <span class="uiIconArrowRight"></span>
-          <a :title="currentDrive.title" :class="currentDrive.isSelected? 'active' : ''" class="currentDriveTitle" data-toggle="tooltip" rel="tooltip"
-             data-placement="bottom">
+          <a
+            :title="currentDrive.title"
+            :class="currentDrive.isSelected ? 'active' : ''"
+            class="currentDriveTitle"
+            data-toggle="tooltip"
+            rel="tooltip"
+            data-placement="bottom"
+          >
             {{ currentDrive.title }}
           </a>
         </div>
@@ -24,7 +45,11 @@
               </ul>
             </div>
           </div>
-          <div v-for="folderHis in foldersHistory.slice(foldersHistory.length-2,foldersHistory.length)" :key="folderHis" class="folderHistory">
+          <div
+            v-for="folderHis in foldersHistory.slice(foldersHistory.length - 2, foldersHistory.length)"
+            :key="folderHis"
+            class="folderHistory"
+          >
             <span class="uiIconArrowRight"></span>
             <a :title="folderHis.title" :class="folderHis.isSelected? 'active' : ''" class="currentSpaceDirectory" data-toggle="tooltip" rel="tooltip"
                data-placement="bottom" @click="openFolder(folderHis)">
@@ -33,9 +58,19 @@
           </div>
         </div>
       </div>
-      <div :class="showSearchInput? 'visible' : ''" class="searchBox">
-        <input id="searchServerAttachments" ref="searchServerAttachments" v-model="searchFilesFolders" type="text" class="searchInput">
-        <a :class="showSearchInput ? 'uiIconCloseServerAttachments' : 'uiIconSearch'" class="uiIconLightGray" @click="showSearchDocumentInput()"></a>
+      <div :class="showSearchInput ? 'visible' : ''" class="searchBox">
+        <input
+          id="searchServerAttachments"
+          ref="searchServerAttachments"
+          v-model="searchFilesFolders"
+          type="text"
+          class="searchInput"
+        />
+        <a
+          :class="showSearchInput ? 'uiIconCloseServerAttachments' : 'uiIconSearch'"
+          class="uiIconLightGray"
+          @click="showSearchDocumentInput()"
+        ></a>
       </div>
     </div>
 
@@ -43,20 +78,20 @@
       <div class="selectionBox">
         <div v-if="loadingFolders" class="VuetifyApp loader">
           <v-app class="VuetifyApp">
-            <v-progress-circular
-              :size="30"
-              :width="3"
-              indeterminate
-              class="loadingRing"
-              color="#578dc9" />
+            <v-progress-circular :size="30" :width="3" indeterminate class="loadingRing" color="#578dc9" />
           </v-app>
         </div>
         <div v-if="emptyFolder" class="emptyFolder">
           <i class="uiIconEmptyFolder"></i>
           <p>This folder is empty</p>
         </div>
-        <div v-for="driver in filteredDrivers" :key="driver.name" :title="driver.title" class="folderSelection"
-             @click="openDrive(driver)">
+        <div
+          v-for="driver in filteredDrivers"
+          :key="driver.name"
+          :title="driver.title"
+          class="folderSelection"
+          @click="openDrive(driver)"
+        >
           <a :data-original-title="driver.title" rel="tooltip" data-placement="bottom">
             <i :class="driver.driveTypeCSSClass" class="uiIconEcms24x24DriveGroup uiIconEcmsLightGray selectionIcon center"></i>
             <div class="selectionLabel center">{{ driver.title }}</div>
@@ -90,7 +125,14 @@
       </div>
       <div v-if="!modeFolderSelection" class="buttonActions">
         <button class="btn" type="button" @click="$emit('cancel')">{{ $t('attachments.drawer.cancel') }}</button>
-        <button :disabled="selectedFiles.length === 0" class="btn btn-primary attach ignore-vuetify-classes" type="button" @click="addSelectedFiles()">{{ $t('attachments.drawer.select') }}</button>
+        <button
+          :disabled="selectedFiles.length === 0"
+          class="btn btn-primary attach ignore-vuetify-classes"
+          type="button"
+          @click="addSelectedFiles()"
+        >
+          {{ $t('attachments.drawer.select') }}
+        </button>
       </div>
     </div>
   </div>
@@ -98,6 +140,7 @@
 
 <script>
 import * as attachmentsService from '../attachmentsService.js';
+import { getAttachmentsComposerExtensions, executeExtensionAction } from '../extension';
 
 export default {
   props: {
@@ -111,12 +154,12 @@ export default {
     },
     spaceId: {
       type: String,
-      default: ''
+      default: '',
     },
     attachedFiles: {
       type: Array,
-      default: () => []
-    }
+      default: () => [],
+    },
   },
   data() {
     return {
@@ -124,7 +167,7 @@ export default {
       currentDrive: {
         name: '',
         title: '',
-        isSelected: false
+        isSelected: false,
       },
       driveRootPath: '',
       drivers: [],
@@ -140,15 +183,16 @@ export default {
       filesCountClass: '',
       selectedFolderPath : '',
       schemaFolder: '',
-      folderDestinationForFile:''
+      folderDestinationForFile:'',
+      attachmentsComposerActions: []
     };
   },
   computed: {
     filteredFolders() {
       let folders = this.folders.slice();
-      if (this.searchFilesFolders && this.searchFilesFolders.trim().length){
+      if (this.searchFilesFolders && this.searchFilesFolders.trim().length) {
         const searchTerm = this.searchFilesFolders.trim().toLowerCase();
-        folders = this.folders.filter(folder => folder.name.toLowerCase().indexOf(searchTerm) >= 0 );
+        folders = this.folders.filter((folder) => folder.name.toLowerCase().indexOf(searchTerm) >= 0);
       }
       const txt = document.createElement('textarea');
       folders.forEach((folder) => {
@@ -159,21 +203,21 @@ export default {
     },
     filteredFiles() {
       let files = this.files.slice();
-      if (this.searchFilesFolders && this.searchFilesFolders.trim().length){
+      if (this.searchFilesFolders && this.searchFilesFolders.trim().length) {
         const searchTerm = this.searchFilesFolders.trim().toLowerCase();
-        files = this.files.filter(file => file.name.toLowerCase().indexOf(searchTerm) >= 0 );
+        files = this.files.filter((file) => file.name.toLowerCase().indexOf(searchTerm) >= 0);
       }
       return files;
     },
     filteredDrivers() {
       let drivers = this.drivers.slice();
-      if (this.searchFilesFolders && this.searchFilesFolders.trim().length){
+      if (this.searchFilesFolders && this.searchFilesFolders.trim().length) {
         const searchTerm = this.searchFilesFolders.trim().toLowerCase();
-        drivers = this.drivers.filter(driver => driver.title.toLowerCase().indexOf(searchTerm) >= 0 );
+        drivers = this.drivers.filter((driver) => driver.title.toLowerCase().indexOf(searchTerm) >= 0);
       }
       return drivers;
     },
-    filesCountLeft(){
+    filesCountLeft() {
       return this.maxFilesCount - this.selectedFiles.length;
     },
     emptyFolder() {
@@ -186,30 +230,35 @@ export default {
   watch: {
     filesCountLeft() {
       this.filesCountClass = this.filesCountLeft === 0 ? 'noFilesLeft' : '';
-    }
+    },
   },
   created() {
     this.selectedFiles = this.attachedFiles.slice();
     const self = this;
-    const spaceId = this.getURLQueryParam('spaceId') ? this.getURLQueryParam('spaceId') : `${eXo.env.portal.spaceId}` ? `${eXo.env.portal.spaceId}` : this.spaceId;
-    attachmentsService.getSpaceById(spaceId).then( space => {
-      if(space.id) {
+    const spaceId = this.getURLQueryParam('spaceId')
+      ? this.getURLQueryParam('spaceId')
+      : `${eXo.env.portal.spaceId}`
+      ? `${eXo.env.portal.spaceId}`
+      : this.spaceId;
+    attachmentsService.getSpaceById(spaceId).then((space) => {
+      if (space.id) {
         self.space = space;
         const spaceGroupId = space.groupId.split('/spaces/')[1];
         self.currentDrive = {
           name: `.spaces.${spaceGroupId}`,
           title: spaceGroupId,
-          isSelected: true
+          isSelected: true,
         };
       } else {
         self.currentDrive = {
           name: 'Personal Documents',
           title: 'Personal Documents',
-          isSelected: true
+          isSelected: true,
         };
       }
       self.fetchChildrenContents('');
     });
+    this.attachmentsComposerActions = getAttachmentsComposerExtensions();
   },
   methods: {
     openFolder: function(folder) {
@@ -237,23 +286,26 @@ export default {
       this.currentDrive = {
         name: drive.name,
         title: drive.title,
-        isSelected: true
+        isSelected: true,
       };
       this.fetchChildrenContents('');
     },
     fetchChildrenContents: function(parentPath) {
       this.loadingFolders = true;
       const self = this;
-      attachmentsService.fetchFoldersAndFiles(this.currentDrive.name, this.workspace, parentPath).then(xml => {
-        const rootFolder = xml.childNodes[0];
-        if(rootFolder.getAttribute('path') === '/') {
-          self.driveRootPath = `${rootFolder.getAttribute('path')}`;
-        } else if (parentPath === '') {
-          self.driveRootPath = `${rootFolder.getAttribute('path')}/`;
-        }
-        self.setFoldersAndFiles(rootFolder);
-        self.loadingFolders = false;
-      }).catch(() => this.loadingFolders = false);
+      attachmentsService
+        .fetchFoldersAndFiles(this.currentDrive.name, this.workspace, parentPath)
+        .then((xml) => {
+          const rootFolder = xml.childNodes[0];
+          if (rootFolder.getAttribute('path') === '/') {
+            self.driveRootPath = `${rootFolder.getAttribute('path')}`;
+          } else if (parentPath === '') {
+            self.driveRootPath = `${rootFolder.getAttribute('path')}/`;
+          }
+          self.setFoldersAndFiles(rootFolder);
+          self.loadingFolders = false;
+        })
+        .catch(() => (this.loadingFolders = false));
     },
     fetchUserDrives() {
       this.resetExplorer();
@@ -261,18 +313,21 @@ export default {
       this.currentDrive = {};
       this.foldersHistory = [];
       const self = this;
-      attachmentsService.getDrivers().then(xml => {
-        const drivers = xml.childNodes[0].childNodes;
-        self.setDrivers(drivers);
-        this.loadingFolders = false;
-      }).catch(() => this.loadingFolders = false);
+      attachmentsService
+        .getDrivers()
+        .then((xml) => {
+          const drivers = xml.childNodes[0].childNodes;
+          self.setDrivers(drivers);
+          this.loadingFolders = false;
+        })
+        .catch(() => (this.loadingFolders = false));
     },
     resetExplorer() {
       this.drivers = [];
       this.folders = [];
       this.files = [];
     },
-    getRelativePath: function (absolutePath) {
+    getRelativePath: function(absolutePath) {
       if (absolutePath && absolutePath.startsWith(this.driveRootPath)) {
         return absolutePath.substr(this.driveRootPath.length);
       }
@@ -286,70 +341,81 @@ export default {
     selectFile(file) {
       if (document.getElementById(file.idAttribute).className === 'fileSelection' && this.filesCountLeft > 0) {
         document.getElementById(file.idAttribute).className = 'fileSelection selected';
-        if (!this.selectedFiles.find(f => f.id === file.id)) {
+        if (!this.selectedFiles.find((f) => f.id === file.id)) {
           this.selectedFiles.push(file);
         }
       } else {
         document.getElementById(file.idAttribute).className = 'fileSelection';
-        const index = this.selectedFiles.findIndex(f => f.id === file.id);
-        if(index !== -1 ){
+        const index = this.selectedFiles.findIndex((f) => f.id === file.id);
+        if (index !== -1) {
           this.selectedFiles.splice(index, 1);
         }
       }
     },
     generateHistoryTree(folder) {
-      if (!this.foldersHistory.find(f => f.name === folder.name) && folder) {
+      if (!this.foldersHistory.find((f) => f.name === folder.name) && folder) {
         this.foldersHistory.push({
           name: folder.name,
           title: folder.title,
           path: folder.driverType ? '' : folder.path,
-          driverType: folder.driverType ? folder.driverType : ''
+          driverType: folder.driverType ? folder.driverType : '',
         });
       }
-      if (!folder.driverType && folder.path){
-        this.foldersHistory = this.foldersHistory.filter(ele =>
-          folder.path.split('/').find(f => f === ele.name)
-        );
+      if (!folder.driverType && folder.path) {
+        this.foldersHistory = this.foldersHistory.filter((ele) => folder.path.split('/').find((f) => f === ele.name));
       }
       this.currentDrive.isSelected = false;
-      this.foldersHistory.forEach(f => f.isSelected = false);
-      this.foldersHistory.find(f => f.name === folder.name).isSelected = true;
+      this.foldersHistory.forEach((f) => (f.isSelected = false));
+      this.foldersHistory.find((f) => f.name === folder.name).isSelected = true;
     },
     addSelectedFiles() {
       this.$emit('itemsSelected', this.selectedFiles);
     },
     showSearchDocumentInput() {
       this.showSearchInput = !this.showSearchInput;
-      document.getElementById('searchServerAttachments').style.display = this.showSearchInput? 'block' : 'none';
+      document.getElementById('searchServerAttachments').style.display = this.showSearchInput ? 'block' : 'none';
       this.$refs.searchServerAttachments.focus();
       this.searchFilesFolders = '';
     },
     setFoldersAndFiles(rootFolder) {
       const fetchedDocuments = rootFolder.childNodes;
-      for(let i = 0; i < fetchedDocuments.length; i++) {
-        if(fetchedDocuments[i].tagName === 'Folders') {
+      for (let i = 0; i < fetchedDocuments.length; i++) {
+        if (fetchedDocuments[i].tagName === 'Folders') {
           const fetchedFolders = fetchedDocuments[i].childNodes;
           for (let j = 0; j < fetchedFolders.length; j++) {
             const folderType = fetchedFolders[j].getAttribute('nodeType');
             const folderTypeCSSClass = `uiIcon24x24${folderType.replace(':', '_')}`;
-            const id = fetchedFolders[j].getAttribute('path').split('/').pop();
+            const id = fetchedFolders[j]
+              .getAttribute('path')
+              .split('/')
+              .pop();
             this.folders.push({
               id: id,
               name: fetchedFolders[j].getAttribute('name'),
               title: fetchedFolders[j].getAttribute('title'),
               path: fetchedFolders[j].getAttribute('currentFolder'),
               folderTypeCSSClass: folderTypeCSSClass,
-              isSelected: false
+              isSelected: false,
             });
           }
-        } else if(fetchedDocuments[i].tagName === 'Files') {
+        } else if (fetchedDocuments[i].tagName === 'Files') {
           const fetchedFiles = fetchedDocuments[i].childNodes;
           for (let j = 0; j < fetchedFiles.length; j++) {
-            const fileExtension = `${fetchedFiles[j].getAttribute('name').split('.')[1].charAt(0).toUpperCase()}${fetchedFiles[j].getAttribute('name').split('.')[1].substring(1)}`;
+            const fileExtension = `${fetchedFiles[j]
+              .getAttribute('name')
+              .split('.')[1]
+              .charAt(0)
+              .toUpperCase()}${fetchedFiles[j]
+              .getAttribute('name')
+              .split('.')[1]
+              .substring(1)}`;
             const fileTypeCSSClass = `uiBgd64x64File${fileExtension}`;
-            const idAttribute = fetchedFiles[j].getAttribute('path').split('/').pop();
+            const idAttribute = fetchedFiles[j]
+              .getAttribute('path')
+              .split('/')
+              .pop();
             const id = fetchedFiles[j].getAttribute('id');
-            const selected = this.attachedFiles.some(f => f.id === id);
+            const selected = this.attachedFiles.some((f) => f.id === id);
             this.files.push({
               id: id,
               name: fetchedFiles[j].getAttribute('name'),
@@ -366,12 +432,12 @@ export default {
       }
     },
     setDrivers(drivers) {
-      for(let i = 0; i < drivers.length; i++) {
-        if(drivers[i].tagName === 'Folders') {
+      for (let i = 0; i < drivers.length; i++) {
+        if (drivers[i].tagName === 'Folders') {
           const fetchedDrivers = drivers[i].childNodes;
           let driverTypeClass;
           const driverType = drivers[i].getAttribute('name');
-          if(driverType === 'Personal Drives') {
+          if (driverType === 'Personal Drives') {
             driverTypeClass = 'uiIconEcms24x24DrivePrivate';
           } else {
             driverTypeClass = `uiIconEcms24x24Drive${driverType.split(' ')[0]}`;
@@ -386,7 +452,7 @@ export default {
               css: fetchedDrivers[j].getAttribute('nodeTypeCssClass'),
               type: 'drive',
               driveTypeCSSClass: driveTypeCSSClass,
-              driverType: driverType
+              driverType: driverType,
             });
           }
         }
@@ -403,7 +469,10 @@ export default {
       } else {
         this.$emit('itemsSelected', this.selectedFolderPath, this.schemaFolder);
       }
+    },
+    executeAction(action) {
+      executeExtensionAction(action);
     }
-  }
+  },
 };
 </script>

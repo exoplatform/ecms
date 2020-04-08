@@ -17,7 +17,7 @@ const url = `/portal/rest/i18n/bundle/locale.attachmentsSelector.attachments-${l
 
 // get overridden components if exist
 if (extensionRegistry) {
-  const components = extensionRegistry.loadComponents('attachmentsSelector');
+  const components = extensionRegistry.loadComponents('AttachmentsComposer');
   if (components && components.length > 0) {
     components.forEach(cmp => {
       Vue.component(cmp.componentName, cmp.componentOptions);
