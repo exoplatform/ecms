@@ -1,8 +1,8 @@
 import "./css/cloud-drive.less";
-import ConnectCloud from "./components/ConnectCloud.vue";
+import ConnectCloudDrive from "./components/ConnectCloudDrive.vue";
 
 Vue.use(Vuetify);
-Vue.component("connect-cloud", ConnectCloud);
+Vue.component("connect-cloud-drive", ConnectCloudDrive);
 
 const vuetify = new Vuetify({
   dark: true,
@@ -33,7 +33,7 @@ export function init() {
     // init Vue app when locale resources are ready
     connectCloudApp = new Vue({
       render: function(createElement) {
-        return createElement(ConnectCloud);
+        return createElement(ConnectCloudDrive);
       },
       i18n,
       vuetify

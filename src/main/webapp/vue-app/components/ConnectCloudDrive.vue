@@ -46,11 +46,6 @@ export default {
       selectedService: null
     };
   },
-  watch: {
-    value: function(newValue) {
-      console.log(newValue);
-    }
-  },
   methods: {
     closeCloudDrawer: function() {
       this.showCloudDrawer = false;

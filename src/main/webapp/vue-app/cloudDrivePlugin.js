@@ -1,11 +1,11 @@
 const CloudDrivePlugin = {
-  key: "cloud-drive",
+  key: "connectCloudDrive",
   rank: 20,
   labelKey: "Connect cloud documents",
   description: "Connect cloud documents",
-  iconClass: "uiIconGeneralDrive",
-  appClass: "cloud-drive",
-  component: "connect-cloud",
+  iconClass: "uiIconCloudDrive",
+  appClass: "connectCloudDrive",
+  component: "connect-cloud-drive",
   enabled: true,
   onExecute() {
     require(['SHARED/cloudDriveApp'], function(cloudDriveApp) {
@@ -15,13 +15,5 @@ const CloudDrivePlugin = {
 };
 
 require(["SHARED/extensionRegistry"], function(extensionRegistry) {
-  extensionRegistry.registerExtension("ActivityComposer", "activity-composer-action", CloudDrivePlugin);
+  extensionRegistry.registerExtension("AttachmentsComposer", "attachments-composer-action", CloudDrivePlugin);
 });
-
-// registering component instead of extension
-// import ConnectCloud from "./components/ConnectCloud.vue";
-
-// require(["SHARED/extensionRegistry"], function(extensionRegistry) {
-//   extensionRegistry.registerComponent("exoAttachmentsApp", "connect-cloud", ConnectCloud);
-//   console.log(extensionRegistry);
-// });
