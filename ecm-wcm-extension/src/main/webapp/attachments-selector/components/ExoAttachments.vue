@@ -16,19 +16,17 @@
           <div class="multiploadFilesSelector">
             <div id="DropFileBox" ref="dropFileBox" class="dropFileBox">
               <div class="contentAttachments">
-                <div class="contentDargAndDrop">
+                <div class="contentDragAndDrop">
                   <div class="contentDrop">
                     <div class="icon"><i class="uiIconTemplate uiIcon32x32LightGray colorText"></i></div>
                     <div><span class="dropMsg colorText">{{ $t('attachments.drawer.drop') }}</span></div>
                   </div>
                   <div class="contentUpload">
-                    <div class="icon"><i class="fas fa-download uiIcon32x32LightGray colorIcon"></i></div>
-                    <div class="uploadMobile">
-                      <a :title="$t('attachments.drawer.upload')" class="uploadButton" href="#" rel="tooltip" data-placement="bottom" @click="uploadFile">
-                        <span class="text colorText">{{ $t('attachments.drawer.upload') }}</span>
-                        <span class="mobileText">{{ $t('attachments.drawer.upload') }}</span>
-                      </a>
-                    </div>
+                    <a :title="$t('attachments.drawer.upload')" class="uploadButton" href="#" rel="tooltip" data-placement="bottom" @click="uploadFile">
+                      <i class="fas fa-download uiIcon32x32LightGray colorIcon"></i>
+                      <span class="text colorText">{{ $t('attachments.drawer.upload') }}</span>
+                      <span class="mobileText">{{ $t('attachments.drawer.upload') }}</span>
+                    </a>
                   </div>
                 </div>
                 <div class="contentOR">
@@ -37,14 +35,10 @@
                   <div class="item"><span class="colorText"><hr class="rightLine"></span></div>
                 </div>
                 <div class="lastContent">
-                  <div class="icon">
+                  <a title="Select on server" class="uploadButton" href="#" rel="tooltip" data-placement="bottom" @click="toggleServerFileSelector()">
                     <i class="uiIconFolderSearch uiIcon32x32LightGray"></i>
-                  </div>
-                  <div class="text">
-                    <a title="Select on server" class="uploadButton" href="#" rel="tooltip" data-placement="bottom" @click="toggleServerFileSelector()">
-                      <span class="text colorText">{{ $t('attachments.drawer.existingUploads') }}</span>
-                    </a>
-                  </div>
+                    <span class="text colorText">{{ $t('attachments.drawer.existingUploads') }}</span>
+                  </a>
                 </div>
               </div>
             </div>
@@ -114,6 +108,16 @@ export default {
       type: String,
       default: ''
     },
+    maxFilesCount: {
+      type: Number,
+      required: false,
+      default: 20
+    },
+    maxFileSize: {
+      type: Number,
+      required: false,
+      default: 25
+    },
     showAttachmentsDrawer: {
       type: Boolean,
       default: false
@@ -132,8 +136,6 @@ export default {
       filesCountLimitError: false,
       sameFileError: false,
       sameFileErrorMessage: `${this.$t('attachments.drawer.sameFile.error')}`,
-      maxFileSize: 25,
-      maxFilesCount: 20,
       BYTES_IN_MB: 1048576,
       MESSAGES_DISPLAY_TIME: 5000,
       drawerTitle: `${this.$t('attachments.drawer.header')}`
@@ -176,6 +178,10 @@ export default {
     this.$refs.dropFileBox.addEventListener('drop', function(e) {
       this.handleFileUpload( e.dataTransfer.files );
     }.bind(this));
+
+    window.require(['SHARED/jquery'], function($) {
+      $('#exoAttachmentsApp *[rel="tooltip"]').tooltip();
+    });
   },
   methods: {
     closeAttachments: function() {
