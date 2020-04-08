@@ -300,7 +300,8 @@
         flex-direction: column;
         width: 100%;
         height: 100%;
-        .contentDargAndDrop{
+        padding: 15px 0;
+        .contentDragAndDrop{
           display: flex;
           flex-direction: row;
           height: 70%;
@@ -308,22 +309,23 @@
             display: flex;
             flex-direction: column;
             width: 50%;
-            padding: 19px 1px 1px;
             .icon{
               padding: 5px;
             }
           }
         }
-        .contentUpload{
+        .contentUpload {
           display: flex;
           flex-direction: column;
           width: 50%;
-          padding: 19px 1px 1px;
-          .colorIcon{
-            color: #578cc9;
-          }
-          .icon{
-            padding: 6px;
+          .uploadButton {
+            display: flex;
+            flex-direction: column;
+            .colorIcon {
+              color: #578cc9;
+              cursor: pointer;
+              padding: 7px;
+            }
           }
         }
         .contentOR{
@@ -356,14 +358,15 @@
         .lastContent{
           height: 33%;
           display: flex;
-          flex-direction: row;
-          .icon{
-            width: 40%;
+          justify-content: center;
+          align-items: center;
+
+          a {
+            display: flex;
+                align-items: center;
           }
           .text{
-            width:65%;
-            margin-left:-37px;
-            padding:6px;
+            padding-left: 6px;
           }
         }
       }
@@ -678,16 +681,6 @@
         padding: 35px 1px 1px;
       }
 
-      .text {
-        width: 100%;
-        margin-left: -39px;
-        padding: 0px;
-      }
-
-      .icon {
-        width: 62%;
-      }
-
       .contentDrop {
         display: none;
       }
@@ -697,18 +690,22 @@
         flex-direction: row;
         width: 100%;
 
-        .icon {
-          width: 73%;
-        }
+        .uploadButton {
+          display: inline-block;
+          width: 100%;
 
-        .text {
-          padding: 8px;
-        }
+          .colorIcon {
+            padding-top: 0;
+          }
 
-        .uploadMobile {
-          width: 170%;
-          margin-left: -36%;
+          .text {
+            padding: 8px;
+          }
         }
+      }
+
+      .lastContent a {
+        align-items: flex-end;
       }
     }
   }
