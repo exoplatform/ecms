@@ -1,0 +1,194 @@
+@import "../../../variables.less";
+
+#editors-admin {
+  .editorsTitle {
+    color: #4d5466;
+    font-size: 24px;
+    position: relative;
+    overflow: hidden;
+
+    &:after {
+      border-bottom: 1px solid #dadada;
+      height: 11px;
+      content: "";
+      position: absolute;
+      width: 100%;
+      margin-left: 10px;
+    }
+  }
+
+  .providersTable {
+    border-left: 0;
+
+    &Row {
+      th,
+      td {
+        height: 20px;
+        padding: 5px 15px;
+      }
+
+      &:nth-child(even):hover > td,
+      &:nth-child(even) > td {
+        background: #f6f7fa !important;
+      }
+
+      &:nth-child(odd):hover > td,
+      &:nth-child(odd) > td {
+        background: @baseBackground !important;
+      }
+    }
+  }
+
+  .providersSwitcher {
+    padding: 0;
+    margin: 0;
+    height: 25px;
+  }
+}
+
+.edit-dialog {
+  .provider {
+    max-width: 100%;
+    border: 0;
+
+    &Header {
+      padding: 12px 10px 12px 15px;
+      height: 20px;
+
+      &Title {
+        line-height: 18px;
+      }
+
+      &Close {
+        top: 13px;
+      }
+    }
+
+    &Content {
+      max-height: 550px;
+    }
+
+    &Name {
+      color: @textColor;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .search {
+      &Label {
+        color: @textColor;
+        margin-bottom: 10px;
+      }
+
+      &Permissions {
+        border: Solid 2px @borderColor;
+        border-radius: 5px;
+        box-shadow: none;
+
+        &:focus {
+          border-color: #a6bad6;
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 5px #c9d5e6;
+        }
+      }
+
+      &Chip.v-chip {
+        background: #ccddef;
+        color: @colorIconDefault;
+        border: 1px solid @colorIconDefault;
+        border-radius: 15px;
+        margin: 4px 10px 4px 4px;
+        font-size: 13px;
+      }
+    }
+
+    .permissions {
+      &Container {
+        min-height: 100px;
+      }
+
+      &List {
+        min-height: 100px;
+        overflow-y: auto;
+      }
+
+      &Item {
+        display: flex;
+        align-items: center;
+        height: 30px;
+
+        &--large {
+          height: 40px;
+          margin: 5px 0;
+          justify-content: space-between;
+        }
+
+        &--removed {
+          .permissionsItemName {
+            text-decoration: line-through;
+          }
+
+          .permissionsItemDelete {
+            color: @borderColor;
+            cursor: initial;
+          }
+        }
+
+        &Avatar {
+          max-height: 26px;
+          margin-right: 5px;
+
+          &--large {
+            max-height: 40px;
+          }
+        }
+
+        &Name {
+          color: #303030;
+          font-family: inherit;
+          font-size: 13px;
+          line-height: 18px;
+        }
+
+        &Delete {
+          cursor: pointer;
+        }
+      }
+    }
+
+    .dialogFooter {
+      &Btn.v-size--default {
+        font-family: Helvetica, arial, sans-serif;
+        font-size: 15px;
+        padding: 9px 20px !important;
+        color: #4d5466;
+        border: 1px solid @borderColor;
+        box-shadow: none;
+        box-sizing: border-box;
+        border-radius: @baseBorderRadius;
+        height: 40px;
+        letter-spacing: normal;
+        min-width: 100px !important;
+
+        &:hover {
+          background-color: @borderColor;
+        }
+
+        &.btn-primary {
+          color: @baseBackground;
+
+          &:hover {
+            background-color: @infoColor;
+            background-position: 0 -45px;
+            transition: background-position 0.1s linear;
+          }
+        }
+      }
+    }
+  }
+}
+
+.alert {
+  position: fixed !important;
+  left: 50%;
+  transform: translate(-50%, 0);
+}

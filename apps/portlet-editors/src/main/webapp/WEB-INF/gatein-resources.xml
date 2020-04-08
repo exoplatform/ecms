@@ -33,13 +33,5 @@
     <skin-module>editors</skin-module>
     <css-path>/css/editors.css</css-path>
   </portal-skin>
-  
-  <portlet-skin>
-    <application-name>editors</application-name>
-    <portlet-name>EditorsAdminPortlet</portlet-name>
-    <skin-name>Enterprise</skin-name>
-    <css-path>/css/editors-admin.css</css-path>
-    <overwrite>true</overwrite>
-  </portlet-skin>
-  
+
 </gatein-resources>
