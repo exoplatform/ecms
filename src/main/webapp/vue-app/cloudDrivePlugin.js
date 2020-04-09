@@ -1,19 +1,22 @@
-const CloudDrivePlugin = {
+const CloudDrivePlugin = [{
   key: "connectCloudDrive",
   rank: 20,
-  labelKey: "Connect cloud documents",
-  description: "Connect cloud documents",
   iconClass: "uiIconCloudDrive",
   appClass: "connectCloudDrive",
-  component: "connect-cloud-drive",
+  component: {
+    name: "connect-cloud-drive"
+  },
   enabled: true,
-  onExecute() {
+  onExecute(cloudDriveComponent) {
+    console.log(cloudDriveComponent);
     require(['SHARED/cloudDriveApp'], function(cloudDriveApp) {
       cloudDriveApp.init();
     });
   }
-};
+}];
 
 require(["SHARED/extensionRegistry"], function(extensionRegistry) {
-  extensionRegistry.registerExtension("AttachmentsComposer", "attachments-composer-action", CloudDrivePlugin);
+  for (const extension of CloudDrivePlugin) {
+    extensionRegistry.registerExtension("AttachmentsComposer", "attachments-composer-action", extension);
+  }
 });
