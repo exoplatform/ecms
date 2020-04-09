@@ -73,6 +73,7 @@ public class FileSearchServiceConnector extends ElasticSearchServiceConnector {
   protected String getSourceFields() {
     List<String> fields = Arrays.asList("name",
             "title",
+            "tag",
             "workspace",
             "path",
             "author",
@@ -117,6 +118,7 @@ public class FileSearchServiceConnector extends ElasticSearchServiceConnector {
     SearchResult ecmsSearchResult = new EcmsSearchResult(getUrl(nodePath),
             getPreviewUrl(jsonHit, searchContext),
             searchResult.getTitle(),
+            searchResult.getTags(),
             searchResult.getExcerpt(),
             detail,
             getImageUrl(workspace, nodePath),

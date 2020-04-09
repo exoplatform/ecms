@@ -49,6 +49,38 @@ public class EcmsSearchResult extends SearchResult {
   public EcmsSearchResult(String url,
                           String urlOnImage,
                           String title,
+                          String tag,
+                          String excerpt,
+                          String detail,
+                          String imageUrl,
+                          long date,
+                          long relevancy,
+                          String fileType,
+                          String nodePath) {
+    this(url, urlOnImage, title, tag, excerpt, detail, imageUrl, date, relevancy, fileType, nodePath, null);
+  }
+
+  public EcmsSearchResult(String url,
+                          String urlOnImage,
+                          String title,
+                          String tag,
+                          String excerpt,
+                          String detail,
+                          String imageUrl,
+                          long date,
+                          long relevancy,
+                          String fileType,
+                          String nodePath,
+                          Map<String, List<String>> breadcrumb) {
+    super(url, urlOnImage, title, tag, excerpt, detail, imageUrl, date, relevancy);
+    this.fileType = fileType;
+    this.nodePath = nodePath;
+    this.breadcrumb = breadcrumb;
+  }
+
+  public EcmsSearchResult(String url,
+                          String urlOnImage,
+                          String title,
                           String excerpt,
                           String detail,
                           String imageUrl,
