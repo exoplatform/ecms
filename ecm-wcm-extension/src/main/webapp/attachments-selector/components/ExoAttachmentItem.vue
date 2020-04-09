@@ -1,5 +1,5 @@
 <template>
-  <div class="file">
+  <div class="attachment">
     <div class="fileType">
       <i :class="getIconClassFromFileMimeType(file.mimetype)" class="uiIconFileTypeDefault"></i>
     </div>
