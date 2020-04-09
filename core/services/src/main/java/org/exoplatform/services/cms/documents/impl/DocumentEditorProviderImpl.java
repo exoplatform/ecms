@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 import org.exoplatform.commons.api.settings.SettingService;
 import org.exoplatform.commons.api.settings.SettingValue;
@@ -195,10 +196,12 @@ public class DocumentEditorProviderImpl implements DocumentEditorProvider {
    * @param fileId the uuid
    * @param workspace the workspace
    * @param requestURI the requestURI
+   * @param locale the locale
+   * @return settings object
    */
   @Override
-  public Object initPreview(String fileId, String workspace, URI requestURI) {
-    return editor.initPreview(fileId, workspace, requestURI);
+  public Object initPreview(String fileId, String workspace, URI requestURI, Locale locale) {
+    return editor.initPreview(fileId, workspace, requestURI, locale);
   }
 
   /**

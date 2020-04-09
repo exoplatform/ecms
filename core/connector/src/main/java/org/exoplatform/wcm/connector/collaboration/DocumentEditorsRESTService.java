@@ -22,6 +22,7 @@ import java.util.stream.Collectors;
 import javax.annotation.security.RolesAllowed;
 import javax.jcr.AccessDeniedException;
 import javax.jcr.RepositoryException;
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
@@ -246,7 +247,9 @@ public class DocumentEditorsRESTService implements ResourceContainer {
   @POST
   @Path("/preview")
   @RolesAllowed("users")
+  @Produces(MediaType.APPLICATION_JSON)
   public Response initPreview(@Context UriInfo uriInfo,
+                              @Context HttpServletRequest request,
                               @FormParam("fileId") String fileId,
                               @FormParam("workspace") String workspace) {
     org.exoplatform.services.security.Identity identity = ConversationState.getCurrent().getIdentity();
@@ -258,7 +261,8 @@ public class DocumentEditorsRESTService implements ResourceContainer {
                                                         try {
                                                           editorSettings = provider.initPreview(fileId,
                                                                                                 workspace,
-                                                                                                uriInfo.getRequestUri());
+                                                                                                uriInfo.getRequestUri(),
+                                                                                                request.getLocale());
                                                         } catch (Exception e) {
                                                           LOG.error("Cannot init preview for provider "
                                                               + provider.getProviderName(), e);

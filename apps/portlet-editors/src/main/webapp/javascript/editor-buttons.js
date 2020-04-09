@@ -106,16 +106,13 @@
     /**
      * Adds editor buttons container (button and pulldown)
      */
-    var addEditorButtonsContainer = function($target, fileId, buttons) {
+    var getButtonsContaner = function(fileId, buttons, dropclass) {
       if (!buttons) {
         return;
       }
       // Add buttons container
-      var $container = $target.find(".editorButtonContainer");
-      if ($container.length == 0) {
-        $container = $("<div class='editorButtonContainer hidden-tabletL'></div>");
-        $target.append($container);
-      }
+      // var $container = $target.find(".editorButtonContainer");
+      var $container = $("<div class='editorButtonContainer hidden-tabletL'></div>");
       
       // Create editor button
       var $btn = buttons[0].createButtonFn();
@@ -147,56 +144,36 @@
         $dropdownContainer.append($dropdown);
         $container.append($dropdownContainer);
       }
+      if (dropclass) {
+        $container.addClass(dropclass);
+      }
+      return $container;
     };
-    
-    
-    /**
-     * Adds the 'Edit Online' button to a preview (from the activity stream)
-     * when it's loaded.
-     */
-    // TODO: should be removed
-    var tryAddEditorButtonToPreview = function(attempts, delay, fileId, buttons) {
-      var $elem = $("#uiDocumentPreview .previewBtn");
-      if ($elem.length == 0 || !$elem.is(":visible")) {
-        if (attempts > 0) {
-          setTimeout(function() {
-            tryAddEditorButtonToPreview(attempts - 1, delay, fileId, buttons);
-          }, delay);
-        } else {
-          log("Cannot find element " + $elem);
+
+    var loadProvidersModule = function(provider) {
+      var loader = $.Deferred();
+      // try load provider client
+      var moduleId = "SHARED/" + provider;
+      if (window.require.s.contexts._.config.paths[moduleId]) {
+        try {
+          // load client module and work with it asynchronously
+          window.require([moduleId], function(client) {
+            // FYI client module's initialization (if provided) will be invoked
+            // in initContext()
+            loader.resolve(client);
+          }, function(err) {
+            log("ERROR: Cannot load provider module " + provider + " Error:" + err.message + ": " + JSON.stringify(err), err);
+            loader.reject();
+          });
+        } catch(e) {
+          // cannot load the module - default behaviour
+          utils.log("ERROR: " + e, e);
+          loader.reject();
         }
       } else {
-        addEditorButtonsContainer($elem, fileId, buttons);
-        $(".previewBtn .editorButtonContainer").addClass("dropup");
+        loader.reject();
       }
-    };
-    
-    /**
-     * Adds the 'Edit Online' button to No-preview screen (from the activity
-     * stream) when it's loaded.
-     */
-    // TODO: should be removed
-    var tryAddEditorButtonNoPreview = function(attempts, delay, fileId, buttons) {
-      var $elem = $("#documentPreviewContainer .navigationContainer.noPreview");
-      if ($elem.length == 0 || !$elem.is(":visible")) {
-        if (attempts > 0) {
-          setTimeout(function() {
-            tryAddEditorButtonNoPreview(attempts - 1, delay, fileId, buttons);
-          }, delay);
-        } else {
-          log("Cannot find .noPreview element");
-        }
-      } else if ($elem.find("div.editorButtonContainer").length == 0) {
-        var $detailContainer = $elem.find(".detailContainer");
-        var $downloadBtn = $detailContainer.find(".uiIconDownload").closest("a.btn");
-        var $target = $("<div style='display: inline;'></div>");
-        if ($downloadBtn.length != 0) {
-          $downloadBtn.after($target);
-        } else {
-          $detailContainer.append($target);
-        }
-        addEditorButtonsContainer($target, fileId, buttons);
-      }
+      return loader.promise();
     };
     
     
@@ -221,7 +198,7 @@
         });
       }
       var $target = $("#activityContainer" + activityId).find("div[id^='ActivityContextBox'] > .actionBar .statusAction.pull-left");
-      addEditorButtonsContainer($target, fileId, buttons);
+      $target.append(getButtonsContaner(fileId, buttons, 'dropdown'));
     };
     
     /**
@@ -229,9 +206,27 @@
      * 
      */
     this.initPreviewButtons = function(fileId, workspace) {
+      buttonsFns = [];
+      var buttonsLoader = $.Deferred();
       initProviders(fileId, workspace).done(function(data) {
-        console.log("PROVIDERS INITED: " + data)
+        console.log("PROVIDERS INITED: " + JSON.stringify(data));
+        var providersLoader = $.Deferred();
+        data.forEach(function(elem, i, arr) {
+          console.log("init provider:" + elem.provider);
+          loadProvidersModule(elem.provider).done(function(module){
+            module.initPreview(elem.settings);
+            // Last provider loaded
+            if (i == (arr.length - 1)) {
+              providersLoader.resolve();
+            }
+          });
+        });
+        providersLoader.done(function(){
+          var $pulldown =  getButtonsContaner(fileId, buttonsFns, 'dropup');
+          buttonsLoader.resolve($pulldown);
+        });
       });
+      return buttonsLoader;
     };
     
     /**
@@ -250,11 +245,11 @@
     
     this.editorOpened = function(provider, fileId) {
       log("Editor opened. Provider: " + provider + ", fileId: " + fileId);
-    }
+    };
     
     this.editorClosed = function(provider, fileId) {
       log("Editor closed. Provider: " + provider + ", fileId: " + fileId);
-    }
+    };
     
     /**
      * Clears buttonsFns
@@ -262,8 +257,7 @@
      */
     this.resetButtons = function() {
       buttonsFns = [];
-    }
-    
+    };
   }
   return new EditorButtons();
 

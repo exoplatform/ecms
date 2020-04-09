@@ -19,6 +19,7 @@ package org.exoplatform.services.cms.documents;
 import java.net.URI;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * The Interface DocumentEditor.
@@ -65,9 +66,10 @@ public interface DocumentEditor {
    * @param fileId the fileId
    * @param workspace workspace
    * @param requestURI the requestURI
+   * @param locale the locale
    * @return the editor setting
    */
-  Object initPreview(String fileId, String workspace, URI requestURI);
+  <T> T initPreview(String fileId, String workspace, URI requestURI, Locale locale);
 
   /**
    * Gets the provider name.
