@@ -1,19 +1,24 @@
 <template>
   <div class="serverFiles">
-    <div class="contentHeader">
-      <div class="currentDirectory">
-        <div class="documents" @click="fetchUserDrives()">
-          <i class="uiIconFolder"></i>
-          <p class="documents" data-toggle="tooltip" rel="tooltip" data-placement="bottom" data-original-title="Documents">
-            Drives
-          </p>
-        </div>
-      </div>
-      <div v-for="action in attachmentsComposerActions" :key="action.key" :class="`${action.appClass}Action`" class="searchBox">
-        <v-icon :class="action.iconClass" @click="executeAction(action)">cloud</v-icon>
-        <component :is="action.component"></component>
-      </div>
+    <div class="VuetifyApp">
+      <v-app>
+        <div v-show="attachmentsComposerActions.length > 0" class="contentHeader">
+          <div class="currentDirectory">
+            <div class="documents" @click="fetchUserDrives()">
+              <i class="uiIconFolder"></i>
+              <p class="documents" data-toggle="tooltip" rel="tooltip" data-placement="bottom" data-original-title="Documents">
+                Drives
+              </p>
+            </div>
+          </div>
+          <div v-for="action in attachmentsComposerActions" :ref="action.key" :key="action.key" :class="`${action.appClass}Action`" class="searchBox">
+            <v-icon :class="action.iconClass" @click="executeAction(action)">cloud</v-icon>
+            <component :is="action.component.name"></component>
+          </div>
+        </div>  
+      </v-app>
     </div>
+    
     <div class="contentHeader">
       <div v-if="!showSearchInput" class="currentDirectory">
         <div class="documents" @click="fetchUserDrives()">
