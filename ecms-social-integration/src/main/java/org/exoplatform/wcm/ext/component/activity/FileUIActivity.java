@@ -68,6 +68,8 @@ import org.exoplatform.social.webui.activity.BaseUIActivity;
 import org.exoplatform.social.webui.activity.UIActivitiesContainer;
 import org.exoplatform.social.webui.composer.PopupContainer;
 import org.exoplatform.web.CacheUserProfileFilter;
+import org.exoplatform.web.application.JavascriptManager;
+import org.exoplatform.web.application.RequireJS;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
 import org.exoplatform.webui.config.annotation.*;
@@ -144,6 +146,8 @@ public class FileUIActivity extends BaseUIActivity{
   public static final String  IS_SYSTEM_COMMENT   = "isSystemComment";
 
   public static final String  SYSTEM_COMMENT      = "systemComment";
+  
+  public static final String                  STREAM_CONTEXT = "stream";
 
   private String              message;
 
@@ -1366,6 +1370,76 @@ public class FileUIActivity extends BaseUIActivity{
     } catch(Exception e) {
       return false;
     }
+  }
+  
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void end() throws Exception {
+    if (getDocumentService().getDocumentEditorProviders().size() > 0) {
+      WebuiRequestContext requestContext = WebuiRequestContext.getCurrentInstance();
+      JavascriptManager js = requestContext.getJavascriptManager();
+      String activityId = getActivity().getId();
+      Identity identity = ConversationState.getCurrent().getIdentity();
+      RequireJS require = js.require("SHARED/editorbuttons", "editorbuttons");
+      if (getFilesCount() == 1) {
+        Node node = getContentNode(0);
+        require.addScripts("editorbuttons.resetButtons();");
+        // call plugins init handlers
+        getDocumentService().getDocumentEditorProviders().forEach(provider -> {
+          try {
+            if (provider.isAvailableForUser(identity)) {
+              provider.initActivity(node.getUUID(), node.getSession().getWorkspace().getName(), activityId);
+            }
+          } catch (Exception e) {
+            LOG.error("Cannot init activity from plugin {}, {}", provider.getProviderName(), e.getMessage());
+          }
+        });
+        String prefferedEditor = getPrefferedEditor(node);
+        require.addScripts("editorbuttons.initActivityButtons('" + activityId + "', '" + node.getUUID() + "', '"
+            + node.getSession().getWorkspace().getName() + "'," + prefferedEditor + ");");
+
+      }
+
+      // Init preview links for each of file
+      for (int index = 0; index < getFilesCount(); index++) {
+        Node node = getContentNode(index);
+        require.addScripts("editorbuttons.resetButtons();");
+        // call plugins init handlers
+        for (DocumentEditorProvider provider : getDocumentService().getDocumentEditorProviders()) {
+          try {
+            if (provider.isAvailableForUser(identity)) {
+              provider.initPreview(node.getUUID(), node.getSession().getWorkspace().getName(), activityId, STREAM_CONTEXT, index);
+            }
+          } catch (Exception e) {
+            LOG.error("Cannot init preview from plugin {}, {}", provider.getProviderName(), e.getMessage());
+          }
+        }
+        String prefferedEditor = getPrefferedEditor(node);
+        require.addScripts("editorbuttons.initPreviewButtons('" + activityId + "', '" + index + "', '" + node.getUUID() + "', "
+            + prefferedEditor + ");");
+      }
+    }
+    super.end();
+  }
+  
+  /**
+   * Gets the preffered editor.
+   *
+   * @param node the node
+   * @return the preffered editor
+   * @throws Exception the exception
+   */
+  protected String getPrefferedEditor(Node node) throws Exception {
+    String userId = ConversationState.getCurrent().getIdentity().getUserId();
+    String prefferedEditor = getDocumentService().getPreferedEditor(userId, node.getUUID(), node.getSession().getWorkspace().getName());
+    if (prefferedEditor != null) {
+      prefferedEditor = "'" + prefferedEditor + "'";
+    } else {
+      prefferedEditor = "null".intern();
+    }
+    return prefferedEditor;
   }
 
 }

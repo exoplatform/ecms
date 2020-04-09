@@ -17,17 +17,19 @@
 package org.exoplatform.services.cms.documents.impl;
 
 import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
+import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.HashSet;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.ResourceBundle;
-import java.util.Set;
 
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
@@ -39,6 +41,7 @@ import org.gatein.api.navigation.Navigation;
 import org.gatein.api.navigation.Nodes;
 import org.gatein.api.site.SiteId;
 
+import org.exoplatform.commons.api.settings.SettingService;
 import org.exoplatform.commons.utils.CommonsUtils;
 import org.exoplatform.container.component.ComponentPlugin;
 import org.exoplatform.container.xml.PortalContainerInfo;
@@ -50,10 +53,15 @@ import org.exoplatform.portal.mop.user.UserPortalContext;
 import org.exoplatform.resolver.ApplicationResourceResolver;
 import org.exoplatform.resolver.ResourceResolver;
 import org.exoplatform.services.cms.BasePath;
+import org.exoplatform.services.cms.documents.DocumentEditor;
+import org.exoplatform.services.cms.documents.DocumentEditorProvider;
+import org.exoplatform.services.cms.documents.DocumentMetadataPlugin;
 import org.exoplatform.services.cms.documents.DocumentService;
-import org.exoplatform.services.cms.documents.DocumentTemplate;
-import org.exoplatform.services.cms.documents.NewDocumentEditorPlugin;
+import org.exoplatform.services.cms.documents.NewDocumentTemplate;
 import org.exoplatform.services.cms.documents.NewDocumentTemplatePlugin;
+import org.exoplatform.services.cms.documents.NewDocumentTemplateProvider;
+import org.exoplatform.services.cms.documents.exception.DocumentEditorProviderNotFoundException;
+import org.exoplatform.services.cms.documents.exception.DocumentExtensionNotSupportedException;
 import org.exoplatform.services.cms.documents.model.Document;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.drives.ManageDriveService;
@@ -70,10 +78,12 @@ import org.exoplatform.services.jcr.impl.core.NodeImpl;
 import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.organization.OrganizationService;
 import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+import org.exoplatform.social.core.manager.IdentityManager;
 import org.exoplatform.webui.application.WebuiRequestContext;
 
 /**
@@ -95,14 +105,19 @@ public class DocumentServiceImpl implements DocumentService {
   public static final String JCR_MIME_TYPE = "jcr:mimeType";
   public static final String EXO_OWNER_PROP = "exo:owner";
   public static final String EXO_TITLE_PROP = "exo:title";
+  private static final String EXO_DOCUMENT = "exo:document";
+  private static final String EXO_USER_PREFFERENCES = "exo:userPrefferences";
+  private static final String EXO_PREFFERED_EDITOR = "exo:prefferedEditor";
   public static final String CURRENT_STATE_PROP = "publication:currentState";
   public static final String DOCUMENTS_APP_NAVIGATION_NODE_NAME = "documents";
   public static final String DOCUMENT_NOT_FOUND = "?path=doc-not-found";
   private static final String DOCUMENTS_NODE = "Documents";
   private static final String SHARED_NODE = "Shared";
   private static final Log LOG                 = ExoLogger.getLogger(DocumentServiceImpl.class);
-  private final Set<NewDocumentTemplatePlugin> templatePlugins = new HashSet<>();
-  private final Set<NewDocumentEditorPlugin> editorPlugins = new HashSet<>();
+  private final List<NewDocumentTemplateProvider> templateProviders = new ArrayList<>();
+  private final List<DocumentEditorProvider> editorProviders = new ArrayList<>();
+  private final List<NewDocumentTemplateProvider> unmodifiebleTemplateProviders = Collections.unmodifiableList(templateProviders);
+  private final List<DocumentEditorProvider> unmodifiebleEditorProviders = Collections.unmodifiableList(editorProviders);
   private ManageDriveService manageDriveService;
   private Portal portal;
   private SessionProviderService sessionProviderService;
@@ -110,8 +125,12 @@ public class DocumentServiceImpl implements DocumentService {
   private NodeHierarchyCreator nodeHierarchyCreator;
   private LinkManager linkManager;
   private PortalContainerInfo portalContainerInfo;
+  private Map<String, DocumentMetadataPlugin> metadataPlugins = new HashMap<>();
+  private OrganizationService organizationService;
+  private SettingService settingService;
+  private IdentityManager identityManager;
 
-  public DocumentServiceImpl(ManageDriveService manageDriveService, Portal portal, SessionProviderService sessionProviderService, RepositoryService repoService, NodeHierarchyCreator nodeHierarchyCreator, LinkManager linkManager, PortalContainerInfo portalContainerInfo) {
+  public DocumentServiceImpl(ManageDriveService manageDriveService, Portal portal, SessionProviderService sessionProviderService, RepositoryService repoService, NodeHierarchyCreator nodeHierarchyCreator, LinkManager linkManager, PortalContainerInfo portalContainerInfo, OrganizationService organizationService, SettingService settingService, IdentityManager identityManager) {
     this.manageDriveService = manageDriveService;
     this.sessionProviderService = sessionProviderService;
     this.repoService = repoService;
@@ -119,6 +138,9 @@ public class DocumentServiceImpl implements DocumentService {
     this.portal = portal;
     this.linkManager = linkManager;
     this.portalContainerInfo = portalContainerInfo;
+    this.organizationService = organizationService;
+    this.settingService = settingService;
+    this.identityManager = identityManager;
   }
 
   @Override
@@ -442,9 +464,10 @@ public class DocumentServiceImpl implements DocumentService {
     Class<NewDocumentTemplatePlugin> pclass = NewDocumentTemplatePlugin.class;
     if (pclass.isAssignableFrom(plugin.getClass())) {
       NewDocumentTemplatePlugin newPlugin = pclass.cast(plugin);
-
-      LOG.info("Adding NewDocumentTemplatePlugin [{}]", newPlugin.toString());
-      templatePlugins.add(newPlugin);
+      if (LOG.isDebugEnabled()) {
+        LOG.debug("Adding NewDocumentTemplatePlugin [{}]", newPlugin.toString());
+      }
+      templateProviders.add(new NewDocumentTemplateProviderImpl(newPlugin, this));
       if (LOG.isDebugEnabled()) {
         LOG.debug("Registered NewDocumentTemplatePlugin instance of {}", plugin.getClass().getName());
       }
@@ -458,17 +481,18 @@ public class DocumentServiceImpl implements DocumentService {
    */
   @Override
   public void addDocumentEditorPlugin(ComponentPlugin plugin) {
-    Class<NewDocumentEditorPlugin> pclass = NewDocumentEditorPlugin.class;
+    Class<DocumentEditor> pclass = DocumentEditor.class;
     if (pclass.isAssignableFrom(plugin.getClass())) {
-      NewDocumentEditorPlugin newPlugin = pclass.cast(plugin);
-
-      LOG.info("Adding NewDocumentEditorPlugin [{}]", newPlugin.toString());
-      editorPlugins.add(newPlugin);
+      DocumentEditor editor = pclass.cast(plugin);
       if (LOG.isDebugEnabled()) {
-        LOG.debug("Registered NewDocumentEditorPlugin instance of {}", plugin.getClass().getName());
+        LOG.debug("Adding DocumentEditor [{}]", editor.toString());
+      }
+      editorProviders.add(new DocumentEditorProviderImpl(editor, settingService, identityManager, organizationService));
+      if (LOG.isDebugEnabled()) {
+        LOG.debug("Registered DocumentEditor instance of {}", plugin.getClass().getName());
       }
     } else {
-      LOG.error("The NewDocumentEditorPlugin plugin is not an instance of " + pclass.getName());
+      LOG.error("The DocumentEditor plugin is not an instance of " + pclass.getName());
     }
   }
 
@@ -476,13 +500,25 @@ public class DocumentServiceImpl implements DocumentService {
    * {@inheritDoc}
    */
   @Override
-  public Node createDocumentFromTemplate(Node currentNode, String title, DocumentTemplate template) throws Exception {
+  public Node createDocumentFromTemplate(Node currentNode, String title, NewDocumentTemplate template) throws Exception {
     InputStream data = new ByteArrayInputStream(new byte[0]);
     if (template.getPath() != null && !template.getPath().trim().isEmpty()) {
       WebuiRequestContext context = WebuiRequestContext.getCurrentInstance();
       ApplicationResourceResolver appResolver = context.getApplication().getResourceResolver();
       ResourceResolver resolver = appResolver.getResourceResolver(template.getPath());
       data = resolver.getInputStream(template.getPath());
+      DocumentMetadataPlugin metadataPlugin = metadataPlugins.get(template.getExtension());
+      if(metadataPlugin != null && metadataPlugin.isExtensionSupported(template.getExtension())) {
+        try {
+          data = metadataPlugin.updateMetadata(template.getExtension(), data, new Date(), getCurrentUserDisplayName());
+        } catch (DocumentExtensionNotSupportedException e) {
+          LOG.error("Document extension is not supported by metadata plugin.", e);
+        } catch (IOException e) {
+          LOG.error("Couldn't add metadata to the document from template.", e);
+        } 
+      } else {
+        LOG.warn("Couldn't find appropriate metadata plugin for the {} extension.", template.getExtension());
+      }
     }
     // Add node
     Node addedNode = currentNode.addNode(title, NT_FILE);
@@ -513,24 +549,109 @@ public class DocumentServiceImpl implements DocumentService {
    * {@inheritDoc}
    */
   @Override
-  public Set<NewDocumentTemplatePlugin> getRegisteredTemplatePlugins() {
-    return Collections.unmodifiableSet(templatePlugins);
+  public List<NewDocumentTemplateProvider> getNewDocumentTemplateProviders() {
+    return unmodifiebleTemplateProviders;
+  }
+  
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void addDocumentMetadataPlugin(ComponentPlugin plugin) {
+    Class<DocumentMetadataPlugin> pclass = DocumentMetadataPlugin.class;
+    if (pclass.isAssignableFrom(plugin.getClass())) {
+      DocumentMetadataPlugin newPlugin = pclass.cast(plugin);
+      LOG.info("Adding DocumentMetadataPlugin [{}]", plugin.toString());
+      newPlugin.getSupportedExtensions().forEach(ext -> metadataPlugins.put(ext, newPlugin));
+      if (LOG.isDebugEnabled()) {
+        LOG.debug("Registered DocumentMetadataPlugin instance of {}", plugin.getClass().getName());
+      }
+    } else {
+      LOG.error("The DocumentMetadataPlugin plugin is not an instance of " + pclass.getName());
+    }
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public Set<NewDocumentEditorPlugin> getRegisteredEditorPlugins() {
-    return Collections.unmodifiableSet(editorPlugins);
+  public void savePreferedEditor(String userId, String provider, String uuid, String workspace) throws RepositoryException {
+    Node node = nodeByUUID(uuid, workspace);
+    if (node.canAddMixin(EXO_DOCUMENT)) {
+      node.addMixin(EXO_DOCUMENT);
+    }
+    Node userPrefferences;
+    if (!node.hasNode(userId)) {
+      userPrefferences = node.addNode(userId, EXO_USER_PREFFERENCES);
+    } else {
+      userPrefferences = node.getNode(userId);
+    }
+    userPrefferences.setProperty(EXO_PREFFERED_EDITOR, provider);
+    node.save();
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public boolean hasDocumentTemplatePlugins() {
-    return templatePlugins.size() > 0;
+  public String getPreferedEditor(String userId, String uuid, String workspace) throws RepositoryException {
+    Node node = nodeByUUID(uuid, workspace);
+    if (node.hasNode(userId)) {
+      Node userPrefferences = node.getNode(userId);
+      if (userPrefferences.hasProperty(EXO_PREFFERED_EDITOR)) {
+        return userPrefferences.getProperty(EXO_PREFFERED_EDITOR).getString();
+      }
+    }
+    return null;
+  }
+  
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public List<DocumentEditorProvider> getDocumentEditorProviders() {
+    return unmodifiebleEditorProviders;
+  }
+  
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public DocumentEditorProvider getEditorProvider(String provider) throws DocumentEditorProviderNotFoundException {
+    return getDocumentEditorProviders().stream()
+                                .filter(editorProvider -> editorProvider.getProviderName().equals(provider))
+                                .findFirst()
+                                .orElseThrow(DocumentEditorProviderNotFoundException::new);
   }
 
+  /**
+   * Gets display name of current user. In case of any errors return current userId
+   * 
+   * @return the display name
+   */
+  protected String getCurrentUserDisplayName() {
+    String userId = ConversationState.getCurrent().getIdentity().getUserId();
+    try {
+      return organizationService.getUserHandler().findUserByName(userId).getDisplayName();
+    } catch (Exception e) {
+      LOG.error("Error searching user " + userId, e);
+      return userId;
+    }
+  }
+  
+  /**
+   * Gets the user session.
+   *
+   * @param workspace the workspace
+   * @return the user session
+   * @throws RepositoryException the repository exception
+   */
+  protected Node nodeByUUID(String uuid, String workspace) throws RepositoryException {
+    if (workspace == null) {
+      workspace = repoService.getCurrentRepository().getConfiguration().getDefaultWorkspaceName();
+    }
+    SessionProvider sp = sessionProviderService.getSessionProvider(null);
+    Session session = sp.getSession(workspace, repoService.getCurrentRepository());
+    return session.getNodeByUUID(uuid);
+  }
 }

@@ -1,0 +1,112 @@
+#uiActionsBarContainer .uiIconEcmsNewDocument:before {
+  content: "\e637";
+}
+
+.editorButtonContainer {
+  display: inline;
+}
+
+.editorButtonContainer .dropdown-container {
+  position: relative;
+  display: inline;
+}
+
+.editorButtonContainer .dropdown-container .dropdown-menu {
+  position: absolute;
+  top: 120%; 
+  margin-left: -140px !important;
+  min-width: 140px !important;
+  margin-top: 5px !important;
+}
+
+.editorButtonContainer .dropdown-container .dropdown-menu li {
+  display: block !important;
+  margin: 0 !important;
+}
+
+.editorButtonContainer .dropdown-container .dropdown-menu li a {
+ padding: 7px 12px;
+ text-align: left;
+}
+
+.editorButtonContainer .dropdown-container .dropdown-menu li a i {
+ margin-right: 5px;
+}
+
+.editorButtonContainer .dropdown-container .dropdown-menu li a:hover {
+ color: #fff !important;
+}
+
+.editorButtonContainer .dropdown-container .dropdown-toggle {
+  background: none;
+  border: none;
+}
+
+.editorButtonContainer .dropdown-container .dropdown-toggle:focus { 
+  background-color: #e7e7e7; 
+  border: none !important;
+  outline:none;
+}
+
+.previewBtn .editorButtonContainer .dropdown-container .dropdown-toggle {
+  background: none;
+  border-color: gray;
+}
+
+.previewBtn .editorButtonContainer .dropdown-container .dropdown-toggle {
+  background: none;
+}
+.previewBtn .editorButtonContainer .dropdown-container .dropdown-toggle:focus {
+  background-color: #323232;
+}
+
+.previewBtn .editorButtonContainer i {
+  color: white;
+}
+
+.editorButtonContainer .dropdown-toggle {
+  padding: 2px;
+}
+
+.previewBtn .editorButtonContainer {
+  float: right;
+}
+
+.editorButtonContainer > li {
+  display: inline;
+}
+
+.previewBtn .editorButtonContainer > li {
+  margin-right: 10px;
+}
+
+.detailContainer .editorButtonContainer {
+  display: inline;
+  border: 1px solid gray;
+  padding: 12px;
+  border: 1px solid #e1e8ee;
+  border-radius: 2px;
+  position: relative;
+  top: 1px;
+  margin-right: 3px;
+}
+
+.detailContainer .editorButtonContainer a {
+ color: #4d5466;
+}
+   
+.detailContainer .editorButtonContainer button,
+.detailContainer .editorButtonContainer .dropdown-menu a {
+ margin: 0 !important;
+}
+.detailContainer .editorButtonContainer button i {
+ margin: 3px !important;
+}
+
+.previewBtn .editorButtonContainer .dropdown-container .dropdown-menu {
+  top: auto;
+}
+
+.previewBtn .editorButtonContainer .dropdown-menu a{
+  color: #3a3a3a;
+}
