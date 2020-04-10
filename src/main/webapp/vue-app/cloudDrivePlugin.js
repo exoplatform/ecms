@@ -2,6 +2,7 @@ const CloudDrivePlugin = [{
   key: "connectCloudDrive",
   rank: 20,
   iconClass: "uiIconCloudDrive",
+  iconName: "cloud",
   appClass: "connectCloudDrive",
   component: {
     name: "connect-cloud-drive"
