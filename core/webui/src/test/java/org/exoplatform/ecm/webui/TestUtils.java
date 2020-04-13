@@ -46,7 +46,7 @@ public class TestUtils {
         assertEquals("/Users", result);
 
         result = Utils.generateMountURL(spaceMount, "collaboration" , "/Users", "/Groups");
-        assertEquals("/Groups/spaces/spacea", result);
+        assertEquals("/Groups/spaces/spacea/Documents", result);
 
         result = Utils.generateMountURL(spaceMount1, "collaboration" , "/Users", "/Groups");
         assertEquals("/Groups/spaces/spacea", result);
