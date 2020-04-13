@@ -106,9 +106,18 @@
     /**
      * Adds editor buttons container (button and pulldown)
      */
-    var getButtonsContaner = function(fileId, buttons, dropclass) {
+    var getButtonsContaner = function(fileId, buttons, preferedProvider, dropclass) {
       if (!buttons) {
         return;
+      }
+      // Sort buttons in user prefference order
+      if (preferedProvider != null) {
+        buttons.forEach(function(item,i){
+          if (item.provider === preferedProvider){
+            buttons.splice(i, 1);
+            buttons.unshift(item);
+          }
+        });
       }
       // Add buttons container
       // var $container = $target.find(".editorButtonContainer");
@@ -188,33 +197,28 @@
       }
       currentWorkspace = workspace;
       log("Init Activity buttons: " + JSON.stringify(buttons));
-      // Sort buttons in user prefference order
-      if (preferedProvider != null) {
-        buttons.forEach(function(item,i){
-          if (item.provider === preferedProvider){
-            buttons.splice(i, 1);
-            buttons.unshift(item);
-          }
-        });
-      }
       var $target = $("#activityContainer" + activityId).find("div[id^='ActivityContextBox'] > .actionBar .statusAction.pull-left");
-      $target.append(getButtonsContaner(fileId, buttons, 'dropdown'));
+      $target.append(getButtonsContaner(fileId, buttons, preferedProvider, 'dropdown'));
     };
     
     /**
      * Inits buttons on document preview.
      * 
      */
-    this.initPreviewButtons = function(fileId, workspace) {
+    this.initPreviewButtons = function(fileId, workspace, dropclass) {
       buttonsFns = [];
       var buttonsLoader = $.Deferred();
       initProviders(fileId, workspace).done(function(data) {
         console.log("PROVIDERS INITED: " + JSON.stringify(data));
         var providersLoader = $.Deferred();
-        data.forEach(function(elem, i, arr) {
-          console.log("init provider:" + elem.provider);
-          loadProvidersModule(elem.provider).done(function(module){
-            module.initPreview(elem.settings);
+        var preferedProvider;
+        data.forEach(function(providerInfo, i, arr) {
+          console.log("init provider:" + providerInfo.provider);
+          loadProvidersModule(providerInfo.provider).done(function(module){
+            module.initPreview(providerInfo.settings);
+            if(providerInfo.prefered) {
+              preferedProvider = providerInfo.provider;
+            }
             // Last provider loaded
             if (i == (arr.length - 1)) {
               providersLoader.resolve();
@@ -222,7 +226,7 @@
           });
         });
         providersLoader.done(function(){
-          var $pulldown =  getButtonsContaner(fileId, buttonsFns, 'dropup');
+          var $pulldown =  getButtonsContaner(fileId, buttonsFns, preferedProvider, dropclass);
           buttonsLoader.resolve($pulldown);
         });
       });

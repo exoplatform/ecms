@@ -477,7 +477,7 @@
         );
       }
 
-      var editorButtonsLoader = editorbuttons.initPreviewButtons(this.settings.doc.id, this.settings.doc.workspace);
+      var editorButtonsLoader = editorbuttons.initPreviewButtons(this.settings.doc.id, this.settings.doc.workspace, 'dropup');
       editorButtonsLoader.done(function($buttonsContainer) {
         $(".previewBtn").append($buttonsContainer);
       });

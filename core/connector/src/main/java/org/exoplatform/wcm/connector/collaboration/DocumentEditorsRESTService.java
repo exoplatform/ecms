@@ -240,6 +240,8 @@ public class DocumentEditorsRESTService implements ResourceContainer {
   /**
    * Inits preview.
    *
+   * @param uriInfo the uri info
+   * @param request the request
    * @param fileId the file id
    * @param workspace the workspace
    * @return the response
@@ -253,6 +255,7 @@ public class DocumentEditorsRESTService implements ResourceContainer {
                               @FormParam("fileId") String fileId,
                               @FormParam("workspace") String workspace) {
     org.exoplatform.services.security.Identity identity = ConversationState.getCurrent().getIdentity();
+    String preferedProvider = getPreferedEditor(identity.getUserId(), fileId, workspace);
     List<ProviderInfo> providersInfo = documentService.getDocumentEditorProviders()
                                                       .stream()
                                                       .filter(provider -> provider.isAvailableForUser(identity))
@@ -267,9 +270,13 @@ public class DocumentEditorsRESTService implements ResourceContainer {
                                                           LOG.error("Cannot init preview for provider "
                                                               + provider.getProviderName(), e);
                                                         }
-                                                        return new ProviderInfo(provider.getProviderName(), editorSettings);
+                                                        boolean isPrefered = provider.getProviderName().equals(preferedProvider);
+                                                        return new ProviderInfo(provider.getProviderName(),
+                                                                                editorSettings,
+                                                                                isPrefered);
                                                       })
                                                       .collect(Collectors.toList());
+
     return Response.ok().entity(providersInfo).build();
   }
 
@@ -364,25 +371,48 @@ public class DocumentEditorsRESTService implements ResourceContainer {
   }
 
   /**
+   * Gets the prefered editor.
+   *
+   * @param userId the user id
+   * @param fileId the file id
+   * @param workspace the workspace
+   * @return the prefered editor
+   */
+  protected String getPreferedEditor(String userId, String fileId, String workspace) {
+    String preferedProvider = null;
+    try {
+      preferedProvider = documentService.getPreferedEditor(userId, fileId, workspace);
+    } catch (RepositoryException e) {
+      LOG.error("Cannot get prefered editor for fileId " + fileId, e);
+    }
+    return preferedProvider;
+  }
+
+  /**
    * The Class ProviderInfo.
    */
   public static class ProviderInfo {
 
     /** The provider. */
-    private final String provider;
+    private final String  provider;
 
     /** The settings. */
-    private final Object settings;
+    private final Object  settings;
+
+    /** The is prefered. */
+    private final boolean isPrefered;
 
     /**
      * Instantiates a new provider info.
      *
      * @param provider the provider
      * @param settings the settings
+     * @param isPrefered the isPrefered
      */
-    public ProviderInfo(String provider, Object settings) {
+    public ProviderInfo(String provider, Object settings, boolean isPrefered) {
       this.provider = provider;
       this.settings = settings;
+      this.isPrefered = isPrefered;
     }
 
     /**
@@ -401,6 +431,15 @@ public class DocumentEditorsRESTService implements ResourceContainer {
      */
     public Object getSettings() {
       return settings;
+    }
+
+    /**
+     * Checks if is prefered.
+     *
+     * @return true, if is prefered
+     */
+    public boolean isPrefered() {
+      return isPrefered;
     }
 
   }
