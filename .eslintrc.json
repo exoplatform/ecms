@@ -17,7 +17,8 @@
         "global": true,
         "exoi18n": true,
         "extensionRegistry": true,
-        "CKEDITOR": true
+        "CKEDITOR": true,
+        "cloudDrive": true
     },
     "parserOptions": {
         "sourceType": "module",

@@ -28,12 +28,14 @@ if (extensionRegistry) {
 
 let connectCloudApp;
 export function init() {
+  // getting drives providers
+  const providers = cloudDrive.getProviders();
   // getting locale resources
   exoi18n.loadLanguageAsync(lang, url).then(i18n => {
     // init Vue app when locale resources are ready
     connectCloudApp = new Vue({
       render: function(createElement) {
-        return createElement(ConnectCloudDrive);
+        return createElement(ConnectCloudDrive, { props: { providers: providers }});
       },
       i18n,
       vuetify

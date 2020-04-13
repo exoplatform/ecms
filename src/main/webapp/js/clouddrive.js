@@ -1156,6 +1156,10 @@
 			return currentNode;
 		};
 
+		this.getProviders = function() {
+			return providers;
+		};
+
 		this.isContextSymlink = function() {
 			if (contextNode && contextDrive) {
 				var file = contextDrive.files[contextNode.path];

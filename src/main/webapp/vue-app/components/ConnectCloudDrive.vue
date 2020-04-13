@@ -10,8 +10,8 @@
       </div>
       <div class="content">
         <v-list dense class="cloudDriveList ignore-vuetify-classes">
-          <v-list-item-group v-model="selectedService" color="primary">
-            <v-list-item v-for="(item, i) in cloudServices" :key="i" :ripple="false" class="cloudDriveListItem">
+          <v-list-item-group v-if="providers" color="primary">
+            <v-list-item v-for="item in providers" :key="item.id" :ripple="false" class="cloudDriveListItem" @click="connectToCloudDrive(item.id)">
               <v-list-item-icon class="cloudDriveListItem__icon">
                 <i :class="`uiIconEcmsConnectDialog-${item.id} uiIconEcmsBlue`"></i>
               </v-list-item-icon>
@@ -34,21 +34,22 @@ export default {
       type: Array,
       default: () => []
     },
+    providers: {
+      type: Object,
+      default: () => ({})
+    }
   },
   data() {
     return {
-      showCloudDrawer: true,
-      cloudServices: [
-        { name: "GDrive", id: "gdrive" },
-        { name: "OneDrive", id: "onedrive" },
-        { name: "Dropbox", id: "dropbox" }
-      ],
-      selectedService: null
+      showCloudDrawer: true
     };
   },
   methods: {
     closeCloudDrawer: function() {
       this.showCloudDrawer = false;
+    },
+    connectToCloudDrive: function(providerId) {
+      cloudDrive.connect(providerId);
     }
   }
 };

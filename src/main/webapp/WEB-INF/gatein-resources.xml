@@ -115,6 +115,9 @@
     <depends>
       <module>extensionRegistry</module>
     </depends>
+    <depends>
+      <module>cloudDrive</module>
+    </depends>
   </module>
 
   <portal-skin>
