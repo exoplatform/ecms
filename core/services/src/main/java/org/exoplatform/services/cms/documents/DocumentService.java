@@ -179,6 +179,33 @@ public interface DocumentService {
    */
   public DocumentEditorProvider getEditorProvider(String provider) throws DocumentEditorProviderNotFoundException;
   
+  /**
+   * Updates information about current open editor for the document.
+   * It is assumed that the document is being edited at the moment.
+   * 
+   * @param uuid the uuid
+   * @param workspace the workspace
+   * @param provider the current provider or null if the document has been closed.
+   * @throws RepositoryException the exception
+   */
+  public void setCurrentDocumentProvider(String uuid, String workspace, String provider) throws RepositoryException;
+
+  /**
+   * Gets current opened document editor.
+   * 
+   * @param uuid the uuid
+   * @param workspace the workspace
+   * @throws RepositoryException the exception
+   */
+  public String getCurrentDocumentProvider(String uuid, String workspace) throws RepositoryException;
+  
+  /**
+   * Init document editors JS module.
+   * 
+   * @param provider the provider
+   * @param workspace the workspace
+   */
+  public void initDocumentEditorsModule(String provider, String workspace);
   
   /**
    * NewDocumentTypesConfig contains all registered template configs for specified provider.

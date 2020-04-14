@@ -114,3 +114,22 @@
 .detailContainer .editors-placeholder {
   display:inline;
 }
+
+.editorButtonContainer .disabledProvider:active {
+  pointer-events: none;
+}
+
+.editorButtonContainer .disabledProvider a {
+  cursor: not-allowed;
+}
+
+.actionBar .disabledProvider a:hover {
+  color: #999999 !important;
+}
+
+.UIJcrExplorerContainer li.disabledProvider {
+  pointer-events: none;
+}
+.UIJcrExplorerContainer li.disabledProvider a {
+  color: #dbdbdb !important;
+}
