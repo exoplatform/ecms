@@ -41,7 +41,7 @@ export default {
   },
   data() {
     return {
-      showCloudDrawer: true
+      showCloudDrawer: false
     };
   },
   methods: {
