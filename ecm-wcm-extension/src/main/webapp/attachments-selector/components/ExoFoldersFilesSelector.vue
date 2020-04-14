@@ -289,7 +289,7 @@ export default {
       this.loadingFolders = true;
       const self = this;
       attachmentsService
-        .fetchFoldersAndFiles(this.currentDrive.name, this.workspace, parentPath)
+        .fetchFoldersAndFiles(this.currentDrive.name, this.workspace, parentPath.replace('@', ''))
         .then((xml) => {
           const rootFolder = xml.childNodes[0];
           if (rootFolder.getAttribute('path') === '/') {
@@ -386,7 +386,7 @@ export default {
               .pop();
             this.folders.push({
               id: id,
-              name: fetchedFolders[j].getAttribute('name'),
+              name: fetchedFolders[j].getAttribute('title').includes('@') ? fetchedFolders[j].getAttribute('title') : fetchedFolders[j].getAttribute('name'),
               title: fetchedFolders[j].getAttribute('title'),
               path: fetchedFolders[j].getAttribute('currentFolder'),
               folderTypeCSSClass: folderTypeCSSClass,
