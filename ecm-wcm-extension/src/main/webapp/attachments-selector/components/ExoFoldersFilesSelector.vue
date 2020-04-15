@@ -257,7 +257,7 @@ export default {
         }
         self.setFoldersAndFiles(rootFolder);
         self.loadingFolders = false;
-      }).catch(() => (this.loadingFolders = false));
+      }).catch(() => this.loadingFolders = false);
     },
     fetchUserDrives() {
       this.resetExplorer();
@@ -269,7 +269,7 @@ export default {
         const drivers = xml.childNodes[0].childNodes;
         self.setDrivers(drivers);
         this.loadingFolders = false;
-      }).catch(() => (this.loadingFolders = false));
+      }).catch(() => this.loadingFolders = false);
     },
     resetExplorer() {
       this.drivers = [];
@@ -302,7 +302,7 @@ export default {
       }
     },
     generateHistoryTree(folder) {
-      if (!this.foldersHistory.find((f) => f.name === folder.name) && folder) {
+      if (!this.foldersHistory.find(f => f.name === folder.name) && folder) {
         this.foldersHistory.push({
           name: folder.name,
           title: folder.title,
@@ -312,11 +312,11 @@ export default {
       }
       if (!folder.driverType && folder.path) {
         this.foldersHistory = this.foldersHistory.filter(ele =>
-          folder.path.split('/').find((f) => f === ele.name)
+          folder.path.split('/').find(f => f === ele.name)
         );
       }
       this.currentDrive.isSelected = false;
-      this.foldersHistory.forEach(f => (f.isSelected = false));
+      this.foldersHistory.forEach(f => f.isSelected = false);
       this.foldersHistory.find(f => f.name === folder.name).isSelected = true;
     },
     addSelectedFiles() {
@@ -409,7 +409,11 @@ export default {
       }
     },
     executeAction(action) {
-      executeExtensionAction(action, this.$refs[action.key][0]);
+      this.$refs[action.key].map(ref => {
+        if (ref.refId && ref.refId === action.key) {
+          executeExtensionAction(action, ref);
+        }
+      });
     },
   },
 };
