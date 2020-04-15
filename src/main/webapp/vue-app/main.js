@@ -25,23 +25,20 @@ if (extensionRegistry) {
     });
   }
 }
-
 let connectCloudApp;
-export function init() {
-  // getting drives providers
-  const providers = cloudDrive.getProviders();
+(function init() {
   // getting locale resources
   exoi18n.loadLanguageAsync(lang, url).then(i18n => {
     // init Vue app when locale resources are ready
     connectCloudApp = new Vue({
       render: function(createElement) {
-        return createElement(ConnectCloudDrive, { props: { providers: providers }});
+        return createElement(ConnectCloudDrive);
       },
       i18n,
       vuetify
     }).$mount("#connectCloudApp");
   });
-}
+}());
 
 export function destroy() {
   if (connectCloudApp) {

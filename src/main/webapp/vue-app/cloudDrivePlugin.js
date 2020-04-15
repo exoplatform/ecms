@@ -10,7 +10,7 @@ const CloudDrivePlugin = [{
   enabled: true,
   onExecute(cloudDriveComponent) {
     console.log(cloudDriveComponent);
-    cloudDriveComponent.showCloudDrawer = true;
+    cloudDriveComponent.toggleCloudDrawer();
   }
 }];
 

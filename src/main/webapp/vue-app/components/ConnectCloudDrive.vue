@@ -29,27 +29,23 @@
 
 <script>
 export default {
-  props: {
-    value: {
-      type: Array,
-      default: () => []
-    },
-    providers: {
-      type: Object,
-      default: () => ({})
-    }
-  },
   data() {
     return {
       showCloudDrawer: false
     };
   },
+  created() {
+    this.providers = cloudDrive.getProviders();
+  },
   methods: {
     closeCloudDrawer: function() {
-      this.showCloudDrawer = false;
+      this.toggleCloudDrawer();
     },
     connectToCloudDrive: function(providerId) {
       cloudDrive.connect(providerId);
+    },
+    toggleCloudDrawer: function() {
+      this.showCloudDrawer = !this.showCloudDrawer;
     }
   }
 };
