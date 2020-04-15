@@ -17,16 +17,30 @@
 package org.exoplatform.wcm.ext.component.activity;
 
 import java.net.URLDecoder;
-import java.text.*;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Set;
 
 import javax.imageio.ImageIO;
 import javax.imageio.ImageReader;
 import javax.imageio.stream.ImageInputStream;
-import javax.jcr.*;
+import javax.jcr.AccessDeniedException;
+import javax.jcr.Node;
+import javax.jcr.PathNotFoundException;
+import javax.jcr.RepositoryException;
+import javax.jcr.ValueFormatException;
 import javax.portlet.PortletRequest;
 
 import org.apache.commons.io.FileUtils;
@@ -36,13 +50,19 @@ import org.apache.commons.lang3.StringEscapeUtils;
 import com.ibm.icu.util.Calendar;
 
 import org.exoplatform.commons.utils.ISO8601;
-import org.exoplatform.container.*;
+import org.exoplatform.container.ExoContainer;
+import org.exoplatform.container.ExoContainerContext;
+import org.exoplatform.container.PortalContainer;
 import org.exoplatform.container.xml.PortalContainerInfo;
 import org.exoplatform.download.DownloadResource;
 import org.exoplatform.download.DownloadService;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.portal.webui.util.Util;
-import org.exoplatform.services.cms.documents.*;
+import org.exoplatform.services.cms.documents.DocumentService;
+import org.exoplatform.services.cms.documents.TrashService;
+import org.exoplatform.services.cms.documents.VersionHistoryUtils;
+import org.exoplatform.services.cms.documents.cometd.CometdConfig;
+import org.exoplatform.services.cms.documents.cometd.CometdDocumentsService;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.drives.impl.ManageDriveServiceImpl;
 import org.exoplatform.services.jcr.access.PermissionType;
@@ -50,7 +70,9 @@ import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
-import org.exoplatform.services.organization.*;
+import org.exoplatform.services.organization.Group;
+import org.exoplatform.services.organization.OrganizationService;
+import org.exoplatform.services.organization.User;
 import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.security.Identity;
 import org.exoplatform.services.wcm.core.NodeLocation;
@@ -72,104 +94,106 @@ import org.exoplatform.web.application.JavascriptManager;
 import org.exoplatform.web.application.RequireJS;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
-import org.exoplatform.webui.config.annotation.*;
+import org.exoplatform.webui.config.annotation.ComponentConfig;
+import org.exoplatform.webui.config.annotation.ComponentConfigs;
+import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIPopupContainer;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.ext.UIExtension;
 import org.exoplatform.webui.ext.UIExtensionManager;
-
+import org.exoplatform.ws.frameworks.json.impl.JsonException;
+import org.exoplatform.ws.frameworks.json.impl.JsonGeneratorImpl;
 
 /**
  * Created by The eXo Platform SAS Author : eXoPlatform exo@exoplatform.com Mar
  * 15, 2011
  */
 @ComponentConfigs({
-        @ComponentConfig(lifecycle = UIFormLifecycle.class,
-                template = "war:/groovy/ecm/social-integration/plugin/space/FileUIActivity.gtmpl", events = {
-                @EventConfig(listeners = FileUIActivity.ViewDocumentActionListener.class),
-                @EventConfig(listeners = BaseUIActivity.LoadLikesActionListener.class),
-                @EventConfig(listeners = BaseUIActivity.ToggleDisplayCommentFormActionListener.class),
-                @EventConfig(listeners = BaseUIActivity.LikeActivityActionListener.class),
-                @EventConfig(listeners = BaseUIActivity.SetCommentListStatusActionListener.class),
-                @EventConfig(listeners = BaseUIActivity.PostCommentActionListener.class),
-                @EventConfig(listeners = BaseUIActivity.DeleteActivityActionListener.class),
-                @EventConfig(listeners = FileUIActivity.OpenFileActionListener.class),
-                @EventConfig(listeners = BaseUIActivity.DeleteCommentActionListener.class),
-                @EventConfig(listeners = BaseUIActivity.LikeCommentActionListener.class),
-                @EventConfig(listeners = BaseUIActivity.EditActivityActionListener.class),
-                @EventConfig(listeners = BaseUIActivity.EditCommentActionListener.class),
-                @EventConfig(listeners = FileUIActivity.DownloadDocumentActionListener.class)
-        }),
-})
-public class FileUIActivity extends BaseUIActivity{
+    @ComponentConfig(lifecycle = UIFormLifecycle.class, template = "war:/groovy/ecm/social-integration/plugin/space/FileUIActivity.gtmpl", events = {
+        @EventConfig(listeners = FileUIActivity.ViewDocumentActionListener.class),
+        @EventConfig(listeners = BaseUIActivity.LoadLikesActionListener.class),
+        @EventConfig(listeners = BaseUIActivity.ToggleDisplayCommentFormActionListener.class),
+        @EventConfig(listeners = BaseUIActivity.LikeActivityActionListener.class),
+        @EventConfig(listeners = BaseUIActivity.SetCommentListStatusActionListener.class),
+        @EventConfig(listeners = BaseUIActivity.PostCommentActionListener.class),
+        @EventConfig(listeners = BaseUIActivity.DeleteActivityActionListener.class),
+        @EventConfig(listeners = FileUIActivity.OpenFileActionListener.class),
+        @EventConfig(listeners = BaseUIActivity.DeleteCommentActionListener.class),
+        @EventConfig(listeners = BaseUIActivity.LikeCommentActionListener.class),
+        @EventConfig(listeners = BaseUIActivity.EditActivityActionListener.class),
+        @EventConfig(listeners = BaseUIActivity.EditCommentActionListener.class),
+        @EventConfig(listeners = FileUIActivity.DownloadDocumentActionListener.class) }), })
+public class FileUIActivity extends BaseUIActivity {
 
-  public static final String[] EMPTY_ARRAY = new String[0];
+  public static final String[]            EMPTY_ARRAY             = new String[0];
 
-  public static final String SEPARATOR_REGEX      = "\\|@\\|";
+  public static final String              SEPARATOR_REGEX         = "\\|@\\|";
 
-  private static final String NEW_DATE_FORMAT     = "hh:mm:ss MMM d, yyyy";
-  
-  private static final Log    LOG                 = ExoLogger.getLogger(FileUIActivity.class);
+  private static final String             NEW_DATE_FORMAT         = "hh:mm:ss MMM d, yyyy";
 
-  public static final String  ID                  = "id";
+  private static final Log                LOG                     = ExoLogger.getLogger(FileUIActivity.class);
 
-  public static final String  CONTENT_LINK        = "contenLink";
+  public static final String              ID                      = "id";
 
-  public static final String  MESSAGE             = "message";
+  public static final String              CONTENT_LINK            = "contenLink";
 
-  public static final String  ACTIVITY_STATUS     = "MESSAGE";
+  public static final String              MESSAGE                 = "message";
 
-  public static final String  CONTENT_NAME        = "contentName";
+  public static final String              ACTIVITY_STATUS         = "MESSAGE";
 
-  public static final String  IMAGE_PATH          = "imagePath";
+  public static final String              CONTENT_NAME            = "contentName";
 
-  public static final String  MIME_TYPE           = "mimeType";
+  public static final String              IMAGE_PATH              = "imagePath";
 
-  public static final String  STATE               = "state";
+  public static final String              MIME_TYPE               = "mimeType";
 
-  public static final String  AUTHOR              = "author";
+  public static final String              STATE                   = "state";
 
-  public static final String  DATE_CREATED        = "dateCreated";
+  public static final String              AUTHOR                  = "author";
 
-  public static final String  LAST_MODIFIED       = "lastModified";
+  public static final String              DATE_CREATED            = "dateCreated";
 
-  public static final String  DOCUMENT_TYPE_LABEL = "docTypeLabel";
+  public static final String              LAST_MODIFIED           = "lastModified";
 
-  public static final String  DOCUMENT_TITLE      = "docTitle";
+  public static final String              DOCUMENT_TYPE_LABEL     = "docTypeLabel";
 
-  public static final String  DOCUMENT_VERSION    = "docVersion";
+  public static final String              DOCUMENT_TITLE          = "docTitle";
 
-  public static final String  DOCUMENT_SUMMARY    = "docSummary";
+  public static final String              DOCUMENT_VERSION        = "docVersion";
 
-  public static final String  IS_SYSTEM_COMMENT   = "isSystemComment";
+  public static final String              DOCUMENT_SUMMARY        = "docSummary";
 
-  public static final String  SYSTEM_COMMENT      = "systemComment";
-  
-  public static final String                  STREAM_CONTEXT = "stream";
+  public static final String              IS_SYSTEM_COMMENT       = "isSystemComment";
 
-  private String              message;
+  public static final String              SYSTEM_COMMENT          = "systemComment";
+
+  public static final String              STREAM_CONTEXT          = "stream";
+
+  private String                          message;
 
   private LinkedHashMap<String, String>[] folderPathWithLinks;
 
-  private String              activityStatus;
+  private String                          activityStatus;
 
-  public int                  filesCount          = 0;
+  public int                              filesCount              = 0;
 
-  private String              activityTitle;
+  private String                          activityTitle;
 
-  private DateTimeFormatter   dateTimeFormatter;
+  private DateTimeFormatter               dateTimeFormatter;
 
-  private DocumentService     documentService;
+  private DocumentService                 documentService;
 
-  private SpaceService        spaceService;
+  private SpaceService                    spaceService;
 
-  private OrganizationService organizationService;
+  private OrganizationService             organizationService;
 
-  private TrashService         trashService;
+  private TrashService                    trashService;
+  
+  private final CometdDocumentsService    cometdService;
 
-  private List<ActivityFileAttachment> activityFileAttachments = new ArrayList<>();
+  private List<ActivityFileAttachment>    activityFileAttachments = new ArrayList<>();
 
   private String                          downloadLink            = null;
 
@@ -177,9 +201,10 @@ public class FileUIActivity extends BaseUIActivity{
 
   public FileUIActivity() throws Exception {
     super();
-    if(WebuiRequestContext.getCurrentInstance() != null) {
+    if (WebuiRequestContext.getCurrentInstance() != null) {
       addChild(UIPopupContainer.class, null, "UIDocViewerPopupContainer");
     }
+    this.cometdService = getApplicationComponent(CometdDocumentsService.class);
   }
 
   @Override
@@ -204,7 +229,7 @@ public class FileUIActivity extends BaseUIActivity{
     return activityFileAttachments.get(i).getContentLink();
   }
 
-  public void setContentLink(int i,String contentLink) {
+  public void setContentLink(int i, String contentLink) {
     if ((i + 1) > activityFileAttachments.size()) {
       return;
     }
@@ -230,7 +255,11 @@ public class FileUIActivity extends BaseUIActivity{
     // To get real file name instead
     try {
       contentName = (activityFileAttachment == null
-          || activityFileAttachment.getContentNode() == null) ? null : URLDecoder.decode(activityFileAttachment.getContentNode().getProperty("exo:title").getString(), "UTF-8");
+          || activityFileAttachment.getContentNode() == null) ? null
+                                                              : URLDecoder.decode(activityFileAttachment.getContentNode()
+                                                                                                        .getProperty("exo:title")
+                                                                                                        .getString(),
+                                                                                  "UTF-8");
       if (StringUtils.isBlank(contentName)) {
         contentName = URLDecoder.decode(activityFileAttachment.getContentName(), "UTF-8");
       }
@@ -372,7 +401,7 @@ public class FileUIActivity extends BaseUIActivity{
   public String getTitle(Node node) throws Exception {
     return Utils.getTitle(node);
   }
-  
+
   private String convertDateFormat(String strDate, String strOldFormat, String strNewFormat) throws ParseException {
     if (strDate == null || strDate.length() <= 0) {
       return "";
@@ -396,7 +425,7 @@ public class FileUIActivity extends BaseUIActivity{
     }
     ActivityFileAttachment activityFileAttachment = activityFileAttachments.get(i);
     return convertDateFormat(activityFileAttachment.getDateCreated(), ISO8601.SIMPLE_DATETIME_FORMAT, NEW_DATE_FORMAT);
-  }  
+  }
 
   public void setDateCreated(String dateCreated, int i) {
     if ((i + 1) > activityFileAttachments.size()) {
@@ -474,24 +503,24 @@ public class FileUIActivity extends BaseUIActivity{
   public String getSummary(Node node) {
     return org.exoplatform.wcm.ext.component.activity.listener.Utils.getSummary(node);
   }
-  
+
   public String getDocumentSummary(Map<String, String> activityParams) {
     return activityParams.get(FileUIActivity.DOCUMENT_SUMMARY);
   }
 
   public String getUserFullName(String userId) {
-    if(StringUtils.isEmpty(userId)) {
+    if (StringUtils.isEmpty(userId)) {
       return "";
     }
 
     // if the requested user is the connected user, get the fullname from the ConversationState
     ConversationState currentUserState = ConversationState.getCurrent();
     Identity currentUserIdentity = currentUserState.getIdentity();
-    if(currentUserIdentity != null) {
+    if (currentUserIdentity != null) {
       String currentUser = currentUserIdentity.getUserId();
       if (currentUser != null && currentUser.equals(userId)) {
         User user = (User) currentUserState.getAttribute(CacheUserProfileFilter.USER_PROFILE);
-        if(user != null) {
+        if (user != null) {
           return user.getDisplayName();
         }
       }
@@ -500,7 +529,7 @@ public class FileUIActivity extends BaseUIActivity{
     // if the requested user if not the connected user, fetch it from the organization service
     try {
       User user = getOrganizationService().getUserHandler().findUserByName(userId);
-      if(user != null) {
+      if (user != null) {
         return user.getDisplayName();
       }
     } catch (Exception e) {
@@ -509,17 +538,17 @@ public class FileUIActivity extends BaseUIActivity{
 
     return "";
   }
-  
+
   protected String getSize(Node node) {
-    double size = 0;    
+    double size = 0;
     try {
       if (node.hasNode(Utils.JCR_CONTENT)) {
         Node contentNode = node.getNode(Utils.JCR_CONTENT);
         if (contentNode.hasProperty(Utils.JCR_DATA)) {
           size = contentNode.getProperty(Utils.JCR_DATA).getLength();
         }
-        
-        return FileUtils.byteCountToDisplaySize((long)size);
+
+        return FileUtils.byteCountToDisplaySize((long) size);
       }
     } catch (PathNotFoundException e) {
       return StringUtils.EMPTY;
@@ -527,88 +556,92 @@ public class FileUIActivity extends BaseUIActivity{
       return StringUtils.EMPTY;
     } catch (RepositoryException e) {
       return StringUtils.EMPTY;
-    } catch(NullPointerException e) {
-    	return StringUtils.EMPTY;
+    } catch (NullPointerException e) {
+      return StringUtils.EMPTY;
     }
-    return StringUtils.EMPTY;    
+    return StringUtils.EMPTY;
   }
-  
+
   protected double getFileSize(Node node) {
-    double fileSize = 0;    
+    double fileSize = 0;
     try {
-      if(node.isNodeType(NodetypeConstant.EXO_SYMLINK)) {
+      if (node.isNodeType(NodetypeConstant.EXO_SYMLINK)) {
         node = Utils.getNodeSymLink(node);
       }
       if (node.hasNode(Utils.JCR_CONTENT)) {
         Node contentNode = node.getNode(Utils.JCR_CONTENT);
         if (contentNode.hasProperty(Utils.JCR_DATA)) {
-        	fileSize = contentNode.getProperty(Utils.JCR_DATA).getLength();
+          fileSize = contentNode.getProperty(Utils.JCR_DATA).getLength();
         }
       }
-    } catch(Exception ex) { fileSize = 0; }
-    return fileSize;    
+    } catch (Exception ex) {
+      fileSize = 0;
+    }
+    return fileSize;
   }
-  
+
   protected int getImageWidth(Node node, int i) {
     if ((i + 1) > activityFileAttachments.size()) {
       return 0;
     }
     ActivityFileAttachment activityFileAttachment = activityFileAttachments.get(i);
 
-  	int imageWidth = 0;
-  	try {
-      if(node.isNodeType(NodetypeConstant.EXO_SYMLINK)) {
+    int imageWidth = 0;
+    try {
+      if (node.isNodeType(NodetypeConstant.EXO_SYMLINK)) {
         node = Utils.getNodeSymLink(node);
       }
-  		if(node.hasNode(NodetypeConstant.JCR_CONTENT)) node = node.getNode(NodetypeConstant.JCR_CONTENT);
-    	ImageReader reader = ImageIO.getImageReadersByMIMEType(activityFileAttachment.getMimeType()).next();
-    	ImageInputStream iis = ImageIO.createImageInputStream(node.getProperty("jcr:data").getStream());
-    	reader.setInput(iis, true);
-    	imageWidth = reader.getWidth(0);
-    	iis.close();
-    	reader.dispose();   	
+      if (node.hasNode(NodetypeConstant.JCR_CONTENT))
+        node = node.getNode(NodetypeConstant.JCR_CONTENT);
+      ImageReader reader = ImageIO.getImageReadersByMIMEType(activityFileAttachment.getMimeType()).next();
+      ImageInputStream iis = ImageIO.createImageInputStream(node.getProperty("jcr:data").getStream());
+      reader.setInput(iis, true);
+      imageWidth = reader.getWidth(0);
+      iis.close();
+      reader.dispose();
     } catch (Exception e) {
-        if(LOG.isTraceEnabled()) {
-          String nodePath = null;
-          try {
-            nodePath = node.getPath();
-          } catch(Exception exp) {
-            // Nothing to log
-          }
-          LOG.trace("Cannot get image from node " + nodePath, e);
+      if (LOG.isTraceEnabled()) {
+        String nodePath = null;
+        try {
+          nodePath = node.getPath();
+        } catch (Exception exp) {
+          // Nothing to log
         }
+        LOG.trace("Cannot get image from node " + nodePath, e);
+      }
     }
-  	return imageWidth;
+    return imageWidth;
   }
-  
+
   protected int getImageHeight(Node node, int i) {
     if ((i + 1) > activityFileAttachments.size()) {
       return 0;
     }
     ActivityFileAttachment activityFileAttachment = activityFileAttachments.get(i);
 
-  	int imageHeight = 0;
-  	try {
-      if(node.isNodeType(NodetypeConstant.EXO_SYMLINK)) {
+    int imageHeight = 0;
+    try {
+      if (node.isNodeType(NodetypeConstant.EXO_SYMLINK)) {
         node = Utils.getNodeSymLink(node);
       }
-  		if(node.hasNode(NodetypeConstant.JCR_CONTENT)) node = node.getNode(NodetypeConstant.JCR_CONTENT);
-    	ImageReader reader = ImageIO.getImageReadersByMIMEType(activityFileAttachment.getMimeType()).next();
-    	ImageInputStream iis = ImageIO.createImageInputStream(node.getProperty("jcr:data").getStream());
-    	reader.setInput(iis, true);
-    	imageHeight = reader.getHeight(0);
-    	iis.close();
-    	reader.dispose();   	
+      if (node.hasNode(NodetypeConstant.JCR_CONTENT))
+        node = node.getNode(NodetypeConstant.JCR_CONTENT);
+      ImageReader reader = ImageIO.getImageReadersByMIMEType(activityFileAttachment.getMimeType()).next();
+      ImageInputStream iis = ImageIO.createImageInputStream(node.getProperty("jcr:data").getStream());
+      reader.setInput(iis, true);
+      imageHeight = reader.getHeight(0);
+      iis.close();
+      reader.dispose();
     } catch (Exception e) {
-        LOG.info("Cannot get node");
+      LOG.info("Cannot get node");
     }
-  	return imageHeight;
+    return imageHeight;
   }
 
   protected String getDocUpdateDate(Node node) {
     String docUpdatedDate = "";
     try {
-      if(node != null && node.hasProperty("exo:lastModifiedDate")) {
+      if (node != null && node.hasProperty("exo:lastModifiedDate")) {
         String rawDocUpdatedDate = node.getProperty("exo:lastModifiedDate").getString();
         LocalDateTime parsedDate = LocalDateTime.parse(rawDocUpdatedDate, DateTimeFormatter.ISO_OFFSET_DATE_TIME);
         docUpdatedDate = parsedDate.format(getDateTimeFormatter());
@@ -624,7 +657,7 @@ public class FileUIActivity extends BaseUIActivity{
    * @return A localized DateTimeFormatter
    */
   protected DateTimeFormatter getDateTimeFormatter() {
-    if(dateTimeFormatter == null) {
+    if (dateTimeFormatter == null) {
       dateTimeFormatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM);
       Locale locale = WebuiRequestContext.getCurrentInstance().getLocale();
       if (locale != null) {
@@ -637,11 +670,11 @@ public class FileUIActivity extends BaseUIActivity{
   protected String getDocLastModifier(Node node) {
     String docLastModifier = "";
     try {
-      if (node.isNodeType("exo:symlink")){
+      if (node.isNodeType("exo:symlink")) {
         String uuid = node.getProperty("exo:uuid").getString();
         node = node.getSession().getNodeByUUID(uuid);
       }
-      if(node != null && node.hasProperty("exo:lastModifier")) {
+      if (node != null && node.hasProperty("exo:lastModifier")) {
         String docLastModifierUsername = node.getProperty("exo:lastModifier").getString();
         docLastModifier = getUserFullName(docLastModifierUsername);
       }
@@ -654,16 +687,17 @@ public class FileUIActivity extends BaseUIActivity{
   protected int getVersion(Node node) {
     String currentVersion = null;
     try {
-      if (node.isNodeType(VersionHistoryUtils.MIX_DISPLAY_VERSION_NAME) &&
-              node.hasProperty(VersionHistoryUtils.MAX_VERSION_PROPERTY)) {
-        //Get max version ID
+      if (node.isNodeType(VersionHistoryUtils.MIX_DISPLAY_VERSION_NAME)
+          && node.hasProperty(VersionHistoryUtils.MAX_VERSION_PROPERTY)) {
+        // Get max version ID
         int max = (int) node.getProperty(VersionHistoryUtils.MAX_VERSION_PROPERTY).getLong();
         return max - 1;
       }
       currentVersion = node.getBaseVersion().getName();
-      if (currentVersion.contains("jcr:rootVersion")) currentVersion = "0";
-    }catch (Exception e) {
-      currentVersion ="0";
+      if (currentVersion.contains("jcr:rootVersion"))
+        currentVersion = "0";
+    } catch (Exception e) {
+      currentVersion = "0";
     }
     return Integer.parseInt(currentVersion);
   }
@@ -715,17 +749,17 @@ public class FileUIActivity extends BaseUIActivity{
   public void setUIActivityData(Map<String, String> activityParams) {
     activityFileAttachments.clear();
 
-    this.message =  activityParams.get(FileUIActivity.MESSAGE);
-    this.activityStatus =  activityParams.get(FileUIActivity.ACTIVITY_STATUS);
+    this.message = activityParams.get(FileUIActivity.MESSAGE);
+    this.activityStatus = activityParams.get(FileUIActivity.ACTIVITY_STATUS);
 
     String[] nodeUUIDs = getParameterValues(activityParams, FileUIActivity.ID);
-    String[] repositories = getParameterValues(activityParams,UIDocActivity.REPOSITORY);
-    String[] workspaces = getParameterValues(activityParams,UIDocActivity.WORKSPACE);
+    String[] repositories = getParameterValues(activityParams, UIDocActivity.REPOSITORY);
+    String[] workspaces = getParameterValues(activityParams, UIDocActivity.WORKSPACE);
     if (nodeUUIDs == null || nodeUUIDs.length == 0) {
       String[] docPaths = getParameterValues(activityParams, UIDocActivity.DOCPATH);
       if (docPaths != null && docPaths.length > 0) {
         nodeUUIDs = new String[docPaths.length];
-        for (int i = 0; i < docPaths.length; i++)  {
+        for (int i = 0; i < docPaths.length; i++) {
           String repository = "repository";
           if (repositories != null && repositories.length == docPaths.length && StringUtils.isNotBlank(repositories[i])) {
             repository = repositories[i];
@@ -750,22 +784,22 @@ public class FileUIActivity extends BaseUIActivity{
     }
     this.filesCount = nodeUUIDs == null ? 0 : nodeUUIDs.length;
 
-    String[] contentLink = getParameterValues(activityParams,FileUIActivity.CONTENT_LINK);
+    String[] contentLink = getParameterValues(activityParams, FileUIActivity.CONTENT_LINK);
     String[] state = getParameterValues(activityParams, FileUIActivity.STATE);
     String[] author = getParameterValues(activityParams, FileUIActivity.AUTHOR);
-    String[] dateCreated =  getParameterValues(activityParams, FileUIActivity.DATE_CREATED);
-    String[] lastModified =  getParameterValues(activityParams, FileUIActivity.LAST_MODIFIED);
-    String[] contentName =  getParameterValues(activityParams, FileUIActivity.CONTENT_NAME);
-    String[] mimeType =  getParameterValues(activityParams, FileUIActivity.MIME_TYPE);
-    String[] imagePath =  getParameterValues(activityParams, FileUIActivity.IMAGE_PATH);
-    String[] docTypeName =  getParameterValues(activityParams, FileUIActivity.DOCUMENT_TYPE_LABEL);
-    String[] docTitle =  getParameterValues(activityParams, FileUIActivity.DOCUMENT_TITLE);  
-    String[] docVersion =  getParameterValues(activityParams, FileUIActivity.DOCUMENT_VERSION);
-    String[] docSummary =  getParameterValues(activityParams, FileUIActivity.DOCUMENT_SUMMARY);
-    String[] docPath =  getParameterValues(activityParams, UIDocActivity.DOCPATH);
+    String[] dateCreated = getParameterValues(activityParams, FileUIActivity.DATE_CREATED);
+    String[] lastModified = getParameterValues(activityParams, FileUIActivity.LAST_MODIFIED);
+    String[] contentName = getParameterValues(activityParams, FileUIActivity.CONTENT_NAME);
+    String[] mimeType = getParameterValues(activityParams, FileUIActivity.MIME_TYPE);
+    String[] imagePath = getParameterValues(activityParams, FileUIActivity.IMAGE_PATH);
+    String[] docTypeName = getParameterValues(activityParams, FileUIActivity.DOCUMENT_TYPE_LABEL);
+    String[] docTitle = getParameterValues(activityParams, FileUIActivity.DOCUMENT_TITLE);
+    String[] docVersion = getParameterValues(activityParams, FileUIActivity.DOCUMENT_VERSION);
+    String[] docSummary = getParameterValues(activityParams, FileUIActivity.DOCUMENT_SUMMARY);
+    String[] docPath = getParameterValues(activityParams, UIDocActivity.DOCPATH);
     Boolean[] isSymlink = null;
     String[] isSymlinkParams = getParameterValues(activityParams, UIDocActivity.IS_SYMLINK);
-    if(isSymlinkParams != null) {
+    if (isSymlinkParams != null) {
       isSymlink = new Boolean[isSymlinkParams.length];
       for (int i = 0; i < isSymlinkParams.length; i++) {
         isSymlink[i] = Boolean.parseBoolean(isSymlinkParams[i]);
@@ -777,14 +811,14 @@ public class FileUIActivity extends BaseUIActivity{
       String repositoryName = (String) getValueFromArray(i, repositories);
       String workspaceName = (String) getValueFromArray(i, workspaces);
 
-      if(StringUtils.isBlank(repositoryName)) {
+      if (StringUtils.isBlank(repositoryName)) {
         ManageableRepository repository = WCMCoreUtils.getRepository();
         repositoryName = repository == null ? null : repository.getConfiguration().getName();
       }
 
-      if(StringUtils.isBlank(workspaceName)) {
+      if (StringUtils.isBlank(workspaceName)) {
         ManageableRepository repository = WCMCoreUtils.getRepository();
-        workspaceName =  repository == null ? null : repository.getConfiguration().getDefaultWorkspaceName();
+        workspaceName = repository == null ? null : repository.getConfiguration().getDefaultWorkspaceName();
       }
 
       fileAttachment.setNodeUUID(nodeUUIDs[i])
@@ -803,7 +837,7 @@ public class FileUIActivity extends BaseUIActivity{
                     .setDocVersion(getValueFromArray(i, docVersion))
                     .setDocSummary(getValueFromArray(i, docSummary))
                     .setSymlink(getValueFromArray(i, isSymlink))
-                    .setDocPath(getValueFromArray(i,docPath));
+                    .setDocPath(getValueFromArray(i, docPath));
 
       Node contentNode = NodeLocation.getNodeByLocation(fileAttachment.getNodeLocation());
       if (contentNode != null) {
@@ -826,15 +860,15 @@ public class FileUIActivity extends BaseUIActivity{
   private String[] getParameterValues(Map<String, String> activityParams, String paramName) {
     String[] values = null;
     String value = activityParams.get(paramName);
-    if(value == null) {
+    if (value == null) {
       value = activityParams.get(paramName.toLowerCase());
     }
-    if(value != null) {
+    if (value != null) {
       values = value.split(SEPARATOR_REGEX);
     }
     if (LOG.isDebugEnabled()) {
-      if(this.filesCount != 0 && (values == null || values.length != this.filesCount)) {
-          LOG.debug("Parameter '{}' hasn't same length as other activity parmameters", paramName);
+      if (this.filesCount != 0 && (values == null || values.length != this.filesCount)) {
+        LOG.debug("Parameter '{}' hasn't same length as other activity parmameters", paramName);
       }
     }
     return values;
@@ -871,11 +905,11 @@ public class FileUIActivity extends BaseUIActivity{
     if (tmpContentNode.isNodeType("nt:frozenNode")) {
       String uuid = tmpContentNode.getProperty("jcr:frozenUuid").getString();
       Node originalNode = tmpContentNode.getSession().getNodeByUUID(uuid);
-      link = baseURI + "/" + portalName + "/" + restContextName + "/jcr/" + repository + "/"
-          + workspace + originalNode.getPath() + "?version=" + this.getContentNode(i).getParent().getName();
+      link = baseURI + "/" + portalName + "/" + restContextName + "/jcr/" + repository + "/" + workspace + originalNode.getPath()
+          + "?version=" + this.getContentNode(i).getParent().getName();
     } else {
-      link = baseURI + "/" + portalName + "/" + restContextName + "/jcr/" + repository + "/"
-          + workspace + tmpContentNode.getPath();
+      link =
+           baseURI + "/" + portalName + "/" + restContextName + "/jcr/" + repository + "/" + workspace + tmpContentNode.getPath();
     }
 
     activityFileAttachment.setWebdavURL(friendlyService.getFriendlyUri(link));
@@ -903,7 +937,9 @@ public class FileUIActivity extends BaseUIActivity{
     if (nodeLocation != null) {
       try {
         String userId = ConversationState.getCurrent().getIdentity().getUserId();
-        activityFileAttachment.setDocDrive(documentService.getDriveOfNode(nodeLocation.getPath(), "placeholder_user_name", Utils.getMemberships()));
+        activityFileAttachment.setDocDrive(documentService.getDriveOfNode(nodeLocation.getPath(),
+                                                                          "placeholder_user_name",
+                                                                          Utils.getMemberships()));
       } catch (Exception e) {
         LOG.error("Cannot get drive of node " + nodeLocation.getPath() + " : " + e.getMessage(), e);
       }
@@ -918,11 +954,11 @@ public class FileUIActivity extends BaseUIActivity{
       if (contentName.toLowerCase().contains(".pdf")) {
         iconClass = "uiBgdFilePDF";
       } else if (contentName.toLowerCase().contains(".doc")) {
-          iconClass = "uiBgdFileWord";
+        iconClass = "uiBgdFileWord";
       } else if (contentName.toLowerCase().contains(".xls")) {
-          iconClass = "uiBgdFileExcel";
+        iconClass = "uiBgdFileExcel";
       } else if (contentName.toLowerCase().contains(".ppt")) {
-          iconClass = "uiBgdFilePPT";
+        iconClass = "uiBgdFilePPT";
       }
     }
     return iconClass;
@@ -949,10 +985,10 @@ public class FileUIActivity extends BaseUIActivity{
     }
     return breadCrumbContent;
   }
-  
+
   public String getDocFilePath(int i) {
     LinkedHashMap<String, String> folderRelativePathWithLinks = getDocFolderRelativePathWithLinks(i);
-    if(folderRelativePathWithLinks != null && !folderRelativePathWithLinks.isEmpty()) {
+    if (folderRelativePathWithLinks != null && !folderRelativePathWithLinks.isEmpty()) {
       String[] nodeNames = folderRelativePathWithLinks.values().toArray(EMPTY_ARRAY);
       return nodeNames[nodeNames.length - 1];
     }
@@ -963,10 +999,10 @@ public class FileUIActivity extends BaseUIActivity{
     if ((i + 1) > activityFileAttachments.size()) {
       return null;
     }
-    if(folderPathWithLinks == null) {
+    if (folderPathWithLinks == null) {
       folderPathWithLinks = new LinkedHashMap[filesCount];
     }
-    if(folderPathWithLinks[i] == null) {
+    if (folderPathWithLinks[i] == null) {
       folderPathWithLinks[i] = new LinkedHashMap<>();
       LinkedHashMap<String, String> reversedFolderPathWithLinks = new LinkedHashMap<>();
 
@@ -1015,7 +1051,8 @@ public class FileUIActivity extends BaseUIActivity{
           // if the drive is the Personal Documents drive, we must handle the special case of the Public symlink
           String drivePublicFolderHomePath = null;
           if (ManageDriveServiceImpl.PERSONAL_DRIVE_NAME.equals(drive.getName())) {
-            drivePublicFolderHomePath = driveHomePath.replace("/" + ManageDriveServiceImpl.PERSONAL_DRIVE_PRIVATE_FOLDER_NAME, "/" + ManageDriveServiceImpl.PERSONAL_DRIVE_PUBLIC_FOLDER_NAME);
+            drivePublicFolderHomePath = driveHomePath.replace("/" + ManageDriveServiceImpl.PERSONAL_DRIVE_PRIVATE_FOLDER_NAME,
+                                                              "/" + ManageDriveServiceImpl.PERSONAL_DRIVE_PUBLIC_FOLDER_NAME);
           }
 
           // calculate the relative path to the drive by browsing up the content node path
@@ -1033,7 +1070,8 @@ public class FileUIActivity extends BaseUIActivity{
             } else if (drivePublicFolderHomePath != null && parentPath.equals(drivePublicFolderHomePath)) {
               // this is a special case : the root of the Public folder of the Personal Documents drive
               // in this case we add the Public folder in the path
-              reversedFolderPathWithLinks.put(ManageDriveServiceImpl.PERSONAL_DRIVE_PUBLIC_FOLDER_NAME, getDocOpenUri(parentPath, i));
+              reversedFolderPathWithLinks.put(ManageDriveServiceImpl.PERSONAL_DRIVE_PUBLIC_FOLDER_NAME,
+                                              getDocOpenUri(parentPath, i));
               break;
             }
 
@@ -1062,9 +1100,9 @@ public class FileUIActivity extends BaseUIActivity{
         }
       }
 
-      if(reversedFolderPathWithLinks.size() > 1) {
+      if (reversedFolderPathWithLinks.size() > 1) {
         List<Map.Entry<String, String>> entries = new ArrayList<>(reversedFolderPathWithLinks.entrySet());
-        for(int j = entries.size()-1; j >= 0; j--) {
+        for (int j = entries.size() - 1; j >= 0; j--) {
           Map.Entry<String, String> entry = entries.get(j);
           folderPathWithLinks[i].put(StringEscapeUtils.escapeHtml4(entry.getKey()), entry.getValue());
         }
@@ -1089,7 +1127,7 @@ public class FileUIActivity extends BaseUIActivity{
     }
     return documentService;
   }
-  
+
   private TrashService getTrashService() {
     if (trashService == null) {
       trashService = getApplicationComponent(TrashService.class);
@@ -1108,14 +1146,14 @@ public class FileUIActivity extends BaseUIActivity{
       String folderName = relativePathIterator.next();
 
       // Delete file from parent Path
-      if(relativePathIterator.hasNext()) {
-        folderName = folderName.replaceAll("_" + (pathSize - folderIndex -1) + "$", "");
+      if (relativePathIterator.hasNext()) {
+        folderName = folderName.replaceAll("_" + (pathSize - folderIndex - 1) + "$", "");
         folderRelativePath.append(folderName).append("/");
       }
       folderIndex++;
     }
 
-    if(folderRelativePath.length() > 1) {
+    if (folderRelativePath.length() > 1) {
       // remove the last /
       folderRelativePath.deleteCharAt(folderRelativePath.length() - 1);
     }
@@ -1130,7 +1168,7 @@ public class FileUIActivity extends BaseUIActivity{
     ActivityFileAttachment activityFileAttachment = activityFileAttachments.get(i);
 
     String uri = "";
-    if(activityFileAttachment.getNodeLocation() != null) {
+    if (activityFileAttachment.getNodeLocation() != null) {
       uri = getDocOpenUri(activityFileAttachment.getDocPath(), i);
     }
 
@@ -1140,13 +1178,13 @@ public class FileUIActivity extends BaseUIActivity{
   public String getDocOpenUri(String nodePath, int i) {
     String uri = "";
 
-    if(nodePath != null) {
+    if (nodePath != null) {
       try {
         if (nodePath.endsWith("/")) {
           nodePath = nodePath.replaceAll("/$", "");
         }
         uri = getDocumentService().getLinkInDocumentsApp(nodePath, getDocDrive(i));
-      } catch(Exception e) {
+      } catch (Exception e) {
         LOG.error("Cannot get document open URI of node " + nodePath + " : " + e.getMessage(), e);
         uri = "";
       }
@@ -1158,15 +1196,15 @@ public class FileUIActivity extends BaseUIActivity{
   public String getEditLink(int i) {
     try {
       return org.exoplatform.wcm.webui.Utils.getEditLink(getContentNode(i), true, false);
-    }catch (Exception e) {
+    } catch (Exception e) {
       return "";
     }
   }
-  
+
   public String getActivityEditLink(int i) {
-  	try {
+    try {
       return org.exoplatform.wcm.webui.Utils.getActivityEditLink(getContentNode(i));
-    }catch (Exception e) {
+    } catch (Exception e) {
       return "";
     }
   }
@@ -1180,10 +1218,10 @@ public class FileUIActivity extends BaseUIActivity{
   }
 
   protected String getContainerName() {
-    //get portal name
+    // get portal name
     ExoContainer container = ExoContainerContext.getCurrentContainer();
     PortalContainerInfo containerInfo = (PortalContainerInfo) container.getComponentInstanceOfType(PortalContainerInfo.class);
-    return containerInfo.getContainerName();  
+    return containerInfo.getContainerName();
   }
 
   public String getDownloadAllLink() {
@@ -1261,7 +1299,8 @@ public class FileUIActivity extends BaseUIActivity{
       context.put(Utils.MIME_TYPE, data.getNode(Utils.JCR_CONTENT).getProperty(Utils.JCR_MIMETYPE).getString());
 
       for (UIExtension extension : extensions) {
-        if (manager.accept(Utils.FILE_VIEWER_EXTENSION_TYPE, extension.getName(), context) && !"Text".equals(extension.getName())) {
+        if (manager.accept(Utils.FILE_VIEWER_EXTENSION_TYPE, extension.getName(), context)
+            && !"Text".equals(extension.getName())) {
           return true;
         }
       }
@@ -1305,15 +1344,17 @@ public class FileUIActivity extends BaseUIActivity{
       UIActivitiesContainer uiActivitiesContainer = fileUIActivity.getAncestorOfType(UIActivitiesContainer.class);
       PopupContainer uiPopupContainer = uiActivitiesContainer.getPopupContainer();
 
-      UIDocumentPreview uiDocumentPreview = uiPopupContainer.createUIComponent(UIDocumentPreview.class, null,
-              "UIDocumentPreview");
+      UIDocumentPreview uiDocumentPreview =
+                                          uiPopupContainer.createUIComponent(UIDocumentPreview.class, null, "UIDocumentPreview");
       uiDocumentPreview.setBaseUIActivity(fileUIActivity);
       if ((i + 1) > fileUIActivity.activityFileAttachments.size()) {
         return;
       }
       ActivityFileAttachment activityFileAttachment = fileUIActivity.activityFileAttachments.get(i);
-      uiDocumentPreview.setContentInfo(activityFileAttachment.getDocPath(), activityFileAttachment.getRepository(), activityFileAttachment.getWorkspace(),
-              fileUIActivity.getContentNode(i));
+      uiDocumentPreview.setContentInfo(activityFileAttachment.getDocPath(),
+                                       activityFileAttachment.getRepository(),
+                                       activityFileAttachment.getWorkspace(),
+                                       fileUIActivity.getContentNode(i));
 
       uiPopupContainer.activate(uiDocumentPreview, 0, 0, true);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiPopupContainer);
@@ -1363,15 +1404,15 @@ public class FileUIActivity extends BaseUIActivity{
    * @param data File node
    * @return true: can edit; false: cannot edit
    */
-  public boolean canEditDocument(Node data){
+  public boolean canEditDocument(Node data) {
     try {
-      ((ExtendedNode)data.getParent()).checkPermission(PermissionType.ADD_NODE);
+      ((ExtendedNode) data.getParent()).checkPermission(PermissionType.ADD_NODE);
       return true;
-    } catch(Exception e) {
+    } catch (Exception e) {
       return false;
     }
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -1383,11 +1424,19 @@ public class FileUIActivity extends BaseUIActivity{
       String activityId = getActivity().getId();
       Identity identity = ConversationState.getCurrent().getIdentity();
       RequireJS require = js.require("SHARED/editorbuttons", "editorbuttons");
+      CometdConfig cometdConf = new CometdConfig(cometdService.getCometdServerPath(),
+                                                 cometdService.getUserToken(requestContext.getRemoteUser()),
+                                                 PortalContainer.getCurrentPortalContainerName());
+      try {
+        require.addScripts("editorbuttons.init('" + requestContext.getRemoteUser() + "' ," + cometdConf.toJSON() + ");");
+      } catch (JsonException e) {
+        LOG.warn("Cannot generate JSON for cometd configuration. {}", e.getMessage());
+      }
       if (getFilesCount() == 1) {
         Node node = getContentNode(0);
         require.addScripts("editorbuttons.resetButtons();");
         // call plugins init handlers
-        getDocumentService().getDocumentEditorProviders().forEach(provider -> {
+        documentService.getDocumentEditorProviders().forEach(provider -> {
           try {
             if (provider.isAvailableForUser(identity)) {
               provider.initActivity(node.getUUID(), node.getSession().getWorkspace().getName(), activityId);
@@ -1396,15 +1445,25 @@ public class FileUIActivity extends BaseUIActivity{
             LOG.error("Cannot init activity from plugin {}, {}", provider.getProviderName(), e.getMessage());
           }
         });
-        String prefferedEditor = getPrefferedEditor(node);
-        require.addScripts("editorbuttons.initActivityButtons('" + activityId + "', '" + node.getUUID() + "', '"
-            + node.getSession().getWorkspace().getName() + "'," + prefferedEditor + ");");
+        String prefferedProvider = documentService.getPreferedEditor(identity.getUserId(),
+                                                                     node.getUUID(),
+                                                                     node.getSession().getWorkspace().getName());
+        String currentProvider = documentService.getCurrentDocumentProvider(node.getUUID(),
+                                                                            node.getSession().getWorkspace().getName());
+        InitConfig config = new InitConfig.InitConfigBuilder().activityId(activityId)
+                                                              .index("0")
+                                                              .fileId(node.getUUID())
+                                                              .workspace(node.getSession().getWorkspace().getName())
+                                                              .prefferedProvider(prefferedProvider)
+                                                              .currentProvider(currentProvider)
+                                                              .build();
+        require.addScripts("editorbuttons.initActivityButtons(" + config.toJSON() + ");");
 
       }
     }
     super.end();
   }
-  
+
   /**
    * Gets the preffered editor.
    *
@@ -1414,7 +1473,9 @@ public class FileUIActivity extends BaseUIActivity{
    */
   protected String getPrefferedEditor(Node node) throws Exception {
     String userId = ConversationState.getCurrent().getIdentity().getUserId();
-    String prefferedEditor = getDocumentService().getPreferedEditor(userId, node.getUUID(), node.getSession().getWorkspace().getName());
+    String prefferedEditor = getDocumentService().getPreferedEditor(userId,
+                                                                    node.getUUID(),
+                                                                    node.getSession().getWorkspace().getName());
     if (prefferedEditor != null) {
       prefferedEditor = "'" + prefferedEditor + "'";
     } else {
@@ -1423,4 +1484,204 @@ public class FileUIActivity extends BaseUIActivity{
     return prefferedEditor;
   }
 
+  /**
+   * The Class InitConfig.
+   */
+  protected static class InitConfig {
+
+    /** The activity id. */
+    protected final String activityId;
+
+    /** The index. */
+    protected final String index;
+
+    /** The file id. */
+    protected final String fileId;
+
+    /** The workspace. */
+    protected final String workspace;
+
+    /** The preffered provider. */
+    protected final String prefferedProvider;
+
+    /** The current provider. */
+    protected final String currentProvider;
+
+    /**
+     * Instantiates a new inits the config.
+     *
+     * @param builder the builder
+     */
+    private InitConfig(InitConfigBuilder builder) {
+      this.activityId = builder.activityId;
+      this.index = builder.index;
+      this.fileId = builder.fileId;
+      this.workspace = builder.workspace;
+      this.prefferedProvider = builder.prefferedProvider;
+      this.currentProvider = builder.currentProvider;
+    }
+
+    /**
+     * Gets the activity id.
+     *
+     * @return the activity id
+     */
+    public String getActivityId() {
+      return activityId;
+    }
+
+    /**
+     * Gets the index.
+     *
+     * @return the index
+     */
+    public String getIndex() {
+      return index;
+    }
+
+    /**
+     * Gets the file id.
+     *
+     * @return the file id
+     */
+    public String getFileId() {
+      return fileId;
+    }
+
+    /**
+     * Gets the workspace.
+     *
+     * @return the workspace
+     */
+    public String getWorkspace() {
+      return workspace;
+    }
+
+    /**
+     * Gets the current provider.
+     *
+     * @return the current provider
+     */
+    public String getCurrentProvider() {
+      return currentProvider;
+    }
+
+    /**
+     * Gets the preffered provider.
+     *
+     * @return the preffered provider
+     */
+    public String getPrefferedProvider() {
+      return prefferedProvider;
+    }
+
+    /**
+     * To JSON.
+     *
+     * @return the string
+     * @throws JsonException the json exception
+     */
+    public String toJSON() throws JsonException {
+      JsonGeneratorImpl gen = new JsonGeneratorImpl();
+      return gen.createJsonObject(this).toString();
+    }
+
+    /**
+     * The Class InitConfigBuilder.
+     */
+    static class InitConfigBuilder {
+      /** The activity id. */
+      protected String activityId;
+
+      /** The index. */
+      protected String index;
+
+      /** The file id. */
+      protected String fileId;
+
+      /** The workspace. */
+      protected String workspace;
+
+      /** The preffered provider. */
+      protected String prefferedProvider;
+
+      /** The current editor. */
+      protected String currentProvider;
+
+      /**
+       * Activity id.
+       *
+       * @param activityId the activity id
+       * @return the inits the config builder
+       */
+      protected InitConfigBuilder activityId(String activityId) {
+        this.activityId = activityId;
+        return this;
+      }
+
+      /**
+       * Index.
+       *
+       * @param index the index
+       * @return the inits the config builder
+       */
+      protected InitConfigBuilder index(String index) {
+        this.index = index;
+        return this;
+      }
+
+      /**
+       * File id.
+       *
+       * @param fileId the file id
+       * @return the inits the config builder
+       */
+      protected InitConfigBuilder fileId(String fileId) {
+        this.fileId = fileId;
+        return this;
+      }
+
+      /**
+       * Workspace.
+       *
+       * @param workspace the workspace
+       * @return the inits the config builder
+       */
+      protected InitConfigBuilder workspace(String workspace) {
+        this.workspace = workspace;
+        return this;
+      }
+
+      /**
+       * Preffered editor.
+       *
+       * @param prefferedProvider the preffered provider
+       * @return the inits the config builder
+       */
+      protected InitConfigBuilder prefferedProvider(String prefferedProvider) {
+        this.prefferedProvider = prefferedProvider;
+        return this;
+      }
+
+      /**
+       * Current editor.
+       *
+       * @param currentProvider the current provider
+       * @return the inits the config builder
+       */
+      protected InitConfigBuilder currentProvider(String currentProvider) {
+        this.currentProvider = currentProvider;
+        return this;
+      }
+
+      /**
+       * Builds the InitConfig.
+       *
+       * @return the inits the config
+       */
+      protected InitConfig build() {
+        return new InitConfig(this);
+      }
+    }
+  }
 }

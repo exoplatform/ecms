@@ -413,7 +413,7 @@
        * config.currentProvider + '"][data-fileId="' + config.fileId +
        * '"]').each(function(){ $(this).addClass("disabledProvider"); }); }
        */
-      subscribeDocument(config.fileId);
+      subscribeDocument(fileId);
       return buttonsLoader;
     };
     
