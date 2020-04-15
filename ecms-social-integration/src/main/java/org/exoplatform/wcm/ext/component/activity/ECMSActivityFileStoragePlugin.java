@@ -5,17 +5,24 @@ import java.io.InputStream;
 import java.util.Calendar;
 import java.util.HashMap;
 
+import javax.jcr.ItemExistsException;
 import javax.jcr.Node;
+import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 
-import org.exoplatform.commons.utils.CommonsUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.exoplatform.container.xml.InitParams;
+import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
+import org.exoplatform.services.jcr.impl.core.RepositoryImpl;
 import org.exoplatform.services.security.ConversationState;
+import org.exoplatform.services.wcm.core.NodeLocation;
+import org.exoplatform.services.wcm.core.NodetypeConstant;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.social.core.activity.model.ActivityFile;
 import org.exoplatform.social.core.activity.model.ExoSocialActivity;
 import org.exoplatform.social.core.identity.model.Identity;
@@ -43,16 +50,20 @@ public class ECMSActivityFileStoragePlugin extends ActivityFileStoragePlugin {
 
   private UploadService        uploadService;
 
+  private SessionProviderService sessionProviderService;
+
   public ECMSActivityFileStoragePlugin(SpaceService spaceService,
                                        NodeHierarchyCreator nodeHierarchyCreator,
                                        RepositoryService repositoryService,
                                        UploadService uploadService,
+                                       SessionProviderService sessionProviderService,
                                        InitParams initParams) {
     super(initParams);
     this.spaceService = spaceService;
     this.nodeHierarchyCreator = nodeHierarchyCreator;
     this.repositoryService = repositoryService;
     this.uploadService = uploadService;
+    this.sessionProviderService = sessionProviderService;
   }
 
   @Override
@@ -68,7 +79,7 @@ public class ECMSActivityFileStoragePlugin extends ActivityFileStoragePlugin {
 
       Node parentNode;
 
-      SessionProvider sessionProvider = SessionProviderService.getSystemSessionProvider();
+      SessionProvider sessionProvider = sessionProviderService.getSystemSessionProvider(null);
       ManageableRepository currentRepository = repositoryService.getCurrentRepository();
       String workspaceName = currentRepository.getConfiguration().getDefaultWorkspaceName();
       Session session = sessionProvider.getSession(workspaceName, currentRepository);
@@ -105,9 +116,28 @@ public class ECMSActivityFileStoragePlugin extends ActivityFileStoragePlugin {
       }
 
 
-      Node parentUploadNode = parentNode.getNode(ACTIVITY_FOLDER_UPLOAD_NAME);
-      Node node = parentUploadNode.addNode(uploadedResource.getFileName(), "nt:file");
-      node.setProperty("exo:title", uploadedResource.getFileName());
+      Node parentUploadNode = null;
+      if (StringUtils.isNotBlank(activityFile.getDestinationFolder())) {
+        SessionProvider sessionProviderUser = sessionProviderService.getSessionProvider(null);
+        session = sessionProviderUser.getSession(workspaceName, currentRepository);
+        StringBuilder folderExpression = new StringBuilder();
+        folderExpression.append("repository").append(":").append(workspaceName).append(":").append(activityFile.getDestinationFolder());
+        parentUploadNode = NodeLocation.getNodeByExpression(folderExpression.toString());
+      }else {
+         parentUploadNode = parentNode.getNode(ACTIVITY_FOLDER_UPLOAD_NAME);
+      }
+      String nodeName = Utils.cleanName(uploadedResource.getFileName());
+      if (!parentUploadNode.getDefinition().allowsSameNameSiblings()) {
+        nodeName = getFileName(parentUploadNode, nodeName, nodeName, 1);
+      }
+      Node node = null;
+      try {
+        node = parentUploadNode.addNode(nodeName, NodetypeConstant.NT_FILE);
+      } catch (ItemExistsException e) {
+        nodeName = getFileName(parentUploadNode, nodeName, nodeName, 1);
+        node = parentUploadNode.addNode(nodeName, NodetypeConstant.NT_FILE);
+      }
+      node.setProperty("exo:title", nodeName);
       Node resourceNode = node.addNode("jcr:content", "nt:resource");
       resourceNode.setProperty("jcr:mimeType", uploadedResource.getMimeType());
       resourceNode.setProperty("jcr:lastModified", Calendar.getInstance());
@@ -151,6 +181,22 @@ public class ECMSActivityFileStoragePlugin extends ActivityFileStoragePlugin {
     concatenateParam(activity.getTemplateParams(), "DOCPATH", attachmentNode.getPath());
     concatenateParam(activity.getTemplateParams(), "mimeType", resourceNode.getProperty("jcr:mimeType").getString());
     concatenateParam(activity.getTemplateParams(), "id", attachmentNode.isNodeType("mix:referenceable") ? attachmentNode.getUUID() : "");
+  }
+
+  private String getFileName(Node parentUploadNode,
+                             String originalNodeName,
+                             String nodeName,
+                             int fileIndex) throws RepositoryException {
+    if (parentUploadNode.hasNode(nodeName)) {
+      int pointIndex = originalNodeName.lastIndexOf('.');
+      if (pointIndex > 0) {
+        nodeName = originalNodeName.substring(0, pointIndex) + "(" + fileIndex + ")" + originalNodeName.substring(pointIndex);
+      } else {
+        nodeName = originalNodeName + "(" + fileIndex + ")";
+      }
+      return getFileName(parentUploadNode, originalNodeName, nodeName, ++fileIndex);
+    }
+    return nodeName;
   }
 }
 

@@ -72,6 +72,18 @@
 
           <div class="uploadedFiles">
             <div class="uploadedFilesTitle">{{ $t('attachments.drawer.title') }} ({{ value.length }})</div>
+            <div v-if="value.length > 0" class="destinationFolder">
+              <div v-if="showFile" class="folderLocation">
+                <div><p class="folderOne">{{ schemaFolder[0] }}</p></div>
+                <div v-for="folder in schemaFolder.slice(1,3)" :key="folder" class="folders">
+                  <div><span class="uiIconArrowRight colorIcon"></span></div>
+                  <div><p :class="schemaFolder[schemaFolder.slice(1,3).length] === folder ?'active' : ''" class="folderName">{{ folder }}</p></div>
+                </div>
+              </div>
+              <div>
+                <i class="uiIconFolder " @click="toggleSelectDestinationFolder()"></i>
+              </div>
+            </div>
             <div class="uploadedFilesItems">
               <div v-for="attachedFile in value" :key="attachedFile.name" class="uploadedFilesItem">
                 <exo-attachment-item :file="attachedFile"></exo-attachment-item>
@@ -85,7 +97,8 @@
             </div>
           </div>
         </div>
-        <exo-server-files-selector v-if="showDocumentSelector" :attached-files="value" :space-id="spaceId" @attachExistingServerAttachment="toggleServerFileSelector" @cancel="toggleServerFileSelector()"></exo-server-files-selector>
+        <exo-server-files-selector v-if="showDocumentSelector && !showDestinationFolder" :attached-files="value" :space-id="spaceId" @selectedItems="toggleServerFileSelector" @cancel="toggleServerFileSelector()"></exo-server-files-selector>
+        <exo-server-files-selector v-if="showDocumentSelector && showDestinationFolder" :mode-folder-selection="showDestinationFolder" @selectedItems="addDestinationFolder" @cancel="toggleServerFileSelector()"></exo-server-files-selector>
       </div>
       <div v-if="!showDocumentSelector" class="attachmentsFooter footer ignore-vuetify-classes">
         <a class="btn btn-primary ignore-vuetify-classes" @click="closeAttachments()">{{ $t('attachments.drawer.apply') }}</a>
@@ -97,6 +110,7 @@
 
 <script>
 import axios from 'axios';
+import * as attachmentsService from '../attachmentsService.js';
 
 export default {
   props: {
@@ -126,6 +140,7 @@ export default {
   data() {
     return {
       showAttachments: false,
+      showDestinationFolder:false,
       message: '',
       uploadingFilesQueue: [],
       uploadingCount : 0,
@@ -138,7 +153,10 @@ export default {
       sameFileErrorMessage: `${this.$t('attachments.drawer.sameFile.error')}`,
       BYTES_IN_MB: 1048576,
       MESSAGES_DISPLAY_TIME: 5000,
-      drawerTitle: `${this.$t('attachments.drawer.header')}`
+      drawerTitle: `${this.$t('attachments.drawer.header')}`,
+      pathDestinationFolder : '',
+      showFile: false,
+      schemaFolder: []
     };
   },
   watch: {
@@ -156,7 +174,15 @@ export default {
       if(this.sameFileError) {
         setTimeout(() => this.sameFileError = false, this.MESSAGES_DISPLAY_TIME);
       }
-    }
+    },
+    value(){
+      if(this.value.length === 0){
+        this.pathDestinationFolder = '';
+        this.showFile = false;
+        this.schemaFolder = [];
+        this.addDefaultPath();
+      }
+    },
   },
   mounted() {
     ['drag', 'dragstart', 'dragend', 'dragover', 'dragenter', 'dragleave', 'drop'].forEach( function( evt ) {
@@ -182,6 +208,9 @@ export default {
     window.require(['SHARED/jquery'], function($) {
       $('#exoAttachmentsApp *[rel="tooltip"]').tooltip();
     });
+  },
+  created(){
+    this.addDefaultPath();
   },
   methods: {
     closeAttachments: function() {
@@ -211,7 +240,8 @@ export default {
           size: file.size,
           mimetype: file.type,
           uploadId: this.getNewUploadId(),
-          uploadProgress: 0
+          uploadProgress: 0,
+          destinationFolder: this.pathDestinationFolder,
         });
       });
 
@@ -318,6 +348,28 @@ export default {
       }
       this.$emit('input', this.value);
     },
+    addDestinationFolder(pathDestinationFolder, folderName) {
+      this.pathDestinationFolder = pathDestinationFolder;
+      if (pathDestinationFolder === '') {
+        this.showFile = false;
+      } else {
+        this.showFile = true;
+      }
+      for (let i = 0; i < this.value.length; i++) {
+        this.value[i].destinationFolder = this.pathDestinationFolder;
+      }
+      this.schemaFolder = [];
+      const namesOfFolders = folderName.split('/');
+      for (let i = 0; i < namesOfFolders.length; i++) {
+        this.schemaFolder[i] = namesOfFolders[i];
+      }
+      this.pathDestinationFolder = '';
+      this.showDocumentSelector = !this.showDocumentSelector;
+      this.drawerTitle = this.showDocumentSelector? `${this.$t('attachments.drawer.existingUploads')}` : `${this.$t('attachments.drawer.header')}`;
+      if (!this.showDocumentSelector) {
+        this.showDestinationFolder = false;
+      }
+    },
     toggleServerFileSelector(selectedFiles){
       if (selectedFiles) {
         this.value = selectedFiles;
@@ -325,6 +377,28 @@ export default {
       }
       this.showDocumentSelector = !this.showDocumentSelector;
       this.drawerTitle = this.showDocumentSelector? `${this.$t('attachments.drawer.existingUploads')}` : `${this.$t('attachments.drawer.header')}`;
+      if (!this.showDocumentSelector){
+        this.showDestinationFolder = false ;
+      }
+    },
+    toggleSelectDestinationFolder(){
+      this.showDestinationFolder = true ;
+      this.showDocumentSelector = !this.showDocumentSelector;
+      this.drawerTitle = this.showDocumentSelector? `${this.$t('attachments.drawer.destination.folder')}` : `${this.$t('attachments.drawer.header')}`;
+    },
+    addDefaultPath(){
+      if(eXo.env.portal.spaceId){
+        attachmentsService.getSpaceById(eXo.env.portal.spaceId).then( space => {
+          this.schemaFolder.push(space.displayName);
+          this.schemaFolder.push('Activity Stream Documents');
+          this.showFile=true;
+        });
+      }else {
+        this.schemaFolder.push(eXo.env.portal.userName);
+        this.schemaFolder.push('Public');
+        this.schemaFolder.push('Activity Stream Documents');
+        this.showFile=true;
+      }
     }
   }
 };
