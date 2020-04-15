@@ -259,21 +259,22 @@ public class DocumentEditorsRESTService implements ResourceContainer {
                                                       .stream()
                                                       .filter(provider -> provider.isAvailableForUser(identity))
                                                       .map(provider -> {
-                                                        Object editorSettings = null;
                                                         try {
-                                                          editorSettings = provider.initPreview(fileId,
-                                                                                                workspace,
-                                                                                                uriInfo.getRequestUri(),
-                                                                                                request.getLocale());
+                                                          Object editorSettings = provider.initPreview(fileId,
+                                                                                                       workspace,
+                                                                                                       uriInfo.getRequestUri(),
+                                                                                                       request.getLocale());
+                                                          boolean preffered = provider.getProviderName().equals(preferedProvider);
+                                                          return new ProviderInfo(provider.getProviderName(),
+                                                                                  editorSettings,
+                                                                                  preffered);
                                                         } catch (Exception e) {
                                                           LOG.error("Cannot init preview for provider "
                                                               + provider.getProviderName(), e);
+                                                          return null;
                                                         }
-                                                        boolean isPrefered = provider.getProviderName().equals(preferedProvider);
-                                                        return new ProviderInfo(provider.getProviderName(),
-                                                                                editorSettings,
-                                                                                isPrefered);
                                                       })
+                                                      .filter(providerInfo -> providerInfo != null)
                                                       .collect(Collectors.toList());
 
     return Response.ok().entity(providersInfo).build();

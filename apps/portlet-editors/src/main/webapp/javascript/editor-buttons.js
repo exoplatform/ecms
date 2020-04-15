@@ -98,8 +98,6 @@
           fileId : fileId,
           workspace : workspace
         }
-      }).catch(function(xhr,status,error) {
-        log("Cannot init providers for file" + fileId + ": " + status + " " + error);
       });
     };
     
@@ -159,7 +157,7 @@
       return $container;
     };
 
-    var loadProvidersModule = function(provider) {
+    var loadProviderModule = function(provider) {
       var loader = $.Deferred();
       var moduleId = "SHARED/" + provider;
       if (window.require.s.contexts._.config.paths[moduleId]) {
@@ -167,11 +165,11 @@
           window.require([moduleId], function(client) {
             loader.resolve(client);
           }, function(err) {
-            log("ERROR: Cannot load provider module " + provider + " Error:" + err.message + ": " + JSON.stringify(err), err);
+            log("Cannot require provider module " + provider, err);
             loader.reject();
           });
         } catch(e) {
-          log("ERROR: " + e, e);
+          log("Cannot load provider module " + provider, e);
           loader.reject();
         }
       } else {
@@ -202,11 +200,11 @@
     this.initPreviewButtons = function(fileId, workspace, dropclass) {
       buttonsFns = [];
       var buttonsLoader = $.Deferred();
-      initProvidersPreview(fileId, workspace).done(function(data) {
+      initProvidersPreview(fileId, workspace).then(function(data) {
         var providersLoader = $.Deferred();
         var preferedProvider;
         data.forEach(function(providerInfo, i, arr) {
-          loadProvidersModule(providerInfo.provider).done(function(module){
+          loadProviderModule(providerInfo.provider).done(function(module){
             module.initPreview(providerInfo.settings);
             if (providerInfo.prefered) {
               preferedProvider = providerInfo.provider;
@@ -221,6 +219,8 @@
           var $pulldown =  getButtonsContaner(fileId, buttonsFns, preferedProvider, dropclass);
           buttonsLoader.resolve($pulldown);
         });
+      }).catch(function(xhr,status,error) {
+        log("Cannot init providers preview for file" + fileId + ": " + status + " " + error);
       });
       return buttonsLoader;
     };
