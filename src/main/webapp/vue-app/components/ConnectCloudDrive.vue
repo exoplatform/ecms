@@ -1,12 +1,12 @@
 <template>
   <div id="connectCloudApp">
-    <div :class="{ open: showCloudDrawer }" class="connect-cloud drawer ignore-vuetify-classes" @keydown.esc="closeCloudDrawer()">
+    <div :class="{ open: showCloudDrawer }" class="connect-cloud drawer ignore-vuetify-classes" @keydown.esc="toggleCloudDrawer()">
       <div class="header cloudDriveHeader">
-        <a class="backButton" @click="closeCloudDrawer()">
+        <a class="backButton" @click="toggleCloudDrawer()">
           <i class="uiIconBack"></i>
         </a>
         <span class="cloudDriveTitle">{{ $t("UIPopupWindow.title.ConnectCloudDriveForm") }}</span>
-        <a class="cloudDriveCloseIcon" @click="closeCloudDrawer()">×</a>
+        <a class="cloudDriveCloseIcon" @click="toggleCloudDrawer()">×</a>
       </div>
       <div class="content">
         <v-list dense class="cloudDriveList ignore-vuetify-classes">
@@ -23,7 +23,6 @@
         </v-list>
       </div>
     </div>
-    <div v-show="showDrawer" class="drawer-backdrop" @click="closeCloudDrawer()"></div>
   </div>
 </template>
 
@@ -31,16 +30,14 @@
 export default {
   data() {
     return {
-      showCloudDrawer: false
+      showCloudDrawer: false,
+      refId: "connectCloudDrive"
     };
   },
   created() {
     this.providers = cloudDrive.getProviders();
   },
   methods: {
-    closeCloudDrawer: function() {
-      this.toggleCloudDrawer();
-    },
     connectToCloudDrive: function(providerId) {
       cloudDrive.connect(providerId);
     },
