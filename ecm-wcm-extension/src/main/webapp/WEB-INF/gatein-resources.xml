@@ -187,9 +187,6 @@
     <depends>
       <module>extensionRegistry</module>
     </depends>
-    <depends>
-      <module>cloudDriveApp</module>
-    </depends>
   </module>
   
   <portal-skin>

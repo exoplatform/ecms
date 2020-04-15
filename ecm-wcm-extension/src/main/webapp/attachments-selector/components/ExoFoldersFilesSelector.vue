@@ -40,7 +40,7 @@
         <a :class="showSearchInput ? 'uiIconCloseServerAttachments' : 'uiIconSearch'" class="uiIconLightGray" @click="showSearchDocumentInput()"></a>
       </div>
       <div v-for="action in attachmentsComposerActions" :key="action.key" :class="`${action.appClass}Action`" class="actionBox">
-        <v-icon :class="action.iconClass" @click="executeAction(action)">{{ action.iconName }}</v-icon>
+        <v-icon :class="action.iconClass" class="uiActionIcon" @click="executeAction(action)">{{ action.iconName }}</v-icon>
         <component v-if="action.component" :is="action.component.name" :ref="action.key"></component>
       </div>
     </div>
