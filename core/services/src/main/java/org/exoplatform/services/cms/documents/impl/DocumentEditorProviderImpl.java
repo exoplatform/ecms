@@ -16,10 +16,12 @@
  */
 package org.exoplatform.services.cms.documents.impl;
 
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 import org.exoplatform.commons.api.settings.SettingService;
 import org.exoplatform.commons.api.settings.SettingValue;
@@ -34,7 +36,6 @@ import org.exoplatform.services.cms.documents.exception.PermissionValidationExce
 import org.exoplatform.services.organization.Group;
 import org.exoplatform.services.organization.OrganizationService;
 import org.exoplatform.services.security.Identity;
-import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.social.core.identity.provider.OrganizationIdentityProvider;
 import org.exoplatform.social.core.manager.IdentityManager;
 
@@ -192,16 +193,15 @@ public class DocumentEditorProviderImpl implements DocumentEditorProvider {
   /**
    * Inits the preview.
    *
-   * @param uuid the uuid
+   * @param fileId the uuid
    * @param workspace the workspace
-   * @param activityId the activity id
-   * @param context the context
-   * @param index the index
-   * @throws Exception the exception
+   * @param requestURI the requestURI
+   * @param locale the locale
+   * @return settings object
    */
   @Override
-  public void initPreview(String uuid, String workspace, String activityId, String context, int index) throws Exception {
-    editor.initPreview(uuid, workspace, activityId, context, index);
+  public Object initPreview(String fileId, String workspace, URI requestURI, Locale locale) {
+    return editor.initPreview(fileId, workspace, requestURI, locale);
   }
 
   /**

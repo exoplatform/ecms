@@ -86,18 +86,40 @@
     };
     
     /**
+     * Inits providers preview
+     * 
+     */
+    var initProvidersPreview = function(fileId, workspace){
+      return $.post({
+        async : true,
+        type : "POST",
+        url : prefixUrl + "/portal/rest/documents/editors/preview",
+        data : {
+          fileId : fileId,
+          workspace : workspace
+        }
+      });
+    };
+    
+    /**
      * Adds editor buttons container (button and pulldown)
      */
-    var addEditorButtonsContainer = function($target, fileId, buttons) {
+    var getButtonsContaner = function(fileId, buttons, preferedProvider, dropclass) {
       if (!buttons) {
         return;
       }
-      // Add buttons container
-      var $container = $target.find(".editorButtonContainer");
-      if ($container.length == 0) {
-        $container = $("<div class='editorButtonContainer hidden-tabletL'></div>");
-        $target.append($container);
+      // Sort buttons in user prefference order
+      if (preferedProvider != null) {
+        buttons.forEach(function(item,i){
+          if (item.provider === preferedProvider){
+            buttons.splice(i, 1);
+            buttons.unshift(item);
+          }
+        });
       }
+      // Add buttons container
+      // var $container = $target.find(".editorButtonContainer");
+      var $container = $("<div class='editorButtonContainer hidden-tabletL'></div>");
       
       // Create editor button
       var $btn = buttons[0].createButtonFn();
@@ -129,53 +151,31 @@
         $dropdownContainer.append($dropdown);
         $container.append($dropdownContainer);
       }
+      if (dropclass) {
+        $container.addClass(dropclass);
+      }
+      return $container;
     };
-    
-    /**
-     * Adds the 'Edit Online' button to a preview (from the activity stream)
-     * when it's loaded.
-     */
-    var tryAddEditorButtonToPreview = function(attempts, delay, fileId, buttons) {
-      var $elem = $("#uiDocumentPreview .previewBtn");
-      if ($elem.length == 0 || !$elem.is(":visible")) {
-        if (attempts > 0) {
-          setTimeout(function() {
-            tryAddEditorButtonToPreview(attempts - 1, delay, fileId, buttons);
-          }, delay);
-        } else {
-          log("Cannot find element " + $elem);
+
+    var loadProviderModule = function(provider) {
+      var loader = $.Deferred();
+      var moduleId = "SHARED/" + provider;
+      if (window.require.s.contexts._.config.paths[moduleId]) {
+        try {
+          window.require([moduleId], function(client) {
+            loader.resolve(client);
+          }, function(err) {
+            log("Cannot require provider module " + provider, err);
+            loader.reject();
+          });
+        } catch(e) {
+          log("Cannot load provider module " + provider, e);
+          loader.reject();
         }
       } else {
-        addEditorButtonsContainer($elem, fileId, buttons);
-        $(".previewBtn .editorButtonContainer").addClass("dropup");
+        loader.reject();
       }
-    };
-    
-    /**
-     * Adds the 'Edit Online' button to No-preview screen (from the activity
-     * stream) when it's loaded.
-     */
-    var tryAddEditorButtonNoPreview = function(attempts, delay, fileId, buttons) {
-      var $elem = $("#documentPreviewContainer .navigationContainer.noPreview");
-      if ($elem.length == 0 || !$elem.is(":visible")) {
-        if (attempts > 0) {
-          setTimeout(function() {
-            tryAddEditorButtonNoPreview(attempts - 1, delay, fileId, buttons);
-          }, delay);
-        } else {
-          log("Cannot find .noPreview element");
-        }
-      } else if ($elem.find("div.editorButtonContainer").length == 0) {
-        var $detailContainer = $elem.find(".detailContainer");
-        var $downloadBtn = $detailContainer.find(".uiIconDownload").closest("a.btn");
-        var $target = $("<div style='display: inline;'></div>");
-        if ($downloadBtn.length != 0) {
-          $downloadBtn.after($target);
-        } else {
-          $detailContainer.append($target);
-        }
-        addEditorButtonsContainer($target, fileId, buttons);
-      }
+      return loader.promise();
     };
     
     
@@ -189,48 +189,40 @@
         return;
       }
       currentWorkspace = workspace;
-      log("Init Activity buttons: " + JSON.stringify(buttons));
-      // Sort buttons in user prefference order
-      if (preferedProvider != null) {
-        buttons.forEach(function(item,i){
-          if (item.provider === preferedProvider){
-            buttons.splice(i, 1);
-            buttons.unshift(item);
-          }
-        });
-      }
       var $target = $("#activityContainer" + activityId).find("div[id^='ActivityContextBox'] > .actionBar .statusAction.pull-left");
-      addEditorButtonsContainer($target, fileId, buttons);
+      $target.append(getButtonsContaner(fileId, buttons, preferedProvider, 'dropdown'));
     };
     
     /**
      * Inits buttons on document preview.
      * 
      */
-    this.initPreviewButtons = function(activityId, index, fileId, preferedProvider) {
-      var buttons = buttonsFns.slice();
-      if (buttons.length == 0) {
-        return;
-      }
-      log("Init preview buttons: " + JSON.stringify(buttons));
-      var clickSelector = "#Preview" + activityId + "-" + index;
-      if (preferedProvider != null) {
-        buttons.forEach(function(item,i){
-          if (item.provider === preferedProvider){
-            buttons.splice(i, 1);
-            buttons.unshift(item);
-          }
+    this.initPreviewButtons = function(fileId, workspace, dropclass) {
+      buttonsFns = [];
+      var buttonsLoader = $.Deferred();
+      initProvidersPreview(fileId, workspace).then(function(data) {
+        var providersLoader = $.Deferred();
+        var preferedProvider;
+        data.forEach(function(providerInfo, i, arr) {
+          loadProviderModule(providerInfo.provider).done(function(module){
+            module.initPreview(providerInfo.settings);
+            if (providerInfo.prefered) {
+              preferedProvider = providerInfo.provider;
+            }
+            // Last provider loaded
+            if (i == (arr.length - 1)) {
+              providersLoader.resolve();
+            }
+          });
         });
-      }
-      $(clickSelector).click(function() {
-        // We set timeout here to avoid the case when the element is rendered
-		// but is going to be updated soon
-        setTimeout(function() {
-          tryAddEditorButtonToPreview(100, 100, fileId, buttons);
-          // We need wait for about 2min when doc cannot generate its preview
-          tryAddEditorButtonNoPreview(600, 250, fileId, buttons);
-        }, 100);
+        providersLoader.done(function(){
+          var $pulldown =  getButtonsContaner(fileId, buttonsFns, preferedProvider, dropclass);
+          buttonsLoader.resolve($pulldown);
+        });
+      }).catch(function(xhr,status,error) {
+        log("Cannot init providers preview for file" + fileId + ": " + status + " " + error);
       });
+      return buttonsLoader;
     };
     
     /**
@@ -249,11 +241,11 @@
     
     this.editorOpened = function(provider, fileId) {
       log("Editor opened. Provider: " + provider + ", fileId: " + fileId);
-    }
+    };
     
     this.editorClosed = function(provider, fileId) {
       log("Editor closed. Provider: " + provider + ", fileId: " + fileId);
-    }
+    };
     
     /**
      * Clears buttonsFns
@@ -261,8 +253,7 @@
      */
     this.resetButtons = function() {
       buttonsFns = [];
-    }
-    
+    };
   }
   return new EditorButtons();
 

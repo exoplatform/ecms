@@ -110,3 +110,8 @@
 .previewBtn .editorButtonContainer .dropdown-menu a{
   color: #3a3a3a;
 }
+
+.detailContainer .editors-placeholder {
+  display:inline;
+  margin-right: 5px;
+}

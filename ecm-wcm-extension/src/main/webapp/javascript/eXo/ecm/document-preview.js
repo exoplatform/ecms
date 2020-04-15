@@ -1,4 +1,4 @@
-(function ($, UIActivity, XSSUtils) {
+(function ($, UIActivity, XSSUtils, editorbuttons) {
   MAX_LENGTH = 2000,
   documentPreview = {
     defaultSettings: {
@@ -346,6 +346,7 @@
               '<a><i class="uiIconComment uiIconWhite"></i>&nbsp;${UIActivity.comment.showComment}</a>' +
             '</div>';
         }
+        
         html += '<div class="openBtn">' +
             '<a href="' + this.settings.doc.openUrl + '"><i class="uiIconGotoFolder uiIconWhite"></i>&nbsp;${UIActivity.comment.openInDocuments}</a>' +
           '</div>' +
@@ -476,23 +477,9 @@
         );
       }
 
-      var onlyOfficeButton =
-              '<div class="onlyOfficeEditBtn hidden-tabletL">' +
-                 '<a href="/portal/' + eXo.env.portal.portalName + '/oeditor?docId=' + this.settings.doc.id + '" target="_blank"><i class="uiIconEdit uiIconWhite"></i>'+ eXo.ecm.WCMUtils.getBundle("File.view.label.editOnline",eXo.env.portal.language) +'</a>' +
-              '</div>';
-
-      $.ajax({
-            url: "/portal/rest/onlyoffice/editor/api/version",
-              }).done(function(data, textStatus, xhr) {
-                 //If status code = 200 append onlyOffice button
-                 if( xhr.status === 200){
-                  $(".previewBtn").append(onlyOfficeButton);
-                  }
-              }).fail(function(textStatus, xhr) {
-                 if( xhr.status === 404){
-                  //OnlyOffice addons is not installed
-                 } else {
-                 console.log("Error to call rest service with status code :" +  xhr.status);}
+      var editorButtonsLoader = editorbuttons.initPreviewButtons(this.settings.doc.id, this.settings.doc.workspace, 'dropup');
+      editorButtonsLoader.done(function($buttonsContainer) {
+        $(".previewBtn").append($buttonsContainer);
       });
       
       $('#documentPreviewContainer #previewLikeLink').tooltip();
@@ -1323,4 +1310,4 @@
   }
 
   return documentPreview;
-})($, UIActivity, XSSUtils);
+})($, UIActivity, XSSUtils, editorbuttons);

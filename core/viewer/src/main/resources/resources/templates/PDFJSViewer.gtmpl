@@ -23,6 +23,8 @@
 
 if (uiParent != null) {
   def originalNode = uiParent.getOriginalNode();  
+  def fileId = originalNode.getUUID();
+  def workspace = originalNode.getSession().getWorkspace().getName();
   def currentNode = uicomponent.getFileLangNode(uiParent.getNode());
   def contentNode = currentNode.getNode("jcr:content");
   def fileSize = contentNode.getProperty("jcr:data").getStream().available();
@@ -286,6 +288,7 @@ if (maximumPage > 0 && maximumPage <= pdfViewerService.getMaxPages() && fileSize
       </div>
       <div class="detailContainer">
         <h4>$errorMessage</h4>
+        <div class="editors-placeholder" data-fileId="$fileId" data-workspace="$workspace"></div>
         <a class="btn btn-primary"  href="$downloadLink"><i class="uiIconDownload uiIconWhite"></i><%=_ctx.appRes("File.view.label.download")%></a>
         <a class="btn" href="#" onclick="<%=uicomponent.getActionOpenDocInDesktop()%>">
             <i class="uiIcon16x16FileDefault uiIcon16x16nt_file $remoteEditClass uiIconEcmsOpenDocument">
@@ -293,5 +296,6 @@ if (maximumPage > 0 && maximumPage <= pdfViewerService.getMaxPages() && fileSize
         </a>
       </div>
     </div>
+    <script type="text/javascript" src="/eXoWCMResources/javascript/eXo/wcm/editors.js"></script>
 <%}
 }%>

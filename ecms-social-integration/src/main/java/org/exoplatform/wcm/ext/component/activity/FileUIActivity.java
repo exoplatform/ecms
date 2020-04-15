@@ -1401,25 +1401,6 @@ public class FileUIActivity extends BaseUIActivity{
             + node.getSession().getWorkspace().getName() + "'," + prefferedEditor + ");");
 
       }
-
-      // Init preview links for each of file
-      for (int index = 0; index < getFilesCount(); index++) {
-        Node node = getContentNode(index);
-        require.addScripts("editorbuttons.resetButtons();");
-        // call plugins init handlers
-        for (DocumentEditorProvider provider : getDocumentService().getDocumentEditorProviders()) {
-          try {
-            if (provider.isAvailableForUser(identity)) {
-              provider.initPreview(node.getUUID(), node.getSession().getWorkspace().getName(), activityId, STREAM_CONTEXT, index);
-            }
-          } catch (Exception e) {
-            LOG.error("Cannot init preview from plugin {}, {}", provider.getProviderName(), e.getMessage());
-          }
-        }
-        String prefferedEditor = getPrefferedEditor(node);
-        require.addScripts("editorbuttons.initPreviewButtons('" + activityId + "', '" + index + "', '" + node.getUUID() + "', "
-            + prefferedEditor + ");");
-      }
     }
     super.end();
   }
