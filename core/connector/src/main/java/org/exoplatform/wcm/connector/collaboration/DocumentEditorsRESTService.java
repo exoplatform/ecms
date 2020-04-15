@@ -37,7 +37,6 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.UriInfo;
 
-import org.exoplatform.container.PortalContainer;
 import org.exoplatform.services.cms.documents.DocumentEditorProvider;
 import org.exoplatform.services.cms.documents.DocumentService;
 import org.exoplatform.services.cms.documents.exception.DocumentEditorProviderNotFoundException;
@@ -345,29 +344,6 @@ public class DocumentEditorsRESTService implements ResourceContainer {
     }).collect(Collectors.toList());
 
     return new DocumentEditorData(provider.getProviderName(), provider.isActive(), permissions);
-  }
-
-  /**
-   * Platform base url.
-   *
-   * @param schema the schema
-   * @param host the host
-   * @param port the port
-   * @return the string builder
-   */
-  protected StringBuilder baseUrl(String schema, String host, int port) {
-    StringBuilder platformUrl = new StringBuilder();
-    platformUrl.append(schema);
-    platformUrl.append("://");
-    platformUrl.append(host);
-    if (port >= 0 && port != 80 && port != 443) {
-      platformUrl.append(':');
-      platformUrl.append(port);
-    }
-    platformUrl.append('/');
-    platformUrl.append(PortalContainer.getCurrentPortalContainerName());
-
-    return platformUrl;
   }
 
   /**

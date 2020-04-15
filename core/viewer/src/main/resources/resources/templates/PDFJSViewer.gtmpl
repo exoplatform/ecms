@@ -299,6 +299,3 @@ if (maximumPage > 0 && maximumPage <= pdfViewerService.getMaxPages() && fileSize
     <script type="text/javascript" src="/eXoWCMResources/pdf.js/editors.js"></script>
 <%}
 }%>
-
-
-

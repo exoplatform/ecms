@@ -86,10 +86,10 @@
     };
     
     /**
-     * Saves prefered provider.
+     * Inits providers preview
      * 
      */
-    var initProviders = function(fileId, workspace){
+    var initProvidersPreview = function(fileId, workspace){
       return $.post({
         async : true,
         type : "POST",
@@ -161,22 +161,17 @@
 
     var loadProvidersModule = function(provider) {
       var loader = $.Deferred();
-      // try load provider client
       var moduleId = "SHARED/" + provider;
       if (window.require.s.contexts._.config.paths[moduleId]) {
         try {
-          // load client module and work with it asynchronously
           window.require([moduleId], function(client) {
-            // FYI client module's initialization (if provided) will be invoked
-            // in initContext()
             loader.resolve(client);
           }, function(err) {
             log("ERROR: Cannot load provider module " + provider + " Error:" + err.message + ": " + JSON.stringify(err), err);
             loader.reject();
           });
         } catch(e) {
-          // cannot load the module - default behaviour
-          utils.log("ERROR: " + e, e);
+          log("ERROR: " + e, e);
           loader.reject();
         }
       } else {
@@ -196,7 +191,6 @@
         return;
       }
       currentWorkspace = workspace;
-      log("Init Activity buttons: " + JSON.stringify(buttons));
       var $target = $("#activityContainer" + activityId).find("div[id^='ActivityContextBox'] > .actionBar .statusAction.pull-left");
       $target.append(getButtonsContaner(fileId, buttons, preferedProvider, 'dropdown'));
     };
@@ -208,15 +202,13 @@
     this.initPreviewButtons = function(fileId, workspace, dropclass) {
       buttonsFns = [];
       var buttonsLoader = $.Deferred();
-      initProviders(fileId, workspace).done(function(data) {
-        console.log("PROVIDERS INITED: " + JSON.stringify(data));
+      initProvidersPreview(fileId, workspace).done(function(data) {
         var providersLoader = $.Deferred();
         var preferedProvider;
         data.forEach(function(providerInfo, i, arr) {
-          console.log("init provider:" + providerInfo.provider);
           loadProvidersModule(providerInfo.provider).done(function(module){
             module.initPreview(providerInfo.settings);
-            if(providerInfo.prefered) {
+            if (providerInfo.prefered) {
               preferedProvider = providerInfo.provider;
             }
             // Last provider loaded
