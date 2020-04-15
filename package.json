@@ -4,7 +4,7 @@
   "description": "eXo Cloud Drive Plugin",
   "repository": {
     "type": "git",
-    "url": "https://github.com/exodev/ecms"
+    "url": "https://github.com/exo-addons/cloud-drive-extension"
   },
   "scripts": {
     "start": "webpack --config webpack.dev.js --mode development",
@@ -52,8 +52,7 @@
   },
   "dependencies": {
     "anchorme": "^1.1.2",
-    "autosize": "^4.0.2",
-    "axios": "^0.19.0"
+    "autosize": "^4.0.2"
   },
   "jest": {
     "projects": [
