@@ -73,9 +73,9 @@
           <div class="uploadedFiles">
             <div class="uploadedFilesTitle">{{ $t('attachments.drawer.title') }} ({{ value.length }})</div>
             <div v-if="value.length > 0" class="destinationFolder">
-              <div v-if="showFile" class="folderLocation">
-                <div><p class="folderOne">{{ schemaFolder[0] }}</p></div>
-                <div v-for="folder in schemaFolder.slice(1,3)" :key="folder" class="folders">
+              <div v-if="showDestinationPath" class="folderLocation">
+                <div><p class="drive">{{ schemaFolder[0] }}</p></div>
+                <div v-for="folder in schemaFolder.slice(1,3)" :key="folder" class="folder">
                   <div><span class="uiIconArrowRight colorIcon"></span></div>
                   <div><p :class="schemaFolder[schemaFolder.slice(1,3).length] === folder ?'active' : ''" class="folderName">{{ folder }}</p></div>
                 </div>
@@ -155,7 +155,7 @@ export default {
       MESSAGES_DISPLAY_TIME: 5000,
       drawerTitle: `${this.$t('attachments.drawer.header')}`,
       pathDestinationFolder : '',
-      showFile: false,
+      showDestinationPath: false,
       schemaFolder: []
     };
   },
@@ -178,7 +178,7 @@ export default {
     value(){
       if(this.value.length === 0){
         this.pathDestinationFolder = '';
-        this.showFile = false;
+        this.showDestinationPath = false;
         this.schemaFolder = [];
         this.addDefaultPath();
       }
@@ -351,9 +351,9 @@ export default {
     addDestinationFolder(pathDestinationFolder, folderName) {
       this.pathDestinationFolder = pathDestinationFolder;
       if (pathDestinationFolder === '') {
-        this.showFile = false;
+        this.showDestinationPath = false;
       } else {
-        this.showFile = true;
+        this.showDestinationPath = true;
       }
       for (let i = 0; i < this.value.length; i++) {
         this.value[i].destinationFolder = this.pathDestinationFolder;
@@ -391,13 +391,13 @@ export default {
         attachmentsService.getSpaceById(eXo.env.portal.spaceId).then( space => {
           this.schemaFolder.push(space.displayName);
           this.schemaFolder.push('Activity Stream Documents');
-          this.showFile=true;
+          this.showDestinationPath=true;
         });
       }else {
         this.schemaFolder.push(eXo.env.portal.userName);
         this.schemaFolder.push('Public');
         this.schemaFolder.push('Activity Stream Documents');
-        this.showFile=true;
+        this.showDestinationPath=true;
       }
     }
   }
