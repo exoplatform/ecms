@@ -6,8 +6,7 @@ const webpackCommonConfig = require("./webpack.common.js");
 const app = "cloud-drive";
 
 // add the server path to your server location path
-// const exoServerPath = "/exo-server";
-const exoServerPath = "D:/sasha_work/platform/platform-6.0.0-M27";
+const exoServerPath = "/exo-server";
 
 let config = merge(webpackCommonConfig, {
   output: {

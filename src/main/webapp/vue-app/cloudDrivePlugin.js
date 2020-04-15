@@ -10,9 +10,7 @@ const CloudDrivePlugin = [{
   enabled: true,
   onExecute(cloudDriveComponent) {
     console.log(cloudDriveComponent);
-    require(['SHARED/cloudDriveApp'], function(cloudDriveApp) {
-      cloudDriveApp.init();
-    });
+    cloudDriveComponent.showCloudDrawer = true;
   }
 }];
 
