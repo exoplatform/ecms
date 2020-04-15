@@ -20,15 +20,15 @@
             <div class="btn-group">
               <button class="btn dropdown-toggle" data-toggle="dropdown">...</button>
               <ul class="dropdown-menu">
-                <li v-for="folderHist in foldersHistory.slice(0,foldersHistory.length-2)" :key="folderHist"><a @click="openFolder(folderHist)">{{ folderHist.name }}</a></li>
+                <li v-for="folderHist in foldersHistory.slice(0,foldersHistory.length-2)" :key="folderHist"><a @click="openFolder(folderHist)">{{ folderHist.title }}</a></li>
               </ul>
             </div>
           </div>
           <div v-for="folderHis in foldersHistory.slice(foldersHistory.length-2,foldersHistory.length)" :key="folderHis" class="folderHistory">
             <span class="uiIconArrowRight"></span>
-            <a :title="folderHis.name" :class="folderHis.isSelected? 'active' : ''" class="currentSpaceDirectory" data-toggle="tooltip" rel="tooltip"
+            <a :title="folderHis.title" :class="folderHis.isSelected? 'active' : ''" class="currentSpaceDirectory" data-toggle="tooltip" rel="tooltip"
                data-placement="bottom" @click="openFolder(folderHis)">
-              {{ folderHis.name }}
+              {{ folderHis.title }}
             </a>
           </div>
         </div>
@@ -69,20 +69,29 @@
             <div class="selectionLabel center">{{ folder.title }}</div>
           </a>
         </div>
-        <div v-for="file in filteredFiles" :key="file.id" :id="file.idAttribute" :title="file.idAttribute" :class="file.selected? 'selected' : ''"
-             class="fileSelection" @click="selectFile(file)">
+        <div v-if="emptyFolderForSelectDestination && modeFolderSelection && !emptyFolder" class="emptyFolder">
+          <i class="uiIconEmptyFolder"></i>
+          <p>{{ $t('attachments.drawer.destination.folder.empty') }}</p>
+        </div>
+        <div v-for="file in filteredFiles" v-show="!modeFolderSelection" :key="file.id" :id="file.idAttribute" :title="file.idAttribute" :class="file.selected? 'selected' : ''" class="fileSelection" @click="selectFile(file)">
           <exo-attachment-item :file="file"></exo-attachment-item>
         </div>
       </div>
     </div>
 
-    <div class="attachActions">
+
+    <div v-if="modeFolderSelection" class="buttonActions btnActions">
+      <button class="btn btnCancel" type="button" @click="$emit('cancel')">{{ $t('attachments.drawer.cancel') }}</button>
+      <button class="btn btn-primary attach ignore-vuetify-classes btnSelect" type="button" @click="selectDestination()">{{ $t('attachments.drawer.select') }}</button>
+    </div>
+
+    <div v-if="!modeFolderSelection" class="attachActions">
       <div class="limitMessage">
         <span :class="filesCountClass" class="countLimit">
           {{ $t('attachments.drawer.maxFileCountLeft').replace('{0}', filesCountLeft) }}
         </span>
       </div>
-      <div class="buttonActions">
+      <div v-if="!modeFolderSelection" class="buttonActions">
         <button class="btn" type="button" @click="$emit('cancel')">{{ $t('attachments.drawer.cancel') }}</button>
         <button :disabled="selectedFiles.length === 0" class="btn btn-primary attach ignore-vuetify-classes" type="button" @click="addSelectedFiles()">{{ $t('attachments.drawer.select') }}</button>
       </div>
@@ -95,6 +104,10 @@ import * as attachmentsService from '../attachmentsService.js';
 
 export default {
   props: {
+    modeFolderSelection: {
+      type: Boolean,
+      default:false,
+    },
     spaceId: {
       type: String,
       default: ''
@@ -123,7 +136,9 @@ export default {
       showSearchInput: false,
       searchFilesFolders: '',
       loadingFolders: true,
-      filesCountClass: ''
+      filesCountClass: '',
+      selectedFolderPath : '',
+      schemaFolder: ''
     };
   },
   computed: {
@@ -156,6 +171,9 @@ export default {
     },
     emptyFolder() {
       return this.files.length === 0 && this.folders.length === 0 && this.drivers.length === 0 && !this.loadingFolders;
+    },
+    emptyFolderForSelectDestination(){
+      return this.folders.length === 0 && this.drivers.length === 0 && !this.loadingFolders;
     }
   },
   watch: {
@@ -192,6 +210,18 @@ export default {
       this.resetExplorer();
       folder.isSelected = true;
       this.fetchChildrenContents(folder.path);
+      if (folder.path === 'Public') {
+        const driverPath = this.driveRootPath.split('/');
+        let localDrive = driverPath[0];
+        const number = 2;
+        for (let i = 1; i < driverPath.length - number; i++) {
+          localDrive = localDrive.concat('/', driverPath[i]);
+        }
+        this.selectedFolderPath = localDrive.concat('/', folder.path);
+      } else {
+        this.selectedFolderPath = this.driveRootPath.concat(folder.path);
+      }
+      this.schemaFolder = this.currentDrive.name.concat('/', folder.path);
     },
     openDrive(drive) {
       this.foldersHistory = [];
@@ -262,7 +292,8 @@ export default {
     generateHistoryTree(folder) {
       if (!this.foldersHistory.find(f => f.name === folder.name) && folder) {
         this.foldersHistory.push({
-          name: folder.driverType === 'Group Drives' ? folder.title : folder.name,
+          name: folder.name,
+          title: folder.title,
           path: folder.driverType ? '' : folder.path,
           driverType: folder.driverType ? folder.driverType : ''
         });
@@ -277,7 +308,7 @@ export default {
       this.foldersHistory.find(f => f.name === folder.name).isSelected = true;
     },
     addSelectedFiles() {
-      this.$emit('attachExistingServerAttachment', this.selectedFiles);
+      this.$emit('selectedItems', this.selectedFiles);
     },
     showSearchDocumentInput() {
       this.showSearchInput = !this.showSearchInput;
@@ -298,7 +329,7 @@ export default {
               id: id,
               name: fetchedFolders[j].getAttribute('name'),
               title: fetchedFolders[j].getAttribute('title'),
-              path: fetchedFolders[j].getAttribute('titlePath'),
+              path: fetchedFolders[j].getAttribute('currentFolder'),
               folderTypeCSSClass: folderTypeCSSClass,
               isSelected: false
             });
@@ -352,6 +383,13 @@ export default {
           }
         }
       }
+    },
+    selectDestination(){
+      if(this.selectedFolderPath === ''){
+        this.selectedFolderPath = this.driveRootPath;
+        this.schemaFolder = this.currentDrive.name ;
+      }
+      this.$emit('selectedItems',this.selectedFolderPath,this.schemaFolder);
     }
   }
 };

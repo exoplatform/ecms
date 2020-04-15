@@ -226,13 +226,12 @@
 
   .limitMessage {
     height: 20px;
-    padding: 12px 0px;
+    padding: 12px 23px;
     color: #555;
     display: flex;
     justify-content: space-between;
 
     .sizeLimit, .countLimit {
-      margin-right: -3px;
       line-height: 16px;
       font-weight: initial;
       box-sizing: border-box;
@@ -665,6 +664,86 @@
         }
       }
     }
+  }
+}
+
+
+.btnActions{
+  float:right;
+  margin-right: 10%;
+  margin-top: -20%;
+}
+.btnCancel{
+  border: 1px solid #568cc9 !important;
+  color: #568cc9 !important;
+  margin-right: 4px;
+  text-transform: uppercase !important;
+}
+.btnSelect{
+  text-transform: uppercase;
+}
+
+
+.destinationFolder {
+  display: flex;
+  flex-direction: row;
+  margin-left: 15px;
+  color: #a8b3c5;
+  margin-bottom: 10%;
+
+  .folderLocation {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    border-bottom: 1px solid  #a8b3c5;;
+     > p{
+       margin-bottom: 0px;
+     }
+
+  }
+
+  .drive {
+    overflow: hidden;
+    white-space: nowrap;
+    cursor: pointer;
+    margin-bottom: 0px;
+
+  }
+  .colorIcon{
+    color: #a8b3c5;
+  }
+
+  .folder {
+    flex-direction: row;
+    display: flex;
+    > p {
+      margin-bottom: 0px;
+    }
+  }
+
+  .folderName {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 95%;
+      margin-bottom: 0px;
+
+  }
+  .active{
+    color: #578cc9;
+    font-weight: bold;
+    width: 30%;
+  }
+
+  .selectFile {
+    width: 100%;
+    border-bottom: 1px solid #a8b3c5;;
+    > p {
+      margin-bottom: 0px;
+    }
+  }
+  .uiIconFolder{
+    cursor: pointer;
   }
 }
 
