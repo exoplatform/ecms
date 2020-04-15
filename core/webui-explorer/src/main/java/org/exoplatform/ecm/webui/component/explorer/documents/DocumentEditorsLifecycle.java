@@ -57,8 +57,8 @@ public class DocumentEditorsLifecycle implements ApplicationLifecycle<WebuiReque
   /** The Constant LOG. */
   protected static final Log    LOG                          = ExoLogger.getLogger(DocumentEditorsLifecycle.class);
 
-  /** The Constant MIX_REFERENCABLE. */
-  protected static final String MIX_REFERENCABLE             = "mix:referencable";
+  /** The Constant MIX_REFERENCEABLE. */
+  protected static final String MIX_REFERENCEABLE             = "mix:referenceable";
 
   /**
    * Instantiates a new DocumentEditorsLifecycle lifecycle.
@@ -112,7 +112,7 @@ public class DocumentEditorsLifecycle implements ApplicationLifecycle<WebuiReque
         Node node = explorer.getCurrentNode();
         String nodeWs = node.getSession().getWorkspace().getName();
         String nodePath = node.getPath();
-        if (node.isNodeType(MIX_REFERENCABLE) && isNotSameUserDocument(userName, nodeWs, nodePath, parentContext)) {
+        if (node.isNodeType(MIX_REFERENCEABLE) && isNotSameUserDocument(userName, nodeWs, nodePath, parentContext)) {
           if (LOG.isDebugEnabled()) {
             LOG.debug("Init documents explorer for {}, node: {}:{}, context: {}", userName, nodeWs, nodePath, parentContext);
           }
@@ -161,6 +161,7 @@ public class DocumentEditorsLifecycle implements ApplicationLifecycle<WebuiReque
    */
   protected void initEditorsModule(WebuiRequestContext context, String fileId, String workspace) throws RepositoryException {
     RequireJS require = context.getJavascriptManager().require("SHARED/editorbuttons", "editorbuttons");
+    require.addScripts("console.log('Hello world');");
     CometdDocumentsService cometdService = context.getApplication()
                                                   .getApplicationServiceContainer()
                                                   .getComponentInstanceOfType(CometdDocumentsService.class);
@@ -177,8 +178,7 @@ public class DocumentEditorsLifecycle implements ApplicationLifecycle<WebuiReque
                                             .collect(Collectors.toList());
     try {
       String providersJson = new JsonGeneratorImpl().createJsonArray(providers).toString();
-      require.addScripts("editorbuttons.init('" + context.getRemoteUser() + "' ," + cometdConf.toJSON() + ", " + providersJson
-          + ");");
+      require.addScripts("editorbuttons.init('" + context.getRemoteUser() + "' ," + cometdConf.toJSON() + ");");
       String currentProvider = documentService.getCurrentDocumentProvider(fileId, workspace);
       currentProvider = currentProvider != null ? new StringBuilder("'").append(currentProvider).append("'").toString() : "null";
       require.addScripts("editorbuttons.initExplorer('" + fileId + "', " + providersJson + ", " + currentProvider + ");");

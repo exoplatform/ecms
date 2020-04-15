@@ -224,10 +224,10 @@
      * optional (used for Documents app)
      */
     var subscribeDocument = function(fileId, providers) {
-      // Use only one channel for one document
       if (subscribedDocuments.fileId) {
-        return;
+          return;
       }
+      console.log("SUBSCRIBING ON " + fileId);
       var subscription = cometd.subscribe("/eXo/Application/documents/" + fileId, function(message) {
         // Channel message handler
         var result = tryParseJson(message);
@@ -265,11 +265,16 @@
             }
           } break;
           case CURRENT_PROVIDER_INFO: {
-            if(result.provider && result.provider != "null") {
+            console.log("Current provider info: " + result.provider + " fileId: " + result.fileId);
+            setTimeout(function(){
+              if(result.provider && result.provider != "null") {
               $('.editorButton[data-provider!="' + result.provider + '"][data-fileId="' + result.fileId + '"]').each(function(){
+                
                 $(this).addClass("disabledProvider");
               });
-            }
+              }
+            }, 100);
+         
            break;
         }}
       }, cometdContext, function(subscribeReply) {
@@ -277,13 +282,15 @@
         if (subscribeReply.successful) {
           // The server successfully subscribed this client to the channel.
           log("Document updates subscribed successfully: " + JSON.stringify(subscribeReply));
-          subscribedDocuments.fileId = subscription;
+          subscribedDocuments.fileId = subscribeReply.subscription;
         } else {
           var err = subscribeReply.error ? subscribeReply.error : (subscribeReply.failure ? subscribeReply.failure.reason
               : "Undefined");
           log("Document updates subscription failed for " + fileId, err);
         }
       });
+      
+
     };
 
     var unsubscribeDocument = function(fileId) {
@@ -322,6 +329,7 @@
     };
     
     this.init = function(userId, cometdConf) {
+      console.lg("INIT CALLED");
       if (cometdConf) {
         cCometD.configure({
           "url" : prefixUrl + cometdConf.path,
@@ -340,6 +348,7 @@
     };
     
     this.initExplorer = function(fileId, providers, currentProvider) {
+      console.lg("INIT EXPLORER CALLED");
       subscribeDocument(fileId, providers);
       // Web UI buttons
       if (providers && currentProvider) {
@@ -383,14 +392,13 @@
      * 
      */
     this.initPreviewButtons = function(fileId, workspace, dropclass) {
+      console.log("INIT PREVIEW BUTTONS CALLED");
       buttonsFns = [];
       var buttonsLoader = $.Deferred();
       initProviders(fileId, workspace).done(function(data) {
-        console.log("PROVIDERS INITED: " + JSON.stringify(data));
         var providersLoader = $.Deferred();
         var preferedProvider;
         data.forEach(function(providerInfo, i, arr) {
-          console.log("init provider:" + providerInfo.provider);
           loadProvidersModule(providerInfo.provider).done(function(module){
             module.initPreview(providerInfo.settings);
             if(providerInfo.prefered) {
@@ -414,6 +422,11 @@
        * '"]').each(function(){ $(this).addClass("disabledProvider"); }); }
        */
       subscribeDocument(fileId);
+      publishDocument(fileId, {
+        "type" : DOCUMENT_PREVIEW_OPENED,
+        "fileId" : fileId,
+        "workspace" : workspace
+      });
       return buttonsLoader;
     };
     
