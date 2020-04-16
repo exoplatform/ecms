@@ -74,31 +74,49 @@
             <div class="uploadedFilesTitle">{{ $t('attachments.drawer.title') }} ({{ value.length }})</div>
             <div v-if="value.length > 0" class="destinationFolder">
               <div v-if="showDestinationPath" class="folderLocation">
-                <div><p class="drive">{{ schemaFolder[0] }}</p></div>
+                <div><p :title="schemaFolder[0]" class="drive" rel="tooltip" data-placement="top">{{ schemaFolder[0] }}</p></div>
                 <div v-for="folder in schemaFolder.slice(1,3)" :key="folder" class="folder">
                   <div><span class="uiIconArrowRight colorIcon"></span></div>
-                  <div><p :class="schemaFolder[schemaFolder.slice(1,3).length] === folder ?'active' : ''" class="folderName">{{ folder }}</p></div>
+                  <div><p :title="folder" :class="schemaFolder[schemaFolder.slice(1,3).length] === folder ?'active' : ''" class="folderName" rel="tooltip" data-placement="top">{{ folder }}</p></div>
                 </div>
               </div>
               <div>
-                <i class="uiIconFolder " @click="toggleSelectDestinationFolder()"></i>
+                <i :title="$t('attachments.drawer.destination.attachment')" class="uiIconFolder " rel="tooltip" data-placement="top" @click="toggleSelectDestinationFolder()"></i>
               </div>
             </div>
             <div class="uploadedFilesItems">
               <div v-for="attachedFile in value" :key="attachedFile.name" class="uploadedFilesItem">
-                <exo-attachment-item :file="attachedFile"></exo-attachment-item>
-                <div class="removeFile">
-                  <a :title="$t('attachments.drawer.delete')" href="#" class="actionIcon" rel="tooltip"
-                     data-placement="top" @click="removeAttachedFile(attachedFile)">
-                    <i class="uiIcon uiIconLightGray"></i>
-                  </a>
+                <div class="showDestination">
+                  <div class="showFile"><exo-attachment-item :file="attachedFile"></exo-attachment-item></div>
+                </div>
+                <div class="destinationFolder">
+                  <div class="folderLocation">
+                    <div class="emptyMessage">
+                    </div>
+                    <div v-if="attachedFile.pathDestinationFolderForFile && attachedFile.uploadId" class="box">
+                      <div><p :title="attachedFile.pathDestinationFolderForFile" class="folder" rel="tooltip" data-placement="top">{{ attachedFile.pathDestinationFolderForFile }}</p></div>
+                      <div class="folderName">
+                        <a class="colorIcon" @click="deleteDestinationFolderForFile(attachedFile.name)">x</a>
+                      </div>
+                    </div>
+                    <div>
+                      <i v-if="!attachedFile.pathDestinationFolderForFile && attachedFile.uploadId" :title="$t('attachments.drawer.destination.folder')" rel="tooltip" data-placement="top" class="fas fa-folder fa-sm colorIcon" @click="openSelectDestinationFolderForFile(attachedFile)"></i>
+                    </div>
+                    <div>
+                      <i v-if="!attachedFile.uploadId" :title="$t('attachments.drawer.destination.attachment')" rel="tooltip" data-placement="top" class="fas fa-ban fa-xs colorIconStop" ></i>
+                    </div>
+                    <div class="btnTrash">
+                      <i :title="$t('attachments.drawer.delete')" rel="tooltip" data-placement="top" class="fas fa-trash fa-xs colorIcon" @click="removeAttachedFile(attachedFile)"></i>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <exo-server-files-selector v-if="showDocumentSelector && !showDestinationFolder" :attached-files="value" :space-id="spaceId" @selectedItems="toggleServerFileSelector" @cancel="toggleServerFileSelector()"></exo-server-files-selector>
-        <exo-server-files-selector v-if="showDocumentSelector && showDestinationFolder" :mode-folder-selection="showDestinationFolder" @selectedItems="addDestinationFolder" @cancel="toggleServerFileSelector()"></exo-server-files-selector>
+        <exo-folders-files-selector v-if="showDocumentSelector && !showDestinationFolder && !showDestinationFolderForFile" :attached-files="value" :space-id="spaceId" @itemsSelected="toggleServerFileSelector" @cancel="toggleServerFileSelector()"></exo-folders-files-selector>
+        <exo-folders-files-selector v-if="showDocumentSelector && showDestinationFolder && !showDestinationFolderForFile" :mode-folder-selection="showDestinationFolder" @itemsSelected="addDestinationFolder" @cancel="toggleServerFileSelector()"></exo-folders-files-selector>
+        <exo-folders-files-selector v-if="showDocumentSelector && showDestinationFolderForFile" :mode-folder-selection="showDestinationFolderForFile" :mode-folder-selection-for-file="modeFolderSelectionForFile" @itemsSelected="addDestinationFolderForFile" @cancel="toggleServerFileSelector()"></exo-folders-files-selector>
       </div>
       <div v-if="!showDocumentSelector" class="attachmentsFooter footer ignore-vuetify-classes">
         <a class="btn btn-primary ignore-vuetify-classes" @click="closeAttachments()">{{ $t('attachments.drawer.apply') }}</a>
@@ -156,7 +174,10 @@ export default {
       drawerTitle: `${this.$t('attachments.drawer.header')}`,
       pathDestinationFolder : '',
       showDestinationPath: false,
-      schemaFolder: []
+      schemaFolder: [],
+      destinationFileName: '',
+      showDestinationFolderForFile:false,
+      modeFolderSelectionForFile: false,
     };
   },
   watch: {
@@ -181,6 +202,13 @@ export default {
         this.showDestinationPath = false;
         this.schemaFolder = [];
         this.addDefaultPath();
+      }
+      if (this.value.length > 0 && !this.pathDestinationFolder) {
+        for (let i = 0; i < this.value.length; i++) {
+          if (!this.value[i].pathDestinationFolder) {
+            this.value[i].pathDestinationFolder = this.pathDestinationFolder;
+          }
+        }
       }
     },
   },
@@ -242,6 +270,7 @@ export default {
           uploadId: this.getNewUploadId(),
           uploadProgress: 0,
           destinationFolder: this.pathDestinationFolder,
+          pathDestinationFolderForFile:''
         });
       });
 
@@ -356,19 +385,35 @@ export default {
         this.showDestinationPath = true;
       }
       for (let i = 0; i < this.value.length; i++) {
-        this.value[i].destinationFolder = this.pathDestinationFolder;
+        if(!this.value[i].destinationFolder){
+          this.value[i].destinationFolder = this.pathDestinationFolder;
+        }
       }
       this.schemaFolder = [];
       const namesOfFolders = folderName.split('/');
       for (let i = 0; i < namesOfFolders.length; i++) {
         this.schemaFolder[i] = namesOfFolders[i];
       }
-      this.pathDestinationFolder = '';
       this.showDocumentSelector = !this.showDocumentSelector;
       this.drawerTitle = this.showDocumentSelector? `${this.$t('attachments.drawer.existingUploads')}` : `${this.$t('attachments.drawer.header')}`;
       if (!this.showDocumentSelector) {
         this.showDestinationFolder = false;
       }
+    },
+    addDestinationFolderForFile(pathDestinationFolder, folder){
+      for (let i =0 ;i< this.value.length;i++){
+        if (this.value[i].name === this.destinationFileName){
+          this.value[i].pathDestinationFolderForFile = folder;
+          this.value[i].destinationFolder = pathDestinationFolder ;
+        }
+      }
+      this.pathDestinationFolder = '';
+      this.showDocumentSelector = !this.showDocumentSelector;
+      this.drawerTitle = this.showDocumentSelector? `${this.$t('attachments.drawer.existingUploads')}` : `${this.$t('attachments.drawer.header')}`;
+      if (!this.showDocumentSelector) {
+        this.showDestinationFolderForFile = false;
+      }
+      this.modeFolderSelectionForFile = false;
     },
     toggleServerFileSelector(selectedFiles){
       if (selectedFiles) {
@@ -378,11 +423,19 @@ export default {
       this.showDocumentSelector = !this.showDocumentSelector;
       this.drawerTitle = this.showDocumentSelector? `${this.$t('attachments.drawer.existingUploads')}` : `${this.$t('attachments.drawer.header')}`;
       if (!this.showDocumentSelector){
-        this.showDestinationFolder = false ;
+        this.showDestinationFolder = false;
+        this.showDestinationFolderForFile = false;
       }
     },
     toggleSelectDestinationFolder(){
       this.showDestinationFolder = true ;
+      this.showDocumentSelector = !this.showDocumentSelector;
+      this.drawerTitle = this.showDocumentSelector? `${this.$t('attachments.drawer.destination.folder')}` : `${this.$t('attachments.drawer.header')}`;
+    },
+    openSelectDestinationFolderForFile(file){
+      this.modeFolderSelectionForFile = true;
+      this.destinationFileName = file.name;
+      this.showDestinationFolderForFile = true;
       this.showDocumentSelector = !this.showDocumentSelector;
       this.drawerTitle = this.showDocumentSelector? `${this.$t('attachments.drawer.destination.folder')}` : `${this.$t('attachments.drawer.header')}`;
     },
@@ -398,6 +451,15 @@ export default {
         this.schemaFolder.push('Public');
         this.schemaFolder.push('Activity Stream Documents');
         this.showDestinationPath=true;
+      }
+    },
+    deleteDestinationFolderForFile(fileName){
+      for (let i=0;i<this.value.length;i++){
+        if(this.value[i].name === fileName){
+          this.value[i].showDestinationFolderForFile = '';
+          this.value[i].pathDestinationFolderForFile = '';
+          break;
+        }
       }
     }
   }

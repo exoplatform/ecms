@@ -104,6 +104,10 @@ import * as attachmentsService from '../attachmentsService.js';
 
 export default {
   props: {
+    modeFolderSelectionForFile: {
+      type: Boolean,
+      default: false
+    },
     modeFolderSelection: {
       type: Boolean,
       default:false,
@@ -138,7 +142,8 @@ export default {
       loadingFolders: true,
       filesCountClass: '',
       selectedFolderPath : '',
-      schemaFolder: ''
+      schemaFolder: '',
+      folderDestinationForFile:''
     };
   },
   computed: {
@@ -222,6 +227,7 @@ export default {
         this.selectedFolderPath = this.driveRootPath.concat(folder.path);
       }
       this.schemaFolder = this.currentDrive.name.concat('/', folder.path);
+      this.folderDestinationForFile = folder.name;
     },
     openDrive(drive) {
       this.foldersHistory = [];
@@ -308,7 +314,7 @@ export default {
       this.foldersHistory.find(f => f.name === folder.name).isSelected = true;
     },
     addSelectedFiles() {
-      this.$emit('selectedItems', this.selectedFiles);
+      this.$emit('itemsSelected', this.selectedFiles);
     },
     showSearchDocumentInput() {
       this.showSearchInput = !this.showSearchInput;
@@ -351,7 +357,7 @@ export default {
               fileTypeCSSClass: fileTypeCSSClass,
               idAttribute: idAttribute,
               selected: selected,
-              mimetype: fetchedFiles[j].getAttribute('nodeType'),
+              mimetype: fetchedFiles[j].getAttribute('nodeType')
             });
           }
         }
@@ -385,11 +391,19 @@ export default {
       }
     },
     selectDestination(){
-      if(this.selectedFolderPath === ''){
+      if(!this.selectedFolderPath){
         this.selectedFolderPath = this.driveRootPath;
         this.schemaFolder = this.currentDrive.name ;
+        this.folderDestinationForFile = this.currentDrive.name;
       }
-      this.$emit('selectedItems',this.selectedFolderPath,this.schemaFolder);
+      if (this.modeFolderSelectionForFile) {
+        this.$emit('itemsSelected', this.selectedFolderPath, this.folderDestinationForFile);
+      } else {
+        this.$emit('itemsSelected', this.selectedFolderPath, this.schemaFolder);
+      }
+
+
+
     }
   }
 };
