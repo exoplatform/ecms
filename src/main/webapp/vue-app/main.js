@@ -17,6 +17,8 @@ const url = `/portal/rest/i18n/bundle/locale.clouddrive.CloudDrive-${lang}.json`
 
 let connectCloudApp;
 export function init() {
+  // should get workspace and path from Personal Documents
+  cloudDrive.init("collaboration", "/Users/r___/ro___/roo___/root/Private");
   // getting locale resources
   exoi18n.loadLanguageAsync(lang, url).then(i18n => {
     // init Vue app when locale resources are ready
