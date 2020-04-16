@@ -26,6 +26,7 @@ import javax.jcr.Node;
 import javax.jcr.NodeIterator;
 import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -62,8 +63,7 @@ import org.exoplatform.services.security.Identity;
 import org.exoplatform.services.security.MembershipEntry;
 
 /**
- * REST service providing information about cloud files in Documents (ECMS)
- * app.<br>
+ * REST service providing information about cloud files in Documents (ECMS) app.<br>
  * Created by The eXo Platform SAS.
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
@@ -113,9 +113,8 @@ public class FileService implements ResourceContainer {
   }
 
   /**
-   * Return file information. Returned file may be not yet created in cloud
-   * (accepted for creation), then this service response will be with status
-   * ACCEPTED, otherwise it's OK response.
+   * Return file information. Returned file may be not yet created in cloud (accepted for creation), then this service response
+   * will be with status ACCEPTED, otherwise it's OK response.
    *
    * @param uriInfo the uri info
    * @param workspace {@link String} Drive Node workspace
@@ -232,6 +231,20 @@ public class FileService implements ResourceContainer {
       }
     } else {
       return Response.status(Status.BAD_REQUEST).entity(ErrorEntiry.message("Null workspace")).build();
+    }
+  }
+
+  @GET
+  @RolesAllowed("users")
+  @Path("/drive/personal")
+  public Response getUserDrive(@Context HttpServletRequest request, @Context UriInfo uriInfo) {
+    Identity currentIdentity = ConversationState.getCurrent().getIdentity();
+    try {
+      DriveData drive = cloudActions.getUserDrive(currentIdentity.getUserId());
+      return Response.ok().entity(drive).build();
+    } catch (Exception e) {
+      LOG.error("Error reading user drive for " + currentIdentity, e);
+      return Response.status(Status.INTERNAL_SERVER_ERROR).entity(ErrorEntiry.message("Error reading user drive: ")).build();
     }
   }
 
