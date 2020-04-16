@@ -409,11 +409,7 @@ export default {
       }
     },
     executeAction(action) {
-      this.$refs[action.key].map(ref => {
-        if (ref.refId && ref.refId === action.key) {
-          executeExtensionAction(action, ref);
-        }
-      });
+      executeExtensionAction(action);
     },
   },
 };
