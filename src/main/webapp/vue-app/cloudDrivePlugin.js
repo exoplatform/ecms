@@ -8,8 +8,10 @@ const CloudDrivePlugin = [{
     name: "connect-cloud-drive"
   },
   enabled: true,
-  onExecute(cloudDriveComponent) {
-    cloudDriveComponent.toggleCloudDrawer();
+  onExecute() {
+    require(['SHARED/cloudDriveApp'], function(cloudDriveApp) {
+      cloudDriveApp.init();
+    });
   }
 }];
 

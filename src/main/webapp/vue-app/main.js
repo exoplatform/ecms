@@ -16,7 +16,7 @@ const lang = typeof eXo !== "undefined" ? eXo.env.portal.language : "en";
 const url = `/portal/rest/i18n/bundle/locale.clouddrive.CloudDrive-${lang}.json`;
 
 let connectCloudApp;
-(function init() {
+export function init() {
   // getting locale resources
   exoi18n.loadLanguageAsync(lang, url).then(i18n => {
     // init Vue app when locale resources are ready
@@ -28,7 +28,7 @@ let connectCloudApp;
       vuetify
     }).$mount("#connectCloudApp");
   });
-}());
+}
 
 export function destroy() {
   if (connectCloudApp) {

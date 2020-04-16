@@ -30,8 +30,7 @@
 export default {
   data() {
     return {
-      showCloudDrawer: false,
-      refId: "connectCloudDrive"
+      showCloudDrawer: true
     };
   },
   created() {
