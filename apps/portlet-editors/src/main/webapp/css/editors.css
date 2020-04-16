@@ -113,6 +113,7 @@
 
 .detailContainer .editors-placeholder {
   display:inline;
+  margin-right: 5px;
 }
 
 .editorButtonContainer .disabledProvider:active {

@@ -114,10 +114,10 @@
     };
     
     /**
-     * Saves prefered provider.
+     * Inits providers preview
      * 
      */
-    var initProviders = function(fileId, workspace){
+    var initProvidersPreview = function(fileId, workspace){
       return $.post({
         async : true,
         type : "POST",
@@ -126,8 +126,6 @@
           fileId : fileId,
           workspace : workspace
         }
-      }).catch(function(xhr,status,error) {
-        log("Cannot init providers for file" + fileId + ": " + status + " " + error);
       });
     };
     
@@ -193,24 +191,19 @@
       return $container;
     };
 
-    var loadProvidersModule = function(provider) {
+    var loadProviderModule = function(provider) {
       var loader = $.Deferred();
-      // try load provider client
       var moduleId = "SHARED/" + provider;
       if (window.require.s.contexts._.config.paths[moduleId]) {
         try {
-          // load client module and work with it asynchronously
           window.require([moduleId], function(client) {
-            // FYI client module's initialization (if provided) will be invoked
-            // in initContext()
             loader.resolve(client);
           }, function(err) {
-            log("ERROR: Cannot load provider module " + provider + " Error:" + err.message + ": " + JSON.stringify(err), err);
+            log("Cannot require provider module " + provider, err);
             loader.reject();
           });
         } catch(e) {
-          // cannot load the module - default behaviour
-          utils.log("ERROR: " + e, e);
+          log("Cannot load provider module " + provider, e);
           loader.reject();
         }
       } else {
@@ -395,13 +388,13 @@
       console.log("INIT PREVIEW BUTTONS CALLED");
       buttonsFns = [];
       var buttonsLoader = $.Deferred();
-      initProviders(fileId, workspace).done(function(data) {
+      initProvidersPreview(fileId, workspace).then(function(data) {
         var providersLoader = $.Deferred();
         var preferedProvider;
         data.forEach(function(providerInfo, i, arr) {
-          loadProvidersModule(providerInfo.provider).done(function(module){
+          loadProviderModule(providerInfo.provider).done(function(module){
             module.initPreview(providerInfo.settings);
-            if(providerInfo.prefered) {
+            if (providerInfo.prefered) {
               preferedProvider = providerInfo.provider;
             }
             // Last provider loaded
@@ -414,6 +407,8 @@
           var $pulldown =  getButtonsContaner(fileId, buttonsFns, preferedProvider, dropclass);
           buttonsLoader.resolve($pulldown);
         });
+      }).catch(function(xhr,status,error) {
+        log("Cannot init providers preview for file" + fileId + ": " + status + " " + error);
       });
       // TODO: fix
       /*

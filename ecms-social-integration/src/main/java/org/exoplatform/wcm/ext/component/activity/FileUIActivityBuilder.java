@@ -28,8 +28,11 @@ import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.social.core.activity.model.ExoSocialActivity;
+import org.exoplatform.social.plugin.doc.UIDocActivity;
 import org.exoplatform.social.webui.activity.BaseUIActivity;
 import org.exoplatform.social.webui.activity.BaseUIActivityBuilder;
+
+import java.util.regex.Pattern;
 
 /**
  * Created by The eXo Platform SAS Author : eXoPlatform exo@exoplatform.com Mar
@@ -37,11 +40,13 @@ import org.exoplatform.social.webui.activity.BaseUIActivityBuilder;
  */
 public class FileUIActivityBuilder extends BaseUIActivityBuilder {
   private static final Log LOG = ExoLogger.getLogger(FileUIActivityBuilder.class);
+  private Pattern  patternLink;
   
   @Override
   protected void extendUIActivity(BaseUIActivity uiActivity, ExoSocialActivity activity) {
+    String HTML_A_HREF_TAG_PATTERN = "^<a\\s*(?i)href\\s*=\\s*(\"([^\"]*\")|'[^']*'|([^'\">\\s]>"+ activity.getTemplateParams().get(FileUIActivity.DOCUMENT_TITLE) +"<\\/a>$))";
     FileUIActivity fileActivity = (FileUIActivity) uiActivity;
-
+    patternLink = Pattern.compile(HTML_A_HREF_TAG_PATTERN);
     // set data into the UI component of activity
     if (activity.getTemplateParams() != null) {
       fileActivity.setUIActivityData(activity.getTemplateParams());
@@ -54,7 +59,8 @@ public class FileUIActivityBuilder extends BaseUIActivityBuilder {
     // org.exoplatform.social.plugin.doc.UIDocActivityComposer.docActivityTitle.
     // So we couldn't set activity.getTitle() all the time, see INTEG-486
     if (activity.getTemplateParams() != null
-        && StringUtils.isNotBlank(activity.getTemplateParams().get(FileUIActivity.ACTIVITY_STATUS))) {
+        && StringUtils.isNotBlank(activity.getTemplateParams().get(FileUIActivity.ACTIVITY_STATUS)) ||
+            ( !patternLink.matcher(activity.getTitle()).find() )){
       fileActivity.setMessage(activity.getTitle());
     } else {
       fileActivity.setMessage(null);
