@@ -31,6 +31,7 @@ public class EcmsSearchResult extends SearchResult {
 
   private String fileType;
   private String nodePath;
+  private String tag;
   private Map<String, List<String>> breadcrumb;
 
   public EcmsSearchResult(String url,
@@ -57,13 +58,12 @@ public class EcmsSearchResult extends SearchResult {
                           long relevancy,
                           String fileType,
                           String nodePath) {
-    this(url, urlOnImage, title, tag, excerpt, detail, imageUrl, date, relevancy, fileType, nodePath, null);
+    this(url, urlOnImage, title, excerpt, detail, imageUrl, date, relevancy, fileType, nodePath, null, tag);
   }
 
   public EcmsSearchResult(String url,
                           String urlOnImage,
                           String title,
-                          String tag,
                           String excerpt,
                           String detail,
                           String imageUrl,
@@ -71,11 +71,13 @@ public class EcmsSearchResult extends SearchResult {
                           long relevancy,
                           String fileType,
                           String nodePath,
-                          Map<String, List<String>> breadcrumb) {
-    super(url, urlOnImage, title, tag, excerpt, detail, imageUrl, date, relevancy);
+                          Map<String, List<String>> breadcrumb,
+                          String tag) {
+    super(url, urlOnImage, title, excerpt, detail, imageUrl, date, relevancy);
     this.fileType = fileType;
     this.nodePath = nodePath;
     this.breadcrumb = breadcrumb;
+    this.tag = tag;
   }
 
   public EcmsSearchResult(String url,
@@ -101,6 +103,14 @@ public class EcmsSearchResult extends SearchResult {
   
   public void setFileType(String fileType) {
     this.fileType = fileType;
+  }
+
+  public String gettag() {
+    return this.tag;
+  }
+
+  public void settag(String tag) {
+    this.tag = tag;
   }
 
   public String getNodePath() {

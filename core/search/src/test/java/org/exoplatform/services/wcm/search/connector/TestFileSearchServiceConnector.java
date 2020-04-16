@@ -27,6 +27,7 @@ import org.exoplatform.services.jcr.config.RepositoryEntry;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.security.Identity;
+import org.exoplatform.services.wcm.search.base.EcmsSearchResult;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.controller.metadata.ControllerDescriptor;
 import org.exoplatform.web.controller.router.Router;
@@ -66,6 +67,7 @@ public class TestFileSearchServiceConnector {
           "               \"dc:creator\": \"cairo 1.9.5 (http://cairographics.org)\",\n" +
           "               \"repository\": \"repository\",\n" +
           "               \"title\": \"exo-documentation.pdf\",\n" +
+          "               \"tag\": \"exo-tag-1\",\n" +
           "               \"path\": \"/sites/intranet/documents/exo-documentation.pdf\",\n" +
           "               \"lastUpdatedDate\": 1505312333066,\n" +
           "               \"createdDate\": \"1505310310756\",\n" +
@@ -100,6 +102,7 @@ public class TestFileSearchServiceConnector {
           "               \"dc:creator\": \"cairo 1.9.5 (http://cairographics.org)\",\n" +
           "               \"repository\": \"repository\",\n" +
           "               \"title\": \"exo-documentation.pdf\",\n" +
+          "               \"tag\": \"exo-tag-1\",\n" +
           "               \"path\": \"/sites/intranet/documents/exo-documentation.pdf\",\n" +
           "               \"lastUpdatedDate\": 1505312333066,\n" +
           "               \"createdDate\": \"1505310310756\",\n" +
@@ -129,6 +132,7 @@ public class TestFileSearchServiceConnector {
           "               \"author\": \"mary\",\n" +
           "               \"repository\": \"repository\",\n" +
           "               \"title\": \"exo-training.pdf\",\n" +
+          "               \"tag\": \"exo-tag-2\",\n" +
           "               \"path\": \"/sites/intranet/documents/exo-training.pdf\",\n" +
           "               \"lastUpdatedDate\": 1505312333166,\n" +
           "               \"createdDate\": \"1505312330856\",\n" +
@@ -209,6 +213,7 @@ public class TestFileSearchServiceConnector {
     assertEquals(1, searchResults.size());
     SearchResult searchResult = searchResults.iterator().next();
     assertEquals("exo-documentation.pdf", searchResult.getTitle());
+    assertEquals("exo-tag-1", ((EcmsSearchResult) searchResult).gettag());
     assertEquals(1505312333066L, searchResult.getDate());
     assertEquals("/rest/thumbnailImage/medium/repository/collaboration/sites/intranet/documents/exo-documentation.pdf", searchResult.getImageUrl());
   }
@@ -231,10 +236,12 @@ public class TestFileSearchServiceConnector {
     Iterator<SearchResult> searchResultIterator = searchResults.iterator();
     SearchResult searchResult1 = searchResultIterator.next();
     assertEquals("exo-documentation.pdf", searchResult1.getTitle());
+    assertEquals("exo-tag-1", ((EcmsSearchResult) searchResult1).gettag());
     assertEquals(1505312333066L, searchResult1.getDate());
     assertEquals("/rest/thumbnailImage/medium/repository/collaboration/sites/intranet/documents/exo-documentation.pdf", searchResult1.getImageUrl());
     SearchResult searchResult2 = searchResultIterator.next();
     assertEquals("exo-training.pdf", searchResult2.getTitle());
+    assertEquals("exo-tag-2", ((EcmsSearchResult) searchResult2).gettag());
     assertEquals(1505312333166L, searchResult2.getDate());
     assertEquals("/rest/thumbnailImage/medium/repository/collaboration/sites/intranet/documents/exo-training.pdf", searchResult2.getImageUrl());
   }

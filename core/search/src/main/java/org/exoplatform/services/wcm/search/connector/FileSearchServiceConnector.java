@@ -95,6 +95,7 @@ public class FileSearchServiceConnector extends ElasticSearchServiceConnector {
     String nodePath = (String) hitSource.get("path");
     String fileType = (String) hitSource.get("fileType");
     String fileSize = (String) hitSource.get("fileSize");
+    String tag = (String) hitSource.get("tag");
 
     String driveName = "";
     try {
@@ -118,7 +119,6 @@ public class FileSearchServiceConnector extends ElasticSearchServiceConnector {
     SearchResult ecmsSearchResult = new EcmsSearchResult(getUrl(nodePath),
             getPreviewUrl(jsonHit, searchContext),
             searchResult.getTitle(),
-            searchResult.getTags(),
             searchResult.getExcerpt(),
             detail,
             getImageUrl(workspace, nodePath),
@@ -126,7 +126,8 @@ public class FileSearchServiceConnector extends ElasticSearchServiceConnector {
             searchResult.getRelevancy(),
             fileType,
             nodePath,
-            getBreadcrumb(nodePath));
+            getBreadcrumb(nodePath),
+            tag);
 
     String userId = ConversationState.getCurrent().getIdentity().getUserId();
     boolean isAnonymous = userId == null || userId.isEmpty() || userId.equals(IdentityConstants.ANONIM);

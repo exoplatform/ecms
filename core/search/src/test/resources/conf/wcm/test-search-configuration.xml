@@ -316,7 +316,7 @@
         <name>constructor.params</name>
         <property name="index" value="file_alias"/>
         <property name="type" value="file"/>
-        <property name="searchFields" value="name,title,attachment.content"/>
+        <property name="searchFields" value="name,title,tag,attachment.content"/>
       </properties-param>
     </init-params>
   </component>
@@ -328,7 +328,7 @@
         <name>constructor.params</name>
         <property name="index" value="file_alias"/>
         <property name="type" value="file"/>
-        <property name="searchFields" value="name,title,attachment.content"/>
+        <property name="searchFields" value="name,title,tag,attachment.content"/>
       </properties-param>
     </init-params>
   </component>
