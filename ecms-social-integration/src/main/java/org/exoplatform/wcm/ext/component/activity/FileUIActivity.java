@@ -1424,14 +1424,6 @@ public class FileUIActivity extends BaseUIActivity {
       String activityId = getActivity().getId();
       Identity identity = ConversationState.getCurrent().getIdentity();
       RequireJS require = js.require("SHARED/editorbuttons", "editorbuttons");
-      CometdConfig cometdConf = new CometdConfig(cometdService.getCometdServerPath(),
-                                                 cometdService.getUserToken(requestContext.getRemoteUser()),
-                                                 PortalContainer.getCurrentPortalContainerName());
-      try {
-        require.addScripts("editorbuttons.init('" + requestContext.getRemoteUser() + "' ," + cometdConf.toJSON() + ");");
-      } catch (JsonException e) {
-        LOG.warn("Cannot generate JSON for cometd configuration. {}", e.getMessage());
-      }
       if (getFilesCount() == 1) {
         Node node = getContentNode(0);
         require.addScripts("editorbuttons.resetButtons();");

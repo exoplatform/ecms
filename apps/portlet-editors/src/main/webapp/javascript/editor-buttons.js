@@ -1,7 +1,7 @@
 /**
  * Editor buttons module.
  */
-(function($, cCometD) {
+(function($, editorsupport) {
   "use strict";
 
   /** For debug logging. */
@@ -212,137 +212,60 @@
       return loader;
     };
    
-    /**
-     * Subscribes the document and reacts to the events. Providers param is
-     * optional (used for Documents app)
-     */
-    var subscribeDocument = function(fileId, providers) {
-      if (subscribedDocuments.fileId) {
-          return;
-      }
-      console.log("SUBSCRIBING ON " + fileId);
-      var subscription = cometd.subscribe("/eXo/Application/documents/" + fileId, function(message) {
-        // Channel message handler
-        var result = tryParseJson(message);
-        switch(result.type) {
-          case DOCUMENT_OPENED: {
-            $('.editorButton[data-provider!="' + result.provider + '"][data-fileId="' + result.fileId + '"]').each(function(){
-              $(this).addClass("disabledProvider");
+    
+    var eventsHandler = function(result) {
+      switch(result.type) {
+      case DOCUMENT_OPENED: {
+        $('.editorButton[data-provider!="' + result.provider + '"][data-fileId="' + result.fileId + '"]').each(function(){
+          $(this).addClass("disabledProvider");
+        });
+        // Web UI buttons
+        if (providers) {
+          var allProviders = providers.slice();
+          var index = allProviders.indexOf(result.provider);
+          if (index !== -1) allProviders.splice(index, 1);
+          allProviders.forEach(provider => {
+            $( "i[class*='uiIconEcms" + provider + "Open' i]").each(function(){
+              $(this).parents(':eq(1)').addClass("disabledProvider");
             });
-            // Web UI buttons
-            if (providers) {
-              var allProviders = providers.slice();
-              var index = allProviders.indexOf(result.provider);
-              if (index !== -1) allProviders.splice(index, 1);
-              allProviders.forEach(provider => {
-                $( "i[class*='uiIconEcms" + provider + "Open' i]").each(function(){
-                  $(this).parents(':eq(1)').addClass("disabledProvider");
-                });
-              });
-            }
-          } break;
-          case LAST_EDITOR_CLOSED: {
-            $('.editorButton[data-provider!="' + result.provider + '"][data-fileId="' + result.fileId + '"]').each(function(){
-              $(this).removeClass("disabledProvider");
-            });
-             // Web UI buttons
-            if (providers) {
-              var allProviders = providers.slice();
-              var index = allProviders.indexOf(result.provider);
-              if (index !== -1) allProviders.splice(index, 1);
-              allProviders.forEach(provider => {
-                $( "i[class*='uiIconEcms" + provider + "Open' i]").each(function(){
-                  $(this).parents(':eq(1)').removeClass("disabledProvider");
-                });
-              });
-            }
-          } break;
-          case CURRENT_PROVIDER_INFO: {
-            console.log("Current provider info: " + result.provider + " fileId: " + result.fileId);
-            setTimeout(function(){
-              if(result.provider && result.provider != "null") {
-              $('.editorButton[data-provider!="' + result.provider + '"][data-fileId="' + result.fileId + '"]').each(function(){
-                
-                $(this).addClass("disabledProvider");
-              });
-              }
-            }, 100);
-         
-           break;
-        }}
-      }, cometdContext, function(subscribeReply) {
-        // Subscription status callback
-        if (subscribeReply.successful) {
-          // The server successfully subscribed this client to the channel.
-          log("Document updates subscribed successfully: " + JSON.stringify(subscribeReply));
-          subscribedDocuments.fileId = subscribeReply.subscription;
-        } else {
-          var err = subscribeReply.error ? subscribeReply.error : (subscribeReply.failure ? subscribeReply.failure.reason
-              : "Undefined");
-          log("Document updates subscription failed for " + fileId, err);
+          });
         }
-      });
-      
-
-    };
-
-    var unsubscribeDocument = function(fileId) {
-      var subscription = subscribedDocuments.fileId;
-      if (subscription) {
-        cometd.unsubscribe(subscription, {}, function(unsubscribeReply) {
-          if (unsubscribeReply.successful) {
-            // The server successfully unsubscribed this client to the channel.
-            log("Document updates unsubscribed successfully for: " + fileId);
-            delete subscribedDocuments.fileId;
-          } else {
-            var err = unsubscribeReply.error ? unsubscribeReply.error
-                : (unsubscribeReply.failure ? unsubscribeReply.failure.reason : "Undefined");
-            log("Document updates unsubscription failed for " + fileId, err);
+      } break;
+      case LAST_EDITOR_CLOSED: {
+        $('.editorButton[data-provider!="' + result.provider + '"][data-fileId="' + result.fileId + '"]').each(function(){
+          $(this).removeClass("disabledProvider");
+        });
+         // Web UI buttons
+        if (providers) {
+          var allProviders = providers.slice();
+          var index = allProviders.indexOf(result.provider);
+          if (index !== -1) allProviders.splice(index, 1);
+          allProviders.forEach(provider => {
+            $( "i[class*='uiIconEcms" + provider + "Open' i]").each(function(){
+              $(this).parents(':eq(1)').removeClass("disabledProvider");
+            });
+          });
+        }
+      } break;
+      case CURRENT_PROVIDER_INFO: {
+        log("Current provider info: " + result.provider + " fileId: " + result.fileId);
+        setTimeout(function(){
+          if(result.provider && result.provider != "null") {
+          $('.editorButton[data-provider!="' + result.provider + '"][data-fileId="' + result.fileId + '"]').each(function(){
+            
+            $(this).addClass("disabledProvider");
+          });
           }
-        });
-      }
-      return loader.promise();
-    };
-    
-    var publishDocument = function(fileId, data) {
-      var deferred = $.Deferred();
-      cometd.publish("/eXo/Application/documents/" + fileId, data, cometdContext, function(publishReply) {
-        // Publication status callback
-        if (publishReply.successful) {
-          deferred.resolve();
-          // The server successfully subscribed this client to the channel.
-          log("Document update published successfully: " + JSON.stringify(publishReply));
-        } else {
-          deferred.reject();
-          var err = publishReply.error ? publishReply.error : (publishReply.failure ? publishReply.failure.reason : "Undefined");
-          log("Document updates publication failed for " + fileId, err);
-        }
-      });
-      return deferred;
-    };
-    
-    this.init = function(userId, cometdConf) {
-      console.lg("INIT CALLED");
-      if (cometdConf) {
-        cCometD.configure({
-          "url" : prefixUrl + cometdConf.path,
-          "exoId" : userId,
-          "exoToken" : cometdConf.token,
-          "maxNetworkDelay" : 30000,
-          "connectTimeout" : 60000
-        });
-        cometdContext = {
-          "exoContainerName" : cometdConf.containerName,
-          "provider" : cometdConf.provider,
-          "workspace" : cometdConf.workspace
-        };
-        cometd = cCometD;
-      }
-    };
+        }, 100);
+     
+       break;
+      }}
+    }
     
     this.initExplorer = function(fileId, providers, currentProvider) {
-      console.lg("INIT EXPLORER CALLED");
+      console.log("INIT EXPLORER CALLED");
       subscribeDocument(fileId, providers);
+      editorsupport.addListener("editorbuttons", fileId, eventsHandler);
       // Web UI buttons
       if (providers && currentProvider) {
         var allProviders = providers.slice();
@@ -377,7 +300,7 @@
           $(this).addClass("disabledProvider");
         });
       }
-      subscribeDocument(config.fileId);
+      editorsupport.addListener("editorbuttons", config.fileId, eventsHandler);
     };
     
     /**
@@ -410,18 +333,9 @@
       }).catch(function(xhr,status,error) {
         log("Cannot init providers preview for file" + fileId + ": " + status + " " + error);
       });
-      // TODO: fix
-      /*
-       * if(config.currentProvider != null) { $('.editorButton[data-provider!="' +
-       * config.currentProvider + '"][data-fileId="' + config.fileId +
-       * '"]').each(function(){ $(this).addClass("disabledProvider"); }); }
-       */
-      subscribeDocument(fileId);
-      publishDocument(fileId, {
-        "type" : DOCUMENT_PREVIEW_OPENED,
-        "fileId" : fileId,
-        "workspace" : workspace
-      });
+
+      editorsupport.addListener("editorbuttons", fileId, eventsHandler);
+      editorsupport.refreshStatus(fileId, workspace);
       return buttonsLoader;
     };
     
@@ -461,4 +375,4 @@
       
   return new EditorButtons();
 
-})($, cCometD);
+})($, editorsupport);

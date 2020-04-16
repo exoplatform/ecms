@@ -660,16 +660,16 @@ public class DocumentServiceImpl implements DocumentService {
    * {@inheritDoc}
    */
   @Override
-  public void initDocumentEditorsModule(String provider, String workspace) {
+  public void initEditorSupportModule(String provider, String workspace) {
     CometdDocumentsService cometdService = ExoContainerContext.getCurrentContainer().getComponentInstanceOfType(CometdDocumentsService.class);
     String userId = ConversationState.getCurrent().getIdentity().getUserId();
     CometdConfig cometdConf = new CometdConfig(cometdService.getCometdServerPath(), cometdService.getUserToken(userId), PortalContainer.getCurrentPortalContainerName(), provider, workspace);
     WebuiRequestContext context = WebuiRequestContext.getCurrentInstance();
     JavascriptManager js = context.getJavascriptManager();
     try {
-      js.require("SHARED/editorbuttons", "editorbuttons").addScripts("editorbuttons.init('" + userId + "', " + cometdConf.toJSON() + ");");
+      js.require("SHARED/editorsupport", "editorsupport").addScripts("editorsupport.initConfig('" + userId + "', " + cometdConf.toJSON() + "); editorsupport.init();");
     } catch (JsonException e) {
-      LOG.error("Cannot convert to JSON cometd configuratuion for editors module. {}", e.getMessage());
+      LOG.error("Cannot convert to JSON cometd configuratuion for editor support module. {}", e.getMessage());
     }
   }
 

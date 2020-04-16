@@ -205,7 +205,7 @@ public interface DocumentService {
    * @param provider the provider
    * @param workspace the workspace
    */
-  public void initDocumentEditorsModule(String provider, String workspace);
+  public void initEditorSupportModule(String provider, String workspace);
   
   /**
    * NewDocumentTypesConfig contains all registered template configs for specified provider.

@@ -23,12 +23,9 @@ import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 import javax.servlet.ServletRequest;
 
-import org.exoplatform.container.PortalContainer;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.portal.application.PortalRequestContext;
 import org.exoplatform.services.cms.documents.DocumentService;
-import org.exoplatform.services.cms.documents.cometd.CometdConfig;
-import org.exoplatform.services.cms.documents.cometd.CometdDocumentsService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.web.application.Application;
@@ -161,16 +158,10 @@ public class DocumentEditorsLifecycle implements ApplicationLifecycle<WebuiReque
    */
   protected void initEditorsModule(WebuiRequestContext context, String fileId, String workspace) throws RepositoryException {
     RequireJS require = context.getJavascriptManager().require("SHARED/editorbuttons", "editorbuttons");
-    require.addScripts("console.log('Hello world');");
-    CometdDocumentsService cometdService = context.getApplication()
-                                                  .getApplicationServiceContainer()
-                                                  .getComponentInstanceOfType(CometdDocumentsService.class);
     DocumentService documentService = context.getApplication()
                                              .getApplicationServiceContainer()
                                              .getComponentInstanceOfType(DocumentService.class);
-    CometdConfig cometdConf = new CometdConfig(cometdService.getCometdServerPath(),
-                                               cometdService.getUserToken(context.getRemoteUser()),
-                                               PortalContainer.getCurrentPortalContainerName());
+ 
 
     List<String> providers = documentService.getDocumentEditorProviders()
                                             .stream()
@@ -178,7 +169,6 @@ public class DocumentEditorsLifecycle implements ApplicationLifecycle<WebuiReque
                                             .collect(Collectors.toList());
     try {
       String providersJson = new JsonGeneratorImpl().createJsonArray(providers).toString();
-      require.addScripts("editorbuttons.init('" + context.getRemoteUser() + "' ," + cometdConf.toJSON() + ");");
       String currentProvider = documentService.getCurrentDocumentProvider(fileId, workspace);
       currentProvider = currentProvider != null ? new StringBuilder("'").append(currentProvider).append("'").toString() : "null";
       require.addScripts("editorbuttons.initExplorer('" + fileId + "', " + providersJson + ", " + currentProvider + ");");
