@@ -239,7 +239,9 @@ public class NodetypeConstant {
   // public static final String PUBLICATION_STATE_AND_VERSION_BASED_PUBLICATION
   // = "publication:stateAndVersionBasedPublication";
   
+  public static final String DOCUMENTS    = "Documents";
   public static final String FAVORITE    = "Favorites";
+  public static final String SHARED    = "Shared";
   public static final String OWNED_BY_ME = "OwnedByMe";
   public static final String HIDDEN      = "Hidden";
   public static final String TRASH       = "Trash";

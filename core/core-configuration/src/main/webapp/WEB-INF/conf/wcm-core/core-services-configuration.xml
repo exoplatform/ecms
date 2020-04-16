@@ -290,6 +290,10 @@
   </component>
   
   <component>
+    <type>org.exoplatform.services.rest.DocumentsRestService</type>
+  </component>
+  
+  <component>
     <type>org.exoplatform.services.rest.DocumentsAppRedirectService</type>
   </component>
 
