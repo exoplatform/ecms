@@ -128,9 +128,9 @@
   color: #999999 !important;
 }
 
-.UIJcrExplorerContainer li.disabledProvider {
+#UIActionBar li.disabledProvider {
   pointer-events: none;
 }
-.UIJcrExplorerContainer li.disabledProvider a {
+#UIActionBar li.disabledProvider a {
   color: #dbdbdb !important;
 }

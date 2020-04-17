@@ -65,6 +65,7 @@
     var cometdConf;
     var userId;
     var configLoader = $.Deferred();
+    var initLoader;
 
     const DOCUMENT_OPENED = "DOCUMENT_OPENED";
     const DOCUMENT_CLOSED = "DOCUMENT_CLOSED";
@@ -94,38 +95,32 @@
      * optional (used for Documents app)
      */
     var subscribeDocument = function(fileId, callback) {
-      var initloader;
-      if (!cometd) {
-        initloader = init();
+      if (!initLoader) {
+        init();
       }
-      if (initloader) {
-        initloader.done(function() {
-          subscribe(fileId, callback);
+      var subscriptionPromise = $.Deferred();
+      ;
+      initLoader.done(function() {
+        log("Subscribinng on " + fileId);
+        var subscription = cometd.subscribe("/eXo/Application/documents/" + fileId, function(message) {
+          // Channel message handler
+          var result = tryParseJson(message);
+          callback(result);
+        }, cometdContext, function(subscribeReply) {
+          // Subscription status callback
+          if (subscribeReply.successful) {
+            // The server successfully subscribed this client to the channel.
+            log("Document updates subscribed successfully: " + JSON.stringify(subscribeReply));
+            subscriptionPromise.resolve(subscription);
+          } else {
+            var err = subscribeReply.error ? subscribeReply.error : (subscribeReply.failure ? subscribeReply.failure.reason
+                : "Undefined");
+            log("Document updates subscription failed for " + fileId, err);
+          }
         });
-      } else {
-        subscribe(fileId, callback);
-      }
-    };
-
-    var subscribe = function(fileId, callback) {
-      log("Subscribinng on " + fileId);
-      var subscription = cometd.subscribe("/eXo/Application/documents/" + fileId, function(message) {
-        // Channel message handler
-        var result = tryParseJson(message);
-        callback(result);
-      }, cometdContext, function(subscribeReply) {
-        // Subscription status callback
-        if (subscribeReply.successful) {
-          // The server successfully subscribed this client to the channel.
-          log("Document updates subscribed successfully: " + JSON.stringify(subscribeReply));
-          subscribedDocuments.fileId = subscribeReply.subscription;
-        } else {
-          var err = subscribeReply.error ? subscribeReply.error : (subscribeReply.failure ? subscribeReply.failure.reason
-              : "Undefined");
-          log("Document updates subscription failed for " + fileId, err);
-        }
       });
-    }
+      return subscriptionPromise;
+    };
 
     var publishEvent = function(fileId, data) {
       var deferred = $.Deferred();
@@ -144,9 +139,25 @@
       return deferred;
     };
 
+    var getListener = function(caller, fileId) {
+      if (!(caller in listeners)) {
+        return null;
+      }
+      for (var i = 0; i < listeners[caller].length; i++) {
+        if (listeners[caller][i].fileId === fileId) {
+          return listeners[caller][i];
+        }
+      }
+      return null;
+    };
+
     var init = function() {
+      if (initLoader) {
+        log("Init is in progress or already done");
+        return;
+      }
       log("Initializing editor support module");
-      var initLoader = $.Deferred();
+      initLoader = $.Deferred();
       configLoader.done(function() {
         cCometD.configure({
           "url" : prefixUrl + cometdConf.path,
@@ -163,7 +174,6 @@
         cometd = cCometD;
         initLoader.resolve();
       });
-      return initLoader;
     };
 
     this.init = init;
@@ -175,18 +185,56 @@
       configLoader.resolve();
     };
 
+    this.removeListener = function(caller, fileId) {
+      var removeLoader = $.Deferred();
+      log("Remove listener handled");
+      var listener = getListener(caller, fileId)
+      if (!listener) {
+        log("Listener isn't registered for " + caller + " and fileId: " + fileId);
+        return;
+      }
+      for (var i = 0; i < listeners[caller].length; i++) {
+        if (listeners[caller][i].fileId === fileId) {
+          listeners[caller].splice(i, 1);
+        }
+      }
+      if (listener.subscription) {
+        console.log("Unsubribing from: " + JSON.stringify(listener.subscription));
+        cometd.unsubscribe(listener.subscription, {}, function(unsubscribeReply) {
+          if (unsubscribeReply.successful) {
+            // The server successfully unsubscribed this client to the channel.
+            log("Document updates unsubscribed successfully for: " + fileId);
+            removeLoader.resolve();
+          } else {
+            var err = unsubscribeReply.error ? unsubscribeReply.error
+                : (unsubscribeReply.failure ? unsubscribeReply.failure.reason : "Undefined");
+            log("Document updates unsubscription failed for " + fileId, err);
+          }
+        });
+      } else {
+        log("Subscription is null");
+        removeLoader.resolve();
+      }
+      return removeLoader;
+    };
+
     this.addListener = function(caller, fileId, callback) {
-      if (listeners[caller] && listeners[caller][fileId]) {
+      if (getListener(caller, fileId)) {
         log("Listener already registered for " + caller + " and fileId: " + fileId);
         return;
       }
-
-      subscribeDocument(fileId, callback);
+      var subscriptionLoader = subscribeDocument(fileId, callback);
+      var listener = {
+        fileId : fileId
+      };
       if (listeners[caller]) {
-        listeners[caller].push(fileId);
+        listeners[caller].push(listener);
       } else {
-        listeners[caller] = [ fileId ];
+        listeners[caller] = [ listener ];
       }
+      subscriptionLoader.done(function(subscription) {
+        listener.subscription = subscription
+      });
     };
 
     this.onEditorOpen = function(fileId, workspace, provider) {
@@ -207,11 +255,17 @@
     };
 
     this.refreshStatus = function(fileId, workspace) {
-      publishEvent(fileId, {
-        "type" : REFRESH_STATUS,
-        "fileId" : fileId,
-        "workspace" : workspace
+      if (!initLoader) {
+        init();
+      }
+      initLoader.done(function() {
+        publishEvent(fileId, {
+          "type" : REFRESH_STATUS,
+          "fileId" : fileId,
+          "workspace" : workspace
+        });
       });
+
     }
 
   }

@@ -428,57 +428,57 @@ public class CometdDocumentsService implements Startable {
   }
 
   /** The Constant LOG. */
-  private static final Log                    LOG                           = ExoLogger.getLogger(CometdDocumentsService.class);
+  private static final Log                    LOG                         = ExoLogger.getLogger(CometdDocumentsService.class);
 
   /** The channel name. */
-  public static final String                  CHANNEL_NAME                  = "/eXo/Application/documents/";
+  public static final String                  CHANNEL_NAME                = "/eXo/Application/documents/";
 
   /** The channel name. */
-  public static final String                  CHANNEL_NAME_PARAMS           = CHANNEL_NAME + "{fileId}";
+  public static final String                  CHANNEL_NAME_PARAMS         = CHANNEL_NAME + "{fileId}";
 
   /** The document saved event. */
-  public static final String                  DOCUMENT_OPENED_EVENT         = "DOCUMENT_OPENED";
+  public static final String                  DOCUMENT_OPENED_EVENT       = "DOCUMENT_OPENED";
 
   /** The document deleted event. */
-  public static final String                  DOCUMENT_CLOSED_EVENT         = "DOCUMENT_CLOSED";
+  public static final String                  DOCUMENT_CLOSED_EVENT       = "DOCUMENT_CLOSED";
 
   /** The Constant LAST_EDITOR_CLOSED_EVENT. */
-  public static final String                  LAST_EDITOR_CLOSED_EVENT      = "LAST_EDITOR_CLOSED";
+  public static final String                  LAST_EDITOR_CLOSED_EVENT    = "LAST_EDITOR_CLOSED";
 
-  /** The Constant DOCUMENT_PREVIEW_OPENED_EVENT. */
-  public static final String                  DOCUMENT_PREVIEW_OPENED_EVENT = "DOCUMENT_PREVIEW_OPENED";
+  /** The Constant REFRESH_STATUS. */
+  public static final String                  REFRESH_STATUS              = "REFRESH_STATUS";
 
   /** The Constant CURRENT_PROVIDER_INFO. */
-  public static final String                  CURRENT_PROVIDER_INFO_EVENT   = "CURRENT_PROVIDER_INFO";
+  public static final String                  CURRENT_PROVIDER_INFO_EVENT = "CURRENT_PROVIDER_INFO";
 
   /**
    * Base minimum number of threads for document updates thread executors.
    */
-  public static final int                     MIN_THREADS                   = 2;
+  public static final int                     MIN_THREADS                 = 2;
 
   /**
    * Minimal number of threads maximum possible for document updates thread
    * executors.
    */
-  public static final int                     MIN_MAX_THREADS               = 4;
+  public static final int                     MIN_MAX_THREADS             = 4;
 
   /** Thread idle time for thread executors (in seconds). */
-  public static final int                     THREAD_IDLE_TIME              = 120;
+  public static final int                     THREAD_IDLE_TIME            = 120;
 
   /**
    * Maximum threads per CPU for thread executors of document changes channel.
    */
-  public static final int                     MAX_FACTOR                    = 20;
+  public static final int                     MAX_FACTOR                  = 20;
 
   /**
    * Queue size per CPU for thread executors of document updates channel.
    */
-  public static final int                     QUEUE_FACTOR                  = MAX_FACTOR * 2;
+  public static final int                     QUEUE_FACTOR                = MAX_FACTOR * 2;
 
   /**
    * Thread name used for the executor.
    */
-  public static final String                  THREAD_PREFIX                 = "documents-comet-thread-";
+  public static final String                  THREAD_PREFIX               = "documents-comet-thread-";
 
   /** The exo bayeux. */
   protected final EXoContinuationBayeux       exoBayeux;
@@ -493,13 +493,13 @@ public class CometdDocumentsService implements Startable {
   protected final DocumentService             documentService;
 
   /** The subscription listener. */
-  protected final ChannelSubscriptionListener subscriptionListener          = new ChannelSubscriptionListener();
+  protected final ChannelSubscriptionListener subscriptionListener        = new ChannelSubscriptionListener();
 
   /** The channel listener. */
-  protected final ClientChannelListener       channelListener               = new ClientChannelListener();
+  protected final ClientChannelListener       channelListener             = new ClientChannelListener();
 
   /** The active providers fileId -> (sessionId, ClientInfo). */
-  protected final EditorsContext              editorsContext                = new EditorsContext();
+  protected final EditorsContext              editorsContext              = new EditorsContext();
 
   /**
    * Instantiates the CometdDocumentsService.
@@ -641,7 +641,7 @@ public class CometdDocumentsService implements Startable {
         @Override
         void execute(ExoContainer exoContainer) {
           switch (type) {
-          case DOCUMENT_PREVIEW_OPENED_EVENT:
+          case REFRESH_STATUS:
             try {
               String currentProvider = documentService.getCurrentDocumentProvider(fileId, workspace);
               sendCurrentProviderInfoEvent(fileId, currentProvider);

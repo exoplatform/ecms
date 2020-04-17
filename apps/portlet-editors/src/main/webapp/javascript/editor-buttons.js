@@ -63,11 +63,8 @@
     var buttonsFns = []; 
     var prefixUrl = pageBaseUrl(location);
     var currentWorkspace;
-    var currentUserId;
-    var subscribedDocuments = {};
-
-    // CometD transport bus
-    var cometd, cometdContext;
+    var providers;
+    var explorerFileId;
     
     const DOCUMENT_OPENED = "DOCUMENT_OPENED";
     const DOCUMENT_CLOSED = "DOCUMENT_CLOSED";
@@ -214,6 +211,7 @@
    
     
     var eventsHandler = function(result) {
+      log("EVENT HANDLED: " + JSON.stringify(result));
       switch(result.type) {
       case DOCUMENT_OPENED: {
         $('.editorButton[data-provider!="' + result.provider + '"][data-fileId="' + result.fileId + '"]').each(function(){
@@ -225,7 +223,7 @@
           var index = allProviders.indexOf(result.provider);
           if (index !== -1) allProviders.splice(index, 1);
           allProviders.forEach(provider => {
-            $( "i[class*='uiIconEcms" + provider + "Open' i]").each(function(){
+            $( "#UIActionBar i[class*='uiIconEcms" + provider + "Open' i]").each(function(){
               $(this).parents(':eq(1)').addClass("disabledProvider");
             });
           });
@@ -241,7 +239,7 @@
           var index = allProviders.indexOf(result.provider);
           if (index !== -1) allProviders.splice(index, 1);
           allProviders.forEach(provider => {
-            $( "i[class*='uiIconEcms" + provider + "Open' i]").each(function(){
+            $( "#UIActionBar i[class*='uiIconEcms" + provider + "Open' i]").each(function(){
               $(this).parents(':eq(1)').removeClass("disabledProvider");
             });
           });
@@ -262,20 +260,39 @@
       }}
     }
     
-    this.initExplorer = function(fileId, providers, currentProvider) {
+    this.initExplorer = function(fileId, workspace, allProviders, currentProvider) {
+      currentWorkspace = workspace;
       console.log("INIT EXPLORER CALLED");
-      subscribeDocument(fileId, providers);
-      editorsupport.addListener("editorbuttons", fileId, eventsHandler);
+      providers = allProviders;
       // Web UI buttons
       if (providers && currentProvider) {
-        var allProviders = providers.slice();
-        var index = allProviders.indexOf(currentProvider);
-        if (index !== -1) allProviders.splice(index, 1);
-        allProviders.forEach(provider => {
-          $( "i[class*='uiIconEcms" + provider + "Open' i]").each(function(){
+        var copyProviders = providers.slice();
+        var index = copyProviders.indexOf(currentProvider);
+        if (index !== -1) copyProviders.splice(index, 1);
+        copyProviders.forEach(provider => {
+          $( "#UIActionBar i[class*='uiIconEcms" + provider + "Open' i]").each(function(){
             $(this).parents(':eq(1)').addClass("disabledProvider");
           });
         });
+      }
+      if (fileId != explorerFileId) {
+        // We need unsubscribe from previous doc
+        var removeLoader;
+        if (explorerFileId) {
+          removeLoader = editorsupport.removeListener("editorbuttons", explorerFileId);
+        }
+        if(removeLoader) {
+          removeLoader.done(function() {
+            editorsupport.addListener("editorbuttons", fileId, eventsHandler);
+            editorsupport.refreshStatus(fileId, workspace);
+          });
+        } else {
+          editorsupport.addListener("editorbuttons", fileId, eventsHandler);
+          editorsupport.refreshStatus(fileId, workspace);
+        }
+
+        explorerFileId = fileId;
+        
       }
 
     };
@@ -285,6 +302,7 @@
      * 
      */
     this.initActivityButtons = function(config) {
+      currentWorkspace = config.workspace;
       var buttons = buttonsFns.slice();
       if (buttons.length == 0) {
         return;
@@ -308,6 +326,7 @@
      * 
      */
     this.initPreviewButtons = function(fileId, workspace, dropclass) {
+      currentWorkspace = workspace;
       console.log("INIT PREVIEW BUTTONS CALLED");
       buttonsFns = [];
       var buttonsLoader = $.Deferred();
@@ -352,18 +371,7 @@
         buttonsFns[index] = buttonFn;
       }
     };
-    
-    this.onEditorOpen = function(fileId, workspace, provider) {
-      log("Editor opened. Provider: " + provider + ", fileId: " + fileId);
-      // subsribe to track opened editors on server-side
-      var subscription = cometd.subscribe("/eXo/Application/documents/" + fileId, function(message) { }, cometdContext, function(subscribeReply) {});
-      publishDocument(fileId, {
-        "type" : DOCUMENT_OPENED,
-        "provider" : provider,
-        "fileId" : fileId,
-        "workspace" : workspace
-      });
-    };
+
     /**
      * Clears buttonsFns
      * 

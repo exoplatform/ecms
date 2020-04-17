@@ -171,7 +171,7 @@ public class DocumentEditorsLifecycle implements ApplicationLifecycle<WebuiReque
       String providersJson = new JsonGeneratorImpl().createJsonArray(providers).toString();
       String currentProvider = documentService.getCurrentDocumentProvider(fileId, workspace);
       currentProvider = currentProvider != null ? new StringBuilder("'").append(currentProvider).append("'").toString() : "null";
-      require.addScripts("editorbuttons.initExplorer('" + fileId + "', " + providersJson + ", " + currentProvider + ");");
+      require.addScripts("editorbuttons.initExplorer('" + fileId + "', '" + workspace + "', " + providersJson + ", " + currentProvider + ");");
     } catch (JsonException e) {
       LOG.warn("Cannot generate JSON for initializing editors module. {}", e.getMessage());
     }
