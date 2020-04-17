@@ -36,6 +36,9 @@ export default {
       default: () => false
     }
   },
+  data: function() {
+    return { providers: {} };
+  },
   async created() {
     try {
       const data = await getUserDrive();
