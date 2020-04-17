@@ -567,6 +567,56 @@ for(def index = 0; index < uicomponent.getFilesCount(); index++) {
                 </div><!--end fileShare-->
                 </div><!--end previews-->
 <% } %>
+            <div class="fileActionsBar clearfix">
+             <ul class="pull-left statusAction">
+                    <%
+                       if(uicomponent.getFilesCount() == 1){
+                            def currentNode = uicomponent.getContentNode(0);
+                            if(uicomponent.canEditDocument(currentNode)) {
+                                def preferenceWS  = currentNode.getSession().getWorkspace().getName();
+	                            def remoteEditURL = uicomponent.event("OpenFile", "0");
+	                            def _documentInfos = openInOfficeConnector.getDocumentInfos(currentNode.getName());
+	                            def remoteEditClass=_documentInfos[1];
+	                            def remoteEditTitle=_ctx.appRes(_documentInfos[0]);
+
+							    jsManager.require("SHARED/openDocumentInOffice", "od")
+							            .addScripts("gj(document).ready(function(){od.OpenDocumentInOffice.updateLabel('" + preferenceWS + ":" + currentNode.getPath().replaceAll("'", "\\\\'") + "', '" + activity.id + "'); }); ");
+                    %>
+                        <li class="hidden-tabletL" style="display:none;" ><a href="<%=uicomponent.event("OpenFile")%>"><i class="uiIcon16x16FileDefault uiIconEcmsOpenDocument_$activity.id $remoteEditClass" ></i>&nbsp;$remoteEditTitle</a></li>
+                        <%  } %>
+                        <li><a href="$downloadAllUrl"><i class="uiIconDownload uiIconLightGray"></i>&nbsp;<%=_ctx.appRes("SocialIntegration.download");%></a></li>
+                    <% } else if(uicomponent.getFilesCount() > 1) { %>
+    		            <li><a href="$downloadAllUrl"><i class="uiIconDownload uiIconLightGray"></i>&nbsp;<%=_ctx.appRes("SocialIntegration.downloadAll");%></a></li>
+                    <% } %>
+				 </ul>
+            </div>
+            <div class="actionsDetailsWrapper">
+                 <% if (identityLikesNum > 0 || uicomponent.isLiked()) {%>
+                  <div class="listLikedBox $listPeopleBGClass">
+                  <div class="listPeopleContent">
+                  
+                    <% if (identityLikesNum > 0) {%>
+                    <div class="listLiked">
+                    <%
+                    displayedIdentityLikes.each({
+                      def id = Utils.getIdentityManager().getIdentity(it);
+                      personLikeFullName = StringEscapeUtils.escapeHtml(id.profile.fullName);
+                      personLikeProfileUri = LinkProvider.getUserProfileUri(id.getRemoteId());
+                      personLikeAvatarImageSource = id.profile.avatarUrl;
+                      if (!personLikeAvatarImageSource) personLikeAvatarImageSource = LinkProvider.PROFILE_DEFAULT_AVATAR_URL;
+                      %>
+                        <a class="avatarXSmall" title="$personLikeFullName" href="$personLikeProfileUri">
+                          <img src="$personLikeAvatarImageSource" alt="$personLikeFullName" />
+            </a>
+                     <% })%>
+                       <button onclick="$loadLikesAction" class="btn">...</button>
+            </div>
+                    <% }%>
+                    <% if (!labelLikes) labelLikes = ""; %>
+                          <p>$labelLikes</p>
+                  </div>
+            </div>
+            <%}%>
 
                 <div class="actionBar clearfix ContentActivityIcon">
                   <% def toggleDisplayCommentAction = uicomponent.event('ToggleDisplayCommentForm', null, false);
@@ -594,85 +644,16 @@ for(def index = 0; index < uicomponent.getFilesCount(); index++) {
                     <% } %>
                 </ul>
                  <% } %>
-    			 <ul class="pull-left statusAction">
-                    <%
-                       if(uicomponent.getFilesCount() == 1){
-                            def currentNode = uicomponent.getContentNode(0);
-                            if(uicomponent.canEditDocument(currentNode)) {
-                                def preferenceWS  = currentNode.getSession().getWorkspace().getName();
-	                            def remoteEditURL = uicomponent.event("OpenFile", "0");
-	                            def _documentInfos = openInOfficeConnector.getDocumentInfos(currentNode.getName());
-	                            def remoteEditClass=_documentInfos[1];
-	                            def remoteEditTitle=_ctx.appRes(_documentInfos[0]);
-
-							    jsManager.require("SHARED/openDocumentInOffice", "od")
-							            .addScripts("gj(document).ready(function(){od.OpenDocumentInOffice.updateLabel('" + preferenceWS + ":" + currentNode.getPath().replaceAll("'", "\\\\'") + "', '" + activity.id + "'); }); ");
-                    %>
-                        <li class="hidden-tabletL" style="display:none;" ><a href="<%=uicomponent.event("OpenFile")%>"><i class="uiIcon16x16FileDefault uiIconEcmsOpenDocument_$activity.id $remoteEditClass" ></i>&nbsp;$remoteEditTitle</a></li>
-                        <%  } %>
-                        <li><a href="$downloadAllUrl"><i class="uiIconDownload uiIconLightGray"></i>&nbsp;<%=_ctx.appRes("SocialIntegration.download");%></a></li>
-                    <% } else if(uicomponent.getFilesCount() > 1) { %>
-    		            <li><a href="$downloadAllUrl"><i class="uiIconDownload uiIconLightGray"></i>&nbsp;<%=_ctx.appRes("SocialIntegration.downloadAll");%></a></li>
-                    <% } %>
-				 </ul>
-            </div><!--end actionBar-->
-
-
-                <% if (identityLikesNum > 0 || uicomponent.isLiked()) {%>
-                  <div class="listLikedBox $listPeopleBGClass">
-                  <div class="listPeopleContent">
-                  <% if (!labelLikes) labelLikes = ""; %>
-                          $labelLikes
-                    <% if (identityLikesNum > 0) {%>
-                    <div class="listLiked">
-                    <%
-                    displayedIdentityLikes.each({
-                      def id = Utils.getIdentityManager().getIdentity(it);
-                      personLikeFullName = StringEscapeUtils.escapeHtml(id.profile.fullName);
-                      personLikeProfileUri = LinkProvider.getUserProfileUri(id.getRemoteId());
-                      personLikeAvatarImageSource = id.profile.avatarUrl;
-                      if (!personLikeAvatarImageSource) personLikeAvatarImageSource = LinkProvider.PROFILE_DEFAULT_AVATAR_URL;
-                      %>
-                        <a class="avatarXSmall" title="$personLikeFullName" href="$personLikeProfileUri">
-                          <img src="$personLikeAvatarImageSource" alt="$personLikeFullName" />
-            </a>
-                     <% })%>
-                       <button onclick="$loadLikesAction" class="btn">...</button>
+                 </div><!--end actionBar-->
             </div>
-                    <% }%>
-                  </div>
-            </div>
-            <%}%>
+    			
+
+
+               
 
 
 
                 <div id="CommentBlockBound${activity.id}" class="commentBox">
-                      <% if (uicomponent.commentListToggleable()) {
-                      def showAllCommentsAction = uicomponent.event("SetCommentListStatus", "all");
-                      def hideAllCommentsAction = uicomponent.event("SetCommentListStatus", "none");
-                      def loadPreviousCommentsAction = uicomponent.event("SetCommentListStatus", "all");
-                      %>
-
-                     <% if (commentListStatus.getStatus().equals("none")) {%>
-                  <div class="commentListInfo hideBottomLine">
-                  <% } else {%>
-                    <div class="commentListInfo clearfix">
-                    <div class="pull-right numberComment">$commentHidden/$commentCount</div>
-                  <% } %>
-                        <% if (commentListStatus.getStatus().equals("latest") || commentListStatus.getStatus().equals("none")) { %>
-                          <a onclick="$showAllCommentsAction" href="#show-all-comments">
-                            $labelShowAllComments
-                          </a>
-            <% } else if (commentListStatus.getStatus().equals("all")) { %>
-            <%   if (commentHidden > 0) { %>
-                <a onclick="$loadPreviousCommentsAction" href="javascript:void(0);">$labelShowPreviousComments</a>
-                  <%   } else { %>
-                         <a onclick="$hideAllCommentsAction" href="javascript:void(0);">$labelHideAllComments</a>
-                <%   } %>
-            <% } %>
-        </div>
-                 <% } %>
-
 
                     <div class="commentList">
                     <%
@@ -793,10 +774,12 @@ def commentActivityId = it.parentCommentId == null ? it.id : it.parentCommentId;
 </a>
             </div><!--end commentLeft-->
 <div class="commentRight">
+<div class="authorCommentContainer clearfix">
 <div class="author">
     <a href="$commenterProfileUri">$commenterFullName</a>
 </div>
               <div class="contentComment">$commentMessage</div>
+              </div>
                    <div class="desktop-input clearfix">
                        <div class="blastInputPeople hideEffect">
                            <div>
@@ -882,6 +865,30 @@ def commentActivityId = it.parentCommentId == null ? it.id : it.parentCommentId;
                     <div class="clearfix"></div>
 </div> <!--end commentItem-->
                     </div><!--end commentlist-->
+                             <% if (uicomponent.commentListToggleable()) {
+                      def showAllCommentsAction = uicomponent.event("SetCommentListStatus", "all");
+                      def hideAllCommentsAction = uicomponent.event("SetCommentListStatus", "none");
+                      def loadPreviousCommentsAction = uicomponent.event("SetCommentListStatus", "all");
+                      %>
+
+                     <% if (commentListStatus.getStatus().equals("none")) {%>
+                  <div class="commentListInfo hideBottomLine">
+                  <% } else {%>
+                    <div class="commentListInfo clearfix">
+                  <% } %>
+                        <% if (commentListStatus.getStatus().equals("latest") || commentListStatus.getStatus().equals("none")) { %>
+                          <a onclick="$showAllCommentsAction" href="#show-all-comments">
+                            $labelShowAllComments
+                          </a>
+            <% } else if (commentListStatus.getStatus().equals("all")) { %>
+            <%   if (commentHidden > 0) { %>
+                <a onclick="$loadPreviousCommentsAction" href="javascript:void(0);">$labelShowPreviousComments</a>
+                  <%   } else { %>
+                         <a onclick="$hideAllCommentsAction" href="javascript:void(0);">$labelHideAllComments</a>
+                <%   } %>
+            <% } %>
+        </div>
+                 <% } %>
 </div><!--end commentBox-->
             </div><!--end #ActivityContextBox${activity.id}-->
 </div> <!--end ContextBox${activity.id}-->
