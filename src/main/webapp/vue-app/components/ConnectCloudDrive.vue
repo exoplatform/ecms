@@ -27,18 +27,31 @@
 </template>
 
 <script>
+import { getUserDrive } from "../cloudDriveService";
+
 export default {
-  data() {
-    return {
-      showCloudDrawer: true
-    };
+  props: {
+    showCloudDrawer: {
+      type: Boolean,
+      default: () => false
+    }
   },
-  created() {
-    this.providers = cloudDrive.getProviders();
+  async created() {
+    try {
+      const data = await getUserDrive();
+      cloudDrive.init(data.workspace, data.homePath);
+      this.providers = cloudDrive.getProviders();
+    } catch (err) {
+      console.log(err);
+    }
   },
   methods: {
-    connectToCloudDrive: function(providerId) {
-      cloudDrive.connect(providerId);
+    connectToCloudDrive: async function(providerId) {
+      // try/catch
+      await cloudDrive.connect(providerId);
+      const createdDrive = cloudDrive.getContextDrive();
+      // should emit after folder creation
+      this.$emit("cloudDriveConnected", createdDrive);
     },
     toggleCloudDrawer: function() {
       this.showCloudDrawer = !this.showCloudDrawer;

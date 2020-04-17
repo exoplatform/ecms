@@ -118,6 +118,9 @@
     <depends>
       <module>cloudDrive</module>
     </depends>
+    <depends>
+      <module>cloudDriveUtils</module>
+    </depends>
   </module>
 
   <portal-skin>

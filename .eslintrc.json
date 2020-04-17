@@ -18,7 +18,8 @@
         "exoi18n": true,
         "extensionRegistry": true,
         "CKEDITOR": true,
-        "cloudDrive": true
+        "cloudDrive": true,
+        "cloudDriveUtils": true
     },
     "parserOptions": {
         "sourceType": "module",

@@ -5,7 +5,13 @@ const CloudDrivePlugin = [{
   iconName: "cloud",
   appClass: "connectCloudDrive",
   component: {
-    name: "connect-cloud-drive"
+    name: "connect-cloud-drive",
+    events: [
+      {
+        "event": "cloudDriveConnected",
+        "listener": "openFolder"
+      }
+    ]
   },
   enabled: true,
   onExecute() {
