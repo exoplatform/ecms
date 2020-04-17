@@ -3,47 +3,48 @@ package org.exoplatform.services.entity;
 
 public class Document {
   
-  private String name;
+  private String id;
   
   private String title;
   
-  private String url;
+  private String path;
   
-  private String parentTitle;
+  private String drive;
   
   private String mimeType;
   
   private String date;
   
   /**
-   * @param name
+   * @param id
    * @param title
-   * @param url
-   * @param parentTitle
+   * @param path
+   * @param drive
    * @param mimeType
    * @param date
    */
-  public Document(String name, String title, String url, String parentTitle, String mimeType, String date) {
-    this.name = name;
+  public Document(String id, String title, String path, String drive, String mimeType, String date) {
+    super();
+    this.id = id;
     this.title = title;
-    this.url = url;
-    this.parentTitle = parentTitle;
+    this.path = path;
+    this.drive = drive;
     this.mimeType = mimeType;
     this.date = date;
   }
 
   /**
-   * @return the name
+   * @return the id
    */
-  public String getName() {
-    return name;
+  public String getId() {
+    return id;
   }
 
   /**
-   * @param name the name to set
+   * @param id the id to set
    */
-  public void setName(String name) {
-    this.name = name;
+  public void setId(String id) {
+    this.id = id;
   }
 
   /**
@@ -59,33 +60,33 @@ public class Document {
   public void setTitle(String title) {
     this.title = title;
   }
-  
+
   /**
-   * @return the url
+   * @return the path
    */
-  public String getUrl() {
-    return url;
+  public String getPath() {
+    return path;
   }
 
   /**
-   * @param url the url to set
+   * @param path the path to set
    */
-  public void setUrl(String url) {
-    this.url = url;
+  public void setPath(String path) {
+    this.path = path;
   }
 
   /**
-   * @return the parentTitle
+   * @return the drive
    */
-  public String getParentTitle() {
-    return parentTitle;
+  public String getDrive() {
+    return drive;
   }
 
   /**
-   * @param parentTitle the parentTitle to set
+   * @param drive the drive to set
    */
-  public void setParentTitle(String parentTitle) {
-    this.parentTitle = parentTitle;
+  public void setDrive(String drive) {
+    this.drive = drive;
   }
 
   /**
