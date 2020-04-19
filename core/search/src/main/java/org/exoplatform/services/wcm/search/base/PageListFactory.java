@@ -20,11 +20,13 @@ import org.apache.commons.lang3.StringUtils;
 
 import org.exoplatform.commons.api.search.data.SearchResult;
 import org.exoplatform.commons.utils.CommonsUtils;
+import org.exoplatform.services.cms.folksonomy.NewFolksonomyService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.impl.core.query.QueryImpl;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.security.ConversationState;
+import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.search.QueryCriteria;
 import org.exoplatform.services.wcm.search.SiteSearchService;
 import org.exoplatform.services.wcm.search.connector.FileApplicationSearchServiceConnector;
@@ -204,6 +206,7 @@ public class PageListFactory {
     SessionProvider sessionProvider = isSystemSession ? WCMCoreUtils.getSystemSessionProvider() :
             WCMCoreUtils.getUserSessionProvider();
     Session session = sessionProvider.getSession(workspace, WCMCoreUtils.getRepository());
+    NewFolksonomyService newFolksonomyService = WCMCoreUtils.getService(NewFolksonomyService.class);
     QueryManager queryManager = session.getWorkspace().getQueryManager();
     Query query = queryManager.createQuery(queryStatement, language);
 
@@ -218,17 +221,34 @@ public class PageListFactory {
       NodeIterator nodeIterator = result.getNodes();
       RowIterator rowIterator = result.getRows();
       while (nodeIterator.hasNext()) {
-        Node node = nodeIterator.nextNode();
         Row row = rowIterator.nextRow();
-        if (filter != null) {
-          node = filter.filterNodeToDisplay(node);
-        }
-        if (dataCreator != null && node != null) {
-          E data = dataCreator.createData(node, row, null);
-          if (data != null) {
-            dataList.add(data);
+        Node node = nodeIterator.nextNode();
+        if(node.getPath().contains("/tags/") && node != null){
+         try {
+           List<Node> tagedNode = newFolksonomyService.getAllDocumentsByTag(node.getPath(),session.getWorkspace().getName(),WCMCoreUtils.getSystemSessionProvider());
+           for (Node taggedNode : tagedNode ){
+             if (dataCreator != null && taggedNode != null) {
+               E data = dataCreator.createData(taggedNode, row, null);
+               if (data != null) {
+                 dataList.add(data);
+               }
+             }
+           }
+         }catch (Exception e) {
+           LOG.error("Cannot get tags of document " +node.getPath(), e);
+         }
+        } else {
+          if (filter != null) {
+            node = filter.filterNodeToDisplay(node);
+          }
+          if (dataCreator != null && node != null) {
+            E data = dataCreator.createData(node, row, null);
+            if (data != null) {
+              dataList.add(data);
+            }
           }
         }
+
       }
     } catch (RepositoryException e) {
       if (LOG.isWarnEnabled()) {
@@ -297,5 +317,18 @@ public class PageListFactory {
     });
 
     return filteredResults;
+  }
+
+  //Get tags
+  protected static List<String> getTags(Node node) throws Exception {
+    NewFolksonomyService newFolksonomyService = WCMCoreUtils.getService(NewFolksonomyService.class);
+    NodeLocation nodeLocation = NodeLocation.getNodeLocationByNode(node);
+    String workspace = nodeLocation.getWorkspace();
+    List<String> tags = new ArrayList<>();
+    List<Node> tagList = newFolksonomyService.getLinkedTagsOfDocument(node, workspace);
+    for (Node nodeTag : tagList ) {
+      tags.add(nodeTag.getName());
+    }
+    return tags;
   }
 }

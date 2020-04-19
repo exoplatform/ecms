@@ -24,6 +24,7 @@ import java.util.*;
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 
+import org.apache.commons.lang3.StringUtils;
 import org.exoplatform.commons.api.search.SearchServiceConnector;
 import org.exoplatform.commons.api.search.data.SearchContext;
 import org.exoplatform.commons.api.search.data.SearchResult;
@@ -33,6 +34,7 @@ import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.services.cms.documents.DocumentService;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.drives.ManageDriveService;
+import org.exoplatform.services.cms.folksonomy.NewFolksonomyService;
 import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.log.ExoLogger;
@@ -57,10 +59,11 @@ public abstract class BaseSearchServiceConnector extends SearchServiceConnector 
   public static final String sortByRelevancy = "relevancy";
   public static final String sortByTitle = "title";
   
-  protected SiteSearchService siteSearch_;
-  protected DocumentService documentService;
-  protected ManageDriveService driveService_;
-  private WCMConfigurationService wcmConfigurationService;
+  protected SiteSearchService       siteSearch_;
+  protected DocumentService         documentService;
+  protected ManageDriveService      driveService_;
+  private   WCMConfigurationService wcmConfigurationService;
+  private  NewFolksonomyService    newFolksonomyService;
 
   private static final Log LOG = ExoLogger.getLogger(BaseSearchServiceConnector.class.getName());
   
@@ -75,6 +78,7 @@ public abstract class BaseSearchServiceConnector extends SearchServiceConnector 
     documentService = WCMCoreUtils.getService(DocumentService.class);
     driveService_ = WCMCoreUtils.getService(ManageDriveService.class);
     wcmConfigurationService = WCMCoreUtils.getService(WCMConfigurationService.class);
+    newFolksonomyService = WCMCoreUtils.getService(NewFolksonomyService.class);
   }
 
   /**
@@ -192,7 +196,9 @@ public abstract class BaseSearchServiceConnector extends SearchServiceConnector 
                                          date.getTimeInMillis(), 
                                          (long)retNode.getScore(),
                                          getFileType(retNode),
-                                         retNode.getPath());
+                                         retNode.getPath(),
+                                         null,
+                                         getTags(retNode));
                 if (result != null) {
                   ret.add(result);
                 }
@@ -361,5 +367,17 @@ public abstract class BaseSearchServiceConnector extends SearchServiceConnector 
     String siteName = context.getSiteName();
     StringBuilder builder = new StringBuilder();
     return builder.append(portalName).append("/").append(siteName).append(basePath).append("?").append(detailParameterName).append("=").append("/").append(repository).append("/").append(workspace).append(nodeLocation.getPath()).toString();
+  }
+
+  //Get tags of documents
+  private String getTags(Node node) throws Exception {
+    NodeLocation nodeLocation = NodeLocation.getNodeLocationByNode(node);
+    String workspace = nodeLocation.getWorkspace();
+    List<String> tags = new ArrayList<>();
+    List<Node> tagList = newFolksonomyService.getLinkedTagsOfDocument(node, workspace);
+    for (Node nodeTag : tagList ) {
+      tags.add(nodeTag.getName());
+    }
+    return StringUtils.join(tags, ",");
   }
 }

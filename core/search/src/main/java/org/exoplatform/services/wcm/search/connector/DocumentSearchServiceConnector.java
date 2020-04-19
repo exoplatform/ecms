@@ -72,6 +72,7 @@ public class DocumentSearchServiceConnector extends BaseContentSearchServiceConn
         LOG.error(e);
       }
     }
+    docTypes.add("exo:tagged");
     docTypes.remove(NodetypeConstant.NT_FILE);
     return docTypes.toArray(new String[]{});
   }
