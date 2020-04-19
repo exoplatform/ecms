@@ -624,8 +624,8 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
 
   protected List<String> getUserMemberships(String userId) throws Exception {
     List<String> memberships = null;
-    String currentUser = ConversationState.getCurrent().getIdentity().getUserId();
-    if(currentUser.equals(userId)) {
+    String currentUser = ConversationState.getCurrent() != null ? ConversationState.getCurrent().getIdentity().getUserId() : null;
+    if(currentUser != null && currentUser.equals(userId)) {
       memberships = Utils.getMemberships();
     } else {
       Collection<Membership> colMemberships = organizationService.getMembershipHandler().findMembershipsByUser(userId);

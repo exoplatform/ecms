@@ -106,6 +106,9 @@
     <depends>
       <module>openDocumentInOffice</module>
     </depends>
+    <depends>
+      <module>editorbuttons</module>
+    </depends>
   </module>
   <module>
     <name>composerMultiUpload</name>
@@ -161,6 +164,7 @@
       <module>ecm-bootstrap</module>
     </depends>
   </module>
+
   <module>
     <name>ExoAttachmentsApp</name>
     <script>
@@ -184,19 +188,7 @@
       <module>extensionRegistry</module>
     </depends>
   </module>
-
-  <portal-skin>
-    <skin-name>Default</skin-name>
-    <skin-module>new-document</skin-module>
-    <css-path>/skin/newdocument/newdocument.css</css-path>
-  </portal-skin>
-
-  <portal-skin>
-    <skin-name>Enterprise</skin-name>
-    <skin-module>new-document</skin-module>
-    <css-path>/skin/newdocument/newdocument.css</css-path>
-  </portal-skin>
-
+  
   <portal-skin>
     <skin-name>Enterprise</skin-name>
     <skin-module>customModuleAttachments</skin-module>

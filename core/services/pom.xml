@@ -10,7 +10,7 @@
   <name>eXo PLF:: CMS Service</name>
   <description>eXo CMS Service</description>
   <properties>
-    <exo.test.coverage.ratio>0.45</exo.test.coverage.ratio>
+    <exo.test.coverage.ratio>0.44</exo.test.coverage.ratio>
   </properties>
   <dependencies>
     <dependency>
@@ -75,6 +75,14 @@
     <dependency>
       <groupId>org.exoplatform.commons</groupId>
       <artifactId>commons-webui-ext</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.exoplatform.social</groupId>
+      <artifactId>social-component-core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.exoplatform.social</groupId>
+      <artifactId>social-component-service</artifactId>
     </dependency>
     <dependency>
       <groupId>org.exoplatform.core</groupId>

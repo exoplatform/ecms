@@ -20,7 +20,6 @@ package org.exoplatform.ecm.webui.component.explorer.documents;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import javax.jcr.AccessDeniedException;
 import javax.jcr.ItemExistsException;
@@ -34,12 +33,14 @@ import org.apache.commons.lang.StringUtils;
 import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
+import org.exoplatform.services.cms.documents.DocumentEditorProvider;
 import org.exoplatform.services.cms.documents.DocumentService;
-import org.exoplatform.services.cms.documents.DocumentTemplate;
-import org.exoplatform.services.cms.documents.NewDocumentEditorPlugin;
-import org.exoplatform.services.cms.documents.NewDocumentTemplatePlugin;
+import org.exoplatform.services.cms.documents.NewDocumentTemplate;
+import org.exoplatform.services.cms.documents.NewDocumentTemplateProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.security.ConversationState;
+import org.exoplatform.services.security.Identity;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -88,13 +89,13 @@ public class UINewDocumentForm extends UIForm implements UIPopupComponent {
     UIFormStringInput titleTextBox = new UIFormStringInput(FIELD_TITLE_TEXT_BOX, FIELD_TITLE_TEXT_BOX, null);
     this.addUIFormInput(titleTextBox);
 
-    Set<NewDocumentTemplatePlugin> templatePlugins = documentService.getRegisteredTemplatePlugins();
+    List<NewDocumentTemplateProvider> templateProviders = documentService.getNewDocumentTemplateProviders();
 
     List<SelectItemOption<String>> options = new ArrayList<SelectItemOption<String>>();
 
-    templatePlugins.forEach(plugin -> {
-      plugin.getTemplates().forEach(template -> {
-        DocumentSelectItemOption<String> option = new DocumentSelectItemOption<>(template.getName(), plugin);
+    templateProviders.forEach(provider -> {
+      provider.getTemplates().forEach(template -> {
+        DocumentSelectItemOption<String> option = new DocumentSelectItemOption<>(template.getName(), provider);
         options.add(option);
       });
     });
@@ -102,11 +103,6 @@ public class UINewDocumentForm extends UIForm implements UIPopupComponent {
     UIFormSelectBox typeSelectBox = new UIFormSelectBox(FIELD_TYPE_SELECT_BOX, FIELD_TYPE_SELECT_BOX, options);
     typeSelectBox.setRendered(true);
     this.addUIFormInput(typeSelectBox);
-
-    // TODO: here we can iterate over all template plugins
-    // and call their handlers (not yet introduced) to init JS/styles/icons
-
-    // Set action
     this.setActions(new String[] { "Save", "Cancel" });
   }
 
@@ -152,19 +148,20 @@ public class UINewDocumentForm extends UIForm implements UIPopupComponent {
                                                                                                 .filter(option -> option.isSelected())
                                                                                                 .findFirst()
                                                                                                 .get();
-      NewDocumentTemplatePlugin templatePlugin = selectedOption.getTemplatePlugin();
+      NewDocumentTemplateProvider templateProvider = selectedOption.getTemplateProvider();
       String name = selectedOption.getLabel();
-      DocumentTemplate template = templatePlugin.getTemplate(name);
+      NewDocumentTemplate template = templateProvider.getTemplate(name);
 
-      NewDocumentEditorPlugin editorPlugin = templatePlugin.getEditor();
+      DocumentEditorProvider editorProvider = templateProvider.getEditor();
       title = getFileName(title, template);
-      if (editorPlugin != null) {
-        editorPlugin.beforeDocumentCreate(template, currentNode.getPath(), title);
+      Identity identity = ConversationState.getCurrent().getIdentity();
+      if (editorProvider != null && editorProvider.isAvailableForUser(identity)) {
+        editorProvider.beforeDocumentCreate(template, currentNode.getPath(), title);
       }
 
       Node document = null;
       try {
-        document = templatePlugin.createDocument(currentNode, title, template);
+        document = templateProvider.createDocument(currentNode, title, template);
       } catch (ConstraintViolationException cve) {
         Object[] arg = { typeSelectBox.getValue() };
         throw new MessageException(new ApplicationMessage("UINewDocumentForm.msg.constraint-violation",
@@ -200,13 +197,13 @@ public class UINewDocumentForm extends UIForm implements UIPopupComponent {
         JCRExceptionManager.process(uiApp, e);
       }
 
-      if (document != null && editorPlugin != null) {
-        editorPlugin.onDocumentCreated(document.getSession().getWorkspace().getName(), document.getPath());
+      if (document != null && editorProvider != null && editorProvider.isAvailableForUser(identity)) {
+        editorProvider.onDocumentCreated(document.getSession().getWorkspace().getName(), document.getPath());
       }
       uiExplorer.updateAjax(event);
     }
 
-    public String getFileName(String title, DocumentTemplate template) {
+    public String getFileName(String title, NewDocumentTemplate template) {
 
       title = Text.escapeIllegalJcrChars(title);
       if (StringUtils.isEmpty(title)) {

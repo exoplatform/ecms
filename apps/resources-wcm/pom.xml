@@ -77,6 +77,7 @@
                 <include>ecms/portlets/presentation/ecms-presentation-categorynavigationportlet.less</include>
                 <include>ecms/portlets/presentation/ecms-presentation-contentlistviewerportlet.less</include>
                 <include>ecms/portlets/presentation/ecms-presentation-singlecontentviewer.less</include>
+                <include>ecms/portlets/editors/editors-admin.less</include>
               </includes>
             </configuration>
             <goals>

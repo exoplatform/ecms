@@ -1,0 +1,100 @@
+{
+    "env": {
+        "browser": true,
+        "es6": true,
+        "node": true,
+        "jest": true
+    },
+    "extends": [
+        "eslint:recommended",
+        "plugin:vue/recommended",
+        "plugin:jest/recommended"
+    ],
+    "plugins": [
+        "standard",
+        "vue"
+    ],
+    "globals": {
+        "$": true,
+        "global": true,
+        "eXo": true,
+        "Vue": true,
+        "Vuetify": true,
+        "exoi18n": true,
+        "cCometd": true
+    },
+    "parserOptions": {
+        "sourceType": "module",
+        "ecmaVersion": 2018
+    },
+    "rules": {
+        "block-scoped-var": ["error"],
+        "curly": ["error", "all"],
+        "eqeqeq": ["error", "always", { "null": "ignore" }],
+        "new-cap": ["off"],
+        "no-alert": ["error"],
+        "no-await-in-loop": ["error"],
+        "no-caller": ["error"],
+        "no-confusing-arrow": ["error"],
+        "no-console": ["off"],
+        "no-empty-function": ["error"],
+        "no-eval": ["error"],
+        "no-extra-label": ["error"],
+        "no-extend-native": ["error"],
+        "no-extra-parens": ["off"],
+        "no-implied-eval": ["error"],
+        "no-iterator": ["error"],
+        "no-labels": ["error"],
+        "no-label-var": ["error"],
+        "no-lone-blocks": ["error"],
+        "no-loop-func": ["error"],
+        "no-magic-numbers": ["off"],
+        "no-new-require": ["error"],
+        "no-path-concat": ["error"],
+        "no-process-env": ["error"],
+        "no-process-exit": ["error"],
+        "no-proto": ["error"],
+        "no-self-compare": ["error"],
+        "no-sequences": ["error"],
+        "no-shadow-restricted-names": ["error"],
+        "no-template-curly-in-string": ["error"],
+        "no-throw-literal": ["error"],
+        "no-unmodified-loop-condition": ["error"],
+        "no-unused-vars": ["off"],
+        "no-unused-expressions": ["error"],
+        "no-useless-computed-key": ["error"],
+        "no-useless-concat": ["error"],
+        "no-var": ["error"],
+        "no-with": ["error"],
+        "prefer-const": ["error"],
+        "prefer-promise-reject-errors": ["error"],
+        "prefer-rest-params": ["error"],
+        "prefer-spread": ["error"],
+        "prefer-template": ["warn"],
+        "quotes": ["error", "double"],
+        "require-await": ["error"],
+        "valid-jsdoc": ["error"],
+        "yoda": ["error", "never", { "exceptRange": true }],
+        "vue/max-attributes-per-line": ["warn", {
+            "singleline": 2,
+            "multiline": {
+                "max": 1,
+                "allowFirstLine": false
+            }
+        }],
+        "vue/singleline-html-element-content-newline": ["off"],
+        "vue/html-self-closing": ["warn", {
+            "html": {
+                "void": "never",
+                "normal": "never",
+                "component": "always"
+            },
+            "svg": "never",
+            "math": "never"
+        }],
+        "vue/html-closing-bracket-newline": ["warn", {
+            "singleline": "never",
+            "multiline": "never"
+        }]
+    }
+}
