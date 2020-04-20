@@ -4,7 +4,7 @@
   <parent>
     <artifactId>ecms-apps</artifactId>
     <groupId>org.exoplatform.ecms</groupId>
-    <version>5.3.2-spaces-groups-binding-SNAPSHOT</version>
+    <version>5.3.2-spaces-groups-binding-01</version>
   </parent>
   <artifactId>ecms-apps-portlet-search</artifactId>
   <packaging>war</packaging>
