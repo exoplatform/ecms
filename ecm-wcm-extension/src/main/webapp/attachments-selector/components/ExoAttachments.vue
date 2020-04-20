@@ -1,15 +1,15 @@
 <template>
   <div id="exoAttachmentsApp">
-    <div :class="{ open: showAttachments || showAttachmentsDrawer }" class="attachments drawer ignore-vuetify-classes" @keydown.esc="closeAttachments()">
+    <div :class="{ open: showAttachmentsDrawer }" class="attachments drawer ignore-vuetify-classes" @keydown.esc="toggleAttachmentsDrawer()">
       <div :class="showDocumentSelector? 'documentSelector' : ''" class="attachmentsHeader header">
         <a v-if="showDocumentSelector" class="backButton" @click="toggleServerFileSelector()">
           <i class="uiIconBack"> </i>
         </a>
-        <a v-if="!showDocumentSelector" class="backButton" @click="closeAttachments()">
+        <a v-if="!showDocumentSelector" class="backButton" @click="toggleAttachmentsDrawer()">
           <i class="uiIconBack"> </i>
         </a>
         <span class="attachmentsTitle">{{ drawerTitle }}</span>
-        <a class="attachmentsCloseIcon" @click="closeAttachments()">×</a>
+        <a class="attachmentsCloseIcon" @click="toggleAttachmentsDrawer()">×</a>
       </div>
       <div :class="showDocumentSelector? 'serverFiles' : 'attachments'" class="content">
         <div v-show="!showDocumentSelector" class="attachmentsContent">
@@ -119,10 +119,10 @@
         <exo-folders-files-selector v-if="showDocumentSelector && showDestinationFolderForFile" :mode-folder-selection="showDestinationFolderForFile" :mode-folder-selection-for-file="modeFolderSelectionForFile" @itemsSelected="addDestinationFolderForFile" @cancel="toggleServerFileSelector()"></exo-folders-files-selector>
       </div>
       <div v-if="!showDocumentSelector" class="attachmentsFooter footer ignore-vuetify-classes">
-        <a class="btn btn-primary ignore-vuetify-classes" @click="closeAttachments()">{{ $t('attachments.drawer.apply') }}</a>
+        <a class="btn btn-primary ignore-vuetify-classes" @click="toggleAttachmentsDrawer()">{{ $t('attachments.drawer.apply') }}</a>
       </div>
     </div>
-    <div v-show="showAttachments || showAttachmentsDrawer" class="drawer-backdrop" @click="closeAttachments()"></div>
+    <div v-show="showAttachmentsDrawer && showAttachmentsBackdrop" class="drawer-backdrop" @click="toggleAttachmentsDrawer()"></div>
   </div>
 </template>
 
@@ -143,21 +143,20 @@ export default {
     maxFilesCount: {
       type: Number,
       required: false,
-      default: 20
+      default: parseInt(`${eXo.env.portal.maxToUpload}`)
     },
     maxFileSize: {
       type: Number,
       required: false,
-      default: 25
+      default: parseInt(`${eXo.env.portal.maxFileSize}`)
     },
-    showAttachmentsDrawer: {
+    showAttachmentsBackdrop: {
       type: Boolean,
-      default: false
+      default: true
     }
   },
   data() {
     return {
-      showAttachments: false,
       showDestinationFolder:false,
       message: '',
       uploadingFilesQueue: [],
@@ -178,39 +177,44 @@ export default {
       destinationFileName: '',
       showDestinationFolderForFile:false,
       modeFolderSelectionForFile: false,
+      showAttachmentsDrawer: false
     };
   },
   watch: {
-    fileSizeLimitError: function() {
-      if(this.fileSizeLimitError) {
+    fileSizeLimitError: function () {
+      if (this.fileSizeLimitError) {
         setTimeout(() => this.fileSizeLimitError = false, this.MESSAGES_DISPLAY_TIME);
       }
     },
-    filesCountLimitError: function() {
-      if(this.filesCountLimitError) {
+    filesCountLimitError: function () {
+      if (this.filesCountLimitError) {
         setTimeout(() => this.filesCountLimitError = false, this.MESSAGES_DISPLAY_TIME);
       }
     },
-    sameFileError: function() {
-      if(this.sameFileError) {
+    sameFileError: function () {
+      if (this.sameFileError) {
         setTimeout(() => this.sameFileError = false, this.MESSAGES_DISPLAY_TIME);
       }
     },
-    value(){
-      if(this.value.length === 0){
-        this.pathDestinationFolder = '';
-        this.showDestinationPath = false;
-        this.schemaFolder = [];
-        this.addDefaultPath();
-      }
-      if (this.value.length > 0 && !this.pathDestinationFolder) {
-        for (let i = 0; i < this.value.length; i++) {
-          if (!this.value[i].pathDestinationFolder) {
-            this.value[i].pathDestinationFolder = this.pathDestinationFolder;
+    value: {
+      deep: true,
+      handler() {
+        this.$emit('attachmentsChanged', this.value);
+        if (this.value.length === 0) {
+          this.pathDestinationFolder = '';
+          this.showDestinationPath = false;
+          this.schemaFolder = [];
+          this.addDefaultPath();
+        }
+        if (this.value.length > 0 && !this.pathDestinationFolder) {
+          for (let i = 0; i < this.value.length; i++) {
+            if (!this.value[i].pathDestinationFolder) {
+              this.value[i].pathDestinationFolder = this.pathDestinationFolder;
+            }
           }
         }
       }
-    },
+    }
   },
   mounted() {
     ['drag', 'dragstart', 'dragend', 'dragover', 'dragenter', 'dragleave', 'drop'].forEach( function( evt ) {
@@ -241,14 +245,8 @@ export default {
     this.addDefaultPath();
   },
   methods: {
-    closeAttachments: function() {
-      this.$emit('HideAttachmentsDrawer', this.showAttachments);
-      this.showAttachments = false;
-      document.getElementsByClassName('attachments drawer')[0].className = 'attachments drawer';
-      document.getElementById('exoAttachmentsApp').getElementsByClassName('drawer-backdrop')[0].style.display = 'none';
-    },
-    setUploadingCount: function(uploadingCount) {
-      this.uploading = uploadingCount > 0;
+    toggleAttachmentsDrawer: function() {
+      this.showAttachmentsDrawer = !this.showAttachmentsDrawer;
     },
     uploadFile: function() {
       this.$refs.uploadInput.click();
@@ -419,6 +417,7 @@ export default {
       if (selectedFiles) {
         this.value = selectedFiles;
         this.$emit('input', this.value);
+        this.$emit('attachmentsChanged', this.value);
       }
       this.showDocumentSelector = !this.showDocumentSelector;
       this.drawerTitle = this.showDocumentSelector? `${this.$t('attachments.drawer.existingUploads')}` : `${this.$t('attachments.drawer.header')}`;

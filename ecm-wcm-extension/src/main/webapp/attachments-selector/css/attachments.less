@@ -868,3 +868,57 @@
     }
   }
 }
+/** Attachments composer plugin **/
+#activityComposerApp {
+  .drawer {
+    .content {
+      .VuetifyApp {
+        .attachmentsList {
+          display: flex;
+          align-items: center;
+
+          .attachedFiles {
+            margin-left: 3%;
+          }
+
+          .uiIconAttach {
+            top: -1px;
+            color: #333;
+          }
+
+          .v-progress-circular {
+            svg {
+              color: transparent;
+
+              circle {
+                color: #FFF;
+              }
+            }
+
+            &.uploading {
+              svg {
+                circle {
+                  color: #578dc9;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      .composerActions {
+        .actionItem {
+          .actionItemIcon {
+            .addFileComposerIcon {
+              background: url('/eXoSkin/skin/images/system/composer/addFile.png') no-repeat;
+              width: 60px;
+              height: 60px;
+              margin: 10px 0 0 10px;
+              background-size: 40px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
