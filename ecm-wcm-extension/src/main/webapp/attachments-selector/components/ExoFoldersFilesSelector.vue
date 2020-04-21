@@ -41,7 +41,7 @@
       </div>
       <div v-for="action in attachmentsComposerActions" :key="action.key" :class="`${action.appClass}Action`" class="actionBox">
         <v-icon :class="action.iconClass" class="uiActionIcon" @click="executeAction(action)">{{ action.iconName }}</v-icon>
-        <component v-dynamic-events="action.component.events" v-if="action.component" :is="action.component.name" :ref="action.key"></component>
+        <component v-dynamic-events="action.component.events" v-if="action.component" v-model="currentDrive" :is="action.component.name" :ref="action.key"></component>
       </div>
     </div>
 
@@ -108,8 +108,8 @@ export default {
         const allEvents = binding.value;
         if (allEvents) {
           allEvents.forEach((event) => {
-            // register handler in the dynamic component
             if (vnode.componentInstance) {
+              // register handler in the dynamic component
               vnode.componentInstance.$on(event.event, (eventData) => {
                 const param = eventData ? eventData : event.listenerParam;
                 // when the event is fired, the eventListener function is going to be called
