@@ -14,15 +14,15 @@ const CloudDrivePlugin = [{
     ]
   },
   enabled: true,
-  onExecute() {
-    require(['SHARED/cloudDriveApp'], function(cloudDriveApp) {
-      cloudDriveApp.init();
-    });
+  onExecute(cloudDriveComponent) {
+    cloudDriveComponent.showCloudDrawer = true;
   }
 }];
 
-require(["SHARED/extensionRegistry"], function(extensionRegistry) {
+require(["SHARED/extensionRegistry", "SHARED/cloudDriveApp"], function(extensionRegistry, cloudDriveApp) {
+  cloudDriveApp.init();
   for (const extension of CloudDrivePlugin) {
     extensionRegistry.registerExtension("AttachmentsComposer", "attachments-composer-action", extension);
   }
+  
 });

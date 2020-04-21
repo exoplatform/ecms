@@ -49,12 +49,20 @@ export default {
     }
   },
   methods: {
-    connectToCloudDrive: async function(providerId) {
-      // try/catch
-      await cloudDrive.connect(providerId);
-      const createdDrive = cloudDrive.getContextDrive();
-      // should emit after folder creation
-      this.$emit("cloudDriveConnected", createdDrive);
+    connectToCloudDrive: function(providerId) {
+      cloudDrive.connect(providerId).then(data => {
+        const folderPath = data.drive.path.split("/").pop();
+        const createdDrive = {
+          id: folderPath,
+          name: folderPath,
+          title: data.drive.title,
+          path: folderPath,
+          folderTypeCSSClass: "uiIcon24x24nt_unstructured",
+          isSelected: true
+        };
+        this.$emit("cloudDriveConnected", createdDrive);
+        this.toggleCloudDrawer();
+      }).catch(err => console.log(err));
     },
     toggleCloudDrawer: function() {
       this.showCloudDrawer = !this.showCloudDrawer;
