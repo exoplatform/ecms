@@ -30,7 +30,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.ResourceBundle;
-import java.util.UUID;
 
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
@@ -74,6 +73,7 @@ import org.exoplatform.services.cms.drives.impl.ManageDriveServiceImpl;
 import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
 import org.exoplatform.services.cms.link.LinkManager;
+import org.exoplatform.services.idgenerator.IDGeneratorService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
@@ -140,7 +140,7 @@ public class DocumentServiceImpl implements DocumentService {
   private IdentityManager identityManager;
   private String editorsId;
 
-  public DocumentServiceImpl(ManageDriveService manageDriveService, Portal portal, SessionProviderService sessionProviderService, RepositoryService repoService, NodeHierarchyCreator nodeHierarchyCreator, LinkManager linkManager, PortalContainerInfo portalContainerInfo, OrganizationService organizationService, SettingService settingService, IdentityManager identityManager) {
+  public DocumentServiceImpl(ManageDriveService manageDriveService, Portal portal, SessionProviderService sessionProviderService, RepositoryService repoService, NodeHierarchyCreator nodeHierarchyCreator, LinkManager linkManager, PortalContainerInfo portalContainerInfo, OrganizationService organizationService, SettingService settingService, IdentityManager identityManager, IDGeneratorService idGenerator) {
     this.manageDriveService = manageDriveService;
     this.sessionProviderService = sessionProviderService;
     this.repoService = repoService;
@@ -151,7 +151,7 @@ public class DocumentServiceImpl implements DocumentService {
     this.organizationService = organizationService;
     this.settingService = settingService;
     this.identityManager = identityManager;
-    this.editorsId = UUID.randomUUID().toString();
+    this.editorsId = idGenerator.generateStringID(this);
   }
 
   @Override
@@ -663,7 +663,10 @@ public class DocumentServiceImpl implements DocumentService {
     if(editorsId.equals(currentEditorsId)) {
       return provider;
     } else {
-      systemNode.setProperty(EXO_CURRENT_PROVIDER_PROP, (String) null);
+      if (systemNode.canAddMixin(EXO_DOCUMENT)) {
+        systemNode.addMixin(EXO_DOCUMENT);
+      }
+      systemNode.setProperty(EXO_CURRENT_PROVIDER_PROP, "");
       systemNode.setProperty(EXO_EDITORS_ID_PROP, editorsId);
       return null;
     }
