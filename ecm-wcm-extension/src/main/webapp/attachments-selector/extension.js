@@ -9,9 +9,9 @@ export function getAttachmentsComposerExtensions() {
   return attachmentsComposerActions;
 }
 
-export function executeExtensionAction(extension) {
+export function executeExtensionAction(extension, component) {
   if(extension.hasOwnProperty('onExecute') && isFunction(extension.onExecute)) {
-    extension.onExecute();
+    extension.onExecute(component);
   }
 }
 

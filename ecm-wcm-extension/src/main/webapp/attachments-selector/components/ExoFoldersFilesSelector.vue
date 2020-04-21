@@ -41,7 +41,7 @@
       </div>
       <div v-for="action in attachmentsComposerActions" :key="action.key" :class="`${action.appClass}Action`" class="actionBox">
         <v-icon :class="action.iconClass" class="uiActionIcon" @click="executeAction(action)">{{ action.iconName }}</v-icon>
-        <component v-if="action.component" :is="action.component.name" :ref="action.key"></component>
+        <component v-dynamic-events="action.component.events" v-if="action.component" :is="action.component.name" :ref="action.key"></component>
       </div>
     </div>
 
@@ -102,6 +102,30 @@ import * as attachmentsService from '../attachmentsService.js';
 import { getAttachmentsComposerExtensions, executeExtensionAction } from '../extension';
 
 export default {
+  directives: {
+    DynamicEvents: {
+      bind: function (el, binding, vnode) {
+        const allEvents = binding.value;
+        if (allEvents) {
+          allEvents.forEach((event) => {
+            // register handler in the dynamic component
+            if (vnode.componentInstance) {
+              vnode.componentInstance.$on(event.event, (eventData) => {
+                const param = eventData ? eventData : event.listenerParam;
+                // when the event is fired, the eventListener function is going to be called
+                vnode.context[event.listener](param);
+              });
+            }
+          });
+        }
+      },
+      unbind: function (el, binding, vnode) {
+        if (vnode.componentInstance) {
+          vnode.componentInstance.$off();
+        }
+      },
+    }
+  },
   props: {
     modeFolderSelectionForFile: {
       type: Boolean,
@@ -409,7 +433,7 @@ export default {
       }
     },
     executeAction(action) {
-      executeExtensionAction(action);
+      executeExtensionAction(action, this.$refs[action.key][0]);
     },
   },
 };
