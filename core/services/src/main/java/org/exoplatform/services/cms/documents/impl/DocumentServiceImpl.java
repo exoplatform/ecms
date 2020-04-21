@@ -30,6 +30,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.UUID;
 
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
@@ -112,6 +113,7 @@ public class DocumentServiceImpl implements DocumentService {
   public static final String EXO_OWNER_PROP = "exo:owner";
   public static final String EXO_TITLE_PROP = "exo:title";
   private static final String EXO_CURRENT_PROVIDER_PROP = "exo:currentProvider";
+  private static final String EXO_EDITORS_ID_PROP = "exo:editorsId";
   private static final String EXO_DOCUMENT = "exo:document";
   private static final String EXO_USER_PREFFERENCES = "exo:userPrefferences";
   private static final String EXO_PREFFERED_EDITOR = "exo:prefferedEditor";
@@ -136,6 +138,7 @@ public class DocumentServiceImpl implements DocumentService {
   private OrganizationService organizationService;
   private SettingService settingService;
   private IdentityManager identityManager;
+  private String editorsId;
 
   public DocumentServiceImpl(ManageDriveService manageDriveService, Portal portal, SessionProviderService sessionProviderService, RepositoryService repoService, NodeHierarchyCreator nodeHierarchyCreator, LinkManager linkManager, PortalContainerInfo portalContainerInfo, OrganizationService organizationService, SettingService settingService, IdentityManager identityManager) {
     this.manageDriveService = manageDriveService;
@@ -148,6 +151,7 @@ public class DocumentServiceImpl implements DocumentService {
     this.organizationService = organizationService;
     this.settingService = settingService;
     this.identityManager = identityManager;
+    this.editorsId = UUID.randomUUID().toString();
   }
 
   @Override
@@ -643,6 +647,7 @@ public class DocumentServiceImpl implements DocumentService {
       systemNode.addMixin(EXO_DOCUMENT);
     }
     systemNode.setProperty(EXO_CURRENT_PROVIDER_PROP, provider);
+    systemNode.setProperty(EXO_EDITORS_ID_PROP, editorsId);
     systemNode.save();
   }
   
@@ -653,7 +658,15 @@ public class DocumentServiceImpl implements DocumentService {
   public String getCurrentDocumentProvider(String uuid, String workspace) throws RepositoryException {
     Session systemSession = repoService.getCurrentRepository().getSystemSession(workspace);
     NodeImpl systemNode = (NodeImpl) systemSession.getNodeByUUID(uuid);
-    return systemNode.hasProperty(EXO_CURRENT_PROVIDER_PROP) ? systemNode.getProperty(EXO_CURRENT_PROVIDER_PROP).getString() : null;
+    String provider =  systemNode.hasProperty(EXO_CURRENT_PROVIDER_PROP) ? systemNode.getProperty(EXO_CURRENT_PROVIDER_PROP).getString() : null;
+    String currentEditorsId =  systemNode.hasProperty(EXO_EDITORS_ID_PROP) ? systemNode.getProperty(EXO_EDITORS_ID_PROP).getString() : null;
+    if(editorsId.equals(currentEditorsId)) {
+      return provider;
+    } else {
+      systemNode.setProperty(EXO_CURRENT_PROVIDER_PROP, (String) null);
+      systemNode.setProperty(EXO_EDITORS_ID_PROP, editorsId);
+      return null;
+    }
   }
 
   /**

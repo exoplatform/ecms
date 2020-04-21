@@ -129,7 +129,7 @@
     /**
      * Adds editor buttons container (button and pulldown)
      */
-    var getButtonsContaner = function(fileId, buttons, preferedProvider, dropclass) {
+    var getButtonsContainer = function(fileId, buttons, preferedProvider, dropclass) {
       if (!buttons) {
         return;
       }
@@ -303,7 +303,8 @@
       }
       log("Init Activity buttons: " + JSON.stringify(buttons));
       var $target = $("#activityContainer" + config.activityId).find("div[id^='ActivityContextBox'] > .actionBar .statusAction.pull-left");
-      $target.append(getButtonsContaner(config.fileId, buttons, config.preferedProvider, 'dropdown'));
+      console.log(JSON.stringify(config));
+      $target.append(getButtonsContainer(config.fileId, buttons, config.prefferedProvider, 'dropdown'));
 
       // Disable editor buttons if the document is currently editing in one of
       // editors.
@@ -339,7 +340,7 @@
           });
         });
         providersLoader.done(function() {
-          var $pulldown = getButtonsContaner(fileId, buttonsFns, preferedProvider, dropclass);
+          var $pulldown = getButtonsContainer(fileId, buttonsFns, preferedProvider, dropclass);
           buttonsLoader.resolve($pulldown);
         });
       }).catch(function(xhr, status, error) {
