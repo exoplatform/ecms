@@ -37,11 +37,16 @@ export default {
     }
   },
   data: function() {
-    return { providers: {} };
+    return { providers: {}, userDrive: {} };
   },
   async created() {
     try {
       const data = await getUserDrive();
+      this.userDrive = { 
+        name: data.name,
+        title: data.name,
+        isSelected: false
+      };
       cloudDrive.init(data.workspace, data.homePath);
       this.providers = cloudDrive.getProviders();
     } catch (err) {
@@ -50,6 +55,7 @@ export default {
   },
   methods: {
     connectToCloudDrive: function(providerId) {
+      this.$emit("openUserDrive", this.userDrive);
       cloudDrive.connect(providerId).then(data => {
         const folderPath = data.drive.path.split("/").pop();
         const createdDrive = {
@@ -57,10 +63,9 @@ export default {
           name: folderPath,
           title: data.drive.title,
           path: folderPath,
-          folderTypeCSSClass: "uiIcon24x24nt_unstructured",
           isSelected: true
         };
-        this.$emit("cloudDriveConnected", createdDrive);
+        this.$emit("openConnectedFolder", createdDrive);
         this.toggleCloudDrawer();
       }).catch(err => console.log(err));
     },

@@ -8,7 +8,11 @@ const CloudDrivePlugin = [{
     name: "connect-cloud-drive",
     events: [
       {
-        "event": "cloudDriveConnected",
+        "event": "openUserDrive",
+        "listener": "openDrive"
+      },
+      {
+        "event": "openConnectedFolder",
         "listener": "openFolder"
       }
     ]
