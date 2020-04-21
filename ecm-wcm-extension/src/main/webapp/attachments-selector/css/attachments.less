@@ -201,7 +201,7 @@
 
     .removeFile {
       flex: 0 0 34px;
-      width: 34px;
+      width: 50px;
       margin-top: 5px;
       margin-right: -7px;
 
@@ -262,6 +262,7 @@
       }
       .colorIconStop{
         color: #bc4343;
+        cursor: pointer;
       }
 
       .folders {
@@ -289,6 +290,19 @@
       }
     }
 
+  }
+
+  .messageDestination {
+    border-bottom: 1px solid #a8b3c5;
+    width: 100%;
+
+    > p {
+      margin-bottom: 0px;
+    }
+  }
+
+  .buttonSelect {
+    padding: 0px;
   }
 
   .fileAlreadyExists {
@@ -713,6 +727,7 @@
 
                 .fileNameLabel {
                   font-size: 12px;
+                  text-align: center;
                 }
               }
             }
@@ -757,9 +772,11 @@
   color: #568cc9 !important;
   margin-right: 4px;
   text-transform: uppercase !important;
+  font-size: 13px;
 }
 .btnSelect{
   text-transform: uppercase;
+  font-size: 13px;
 }
 
 
@@ -811,18 +828,22 @@
   .active{
     color: #578cc9;
     font-weight: bold;
-    width: 30%;
+    width: 50%;
   }
 
   .selectFile {
     width: 100%;
-    border-bottom: 1px solid #a8b3c5;;
+    border-bottom: 1px solid #a8b3c5;
     > p {
       margin-bottom: 0px;
     }
   }
   .uiIconFolder{
     cursor: pointer;
+  }
+  .disabled {
+    cursor: pointer;
+    color: #a8b3c5;
   }
 }
 

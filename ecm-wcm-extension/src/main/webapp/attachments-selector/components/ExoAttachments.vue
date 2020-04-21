@@ -73,16 +73,27 @@
           <div class="uploadedFiles">
             <div class="uploadedFilesTitle">{{ $t('attachments.drawer.title') }} ({{ value.length }})</div>
             <div v-if="value.length > 0" class="destinationFolder">
-              <div v-if="showDestinationPath" class="folderLocation">
+              <div v-if="showDestinationPath && !displayMessageDestinationFolder" class="folderLocation">
                 <div><p :title="schemaFolder[0]" class="drive" rel="tooltip" data-placement="top">{{ schemaFolder[0] }}</p></div>
-                <div v-for="folder in schemaFolder.slice(1,3)" :key="folder" class="folder">
+                <div v-if="schemaFolder.length == 2" class="folder">
                   <div><span class="uiIconArrowRight colorIcon"></span></div>
-                  <div><p :title="folder" :class="schemaFolder[schemaFolder.slice(1,3).length] === folder ?'active' : ''" class="folderName" rel="tooltip" data-placement="top">{{ folder }}</p></div>
+                  <div><p :title="schemaFolder[1]" class="folderName active" rel="tooltip" data-placement="top">{{ schemaFolder[1].slice(0,20) }}</p></div>
+                </div>
+                <div v-if="schemaFolder.length > 3" class="folder">
+                  <div><span class="uiIconArrowRight colorIcon"></span></div>
+                  <div><p :title="schemaFolder[1]" class="folderName active" rel="tooltip" data-placement="top">...</p></div>
+                </div>
+                <div v-for="folder in schemaFolder.slice(schemaFolder.length-2,schemaFolder.length)" v-show="schemaFolder.length > 2" :key="folder" class="folder">
+                  <div><span class="uiIconArrowRight colorIcon"></span></div>
+                  <div><p :title="folder" :class="schemaFolder[schemaFolder.length - 1] === folder ?'active' : ''" class="folderName" rel="tooltip" data-placement="top">{{ folder.slice(0,20) }}</p></div>
                 </div>
               </div>
-              <div>
-                <i :title="$t('attachments.drawer.destination.attachment')" class="uiIconFolder " rel="tooltip" data-placement="top" @click="toggleSelectDestinationFolder()"></i>
+              <div v-if="displayMessageDestinationFolder" class="messageDestination">
+                <p :title="$t('attachments.drawer.destination.attachment.message')" rel="tooltip" data-placement="top">{{ $t('attachments.drawer.destination.attachment.message') }}</p>
               </div>
+              <button :disabled="displayMessageDestinationFolder" class="buttonSelect" @click="toggleSelectDestinationFolder()">
+                <i :title="!displayMessageDestinationFolder ? $t('attachments.drawer.destination.attachment') : $t('attachments.drawer.destination.attachment.access') " :class="displayMessageDestinationFolder ? 'disabled' : ''" class="uiIconFolder " rel="tooltip" data-placement="top"></i>
+              </button>
             </div>
             <div class="uploadedFilesItems">
               <div v-for="attachedFile in value" :key="attachedFile.name" class="uploadedFilesItem">
@@ -103,7 +114,7 @@
                       <i v-if="!attachedFile.pathDestinationFolderForFile && attachedFile.uploadId" :title="$t('attachments.drawer.destination.folder')" rel="tooltip" data-placement="top" class="fas fa-folder fa-sm colorIcon" @click="openSelectDestinationFolderForFile(attachedFile)"></i>
                     </div>
                     <div>
-                      <i v-if="!attachedFile.uploadId" :title="$t('attachments.drawer.destination.attachment')" rel="tooltip" data-placement="top" class="fas fa-ban fa-xs colorIconStop" ></i>
+                      <i v-if="!attachedFile.uploadId" :title="$t('attachments.drawer.destination.attachment.access')" rel="tooltip" data-placement="top" class="fas fa-ban fa-xs colorIconStop" ></i>
                     </div>
                     <div class="btnTrash">
                       <i :title="$t('attachments.drawer.delete')" rel="tooltip" data-placement="top" class="fas fa-trash fa-xs colorIcon" @click="removeAttachedFile(attachedFile)"></i>
@@ -177,7 +188,8 @@ export default {
       destinationFileName: '',
       showDestinationFolderForFile:false,
       modeFolderSelectionForFile: false,
-      showAttachmentsDrawer: false
+      showAttachmentsDrawer: false,
+      displayMessageDestinationFolder: true,
     };
   },
   watch: {
@@ -200,10 +212,12 @@ export default {
       deep: true,
       handler() {
         this.$emit('attachmentsChanged', this.value);
+        this.displayMessageDestinationFolder = !this.value.some(val => val.uploadId != null && val.uploadId !== '');
         if (this.value.length === 0) {
           this.pathDestinationFolder = '';
           this.showDestinationPath = false;
           this.schemaFolder = [];
+          this.displayMessageDestinationFolder = true;
           this.addDefaultPath();
         }
         if (this.value.length > 0 && !this.pathDestinationFolder) {
