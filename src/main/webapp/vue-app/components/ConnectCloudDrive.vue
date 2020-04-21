@@ -30,10 +30,18 @@
 import { getUserDrive } from "../cloudDriveService";
 
 export default {
+  model: {
+    prop: "currentDrive",
+    event: "changeCurrentDrive"
+  },
   props: {
     showCloudDrawer: {
       type: Boolean,
       default: () => false
+    },
+    currentDrive: {
+      type: Object,
+      default: () => ({})
     }
   },
   data: function() {
@@ -55,7 +63,6 @@ export default {
   },
   methods: {
     connectToCloudDrive: function(providerId) {
-      this.$emit("openUserDrive", this.userDrive);
       cloudDrive.connect(providerId).then(data => {
         const folderPath = data.drive.path.split("/").pop();
         const createdDrive = {
@@ -65,9 +72,12 @@ export default {
           path: folderPath,
           isSelected: true
         };
+        if (this.currentDrive.name !== this.userDrive.name) {
+          this.$emit("changeCurrentDrive", this.userDrive);
+        }
         this.$emit("openConnectedFolder", createdDrive);
         this.toggleCloudDrawer();
-      }).catch(err => console.log(err));
+      });
     },
     toggleCloudDrawer: function() {
       this.showCloudDrawer = !this.showCloudDrawer;
