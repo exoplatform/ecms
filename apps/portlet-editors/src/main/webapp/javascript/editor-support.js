@@ -20,8 +20,8 @@
             msgLine += err.message;
           }
         } else {
-          msgLine += (typeof err === "string" ? err : JSON.stringify(err)
-              + (err.toString && typeof err.toString === "function" ? "; " + err.toString() : ""));
+          msgLine += (typeof err === "string" ? err : JSON.stringify(err) +
+            (err.toString && typeof err.toString === "function" ? "; " + err.toString() : ""));
         }
 
         console.log(logPrefix + msgLine + isoTime);
@@ -58,7 +58,6 @@
   function EditorSupport() {
 
     var prefixUrl = pageBaseUrl(location);
-    var subscribedDocuments = {};
     var listeners = {};
     // CometD transport bus
     var cometd, cometdContext;
@@ -99,7 +98,6 @@
         init();
       }
       var subscriptionPromise = $.Deferred();
-      ;
       initLoader.done(function() {
         log("Subscribinng on " + fileId);
         var subscription = cometd.subscribe("/eXo/Application/documents/" + fileId, function(message) {
@@ -113,8 +111,8 @@
             log("Document updates subscribed successfully: " + JSON.stringify(subscribeReply));
             subscriptionPromise.resolve(subscription);
           } else {
-            var err = subscribeReply.error ? subscribeReply.error : (subscribeReply.failure ? subscribeReply.failure.reason
-                : "Undefined");
+            var err = subscribeReply.error ? subscribeReply.error : (subscribeReply.failure ? subscribeReply.failure.reason :
+              "Undefined");
             log("Document updates subscription failed for " + fileId, err);
           }
         });
@@ -160,16 +158,16 @@
       initLoader = $.Deferred();
       configLoader.done(function() {
         cCometD.configure({
-          "url" : prefixUrl + cometdConf.path,
-          "exoId" : userId,
-          "exoToken" : cometdConf.token,
-          "maxNetworkDelay" : 30000,
-          "connectTimeout" : 60000
+          "url": prefixUrl + cometdConf.path,
+          "exoId": userId,
+          "exoToken": cometdConf.token,
+          "maxNetworkDelay": 30000,
+          "connectTimeout": 60000
         });
         cometdContext = {
-          "exoContainerName" : cometdConf.containerName,
-          "provider" : cometdConf.provider,
-          "workspace" : cometdConf.workspace
+          "exoContainerName": cometdConf.containerName,
+          "provider": cometdConf.provider,
+          "workspace": cometdConf.workspace
         };
         cometd = cCometD;
         initLoader.resolve();
@@ -206,8 +204,8 @@
             log("Document updates unsubscribed successfully for: " + fileId);
             removeLoader.resolve();
           } else {
-            var err = unsubscribeReply.error ? unsubscribeReply.error
-                : (unsubscribeReply.failure ? unsubscribeReply.failure.reason : "Undefined");
+            var err = unsubscribeReply.error ? unsubscribeReply.error :
+              (unsubscribeReply.failure ? unsubscribeReply.failure.reason : "Undefined");
             log("Document updates unsubscription failed for " + fileId, err);
           }
         });
@@ -224,14 +222,17 @@
         return;
       }
       var subscriptionLoader = subscribeDocument(fileId, callback);
+      // Save listener before subscription inited
       var listener = {
-        fileId : fileId
+        fileId: fileId
       };
       if (listeners[caller]) {
         listeners[caller].push(listener);
       } else {
-        listeners[caller] = [ listener ];
+        listeners[caller] = [listener];
       }
+
+      // Set subscription for listener
       subscriptionLoader.done(function(subscription) {
         listener.subscription = subscription
       });
@@ -243,14 +244,12 @@
       if (!cometd) {
         init();
       }
-      var subscription = cometd.subscribe("/eXo/Application/documents/" + fileId, function(message) {
-      }, cometdContext, function(subscribeReply) {
-      });
+      var subscription = cometd.subscribe("/eXo/Application/documents/" + fileId, function(message) {}, cometdContext, function(subscribeReply) {});
       publishEvent(fileId, {
-        "type" : DOCUMENT_OPENED,
-        "provider" : provider,
-        "fileId" : fileId,
-        "workspace" : workspace
+        "type": DOCUMENT_OPENED,
+        "provider": provider,
+        "fileId": fileId,
+        "workspace": workspace
       });
     };
 
@@ -260,16 +259,13 @@
       }
       initLoader.done(function() {
         publishEvent(fileId, {
-          "type" : REFRESH_STATUS,
-          "fileId" : fileId,
-          "workspace" : workspace
+          "type": REFRESH_STATUS,
+          "fileId": fileId,
+          "workspace": workspace
         });
       });
-
     }
-
   }
-
   return new EditorSupport();
 
 })($, cCometD);

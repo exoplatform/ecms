@@ -158,8 +158,6 @@ public class CometdDocumentsService implements Startable {
           ExoContainerContext.setCurrentContainer(contextContainer);
         }
       } else {
-        // LOG.warn("Container not found " + containerName + " for remote call "
-        // + contextName);
         onContainerError("Container not found");
       }
 

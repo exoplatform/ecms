@@ -20,8 +20,8 @@
             msgLine += err.message;
           }
         } else {
-          msgLine += (typeof err === "string" ? err : JSON.stringify(err)
-              + (err.toString && typeof err.toString === "function" ? "; " + err.toString() : ""));
+          msgLine += (typeof err === "string" ? err : JSON.stringify(err) +
+            (err.toString && typeof err.toString === "function" ? "; " + err.toString() : ""));
         }
 
         console.log(logPrefix + msgLine + isoTime);
@@ -36,7 +36,7 @@
       }
     }
   };
-  
+
   var pageBaseUrl = function(theLocation) {
     if (!theLocation) {
       theLocation = window.location;
@@ -51,27 +51,27 @@
 
     return theLocation.protocol + "//" + theHostName;
   };
-  
-  
-  
+
+
+
   /**
    * Editor core class.
    */
   function EditorButtons() {
 
     // Functions to create editor buttons
-    var buttonsFns = []; 
+    var buttonsFns = [];
     var prefixUrl = pageBaseUrl(location);
     var currentWorkspace;
     var providers;
     var explorerFileId;
-    
+
     const DOCUMENT_OPENED = "DOCUMENT_OPENED";
     const DOCUMENT_CLOSED = "DOCUMENT_CLOSED";
     const LAST_EDITOR_CLOSED = "LAST_EDITOR_CLOSED";
     const DOCUMENT_PREVIEW_OPENED = "DOCUMENT_PREVIEW_OPENED";
     const CURRENT_PROVIDER_INFO = "CURRENT_PROVIDER_INFO";
-    
+
     /**
      * Parses comet message from JSON
      */
@@ -88,44 +88,44 @@
       }
       return src;
     };
-    
+
     /**
      * Saves prefered provider.
      * 
      */
-    var savePrefferedProvider = function(fileId, provider){
+    var savePrefferedProvider = function(fileId, provider) {
       $.post({
-        async : true,
-        type : "POST",
-        url : prefixUrl + "/portal/rest/documents/editors/prefered/" + fileId,
-        data : {
-          userId : eXo.env.portal.userName,
-          provider : provider,
-          workspace : currentWorkspace
+        async: true,
+        type: "POST",
+        url: prefixUrl + "/portal/rest/documents/editors/prefered/" + fileId,
+        data: {
+          userId: eXo.env.portal.userName,
+          provider: provider,
+          workspace: currentWorkspace
         }
       }).then(function(result) {
         log("Prefered provider " + provider + " saved. " + result);
-      }).catch(function(xhr,status,error) {
+      }).catch(function(xhr, status, error) {
         log("Cannot save prefered provider " + provider + ": " + status + " " + error);
       });
     };
-    
+
     /**
      * Inits providers preview
      * 
      */
-    var initProvidersPreview = function(fileId, workspace){
+    var initProvidersPreview = function(fileId, workspace) {
       return $.post({
-        async : true,
-        type : "POST",
-        url : prefixUrl + "/portal/rest/documents/editors/preview",
-        data : {
-          fileId : fileId,
-          workspace : workspace
+        async: true,
+        type: "POST",
+        url: prefixUrl + "/portal/rest/documents/editors/preview",
+        data: {
+          fileId: fileId,
+          workspace: workspace
         }
       });
     };
-    
+
     /**
      * Adds editor buttons container (button and pulldown)
      */
@@ -135,8 +135,8 @@
       }
       // Sort buttons in user prefference order
       if (preferedProvider != null) {
-        buttons.forEach(function(item,i){
-          if (item.provider === preferedProvider){
+        buttons.forEach(function(item, i) {
+          if (item.provider === preferedProvider) {
             buttons.splice(i, 1);
             buttons.unshift(item);
           }
@@ -145,7 +145,7 @@
       // Add buttons container
       // var $container = $target.find(".editorButtonContainer");
       var $container = $("<div class='editorButtonContainer hidden-tabletL'></div>");
-      
+
       // Create editor button
       var $btn = buttons[0].createButtonFn();
       $btn.addClass("editorButton");
@@ -157,16 +157,16 @@
         log("prefered provider: " + provider);
         savePrefferedProvider(fileId, provider);
       });
-      
+
       // Create pulldown with editor buttons
       if (buttons.length > 1) {
         var $dropdownContainer = $("<div class='dropdown-container'></div>");
         var $toggle = $("<button class='btn dropdown-toggle' data-toggle='dropdown'>" +
-        "<i class='uiIconArrowDown uiIconLightGray'></i></span></button>");
-        
+          "<i class='uiIconArrowDown uiIconLightGray'></i></span></button>");
+
         var $dropdown = $("<ul class='dropdown-menu'></ul>");
-        
-        for(var i = 1; i < buttons.length; i++) {
+
+        for (var i = 1; i < buttons.length; i++) {
           var $btn = buttons[i].createButtonFn();
           let provider = buttons[i].provider;
           // Save user choice
@@ -199,7 +199,7 @@
             log("Cannot require provider module " + provider, err);
             loader.reject();
           });
-        } catch(e) {
+        } catch (e) {
           log("Cannot load provider module " + provider, e);
           loader.reject();
         }
@@ -208,95 +208,89 @@
       }
       return loader;
     };
-   
-    
-    var eventsHandler = function(result) {
-      log("EVENT HANDLED: " + JSON.stringify(result));
-      switch(result.type) {
-      case DOCUMENT_OPENED: {
-        $('.editorButton[data-provider!="' + result.provider + '"][data-fileId="' + result.fileId + '"]').each(function(){
-          $(this).addClass("disabledProvider");
-        });
-        // Web UI buttons
-        if (providers) {
-          var allProviders = providers.slice();
-          var index = allProviders.indexOf(result.provider);
-          if (index !== -1) allProviders.splice(index, 1);
-          allProviders.forEach(provider => {
-            $( "#UIActionBar i[class*='uiIconEcms" + provider + "Open' i]").each(function(){
-              $(this).parents(':eq(1)').addClass("disabledProvider");
-            });
-          });
-        }
-      } break;
-      case LAST_EDITOR_CLOSED: {
-        $('.editorButton[data-provider!="' + result.provider + '"][data-fileId="' + result.fileId + '"]').each(function(){
-          $(this).removeClass("disabledProvider");
-        });
-         // Web UI buttons
-        if (providers) {
-          var allProviders = providers.slice();
-          var index = allProviders.indexOf(result.provider);
-          if (index !== -1) allProviders.splice(index, 1);
-          allProviders.forEach(provider => {
-            $( "#UIActionBar i[class*='uiIconEcms" + provider + "Open' i]").each(function(){
-              $(this).parents(':eq(1)').removeClass("disabledProvider");
-            });
-          });
-        }
-      } break;
-      case CURRENT_PROVIDER_INFO: {
-        log("Current provider info: " + result.provider + " fileId: " + result.fileId);
-        setTimeout(function(){
-          if(result.provider && result.provider != "null") {
-          $('.editorButton[data-provider!="' + result.provider + '"][data-fileId="' + result.fileId + '"]').each(function(){
-            
-            $(this).addClass("disabledProvider");
-          });
-          }
-        }, 100);
-     
-       break;
-      }}
-    }
-    
-    this.initExplorer = function(fileId, workspace, allProviders, currentProvider) {
-      currentWorkspace = workspace;
-      console.log("INIT EXPLORER CALLED");
-      providers = allProviders;
-      // Web UI buttons
-      if (providers && currentProvider) {
-        var copyProviders = providers.slice();
-        var index = copyProviders.indexOf(currentProvider);
-        if (index !== -1) copyProviders.splice(index, 1);
-        copyProviders.forEach(provider => {
-          $( "#UIActionBar i[class*='uiIconEcms" + provider + "Open' i]").each(function(){
+
+    var disableECMSButtons = function(currentProvider) {
+      if (providers) {
+        var allProviders = providers.slice();
+        var index = allProviders.indexOf(currentProvider);
+        if (index !== -1) allProviders.splice(index, 1);
+        allProviders.forEach(provider => {
+          $("#UIActionBar i[class*='uiIconEcms" + provider + "Open' i]").each(function() {
             $(this).parents(':eq(1)').addClass("disabledProvider");
           });
         });
       }
+    };
+
+    var enableECMSButtons = function(currentProvider) {
+      if (providers) {
+        var allProviders = providers.slice();
+        var index = allProviders.indexOf(currentProvider);
+        if (index !== -1) allProviders.splice(index, 1);
+        allProviders.forEach(provider => {
+          $("#UIActionBar i[class*='uiIconEcms" + provider + "Open' i]").each(function() {
+            $(this).parents(':eq(1)').removeClass("disabledProvider");
+          });
+        });
+      }
+    };
+
+
+    var eventsHandler = function(result) {
+      log("EVENT HANDLED: " + JSON.stringify(result));
+      switch (result.type) {
+        case DOCUMENT_OPENED: {
+          $('.editorButton[data-provider!="' + result.provider + '"][data-fileId="' + result.fileId + '"]').each(function() {
+            $(this).addClass("disabledProvider");
+          });
+          if (explorerFileId) {
+            disableECMSButtons(result.provider);
+          }
+        }
+        break;
+      case LAST_EDITOR_CLOSED: {
+        $('.editorButton[data-provider!="' + result.provider + '"][data-fileId="' + result.fileId + '"]').each(function() {
+          $(this).removeClass("disabledProvider");
+        });
+        if (explorerFileId) {
+          enableECMSButtons(result.provider);
+        }
+      }
+      break;
+      case CURRENT_PROVIDER_INFO: {
+        log("Current provider info: " + result.provider + " fileId: " + result.fileId);
+        setTimeout(function() {
+          if (result.provider && result.provider != "null") {
+            $('.editorButton[data-provider!="' + result.provider + '"][data-fileId="' + result.fileId + '"]').each(function() {
+              $(this).addClass("disabledProvider");
+            });
+          }
+        }, 100);
+        break;
+      }
+      }
+    }
+
+    this.initExplorer = function(fileId, workspace, allProviders, currentProvider) {
+      currentWorkspace = workspace;
+      providers = allProviders;
+      // Web UI buttons
+      if (currentProvider) {
+        disableECMSButtons(currentProvider);
+      }
       if (fileId != explorerFileId) {
         // We need unsubscribe from previous doc
-        var removeLoader;
         if (explorerFileId) {
-          removeLoader = editorsupport.removeListener("editorbuttons", explorerFileId);
-        }
-        if(removeLoader) {
-          removeLoader.done(function() {
+          editorsupport.removeListener("editorbuttons", explorerFileId).done(function() {
             editorsupport.addListener("editorbuttons", fileId, eventsHandler);
-            editorsupport.refreshStatus(fileId, workspace);
           });
         } else {
           editorsupport.addListener("editorbuttons", fileId, eventsHandler);
-          editorsupport.refreshStatus(fileId, workspace);
         }
-
         explorerFileId = fileId;
-        
       }
-
     };
-    
+
     /**
      * Inits editor buttons on DocumentUIActivity.
      * 
@@ -313,28 +307,27 @@
 
       // Disable editor buttons if the document is currently editing in one of
       // editors.
-      if(config.currentProvider != null) {
-        $('.editorButton[data-provider!="' + config.currentProvider + '"][data-fileId="' + config.fileId + '"]').each(function(){
+      if (config.currentProvider != null) {
+        $('.editorButton[data-provider!="' + config.currentProvider + '"][data-fileId="' + config.fileId + '"]').each(function() {
           $(this).addClass("disabledProvider");
         });
       }
       editorsupport.addListener("editorbuttons", config.fileId, eventsHandler);
     };
-    
+
     /**
      * Inits buttons on document preview.
      * 
      */
     this.initPreviewButtons = function(fileId, workspace, dropclass) {
       currentWorkspace = workspace;
-      console.log("INIT PREVIEW BUTTONS CALLED");
       buttonsFns = [];
       var buttonsLoader = $.Deferred();
       initProvidersPreview(fileId, workspace).then(function(data) {
         var providersLoader = $.Deferred();
         var preferedProvider;
         data.forEach(function(providerInfo, i, arr) {
-          loadProviderModule(providerInfo.provider).done(function(module){
+          loadProviderModule(providerInfo.provider).done(function(module) {
             module.initPreview(providerInfo.settings);
             if (providerInfo.prefered) {
               preferedProvider = providerInfo.provider;
@@ -345,11 +338,11 @@
             }
           });
         });
-        providersLoader.done(function(){
-          var $pulldown =  getButtonsContaner(fileId, buttonsFns, preferedProvider, dropclass);
+        providersLoader.done(function() {
+          var $pulldown = getButtonsContaner(fileId, buttonsFns, preferedProvider, dropclass);
           buttonsLoader.resolve($pulldown);
         });
-      }).catch(function(xhr,status,error) {
+      }).catch(function(xhr, status, error) {
         log("Cannot init providers preview for file" + fileId + ": " + status + " " + error);
       });
 
@@ -357,13 +350,16 @@
       editorsupport.refreshStatus(fileId, workspace);
       return buttonsLoader;
     };
-    
+
     /**
      * API for providers to add their editor buttons.
      * 
      */
     this.addCreateButtonFn = function(provider, createButtonFn) {
-      var buttonFn = { "provider" : provider, "createButtonFn" : createButtonFn };
+      var buttonFn = {
+        "provider": provider,
+        "createButtonFn": createButtonFn
+      };
       var index = buttonsFns.findIndex(elem => elem.provider === provider);
       if (index === -1) {
         buttonsFns.push(buttonFn);
@@ -380,7 +376,7 @@
       buttonsFns = [];
     };
   }
-      
+
   return new EditorButtons();
 
 })($, editorsupport);
