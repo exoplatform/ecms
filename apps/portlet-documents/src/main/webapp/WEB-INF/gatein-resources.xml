@@ -1,0 +1,64 @@
+<gatein-resources xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.exoplatform.org/xml/ns/gatein_resources_1_4 http://www.exoplatform.org/xml/ns/gatein_resources_1_4"
+  xmlns="http://www.exoplatform.org/xml/ns/gatein_resources_1_4">
+
+  <portlet>
+    <name>documents</name>
+    <module>
+      <depends>
+        <module>documentsBundle</module>
+      </depends>
+    </module>
+  </portlet>
+
+  <module>
+    <name>documentsBundle</name>
+    <script>
+      <minify>false</minify>
+      <path>/js/documents.bundle.js</path>
+    </script>
+    <depends>
+      <module>commonDocComponents</module>
+    </depends>
+    <depends>
+      <module>vue</module>
+    </depends>
+    <depends>
+      <module>vuetify</module>
+    </depends>
+    <depends>
+      <module>extensionRegistry</module>
+    </depends>
+  </module>
+
+  <module>
+    <name>commonDocComponents</name>
+    <script>
+      <minify>false</minify>
+      <path>/js/commonDocComponents.bundle.js</path>
+    </script>
+    <depends>
+      <module>vue</module>
+    </depends>
+    <depends>
+      <module>vuetify</module>
+    </depends>
+    <depends>
+      <module>vueEllipsis</module>
+    </depends>
+    <depends>
+      <module>eXoVueI18n</module>
+    </depends>
+    <depends>
+      <module>documentPreview</module>
+    </depends>
+    <depends>
+      <module>jquery</module>
+      <as>$</as>
+    </depends>
+    <depends>
+      <module>extensionRegistry</module>
+    </depends>
+  </module>
+
+</gatein-resources>
