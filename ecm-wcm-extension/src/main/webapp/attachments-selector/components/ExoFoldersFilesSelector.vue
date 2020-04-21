@@ -40,8 +40,10 @@
         <a :class="showSearchInput ? 'uiIconCloseServerAttachments' : 'uiIconSearch'" class="uiIconLightGray" @click="showSearchDocumentInput()"></a>
       </div>
       <div v-for="action in attachmentsComposerActions" :key="action.key" :class="`${action.appClass}Action`" class="actionBox">
-        <v-icon :class="action.iconClass" class="uiActionIcon" @click="executeAction(action)">{{ action.iconName }}</v-icon>
-        <component v-dynamic-events="action.component.events" v-if="action.component" v-model="currentDrive" :is="action.component.name" :ref="action.key"></component>
+        <v-icon v-if="action.iconName" class="uiActionIcon" @click="executeAction(action)">{{ action.iconName }}</v-icon>
+        <i v-else :class="action.iconClass" class="uiActionIcon" @click="executeAction(action)"></i>
+        <component v-dynamic-events="action.component.events" v-if="action.component" v-bind="action.component.props ? action.component.props : {}"
+                   v-model="currentDrive" :is="action.component.name" :ref="action.key"></component>
       </div>
     </div>
 
