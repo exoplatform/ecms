@@ -223,21 +223,12 @@ public class PageListFactory {
       while (nodeIterator.hasNext()) {
         Row row = rowIterator.nextRow();
         Node node = nodeIterator.nextNode();
-        if(node.getPath().contains("/tags/") && node != null){
-         try {
-           List<Node> tagedNode = newFolksonomyService.getAllDocumentsByTag(node.getPath(),session.getWorkspace().getName(),WCMCoreUtils.getSystemSessionProvider());
-           for (Node taggedNode : tagedNode ){
-             if (dataCreator != null && taggedNode != null) {
-               E data = dataCreator.createData(taggedNode, row, null);
-               if (data != null) {
-                 dataList.add(data);
-               }
-             }
-           }
-         }catch (Exception e) {
-           LOG.error("Cannot get tags of document " +node.getPath(), e);
-         }
-        } else {
+        if(node.getPath().contains("/tags/") && node != null) {
+            List<Node> tagedNode = newFolksonomyService.getAllDocumentsByTag(node.getPath(), session.getWorkspace().getName(), sessionProvider);
+            for (Node taggedNode : tagedNode) {
+              node = taggedNode;
+            }
+          }
           if (filter != null) {
             node = filter.filterNodeToDisplay(node);
           }
@@ -247,10 +238,8 @@ public class PageListFactory {
               dataList.add(data);
             }
           }
-        }
-
       }
-    } catch (RepositoryException e) {
+    } catch (Exception e) {
       if (LOG.isWarnEnabled()) {
         LOG.warn(e.getMessage());
       }
@@ -319,16 +308,4 @@ public class PageListFactory {
     return filteredResults;
   }
 
-  //Get tags
-  protected static List<String> getTags(Node node) throws Exception {
-    NewFolksonomyService newFolksonomyService = WCMCoreUtils.getService(NewFolksonomyService.class);
-    NodeLocation nodeLocation = NodeLocation.getNodeLocationByNode(node);
-    String workspace = nodeLocation.getWorkspace();
-    List<String> tags = new ArrayList<>();
-    List<Node> tagList = newFolksonomyService.getLinkedTagsOfDocument(node, workspace);
-    for (Node nodeTag : tagList ) {
-      tags.add(nodeTag.getName());
-    }
-    return tags;
-  }
 }

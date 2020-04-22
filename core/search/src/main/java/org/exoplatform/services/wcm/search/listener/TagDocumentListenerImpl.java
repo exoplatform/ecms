@@ -14,9 +14,9 @@ public class TagDocumentListenerImpl extends Listener<Node, String> {
 
   private static final Log LOG = ExoLogger.getExoLogger(TagDocumentListenerImpl.class);
 
-  private static final String ADD_TAG_TO_SEARCH_DOCUMENT = "ActivityNotify.event.TagAdded";
+  private static final String TAG_ADDED_TO_DOCUMENT = "Document.event.TagAdded";
 
-  private static final String REMOVE_TAG_FROM_SEARCH_DOCUMENT = "ActivityNotify.event.TagRemoved";
+  private static final String TAG_REMOVED_FROM_DOCUMENT = "Document.event.TagRemoved";
 
   private   IndexingOperationProcessor indexingOperationProcessor;
 
@@ -30,7 +30,7 @@ public class TagDocumentListenerImpl extends Listener<Node, String> {
   public void onEvent(Event<Node, String> event) throws Exception {
 
     Node node = event.getSource();
-    if (ADD_TAG_TO_SEARCH_DOCUMENT.equals(event.getEventName()) || REMOVE_TAG_FROM_SEARCH_DOCUMENT.equals(event.getEventName())  ) {
+    if (TAG_ADDED_TO_DOCUMENT.equals(event.getEventName()) || TAG_REMOVED_FROM_DOCUMENT.equals(event.getEventName())  ) {
     indexingOperationProcessor.getConnectors().get(FileindexingConnector.TYPE).update(node.getUUID());
     indexingService.reindex(FileindexingConnector.TYPE, node.getUUID());
     }

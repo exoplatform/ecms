@@ -67,7 +67,7 @@ public class TestFileSearchServiceConnector {
           "               \"dc:creator\": \"cairo 1.9.5 (http://cairographics.org)\",\n" +
           "               \"repository\": \"repository\",\n" +
           "               \"title\": \"exo-documentation.pdf\",\n" +
-          "               \"tag\": \"exo-tag-1\",\n" +
+          "               \"tag\": \"exo-tag-doc-john\",\n" +
           "               \"path\": \"/sites/intranet/documents/exo-documentation.pdf\",\n" +
           "               \"lastUpdatedDate\": 1505312333066,\n" +
           "               \"createdDate\": \"1505310310756\",\n" +
@@ -102,7 +102,7 @@ public class TestFileSearchServiceConnector {
           "               \"dc:creator\": \"cairo 1.9.5 (http://cairographics.org)\",\n" +
           "               \"repository\": \"repository\",\n" +
           "               \"title\": \"exo-documentation.pdf\",\n" +
-          "               \"tag\": \"exo-tag-1\",\n" +
+          "               \"tag\": \"exo-tag-doc-john\",\n" +
           "               \"path\": \"/sites/intranet/documents/exo-documentation.pdf\",\n" +
           "               \"lastUpdatedDate\": 1505312333066,\n" +
           "               \"createdDate\": \"1505310310756\",\n" +
@@ -132,7 +132,7 @@ public class TestFileSearchServiceConnector {
           "               \"author\": \"mary\",\n" +
           "               \"repository\": \"repository\",\n" +
           "               \"title\": \"exo-training.pdf\",\n" +
-          "               \"tag\": \"exo-tag-2\",\n" +
+          "               \"tag\": \"exo-training-john\",\n" +
           "               \"path\": \"/sites/intranet/documents/exo-training.pdf\",\n" +
           "               \"lastUpdatedDate\": 1505312333166,\n" +
           "               \"createdDate\": \"1505312330856\",\n" +
@@ -213,7 +213,7 @@ public class TestFileSearchServiceConnector {
     assertEquals(1, searchResults.size());
     SearchResult searchResult = searchResults.iterator().next();
     assertEquals("exo-documentation.pdf", searchResult.getTitle());
-    assertEquals("exo-tag-1", ((EcmsSearchResult) searchResult).gettag());
+    assertEquals("exo-tag-doc-john", ((EcmsSearchResult) searchResult).gettag());
     assertEquals(1505312333066L, searchResult.getDate());
     assertEquals("/rest/thumbnailImage/medium/repository/collaboration/sites/intranet/documents/exo-documentation.pdf", searchResult.getImageUrl());
   }
@@ -236,14 +236,36 @@ public class TestFileSearchServiceConnector {
     Iterator<SearchResult> searchResultIterator = searchResults.iterator();
     SearchResult searchResult1 = searchResultIterator.next();
     assertEquals("exo-documentation.pdf", searchResult1.getTitle());
-    assertEquals("exo-tag-1", ((EcmsSearchResult) searchResult1).gettag());
+    assertEquals("exo-tag-doc-john", ((EcmsSearchResult) searchResult1).gettag());
     assertEquals(1505312333066L, searchResult1.getDate());
     assertEquals("/rest/thumbnailImage/medium/repository/collaboration/sites/intranet/documents/exo-documentation.pdf", searchResult1.getImageUrl());
     SearchResult searchResult2 = searchResultIterator.next();
     assertEquals("exo-training.pdf", searchResult2.getTitle());
-    assertEquals("exo-tag-2", ((EcmsSearchResult) searchResult2).gettag());
+    assertEquals("exo-training-john", ((EcmsSearchResult) searchResult2).gettag());
     assertEquals(1505312333166L, searchResult2.getDate());
     assertEquals("/rest/thumbnailImage/medium/repository/collaboration/sites/intranet/documents/exo-training.pdf", searchResult2.getImageUrl());
+  }
+
+  @Test
+  public void searchByTagShouldReturnOneResult() throws Exception {
+    // Given
+    startSessionAs("john");
+    InitParams initParams = buildInitParams();
+    when(elasticSearchingClient.sendRequest(anyString(), anyString(), anyString())).thenReturn(ES_RESPONSE_ONE_DOC);
+
+    FileSearchServiceConnector fileSearchServiceConnector = new FileSearchServiceConnector(initParams, elasticSearchingClient, repositoryService, documentService);
+
+    // When
+    Collection<SearchResult> searchResults = fileSearchServiceConnector.search(new SearchContext(new Router(new ControllerDescriptor()), "site"), "exo-tag-doc-john~", null, 0, -1, "relevancy", "desc");
+
+    // Then
+    assertNotNull(searchResults);
+    assertEquals(1, searchResults.size());
+    SearchResult searchResult = searchResults.iterator().next();
+    assertEquals("exo-documentation.pdf", searchResult.getTitle());
+    assertEquals("exo-tag-doc-john", ((EcmsSearchResult) searchResult).gettag());
+    assertEquals(1505312333066L, searchResult.getDate());
+    assertEquals("/rest/thumbnailImage/medium/repository/collaboration/sites/intranet/documents/exo-documentation.pdf", searchResult.getImageUrl());
   }
 
   /**
@@ -255,7 +277,7 @@ public class TestFileSearchServiceConnector {
     PropertiesParam propertiesParam = new PropertiesParam();
     propertiesParam.setProperty("searchType", FileindexingConnector.TYPE);
     propertiesParam.setProperty("displayName", "Files");
-    propertiesParam.setProperty("searchFields", "name,title,attachment.content");
+    propertiesParam.setProperty("searchFields", "name,tag,title,attachment.content");
     initParams.put("constructor.params", propertiesParam);
     return initParams;
   }

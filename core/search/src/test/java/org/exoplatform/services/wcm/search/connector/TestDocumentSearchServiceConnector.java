@@ -29,7 +29,10 @@ import org.exoplatform.commons.api.search.data.SearchResult;
 import org.exoplatform.component.test.ConfigurationUnit;
 import org.exoplatform.component.test.ConfiguredBy;
 import org.exoplatform.component.test.ContainerScope;
-import org.exoplatform.services.cms.templates.TemplateService;
+import org.exoplatform.services.cms.documents.TrashService;
+import org.exoplatform.services.cms.folksonomy.NewFolksonomyService;
+import org.exoplatform.services.jcr.ext.distribution.DataDistributionType;
+import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.security.Identity;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
@@ -55,6 +58,19 @@ import org.mockito.Mockito;
 public class TestDocumentSearchServiceConnector extends BaseSearchTest {
 
   private SearchServiceConnector documentSearch_;
+  private NewFolksonomyService newFolksonomyService_;
+  private static final String TEST = "test";
+  private static final String TEST2 = "test2";
+  private static final String[] groups = {"/platform/users", "/platform/guests"};
+  private NodeHierarchyCreator nodeHierarchyCreator;
+  private TrashService         trashService;
+  private Node                 test, test2;
+  private Node                 folksonomyNode;
+  private Node                 groupAFolksonomyNode;
+  private Node                 groupBFolksonomyNode;
+  private Node                 publicFolksonomyNode;
+  private Node                 siteFolksonomyNode;
+  private DataDistributionType dataDistributionType;
 
   public void setUp() throws Exception {
     super.setUp();
@@ -62,6 +78,46 @@ public class TestDocumentSearchServiceConnector extends BaseSearchTest {
     ConversationState c = new ConversationState(new Identity(session.getUserID()));
     ConversationState.setCurrent(c);
     documentSearch_ = WCMCoreUtils.getService(DocumentSearchServiceConnector.class);
+    newFolksonomyService_ = WCMCoreUtils.getService(NewFolksonomyService.class);
+    nodeHierarchyCreator = WCMCoreUtils.getService(NodeHierarchyCreator.class);
+    Node root = session.getRootNode();
+    root.addNode("Trash");
+
+    Node tagsNode = root.hasNode("Tags") ?
+                    root.getNode("Tags") :
+                    root.addNode("Tags");
+    Node rootNode = root.hasNode("Users") ? root.getNode("Users") : root.addNode("Users");
+    //    Node userNode = rootNode.hasNode(userName) ? rootNode.getNode(userName) :
+    //                                                  rootNode.addNode(userName);
+    Node userNode = nodeHierarchyCreator.getUserNode(sessionProvider, "john");
+    Node groupsNode = root.hasNode("Groups") ? root.getNode("Groups") :
+                      root.addNode("Groups");
+    Node platformNode = groupsNode.hasNode("platform") ? groupsNode.getNode("platform") :
+                        groupsNode.addNode("platform");
+    Node privateNode = userNode.hasNode("Private") ? userNode.getNode("Private") :
+                       userNode.addNode("Private");
+    //    NodeHierarchyCreator nodehierarchyCreator = (NodeHierarchyCreator) container
+    //    .getComponentInstanceOfType(NodeHierarchyCreator.class);
+
+    String folksonomyPath = "Folksonomy";
+    folksonomyNode = privateNode.hasNode(folksonomyPath) ? privateNode.getNode(folksonomyPath) :
+                     privateNode.addNode(folksonomyPath);
+    rootNode = privateNode;
+    test = rootNode.addNode(TEST);
+    test2 = rootNode.addNode(TEST2);
+
+
+    publicFolksonomyNode = tagsNode;
+    session.save();
+    dataDistributionType = newFolksonomyService_.getDataDistributionType();
+
+    String site = "classic";
+    Node siteTags = root.hasNode("SiteTags") ?
+                    root.getNode("SiteTags") :
+                    root.addNode("SiteTags");
+    siteFolksonomyNode = siteTags.addNode(site);
+    session.save();
+    ConversationState.setCurrent(new ConversationState(new Identity("john")));
   }
   
   public void tearDown() throws Exception {
@@ -90,6 +146,7 @@ public class TestDocumentSearchServiceConnector extends BaseSearchTest {
     article3.setProperty("exo:dateModified",new GregorianCalendar());
     Node article4 = parentNode.addNode("article4", "exo:article");
     article4.setProperty("exo:title", "Albert Einstein");
+    article4.addMixin("exo:tagged");
     article4.setProperty("exo:text", "Hopkins");
     session.save();
 
@@ -143,7 +200,28 @@ public class TestDocumentSearchServiceConnector extends BaseSearchTest {
                                    0, 20, "title", "asc");
     assertEquals(4, ret.size());//2
   }
-  
+
+  public void testSearchDocumentByTags() throws Exception {
+    String[] tags = { "sport", "weather" };
+    String site = "classic";
+    Node root = session.getRootNode();
+    Node siteTags = root.hasNode("SiteTags") ?
+                    root.getNode("SiteTags") :
+                    root.addNode("SiteTags");
+    String publicFolksonomyTreePath = "/Tags";
+    Node article4 = (Node) session.getItem("/sites content/live/classic/web contents/article4");
+    newFolksonomyService_.addPublicTag(publicFolksonomyTreePath,
+                                       tags,
+                                       article4,
+                                       COLLABORATION_WS);
+    Collection<String> sites = new ArrayList<String>();
+    sites.add(site);
+    Collection<SearchResult> ret
+        = documentSearch_.search(new SearchContext(new Router(new ControllerDescriptor()), "classic"), "weather~",
+                                 sites,
+                                 0, 20, "", "asc");
+  }
+
   public void testSearchSingleWithOffset() throws Exception {
     Collection<String> sites = new ArrayList<String>();
     sites.add("classic");
@@ -211,7 +289,7 @@ public class TestDocumentSearchServiceConnector extends BaseSearchTest {
                                    0, 20, "title", "asc");
     assertEquals(2, ret.size());//1
   }
-  
+
   public void testSearchPhraseWithOffset() throws Exception {
     Collection<String> sites = new ArrayList<String>();
     sites.add("classic");

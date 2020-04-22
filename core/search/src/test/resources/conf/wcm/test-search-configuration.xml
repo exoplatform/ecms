@@ -153,6 +153,12 @@
 
 
   <component>
+    <key>org.exoplatform.services.cms.folksonomy.NewFolksonomyService</key>
+    <type>org.exoplatform.services.cms.folksonomy.impl.NewFolksonomyServiceImpl</type>
+  </component>
+
+
+  <component>
     <type>org.exoplatform.services.cms.jcrext.activity.ActivityCommonService</type>
     <init-params>
       <value-param>
@@ -165,7 +171,7 @@
       </value-param>
       <value-param>
         <name>acceptedFileProperties</name>
-        <value>{dc:title}{dc:description}{dc:creator}{dc:source}{exo:summary}{exo:title}{exo:language}{jcr:data}</value>
+        <value>{dc:title}{dc:description}{dc:creator}{dc:source}{exo:summary}{exo:title}{{exo:language}{jcr:data}</value>
       </value-param>
     </init-params>
   </component>
@@ -304,7 +310,7 @@
            <property name="type" value="file"/>
            <property name="enable" value="${exo.unified-search.connector.file.enable:true}"/>
            <property name="titleField" value="title"/>
-           <property name="searchFields" value="name,title,attachment.content"/>
+           <property name="searchFields" value="name,title,tag,attachment.content"/>
          </properties-param>
     </init-params>   
 	</component>
