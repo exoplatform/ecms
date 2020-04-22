@@ -95,7 +95,6 @@
 
     .fileDetails1 {
       display: flex;
-      margin-top: 10px;
       text-overflow: ellipsis;
       overflow: hidden;
       white-space: nowrap;
@@ -189,16 +188,22 @@
   .uploadedFilesItem, .fileSelection {
     display: flex;
     font-size: 18px;
-    margin: 15px;
+    flex-direction: column;
 
-    > div {
-      margin: 0 10px;
+    .showDestination{
+      display: flex;
+      margin-bottom: 13px;
+      .showFile{
+        width: 97%;
+        margin-left:12px;
+      }
     }
 
     .removeFile {
       flex: 0 0 34px;
       width: 34px;
       margin-top: 5px;
+      margin-right: -7px;
 
       .uiIcon {
         color: #A8B3C5;
@@ -210,6 +215,80 @@
         }
       }
     }
+    .destinationFolder {
+      display: flex;
+      flex-direction: row;
+      margin-left: 15px;
+      color: #a8b3c5;
+      border-bottom: 1px solid  #a8b3c5;
+      margin-top: -14px;
+
+      .emptyMessage{
+        width: 100%
+      }
+      .box{
+        display: flex;
+        flex-direction: row;
+      }
+      .btnTrash{
+        margin-left: 10px;
+        margin-bottom: 8px;
+        cursor: pointer;
+        margin-top: -1px;
+      }
+
+      .folderLocation {
+        display: flex;
+        flex-direction: row;
+        border-bottom: 0px;
+        width: 100%;
+
+      }
+
+      .folder {
+        overflow: hidden;
+        white-space: nowrap;
+        cursor: pointer;
+        margin-bottom: 0px;
+        margin-right: 5px;
+
+      }
+      .folderName{
+        margin-right: 5px;
+        cursor: pointer
+      }
+      .colorIcon{
+        color: #a8b3c5;
+      }
+      .colorIconStop{
+        color: #bc4343;
+      }
+
+      .folders {
+        flex-direction: row;
+        display: flex;
+      }
+
+      .folderName {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        width: 95%;
+        margin-bottom: 0px;
+
+      }
+      .selectFile {
+        width: 100%;
+        border-bottom: 0px;
+        > p {
+          margin-bottom: 1px;
+        }
+      }
+      .uiIconFolder{
+        cursor: pointer;
+      }
+    }
+
   }
 
   .fileAlreadyExists {
@@ -226,13 +305,12 @@
 
   .limitMessage {
     height: 20px;
-    padding: 12px 0px;
+    padding: 12px 23px;
     color: #555;
     display: flex;
     justify-content: space-between;
 
     .sizeLimit, .countLimit {
-      margin-right: -3px;
       line-height: 16px;
       font-weight: initial;
       box-sizing: border-box;
@@ -300,7 +378,8 @@
         flex-direction: column;
         width: 100%;
         height: 100%;
-        .contentDargAndDrop{
+        padding: 15px 0;
+        .contentDragAndDrop{
           display: flex;
           flex-direction: row;
           height: 70%;
@@ -308,22 +387,23 @@
             display: flex;
             flex-direction: column;
             width: 50%;
-            padding: 19px 1px 1px;
             .icon{
               padding: 5px;
             }
           }
         }
-        .contentUpload{
+        .contentUpload {
           display: flex;
           flex-direction: column;
           width: 50%;
-          padding: 19px 1px 1px;
-          .colorIcon{
-            color: #578cc9;
-          }
-          .icon{
-            padding: 6px;
+          .uploadButton {
+            display: flex;
+            flex-direction: column;
+            .colorIcon {
+              color: #578cc9;
+              cursor: pointer;
+              padding: 7px;
+            }
           }
         }
         .contentOR{
@@ -356,14 +436,15 @@
         .lastContent{
           height: 33%;
           display: flex;
-          flex-direction: row;
-          .icon{
-            width: 40%;
+          justify-content: center;
+          align-items: center;
+
+          a {
+            display: flex;
+                align-items: center;
           }
           .text{
-            width:65%;
-            margin-left:-37px;
-            padding:6px;
+            padding-left: 6px;
           }
         }
       }
@@ -665,6 +746,86 @@
   }
 }
 
+
+.btnActions{
+  float:right;
+  margin-right: 10%;
+  margin-top: -20%;
+}
+.btnCancel{
+  border: 1px solid #568cc9 !important;
+  color: #568cc9 !important;
+  margin-right: 4px;
+  text-transform: uppercase !important;
+}
+.btnSelect{
+  text-transform: uppercase;
+}
+
+
+.destinationFolder {
+  display: flex;
+  flex-direction: row;
+  margin-left: 15px;
+  color: #a8b3c5;
+  margin-bottom: 10%;
+
+  .folderLocation {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    border-bottom: 1px solid  #a8b3c5;;
+     > p{
+       margin-bottom: 0px;
+     }
+
+  }
+
+  .drive {
+    overflow: hidden;
+    white-space: nowrap;
+    cursor: pointer;
+    margin-bottom: 0px;
+
+  }
+  .colorIcon{
+    color: #a8b3c5;
+  }
+
+  .folder {
+    flex-direction: row;
+    display: flex;
+    > p {
+      margin-bottom: 0px;
+    }
+  }
+
+  .folderName {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 95%;
+      margin-bottom: 0px;
+
+  }
+  .active{
+    color: #578cc9;
+    font-weight: bold;
+    width: 30%;
+  }
+
+  .selectFile {
+    width: 100%;
+    border-bottom: 1px solid #a8b3c5;;
+    > p {
+      margin-bottom: 0px;
+    }
+  }
+  .uiIconFolder{
+    cursor: pointer;
+  }
+}
+
 @media screen and (max-width: 630px) {
   #exoAttachmentsApp {
     .dropFileBox {
@@ -678,16 +839,6 @@
         padding: 35px 1px 1px;
       }
 
-      .text {
-        width: 100%;
-        margin-left: -39px;
-        padding: 0px;
-      }
-
-      .icon {
-        width: 62%;
-      }
-
       .contentDrop {
         display: none;
       }
@@ -697,18 +848,22 @@
         flex-direction: row;
         width: 100%;
 
-        .icon {
-          width: 73%;
-        }
+        .uploadButton {
+          display: inline-block;
+          width: 100%;
 
-        .text {
-          padding: 8px;
-        }
+          .colorIcon {
+            padding-top: 0;
+          }
 
-        .uploadMobile {
-          width: 170%;
-          margin-left: -36%;
+          .text {
+            padding: 8px;
+          }
         }
+      }
+
+      .lastContent a {
+        align-items: flex-end;
       }
     }
   }

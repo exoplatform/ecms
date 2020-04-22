@@ -1,13 +1,45 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 
-<configuration
-   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-   xsi:schemaLocation="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd http://www.exoplatform.org/xml/ns/kernel_1_2.xsd"
-   xmlns="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd">
+<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd http://www.exoplatform.org/xml/ns/kernel_1_2.xsd"
+  xmlns="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd">
 
   <component>
     <key>org.exoplatform.services.wcm.skin.XSkinService</key>
     <type>org.exoplatform.services.wcm.skin.XSkinService</type>
+  </component>
+
+  <component>
+    <key>org.exoplatform.social.core.identity.IdentityProvider</key>
+    <type>org.exoplatform.social.core.identity.provider.OrganizationIdentityProvider</type>
+  </component>
+
+  <component>
+    <type>org.exoplatform.social.core.storage.cache.SocialStorageCacheService</type>
+  </component>
+
+  <component>
+    <key>org.exoplatform.social.core.jpa.storage.dao.SpaceMemberDAO</key>
+    <type>org.exoplatform.social.core.jpa.storage.dao.jpa.SpaceMemberDAOImpl</type>
+  </component>
+
+  <component>
+    <key>org.exoplatform.social.core.jpa.storage.dao.IdentityDAO</key>
+    <type>org.exoplatform.social.core.jpa.storage.dao.jpa.IdentityDAOImpl</type>
+  </component>
+
+  <component>
+    <type>org.exoplatform.social.core.jpa.storage.RDBMSIdentityStorageImpl</type>
+  </component>
+
+  <component>
+    <key>org.exoplatform.social.core.storage.api.IdentityStorage</key>
+    <type>org.exoplatform.social.core.storage.cache.CachedIdentityStorage</type>
+  </component>
+
+  <component>
+    <key>org.exoplatform.social.core.manager.IdentityManager</key>
+    <type>org.exoplatform.social.core.manager.IdentityManagerImpl</type>
   </component>
 
   <component>
@@ -34,7 +66,7 @@
     </init-params>
   </component>
 
-   <component>
+  <component>
     <type>org.exoplatform.services.cms.jcrext.activity.ActivityCommonService</type>
     <init-params>
       <value-param>
@@ -52,17 +84,17 @@
     </init-params>
   </component>
   <component>
-    <key>org.exoplatform.services.jcr.ext.audit.AuditService</key>  
+    <key>org.exoplatform.services.jcr.ext.audit.AuditService</key>
     <type>org.exoplatform.services.jcr.ext.audit.AuditServiceImpl</type>
-      <init-params>
+    <init-params>
         <!-- Group or user who may view audit information -->
-        <value-param>
-          <name>adminIdentity</name>
-          <value>*:/Platform/Administrators</value>
-        </value-param>
+      <value-param>
+        <name>adminIdentity</name>
+        <value>*:/Platform/Administrators</value>
+      </value-param>
     </init-params>
   </component>
-  
+
   <component>
     <key>org.exoplatform.services.portletcache.FragmentCacheService</key>
     <type>org.exoplatform.services.portletcache.FragmentCacheService</type>
@@ -79,21 +111,26 @@
     <key>org.exoplatform.webui.ext.UIExtensionManager</key>
     <type>org.exoplatform.webui.ext.impl.UIExtensionManagerImpl</type>
   </component>
-  
+
+  <component>
+    <key>org.gatein.api.Portal</key>
+    <type>org.exoplatform.services.cms.documents.mock.PortalMock</type>
+  </component>
+
   <component>
     <type>org.exoplatform.services.deployment.ContentInitializerService</type>
   </component>
-  
+
   <component>
     <key>org.exoplatform.services.cms.CmsService</key>
     <type>org.exoplatform.services.cms.impl.CmsServiceImpl</type>
   </component>
-	
+
   <component>
-	  <key>org.exoplatform.services.cms.actions.ActionServiceContainer</key>  
-	  <type>org.exoplatform.services.cms.actions.impl.ActionServiceContainerImpl</type>
-  </component>  
-   
+    <key>org.exoplatform.services.cms.actions.ActionServiceContainer</key>
+    <type>org.exoplatform.services.cms.actions.impl.ActionServiceContainerImpl</type>
+  </component>
+
   <component>
     <key>org.exoplatform.services.cms.i18n.MultiLanguageService</key>
     <type>org.exoplatform.services.cms.i18n.impl.MultiLanguageServiceImpl</type>
@@ -107,161 +144,181 @@
   <component>
     <key>org.exoplatform.services.cms.drives.ManageDriveService</key>
     <type>org.exoplatform.services.cms.drives.impl.ManageDriveServiceImpl</type>
-  </component>    
-  
+  </component>
+
   <component>
-	  <key>org.exoplatform.services.cms.folksonomy.NewFolksonomyService</key>  
-	  <type>org.exoplatform.services.cms.folksonomy.impl.NewFolksonomyServiceImpl</type>      
-	</component>	
-	
-	<component>
+    <key>org.exoplatform.services.cms.folksonomy.NewFolksonomyService</key>
+    <type>org.exoplatform.services.cms.folksonomy.impl.NewFolksonomyServiceImpl</type>
+  </component>
+
+  <component>
     <key>org.exoplatform.services.cms.metadata.MetadataService</key>
-    <type>org.exoplatform.services.cms.metadata.impl.MetadataServiceImpl</type>    
-  </component>    
-  
+    <type>org.exoplatform.services.cms.metadata.impl.MetadataServiceImpl</type>
+  </component>
+
   <component>
-    <key>org.exoplatform.services.cms.scripts.ScriptService</key>  
+    <key>org.exoplatform.services.cms.scripts.ScriptService</key>
     <type>org.exoplatform.services.cms.scripts.impl.ScriptServiceImpl</type>
   </component>
-  
+
   <component>
-	  <key>org.exoplatform.services.cms.relations.RelationsService</key>  
-	  <type>org.exoplatform.services.cms.relations.impl.RelationsServiceImpl</type>
-	</component>	
-	
-	<component>
-	  <key>org.exoplatform.services.cms.voting.VotingService</key>  
-	  <type>org.exoplatform.services.cms.voting.impl.VotingServiceImpl</type>      
-	</component>
-	
-	<component>
-	  <key>org.exoplatform.services.cms.comments.CommentsService</key>  
-	  <type>org.exoplatform.services.cms.comments.impl.CommentsServiceImpl</type>      
-	</component>
-		
-	<component>
-	  <key>org.exoplatform.services.cms.watch.WatchDocumentService</key>  
-	  <type>org.exoplatform.services.cms.watch.impl.WatchDocumentServiceImpl</type>        
-	</component>
-	
-	<component>
-	  <key>org.exoplatform.services.cms.queries.QueryService</key>  
-	  <type>org.exoplatform.services.cms.queries.impl.QueryServiceImpl</type>
-	  <init-params>
-	    <value-param>
-	      <name>relativePath</name>
-	      <value>Private/Queries</value>
-	    </value-param>
-	    <value-param>
-	      <name>group</name>
-	      <value>*:/admin</value>
-	    </value-param>            
-	  </init-params>       
-	</component>
-	
-	<component>
-    <key>org.exoplatform.services.cms.templates.TemplateService</key>
-    <type>org.exoplatform.services.cms.templates.impl.TemplateServiceImpl</type>    
+    <key>org.exoplatform.services.cms.relations.RelationsService</key>
+    <type>org.exoplatform.services.cms.relations.impl.RelationsServiceImpl</type>
   </component>
-  
+
+  <component>
+    <key>org.exoplatform.services.cms.voting.VotingService</key>
+    <type>org.exoplatform.services.cms.voting.impl.VotingServiceImpl</type>
+  </component>
+
+  <component>
+    <key>org.exoplatform.services.cms.comments.CommentsService</key>
+    <type>org.exoplatform.services.cms.comments.impl.CommentsServiceImpl</type>
+  </component>
+
+  <component>
+    <key>org.exoplatform.services.cms.watch.WatchDocumentService</key>
+    <type>org.exoplatform.services.cms.watch.impl.WatchDocumentServiceImpl</type>
+  </component>
+
+  <component>
+    <key>org.exoplatform.services.cms.queries.QueryService</key>
+    <type>org.exoplatform.services.cms.queries.impl.QueryServiceImpl</type>
+    <init-params>
+      <value-param>
+        <name>relativePath</name>
+        <value>Private/Queries</value>
+      </value-param>
+      <value-param>
+        <name>group</name>
+        <value>*:/admin</value>
+      </value-param>
+    </init-params>
+  </component>
+
+  <component>
+    <key>org.exoplatform.services.cms.templates.TemplateService</key>
+    <type>org.exoplatform.services.cms.templates.impl.TemplateServiceImpl</type>
+  </component>
+
   <component>
     <key>org.exoplatform.services.cms.views.ManageViewService</key>
     <type>org.exoplatform.services.cms.views.impl.ManageViewServiceImpl</type>
   </component>
-  
+
   <component>
     <key>org.exoplatform.services.cms.link.LinkManager</key>
     <type>org.exoplatform.services.cms.link.impl.LinkManagerImpl</type>
   </component>
-  
-	<component>
-	  <key>org.exoplatform.services.cms.taxonomy.TaxonomyService</key>  
-	  <type>org.exoplatform.services.cms.taxonomy.impl.TaxonomyServiceImpl</type>
-	  <init-params>
-      <object-param>   
-        <name>defaultPermission.configuration</name>   
-	        <object type="org.exoplatform.services.cms.taxonomy.impl.TaxonomyTreeDefaultUserPermission">
-	          <field name="permissions">
-	            <collection type="java.util.ArrayList">               
-	              <value>                            
-	                <object type="org.exoplatform.services.cms.taxonomy.impl.TaxonomyTreeDefaultUserPermission$Permission">             
-	                  <field name="identity"><string>*:/platform/administrators</string></field>
-	                  <field name="read"><string>true</string></field>                
-	                  <field name="addNode"><string>true</string></field>                
-	                  <field name="setProperty"><string>true</string></field>                
-	                  <field name="remove"><string>true</string></field>                  
-	                </object>  
-	              </value>
-                <value>                            
-                  <object type="org.exoplatform.services.cms.taxonomy.impl.TaxonomyTreeDefaultUserPermission$Permission">             
-                    <field name="identity"><string>*:/platform/users</string></field>
-                    <field name="read"><string>true</string></field>                
-                    <field name="addNode"><string>true</string></field>                
-                    <field name="setProperty"><string>true</string></field>                
-                    <field name="remove"><string>false</string></field>                  
-                  </object>  
-                </value>                        
-	            </collection>
-	          </field>
-	        </object>
-      </object-param>
-	  </init-params>          
-	    	
-	</component>
-  
+
   <component>
-	  <key>org.exoplatform.services.cms.thumbnail.ThumbnailService</key>  
-	  <type>org.exoplatform.services.cms.thumbnail.impl.ThumbnailServiceImpl</type>      
-	  <init-params>
+    <key>org.exoplatform.services.cms.taxonomy.TaxonomyService</key>
+    <type>org.exoplatform.services.cms.taxonomy.impl.TaxonomyServiceImpl</type>
+    <init-params>
+      <object-param>
+        <name>defaultPermission.configuration</name>
+        <object type="org.exoplatform.services.cms.taxonomy.impl.TaxonomyTreeDefaultUserPermission">
+          <field name="permissions">
+            <collection type="java.util.ArrayList">
+              <value>
+                <object type="org.exoplatform.services.cms.taxonomy.impl.TaxonomyTreeDefaultUserPermission$Permission">
+                  <field name="identity">
+                    <string>*:/platform/administrators</string>
+                  </field>
+                  <field name="read">
+                    <string>true</string>
+                  </field>
+                  <field name="addNode">
+                    <string>true</string>
+                  </field>
+                  <field name="setProperty">
+                    <string>true</string>
+                  </field>
+                  <field name="remove">
+                    <string>true</string>
+                  </field>
+                </object>
+              </value>
+              <value>
+                <object type="org.exoplatform.services.cms.taxonomy.impl.TaxonomyTreeDefaultUserPermission$Permission">
+                  <field name="identity">
+                    <string>*:/platform/users</string>
+                  </field>
+                  <field name="read">
+                    <string>true</string>
+                  </field>
+                  <field name="addNode">
+                    <string>true</string>
+                  </field>
+                  <field name="setProperty">
+                    <string>true</string>
+                  </field>
+                  <field name="remove">
+                    <string>false</string>
+                  </field>
+                </object>
+              </value>
+            </collection>
+          </field>
+        </object>
+      </object-param>
+    </init-params>
+
+  </component>
+
+  <component>
+    <key>org.exoplatform.services.cms.thumbnail.ThumbnailService</key>
+    <type>org.exoplatform.services.cms.thumbnail.impl.ThumbnailServiceImpl</type>
+    <init-params>
       <value-param>
-      	<name>smallSize</name>
-	      <value>32x32</value>
+        <name>smallSize</name>
+        <value>32x32</value>
       </value-param>
       <value-param>
-      	<name>mediumSize</name>
-	      <value>64x64</value>
-      </value-param> 
-      <value-param>
-      	<name>bigSize</name>
-	      <value>300x300</value>
+        <name>mediumSize</name>
+        <value>64x64</value>
       </value-param>
       <value-param>
-      	<name>enable</name>
-	      <value>false</value>
+        <name>bigSize</name>
+        <value>300x300</value>
+      </value-param>
+      <value-param>
+        <name>enable</name>
+        <value>false</value>
       </value-param>
       <value-param>
         <name>mimetypes</name>
         <value>image/jpeg;image/png;image/gif;image/bmp</value>
-      </value-param>            
+      </value-param>
     </init-params>
-	</component>
-	
-	<component>
+  </component>
+
+  <component>
     <key>org.exoplatform.services.cms.views.ApplicationTemplateManagerService</key>
     <type>org.exoplatform.services.cms.views.impl.ApplicationTemplateManagerServiceImpl</type>
   </component>
-  
-	<component>
+
+  <component>
     <key>org.exoplatform.services.cms.link.NodeFinder</key>
     <type>org.exoplatform.services.cms.link.impl.NodeFinderImpl</type>
   </component>
-  
+
   <component>
     <type>org.exoplatform.services.cms.impl.DMSConfiguration</type>
-  </component>  
-  
+  </component>
+
   <component>
-    <key>org.exoplatform.services.cms.documents.DocumentTypeService</key>  
+    <key>org.exoplatform.services.cms.documents.DocumentTypeService</key>
     <type>org.exoplatform.services.cms.documents.impl.DocumentTypeServiceImpl</type>
   </component>
-  
+
   <component>
-    <key>org.exoplatform.services.cms.documents.FavoriteService</key>  
+    <key>org.exoplatform.services.cms.documents.FavoriteService</key>
     <type>org.exoplatform.services.cms.documents.impl.FavoriteServiceImpl</type>
-  </component>  
-    
+  </component>
+
   <component>
-    <key>org.exoplatform.services.cms.documents.TrashService</key>  
+    <key>org.exoplatform.services.cms.documents.TrashService</key>
     <type>org.exoplatform.services.cms.documents.impl.TrashServiceImpl</type>
     <init-params>
       <value-param>
@@ -272,11 +329,11 @@
         <name>trashHomeNodePath</name>
         <value>/Trash</value>
       </value-param>
-    </init-params>    
+    </init-params>
   </component>
-  
+
   <component>
-    <key>org.exoplatform.services.cms.timeline.TimelineService</key>  
+    <key>org.exoplatform.services.cms.timeline.TimelineService</key>
     <type>org.exoplatform.services.cms.timeline.impl.TimelineServiceImpl</type>
     <init-params>
       <value-param>
@@ -285,49 +342,71 @@
       </value-param>
     </init-params>
   </component>
-  
+
   <component>
-    <key>org.exoplatform.services.cms.lock.LockService</key>  
-    <type>org.exoplatform.services.cms.lock.impl.LockServiceImpl</type>    
+    <key>org.exoplatform.services.cms.lock.LockService</key>
+    <type>org.exoplatform.services.cms.lock.impl.LockServiceImpl</type>
   </component>
-	
+
   <component>
-    <key>org.exoplatform.services.seo.SEOService</key>  
+    <key>org.exoplatform.services.seo.SEOService</key>
     <type>org.exoplatform.services.seo.impl.SEOServiceImpl</type>
     <init-params>
       <object-param>
-	    <name>seo.config</name>
-		<object type="org.exoplatform.services.seo.SEOConfig">
-		  <field name="robotsindex">
-		    <collection type="java.util.ArrayList">
-			  <value><string>INDEX</string></value>	
-			  <value><string>NOINDEX</string></value>
-			</collection>	  
-		  </field>
-		  <field name="robotsfollow">
-		    <collection type="java.util.ArrayList">
-			  <value><string>FOLLOW</string></value>	
-			  <value><string>NOFOLLOW</string></value>
-			</collection>	  
-		  </field>	  
-		  <field name="frequency">
-		    <collection type="java.util.ArrayList">
-			  <value><string>Always</string></value>
-			  <value><string>Hourly</string></value>
-			  <value><string>Daily</string></value>
-			  <value><string>Weekly</string></value>
-			  <value><string>Monthly</string></value>
-			  <value><string>Yearly</string></value>
-			  <value><string>Never</string></value>						
-			</collection>
-		  </field>
-        </object>  	    
-	  </object-param>	
+        <name>seo.config</name>
+        <object type="org.exoplatform.services.seo.SEOConfig">
+          <field name="robotsindex">
+            <collection type="java.util.ArrayList">
+              <value>
+                <string>INDEX</string>
+              </value>
+              <value>
+                <string>NOINDEX</string>
+              </value>
+            </collection>
+          </field>
+          <field name="robotsfollow">
+            <collection type="java.util.ArrayList">
+              <value>
+                <string>FOLLOW</string>
+              </value>
+              <value>
+                <string>NOFOLLOW</string>
+              </value>
+            </collection>
+          </field>
+          <field name="frequency">
+            <collection type="java.util.ArrayList">
+              <value>
+                <string>Always</string>
+              </value>
+              <value>
+                <string>Hourly</string>
+              </value>
+              <value>
+                <string>Daily</string>
+              </value>
+              <value>
+                <string>Weekly</string>
+              </value>
+              <value>
+                <string>Monthly</string>
+              </value>
+              <value>
+                <string>Yearly</string>
+              </value>
+              <value>
+                <string>Never</string>
+              </value>
+            </collection>
+          </field>
+        </object>
+      </object-param>
     </init-params>
   </component>
-  
+
   <component>
-    <key>org.exoplatform.services.cms.clipboard.ClipboardService</key>  
+    <key>org.exoplatform.services.cms.clipboard.ClipboardService</key>
     <type>org.exoplatform.services.cms.clipboard.impl.ClipboardServiceImpl</type>
     <init-params>
       <value-param>
@@ -339,28 +418,30 @@
         <value>${wcm.cache.clipboard.MaxNodes:500}</value>
       </value-param>
     </init-params>
-  </component>  
-	  
+  </component>
+
   <external-component-plugins>
-    <target-component>org.exoplatform.services.cms.lock.LockService</target-component>     
-      <component-plugin>
-        <name>predefinedLockGroupsOrUsersPlugin</name>
-        <set-method>addLockGroupsOrUsersPlugin</set-method>
-        <type>org.exoplatform.services.cms.lock.impl.LockGroupsOrUsersPlugin</type>
-        <init-params>
-          <object-param>
-            <name>LockGroupsOrUsers.configuration</name>
-            <description>configuration predefined groups or users for lock administrator</description>
-            <object type="org.exoplatform.services.cms.lock.impl.LockGroupsOrUsersConfig">
-              <field  name="settingLockList">
-                <collection type="java.util.ArrayList">                 
-			            			<value><string>*:/platform/administrators</string></value>
-                </collection>
-              </field>
-            </object>
-          </object-param>  
-        </init-params>                  
-      </component-plugin>
+    <target-component>org.exoplatform.services.cms.lock.LockService</target-component>
+    <component-plugin>
+      <name>predefinedLockGroupsOrUsersPlugin</name>
+      <set-method>addLockGroupsOrUsersPlugin</set-method>
+      <type>org.exoplatform.services.cms.lock.impl.LockGroupsOrUsersPlugin</type>
+      <init-params>
+        <object-param>
+          <name>LockGroupsOrUsers.configuration</name>
+          <description>configuration predefined groups or users for lock administrator</description>
+          <object type="org.exoplatform.services.cms.lock.impl.LockGroupsOrUsersConfig">
+            <field name="settingLockList">
+              <collection type="java.util.ArrayList">
+                <value>
+                  <string>*:/platform/administrators</string>
+                </value>
+              </collection>
+            </field>
+          </object>
+        </object-param>
+      </init-params>
+    </component-plugin>
   </external-component-plugins>
 	
   <!-- Configures live time for query service cache -->
@@ -372,28 +453,34 @@
       <type>org.exoplatform.services.cache.ExoCacheConfigPlugin</type>
       <description>Configures the cache for query service</description>
       <init-params>
-	      <object-param>
-	        <name>cache.config.ecm.query</name>
-	        <description>The default cache configuration</description>
-            <object type="org.exoplatform.services.cache.impl.infinispan.generic.GenericExoCacheConfig">
-	          <field name="name"><string>default</string></field>
-	          <field name="maxSize"><int>300</int></field>
-	          <field name="liveTime"><long>-1</long></field>
-	        </object>
-	      </object-param>
+        <object-param>
+          <name>cache.config.ecm.query</name>
+          <description>The default cache configuration</description>
+          <object type="org.exoplatform.services.cache.impl.infinispan.generic.GenericExoCacheConfig">
+            <field name="name">
+              <string>default</string>
+            </field>
+            <field name="maxSize">
+              <int>300</int>
+            </field>
+            <field name="liveTime">
+              <long>-1</long>
+            </field>
+          </object>
+        </object-param>
       </init-params>
     </component-plugin>
   </external-component-plugins>
-  
-	<external-component-plugins>
-	  <target-component>org.exoplatform.services.listener.ListenerService</target-component>
-		<component-plugin>
-		  <name>exo.core.security.ConversationRegistry.unregister</name>
-		  <set-method>addListener</set-method>
-		  <type>org.exoplatform.ecm.utils.LockManagerListener</type>
-	  </component-plugin>
-	</external-component-plugins>
-	
+
+  <external-component-plugins>
+    <target-component>org.exoplatform.services.listener.ListenerService</target-component>
+    <component-plugin>
+      <name>exo.core.security.ConversationRegistry.unregister</name>
+      <set-method>addListener</set-method>
+      <type>org.exoplatform.ecm.utils.LockManagerListener</type>
+    </component-plugin>
+  </external-component-plugins>
+
   <external-component-plugins>
     <target-component>org.exoplatform.services.cms.watch.WatchDocumentService</target-component>
     <component-plugin>
@@ -406,35 +493,41 @@
           <name>messageConfig</name>
           <description>description</description>
           <object type="org.exoplatform.services.cms.watch.impl.MessageConfig">
-            <field name="sender"><string>support@exoplatform.com</string></field>
-            <field name="subject"><string>Your watching document is changed</string></field>
-            <field name="mimeType"><string>text/plain</string></field>
+            <field name="sender">
+              <string>support@exoplatform.com</string>
+            </field>
+            <field name="subject">
+              <string>Your watching document is changed</string>
+            </field>
+            <field name="mimeType">
+              <string>text/plain</string>
+            </field>
             <field name="content">
               <string>The document that you are watching is changed. 
                     Please go to ecm to see this change
               </string>
-            </field>          
+            </field>
           </object>
         </object-param>
       </init-params>
     </component-plugin>
-  </external-component-plugins>	
-  
+  </external-component-plugins>
+
   <external-component-plugins>
-    <target-component>org.exoplatform.services.cms.impl.DMSConfiguration</target-component>                   
-    <component-plugin> 
+    <target-component>org.exoplatform.services.cms.impl.DMSConfiguration</target-component>
+    <component-plugin>
       <name>dmsconfiguration.plugin</name>
       <set-method>addPlugin</set-method>
       <type>org.exoplatform.services.cms.impl.DMSRepositoryConfiguration</type>
       <description>DMS Repository configuration</description>
       <init-params>
-       <value-param>
-         <name>systemWorkspace</name>
-         <value>dms-system</value>
-       </value-param>
-      </init-params>  
-    </component-plugin>     
- </external-component-plugins>
+        <value-param>
+          <name>systemWorkspace</name>
+          <value>dms-system</value>
+        </value-param>
+      </init-params>
+    </component-plugin>
+  </external-component-plugins>
 
   <external-component-plugins>
     <target-component>org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator</target-component>
@@ -446,8 +539,7 @@
         <object-param>
           <name>configuration</name>
           <description>description</description>
-          <object
-            type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig">
+          <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig">
             <field name="workspaces">
               <collection type="java.util.ArrayList">
                 <value>
@@ -458,8 +550,7 @@
             <field name="jcrPaths">
               <collection type="java.util.ArrayList">
                 <value>
-                  <object
-                    type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$JcrPath">
+                  <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$JcrPath">
                     <field name="alias">
                       <string>userApplicationData</string>
                     </field>
@@ -472,8 +563,7 @@
                     <field name="permissions">
                       <collection type="java.util.ArrayList">
                         <value>
-                          <object
-                            type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$Permission">
+                          <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$Permission">
                             <field name="identity">
                               <string>*:/platform/administrators</string>
                             </field>
@@ -503,8 +593,7 @@
                   </object>
                 </value>
                 <value>
-                  <object
-                    type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$JcrPath">
+                  <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$JcrPath">
                     <field name="alias">
                       <string>userPrivate</string>
                     </field>
@@ -517,8 +606,7 @@
                   </object>
                 </value>
                 <value>
-                  <object
-                    type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$JcrPath">
+                  <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$JcrPath">
                     <field name="alias">
                       <string>userPrivateDocuments</string>
                     </field>
@@ -532,8 +620,7 @@
                   </object>
                 </value>
                 <value>
-                  <object
-                    type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$JcrPath">
+                  <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$JcrPath">
                     <field name="alias">
                       <string>userPrivateVideo</string>
                     </field>
@@ -547,8 +634,7 @@
                   </object>
                 </value>
                 <value>
-                  <object
-                    type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$JcrPath">
+                  <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$JcrPath">
                     <field name="alias">
                       <string>userPrivateAudio</string>
                     </field>
@@ -562,8 +648,7 @@
                   </object>
                 </value>
                 <value>
-                  <object
-                    type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$JcrPath">
+                  <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$JcrPath">
                     <field name="alias">
                       <string>userPrivatePicture</string>
                     </field>
@@ -577,8 +662,7 @@
                   </object>
                 </value>
                 <value>
-                  <object
-                    type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$JcrPath">
+                  <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$JcrPath">
                     <field name="alias">
                       <string>userPrivateSearches</string>
                     </field>
@@ -592,8 +676,7 @@
                   </object>
                 </value>
                 <value>
-                  <object
-                    type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$JcrPath">
+                  <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$JcrPath">
                     <field name="alias">
                       <string>userPrivateFavorites</string>
                     </field>
@@ -607,8 +690,7 @@
                   </object>
                 </value>
                 <value>
-                  <object
-                    type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$JcrPath">
+                  <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$JcrPath">
                     <field name="alias">
                       <string>userPrivateFolksonomy</string>
                     </field>
@@ -622,8 +704,7 @@
                   </object>
                 </value>
                 <value>
-                  <object
-                    type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$JcrPath">
+                  <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$JcrPath">
                     <field name="alias">
                       <string>userPublic</string>
                     </field>
@@ -636,8 +717,7 @@
                     <field name="permissions">
                       <collection type="java.util.ArrayList">
                         <value>
-                          <object
-                            type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$Permission">
+                          <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$Permission">
                             <field name="identity">
                               <string>any</string>
                             </field>
@@ -664,19 +744,23 @@
             <field name="jcrLinks">
               <collection type="java.util.ArrayList">
                 <value>
-                  <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$JcrLink">                 
-                    <field name="sourcePath"><string>Public</string></field>
-                    <field name="targetPath"><string>Private/Public</string></field>
+                  <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$JcrLink">
+                    <field name="sourcePath">
+                      <string>Public</string>
+                    </field>
+                    <field name="targetPath">
+                      <string>Private/Public</string>
+                    </field>
                   </object>
                 </value>
-             </collection>
+              </collection>
             </field>
           </object>
         </object-param>
       </init-params>
-     </component-plugin>
+    </component-plugin>
   </external-component-plugins>
- 
+
   <import>classpath:/conf/standalone/wcm-configuration.xml</import>
   <import>classpath:/conf/standalone/test-configuration.xml</import>
   <import>classpath:/conf/standalone/wcm/test-configuration.xml</import>

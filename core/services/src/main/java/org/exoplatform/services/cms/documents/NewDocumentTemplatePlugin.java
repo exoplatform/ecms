@@ -1,3 +1,19 @@
+/*
+ * Copyright (C) 2003-2020 eXo Platform SAS.
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License
+ * as published by the Free Software Foundation; either version 3
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, see<http://www.gnu.org/licenses/>.
+ */
 package org.exoplatform.services.cms.documents;
 
 import java.util.List;
@@ -15,7 +31,7 @@ public interface NewDocumentTemplatePlugin {
    *
    * @return the templates
    */
-  List<DocumentTemplate> getTemplates();
+  List<NewDocumentTemplate> getTemplates();
   
   /**
    * Gets the template 
@@ -23,14 +39,14 @@ public interface NewDocumentTemplatePlugin {
    * @param name the name
    * @return the template
    */
-  DocumentTemplate getTemplate(String name);
+  NewDocumentTemplate getTemplate(String name);
   
   /**
-   * Gets editor plugin
+   * Gets editor plugin class
    * 
-   * @return the editorPlugin
+   * @return the editor plugin class
    */
-  NewDocumentEditorPlugin getEditor();
+  Class<? extends DocumentEditor> getEditorClass();
 
   /**
    * Creates the document from specified template.
@@ -41,6 +57,6 @@ public interface NewDocumentTemplatePlugin {
    * @return the node
    * @throws Exception the exception
    */
-  Node createDocument(Node parent, String title, DocumentTemplate template) throws Exception;
+  Node createDocument(Node parent, String title, NewDocumentTemplate template) throws Exception;
 
 }

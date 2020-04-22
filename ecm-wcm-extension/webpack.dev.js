@@ -6,7 +6,7 @@ const webpackCommonConfig = require('./webpack.common.js');
 const app = 'ecm-wcm-extension';
 
 // add the server path to your server location path
-const exoServerPath = "/home/exo/Source/NewComposer/platform-6.0.x-SNAPSHOT";
+const exoServerPath = "/work/platform-6.0.x-SNAPSHOT";
 
 let config = merge(webpackCommonConfig, {
   output: {

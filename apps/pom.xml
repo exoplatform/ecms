@@ -17,5 +17,6 @@
     <module>portlet-search</module>
     <module>resources-wcm</module>
     <module>portlet-seo</module>
+    <module>portlet-editors</module>
   </modules>
 </project>
