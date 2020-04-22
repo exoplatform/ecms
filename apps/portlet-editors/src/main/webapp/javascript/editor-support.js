@@ -252,19 +252,6 @@
         "workspace": workspace
       });
     };
-
-    this.refreshStatus = function(fileId, workspace) {
-      if (!initLoader) {
-        init();
-      }
-      initLoader.done(function() {
-        publishEvent(fileId, {
-          "type": REFRESH_STATUS,
-          "fileId": fileId,
-          "workspace": workspace
-        });
-      });
-    }
   }
   return new EditorSupport();
 

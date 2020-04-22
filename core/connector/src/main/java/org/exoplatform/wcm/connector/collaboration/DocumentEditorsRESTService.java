@@ -255,6 +255,7 @@ public class DocumentEditorsRESTService implements ResourceContainer {
                               @FormParam("workspace") String workspace) {
     org.exoplatform.services.security.Identity identity = ConversationState.getCurrent().getIdentity();
     String preferedProvider = getPreferedEditor(identity.getUserId(), fileId, workspace);
+    String currentProvider = getCurrentEditor(fileId, workspace);
     List<ProviderInfo> providersInfo = documentService.getDocumentEditorProviders()
                                                       .stream()
                                                       .filter(provider -> provider.isAvailableForUser(identity))
@@ -265,9 +266,11 @@ public class DocumentEditorsRESTService implements ResourceContainer {
                                                                                                        uriInfo.getRequestUri(),
                                                                                                        request.getLocale());
                                                           boolean preffered = provider.getProviderName().equals(preferedProvider);
+                                                          boolean current = provider.getProviderName().equals(currentProvider);
                                                           return new ProviderInfo(provider.getProviderName(),
                                                                                   editorSettings,
-                                                                                  preffered);
+                                                                                  preffered,
+                                                                                  current);
                                                         } catch (Exception e) {
                                                           LOG.error("Cannot init preview for provider "
                                                               + provider.getProviderName(), e);
@@ -276,6 +279,7 @@ public class DocumentEditorsRESTService implements ResourceContainer {
                                                       })
                                                       .filter(providerInfo -> providerInfo != null)
                                                       .collect(Collectors.toList());
+
 
     return Response.ok().entity(providersInfo).build();
   }
@@ -364,6 +368,23 @@ public class DocumentEditorsRESTService implements ResourceContainer {
     }
     return preferedProvider;
   }
+  
+  /**
+   * Gets the current editor.
+   *
+   * @param fileId the file id
+   * @param workspace the workspace
+   * @return the current editor
+   */
+  protected String getCurrentEditor(String fileId, String workspace) {
+    String currentProvider = null;
+    try {
+      currentProvider = documentService.getCurrentDocumentProvider(fileId, workspace);
+    } catch (RepositoryException e) {
+      LOG.error("Cannot get current editor for fileId " + fileId, e);
+    }
+    return currentProvider;
+  }
 
   /**
    * The Class ProviderInfo.
@@ -378,6 +399,9 @@ public class DocumentEditorsRESTService implements ResourceContainer {
 
     /** The is prefered. */
     private final boolean isPrefered;
+    
+    /** The is current. */
+    private final boolean isCurrent;
 
     /**
      * Instantiates a new provider info.
@@ -385,11 +409,13 @@ public class DocumentEditorsRESTService implements ResourceContainer {
      * @param provider the provider
      * @param settings the settings
      * @param isPrefered the isPrefered
+     * @param isCurrent the is current
      */
-    public ProviderInfo(String provider, Object settings, boolean isPrefered) {
+    public ProviderInfo(String provider, Object settings, boolean isPrefered, boolean isCurrent) {
       this.provider = provider;
       this.settings = settings;
       this.isPrefered = isPrefered;
+      this.isCurrent = isCurrent;
     }
 
     /**
@@ -418,5 +444,16 @@ public class DocumentEditorsRESTService implements ResourceContainer {
     public boolean isPrefered() {
       return isPrefered;
     }
+
+    /**
+     * Checks if is current.
+     *
+     * @return true, if is current
+     */
+    public boolean isCurrent() {
+      return isCurrent;
+    }
+    
+    
   }
 }

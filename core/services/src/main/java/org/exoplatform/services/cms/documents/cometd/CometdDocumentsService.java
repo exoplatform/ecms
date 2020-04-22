@@ -19,12 +19,9 @@ import javax.annotation.PreDestroy;
 import javax.inject.Inject;
 import javax.jcr.RepositoryException;
 
-import org.cometd.annotation.Param;
 import org.cometd.annotation.ServerAnnotationProcessor;
 import org.cometd.annotation.Service;
 import org.cometd.annotation.Session;
-import org.cometd.annotation.Subscription;
-import org.cometd.bayeux.Message;
 import org.cometd.bayeux.server.BayeuxServer;
 import org.cometd.bayeux.server.BayeuxServer.ChannelListener;
 import org.cometd.bayeux.server.ConfigurableServerChannel;
@@ -443,12 +440,6 @@ public class CometdDocumentsService implements Startable {
   /** The Constant LAST_EDITOR_CLOSED_EVENT. */
   public static final String                  LAST_EDITOR_CLOSED_EVENT    = "LAST_EDITOR_CLOSED";
 
-  /** The Constant REFRESH_STATUS. */
-  public static final String                  REFRESH_STATUS              = "REFRESH_STATUS";
-
-  /** The Constant CURRENT_PROVIDER_INFO. */
-  public static final String                  CURRENT_PROVIDER_INFO_EVENT = "CURRENT_PROVIDER_INFO";
-
   /**
    * Base minimum number of threads for document updates thread executors.
    */
@@ -610,52 +601,6 @@ public class CometdDocumentsService implements Startable {
     }
 
     /**
-     * Subscribe document events.
-     *
-     * @param message the message.
-     * @param fileId the fileId.
-     */
-    @Subscription(CHANNEL_NAME_PARAMS)
-    public void subscribeDocuments(Message message, @Param("fileId") String fileId) {
-      Object objData = message.getData();
-      if (!Map.class.isInstance(objData)) {
-        if (LOG.isDebugEnabled()) {
-          LOG.debug("Couldn't get data as a map from event");
-        }
-        return;
-      }
-
-      Map<String, Object> data = message.getDataAsMap();
-      String type = (String) data.get("type");
-      String workspace = (String) data.get("workspace");
-      String provider = (String) data.get("provider");
-
-      eventsHandlers.submit(new ContainerCommand(PortalContainer.getCurrentPortalContainerName()) {
-        @Override
-        void onContainerError(String error) {
-          LOG.error("An error has occured in container: {}", containerName);
-        }
-
-        @Override
-        void execute(ExoContainer exoContainer) {
-          switch (type) {
-          case REFRESH_STATUS:
-            try {
-              String currentProvider = documentService.getCurrentDocumentProvider(fileId, workspace);
-              sendCurrentProviderInfoEvent(fileId, currentProvider);
-            } catch (RepositoryException e) {
-              LOG.warn("Cannnot get current provider on file {}. {}", fileId, e.getMessage());
-            }
-            break;
-          }
-        }
-      });
-      if (LOG.isDebugEnabled()) {
-        LOG.debug("Event published in " + message.getChannel() + ", fileId: " + fileId + ", data: " + message.getJSON());
-      }
-    }
-
-    /**
      * Send last editor closed event.
      *
      * @param fileId the file id
@@ -668,30 +613,6 @@ public class CometdDocumentsService implements Startable {
         data.append('{');
         data.append("\"type\": \"");
         data.append(LAST_EDITOR_CLOSED_EVENT);
-        data.append("\", ");
-        data.append("\"fileId\": \"");
-        data.append(fileId);
-        data.append("\", ");
-        data.append("\"provider\": \"");
-        data.append(provider);
-        data.append("\"}");
-        channel.publish(localSession, data.toString());
-      }
-    }
-
-    /**
-     * Send last editor closed event.
-     *
-     * @param fileId the file id
-     * @param provider the provider
-     */
-    protected void sendCurrentProviderInfoEvent(String fileId, String provider) {
-      ServerChannel channel = bayeux.getChannel(CHANNEL_NAME + fileId);
-      if (channel != null) {
-        StringBuilder data = new StringBuilder();
-        data.append('{');
-        data.append("\"type\": \"");
-        data.append(CURRENT_PROVIDER_INFO_EVENT);
         data.append("\", ");
         data.append("\"fileId\": \"");
         data.append(fileId);

@@ -129,7 +129,7 @@
     /**
      * Adds editor buttons container (button and pulldown)
      */
-    var getButtonsContainer = function(fileId, buttons, preferedProvider, dropclass) {
+    var getButtonsContainer = function(fileId, buttons, preferedProvider, currentProvider, dropclass) {
       if (!buttons) {
         return;
       }
@@ -142,6 +142,7 @@
           }
         });
       }
+      
       // Add buttons container
       // var $container = $target.find(".editorButtonContainer");
       var $container = $("<div class='editorButtonContainer hidden-tabletL'></div>");
@@ -151,6 +152,10 @@
       $btn.addClass("editorButton");
       $btn.attr('data-provider', buttons[0].provider);
       $btn.attr('data-fileId', fileId);
+      // If there is current open editor and it's not this one
+      if (currentProvider && currentProvider != buttons[0].provider) {
+        $btn.addClass("disabledProvider");
+      }
       $container.append($btn);
       let provider = buttons[0].provider;
       $btn.click(function() {
@@ -176,6 +181,10 @@
           $btn.addClass("editorButton");
           $btn.attr('data-provider', buttons[i].provider);
           $btn.attr('data-fileId', fileId);
+          // If there is current open editor and it's not this one
+          if (currentProvider && currentProvider != buttons[i].provider) {
+            $btn.addClass("disabledProvider");
+          }
           $dropdown.append($btn);
         }
         $dropdownContainer.append($toggle);
@@ -235,7 +244,6 @@
       }
     };
 
-
     var eventsHandler = function(result) {
       log("EVENT HANDLED: " + JSON.stringify(result));
       switch (result.type) {
@@ -257,17 +265,6 @@
         }
       }
       break;
-      case CURRENT_PROVIDER_INFO: {
-        log("Current provider info: " + result.provider + " fileId: " + result.fileId);
-        setTimeout(function() {
-          if (result.provider && result.provider != "null") {
-            $('.editorButton[data-provider!="' + result.provider + '"][data-fileId="' + result.fileId + '"]').each(function() {
-              $(this).addClass("disabledProvider");
-            });
-          }
-        }, 100);
-        break;
-      }
       }
     }
 
@@ -304,15 +301,7 @@
       log("Init Activity buttons: " + JSON.stringify(buttons));
       var $target = $("#activityContainer" + config.activityId).find("div[id^='ActivityContextBox'] > .actionBar .statusAction.pull-left");
       console.log(JSON.stringify(config));
-      $target.append(getButtonsContainer(config.fileId, buttons, config.prefferedProvider, 'dropdown'));
-
-      // Disable editor buttons if the document is currently editing in one of
-      // editors.
-      if (config.currentProvider != null) {
-        $('.editorButton[data-provider!="' + config.currentProvider + '"][data-fileId="' + config.fileId + '"]').each(function() {
-          $(this).addClass("disabledProvider");
-        });
-      }
+      $target.append(getButtonsContainer(config.fileId, buttons, config.prefferedProvider, config.currentProvider, 'dropdown'));
       editorsupport.addListener("editorbuttons", config.fileId, eventsHandler);
     };
 
@@ -327,11 +316,15 @@
       initProvidersPreview(fileId, workspace).then(function(data) {
         var providersLoader = $.Deferred();
         var preferedProvider;
+        var currentProvider;
         data.forEach(function(providerInfo, i, arr) {
           loadProviderModule(providerInfo.provider).done(function(module) {
             module.initPreview(providerInfo.settings);
             if (providerInfo.prefered) {
               preferedProvider = providerInfo.provider;
+            }
+            if (providerInfo.current) {
+              currentProvider = providerInfo.provider;
             }
             // Last provider loaded
             if (i == (arr.length - 1)) {
@@ -340,7 +333,7 @@
           });
         });
         providersLoader.done(function() {
-          var $pulldown = getButtonsContainer(fileId, buttonsFns, preferedProvider, dropclass);
+          var $pulldown = getButtonsContainer(fileId, buttonsFns, preferedProvider, currentProvider, dropclass);
           buttonsLoader.resolve($pulldown);
         });
       }).catch(function(xhr, status, error) {
@@ -348,7 +341,6 @@
       });
 
       editorsupport.addListener("editorbuttons", fileId, eventsHandler);
-      editorsupport.refreshStatus(fileId, workspace);
       return buttonsLoader;
     };
 
