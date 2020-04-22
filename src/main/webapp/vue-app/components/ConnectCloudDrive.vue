@@ -55,7 +55,7 @@ export default {
     }
   },
   data: function() {
-    return { providers: {}, userDrive: {} };
+    return { providers: {}, userDrive: {}, error: null };
   },
   async created() {
     try {
@@ -68,24 +68,26 @@ export default {
       cloudDrive.init(data.workspace, data.homePath);
       this.providers = cloudDrive.getProviders();
     } catch (err) {
-      console.log(err);
+      this.error = err.message;
     }
   },
   methods: {
     connectToCloudDrive: function(providerId) {
-      let inProcess = true;
+      // openDriveFolder() method should be called only one time, but as progress callback may be called several times or
+      // it may not be called driveFolderOpened should monitor this 
+      let driveFolderOpened = false;
       cloudDrive.connect(providerId).then(
         data => { 
-          if (inProcess) {
+          if (!driveFolderOpened) {
             this.openDriveFolder(data.drive.path, data.drive.title);
-            inProcess = false;
+            driveFolderOpened = true;
           }
         },
-        () => { inProcess = false; },
+        () => { driveFolderOpened = true; },
         progress => { 
-          if (progress.drive.path && inProcess) { 
+          if (progress.drive.path && !driveFolderOpened) { 
             this.openDriveFolder(progress.drive.path, progress.drive.title);
-            inProcess = false;
+            driveFolderOpened = true;
           }
         }
       );
