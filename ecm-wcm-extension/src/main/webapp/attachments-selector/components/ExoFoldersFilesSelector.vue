@@ -78,18 +78,15 @@
         </div>
       </div>
     </div>
-
-
-    <div v-if="modeFolderSelection" class="buttonActions btnActions">
-      <button class="btn btnCancel" type="button" @click="$emit('cancel')">{{ $t('attachments.drawer.cancel') }}</button>
-      <button class="btn btn-primary attach ignore-vuetify-classes btnSelect" type="button" @click="selectDestination()">{{ $t('attachments.drawer.select') }}</button>
-    </div>
-
-    <div v-if="!modeFolderSelection" class="attachActions">
-      <div class="limitMessage">
+    <div class="attachActions">
+      <div v-if="!modeFolderSelection" class="limitMessage">
         <span :class="filesCountClass" class="countLimit">
           {{ $t('attachments.drawer.maxFileCountLeft').replace('{0}', filesCountLeft) }}
         </span>
+      </div>
+      <div v-if="modeFolderSelection" class="buttonActions btnActions">
+        <button class="btn btn-primary attach ignore-vuetify-classes btnSelect" type="button" @click="selectDestination()">{{ $t('attachments.drawer.select') }}</button>
+        <button class="btn btnCancel" type="button" @click="$emit('cancel')">{{ $t('attachments.drawer.cancel') }}</button>
       </div>
       <div v-if="!modeFolderSelection" class="buttonActions">
         <button class="btn" type="button" @click="$emit('cancel')">{{ $t('attachments.drawer.cancel') }}</button>
@@ -218,8 +215,8 @@ export default {
       if (folder.path === 'Public') {
         const driverPath = this.driveRootPath.split('/');
         let localDrive = driverPath[0];
-        const number = 2;
-        for (let i = 1; i < driverPath.length - number; i++) {
+        const secondPartPath = 2;
+        for (let i = 1; i < driverPath.length - secondPartPath; i++) {
           localDrive = localDrive.concat('/', driverPath[i]);
         }
         this.selectedFolderPath = localDrive.concat('/', folder.path);
