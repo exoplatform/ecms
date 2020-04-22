@@ -89,14 +89,14 @@
     </component-plugin>
 
     <component-plugin>
-      <name>ActivityNotify.event.TagAdded</name>
+      <name>Document.event.TagAdded</name>
       <set-method>addListener</set-method>
       <type>org.exoplatform.wcm.ext.component.activity.listener.TagActivityListener</type>
       <description>this listener will publish an activity when tags added</description>
     </component-plugin>
 
     <component-plugin>
-      <name>ActivityNotify.event.TagRemoved</name>
+      <name>Document.event.TagRemoved</name>
       <set-method>addListener</set-method>
       <type>org.exoplatform.wcm.ext.component.activity.listener.TagActivityListener</type>
       <description>this listener will publish an activity when tags removed</description>

@@ -137,7 +137,7 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
       }
     } else {
       dataDistributionType = dataDistributionManager.getDataDistributionType(DataDistributionMode.READABLE);
-    }    
+    }
   }
 
   /**
@@ -202,9 +202,8 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
   private void broadcastActivityTag(Node documentNode, String tagValue ) {
     if (listenerService!=null && activityService !=null) {
       try {
-        if (activityService.isAcceptedNode(documentNode) || 
+        if (activityService.isAcceptedNode(documentNode) ||
             documentNode.getPrimaryNodeType().getName().equals(NodetypeConstant.NT_FILE)) {
-          listenerService.broadcast(ActivityCommonService.TAG_ADDED_ACTIVITY, documentNode, tagValue);
           listenerService.broadcast(DOCUMENT_ADD_TAG , documentNode, tagValue);
         }
       } catch (Exception e) {
@@ -437,13 +436,13 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
     List<Node> ret = new ArrayList<Node>();
     StringBuilder queryStr = new StringBuilder().append("select * from ").append(EXO_TAGGED).append(" where jcr:path like '").
         append(rootNode.getPath()).append("/%'");
-    Query query = rootNode.getSession().getWorkspace().getQueryManager().createQuery(queryStr.toString(), Query.SQL); 
+    Query query = rootNode.getSession().getWorkspace().getQueryManager().createQuery(queryStr.toString(), Query.SQL);
     for (NodeIterator iter = query.execute().getNodes(); iter.hasNext();) {
       ret.add(iter.nextNode());
     }
     Collections.sort(ret, new NodeComparator());
     return ret;
-  }  
+  }
 
   /**
    * {@inheritDoc}
@@ -623,7 +622,7 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
     oldTagNode.remove();
     session.save();
     return newTagNode;
-  }      
+  }
 
 
   /**
@@ -697,7 +696,6 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
       try {
         if (activityService.isAcceptedNode(document) || (document.getPrimaryNodeType().getName().equals(NodetypeConstant.NT_FILE)
             && activityService.isBroadcastNTFileEvents(document))) {
-          listenerService.broadcast(ActivityCommonService.TAG_REMOVED_ACTIVITY, document, removedTags.toString());
           listenerService.broadcast(DOCUMENT_REMOVE_TAG, document, removedTags.toString());
         }
       } catch (Exception e) {

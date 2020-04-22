@@ -34,11 +34,13 @@ public class TagActivityListener extends Listener<Node, String>{
   private static String TAG_REMOVED_BUNDLE      = "SocialIntegration.messages.tagRemoved";
   private static String TAGS_ADDED_BUNDLE       = "SocialIntegration.messages.tagsAdded";
   private static String TAGS_REMOVED_BUNDLE     = "SocialIntegration.messages.tagsRemoved";
-  
+  private static String DOCUMENT_TAG_REMOVED     = "Document.event.TagRemoved";
+  private static String DOCUMENT_TAG_ADDED     = "Document.event.TagAdded";
+
   @Override
   public void onEvent(Event<Node, String> event) throws Exception {
     String eventName = event.getEventName();
-    if(! (eventName.equals(ActivityCommonService.TAG_ADDED_ACTIVITY) || eventName.equals(ActivityCommonService.TAG_REMOVED_ACTIVITY)) ){
+    if(! (eventName.equals(DOCUMENT_TAG_ADDED) || eventName.equals(DOCUMENT_TAG_REMOVED)) ){
       return;
     }
     Node currentNode = event.getSource();
@@ -47,9 +49,9 @@ public class TagActivityListener extends Listener<Node, String>{
     boolean isMultiple = tagSepIndex>0 && !tagValue.endsWith(",");
     String bundleMessage ;
     if (isMultiple) {
-      bundleMessage = ActivityCommonService.TAG_ADDED_ACTIVITY.equals(eventName)?TAGS_ADDED_BUNDLE:TAGS_REMOVED_BUNDLE;
+      bundleMessage = DOCUMENT_TAG_ADDED.equals(eventName)?TAGS_ADDED_BUNDLE:TAGS_REMOVED_BUNDLE;
     }else {
-      bundleMessage = ActivityCommonService.TAG_ADDED_ACTIVITY.equals(eventName)?TAG_ADDED_BUNDLE:TAG_REMOVED_BUNDLE;
+      bundleMessage = DOCUMENT_TAG_ADDED.equals(eventName)?TAG_ADDED_BUNDLE:TAG_REMOVED_BUNDLE;
     }
     Utils.postActivity(currentNode, bundleMessage, false, true, tagValue, "");
     LinkManager linkManager = WCMCoreUtils.getService(LinkManager.class);
