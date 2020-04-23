@@ -800,6 +800,7 @@
 
   .drive {
     overflow: hidden;
+    text-overflow: ellipsis;
     white-space: nowrap;
     cursor: pointer;
     margin-bottom: 0px;
@@ -828,7 +829,12 @@
   .active{
     color: #578cc9;
     font-weight: bold;
-    width: 50%;
+    width: min-content;
+  }
+  .path{
+    color: #578cc9;
+    font-weight: bold;
+    width: 90%;
   }
 
   .selectFile {

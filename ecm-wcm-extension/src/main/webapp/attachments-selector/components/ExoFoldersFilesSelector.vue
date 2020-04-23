@@ -228,7 +228,7 @@ export default {
       } else {
         this.selectedFolderPath = this.driveRootPath.concat(folder.path);
       }
-      this.schemaFolder = this.currentDrive.name.concat('/', folder.title);
+      this.schemaFolder = this.currentDrive.name.concat('/', folder.path);
       this.folderDestinationForFile = folder.title;
     },
     openDrive(drive) {
