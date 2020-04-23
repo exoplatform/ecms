@@ -41,7 +41,9 @@ import { getUserDrive } from "../cloudDriveService";
 
 export default {
   model: {
+    // define name of prop below, this prop will be passed by parent in v-model
     prop: "currentDrive",
+    // name of event that will change currentDrive in parent
     event: "changeCurrentDrive"
   },
   props: {
@@ -65,6 +67,7 @@ export default {
         title: data.name,
         isSelected: false
       };
+      // init cloudDrive module after response from getUserDrive
       cloudDrive.init(data.workspace, data.homePath);
       this.providers = cloudDrive.getProviders();
     } catch (err) {
@@ -107,6 +110,7 @@ export default {
       if (this.currentDrive.name !== this.userDrive.name) {
         this.$emit("changeCurrentDrive", this.userDrive);
       }
+      // parent component should listen openConnectedFolder event and call own method after emit
       this.$emit("openConnectedFolder", createdDrive);
       this.toggleCloudDrawer();
     }

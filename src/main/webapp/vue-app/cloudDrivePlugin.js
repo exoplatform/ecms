@@ -8,6 +8,7 @@ const CloudDrivePlugin = [{
     events: [
       {
         "event": "openConnectedFolder",
+        // listener must be the name of the method existing in composer, this method will be called on event emit
         "listener": "openFolder"
       }
     ]
@@ -19,6 +20,7 @@ const CloudDrivePlugin = [{
 }];
 
 require(["SHARED/extensionRegistry", "SHARED/cloudDriveApp"], function(extensionRegistry, cloudDriveApp) {
+  // init app only once with registering cloud drive extension
   cloudDriveApp.init();
   for (const extension of CloudDrivePlugin) {
     extensionRegistry.registerExtension("AttachmentsComposer", "attachments-composer-action", extension);
