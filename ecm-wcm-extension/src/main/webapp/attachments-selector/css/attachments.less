@@ -547,7 +547,7 @@
 
           .foldersHistory {
             display: flex;
-            flex: 1;
+            flex: 0 1 auto;
             min-width: 0;
 
             .longFolderHistory {
@@ -584,9 +584,12 @@
           }
         }
 
-        .searchBox {
+        .selectorActions {
           display: inline-flex;
           align-items: center;
+          a:first-of-type {
+            margin-right: 5px;
+          }
 
           &.visible {
             width: 100%;
@@ -621,7 +624,7 @@
             display: none;
           }
 
-          .uiIconSearch {
+          .uiIconSearch, .uiIconAddFolder{
             border: 1px solid #b3b3b3;
             padding: 10px;
             border-radius: 15%;
@@ -704,6 +707,16 @@
                 white-space: nowrap;
                 color: #333;
               }
+            }
+            .newFolderInput {
+              width: auto;
+              height: 16px;
+              margin-top: 3px;
+              min-height: 15px;
+              background-color: #578dc9;
+              color: #FFF;
+              border: none;
+              border-radius: 0;
             }
           }
 

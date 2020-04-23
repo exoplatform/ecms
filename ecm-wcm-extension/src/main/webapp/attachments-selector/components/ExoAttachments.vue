@@ -1,6 +1,6 @@
 <template>
   <div id="exoAttachmentsApp">
-    <div :class="{ open: showAttachmentsDrawer }" class="attachments drawer ignore-vuetify-classes" @keydown.esc="toggleAttachmentsDrawer()">
+    <div :class="{ open: showAttachmentsDrawer }" class="attachments drawer ignore-vuetify-classes" @keydown.esc.self="toggleAttachmentsDrawer()">
       <div :class="showDocumentSelector? 'documentSelector' : ''" class="attachmentsHeader header">
         <a v-if="showDocumentSelector" class="backButton" @click="toggleServerFileSelector()">
           <i class="uiIconBack"> </i>
