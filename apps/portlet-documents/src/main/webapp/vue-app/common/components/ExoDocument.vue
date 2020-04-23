@@ -9,7 +9,7 @@
       <v-list-item-title v-text="document.title"/>
       <v-list-item-subtitle>
         <div class="color-title">
-          {{ document.date }}
+          {{ dateModified }}
           <v-icon color="#a8b3c5">
             mdi-menu-right
           </v-icon>
@@ -34,6 +34,10 @@
       openUrl() {
         const path = this.document.drive === 'Private' ? 'Personal+Documents' : `.space.${this.document.drive}`;
         return `${eXo.env.portal.context}/${eXo.env.portal.portalName}/documents?path=${path}${this.document.path}`;
+      },
+      dateModified() {
+        const lang = eXo && eXo.env && eXo.env.portal && eXo.env.portal.language || 'en';
+        return new Date(this.document.dateModified.time).toLocaleString(lang);
       },
       documentIcon() {
         const icon = {}

@@ -30,11 +30,43 @@
       }
     },
     created(){
-      documentsService.getDocuments(this.query, this.folder, this.type, this.limit).then(
-        documents => { 
-          this.documents = documents;
+      if (this.query != null && this.query !== 'null') {
+        documentsService.getDocumentsByQuery(this.query, this.limit).then(
+          documents => { 
+            this.documents = documents;
+          }
+        );
+      }
+      else if (this.folder != null && this.folder !== 'null') {
+        documentsService.getDocumentsByFolder(this.folder, this.limit).then(
+          documents => { 
+            this.documents = documents;
+          }
+        );
+      }
+      else if (this.type != null) {
+        if (this.type === 'recent') {
+          documentsService.getRecentDocuments(this.limit).then(
+            documents => { 
+              this.documents = documents;
+            }
+          );
         }
-      );
+        if (this.type === 'favorite') {
+          documentsService.getFavoriteDocuments(this.limit).then(
+            documents => { 
+              this.documents = documents;
+            }
+          );
+        }
+        if (this.type === 'shared') {
+          documentsService.getSharedDocuments(this.limit).then(
+            documents => { 
+              this.documents = documents;
+            }
+          );
+        }
+      }
     }
   }
 </script>

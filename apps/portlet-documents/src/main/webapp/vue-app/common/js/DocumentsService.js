@@ -1,22 +1,37 @@
-export function getDocuments(query, folder, type, limit) {
-  let url = '/portal/rest/documents';
-  if (query != null && query !== 'null') {
-    url += `/query?query=${query}&limit=${limit}`;
-  }
-  else if (folder != null && folder !== 'null') {
-    url += `/folder?folder=${folder}&limit=${limit}`;
-  }
-  else if (type != null && type !== 'null') {
-    url += `/type?type=${type}&limit=${limit}`;
-  }
+function getDocuments(url) {
   return fetch(url, {
     method: 'GET',
-    credentials: 'include',
+	credentials: 'include',
   }).then((resp) => {
     if(resp && resp.ok) {
       return resp.json();
-    } else {
+	} else {
       throw new Error (`Error when getting documents`);
-    }
+	}
   })
+}
+
+export function getDocumentsByQuery(query, limit) {
+  const url = `/portal/rest/documents/query?query=${query}&limit=${limit}`;
+  return getDocuments(url);
+}
+
+export function getDocumentsByFolder(folder, limit) {
+  const url = `/portal/rest/documents/folder?folder=${folder}&limit=${limit}`;
+  return getDocuments(url);
+}
+
+export function getRecentDocuments(limit) {
+  const url = `/portal/rest/documents/recent?limit=${limit}`;
+  return getDocuments(url);
+}
+
+export function getFavoriteDocuments(limit) {
+  const url = `/portal/rest/documents/favorite?limit=${limit}`;
+  return getDocuments(url);
+}
+
+export function getSharedDocuments(limit) {
+  const url = `/portal/rest/documents/shared?limit=${limit}`;
+  return getDocuments(url);
 }
