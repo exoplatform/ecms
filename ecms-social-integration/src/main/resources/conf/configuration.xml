@@ -48,6 +48,9 @@
                     <string>editors</string>
                  </value>
                  <value>
+                    <string>documents</string>
+                 </value>
+                 <value>
                     <string>authoring-apps</string>
                  </value>
                  <value>
