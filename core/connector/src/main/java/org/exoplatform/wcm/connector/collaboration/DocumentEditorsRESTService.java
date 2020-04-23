@@ -265,11 +265,11 @@ public class DocumentEditorsRESTService implements ResourceContainer {
                                                                                                        workspace,
                                                                                                        uriInfo.getRequestUri(),
                                                                                                        request.getLocale());
-                                                          boolean preffered = provider.getProviderName().equals(preferedProvider);
+                                                          boolean prefered = provider.getProviderName().equals(preferedProvider);
                                                           boolean current = provider.getProviderName().equals(currentProvider);
                                                           return new ProviderInfo(provider.getProviderName(),
                                                                                   editorSettings,
-                                                                                  preffered,
+                                                                                  prefered,
                                                                                   current);
                                                         } catch (Exception e) {
                                                           LOG.error("Cannot init preview for provider "

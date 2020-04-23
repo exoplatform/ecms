@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configuration
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://www.exoplatform.org/xml/ns/kernel_1_3.xsd http://www.exoplatform.org/xml/ns/kernel_1_3.xsd"
   xmlns="http://www.exoplatform.org/xml/ns/kernel_1_3.xsd">
-  
+
   <component>
     <type>org.exoplatform.wcm.connector.collaboration.DocumentEditorsRESTService</type>
   </component>
-  
+
   <external-component-plugins>
     <target-component>org.exoplatform.commons.addons.AddOnService</target-component>
     <component-plugin>
@@ -41,5 +40,174 @@
     </component-plugin>
   </external-component-plugins>
   
+    
+  
+   <!-- ECMS menu action for office online. -->
+  <external-component-plugins>
+    <target-component>org.exoplatform.webui.ext.UIExtensionManager</target-component>
+    <component-plugin>
+      <name>Add Office Online Actions</name>
+      <set-method>registerUIExtensionPlugin</set-method>
+      <type>org.exoplatform.webui.ext.UIExtensionPlugin</type>
+      <init-params>
+        <object-param>
+          <name>EditorsOpen</name>
+          <object type="org.exoplatform.webui.ext.UIExtension">
+            <field name="type">
+              <string>org.exoplatform.ecm.dms.UIActionBar</string>
+            </field>
+            <field name="name">
+              <string>EditorsOpen</string>
+            </field>
+            <field name="rank">
+              <int>10</int>
+            </field>
+            <field name="component">
+              <string>org.exoplatform.ecm.webui.component.explorer.documents.EditorsOpenManageComponent</string>
+            </field>
+          </object>
+        </object-param>
+      </init-params>
+    </component-plugin>
+  </external-component-plugins>
+
+  <!-- Add Editors actions to ECMS views -->
+  <external-component-plugins>
+    <target-component>org.exoplatform.services.cms.views.CustomizeViewService</target-component>
+    <component-plugin>
+      <name>customize.view.plugin</name>
+      <set-method>addCustomizeViewPlugin</set-method>
+      <type>org.exoplatform.services.cms.views.CustomizeViewPlugin</type>
+      <description>this plugin customize user view</description>
+      <init-params>
+        <object-param>
+          <name>Admin</name>
+          <description>View configuration of Admin</description>
+          <object type="org.exoplatform.services.cms.views.ViewConfig">
+            <field name="name">
+              <string>Admin</string>
+            </field>
+            <field name="tabList">
+              <collection type="java.util.ArrayList">
+                <value>
+                  <object type="org.exoplatform.services.cms.views.ViewConfig$Tab">
+                    <field name="tabName">
+                      <string>Admin</string>
+                    </field>
+                    <field name="buttons">
+                      <string>
+                        editorsOpen
+                      </string>
+                    </field>
+                  </object>
+                </value>
+              </collection>
+            </field>
+          </object>
+        </object-param>
+        <object-param>
+          <name>Icons</name>
+          <description>View configuration for user</description>
+          <object type="org.exoplatform.services.cms.views.ViewConfig">
+            <field name="name">
+              <string>Icons</string>
+            </field>
+            <field name="tabList">
+              <collection type="java.util.ArrayList">
+                <value>
+                  <object type="org.exoplatform.services.cms.views.ViewConfig$Tab">
+                    <field name="tabName">
+                      <string>Icons</string>
+                    </field>
+                    <field name="buttons">
+                      <string>
+                        editorsOpen
+                      </string>
+                    </field>
+                  </object>
+                </value>
+              </collection>
+            </field>
+          </object>
+        </object-param>
+        <object-param>
+          <name>List</name>
+          <description>View configuration for List</description>
+          <object type="org.exoplatform.services.cms.views.ViewConfig">
+            <field name="name">
+              <string>List</string>
+            </field>
+            <field name="tabList">
+              <collection type="java.util.ArrayList">
+                <value>
+                  <object type="org.exoplatform.services.cms.views.ViewConfig$Tab">
+                    <field name="tabName">
+                      <string>List</string>
+                    </field>
+                    <field name="buttons">
+                      <string>
+                        editorsOpen
+                      </string>
+                    </field>
+                  </object>
+                </value>
+              </collection>
+            </field>
+          </object>
+        </object-param>
+        <object-param>
+          <name>Web</name>
+          <description>View configuration of WCM administrator</description>
+          <object type="org.exoplatform.services.cms.views.ViewConfig">
+            <field name="name">
+              <string>Web</string>
+            </field>
+            <field name="tabList">
+              <collection type="java.util.ArrayList">
+                <value>
+                  <object type="org.exoplatform.services.cms.views.ViewConfig$Tab">
+                    <field name="tabName">
+                      <string>Authoring</string>
+                    </field>
+                    <field name="buttons">
+                      <string>
+                        editorsOpen
+                      </string>
+                    </field>
+                  </object>
+                </value>
+              </collection>
+            </field>
+          </object>
+        </object-param>
+        <object-param>
+          <name>Categories</name>
+          <description>View configuration of WCM contributors</description>
+          <object type="org.exoplatform.services.cms.views.ViewConfig">
+            <field name="name">
+              <string>Categories</string>
+            </field>
+            <field name="tabList">
+              <collection type="java.util.ArrayList">
+                <value>
+                  <object type="org.exoplatform.services.cms.views.ViewConfig$Tab">
+                    <field name="tabName">
+                      <string>Collaboration</string>
+                    </field>
+                    <field name="buttons">
+                      <string>
+                        editorsOpen
+                      </string>
+                    </field>
+                  </object>
+                </value>
+              </collection>
+            </field>
+          </object>
+        </object-param>
+      </init-params>
+    </component-plugin>
+  </external-component-plugins>
+
 </configuration>
   

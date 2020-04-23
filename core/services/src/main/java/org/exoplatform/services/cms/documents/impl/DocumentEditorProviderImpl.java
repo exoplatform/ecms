@@ -38,6 +38,7 @@ import org.exoplatform.services.organization.OrganizationService;
 import org.exoplatform.services.security.Identity;
 import org.exoplatform.social.core.identity.provider.OrganizationIdentityProvider;
 import org.exoplatform.social.core.manager.IdentityManager;
+import org.exoplatform.webui.application.WebuiRequestContext;
 
 /**
  * The Class DocumentEditorProviderImpl.
@@ -193,6 +194,7 @@ public class DocumentEditorProviderImpl implements DocumentEditorProvider {
   /**
    * Inits the preview.
    *
+   * @param <T> the generic type
    * @param fileId the uuid
    * @param workspace the workspace
    * @param requestURI the requestURI
@@ -200,9 +202,25 @@ public class DocumentEditorProviderImpl implements DocumentEditorProvider {
    * @return settings object
    */
   @Override
-  public Object initPreview(String fileId, String workspace, URI requestURI, Locale locale) {
+  public <T> T initPreview(String fileId, String workspace, URI requestURI, Locale locale) {
     return editor.initPreview(fileId, workspace, requestURI, locale);
   }
+  
+  
+  /**
+   * Inits the explorer.
+   *
+   * @param <T> the generic type
+   * @param fileId the file id
+   * @param workspace the workspace
+   * @param context the context
+   * @return the settings object
+   */
+  @Override
+  public <T> T initExplorer(String fileId, String workspace, WebuiRequestContext context) {
+    return editor.initExplorer(fileId, workspace, context);
+  }
+
 
   /**
    * Gets the provider name.
@@ -212,6 +230,19 @@ public class DocumentEditorProviderImpl implements DocumentEditorProvider {
   @Override
   public String getProviderName() {
     return editor.getProviderName();
+  }
+  
+  
+  /**
+   * Checks if is document supported.
+   *
+   * @param fileId the file id
+   * @param workspace the workspace
+   * @return true, if is document supported
+   */
+  @Override
+  public boolean isDocumentSupported(String fileId, String workspace) {
+    return editor.isDocumentSupported(fileId, workspace);
   }
 
   /**

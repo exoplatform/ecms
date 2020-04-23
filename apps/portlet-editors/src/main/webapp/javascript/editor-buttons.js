@@ -268,13 +268,42 @@
       }
     }
 
-    this.initExplorer = function(fileId, workspace, allProviders, currentProvider) {
+    this.initExplorer = function(fileId, workspace, providersInfo) {
       currentWorkspace = workspace;
-      providers = allProviders;
+      providers = providersInfo.map(function(providerInfo) {
+        return providerInfo.provider;
+      });
+      
+      buttonsFns = [];
+      var providersLoader = $.Deferred();
+      var preferedProvider;
+      var currentProvider;
+      providersInfo.forEach(function(providerInfo, i, arr) {
+        loadProviderModule(providerInfo.provider).done(function(module) {
+          module.initExplorer(providerInfo.settings);
+          if (providerInfo.prefered) {
+            preferedProvider = providerInfo.provider;
+          }
+          if (providerInfo.current) {
+            currentProvider = providerInfo.provider;
+          }
+          // Last provider loaded
+          if (i == (arr.length - 1)) {
+            providersLoader.resolve();
+          }
+        });
+      });
+      providersLoader.done(function() {
+        var $pulldown = getButtonsContainer(fileId, buttonsFns, preferedProvider, currentProvider, 'dropdown');
+        console.log($pulldown);
+        $(".detailContainer").append($pulldown);
+      });
+      
+      
       // Web UI buttons
-      if (currentProvider) {
-        disableECMSButtons(currentProvider);
-      }
+     // if (currentProvider) {
+      // disableECMSButtons(currentProvider);
+    // }
       if (fileId != explorerFileId) {
         // We need unsubscribe from previous doc
         if (explorerFileId) {

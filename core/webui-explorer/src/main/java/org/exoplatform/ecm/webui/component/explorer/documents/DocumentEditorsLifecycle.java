@@ -28,6 +28,9 @@ import org.exoplatform.portal.application.PortalRequestContext;
 import org.exoplatform.services.cms.documents.DocumentService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.security.ConversationState;
+import org.exoplatform.services.security.Identity;
+import org.exoplatform.wcm.connector.collaboration.DocumentEditorsRESTService.ProviderInfo;
 import org.exoplatform.web.application.Application;
 import org.exoplatform.web.application.ApplicationLifecycle;
 import org.exoplatform.web.application.RequestContext;
@@ -55,7 +58,10 @@ public class DocumentEditorsLifecycle implements ApplicationLifecycle<WebuiReque
   protected static final Log    LOG                          = ExoLogger.getLogger(DocumentEditorsLifecycle.class);
 
   /** The Constant MIX_REFERENCEABLE. */
-  protected static final String MIX_REFERENCEABLE             = "mix:referenceable";
+  protected static final String MIX_REFERENCEABLE            = "mix:referenceable";
+
+  /** The document service. */
+  protected DocumentService     documentService;
 
   /**
    * Instantiates a new DocumentEditorsLifecycle lifecycle.
@@ -157,23 +163,36 @@ public class DocumentEditorsLifecycle implements ApplicationLifecycle<WebuiReque
    * @throws RepositoryException the repository exception
    */
   protected void initEditorsModule(WebuiRequestContext context, String fileId, String workspace) throws RepositoryException {
+    Identity identity = ConversationState.getCurrent().getIdentity();
     RequireJS require = context.getJavascriptManager().require("SHARED/editorbuttons", "editorbuttons");
-    DocumentService documentService = context.getApplication()
-                                             .getApplicationServiceContainer()
-                                             .getComponentInstanceOfType(DocumentService.class);
- 
+    String preferedProvider = getPreferedEditor(identity.getUserId(), fileId, workspace);
+    String currentProvider = getCurrentEditor(fileId, workspace);
+    List<ProviderInfo> providersInfo = getDocumentService().getDocumentEditorProviders()
+                                                      .stream()
+                                                      .filter(provider -> provider.isAvailableForUser(identity))
+                                                      .map(provider -> {
+                                                        try {
+                                                          Object editorSettings = provider.initExplorer(fileId, workspace, context);
+                                                          boolean prefered = provider.getProviderName().equals(preferedProvider);
+                                                          boolean current = provider.getProviderName().equals(currentProvider);
+                                                          return new ProviderInfo(provider.getProviderName(),
+                                                                                  editorSettings,
+                                                                                  prefered,
+                                                                                  current);
+                                                        } catch (Exception e) {
+                                                          LOG.error("Cannot init explorer for provider "
+                                                              + provider.getProviderName(), e);
+                                                          return null;
+                                                        }
+                                                      })
+                                                      .filter(providerInfo -> providerInfo != null)
+                                                      .collect(Collectors.toList());
 
-    List<String> providers = documentService.getDocumentEditorProviders()
-                                            .stream()
-                                            .map(provider -> provider.getProviderName())
-                                            .collect(Collectors.toList());
     try {
-      String providersJson = new JsonGeneratorImpl().createJsonArray(providers).toString();
-      String currentProvider = documentService.getCurrentDocumentProvider(fileId, workspace);
-      currentProvider = currentProvider != null ? new StringBuilder("'").append(currentProvider).append("'").toString() : "null";
-      require.addScripts("editorbuttons.initExplorer('" + fileId + "', '" + workspace + "', " + providersJson + ", " + currentProvider + ");");
+      String providersInfoJson = new JsonGeneratorImpl().createJsonArray(providersInfo).toString();
+      require.addScripts("editorbuttons.initExplorer('" + fileId + "', '" + workspace + "', " + providersInfoJson + ");");
     } catch (JsonException e) {
-      LOG.warn("Cannot generate JSON for initializing editors module. {}", e.getMessage());
+      LOG.warn("Cannot generate JSON for initializing exprorer in editors module. {}", e.getMessage());
     }
 
   }
@@ -191,6 +210,55 @@ public class DocumentEditorsLifecycle implements ApplicationLifecycle<WebuiReque
     return !(userName.equals(parentContext.getAttribute(USERID_ATTRIBUTE))
         && nodeWs.equals(parentContext.getAttribute(DOCUMENT_WORKSPACE_ATTRIBUTE))
         && nodePath.equals(parentContext.getAttribute(DOCUMENT_PATH_ATTRIBUTE)));
+  }
+
+  /**
+   * Gets the document service.
+   *
+   * @return the document service
+   */
+  protected DocumentService getDocumentService() {
+    if (documentService == null) {
+      documentService = WebuiRequestContext.getCurrentInstance()
+                                           .getApplication()
+                                           .getApplicationServiceContainer()
+                                           .getComponentInstanceOfType(DocumentService.class);
+    }
+    return documentService;
+  }
+
+  /**
+   * Gets the prefered editor.
+   *
+   * @param userId the user id
+   * @param fileId the file id
+   * @param workspace the workspace
+   * @return the prefered editor
+   */
+  protected String getPreferedEditor(String userId, String fileId, String workspace) {
+    try {
+      return getDocumentService().getPreferedEditor(userId, fileId, workspace);
+    } catch (RepositoryException e) {
+      LOG.error("Cannot get prefered editor for fileId " + fileId, e);
+      return null;
+    }
+  }
+
+  
+  /**
+   * Gets the current editor.
+   *
+   * @param fileId the file id
+   * @param workspace the workspace
+   * @return the current editor
+   */
+  protected String getCurrentEditor(String fileId, String workspace) {
+    try {
+      return getDocumentService().getCurrentDocumentProvider(fileId, workspace);
+    } catch (RepositoryException e) {
+      LOG.error("Cannot get current editor for fileId " + fileId, e);
+      return null;
+    }
   }
 
 }
