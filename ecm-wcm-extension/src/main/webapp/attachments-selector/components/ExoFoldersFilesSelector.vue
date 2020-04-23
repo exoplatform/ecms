@@ -64,7 +64,7 @@
         </div>
         <div v-for="folder in filteredFolders" :key="folder.id" :id="folder.id" :title="folder.name" class="folderSelection"
              @click="openFolder(folder)">
-          <a :data-original-title="folder.title" href="javascript:void(0);" rel="tooltip" data-placement="bottom">
+          <a :title="folder.title" href="javascript:void(0);" rel="tooltip" data-placement="bottom">
             <i :class="folder.folderTypeCSSClass" class="uiIcon24x24FolderDefault uiIconEcmsLightGray selectionIcon center"></i>
             <div class="selectionLabel center">{{ folder.title }}</div>
           </a>
@@ -150,6 +150,11 @@ export default {
         const searchTerm = this.searchFilesFolders.trim().toLowerCase();
         folders = this.folders.filter(folder => folder.name.toLowerCase().indexOf(searchTerm) >= 0 );
       }
+      const txt = document.createElement('textarea');
+      folders.forEach((folder) => {
+        txt.innerHTML = folder.title;
+        folder.title = txt.value;
+      });
       return folders;
     },
     filteredFiles() {
@@ -223,8 +228,8 @@ export default {
       } else {
         this.selectedFolderPath = this.driveRootPath.concat(folder.path);
       }
-      this.schemaFolder = this.currentDrive.name.concat('/', folder.path);
-      this.folderDestinationForFile = folder.name;
+      this.schemaFolder = this.currentDrive.name.concat('/', folder.title);
+      this.folderDestinationForFile = folder.title;
     },
     openDrive(drive) {
       this.foldersHistory = [];
@@ -398,9 +403,6 @@ export default {
       } else {
         this.$emit('itemsSelected', this.selectedFolderPath, this.schemaFolder);
       }
-
-
-
     }
   }
 };
