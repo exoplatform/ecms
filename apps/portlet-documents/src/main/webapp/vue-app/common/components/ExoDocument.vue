@@ -8,8 +8,8 @@
     <v-list-item-content>
       <v-list-item-title v-text="document.title"/>
       <v-list-item-subtitle>
-        <div class="color-title">
-          {{ dateModified }}
+        <div :title="absoluteDateModified()" class="color-title">
+          {{ relativeDateModified }}
           <v-icon color="#a8b3c5">
             mdi-menu-right
           </v-icon>
@@ -35,9 +35,8 @@
         const path = this.document.drive === 'Private' ? 'Personal+Documents' : `.space.${this.document.drive}`;
         return `${eXo.env.portal.context}/${eXo.env.portal.portalName}/documents?path=${path}${this.document.path}`;
       },
-      dateModified() {
-        const lang = eXo && eXo.env && eXo.env.portal && eXo.env.portal.language || 'en';
-        return new Date(this.document.dateModified.time).toLocaleString(lang);
+      relativeDateModified() {
+        return this.getRelativeTime(this.document.dateModified.time);
       },
       documentIcon() {
         const icon = {}
@@ -67,6 +66,34 @@
       }
     },
     methods: {
+      getRelativeTime(previous) {
+        const msPerMinute = 60 * 1000;
+        const msPerHour = msPerMinute * 60;
+        const msPerDay = msPerHour * 24;
+        const msPerMaxDays = msPerDay * 2;
+        const elapsed = new Date().getTime() - previous;
+        if (elapsed < msPerMinute) {
+          return this.$t('documents.timeConvert.Less_Than_A_Minute');
+        } else if (elapsed === msPerMinute) {
+          return this.$t('documents.timeConvert.About_A_Minute');
+        } else if (elapsed < msPerHour) {
+          return this.$t('documents.timeConvert.About_?_Minutes').replace('{0}', Math.round(elapsed / msPerMinute));
+        } else if (elapsed === msPerHour) {
+          return this.$t('documents.timeConvert.About_An_Hour');
+        } else if (elapsed < msPerDay) {
+          return this.$t('documents.timeConvert.About_?_Hours').replace('{0}', Math.round(elapsed / msPerHour));
+        } else if (elapsed === msPerDay) {
+          return this.$t('documents.timeConvert.About_A_Day');
+        } else if (elapsed < msPerMaxDays) {
+          return this.$t('documents.timeConvert.About_?_Days').replace('{0}', Math.round(elapsed / msPerDay));
+        } else {
+          return this.absoluteDateModified({dateStyle: "short"});
+        }
+      },
+      absoluteDateModified(options) {
+        const lang = eXo && eXo.env && eXo.env.portal && eXo.env.portal.language || 'en';
+        return new Date(this.document.dateModified.time).toLocaleString(lang, options).split("/").join("-");
+      },
       openPreview() {
         documentPreview.init({
           doc: {
