@@ -6,7 +6,7 @@
 
   /** For debug logging. */
   var log = function(msg, err) {
-    var logPrefix = "[EDITORSUPPORT] ";
+    var logPrefix = "[editorsupport] ";
     if (typeof console != "undefined" && typeof console.log != "undefined") {
       var isoTime = " -- " + new Date().toISOString();
       var msgLine = msg;
@@ -90,8 +90,7 @@
     };
 
     /**
-     * Subscribes the document and reacts to the events. Providers param is
-     * optional (used for Documents app)
+     * Subscribes the document and passes events to the callback.
      */
     var subscribeDocument = function(fileId, callback) {
       if (!initLoader) {
@@ -99,7 +98,6 @@
       }
       var subscriptionPromise = $.Deferred();
       initLoader.done(function() {
-        log("Subscribinng on " + fileId);
         var subscription = cometd.subscribe("/eXo/Application/documents/" + fileId, function(message) {
           // Channel message handler
           var result = tryParseJson(message);
@@ -120,6 +118,9 @@
       return subscriptionPromise;
     };
 
+    /**
+     * Publish event to the cometd channel.
+     */
     var publishEvent = function(fileId, data) {
       var deferred = $.Deferred();
       cometd.publish("/eXo/Application/documents/" + fileId, data, cometdContext, function(publishReply) {
@@ -137,6 +138,9 @@
       return deferred;
     };
 
+    /**
+     * Gets listener by caller and fileId.
+     */
     var getListener = function(caller, fileId) {
       if (!(caller in listeners)) {
         return null;
@@ -149,6 +153,9 @@
       return null;
     };
 
+    /**
+     * Inits cometd
+     */
     var init = function() {
       if (initLoader) {
         log("Init is in progress or already done");
@@ -176,13 +183,18 @@
 
     this.init = init;
 
+    /**
+     * Inits configuration
+     */
     this.initConfig = function(user, conf) {
-      log("Config inited");
       userId = user;
       cometdConf = conf;
       configLoader.resolve();
     };
 
+    /**
+     * Removes listener
+     */
     this.removeListener = function(caller, fileId) {
       var removeLoader = $.Deferred();
       log("Remove listener handled");
@@ -197,7 +209,6 @@
         }
       }
       if (listener.subscription) {
-        console.log("Unsubribing from: " + JSON.stringify(listener.subscription));
         cometd.unsubscribe(listener.subscription, {}, function(unsubscribeReply) {
           if (unsubscribeReply.successful) {
             // The server successfully unsubscribed this client to the channel.
@@ -210,12 +221,14 @@
           }
         });
       } else {
-        log("Subscription is null");
         removeLoader.resolve();
       }
       return removeLoader;
     };
 
+    /**
+     * Adds listener
+     */
     this.addListener = function(caller, fileId, callback) {
       if (getListener(caller, fileId)) {
         log("Listener already registered for " + caller + " and fileId: " + fileId);
@@ -238,6 +251,10 @@
       });
     };
 
+    /**
+     * Opens cometd connection and sends DOCUMENT_OPENED event to track the editor.
+     * Used as an API for providers.
+     */
     this.onEditorOpen = function(fileId, workspace, provider) {
       log("Editor opened. Provider: " + provider + ", fileId: " + fileId);
       // subsribe to track opened editors on server-side

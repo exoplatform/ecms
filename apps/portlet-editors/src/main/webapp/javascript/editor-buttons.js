@@ -70,6 +70,8 @@
     const LAST_EDITOR_CLOSED = "LAST_EDITOR_CLOSED";
     const DOCUMENT_PREVIEW_OPENED = "DOCUMENT_PREVIEW_OPENED";
     const CURRENT_PROVIDER_INFO = "CURRENT_PROVIDER_INFO";
+    // Current module name
+    const EDITOR_BUTTONS = "editorbuttons";
 
     /**
      * Parses comet message from JSON
@@ -126,7 +128,7 @@
     };
 
     /**
-     * Adds editor buttons container (button and pulldown)
+     * Creates the dropdown with editor buttons
      */
     var getButtonsContainer = function(fileId, buttons, preferedProvider, currentProvider, dropclass) {
       if (!buttons) {
@@ -196,6 +198,9 @@
       return $container;
     };
 
+    /**
+     * Loads providers JS module
+     */
     var loadProviderModule = function(provider) {
       var loader = $.Deferred();
       var moduleId = "SHARED/" + provider;
@@ -217,8 +222,11 @@
       return loader;
     };
 
+    /**
+     * Handles events from editorsupport.js and enables/disables editor buttons.
+     */
     var eventsHandler = function(result) {
-      log("EVENT HANDLED: " + JSON.stringify(result));
+      log("Event handled from editorsupport: " + JSON.stringify(result));
       switch (result.type) {
         case DOCUMENT_OPENED: {
           $('.editorButton[data-provider!="' + result.provider + '"][data-fileId="' + result.fileId + '"]').each(function() {
@@ -235,16 +243,22 @@
       }
     }
 
+    /**
+     * Inits the ECMS Explorer
+     */
     this.initExplorer = function(fileId, workspace, providersInfo) {
       var $placeholder = $(".uiIconEcmsEditorsOpen").parents(':eq(1)');
       $placeholder.css("display", "none");
       currentWorkspace = workspace;
+      // reset buttons
       buttonsFns = [];
       var providersLoader = $.Deferred();
       var preferedProvider;
       var currentProvider;
       providersInfo.forEach(function(providerInfo, i, arr) {
         loadProviderModule(providerInfo.provider).done(function(module) {
+          // The provider's module will call addCreateButtonFn() and 
+          // add the button-function to buttonsFns array
           module.initExplorer(providerInfo.settings);
           if (providerInfo.prefered) {
             preferedProvider = providerInfo.provider;
@@ -259,20 +273,22 @@
         });
       });
       providersLoader.done(function() {
-        var $pulldown = getButtonsContainer(fileId, buttonsFns, preferedProvider, currentProvider, 'dropdown');
-        $placeholder.replaceWith($pulldown);
-      });
-      if (fileId != explorerFileId) {
-        // We need unsubscribe from previous doc
-        if (explorerFileId) {
-          editorsupport.removeListener("editorbuttons", explorerFileId).done(function() {
-            editorsupport.addListener("editorbuttons", fileId, eventsHandler);
-          });
-        } else {
-          editorsupport.addListener("editorbuttons", fileId, eventsHandler);
+        if (buttonsFns.length) {
+          var $pulldown = getButtonsContainer(fileId, buttonsFns, preferedProvider, currentProvider, 'dropdown');
+          $placeholder.replaceWith($pulldown);
+          if (fileId != explorerFileId) {
+            // We need unsubscribe from previous doc
+            if (explorerFileId) {
+              editorsupport.removeListener(EDITOR_BUTTONS, explorerFileId).done(function() {
+                editorsupport.addListener(EDITOR_BUTTONS, fileId, eventsHandler);
+              });
+            } else {
+              editorsupport.addListener(EDITOR_BUTTONS, fileId, eventsHandler);
+            }
+            explorerFileId = fileId;
+          }
         }
-        explorerFileId = fileId;
-      }
+      });
     };
 
     /**
@@ -285,11 +301,9 @@
       if (buttons.length == 0) {
         return;
       }
-      log("Init Activity buttons: " + JSON.stringify(buttons));
       var $target = $("#activityContainer" + config.activityId).find("div[id^='ActivityContextBox'] > .actionBar .statusAction.pull-left");
-      console.log(JSON.stringify(config));
       $target.append(getButtonsContainer(config.fileId, buttons, config.prefferedProvider, config.currentProvider, 'dropdown'));
-      editorsupport.addListener("editorbuttons", config.fileId, eventsHandler);
+      editorsupport.addListener(EDITOR_BUTTONS, config.fileId, eventsHandler);
     };
 
     /**
@@ -298,6 +312,7 @@
      */
     this.initPreviewButtons = function(fileId, workspace, dropclass) {
       currentWorkspace = workspace;
+      // reset buttons
       buttonsFns = [];
       var buttonsLoader = $.Deferred();
       initProvidersPreview(fileId, workspace).then(function(data) {
@@ -306,6 +321,8 @@
         var currentProvider;
         data.forEach(function(providerInfo, i, arr) {
           loadProviderModule(providerInfo.provider).done(function(module) {
+            // The provider's module will call addCreateButtonFn() and 
+            // add the button-function to buttonsFns array
             module.initPreview(providerInfo.settings);
             if (providerInfo.prefered) {
               preferedProvider = providerInfo.provider;
@@ -320,14 +337,15 @@
           });
         });
         providersLoader.done(function() {
-          var $pulldown = getButtonsContainer(fileId, buttonsFns, preferedProvider, currentProvider, dropclass);
-          buttonsLoader.resolve($pulldown);
+          if (buttonsFns.length) {
+            var $pulldown = getButtonsContainer(fileId, buttonsFns, preferedProvider, currentProvider, dropclass);
+            buttonsLoader.resolve($pulldown);
+            editorsupport.addListener(EDITOR_BUTTONS, fileId, eventsHandler);
+          }
         });
       }).catch(function(xhr, status, error) {
         log("Cannot init providers preview for file" + fileId + ": " + status + " " + error);
       });
-
-      editorsupport.addListener("editorbuttons", fileId, eventsHandler);
       return buttonsLoader;
     };
 
