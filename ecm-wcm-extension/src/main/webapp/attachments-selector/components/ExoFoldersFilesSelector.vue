@@ -43,6 +43,7 @@
         <component v-dynamic-events="action.component.events" v-if="action.component" v-bind="action.component.props ? action.component.props : {}"
                    v-model="currentDrive" :is="action.component.name" :ref="action.key"></component>
       </div>
+      <v-progress-linear :active="loadingCloudDrive !== null && !loadingFolders" :value="loadingCloudDrive" absolute buffer-value="0" stream class="progressLine"></v-progress-linear>
     </div>
 
     <div class="contentBody">
@@ -172,7 +173,8 @@ export default {
       selectedFolderPath : '',
       schemaFolder: '',
       folderDestinationForFile:'',
-      attachmentsComposerActions: []
+      attachmentsComposerActions: [],
+      loadingCloudDrive: null
     };
   },
   computed: {
@@ -439,6 +441,15 @@ export default {
     },
     executeAction(action) {
       executeExtensionAction(action, this.$refs[action.key][0]);
+    },
+    updateCloudDriveFolder({ folder, progress }) {
+      this.loadingCloudDrive = progress;
+      if (folder) { this.openFolder(folder); }
+      const fullProgress = 100;
+      if (progress >= fullProgress) {
+        const latency = 1000;
+        setTimeout(() => { this.loadingCloudDrive = null; }, latency);
+      }
     }
   }
 };
