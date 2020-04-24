@@ -63,7 +63,6 @@
     var buttonsFns = [];
     var prefixUrl = pageBaseUrl(location);
     var currentWorkspace;
-    var providers;
     var explorerFileId;
 
     const DOCUMENT_OPENED = "DOCUMENT_OPENED";
@@ -142,7 +141,7 @@
           }
         });
       }
-      
+
       // Add buttons container
       // var $container = $target.find(".editorButtonContainer");
       var $container = $("<div class='editorButtonContainer hidden-tabletL'></div>");
@@ -218,32 +217,6 @@
       return loader;
     };
 
-    var disableECMSButtons = function(currentProvider) {
-      if (providers) {
-        var allProviders = providers.slice();
-        var index = allProviders.indexOf(currentProvider);
-        if (index !== -1) allProviders.splice(index, 1);
-        allProviders.forEach(provider => {
-          $("#UIActionBar i[class*='uiIconEcms" + provider + "Open' i]").each(function() {
-            $(this).parents(':eq(1)').addClass("disabledProvider");
-          });
-        });
-      }
-    };
-
-    var enableECMSButtons = function(currentProvider) {
-      if (providers) {
-        var allProviders = providers.slice();
-        var index = allProviders.indexOf(currentProvider);
-        if (index !== -1) allProviders.splice(index, 1);
-        allProviders.forEach(provider => {
-          $("#UIActionBar i[class*='uiIconEcms" + provider + "Open' i]").each(function() {
-            $(this).parents(':eq(1)').removeClass("disabledProvider");
-          });
-        });
-      }
-    };
-
     var eventsHandler = function(result) {
       log("EVENT HANDLED: " + JSON.stringify(result));
       switch (result.type) {
@@ -251,29 +224,21 @@
           $('.editorButton[data-provider!="' + result.provider + '"][data-fileId="' + result.fileId + '"]').each(function() {
             $(this).addClass("disabledProvider");
           });
-          if (explorerFileId) {
-            disableECMSButtons(result.provider);
-          }
         }
         break;
       case LAST_EDITOR_CLOSED: {
         $('.editorButton[data-provider!="' + result.provider + '"][data-fileId="' + result.fileId + '"]').each(function() {
           $(this).removeClass("disabledProvider");
         });
-        if (explorerFileId) {
-          enableECMSButtons(result.provider);
-        }
       }
       break;
       }
     }
 
     this.initExplorer = function(fileId, workspace, providersInfo) {
+      var $placeholder = $(".uiIconEcmsEditorsOpen").parents(':eq(1)');
+      $placeholder.css("display", "none");
       currentWorkspace = workspace;
-      providers = providersInfo.map(function(providerInfo) {
-        return providerInfo.provider;
-      });
-      
       buttonsFns = [];
       var providersLoader = $.Deferred();
       var preferedProvider;
@@ -295,15 +260,8 @@
       });
       providersLoader.done(function() {
         var $pulldown = getButtonsContainer(fileId, buttonsFns, preferedProvider, currentProvider, 'dropdown');
-        console.log($pulldown);
-        $(".detailContainer").append($pulldown);
+        $placeholder.replaceWith($pulldown);
       });
-      
-      
-      // Web UI buttons
-     // if (currentProvider) {
-      // disableECMSButtons(currentProvider);
-    // }
       if (fileId != explorerFileId) {
         // We need unsubscribe from previous doc
         if (explorerFileId) {
