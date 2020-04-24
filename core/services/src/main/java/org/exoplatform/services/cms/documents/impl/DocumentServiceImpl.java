@@ -723,8 +723,16 @@ public class DocumentServiceImpl implements DocumentService {
     NodeHierarchyCreator nodeHierarchyCreator = WCMCoreUtils.getService(NodeHierarchyCreator.class);
     Node userNode = nodeHierarchyCreator.getUserNode(sessionProvider, userId);
     Node userPrivateNode = (Node) userNode.getNode(Utils.PRIVATE);
-    //TODO elastic search implem
     return getDocumentsByFolder(userPrivateNode.getPath(), limit);
+  }
+  
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public List<Document> getRecentSpacesDocuments(int limit) throws Exception {
+    //TODO elastic search implementation
+    return getDocumentsByFolder(USER_SPACES_NODE_PATH, limit);
   }
 
   /**
