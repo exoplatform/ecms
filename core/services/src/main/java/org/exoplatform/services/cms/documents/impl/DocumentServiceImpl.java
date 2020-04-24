@@ -121,7 +121,9 @@ public class DocumentServiceImpl implements DocumentService {
   private static final String SHARED_NODE = "Shared";
   private static final String COLLABORATION         = "collaboration";
   private static final String SEPARATOR             = "/";
-  private static final String USER_SPACES_NODE_PATH = "/Groups/spaces";
+  private static final String SPACES_NODE_PATH = "/Groups/spaces";
+  private static final String USERS_NODE_PATH = "/Users";
+  private static final String OTHER_DRIVE = "Other";
   private static final Log LOG                 = ExoLogger.getLogger(DocumentServiceImpl.class);
   private final List<NewDocumentTemplateProvider> templateProviders = new ArrayList<>();
   private final List<DocumentEditorProvider> editorProviders = new ArrayList<>();
@@ -663,15 +665,21 @@ public class DocumentServiceImpl implements DocumentService {
       NodeIterator documentsIterator = queryResult.getNodes();
       while (documentsIterator.hasNext()) {
         Node documentNode = documentsIterator.nextNode();
-        //SimpleDateFormat simpleDateFormat = new SimpleDateFormat(ISO8601.SIMPLE_DATETIME_FORMAT);
         if (documentNode.isNodeType(NodetypeConstant.EXO_SYMLINK)) {
           documentNode = linkManager.getTarget(documentNode);
         }
         String documentNodePath = documentNode.getPath();
+        String documentDrive = OTHER_DRIVE;
+        if (documentNodePath.contains(SPACES_NODE_PATH)) {
+          documentDrive = getSpaceFromNodePath(documentNodePath);
+        }
+        else if (documentNodePath.contains(USERS_NODE_PATH)) {
+          documentDrive = Utils.PRIVATE;
+        }
         Document document = new Document(documentNode.getUUID(),
                                          Utils.getTitle(documentNode),
                                          documentNodePath,
-                                         documentNodePath.contains(Utils.PRIVATE) ? Utils.PRIVATE : getSpaceFromNodePath(documentNodePath),
+                                         documentDrive,
                                          Utils.getFileType(documentNode),
                                          Utils.getDate(documentNode).getTime());
         documents.add(document);
@@ -722,8 +730,7 @@ public class DocumentServiceImpl implements DocumentService {
     SessionProvider sessionProvider = SessionProvider.createSystemProvider();
     NodeHierarchyCreator nodeHierarchyCreator = WCMCoreUtils.getService(NodeHierarchyCreator.class);
     Node userNode = nodeHierarchyCreator.getUserNode(sessionProvider, userId);
-    Node userPrivateNode = (Node) userNode.getNode(Utils.PRIVATE);
-    return getDocumentsByFolder(userPrivateNode.getPath(), limit);
+    return getDocumentsByFolder(userNode.getPath(), limit);
   }
   
   /**
@@ -732,7 +739,7 @@ public class DocumentServiceImpl implements DocumentService {
   @Override
   public List<Document> getRecentSpacesDocuments(int limit) throws Exception {
     //TODO elastic search implementation
-    return getDocumentsByFolder(USER_SPACES_NODE_PATH, limit);
+    return getDocumentsByFolder(SPACES_NODE_PATH, limit);
   }
 
   /**
@@ -767,7 +774,7 @@ public class DocumentServiceImpl implements DocumentService {
   }
   
   private String getSpaceFromNodePath(String nodePath) {
-    if (nodePath.startsWith(USER_SPACES_NODE_PATH)) {
+    if (nodePath.startsWith(SPACES_NODE_PATH)) {
       String[] splittedNodePath = nodePath.split(SEPARATOR);
       if (splittedNodePath.length > 3) {
         SpaceService spaceService = WCMCoreUtils.getService(SpaceService.class);
