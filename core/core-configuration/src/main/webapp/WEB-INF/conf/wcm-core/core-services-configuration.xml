@@ -294,6 +294,10 @@
   </component>
   
   <component>
+    <type>org.exoplatform.services.rest.DocumentRestService</type>
+  </component>
+  
+  <component>
     <type>org.exoplatform.services.rest.DocumentsAppRedirectService</type>
   </component>
 

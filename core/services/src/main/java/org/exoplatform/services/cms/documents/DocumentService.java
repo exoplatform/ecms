@@ -171,6 +171,34 @@ public interface DocumentService {
    */
   public List<DocumentEditorProvider> getDocumentEditorProviders();
   
+   /**
+   * Updates information about current open editor for the document.
+   * It is assumed that the document is being edited at the moment.
+   *
+   * @param uuid the uuid
+   * @param workspace the workspace
+   * @param provider the current provider or null if the document has been closed.
+   * @throws RepositoryException the exception
+   */
+ public void setCurrentDocumentProvider(String uuid, String workspace, String provider) throws RepositoryException;
+
+ /**
+  * Gets current opened document editor.
+  * 
+  * @param uuid the uuid
+  * @param workspace the workspace
+  * @throws RepositoryException the exception
+  */
+ public String getCurrentDocumentProvider(String uuid, String workspace) throws RepositoryException;
+  
+  /**
+   * Init document editors JS module.
+   * 
+   * @param provider the provider
+   * @param workspace the workspace
+   */
+ public void initEditorSupportModule(String provider, String workspace);
+ 
   /**
    * Gets the editor provider.
    *
@@ -180,32 +208,59 @@ public interface DocumentService {
   public DocumentEditorProvider getEditorProvider(String provider) throws DocumentEditorProviderNotFoundException;
   
   /**
-   * Updates information about current open editor for the document.
-   * It is assumed that the document is being edited at the moment.
-   * 
-   * @param uuid the uuid
-   * @param workspace the workspace
-   * @param provider the current provider or null if the document has been closed.
-   * @throws RepositoryException the exception
+   * Gets the documents by folder.
+   *
+   * @param folder the folder
+   * @param limit the limit
+   * @return the documents by folder
    */
-  public void setCurrentDocumentProvider(String uuid, String workspace, String provider) throws RepositoryException;
-
-  /**
-   * Gets current opened document editor.
-   * 
-   * @param uuid the uuid
-   * @param workspace the workspace
-   * @throws RepositoryException the exception
-   */
-  public String getCurrentDocumentProvider(String uuid, String workspace) throws RepositoryException;
+  default List<Document> getDocumentsByFolder(String folder, long limit) throws Exception {
+    throw new UnsupportedOperationException();
+  }
   
   /**
-   * Init document editors JS module.
-   * 
-   * @param provider the provider
-   * @param workspace the workspace
+   * Gets the documents by query.
+   *
+   * @param query the query
+   * @param limit the limit
+   * @return the documents by query
    */
-  public void initEditorSupportModule(String provider, String workspace);
+  default List<Document> getDocumentsByQuery(String query, long limit) throws Exception {
+    throw new UnsupportedOperationException();
+  }
+  
+  /**
+   * Gets the favorite documents.
+   *
+   * @param userId the userId
+   * @param limit the limit
+   * @return the favorite documents
+   */
+  default List<Document> getFavoriteDocuments(String userId, int limit) throws Exception {
+    throw new UnsupportedOperationException();
+  }
+  
+  /**
+   * Gets the shared documents.
+   *
+   * @param userId the userId
+   * @param limit the limit
+   * @return the shared documents
+   */
+  default List<Document> getSharedDocuments(String userId, int limit) throws Exception {
+    throw new UnsupportedOperationException();
+  }
+  
+  /**
+   * Gets the recent documents.
+   *
+   * @param userId the userId
+   * @param limit the limit
+   * @return the recent documents
+   */
+  default List<Document> getRecentDocuments(String userId, int limit) throws Exception {
+    throw new UnsupportedOperationException();
+  }
   
   /**
    * NewDocumentTypesConfig contains all registered template configs for specified provider.

@@ -95,7 +95,6 @@
 
     .fileDetails1 {
       display: flex;
-      margin-top: 10px;
       text-overflow: ellipsis;
       overflow: hidden;
       white-space: nowrap;
@@ -189,16 +188,22 @@
   .uploadedFilesItem, .fileSelection {
     display: flex;
     font-size: 18px;
-    margin: 15px;
+    flex-direction: column;
 
-    > div {
-      margin: 0 10px;
+    .showDestination{
+      display: flex;
+      margin-bottom: 13px;
+      .showFile{
+        width: 97%;
+        margin-left:12px;
+      }
     }
 
     .removeFile {
       flex: 0 0 34px;
-      width: 34px;
+      width: 50px;
       margin-top: 5px;
+      margin-right: -7px;
 
       .uiIcon {
         color: #A8B3C5;
@@ -210,6 +215,94 @@
         }
       }
     }
+    .destinationFolder {
+      display: flex;
+      flex-direction: row;
+      margin-left: 15px;
+      color: #a8b3c5;
+      border-bottom: 1px solid  #a8b3c5;
+      margin-top: -14px;
+
+      .emptyMessage{
+        width: 100%
+      }
+      .box{
+        display: flex;
+        flex-direction: row;
+      }
+      .btnTrash{
+        margin-left: 10px;
+        margin-bottom: 8px;
+        cursor: pointer;
+        margin-top: -1px;
+      }
+
+      .folderLocation {
+        display: flex;
+        flex-direction: row;
+        border-bottom: 0px;
+        width: 100%;
+
+      }
+
+      .folder {
+        overflow: hidden;
+        white-space: nowrap;
+        cursor: pointer;
+        margin-bottom: 0px;
+        margin-right: 5px;
+
+      }
+      .folderName{
+        margin-right: 5px;
+        cursor: pointer
+      }
+      .colorIcon{
+        color: #a8b3c5;
+      }
+      .colorIconStop{
+        color: #bc4343;
+        cursor: pointer;
+      }
+
+      .folders {
+        flex-direction: row;
+        display: flex;
+      }
+
+      .folderName {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        width: 95%;
+        margin-bottom: 0px;
+
+      }
+      .selectFile {
+        width: 100%;
+        border-bottom: 0px;
+        > p {
+          margin-bottom: 1px;
+        }
+      }
+      .uiIconFolder{
+        cursor: pointer;
+      }
+    }
+
+  }
+
+  .messageDestination {
+    border-bottom: 1px solid #a8b3c5;
+    width: 100%;
+
+    > p {
+      margin-bottom: 0px;
+    }
+  }
+
+  .buttonSelect {
+    padding: 0px;
   }
 
   .fileAlreadyExists {
@@ -454,7 +547,7 @@
 
           .foldersHistory {
             display: flex;
-            flex: 1;
+            flex: 0 1 auto;
             min-width: 0;
 
             .longFolderHistory {
@@ -491,9 +584,12 @@
           }
         }
 
-        .searchBox {
+        .selectorActions {
           display: inline-flex;
           align-items: center;
+          a:first-of-type {
+            margin-right: 5px;
+          }
 
           &.visible {
             width: 100%;
@@ -528,7 +624,7 @@
             display: none;
           }
 
-          .uiIconSearch {
+          .uiIconSearch, .uiIconAddFolder{
             border: 1px solid #b3b3b3;
             padding: 10px;
             border-radius: 15%;
@@ -612,6 +708,16 @@
                 color: #333;
               }
             }
+            .newFolderInput {
+              width: auto;
+              height: 16px;
+              margin-top: 3px;
+              min-height: 15px;
+              background-color: #578dc9;
+              color: #FFF;
+              border: none;
+              border-radius: 0;
+            }
           }
 
           .fileSelection {
@@ -634,6 +740,7 @@
 
                 .fileNameLabel {
                   font-size: 12px;
+                  text-align: center;
                 }
               }
             }
@@ -678,9 +785,11 @@
   color: #568cc9 !important;
   margin-right: 4px;
   text-transform: uppercase !important;
+  font-size: 13px;
 }
 .btnSelect{
   text-transform: uppercase;
+  font-size: 13px;
 }
 
 
@@ -704,6 +813,7 @@
 
   .drive {
     overflow: hidden;
+    text-overflow: ellipsis;
     white-space: nowrap;
     cursor: pointer;
     margin-bottom: 0px;
@@ -732,18 +842,27 @@
   .active{
     color: #578cc9;
     font-weight: bold;
-    width: 30%;
+    width: min-content;
+  }
+  .path{
+    color: #578cc9;
+    font-weight: bold;
+    width: 90%;
   }
 
   .selectFile {
     width: 100%;
-    border-bottom: 1px solid #a8b3c5;;
+    border-bottom: 1px solid #a8b3c5;
     > p {
       margin-bottom: 0px;
     }
   }
   .uiIconFolder{
     cursor: pointer;
+  }
+  .disabled {
+    cursor: pointer;
+    color: #a8b3c5;
   }
 }
 
@@ -785,6 +904,60 @@
 
       .lastContent a {
         align-items: flex-end;
+      }
+    }
+  }
+}
+/** Attachments composer plugin **/
+#activityComposerApp {
+  .drawer {
+    .content {
+      .VuetifyApp {
+        .attachmentsList {
+          display: flex;
+          align-items: center;
+
+          .attachedFiles {
+            margin-left: 3%;
+          }
+
+          .uiIconAttach {
+            top: -1px;
+            color: #333;
+          }
+
+          .v-progress-circular {
+            svg {
+              color: transparent;
+
+              circle {
+                color: #FFF;
+              }
+            }
+
+            &.uploading {
+              svg {
+                circle {
+                  color: #578dc9;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      .composerActions {
+        .actionItem {
+          .actionItemIcon {
+            .addFileComposerIcon {
+              background: url('/eXoSkin/skin/images/system/composer/addFile.png') no-repeat;
+              width: 60px;
+              height: 60px;
+              margin: 10px 0 0 10px;
+              background-size: 40px;
+            }
+          }
+        }
       }
     }
   }
