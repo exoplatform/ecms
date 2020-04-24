@@ -2231,16 +2231,20 @@
 
 			// pnotify notice
 			var notice = $.pnotify({
-				title : "Authorizing...",
-				type : "info",
-				icon : "picon picon-throbber",
-				hide : false,
+				// title : "Authorizing...",
+				// type : "info",
+				// icon : "picon picon-throbber",
+				// hide : false,
+				hide: true,
 				closer : true,
 				sticker : false,
-				opacity : .75,
+				// opacity : .75,
+				opacity: 0,
 				shadow : false,
-				nonblock : true,
-				nonblock_opacity : .25,
+				// nonblock : true,
+				nonblock : false,
+				// nonblock_opacity : .25,
+				nonblock_opacity : 0,
 				width : NOTICE_WIDTH
 			});
 
@@ -2254,12 +2258,12 @@
 			var update = function() {
 				var options = {
 				};
-				if (progress > 0) {
-					options.text = progress + "% complete.";
-				}
-				if (progress >= 75) {
-					options.title = "Almost Done...";
-				}
+				// if (progress > 0) {
+				// 	options.text = progress + "% complete.";
+				// }
+				// if (progress >= 75) {
+				// 	options.title = "Almost Done...";
+				// }
 				if (progress >= 100) {
 					options.title = driveName + " Connected!";
 					options.type = "success";
