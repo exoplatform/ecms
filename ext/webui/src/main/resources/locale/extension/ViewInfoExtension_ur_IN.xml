@@ -2,24 +2,24 @@
 <bundle>
 <UIPopupWindow>
 <title>
-<UIViewInfoManager>معلومات دکھائیں</UIViewInfoManager>
+<UIViewInfoManager>View Information</UIViewInfoManager>
 </title>
 </UIPopupWindow>
     
 <ECMContextMenu>
 <event>
-<ViewInfo>معلومات دکھائیں</ViewInfo>
+<ViewInfo>View Information</ViewInfo>
 </event>
 </ECMContextMenu>
 <UIViewInfoContainer>
 <label>
-      <name>نام</name>
+      <name>Name</name>
       <title>Title</title>
-      <type>قسم</type>
-      <size>مقدار</size>
+      <type>Type</type>
+      <size>Size</size>
       <owner>Owner</owner>
       <lastModifier>Last Modifier</lastModifier>
-      <created>تشکیل کی تاریخ</created>
+      <created>Created Date</created>
       <lastModified>Last Modified Date</lastModified>
       <publicationState>Publication State</publicationState>
 </label>

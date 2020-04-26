@@ -2,13 +2,13 @@
 <bundle>
   <UICNContainer>
     <title>
-      <QuickEdit>فوری ترمیم</QuickEdit>
+      <QuickEdit>Quick Edit</QuickEdit>
     </title>
   </UICNContainer>
 
   <UICNConfigPopupWindow>
     <title>
-      <UICategoryNavigationConfig>ترتیب زمرہ فہرست</UICategoryNavigationConfig>
+      <UICategoryNavigationConfig>Category List Configuration</UICategoryNavigationConfig>
     </title>
   </UICNConfigPopupWindow>
 
@@ -20,39 +20,39 @@
 
   <UICategoryNavigationConfig>
     <label>
-      <UICategoryNavigationRepositoryFormSelectBox>ذخیرہ</UICategoryNavigationRepositoryFormSelectBox>
-      <UICategoryNavigationTreeNameSelectBox>زمرہ درخت</UICategoryNavigationTreeNameSelectBox>
-      <UICategoryNavigationTreeTitleFormStringInput>عنوان</UICategoryNavigationTreeTitleFormStringInput>
+      <UICategoryNavigationRepositoryFormSelectBox>Repository</UICategoryNavigationRepositoryFormSelectBox>
+      <UICategoryNavigationTreeNameSelectBox>Category Tree</UICategoryNavigationTreeNameSelectBox>
+      <UICategoryNavigationTreeTitleFormStringInput>Title</UICategoryNavigationTreeTitleFormStringInput>
   
-      <UICategoryNavigationTreeNameFormSelectBox>درخت کا نام</UICategoryNavigationTreeNameFormSelectBox>
-      <UICategoryNavigationTemplateFormSelectBox>درخت ناظر سانچہ</UICategoryNavigationTemplateFormSelectBox>
+      <UICategoryNavigationTreeNameFormSelectBox>Tree Name</UICategoryNavigationTreeNameFormSelectBox>
+      <UICategoryNavigationTemplateFormSelectBox>Tree viewer template</UICategoryNavigationTemplateFormSelectBox>
       
-      <UICategoryNavigationTargetPathFormInputSet>صفحہ میں دکھائیں</UICategoryNavigationTargetPathFormInputSet>      
-      <TreeSelectionBlock>انتخاب درخت</TreeSelectionBlock>
-      <DisplaySettingBlock>ڈسپلے ترتیبات</DisplaySettingBlock>
-      <AdvancedBlock>پیشگی</AdvancedBlock>
+      <UICategoryNavigationTargetPathFormInputSet>Show in Page</UICategoryNavigationTargetPathFormInputSet>      
+      <TreeSelectionBlock>Tree Selection</TreeSelectionBlock>
+      <DisplaySettingBlock>Display Settings</DisplaySettingBlock>
+      <AdvancedBlock>Advanced</AdvancedBlock>
   
-  <UICategoryNavigationTreePathFormInputSet>راہ ہدف</UICategoryNavigationTreePathFormInputSet>
-  <UICategoryNavigationTreePathFormStringInput>راہ ہدف</UICategoryNavigationTreePathFormStringInput>
-  <UICategoryNavigationHeaderFormStringInput>سرتحریر</UICategoryNavigationHeaderFormStringInput>
-  <UICategoryNavigationAutomaticDetectionCheckBoxInput>خود کار</UICategoryNavigationAutomaticDetectionCheckBoxInput>
-  <UICategoryNavigationDynamicNavigationLabel>متحرک سمت شناسی</UICategoryNavigationDynamicNavigationLabel>
-  <UICategoryNavigationWithClvFormStringInput>ساتھ</UICategoryNavigationWithClvFormStringInput>
-  <UICategoryNavigationTreepathPopupWindow>راہ ہدف</UICategoryNavigationTreepathPopupWindow>    
+  <UICategoryNavigationTreePathFormInputSet>Target Path</UICategoryNavigationTreePathFormInputSet>
+  <UICategoryNavigationTreePathFormStringInput>Target Path</UICategoryNavigationTreePathFormStringInput>
+  <UICategoryNavigationHeaderFormStringInput>Header</UICategoryNavigationHeaderFormStringInput>
+  <UICategoryNavigationAutomaticDetectionCheckBoxInput>Automatic</UICategoryNavigationAutomaticDetectionCheckBoxInput>
+  <UICategoryNavigationDynamicNavigationLabel>Dynamic Navigation</UICategoryNavigationDynamicNavigationLabel>
+  <UICategoryNavigationWithClvFormStringInput>with</UICategoryNavigationWithClvFormStringInput>
+  <UICategoryNavigationTreepathPopupWindow>Target Path</UICategoryNavigationTreepathPopupWindow>    
       
     </label>
     <msg>
-      <not-support-encoding>ضابطہ بندی کی حمایت نہیں ہے ۔.</not-support-encoding>
-      <render>انجام دیتے وقت ایک خرابی واقع ہوگئی ۔.</render>
-      <saving-success>معلومات کامیابی سے تازہ کر دی گئی ہیں۔.</saving-success>
+      <not-support-encoding>Encoding is not supported.</not-support-encoding>
+      <render>An error occurred when rendering.</render>
+      <saving-success>The information was updated successfully.</saving-success>
     </msg>
     <action>
-      <Save>محفوظ کریں</Save>
+      <Save>Save</Save>
     </action>
   </UICategoryNavigationConfig>
   <UICategoryNavigationTreeBase>
     <msg>
-      <not-existed-category>زمرہ موجود نہیں ہے.</not-existed-category>
+      <not-existed-category>The category does not exist.</not-existed-category>
     </msg>
   </UICategoryNavigationTreeBase>
 </bundle>
