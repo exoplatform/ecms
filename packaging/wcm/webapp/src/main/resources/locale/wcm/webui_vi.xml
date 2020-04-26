@@ -213,7 +213,7 @@
       <empty-doctype>Please select a document type</empty-doctype>
       <empty-startDate>"From Date" is required</empty-startDate>
       <invalid-format>Trường {0} có định dạng ngày/giờ không đúng.</invalid-format>
-      <invalid-date>"Ngày Kết thúc phải lớn hơn Ngày Bắt đầu"</invalid-date>
+      <invalid-date>Ngày Kết thúc phải lớn hơn Ngày Bắt đầu</invalid-date>
       <invalid-startDate>"From Date" must not be later than today</invalid-startDate>
       <invalid-nodeType>Kiểu node "{0}" không đúng. Hãy kiểm tra lại.</invalid-nodeType>
       <invalid-keyword>Từ khóa tìm kiếm không hợp lệ hoặc không được hỗ trợ.</invalid-keyword>
