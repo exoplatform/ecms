@@ -3,21 +3,21 @@
   <PublicationService>
     <AuthoringPublicationPlugin>
       <changeState>
-        <obsoleted>هذا المحتوى قد عفا عليه الزمن (مُهمَل)</obsoleted>
-        <published>لقد تمّت عمليّة نشر المُحتوى</published>
-<unpublished>لم تتمّ بعدُ عمليّة نشر المحتوى</unpublished>
-<archived>تمّت أرشفة المُحتوى</archived>
-<staged>المحتوى جاهز للنشر</staged>
-<approved>لقد تمّت المصادقة على المُحتوى</approved>
-<pending>المحتوى قيد النّظر</pending>
-<draft>المحتوى في شكل مُسوّدة</draft>
+        <obsoleted>The content is obsolete</obsoleted>
+        <published>The content is published</published>
+<unpublished>The content is unpublished</unpublished>
+<archived>The content is archived</archived>
+<staged>The content is staged</staged>
+<approved>The content is approved</approved>
+<pending>The content is pending</pending>
+<draft>The content is in draft form</draft>
       </changeState>
     </AuthoringPublicationPlugin>
   </PublicationService>
   <Publication>
     <log>
       <description>
-        <enrolled>تمّ ادراج المحتوى ضمن دورة النّشر</enrolled>
+        <enrolled>The content enrolls in Publication life cycle</enrolled>
       </description>
     </log>
   </Publication>

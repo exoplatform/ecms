@@ -2,18 +2,18 @@
 <bundle>
   <EditingPortlet>
     <label>
-      <Editing>نمط:</Editing>
+      <Editing>Mode:</Editing>
     </label>
     <msg>
-      <not-permission>لاتملك الصلاحية الكافية للقيام بهذا الاجراء</not-permission>
+      <not-permission>You don't have permission to do this action.</not-permission>
     </msg>
   </EditingPortlet>
 
   <UIEditingForm>
     <label>
       <option>
-        <Draft>تعديل</Draft>
-        <Published>تم نشره</Published>
+        <Draft>Edit</Draft>
+        <Published>Published</Published>
       </option>
     </label>
   </UIEditingForm>

@@ -2,34 +2,34 @@
 <bundle>
   <ContentSelector>
     <msg>
-      <no-file-selected>لم يتمّ اختيار أيّ محتوى. الرّجاء اختيار واحد على الأقل.</no-file-selected>
+      <no-file-selected>There is no content selected. Please select at least one.</no-file-selected>
     </msg>
   </ContentSelector>
   <RenameConnector>
     <label>
-      <rename>إعادة تسمية</rename>
-      <cancel>الغاء</cancel>
+      <rename>Rename</rename>
+      <cancel>Cancel</cancel>
     </label>
     <msg>
-      <renaming>بصدد إعادة التّسمية...</renaming>
+      <renaming>Renaming...</renaming>
     </msg>
   </RenameConnector>
   <OpenInOfficeConnector>
     <label>
       <exo>
         <remote-edit>
-          <word>فتح الملفّ بواسطة مايكروسوفت وورد</word>
-          <excel>فتح الملفّ بواسطة مايكروسوفت إكسل</excel>
-          <powerpoint>فتح الملفّ بواسطة مايكروسوفت باوربوينت</powerpoint>
-          <desktop>فتح الملفّ على سطح المكتب</desktop>
-          <desktop-app>فتح في {0}</desktop-app>
+          <word>Open in Word</word>
+          <excel>Open in Excel</excel>
+          <powerpoint>Open in Powerpoint</powerpoint>
+          <desktop>Open on Desktop</desktop>
+          <desktop-app>Open in {0}</desktop-app>
         </remote-edit>
       </exo>
     </label>
   </OpenInOfficeConnector>
   <DocumentAutoVersion>
     <msg>
-      <WrongMimeType>نوع التوصيلة الخاص بالملف الذي تم تحميله غير معروف. لن يتم إنشاء ايّ نسخة جديدة من {0}.</WrongMimeType>
+      <WrongMimeType>The mimetype of the file uploaded is unknown. No new version of {0} will be created.</WrongMimeType>
     </msg>
   </DocumentAutoVersion>
 </bundle>
