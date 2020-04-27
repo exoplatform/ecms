@@ -1,6 +1,12 @@
 <template>
   <v-app class="VuetifyApp" flat>
     <exo-documents :documents="documents"/>
+    <div v-if="!loading && documents.length === 0" class="noDocuments">
+      <div class="noDocumentsContent">
+        <i class="uiNoDocumentsIcon"></i>
+        <div class="noDocumentsTitle">{{ $t('documents.label.noDocument') }}</div>
+      </div>
+    </div>
   </v-app>
 </template>
 <script>
@@ -27,6 +33,7 @@
     data() {
       return {
         documents: [],
+        loading: true
       }
     },
     created(){
@@ -35,14 +42,14 @@
           documents => { 
             this.documents = documents;
           }
-        );
+        ).finally(() => this.loading = false);
       }
       else if (this.folder != null && this.folder !== 'null') {
         documentsService.getDocumentsByFolder(this.folder, this.limit).then(
           documents => { 
             this.documents = documents;
           }
-        );
+        ).finally(() => this.loading = false);
       }
       else if (this.type != null) {
         if (this.type === 'recent') {
@@ -50,21 +57,21 @@
             documents => { 
               this.documents = documents;
             }
-          );
+          ).finally(() => this.loading = false);
         }
         if (this.type === 'favorite') {
           documentsService.getFavoriteDocuments(this.limit).then(
             documents => { 
               this.documents = documents;
             }
-          );
+          ).finally(() => this.loading = false);
         }
         if (this.type === 'shared') {
           documentsService.getSharedDocuments(this.limit).then(
             documents => { 
               this.documents = documents;
             }
-          );
+          ).finally(() => this.loading = false);
         }
       }
     }

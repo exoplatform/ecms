@@ -186,7 +186,9 @@ public interface DocumentService {
    * @param limit the limit
    * @return the documents by folder
    */
-  public List<Document> getDocumentsByFolder(String folder, long limit) throws Exception;
+  default List<Document> getDocumentsByFolder(String folder, long limit) throws Exception {
+    throw new UnsupportedOperationException();
+  }
   
   /**
    * Gets the documents by query.
@@ -195,7 +197,9 @@ public interface DocumentService {
    * @param limit the limit
    * @return the documents by query
    */
-  public List<Document> getDocumentsByQuery(String query, long limit) throws Exception;
+  default List<Document> getDocumentsByQuery(String query, long limit) throws Exception {
+    throw new UnsupportedOperationException();
+  }
   
   /**
    * Gets the favorite documents.
@@ -204,7 +208,9 @@ public interface DocumentService {
    * @param limit the limit
    * @return the favorite documents
    */
-  public List<Document> getFavoriteDocuments(String userId, int limit) throws Exception;
+  default List<Document> getFavoriteDocuments(String userId, int limit) throws Exception {
+    throw new UnsupportedOperationException();
+  }
   
   /**
    * Gets the shared documents.
@@ -213,7 +219,9 @@ public interface DocumentService {
    * @param limit the limit
    * @return the shared documents
    */
-  public List<Document> getSharedDocuments(String userId, int limit) throws Exception;
+  default List<Document> getSharedDocuments(String userId, int limit) throws Exception {
+    throw new UnsupportedOperationException();
+  }
   
   /**
    * Gets the recent documents.
@@ -222,7 +230,9 @@ public interface DocumentService {
    * @param limit the limit
    * @return the recent documents
    */
-  public List<Document> getRecentDocuments(String userId, int limit) throws Exception;
+  default List<Document> getRecentDocuments(String userId, int limit) throws Exception {
+    throw new UnsupportedOperationException();
+  }
   
   /**
    * NewDocumentTypesConfig contains all registered template configs for specified provider.

@@ -1,0 +1,31 @@
+@import "../../../variables.less";
+
+.noDocuments {
+  display: flex;
+  height: 370px;
+  align-items: center;
+  justify-content: center;
+  @media(min-width: 600px){
+    .noDocumentsContent {
+      margin-top: -120px;
+    }
+  }
+  .noDocumentsContent {
+    text-align: center;
+    .uiNoDocumentsIcon {
+      color: #6d7d9821;
+      font-size: 60px;
+      font-style: normal;
+      font-weight: normal;
+      &:before {
+        font-family: 'PLF-FONT-ICONS';
+        content: "\e6ba" !important;
+      }
+    }
+    .noDocumentsTitle {
+      color: #4d5466;
+      font-weight: normal;
+      font-size: 22px;
+    }
+  }
+}

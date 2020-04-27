@@ -1,6 +1,6 @@
 <template>
   <div id="exoAttachmentsApp">
-    <div :class="{ open: showAttachmentsDrawer }" class="attachments drawer ignore-vuetify-classes" @keydown.esc="toggleAttachmentsDrawer()">
+    <div :class="{ open: showAttachmentsDrawer }" class="attachments drawer ignore-vuetify-classes" @keydown.esc.self="toggleAttachmentsDrawer()">
       <div :class="showDocumentSelector? 'documentSelector' : ''" class="attachmentsHeader header">
         <a v-if="showDocumentSelector" class="backButton" @click="toggleServerFileSelector()">
           <i class="uiIconBack"> </i>
@@ -74,18 +74,22 @@
             <div class="uploadedFilesTitle">{{ $t('attachments.drawer.title') }} ({{ value.length }})</div>
             <div v-if="value.length > 0" class="destinationFolder">
               <div v-if="showDestinationPath && !displayMessageDestinationFolder" class="folderLocation">
-                <div><p :title="schemaFolder[0]" class="drive" rel="tooltip" data-placement="top">{{ schemaFolder[0] }}</p></div>
-                <div v-if="schemaFolder.length == 2" class="folder">
+                <div :title="schemaFolder[0]" class="drive" rel="tooltip" data-placement="top">{{ schemaFolder[0] }}</div>
+                <div v-if="schemaFolder.length > 1" class="folder">
                   <div><span class="uiIconArrowRight colorIcon"></span></div>
-                  <div><p :title="schemaFolder[1]" class="folderName active" rel="tooltip" data-placement="top">{{ schemaFolder[1].slice(0,20) }}</p></div>
+                  <div :title="schemaFolder[1]" :class="schemaFolder.length === 2 ? 'active' : '' " class="folderName" rel="tooltip" data-placement="top">{{ schemaFolder[1] }}</div>
+                </div>
+                <div v-if="schemaFolder.length === 3" class="folder">
+                  <div><span class="uiIconArrowRight colorIcon"></span></div>
+                  <div :title="schemaFolder[2]" :class="schemaFolder[2] !== 'Activity Stream Documents' ? 'path' : 'active' " class="folderName" rel="tooltip" data-placement="top">{{ schemaFolder[2] }}</div>
                 </div>
                 <div v-if="schemaFolder.length > 3" class="folder">
                   <div><span class="uiIconArrowRight colorIcon"></span></div>
-                  <div><p :title="schemaFolder[1]" class="folderName active" rel="tooltip" data-placement="top">...</p></div>
+                  <div :title="schemaFolder[2]" class="folderName" rel="tooltip" data-placement="top">...</div>
                 </div>
-                <div v-for="folder in schemaFolder.slice(schemaFolder.length-2,schemaFolder.length)" v-show="schemaFolder.length > 2" :key="folder" class="folder">
+                <div v-for="folder in schemaFolder.slice(schemaFolder.length-1,schemaFolder.length)" v-show="schemaFolder.length > 3" :key="folder" class="folder">
                   <div><span class="uiIconArrowRight colorIcon"></span></div>
-                  <div><p :title="folder" :class="schemaFolder[schemaFolder.length - 1] === folder ?'active' : ''" class="folderName" rel="tooltip" data-placement="top">{{ folder.slice(0,20) }}</p></div>
+                  <div :title="folder" :class="schemaFolder[schemaFolder.length - 1] === folder && schemaFolder[schemaFolder.length - 1].length < 11 ?'active' : 'path'" class="folderName" rel="tooltip" data-placement="top">{{ folder }}</div>
                 </div>
               </div>
               <div v-if="displayMessageDestinationFolder" class="messageDestination">
