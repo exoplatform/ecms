@@ -191,7 +191,8 @@ export default {
       creatingNewFolder: false,
       newFolderName: '',
       currentAbsolutePath: '',
-      popupBodyMessage: ''
+      popupBodyMessage: '',
+      cloudDriveFolder: ''
     };
   },
   computed: {
@@ -469,7 +470,13 @@ export default {
     },
     updateCloudDriveFolder({ folder, progress }) {
       this.loadingCloudDrive = progress;
-      if (folder) { this.openFolder(folder); }
+      if (this.foldersHistory.some(({ path }) => path === this.cloudDriveFolder.path)) {
+        this.openFolder(this.cloudDriveFolder);
+      }
+      if (folder) { 
+        this.cloudDriveFolder = folder;
+        this.openFolder(folder); 
+      }
       const fullProgress = 100;
       if (progress >= fullProgress) {
         const latency = 1000;
