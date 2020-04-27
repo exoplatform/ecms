@@ -2228,14 +2228,14 @@
 			var progress = 0;
 			var task;
 			var hideTimeout;
+			var stack_topright = {"dir1": "down", "dir2": "left", "firstpos1": 5, "firstpos2": 5};
 
 			// pnotify notice
 			var notice = $.pnotify({
 				// title : "Authorizing...",
 				// type : "info",
 				// icon : "picon picon-throbber",
-				// hide : false,
-				hide: true,
+				hide: false,
 				closer : true,
 				sticker : false,
 				// opacity : .75,
@@ -2245,7 +2245,9 @@
 				nonblock : false,
 				// nonblock_opacity : .25,
 				nonblock_opacity : 0,
-				width : NOTICE_WIDTH
+				width : NOTICE_WIDTH,
+				addclass: "stack-topleft", // This is one of the included default classes.
+				stack: stack_topright
 			});
 
 			// show close button in 20s
@@ -2288,18 +2290,18 @@
 					if (progress > 0) {
 						driveName = state.drive.provider.name;
 
-						notice.pnotify({
-							title : "Connecting Your " + driveName,
-							text : progress + "% complete."
-						});
+						// notice.pnotify({
+						// 	title : "Connecting Your " + driveName,
+						// 	text : progress + "% complete."
+						// });
 
 						// hide title in 5sec
-						hideTimeout = setTimeout(function() {
-							notice.pnotify({
-								title : false,
-								width : "200px"
-							});
-						}, 5000);
+						// hideTimeout = setTimeout(function() {
+						// 	notice.pnotify({
+						// 		title : false,
+						// 		width : "200px"
+						// 	});
+						// }, 5000);
 
 						// add as tasks also
 						if (tasks) {
