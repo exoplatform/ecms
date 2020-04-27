@@ -103,6 +103,15 @@
     <css-path>/skin/css/ecms/portlets/editors/editors-admin.css</css-path>
     <overwrite>true</overwrite>
   </portlet-skin>
+  
+  <!-- DocumentsPortlet skins -->
+  <portlet-skin>
+    <application-name>documents</application-name>
+    <portlet-name>DocumentsPortlet</portlet-name>
+    <skin-name>Enterprise</skin-name>
+    <css-path>/skin/css/ecms/portlets/documents/documents.css</css-path>
+    <overwrite>true</overwrite>
+  </portlet-skin>
 
   <!-- Bootstrap Javascripts -->
   <!-- Twitter Bootstrap bootstrap-typeahead plugin -->

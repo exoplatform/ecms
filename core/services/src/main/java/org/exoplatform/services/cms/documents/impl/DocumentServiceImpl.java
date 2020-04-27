@@ -35,6 +35,9 @@ import javax.jcr.Node;
 import javax.jcr.NodeIterator;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
+import javax.jcr.query.Query;
+import javax.jcr.query.QueryManager;
+import javax.jcr.query.QueryResult;
 
 import org.gatein.api.Portal;
 import org.gatein.api.navigation.Navigation;
@@ -75,6 +78,7 @@ import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.jcr.impl.core.NodeImpl;
+import org.exoplatform.services.jcr.impl.core.query.QueryImpl;
 import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
@@ -84,6 +88,8 @@ import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.social.core.manager.IdentityManager;
+import org.exoplatform.social.core.space.model.Space;
+import org.exoplatform.social.core.space.spi.SpaceService;
 import org.exoplatform.webui.application.WebuiRequestContext;
 
 /**
@@ -113,6 +119,9 @@ public class DocumentServiceImpl implements DocumentService {
   public static final String DOCUMENT_NOT_FOUND = "?path=doc-not-found";
   private static final String DOCUMENTS_NODE = "Documents";
   private static final String SHARED_NODE = "Shared";
+  private static final String COLLABORATION         = "collaboration";
+  private static final String SEPARATOR             = "/";
+  private static final String USER_SPACES_NODE_PATH = "/Groups/spaces";
   private static final Log LOG                 = ExoLogger.getLogger(DocumentServiceImpl.class);
   private final List<NewDocumentTemplateProvider> templateProviders = new ArrayList<>();
   private final List<DocumentEditorProvider> editorProviders = new ArrayList<>();
@@ -623,6 +632,101 @@ public class DocumentServiceImpl implements DocumentService {
                                 .findFirst()
                                 .orElseThrow(DocumentEditorProviderNotFoundException::new);
   }
+  
+  /**
+  * {@inheritDoc}
+  */
+ @Override
+ public List<Document> getDocumentsByFolder(String folder, long limit) throws Exception {
+   List<Document> documents = new ArrayList<Document>();
+   if (folder != null) {
+     String query = "select * from nt:base where jcr:path like '" + folder + "/%' and (exo:primaryType = 'nt:file' or jcr:primaryType = 'nt:file') order by exo:dateModified DESC";
+     return getDocumentsByQuery(query, limit);
+   }
+   return documents;
+ }
+  
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public List<Document> getDocumentsByQuery(String query, long limit) throws Exception {
+    List<Document> documents = new ArrayList<Document>();
+    if (query != null) {
+      ManageableRepository manageableRepository = repoService.getCurrentRepository();
+      SessionProvider sessionProvider = SessionProvider.createSystemProvider();
+      Session session = sessionProvider.getSession(COLLABORATION, manageableRepository);
+      QueryManager queryManager = session.getWorkspace().getQueryManager();
+      QueryImpl documentsQuery = (QueryImpl) queryManager.createQuery(query, Query.SQL);
+      documentsQuery.setLimit(limit);
+      QueryResult queryResult = documentsQuery.execute();
+      NodeIterator documentsIterator = queryResult.getNodes();
+      while (documentsIterator.hasNext()) {
+        Node documentNode = documentsIterator.nextNode();
+        //SimpleDateFormat simpleDateFormat = new SimpleDateFormat(ISO8601.SIMPLE_DATETIME_FORMAT);
+        if (documentNode.isNodeType(NodetypeConstant.EXO_SYMLINK)) {
+          documentNode = linkManager.getTarget(documentNode);
+        }
+        String documentNodePath = documentNode.getPath();
+        Document document = new Document(documentNode.getUUID(),
+                                         Utils.getTitle(documentNode),
+                                         documentNodePath,
+                                         documentNodePath.contains(Utils.PRIVATE) ? Utils.PRIVATE : getSpaceFromNodePath(documentNodePath),
+                                         Utils.getFileType(documentNode),
+                                         Utils.getDate(documentNode).getTime());
+        documents.add(document);
+      }
+      session.logout();
+    }
+    return documents;
+  }
+  
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public List<Document> getFavoriteDocuments(String userId, int limit) throws Exception {
+    SessionProvider sessionProvider = SessionProvider.createSystemProvider();
+    NodeHierarchyCreator nodeHierarchyCreator = WCMCoreUtils.getService(NodeHierarchyCreator.class);
+    Node userNode = nodeHierarchyCreator.getUserNode(sessionProvider, userId);
+    Node userPrivateNode = (Node) userNode.getNode(Utils.PRIVATE);
+    String favoriteFolder = null;
+    if (userPrivateNode.hasNode(NodetypeConstant.FAVORITE)) {
+      favoriteFolder = ((Node) userPrivateNode.getNode(NodetypeConstant.FAVORITE)).getPath();
+    }
+    return getDocumentsByFolder(favoriteFolder, limit);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public List<Document> getSharedDocuments(String userId, int limit) throws Exception {
+    SessionProvider sessionProvider = SessionProvider.createSystemProvider();
+    NodeHierarchyCreator nodeHierarchyCreator = WCMCoreUtils.getService(NodeHierarchyCreator.class);
+    Node userNode = nodeHierarchyCreator.getUserNode(sessionProvider, userId);
+    Node userPrivateNode = (Node) userNode.getNode(Utils.PRIVATE);
+    Node userDocumentsNode = (Node) userPrivateNode.getNode(NodetypeConstant.DOCUMENTS);
+    String sharedFolder = null;
+    if (userDocumentsNode.hasNode(NodetypeConstant.SHARED)) {
+      sharedFolder = ((Node) userDocumentsNode.getNode(NodetypeConstant.SHARED)).getPath();
+    }
+    return getDocumentsByFolder(sharedFolder, limit);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public List<Document> getRecentDocuments(String userId, int limit) throws Exception {
+    SessionProvider sessionProvider = SessionProvider.createSystemProvider();
+    NodeHierarchyCreator nodeHierarchyCreator = WCMCoreUtils.getService(NodeHierarchyCreator.class);
+    Node userNode = nodeHierarchyCreator.getUserNode(sessionProvider, userId);
+    Node userPrivateNode = (Node) userNode.getNode(Utils.PRIVATE);
+    Node userDocumentsNode = (Node) userPrivateNode.getNode(NodetypeConstant.DOCUMENTS);
+    //TODO elastic search implem
+    return getDocumentsByFolder(userDocumentsNode.getPath(), limit);
+  }
 
   /**
    * Gets display name of current user. In case of any errors return current userId
@@ -653,5 +757,19 @@ public class DocumentServiceImpl implements DocumentService {
     SessionProvider sp = sessionProviderService.getSessionProvider(null);
     Session session = sp.getSession(workspace, repoService.getCurrentRepository());
     return session.getNodeByUUID(uuid);
+  }
+  
+  private String getSpaceFromNodePath(String nodePath) {
+    if (nodePath.startsWith(USER_SPACES_NODE_PATH)) {
+      String[] splittedNodePath = nodePath.split(SEPARATOR);
+      if (splittedNodePath.length > 3) {
+        SpaceService spaceService = WCMCoreUtils.getService(SpaceService.class);
+        Space space = spaceService.getSpaceByPrettyName(splittedNodePath[3]);
+        if (space != null) {
+          return space.getDisplayName();
+        }
+      }
+    }
+    return "";
   }
 }

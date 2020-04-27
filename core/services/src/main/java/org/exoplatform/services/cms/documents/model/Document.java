@@ -17,6 +17,7 @@
 package org.exoplatform.services.cms.documents.model;
 
 import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Created by The eXo Platform SAS Author : eXoPlatform exo@exoplatform.com Mar
@@ -36,12 +37,29 @@ public class Document {
   private String   state;
 
   private String   author;
+  
+  private String drive;
+  
+  private String mimeType;
 
   private String   lastEditor;
 
   private Calendar lastModified;
 
   private Calendar dateCreated;
+  
+  private Date dateModified;
+  
+  public Document(String id, String title, String path, String drive, String mimeType, Date dateModified) {
+    super();
+    this.id = id;
+    this.title = title;
+    this.path = path;
+    this.drive = drive;
+    this.mimeType = mimeType;
+    this.dateModified = dateModified;
+  }
+
 
   public Document(String id,
                   String name,
@@ -62,9 +80,7 @@ public class Document {
     this.lastEditor = lastEditor;
     this.lastModified = lastModified;
     this.dateCreated = dateCreated;
-    this.dateCreated = dateCreated;
     this.name = name;
-
   }
 
   public String getId() {
@@ -147,4 +163,45 @@ public class Document {
     this.name = name;
   }
 
+  /**
+   * @return the drive
+   */
+  public String getDrive() {
+    return drive;
+  }
+
+  /**
+   * @param drive the drive to set
+   */
+  public void setDrive(String drive) {
+    this.drive = drive;
+  }
+
+  /**
+   * @return the mimeType
+   */
+  public String getMimeType() {
+    return mimeType;
+  }
+
+  /**
+   * @return the dateModified
+   */
+  public Date getDateModified() {
+    return dateModified;
+  }
+
+  /**
+   * @param dateModified the dateModified to set
+   */
+  public void setDateModified(Date dateModified) {
+    this.dateModified = dateModified;
+  }
+
+  /**
+   * @param mimeType the mimeType to set
+   */
+  public void setMimeType(String mimeType) {
+    this.mimeType = mimeType;
+  }
 }

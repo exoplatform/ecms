@@ -179,6 +179,60 @@ public interface DocumentService {
    */
   public DocumentEditorProvider getEditorProvider(String provider) throws DocumentEditorProviderNotFoundException;
   
+  /**
+   * Gets the documents by folder.
+   *
+   * @param folder the folder
+   * @param limit the limit
+   * @return the documents by folder
+   */
+  default List<Document> getDocumentsByFolder(String folder, long limit) throws Exception {
+    throw new UnsupportedOperationException();
+  }
+  
+  /**
+   * Gets the documents by query.
+   *
+   * @param query the query
+   * @param limit the limit
+   * @return the documents by query
+   */
+  default List<Document> getDocumentsByQuery(String query, long limit) throws Exception {
+    throw new UnsupportedOperationException();
+  }
+  
+  /**
+   * Gets the favorite documents.
+   *
+   * @param userId the userId
+   * @param limit the limit
+   * @return the favorite documents
+   */
+  default List<Document> getFavoriteDocuments(String userId, int limit) throws Exception {
+    throw new UnsupportedOperationException();
+  }
+  
+  /**
+   * Gets the shared documents.
+   *
+   * @param userId the userId
+   * @param limit the limit
+   * @return the shared documents
+   */
+  default List<Document> getSharedDocuments(String userId, int limit) throws Exception {
+    throw new UnsupportedOperationException();
+  }
+  
+  /**
+   * Gets the recent documents.
+   *
+   * @param userId the userId
+   * @param limit the limit
+   * @return the recent documents
+   */
+  default List<Document> getRecentDocuments(String userId, int limit) throws Exception {
+    throw new UnsupportedOperationException();
+  }
   
   /**
    * NewDocumentTypesConfig contains all registered template configs for specified provider.
