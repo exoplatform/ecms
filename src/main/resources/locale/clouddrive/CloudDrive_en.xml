@@ -79,6 +79,7 @@
       <ErrorReadingDrives>Error reading document drives</ErrorReadingDrives>
       <CannotFindUser>Cannot find user {0}</CannotFindUser>
       <ErrorReadingFileLinks>Error reading file links</ErrorReadingFileLinks>
+      <ErrorReadingUserDrive>Error reading user drive</ErrorReadingUserDrive>
     </msg>
   </CloudFile>
   <ConnectCloudDriveForm>
