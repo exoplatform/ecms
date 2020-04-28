@@ -19,9 +19,12 @@ import javax.annotation.PreDestroy;
 import javax.inject.Inject;
 import javax.jcr.RepositoryException;
 
+import org.cometd.annotation.Param;
 import org.cometd.annotation.ServerAnnotationProcessor;
 import org.cometd.annotation.Service;
 import org.cometd.annotation.Session;
+import org.cometd.annotation.Subscription;
+import org.cometd.bayeux.Message;
 import org.cometd.bayeux.server.BayeuxServer;
 import org.cometd.bayeux.server.BayeuxServer.ChannelListener;
 import org.cometd.bayeux.server.ConfigurableServerChannel;
@@ -39,9 +42,14 @@ import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.PortalContainer;
 import org.exoplatform.container.component.RequestLifeCycle;
+import org.exoplatform.services.cms.documents.DocumentEditorProvider;
 import org.exoplatform.services.cms.documents.DocumentService;
+import org.exoplatform.services.cms.documents.exception.DocumentEditorProviderNotFoundException;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.security.Authenticator;
+import org.exoplatform.services.security.Identity;
+import org.exoplatform.services.security.IdentityRegistry;
 
 /**
  * The Class CometdDocumentsService.
@@ -305,17 +313,10 @@ public class CometdDocumentsService implements Startable {
         String exoContainerName = asString(message.get("exoContainerName"));
         String provider = asString(message.get("provider"));
         String workspace = asString(message.get("workspace"));
+
         if (provider != null) {
           String fileId = channelId.substring(channelId.lastIndexOf("/") + 1);
           editorsContext.addClient(sessionId, fileId, provider, workspace);
-
-          // First editor opened
-          if (editorsContext.getOpenedEditorsCount(fileId, provider) == 1) {
-            if (LOG.isDebugEnabled()) {
-              LOG.debug("First editor opened. Provider: " + provider + ", workspace: " + workspace + ", fileId:" + fileId);
-            }
-            setCurrentDocumentProvider(fileId, workspace, provider);
-          }
         }
         if (LOG.isDebugEnabled()) {
           LOG.debug(">> Subscribed: provider: " + provider + ", session:" + sessionId + " (" + exoContainerName + "@"
@@ -341,7 +342,7 @@ public class CometdDocumentsService implements Startable {
           String provider = removedClient.getProvider();
           String workspace = removedClient.getWorkspace();
           if (editorsContext.getOpenedEditorsCount(fileId, provider) == 0) {
-            setCurrentDocumentProvider(fileId, workspace, null);
+            service.setCurrentDocumentProvider(fileId, workspace, null);
             service.sendLastEditorClosedEvent(fileId, provider);
             if (LOG.isDebugEnabled()) {
               LOG.debug("Last editor closed. Provider" + provider + ", workspace: " + removedClient.getWorkspace() + ", fileId:"
@@ -356,30 +357,6 @@ public class CometdDocumentsService implements Startable {
       }
     }
 
-    /**
-     * Sets the current document provider.
-     *
-     * @param fileId the file id
-     * @param workspace the workspace
-     * @param provider the provider
-     */
-    protected void setCurrentDocumentProvider(String fileId, String workspace, String provider) {
-      eventsHandlers.submit(new ContainerCommand(PortalContainer.getCurrentPortalContainerName()) {
-        @Override
-        void onContainerError(String error) {
-          LOG.error("An error has occured in container: {}", containerName);
-        }
-
-        @Override
-        void execute(ExoContainer exoContainer) {
-          try {
-            documentService.setCurrentDocumentProvider(fileId, workspace, provider);
-          } catch (RepositoryException e) {
-            LOG.error("Cannot set current document provider for fileId: " + fileId + ", workspace: " + workspace, e);
-          }
-        }
-      });
-    }
   }
 
   /**
@@ -423,51 +400,51 @@ public class CometdDocumentsService implements Startable {
   }
 
   /** The Constant LOG. */
-  private static final Log                    LOG                         = ExoLogger.getLogger(CometdDocumentsService.class);
+  private static final Log                    LOG                      = ExoLogger.getLogger(CometdDocumentsService.class);
 
   /** The channel name. */
-  public static final String                  CHANNEL_NAME                = "/eXo/Application/documents/";
+  public static final String                  CHANNEL_NAME             = "/eXo/Application/documents/editor/";
 
   /** The channel name. */
-  public static final String                  CHANNEL_NAME_PARAMS         = CHANNEL_NAME + "{fileId}";
+  public static final String                  CHANNEL_NAME_PARAMS      = CHANNEL_NAME + "{fileId}";
 
-  /** The document saved event. */
-  public static final String                  DOCUMENT_OPENED_EVENT       = "DOCUMENT_OPENED";
-
-  /** The document deleted event. */
-  public static final String                  DOCUMENT_CLOSED_EVENT       = "DOCUMENT_CLOSED";
+  /** The document opened event. */
+  public static final String                  DOCUMENT_OPENED_EVENT    = "DOCUMENT_OPENED";
 
   /** The Constant LAST_EDITOR_CLOSED_EVENT. */
-  public static final String                  LAST_EDITOR_CLOSED_EVENT    = "LAST_EDITOR_CLOSED";
+  public static final String                  LAST_EDITOR_CLOSED_EVENT = "LAST_EDITOR_CLOSED";
+
+  /** The Constant CURRENT_PROVIDER_INFO. */
+  public static final String                  CURRENT_PROVIDER_INFO    = "CURRENT_PROVIDER_INFO";
 
   /**
    * Base minimum number of threads for document updates thread executors.
    */
-  public static final int                     MIN_THREADS                 = 2;
+  public static final int                     MIN_THREADS              = 2;
 
   /**
    * Minimal number of threads maximum possible for document updates thread
    * executors.
    */
-  public static final int                     MIN_MAX_THREADS             = 4;
+  public static final int                     MIN_MAX_THREADS          = 4;
 
   /** Thread idle time for thread executors (in seconds). */
-  public static final int                     THREAD_IDLE_TIME            = 120;
+  public static final int                     THREAD_IDLE_TIME         = 120;
 
   /**
    * Maximum threads per CPU for thread executors of document changes channel.
    */
-  public static final int                     MAX_FACTOR                  = 20;
+  public static final int                     MAX_FACTOR               = 20;
 
   /**
    * Queue size per CPU for thread executors of document updates channel.
    */
-  public static final int                     QUEUE_FACTOR                = MAX_FACTOR * 2;
+  public static final int                     QUEUE_FACTOR             = MAX_FACTOR * 2;
 
   /**
    * Thread name used for the executor.
    */
-  public static final String                  THREAD_PREFIX               = "documents-comet-thread-";
+  public static final String                  THREAD_PREFIX            = "documents-comet-thread-";
 
   /** The exo bayeux. */
   protected final EXoContinuationBayeux       exoBayeux;
@@ -481,26 +458,39 @@ public class CometdDocumentsService implements Startable {
   /** The document service. */
   protected final DocumentService             documentService;
 
+  /** The identity registry. */
+  protected final IdentityRegistry            identityRegistry;
+
+  /** The authenticator. */
+  protected final Authenticator               authenticator;
+
   /** The subscription listener. */
-  protected final ChannelSubscriptionListener subscriptionListener        = new ChannelSubscriptionListener();
+  protected final ChannelSubscriptionListener subscriptionListener     = new ChannelSubscriptionListener();
 
   /** The channel listener. */
-  protected final ClientChannelListener       channelListener             = new ClientChannelListener();
+  protected final ClientChannelListener       channelListener          = new ClientChannelListener();
 
   /** The active providers fileId -> (sessionId, ClientInfo). */
-  protected final EditorsContext              editorsContext              = new EditorsContext();
+  protected final EditorsContext              editorsContext           = new EditorsContext();
 
   /**
    * Instantiates the CometdDocumentsService.
    *
    * @param exoBayeux the exoBayeux
    * @param documentService the document service
+   * @param identityRegistry the identity registry
+   * @param authenticator the authenticator
    */
-  public CometdDocumentsService(EXoContinuationBayeux exoBayeux, DocumentService documentService) {
+  public CometdDocumentsService(EXoContinuationBayeux exoBayeux,
+                                DocumentService documentService,
+                                IdentityRegistry identityRegistry,
+                                Authenticator authenticator) {
     this.exoBayeux = exoBayeux;
     this.documentService = documentService;
     this.service = new CometdService();
     this.eventsHandlers = createThreadExecutor(THREAD_PREFIX, MAX_FACTOR, QUEUE_FACTOR);
+    this.identityRegistry = identityRegistry;
+    this.authenticator = authenticator;
   }
 
   /**
@@ -601,6 +591,105 @@ public class CometdDocumentsService implements Startable {
     }
 
     /**
+     * Subscribe documents.
+     *
+     * @param message the message
+     * @param docId the doc id
+     * @throws RepositoryException the repository exception
+     */
+    @Subscription(CHANNEL_NAME_PARAMS)
+    public void subscribeDocuments(Message message, @Param("fileId") String fileId) throws RepositoryException {
+      Object objData = message.getData();
+      if (!Map.class.isInstance(objData)) {
+        if (LOG.isDebugEnabled()) {
+          LOG.debug("Couldn't get data as a map from event");
+        }
+        return;
+      }
+
+      Map<String, Object> data = message.getDataAsMap();
+      String type = (String) data.get("type");
+
+      if (type.equals(DOCUMENT_OPENED_EVENT)) {
+        String userId = (String) data.get("userId");
+        String workspace = (String) data.get("workspace");
+        String provider = (String) data.get("provider");
+        eventsHandlers.submit(new ContainerCommand(PortalContainer.getCurrentPortalContainerName()) {
+          @Override
+          void onContainerError(String error) {
+            LOG.error("An error has occured in container: {}", containerName);
+          }
+
+          @Override
+          void execute(ExoContainer exoContainer) {
+            try {
+              DocumentEditorProvider editorProvider = documentService.getEditorProvider(provider);
+              boolean allowed = editorProvider.isAvailableForUser(userIdentity(userId));
+              String currentProvider = documentService.getCurrentDocumentProvider(fileId, workspace);
+              boolean available = allowed && (currentProvider == null || provider.equals(currentProvider));
+              service.sendCurrentProviderInfo(fileId, available);
+              if (currentProvider == null) {
+                setCurrentDocumentProvider(fileId, workspace, provider);
+              }
+            } catch (DocumentEditorProviderNotFoundException | RepositoryException e) {
+              LOG.error("Cannot send current provider info for fileId: " + fileId + ", workspace: " + workspace, e);
+            }
+          }
+        });
+      }
+    }
+    
+    /**
+     * Sets the current document provider.
+     *
+     * @param fileId the file id
+     * @param workspace the workspace
+     * @param provider the provider
+     */
+    protected void setCurrentDocumentProvider(String fileId, String workspace, String provider) {
+      eventsHandlers.submit(new ContainerCommand(PortalContainer.getCurrentPortalContainerName()) {
+        @Override
+        void onContainerError(String error) {
+          LOG.error("An error has occured in container: {}", containerName);
+        }
+
+        @Override
+        void execute(ExoContainer exoContainer) {
+          try {
+            documentService.setCurrentDocumentProvider(fileId, workspace, provider);
+          } catch (RepositoryException e) {
+            LOG.error("Cannot set current document provider for fileId: " + fileId + ", workspace: " + workspace, e);
+          }
+        }
+      });
+    }
+    
+
+    /**
+     * Find or create user identity.
+     *
+     * @param userId the user id
+     * @return the identity can be null if not found and cannot be created via
+     *         current authenticator
+     */
+    protected Identity userIdentity(String userId) {
+      Identity userIdentity = identityRegistry.getIdentity(userId);
+      if (userIdentity == null) {
+        // We create user identity by authenticator, but not register it in the
+        // registry
+        try {
+          if (LOG.isDebugEnabled()) {
+            LOG.debug("User identity not registered, trying to create it for: " + userId);
+          }
+          userIdentity = authenticator.createIdentity(userId);
+        } catch (Exception e) {
+          LOG.warn("Failed to create user identity: " + userId, e);
+        }
+      }
+      return userIdentity;
+    }
+
+    /**
      * Send last editor closed event.
      *
      * @param fileId the file id
@@ -619,6 +708,30 @@ public class CometdDocumentsService implements Startable {
         data.append("\", ");
         data.append("\"provider\": \"");
         data.append(provider);
+        data.append("\"}");
+        channel.publish(localSession, data.toString());
+      }
+    }
+
+    /**
+     * Send last editor closed event.
+     *
+     * @param fileId the file id
+     * @param available the available
+     */
+    protected void sendCurrentProviderInfo(String fileId, boolean available) {
+      ServerChannel channel = bayeux.getChannel(CHANNEL_NAME + fileId);
+      if (channel != null) {
+        StringBuilder data = new StringBuilder();
+        data.append('{');
+        data.append("\"type\": \"");
+        data.append(CURRENT_PROVIDER_INFO);
+        data.append("\", ");
+        data.append("\"fileId\": \"");
+        data.append(fileId);
+        data.append("\", ");
+        data.append("\"available\": \"");
+        data.append(available);
         data.append("\"}");
         channel.publish(localSession, data.toString());
       }

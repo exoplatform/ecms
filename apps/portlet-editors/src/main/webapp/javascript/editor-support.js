@@ -61,8 +61,6 @@
     var listeners = {};
     // CometD transport bus
     var cometd, cometdContext;
-    var cometdConf;
-    var userId;
     var configLoader = $.Deferred();
     var initLoader;
 
@@ -98,10 +96,12 @@
       }
       var subscriptionPromise = $.Deferred();
       initLoader.done(function() {
-        var subscription = cometd.subscribe("/eXo/Application/documents/" + fileId, function(message) {
+        var subscription = cometd.subscribe("/eXo/Application/documents/editor/" + fileId, function(message) {
           // Channel message handler
           var result = tryParseJson(message);
-          callback(result);
+          if (callback) {
+            callback(result);
+          }
         }, cometdContext, function(subscribeReply) {
           // Subscription status callback
           if (subscribeReply.successful) {
@@ -123,7 +123,7 @@
      */
     var publishEvent = function(fileId, data) {
       var deferred = $.Deferred();
-      cometd.publish("/eXo/Application/documents/" + fileId, data, cometdContext, function(publishReply) {
+      cometd.publish("/eXo/Application/documents/editor/" + fileId, data, cometdContext, function(publishReply) {
         // Publication status callback
         if (publishReply.successful) {
           deferred.resolve();
@@ -156,25 +156,25 @@
     /**
      * Inits cometd
      */
-    var init = function() {
+    var init = function(provider, workspace) {
       if (initLoader) {
         log("Init is in progress or already done");
         return;
       }
       log("Initializing editor support module");
       initLoader = $.Deferred();
-      configLoader.done(function() {
+      configLoader.done(function(user, cometdConf) {
         cCometD.configure({
           "url": prefixUrl + cometdConf.path,
-          "exoId": userId,
+          "exoId": user,
           "exoToken": cometdConf.token,
           "maxNetworkDelay": 30000,
           "connectTimeout": 60000
         });
         cometdContext = {
           "exoContainerName": cometdConf.containerName,
-          "provider": cometdConf.provider,
-          "workspace": cometdConf.workspace
+          "provider": provider,
+          "workspace": workspace
         };
         cometd = cCometD;
         initLoader.resolve();
@@ -187,9 +187,7 @@
      * Inits configuration
      */
     this.initConfig = function(user, conf) {
-      userId = user;
-      cometdConf = conf;
-      configLoader.resolve();
+      configLoader.resolve(user, conf);
     };
 
     /**
@@ -259,15 +257,32 @@
       log("Editor opened. Provider: " + provider + ", fileId: " + fileId);
       // subsribe to track opened editors on server-side
       if (!cometd) {
-        init();
+        init(provider, workspace);
       }
-      var subscription = cometd.subscribe("/eXo/Application/documents/" + fileId, function(message) {}, cometdContext, function(subscribeReply) {});
-      publishEvent(fileId, {
-        "type": DOCUMENT_OPENED,
-        "provider": provider,
-        "fileId": fileId,
-        "workspace": workspace
+      var $loader = $.Deferred();
+
+      initLoader.done(function() {
+        subscribeDocument(fileId, function(result) {
+          if (result.type === CURRENT_PROVIDER_INFO) {
+            if (result.available == "true") {
+              $loader.resolve();
+            } else {
+              $loader.reject();
+            }
+          }
+        }).done(function() {
+          publishEvent(fileId, {
+            "type": DOCUMENT_OPENED,
+            "provider": provider,
+            "fileId": fileId,
+            "workspace": workspace,
+            "userId": eXo.env.portal.userName
+          });
+        });
+
       });
+
+      return $loader.promise();
     };
   }
   return new EditorSupport();

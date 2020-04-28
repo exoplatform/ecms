@@ -190,14 +190,6 @@ public interface DocumentService {
   * @throws RepositoryException the exception
   */
  public String getCurrentDocumentProvider(String uuid, String workspace) throws RepositoryException;
-  
-  /**
-   * Init document editors JS module.
-   * 
-   * @param provider the provider
-   * @param workspace the workspace
-   */
- public void initEditorSupportModule(String provider, String workspace);
  
   /**
    * Gets the editor provider.
