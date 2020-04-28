@@ -38,7 +38,7 @@
 </template>
 
 <script>
-import { getUserDrive } from "../cloudDriveService";
+import { getUserDrive, notifyError } from "../cloudDriveService";
 
 export default {
   model: {
@@ -58,21 +58,23 @@ export default {
     }
   },
   data: function() {
-    return { providers: {}, userDrive: {}, error: null, connectingProvider: "" };
+    return { providers: {}, userDrive: {}, connectingProvider: "" };
   },
   async created() {
-    try {
-      const data = await getUserDrive();
-      this.userDrive = {
-        name: data.name,
-        title: data.name,
-        isSelected: false
-      };
-      // init cloudDrive module after response from getUserDrive
-      cloudDrive.init(data.workspace, data.homePath);
-      this.providers = cloudDrive.getProviders();
-    } catch (err) {
-      this.error = err.message;
+    if (!this.showCloudDrawer) {
+      try {
+        const data = await getUserDrive();
+        this.userDrive = {
+          name: data.name,
+          title: data.name,
+          isSelected: false,
+        };
+        // init cloudDrive module after response from getUserDrive
+        cloudDrive.init(data.workspace, data.homePath);
+        this.providers = cloudDrive.getProviders();
+      } catch (err) {
+        notifyError(this.$t(err.message));
+      }
     }
   },
   methods: {
@@ -122,7 +124,6 @@ export default {
         }
         // parent component should listen openConnectedFolder event and call own method after emit
         this.$emit("openConnectedFolder", { folder: createdDrive, progress: progress });
-        // this.toggleCloudDrawer();
         this.showCloudDrawer = false;
       }
     }
