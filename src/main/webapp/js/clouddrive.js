@@ -2469,7 +2469,8 @@
 			var h = 540;
 			var left = (screen.width / 2) - (w / 2);
 			var top = (screen.height / 2) - (h / 2);
-			return window.open(authURL, 'contacts', 'width=' + w + ',height=' + h + ',top=' + top + ',left=' + left);
+			// return window.open(authURL, 'contacts', 'width=' + w + ',height=' + h + ',top=' + top + ',left=' + left);
+			return window.open(authURL, "_blank");
 		};
 
 		/**
