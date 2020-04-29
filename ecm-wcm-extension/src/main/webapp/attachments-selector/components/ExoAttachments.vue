@@ -10,6 +10,7 @@
         </a>
         <span class="attachmentsTitle">{{ drawerTitle }}</span>
         <a class="attachmentsCloseIcon" @click="toggleAttachmentsDrawer()">×</a>
+        <v-progress-linear :active="cloudDriveConnecting" absolute bottom indeterminate></v-progress-linear>
       </div>
       <div :class="showDocumentSelector? 'serverFiles' : 'attachments'" class="content">
         <div v-show="!showDocumentSelector" class="attachmentsContent">
@@ -129,7 +130,14 @@
             </div>
           </div>
         </div>
-        <exo-folders-files-selector v-if="showDocumentSelector && !showDestinationFolder && !showDestinationFolderForFile" :attached-files="value" :space-id="spaceId" @itemsSelected="toggleServerFileSelector" @cancel="toggleServerFileSelector()"></exo-folders-files-selector>
+        <exo-folders-files-selector 
+          v-if="showDocumentSelector && !showDestinationFolder && !showDestinationFolderForFile" 
+          :attached-files="value" 
+          :space-id="spaceId" 
+          @itemsSelected="toggleServerFileSelector"
+          @cancel="toggleServerFileSelector()" 
+          @changeConnectingStatus="updateCloudConnecting"
+        ></exo-folders-files-selector>
         <exo-folders-files-selector v-if="showDocumentSelector && showDestinationFolder && !showDestinationFolderForFile" :mode-folder-selection="showDestinationFolder" @itemsSelected="addDestinationFolder" @cancel="toggleServerFileSelector()"></exo-folders-files-selector>
         <exo-folders-files-selector v-if="showDocumentSelector && showDestinationFolderForFile" :mode-folder-selection="showDestinationFolderForFile" :mode-folder-selection-for-file="modeFolderSelectionForFile" @itemsSelected="addDestinationFolderForFile" @cancel="toggleServerFileSelector()"></exo-folders-files-selector>
       </div>
@@ -194,6 +202,7 @@ export default {
       modeFolderSelectionForFile: false,
       showAttachmentsDrawer: false,
       displayMessageDestinationFolder: true,
+      cloudDriveConnecting: false
     };
   },
   watch: {
@@ -478,6 +487,9 @@ export default {
           break;
         }
       }
+    },
+    updateCloudConnecting(status) {
+      this.cloudDriveConnecting = status;
     }
   }
 };

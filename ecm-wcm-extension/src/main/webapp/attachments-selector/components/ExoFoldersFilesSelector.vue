@@ -39,14 +39,13 @@
         <a v-if="modeFolderSelectionForFile || modeFolderSelection" :title="$t('attachments.filesFoldersSelector.button.addNewFOlder.tooltip')" rel="tooltip" data-placement="bottom" class="uiIconLightGray uiIconAddFolder" @click="addNewFolder()"></a>
       </div>
       <div v-for="action in attachmentsComposerActions" :key="action.key" :class="`${action.appClass}Action`" class="actionBox">
-        <div class="actionBoxLogo" @click="executeAction(action)">
+        <div v-if="!modeFolderSelection" class="actionBoxLogo" @click="executeAction(action)">
           <v-icon v-if="action.iconName" class="uiActionIcon" >{{ action.iconName }}</v-icon>
           <i v-else :class="action.iconClass" class="uiActionIcon"></i>
         </div>
         <component v-dynamic-events="action.component.events" v-if="action.component" v-bind="action.component.props ? action.component.props : {}"
                    v-model="currentDrive" :is="action.component.name" :ref="action.key"></component>
       </div>
-      <v-progress-linear :active="cloudDriveProgress !== null" absolute bottom indeterminate></v-progress-linear>
     </div>
 
     <div class="contentBody">
@@ -471,6 +470,7 @@ export default {
     },
     setCloudDriveProgress({ progress }) {
       this.cloudDriveProgress = progress;
+      this.$emit('changeConnectingStatus', progress ? true : false);
     },
     addNewFolder() {
       if (!this.creatingNewFolder) {
