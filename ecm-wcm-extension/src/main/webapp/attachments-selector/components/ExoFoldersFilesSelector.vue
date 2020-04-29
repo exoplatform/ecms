@@ -39,12 +39,14 @@
         <a v-if="modeFolderSelectionForFile || modeFolderSelection" :title="$t('attachments.filesFoldersSelector.button.addNewFOlder.tooltip')" rel="tooltip" data-placement="bottom" class="uiIconLightGray uiIconAddFolder" @click="addNewFolder()"></a>
       </div>
       <div v-for="action in attachmentsComposerActions" :key="action.key" :class="`${action.appClass}Action`" class="actionBox">
-        <v-icon v-if="action.iconName" class="uiActionIcon" @click="executeAction(action)">{{ action.iconName }}</v-icon>
-        <i v-else :class="action.iconClass" class="uiActionIcon" @click="executeAction(action)"></i>
+        <div class="actionBoxLogo" @click="executeAction(action)">
+          <v-icon v-if="action.iconName" class="uiActionIcon" >{{ action.iconName }}</v-icon>
+          <i v-else :class="action.iconClass" class="uiActionIcon"></i>
+        </div>
         <component v-dynamic-events="action.component.events" v-if="action.component" v-bind="action.component.props ? action.component.props : {}"
                    v-model="currentDrive" :is="action.component.name" :ref="action.key"></component>
       </div>
-      <v-progress-linear :active="loadingCloudDrive !== null && !loadingFolders" :value="loadingCloudDrive" absolute buffer-value="0" stream class="progressLine"></v-progress-linear>
+      <v-progress-linear :active="cloudDriveProgress !== null" absolute bottom indeterminate></v-progress-linear>
     </div>
 
     <div class="contentBody">
@@ -187,12 +189,11 @@ export default {
       schemaFolder: '',
       folderDestinationForFile:'',
       attachmentsComposerActions: [],
-      loadingCloudDrive: null,
+      cloudDriveProgress: null,
       creatingNewFolder: false,
       newFolderName: '',
       currentAbsolutePath: '',
-      popupBodyMessage: '',
-      cloudDriveFolder: ''
+      popupBodyMessage: ''
     };
   },
   computed: {
@@ -468,20 +469,8 @@ export default {
     executeAction(action) {
       executeExtensionAction(action, this.$refs[action.key][0]);
     },
-    updateCloudDriveFolder({ folder, progress }) {
-      this.loadingCloudDrive = progress;
-      if (this.foldersHistory.some(({ path }) => path === this.cloudDriveFolder.path)) {
-        this.openFolder(this.cloudDriveFolder);
-      }
-      if (folder) { 
-        this.cloudDriveFolder = folder;
-        this.openFolder(folder); 
-      }
-      const fullProgress = 100;
-      if (progress >= fullProgress) {
-        const latency = 1000;
-        setTimeout(() => { this.loadingCloudDrive = null; }, latency);
-      }
+    setCloudDriveProgress({ progress }) {
+      this.cloudDriveProgress = progress;
     },
     addNewFolder() {
       if (!this.creatingNewFolder) {

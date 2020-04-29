@@ -637,20 +637,32 @@
         .actionBox {
           display: inline-flex;
           align-items: center;
-          margin-left: 10px;
+          margin-left: 5px;
 
-          .uiActionIcon {
-            border: 1px solid #b3b3b3;
-            padding: 7px;
-            border-radius: 15%;
-            margin-bottom: 10px;
-            color: #4d5466;
-            cursor: pointer;
+          &Logo {
+            position: relative;
+
+            .uiActionIcon {
+              border: 1px solid #b3b3b3;
+              padding: 7px;
+              border-radius: 15%;
+              margin-bottom: 10px;
+              color: #4d5466;
+              cursor: pointer;
+
+              &:before {
+                content: '+';
+                position: absolute;
+                color: #fff;
+                left: 0;
+                top: 26%;
+                width: 100%;
+                font-weight: bold;
+                font-size: 15px;
+                text-align: center;
+              }
+            }
           }
-        }
-
-        .progressLine {
-          bottom: -5px;
         }
       }
 
