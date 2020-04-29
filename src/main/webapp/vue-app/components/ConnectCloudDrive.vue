@@ -80,36 +80,35 @@ export default {
   methods: {
     connectToCloudDrive: function(providerId) {
       this.connectingProvider = providerId;
-      this.$emit("openConnectedFolder", { progress: 0 });
-      // openDriveFolder() method should be called only one time, but as progress callback may be called several times or
-      // it may not be called driveFolderOpened should monitor this
-      let driveFolderOpened = false;
+      this.$emit("updateProgress", { progress: 0 });
+      const fullProgress = 100;
       cloudDrive.connect(providerId).then(
         data => {
-          const fullProgress = 100;
-          if (!driveFolderOpened) {
-            this.openDriveFolder(data.drive.path, data.drive.title, fullProgress);
-            driveFolderOpened = true;
-          }
-          this.$emit("openConnectedFolder", { progress: fullProgress });
+          console.log(data);
+          this.$emit("updateProgress", { progress: fullProgress });
+          // this.openDriveFolder(data.drive.path, data.drive.title);
+          const latency = 1000;
+          setTimeout(() => { this.$emit("updateProgress", { progress: null }); }, latency);
           this.connectingProvider = "";
+          this.showCloudDrawer = false;
         },
         () => {
           this.connectingProvider = "";
+          this.$emit("updateProgress", { progress: null });
         },
         progressData => {
-          if (progressData.drive.path && !driveFolderOpened) {
-            this.openDriveFolder(progressData.drive.path, progressData.drive.title, progressData.progress);
-            driveFolderOpened = true;
-          }
-          this.$emit("openConnectedFolder", { progress: progressData.progress });
+          // if (progressData.drive.path) {
+          //   this.openDriveFolder(progressData.drive.path, progressData.drive.title);
+          // }
+          this.$emit("updateProgress", { progress: progressData.progress });
+          this.showCloudDrawer = false;
         }
       );
     },
     toggleCloudDrawer: function() {
       this.showCloudDrawer = !this.showCloudDrawer;
     },
-    openDriveFolder: function(path, title, progress) {
+    openDriveFolder: function(path, title) {
       if (path) {
         const folderPath = path.split("/").pop();
         const createdDrive = {
@@ -123,7 +122,7 @@ export default {
           this.$emit("changeCurrentDrive", this.userDrive);
         }
         // parent component should listen openConnectedFolder event and call own method after emit
-        this.$emit("openConnectedFolder", { folder: createdDrive, progress: progress });
+        this.$emit("openDriveFolder", createdDrive);
         this.showCloudDrawer = false;
       }
     }
