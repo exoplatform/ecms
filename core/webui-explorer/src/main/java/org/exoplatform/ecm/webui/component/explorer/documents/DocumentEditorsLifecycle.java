@@ -122,8 +122,7 @@ public class DocumentEditorsLifecycle implements ApplicationLifecycle<WebuiReque
           parentContext.setAttribute(USERID_ATTRIBUTE, userName);
           parentContext.setAttribute(DOCUMENT_WORKSPACE_ATTRIBUTE, nodeWs);
           parentContext.setAttribute(DOCUMENT_PATH_ATTRIBUTE, nodePath);
-          // This will init explorer even for docs that cannot be edited
-          // by the user (lack of permissions)
+          
           initEditorsModule(context, node.getUUID(), node.getSession().getWorkspace().getName());
         }
       } catch (RepositoryException e) {

@@ -42,11 +42,11 @@
   
     
   
-   <!-- ECMS menu action for office online. -->
+   <!-- ECMS menu action for editor buttons. -->
   <external-component-plugins>
     <target-component>org.exoplatform.webui.ext.UIExtensionManager</target-component>
     <component-plugin>
-      <name>Add Office Online Actions</name>
+      <name>Add Editor Buttons Actions</name>
       <set-method>registerUIExtensionPlugin</set-method>
       <type>org.exoplatform.webui.ext.UIExtensionPlugin</type>
       <init-params>

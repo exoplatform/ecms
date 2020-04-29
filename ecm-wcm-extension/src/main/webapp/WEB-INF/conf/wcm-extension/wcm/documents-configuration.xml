@@ -34,10 +34,16 @@
             <field name="patterns">
               <collection type="java.util.ArrayList" item-type="java.lang.String">
                 <value>
-                  <string>.*/documents.*</string>
+                  <string>/intranet/drives.*</string>
                 </value>
-                 <value>
-                  <string>.*/drives.*</string>
+                <value>
+                  <string>/dw/drives.*</string>
+                </value>
+                <value>
+                  <string>/g/.*/documents.*</string>
+                </value>
+                <value>
+                  <string>/g/.*/drives.*</string>
                 </value>
               </collection>
             </field>
