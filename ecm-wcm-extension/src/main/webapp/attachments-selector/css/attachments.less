@@ -635,6 +635,20 @@
         }
       }
 
+      .foldersFilesSelectorAlert {
+        margin: 0 3%;
+      }
+
+      .fade-enter-active,
+      .fade-leave-active {
+        transition: opacity 1s
+      }
+
+      .fade-enter,
+      .fade-leave-active {
+        opacity: 0
+      }
+
       .contentBody::-webkit-scrollbar-thumb  {
         background: #578dc9;
         border-radius: 3px;
@@ -660,6 +674,7 @@
       .contentBody {
         height: 86%;
         overflow-y: auto;
+
 
         .selectionBox {
           display: flex;
@@ -708,6 +723,7 @@
                 color: #333;
               }
             }
+
             .newFolderInput {
               width: auto;
               height: 16px;
@@ -748,6 +764,50 @@
             &.selected {
               border-radius: 5px;
               background-color: #E1E8EE;
+            }
+          }
+
+          #folderActionsMenu {
+            background: #FFF;
+            display: block;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            position: fixed;
+            min-width: auto;
+            border: none;
+            box-shadow: 1px 1px 5px 1px #d2d2d2;
+
+            &:focus {
+              outline: none;
+            }
+
+            .folderActionsMenuItem {
+              border-bottom: 1px solid #E0E0E0;
+              margin: 0;
+              cursor: pointer;
+              display: block;
+              text-align: left;
+              padding: 10px;
+
+              &:last-child {
+                border-bottom: none;
+              }
+              i {
+                margin-right: 5px;
+                width: 20px;
+              }
+              &:hover {
+                background: #578dc9;
+                color: #fff;
+                i {
+                  color: #fff;
+                }
+              }
+
+              &.disabled {
+                cursor: not-allowed;
+              }
             }
           }
         }
