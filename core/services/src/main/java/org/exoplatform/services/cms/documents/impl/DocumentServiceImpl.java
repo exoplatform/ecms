@@ -46,8 +46,6 @@ import org.gatein.api.site.SiteId;
 
 import org.exoplatform.commons.api.settings.SettingService;
 import org.exoplatform.commons.utils.CommonsUtils;
-import org.exoplatform.container.ExoContainerContext;
-import org.exoplatform.container.PortalContainer;
 import org.exoplatform.container.component.ComponentPlugin;
 import org.exoplatform.container.xml.PortalContainerInfo;
 import org.exoplatform.portal.config.UserPortalConfig;
@@ -65,8 +63,6 @@ import org.exoplatform.services.cms.documents.DocumentService;
 import org.exoplatform.services.cms.documents.NewDocumentTemplate;
 import org.exoplatform.services.cms.documents.NewDocumentTemplatePlugin;
 import org.exoplatform.services.cms.documents.NewDocumentTemplateProvider;
-import org.exoplatform.services.cms.documents.cometd.CometdConfig;
-import org.exoplatform.services.cms.documents.cometd.CometdDocumentsService;
 import org.exoplatform.services.cms.documents.exception.DocumentEditorProviderNotFoundException;
 import org.exoplatform.services.cms.documents.exception.DocumentExtensionNotSupportedException;
 import org.exoplatform.services.cms.documents.model.Document;
@@ -95,9 +91,7 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.social.core.manager.IdentityManager;
 import org.exoplatform.social.core.space.model.Space;
 import org.exoplatform.social.core.space.spi.SpaceService;
-import org.exoplatform.web.application.JavascriptManager;
 import org.exoplatform.webui.application.WebuiRequestContext;
-import org.exoplatform.ws.frameworks.json.impl.JsonException;
 
 /**
  * Created by The eXo Platform SAS Author : eXoPlatform exo@exoplatform.com Mar
@@ -161,6 +155,7 @@ public class DocumentServiceImpl implements DocumentService {
     this.settingService = settingService;
     this.identityManager = identityManager;
     this.editorsId = idGenerator.generateStringID(this);
+    EditorProvidersHelper.init(this);
   }
 
   @Override

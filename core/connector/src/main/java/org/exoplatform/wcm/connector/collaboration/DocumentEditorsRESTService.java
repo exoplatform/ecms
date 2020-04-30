@@ -17,6 +17,7 @@
 package org.exoplatform.wcm.connector.collaboration;
 
 import java.util.List;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import javax.annotation.security.RolesAllowed;
@@ -41,6 +42,8 @@ import org.exoplatform.services.cms.documents.DocumentEditorProvider;
 import org.exoplatform.services.cms.documents.DocumentService;
 import org.exoplatform.services.cms.documents.exception.DocumentEditorProviderNotFoundException;
 import org.exoplatform.services.cms.documents.exception.PermissionValidationException;
+import org.exoplatform.services.cms.documents.impl.EditorProvidersHelper;
+import org.exoplatform.services.cms.documents.impl.EditorProvidersHelper.ProviderInfo;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.organization.Group;
@@ -254,33 +257,14 @@ public class DocumentEditorsRESTService implements ResourceContainer {
                               @FormParam("fileId") String fileId,
                               @FormParam("workspace") String workspace) {
     org.exoplatform.services.security.Identity identity = ConversationState.getCurrent().getIdentity();
-    String preferedProvider = getPreferedEditor(identity.getUserId(), fileId, workspace);
-    String currentProvider = getCurrentEditor(fileId, workspace);
-    List<ProviderInfo> providersInfo = documentService.getDocumentEditorProviders()
-                                                      .stream()
-                                                      .filter(provider -> provider.isAvailableForUser(identity))
-                                                      .map(provider -> {
-                                                        try {
-                                                          Object editorSettings = provider.initPreview(fileId,
-                                                                                                       workspace,
-                                                                                                       uriInfo.getRequestUri(),
-                                                                                                       request.getLocale());
-                                                          boolean prefered = provider.getProviderName().equals(preferedProvider);
-                                                          boolean current = provider.getProviderName().equals(currentProvider);
-                                                          return new ProviderInfo(provider.getProviderName(),
-                                                                                  editorSettings,
-                                                                                  prefered,
-                                                                                  current);
-                                                        } catch (Exception e) {
-                                                          LOG.error("Cannot init preview for provider "
-                                                              + provider.getProviderName(), e);
-                                                          return null;
-                                                        }
-                                                      })
-                                                      .filter(providerInfo -> providerInfo != null)
-                                                      .collect(Collectors.toList());
-
-
+    List<DocumentEditorProvider> providers = documentService.getDocumentEditorProviders();
+    List<ProviderInfo> providersInfo = EditorProvidersHelper.getInstance()
+                                                           .initPreview(providers,
+                                                                        identity,
+                                                                        fileId,
+                                                                        workspace,
+                                                                        uriInfo.getRequestUri(),
+                                                                        request.getLocale());
     return Response.ok().entity(providersInfo).build();
   }
 
@@ -351,109 +335,4 @@ public class DocumentEditorsRESTService implements ResourceContainer {
     return new DocumentEditorData(provider.getProviderName(), provider.isActive(), permissions);
   }
 
-  /**
-   * Gets the prefered editor.
-   *
-   * @param userId the user id
-   * @param fileId the file id
-   * @param workspace the workspace
-   * @return the prefered editor
-   */
-  protected String getPreferedEditor(String userId, String fileId, String workspace) {
-    String preferedProvider = null;
-    try {
-      preferedProvider = documentService.getPreferedEditor(userId, fileId, workspace);
-    } catch (RepositoryException e) {
-      LOG.error("Cannot get prefered editor for fileId " + fileId, e);
-    }
-    return preferedProvider;
-  }
-  
-  /**
-   * Gets the current editor.
-   *
-   * @param fileId the file id
-   * @param workspace the workspace
-   * @return the current editor
-   */
-  protected String getCurrentEditor(String fileId, String workspace) {
-    String currentProvider = null;
-    try {
-      currentProvider = documentService.getCurrentDocumentProvider(fileId, workspace);
-    } catch (RepositoryException e) {
-      LOG.error("Cannot get current editor for fileId " + fileId, e);
-    }
-    return currentProvider;
-  }
-
-  /**
-   * The Class ProviderInfo.
-   */
-  public static class ProviderInfo {
-
-    /** The provider. */
-    private final String  provider;
-
-    /** The settings. */
-    private final Object  settings;
-
-    /** The is prefered. */
-    private final boolean isPrefered;
-    
-    /** The is current. */
-    private final boolean isCurrent;
-
-    /**
-     * Instantiates a new provider info.
-     *
-     * @param provider the provider
-     * @param settings the settings
-     * @param isPrefered the isPrefered
-     * @param isCurrent the is current
-     */
-    public ProviderInfo(String provider, Object settings, boolean isPrefered, boolean isCurrent) {
-      this.provider = provider;
-      this.settings = settings;
-      this.isPrefered = isPrefered;
-      this.isCurrent = isCurrent;
-    }
-
-    /**
-     * Gets the provider.
-     *
-     * @return the provider
-     */
-    public String getProvider() {
-      return provider;
-    }
-
-    /**
-     * Gets the settings.
-     *
-     * @return the settings
-     */
-    public Object getSettings() {
-      return settings;
-    }
-
-    /**
-     * Checks if is prefered.
-     *
-     * @return true, if is prefered
-     */
-    public boolean isPrefered() {
-      return isPrefered;
-    }
-
-    /**
-     * Checks if is current.
-     *
-     * @return true, if is current
-     */
-    public boolean isCurrent() {
-      return isCurrent;
-    }
-    
-    
-  }
 }
