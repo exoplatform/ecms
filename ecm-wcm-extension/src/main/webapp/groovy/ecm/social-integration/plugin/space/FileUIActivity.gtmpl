@@ -260,7 +260,7 @@ public void addActivityTimeLine(String ownerName, String ownerUri, String ownerA
     uiform.begin();
     def viewerId = Utils.getViewerIdentity().getId();
 %>
-    <div class="activityStream uiContentActivity fileActivity multiFilesActivity" id="activityContainer${activity.id}">
+    <div class="activityStream uiActivityStreamWrapper uiContentActivity fileActivity multiFilesActivity" id="activityContainer${activity.id}">
     <div class="boxContainer" id="boxContainer">
         <div id="ContextBox${activity.id}"class="uiBox contentBox">
             <div id="ActivityContextBox${activity.id}">
