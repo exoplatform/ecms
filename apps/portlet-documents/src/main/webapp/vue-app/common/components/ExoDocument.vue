@@ -6,7 +6,7 @@
       </v-icon>
     </v-list-item-icon>
     <v-list-item-content>
-      <v-list-item-title v-html="document.title"/>
+      <v-list-item-title :title="document.title" v-html="document.title"/>
       <v-list-item-subtitle>
         <div :title="absoluteDateModified()" class="color-title">
           {{ relativeDateModified }}
