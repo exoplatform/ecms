@@ -603,6 +603,19 @@
                     </field>
                   </object>
                 </value>
+                <value>
+                  <object type="org.exoplatform.services.jcr.impl.ext.action.ActionConfiguration">
+                    <field name="eventTypes">
+                      <string>addNode</string>
+                    </field>
+                    <field name="workspace">
+                      <string>collaboration</string>
+                    </field>
+                    <field name="actionClassName">
+                      <string>org.exoplatform.services.cms.jcrext.AddNodeNameAction</string>
+                    </field>
+                  </object>
+                </value>
               </collection>
             </field>
           </object>
@@ -610,7 +623,7 @@
       </init-params>
     </component-plugin>
   </external-component-plugins>
-  
+
    <external-component-plugins>
     <target-component>org.exoplatform.services.cms.drives.ManageDriveService</target-component>    
 
@@ -962,6 +975,4 @@
       </init-params>
     </component-plugin>
   </external-component-plugins>
-	
-  
 </configuration>

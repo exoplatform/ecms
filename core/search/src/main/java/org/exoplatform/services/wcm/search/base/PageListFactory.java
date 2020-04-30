@@ -36,6 +36,8 @@ import javax.jcr.*;
 import javax.jcr.query.*;
 import java.util.*;
 
+import static org.exoplatform.services.cms.folksonomy.NewFolksonomyService.EXO_TAGGED;
+
 /**
  * Created by The eXo Platform SAS
  * Author : Nguyen Anh Vu
@@ -223,12 +225,20 @@ public class PageListFactory {
       while (nodeIterator.hasNext()) {
         Row row = rowIterator.nextRow();
         Node node = nodeIterator.nextNode();
-        if(node.getPath().contains("/tags/") && node != null) {
-            List<Node> tagedNode = newFolksonomyService.getAllDocumentsByTag(node.getPath(), session.getWorkspace().getName(), sessionProvider);
-            for (Node taggedNode : tagedNode) {
-              node = taggedNode;
+        if(node.isNodeType(EXO_TAGGED)) {
+            List<Node> taggedNode = newFolksonomyService.getAllDocumentsByTag(node.getPath(), session.getWorkspace().getName(), sessionProvider);
+            for (Node item : taggedNode) {
+              if (filter != null) {
+                item = filter.filterNodeToDisplay(item);
+              }
+              if (dataCreator != null && item != null) {
+                E data = dataCreator.createData(item, row, null);
+                if (data != null) {
+                  dataList.add(data);
+                }
+              }
             }
-          }
+          } else {
           if (filter != null) {
             node = filter.filterNodeToDisplay(node);
           }
@@ -238,6 +248,7 @@ public class PageListFactory {
               dataList.add(data);
             }
           }
+        }
       }
     } catch (Exception e) {
       if (LOG.isWarnEnabled()) {
