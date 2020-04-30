@@ -59,6 +59,13 @@
             }
           ).finally(() => this.loading = false);
         }
+        if (this.type === 'recentSpaces') {
+          documentsService.getRecentSpacesDocuments(this.limit).then(
+            documents => { 
+              this.documents = documents;
+            }
+          ).finally(() => this.loading = false);
+        }
         if (this.type === 'favorite') {
           documentsService.getFavoriteDocuments(this.limit).then(
             documents => { 
