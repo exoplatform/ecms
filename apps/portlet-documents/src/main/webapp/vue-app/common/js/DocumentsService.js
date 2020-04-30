@@ -26,6 +26,11 @@ export function getRecentDocuments(limit) {
   return getDocuments(url);
 }
 
+export function getRecentSpacesDocuments(limit) {
+  const url = `/portal/rest/documents/recentSpaces?limit=${limit}`;
+  return getDocuments(url);
+}
+
 export function getFavoriteDocuments(limit) {
   const url = `/portal/rest/documents/favorite?limit=${limit}`;
   return getDocuments(url);
