@@ -87,7 +87,7 @@ export default {
           console.log(data);
           this.$emit("updateProgress", { progress: fullProgress });
           // this.openDriveFolder(data.drive.path, data.drive.title);
-          const latency = 1000;
+          const latency = 3000;
           setTimeout(() => { this.$emit("updateProgress", { progress: null }); }, latency);
           this.connectingProvider = "";
           this.showCloudDrawer = false;
