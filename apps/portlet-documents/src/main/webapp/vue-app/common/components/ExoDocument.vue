@@ -6,7 +6,7 @@
       </v-icon>
     </v-list-item-icon>
     <v-list-item-content>
-      <v-list-item-title :title="document.title" v-html="document.title"/>
+      <v-list-item-title :title="decoder(document.title)" v-html="document.title"/>
       <v-list-item-subtitle>
         <div :title="absoluteDateModified()" class="color-title">
           {{ relativeDateModified }}
@@ -102,6 +102,11 @@
       absoluteDateModified(options) {
         const lang = eXo && eXo.env && eXo.env.portal && eXo.env.portal.language || 'en';
         return new Date(this.document.dateModified.time).toLocaleString(lang, options).split("/").join("-");
+      },
+      decoder(str) {
+        const text = document.createElement('textarea');
+        text.innerHTML = str;
+        return text.value;
       },
       openPreview() {
         documentPreview.init({
