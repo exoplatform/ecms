@@ -17,7 +17,6 @@
 package org.exoplatform.ecm.webui.component.explorer.documents;
 
 import java.util.List;
-import java.util.function.Function;
 
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
