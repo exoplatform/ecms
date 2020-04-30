@@ -65,7 +65,6 @@ import org.exoplatform.ws.frameworks.json.impl.JsonGeneratorImpl;
 
 /**
  * The Class DocumentEditorsRESTService is REST endpoint for working with editable documents.
- * Its used to set prefered editor for specific user/document.
  *
  */
 @Path("/documents/editors")
@@ -83,8 +82,8 @@ public class DocumentEditorsRESTService implements ResourceContainer {
   /** The Constant PERMISSION_NOT_VALID. */
   private static final String   PERMISSION_NOT_VALID         = "PermissionNotValid";
 
-  /** The Constant CANNOT_SAVE_PREFFERED_EDITOR. */
-  private static final String   CANNOT_SAVE_PREFFERED_EDITOR = "CannotSavePrefferedEditor";
+  /** The Constant CANNOT_SAVE_PREFERRED_EDITOR. */
+  private static final String   CANNOT_SAVE_PREFERRED_EDITOR = "CannotSavePreferredEditor";
 
   /** The Constant SELF. */
   private static final String   SELF                         = "self";
@@ -207,7 +206,7 @@ public class DocumentEditorsRESTService implements ResourceContainer {
   }
 
   /**
-   * Sets the prefered editor for specific user/document.
+   * Sets the preferred editor for specific user/document.
    *
    * @param fileId the file id
    * @param userId the user id
@@ -216,23 +215,23 @@ public class DocumentEditorsRESTService implements ResourceContainer {
    * @return the response
    */
   @POST
-  @Path("/prefered/{fileId}")
+  @Path("/preferred/{fileId}")
   @RolesAllowed("users")
-  public Response preferedEditor(@PathParam("fileId") String fileId,
+  public Response preferredEditor(@PathParam("fileId") String fileId,
                                  @FormParam("userId") String userId,
                                  @FormParam("provider") String provider,
                                  @FormParam("workspace") String workspace) {
     try {
-      documentService.savePreferedEditor(userId, provider, fileId, workspace);
+      documentService.savePreferredEditor(userId, provider, fileId, workspace);
     } catch (AccessDeniedException e) {
-      LOG.error("Access denied to set prefered editor for user {} and node {}: {}", userId, fileId, e.getMessage());
+      LOG.error("Access denied to set preferred editor for user {} and node {}: {}", userId, fileId, e.getMessage());
       return Response.status(Status.INTERNAL_SERVER_ERROR)
-                     .entity(new ErrorMessage("Access denied error.", CANNOT_SAVE_PREFFERED_EDITOR))
+                     .entity(new ErrorMessage("Access denied error.", CANNOT_SAVE_PREFERRED_EDITOR))
                      .build();
     } catch (RepositoryException e) {
-      LOG.error("Cannot set prefered editor for user {} and node {}: {}", userId, fileId, e.getMessage());
+      LOG.error("Cannot set preferred editor for user {} and node {}: {}", userId, fileId, e.getMessage());
       return Response.status(Status.INTERNAL_SERVER_ERROR)
-                     .entity(new ErrorMessage(e.getMessage(), CANNOT_SAVE_PREFFERED_EDITOR))
+                     .entity(new ErrorMessage(e.getMessage(), CANNOT_SAVE_PREFERRED_EDITOR))
                      .build();
     }
     return Response.ok().build();

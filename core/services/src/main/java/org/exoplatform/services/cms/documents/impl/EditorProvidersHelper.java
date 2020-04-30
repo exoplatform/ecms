@@ -108,18 +108,18 @@ public class EditorProvidersHelper {
                                                    String fileId,
                                                    String workspace,
                                                    Function<DocumentEditorProvider, Object> initFunction) {
-    String preferedProvider = getPreferedEditor(identity.getUserId(), fileId, workspace);
+    String preferredProvider = getPrefferedEditor(identity.getUserId(), fileId, workspace);
     String currentProvider = getCurrentEditor(fileId, workspace);
     List<ProviderInfo> providersInfo = providers.stream()
                                                 .filter(provider -> provider.isAvailableForUser(identity))
                                                 .map(provider -> {
                                                   try {
                                                     Object editorSettings = initFunction.apply(provider);
-                                                    boolean prefered = provider.getProviderName().equals(preferedProvider);
+                                                    boolean preffered = provider.getProviderName().equals(preferredProvider);
                                                     boolean current = provider.getProviderName().equals(currentProvider);
                                                     return new ProviderInfo(provider.getProviderName(),
                                                                             editorSettings,
-                                                                            prefered,
+                                                                            preffered,
                                                                             current);
                                                   } catch (Exception e) {
                                                     LOG.error("Cannot init provider " + provider.getProviderName(), e);
@@ -146,21 +146,21 @@ public class EditorProvidersHelper {
   }
 
   /**
-   * Gets the prefered editor.
+   * Gets the preffered editor.
    *
    * @param userId the user id
    * @param fileId the file id
    * @param workspace the workspace
-   * @return the prefered editor
+   * @return the preffered editor
    */
-  protected String getPreferedEditor(String userId, String fileId, String workspace) {
-    String preferedProvider = null;
+  protected String getPrefferedEditor(String userId, String fileId, String workspace) {
+    String prefferedProvider = null;
     try {
-      preferedProvider = documentService.getPreferedEditor(userId, fileId, workspace);
+      prefferedProvider = documentService.getPreferredEditor(userId, fileId, workspace);
     } catch (RepositoryException e) {
-      LOG.error("Cannot get prefered editor for fileId " + fileId, e);
+      LOG.error("Cannot get preffered editor for fileId " + fileId, e);
     }
-    return preferedProvider;
+    return prefferedProvider;
   }
 
   /**
@@ -191,8 +191,8 @@ public class EditorProvidersHelper {
     /** The settings. */
     private final Object  settings;
 
-    /** The is prefered. */
-    private final boolean isPrefered;
+    /** The is preffered. */
+    private final boolean isPreferred;
 
     /** The is current. */
     private final boolean isCurrent;
@@ -202,13 +202,13 @@ public class EditorProvidersHelper {
      *
      * @param provider the provider
      * @param settings the settings
-     * @param isPrefered the isPrefered
+     * @param isPreferred the isPreferred
      * @param isCurrent the is current
      */
-    public ProviderInfo(String provider, Object settings, boolean isPrefered, boolean isCurrent) {
+    public ProviderInfo(String provider, Object settings, boolean isPreferred, boolean isCurrent) {
       this.provider = provider;
       this.settings = settings;
-      this.isPrefered = isPrefered;
+      this.isPreferred = isPreferred;
       this.isCurrent = isCurrent;
     }
 
@@ -230,13 +230,14 @@ public class EditorProvidersHelper {
       return settings;
     }
 
+    
     /**
-     * Checks if is prefered.
+     * Checks if is preffered.
      *
-     * @return true, if is prefered
+     * @return true, if is preffered
      */
-    public boolean isPrefered() {
-      return isPrefered;
+    public boolean isPreferred() {
+      return isPreferred;
     }
 
     /**

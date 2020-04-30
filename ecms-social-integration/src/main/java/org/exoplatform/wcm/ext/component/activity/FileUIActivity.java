@@ -1402,7 +1402,7 @@ public class FileUIActivity extends BaseUIActivity{
             LOG.error("Cannot init activity from plugin {}, {}", provider.getProviderName(), e.getMessage());
           }
         });
-        String prefferedProvider = documentService.getPreferedEditor(identity.getUserId(),
+        String preferredProvider = documentService.getPreferredEditor(identity.getUserId(),
                                                                      node.getUUID(),
                                                                      node.getSession().getWorkspace().getName());
         String currentProvider = documentService.getCurrentDocumentProvider(node.getUUID(),
@@ -1411,7 +1411,7 @@ public class FileUIActivity extends BaseUIActivity{
                                                               .index("0")
                                                               .fileId(node.getUUID())
                                                               .workspace(node.getSession().getWorkspace().getName())
-                                                              .prefferedProvider(prefferedProvider)
+                                                              .preferredProvider(preferredProvider)
                                                               .currentProvider(currentProvider)
                                                               .build();
         require.addScripts("editorbuttons.initActivityButtons(" + config.toJSON() + ");");
@@ -1438,8 +1438,8 @@ public class FileUIActivity extends BaseUIActivity{
     /** The workspace. */
     protected final String workspace;
 
-    /** The preffered provider. */
-    protected final String prefferedProvider;
+    /** The preferred provider. */
+    protected final String preferredProvider;
 
     /** The current provider. */
     protected final String currentProvider;
@@ -1454,7 +1454,7 @@ public class FileUIActivity extends BaseUIActivity{
       this.index = builder.index;
       this.fileId = builder.fileId;
       this.workspace = builder.workspace;
-      this.prefferedProvider = builder.prefferedProvider;
+      this.preferredProvider = builder.preferredProvider;
       this.currentProvider = builder.currentProvider;
     }
 
@@ -1504,12 +1504,12 @@ public class FileUIActivity extends BaseUIActivity{
     }
 
     /**
-     * Gets the preffered provider.
+     * Gets the preferred provider.
      *
-     * @return the preffered provider
+     * @return the preferred provider
      */
-    public String getPrefferedProvider() {
-      return prefferedProvider;
+    public String getPreferredProvider() {
+      return preferredProvider;
     }
 
     /**
@@ -1539,8 +1539,8 @@ public class FileUIActivity extends BaseUIActivity{
       /** The workspace. */
       protected String workspace;
 
-      /** The preffered provider. */
-      protected String prefferedProvider;
+      /** The preferred provider. */
+      protected String preferredProvider;
 
       /** The current editor. */
       protected String currentProvider;
@@ -1592,11 +1592,11 @@ public class FileUIActivity extends BaseUIActivity{
       /**
        * Preffered editor.
        *
-       * @param prefferedProvider the preffered provider
+       * @param preferredProvider the preferred provider
        * @return the inits the config builder
        */
-      protected InitConfigBuilder prefferedProvider(String prefferedProvider) {
-        this.prefferedProvider = prefferedProvider;
+      protected InitConfigBuilder preferredProvider(String preferredProvider) {
+        this.preferredProvider = preferredProvider;
         return this;
       }
 

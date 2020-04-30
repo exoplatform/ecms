@@ -91,23 +91,23 @@
     };
 
     /**
-     * Saves prefered provider.
+     * Saves preferred provider.
      * 
      */
-    var savePrefferedProvider = function(fileId, provider) {
+    var savePreferredProvider = function(fileId, provider) {
       $.post({
         async: true,
         type: "POST",
-        url: prefixUrl + "/portal/rest/documents/editors/prefered/" + fileId,
+        url: prefixUrl + "/portal/rest/documents/editors/preferred/" + fileId,
         data: {
           userId: eXo.env.portal.userName,
           provider: provider,
           workspace: currentWorkspace
         }
       }).then(function(result) {
-        log("Prefered provider " + provider + " saved. " + result);
+        log("Preferred provider " + provider + " saved. " + result);
       }).catch(function(xhr, status, error) {
-        log("Cannot save prefered provider " + provider + ": " + status + " " + error);
+        log("Cannot save preferred provider " + provider + ": " + status + " " + error);
       });
     };
 
@@ -130,14 +130,14 @@
     /**
      * Creates the dropdown with editor buttons
      */
-    var getButtonsContainer = function(fileId, buttons, preferedProvider, currentProvider, dropclass) {
+    var getButtonsContainer = function(fileId, buttons, preferredProvider, currentProvider, dropclass) {
       if (!buttons) {
         return;
       }
       // Sort buttons in user prefference order
-      if (preferedProvider != null) {
+      if (preferredProvider != null) {
         buttons.forEach(function(item, i) {
-          if (item.provider === preferedProvider) {
+          if (item.provider === preferredProvider) {
             buttons.splice(i, 1);
             buttons.unshift(item);
           }
@@ -160,8 +160,8 @@
       $container.append($btn);
       let provider = buttons[0].provider;
       $btn.click(function() {
-        log("prefered provider: " + provider);
-        savePrefferedProvider(fileId, provider);
+        log("preferred provider: " + provider);
+        savePreferredProvider(fileId, provider);
       });
 
       // Create pulldown with editor buttons
@@ -177,7 +177,7 @@
           let provider = buttons[i].provider;
           // Save user choice
           $btn.click(function() {
-            savePrefferedProvider(fileId, provider);
+            savePreferredProvider(fileId, provider);
           });
           $btn.addClass("editorButton");
           $btn.attr('data-provider', buttons[i].provider);
@@ -253,15 +253,15 @@
       // reset buttons
       buttonsFns = [];
       var providersLoader = $.Deferred();
-      var preferedProvider;
+      var preferredProvider;
       var currentProvider;
       providersInfo.forEach(function(providerInfo, i, arr) {
         loadProviderModule(providerInfo.provider).done(function(module) {
           // The provider's module will call addCreateButtonFn() and 
           // add the button-function to buttonsFns array
           module.initExplorer(providerInfo.settings);
-          if (providerInfo.prefered) {
-            preferedProvider = providerInfo.provider;
+          if (providerInfo.preferred) {
+            preferredProvider = providerInfo.provider;
           }
           if (providerInfo.current) {
             currentProvider = providerInfo.provider;
@@ -274,7 +274,7 @@
       });
       providersLoader.done(function() {
         if (buttonsFns.length) {
-          var $pulldown = getButtonsContainer(fileId, buttonsFns, preferedProvider, currentProvider, 'dropdown');
+          var $pulldown = getButtonsContainer(fileId, buttonsFns, preferredProvider, currentProvider, 'dropdown');
           $placeholder.replaceWith($pulldown);
           if (fileId != explorerFileId) {
             // We need unsubscribe from previous doc
@@ -302,7 +302,7 @@
         return;
       }
       var $target = $("#activityContainer" + config.activityId).find("div[id^='ActivityContextBox'] > .actionBar .statusAction.pull-left");
-      $target.append(getButtonsContainer(config.fileId, buttons, config.prefferedProvider, config.currentProvider, 'dropdown'));
+      $target.append(getButtonsContainer(config.fileId, buttons, config.preferredProvider, config.currentProvider, 'dropdown'));
       editorsupport.addListener(EDITOR_BUTTONS, config.fileId, eventsHandler);
     };
 
@@ -317,15 +317,15 @@
       var buttonsLoader = $.Deferred();
       initProvidersPreview(fileId, workspace).then(function(data) {
         var providersLoader = $.Deferred();
-        var preferedProvider;
+        var preferredProvider;
         var currentProvider;
         data.forEach(function(providerInfo, i, arr) {
           loadProviderModule(providerInfo.provider).done(function(module) {
             // The provider's module will call addCreateButtonFn() and 
             // add the button-function to buttonsFns array
             module.initPreview(providerInfo.settings);
-            if (providerInfo.prefered) {
-              preferedProvider = providerInfo.provider;
+            if (providerInfo.preferred) {
+              preferredProvider = providerInfo.provider;
             }
             if (providerInfo.current) {
               currentProvider = providerInfo.provider;
@@ -338,7 +338,7 @@
         });
         providersLoader.done(function() {
           if (buttonsFns.length) {
-            var $pulldown = getButtonsContainer(fileId, buttonsFns, preferedProvider, currentProvider, dropclass);
+            var $pulldown = getButtonsContainer(fileId, buttonsFns, preferredProvider, currentProvider, dropclass);
             buttonsLoader.resolve($pulldown);
             editorsupport.addListener(EDITOR_BUTTONS, fileId, eventsHandler);
           }

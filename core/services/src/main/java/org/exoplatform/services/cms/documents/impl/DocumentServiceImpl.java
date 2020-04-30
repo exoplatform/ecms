@@ -590,18 +590,18 @@ public class DocumentServiceImpl implements DocumentService {
    * {@inheritDoc}
    */
   @Override
-  public void savePreferedEditor(String userId, String provider, String uuid, String workspace) throws RepositoryException {
+  public void savePreferredEditor(String userId, String provider, String uuid, String workspace) throws RepositoryException {
     Node node = nodeByUUID(uuid, workspace);
     if (node.canAddMixin(EXO_DOCUMENT)) {
       node.addMixin(EXO_DOCUMENT);
     }
-    Node userPrefferences;
+    Node userPreferences;
     if (!node.hasNode(userId)) {
-      userPrefferences = node.addNode(userId, EXO_USER_PREFFERENCES);
+      userPreferences = node.addNode(userId, EXO_USER_PREFFERENCES);
     } else {
-      userPrefferences = node.getNode(userId);
+      userPreferences = node.getNode(userId);
     }
-    userPrefferences.setProperty(EXO_PREFFERED_EDITOR, provider);
+    userPreferences.setProperty(EXO_PREFFERED_EDITOR, provider);
     node.save();
   }
 
@@ -609,12 +609,12 @@ public class DocumentServiceImpl implements DocumentService {
    * {@inheritDoc}
    */
   @Override
-  public String getPreferedEditor(String userId, String uuid, String workspace) throws RepositoryException {
+  public String getPreferredEditor(String userId, String uuid, String workspace) throws RepositoryException {
     Node node = nodeByUUID(uuid, workspace);
     if (node.hasNode(userId)) {
-      Node userPrefferences = node.getNode(userId);
-      if (userPrefferences.hasProperty(EXO_PREFFERED_EDITOR)) {
-        return userPrefferences.getProperty(EXO_PREFFERED_EDITOR).getString();
+      Node userPreferences = node.getNode(userId);
+      if (userPreferences.hasProperty(EXO_PREFFERED_EDITOR)) {
+        return userPreferences.getProperty(EXO_PREFFERED_EDITOR).getString();
       }
     }
     return null;

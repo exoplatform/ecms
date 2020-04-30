@@ -143,18 +143,18 @@ public interface DocumentService {
   public void addDocumentMetadataPlugin(ComponentPlugin plugin);
   
   /**
-   * Gets prefered editor provider for specified file and user.
+   * Gets preferred editor provider for specified file and user.
    *
    * @param userId the userId
    * @param uuid the uuid
    * @param workspace the workspace
-   * @return the preffered editor (provider)
+   * @return the preferred editor (provider)
    * @throws RepositoryException the exception
    */
-  public String getPreferedEditor(String userId, String uuid, String workspace) throws RepositoryException;
+  public String getPreferredEditor(String userId, String uuid, String workspace) throws RepositoryException;
   
   /**
-   * Sets preffered editor provider for specified file and user.
+   * Sets preferred editor provider for specified file and user.
    *
    * @param userId the userId
    * @param provider the editor provider
@@ -162,7 +162,7 @@ public interface DocumentService {
    * @param workspace the workspace
    * @throws RepositoryException the exception
    */
-  public void savePreferedEditor(String userId, String provider, String uuid, String workspace) throws RepositoryException;
+  public void savePreferredEditor(String userId, String provider, String uuid, String workspace) throws RepositoryException;
 
   /**
    * Gets the editor providers.
