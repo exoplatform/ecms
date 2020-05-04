@@ -38,7 +38,7 @@
       <SharedSite>Ibinahagi na Site</SharedSite>
       <PersonalDocuments>Pansariling mga Dokumento</PersonalDocuments>
       <UserDocuments>{0} mga Dokumento</UserDocuments>
-      <Collaboration>Pakikipagtulungan</Collaboration>
+      <Collaboration>Ang Pakikipagtulungan</Collaboration>
       <Trash>Basura</Trash>
     </label>
   </Drives>
@@ -46,7 +46,7 @@
   <Views>
     <label>
       <wcm-view>Ang web</wcm-view>
-      <admin-view>Nangangasiwa</admin-view>
+      <admin-view>Ang Admin</admin-view>
       <icon-view>Mga Icon</icon-view>
       <thumbails-view>Mga Thumbnail</thumbails-view>
       <list-view>Listahan</list-view>
@@ -88,7 +88,7 @@
       <UIContentBrowsePanelMulti>Nilalaman Browser</UIContentBrowsePanelMulti>
       <UIContentBrowsePanelFolder>Ang folder ng Browser</UIContentBrowsePanelFolder>
       <UIContentSearchForm>Ang form ng Paghahanap ng Nilalaman</UIContentSearchForm>
-      <UIContentSearchResult>Resulta ng paghahanap</UIContentSearchResult>
+      <UIContentSearchResult>Search Result</UIContentSearchResult>
       <UIContentViewer>I-preview ang Nilalaman</UIContentViewer>
       <WebContentMetadataPopup>Taga-pili ng Ari-arian</WebContentMetadataPopup>
       <WebContentNodeTypePopup>Taga-pili ng Nodetype</WebContentNodeTypePopup>
@@ -100,7 +100,7 @@
     <selectBoxValues>
       <FilterBy>Salain ng</FilterBy>
       <WebContent>Nilalaman ng web</WebContent>
-      <DMSDocument>Dokumento</DMSDocument>
+      <DMSDocument>Ang Dokumento</DMSDocument>
       <Media>Mamamahayag</Media>
     </selectBoxValues>
     <msg>
@@ -112,7 +112,7 @@
     <selectBoxValues>
       <FilterBy>Salain ng</FilterBy>
       <WebContent>Nilalaman ng web</WebContent>
-      <DMSDocument>Dokumento</DMSDocument>
+      <DMSDocument>Ang Dokumento</DMSDocument>
       <Media>Mamamahayag</Media>
     </selectBoxValues>
   </UIContentBrowsePanelMulti>
@@ -141,8 +141,8 @@
   <UISelectedContentGrid>
     <label>
       <name>#{word.name}</name>
-      <add>Magdagdag</add>
-      <delete>Burahin</delete>
+      <add>Add</add>
+      <delete>Delete</delete>
     </label>
     <msg>
       <no-content-found>Walang nilalaman na nakita.</no-content-found>
@@ -161,7 +161,7 @@
     <header>
       <name>#{word.name}</name>
       <publicationstate>Estado ng paglalathala</publicationstate>
-      <action>Aksyon</action>
+      <action>Action</action>
     </header>
     <msg>
       <child-not-found>Walang nilalaman na nakita</child-not-found>
@@ -172,7 +172,7 @@
     <header>
       <name>#{word.name}</name>
       <publicationstate>Estado ng paglalathala</publicationstate>
-      <action>Aksyon</action>
+      <action>Action</action>
     </header>
     <msg>
       <child-not-found>Walang folder na nakita</child-not-found>
@@ -187,7 +187,7 @@
       <Property>Ang Katangian</Property>
       <Contain>Naglalaman</Contain>
       <FromDate>Mula sa Petsa</FromDate>
-      <ToDate>Petsa Hanggang</ToDate>
+      <ToDate>Hanggang Petsa</ToDate>
       <DocumentType>Ang Uri ng dokumento</DocumentType>
     </title>
     <tooltip>
@@ -213,7 +213,7 @@
       <empty-doctype>Mangyaring pumili ng isang uri ng dokumento</empty-doctype>
       <empty-startDate>"Mula sa Petsa" ay kinakailangan</empty-startDate>
       <invalid-format>Hindi wastong petsa/oras ng format sa field na '{0}'.</invalid-format>
-      <invalid-date>"Petsa hanggang" ay dapat na sa huli "Mula sa Petsa"</invalid-date>
+      <invalid-date>"To Date" must be later than "From Date"</invalid-date>
       <invalid-startDate>"Mula sa Petsa" hindi dapat lumipas pa sa ngayon</invalid-startDate>
       <invalid-nodeType>Ang uri ng node na "{0}" ay hindi wasto. Mangyaring suriin muli.</invalid-nodeType>
       <invalid-keyword>Hindi balid ang keyword. Ang ilang mga character ay hindi suportado.</invalid-keyword>
@@ -228,7 +228,7 @@
 
   <UIContentPropertySelector>
     <action>
-      <Add>Magdagdag</Add>
+      <Add>Add</Add>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
@@ -239,7 +239,7 @@
 
   <WebContentNodeTypePopup>
     <title>
-      <UIContentNodeTypeSelector>Tagapili ng Uri ng Node</UIContentNodeTypeSelector>
+      <UIContentNodeTypeSelector>Ang Tagapili ng Node Type</UIContentNodeTypeSelector>
     </title>
   </WebContentNodeTypePopup>
 
@@ -252,14 +252,14 @@
 
   <UIContentSearchResult>
     <header>
-      <title>Pamagat</title>
-      <score>Puntos</score>
+      <title>Ang Pamagat</title>
+      <score>Score</score>
       <publicationstate>Estado ng paglalathala</publicationstate>
-      <action>Aksyon</action>
+      <action>Action</action>
     </header>
     <title>
       <Select>Pumili</Select>
-      <View>Tingnan</View>
+      <View>View</View>
     </title>
     <msg>
     <template-not-support>Hindi ma-preview itong nilalaman. Ang template ay hindi suportado</template-not-support>
@@ -282,7 +282,7 @@
 
   <UIPermissionManager>
     <label>
-      <UIPermissionInputSetWithAction>Pahintulot</UIPermissionInputSetWithAction>
+      <UIPermissionInputSetWithAction>Ang Permiso</UIPermissionInputSetWithAction>
       <UIAccessibleCheckboxInput>Tamang pag-access</UIAccessibleCheckboxInput>
       <UIEditableCheckboxInput>Baguhin ng Tama</UIEditableCheckboxInput>
     </label>
@@ -290,21 +290,21 @@
       <Save>#{word.save}</Save>
       <Clear>Malinaw</Clear>
       <title>
-        <Edit>Baguhin</Edit>
-        <Delete>Burahin</Delete>
+        <Edit>Edit</Edit>
+        <Delete>Delete</Delete>
       </title>
     </action>
   </UIPermissionManager>
 
   <UIPermissionManagerGrid>
     <header>
-      <owner>Pahintulot</owner>
+      <owner>Ang Permiso</owner>
       <accessible>Magagamit</accessible>
       <editable>Nae-edit</editable>
-      <action>Aksyon</action>
+      <action>Action</action>
     </header>
     <msg>
-      <confirm-delete-permission>Ikaw ba ay sigurado na gusto mong burahin itong pahintulot?</confirm-delete-permission>
+      <confirm-delete-permission>Sigurado kaba na gusto mong i-delete ang permisong ito?</confirm-delete-permission>
       <no-permission-remove>Wala kang pahintulot.</no-permission-remove>
       <access-denied>Tinanggihan ang pag-access.</access-denied>
       <node-locked>Ang landas ng elemento {0} o isa sa mga magulang nito ay nakakandado.</node-locked>
@@ -316,7 +316,7 @@
 
   <UIPermissionInputSetWithAction>
     <title>
-      <SelectUser>Pumili ng Gumagamit</SelectUser>
+      <SelectUser>Select User</SelectUser>
       <SelectMember>Pumili ng Myembro</SelectMember>
       <AddAny>Magdagdag ng Anumang Pahintulot</AddAny>
     </title>
@@ -330,20 +330,20 @@
 
   <UIGroupSelectorPopupWindow>
     <title>
-      <UIGroupMemberSelector>Tagapili ng Grupo</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Ang Tagapagpili ng Grupo</UIGroupMemberSelector>
     </title>
   </UIGroupSelectorPopupWindow>
 
   <UIGroupMemberSelector>
     <label>
-      <selectGroup>Pumili ng Grupo</selectGroup>
+      <selectGroup>Select Group</selectGroup>
       <selectMembership>Pumili ng Pagpapa-miyembro</selectMembership>
     </label>
   </UIGroupMemberSelector>
 
   <UIContentDialogPreference>
     <action>
-      <Back>Bumalik</Back>
+      <Back>Back</Back>
     </action>
   </UIContentDialogPreference>
 
@@ -382,11 +382,11 @@
   </UIWizardPageSelectLayoutForm>
 
   <Signin>
-    <welcome>Maligayang pagdating</welcome>
-    <login>Mag-login</login>
-    <logout>Mag-logout</logout>
-    <language>Baguhin ang Wika</language>
-    <register>Rehistro</register>
+    <welcome>Welcome</welcome>
+    <login>Login</login>
+    <logout>Logout</logout>
+    <language>Change Language</language>
+    <register>Register</register>
   </Signin>
   <UIDriveForm>
 <label>
@@ -397,11 +397,11 @@
   
   <ContentSelector>
     <title>
-      <PersonalDrives>Pansariling mga Drive</PersonalDrives>
-      <GeneralDrives>Pangkalahatang mga Drive</GeneralDrives>
-      <GroupDrives>Grupo ng mga Drive</GroupDrives>
+      <PersonalDrives>Personal Drives</PersonalDrives>
+      <GeneralDrives>General Drives</GeneralDrives>
+      <GroupDrives>Group Drives</GroupDrives>
       <Private>Pribado</Private>
-      <Public>Pampubliko</Public>
+      <Public>Publiko</Public>
       <BackupCenter>Ang backup ng gitna</BackupCenter>
       <CategorizedDocumentsCenter>Nakategorya sa Sentro ng Mga Dokumento</CategorizedDocumentsCenter>
       <CollaborationCenter>Sentro ng Pakikipagtulungan</CollaborationCenter>
@@ -421,7 +421,7 @@
   
   <UICategoryNavigationTargetPathPopupWindow>
     <title>
-      <UIPageSelector>Tagapili ng pahina</UIPageSelector>
+      <UIPageSelector>Page Selector</UIPageSelector>
     </title>
   </UICategoryNavigationTargetPathPopupWindow>
   

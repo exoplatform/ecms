@@ -52,7 +52,7 @@
   </UICategoryNavigationConfig>
   <UICategoryNavigationTreeBase>
     <msg>
-      <not-existed-category>The category does not exist.</not-existed-category>
+      <not-existed-category>Ang kategorya ay hindi umiiral.</not-existed-category>
     </msg>
   </UICategoryNavigationTreeBase>
 </bundle>

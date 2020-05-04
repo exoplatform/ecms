@@ -141,7 +141,7 @@
   <UISelectedContentGrid>
     <label>
       <name>#{word.name}</name>
-      <add>افزودن</add>
+      <add>Add</add>
       <delete>حذف</delete>
     </label>
     <msg>
@@ -186,13 +186,13 @@
       <Fulltext>یک کلمه یا عبارت در متن</Fulltext>
       <Property>ویژگی</Property>
       <Contain>شامل</Contain>
-      <FromDate>از تاریخ</FromDate>
-      <ToDate>تا تاریخ</ToDate>
+      <FromDate>تاریخ شروع</FromDate>
+      <ToDate>تاریخ پایان</ToDate>
       <DocumentType>نوع سند</DocumentType>
     </title>
     <tooltip>
-      <AddMetadataType>اضافه کردن خصیصه</AddMetadataType>
-      <AddNodeType>افزودن نوع گره</AddNodeType>
+      <AddMetadataType>Add Property</AddMetadataType>
+      <AddNodeType>Add Node Type</AddNodeType>
     </tooltip>    
     <label>
       <option>
@@ -213,10 +213,10 @@
       <empty-doctype>لطفاً نوع سند را انتخاب کنید</empty-doctype>
       <empty-startDate>«تاریخ فرم» مورد نیاز است</empty-startDate>
       <invalid-format>فرمت غیرمعتبر تاریخ/زمان در فیلد '{0}'.</invalid-format>
-      <invalid-date>""تا تاریخ" باید بعد از "از تاریخ" باشد"</invalid-date>
+      <invalid-date>"To Date" must be later than "From Date"</invalid-date>
       <invalid-startDate>«تاریخ فرم» نباید دیرتر از تاریخ امروز باشد</invalid-startDate>
       <invalid-nodeType>نوع گره "{0}" معتبر نیست. لطفا دوباره چک کنید.</invalid-nodeType>
-      <invalid-keyword>کلمه کلیدی نامعتبر است. برخی از کاراکترها پشتیباتی نمی شوند.</invalid-keyword>
+      <invalid-keyword>کلمه کلیدی نامعتبر است. برخی از کاراکترها معتبر نیستند.</invalid-keyword>
     </msg>
   </UIContentSearchForm>
 
@@ -228,12 +228,12 @@
 
   <UIContentPropertySelector>
     <action>
-      <Add>افزودن</Add>
+      <Add>Add</Add>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
       <metadataType>نوع فراداده</metadataType>
-      <property_select>خصیصه</property_select>
+      <property_select>ویژگی</property_select>
     </label>
   </UIContentPropertySelector>
 
@@ -258,7 +258,7 @@
       <action>اقدام</action>
     </header>
     <title>
-      <Select>Select</Select>
+      <Select>انتخاب</Select>
       <View>مشاهده</View>
     </title>
     <msg>
@@ -290,7 +290,7 @@
       <Save>#{word.save}</Save>
       <Clear>Clear</Clear>
       <title>
-        <Edit>ویرایش</Edit>
+        <Edit>ويرايش</Edit>
         <Delete>حذف</Delete>
       </title>
     </action>
@@ -316,7 +316,7 @@
 
   <UIPermissionInputSetWithAction>
     <title>
-      <SelectUser>Select User</SelectUser>
+      <SelectUser>انتخاب کاربر</SelectUser>
       <SelectMember>Select Member</SelectMember>
       <AddAny>Add Any Permission</AddAny>
     </title>
@@ -324,7 +324,7 @@
 
   <UIUserSelectorPopupWindow>
     <title>
-      <UIUserContainer>User Selector</UIUserContainer>
+      <UIUserContainer>انتخاب کننده کاربر</UIUserContainer>
     </title>
   </UIUserSelectorPopupWindow>
 
@@ -438,13 +438,13 @@
   
   <CategoryNavigationTemplate>
   <label>
-  <home>Home</home>
+  <home>صفحه اصلی</home>
   </label>
   </CategoryNavigationTemplate>
   
   <Breadcrumb>
   <label>
-  <home>Home</home>
+  <home>صفحه اصلی</home>
   </label>  
   </Breadcrumb>
 

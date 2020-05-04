@@ -161,7 +161,7 @@
     <header>
       <name>#{word.name}</name>
       <publicationstate>Yayın Durumu</publicationstate>
-      <action>Eylem</action>
+      <action>Yöntem</action>
     </header>
     <msg>
       <child-not-found>İçerik Bulunamadı</child-not-found>
@@ -172,7 +172,7 @@
     <header>
       <name>#{word.name}</name>
       <publicationstate>Yayın Durumu</publicationstate>
-      <action>Eylem</action>
+      <action>Yöntem</action>
     </header>
     <msg>
       <child-not-found>Klasör bulunamadı</child-not-found>
@@ -192,16 +192,16 @@
     </title>
     <tooltip>
       <AddMetadataType>Özellik Ekle</AddMetadataType>
-      <AddNodeType>Düğüm Türü Ekle</AddNodeType>
+      <AddNodeType>Ağ Türü Ekle</AddNodeType>
     </tooltip>    
     <label>
       <option>
-        <CREATED>Oluşturma</CREATED>
-        <MODIFIED>Değiştirme</MODIFIED>
+        <CREATED>Oluşturulma</CREATED>
+        <MODIFIED>Değiştirilme</MODIFIED>
       </option>
     </label>
     <action>
-      <SearchWebContent>Ara</SearchWebContent>
+      <SearchWebContent>Arama</SearchWebContent>
     </action>
     <msg>
       <time-to-late>Arama süresi çok uzun.</time-to-late>
@@ -213,7 +213,7 @@
       <empty-doctype>Lütfen bir belge türü seçiniz</empty-doctype>
       <empty-startDate>"Başlangıç Tarihi" gerekmektedir</empty-startDate>
       <invalid-format>'{0}' Alanda geçersiz tarih/saat biçimindedir.</invalid-format>
-      <invalid-date>""Bitiş Tarihi" "Başlangıç Tarihinden" sonra olmalıdır"</invalid-date>
+      <invalid-date>"To Date" must be later than "From Date"</invalid-date>
       <invalid-startDate>"Başlangıç Tarihi" bugünden sonraki bir tarih olamaz</invalid-startDate>
       <invalid-nodeType>Düğüm türü "{0}" geçersiz. Lütfen tekrar kontrol edin.</invalid-nodeType>
       <invalid-keyword>Anahtar geçersiz. Bazı karakterler desteklenmez.</invalid-keyword>
@@ -255,7 +255,7 @@
       <title>Başlık</title>
       <score>Puan</score>
       <publicationstate>Yayın Durumu</publicationstate>
-      <action>Eylem</action>
+      <action>Yöntem</action>
     </header>
     <title>
       <Select>Seçin</Select>
@@ -282,7 +282,7 @@
 
   <UIPermissionManager>
     <label>
-      <UIPermissionInputSetWithAction>İzni</UIPermissionInputSetWithAction>
+      <UIPermissionInputSetWithAction>İzin</UIPermissionInputSetWithAction>
       <UIAccessibleCheckboxInput>Erişim Hakları</UIAccessibleCheckboxInput>
       <UIEditableCheckboxInput>Düzenleme Hakları</UIEditableCheckboxInput>
     </label>
@@ -298,10 +298,10 @@
 
   <UIPermissionManagerGrid>
     <header>
-      <owner>İzni</owner>
+      <owner>İzin</owner>
       <accessible>Erişilebilir</accessible>
       <editable>Düzenlenebilir</editable>
-      <action>Eylem</action>
+      <action>Yöntem</action>
     </header>
     <msg>
       <confirm-delete-permission>Bu izin silmek istediğinizden emin misiniz?</confirm-delete-permission>
@@ -317,7 +317,7 @@
   <UIPermissionInputSetWithAction>
     <title>
       <SelectUser>Kullanıcı Seçin</SelectUser>
-      <SelectMember>Üye Seçin</SelectMember>
+      <SelectMember>Üye Seç</SelectMember>
       <AddAny>Herhangi bir izin Ekle</AddAny>
     </title>
   </UIPermissionInputSetWithAction>
@@ -337,7 +337,7 @@
   <UIGroupMemberSelector>
     <label>
       <selectGroup>Grup Seçin</selectGroup>
-      <selectMembership>Üyelik Seçin</selectMembership>
+      <selectMembership>Üyelik seçin</selectMembership>
     </label>
   </UIGroupMemberSelector>
 
@@ -367,7 +367,7 @@
     <label>
       <SingleContentViewer>Tek içerik Görüntüleyicisi</SingleContentViewer>
       <ContentListViewer>İçerik Listesi Görüntüleyicisi</ContentListViewer>
-      <Search>Ara</Search>
+      <Search>Arama</Search>
       <Sitemap>Site Haritası</Sitemap>
       <TwoColumnsLayout>İki Sütun Yerleşimi</TwoColumnsLayout>
       <ThreeColumnsLayout>Üç Sütun Yerleşimi</ThreeColumnsLayout>
@@ -421,7 +421,7 @@
   
   <UICategoryNavigationTargetPathPopupWindow>
     <title>
-      <UIPageSelector>Sayfa Seçici</UIPageSelector>
+      <UIPageSelector>Sayfa seçicisi</UIPageSelector>
     </title>
   </UICategoryNavigationTargetPathPopupWindow>
   
@@ -438,13 +438,13 @@
   
   <CategoryNavigationTemplate>
   <label>
-  <home>Ana Sayfa</home>
+  <home>Ana sayfa</home>
   </label>
   </CategoryNavigationTemplate>
   
   <Breadcrumb>
   <label>
-  <home>Ana Sayfa</home>
+  <home>Ana sayfa</home>
   </label>  
   </Breadcrumb>
 

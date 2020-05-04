@@ -23,6 +23,7 @@
       <Title>crwdns6793156:0crwdne6793156:0</Title>
       <ContentSelectionBlock>crwdns6793157:0crwdne6793157:0</ContentSelectionBlock>
       <UICLVConfigDisplayModeFormRadioBoxInput>crwdns6793158:0crwdne6793158:0</UICLVConfigDisplayModeFormRadioBoxInput>
+      <UICLVConfigCheckTranslationFormCheckboxInput>crwdns6912774:0crwdne6912774:0</UICLVConfigCheckTranslationFormCheckboxInput>
       <UICLVConfigItemPathFormInputSet>crwdns6793159:0crwdne6793159:0</UICLVConfigItemPathFormInputSet>
     <UICLVConfigItemPathFormStringInput>crwdns6793160:0crwdne6793160:0</UICLVConfigItemPathFormStringInput>
       <UICLVConfigOrderByFormSelectBox>crwdns6793161:0crwdne6793161:0</UICLVConfigOrderByFormSelectBox>
@@ -69,6 +70,7 @@
       <UICLVConfigCacheEnableRadioBoxInput>crwdns6793200:0crwdne6793200:0</UICLVConfigCacheEnableRadioBoxInput>
     </label>
     <help>
+      <TranslationHelp>crwdns6912776:0crwdne6912776:0</TranslationHelp>
       <ModeSelectionHelp>crwdns6793201:0crwdne6793201:0</ModeSelectionHelp>
       <FolderPathHelp>crwdns6793202:0crwdne6793202:0</FolderPathHelp>
       <HeaderOptionHelp>crwdns6793203:0crwdne6793203:0</HeaderOptionHelp>

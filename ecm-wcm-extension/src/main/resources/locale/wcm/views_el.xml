@@ -34,7 +34,7 @@
       <label>
         <title>Τίτλος Τοποθεσίας</title>
         <description>Περιγραφή Τοποθεσίας</description>
-        <keywords>Λέξεις-κλειδιά ιστοσελίδας</keywords>
+        <keywords>Λέξεις-κλειδιά τοποθεσίας</keywords>
         <robots>Συμπεριφορά ως προς τις μηχανές αναζήτησης</robots>
       </label>
       <tooltip>

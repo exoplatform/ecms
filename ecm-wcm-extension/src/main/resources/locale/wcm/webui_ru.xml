@@ -182,16 +182,16 @@
   <UIContentSearchForm>
     <title>
       <Location>Название сайта</Location>
-      <SearchByName>Поиск по имени</SearchByName>
+      <SearchByName>Поиск по названию</SearchByName>
       <Fulltext>Слово или фраза в контексте</Fulltext>
       <Property>Свойство</Property>
       <Contain>Содержит</Contain>
-      <FromDate>Дата От</FromDate>
+      <FromDate>Дата  От</FromDate>
       <ToDate>Дата До</ToDate>
       <DocumentType>Тип документа</DocumentType>
     </title>
     <tooltip>
-      <AddMetadataType>Добавить свойство</AddMetadataType>
+      <AddMetadataType>Добавить свойства</AddMetadataType>
       <AddNodeType>Добавить тип узла</AddNodeType>
     </tooltip>    
     <label>
@@ -201,7 +201,7 @@
       </option>
     </label>
     <action>
-      <SearchWebContent>Искать</SearchWebContent>
+      <SearchWebContent>Поиск</SearchWebContent>
     </action>
     <msg>
       <time-to-late>Слишком длительное время поиска.</time-to-late>
@@ -213,7 +213,7 @@
       <empty-doctype>Пожалуйста, выберите тип документа</empty-doctype>
       <empty-startDate>«Дата от» требуется для заполнения</empty-startDate>
       <invalid-format>Недопустимый формат даты в поле '{0}'.</invalid-format>
-      <invalid-date>"Дата До" должна быть позже, чем "Дата От"</invalid-date>
+      <invalid-date>"To Date" must be later than "From Date"</invalid-date>
       <invalid-startDate>«Дата от" должна быть не позднее сегодня</invalid-startDate>
       <invalid-nodeType>Недопустимый тип узла "{0}". Пожалуйста, проверьте еще раз.</invalid-nodeType>
       <invalid-keyword>Неверное ключевое слово. Некоторые символы не поддерживаются.</invalid-keyword>
@@ -304,7 +304,7 @@
       <action>Действие</action>
     </header>
     <msg>
-      <confirm-delete-permission>Вы уверены, что хотите удалить это разрешение?</confirm-delete-permission>
+      <confirm-delete-permission>Вы действительно хотите удалить это разрешение?</confirm-delete-permission>
       <no-permission-remove>У вас нет разрешения.</no-permission-remove>
       <access-denied>Доступ запрещён.</access-denied>
       <node-locked>Элемент пути {0} или один из его дочерних элементов заблокирован.</node-locked>
@@ -316,8 +316,8 @@
 
   <UIPermissionInputSetWithAction>
     <title>
-      <SelectUser>Выбрать пользователя</SelectUser>
-      <SelectMember>Выбрать члена</SelectMember>
+      <SelectUser>Выберите пользователя</SelectUser>
+      <SelectMember>Выберите члена</SelectMember>
       <AddAny>Добавить любое разрешение</AddAny>
     </title>
   </UIPermissionInputSetWithAction>
@@ -367,7 +367,7 @@
     <label>
       <SingleContentViewer>Просмотр одного контента</SingleContentViewer>
       <ContentListViewer>Просмотра списка контента</ContentListViewer>
-      <Search>Искать</Search>
+      <Search>Поиск</Search>
       <Sitemap>Карта сайта</Sitemap>
       <TwoColumnsLayout>Макет с двумя столбцами</TwoColumnsLayout>
       <ThreeColumnsLayout>Макет с тремя столбцами</ThreeColumnsLayout>
@@ -386,7 +386,7 @@
     <login>Авторизация</login>
     <logout>Выйти</logout>
     <language>Изменить язык</language>
-    <register>Зарегистрироваться</register>
+    <register>Регистрация</register>
   </Signin>
   <UIDriveForm>
 <label>
@@ -397,11 +397,11 @@
   
   <ContentSelector>
     <title>
-      <PersonalDrives>Персональные диски</PersonalDrives>
+      <PersonalDrives>Личные диски</PersonalDrives>
       <GeneralDrives>Общие диски</GeneralDrives>
       <GroupDrives>Диски группы</GroupDrives>
-      <Private>Приватный</Private>
-      <Public>Публичный</Public>
+      <Private>Приватные</Private>
+      <Public>Публичные</Public>
       <BackupCenter>Центр резервного копирования</BackupCenter>
       <CategorizedDocumentsCenter>Центр упорядоченных по категориям документов</CategorizedDocumentsCenter>
       <CollaborationCenter>Центр сотрудничества</CollaborationCenter>
@@ -421,7 +421,7 @@
   
   <UICategoryNavigationTargetPathPopupWindow>
     <title>
-      <UIPageSelector>Выбор страницы</UIPageSelector>
+      <UIPageSelector>Указатель страницы</UIPageSelector>
     </title>
   </UICategoryNavigationTargetPathPopupWindow>
   

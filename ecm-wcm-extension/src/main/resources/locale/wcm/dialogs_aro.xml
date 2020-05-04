@@ -26,7 +26,7 @@
         <MainContent>المحتوى الاساسي</MainContent>
         <cssFile>css الافتراضي</cssFile>
         <jsFile>js  الافتراضي</jsFile>
-        <Advanced>متطور/ة</Advanced>
+        <Advanced>إعدادات متقدمة</Advanced>
         <Summary>مُلخّص</Summary>
         <name>#{word.name}</name>
         <title>عنوان</title>
@@ -34,11 +34,11 @@
         <hintCSS>يمكنك تحديد الأنماط الرئيسية لمحتوى الويب الخاص بك. وسوف يتجاوز هذا النمط الأنماط الخاصّة بهذا الموقع، وعلى الصعيد المشترك.</hintCSS>
         <ContentJS>بيانات الــ JS</ContentJS>
         <hintJS>يمكنك تحديد بعض رموز الجافا سكريبت التي يمكن تنفيذها قبل تشغيل محتوى الويب الخاصّ بك.</hintJS>
-        <WebContentHtml>المحتوى الأصلي</WebContentHtml>
+        <WebContentHtml>المحتوى الاساسي</WebContentHtml>
         <Illustration>رسم بياني</Illustration>
         <hintIllustration>في هذه اللوحة، يمكنك تحديد الصورة التي سيتم عرضها عندما يتم عرض محتوى ويب ضمن جملة القائمات. يمكنك أيضا تحديد بعض النصوص الموجزة بحيث تستطيع أن ترفقها مع هذه الصورة.</hintIllustration>
         <confirm-delete>هل أنت متأكد من حذف هذا الرسم البياني؟</confirm-delete>
-        <illustrationImage>صورة الرسم البياني</illustrationImage>
+        <illustrationImage>صورة الرسم التوضيحي</illustrationImage>
         <imageMimeType>نوع الصورة</imageMimeType>
         <image>تحميل صُورة</image>
         <imageWidth>عرض الصورة</imageWidth>
@@ -52,7 +52,7 @@
     <dialog>
       <label>
         <name>#{word.name}</name>
-        <active>نشط</active>
+        <active>ناشط</active>
         <priority>الأولوية</priority>
         <content>بيانات الـCSS</content>
       </label>
@@ -63,7 +63,7 @@
     <dialog>
       <label>
         <name>#{word.name}</name>
-        <active>نشط</active>
+        <active>ناشط</active>
         <priority>الأولوية</priority>
         <content>بيانات الــ JS</content>
       </label>
@@ -74,7 +74,7 @@
     <dialog>
       <label>
         <name>#{word.name}</name>
-        <url>عنوان الموارد الموحد(URL)</url>
+        <url>عنوان الموقع</url>
         <description>الوصف</description>
       </label>
     </dialog>

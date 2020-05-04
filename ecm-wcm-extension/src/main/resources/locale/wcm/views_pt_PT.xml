@@ -35,7 +35,7 @@
         <title>Título do Site</title>
         <description>Descrição do Site</description>
         <keywords>Palavras Chave do Site</keywords>
-        <robots>Comportamento dos Motores de Busca</robots>
+        <robots>Comportamento do motor de busca</robots>
       </label>
       <tooltip>
         <add-edit>Adicionar/Editar Metadado</add-edit>
@@ -50,7 +50,7 @@
 
   <Category>
     <view>
-      <label>Categoria</label>
+      <label>Tópico</label>
     </view>
   </Category>
 

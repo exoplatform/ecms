@@ -100,7 +100,7 @@
     <selectBoxValues>
       <FilterBy>تصنيف  بحسب</FilterBy>
       <WebContent>محتوى الواب</WebContent>
-      <DMSDocument>الوثيقة</DMSDocument>
+      <DMSDocument>وثائق</DMSDocument>
       <Media>وسائل الاعلام</Media>
     </selectBoxValues>
     <msg>
@@ -110,7 +110,7 @@
 
   <UIContentBrowsePanelMulti>
     <selectBoxValues>
-      <FilterBy>تصنيف بحسب</FilterBy>
+      <FilterBy>تصنيف  بحسب</FilterBy>
       <WebContent>محتوى الواب</WebContent>
       <DMSDocument>وثائق</DMSDocument>
       <Media>وسائل الاعلام</Media>
@@ -141,7 +141,7 @@
   <UISelectedContentGrid>
     <label>
       <name>#{word.name}</name>
-      <add>اضف</add>
+      <add>اضافة</add>
       <delete>حذف</delete>
     </label>
     <msg>
@@ -182,12 +182,12 @@
   <UIContentSearchForm>
     <title>
       <Location>اسم الموقع</Location>
-      <SearchByName>البحث حسب الاسم</SearchByName>
+      <SearchByName>البحث بحسب الاسم</SearchByName>
       <Fulltext>عبارة أو جُملة في نفس السّياق</Fulltext>
-      <Property>الخاصية</Property>
+      <Property>خاصيّة</Property>
       <Contain>تحتوي على</Contain>
-      <FromDate>من تاريخ</FromDate>
-      <ToDate>الى تاريخ</ToDate>
+      <FromDate>تاريخ البداية</FromDate>
+      <ToDate>تاريخ النهاية</ToDate>
       <DocumentType>نوع الوثيقة</DocumentType>
     </title>
     <tooltip>
@@ -213,7 +213,7 @@
       <empty-doctype>الرّجاء تحديد نوع الملفّ</empty-doctype>
       <empty-startDate>يرجى تحديد قيمة تاريخ "من"</empty-startDate>
       <invalid-format>صيغة التاريخ/التوقيت التي تمّ ادخالها في المجال '{0}' غير صحيحة.</invalid-format>
-      <invalid-date>"قيمة "إلى تاريخ" يجب أن تأتي بعد قيمة "من تاريخ""</invalid-date>
+      <invalid-date>"To Date" must be later than "From Date"</invalid-date>
       <invalid-startDate>تاريخ "من" لا يجب أن يتجاوزتاريخ اليوم</invalid-startDate>
       <invalid-nodeType>نوع العقدة "{0}" غير صحيح. يُرجى اعادة التثبّت.</invalid-nodeType>
       <invalid-keyword>الكلمة المفتاح غير صحيحة. لم يتم التعرّف على بعض الأحرف.</invalid-keyword>
@@ -259,7 +259,7 @@
     </header>
     <title>
       <Select>اختيار</Select>
-      <View>رأي</View>
+      <View>الاعدادات</View>
     </title>
     <msg>
     <template-not-support>لا يمكن معاينة هذا المحتوى. القالب غير معتمد</template-not-support>
@@ -306,7 +306,7 @@
     <msg>
       <confirm-delete-permission>هل ترغب حقّا في حذف هذه الصلاحيّة؟</confirm-delete-permission>
       <no-permission-remove>ليس لديك الصلاحيّات الكافية.</no-permission-remove>
-      <access-denied>تم رفض الوصول.</access-denied>
+      <access-denied>غير مسموح بالدخول.</access-denied>
       <node-locked>يتم تأمين مسار العنصر {0} أو أحد العناصر الأصل.</node-locked>
       <userOrGroup-required>يجب اختيار مستخدم أو مجموعة.</userOrGroup-required>
       <checkbox-require>يجب عليك تعيين الحقوق.</checkbox-require>
@@ -316,7 +316,7 @@
 
   <UIPermissionInputSetWithAction>
     <title>
-      <SelectUser>اختيارمستخدم</SelectUser>
+      <SelectUser>اختيار مستخدم</SelectUser>
       <SelectMember>اختيار عضو</SelectMember>
       <AddAny>أضف أي صلاحيّة</AddAny>
     </title>
@@ -324,7 +324,7 @@
 
   <UIUserSelectorPopupWindow>
     <title>
-      <UIUserContainer>منتق المستخدمين</UIUserContainer>
+      <UIUserContainer>مُنتق المستخدمين</UIUserContainer>
     </title>
   </UIUserSelectorPopupWindow>
 
@@ -337,7 +337,7 @@
   <UIGroupMemberSelector>
     <label>
       <selectGroup>اختيار مجموعة</selectGroup>
-      <selectMembership>اختيار العضوية</selectMembership>
+      <selectMembership>اختيار عُضويّة</selectMembership>
     </label>
   </UIGroupMemberSelector>
 
@@ -368,7 +368,7 @@
       <SingleContentViewer>العارض الموحّد للمحتوى</SingleContentViewer>
       <ContentListViewer>عارض قائمة المحتويات</ContentListViewer>
       <Search>البحث</Search>
-      <Sitemap>خريطه الموقع</Sitemap>
+      <Sitemap>خريطة الموقع</Sitemap>
       <TwoColumnsLayout>تخطيط ذو عمودين</TwoColumnsLayout>
       <ThreeColumnsLayout>تخطيط ذو ثلاثة أعمدة</ThreeColumnsLayout>
       <TwoRowsLayout>تخطيط ذو سطرين</TwoRowsLayout>
@@ -397,11 +397,11 @@
   
   <ContentSelector>
     <title>
-      <PersonalDrives>الأقراص الشخصية</PersonalDrives>
-      <GeneralDrives>الأقراص العامّة</GeneralDrives>
-      <GroupDrives>أقراص المجموعة</GroupDrives>
+      <PersonalDrives>أقراص شخصيّة</PersonalDrives>
+      <GeneralDrives>الأقراص الرئيسية</GeneralDrives>
+      <GroupDrives>محركات أقراص المجموعات</GroupDrives>
       <Private>شخصي</Private>
-      <Public>عام</Public>
+      <Public>عمومي</Public>
       <BackupCenter>مركز النُّسخ الاحتياطية</BackupCenter>
       <CategorizedDocumentsCenter>مركز تصنيف الوثائق</CategorizedDocumentsCenter>
       <CollaborationCenter>مركز التعاون</CollaborationCenter>

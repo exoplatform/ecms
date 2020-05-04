@@ -23,6 +23,7 @@
       <Title>Preferințe lista conținut</Title>
       <ContentSelectionBlock>Selecție conținut</ContentSelectionBlock>
       <UICLVConfigDisplayModeFormRadioBoxInput>Mod</UICLVConfigDisplayModeFormRadioBoxInput>
+      <UICLVConfigCheckTranslationFormCheckboxInput>Multi-language support</UICLVConfigCheckTranslationFormCheckboxInput>
       <UICLVConfigItemPathFormInputSet>Calea folderului</UICLVConfigItemPathFormInputSet>
     <UICLVConfigItemPathFormStringInput>Calea folderului</UICLVConfigItemPathFormStringInput>
       <UICLVConfigOrderByFormSelectBox>Ordonat după</UICLVConfigOrderByFormSelectBox>
@@ -69,6 +70,7 @@
       <UICLVConfigCacheEnableRadioBoxInput>Share content between users</UICLVConfigCacheEnableRadioBoxInput>
     </label>
     <help>
+      <TranslationHelp>If you check this option, only contents with the user's language will appear in the list. For example: when this option is checked and that the user language is English, only contents written in the English language will be listed. Whereas when this option is not checked we list all the contents inside the folder.</TranslationHelp>
       <ModeSelectionHelp>Două moduri sunt disponibile pentru a arăta conținutul. "După Dosare" va lua toate elementele disponibile în folderul/categoria selectată. "După Conținut" vă permite să selectaţi manual conținutul pe care doriți să-l afișați.</ModeSelectionHelp>
       <FolderPathHelp>Selectați conținutul pe care doriți să-l afișați. Selecţia implicită va fi înlocuită dinamic dacă activezi opţiunea de navigare dinamică (a se vedea modul avansat mai jos).</FolderPathHelp>
       <HeaderOptionHelp>Arată un antet pe lista de conţinut. Dacă activezi opţiunea de detectare automată, acesta va încerca să găsească antetul pe baza selecţiei curente.</HeaderOptionHelp>

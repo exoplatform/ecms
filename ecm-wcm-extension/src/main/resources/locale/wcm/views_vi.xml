@@ -23,7 +23,7 @@
   <WebLink>
     <view>
       <label>
-        <url>Đường dẫn</url>
+        <url>URL</url>
         <description>Mô tả</description>
       </label>
     </view>
@@ -42,7 +42,7 @@
         <cancel>#{word.cancel}</cancel>
       </tooltip>
       <action>
-        <add-edit>Thêm/Sửa</add-edit>
+        <add-edit>Thêm/sửa</add-edit>
         <cancel>#{word.cancel}</cancel>
       </action>
     </view>
@@ -56,7 +56,7 @@
 
   <Tag>
     <view>
-      <label>Nhãn</label>
+      <label>Gán nhãn</label>
     </view>
   </Tag>
 </bundle>

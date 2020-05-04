@@ -23,6 +23,7 @@
       <Title>Turinio sąrašo nuostatos</Title>
       <ContentSelectionBlock>Turinio pasirinkimas</ContentSelectionBlock>
       <UICLVConfigDisplayModeFormRadioBoxInput>Režimas</UICLVConfigDisplayModeFormRadioBoxInput>
+      <UICLVConfigCheckTranslationFormCheckboxInput>Multi-language support</UICLVConfigCheckTranslationFormCheckboxInput>
       <UICLVConfigItemPathFormInputSet>Aplanko kelias</UICLVConfigItemPathFormInputSet>
     <UICLVConfigItemPathFormStringInput>Aplanko kelias</UICLVConfigItemPathFormStringInput>
       <UICLVConfigOrderByFormSelectBox>Rūšiuoti pagal</UICLVConfigOrderByFormSelectBox>
@@ -69,6 +70,7 @@
       <UICLVConfigCacheEnableRadioBoxInput>Share content between users</UICLVConfigCacheEnableRadioBoxInput>
     </label>
     <help>
+      <TranslationHelp>If you check this option, only contents with the user's language will appear in the list. For example: when this option is checked and that the user language is English, only contents written in the English language will be listed. Whereas when this option is not checked we list all the contents inside the folder.</TranslationHelp>
       <ModeSelectionHelp>Yra du režimai parodyti turinį. "Pagal aplanką" apims visą prieinamą turinį jūsų pasirinktame aplanke/kategorijoje. "Pagal turinį" leidžia rankiniu būdu pasirinkti turinį, kurį norite rodyti.</ModeSelectionHelp>
       <FolderPathHelp>Pasirinkite turinį, kurį norite rodyti. Numatytasis pasirinkimas bus pakeistas dinamiškai jeigu aktyvuosite Dinaminės navigacijos opciją (žr. 'Plačiau' apačioje).</FolderPathHelp>
       <HeaderOptionHelp>Rodyti turinio sąrašo antraštę viršuje. Jei aktyvuosite automatinio aptikimo funkciją, bus bandoma rasti antraštę remiantis dabartiniu pasirinkimu.</HeaderOptionHelp>

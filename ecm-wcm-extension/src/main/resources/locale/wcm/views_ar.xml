@@ -23,7 +23,7 @@
   <WebLink>
     <view>
       <label>
-        <url>عنوان الموارد الموحد (URL)</url>
+        <url>عنوان الموقع</url>
         <description>الوصف</description>
       </label>
     </view>
@@ -39,11 +39,11 @@
       </label>
       <tooltip>
         <add-edit>إضافة/تغيير البيانات الوصفية</add-edit>
-        <cancel>إلغاء</cancel>
+        <cancel>#{word.cancel}</cancel>
       </tooltip>
       <action>
         <add-edit>اضافة/تغيير</add-edit>
-        <cancel>إلغاء</cancel>
+        <cancel>#{word.cancel}</cancel>
       </action>
     </view>
   </SiteMetadata>

@@ -141,7 +141,7 @@
   <UISelectedContentGrid>
     <label>
       <name>#{word.name}</name>
-      <add>Προσθήκη</add>
+      <add>Add</add>
       <delete>Διαγραφή</delete>
     </label>
     <msg>
@@ -186,13 +186,13 @@
       <Fulltext>Μια λέξη ή φράση που συνοψίζει το νόημα</Fulltext>
       <Property>Ιδιότητα</Property>
       <Contain>Περιέχει</Contain>
-      <FromDate>Από την ημερομηνία</FromDate>
-      <ToDate>Έως την ημερομηνία</ToDate>
+      <FromDate>Ημερομηνία έναρξης</FromDate>
+      <ToDate>Ημερομηνία λήξης</ToDate>
       <DocumentType>Τύπος εγγράφου</DocumentType>
     </title>
     <tooltip>
-      <AddMetadataType>Προσθήκη ιδιότητας</AddMetadataType>
-      <AddNodeType>Προσθήκη τύπου κόμβου</AddNodeType>
+      <AddMetadataType>Add Property</AddMetadataType>
+      <AddNodeType>Add Node Type</AddNodeType>
     </tooltip>    
     <label>
       <option>
@@ -213,7 +213,7 @@
       <empty-doctype>Παρακαλώ, επιλέξτε έναν τύπο εγγράφου</empty-doctype>
       <empty-startDate>Η ημερομηνία "Από" είναι απαραίτητη</empty-startDate>
       <invalid-format>Μη έγκυρη μορφή ημερομηνίας/ώρας στο πεδίο '{0}'.</invalid-format>
-      <invalid-date>"Η τελική ημερομηνία πρέπει να είναι μεταγενέστερη της αρχικής"</invalid-date>
+      <invalid-date>"To Date" must be later than "From Date"</invalid-date>
       <invalid-startDate>Η ημερομηνία "Από" δεν μπορεί να είναι μεταγενέστερη της σημερινής</invalid-startDate>
       <invalid-nodeType>Ο τύπος κόμβου "{0}" δεν είναι έγκυρος. Ελέγξτε και πάλι.</invalid-nodeType>
       <invalid-keyword>Η λέξη-κλειδί δεν είναι έγκυρη. Ορισμένοι χαρακτήρες δεν υποστηρίζονται.</invalid-keyword>
@@ -228,7 +228,7 @@
 
   <UIContentPropertySelector>
     <action>
-      <Add>Προσθήκη</Add>
+      <Add>Add</Add>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
@@ -317,14 +317,14 @@
   <UIPermissionInputSetWithAction>
     <title>
       <SelectUser>Επιλογή χρήστη</SelectUser>
-      <SelectMember>Επιλέξτε μέλος</SelectMember>
+      <SelectMember>Select Member</SelectMember>
       <AddAny>Όλοι</AddAny>
     </title>
   </UIPermissionInputSetWithAction>
 
   <UIUserSelectorPopupWindow>
     <title>
-      <UIUserContainer>Επιλογέας χρηστών</UIUserContainer>
+      <UIUserContainer>Επιλογέας χρήστη</UIUserContainer>
     </title>
   </UIUserSelectorPopupWindow>
 
@@ -336,7 +336,7 @@
 
   <UIGroupMemberSelector>
     <label>
-      <selectGroup>Επιλέξτε ομάδα</selectGroup>
+      <selectGroup>Επιλογή ομάδας</selectGroup>
       <selectMembership>Επιλογή ρόλου</selectMembership>
     </label>
   </UIGroupMemberSelector>

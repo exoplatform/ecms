@@ -213,7 +213,7 @@
       <empty-doctype>Selecciona un tipus de document</empty-doctype>
       <empty-startDate>«Del dia» és necessari</empty-startDate>
       <invalid-format>Format invàlid de data/hora en el camp "{0}".</invalid-format>
-      <invalid-date>"Des del" ha de ser posterior a "Fins al"</invalid-date>
+      <invalid-date>"To Date" must be later than "From Date"</invalid-date>
       <invalid-startDate>"Del dia" no ha de ser posterior a avui</invalid-startDate>
       <invalid-nodeType>El tipus de node "{0}" no és vàlid. Si us plau comprovi-ho de nou.</invalid-nodeType>
       <invalid-keyword>La paraula clau és invàlida. Alguns caràcters no són compatibles.</invalid-keyword>
@@ -254,7 +254,7 @@
     <header>
       <title>Títol</title>
       <score>Puntuació</score>
-      <publicationstate>Estat de publicació</publicationstate>
+      <publicationstate>Estat de Publicació</publicationstate>
       <action>Acció</action>
     </header>
     <title>

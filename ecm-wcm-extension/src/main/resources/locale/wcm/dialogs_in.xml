@@ -26,7 +26,7 @@
         <MainContent>Isi utama</MainContent>
         <cssFile>default.css</cssFile>
         <jsFile>default.js</jsFile>
-        <Advanced>Maju</Advanced>
+        <Advanced>Lanjutan</Advanced>
         <Summary>Ringkasan</Summary>
         <name>#{word.name}</name>
         <title>Judul</title>
@@ -34,11 +34,11 @@
         <hintCSS>Anda bisa menentukan lembar gaya utama untuk konten web anda. Gaya ini akan menimpa lembar gaya yang dedifinisikan di tingkat situs dan pada tingkat bersama.</hintCSS>
         <ContentJS>Data JS</ContentJS>
         <hintJS>Anda dapat menentukan beberapa kode bahwa JavaScript bisa dieksekusi sebelum web anda dan konten yang diberikan.</hintJS>
-        <WebContentHtml>Konten utama</WebContentHtml>
+        <WebContentHtml>Isi utama</WebContentHtml>
         <Illustration>Ilustrasi</Illustration>
         <hintIllustration>Anda dapat menentukan sebuah gambar yang akan ditunjukkan saat konten web anda ditampilkan dalam daftar. anda juga dapat menentukan beberapa teks ringkasan untuk pergi dengan gambar ini.</hintIllustration>
         <confirm-delete>Apakah anda yakin ingin untuk menghapus ilustrasi ini?</confirm-delete>
-        <illustrationImage>Gambar Ilustrasi</illustrationImage>
+        <illustrationImage>Ilustrasi Gambar</illustrationImage>
         <imageMimeType>Jenis gambar</imageMimeType>
         <image>Unggah gambar</image>
         <imageWidth>Lebar gambar</imageWidth>

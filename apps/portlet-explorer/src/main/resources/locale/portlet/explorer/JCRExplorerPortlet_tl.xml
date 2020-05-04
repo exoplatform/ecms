@@ -2459,7 +2459,7 @@
       <Back>Bumalik sa Rename</Back>
       <Keepfile>Panatilihin ang parehong mga file</Keepfile>
 <ReadOnly>Buksan sa Read-only</ReadOnly>
-<Cancel>Cancel</Cancel>
+<Cancel>Kanselahin</Cancel>
       <KeepBoth>Panatilihin ng pareho</KeepBoth>
       <CreateNewVersion>I-save bilang bagong bersyon</CreateNewVersion>
     </label>

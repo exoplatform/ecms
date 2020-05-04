@@ -141,7 +141,7 @@
   <UISelectedContentGrid>
     <label>
       <name>#{word.name}</name>
-      <add>Přidat</add>
+      <add>Add</add>
       <delete>Odstranit</delete>
     </label>
     <msg>
@@ -191,8 +191,8 @@
       <DocumentType>Typ dokumentu</DocumentType>
     </title>
     <tooltip>
-      <AddMetadataType>Přidat vlastnost</AddMetadataType>
-      <AddNodeType>Přidat typ uzlu</AddNodeType>
+      <AddMetadataType>Add Property</AddMetadataType>
+      <AddNodeType>Add Node Type</AddNodeType>
     </tooltip>    
     <label>
       <option>
@@ -213,7 +213,7 @@
       <empty-doctype>Zvolte typ dokumentu</empty-doctype>
       <empty-startDate>„Od data“ je povinné</empty-startDate>
       <invalid-format>Neplatný formát data/času v poli '{0}'.</invalid-format>
-      <invalid-date>"K datu" musí být pozdější než "Datum od"</invalid-date>
+      <invalid-date>"To Date" must be later than "From Date"</invalid-date>
       <invalid-startDate>„Od data“ nesmí být pozdější než dnes</invalid-startDate>
       <invalid-nodeType>Typ uzlu "{0}" je neplatný. Zkontrolujte znovu.</invalid-nodeType>
       <invalid-keyword>Klíčové slovo je neplatné. Některé znaky nejsou podporovány.</invalid-keyword>
@@ -228,7 +228,7 @@
 
   <UIContentPropertySelector>
     <action>
-      <Add>Přidat</Add>
+      <Add>Add</Add>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
@@ -252,7 +252,7 @@
 
   <UIContentSearchResult>
     <header>
-      <title>Popisek</title>
+      <title>Nadpis</title>
       <score>Skóre</score>
       <publicationstate>Stav zveřejnění</publicationstate>
       <action>Akce</action>
@@ -317,7 +317,7 @@
   <UIPermissionInputSetWithAction>
     <title>
       <SelectUser>Vybrat uživatele</SelectUser>
-      <SelectMember>Vybrat člena</SelectMember>
+      <SelectMember>Select Member</SelectMember>
       <AddAny>Přidat libovolné oprávnění</AddAny>
     </title>
   </UIPermissionInputSetWithAction>

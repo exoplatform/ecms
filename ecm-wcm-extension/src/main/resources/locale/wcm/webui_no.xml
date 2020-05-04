@@ -46,7 +46,7 @@
   <Views>
     <label>
       <wcm-view>Web</wcm-view>
-      <admin-view>Administrer</admin-view>
+      <admin-view>Administrator</admin-view>
       <icon-view>Ikoner</icon-view>
       <thumbails-view>Miniatyrbilder</thumbails-view>
       <list-view>Liste</list-view>
@@ -141,7 +141,7 @@
   <UISelectedContentGrid>
     <label>
       <name>#{word.name}</name>
-      <add>Legg til</add>
+      <add>Add</add>
       <delete>Slette</delete>
     </label>
     <msg>
@@ -186,13 +186,13 @@
       <Fulltext>Et ord eller uttrykk i sammenheng</Fulltext>
       <Property>Egenskap</Property>
       <Contain>Inneholder</Contain>
-      <FromDate>Fra dato</FromDate>
-      <ToDate>Til dato</ToDate>
+      <FromDate>Fra-dato</FromDate>
+      <ToDate>Til-dato</ToDate>
       <DocumentType>Dokumenttype</DocumentType>
     </title>
     <tooltip>
-      <AddMetadataType>Legg til egenskap</AddMetadataType>
-      <AddNodeType>Legge til nodetype</AddNodeType>
+      <AddMetadataType>Add Property</AddMetadataType>
+      <AddNodeType>Add Node Type</AddNodeType>
     </tooltip>    
     <label>
       <option>
@@ -213,7 +213,7 @@
       <empty-doctype>Please select a document type</empty-doctype>
       <empty-startDate>"From Date" is required</empty-startDate>
       <invalid-format>Ugyldig dato/tidsformat i feltet '{0}'.</invalid-format>
-      <invalid-date>"Til dato" må være etter "Fra dato"</invalid-date>
+      <invalid-date>"To Date" must be later than "From Date"</invalid-date>
       <invalid-startDate>"From Date" must not be later than today</invalid-startDate>
       <invalid-nodeType>Nodetypen "{0}", er ugyldig. Vennligst sjekk igjen.</invalid-nodeType>
       <invalid-keyword>Søkeordet er ugyldig. Noen tegn er ikke støttet.</invalid-keyword>
@@ -228,7 +228,7 @@
 
   <UIContentPropertySelector>
     <action>
-      <Add>Legg til</Add>
+      <Add>Add</Add>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
@@ -317,14 +317,14 @@
   <UIPermissionInputSetWithAction>
     <title>
       <SelectUser>Velg bruker</SelectUser>
-      <SelectMember>Velg medlem</SelectMember>
+      <SelectMember>Select Member</SelectMember>
       <AddAny>Legg til rettighet</AddAny>
     </title>
   </UIPermissionInputSetWithAction>
 
   <UIUserSelectorPopupWindow>
     <title>
-      <UIUserContainer>Brukervelger</UIUserContainer>
+      <UIUserContainer>Brukervelgeren</UIUserContainer>
     </title>
   </UIUserSelectorPopupWindow>
 
@@ -385,7 +385,7 @@
     <welcome>Velkommen</welcome>
     <login>Innlogging</login>
     <logout>Logg ut</logout>
-    <language>Bytt språk</language>
+    <language>Endre språk</language>
     <register>Registrer</register>
   </Signin>
   <UIDriveForm>
@@ -397,9 +397,9 @@
   
   <ContentSelector>
     <title>
-      <PersonalDrives>Personlige stasjoner</PersonalDrives>
+      <PersonalDrives>Personlig stasjoner</PersonalDrives>
       <GeneralDrives>Generelle stasjoner</GeneralDrives>
-      <GroupDrives>Gruppestasjoner</GroupDrives>
+      <GroupDrives>Gruppe stasjoner</GroupDrives>
       <Private>Privat</Private>
       <Public>Offentlig</Public>
       <BackupCenter>Backup senter</BackupCenter>
