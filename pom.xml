@@ -40,9 +40,9 @@
     <!-- **************************************** -->
     <!-- Project Dependencies                     -->
     <!-- **************************************** -->
-    <org.exoplatform.social.version>6.0.x-SNAPSHOT</org.exoplatform.social.version>
-    <org.exoplatform.jcr.version>6.0.x-SNAPSHOT</org.exoplatform.jcr.version>
-    <org.exoplatform.platform-ui.version>6.0.x-SNAPSHOT</org.exoplatform.platform-ui.version>
+    <org.exoplatform.social.version>6.0.0-M30</org.exoplatform.social.version>
+    <org.exoplatform.jcr.version>6.0.0-M30</org.exoplatform.jcr.version>
+    <org.exoplatform.platform-ui.version>6.0.0-M30</org.exoplatform.platform-ui.version>
   </properties>
   <dependencyManagement>
     <!-- ### NEVER CHANGE THIS ORDER OF DEPMGT ### -->
