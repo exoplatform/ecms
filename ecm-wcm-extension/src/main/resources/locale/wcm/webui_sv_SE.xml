@@ -141,7 +141,7 @@
   <UISelectedContentGrid>
     <label>
       <name>#{word.name}</name>
-      <add>Lägg till</add>
+      <add>Add</add>
       <delete>Ta bort</delete>
     </label>
     <msg>
@@ -213,7 +213,7 @@
       <empty-doctype>Please select a document type</empty-doctype>
       <empty-startDate>"From Date" is required</empty-startDate>
       <invalid-format>Ogiltigt datum/tid-format i fältet {0}.</invalid-format>
-      <invalid-date>"Till datum" måste vara senare än "Från datum"</invalid-date>
+      <invalid-date>"To Date" must be later than "From Date"</invalid-date>
       <invalid-startDate>"From Date" must not be later than today</invalid-startDate>
       <invalid-nodeType>Nodtypen {0} är ogiltig. Kontrollera igen.</invalid-nodeType>
       <invalid-keyword>Nyckelordet är ogiltig. Vissa tecken stöds inte.</invalid-keyword>
@@ -228,7 +228,7 @@
 
   <UIContentPropertySelector>
     <action>
-      <Add>Lägg till</Add>
+      <Add>Add</Add>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>

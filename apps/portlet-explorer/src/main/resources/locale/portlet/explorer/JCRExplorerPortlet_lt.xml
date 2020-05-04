@@ -597,7 +597,7 @@
       <RestoreFromTrash>Atkurti iš šiukšliadėžės</RestoreFromTrash>
       <EmptyTrash>Išvalyti šiukšliadėžę</EmptyTrash>
       <WebDavView>Atidaryti su MS Office</WebDavView>
-      <Download>Download</Download>
+      <Download>Atsisiųsti</Download>
       <OpenDocument>Remote Edit</OpenDocument>
       <EditProperty>Edit Document Properties</EditProperty>
       <UploadNewVersion>Upload a new version</UploadNewVersion>
@@ -1321,7 +1321,7 @@
       <Cancel>#{word.cancel}</Cancel>
       <Export>Eksportuoti</Export>
     </action>
-    <title>Export</title>
+    <title>Eksportuoti</title>
   </UIExportNode>
   <!--
   ###############################################################################
@@ -1330,7 +1330,7 @@
   -->
   <PopupUserSelector>
     <title>
-      <UIUserContainer>Permission Selector</UIUserContainer>
+      <UIUserContainer>Teisės pasirinkimas</UIUserContainer>
     </title>
   </PopupUserSelector>
   <UIPopupTaxonomy>
@@ -1351,7 +1351,7 @@
     </summary>
     <tooltip>
       <original>Original Version</original>
-      <version>Version</version>
+      <version>Versija</version>
       <baseVersion>current draft</baseVersion>
       <addLabel>Pridėti etiketę</addLabel>
       <removeLable>Pašalinti etiketę</removeLable>
@@ -1517,7 +1517,7 @@
       <Cancel>#{word.cancel}</Cancel>
       <Import>Importuoti</Import>
     </action>
-    <title>Import</title>
+    <title>Importuoti</title>
     <msg>
       <import-successful>Sėkmingai importuotas.</import-successful>
       <filename-invalid>Pasirinkite .xml failą 'Įkelti failą' laukelyje, kad įkelti.</filename-invalid>
@@ -1574,7 +1574,7 @@
   <UIViewVersion>
     <label>
       <nodeType>Mazgo tipas</nodeType>
-      <nodeName>Name</nodeName>
+      <nodeName>Pavadinimas</nodeName>
       <VersionNumber>Versijos numeris</VersionNumber>
       <VersionLabels>Versijos etiketės</VersionLabels>
       <VersionDate>Versijos data</VersionDate>
@@ -1875,7 +1875,7 @@
     </label>
     <title>
       <exeButton>Eiti</exeButton>
-      <backButton>Back</backButton>
+      <backButton>Atgal</backButton>
       <showHistory>Show History</showHistory>
       <changeNode>Pakeisti mazgą</changeNode>
     </title>
@@ -2035,7 +2035,7 @@
       <private>Privatus</private>
       <state>Būsena</state>
       <visibility>Matomumas</visibility>
-      <nodeName>Name:</nodeName>
+      <nodeName>Vardas:</nodeName>
       <lifecycleName>Gyvavimo ciklo pavadinimas</lifecycleName>
       <stateName>Būsenos pavadinimas</stateName>
     </label>
@@ -2273,7 +2273,7 @@
 
   <PopupSelectPath>
     <title>
-      <UIOneNodePathSelector>Select Path</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Pasirinkti kelią</UIOneNodePathSelector>
     </title>
   </PopupSelectPath>
 
@@ -2303,7 +2303,7 @@
   <UISymLinkForm>
     <label>
       <symLinkName>Simbolinės nuorodos pavadinimas</symLinkName>
-      <pathNode>Path</pathNode>
+      <pathNode>Kelias</pathNode>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -2459,7 +2459,7 @@
       <Back>Atgal į pervadinimą</Back>
       <Keepfile>Palikti abu failus</Keepfile>
 <ReadOnly>Open Read-only</ReadOnly>
-<Cancel>Cancel</Cancel>
+<Cancel>Atšaukti</Cancel>
       <KeepBoth>Keep Both</KeepBoth>
       <CreateNewVersion>Save as new version</CreateNewVersion>
     </label>

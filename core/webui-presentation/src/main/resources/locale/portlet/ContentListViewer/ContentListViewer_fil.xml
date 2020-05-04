@@ -23,6 +23,7 @@
       <Title>Mga kagustuhan sa Listahan ng Nilalaman</Title>
       <ContentSelectionBlock>Pagpipili ng Nilalaman</ContentSelectionBlock>
       <UICLVConfigDisplayModeFormRadioBoxInput>Pamamaraan</UICLVConfigDisplayModeFormRadioBoxInput>
+      <UICLVConfigCheckTranslationFormCheckboxInput>Multi-language support</UICLVConfigCheckTranslationFormCheckboxInput>
       <UICLVConfigItemPathFormInputSet>Ang Landas ng Folder</UICLVConfigItemPathFormInputSet>
     <UICLVConfigItemPathFormStringInput>Ang Landas ng Folder</UICLVConfigItemPathFormStringInput>
       <UICLVConfigOrderByFormSelectBox>Isaayos ayon sa</UICLVConfigOrderByFormSelectBox>
@@ -69,6 +70,7 @@
       <UICLVConfigCacheEnableRadioBoxInput>Share content between users</UICLVConfigCacheEnableRadioBoxInput>
     </label>
     <help>
+      <TranslationHelp>If you check this option, only contents with the user's language will appear in the list. For example: when this option is checked and that the user language is English, only contents written in the English language will be listed. Whereas when this option is not checked we list all the contents inside the folder.</TranslationHelp>
       <ModeSelectionHelp>Dalawang mode ang pwedeng magamit para maipakita ang nilalaman. Ang "Sa Pamamagitan ng Folder" ay kukunin ang magagamit na nilalamn sa iyong napiling folder/kategorya. Ang "Sa Pamamagitan ng Nilalaman" ay maaari mong mano-manong piliin ang nilalaman na gusto mong ipakita.</ModeSelectionHelp>
       <FolderPathHelp>Pumili ng nilalaman na gusto mong ipakita. Ang default na pagpipili ay dynamic na napapalitan kung iyong bubuhayin ang Dynamic Nabigasyon na opsyon (tingnan ang Nauunang Paraaan sa ibaba).</FolderPathHelp>
       <HeaderOptionHelp>Magpakita ng isang header sa taas ng listahan ng nilalaman. Kung iyong na-activate ang Awtomatik Detection na opsyon, ito ay susubukang hanapin ang header base sa kasalukuyang pagpipili.</HeaderOptionHelp>

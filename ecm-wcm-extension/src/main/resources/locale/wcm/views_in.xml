@@ -35,14 +35,14 @@
         <title>Judul situs</title>
         <description>Deskripsi situs</description>
         <keywords>Kata kunci situs</keywords>
-        <robots>Perilaku Mesin Pencari</robots>
+        <robots>Perilaku mesin pencari</robots>
       </label>
       <tooltip>
         <add-edit>Tambahkan/Edit Metadata</add-edit>
         <cancel>#{word.cancel}</cancel>
       </tooltip>
       <action>
-        <add-edit>Tambah/Edit</add-edit>
+        <add-edit>Tambahkan/Ubah</add-edit>
         <cancel>#{word.cancel}</cancel>
       </action>
     </view>
@@ -56,7 +56,7 @@
 
   <Tag>
     <view>
-      <label>Menandai</label>
+      <label>Tager</label>
     </view>
   </Tag>
 </bundle>

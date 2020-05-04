@@ -27,7 +27,7 @@
       <UIFCCWorkspaceFormSelectBox>Select Workspace</UIFCCWorkspaceFormSelectBox>
       <UIFCCTemplateField>Template Options</UIFCCTemplateField>
       <UIFCCLocationFormInputAction>Location to Save</UIFCCLocationFormInputAction>
-      <UIFCCTemplateFormSelectBox>Select Template</UIFCCTemplateFormSelectBox>
+      <UIFCCTemplateFormSelectBox>Pumili ng Template</UIFCCTemplateFormSelectBox>
       <UIFCCSaveFormStringInput>Custom Save Button</UIFCCSaveFormStringInput>
       <UIFCCMessageFormTextareaInput>Custom Save Message</UIFCCMessageFormTextareaInput>
       <UIFCCRedirectFormCheckboxInput>Redirect:</UIFCCRedirectFormCheckboxInput>
@@ -52,7 +52,7 @@
 
   <UIFCCLocationFormInputAction>
     <title>
-      <SelectPath>Select Path</SelectPath>
+      <SelectPath>Pumili ng Path</SelectPath>
     </title>
   </UIFCCLocationFormInputAction>
 
@@ -69,10 +69,10 @@
     <msg>
       <empty>No actions</empty>
       <remove-popup-first>You must close the edit pop-up before deleting this node.</remove-popup-first>
-      <confirm-delete-action>Are you sure you want to delete this action?</confirm-delete-action>
+      <confirm-delete-action>Sigurado kaba na gusto mong i-delete ang aksyong ito?</confirm-delete-action>
       <template-empty>The template of '{0}' is null or empty.</template-empty>
       <template-null>The template is null or empty, or you do not have permission to access this template.</template-null>
-      <access-denied>Access denied. You do not have permission to perform this action.</access-denied>
+      <access-denied>Ang pag-akses ay hindi pinahintulotan. Wala kang permisong i-perform ang aksyong ito.</access-denied>
     </msg>
   </UIFCCActionList>
 
@@ -84,8 +84,8 @@
 
   <UIWorkspaceList>
     <label>
-      <workspaceName>Workspace:</workspaceName>
-      <rootNodePath>Root Path:</rootNodePath>
+      <workspaceName>Ang Workspace:</workspaceName>
+      <rootNodePath>Ang Root Path:</rootNodePath>
       <rootNodeInfo>Root node</rootNodeInfo>
     </label>
   </UIWorkspaceList>
@@ -113,7 +113,7 @@
   </UIFCCActionPopupWindow>
 
   <UIFCCActionForm>
-    <title>Add/Edit Action</title>
+    <title>Magdagdag/Mag-edit ng Aksyon</title>
     <action>
       <Save>#{word.save}</Save>
       <Close>#{word.close}</Close>
@@ -125,12 +125,12 @@
       <unable-add-action>Unable to add this action.</unable-add-action>
       <unable-add>Unable to add this action. This node is root or you do not have permision.</unable-add>
       <not-support>The dialog '{0}' is not supported.</not-support>
-      <no-permission-add>Access denied. You do not have the right to add an action here.</no-permission-add>
-      <access-denied>Access denied. You do not have permission to access this template.</access-denied>
+      <no-permission-add>Hindi tinanggap ang pag-akses. Wala kang pahintulot na magdagdag ng aksyon dito.</no-permission-add>
+      <access-denied>Hindi tinanggap ang pag-akses. Wala kang permiso na mag-akses sa template na ito.</access-denied>
     </msg>
     <validator>
-      <validator>Validator</validator>
-      <destPath>With Path</destPath>
+      <validator>Ang Validator</validator>
+      <destPath>Mayroong Path</destPath>
     </validator>
   </UIFCCActionForm>
 
@@ -139,7 +139,7 @@
       <actionType>Create an Action of Type</actionType>
     </label>
     <msg>
-      <not-support>Cannot load the template of '{0}'.</not-support>
+      <not-support>Hindi mai-load ang template ng '{0}'.</not-support>
       <do-not-permission>You do not have permission to load the template of '{0}'.</do-not-permission>
     </msg>
   </UIFCCActionTypeForm>
@@ -147,8 +147,8 @@
   <PopupComponent>
     <title>
       <UIOneNodePathSelector>Select Location</UIOneNodePathSelector>
-      <UIPermissionSelector>Permission Browser</UIPermissionSelector>
-      <UICategoriesSelector>Add Categories</UICategoriesSelector>
+      <UIPermissionSelector>Ang Browser sa Permiso</UIPermissionSelector>
+      <UICategoriesSelector>Magdagdag ng mga Kategorya</UICategoriesSelector>
     </title>
   </PopupComponent>
 
@@ -160,7 +160,7 @@
 
   <UITabPane>
     <title>
-      <UICategoriesSelectPanel>Select Categories</UICategoriesSelectPanel>
+      <UICategoriesSelectPanel>Pumili ng mga Kategorya</UICategoriesSelectPanel>
       <UISelectedCategoriesGrid>Ang Reperensiyang mga Kategorya</UISelectedCategoriesGrid>
     </title>
   </UITabPane>
@@ -173,13 +173,13 @@
 
   <PopupComponent>
     <title>
-      <UIOneTaxonomySelector>Add Categories</UIOneTaxonomySelector>
+      <UIOneTaxonomySelector>Magdagdag ng mga Kategorya</UIOneTaxonomySelector>
     </title>
   </PopupComponent>
 
   <UITreeTaxonomyList>
     <label>
-      <taxonomyTree>Category Tree</taxonomyTree>
+      <taxonomyTree>Ang Category Tree</taxonomyTree>
     </label>
   </UITreeTaxonomyList>
 

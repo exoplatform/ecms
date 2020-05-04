@@ -51,3 +51,16 @@ export function createFolder(currentDrive, workspace, parentPath, newFolderName)
       throw new Error(`Error creating a new folder ${e}`);
     });
 }
+
+export function deleteFolderOrFile(currentDrive, workspace, itemPath) {
+  return fetch(`/portal/rest/managedocument/deleteFolderOrFile/?driveName=${currentDrive}&workspaceName=${workspace}&itemPath=${itemPath}`, {})
+    .then(response => response.text())
+    .then(xmlStr => (new window.DOMParser()).parseFromString(xmlStr, 'text/xml'))
+    .then(xml => {
+      if (xml) {
+        return xml;
+      }
+    }).catch(e => {
+      throw new Error(`Error deleting the folder or the file ${e}`);
+    });
+}

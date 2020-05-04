@@ -56,7 +56,7 @@
 
   <Tag>
     <view>
-      <label>タグ</label>
+      <label>ドキュメントにタグ付け</label>
     </view>
   </Tag>
 </bundle>

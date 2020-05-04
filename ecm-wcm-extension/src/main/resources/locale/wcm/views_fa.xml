@@ -24,7 +24,7 @@
     <view>
       <label>
         <url>آدرس</url>
-        <description>توصیف</description>
+        <description>شرح</description>
       </label>
     </view>
   </WebLink>

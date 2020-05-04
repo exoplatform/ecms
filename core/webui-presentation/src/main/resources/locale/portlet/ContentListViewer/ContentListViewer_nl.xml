@@ -23,6 +23,7 @@
       <Title>Inhoudslijst voorkeuren</Title>
       <ContentSelectionBlock>Inhoud selectie</ContentSelectionBlock>
       <UICLVConfigDisplayModeFormRadioBoxInput>Modus</UICLVConfigDisplayModeFormRadioBoxInput>
+      <UICLVConfigCheckTranslationFormCheckboxInput>Multi-language support</UICLVConfigCheckTranslationFormCheckboxInput>
       <UICLVConfigItemPathFormInputSet>Mappad</UICLVConfigItemPathFormInputSet>
     <UICLVConfigItemPathFormStringInput>Mappad</UICLVConfigItemPathFormStringInput>
       <UICLVConfigOrderByFormSelectBox>Sorteer op</UICLVConfigOrderByFormSelectBox>
@@ -69,6 +70,7 @@
       <UICLVConfigCacheEnableRadioBoxInput>Share content between users</UICLVConfigCacheEnableRadioBoxInput>
     </label>
     <help>
+      <TranslationHelp>If you check this option, only contents with the user's language will appear in the list. For example: when this option is checked and that the user language is English, only contents written in the English language will be listed. Whereas when this option is not checked we list all the contents inside the folder.</TranslationHelp>
       <ModeSelectionHelp>Er zijn twee modi beschikbaar voor inhoud weergeven. "Per map" vindt alle inhoud die beschikbaar is in uw geselecteerde map/categorie. Hiermee kunt u handmatig de inhoud die u wilt weergeven selecteren "Door inhoud".</ModeSelectionHelp>
       <FolderPathHelp>Selecteer de inhoud die u wilt weergeven. De standaardselectie zal dynamisch worden vervangen als u de optie dynamische navigatie activeert (Zie de onderstaande geavanceerde modus).</FolderPathHelp>
       <HeaderOptionHelp>Een koptekst op de top van de lijst inhoud weergeven. Als u de optie Automatische detectie activeert, zal het proberen te vinden van de kop op basis van de huidige selectie.</HeaderOptionHelp>

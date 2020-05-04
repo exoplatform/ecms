@@ -23,6 +23,7 @@
       <Title>مشمول فہرست ترجیحات</Title>
       <ContentSelectionBlock>مشمول انتخاب</ContentSelectionBlock>
       <UICLVConfigDisplayModeFormRadioBoxInput>نوع</UICLVConfigDisplayModeFormRadioBoxInput>
+      <UICLVConfigCheckTranslationFormCheckboxInput>Multi-language support</UICLVConfigCheckTranslationFormCheckboxInput>
       <UICLVConfigItemPathFormInputSet>فولڈر کا راستہ</UICLVConfigItemPathFormInputSet>
     <UICLVConfigItemPathFormStringInput>فولڈر کا راستہ</UICLVConfigItemPathFormStringInput>
       <UICLVConfigOrderByFormSelectBox>کی طرف سے آرڈر</UICLVConfigOrderByFormSelectBox>
@@ -69,6 +70,7 @@
       <UICLVConfigCacheEnableRadioBoxInput>Share content between users</UICLVConfigCacheEnableRadioBoxInput>
     </label>
     <help>
+      <TranslationHelp>If you check this option, only contents with the user's language will appear in the list. For example: when this option is checked and that the user language is English, only contents written in the English language will be listed. Whereas when this option is not checked we list all the contents inside the folder.</TranslationHelp>
       <ModeSelectionHelp>مواد دکھانے کے لئے دو طریقے دستیاب ہیں. "فولڈر کی طرف سے" آپ کے منتخب شدہ فولڈر / زمرہ میں دستیاب تمام مواد لے جائے گا. "مواد کی طرف سے" آپ کو دستی طور جو مواد آپ ظاہر کرنا چاہتے ہیں کو منتخب کرنے کی اجازت دیتا ہے.</ModeSelectionHelp>
       <FolderPathHelp>وہ مواد منتخب کریں جو آپ ظاہر کرنا چاہتے ہیں. اگر آپ متحرک سمت شناسی اختیار کو فعال کرتے ہیں تو پہلے سے طے شدہ انتخاب کو متحرک طور پر تبدیل کیا جائے گا( نیچے پیشگی طرز دیکھیں).</FolderPathHelp>
       <HeaderOptionHelp>مواد کی فہرست کے اوپر ہیڈر دکھائیں. اگر آپ خود کار طریقے سے پتہ لگانے کے اختیار کو فعال کرتے ہیں، تو یہ موجودہ انتخاب کی بنیاد پر ہیڈر کو تلاش کرنے کی کوشش کرے گی.</HeaderOptionHelp>

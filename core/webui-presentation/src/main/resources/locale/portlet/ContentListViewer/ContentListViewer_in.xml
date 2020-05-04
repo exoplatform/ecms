@@ -24,6 +24,7 @@
       <Title>Daftar Preferensi Konten</Title>
       <ContentSelectionBlock>Pemilihan Konten</ContentSelectionBlock>
       <UICLVConfigDisplayModeFormRadioBoxInput>Mode</UICLVConfigDisplayModeFormRadioBoxInput>
+      <UICLVConfigCheckTranslationFormCheckboxInput>Multi-language support</UICLVConfigCheckTranslationFormCheckboxInput>
       <UICLVConfigItemPathFormInputSet>Berkas Path</UICLVConfigItemPathFormInputSet>
     <UICLVConfigItemPathFormStringInput>Berkas Path</UICLVConfigItemPathFormStringInput>
       <UICLVConfigOrderByFormSelectBox>Dipesan oleh</UICLVConfigOrderByFormSelectBox>
@@ -70,6 +71,7 @@
       <UICLVConfigCacheEnableRadioBoxInput>Berbagi konten antara pengguna</UICLVConfigCacheEnableRadioBoxInput>
     </label>
     <help>
+      <TranslationHelp>If you check this option, only contents with the user's language will appear in the list. For example: when this option is checked and that the user language is English, only contents written in the English language will be listed. Whereas when this option is not checked we list all the contents inside the folder.</TranslationHelp>
       <ModeSelectionHelp>Dua mode yang tersedia untuk tampilan konten. "Oleh Folder" akan mengambil semua konten tersedia yang dapat anda pilih dalam folder/kategori. "Oleh Konten" memungkinkan anda secara manual memilih konten yang ingin anda tampilkan.</ModeSelectionHelp>
       <FolderPathHelp>Pilih konten yang ingin untuk anda tampilkan. pilihan bawaan akan diganti secara dinamis jika anda mengaktifkan pilihan navigasi dinamis (lihat mode Lanjutan di bawah ini).</FolderPathHelp>
       <HeaderOptionHelp>Tampilkan sebuah header di atas daftar isi. Jika anda mengaktifkan pilihan deteksi otomatis, ini akan mencoba untuk menemukan header berdasarkan pilihan saat ini.</HeaderOptionHelp>

@@ -23,6 +23,7 @@
       <Title>Preferències del Llistat de Contingut</Title>
       <ContentSelectionBlock>Selecció del contingut</ContentSelectionBlock>
       <UICLVConfigDisplayModeFormRadioBoxInput>Mode</UICLVConfigDisplayModeFormRadioBoxInput>
+      <UICLVConfigCheckTranslationFormCheckboxInput>Multi-language support</UICLVConfigCheckTranslationFormCheckboxInput>
       <UICLVConfigItemPathFormInputSet>Ruta de la Carpeta</UICLVConfigItemPathFormInputSet>
     <UICLVConfigItemPathFormStringInput>Ruta de la Carpeta</UICLVConfigItemPathFormStringInput>
       <UICLVConfigOrderByFormSelectBox>Ordena per</UICLVConfigOrderByFormSelectBox>
@@ -69,6 +70,7 @@
       <UICLVConfigCacheEnableRadioBoxInput>Share content between users</UICLVConfigCacheEnableRadioBoxInput>
     </label>
     <help>
+      <TranslationHelp>If you check this option, only contents with the user's language will appear in the list. For example: when this option is checked and that the user language is English, only contents written in the English language will be listed. Whereas when this option is not checked we list all the contents inside the folder.</TranslationHelp>
       <ModeSelectionHelp>Hi ha dues maneres de mostrar els continguts. "Per carpeta" aquest mode agafarà tots els continguts disponibles a les carpetes i/o categories seleccionades. "Per Contingut" et fa seleccionar manualment els continguts que vols mostrar.</ModeSelectionHelp>
       <FolderPathHelp>Selecciona el contingut que vol mostrar. Aquesta selecció per defecte es canviarà dinàmicament si s'activa la opció de navegació dinàmica (vegeu el mode avançat a sota).</FolderPathHelp>
       <HeaderOptionHelp>Mostra una capçalera a la part superior de la llista de contingut. Si activa l'opció de detecció automàtica, intentarà trobar la capçalera basada en la selecció actual.</HeaderOptionHelp>

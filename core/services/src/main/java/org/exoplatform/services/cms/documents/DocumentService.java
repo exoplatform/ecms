@@ -255,6 +255,16 @@ public interface DocumentService {
   }
   
   /**
+   * Gets the recent spaces documents.
+   *
+   * @param limit the limit
+   * @return the recent spaces documents
+   */
+  default List<Document> getRecentSpacesDocuments(int limit) throws Exception {
+    throw new UnsupportedOperationException();
+  }
+  
+  /**
    * NewDocumentTypesConfig contains all registered template configs for specified provider.
    */
   public static class DocumentTemplatesConfig {

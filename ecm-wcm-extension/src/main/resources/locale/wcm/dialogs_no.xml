@@ -38,7 +38,7 @@
         <Illustration>Illustrasjon</Illustration>
         <hintIllustration>Du kan angi et bilde som skal vises når web-innholdet vises i listen. Du kan også legge til et sammendrag til dette bildet.</hintIllustration>
         <confirm-delete>Er du sikker på at du vil slette denne illustrasjonen?</confirm-delete>
-        <illustrationImage>Illustrasjonsbilde</illustrationImage>
+        <illustrationImage>Illustrasjons bilde</illustrationImage>
         <imageMimeType>Bildetype</imageMimeType>
         <image>Last opp bilde</image>
         <imageWidth>Bildebredde</imageWidth>
@@ -74,7 +74,7 @@
     <dialog>
       <label>
         <name>#{word.name}</name>
-        <url>URL</url>
+        <url>Nettadresse</url>
         <description>Beskrivelse</description>
       </label>
     </dialog>

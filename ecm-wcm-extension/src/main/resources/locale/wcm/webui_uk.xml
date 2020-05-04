@@ -113,7 +113,7 @@
       <FilterBy>Фільтрувати за</FilterBy>
       <WebContent>Веб-контент</WebContent>
       <DMSDocument>Документ</DMSDocument>
-      <Media>Media</Media>
+      <Media>Медіа</Media>
     </selectBoxValues>
   </UIContentBrowsePanelMulti>
 
@@ -141,7 +141,7 @@
   <UISelectedContentGrid>
     <label>
       <name>#{word.name}</name>
-      <add>Додати</add>
+      <add>Add</add>
       <delete>Видалити</delete>
     </label>
     <msg>
@@ -186,13 +186,13 @@
       <Fulltext>Слово або фраза в контексті</Fulltext>
       <Property>Властивість</Property>
       <Contain>Містить</Contain>
-      <FromDate>Дата Від</FromDate>
-      <ToDate>Дата До</ToDate>
+      <FromDate>Від дати</FromDate>
+      <ToDate>До дата</ToDate>
       <DocumentType>Тип документа</DocumentType>
     </title>
     <tooltip>
-      <AddMetadataType>Додати властивість</AddMetadataType>
-      <AddNodeType>Додати тип вузла</AddNodeType>
+      <AddMetadataType>Add Property</AddMetadataType>
+      <AddNodeType>Add Node Type</AddNodeType>
     </tooltip>    
     <label>
       <option>
@@ -213,10 +213,10 @@
       <empty-doctype>Будь ласка, виберіть тип документа</empty-doctype>
       <empty-startDate>«Дата від» потрібно заповнити</empty-startDate>
       <invalid-format>Неприпустимий формат дата/час у поля "{0}".</invalid-format>
-      <invalid-date>"Дата До" повинна бути пізніше ніж "Дата Від"</invalid-date>
+      <invalid-date>"To Date" must be later than "From Date"</invalid-date>
       <invalid-startDate>"Дата від" не має бути пізнішою за сьогодні</invalid-startDate>
       <invalid-nodeType>Вузол типу "{0}" є неприпустимим. Будь ласка, перевірте ще раз.</invalid-nodeType>
-      <invalid-keyword>Невірне ключове слово. Деякі символи не розпізнані.</invalid-keyword>
+      <invalid-keyword>Неприпустиме ключове слово. Деякі символи не підтримуються.</invalid-keyword>
     </msg>
   </UIContentSearchForm>
 
@@ -228,7 +228,7 @@
 
   <UIContentPropertySelector>
     <action>
-      <Add>Додати</Add>
+      <Add>Add</Add>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
@@ -316,8 +316,8 @@
 
   <UIPermissionInputSetWithAction>
     <title>
-      <SelectUser>Виберіть Користувача</SelectUser>
-      <SelectMember>Вибрати члена</SelectMember>
+      <SelectUser>Виберіть користувача</SelectUser>
+      <SelectMember>Select Member</SelectMember>
       <AddAny>Додати будь-який дозвіл</AddAny>
     </title>
   </UIPermissionInputSetWithAction>
@@ -337,7 +337,7 @@
   <UIGroupMemberSelector>
     <label>
       <selectGroup>Виберіть групу</selectGroup>
-      <selectMembership>Виберіть членство</selectMembership>
+      <selectMembership>Виберіть Членство</selectMembership>
     </label>
   </UIGroupMemberSelector>
 
@@ -386,7 +386,7 @@
     <login>Логін</login>
     <logout>Вийти</logout>
     <language>Змінити мову</language>
-    <register>Зареєструватися</register>
+    <register>Реєстрація</register>
   </Signin>
   <UIDriveForm>
 <label>

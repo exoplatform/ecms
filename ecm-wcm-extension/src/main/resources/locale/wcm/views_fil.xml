@@ -24,7 +24,7 @@
     <view>
       <label>
         <url>URL</url>
-        <description>Ang Paglalarawan</description>
+        <description>Paglalarawan</description>
       </label>
     </view>
   </WebLink>
@@ -32,10 +32,10 @@
   <SiteMetadata>
     <view>
       <label>
-        <title>Ang Pamagat ng Lugar</title>
-        <description>Paglalarawan sa Lugar</description>
-        <keywords>Lugar ng mga Keyword</keywords>
-        <robots>Pagsasaliksik sa Kilos ng Makina</robots>
+        <title>Ang Pamagat ng Site</title>
+        <description>Ang Paglalarawan sa Site</description>
+        <keywords>Ang mga Keyword ng Site</keywords>
+        <robots>Gawi ng Search Engine</robots>
       </label>
       <tooltip>
         <add-edit>Dagdagan/Baguhin ang Metadata</add-edit>
@@ -50,7 +50,7 @@
 
   <Category>
     <view>
-      <label>Ang Kategorya</label>
+      <label>Ang kategorya</label>
     </view>
   </Category>
 

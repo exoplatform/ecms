@@ -64,7 +64,7 @@
       <label>
         <name>Tên</name>
         <active>Bật</active>
-        <priority>Độ ưu tiên</priority>
+        <priority>Mức ưu tiên</priority>
         <content>Dữ liệu Javascript</content>
       </label>
     </dialog>
@@ -74,7 +74,7 @@
     <dialog>
       <label>
         <name>Tên</name>
-        <url>Đường dẫn</url>
+        <url>URL</url>
         <description>Mô tả</description>
       </label>
     </dialog>

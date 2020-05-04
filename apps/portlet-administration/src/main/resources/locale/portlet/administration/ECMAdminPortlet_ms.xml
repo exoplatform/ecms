@@ -57,7 +57,7 @@
       <paste>Paste</paste>
       <cut>Cut</cut>
       <copy>Copy</copy>
-      <remove>Delete</remove>
+      <remove>Padam</remove>
     </title>
   </UITaxonomyManager>
 
@@ -120,8 +120,8 @@
   <UIPermissionTreeInfo>
     <action>
       <title>
-        <Delete>Delete</Delete>
-        <Edit>Edit</Edit>
+        <Delete>Padam</Delete>
+        <Edit>Sunting</Edit>
       </title>
     </action>
     <header>
@@ -2127,7 +2127,7 @@
   <UIViewContainer>
     <title>
       <View>View</View>
-      <EditInfo>Edit</EditInfo>
+      <EditInfo>Sunting</EditInfo>
       <Delete>Padam</Delete>
     </title>
     <label>

@@ -213,7 +213,7 @@
       <empty-doctype>Wybierz typ dokumentu</empty-doctype>
       <empty-startDate>"Od Daty" jest wymagane</empty-startDate>
       <invalid-format>Nieprawidłowy format daty/godziny w polu „{0}”.</invalid-format>
-      <invalid-date>"Data w polu „Do" musi być późniejsza niż data w polu "Od""</invalid-date>
+      <invalid-date>"To Date" must be later than "From Date"</invalid-date>
       <invalid-startDate>"Od Daty" nie może być późniejsza niż dzisiejsza data</invalid-startDate>
       <invalid-nodeType>Typ węzła „{0}” jest nieprawidłowy. Proszę sprawdzić ponownie.</invalid-nodeType>
       <invalid-keyword>Słowo kluczowe jest nieprawidłowe. Niektóre znaki nie są obsługiwane.</invalid-keyword>
@@ -259,7 +259,7 @@
     </header>
     <title>
       <Select>Wybierz</Select>
-      <View>Widok</View>
+      <View>Zobacz</View>
     </title>
     <msg>
     <template-not-support>Nie można obejrzeć tej zawartości. Szablon nie jest obsługiwany</template-not-support>
@@ -330,7 +330,7 @@
 
   <UIGroupSelectorPopupWindow>
     <title>
-      <UIGroupMemberSelector>Selektor grupy</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Wybieranie grup</UIGroupMemberSelector>
     </title>
   </UIGroupSelectorPopupWindow>
 
@@ -383,8 +383,8 @@
 
   <Signin>
     <welcome>Witamy</welcome>
-    <login>Zaloguj</login>
-    <logout>Wyloguj</logout>
+    <login>Zaloguj się</login>
+    <logout>Wyloguj się</logout>
     <language>Zmień język</language>
     <register>Zarejestruj się</register>
   </Signin>
@@ -400,7 +400,7 @@
       <PersonalDrives>Dyski osobiste</PersonalDrives>
       <GeneralDrives>Dyski ogólne</GeneralDrives>
       <GroupDrives>Dyski grupowe</GroupDrives>
-      <Private>Prywatny</Private>
+      <Private>Prywatne</Private>
       <Public>Publiczne</Public>
       <BackupCenter>Centrum kopii zapasowych</BackupCenter>
       <CategorizedDocumentsCenter>Centrum sklasyfikowanych Dokumentów</CategorizedDocumentsCenter>

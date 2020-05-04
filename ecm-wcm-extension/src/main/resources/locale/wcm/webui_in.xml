@@ -65,7 +65,7 @@
 
   <UIPageSelectorPanel>
     <header>
-      <path>Path</path>
+      <path>Jalan</path>
       <action>#{word.action}</action>
     </header>
     <msg>
@@ -110,7 +110,7 @@
 
   <UIContentBrowsePanelMulti>
     <selectBoxValues>
-      <FilterBy>Filter menurut</FilterBy>
+      <FilterBy>Saring menurut</FilterBy>
       <WebContent>Konten web</WebContent>
       <DMSDocument>Dokumen</DMSDocument>
       <Media>Media</Media>
@@ -126,14 +126,14 @@
 
   <UIContentBrowsePanelMulti>
     <label>
-      <LeftColumn>Pilih sebuah map untuk menampilkan anak-anaknya sebagai konten.</LeftColumn>
-      <RightColumn>Isi di bawah ini bisa dipilih.</RightColumn>
+      <LeftColumn>Pilih sebuah folder untuk menampilkan anak-anaknya sebagai konten.</LeftColumn>
+      <RightColumn>Konten di bawah ini dapat dipilih.</RightColumn>
     </label>
   </UIContentBrowsePanelMulti>
 
   <UIContentBrowsePanelFolder>
     <label>
-      <LeftColumn>Pilih folder untuk menampilkan anak-anaknya sebagai konten.</LeftColumn>
+      <LeftColumn>Pilih sebuah folder untuk menampilkan anak-anaknya sebagai konten.</LeftColumn>
       <RightColumn>Folder di bawah ini dapat dipilih.</RightColumn>
     </label>
   </UIContentBrowsePanelFolder>
@@ -141,8 +141,8 @@
   <UISelectedContentGrid>
     <label>
       <name>#{word.name}</name>
-      <add>Tambah</add>
-      <delete>Hapus</delete>
+      <add>Tambahkan</add>
+      <delete>hapus</delete>
     </label>
     <msg>
       <no-content-found>Konten tidak ditemukan</no-content-found>
@@ -182,17 +182,17 @@
   <UIContentSearchForm>
     <title>
       <Location>Nama situs</Location>
-      <SearchByName>Cari berdasarkan nama</SearchByName>
+      <SearchByName>Cari berdasarkan Nama</SearchByName>
       <Fulltext>Sebuah kata atau ungkapan dalam konteks</Fulltext>
-      <Property>Milik</Property>
+      <Property>Properti</Property>
       <Contain>Berisi</Contain>
-      <FromDate>Dari tanggal</FromDate>
-      <ToDate>Saat ini</ToDate>
+      <FromDate>Dari Tanggal</FromDate>
+      <ToDate>Sampai Tanggal</ToDate>
       <DocumentType>Jenis Dokumen</DocumentType>
     </title>
     <tooltip>
       <AddMetadataType>Tambahkan Properti</AddMetadataType>
-      <AddNodeType>Tambahkan Jenis Node</AddNodeType>
+      <AddNodeType>Tambahkan Jenis simpul</AddNodeType>
     </tooltip>    
     <label>
       <option>
@@ -213,10 +213,10 @@
       <empty-doctype>Silahkan pilih sebuah jenis dokumen</empty-doctype>
       <empty-startDate>"Tanggal mulai" diperlukan</empty-startDate>
       <invalid-format>Format tanggal / waktu yang tidak valid di bidang '{0}'.</invalid-format>
-      <invalid-date>"Saat ini "harus lebih dari"Tanggal mulai"</invalid-date>
+      <invalid-date>"To Date" must be later than "From Date"</invalid-date>
       <invalid-startDate>"Tanggal mulai" tidak boleh lebih dari hari ini</invalid-startDate>
       <invalid-nodeType>Jenis simpulnya "{0}" adalah tidak valid. Silahkan periksa lagi.</invalid-nodeType>
-      <invalid-keyword>Kata kuncinya adalah tidak sah. Beberapa karakter tidak didukung.</invalid-keyword>
+      <invalid-keyword>Kata kunci ini tidak benar. Beberapa karakter tidak didukung.</invalid-keyword>
     </msg>
   </UIContentSearchForm>
 
@@ -228,18 +228,18 @@
 
   <UIContentPropertySelector>
     <action>
-      <Add>Tambah</Add>
+      <Add>Tambahkan</Add>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
-      <metadataType>Jenis Metadata</metadataType>
+      <metadataType>Jenis metadata</metadataType>
       <property_select>Properti</property_select>
     </label>
   </UIContentPropertySelector>
 
   <WebContentNodeTypePopup>
     <title>
-      <UIContentNodeTypeSelector>Pemilihan Jenis simpul</UIContentNodeTypeSelector>
+      <UIContentNodeTypeSelector>Pemilihan jenis simpul</UIContentNodeTypeSelector>
     </title>
   </WebContentNodeTypePopup>
 
@@ -258,8 +258,8 @@
       <action>Tindakan</action>
     </header>
     <title>
-      <Select>Memilih</Select>
-      <View>Lihat</View>
+      <Select>Pilih</Select>
+      <View>Tampilkan</View>
     </title>
     <msg>
     <template-not-support>Tidak dapat melihat pratinjau konten ini. Template ini tidak didukung</template-not-support>
@@ -282,7 +282,7 @@
 
   <UIPermissionManager>
     <label>
-      <UIPermissionInputSetWithAction>Ijin</UIPermissionInputSetWithAction>
+      <UIPermissionInputSetWithAction>Izin</UIPermissionInputSetWithAction>
       <UIAccessibleCheckboxInput>Akses kanan</UIAccessibleCheckboxInput>
       <UIEditableCheckboxInput>Edit Benar</UIEditableCheckboxInput>
     </label>
@@ -290,33 +290,33 @@
       <Save>#{word.save}</Save>
       <Clear>Bersih</Clear>
       <title>
-        <Edit>Ubah</Edit>
-        <Delete>Hapus</Delete>
+        <Edit>merubah</Edit>
+        <Delete>hapus</Delete>
       </title>
     </action>
   </UIPermissionManager>
 
   <UIPermissionManagerGrid>
     <header>
-      <owner>Ijin</owner>
+      <owner>Izin</owner>
       <accessible>Dapat diakses</accessible>
       <editable>Bisa diedit</editable>
       <action>Tindakan</action>
     </header>
     <msg>
-      <confirm-delete-permission>Apakah anda yakin  ingin menghapus izin ini?</confirm-delete-permission>
+      <confirm-delete-permission>Apakah Kamu yakin ingin menghapus izin ini?</confirm-delete-permission>
       <no-permission-remove>Kamu tidak mempunyai izin.</no-permission-remove>
       <access-denied>Akses ditolak.</access-denied>
       <node-locked>Elemen path {0} atau salah satu orang tuanya yang terkunci.</node-locked>
       <userOrGroup-required>Kamu harus pilih kelompok atau pengguna.</userOrGroup-required>
       <checkbox-require>Kamu harus menetapkan hak.</checkbox-require>
-      <node-checkedin>Kamu harus keluar terlebih dahulu.</node-checkedin>
+      <node-checkedin>Kamu harus check dulu.</node-checkedin>
     </msg>
   </UIPermissionManagerGrid>
 
   <UIPermissionInputSetWithAction>
     <title>
-      <SelectUser>Memilih Pengguna</SelectUser>
+      <SelectUser>Pilih Pengguna</SelectUser>
       <SelectMember>Pilih Anggota</SelectMember>
       <AddAny>Tambahkan Izin Lainnya</AddAny>
     </title>
@@ -324,19 +324,19 @@
 
   <UIUserSelectorPopupWindow>
     <title>
-      <UIUserContainer>Memilih Pengguna</UIUserContainer>
+      <UIUserContainer>Pilihan Pengguna</UIUserContainer>
     </title>
   </UIUserSelectorPopupWindow>
 
   <UIGroupSelectorPopupWindow>
     <title>
-      <UIGroupMemberSelector>Memilih grup</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Pilihan Grup</UIGroupMemberSelector>
     </title>
   </UIGroupSelectorPopupWindow>
 
   <UIGroupMemberSelector>
     <label>
-      <selectGroup>Pilih Kelompok</selectGroup>
+      <selectGroup>Pilih Grup</selectGroup>
       <selectMembership>Pilih Keanggotaan</selectMembership>
     </label>
   </UIGroupMemberSelector>
@@ -382,7 +382,7 @@
   </UIWizardPageSelectLayoutForm>
 
   <Signin>
-    <welcome>Selamat Datang</welcome>
+    <welcome>Selamat datang</welcome>
     <login>Masuk</login>
     <logout>Keluar</logout>
     <language>Ganti Bahasa</language>
@@ -415,13 +415,13 @@
       <Systemfiles>Berkas Sistem</Systemfiles>
       <ValidationRequestsDocumentsCenter>Pusat Dokumen Permintaan Validasi</ValidationRequestsDocumentsCenter>
       <ManagedSites>Pengelolaan Situs</ManagedSites>
-      <SharedSite>Situs bersama</SharedSite>
+      <SharedSite>Situs Berbagi</SharedSite>
     </title>
   </ContentSelector>
   
   <UICategoryNavigationTargetPathPopupWindow>
     <title>
-      <UIPageSelector>Pemilihan halaman</UIPageSelector>
+      <UIPageSelector>Memilih halaman</UIPageSelector>
     </title>
   </UICategoryNavigationTargetPathPopupWindow>
   
@@ -432,7 +432,7 @@
   </UIDocumentInfo>
   <UIPortalApplication>
     <title>
-      <abort>Menggugurkan</abort>
+      <abort>Batalkan</abort>
     </title>
   </UIPortalApplication>    
   

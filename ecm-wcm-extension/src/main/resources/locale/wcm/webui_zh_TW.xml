@@ -46,7 +46,7 @@
   <Views>
     <label>
       <wcm-view>Web</wcm-view>
-      <admin-view>Admin</admin-view>
+      <admin-view>管理員</admin-view>
       <icon-view>圖示</icon-view>
       <thumbails-view>縮略圖</thumbails-view>
       <list-view>清單</list-view>
@@ -182,7 +182,7 @@
   <UIContentSearchForm>
     <title>
       <Location>網站名稱</Location>
-      <SearchByName>按名稱搜尋</SearchByName>
+      <SearchByName>按名稱搜索</SearchByName>
       <Fulltext>單詞或短語在上下文中</Fulltext>
       <Property>屬性</Property>
       <Contain>包含</Contain>
@@ -192,12 +192,12 @@
     </title>
     <tooltip>
       <AddMetadataType>增加屬性</AddMetadataType>
-      <AddNodeType>新增節點類型</AddNodeType>
+      <AddNodeType>增加節點類型</AddNodeType>
     </tooltip>    
     <label>
       <option>
         <CREATED>已建立</CREATED>
-        <MODIFIED>修改</MODIFIED>
+        <MODIFIED>已修改</MODIFIED>
       </option>
     </label>
     <action>
@@ -213,10 +213,10 @@
       <empty-doctype>Please select a document type</empty-doctype>
       <empty-startDate>"From Date" is required</empty-startDate>
       <invalid-format>欄位"{0}"不正確的日期/時間格式。</invalid-format>
-      <invalid-date>"結束日期必須晚於開始日期"</invalid-date>
+      <invalid-date>"To Date" must be later than "From Date"</invalid-date>
       <invalid-startDate>"From Date" must not be later than today</invalid-startDate>
       <invalid-nodeType>節點類型"{0}"無效。請再次檢查。</invalid-nodeType>
-      <invalid-keyword>關鍵字不正確。無法識別某些字元。</invalid-keyword>
+      <invalid-keyword>關鍵字不正確。不支援某些字元。</invalid-keyword>
     </msg>
   </UIContentSearchForm>
 
@@ -259,7 +259,7 @@
     </header>
     <title>
       <Select>選擇</Select>
-      <View>檢視</View>
+      <View>查看</View>
     </title>
     <msg>
     <template-not-support>無法預覽此內容。該範本不受支援</template-not-support>
@@ -310,7 +310,7 @@
       <node-locked>路徑元素 {0} 已被父母其中之一鎖定。</node-locked>
       <userOrGroup-required>您必須選擇一個使用者或群組。</userOrGroup-required>
       <checkbox-require>您必須設定權限。</checkbox-require>
-      <node-checkedin>您必須簽出第一次。</node-checkedin>
+      <node-checkedin>您必須檢查一次。</node-checkedin>
     </msg>
   </UIPermissionManagerGrid>
 

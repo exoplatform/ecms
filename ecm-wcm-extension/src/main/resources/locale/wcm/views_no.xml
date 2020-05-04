@@ -23,7 +23,7 @@
   <WebLink>
     <view>
       <label>
-        <url>URL</url>
+        <url>Nettadresse</url>
         <description>Beskrivelse</description>
       </label>
     </view>
@@ -35,7 +35,7 @@
         <title>Nettstedets tittel</title>
         <description>Nettstedsbeskrivelse</description>
         <keywords>Nøkkelord for nettstedet</keywords>
-        <robots>Søkemotor oppsett</robots>
+        <robots>Søkemotoroppsett</robots>
       </label>
       <tooltip>
         <add-edit>Legg til/Rediger Metadata</add-edit>

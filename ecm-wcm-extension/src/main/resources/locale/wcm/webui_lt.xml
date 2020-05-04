@@ -141,7 +141,7 @@
   <UISelectedContentGrid>
     <label>
       <name>#{word.name}</name>
-      <add>Pridėti</add>
+      <add>Add</add>
       <delete>Ištrinti</delete>
     </label>
     <msg>
@@ -186,18 +186,18 @@
       <Fulltext>Žodis ar frazės kontekste</Fulltext>
       <Property>Ypatybė</Property>
       <Contain>Turi</Contain>
-      <FromDate>Data nuo</FromDate>
-      <ToDate>Data iki</ToDate>
+      <FromDate>Nuo Data</FromDate>
+      <ToDate>Iki data</ToDate>
       <DocumentType>Dokumento tipas</DocumentType>
     </title>
     <tooltip>
-      <AddMetadataType>Pridėti savybę</AddMetadataType>
-      <AddNodeType>Pridėti mazgo tipą</AddNodeType>
+      <AddMetadataType>Add Property</AddMetadataType>
+      <AddNodeType>Add Node Type</AddNodeType>
     </tooltip>    
     <label>
       <option>
         <CREATED>Sukurta</CREATED>
-        <MODIFIED>Modifikuota</MODIFIED>
+        <MODIFIED>Modifikuotas</MODIFIED>
       </option>
     </label>
     <action>
@@ -213,10 +213,10 @@
       <empty-doctype>Please select a document type</empty-doctype>
       <empty-startDate>"From Date" is required</empty-startDate>
       <invalid-format>Neleistinas datos/laiko formatas lauke '{0}'.</invalid-format>
-      <invalid-date>"Data iki" turi būti vėlesnė už "Data nuo"</invalid-date>
+      <invalid-date>"To Date" must be later than "From Date"</invalid-date>
       <invalid-startDate>"From Date" must not be later than today</invalid-startDate>
       <invalid-nodeType>Mazgo tipas "{0}" yra netinkamas. Prašome patikrinti dar kartą.</invalid-nodeType>
-      <invalid-keyword>Raktinis žodis yra neteisingas. Kai kurie ženklai yra nepalaikomi.</invalid-keyword>
+      <invalid-keyword>Raktinis žodis yra neteisingas. Kai kurie ženklai yra nepripažįstami.</invalid-keyword>
     </msg>
   </UIContentSearchForm>
 
@@ -228,7 +228,7 @@
 
   <UIContentPropertySelector>
     <action>
-      <Add>Pridėti</Add>
+      <Add>Add</Add>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
@@ -304,20 +304,20 @@
       <action>Veiksmas</action>
     </header>
     <msg>
-      <confirm-delete-permission>Ar tikrai norite ištrinti šią teisę?</confirm-delete-permission>
+      <confirm-delete-permission>Ar tikrai norite panaikinti šį leidimą?</confirm-delete-permission>
       <no-permission-remove>Jūs neturite teisės.</no-permission-remove>
       <access-denied>Prieiga uždrausta.</access-denied>
       <node-locked>Kelio elementas {0} arba vienas iš jo pradininkų yra užrakintas.</node-locked>
       <userOrGroup-required>Pasirinkite vartotoją arba grupę.</userOrGroup-required>
       <checkbox-require>Turite nustatyti teises.</checkbox-require>
-      <node-checkedin>Turite pirmiau išsiregistruoti.</node-checkedin>
+      <node-checkedin>Jums pirmiau reikia išsiregistruoti.</node-checkedin>
     </msg>
   </UIPermissionManagerGrid>
 
   <UIPermissionInputSetWithAction>
     <title>
       <SelectUser>Pasirinkti vartotoją</SelectUser>
-      <SelectMember>Pasirinkti narį</SelectMember>
+      <SelectMember>Select Member</SelectMember>
       <AddAny>Pridėkite bet kokią teisę</AddAny>
     </title>
   </UIPermissionInputSetWithAction>

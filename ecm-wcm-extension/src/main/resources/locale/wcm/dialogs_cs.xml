@@ -26,10 +26,10 @@
         <MainContent>Hlavní obsah</MainContent>
         <cssFile>default.css</cssFile>
         <jsFile>default.js</jsFile>
-        <Advanced>Pokročilé</Advanced>
+        <Advanced>Pokročilé nastavení</Advanced>
         <Summary>Shrnutí</Summary>
         <name>#{word.name}</name>
-        <title>Popisek</title>
+        <title>Nadpis</title>
         <ContentCSS>CSS Data</ContentCSS>
         <hintCSS>Můžete specifikovat hlavní style sheet pro váš webový obsah. Tento styl přepíše styly definované na úrovni webu a na sdílené úrovni.</hintCSS>
         <ContentJS>JS Data</ContentJS>

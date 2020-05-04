@@ -52,7 +52,7 @@
     <dialog>
       <label>
         <name>#{word.name}</name>
-        <active>Активное</active>
+        <active>Активно</active>
         <priority>Приоритет</priority>
         <content>Данные CSS</content>
       </label>
@@ -63,7 +63,7 @@
     <dialog>
       <label>
         <name>#{word.name}</name>
-        <active>Активное</active>
+        <active>Активно</active>
         <priority>Приоритет</priority>
         <content>Данные JS</content>
       </label>

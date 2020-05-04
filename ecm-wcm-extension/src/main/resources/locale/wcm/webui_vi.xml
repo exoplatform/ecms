@@ -182,22 +182,22 @@
   <UIContentSearchForm>
     <title>
       <Location>Tên Site</Location>
-      <SearchByName>Tìm theo Tên</SearchByName>
+      <SearchByName>Tìm kiếm theo Tên</SearchByName>
       <Fulltext>Một từ hoặc đoạn trong ngữ cảnh</Fulltext>
       <Property>Thuộc tính</Property>
       <Contain>Chứa</Contain>
-      <FromDate>Ngày Bắt đầu</FromDate>
-      <ToDate>Ngày Kết thúc</ToDate>
+      <FromDate>Từ Ngày</FromDate>
+      <ToDate>Đến Ngày</ToDate>
       <DocumentType>Kiểu Tài liệu</DocumentType>
     </title>
     <tooltip>
-      <AddMetadataType>Thêm Thuộc Tính</AddMetadataType>
-      <AddNodeType>Têm Kiểu Node</AddNodeType>
+      <AddMetadataType>Thêm Thuộc tính</AddMetadataType>
+      <AddNodeType>Thêm Kiểu Nút</AddNodeType>
     </tooltip>    
     <label>
       <option>
-        <CREATED>Ngày tạo</CREATED>
-        <MODIFIED>Ngày sửa</MODIFIED>
+        <CREATED>Ngày Tạo</CREATED>
+        <MODIFIED>Ngày Sửa</MODIFIED>
       </option>
     </label>
     <action>
@@ -213,10 +213,10 @@
       <empty-doctype>Please select a document type</empty-doctype>
       <empty-startDate>"From Date" is required</empty-startDate>
       <invalid-format>Trường {0} có định dạng ngày/giờ không đúng.</invalid-format>
-      <invalid-date>"Ngày Kết thúc phải lớn hơn Ngày Bắt đầu"</invalid-date>
+      <invalid-date>"To Date" must be later than "From Date"</invalid-date>
       <invalid-startDate>"From Date" must not be later than today</invalid-startDate>
       <invalid-nodeType>Kiểu node "{0}" không đúng. Hãy kiểm tra lại.</invalid-nodeType>
-      <invalid-keyword>Từ khóa tìm kiếm không hợp lệ hoặc không được hỗ trợ.</invalid-keyword>
+      <invalid-keyword>Từ khóa không hợp lệ. Một số ký tự không được hỗ trợ.</invalid-keyword>
     </msg>
   </UIContentSearchForm>
 
@@ -239,7 +239,7 @@
 
   <WebContentNodeTypePopup>
     <title>
-      <UIContentNodeTypeSelector>Chọn Kiểu Nút</UIContentNodeTypeSelector>
+      <UIContentNodeTypeSelector>Chọn kiểu nút</UIContentNodeTypeSelector>
     </title>
   </WebContentNodeTypePopup>
 
@@ -253,13 +253,13 @@
   <UIContentSearchResult>
     <header>
       <title>Tiêu đề</title>
-      <score>Đánh giá</score>
+      <score>Điểm</score>
       <publicationstate>Trạng thái Xuất bản</publicationstate>
       <action>Tác vụ</action>
     </header>
     <title>
       <Select>Chọn</Select>
-      <View>Xem</View>
+      <View>Cài đặt</View>
     </title>
     <msg>
     <template-not-support>Không thể xem trước nội dung này. Mẫu giao diện không được hỗ trợ.</template-not-support>
@@ -282,7 +282,7 @@
 
   <UIPermissionManager>
     <label>
-      <UIPermissionInputSetWithAction>Quyền</UIPermissionInputSetWithAction>
+      <UIPermissionInputSetWithAction>Phân quyền</UIPermissionInputSetWithAction>
       <UIAccessibleCheckboxInput>Quyền Truy cập</UIAccessibleCheckboxInput>
       <UIEditableCheckboxInput>Quỳnh Chỉnh sửa</UIEditableCheckboxInput>
     </label>
@@ -290,7 +290,7 @@
       <Save>#{word.save}</Save>
       <Clear>Làm lại</Clear>
       <title>
-        <Edit>Sửa</Edit>
+        <Edit>Chỉnh sửa</Edit>
         <Delete>Xóa</Delete>
       </title>
     </action>
@@ -298,19 +298,19 @@
 
   <UIPermissionManagerGrid>
     <header>
-      <owner>Quyền</owner>
+      <owner>Phân quyền</owner>
       <accessible>Truy cập</accessible>
       <editable>Chỉnh sửa</editable>
       <action>Tác vụ</action>
     </header>
     <msg>
-      <confirm-delete-permission>Bạn có chắc chắc muốn xóa quyền này?</confirm-delete-permission>
+      <confirm-delete-permission>Bạn có chắc chắn muốn xóa phân quyền này không?</confirm-delete-permission>
       <no-permission-remove>Bạn không có quyền.</no-permission-remove>
-      <access-denied>Truy cập bị từ chối.</access-denied>
+      <access-denied>Truy cập bị hủy bỏ</access-denied>
       <node-locked>Thành phần đường dẫn {0} hoặc một trong số thư mục cha bị khóa.</node-locked>
       <userOrGroup-required>Bạn cần phải lựa chọn người dùng hoặc nhóm.</userOrGroup-required>
       <checkbox-require>Bạn cần phải nhập quyền.</checkbox-require>
-      <node-checkedin>Bạn cần phải check-out trước.</node-checkedin>
+      <node-checkedin>Bạn phải check out trước.</node-checkedin>
     </msg>
   </UIPermissionManagerGrid>
 
@@ -343,7 +343,7 @@
 
   <UIContentDialogPreference>
     <action>
-      <Back>Quay về</Back>
+      <Back>Trở lại</Back>
     </action>
   </UIContentDialogPreference>
 
@@ -398,9 +398,9 @@
   <ContentSelector>
     <title>
       <PersonalDrives>Ổ đĩa Cá nhân</PersonalDrives>
-      <GeneralDrives>Ổ đĩa Chung</GeneralDrives>
-      <GroupDrives>Ổ đĩa Nhóm</GroupDrives>
-      <Private>Cá nhân</Private>
+      <GeneralDrives>Ổ đĩa chung</GeneralDrives>
+      <GroupDrives>Các ổ đĩa của nhóm</GroupDrives>
+      <Private>Riêng tư</Private>
       <Public>Công khai</Public>
       <BackupCenter>Ổ đĩa Sao lưu</BackupCenter>
       <CategorizedDocumentsCenter>Trung tâm Phân loại Tài liệu</CategorizedDocumentsCenter>
@@ -432,7 +432,7 @@
   </UIDocumentInfo>
   <UIPortalApplication>
     <title>
-      <abort>Thoát</abort>
+      <abort>Hủy</abort>
     </title>
   </UIPortalApplication>    
   

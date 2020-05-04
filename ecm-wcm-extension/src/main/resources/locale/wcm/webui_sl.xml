@@ -213,7 +213,7 @@
       <empty-doctype>Izberi vrsto dokumenta</empty-doctype>
       <empty-startDate>"Od datuma" je obvezen</empty-startDate>
       <invalid-format>Neveljavna oblika datum&amp;čas v polju '{0}'.</invalid-format>
-      <invalid-date>"Do datuma" mora biti kasneje kot "od datuma"</invalid-date>
+      <invalid-date>"To Date" must be later than "From Date"</invalid-date>
       <invalid-startDate>"Od datuma" ne sme biti poznejši od današnjega</invalid-startDate>
       <invalid-nodeType>Vrsta vozlišča "{0}" ni veljavna. Prosimo, preverite.</invalid-nodeType>
       <invalid-keyword>Ključna beseda ni veljavna. Nekateri znaki niso podprti.</invalid-keyword>
@@ -336,7 +336,7 @@
 
   <UIGroupMemberSelector>
     <label>
-      <selectGroup>Izberi skupino</selectGroup>
+      <selectGroup>Izberite skupino</selectGroup>
       <selectMembership>Izberi članstvo</selectMembership>
     </label>
   </UIGroupMemberSelector>

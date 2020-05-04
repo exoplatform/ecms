@@ -74,7 +74,7 @@
     <dialog>
       <label>
         <name>#{word.name}</name>
-        <url>URI</url>
+        <url>URL</url>
         <description>Beskrivning</description>
       </label>
     </dialog>

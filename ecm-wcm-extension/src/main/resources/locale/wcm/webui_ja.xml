@@ -46,7 +46,7 @@
   <Views>
     <label>
       <wcm-view>WCM ビュー</wcm-view>
-      <admin-view>管理者 ビュー</admin-view>
+      <admin-view>管理</admin-view>
       <icon-view>アイコン</icon-view>
       <thumbails-view>サムネイル</thumbails-view>
       <list-view>一覧</list-view>
@@ -213,10 +213,10 @@
       <empty-doctype>ドキュメント タイプを選択してください。</empty-doctype>
       <empty-startDate>"開始日"が必要です。</empty-startDate>
       <invalid-format>不正な日時フォーマットです '{0}'</invalid-format>
-      <invalid-date>"終了日は開始日より大きい必要があります"</invalid-date>
+      <invalid-date>"To Date" must be later than "From Date"</invalid-date>
       <invalid-startDate>「開始日」は、本日より後でなければなりません</invalid-startDate>
       <invalid-nodeType>ノードタイプ "{0}" が不正です。確認してください</invalid-nodeType>
-      <invalid-keyword>検索キーワードが無効です。文字列が認識されていません。</invalid-keyword>
+      <invalid-keyword>検索キーワードが無効です。認識されない文字列が存在しています。</invalid-keyword>
     </msg>
   </UIContentSearchForm>
 
@@ -239,7 +239,7 @@
 
   <WebContentNodeTypePopup>
     <title>
-      <UIContentNodeTypeSelector>ノードタイプセレクタ</UIContentNodeTypeSelector>
+      <UIContentNodeTypeSelector>ノードタイプセレクター</UIContentNodeTypeSelector>
     </title>
   </WebContentNodeTypePopup>
 
@@ -258,8 +258,8 @@
       <action>アクション</action>
     </header>
     <title>
-      <Select>セレクト</Select>
-      <View>ビュー</View>
+      <Select>選択</Select>
+      <View>ビューフォーム</View>
     </title>
     <msg>
     <template-not-support>このコンテンツをプレビューすることはできません。テンプレートはサポートされていません</template-not-support>
@@ -304,13 +304,13 @@
       <action>アクション</action>
     </header>
     <msg>
-      <confirm-delete-permission>削除しますか？</confirm-delete-permission>
+      <confirm-delete-permission>本当にこの権限を削除しますか？</confirm-delete-permission>
       <no-permission-remove>権限がありません。</no-permission-remove>
-      <access-denied>アクセスが拒否されました</access-denied>
+      <access-denied>アクセス出来ません</access-denied>
       <node-locked>パス {0} のアイテム、もしくは上位のレベルがロックされています。</node-locked>
       <userOrGroup-required>ユーザーもしくはグループを選択してください。</userOrGroup-required>
       <checkbox-require>訂正してください</checkbox-require>
-      <node-checkedin>先にチェックアウトする必要があります。</node-checkedin>
+      <node-checkedin>まず、チェックアウトする必要があります。</node-checkedin>
     </msg>
   </UIPermissionManagerGrid>
 
@@ -324,13 +324,13 @@
 
   <UIUserSelectorPopupWindow>
     <title>
-      <UIUserContainer>ユーザーセレクター</UIUserContainer>
+      <UIUserContainer>ユーザー・セレクター</UIUserContainer>
     </title>
   </UIUserSelectorPopupWindow>
 
   <UIGroupSelectorPopupWindow>
     <title>
-      <UIGroupMemberSelector>グループセレクタ</UIGroupMemberSelector>
+      <UIGroupMemberSelector>グループ選択</UIGroupMemberSelector>
     </title>
   </UIGroupSelectorPopupWindow>
 
@@ -385,7 +385,7 @@
     <welcome>ようこそ</welcome>
     <login>ログイン</login>
     <logout>ログアウト</logout>
-    <language>言語の変更</language>
+    <language>言語を変更</language>
     <register>登録</register>
   </Signin>
   <UIDriveForm>
@@ -401,7 +401,7 @@
       <GeneralDrives>一般ドライブ</GeneralDrives>
       <GroupDrives>グループドライブ</GroupDrives>
       <Private>プライベート</Private>
-      <Public>パブリック</Public>
+      <Public>公開</Public>
       <BackupCenter>バックアップセンタ</BackupCenter>
       <CategorizedDocumentsCenter>カテゴライズされたドキュメントセンタ</CategorizedDocumentsCenter>
       <CollaborationCenter>コラボレーションセンタ</CollaborationCenter>
@@ -421,7 +421,7 @@
   
   <UICategoryNavigationTargetPathPopupWindow>
     <title>
-      <UIPageSelector>ページセレクタ</UIPageSelector>
+      <UIPageSelector>ページ選択</UIPageSelector>
     </title>
   </UICategoryNavigationTargetPathPopupWindow>
   
