@@ -13,7 +13,7 @@
           <v-icon color="#a8b3c5">
             mdi-menu-right
           </v-icon>
-          {{ drive }}
+          {{ document.drive }}
         </div>
       </v-list-item-subtitle>
     </v-list-item-content>
@@ -57,18 +57,13 @@
       downloadUrl() {
         return `/rest/jcr/repository/collaboration${this.document.path}`;
       },
-      drive() {
-        return this.document.drive === 'Private' || this.document.drive === 'Other' ? this.$t(`documents.drive.label.${this.document.drive}`) : this.document.drive;
-      },
       openUrl() {
-        let path = `.space.${this.document.drive}`;
-        if (this.document.drive === 'Private') {
+        let path = 'Collaboration';
+        if (this.document.path.includes('/Users')) {
           path = 'Personal+Documents';
         }
-        else if (this.document.drive === 'Other') {
-          path = 'Collaboration';
-        }
-        return `${eXo.env.portal.context}/${eXo.env.portal.portalName}/documents?path=${path}${this.document.path}`;
+        path += this.document.path;
+        return `${eXo.env.portal.context}/${eXo.env.portal.portalName}/documents?path=${path}`;
       },
       relativeDateModified() {
         return this.getRelativeTime(this.document.dateModified.time);

@@ -125,8 +125,6 @@ public class DocumentServiceImpl implements DocumentService {
   private static final String COLLABORATION         = "collaboration";
   private static final String SEPARATOR             = "/";
   private static final String SPACES_NODE_PATH = "/Groups/spaces";
-  private static final String USERS_NODE_PATH = "/Users";
-  private static final String OTHER_DRIVE = "Other";
   private static final Log LOG                 = ExoLogger.getLogger(DocumentServiceImpl.class);
   private final List<NewDocumentTemplateProvider> templateProviders = new ArrayList<>();
   private final List<DocumentEditorProvider> editorProviders = new ArrayList<>();
@@ -698,8 +696,7 @@ public class DocumentServiceImpl implements DocumentService {
     List<Document> documents = new ArrayList<Document>();
     if (query != null) {
       ManageableRepository manageableRepository = repoService.getCurrentRepository();
-      SessionProvider sessionProvider = SessionProvider.createSystemProvider();
-      Session session = sessionProvider.getSession(COLLABORATION, manageableRepository);
+      Session session = manageableRepository.getSystemSession(COLLABORATION);
       QueryManager queryManager = session.getWorkspace().getQueryManager();
       QueryImpl documentsQuery = (QueryImpl) queryManager.createQuery(query, Query.SQL);
       documentsQuery.setLimit(limit);
@@ -707,22 +704,16 @@ public class DocumentServiceImpl implements DocumentService {
       NodeIterator documentsIterator = queryResult.getNodes();
       while (documentsIterator.hasNext()) {
         Node documentNode = documentsIterator.nextNode();
+        Node originalDocumentNode = documentNode;
         if (documentNode.isNodeType(NodetypeConstant.EXO_SYMLINK)) {
-          documentNode = linkManager.getTarget(documentNode);
+          originalDocumentNode = linkManager.getTarget(documentNode);
         }
-        String documentNodePath = documentNode.getPath();
-        String documentDrive = OTHER_DRIVE;
-        if (documentNodePath.contains(SPACES_NODE_PATH)) {
-          documentDrive = getSpaceFromNodePath(documentNodePath);
-        }
-        else if (documentNodePath.contains(USERS_NODE_PATH)) {
-          documentDrive = Utils.PRIVATE;
-        }
-        Document document = new Document(documentNode.getUUID(),
-                                         Utils.getTitle(documentNode),
+        String documentNodePath = originalDocumentNode.getPath();
+        Document document = new Document(originalDocumentNode.getUUID(),
+                                         Utils.getTitle(originalDocumentNode),
                                          documentNodePath,
-                                         documentDrive,
-                                         Utils.getFileType(documentNode),
+                                         documentNodePath.contains(SPACES_NODE_PATH) ? getSpaceFromNodePath(documentNodePath) : documentNode.getParent().getName(),
+                                         Utils.getFileType(originalDocumentNode),
                                          Utils.getDate(documentNode).getTime());
         documents.add(document);
       }
