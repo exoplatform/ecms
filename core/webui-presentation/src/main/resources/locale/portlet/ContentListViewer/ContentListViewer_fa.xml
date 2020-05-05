@@ -23,6 +23,7 @@
       <Title>تنظیمات فهرست مطالب</Title>
       <ContentSelectionBlock>انتخاب محتوا</ContentSelectionBlock>
       <UICLVConfigDisplayModeFormRadioBoxInput>حالت</UICLVConfigDisplayModeFormRadioBoxInput>
+      <UICLVConfigCheckTranslationFormCheckboxInput>Multi-language support</UICLVConfigCheckTranslationFormCheckboxInput>
       <UICLVConfigItemPathFormInputSet>مسیر پوشه</UICLVConfigItemPathFormInputSet>
     <UICLVConfigItemPathFormStringInput>مسیر پوشه</UICLVConfigItemPathFormStringInput>
       <UICLVConfigOrderByFormSelectBox>مرتب کردن بر اساس</UICLVConfigOrderByFormSelectBox>
@@ -69,6 +70,7 @@
       <UICLVConfigCacheEnableRadioBoxInput>Share content between users</UICLVConfigCacheEnableRadioBoxInput>
     </label>
     <help>
+      <TranslationHelp>If you check this option, only contents with the user's language will appear in the list. For example: when this option is checked and that the user language is English, only contents written in the English language will be listed. Whereas when this option is not checked we list all the contents inside the folder.</TranslationHelp>
       <ModeSelectionHelp>دو حالت برای نمایش محتوا وجود دارد. "بر اساس پوشه" که همه محتوای موجود در پوشه/دسته انتخاب شده را نمایش می دهد. "بر اساس محتوا" که با انتخاب آن می توانید محتوای دلخواه خود را برای نماش برگزینید.</ModeSelectionHelp>
       <FolderPathHelp>محتوای دلخواه خود را برگزینید. در صورت فعال نمودن ناوبری پویا لیست محتوای پیش فرض جایگزین خواهد شد (حالت پیشرفته زیر را ببینید).</FolderPathHelp>
       <HeaderOptionHelp>نمایش سربرگ در بالای لیست محتوا. در صورت فعال نمودن تشخیص خودکار، سیستم بر اساس انتخاب فعلی سربرگ را خواهد یافت.</HeaderOptionHelp>

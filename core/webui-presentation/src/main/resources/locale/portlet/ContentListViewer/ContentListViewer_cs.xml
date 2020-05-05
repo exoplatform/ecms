@@ -23,6 +23,7 @@
       <Title>Preference seznamu obsahu</Title>
       <ContentSelectionBlock>Výběr obsahu</ContentSelectionBlock>
       <UICLVConfigDisplayModeFormRadioBoxInput>Režim</UICLVConfigDisplayModeFormRadioBoxInput>
+      <UICLVConfigCheckTranslationFormCheckboxInput>Multi-language support</UICLVConfigCheckTranslationFormCheckboxInput>
       <UICLVConfigItemPathFormInputSet>Cesta ke složce</UICLVConfigItemPathFormInputSet>
     <UICLVConfigItemPathFormStringInput>Cesta ke složce</UICLVConfigItemPathFormStringInput>
       <UICLVConfigOrderByFormSelectBox>Seřadit podle</UICLVConfigOrderByFormSelectBox>
@@ -69,6 +70,7 @@
       <UICLVConfigCacheEnableRadioBoxInput>Share content between users</UICLVConfigCacheEnableRadioBoxInput>
     </label>
     <help>
+      <TranslationHelp>If you check this option, only contents with the user's language will appear in the list. For example: when this option is checked and that the user language is English, only contents written in the English language will be listed. Whereas when this option is not checked we list all the contents inside the folder.</TranslationHelp>
       <ModeSelectionHelp>Pro zobrazování obsahu jsou k dispozici dva režimy. "Podle složky" vybere všechen dostupný obsah v dané složce/kategorii. "Podle obsahu" umožňuje ručně vybrat obsah, který chcete zobrazit.</ModeSelectionHelp>
       <FolderPathHelp>Vyberte obsah, který chcete zobrazit. Pokud aktivujete možnost dynamické navigace (viz níže pokročilý režim), bude výchozí výběr nahrazen dynamicky.</FolderPathHelp>
       <HeaderOptionHelp>Zobrazit záhlaví na vrcholu seznamu obsahu. Pokud aktivujete možnost automatické detekce, pokusí se systém najít záhlaví na základě aktuálního výběru.</HeaderOptionHelp>

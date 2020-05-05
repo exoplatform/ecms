@@ -33,8 +33,8 @@
     <view>
       <label>
         <title>Titre du site</title>
-        <description>Description du Site</description>
-        <keywords>Mots Clés du Site</keywords>
+        <description>Description du site</description>
+        <keywords>Mots clés du site</keywords>
         <robots>Comportement des moteurs de recherche</robots>
       </label>
       <tooltip>
@@ -42,7 +42,7 @@
         <cancel>#{word.cancel}</cancel>
       </tooltip>
       <action>
-        <add-edit>Ajouter/Modifier</add-edit>
+        <add-edit>Modifier</add-edit>
         <cancel>#{word.cancel}</cancel>
       </action>
     </view>

@@ -100,7 +100,7 @@
     <selectBoxValues>
       <FilterBy>Filteren op</FilterBy>
       <WebContent>Webinhoud</WebContent>
-      <DMSDocument>Documents</DMSDocument>
+      <DMSDocument>Document</DMSDocument>
       <Media>Media</Media>
     </selectBoxValues>
     <msg>
@@ -112,7 +112,7 @@
     <selectBoxValues>
       <FilterBy>Filteren op</FilterBy>
       <WebContent>Webinhoud</WebContent>
-      <DMSDocument>Documents</DMSDocument>
+      <DMSDocument>Document</DMSDocument>
       <Media>Media</Media>
     </selectBoxValues>
   </UIContentBrowsePanelMulti>
@@ -191,7 +191,7 @@
       <DocumentType>Document Type</DocumentType>
     </title>
     <tooltip>
-      <AddMetadataType>Properties toevoegen</AddMetadataType>
+      <AddMetadataType>eigenschap toevoegen</AddMetadataType>
       <AddNodeType>node type toevoegen</AddNodeType>
     </tooltip>    
     <label>
@@ -213,7 +213,7 @@
       <empty-doctype>Selecteer een documenttype</empty-doctype>
       <empty-startDate>"Vanaf" is vereist</empty-startDate>
       <invalid-format>Ongeldige datum/tijdnotatie in veld '{0}'.</invalid-format>
-      <invalid-date>"Tot op heden"moet uiterlijk"van datum"</invalid-date>
+      <invalid-date>"To Date" must be later than "From Date"</invalid-date>
       <invalid-startDate>"Na" mag niet later dan vandaag</invalid-startDate>
       <invalid-nodeType>Het Nodetype "{0}" is ongeldig. Controleer het opnieuw.</invalid-nodeType>
       <invalid-keyword>Het sleutelwoord is ongeldig. Sommige tekens worden niet ondersteund.</invalid-keyword>
@@ -222,7 +222,7 @@
 
   <WebContentMetadataPopup>
     <title>
-      <UIContentPropertySelector>Properties Selector</UIContentPropertySelector>
+      <UIContentPropertySelector>Eigenschap Selector</UIContentPropertySelector>
     </title>
   </WebContentMetadataPopup>
 
@@ -259,7 +259,7 @@
     </header>
     <title>
       <Select>Selecteren</Select>
-      <View>Tonen</View>
+      <View>Zicht Formulier</View>
     </title>
     <msg>
     <template-not-support>Geen voorvertoning weergeven van deze inhoud. De sjabloon wordt niet ondersteund</template-not-support>
@@ -316,7 +316,7 @@
 
   <UIPermissionInputSetWithAction>
     <title>
-      <SelectUser>Selecteer gebruiker</SelectUser>
+      <SelectUser>Selecteer Gebruiker</SelectUser>
       <SelectMember>Selecteer lid</SelectMember>
       <AddAny>Toevoegen van toestemming</AddAny>
     </title>
@@ -337,7 +337,7 @@
   <UIGroupMemberSelector>
     <label>
       <selectGroup>Selecteer Groep</selectGroup>
-      <selectMembership>Selecteer lidmaatschap</selectMembership>
+      <selectMembership>Select membership</selectMembership>
     </label>
   </UIGroupMemberSelector>
 
@@ -367,7 +367,7 @@
     <label>
       <SingleContentViewer>Enkele inhoud kijker</SingleContentViewer>
       <ContentListViewer>Inhoudslijst Viewer</ContentListViewer>
-      <Search>Zoeken</Search>
+      <Search>Zoek</Search>
       <Sitemap>Sitemap</Sitemap>
       <TwoColumnsLayout>Twee-kolom lay-out</TwoColumnsLayout>
       <ThreeColumnsLayout>Drie kolommen lay-out</ThreeColumnsLayout>

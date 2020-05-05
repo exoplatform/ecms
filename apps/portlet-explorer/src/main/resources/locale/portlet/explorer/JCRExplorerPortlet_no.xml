@@ -597,7 +597,7 @@
       <RestoreFromTrash>Gjenopprett fra papirkurven</RestoreFromTrash>
       <EmptyTrash>Tøm papirkurven</EmptyTrash>
       <WebDavView>Open in MS Office</WebDavView>
-      <Download>Download</Download>
+      <Download>Last ned</Download>
       <OpenDocument>Remote Edit</OpenDocument>
       <EditProperty>Edit Document Properties</EditProperty>
       <UploadNewVersion>Upload a new version</UploadNewVersion>
@@ -1321,7 +1321,7 @@
       <Cancel>#{word.cancel}</Cancel>
       <Export>Eksporter</Export>
     </action>
-    <title>Export</title>
+    <title>Eksporter</title>
   </UIExportNode>
   <!--
   ###############################################################################
@@ -1330,7 +1330,7 @@
   -->
   <PopupUserSelector>
     <title>
-      <UIUserContainer>Permission Selector</UIUserContainer>
+      <UIUserContainer>Rettighets velger</UIUserContainer>
     </title>
   </PopupUserSelector>
   <UIPopupTaxonomy>
@@ -1351,7 +1351,7 @@
     </summary>
     <tooltip>
       <original>Original Version</original>
-      <version>Version</version>
+      <version>Versjon</version>
       <baseVersion>current draft</baseVersion>
       <addLabel>Legge til etikett</addLabel>
       <removeLable>Fjern etikett</removeLable>
@@ -1517,7 +1517,7 @@
       <Cancel>#{word.cancel}</Cancel>
       <Import>Importer</Import>
     </action>
-    <title>Import</title>
+    <title>Importer</title>
     <msg>
       <import-successful>Importert.</import-successful>
       <filename-invalid>Velg en .xml fil via "filopplasting"-feltet for å importere.</filename-invalid>
@@ -1574,7 +1574,7 @@
   <UIViewVersion>
     <label>
       <nodeType>Nodetype</nodeType>
-      <nodeName>Name</nodeName>
+      <nodeName>Navn</nodeName>
       <VersionNumber>Versjonsnummer</VersionNumber>
       <VersionLabels>Versjonsetiketter</VersionLabels>
       <VersionDate>Versjonsdato</VersionDate>
@@ -1875,7 +1875,7 @@
     </label>
     <title>
       <exeButton>Gå</exeButton>
-      <backButton>Back</backButton>
+      <backButton>Tilbake</backButton>
       <showHistory>Show History</showHistory>
       <changeNode>Endre node</changeNode>
     </title>
@@ -2035,7 +2035,7 @@
       <private>Privat</private>
       <state>Tilstand</state>
       <visibility>Synlighet</visibility>
-      <nodeName>Name:</nodeName>
+      <nodeName>navn:</nodeName>
       <lifecycleName>Navn på livssyklus</lifecycleName>
       <stateName>Navn på status</stateName>
     </label>
@@ -2273,7 +2273,7 @@
 
   <PopupSelectPath>
     <title>
-      <UIOneNodePathSelector>Select Path</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Velg sti</UIOneNodePathSelector>
     </title>
   </PopupSelectPath>
 
@@ -2303,7 +2303,7 @@
   <UISymLinkForm>
     <label>
       <symLinkName>Symlink navn</symLinkName>
-      <pathNode>Path</pathNode>
+      <pathNode>Sti</pathNode>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -2459,7 +2459,7 @@
       <Back>Tilbake til Gi nytt navn</Back>
       <Keepfile>Behold begge filene</Keepfile>
 <ReadOnly>Open Read-only</ReadOnly>
-<Cancel>Cancel</Cancel>
+<Cancel>Avbryt</Cancel>
       <KeepBoth>Keep Both</KeepBoth>
       <CreateNewVersion>Save as new version</CreateNewVersion>
     </label>

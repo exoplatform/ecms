@@ -34,7 +34,7 @@
       <label>
         <title>Naslov strani</title>
         <description>Opis mesta</description>
-        <keywords>Ključne besede mesta</keywords>
+        <keywords>Ključne besede strani</keywords>
         <robots>Obnašanje mehanizma za iskanje</robots>
       </label>
       <tooltip>

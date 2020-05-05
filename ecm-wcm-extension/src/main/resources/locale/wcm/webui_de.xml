@@ -182,7 +182,7 @@
   <UIContentSearchForm>
     <title>
       <Location>Seitenname</Location>
-      <SearchByName>Suche nach Namen</SearchByName>
+      <SearchByName>Nach Namen suchen</SearchByName>
       <Fulltext>Ein Wort oder Ausdruck im Kontext</Fulltext>
       <Property>Eigenschaft</Property>
       <Contain>Enthalten</Contain>
@@ -197,7 +197,7 @@
     <label>
       <option>
         <CREATED>Erstellt</CREATED>
-        <MODIFIED>Bearbeitet</MODIFIED>
+        <MODIFIED>Aktualisiert</MODIFIED>
       </option>
     </label>
     <action>
@@ -213,7 +213,7 @@
       <empty-doctype>Bitte wählen Sie einen Dokumenttyp aus</empty-doctype>
       <empty-startDate>"Von Datum" ist erforderlich</empty-startDate>
       <invalid-format>Ungültiges Datums-/Zeitformat im Feld '{0}'.</invalid-format>
-      <invalid-date>"Das Enddatum muss nach dem Anfangsdatum liegen"</invalid-date>
+      <invalid-date>"To Date" must be later than "From Date"</invalid-date>
       <invalid-startDate>"Von Datum" darf nicht später als heute sein</invalid-startDate>
       <invalid-nodeType>Der Knotentyp "{0}" ist ungültig. Bitte überprüfen Sie ihn.</invalid-nodeType>
       <invalid-keyword>Das Schlüsselwort ist ungültig. Einige Zeichen werden nicht erkannt.</invalid-keyword>
@@ -253,13 +253,13 @@
   <UIContentSearchResult>
     <header>
       <title>Titel</title>
-      <score>Ergebnis</score>
+      <score>Bewertung</score>
       <publicationstate>Veröffentlichungszustand</publicationstate>
       <action>Aktion</action>
     </header>
     <title>
       <Select>Auswählen</Select>
-      <View>Sehen</View>
+      <View>Einstellung</View>
     </title>
     <msg>
     <template-not-support>Diesen Inhalt können Sie nicht vorab anschauen. Die Vorlage wird nicht unterstützt</template-not-support>
@@ -337,7 +337,7 @@
   <UIGroupMemberSelector>
     <label>
       <selectGroup>Gruppe auswählen</selectGroup>
-      <selectMembership>Rolle auswählen</selectMembership>
+      <selectMembership>Mitgliedschaft auswählen</selectMembership>
     </label>
   </UIGroupMemberSelector>
 
@@ -367,7 +367,7 @@
     <label>
       <SingleContentViewer>Betrachter für einzelne Inhalte</SingleContentViewer>
       <ContentListViewer>Inhaltslistenbetrachter</ContentListViewer>
-      <Search>Suchen</Search>
+      <Search>Suche</Search>
       <Sitemap>Seitenübersicht</Sitemap>
       <TwoColumnsLayout>Zweispaltiges Layout</TwoColumnsLayout>
       <ThreeColumnsLayout>Dreispaltiges Layout</ThreeColumnsLayout>
@@ -399,7 +399,7 @@
     <title>
       <PersonalDrives>Persönliche Laufwerke</PersonalDrives>
       <GeneralDrives>Allgemeine Laufwerke</GeneralDrives>
-      <GroupDrives>Gruppenlaufwerke</GroupDrives>
+      <GroupDrives>Groups Drives</GroupDrives>
       <Private>Privat</Private>
       <Public>Öffentlich</Public>
       <BackupCenter>Backupcenter</BackupCenter>

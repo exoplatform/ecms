@@ -23,6 +23,7 @@
       <Title>Προτιμήσεις λίστας περιεχομένου</Title>
       <ContentSelectionBlock>Επιλογή του περιεχομένου</ContentSelectionBlock>
       <UICLVConfigDisplayModeFormRadioBoxInput>Λειτουργία</UICLVConfigDisplayModeFormRadioBoxInput>
+      <UICLVConfigCheckTranslationFormCheckboxInput>Multi-language support</UICLVConfigCheckTranslationFormCheckboxInput>
       <UICLVConfigItemPathFormInputSet>Διαδρομή φακέλου</UICLVConfigItemPathFormInputSet>
     <UICLVConfigItemPathFormStringInput>Διαδρομή φακέλου</UICLVConfigItemPathFormStringInput>
       <UICLVConfigOrderByFormSelectBox>Ταξινόμιση</UICLVConfigOrderByFormSelectBox>
@@ -69,6 +70,7 @@
       <UICLVConfigCacheEnableRadioBoxInput>Share content between users</UICLVConfigCacheEnableRadioBoxInput>
     </label>
     <help>
+      <TranslationHelp>If you check this option, only contents with the user's language will appear in the list. For example: when this option is checked and that the user language is English, only contents written in the English language will be listed. Whereas when this option is not checked we list all the contents inside the folder.</TranslationHelp>
       <ModeSelectionHelp>Δύο καταστάσεις λειτουργίας είναι διαθέσιμες για την εμφάνιση του περιεχομένου. "Από τον φάκελο" όπου θα πάρει όλο το περιεχόμενο που είναι διαθέσιμο στον επιλεγμένο φάκελο/κατηγορία και "Από το περιεχόμενο" όπου σας επιτρέπει να επιλέξετε με μη αυτόματο τρόπο το περιεχόμενο που θέλετε να εμφανίζεται.</ModeSelectionHelp>
       <FolderPathHelp>Επιλέξτε το περιεχόμενο που θέλετε να εμφανίζεται. Η προεπιλεγμένη επιλογή θα αντικατασταθεί δυναμικά αν ενεργοποιήσετε την λειτουργία "Δυναμική πλοήγηση" (δείτε την επιλογή για προχωρημένους παρακάτω).</FolderPathHelp>
       <HeaderOptionHelp>Εμφάνιση κεφαλίδας στην κορυφή της λίστας του περιεχομένου. Εάν ενεργοποιήσετε την επιλογή "Αυτόματη ανίχνευση", θα προσπαθήσει να βρει την κατάλληλη κεφαλίδα με βάση την τρέχουσα επιλογή.</HeaderOptionHelp>

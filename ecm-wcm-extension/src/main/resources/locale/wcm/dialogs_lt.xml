@@ -26,7 +26,7 @@
         <MainContent>Pagrindinis turinys</MainContent>
         <cssFile>default.css</cssFile>
         <jsFile>default.js</jsFile>
-        <Advanced>Plačiau</Advanced>
+        <Advanced>Papildomi</Advanced>
         <Summary>Santrauka</Summary>
         <name>#{word.name}</name>
         <title>Antraštė</title>

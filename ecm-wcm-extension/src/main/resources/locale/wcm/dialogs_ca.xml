@@ -38,7 +38,7 @@
         <Illustration>Miniatura</Illustration>
         <hintIllustration>Pot especificar una imatge que es mostrarà quan el contingut del seu web surti a la llista. També pot especificar alguns textos de resum per anar junt amb l'imatge.</hintIllustration>
         <confirm-delete>Està segur que vol suprimir aquesta miniatura?</confirm-delete>
-        <illustrationImage>Imatge de la miniatura</illustrationImage>
+        <illustrationImage>Miniatura de l'imatge</illustrationImage>
         <imageMimeType>Tipus d'imatge</imageMimeType>
         <image>Puja l'imatge</image>
         <imageWidth>Amplada d'imatge</imageWidth>

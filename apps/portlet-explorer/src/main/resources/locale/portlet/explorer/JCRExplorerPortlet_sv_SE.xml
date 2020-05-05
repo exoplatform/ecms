@@ -236,7 +236,7 @@
       <EditFormController>Redigera dokument</EditFormController>
       <UIRelationManager>Lägg till Relation</UIRelationManager>
       <UICategoryManager>Lägg till kategori</UICategoryManager>
-      <UIImportNode>Import</UIImportNode>
+      <UIImportNode>Importera</UIImportNode>
       <UIViewMetadataManager>Visa Metadata</UIViewMetadataManager>
       <UIVoteForm>Omröstning dokument</UIVoteForm>
       <UICommentForm>Kommentar</UICommentForm>
@@ -597,7 +597,7 @@
       <RestoreFromTrash>Återställ från papperskorgen</RestoreFromTrash>
       <EmptyTrash>Töm papperskorgen</EmptyTrash>
       <WebDavView>Open in MS Office</WebDavView>
-      <Download>Download</Download>
+      <Download>Ladda ner</Download>
       <OpenDocument>Remote Edit</OpenDocument>
       <EditProperty>Edit Document Properties</EditProperty>
       <UploadNewVersion>Upload a new version</UploadNewVersion>
@@ -1155,11 +1155,11 @@
   </UINodeTypeSelectForm>
   <UICompareExactlyForm>
     <label>
-      <filter>Filter:</filter>
+      <filter>Filtrera:</filter>
       <result>Resultat:</result>
     </label>
     <title>
-      <result>Filter</result>
+      <result>Filtrera</result>
     </title>
     <button>
       <label-Select>Välj</label-Select>
@@ -1321,7 +1321,7 @@
       <Cancel>#{word.cancel}</Cancel>
       <Export>Exportera</Export>
     </action>
-    <title>Export</title>
+    <title>Exportera</title>
   </UIExportNode>
   <!--
   ###############################################################################
@@ -1330,7 +1330,7 @@
   -->
   <PopupUserSelector>
     <title>
-      <UIUserContainer>Permission Selector</UIUserContainer>
+      <UIUserContainer>Väljare för behörighet</UIUserContainer>
     </title>
   </PopupUserSelector>
   <UIPopupTaxonomy>
@@ -1405,7 +1405,7 @@
       <e_512>Ta bort Mixin</e_512>
       <e_1024>Klon</e_1024>
       <e_2048>Uppdatera</e_2048>
-      <e_4096>Import</e_4096>
+      <e_4096>Importera</e_4096>
       <e_8192>Checka in</e_8192>
       <e_16384>Checka ut</e_16384>
       <e_32768>Återställ</e_32768>
@@ -1515,9 +1515,9 @@
     </label>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Import>Import</Import>
+      <Import>Importera</Import>
     </action>
-    <title>Import</title>
+    <title>Importera</title>
     <msg>
       <import-successful>Har importerats.</import-successful>
       <filename-invalid>Sök i en .xml-fil för fältet 'Ladda upp fil' för att importera.</filename-invalid>
@@ -1574,7 +1574,7 @@
   <UIViewVersion>
     <label>
       <nodeType>Nodtyp</nodeType>
-      <nodeName>Name</nodeName>
+      <nodeName>Namn</nodeName>
       <VersionNumber>Versionsnummer</VersionNumber>
       <VersionLabels>Versionsetiketter</VersionLabels>
       <VersionDate>Versionsdatum</VersionDate>
@@ -1875,7 +1875,7 @@
     </label>
     <title>
       <exeButton>Gå</exeButton>
-      <backButton>Back</backButton>
+      <backButton>Tillbaka</backButton>
       <showHistory>Show History</showHistory>
       <changeNode>Ändra nod</changeNode>
     </title>
@@ -2035,7 +2035,7 @@
       <private>Privat</private>
       <state>Läge</state>
       <visibility>Synlighet</visibility>
-      <nodeName>Name:</nodeName>
+      <nodeName>Namn:</nodeName>
       <lifecycleName>Livscykel namn</lifecycleName>
       <stateName>Läges namn</stateName>
     </label>
@@ -2273,7 +2273,7 @@
 
   <PopupSelectPath>
     <title>
-      <UIOneNodePathSelector>Select Path</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Välj sökväg</UIOneNodePathSelector>
     </title>
   </PopupSelectPath>
 
@@ -2303,7 +2303,7 @@
   <UISymLinkForm>
     <label>
       <symLinkName>Symlink namn</symLinkName>
-      <pathNode>Path</pathNode>
+      <pathNode>Sökväg</pathNode>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -2459,7 +2459,7 @@
       <Back>Tillbaka till namnbyte</Back>
       <Keepfile>Behåll båda filerna</Keepfile>
 <ReadOnly>Open Read-only</ReadOnly>
-<Cancel>Cancel</Cancel>
+<Cancel>Avbryt</Cancel>
       <KeepBoth>Keep Both</KeepBoth>
       <CreateNewVersion>Save as new version</CreateNewVersion>
     </label>

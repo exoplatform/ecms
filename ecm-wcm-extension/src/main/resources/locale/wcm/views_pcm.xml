@@ -24,7 +24,7 @@
     <view>
       <label>
         <url>URL</url>
-        <description>Wetin e dey all about</description>
+        <description>Description</description>
       </label>
     </view>
   </WebLink>
@@ -33,7 +33,7 @@
     <view>
       <label>
         <title>Site Title</title>
-        <description>Wetin the site dey about</description>
+        <description>Site Description</description>
         <keywords>Site Keywords</keywords>
         <robots>Search Engine Behavior</robots>
       </label>

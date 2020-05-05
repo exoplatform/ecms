@@ -32,10 +32,10 @@
   <SiteMetadata>
     <view>
       <label>
-        <title>Titolo del sito</title>
+        <title>Titolo Sito</title>
         <description>Descrizione Sito</description>
-        <keywords>Parole chiavi del sito</keywords>
-        <robots>Comportamento del Motore di Ricerca</robots>
+        <keywords>Parole Chiave del Sito</keywords>
+        <robots>Comportamento del Sito</robots>
       </label>
       <tooltip>
         <add-edit>Aggiungi/Modifica Metadata</add-edit>

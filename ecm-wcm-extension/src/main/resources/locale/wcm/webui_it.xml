@@ -46,10 +46,10 @@
   <Views>
     <label>
       <wcm-view>Vista WCM</wcm-view>
-      <admin-view>Vista Admin</admin-view>
+      <admin-view>Amministratore</admin-view>
       <icon-view>Icone</icon-view>
       <thumbails-view>Anteprime</thumbails-view>
-      <list-view>Elenco</list-view>
+      <list-view>Lista</list-view>
       <authoring-view>Authoring</authoring-view>
       <wcm-category-view>Categorie</wcm-category-view>
       <file-view>Vista di Gestione di file</file-view>
@@ -142,7 +142,7 @@
     <label>
       <name>#{word.name}</name>
       <add>Aggiungi</add>
-      <delete>Elimina</delete>
+      <delete>Cancellare</delete>
     </label>
     <msg>
       <no-content-found>Nessun contenuto trovato.</no-content-found>
@@ -184,10 +184,10 @@
       <Location>Nome Sito</Location>
       <SearchByName>Cerca per Nome</SearchByName>
       <Fulltext>Una parola o frase nel contesto</Fulltext>
-      <Property>Proprietà</Property>
+      <Property>ProprietÃ </Property>
       <Contain>Contiene</Contain>
-      <FromDate>Da Data</FromDate>
-      <ToDate>A Data</ToDate>
+      <FromDate>Da data</FromDate>
+      <ToDate>A data</ToDate>
       <DocumentType>Tipo Documento</DocumentType>
     </title>
     <tooltip>
@@ -196,12 +196,12 @@
     </tooltip>    
     <label>
       <option>
-        <CREATED>Creato</CREATED>
-        <MODIFIED>Modificato</MODIFIED>
+        <CREATED>Creata</CREATED>
+        <MODIFIED>Modificata</MODIFIED>
       </option>
     </label>
     <action>
-      <SearchWebContent>Cerca</SearchWebContent>
+      <SearchWebContent>Ricerca</SearchWebContent>
     </action>
     <msg>
       <time-to-late>Il tempo di ricerca è troppo lungo.</time-to-late>
@@ -213,10 +213,10 @@
       <empty-doctype>Seleziona un tipo di documento</empty-doctype>
       <empty-startDate>Il campo "Data di inizio" è obbligatorio</empty-startDate>
       <invalid-format>Formato data/tempo non valido nel campo '{0}'.</invalid-format>
-      <invalid-date>"A Data" dev'essere maggiore della "Da Date"</invalid-date>
+      <invalid-date>"To Date" must be later than "From Date"</invalid-date>
       <invalid-startDate>Il campo "Data di inizio" non deve riportare una data successiva ad oggi</invalid-startDate>
       <invalid-nodeType>Tipo nodo "{0}" non è valido. Prego controlla di nuovo.</invalid-nodeType>
-      <invalid-keyword>Parola chiave non è valida. Alcuni caratteri non sono supportati.</invalid-keyword>
+      <invalid-keyword>Parola chiave non valida. Alcuni caratteri non sono supportati.</invalid-keyword>
     </msg>
   </UIContentSearchForm>
 
@@ -232,8 +232,8 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
-      <metadataType>Tipo Metadata</metadataType>
-      <property_select>Proprietà</property_select>
+      <metadataType>Tipo Metadato</metadataType>
+      <property_select>ProprietÃ </property_select>
     </label>
   </UIContentPropertySelector>
 
@@ -254,12 +254,12 @@
     <header>
       <title>Titolo</title>
       <score>Punti</score>
-      <publicationstate>Stato Pubblicazione</publicationstate>
+      <publicationstate>Stato pubblicazione</publicationstate>
       <action>Azione</action>
     </header>
     <title>
       <Select>Seleziona</Select>
-      <View>Mostra</View>
+      <View>Vista</View>
     </title>
     <msg>
     <template-not-support>Impossibile vedere l'anteprima del contenuto. Il template non è supportato.</template-not-support>
@@ -290,8 +290,8 @@
       <Save>#{word.save}</Save>
       <Clear>Svuota</Clear>
       <title>
-        <Edit>Modifica</Edit>
-        <Delete>Elimina</Delete>
+        <Edit>Modificare</Edit>
+        <Delete>Cancellare</Delete>
       </title>
     </action>
   </UIPermissionManager>
@@ -304,13 +304,13 @@
       <action>Azione</action>
     </header>
     <msg>
-      <confirm-delete-permission>È sicuro di voler eliminare questo permesso?</confirm-delete-permission>
+      <confirm-delete-permission>Sei sicuro di voler eliminare questo permesso?</confirm-delete-permission>
       <no-permission-remove>Non hai il permesso.</no-permission-remove>
       <access-denied>Accesso negato.</access-denied>
       <node-locked>Oggetto con il path {0} oppure qualcosa di livello superiore è bloccato.</node-locked>
       <userOrGroup-required>Devi selezionare un utente o gruppo.</userOrGroup-required>
       <checkbox-require>Devi impostare i diritti.</checkbox-require>
-      <node-checkedin>Devi fare il check out prima.</node-checkedin>
+      <node-checkedin>Devi fare il checkout prima.</node-checkedin>
     </msg>
   </UIPermissionManagerGrid>
 
@@ -336,7 +336,7 @@
 
   <UIGroupMemberSelector>
     <label>
-      <selectGroup>Seleziona Gruppo</selectGroup>
+      <selectGroup>Seleziona il Gruppo</selectGroup>
       <selectMembership>Seleziona Membership</selectMembership>
     </label>
   </UIGroupMemberSelector>
@@ -367,7 +367,7 @@
     <label>
       <SingleContentViewer>Mostra Contenuto Singolo (SCV)</SingleContentViewer>
       <ContentListViewer>Mostra Contenuti in Lista (CLV)</ContentListViewer>
-      <Search>Cerca</Search>
+      <Search>Ricerca</Search>
       <Sitemap>Mappa sito</Sitemap>
       <TwoColumnsLayout>Layout Due-colonne</TwoColumnsLayout>
       <ThreeColumnsLayout>Layout Tre-colonne</ThreeColumnsLayout>
@@ -383,10 +383,10 @@
 
   <Signin>
     <welcome>Benvenuto</welcome>
-    <login>Accedi</login>
-    <logout>Esci</logout>
-    <language>Cambia Lingua</language>
-    <register>Registrati</register>
+    <login>Entra</login>
+    <logout>Uscire</logout>
+    <language>Cambiare Lingua</language>
+    <register>Registrarsi</register>
   </Signin>
   <UIDriveForm>
 <label>
@@ -421,7 +421,7 @@
   
   <UICategoryNavigationTargetPathPopupWindow>
     <title>
-      <UIPageSelector>Selettore Pagina</UIPageSelector>
+      <UIPageSelector>Selettore Pagine</UIPageSelector>
     </title>
   </UICategoryNavigationTargetPathPopupWindow>
   
@@ -432,7 +432,7 @@
   </UIDocumentInfo>
   <UIPortalApplication>
     <title>
-      <abort>Abbandona</abort>
+      <abort>Abbandonare</abort>
     </title>
   </UIPortalApplication>    
   

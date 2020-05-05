@@ -26,8 +26,8 @@
         <MainContent>メインコンテンツ</MainContent>
         <cssFile>デフォルトCSS</cssFile>
         <jsFile>デフォルトjS</jsFile>
-        <Advanced>詳細</Advanced>
-        <Summary>サマリー</Summary>
+        <Advanced>詳細設定</Advanced>
+        <Summary>サマリ</Summary>
         <name>#{word.name}</name>
         <title>タイトル</title>
         <ContentCSS>CSS データ</ContentCSS>
@@ -53,7 +53,7 @@
       <label>
         <name>#{word.name}</name>
         <active>アクティブ</active>
-        <priority>優先度</priority>
+        <priority>優先順位</priority>
         <content>CSS データ</content>
       </label>
     </dialog>
@@ -64,7 +64,7 @@
       <label>
         <name>#{word.name}</name>
         <active>アクティブ</active>
-        <priority>優先度</priority>
+        <priority>優先順位</priority>
         <content>JS データ</content>
       </label>
     </dialog>

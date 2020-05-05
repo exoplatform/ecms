@@ -53,7 +53,7 @@
       <label>
         <name>#{word.name}</name>
         <active>فعال</active>
-        <priority>اولویت</priority>
+        <priority>اولويت</priority>
         <content>داده های CSS</content>
       </label>
     </dialog>
@@ -64,7 +64,7 @@
       <label>
         <name>#{word.name}</name>
         <active>فعال</active>
-        <priority>اولویت</priority>
+        <priority>اولويت</priority>
         <content>داده های JS</content>
       </label>
     </dialog>
@@ -75,7 +75,7 @@
       <label>
         <name>#{word.name}</name>
         <url>آدرس</url>
-        <description>توضیحات</description>
+        <description>شرح</description>
       </label>
     </dialog>
   </WebLink>

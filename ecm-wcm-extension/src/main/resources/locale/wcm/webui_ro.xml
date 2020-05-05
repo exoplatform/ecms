@@ -142,7 +142,7 @@
     <label>
       <name>#{word.name}</name>
       <add>Adaugă</add>
-      <delete>Ştergeţi</delete>
+      <delete>Şterge</delete>
     </label>
     <msg>
       <no-content-found>Nu a fost găsit conținut.</no-content-found>
@@ -213,7 +213,7 @@
       <empty-doctype>Selecta-ți un tip de document</empty-doctype>
       <empty-startDate>"Din" este necesar</empty-startDate>
       <invalid-format>Format dată/oră invalid în câmpul '{0}'.</invalid-format>
-      <invalid-date>"La data de" trebuie să fie mai târziu decât "De la data"</invalid-date>
+      <invalid-date>"To Date" must be later than "From Date"</invalid-date>
       <invalid-startDate>"Din" nu trebuie să fie mai târziu decât astăzi</invalid-startDate>
       <invalid-nodeType>Tipul "{0}" al modulului este invalid. Vă rugăm să verificaţi din nou.</invalid-nodeType>
       <invalid-keyword>Cuvântul cheie este invalid. Unele caractere nu sunt recunoscute.</invalid-keyword>
@@ -282,7 +282,7 @@
 
   <UIPermissionManager>
     <label>
-      <UIPermissionInputSetWithAction>Permisiunea</UIPermissionInputSetWithAction>
+      <UIPermissionInputSetWithAction>Drepturi</UIPermissionInputSetWithAction>
       <UIAccessibleCheckboxInput>Dreptul de acces</UIAccessibleCheckboxInput>
       <UIEditableCheckboxInput>Drept editare</UIEditableCheckboxInput>
     </label>
@@ -291,14 +291,14 @@
       <Clear>Elimină</Clear>
       <title>
         <Edit>Modifică</Edit>
-        <Delete>Ştergeţi</Delete>
+        <Delete>Şterge</Delete>
       </title>
     </action>
   </UIPermissionManager>
 
   <UIPermissionManagerGrid>
     <header>
-      <owner>Permisiunea</owner>
+      <owner>Drepturi</owner>
       <accessible>Accesibil</accessible>
       <editable>Editabil</editable>
       <action>Acțiune</action>
@@ -316,7 +316,7 @@
 
   <UIPermissionInputSetWithAction>
     <title>
-      <SelectUser>Selectaţi utilizator</SelectUser>
+      <SelectUser>Selectaţi utilizatorul</SelectUser>
       <SelectMember>Selectaţi membru</SelectMember>
       <AddAny>Adauga orice permisiune</AddAny>
     </title>
@@ -324,7 +324,7 @@
 
   <UIUserSelectorPopupWindow>
     <title>
-      <UIUserContainer>Selector de utilizator</UIUserContainer>
+      <UIUserContainer>Selectare utilizator</UIUserContainer>
     </title>
   </UIUserSelectorPopupWindow>
 
@@ -382,11 +382,11 @@
   </UIWizardPageSelectLayoutForm>
 
   <Signin>
-    <welcome>Bun venit</welcome>
+    <welcome>Bine ai venit</welcome>
     <login>Autentificare</login>
     <logout>Deconectare</logout>
     <language>Schimbă limba</language>
-    <register>Înregistrează</register>
+    <register>Înregistrare</register>
   </Signin>
   <UIDriveForm>
 <label>
@@ -398,8 +398,8 @@
   <ContentSelector>
     <title>
       <PersonalDrives>Drive-uri personale</PersonalDrives>
-      <GeneralDrives>Drive-urile generale</GeneralDrives>
-      <GroupDrives>Drive-uri de grup</GroupDrives>
+      <GeneralDrives>Drive-uri generale</GeneralDrives>
+      <GroupDrives>Drive-uri grup</GroupDrives>
       <Private>Privat</Private>
       <Public>Public</Public>
       <BackupCenter>Centru Backup</BackupCenter>
@@ -432,7 +432,7 @@
   </UIDocumentInfo>
   <UIPortalApplication>
     <title>
-      <abort>Renunță</abort>
+      <abort>Anulare</abort>
     </title>
   </UIPortalApplication>    
   

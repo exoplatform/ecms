@@ -34,11 +34,11 @@
         <hintCSS>Vous pouvez spécifier la feuille de style principale pour votre contenu web. Ce style surchargera celui défini au niveau du site et au niveau partagé.</hintCSS>
         <ContentJS>Javascript</ContentJS>
         <hintJS>Vous pouvez spécifier du code JavaScript qui sera exécuté avant que votre contenu web est affiché sur la page.</hintJS>
-        <WebContentHtml>Contenu principal</WebContentHtml>
+        <WebContentHtml>Contenu Principal</WebContentHtml>
         <Illustration>Illustration</Illustration>
         <hintIllustration>Vous pouvez spécifier une image qui sera affichée lorsque votre contenu web sera affiché dans les listes. En plus, vous pouvez spécifier un résumé accompagnant cette image.</hintIllustration>
         <confirm-delete>Confirmez-vous la suppression de cette illustration?</confirm-delete>
-        <illustrationImage>Vignette Illustrative</illustrationImage>
+        <illustrationImage>Vignette</illustrationImage>
         <imageMimeType>Type d'image</imageMimeType>
         <image>Transférer l'image</image>
         <imageWidth>Largeur de l'image</imageWidth>
@@ -52,7 +52,7 @@
     <dialog>
       <label>
         <name>#{word.name}</name>
-        <active>Actif</active>
+        <active>Activé</active>
         <priority>Priorité</priority>
         <content>CSS</content>
       </label>
@@ -63,9 +63,9 @@
     <dialog>
       <label>
         <name>#{word.name}</name>
-        <active>Actif</active>
+        <active>Activé</active>
         <priority>Priorité</priority>
-        <content>JavaScript</content>
+        <content>Javascript</content>
       </label>
     </dialog>
   </JSFile>

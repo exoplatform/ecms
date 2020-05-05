@@ -85,7 +85,7 @@
   <UITabPane>
     <title>
       <UIContentBrowsePanelOne>Navegador de contéudo</UIContentBrowsePanelOne>
-      <UIContentBrowsePanelMulti>Navegador de conteúdo</UIContentBrowsePanelMulti>
+      <UIContentBrowsePanelMulti>Navegador de contéudo</UIContentBrowsePanelMulti>
       <UIContentBrowsePanelFolder>Navegador de pasta</UIContentBrowsePanelFolder>
       <UIContentSearchForm>Formulário de busca de conteúdo</UIContentSearchForm>
       <UIContentSearchResult>Resultado da busca</UIContentSearchResult>
@@ -100,7 +100,7 @@
     <selectBoxValues>
       <FilterBy>Filtrar por</FilterBy>
       <WebContent>Conteúdo Web</WebContent>
-      <DMSDocument>Documento</DMSDocument>
+      <DMSDocument>Documentos</DMSDocument>
       <Media>Mídia</Media>
     </selectBoxValues>
     <msg>
@@ -112,7 +112,7 @@
     <selectBoxValues>
       <FilterBy>Filtrar por</FilterBy>
       <WebContent>Conteúdo Web</WebContent>
-      <DMSDocument>Documento</DMSDocument>
+      <DMSDocument>Documentos</DMSDocument>
       <Media>Mídia</Media>
     </selectBoxValues>
   </UIContentBrowsePanelMulti>
@@ -126,14 +126,14 @@
 
   <UIContentBrowsePanelMulti>
     <label>
-      <LeftColumn>Selecine uma pasta para exibir seus filhos como conteúdo</LeftColumn>
+      <LeftColumn>Selecione uma pasta para exibir seus filhos como conteúdo</LeftColumn>
       <RightColumn>Abaixo estão os possíveis conteúdos que podem ser selecionados</RightColumn>
     </label>
   </UIContentBrowsePanelMulti>
 
   <UIContentBrowsePanelFolder>
     <label>
-      <LeftColumn>Selecine uma pasta para exibir seus filhos como conteúdo</LeftColumn>
+      <LeftColumn>Selecione uma pasta para exibir seus filhos como conteúdo</LeftColumn>
       <RightColumn>Abaixo estão os possíveis conteúdos que podem ser selecionados</RightColumn>
     </label>
   </UIContentBrowsePanelFolder>
@@ -142,7 +142,7 @@
     <label>
       <name>#{word.name}</name>
       <add>Adicionar</add>
-      <delete>Excluir</delete>
+      <delete>Eliminar</delete>
     </label>
     <msg>
       <no-content-found>Nenhum conteúdo encontrado</no-content-found>
@@ -182,17 +182,17 @@
   <UIContentSearchForm>
     <title>
       <Location>Nome do Site</Location>
-      <SearchByName>Buscar por nome</SearchByName>
+      <SearchByName>Busca por nome</SearchByName>
       <Fulltext>Uma palavra ou frase no contexto</Fulltext>
       <Property>Propriedade</Property>
       <Contain>Contém</Contain>
-      <FromDate>De</FromDate>
-      <ToDate>a</ToDate>
-      <DocumentType>Tipo de Documento</DocumentType>
+      <FromDate>Data de início</FromDate>
+      <ToDate>Data de término</ToDate>
+      <DocumentType>Tipo de documento</DocumentType>
     </title>
     <tooltip>
       <AddMetadataType>Adicionar propriedade</AddMetadataType>
-      <AddNodeType>Adicionar tipo de nó</AddNodeType>
+      <AddNodeType>Adicionar tipo de node</AddNodeType>
     </tooltip>    
     <label>
       <option>
@@ -201,7 +201,7 @@
       </option>
     </label>
     <action>
-      <SearchWebContent>Buscar</SearchWebContent>
+      <SearchWebContent>Pesquisar</SearchWebContent>
     </action>
     <msg>
       <time-to-late>O tempo de busca está demorando muito.</time-to-late>
@@ -213,16 +213,16 @@
       <empty-doctype>Por favor, selecione um tipo de documento</empty-doctype>
       <empty-startDate>O campo "Data inicial" é obrigatório</empty-startDate>
       <invalid-format>Formato de data/hora inválido no campo '{0}'</invalid-format>
-      <invalid-date>"Data final" deve ser maior que a "Data inicial"</invalid-date>
+      <invalid-date>"To Date" must be later than "From Date"</invalid-date>
       <invalid-startDate>O campo "Data inicial" não pode ser maior que a data de hoje</invalid-startDate>
       <invalid-nodeType>O tipo de nó "{0}" é inválido! Por favor verifique novamente.</invalid-nodeType>
-      <invalid-keyword>A palavra-chave é inválida. Alguns caracteres não são autorizados.</invalid-keyword>
+      <invalid-keyword>A palavra-chave é inválida. Alguns caracteres não são suportados.</invalid-keyword>
     </msg>
   </UIContentSearchForm>
 
   <WebContentMetadataPopup>
     <title>
-      <UIContentPropertySelector>Seletor de Propriedade</UIContentPropertySelector>
+      <UIContentPropertySelector>Seletor de propriedade</UIContentPropertySelector>
     </title>
   </WebContentMetadataPopup>
 
@@ -259,7 +259,7 @@
     </header>
     <title>
       <Select>Selecionar</Select>
-      <View>Visualizar</View>
+      <View>Visualização</View>
     </title>
     <msg>
     <template-not-support>Cannot preview this content. The template is not supported. Não é possível pré-visualizar este conteúdo. Este modelo não é suportado</template-not-support>
@@ -291,7 +291,7 @@
       <Clear>Limpar</Clear>
       <title>
         <Edit>Editar</Edit>
-        <Delete>Excluir</Delete>
+        <Delete>Eliminar</Delete>
       </title>
     </action>
   </UIPermissionManager>
@@ -304,19 +304,19 @@
       <action>Ação</action>
     </header>
     <msg>
-      <confirm-delete-permission>Quer mesmo excluir essa permissão ?</confirm-delete-permission>
+      <confirm-delete-permission>Tem certeza que deseja excluir esta permissão?</confirm-delete-permission>
       <no-permission-remove>Você não possui permissão para excluir.</no-permission-remove>
       <access-denied>Acesso negado.</access-denied>
       <node-locked>O elemento caminho (0) ou um de seus pais está bloqueado.</node-locked>
       <userOrGroup-required>Você deve selecionar um usuário ou um grupo.</userOrGroup-required>
       <checkbox-require>Você deve atribuir permissões.</checkbox-require>
-      <node-checkedin>Você deve verificar antes</node-checkedin>
+      <node-checkedin>Você deve reservar o nó primeiro.</node-checkedin>
     </msg>
   </UIPermissionManagerGrid>
 
   <UIPermissionInputSetWithAction>
     <title>
-      <SelectUser>Selecionar usuário</SelectUser>
+      <SelectUser>Selecionar Utilizador</SelectUser>
       <SelectMember>Selecionar membro</SelectMember>
       <AddAny>Adicionar qualquer permissão</AddAny>
     </title>
@@ -324,7 +324,7 @@
 
   <UIUserSelectorPopupWindow>
     <title>
-      <UIUserContainer>Seletor de Usuário</UIUserContainer>
+      <UIUserContainer>Seleção de utilizadores</UIUserContainer>
     </title>
   </UIUserSelectorPopupWindow>
 
@@ -336,8 +336,8 @@
 
   <UIGroupMemberSelector>
     <label>
-      <selectGroup>Selecionar grupo</selectGroup>
-      <selectMembership>Selecionar Associação</selectMembership>
+      <selectGroup>Selecionar Grupo</selectGroup>
+      <selectMembership>Selecione Associação</selectMembership>
     </label>
   </UIGroupMemberSelector>
 
@@ -367,8 +367,8 @@
     <label>
       <SingleContentViewer>Visualizador de conteúdo único</SingleContentViewer>
       <ContentListViewer>Visualizador de lista de conteúdo</ContentListViewer>
-      <Search>Buscar</Search>
-      <Sitemap>Mapa do Site</Sitemap>
+      <Search>Pesquisar</Search>
+      <Sitemap>Mapa do site</Sitemap>
       <TwoColumnsLayout>Layout de duas colunas</TwoColumnsLayout>
       <ThreeColumnsLayout>Layout de três colunas</ThreeColumnsLayout>
       <TwoRowsLayout>Duas linhas</TwoRowsLayout>
@@ -383,7 +383,7 @@
 
   <Signin>
     <welcome>Bem-vindo</welcome>
-    <login>Sair</login>
+    <login>Conectar</login>
     <logout>Sair</logout>
     <language>Mudar Idioma</language>
     <register>Registrar</register>
@@ -421,7 +421,7 @@
   
   <UICategoryNavigationTargetPathPopupWindow>
     <title>
-      <UIPageSelector>Seletor de Páginas</UIPageSelector>
+      <UIPageSelector>Seletor de página</UIPageSelector>
     </title>
   </UICategoryNavigationTargetPathPopupWindow>
   

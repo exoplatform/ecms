@@ -80,6 +80,9 @@ public void addActivityTimeLine(String ownerName, String ownerUri, String ownerA
     def viewActivityTip = _ctx.appRes("UIActivity.msg.ViewActivity");
     def deleteActivityTip = _ctx.appRes("UIActivity.msg.DeleteActivity");
     def labelComment = _ctx.appRes("UIActivity.label.Comment");
+    def labelComments= _ctx.appRes("UIActivity.comment.commentsLabel");
+    def labelLikesActivity = _ctx.appRes("UIActivity.label.likesLabel");
+    def labelLike = _ctx.appRes("UIActivity.label.Like");
     def labelCancel = _ctx.appRes("UIActivity.label.Cancel");
     def labelViewAllReplies = _ctx.appRes("UIActivity.label.ViewAllReplies");
     def inputWriteAComment = _ctx.appRes("UIActivity.input.Add_your_comment").replace("'", "\\'");
@@ -115,7 +118,6 @@ public void addActivityTimeLine(String ownerName, String ownerUri, String ownerA
 
     def openInOfficeConnector = WCMCoreUtils.getService(OpenInOfficeConnector.class);
 
-    //
     def commentList = uicomponent.getComments();
     def allComments = uicomponent.getAllComments();
     def commentCount = 0;
@@ -258,27 +260,44 @@ public void addActivityTimeLine(String ownerName, String ownerUri, String ownerA
     uiform.begin();
     def viewerId = Utils.getViewerIdentity().getId();
 %>
-    <div class="activityStream uiContentActivity fileActivity multiFilesActivity" id="activityContainer${activity.id}">
-        <%addActivityTimeLine(ownerName, ownerUri, ownerAvatar);%>
-    </div><!--end activityTimeLine-->
+    <div class="activityStream uiActivityStreamWrapper uiContentActivity fileActivity multiFilesActivity" id="activityContainer${activity.id}">
     <div class="boxContainer" id="boxContainer">
         <div id="ContextBox${activity.id}"class="uiBox contentBox">
             <div id="ActivityContextBox${activity.id}">
                 <div class="heading">
+                    <div class="activityHeader">
                     <span class="arrowLeft"></span>
-                <!--div class="pull-right"-->
-			    <%
-			  		if(activityEditable || activityDeletable) {
-			    %>
-                    <div id="dropDownEditActivity${activity.id}" class="btn-group uiDropdownWithIcon actLink hidden-phone hidden-tablet">
+                     <div class="activityAvatar avatarCircle">
+                        <a title="$ownerName" href="$ownerUri">
+                            <img alt="$ownerName" src="$ownerAvatar"/>
+                        </a>
+                    </div>
+                     <div class="activityAuthorAndDate">
+                    <div class="author">
+    <% if (uicomponent.isUserActivity() && uicomponent.isSpaceStreamOwner() && !uicomponent.isUISpaceActivitiesDisplay()) {
+        getOwnerSpace(ownerName, ownerUri, spaceSourceURI, spaceID, spaceName, spaceImageSource);
+    } else{
+        getOwner(ownerName, ownerUri);
+    } %>
+                    </div>
+        <div class="dataInfor">
+            <span class="dateTime"><i class="uiIconClock  uiIconLightGray"></i>&nbsp;<a id="EditActivityTime${activity.id}" rel="tooltip" data-placement="bottom" title="$absolutePostedTime" href="<%=uicomponent.getActivityPermalink(activity.id)%>"<% if(activity.postedTime != activity.updated.getTime() ){%>> $activityUpdatedTime <%} else {%> >$activityPostedTime <%}%></a></span>
+        </div>
+    </div><!-- endactivityAuthorAndDate -->
+    </div><!-- end activityHeader -->
+
+                    <div id="dropDownEditActivity${activity.id}" class="btn-group uiDropdownWithIcon actLink">
                         <div class="dropdown-toggle" data-toggle="dropdown">
                             <i class="uiIconActivityAction uiIconLightGray">
                             </i>
                         </div>
                         <ul class="dropdown-menu pull-right" role="menu">
-							<% if(activityEditable) {%>
                             <li>
-                                <a id="EditActivitylink${activity.id}" class="" data-edit-activity="${activity.id}" data-placement="bottom" href="javascript:void(0)">${labelEdit}</a>
+                                <a id="Permalink${activity.id}"  rel="tooltip" data-placement="bottom" title="$viewActivityTip" href="<%=uicomponent.getActivityPermalink(activity.id)%>">$viewActivityTip</a>
+                            </li>
+							<% if(activityEditable) {%>
+                            <li class="hidden-tabletL">
+                                <a id="EditActivitylink${activity.id}"  data-edit-activity="${activity.id}" data-placement="bottom" href="javascript:void(0)">${labelEdit}</a>
                             </li>
                             <%
 							}
@@ -288,39 +307,29 @@ public void addActivityTimeLine(String ownerName, String ownerUri, String ownerA
                                 <a href="javascript:void(0)" data-confirm="$labelToDeleteThisActivity" data-caption="$captionConfirmation" data-close="$labelClosebutton" data-ok="$labelConfirmbutton"  data-delete="<%=uicomponent.event("DeleteActivity", uicomponent.getId(), "");%>" class="controllDelete" id="DeleteActivityButton${activity.id}">${labelDelete}</a>
 
                             </li>
-                            <%}%>
+                            <%}
+                            if(uicomponent.getFilesCount() == 1){
+                                    def currentNode = uicomponent.getContentNode(0);
+                                    if(uicomponent.canEditDocument(currentNode)) {
+                                        def preferenceWS  = currentNode.getSession().getWorkspace().getName();
+                                        def remoteEditURL = uicomponent.event("OpenFile", "0");
+                                        def _documentInfos = openInOfficeConnector.getDocumentInfos(currentNode.getName());
+                                        def remoteEditClass=_documentInfos[1];
+                                        def remoteEditTitle=_ctx.appRes(_documentInfos[0]);
+
+                                        jsManager.require("SHARED/openDocumentInOffice", "od")
+                                                .addScripts("gj(document).ready(function(){od.OpenDocumentInOffice.updateLabel('" + preferenceWS + ":" + currentNode.getPath().replaceAll("'", "\\\\'") + "', '" + activity.id + "'); }); ");
+                            %>
+                                <li class="hidden-tabletL" style="display:none;" ><a href="<%=uicomponent.event("OpenFile")%>"><i class="uiIcon16x16FileDefault uiIconEcmsOpenDocument_$activity.id $remoteEditClass" ></i>&nbsp;$remoteEditTitle</a></li>
+                                <%  } %>
+                                <li><a href="$downloadAllUrl"><%=_ctx.appRes("SocialIntegration.download");%></a></li>
+                            <% } else if(uicomponent.getFilesCount() > 1) { %>
+                                <li><a href="$downloadAllUrl"><%=_ctx.appRes("SocialIntegration.downloadAll");%></a></li>
+                            <% } %>
+
                         </ul>
-                    </div>
-			    <%
-			     }
-			    %>
-                <!--/div-->
-                    <div class="author">
-                        <div class="hidden-desktop circleSpaceAvatar">
-                            <a href="$ownerUri">
-                              <img alt="$ownerName" src="$ownerAvatar"/>
-    </a>
-                        </div>
-    <% if (uicomponent.isUserActivity() && uicomponent.isSpaceStreamOwner() && !uicomponent.isUISpaceActivitiesDisplay()) {
-        getOwnerSpace(ownerName, ownerUri, spaceSourceURI, spaceID, spaceName, spaceImageSource);
-    } else{
-        getOwner(ownerName, ownerUri);
-    } %>
-                    </div>
-        <div class="dataInfor">
-            <span class="dateTime"><i class="uiIconClock  uiIconLightGray"></i>&nbsp;<a id="EditActivityTime${activity.id}" rel="tooltip" data-placement="bottom" title="$absolutePostedTime" href="<%=uicomponent.getActivityPermalink(activity.id)%>"<% if(activity.postedTime != activity.updated.getTime() ){%>> $activityUpdatedTime <%} else {%> >$activityPostedTime <%}%></a></span>
-        <div class=" actionLink hidden-desktop visible-tablet visible-phone">
-        <a id="Permalink${activity.id}" class="uiIconLink uiIconLightGray" rel="tooltip" data-placement="bottom" title="$viewActivityTip" href="<%=uicomponent.getActivityPermalink(activity.id)%>"></a>
-                        <% if (activityDeletable) {%>
-                              <a href="javascript:void(0)" data-confirm="$labelToDeleteThisActivity"
-                                    data-caption="$captionConfirmation" data-close="$labelClosebutton"
-                                    data-ok="$labelConfirmbutton" data-delete="<%=uicomponent.event("DeleteActivity", uicomponent.getId(), "");%>"
-                                    class="uiIconClose uiIconLightGray controllDelete"
-                                    rel="tooltip" data-placement="bottom" title="$deleteActivityTip"
-                                    id="DeleteActivityButton${activity.id}"></a>
-        <%}%>
-    </div>
-                    </div>
+                    </div><!-- end three dots link-->
+
     </div><!--end heading-->
     <% if (activityStatus != null) { %>
         <div class="description">$activityStatus</div><!--end description-->
@@ -568,61 +577,15 @@ for(def index = 0; index < uicomponent.getFilesCount(); index++) {
                 </div><!--end previews-->
 <% } %>
 
-                <div class="actionBar clearfix ContentActivityIcon">
-                  <% def toggleDisplayCommentAction = uicomponent.event('ToggleDisplayCommentForm', null, false);
-                     def commentLink = "";
-                  %>
-                 <% if (activityCommentAndLikable) { %>
-                    <ul class="pull-right statusAction">
-                        <li>
-                            <a class="$commentLink"  id="CommentLink${activity.id}" rel="tooltip" data-activity="${activity.id}" data-placement="bottom" title="<%=_ctx.appRes("UIActivity.label.Comment"); %>" href="javascript:void(0);">
-                                <i class="uiIconComment uiIconLightGray"></i>&nbsp;$commentCount
-                </a>
-                        </li>
-                    <% if (uicomponent.isLiked()) { %>
-                        <li>
-                                <a onclick="$unlikeActivityAction" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIActivity.msg.UnlikeActivity"); %>" id="UnLikeLink${activity.id}" href="javascript:void(0);">
-                                <i class="uiIconThumbUp uiIconBlue"></i>&nbsp;$identityLikesNum
-                                </a>
-                        </li>
-                      <% } else { %>
-                        <li>
-                            <a onclick="$likeActivityAction" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIActivity.msg.LikeActivity"); %>" id="LikeLink${activity.id}" href="javascript:void(0);">
-                              <i class="uiIconThumbUp uiIconLightGray"></i>&nbsp;$identityLikesNum
-                            </a>
-                        </li>
-                    <% } %>
-                </ul>
-                 <% } %>
-    			 <ul class="pull-left statusAction">
-                    <%
-                       if(uicomponent.getFilesCount() == 1){
-                            def currentNode = uicomponent.getContentNode(0);
-                            if(uicomponent.canEditDocument(currentNode)) {
-                                def preferenceWS  = currentNode.getSession().getWorkspace().getName();
-	                            def remoteEditURL = uicomponent.event("OpenFile", "0");
-	                            def _documentInfos = openInOfficeConnector.getDocumentInfos(currentNode.getName());
-	                            def remoteEditClass=_documentInfos[1];
-	                            def remoteEditTitle=_ctx.appRes(_documentInfos[0]);
-
-							    jsManager.require("SHARED/openDocumentInOffice", "od")
-							            .addScripts("gj(document).ready(function(){od.OpenDocumentInOffice.updateLabel('" + preferenceWS + ":" + currentNode.getPath().replaceAll("'", "\\\\'") + "', '" + activity.id + "'); }); ");
-                    %>
-                        <li class="hidden-tabletL" style="display:none;" ><a href="<%=uicomponent.event("OpenFile")%>"><i class="uiIcon16x16FileDefault uiIconEcmsOpenDocument_$activity.id $remoteEditClass" ></i>&nbsp;$remoteEditTitle</a></li>
-                        <%  } %>
-                        <li><a href="$downloadAllUrl"><i class="uiIconDownload uiIconLightGray"></i>&nbsp;<%=_ctx.appRes("SocialIntegration.download");%></a></li>
-                    <% } else if(uicomponent.getFilesCount() > 1) { %>
-    		            <li><a href="$downloadAllUrl"><i class="uiIconDownload uiIconLightGray"></i>&nbsp;<%=_ctx.appRes("SocialIntegration.downloadAll");%></a></li>
-                    <% } %>
-				 </ul>
-            </div><!--end actionBar-->
-
-
-                <% if (identityLikesNum > 0 || uicomponent.isLiked()) {%>
+      <div class="actionBarMobile">
+        <a class="likesNumber" href="#">$identityLikesNum $labelLikesActivity</a>
+        <a class="CommentsNumber" href="#">$commentCount $labelComments</a>
+      </div><!--end actionBarMobile-->
+            <div class="actionsDetailsWrapper">
+                 <% if (identityLikesNum > 0 || uicomponent.isLiked()) {%>
                   <div class="listLikedBox $listPeopleBGClass">
                   <div class="listPeopleContent">
-                  <% if (!labelLikes) labelLikes = ""; %>
-                          $labelLikes
+                  
                     <% if (identityLikesNum > 0) {%>
                     <div class="listLiked">
                     <%
@@ -640,39 +603,54 @@ for(def index = 0; index < uicomponent.getFilesCount(); index++) {
                        <button onclick="$loadLikesAction" class="btn">...</button>
             </div>
                     <% }%>
+                    <% if (!labelLikes) labelLikes = ""; %>
+                          <p>$labelLikes</p>
                   </div>
             </div>
             <%}%>
 
+                <div class="actionBar clearfix ContentActivityIcon">
+                  <% def toggleDisplayCommentAction = uicomponent.event('ToggleDisplayCommentForm', null, false);
+                     def commentLink = "";
+                  %>
+                 <% if (activityCommentAndLikable) { %>
+                    <ul class="pull-right statusAction">
+                    <% if (uicomponent.isLiked()) { %>
+                        <li>
+                                <a onclick="$unlikeActivityAction" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIActivity.msg.UnlikeActivity"); %>" id="UnLikeLink${activity.id}" href="javascript:void(0);">
+                                <i class="uiIconThumbUp uiIconBlue"></i>
+                                <span class="LikeLabel">$labelLike</span>
+                                <span class="LikesActionNumber">$identityLikesNum</span>
+                                </a>
+                        </li>
+                      <% } else { %>
+                        <li>
+                            <a onclick="$likeActivityAction" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIActivity.msg.LikeActivity"); %>" id="LikeLink${activity.id}" href="javascript:void(0);">
+                              <i class="uiIconThumbUp uiIconLightGray"></i>
+                              <span class="LikeLabel">$labelLike</span>
+                              <span class="LikesActionNumber">$identityLikesNum</span>
+                            </a>
+                        </li>
+                    <% } %>
+                    <li>
+                            <a class="$commentLink"  id="CommentLink${activity.id}" rel="tooltip" data-activity="${activity.id}" data-placement="bottom" title="<%=_ctx.appRes("UIActivity.label.Comment"); %>" href="javascript:void(0);">
+                                <i class="uiIconComment uiIconLightGray"></i>
+                                 <span class="CommentLabel">$labelComment</span>
+                                <span class="commentsActionNumber">$commentCount</span>
+                </a>
+                        </li>
+                </ul>
+                 <% } %>
+                 </div><!--end actionBar-->
+            </div>
+    			
+
+
+               
+
 
 
                 <div id="CommentBlockBound${activity.id}" class="commentBox">
-                      <% if (uicomponent.commentListToggleable()) {
-                      def showAllCommentsAction = uicomponent.event("SetCommentListStatus", "all");
-                      def hideAllCommentsAction = uicomponent.event("SetCommentListStatus", "none");
-                      def loadPreviousCommentsAction = uicomponent.event("SetCommentListStatus", "all");
-                      %>
-
-                     <% if (commentListStatus.getStatus().equals("none")) {%>
-                  <div class="commentListInfo hideBottomLine">
-                  <% } else {%>
-                    <div class="commentListInfo clearfix">
-                    <div class="pull-right numberComment">$commentHidden/$commentCount</div>
-                  <% } %>
-                        <% if (commentListStatus.getStatus().equals("latest") || commentListStatus.getStatus().equals("none")) { %>
-                          <a onclick="$showAllCommentsAction" href="#show-all-comments">
-                            $labelShowAllComments
-                          </a>
-            <% } else if (commentListStatus.getStatus().equals("all")) { %>
-            <%   if (commentHidden > 0) { %>
-                <a onclick="$loadPreviousCommentsAction" href="javascript:void(0);">$labelShowPreviousComments</a>
-                  <%   } else { %>
-                         <a onclick="$hideAllCommentsAction" href="javascript:void(0);">$labelHideAllComments</a>
-                <%   } %>
-            <% } %>
-        </div>
-                 <% } %>
-
 
                     <div class="commentList">
                     <%
@@ -793,10 +771,12 @@ def commentActivityId = it.parentCommentId == null ? it.id : it.parentCommentId;
 </a>
             </div><!--end commentLeft-->
 <div class="commentRight">
+<div class="authorCommentContainer clearfix">
 <div class="author">
     <a href="$commenterProfileUri">$commenterFullName</a>
 </div>
               <div class="contentComment">$commentMessage</div>
+              </div>
                    <div class="desktop-input clearfix">
                        <div class="blastInputPeople hideEffect">
                            <div>
@@ -846,6 +826,8 @@ def commentActivityId = it.parentCommentId == null ? it.id : it.parentCommentId;
                                    <a href="javascript:void(0)" id="$idDeleteComment" data-confirm="$labelToDeleteThisComment" data-caption="$captionConfirmation" data-close="$labelClosebutton" data-ok="$labelConfirmbutton"  data-delete="<%= uicomponent.event("DeleteComment", uicomponent.id, it.id); %>"  class="controllDelete">${labelDelete}</a>
 				                </li>
                                <% } %>
+
+
                            </ul>
                        </div>
     				<%}%>
@@ -882,6 +864,30 @@ def commentActivityId = it.parentCommentId == null ? it.id : it.parentCommentId;
                     <div class="clearfix"></div>
 </div> <!--end commentItem-->
                     </div><!--end commentlist-->
+                             <% if (uicomponent.commentListToggleable()) {
+                      def showAllCommentsAction = uicomponent.event("SetCommentListStatus", "all");
+                      def hideAllCommentsAction = uicomponent.event("SetCommentListStatus", "none");
+                      def loadPreviousCommentsAction = uicomponent.event("SetCommentListStatus", "all");
+                      %>
+
+                     <% if (commentListStatus.getStatus().equals("none")) {%>
+                  <div class="commentListInfo hideBottomLine">
+                  <% } else {%>
+                    <div class="commentListInfo clearfix">
+                  <% } %>
+                        <% if (commentListStatus.getStatus().equals("latest") || commentListStatus.getStatus().equals("none")) { %>
+                          <a onclick="$showAllCommentsAction" href="#show-all-comments">
+                            $labelShowAllComments
+                          </a>
+            <% } else if (commentListStatus.getStatus().equals("all")) { %>
+            <%   if (commentHidden > 0) { %>
+                <a onclick="$loadPreviousCommentsAction" href="javascript:void(0);">$labelShowPreviousComments</a>
+                  <%   } else { %>
+                         <a onclick="$hideAllCommentsAction" href="javascript:void(0);">$labelHideAllComments</a>
+                <%   } %>
+            <% } %>
+        </div>
+                 <% } %>
 </div><!--end commentBox-->
             </div><!--end #ActivityContextBox${activity.id}-->
 </div> <!--end ContextBox${activity.id}-->

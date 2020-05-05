@@ -141,7 +141,7 @@
   <UISelectedContentGrid>
     <label>
       <name>#{word.name}</name>
-      <add>新增</add>
+      <add>添加</add>
       <delete>删除</delete>
     </label>
     <msg>
@@ -213,7 +213,7 @@
       <empty-doctype>请选择一种文档类型</empty-doctype>
       <empty-startDate>"开始日期"是必需的</empty-startDate>
       <invalid-format>在字段"{0}"无效的日期时间格式。</invalid-format>
-      <invalid-date>"到日期"必须晚于"从日期"</invalid-date>
+      <invalid-date>"To Date" must be later than "From Date"</invalid-date>
       <invalid-startDate>"起始"日期不能晚于今天</invalid-startDate>
       <invalid-nodeType>节点类型"{0}"无效。请再次检查。</invalid-nodeType>
       <invalid-keyword>关键字是无效的。不支持某些字符。</invalid-keyword>
@@ -228,7 +228,7 @@
 
   <UIContentPropertySelector>
     <action>
-      <Add>新增</Add>
+      <Add>添加</Add>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
@@ -304,13 +304,13 @@
       <action>操作</action>
     </header>
     <msg>
-      <confirm-delete-permission>确实要删除此权限吗?</confirm-delete-permission>
+      <confirm-delete-permission>您确定要删除此权限吗?</confirm-delete-permission>
       <no-permission-remove>您没有权限。</no-permission-remove>
       <access-denied>访问被拒绝。</access-denied>
       <node-locked>其父母之一或路径元素 {0} 已被锁定。</node-locked>
       <userOrGroup-required>您必须选择一个用户或组。</userOrGroup-required>
       <checkbox-require>您必须设置权限。</checkbox-require>
-      <node-checkedin>您必须签出第一次。</node-checkedin>
+      <node-checkedin>您必须先签出。</node-checkedin>
     </msg>
   </UIPermissionManagerGrid>
 
@@ -336,8 +336,8 @@
 
   <UIGroupMemberSelector>
     <label>
-      <selectGroup>选择群组</selectGroup>
-      <selectMembership>选择成员身份</selectMembership>
+      <selectGroup>选择组</selectGroup>
+      <selectMembership>选择成员</selectMembership>
     </label>
   </UIGroupMemberSelector>
 
@@ -398,7 +398,7 @@
   <ContentSelector>
     <title>
       <PersonalDrives>个人驱动器</PersonalDrives>
-      <GeneralDrives>一般的驱动器</GeneralDrives>
+      <GeneralDrives>通用驱动器</GeneralDrives>
       <GroupDrives>组驱动器</GroupDrives>
       <Private>私有</Private>
       <Public>公开</Public>
@@ -444,7 +444,7 @@
   
   <Breadcrumb>
   <label>
-  <home>主页</home>
+  <home>首页</home>
   </label>  
   </Breadcrumb>
 

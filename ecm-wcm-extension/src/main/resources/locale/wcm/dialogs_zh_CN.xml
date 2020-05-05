@@ -26,7 +26,7 @@
         <MainContent>主要内容</MainContent>
         <cssFile>default.css</cssFile>
         <jsFile>default.js</jsFile>
-        <Advanced>高级</Advanced>
+        <Advanced>高级设置</Advanced>
         <Summary>摘要</Summary>
         <name>#{word.name}</name>
         <title>标题</title>
@@ -38,7 +38,7 @@
         <Illustration>图</Illustration>
         <hintIllustration>您可以指定您的 web 内容显示在列表中时将显示的图像。您还可以指定一些摘要文本和此图像一起去。</hintIllustration>
         <confirm-delete>确实要删除此图吗?</confirm-delete>
-        <illustrationImage>图图像</illustrationImage>
+        <illustrationImage>插图图片</illustrationImage>
         <imageMimeType>图像类型</imageMimeType>
         <image>上传图像</image>
         <imageWidth>图像宽度</imageWidth>

@@ -8,7 +8,7 @@
   <RenameConnector>
     <label>
       <rename>Rename</rename>
-      <cancel>Cancel</cancel>
+      <cancel>Batal</cancel>
     </label>
     <msg>
       <renaming>Renaming...</renaming>

@@ -46,7 +46,7 @@
   <Views>
     <label>
       <wcm-view>Web</wcm-view>
-      <admin-view>Administration</admin-view>
+      <admin-view>Administrateur</admin-view>
       <icon-view>Icônes</icon-view>
       <thumbails-view>Vignettes</thumbails-view>
       <list-view>Liste</list-view>
@@ -65,14 +65,14 @@
 
   <UIPageSelectorPanel>
     <header>
-      <path>Chemin</path>
+      <path>Emplacement</path>
       <action>#{word.action}</action>
     </header>
     <msg>
       <child-not-found>Aucune page trouvée</child-not-found>
     </msg>
     <title>
-      <select>Sélection</select>
+      <select>Sélectionner</select>
     </title>
   </UIPageSelectorPanel>
 
@@ -88,7 +88,7 @@
       <UIContentBrowsePanelMulti>Navigateur de Contenus</UIContentBrowsePanelMulti>
       <UIContentBrowsePanelFolder>Navigateur de Dossiers</UIContentBrowsePanelFolder>
       <UIContentSearchForm>Rechercher</UIContentSearchForm>
-      <UIContentSearchResult>Résultat de Recherche</UIContentSearchResult>
+      <UIContentSearchResult>Résultats de recherche</UIContentSearchResult>
       <UIContentViewer>Aperçu du Contenu</UIContentViewer>
       <WebContentMetadataPopup>Sélecteur de Propriété</WebContentMetadataPopup>
       <WebContentNodeTypePopup>Sélecteur de Nodetype</WebContentNodeTypePopup>
@@ -111,7 +111,7 @@
   <UIContentBrowsePanelMulti>
     <selectBoxValues>
       <FilterBy>Filtrer par</FilterBy>
-      <WebContent>Contenu Web</WebContent>
+      <WebContent>Content Web</WebContent>
       <DMSDocument>Document</DMSDocument>
       <Media>Média</Media>
     </selectBoxValues>
@@ -171,7 +171,7 @@
   <UIContentBrowsePathSelectorFolder>
     <header>
       <name>#{word.name}</name>
-      <publicationstate>État de Publication</publicationstate>
+      <publicationstate>Etat de Publication</publicationstate>
       <action>Action</action>
     </header>
     <msg>
@@ -182,26 +182,26 @@
   <UIContentSearchForm>
     <title>
       <Location>Site</Location>
-      <SearchByName>Recherche par nom</SearchByName>
+      <SearchByName>Recherche par Nom</SearchByName>
       <Fulltext>Mots à rechercher</Fulltext>
       <Property>Propriété</Property>
       <Contain>Contient</Contain>
-      <FromDate>De</FromDate>
-      <ToDate>à</ToDate>
-      <DocumentType>Type de document</DocumentType>
+      <FromDate>Date de début</FromDate>
+      <ToDate>Date de fin</ToDate>
+      <DocumentType>Type</DocumentType>
     </title>
     <tooltip>
-      <AddMetadataType>Détail Propriété</AddMetadataType>
-      <AddNodeType>Ajouter un type de noeud</AddNodeType>
+      <AddMetadataType>Ajouter une Propriété</AddMetadataType>
+      <AddNodeType>Ajouter un Type de Noeud</AddNodeType>
     </tooltip>    
     <label>
       <option>
         <CREATED>Créé</CREATED>
-        <MODIFIED>Modifié</MODIFIED>
+        <MODIFIED>Mis à jour</MODIFIED>
       </option>
     </label>
     <action>
-      <SearchWebContent>Recherche</SearchWebContent>
+      <SearchWebContent>Rechercher</SearchWebContent>
     </action>
     <msg>
       <time-to-late>Le temps de recherche est trop long.</time-to-late>
@@ -213,7 +213,7 @@
       <empty-doctype>Veuillez sélectionner un type de document</empty-doctype>
       <empty-startDate>Le champ "Date de début" est obligatoire</empty-startDate>
       <invalid-format>Blancs datetime format dans le champ '{0}'</invalid-format>
-      <invalid-date>"To Date" have to greater than "From Date"</invalid-date>
+      <invalid-date>"To Date" must be later than "From Date"</invalid-date>
       <invalid-startDate>Le champ "Date de début" doit être après aujourd'hui</invalid-startDate>
       <invalid-nodeType>Type de noeud "(0)" n'est pas valide! S'il vous plaît vérifiez à nouveau.</invalid-nodeType>
       <invalid-keyword>Le mot clé est invalide. Certains caractères ne sont pas autorisés.</invalid-keyword>
@@ -222,7 +222,7 @@
 
   <WebContentMetadataPopup>
     <title>
-      <UIContentPropertySelector>Sélecteur de la propriété</UIContentPropertySelector>
+      <UIContentPropertySelector>Sélecteur de Propriété</UIContentPropertySelector>
     </title>
   </WebContentMetadataPopup>
 
@@ -232,14 +232,14 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
-      <metadataType>Métadonnées de type</metadataType>
+      <metadataType>Entrez un nom de requête.</metadataType>
       <property_select>Propriété</property_select>
     </label>
   </UIContentPropertySelector>
 
   <WebContentNodeTypePopup>
     <title>
-      <UIContentNodeTypeSelector>Sélecteur de la Nodetype</UIContentNodeTypeSelector>
+      <UIContentNodeTypeSelector>Sélecteur de Type de Nœud</UIContentNodeTypeSelector>
     </title>
   </WebContentNodeTypePopup>
 
@@ -258,8 +258,8 @@
       <action>Action</action>
     </header>
     <title>
-      <Select>Sélectionnez</Select>
-      <View>Affichage</View>
+      <Select>Sélectionner</Select>
+      <View>Vue</View>
     </title>
     <msg>
     <template-not-support>Vous ne pouvez pas voir ce contenu en avant-permière. Ce masque de saisie n'est pas supporté</template-not-support>
@@ -304,40 +304,40 @@
       <action>Action</action>
     </header>
     <msg>
-      <confirm-delete-permission>Confirmez-vous vouloir supprimer cette permission ?</confirm-delete-permission>
+      <confirm-delete-permission>Êtes-vous sûr de vouloir supprimer cette permission?</confirm-delete-permission>
       <no-permission-remove>Il n'y a pas de permission à supprimer.</no-permission-remove>
       <access-denied>Accès refusé.</access-denied>
       <node-locked>L'élément de chemin {0} ou l'un de ses parents est verrouillé.</node-locked>
       <userOrGroup-required>Vous devez sélectionner un utilisateur ou un groupe.</userOrGroup-required>
       <checkbox-require>Vous devez donner des permissions.</checkbox-require>
-      <node-checkedin>Vous devez faire un Check Out</node-checkedin>
+      <node-checkedin>Vous devez d'abord effectuer un check out.</node-checkedin>
     </msg>
   </UIPermissionManagerGrid>
 
   <UIPermissionInputSetWithAction>
     <title>
-      <SelectUser>Sélectionner l'utilisateur</SelectUser>
-      <SelectMember>Sélectionner le membre</SelectMember>
+      <SelectUser>Utilisateur</SelectUser>
+      <SelectMember>Selection d'un membre</SelectMember>
       <AddAny>Toutes</AddAny>
     </title>
   </UIPermissionInputSetWithAction>
 
   <UIUserSelectorPopupWindow>
     <title>
-      <UIUserContainer>Sélecteur d'Utilisateur</UIUserContainer>
+      <UIUserContainer>Sélectionner un Utilisateur</UIUserContainer>
     </title>
   </UIUserSelectorPopupWindow>
 
   <UIGroupSelectorPopupWindow>
     <title>
-      <UIGroupMemberSelector>Sélecteur de Groupe</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Veuillez renseigner toutes les réponses.</UIGroupMemberSelector>
     </title>
   </UIGroupSelectorPopupWindow>
 
   <UIGroupMemberSelector>
     <label>
-      <selectGroup>Sélectionner le Groupe</selectGroup>
-      <selectMembership>Rôle</selectMembership>
+      <selectGroup>Groupe</selectGroup>
+      <selectMembership>Sélectionnez un rôle</selectMembership>
     </label>
   </UIGroupMemberSelector>
 
@@ -367,8 +367,8 @@
     <label>
       <SingleContentViewer>Contenu Seul</SingleContentViewer>
       <ContentListViewer>Liste de Contenus</ContentListViewer>
-      <Search>Recherche</Search>
-      <Sitemap>Plan de Site</Sitemap>
+      <Search>Rechercher</Search>
+      <Sitemap>Carte du site</Sitemap>
       <TwoColumnsLayout>2 Colonnes</TwoColumnsLayout>
       <ThreeColumnsLayout>3 Colonnes</ThreeColumnsLayout>
       <TwoRowsLayout>2 Lignes</TwoRowsLayout>
@@ -415,13 +415,13 @@
       <Systemfiles>Fichiers Système</Systemfiles>
       <ValidationRequestsDocumentsCenter>Centre des Documents en Attente de Validation</ValidationRequestsDocumentsCenter>
       <ManagedSites>Gestion des Sites</ManagedSites>
-      <SharedSite>Site Partagé</SharedSite>
+      <SharedSite>Espace Partagé</SharedSite>
     </title>
   </ContentSelector>
   
   <UICategoryNavigationTargetPathPopupWindow>
     <title>
-      <UIPageSelector>Page sélecteur</UIPageSelector>
+      <UIPageSelector>Sélecteur de Page</UIPageSelector>
     </title>
   </UICategoryNavigationTargetPathPopupWindow>
   

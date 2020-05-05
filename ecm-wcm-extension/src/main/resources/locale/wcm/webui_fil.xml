@@ -38,20 +38,20 @@
       <SharedSite>Ang Sayt ay ibahagi</SharedSite>
       <PersonalDocuments>Ang Mga Personal na Dokumento</PersonalDocuments>
       <UserDocuments>ang {0} na mga Dokumento</UserDocuments>
-      <Collaboration>Pagtutulungan</Collaboration>
-      <Trash>Basura</Trash>
+      <Collaboration>Ang Kolaborasyon</Collaboration>
+      <Trash>Ang Basura</Trash>
     </label>
   </Drives>
 
   <Views>
     <label>
       <wcm-view>Ang Web</wcm-view>
-      <admin-view>Ang tagapangasiwa</admin-view>
+      <admin-view>Ang Admin</admin-view>
       <icon-view>Ang mga imahe</icon-view>
       <thumbails-view>Nag Thumbnails</thumbails-view>
       <list-view>Ang Listahan</list-view>
       <authoring-view>Awtorisado</authoring-view>
-      <wcm-category-view>Ang mga kategorya</wcm-category-view>
+      <wcm-category-view>Ang Mga Kategorya</wcm-category-view>
       <file-view>Tignan ang namamahala sa mga payl</file-view>
     </label>
   </Views>
@@ -72,7 +72,7 @@
       <child-not-found>Walang pahina na natagpuan.</child-not-found>
     </msg>
     <title>
-      <select>Pumili</select>
+      <select>Piliin</select>
     </title>
   </UIPageSelectorPanel>
 
@@ -88,7 +88,7 @@
       <UIContentBrowsePanelMulti>Ang nilalaman ng browser</UIContentBrowsePanelMulti>
       <UIContentBrowsePanelFolder>Ang polder ng Browser</UIContentBrowsePanelFolder>
       <UIContentSearchForm>Ang porm para sa Paghahanap ng Nilalaman</UIContentSearchForm>
-      <UIContentSearchResult>Hanapi ang resulta</UIContentSearchResult>
+      <UIContentSearchResult>Ang hanapin ang resulta</UIContentSearchResult>
       <UIContentViewer>I-preview ang Nilalaman</UIContentViewer>
       <WebContentMetadataPopup>Ang Tagapili ng Katangian</WebContentMetadataPopup>
       <WebContentNodeTypePopup>Ang Tagapili ng Nodetype</WebContentNodeTypePopup>
@@ -100,7 +100,7 @@
     <selectBoxValues>
       <FilterBy>I-filter sa pamamagitan ng</FilterBy>
       <WebContent>Ang Nilalaman ng Web</WebContent>
-      <DMSDocument>Dokumento</DMSDocument>
+      <DMSDocument>Ang Dokumento</DMSDocument>
       <Media>Medya</Media>
     </selectBoxValues>
     <msg>
@@ -110,7 +110,7 @@
 
   <UIContentBrowsePanelMulti>
     <selectBoxValues>
-      <FilterBy>Ang medya</FilterBy>
+      <FilterBy>I-filter sa pamamagitan ng</FilterBy>
       <WebContent>Ang Nilalaman ng Web</WebContent>
       <DMSDocument>Ang Dokumento</DMSDocument>
       <Media>Medya</Media>
@@ -141,8 +141,8 @@
   <UISelectedContentGrid>
     <label>
       <name>#{word.name}</name>
-      <add>Magdagdag</add>
-      <delete>Burahin</delete>
+      <add>Dagdag</add>
+      <delete>OK</delete>
     </label>
     <msg>
       <no-content-found>Walang nilalaman na nakita.</no-content-found>
@@ -161,7 +161,7 @@
     <header>
       <name>#{word.name}</name>
       <publicationstate>Ang estado ng publikasyon</publicationstate>
-      <action>Ang kilos</action>
+      <action>Aksyon</action>
     </header>
     <msg>
       <child-not-found>Walang nakitang nilalaman</child-not-found>
@@ -172,7 +172,7 @@
     <header>
       <name>#{word.name}</name>
       <publicationstate>Ang estado ng publikasyon</publicationstate>
-      <action>Ang kilos</action>
+      <action>Aksyon</action>
     </header>
     <msg>
       <child-not-found>Hindi Nakita ang polder</child-not-found>
@@ -184,9 +184,9 @@
       <Location>Ang Pangalan ng Sayt</Location>
       <SearchByName>Maghanap ayon sa Pangalan</SearchByName>
       <Fulltext>Isang salita o parirala sa konteksto</Fulltext>
-      <Property>Ang pag aari</Property>
-      <Contain>Naglalaman</Contain>
-      <FromDate>Ang Petsa mula sa</FromDate>
+      <Property>Ang pag-aari</Property>
+      <Contain>Ang Nilalaman</Contain>
+      <FromDate>Ang araw mula sa</FromDate>
       <ToDate>Ang Petsa sa</ToDate>
       <DocumentType>Uri ng Dokumento</DocumentType>
     </title>
@@ -213,7 +213,7 @@
       <empty-doctype>Mangyaring pumili ng isang uri ng dokumento</empty-doctype>
       <empty-startDate>Kailangan ang "Mula sa Petsa"</empty-startDate>
       <invalid-format>Hindi balidong pormat ng petsa/oras sa field '{0}'.</invalid-format>
-      <invalid-date>"Ang Hanggang sa Petsa" ay kailangang mas huli sa "Mula sa Petsa"</invalid-date>
+      <invalid-date>"To Date" must be later than "From Date"</invalid-date>
       <invalid-startDate>Ang "Mula sa Petsa" ay kinakailangang hindi lalampas ngayong araw</invalid-startDate>
       <invalid-nodeType>Ang uri ng node na "{0}" ay hindi balido. Mangyaring suriin muli.</invalid-nodeType>
       <invalid-keyword>Ang keyword ay hindi wasto. Ang ilang mga karakter ay hindi suportado.</invalid-keyword>
@@ -228,12 +228,12 @@
 
   <UIContentPropertySelector>
     <action>
-      <Add>Dagdagan</Add>
+      <Add>Dagdag</Add>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
-      <metadataType>Uri ng metadata</metadataType>
-      <property_select>Ang pag aari</property_select>
+      <metadataType>Ang Uri ng metadata</metadataType>
+      <property_select>Ang pag-aari</property_select>
     </label>
   </UIContentPropertySelector>
 
@@ -252,14 +252,14 @@
 
   <UIContentSearchResult>
     <header>
-      <title>Titulo</title>
+      <title>Ang Titulo</title>
       <score>Ang Puntos</score>
       <publicationstate>Ang estado ng publikasyon</publicationstate>
-      <action>Ang Aksyon</action>
+      <action>Aksyon</action>
     </header>
     <title>
-      <Select>Pumili</Select>
-      <View>Tignan</View>
+      <Select>Piliin</Select>
+      <View>Ang Tanaw</View>
     </title>
     <msg>
     <template-not-support>Hindi ma-preview ang nilalaman na ito. Ang template ay hindi suportado</template-not-support>
@@ -282,7 +282,7 @@
 
   <UIPermissionManager>
     <label>
-      <UIPermissionInputSetWithAction>Pahintulot</UIPermissionInputSetWithAction>
+      <UIPermissionInputSetWithAction>Ang pahintulot</UIPermissionInputSetWithAction>
       <UIAccessibleCheckboxInput>I-access ang Karapatan</UIAccessibleCheckboxInput>
       <UIEditableCheckboxInput>I-edit ang Karapatan</UIEditableCheckboxInput>
     </label>
@@ -290,18 +290,18 @@
       <Save>#{word.save}</Save>
       <Clear>Linawin</Clear>
       <title>
-        <Edit>Edit</Edit>
-        <Delete>Burahin</Delete>
+        <Edit>I-edit</Edit>
+        <Delete>OK</Delete>
       </title>
     </action>
   </UIPermissionManager>
 
   <UIPermissionManagerGrid>
     <header>
-      <owner>Pahintulot</owner>
+      <owner>Ang pahintulot</owner>
       <accessible>Maaaring Ma-access</accessible>
       <editable>Maaaring Ma-edit</editable>
-      <action>Ang Aksyon</action>
+      <action>Aksyon</action>
     </header>
     <msg>
       <confirm-delete-permission>Sigurado ka bang gusto mong burahin ang pahintulot na ito?</confirm-delete-permission>
@@ -316,7 +316,7 @@
 
   <UIPermissionInputSetWithAction>
     <title>
-      <SelectUser>Pumili ng user</SelectUser>
+      <SelectUser>Pumili ng Gumagamit</SelectUser>
       <SelectMember>Piliin ang Miyembro</SelectMember>
       <AddAny>Magdagdag ng kahit anong Pahintulot</AddAny>
     </title>
@@ -324,7 +324,7 @@
 
   <UIUserSelectorPopupWindow>
     <title>
-      <UIUserContainer>Selector ng User</UIUserContainer>
+      <UIUserContainer>Tagapili ng Gumagamit</UIUserContainer>
     </title>
   </UIUserSelectorPopupWindow>
 
@@ -337,13 +337,13 @@
   <UIGroupMemberSelector>
     <label>
       <selectGroup>Pumili ng grupo</selectGroup>
-      <selectMembership>Pumili ng Membership</selectMembership>
+      <selectMembership>Pumili ng Pagpapamiyembro</selectMembership>
     </label>
   </UIGroupMemberSelector>
 
   <UIContentDialogPreference>
     <action>
-      <Back>Likod</Back>
+      <Back>Bumalik</Back>
     </action>
   </UIContentDialogPreference>
 
@@ -368,7 +368,7 @@
       <SingleContentViewer>Pang-isang Viewer ng Nilalaman</SingleContentViewer>
       <ContentListViewer>Tagamasid ng nilalaman ng listahan</ContentListViewer>
       <Search>Hanapin</Search>
-      <Sitemap>Ang Site Map</Sitemap>
+      <Sitemap>Site Map</Sitemap>
       <TwoColumnsLayout>Dalawang hanay na Layout</TwoColumnsLayout>
       <ThreeColumnsLayout>Tatlong hanay na Layout</ThreeColumnsLayout>
       <TwoRowsLayout>Dalawang hilera na Layout</TwoRowsLayout>
@@ -386,7 +386,7 @@
     <login>Mag-login</login>
     <logout>Mag-logout</logout>
     <language>Magpalit ng Lengguwahe</language>
-    <register>Rehistro</register>
+    <register>Magpa-Rehistro</register>
   </Signin>
   <UIDriveForm>
 <label>
@@ -415,7 +415,7 @@
       <Systemfiles>Ang Mga payl ng Sistema</Systemfiles>
       <ValidationRequestsDocumentsCenter>Ang Sentro ng mga patunay ng Kahilingan na Dokumento</ValidationRequestsDocumentsCenter>
       <ManagedSites>Ang pamamahala ng mga sayt</ManagedSites>
-      <SharedSite>Ang sayt ay ibahagi</SharedSite>
+      <SharedSite>Ang Sayt ay ibahagi</SharedSite>
     </title>
   </ContentSelector>
   

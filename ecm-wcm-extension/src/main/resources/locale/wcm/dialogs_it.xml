@@ -26,7 +26,7 @@
         <MainContent>Contenuto Principale</MainContent>
         <cssFile>default.css</cssFile>
         <jsFile>default.js</jsFile>
-        <Advanced>Avanzato</Advanced>
+        <Advanced>Avanzate</Advanced>
         <Summary>Sommario</Summary>
         <name>#{word.name}</name>
         <title>Titolo</title>

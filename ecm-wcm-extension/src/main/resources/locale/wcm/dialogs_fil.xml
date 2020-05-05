@@ -26,10 +26,10 @@
         <MainContent>Pangunahing Nilalaman</MainContent>
         <cssFile>default.css</cssFile>
         <jsFile>default.js</jsFile>
-        <Advanced>Ang pinahusay</Advanced>
-        <Summary>Buod</Summary>
+        <Advanced>Pinahusay</Advanced>
+        <Summary>Ang Buod</Summary>
         <name>#{word.name}</name>
-        <title>Titulo</title>
+        <title>Ang Titulo</title>
         <ContentCSS>CSS na Datos</ContentCSS>
         <hintCSS>Maaari mong tukuyin ang pangunahing style sheet para sa iyong web content. Ang estilo na ito ay papalitan ang mga style sheet na tinutukoy sa site na level at sa ibinahagi na level.</hintCSS>
         <ContentJS>JS na Datos</ContentJS>
@@ -53,7 +53,7 @@
       <label>
         <name>#{word.name}</name>
         <active>Gawing aktibo</active>
-        <priority>Prayoridad</priority>
+        <priority>Ang prayoridad</priority>
         <content>CSS na Datos</content>
       </label>
     </dialog>
@@ -64,7 +64,7 @@
       <label>
         <name>#{word.name}</name>
         <active>Gawing aktibo</active>
-        <priority>Prayoridad</priority>
+        <priority>Ang prayoridad</priority>
         <content>JS na Datos</content>
       </label>
     </dialog>
