@@ -10,6 +10,22 @@
     <depends>
       <module>jquery</module>
     </depends>
+    <depends>
+      <module>editorsupport</module>
+    </depends>
+  </module>
+  
+  <module>
+    <name>editorsupport</name>
+    <script>
+      <path>/javascript/editor-support.js</path>
+    </script>
+    <depends>
+      <module>jquery</module>
+    </depends>
+    <depends>
+      <module>commons-cometd3</module>
+    </depends>
   </module>
 
   <module>

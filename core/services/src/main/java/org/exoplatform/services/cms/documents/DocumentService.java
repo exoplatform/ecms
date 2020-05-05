@@ -143,18 +143,18 @@ public interface DocumentService {
   public void addDocumentMetadataPlugin(ComponentPlugin plugin);
   
   /**
-   * Gets prefered editor provider for specified file and user.
+   * Gets preferred editor provider for specified file and user.
    *
    * @param userId the userId
    * @param uuid the uuid
    * @param workspace the workspace
-   * @return the preffered editor (provider)
+   * @return the preferred editor (provider)
    * @throws RepositoryException the exception
    */
-  public String getPreferedEditor(String userId, String uuid, String workspace) throws RepositoryException;
+  public String getPreferredEditor(String userId, String uuid, String workspace) throws RepositoryException;
   
   /**
-   * Sets preffered editor provider for specified file and user.
+   * Sets preferred editor provider for specified file and user.
    *
    * @param userId the userId
    * @param provider the editor provider
@@ -162,7 +162,7 @@ public interface DocumentService {
    * @param workspace the workspace
    * @throws RepositoryException the exception
    */
-  public void savePreferedEditor(String userId, String provider, String uuid, String workspace) throws RepositoryException;
+  public void savePreferredEditor(String userId, String provider, String uuid, String workspace) throws RepositoryException;
 
   /**
    * Gets the editor providers.
@@ -171,6 +171,26 @@ public interface DocumentService {
    */
   public List<DocumentEditorProvider> getDocumentEditorProviders();
   
+   /**
+   * Updates information about current open editor for the document.
+   * It is assumed that the document is being edited at the moment.
+   *
+   * @param uuid the uuid
+   * @param workspace the workspace
+   * @param provider the current provider or null if the document has been closed.
+   * @throws RepositoryException the exception
+   */
+ public void setCurrentDocumentProvider(String uuid, String workspace, String provider) throws RepositoryException;
+
+ /**
+  * Gets current opened document editor.
+  * 
+  * @param uuid the uuid
+  * @param workspace the workspace
+  * @throws RepositoryException the exception
+  */
+ public String getCurrentDocumentProvider(String uuid, String workspace) throws RepositoryException;
+ 
   /**
    * Gets the editor provider.
    *

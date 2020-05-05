@@ -18,21 +18,29 @@ package org.exoplatform.ecm.webui.component.explorer.documents;
 
 import java.util.Map;
 
+import javax.jcr.Node;
+
 import org.exoplatform.container.ExoContainerContext;
+import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
+import org.exoplatform.services.cms.documents.DocumentEditorProvider;
 import org.exoplatform.services.cms.documents.DocumentService;
+import org.exoplatform.services.security.ConversationState;
+import org.exoplatform.services.security.Identity;
 import org.exoplatform.webui.ext.filter.UIExtensionAbstractFilter;
 import org.exoplatform.webui.ext.filter.UIExtensionFilterType;
-
 
 /**
  * The filter checks if at least one NewDocumentTemplateProvider is registered.
  */
-public class IsNewDocumentTemplatePresentFilter extends UIExtensionAbstractFilter {
+public class IsAvailableDocumentProviderPresentFilter extends UIExtensionAbstractFilter {
+
+  /** The Constant MIX_REFERENCEABLE. */
+  private static final String MIX_REFERENCEABLE = "mix:referenceable";
 
   /**
    * Instantiates a new checks if is template plugin present filter.
    */
-  public IsNewDocumentTemplatePresentFilter() {
+  public IsAvailableDocumentProviderPresentFilter() {
     this(null);
   }
 
@@ -41,7 +49,7 @@ public class IsNewDocumentTemplatePresentFilter extends UIExtensionAbstractFilte
    *
    * @param messageKey the message key
    */
-  public IsNewDocumentTemplatePresentFilter(String messageKey) {
+  public IsAvailableDocumentProviderPresentFilter(String messageKey) {
     super(messageKey, UIExtensionFilterType.MANDATORY);
   }
 
@@ -54,11 +62,30 @@ public class IsNewDocumentTemplatePresentFilter extends UIExtensionAbstractFilte
    */
   @Override
   public boolean accept(Map<String, Object> context) throws Exception {
-    DocumentService documentService = ExoContainerContext.getCurrentContainer()
-                                                            .getComponentInstanceOfType(DocumentService.class);
-
-    if (documentService != null) {
-      return documentService.getNewDocumentTemplateProviders().size() > 0;
+    Node node = null;
+    if (context != null) {
+      node = (Node) context.get(Node.class.getName());
+    }
+    if (node == null) {
+      UIJCRExplorer uiExplorer = (UIJCRExplorer) context.get(UIJCRExplorer.class.getName());
+      if (uiExplorer != null) {
+        node = uiExplorer.getCurrentNode();
+      }
+    }
+    if (node != null && node.isNodeType(MIX_REFERENCEABLE)) {
+      DocumentService documentService =
+                                      ExoContainerContext.getCurrentContainer().getComponentInstanceOfType(DocumentService.class);
+      if (documentService != null) {
+        Identity identity = ConversationState.getCurrent().getIdentity();
+        String fileId = node.getUUID();
+        String workspace = node.getSession().getWorkspace().getName();
+        // Search for available provider which supports the current file
+        for (DocumentEditorProvider provider : documentService.getDocumentEditorProviders()) {
+          if (provider.isAvailableForUser(identity) && provider.isDocumentSupported(fileId, workspace)) {
+            return true;
+          }
+        }
+      }
     }
     return false;
   }

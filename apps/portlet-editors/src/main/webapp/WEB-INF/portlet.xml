@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<portlet-app xmlns="http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd"
-             version="2.0"
-             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-             xsi:schemaLocation="http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd
+<portlet-app xmlns="http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd" version="2.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd
    http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd">
   <portlet>
     <portlet-name>EditorsAdminPortlet</portlet-name>
@@ -18,4 +17,19 @@
       <keywords>editors</keywords>
     </portlet-info>
   </portlet>
+  
+  <portlet>
+    <portlet-name>EditorSupportPortlet</portlet-name>
+    <display-name xml:lang="EN">Editor Support Portlet</display-name>
+    <portlet-class>org.exoplatform.editors.portlet.EditorSupportPortlet</portlet-class>
+    <supports>
+      <mime-type>text/html</mime-type>
+    </supports>
+    <portlet-info>
+      <title>Editor Support Portlet</title>
+      <short-title>Editor Support Portlet</short-title>
+      <keywords>editors</keywords>
+    </portlet-info>
+  </portlet>
+  
 </portlet-app>
