@@ -6,6 +6,7 @@
 @header-popup-bg: #484848;
 @textLightColor: #999999;
 @btnDisableColor: #c6c6c6;
+@groupHeadingColor: #c3cad6;
 
 .attachment {
   display: flex;
@@ -667,20 +668,6 @@
         }
       }
 
-      .foldersFilesSelectorAlert {
-        margin: 0 3%;
-      }
-
-      .fade-enter-active,
-      .fade-leave-active {
-        transition: opacity 1s
-      }
-
-      .fade-enter,
-      .fade-leave-active {
-        opacity: 0
-      }
-
       .contentBody::-webkit-scrollbar-thumb  {
         background: #578dc9;
         border-radius: 3px;
@@ -706,7 +693,7 @@
       .contentBody {
         height: 86%;
         overflow-y: auto;
-
+        overflow-x: hidden;
 
         .selectionBox {
           display: flex;
@@ -755,7 +742,6 @@
                 color: #333;
               }
             }
-
             .newFolderInput {
               width: auto;
               height: 16px;
@@ -798,48 +784,38 @@
               background-color: #E1E8EE;
             }
           }
+        }
 
-          #folderActionsMenu {
-            background: #FFF;
-            display: block;
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            position: fixed;
-            min-width: auto;
-            border: none;
-            box-shadow: 1px 1px 5px 1px #d2d2d2;
+        .categorizedDrives {
+          padding: 0 3%;
 
-            &:focus {
-              outline: none;
+          .categoryName {
+            margin: 0 3%;
+            position: relative;
+            padding-left: 15px;
+            overflow: hidden;
+            color: @groupHeadingColor;
+            cursor: pointer;
+
+            &:before {
+              content: '';
+              position: absolute;
+              top: 9px;
+              left: 0;
+              border-top: 5px solid @groupHeadingColor;
+              border-left: 5px solid transparent;
+              border-right: 5px solid transparent;
             }
 
-            .folderActionsMenuItem {
-              border-bottom: 1px solid #E0E0E0;
-              margin: 0;
-              cursor: pointer;
-              display: block;
-              text-align: left;
-              padding: 10px;
-
-              &:last-child {
-                border-bottom: none;
-              }
-              i {
-                margin-right: 5px;
-                width: 20px;
-              }
-              &:hover {
-                background: #578dc9;
-                color: #fff;
-                i {
-                  color: #fff;
-                }
-              }
-
-              &.disabled {
-                cursor: not-allowed;
-              }
+            &:after {
+              content: '';
+              display: inline-block;
+              height: 0.5em;
+              vertical-align: middle;
+              width: 100%;
+              margin-right: -100%;
+              margin-left: 10px;
+              border-top: 1px solid @groupHeadingColor;
             }
           }
         }
