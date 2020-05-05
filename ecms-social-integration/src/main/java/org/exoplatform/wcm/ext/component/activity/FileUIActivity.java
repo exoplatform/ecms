@@ -43,7 +43,6 @@ import org.exoplatform.download.DownloadService;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.documents.*;
-import org.exoplatform.services.cms.documents.cometd.CometdDocumentsService;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.drives.impl.ManageDriveServiceImpl;
 import org.exoplatform.services.jcr.access.PermissionType;
@@ -171,8 +170,6 @@ public class FileUIActivity extends BaseUIActivity{
   private OrganizationService organizationService;
 
   private TrashService         trashService;
-  
-  private final CometdDocumentsService    cometdService;
 
   private List<ActivityFileAttachment> activityFileAttachments = new ArrayList<>();
 
@@ -185,7 +182,6 @@ public class FileUIActivity extends BaseUIActivity{
     if(WebuiRequestContext.getCurrentInstance() != null) {
       addChild(UIPopupContainer.class, null, "UIDocViewerPopupContainer");
     }
-    this.cometdService = getApplicationComponent(CometdDocumentsService.class);
   }
 
   @Override
