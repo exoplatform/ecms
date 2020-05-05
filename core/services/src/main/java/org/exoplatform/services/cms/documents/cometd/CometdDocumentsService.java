@@ -470,7 +470,7 @@ public class CometdDocumentsService implements Startable {
   /** The channel listener. */
   protected final ClientChannelListener       channelListener          = new ClientChannelListener();
 
-  /** The active providers fileId -> (sessionId, ClientInfo). */
+  /** The editors context. */
   protected final EditorsContext              editorsContext           = new EditorsContext();
 
   /**
@@ -594,7 +594,7 @@ public class CometdDocumentsService implements Startable {
      * Subscribe documents.
      *
      * @param message the message
-     * @param docId the doc id
+     * @param fileId the file id
      * @throws RepositoryException the repository exception
      */
     @Subscription(CHANNEL_NAME_PARAMS)
