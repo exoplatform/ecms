@@ -64,7 +64,7 @@
   def labelYouLikeThis=_ctx.appRes("UIActivity.label.You_Like_This");
   def labelYouAndOnePersonLikeThis=_ctx.appRes("UIActivity.label.You_And_One_Person_Like_This");
   def labelYouAndOthersLikeThis=_ctx.appRes("UIActivity.label.You_And_Others_Like_This");
-  
+
   def captionConfirmation=StringEscapeUtils.escapeHtml(_ctx.appRes("UIActivity.label.Confirmation"));
   def labelToDeleteThisActivity=StringEscapeUtils.escapeHtml(_ctx.appRes("UIActivity.msg.Are_You_Sure_To_Delete_This_Activity"));
   def labelConfirmbutton=StringEscapeUtils.escapeHtml(_ctx.appRes("UIActivity.label.Confirm_Delete_Activity-Button"));
@@ -91,7 +91,7 @@
   if (displayedIdentityLikes != null) {
     identityLikesNum = displayedIdentityLikes.length;
   }
-  
+
   def ownerRemoteId =  uicomponent.ownerIdentity.getRemoteId();
   def commentListStatus = uicomponent.getCommentListStatus();
   def commentFormDisplayed = uicomponent.isCommentFormDisplayed();
@@ -311,9 +311,9 @@
 					  def linkClass = "content";
 					  def link = "";
 					  if (linkImage == null || linkImage.equals("")) {
-						linkClass = "";
+						link = "<img src=\"/eXoSkin/skin/images/system/composer/PostLinks.png\" class=\"imagePreview\" alt=\"$linkTitle\" />";
 					  } else {
-						link = "<img width=\"75px\" src=\"$linkImage\" alt=\"$linkTitle\" />";
+						link = "<img src=\"$linkImage\" class=\"imagePreview\" alt=\"$linkTitle\" />";
 					  }
 					  def embedHtml = uicomponent.getEmbedHtml();
 					%>
@@ -333,22 +333,25 @@
                 </div>
 				<div class="uiBox roundedBottom introBox linkShare">
 					<div class="clearfix">
-						<% if (embedHtml == null && link.length() != 0) { %>
-							   <a href="javascript:void(0);" class="pull-left avatar" rel="tooltip" data-placement="bottom" title="$linkTitle">$link</a>
-						  <% } %>
-						  <div class="$linkClass text">
-								<a class="linkTitle" target="_blank" href="$linkSource">$linkTitle</a>
-								<% if (embedHtml == null) { %>
-									 <p class="linkDescription">$linkDescription</p>
-								<% } %>
-								<div class="linkSource">$labelSource : <a href="$linkSource" target="_blank" title="$linkTitle">$linkSource</a></div>
-								<% if (embedHtml != null) { %>
-									 <div class="EmbedHtml">$embedHtml</div>
-								<% } %>
-						  </div>
+					<% if (embedHtml == null && link.length() != 0) { %>
+                      <div class="linkPreview">
+                      	 <div> <a href="javascript:void(0);" rel="tooltip" data-placement="right" title="$linkTitle">$link</a></div>
+                         <div class="boxDescription">
+                           <div class="block">
+                             <div class="titlePreview"><a target="_blank" href="$linkSource">$linkTitle</a></div>
+                             <div class="descriptionLink">$linkDescription</div>
+                             <div class="link" ><a href="$linkSource"><i class="far fa-link"></i> $linkSource</a></div>
+                           </div>
+                         </div>
+                      <div>
+                      <% } %>
+                      <% if (embedHtml != null) { %>
+							<div class="EmbedHtml">$embedHtml</div>
+					<% } %>
 					</div>
+				</div>
 				</div><!--end introBox,linkShare-->
-  
+
 				<div class="actionBar clearfix linkActivityIcon">
 						 <% def toggleDisplayCommentAction = uicomponent.event('ToggleDisplayCommentForm', null, false);
 									 def commentLink = "";
@@ -474,7 +477,7 @@
                               <a href="javascript:void(0)" class="subCommentShowAllLink" data-parent-comment="$it.parentCommentId">
                                   <%=labelViewAllReplies.replace("{0}", String.valueOf(subCommentSize))%>
                               </a>
-	                        </div> 
+	                        </div>
 	                         <%
 	                     }
 	                }
@@ -569,7 +572,7 @@
 					  def currentCommenterName = StringEscapeUtils.escapeHtml(currentCommenterIdentity.profile.fullName);
 					  if (!currentCommenterAvatar) currentCommenterAvatar= LinkProvider.PROFILE_DEFAULT_AVATAR_URL;
 				  %>
-					
+
 					<% if (commentList.size() == 0) { %>
 					  <div class="commentItem noCommentFormBox" id="CommentFormBlock${activity.id}">
 					<% } else { %>
@@ -579,7 +582,7 @@
 							<a class="avatarXSmall" href="$currentCommenterUri">
 								<img src="$currentCommenterAvatar" alt="$currentCommenterName"/>
 							</a>
-						</div><!--end commentLeft--> 
+						</div><!--end commentLeft-->
 						<div class="commentRight">
 							<div class="commentInputBox ">
 								<div class="commentInput"><% uicomponent.renderChild(UIFormTextAreaInput.class); %></div>
@@ -588,12 +591,12 @@
 							</div>
 						</div><!--end commentRight-->
                         <div class="clearfix"></div>
-					  </div> <!--end commentItem-->					
-					</div><!--end commentlist-->	  
+					  </div> <!--end commentItem-->
+					</div><!--end commentlist-->
 				</div><!--end commentBox-->
 			</div><!--end #ActivityContextBox${activity.id}-->
-		</div> <!--end ContextBox${activity.id}-->	
-  </div> <!-- #boxContainer-->	  
+		</div> <!--end ContextBox${activity.id}-->
+  </div> <!-- #boxContainer-->
   <% uiform.end() %>
 </div>
 <% } else { %> <!-- activity deleted -->
