@@ -283,7 +283,7 @@ export default {
       if(newVal) {
         setTimeout(() => this.showErrorMessage = false, this.MESSAGE_TIMEOUT);
       }
-    },
+    }
   },
   created() {
     this.selectedFiles = this.attachedFiles.slice();
@@ -454,7 +454,7 @@ export default {
               path: fetchedFolders[j].getAttribute('currentFolder'),
               folderTypeCSSClass: folderTypeCSSClass,
               isSelected: false,
-              canRemove: fetchedFolders[j].getAttribute('canRemove') === 'true'
+              canRemove: fetchedFolders[j].getAttribute('canRemove') === 'true',
             });
           }
         } else if (fetchedDocuments[i].tagName === 'Files') {
@@ -584,6 +584,11 @@ export default {
         }
       }
     },
+    cancelCreatingNewFolder() {
+      this.folders.shift();
+      this.creatingNewFolder = false;
+      this.newFolderName = '';
+    },
     openFolderActionsMenu(folder, event) {
       this.selectedFolder = folder;
       this.showFolderActionsMenu = true;
@@ -621,11 +626,6 @@ export default {
         this.errorMessage= `${this.$t('attachments.deleteFolderOrFile.error')}`;
         this.showErrorMessage = true;
       });
-    },
-    cancelCreatingNewFolder() {
-      this.folders.shift();
-      this.creatingNewFolder = false;
-      this.newFolderName = '';
     },
     reloadCurrentPath(){
       this.resetExplorer();
