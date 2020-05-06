@@ -79,6 +79,8 @@ import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.ext.UIExtension;
 import org.exoplatform.webui.ext.UIExtensionManager;
+import org.exoplatform.ws.frameworks.json.impl.JsonException;
+import org.exoplatform.ws.frameworks.json.impl.JsonGeneratorImpl;
 
 
 /**
@@ -1387,7 +1389,7 @@ public class FileUIActivity extends BaseUIActivity{
         Node node = getContentNode(0);
         require.addScripts("editorbuttons.resetButtons();");
         // call plugins init handlers
-        getDocumentService().getDocumentEditorProviders().forEach(provider -> {
+        documentService.getDocumentEditorProviders().forEach(provider -> {
           try {
             if (provider.isAvailableForUser(identity)) {
               provider.initActivity(node.getUUID(), node.getSession().getWorkspace().getName(), activityId);
@@ -1396,31 +1398,223 @@ public class FileUIActivity extends BaseUIActivity{
             LOG.error("Cannot init activity from plugin {}, {}", provider.getProviderName(), e.getMessage());
           }
         });
-        String prefferedEditor = getPrefferedEditor(node);
-        require.addScripts("editorbuttons.initActivityButtons('" + activityId + "', '" + node.getUUID() + "', '"
-            + node.getSession().getWorkspace().getName() + "'," + prefferedEditor + ");");
+        String preferredProvider = documentService.getPreferredEditor(identity.getUserId(),
+                                                                     node.getUUID(),
+                                                                     node.getSession().getWorkspace().getName());
+        String currentProvider = documentService.getCurrentDocumentProvider(node.getUUID(),
+                                                                            node.getSession().getWorkspace().getName());
+        InitConfig config = new InitConfig.InitConfigBuilder().activityId(activityId)
+                                                              .index("0")
+                                                              .fileId(node.getUUID())
+                                                              .workspace(node.getSession().getWorkspace().getName())
+                                                              .preferredProvider(preferredProvider)
+                                                              .currentProvider(currentProvider)
+                                                              .build();
+        require.addScripts("editorbuttons.initActivityButtons(" + config.toJSON() + ");");
 
       }
     }
     super.end();
   }
-  
-  /**
-   * Gets the preffered editor.
-   *
-   * @param node the node
-   * @return the preffered editor
-   * @throws Exception the exception
-   */
-  protected String getPrefferedEditor(Node node) throws Exception {
-    String userId = ConversationState.getCurrent().getIdentity().getUserId();
-    String prefferedEditor = getDocumentService().getPreferedEditor(userId, node.getUUID(), node.getSession().getWorkspace().getName());
-    if (prefferedEditor != null) {
-      prefferedEditor = "'" + prefferedEditor + "'";
-    } else {
-      prefferedEditor = "null".intern();
-    }
-    return prefferedEditor;
-  }
 
+  /**
+   * The Class InitConfig.
+   */
+  protected static class InitConfig {
+
+    /** The activity id. */
+    protected final String activityId;
+
+    /** The index. */
+    protected final String index;
+
+    /** The file id. */
+    protected final String fileId;
+
+    /** The workspace. */
+    protected final String workspace;
+
+    /** The preferred provider. */
+    protected final String preferredProvider;
+
+    /** The current provider. */
+    protected final String currentProvider;
+
+    /**
+     * Instantiates a new inits the config.
+     *
+     * @param builder the builder
+     */
+    private InitConfig(InitConfigBuilder builder) {
+      this.activityId = builder.activityId;
+      this.index = builder.index;
+      this.fileId = builder.fileId;
+      this.workspace = builder.workspace;
+      this.preferredProvider = builder.preferredProvider;
+      this.currentProvider = builder.currentProvider;
+    }
+
+    /**
+     * Gets the activity id.
+     *
+     * @return the activity id
+     */
+    public String getActivityId() {
+      return activityId;
+    }
+
+    /**
+     * Gets the index.
+     *
+     * @return the index
+     */
+    public String getIndex() {
+      return index;
+    }
+
+    /**
+     * Gets the file id.
+     *
+     * @return the file id
+     */
+    public String getFileId() {
+      return fileId;
+    }
+
+    /**
+     * Gets the workspace.
+     *
+     * @return the workspace
+     */
+    public String getWorkspace() {
+      return workspace;
+    }
+
+    /**
+     * Gets the current provider.
+     *
+     * @return the current provider
+     */
+    public String getCurrentProvider() {
+      return currentProvider;
+    }
+
+    /**
+     * Gets the preferred provider.
+     *
+     * @return the preferred provider
+     */
+    public String getPreferredProvider() {
+      return preferredProvider;
+    }
+
+    /**
+     * To JSON.
+     *
+     * @return the string
+     * @throws JsonException the json exception
+     */
+    public String toJSON() throws JsonException {
+      JsonGeneratorImpl gen = new JsonGeneratorImpl();
+      return gen.createJsonObject(this).toString();
+    }
+
+    /**
+     * The Class InitConfigBuilder.
+     */
+    static class InitConfigBuilder {
+      /** The activity id. */
+      protected String activityId;
+
+      /** The index. */
+      protected String index;
+
+      /** The file id. */
+      protected String fileId;
+
+      /** The workspace. */
+      protected String workspace;
+
+      /** The preferred provider. */
+      protected String preferredProvider;
+
+      /** The current editor. */
+      protected String currentProvider;
+
+      /**
+       * Activity id.
+       *
+       * @param activityId the activity id
+       * @return the inits the config builder
+       */
+      protected InitConfigBuilder activityId(String activityId) {
+        this.activityId = activityId;
+        return this;
+      }
+
+      /**
+       * Index.
+       *
+       * @param index the index
+       * @return the inits the config builder
+       */
+      protected InitConfigBuilder index(String index) {
+        this.index = index;
+        return this;
+      }
+
+      /**
+       * File id.
+       *
+       * @param fileId the file id
+       * @return the inits the config builder
+       */
+      protected InitConfigBuilder fileId(String fileId) {
+        this.fileId = fileId;
+        return this;
+      }
+
+      /**
+       * Workspace.
+       *
+       * @param workspace the workspace
+       * @return the inits the config builder
+       */
+      protected InitConfigBuilder workspace(String workspace) {
+        this.workspace = workspace;
+        return this;
+      }
+
+      /**
+       * Preffered editor.
+       *
+       * @param preferredProvider the preferred provider
+       * @return the inits the config builder
+       */
+      protected InitConfigBuilder preferredProvider(String preferredProvider) {
+        this.preferredProvider = preferredProvider;
+        return this;
+      }
+
+      /**
+       * Current editor.
+       *
+       * @param currentProvider the current provider
+       * @return the inits the config builder
+       */
+      protected InitConfigBuilder currentProvider(String currentProvider) {
+        this.currentProvider = currentProvider;
+        return this;
+      }
+
+      /**
+       * Builds the InitConfig.
+       *
+       * @return the inits the config
+       */
+      protected InitConfig build() {
+        return new InitConfig(this);
+      }
+    }
+  }
 }

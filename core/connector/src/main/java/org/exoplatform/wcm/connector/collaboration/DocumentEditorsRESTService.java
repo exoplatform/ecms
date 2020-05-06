@@ -41,6 +41,8 @@ import org.exoplatform.services.cms.documents.DocumentEditorProvider;
 import org.exoplatform.services.cms.documents.DocumentService;
 import org.exoplatform.services.cms.documents.exception.DocumentEditorProviderNotFoundException;
 import org.exoplatform.services.cms.documents.exception.PermissionValidationException;
+import org.exoplatform.services.cms.documents.impl.EditorProvidersHelper;
+import org.exoplatform.services.cms.documents.impl.EditorProvidersHelper.ProviderInfo;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.organization.Group;
@@ -63,7 +65,6 @@ import org.exoplatform.ws.frameworks.json.impl.JsonGeneratorImpl;
 
 /**
  * The Class DocumentEditorsRESTService is REST endpoint for working with editable documents.
- * Its used to set prefered editor for specific user/document.
  *
  */
 @Path("/documents/editors")
@@ -81,8 +82,8 @@ public class DocumentEditorsRESTService implements ResourceContainer {
   /** The Constant PERMISSION_NOT_VALID. */
   private static final String   PERMISSION_NOT_VALID         = "PermissionNotValid";
 
-  /** The Constant CANNOT_SAVE_PREFFERED_EDITOR. */
-  private static final String   CANNOT_SAVE_PREFFERED_EDITOR = "CannotSavePrefferedEditor";
+  /** The Constant CANNOT_SAVE_PREFERRED_EDITOR. */
+  private static final String   CANNOT_SAVE_PREFERRED_EDITOR = "CannotSavePreferredEditor";
 
   /** The Constant SELF. */
   private static final String   SELF                         = "self";
@@ -205,7 +206,7 @@ public class DocumentEditorsRESTService implements ResourceContainer {
   }
 
   /**
-   * Sets the prefered editor for specific user/document.
+   * Sets the preferred editor for specific user/document.
    *
    * @param fileId the file id
    * @param userId the user id
@@ -214,23 +215,23 @@ public class DocumentEditorsRESTService implements ResourceContainer {
    * @return the response
    */
   @POST
-  @Path("/prefered/{fileId}")
+  @Path("/preferred/{fileId}")
   @RolesAllowed("users")
-  public Response preferedEditor(@PathParam("fileId") String fileId,
+  public Response preferredEditor(@PathParam("fileId") String fileId,
                                  @FormParam("userId") String userId,
                                  @FormParam("provider") String provider,
                                  @FormParam("workspace") String workspace) {
     try {
-      documentService.savePreferedEditor(userId, provider, fileId, workspace);
+      documentService.savePreferredEditor(userId, provider, fileId, workspace);
     } catch (AccessDeniedException e) {
-      LOG.error("Access denied to set prefered editor for user {} and node {}: {}", userId, fileId, e.getMessage());
+      LOG.error("Access denied to set preferred editor for user {} and node {}: {}", userId, fileId, e.getMessage());
       return Response.status(Status.INTERNAL_SERVER_ERROR)
-                     .entity(new ErrorMessage("Access denied error.", CANNOT_SAVE_PREFFERED_EDITOR))
+                     .entity(new ErrorMessage("Access denied error.", CANNOT_SAVE_PREFERRED_EDITOR))
                      .build();
     } catch (RepositoryException e) {
-      LOG.error("Cannot set prefered editor for user {} and node {}: {}", userId, fileId, e.getMessage());
+      LOG.error("Cannot set preferred editor for user {} and node {}: {}", userId, fileId, e.getMessage());
       return Response.status(Status.INTERNAL_SERVER_ERROR)
-                     .entity(new ErrorMessage(e.getMessage(), CANNOT_SAVE_PREFFERED_EDITOR))
+                     .entity(new ErrorMessage(e.getMessage(), CANNOT_SAVE_PREFERRED_EDITOR))
                      .build();
     }
     return Response.ok().build();
@@ -254,29 +255,14 @@ public class DocumentEditorsRESTService implements ResourceContainer {
                               @FormParam("fileId") String fileId,
                               @FormParam("workspace") String workspace) {
     org.exoplatform.services.security.Identity identity = ConversationState.getCurrent().getIdentity();
-    String preferedProvider = getPreferedEditor(identity.getUserId(), fileId, workspace);
-    List<ProviderInfo> providersInfo = documentService.getDocumentEditorProviders()
-                                                      .stream()
-                                                      .filter(provider -> provider.isAvailableForUser(identity))
-                                                      .map(provider -> {
-                                                        try {
-                                                          Object editorSettings = provider.initPreview(fileId,
-                                                                                                       workspace,
-                                                                                                       uriInfo.getRequestUri(),
-                                                                                                       request.getLocale());
-                                                          boolean preffered = provider.getProviderName().equals(preferedProvider);
-                                                          return new ProviderInfo(provider.getProviderName(),
-                                                                                  editorSettings,
-                                                                                  preffered);
-                                                        } catch (Exception e) {
-                                                          LOG.error("Cannot init preview for provider "
-                                                              + provider.getProviderName(), e);
-                                                          return null;
-                                                        }
-                                                      })
-                                                      .filter(providerInfo -> providerInfo != null)
-                                                      .collect(Collectors.toList());
-
+    List<DocumentEditorProvider> providers = documentService.getDocumentEditorProviders();
+    List<ProviderInfo> providersInfo = EditorProvidersHelper.getInstance()
+                                                           .initPreview(providers,
+                                                                        identity,
+                                                                        fileId,
+                                                                        workspace,
+                                                                        uriInfo.getRequestUri(),
+                                                                        request.getLocale());
     return Response.ok().entity(providersInfo).build();
   }
 
@@ -345,80 +331,6 @@ public class DocumentEditorsRESTService implements ResourceContainer {
     }).collect(Collectors.toList());
 
     return new DocumentEditorData(provider.getProviderName(), provider.isActive(), permissions);
-  }
-
-  /**
-   * Gets the prefered editor.
-   *
-   * @param userId the user id
-   * @param fileId the file id
-   * @param workspace the workspace
-   * @return the prefered editor
-   */
-  protected String getPreferedEditor(String userId, String fileId, String workspace) {
-    String preferedProvider = null;
-    try {
-      preferedProvider = documentService.getPreferedEditor(userId, fileId, workspace);
-    } catch (RepositoryException e) {
-      LOG.error("Cannot get prefered editor for fileId " + fileId, e);
-    }
-    return preferedProvider;
-  }
-
-  /**
-   * The Class ProviderInfo.
-   */
-  public static class ProviderInfo {
-
-    /** The provider. */
-    private final String  provider;
-
-    /** The settings. */
-    private final Object  settings;
-
-    /** The is prefered. */
-    private final boolean isPrefered;
-
-    /**
-     * Instantiates a new provider info.
-     *
-     * @param provider the provider
-     * @param settings the settings
-     * @param isPrefered the isPrefered
-     */
-    public ProviderInfo(String provider, Object settings, boolean isPrefered) {
-      this.provider = provider;
-      this.settings = settings;
-      this.isPrefered = isPrefered;
-    }
-
-    /**
-     * Gets the provider.
-     *
-     * @return the provider
-     */
-    public String getProvider() {
-      return provider;
-    }
-
-    /**
-     * Gets the settings.
-     *
-     * @return the settings
-     */
-    public Object getSettings() {
-      return settings;
-    }
-
-    /**
-     * Checks if is prefered.
-     *
-     * @return true, if is prefered
-     */
-    public boolean isPrefered() {
-      return isPrefered;
-    }
-
   }
 
 }

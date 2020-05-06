@@ -10,7 +10,7 @@
   <name>eXo PLF:: CMS Service</name>
   <description>eXo CMS Service</description>
   <properties>
-    <exo.test.coverage.ratio>0.44</exo.test.coverage.ratio>
+    <exo.test.coverage.ratio>0.43</exo.test.coverage.ratio>
   </properties>
   <dependencies>
     <dependency>

@@ -58,6 +58,10 @@
         <key>org.exoplatform.services.cms.documents.DocumentService</key>
         <type>org.exoplatform.services.cms.documents.impl.DocumentServiceImpl</type>
     </component>
+    
+    <component>
+        <type>org.exoplatform.services.cms.documents.cometd.CometdDocumentsService</type>
+    </component>
 
     <component>
         <key>org.exoplatform.services.cms.drives.ManageDriveService</key>

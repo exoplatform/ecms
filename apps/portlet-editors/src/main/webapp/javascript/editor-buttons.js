@@ -1,7 +1,7 @@
 /**
  * Editor buttons module.
  */
-(function($) {
+(function($, editorsupport) {
   "use strict";
 
   /** For debug logging. */
@@ -20,8 +20,8 @@
             msgLine += err.message;
           }
         } else {
-          msgLine += (typeof err === "string" ? err : JSON.stringify(err)
-              + (err.toString && typeof err.toString === "function" ? "; " + err.toString() : ""));
+          msgLine += (typeof err === "string" ? err : JSON.stringify(err) +
+            (err.toString && typeof err.toString === "function" ? "; " + err.toString() : ""));
         }
 
         console.log(logPrefix + msgLine + isoTime);
@@ -36,7 +36,7 @@
       }
     }
   };
-  
+
   var pageBaseUrl = function(theLocation) {
     if (!theLocation) {
       theLocation = window.location;
@@ -51,100 +51,141 @@
 
     return theLocation.protocol + "//" + theHostName;
   };
-  
-  
-  
+
+
+
   /**
    * Editor core class.
    */
   function EditorButtons() {
 
     // Functions to create editor buttons
-    var buttonsFns = []; 
+    var buttonsFns = [];
     var prefixUrl = pageBaseUrl(location);
     var currentWorkspace;
-    
+    var explorerFileId;
+
+    const DOCUMENT_OPENED = "DOCUMENT_OPENED";
+    const DOCUMENT_CLOSED = "DOCUMENT_CLOSED";
+    const LAST_EDITOR_CLOSED = "LAST_EDITOR_CLOSED";
+    const DOCUMENT_PREVIEW_OPENED = "DOCUMENT_PREVIEW_OPENED";
+    const CURRENT_PROVIDER_INFO = "CURRENT_PROVIDER_INFO";
+    // Current module name
+    const EDITOR_BUTTONS = "editorbuttons";
+
     /**
-     * Saves prefered provider.
+     * Parses comet message from JSON
+     */
+    var tryParseJson = function(message) {
+      var src = message.data ? message.data : (message.error ? message.error : message.failure);
+      if (src) {
+        try {
+          if (typeof src === "string" && (src.startsWith("{") || src.startsWith("["))) {
+            return JSON.parse(src);
+          }
+        } catch (e) {
+          log("Error parsing '" + src + "' as JSON: " + e, e);
+        }
+      }
+      return src;
+    };
+
+    /**
+     * Saves preferred provider.
      * 
      */
-    var savePreferedProvider = function(fileId, provider){
+    var savePreferredProvider = function(fileId, provider) {
       $.post({
-        async : true,
-        type : "POST",
-        url : prefixUrl + "/portal/rest/documents/editors/prefered/" + fileId,
-        data : {
-          userId : eXo.env.portal.userName,
-          provider : provider,
-          workspace : currentWorkspace
+        async: true,
+        type: "POST",
+        url: prefixUrl + "/portal/rest/documents/editors/preferred/" + fileId,
+        data: {
+          userId: eXo.env.portal.userName,
+          provider: provider,
+          workspace: currentWorkspace
         }
       }).then(function(result) {
-        log("Prefered provider " + provider + " saved. " + result);
-      }).catch(function(xhr,status,error) {
-        log("Cannot save prefered provider " + provider + ": " + status + " " + error);
+        log("Preferred provider " + provider + " saved. " + result);
+      }).catch(function(xhr, status, error) {
+        log("Cannot save preferred provider " + provider + ": " + status + " " + error);
       });
     };
-    
+
     /**
      * Inits providers preview
      * 
      */
-    var initProvidersPreview = function(fileId, workspace){
+    var initProvidersPreview = function(fileId, workspace) {
       return $.post({
-        async : true,
-        type : "POST",
-        url : prefixUrl + "/portal/rest/documents/editors/preview",
-        data : {
-          fileId : fileId,
-          workspace : workspace
+        async: true,
+        type: "POST",
+        url: prefixUrl + "/portal/rest/documents/editors/preview",
+        data: {
+          fileId: fileId,
+          workspace: workspace
         }
       });
     };
-    
+
     /**
-     * Adds editor buttons container (button and pulldown)
+     * Creates the dropdown with editor buttons
      */
-    var getButtonsContaner = function(fileId, buttons, preferedProvider, dropclass) {
+    var getButtonsContainer = function(fileId, buttons, preferredProvider, currentProvider, dropclass) {
       if (!buttons) {
         return;
       }
       // Sort buttons in user prefference order
-      if (preferedProvider != null) {
-        buttons.forEach(function(item,i){
-          if (item.provider === preferedProvider){
+      if (preferredProvider != null) {
+        buttons.forEach(function(item, i) {
+          if (item.provider === preferredProvider) {
             buttons.splice(i, 1);
             buttons.unshift(item);
           }
         });
       }
+
       // Add buttons container
       // var $container = $target.find(".editorButtonContainer");
       var $container = $("<div class='editorButtonContainer hidden-tabletL'></div>");
-      
+
       // Create editor button
       var $btn = buttons[0].createButtonFn();
+      $btn.addClass("editorButton");
+      $btn.attr('data-provider', buttons[0].provider);
+      $btn.attr('data-fileId', fileId);
+      // If there is current open editor and it's not this one
+      if (currentProvider && currentProvider != buttons[0].provider) {
+        $btn.addClass("disabledProvider");
+      }
       $container.append($btn);
       let provider = buttons[0].provider;
       $btn.click(function() {
-        log("prefered provider: " + provider);
-        savePreferedProvider(fileId, provider);
+        log("preferred provider: " + provider);
+        savePreferredProvider(fileId, provider);
       });
-      
+
       // Create pulldown with editor buttons
       if (buttons.length > 1) {
         var $dropdownContainer = $("<div class='dropdown-container'></div>");
         var $toggle = $("<button class='btn dropdown-toggle' data-toggle='dropdown'>" +
-        "<i class='uiIconArrowDown uiIconLightGray'></i></span></button>");
-        
+          "<i class='uiIconArrowDown uiIconLightGray'></i></span></button>");
+
         var $dropdown = $("<ul class='dropdown-menu'></ul>");
-        
-        for(var i = 1; i < buttons.length; i++) {
+
+        for (var i = 1; i < buttons.length; i++) {
           var $btn = buttons[i].createButtonFn();
           let provider = buttons[i].provider;
           // Save user choice
           $btn.click(function() {
-            savePreferedProvider(fileId, provider);
+            savePreferredProvider(fileId, provider);
           });
+          $btn.addClass("editorButton");
+          $btn.attr('data-provider', buttons[i].provider);
+          $btn.attr('data-fileId', fileId);
+          // If there is current open editor and it's not this one
+          if (currentProvider && currentProvider != buttons[i].provider) {
+            $btn.addClass("disabledProvider");
+          }
           $dropdown.append($btn);
         }
         $dropdownContainer.append($toggle);
@@ -157,6 +198,9 @@
       return $container;
     };
 
+    /**
+     * Loads providers JS module
+     */
     var loadProviderModule = function(provider) {
       var loader = $.Deferred();
       var moduleId = "SHARED/" + provider;
@@ -168,46 +212,123 @@
             log("Cannot require provider module " + provider, err);
             loader.reject();
           });
-        } catch(e) {
+        } catch (e) {
           log("Cannot load provider module " + provider, e);
           loader.reject();
         }
       } else {
         loader.reject();
       }
-      return loader.promise();
+      return loader;
     };
-    
-    
+
+    /**
+     * Handles events from editorsupport.js and enables/disables editor buttons.
+     */
+    var eventsHandler = function(result) {
+      log("Event handled from editorsupport: " + JSON.stringify(result));
+      switch (result.type) {
+        case DOCUMENT_OPENED: {
+          $('.editorButton[data-provider!="' + result.provider + '"][data-fileId="' + result.fileId + '"]').each(function() {
+            $(this).addClass("disabledProvider");
+          });
+        }
+        break;
+      case LAST_EDITOR_CLOSED: {
+        $('.editorButton[data-provider!="' + result.provider + '"][data-fileId="' + result.fileId + '"]').each(function() {
+          $(this).removeClass("disabledProvider");
+        });
+      }
+      break;
+      }
+    }
+
+    /**
+     * Inits the ECMS Explorer
+     */
+    this.initExplorer = function(fileId, workspace, providersInfo) {
+      var $placeholder = $(".uiIconEcmsEditorsOpen").parents(':eq(1)');
+      $placeholder.css("display", "none");
+      currentWorkspace = workspace;
+      // reset buttons
+      buttonsFns = [];
+      var providersLoader = $.Deferred();
+      var preferredProvider;
+      var currentProvider;
+      providersInfo.forEach(function(providerInfo, i, arr) {
+        loadProviderModule(providerInfo.provider).done(function(module) {
+          // The provider's module will call addCreateButtonFn() and 
+          // add the button-function to buttonsFns array
+          module.initExplorer(providerInfo.settings);
+          if (providerInfo.preferred) {
+            preferredProvider = providerInfo.provider;
+          }
+          if (providerInfo.current) {
+            currentProvider = providerInfo.provider;
+          }
+          // Last provider loaded
+          if (i == (arr.length - 1)) {
+            providersLoader.resolve();
+          }
+        });
+      });
+      providersLoader.done(function() {
+        if (buttonsFns.length) {
+          var $pulldown = getButtonsContainer(fileId, buttonsFns, preferredProvider, currentProvider, 'dropdown');
+          $placeholder.replaceWith($pulldown);
+          if (fileId != explorerFileId) {
+            // We need unsubscribe from previous doc
+            if (explorerFileId) {
+              editorsupport.removeListener(EDITOR_BUTTONS, explorerFileId).done(function() {
+                editorsupport.addListener(EDITOR_BUTTONS, fileId, eventsHandler);
+              });
+            } else {
+              editorsupport.addListener(EDITOR_BUTTONS, fileId, eventsHandler);
+            }
+            explorerFileId = fileId;
+          }
+        }
+      });
+    };
+
     /**
      * Inits editor buttons on DocumentUIActivity.
      * 
      */
-    this.initActivityButtons = function(activityId, fileId, workspace, preferedProvider) {
+    this.initActivityButtons = function(config) {
+      currentWorkspace = config.workspace;
       var buttons = buttonsFns.slice();
       if (buttons.length == 0) {
         return;
       }
-      currentWorkspace = workspace;
-      var $target = $("#activityContainer" + activityId).find("div[id^='ActivityContextBox'] > .actionBar .statusAction.pull-left");
-      $target.append(getButtonsContaner(fileId, buttons, preferedProvider, 'dropdown'));
+      var $target = $("#activityContainer" + config.activityId).find("div[id^='ActivityContextBox'] > .actionBar .statusAction.pull-left");
+      $target.append(getButtonsContainer(config.fileId, buttons, config.preferredProvider, config.currentProvider, 'dropdown'));
+      editorsupport.addListener(EDITOR_BUTTONS, config.fileId, eventsHandler);
     };
-    
+
     /**
      * Inits buttons on document preview.
      * 
      */
     this.initPreviewButtons = function(fileId, workspace, dropclass) {
+      currentWorkspace = workspace;
+      // reset buttons
       buttonsFns = [];
       var buttonsLoader = $.Deferred();
       initProvidersPreview(fileId, workspace).then(function(data) {
         var providersLoader = $.Deferred();
-        var preferedProvider;
+        var preferredProvider;
+        var currentProvider;
         data.forEach(function(providerInfo, i, arr) {
-          loadProviderModule(providerInfo.provider).done(function(module){
+          loadProviderModule(providerInfo.provider).done(function(module) {
+            // The provider's module will call addCreateButtonFn() and 
+            // add the button-function to buttonsFns array
             module.initPreview(providerInfo.settings);
-            if (providerInfo.prefered) {
-              preferedProvider = providerInfo.provider;
+            if (providerInfo.preferred) {
+              preferredProvider = providerInfo.provider;
+            }
+            if (providerInfo.current) {
+              currentProvider = providerInfo.provider;
             }
             // Last provider loaded
             if (i == (arr.length - 1)) {
@@ -215,22 +336,28 @@
             }
           });
         });
-        providersLoader.done(function(){
-          var $pulldown =  getButtonsContaner(fileId, buttonsFns, preferedProvider, dropclass);
-          buttonsLoader.resolve($pulldown);
+        providersLoader.done(function() {
+          if (buttonsFns.length) {
+            var $pulldown = getButtonsContainer(fileId, buttonsFns, preferredProvider, currentProvider, dropclass);
+            buttonsLoader.resolve($pulldown);
+            editorsupport.addListener(EDITOR_BUTTONS, fileId, eventsHandler);
+          }
         });
-      }).catch(function(xhr,status,error) {
+      }).catch(function(xhr, status, error) {
         log("Cannot init providers preview for file" + fileId + ": " + status + " " + error);
       });
       return buttonsLoader;
     };
-    
+
     /**
      * API for providers to add their editor buttons.
      * 
      */
     this.addCreateButtonFn = function(provider, createButtonFn) {
-      var buttonFn = { "provider" : provider, "createButtonFn" : createButtonFn };
+      var buttonFn = {
+        "provider": provider,
+        "createButtonFn": createButtonFn
+      };
       var index = buttonsFns.findIndex(elem => elem.provider === provider);
       if (index === -1) {
         buttonsFns.push(buttonFn);
@@ -238,15 +365,7 @@
         buttonsFns[index] = buttonFn;
       }
     };
-    
-    this.editorOpened = function(provider, fileId) {
-      log("Editor opened. Provider: " + provider + ", fileId: " + fileId);
-    };
-    
-    this.editorClosed = function(provider, fileId) {
-      log("Editor closed. Provider: " + provider + ", fileId: " + fileId);
-    };
-    
+
     /**
      * Clears buttonsFns
      * 
@@ -255,6 +374,7 @@
       buttonsFns = [];
     };
   }
+
   return new EditorButtons();
 
-})($);
+})($, editorsupport);

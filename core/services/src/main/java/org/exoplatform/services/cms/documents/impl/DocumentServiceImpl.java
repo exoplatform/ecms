@@ -72,6 +72,7 @@ import org.exoplatform.services.cms.drives.impl.ManageDriveServiceImpl;
 import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
 import org.exoplatform.services.cms.link.LinkManager;
+import org.exoplatform.services.idgenerator.IDGeneratorService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
@@ -114,6 +115,8 @@ public class DocumentServiceImpl implements DocumentService {
   private static final String EXO_DOCUMENT = "exo:document";
   private static final String EXO_USER_PREFFERENCES = "exo:userPrefferences";
   private static final String EXO_PREFFERED_EDITOR = "exo:prefferedEditor";
+  private static final String EXO_CURRENT_PROVIDER_PROP = "exo:currentProvider";
+  private static final String EXO_EDITORS_ID_PROP = "exo:editorsId";
   public static final String CURRENT_STATE_PROP = "publication:currentState";
   public static final String DOCUMENTS_APP_NAVIGATION_NODE_NAME = "documents";
   public static final String DOCUMENT_NOT_FOUND = "?path=doc-not-found";
@@ -140,8 +143,9 @@ public class DocumentServiceImpl implements DocumentService {
   private OrganizationService organizationService;
   private SettingService settingService;
   private IdentityManager identityManager;
+  private String editorsId;
 
-  public DocumentServiceImpl(ManageDriveService manageDriveService, Portal portal, SessionProviderService sessionProviderService, RepositoryService repoService, NodeHierarchyCreator nodeHierarchyCreator, LinkManager linkManager, PortalContainerInfo portalContainerInfo, OrganizationService organizationService, SettingService settingService, IdentityManager identityManager) {
+  public DocumentServiceImpl(ManageDriveService manageDriveService, Portal portal, SessionProviderService sessionProviderService, RepositoryService repoService, NodeHierarchyCreator nodeHierarchyCreator, LinkManager linkManager, PortalContainerInfo portalContainerInfo, OrganizationService organizationService, SettingService settingService, IdentityManager identityManager, IDGeneratorService idGenerator) {
     this.manageDriveService = manageDriveService;
     this.sessionProviderService = sessionProviderService;
     this.repoService = repoService;
@@ -152,6 +156,8 @@ public class DocumentServiceImpl implements DocumentService {
     this.organizationService = organizationService;
     this.settingService = settingService;
     this.identityManager = identityManager;
+    this.editorsId = idGenerator.generateStringID(this);
+    EditorProvidersHelper.init(this);
   }
 
   @Override
@@ -586,18 +592,18 @@ public class DocumentServiceImpl implements DocumentService {
    * {@inheritDoc}
    */
   @Override
-  public void savePreferedEditor(String userId, String provider, String uuid, String workspace) throws RepositoryException {
+  public void savePreferredEditor(String userId, String provider, String uuid, String workspace) throws RepositoryException {
     Node node = nodeByUUID(uuid, workspace);
     if (node.canAddMixin(EXO_DOCUMENT)) {
       node.addMixin(EXO_DOCUMENT);
     }
-    Node userPrefferences;
+    Node userPreferences;
     if (!node.hasNode(userId)) {
-      userPrefferences = node.addNode(userId, EXO_USER_PREFFERENCES);
+      userPreferences = node.addNode(userId, EXO_USER_PREFFERENCES);
     } else {
-      userPrefferences = node.getNode(userId);
+      userPreferences = node.getNode(userId);
     }
-    userPrefferences.setProperty(EXO_PREFFERED_EDITOR, provider);
+    userPreferences.setProperty(EXO_PREFFERED_EDITOR, provider);
     node.save();
   }
 
@@ -605,12 +611,12 @@ public class DocumentServiceImpl implements DocumentService {
    * {@inheritDoc}
    */
   @Override
-  public String getPreferedEditor(String userId, String uuid, String workspace) throws RepositoryException {
+  public String getPreferredEditor(String userId, String uuid, String workspace) throws RepositoryException {
     Node node = nodeByUUID(uuid, workspace);
     if (node.hasNode(userId)) {
-      Node userPrefferences = node.getNode(userId);
-      if (userPrefferences.hasProperty(EXO_PREFFERED_EDITOR)) {
-        return userPrefferences.getProperty(EXO_PREFFERED_EDITOR).getString();
+      Node userPreferences = node.getNode(userId);
+      if (userPreferences.hasProperty(EXO_PREFFERED_EDITOR)) {
+        return userPreferences.getProperty(EXO_PREFFERED_EDITOR).getString();
       }
     }
     return null;
@@ -624,6 +630,42 @@ public class DocumentServiceImpl implements DocumentService {
     return unmodifiebleEditorProviders;
   }
   
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setCurrentDocumentProvider(String uuid, String workspace, String provider) throws RepositoryException {
+    Session systemSession = repoService.getCurrentRepository().getSystemSession(workspace);
+    NodeImpl systemNode = (NodeImpl) systemSession.getNodeByUUID(uuid);
+    if (systemNode.canAddMixin(EXO_DOCUMENT)) {
+      systemNode.addMixin(EXO_DOCUMENT);
+    }
+    systemNode.setProperty(EXO_CURRENT_PROVIDER_PROP, provider);
+    systemNode.setProperty(EXO_EDITORS_ID_PROP, editorsId);
+    systemNode.save();
+  }
+  
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getCurrentDocumentProvider(String uuid, String workspace) throws RepositoryException {
+    Session systemSession = repoService.getCurrentRepository().getSystemSession(workspace);
+    NodeImpl systemNode = (NodeImpl) systemSession.getNodeByUUID(uuid);
+    String provider =  systemNode.hasProperty(EXO_CURRENT_PROVIDER_PROP) ? systemNode.getProperty(EXO_CURRENT_PROVIDER_PROP).getString() : null;
+    String currentEditorsId =  systemNode.hasProperty(EXO_EDITORS_ID_PROP) ? systemNode.getProperty(EXO_EDITORS_ID_PROP).getString() : null;
+    if(editorsId.equals(currentEditorsId)) {
+      return provider;
+    } else {
+      if (systemNode.canAddMixin(EXO_DOCUMENT)) {
+        systemNode.addMixin(EXO_DOCUMENT);
+      }
+      systemNode.setProperty(EXO_CURRENT_PROVIDER_PROP, "");
+      systemNode.setProperty(EXO_EDITORS_ID_PROP, editorsId);
+      return null;
+    }
+  }
+
   /**
    * {@inheritDoc}
    */
