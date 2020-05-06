@@ -26,6 +26,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -39,6 +40,8 @@ import javax.jcr.query.Query;
 import javax.jcr.query.QueryManager;
 import javax.jcr.query.QueryResult;
 
+import org.apache.commons.lang3.StringEscapeUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.gatein.api.Portal;
 import org.gatein.api.navigation.Navigation;
 import org.gatein.api.navigation.Nodes;
@@ -83,12 +86,15 @@ import org.exoplatform.services.jcr.impl.core.query.QueryImpl;
 import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.organization.Group;
 import org.exoplatform.services.organization.OrganizationService;
+import org.exoplatform.services.organization.User;
 import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.social.core.manager.IdentityManager;
+import org.exoplatform.social.core.space.SpaceUtils;
 import org.exoplatform.social.core.space.model.Space;
 import org.exoplatform.social.core.space.spi.SpaceService;
 import org.exoplatform.webui.application.WebuiRequestContext;
@@ -714,7 +720,10 @@ public class DocumentServiceImpl implements DocumentService {
                                          documentNodePath,
                                          documentNodePath.contains(SPACES_NODE_PATH) ? getSpaceFromNodePath(documentNodePath) : documentNode.getParent().getName(),
                                          Utils.getFileType(originalDocumentNode),
-                                         Utils.getDate(documentNode).getTime());
+                                         Utils.getDate(documentNode).getTime(),
+                                         getFileBreadCrumb(documentNode),
+                                         getLinkInDocumentsApp(originalDocumentNode.getPath()),
+                                         getDownloadUri(originalDocumentNode));
         documents.add(document);
       }
       session.logout();
@@ -818,5 +827,159 @@ public class DocumentServiceImpl implements DocumentService {
       }
     }
     return "";
+  }
+  
+  private LinkedHashMap<String, String> getFileBreadCrumb(Node fileNode) {
+    LinkedHashMap<String, String> docFolderBreadCrumb = getDocFolderRelativePathWithLinks(fileNode);
+    LinkedHashMap<String, String> fileBreadCrumb = new LinkedHashMap<>();;
+    if (docFolderBreadCrumb != null) {
+      int breadCrumbSize = docFolderBreadCrumb.size();
+      int folderIndex = 0;
+      for (String folderName : docFolderBreadCrumb.keySet()) {
+        String folderPath = docFolderBreadCrumb.get(folderName);
+        folderName = folderName.replaceAll("_" + (breadCrumbSize - folderIndex - 1) + "$", "");
+        folderPath = folderPath.replace("%27", "\\'");
+        fileBreadCrumb.put(folderName, folderPath);
+        folderIndex++;
+      }
+    }
+    return fileBreadCrumb;
+  }
+
+  private LinkedHashMap<String, String> getDocFolderRelativePathWithLinks(Node fileNode) {
+    LinkedHashMap<String, String> reversedFolderPathWithLinks = new LinkedHashMap<>();
+    try {
+      DriveData drive = getDriveOfNode(fileNode.getPath());
+      if (drive != null) {
+        Map<String, String> parameters = drive.getParameters();
+        String driveName = drive.getName();
+        if (parameters != null) {
+          if (parameters.containsKey("groupId")) {
+            String groupId = parameters.get("groupId");
+            if (StringUtils.isNotBlank(groupId)) {
+              try {
+                groupId = groupId.replaceAll("\\.", "/");
+                if (groupId.startsWith(SpaceUtils.SPACE_GROUP)) {
+                  SpaceService spaceService = WCMCoreUtils.getService(SpaceService.class);
+                  Space space = spaceService.getSpaceByGroupId(groupId);
+                  if (space != null) {
+                    driveName = space.getDisplayName();
+                  }
+                } else {
+                  Group group = organizationService.getGroupHandler().findGroupById(groupId);
+                  driveName = group == null ? driveName : group.getLabel();
+                }
+              } catch (Exception e) {
+                LOG.warn("Can't get drive name for group with id '" + groupId + "'", e);
+              }
+            }
+          } else if (parameters.containsKey("userId")) {
+            String userId = parameters.get("userId");
+            if (StringUtils.isNotBlank(userId)) {
+              try {
+                userId = userId.indexOf("/") >= 0 ? userId.substring(userId.lastIndexOf("/") + 1) : userId;
+                User user = organizationService.getUserHandler().findUserByName(userId);
+                if (user != null) {
+                  driveName = user.getDisplayName();
+                }
+              } catch (Exception e) {
+                LOG.warn("Can't get drive name for user with id '" + userId + "'", e);
+              }
+            }
+          }
+        }
+        String driveHomePath = drive.getResolvedHomePath();
+
+        // if the drive is the Personal Documents drive, we must handle the
+        // special case of the Public symlink
+        String drivePublicFolderHomePath = null;
+        if (ManageDriveServiceImpl.PERSONAL_DRIVE_NAME.equals(drive.getName())) {
+          drivePublicFolderHomePath = driveHomePath.replace("/" + ManageDriveServiceImpl.PERSONAL_DRIVE_PRIVATE_FOLDER_NAME, "/"
+              + ManageDriveServiceImpl.PERSONAL_DRIVE_PUBLIC_FOLDER_NAME);
+        }
+
+        // calculate the relative path to the drive by browsing up the content
+        // node path
+        Node parentContentNode = fileNode.getParent();
+        while (parentContentNode != null) {
+          String parentPath = parentContentNode.getPath();
+          // exit condition is check here instead of in the while condition to
+          // avoid
+          // retrieving the path several times and because there is some logic
+          // to handle
+          if (!parentPath.contains(driveHomePath)) {
+            // The parent path is outside drive
+            break;
+          } else if (!driveHomePath.equals("/") && parentPath.equals("/")) {
+            // we are at the root of the workspace
+            break;
+          } else if (drivePublicFolderHomePath != null && parentPath.equals(drivePublicFolderHomePath)) {
+            // this is a special case : the root of the Public folder of the
+            // Personal Documents drive
+            // in this case we add the Public folder in the path
+            reversedFolderPathWithLinks.put(ManageDriveServiceImpl.PERSONAL_DRIVE_PUBLIC_FOLDER_NAME, getDocOpenUri(parentContentNode));
+            break;
+          }
+
+          String nodeName;
+          // title is used if it exists, otherwise the name is used
+          if (parentPath.equals(driveHomePath)) {
+            nodeName = driveName;
+          } else if (parentContentNode.hasProperty("exo:title")) {
+            nodeName = parentContentNode.getProperty("exo:title").getString();
+          } else {
+            nodeName = parentContentNode.getName();
+          }
+          reversedFolderPathWithLinks.put(nodeName + "_" + reversedFolderPathWithLinks.size(), getDocOpenUri(parentContentNode));
+
+          if (parentPath.equals("/")) {
+            break;
+          } else {
+            parentContentNode = parentContentNode.getParent();
+          }
+        }
+      }
+    } catch (Exception re) {
+      LOG.error("Cannot retrieve path of doc " + re.getMessage(), re);
+    }
+
+    LinkedHashMap<String, String> fileNodePathWithLinks = new LinkedHashMap<>();
+    if (reversedFolderPathWithLinks.size() > 1) {
+      List<Map.Entry<String, String>> entries = new ArrayList<>(reversedFolderPathWithLinks.entrySet());
+      for (int j = entries.size() - 1; j >= 0; j--) {
+        Map.Entry<String, String> entry = entries.get(j);
+        fileNodePathWithLinks.put(StringEscapeUtils.escapeHtml4(entry.getKey()), entry.getValue());
+      }
+    } else {
+      fileNodePathWithLinks = reversedFolderPathWithLinks;
+    }
+    return fileNodePathWithLinks;
+  }
+
+  private String getDocOpenUri(Node fileNode) throws Exception{
+    String uri = "";
+    String nodePath = fileNode.getPath();
+    if (nodePath != null) {
+      try {
+        if (nodePath.endsWith("/")) {
+          nodePath = nodePath.replaceAll("/$", "");
+        }
+        uri = getLinkInDocumentsApp(nodePath, getDriveOfNode(nodePath));
+      } catch (Exception e) {
+        LOG.error("Cannot get document open URI of node " + nodePath + " : " + e.getMessage(), e);
+        uri = "";
+      }
+    }
+    return uri;
+  }
+  
+  private String getDownloadUri(Node fileNode) throws Exception{
+    StringBuffer downloadUrl = new StringBuffer();
+    String restContextName =  WCMCoreUtils.getRestContextName();
+    String workspaceName = fileNode.getSession().getWorkspace().getName();
+    downloadUrl.append('/').append(restContextName).append("/jcr/").
+            append(WCMCoreUtils.getRepository().getConfiguration().getName()).append('/').
+            append(workspaceName).append(fileNode.getPath());
+   return downloadUrl.toString().replaceFirst(fileNode.getName(), URLEncoder.encode(fileNode.getName(), "UTF-8")); 
   }
 }

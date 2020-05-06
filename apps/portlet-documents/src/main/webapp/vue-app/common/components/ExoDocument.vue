@@ -54,17 +54,6 @@
         }
         return icon;
       },
-      downloadUrl() {
-        return `/rest/jcr/repository/collaboration${this.document.path}`;
-      },
-      openUrl() {
-        let path = 'Collaboration';
-        if (this.document.path.includes('/Users')) {
-          path = 'Personal+Documents';
-        }
-        path += this.document.path;
-        return `${eXo.env.portal.context}/${eXo.env.portal.portalName}/documents?path=${path}`;
-      },
       relativeDateModified() {
         return this.getRelativeTime(this.document.dateModified.time);
       }
@@ -111,8 +100,9 @@
             workspace: 'collaboration',
             path: this.document.path,
             title: this.document.title,
-            downloadUrl: this.downloadUrl,
-            openUrl: this.openUrl
+            downloadUrl: this.document.downloadUrl,
+            openUrl: this.document.openUrl,
+            breadCrumb: this.document.breadCrumb
           },
         });
       }
