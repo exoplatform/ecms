@@ -48,6 +48,11 @@
       </div>
     </div>
 
+    <transition name="fade" mode="in-out">
+      <div v-show="showErrorMessage" class="alert foldersFilesSelectorAlert alert-error">
+        <i class="uiIconError"></i>{{ errorMessage }}
+      </div>
+    </transition>
     <div class="contentBody">
       <div v-if="currentDrive.title" class="selectionBox">
         <div v-if="loadingFolders" class="VuetifyApp loader">
@@ -72,13 +77,14 @@
           </a>
         </div>
         <div v-for="folder in filteredFolders" :key="folder.id" :id="folder.id" :title="folder.name" class="folderSelection"
-             @click="openFolder(folder)">
+             @click="openFolder(folder)" @contextmenu="openFolderActionsMenu(folder, $event)">
           <a :title="folder.title" href="javascript:void(0);" rel="tooltip" data-placement="bottom">
             <i :class="folder.folderTypeCSSClass" class="uiIcon24x24FolderDefault uiIconEcmsLightGray selectionIcon center"></i>
             <input v-if="folder.type === 'new_folder'" :ref="folder.ref" v-model="newFolderName" type="text" class="newFolderInput  ignore-vuetify-classes" @blur="createNewFolder()" @keyup.enter="$event.target.blur()" @keyup.esc="cancelCreatingNewFolder($event)">
             <div v-else class="selectionLabel center">{{ folder.title }}</div>
           </a>
         </div>
+        <exo-dropdown-menu ref="folderActionsMenu" :folder-actions-menu-left="folderActionsMenuLeft" :folder-actions-menu-top="folderActionsMenuTop" :show-dropdown-menu="showFolderActionsMenu" :selected-folder="selectedFolder" @deleteFolder="deleteFolder" @closeMenu="closeFolderActionsMenu"></exo-dropdown-menu>
         <div v-if="emptyFolderForSelectDestination && modeFolderSelection && !emptyFolder" class="emptyFolder">
           <i class="uiIconEmptyFolder"></i>
           <p>{{ $t('attachments.drawer.destination.folder.empty') }}</p>
@@ -119,15 +125,26 @@
     </div>
     <!-- The following bloc is needed in order to display the warning popup -->
     <!--begin -->
-    <!-- <exo-modal
+    <exo-modal
       ref="exoModal"
       :ok-label="$t('attachments.filesFoldersSelector.popup.button.ok')"
       :title="$t('attachments.filesFoldersSelector.popup.title')">
       <div class="modal-body">
         <p>{{ popupBodyMessage }}</p>
       </div>
-    </exo-modal> -->
+    </exo-modal>
     <!--end -->
+
+    <!-- The following bloc is needed in order to display the confirmation popup -->
+    <!--begin -->
+    <exo-confirm-dialog
+      ref="confirmDialog"
+      :title="$t('attachments.filesFoldersSelector.action.delete.popup.title')"
+      :message="popupBodyMessage"
+      :ok-label="$t('attachments.filesFoldersSelector.action.delete.popup.button.ok')"
+      :cancel-label="$t('attachments.filesFoldersSelector.action.delete.popup.button.cancel')"
+      @ok="okConfirmDialog"/>
+      <!--end -->
   </div>
 </template>
 
@@ -207,6 +224,14 @@ export default {
       newFolderName: '',
       currentAbsolutePath: '',
       popupBodyMessage: '',
+      showFolderActionsMenu: false,
+      folderActionsMenuTop: '0px',
+      folderActionsMenuLeft: '0px',
+      selectedFolder: {},
+      windowPositionLimit: 25,
+      MESSAGE_TIMEOUT: 5000,
+      showErrorMessage: false,
+      errorMessage: '',
       categorizedDrives: {}
     };
   },
@@ -253,7 +278,12 @@ export default {
   watch: {
     filesCountLeft() {
       this.filesCountClass = this.filesCountLeft === 0 ? 'noFilesLeft' : '';
-    }
+    },
+    showErrorMessage: function(newVal) {
+      if(newVal) {
+        setTimeout(() => this.showErrorMessage = false, this.MESSAGE_TIMEOUT);
+      }
+    },
   },
   created() {
     this.selectedFiles = this.attachedFiles.slice();
@@ -273,6 +303,9 @@ export default {
         this.fetchUserDrives();
       }
       self.fetchChildrenContents('');
+    }).catch(() => {
+      this.errorMessage= `${this.$t('attachments.fetchFoldersAndFiles.error')}`;
+      this.showErrorMessage = true;
     });
     this.attachmentsComposerActions = getAttachmentsComposerExtensions();
   },
@@ -326,7 +359,11 @@ export default {
         }
         self.setFoldersAndFiles(rootFolder);
         self.loadingFolders = false;
-      }).catch(() => this.loadingFolders = false);
+      }).catch(() => {
+        this.loadingFolders = false;
+        this.errorMessage= `${this.$t('attachments.fetchFoldersAndFiles.error')}`;
+        this.showErrorMessage = true;
+      });
     },
     fetchUserDrives() {
       this.resetExplorer();
@@ -338,7 +375,11 @@ export default {
         const drivers = xml.childNodes[0].childNodes;
         self.setDrivers(drivers);
         this.loadingFolders = false;
-      }).catch(() => this.loadingFolders = false);
+      }).catch(() => {
+        this.loadingFolders = false;
+        this.errorMessage= `${this.$t('attachments.getDrivers.error')}`;
+        this.showErrorMessage = true;
+      });
     },
     resetExplorer() {
       this.drivers = [];
@@ -412,7 +453,8 @@ export default {
               title: fetchedFolders[j].getAttribute('title'),
               path: fetchedFolders[j].getAttribute('currentFolder'),
               folderTypeCSSClass: folderTypeCSSClass,
-              isSelected: false
+              isSelected: false,
+              canRemove: fetchedFolders[j].getAttribute('canRemove') === 'true'
             });
           }
         } else if (fetchedDocuments[i].tagName === 'Files') {
@@ -520,7 +562,8 @@ export default {
                   title: createdNewFolder.getAttribute('title'),
                   path: createdNewFolder.getAttribute('currentFolder'),
                   folderTypeCSSClass: folderTypeCSSClass,
-                  isSelected: false
+                  isSelected: false,
+                  canRemove: true
                 };
                 self.folders.shift();
                 self.folders.unshift(newFolder);
@@ -530,6 +573,9 @@ export default {
                 self.creatingNewFolder = false;
                 self.newFolderName = '';
               }
+            }).catch(() => {
+              this.errorMessage= `${this.$t('attachments.createFolder.error')}`;
+              this.showErrorMessage = true;
             });
           }
         } else {
@@ -538,10 +584,56 @@ export default {
         }
       }
     },
+    openFolderActionsMenu(folder, event) {
+      this.selectedFolder = folder;
+      this.showFolderActionsMenu = true;
+      Vue.nextTick(function() {
+        this.$refs.folderActionsMenu.$el.focus();
+        this.setFolderActionsMenu(event.y, event.x);
+      }.bind(this));
+      event.preventDefault();
+    },
+    setFolderActionsMenu: function(top, left) {
+      const largestHeight = window.innerHeight - this.$refs.folderActionsMenu.$el.offsetHeight - this.windowPositionLimit;
+      const largestWidth = window.innerWidth - this.$refs.folderActionsMenu.$el.offsetWidth - this.windowPositionLimit;
+      if (top > largestHeight) {
+        top = largestHeight;
+      }
+      if (left > largestWidth) {
+        left = largestWidth;
+      }
+      this.folderActionsMenuTop = `${top}px`;
+      this.folderActionsMenuLeft = `${left}px`;
+    },
+    closeFolderActionsMenu: function() {
+      this.showFolderActionsMenu = false;
+    },
+    deleteFolder() {
+      if(this.selectedFolder.canRemove) {
+        this.$refs.confirmDialog.open();
+        this.popupBodyMessage = `${this.$t('attachments.filesFoldersSelector.action.delete.popup.bodyMessage')}`;
+      }
+    },
+    okConfirmDialog() {
+      attachmentsService.deleteFolderOrFile(this.currentDrive.name, this.workspace,this.selectedFolder.path).then(() => {
+        this.reloadCurrentPath();
+      }).catch(() => {
+        this.errorMessage= `${this.$t('attachments.deleteFolderOrFile.error')}`;
+        this.showErrorMessage = true;
+      });
+    },
     cancelCreatingNewFolder() {
       this.folders.shift();
       this.creatingNewFolder = false;
       this.newFolderName = '';
+    },
+    reloadCurrentPath(){
+      this.resetExplorer();
+      if(this.currentAbsolutePath) {
+        this.fetchChildrenContents(this.currentAbsolutePath);
+      } else {
+        this.fetchChildrenContents('');
+      }
     },
     setCategorizedDrives() {
       const drives = this.drivers.slice();
