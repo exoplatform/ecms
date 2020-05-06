@@ -5,7 +5,7 @@
         <div class="documents" @click="fetchUserDrives()">
           <i class="uiIconFolder"></i>
           <p class="documents" data-toggle="tooltip" rel="tooltip" data-placement="bottom"
-             data-original-title="Documents">{{ currentDrive.title ? $t('attachments.drawer.documents') : $t('attachments.drawer.drives') }}</p>
+             data-original-title="Documents">{{ $t('attachments.drawer.drives') }}</p>
         </div>
         <div v-if="currentDrive.title" class="currentDrive" @click="openDrive(currentDrive)">
           <span class="uiIconArrowRight"></span>
@@ -89,8 +89,8 @@
       </div>
       <div v-else class="categorizedDrives">
         <div v-for="(group, name) in categorizedDrives" :key="name">
-          <p class="categoryName">{{ name }}</p>
-          <div class="selectionBox">
+          <p class="categoryName" @click="toggleDrivesSection(name)">{{ name }}</p>
+          <div v-show="group.opened" class="selectionBox">
             <div v-for="driver in group.drives" :key="driver.name" :title="driver.title" class="folderSelection"
                  @click="openDrive(driver)">
               <a :data-original-title="driver.title" rel="tooltip" data-placement="bottom">
@@ -206,7 +206,8 @@ export default {
       creatingNewFolder: false,
       newFolderName: '',
       currentAbsolutePath: '',
-      popupBodyMessage: ''
+      popupBodyMessage: '',
+      categorizedDrives: {}
     };
   },
   computed: {
@@ -247,25 +248,6 @@ export default {
     },
     emptyFolderForSelectDestination(){
       return this.folders.length === 0 && this.drivers.length === 0 && !this.loadingFolders;
-    },
-    categorizedDrives() {
-      const drives = this.drivers.slice();
-      const categorized = { 
-        'My Drives': { drives: [], opened: true }, 
-        'My Spaces': { drives: [], opened: true }, 
-        'Others': { drives: [], opened: true } 
-      };
-      drives.map(drive => { 
-        if (drive.driverType === 'Personal Drives') {
-          categorized['My Drives'].drives.push(drive);
-        } else if (drive.path.includes('spaces')) {
-          categorized['My Spaces'].drives.push(drive);
-        } else if (!drive.path.includes('Trash')) {
-          categorized['Others'].drives.push(drive);
-        }
-        return drive;
-      });
-      return categorized;
     }
   },
   watch: {
@@ -482,6 +464,7 @@ export default {
           }
         }
       }
+      this.setCategorizedDrives();
     },
     selectDestination() {
       if (!this.selectedFolderPath) {
@@ -559,6 +542,34 @@ export default {
       this.folders.shift();
       this.creatingNewFolder = false;
       this.newFolderName = '';
+    },
+    setCategorizedDrives() {
+      const drives = this.drivers.slice();
+      const categorized = { 
+        'My Drives': { drives: [], opened: true }, 
+        'My Spaces': { drives: [], opened: true }, 
+        'Others': { drives: [], opened: true } 
+      };
+      drives.map(drive => { 
+        if (drive.driverType === 'Personal Drives') {
+          categorized['My Drives'].drives.push(drive);
+        } else if (drive.path.includes('spaces')) {
+          categorized['My Spaces'].drives.push(drive);
+        } else if (!drive.path.includes('Trash')) {
+          categorized['Others'].drives.push(drive);
+        }
+        return drive;
+      });
+      this.categorizedDrives = categorized;
+    },
+    toggleDrivesSection(sectionName) {
+      this.categorizedDrives = {
+        ...this.categorizedDrives,
+        [sectionName]: {
+          ...this.categorizedDrives[sectionName],
+          opened: !this.categorizedDrives[sectionName].opened
+        }
+      };
     }
   }
 };
