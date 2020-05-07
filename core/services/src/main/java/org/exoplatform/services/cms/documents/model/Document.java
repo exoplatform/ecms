@@ -18,6 +18,7 @@ package org.exoplatform.services.cms.documents.model;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.LinkedHashMap;
 
 /**
  * Created by The eXo Platform SAS Author : eXoPlatform exo@exoplatform.com Mar
@@ -50,16 +51,31 @@ public class Document {
   
   private Date dateModified;
   
-  public Document(String id, String title, String path, String drive, String mimeType, Date dateModified) {
-    super();
+  private LinkedHashMap<String, String> breadCrumb;
+  
+  private String openUrl;
+  
+  private String downloadUrl;
+  
+  public Document(String id,
+                  String title,
+                  String path,
+                  String drive,
+                  String mimeType,
+                  Date dateModified,
+                  LinkedHashMap<String, String> breadCrumb,
+                  String openUrl,
+                  String downloadUrl) {
     this.id = id;
     this.title = title;
     this.path = path;
     this.drive = drive;
     this.mimeType = mimeType;
     this.dateModified = dateModified;
+    this.breadCrumb = breadCrumb;
+    this.openUrl = openUrl;
+    this.downloadUrl = downloadUrl;
   }
-
 
   public Document(String id,
                   String name,
@@ -203,5 +219,47 @@ public class Document {
    */
   public void setMimeType(String mimeType) {
     this.mimeType = mimeType;
+  }
+
+  /**
+   * @return the breadCrumb
+   */
+  public LinkedHashMap<String, String> getBreadCrumb() {
+    return breadCrumb;
+  }
+
+  /**
+   * @param breadCrumb the breadCrumb to set
+   */
+  public void setBreadCrumb(LinkedHashMap<String, String> breadCrumb) {
+    this.breadCrumb = breadCrumb;
+  }
+
+  /**
+   * @return the openUrl
+   */
+  public String getOpenUrl() {
+    return openUrl;
+  }
+
+  /**
+   * @param openUrl the openUrl to set
+   */
+  public void setOpenUrl(String openUrl) {
+    this.openUrl = openUrl;
+  }
+
+  /**
+   * @return the downloadUrl
+   */
+  public String getDownloadUrl() {
+    return downloadUrl;
+  }
+
+  /**
+   * @param downloadUrl the downloadUrl to set
+   */
+  public void setDownloadUrl(String downloadUrl) {
+    this.downloadUrl = downloadUrl;
   }
 }
