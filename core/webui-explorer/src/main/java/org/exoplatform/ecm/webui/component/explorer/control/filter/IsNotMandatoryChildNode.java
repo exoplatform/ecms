@@ -43,7 +43,12 @@ public class IsNotMandatoryChildNode extends UIExtensionAbstractFilter {
     if (context == null) return true;
     Node currentNode = (Node) context.get(Node.class.getName());
     Node parentNode = currentNode.getParent();
-    String deletedNodeType = currentNode.getDefinition().getDeclaringNodeType().getName();
+    String deletedNodeType;
+    try {
+      deletedNodeType = currentNode.getDefinition().getDeclaringNodeType().getName();
+    } catch (Exception e) {
+       return true;
+    }
     NodeDefinition[] nodeDefinitions = parentNode.getPrimaryNodeType().getDeclaredChildNodeDefinitions();
     for (NodeDefinition nodeDefinition : nodeDefinitions) {
       String childNodeType = nodeDefinition.getDeclaringNodeType().getName();

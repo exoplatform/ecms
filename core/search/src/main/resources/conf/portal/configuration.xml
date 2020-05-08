@@ -25,6 +25,20 @@
     <target-component>org.exoplatform.services.listener.ListenerService</target-component>
 
     <component-plugin>
+      <name>Document.event.TagAdded</name>
+      <set-method>addListener</set-method>
+      <type>org.exoplatform.services.wcm.search.listener.TagDocumentListenerImpl</type>
+      <description>this listener will add tag to file search connector</description>
+    </component-plugin>
+
+    <component-plugin>
+      <name>Document.event.TagRemoved</name>
+      <set-method>addListener</set-method>
+      <type>org.exoplatform.services.wcm.search.listener.TagDocumentListenerImpl</type>
+      <description>this listener will remove tag from file search connector</description>
+    </component-plugin>
+
+    <component-plugin>
       <name>org.exoplatform.portal.mop.page.page_destroyed</name>
       <set-method>addListener</set-method>
       <type>org.exoplatform.services.wcm.search.listener.PageESListenerImpl</type>

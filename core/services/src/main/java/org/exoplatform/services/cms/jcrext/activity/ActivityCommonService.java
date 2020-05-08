@@ -69,9 +69,6 @@ public class ActivityCommonService {
   public static String CATEGORY_ADDED_ACTIVITY    = "ActivityNotify.event.CategoryAdded";
   public static String CATEGORY_REMOVED_ACTIVITY  = "ActivityNotify.event.CategoryRemoved";
   
-  public static String TAG_ADDED_ACTIVITY         = "ActivityNotify.event.TagAdded";
-  public static String TAG_REMOVED_ACTIVITY       = "ActivityNotify.event.TagRemoved";
-  
   public static String COMMENT_ADDED_ACTIVITY     = "ActivityNotify.event.CommentAdded";
   public static String COMMENT_UPDATED_ACTIVITY   = "ActivityNotify.event.CommentUpdated";
   public static String COMMENT_REMOVED_ACTIVITY   = "ActivityNotify.event.CommentRemoved";
