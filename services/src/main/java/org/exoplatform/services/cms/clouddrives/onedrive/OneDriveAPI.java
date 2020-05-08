@@ -1,4 +1,4 @@
-package org.exoplatform.clouddrive.onedrive;
+package org.exoplatform.services.cms.clouddrives.onedrive;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -43,12 +43,11 @@ import org.apache.http.message.BasicNameValuePair;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.microsoft.graph.options.HeaderOption;
 import com.microsoft.graph.options.QueryOption;
 
-import org.exoplatform.clouddrive.CloudDriveException;
-import org.exoplatform.clouddrive.RefreshAccessException;
-import org.exoplatform.clouddrive.utils.ChunkIterator;
+import org.exoplatform.services.cms.clouddrives.CloudDriveException;
+import org.exoplatform.services.cms.clouddrives.RefreshAccessException;
+import org.exoplatform.services.cms.clouddrives.utils.ChunkIterator;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 

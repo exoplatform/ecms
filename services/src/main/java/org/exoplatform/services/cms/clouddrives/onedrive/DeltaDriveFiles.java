@@ -1,4 +1,4 @@
-package org.exoplatform.clouddrive.onedrive;
+package org.exoplatform.services.cms.clouddrives.onedrive;
 
 import java.util.List;
 

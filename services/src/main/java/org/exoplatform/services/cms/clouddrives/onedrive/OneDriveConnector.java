@@ -1,6 +1,4 @@
-package org.exoplatform.clouddrive.onedrive;
-
-import static org.exoplatform.clouddrive.onedrive.OneDriveAPI.SCOPES;
+package org.exoplatform.services.cms.clouddrives.onedrive;
 
 import java.io.IOException;
 import java.util.Map;
@@ -10,11 +8,11 @@ import javax.jcr.RepositoryException;
 
 import com.microsoft.graph.models.extensions.User;
 
-import org.exoplatform.clouddrive.*;
-import org.exoplatform.clouddrive.jcr.JCRLocalCloudDrive;
-import org.exoplatform.clouddrive.jcr.NodeFinder;
-import org.exoplatform.clouddrive.utils.ExtendedMimeTypeResolver;
 import org.exoplatform.container.xml.InitParams;
+import org.exoplatform.services.cms.clouddrives.*;
+import org.exoplatform.services.cms.clouddrives.jcr.JCRLocalCloudDrive;
+import org.exoplatform.services.cms.clouddrives.jcr.NodeFinder;
+import org.exoplatform.services.cms.clouddrives.utils.ExtendedMimeTypeResolver;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.log.ExoLogger;
@@ -96,7 +94,7 @@ public class OneDriveConnector extends CloudDriveConnector {
            .append("&client_id=")
            .append(getClientId())
            .append("&scope=")
-           .append(SCOPES);
+           .append(OneDriveAPI.SCOPES);
 
     return new OneDriveProvider(getProviderId(), getProviderName(), authUrl.toString(), getConnectorSchema() + "://" + getConnectorHost() + "/portal/rest/clouddrive/connect/onedrive");
   }

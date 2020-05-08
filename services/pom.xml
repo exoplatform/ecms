@@ -227,31 +227,31 @@
               <relocations>
                 <relocation>
                   <pattern>com.google.gson</pattern>
-                  <shadedPattern>org.exoplatform.clouddrive.onedrive.shaded.google.gson</shadedPattern>
+                  <shadedPattern>org.exoplatform.services.cms.clouddrives.onedrive.shaded.google.gson</shadedPattern>
                 </relocation>
                 <relocation>
                   <pattern>com.googlecode.json-simple</pattern>
-                  <shadedPattern>org.exoplatform.clouddrive.onedrive.shaded.googlecode.json-simple</shadedPattern>
+                  <shadedPattern>org.exoplatform.services.cms.clouddrives.onedrive.shaded.googlecode.json-simple</shadedPattern>
                 </relocation>
                 <relocation>
                   <pattern>com.microsoft.graph</pattern>
-                  <shadedPattern>org.exoplatform.clouddrive.onedrive.shaded.microsoft.graph</shadedPattern>
+                  <shadedPattern>org.exoplatform.services.cms.clouddrives.onedrive.shaded.microsoft.graph</shadedPattern>
                 </relocation>
                 <relocation>
                   <pattern>com.squareup.okhttp3</pattern>
-                  <shadedPattern>org.exoplatform.clouddrive.onedrive.shaded.squareup.okhttp3</shadedPattern>
+                  <shadedPattern>org.exoplatform.services.cms.clouddrives.onedrive.shaded.squareup.okhttp3</shadedPattern>
                 </relocation>
                 <relocation>
                   <pattern>com.squareup.okio</pattern>
-                  <shadedPattern>org.exoplatform.clouddrive.onedrive.shaded.squareup.okio</shadedPattern>
+                  <shadedPattern>org.exoplatform.services.cms.clouddrives.onedrive.shaded.squareup.okio</shadedPattern>
                 </relocation>
                 <relocation>
                   <pattern>com.sun.jersey</pattern>
-                  <shadedPattern>org.exoplatform.clouddrive.onedrive.shaded.sun.jersey</shadedPattern>
+                  <shadedPattern>org.exoplatform.services.cms.clouddrives.onedrive.shaded.sun.jersey</shadedPattern>
                 </relocation>
                 <relocation>
                   <pattern>com.google.guava</pattern>
-                  <shadedPattern>org.exoplatform.clouddrive.onedrive.shaded.google.guava</shadedPattern>
+                  <shadedPattern>org.exoplatform.services.cms.clouddrives.onedrive.shaded.google.guava</shadedPattern>
                 </relocation>
               </relocations>
             </configuration>

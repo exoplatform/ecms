@@ -1,4 +1,4 @@
-package org.exoplatform.clouddrive.onedrive;
+package org.exoplatform.services.cms.clouddrives.onedrive;
 
 import com.microsoft.graph.logger.ILogger;
 import com.microsoft.graph.logger.LoggerLevel;

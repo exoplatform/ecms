@@ -16,10 +16,10 @@
  * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
-package org.exoplatform.clouddrive.onedrive;
+package org.exoplatform.services.cms.clouddrives.onedrive;
 
-import org.exoplatform.clouddrive.CloudProvider;
-import org.exoplatform.clouddrive.CloudUser;
+import org.exoplatform.services.cms.clouddrives.CloudProvider;
+import org.exoplatform.services.cms.clouddrives.CloudUser;
 
 /**
  * The Class OneDriveUser.

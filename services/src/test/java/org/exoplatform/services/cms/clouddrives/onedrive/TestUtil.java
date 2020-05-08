@@ -1,4 +1,4 @@
-package org.exoplatform.clouddrive.onedrive;
+package org.exoplatform.services.cms.clouddrives.onedrive;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -96,7 +96,7 @@ public class TestUtil {
 
   private static String scopes() {
     StringJoiner scopes = new StringJoiner(" ");
-    scopes.add(org.exoplatform.clouddrive.onedrive.Scopes.FilesReadWriteAll)
+    scopes.add(org.exoplatform.services.cms.clouddrives.onedrive.Scopes.FilesReadWriteAll)
           .add(Scopes.FilesRead)
           .add(Scopes.FilesReadWrite)
           .add(Scopes.FilesReadAll)

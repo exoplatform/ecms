@@ -1,6 +1,6 @@
-package org.exoplatform.clouddrive.onedrive;
+package org.exoplatform.services.cms.clouddrives.onedrive;
 
-import static org.exoplatform.clouddrive.jcr.JCRLocalCloudDrive.ECD_CLOUDDRIVE;
+import static org.exoplatform.services.cms.clouddrives.jcr.JCRLocalCloudDrive.ECD_CLOUDDRIVE;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
@@ -34,16 +34,16 @@ import com.microsoft.graph.models.extensions.FileSystemInfo;
 import com.microsoft.graph.models.extensions.ItemReference;
 import com.microsoft.graph.models.extensions.SharingLink;
 
-import org.exoplatform.clouddrive.CloudDriveException;
-import org.exoplatform.clouddrive.CloudFile;
-import org.exoplatform.clouddrive.CloudUser;
-import org.exoplatform.clouddrive.SkipSyncException;
-import org.exoplatform.clouddrive.SyncNotSupportedException;
-import org.exoplatform.clouddrive.jcr.NodeFinder;
-import org.exoplatform.clouddrive.utils.ExtendedMimeTypeResolver;
+import org.exoplatform.services.cms.clouddrives.CloudDriveException;
+import org.exoplatform.services.cms.clouddrives.CloudFile;
+import org.exoplatform.services.cms.clouddrives.CloudUser;
+import org.exoplatform.services.cms.clouddrives.SkipSyncException;
+import org.exoplatform.services.cms.clouddrives.SyncNotSupportedException;
+import org.exoplatform.services.cms.clouddrives.jcr.NodeFinder;
+import org.exoplatform.services.cms.clouddrives.utils.ExtendedMimeTypeResolver;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
-
+import org.mockito.Mockito;
 
 
 public class OneDriveFileAPITest {
@@ -72,7 +72,7 @@ public class OneDriveFileAPITest {
         SessionProviderService sessionProviderService = mock(SessionProviderService.class);
         NodeFinder nodeFinder = mock(NodeFinder.class);
         ExtendedMimeTypeResolver extendedMimeTypeResolver = mock(ExtendedMimeTypeResolver.class);
-        jcrLocalOneDrive = spy(new JCRLocalOneDrive(cloudUser, driveNode, sessionProviderService, nodeFinder, extendedMimeTypeResolver));
+        jcrLocalOneDrive = Mockito.spy(new JCRLocalOneDrive(cloudUser, driveNode, sessionProviderService, nodeFinder, extendedMimeTypeResolver));
         oneDriveFileAPI = jcrLocalOneDrive.createFileAPI();
 
     }

@@ -1,7 +1,5 @@
-package org.exoplatform.clouddrive.onedrive;
+package org.exoplatform.services.cms.clouddrives.onedrive;
 
-import static org.exoplatform.clouddrive.onedrive.TestUtil.getRefreshToken;
-import static org.exoplatform.clouddrive.onedrive.TestUtil.retrieveAccessToken;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -18,6 +16,8 @@ import java.util.Objects;
 import java.util.Properties;
 import java.util.stream.Collectors;
 
+import org.exoplatform.services.cms.clouddrives.CloudDriveException;
+import org.exoplatform.services.cms.clouddrives.RefreshAccessException;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Rule;
@@ -33,9 +33,6 @@ import com.microsoft.graph.models.extensions.User;
 import com.microsoft.graph.options.HeaderOption;
 import com.microsoft.graph.requests.extensions.GraphServiceClient;
 import com.microsoft.graph.requests.extensions.IDriveItemDeltaCollectionPage;
-
-import org.exoplatform.clouddrive.CloudDriveException;
-import org.exoplatform.clouddrive.RefreshAccessException;
 
 
 /**
@@ -91,14 +88,14 @@ public class OneDriveAPITest {
     oneDriveAPI = new OneDriveAPI(properties.getProperty("clientId"),
                                   properties.getProperty("clientSecret"),
                                   "",
-                                  getRefreshToken(),
+                                  TestUtil.getRefreshToken(),
                                   10,
                                   "");
   }
 
   private static void initGraphClient() {
     graphClient = GraphServiceClient.builder().authenticationProvider(iHttpRequest -> {
-      String accessToken = retrieveAccessToken();
+      String accessToken = TestUtil.retrieveAccessToken();
       iHttpRequest.getHeaders().add(new HeaderOption("Authorization", "Bearer " + accessToken));
     }).buildClient();
     rootId = graphClient.me().drive().root().buildRequest().get().id;

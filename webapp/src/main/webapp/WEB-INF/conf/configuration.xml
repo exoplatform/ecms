@@ -42,11 +42,11 @@
 
   <!-- One Drive connector plugin -->
   <external-component-plugins>
-    <target-component>org.exoplatform.clouddrive.CloudDriveService</target-component>
+    <target-component>org.exoplatform.services.cms.clouddrives.CloudDriveService</target-component>
     <component-plugin>
       <name>add.clouddriveprovider</name>
       <set-method>addPlugin</set-method>
-      <type>org.exoplatform.clouddrive.onedrive.OneDriveConnector</type>
+      <type>org.exoplatform.services.cms.clouddrives.onedrive.OneDriveConnector</type>
       <init-params>
         <properties-param>
           <name>drive-configuration</name>
@@ -83,12 +83,12 @@
               <string>ConnectOneDrive</string>
             </field>
             <field name="component">
-              <string>org.exoplatform.clouddrive.onedrive.ecms.ConnectOneDriveActionComponent</string>
+              <string>org.exoplatform.services.cms.clouddrives.onedrive.ecms.ConnectOneDriveActionComponent</string>
             </field>
             <field name="extendedFilters">
               <collection type="java.util.ArrayList">
                 <value>
-                  <object type="org.exoplatform.clouddrive.ecms.filters.PersonalDocumentsFilter"></object>
+                  <object type="org.exoplatform.services.cms.clouddrives.webui.filters.PersonalDocumentsFilter"></object>
                 </value>
               </collection>
             </field>

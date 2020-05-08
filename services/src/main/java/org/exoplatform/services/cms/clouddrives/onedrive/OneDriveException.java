@@ -1,6 +1,6 @@
-package org.exoplatform.clouddrive.onedrive;
+package org.exoplatform.services.cms.clouddrives.onedrive;
 
-import org.exoplatform.clouddrive.CloudProviderException;
+import org.exoplatform.services.cms.clouddrives.CloudProviderException;
 
 // TODO generate serial ID, add javadocs
 public class OneDriveException extends CloudProviderException {
