@@ -131,7 +131,7 @@
      * Creates the dropdown with editor buttons
      */
     var getButtonsContainer = function(fileId, buttons, preferredProvider, currentProvider, dropclass) {
-      if (!buttons) {
+      if (!buttons.length) {
         return;
       }
       // Sort buttons in user prefference order
