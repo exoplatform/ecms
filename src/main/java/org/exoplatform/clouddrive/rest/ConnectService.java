@@ -18,6 +18,7 @@
  */
 package org.exoplatform.clouddrive.rest;
 
+import java.net.URI;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -827,6 +828,7 @@ public class ConnectService implements ResourceContainer {
                            @QueryParam("state") String state,
                            @QueryParam("error") String error,
                            @QueryParam("error_description") String errorDescription,
+                           @QueryParam("hostName") String hostName,
                            @CookieParam("JSESSIONID") Cookie jsessionsId,
                            @CookieParam("JSESSIONIDSSO") Cookie jsessionsIdSSO,
                            @CookieParam(INIT_COOKIE) Cookie initId) {
@@ -836,6 +838,22 @@ public class ConnectService implements ResourceContainer {
     // LOG.info(INIT_COOKIE + ": " + initId);
 
     ConnectResponse resp = new ConnectResponse();
+
+    URI requestURI = uriInfo.getRequestUri();
+    StringBuilder serverHostBuilder = new StringBuilder();
+    serverHostBuilder.append(requestURI.getScheme());
+    serverHostBuilder.append("://");
+    if (hostName != null && hostName.length() > 0) {
+      serverHostBuilder.append(hostName);
+    } else {
+      serverHostBuilder.append(requestURI.getHost());
+      int serverPort = requestURI.getPort();
+      if (serverPort >= 0 && serverPort != 80 && serverPort != 443) {
+        serverHostBuilder.append(':');
+        serverHostBuilder.append(serverPort);
+      }
+    }
+    String serverURL = serverHostBuilder.toString();
 
     // TODO implement CSRF handing in state parameter
 
@@ -866,6 +884,7 @@ public class ConnectService implements ResourceContainer {
                   Map<String, String> params = new HashMap<String, String>();
                   params.put(CloudDriveConnector.OAUTH2_CODE, code);
                   params.put(CloudDriveConnector.OAUTH2_STATE, state);
+                  params.put(CloudDriveConnector.OAUTH2_SERVER_URL, serverURL);
                   CloudUser user = cloudDrives.authenticate(provider, params);
 
                   UUID connectId = generateId(user.getEmail() + code);

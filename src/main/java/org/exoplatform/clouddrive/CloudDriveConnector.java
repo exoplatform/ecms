@@ -128,6 +128,9 @@ public abstract class CloudDriveConnector extends BaseComponentPlugin {
   /** The Constant OAUTH2_STATE. */
   public static final String               OAUTH2_STATE                     = "state";
 
+  /** The Constant OAUTH2_SERVER_URL. */
+  public static final String               OAUTH2_SERVER_URL                = "server-url";
+
   /** The Constant OAUTH2_ERROR. */
   public static final String               OAUTH2_ERROR                     = "error";
 
