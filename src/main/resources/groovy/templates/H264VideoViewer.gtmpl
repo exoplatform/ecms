@@ -22,8 +22,8 @@
 	-->
 */
 
-import org.exoplatform.clouddrive.CloudDrive
-import org.exoplatform.clouddrive.CloudFile
+import org.exoplatform.services.cms.clouddrives.CloudDrive
+import org.exoplatform.services.cms.clouddrives.CloudFile
 import org.exoplatform.wcm.webui.reader.ContentReader
 
 // should be set in CloudFileFilter

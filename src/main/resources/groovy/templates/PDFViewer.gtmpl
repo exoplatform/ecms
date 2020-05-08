@@ -24,8 +24,8 @@
 
   import org.exoplatform.ecm.webui.utils.Utils
   import org.exoplatform.wcm.webui.reader.ContentReader
-  import org.exoplatform.clouddrive.CloudDrive
-  import org.exoplatform.clouddrive.CloudFile
+  import org.exoplatform.services.cms.clouddrives.CloudDrive
+  import org.exoplatform.services.cms.clouddrives.CloudFile
   
 	def uiParent = uicomponent.getParent()
   def currentNode = uiParent.node
