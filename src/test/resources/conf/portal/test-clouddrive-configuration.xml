@@ -49,27 +49,27 @@
   <!-- Cloud Drive components -->
 
   <component>
-    <key>org.exoplatform.clouddrive.CloudDriveService</key>
-    <type>org.exoplatform.clouddrive.CloudDriveServiceImpl</type>
+    <key>org.exoplatform.services.cms.clouddrives.CloudDriveService</key>
+    <type>org.exoplatform.services.cms.clouddrives.CloudDriveServiceImpl</type>
   </component>
 
   <component>
-    <key>org.exoplatform.clouddrive.jcr.NodeFinder</key>
-    <type>org.exoplatform.clouddrive.jcr.JCRNodeFinder</type>
+    <key>org.exoplatform.services.cms.clouddrives.jcr.NodeFinder</key>
+    <type>org.exoplatform.services.cms.clouddrives.jcr.JCRNodeFinder</type>
   </component>
 
   <component>
-    <type>org.exoplatform.clouddrive.utils.ExtendedMimeTypeResolver</type>
+    <type>org.exoplatform.services.cms.clouddrives.utils.ExtendedMimeTypeResolver</type>
   </component>
 
   <component>
-    <key>org.exoplatform.clouddrive.CloudDriveFeatures</key>
-    <type>org.exoplatform.clouddrive.features.PermissiveFeatures</type>
+    <key>org.exoplatform.services.cms.clouddrives.CloudDriveFeatures</key>
+    <type>org.exoplatform.services.cms.clouddrives.features.PermissiveFeatures</type>
   </component>
 
   <component>
-    <key>org.exoplatform.clouddrive.exodrive.service.ExoDriveService</key>
-    <type>org.exoplatform.clouddrive.exodrive.service.ExoDriveService</type>
+    <key>org.exoplatform.services.cms.clouddrives.exodrive.service.ExoDriveService</key>
+    <type>org.exoplatform.services.cms.clouddrives.exodrive.service.ExoDriveService</type>
     <init-params>
       <properties-param>
         <name>storage-configuration</name>
@@ -155,7 +155,7 @@
                       <boolean>true</boolean>
                     </field>
                     <field name="actionClassName">
-                      <string>org.exoplatform.clouddrive.jcr.RemoveCloudFileAction</string>
+                      <string>org.exoplatform.services.cms.clouddrives.jcr.RemoveCloudFileAction</string>
                     </field>
                   </object>
                 </value>
@@ -169,11 +169,11 @@
 
   <!-- Use this plugin in external configuration, e.g. an extension -->
   <external-component-plugins> <!-- profiles="default,cloud" -->
-    <target-component>org.exoplatform.clouddrive.CloudDriveService</target-component>
+    <target-component>org.exoplatform.services.cms.clouddrives.CloudDriveService</target-component>
     <!-- component-plugin>
       <name>add.clouddriveprovider</name>
       <set-method>addPlugin</set-method>
-      <type>org.exoplatform.clouddrive.gdrive.GoogleDriveConnector</type>
+      <type>org.exoplatform.services.cms.clouddrives.gdrive.GoogleDriveConnector</type>
       <init-params>
         <properties-param>
           <name>drive-configuration</name>
@@ -185,7 +185,7 @@
     <component-plugin>
       <name>add.clouddriveprovider</name>
       <set-method>addPlugin</set-method>
-      <type>org.exoplatform.clouddrive.exodrive.ExoDriveConnector</type>
+      <type>org.exoplatform.services.cms.clouddrives.exodrive.ExoDriveConnector</type>
       <init-params>
         <properties-param>
           <name>drive-configuration</name>
@@ -197,7 +197,7 @@
     <!-- component-plugin>
       <name>add.clouddriveprovider</name>
       <set-method>addPlugin</set-method>
-      <type>org.exoplatform.clouddrive.box.BoxConnector</type>
+      <type>org.exoplatform.services.cms.clouddrives.box.BoxConnector</type>
       <init-params>
         <properties-param>
           <name>drive-configuration</name>
