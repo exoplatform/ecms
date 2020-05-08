@@ -20,11 +20,13 @@ import org.apache.commons.lang3.StringUtils;
 
 import org.exoplatform.commons.api.search.data.SearchResult;
 import org.exoplatform.commons.utils.CommonsUtils;
+import org.exoplatform.services.cms.folksonomy.NewFolksonomyService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.impl.core.query.QueryImpl;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.security.ConversationState;
+import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.search.QueryCriteria;
 import org.exoplatform.services.wcm.search.SiteSearchService;
 import org.exoplatform.services.wcm.search.connector.FileApplicationSearchServiceConnector;
@@ -33,6 +35,8 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import javax.jcr.*;
 import javax.jcr.query.*;
 import java.util.*;
+
+import static org.exoplatform.services.cms.folksonomy.NewFolksonomyService.EXO_TAGGED;
 
 /**
  * Created by The eXo Platform SAS
@@ -204,6 +208,7 @@ public class PageListFactory {
     SessionProvider sessionProvider = isSystemSession ? WCMCoreUtils.getSystemSessionProvider() :
             WCMCoreUtils.getUserSessionProvider();
     Session session = sessionProvider.getSession(workspace, WCMCoreUtils.getRepository());
+    NewFolksonomyService newFolksonomyService = WCMCoreUtils.getService(NewFolksonomyService.class);
     QueryManager queryManager = session.getWorkspace().getQueryManager();
     Query query = queryManager.createQuery(queryStatement, language);
 
@@ -218,19 +223,34 @@ public class PageListFactory {
       NodeIterator nodeIterator = result.getNodes();
       RowIterator rowIterator = result.getRows();
       while (nodeIterator.hasNext()) {
-        Node node = nodeIterator.nextNode();
         Row row = rowIterator.nextRow();
-        if (filter != null) {
-          node = filter.filterNodeToDisplay(node);
-        }
-        if (dataCreator != null && node != null) {
-          E data = dataCreator.createData(node, row, null);
-          if (data != null) {
-            dataList.add(data);
+        Node node = nodeIterator.nextNode();
+        if(node.isNodeType(EXO_TAGGED)) {
+            List<Node> taggedNode = newFolksonomyService.getAllDocumentsByTag(node.getPath(), session.getWorkspace().getName(), sessionProvider);
+            for (Node item : taggedNode) {
+              if (filter != null) {
+                item = filter.filterNodeToDisplay(item);
+              }
+              if (dataCreator != null && item != null) {
+                E data = dataCreator.createData(item, row, null);
+                if (data != null) {
+                  dataList.add(data);
+                }
+              }
+            }
+          } else {
+          if (filter != null) {
+            node = filter.filterNodeToDisplay(node);
+          }
+          if (dataCreator != null && node != null) {
+            E data = dataCreator.createData(node, row, null);
+            if (data != null) {
+              dataList.add(data);
+            }
           }
         }
       }
-    } catch (RepositoryException e) {
+    } catch (Exception e) {
       if (LOG.isWarnEnabled()) {
         LOG.warn(e.getMessage());
       }
@@ -298,4 +318,5 @@ public class PageListFactory {
 
     return filteredResults;
   }
+
 }

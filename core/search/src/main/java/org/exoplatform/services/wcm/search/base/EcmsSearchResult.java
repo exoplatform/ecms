@@ -31,6 +31,7 @@ public class EcmsSearchResult extends SearchResult {
 
   private String fileType;
   private String nodePath;
+  private List<String> tags;
   private Map<String, List<String>> breadcrumb;
 
   public EcmsSearchResult(String url,
@@ -44,6 +45,39 @@ public class EcmsSearchResult extends SearchResult {
                           String fileType,
                           String nodePath) {
     this(url, urlOnImage, title, excerpt, detail, imageUrl, date, relevancy, fileType, nodePath, null);
+  }
+
+  public EcmsSearchResult(String url,
+                          String urlOnImage,
+                          String title,
+                          List<String> tags,
+                          String excerpt,
+                          String detail,
+                          String imageUrl,
+                          long date,
+                          long relevancy,
+                          String fileType,
+                          String nodePath) {
+    this(url, urlOnImage, title, excerpt, detail, imageUrl, date, relevancy, fileType, nodePath, null, tags);
+  }
+
+  public EcmsSearchResult(String url,
+                          String urlOnImage,
+                          String title,
+                          String excerpt,
+                          String detail,
+                          String imageUrl,
+                          long date,
+                          long relevancy,
+                          String fileType,
+                          String nodePath,
+                          Map<String, List<String>> breadcrumb,
+                          List<String> tags) {
+    super(url, urlOnImage, title, excerpt, detail, imageUrl, date, relevancy);
+    this.fileType = fileType;
+    this.nodePath = nodePath;
+    this.breadcrumb = breadcrumb;
+    this.tags = tags;
   }
 
   public EcmsSearchResult(String url,
@@ -69,6 +103,14 @@ public class EcmsSearchResult extends SearchResult {
   
   public void setFileType(String fileType) {
     this.fileType = fileType;
+  }
+
+  public List<String> getTags() {
+    return this.tags;
+  }
+
+  public void setTags(List<String> tags) {
+    this.tags = tags;
   }
 
   public String getNodePath() {

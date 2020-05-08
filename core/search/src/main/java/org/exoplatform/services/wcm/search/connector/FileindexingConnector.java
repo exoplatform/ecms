@@ -7,6 +7,7 @@ import org.exoplatform.commons.search.index.impl.ElasticIndexingServiceConnector
 import org.exoplatform.commons.utils.CommonsUtils;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.services.cms.documents.TrashService;
+import org.exoplatform.services.cms.folksonomy.NewFolksonomyService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.access.AccessControlList;
 import org.exoplatform.services.jcr.core.ExtendedNode;
@@ -23,7 +24,6 @@ import javax.jcr.*;
 import javax.jcr.nodetype.NodeTypeManager;
 import javax.jcr.nodetype.PropertyDefinition;
 import javax.jcr.query.*;
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -41,10 +41,13 @@ public class FileindexingConnector extends ElasticIndexingServiceConnector {
 
   private TrashService trashService;
 
+  private NewFolksonomyService newFolksonomyService;
+
   public FileindexingConnector(InitParams initParams) {
     super(initParams);
     this.repositoryService = CommonsUtils.getService(RepositoryService.class);
     this.trashService = CommonsUtils.getService(TrashService.class);
+    this.newFolksonomyService = CommonsUtils.getService(NewFolksonomyService.class);
   }
 
   @Override
@@ -74,6 +77,7 @@ public class FileindexingConnector extends ElasticIndexingServiceConnector {
             .append("    \"fileSize\" : {\"type\" : \"long\"},\n")
             .append("    \"name\" : {\"type\" : \"text\", \"analyzer\": \"letter_lowercase_asciifolding\"},\n")
             .append("    \"title\" : {\"type\" : \"text\", \"analyzer\": \"letter_lowercase_asciifolding\"},\n")
+            .append("    \"tags\" : {\"type\" : \"keyword\"},\n")
             .append("    \"dc:title\" : {\"type\" : \"text\"},\n")
             .append("    \"dc:creator\" : {\"type\" : \"text\"},\n")
             .append("    \"dc:subject\" : {\"type\" : \"text\"},\n")
@@ -174,8 +178,8 @@ public class FileindexingConnector extends ElasticIndexingServiceConnector {
       }
 
       LOGGER.info("ES document generated for file with id={} path=\"{}\"", id, node.getPath());
-      return new Document(TYPE, id, null, new Date(), computePermissions(node), fields);
-    } catch (RepositoryException | IOException e) {
+      return new Document(TYPE, id, null, new Date(), computePermissions(node), getTags(node,session.getWorkspace().getName()), fields);
+    } catch (Exception e ) {
       LOGGER.error("Error while indexing file " + id, e);
     }
     finally {
@@ -286,5 +290,15 @@ public class FileindexingConnector extends ElasticIndexingServiceConnector {
     }
 
     return permissions;
+  }
+
+  //Get tags of document
+  private  List<String> getTags(Node node, String workspace) throws Exception {
+    List<String> tags = new ArrayList<>();
+    List<Node> tagList = newFolksonomyService.getLinkedTagsOfDocument(node, workspace);
+    for (Node nodeTag : tagList ) {
+      tags.add(nodeTag.getName());
+     }
+    return tags;
   }
 }

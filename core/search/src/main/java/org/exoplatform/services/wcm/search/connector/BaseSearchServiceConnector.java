@@ -57,10 +57,10 @@ public abstract class BaseSearchServiceConnector extends SearchServiceConnector 
   public static final String sortByRelevancy = "relevancy";
   public static final String sortByTitle = "title";
   
-  protected SiteSearchService siteSearch_;
-  protected DocumentService documentService;
-  protected ManageDriveService driveService_;
-  private WCMConfigurationService wcmConfigurationService;
+  protected SiteSearchService       siteSearch_;
+  protected DocumentService         documentService;
+  protected ManageDriveService      driveService_;
+  private   WCMConfigurationService wcmConfigurationService;
 
   private static final Log LOG = ExoLogger.getLogger(BaseSearchServiceConnector.class.getName());
   

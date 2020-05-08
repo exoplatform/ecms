@@ -39,7 +39,7 @@
           <property name="type" value="file"/>
           <property name="enable" value="${exo.unified-search.connector.file.enable:true}"/>
           <property name="titleField" value="title"/>
-          <property name="searchFields" value="name,title,attachment.content,dc:title,dc:creator,dc:subject,dc:description,dc:publisher,dc:contributor,dc:resourceType,dc:format,dc:identifier,dc:source,dc:language,dc:relation,dc:coverage,dc:rights"/>
+          <property name="searchFields" value="name,title,tags,attachment.content,dc:title,dc:creator,dc:subject,dc:description,dc:publisher,dc:contributor,dc:resourceType,dc:format,dc:identifier,dc:source,dc:language,dc:relation,dc:coverage,dc:rights"/>
         </properties-param>
       </init-params>
     </component-plugin>
