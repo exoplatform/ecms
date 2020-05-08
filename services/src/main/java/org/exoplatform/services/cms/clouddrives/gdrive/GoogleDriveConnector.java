@@ -16,7 +16,7 @@
  * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
-package org.exoplatform.clouddrive.gdrive;
+package org.exoplatform.services.cms.clouddrives.gdrive;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -27,16 +27,16 @@ import javax.jcr.RepositoryException;
 
 import com.google.api.services.oauth2.model.Userinfoplus;
 
-import org.exoplatform.clouddrive.CloudDrive;
-import org.exoplatform.clouddrive.CloudDriveConnector;
-import org.exoplatform.clouddrive.CloudDriveException;
-import org.exoplatform.clouddrive.CloudProvider;
-import org.exoplatform.clouddrive.CloudUser;
-import org.exoplatform.clouddrive.ConfigurationException;
-import org.exoplatform.clouddrive.jcr.JCRLocalCloudDrive;
-import org.exoplatform.clouddrive.jcr.NodeFinder;
-import org.exoplatform.clouddrive.utils.ExtendedMimeTypeResolver;
 import org.exoplatform.container.xml.InitParams;
+import org.exoplatform.services.cms.clouddrives.CloudDrive;
+import org.exoplatform.services.cms.clouddrives.CloudDriveConnector;
+import org.exoplatform.services.cms.clouddrives.CloudDriveException;
+import org.exoplatform.services.cms.clouddrives.CloudProvider;
+import org.exoplatform.services.cms.clouddrives.CloudUser;
+import org.exoplatform.services.cms.clouddrives.ConfigurationException;
+import org.exoplatform.services.cms.clouddrives.jcr.JCRLocalCloudDrive;
+import org.exoplatform.services.cms.clouddrives.jcr.NodeFinder;
+import org.exoplatform.services.cms.clouddrives.utils.ExtendedMimeTypeResolver;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 

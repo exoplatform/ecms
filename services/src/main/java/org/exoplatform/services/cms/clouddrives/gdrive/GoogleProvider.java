@@ -17,12 +17,12 @@
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
 
-package org.exoplatform.clouddrive.gdrive;
+package org.exoplatform.services.cms.clouddrives.gdrive;
 
 import javax.jcr.RepositoryException;
 
-import org.exoplatform.clouddrive.CloudDriveException;
-import org.exoplatform.clouddrive.CloudProvider;
+import org.exoplatform.services.cms.clouddrives.CloudDriveException;
+import org.exoplatform.services.cms.clouddrives.CloudProvider;
 import org.exoplatform.services.jcr.RepositoryService;
 
 /**

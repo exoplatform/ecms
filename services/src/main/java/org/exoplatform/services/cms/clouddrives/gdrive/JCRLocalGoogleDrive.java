@@ -16,7 +16,7 @@
  * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
-package org.exoplatform.clouddrive.gdrive;
+package org.exoplatform.services.cms.clouddrives.gdrive;
 
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -41,24 +41,21 @@ import com.google.api.services.drive.model.File;
 import com.google.api.services.drive.model.ParentReference;
 import com.google.api.services.drive.model.User;
 
-import org.exoplatform.clouddrive.CloudDriveAccessException;
-import org.exoplatform.clouddrive.CloudDriveException;
-import org.exoplatform.clouddrive.CloudFile;
-import org.exoplatform.clouddrive.CloudFileAPI;
-import org.exoplatform.clouddrive.CloudUser;
-import org.exoplatform.clouddrive.DriveRemovedException;
-import org.exoplatform.clouddrive.NotFoundException;
-import org.exoplatform.clouddrive.RefreshAccessException;
-import org.exoplatform.clouddrive.SyncNotSupportedException;
-import org.exoplatform.clouddrive.gdrive.GoogleDriveAPI.ChangesIterator;
-import org.exoplatform.clouddrive.gdrive.GoogleDriveAPI.ChildIterator;
-import org.exoplatform.clouddrive.gdrive.GoogleDriveConnector.API;
-import org.exoplatform.clouddrive.jcr.JCRLocalCloudDrive;
-import org.exoplatform.clouddrive.jcr.JCRLocalCloudFile;
-import org.exoplatform.clouddrive.jcr.NodeFinder;
-import org.exoplatform.clouddrive.oauth2.UserToken;
-import org.exoplatform.clouddrive.oauth2.UserTokenRefreshListener;
-import org.exoplatform.clouddrive.utils.ExtendedMimeTypeResolver;
+import org.exoplatform.services.cms.clouddrives.CloudDriveAccessException;
+import org.exoplatform.services.cms.clouddrives.CloudDriveException;
+import org.exoplatform.services.cms.clouddrives.CloudFile;
+import org.exoplatform.services.cms.clouddrives.CloudFileAPI;
+import org.exoplatform.services.cms.clouddrives.CloudUser;
+import org.exoplatform.services.cms.clouddrives.DriveRemovedException;
+import org.exoplatform.services.cms.clouddrives.NotFoundException;
+import org.exoplatform.services.cms.clouddrives.RefreshAccessException;
+import org.exoplatform.services.cms.clouddrives.SyncNotSupportedException;
+import org.exoplatform.services.cms.clouddrives.jcr.JCRLocalCloudDrive;
+import org.exoplatform.services.cms.clouddrives.jcr.JCRLocalCloudFile;
+import org.exoplatform.services.cms.clouddrives.jcr.NodeFinder;
+import org.exoplatform.services.cms.clouddrives.oauth2.UserToken;
+import org.exoplatform.services.cms.clouddrives.oauth2.UserTokenRefreshListener;
+import org.exoplatform.services.cms.clouddrives.utils.ExtendedMimeTypeResolver;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 
 /**
@@ -114,7 +111,7 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
      * @throws RepositoryException the repository exception
      */
     protected void fetchChilds(String fileId, Node localFile) throws CloudDriveException, RepositoryException {
-      ChildIterator children = api.children(fileId);
+      GoogleDriveAPI.ChildIterator children = api.children(fileId);
       iterators.add(children);
       while (children.hasNext() && !Thread.currentThread().isInterrupted()) {
         ChildReference child = children.next();
@@ -218,7 +215,7 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
     protected final GoogleDriveAPI api;
 
     /** The changes. */
-    protected ChangesIterator      changes;
+    protected GoogleDriveAPI.ChangesIterator changes;
 
     /**
      * Last change ID fetched and applied to the drive. Used by
@@ -1293,7 +1290,7 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
   /**
    * Create drive by loading it from local JCR node.
    *
-   * @param apiBuilder {@link API} API builder
+   * @param apiBuilder {@link GoogleDriveConnector.API} API builder
    * @param provider {@link GoogleProvider}
    * @param driveNode {@link Node} root of the drive
    * @param sessionProviders the session providers
@@ -1304,7 +1301,7 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
    *           services
    * @throws CloudDriveException if cannot load tokens stored locally
    */
-  protected JCRLocalGoogleDrive(API apiBuilder,
+  protected JCRLocalGoogleDrive(GoogleDriveConnector.API apiBuilder,
                                 GoogleProvider provider,
                                 Node driveNode,
                                 SessionProviderService sessionProviders,
@@ -1318,7 +1315,7 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
   /**
    * Load user from the drive Node.
    *
-   * @param apiBuilder {@link API} API builder
+   * @param apiBuilder {@link GoogleDriveConnector.API} API builder
    * @param provider {@link GoogleProvider}
    * @param driveNode {@link Node} root of the drive
    * @return {@link GoogleUser}
@@ -1326,7 +1323,7 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
    * @throws GoogleDriveException the google drive exception
    * @throws CloudDriveException the cloud drive exception
    */
-  protected static GoogleUser loadUser(API apiBuilder, GoogleProvider provider, Node driveNode) throws RepositoryException,
+  protected static GoogleUser loadUser(GoogleDriveConnector.API apiBuilder, GoogleProvider provider, Node driveNode) throws RepositoryException,
                                                                                                 GoogleDriveException,
                                                                                                 CloudDriveException {
     String username = driveNode.getProperty("ecd:cloudUserName").getString();

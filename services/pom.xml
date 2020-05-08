@@ -435,19 +435,19 @@
               <relocations>
                 <relocation>
                   <pattern>com.google.j2objc</pattern>
-                  <shadedPattern>org.exoplatform.clouddrive.gdrive.shaded.google.j2objc</shadedPattern>
+                  <shadedPattern>org.exoplatform.services.cms.clouddrives.gdrive.shaded.google.j2objc</shadedPattern>
                 </relocation>
                 <relocation>
                   <pattern>com.google.api</pattern>
-                  <shadedPattern>org.exoplatform.clouddrive.gdrive.shaded.google.api</shadedPattern>
+                  <shadedPattern>org.exoplatform.services.cms.clouddrives.gdrive.shaded.google.api</shadedPattern>
                 </relocation>
                 <relocation>
                   <pattern>io.opencensus</pattern>
-                  <shadedPattern>org.exoplatform.clouddrive.gdrive.shaded.io.opencensus</shadedPattern>
+                  <shadedPattern>org.exoplatform.services.cms.clouddrives.gdrive.shaded.io.opencensus</shadedPattern>
                 </relocation>
                 <relocation>
                   <pattern>io.grpc</pattern>
-                  <shadedPattern>org.exoplatform.clouddrive.gdrive.shaded.io.grpc</shadedPattern>
+                  <shadedPattern>org.exoplatform.services.cms.clouddrives.gdrive.shaded.io.grpc</shadedPattern>
                 </relocation>
               </relocations>
             </configuration>

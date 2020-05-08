@@ -16,7 +16,7 @@
  * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
-package org.exoplatform.clouddrive.gdrive;
+package org.exoplatform.services.cms.clouddrives.gdrive;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -24,7 +24,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
 
-import org.exoplatform.clouddrive.CloudFile;
+import org.exoplatform.services.cms.clouddrives.CloudFile;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.testng.annotations.BeforeClass;

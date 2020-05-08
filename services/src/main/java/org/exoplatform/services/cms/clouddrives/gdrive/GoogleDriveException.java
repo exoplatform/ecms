@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003-2019 eXo Platform SAS.
+ * Copyright (C) 2003-2016 eXo Platform SAS.
  *
  * This is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as
@@ -16,29 +16,43 @@
  * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
-package org.exoplatform.clouddrive.gdrive;
+package org.exoplatform.services.cms.clouddrives.gdrive;
 
-import java.io.IOException;
+import org.exoplatform.services.cms.clouddrives.CloudProviderException;
 
 /**
- * Indicates that Google client was unable to aquire or restore access token and need an user action to reconnect the drive.<br>
- * Created by The eXo Platform SAS
- * 
- * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
- * @version $Id: AccessTokenNotRestoredException.java 00000 Nov 28, 2019 pnedonosko $
+ * Indicates a problem on provider side or communication problem.
  */
-public class AccessTokenNotRestoredException extends IOException {
+public class GoogleDriveException extends CloudProviderException {
 
   /** The Constant serialVersionUID. */
-  private static final long serialVersionUID = 639413195582762663L;
+  private static final long serialVersionUID = -4550294718482983340L;
 
   /**
-   * Instantiates a new access token not restored exception.
+   * Instantiates a new google drive exception.
    *
    * @param message the message
    */
-  public AccessTokenNotRestoredException(String message) {
+  public GoogleDriveException(String message) {
     super(message);
   }
 
+  /**
+   * Instantiates a new google drive exception.
+   *
+   * @param message the message
+   * @param cause the cause
+   */
+  public GoogleDriveException(String message, Throwable cause) {
+    super(message, cause);
+  }
+
+  /**
+   * Instantiates a new google drive exception.
+   *
+   * @param cause the cause
+   */
+  public GoogleDriveException(Throwable cause) {
+    super(cause);
+  }
 }
