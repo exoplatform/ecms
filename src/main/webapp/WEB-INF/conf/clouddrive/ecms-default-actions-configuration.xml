@@ -34,11 +34,11 @@ Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
     to the ECMS views.
   -->
   <external-component-plugins>
-    <target-component>org.exoplatform.clouddrive.ecms.CloudDriveUIService</target-component>
+    <target-component>org.exoplatform.services.cms.clouddrives.webui.CloudDriveUIService</target-component>
     <component-plugin>
       <name>add.clouddrive.ecms.menu</name>
       <set-method>addPlugin</set-method>
-      <type>org.exoplatform.clouddrive.ecms.CloudDriveUIExtension</type>
+      <type>org.exoplatform.services.cms.clouddrives.webui.CloudDriveUIExtension</type>
       <init-params>
         <values-param>
           <name>default-actions</name>

@@ -25,56 +25,56 @@
   xmlns="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd">
 
   <component>
-    <key>org.exoplatform.clouddrive.CloudDriveService</key>
-    <type>org.exoplatform.clouddrive.CloudDriveServiceImpl</type>
+    <key>org.exoplatform.services.cms.clouddrives.CloudDriveService</key>
+    <type>org.exoplatform.services.cms.clouddrives.CloudDriveServiceImpl</type>
   </component>
   <component>
-    <key>org.exoplatform.clouddrive.CloudDriveFeatures</key>
-    <type>org.exoplatform.clouddrive.features.PermissiveFeatures</type>
+    <key>org.exoplatform.services.cms.clouddrives.CloudDriveFeatures</key>
+    <type>org.exoplatform.services.cms.clouddrives.features.PermissiveFeatures</type>
   </component>
   <component>
-    <key>org.exoplatform.clouddrive.jcr.NodeFinder</key>
-    <type>org.exoplatform.clouddrive.ecms.jcr.CMSNodeFinder</type>
+    <key>org.exoplatform.services.cms.clouddrives.jcr.NodeFinder</key>
+    <type>org.exoplatform.services.cms.clouddrives.webui.jcr.CMSNodeFinder</type>
   </component>
   <component>
-    <type>org.exoplatform.clouddrive.utils.ExtendedMimeTypeResolver</type>
+    <type>org.exoplatform.services.cms.clouddrives.utils.ExtendedMimeTypeResolver</type>
   </component>
   <component>
-    <type>org.exoplatform.clouddrive.viewer.ViewerStorage</type>
+    <type>org.exoplatform.services.cms.clouddrives.viewer.ViewerStorage</type>
   </component>
   <component>
-    <type>org.exoplatform.clouddrive.rest.ConnectService</type>
+    <type>org.exoplatform.ecm.connector.clouddrives.ConnectService</type>
   </component>
   <component>
-    <type>org.exoplatform.clouddrive.rest.ProviderService</type>
+    <type>org.exoplatform.ecm.connector.clouddrives.ProviderService</type>
   </component>
   <component>
-    <type>org.exoplatform.clouddrive.rest.DriveService</type>
+    <type>org.exoplatform.ecm.connector.clouddrives.DriveService</type>
   </component>
   <component>
-    <type>org.exoplatform.clouddrive.rest.FeaturesService</type>
+    <type>org.exoplatform.ecm.connector.clouddrives.FeaturesService</type>
   </component>
   <component>
-    <type>org.exoplatform.clouddrive.rest.DriveServiceLocator</type>
+    <type>org.exoplatform.ecm.connector.clouddrives.DriveServiceLocator</type>
   </component>
   <component>
-    <type>org.exoplatform.clouddrive.rest.ContentService</type>
+    <type>org.exoplatform.ecm.connector.clouddrives.ContentService</type>
   </component>
   <component>
-    <type>org.exoplatform.clouddrive.ecms.rest.ResourceService</type>
+    <type>org.exoplatform.services.cms.clouddrives.webui.rest.ResourceService</type>
   </component>
   <component>
-    <type>org.exoplatform.clouddrive.ecms.rest.FileService</type>
+    <type>org.exoplatform.services.cms.clouddrives.webui.rest.FileService</type>
   </component>
   
   <!-- ECMS integration -->
   <component>
-    <key>org.exoplatform.clouddrive.ecms.CloudDriveUIService</key>
-    <type>org.exoplatform.clouddrive.ecms.CloudDriveUIService</type>
+    <key>org.exoplatform.services.cms.clouddrives.webui.CloudDriveUIService</key>
+    <type>org.exoplatform.services.cms.clouddrives.webui.CloudDriveUIService</type>
   </component>
   <component>
-    <key>org.exoplatform.clouddrive.ecms.action.CloudFileActionService</key>
-    <type>org.exoplatform.clouddrive.ecms.action.CloudFileActionService</type>
+    <key>org.exoplatform.services.cms.clouddrives.webui.action.CloudFileActionService</key>
+    <type>org.exoplatform.services.cms.clouddrives.webui.action.CloudFileActionService</type>
   </component>
 
   <external-component-plugins>
@@ -102,7 +102,7 @@
                       <boolean>true</boolean>
                     </field>
                     <field name="actionClassName">
-                      <string>org.exoplatform.clouddrive.jcr.RemoveCloudFileAction</string>
+                      <string>org.exoplatform.services.cms.clouddrives.jcr.RemoveCloudFileAction</string>
                     </field>
                   </object>
                 </value>
@@ -135,7 +135,7 @@
                       <boolean>false</boolean>
                     </field>
                     <field name="actionClassName">
-                      <string>org.exoplatform.clouddrive.ecms.action.RemoveCloudFileLinkAction</string>
+                      <string>org.exoplatform.services.cms.clouddrives.webui.action.RemoveCloudFileLinkAction</string>
                     </field>
                   </object>
                 </value>
@@ -176,20 +176,20 @@
 
   <!-- use this plugin in external configuration, e.g. an extension -->
   <external-component-plugins>
-    <target-component>org.exoplatform.clouddrive.CloudDriveService</target-component>
+    <target-component>org.exoplatform.services.cms.clouddrives.CloudDriveService</target-component>
     <component-plugin>
       <name>add.portalenv</name>
       <set-method>addPlugin</set-method>
-      <type>org.exoplatform.clouddrive.webui.PortalEnvironment</type>
+      <type>org.exoplatform.services.cms.clouddrives.webui.PortalEnvironment</type>
     </component-plugin>
   </external-component-plugins>
 
   <external-component-plugins>
-    <target-component>org.exoplatform.clouddrive.utils.ExtendedMimeTypeResolver</target-component>
+    <target-component>org.exoplatform.services.cms.clouddrives.utils.ExtendedMimeTypeResolver</target-component>
     <component-plugin>
       <name>add.namespaces</name>
       <set-method>addPlugin</set-method>
-      <type>org.exoplatform.clouddrive.utils.ExtendedMimeTypeResolver$MimeTypeMap</type>
+      <type>org.exoplatform.services.cms.clouddrives.utils.ExtendedMimeTypeResolver$MimeTypeMap</type>
       <init-params>
         <values-param>
           <name>mimetypes-properties</name>
@@ -218,12 +218,12 @@
               <string>ShowConnectCloudDrive</string>
             </field>
             <field name="component">
-              <string>org.exoplatform.clouddrive.ecms.ShowConnectCloudDriveActionComponent</string>
+              <string>org.exoplatform.services.cms.clouddrives.webui.ShowConnectCloudDriveActionComponent</string>
             </field>
             <field name="extendedFilters">
               <collection type="java.util.ArrayList">
                 <value>
-                  <object type="org.exoplatform.clouddrive.ecms.filters.PersonalDocumentsFilter"></object>
+                  <object type="org.exoplatform.services.cms.clouddrives.webui.filters.PersonalDocumentsFilter"></object>
                 </value>
               </collection>
             </field>
@@ -243,7 +243,7 @@
               <int>65</int>
             </field>
             <field name="component">
-              <string>org.exoplatform.clouddrive.ecms.action.ManagePublicationsActionComponent</string>
+              <string>org.exoplatform.services.cms.clouddrives.webui.action.ManagePublicationsActionComponent</string>
             </field>
           </object>
         </object-param>
@@ -260,7 +260,7 @@
               <int>65</int>
             </field>
             <field name="component">
-              <string>org.exoplatform.clouddrive.ecms.action.ManageVersionsActionComponent</string>
+              <string>org.exoplatform.services.cms.clouddrives.webui.action.ManageVersionsActionComponent</string>
             </field>
           </object>
         </object-param>
@@ -277,7 +277,7 @@
               <string>CheckIn</string>
             </field>
             <field name="component">
-              <string>org.exoplatform.clouddrive.ecms.action.CheckInManageComponent</string>
+              <string>org.exoplatform.services.cms.clouddrives.webui.action.CheckInManageComponent</string>
             </field>
           </object>
         </object-param>
@@ -291,7 +291,7 @@
               <string>OpenCloudFile</string>
             </field>
             <field name="component">
-              <string>org.exoplatform.clouddrive.ecms.OpenCloudFileManagerComponent</string>
+              <string>org.exoplatform.services.cms.clouddrives.webui.OpenCloudFileManagerComponent</string>
             </field>
             <field name="category">
               <string>ItemContextMenu_SingleSelection</string>
@@ -311,7 +311,7 @@
               <string>RefreshCloudDrive</string>
             </field>
             <field name="component">
-              <string>org.exoplatform.clouddrive.ecms.RefreshCloudDriveManagerComponent</string>
+              <string>org.exoplatform.services.cms.clouddrives.webui.RefreshCloudDriveManagerComponent</string>
             </field>
             <field name="category">
               <string>ItemContextMenu_SingleSelection</string>
@@ -332,7 +332,7 @@
             </field>
             <field name="component">
               <!-- Invisible action used by Cloud Drive JS to refresh user session on auto-sync -->
-              <string>org.exoplatform.clouddrive.ecms.RefreshViewManagerComponent</string>
+              <string>org.exoplatform.services.cms.clouddrives.webui.RefreshViewManagerComponent</string>
             </field>
             <field name="category">
               <string>GroundContextMenu</string>
@@ -353,7 +353,7 @@
             </field>
             <field name="component">
               <!-- Invisible action used by Cloud Drive JS to mark synchronizing files -->
-              <string>org.exoplatform.clouddrive.ecms.SyncingFileManagerComponent</string>
+              <string>org.exoplatform.services.cms.clouddrives.webui.SyncingFileManagerComponent</string>
             </field>
             <field name="category">
               <string>ItemContextMenu_SingleSelection</string>
@@ -373,7 +373,7 @@
               <string>PushCloudFile</string>
             </field>
             <field name="component">
-              <string>org.exoplatform.clouddrive.ecms.PushCloudFileManagerComponent</string>
+              <string>org.exoplatform.services.cms.clouddrives.webui.PushCloudFileManagerComponent</string>
             </field>
             <field name="category">
               <string>ItemContextMenu_SingleSelection</string>
@@ -393,7 +393,7 @@
               <string>ShowLargeFile</string>
             </field>
             <field name="component">
-              <string>org.exoplatform.clouddrive.ecms.viewer.NotViewableViewer</string>
+              <string>org.exoplatform.services.cms.clouddrives.webui.viewer.NotViewableViewer</string>
             </field>
             <field name="category">
               <string>FileViewer</string>
@@ -404,7 +404,7 @@
             <field name="extendedFilters">
               <collection type="java.util.ArrayList">
                 <value>
-                  <object type="org.exoplatform.clouddrive.ecms.filters.CloudFileLargerFilter">
+                  <object type="org.exoplatform.services.cms.clouddrives.webui.filters.CloudFileLargerFilter">
                     <field name="minSize">
                       <long>209715200</long><!-- 200MB -->
                     </field>
@@ -424,7 +424,7 @@
               <string>ShowCloudFile</string>
             </field>
             <field name="component">
-              <string>org.exoplatform.clouddrive.ecms.viewer.DefaultFileViewer</string>
+              <string>org.exoplatform.services.cms.clouddrives.webui.viewer.DefaultFileViewer</string>
             </field>
             <field name="category">
               <string>FileViewer</string>
@@ -450,7 +450,7 @@
               <string>JCRMoveAction</string>
             </field>
             <field name="component">
-              <string>org.exoplatform.clouddrive.ecms.action.CloudDriveMoveNodeManageComponent</string>
+              <string>org.exoplatform.services.cms.clouddrives.webui.action.CloudDriveMoveNodeManageComponent</string>
             </field>
           </object>
         </object-param>
@@ -464,7 +464,7 @@
               <string>Paste</string>
             </field>
             <field name="component">
-              <string>org.exoplatform.clouddrive.ecms.action.CloudDrivePasteManageComponent</string>
+              <string>org.exoplatform.services.cms.clouddrives.webui.action.CloudDrivePasteManageComponent</string>
             </field>
             <field name="category">
               <string>ItemGroundContextMenu</string>
@@ -490,7 +490,7 @@
               <string>ItemContextMenu</string>
             </field>
             <field name="component">
-              <string>org.exoplatform.clouddrive.ecms.action.CloudDriveDeleteManageComponent</string>
+              <string>org.exoplatform.services.cms.clouddrives.webui.action.CloudDriveDeleteManageComponent</string>
             </field>
           </object>
         </object-param>
@@ -508,7 +508,7 @@
             </field>
             <field name="component">
               <!-- this component sets a new config of UIClipboard in UISideBar to UICloudDriveClipboard to -->
-              <string>org.exoplatform.clouddrive.ecms.action.CloudDriveClipboardActionComponent</string>
+              <string>org.exoplatform.services.cms.clouddrives.webui.action.CloudDriveClipboardActionComponent</string>
             </field>
           </object>
         </object-param>
@@ -523,7 +523,7 @@
               <string>sharecloudfiles:spaces</string>
             </field>
             <field name="component">
-              <string>org.exoplatform.clouddrive.ecms.action.SharedCloudFileUIActivity</string>
+              <string>org.exoplatform.services.cms.clouddrives.webui.action.SharedCloudFileUIActivity</string>
             </field>
             <field name="activityBuiderClass">
               <string>org.exoplatform.wcm.ext.component.activity.UISharedFileBuilder</string>

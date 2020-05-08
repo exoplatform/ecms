@@ -17,7 +17,7 @@
  * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
-package org.exoplatform.clouddrive.portlet;
+package org.exoplatform.services.cms.clouddrives.portlet;
 
 import java.io.IOException;
 
@@ -26,7 +26,7 @@ import javax.portlet.PortletException;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
-import org.exoplatform.clouddrive.ecms.CloudDriveContext;
+import org.exoplatform.services.cms.clouddrives.webui.CloudDriveContext;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.webui.application.WebuiRequestContext;

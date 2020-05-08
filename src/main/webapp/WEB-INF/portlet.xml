@@ -7,7 +7,7 @@
   <portlet>
     <portlet-name>CloudDrivePortlet</portlet-name>
     <display-name xml:lang="EN">Cloud Drive portlet</display-name>
-    <portlet-class>org.exoplatform.clouddrive.portlet.CloudDrivePortlet</portlet-class>
+    <portlet-class>org.exoplatform.services.cms.clouddrives.portlet.CloudDrivePortlet</portlet-class>
     <supports>
       <mime-type>text/html</mime-type>
     </supports>

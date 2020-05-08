@@ -28,15 +28,15 @@ Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
   <!-- ECMS overrides to make Cloud Drive files work correct -->
   <component>
     <key>org.exoplatform.services.cms.watch.WatchDocumentService</key>
-    <type>org.exoplatform.clouddrive.ecms.watch.WatchCloudDocumentServiceImpl</type>
+    <type>org.exoplatform.services.cms.clouddrives.webui.watch.WatchCloudDocumentServiceImpl</type>
   </component>
   <component>
     <key>org.exoplatform.wcm.ext.component.document.service.IShareDocumentService</key>
-    <type>org.exoplatform.clouddrive.ecms.document.CloudDriveShareDocumentService</type>
+    <type>org.exoplatform.services.cms.clouddrives.webui.document.CloudDriveShareDocumentService</type>
   </component>
   <!-- component>
     <key>org.exoplatform.services.cms.thumbnail.ThumbnailService</key>
-    <type>org.exoplatform.clouddrive.ecms.thumbnail.CloudDriveThumbnailServiceImpl</type>
+    <type>org.exoplatform.services.cms.clouddrives.webui.thumbnail.CloudDriveThumbnailServiceImpl</type>
     <init-params>
       <value-param>
         <name>smallSize</name>
@@ -62,7 +62,7 @@ Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
   </component -->
   <component>
     <key>org.exoplatform.wcm.connector.collaboration.ThumbnailRESTService</key>
-    <type>org.exoplatform.clouddrive.ecms.thumbnail.CloudDriveThumbnailRESTService</type>
+    <type>org.exoplatform.services.cms.clouddrives.webui.thumbnail.CloudDriveThumbnailRESTService</type>
   </component>
     
   <!-- Import default menu actions that can be customized in other extensions -->
