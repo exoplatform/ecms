@@ -2232,22 +2232,17 @@
 
 			// pnotify notice
 			var notice = $.pnotify({
-				// title : "Authorizing...",
-				// type : "info",
-				// icon : "picon picon-throbber",
-				hide: false,
+				title : "Authorizing...",
+				type : "info",
+				icon : "picon picon-throbber",
+				hide : false,
 				closer : true,
 				sticker : false,
-				// opacity : .75,
-				opacity: 0,
+				opacity : .75,
 				shadow : false,
-				// nonblock : true,
-				nonblock : false,
-				// nonblock_opacity : .25,
-				nonblock_opacity : 0,
-				width : NOTICE_WIDTH,
-				addclass: "stack-topleft", // This is one of the included default classes.
-				stack: stack_topright
+				nonblock : true,
+				nonblock_opacity : .25,
+				width : NOTICE_WIDTH
 			});
 
 			// show close button in 20s
@@ -2260,12 +2255,12 @@
 			var update = function() {
 				var options = {
 				};
-				// if (progress > 0) {
-				// 	options.text = progress + "% complete.";
-				// }
-				// if (progress >= 75) {
-				// 	options.title = "Almost Done...";
-				// }
+				if (progress > 0) {
+					options.text = progress + "% complete.";
+				}
+				if (progress >= 75) {
+					options.title = "Almost Done...";
+				}
 				if (progress >= 100) {
 					options.title = driveName + " Connected!";
 					options.type = "success";
@@ -2290,18 +2285,18 @@
 					if (progress > 0) {
 						driveName = state.drive.provider.name;
 
-						// notice.pnotify({
-						// 	title : "Connecting Your " + driveName,
-						// 	text : progress + "% complete."
-						// });
+						notice.pnotify({
+							title : "Connecting Your " + driveName,
+							text : progress + "% complete."
+						});
 
 						// hide title in 5sec
-						// hideTimeout = setTimeout(function() {
-						// 	notice.pnotify({
-						// 		title : false,
-						// 		width : "200px"
-						// 	});
-						// }, 5000);
+						hideTimeout = setTimeout(function() {
+							notice.pnotify({
+								title : false,
+								width : "200px"
+							});
+						}, 5000);
 
 						// add as tasks also
 						if (tasks) {

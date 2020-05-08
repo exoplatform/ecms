@@ -20,7 +20,7 @@
               :key="item.id"
               :ripple="false"
               class="cloudDriveListItem"
-              @click="connectToCloudDrive(item.id)"
+              @click.native="connectToCloudDrive(item.id)"
             >
               <v-list-item-icon class="cloudDriveListItem__icon">
                 <i :class="`uiIconEcmsConnectDialog-${item.id} uiIconEcmsBlue`"></i>
@@ -48,17 +48,20 @@ export default {
     event: "changeCurrentDrive",
   },
   props: {
-    showCloudDrawer: {
-      type: Boolean,
-      default: () => false
-    },
     currentDrive: {
       type: Object,
       default: () => ({})
     }
   },
   data: function() {
-    return { providers: {}, userDrive: {}, connectingProvider: "" };
+    return {
+      providers: {},
+      userDrive: {},
+      connectingProvider: "",
+      showCloudDrawer: false,
+      drivesOpened: false,
+      drivesInProgress: {}
+    };
   },
   async created() {
     if (!this.showCloudDrawer) {
@@ -84,22 +87,41 @@ export default {
       const fullProgress = 100;
       cloudDrive.connect(providerId).then(
         data => {
-          console.log(data);
+          if (!this.drivesOpened) {
+            this.openDriveFolder(data.drive.path, data.drive.title);
+          }
+
+          this.drivesInProgress[data.drive.title] = fullProgress;
+          this.$emit("updateDrivesInProgress", { drive: this.drivesInProgress });
+
           this.$emit("updateProgress", { progress: fullProgress });
-          // this.openDriveFolder(data.drive.path, data.drive.title);
           const latency = 3000;
-          setTimeout(() => { this.$emit("updateProgress", { progress: null }); }, latency);
+          setTimeout(() => {
+
+            delete this.drivesInProgress[data.drive.title];
+            this.$emit("updateDrivesInProgress", { drive: this.drivesInProgress });
+
+            this.$emit("updateProgress", { progress: null });
+          }, latency);
           this.connectingProvider = "";
           this.showCloudDrawer = false;
+          this.drivesOpened = false;
         },
         () => {
           this.connectingProvider = "";
+          this.drivesOpened = false;
           this.$emit("updateProgress", { progress: null });
         },
         progressData => {
-          // if (progressData.drive.path) {
-          //   this.openDriveFolder(progressData.drive.path, progressData.drive.title);
-          // }
+          if (progressData.drive.title) {
+
+            this.drivesInProgress[progressData.drive.title] = progressData.progress;
+            this.$emit("updateDrivesInProgress", { drive: this.drivesInProgress });
+
+            if (!this.drivesOpened) {
+              this.openDriveFolder(progressData.drive.path, progressData.drive.title);
+            }
+          }
           this.$emit("updateProgress", { progress: progressData.progress });
           this.showCloudDrawer = false;
         }
@@ -116,16 +138,15 @@ export default {
           name: folderPath,
           title: title,
           path: folderPath,
-          isSelected: true
+          isSelected: true,
+          folderTypeCSSClass: "uiIcon24x24nt_folder",
+          type: "cloud",
         };
-        if (this.currentDrive.name !== this.userDrive.name) {
-          this.$emit("changeCurrentDrive", this.userDrive);
-        }
-        // parent component should listen openConnectedFolder event and call own method after emit
-        this.$emit("openDriveFolder", createdDrive);
+        this.$emit("addDrive", createdDrive);
+        this.drivesOpened = true;
         this.showCloudDrawer = false;
       }
-    }
-  }
+    },
+  },
 };
 </script>

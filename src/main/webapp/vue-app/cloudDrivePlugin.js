@@ -14,6 +14,18 @@ const CloudDrivePlugin = [{
       {
         "event": "updateProgress",
         "listener": "setCloudDriveProgress"
+      },
+      {
+        "event": "addDrive",
+        "listener": "addCloudDrive"
+      },
+      {
+        "event": "openDrives",
+        "listener": "fetchUserDrives"
+      },
+      {
+        "event": "updateDrivesInProgress",
+        "listener": "changeCloudDriveProgress"
       }
     ]
   },

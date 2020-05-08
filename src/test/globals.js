@@ -25,5 +25,6 @@ global.cloudDrive = {
   init: () => {
     // mocked cloudDrive module initialization
   },
-  getProviders: () => [{ id: "gDrive", name: "Google Drive" }, { id: "oneDrive", name: "One Drive" }]
+  getProviders: () => [{ id: "gDrive", name: "Google Drive" }, { id: "oneDrive", name: "One Drive" }],
+  connect: () => Promise.resolve()
 };
