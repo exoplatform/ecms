@@ -75,6 +75,7 @@ import com.google.api.services.oauth2.model.Userinfoplus;
 import org.exoplatform.clouddrive.CloudDriveAccessException;
 import org.exoplatform.clouddrive.CloudDriveException;
 import org.exoplatform.clouddrive.NotFoundException;
+import org.exoplatform.clouddrive.RefreshAccessException;
 import org.exoplatform.clouddrive.oauth2.UserToken;
 import org.exoplatform.clouddrive.utils.ChunkIterator;
 import org.exoplatform.services.log.ExoLogger;
@@ -230,11 +231,12 @@ class GoogleDriveAPI implements DataStoreFactory {
       public DataStore<StoredCredential> set(String userId, StoredCredential value) throws IOException {
         if (value != null) {
           store(value);
+          return this;
         } else {
           LOG.warn("Cannot save null credentials for user: {}. Erase locally saved as outdated.", userId);
           clear();
+          throw new AccessTokenNotRestoredException("No stored credentials");
         }
-        return this;
       }
 
       /**
@@ -244,7 +246,7 @@ class GoogleDriveAPI implements DataStoreFactory {
       public DataStore<StoredCredential> clear() throws IOException {
         // clear the token keys
         try {
-          load(null, null, 0);
+          load(null, null, null);
         } catch (CloudDriveException e) {
           LOG.error("Failed to delete credentials");
         }
@@ -280,12 +282,21 @@ class GoogleDriveAPI implements DataStoreFactory {
     }
 
     /**
-     * Store.
+     * Store drive access tokens from the client credentials.
      *
      * @param credential the credential
+     * @throws AccessTokenNotRestoredException the access token not restored exception
      */
-    void store(StoredCredential credential) {
+    void store(StoredCredential credential) throws AccessTokenNotRestoredException {
       try {
+        // From Google client code Credential.refreshToken() which call this method:
+        // We were unable to get a new access token (e.g. it may have been revoked), we must now
+        // indicate that our current token is invalid.
+        // setAccessToken(null);
+        // setExpiresInSeconds(null);
+        if (credential.getAccessToken() == null && credential.getExpirationTimeMilliseconds() == null) {
+          throw new AccessTokenNotRestoredException("Unable to get a new access token");
+        }
         store(credential.getAccessToken(), credential.getRefreshToken(), credential.getExpirationTimeMilliseconds());
       } catch (CloudDriveException e) {
         LOG.error("Error storing credential", e);
@@ -293,7 +304,7 @@ class GoogleDriveAPI implements DataStoreFactory {
     }
 
     /**
-     * Store.
+     * Store drive access tokens from the client credentials.
      *
      * @param credential the credential
      */
@@ -1308,15 +1319,18 @@ class GoogleDriveAPI implements DataStoreFactory {
 
   /**
    * Check credentials isn't expired and refresh them if required.
-   * 
+   *
    * @throws GoogleDriveException if error during communication with the
    *           provider
+   * @throws RefreshAccessException if need refresh access by an user (e.g. via consent)
    */
-  void refreshAccess() throws GoogleDriveException {
+  void refreshAccess() throws GoogleDriveException, RefreshAccessException {
     Long expirationTime = credential.getExpiresInSeconds();
     if (expirationTime != null && expirationTime < 0) {
       try {
         credential.refreshToken();
+      } catch (AccessTokenNotRestoredException e) {
+        throw new RefreshAccessException("Refresh access to your Google Drive", e);
       } catch (IOException e) {
         throw new GoogleDriveException("Error refreshing access token: " + e.getMessage(), e);
       }
