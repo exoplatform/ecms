@@ -1,0 +1,16 @@
+grant codeBase "@MAVEN_REPO@-"{
+   permission java.security.AllPermission;
+};
+
+grant codeBase "@MAIN_CLASSES@-"{
+   permission java.security.AllPermission;
+};
+
+grant codeBase "@TEST_CLASSES@-"{
+   permission java.lang.RuntimePermission "createSystemSession";
+   permission java.lang.RuntimePermission "createDynamicSession";
+   permission java.lang.RuntimePermission "manageRepository";
+   permission java.lang.RuntimePermission "accessRPCService";
+   permission java.lang.RuntimePermission "invokeInternalAPI";
+};
+
