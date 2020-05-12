@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <parent>
+    <groupId>org.exoplatform.addons.clouddrive</groupId>
+    <artifactId>exo-clouddrive-onedrive</artifactId>
+    <version>2.0.x-SNAPSHOT</version>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
+
+  <artifactId>exo-clouddrive-onedrive-webapp</artifactId>
+  <packaging>war</packaging>
+  <name>eXo Cloud Drive :: Connectors :: OneDrive :: Webapp</name>
+  <description>eXo Cloud Drive Microsoft OneDrive connector exetension web application</description>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.exoplatform.addons.clouddrive</groupId>
+      <artifactId>exo-clouddrive-onedrive-services</artifactId>
+      <scope>provided</scope>
+      <type>jar</type>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <finalName>cloud-drive-onedrive</finalName>
+    <resources>
+      <resource>
+        <directory>src/main/java</directory>
+        <includes>
+          <include>**/*.xml</include>
+          <include>**/*.properties</include>
+          <include>**/*.xsl</include>
+          <include>**/*.dtd</include>
+        </includes>
+      </resource>
+      <resource>
+        <directory>src/main/resources</directory>
+        <includes>
+          <include>**/*.properties</include>
+          <include>**/*.xml</include>
+          <include>**/*.drl</include>
+          <include>**/*.doc</include>
+          <include>**/*.xls</include>
+          <include>**/*.ppt</include>
+          <include>**/*.txt</include>
+          <include>**/*.jar</include>
+          <include>**/*.pom</include>
+          <include>**/*.sha1</include>
+          <include>**/*.conf</include>
+          <include>**/*.gtmpl</include>
+          <include>**/*.gif</include>
+          <include>**/*.jpg</include>
+          <include>**/*.png</include>
+        </includes>
+      </resource>
+    </resources>
+  </build>
+
+</project>
