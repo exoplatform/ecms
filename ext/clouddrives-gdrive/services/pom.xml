@@ -1,0 +1,459 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+  Copyright (C) 2020 eXo Platform SAS.
+  
+  This is free software; you can redistribute it and/or modify it
+  under the terms of the GNU Lesser General Public License as
+  published by the Free Software Foundation; either version 2.1 of
+  the License, or (at your option) any later version.
+  
+  This software is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+  Lesser General Public License for more details.
+  
+  You should have received a copy of the GNU Lesser General Public
+  License along with this software; if not, write to the Free
+  Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+  02110-1301 USA, or see the FSF site: http://www.fsf.org.
+
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.exoplatform.addons.clouddrive</groupId>
+    <artifactId>exo-clouddrive-gdrive</artifactId>
+    <version>2.0.x-SNAPSHOT</version>
+  </parent>
+  
+  <artifactId>exo-clouddrive-gdrive-services</artifactId>
+  <packaging>jar</packaging>
+  <name>eXo Cloud Drive :: Connectors :: Google Drive :: Services</name>
+  <description>eXo Cloud Drive Google Drive connector extension configuration and services</description>
+  
+  <dependencies>
+    <!-- Google API -->
+    <dependency>
+      <groupId>com.google.api-client</groupId>
+      <artifactId>google-api-client</artifactId>
+      <scope>compile</scope>
+      <type>jar</type>
+      <exclusions>
+        <!-- exclude Apache HTTP as Google uses lower (4.0.1), than the Platform 4.0 (4.1.2)-->
+        <exclusion>
+          <groupId>org.apache.httpcomponents</groupId>
+          <artifactId>httpclient</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.apache.httpcomponents</groupId>
+          <artifactId>httpcore</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>com.google.code.findbugs</groupId>
+          <artifactId>jsr305</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>com.google.guava</groupId>
+          <artifactId>guava-jdk5</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>com.google.oauth-client</groupId>
+      <artifactId>google-oauth-client</artifactId>
+      <scope>compile</scope>
+      <type>jar</type>
+      <exclusions>
+        <exclusion>
+          <groupId>com.google.code.findbugs</groupId>
+          <artifactId>jsr305</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>com.google.guava</groupId>
+          <artifactId>guava-jdk5</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+    <groupId>com.google.http-client</groupId>
+      <artifactId>google-http-client</artifactId>
+      <scope>compile</scope>
+      <type>jar</type>
+      <exclusions>
+        <!-- exclude Apache HTTP as Google uses lower (4.0.1), than the Platform 4.0 (4.1.2)-->
+        <exclusion>
+          <groupId>org.apache.httpcomponents</groupId>
+          <artifactId>httpclient</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>com.google.code.findbugs</groupId>
+          <artifactId>jsr305</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>com.google.guava</groupId>
+          <artifactId>guava-jdk5</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>com.google.http-client</groupId>
+      <artifactId>google-http-client-jackson2</artifactId>
+      <scope>compile</scope>
+      <type>jar</type>
+      <exclusions>
+        <!-- exclude Apache HTTP as Google uses lower (4.0.1), than the Platform 4.0 (4.1.2)-->
+        <exclusion>
+          <groupId>org.apache.httpcomponents</groupId>
+          <artifactId>httpclient</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.apache.httpcomponents</groupId>
+          <artifactId>httpcore</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>com.google.code.findbugs</groupId>
+          <artifactId>jsr305</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>com.google.apis</groupId>
+      <artifactId>google-api-services-drive</artifactId>
+      <scope>compile</scope>
+      <type>jar</type>
+    </dependency>
+    <dependency>
+      <groupId>com.google.apis</groupId>
+      <artifactId>google-api-services-oauth2</artifactId>
+      <scope>compile</scope>
+      <type>jar</type>
+    </dependency>
+  
+    <!-- Cloud Drive add-on -->
+    <dependency>
+      <groupId>org.exoplatform.addons.clouddrive</groupId>
+      <artifactId>exo-clouddrive-services-core</artifactId>
+      <scope>provided</scope>
+      <type>jar</type>
+    </dependency>
+    <dependency>
+      <groupId>org.exoplatform.addons.clouddrive</groupId>
+      <artifactId>exo-clouddrive-services-ecms</artifactId>
+      <scope>provided</scope>
+      <type>jar</type>
+    </dependency>
+    
+    <!-- eXo -->
+    <dependency>
+      <groupId>org.exoplatform.kernel</groupId>
+      <artifactId>exo.kernel.container</artifactId>
+      <scope>provided</scope>
+      <type>jar</type>
+    </dependency>
+    <dependency>
+      <groupId>org.exoplatform.kernel</groupId>
+      <artifactId>exo.kernel.component.common</artifactId>
+      <scope>provided</scope>
+      <type>jar</type>
+    </dependency>
+    <dependency>
+      <groupId>org.exoplatform.core</groupId>
+      <artifactId>exo.core.component.organization.api</artifactId>
+      <scope>provided</scope>
+      <type>jar</type>
+    </dependency>
+    <dependency>
+      <groupId>org.exoplatform.jcr</groupId>
+      <artifactId>exo.jcr.component.core</artifactId>
+      <scope>provided</scope>
+      <type>jar</type>
+    </dependency>
+    <dependency>
+      <groupId>org.exoplatform.jcr</groupId>
+      <artifactId>exo.jcr.component.ext</artifactId>
+      <scope>provided</scope>
+      <type>jar</type>
+    </dependency>
+    <dependency>
+      <groupId>org.exoplatform.jcr</groupId>
+      <artifactId>exo.jcr.framework.web</artifactId>
+      <scope>provided</scope>
+      <type>jar</type>
+    </dependency>
+    <dependency>
+      <groupId>org.exoplatform.ws</groupId>
+      <artifactId>exo.ws.commons</artifactId>
+      <scope>provided</scope>
+      <type>jar</type>
+    </dependency>
+    <dependency>
+      <groupId>org.exoplatform.ecms</groupId>
+      <artifactId>ecms-core-webui-explorer</artifactId>
+      <scope>provided</scope>
+      <type>jar</type>
+    </dependency>
+
+    <!-- Others third party -->
+    <dependency>
+      <groupId>javax.jcr</groupId>
+      <artifactId>jcr</artifactId>
+      <scope>provided</scope>
+      <type>jar</type>
+    </dependency>
+    <dependency>
+      <groupId>javax.ws.rs</groupId>
+      <artifactId>jsr311-api</artifactId>
+      <scope>provided</scope>
+      <type>jar</type>
+    </dependency>
+  
+    <!-- for tests -->
+    <dependency>
+      <groupId>org.hsqldb</groupId>
+      <artifactId>hsqldb</artifactId>
+      <scope>test</scope>
+      <type>jar</type>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-log4j12</artifactId>
+      <scope>test</scope>
+      <type>jar</type>
+    </dependency>
+    <!-- dependency>
+    <groupId>org.exoplatform.platform</groupId>
+    <artifactId>exo.platform.component.organization</artifactId>
+    <scope>test</scope>
+    <type>jar</type>
+    </dependency -->
+    <dependency>
+      <groupId>org.exoplatform</groupId>
+      <artifactId>exo-jcr-services</artifactId>
+      <scope>test</scope>
+      <type>jar</type>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <scope>test</scope>
+      <type>jar</type>
+    </dependency>
+    <dependency>
+      <groupId>org.testng</groupId>
+      <artifactId>testng</artifactId>
+      <scope>test</scope>
+      <type>jar</type>
+    </dependency>
+    <dependency>
+      <groupId>org.spockframework</groupId>
+      <artifactId>spock-core</artifactId>
+      <scope>test</scope>
+      <exclusions>
+        <exclusion>
+          <groupId>org.codehaus.groovy</groupId>
+          <artifactId>groovy-all</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>org.codehaus.groovy</groupId>
+      <artifactId>groovy-all</artifactId>
+      <version>${test.groovy.version}</version><!-- version explicitly here to let eXo's version live outside -->
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.ow2.asm</groupId>
+      <artifactId>asm</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>cglib</groupId>
+      <artifactId>cglib-nodep</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.objenesis</groupId>
+      <artifactId>objenesis</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.hamcrest</groupId>
+      <artifactId>hamcrest-core</artifactId>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <resources>
+      <resource>
+        <directory>src/main/java</directory>
+        <includes>
+          <include>**/*.xml</include>
+        </includes>
+      </resource>
+      <resource>
+        <directory>src/main/resources</directory>
+        <includes>
+          <include>**/*.properties</include>
+          <include>**/*.xml</include>
+          <include>**/*.conf</include>
+        </includes>
+      </resource>
+    </resources>
+    <testResources>
+      <testResource>
+        <directory>src/test/resources</directory>
+        <includes>
+          <include>**/*.properties</include>
+          <include>**/*.xml</include>
+          <include>**/*.txt</include>
+          <include>**/*.policy</include>
+          <include>**/*.conf</include>
+        </includes>
+      </testResource>
+    </testResources>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <configuration>
+          <useFile>false</useFile>
+          <argLine>${env.MAVEN_OPTS} -Djava.security.manager=org.exoplatform.commons.test.TestSecurityManager
+            -Djava.security.policy=${project.build.directory}/test-classes/conf/test.policy</argLine>
+          <systemPropertyVariables>
+            <maven.exoplatform.dir>${project.build.directory}</maven.exoplatform.dir>
+            <exo.conf.dir.name>test-classes/conf</exo.conf.dir.name>
+            <java.security.auth.login.config>${project.build.directory}/test-classes/conf/jaas.conf</java.security.auth.login.config>
+          </systemPropertyVariables>
+          <includes>
+            <include>**/**/NoTest*.java</include>
+          </includes>
+          <excludes>
+            <exclude>**/**/TestGoogle*.java</exclude>
+          </excludes>
+          <forkCount>0</forkCount>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-failsafe-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>integration-spec</id>
+            <goals>
+              <goal>integration-test</goal>
+            </goals>
+            <configuration>
+              <argLine>${env.MAVEN_OPTS}
+                -Djava.security.manager=org.exoplatform.commons.test.TestSecurityManager
+                -Djava.security.policy=${project.build.directory}/test-classes/conf/test.policy</argLine>
+              <systemPropertyVariables>
+                <exo.test.type>integration</exo.test.type><!-- to separate HSQL and Indexer files in JCR -->
+                <maven.exoplatform.dir>${project.build.directory}</maven.exoplatform.dir>
+                <exo.conf.dir.name>test-classes/conf</exo.conf.dir.name>
+                <java.security.auth.login.config>${project.build.directory}/test-classes/conf/jaas.conf</java.security.auth.login.config>
+              </systemPropertyVariables>
+              <includes>
+                <include>**/**/*No_Spec.java</include>
+              </includes>
+              <forkCount>0</forkCount>
+            </configuration>
+          </execution>
+        </executions>
+        <!--
+        [ Force use of JUnit: How to execute JUnit(=Spock) and TestNG test cases at same time ? ]
+        see: http://solidsoft.wordpress.com/2013/03/12/mixing-testng-and-junit-tests-in-one-maven-module-2013-edition/
+        -->
+        <dependencies>
+          <dependency>
+            <groupId>org.apache.maven.surefire</groupId>
+            <artifactId>surefire-junit47</artifactId>
+            <version>${maven.surefire.junit47.version}</version>
+          </dependency>
+        </dependencies>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.gmaven</groupId>
+        <artifactId>gmaven-plugin</artifactId>
+        <configuration>
+          <providerSelection>2.0</providerSelection>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>testCompile</goal>
+            </goals>
+          </execution>
+        </executions>
+        <dependencies>
+          <dependency>
+            <groupId>org.codehaus.gmaven.runtime</groupId>
+            <artifactId>gmaven-runtime-2.0</artifactId>
+            <version>${maven.gmaven.runtime.version}</version>
+            <exclusions>
+              <exclusion>
+                <groupId>org.codehaus.groovy</groupId>
+                <artifactId>groovy-all</artifactId>
+              </exclusion>
+            </exclusions>
+          </dependency>
+          <dependency>
+            <groupId>org.codehaus.groovy</groupId>
+            <artifactId>groovy-all</artifactId>
+            <version>${test.groovy.version}</version>
+          </dependency>
+        </dependencies>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-shade-plugin</artifactId>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+            <configuration>
+              <artifactSet>
+                <includes>
+                  <include>com.google.api-client:google-api-client</include>
+                  <include>com.google.oauth-client:google-oauth-client</include>
+                  <include>com.google.apis:google-api-services-drive</include>
+                  <include>com.google.apis:google-api-services-oauth2</include>
+                  <include>com.google.http-client:google-http-client-jackson2</include>
+                  <include>com.google.http-client:google-http-client</include>
+                  <!-- Added in 1.8.0 -->
+                  <include>com.google.j2objc:j2objc-annotations</include>
+                  <include>io.opencensus:opencensus-api</include>
+                  <include>io.opencensus:opencensus-contrib-http-util</include>
+                  <include>io.grpc:grpc-context</include>
+                  <!-- include>com.fasterxml.jackson.core:jackson-core</include -->
+                </includes>
+              </artifactSet>
+              <relocations>
+                <relocation>
+                  <pattern>com.google.j2objc</pattern>
+                  <shadedPattern>org.exoplatform.services.cms.clouddrives.gdrive.shaded.google.j2objc</shadedPattern>
+                </relocation>
+                <relocation>
+                  <pattern>com.google.api</pattern>
+                  <shadedPattern>org.exoplatform.services.cms.clouddrives.gdrive.shaded.google.api</shadedPattern>
+                </relocation>
+                <relocation>
+                  <pattern>io.opencensus</pattern>
+                  <shadedPattern>org.exoplatform.services.cms.clouddrives.gdrive.shaded.io.opencensus</shadedPattern>
+                </relocation>
+                <relocation>
+                  <pattern>io.grpc</pattern>
+                  <shadedPattern>org.exoplatform.services.cms.clouddrives.gdrive.shaded.io.grpc</shadedPattern>
+                </relocation>
+              </relocations>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>
