@@ -105,6 +105,13 @@ public interface DocumentEditor {
    * @return the provider name
    */
   String getProviderName();
+  
+  /**
+   * Gets document update activity handler for managing comments.
+   * 
+   * @return the handler
+   */
+  DocumentUpdateActivityHandler getDocumentUpdateHandler();
 
   /**
    * Gets the permissions.
