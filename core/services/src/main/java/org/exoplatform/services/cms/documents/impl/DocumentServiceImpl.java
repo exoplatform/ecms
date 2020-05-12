@@ -66,6 +66,7 @@ import org.exoplatform.services.cms.documents.DocumentService;
 import org.exoplatform.services.cms.documents.NewDocumentTemplate;
 import org.exoplatform.services.cms.documents.NewDocumentTemplatePlugin;
 import org.exoplatform.services.cms.documents.NewDocumentTemplateProvider;
+import org.exoplatform.services.cms.documents.VersionHistoryUtils;
 import org.exoplatform.services.cms.documents.exception.DocumentEditorProviderNotFoundException;
 import org.exoplatform.services.cms.documents.exception.DocumentExtensionNotSupportedException;
 import org.exoplatform.services.cms.documents.model.Document;
@@ -723,7 +724,8 @@ public class DocumentServiceImpl implements DocumentService {
                                          Utils.getDate(documentNode).getTime(),
                                          getFileBreadCrumb(documentNode),
                                          getLinkInDocumentsApp(originalDocumentNode.getPath()),
-                                         getDownloadUri(originalDocumentNode));
+                                         getDownloadUri(originalDocumentNode),
+                                         VersionHistoryUtils.getVersion(originalDocumentNode));
         documents.add(document);
       }
       session.logout();

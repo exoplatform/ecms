@@ -104,6 +104,9 @@
             openUrl: this.document.openUrl,
             breadCrumb: this.document.breadCrumb
           },
+          version: {                                                                 
+            number : this.document.version 
+          },
         });
       }
     }
