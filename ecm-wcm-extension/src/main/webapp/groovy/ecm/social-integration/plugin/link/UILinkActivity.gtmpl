@@ -272,7 +272,7 @@
 						<a class="space-avatar spaceName" href="$spaceSourceURI" space-data="$spaceID"><span class="uiIconArrowRightMini uiIconLightGray"></span>
 							<img  class="avatarMini" alt="$spaceName" src="$spaceImageSource"/>&nbsp;$spaceName
 						</a>
-						</a>
+						</div>
 						<%} else{%>
 							<div class="owner">
                             	<a  href="$ownerUri">$ownerName</a>
@@ -602,3 +602,4 @@
 <% } else { %> <!-- activity deleted -->
 <div class="activityStream deleted">$labelActivityHasBeenDeleted</div>
 <% }%>
+</div>
