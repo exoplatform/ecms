@@ -56,6 +56,15 @@
                  <value>
                     <string>seo</string>
                  </value>
+                 <value>
+                   <string>clouddrives</string>
+                 </value>
+                 <value>
+                   <string>clouddrives-onedrive</string>
+                 </value>
+                 <value>
+                   <string>clouddrives-gdrive</string>
+                 </value>
               </collection>
             </field>
           </object>
