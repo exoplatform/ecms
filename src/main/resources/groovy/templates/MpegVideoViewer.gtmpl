@@ -38,7 +38,7 @@ if (drive && file) {
   <div style="text-align:center; display: none;" class="file-content" title="$title">
   	<object id="MediaPlayer1" CLASSID="CLSID:22d6f312-b0f6-11d0-94ab-0080c74c7e95" 
   			codebase="http://activex.microsoft.com/activex/controls/mplayer/en/nsmp2inf.cab#Version=5,1,52,701"
-				standby="Loading Microsoft Windows� Media Player components..." type="application/x-oleobject" width="400" height="300">
+				standby="Loading Microsoft Windows® Media Player components..." type="application/x-oleobject" width="400" height="300">
 			<param name="fileName" value="$file.previewLink">
 			<param name="animationatStart" value="true">
 			<param name="transparentatStart" value="true">
