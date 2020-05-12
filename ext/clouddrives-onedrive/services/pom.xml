@@ -19,16 +19,16 @@
 
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>org.exoplatform.addons.clouddrive</groupId>
-    <artifactId>exo-clouddrive-onedrive</artifactId>
-    <version>2.0.x-SNAPSHOT</version>
+    <groupId>org.exoplatform.ecms</groupId>
+    <artifactId>ecms-ext-onedrive</artifactId>
+    <version>6.0.x-SNAPSHOT</version>
   </parent>
 
-  <artifactId>exo-clouddrive-onedrive-services</artifactId>
-  <name>eXo Cloud Drive :: Connectors :: OneDrive :: Services</name>
+  <artifactId>ecms-ext-onedrive-services</artifactId>
+  <name>eXo PLF:: ECM Suite :: Ext :: OneDrive :: Services</name>
   <packaging>jar</packaging>
   <description>eXo Cloud Drive Microsoft OneDrive connector extension configuration and services</description>
 
@@ -43,14 +43,14 @@
 
     <!-- Cloud Drive add-on -->
     <dependency>
-      <groupId>org.exoplatform.addons.clouddrive</groupId>
-      <artifactId>exo-clouddrive-services-core</artifactId>
+      <groupId>org.exoplatform.ecms</groupId>
+      <artifactId>ecms-core-services</artifactId>
       <scope>provided</scope>
       <type>jar</type>
     </dependency>
     <dependency>
-      <groupId>org.exoplatform.addons.clouddrive</groupId>
-      <artifactId>exo-clouddrive-services-ecms</artifactId>
+      <groupId>org.exoplatform.ecms</groupId>
+      <artifactId>ecms-core-webui-clouddrives</artifactId>
       <scope>provided</scope>
       <type>jar</type>
     </dependency>

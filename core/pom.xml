@@ -21,6 +21,7 @@
     <module>webui-explorer</module>
     <module>webui-presentation</module>
     <module>webui-administration</module>
+    <module>webui-clouddrives</module>
     <module>core-configuration</module>
     <module>webui-seo</module>
     <module>webui-fcc</module>

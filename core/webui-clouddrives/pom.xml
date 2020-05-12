@@ -22,23 +22,16 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>org.exoplatform.addons.clouddrive</groupId>
-    <artifactId>exo-clouddrive-services</artifactId>
-    <version>2.0.x-SNAPSHOT</version>
+    <artifactId>ecms-core</artifactId>
+    <groupId>org.exoplatform.ecms</groupId>
+    <version>6.0.x-SNAPSHOT</version>
   </parent>
-  <artifactId>exo-clouddrive-services-ecms</artifactId>
+  <artifactId>ecms-core-webui-clouddrives</artifactId>
   <packaging>jar</packaging>
-  <name>eXo Cloud Drive :: Services :: ECMS Integration</name>
+  <name>eXo PLF:: ECMS Integration</name>
   <description>eXo Cloud Drive extension integration in eXo WCM (ECMS)</description>
 
   <dependencies>
-    <dependency>
-      <groupId>org.exoplatform.addons.clouddrive</groupId>
-      <artifactId>exo-clouddrive-services-core</artifactId>
-      <scope>compile</scope>
-      <type>jar</type>
-    </dependency>
-
     <!-- WebUI -->
     <dependency>
       <groupId>org.exoplatform.commons</groupId>

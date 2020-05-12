@@ -23,27 +23,26 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>org.exoplatform.addons.clouddrive</groupId>
-    <artifactId>exo-clouddrive</artifactId>
-    <version>2.0.x-SNAPSHOT</version>
+    <artifactId>ecms-apps</artifactId>
+    <groupId>org.exoplatform.ecms</groupId>
+    <version>6.0.x-SNAPSHOT</version>
   </parent>
-  
-  <artifactId>exo-clouddrive-webapp</artifactId>
+  <artifactId>ecms-apps-portlet-clouddrives</artifactId>
   <packaging>war</packaging>
-  <name>eXo Cloud Drive :: Extension Webapp</name>
-  <description>eXo Cloud Drive web application of portal extension</description>
+  <name>eXo PLF:: Clouddrive Portlet</name>
+  <description>eXo Cloud Drive Portlet</description>
 
   <dependencies>
     <!-- Cloud Drives -->
     <dependency>
-      <groupId>org.exoplatform.addons.clouddrive</groupId>
-      <artifactId>exo-clouddrive-services-core</artifactId>
+      <groupId>org.exoplatform.ecms</groupId>
+      <artifactId>ecms-core-services</artifactId>
       <scope>provided</scope>
       <type>jar</type>
     </dependency>
     <dependency>
-      <groupId>org.exoplatform.addons.clouddrive</groupId>
-      <artifactId>exo-clouddrive-services-ecms</artifactId>
+      <groupId>org.exoplatform.ecms</groupId>
+      <artifactId>ecms-core-webui-clouddrives</artifactId>
       <scope>provided</scope>
       <type>jar</type>
     </dependency>
@@ -67,7 +66,7 @@
   </dependencies>
 
   <build>
-    <finalName>cloud-drive</finalName>
+    <finalName>clouddrives</finalName>
     <resources>
       <resource>
         <directory>src/main/java</directory>
@@ -103,6 +102,7 @@
       <plugin>
         <groupId>com.github.eirslett</groupId>
         <artifactId>frontend-maven-plugin</artifactId>
+        <version>1.9.1</version>
         <configuration>
           <installDirectory>target</installDirectory>
         </configuration>
@@ -113,9 +113,15 @@
               <goal>install-node-and-npm</goal>
             </goals>
             <configuration>
-              <nodeVersion>v11.4.0</nodeVersion>
-              <npmVersion>6.5.0</npmVersion>
+              <nodeVersion>v12.13.1</nodeVersion>
+              <npmVersion>6.12.1</npmVersion>
             </configuration>
+          </execution>
+          <execution>
+            <id>npm config</id>
+            <goals>
+              <goal>npm</goal>
+            </goals>
           </execution>
           <execution>
             <id>npm install</id>

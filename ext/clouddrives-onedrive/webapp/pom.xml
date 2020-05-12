@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <parent>
-    <groupId>org.exoplatform.addons.clouddrive</groupId>
-    <artifactId>exo-clouddrive-onedrive</artifactId>
-    <version>2.0.x-SNAPSHOT</version>
+    <groupId>org.exoplatform.ecms</groupId>
+    <artifactId>ecms-ext-onedrive</artifactId>
+    <version>6.0.x-SNAPSHOT</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
 
-  <artifactId>exo-clouddrive-onedrive-webapp</artifactId>
+  <artifactId>ecms-ext-onedrive-webapp</artifactId>
   <packaging>war</packaging>
-  <name>eXo Cloud Drive :: Connectors :: OneDrive :: Webapp</name>
+  <name>eXo PLF:: ECM Suite :: Ext :: OneDrive :: Webapp</name>
   <description>eXo Cloud Drive Microsoft OneDrive connector exetension web application</description>
 
   <dependencies>
     <dependency>
-      <groupId>org.exoplatform.addons.clouddrive</groupId>
-      <artifactId>exo-clouddrive-onedrive-services</artifactId>
+      <groupId>org.exoplatform.ecms</groupId>
+      <artifactId>ecms-ext-onedrive-services</artifactId>
       <scope>provided</scope>
       <type>jar</type>
     </dependency>
   </dependencies>
 
   <build>
-    <finalName>cloud-drive-onedrive</finalName>
+    <finalName>clouddrives-onedrive</finalName>
     <resources>
       <resource>
         <directory>src/main/java</directory>

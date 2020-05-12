@@ -20,30 +20,30 @@
 
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>org.exoplatform.addons.clouddrive</groupId>
-    <artifactId>exo-clouddrive-gdrive</artifactId>
-    <version>2.0.x-SNAPSHOT</version>
+    <groupId>org.exoplatform.ecms</groupId>
+    <artifactId>ecms-ext-gdrive</artifactId>
+    <version>6.0.x-SNAPSHOT</version>
   </parent>
-  
-  <artifactId>exo-clouddrive-gdrive-webapp</artifactId>
+
+  <artifactId>ecms-ext-gdrive-webapp</artifactId>
   <packaging>war</packaging>
-  <name>eXo Cloud Drive :: Connectors :: Google Drive :: Webapp</name>
+  <name>eXo PLF:: ECM Suite :: Ext :: Google Drive :: Webapp</name>
   <description>eXo Cloud Drive Google Drive connector exetension web application</description>
-  
+
   <dependencies>
     <dependency>
-      <groupId>org.exoplatform.addons.clouddrive</groupId>
-      <artifactId>exo-clouddrive-gdrive-services</artifactId>
+      <groupId>org.exoplatform.ecms</groupId>
+      <artifactId>ecms-ext-gdrive-services</artifactId>
       <scope>provided</scope>
       <type>jar</type>
     </dependency>
   </dependencies>
-  
+
   <build>
-    <finalName>cloud-drive-gdrive</finalName>
+    <finalName>clouddrives-gdrive</finalName>
     <resources>
       <resource>
         <directory>src/main/java</directory>
