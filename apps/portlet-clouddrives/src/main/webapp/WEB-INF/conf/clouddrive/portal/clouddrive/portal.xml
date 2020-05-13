@@ -24,7 +24,7 @@
   xsi:schemaLocation="http://www.gatein.org/xml/ns/gatein_objects_1_2 http://www.gatein.org/xml/ns/gatein_objects_1_2"
   xmlns="http://www.gatein.org/xml/ns/gatein_objects_1_2">
 
-  <portal-name>clouddrive</portal-name>
+  <portal-name>clouddrives</portal-name>
   <locale>en</locale>
   <access-permissions>*:/platform/users</access-permissions>
   <edit-permission>*:/platform/administrators</edit-permission>

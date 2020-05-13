@@ -47,7 +47,7 @@ Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
             <field name="predefinedOwner">
               <collection type="java.util.HashSet">
                 <value>
-                  <string>clouddrive</string>
+                  <string>clouddrives</string>
                 </value>
               </collection>
             </field>

@@ -1022,10 +1022,10 @@
 			if (window == top) {
 				try {
 					// load provider styles
-					utils.loadStyle("/cloud-drive-" + id + "/skin/clouddrive.css");
+					utils.loadStyle("/clouddrives-" + id + "/skin/clouddrive.css");
 					// XXX load Enterprise Skin if required
 					if (eXo.env && eXo.env.client && eXo.env.client.skin == "Enterprise") {
-						utils.loadStyle("/cloud-drive-" + id + "/skin/clouddrive-enterprise.css");
+						utils.loadStyle("/clouddrives-" + id + "/skin/clouddrive-enterprise.css");
 					}
 				} catch(e) {
 					utils.log("Error loading provider (" + id + ") style.", e);
@@ -1851,7 +1851,7 @@
 				// and only in window (not in iframe as gadgets may do)
 				if (window == top) {
 					try {
-						utils.loadStyle("/cloud-drive/skin/codemirror.css");
+						utils.loadStyle("/clouddrives/skin/codemirror.css");
 					} catch(e) {
 						utils.log("Error intializing text viewer.", e);
 					}
@@ -1885,7 +1885,7 @@
 						// FYI PLF's RequireJS baseUrl is /portal/intranet, thus we need relative moduleId to reach the WAR location
 						// after all this CodeMirror will be available globally as 'require' inside the module wrapper doesn't have amd
 						// function.
-						window.require(["../../cloud-drive/js/codemirror-bundle.min"], function() {
+						window.require(["../../clouddrives/js/codemirror-bundle.min"], function() {
 							CodeMirror($code.get(0), {
 								value : code,
 								lineNumbers : true,
@@ -2809,10 +2809,10 @@
 	if (window == top) {
 		try {
 			// load required styles
-			utils.loadStyle("/cloud-drive/skin/jquery-ui.css");
-			utils.loadStyle("/cloud-drive/skin/jquery.pnotify.default.css");
-			utils.loadStyle("/cloud-drive/skin/jquery.pnotify.default.icons.css");
-			utils.loadStyle("/cloud-drive/skin/clouddrive.css");
+			utils.loadStyle("/clouddrives/skin/jquery-ui.css");
+			utils.loadStyle("/clouddrives/skin/jquery.pnotify.default.css");
+			utils.loadStyle("/clouddrives/skin/jquery.pnotify.default.icons.css");
+			utils.loadStyle("/clouddrives/skin/clouddrive.css");
 
 			// configure Pnotify
 			// use jQuery UI css

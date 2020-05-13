@@ -15,7 +15,7 @@
     <portlet-info>
       <title>Cloud Drive portelt for eXo Platform</title>
       <short-title>Cloud Drive</short-title>
-      <keywords>cloud drive</keywords>
+      <keywords>clouddrives</keywords>
     </portlet-info>
   </portlet>
 </portlet-app>
