@@ -27,8 +27,8 @@
     <artifactId>ecms-ext-gdrive</artifactId>
     <version>6.0.x-SNAPSHOT</version>
   </parent>
-  
-  <artifactId>exo-clouddrive-gdrive-services</artifactId>
+
+  <artifactId>ecms-ext-gdrive-services</artifactId>
   <packaging>jar</packaging>
   <name>eXo PLF:: ECM Suite :: Ext :: Google Drive :: Services</name>
   <description>eXo Cloud Drive Google Drive connector extension configuration and services</description>
