@@ -703,7 +703,8 @@ public class DocumentServiceImpl implements DocumentService {
     List<Document> documents = new ArrayList<Document>();
     if (query != null) {
       ManageableRepository manageableRepository = repoService.getCurrentRepository();
-      Session session = manageableRepository.getSystemSession(COLLABORATION);
+      SessionProvider sessionProvider = WCMCoreUtils.getUserSessionProvider();
+      Session session = sessionProvider.getSession(COLLABORATION, manageableRepository);
       QueryManager queryManager = session.getWorkspace().getQueryManager();
       QueryImpl documentsQuery = (QueryImpl) queryManager.createQuery(query, Query.SQL);
       documentsQuery.setLimit(limit);
