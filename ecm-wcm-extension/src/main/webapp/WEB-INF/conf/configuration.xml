@@ -47,7 +47,8 @@
   <import>war:/conf/dms-extension/dms/dms-session-providers-configuration.xml</import>
   <import>war:/conf/dms-extension/dms/dms-drives-configuration.xml</import>
   <import>war:/conf/dms-extension/dms/dms-views-configuration.xml</import>
-  
+  <import>war:/conf/dms-extension/dms/dms-clouddrives-configuration.xml</import>
+
   <import>war:/conf/wcm-extension/portal/resource-bundle-configuration.xml</import>
   <import>war:/conf/wcm-extension/portal/ecms-portal-configuration.xml</import>
   <import>war:/conf/wcm-extension/portal/application-registry-configuration.xml</import>
