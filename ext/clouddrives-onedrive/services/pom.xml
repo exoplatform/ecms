@@ -39,6 +39,12 @@
       <artifactId>microsoft-graph</artifactId>
       <scope>compile</scope>
       <type>jar</type>
+      <exclusions>
+        <exclusion>
+          <groupId>com.sun.jersey</groupId>
+          <artifactId>jersey-server</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
 
     <!-- Cloud Drive add-on -->
@@ -213,45 +219,30 @@
             <configuration>
               <artifactSet>
                 <includes>
+                  <!-- MS Graph uses Gson 2.8 but PLF V6 comes with 2.7 -->
                   <include>com.google.code.gson:gson</include>
-                  <include>com.googlecode.json-simple:json-simple</include>
                   <include>com.microsoft.graph:microsoft-graph</include>
                   <include>com.microsoft.graph:microsoft-graph-core</include>
                   <include>com.squareup.okhttp3:okhttp</include>
                   <include>com.squareup.okio:okio</include>
-                  <include>com.sun.jersey:jersey-server</include>
-                  <include>com.sun.jersey:jersey-core</include>
-                  <include>com.google.guava:guava</include>
                 </includes>
               </artifactSet>
               <relocations>
+                <relocation>
+                  <pattern>okhttp3</pattern>
+                  <shadedPattern>org.exoplatform.services.cms.clouddrives.onedrive.shaded.okhttp3</shadedPattern>
+                </relocation>
+                <relocation>
+                  <pattern>okio</pattern>
+                  <shadedPattern>org.exoplatform.services.cms.clouddrives.onedrive.shaded.okio</shadedPattern>
+                </relocation>                
                 <relocation>
                   <pattern>com.google.gson</pattern>
                   <shadedPattern>org.exoplatform.services.cms.clouddrives.onedrive.shaded.google.gson</shadedPattern>
                 </relocation>
                 <relocation>
-                  <pattern>com.googlecode.json-simple</pattern>
-                  <shadedPattern>org.exoplatform.services.cms.clouddrives.onedrive.shaded.googlecode.json-simple</shadedPattern>
-                </relocation>
-                <relocation>
                   <pattern>com.microsoft.graph</pattern>
                   <shadedPattern>org.exoplatform.services.cms.clouddrives.onedrive.shaded.microsoft.graph</shadedPattern>
-                </relocation>
-                <relocation>
-                  <pattern>com.squareup.okhttp3</pattern>
-                  <shadedPattern>org.exoplatform.services.cms.clouddrives.onedrive.shaded.squareup.okhttp3</shadedPattern>
-                </relocation>
-                <relocation>
-                  <pattern>com.squareup.okio</pattern>
-                  <shadedPattern>org.exoplatform.services.cms.clouddrives.onedrive.shaded.squareup.okio</shadedPattern>
-                </relocation>
-                <relocation>
-                  <pattern>com.sun.jersey</pattern>
-                  <shadedPattern>org.exoplatform.services.cms.clouddrives.onedrive.shaded.sun.jersey</shadedPattern>
-                </relocation>
-                <relocation>
-                  <pattern>com.google.guava</pattern>
-                  <shadedPattern>org.exoplatform.services.cms.clouddrives.onedrive.shaded.google.guava</shadedPattern>
                 </relocation>
               </relocations>
             </configuration>
