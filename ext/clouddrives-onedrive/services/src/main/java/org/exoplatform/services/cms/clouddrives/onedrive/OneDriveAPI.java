@@ -300,7 +300,7 @@ public class OneDriveAPI {
       this.storedToken = new OneDriveStoredToken();
       this.storedToken.store(oneDriveTokenResponse.getToken(),
               oneDriveTokenResponse.getRefreshToken(),
-              oneDriveTokenResponse.getExpires());
+              Integer.valueOf(oneDriveTokenResponse.getExpires()).longValue());
 
       this.oneDriveToken = new OneDriveToken(oneDriveTokenResponse.getToken(), oneDriveTokenResponse.getRefreshToken());
       initGraphClient();

@@ -8,6 +8,6 @@ class OneDriveStoredToken extends UserToken {
    * {@inheritDoc}
    */
   public void store(String refreshToken) throws CloudDriveException {
-    this.store("", refreshToken, 0);
+    this.store("", refreshToken, 0l);
   }
 }
