@@ -101,11 +101,8 @@
           if (data.isLocked) return;//can not edit, just show popup(do not change href)
           defaultEnviromentFilter(openDocument);//only show with support enviroment.
         }else{
-          if(!data.isMsoffice){
-            openDocument.addClass("hidden");
-          }else{
-            openDocument.removeClass("hidden");
-          }
+          //remove button
+          openDocument.addClass("hidden");
           //console.log("ITHIT not detected!");
           defaultEnviromentFilter(openDocument);//only show with support enviroment.
         }

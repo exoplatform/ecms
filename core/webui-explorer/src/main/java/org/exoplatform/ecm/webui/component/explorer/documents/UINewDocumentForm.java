@@ -65,19 +65,19 @@ import org.exoplatform.webui.form.UIFormStringInput;
 public class UINewDocumentForm extends UIForm implements UIPopupComponent {
 
   /** The Constant FIELD_TITLE_TEXT_BOX. */
-  public static final String       FIELD_TITLE_TEXT_BOX  = "titleTextBox";
+  public static final String  FIELD_TITLE_TEXT_BOX  = "titleTextBox";
 
   /** The Constant FIELD_TYPE_SELECT_BOX. */
-  public static final String       FIELD_TYPE_SELECT_BOX = "typeSelectBox";
+  public static final String  FIELD_TYPE_SELECT_BOX = "typeSelectBox";
 
   /** The Constant DEFAULT_NAME. */
-  private static final String      DEFAULT_NAME          = "untitled";
+  private static final String DEFAULT_NAME          = "untitled";
 
   /** The Constant LOG. */
-  protected static final Log       LOG                   = ExoLogger.getLogger(UINewDocumentForm.class.getName());
+  protected static final Log  LOG                   = ExoLogger.getLogger(UINewDocumentForm.class.getName());
 
   /** The document service. */
-  protected DocumentService documentService;
+  protected DocumentService   documentService;
 
   /**
    * Constructor.
@@ -92,12 +92,14 @@ public class UINewDocumentForm extends UIForm implements UIPopupComponent {
     List<NewDocumentTemplateProvider> templateProviders = documentService.getNewDocumentTemplateProviders();
 
     List<SelectItemOption<String>> options = new ArrayList<SelectItemOption<String>>();
-
+    Identity identity = ConversationState.getCurrent().getIdentity();
     templateProviders.forEach(provider -> {
-      provider.getTemplates().forEach(template -> {
-        DocumentSelectItemOption<String> option = new DocumentSelectItemOption<>(template.getName(), provider);
-        options.add(option);
-      });
+      if (provider.getEditor().isAvailableForUser(identity)) {
+        provider.getTemplates().forEach(template -> {
+          DocumentSelectItemOption<String> option = new DocumentSelectItemOption<>(template.getName(), provider);
+          options.add(option);
+        });
+      }
     });
 
     UIFormSelectBox typeSelectBox = new UIFormSelectBox(FIELD_TYPE_SELECT_BOX, FIELD_TYPE_SELECT_BOX, options);

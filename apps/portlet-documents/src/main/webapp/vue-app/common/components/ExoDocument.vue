@@ -6,14 +6,14 @@
       </v-icon>
     </v-list-item-icon>
     <v-list-item-content>
-      <v-list-item-title :title="document.title" v-html="document.title"/>
+      <v-list-item-title :title="decoder(document.title)" v-html="document.title"/>
       <v-list-item-subtitle>
         <div :title="absoluteDateModified()" class="color-title">
           {{ relativeDateModified }}
           <v-icon color="#a8b3c5">
             mdi-menu-right
           </v-icon>
-          {{ drive }}
+          {{ document.drive }}
         </div>
       </v-list-item-subtitle>
     </v-list-item-content>
@@ -54,22 +54,6 @@
         }
         return icon;
       },
-      downloadUrl() {
-        return `/rest/jcr/repository/collaboration${this.document.path}`;
-      },
-      drive() {
-        return this.document.drive === 'Private' || this.document.drive === 'Other' ? this.$t(`documents.drive.label.${this.document.drive}`) : this.document.drive;
-      },
-      openUrl() {
-        let path = `.space.${this.document.drive}`;
-        if (this.document.drive === 'Private') {
-          path = 'Personal+Documents';
-        }
-        else if (this.document.drive === 'Other') {
-          path = 'Collaboration';
-        }
-        return `${eXo.env.portal.context}/${eXo.env.portal.portalName}/documents?path=${path}${this.document.path}`;
-      },
       relativeDateModified() {
         return this.getRelativeTime(this.document.dateModified.time);
       }
@@ -103,6 +87,11 @@
         const lang = eXo && eXo.env && eXo.env.portal && eXo.env.portal.language || 'en';
         return new Date(this.document.dateModified.time).toLocaleString(lang, options).split("/").join("-");
       },
+      decoder(str) {
+        const text = document.createElement('textarea');
+        text.innerHTML = str;
+        return text.value;
+      },
       openPreview() {
         documentPreview.init({
           doc: {
@@ -111,8 +100,9 @@
             workspace: 'collaboration',
             path: this.document.path,
             title: this.document.title,
-            downloadUrl: this.downloadUrl,
-            openUrl: this.openUrl
+            downloadUrl: this.document.downloadUrl,
+            openUrl: this.document.openUrl,
+            breadCrumb: this.document.breadCrumb
           },
         });
       }

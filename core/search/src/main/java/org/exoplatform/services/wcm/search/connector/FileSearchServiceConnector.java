@@ -73,6 +73,7 @@ public class FileSearchServiceConnector extends ElasticSearchServiceConnector {
   protected String getSourceFields() {
     List<String> fields = Arrays.asList("name",
             "title",
+            "tags",
             "workspace",
             "path",
             "author",
@@ -94,6 +95,7 @@ public class FileSearchServiceConnector extends ElasticSearchServiceConnector {
     String nodePath = (String) hitSource.get("path");
     String fileType = (String) hitSource.get("fileType");
     String fileSize = (String) hitSource.get("fileSize");
+    List<String> tags = (List<String>) hitSource.get("tags");
 
     String driveName = "";
     try {
@@ -124,7 +126,8 @@ public class FileSearchServiceConnector extends ElasticSearchServiceConnector {
             searchResult.getRelevancy(),
             fileType,
             nodePath,
-            getBreadcrumb(nodePath));
+            getBreadcrumb(nodePath),
+            tags);
 
     String userId = ConversationState.getCurrent().getIdentity().getUserId();
     boolean isAnonymous = userId == null || userId.isEmpty() || userId.equals(IdentityConstants.ANONIM);
