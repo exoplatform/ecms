@@ -245,6 +245,16 @@ public class DocumentEditorProviderImpl implements DocumentEditorProvider {
   public boolean isDocumentSupported(String fileId, String workspace) {
     return editor.isDocumentSupported(fileId, workspace);
   }
+  
+  /**
+   * Gets the document update handler.
+   *
+   * @return the document update handler
+   */
+  @Override
+  public DocumentUpdateActivityHandler getDocumentUpdateHandler() {
+    return editor.getDocumentUpdateHandler();
+  }
 
   /**
    * Gets the stored active.
