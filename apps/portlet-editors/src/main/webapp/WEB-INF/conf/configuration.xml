@@ -5,5 +5,4 @@
   xmlns="http://www.exoplatform.org/xml/ns/kernel_1_3.xsd">
 
   <import>war:/conf/editors/portal/portal-configuration.xml</import>
-  <import>war:/conf/editors/configuration.xml</import>
 </configuration>

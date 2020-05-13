@@ -1,46 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://www.exoplatform.org/xml/ns/kernel_1_3.xsd http://www.exoplatform.org/xml/ns/kernel_1_3.xsd"
-  xmlns="http://www.exoplatform.org/xml/ns/kernel_1_3.xsd">
-
-  <component>
-    <type>org.exoplatform.wcm.connector.collaboration.DocumentEditorsRESTService</type>
-  </component>
-
-  <external-component-plugins>
-    <target-component>org.exoplatform.commons.addons.AddOnService</target-component>
-    <component-plugin>
-      <name>addPlugin</name>
-      <set-method>addPlugin</set-method>
-      <type>org.exoplatform.commons.addons.AddOnPluginImpl</type>
-      <description>add application Config</description>
-      <init-params>
-        <value-param>
-          <name>priority</name>
-          <value>10</value>
-        </value-param>
-        <value-param>
-          <name>containerName</name>
-          <value>bottom-all-container</value>
-        </value-param>
-        <object-param>
-          <name>EditorSupportPortlet</name>
-          <description>Editor Support Portlet</description>
-          <object type="org.exoplatform.portal.config.serialize.PortletApplication">
-            <field name="state">
-              <object type="org.exoplatform.portal.config.model.TransientApplicationState">
-                <field name="contentId">
-                  <string>editors/EditorSupportPortlet</string>
-                </field>
-              </object>
-            </field>
-          </object>
-        </object-param>
-      </init-params>
-    </component-plugin>
-  </external-component-plugins>
-  
-    
+  xsi:schemaLocation="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd http://www.exoplatform.org/xml/ns/kernel_1_2.xsd"
+  xmlns="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd">
   
    <!-- ECMS menu action for editor buttons. -->
   <external-component-plugins>
@@ -70,7 +30,7 @@
       </init-params>
     </component-plugin>
   </external-component-plugins>
-
+  
   <!-- Add Editors actions to ECMS views -->
   <external-component-plugins>
     <target-component>org.exoplatform.services.cms.views.CustomizeViewService</target-component>
@@ -96,8 +56,8 @@
                     </field>
                     <field name="buttons">
                       <string>
-                        editorsOpen
-                      </string>
+                          editorsOpen
+                        </string>
                     </field>
                   </object>
                 </value>
@@ -121,8 +81,8 @@
                     </field>
                     <field name="buttons">
                       <string>
-                        editorsOpen
-                      </string>
+                          editorsOpen
+                        </string>
                     </field>
                   </object>
                 </value>
@@ -146,8 +106,8 @@
                     </field>
                     <field name="buttons">
                       <string>
-                        editorsOpen
-                      </string>
+                          editorsOpen
+                        </string>
                     </field>
                   </object>
                 </value>
@@ -171,8 +131,8 @@
                     </field>
                     <field name="buttons">
                       <string>
-                        editorsOpen
-                      </string>
+                          editorsOpen
+                        </string>
                     </field>
                   </object>
                 </value>
@@ -196,8 +156,8 @@
                     </field>
                     <field name="buttons">
                       <string>
-                        editorsOpen
-                      </string>
+                          editorsOpen
+                        </string>
                     </field>
                   </object>
                 </value>
@@ -209,5 +169,21 @@
     </component-plugin>
   </external-component-plugins>
 
+  <external-component-plugins>
+    <target-component>org.exoplatform.services.jcr.RepositoryService</target-component>
+    <component-plugin>
+      <name>add.gadget.services.nodeType</name>
+      <set-method>addPlugin</set-method>
+      <type>org.exoplatform.services.jcr.impl.AddNodeTypePlugin</type>
+      <init-params>
+        <values-param>
+          <name>autoCreatedInNewRepository</name>
+          <description>Documents node types configuration file</description>
+          <value>war:/conf/wcm-extension/wcm/documents-nodetypes-configuration.xml</value>
+        </values-param>
+      </init-params>
+    </component-plugin>
+  </external-component-plugins>
+
 </configuration>
-  
+ 

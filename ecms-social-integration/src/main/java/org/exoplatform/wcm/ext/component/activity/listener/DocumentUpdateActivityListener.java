@@ -23,7 +23,7 @@ public class DocumentUpdateActivityListener extends FileUpdateActivityListener {
   
   @Override
   public void onEvent(Event<Context, String> event) throws Exception {
-    List<DocumentUpdateActivityHandler> handlers = documentService.getRegisteredEditorPlugins().stream().map(p -> p.getDocumentUpdateHandler()).collect(Collectors.toList());
+    List<DocumentUpdateActivityHandler> handlers = documentService.getDocumentEditorProviders().stream().map(p -> p.getDocumentUpdateHandler()).collect(Collectors.toList());
     for(DocumentUpdateActivityHandler handler : handlers) {
       if(handler.handleDocumentUpdateEvent(event)) {
         return;
