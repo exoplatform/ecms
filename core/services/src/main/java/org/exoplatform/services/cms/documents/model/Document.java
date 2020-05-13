@@ -59,6 +59,8 @@ public class Document {
   
   private int version;
   
+  private String size;
+  
   public Document(String id,
                   String title,
                   String path,
@@ -68,7 +70,9 @@ public class Document {
                   LinkedHashMap<String, String> breadCrumb,
                   String openUrl,
                   String downloadUrl,
-                  int version) {
+                  int version,
+                  String size,
+                  String lastEditor) {
     this.id = id;
     this.title = title;
     this.path = path;
@@ -79,6 +83,9 @@ public class Document {
     this.openUrl = openUrl;
     this.downloadUrl = downloadUrl;
     this.version = version;
+    this.size = size;
+    this.lastEditor = lastEditor;
+    
   }
 
   public Document(String id,
@@ -279,5 +286,19 @@ public class Document {
    */
   public void setVersion(int version) {
     this.version = version;
+  }
+
+  /**
+   * @return the size
+   */
+  public String getSize() {
+    return size;
+  }
+
+  /**
+   * @param size the size to set
+   */
+  public void setSize(String size) {
+    this.size = size;
   }
 }

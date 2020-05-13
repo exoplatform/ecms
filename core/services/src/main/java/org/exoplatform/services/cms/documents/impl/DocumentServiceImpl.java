@@ -20,6 +20,9 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URLEncoder;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -34,12 +37,15 @@ import java.util.ResourceBundle;
 
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
+import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
+import javax.jcr.ValueFormatException;
 import javax.jcr.query.Query;
 import javax.jcr.query.QueryManager;
 import javax.jcr.query.QueryResult;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.gatein.api.Portal;
@@ -91,6 +97,7 @@ import org.exoplatform.services.organization.Group;
 import org.exoplatform.services.organization.OrganizationService;
 import org.exoplatform.services.organization.User;
 import org.exoplatform.services.security.ConversationState;
+import org.exoplatform.services.security.Identity;
 import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
@@ -98,6 +105,7 @@ import org.exoplatform.social.core.manager.IdentityManager;
 import org.exoplatform.social.core.space.SpaceUtils;
 import org.exoplatform.social.core.space.model.Space;
 import org.exoplatform.social.core.space.spi.SpaceService;
+import org.exoplatform.web.CacheUserProfileFilter;
 import org.exoplatform.webui.application.WebuiRequestContext;
 
 /**
@@ -729,7 +737,9 @@ public class DocumentServiceImpl implements DocumentService {
                                          getFileBreadCrumb(documentNode),
                                          getLinkInDocumentsApp(originalDocumentNode.getPath()),
                                          getDownloadUri(originalDocumentNode),
-                                         VersionHistoryUtils.getVersion(originalDocumentNode));
+                                         VersionHistoryUtils.getVersion(originalDocumentNode),
+                                         Utils.fileSize(originalDocumentNode),
+                                         getDocLastModifier(originalDocumentNode));
         documents.add(document);
       }
       session.logout();
@@ -994,5 +1004,53 @@ public class DocumentServiceImpl implements DocumentService {
             append(WCMCoreUtils.getRepository().getConfiguration().getName()).append('/').
             append(workspaceName).append(fileNode.getPath());
    return downloadUrl.toString().replaceFirst(fileNode.getName(), URLEncoder.encode(fileNode.getName(), "UTF-8")); 
+  }
+  
+  private String getDocLastModifier(Node node) {
+    String docLastModifier = "";
+    try {
+      if (node.isNodeType("exo:symlink")){
+        String uuid = node.getProperty("exo:uuid").getString();
+        node = node.getSession().getNodeByUUID(uuid);
+      }
+      if(node != null && node.hasProperty("exo:lastModifier")) {
+        String docLastModifierUsername = node.getProperty("exo:lastModifier").getString();
+        docLastModifier = getUserFullName(docLastModifierUsername);
+      }
+    } catch (RepositoryException e) {
+      LOG.error("Cannot get document last modifier : " + e.getMessage(), e);
+    }
+    return docLastModifier;
+  }
+  
+  private String getUserFullName(String userId) {
+    if(StringUtils.isEmpty(userId)) {
+      return "";
+    }
+
+    // if the requested user is the connected user, get the fullname from the ConversationState
+    ConversationState currentUserState = ConversationState.getCurrent();
+    Identity currentUserIdentity = currentUserState.getIdentity();
+    if(currentUserIdentity != null) {
+      String currentUser = currentUserIdentity.getUserId();
+      if (currentUser != null && currentUser.equals(userId)) {
+        User user = (User) currentUserState.getAttribute(CacheUserProfileFilter.USER_PROFILE);
+        if(user != null) {
+          return user.getDisplayName();
+        }
+      }
+    }
+
+    // if the requested user if not the connected user, fetch it from the organization service
+    try {
+      User user = organizationService.getUserHandler().findUserByName(userId);
+      if(user != null) {
+        return user.getDisplayName();
+      }
+    } catch (Exception e) {
+      LOG.error("Cannot get information of user " + userId + " : " + e.getMessage(), e);
+    }
+
+    return "";
   }
 }
