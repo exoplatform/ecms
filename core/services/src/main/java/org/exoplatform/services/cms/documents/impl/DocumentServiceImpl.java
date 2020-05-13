@@ -686,10 +686,13 @@ public class DocumentServiceImpl implements DocumentService {
   * {@inheritDoc}
   */
  @Override
- public List<Document> getDocumentsByFolder(String folder, long limit) throws Exception {
+ public List<Document> getDocumentsByFolder(String folder, String condition, long limit) throws Exception {
    List<Document> documents = new ArrayList<Document>();
    if (folder != null) {
-     String query = "select * from nt:base where jcr:path like '" + folder + "/%' and (exo:primaryType = 'nt:file' or jcr:primaryType = 'nt:file') order by exo:dateModified DESC";
+     String query = "select * from nt:base where jcr:path like '" + folder + "/%' "
+         + "and (exo:primaryType = 'nt:file' or jcr:primaryType = 'nt:file')"
+         + (condition != null ? condition : "")
+         + " order by exo:dateModified DESC";
      return getDocumentsByQuery(query, limit);
    }
    return documents;
@@ -738,16 +741,35 @@ public class DocumentServiceImpl implements DocumentService {
    * {@inheritDoc}
    */
   @Override
+  public List<Document> getMyWorkDocuments(String userId, int limit) throws Exception {
+    //TODO elastic search implementation
+    String condition = " and (exo:owner = '" + userId + "' or exo:lastModifier = '" + userId + "')";
+    return getDocumentsByFolder(SPACES_NODE_PATH, condition, limit);
+  }
+  
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public List<Document> getPrivateDocuments(String userId, int limit) throws Exception {
+    SessionProvider sessionProvider = SessionProvider.createSystemProvider();
+    Node userNode = nodeHierarchyCreator.getUserNode(sessionProvider, userId);
+    return getDocumentsByFolder(userNode.getPath(), null, limit);
+  }
+  
+  /**
+   * {@inheritDoc}
+   */
+  @Override
   public List<Document> getFavoriteDocuments(String userId, int limit) throws Exception {
     SessionProvider sessionProvider = SessionProvider.createSystemProvider();
-    NodeHierarchyCreator nodeHierarchyCreator = WCMCoreUtils.getService(NodeHierarchyCreator.class);
     Node userNode = nodeHierarchyCreator.getUserNode(sessionProvider, userId);
     Node userPrivateNode = (Node) userNode.getNode(Utils.PRIVATE);
     String favoriteFolder = null;
     if (userPrivateNode.hasNode(NodetypeConstant.FAVORITE)) {
       favoriteFolder = ((Node) userPrivateNode.getNode(NodetypeConstant.FAVORITE)).getPath();
     }
-    return getDocumentsByFolder(favoriteFolder, limit);
+    return getDocumentsByFolder(favoriteFolder, null, limit);
   }
 
   /**
@@ -756,7 +778,6 @@ public class DocumentServiceImpl implements DocumentService {
   @Override
   public List<Document> getSharedDocuments(String userId, int limit) throws Exception {
     SessionProvider sessionProvider = SessionProvider.createSystemProvider();
-    NodeHierarchyCreator nodeHierarchyCreator = WCMCoreUtils.getService(NodeHierarchyCreator.class);
     Node userNode = nodeHierarchyCreator.getUserNode(sessionProvider, userId);
     Node userPrivateNode = (Node) userNode.getNode(Utils.PRIVATE);
     Node userDocumentsNode = (Node) userPrivateNode.getNode(NodetypeConstant.DOCUMENTS);
@@ -764,27 +785,16 @@ public class DocumentServiceImpl implements DocumentService {
     if (userDocumentsNode.hasNode(NodetypeConstant.SHARED)) {
       sharedFolder = ((Node) userDocumentsNode.getNode(NodetypeConstant.SHARED)).getPath();
     }
-    return getDocumentsByFolder(sharedFolder, limit);
+    return getDocumentsByFolder(sharedFolder, null, limit);
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public List<Document> getRecentDocuments(String userId, int limit) throws Exception {
-    SessionProvider sessionProvider = SessionProvider.createSystemProvider();
-    NodeHierarchyCreator nodeHierarchyCreator = WCMCoreUtils.getService(NodeHierarchyCreator.class);
-    Node userNode = nodeHierarchyCreator.getUserNode(sessionProvider, userId);
-    return getDocumentsByFolder(userNode.getPath(), limit);
-  }
-  
-  /**
-   * {@inheritDoc}
-   */
-  @Override
   public List<Document> getRecentSpacesDocuments(int limit) throws Exception {
     //TODO elastic search implementation
-    return getDocumentsByFolder(SPACES_NODE_PATH, limit);
+    return getDocumentsByFolder(SPACES_NODE_PATH, null, limit);
   }
 
   /**

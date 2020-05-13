@@ -203,10 +203,11 @@ public interface DocumentService {
    * Gets the documents by folder.
    *
    * @param folder the folder
+   * @param condition the condition
    * @param limit the limit
    * @return the documents by folder
    */
-  default List<Document> getDocumentsByFolder(String folder, long limit) throws Exception {
+  default List<Document> getDocumentsByFolder(String folder, String condition, long limit) throws Exception {
     throw new UnsupportedOperationException();
   }
   
@@ -244,13 +245,24 @@ public interface DocumentService {
   }
   
   /**
-   * Gets the recent documents.
+   * Gets my work documents.
    *
    * @param userId the userId
    * @param limit the limit
-   * @return the recent documents
+   * @return my work documents
    */
-  default List<Document> getRecentDocuments(String userId, int limit) throws Exception {
+  default List<Document> getMyWorkDocuments(String userId, int limit) throws Exception {
+    throw new UnsupportedOperationException();
+  }
+  
+  /**
+   * Gets the private documents.
+   *
+   * @param userId the userId
+   * @param limit the limit
+   * @return the private documents
+   */
+  default List<Document> getPrivateDocuments(String userId, int limit) throws Exception {
     throw new UnsupportedOperationException();
   }
   
