@@ -5,7 +5,7 @@
         <div class="documents" @click="fetchUserDrives()">
           <i class="uiIconFolder"></i>
           <p class="documents" data-toggle="tooltip" rel="tooltip" data-placement="bottom"
-             data-original-title="Documents">{{ $t('attachments.drawer.documents') }}</p>
+             data-original-title="Documents">{{ $t('attachments.drawer.drives') }}</p>
         </div>
         <div v-if="currentDrive.title" class="currentDrive" @click="openDrive(currentDrive)">
           <span class="uiIconArrowRight"></span>
@@ -38,6 +38,14 @@
         <a :class="showSearchInput ? 'uiIconCloseServerAttachments' : 'uiIconSearch'" class="uiIconLightGray" @click="showSearchDocumentInput()"></a>
         <a v-if="modeFolderSelectionForFile || modeFolderSelection" :title="$t('attachments.filesFoldersSelector.button.addNewFOlder.tooltip')" rel="tooltip" data-placement="bottom" class="uiIconLightGray uiIconAddFolder" @click="addNewFolder()"></a>
       </div>
+      <div v-for="action in attachmentsComposerActions" :key="action.key" :class="`${action.appClass}Action`" class="actionBox">
+        <div v-if="!modeFolderSelection" class="actionBoxLogo" @click="executeAction(action)">
+          <v-icon v-if="action.iconName" class="uiActionIcon" >{{ action.iconName }}</v-icon>
+          <i v-else :class="action.iconClass" class="uiActionIcon"></i>
+        </div>
+        <component v-dynamic-events="action.component.events" v-if="action.component" v-bind="action.component.props ? action.component.props : {}"
+                   v-model="currentDrive" :is="action.component.name" :ref="action.key"></component>
+      </div>
     </div>
 
     <transition name="fade" mode="in-out">
@@ -46,7 +54,7 @@
       </div>
     </transition>
     <div class="contentBody">
-      <div class="selectionBox">
+      <div v-if="currentDrive.title" class="selectionBox">
         <div v-if="loadingFolders" class="VuetifyApp loader">
           <v-app class="VuetifyApp">
             <v-progress-circular
@@ -83,6 +91,20 @@
         </div>
         <div v-for="file in filteredFiles" v-show="!modeFolderSelection" :key="file.id" :id="file.idAttribute" :title="file.idAttribute" :class="file.selected? 'selected' : ''" class="fileSelection" @click="selectFile(file)">
           <exo-attachment-item :file="file"></exo-attachment-item>
+        </div>
+      </div>
+      <div v-else class="categorizedDrives">
+        <div v-for="(group, name) in categorizedDrives" :key="name">
+          <p class="categoryName" @click="toggleDrivesSection(name)">{{ name }}</p>
+          <div v-show="group.opened" class="selectionBox">
+            <div v-for="driver in group.drives" :key="driver.name" :title="driver.title" class="folderSelection"
+                 @click="openDrive(driver)">
+              <a :data-original-title="driver.title" rel="tooltip" data-placement="bottom">
+                <i :class="driver.driveTypeCSSClass" class="uiIconEcms24x24DriveGroup uiIconEcmsLightGray selectionIcon center"></i>
+                <div class="selectionLabel center">{{ driver.title }}</div>
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -128,8 +150,33 @@
 
 <script>
 import * as attachmentsService from '../attachmentsService.js';
+import { getAttachmentsComposerExtensions, executeExtensionAction } from '../extension';
 
 export default {
+  directives: {
+    DynamicEvents: {
+      bind: function (el, binding, vnode) {
+        const allEvents = binding.value;
+        if (allEvents) {
+          allEvents.forEach((event) => {
+            if (vnode.componentInstance) {
+              // register handler in the dynamic component
+              vnode.componentInstance.$on(event.event, (eventData) => {
+                const param = eventData ? eventData : event.listenerParam;
+                // when the event is fired, the eventListener function is going to be called
+                vnode.context[event.listener](param);
+              });
+            }
+          });
+        }
+      },
+      unbind: function (el, binding, vnode) {
+        if (vnode.componentInstance) {
+          vnode.componentInstance.$off();
+        }
+      },
+    }
+  },
   props: {
     modeFolderSelectionForFile: {
       type: Boolean,
@@ -171,6 +218,8 @@ export default {
       selectedFolderPath : '',
       schemaFolder: '',
       folderDestinationForFile:'',
+      attachmentsComposerActions: [],
+      cloudDriveProgress: null,
       creatingNewFolder: false,
       newFolderName: '',
       currentAbsolutePath: '',
@@ -182,7 +231,8 @@ export default {
       windowPositionLimit: 25,
       MESSAGE_TIMEOUT: 5000,
       showErrorMessage: false,
-      errorMessage: ''
+      errorMessage: '',
+      categorizedDrives: {}
     };
   },
   computed: {
@@ -249,17 +299,15 @@ export default {
           isSelected: true
         };
       } else {
-        self.currentDrive = {
-          name: 'Personal Documents',
-          title: 'Personal Documents',
-          isSelected: true
-        };
+        self.currentDrive = {};
+        this.fetchUserDrives();
       }
       self.fetchChildrenContents('');
     }).catch(() => {
       this.errorMessage= `${this.$t('attachments.fetchFoldersAndFiles.error')}`;
       this.showErrorMessage = true;
     });
+    this.attachmentsComposerActions = getAttachmentsComposerExtensions();
   },
   methods: {
     openFolder: function (folder) {
@@ -458,6 +506,7 @@ export default {
           }
         }
       }
+      this.setCategorizedDrives();
     },
     selectDestination() {
       if (!this.selectedFolderPath) {
@@ -470,6 +519,13 @@ export default {
       } else {
         this.$emit('itemsSelected', this.selectedFolderPath, this.schemaFolder);
       }
+    },
+    executeAction(action) {
+      executeExtensionAction(action, this.$refs[action.key][0]);
+    },
+    setCloudDriveProgress({ progress }) {
+      this.cloudDriveProgress = progress;
+      this.$emit('changeConnectingStatus', progress ? true : false);
     },
     addNewFolder() {
       if (!this.creatingNewFolder) {
@@ -578,6 +634,34 @@ export default {
       } else {
         this.fetchChildrenContents('');
       }
+    },
+    setCategorizedDrives() {
+      const drives = this.drivers.slice();
+      const categorized = { 
+        'My Drives': { drives: [], opened: true }, 
+        'My Spaces': { drives: [], opened: true }, 
+        'Others': { drives: [], opened: true } 
+      };
+      drives.map(drive => { 
+        if (drive.driverType === 'Personal Drives') {
+          categorized['My Drives'].drives.push(drive);
+        } else if (drive.path.includes('spaces')) {
+          categorized['My Spaces'].drives.push(drive);
+        } else if (!drive.path.includes('Trash')) {
+          categorized['Others'].drives.push(drive);
+        }
+        return drive;
+      });
+      this.categorizedDrives = categorized;
+    },
+    toggleDrivesSection(sectionName) {
+      this.categorizedDrives = {
+        ...this.categorizedDrives,
+        [sectionName]: {
+          ...this.categorizedDrives[sectionName],
+          opened: !this.categorizedDrives[sectionName].opened
+        }
+      };
     }
   }
 };
