@@ -40,12 +40,14 @@ import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 import javax.jcr.ValueFormatException;
 import javax.jcr.nodetype.NodeType;
-import javax.jcr.nodetype.NodeTypeManager;
 import javax.jcr.query.Query;
 import javax.jcr.query.QueryManager;
 import javax.jcr.query.QueryResult;
 
 import org.apache.commons.lang.StringUtils;
+import org.quartz.JobExecutionContext;
+import org.quartz.impl.JobDetailImpl;
+
 import org.exoplatform.commons.api.settings.SettingService;
 import org.exoplatform.commons.api.settings.SettingValue;
 import org.exoplatform.commons.api.settings.data.Context;
@@ -62,7 +64,9 @@ import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.container.xml.ObjectParameter;
 import org.exoplatform.container.xml.PortalContainerInfo;
 import org.exoplatform.container.xml.ValueParam;
+import org.exoplatform.portal.application.PortalRequestContext;
 import org.exoplatform.portal.config.UserACL;
+import org.exoplatform.portal.config.UserPortalConfigService;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.CmsService;
 import org.exoplatform.services.cms.documents.DocumentService;
@@ -74,7 +78,6 @@ import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
-import org.exoplatform.services.jcr.impl.core.nodetype.registration.NodeTypeConverter;
 import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
@@ -87,8 +90,6 @@ import org.exoplatform.services.security.MembershipEntry;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.portal.LivePortalManagerService;
-import org.quartz.JobExecutionContext;
-import org.quartz.impl.JobDetailImpl;
 
 /**
  * Created by The eXo Platform SAS
@@ -731,6 +732,34 @@ public class WCMCoreUtils {
   public static String getPortalName() {
     PortalContainerInfo containerInfo = WCMCoreUtils.getService(PortalContainerInfo.class) ;
     return containerInfo.getContainerName() ;
+  }
+  
+  public static String getCurrentPortalName() throws Exception {
+    UserPortalConfigService userPortalConfigService = WCMCoreUtils.getService(UserPortalConfigService.class) ;
+    // Try to get the portal owner from request context
+    try {
+      PortalRequestContext requestContext = Util.getPortalRequestContext();
+      if (requestContext != null) {
+        String portalOwner = requestContext.getPortalOwner();
+        if (portalOwner != null) {
+          return portalOwner;
+        }
+      }
+    } catch (Exception e) {
+      if (LOG.isDebugEnabled()) {
+        LOG.debug("Cannot get portal owner from portal request context: {}", e.getMessage());
+      }
+    }
+
+    String defaultPortal = userPortalConfigService.getDefaultPortal();
+    // Retrieve the list of accessible portals by current user (defined in ConservationState.getCurrent() )
+    List<String> allPortalNames = userPortalConfigService.getAllPortalNames();
+    // Check if current portal is accessbile
+    if (allPortalNames.contains(defaultPortal)) {
+      return defaultPortal;
+    } else {
+      return allPortalNames.get(0);
+    }
   }
 
   public static String getRemoteUser() {
