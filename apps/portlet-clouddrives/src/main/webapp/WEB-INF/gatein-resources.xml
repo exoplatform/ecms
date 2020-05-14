@@ -25,7 +25,7 @@
 
   <javascript>
     <param>
-      <js-module>сloudDrivePlugin</js-module>
+      <js-module>cloudDrivePlugin</js-module>
       <js-path>/vue-app/cloudDrivePlugin.js</js-path>
     </param>
   </javascript>
