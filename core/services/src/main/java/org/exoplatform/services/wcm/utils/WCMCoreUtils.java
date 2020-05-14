@@ -735,7 +735,6 @@ public class WCMCoreUtils {
   }
   
   public static String getCurrentPortalName() throws Exception {
-    UserPortalConfigService userPortalConfigService = WCMCoreUtils.getService(UserPortalConfigService.class) ;
     // Try to get the portal owner from request context
     try {
       PortalRequestContext requestContext = Util.getPortalRequestContext();
@@ -750,7 +749,7 @@ public class WCMCoreUtils {
         LOG.debug("Cannot get portal owner from portal request context: {}", e.getMessage());
       }
     }
-
+    UserPortalConfigService userPortalConfigService = WCMCoreUtils.getService(UserPortalConfigService.class) ;
     String defaultPortal = userPortalConfigService.getDefaultPortal();
     // Retrieve the list of accessible portals by current user (defined in ConservationState.getCurrent() )
     List<String> allPortalNames = userPortalConfigService.getAllPortalNames();
