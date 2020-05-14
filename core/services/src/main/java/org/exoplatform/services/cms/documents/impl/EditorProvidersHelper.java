@@ -141,7 +141,9 @@ public class EditorProvidersHelper {
     if (helper == null) {
       helper = new EditorProvidersHelper(documentService);
     } else {
-      LOG.warn("EditorProviderHelper is already initialized");
+      if (LOG.isDebugEnabled()) {
+        LOG.debug("EditorProviderHelper is already initialized");
+      }
     }
   }
 

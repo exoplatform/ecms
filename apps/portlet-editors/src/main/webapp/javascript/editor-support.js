@@ -195,7 +195,6 @@
      */
     this.removeListener = function(caller, fileId) {
       var removeLoader = $.Deferred();
-      log("Remove listener handled");
       var listener = getListener(caller, fileId)
       if (!listener) {
         log("Listener isn't registered for " + caller + " and fileId: " + fileId);
@@ -229,7 +228,6 @@
      */
     this.addListener = function(caller, fileId, callback) {
       if (getListener(caller, fileId)) {
-        log("Listener already registered for " + caller + " and fileId: " + fileId);
         return;
       }
       var subscriptionLoader = subscribeDocument(fileId, callback);
