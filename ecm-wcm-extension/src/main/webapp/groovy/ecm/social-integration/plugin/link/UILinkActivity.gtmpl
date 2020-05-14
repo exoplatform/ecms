@@ -29,6 +29,7 @@
   import org.exoplatform.social.webui.Utils;
   import org.exoplatform.wcm.ext.component.activity.UILinkUtil;
   import org.apache.commons.lang.StringEscapeUtils;
+  import java.net.*;
 
   import static org.exoplatform.social.webui.activity.BaseUIActivity.TEMPLATE_PARAM_COMMENT;
 
@@ -307,6 +308,8 @@
 					  linkTitle = UILinkUtil.simpleEscapeHtml(Util.getDecodeQueryURL(linkTitle));
 					  linkSource = UILinkUtil.simpleEscapeHtml(Util.getDecodeQueryURL(linkSource));
 					  //
+					  def linkMedia = new URL(linkSource);
+                       def hostUrl = linkMedia.getHost();
 					  def linkComment = uicomponent.getLinkComment();
 					  def linkClass = "content";
 					  def link = "";
@@ -332,24 +335,33 @@
                     </div>
                 </div>
 				<div class="uiBox roundedBottom introBox linkShare">
+				  <% if (embedHtml != null) { %>
+					<div class="clearfix embedBox">
+					<% } else { %>
 					<div class="clearfix">
+					<% } %>
 					<% if (embedHtml == null && link.length() != 0) { %>
                       <div class="linkPreview">
-                      	 <div> <a href="javascript:void(0);" rel="tooltip" data-placement="right" title="$linkTitle">$link</a></div>
+                      	 <div> <a href="javascript:void(0);" rel="tooltip" data-placement="right" title="$linkTitle" target="_blank">$link</a></div>
                          <div class="boxDescription">
                            <div class="block">
-                             <div class="titlePreview"><a target="_blank" href="$linkSource">$linkTitle</a></div>
+                             <div class="titlePreview"><a target="_blank" href="$linkSource" target="_blank">$linkTitle</a></div>
                              <div class="descriptionLink">$linkDescription</div>
-                             <div class="link" ><a href="$linkSource"><i class="far fa-link"></i> $linkSource</a></div>
+                             <div class="link" ><a href="$linkSource" target="_blank"><i class="far fa-link"></i> $linkSource</a></div>
                            </div>
                          </div>
                       <div>
                       <% } %>
                       <% if (embedHtml != null) { %>
 							<div class="EmbedHtml">$embedHtml</div>
+							<div class="box">
+							  <div class="boxLink">
+							    <div class="linkVideo"><a href="$linkSource" target="_blank">$linkSource</a></div>
+							  </div>
+							  <div class="boxSite link"><p><i class="far fa-link"></i>$hostUrl</p></div>
+							</div>
 					<% } %>
 					</div>
-				</div>
 				</div><!--end introBox,linkShare-->
 
 				<div class="actionBar clearfix linkActivityIcon">
