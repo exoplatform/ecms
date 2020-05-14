@@ -87,6 +87,9 @@
         const lang = eXo && eXo.env && eXo.env.portal && eXo.env.portal.language || 'en';
         return new Date(this.document.dateModified.time).toLocaleString(lang, options).split("/").join("-");
       },
+      fileInfo() {
+        return `${this.$t("documents.preview.updatedOn")} ${this.absoluteDateModified()} ${this.$t("documents.preview.updatedBy")} ${this.document.lastEditor} ${this.document.size}`;
+      },
       decoder(str) {
         const text = document.createElement('textarea');
         text.innerHTML = str;
@@ -102,7 +105,11 @@
             title: this.document.title,
             downloadUrl: this.document.downloadUrl,
             openUrl: this.document.openUrl,
-            breadCrumb: this.document.breadCrumb
+            breadCrumb: this.document.breadCrumb,
+            fileInfo: this.fileInfo()
+          },
+          version: {                                                                 
+            number : this.document.version 
           },
         });
       }

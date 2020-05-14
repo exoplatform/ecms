@@ -73,9 +73,7 @@ public class DocumentRestService implements ResourceContainer {
     if (limit <= 0) {
       limit = DEFAULT_LIMIT;
     }
-    String query = "select * from nt:base where jcr:path like '" + folder
-        + "/%' and (exo:primaryType = 'nt:file' or jcr:primaryType = 'nt:file') order by exo:dateModified DESC";
-    return Response.ok(documentService.getDocumentsByFolder(query, limit)).build();
+    return Response.ok(documentService.getDocumentsByFolder(folder, null, limit)).build();
   }
 
   @GET
@@ -133,7 +131,7 @@ public class DocumentRestService implements ResourceContainer {
       limit = DEFAULT_LIMIT;
     }
     String userId = ConversationState.getCurrent().getIdentity().getUserId();
-    return Response.ok(documentService.getRecentDocuments(userId, limit)).build();
+    return Response.ok(documentService.getMyWorkDocuments(userId, limit)).build();
   }
   
   @GET

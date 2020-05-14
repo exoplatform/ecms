@@ -27,6 +27,7 @@ import javax.jcr.Value;
 import javax.jcr.version.Version;
 import javax.jcr.version.VersionHistory;
 import javax.jcr.version.VersionIterator;
+
 import java.util.*;
 
 public class VersionHistoryUtils {
@@ -155,6 +156,23 @@ public class VersionHistoryUtils {
       node.save();
     }
     versionHistory.removeVersion(versionName);
+  }
+  
+  public static int getVersion(Node node) {
+    String currentVersion = null;
+    try {
+      if (node.isNodeType(VersionHistoryUtils.MIX_DISPLAY_VERSION_NAME) &&
+              node.hasProperty(VersionHistoryUtils.MAX_VERSION_PROPERTY)) {
+        //Get max version ID
+        int max = (int) node.getProperty(VersionHistoryUtils.MAX_VERSION_PROPERTY).getLong();
+        return max - 1;
+      }
+      currentVersion = node.getBaseVersion().getName();
+      if (currentVersion.contains("jcr:rootVersion")) currentVersion = "0";
+    }catch (Exception e) {
+      currentVersion ="0";
+    }
+    return Integer.parseInt(currentVersion);
   }
 
   /**

@@ -20,6 +20,9 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URLEncoder;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -34,12 +37,15 @@ import java.util.ResourceBundle;
 
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
+import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
+import javax.jcr.ValueFormatException;
 import javax.jcr.query.Query;
 import javax.jcr.query.QueryManager;
 import javax.jcr.query.QueryResult;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.gatein.api.Portal;
@@ -66,6 +72,7 @@ import org.exoplatform.services.cms.documents.DocumentService;
 import org.exoplatform.services.cms.documents.NewDocumentTemplate;
 import org.exoplatform.services.cms.documents.NewDocumentTemplatePlugin;
 import org.exoplatform.services.cms.documents.NewDocumentTemplateProvider;
+import org.exoplatform.services.cms.documents.VersionHistoryUtils;
 import org.exoplatform.services.cms.documents.exception.DocumentEditorProviderNotFoundException;
 import org.exoplatform.services.cms.documents.exception.DocumentExtensionNotSupportedException;
 import org.exoplatform.services.cms.documents.model.Document;
@@ -90,6 +97,7 @@ import org.exoplatform.services.organization.Group;
 import org.exoplatform.services.organization.OrganizationService;
 import org.exoplatform.services.organization.User;
 import org.exoplatform.services.security.ConversationState;
+import org.exoplatform.services.security.Identity;
 import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
@@ -97,6 +105,7 @@ import org.exoplatform.social.core.manager.IdentityManager;
 import org.exoplatform.social.core.space.SpaceUtils;
 import org.exoplatform.social.core.space.model.Space;
 import org.exoplatform.social.core.space.spi.SpaceService;
+import org.exoplatform.web.CacheUserProfileFilter;
 import org.exoplatform.webui.application.WebuiRequestContext;
 
 /**
@@ -685,10 +694,13 @@ public class DocumentServiceImpl implements DocumentService {
   * {@inheritDoc}
   */
  @Override
- public List<Document> getDocumentsByFolder(String folder, long limit) throws Exception {
+ public List<Document> getDocumentsByFolder(String folder, String condition, long limit) throws Exception {
    List<Document> documents = new ArrayList<Document>();
    if (folder != null) {
-     String query = "select * from nt:base where jcr:path like '" + folder + "/%' and (exo:primaryType = 'nt:file' or jcr:primaryType = 'nt:file') order by exo:dateModified DESC";
+     String query = "select * from nt:base where jcr:path like '" + folder + "/%' "
+         + "and (exo:primaryType = 'nt:file' or jcr:primaryType = 'nt:file')"
+         + (condition != null ? condition : "")
+         + " order by exo:dateModified DESC";
      return getDocumentsByQuery(query, limit);
    }
    return documents;
@@ -702,7 +714,8 @@ public class DocumentServiceImpl implements DocumentService {
     List<Document> documents = new ArrayList<Document>();
     if (query != null) {
       ManageableRepository manageableRepository = repoService.getCurrentRepository();
-      Session session = manageableRepository.getSystemSession(COLLABORATION);
+      SessionProvider sessionProvider = WCMCoreUtils.getUserSessionProvider();
+      Session session = sessionProvider.getSession(COLLABORATION, manageableRepository);
       QueryManager queryManager = session.getWorkspace().getQueryManager();
       QueryImpl documentsQuery = (QueryImpl) queryManager.createQuery(query, Query.SQL);
       documentsQuery.setLimit(limit);
@@ -723,7 +736,10 @@ public class DocumentServiceImpl implements DocumentService {
                                          Utils.getDate(documentNode).getTime(),
                                          getFileBreadCrumb(documentNode),
                                          getLinkInDocumentsApp(originalDocumentNode.getPath()),
-                                         getDownloadUri(originalDocumentNode));
+                                         getDownloadUri(originalDocumentNode),
+                                         VersionHistoryUtils.getVersion(originalDocumentNode),
+                                         Utils.fileSize(originalDocumentNode),
+                                         getDocLastModifier(originalDocumentNode));
         documents.add(document);
       }
       session.logout();
@@ -735,16 +751,35 @@ public class DocumentServiceImpl implements DocumentService {
    * {@inheritDoc}
    */
   @Override
+  public List<Document> getMyWorkDocuments(String userId, int limit) throws Exception {
+    //TODO elastic search implementation
+    String condition = " and (exo:owner = '" + userId + "' or exo:lastModifier = '" + userId + "')";
+    return getDocumentsByFolder(SPACES_NODE_PATH, condition, limit);
+  }
+  
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public List<Document> getPrivateDocuments(String userId, int limit) throws Exception {
+    SessionProvider sessionProvider = SessionProvider.createSystemProvider();
+    Node userNode = nodeHierarchyCreator.getUserNode(sessionProvider, userId);
+    return getDocumentsByFolder(userNode.getPath(), null, limit);
+  }
+  
+  /**
+   * {@inheritDoc}
+   */
+  @Override
   public List<Document> getFavoriteDocuments(String userId, int limit) throws Exception {
     SessionProvider sessionProvider = SessionProvider.createSystemProvider();
-    NodeHierarchyCreator nodeHierarchyCreator = WCMCoreUtils.getService(NodeHierarchyCreator.class);
     Node userNode = nodeHierarchyCreator.getUserNode(sessionProvider, userId);
     Node userPrivateNode = (Node) userNode.getNode(Utils.PRIVATE);
     String favoriteFolder = null;
     if (userPrivateNode.hasNode(NodetypeConstant.FAVORITE)) {
       favoriteFolder = ((Node) userPrivateNode.getNode(NodetypeConstant.FAVORITE)).getPath();
     }
-    return getDocumentsByFolder(favoriteFolder, limit);
+    return getDocumentsByFolder(favoriteFolder, null, limit);
   }
 
   /**
@@ -753,7 +788,6 @@ public class DocumentServiceImpl implements DocumentService {
   @Override
   public List<Document> getSharedDocuments(String userId, int limit) throws Exception {
     SessionProvider sessionProvider = SessionProvider.createSystemProvider();
-    NodeHierarchyCreator nodeHierarchyCreator = WCMCoreUtils.getService(NodeHierarchyCreator.class);
     Node userNode = nodeHierarchyCreator.getUserNode(sessionProvider, userId);
     Node userPrivateNode = (Node) userNode.getNode(Utils.PRIVATE);
     Node userDocumentsNode = (Node) userPrivateNode.getNode(NodetypeConstant.DOCUMENTS);
@@ -761,27 +795,16 @@ public class DocumentServiceImpl implements DocumentService {
     if (userDocumentsNode.hasNode(NodetypeConstant.SHARED)) {
       sharedFolder = ((Node) userDocumentsNode.getNode(NodetypeConstant.SHARED)).getPath();
     }
-    return getDocumentsByFolder(sharedFolder, limit);
+    return getDocumentsByFolder(sharedFolder, null, limit);
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public List<Document> getRecentDocuments(String userId, int limit) throws Exception {
-    SessionProvider sessionProvider = SessionProvider.createSystemProvider();
-    NodeHierarchyCreator nodeHierarchyCreator = WCMCoreUtils.getService(NodeHierarchyCreator.class);
-    Node userNode = nodeHierarchyCreator.getUserNode(sessionProvider, userId);
-    return getDocumentsByFolder(userNode.getPath(), limit);
-  }
-  
-  /**
-   * {@inheritDoc}
-   */
-  @Override
   public List<Document> getRecentSpacesDocuments(int limit) throws Exception {
     //TODO elastic search implementation
-    return getDocumentsByFolder(SPACES_NODE_PATH, limit);
+    return getDocumentsByFolder(SPACES_NODE_PATH, null, limit);
   }
 
   /**
@@ -981,5 +1004,53 @@ public class DocumentServiceImpl implements DocumentService {
             append(WCMCoreUtils.getRepository().getConfiguration().getName()).append('/').
             append(workspaceName).append(fileNode.getPath());
    return downloadUrl.toString().replaceFirst(fileNode.getName(), URLEncoder.encode(fileNode.getName(), "UTF-8")); 
+  }
+  
+  private String getDocLastModifier(Node node) {
+    String docLastModifier = "";
+    try {
+      if (node.isNodeType("exo:symlink")){
+        String uuid = node.getProperty("exo:uuid").getString();
+        node = node.getSession().getNodeByUUID(uuid);
+      }
+      if(node != null && node.hasProperty("exo:lastModifier")) {
+        String docLastModifierUsername = node.getProperty("exo:lastModifier").getString();
+        docLastModifier = getUserFullName(docLastModifierUsername);
+      }
+    } catch (RepositoryException e) {
+      LOG.error("Cannot get document last modifier : " + e.getMessage(), e);
+    }
+    return docLastModifier;
+  }
+  
+  private String getUserFullName(String userId) {
+    if(StringUtils.isEmpty(userId)) {
+      return "";
+    }
+
+    // if the requested user is the connected user, get the fullname from the ConversationState
+    ConversationState currentUserState = ConversationState.getCurrent();
+    Identity currentUserIdentity = currentUserState.getIdentity();
+    if(currentUserIdentity != null) {
+      String currentUser = currentUserIdentity.getUserId();
+      if (currentUser != null && currentUser.equals(userId)) {
+        User user = (User) currentUserState.getAttribute(CacheUserProfileFilter.USER_PROFILE);
+        if(user != null) {
+          return user.getDisplayName();
+        }
+      }
+    }
+
+    // if the requested user if not the connected user, fetch it from the organization service
+    try {
+      User user = organizationService.getUserHandler().findUserByName(userId);
+      if(user != null) {
+        return user.getDisplayName();
+      }
+    } catch (Exception e) {
+      LOG.error("Cannot get information of user " + userId + " : " + e.getMessage(), e);
+    }
+
+    return "";
   }
 }
