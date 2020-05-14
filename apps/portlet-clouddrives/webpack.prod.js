@@ -7,9 +7,7 @@ const app = "cloud-drive";
 
 const config = merge(webpackCommonConfig, {
   output: {
-    path: path.resolve(__dirname, `./target/${app}/`),
-    filename: "js/[name].bundle.js",
-    libraryTarget: "amd"
+    path: path.resolve(__dirname, `./target/${app}/`)
   }
 });
 
