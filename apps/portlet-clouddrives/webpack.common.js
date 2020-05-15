@@ -48,11 +48,7 @@ let config = {
         use: ["vue-loader", "eslint-loader"]
       }
     ]
-  },
-  plugins: [
-    // we use ExtractTextWebpackPlugin to extract the css code on a css file
-    new ExtractTextWebpackPlugin("css/cloud-drive.css")
-  ]
+  }
 };
 
 module.exports = config;

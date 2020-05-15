@@ -124,11 +124,4 @@
       <module>jquery</module>
     </depends>
   </module>
-
-  <portal-skin>
-    <skin-name>Enterprise</skin-name>
-    <skin-module>customModuleCloudDrive</skin-module>
-    <css-path>/css/cloud-drive.css</css-path>
-    <css-priority>10</css-priority>
-  </portal-skin>
 </gatein-resources>

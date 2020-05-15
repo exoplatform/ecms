@@ -1,4 +1,3 @@
-import "./css/cloud-drive.less";
 import ConnectCloudDrive from "./components/ConnectCloudDrive.vue";
 
 Vue.use(Vuetify);
