@@ -104,8 +104,6 @@
           provider: provider,
           workspace: currentWorkspace
         }
-      }).then(function(result) {
-        log("Preferred provider " + provider + " saved. " + result);
       }).catch(function(xhr, status, error) {
         log("Cannot save preferred provider " + provider + ": " + status + " " + error);
       });
@@ -160,7 +158,6 @@
       $container.append($btn);
       let provider = buttons[0].provider;
       $btn.click(function() {
-        log("preferred provider: " + provider);
         savePreferredProvider(fileId, provider);
       });
 
@@ -226,7 +223,6 @@
      * Handles events from editorsupport.js and enables/disables editor buttons.
      */
     var eventsHandler = function(result) {
-      log("Event handled from editorsupport: " + JSON.stringify(result));
       switch (result.type) {
         case DOCUMENT_OPENED: {
           $('.editorButton[data-provider!="' + result.provider + '"][data-fileId="' + result.fileId + '"]').each(function() {

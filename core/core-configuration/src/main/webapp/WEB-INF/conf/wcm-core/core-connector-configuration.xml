@@ -5,6 +5,7 @@
    xsi:schemaLocation="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd http://www.exoplatform.org/xml/ns/kernel_1_2.xsd"
    xmlns="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd">
 
+
   <component>
     <type>org.exoplatform.ecm.connector.fckeditor.FCKCoreRESTConnector</type>
   </component>
@@ -79,6 +80,10 @@
   <component>
     <type>org.exoplatform.wcm.connector.collaboration.OpenInOfficeConnector</type>
   </component>
+  <component>
+    <type>org.exoplatform.wcm.connector.collaboration.DocumentEditorsRESTService</type>
+  </component>
+  
   <component>
     <type>org.exoplatform.wcm.connector.fckeditor.DriverConnector</type>
     <init-params>

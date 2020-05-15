@@ -31,6 +31,7 @@ import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.portal.config.UserACL;
 import org.exoplatform.services.cms.documents.DocumentEditor;
 import org.exoplatform.services.cms.documents.DocumentEditorProvider;
+import org.exoplatform.services.cms.documents.DocumentUpdateActivityHandler;
 import org.exoplatform.services.cms.documents.NewDocumentTemplate;
 import org.exoplatform.services.cms.documents.exception.PermissionValidationException;
 import org.exoplatform.services.organization.Group;
@@ -243,6 +244,16 @@ public class DocumentEditorProviderImpl implements DocumentEditorProvider {
   @Override
   public boolean isDocumentSupported(String fileId, String workspace) {
     return editor.isDocumentSupported(fileId, workspace);
+  }
+  
+  /**
+   * Gets the document update handler.
+   *
+   * @return the document update handler
+   */
+  @Override
+  public DocumentUpdateActivityHandler getDocumentUpdateHandler() {
+    return editor.getDocumentUpdateHandler();
   }
 
   /**

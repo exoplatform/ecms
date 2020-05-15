@@ -56,7 +56,7 @@
     <component-plugin>
       <name>FileActivityNotify.event.PropertyUpdated</name>
       <set-method>addListener</set-method>
-      <type>org.exoplatform.wcm.ext.component.activity.listener.FileUpdateActivityListener</type>
+      <type>org.exoplatform.wcm.ext.component.activity.listener.DocumentUpdateActivityListener</type>
       <description>this listener will create a new comment when a property has been	updated</description>
     </component-plugin>
 
