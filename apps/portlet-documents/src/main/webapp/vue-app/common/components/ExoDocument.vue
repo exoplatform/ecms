@@ -111,6 +111,7 @@
           version: {                                                                 
             number : this.document.version 
           },
+          showComments: false
         });
       }
     }
