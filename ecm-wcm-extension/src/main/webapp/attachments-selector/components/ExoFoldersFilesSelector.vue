@@ -299,11 +299,11 @@ export default {
           title: spaceGroupId,
           isSelected: true
         };
+        self.fetchChildrenContents('');
       } else {
         self.currentDrive = {};
         this.fetchUserDrives();
       }
-      self.fetchChildrenContents('');
     }).catch(() => {
       this.errorMessage= `${this.$t('attachments.fetchFoldersAndFiles.error')}`;
       this.showErrorMessage = true;
