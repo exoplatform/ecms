@@ -6,7 +6,7 @@ let config = {
   // set the entry point of the application
   // can use multiple entry
   entry: {
-    "cloud-drive": "./src/main/webapp/vue-app/main.js"
+    "clouddrives-app": "./src/main/webapp/vue-app/main.js"
   },
   output: {
     filename: "js/[name].bundle.js",
