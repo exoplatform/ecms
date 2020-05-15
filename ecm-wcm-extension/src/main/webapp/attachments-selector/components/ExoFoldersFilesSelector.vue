@@ -125,14 +125,15 @@
     </div>
     <!-- The following bloc is needed in order to display the warning popup -->
     <!--begin -->
-    <exo-modal
+    <!-- Commented as it is't work and unable to close, should be uncommented before merge -->
+    <!-- <exo-modal
       ref="exoModal"
       :ok-label="$t('attachments.filesFoldersSelector.popup.button.ok')"
       :title="$t('attachments.filesFoldersSelector.popup.title')">
       <div class="modal-body">
         <p>{{ popupBodyMessage }}</p>
       </div>
-    </exo-modal>
+    </exo-modal> -->
     <!--end -->
 
     <!-- The following bloc is needed in order to display the confirmation popup -->
