@@ -21,6 +21,7 @@
           <value>locale.ecm.webui</value>
           <value>locale.ecm.cms.taxonomy.taxonomies</value>
           <value>locale.portal.custom</value>
+          <value>locale.clouddrive.CloudDrive</value>
         </values-param>
         <values-param>
           <name>portal.resource.names</name>
@@ -29,6 +30,7 @@
           <value>locale.ecm.webui</value>
           <value>locale.ecm.dialogs</value>
           <value>locale.ecm.views</value>
+          <value>locale.clouddrive.CloudDrive</value>
         </values-param>
       </init-params>
     </component-plugin>
