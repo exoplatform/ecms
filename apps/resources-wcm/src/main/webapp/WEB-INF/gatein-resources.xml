@@ -116,7 +116,7 @@
   <!-- CloudDrivesPortlet skins -->
   <portlet-skin>
     <application-name>clouddrives</application-name>
-    <portlet-name>CloudDrivesPortlet</portlet-name>
+    <portlet-name>CloudDrivePortlet</portlet-name>
     <skin-name>Enterprise</skin-name>
     <css-path>/skin/css/ecms/portlets/clouddrives/cloud-drives.css</css-path>
     <overwrite>true</overwrite>
