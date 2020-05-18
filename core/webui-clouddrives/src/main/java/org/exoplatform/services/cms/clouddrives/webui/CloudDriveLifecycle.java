@@ -40,6 +40,7 @@ import org.exoplatform.webui.core.UIComponentDecorator;
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
  * @version $Id: CloudDriveLifecycle.java 00000 Nov 17, 2016 pnedonosko $
  */
+@Deprecated // TODO should not be used in PLF V6
 public class CloudDriveLifecycle implements ApplicationLifecycle<WebuiRequestContext> {
 
   /** The Constant LOG. */

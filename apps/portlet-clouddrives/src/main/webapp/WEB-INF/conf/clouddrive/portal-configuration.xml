@@ -23,15 +23,12 @@ Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
   xsi:schemaLocation="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd http://www.exoplatform.org/xml/ns/kernel_1_2.xsd"
   xmlns="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd">
   
+  <!-- TODO this configuration should not be used in PLF V6 -->
   <external-component-plugins>
-    <!-- The full qualified name of the UserPortalConfigService -->
     <target-component>org.exoplatform.portal.config.UserPortalConfigService</target-component>
     <component-plugin>
-      <!-- The name of the plugin -->
       <name>new.portal.config.user.listener</name>
-      <!-- The name of the method to call on the UserPortalConfigService in order to register the NewPortalConfigs -->
       <set-method>initListener</set-method>
-      <!-- The full qualified name of the NewPortalConfigListener -->
       <type>org.exoplatform.portal.config.NewPortalConfigListener</type>
       <description>this listener init the portal configuration</description>
       <init-params>

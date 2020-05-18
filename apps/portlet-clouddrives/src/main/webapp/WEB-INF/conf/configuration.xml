@@ -26,5 +26,5 @@
 
   <import>war:/conf/clouddrive/clouddrive-configuration.xml</import>
   <import>war:/conf/clouddrive/ecms-ext-configuration.xml</import>
-  <import>war:/conf/clouddrive/portal-configuration.xml</import>
+  <!-- import>war:/conf/clouddrive/portal-configuration.xml</import -->
 </configuration>
