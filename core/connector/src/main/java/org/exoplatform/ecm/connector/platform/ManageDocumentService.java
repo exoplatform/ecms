@@ -16,30 +16,12 @@
  */
 package org.exoplatform.ecm.connector.platform;
 
-import org.apache.commons.lang.StringUtils;
-import org.exoplatform.container.xml.InitParams;
-import org.exoplatform.ecm.connector.fckeditor.FCKUtils;
-import org.exoplatform.ecm.utils.text.Text;
-import org.exoplatform.services.cms.documents.AutoVersionService;
-import org.exoplatform.services.cms.drives.DriveData;
-import org.exoplatform.services.cms.drives.ManageDriveService;
-import org.exoplatform.services.cms.impl.Utils;
-import org.exoplatform.services.cms.link.LinkManager;
-import org.exoplatform.services.context.DocumentContext;
-import org.exoplatform.services.jcr.RepositoryService;
-import org.exoplatform.services.jcr.access.PermissionType;
-import org.exoplatform.services.jcr.core.ManageableRepository;
-import org.exoplatform.services.jcr.ext.common.SessionProvider;
-import org.exoplatform.services.log.ExoLogger;
-import org.exoplatform.services.log.Log;
-import org.exoplatform.services.rest.resource.ResourceContainer;
-import org.exoplatform.services.security.ConversationState;
-import org.exoplatform.services.security.MembershipEntry;
-import org.exoplatform.services.wcm.core.NodetypeConstant;
-import org.exoplatform.services.wcm.utils.WCMCoreUtils;
-import org.exoplatform.wcm.connector.FileUploadHandler;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
+import java.util.List;
 
 import javax.annotation.security.RolesAllowed;
 import javax.jcr.AccessDeniedException;
@@ -63,12 +45,37 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.dom.DOMSource;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
-import java.util.List;
+
+import org.apache.commons.lang.StringUtils;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
+import org.exoplatform.container.xml.InitParams;
+import org.exoplatform.ecm.connector.fckeditor.FCKUtils;
+import org.exoplatform.ecm.utils.text.Text;
+import org.exoplatform.services.cms.clouddrives.CloudDrive;
+import org.exoplatform.services.cms.clouddrives.CloudDriveException;
+import org.exoplatform.services.cms.clouddrives.CloudDriveService;
+import org.exoplatform.services.cms.clouddrives.CloudFile;
+import org.exoplatform.services.cms.clouddrives.NotYetCloudFileException;
+import org.exoplatform.services.cms.documents.AutoVersionService;
+import org.exoplatform.services.cms.drives.DriveData;
+import org.exoplatform.services.cms.drives.ManageDriveService;
+import org.exoplatform.services.cms.impl.Utils;
+import org.exoplatform.services.cms.link.LinkManager;
+import org.exoplatform.services.context.DocumentContext;
+import org.exoplatform.services.jcr.RepositoryService;
+import org.exoplatform.services.jcr.access.PermissionType;
+import org.exoplatform.services.jcr.core.ManageableRepository;
+import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
+import org.exoplatform.services.rest.resource.ResourceContainer;
+import org.exoplatform.services.security.ConversationState;
+import org.exoplatform.services.security.MembershipEntry;
+import org.exoplatform.services.wcm.core.NodetypeConstant;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+import org.exoplatform.wcm.connector.FileUploadHandler;
 
 /**
  * This service is used to perform some actions on a folder or on a file, such as creating,
@@ -96,9 +103,11 @@ public class ManageDocumentService implements ResourceContainer {
   /** Default folder name if the original is null */ 
   private static final String DEFAULT_NAME = "untitled";
 
-  private ManageDriveService    manageDriveService;
+  private final ManageDriveService    manageDriveService;
 
-  private LinkManager linkManager;
+  private final LinkManager linkManager;
+  
+  private final CloudDriveService cloudDrives;
 
   /** The file upload handler. */
   protected FileUploadHandler   fileUploadHandler;
@@ -142,16 +151,21 @@ public class ManageDocumentService implements ResourceContainer {
    *
    * @param manageDriveService Instantiates a drive manager service.
    * @param linkManager Instantiates a link manager service.
+   * @param cloudDrives the CloudDrives service
+   * @param params the params
    */
-  public ManageDocumentService(ManageDriveService manageDriveService, LinkManager linkManager,
+  public ManageDocumentService(ManageDriveService manageDriveService,
+                               LinkManager linkManager,
+                               CloudDriveService cloudDrives,
                                InitParams params) {
     this.manageDriveService = manageDriveService;
     this.linkManager = linkManager;
-    fileUploadHandler = new FileUploadHandler();
-    cc = new CacheControl();
-    cc.setNoCache(true);
-    cc.setNoStore(true);
-    limit = Integer.parseInt(params.getValueParam("upload.limit.size").getValue());
+    this.cloudDrives = cloudDrives;
+    this.fileUploadHandler = new FileUploadHandler();
+    this.cc = new CacheControl();
+    this.cc.setNoCache(true);
+    this.cc.setNoStore(true);
+    this.limit = Integer.parseInt(params.getValueParam("upload.limit.size").getValue());
   }
 
   /**
@@ -237,8 +251,7 @@ public class ManageDocumentService implements ResourceContainer {
         LOG.debug("Access is denied when perform get Folders and files: ", e);
       }
       return Response.status(Status.UNAUTHORIZED).entity(e.getMessage()).cacheControl(cc).build();
-    }
-    catch (PathNotFoundException e) {
+    } catch (PathNotFoundException e) {
       if (LOG.isDebugEnabled()) {
         LOG.debug("Item is not found: ", e);
       }
@@ -248,7 +261,6 @@ public class ManageDocumentService implements ResourceContainer {
         LOG.error("Repository is error: ", e);
       }
       return Response.status(Status.SERVICE_UNAVAILABLE).entity(e.getMessage()).cacheControl(cc).build();
-
     } catch (Exception e) {
       if (LOG.isErrorEnabled()) {
         LOG.error("Error when perform get Folders and files: ", e);
@@ -448,14 +460,10 @@ public class ManageDocumentService implements ResourceContainer {
   private Response buildXMLResponseForChildren(Node node,
                                                String driveName,
                                                String currentFolder,
-                                               boolean showHidden
-                                               ) throws Exception {
+                                               boolean showHidden) throws Exception {
     Document document = createNewDocument();
-    Element rootElement = createFolderElement(document,
-                                              node,
-                                              node.getSession().getWorkspace().getName(),
-                                              driveName,
-                                              currentFolder);
+    Element rootElement = createFolderElement(document, node, node.getSession().getWorkspace().getName(), 
+                                              driveName, currentFolder);
     Element folders = document.createElement("Folders");
     Element files = document.createElement("Files");
     Node referParentNode = node;
@@ -472,29 +480,24 @@ public class ManageDocumentService implements ResourceContainer {
         sourceNode = linkManager.getTarget(child);
       }
       referNode = sourceNode != null ? sourceNode : child;
-
+      String workspaceName = referNode.getSession().getWorkspace().getName();
+      
       if (isFolder(referNode)) {
         // Get current folder from folder path to fix same name problem (ECMS-3586)
         String folderPath = child.getPath();
         folderPath = folderPath.substring(folderPath.lastIndexOf("/") + 1, folderPath.length());
-        String childFolder = StringUtils.isEmpty(currentFolder) ? folderPath : currentFolder.concat("/")
-                                                                                    .concat(folderPath);
-        Element folder = createFolderElement(document,
-                                             child,
-                                             child.getSession().getWorkspace().getName(),
-                                             driveName,
-                                             childFolder);
+        String childFolder = StringUtils.isEmpty(currentFolder) ? folderPath : currentFolder.concat("/").concat(folderPath);
+        Element folder = createFolderElement(document, child, workspaceName, driveName, childFolder);
         folders.appendChild(folder);
-      } else   if (isFile(referNode)) {
-        Element file = createFileElement(document, referNode, child,
-                                         referNode.getSession().getWorkspace().getName());
+      } else if (isFile(referNode)) {
+        Element file = createFileElement(document, referNode, child, workspaceName);
         files.appendChild(file);
       } else {
         continue;
       }
     }
     rootElement.appendChild(folders);
-      rootElement.appendChild(files);
+    rootElement.appendChild(files);
     document.appendChild(rootElement);
     return getResponse(document);
   }
@@ -528,13 +531,11 @@ public class ManageDocumentService implements ResourceContainer {
     } catch (Exception e) {
       canRemove = false;
     }
-
     try {
       getSession(workspaceName).checkPermission(child.getPath(), PermissionType.ADD_NODE);
     } catch (Exception e) {
       canAddChild = false;
     }
-
     folder.setAttribute("name", child.getName());
     folder.setAttribute("title", Utils.getTitle(child));
     folder.setAttribute("path", child.getPath());
@@ -546,7 +547,6 @@ public class ManageDocumentService implements ResourceContainer {
     folder.setAttribute("currentFolder", currentFolder);
     folder.setAttribute("hasChild", String.valueOf(hasChild));
     folder.setAttribute("titlePath", createTitlePath(driveName, workspaceName, currentFolder));
-
     return folder;
   }
 
@@ -560,20 +560,7 @@ public class ManageDocumentService implements ResourceContainer {
     file.setAttribute("name", Utils.getTitle(displayNode));
     file.setAttribute("title", Utils.getTitle(displayNode));
     file.setAttribute("workspaceName", workspaceName);
-    file.setAttribute("id", sourceNode.getUUID());
-    SimpleDateFormat formatter = (SimpleDateFormat) SimpleDateFormat.getDateTimeInstance(SimpleDateFormat.SHORT,
-                                                                                         SimpleDateFormat.SHORT);
-    file.setAttribute("dateCreated", formatter.format(sourceNode.getProperty("exo:dateCreated")
-                                                                .getDate()
-                                                                .getTime()));
-    if (sourceNode.hasProperty("exo:dateModified")) {
-      file.setAttribute("dateModified", formatter.format(sourceNode.getProperty("exo:dateModified")
-                                                                   .getDate()
-                                                                   .getTime()));
-    } else {
-      file.setAttribute("dateModified", null);
-    }
-    file.setAttribute("creator", sourceNode.getProperty("exo:owner").getString());
+    file.setAttribute("id", sourceNode.getUUID());    
     file.setAttribute("path", displayNode.getPath());
     file.setAttribute("isVersioned", String.valueOf(sourceNode.isNodeType(NodetypeConstant.MIX_VERSIONABLE)));
     file.setAttribute("isVersionSupport", String.valueOf(autoVersionService.isVersionSupport(sourceNode.getPath(), workspaceName)));
@@ -584,17 +571,63 @@ public class ManageDocumentService implements ResourceContainer {
       file.setAttribute("nodeType", sourceNode.getPrimaryNodeType().getName());
     }
 
-    long size = sourceNode.getNode("jcr:content").getProperty("jcr:data").getLength();
-    file.setAttribute("size", "" + size);
     try {
       getSession(workspaceName).checkPermission(sourceNode.getPath(), PermissionType.REMOVE);
     } catch (Exception e) {
       canRemove = false;
     }
     file.setAttribute("canRemove", String.valueOf(canRemove));
+    
+    
+    SimpleDateFormat formatter = (SimpleDateFormat) SimpleDateFormat.getDateTimeInstance(SimpleDateFormat.SHORT,
+                                                                                         SimpleDateFormat.SHORT);
+    CloudDrive cloudDrive = cloudDrives.findDrive(displayNode);
+    CloudFile cloudFile = null;
+    if (cloudDrive != null && cloudDrive.isConnected()) {
+      // It's connected Cloud Drive file
+      try {
+        cloudFile = cloudDrive.getFile(displayNode.getPath());
+        if (cloudFile.isConnected()) {
+          file.setAttribute("isCloudFile", "true");
+          file.setAttribute("isConnected", "true");
+          //
+          file.setAttribute("dateCreated", formatter.format(cloudFile.getCreatedDate().getTime()));
+          file.setAttribute("dateModified", formatter.format(cloudFile.getModifiedDate().getTime()));
+          file.setAttribute("lastModifier", cloudFile.getLastUser());
+          file.setAttribute("creator", cloudFile.getAuthor());
+          file.setAttribute("size", String.valueOf(cloudFile.getSize()));
+        } else {
+          file.setAttribute("isCloudFile", "true");
+          file.setAttribute("isConnected", "false");
+        }
+      } catch (NotYetCloudFileException e) {
+        file.setAttribute("isCloudFile", "true");
+        file.setAttribute("isConnected", "false");
+      } catch (CloudDriveException e) {
+        LOG.warn("Error reading cloud file {}: {}", displayNode.getPath(), e.getMessage());
+      }
+    } 
+    if (cloudFile == null) {
+      // It's local storage file
+      file.setAttribute("dateCreated", formatter.format(sourceNode.getProperty("exo:dateCreated").getDate().getTime()));
+      if (sourceNode.hasProperty("exo:dateModified")) {
+        file.setAttribute("dateModified", formatter.format(sourceNode.getProperty("exo:dateModified").getDate().getTime()));
+      } else {
+        file.setAttribute("dateModified", null);
+      }
+      if (sourceNode.hasProperty("exo:lastModifier")) {
+        file.setAttribute("lastModifier", sourceNode.getProperty("exo:lastModifier").getString());
+      } else {
+        file.setAttribute("lastModifier", null);
+      }
+      file.setAttribute("creator", sourceNode.getProperty("exo:owner").getString());
+      long size = sourceNode.getNode("jcr:content").getProperty("jcr:data").getLength();
+      file.setAttribute("size", String.valueOf(size));
+    }
+
     return file;
   }
-
+  
   private Node getNode(String driveName, String workspaceName, String currentFolder) throws Exception {
     Session session = getSession(workspaceName);
     String driveHomePath = manageDriveService.getDriveByName(Text.escapeIllegalJcrChars(driveName)).getHomePath();
