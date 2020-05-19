@@ -17,8 +17,10 @@
 package org.exoplatform.services.cms.impl;
 
 import com.ibm.icu.text.Transliterator;
+
 import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang.StringUtils;
+
 import org.exoplatform.container.component.ComponentPlugin;
 import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.documents.TrashService;
@@ -42,6 +44,8 @@ import org.exoplatform.services.log.Log;
 import org.exoplatform.services.security.*;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+import org.exoplatform.social.core.space.model.Space;
+import org.exoplatform.social.core.space.spi.SpaceService;
 
 import javax.jcr.*;
 import javax.jcr.nodetype.NodeType;
@@ -81,6 +85,8 @@ public class Utils {
   private final static Log   LOG          = ExoLogger.getLogger(Utils.class.getName());
 
   private static final String ILLEGAL_SEARCH_CHARACTERS= "\\!^()+{}[]:\"-";
+  
+  private static final String SEPARATOR = "/";
 
   public static final String MAPPING_FILE = "mapping.properties";
 
@@ -89,6 +95,8 @@ public class Utils {
   public static final String PRIVATE = "Private";
 
   public static final String PUBLIC = "Public";
+  
+  public static final String SPACES_NODE_PATH = "/Groups/spaces";
 
   public static final String[] SPECIFIC_FOLDERS = { "exo:folksonomyFolder", NodetypeConstant.EXO_DOCUMENTFOLDER, NodetypeConstant.EXO_FAVOURITE_FOLDER,
       NodetypeConstant.EXO_PICTUREFOLDER, NodetypeConstant.EXO_MUSICFOLDER, NodetypeConstant.EXO_VIDEOFOLDER, NodetypeConstant.EXO_SEARCHFOLDER };
@@ -1029,5 +1037,21 @@ public class Utils {
          && "__system".equals(owner);
    }
    return false;
+ }
+ 
+ public static String getSearchDocumentDrive(Node documentNode) throws Exception {
+   String nodePath = documentNode.getPath();
+   if (!nodePath.startsWith(SPACES_NODE_PATH)) {
+     return documentNode.getParent().getName();
+   }
+   String[] splittedNodePath = nodePath.split(SEPARATOR);
+   if (splittedNodePath.length > 3) {
+     SpaceService spaceService = WCMCoreUtils.getService(SpaceService.class);
+     Space space = spaceService.getSpaceByPrettyName(splittedNodePath[3]);
+     if (space != null) {
+       return space.getDisplayName();
+     }
+   }
+   return "";
  }
 }

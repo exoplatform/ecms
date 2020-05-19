@@ -22,21 +22,22 @@ export function getDocumentsByFolder(folder, limit) {
 }
 
 export function getRecentDocuments(limit) {
-  const url = `/portal/rest/documents/recent?limit=${limit}`;
+  const url = `/portal/rest/search/documents/recent?limit=${limit}`;
   return getDocuments(url);
 }
 
 export function getRecentSpacesDocuments(limit) {
-  const url = `/portal/rest/documents/recentSpaces?limit=${limit}`;
+  const url = `/portal/rest/search/documents/recentSpaces?limit=${limit}`;
   return getDocuments(url);
 }
 
 export function getFavoriteDocuments(limit) {
-  const url = `/portal/rest/documents/favorite?limit=${limit}`;
+  //const url = `/portal/rest/search?q=news&sort=date&limit=${limit}`;
+  const url = `/portal/rest/search/documents/favorite?limit=${limit}`;
   return getDocuments(url);
 }
 
 export function getSharedDocuments(limit) {
-  const url = `/portal/rest/documents/shared?limit=${limit}`;
+  const url = `/portal/rest/search/documents/shared?limit=${limit}`;
   return getDocuments(url);
 }

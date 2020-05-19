@@ -16,6 +16,7 @@
  */
 package org.exoplatform.services.cms.documents;
 
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import javax.jcr.Node;
@@ -102,6 +103,14 @@ public interface DocumentService {
    * @throws Exception
    */
   public DriveData getDriveOfNode(String nodePath, String userId, List<String> memberships) throws Exception;
+  
+  /**
+   * Get the file preview breadCrumb.
+   * @param fileNode The file node
+   * @return The file preview breadCrumb
+   * @throws Exception
+   */
+  public LinkedHashMap<String, String> getFilePreviewBreadCrumb(Node fileNode) throws Exception;
   
   /**
    * Adds the document template plugin.

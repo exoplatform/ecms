@@ -18,6 +18,7 @@ package org.exoplatform.services.wcm.search.base;
 
 import org.exoplatform.commons.api.search.data.SearchResult;
 
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -33,6 +34,13 @@ public class EcmsSearchResult extends SearchResult {
   private String nodePath;
   private List<String> tags;
   private Map<String, List<String>> breadcrumb;
+  private LinkedHashMap<String, String> previewBreadcrumb;
+  private String id;
+  private String downloadUrl;
+  private String version;
+  private String size;
+  private String drive;
+  private String lastEditor;
 
   public EcmsSearchResult(String url,
                           String urlOnImage,
@@ -97,6 +105,31 @@ public class EcmsSearchResult extends SearchResult {
     this.breadcrumb = breadcrumb;
   }
   
+  public EcmsSearchResult(String url,
+                          String title,
+                          long date,
+                          long relevancy,
+                          String fileType,
+                          String nodePath,
+                          LinkedHashMap<String, String> previewBreadcrumb,
+                          String id,
+                          String downloadUrl,
+                          String version,
+                          String size,
+                          String drive,
+                          String lastEditor) {
+    super(url, title, null, null, null, date, relevancy);
+    this.fileType = fileType;
+    this.nodePath = nodePath;
+    this.previewBreadcrumb = previewBreadcrumb;
+    this.id = id;
+    this.downloadUrl = downloadUrl;
+    this.version = version;
+    this.size = size;
+    this.drive = drive;
+    this.lastEditor = lastEditor;
+  }
+
   public String getFileType() {
     return this.fileType;
   }
@@ -127,5 +160,103 @@ public class EcmsSearchResult extends SearchResult {
 
   public void setBreadcrumb(Map<String, List<String>> breadcrumb) {
     this.breadcrumb = breadcrumb;
+  }
+
+  /**
+   * @return the id
+   */
+  public String getId() {
+    return id;
+  }
+
+  /**
+   * @param id the id to set
+   */
+  public void setId(String id) {
+    this.id = id;
+  }
+
+  /**
+   * @return the downloadUrl
+   */
+  public String getDownloadUrl() {
+    return downloadUrl;
+  }
+
+  /**
+   * @param downloadUrl the downloadUrl to set
+   */
+  public void setDownloadUrl(String downloadUrl) {
+    this.downloadUrl = downloadUrl;
+  }
+
+  /**
+   * @return the version
+   */
+  public String getVersion() {
+    return version;
+  }
+
+  /**
+   * @param version the version to set
+   */
+  public void setVersion(String version) {
+    this.version = version;
+  }
+
+  /**
+   * @return the size
+   */
+  public String getSize() {
+    return size;
+  }
+
+  /**
+   * @param size the size to set
+   */
+  public void setSize(String size) {
+    this.size = size;
+  }
+
+  /**
+   * @return the drive
+   */
+  public String getDrive() {
+    return drive;
+  }
+
+  /**
+   * @param drive the drive to set
+   */
+  public void setDrive(String drive) {
+    this.drive = drive;
+  }
+
+  /**
+   * @return the lastEditor
+   */
+  public String getLastEditor() {
+    return lastEditor;
+  }
+
+  /**
+   * @param lastEditor the lastEditor to set
+   */
+  public void setLastEditor(String lastEditor) {
+    this.lastEditor = lastEditor;
+  }
+
+  /**
+   * @return the previewBreadcrumb
+   */
+  public LinkedHashMap<String, String> getPreviewBreadcrumb() {
+    return previewBreadcrumb;
+  }
+
+  /**
+   * @param previewBreadcrumb the previewBreadcrumb to set
+   */
+  public void setPreviewBreadcrumb(LinkedHashMap<String, String> previewBreadcrumb) {
+    this.previewBreadcrumb = previewBreadcrumb;
   }
 }
