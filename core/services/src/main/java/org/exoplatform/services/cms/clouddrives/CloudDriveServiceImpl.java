@@ -36,8 +36,6 @@ import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 import javax.jcr.query.Query;
 
-import org.exoplatform.services.cms.drives.ManageDriveService;
-import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.picocontainer.Startable;
 import org.exoplatform.container.component.ComponentPlugin;
 import org.exoplatform.services.cms.clouddrives.features.CloudDriveFeatures;
@@ -60,51 +58,6 @@ import org.exoplatform.services.log.Log;
  * @version $Id: CloudDriveService.java 00000 Sep 7, 2012 pnedonosko $
  */
 public class CloudDriveServiceImpl implements CloudDriveService, Startable {
-
-  /**
-   * The Constant DRIVE_PERMISSIONS.
-   */
-  public static final String DRIVE_PERMISSIONS = "*:/platform/user";
-
-  /**
-   * The constant DRIVE_VIEWS.
-   */
-  public static final String DRIVE_VIEWS = "admin-view, system-view";
-
-  /**
-   * The constant DRIVE_ICON.
-   */
-  public static final String DRIVE_ICON = "";
-
-  /**
-   * The constant DRIVE_VIEW_REFERENCES.
-   */
-  public static final boolean DRIVE_VIEW_REFERENCES = true;
-
-  /**
-   * The constant DRIVE_VIEW_NON_DOCUMENT.
-   */
-  public static final boolean DRIVE_VIEW_NON_DOCUMENT = true;
-
-  /**
-   * The constant DRIVE_VIEW_SIDE_BAR.
-   */
-  public static final boolean DRIVE_VIEW_SIDE_BAR = true;
-
-  /**
-   * The constant DRIVE_SHOW_HIDDEN_NODE.
-   */
-  public static final boolean DRIVE_SHOW_HIDDEN_NODE = false;
-
-  /**
-   * The constant DRIVE_ALLOW_CREATE_FOLDER.
-   */
-  public static final String DRIVE_ALLOW_CREATE_FOLDER = "nt:folder,nt:unstructured";
-
-  /**
-   * The constant DRIVE_ALLOW_NODE_TYPES_ON_TREE.
-   */
-  public static final String DRIVE_ALLOW_NODE_TYPES_ON_TREE = "*";
 
   /**
    * Listener for disconnects and removals of local drives made not via
@@ -133,6 +86,10 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
     @Override
     public void onRemove(CloudDriveEvent event) {
       cleanUserCaches(event.getUser());
+
+      if (documentsDriveInitializer != null) {
+        documentsDriveInitializer.deleteDocumentDrive(event);
+      }
     }
 
     /**
@@ -205,6 +162,11 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
   protected CloudDriveEnvironment                            commandEnv;
 
   /**
+   * The Documents drive initializer.
+   */
+  protected CloudDriveDocumentsDriveInitializer              documentsDriveInitializer;
+
+  /**
    * Cloud Drive service with storage in JCR and with managed features.
    * 
    * @param jcrService {@link RepositoryService}
@@ -264,6 +226,9 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
     } else if (plugin instanceof CloudFileSynchronizer) {
       // sync plugin
       fileSynchronizers.add((CloudFileSynchronizer) plugin);
+    } else if (plugin instanceof CloudDriveDocumentsDriveInitializer) {
+      // drive plugin
+      documentsDriveInitializer = (CloudDriveDocumentsDriveInitializer) plugin;
     } else {
       LOG.warn("Cannot recognize component plugin for " + plugin.getName() + ": type " + plugin.getClass()
           + " not supported for addition");
@@ -463,28 +428,12 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
               user.getId(),
               user.getProvider())) {
 
-        ManageDriveService manageDriveService = WCMCoreUtils.getService(ManageDriveService.class);
-
         CloudDrive local = conn.createDrive(user, driveNode);
         local.configure(commandEnv, fileSynchronizers);
         registerDrive(user, local, repoName);
 
-        try {
-          manageDriveService.addDrive(local.getTitle(),
-                  local.getWorkspace(),
-                  DRIVE_PERMISSIONS,
-                  local.getPath(),
-                  DRIVE_VIEWS,
-                  DRIVE_ICON,
-                  DRIVE_VIEW_REFERENCES,
-                  DRIVE_VIEW_NON_DOCUMENT,
-                  DRIVE_VIEW_SIDE_BAR,
-                  DRIVE_SHOW_HIDDEN_NODE,
-                  DRIVE_ALLOW_CREATE_FOLDER,
-                  DRIVE_ALLOW_NODE_TYPES_ON_TREE);
-        } catch (Exception e) {
-          LOG.error("Error adding a drive '" + local.getTitle() + "' by ManageDriveService for user " + user.getEmail(), e);
-          throw new CloudDriveException("Cannot add a drive (addDrive part) for user " + user.getEmail());
+        if (documentsDriveInitializer != null) {
+          documentsDriveInitializer.addDocumentsDrive(local, driveNode);
         }
 
         return local;

@@ -141,6 +141,16 @@
     </component-plugin>
   </external-component-plugins>
 
+  <!-- use this plugin in order to add a new cloud drive (or delete added) as a documents drive in ECMS -->
+  <external-component-plugins>
+    <target-component>org.exoplatform.services.cms.clouddrives.CloudDriveService</target-component>
+    <component-plugin>
+      <name>add.portalenv</name>
+      <set-method>addPlugin</set-method>
+      <type>org.exoplatform.services.cms.clouddrives.CloudDriveDocumentsDriveInitializer</type>
+    </component-plugin>
+  </external-component-plugins>
+
   <external-component-plugins>
     <target-component>org.exoplatform.services.cms.clouddrives.utils.ExtendedMimeTypeResolver</target-component>
     <component-plugin>
