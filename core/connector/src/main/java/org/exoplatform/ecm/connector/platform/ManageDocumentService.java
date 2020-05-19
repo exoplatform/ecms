@@ -526,13 +526,14 @@ public class ManageDocumentService implements ResourceContainer {
         break;
       }
     }
+    Session session = getSession(workspaceName);
     try {
-      getSession(workspaceName).checkPermission(child.getPath(), PermissionType.REMOVE);
+      session.checkPermission(child.getPath(), PermissionType.REMOVE);
     } catch (Exception e) {
       canRemove = false;
     }
     try {
-      getSession(workspaceName).checkPermission(child.getPath(), PermissionType.ADD_NODE);
+      session.checkPermission(child.getPath(), PermissionType.ADD_NODE);
     } catch (Exception e) {
       canAddChild = false;
     }
@@ -547,6 +548,33 @@ public class ManageDocumentService implements ResourceContainer {
     folder.setAttribute("currentFolder", currentFolder);
     folder.setAttribute("hasChild", String.valueOf(hasChild));
     folder.setAttribute("titlePath", createTitlePath(driveName, workspaceName, currentFolder));
+    
+    //
+    CloudDrive cloudDrive = cloudDrives.findDrive(child);
+    CloudFile cloudFile = null;
+    if (cloudDrive != null && cloudDrive.isConnected()) {
+      // It's connected Cloud Drive file
+      try {
+        cloudFile = cloudDrive.getFile(child.getPath());
+        if (cloudFile.isConnected()) {
+          if (cloudFile.isFolder()) {
+            folder.setAttribute("isCloudFile", Boolean.TRUE.toString());
+            folder.setAttribute("isConnected", Boolean.TRUE.toString());
+          } // otherwise we don't want show them
+        } else {
+          folder.setAttribute("isCloudFile", Boolean.TRUE.toString());
+          folder.setAttribute("isConnected", Boolean.FALSE.toString());
+        }
+      } catch (NotYetCloudFileException e) {
+        folder.setAttribute("isCloudFile", Boolean.TRUE.toString());
+        folder.setAttribute("isConnected", Boolean.FALSE.toString());
+      } catch (CloudDriveException e) {
+        LOG.warn("Error reading cloud folder {}: {}", child.getPath(), e.getMessage());
+      }
+    } 
+    if (cloudFile == null) {
+      // It's local storage folder
+    }
     return folder;
   }
 
@@ -570,15 +598,12 @@ public class ManageDocumentService implements ResourceContainer {
     } else {
       file.setAttribute("nodeType", sourceNode.getPrimaryNodeType().getName());
     }
-
     try {
       getSession(workspaceName).checkPermission(sourceNode.getPath(), PermissionType.REMOVE);
     } catch (Exception e) {
       canRemove = false;
     }
     file.setAttribute("canRemove", String.valueOf(canRemove));
-    
-    
     SimpleDateFormat formatter = (SimpleDateFormat) SimpleDateFormat.getDateTimeInstance(SimpleDateFormat.SHORT,
                                                                                          SimpleDateFormat.SHORT);
     CloudDrive cloudDrive = cloudDrives.findDrive(displayNode);
@@ -588,21 +613,22 @@ public class ManageDocumentService implements ResourceContainer {
       try {
         cloudFile = cloudDrive.getFile(displayNode.getPath());
         if (cloudFile.isConnected()) {
-          file.setAttribute("isCloudFile", "true");
-          file.setAttribute("isConnected", "true");
-          //
-          file.setAttribute("dateCreated", formatter.format(cloudFile.getCreatedDate().getTime()));
-          file.setAttribute("dateModified", formatter.format(cloudFile.getModifiedDate().getTime()));
-          file.setAttribute("lastModifier", cloudFile.getLastUser());
-          file.setAttribute("creator", cloudFile.getAuthor());
-          file.setAttribute("size", String.valueOf(cloudFile.getSize()));
+          if (!cloudFile.isFolder()) {
+            file.setAttribute("isCloudFile", Boolean.TRUE.toString());
+            file.setAttribute("isConnected", Boolean.TRUE.toString());
+            file.setAttribute("dateCreated", formatter.format(cloudFile.getCreatedDate().getTime()));
+            file.setAttribute("dateModified", formatter.format(cloudFile.getModifiedDate().getTime()));
+            file.setAttribute("lastModifier", cloudFile.getLastUser());
+            file.setAttribute("creator", cloudFile.getAuthor());
+            file.setAttribute("size", String.valueOf(cloudFile.getSize()));  
+          } // otherwise we don't want show it
         } else {
-          file.setAttribute("isCloudFile", "true");
-          file.setAttribute("isConnected", "false");
+          file.setAttribute("isCloudFile", Boolean.TRUE.toString());
+          file.setAttribute("isConnected", Boolean.FALSE.toString());
         }
       } catch (NotYetCloudFileException e) {
-        file.setAttribute("isCloudFile", "true");
-        file.setAttribute("isConnected", "false");
+        file.setAttribute("isCloudFile", Boolean.TRUE.toString());
+        file.setAttribute("isConnected", Boolean.FALSE.toString());
       } catch (CloudDriveException e) {
         LOG.warn("Error reading cloud file {}: {}", displayNode.getPath(), e.getMessage());
       }
@@ -624,7 +650,6 @@ public class ManageDocumentService implements ResourceContainer {
       long size = sourceNode.getNode("jcr:content").getProperty("jcr:data").getLength();
       file.setAttribute("size", String.valueOf(size));
     }
-
     return file;
   }
   
