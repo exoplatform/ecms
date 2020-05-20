@@ -1,6 +1,6 @@
 package org.exoplatform.services.cms.clouddrives;
 
-import org.exoplatform.container.xml.ComponentPlugin;
+import org.exoplatform.container.component.BaseComponentPlugin;
 import org.exoplatform.services.cms.drives.ManageDriveService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
@@ -9,7 +9,7 @@ import org.exoplatform.services.security.ConversationState;
 /**
  * The type Cloud drive documents drive initializer.
  */
-public class CloudDriveDocumentsDriveInitializer extends ComponentPlugin implements CloudDriveListener {
+public class CloudDriveDocumentsDriveInitializer extends BaseComponentPlugin implements CloudDriveListener {
 
   /**
    * The Constant LOG.
