@@ -32,12 +32,11 @@ export function getRecentSpacesDocuments(limit) {
 }
 
 export function getFavoriteDocuments(limit) {
-  //const url = `/portal/rest/search?q=news&sort=date&limit=${limit}`;
-  const url = `/portal/rest/search/documents/favorite?limit=${limit}`;
+  const url = `/portal/rest/documents/favorite?limit=${limit}`;
   return getDocuments(url);
 }
 
 export function getSharedDocuments(limit) {
-  const url = `/portal/rest/search/documents/shared?limit=${limit}`;
+  const url = `/portal/rest/documents/shared?limit=${limit}`;
   return getDocuments(url);
 }

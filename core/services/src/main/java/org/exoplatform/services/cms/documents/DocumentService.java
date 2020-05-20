@@ -253,27 +253,17 @@ public interface DocumentService {
     throw new UnsupportedOperationException();
   }
   
-  /**
-   * Gets my work documents.
-   *
-   * @param userId the userId
-   * @param limit the limit
-   * @return my work documents
-   */
-  default List<Document> getMyWorkDocuments(String userId, int limit) throws Exception {
-    throw new UnsupportedOperationException();
-  }
-  
-  /**
-   * Gets the private documents.
-   *
-   * @param userId the userId
-   * @param limit the limit
-   * @return the private documents
-   */
-  default List<Document> getPrivateDocuments(String userId, int limit) throws Exception {
-    throw new UnsupportedOperationException();
-  }
+//  /**
+//   * Gets my work documents.
+//   *
+//   * @param userId the userId
+//   * @param limit the limit
+//   * @return my work documents
+//   */
+//  default List<Document> getMyWorkDocuments(String userId, int limit) throws Exception {
+//    throw new UnsupportedOperationException();
+//  }
+//  
   
   /**
    * Gets the recent spaces documents.

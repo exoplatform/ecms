@@ -20,10 +20,8 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriInfo;
 
 import org.exoplatform.commons.api.search.data.SearchResult;
 import org.exoplatform.commons.search.es.ElasticSearchFilter;
@@ -33,7 +31,6 @@ import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.rest.resource.ResourceContainer;
 import org.exoplatform.services.security.ConversationState;
-import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.search.connector.FileSearchRestServiceConnector;
 
 /**
@@ -52,58 +49,6 @@ public class FileSearchRestService implements ResourceContainer {
   public FileSearchRestService(FileSearchRestServiceConnector fileSearchRestServiceConnector, NodeHierarchyCreator nodeHierarchyCreator) {
     this.fileSearchRestServiceConnector = fileSearchRestServiceConnector;
     this.nodeHierarchyCreator = nodeHierarchyCreator;
-  }
-
-  @GET
-  @Path("/favorite")
-  @RolesAllowed("users")
-  @Produces(MediaType.APPLICATION_JSON)
-  @ApiOperation(value = "Search favorite documents",
-      httpMethod = "GET",
-      response = Response.class,
-      notes = "This returns favorite documents")
-  @ApiResponses(value = {
-      @ApiResponse(code = 200, message = "Request fulfilled") })
-  public Response searchFavoriteDocuments(@Context UriInfo uriInfo,
-                                       @ApiParam(value = "Limit", required = false, defaultValue = "20") @QueryParam("limit") int limit) throws Exception {
-    if (limit <= 0) {
-      limit = DEFAULT_LIMIT;
-    }
-    Node userPrivateNode = getUserPrivateNode();
-    Collection<SearchResult> favoriteDocuments = new ArrayList<SearchResult>();
-    if (userPrivateNode.hasNode(NodetypeConstant.FAVORITE)) {
-      List<ElasticSearchFilter> favoriteFilters = new ArrayList<ElasticSearchFilter>();
-      favoriteFilters.add(getFileTypesFilter());
-      favoriteFilters.add(getPathsFilter(Arrays.asList(((Node) userPrivateNode.getNode(NodetypeConstant.FAVORITE)).getPath())));
-      favoriteDocuments = fileSearchRestServiceConnector.filteredSearch(null, null, favoriteFilters, null, 0, limit, "date", "desc");
-    }
-    return Response.ok(favoriteDocuments).build();
-  }
-
-  @GET
-  @Path("/shared")
-  @RolesAllowed("users")
-  @Produces(MediaType.APPLICATION_JSON)
-  @ApiOperation(value = "Gets shared documents",
-      httpMethod = "GET",
-      response = Response.class,
-      notes = "This returns shared documents")
-  @ApiResponses(value = {
-      @ApiResponse(code = 200, message = "Request fulfilled") })
-  public Response searchSharedDocuments(@ApiParam(value = "Limit", required = false, defaultValue = "20") @QueryParam("limit") int limit) throws Exception {
-    if (limit <= 0) {
-      limit = DEFAULT_LIMIT;
-    }
-    Node userPrivateNode = getUserPrivateNode();
-    Node userDocumentsNode = (Node) userPrivateNode.getNode(NodetypeConstant.DOCUMENTS);
-    Collection<SearchResult> sharedDocuments = new ArrayList<SearchResult>();
-    if (userDocumentsNode.hasNode(NodetypeConstant.SHARED)) {
-      List<ElasticSearchFilter> sharedFilters = new ArrayList<ElasticSearchFilter>();
-      sharedFilters.add(getFileTypesFilter());
-      sharedFilters.add(getPathsFilter(Arrays.asList(((Node) userDocumentsNode.getNode(NodetypeConstant.SHARED)).getPath())));
-      sharedDocuments = fileSearchRestServiceConnector.filteredSearch(null, null, sharedFilters, null, 0, limit, "date", "desc");
-    }
-    return Response.ok(sharedDocuments).build();
   }
 
   @GET

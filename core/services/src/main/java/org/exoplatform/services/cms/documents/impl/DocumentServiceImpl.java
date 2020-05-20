@@ -723,9 +723,9 @@ public class DocumentServiceImpl implements DocumentService {
         Document document = new Document(originalDocumentNode.getUUID(),
                                          Utils.getTitle(originalDocumentNode),
                                          documentNodePath,
-                                         Utils.getSearchDocumentDrive(originalDocumentNode),
+                                         Utils.getSearchDocumentDrive(documentNode),
                                          Utils.getFileType(originalDocumentNode),
-                                         Utils.getDate(documentNode).getTime(),
+                                         Utils.getDate(documentNode).getTime().getTime(),
                                          getFilePreviewBreadCrumb(documentNode),
                                          getLinkInDocumentsApp(originalDocumentNode.getPath()),
                                          getDownloadUri(originalDocumentNode),
@@ -739,24 +739,15 @@ public class DocumentServiceImpl implements DocumentService {
     return documents;
   }
   
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public List<Document> getMyWorkDocuments(String userId, int limit) throws Exception {
-    String condition = " and (exo:owner = '" + userId + "' or exo:lastModifier = '" + userId + "')";
-    return getDocumentsByFolder(Utils.SPACES_NODE_PATH, condition, limit);
-  }
-  
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public List<Document> getPrivateDocuments(String userId, int limit) throws Exception {
-    SessionProvider sessionProvider = SessionProvider.createSystemProvider();
-    Node userNode = nodeHierarchyCreator.getUserNode(sessionProvider, userId);
-    return getDocumentsByFolder(userNode.getPath(), null, limit);
-  }
+//  /**
+//   * {@inheritDoc}
+//   */
+//  @Override
+//  public List<Document> getMyWorkDocuments(String userId, int limit) throws Exception {
+//    String condition = " and (exo:owner = '" + userId + "' or exo:lastModifier = '" + userId + "')";
+//    return getDocumentsByFolder(Utils.SPACES_NODE_PATH, condition, limit);
+//  }
+//  
   
   /**
    * {@inheritDoc}
@@ -789,13 +780,13 @@ public class DocumentServiceImpl implements DocumentService {
     return getDocumentsByFolder(sharedFolder, null, limit);
   }
 
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public List<Document> getRecentSpacesDocuments(int limit) throws Exception {
-    return getDocumentsByFolder(Utils.SPACES_NODE_PATH, null, limit);
-  }
+//  /**
+//   * {@inheritDoc}
+//   */
+//  @Override
+//  public List<Document> getRecentSpacesDocuments(int limit) throws Exception {
+//    return getDocumentsByFolder(Utils.SPACES_NODE_PATH, null, limit);
+//  }
 
   /**
    * Gets display name of current user. In case of any errors return current userId

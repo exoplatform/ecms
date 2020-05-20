@@ -42,9 +42,12 @@
         } else if (this.document.fileType.includes('word') || this.document.fileType.includes('opendocument') || this.document.fileType.includes('rtf') ) {
           icon.ico = 'mdi-file-word';
           icon.color = '#094d7f';
-        } else if (this.document.fileType.includes('textplain')) {
+        } else if (this.document.fileType.includes('plain')) {
           icon.ico = 'mdi-clipboard-text';
           icon.color = '#1c9bd7';
+        } else if (this.document.fileType.includes('image')) {
+          icon.ico = 'mdi-image';
+          icon.color = '#eab320';
         } else {
           icon.ico = 'mdi-file';
           icon.color = '#cdcccc';
@@ -98,7 +101,7 @@
             id: this.document.id,
             repository: 'repository',
             workspace: 'collaboration',
-            path: this.document.nodePath,
+            path: this.document.nodePath || this.document.path,
             title: this.document.title,
             downloadUrl: this.document.downloadUrl,
             openUrl: this.document.url,

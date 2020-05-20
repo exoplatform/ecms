@@ -116,38 +116,38 @@ public class DocumentRestService implements ResourceContainer {
     return Response.ok(documentService.getSharedDocuments(userId, limit)).build();
   }
 
-  @GET
-  @Path("/recent")
-  @RolesAllowed("users")
-  @Produces(MediaType.APPLICATION_JSON)
-  @ApiOperation(value = "Gets recent documents",
-      httpMethod = "GET",
-      response = Response.class,
-      notes = "This returns recent documents")
-  @ApiResponses(value = {
-      @ApiResponse(code = 200, message = "Request fulfilled") })
-  public Response getRecentDocuments(@ApiParam(value = "Limit", required = false, defaultValue = "20") @QueryParam("limit") int limit) throws Exception {
-    if (limit <= 0) {
-      limit = DEFAULT_LIMIT;
-    }
-    String userId = ConversationState.getCurrent().getIdentity().getUserId();
-    return Response.ok(documentService.getMyWorkDocuments(userId, limit)).build();
-  }
-  
-  @GET
-  @Path("/recentSpaces")
-  @RolesAllowed("users")
-  @Produces(MediaType.APPLICATION_JSON)
-  @ApiOperation(value = "Gets recent spaces documents",
-      httpMethod = "GET",
-      response = Response.class,
-      notes = "This returns recent spaces documents")
-  @ApiResponses(value = {
-      @ApiResponse(code = 200, message = "Request fulfilled") })
-  public Response getRecentSpacesDocuments(@ApiParam(value = "Limit", required = false, defaultValue = "20") @QueryParam("limit") int limit) throws Exception {
-    if (limit <= 0) {
-      limit = DEFAULT_LIMIT;
-    }
-    return Response.ok(documentService.getRecentSpacesDocuments(limit)).build();
-  }
+//  @GET
+//  @Path("/recent")
+//  @RolesAllowed("users")
+//  @Produces(MediaType.APPLICATION_JSON)
+//  @ApiOperation(value = "Gets recent documents",
+//      httpMethod = "GET",
+//      response = Response.class,
+//      notes = "This returns recent documents")
+//  @ApiResponses(value = {
+//      @ApiResponse(code = 200, message = "Request fulfilled") })
+//  public Response getRecentDocuments(@ApiParam(value = "Limit", required = false, defaultValue = "20") @QueryParam("limit") int limit) throws Exception {
+//    if (limit <= 0) {
+//      limit = DEFAULT_LIMIT;
+//    }
+//    String userId = ConversationState.getCurrent().getIdentity().getUserId();
+//    return Response.ok(documentService.getMyWorkDocuments(userId, limit)).build();
+//  }
+//  
+//  @GET
+//  @Path("/recentSpaces")
+//  @RolesAllowed("users")
+//  @Produces(MediaType.APPLICATION_JSON)
+//  @ApiOperation(value = "Gets recent spaces documents",
+//      httpMethod = "GET",
+//      response = Response.class,
+//      notes = "This returns recent spaces documents")
+//  @ApiResponses(value = {
+//      @ApiResponse(code = 200, message = "Request fulfilled") })
+//  public Response getRecentSpacesDocuments(@ApiParam(value = "Limit", required = false, defaultValue = "20") @QueryParam("limit") int limit) throws Exception {
+//    if (limit <= 0) {
+//      limit = DEFAULT_LIMIT;
+//    }
+//    return Response.ok(documentService.getRecentSpacesDocuments(limit)).build();
+//  }
 }

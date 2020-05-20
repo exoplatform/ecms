@@ -97,6 +97,8 @@ public class Utils {
   public static final String PUBLIC = "Public";
   
   public static final String SPACES_NODE_PATH = "/Groups/spaces";
+  
+  final static public String SPACE_GROUP = "/spaces";
 
   public static final String[] SPECIFIC_FOLDERS = { "exo:folksonomyFolder", NodetypeConstant.EXO_DOCUMENTFOLDER, NodetypeConstant.EXO_FAVOURITE_FOLDER,
       NodetypeConstant.EXO_PICTUREFOLDER, NodetypeConstant.EXO_MUSICFOLDER, NodetypeConstant.EXO_VIDEOFOLDER, NodetypeConstant.EXO_SEARCHFOLDER };
@@ -1047,7 +1049,7 @@ public class Utils {
    String[] splittedNodePath = nodePath.split(SEPARATOR);
    if (splittedNodePath.length > 3) {
      SpaceService spaceService = WCMCoreUtils.getService(SpaceService.class);
-     Space space = spaceService.getSpaceByPrettyName(splittedNodePath[3]);
+     Space space = spaceService.getSpaceByGroupId(SPACE_GROUP + SEPARATOR + splittedNodePath[3]);
      if (space != null) {
        return space.getDisplayName();
      }

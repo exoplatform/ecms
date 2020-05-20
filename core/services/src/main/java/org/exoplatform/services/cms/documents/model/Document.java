@@ -17,7 +17,6 @@
 package org.exoplatform.services.cms.documents.model;
 
 import java.util.Calendar;
-import java.util.Date;
 import java.util.LinkedHashMap;
 
 /**
@@ -41,7 +40,7 @@ public class Document {
   
   private String drive;
   
-  private String mimeType;
+  private String fileType;
 
   private String   lastEditor;
 
@@ -49,9 +48,9 @@ public class Document {
 
   private Calendar dateCreated;
   
-  private Date dateModified;
+  private long date;
   
-  private LinkedHashMap<String, String> breadCrumb;
+  private LinkedHashMap<String, String> previewBreadcrumb;
   
   private String openUrl;
   
@@ -65,9 +64,9 @@ public class Document {
                   String title,
                   String path,
                   String drive,
-                  String mimeType,
-                  Date dateModified,
-                  LinkedHashMap<String, String> breadCrumb,
+                  String fileType,
+                  long date,
+                  LinkedHashMap<String, String> previewBreadcrumb,
                   String openUrl,
                   String downloadUrl,
                   int version,
@@ -77,9 +76,9 @@ public class Document {
     this.title = title;
     this.path = path;
     this.drive = drive;
-    this.mimeType = mimeType;
-    this.dateModified = dateModified;
-    this.breadCrumb = breadCrumb;
+    this.fileType = fileType;
+    this.date = date;
+    this.previewBreadcrumb = previewBreadcrumb;
     this.openUrl = openUrl;
     this.downloadUrl = downloadUrl;
     this.version = version;
@@ -205,45 +204,45 @@ public class Document {
   }
 
   /**
-   * @return the mimeType
+   * @return the date
    */
-  public String getMimeType() {
-    return mimeType;
+  public long getDate() {
+    return date;
   }
 
   /**
-   * @return the dateModified
+   * @param date the date to set
    */
-  public Date getDateModified() {
-    return dateModified;
+  public void setDate(long date) {
+    this.date = date;
   }
 
   /**
-   * @param dateModified the dateModified to set
+   * @return the fileType
    */
-  public void setDateModified(Date dateModified) {
-    this.dateModified = dateModified;
+  public String getFileType() {
+    return fileType;
   }
 
   /**
-   * @param mimeType the mimeType to set
+   * @param fileType the fileType to set
    */
-  public void setMimeType(String mimeType) {
-    this.mimeType = mimeType;
+  public void setFileType(String fileType) {
+    this.fileType = fileType;
   }
 
   /**
-   * @return the breadCrumb
+   * @return the previewBreadcrumb
    */
-  public LinkedHashMap<String, String> getBreadCrumb() {
-    return breadCrumb;
+  public LinkedHashMap<String, String> getPreviewBreadcrumb() {
+    return previewBreadcrumb;
   }
 
   /**
-   * @param breadCrumb the breadCrumb to set
+   * @param previewBreadcrumb the previewBreadcrumb to set
    */
-  public void setBreadCrumb(LinkedHashMap<String, String> breadCrumb) {
-    this.breadCrumb = breadCrumb;
+  public void setPreviewBreadcrumb(LinkedHashMap<String, String> previewBreadcrumb) {
+    this.previewBreadcrumb = previewBreadcrumb;
   }
 
   /**
