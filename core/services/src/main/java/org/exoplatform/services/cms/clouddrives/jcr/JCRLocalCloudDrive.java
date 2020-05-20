@@ -930,7 +930,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
       }
 
       // fire listeners
-      listeners.fireOnRemove(new CloudDriveEvent(getUser(), rootWorkspace, rootPath));
+      listeners.fireOnRemove(new CloudDriveEvent(getUser(), rootWorkspace, rootPath, title()));
     }
 
     /**
@@ -6637,5 +6637,12 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
    */
   protected boolean isPrivilegedUser(String userId) {
     return IdentityHelper.SYSTEM_USER_ID.equals(userId) || IdentityHelper.ROOT_USER_ID.equals(userId);
+  }
+
+  /**
+   * Fire create.
+   */
+  protected void fireCreated() {
+    listeners.fireCreated(new CloudDriveEvent(getUser(), rootWorkspace, jcrListener.initialRootPath, title()));
   }
 }

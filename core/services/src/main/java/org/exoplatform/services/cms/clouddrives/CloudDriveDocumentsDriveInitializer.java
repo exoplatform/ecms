@@ -1,17 +1,14 @@
 package org.exoplatform.services.cms.clouddrives;
 
-import org.exoplatform.container.component.BaseComponentPlugin;
 import org.exoplatform.services.cms.drives.ManageDriveService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
-
-import javax.jcr.Node;
-import javax.jcr.RepositoryException;
+import org.exoplatform.services.security.ConversationState;
 
 /**
  * The type Cloud drive documents drive initializer.
  */
-public class CloudDriveDocumentsDriveInitializer extends BaseComponentPlugin {
+public class CloudDriveDocumentsDriveInitializer extends BaseCloudDriveListener {
 
   /**
    * The Constant LOG.
@@ -76,14 +73,14 @@ public class CloudDriveDocumentsDriveInitializer extends BaseComponentPlugin {
   /**
    * Add documents drive.
    *
-   * @param local the local
+   * @param event the local
    */
-  public void addDocumentsDrive(CloudDrive local, Node driveNode) throws RepositoryException, DriveRemovedException {
+  public void addDocumentsDrive(CloudDriveEvent event) {
     try {
-      manageDriveService.addDrive(local.getTitle(),
-                                  local.getWorkspace(),
-                                  driveNode.getSession().getUserID(),
-                                  local.getPath(),
+      manageDriveService.addDrive(event.getTitle(),
+                                  event.getWorkspace(),
+                                  ConversationState.getCurrent().getIdentity().getUserId(),
+                                  event.getNodePath(),
                                   DRIVE_VIEWS,
                                   DRIVE_ICON,
                                   DRIVE_VIEW_REFERENCES,
@@ -93,7 +90,7 @@ public class CloudDriveDocumentsDriveInitializer extends BaseComponentPlugin {
                                   DRIVE_ALLOW_CREATE_FOLDER,
                                   DRIVE_ALLOW_NODE_TYPES_ON_TREE);
     } catch (Exception e) {
-      LOG.warn("Warning adding a drive '" + local.getTitle() + "' by ManageDriveService", e);
+      LOG.warn("Warning adding a drive '" + event.getTitle() + "' by ManageDriveService", e);
     }
   }
 
@@ -103,15 +100,26 @@ public class CloudDriveDocumentsDriveInitializer extends BaseComponentPlugin {
    * @param event the event
    */
   public void deleteDocumentDrive(CloudDriveEvent event) {
-    event.getRemoved();
-
-    String removedDriveName = new StringBuilder(event.getUser().getProvider().getName()).append(" - ")
-                                                                                        .append(event.getUser().getEmail())
-                                                                                        .toString();
     try {
-      manageDriveService.removeDrive(removedDriveName);
+      manageDriveService.removeDrive(event.getTitle());
     } catch (Exception e) {
-      LOG.warn("Warning removing a drive '" + removedDriveName + "' by ManageDriveService", e);
+      LOG.warn("Warning removing a drive '" + event.getTitle() + "' by ManageDriveService", e);
     }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void onRemove(CloudDriveEvent event) {
+    deleteDocumentDrive(event);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void onCreate(CloudDriveEvent event) {
+    addDocumentsDrive(event);
   }
 }

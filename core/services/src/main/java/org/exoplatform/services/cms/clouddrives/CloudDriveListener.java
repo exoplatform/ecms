@@ -73,4 +73,11 @@ public interface CloudDriveListener {
    * @see CloudDrive#synchronize()
    */
   void onError(CloudDriveEvent event, Throwable error, String operationName);
+
+  /**
+   * Will be fired while successful creation of a drive
+   *
+   * @param event {@link CloudDriveEvent}
+   */
+  void onCreate(CloudDriveEvent event);
 }

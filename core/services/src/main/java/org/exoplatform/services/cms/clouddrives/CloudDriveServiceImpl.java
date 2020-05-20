@@ -86,10 +86,6 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
     @Override
     public void onRemove(CloudDriveEvent event) {
       cleanUserCaches(event.getUser());
-
-      if (documentsDriveInitializer != null) {
-        documentsDriveInitializer.deleteDocumentDrive(event);
-      }
     }
 
     /**
@@ -162,11 +158,6 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
   protected CloudDriveEnvironment                            commandEnv;
 
   /**
-   * The Documents drive initializer.
-   */
-  protected CloudDriveDocumentsDriveInitializer              documentsDriveInitializer;
-
-  /**
    * Cloud Drive service with storage in JCR and with managed features.
    * 
    * @param jcrService {@link RepositoryService}
@@ -227,8 +218,8 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
       // sync plugin
       fileSynchronizers.add((CloudFileSynchronizer) plugin);
     } else if (plugin instanceof CloudDriveDocumentsDriveInitializer) {
-      // drive plugin
-      documentsDriveInitializer = (CloudDriveDocumentsDriveInitializer) plugin;
+      // drive initializer
+      drivesListeners.add((CloudDriveDocumentsDriveInitializer) plugin);
     } else {
       LOG.warn("Cannot recognize component plugin for " + plugin.getName() + ": type " + plugin.getClass()
           + " not supported for addition");
@@ -432,9 +423,7 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
         local.configure(commandEnv, fileSynchronizers);
         registerDrive(user, local, repoName);
 
-        if (documentsDriveInitializer != null) {
-          documentsDriveInitializer.addDocumentsDrive(local, driveNode);
-        }
+        local.fireCreated();
 
         return local;
       } else {

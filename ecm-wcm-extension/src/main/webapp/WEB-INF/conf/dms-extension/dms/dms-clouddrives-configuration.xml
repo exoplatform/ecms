@@ -139,13 +139,9 @@
       <set-method>addPlugin</set-method>
       <type>org.exoplatform.services.cms.clouddrives.webui.PortalEnvironment</type>
     </component-plugin>
-  </external-component-plugins>
-
-  <!-- use this plugin in order to add a new cloud drive (or delete added) as a documents drive in ECMS -->
-  <external-component-plugins>
-    <target-component>org.exoplatform.services.cms.clouddrives.CloudDriveService</target-component>
+    <!-- use this plugin in order to add a new cloud drive (or delete added) as a documents drive in ECMS -->
     <component-plugin>
-      <name>add.portalenv</name>
+      <name>add.dmsdriveinitializer</name>
       <set-method>addPlugin</set-method>
       <type>org.exoplatform.services.cms.clouddrives.CloudDriveDocumentsDriveInitializer</type>
     </component-plugin>

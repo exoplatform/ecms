@@ -288,6 +288,22 @@ public abstract class CloudDrive {
         }
       }
     }
+
+    /**
+     * Fire create.
+     *
+     * @param event the event
+     */
+    public void fireCreated(CloudDriveEvent event) {
+      for (CloudDriveListener listener : registry) {
+        try {
+          listener.onCreate(event);
+        } catch (Throwable th) {
+          // nothing should prevent at this point
+          LOG.warn("Error firing onCreated listener on Cloud Drive '" + title() + "': " + th.getMessage(), th);
+        }
+      }
+    }
   }
 
   // *********** class body ************
@@ -654,4 +670,9 @@ public abstract class CloudDrive {
   protected abstract void initCopy(Node srcNode, Node destNode) throws SyncNotSupportedException,
                                                                 CloudDriveException,
                                                                 RepositoryException;
+
+  /**
+   * Fire create.
+   */
+  protected abstract void fireCreated();
 }
