@@ -420,7 +420,7 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
         local.configure(commandEnv, fileSynchronizers);
         registerDrive(user, local, repoName);
 
-        local.fireCreated();
+        local.initCreated();
 
         return local;
       } else {

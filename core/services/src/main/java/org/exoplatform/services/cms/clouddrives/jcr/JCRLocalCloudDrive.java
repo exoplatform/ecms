@@ -930,7 +930,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
       }
 
       // fire listeners
-      listeners.fireOnRemove(new CloudDriveEvent(getUser(), rootWorkspace, rootPath, title()));
+      listeners.fireOnRemove(new CloudDriveEvent(getUser(), getLocalUser(), rootWorkspace, rootPath, title()));
     }
 
     /**
@@ -1701,7 +1701,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
       save();
 
       // fire listeners
-      listeners.fireOnConnect(new CloudDriveEvent(getUser(), rootWorkspace, driveNode.getPath()));
+      listeners.fireOnConnect(new CloudDriveEvent(getUser(), getLocalUser(), rootWorkspace, driveNode.getPath(), title()));
     }
 
     /**
@@ -1807,10 +1807,12 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
       // fire listeners afterwards and only if actual changes have a place
       if (hasChanges) {
         listeners.fireOnSynchronized(new CloudDriveEvent(getUser(),
+                                                         getLocalUser(),
                                                          rootWorkspace,
                                                          driveNode.getPath(),
                                                          getFiles(),
-                                                         getRemoved()));
+                                                         getRemoved(), 
+                                                         title()));
       }
     }
 
@@ -2073,10 +2075,12 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
         // fire listeners afterwards and only if actual changes have a place
         if (hasChanges()) {
           listeners.fireOnSynchronized(new CloudDriveEvent(getUser(),
+                                                           getLocalUser(),
                                                            rootWorkspace,
                                                            driveNode.getPath(),
                                                            getFiles(),
-                                                           getRemoved()));
+                                                           getRemoved(), 
+                                                           title()));
         }
       } else {
         LOG.warn("Cannot synchronize file in cloud drive '" + title() + "': drive not connected");
@@ -3748,6 +3752,9 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
    * successful use this one cached.
    */
   private String                                          titleCached;
+  
+  /** Local user name cached like title as used in many places. */
+  private String localUserCached;
 
   /**
    * Create JCR backed {@link CloudDrive}. This method used for both newly
@@ -3786,10 +3793,6 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
     if (driveNode.isNodeType(ECD_CLOUDDRIVE)) {
       // ensure this existing CD node is of the same remote drive
       ensureSame(user, driveNode);
-
-      if (driveNode.hasProperty("exo:title")) {
-        titleCached = driveNode.getProperty("exo:title").getString();
-      }
       existing = true;
     } else {
       try {
@@ -3803,6 +3806,19 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
         throw e;
       }
       existing = false;
+    }
+    
+    if (driveNode.hasProperty("exo:title")) {
+      this.titleCached = driveNode.getProperty("exo:title").getString();
+    } else {
+      LOG.warn("Cloud Drive has not title set {}", driveNode.getPath());
+      this.titleCached = driveNode.getName();
+    }
+    if (driveNode.hasProperty("ecd:localUserName")) {
+      this.localUserCached = driveNode.getProperty("ecd:localUserName").getString();
+    } else {
+      LOG.warn("Cloud Drive has not local user set {}", driveNode.getPath());
+      this.localUserCached = driveNode.getSession().getUserID();
     }
 
     this.rootUUID = driveNode.getUUID();
@@ -3865,11 +3881,11 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
    * Gets the local user.
    *
    * @return the local user
-   * @throws DriveRemovedException the drive removed exception
-   * @throws RepositoryException the repository exception
    */
-  public String getLocalUser() throws DriveRemovedException, RepositoryException {
-    return rootNode(true).getProperty("ecd:localUserName").getString();
+  public String getLocalUser() {
+    return localUserCached;
+    // TODO cleanup
+    //return rootNode(true).getProperty("ecd:localUserName").getString();
   }
 
   /**
@@ -4265,9 +4281,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
     rootNode.addMixin(ECD_CLOUDDRIVE);
     if (!rootNode.hasProperty("exo:title")) {
       // default title
-      rootNode.setProperty("exo:title", titleCached = getUser().createDriveTitle());
-    } else {
-      titleCached = rootNode.getProperty("exo:title").getString();
+      rootNode.setProperty("exo:title", getUser().createDriveTitle());
     }
 
     rootNode.setProperty("ecd:connected", false);
@@ -4357,7 +4371,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
       disconnect(driveRoot);
 
       // finally fire listeners
-      listeners.fireOnDisconnect(new CloudDriveEvent(getUser(), rootWorkspace, driveRoot.getPath()));
+      listeners.fireOnDisconnect(new CloudDriveEvent(getUser(), getLocalUser(), rootWorkspace, driveRoot.getPath(), title()));
     }
   }
 
@@ -4381,7 +4395,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
       // implemented respecting the cloud provider sharing capabilities
       // (possible in dedicated connectors).
       String currentUser = currentUserName();
-      String driveOwner = rootNode(true).getProperty("ecd:localUserName").getString();
+      String driveOwner = getLocalUser();
       if (driveOwner.equals(currentUser)) {
         refreshAccess();
 
@@ -5296,7 +5310,9 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
     }
 
     try {
-      listeners.fireOnError(new CloudDriveEvent(getUser(), rootWorkspace, rootPath), error, commandName);
+      listeners.fireOnError(new CloudDriveEvent(getUser(), getLocalUser(), rootWorkspace, rootPath, title()),
+                            error,
+                            commandName);
     } catch (Throwable e) {
       LOG.warn("Error firing error '" + error.getMessage() + "' " + (commandName != null ? "of " + commandName + " command " : "")
           + "to listeners on Cloud Drive '" + title() + "':" + e.getMessage());
@@ -5913,7 +5929,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
   protected String title() {
     return titleCached;
   }
-
+  
   /**
    * Add Observation listener to removal from parent and addition to the Trash.
    *
@@ -6637,12 +6653,5 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
    */
   protected boolean isPrivilegedUser(String userId) {
     return IdentityHelper.SYSTEM_USER_ID.equals(userId) || IdentityHelper.ROOT_USER_ID.equals(userId);
-  }
-
-  /**
-   * Fire create.
-   */
-  protected void fireCreated() {
-    listeners.fireCreated(new CloudDriveEvent(getUser(), rootWorkspace, jcrListener.initialRootPath, title()));
   }
 }

@@ -290,11 +290,11 @@ public abstract class CloudDrive {
     }
 
     /**
-     * Fire create.
+     * Fire on created event.
      *
      * @param event the event
      */
-    public void fireCreated(CloudDriveEvent event) {
+    public void fireOnCreated(CloudDriveEvent event) {
       for (CloudDriveListener listener : registry) {
         try {
           listener.onCreate(event);
@@ -338,7 +338,7 @@ public abstract class CloudDrive {
   public void removeListener(CloudDriveListener listener) {
     listeners.registry.remove(listener);
   }
-
+  
   /**
    * Return cloud user related to this Cloud Drive.
    * 
@@ -567,6 +567,16 @@ public abstract class CloudDrive {
   public abstract boolean isDrive(Node node) throws DriveRemovedException, RepositoryException;
 
   // ********** internal stuff **********
+  
+  /**
+   * Initialize the drive after creation, this method should be invoked before first use of the drive.
+   *
+   * @throws RepositoryException if repository exception
+   * @throws DriveRemovedException if the drive was removed
+   */
+  protected void initCreated() throws RepositoryException, DriveRemovedException {
+    listeners.fireOnCreated(new CloudDriveEvent(getUser(), getLocalUser(), getWorkspace(), getPath(), title()));
+  }
 
   /**
    * Tells whether given node instance belongs to this Cloud Drive folder. <br>
@@ -671,8 +681,4 @@ public abstract class CloudDrive {
                                                                 CloudDriveException,
                                                                 RepositoryException;
 
-  /**
-   * Fire create.
-   */
-  protected abstract void fireCreated();
 }
