@@ -92,14 +92,14 @@ export default {
           }
 
           this.drivesInProgress[data.drive.title] = fullProgress;
-          this.$emit("updateDrivesInProgress", { drive: this.drivesInProgress });
+          // this.$emit("updateDrivesInProgress", { drive: this.drivesInProgress });
 
           this.$emit("updateProgress", { progress: fullProgress });
           const latency = 3000;
           setTimeout(() => {
 
             delete this.drivesInProgress[data.drive.title];
-            this.$emit("updateDrivesInProgress", { drive: this.drivesInProgress });
+            // this.$emit("updateDrivesInProgress", { drive: this.drivesInProgress });
 
             this.$emit("updateProgress", { progress: null });
           }, latency);
@@ -116,7 +116,7 @@ export default {
           if (progressData.drive.title) {
 
             this.drivesInProgress[progressData.drive.title] = progressData.progress;
-            this.$emit("updateDrivesInProgress", { drive: this.drivesInProgress });
+            // this.$emit("updateDrivesInProgress", { drive: this.drivesInProgress });
 
             if (!this.drivesOpened) {
               this.openDriveFolder(progressData.drive.path, progressData.drive.title);
@@ -132,21 +132,22 @@ export default {
     },
     openDriveFolder: function(path, title) {
       if (path) {
-        const folderPath = path.split("/").pop();
-        const createdDrive = {
-          id: folderPath,
-          name: folderPath,
-          title: title,
-          path: folderPath,
-          isSelected: true,
-          folderTypeCSSClass: "uiIcon24x24nt_folder",
-          type: "cloud",
-        };
-        this.$emit("addDrive", createdDrive);
+        console.log(title);
+        // const folderPath = path.split("/").pop();
+        // const createdDrive = {
+        //   id: folderPath,
+        //   name: folderPath,
+        //   title: title,
+        //   path: folderPath,
+        //   isSelected: true,
+        //   folderTypeCSSClass: "uiIcon24x24nt_folder",
+        //   type: "cloud",
+        // };
+        // this.$emit("addDrive", createdDrive);
         this.drivesOpened = true;
         this.showCloudDrawer = false;
       }
-    },
+    }
   },
 };
 </script>

@@ -360,9 +360,9 @@ export default {
         }
         self.setFoldersAndFiles(rootFolder);
         self.loadingFolders = false;
-      }).catch(() => {
+      }).catch(error => {
         this.loadingFolders = false;
-        this.errorMessage= `${this.$t('attachments.fetchFoldersAndFiles.error')}`;
+        this.errorMessage= `${this.$t('attachments.fetchFoldersAndFiles.error')}. ${error.message ? error.message : ''}`;
         this.showErrorMessage = true;
       });
     },
@@ -461,7 +461,9 @@ export default {
         } else if (fetchedDocuments[i].tagName === 'Files') {
           const fetchedFiles = fetchedDocuments[i].childNodes;
           for (let j = 0; j < fetchedFiles.length; j++) {
-            const fileExtension = `${fetchedFiles[j].getAttribute('name').split('.')[1].charAt(0).toUpperCase()}${fetchedFiles[j].getAttribute('name').split('.')[1].substring(1)}`;
+            const fileExtension = fetchedFiles[j].getAttribute('isCloudFile') 
+              ? fetchedFiles[j].getAttribute('nodeType') 
+              : `${fetchedFiles[j].getAttribute('name').split('.')[1].charAt(0).toUpperCase()}${fetchedFiles[j].getAttribute('name').split('.')[1].substring(1)}`;
             const fileTypeCSSClass = `uiBgd64x64File${fileExtension}`;
             const idAttribute = fetchedFiles[j].getAttribute('path').split('/').pop();
             const id = fetchedFiles[j].getAttribute('id');
