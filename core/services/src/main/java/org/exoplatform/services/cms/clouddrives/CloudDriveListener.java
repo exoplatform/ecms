@@ -28,11 +28,13 @@ package org.exoplatform.services.cms.clouddrives;
 public interface CloudDriveListener {
 
   /**
-   * Will be fired after successful connection of a drive to remote provider.
+   * Will be fired after successful creation of a drive to remote provider.
    * 
    * @param event {@link CloudDriveEvent}
    */
-  void onConnect(CloudDriveEvent event);
+  default void onConnect(CloudDriveEvent event){
+    // nothing
+  }
 
   /**
    * Will be fired after successful disconnection of a drive from remote
@@ -40,21 +42,27 @@ public interface CloudDriveListener {
    * 
    * @param event {@link CloudDriveEvent}
    */
-  void onDisconnect(CloudDriveEvent event);
+  default void onDisconnect(CloudDriveEvent event){
+// nothing
+  }
 
   /**
    * Will be fired just before a drive physical removal from JCR storage.
    * 
    * @param event {@link CloudDriveEvent}
    */
-  void onRemove(CloudDriveEvent event);
+  default void onRemove(CloudDriveEvent event){
+// nothing
+  }
 
   /**
    * Will be fired after the drive synchronization with its provider.
    * 
    * @param event {@link CloudDriveEvent}
    */
-  void onSynchronized(CloudDriveEvent event);
+  default void onSynchronized(CloudDriveEvent event){
+// nothing
+  }
 
   /**
    * Will be fired on an error happened during connect or synchronization of
@@ -72,12 +80,16 @@ public interface CloudDriveListener {
    * @see CloudDrive#connect()
    * @see CloudDrive#synchronize()
    */
-  void onError(CloudDriveEvent event, Throwable error, String operationName);
+  default void onError(CloudDriveEvent event, Throwable error, String operationName){
+// nothing
+  }
 
   /**
    * Will be fired while successful creation of a drive
    *
    * @param event {@link CloudDriveEvent}
    */
-  void onCreate(CloudDriveEvent event);
+  default void onCreate(CloudDriveEvent event){
+// nothing
+  }
 }

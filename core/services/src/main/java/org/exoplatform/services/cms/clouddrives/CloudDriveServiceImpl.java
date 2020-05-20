@@ -217,9 +217,6 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
     } else if (plugin instanceof CloudFileSynchronizer) {
       // sync plugin
       fileSynchronizers.add((CloudFileSynchronizer) plugin);
-    } else if (plugin instanceof CloudDriveDocumentsDriveInitializer) {
-      // drive initializer
-      drivesListeners.add((CloudDriveDocumentsDriveInitializer) plugin);
     } else {
       LOG.warn("Cannot recognize component plugin for " + plugin.getName() + ": type " + plugin.getClass()
           + " not supported for addition");

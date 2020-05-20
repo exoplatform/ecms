@@ -1,5 +1,6 @@
 package org.exoplatform.services.cms.clouddrives;
 
+import org.exoplatform.container.xml.ComponentPlugin;
 import org.exoplatform.services.cms.drives.ManageDriveService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
@@ -8,7 +9,7 @@ import org.exoplatform.services.security.ConversationState;
 /**
  * The type Cloud drive documents drive initializer.
  */
-public class CloudDriveDocumentsDriveInitializer extends BaseCloudDriveListener {
+public class CloudDriveDocumentsDriveInitializer extends ComponentPlugin implements CloudDriveListener {
 
   /**
    * The Constant LOG.
@@ -71,11 +72,11 @@ public class CloudDriveDocumentsDriveInitializer extends BaseCloudDriveListener 
   }
 
   /**
-   * Add documents drive.
+   * Add document drive.
    *
    * @param event the local
    */
-  public void addDocumentsDrive(CloudDriveEvent event) {
+  protected void addDocumentDrive(CloudDriveEvent event) {
     try {
       manageDriveService.addDrive(event.getTitle(),
                                   event.getWorkspace(),
@@ -99,7 +100,7 @@ public class CloudDriveDocumentsDriveInitializer extends BaseCloudDriveListener 
    *
    * @param event the event
    */
-  public void deleteDocumentDrive(CloudDriveEvent event) {
+  protected void deleteDocumentDrive(CloudDriveEvent event) {
     try {
       manageDriveService.removeDrive(event.getTitle());
     } catch (Exception e) {
@@ -120,6 +121,6 @@ public class CloudDriveDocumentsDriveInitializer extends BaseCloudDriveListener 
    */
   @Override
   public void onCreate(CloudDriveEvent event) {
-    addDocumentsDrive(event);
+    addDocumentDrive(event);
   }
 }

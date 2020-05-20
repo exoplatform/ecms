@@ -25,6 +25,7 @@ package org.exoplatform.services.cms.clouddrives;
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
  * @version $Id: BaseCloudDriveListener.java 00000 Jan 8, 2013 pnedonosko $
  */
+@Deprecated
 public class BaseCloudDriveListener implements CloudDriveListener {
 
   /**
