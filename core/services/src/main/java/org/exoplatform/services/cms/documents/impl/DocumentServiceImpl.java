@@ -690,7 +690,13 @@ public class DocumentServiceImpl implements DocumentService {
    List<Document> documents = new ArrayList<Document>();
    if (folder != null) {
      String query = "select * from nt:base where jcr:path like '" + folder + "/%' "
-         + "and (exo:primaryType = 'nt:file' or jcr:primaryType = 'nt:file')"
+         + "and (exo:primaryType = 'nt:file' or jcr:primaryType = 'nt:file') "
+         + "and (exo:fileType like '%pdf%' "
+         + "or exo:fileType like '%text%' "
+         + "or exo:fileType like '%opendocument%' "
+         + "or exo:fileType like '%odt%' "
+         + "or exo:fileType like '%officedocument%' "
+         + "or exo:fileType like '%ms%') "
          + (condition != null ? condition : "")
          + " order by exo:dateModified DESC";
      return getDocumentsByQuery(query, limit);

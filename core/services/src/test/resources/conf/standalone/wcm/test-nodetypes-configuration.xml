@@ -25,6 +25,15 @@
    xmlns:jcr="http://www.jcp.org/jcr/1.0" 
    xmlns:exo="http://www.exoplatform.com/jcr/exo/1.0">
    
+  <nodeType name="mix:fileType" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
+  	<propertyDefinitions>
+      <propertyDefinition name="exo:fileType" requiredType="String" autoCreated="false" mandatory="false"
+        onParentVersion="COPY" protected="false" multiple="false">
+        <valueConstraints/>
+      </propertyDefinition>
+    </propertyDefinitions>
+  </nodeType>
+   
  	<nodeType name="exo:seoMetadata" isMixin="true" hasOrderableChildNodes="false">
     <propertyDefinitions/>
     <childNodeDefinitions>
