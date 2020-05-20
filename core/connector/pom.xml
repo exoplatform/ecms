@@ -142,12 +142,11 @@
       <artifactId>log4j</artifactId>
       <optional>true</optional>
     </dependency>
-    <!-- "unused declared" by analyze but still use for test -->
     <dependency>
       <groupId>org.exoplatform.commons</groupId>
       <artifactId>commons-component-common</artifactId>
-      <scope>test</scope>
     </dependency>
+    <!-- "unused declared" by analyze but still use for test -->
     <dependency>
       <groupId>org.exoplatform.commons</groupId>
       <artifactId>commons-testing</artifactId>

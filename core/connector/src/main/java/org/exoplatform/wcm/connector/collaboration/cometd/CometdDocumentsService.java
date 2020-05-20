@@ -1,4 +1,4 @@
-package org.exoplatform.services.cms.documents.cometd;
+package org.exoplatform.wcm.connector.collaboration.cometd;
 
 import java.util.HashMap;
 import java.util.Map;
