@@ -23,7 +23,6 @@ import com.google.gson.Gson;
 
 public class TestUtil {
 
-
   private static final String clientId;
 
   private static final String clientSecret;
@@ -31,7 +30,8 @@ public class TestUtil {
     Properties properties = new Properties();
     try {
       properties.load(ClassLoader.getSystemClassLoader().getResourceAsStream("onedrive.properties"));
-    } catch (IOException e) { }
+    } catch (IOException e) {
+    }
     clientId = properties.getProperty("clientId");
     clientSecret = properties.getProperty("clientSecret");
   }
@@ -46,7 +46,8 @@ public class TestUtil {
 
   public static String getRefreshToken() {
     try (InputStream inputStream = ClassLoader.getSystemClassLoader().getResourceAsStream("refresh.token");) {
-      return IOUtils.toString(inputStream, "UTF-8").trim();
+      return IOUtils.toString(inputStream,
+                              "UTF-8").trim();
     } catch (IOException e) {
       e.printStackTrace();
     }
@@ -55,7 +56,8 @@ public class TestUtil {
 
   public static String retrieveAccessToken() {
     try (InputStream inputStream = ClassLoader.getSystemClassLoader().getResourceAsStream("refresh.token");) {
-      String refreshToken = IOUtils.toString(inputStream, "UTF-8").trim();
+      String refreshToken = IOUtils.toString(inputStream,
+                                             "UTF-8").trim();
       OneDriveTokenResponse oneDriveTokenResponse = retrieveAccessTokenByRefreshToken(refreshToken);
       return oneDriveTokenResponse.getToken();
     } catch (IOException e) {
@@ -96,7 +98,7 @@ public class TestUtil {
 
   private static String scopes() {
     StringJoiner scopes = new StringJoiner(" ");
-    scopes.add(org.exoplatform.services.cms.clouddrives.onedrive.Scopes.FilesReadWriteAll)
+    scopes.add(org.exoplatform.services.cms.clouddrives.onedrive.OneDriveAPI.Scopes.FilesReadWriteAll)
           .add(Scopes.FilesRead)
           .add(Scopes.FilesReadWrite)
           .add(Scopes.FilesReadAll)
@@ -139,8 +141,10 @@ public class TestUtil {
     HttpEntity entity = response.getEntity();
     if (entity != null) {
       try (InputStream inputStream = entity.getContent()) {
-        String responseBody = IOUtils.toString(inputStream, Charset.forName("UTF-8"));
-        return gson.fromJson(responseBody, OneDriveTokenResponse.class);
+        String responseBody = IOUtils.toString(inputStream,
+                                               Charset.forName("UTF-8"));
+        return gson.fromJson(responseBody,
+                             OneDriveTokenResponse.class);
       }
     }
     return null;

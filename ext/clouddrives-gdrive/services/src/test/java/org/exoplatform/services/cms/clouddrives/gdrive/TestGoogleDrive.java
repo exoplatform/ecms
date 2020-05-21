@@ -18,6 +18,14 @@
  */
 package org.exoplatform.services.cms.clouddrives.gdrive;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.Assert;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
 import com.google.api.client.auth.oauth2.Credential;
 import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow;
 import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeTokenRequest;
@@ -26,17 +34,9 @@ import org.exoplatform.services.cms.clouddrives.CloudDriveException;
 import org.exoplatform.services.cms.clouddrives.CloudFile;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
-import org.testng.Assert;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * TODO Test should be adopted to API rework.
- * 
  */
 public class TestGoogleDrive {
   protected static final Log                  LOG           = ExoLogger.getLogger(TestGoogleDrive.class);
@@ -48,8 +48,7 @@ public class TestGoogleDrive {
   private final String                        GRANT_TYPE    = "authorization_code";
 
   private static final String                 SCOPES        = "https://www.googleapis.com/auth/userinfo.email "
-                                                                + "https://www.googleapis.com/auth/userinfo.profile "
-                                                                + "https://www.googleapis.com/auth/drive.readonly";
+      + "https://www.googleapis.com/auth/userinfo.profile " + "https://www.googleapis.com/auth/drive.readonly";
 
   private GoogleUser                          googleUser;
 
@@ -135,8 +134,11 @@ public class TestGoogleDrive {
   public void testToken() {
     Assert.assertNotNull(flow.getClientId());
     Assert.assertNotNull(flow.getScopes());
-    Assert.assertEquals(GRANT_TYPE, tokenRequest.getGrantType());
-    Assert.assertEquals(CODE1, tokenRequest.getCode());
-    Assert.assertEquals(SCOPES, tokenRequest.getScopes());
+    Assert.assertEquals(GRANT_TYPE,
+                        tokenRequest.getGrantType());
+    Assert.assertEquals(CODE1,
+                        tokenRequest.getCode());
+    Assert.assertEquals(SCOPES,
+                        tokenRequest.getScopes());
   }
 }

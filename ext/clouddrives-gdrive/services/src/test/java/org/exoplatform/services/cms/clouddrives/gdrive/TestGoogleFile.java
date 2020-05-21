@@ -24,17 +24,18 @@ import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
 
-import org.exoplatform.services.cms.clouddrives.CloudFile;
-import org.exoplatform.services.log.ExoLogger;
-import org.exoplatform.services.log.Log;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 import com.google.api.client.util.DateTime;
 import com.google.api.services.drive.model.File;
 
-import junit.framework.Assert;
+import org.exoplatform.services.cms.clouddrives.CloudFile;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
+
 
 /**
  * TODO Test should be adopted to API rework.
@@ -116,7 +117,7 @@ public class TestGoogleFile {
     file2.setModifiedDate(dt);
   }
 
-  @BeforeMethod
+  @Before
   public void initMethod() {
     listOfGoogleFiles = new ArrayList<File>();
     listOfCloudFiles = new ArrayList<CloudFile>();

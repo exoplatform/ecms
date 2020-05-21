@@ -1,3 +1,21 @@
+/*
+ * Copyright (C) 2003-2020 eXo Platform SAS.
+ *
+ * This is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation; either version 2.1 of
+ * the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this software; if not, write to the Free
+ * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+ * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
+ */
 package org.exoplatform.services.cms.clouddrives.onedrive;
 
 import java.io.BufferedReader;
@@ -52,47 +70,81 @@ import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 
 
-
-class Scopes {
-  static final String FilesReadAll            = "https://graph.microsoft.com/Files.Read.All";
-
-  static final String FilesRead               = "https://graph.microsoft.com/Files.Read";
-
-  static final String FilesReadSelected       = "https://graph.microsoft.com/Files.Read.Selected";
-
-  static final String FilesReadWriteSelected  = "https://graph.microsoft.com/Files.ReadWrite.Selected";
-
-  static final String FilesReadWrite          = "https://graph.microsoft.com/Files.ReadWrite";
-
-  static final String FilesReadWriteAll       = "https://graph.microsoft.com/Files.ReadWrite.All";
-
-  static final String FilesReadWriteAppFolder = "https://graph.microsoft.com/Files.ReadWrite.AppFolder";
-
-  static final String UserRead                = "https://graph.microsoft.com/User.Read";
-
-  static final String UserReadWrite           = "https://graph.microsoft.com/User.ReadWrite";
-
-  static final String OfflineAccess           = "offline_access";
-
-  static final String Profile                 = "profile";
-
-  static final String UserReadWriteAll        = "https://graph.microsoft.com/User.ReadWrite.All";
-
-  static final String SitesReadWriteAll       = "https://graph.microsoft.com/Sites.ReadWrite.All";
-}
-
-
-
+/**
+ * The Class OneDriveAPI.
+ */
 public class OneDriveAPI {
+  
+  /**
+   * The Class Scopes.
+   */
+  class Scopes {
+    
+    /** The Constant FilesReadAll. */
+    static final String FilesReadAll            = "https://graph.microsoft.com/Files.Read.All";
+
+    /** The Constant FilesRead. */
+    static final String FilesRead               = "https://graph.microsoft.com/Files.Read";
+
+    /** The Constant FilesReadSelected. */
+    static final String FilesReadSelected       = "https://graph.microsoft.com/Files.Read.Selected";
+
+    /** The Constant FilesReadWriteSelected. */
+    static final String FilesReadWriteSelected  = "https://graph.microsoft.com/Files.ReadWrite.Selected";
+
+    /** The Constant FilesReadWrite. */
+    static final String FilesReadWrite          = "https://graph.microsoft.com/Files.ReadWrite";
+
+    /** The Constant FilesReadWriteAll. */
+    static final String FilesReadWriteAll       = "https://graph.microsoft.com/Files.ReadWrite.All";
+
+    /** The Constant FilesReadWriteAppFolder. */
+    static final String FilesReadWriteAppFolder = "https://graph.microsoft.com/Files.ReadWrite.AppFolder";
+
+    /** The Constant UserRead. */
+    static final String UserRead                = "https://graph.microsoft.com/User.Read";
+
+    /** The Constant UserReadWrite. */
+    static final String UserReadWrite           = "https://graph.microsoft.com/User.ReadWrite";
+
+    /** The Constant OfflineAccess. */
+    static final String OfflineAccess           = "offline_access";
+
+    /** The Constant Profile. */
+    static final String Profile                 = "profile";
+
+    /** The Constant UserReadWriteAll. */
+    static final String UserReadWriteAll        = "https://graph.microsoft.com/User.ReadWrite.All";
+
+    /** The Constant SitesReadWriteAll. */
+    static final String SitesReadWriteAll       = "https://graph.microsoft.com/Sites.ReadWrite.All";
+  }
+
+
+  
+  /** The redirect url. */
   private final String redirectUrl;
 
+  /** The root id. */
   private String       rootId;
+  
+  /**
+   * The Class OneDriveSubscription.
+   */
   @Deprecated
   private class OneDriveSubscription {
+    
+    /** The expiration date time. */
     private long   expirationDateTime;
 
+    /** The notification url. */
     private String notificationUrl;
 
+    /**
+     * Gets the notification url.
+     *
+     * @return the notification url
+     */
     public synchronized String getNotificationUrl() {
       if (LOG.isDebugEnabled()) {
         LOG.debug("subscription left: " + (expirationDateTime - Calendar.getInstance().getTimeInMillis()));
@@ -106,20 +158,41 @@ public class OneDriveAPI {
     }
   }
 
+  /**
+   * The Class OneDriveToken.
+   */
   private class OneDriveToken {
+    
+    /** The Constant LIFETIME. */
     // in millis
     private final static int LIFETIME = 2000 * 1000;
 
+    /** The refresh token. */
     private String           refreshToken;
 
+    /** The access token. */
     private String           accessToken;
 
+    /** The last modified time. */
     private long             lastModifiedTime;
 
+    /**
+     * Instantiates a new one drive token.
+     *
+     * @param accessToken the access token
+     * @param refreshToken the refresh token
+     */
     public OneDriveToken(String accessToken, String refreshToken) {
       this.updateToken(accessToken, refreshToken);
     }
 
+    /**
+     * Gets the access token.
+     *
+     * @return the access token
+     * @throws RefreshAccessException the refresh access exception
+     * @throws OneDriveException the one drive exception
+     */
     public synchronized String getAccessToken() throws RefreshAccessException, OneDriveException {
       long currentTime = System.currentTimeMillis();
       if (currentTime >= lastModifiedTime + LIFETIME) {
@@ -140,6 +213,12 @@ public class OneDriveAPI {
       return accessToken;
     }
 
+    /**
+     * Update token.
+     *
+     * @param accessToken the access token
+     * @param refreshToken the refresh token
+     */
     public final synchronized void updateToken(String accessToken, String refreshToken) {
       if (LOG.isDebugEnabled()) {
         LOG.debug("OneDriveToken.updateToken() : accessToken = " + accessToken + " refreshToken = " + refreshToken);
@@ -150,34 +229,43 @@ public class OneDriveAPI {
     }
   }
 
+  /** The Constant LOG. */
   private static final Log           LOG                  = ExoLogger.getLogger(OneDriveAPI.class);
 
+  /** The Constant GRAPH_CLIENT_LOG. */
   private static final Log           GRAPH_CLIENT_LOG     = ExoLogger.getLogger(OneDriveAPI.class.getSimpleName()
           + "_GraphClient");
 
+  /** The stored token. */
   private final OneDriveStoredToken  storedToken;
 
+  /** The client id. */
   private final String               clientId;
 
+  /** The client secret. */
   private final String               clientSecret;
 
+  /** The one drive token. */
   private final OneDriveToken        oneDriveToken;
 
+  /** The httpclient. */
   private final HttpClient           httpclient           = HttpClients.createDefault();
 
+  /** The one drive subscription. */
   private final OneDriveSubscription oneDriveSubscription = new OneDriveSubscription();
 
   /**
    * Makes request to onedrive to get a token, using oauth code or refresh token depending on the grantType.
-   * @param clientId
-   * @param clientSecret
-   * @param code
-   * @param refreshToken
-   * @param grantType
-   * @param redirectUrl
-   * @return
-   * @throws IOException
-   * @throws OneDriveException
+   *
+   * @param clientId the client id
+   * @param clientSecret the client secret
+   * @param code the code
+   * @param refreshToken the refresh token
+   * @param grantType the grant type
+   * @param redirectUrl the redirect url
+   * @return the one drive token response
+   * @throws IOException Signals that an I/O exception has occurred.
+   * @throws OneDriveException the one drive exception
    */
   private OneDriveTokenResponse retrieveAccessToken(String clientId,
                                                     String clientSecret,
@@ -226,12 +314,12 @@ public class OneDriveAPI {
   /**
    * Gets access token. See
    * {@link OneDriveAPI#retrieveAccessToken(String, String, String, String, String, String)}
-   * 
+   *
    * @param code authorization identifier according to oauth specification.
-   * @param redirectUrl
+   * @param redirectUrl the redirect url
    * @return {@link OneDriveTokenResponse}
-   * @throws IOException
-   * @throws OneDriveException
+   * @throws IOException Signals that an I/O exception has occurred.
+   * @throws OneDriveException the one drive exception
    */
   private OneDriveTokenResponse aquireAccessToken(String code, String redirectUrl) throws IOException, OneDriveException {
     return retrieveAccessToken(clientId, clientSecret, code, null, "authorization_code", redirectUrl);
@@ -240,12 +328,12 @@ public class OneDriveAPI {
   /**
    * Updates access token. See
    * {@link OneDriveAPI#retrieveAccessToken(String, String, String, String, String, String)}
-   * 
-   * @param refreshToken
-   * @param redirectUrl
+   *
+   * @param refreshToken the refresh token
+   * @param redirectUrl the redirect url
    * @return {@link OneDriveTokenResponse}
-   * @throws IOException
-   * @throws OneDriveException
+   * @throws IOException Signals that an I/O exception has occurred.
+   * @throws OneDriveException the one drive exception
    */
   private OneDriveTokenResponse renewAccessToken(String refreshToken, String redirectUrl) throws IOException, OneDriveException {
     return retrieveAccessToken(clientId, clientSecret, null, refreshToken, "refresh_token", redirectUrl);
@@ -253,11 +341,12 @@ public class OneDriveAPI {
 
   /**
    * Creates a public link to view a file content.
-     Currently at 23/08/2019, the business account does not support the 'embed' link type.
-   * @param itemId
+   *      Currently at 23/08/2019, the business account does not support the 'embed' link type.
+   *
+   * @param itemId the item id
    * @param type must be view or embed
-   * @return
-   * @throws OneDriveException
+   * @return the sharing link
+   * @throws OneDriveException the one drive exception
    */
   public SharingLink createLink(String itemId, String type) throws OneDriveException {
     if (type.equalsIgnoreCase("embed")) {
@@ -268,8 +357,14 @@ public class OneDriveAPI {
     throw new OneDriveException("Link type must be either view or embed");
   }
 
+  /** The Constant SCOPES. */
   public final static String SCOPES = scopes();
 
+  /**
+   * Scopes.
+   *
+   * @return the string
+   */
   private static String scopes() {
     StringJoiner scopes = new StringJoiner(" ");
     scopes.add(Scopes.UserRead)
@@ -279,6 +374,9 @@ public class OneDriveAPI {
     return scopes.toString();
   }
 
+  /**
+   * Inits the graph client.
+   */
   private void initGraphClient() {
     this.graphClient = GraphServiceClient.builder().authenticationProvider(iHttpRequest -> {
       String accessToken = null;
@@ -291,6 +389,16 @@ public class OneDriveAPI {
     }).logger(new ExoGraphClientLogger(GRAPH_CLIENT_LOG)).buildClient();
   }
 
+  /**
+   * Instantiates a new one drive API.
+   *
+   * @param clientId the client id
+   * @param clientSecret the client secret
+   * @param authCode the auth code
+   * @param redirectUrl the redirect url
+   * @throws IOException Signals that an I/O exception has occurred.
+   * @throws CloudDriveException the cloud drive exception
+   */
   OneDriveAPI(String clientId, String clientSecret, String authCode, String redirectUrl) throws IOException, CloudDriveException {
     this.clientId = clientId;
     this.clientSecret = clientSecret;
@@ -309,6 +417,18 @@ public class OneDriveAPI {
     }
   }
 
+  /**
+   * Instantiates a new one drive API.
+   *
+   * @param clientId the client id
+   * @param clientSecret the client secret
+   * @param accessToken the access token
+   * @param refreshToken the refresh token
+   * @param expirationTime the expiration time
+   * @param redirectUrl the redirect url
+   * @throws CloudDriveException the cloud drive exception
+   * @throws IOException Signals that an I/O exception has occurred.
+   */
   OneDriveAPI(String clientId,
               String clientSecret,
               String accessToken,
@@ -333,32 +453,64 @@ public class OneDriveAPI {
     }
   }
 
+  /**
+   * Gets the access token.
+   *
+   * @return the access token
+   * @throws RefreshAccessException the refresh access exception
+   * @throws OneDriveException the one drive exception
+   */
   private String getAccessToken() throws RefreshAccessException, OneDriveException {
     return oneDriveToken.getAccessToken();
   }
 
+  /**
+   * Update token.
+   *
+   * @param newToken the new token
+   * @throws CloudDriveException the cloud drive exception
+   */
   public void updateToken(OneDriveStoredToken newToken) throws CloudDriveException {
     this.oneDriveToken.updateToken(newToken.getAccessToken(), newToken.getRefreshToken());
     this.storedToken.merge(newToken);
   }
 
+  /** The gson. */
   private final Gson          gson = new Gson();
 
+  /** The graph client. */
   private IGraphServiceClient graphClient;
 
+  /**
+   * Removes the folder.
+   *
+   * @param fileId the file id
+   */
   public void removeFolder(String fileId) {
     graphClient.me().drive().items(fileId).buildRequest().delete();
   }
 
+  /**
+   * Removes the file.
+   *
+   * @param fileId the file id
+   */
   public void removeFile(String fileId) {
     graphClient.me().drive().items(fileId).buildRequest().delete();
   }
 
+  /**
+   * Gets the user.
+   *
+   * @return the user
+   */
   public User getUser() {
     return graphClient.me().buildRequest().get();
   }
 
   /**
+   * Gets the root id.
+   *
    * @return id of the root folder on the user's drive.
    */
   public synchronized String getRootId() {
@@ -368,6 +520,11 @@ public class OneDriveAPI {
     return rootId;
   }
 
+  /**
+   * Gets the root.
+   *
+   * @return the root
+   */
   private DriveItem getRoot() {
     return graphClient.me().drive().root().buildRequest().get();
   }
@@ -375,10 +532,10 @@ public class OneDriveAPI {
   /**
    * Сreates folder. If a folder with the same name already exists - renames new
    * folder.
-   * 
-   * @param parentId
-   * @param folder
-   * @return
+   *
+   * @param parentId the parent id
+   * @param folder the folder
+   * @return the drive item
    */
   private DriveItem createFolderRequestWrapper(String parentId, DriveItem folder) {
     JsonObject obj = new JsonParser().parse("{\n" + "  \"name\": \"" + folder.name + "\",\n" + "  \"folder\": { },\n"
@@ -391,6 +548,14 @@ public class OneDriveAPI {
     return getItem(id);
   }
 
+  /**
+   * Creates the folder.
+   *
+   * @param parentId the parent id
+   * @param name the name
+   * @param created the created
+   * @return the drive item
+   */
   public DriveItem createFolder(String parentId, String name, Calendar created) {
     if (parentId == null || parentId.isEmpty()) {
       parentId = getRootId();
@@ -406,32 +571,73 @@ public class OneDriveAPI {
     return createFolderRequestWrapper(parentId, folder);
   }
 
+  /**
+   * Copy file.
+   *
+   * @param parentId the parent id
+   * @param fileName the file name
+   * @param fileId the file id
+   * @return the drive item
+   * @throws IOException Signals that an I/O exception has occurred.
+   * @throws CloudDriveException the cloud drive exception
+   */
   public DriveItem copyFile(String parentId, String fileName, String fileId) throws IOException, CloudDriveException {
     return copy(parentId, fileName, fileId, true);
   }
 
+  /**
+   * Copy folder.
+   *
+   * @param parentId the parent id
+   * @param name the name
+   * @param folderId the folder id
+   * @return the drive item
+   * @throws CloudDriveException the cloud drive exception
+   * @throws IOException Signals that an I/O exception has occurred.
+   */
   public DriveItem copyFolder(String parentId, String name, String folderId) throws CloudDriveException, IOException {
     return copy(parentId, name, folderId, false);
   }
 
+  /**
+   * Gets the stored token.
+   *
+   * @return the stored token
+   */
   public OneDriveStoredToken getStoredToken() {
     return storedToken;
   }
 
+  /**
+   * Gets the notification url.
+   *
+   * @return the notification url
+   */
   @Deprecated
   public String getNotificationUrl() {
     return oneDriveSubscription.getNotificationUrl();
   }
 
   /**
-   *
    * Subscribes to receive drive changes using web socket.
-   * @return
+   *
+   * @return the subscription
    */
   public Subscription getSubscription() {
     return graphClient.me().drive().root().subscriptions("socketIO").buildRequest().get();
   }
 
+  /**
+   * Copy.
+   *
+   * @param parentId the parent id
+   * @param fileName the file name
+   * @param fileId the file id
+   * @param isFile the is file
+   * @return the drive item
+   * @throws RefreshAccessException the refresh access exception
+   * @throws OneDriveException the one drive exception
+   */
   public DriveItem copy(String parentId, String fileName, String fileId, boolean isFile) throws RefreshAccessException, OneDriveException {
     if (LOG.isDebugEnabled()) {
       LOG.debug(">> copy {}->{}/{}", fileName, parentId, fileName);
@@ -497,8 +703,8 @@ public class OneDriveAPI {
 
   /**
    * Creates a new file name.
-   * 
-   * @param name
+   *
+   * @param name the name
    * @param number which should be present in the file name.
    * @param isFile indicates file or folder.
    * @return новое имя файла
@@ -518,10 +724,10 @@ public class OneDriveAPI {
 
   /**
    * Request copy status.
-   * 
+   *
    * @param location URL for copying drive item.
    * @return file copy status
-   * @throws IOException
+   * @throws IOException Signals that an I/O exception has occurred.
    */
   private String getCopyResponseBody(String location) throws IOException {
     HttpGet httpGet = new HttpGet(location);
@@ -533,8 +739,9 @@ public class OneDriveAPI {
 
   /**
    * Gets a list of children of the folder, with pagination.
-   * @param folderId
-   * @return
+   *
+   * @param folderId the folder id
+   * @return the drive item collection page
    */
   public IDriveItemCollectionPage getDriveItemCollectionPage(String folderId) {
     IDriveItemCollectionPage collectionPage;
@@ -548,9 +755,10 @@ public class OneDriveAPI {
 
   /**
    * Gets list of files in this folder whose names begins with the given prefix.
-   * @param folderId
-   * @param startsWith
-   * @return
+   *
+   * @param folderId the folder id
+   * @param startsWith the starts with
+   * @return the files
    */
   private List<DriveItem> getFiles(String folderId, String startsWith) {
     IDriveItemCollectionPage collectionPage;
@@ -579,6 +787,13 @@ public class OneDriveAPI {
     }
     return driveItems;
   }
+  
+  /**
+   * Gets the files.
+   *
+   * @param folderId the folder id
+   * @return the files
+   */
   @Deprecated
   public List<DriveItem> getFiles(String folderId) {
     IDriveItemCollectionPage collectionPage;
@@ -602,15 +817,15 @@ public class OneDriveAPI {
   }
 
   /**
-   * Uploads part of a file
-   * 
+   * Uploads part of a file.
+   *
    * @param url to which the file is uploaded
    * @param startPosition from which the transmitted date should be in the file.
    * @param contentLength size of transmitted data in the current request.
    * @param size total file size
    * @param data file slice
    * @return {@link FileSendResponse}
-   * @throws IOException
+   * @throws IOException Signals that an I/O exception has occurred.
    */
   private FileSendResponse sendFile(String url, int startPosition, int contentLength, int size, byte[] data) throws IOException {
     URL obj = new URL(url);
@@ -663,6 +878,14 @@ public class OneDriveAPI {
     return null;
   }
 
+  /**
+   * Upload url conflict rename wrapper.
+   *
+   * @param path the path
+   * @param driveItemUploadableProperties the drive item uploadable properties
+   * @return the string
+   * @throws UnsupportedEncodingException the unsupported encoding exception
+   */
   private String uploadUrlConflictRenameWrapper(String path, DriveItemUploadableProperties driveItemUploadableProperties) throws UnsupportedEncodingException {
 
     JsonObject uploadFileRequestBody = new JsonParser().parse("{\"item\": {\n"
@@ -677,12 +900,22 @@ public class OneDriveAPI {
             .getAsString();
   }
 
+  /**
+   * Gets the upload url.
+   *
+   * @param path the path
+   * @param driveItemUploadableProperties the drive item uploadable properties
+   * @return the upload url
+   * @throws UnsupportedEncodingException the unsupported encoding exception
+   */
   @Deprecated
   private String getUploadUrl(String path, DriveItemUploadableProperties driveItemUploadableProperties) throws UnsupportedEncodingException {
     return uploadUrlConflictRenameWrapper(path, driveItemUploadableProperties);
   }
 
   /**
+   * Changes.
+   *
    * @param deltaToken starting from which to get changes.
    * @return {@link ChangesIterator}
    */
@@ -690,6 +923,12 @@ public class OneDriveAPI {
     return new ChangesIterator(deltaToken);
   }
 
+  /**
+   * Decode url path.
+   *
+   * @param value the value
+   * @return the string
+   */
   private String decodeUrlPath(String value) {
     try {
       value = java.net.URLDecoder.decode(value, StandardCharsets.UTF_8.name());
@@ -700,6 +939,13 @@ public class OneDriveAPI {
     return value;
   }
 
+  /**
+   * Encode url path.
+   *
+   * @param value the value
+   * @return the string
+   * @throws URISyntaxException the URI syntax exception
+   */
   private String encodeUrlPath(String value) throws URISyntaxException {
     value = decodeUrlPath(value);
     URI uri = new URI(null, null, null, value, null);
@@ -709,15 +955,15 @@ public class OneDriveAPI {
 
   /**
    * Gets url on which uploading should be done.
-   * 
+   *
    * @param parentId where should the new file be added.
-   * @param name
+   * @param name the name
    * @param conflictBehavior determines the behavior if a file with the name is
    *          already present. must be 'fail' or 'rename';
    * @return url to upload the file. see the
    *         {@link OneDriveAPI#insertUpdate(String, InputStream)}
-   * @throws RefreshAccessException
-   * @throws OneDriveException
+   * @throws RefreshAccessException the refresh access exception
+   * @throws OneDriveException the one drive exception
    */
   public String getInsertUploadUrl(String parentId, String name, String conflictBehavior) throws RefreshAccessException, OneDriveException {
 
@@ -760,6 +1006,15 @@ public class OneDriveAPI {
     throw new OneDriveException("Unable to retrieve url to upload file: parentId " + parentId + ", name " + name);
   }
 
+  /**
+   * Update upload url.
+   *
+   * @param itemId the item id
+   * @return the string
+   * @throws IOException Signals that an I/O exception has occurred.
+   * @throws RefreshAccessException the refresh access exception
+   * @throws OneDriveException the one drive exception
+   */
   String updateUploadUrl(String itemId) throws IOException, RefreshAccessException, OneDriveException {
     HttpPost httppost = new HttpPost("https://graph.microsoft.com/v1.0/me/drive/items/" + itemId + "/createUploadSession");
     httppost.addHeader("Authorization", "Bearer " + getAccessToken());
@@ -775,13 +1030,13 @@ public class OneDriveAPI {
   }
 
   /**
-   * Uploads a file to onedrive
-   * 
+   * Uploads a file to onedrive.
+   *
    * @param uploadUrl to upload file.
    * @param inputStream new file content.
    * @return new or updated file
-   * @throws OneDriveException
-   * @throws IOException
+   * @throws OneDriveException the one drive exception
+   * @throws IOException Signals that an I/O exception has occurred.
    */
   DriveItem insertUpdate(String uploadUrl, InputStream inputStream) throws OneDriveException, IOException {
     int fileLength = inputStream.available();
@@ -811,6 +1066,18 @@ public class OneDriveAPI {
     throw new OneDriveException("Failed to upload file to url " + uploadUrl);
   }
 
+  /**
+   * Insert.
+   *
+   * @param parentId the parent id
+   * @param fileName the file name
+   * @param created the created
+   * @param modified the modified
+   * @param inputStream the input stream
+   * @param conflictBehavior the conflict behavior
+   * @return the drive item
+   * @throws OneDriveException the one drive exception
+   */
   public DriveItem insert(String parentId, String fileName, Calendar created, Calendar modified, InputStream inputStream, String conflictBehavior) throws OneDriveException {
     if (LOG.isDebugEnabled()) {
       LOG.debug("insert file");
@@ -824,6 +1091,16 @@ public class OneDriveAPI {
     }
   }
 
+  /**
+   * Update file content.
+   *
+   * @param itemId the item id
+   * @param created the created
+   * @param modified the modified
+   * @param inputStream the input stream
+   * @return the drive item
+   * @throws OneDriveException the one drive exception
+   */
   public DriveItem updateFileContent(String itemId, Calendar created, Calendar modified, InputStream inputStream) throws OneDriveException {
 
     try {
@@ -834,6 +1111,12 @@ public class OneDriveAPI {
     }
   }
 
+  /**
+   * Update file wrapper.
+   *
+   * @param item the item
+   * @return the drive item
+   */
   private DriveItem updateFileWrapper(DriveItem item) {
     JsonObject updateFileRequestBody = new JsonParser().parse("  {\n" + "            \"parentReference\": {\n"
         + "            \"id\": \"" + item.parentReference.id + "\"\n" + "        },\n" + "            \"name\": \"" + item.name
@@ -868,10 +1151,22 @@ public class OneDriveAPI {
     return new DeltaDriveFiles(deltaToken, changes);
   }
 
+  /**
+   * Update file.
+   *
+   * @param driveItem the drive item
+   * @return the drive item
+   */
   public DriveItem updateFile(DriveItem driveItem) {
     return updateFileWrapper(driveItem);
   }
 
+  /**
+   * Gets the item.
+   *
+   * @param itemId the item id
+   * @return the item
+   */
   public DriveItem getItem(String itemId) {
     return graphClient.me().drive().items(itemId).buildRequest().get();
   }
@@ -885,12 +1180,20 @@ public class OneDriveAPI {
     return graphClient.me().drive().buildRequest().get();
   }
 
+  /**
+   * Checks if is delta token expired.
+   *
+   * @param deltaToken the delta token
+   * @return true, if is delta token expired
+   */
   private boolean isDeltaTokenExpired(String deltaToken) {
     return false;
   }
 
   /**
-   * @param deltaToken
+   * Delta.
+   *
+   * @param deltaToken the delta token
    * @return list of items that have been changed since last sync.
    */
   private IDriveItemDeltaCollectionPage delta(String deltaToken) {
@@ -908,10 +1211,20 @@ public class OneDriveAPI {
     return collectionPage;
   }
 
+  /**
+   * The Class SimpleChildIterator.
+   */
   class SimpleChildIterator extends ChunkIterator<HashSetCompatibleDriveItem> {
 
+    /** The items. */
     private final Collection<HashSetCompatibleDriveItem> items;
 
+    /**
+     * Instantiates a new simple child iterator.
+     *
+     * @param items the items
+     * @throws CloudDriveException the cloud drive exception
+     */
     public SimpleChildIterator(Collection<HashSetCompatibleDriveItem> items) throws CloudDriveException {
       this.items = items;
       this.iter = nextChunk();
@@ -935,18 +1248,40 @@ public class OneDriveAPI {
     }
   }
 
+  /**
+   * Gets the simple child iterator.
+   *
+   * @param items the items
+   * @return the simple child iterator
+   * @throws CloudDriveException the cloud drive exception
+   */
   public SimpleChildIterator getSimpleChildIterator(Collection<HashSetCompatibleDriveItem> items) throws CloudDriveException {
     return new SimpleChildIterator(items);
   }
 
+  /**
+   * Gets the child iterator.
+   *
+   * @param folderId the folder id
+   * @return the child iterator
+   */
   public ChildIterator getChildIterator(String folderId) {
     return new ChildIterator(folderId);
   }
 
+  /**
+   * The Class ChildIterator.
+   */
   class ChildIterator extends ChunkIterator<DriveItem> {
 
+    /** The collection page. */
     IDriveItemCollectionPage collectionPage;
 
+    /**
+     * Instantiates a new child iterator.
+     *
+     * @param folderId the folder id
+     */
     ChildIterator(String folderId) {
       this.collectionPage = getDriveItemCollectionPage(folderId);
       iter = nextChunk();
@@ -977,16 +1312,32 @@ public class OneDriveAPI {
     }
   }
 
+  /**
+   * Extract delta token.
+   *
+   * @param deltaLink the delta link
+   * @return the string
+   */
   private String extractDeltaToken(String deltaLink) {
     return deltaLink.substring(deltaLink.indexOf("=") + 1);
   }
 
+  /**
+   * The Class ChangesIterator.
+   */
   class ChangesIterator extends ChunkIterator<DriveItem> {
 
+    /** The delta collection page. */
     private IDriveItemDeltaCollectionPage deltaCollectionPage;
 
+    /** The delta token. */
     private String                        deltaToken;
 
+    /**
+     * Instantiates a new changes iterator.
+     *
+     * @param deltaToken the delta token
+     */
     ChangesIterator(String deltaToken) {
       this.deltaToken = deltaToken;
       this.deltaCollectionPage = delta(deltaToken);
@@ -1027,6 +1378,11 @@ public class OneDriveAPI {
       return deltaCollectionPage != null;
     }
 
+    /**
+     * Gets the delta token.
+     *
+     * @return the delta token
+     */
     String getDeltaToken() {
       return deltaToken;
     }

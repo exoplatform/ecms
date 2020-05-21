@@ -127,6 +127,19 @@
 
     <!-- for tests -->
     <dependency>
+      <groupId>javax.ws.rs</groupId>
+      <artifactId>jsr311-api</artifactId>
+      <scope>test</scope>
+      <type>jar</type>
+    </dependency>
+    <dependency>
+      <groupId>com.sun.jersey</groupId>
+      <artifactId>jersey-server</artifactId>
+      <version>1.19.4</version>
+      <scope>test</scope>
+      <type>jar</type>
+    </dependency>
+    <dependency>
       <groupId>org.hsqldb</groupId>
       <artifactId>hsqldb</artifactId>
       <scope>test</scope>
@@ -151,49 +164,6 @@
       <type>jar</type>
     </dependency>
     <dependency>
-      <groupId>org.testng</groupId>
-      <artifactId>testng</artifactId>
-      <scope>test</scope>
-      <type>jar</type>
-    </dependency>
-    <dependency>
-      <groupId>org.spockframework</groupId>
-      <artifactId>spock-core</artifactId>
-      <scope>test</scope>
-      <exclusions>
-        <exclusion>
-          <groupId>org.codehaus.groovy</groupId>
-          <artifactId>groovy-all</artifactId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-    <dependency>
-      <groupId>org.codehaus.groovy</groupId>
-      <artifactId>groovy-all</artifactId>
-      <version>${test.groovy.version}</version><!-- version explicitly here to let eXo's version live outside -->
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.ow2.asm</groupId>
-      <artifactId>asm</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>cglib</groupId>
-      <artifactId>cglib-nodep</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.objenesis</groupId>
-      <artifactId>objenesis</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.hamcrest</groupId>
-      <artifactId>hamcrest-core</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
       <groupId>org.powermock</groupId>
       <artifactId>powermock-api-mockito</artifactId>
       <scope>test</scope>
@@ -204,9 +174,27 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
-
   <build>
     <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <configuration>
+          <useFile>false</useFile>
+          <argLine>${env.MAVEN_OPTS} -Djava.security.manager=org.exoplatform.commons.test.TestSecurityManager
+            -Djava.security.policy=${project.build.directory}/test-classes/conf/test.policy</argLine>
+          <systemPropertyVariables>
+            <maven.exoplatform.dir>${project.build.directory}</maven.exoplatform.dir>
+            <exo.conf.dir.name>test-classes/conf</exo.conf.dir.name>
+            <java.security.auth.login.config>${project.build.directory}/test-classes/conf/jaas.conf</java.security.auth.login.config>
+          </systemPropertyVariables>
+          <includes>
+            <!-- TODO need setup MS Graph auth in test -->
+            <include>**/**/NoTest*.java</include>
+          </includes>
+          <forkCount>0</forkCount>
+        </configuration>
+      </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-shade-plugin</artifactId>
