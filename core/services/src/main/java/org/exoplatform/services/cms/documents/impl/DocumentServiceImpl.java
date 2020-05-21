@@ -69,6 +69,7 @@ import org.exoplatform.services.cms.documents.DocumentEditor;
 import org.exoplatform.services.cms.documents.DocumentEditorProvider;
 import org.exoplatform.services.cms.documents.DocumentMetadataPlugin;
 import org.exoplatform.services.cms.documents.DocumentService;
+import org.exoplatform.services.cms.documents.IdentityProfileService;
 import org.exoplatform.services.cms.documents.NewDocumentTemplate;
 import org.exoplatform.services.cms.documents.NewDocumentTemplatePlugin;
 import org.exoplatform.services.cms.documents.NewDocumentTemplateProvider;
@@ -101,10 +102,6 @@ import org.exoplatform.services.security.Identity;
 import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
-import org.exoplatform.social.core.manager.IdentityManager;
-import org.exoplatform.social.core.space.SpaceUtils;
-import org.exoplatform.social.core.space.model.Space;
-import org.exoplatform.social.core.space.spi.SpaceService;
 import org.exoplatform.web.CacheUserProfileFilter;
 import org.exoplatform.webui.application.WebuiRequestContext;
 
@@ -155,10 +152,10 @@ public class DocumentServiceImpl implements DocumentService {
   private Map<String, DocumentMetadataPlugin> metadataPlugins = new HashMap<>();
   private OrganizationService organizationService;
   private SettingService settingService;
-  private IdentityManager identityManager;
+  private IdentityProfileService identityProfileService;
   private String editorsId;
 
-  public DocumentServiceImpl(ManageDriveService manageDriveService, Portal portal, SessionProviderService sessionProviderService, RepositoryService repoService, NodeHierarchyCreator nodeHierarchyCreator, LinkManager linkManager, PortalContainerInfo portalContainerInfo, OrganizationService organizationService, SettingService settingService, IdentityManager identityManager, IDGeneratorService idGenerator) {
+  public DocumentServiceImpl(ManageDriveService manageDriveService, Portal portal, SessionProviderService sessionProviderService, RepositoryService repoService, NodeHierarchyCreator nodeHierarchyCreator, LinkManager linkManager, PortalContainerInfo portalContainerInfo, OrganizationService organizationService, SettingService settingService, IdentityProfileService identityProfileService, IDGeneratorService idGenerator) {
     this.manageDriveService = manageDriveService;
     this.sessionProviderService = sessionProviderService;
     this.repoService = repoService;
@@ -168,7 +165,7 @@ public class DocumentServiceImpl implements DocumentService {
     this.portalContainerInfo = portalContainerInfo;
     this.organizationService = organizationService;
     this.settingService = settingService;
-    this.identityManager = identityManager;
+    this.identityProfileService = identityProfileService;
     this.editorsId = idGenerator.generateStringID(this);
     EditorProvidersHelper.init(this);
   }
@@ -517,7 +514,7 @@ public class DocumentServiceImpl implements DocumentService {
       if (LOG.isDebugEnabled()) {
         LOG.debug("Adding DocumentEditor [{}]", editor.toString());
       }
-      editorProviders.add(new DocumentEditorProviderImpl(editor, settingService, identityManager, organizationService));
+      editorProviders.add(new DocumentEditorProviderImpl(editor, settingService, identityProfileService, organizationService));
       if (LOG.isDebugEnabled()) {
         LOG.debug("Registered DocumentEditor instance of {}", plugin.getClass().getName());
       }

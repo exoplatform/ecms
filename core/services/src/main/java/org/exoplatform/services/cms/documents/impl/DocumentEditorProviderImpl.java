@@ -32,13 +32,12 @@ import org.exoplatform.portal.config.UserACL;
 import org.exoplatform.services.cms.documents.DocumentEditor;
 import org.exoplatform.services.cms.documents.DocumentEditorProvider;
 import org.exoplatform.services.cms.documents.DocumentUpdateActivityHandler;
+import org.exoplatform.services.cms.documents.IdentityProfileService;
 import org.exoplatform.services.cms.documents.NewDocumentTemplate;
 import org.exoplatform.services.cms.documents.exception.PermissionValidationException;
 import org.exoplatform.services.organization.Group;
 import org.exoplatform.services.organization.OrganizationService;
 import org.exoplatform.services.security.Identity;
-import org.exoplatform.social.core.identity.provider.OrganizationIdentityProvider;
-import org.exoplatform.social.core.manager.IdentityManager;
 import org.exoplatform.webui.application.WebuiRequestContext;
 
 /**
@@ -67,8 +66,8 @@ public class DocumentEditorProviderImpl implements DocumentEditorProvider {
   /** The setting service. */
   protected SettingService      settingService;
 
-  /** The identity manager. */
-  protected IdentityManager     identityManager;
+  /** The identity profile service. */
+  protected IdentityProfileService     identityProfileService;
 
   /** The organization service. */
   protected OrganizationService organizationService;
@@ -79,16 +78,16 @@ public class DocumentEditorProviderImpl implements DocumentEditorProvider {
    *
    * @param editor the editor
    * @param settingService the setting service
-   * @param identityManager the identity manager
+   * @param identityProfileService the identity profile service
    * @param organizationService the organization service
    */
   protected DocumentEditorProviderImpl(DocumentEditor editor,
                                        SettingService settingService,
-                                       IdentityManager identityManager,
+                                       IdentityProfileService identityProfileService,
                                        OrganizationService organizationService) {
     this.editor = editor;
     this.settingService = settingService;
-    this.identityManager = identityManager;
+    this.identityProfileService = identityProfileService;
     this.organizationService = organizationService;
     Boolean storedActive = getStoredActive();
     List<String> storedPermissions = getStoredPermissions();
@@ -315,7 +314,7 @@ public class DocumentEditorProviderImpl implements DocumentEditorProvider {
     if (temp.length < 2) {
       // user permissions
       String userId = temp[0];
-      if (!userId.equals("*") && identityManager.getOrCreateIdentity(OrganizationIdentityProvider.NAME, userId) == null) {
+      if (!userId.equals("*") && !identityProfileService.hasProfile(userId)) {
         throw new PermissionValidationException("User " + userId + " doesn't exist.");
       }
     } else {
