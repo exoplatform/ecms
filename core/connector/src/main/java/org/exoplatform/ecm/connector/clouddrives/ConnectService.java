@@ -53,18 +53,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.UriInfo;
 
-import org.exoplatform.services.cms.clouddrives.BaseCloudDriveListener;
-import org.exoplatform.services.cms.clouddrives.CannotConnectDriveException;
-import org.exoplatform.services.cms.clouddrives.CloudDrive;
-import org.exoplatform.services.cms.clouddrives.CloudDriveConnector;
-import org.exoplatform.services.cms.clouddrives.CloudDriveEvent;
-import org.exoplatform.services.cms.clouddrives.CloudDriveException;
-import org.exoplatform.services.cms.clouddrives.CloudDriveService;
-import org.exoplatform.services.cms.clouddrives.CloudProvider;
-import org.exoplatform.services.cms.clouddrives.CloudUser;
-import org.exoplatform.services.cms.clouddrives.DriveRemovedException;
-import org.exoplatform.services.cms.clouddrives.ProviderNotAvailableException;
-import org.exoplatform.services.cms.clouddrives.UserAlreadyConnectedException;
+import org.exoplatform.services.cms.clouddrives.*;
 import org.exoplatform.services.cms.clouddrives.CloudDrive.Command;
 import org.exoplatform.services.cms.clouddrives.jcr.JCRLocalCloudDrive;
 import org.exoplatform.services.cms.clouddrives.jcr.NodeFinder;
@@ -314,7 +303,7 @@ public class ConnectService implements ResourceContainer {
    * Connect process record used in connect workflow. Also used to answer on
    * state request.
    */
-  class ConnectProcess extends BaseCloudDriveListener {
+  class ConnectProcess implements CloudDriveListener {
 
     /** The drive. */
     final CloudDrive drive;

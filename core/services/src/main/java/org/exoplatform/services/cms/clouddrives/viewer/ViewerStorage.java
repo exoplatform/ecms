@@ -46,6 +46,7 @@ import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 
 import org.artofsolving.jodconverter.office.OfficeException;
+import org.exoplatform.services.cms.clouddrives.*;
 import org.icepdf.core.exceptions.PDFException;
 import org.icepdf.core.exceptions.PDFSecurityException;
 import org.icepdf.core.pobjects.Document;
@@ -55,13 +56,6 @@ import org.icepdf.core.pobjects.Stream;
 import org.icepdf.core.util.GraphicsRenderingHints;
 import org.exoplatform.services.cache.CacheService;
 import org.exoplatform.services.cache.ExoCache;
-import org.exoplatform.services.cms.clouddrives.BaseCloudDriveListener;
-import org.exoplatform.services.cms.clouddrives.CloudDrive;
-import org.exoplatform.services.cms.clouddrives.CloudDriveEvent;
-import org.exoplatform.services.cms.clouddrives.CloudDriveException;
-import org.exoplatform.services.cms.clouddrives.CloudDriveStorage;
-import org.exoplatform.services.cms.clouddrives.CloudFile;
-import org.exoplatform.services.cms.clouddrives.DriveRemovedException;
 import org.exoplatform.services.cms.clouddrives.jcr.JCRLocalCloudDrive;
 import org.exoplatform.services.cms.jodconverter.JodConverterService;
 import org.exoplatform.services.log.ExoLogger;
@@ -684,7 +678,7 @@ public class ViewerStorage {
   /**
    * The Class FilesCleaner.
    */
-  protected class FilesCleaner extends BaseCloudDriveListener {
+  protected class FilesCleaner implements CloudDriveListener {
 
     /** The files. */
     final Map<String, ContentFile> files = new ConcurrentHashMap<String, ContentFile>();

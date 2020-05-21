@@ -66,7 +66,7 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
    *
    * @see LocalDrivesEvent
    */
-  class LocalDrivesListener extends BaseCloudDriveListener {
+  class LocalDrivesListener implements CloudDriveListener {
 
     /**
      * Clean user caches.

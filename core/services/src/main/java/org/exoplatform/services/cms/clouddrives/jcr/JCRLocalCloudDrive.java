@@ -76,38 +76,7 @@ import com.ibm.icu.text.Transliterator;
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.component.RequestLifeCycle;
-import org.exoplatform.services.cms.clouddrives.BaseCloudDriveListener;
-import org.exoplatform.services.cms.clouddrives.CannotConnectDriveException;
-import org.exoplatform.services.cms.clouddrives.CloudDrive;
-import org.exoplatform.services.cms.clouddrives.CloudDriveConnector;
-import org.exoplatform.services.cms.clouddrives.CloudDriveEnvironment;
-import org.exoplatform.services.cms.clouddrives.CloudDriveEvent;
-import org.exoplatform.services.cms.clouddrives.CloudDriveException;
-import org.exoplatform.services.cms.clouddrives.CloudDriveManager;
-import org.exoplatform.services.cms.clouddrives.CloudDriveMessage;
-import org.exoplatform.services.cms.clouddrives.CloudDriveSecurity;
-import org.exoplatform.services.cms.clouddrives.CloudDriveStorage;
-import org.exoplatform.services.cms.clouddrives.CloudFile;
-import org.exoplatform.services.cms.clouddrives.CloudFileAPI;
-import org.exoplatform.services.cms.clouddrives.CloudFileSynchronizer;
-import org.exoplatform.services.cms.clouddrives.CloudProviderException;
-import org.exoplatform.services.cms.clouddrives.CloudUser;
-import org.exoplatform.services.cms.clouddrives.ConflictException;
-import org.exoplatform.services.cms.clouddrives.ConstraintException;
-import org.exoplatform.services.cms.clouddrives.DriveRemovedException;
-import org.exoplatform.services.cms.clouddrives.DriveTrashedException;
-import org.exoplatform.services.cms.clouddrives.FileTrashRemovedException;
-import org.exoplatform.services.cms.clouddrives.NotCloudDriveException;
-import org.exoplatform.services.cms.clouddrives.NotCloudFileException;
-import org.exoplatform.services.cms.clouddrives.NotConnectedException;
-import org.exoplatform.services.cms.clouddrives.NotFoundException;
-import org.exoplatform.services.cms.clouddrives.NotYetCloudFileException;
-import org.exoplatform.services.cms.clouddrives.RefreshAccessException;
-import org.exoplatform.services.cms.clouddrives.RetryLaterException;
-import org.exoplatform.services.cms.clouddrives.SkipChangeException;
-import org.exoplatform.services.cms.clouddrives.SkipSyncException;
-import org.exoplatform.services.cms.clouddrives.SyncNotSupportedException;
-import org.exoplatform.services.cms.clouddrives.ThreadExecutor;
+import org.exoplatform.services.cms.clouddrives.*;
 import org.exoplatform.services.cms.clouddrives.jcr.JCRLocalCloudDrive.JCRListener.AddTrashListener;
 import org.exoplatform.services.cms.clouddrives.jcr.JCRLocalCloudDrive.JCRListener.DriveChangesListener;
 import org.exoplatform.services.cms.clouddrives.utils.ChunkIterator;
@@ -584,7 +553,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
      *
      * @see DriveChangesEvent
      */
-    class DriveChangesListener extends BaseCloudDriveListener implements EventListener {
+    class DriveChangesListener implements EventListener, CloudDriveListener {
 
       /**
        * The Class DelayedStart.
