@@ -80,7 +80,7 @@ public class CloudDriveDocumentsDriveInitializer extends BaseComponentPlugin imp
     try {
       manageDriveService.addDrive(event.getTitle(),
                                   event.getWorkspace(),
-                                  ConversationState.getCurrent().getIdentity().getUserId(),
+                                  event.getLocalUser(),
                                   event.getNodePath(),
                                   DRIVE_VIEWS,
                                   DRIVE_ICON,

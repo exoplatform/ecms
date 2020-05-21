@@ -3721,9 +3721,9 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
    * successful use this one cached.
    */
   private String                                          titleCached;
-  
+
   /** Local user name cached like title as used in many places. */
-  private String localUserCached;
+  private String                                          localUserCached;
 
   /**
    * Create JCR backed {@link CloudDrive}. This method used for both newly

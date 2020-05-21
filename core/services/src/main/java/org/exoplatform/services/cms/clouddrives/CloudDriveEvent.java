@@ -34,7 +34,7 @@ public class CloudDriveEvent {
   protected final CloudUser             user;
   
   /** The local user. */
-  protected final String localUser;
+  protected final String                localUser;
 
   /** The workspace. */
   protected final String                workspace;
@@ -155,5 +155,14 @@ public class CloudDriveEvent {
    */
   public String getTitle() {
     return title;
+  }
+
+  /**
+   * Gets local user.
+   *
+   * @return the local user
+   */
+  public String getLocalUser() {
+    return localUser;
   }
 }
