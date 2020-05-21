@@ -38,7 +38,7 @@
         <a :class="showSearchInput ? 'uiIconCloseServerAttachments' : 'uiIconSearch'" class="uiIconLightGray" @click="showSearchDocumentInput()"></a>
         <a v-if="modeFolderSelectionForFile || modeFolderSelection" :title="$t('attachments.filesFoldersSelector.button.addNewFOlder.tooltip')" rel="tooltip" data-placement="bottom" class="uiIconLightGray uiIconAddFolder" @click="addNewFolder()"></a>
       </div>
-      <div v-for="action in attachmentsComposerActions" :key="action.key" :class="`${action.appClass}Action`" class="actionBox">
+      <div v-for="action in attachmentsComposerActions" v-show="!currentDrive.name || currentDrive.name === 'Personal Documents'" :key="action.key" :class="`${action.appClass}Action`" class="actionBox">
         <div v-if="!modeFolderSelection" class="actionBoxLogo" @click="executeAction(action)">
           <v-icon v-if="action.iconName" class="uiActionIcon" >{{ action.iconName }}</v-icon>
           <i v-else :class="action.iconClass" class="uiActionIcon"></i>
@@ -477,7 +477,8 @@ export default {
               fileTypeCSSClass: fileTypeCSSClass,
               idAttribute: idAttribute,
               selected: selected,
-              mimetype: fetchedFiles[j].getAttribute('nodeType')
+              mimetype: fetchedFiles[j].getAttribute('nodeType'),
+              isCloudFile: fetchedFiles[j].getAttribute('isCloudFile') ? fetchedFiles[j].getAttribute('isCloudFile') : false
             });
           }
         }

@@ -1,7 +1,7 @@
 <template>
   <div class="attachment">
     <div class="fileType">
-      <i :class="getIconClassFromFileMimeType(file.mimetype)" class="uiIconFileTypeDefault"></i>
+      <i :class="getIconClassFromFileMimeType(file.mimetype)"></i>
     </div>
     <div class="fileDetails">
       <div class="fileDetails1">
@@ -38,7 +38,9 @@ export default {
     getIconClassFromFileMimeType: function(fileMimeType) {
       if(fileMimeType) {
         const fileMimeTypeClass = fileMimeType.replace(/\./g, '').replace('/', '').replace('\\', '');
-        return `uiIconFileType${fileMimeTypeClass}`;
+        return this.file.isCloudFile 
+          ? `uiIcon32x32${fileMimeType.replace(/[/.]/g, '')}` 
+          : `uiIconFileType${fileMimeTypeClass} uiIconFileTypeDefault`;
       } else {
         return '';
       }
