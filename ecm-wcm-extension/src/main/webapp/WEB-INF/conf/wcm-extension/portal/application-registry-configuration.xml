@@ -212,5 +212,72 @@
         </object-param>
       </init-params>
     </component-plugin>
+    <component-plugin>
+      <name>spaces.portlets.registry</name>
+      <set-method>initListener</set-method>
+      <type>org.exoplatform.application.registry.ApplicationCategoriesPlugins</type>
+      <description>this listener init the portlets are registered in PortletRegister</description>
+      <init-params>
+        <value-param>
+          <name>merge</name>
+          <value>true</value>
+        </value-param>
+        <object-param>
+          <name>spacesApplications</name>
+          <description>description</description>
+          <object type="org.exoplatform.application.registry.ApplicationCategory">
+            <field name="name">
+              <string>spacesApplications</string>
+            </field>
+            <field name="displayName">
+              <string>Spaces applications</string>
+            </field>
+            <field name="description">
+              <string>Applications allowed to be added in spaces</string>
+            </field>
+            <field name="accessPermissions">
+              <collection type="java.util.ArrayList" item-type="java.lang.String">
+                <value>
+                  <string>*:/platform/users</string>
+                </value>
+              </collection>
+            </field>
+            <field name="applications">
+              <collection type="java.util.ArrayList">
+                <value>
+                  <object type="org.exoplatform.application.registry.Application">
+                    <field name="applicationName">
+                      <string>FileExplorerPortlet</string>
+                    </field>
+                    <field name="categoryName">
+                      <string>content</string>
+                    </field>
+                    <field name="displayName">
+                      <string>Documents</string>
+                    </field>
+                    <field name="description">
+                      <string>File Explorer Portlet</string>
+                    </field>
+                    <field name="type">
+                      <string>portlet</string>
+                    </field>
+                    <field name="contentId">
+                      <string>ecmexplorer/FileExplorerPortlet</string>
+                    </field>
+                    <field name="accessPermissions">
+                      <collection type="java.util.ArrayList" item-type="java.lang.String">
+                        <value>
+                          <string>*:/platform/users</string>
+                        </value>
+                      </collection>
+                    </field>
+                  </object>
+                </value>
+              </collection>
+            </field>
+          </object>
+        </object-param>
+      </init-params>
+    </component-plugin>
   </external-component-plugins>
 </configuration>
