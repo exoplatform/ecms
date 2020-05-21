@@ -6533,9 +6533,9 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
    *
    * @param session the JCR session
    * @param fileUUID the file UUID
-   * @throws RepositoryException
-   * @throws AccessDeniedException
-   * @throws ItemNotFoundException
+   * @throws ItemNotFoundException the item not found exception
+   * @throws AccessDeniedException the access denied exception
+   * @throws RepositoryException the repository exception
    */
   protected void removeLinks(Session session, String fileUUID) throws ItemNotFoundException,
                                                                AccessDeniedException,

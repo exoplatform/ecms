@@ -50,7 +50,7 @@ public abstract class CloudDriveEnvironment extends BaseComponentPlugin {
    * Configure environment for a command execution. If this configuration will
    * fail the command execution will fail also with this exception.<br>
    * This operation should gather required settings to apply them later in
-   * {@link CloudDriveEnvironment#prepare(Command)} method.
+   * {@link #prepare(Command)} method.
    *
    * @param command the command
    * @throws CloudDriveException the cloud drive exception
@@ -66,7 +66,7 @@ public abstract class CloudDriveEnvironment extends BaseComponentPlugin {
    * the command execution will fail also with this exception. This method
    * should be invoked in a thread where the command runs.<br>
    * Preparation does apply settings gathered in
-   * {@link CloudDriveEnvironment#configure(Command)} method.
+   * {@link #configure(Command)} method.
    *
    * @param command the command
    * @throws CloudDriveException the cloud drive exception
@@ -82,7 +82,7 @@ public abstract class CloudDriveEnvironment extends BaseComponentPlugin {
    * case of command success. This method should be invoked in a thread where
    * the command runs.<br>
    * Cleanup does restore setting applied in
-   * {@link CloudDriveEnvironment#prepare(Command)} method.
+   * {@link #prepare(Command)} method.
    *
    * @param command {@link Command}
    * @throws CloudDriveException the cloud drive exception
@@ -98,7 +98,7 @@ public abstract class CloudDriveEnvironment extends BaseComponentPlugin {
    * regarding the error. This method should be invoked in a thread where the
    * command runs.<br>
    * Fail <strong>should not</strong> restore setting applied in
-   * {@link CloudDriveEnvironment#prepare(Command)} method, this should be done
+   * {@link #prepare(Command)} method, this should be done
    * by {@link #cleanup(Command)} call from try-finally block for example.
    *
    * @param command {@link Command}

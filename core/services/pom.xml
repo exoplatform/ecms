@@ -10,7 +10,7 @@
   <name>eXo PLF:: CMS Service</name>
   <description>eXo CMS Service</description>
   <properties>
-    <exo.test.coverage.ratio>0.43</exo.test.coverage.ratio>
+    <exo.test.coverage.ratio>0.34</exo.test.coverage.ratio>
   </properties>
   <dependencies>
     <dependency>
@@ -306,7 +306,7 @@
       <scope>test</scope>
     </dependency>
     <!-- for tests -->
-    <dependency>
+    <!-- dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-log4j12</artifactId>
       <scope>test</scope>
@@ -348,7 +348,7 @@
       <groupId>org.hamcrest</groupId>
       <artifactId>hamcrest-core</artifactId>
       <scope>test</scope>
-    </dependency>
+    </dependency -->
   </dependencies>
   <build>
     <resources>
