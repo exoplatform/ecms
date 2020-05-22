@@ -94,7 +94,7 @@
         </div>
       </div>
       <div v-else class="categorizedDrives">
-        <div v-for="(group, name) in categorizedDrives" :key="name">
+        <div v-for="(group, name) in categorizedDrives" :key="name" :class="{ 'categoryClosed': !group.opened }" class="category">
           <p class="categoryName" @click="toggleDrivesSection(name)">{{ name }}</p>
           <div v-show="group.opened" class="selectionBox">
             <div v-for="driver in group.drives" :key="driver.name" :title="driver.title" class="folderSelection"
