@@ -598,7 +598,7 @@ public class DocumentServiceImpl implements DocumentService {
    */
   @Override
   public void savePreferredEditor(String userId, String provider, String uuid, String workspace) throws RepositoryException {
-    Node node = WCMCoreUtils.nodeByUUID(uuid, workspace);
+    Node node = nodeByUUID(uuid, workspace);
     if (node.canAddMixin(EXO_DOCUMENT)) {
       node.addMixin(EXO_DOCUMENT);
     }
@@ -617,7 +617,7 @@ public class DocumentServiceImpl implements DocumentService {
    */
   @Override
   public String getPreferredEditor(String userId, String uuid, String workspace) throws RepositoryException {
-    Node node = WCMCoreUtils.nodeByUUID(uuid, workspace);
+    Node node = nodeByUUID(uuid, workspace);
     if (node.hasNode(userId)) {
       Node userPreferences = node.getNode(userId);
       if (userPreferences.hasProperty(EXO_PREFFERED_EDITOR)) {
@@ -643,7 +643,9 @@ public class DocumentServiceImpl implements DocumentService {
     Session systemSession = repoService.getCurrentRepository().getSystemSession(workspace);
     Node systemNode = systemSession.getNodeByUUID(uuid);
     String userId = systemNode.getProperty(EXO_LAST_MODIFIER_PROP).getString();
-    WCMCoreUtils.invokeUserSession(userId, uuid, workspace, (node) -> {
+    WCMCoreUtils.invokeUserSession(userId, (sessionProvider) -> {
+      Session session = sessionProvider.getSession(workspace, repoService.getCurrentRepository());
+      Node node = session.getNodeByUUID(uuid);
       if (node.canAddMixin(EXO_DOCUMENT)) {
         node.addMixin(EXO_DOCUMENT);
       }
@@ -666,7 +668,9 @@ public class DocumentServiceImpl implements DocumentService {
       return provider;
     } else {
       String userId = systemNode.getProperty(EXO_LAST_MODIFIER_PROP).getString();
-      WCMCoreUtils.invokeUserSession(userId, uuid, workspace, (node) -> {
+      WCMCoreUtils.invokeUserSession(userId, (sessionProvider) -> {
+        Session session = sessionProvider.getSession(workspace, repoService.getCurrentRepository());
+        Node node = session.getNodeByUUID(uuid);
         if (node.canAddMixin(EXO_DOCUMENT)) {
           node.addMixin(EXO_DOCUMENT);
         }
@@ -1032,4 +1036,5 @@ public class DocumentServiceImpl implements DocumentService {
 
     return "";
   }
+  
 }
