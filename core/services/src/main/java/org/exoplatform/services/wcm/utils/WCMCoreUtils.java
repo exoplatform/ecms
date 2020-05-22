@@ -48,6 +48,8 @@ import org.apache.commons.lang.StringUtils;
 import org.quartz.JobExecutionContext;
 import org.quartz.impl.JobDetailImpl;
 
+import com.github.scribejava.core.java8.Consumer;
+
 import org.exoplatform.commons.api.settings.SettingService;
 import org.exoplatform.commons.api.settings.SettingValue;
 import org.exoplatform.commons.api.settings.data.Context;
@@ -84,8 +86,10 @@ import org.exoplatform.services.log.Log;
 import org.exoplatform.services.organization.Membership;
 import org.exoplatform.services.organization.OrganizationService;
 import org.exoplatform.services.organization.idm.MembershipImpl;
+import org.exoplatform.services.security.Authenticator;
 import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.security.Identity;
+import org.exoplatform.services.security.IdentityRegistry;
 import org.exoplatform.services.security.MembershipEntry;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
@@ -807,4 +811,88 @@ public class WCMCoreUtils {
     DocumentService documentService = WCMCoreUtils.getService(DocumentService.class);
     return documentService.getLinkInDocumentsApp(nodePath);
   }
+  
+  /**
+   * Invoke user session.
+   *
+   * @param userId the user id
+   * @param uuid the uuid
+   * @param workspace the workspace
+   * @param handler the handler
+   * @throws RepositoryException the repository exception
+   */
+  @SuppressWarnings("deprecation")
+  public static void invokeUserSession(String userId, String uuid, String workspace, RepositoryConsumer<Node> handler) throws RepositoryException {
+    Identity userIdentity = userIdentity(userId);
+    if (userIdentity != null) {
+      SessionProviderService sessionProviderService = getService(SessionProviderService.class);
+      // Remember current conversation state
+      ConversationState currentConvoState = ConversationState.getCurrent();
+      SessionProvider currentContextProvider = sessionProviderService.getSessionProvider(null);
+      try {
+        ConversationState state = new ConversationState(userIdentity);
+        // Keep subject as attribute in ConversationState.
+        state.setAttribute(ConversationState.SUBJECT, userIdentity.getSubject());
+        ConversationState.setCurrent(state);
+        SessionProvider userProvider = new SessionProvider(state);
+        
+        sessionProviderService.setSessionProvider(null, userProvider);
+        
+        Node node = nodeByUUID(uuid, workspace);
+        handler.accept(node);
+      } finally {
+        // Restore previous conversation state
+        ConversationState.setCurrent(currentConvoState);
+        sessionProviderService.setSessionProvider(null, currentContextProvider);
+      }
+    } else {
+      throw new IllegalArgumentException("User identity not found " + userId + " for setting conversation state");
+    }
+  }
+  
+  /**
+   * Node by UUID.
+   *
+   * @param uuid the uuid
+   * @param workspace the workspace
+   * @return the node
+   * @throws RepositoryException the repository exception
+   */
+  public static Node nodeByUUID(String uuid, String workspace) throws RepositoryException {
+    RepositoryService repositoryService = getService(RepositoryService.class);
+    if (workspace == null) {
+      workspace = repositoryService.getCurrentRepository().getConfiguration().getDefaultWorkspaceName();
+    }
+    SessionProviderService sessionProviderService = getService(SessionProviderService.class);
+    SessionProvider sp = sessionProviderService.getSessionProvider(null);
+    Session session = sp.getSession(workspace, repositoryService.getCurrentRepository());
+    return session.getNodeByUUID(uuid);
+  }
+  
+  /**
+   * Find or create user identity.
+   *
+   * @param userId the user id
+   * @return the identity can be null if not found and cannot be created via
+   *         current authenticator
+   */
+  private static Identity userIdentity(String userId) {
+    IdentityRegistry identityRegistry = getService(IdentityRegistry.class);
+    Identity userIdentity = identityRegistry.getIdentity(userId);
+    if (userIdentity == null) {
+      // We create user identity by authenticator, but not register it in the
+      // registry
+      try {
+        if (LOG.isDebugEnabled()) {
+          LOG.debug("User identity not registered, trying to create it for: " + userId);
+        }
+        Authenticator authenticator = getService(Authenticator.class);
+        userIdentity = authenticator.createIdentity(userId);
+      } catch (Exception e) {
+        LOG.warn("Failed to create user identity: " + userId, e);
+      }
+    }
+    return userIdentity;
+  } 
+  
 }
