@@ -815,7 +815,7 @@ public class WCMCoreUtils {
   /**
    * Allows to perform actions using user session provider.
    * Invokes the handler with obtained session provider using the conversation state based on userId.
-   * Restores the converation state after calling handler.
+   * Restores the conversation state after calling the handler.
    *
    * @param userId the user id for conversation state
    * @param handler the handler to be called
