@@ -813,10 +813,12 @@ public class WCMCoreUtils {
   }
   
   /**
-   * Invoke user session.
+   * Allows to perform actions using user session provider.
+   * Invokes the handler with obtained session provider using the conversation state based on userId.
+   * Restores the converation state after calling handler.
    *
-   * @param userId the user id
-   * @param handler the handler
+   * @param userId the user id for conversation state
+   * @param handler the handler to be called
    * @throws RepositoryException the repository exception
    */
   @SuppressWarnings("deprecation")
