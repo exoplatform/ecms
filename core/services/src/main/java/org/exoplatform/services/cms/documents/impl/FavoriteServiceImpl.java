@@ -28,6 +28,7 @@ import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
 
 import org.exoplatform.services.cms.documents.FavoriteService;
+import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.jcr.access.PermissionType;
 import org.exoplatform.services.jcr.core.ExtendedNode;
@@ -92,7 +93,11 @@ public class FavoriteServiceImpl implements FavoriteService {
       }
     }
     // add favorite symlink
-    linkManager.createLink(userFavoriteNode, NodetypeConstant.EXO_SYMLINK, node, node.getName() + ".lnk");
+    Node favoriteNode = linkManager.createLink(userFavoriteNode, NodetypeConstant.EXO_SYMLINK, node, node.getName() + ".lnk");
+    String nodeMimeType = Utils.getFileType(node);
+    favoriteNode.addMixin(NodetypeConstant.MIX_FILE_TYPE);
+    favoriteNode.setProperty(NodetypeConstant.EXO_FILE_TYPE, nodeMimeType);
+    userFavoriteNode.save();
     userFavoriteNode.getSession().save();
   }
 

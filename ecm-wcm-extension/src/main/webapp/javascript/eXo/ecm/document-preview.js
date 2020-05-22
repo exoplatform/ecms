@@ -365,9 +365,20 @@
 
           if(this.settings.showComments) {
             html += '<!-- doc comments -->' +
-              '<div class="uiBox commentArea pull-right" id="commentArea">' +
+                '<div class="uiBox commentArea pull-right" id="commentArea">' +
                 '<div class="title">' +
-                  '<i class="' + cssClasses + '"></i>&nbsp;' + this.settings.doc.title +
+                '<div class="docTitle" rel="tooltip" data-placement="top" title="' + this.settings.doc.title + '">' +
+                '<span>' + this.settings.doc.title + '</span>'
+            if (typeof this.settings.doc.fileInfo != "undefined") {
+              html += '<div class="label primary fileVersion">V' + documentPreview.settings.version.number + '</div>'
+            }
+            if (typeof this.settings.doc.fileInfo != "undefined") {
+              html += '<div class="docInfo" rel="tooltip" data-placement="top" title="' + this.settings.doc.fileInfo + '">' + this.settings.doc.fileInfo + '</div>'
+            }
+            html += '</div>' +
+                '<div class="closeIcon">' +
+                '<a class="uiIconClose" title="${UIActivity.comment.close}" onclick="documentPreview.hide()"></a>' +
+                '</div>' +
                 '</div>' +
                 '<div class="uiContentBox">' +
                   '<div class="highlightBox">' +
@@ -462,10 +473,37 @@
                     '</div>' +
                     '<div class="downloadBtn">' +
                       '<a href="' + this.settings.doc.downloadUrl + '"><i class="uiIconDownload uiIconWhite"></i>&nbsp;${UIActivity.comment.download}</a>' +
-                    '</div>' +
-                  '</div>' +
-                '</div>' +
+                    '</div>' ;
+        if (!this.settings.showComments) {
+          html += '<div class="fileName" data-container="body" rel="tooltip" data-placement="top" title="' + documentPreview.settings.doc.title + '">' +
+              '<div class="ellipsis">' + documentPreview.settings.doc.title + '</div>' +
+              ((documentPreview.settings.version && documentPreview.settings.version.number) ? ('<div class="label primary fileVersion"' + (documentPreview.settings.doc.openUrl ? 'onclick="window.location.href=\'' + documentPreview.settings.doc.openUrl + '&versions=true\'"' : "") + '>V' + documentPreview.settings.version.number + '</div>') : '') +
               '</div>';
+        }
+        if(documentPreview.settings.doc && documentPreview.settings.doc.breadCrumb) {
+          var breadCrumbContent = '<div class="ellipsis-reverse-content hidden">...</div><div class="ellipsis-reverse-apply"><div class="ellipsis-reverse-apply-content">';
+          var folderIndex = 0;
+          var breadCrumbContentTooltip = "";
+          for (var folderName in documentPreview.settings.doc.breadCrumb) {
+            if (documentPreview.settings.doc.breadCrumb.hasOwnProperty(folderName)) {
+              var folderPath = documentPreview.settings.doc.breadCrumb[folderName];
+              if(folderIndex > 0) {
+                breadCrumbContent += '&nbsp;<i class="uiIconArrowRight"></i>&nbsp;';
+                breadCrumbContentTooltip += " > ";
+              }
+              breadCrumbContent += '<a href="' + folderPath + '" onclick="event.stopPropagation();window.location.href=this.href">' + XSSUtils.escapeHtml(folderName) + '</a>';
+              breadCrumbContentTooltip += folderName;
+              folderIndex++;
+            }
+          }
+          breadCrumbContent += '</div></div>';
+        }
+        if(breadCrumbContent) {
+          html += '<div class="breadCrumb ellipsis-reverse" data-container="body" rel="tooltip" data-placement="top" title="' + breadCrumbContentTooltip + '">' + breadCrumbContent + '</div>';
+        }
+        html += '</div>' +
+            '</div>' +
+            '</div>';
         docPreviewContainer.html(html);
       }
 
@@ -921,6 +959,16 @@
             $(window).off('resize', resizeEventHandler);
           }, 500);
         });
+
+        $(".closeIcon > .uiIconClose", $('#uiDocumentPreview')).click(function() {
+          $('body').removeClass('modal-open');
+          $("#documentPreviewContainer").remove();
+          setTimeout(function() {
+            $('body').css('overflow', 'visible');
+            $(document).off('keyup', closeEventHandler);
+            $(window).off('resize', resizeEventHandler);
+          }, 500);
+        });
   
         if(this.settings.showComments) {
           // Bind expanded/collapsed event
@@ -1183,48 +1231,12 @@
     }
     // Show Next & previous buttons inside resizable div
     if($uiDocumentPreview.find("#NavCommands").length == 0) {
-      if(documentPreview.settings.doc && documentPreview.settings.doc.breadCrumb) {
-        var breadCrumbContent = '<div class="ellipsis-reverse-content hidden">...</div><div class="ellipsis-reverse-apply"><div class="ellipsis-reverse-apply-content">';
-        var folderIndex = 0;
-        var breadCrumbContentTooltip = "";
-        for (var folderName in documentPreview.settings.doc.breadCrumb) {
-          if (documentPreview.settings.doc.breadCrumb.hasOwnProperty(folderName)) {
-              var folderPath = documentPreview.settings.doc.breadCrumb[folderName];
-              if(folderIndex > 0) {
-                breadCrumbContent += '&nbsp;<i class="uiIconArrowRight"></i>&nbsp;';
-                breadCrumbContentTooltip += " > ";
-              }
-              breadCrumbContent += '<a href="' + folderPath + '" onclick="event.stopPropagation();window.location.href=this.href">' + XSSUtils.escapeHtml(folderName) + '</a>';
-              breadCrumbContentTooltip += folderName;
-              folderIndex++;
-          }
-        }
-        breadCrumbContent += '</div></div>';
-      }
-      var fileTitleBlock = '<div class="fileTitle">' +
-          '<h4 class="fileName" data-container="body" rel="tooltip" data-placement="top" title="' + documentPreview.settings.doc.title + '">' +
-            '<div class="ellipsis">' + documentPreview.settings.doc.title + '</div>' +
-                ((documentPreview.settings.version  && documentPreview.settings.version.number) ? ('<div class="label primary fileVersion"' + (documentPreview.settings.doc.openUrl ? 'onclick="window.location.href=\'' + documentPreview.settings.doc.openUrl +'&versions=true\'"' : "") + '>V' + documentPreview.settings.version.number + '</div>') : '') +
-          '</h4>';
-      if(breadCrumbContent) {
-        fileTitleBlock += '<div class="breadCrumb ellipsis-reverse" data-container="body" rel="tooltip" data-placement="top" title="' + breadCrumbContentTooltip + '">' + breadCrumbContent + '</div>';
-      }
-      if(documentPreview.settings.doc.fileInfo) {
-        fileTitleBlock += '<div class="fileInfo ellipsis" data-container="body" rel="tooltip" data-placement="top" title="' + documentPreview.settings.doc.fileInfo + '">' + documentPreview.settings.doc.fileInfo + '</div>';
-      }
-      fileTitleBlock += '</div>';
       if(documentPreview.settings.activity.next || documentPreview.settings.activity.previous) {
         $blockToAppendTo.append('<div id="NavCommands">' +
-             '<div class="arrowPrevious ' + (documentPreview.settings.activity.previous ? '' : 'disabled') + '" onclick="documentPreview.goToPrevious()"  rel="tooltip" data-placement="top" title="${UIActivity.label.Previous}"><span></span></div>'
-               + fileTitleBlock +
+             '<div class="arrowPrevious ' + (documentPreview.settings.activity.previous ? '' : 'disabled') + '" onclick="documentPreview.goToPrevious()"  rel="tooltip" data-placement="top" title="${UIActivity.label.Previous}"><span></span></div>' +
              '<div class="arrowNext ' + (documentPreview.settings.activity.next ? '' : 'disabled') + '" onclick="documentPreview.goToNext()" rel="tooltip" data-placement="top" title="${UIActivity.label.Next}"><span></span></div>' +
           '</div>'
         );
-      } else {
-        $blockToAppendTo.append('<div id="NavCommands">'
-            + fileTitleBlock +
-         '</div>'
-       );
       }
     }
     applyReverseEllipsis($uiDocumentPreview);

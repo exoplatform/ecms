@@ -450,6 +450,7 @@ body {
 	width: 36px;
 	text-align: right;
 	margin-bottom: 0;
+    min-height: 27px!important;
 }
 
 #toolbarViewerLeft > *,

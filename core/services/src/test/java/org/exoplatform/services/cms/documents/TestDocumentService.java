@@ -64,32 +64,21 @@ public class TestDocumentService extends BaseWCMTestCase {
     assertEquals(0, documents.size());
   }
   
-  public void testGetPrivateDocuments() throws Exception {
-    String userId = "root";
-    applyUserSession(userId, "gtn", COLLABORATION_WS);
-    Node userNode = nodeHierarchyCreator.getUserNode(sessionProvider, userId);
-    userNode.addNode("doc.txt", "nt:file");
-    session.save();
-    List<Document> documents = documentService.getPrivateDocuments(userId, 10);
-    assertNotNull("documents wasn't created", documents);
-    assertEquals(0, documents.size());
-  }
-  
-  public void testGetMyWorkDocuments() throws Exception {
-    String userId = "root";
-    applyUserSession(userId, "gtn", COLLABORATION_WS);
-    List<Document> documents = documentService.getMyWorkDocuments(userId, 10);
-    assertNotNull("documents wasn't created", documents);
-    assertEquals(0, documents.size());
-  }
-  
-  public void testGetRecentSpacesDocuments() throws Exception {
-    String userId = "root";
-    applyUserSession(userId, "gtn", COLLABORATION_WS);
-    List<Document> documents = documentService.getRecentSpacesDocuments(10);
-    assertNotNull("documents wasn't created", documents);
-    assertEquals(0, documents.size());
-  }
+//  public void testGetMyWorkDocuments() throws Exception {
+//    String userId = "root";
+//    applyUserSession(userId, "gtn", COLLABORATION_WS);
+//    List<Document> documents = documentService.getMyWorkDocuments(userId, 10);
+//    assertNotNull("documents wasn't created", documents);
+//    assertEquals(0, documents.size());
+//  }
+//  
+//  public void testGetRecentSpacesDocuments() throws Exception {
+//    String userId = "root";
+//    applyUserSession(userId, "gtn", COLLABORATION_WS);
+//    List<Document> documents = documentService.getRecentSpacesDocuments(10);
+//    assertNotNull("documents wasn't created", documents);
+//    assertEquals(0, documents.size());
+//  }
   
   public void tearDown() throws Exception {
     if (session.isLive()) {
