@@ -110,7 +110,9 @@ public interface DocumentService {
    * @return The file preview breadCrumb
    * @throws Exception
    */
-  public LinkedHashMap<String, String> getFilePreviewBreadCrumb(Node fileNode) throws Exception;
+  default LinkedHashMap<String, String> getFilePreviewBreadCrumb(Node fileNode) throws Exception {
+    throw new UnsupportedOperationException();
+  }
   
   /**
    * Adds the document template plugin.
