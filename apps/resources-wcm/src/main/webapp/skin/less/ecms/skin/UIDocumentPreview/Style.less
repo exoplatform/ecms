@@ -6,11 +6,12 @@
 	left: 0;
 	top: 0;
 	z-index: 100;
-	background: rgba(0, 0, 0, 0.8);
+	background: @black;
 	color: @textColor;
 	.uiDocumentPreview.collapsed {
 		#documentPreviewContent, .uiPreviewWebContent, .EmbedHtml, .previewBtn {
 			margin-right: 30px;
+			background : @black;
 		}
 		.commentArea {
 			display: none;
@@ -27,7 +28,7 @@
 	}
 	.uiDocumentPreview {
 		padding-left: 30px;
-		padding-top: 35px;
+		background: @black;
 
 		.label {
 			background-color: #578dc9;
@@ -54,14 +55,52 @@
 		    margin-bottom: 0;
 		    width: 365px;
 		    border: 0;
+			.avatarMedium img {
+				border-radius: 2rem;
+			}
 			.title {
 				font-weight: bold;
 				overflow: hidden;
 			    text-overflow: ellipsis;
 			    white-space: nowrap;
-			}			
+				padding: 0px;
+				background-color: white;
+				border-bottom: 1px solid @greyColor;
+				border-radius: initial;
+				.docTitle {
+					width: 90%;
+					float:left;
+					border-right: 1px solid @greyColor;
+					padding-top: 8px;
+					padding-bottom: 8px;
+					white-space: nowrap;
+					overflow: hidden;
+					text-overflow: ellipsis;
+					span {
+						margin-left: 15px;
+						margin-right: 15px;
+						font-weight: bold;
+						color: @primaryColor
+					}
+				}
+				.docInfo {
+					color: @darkGrey;
+					font-size: 14px;
+					font-weight: normal;
+					margin-left: 15px;
+				}
+				.closeIcon {
+					width: 8%;
+					float:right;
+					.uiIconClose {
+						margin-left: 8px;
+						margin-top: 16px;
+						cursor: pointer;
+					}
+				}
+			}
       .focus {
-        background-color: @primaryBackgroundLight;
+        background-color: @black;
       }
 			.uiContentBox {
 				padding: 0;
@@ -329,8 +368,9 @@
 	  	#documentPreviewContent {
             position: relative;
             margin-right: 390px;
-            background-color: white;
+            background-color: @black;
 			height: ~"calc(100vh - 82px)";
+			padding-top: 35px;
 
 			div.loading {
                margin: auto 0;
@@ -506,6 +546,7 @@
 				}
 				.content {	
 					text-align: center;
+					background: @black;
 				}
 				.uiUnEditable {
 					margin: 0px auto;
@@ -597,6 +638,22 @@
 		  	.openBtn, .downloadBtn, .openDocBtn, .showComments {
 			    float: right;
 			  	padding-left: 15px;
+			}
+			.fileName {
+				text-align: center;
+				width: 70%;
+				float: right;
+				.ellipsis {
+					display: contents;
+					color: @white;
+					font-weight: bold;
+				}
+				.label {
+					margin-left: 16px;
+				}
+			}
+			.breadCrumb {
+				float: left;
 			}
 			.showComments {
 				display: none;
