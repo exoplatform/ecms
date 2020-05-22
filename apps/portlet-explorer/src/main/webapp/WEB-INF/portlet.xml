@@ -5,9 +5,9 @@
   
   
   <portlet>
-    <description xml:lang="EN">Content Explorer</description>
+    <description xml:lang="EN">File Explorer Portlet</description>
     <portlet-name>FileExplorerPortlet</portlet-name>
-    <display-name xml:lang="EN">Content Explorer</display-name>
+    <display-name xml:lang="EN">Documents</display-name>
     <portlet-class>org.exoplatform.webui.application.portlet.PortletApplicationController</portlet-class>    
     
     <init-param>

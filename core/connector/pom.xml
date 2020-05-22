@@ -12,7 +12,7 @@
   <name>eXo PLF:: ECMS Connector</name>
   <description>eXo ECMS REST Services</description>
   <properties>
-    <exo.test.coverage.ratio>0.1</exo.test.coverage.ratio>
+    <exo.test.coverage.ratio>0.0</exo.test.coverage.ratio>
   </properties>
   <dependencies>
     <dependency>
@@ -142,12 +142,11 @@
       <artifactId>log4j</artifactId>
       <optional>true</optional>
     </dependency>
-    <!-- "unused declared" by analyze but still use for test -->
     <dependency>
       <groupId>org.exoplatform.commons</groupId>
       <artifactId>commons-component-common</artifactId>
-      <scope>test</scope>
     </dependency>
+    <!-- "unused declared" by analyze but still use for test -->
     <dependency>
       <groupId>org.exoplatform.commons</groupId>
       <artifactId>commons-testing</artifactId>

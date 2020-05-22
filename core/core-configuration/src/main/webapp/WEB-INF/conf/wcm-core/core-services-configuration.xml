@@ -60,10 +60,6 @@
     </component>
     
     <component>
-        <type>org.exoplatform.services.cms.documents.cometd.CometdDocumentsService</type>
-    </component>
-
-    <component>
         <key>org.exoplatform.services.cms.drives.ManageDriveService</key>
         <type>org.exoplatform.services.cms.drives.impl.ManageDriveServiceImpl</type>
     </component>
