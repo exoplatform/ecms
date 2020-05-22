@@ -88,6 +88,8 @@
 					font-size: 14px;
 					font-weight: normal;
 					margin-left: 15px;
+					overflow: hidden;
+					text-overflow: ellipsis;
 				}
 				.closeIcon {
 					width: 8%;
@@ -414,7 +416,7 @@
                 white-space: nowrap;
                 width: ~"calc(100% - 20px)";
                 max-width: ~"calc(100% - 20px)";
-                background: white;
+                background: @black;
                 display: flex;
 
                 .ellipsis {
@@ -450,10 +452,10 @@
                     background: gray;
                 }
                 > .arrowPrevious {
-                    text-align: right;
+                    text-align: inherit;
                 }
                 > .arrowNext {
-                    text-align: left;
+                    text-align: end;
                 }
                 > .fileTitle {
                     text-align: center;

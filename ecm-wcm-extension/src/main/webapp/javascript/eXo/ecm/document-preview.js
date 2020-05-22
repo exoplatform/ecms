@@ -373,7 +373,7 @@
               html += '<div class="label primary fileVersion">V' + documentPreview.settings.version.number + '</div>'
             }
             if (typeof this.settings.doc.fileInfo != "undefined") {
-              html += '<div class="docInfo">' + this.settings.doc.fileInfo.replace(/,.*-/, '-') + '</div>'
+              html += '<div class="docInfo" rel="tooltip" data-placement="top" title="' + this.settings.doc.fileInfo + '">' + this.settings.doc.fileInfo + '</div>'
             }
             html += '</div>' +
                 '<div class="closeIcon">' +
@@ -1230,28 +1230,13 @@
       }
     }
     // Show Next & previous buttons inside resizable div
-    if (typeof this.settings !== 'undefined') {
-      if (this.settings.showComments) {
-        if($uiDocumentPreview.find("#NavCommands").length == 0) {
-
-          if(documentPreview.settings.doc.fileInfo) {
-            fileTitleBlock += '<div class="fileInfo ellipsis" data-container="body" rel="tooltip" data-placement="top" title="' + documentPreview.settings.doc.fileInfo + '">' + documentPreview.settings.doc.fileInfo + '</div>';
-          }
-          fileTitleBlock += '</div>';
-          if(documentPreview.settings.activity.next || documentPreview.settings.activity.previous) {
-            $blockToAppendTo.append('<div id="NavCommands">' +
-                '<div class="arrowPrevious ' + (documentPreview.settings.activity.previous ? '' : 'disabled') + '" onclick="documentPreview.goToPrevious()"  rel="tooltip" data-placement="top" title="${UIActivity.label.Previous}"><span></span></div>'
-                + fileTitleBlock +
-                '<div class="arrowNext ' + (documentPreview.settings.activity.next ? '' : 'disabled') + '" onclick="documentPreview.goToNext()" rel="tooltip" data-placement="top" title="${UIActivity.label.Next}"><span></span></div>' +
-                '</div>'
-            );
-          } else {
-            $blockToAppendTo.append('<div id="NavCommands">'
-                + fileTitleBlock +
-                '</div>'
-            );
-          }
-        }
+    if($uiDocumentPreview.find("#NavCommands").length == 0) {
+      if(documentPreview.settings.activity.next || documentPreview.settings.activity.previous) {
+        $blockToAppendTo.append('<div id="NavCommands">' +
+             '<div class="arrowPrevious ' + (documentPreview.settings.activity.previous ? '' : 'disabled') + '" onclick="documentPreview.goToPrevious()"  rel="tooltip" data-placement="top" title="${UIActivity.label.Previous}"><span></span></div>' +
+             '<div class="arrowNext ' + (documentPreview.settings.activity.next ? '' : 'disabled') + '" onclick="documentPreview.goToNext()" rel="tooltip" data-placement="top" title="${UIActivity.label.Next}"><span></span></div>' +
+          '</div>'
+        );
       }
     }
     applyReverseEllipsis($uiDocumentPreview);
