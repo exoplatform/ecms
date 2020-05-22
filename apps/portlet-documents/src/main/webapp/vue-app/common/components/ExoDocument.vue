@@ -30,22 +30,22 @@
     computed: {
       documentIcon() {
         const icon = {}
-        if (this.document.mimeType.includes('pdf')) {
+        if (this.document.fileType.includes('pdf')) {
           icon.ico = 'mdi-file-pdf';
           icon.color = '#d07b7b';
-        } else if (this.document.mimeType.includes('mlpresentation')) {
+        } else if (this.document.fileType.includes('presentation') || this.document.fileType.includes('powerpoint')) {
           icon.ico = 'mdi-file-powerpoint';
           icon.color = '#e45030';
-        } else if (this.document.mimeType.includes('mlsheet')) {
+        } else if (this.document.fileType.includes('sheet') || this.document.fileType.includes('excel')) {
           icon.ico = 'mdi-file-excel';
           icon.color = '#1a744b';
-        } else if (this.document.mimeType.includes('mldocument')) {
+        } else if (this.document.fileType.includes('word') || this.document.fileType.includes('opendocument') || this.document.fileType.includes('rtf') ) {
           icon.ico = 'mdi-file-word';
           icon.color = '#094d7f';
-        } else if (this.document.mimeType.includes('textplain')) {
+        } else if (this.document.fileType.includes('plain')) {
           icon.ico = 'mdi-clipboard-text';
           icon.color = '#1c9bd7';
-        } else if (this.document.mimeType.includes('image')) {
+        } else if (this.document.fileType.includes('image')) {
           icon.ico = 'mdi-image';
           icon.color = '#eab320';
         } else {
@@ -55,7 +55,7 @@
         return icon;
       },
       relativeDateModified() {
-        return this.getRelativeTime(this.document.dateModified.time);
+        return this.getRelativeTime(this.document.date);
       }
     },
     methods: {
@@ -85,7 +85,7 @@
       },
       absoluteDateModified(options) {
         const lang = eXo && eXo.env && eXo.env.portal && eXo.env.portal.language || 'en';
-        return new Date(this.document.dateModified.time).toLocaleString(lang, options).split("/").join("-");
+        return new Date(this.document.date).toLocaleString(lang, options).split("/").join("-");
       },
       fileInfo() {
         return `${this.$t("documents.preview.updatedOn")} ${this.absoluteDateModified()} ${this.$t("documents.preview.updatedBy")} ${this.document.lastEditor} ${this.document.size}`;
@@ -101,16 +101,17 @@
             id: this.document.id,
             repository: 'repository',
             workspace: 'collaboration',
-            path: this.document.path,
+            path: this.document.nodePath || this.document.path,
             title: this.document.title,
             downloadUrl: this.document.downloadUrl,
-            openUrl: this.document.openUrl,
-            breadCrumb: this.document.breadCrumb,
+            openUrl: this.document.url,
+            breadCrumb: this.document.previewBreadcrumb,
             fileInfo: this.fileInfo()
           },
           version: {                                                                 
             number : this.document.version 
           },
+          showComments: false
         });
       }
     }

@@ -10,7 +10,7 @@
     "start": "webpack --config webpack.dev.js --mode development",
     "dev": "webpack-dev-server --config webpack.dev.js --mode development --hot",
     "watch": "webpack --config webpack.dev.js --progress --colors --watch -d",
-    "lint": "eslint --fix ./src/main/webapp/attachments-selector/components/*.vue",
+    "lint": "eslint --fix ./src/main/webapp/attachments-selector/components/*.vue ./src/main/webapp/attachments-selector/attachmentsService.js",
     "test": "jest",
     "test-coverage": "jest --coverage",
     "build": "webpack --config webpack.prod.js --mode production"

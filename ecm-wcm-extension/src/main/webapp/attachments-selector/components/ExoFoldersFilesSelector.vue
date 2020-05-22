@@ -81,10 +81,11 @@
           <a :title="folder.title" href="javascript:void(0);" rel="tooltip" data-placement="bottom">
             <i :class="folder.folderTypeCSSClass" class="uiIcon24x24FolderDefault uiIconEcmsLightGray selectionIcon center"></i>
             <input v-if="folder.type === 'new_folder'" :ref="folder.ref" v-model="newFolderName" type="text" class="newFolderInput  ignore-vuetify-classes" @blur="createNewFolder()" @keyup.enter="$event.target.blur()" @keyup.esc="cancelCreatingNewFolder($event)">
-            <div v-else class="selectionLabel center">{{ folder.title }}</div>
+            <input v-else-if="renameFolderAction && folder.id === selectedFolder.id" ref="test" :id="folder.id" v-model="newName" type="text" class="newFolderInput  ignore-vuetify-classes" @blur="saveNewNameFolder()" @keyup.enter="$event.target.blur()" @keyup.esc="cancelRenameNewFolder($event)">
+            <div v-else :id="folder.id" class="selectionLabel center">{{ folder.title }}</div>
           </a>
         </div>
-        <exo-dropdown-menu ref="folderActionsMenu" :folder-actions-menu-left="folderActionsMenuLeft" :folder-actions-menu-top="folderActionsMenuTop" :show-dropdown-menu="showFolderActionsMenu" :selected-folder="selectedFolder" @deleteFolder="deleteFolder" @closeMenu="closeFolderActionsMenu"></exo-dropdown-menu>
+        <exo-dropdown-menu ref="folderActionsMenu" :folder-actions-menu-left="folderActionsMenuLeft" :folder-actions-menu-top="folderActionsMenuTop" :show-dropdown-menu="showFolderActionsMenu" :selected-folder="selectedFolder" @renameFolder="renameFolder()" @deleteFolder="deleteFolder" @closeMenu="closeFolderActionsMenu"></exo-dropdown-menu>
         <div v-if="emptyFolderForSelectDestination && modeFolderSelection && !emptyFolder" class="emptyFolder">
           <i class="uiIconEmptyFolder"></i>
           <p>{{ $t('attachments.drawer.destination.folder.empty') }}</p>
@@ -234,6 +235,9 @@ export default {
       showErrorMessage: false,
       errorMessage: '',
       categorizedDrives: {}
+      renameFolderAction:false,
+      newName:'',
+      MESSAGES_DISPLAY_TIME: 5000,
     };
   },
   computed: {
@@ -312,7 +316,10 @@ export default {
   },
   methods: {
     openFolder: function (folder) {
-      if (folder.type === 'new_folder') {
+      if (this.selectedFolder.id){
+        this.$refs.test[0].focus();
+      }
+      else if (folder.type === 'new_folder') {
         this.$refs.newFolder[0].focus();
       } else {
         this.currentAbsolutePath = folder.path;
@@ -320,17 +327,7 @@ export default {
         this.resetExplorer();
         folder.isSelected = true;
         this.fetchChildrenContents(folder.path);
-        if (folder.path === 'Public') {
-          const driverPath = this.driveRootPath.split('/');
-          let localDrive = driverPath[0];
-          const secondPartPath = 2;
-          for (let i = 1; i < driverPath.length - secondPartPath; i++) {
-            localDrive = localDrive.concat('/', driverPath[i]);
-          }
-          this.selectedFolderPath = localDrive.concat('/', folder.path);
-        } else {
-          this.selectedFolderPath = this.driveRootPath.concat(folder.path);
-        }
+        this.getFolderPath(folder);
         this.schemaFolder = this.currentDrive.name.concat('/', folder.path);
         this.folderDestinationForFile = folder.name;
       }
@@ -593,6 +590,10 @@ export default {
       this.creatingNewFolder = false;
       this.newFolderName = '';
     },
+    cancelRenameNewFolder() {
+      this.renameFolderAction = false;
+      this.newName = this.selectedFolder.title;
+    },
     openFolderActionsMenu(folder, event) {
       this.selectedFolder = folder;
       this.showFolderActionsMenu = true;
@@ -666,6 +667,69 @@ export default {
           opened: !this.categorizedDrives[sectionName].opened
         }
       };
+    },
+    renameFolder() {
+      if (this.selectedFolder.canRemove) {
+        if (this.selectedFolder.title) {
+          this.newName = this.selectedFolder.title;
+          this.renameFolderAction = true;
+          this.showFolderActionsMenu = false;
+          this.$nextTick(() => {this.$refs.test[0].focus();});
+        }
+      }
+    },
+    saveNewNameFolder() {
+      if (this.newName !== this.selectedFolder.title && this.newName !== '') {
+        const folderNameExists = this.folders.some(folder => folder.title === this.newName);
+        if (folderNameExists) {
+          this.$refs.exoModal.open();
+          this.popupBodyMessage = `${this.$t('attachments.renameFolder.error')}`;
+          this.cancelRenameNewFolder();
+        } else {
+          this.getFolderPath(this.selectedFolder);
+          const path = encodeURIComponent(this.workspace.concat(':', this.selectedFolderPath));
+          attachmentsService.renameFolder(path, this.newName).then(response => {
+            if (response) {
+              this.renameFolderAction = false;
+              this.folders.find(folder => {
+                if (folder.id === this.selectedFolder.id) {
+                  folder.title = this.newName;
+                  folder.name = this.newName;
+                  folder.id = this.newName;
+                  const oldFolder = folder.path.split('/');
+                  let newPath = oldFolder[0];
+                  for (let i = 0; i < oldFolder.length - 1; i++) {
+                    newPath.concat('/', newPath[i]);
+                  }
+                  if (oldFolder.length === 1) {
+                    newPath = this.newName;
+                  } else {
+                    newPath.concat('/', this.newName);
+                  }
+                  folder.path = newPath;
+                }
+              });
+              this.selectedFolder = {};
+            }
+          });
+        }
+      }else {
+        this.selectedFolder = {};
+      }
+      this.selectedFolderPath = '';
+    },
+    getFolderPath(folder){
+      if (folder.path === 'Public') {
+        const driverPath = this.driveRootPath.split('/');
+        let localDrive = driverPath[0];
+        const secondPartPath = 2;
+        for (let i = 1; i < driverPath.length - secondPartPath; i++) {
+          localDrive = localDrive.concat('/', driverPath[i]);
+        }
+        this.selectedFolderPath = localDrive.concat('/', folder.path);
+      } else {
+        this.selectedFolderPath = this.driveRootPath.concat(folder.path);
+      }
     }
   }
 };

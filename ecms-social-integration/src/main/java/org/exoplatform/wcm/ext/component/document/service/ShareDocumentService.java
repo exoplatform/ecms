@@ -97,6 +97,9 @@ public class ShareDocumentService implements IShareDocumentService, Startable{
       }
       currentNode.getSession().save();
       Node link = linkManager.createLink(shared, currentNode);
+      String nodeMimeType = Utils.getMimeType(currentNode);
+      link.addMixin(NodetypeConstant.MIX_FILE_TYPE);
+      link.setProperty(NodetypeConstant.EXO_FILE_TYPE, nodeMimeType);
       rootSpace.save();
       //Share activity
       try {
@@ -155,6 +158,9 @@ public class ShareDocumentService implements IShareDocumentService, Startable{
       }
       currentNode.getSession().save();
       Node link = linkManager.createLink(shared, currentNode);
+      String nodeMimeType = Utils.getMimeType(currentNode);
+      link.addMixin(NodetypeConstant.MIX_FILE_TYPE);
+      link.setProperty(NodetypeConstant.EXO_FILE_TYPE, nodeMimeType);
       userPrivateNode.save();
     } catch (RepositoryException e) {
       if(LOG.isErrorEnabled())

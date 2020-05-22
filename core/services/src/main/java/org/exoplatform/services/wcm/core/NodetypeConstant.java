@@ -73,6 +73,10 @@ public class NodetypeConstant {
   public static final String JCR_SCORE                        = "jcr:score";
 
   public static final String MIX_REFERENCEABLE                = "mix:referenceable";
+  
+  public static final String MIX_FILE_TYPE                    = "mix:fileType";
+  
+  public static final String EXO_FILE_TYPE                    = "exo:fileType";
 
   public static final String MIX_VERSIONABLE                  = "mix:versionable";
 

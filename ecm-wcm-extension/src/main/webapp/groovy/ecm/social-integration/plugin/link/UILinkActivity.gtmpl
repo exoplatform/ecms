@@ -609,6 +609,7 @@
 			</div><!--end #ActivityContextBox${activity.id}-->
 		</div> <!--end ContextBox${activity.id}-->
   </div> <!-- #boxContainer-->
+  </div>
   <% uiform.end() %>
 </div>
 <% } else { %> <!-- activity deleted -->

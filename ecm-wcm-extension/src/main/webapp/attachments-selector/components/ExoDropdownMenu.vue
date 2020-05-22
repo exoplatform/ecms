@@ -5,7 +5,7 @@
     <li :class="!selectedFolder.canRemove ? 'disabled' : ''" class="folderActionsMenuItem btn delete"
         @click="deleteFolder()"><i class="uiIconTrash"></i>{{ $t('attachments.filesFoldersSelector.action.delete') }}
     </li>
-    <li :class="!selectedFolder.canRemove ? 'disabled' : ''" class="folderActionsMenuItem btn rename"><i
+    <li :class="!selectedFolder.canRemove ? 'disabled' : ''" class="folderActionsMenuItem btn rename" @click="renameFolder()"><i
       class="uiIconEdit"></i>{{ $t('attachments.filesFoldersSelector.action.rename') }}
     </li>
   </ul>
@@ -41,6 +41,9 @@ export default {
     closeMenu() {
       this.$emit('closeMenu');
     },
+    renameFolder(){
+      this.$emit('renameFolder');
+    }
   }
 };
 </script>

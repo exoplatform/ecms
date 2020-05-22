@@ -944,30 +944,6 @@
         </object-param>
       </init-params>
     </component-plugin>
-    <component-plugin>
-      <name>add.action</name>
-      <set-method>registerUIExtensionPlugin</set-method>
-      <type>org.exoplatform.webui.ext.UIExtensionPlugin</type>
-      <init-params>
-        <object-param>
-          <name>Document Composer</name>
-          <object type="org.exoplatform.webui.ext.UIExtension">
-            <field name="type">
-              <string>org.exoplatform.social.webui.composer.UIActivityComposer</string>
-            </field>
-            <field name="name">
-              <string>LINK_ACTIVITY</string>
-            </field>
-            <field name="component">
-              <string>org.exoplatform.wcm.ext.component.activity.UILinkActivityComposer</string>
-            </field>
-            <field name="rank">
-              <int>3</int>
-            </field>
-          </object>
-        </object-param>
-      </init-params>
-    </component-plugin>
   </external-component-plugins>
   <external-component-plugins>
     <target-component>org.exoplatform.commons.api.notification.service.setting.PluginContainer</target-component>

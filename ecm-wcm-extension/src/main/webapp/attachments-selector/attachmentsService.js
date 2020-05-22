@@ -64,3 +64,17 @@ export function deleteFolderOrFile(currentDrive, workspace, itemPath) {
       throw new Error(`Error deleting the folder or the file ${e}`);
     });
 }
+
+export function renameFolder(pathFolder,newTitle) {
+  return fetch(`/portal/rest/contents/rename/rename?oldPath=${pathFolder}&newTitle=${newTitle}`,{
+    credentials: 'include',
+    method: 'GET',
+  }).then((resp) => {
+    if (resp && resp.ok) {
+      return resp.ok;
+    }
+  }).catch(e => {
+    throw new Error(`Error rename this folder ${e}`);
+  });
+
+}
