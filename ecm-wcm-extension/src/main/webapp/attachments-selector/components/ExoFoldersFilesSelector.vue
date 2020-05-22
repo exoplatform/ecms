@@ -234,7 +234,7 @@ export default {
       MESSAGE_TIMEOUT: 5000,
       showErrorMessage: false,
       errorMessage: '',
-      categorizedDrives: {}
+      categorizedDrives: {},
       renameFolderAction:false,
       newName:'',
       MESSAGES_DISPLAY_TIME: 5000,
