@@ -20,9 +20,6 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URLEncoder;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -37,10 +34,8 @@ import java.util.ResourceBundle;
 
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
-import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
-import javax.jcr.ValueFormatException;
 import javax.jcr.query.Query;
 import javax.jcr.query.QueryManager;
 import javax.jcr.query.QueryResult;
@@ -51,8 +46,6 @@ import org.gatein.api.Portal;
 import org.gatein.api.navigation.Navigation;
 import org.gatein.api.navigation.Nodes;
 import org.gatein.api.site.SiteId;
-
-import com.github.scribejava.core.java8.Consumer;
 
 import org.exoplatform.commons.api.settings.SettingService;
 import org.exoplatform.commons.utils.CommonsUtils;
@@ -80,7 +73,6 @@ import org.exoplatform.services.cms.documents.model.Document;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.drives.ManageDriveService;
 import org.exoplatform.services.cms.drives.impl.ManageDriveServiceImpl;
-import org.exoplatform.services.cms.drives.impl.WCMMembershipUpdateListener;
 import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
 import org.exoplatform.services.cms.link.LinkManager;
@@ -140,8 +132,6 @@ public class DocumentServiceImpl implements DocumentService {
   private static final String DOCUMENTS_NODE = "Documents";
   private static final String SHARED_NODE = "Shared";
   private static final String COLLABORATION         = "collaboration";
-  private static final String SEPARATOR             = "/";
-  private static final String SPACES_NODE_PATH = "/Groups/spaces";
   private static final Log LOG                 = ExoLogger.getLogger(DocumentServiceImpl.class);
   private final List<NewDocumentTemplateProvider> templateProviders = new ArrayList<>();
   private final List<DocumentEditorProvider> editorProviders = new ArrayList<>();
@@ -706,7 +696,13 @@ public class DocumentServiceImpl implements DocumentService {
    List<Document> documents = new ArrayList<Document>();
    if (folder != null) {
      String query = "select * from nt:base where jcr:path like '" + folder + "/%' "
-         + "and (exo:primaryType = 'nt:file' or jcr:primaryType = 'nt:file')"
+         + "and (exo:primaryType = 'nt:file' or jcr:primaryType = 'nt:file') "
+         + "and (exo:fileType like '%pdf%' "
+         + "or exo:fileType like '%text%' "
+         + "or exo:fileType like '%opendocument%' "
+         + "or exo:fileType like '%odt%' "
+         + "or exo:fileType like '%officedocument%' "
+         + "or exo:fileType like '%ms%') "
          + (condition != null ? condition : "")
          + " order by exo:dateModified DESC";
      return getDocumentsByQuery(query, limit);
@@ -739,10 +735,10 @@ public class DocumentServiceImpl implements DocumentService {
         Document document = new Document(originalDocumentNode.getUUID(),
                                          Utils.getTitle(originalDocumentNode),
                                          documentNodePath,
-                                         documentNodePath.contains(SPACES_NODE_PATH) ? getSpaceFromNodePath(documentNodePath) : documentNode.getParent().getName(),
+                                         Utils.getSearchDocumentDrive(documentNode),
                                          Utils.getFileType(originalDocumentNode),
-                                         Utils.getDate(documentNode).getTime(),
-                                         getFileBreadCrumb(documentNode),
+                                         Utils.getDate(documentNode).getTime().getTime(),
+                                         getFilePreviewBreadCrumb(documentNode),
                                          getLinkInDocumentsApp(originalDocumentNode.getPath()),
                                          getDownloadUri(originalDocumentNode),
                                          VersionHistoryUtils.getVersion(originalDocumentNode),
@@ -755,25 +751,15 @@ public class DocumentServiceImpl implements DocumentService {
     return documents;
   }
   
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public List<Document> getMyWorkDocuments(String userId, int limit) throws Exception {
-    //TODO elastic search implementation
-    String condition = " and (exo:owner = '" + userId + "' or exo:lastModifier = '" + userId + "')";
-    return getDocumentsByFolder(SPACES_NODE_PATH, condition, limit);
-  }
-  
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public List<Document> getPrivateDocuments(String userId, int limit) throws Exception {
-    SessionProvider sessionProvider = SessionProvider.createSystemProvider();
-    Node userNode = nodeHierarchyCreator.getUserNode(sessionProvider, userId);
-    return getDocumentsByFolder(userNode.getPath(), null, limit);
-  }
+//  /**
+//   * {@inheritDoc}
+//   */
+//  @Override
+//  public List<Document> getMyWorkDocuments(String userId, int limit) throws Exception {
+//    String condition = " and (exo:owner = '" + userId + "' or exo:lastModifier = '" + userId + "')";
+//    return getDocumentsByFolder(Utils.SPACES_NODE_PATH, condition, limit);
+//  }
+//  
   
   /**
    * {@inheritDoc}
@@ -806,14 +792,13 @@ public class DocumentServiceImpl implements DocumentService {
     return getDocumentsByFolder(sharedFolder, null, limit);
   }
 
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public List<Document> getRecentSpacesDocuments(int limit) throws Exception {
-    //TODO elastic search implementation
-    return getDocumentsByFolder(SPACES_NODE_PATH, null, limit);
-  }
+//  /**
+//   * {@inheritDoc}
+//   */
+//  @Override
+//  public List<Document> getRecentSpacesDocuments(int limit) throws Exception {
+//    return getDocumentsByFolder(Utils.SPACES_NODE_PATH, null, limit);
+//  }
 
   /**
    * Gets display name of current user. In case of any errors return current userId
@@ -829,24 +814,26 @@ public class DocumentServiceImpl implements DocumentService {
       return userId;
     }
   }
- 
-  private String getSpaceFromNodePath(String nodePath) {
-    if (nodePath.startsWith(SPACES_NODE_PATH)) {
-      String[] splittedNodePath = nodePath.split(SEPARATOR);
-      if (splittedNodePath.length > 3) {
-        SpaceService spaceService = WCMCoreUtils.getService(SpaceService.class);
-        Space space = spaceService.getSpaceByPrettyName(splittedNodePath[3]);
-        if (space != null) {
-          return space.getDisplayName();
-        }
-      }
+  
+  /**
+   * Gets the user session.
+   *
+   * @param workspace the workspace
+   * @return the user session
+   * @throws RepositoryException the repository exception
+   */
+  protected Node nodeByUUID(String uuid, String workspace) throws RepositoryException {
+    if (workspace == null) {
+      workspace = repoService.getCurrentRepository().getConfiguration().getDefaultWorkspaceName();
     }
-    return "";
+    SessionProvider sp = sessionProviderService.getSessionProvider(null);
+    Session session = sp.getSession(workspace, repoService.getCurrentRepository());
+    return session.getNodeByUUID(uuid);
   }
   
-  private LinkedHashMap<String, String> getFileBreadCrumb(Node fileNode) {
+  public LinkedHashMap<String, String> getFilePreviewBreadCrumb(Node fileNode) {
     LinkedHashMap<String, String> docFolderBreadCrumb = getDocFolderRelativePathWithLinks(fileNode);
-    LinkedHashMap<String, String> fileBreadCrumb = new LinkedHashMap<>();;
+    LinkedHashMap<String, String> fileBreadCrumb = new LinkedHashMap<>();
     if (docFolderBreadCrumb != null) {
       int breadCrumbSize = docFolderBreadCrumb.size();
       int folderIndex = 0;

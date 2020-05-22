@@ -294,6 +294,10 @@
   </component>
   
   <component>
+    <type>org.exoplatform.services.wcm.search.FileSearchRestService</type>
+  </component>
+  
+  <component>
     <type>org.exoplatform.services.rest.DocumentsAppRedirectService</type>
   </component>
 

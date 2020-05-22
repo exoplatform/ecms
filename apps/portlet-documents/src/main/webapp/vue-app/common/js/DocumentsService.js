@@ -22,12 +22,12 @@ export function getDocumentsByFolder(folder, limit) {
 }
 
 export function getRecentDocuments(limit) {
-  const url = `/portal/rest/documents/recent?limit=${limit}`;
+  const url = `/portal/rest/search/documents/recent?limit=${limit}`;
   return getDocuments(url);
 }
 
 export function getRecentSpacesDocuments(limit) {
-  const url = `/portal/rest/documents/recentSpaces?limit=${limit}`;
+  const url = `/portal/rest/search/documents/recentSpaces?limit=${limit}`;
   return getDocuments(url);
 }
 

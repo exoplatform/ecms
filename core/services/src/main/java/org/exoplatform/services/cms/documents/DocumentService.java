@@ -16,6 +16,7 @@
  */
 package org.exoplatform.services.cms.documents;
 
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import javax.jcr.Node;
@@ -102,6 +103,16 @@ public interface DocumentService {
    * @throws Exception
    */
   public DriveData getDriveOfNode(String nodePath, String userId, List<String> memberships) throws Exception;
+  
+  /**
+   * Get the file preview breadCrumb.
+   * @param fileNode The file node
+   * @return The file preview breadCrumb
+   * @throws Exception
+   */
+  default LinkedHashMap<String, String> getFilePreviewBreadCrumb(Node fileNode) throws Exception {
+    throw new UnsupportedOperationException();
+  }
   
   /**
    * Adds the document template plugin.
@@ -244,27 +255,17 @@ public interface DocumentService {
     throw new UnsupportedOperationException();
   }
   
-  /**
-   * Gets my work documents.
-   *
-   * @param userId the userId
-   * @param limit the limit
-   * @return my work documents
-   */
-  default List<Document> getMyWorkDocuments(String userId, int limit) throws Exception {
-    throw new UnsupportedOperationException();
-  }
-  
-  /**
-   * Gets the private documents.
-   *
-   * @param userId the userId
-   * @param limit the limit
-   * @return the private documents
-   */
-  default List<Document> getPrivateDocuments(String userId, int limit) throws Exception {
-    throw new UnsupportedOperationException();
-  }
+//  /**
+//   * Gets my work documents.
+//   *
+//   * @param userId the userId
+//   * @param limit the limit
+//   * @return my work documents
+//   */
+//  default List<Document> getMyWorkDocuments(String userId, int limit) throws Exception {
+//    throw new UnsupportedOperationException();
+//  }
+//  
   
   /**
    * Gets the recent spaces documents.

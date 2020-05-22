@@ -2,11 +2,13 @@ package org.exoplatform.services.wcm.search.connector;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
+
 import org.exoplatform.commons.search.domain.Document;
 import org.exoplatform.commons.search.index.impl.ElasticIndexingServiceConnector;
 import org.exoplatform.commons.utils.CommonsUtils;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.services.cms.documents.TrashService;
+import org.exoplatform.services.cms.documents.VersionHistoryUtils;
 import org.exoplatform.services.cms.folksonomy.NewFolksonomyService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.access.AccessControlList;
@@ -24,6 +26,7 @@ import javax.jcr.*;
 import javax.jcr.nodetype.NodeTypeManager;
 import javax.jcr.nodetype.PropertyDefinition;
 import javax.jcr.query.*;
+
 import java.io.InputStream;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -73,8 +76,11 @@ public class FileindexingConnector extends ElasticIndexingServiceConnector {
             .append("    \"createdDate\" : {\"type\" : \"date\", \"format\": \"epoch_millis\"},\n")
             .append("    \"activityId\" : {\"type\" : \"text\"},\n")
             .append("    \"lastUpdatedDate\" : {\"type\" : \"date\", \"format\": \"epoch_millis\"},\n")
+            .append("    \"lastModifier\" : {\"type\" : \"text\"},\n")
             .append("    \"fileType\" : {\"type\" : \"keyword\"},\n")
             .append("    \"fileSize\" : {\"type\" : \"long\"},\n")
+            .append("    \"drive\" : {\"type\" : \"text\"},\n")
+            .append("    \"version\" : {\"type\" : \"long\"},\n")
             .append("    \"name\" : {\"type\" : \"text\", \"analyzer\": \"letter_lowercase_asciifolding\"},\n")
             .append("    \"title\" : {\"type\" : \"text\", \"analyzer\": \"letter_lowercase_asciifolding\"},\n")
             .append("    \"tags\" : {\"type\" : \"keyword\"},\n")
@@ -152,13 +158,15 @@ public class FileindexingConnector extends ElasticIndexingServiceConnector {
       }
       if (node.hasProperty("exo:lastModifiedDate")) {
         fields.put("lastUpdatedDate", String.valueOf(node.getProperty("exo:lastModifiedDate").getDate().getTimeInMillis()));
+        fields.put("lastModifier", String.valueOf(node.getProperty("exo:lastModifier").getString()));
       } else {
         fields.put("lastUpdatedDate", fields.get("createdDate"));
       }
       if (node.hasProperty("exo:activityId")){
         fields.put("activityId", node.getProperty("exo:activityId").getString());
       }
-
+      fields.put("version", String .valueOf(VersionHistoryUtils.getVersion(node)));
+      
       Node contentNode = node.getNode(NodetypeConstant.JCR_CONTENT);
       if(contentNode != null) {
         if (contentNode.hasProperty(NodetypeConstant.JCR_MIMETYPE)) {
