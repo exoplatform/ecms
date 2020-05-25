@@ -36,6 +36,7 @@ import javax.portlet.PortletPreferences;
 import org.apache.commons.lang.StringUtils;
 import org.apache.ws.commons.util.Base64;
 import org.exoplatform.commons.api.search.data.SearchResult;
+import org.exoplatform.commons.utils.CommonsUtils;
 import org.exoplatform.commons.utils.PageList;
 import org.exoplatform.container.xml.PortalContainerInfo;
 import org.exoplatform.ecm.jcr.model.Preference;
@@ -49,6 +50,8 @@ import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
 import org.exoplatform.ecm.webui.component.explorer.UIDocumentInfo;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.services.cms.clipboard.ClipboardService;
+import org.exoplatform.services.cms.clouddrives.CloudDrive;
+import org.exoplatform.services.cms.clouddrives.CloudDriveService;
 import org.exoplatform.services.cms.documents.AutoVersionService;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.drives.impl.ManageDriveServiceImpl;
@@ -108,14 +111,23 @@ public class UITreeExplorer extends UIContainer {
       }
     }
   }
+  
   /**
    * Logger.
    */
-  private static final Log LOG  = ExoLogger.getLogger(UITreeExplorer.class.getName());
-  private TreeNode treeRoot_ ;
-  private String expandPath = null;
-  private boolean isExpand = false;
+  private static final Log  LOG        = ExoLogger.getLogger(UITreeExplorer.class.getName());
+
+  private TreeNode          treeRoot_;
+
+  private String            expandPath = null;
+
+  private boolean           isExpand   = false;
+
+  /** The cloud drive service. */
+  private CloudDriveService cloudDriveService;
+
   public UITreeExplorer() throws Exception {
+    cloudDriveService = CommonsUtils.getService(CloudDriveService.class);
   }
 
 
@@ -198,12 +210,26 @@ public class UITreeExplorer extends UIContainer {
           return res.getString(driveLabelKey);
         } catch (MissingResourceException ex) {
           try {
-            RepositoryService repoService = WCMCoreUtils.getService(RepositoryService.class);
-            Node groupNode = (Node)WCMCoreUtils.getSystemSessionProvider().getSession(
-                    repoService.getCurrentRepository().getConfiguration().getDefaultWorkspaceName(),
-                    repoService.getCurrentRepository()).getItem(path);
-            return groupNode.getProperty(NodetypeConstant.EXO_LABEL).getString();
-          } catch(Exception e) {
+            CloudDrive cloudDrives = cloudDriveService.findDrive(driveData.getWorkspace(), driveData.getHomePath());
+            if (cloudDrives != null) {
+              // Cloud drives
+              return cloudDrives.getTitle();
+            } else {
+              try {
+                RepositoryService repoService = WCMCoreUtils.getService(RepositoryService.class);
+                Node groupNode = (Node) WCMCoreUtils.getSystemSessionProvider()
+                                                    .getSession(repoService.getCurrentRepository()
+                                                                           .getConfiguration()
+                                                                           .getDefaultWorkspaceName(),
+                                                                repoService.getCurrentRepository())
+                                                    .getItem(path);
+                return groupNode.getProperty(NodetypeConstant.EXO_LABEL).getString();
+              } catch (Exception e) {
+                return id.replace(".", " / ");
+              }
+            }
+          } catch (RepositoryException e) {
+            LOG.warn("Cannot find clouddrive " + driveData.getHomePath() + " in " + driveData.getWorkspace(), e);
             return id.replace(".", " / ");
           }
         }
