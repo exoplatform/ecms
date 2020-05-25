@@ -34,7 +34,7 @@
 }
 
 .editorButtonContainer .dropdown-container .dropdown-menu li a:hover {
- color: #fff !important;
+ color: #fff;
 }
 
 .editorButtonContainer .dropdown-container .dropdown-toggle {
@@ -120,8 +120,19 @@
   pointer-events: none;
 }
 
-.editorButtonContainer .disabledProvider a {
+.editorButtonContainer .disabledProvider a,
+.editorButtonContainer .disabledProvider a > [class^="uiIcon"]:before {
   cursor: not-allowed;
+  color: #ADADAD !important;
+  background-image: none;
+}
+
+.editorButtonContainer .dropdown-container .dropdown-menu li.disabledProvider a:hover,
+.editorButtonContainer .dropdown-container .dropdown-menu li.disabledProvider a:focus,
+.editorButtonContainer .dropdown-container .dropdown-menu li.disabledProvider a:hover > [class^="uiIcon"]:before,
+.editorButtonContainer .dropdown-container .dropdown-menu li.disabledProvider a:focus > [class^="uiIcon"]:before {
+  background-image: none;
+  color: #ADADAD;
 }
 
 #UIActionBar .editorButtonContainer {

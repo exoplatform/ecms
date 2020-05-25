@@ -641,13 +641,18 @@ public class DocumentServiceImpl implements DocumentService {
   @Override
   public void setCurrentDocumentProvider(String uuid, String workspace, String provider) throws RepositoryException {
     Session systemSession = repoService.getCurrentRepository().getSystemSession(workspace);
-    NodeImpl systemNode = (NodeImpl) systemSession.getNodeByUUID(uuid);
-    if (systemNode.canAddMixin(EXO_DOCUMENT)) {
-      systemNode.addMixin(EXO_DOCUMENT);
-    }
-    systemNode.setProperty(EXO_CURRENT_PROVIDER_PROP, provider);
-    systemNode.setProperty(EXO_EDITORS_ID_PROP, editorsId);
-    systemNode.save();
+    Node systemNode = systemSession.getNodeByUUID(uuid);
+    String userId = systemNode.getProperty(EXO_LAST_MODIFIER_PROP).getString();
+    WCMCoreUtils.invokeUserSession(userId, (sessionProvider) -> {
+      Session session = sessionProvider.getSession(workspace, repoService.getCurrentRepository());
+      Node node = session.getNodeByUUID(uuid);
+      if (node.canAddMixin(EXO_DOCUMENT)) {
+        node.addMixin(EXO_DOCUMENT);
+      }
+      node.setProperty(EXO_CURRENT_PROVIDER_PROP, provider);
+      node.setProperty(EXO_EDITORS_ID_PROP, editorsId);
+      node.save();
+    });
   }
   
   /**
@@ -656,17 +661,22 @@ public class DocumentServiceImpl implements DocumentService {
   @Override
   public String getCurrentDocumentProvider(String uuid, String workspace) throws RepositoryException {
     Session systemSession = repoService.getCurrentRepository().getSystemSession(workspace);
-    NodeImpl systemNode = (NodeImpl) systemSession.getNodeByUUID(uuid);
+    Node systemNode = systemSession.getNodeByUUID(uuid);
     String provider =  systemNode.hasProperty(EXO_CURRENT_PROVIDER_PROP) ? systemNode.getProperty(EXO_CURRENT_PROVIDER_PROP).getString() : null;
     String currentEditorsId =  systemNode.hasProperty(EXO_EDITORS_ID_PROP) ? systemNode.getProperty(EXO_EDITORS_ID_PROP).getString() : null;
-    if(editorsId.equals(currentEditorsId)) {
+    if (editorsId.equals(currentEditorsId)) {
       return provider;
     } else {
-      if (systemNode.canAddMixin(EXO_DOCUMENT)) {
-        systemNode.addMixin(EXO_DOCUMENT);
-      }
-      systemNode.setProperty(EXO_CURRENT_PROVIDER_PROP, "");
-      systemNode.setProperty(EXO_EDITORS_ID_PROP, editorsId);
+      String userId = systemNode.getProperty(EXO_LAST_MODIFIER_PROP).getString();
+      WCMCoreUtils.invokeUserSession(userId, (sessionProvider) -> {
+        Session session = sessionProvider.getSession(workspace, repoService.getCurrentRepository());
+        Node node = session.getNodeByUUID(uuid);
+        if (node.canAddMixin(EXO_DOCUMENT)) {
+          node.addMixin(EXO_DOCUMENT);
+        }
+        node.setProperty(EXO_CURRENT_PROVIDER_PROP, "");
+        node.setProperty(EXO_EDITORS_ID_PROP, editorsId);
+      });
       return null;
     }
   }
@@ -1026,4 +1036,5 @@ public class DocumentServiceImpl implements DocumentService {
 
     return "";
   }
+  
 }
