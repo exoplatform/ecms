@@ -60,7 +60,7 @@ export default {
       connectingProvider: "",
       showCloudDrawer: false,
       drivesOpened: false,
-      drivesInProgress: {}
+      drivesInProgress: {} // contain all drives that are in connecting process, drive name is a key and progress percent is a value
     };
   },
   async created() {
@@ -92,14 +92,14 @@ export default {
           }
 
           this.drivesInProgress[data.drive.title] = fullProgress;
-          // this.$emit("updateDrivesInProgress", { drive: this.drivesInProgress });
+          this.$emit("updateDrivesInProgress", { drives: this.drivesInProgress }); // drives update in parent component
 
           this.$emit("updateProgress", { progress: fullProgress });
           const latency = 3000;
           setTimeout(() => {
 
-            delete this.drivesInProgress[data.drive.title];
-            // this.$emit("updateDrivesInProgress", { drive: this.drivesInProgress });
+            delete this.drivesInProgress[data.drive.title]; // connection is finished, so remove drive from drivesInProgress
+            this.$emit("updateDrivesInProgress", { drives: this.drivesInProgress }); // drives update in parent component
 
             this.$emit("updateProgress", { progress: null });
           }, latency);
@@ -116,7 +116,7 @@ export default {
           if (progressData.drive.title) {
 
             this.drivesInProgress[progressData.drive.title] = progressData.progress;
-            // this.$emit("updateDrivesInProgress", { drive: this.drivesInProgress });
+            this.$emit("updateDrivesInProgress", { drives: this.drivesInProgress }); // drives update in parent component
 
             if (!this.drivesOpened) {
               this.openDriveFolder(progressData.drive.path, progressData.drive.title);
@@ -132,18 +132,18 @@ export default {
     },
     openDriveFolder: function(path, title) {
       if (path) {
-        console.log(title);
-        // const folderPath = path.split("/").pop();
-        // const createdDrive = {
-        //   id: folderPath,
-        //   name: folderPath,
-        //   title: title,
-        //   path: folderPath,
-        //   isSelected: true,
-        //   folderTypeCSSClass: "uiIcon24x24nt_folder",
-        //   type: "cloud",
-        // };
-        // this.$emit("addDrive", createdDrive);
+        const folderPath = path.split("/").pop();
+        const createdDrive = {
+          name: title,
+          title: title,
+          path: folderPath,
+          driveTypeCSSClass: `uiIconEcms24x24Drive${title.replace(" ", "")} uiIconEcms24x24DrivePrivate`,
+          type: "drive",
+          css: "uiIcon16x16FolderDefault uiIcon16x16nt_folder",
+          driverType: "Personal Drives",
+          isCloudDrive: true
+        };
+        this.$emit("addDrive", createdDrive); // display drive in "My drives" section
         this.drivesOpened = true;
         this.showCloudDrawer = false;
       }

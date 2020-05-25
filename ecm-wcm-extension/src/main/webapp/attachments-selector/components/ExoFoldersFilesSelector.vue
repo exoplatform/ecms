@@ -98,8 +98,13 @@
         <div v-for="(group, name) in categorizedDrives" :key="name" :class="{ 'categoryClosed': !group.opened }" class="category">
           <p class="categoryName" @click="toggleDrivesSection(name)">{{ name }}</p>
           <div v-show="group.opened" class="selectionBox">
-            <div v-for="driver in group.drives" :key="driver.name" :title="driver.title" class="folderSelection"
-                 @click="openDrive(driver)">
+            <div 
+              v-for="driver in group.drives" 
+              :key="driver.name" 
+              :title="driver.title" 
+              :class="{ 'isConnecting': drivesInProgress[driver.title] >= 0 || drivesInProgress[driver.title] <= 100 }" 
+              class="folderSelection"
+              @click="openDrive(driver)">
               <a :data-original-title="driver.title" rel="tooltip" data-placement="bottom">
                 <i :class="driver.driveTypeCSSClass" class="uiIconEcms24x24DriveGroup uiIconEcmsLightGray selectionIcon center"></i>
                 <div class="selectionLabel center">{{ driver.title }}</div>
@@ -238,6 +243,7 @@ export default {
       renameFolderAction:false,
       newName:'',
       MESSAGES_DISPLAY_TIME: 5000,
+      drivesInProgress: {}
     };
   },
   computed: {
@@ -475,7 +481,7 @@ export default {
               idAttribute: idAttribute,
               selected: selected,
               mimetype: fetchedFiles[j].getAttribute('nodeType'),
-              isCloudFile: fetchedFiles[j].getAttribute('isCloudFile') ? fetchedFiles[j].getAttribute('isCloudFile') : false
+              isCloudFile: fetchedFiles[j].getAttribute('isCloudFile') === 'true' ? true : false
             });
           }
         }
@@ -502,7 +508,8 @@ export default {
               css: fetchedDrivers[j].getAttribute('nodeTypeCssClass'),
               type: 'drive',
               driveTypeCSSClass: driveTypeCSSClass,
-              driverType: driverType
+              driverType: driverType,
+              isCloudDrive: fetchedDrivers[j].getAttribute('isCloudDrive') === 'true' ? true : false
             });
           }
         }
@@ -730,6 +737,12 @@ export default {
       } else {
         this.selectedFolderPath = this.driveRootPath.concat(folder.path);
       }
+    },
+    addCloudDrive(drive) { // listen clouddrives 'addDrive' event
+      this.categorizedDrives['My Drives'].drives.push(drive); // display connecting drive in 'My Drives' section
+    },
+    changeCloudDriveProgress({ drives }) { // listen clouddrives 'updateDrivesInProgress' event
+      this.drivesInProgress = { ...drives }; // update progress for connecting drive to display that drive is in connection
     }
   }
 };
