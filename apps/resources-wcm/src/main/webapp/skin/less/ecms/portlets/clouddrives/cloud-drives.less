@@ -5,6 +5,7 @@
     &Header {
       display: flex;
       justify-content: space-between;
+      align-items: center;
 
       .backButton {
         width: 0;
@@ -13,18 +14,21 @@
           color: grey;
           background: none;
           margin: 0;
-          padding: 15px;
+          padding: 15px 15px 15px 0;
           position: absolute;
           float: left;
           font-size: 15px;
           cursor: pointer;
+          top: 10px;
         }
       }
 
       .cloudDriveTitle {
         font-size: 18px;
         font-weight: bold;
-        width: 75%;
+        width: 100%;
+        text-align: center;
+        padding-left: 15px;
       }
 
       .cloudDriveCloseIcon {
