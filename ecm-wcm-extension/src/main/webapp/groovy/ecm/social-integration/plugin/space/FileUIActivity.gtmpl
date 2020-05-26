@@ -606,47 +606,8 @@ for(def index = 0; index < uicomponent.getFilesCount(); index++) {
                   </div>
             </div>
             <%}%>
-
-                <div class="actionBar clearfix ContentActivityIcon">
-                  <% def toggleDisplayCommentAction = uicomponent.event('ToggleDisplayCommentForm', null, false);
-                     def commentLink = "";
-                  %>
-                 <% if (activityCommentAndLikable) { %>
-                    <ul class="pull-right statusAction">
-                    <% if (uicomponent.isLiked()) { %>
-                        <li>
-                                <a onclick="$unlikeActivityAction" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIActivity.msg.UnlikeActivity"); %>" id="UnLikeLink${activity.id}" href="javascript:void(0);">
-                                <i class="uiIconThumbUp uiIconBlue"></i>
-                                <span class="LikeLabel">$labelLike</span>
-                                <span class="LikesActionNumber">$identityLikesNum</span>
-                                </a>
-                        </li>
-                      <% } else { %>
-                        <li>
-                            <a onclick="$likeActivityAction" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIActivity.msg.LikeActivity"); %>" id="LikeLink${activity.id}" href="javascript:void(0);">
-                              <i class="uiIconThumbUp uiIconLightGray"></i>
-                              <span class="LikeLabel">$labelLike</span>
-                              <span class="LikesActionNumber">$identityLikesNum</span>
-                            </a>
-                        </li>
-                    <% } %>
-                    <li>
-                            <a class="$commentLink"  id="CommentLink${activity.id}" rel="tooltip" data-activity="${activity.id}" data-placement="bottom" title="<%=_ctx.appRes("UIActivity.label.Comment"); %>" href="javascript:void(0);">
-                                <i class="uiIconComment uiIconLightGray"></i>
-                                 <span class="CommentLabel">$labelComment</span>
-                                <span class="commentsActionNumber">$commentCount</span>
-                </a>
-                        </li>
-                </ul>
-                 <% } %>
-                 </div><!--end actionBar-->
+              <% _ctx.includeTemplates("UIActivityActionBar-head") %>
             </div>
-    			
-
-
-               
-
-
 
                 <div id="CommentBlockBound${activity.id}" class="commentBox">
 
