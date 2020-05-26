@@ -127,6 +127,9 @@ public class OneDriveAPI {
 
   /** The root id. */
   private String       rootId;
+
+  /** The user id. */
+  private String       userId;
   
   /**
    * The Class OneDriveSubscription.
@@ -521,6 +524,18 @@ public class OneDriveAPI {
   }
 
   /**
+   * Gets the user id.
+   *
+   * @return the user id
+   */
+  public synchronized String getUserId() {
+    if (this.userId == null) {
+      this.userId = getUser().id;
+    }
+    return userId;
+  }
+
+  /**
    * Gets the root.
    *
    * @return the root
@@ -624,7 +639,7 @@ public class OneDriveAPI {
    * @return the subscription
    */
   public Subscription getSubscription() {
-    return graphClient.me().drive().root().subscriptions("socketIO").buildRequest().get();
+    return graphClient.drives().byId(getUserId()).root().subscriptions("socketIO").buildRequest().get();
   }
 
   /**
