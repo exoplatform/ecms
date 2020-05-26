@@ -69,13 +69,6 @@
           <i class="uiIconEmptyFolder"></i>
           <p>This folder is empty</p>
         </div>
-        <div v-for="driver in filteredDrivers" :key="driver.name" :title="driver.title" class="folderSelection"
-             @click="openDrive(driver)">
-          <a :data-original-title="driver.title" rel="tooltip" data-placement="bottom">
-            <i :class="driver.driveTypeCSSClass" class="uiIconEcms24x24DriveGroup uiIconEcmsLightGray selectionIcon center"></i>
-            <div class="selectionLabel center">{{ driver.title }}</div>
-          </a>
-        </div>
         <div v-for="folder in filteredFolders" :key="folder.id" :id="folder.id" :title="folder.name" class="folderSelection"
              @click="openFolder(folder)" @contextmenu="openFolderActionsMenu(folder, $event)">
           <a :title="folder.title" href="javascript:void(0);" rel="tooltip" data-placement="bottom">
@@ -95,23 +88,29 @@
         </div>
       </div>
       <div v-else class="categorizedDrives">
-        <div v-for="(group, name) in categorizedDrives" :key="name" :class="{ 'categoryClosed': !group.opened }" class="category">
-          <p class="categoryName" @click="toggleDrivesSection(name)">{{ name }}</p>
-          <div v-show="group.opened" class="selectionBox">
-            <div 
-              v-for="driver in group.drives" 
-              :key="driver.name" 
-              :title="driver.title" 
-              :class="{ 'isConnecting': drivesInProgress[driver.title] >= 0 || drivesInProgress[driver.title] <= 100 }" 
-              class="folderSelection"
-              @click="openDrive(driver)">
-              <a :data-original-title="driver.title" rel="tooltip" data-placement="bottom">
-                <i :class="driver.driveTypeCSSClass" class="uiIconEcms24x24DriveGroup uiIconEcmsLightGray selectionIcon center"></i>
-                <div class="selectionLabel center">{{ driver.title }}</div>
-              </a>
-            </div>
-          </div>
-        </div>
+        <v-list dense flat>
+          <v-list-group value="true" class="categories" eager>
+            <v-list-group v-for="(group, name) in filteredDrivers" :key="name" :ripple="false" sub-group no-action value="true" class="category" active-class="categoryActive">
+              <template v-slot:activator>
+                <v-list-item-content class="categoryContent">{{ name }}</v-list-item-content>
+              </template>
+              <div class="selectionBox">
+                <div 
+                  v-for="driver in group.drives" 
+                  :key="driver.name" 
+                  :title="driver.title" 
+                  :class="{ 'isConnecting': drivesInProgress[driver.title] >= 0 || drivesInProgress[driver.title] <= 100 }" 
+                  class="folderSelection"
+                  @click="openDrive(driver)">
+                  <a :data-original-title="driver.title" rel="tooltip" data-placement="bottom">
+                    <i :class="driver.driveTypeCSSClass" class="uiIconEcms24x24DriveGroup uiIconEcmsLightGray selectionIcon center"></i>
+                    <div class="selectionLabel center">{{ driver.title }}</div>
+                  </a>
+                </div>
+              </div>
+            </v-list-group>
+          </v-list-group>
+        </v-list>
       </div>
     </div>
     <div class="attachActions">
@@ -239,7 +238,6 @@ export default {
       MESSAGE_TIMEOUT: 5000,
       showErrorMessage: false,
       errorMessage: '',
-      categorizedDrives: {},
       renameFolderAction:false,
       newName:'',
       MESSAGES_DISPLAY_TIME: 5000,
@@ -274,7 +272,22 @@ export default {
         const searchTerm = this.searchFilesFolders.trim().toLowerCase();
         drivers = this.drivers.filter(driver => driver.title.toLowerCase().indexOf(searchTerm) >= 0 );
       }
-      return drivers;
+      const drivesByTypes = { 
+        'My Drives': { drives: [] }, 
+        'My Spaces': { drives: [] }, 
+        'Others': { drives: [] } 
+      };
+      drivers.map(drive => { 
+        if (drive.driverType === 'Personal Drives') {
+          drivesByTypes['My Drives'].drives.push(drive);
+        } else if (drive.path.includes('spaces')) {
+          drivesByTypes['My Spaces'].drives.push(drive);
+        } else if (!drive.path.includes('Trash')) {
+          drivesByTypes['Others'].drives.push(drive);
+        }
+        return drive;
+      });
+      return drivesByTypes;
     },
     filesCountLeft(){
       return this.maxFilesCount - this.selectedFiles.length;
@@ -514,7 +527,6 @@ export default {
           }
         }
       }
-      this.setCategorizedDrives();
     },
     selectDestination() {
       if (!this.selectedFolderPath) {
@@ -647,34 +659,6 @@ export default {
         this.fetchChildrenContents('');
       }
     },
-    setCategorizedDrives() {
-      const drives = this.drivers.slice();
-      const categorized = { 
-        'My Drives': { drives: [], opened: true }, 
-        'My Spaces': { drives: [], opened: true }, 
-        'Others': { drives: [], opened: true } 
-      };
-      drives.map(drive => { 
-        if (drive.driverType === 'Personal Drives') {
-          categorized['My Drives'].drives.push(drive);
-        } else if (drive.path.includes('spaces')) {
-          categorized['My Spaces'].drives.push(drive);
-        } else if (!drive.path.includes('Trash')) {
-          categorized['Others'].drives.push(drive);
-        }
-        return drive;
-      });
-      this.categorizedDrives = categorized;
-    },
-    toggleDrivesSection(sectionName) {
-      this.categorizedDrives = {
-        ...this.categorizedDrives,
-        [sectionName]: {
-          ...this.categorizedDrives[sectionName],
-          opened: !this.categorizedDrives[sectionName].opened
-        }
-      };
-    },
     renameFolder() {
       if (this.selectedFolder.canRemove) {
         if (this.selectedFolder.title) {
@@ -739,7 +723,7 @@ export default {
       }
     },
     addCloudDrive(drive) { // listen clouddrives 'addDrive' event
-      this.categorizedDrives['My Drives'].drives.push(drive); // display connecting drive in 'My Drives' section
+      this.drivers.push(drive); // display connecting drive in 'My Drives' section
     },
     changeCloudDriveProgress({ drives }) { // listen clouddrives 'updateDrivesInProgress' event
       this.drivesInProgress = { ...drives }; // update progress for connecting drive to display that drive is in connection

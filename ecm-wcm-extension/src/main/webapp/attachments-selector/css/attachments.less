@@ -855,40 +855,23 @@
         }
 
         .categorizedDrives {
-          .category {
-            margin-top: 10px;
+          .categories > .v-list-group__header {
+            display: none;
+          }
 
-            &Closed {
-              .categoryName:before {
-                top: 4px;
-                border-left: 5px solid #c3cad6;
-                border-top: 5px solid transparent;
-                border-bottom: 5px solid transparent;
+          .category {
+            .v-list-group__header__prepend-icon {
+              margin: 0;
+              align-self: center;
+
+              .v-icon {
+                color: @groupHeadingColor !important;
               }
             }
-  
-            &Name {
-              margin: 0 3%;
-              position: relative;
-              padding-left: 15px;
-              overflow: hidden;
+
+            &Content {
+              padding: 0;
               color: @groupHeadingColor;
-              cursor: pointer;
-              -moz-user-select: none;
-              -webkit-user-select: none;
-              -ms-user-select:none;
-              user-select:none;
-              -o-user-select:none;
-  
-              &:before {
-                content: '';
-                position: absolute;
-                top: 9px;
-                left: 0;
-                border-top: 5px solid @groupHeadingColor;
-                border-left: 5px solid transparent;
-                border-right: 5px solid transparent;
-              }
   
               &:after {
                 content: '';
@@ -899,6 +882,12 @@
                 margin-right: -100%;
                 margin-left: 10px;
                 border-top: 1px solid #efefef;
+              }
+            }
+
+            &Active {
+              &::before, :hover::before {
+                display: none;
               }
             }
           }
