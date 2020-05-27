@@ -87,4 +87,9 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
   </ConnectCloudDriveForm>
+  <ConnectDriveDrawer>
+    <title>
+      <ConnectYourService>Connect your service</ConnectYourService>
+    </title>
+  </ConnectDriveDrawer>
 </bundle>

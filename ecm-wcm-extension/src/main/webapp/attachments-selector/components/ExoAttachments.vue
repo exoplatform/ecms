@@ -37,7 +37,8 @@
                 </div>
                 <div class="lastContent">
                   <a title="Select on server" class="uploadButton" href="#" rel="tooltip" data-placement="bottom" @click="toggleServerFileSelector()">
-                    <i class="uiIconFolderSearch uiIcon32x32LightGray"></i>
+                    <i class="uiIcon32x32FolderDefault uiIcon32x32LightGray"></i>
+                    <v-icon color="#fff" x-small class="iconCloud">cloud</v-icon>
                     <span class="text colorText">{{ $t('attachments.drawer.existingUploads') }}</span>
                   </a>
                 </div>

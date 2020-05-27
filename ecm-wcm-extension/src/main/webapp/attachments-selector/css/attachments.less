@@ -462,7 +462,19 @@
 
           a {
             display: flex;
-                align-items: center;
+            align-items: center;
+            position: relative;
+
+            .uiIcon32x32FolderDefault {
+              font-size: 22px;
+              top: 0;
+            }
+
+            .iconCloud {
+              position: absolute;
+              left: 5px;
+              top: 8px;
+            }
           }
           .text{
             padding-left: 6px;
@@ -632,7 +644,7 @@
             display: none;
           }
 
-          .uiIconSearch, .uiIconAddFolder{
+          .uiIconFilter, .uiIconAddFolder{
             border: 1px solid #b3b3b3;
             padding: 10px;
             border-radius: 15%;

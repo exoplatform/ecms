@@ -9,7 +9,7 @@
         <a class="backButton" @click="toggleCloudDrawer()">
           <i class="uiIconBack"></i>
         </a>
-        <span class="cloudDriveTitle">{{ $t("UIPopupWindow.title.ConnectCloudDriveForm") }}</span>
+        <span class="cloudDriveTitle">{{ $t("ConnectDriveDrawer.title.ConnectYourService") }}</span>
         <a class="cloudDriveCloseIcon" @click="toggleCloudDrawer()">×</a>
       </div>
       <div class="content">
@@ -26,7 +26,7 @@
                 <i :class="`uiIconEcmsConnectDialog-${item.id} uiIconEcmsBlue`"></i>
               </v-list-item-icon>
               <v-list-item-content class="cloudDriveListItem__content">
-                <v-list-item-title> {{ $t("UIPopupWindow.title.ConnectYour") }} {{ item.name }} </v-list-item-title>
+                <v-list-item-title class="cloudDriveListItem__title"> {{ $t("UIPopupWindow.title.ConnectYour") }} {{ item.name }} </v-list-item-title>
               </v-list-item-content>
               <v-progress-linear :active="item.id === connectingProvider" indeterminate absolute bottom></v-progress-linear>
             </v-list-item>

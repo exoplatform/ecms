@@ -35,7 +35,7 @@
       </div>
       <div :class="showSearchInput? 'visible' : ''" class="selectorActions">
         <input id="searchServerAttachments" ref="searchServerAttachments" v-model="searchFilesFolders" type="text" class="searchInput">
-        <a :class="showSearchInput ? 'uiIconCloseServerAttachments' : 'uiIconSearch'" class="uiIconLightGray" @click="showSearchDocumentInput()"></a>
+        <a :class="showSearchInput ? 'uiIconCloseServerAttachments' : 'uiIconFilter'" class="uiIconLightGray" @click="showSearchDocumentInput()"></a>
         <a v-if="modeFolderSelectionForFile || modeFolderSelection" :title="$t('attachments.filesFoldersSelector.button.addNewFOlder.tooltip')" rel="tooltip" data-placement="bottom" class="uiIconLightGray uiIconAddFolder" @click="addNewFolder()"></a>
       </div>
       <div v-for="action in attachmentsComposerActions" v-show="!currentDrive.name || currentDrive.name === 'Personal Documents'" :key="action.key" :class="`${action.appClass}Action`" class="actionBox">
