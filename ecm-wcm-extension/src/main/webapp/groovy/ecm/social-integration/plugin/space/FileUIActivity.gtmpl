@@ -575,10 +575,7 @@ for(def index = 0; index < uicomponent.getFilesCount(); index++) {
                 </div><!--end previews-->
 <% } %>
 
-      <div class="actionBarMobile">
-        <a class="likesNumber" href="#">$identityLikesNum $labelLikesActivity</a>
-        <a class="CommentsNumber" href="#">$commentCount $labelComments</a>
-      </div><!--end actionBarMobile-->
+            <% _ctx.includeTemplates("UIActivityActionBar-mobile") %>
             <div class="actionsDetailsWrapper">
                  <% if (identityLikesNum > 0 || uicomponent.isLiked()) {%>
                   <div class="listLikedBox $listPeopleBGClass">

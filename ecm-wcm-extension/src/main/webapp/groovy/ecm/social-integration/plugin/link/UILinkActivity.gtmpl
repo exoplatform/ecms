@@ -344,10 +344,7 @@
 					<% } %>
 				</div>
 				</div><!--end introBox,linkShare-->
-				 <div class="actionBarMobile">
-             <a class="likesNumber" href="#">$totalLikesNum $labelLikesActivity</a>
-             <a class="CommentsNumber" href="#">$allCommentSize $labelComments</a>
-          </div><!--end actionBarMobile-->
+				 <% _ctx.includeTemplates("UIActivityActionBar-mobile") %>
 				<% if (embedHtml != null) { %>
           <ul class="statusAction uiLinkActions">
             <li>
