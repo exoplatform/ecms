@@ -661,7 +661,10 @@ public class DocumentServiceImpl implements DocumentService {
       if (node.canAddMixin(EXO_DOCUMENT)) {
         node.addMixin(EXO_DOCUMENT);
       }
-      String previousProvider = node.getProperty(EXO_CURRENT_PROVIDER_PROP).getString();
+      String previousProvider = null;
+      if (node.hasProperty(EXO_CURRENT_PROVIDER_PROP)) {
+        previousProvider = node.getProperty(EXO_CURRENT_PROVIDER_PROP).getString();
+      }
       node.setProperty(EXO_CURRENT_PROVIDER_PROP, provider);
       node.setProperty(EXO_EDITORS_ID_PROP, editorsId);
       node.save();
