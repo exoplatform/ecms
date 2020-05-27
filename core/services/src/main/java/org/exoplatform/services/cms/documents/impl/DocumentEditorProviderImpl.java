@@ -255,6 +255,17 @@ public class DocumentEditorProviderImpl implements DocumentEditorProvider {
   public DocumentUpdateActivityHandler getDocumentUpdateHandler() {
     return editor.getDocumentUpdateHandler();
   }
+  
+  /**
+   * On last editor closed handler.
+   *
+   * @param fileId the file id
+   * @param workspace the workspace
+   */
+  @Override
+  public void onLastEditorClosed(String fileId, String workspace) {
+    editor.onLastEditorClosed(fileId, workspace);
+  }
 
   /**
    * Gets the stored active.
