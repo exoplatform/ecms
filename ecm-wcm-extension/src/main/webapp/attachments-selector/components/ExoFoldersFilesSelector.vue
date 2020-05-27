@@ -114,7 +114,7 @@
       </div>
     </div>
     <div class="attachActions">
-      <div v-if="!modeFolderSelection" class="limitMessage">
+      <div v-if="!modeFolderSelection && currentDrive.name" class="limitMessage">
         <span :class="filesCountClass" class="countLimit">
           {{ $t('attachments.drawer.maxFileCountLeft').replace('{0}', filesCountLeft) }}
         </span>
@@ -123,7 +123,7 @@
         <button class="btn btn-primary attach ignore-vuetify-classes btnSelect" type="button" @click="selectDestination()">{{ $t('attachments.drawer.select') }}</button>
         <button class="btn btnCancel" type="button" @click="$emit('cancel')">{{ $t('attachments.drawer.cancel') }}</button>
       </div>
-      <div v-if="!modeFolderSelection" class="buttonActions">
+      <div v-if="!modeFolderSelection && currentDrive.name" class="buttonActions">
         <button class="btn" type="button" @click="$emit('cancel')">{{ $t('attachments.drawer.cancel') }}</button>
         <button :disabled="selectedFiles.length === 0" class="btn btn-primary attach ignore-vuetify-classes" type="button" @click="addSelectedFiles()">{{ $t('attachments.drawer.select') }}</button>
       </div>

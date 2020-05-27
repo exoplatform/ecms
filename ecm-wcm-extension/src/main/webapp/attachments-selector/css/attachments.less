@@ -172,8 +172,8 @@
       font-size: 18px;
       font-weight: bold;
       width: 100%;
-      text-align: center;
-      padding-left: 15px;
+      text-align: left;
+      padding-left: 35px;
     }
 
     .attachmentsCloseIcon {
@@ -866,6 +866,7 @@
 
               .v-icon {
                 color: @groupHeadingColor !important;
+                transform: rotate(270deg);
               }
             }
 
@@ -876,7 +877,6 @@
               &:after {
                 content: '';
                 display: inline-block;
-                height: 0.5em;
                 vertical-align: middle;
                 width: 100%;
                 margin-right: -100%;
@@ -888,6 +888,10 @@
             &Active {
               &::before, :hover::before {
                 display: none;
+              }
+
+              .v-list-group__header__prepend-icon > .v-icon {
+                transform: rotate(0);
               }
             }
           }
