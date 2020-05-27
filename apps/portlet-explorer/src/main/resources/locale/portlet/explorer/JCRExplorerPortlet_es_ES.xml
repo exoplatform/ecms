@@ -254,7 +254,7 @@
       <UISelectRestorePath>Seleccionar Ruta de Restauración</UISelectRestorePath>
       <UISEOForm>Administrar SEO</UISEOForm>
       <UISEOToolbarForm>Administrar SEO</UISEOToolbarForm>
-      <UIReadOnlyFileConfirmMessage>Abrir Documento</UIReadOnlyFileConfirmMessage>
+      <UIReadOnlyFileConfirmMessage>Abrir documento</UIReadOnlyFileConfirmMessage>
       <UIDocumentAutoVersionForm>Copiar documento</UIDocumentAutoVersionForm>
     </title>
     <header>
@@ -1352,7 +1352,7 @@
     <tooltip>
       <original>Versión original</original>
       <version>Versión</version>
-      <baseVersion>current draft</baseVersion>
+      <baseVersion>versión actual</baseVersion>
       <addLabel>Añadir etiqueta</addLabel>
       <removeLable>Eliminar la Etiqueta</removeLable>
       <restoreVersion>Restablecer la Versión</restoreVersion>
@@ -2458,7 +2458,7 @@
       <ReplaceData>Reemplazar la data</ReplaceData>
       <Back>Regresar al cambio de nombre</Back>
       <Keepfile>Guardar ambos archivos</Keepfile>
-<ReadOnly>Abrir en sólo lectura</ReadOnly>
+<ReadOnly>Abrir en solo lectura</ReadOnly>
 <Cancel>Cancelar</Cancel>
       <KeepBoth>Mantener ambos</KeepBoth>
       <CreateNewVersion>Guardar como nueva versión</CreateNewVersion>

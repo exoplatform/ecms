@@ -213,7 +213,7 @@
       <empty-doctype>Por favor, seleccione un tipo de documento</empty-doctype>
       <empty-startDate>"Fecha de inicio" es necesaria</empty-startDate>
       <invalid-format>Formato de fecha/hora no válida en el campo '{0}'.</invalid-format>
-      <invalid-date>"To Date" must be later than "From Date"</invalid-date>
+      <invalid-date>«Hasta» debe ser posterior a «Desde»</invalid-date>
       <invalid-startDate>"Fecha de inicio" no debe ser posterior a hoy</invalid-startDate>
       <invalid-nodeType>El tipo de nodo "{0}" no es válido. Por favor, compruebe de nuevo.</invalid-nodeType>
       <invalid-keyword>La palabra clave no es válida. Algunos caracteres no son compatibles.</invalid-keyword>
