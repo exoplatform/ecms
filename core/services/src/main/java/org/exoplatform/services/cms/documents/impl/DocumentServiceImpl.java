@@ -671,7 +671,7 @@ public class DocumentServiceImpl implements DocumentService {
       if (previousProvider != null && provider == null) {
         try {
           DocumentEditorProvider editorProvider =  getEditorProvider(previousProvider);
-          editorProvider.onLastEditorClosed(node.getUUID(), node.getPath());
+          editorProvider.onLastEditorClosed(node.getUUID(), workspace);
         } catch(DocumentEditorProviderNotFoundException e) {
           LOG.error("Cannot find {} editor provider. {}", previousProvider, e.getMessage());
         } catch(Exception e) {
