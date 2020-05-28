@@ -90,7 +90,7 @@ public class OneDriveConnector extends CloudDriveConnector {
            .append(getConnectorHost())
            .append("/portal/rest/clouddrive/connect/onedrive")
            .append("&response_mode=query")
-           .append("&prompt=login")
+           .append("&prompt=select_account")
            .append("&client_id=")
            .append(getClientId())
            .append("&scope=")
