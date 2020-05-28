@@ -632,26 +632,41 @@
 				float: right;
 			}
 		}
+		.fileName {
+			text-align: center;
+			position: absolute;
+			width: 100%;
+
+			.ellipsis {
+				display: contents;
+				color: @white;
+				font-weight: bold;
+			}
+
+			.label {
+				margin-left: 16px;
+			}
+		}
 		.previewBtn {
 			bottom: 7px;
 		  	text-align: right;
 		  	margin-right: 390px;
-		  	padding: 5px 0px 0 0;
 		  	.openBtn, .downloadBtn, .openDocBtn, .showComments {
 			    float: right;
 			  	padding-left: 15px;
 			}
-			.fileName {
-				text-align: center;
-				width: 70%;
+			.showComments-lg {
+				cursor: pointer;
 				float: right;
-				.ellipsis {
-					display: contents;
+				padding-left: 15px;
+				.hiddenComment:after {
+					position: absolute;
+					content: "/";
 					color: @white;
-					font-weight: bold;
-				}
-				.label {
-					margin-left: 16px;
+					font-weight: 700;
+					font-size: 1.7em;
+					left: 4px;
+					top: -8px;
 				}
 			}
 			.breadCrumb {
@@ -783,9 +798,16 @@
 
 	.uiDocumentPreview {
 		.previewBtn {
+          position: absolute;
 			.showComments {
-				display: block!important;
+              display: block !important;
 			}
+			.showComments-lg {
+              display: none;
+			}
+            .breadCrumb {
+              display: none;
+            }
 		}
 	}
 
@@ -984,6 +1006,12 @@
 	  .findbar {
 		  left: 40px; //1.2
 	  }
+      .previewBtn {
+        position: absolute;
+        .breadCrumb {
+          display: none;
+        }
+      }
 
   }
 }
@@ -1001,6 +1029,10 @@
             .previewBtn {
               margin-right: 0px;
               font-size: 0;
+              position: absolute;
+              .breadCrumb {
+                display: none;
+              }
             }
 
             .fileInfo {
