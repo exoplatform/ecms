@@ -346,13 +346,15 @@
               '<a><i class="uiIconComment uiIconWhite"></i>&nbsp;${UIActivity.comment.showComment}</a>' +
             '</div>';
         }
-        
-        html += '<div class="openBtn">' +
+        html += '<div class="showComments-lg">' +
+            '<a><i class="uiIconComment uiIconWhite hiddenComment"></i>&nbsp;${UIActivity.comment.showComment}</a>' +
+            '</div>' +
+            '<div class="openBtn">' +
             '<a href="' + this.settings.doc.openUrl + '"><i class="uiIconGotoFolder uiIconWhite"></i>&nbsp;${UIActivity.comment.openInDocuments}</a>' +
-          '</div>' +
-          '<div class="downloadBtn">' +
+            '</div>' +
+            '<div class="downloadBtn">' +
             '<a href="' + this.settings.doc.downloadUrl + '"><i class="uiIconDownload uiIconWhite"></i>&nbsp;${UIActivity.comment.download}</a>' +
-          '</div>';
+            '</div>';
         docPreviewContainer.find(".previewBtn").html(html);
 
       } else {
@@ -428,10 +430,6 @@
                       '<a href="javascript:void(0)" class="ParentCommentLink">${UIActivity.label.Comment}</a>' +
                     '</div>' +
                 '</div>' +
-              '</div>' +
-              '<div class="resizeButton " id="ShowHideAll">' +
-                '<i class="uiIconMiniArrowLeft uiIconWhite"></i>' +
-                '<i class="uiIconMiniArrowRight uiIconWhite"></i>' +
               '</div>';
             }
 
@@ -458,6 +456,10 @@
                     '</div>' +
                     '<span class="uiIconResize pull-right uiIconLightGray"></span>' +
                   '</div>' +
+                '<div class="fileName hidden" data-container="body" rel="tooltip" data-placement="top" title="' + documentPreview.settings.doc.title + '">' +
+                '<div class="ellipsis">' + documentPreview.settings.doc.title + '</div>' +
+                '<div class="label primary fileVersion"' + (documentPreview.settings.doc.openUrl ? 'onclick="window.location.href=\'' + documentPreview.settings.doc.openUrl + '&versions=true\'"' : "") + '>V' + documentPreview.settings.version.number + '</div>' +
+                '</div>' +
 
                   '<!-- put vote area here -->' +
                   '<div class="previewBtn">';
@@ -467,19 +469,15 @@
                       '<a><i class="uiIconComment uiIconWhite"></i>&nbsp;${UIActivity.comment.showComment}</a>' +
                     '</div>';
             }
-
-            html += '<div class="openBtn">' +
-                      '<a href="' + this.settings.doc.openUrl + '"><i class="uiIconGotoFolder uiIconWhite"></i>&nbsp;${UIActivity.comment.openInDocuments}</a>' +
-                    '</div>' +
-                    '<div class="downloadBtn">' +
-                      '<a href="' + this.settings.doc.downloadUrl + '"><i class="uiIconDownload uiIconWhite"></i>&nbsp;${UIActivity.comment.download}</a>' +
-                    '</div>' ;
-        if (!this.settings.showComments) {
-          html += '<div class="fileName" data-container="body" rel="tooltip" data-placement="top" title="' + documentPreview.settings.doc.title + '">' +
-              '<div class="ellipsis">' + documentPreview.settings.doc.title + '</div>' +
-              ((documentPreview.settings.version && documentPreview.settings.version.number) ? ('<div class="label primary fileVersion"' + (documentPreview.settings.doc.openUrl ? 'onclick="window.location.href=\'' + documentPreview.settings.doc.openUrl + '&versions=true\'"' : "") + '>V' + documentPreview.settings.version.number + '</div>') : '') +
-              '</div>';
-        }
+            html += '<div class="showComments-lg">' +
+                '<a><i class="uiIconComment uiIconWhite hiddenComment"></i>&nbsp;${UIActivity.comment.showComment}</a>' +
+                '</div>' +
+                '<div class="openBtn">' +
+                '<a href="' + this.settings.doc.openUrl + '"><i class="uiIconGotoFolder uiIconWhite"></i>&nbsp;${UIActivity.comment.openInDocuments}</a>' +
+                '</div>' +
+                '<div class="downloadBtn">' +
+                '<a href="' + this.settings.doc.downloadUrl + '"><i class="uiIconDownload uiIconWhite"></i>&nbsp;${UIActivity.comment.download}</a>' +
+                '</div>';
         if(documentPreview.settings.doc && documentPreview.settings.doc.breadCrumb) {
           var breadCrumbContent = '<div class="ellipsis-reverse-content hidden">...</div><div class="ellipsis-reverse-apply"><div class="ellipsis-reverse-apply-content">';
           var folderIndex = 0;
@@ -973,8 +971,10 @@
         if(this.settings.showComments) {
           // Bind expanded/collapsed event
           var uiDocumentPreview = $('#uiDocumentPreview');
-          $('.resizeButton .uiIconMiniArrowLeft, .resizeButton .uiIconMiniArrowRight', uiDocumentPreview).click(function() {
+          $('.showComments-lg', uiDocumentPreview).click(function() {
             uiDocumentPreview.toggleClass("collapsed");
+            $('.uiIconComment').toggleClass("hiddenComment");
+            $('.fileName').toggleClass("hidden");
             resizeEventHandler();
           });
 
