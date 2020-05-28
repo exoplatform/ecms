@@ -68,14 +68,21 @@
             <div class="selectionLabel center">{{ driver.title }}</div>
           </a>
         </div>
-        <div v-for="folder in filteredFolders" :key="folder.id" :id="folder.id" :title="folder.name" class="folderSelection"
-             @click="openFolder(folder)" @contextmenu="openFolderActionsMenu(folder, $event)">
-          <a :title="folder.title" href="javascript:void(0);" rel="tooltip" data-placement="bottom">
-            <i :class="folder.folderTypeCSSClass" class="uiIcon24x24FolderDefault uiIconEcmsLightGray selectionIcon center"></i>
-            <input v-if="folder.type === 'new_folder'" :ref="folder.ref" v-model="newFolderName" type="text" class="newFolderInput  ignore-vuetify-classes" @blur="createNewFolder()" @keyup.enter="$event.target.blur()" @keyup.esc="cancelCreatingNewFolder($event)">
-            <input v-else-if="renameFolderAction && folder.id === selectedFolder.id" ref="test" :id="folder.id" v-model="newName" type="text" class="newFolderInput  ignore-vuetify-classes" @blur="saveNewNameFolder()" @keyup.enter="$event.target.blur()" @keyup.esc="cancelRenameNewFolder($event)">
-            <div v-else :id="folder.id" class="selectionLabel center">{{ folder.title }}</div>
+        <div v-for="folder in filteredFolders" :key="folder.id" :id="folder.id" :title="folder.name" :class="folder.type === 'new_folder' ? 'boxOfFolder':''"
+             class="folderSelection" @click="openFolder(folder)" @contextmenu="openFolderActionsMenu(folder, $event)">
+          <a v-if="folder.type === 'new_folder'" href="javascript:void(0);" class="closeIcon" @mousedown="cancelCreatingNewFolder($event)">
+            <p>
+              x
+            </p>
           </a>
+          <div :class="folder.type === 'new_folder' ? 'boxOfTitle' :''">
+            <a :title="folder.title" href="javascript:void(0);" rel="tooltip" data-placement="bottom">
+              <i :class="folder.folderTypeCSSClass" class="uiIcon24x24FolderDefault uiIconEcmsLightGray selectionIcon center"></i>
+              <input v-if="folder.type === 'new_folder'" :ref="folder.ref" v-model="newFolderName" type="text" class="newFolderInput  ignore-vuetify-classes" @blur="createNewFolder($event)" @keyup.enter="$event.target.blur()" @keyup.esc="cancelCreatingNewFolder($event)">
+              <input v-else-if="renameFolderAction && folder.id === selectedFolder.id" ref="rename" :id="folder.id" v-model="newName" type="text" class="newFolderInput  ignore-vuetify-classes" @blur="saveNewNameFolder()" @keyup.enter="$event.target.blur()" @keyup.esc="cancelRenameNewFolder($event)">
+              <div v-else class="selectionLabel center">{{ folder.title }}</div>
+            </a>
+          </div>
         </div>
         <exo-dropdown-menu ref="folderActionsMenu" :folder-actions-menu-left="folderActionsMenuLeft" :folder-actions-menu-top="folderActionsMenuTop" :show-dropdown-menu="showFolderActionsMenu" :selected-folder="selectedFolder" @renameFolder="renameFolder()" @deleteFolder="deleteFolder" @closeMenu="closeFolderActionsMenu"></exo-dropdown-menu>
         <div v-if="emptyFolderForSelectDestination && modeFolderSelection && !emptyFolder" class="emptyFolder">
@@ -267,8 +274,8 @@ export default {
   },
   methods: {
     openFolder: function (folder) {
-      if (this.selectedFolder.id){
-        this.$refs.test[0].focus();
+      if (this.selectedFolder.id && this.selectedFolder.canRemove){
+        this.$refs.rename[0].focus();
       }
       else if (folder.type === 'new_folder') {
         this.$refs.newFolder[0].focus();
@@ -586,7 +593,7 @@ export default {
           this.newName = this.selectedFolder.title;
           this.renameFolderAction = true;
           this.showFolderActionsMenu = false;
-          this.$nextTick(() => {this.$refs.test[0].focus();});
+          this.$nextTick(() => {this.$refs.rename[0].focus();});
         }
       }
     },

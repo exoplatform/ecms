@@ -1,5 +1,4 @@
 import './components/initComponents.js';
-import './css/attachments.less';
 
 Vue.use(Vuetify);
 
