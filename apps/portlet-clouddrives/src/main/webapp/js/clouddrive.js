@@ -996,7 +996,8 @@
 					excluded = {};
 
 					var process = connectDrive(providerId, authURL);
-					cloudDriveUI.connectProcess(process);
+					// commented to not display old notifications in composer
+					// cloudDriveUI.connectProcess(process);
 					return process;
 				} else {
 					utils.log("ERROR: Provider has no authURL " + providerId);

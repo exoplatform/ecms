@@ -13,6 +13,7 @@
         <v-progress-linear :active="cloudDriveConnecting" absolute bottom indeterminate></v-progress-linear>
       </div>
       <div :class="showDocumentSelector? 'serverFiles' : 'attachments'" class="content">
+        <div v-show="!showDocumentSelector && privateFilesAttached" class="alert alert-info attachmentsAlert">{{ $t('attachments.alert.personalFiles') }}</div>
         <div v-show="!showDocumentSelector" class="attachmentsContent">
           <div class="multiploadFilesSelector">
             <div id="DropFileBox" ref="dropFileBox" class="dropFileBox">
@@ -203,7 +204,8 @@ export default {
       modeFolderSelectionForFile: false,
       showAttachmentsDrawer: false,
       displayMessageDestinationFolder: true,
-      cloudDriveConnecting: false
+      cloudDriveConnecting: false,
+      privateFilesAttached: false
     };
   },
   watch: {
@@ -241,6 +243,7 @@ export default {
             }
           }
         }
+        this.privateFilesAttached = this.value.some(file => !file.isPublic);
       }
     }
   },

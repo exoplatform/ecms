@@ -1,5 +1,8 @@
 <template>
   <div class="serverFiles">
+    <div v-show="connectedMessage" class="alert alert-info attachmentsAlert">
+      <span>{{ $t('attachments.alert.connected') }} {{ connectedMessage }}!</span>{{ $t('attachments.alert.pleaseNote') }}
+    </div>
     <div class="contentHeader">
       <div v-if="!showSearchInput" class="currentDirectory">
         <div class="documents" @click="fetchUserDrives()">
@@ -297,6 +300,14 @@ export default {
     },
     emptyFolderForSelectDestination(){
       return this.folders.length === 0 && this.drivers.length === 0 && !this.loadingFolders;
+    },
+    connectedMessage() {
+      let connectedDrive;
+      for (const key in this.drivesInProgress) {
+        const fullProgress = 100;
+        connectedDrive = this.drivesInProgress[key] >= fullProgress ? key : '';
+      }
+      return connectedDrive;
     }
   },
   watch: {
@@ -494,7 +505,8 @@ export default {
               idAttribute: idAttribute,
               selected: selected,
               mimetype: fetchedFiles[j].getAttribute('nodeType'),
-              isCloudFile: fetchedFiles[j].getAttribute('isCloudFile') === 'true' ? true : false
+              isCloudFile: fetchedFiles[j].getAttribute('isCloudFile') === 'true' ? true : false,
+              isPublic: fetchedFiles[j].getAttribute('isPublic') ? fetchedFiles[j].getAttribute('isPublic') : false
             });
           }
         }
