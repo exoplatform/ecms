@@ -284,52 +284,50 @@ public void addActivityTimeLine(String ownerName, String ownerUri, String ownerA
             <span class="dateTime"><i class="uiIconClock  uiIconLightGray"></i>&nbsp;<a id="EditActivityTime${activity.id}" rel="tooltip" data-placement="bottom" title="$absolutePostedTime" href="<%=uicomponent.getActivityPermalink(activity.id)%>"<% if(activity.postedTime != activity.updated.getTime() ){%>> $activityUpdatedTime <%} else {%> >$activityPostedTime <%}%></a></span>
         </div>
     </div><!-- endactivityAuthorAndDate -->
+            <div id="dropDownEditActivity${activity.id}" class="btn-group uiDropdownWithIcon actLink">
+            <div class="dropdown-toggle" data-toggle="dropdown">
+            <i class="uiIconActivityAction uiIconLightGray">
+            </i>
+                                    </div>
+            <ul class="dropdown-menu pull-right" role="menu">
+            <li>
+            <a id="Permalink${activity.id}"  rel="tooltip" data-placement="bottom" title="$viewActivityTip" href="<%=uicomponent.getActivityPermalink(activity.id)%>">$viewActivityTip</a>
+                                        </li>
+            <% if(activityEditable) {%>
+            <li class="hidden-tabletL">
+            <a id="EditActivitylink${activity.id}"  data-edit-activity="${activity.id}" data-placement="bottom" href="javascript:void(0)">${labelEdit}</a>
+                                        </li>
+            <%
+            }
+            if (activityDeletable) {
+            %>
+            <li>
+            <a href="javascript:void(0)" data-confirm="$labelToDeleteThisActivity" data-caption="$captionConfirmation" data-close="$labelClosebutton" data-ok="$labelConfirmbutton"  data-delete="<%=uicomponent.event("DeleteActivity", uicomponent.getId(), "");%>" class="controllDelete" id="DeleteActivityButton${activity.id}">${labelDelete}</a>
+
+                                        </li>
+            <%}
+            if(uicomponent.getFilesCount() == 1){
+            def currentNode = uicomponent.getContentNode(0);
+            if(uicomponent.canEditDocument(currentNode)) {
+            def preferenceWS  = currentNode.getSession().getWorkspace().getName();
+            def remoteEditURL = uicomponent.event("OpenFile", "0");
+            def _documentInfos = openInOfficeConnector.getDocumentInfos(currentNode.getName());
+            def remoteEditClass=_documentInfos[1];
+            def remoteEditTitle=_ctx.appRes(_documentInfos[0]);
+
+            jsManager.require("SHARED/openDocumentInOffice", "od")
+            .addScripts("gj(document).ready(function(){od.OpenDocumentInOffice.updateLabel('" + preferenceWS + ":" + currentNode.getPath().replaceAll("'", "\\\\'") + "', '" + activity.id + "'); }); ");
+            %>
+            <li class="hidden-tabletL" style="display:none;" ><a href="<%=uicomponent.event("OpenFile")%>"><i class="uiIcon16x16FileDefault uiIconEcmsOpenDocument_$activity.id $remoteEditClass" ></i>&nbsp;$remoteEditTitle</a></li>
+                                            <%  } %>
+                                            <li><a href="$downloadAllUrl"><%=_ctx.appRes("SocialIntegration.download");%></a></li>
+                                        <% } else if(uicomponent.getFilesCount() > 1) { %>
+                                            <li><a href="$downloadAllUrl"><%=_ctx.appRes("SocialIntegration.downloadAll");%></a></li>
+                                        <% } %>
+
+                                    </ul>
+            </div><!-- end three dots link-->
     </div><!-- end activityHeader -->
-
-                    <div id="dropDownEditActivity${activity.id}" class="btn-group uiDropdownWithIcon actLink">
-                        <div class="dropdown-toggle" data-toggle="dropdown">
-                            <i class="uiIconActivityAction uiIconLightGray">
-                            </i>
-                        </div>
-                        <ul class="dropdown-menu pull-right" role="menu">
-                            <li>
-                                <a id="Permalink${activity.id}"  rel="tooltip" data-placement="bottom" title="$viewActivityTip" href="<%=uicomponent.getActivityPermalink(activity.id)%>">$viewActivityTip</a>
-                            </li>
-							<% if(activityEditable) {%>
-                            <li class="hidden-tabletL">
-                                <a id="EditActivitylink${activity.id}"  data-edit-activity="${activity.id}" data-placement="bottom" href="javascript:void(0)">${labelEdit}</a>
-                            </li>
-                            <%
-							}
-							if (activityDeletable) {
-                            %>
-                            <li>
-                                <a href="javascript:void(0)" data-confirm="$labelToDeleteThisActivity" data-caption="$captionConfirmation" data-close="$labelClosebutton" data-ok="$labelConfirmbutton"  data-delete="<%=uicomponent.event("DeleteActivity", uicomponent.getId(), "");%>" class="controllDelete" id="DeleteActivityButton${activity.id}">${labelDelete}</a>
-
-                            </li>
-                            <%}
-                            if(uicomponent.getFilesCount() == 1){
-                                    def currentNode = uicomponent.getContentNode(0);
-                                    if(uicomponent.canEditDocument(currentNode)) {
-                                        def preferenceWS  = currentNode.getSession().getWorkspace().getName();
-                                        def remoteEditURL = uicomponent.event("OpenFile", "0");
-                                        def _documentInfos = openInOfficeConnector.getDocumentInfos(currentNode.getName());
-                                        def remoteEditClass=_documentInfos[1];
-                                        def remoteEditTitle=_ctx.appRes(_documentInfos[0]);
-
-                                        jsManager.require("SHARED/openDocumentInOffice", "od")
-                                                .addScripts("gj(document).ready(function(){od.OpenDocumentInOffice.updateLabel('" + preferenceWS + ":" + currentNode.getPath().replaceAll("'", "\\\\'") + "', '" + activity.id + "'); }); ");
-                            %>
-                                <li class="hidden-tabletL" style="display:none;" ><a href="<%=uicomponent.event("OpenFile")%>"><i class="uiIcon16x16FileDefault uiIconEcmsOpenDocument_$activity.id $remoteEditClass" ></i>&nbsp;$remoteEditTitle</a></li>
-                                <%  } %>
-                                <li><a href="$downloadAllUrl"><%=_ctx.appRes("SocialIntegration.download");%></a></li>
-                            <% } else if(uicomponent.getFilesCount() > 1) { %>
-                                <li><a href="$downloadAllUrl"><%=_ctx.appRes("SocialIntegration.downloadAll");%></a></li>
-                            <% } %>
-
-                        </ul>
-                    </div><!-- end three dots link-->
-
     </div><!--end heading-->
     <% if (activityStatus != null) { %>
         <div class="description">$activityStatus</div><!--end description-->
