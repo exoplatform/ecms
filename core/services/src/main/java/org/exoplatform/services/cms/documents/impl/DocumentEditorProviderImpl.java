@@ -266,6 +266,12 @@ public class DocumentEditorProviderImpl implements DocumentEditorProvider {
   public void onLastEditorClosed(String fileId, String workspace) {
     editor.onLastEditorClosed(fileId, workspace);
   }
+  
+
+  @Override
+  public void onFirstEditorOpened(String fileId, String workspace) {
+    editor.onFirstEditorOpened(fileId, workspace);
+  }
 
   /**
    * Gets the stored active.
@@ -372,5 +378,6 @@ public class DocumentEditorProviderImpl implements DocumentEditorProvider {
   public Class<? extends DocumentEditor> getEditorClass() {
     return editor.getClass();
   }
+
 
 }

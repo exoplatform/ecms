@@ -101,11 +101,15 @@ public class LockUtil {
   public static String getLockTokenOfUser(Node node) throws Exception {
     return WCMCoreUtils.getService(LockService.class).getLockTokenOfUser(node);
   }
+  
+  public static String getLockTokenOfUser(Node node, String userId) throws Exception {
+    return WCMCoreUtils.getService(LockService.class).getLockTokenOfUser(node, userId);
+  }
 
   public static String getLockToken(Node node) throws Exception {
     return WCMCoreUtils.getService(LockService.class).getLockToken(node);
   }
-
+  
   public static String getOldLockKey(String srcPath, Node node) throws Exception {
     return WCMCoreUtils.getService(LockService.class).getOldLockKey(srcPath, node);
   }

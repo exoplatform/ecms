@@ -650,9 +650,10 @@ public class DocumentServiceImpl implements DocumentService {
       Session session = sessionProvider.getSession(workspace, repoService.getCurrentRepository());
       Node node = session.getNodeByUUID(uuid);
       if (node.isLocked()) {
+        String lockOwner = node.getLock().getLockOwner();
         String lockToken;
         try {
-          lockToken = LockUtil.getLockToken(node);
+          lockToken = LockUtil.getLockTokenOfUser(node, lockOwner);
           session.addLockToken(lockToken);
         } catch (Exception e) {
           LOG.error("Cannot get lock token from node", e);
@@ -677,6 +678,15 @@ public class DocumentServiceImpl implements DocumentService {
         } catch(Exception e) {
           LOG.error("Cannot execute last editor closed handler", e.getMessage());
         }
+      } else if (previousProvider == null && provider != null) {
+        try {
+          DocumentEditorProvider editorProvider = getEditorProvider(provider);
+          editorProvider.onFirstEditorOpened(node.getUUID(), workspace);
+        } catch(DocumentEditorProviderNotFoundException e) {
+          LOG.error("Cannot find {} editor provider. {}", previousProvider, e.getMessage());
+        } catch(Exception e) {
+          LOG.error("Cannot execute first editor opened handler", e.getMessage());
+        }
       }
     });
   }
@@ -698,9 +708,10 @@ public class DocumentServiceImpl implements DocumentService {
         Session session = sessionProvider.getSession(workspace, repoService.getCurrentRepository());
         Node node = session.getNodeByUUID(uuid);
         if (node.isLocked()) {
+          String lockOwner = node.getLock().getLockOwner();
           String lockToken;
           try {
-            lockToken = LockUtil.getLockToken(node);
+            lockToken = LockUtil.getLockTokenOfUser(node, lockOwner);
             session.addLockToken(lockToken);
           } catch (Exception e) {
             LOG.error("Cannot get lock token from node", e);

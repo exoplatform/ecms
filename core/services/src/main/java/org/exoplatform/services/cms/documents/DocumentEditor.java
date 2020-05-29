@@ -121,6 +121,15 @@ public interface DocumentEditor {
    * @param workspace the workspace
    */
   void onLastEditorClosed(String fileId, String workspace);
+  
+
+  /**
+   * On first editor opened.
+   *
+   * @param fileId the file id
+   * @param workspace the workspace
+   */
+  void onFirstEditorOpened(String fileId, String workspace);
 
   /**
    * Gets the permissions.
