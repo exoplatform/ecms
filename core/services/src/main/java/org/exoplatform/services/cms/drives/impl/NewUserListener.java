@@ -41,9 +41,6 @@ public class NewUserListener extends UserEventListener {
   private NodeHierarchyCreator nodeHierarchyCreator_ ;
   private String userPath_ ;
 
-  final static String PRIVATE_ALIAS = "userPrivate" ;
-  final static String PUBLIC_ALIAS = "userPublic" ;
-
   /**
    *
    * @param driveService
@@ -81,8 +78,8 @@ public class NewUserListener extends UserEventListener {
     String allowCreateFolder = initParams_.getValueParam("allowCreateFolder").getValue();
     String allowNodeTypesOnTree = initParams_.getValueParam("allowNodeTypesOnTree").getValue();
     //Only user can access private drive
-    String publicPath = nodeHierarchyCreator_.getJcrPath(PUBLIC_ALIAS) ;
-    String privatePath = nodeHierarchyCreator_.getJcrPath(PRIVATE_ALIAS) ;
+    String publicPath = nodeHierarchyCreator_.getJcrPath(BasePath.CMS_USER_PUBLIC_ALIAS) ;
+    String privatePath = nodeHierarchyCreator_.getJcrPath(BasePath.CMS_USER_PRIVATE_ALIAS) ;
     //Get user relPath
     String userRelPath = StringUtils.replaceOnce(userNode.getPath(), userPath_ + "/", "");
     //add drive with user relPath
@@ -121,9 +118,9 @@ public class NewUserListener extends UserEventListener {
     Node userNode = nodeHierarchyCreator_.getUserNode(sessionProvider, user.getUserName());
     String userRelPath = StringUtils.replaceOnce(userNode.getPath(), userPath_ + "/", "");
     //Remove private drive
-    driveService_.removeDrive(userRelPath + "|" + nodeHierarchyCreator_.getJcrPath(PRIVATE_ALIAS));
+    driveService_.removeDrive(userRelPath + "|" + nodeHierarchyCreator_.getJcrPath(BasePath.CMS_USER_PRIVATE_ALIAS));
     
     //Remove public drive
-    driveService_.removeDrive(userRelPath + "|" + nodeHierarchyCreator_.getJcrPath(PUBLIC_ALIAS));
+    driveService_.removeDrive(userRelPath + "|" + nodeHierarchyCreator_.getJcrPath(BasePath.CMS_USER_PUBLIC_ALIAS));
   }
 }

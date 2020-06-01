@@ -17,13 +17,17 @@
 package org.exoplatform.ecm.utils.permission;
 
 import java.security.AccessControlException;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 
+import org.exoplatform.services.jcr.access.AccessControlEntry;
 import org.exoplatform.services.jcr.access.PermissionType;
 import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.security.IdentityConstants;
+import org.exoplatform.services.security.MembershipEntry;
 
 /**
  * The Class PermissionUtil use to check permission for a node
@@ -64,14 +68,19 @@ public class PermissionUtil {
   }
 
   /**
-   * Checks if is any role.
+   * Checks if is any identity can access the node with {@link PermissionType#DEFAULT_AC} permissions.
    *
    * @param node the node
-   * @return true, if is any role
+   * @return true, if any identity can access the node
    * @throws RepositoryException the repository exception
    */
   public static boolean isAnyRole(Node node)throws RepositoryException {
-    return checkPermission(node,IdentityConstants.ANY);
+    // TODO this check is not correct: permissionType cannot be compared with identity {@link IdentityConstants#ANY}.
+    // If use it, it leads to: javax.jcr.RepositoryException: Unknown permission entry any and 503 error in REST.
+    //return checkPermission(node,IdentityConstants.ANY);
+    //
+    // Check if given node has default (read) permissions for any identity
+    return hasPermissions(node, IdentityConstants.ANY, PermissionType.DEFAULT_AC);
   }
 
   /**
@@ -94,6 +103,59 @@ public class PermissionUtil {
    */
   public static boolean canRemoveNode(Node node) throws RepositoryException {
     return checkPermission(node,PermissionType.REMOVE);
+  }
+  
+  /**
+   * Checks for node permissions granted to given identity. This method checks actually assigned permissions to the identity. It
+   * will not resolve an user group membership to check the groups permissions - user groups resolution should be done externally
+   * and then checked with this method for each group.<br>
+   * Method will return <code>true</code> only if all asked permissions match the granted on the node.
+   *
+   * @param node the target node
+   * @param identity the organizational identity, can be user (e.g. "john") or group with membership (e.g. *:/some/group,
+   *          manager:/platform/administrator)
+   * @param permissions the permissions to check if granted (e.g. "read" or ["read", "write"]), see {@link PermissionType} for all
+   *          variants
+   * @return true, if all asked permissions are granted to the identity, false otherwise
+   * @throws RepositoryException the repository exception if error reading the node permission (ACL)
+   */
+  public static boolean hasPermissions(Node node, String identity, String[] permissions) throws RepositoryException {
+    if (ExtendedNode.class.isAssignableFrom(node.getClass())) {
+      ExtendedNode extNode = ExtendedNode.class.cast(node); 
+      MembershipEntry identityMembership = MembershipEntry.parse(identity);
+      Set<String> identityPermissions = new HashSet<>();
+      for (AccessControlEntry ace : extNode.getACL().getPermissionEntries()) {
+        if (identityMembership != null && ace.getMembershipEntry() != null) {
+          // Group permissions
+          MembershipEntry me = ace.getMembershipEntry();
+          // Check any (*) as well as exact match of membership
+          if (identityMembership.getGroup().equals(me.getGroup())) {
+            if (me.getMembershipType().equals(identityMembership.getMembershipType()) || me.getMembershipType()
+                                                                                           .equals(MembershipEntry.ANY_TYPE)) {
+              identityPermissions.add(ace.getPermission());
+            }
+          }
+        } else if (ace.getIdentity().equals(identity)) {
+          // It is user permissions
+          identityPermissions.add(ace.getPermission());
+        } else if (ace.getIdentity().equals(IdentityConstants.ANY)) {
+          // ACL for any can be applied to any of given identity  
+          identityPermissions.add(ace.getPermission());
+        }
+      }
+      if (!identityPermissions.isEmpty()) {
+        // Check that all asked present in the identity permissions of the node
+        int checks = permissions.length;
+        for (String p : permissions) {
+          if (identityPermissions.contains(p)) {
+            checks--;
+          }
+        }
+        identityPermissions.clear(); // help GC
+        return checks == 0;
+      }
+    }
+    return false;
   }
 
   private static boolean checkPermission(Node node,String permissionType) throws RepositoryException {

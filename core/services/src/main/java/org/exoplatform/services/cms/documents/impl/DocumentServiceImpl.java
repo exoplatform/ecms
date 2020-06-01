@@ -134,26 +134,52 @@ public class DocumentServiceImpl implements DocumentService {
   public static final String DOCUMENT_NOT_FOUND = "?path=doc-not-found";
   private static final String DOCUMENTS_NODE = "Documents";
   private static final String SHARED_NODE = "Shared";
-  private static final String COLLABORATION         = "collaboration";
-  private static final Log LOG                 = ExoLogger.getLogger(DocumentServiceImpl.class);
+  private static final String COLLABORATION = "collaboration";
+  private static final Log LOG = ExoLogger.getLogger(DocumentServiceImpl.class);
+  
   private final List<NewDocumentTemplateProvider> templateProviders = new ArrayList<>();
   private final List<DocumentEditorProvider> editorProviders = new ArrayList<>();
   private final List<NewDocumentTemplateProvider> unmodifiebleTemplateProviders = Collections.unmodifiableList(templateProviders);
   private final List<DocumentEditorProvider> unmodifiebleEditorProviders = Collections.unmodifiableList(editorProviders);
-  private ManageDriveService manageDriveService;
-  private Portal portal;
-  private SessionProviderService sessionProviderService;
-  private RepositoryService repoService;
-  private NodeHierarchyCreator nodeHierarchyCreator;
-  private LinkManager linkManager;
-  private PortalContainerInfo portalContainerInfo;
-  private Map<String, DocumentMetadataPlugin> metadataPlugins = new HashMap<>();
-  private OrganizationService organizationService;
-  private SettingService settingService;
-  private IdentityManager identityManager;
-  private String editorsId;
-
-  public DocumentServiceImpl(ManageDriveService manageDriveService, Portal portal, SessionProviderService sessionProviderService, RepositoryService repoService, NodeHierarchyCreator nodeHierarchyCreator, LinkManager linkManager, PortalContainerInfo portalContainerInfo, OrganizationService organizationService, SettingService settingService, IdentityManager identityManager, IDGeneratorService idGenerator) {
+  private final ManageDriveService manageDriveService;
+  private final Portal portal;
+  private final SessionProviderService sessionProviderService;
+  private final RepositoryService repoService;
+  private final NodeHierarchyCreator nodeHierarchyCreator;
+  private final LinkManager linkManager;
+  private final PortalContainerInfo portalContainerInfo;
+  private final Map<String, DocumentMetadataPlugin> metadataPlugins = new HashMap<>();
+  private final OrganizationService organizationService;
+  private final SettingService settingService;
+  private final IdentityManager identityManager;
+  private final String editorsId;
+  
+  /**
+   * Instantiates a new {@link DocumentService} implementation.
+   *
+   * @param manageDriveService the manage drive service
+   * @param portal the portal
+   * @param sessionProviderService the session provider service
+   * @param repoService the repo service
+   * @param nodeHierarchyCreator the node hierarchy creator
+   * @param linkManager the link manager
+   * @param portalContainerInfo the portal container info
+   * @param organizationService the organization service
+   * @param settingService the setting service
+   * @param identityManager the identity manager
+   * @param idGenerator the id generator
+   */
+  public DocumentServiceImpl(ManageDriveService manageDriveService,
+                             Portal portal,
+                             SessionProviderService sessionProviderService,
+                             RepositoryService repoService,
+                             NodeHierarchyCreator nodeHierarchyCreator,
+                             LinkManager linkManager,
+                             PortalContainerInfo portalContainerInfo,
+                             OrganizationService organizationService,
+                             SettingService settingService,
+                             IdentityManager identityManager,
+                             IDGeneratorService idGenerator) {
     this.manageDriveService = manageDriveService;
     this.sessionProviderService = sessionProviderService;
     this.repoService = repoService;
@@ -164,6 +190,8 @@ public class DocumentServiceImpl implements DocumentService {
     this.organizationService = organizationService;
     this.settingService = settingService;
     this.identityManager = identityManager;
+
+    // Online editors support
     this.editorsId = idGenerator.generateStringID(this);
     EditorProvidersHelper.init(this);
   }
@@ -830,17 +858,30 @@ public class DocumentServiceImpl implements DocumentService {
     }
     return getDocumentsByFolder(sharedFolder, null, limit);
   }
-
+  
+  // TODO consider do we need this in this API level service
 //  /**
 //   * {@inheritDoc}
 //   */
-//  @Override
-//  public List<Document> getRecentSpacesDocuments(int limit) throws Exception {
-//    return getDocumentsByFolder(Utils.SPACES_NODE_PATH, null, limit);
+//  public Node getUserPublicNode(String userId) throws Exception {
+//    Node profileNode = getUserProfileNode(userId);
+//    String userPublic = nodeHierarchyCreator.getJcrPath(BasePath.CMS_USER_PUBLIC_ALIAS);
+//    return profileNode.getNode(userPublic != null ? userPublic : "Public");
 //  }
-
+//
+//  /**
+//   * {@inheritDoc}
+//   */
+//  public Node getUserProfileNode(String userId) throws Exception {
+//    SessionProvider ssp = sessionProviderService.getSystemSessionProvider(null);
+//    if (ssp != null) {
+//      return nodeHierarchyCreator.getUserNode(ssp, userId);
+//    }
+//    throw new RepositoryException("Cannot get session provider.");
+//  }
+    
   /**
-   * Gets display name of current user. In case of any errors return current userId
+   * Gets display name of current user. In case of any errors return current userId.
    * 
    * @return the display name
    */

@@ -46,7 +46,6 @@ import org.picocontainer.Startable;
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.component.RequestLifeCycle;
-import org.exoplatform.ecm.connector.platform.ManageDocumentService;
 import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.CmsService;
 import org.exoplatform.services.cms.clouddrives.CloudDrive;
@@ -85,6 +84,9 @@ import org.exoplatform.wcm.ext.component.activity.listener.Utils;
  * @version $Id: CloudFileActionService.java 00000 Jul 6, 2015 pnedonosko $
  */
 public class CloudFileActionService implements Startable {
+  
+  /** The Constant EXO_SYMLINK. */
+  public static final String   EXO_SYMLINK          = "exo:symlink";
 
   /** The Constant ECD_CLOUDFILELINK. */
   public static final String      ECD_CLOUDFILELINK        = "ecd:cloudFileLink";
@@ -411,6 +413,7 @@ public class CloudFileActionService implements Startable {
    * @param drive the drive
    * @return true, if is group drive
    */
+  @Deprecated
   public boolean isGroupDrive(DriveData drive) {
     return drive.getHomePath().startsWith(groupsPath);
   }
@@ -421,6 +424,7 @@ public class CloudFileActionService implements Startable {
    * @param drive the drive
    * @return true, if is user drive
    */
+  @Deprecated
   public boolean isUserDrive(DriveData drive) {
     return drive.getHomePath().startsWith(usersPath);
   }
@@ -431,6 +435,7 @@ public class CloudFileActionService implements Startable {
    * @param path the path
    * @return true, if is group path
    */
+  @Deprecated
   public boolean isGroupPath(String path) {
     return path.startsWith(groupsPath);
   }
@@ -441,6 +446,7 @@ public class CloudFileActionService implements Startable {
    * @param path the path
    * @return true, if is user path
    */
+  @Deprecated
   public boolean isUserPath(String path) {
     return path.startsWith(usersPath);
   }
@@ -452,6 +458,7 @@ public class CloudFileActionService implements Startable {
    * @return the space drive
    * @throws Exception the exception
    */
+  @Deprecated
   public DriveData getGroupDrive(String groupId) throws Exception {
     return documentDrives.getDriveByName(groupId.replace('/', '.'));
   }
@@ -463,6 +470,7 @@ public class CloudFileActionService implements Startable {
    * @return the user drive
    * @throws Exception the exception
    */
+  @Deprecated
   public DriveData getUserDrive(String userName) throws Exception {
     DriveData userDrive = null;
     String homePath = null;
@@ -493,6 +501,7 @@ public class CloudFileActionService implements Startable {
    * @return the user public node
    * @throws Exception the exception
    */
+  @Deprecated
   public Node getUserPublicNode(String userName) throws Exception {
     Node profileNode = getUserProfileNode(userName);
     String userPublic = hierarchyCreator.getJcrPath("userPublic");
@@ -506,6 +515,7 @@ public class CloudFileActionService implements Startable {
    * @return the user profile node
    * @throws Exception the exception
    */
+  @Deprecated
   public Node getUserProfileNode(String userName) throws Exception {
     SessionProvider ssp = sessionProviders.getSystemSessionProvider(null);
     if (ssp != null) {
@@ -970,7 +980,7 @@ public class CloudFileActionService implements Startable {
       // FYI link(s) should be created by CloudDriveShareDocumentService, it
       // creates them under system session, thus we will do the same.
       SessionProvider systemSession = sessionProviders.getSystemSessionProvider(null);
-      List<Node> links = linkManager.getAllLinks(fileNode, ManageDocumentService.EXO_SYMLINK, systemSession);
+      List<Node> links = linkManager.getAllLinks(fileNode, EXO_SYMLINK, systemSession);
       for (Node linkNode : links) {
         // do only for a target (space or user)
         if (linkNode.getPath().startsWith(targetPath)) {
