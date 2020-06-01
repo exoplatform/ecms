@@ -47,8 +47,6 @@ import org.gatein.api.navigation.Navigation;
 import org.gatein.api.navigation.Nodes;
 import org.gatein.api.site.SiteId;
 
-import com.sun.star.ui.dialogs.ExecutableDialogException;
-
 import org.exoplatform.commons.api.settings.SettingService;
 import org.exoplatform.commons.utils.CommonsUtils;
 import org.exoplatform.container.component.ComponentPlugin;
@@ -97,6 +95,7 @@ import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.security.Identity;
 import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
+import org.exoplatform.services.wcm.utils.RepositoryConsumer;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.social.core.manager.IdentityManager;
 import org.exoplatform.social.core.space.SpaceUtils;
@@ -601,18 +600,20 @@ public class DocumentServiceImpl implements DocumentService {
    */
   @Override
   public void savePreferredEditor(String userId, String provider, String uuid, String workspace) throws RepositoryException {
-    Node node = nodeByUUID(uuid, workspace);
-    if (node.canAddMixin(EXO_DOCUMENT)) {
-      node.addMixin(EXO_DOCUMENT);
-    }
-    Node userPreferences;
-    if (!node.hasNode(userId)) {
-      userPreferences = node.addNode(userId, EXO_USER_PREFFERENCES);
-    } else {
-      userPreferences = node.getNode(userId);
-    }
-    userPreferences.setProperty(EXO_PREFFERED_EDITOR, provider);
-    node.save();
+    Node targetNode = nodeByUUID(uuid, workspace);
+    invokeOnLockedNode(targetNode, (node) -> {
+      if (node.canAddMixin(EXO_DOCUMENT)) {
+        node.addMixin(EXO_DOCUMENT);
+      }
+      Node userPreferences;
+      if (!node.hasNode(userId)) {
+        userPreferences = node.addNode(userId, EXO_USER_PREFFERENCES);
+      } else {
+        userPreferences = node.getNode(userId);
+      }
+      userPreferences.setProperty(EXO_PREFFERED_EDITOR, provider);
+      node.save();
+    });
   }
 
   /**
@@ -637,7 +638,7 @@ public class DocumentServiceImpl implements DocumentService {
   public List<DocumentEditorProvider> getDocumentEditorProviders() {
     return unmodifiebleEditorProviders;
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -648,46 +649,38 @@ public class DocumentServiceImpl implements DocumentService {
     String userId = systemNode.getProperty(EXO_LAST_MODIFIER_PROP).getString();
     WCMCoreUtils.invokeUserSession(userId, (sessionProvider) -> {
       Session session = sessionProvider.getSession(workspace, repoService.getCurrentRepository());
-      Node node = session.getNodeByUUID(uuid);
-      if (node.isLocked()) {
-        String lockOwner = node.getLock().getLockOwner();
-        String lockToken;
-        try {
-          lockToken = LockUtil.getLockTokenOfUser(node, lockOwner);
-          session.addLockToken(lockToken);
-        } catch (Exception e) {
-          LOG.error("Cannot get lock token from node", e);
+      Node targetNode = session.getNodeByUUID(uuid);
+      invokeOnLockedNode(targetNode, (node) -> {
+        if (node.canAddMixin(EXO_DOCUMENT)) {
+          node.addMixin(EXO_DOCUMENT);
         }
-      }
-      if (node.canAddMixin(EXO_DOCUMENT)) {
-        node.addMixin(EXO_DOCUMENT);
-      }
-      String previousProvider = null;
-      if (node.hasProperty(EXO_CURRENT_PROVIDER_PROP)) {
-        previousProvider = node.getProperty(EXO_CURRENT_PROVIDER_PROP).getString();
-      }
-      node.setProperty(EXO_CURRENT_PROVIDER_PROP, provider);
-      node.setProperty(EXO_EDITORS_ID_PROP, editorsId);
-      node.save();
-      if (previousProvider != null && provider == null) {
-        try {
-          DocumentEditorProvider editorProvider =  getEditorProvider(previousProvider);
-          editorProvider.onLastEditorClosed(node.getUUID(), workspace);
-        } catch(DocumentEditorProviderNotFoundException e) {
-          LOG.error("Cannot find {} editor provider. {}", previousProvider, e.getMessage());
-        } catch(Exception e) {
-          LOG.error("Cannot execute last editor closed handler", e.getMessage());
+        String previousProvider = null;
+        if (node.hasProperty(EXO_CURRENT_PROVIDER_PROP)) {
+          previousProvider = node.getProperty(EXO_CURRENT_PROVIDER_PROP).getString();
         }
-      } else if (previousProvider == null && provider != null) {
-        try {
-          DocumentEditorProvider editorProvider = getEditorProvider(provider);
-          editorProvider.onFirstEditorOpened(node.getUUID(), workspace);
-        } catch(DocumentEditorProviderNotFoundException e) {
-          LOG.error("Cannot find {} editor provider. {}", previousProvider, e.getMessage());
-        } catch(Exception e) {
-          LOG.error("Cannot execute first editor opened handler", e.getMessage());
+        node.setProperty(EXO_CURRENT_PROVIDER_PROP, provider);
+        node.setProperty(EXO_EDITORS_ID_PROP, editorsId);
+        node.save();
+        if (previousProvider != null && provider == null) {
+          try {
+            DocumentEditorProvider editorProvider = getEditorProvider(previousProvider);
+            editorProvider.onLastEditorClosed(node.getUUID(), workspace);
+          } catch (DocumentEditorProviderNotFoundException e) {
+            LOG.error("Cannot find {} editor provider. {}", previousProvider, e.getMessage());
+          } catch (Exception e) {
+            LOG.error("Cannot execute last editor closed handler", e.getMessage());
+          }
+        } else if (previousProvider == null && provider != null) {
+          try {
+            DocumentEditorProvider editorProvider = getEditorProvider(provider);
+            editorProvider.onFirstEditorOpened(node.getUUID(), workspace);
+          } catch (DocumentEditorProviderNotFoundException e) {
+            LOG.error("Cannot find {} editor provider. {}", previousProvider, e.getMessage());
+          } catch (Exception e) {
+            LOG.error("Cannot execute first editor opened handler", e.getMessage());
+          }
         }
-      }
+      });
     });
   }
   
@@ -698,30 +691,27 @@ public class DocumentServiceImpl implements DocumentService {
   public String getCurrentDocumentProvider(String uuid, String workspace) throws RepositoryException {
     Session systemSession = repoService.getCurrentRepository().getSystemSession(workspace);
     Node systemNode = systemSession.getNodeByUUID(uuid);
-    String provider =  systemNode.hasProperty(EXO_CURRENT_PROVIDER_PROP) ? systemNode.getProperty(EXO_CURRENT_PROVIDER_PROP).getString() : null;
-    String currentEditorsId =  systemNode.hasProperty(EXO_EDITORS_ID_PROP) ? systemNode.getProperty(EXO_EDITORS_ID_PROP).getString() : null;
+    String provider = systemNode.hasProperty(EXO_CURRENT_PROVIDER_PROP) ? systemNode.getProperty(EXO_CURRENT_PROVIDER_PROP)
+                                                                                    .getString()
+                                                                        : null;
+    String currentEditorsId =
+                            systemNode.hasProperty(EXO_EDITORS_ID_PROP) ? systemNode.getProperty(EXO_EDITORS_ID_PROP).getString()
+                                                                        : null;
     if (editorsId.equals(currentEditorsId)) {
       return provider;
     } else {
       String userId = systemNode.getProperty(EXO_LAST_MODIFIER_PROP).getString();
       WCMCoreUtils.invokeUserSession(userId, (sessionProvider) -> {
         Session session = sessionProvider.getSession(workspace, repoService.getCurrentRepository());
-        Node node = session.getNodeByUUID(uuid);
-        if (node.isLocked()) {
-          String lockOwner = node.getLock().getLockOwner();
-          String lockToken;
-          try {
-            lockToken = LockUtil.getLockTokenOfUser(node, lockOwner);
-            session.addLockToken(lockToken);
-          } catch (Exception e) {
-            LOG.error("Cannot get lock token from node", e);
+        Node tagetNode = session.getNodeByUUID(uuid);
+        invokeOnLockedNode(tagetNode, (node) -> {
+          if (node.canAddMixin(EXO_DOCUMENT)) {
+            node.addMixin(EXO_DOCUMENT);
           }
-        }
-        if (node.canAddMixin(EXO_DOCUMENT)) {
-          node.addMixin(EXO_DOCUMENT);
-        }
-        node.setProperty(EXO_CURRENT_PROVIDER_PROP, "");
-        node.setProperty(EXO_EDITORS_ID_PROP, editorsId);
+          node.setProperty(EXO_CURRENT_PROVIDER_PROP, (String) null);
+          node.setProperty(EXO_EDITORS_ID_PROP, editorsId);
+          node.save();
+        });
       });
       return null;
     }
@@ -1081,6 +1071,35 @@ public class DocumentServiceImpl implements DocumentService {
     }
 
     return "";
+  }
+  
+  /**
+   * Invokes handler on node than can be locked.
+   * Retrieves lock token from LockUtil and adds it to the session.
+   * Removes lock token from the session after executing the handler
+   * 
+   * @param node the node
+   * @param handler the handler
+   * @throws RepositoryException the repository exception
+   */
+  protected void invokeOnLockedNode(Node node, RepositoryConsumer<Node> handler) throws RepositoryException {
+    String lockToken = null;
+    if (node.isLocked()) {
+      String lockOwner = node.getLock().getLockOwner();
+      try {
+        lockToken = LockUtil.getLockTokenOfUser(node, lockOwner);
+      } catch (Exception e) {
+        LOG.error("Cannot get lock token for node {}, {} ", node.getUUID(), e.getMessage());
+      }
+      if (lockToken == null) {
+        throw new IllegalStateException("Cannot get lock token for node: " + node.getUUID());
+      }
+      node.getSession().addLockToken(lockToken);
+    }
+    handler.accept(node);
+    if (lockToken != null) {
+      node.getSession().removeLockToken(lockToken);
+    }
   }
   
 }
