@@ -656,7 +656,7 @@ public class CometdDocumentsService implements Startable {
         @Override
         void execute(ExoContainer exoContainer) {
           try {
-            documentService.setCurrentDocumentProvider(fileId, workspace, provider);
+            documentService.saveCurrentDocumentProvider(fileId, workspace, provider);
           } catch (RepositoryException e) {
             LOG.error("Cannot set current document provider for fileId: " + fileId + ", workspace: " + workspace, e);
           }

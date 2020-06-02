@@ -127,7 +127,7 @@ public class DocumentServiceImpl implements DocumentService {
   private static final String EXO_USER_PREFFERENCES = "exo:userPrefferences";
   private static final String EXO_PREFFERED_EDITOR = "exo:prefferedEditor";
   private static final String EXO_CURRENT_PROVIDER_PROP = "exo:currentProvider";
-  private static final String EXO_EDITORS_ID_PROP = "exo:editorsId";
+  private static final String EXO_EDITORS_RUNTIME_ID_PROP = "exo:editorsId";
   public static final String CURRENT_STATE_PROP = "publication:currentState";
   public static final String DOCUMENTS_APP_NAVIGATION_NODE_NAME = "documents";
   public static final String DOCUMENT_NOT_FOUND = "?path=doc-not-found";
@@ -150,7 +150,7 @@ public class DocumentServiceImpl implements DocumentService {
   private OrganizationService organizationService;
   private SettingService settingService;
   private IdentityManager identityManager;
-  private String editorsId;
+  private String editorsRuntimeId;
 
   public DocumentServiceImpl(ManageDriveService manageDriveService, Portal portal, SessionProviderService sessionProviderService, RepositoryService repoService, NodeHierarchyCreator nodeHierarchyCreator, LinkManager linkManager, PortalContainerInfo portalContainerInfo, OrganizationService organizationService, SettingService settingService, IdentityManager identityManager, IDGeneratorService idGenerator) {
     this.manageDriveService = manageDriveService;
@@ -163,7 +163,7 @@ public class DocumentServiceImpl implements DocumentService {
     this.organizationService = organizationService;
     this.settingService = settingService;
     this.identityManager = identityManager;
-    this.editorsId = idGenerator.generateStringID(this);
+    this.editorsRuntimeId = idGenerator.generateStringID(this);
     EditorProvidersHelper.init(this);
   }
 
@@ -601,7 +601,7 @@ public class DocumentServiceImpl implements DocumentService {
   @Override
   public void savePreferredEditor(String userId, String provider, String uuid, String workspace) throws RepositoryException {
     Node targetNode = nodeByUUID(uuid, workspace);
-    invokeOnLockedNode(targetNode, (node) -> {
+    invokeWithLockToken(targetNode, (node) -> {
       if (node.canAddMixin(EXO_DOCUMENT)) {
         node.addMixin(EXO_DOCUMENT);
       }
@@ -643,14 +643,14 @@ public class DocumentServiceImpl implements DocumentService {
    * {@inheritDoc}
    */
   @Override
-  public void setCurrentDocumentProvider(String uuid, String workspace, String provider) throws RepositoryException {
+  public void saveCurrentDocumentProvider(String uuid, String workspace, String provider) throws RepositoryException {
     Session systemSession = repoService.getCurrentRepository().getSystemSession(workspace);
     Node systemNode = systemSession.getNodeByUUID(uuid);
     String userId = systemNode.getProperty(EXO_LAST_MODIFIER_PROP).getString();
     WCMCoreUtils.invokeUserSession(userId, (sessionProvider) -> {
       Session session = sessionProvider.getSession(workspace, repoService.getCurrentRepository());
       Node targetNode = session.getNodeByUUID(uuid);
-      invokeOnLockedNode(targetNode, (node) -> {
+      invokeWithLockToken(targetNode, (node) -> {
         if (node.canAddMixin(EXO_DOCUMENT)) {
           node.addMixin(EXO_DOCUMENT);
         }
@@ -659,7 +659,7 @@ public class DocumentServiceImpl implements DocumentService {
           previousProvider = node.getProperty(EXO_CURRENT_PROVIDER_PROP).getString();
         }
         node.setProperty(EXO_CURRENT_PROVIDER_PROP, provider);
-        node.setProperty(EXO_EDITORS_ID_PROP, editorsId);
+        node.setProperty(EXO_EDITORS_RUNTIME_ID_PROP, editorsRuntimeId);
         node.save();
         if (previousProvider != null && provider == null) {
           try {
@@ -695,21 +695,21 @@ public class DocumentServiceImpl implements DocumentService {
                                                                                     .getString()
                                                                         : null;
     String currentEditorsId =
-                            systemNode.hasProperty(EXO_EDITORS_ID_PROP) ? systemNode.getProperty(EXO_EDITORS_ID_PROP).getString()
+                            systemNode.hasProperty(EXO_EDITORS_RUNTIME_ID_PROP) ? systemNode.getProperty(EXO_EDITORS_RUNTIME_ID_PROP).getString()
                                                                         : null;
-    if (editorsId.equals(currentEditorsId)) {
+    if (editorsRuntimeId.equals(currentEditorsId)) {
       return provider;
     } else {
       String userId = systemNode.getProperty(EXO_LAST_MODIFIER_PROP).getString();
       WCMCoreUtils.invokeUserSession(userId, (sessionProvider) -> {
         Session session = sessionProvider.getSession(workspace, repoService.getCurrentRepository());
         Node tagetNode = session.getNodeByUUID(uuid);
-        invokeOnLockedNode(tagetNode, (node) -> {
+        invokeWithLockToken(tagetNode, (node) -> {
           if (node.canAddMixin(EXO_DOCUMENT)) {
             node.addMixin(EXO_DOCUMENT);
           }
           node.setProperty(EXO_CURRENT_PROVIDER_PROP, (String) null);
-          node.setProperty(EXO_EDITORS_ID_PROP, editorsId);
+          node.setProperty(EXO_EDITORS_RUNTIME_ID_PROP, editorsRuntimeId);
           node.save();
         });
       });
@@ -1082,7 +1082,7 @@ public class DocumentServiceImpl implements DocumentService {
    * @param handler the handler
    * @throws RepositoryException the repository exception
    */
-  protected void invokeOnLockedNode(Node node, RepositoryConsumer<Node> handler) throws RepositoryException {
+  protected void invokeWithLockToken(Node node, RepositoryConsumer<Node> handler) throws RepositoryException {
     String lockToken = null;
     if (node.isLocked()) {
       String lockOwner = node.getLock().getLockOwner();

@@ -90,7 +90,11 @@ public class EditorProvidersHelper {
    * @return single instance of EditorProviderHelper
    */
   public static EditorProvidersHelper getInstance() {
-    return helper;
+    if (helper != null) {
+      return helper;
+    } else {
+      throw new IllegalStateException("EditorProvidersHelper hasn't been initialized yet.");
+    }
   }
 
   /**
