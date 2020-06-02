@@ -108,10 +108,19 @@ public interface DocumentEditor {
   
   /**
    * Gets document update activity handler for managing comments.
-   * 
+   *
    * @return the handler
    */
   DocumentUpdateActivityHandler getDocumentUpdateHandler();
+  
+  /**
+   * On last editor closed handler.
+   * Gets invoked when the last editor has been closed for the file. 
+   *
+   * @param fileId the file id
+   * @param workspace the workspace
+   */
+  void onLastEditorClosed(String fileId, String workspace);
 
   /**
    * Gets the permissions.

@@ -1,13 +1,5 @@
-
-@headingColor: #4d5466;
-@baseColorDark: #333333;
-@primaryColor: #2f5e92;
-@globalLoadingBorder: #333;
-@colorIconPrimary: @primaryColor;
-@header-popup-bg: #484848;
-@textLightColor: #999999;
-@btnDisableColor: #c6c6c6;
-@groupHeadingColor: #c3cad6;
+@import "variables.less";
+@import "mixins.less";
 
 .attachment {
   display: flex;
@@ -747,12 +739,36 @@
           .loader {
             margin: auto;
           }
+          .boxOfFolder{
+            background-color: @greyColorDefault;
+            border-radius: 5px;
+            display: flex;
+            flex-direction: column;
+          }
 
           .folderSelection {
             width: 20%;
             margin: 7px;
             padding: 10px 2px 5px;
             cursor: pointer;
+
+            .boxNewFolder {
+              border-radius: 5px;
+              background-color: @greyColorDefault;
+              padding: 0px 9px 0px;
+            }
+            .boxOfTitle{
+              padding: 0px 3px 0px;
+            }
+            .closeIcon {
+              margin-top: -9px;
+              padding: 3px;
+              margin-left: 80%;
+              > p {
+                margin-bottom: 0px;
+                margin-top:-5px;
+              }
+            }
 
             a {
               display: flex;

@@ -30,7 +30,6 @@
   import org.exoplatform.wcm.ext.component.activity.UILinkUtil;
   import org.apache.commons.lang.StringEscapeUtils;
   import java.net.*;
-
   import static org.exoplatform.social.webui.activity.BaseUIActivity.TEMPLATE_PARAM_COMMENT;
 
   def pcontext = org.exoplatform.portal.webui.util.Util.getPortalRequestContext();
@@ -273,7 +272,6 @@
 						<a class="space-avatar spaceName" href="$spaceSourceURI" space-data="$spaceID"><span class="uiIconArrowRightMini uiIconLightGray"></span>
 							<img  class="avatarMini" alt="$spaceName" src="$spaceImageSource"/>&nbsp;$spaceName
 						</a>
-						</div>
 						<%} else{%>
 							<div class="owner">
                             	<a  href="$ownerUri">$ownerName</a>
@@ -307,18 +305,21 @@
 					  //
 					  linkTitle = UILinkUtil.simpleEscapeHtml(Util.getDecodeQueryURL(linkTitle));
 					  linkSource = UILinkUtil.simpleEscapeHtml(Util.getDecodeQueryURL(linkSource));
-					  //
 					  def linkMedia = new URL(linkSource);
-                       def hostUrl = linkMedia.getHost();
+                      def hostUrl = linkMedia.getHost();
+					  //
 					  def linkComment = uicomponent.getLinkComment();
-					  def linkClass = "content";
 					  def link = "";
 					  if (linkImage == null || linkImage.equals("")) {
-						link = "<img src=\"/eXoSkin/skin/images/system/composer/PostLinks.png\" class=\"imagePreview\" alt=\"$linkTitle\" />";
+                        link = "<img src=\"/eXoSkin/skin/images/system/composer/PostLinks.png\" class=\"imagePreview\" alt=\"$linkTitle\" />";
 					  } else {
 						link = "<img src=\"$linkImage\" class=\"imagePreview\" alt=\"$linkTitle\" />";
 					  }
 					  def embedHtml = uicomponent.getEmbedHtml();
+					  def linkClass = "";
+					  if ( embedHtml != null ){
+					    linkClass = "embedBox";
+					  }
 					%>
 				<% if (linkComment != null && linkComment.length() > 0) { %>
 				<div class="description">$linkComment</div>
@@ -335,11 +336,7 @@
                     </div>
                 </div>
 				<div class="uiBox roundedBottom introBox linkShare">
-				  <% if (embedHtml != null) { %>
-					<div class="clearfix embedBox">
-					<% } else { %>
-					<div class="clearfix">
-					<% } %>
+			     	<div class="clearfix linkClass">
 					<% if (embedHtml == null && link.length() != 0) { %>
                       <div class="linkPreview">
                       	 <div> <a href="javascript:void(0);" rel="tooltip" data-placement="right" title="$linkTitle" target="_blank">$link</a></div>
@@ -350,7 +347,7 @@
                              <div class="link" ><a href="$linkSource" target="_blank"><i class="far fa-link"></i> $linkSource</a></div>
                            </div>
                          </div>
-                      <div>
+                      </div>
                       <% } %>
                       <% if (embedHtml != null) { %>
 							<div class="EmbedHtml">$embedHtml</div>
@@ -361,7 +358,7 @@
 							  <div class="boxSite link"><p><i class="far fa-link"></i>$hostUrl</p></div>
 							</div>
 					<% } %>
-					</div>
+				</div>
 				</div><!--end introBox,linkShare-->
 
 				<div class="actionBar clearfix linkActivityIcon">
@@ -609,10 +606,8 @@
 			</div><!--end #ActivityContextBox${activity.id}-->
 		</div> <!--end ContextBox${activity.id}-->
   </div> <!-- #boxContainer-->
-  </div>
   <% uiform.end() %>
 </div>
 <% } else { %> <!-- activity deleted -->
 <div class="activityStream deleted">$labelActivityHasBeenDeleted</div>
 <% }%>
-</div>

@@ -47,10 +47,13 @@ import org.gatein.api.navigation.Navigation;
 import org.gatein.api.navigation.Nodes;
 import org.gatein.api.site.SiteId;
 
+import com.sun.star.ui.dialogs.ExecutableDialogException;
+
 import org.exoplatform.commons.api.settings.SettingService;
 import org.exoplatform.commons.utils.CommonsUtils;
 import org.exoplatform.container.component.ComponentPlugin;
 import org.exoplatform.container.xml.PortalContainerInfo;
+import org.exoplatform.ecm.utils.lock.LockUtil;
 import org.exoplatform.portal.config.UserPortalConfig;
 import org.exoplatform.portal.config.UserPortalConfigService;
 import org.exoplatform.portal.mop.SiteKey;
@@ -646,12 +649,35 @@ public class DocumentServiceImpl implements DocumentService {
     WCMCoreUtils.invokeUserSession(userId, (sessionProvider) -> {
       Session session = sessionProvider.getSession(workspace, repoService.getCurrentRepository());
       Node node = session.getNodeByUUID(uuid);
+      if (node.isLocked()) {
+        String lockToken;
+        try {
+          lockToken = LockUtil.getLockToken(node);
+          session.addLockToken(lockToken);
+        } catch (Exception e) {
+          LOG.error("Cannot get lock token from node", e);
+        }
+      }
       if (node.canAddMixin(EXO_DOCUMENT)) {
         node.addMixin(EXO_DOCUMENT);
+      }
+      String previousProvider = null;
+      if (node.hasProperty(EXO_CURRENT_PROVIDER_PROP)) {
+        previousProvider = node.getProperty(EXO_CURRENT_PROVIDER_PROP).getString();
       }
       node.setProperty(EXO_CURRENT_PROVIDER_PROP, provider);
       node.setProperty(EXO_EDITORS_ID_PROP, editorsId);
       node.save();
+      if (previousProvider != null && provider == null) {
+        try {
+          DocumentEditorProvider editorProvider =  getEditorProvider(previousProvider);
+          editorProvider.onLastEditorClosed(node.getUUID(), workspace);
+        } catch(DocumentEditorProviderNotFoundException e) {
+          LOG.error("Cannot find {} editor provider. {}", previousProvider, e.getMessage());
+        } catch(Exception e) {
+          LOG.error("Cannot execute last editor closed handler", e.getMessage());
+        }
+      }
     });
   }
   
@@ -671,6 +697,15 @@ public class DocumentServiceImpl implements DocumentService {
       WCMCoreUtils.invokeUserSession(userId, (sessionProvider) -> {
         Session session = sessionProvider.getSession(workspace, repoService.getCurrentRepository());
         Node node = session.getNodeByUUID(uuid);
+        if (node.isLocked()) {
+          String lockToken;
+          try {
+            lockToken = LockUtil.getLockToken(node);
+            session.addLockToken(lockToken);
+          } catch (Exception e) {
+            LOG.error("Cannot get lock token from node", e);
+          }
+        }
         if (node.canAddMixin(EXO_DOCUMENT)) {
           node.addMixin(EXO_DOCUMENT);
         }
