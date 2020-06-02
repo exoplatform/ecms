@@ -554,7 +554,7 @@ public class ManageDocumentService implements ResourceContainer {
     folder.setAttribute("titlePath", createTitlePath(driveName, workspaceName, currentFolder));
     
     // is folder public (available to any user)
-    boolean isPublic = PermissionUtil.isAnyRole(node);
+    boolean isPublic = PermissionUtil.canAnyAccess(node);
     folder.setAttribute("isPublic", String.valueOf(isPublic));
 
     CloudDrive cloudDrive = cloudDrives.findDrive(node);
@@ -616,7 +616,7 @@ public class ManageDocumentService implements ResourceContainer {
                                                                                          SimpleDateFormat.SHORT);
     
     // is document public (available to any user)
-    boolean isPublic = PermissionUtil.isAnyRole(sourceNode);
+    boolean isPublic = PermissionUtil.canAnyAccess(sourceNode);
     file.setAttribute("isPublic", String.valueOf(isPublic));
     
     CloudDrive cloudDrive = cloudDrives.findDrive(displayNode);

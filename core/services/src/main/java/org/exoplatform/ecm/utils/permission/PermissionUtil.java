@@ -74,7 +74,7 @@ public class PermissionUtil {
    * @return true, if any identity can access the node
    * @throws RepositoryException the repository exception
    */
-  public static boolean isAnyRole(Node node)throws RepositoryException {
+  public static boolean canAnyAccess(Node node)throws RepositoryException {
     // TODO this check is not correct: permissionType cannot be compared with identity {@link IdentityConstants#ANY}.
     // If use it, it leads to: javax.jcr.RepositoryException: Unknown permission entry any and 503 error in REST.
     //return checkPermission(node,IdentityConstants.ANY);
