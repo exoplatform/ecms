@@ -7,6 +7,7 @@ export function getSpaceById(id) {
       return resp.json();
     }
   }).catch(e => {
+    log(`Error getting space: ${e.errorMessage ? e.errorMessage : e.errorCode}`);
     throw new Error(`Error getting space with id ${e}`);
   });
 }
@@ -19,6 +20,7 @@ export function fetchFoldersAndFiles(currentDrive, workspace, parentPath) {
         return response.text(); 
       } else { 
         return response.json().then(error => {
+          log(`Error get data: ${error.errorMessage ? error.errorMessage : error.errorCode}`);
           throw new Error(error.errorMessage ? error.errorMessage : error.errorCode);
         });
       }})
@@ -28,6 +30,7 @@ export function fetchFoldersAndFiles(currentDrive, workspace, parentPath) {
         return xml;
       }
     }).catch(e => {
+      log(`Error get data: ${e.errorMessage ? e.errorMessage : e.errorCode}`);
       throw new Error(`Error getting folders and files of the current path ${e}`);
     });
 }
@@ -40,6 +43,7 @@ export function getDrivers() {
         return response.text(); 
       } else { 
         return response.json().then(error => {
+          log(`Error get data: ${error.errorMessage ? error.errorMessage : error.errorCode}`);
           throw new Error(error.errorMessage ? error.errorMessage : error.errorCode);
         });
       }
@@ -50,6 +54,7 @@ export function getDrivers() {
         return xml;
       }
     }).catch(e => {
+      log(`Error get drives data: ${e.errorMessage ? e.errorMessage : e.errorCode}`);
       throw new Error(`Error getting drivers ${e}`);
     });
 }
@@ -61,6 +66,7 @@ export function createFolder(currentDrive, workspace, parentPath, newFolderName)
         return response.text(); 
       } else { 
         return response.json().then(error => {
+          log(`Error post data: ${error.errorMessage ? error.errorMessage : error.errorCode}`);
           throw new Error(error.errorMessage ? error.errorMessage : error.errorCode);
         });
       }
@@ -71,6 +77,7 @@ export function createFolder(currentDrive, workspace, parentPath, newFolderName)
         return xml;
       }
     }).catch(e => {
+      log(`Error creating folder: ${e.errorMessage ? e.errorMessage : e.errorCode}`);
       throw new Error(`Error creating a new folder ${e}`);
     });
 }
@@ -82,6 +89,7 @@ export function deleteFolderOrFile(currentDrive, workspace, itemPath) {
         return response.text(); 
       } else { 
         return response.json().then(error => {
+          log(`Error delete data: ${error.errorMessage ? error.errorMessage : error.errorCode}`);
           throw new Error(error.errorMessage ? error.errorMessage : error.errorCode);
         });
       }
@@ -92,6 +100,7 @@ export function deleteFolderOrFile(currentDrive, workspace, itemPath) {
         return xml;
       }
     }).catch(e => {
+      log(`Error deleting the folder: ${e.errorMessage ? e.errorMessage : e.errorCode}`);
       throw new Error(`Error deleting the folder or the file ${e}`);
     });
 }
@@ -105,7 +114,42 @@ export function renameFolder(pathFolder,newTitle) {
       return resp.ok;
     }
   }).catch(e => {
+    log(`Error rename folder: ${e.errorMessage ? e.errorMessage : e.errorCode}`);
     throw new Error(`Error rename this folder ${e}`);
   });
 
+}
+
+export function log(msg, err) {
+  const logPrefix = '[attachmentsSelector] ';
+  if (typeof console !== 'undefined' && typeof console.log !== 'undefined') {
+    const isoTime = `--${new Date().toISOString()}`;
+    let msgLine = msg;
+    if (err) {
+      msgLine += '. Error: ';
+      if (err.name || err.message) {
+        if (err.name) {
+          msgLine += `[${err.name}]`;
+        }
+        if (err.message) {
+          msgLine += err.message;
+        }
+      } else {
+        msgLine +=
+          typeof err === 'string'
+            ? err
+            : JSON.stringify(err) + (err.toString && typeof err.toString === 'function' ? `; ${err.toString()}` : '');
+      }
+
+      console.log(logPrefix + msgLine + isoTime);
+      if (typeof err.stack !== 'undefined') {
+        console.log(err.stack);
+      }
+    } else {
+      if (err !== null && typeof err !== 'undefined') {
+        msgLine += `. Error: ${err}`;
+      }
+      console.log(logPrefix + msgLine + isoTime);
+    }
+  }
 }

@@ -1,7 +1,7 @@
 <template>
   <div class="serverFiles">
     <div v-show="connectedMessage" class="alert alert-info attachmentsAlert">
-      <span>{{ $t('attachments.alert.connected') }} {{ connectedMessage }}!</span>{{ $t('attachments.alert.pleaseNote') }}
+      <b>{{ $t('attachments.alert.connected') }} {{ connectedMessage }}!</b>{{ $t('attachments.alert.pleaseNote') }}
     </div>
     <div class="contentHeader">
       <div v-if="!showSearchInput" class="currentDirectory">
@@ -81,7 +81,7 @@
           </a>
           <div :class="folder.type === 'new_folder' ? 'boxOfTitle' :''">
             <a :title="folder.title" href="javascript:void(0);" rel="tooltip" data-placement="bottom">
-              <i :class="folder.folderTypeCSSClass" class="uiIcon24x24FolderDefault uiIconEcmsLightGray selectionIcon center"></i>
+              <i :class="getFolderIcon(folder)" class="uiIcon24x24FolderDefault uiIconEcmsLightGray selectionIcon center"></i>
               <input v-if="folder.type === 'new_folder'" :ref="folder.ref" v-model="newFolderName" type="text" class="newFolderInput  ignore-vuetify-classes" @blur="createNewFolder($event)" @keyup.enter="$event.target.blur()" @keyup.esc="cancelCreatingNewFolder($event)">
               <input v-else-if="renameFolderAction && folder.id === selectedFolder.id" ref="rename" :id="folder.id" v-model="newName" type="text" class="newFolderInput  ignore-vuetify-classes" @blur="saveNewNameFolder()" @keyup.enter="$event.target.blur()" @keyup.esc="cancelRenameNewFolder($event)">
               <div v-else class="selectionLabel center">{{ folder.title }}</div>
@@ -495,9 +495,9 @@ export default {
         } else if (fetchedDocuments[i].tagName === 'Files') {
           const fetchedFiles = fetchedDocuments[i].childNodes;
           for (let j = 0; j < fetchedFiles.length; j++) {
-            const fileExtension = fetchedFiles[j].getAttribute('isCloudFile') 
-              ? fetchedFiles[j].getAttribute('nodeType') 
-              : `${fetchedFiles[j].getAttribute('name').split('.')[1].charAt(0).toUpperCase()}${fetchedFiles[j].getAttribute('name').split('.')[1].substring(1)}`;
+            const fileExtension = fetchedFiles[j].getAttribute('name').includes('.')
+              ? `${fetchedFiles[j].getAttribute('name').split('.')[1].charAt(0).toUpperCase()}${fetchedFiles[j].getAttribute('name').split('.')[1].substring(1)}`
+              : fetchedFiles[j].getAttribute('nodeType');
             const fileTypeCSSClass = `uiBgd64x64File${fileExtension}`;
             const idAttribute = fetchedFiles[j].getAttribute('path').split('/').pop();
             const id = fetchedFiles[j].getAttribute('id');
@@ -513,7 +513,7 @@ export default {
               selected: selected,
               mimetype: fetchedFiles[j].getAttribute('nodeType'),
               isCloudFile: fetchedFiles[j].getAttribute('isCloudFile') === 'true' ? true : false,
-              isPublic: fetchedFiles[j].getAttribute('isPublic') ? fetchedFiles[j].getAttribute('isPublic') : false
+              isPublic: fetchedFiles[j].getAttribute('isPublic') === 'true' ? true : false
             });
           }
         }
@@ -746,6 +746,9 @@ export default {
     },
     changeCloudDriveProgress({ drives }) { // listen clouddrives 'updateDrivesInProgress' event
       this.drivesInProgress = { ...drives }; // update progress for connecting drive to display that drive is in connection
+    },
+    getFolderIcon(folder) {
+      return folder.folderTypeCSSClass;
     }
   }
 };
