@@ -560,17 +560,22 @@ public class ManageDocumentService implements ResourceContainer {
     CloudDrive cloudDrive = cloudDrives.findDrive(node);
     CloudFile cloudFile = null;
     if (cloudDrive != null && cloudDrive.isConnected()) {
-      // It's connected Cloud Drive file
+      // It's connected Cloud Drive or its sub-folder
       try {
-        cloudFile = cloudDrive.getFile(node.getPath());
-        if (cloudFile.isConnected()) {
-          if (cloudFile.isFolder()) {
-            folder.setAttribute("isCloudFile", Boolean.TRUE.toString());
-            folder.setAttribute("isConnected", Boolean.TRUE.toString());
-          } // otherwise we don't want show them
+        if (cloudDrive.isDrive(node)) {
+          folder.setAttribute("isCloudDrive", Boolean.TRUE.toString());
+          folder.setAttribute("isConnected", Boolean.TRUE.toString());
         } else {
-          folder.setAttribute("isCloudFile", Boolean.TRUE.toString());
-          folder.setAttribute("isConnected", Boolean.FALSE.toString());
+          cloudFile = cloudDrive.getFile(node.getPath());
+          if (cloudFile.isConnected()) {
+            if (cloudFile.isFolder()) {
+              folder.setAttribute("isCloudFile", Boolean.TRUE.toString());
+              folder.setAttribute("isConnected", Boolean.TRUE.toString());
+            } // otherwise we don't want show them
+          } else {
+            folder.setAttribute("isCloudFile", Boolean.TRUE.toString());
+            folder.setAttribute("isConnected", Boolean.FALSE.toString());
+          }
         }
       } catch (NotYetCloudFileException e) {
         folder.setAttribute("isCloudFile", Boolean.TRUE.toString());
@@ -619,12 +624,12 @@ public class ManageDocumentService implements ResourceContainer {
     boolean isPublic = PermissionUtil.canAnyAccess(sourceNode);
     file.setAttribute("isPublic", String.valueOf(isPublic));
     
-    CloudDrive cloudDrive = cloudDrives.findDrive(displayNode);
+    CloudDrive cloudDrive = cloudDrives.findDrive(sourceNode);
     CloudFile cloudFile = null;
-    if (cloudDrive != null && cloudDrive.isConnected()) {
+    if (cloudDrive != null && cloudDrive.isConnected() && !cloudDrive.isDrive(sourceNode)) {
       // It's connected Cloud Drive file
       try {
-        cloudFile = cloudDrive.getFile(displayNode.getPath());
+        cloudFile = cloudDrive.getFile(sourceNode.getPath());
         if (cloudFile.isConnected()) {
           if (!cloudFile.isFolder()) {
             file.setAttribute("isCloudFile", Boolean.TRUE.toString());
@@ -643,7 +648,7 @@ public class ManageDocumentService implements ResourceContainer {
         file.setAttribute("isCloudFile", Boolean.TRUE.toString());
         file.setAttribute("isConnected", Boolean.FALSE.toString());
       } catch (CloudDriveException e) {
-        LOG.warn("Error reading cloud file {}: {}", displayNode.getPath(), e.getMessage());
+        LOG.warn("Error reading cloud file {}: {}", sourceNode.getPath(), e.getMessage());
       }
     } 
     if (cloudFile == null) {
