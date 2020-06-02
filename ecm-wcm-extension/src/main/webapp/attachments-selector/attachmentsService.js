@@ -14,7 +14,14 @@ export function getSpaceById(id) {
 export function fetchFoldersAndFiles(currentDrive, workspace, parentPath) {
   return fetch(`/portal/rest/managedocument/getFoldersAndFiles/?driveName=${currentDrive}&workspaceName=${workspace}&currentFolder=${parentPath}`,
     {})
-    .then(response => response.text())
+    .then(response => { 
+      if (response.ok) { 
+        return response.text(); 
+      } else { 
+        return response.json().then(error => {
+          throw new Error(error.errorMessage ? error.errorMessage : error.errorCode);
+        });
+      }})
     .then(xmlStr => (new window.DOMParser()).parseFromString(xmlStr, 'text/xml'))
     .then(xml => {
       if (xml) {
@@ -28,7 +35,15 @@ export function fetchFoldersAndFiles(currentDrive, workspace, parentPath) {
 export function getDrivers() {
   return fetch('/portal/rest/wcmDriver/getDrivers',
     {})
-    .then(response => response.text())
+    .then(response => {
+      if (response.ok) { 
+        return response.text(); 
+      } else { 
+        return response.json().then(error => {
+          throw new Error(error.errorMessage ? error.errorMessage : error.errorCode);
+        });
+      }
+    })
     .then(xmlStr => (new window.DOMParser()).parseFromString(xmlStr, 'text/xml'))
     .then(xml => {
       if (xml) {
@@ -41,7 +56,15 @@ export function getDrivers() {
 
 export function createFolder(currentDrive, workspace, parentPath, newFolderName) {
   return fetch(`/portal/rest/managedocument/createFolder?driveName=${currentDrive}&workspaceName=${workspace}&currentFolder=${parentPath}&folderName=${newFolderName}`, {})
-    .then(response => response.text())
+    .then(response => {
+      if (response.ok) { 
+        return response.text(); 
+      } else { 
+        return response.json().then(error => {
+          throw new Error(error.errorMessage ? error.errorMessage : error.errorCode);
+        });
+      }
+    })
     .then(xmlStr => (new window.DOMParser()).parseFromString(xmlStr, 'text/xml'))
     .then(xml => {
       if (xml) {
@@ -54,7 +77,15 @@ export function createFolder(currentDrive, workspace, parentPath, newFolderName)
 
 export function deleteFolderOrFile(currentDrive, workspace, itemPath) {
   return fetch(`/portal/rest/managedocument/deleteFolderOrFile/?driveName=${currentDrive}&workspaceName=${workspace}&itemPath=${itemPath}`, {})
-    .then(response => response.text())
+    .then(response => {
+      if (response.ok) { 
+        return response.text(); 
+      } else { 
+        return response.json().then(error => {
+          throw new Error(error.errorMessage ? error.errorMessage : error.errorCode);
+        });
+      }
+    })
     .then(xmlStr => (new window.DOMParser()).parseFromString(xmlStr, 'text/xml'))
     .then(xml => {
       if (xml) {
