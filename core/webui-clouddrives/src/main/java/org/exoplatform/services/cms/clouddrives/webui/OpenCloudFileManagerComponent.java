@@ -21,7 +21,7 @@ package org.exoplatform.services.cms.clouddrives.webui;
 import java.util.Arrays;
 import java.util.List;
 
-import org.exoplatform.services.cms.clouddrives.webui.filters.CloudFileFilter;
+import org.exoplatform.ecm.webui.filters.CloudFileFilter;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.web.application.Parameter;
@@ -29,6 +29,8 @@ import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.lifecycle.UIContainerLifecycle;
 import org.exoplatform.webui.ext.filter.UIExtensionFilter;
 import org.exoplatform.webui.ext.filter.UIExtensionFilters;
+import org.exoplatform.webui.ext.manager.UIAbstractManager;
+import org.exoplatform.webui.ext.manager.UIAbstractManagerComponent;
 
 /**
  * Created by The eXo Platform SAS.
@@ -38,7 +40,7 @@ import org.exoplatform.webui.ext.filter.UIExtensionFilters;
  *          pnedonosko $
  */
 @ComponentConfig(lifecycle = UIContainerLifecycle.class)
-public class OpenCloudFileManagerComponent extends BaseCloudDriveManagerComponent {
+public class OpenCloudFileManagerComponent extends UIAbstractManagerComponent {
 
   /** The Constant LOG. */
   protected static final Log                     LOG        = ExoLogger.getLogger(OpenCloudFileManagerComponent.class);
@@ -65,10 +67,14 @@ public class OpenCloudFileManagerComponent extends BaseCloudDriveManagerComponen
   @Override
   public String renderEventURL(boolean ajax, String name, String beanId, Parameter[] params) throws Exception {
     if (EVENT_NAME.equals(name)) {
-      initContext();
+      //initContext();
       return "javascript:void(0);//objectId";
     }
     return super.renderEventURL(ajax, name, beanId, params);
   }
 
+  @Override
+  public Class<? extends UIAbstractManager> getUIAbstractManagerClass() {
+    return null;
+  }
 }

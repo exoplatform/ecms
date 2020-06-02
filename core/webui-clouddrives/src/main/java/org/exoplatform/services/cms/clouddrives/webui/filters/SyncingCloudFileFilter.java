@@ -23,6 +23,7 @@ import java.util.List;
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 
+import org.exoplatform.ecm.webui.filters.AbstractCloudDriveNodeFilter;
 import org.exoplatform.services.cms.clouddrives.CloudDrive;
 import org.exoplatform.services.cms.clouddrives.CloudDriveService;
 import org.exoplatform.services.cms.clouddrives.CloudFile;

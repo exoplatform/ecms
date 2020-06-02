@@ -19,6 +19,8 @@
  */
 package org.exoplatform.services.cms.clouddrives.webui.filters;
 
+import org.exoplatform.ecm.webui.filters.CloudFileFilter;
+
 import java.util.List;
 
 /**

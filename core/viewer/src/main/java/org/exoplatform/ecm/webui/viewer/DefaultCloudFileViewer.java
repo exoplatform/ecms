@@ -16,18 +16,19 @@
  * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
-package org.exoplatform.services.cms.clouddrives.webui.viewer;
+package org.exoplatform.ecm.webui.viewer;
 
 import java.util.Arrays;
 import java.util.List;
 
-import org.exoplatform.services.cms.clouddrives.webui.filters.CloudFileFilter;
+import org.exoplatform.ecm.webui.filters.CloudFileFilter;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.web.application.Parameter;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.ext.filter.UIExtensionFilter;
 import org.exoplatform.webui.ext.filter.UIExtensionFilters;
+import org.exoplatform.webui.ext.manager.UIAbstractManager;
 
 /**
  * Default WebUI component for Cloud Drive files. It shows content of remote
@@ -37,11 +38,11 @@ import org.exoplatform.webui.ext.filter.UIExtensionFilters;
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
  * @version $Id: DefaultFileViewer.java 00000 Nov 1, 2012 pnedonosko $
  */
-@ComponentConfig(template = "classpath:groovy/templates/DefaultFileViewer.gtmpl")
-public class DefaultFileViewer extends AbstractFileViewer {
+@ComponentConfig(template = "classpath:resources/templates/DefaultCloudFileViewer.gtmpl")
+public class DefaultCloudFileViewer extends AbstractCloudFileViewer {
 
   /** The Constant LOG. */
-  protected static final Log                     LOG        = ExoLogger.getLogger(DefaultFileViewer.class);
+  protected static final Log                     LOG        = ExoLogger.getLogger(DefaultCloudFileViewer.class);
 
   /** The Constant EVENT_NAME. */
   public static final String                     EVENT_NAME = "ShowCloudFile";
@@ -52,7 +53,7 @@ public class DefaultFileViewer extends AbstractFileViewer {
   /**
    * Instantiates a new default file viewer.
    */
-  public DefaultFileViewer() {
+  public DefaultCloudFileViewer() {
     super();
   }
 
@@ -61,7 +62,7 @@ public class DefaultFileViewer extends AbstractFileViewer {
    *
    * @param viewableMaxSize the viewable max size
    */
-  protected DefaultFileViewer(long viewableMaxSize) {
+  protected DefaultCloudFileViewer(long viewableMaxSize) {
     super(viewableMaxSize);
   }
 
@@ -81,9 +82,14 @@ public class DefaultFileViewer extends AbstractFileViewer {
   @Override
   public String renderEventURL(boolean ajax, String name, String beanId, Parameter[] params) throws Exception {
     if (EVENT_NAME.equals(name)) {
-      initContext();
+      //initContext();
       return "javascript:void(0);//objectId";
     }
     return super.renderEventURL(ajax, name, beanId, params);
+  }
+
+  @Override
+  public Class<? extends UIAbstractManager> getUIAbstractManagerClass() {
+    return null;
   }
 }

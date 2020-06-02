@@ -18,12 +18,13 @@
  */
 package org.exoplatform.services.cms.clouddrives.webui.viewer;
 
+import org.exoplatform.ecm.webui.viewer.AbstractCloudFileViewer;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 
 /**
  * Image files viewer for Cloud Drive.
  */
 @ComponentConfig(template = "classpath:groovy/templates/ImageViewer.gtmpl")
-public class ImageViewer extends AbstractFileViewer {
+public class ImageViewer extends AbstractCloudFileViewer {
 
 }
