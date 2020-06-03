@@ -565,6 +565,7 @@ public class ManageDocumentService implements ResourceContainer {
         if (cloudDrive.isDrive(node)) {
           folder.setAttribute("isCloudDrive", Boolean.TRUE.toString());
           folder.setAttribute("isConnected", Boolean.TRUE.toString());
+          folder.setAttribute("cloudProvider", cloudDrive.getUser().getProvider().getId());
         } else {
           cloudFile = cloudDrive.getFile(node.getPath());
           if (cloudFile.isConnected()) {
