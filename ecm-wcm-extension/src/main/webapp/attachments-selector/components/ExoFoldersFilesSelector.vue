@@ -81,7 +81,8 @@
           </a>
           <div :class="folder.type === 'new_folder' ? 'boxOfTitle' :''">
             <a :title="folder.title" href="javascript:void(0);" rel="tooltip" data-placement="bottom">
-              <i :class="getFolderIcon(folder)" class="uiIcon24x24FolderDefault uiIconEcmsLightGray selectionIcon center"></i>
+              <i :class="folder.folderTypeCSSClass" class="uiIcon24x24FolderDefault uiIconEcmsLightGray selectionIcon center"></i>
+              <i v-show="folder.isCloudDrive" :class="getFolderIcon(folder)"></i>
               <input v-if="folder.type === 'new_folder'" :ref="folder.ref" v-model="newFolderName" type="text" class="newFolderInput  ignore-vuetify-classes" @blur="createNewFolder($event)" @keyup.enter="$event.target.blur()" @keyup.esc="cancelCreatingNewFolder($event)">
               <input v-else-if="renameFolderAction && folder.id === selectedFolder.id" ref="rename" :id="folder.id" v-model="newName" type="text" class="newFolderInput  ignore-vuetify-classes" @blur="saveNewNameFolder()" @keyup.enter="$event.target.blur()" @keyup.esc="cancelRenameNewFolder($event)">
               <div v-else class="selectionLabel center">{{ folder.title }}</div>
@@ -490,15 +491,12 @@ export default {
               folderTypeCSSClass: folderTypeCSSClass,
               isSelected: false,
               canRemove: fetchedFolders[j].getAttribute('canRemove') === 'true',
+              isCloudDrive: fetchedFolders[j].getAttribute('isCloudDrive') === 'true' ? true : false
             });
           }
         } else if (fetchedDocuments[i].tagName === 'Files') {
           const fetchedFiles = fetchedDocuments[i].childNodes;
           for (let j = 0; j < fetchedFiles.length; j++) {
-            const fileExtension = fetchedFiles[j].getAttribute('name').includes('.')
-              ? `${fetchedFiles[j].getAttribute('name').split('.')[1].charAt(0).toUpperCase()}${fetchedFiles[j].getAttribute('name').split('.')[1].substring(1)}`
-              : fetchedFiles[j].getAttribute('nodeType');
-            const fileTypeCSSClass = `uiBgd64x64File${fileExtension}`;
             const idAttribute = fetchedFiles[j].getAttribute('path').split('/').pop();
             const id = fetchedFiles[j].getAttribute('id');
             const selected = this.attachedFiles.some(f => f.id === id);
@@ -508,7 +506,6 @@ export default {
               title: fetchedFiles[j].getAttribute('title'),
               path: this.getRelativePath(fetchedFiles[j].getAttribute('path')),
               size: fetchedFiles[j].getAttribute('size'),
-              fileTypeCSSClass: fileTypeCSSClass,
               idAttribute: idAttribute,
               selected: selected,
               mimetype: fetchedFiles[j].getAttribute('nodeType'),
@@ -748,7 +745,7 @@ export default {
       this.drivesInProgress = { ...drives }; // update progress for connecting drive to display that drive is in connection
     },
     getFolderIcon(folder) {
-      return folder.folderTypeCSSClass;
+      return folder.title.includes('@gmail.com') ? 'uiIcon-gdrive' : '';
     }
   }
 };

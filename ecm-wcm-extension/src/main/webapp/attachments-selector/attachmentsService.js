@@ -122,7 +122,7 @@ export function renameFolder(pathFolder,newTitle) {
 
 export function log(msg, err) {
   const logPrefix = '[attachmentsSelector] ';
-  if (typeof console !== 'undefined' && typeof console.log !== 'undefined') {
+  if (typeof console !== 'undefined' && typeof console.log !== 'undefined') { // eslint-disable-line no-console
     const isoTime = `--${new Date().toISOString()}`;
     let msgLine = msg;
     if (err) {
@@ -141,15 +141,15 @@ export function log(msg, err) {
             : JSON.stringify(err) + (err.toString && typeof err.toString === 'function' ? `; ${err.toString()}` : '');
       }
 
-      console.log(logPrefix + msgLine + isoTime);
+      console.log(logPrefix + msgLine + isoTime); // eslint-disable-line no-console
       if (typeof err.stack !== 'undefined') {
-        console.log(err.stack);
+        console.log(err.stack); // eslint-disable-line no-console
       }
     } else {
       if (err !== null && typeof err !== 'undefined') {
         msgLine += `. Error: ${err}`;
       }
-      console.log(logPrefix + msgLine + isoTime);
+      console.log(logPrefix + msgLine + isoTime); // eslint-disable-line no-console
     }
   }
 }
