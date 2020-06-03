@@ -76,6 +76,7 @@
 					white-space: nowrap;
 					overflow: hidden;
 					text-overflow: ellipsis;
+					cursor: default;
 					span {
 						margin-left: 15px;
 						margin-right: 15px;
@@ -651,7 +652,43 @@
 			bottom: 7px;
 		  	text-align: right;
 		  	margin-right: 390px;
-		  	.openBtn, .downloadBtn, .openDocBtn, .showComments {
+			.btn-group {
+				float: right;
+				padding-left: 15px;
+				.btn {
+					background-color: black;
+					border: none;
+					padding-top: 2px;
+					&:focus {
+						outline: none!important;
+					}
+					.uiVerticalDots {
+						color: @white;
+						font-size: 20px;
+						font-style: normal;
+						font-weight: normal;
+
+						&:before {
+							font-family: 'PLF-FONT-ICONS';
+							content: "\e79c" !important;
+						}
+					}
+				}
+				@media (min-width: 1024px) {
+					.dropdown-menu {
+						left: -100px;
+					}
+				}
+				.dropdown-menu {
+					background: black;
+					margin-bottom: 8px;
+				}
+			}
+			.openBtn, .downloadBtn {
+				padding: 8px 15px 8px 15px ;
+				display: flex;
+			}
+		  	.openDocBtn, .showComments {
 			    float: right;
 			  	padding-left: 15px;
 			}
