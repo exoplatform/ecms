@@ -496,7 +496,7 @@ public class TestDriveService extends BaseWCMTestCase {
     userRoles.add("*:/platform/web-contributors");
     userRoles.add("*:/platform/administrators");
     userRoles.add("*:/platform/users");
-    Field field = ManageDriveServiceImpl.class.getDeclaredField("groupDriveTemplate_");
+    Field field = ManageDriveServiceImpl.class.getDeclaredField("groupDriveTemplate");
     field.setAccessible(true);
     field.set(driveService, null);
     driveService.clearAllDrivesCache();
@@ -635,7 +635,7 @@ public class TestDriveService extends BaseWCMTestCase {
         "admin-view", "", true, true, true, true, "nt:folder", "*");
     driveService.addDrive("Public2", COLLABORATION_WS, "*:/platform/users", "/Users/john/Public2",
         "simple-view, admin-view", "", false, false, true, false, "nt:folder,nt:unstructured", "*");
-    Field field = ManageDriveServiceImpl.class.getDeclaredField("groupDriveTemplate_");
+    Field field = ManageDriveServiceImpl.class.getDeclaredField("groupDriveTemplate");
     field.setAccessible(true);
     field.set(driveService, null);
 
@@ -876,7 +876,7 @@ public class TestDriveService extends BaseWCMTestCase {
    * @throws Exception
    */
   private void deActivateGroupDriveTemplate() throws Exception {
-    Field field = ManageDriveServiceImpl.class.getDeclaredField("groupDriveTemplate_");
+    Field field = ManageDriveServiceImpl.class.getDeclaredField("groupDriveTemplate");
     field.setAccessible(true);
     field.set(driveService, null);
   }
