@@ -302,7 +302,8 @@ export default {
           uploadId: this.getNewUploadId(),
           uploadProgress: 0,
           destinationFolder: this.pathDestinationFolder,
-          pathDestinationFolderForFile:''
+          pathDestinationFolderForFile:'',
+          isPublic: false
         });
       });
 
@@ -432,11 +433,12 @@ export default {
         this.showDestinationFolder = false;
       }
     },
-    addDestinationFolderForFile(pathDestinationFolder, folder){
+    addDestinationFolderForFile(pathDestinationFolder, folder, isPublic){
       for (let i =0 ;i< this.value.length;i++){
         if (this.value[i].name === this.destinationFileName){
           this.value[i].pathDestinationFolderForFile = folder;
-          this.value[i].destinationFolder = pathDestinationFolder ;
+          this.value[i].destinationFolder = pathDestinationFolder;
+          this.value[i].isPublic = isPublic;
         }
       }
       this.pathDestinationFolder = '';

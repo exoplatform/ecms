@@ -82,7 +82,7 @@
           <div :class="folder.type === 'new_folder' ? 'boxOfTitle' :''">
             <a :title="folder.title" href="javascript:void(0);" rel="tooltip" data-placement="bottom">
               <i :class="folder.folderTypeCSSClass" class="uiIcon24x24FolderDefault uiIconEcmsLightGray selectionIcon center"></i>
-              <i v-show="folder.isCloudDrive" :class="getFolderIcon(folder)"></i>
+              <i v-show="folder.isCloudDrive" :class="getFolderIcon(folder)" class="uiIcon-clouddrive"></i>
               <input v-if="folder.type === 'new_folder'" :ref="folder.ref" v-model="newFolderName" type="text" class="newFolderInput  ignore-vuetify-classes" @blur="createNewFolder($event)" @keyup.enter="$event.target.blur()" @keyup.esc="cancelCreatingNewFolder($event)">
               <input v-else-if="renameFolderAction && folder.id === selectedFolder.id" ref="rename" :id="folder.id" v-model="newName" type="text" class="newFolderInput  ignore-vuetify-classes" @blur="saveNewNameFolder()" @keyup.enter="$event.target.blur()" @keyup.esc="cancelRenameNewFolder($event)">
               <div v-else class="selectionLabel center">{{ folder.title }}</div>
@@ -252,7 +252,8 @@ export default {
       renameFolderAction:false,
       newName:'',
       MESSAGES_DISPLAY_TIME: 5000,
-      drivesInProgress: {}
+      drivesInProgress: {},
+      privateDestinationForFile: false
     };
   },
   computed: {
@@ -371,6 +372,7 @@ export default {
       }
       this.schemaFolder = this.currentDrive.name.concat('/', folder.path);
       this.folderDestinationForFile = folder.title;
+      this.privateDestinationForFile = folder.isPublic;
     },
     openDrive(drive) {
       this.currentAbsolutePath = '';
@@ -491,7 +493,9 @@ export default {
               folderTypeCSSClass: folderTypeCSSClass,
               isSelected: false,
               canRemove: fetchedFolders[j].getAttribute('canRemove') === 'true',
-              isCloudDrive: fetchedFolders[j].getAttribute('isCloudDrive') === 'true' ? true : false
+              isCloudDrive: fetchedFolders[j].getAttribute('isCloudDrive') === 'true' ? true : false,
+              isPublic: fetchedFolders[j].getAttribute('isPublic') === 'true' ? true : false,
+              cloudProvider: fetchedFolders[j].getAttribute('cloudProvider')
             });
           }
         } else if (fetchedDocuments[i].tagName === 'Files') {
@@ -551,7 +555,7 @@ export default {
         this.folderDestinationForFile = this.currentDrive.name;
       }
       if (this.modeFolderSelectionForFile) {
-        this.$emit('itemsSelected', this.selectedFolderPath, this.folderDestinationForFile);
+        this.$emit('itemsSelected', this.selectedFolderPath, this.folderDestinationForFile, this.privateDestinationForFile);
       } else {
         this.$emit('itemsSelected', this.selectedFolderPath, this.schemaFolder);
       }
@@ -745,7 +749,7 @@ export default {
       this.drivesInProgress = { ...drives }; // update progress for connecting drive to display that drive is in connection
     },
     getFolderIcon(folder) {
-      return folder.title.includes('@gmail.com') ? 'uiIcon-gdrive' : '';
+      return `uiIcon-${folder.cloudProvider}`;
     }
   }
 };
