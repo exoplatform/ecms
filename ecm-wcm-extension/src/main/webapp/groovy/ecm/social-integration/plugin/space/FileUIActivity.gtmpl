@@ -89,12 +89,6 @@ public void addActivityTimeLine(String ownerName, String ownerUri, String ownerA
     def labelShowAllComments = _ctx.appRes("UIActivity.label.Show_All_Comments");
     def labelHideAllComments = _ctx.appRes("UIActivity.label.Hide_All_Comments");
     def labelShowPreviousComments = _ctx.appRes("UIActivity.label.Show_Previous_Comments");
-    def labelOnePersonLikeThis = _ctx.appRes("UIActivity.label.One_Person_Like_This");
-    def labelTwoPersonLikeThis=_ctx.appRes("UIActivity.label.Two_Person_Like_This");
-    def labelOneAndOthersLikeThis=_ctx.appRes("UIActivity.label.One_And_Others_Like_This");
-    def labelYouLikeThis = _ctx.appRes("UIActivity.label.You_Like_This");
-    def labelYouAndOnePersonLikeThis = _ctx.appRes("UIActivity.label.You_And_One_Person_Like_This");
-    def labelYouAndOthersLikeThis = _ctx.appRes("UIActivity.label.You_And_Others_Like_This");
     def captionConfirmation=StringEscapeUtils.escapeHtml(_ctx.appRes("UIActivity.label.Confirmation"));
     def labelConfirmbutton=StringEscapeUtils.escapeHtml(_ctx.appRes("UIActivity.label.Confirm_Delete_Activity-Button"));
     def labelClosebutton=StringEscapeUtils.escapeHtml(_ctx.appRes("UIActivity.label.Cancel_Delete_Activity-Button"));
@@ -113,9 +107,6 @@ public void addActivityTimeLine(String ownerName, String ownerUri, String ownerA
     def activityCommentAndLikable = uicomponent.isActivityCommentAndLikable();
     def downloadAllUrl = uicomponent.event("DownloadDocument");
 
-    def likeActivityAction = uicomponent.event("LikeActivity", "true");
-    def unlikeActivityAction = uicomponent.event("LikeActivity", "false");
-
     def openInOfficeConnector = WCMCoreUtils.getService(OpenInOfficeConnector.class);
 
     def commentList = uicomponent.getComments();
@@ -133,8 +124,6 @@ public void addActivityTimeLine(String ownerName, String ownerUri, String ownerA
     def identityLikesNum = 0;
     def totalLikesNum = uicomponent.getIdentityLikes().length;
 
-    def loadLikesAction = uicomponent.event("LoadLikes");
-    def labelLikes = null;
     def toggleDisplayLikesAction = uicomponent.event("ToggleDisplayLikes");
     def startTag = "<a onclick=\"$toggleDisplayLikesAction\" id=\"ToggleDisplayListPeopleLikes${activity.id}\" href=\"#ToggleDisplayListPeopleLikes\">";
     def endTag = "</a>";
@@ -143,7 +132,6 @@ public void addActivityTimeLine(String ownerName, String ownerUri, String ownerA
     }
     def commentListStatus = uicomponent.getCommentListStatus();
     def commentFormDisplayed = uicomponent.isCommentFormDisplayed();
-    def likesDisplayed = uicomponent.isAllLoaded();
     def spaceURL = uicomponent.getSpaceURL();
     def spaceGroupId = uicomponent.getSpaceGroupId();
     def placeholder = _ctx.appRes("UIActivity.comment.placeholder").replace("'", "\\'");
@@ -186,40 +174,6 @@ public void addActivityTimeLine(String ownerName, String ownerUri, String ownerA
     //make sures commentFormFocused is set to false to prevent any refresh to focus, only focus after post a comment
     uicomponent.setCommentFormFocused(false);
     def ownerName, ownerUri = "#", ownerAvatar, activityPostedTime, activityUpdatedTime, absolutePostedTime;
-    def listPeopleLikeBlockClass = "", listPeopleBGClass = "";
-
-    if (!likesDisplayed) {
-        listPeopleLikeBlockClass = "displayNone";
-    }
-
-    if (uicomponent.isLiked()) {
-        if (totalLikesNum > 2) {
-            labelLikes = labelYouAndOthersLikeThis.replace("{0}", totalLikesNum - 1 + "");
-        } else if (totalLikesNum == 2) {
-            def likeId = (displayedIdentityLikes[0] == Utils.getViewerIdentity().getId()) ? displayedIdentityLikes[1] : displayedIdentityLikes[0];
-            def id = Utils.getIdentityManager().getIdentity(likeId);
-            labelLikes = labelYouAndOnePersonLikeThis.replace("{0}", StringEscapeUtils.escapeHtml(id.profile.fullName));
-        } else {
-            labelLikes = labelYouLikeThis;
-        }
-    } else {
-        if (totalLikesNum > 2) {
-            def id = Utils.getIdentityManager().getIdentity(displayedIdentityLikes[0]);
-            labelLikes = labelOneAndOthersLikeThis.replace("{0}", StringEscapeUtils.escapeHtml(id.profile.fullName)).replace("{1}", totalLikesNum - 1 + "");
-        } else if (totalLikesNum == 1) {
-            def id = Utils.getIdentityManager().getIdentity(displayedIdentityLikes[0]);
-            labelLikes = labelOnePersonLikeThis.replace("{0}", StringEscapeUtils.escapeHtml(id.profile.fullName));
-        } else if (totalLikesNum == 2) {
-            def id1 = Utils.getIdentityManager().getIdentity(displayedIdentityLikes[0]);
-            def id2 = Utils.getIdentityManager().getIdentity(displayedIdentityLikes[1]);
-            labelLikes = labelTwoPersonLikeThis.replace("{0}", StringEscapeUtils.escapeHtml(id1.profile.fullName)).replace("{1}", StringEscapeUtils.escapeHtml(id2.profile.fullName));
-        }
-    }
-
-    if (!labelLikes) {
-        //hides diplayPeopleBG
-        listPeopleBGClass = "displayNone";
-    }
 
     activityPostedTime = uicomponent.getRelativeTimeLabel(_ctx, activity.postedTime);
     activityUpdatedTime = uicomponent.getRelativeTimeLabel(_ctx, activity.updated.getTime());
@@ -575,78 +529,11 @@ for(def index = 0; index < uicomponent.getFilesCount(); index++) {
                 </div><!--end previews-->
 <% } %>
 
-      <div class="actionBarMobile">
-        <a class="likesNumber" href="#">$identityLikesNum $labelLikesActivity</a>
-        <a class="CommentsNumber" href="#">$commentCount $labelComments</a>
-      </div><!--end actionBarMobile-->
+            <% _ctx.includeTemplates("UIActivityActionBar-actions-mobile") %>
             <div class="actionsDetailsWrapper">
-                 <% if (identityLikesNum > 0 || uicomponent.isLiked()) {%>
-                  <div class="listLikedBox $listPeopleBGClass">
-                  <div class="listPeopleContent">
-                  
-                    <% if (identityLikesNum > 0) {%>
-                    <div class="listLiked">
-                    <%
-                    displayedIdentityLikes.each({
-                      def id = Utils.getIdentityManager().getIdentity(it);
-                      personLikeFullName = StringEscapeUtils.escapeHtml(id.profile.fullName);
-                      personLikeProfileUri = LinkProvider.getUserProfileUri(id.getRemoteId());
-                      personLikeAvatarImageSource = id.profile.avatarUrl;
-                      if (!personLikeAvatarImageSource) personLikeAvatarImageSource = LinkProvider.PROFILE_DEFAULT_AVATAR_URL;
-                      %>
-                        <a class="avatarXSmall" title="$personLikeFullName" href="$personLikeProfileUri">
-                          <img src="$personLikeAvatarImageSource" alt="$personLikeFullName" />
-            </a>
-                     <% })%>
-                       <button onclick="$loadLikesAction" class="btn">...</button>
+              <% _ctx.includeTemplates("UIActivityListLiked") %>
+              <% _ctx.includeTemplates("UIActivityActionBar-actions") %>
             </div>
-                    <% }%>
-                    <% if (!labelLikes) labelLikes = ""; %>
-                          <p>$labelLikes</p>
-                  </div>
-            </div>
-            <%}%>
-
-                <div class="actionBar clearfix ContentActivityIcon">
-                  <% def toggleDisplayCommentAction = uicomponent.event('ToggleDisplayCommentForm', null, false);
-                     def commentLink = "";
-                  %>
-                 <% if (activityCommentAndLikable) { %>
-                    <ul class="pull-right statusAction">
-                    <% if (uicomponent.isLiked()) { %>
-                        <li>
-                                <a onclick="$unlikeActivityAction" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIActivity.msg.UnlikeActivity"); %>" id="UnLikeLink${activity.id}" href="javascript:void(0);">
-                                <i class="uiIconThumbUp uiIconBlue"></i>
-                                <span class="LikeLabel">$labelLike</span>
-                                <span class="LikesActionNumber">$identityLikesNum</span>
-                                </a>
-                        </li>
-                      <% } else { %>
-                        <li>
-                            <a onclick="$likeActivityAction" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIActivity.msg.LikeActivity"); %>" id="LikeLink${activity.id}" href="javascript:void(0);">
-                              <i class="uiIconThumbUp uiIconLightGray"></i>
-                              <span class="LikeLabel">$labelLike</span>
-                              <span class="LikesActionNumber">$identityLikesNum</span>
-                            </a>
-                        </li>
-                    <% } %>
-                    <li>
-                            <a class="$commentLink"  id="CommentLink${activity.id}" rel="tooltip" data-activity="${activity.id}" data-placement="bottom" title="<%=_ctx.appRes("UIActivity.label.Comment"); %>" href="javascript:void(0);">
-                                <i class="uiIconComment uiIconLightGray"></i>
-                                 <span class="CommentLabel">$labelComment</span>
-                                <span class="commentsActionNumber">$commentCount</span>
-                </a>
-                        </li>
-                </ul>
-                 <% } %>
-                 </div><!--end actionBar-->
-            </div>
-    			
-
-
-               
-
-
 
                 <div id="CommentBlockBound${activity.id}" class="commentBox">
 

@@ -370,12 +370,10 @@
                 '<div class="uiBox commentArea pull-right" id="commentArea">' +
                 '<div class="title">' +
                 '<div class="docTitle" rel="tooltip" data-placement="top" title="' + this.settings.doc.title + '">' +
-                '<span>' + this.settings.doc.title + '</span>'
+                '<span>' + this.settings.doc.title + '</span>';
             if (typeof this.settings.doc.fileInfo != "undefined") {
-              html += '<div class="label primary fileVersion">V' + documentPreview.settings.version.number + '</div>'
-            }
-            if (typeof this.settings.doc.fileInfo != "undefined") {
-              html += '<div class="docInfo" rel="tooltip" data-placement="top" title="' + this.settings.doc.fileInfo + '">' + this.settings.doc.fileInfo + '</div>'
+              html += ((documentPreview.settings.version && documentPreview.settings.version.number) ? ('<div class="label primary fileVersion"' + (documentPreview.settings.doc.openUrl ? 'onclick="window.location.href=\'' + documentPreview.settings.doc.openUrl + '&versions=true\'"' : "") + '>V' + documentPreview.settings.version.number + '</div>') : '') +
+                  '<div class="docInfo" rel="tooltip" data-placement="top" title="' + this.settings.doc.fileInfo + '">' + this.settings.doc.fileInfo + '</div>';
             }
             html += '</div>' +
                 '<div class="closeIcon">' +
@@ -458,26 +456,36 @@
                   '</div>' +
                 '<div class="fileName hidden" data-container="body" rel="tooltip" data-placement="top" title="' + documentPreview.settings.doc.title + '">' +
                 '<div class="ellipsis">' + documentPreview.settings.doc.title + '</div>' +
-                '<div class="label primary fileVersion"' + (documentPreview.settings.doc.openUrl ? 'onclick="window.location.href=\'' + documentPreview.settings.doc.openUrl + '&versions=true\'"' : "") + '>V' + documentPreview.settings.version.number + '</div>' +
-                '</div>' +
-
-                  '<!-- put vote area here -->' +
-                  '<div class="previewBtn">';
-
-            if(this.settings.showComments) {
-              html += '<div class="showComments">' +
-                      '<a><i class="uiIconComment uiIconWhite"></i>&nbsp;${UIActivity.comment.showComment}</a>' +
-                    '</div>';
-            }
-            html += '<div class="showComments-lg">' +
-                '<a><i class="uiIconComment uiIconWhite hiddenComment"></i>&nbsp;${UIActivity.comment.showComment}</a>' +
-                '</div>' +
-                '<div class="openBtn">' +
-                '<a href="' + this.settings.doc.openUrl + '"><i class="uiIconGotoFolder uiIconWhite"></i>&nbsp;${UIActivity.comment.openInDocuments}</a>' +
-                '</div>' +
-                '<div class="downloadBtn">' +
-                '<a href="' + this.settings.doc.downloadUrl + '"><i class="uiIconDownload uiIconWhite"></i>&nbsp;${UIActivity.comment.download}</a>' +
+                ((documentPreview.settings.version && documentPreview.settings.version.number) ? ('<div class="label primary fileVersion"' + (documentPreview.settings.doc.openUrl ? 'onclick="window.location.href=\'' + documentPreview.settings.doc.openUrl + '&versions=true\'"' : "") + '>V' + documentPreview.settings.version.number + '</div>') : '') +
                 '</div>';
+                if (!this.settings.showComments) {
+                  html += '<div class="fileName" data-container="body" rel="tooltip" data-placement="top" title="' + documentPreview.settings.doc.title + '">' +
+                      '<div class="ellipsis">' + documentPreview.settings.doc.title + '</div>' +
+                      ((documentPreview.settings.version && documentPreview.settings.version.number) ? ('<div class="label primary fileVersion"' + (documentPreview.settings.doc.openUrl ? 'onclick="window.location.href=\'' + documentPreview.settings.doc.openUrl + '&versions=true\'"' : "") + '>V' + documentPreview.settings.version.number + '</div>') : '') +
+                      '</div>';
+                }
+                '<!-- put vote area here -->'
+                html += '<div class="previewBtn dropup">' +
+                    '<div class="btn-group">' +
+                    '    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">' +
+                    '    <i class="uiVerticalDots"></i></button>' +
+                    '    <ul class="dropdown-menu" role="menu">' +
+                    '      <li><div class="openBtn">' +
+                    '                <a href="' + this.settings.doc.openUrl + '"><i class="uiIconGotoFolder uiIconWhite"></i>&nbsp;${UIActivity.comment.openInDocuments}</a>' +
+                    '                </div></li>' +
+                    '      <li><div class="downloadBtn">' +
+                    '                <a href="' + this.settings.doc.downloadUrl + '"><i class="uiIconDownload uiIconWhite"></i>&nbsp;${UIActivity.comment.download}</a>' +
+                    '                </div></li>' +
+                    '    </ul>' +
+                    '  </div>';
+                if (this.settings.showComments) {
+                  html += '<div class="showComments">' +
+                      '<a><i class="uiIconComment uiIconWhite"></i>&nbsp;${UIActivity.comment.showComment}</a>' +
+                      '</div>' +
+                      '<div class="showComments-lg">' +
+                      '<a><i class="uiIconComment uiIconWhite hiddenComment"></i>&nbsp;${UIActivity.comment.showComment}</a>' +
+                      '</div>';
+                }
         if(documentPreview.settings.doc && documentPreview.settings.doc.breadCrumb) {
           var breadCrumbContent = '<div class="ellipsis-reverse-content hidden">...</div><div class="ellipsis-reverse-apply"><div class="ellipsis-reverse-apply-content">';
           var folderIndex = 0;
