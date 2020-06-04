@@ -715,7 +715,9 @@
       }
 
       .contentBody {
-        height: 91%;
+        @sectionHeight: 130px;
+        min-height: calc(@sectionHeight *3);
+        height: 86%;
         overflow-y: auto;
         overflow-x: hidden;
 
@@ -778,6 +780,7 @@
               text-overflow: ellipsis;
               overflow: hidden;
               white-space: nowrap;
+              position: relative;
 
               i {
                 font-size: 41px;
@@ -806,13 +809,26 @@
             }
 
             .uiIcon {
-              &-clouddrive:before {
-                top: -25px;
-                left: 31px;
+              &-clouddrive {
                 position: absolute;
-                content: '';
-              }
+                width: 100%;
+                height: 40px;
+                padding-bottom: 15px;
 
+                &:before {
+                  width: 100%;
+                  height: 100%;
+                  position: absolute;
+                  content: '';
+                  right: 0;
+                  left: 0;
+                  top: -1px;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                }
+              }
+              
               &-gdrive:before {
                 font-family: 'icomoon' !important;
                 speak: none;
@@ -907,8 +923,12 @@
         }
 
         .categorizedDrives {
-          .categories > .v-list-group__header {
-            display: none;
+          .drivesList {
+            padding: 0;
+
+            .categories > .v-list-group__header {
+              display: none;
+            }
           }
 
           .category {
@@ -1105,6 +1125,19 @@
     }
   }
 }
+
+@media screen and (max-width: 959px) {
+  .attachments .content.serverFiles .serverFiles .contentBody {
+    min-height: 259px;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .attachments .content.serverFiles .serverFiles .contentBody .selectionBox .folderSelection {
+    margin: 0 7px;
+  }
+}
+
 /** Attachments composer plugin **/
 #activityComposerApp {
   .drawer {

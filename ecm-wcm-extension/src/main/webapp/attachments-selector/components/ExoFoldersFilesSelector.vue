@@ -99,7 +99,7 @@
         </div>
       </div>
       <div v-else class="categorizedDrives">
-        <v-list dense flat>
+        <v-list dense flat class="drivesList">
           <v-list-group value="true" class="categories" eager>
             <v-list-group v-for="(group, name) in filteredDrivers" :key="name" :ripple="false" sub-group no-action value="true" class="category" active-class="categoryActive">
               <template v-slot:activator>
