@@ -38,7 +38,6 @@ import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
-import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.social.core.activity.model.ExoSocialActivity;
@@ -74,8 +73,6 @@ public class UIComposerMultiUploadSelector extends UIAbstractSelectFileComposer 
   private static final Log    LOG                       = ExoLogger.getLogger(UIComposerMultiUploadSelector.class);
 
   public static final String  UPLOAD_RESOLVER_TYPE      = "UPLOAD";
-
-  private final static String PUBLIC_ALIAS              = "userPublic";
 
   private static final String FOLDER_UPLOAD_PARENT_NAME = "Activity Stream Documents";
 
@@ -241,7 +238,7 @@ public class UIComposerMultiUploadSelector extends UIAbstractSelectFileComposer 
           throw new IllegalStateException("Remote user is empty");
         }
         Node userNode = nodeHierarchyCreator.getUserNode(sessionProvider, remoteUser);
-        String publicPath = nodeHierarchyCreator.getJcrPath(PUBLIC_ALIAS);
+        String publicPath = nodeHierarchyCreator.getJcrPath(BasePath.CMS_USER_PUBLIC_ALIAS);
         if (userNode == null || !userNode.hasNode(publicPath)) {
           throw new IllegalStateException("User '" + remoteUser + "' hasn't public folder");
         }

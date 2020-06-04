@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+  Copyright (C) 2003-2016 eXo Platform SAS.
+  
+  This is free software; you can redistribute it and/or modify it
+  under the terms of the GNU Lesser General Public License as
+  published by the Free Software Foundation; either version 2.1 of
+  the License, or (at your option) any later version.
+  
+  This software is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+  Lesser General Public License for more details.
+  
+  You should have received a copy of the GNU Lesser General Public
+  License along with this software; if not, write to the Free
+  Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+  02110-1301 USA, or see the FSF site: http://www.fsf.org.
+
+-->
+<nodeTypes xmlns:nt="http://www.jcp.org/jcr/nt/1.0" xmlns:mix="http://www.jcp.org/jcr/mix/1.0"
+  xmlns:jcr="http://www.jcp.org/jcr/1.0">
+
+  <!-- NOTE All nodetypes contain free space for all possible properties -->
+
+  <!-- hierarchical nodetype for cloud drive folder (nt:folder) -->
+  <nodeType name="ecd:cloudDrive" isMixin="true" hasOrderableChildNodes="false" primaryItemName="exo:userEmail">
+    <supertypes>
+      <supertype>mix:referenceable</supertype>
+    </supertypes>
+    <propertyDefinitions>
+      <!--  mandatory -->
+      <propertyDefinition name="exo:title" requiredType="String" autoCreated="false"
+        mandatory="true" onParentVersion="ABORT" protected="false" multiple="false">
+        <valueConstraints />
+      </propertyDefinition>
+      <propertyDefinition name="ecd:connected" requiredType="Boolean" autoCreated="false"
+        mandatory="true" onParentVersion="ABORT" protected="false" multiple="false">
+        <valueConstraints />
+      </propertyDefinition>
+      <propertyDefinition name="ecd:localUserName" requiredType="String" autoCreated="false"
+        mandatory="true" onParentVersion="ABORT" protected="false" multiple="false">
+        <valueConstraints />
+      </propertyDefinition>
+      <propertyDefinition name="ecd:initDate" requiredType="Date" autoCreated="false"
+        mandatory="true" onParentVersion="ABORT" protected="false" multiple="false">
+        <valueConstraints />
+      </propertyDefinition>
+      <propertyDefinition name="ecd:provider" requiredType="String" autoCreated="false"
+        mandatory="true" onParentVersion="ABORT" protected="false" multiple="false">
+        <valueConstraints />
+      </propertyDefinition>
+      <propertyDefinition name="ecd:url" requiredType="String" autoCreated="false"
+        mandatory="true" onParentVersion="ABORT" protected="false" multiple="false">
+        <valueConstraints />
+      </propertyDefinition>
+      <propertyDefinition name="ecd:id" requiredType="String" autoCreated="false"
+        mandatory="true" onParentVersion="ABORT" protected="false" multiple="false">
+        <valueConstraints />
+      </propertyDefinition>
+      
+      <!--  for connected only -->
+      <propertyDefinition name="ecd:cloudUserName" requiredType="String" autoCreated="false"
+        mandatory="false" onParentVersion="ABORT" protected="false" multiple="false">
+        <valueConstraints />
+      </propertyDefinition>
+      <propertyDefinition name="ecd:cloudUserId" requiredType="String" autoCreated="false"
+        mandatory="false" onParentVersion="ABORT" protected="false" multiple="false">
+        <valueConstraints />
+      </propertyDefinition>
+      <propertyDefinition name="ecd:userEmail" requiredType="String" autoCreated="false"
+        mandatory="false" onParentVersion="ABORT" protected="false" multiple="false">
+        <valueConstraints />
+      </propertyDefinition>
+      <propertyDefinition name="ecd:connectDate" requiredType="Date" autoCreated="false"
+        mandatory="false" onParentVersion="ABORT" protected="false" multiple="false">
+        <valueConstraints />
+      </propertyDefinition>
+      <propertyDefinition name="*" requiredType="Underfined" autoCreated="false" mandatory="false"
+        onParentVersion="ABORT" protected="false" multiple="false">
+        <valueConstraints />
+      </propertyDefinition>
+      <propertyDefinition name="*" requiredType="Underfined" autoCreated="false" mandatory="false"
+        onParentVersion="ABORT" protected="false" multiple="true">
+        <valueConstraints />
+      </propertyDefinition>
+    </propertyDefinitions>
+    <!-- childs by default nt:file and OPV is ABORT to avoid version operations, other the same as on parent's 
+      nt:folder -->
+    <!-- TODO probably this definition will not be used due to JCR impl, it will take first residual * from the 
+      primary type (nt:folder) -->
+    <childNodeDefinitions>
+      <childNodeDefinition name="*" defaultPrimaryType="nt:file" autoCreated="false"
+        mandatory="false" onParentVersion="ABORT" protected="false" sameNameSiblings="true">
+        <requiredPrimaryTypes>
+          <requiredPrimaryType>nt:hierarchyNode</requiredPrimaryType>
+        </requiredPrimaryTypes>
+      </childNodeDefinition>
+    </childNodeDefinitions>
+  </nodeType>
+
+  <!-- hierarchical nodetype for cloud files (nt:file) -->
+  <nodeType name="ecd:cloudFile" isMixin="true" hasOrderableChildNodes="false" primaryItemName="exo:title">
+    <propertyDefinitions>
+      <!-- Visual name of the file, exo:title also defined in exo:rss-enable, exo:sortable etc -->
+      <propertyDefinition name="exo:title" requiredType="String" autoCreated="false"
+        mandatory="true" onParentVersion="ABORT" protected="false" multiple="false">
+        <valueConstraints />
+      </propertyDefinition>
+      <!-- Unique identifier of the file -->
+      <propertyDefinition name="ecd:id" requiredType="String" autoCreated="false"
+        mandatory="true" onParentVersion="ABORT" protected="false" multiple="false">
+        <valueConstraints />
+      </propertyDefinition>
+      <!-- Drive node UUID. Used in symlinking files outside the drive. -->
+      <propertyDefinition name="ecd:driveUUID" requiredType="String" autoCreated="false"
+        mandatory="true" onParentVersion="ABORT" protected="false" multiple="false">
+        <valueConstraints />
+      </propertyDefinition>
+      <!-- text, spreadsheet, image etc, but consider jcr:mimeType also -->
+      <propertyDefinition name="ecd:type" requiredType="String" autoCreated="false"
+        mandatory="true" onParentVersion="ABORT" protected="false" multiple="false">
+        <valueConstraints />
+      </propertyDefinition>
+      <!-- link to the file in the cloud -->
+      <propertyDefinition name="ecd:url" requiredType="String" autoCreated="false"
+        mandatory="true" onParentVersion="ABORT" protected="false" multiple="false">
+        <valueConstraints />
+      </propertyDefinition>
+      <propertyDefinition name="ecd:author" requiredType="String" autoCreated="false"
+        mandatory="true" onParentVersion="ABORT" protected="false" multiple="false">
+        <valueConstraints />
+      </propertyDefinition>
+      <propertyDefinition name="ecd:lastUser" requiredType="String" autoCreated="false"
+        mandatory="true" onParentVersion="ABORT" protected="false" multiple="false">
+        <valueConstraints />
+      </propertyDefinition>
+      <propertyDefinition name="ecd:created" requiredType="Date" autoCreated="false"
+        mandatory="true" onParentVersion="ABORT" protected="false" multiple="false">
+        <valueConstraints />
+      </propertyDefinition>
+      <propertyDefinition name="ecd:modified" requiredType="Date" autoCreated="false"
+        mandatory="true" onParentVersion="ABORT" protected="false" multiple="false">
+        <valueConstraints />
+      </propertyDefinition>
+      <propertyDefinition name="ecd:synchronized" requiredType="Date" autoCreated="false"
+        mandatory="true" onParentVersion="ABORT" protected="false" multiple="false">
+        <valueConstraints />
+      </propertyDefinition>
+      <propertyDefinition name="*" requiredType="Underfined" autoCreated="false" mandatory="false"
+        onParentVersion="ABORT" protected="false" multiple="false">
+        <valueConstraints />
+      </propertyDefinition>
+      <propertyDefinition name="*" requiredType="Underfined" autoCreated="false" mandatory="false"
+        onParentVersion="ABORT" protected="false" multiple="true">
+        <valueConstraints />
+      </propertyDefinition>
+    </propertyDefinitions>
+  </nodeType>
+  
+  <!-- content nodetype for cloud files' jcr;content node (nt:resource) -->
+  <nodeType name="ecd:cloudFileResource" isMixin="true" hasOrderableChildNodes="false"
+    primaryItemName="">
+    <propertyDefinitions>
+      <propertyDefinition name="*" requiredType="Underfined" autoCreated="false" mandatory="false"
+        onParentVersion="ABORT" protected="false" multiple="false">
+        <valueConstraints />
+      </propertyDefinition>
+      <propertyDefinition name="*" requiredType="Underfined" autoCreated="false" mandatory="false"
+        onParentVersion="ABORT" protected="false" multiple="true">
+        <valueConstraints />
+      </propertyDefinition>
+    </propertyDefinitions>
+  </nodeType>
+  
+  <!-- hierarchical nodetype for cloud folders (nt:folder) -->
+  <nodeType name="ecd:cloudFolder" isMixin="true" hasOrderableChildNodes="false" primaryItemName="exo:title">
+    <supertypes>
+      <supertype>ecd:cloudFile</supertype>
+    </supertypes>
+    <propertyDefinitions>
+      <propertyDefinition name="*" requiredType="Underfined" autoCreated="false" mandatory="false"
+        onParentVersion="ABORT" protected="false" multiple="false">
+        <valueConstraints />
+      </propertyDefinition>
+      <propertyDefinition name="*" requiredType="Underfined" autoCreated="false" mandatory="false"
+        onParentVersion="ABORT" protected="false" multiple="true">
+        <valueConstraints />
+      </propertyDefinition>
+    </propertyDefinitions>
+    <childNodeDefinitions><!-- ecd:cloudFile not used as child node -->
+      <childNodeDefinition name="ecd:cloudFile" autoCreated="false" mandatory="false"
+        onParentVersion="ABORT" protected="false" sameNameSiblings="false">
+        <requiredPrimaryTypes>
+          <requiredPrimaryType>nt:base</requiredPrimaryType>
+        </requiredPrimaryTypes>
+      </childNodeDefinition>
+    </childNodeDefinitions>
+  </nodeType>
+  
+  <!-- a nodetype-marker of ignored nodes inside cloud drive (for technical nodes) -->
+  <nodeType name="ecd:ignored" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
+  </nodeType>
+  
+</nodeTypes>

@@ -16,7 +16,6 @@
  */
 package org.exoplatform.wcm.connector.fckeditor;
 
-import java.net.URLDecoder;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -57,6 +56,7 @@ import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.ecm.connector.fckeditor.FCKUtils;
 import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.services.cms.BasePath;
+import org.exoplatform.services.cms.clouddrives.CloudDriveService;
 import org.exoplatform.services.cms.documents.DocumentService;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.drives.ManageDriveService;
@@ -142,33 +142,41 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
   /** The file number limit on server side. */
   private int limitCountServer_ = 30;
 
-  private List<String> browsableContent =new ArrayList<String>();
+  private List<String> browsableContent = new ArrayList<String>();
 
-
-  private ResourceBundleService resourceBundleService=null;
+  private ResourceBundleService resourceBundleService = null;
+  
   private NodeFinder nodeFinder_ = null;
+  
   private LinkManager linkManager_ = null;
 
   private String resourceBundleNames[];
 
-  private DocumentService documentService;
+  /** Document service. */
+  private final DocumentService documentService;
+  
+  /** Cloud Drive service. */
+  private final CloudDriveService cloudDrives;
 
   /**
    * Instantiates a new driver connector.
    *
    * @param params The init parameters.
+   * @param documentService the document service
+   * @param cloudDrives the cloud drives
    */
-  public DriverConnector(InitParams params, DocumentService documentService) {
+  public DriverConnector(InitParams params, DocumentService documentService, CloudDriveService cloudDrives) {
     this.documentService = documentService;
-    limit = Integer.parseInt(params.getValueParam("upload.limit.size").getValue());
+    this.cloudDrives = cloudDrives;
+    this.limit = Integer.parseInt(params.getValueParam("upload.limit.size").getValue());
     if (params.getValueParam("upload.limit.count.client") != null) {
-      limitCountClient_ = Integer.parseInt(params.getValueParam("upload.limit.count.client").getValue());
+      this.limitCountClient_ = Integer.parseInt(params.getValueParam("upload.limit.count.client").getValue());
     }
     if (params.getValueParam("upload.limit.count.server") != null) {
-      limitCountServer_ = Integer.parseInt(params.getValueParam("upload.limit.count.server").getValue());
+      this.limitCountServer_ = Integer.parseInt(params.getValueParam("upload.limit.count.server").getValue());
     }
     if (params.getValueParam("exo.ecms.content.browsable") != null) {
-      browsableContent = Arrays.asList((params.getValueParam("exo.ecms.content.browsable").getValue()).split("\\s*,\\s*"));
+      this.browsableContent = Arrays.asList((params.getValueParam("exo.ecms.content.browsable").getValue()).split("\\s*,\\s*"));
     }
   }
 
@@ -524,10 +532,13 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
       folder.setAttribute("path", path);
       folder.setAttribute("repository", repository);
       folder.setAttribute("workspace", workspace);
+      folder.setAttribute("isCloudDrive",
+                          String.valueOf(cloudDrives.findDrive(driver.getWorkspace(),
+                                                               driver.getHomePath()) != null));
       folder.setAttribute("isUpload", "true");
       folder.setAttribute("hasFolderChild", String.valueOf(this.hasFolderChild(driveNode)));
       folder.setAttribute("nodeTypeCssClass", Utils.getNodeTypeIcon(driveNode, "uiIcon16x16"));
-
+      
       folders.appendChild(folder);
     }
     return folders;

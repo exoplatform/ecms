@@ -25,6 +25,8 @@ import org.exoplatform.ecm.webui.component.explorer.popup.actions.UIDocumentForm
 import org.exoplatform.ecm.webui.component.explorer.search.*;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.BasePath;
+import org.exoplatform.services.cms.clouddrives.CloudDrive;
+import org.exoplatform.services.cms.clouddrives.CloudDriveService;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.drives.impl.ManageDriveServiceImpl;
 import org.exoplatform.services.cms.queries.QueryService;
@@ -63,8 +65,6 @@ import javax.jcr.RepositoryException;
 import javax.jcr.query.Query;
 import javax.portlet.PortletPreferences;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
 import java.util.*;
 
 /**
@@ -122,7 +122,10 @@ public class UIActionBar extends UIForm {
   final static private String   SQL_QUERY            = "select * from nt:base where jcr:path like '$0/%' and contains(*, '$1') "
                                                          + "order by jcr:path DESC, jcr:primaryType DESC";
 
-  private String backLink;
+  private String                backLink;
+
+  /** The cloud drive service. */
+  private CloudDriveService     cloudDriveService;
 
   public UIActionBar() throws Exception {
     organizationService = CommonsUtils.getService(OrganizationService.class);
@@ -133,6 +136,7 @@ public class UIActionBar extends UIForm {
     typeOptions.add(new SelectItemOption<String>(FIELD_XPATH, Query.XPATH));
     addChild(new UIFormSelectBox(FIELD_SEARCH_TYPE, FIELD_SEARCH_TYPE, typeOptions));
     addChild(new UIFormStringInput(FIELD_ADVANCE_SEARCH, FIELD_ADVANCE_SEARCH, null));
+    cloudDriveService = CommonsUtils.getService(CloudDriveService.class);
   }
 
   public void setTabOptions(String viewName) throws Exception {
@@ -414,12 +418,23 @@ public class UIActionBar extends UIForm {
         }
       } else {
         // Others drives
-        String driveLabelKey = "Drives.label." + driveName.replace(".", "").replace(" ", "");
         try {
-          driveLabel = res.getString(driveLabelKey);
-        } catch (MissingResourceException ex) {
-          //
-          driveLabel = driveName.replace(".", "/");
+          CloudDrive cloudDrives = cloudDriveService.findDrive(drive.getWorkspace(), drive.getHomePath());
+          if (cloudDrives != null) {
+            // Cloud drives
+            driveLabel = cloudDrives.getTitle();
+          } else {
+            String driveLabelKey = "Drives.label." + driveName.replace(".", "").replace(" ", "");
+            try {
+              driveLabel = res.getString(driveLabelKey);
+            } catch (MissingResourceException ex) {
+              //
+              driveLabel = driveName.replace(".", "/");
+            }
+          }
+        } catch (RepositoryException e) {
+          LOG.warn("Cannot find clouddrive " + drive.getHomePath() + " in " + drive.getWorkspace(), e);
+          driveLabel = driveName.replace(".", " / ");
         }
       }
     } catch(Exception e) {

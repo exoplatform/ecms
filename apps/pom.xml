@@ -18,6 +18,7 @@
     <module>resources-wcm</module>
     <module>portlet-seo</module>
     <module>portlet-editors</module>
-	<module>portlet-documents</module>
+    <module>portlet-documents</module>
+    <module>portlet-clouddrives</module>
   </modules>
 </project>

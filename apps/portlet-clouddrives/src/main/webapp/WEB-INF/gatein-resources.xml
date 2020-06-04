@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!--
+
+  Copyright (C) 2018 eXo Platform SAS.
+
+  This is free software; you can redistribute it and/or modify it
+  under the terms of the GNU Lesser General Public License as
+  published by the Free Software Foundation; either version 2.1 of
+  the License, or (at your option) any later version.
+
+  This software is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+  Lesser General Public License for more details.
+
+  You should have received a copy of the GNU Lesser General Public
+  License along with this software; if not, write to the Free
+  Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+  02110-1301 USA, or see the FSF site: http://www.fsf.org.
+
+-->
+<gatein-resources xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://www.exoplatform.org/xml/ns/gatein_resources_1_4 http://www.exoplatform.org/xml/ns/gatein_resources_1_4"
+                  xmlns="http://www.exoplatform.org/xml/ns/gatein_resources_1_4">
+
+  <javascript>
+    <param>
+      <js-module>cloudDrivePlugin</js-module>
+      <js-path>/vue-app/cloudDrivePlugin.js</js-path>
+    </param>
+  </javascript>
+
+  <!-- Javascript for Cloud Drive UI support in WCM -->
+  <module>
+    <name>cloudDriveJqueryPnotify</name>
+    <load-group>cloudDriveGRP</load-group>
+    <script>
+      <path>/js/jquery.pnotify.js</path>
+    </script>
+    <depends>
+      <module>jquery</module>
+      <as>jQuery</as>
+    </depends>
+  </module>
+  <module>
+    <name>cloudDriveUtils</name>
+    <load-group>cloudDriveGRP</load-group>
+    <script>
+      <path>/js/utils.js</path>
+    </script>
+    <depends>
+      <module>jquery</module>
+    </depends>
+    <depends>
+      <module>cloudDriveJqueryPnotify</module>
+    </depends>
+  </module>
+  <module>
+    <name>cloudDriveTasks</name>
+    <load-group>cloudDriveGRP</load-group>
+    <script>
+      <path>/js/taskstore.js</path>
+    </script>
+    <depends>
+      <module>jquery</module>
+    </depends>
+    <depends>
+      <module>cloudDriveUtils</module>
+    </depends>
+  </module>
+  <module>
+    <name>cloudDrive</name>
+    <load-group>cloudDriveGRP</load-group>
+    <script>
+      <path>/js/clouddrive.js</path>
+    </script>
+    <depends>
+      <module>jquery</module>
+    </depends>
+    <depends>
+      <module>cloudDriveUtils</module>
+    </depends>
+    <depends>
+      <module>cloudDriveTasks</module>
+    </depends>
+    <depends>
+      <module>uiRightClickPopupMenu</module>
+    </depends>
+    <depends>
+      <module>uiListView</module>
+    </depends>
+    <depends>
+      <module>uiSimpleView</module>
+    </depends>
+    <depends>
+      <module>uiFileView</module>
+    </depends>
+  </module>
+  <module>
+    <name>cloudDriveApp</name>
+    <script>
+      <minify>false</minify>
+      <path>/js/clouddrives-app.bundle.js</path>
+    </script>
+    <depends>
+      <module>vue</module>
+    </depends>
+    <depends>
+      <module>eXoVueI18n</module>
+    </depends>
+    <depends>
+      <module>vuetify</module>
+    </depends>
+    <depends>
+      <module>extensionRegistry</module>
+    </depends>
+    <depends>
+      <module>cloudDrive</module>
+    </depends>
+    <depends>
+      <module>cloudDriveUtils</module>
+    </depends>
+    <depends>
+      <module>jquery</module>
+    </depends>
+  </module>
+</gatein-resources>

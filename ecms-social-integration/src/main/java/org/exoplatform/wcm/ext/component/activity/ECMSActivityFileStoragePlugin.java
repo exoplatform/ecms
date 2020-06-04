@@ -12,17 +12,16 @@ import javax.jcr.Session;
 
 import org.apache.commons.lang3.StringUtils;
 import org.exoplatform.container.xml.InitParams;
+import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
-import org.exoplatform.services.jcr.impl.core.RepositoryImpl;
 import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
-import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.social.core.activity.model.ActivityFile;
 import org.exoplatform.social.core.activity.model.ExoSocialActivity;
 import org.exoplatform.social.core.identity.model.Identity;
@@ -37,8 +36,6 @@ import org.exoplatform.upload.UploadService;
  * This plugin will store activity attachment files in JCR
  */
 public class ECMSActivityFileStoragePlugin extends ActivityFileStoragePlugin {
-
-  private static final String  USER_FOLDER_PUBLIC_ALIAS    = "userPublic";
 
   private static final String  ACTIVITY_FOLDER_UPLOAD_NAME = "Activity Stream Documents";
 
@@ -103,7 +100,7 @@ public class ECMSActivityFileStoragePlugin extends ActivityFileStoragePlugin {
           throw new IllegalStateException("Remote user is empty");
         }
         Node userNode = nodeHierarchyCreator.getUserNode(sessionProvider, remoteUser);
-        String publicPath = nodeHierarchyCreator.getJcrPath(USER_FOLDER_PUBLIC_ALIAS);
+        String publicPath = nodeHierarchyCreator.getJcrPath(BasePath.CMS_USER_PUBLIC_ALIAS);
         if (userNode == null || !userNode.hasNode(publicPath)) {
           throw new IllegalStateException("User '" + remoteUser + "' hasn't public folder");
         }

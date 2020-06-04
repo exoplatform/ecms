@@ -1,0 +1,268 @@
+<%
+/**
+<!--
+
+ Copyright (C) 2003-2016 eXo Platform SAS.
+
+ This is free software; you can redistribute it and/or modify it
+ under the terms of the GNU Lesser General Public License as
+ published by the Free Software Foundation; either version 2.1 of
+ the License, or (at your option) any later version.
+
+ This software is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ Lesser General Public License for more details.
+
+ You should have received a copy of the GNU Lesser General Public
+ License along with this software; if not, write to the Free
+ Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+ 02110-1301 USA, or see the FSF site: http://www.fsf.org.
+
+	-->
+*/
+
+  import org.exoplatform.ecm.webui.utils.Utils
+  import org.exoplatform.wcm.webui.reader.ContentReader
+  import org.exoplatform.services.cms.clouddrives.CloudDrive
+  import org.exoplatform.services.cms.clouddrives.CloudFile
+  
+	def uiParent = uicomponent.getParent()
+  def currentNode = uiParent.node
+  
+  def rqcontext = _ctx.getRequestContext()
+  rqcontext.getJavascriptManager().require("SHARED/ecm-utils", "ecmutil").addScripts('ecmutil.ECMUtils.onKeyPDFViewerPress();')
+	
+  // should be set in CloudFileFilter
+  def drive = uicomponent.drive
+  def file = uicomponent.file
+%>
+<head>
+  <style>
+
+.UIPDFViewerContainer {
+	border: 1px solid #d1d1d1;
+} 
+
+.UIPDFViewerContainer .PDFViewerBar {
+	background: url('/eXoWCMResources/skin/images/file/PDFViewerBar.gif') repeat-x ;
+	height: 28px; 
+}
+
+.UIPDFViewerContainer .PDFViewerBar .ControlButton {
+	float: left;
+	line-height: 28px;
+	margin-left: 8px;
+}
+
+
+.UIPDFViewerContainer .PDFViewerBar .ControlButton .ButtonBack{
+	background: url('/eXoWCMResources/skin/images/file/ButtonBack.gif') no-repeat left center ;
+	height: 28px;
+	width: 18px;
+	cursor: pointer;
+}
+
+.UIPDFViewerContainer .PDFViewerBar .ControlButton .ButtonNext{
+	background: url('/eXoWCMResources/skin/images/file/ButtonNext.gif') no-repeat left center ;
+	height: 28px;
+	width: 18px;
+	cursor: pointer;
+}
+
+.UIPDFViewerContainer .PDFViewerBar .ControlButton .ZoomIn{
+	background: url('/eXoWCMResources/skin/images/file/ZoomIn.gif') no-repeat left center ;
+	height: 28px;
+	width: 18px;
+	cursor: pointer;
+}
+
+
+.UIPDFViewerContainer .PDFViewerBar .ControlButton .ZoomOut{
+	background: url('/eXoWCMResources/skin/images/file/ZoomOut.gif') no-repeat left center ;
+	height: 28px;
+	width: 18px;
+	cursor: pointer;
+}
+
+.UIPDFViewerContainer .PDFViewerBar .ControlButton .RotateLeft{
+	background: url('/eXoWCMResources/skin/images/file/HeightToWidth.gif') no-repeat left center ;
+	height: 28px;
+	width: 18px;
+	cursor: pointer;
+}
+
+.UIPDFViewerContainer .PDFViewerBar .ControlButton .RotateRight{
+	background: url('/eXoWCMResources/skin/images/file/WidthToHeight.gif') no-repeat left center ;
+	height: 28px;
+	width: 18px;
+	cursor: pointer;
+}
+
+.UIPDFViewerContainer .PDFViewerBar .ControlButton .InfoIcon{
+	background: url('/eXoWCMResources/skin/images/file/InfoIcon.gif') no-repeat left center ;
+	height: 28px;
+	width: 18px;
+	cursor: pointer;
+}
+
+.UIPDFViewerContainer .PDFViewerBar .DownLoadIcon{
+	background: url('/eXoWCMResources/skin/images/file/DownLoadIcon.gif') no-repeat left center ;
+	Line-height: 28px;
+	cursor: pointer;
+	float: right;
+	margin-right: 8px;
+	color: #4f4f4f;
+	padding-left: 22px;
+}
+
+.UIPDFViewerContainer .PDFViewerContent {
+	padding-top: 12px;
+}
+
+.UIPDFViewerContainer .PDFViewerContent .ImageView{
+	margin:auto;
+	height: 100%;
+	text-align: center;
+}
+
+.UIPDFViewerContainer .PDFViewerBar .ControlButton .PageNumber{
+	height: 20px;
+	width: 28px;
+	margin: 4px 0px 0px 0px;
+	line-height: 20px;
+}
+
+.UIPDFViewerContainer .PDFViewerBar .ControlButton .PageNumber input{
+	width: 28px;
+	border: 1px solid #c7c7c7;
+	text-align: center;
+}
+
+.UIPDFViewerContainer .PDFViewerBar .ControlButton .SeparatorLine{
+	height: 28px;
+	border-left: 1px solid #c7c7c7;
+}
+
+.UIPDFViewerContainer .InfoPopup{
+	padding: 5px;
+	background: #fafafa;
+	border: 1px solid #c7c7c7;
+}
+
+.UIPDFViewerContainer .InfoPopup .metaKey{
+	font-weight: bold;
+}
+
+.UIPDFViewerContainer .InfoPopup .metaValue{
+	margin-left: 5px;
+}
+
+.UIPDFViewerContainer .InfoPopup .Metadata{
+	margin: 5px 5px 0px 0px;
+}
+  </style>  
+</head>
+<%
+	uiform.begin()
+
+	if (drive && file) {
+	  def serviceName = drive.user.serviceName
+    def openOn = uicomponent.appRes("CloudFileViewer.event.OpenOn")
+
+%>
+<div id="CloudFileViewer" file-open-on="${openOn} ${serviceName}" style="height: 100%; ">
+<%
+		def numberOfPages = uicomponent.numberOfPages
+
+	  // can be null if document cannot be converted to PDF (e.g. office manager stopped)
+		def pdfLink = uicomponent.pdfLink
+			
+		if (pdfLink && numberOfPages > 0) {
+			def title = ContentReader.getXSSCompatibilityContent(file.title)
+			
+			// FYI this link already contains current page index, rotation and scale
+			def pageImageLink = uicomponent.pageImageLink
+					
+%>    
+	<div class="UIPDFViewerContainer">   
+		<div class="PDFViewerBar ClearFix">
+			<div class="ControlButton" rel="tooltip" data-placement="bottom" title="<%=uicomponent.appRes("PDFViewer.label.previousPage")%>">
+				<a href="<%=uicomponent.event("PreviousPage")%>"><div class="ButtonBack"><span></span></div></a>
+			</div>
+			<div class="ControlButton">
+				<div class="Lable"><%=uicomponent.appRes("PDFViewer.label.page")%></div>
+			</div>
+			<div class="ControlButton" id="PageControl">
+			  <a href="<%=uicomponent.event("GotoPage")%>" id="GotoPage"></a>
+				<div class="PageNumber"><%uiform.renderField(uicomponent.getChildById("pageNumber"))%></div>
+			</div>
+			<div class="ControlButton">
+				<div class="Lable"><%=uicomponent.appRes("PDFViewer.label.of")%> $numberOfPages</div>
+			</div>
+			<div class="ControlButton" rel="tooltip" data-placement="bottom" title="<%=uicomponent.appRes("PDFViewer.label.nextPage")%>">
+				<a href="<%=uicomponent.event("NextPage")%>">
+				  <div class="ButtonNext"><span></span></div>
+				</a>
+			</div>
+			<div class="ControlButton">
+				<div class="SeparatorLine"><span></span></div>
+			</div>
+			<div class="ControlButton" rel="tooltip" data-placement="bottom" title="<%=uicomponent.appRes("PDFViewer.label.zoomOutPage")%>">
+				<a href="<%=uicomponent.event("ZoomOutPage")%>">
+				  <div class="ZoomOut"><span></span></div>
+				</a>
+			</div>
+			<div class="ControlButton" rel="tooltip" data-placement="bottom" title="<%=uicomponent.appRes("PDFViewer.label.zoomInPage")%>">
+				<a href="<%=uicomponent.event("ZoomInPage")%>">
+				  <div class="ZoomIn"><span></span></div>
+				</a>
+			</div>
+			<div class="ControlButton">
+			   <div class="selectbox"><%uiform.renderField(uicomponent.getChildById("scalePage"))%></div>
+			</div>
+			<div class="ControlButton" rel="tooltip" data-placement="bottom" title="<%=uicomponent.appRes("PDFViewer.label.rotateLeft")%>">
+				<a href="<%=uicomponent.event("RotateLeftPage")%>">
+				  <div class="RotateLeft"><span></span></div>
+				</a>
+			</div>
+			<div class="ControlButton" rel="tooltip" data-placement="bottom" title="<%=uicomponent.appRes("PDFViewer.label.rotateRight")%>">
+				<a href="<%=uicomponent.event("RotateRightPage")%>"><div class="RotateRight"><span></span></div></a>
+			</div>
+			<div class="ControlButton" rel="tooltip" data-placement="bottom" title="<%=uicomponent.appRes("PDFViewer.label.viewInfor")%>">
+				<div class="InfoIcon" onclick="javascript:eXo.ecm.ECMUtils.showDocumentInformation(this, event);"><span></span></div>
+			</div>
+			<div class="DownLoadIcon"><a href="$pdfLink"><%=uicomponent.appRes("File.view.label.download")%></a></div>
+		</div>
+		<div class="InfoPopup" id="metadatas" style="display: none; position: absolute;">
+			<div class="Metadata"><span class="metaKey"><%=uicomponent.appRes("PDFViewer.metadata.fileName")%></span>: <span class="metaValue">$title</span></div>
+		<%	def metadatas = uicomponent.fileMetadata 
+				for(key in metadatas.keySet()) {%>
+				<div class="Metadata"><span class="metaKey"><%=uicomponent.appRes("PDFViewer.metadata." + key)%>: </span><span class="metaValue"><%=metadatas.get(key)%></span></div>
+		<%	} %>
+		</div>
+		<div class="PDFViewerContent">
+	  	<div class="ImageView" style="overflow-x:auto; overflow-y:hidden" id ="pdf_viewer_image" name="pdf_viewer_image">
+			  <a href="$pageImageLink" target="_blank" style="display:inline-block" rel="tooltip" data-placement="bottom" title="<%=uicomponent.appRes("PDFViewer.label.viewFullPage")%>">
+			  	<img src="$pageImageLink" />
+			  </a>
+			</div>
+		</div>
+  </div>
+<%  } else { %>	
+	<div class="uiUnEditable clearfix">
+	  <div class="iconContainer">
+	    <i class="<%=Utils.getNodeTypeIcon(currentNode, "uiIcon64x64")%>"></i>
+	  </div>
+	  <div class="detailContainer">
+	    <h4><%=uicomponent.appRes("File.view.label.not-viewable")%></h4>
+	    <a class="btn btn-primary" href="$file.previewLink"><%=uicomponent.appRes("File.view.label.download")%></a>
+	  </div>
+	</div>
+<%  }
+  } else { %>
+	<p>Cannot load cloud file viewer. Refresh the page.</p>
+<%}%>
+</div>
+<%uiform.end()%>		
+

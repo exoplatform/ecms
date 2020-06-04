@@ -7,6 +7,7 @@ export function getSpaceById(id) {
       return resp.json();
     }
   }).catch(e => {
+    log(`Error getting space: ${e.errorMessage ? e.errorMessage : e.errorCode}`);
     throw new Error(`Error getting space with id ${e}`);
   });
 }
@@ -14,13 +15,22 @@ export function getSpaceById(id) {
 export function fetchFoldersAndFiles(currentDrive, workspace, parentPath) {
   return fetch(`/portal/rest/managedocument/getFoldersAndFiles/?driveName=${currentDrive}&workspaceName=${workspace}&currentFolder=${parentPath}`,
     {})
-    .then(response => response.text())
+    .then(response => { 
+      if (response.ok) { 
+        return response.text(); 
+      } else { 
+        return response.json().then(error => {
+          log(`Error get data: ${error.errorMessage ? error.errorMessage : error.errorCode}`);
+          throw new Error(error.errorMessage ? error.errorMessage : error.errorCode);
+        });
+      }})
     .then(xmlStr => (new window.DOMParser()).parseFromString(xmlStr, 'text/xml'))
     .then(xml => {
       if (xml) {
         return xml;
       }
     }).catch(e => {
+      log(`Error get data: ${e.errorMessage ? e.errorMessage : e.errorCode}`);
       throw new Error(`Error getting folders and files of the current path ${e}`);
     });
 }
@@ -28,39 +38,69 @@ export function fetchFoldersAndFiles(currentDrive, workspace, parentPath) {
 export function getDrivers() {
   return fetch('/portal/rest/wcmDriver/getDrivers',
     {})
-    .then(response => response.text())
+    .then(response => {
+      if (response.ok) { 
+        return response.text(); 
+      } else { 
+        return response.json().then(error => {
+          log(`Error get data: ${error.errorMessage ? error.errorMessage : error.errorCode}`);
+          throw new Error(error.errorMessage ? error.errorMessage : error.errorCode);
+        });
+      }
+    })
     .then(xmlStr => (new window.DOMParser()).parseFromString(xmlStr, 'text/xml'))
     .then(xml => {
       if (xml) {
         return xml;
       }
     }).catch(e => {
+      log(`Error get drives data: ${e.errorMessage ? e.errorMessage : e.errorCode}`);
       throw new Error(`Error getting drivers ${e}`);
     });
 }
 
 export function createFolder(currentDrive, workspace, parentPath, newFolderName) {
   return fetch(`/portal/rest/managedocument/createFolder?driveName=${currentDrive}&workspaceName=${workspace}&currentFolder=${parentPath}&folderName=${newFolderName}`, {})
-    .then(response => response.text())
+    .then(response => {
+      if (response.ok) { 
+        return response.text(); 
+      } else { 
+        return response.json().then(error => {
+          log(`Error post data: ${error.errorMessage ? error.errorMessage : error.errorCode}`);
+          throw new Error(error.errorMessage ? error.errorMessage : error.errorCode);
+        });
+      }
+    })
     .then(xmlStr => (new window.DOMParser()).parseFromString(xmlStr, 'text/xml'))
     .then(xml => {
       if (xml) {
         return xml;
       }
     }).catch(e => {
+      log(`Error creating folder: ${e.errorMessage ? e.errorMessage : e.errorCode}`);
       throw new Error(`Error creating a new folder ${e}`);
     });
 }
 
 export function deleteFolderOrFile(currentDrive, workspace, itemPath) {
   return fetch(`/portal/rest/managedocument/deleteFolderOrFile/?driveName=${currentDrive}&workspaceName=${workspace}&itemPath=${itemPath}`, {})
-    .then(response => response.text())
+    .then(response => {
+      if (response.ok) { 
+        return response.text(); 
+      } else { 
+        return response.json().then(error => {
+          log(`Error delete data: ${error.errorMessage ? error.errorMessage : error.errorCode}`);
+          throw new Error(error.errorMessage ? error.errorMessage : error.errorCode);
+        });
+      }
+    })
     .then(xmlStr => (new window.DOMParser()).parseFromString(xmlStr, 'text/xml'))
     .then(xml => {
       if (xml) {
         return xml;
       }
     }).catch(e => {
+      log(`Error deleting the folder: ${e.errorMessage ? e.errorMessage : e.errorCode}`);
       throw new Error(`Error deleting the folder or the file ${e}`);
     });
 }
@@ -74,7 +114,42 @@ export function renameFolder(pathFolder,newTitle) {
       return resp.ok;
     }
   }).catch(e => {
+    log(`Error rename folder: ${e.errorMessage ? e.errorMessage : e.errorCode}`);
     throw new Error(`Error rename this folder ${e}`);
   });
 
+}
+
+export function log(msg, err) {
+  const logPrefix = '[attachmentsSelector] ';
+  if (typeof console !== 'undefined' && typeof console.log !== 'undefined') { // eslint-disable-line no-console
+    const isoTime = `--${new Date().toISOString()}`;
+    let msgLine = msg;
+    if (err) {
+      msgLine += '. Error: ';
+      if (err.name || err.message) {
+        if (err.name) {
+          msgLine += `[${err.name}]`;
+        }
+        if (err.message) {
+          msgLine += err.message;
+        }
+      } else {
+        msgLine +=
+          typeof err === 'string'
+            ? err
+            : JSON.stringify(err) + (err.toString && typeof err.toString === 'function' ? `; ${err.toString()}` : '');
+      }
+
+      console.log(logPrefix + msgLine + isoTime); // eslint-disable-line no-console
+      if (typeof err.stack !== 'undefined') {
+        console.log(err.stack); // eslint-disable-line no-console
+      }
+    } else {
+      if (err !== null && typeof err !== 'undefined') {
+        msgLine += `. Error: ${err}`;
+      }
+      console.log(logPrefix + msgLine + isoTime); // eslint-disable-line no-console
+    }
+  }
 }

@@ -20,6 +20,7 @@ package org.exoplatform.services.cms;
  * @author benjaminmestrallet
  */
 public interface BasePath {
+  
   public static final String CMS_PATH = "cmsPath";
   public static final String CMS_TEMPLATES_PATH = "templatesPath";
   public static final String CMS_HOME_PATH = "homePath";
@@ -44,6 +45,7 @@ public interface BasePath {
   public static final String ECM_ACTION_SCRIPTS = "ecmActionScripts" ;
   public static final String ECM_INTERCEPTOR_SCRIPTS = "ecmInterceptorScripts" ;
   public static final String ECM_WIDGET_SCRIPTS = "ecmWidgetScripts" ;
-
   public static final String TRASH_PATH = "newDocumentsTrashPath";
+  public static final String CMS_USER_PUBLIC_ALIAS = "userPublic";
+  public static final String CMS_USER_PRIVATE_ALIAS = "userPrivate";
 }
