@@ -668,7 +668,7 @@ public class DocumentServiceImpl implements DocumentService {
           } catch (DocumentEditorProviderNotFoundException e) {
             LOG.error("Cannot find {} editor provider. {}", previousProvider, e.getMessage());
           } catch (Exception e) {
-            LOG.error("Cannot execute last editor closed handler", e.getMessage());
+            LOG.error("Cannot execute last editor closed handler", e);
           }
         } else if (previousProvider == null && provider != null) {
           try {

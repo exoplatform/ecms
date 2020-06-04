@@ -3,6 +3,8 @@ package org.exoplatform.wcm.connector.collaboration.cometd;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -342,11 +344,29 @@ public class CometdDocumentsService implements Startable {
           String provider = removedClient.getProvider();
           String workspace = removedClient.getWorkspace();
           if (editorsContext.getOpenedEditorsCount(fileId, provider) == 0) {
-            service.setCurrentDocumentProvider(fileId, workspace, null);
-            service.sendLastEditorClosedEvent(fileId, provider);
-            if (LOG.isDebugEnabled()) {
-              LOG.debug("Last editor closed. Provider" + provider + ", workspace: " + removedClient.getWorkspace() + ", fileId:"
-                  + fileId + " opened");
+            try {
+              DocumentEditorProvider editorProvider = documentService.getEditorProvider(provider);
+              new Timer().schedule(new TimerTask() {
+                @Override
+                public void run() {
+                  try {
+                    String currentProvider = documentService.getCurrentDocumentProvider(fileId, workspace);
+                    if (currentProvider != null && editorsContext.getOpenedEditorsCount(fileId, provider) == 0) {
+                      service.setCurrentDocumentProvider(fileId, workspace, null);
+                      service.sendLastEditorClosedEvent(fileId, provider);
+                      if (LOG.isDebugEnabled()) {
+                        LOG.debug("Last editor closed. Provider" + provider + ", workspace: " + removedClient.getWorkspace()
+                            + ", fileId:" + fileId);
+                      }
+                    }
+                  } catch (RepositoryException e) {
+                    LOG.error("Cannot reset current editor provider for fileId: " + fileId + " workspace: " + workspace, e);
+                    return;
+                  }
+                }
+              }, editorProvider.getEditingFinishedDelay());
+            } catch (DocumentEditorProviderNotFoundException e) {
+              LOG.error("Cannot find {} editor provider. {}", provider, e.getMessage());
             }
           }
         }
@@ -638,7 +658,7 @@ public class CometdDocumentsService implements Startable {
         });
       }
     }
-    
+
     /**
      * Sets the current document provider.
      *
@@ -663,7 +683,6 @@ public class CometdDocumentsService implements Startable {
         }
       });
     }
-    
 
     /**
      * Find or create user identity.

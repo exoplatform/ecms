@@ -268,9 +268,25 @@ public class DocumentEditorProviderImpl implements DocumentEditorProvider {
   }
   
 
+  /**
+   * On first editor opened.
+   *
+   * @param fileId the file id
+   * @param workspace the workspace
+   */
   @Override
   public void onFirstEditorOpened(String fileId, String workspace) {
     editor.onFirstEditorOpened(fileId, workspace);
+  }
+  
+  /**
+   * Gets the editing finished delay.
+   *
+   * @return the editing finished delay
+   */
+  @Override
+  public long getEditingFinishedDelay() {
+    return editor.getEditingFinishedDelay();
   }
 
   /**
@@ -378,6 +394,5 @@ public class DocumentEditorProviderImpl implements DocumentEditorProvider {
   public Class<? extends DocumentEditor> getEditorClass() {
     return editor.getClass();
   }
-
 
 }
