@@ -347,7 +347,7 @@
             '</div>';
         }
         html += '<div class="showComments-lg">' +
-            '<a><i class="uiIconComment uiIconWhite hiddenComment"></i>&nbsp;${UIActivity.comment.showComment}</a>' +
+            '<a><i class="uiIconComment uiIconWhite hiddenComment"></i>&nbsp;${UIActivity.comment.commentsLabel}</a>' +
             '</div>' +
             '<div class="openBtn">' +
             '<a href="' + this.settings.doc.openUrl + '"><i class="uiIconGotoFolder uiIconWhite"></i>&nbsp;${UIActivity.comment.openInDocuments}</a>' +
@@ -460,9 +460,11 @@
                 '</div>';
                 if (!this.settings.showComments) {
                   html += '<div class="fileName" data-container="body" rel="tooltip" data-placement="top" title="' + documentPreview.settings.doc.title + '">' +
-                      '<div class="ellipsis">' + documentPreview.settings.doc.title + '</div>' +
-                      ((documentPreview.settings.version && documentPreview.settings.version.number) ? ('<div class="label primary fileVersion"' + (documentPreview.settings.doc.openUrl ? 'onclick="window.location.href=\'' + documentPreview.settings.doc.openUrl + '&versions=true\'"' : "") + '>V' + documentPreview.settings.version.number + '</div>') : '') +
-                      '</div>';
+                      '<div class="ellipsis">' + documentPreview.settings.doc.title + '</div>';
+                  if (documentPreview.settings.version && (documentPreview.settings.version.number != 0)) {
+                    html +='<div class="label primary fileVersion"' + (documentPreview.settings.doc.openUrl ? 'onclick="window.location.href=\'' + documentPreview.settings.doc.openUrl + '&versions=true\'"' : "") + '>V' + documentPreview.settings.version.number + '</div>';
+                  }
+                  html +='</div>';
                 }
                 '<!-- put vote area here -->'
                 html += '<div class="previewBtn dropup">' +
@@ -483,7 +485,7 @@
                       '<a><i class="uiIconComment uiIconWhite"></i>&nbsp;${UIActivity.comment.showComment}</a>' +
                       '</div>' +
                       '<div class="showComments-lg">' +
-                      '<a><i class="uiIconComment uiIconWhite hiddenComment"></i>&nbsp;${UIActivity.comment.showComment}</a>' +
+                      '<a><i class="uiIconComment uiIconWhite hiddenComment"></i>&nbsp;${UIActivity.comment.commentsLabel}</a>' +
                       '</div>';
                 }
         if(documentPreview.settings.doc && documentPreview.settings.doc.breadCrumb) {
@@ -1226,7 +1228,7 @@
 
   // Resize Event
   var resizeEventHandler = function() {
-    var pdfDisplayAreaHeight = window.innerHeight - 143 - ((documentPreview.settings.doc.fileInfo || documentPreview.settings.doc.breadCrumb) ? 55 : 0);
+    var pdfDisplayAreaHeight = window.innerHeight - 50 - ((documentPreview.settings.doc.fileInfo || documentPreview.settings.doc.breadCrumb) ? 55 : 0);
     var $uiDocumentPreview = $('#uiDocumentPreview');
 
     // Show empty preview message
