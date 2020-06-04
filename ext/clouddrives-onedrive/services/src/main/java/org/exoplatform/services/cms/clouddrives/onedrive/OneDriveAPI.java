@@ -305,13 +305,18 @@ public class OneDriveAPI {
         OneDriveTokenResponse oneDriveTokenResponse = gson.fromJson(responseBody, OneDriveTokenResponse.class);
         if (oneDriveTokenResponse.getToken() != null && !oneDriveTokenResponse.getToken().isEmpty()) {
           return oneDriveTokenResponse;
+        } else {
+          LOG.error("Cannot read access token for clientId: {}, token: {}, refresh token: {}, scope: {}",
+                   clientId,
+                   oneDriveTokenResponse.getToken(),
+                   oneDriveTokenResponse.getRefreshToken(),
+                   oneDriveTokenResponse.getScope());
         }
       }
     } else {
-      LOG.error("failed to get access token");
+      LOG.error("Cannot get access token: empty response for client: {}, grant_type: {}", clientId, grantType);
     }
     throw new OneDriveException("Error getting access token for clientId " + clientId + ", refresh token " + refreshToken);
-
   }
 
   /**
