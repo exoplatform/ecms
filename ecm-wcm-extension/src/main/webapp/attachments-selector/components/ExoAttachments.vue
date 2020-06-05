@@ -439,6 +439,7 @@ export default {
         if (this.value[i].name === this.destinationFileName){
           this.value[i].pathDestinationFolderForFile = folder;
           this.value[i].destinationFolder = pathDestinationFolder;
+          // TODO: get 'isPublic' property of file from rest, now 'isPublic' assigned to 'isPublic' property of destination folder
           this.value[i].isPublic = isPublic;
         }
       }
