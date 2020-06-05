@@ -86,6 +86,12 @@
     </dependency>
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
+      <artifactId>ecms-core-webui-clouddrives</artifactId>
+      <version>${project.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.exoplatform.ecms</groupId>
       <artifactId>ecms-core-webui-explorer</artifactId>
       <version>${project.version}</version>
       <scope>provided</scope>
@@ -112,6 +118,32 @@
       <groupId>org.exoplatform.ecms</groupId>
       <artifactId>ecms-ext-authoring-webui</artifactId>
       <version>${project.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.exoplatform.ecms</groupId>
+      <artifactId>ecms-ext-gdrive-services</artifactId>
+      <version>${project.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.exoplatform.ecms</groupId>
+      <artifactId>ecms-ext-gdrive-webapp</artifactId>
+      <version>${project.version}</version>
+      <type>war</type>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.exoplatform.ecms</groupId>
+      <artifactId>ecms-ext-onedrive-services</artifactId>
+      <version>${project.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.exoplatform.ecms</groupId>
+      <artifactId>ecms-ext-onedrive-webapp</artifactId>
+      <version>${project.version}</version>
+      <type>war</type>
       <scope>provided</scope>
     </dependency>
     <dependency>
@@ -157,6 +189,13 @@
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
       <artifactId>ecms-apps-portlet-administration</artifactId>
+      <version>${project.version}</version>
+      <type>war</type>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.exoplatform.ecms</groupId>
+      <artifactId>ecms-apps-portlet-clouddrives</artifactId>
       <version>${project.version}</version>
       <type>war</type>
       <scope>provided</scope>

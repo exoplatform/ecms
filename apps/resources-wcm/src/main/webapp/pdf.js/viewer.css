@@ -448,7 +448,8 @@ body {
 
 #toolbarViewerLeft input{
 	width: 36px;
-	text-align: right;
+    text-align: center;
+    font-size: 12px !important;
 	margin-bottom: 0;
     min-height: 27px!important;
 }

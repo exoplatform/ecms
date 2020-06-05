@@ -19,6 +19,8 @@
 # Maven 
 target/
 pom.xml.versionsBackup
+# Maven Shade plugin file 
+dependency-reduced-pom.xml
 
 # IntelliJ project files 
 *.iml
@@ -39,6 +41,9 @@ bin/
 .settings/
 .classpath
 .project
+
+# vsCode settings
+.vscode
 
 # Bin
 bin/

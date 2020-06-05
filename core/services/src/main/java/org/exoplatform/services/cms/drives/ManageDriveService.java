@@ -26,13 +26,13 @@ import java.util.Set;
  */
 public interface ManageDriveService {
   
-  public static String COLLABORATION_DRIVE = "Collaboration";
+  static String COLLABORATION_DRIVE = "Collaboration";
 
   /**
    * Get Drive name which point to root folder of default workspace
    * @return String Name of drive.
    */
-  public String getDriveOfDefaultWorkspace() throws Exception;
+  String getDriveOfDefaultWorkspace() throws Exception;
 
   /**
    * Register a new drive to workspace or update if the drive is existing
@@ -56,7 +56,7 @@ public interface ManageDriveService {
    * @param allowNodeTypesOnTree
    * @throws Exception
    */
-  public void addDrive(String name,
+   void addDrive(String name,
                        String workspace,
                        String permissions,
                        String homePath,
@@ -76,7 +76,7 @@ public interface ManageDriveService {
    * @return  DriveData with specified drive name and repository
    * @throws Exception
    */
-  public DriveData getDriveByName(String driveName) throws Exception;
+  DriveData getDriveByName(String driveName) throws Exception;
 
   /**
    * Return the list of DriveData
@@ -87,14 +87,14 @@ public interface ManageDriveService {
    * @see DriveData
    * @throws Exception
    */
-  public List<DriveData> getAllDriveByPermission(String permission) throws Exception;
+  List<DriveData> getAllDriveByPermission(String permission) throws Exception;
 
   /**
    * Remove drive with specified drive name and repository
    * @param driveName  drive name
    * @throws Exception
    */
-  public void removeDrive(String driveName) throws Exception;
+  void removeDrive(String driveName) throws Exception;
 
   /**
    * This method will look up in all workspaces of current repository to find DriveData
@@ -103,14 +103,14 @@ public interface ManageDriveService {
    * @return list of DriveData with specified repository
    * @throws Exception
    */
-  public List<DriveData> getAllDrives(boolean withVirtualDrives) throws Exception;
+  List<DriveData> getAllDrives(boolean withVirtualDrives) throws Exception;
 
   /**
    * This method will look up in all workspaces of current repository to find DriveData
    * @return list of DriveData with specified repository
    * @throws Exception
    */
-  public List<DriveData> getAllDrives() throws Exception;
+  List<DriveData> getAllDrives() throws Exception;
 
   /**
    * This method will check to make sure the view is not in used before remove this view
@@ -118,14 +118,14 @@ public interface ManageDriveService {
    * @return the status of current view is in used or not
    * @throws Exception
    */
-  public boolean isUsedView(String viewName) throws Exception;
+  boolean isUsedView(String viewName) throws Exception;
 
   /**
    * Register all drive plugins
    *
    * @throws Exception
    */
-  public void init() throws Exception;
+  void init() throws Exception;
 
   /**
    * Get all drives by user roles
@@ -134,7 +134,7 @@ public interface ManageDriveService {
    * @return list of drives
    * @throws Exception
    */
-  public List<DriveData> getDriveByUserRoles(String userId, List<String> roles) throws Exception;
+  List<DriveData> getDriveByUserRoles(String userId, List<String> roles) throws Exception;
 
   /**
    * Get all main drives.
@@ -144,7 +144,7 @@ public interface ManageDriveService {
    * @return list of drives
    * @throws Exception
    */
-  public List<DriveData> getMainDrives(String userId, List<String> userRoles) throws Exception;
+  List<DriveData> getMainDrives(String userId, List<String> userRoles) throws Exception;
 
   /**
    * Get all personal drives.
@@ -153,7 +153,7 @@ public interface ManageDriveService {
    * @return list of drives
    * @throws Exception
    */
-  public List<DriveData> getPersonalDrives(String userId) throws Exception;
+  List<DriveData> getPersonalDrives(String userId) throws Exception;
 
   /**
    * Get all group drives
@@ -162,43 +162,62 @@ public interface ManageDriveService {
    * @return list of drives
    * @throws Exception
    */
-  public List<DriveData> getGroupDrives(String userId, List<String> userRoles) throws Exception;
+  List<DriveData> getGroupDrives(String userId, List<String> userRoles) throws Exception;
 
   /**
-   * Get the Groups drive
-   * @return The Groups drive
+   * Get the Groups drive template.
+   *
+   * @return the group drive template
    */
-  public DriveData getGroupDriveTemplate();
+  DriveData getGroupDriveTemplate();
+  
+  /**
+   * Gets the group drive.
+   *
+   * @param groupId the group ID in organization service
+   * @return the group drive or <code>null</code> if group drive cannot be found
+   * @throws Exception the exception
+   */
+  DriveData getGroupDrive(String groupId) throws Exception;
+  
+  /**
+   * Gets the user private drive.
+   *
+   * @param userId the user ID in organization service.
+   * @return the user drive or <code>null</code> if private drive cannot be found
+   * @throws Exception the exception
+   */
+  DriveData getUserDrive(String userId) throws Exception;
 
   /**
-   * Check if a drive is vitual(Group Drive Template)
+   * Check if a drive is virtual (Group Drive Template)
    * @param driveName  the string contain the drive name
    * @return true: is Virtual Drive, false: not is Virtual Drive
    */
-  public boolean isVitualDrive(String driveName);
+  boolean isVitualDrive(String driveName);
 
   /**
-   * Clear all drives cache
+   * Clear all drives cache.
    */
-  public void clearAllDrivesCache();
+  void clearAllDrivesCache();
 
   /**
-   * Clear group drives cache
+   * Clear group drives cache.
    * @param userId User name of current user
    */
-  public void clearGroupCache(String userId);
+  void clearGroupCache(String userId);
 
   /**
    * Inform when have new role added
    * @return Boolean
    */
-  public boolean newRoleUpdated();
+  boolean newRoleUpdated();
 
   /**
    * Set the status of new added role
    * @param newRoleUpdated
    */
-  public void setNewRoleUpdated(boolean newRoleUpdated);
+  void setNewRoleUpdated(boolean newRoleUpdated);
 
   /**
    * Get deleted drive names.
@@ -206,5 +225,22 @@ public interface ManageDriveService {
    * @return list of deleted drive names
    * @throws Exception
    */
-  public Set<String> getDeletedDriveNames() throws Exception;
+  Set<String> getDeletedDriveNames() throws Exception;
+  
+  /**
+   * Checks is it a user drive.
+   *
+   * @param drive the drive
+   * @return true, if it is a user drive, false otherwise
+   */
+  boolean isUserDrive(DriveData drive);
+  
+  /**
+   * Checks is it a group drive.
+   *
+   * @param drive the drive
+   * @return true, if it is a group drive, false otherwise
+   */
+  boolean isGroupDrive(DriveData drive);
+
 }

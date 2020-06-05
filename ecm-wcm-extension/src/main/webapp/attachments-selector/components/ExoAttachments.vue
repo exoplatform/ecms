@@ -10,8 +10,13 @@
         </a>
         <span class="attachmentsTitle">{{ drawerTitle }}</span>
         <a class="attachmentsCloseIcon" @click="toggleAttachmentsDrawer()">×</a>
+        <v-progress-linear :active="cloudDriveConnecting" absolute bottom indeterminate></v-progress-linear>
       </div>
       <div :class="showDocumentSelector? 'serverFiles' : 'attachments'" class="content">
+        <div v-show="!showDocumentSelector && privateFilesAttached" class="alert alert-info attachmentsAlert">
+          <span>{{ $t('attachments.alert.personalFiles') }}</span>
+          <span>{{ $t('attachments.alert.everyoneAvailable') }}</span>
+        </div>
         <div v-show="!showDocumentSelector" class="attachmentsContent">
           <div class="multiploadFilesSelector">
             <div id="DropFileBox" ref="dropFileBox" class="dropFileBox">
@@ -36,7 +41,8 @@
                 </div>
                 <div class="lastContent">
                   <a title="Select on server" class="uploadButton" href="#" rel="tooltip" data-placement="bottom" @click="toggleServerFileSelector()">
-                    <i class="uiIconFolderSearch uiIcon32x32LightGray"></i>
+                    <i class="uiIcon32x32FolderDefault uiIcon32x32LightGray"></i>
+                    <v-icon color="#fff" x-small class="iconCloud">cloud</v-icon>
                     <span class="text colorText">{{ $t('attachments.drawer.existingUploads') }}</span>
                   </a>
                 </div>
@@ -129,7 +135,14 @@
             </div>
           </div>
         </div>
-        <exo-folders-files-selector v-if="showDocumentSelector && !showDestinationFolder && !showDestinationFolderForFile" :attached-files="value" :space-id="spaceId" @itemsSelected="toggleServerFileSelector" @cancel="toggleServerFileSelector()"></exo-folders-files-selector>
+        <exo-folders-files-selector 
+          v-if="showDocumentSelector && !showDestinationFolder && !showDestinationFolderForFile" 
+          :attached-files="value" 
+          :space-id="spaceId" 
+          @itemsSelected="toggleServerFileSelector"
+          @cancel="toggleServerFileSelector()" 
+          @changeConnectingStatus="updateCloudConnecting"
+        ></exo-folders-files-selector>
         <exo-folders-files-selector v-if="showDocumentSelector && showDestinationFolder && !showDestinationFolderForFile" :mode-folder-selection="showDestinationFolder" @itemsSelected="addDestinationFolder" @cancel="toggleServerFileSelector()"></exo-folders-files-selector>
         <exo-folders-files-selector v-if="showDocumentSelector && showDestinationFolderForFile" :mode-folder-selection="showDestinationFolderForFile" :mode-folder-selection-for-file="modeFolderSelectionForFile" @itemsSelected="addDestinationFolderForFile" @cancel="toggleServerFileSelector()"></exo-folders-files-selector>
       </div>
@@ -194,6 +207,8 @@ export default {
       modeFolderSelectionForFile: false,
       showAttachmentsDrawer: false,
       displayMessageDestinationFolder: true,
+      cloudDriveConnecting: false,
+      privateFilesAttached: false
     };
   },
   watch: {
@@ -231,6 +246,7 @@ export default {
             }
           }
         }
+        this.privateFilesAttached = this.value.some(file => file.isPublic === false);
       }
     }
   },
@@ -286,7 +302,8 @@ export default {
           uploadId: this.getNewUploadId(),
           uploadProgress: 0,
           destinationFolder: this.pathDestinationFolder,
-          pathDestinationFolderForFile:''
+          pathDestinationFolderForFile:'',
+          isPublic: false
         });
       });
 
@@ -416,11 +433,12 @@ export default {
         this.showDestinationFolder = false;
       }
     },
-    addDestinationFolderForFile(pathDestinationFolder, folder){
+    addDestinationFolderForFile(pathDestinationFolder, folder, isPublic){
       for (let i =0 ;i< this.value.length;i++){
         if (this.value[i].name === this.destinationFileName){
           this.value[i].pathDestinationFolderForFile = folder;
-          this.value[i].destinationFolder = pathDestinationFolder ;
+          this.value[i].destinationFolder = pathDestinationFolder;
+          this.value[i].isPublic = isPublic;
         }
       }
       this.pathDestinationFolder = '';
@@ -478,6 +496,9 @@ export default {
           break;
         }
       }
+    },
+    updateCloudConnecting(status) {
+      this.cloudDriveConnecting = status;
     }
   }
 };

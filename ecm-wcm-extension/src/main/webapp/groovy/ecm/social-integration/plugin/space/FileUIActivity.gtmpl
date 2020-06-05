@@ -42,6 +42,8 @@ import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
 
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.wcm.connector.collaboration.OpenInOfficeConnector;
+import org.exoplatform.wcm.ext.component.activity.UILinkUtil;
+
 
 //ECMS import END
 
@@ -100,6 +102,7 @@ public void addActivityTimeLine(String ownerName, String ownerUri, String ownerA
     def activity = uicomponent.getActivity();
     def streamOwner = activity.getStreamOwner();
     def activityContentTitle = Text.unescapeIllegalJcrChars(activity.title);
+    def linkExistsClassName = uicomponent.getLinkSource() ? "linkExists" : "";
 
     def activityStatus = uicomponent.getActivityStatus();
     def activityDeletable = uicomponent.isActivityDeletable();
@@ -301,12 +304,55 @@ public void addActivityTimeLine(String ownerName, String ownerUri, String ownerA
 <% if(uicomponent.getFilesCount() > 0) { %>
 
   <div class="previews Previews${activity.id}">
-    <div class="fileShare">
-<%
+  <div class="fileShare">
 
-int maxToDisplay = 3;
-int filesToDisplay = uicomponent.getFilesCount() > maxToDisplay ? maxToDisplay : uicomponent.getFilesCount();
-
+  <%
+    int maxToDisplay = 3;
+    int filesToDisplay = uicomponent.getFilesCount() > maxToDisplay ? maxToDisplay : uicomponent.getFilesCount();
+    //if link exists
+    filesToDisplay = uicomponent.getLinkSource() && (filesToDisplay != maxToDisplay) ? filesToDisplay+1 : filesToDisplay;
+    if (uicomponent.getLinkSource()){
+      String linkSource = uicomponent.getLinkSource();
+      String linkTitle = uicomponent.getLinkTitle();
+      if (linkTitle == null || linkTitle.equals("")) {
+        linkTitle = UILinkUtil.simpleEscapeHtml(linkSource);
+      }
+      String linkImage = uicomponent.getLinkImage();
+      String linkDescription = UILinkUtil.simpleEscapeHtml(uicomponent.getLinkDescription());
+      //
+      linkTitle = UILinkUtil.simpleEscapeHtml(org.exoplatform.social.service.rest.Util.getDecodeQueryURL(linkTitle));
+      linkSource = UILinkUtil.simpleEscapeHtml(org.exoplatform.social.service.rest.Util.getDecodeQueryURL(linkSource));
+      //
+      def isDefaultPreview = "";
+      if (linkImage == null || linkImage.equals("")) {
+        linkImage = "/eXoSkin/skin/images/system/composer/PostLinks.png";
+        isDefaultPreview = "defaultPreview";
+      }
+      def embedHtml = uicomponent.getEmbedHtml();
+  %>
+  <div class="uiBox roundedBottom introBox linkShare clearfix isPreviewable previewable${filesToDisplay}0 ${linkExistsClassName} ${isDefaultPreview}">
+      <div class="clearfix linkClass">
+      					<% if (embedHtml == null && linkImage.length() != 0) { %>
+                            <div class="linkPreview ${isDefaultPreview}" alt="$linkTitle" style="background-image: url($linkImage);">
+                               <% if (isDefaultPreview) { %>
+                                    <div class="defaultImage" style="background-image: url($linkImage);"></div>
+                               <% } %>
+                               <div class="boxDescription">
+                                 <div class="block">
+                                   <div class="titlePreview"><a target="_blank" href="$linkSource" target="_blank">$linkTitle</a></div>
+                                   <div class="descriptionLink">$linkDescription</div>
+                                   <div class="link" ><a href="$linkSource" target="_blank"><i class="far fa-link"></i> $linkSource</a></div>
+                                 </div>
+                               </div>
+                            </div>
+                            <% } %>
+                            <% if (embedHtml != null) { %>
+      							<div class="EmbedHtml">$embedHtml</div>
+      					<% } %>
+      				</div>
+      				</div><!--end introBox,linkShare-->
+  <%
+  }
 // for each node
 for(def index = 0; index < uicomponent.getFilesCount(); index++) {
     def currentNode = uicomponent.getContentNode(index);
@@ -372,7 +418,10 @@ for(def index = 0; index < uicomponent.getFilesCount(); index++) {
     def breadCrumbSize = docFolderBreadCrumb == null ? 0 : docFolderBreadCrumb.size();
 
     def fileInfo = _ctx.appRes("SocialIntegration.messages.updatedOn") + " " + uicomponent.getDocUpdateDate(currentNode) + " " + _ctx.appRes("SocialIntegration.messages.updatedBy") + " " + StringEscapeUtils.escapeHtml(uicomponent.getDocLastModifier(currentNode)) + " " + (StringUtils.isBlank(size) ? "" : (" - " + size));
-
+    def newIndex = uicomponent.getLinkSource() ? index+1 : index;
+    def previousDoc = newIndex == index ? 1 : 2;
+    def nextDoc = newIndex == index ? 1 : 0;
+    def maxFilesToShow = newIndex == index ? 3 : 2;
     def docPreviewUri = "javascript:require(['SHARED/documentPreview'], \
                            function(documentPreview) { \
                                     documentPreview.init({ \
@@ -405,66 +454,67 @@ for(def index = 0; index < uicomponent.getFilesCount(); index++) {
                                                                 liked: " + uicomponent.isLiked() + ", \
                                                                 likes: " + identityLikesNum + ", \
                                                                 spaceURL: '" + spaceURL + "',  \
-                                                                next: " + ((index + 1 < uicomponent.getFilesCount()) ? ("'#Preview${activity.id}-" + (index + 1) + "'") : "null") + ",  \
-                                                                previous: " + ((index - 1 >= 0) ? ("'#Preview${activity.id}-" + (index - 1) + "'") : "null") + " \
+                                                                next: " + ((newIndex + nextDoc < uicomponent.getFilesCount()) ? ("'#Preview${activity.id}-" + (newIndex + 1) + "'") : "null") + ",  \
+                                                                previous: " + ((newIndex - previousDoc >= 0) ? ("'#Preview${activity.id}-" + (newIndex - 1) + "'") : "null") + " \
                                                             }, \
                                                             version: { \
                                                                 number : "+ version +" \
                                                             }, \
                                                         }) \
                              })";
+
     // END ECMS
 %>
 
-<div id="Preview${activity.id}-$index" class="clearfix isPreviewable previewable${filesToDisplay}${index}" onclick="$docPreviewUri">
+<div id="Preview${activity.id}-$newIndex" class="clearfix isPreviewable previewable${filesToDisplay}${newIndex} ${linkExistsClassName}" onclick="$docPreviewUri">
 <%
-        if (index >= maxToDisplay) { %>
+        if (newIndex >= maxToDisplay) { %>
          </div>
 <%        continue;
     } else if (mimeType != null && mimeType.length() > 0 && fileSize > 0){
                 if(mimeType.startsWith("image") || mimeType.indexOf("icon") >=0){
 %>
-        <div id="MediaContent${activity.id}-$index" class="mediaContent">
+        <div id="MediaContent${activity.id}-$newIndex" class="mediaContent">
     <%
 			        def encodedPath = URLEncoder.encode(currentNode.getPath(), "utf-8");
 			        encodedPath = encodedPath.replaceAll ("%2F", "/");
 			        String thumbnailImage = "/" + portalName + "/" + restContextName + "/thumbnailImage/origin/" + repository + "/" + preferenceWS + encodedPath;
 			        if(mimeType.indexOf("icon") >=0) thumbnailImage = binarySrc;
     %>
-        <img src="$thumbnailImage" onerror="document.getElementById('MediaContent${activity.id}-$index').className += ' NoPreview uiBgdFileImage';document.getElementById('MediaContent${activity.id}-$index').removeChild(this);" />
+        <img src="$thumbnailImage" onerror="document.getElementById('MediaContent${activity.id}-$newIndex').className += ' NoPreview uiBgdFileImage';document.getElementById('MediaContent${activity.id}-$newIndex').removeChild(this);" />
     </div>
                                  <%
                 } else if(org.exoplatform.services.cms.impl.Utils.isSupportThumbnailView(mimeType)){%>
-   <div id="MediaContent${activity.id}-$index" class="mediaContent docTypeContent hovereffect">
+   <div id="MediaContent${activity.id}-$newIndex" class="mediaContent docTypeContent hovereffect">
    <%
                     def iconClass = uicomponent.getDefaultIconClass(index);
 	                def encodedPath = URLEncoder.encode(currentNode.getPath(), "utf-8");
 	                encodedPath = encodedPath.replaceAll ("%2F", "/");
 			        String pdfThumbnailImage = "/" + portalName + "/" + restContextName + "/thumbnailImage/custom/900x900/" + repository + "/" + preferenceWS + encodedPath+ "?version="+ version+"&lastModified="+ lastModified.hashCode();
    %>
-        <img src="$pdfThumbnailImage" onerror="document.getElementById('MediaContent${activity.id}-$index').className += ' NoPreview $iconClass';document.getElementById('MediaContent${activity.id}-$index').removeChild(this);" />
+        <img src="$pdfThumbnailImage" onerror="document.getElementById('MediaContent${activity.id}-$newIndex').className += ' NoPreview $iconClass';document.getElementById('MediaContent${activity.id}-$newIndex').removeChild(this);" />
     </div>
     <%
                 } else if(fileComponent != null) { %>
-     <div id="MediaContent${activity.id}-$index" class="mediaContent PlayerContianer">
+     <div id="MediaContent${activity.id}-$newIndex" class="mediaContent PlayerContianer">
         <% uicontentpresentation.renderUIComponent(fileComponent);%>
      </div>
     <%
                 } else { %>
-     <div id="MediaContent${activity.id}-$index" class="mediaContent uiBgdFile NoPreview">
+     <div id="MediaContent${activity.id}-$newIndex" class="mediaContent uiBgdFile NoPreview">
      </div>
     <%
                 }
               }
-			   if (index == 2 && uicomponent.getFilesCount() > 3) { %>
-			             <a id="LoadMore${activity.id}-$index" class="MediaName LoadMore" href="javascript:void(0)">
+			   if (newIndex == 2 && uicomponent.getFilesCount() > maxFilesToShow) { %>
+			             <a id="LoadMore${activity.id}-$newIndex" class="MediaName LoadMore" href="javascript:void(0)">
     			            <%=_ctx.appRes("SocialIntegration.messages.loadMoreFiles").replace("{0}", String.valueOf(uicomponent.getFilesCount() - maxToDisplay + 1))%>
 			             </a>
 			         </div>
 			<%        continue;
 			    } else { %>
 
-		    <div id="MediaName${activity.id}$index" class="MediaName">
+		    <div id="MediaName${activity.id}$newIndex" class="MediaName">
                 <h4 class="fileName">
                     <div class="fileTitle content">
 	                    <div class="fileNameParentLink" data-container="body" rel="tooltip" data-placement="top" data-original-title="$contentName">
@@ -589,7 +639,7 @@ for(def index = 0; index < uicomponent.getFilesCount(); index++) {
                         <a href="javascript:void(0)" class="subCommentShowAllLink" data-parent-comment="$it.parentCommentId">
                             <%=labelViewAllReplies.replace("{0}", String.valueOf(subCommentSize))%>
                         </a>
-                      </div> 
+                      </div>
                        <%
                    }
               }

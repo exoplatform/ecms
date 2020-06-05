@@ -1,11 +1,14 @@
 <template>
   <div class="serverFiles">
+    <div v-show="connectedMessage" class="alert alert-info attachmentsAlert">
+      <b>{{ $t('attachments.alert.connected') }} {{ connectedMessage }}!</b>{{ $t('attachments.alert.pleaseNote') }}
+    </div>
     <div class="contentHeader">
       <div v-if="!showSearchInput" class="currentDirectory">
         <div class="documents" @click="fetchUserDrives()">
           <i class="uiIconFolder"></i>
           <p class="documents" data-toggle="tooltip" rel="tooltip" data-placement="bottom"
-             data-original-title="Documents">{{ $t('attachments.drawer.documents') }}</p>
+             data-original-title="Documents">{{ $t('attachments.drawer.drives') }}</p>
         </div>
         <div v-if="currentDrive.title" class="currentDrive" @click="openDrive(currentDrive)">
           <span class="uiIconArrowRight"></span>
@@ -35,8 +38,16 @@
       </div>
       <div :class="showSearchInput? 'visible' : ''" class="selectorActions">
         <input id="searchServerAttachments" ref="searchServerAttachments" v-model="searchFilesFolders" type="text" class="searchInput">
-        <a :class="showSearchInput ? 'uiIconCloseServerAttachments' : 'uiIconSearch'" class="uiIconLightGray" @click="showSearchDocumentInput()"></a>
+        <a :class="showSearchInput ? 'uiIconCloseServerAttachments' : 'uiIconFilter'" class="uiIconLightGray" @click="showSearchDocumentInput()"></a>
         <a v-if="modeFolderSelectionForFile || modeFolderSelection" :title="$t('attachments.filesFoldersSelector.button.addNewFOlder.tooltip')" rel="tooltip" data-placement="bottom" class="uiIconLightGray uiIconAddFolder" @click="addNewFolder()"></a>
+      </div>
+      <div v-for="action in attachmentsComposerActions" v-show="!currentDrive.name || currentDrive.name === 'Personal Documents'" :key="action.key" :class="`${action.appClass}Action`" class="actionBox">
+        <div v-if="!modeFolderSelection" class="actionBoxLogo" @click="executeAction(action)">
+          <v-icon v-if="action.iconName" class="uiActionIcon" >{{ action.iconName }}</v-icon>
+          <i v-else :class="action.iconClass" class="uiActionIcon"></i>
+        </div>
+        <component v-dynamic-events="action.component.events" v-if="action.component" v-bind="action.component.props ? action.component.props : {}"
+                   v-model="currentDrive" :is="action.component.name" :ref="action.key"></component>
       </div>
     </div>
 
@@ -46,7 +57,7 @@
       </div>
     </transition>
     <div class="contentBody">
-      <div class="selectionBox">
+      <div v-if="currentDrive.title" class="selectionBox">
         <div v-if="loadingFolders" class="VuetifyApp loader">
           <v-app class="VuetifyApp">
             <v-progress-circular
@@ -61,13 +72,6 @@
           <i class="uiIconEmptyFolder"></i>
           <p>This folder is empty</p>
         </div>
-        <div v-for="driver in filteredDrivers" :key="driver.name" :title="driver.title" class="folderSelection"
-             @click="openDrive(driver)">
-          <a :data-original-title="driver.title" rel="tooltip" data-placement="bottom">
-            <i :class="driver.driveTypeCSSClass" class="uiIconEcms24x24DriveGroup uiIconEcmsLightGray selectionIcon center"></i>
-            <div class="selectionLabel center">{{ driver.title }}</div>
-          </a>
-        </div>
         <div v-for="folder in filteredFolders" :key="folder.id" :id="folder.id" :title="folder.name" :class="folder.type === 'new_folder' ? 'boxOfFolder':''"
              class="folderSelection" @click="openFolder(folder)" @contextmenu="openFolderActionsMenu(folder, $event)">
           <a v-if="folder.type === 'new_folder'" href="javascript:void(0);" class="closeIcon" @mousedown="cancelCreatingNewFolder($event)">
@@ -78,6 +82,7 @@
           <div :class="folder.type === 'new_folder' ? 'boxOfTitle' :''">
             <a :title="folder.title" href="javascript:void(0);" rel="tooltip" data-placement="bottom">
               <i :class="folder.folderTypeCSSClass" class="uiIcon24x24FolderDefault uiIconEcmsLightGray selectionIcon center"></i>
+              <i v-show="folder.isCloudDrive" :class="getFolderIcon(folder)" class="uiIcon-clouddrive"></i>
               <input v-if="folder.type === 'new_folder'" :ref="folder.ref" v-model="newFolderName" type="text" class="newFolderInput  ignore-vuetify-classes" @blur="createNewFolder($event)" @keyup.enter="$event.target.blur()" @keyup.esc="cancelCreatingNewFolder($event)">
               <input v-else-if="renameFolderAction && folder.id === selectedFolder.id" ref="rename" :id="folder.id" v-model="newName" type="text" class="newFolderInput  ignore-vuetify-classes" @blur="saveNewNameFolder()" @keyup.enter="$event.target.blur()" @keyup.esc="cancelRenameNewFolder($event)">
               <div v-else class="selectionLabel center">{{ folder.title }}</div>
@@ -93,9 +98,34 @@
           <exo-attachment-item :file="file"></exo-attachment-item>
         </div>
       </div>
+      <div v-else class="categorizedDrives">
+        <v-list dense flat class="drivesList">
+          <v-list-group value="true" class="categories" eager>
+            <v-list-group v-for="(group, name) in filteredDrivers" :key="name" :ripple="false" sub-group no-action value="true" class="category" active-class="categoryActive">
+              <template v-slot:activator>
+                <v-list-item-content class="categoryContent">{{ name }}</v-list-item-content>
+              </template>
+              <div class="selectionBox">
+                <div 
+                  v-for="driver in group.drives" 
+                  :key="driver.name" 
+                  :title="driver.title" 
+                  :class="{ 'isConnecting': drivesInProgress[driver.title] >= 0 || drivesInProgress[driver.title] <= 100 }" 
+                  class="folderSelection"
+                  @click="openDrive(driver)">
+                  <a :data-original-title="driver.title" rel="tooltip" data-placement="bottom">
+                    <i :class="driver.driveTypeCSSClass" class="uiIconEcms24x24DriveGroup uiIconEcmsLightGray selectionIcon center"></i>
+                    <div class="selectionLabel center">{{ driver.title }}</div>
+                  </a>
+                </div>
+              </div>
+            </v-list-group>
+          </v-list-group>
+        </v-list>
+      </div>
     </div>
     <div class="attachActions">
-      <div v-if="!modeFolderSelection" class="limitMessage">
+      <div v-if="!modeFolderSelection && currentDrive.name" class="limitMessage">
         <span :class="filesCountClass" class="countLimit">
           {{ $t('attachments.drawer.maxFileCountLeft').replace('{0}', filesCountLeft) }}
         </span>
@@ -104,21 +134,22 @@
         <button class="btn btn-primary attach ignore-vuetify-classes btnSelect" type="button" @click="selectDestination()">{{ $t('attachments.drawer.select') }}</button>
         <button class="btn btnCancel" type="button" @click="$emit('cancel')">{{ $t('attachments.drawer.cancel') }}</button>
       </div>
-      <div v-if="!modeFolderSelection" class="buttonActions">
+      <div v-if="!modeFolderSelection && currentDrive.name" class="buttonActions">
         <button class="btn" type="button" @click="$emit('cancel')">{{ $t('attachments.drawer.cancel') }}</button>
         <button :disabled="selectedFiles.length === 0" class="btn btn-primary attach ignore-vuetify-classes" type="button" @click="addSelectedFiles()">{{ $t('attachments.drawer.select') }}</button>
       </div>
     </div>
     <!-- The following bloc is needed in order to display the warning popup -->
     <!--begin -->
-    <exo-modal
+    <!-- Commented as it is't work and unable to close, should be uncommented before merge -->
+    <!-- <exo-modal
       ref="exoModal"
       :ok-label="$t('attachments.filesFoldersSelector.popup.button.ok')"
       :title="$t('attachments.filesFoldersSelector.popup.title')">
       <div class="modal-body">
         <p>{{ popupBodyMessage }}</p>
       </div>
-    </exo-modal>
+    </exo-modal> -->
     <!--end -->
 
     <!-- The following bloc is needed in order to display the confirmation popup -->
@@ -136,8 +167,33 @@
 
 <script>
 import * as attachmentsService from '../attachmentsService.js';
+import { getAttachmentsComposerExtensions, executeExtensionAction } from '../extension';
 
 export default {
+  directives: {
+    DynamicEvents: {
+      bind: function (el, binding, vnode) {
+        const allEvents = binding.value;
+        if (allEvents) {
+          allEvents.forEach((event) => {
+            if (vnode.componentInstance) {
+              // register handler in the dynamic component
+              vnode.componentInstance.$on(event.event, (eventData) => {
+                const param = eventData ? eventData : event.listenerParam;
+                // when the event is fired, the eventListener function is going to be called
+                vnode.context[event.listener](param);
+              });
+            }
+          });
+        }
+      },
+      unbind: function (el, binding, vnode) {
+        if (vnode.componentInstance) {
+          vnode.componentInstance.$off();
+        }
+      },
+    }
+  },
   props: {
     modeFolderSelectionForFile: {
       type: Boolean,
@@ -179,6 +235,8 @@ export default {
       selectedFolderPath : '',
       schemaFolder: '',
       folderDestinationForFile:'',
+      attachmentsComposerActions: [],
+      cloudDriveProgress: null,
       creatingNewFolder: false,
       newFolderName: '',
       currentAbsolutePath: '',
@@ -194,6 +252,8 @@ export default {
       renameFolderAction:false,
       newName:'',
       MESSAGES_DISPLAY_TIME: 5000,
+      drivesInProgress: {},
+      privateDestinationForFile: false
     };
   },
   computed: {
@@ -224,7 +284,22 @@ export default {
         const searchTerm = this.searchFilesFolders.trim().toLowerCase();
         drivers = this.drivers.filter(driver => driver.title.toLowerCase().indexOf(searchTerm) >= 0 );
       }
-      return drivers;
+      const drivesByTypes = { 
+        'My Drives': { drives: [] }, 
+        'My Spaces': { drives: [] }, 
+        'Others': { drives: [] } 
+      };
+      drivers.map(drive => { 
+        if (drive.driverType === 'Personal Drives') {
+          drivesByTypes['My Drives'].drives.push(drive);
+        } else if (drive.path.includes('spaces')) {
+          drivesByTypes['My Spaces'].drives.push(drive);
+        } else if (!drive.path.includes('Trash')) {
+          drivesByTypes['Others'].drives.push(drive);
+        }
+        return drive;
+      });
+      return drivesByTypes;
     },
     filesCountLeft(){
       return this.maxFilesCount - this.selectedFiles.length;
@@ -234,6 +309,14 @@ export default {
     },
     emptyFolderForSelectDestination(){
       return this.folders.length === 0 && this.drivers.length === 0 && !this.loadingFolders;
+    },
+    connectedMessage() {
+      let connectedDrive;
+      for (const key in this.drivesInProgress) {
+        const fullProgress = 100;
+        connectedDrive = this.drivesInProgress[key] >= fullProgress ? key : '';
+      }
+      return connectedDrive;
     }
   },
   watch: {
@@ -259,18 +342,16 @@ export default {
           title: spaceGroupId,
           isSelected: true
         };
+        self.fetchChildrenContents('');
       } else {
-        self.currentDrive = {
-          name: 'Personal Documents',
-          title: 'Personal Documents',
-          isSelected: true
-        };
+        self.currentDrive = {};
+        this.fetchUserDrives();
       }
-      self.fetchChildrenContents('');
     }).catch(() => {
       this.errorMessage= `${this.$t('attachments.fetchFoldersAndFiles.error')}`;
       this.showErrorMessage = true;
     });
+    this.attachmentsComposerActions = getAttachmentsComposerExtensions();
   },
   methods: {
     openFolder: function (folder) {
@@ -291,6 +372,7 @@ export default {
       }
       this.schemaFolder = this.currentDrive.name.concat('/', folder.path);
       this.folderDestinationForFile = folder.title;
+      this.privateDestinationForFile = folder.isPublic;
     },
     openDrive(drive) {
       this.currentAbsolutePath = '';
@@ -315,9 +397,9 @@ export default {
         }
         self.setFoldersAndFiles(rootFolder);
         self.loadingFolders = false;
-      }).catch(() => {
+      }).catch(error => {
         this.loadingFolders = false;
-        this.errorMessage= `${this.$t('attachments.fetchFoldersAndFiles.error')}`;
+        this.errorMessage= `${this.$t('attachments.fetchFoldersAndFiles.error')}. ${error.message ? error.message : ''}`;
         this.showErrorMessage = true;
       });
     },
@@ -411,13 +493,14 @@ export default {
               folderTypeCSSClass: folderTypeCSSClass,
               isSelected: false,
               canRemove: fetchedFolders[j].getAttribute('canRemove') === 'true',
+              isCloudDrive: fetchedFolders[j].getAttribute('isCloudDrive') === 'true' ? true : false,
+              isPublic: fetchedFolders[j].getAttribute('isPublic') === 'true' ? true : false,
+              cloudProvider: fetchedFolders[j].getAttribute('cloudProvider')
             });
           }
         } else if (fetchedDocuments[i].tagName === 'Files') {
           const fetchedFiles = fetchedDocuments[i].childNodes;
           for (let j = 0; j < fetchedFiles.length; j++) {
-            const fileExtension = `${fetchedFiles[j].getAttribute('name').split('.')[1].charAt(0).toUpperCase()}${fetchedFiles[j].getAttribute('name').split('.')[1].substring(1)}`;
-            const fileTypeCSSClass = `uiBgd64x64File${fileExtension}`;
             const idAttribute = fetchedFiles[j].getAttribute('path').split('/').pop();
             const id = fetchedFiles[j].getAttribute('id');
             const selected = this.attachedFiles.some(f => f.id === id);
@@ -427,10 +510,11 @@ export default {
               title: fetchedFiles[j].getAttribute('title'),
               path: this.getRelativePath(fetchedFiles[j].getAttribute('path')),
               size: fetchedFiles[j].getAttribute('size'),
-              fileTypeCSSClass: fileTypeCSSClass,
               idAttribute: idAttribute,
               selected: selected,
-              mimetype: fetchedFiles[j].getAttribute('nodeType')
+              mimetype: fetchedFiles[j].getAttribute('nodeType'),
+              isCloudFile: fetchedFiles[j].getAttribute('isCloudFile') === 'true' ? true : false,
+              isPublic: fetchedFiles[j].getAttribute('isPublic') === 'true' ? true : false
             });
           }
         }
@@ -457,7 +541,8 @@ export default {
               css: fetchedDrivers[j].getAttribute('nodeTypeCssClass'),
               type: 'drive',
               driveTypeCSSClass: driveTypeCSSClass,
-              driverType: driverType
+              driverType: driverType,
+              isCloudDrive: fetchedDrivers[j].getAttribute('isCloudDrive') === 'true' ? true : false
             });
           }
         }
@@ -470,10 +555,17 @@ export default {
         this.folderDestinationForFile = this.currentDrive.name;
       }
       if (this.modeFolderSelectionForFile) {
-        this.$emit('itemsSelected', this.selectedFolderPath, this.folderDestinationForFile);
+        this.$emit('itemsSelected', this.selectedFolderPath, this.folderDestinationForFile, this.privateDestinationForFile);
       } else {
         this.$emit('itemsSelected', this.selectedFolderPath, this.schemaFolder);
       }
+    },
+    executeAction(action) {
+      executeExtensionAction(action, this.$refs[action.key][0]);
+    },
+    setCloudDriveProgress({ progress }) {
+      this.cloudDriveProgress = progress;
+      this.$emit('changeConnectingStatus', progress ? true : false);
     },
     addNewFolder() {
       if (!this.creatingNewFolder) {
@@ -649,6 +741,15 @@ export default {
       } else {
         this.selectedFolderPath = this.driveRootPath.concat(folder.path);
       }
+    },
+    addCloudDrive(drive) { // listen clouddrives 'addDrive' event
+      this.drivers.push(drive); // display connecting drive in 'My Drives' section
+    },
+    changeCloudDriveProgress({ drives }) { // listen clouddrives 'updateDrivesInProgress' event
+      this.drivesInProgress = { ...drives }; // update progress for connecting drive to display that drive is in connection
+    },
+    getFolderIcon(folder) {
+      return `uiIcon-${folder.cloudProvider}`;
     }
   }
 };

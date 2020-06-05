@@ -14,5 +14,7 @@
     <module>authoring</module>
     <module>fastcontentcreator</module>
     <module>webui</module>
+    <module>clouddrives-gdrive</module>
+    <module>clouddrives-onedrive</module>
   </modules>
 </project>

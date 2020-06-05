@@ -134,9 +134,17 @@ public class FileindexingConnector extends ElasticIndexingServiceConnector {
     ExtendedSession session = null;
     try {
       session = (ExtendedSession) WCMCoreUtils.getSystemSessionProvider().getSession("collaboration", repositoryService.getCurrentRepository());
-      Node node = session.getNodeByIdentifier(id);
+      
+      Node node;
+      try {
+        node = session.getNodeByIdentifier(id);
+      } catch(ItemNotFoundException e) {
+        // If node not found we don't index it
+        return null;
+      }
 
-      if(node == null || !node.isNodeType(NodetypeConstant.NT_FILE) || trashService.isInTrash(node) || isInContentFolder(node)) {
+      // If not not a file or trashed or technical node - we skip it
+      if (!node.isNodeType(NodetypeConstant.NT_FILE) || trashService.isInTrash(node) || isInContentFolder(node)) {
         return null;
       }
 
@@ -145,15 +153,15 @@ public class FileindexingConnector extends ElasticIndexingServiceConnector {
       fields.put("repository", ((ManageableRepository) session.getRepository()).getConfiguration().getName());
       fields.put("workspace", session.getWorkspace().getName());
       fields.put("path", node.getPath());
-      if(node.hasProperty(NodetypeConstant.EXO_TITLE)) {
+      if (node.hasProperty(NodetypeConstant.EXO_TITLE)) {
         fields.put("title", node.getProperty(NodetypeConstant.EXO_TITLE).getString());
       } else {
         fields.put("title", node.getName());
       }
-      if(node.hasProperty(NodetypeConstant.EXO_OWNER)) {
+      if (node.hasProperty(NodetypeConstant.EXO_OWNER)) {
         fields.put("author", node.getProperty(NodetypeConstant.EXO_OWNER).getString());
       }
-      if(node.hasProperty("jcr:created")) {
+      if (node.hasProperty("jcr:created")) {
         fields.put("createdDate", String.valueOf(node.getProperty("jcr:created").getDate().getTimeInMillis()));
       }
       if (node.hasProperty("exo:lastModifiedDate")) {
@@ -168,7 +176,7 @@ public class FileindexingConnector extends ElasticIndexingServiceConnector {
       fields.put("version", String .valueOf(VersionHistoryUtils.getVersion(node)));
       
       Node contentNode = node.getNode(NodetypeConstant.JCR_CONTENT);
-      if(contentNode != null) {
+      if (contentNode != null) {
         if (contentNode.hasProperty(NodetypeConstant.JCR_MIMETYPE)) {
           fields.put("fileType", contentNode.getProperty(NodetypeConstant.JCR_MIMETYPE).getString());
         }
@@ -180,7 +188,7 @@ public class FileindexingConnector extends ElasticIndexingServiceConnector {
 
         // Dublin Core metadata
         Map<String, String> dublinCoreMetadata = extractDublinCoreMetadata(contentNode);
-        if(dublinCoreMetadata != null) {
+        if (dublinCoreMetadata != null) {
           fields.putAll(dublinCoreMetadata);
         }
       }
@@ -189,13 +197,11 @@ public class FileindexingConnector extends ElasticIndexingServiceConnector {
       return new Document(TYPE, id, null, new Date(), computePermissions(node), getTags(node,session.getWorkspace().getName()), fields);
     } catch (Exception e ) {
       LOGGER.error("Error while indexing file " + id, e);
-    }
-    finally {
+    } finally {
       if (session != null) {
         session.logout();
       }
     }
-
     return null;
   }
 
