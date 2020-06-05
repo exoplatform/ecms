@@ -122,15 +122,6 @@ public interface DocumentEditor {
    */
   void onLastEditorClosed(String fileId, String workspace);
   
-
-  /**
-   * On first editor opened.
-   *
-   * @param fileId the file id
-   * @param workspace the workspace
-   */
-  void onFirstEditorOpened(String fileId, String workspace);
-  
   
   /**
    * Gets the editing finished delay (ms).

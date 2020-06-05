@@ -210,6 +210,7 @@ public interface DocumentService {
    */
   public DocumentEditorProvider getEditorProvider(String provider) throws DocumentEditorProviderNotFoundException;
   
+  
   /**
    * Gets the documents by folder.
    *
@@ -324,4 +325,5 @@ public interface DocumentService {
     }
     
   }
+
 }

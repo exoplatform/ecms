@@ -267,18 +267,6 @@ public class DocumentEditorProviderImpl implements DocumentEditorProvider {
     editor.onLastEditorClosed(fileId, workspace);
   }
   
-
-  /**
-   * On first editor opened.
-   *
-   * @param fileId the file id
-   * @param workspace the workspace
-   */
-  @Override
-  public void onFirstEditorOpened(String fileId, String workspace) {
-    editor.onFirstEditorOpened(fileId, workspace);
-  }
-  
   /**
    * Gets the editing finished delay.
    *
