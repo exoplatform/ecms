@@ -97,6 +97,34 @@
     </depends>
   </module>
   <module>
+    <name>cloudDriveDocuments</name>
+    <load-group>cloudDriveGRP</load-group>
+    <script>
+      <path>/js/clouddrive-dms.js</path>
+    </script>
+    <depends>
+      <module>jquery</module>
+    </depends>
+    <depends>
+      <module>cloudDrive</module>
+    </depends>
+    <depends>
+      <module>cloudDriveUtils</module>
+    </depends>
+    <depends>
+      <module>uiRightClickPopupMenu</module>
+    </depends>
+    <depends>
+      <module>uiListView</module>
+    </depends>
+    <depends>
+      <module>uiSimpleView</module>
+    </depends>
+    <depends>
+      <module>uiFileView</module>
+    </depends>
+  </module>
+  <module>
     <name>cloudDriveApp</name>
     <script>
       <minify>false</minify>

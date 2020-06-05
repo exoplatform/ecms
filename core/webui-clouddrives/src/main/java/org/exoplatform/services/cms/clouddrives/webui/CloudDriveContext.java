@@ -223,7 +223,7 @@ public class CloudDriveContext {
    */
   private CloudDriveContext(RequestContext requestContext) {
     JavascriptManager js = ((WebuiRequestContext) requestContext).getJavascriptManager();
-    this.require = js.require("SHARED/cloudDrive", "cloudDrive");
+    this.require = js.require("SHARED/cloudDriveDocuments", "cloudDriveDocuments");
     this.hasContextNode = false;
   }
 
@@ -233,7 +233,7 @@ public class CloudDriveContext {
    * @return the cloud drive context
    */
   private CloudDriveContext init() {
-    require.addScripts("\ncloudDrive.init();\n");
+    require.addScripts("\ncloudDriveDocuments.init();\n");
     return this;
   }
 
@@ -245,7 +245,7 @@ public class CloudDriveContext {
    * @return the cloud drive context
    */
   private CloudDriveContext init(String workspace, String nodePath) {
-    require.addScripts("\ncloudDrive.init('" + workspace + "','" + nodePath + "');\n");
+    require.addScripts("\ncloudDriveDocuments.init('" + workspace + "','" + nodePath + "');\n");
     hasContextNode = true;
     return this;
   }
@@ -296,7 +296,7 @@ public class CloudDriveContext {
         map.append('}');
 
         // we already "required" cloudDrive as AMD dependency in init()
-        require.addScripts("\ncloudDrive.initConnected(" + map.toString() + ");\n");
+        require.addScripts("\ncloudDriveDocuments.initConnected(" + map.toString() + ");\n");
       }
     }
     return this;
@@ -315,7 +315,7 @@ public class CloudDriveContext {
       // if provider cannot be converted to JSON then null will be
       String providerJson = new JSONObject(provider).toString();
       if (providerJson != null) {
-        require.addScripts("\ncloudDrive.initProvider('" + id + "', " + providerJson.toString() + ");\n");
+        require.addScripts("\ncloudDriveDocuments.initProvider('" + id + "', " + providerJson.toString() + ");\n");
         providers.add(id);
       } else {
         LOG.error("Error converting cloud provider (" + provider.getName() + ") to JSON object (null).");
@@ -332,7 +332,7 @@ public class CloudDriveContext {
    * @return the cloud drive context
    */
   private CloudDriveContext showInfo(String title, String text) {
-    require.addScripts("\ncloudDrive.showInfo('" + title + "','" + text + "');\n");
+    require.addScripts("\ncloudDriveDocuments.showInfo('" + title + "','" + text + "');\n");
     return this;
   }
 }
